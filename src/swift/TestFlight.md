@@ -261,7 +261,17 @@ in order to download test builds of the app and provide feedback.
 1. Read the messages explaining why the app was rejected.
 1. Address all of the issues and verify that they are no longer present
    when running the app locally.
-1. Resubmit the app for a new review.
+1. In the left nav, select the first entry under "iOS App".
+1. In the main area, scroll down to the "Build" section.
+1. Click the "-" button to disassociate the previous build.
+1. Click the "+" button after the "Build" section heading.
+1. Select a new build.
+1. Click the "Save" button in the upper-right.
+1. Click the "Add for Review" button in the upper-right.
+1. A "Confirm Submission" page will be displayed.
+1. Click the "Submit to App Review" button in the upper-right.
+1. The app status will change to "Waiting for Review".
+1. Wait for feedback from Apple. This could take a couple of days.
 
 ### Part 9 - Instructions for Test Users
 
