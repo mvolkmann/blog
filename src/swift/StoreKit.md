@@ -127,9 +127,13 @@ To use StoreKit in an app:
 
 ## Testing from Xcode
 
+Xcode and the Simulator can be used to test in-app purchases
+without the need to configure them in AppStoreConnect.
 See the YouTube video {% aTargetBlank
 "https://www.youtube.com/watch?v=o_YMsmmkfFc&feature=youtu.be",
 "How to easily test InApp Purchases in an iOS app" %} with Josh Holtz.
+
+To create a StoreKit configuration file to be used for testing:
 
 1. Select File ... New ... File...
 1. Select "StoreKit Configuration File" and click the "Next" button.
@@ -139,7 +143,10 @@ See the YouTube video {% aTargetBlank
 1. Click the "Next" button.
 1. Select the top project directory that contains the main `.swift` file.
 1. Click the "Create" button.
-1. In the special editor that opens for this file,
+
+To describe products in the new StoreKit configuration file:
+
+1. In the special editor that opens for the new StoreKit configuration file,
    for each product to be offered by the app:
 
    1. Click the "+" in the lower-left and select a kind of product to add
@@ -167,9 +174,13 @@ To tell the Simulator to use this new `.storekit` configuration file:
 To test an in-app purchase:
 
 1. Run the app in the Simulator and make an in-app purchase.
+1. If the products do not appear in the app, try running it again.
 1. In Xcode, select Debug ... StoreKit ... Manage Transactions...
    to see a history of all the in-app purchase transactions.
 1. Right-click a transaction to get a menu with the options
    "Approve Transaction", "Decline Transaction", "Refund Purchase",
    "Resolve Issue", "Request Price Increase Consent",
    and "Delete Transaction".
+1. For subscriptions,
+   click the "Subscription Options" button below a transaction
+   to get a dialog where the subscription can be cancelled.
