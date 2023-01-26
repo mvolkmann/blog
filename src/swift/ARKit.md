@@ -21,6 +21,16 @@ This displays a camera stream on a device.
 It renders 3D images and simulates changes to them.
 It can be used to add virtual objects to an ARKit view.
 
+## Resources
+
+Florian Schweizer (@FloWritesCode) created the following
+excellent YouTube videos on ARKit:
+
+- [Intro to ARKit 01: Project Setup & ARView](https://www.youtube.com/watch?v=lamIxNozxv4)
+- [Intro to ARKit 02: Placing Object](https://www.youtube.com/watch?v=vL-JKo_wtxM)
+- [Intro to ARKit 03: Communication via Combine](https://www.youtube.com/watch?v=KbqbU-cCKf4)
+- [Intro to ARKit 04: RealityComposer](https://www.youtube.com/watch?v=brko7EoYJAk)
+
 ## Configuration
 
 To change the configuration of an `ARView` session,
