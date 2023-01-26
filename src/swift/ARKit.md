@@ -8,7 +8,8 @@ layout: topic-layout.njk
 ## Overview
 
 {% aTargetBlank "https://developer.apple.com/documentation/arkit", "ARKit" %}
-is an Apple framework for rendering augmented reality experiences.
+is an Apple framework for rendering augmented reality experiences
+in iOS and iPadOS.
 
 One of the most important classes provided by ARKit is {% aTargetBlank
 "https://developer.apple.com/documentation/realitykit/arview", "ARView" %}.
@@ -36,7 +37,10 @@ After creating an anchor it must be added to a scene with
 An entity is a 3D object that can be placed in a scene.
 There are many ways to load entities into a project.
 One option is to use a USDZ file.
-Many of these can be downloaded from the Apple Developer website.
+The USDZ file format was created by Pixar.
+Many USDZ files can be downloaded from the {% aTargetBlank
+"https://developer.apple.com/augmented-reality/quick-look/",
+"Apple Developer website" %}.
 
 To load an entity from a file and place it at an anchor:
 
@@ -94,4 +98,4 @@ We need to wrap the `ARView` in a `UIViewRepresentable`
 in order to access it from SwiftUI.
 
 1. In Xcode, create a SwiftUI project.
-1.
+1. TODO: Finish this!
