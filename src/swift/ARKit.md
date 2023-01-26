@@ -10,6 +10,7 @@ layout: topic-layout.njk
 {% aTargetBlank "https://developer.apple.com/documentation/arkit", "ARKit" %}
 is an Apple framework for rendering augmented reality experiences
 in iOS and iPadOS.
+ARKit utilizes device front and rear facing cameras and motion sensors.
 
 One of the most important classes provided by ARKit is {% aTargetBlank
 "https://developer.apple.com/documentation/realitykit/arview", "ARView" %}.
@@ -132,4 +133,10 @@ We need to wrap the `ARView` in a `UIViewRepresentable`
 in order to access it from SwiftUI.
 
 1. In Xcode, create a SwiftUI project.
+1. Select the top entry in the Project Navigator.
+1. Select the main target.
+1. Select the "Info" tab.
+1. Hover over any row and click the "+" button.
+1. For the value, describe for users why camera access is needed.
+   For example, "Need for augmented reality view".
 1. TODO: Finish this!
