@@ -23,6 +23,11 @@ If you attempt to add more people or occasions,
 you will be prompted to make an in-app purchase which
 enables tracking gifts for an unlimited number of people and occasions.
 
+## Contact Information
+
+To contact the developer of this application, send email to
+<a href="mailto:r.mark.volkmann@gmail.com">R. Mark Volkmann</a>.
+
 ## Deleting Data
 
 To delete a person, occasion, or gift, swipe left
