@@ -20,6 +20,40 @@ This displays a camera stream on a device.
 It renders 3D images and simulates changes to them.
 It can be used to add virtual objects to an ARKit view.
 
+## Configuration
+
+To change the configuration of an `ARView` session,
+pass a configuration object to the `run` method of the {% aTargetBlank
+"https://developer.apple.com/documentation/arkit/arsession", "ARSession" %}  
+object stored in the `session` property of the `ARView` object.
+Supported configuration types include:
+
+- {% aTargetBlank "https://developer.apple.com/documentation/arkit/arbodytrackingconfiguration", "ARBodyTrackingConfiguration" %}
+  "tracks human body poses, planar surfaces, and images using the rear-facing camera".
+
+- {% aTargetBlank "https://developer.apple.com/documentation/arkit/arfacetrackingconfiguration", "ARFaceTrackingConfiguration" %}
+  "tracks facial movement and expressions using the front camera".
+
+- {% aTargetBlank "https://developer.apple.com/documentation/arkit/argeotrackingconfiguration", "ARGeoTrackingConfiguration" %}
+  "tracks locations with GPS, map data, and a device's compass".
+  For a list of supported cities, scroll to the
+  "Supported Areas and Cities" section of the `ARGeoTrackingConfiguration` page.
+
+- {% aTargetBlank "https://developer.apple.com/documentation/arkit/arimagetrackingconfiguration", "ARImageTrackingConfiguration" %}
+  "tracks known images using the rear-facing camera".
+
+- {% aTargetBlank "https://developer.apple.com/documentation/arkit/arobjectscanningconfiguration", "ARObjectScanningConfiguration" %}
+  "recognizes objects and collects high-fidelity data about specific objects using the rear-facing camera".
+
+- {% aTargetBlank "https://developer.apple.com/documentation/arkit/arorientationtrackingconfiguration", "AROrientationTrackingConfiguration" %}
+  "tracks only the device’s orientation using the rear-facing camera".
+
+- {% aTargetBlank "https://developer.apple.com/documentation/arkit/arpositionaltrackingconfiguration", "ARPositionalTrackingConfiguration" %}
+  "tracks only the device’s position in 3D space".
+
+- {% aTargetBlank "https://developer.apple.com/documentation/arkit/arworldtrackingconfiguration", "ARWorldTrackingConfiguration" %}
+  "tracks the position of a device in relation to objects in the environment".
+
 ## Anchors
 
 An anchor ties entities to a location in a scene such as
