@@ -1516,7 +1516,10 @@ that is passed in from a parent view.
 This subscribes to changes published by an observable object (indicated by
 applying the `@Published` property wrapper to specific properties),
 but it doesn't "own" the object.
-When changes occur, the view `body` is recomputed.
+The `@Published` property wrapper internally uses the {% aTargetBlank
+"https://developer.apple.com/documentation/combine", "Combine" %} framework.
+When changes in an `@Published` property occur,
+any view `body` computed properties that use it are recomputed.
 
 The following code demonstrates passing a view model
 from one view to another:
