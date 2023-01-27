@@ -162,11 +162,20 @@ To create a new "Reality Composer" project:
 - Click the "+" in the upper-right.
 - Choose an anchor such as "Horizontal".
   This creates an initial scene containing a single white cube.
-- To pan, rotate, and zoom the scene, use two fingers on the screen.
-- To remove the cube, select add press the delete key
-  or long-press the cube and tap "Delete".
+- To remove the cube, tap the shape and press the delete key.
+  Alternatively, tap the shape, tap it again to get a popup of options,
+  and tap "Delete".
 - To delete the thing (what is it?) that was below the cube,
   use the same steps.
+
+To transform the scene:
+
+- To pan the scene, drag two fingers on the screen.
+- To rotate the scene, drag one finger on the screen.
+- To zoom the scene, pinch or spread two fingers on the screen.
+
+To rename a project:
+
 - Tap "< Projects" in the upper-left.
 - Tap the current project name which will be "New Project.rcproject".
 - Type a new name, keeping the file extension `.rcproject`.
@@ -196,12 +205,22 @@ To change the position, rotation, and scale of an object:
   just outside the object that represent the x, y, z axes.
   TODO: Does the y-axis value specify the distance above the surface?
   TODO: Does the z-axis value specify the distance away?
+- To rotate a shape around a given axis
+  where the origin is considered to be the center of the shape,
+  select a shape, tap one of the colored cones outside it,
+  and drag the ring that appears.
+- To cause a shape to snap to planes and other objects when dragged near it,
+  tap the magnet button in the upper-left to toggle snap mode on.
 
 To change the "look" of an object:
 
 - Tap the object to select it.
 - In the Inspector on the right, expand the "Look" section.
 - Under "Style", tap the "Realistic", "Stylized", or "Iconic" button.
+
+Basic shapes can also select a "Material" and a "Material Color".
+Material options include "Glossy Paint", "Matte Paint", "Plastic", "Car Paint",
+"Aluminum", "Brass", "Bronze", "Gold", "Steel", "Rubber", and "Terracotta".
 
 To cause an object to participate in physics:
 
@@ -214,6 +233,18 @@ To cause an object to participate in physics:
   collisions with surfaces or other objects.
 - Select a "Collision Shape" which can be
   "Automatic", "Box", "Capsule", or "Sphere".
+
+Shapes can be group so they can be transformed as a single unit.
+To group shapes ...
+
+### Duplicate
+
+To duplicate a shape, tap the shape,
+tap it again to get a popup of options, and tap "Duplicate".
+
+### Undo
+
+To undo the last change, tap the undo button in the upper-left.
 
 ### Behaviors
 
@@ -315,6 +346,7 @@ and saved in "iCloud Drive" to an Xcode project on a Mac:
 - Click the `.rcproject` file in the Project Navigator.
 - Click the "Open in Reality Composer" button in the upper-right.
   This will open it in "Reality Composer" on the Mac.
+  This is not an app in the Applications directory.
   TODO: How did this get installed? Is it included with Xcode?
 - Select each object one at a time and click the cloud icon
   in the upper-right to download the model for the object.
