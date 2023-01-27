@@ -147,7 +147,8 @@ in order to access it from SwiftUI.
 
 ## Reality Composer
 
-The "Reality Composer" iOS app (best used on an iPad) allows users to
+The "Reality Composer" iOS app (best used on an iPad)
+and a macOS app (included with Xcode?) that allows users to
 "easily prototype and produce AR experiences directly
 with no prior 3D experience".
 This includes creating virtual objects from existing 3D models,
@@ -299,3 +300,23 @@ To delete a behavior:
 
 - Long press it in the left nav.
 - Tap "Delete".
+
+### Accessing Project File
+
+To add a Reality Composer project that created on a iPad
+and saved in "iCloud Drive" to an Xcode project on a Mac:
+
+- Open the Finder.
+- Select "iCloud Drive" in the left nav.
+- Select the "Reality Composer" directory.
+- Drag the `.rcproject` file into the Xcode Project Navigator.
+- In the dialog that appears, check the "Copy items if needed" checkbox
+  and click the "Finish" button.
+- Click the `.rcproject` file in the Project Navigator.
+- Click the "Open in Reality Composer" button in the upper-right.
+  This will open it in "Reality Composer" on the Mac.
+  TODO: How did this get installed? Is it included with Xcode?
+- Select each object one at a time and click the cloud icon
+  in the upper-right to download the model for the object.
+- Select File ... Save to save the downloaded models in the project.
+  They will now appear in the Xcode view of the project.
