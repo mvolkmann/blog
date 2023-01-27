@@ -196,6 +196,9 @@ To add a shape to the scene:
 
 ### Configuring a Shape
 
+To toggle display of the Inspector panel on the right side,
+tap the button in the upper-right that contains a cube in a gear in a circle.
+
 To change the position, rotation, and scale of an object:
 
 - Tap the object to select it.
@@ -234,8 +237,15 @@ To cause an object to participate in physics:
 - Select a "Collision Shape" which can be
   "Automatic", "Box", "Capsule", or "Sphere".
 
-Shapes can be group so they can be transformed as a single unit.
-To group shapes ...
+Shapes can be grouped so they can be transformed as a single unit.
+To select all objects in the scene,
+tap outside all of them and tap "Select All".
+To select a subset of the objects,
+hold down on one object and tap all the others.
+After selecting the shapes to be grouped,
+tap any one of them to get a popup of options, and tap "Group".
+To ungroup the shapes in a group, tap the group to selected it,
+tap again to get a popup of options, and tap "Ungroup".
 
 ### Duplicate
 
