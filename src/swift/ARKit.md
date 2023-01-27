@@ -377,4 +377,4 @@ and saved in "iCloud Drive" to an Xcode project on a Mac:
 
 ## Example Project
 
-See [ARKitDemo](https://github.com/mvolkmann/ARKitDemo).
+See {% aTargetBlank "https://github.com/mvolkmann/ARKitDemo/", "ARKitDemo" %}.
