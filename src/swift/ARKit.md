@@ -99,13 +99,7 @@ The Apple {% aTargetBlank
 "Augmented Reality Tools" %} web page contains links for downloading
 the tools "Reality Composer" (iPhone and iPad only) and "Reality Converter".
 
-The **Reality Composer** iOS app (best used on an iPad) allows users to
-"easily prototype and produce AR experiences directly
-with no prior 3D experience".
-This includes creating virtual objects, adding animations to them,
-adding audio that can be triggered in many ways.
-The app can "record sensor and camera data in the actual location
-you are building it for, and then replay it on your iOS device".
+[Reality Composer](#reality-composer) is described below.
 
 The **Reality Converter** macOS app "converts common 3D file formats such as
 `.obj`, `.gltf`, `.fbx`, and `USD` to `USDZ`.
@@ -150,3 +144,68 @@ in order to access it from SwiftUI.
 1. For the value, describe for users why camera access is needed.
    For example, "Need for augmented reality view".
 1. TODO: Finish this!
+
+## Reality Composer
+
+The "Reality Composer" iOS app (best used on an iPad) allows users to
+"easily prototype and produce AR experiences directly
+with no prior 3D experience".
+This includes creating virtual objects from existing 3D models,
+adding animations to them, and
+adding audio that can be triggered in many ways.
+The app can "record sensor and camera data in the actual location
+you are building it for, and then replay it on your iOS device".
+
+To create a new "Reality Composer" project:
+
+- Click the "+" in the upper-right.
+- Choose an anchor such as "Horizontal".
+  This creates an initial scene containing a single white cube.
+- To pan, rotate, and zoom the scene, use two fingers on the screen.
+- To remove the cube, select add press the delete key
+  or long-press the cube and tap "Delete".
+- To delete the thing (what is it?) that was below the cube,
+  use the same steps.
+- Tap "< Projects" in the upper-left.
+- Tap the current project name which will be "New Project.rcproject".
+- Type a new name, keeping the file extension `.rcproject`.
+- This will be saved in "iCloud Drive"
+  inside a directory named "Reality Composer"
+  so it is also accessible from your Mac.
+
+To add a shape to the scene:
+
+- Tap the "+" in the upper-right.
+- In the dialog that is displayed, tap "Import" to add your own model
+  or select a predefined model.
+  For example, tap the "Activities" category in the left nav,
+  scroll down to the "Sports" section, and tap the football.
+  This will download a 3D model and add it to the center of the scene.
+
+To change the position, rotation, and scale of an object:
+
+- Tap the object to select it.
+- In the Inspector on the right, expand the "Transform" section.
+- Modify the values under Position, Rotation, and Scale.
+- The position can also be modified by dragging the red, blue, and green cones
+  just outside the object that represent the x, y, z axes.
+  TODO: Does the y-axis value specify the distance above the surface?
+  TODO: Does the z-axis value specify the distance away?
+
+To change the "look" of an object:
+
+- Tap the object to select it.
+- In the Inspector on the right, expand the "Look" section.
+- Under "Style", tap the "Realistic", "Stylized", or "Iconic" button.
+
+To cause an object to participate in physics:
+
+- Tap the object to select it.
+- In the Inspector on the right, expand the "Physics" section.
+- Change the "Participates" toggle to be on.
+- Select a "Motion Type" of either "Fixed" or "Dynamic".
+- Select a "Material" which can be "Lead", "Plastic", "Wood", or "Rubber".
+  This affects how the object responds to
+  collisions with surfaces or other objects.
+- Select a "Collision Shape" which can be
+  "Automatic", "Box", "Capsule", or "Sphere".
