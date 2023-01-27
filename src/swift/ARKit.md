@@ -182,6 +182,8 @@ To rename a project:
 - This will be saved in "iCloud Drive"
   inside a directory named "Reality Composer"
   so it is also accessible from your Mac.
+  Editing the project from any device or Mac that shares the iCloud account
+  will edit the same project file.
 
 ### Adding a Shape
 
@@ -193,6 +195,8 @@ To add a shape to the scene:
   For example, tap the "Activities" category in the left nav,
   scroll down to the "Sports" section, and tap the football.
   This will download a 3D model and add it to the center of the scene.
+- In the Inspector panel on the right, in the "Object Name" input,
+  enter a name that will be used to refer to the object in code.
 
 ### Configuring a Shape
 
@@ -301,6 +305,8 @@ To add a behavior to the selected object:
 Behaviors are given default names like "Behavior" and "Behavior 1".
 To rename a behavior, long-press it in the left nav,
 tap "Rename", and edit the name.
+Since these names will become property names in code,
+use a camelCase name that starts with a lowercase letter.
 
 To change a trigger, long-press its name, select "Replace",
 and select a new trigger from the popup that appears.
@@ -342,6 +348,12 @@ To delete a behavior:
 - Long press it in the left nav.
 - Tap "Delete".
 
+### Occlusion
+
+To cause shapes to occlude real-world objects when viewing them,
+tap the "..." button in the upper-left and
+toggle "Real-World Occlusion" to be on.
+
 ### Accessing Project File
 
 To add a Reality Composer project that created on a iPad
@@ -362,3 +374,7 @@ and saved in "iCloud Drive" to an Xcode project on a Mac:
   in the upper-right to download the model for the object.
 - Select File ... Save to save the downloaded models in the project.
   They will now appear in the Xcode view of the project.
+
+## Example Project
+
+See [ARKitDemo](https://github.com/mvolkmann/ARKitDemo).
