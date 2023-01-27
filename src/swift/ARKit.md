@@ -148,7 +148,7 @@ in order to access it from SwiftUI.
 ## Reality Composer
 
 The "Reality Composer" iOS app (best used on an iPad)
-and a macOS app (included with Xcode?) that allows users to
+and a macOS app (included with Xcode) that allows users to
 "easily prototype and produce AR experiences directly
 with no prior 3D experience".
 This includes creating virtual objects from existing 3D models,
@@ -156,6 +156,9 @@ adding animations to them, and
 adding audio that can be triggered in many ways.
 The app can "record sensor and camera data in the actual location
 you are building it for, and then replay it on your iOS device".
+
+To launch the "Reality Composer" app in macOS, launch Xcode and
+select Xcode ... Open Developer Tool .. Reality Composer.
 
 To create a new "Reality Composer" project:
 
@@ -378,3 +381,82 @@ and saved in "iCloud Drive" to an Xcode project on a Mac:
 ## Example Project
 
 See {% aTargetBlank "https://github.com/mvolkmann/ARKitDemo/", "ARKitDemo" %}.
+
+## Object Capture
+
+Take photos of an object from many angles.
+See the sample command-line app HelloPhotogrammetry.
+This creates a .usdz file.
+Models can be produced in four detail levels which are
+Reduced, Medium, Full, and Raw (for custom workflows).
+A Medium detail model can be viewed in the ARQuickLook macOS app.
+
+Basic workflow:
+
+- Setup
+  - Create session
+    - Create a `PhotogrammetrySession` object which is a container for images.
+    - Can give this a `FileURL` to a directory of images and it will process each of them.
+  - Connect output stream
+- Process
+  - Request models
+
+```swift
+import RealityKit
+
+let url = URL(fileURLWithPath: "/tmp/photos/", isDirectory: true)
+let session = try! PhotogrammetrySession(
+    input: url,
+    configuration: PhotogrammetrySession.Configuration()
+)
+
+Task {
+    for try await output in session.outputs {
+        switch output {
+        case .requestProgress(let request, let fraction):
+            print("Progress:", fraction)
+        case .requestComplete(let request, let result):
+            if case .modelFile(let url) = result {
+                print("Output at", url)
+            }
+        case .requestError(let request, let error):
+            print("Error:", error)
+        case .processingComplete:
+            print("Completed")
+        default:
+            print("Unhandled case")
+        }
+    }
+}
+
+// Request two models to be produced from the input photos.
+try! session.process(requests: [
+    .modelFile("/tmp/models/reduced.usdz", detail: .reduced),
+    .modelFile("/tmp/models/medium.usdz", detail: .medium)
+])
+```
+
+Try double-clicking a produced `.usdz` file
+to see what app is used to render it.
+
+Guidelines for creating models from real objects
+
+- Choose an object that has adequate texture detail.
+  If an object has low texture or transparent portions,
+  the resulting model will lack detail.
+- Choose an object that does not have highly reflective regions.
+- If the object will need to be moved to take photos at various angles,
+  choose a rigid object that will not change its shape when moved.
+- Place the object on an uncluttered background such as a solid white table
+  so it clearly stands out.
+- Move slowly around the object while taking photos
+  to capture a uniform set of views.
+  Alternatively place the camera on a tripod, place the object on a turntable,
+  and turn it to capture photos and various angles.
+  Consider using timed shutter mode that is synced to a motorized turntable.
+- To capture the bottom of the object,
+  flip it over and repeat the process of taking photos.
+- Take between 20 and 200 photos.
+
+Try using the "CaptureSample" SwiftUI app
+that is provided in the developer documentation.
