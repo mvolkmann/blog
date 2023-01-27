@@ -221,8 +221,15 @@ Each behavior has a trigger and a sequence of actions.
 The trigger and each action can be configured.
 
 Each trigger has a type and a set of "Affected Objects".
-Example trigger types include "Tap", "Proximity to Camera", and "Scene Start".
-Some triggers have an associated "Distance".
+The supported trigger types include:
+
+- "Tap" when an object in a specified set is tapped
+- "Scene Start" when the scene is rendered
+- "Proximity to Camera" when an object in a specified set
+  is a specified distance from the camera
+- "Collide" when an object from a specified set
+  collides with an object in another specified set
+- "Notification" when a notification with a specified identifier is received
 
 Each action also has a type and a set of "Affected Objects".
 Example action types include:
@@ -252,6 +259,9 @@ To add a behavior to the selected object:
 Behaviors are given default names like "Behavior" and "Behavior 1".
 To rename a behavior, long-press it in the left nav,
 tap "Rename", and edit the name.
+
+To change a trigger, long-press its name, select "Replace",
+and select a new trigger from the popup that appears.
 
 To add another action to the action sequence of a behavior:
 
