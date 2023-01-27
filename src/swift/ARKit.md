@@ -209,3 +209,52 @@ To cause an object to participate in physics:
   collisions with surfaces or other objects.
 - Select a "Collision Shape" which can be
   "Automatic", "Box", "Capsule", or "Sphere".
+
+Any number of behaviors can be added to an object.
+Each behavior has a trigger and a sequence of actions.
+The trigger and each action can be configured.
+
+To add a behavior to the selected object:
+
+- Tap the circle containing a right-pointing arrow in the upper-right.
+  This opens an area at the bottom titled "Behaviors".
+- Tap the "+" in the left nav to create a new behavior.
+- In the popup that appears, select a behavior type which can be:
+  - "Tap & Flip" flips the object when tapped.
+  - "Tap & Play Sound" plays a sound when tapped.
+  - "Tap & Add Force" adds "impulse force" when tapped (What is this?).
+  - "Start Hidden" hides the object when the scene begins.
+  - "Wait & Show" shows the object after a configurable delay.
+  - "Proximity & Jiggle" jiggles the object when near another.
+  - "Custom" defines a custom behavior.
+
+Behaviors are given default names like "Behavior" and "Behavior 1".
+To rename a behavior, long-press it in the left nav,
+tap "Rename", and edit the name.
+
+To add another action to the action sequence of a behavior:
+
+- Tap the "+" after the heading "Action Sequence".
+- In the popup that appears, select a behavior type.
+
+To play a behavior in order to see its effect:
+
+- Tap a behavior in the left nav to select it.
+- Tap the play (triangle) button after "Action Sequence"
+  to play the entire sequence.
+- Tap the play (triangle) button in an action box
+  to play only that action.
+
+TODO: Is there a way to execute two actions at the same time
+TODO: rather than in sequence?
+
+Behaviors that have missing or invalid data in their trigger or actions
+will have a warning icon after their name.
+Select the behavior in the left nav. to repair it.
+The trigger or actions that are invalid will have
+the same warning icon in the upper-right of their boxes.
+
+To delete a behavior:
+
+- Long press it in the left nav.
+- Tap "Delete".
