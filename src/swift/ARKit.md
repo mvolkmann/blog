@@ -173,6 +173,8 @@ To create a new "Reality Composer" project:
   inside a directory named "Reality Composer"
   so it is also accessible from your Mac.
 
+### Adding a Shape
+
 To add a shape to the scene:
 
 - Tap the "+" in the upper-right.
@@ -181,6 +183,8 @@ To add a shape to the scene:
   For example, tap the "Activities" category in the left nav,
   scroll down to the "Sports" section, and tap the football.
   This will download a 3D model and add it to the center of the scene.
+
+### Configuring a Shape
 
 To change the position, rotation, and scale of an object:
 
@@ -210,9 +214,25 @@ To cause an object to participate in physics:
 - Select a "Collision Shape" which can be
   "Automatic", "Box", "Capsule", or "Sphere".
 
-Any number of behaviors can be added to an object.
+### Behaviors
+
+Any number of behaviors can be added to each object.
 Each behavior has a trigger and a sequence of actions.
 The trigger and each action can be configured.
+
+Each trigger has a type and a set of "Affected Objects".
+Example trigger types include "Tap", "Proximity to Camera", and "Scene Start".
+Some triggers have an associated "Distance".
+
+Each action also has a type and a set of "Affected Objects".
+Example action types include:
+
+- "Emphasize" has "Duration", "Motion Type", and "Style".
+- "Play Sound" has volume and "Audio Clip", and "Triggered while Running".
+- "Add Force" has "Velocity".
+- "Hide" has "Duration" and "Motion Type".
+- "Wait" has "Duration".
+- "Show" has "Duration" and "Motion Type".
 
 To add a behavior to the selected object:
 
@@ -226,7 +246,8 @@ To add a behavior to the selected object:
   - "Start Hidden" hides the object when the scene begins.
   - "Wait & Show" shows the object after a configurable delay.
   - "Proximity & Jiggle" jiggles the object when near another.
-  - "Custom" defines a custom behavior.
+  - "Custom" defines a custom behavior,
+    beginning with no predefined trigger or actions.
 
 Behaviors are given default names like "Behavior" and "Behavior 1".
 To rename a behavior, long-press it in the left nav,
@@ -253,6 +274,16 @@ will have a warning icon after their name.
 Select the behavior in the left nav. to repair it.
 The trigger or actions that are invalid will have
 the same warning icon in the upper-right of their boxes.
+
+To copy a behavior:
+
+- Long press it in the left nav.
+- Tap "Duplicate".
+
+To temporarily disable a behavior:
+
+- Long press it in the left nav.
+- Tap "Disable".
 
 To delete a behavior:
 
