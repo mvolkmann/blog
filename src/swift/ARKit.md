@@ -262,12 +262,17 @@ tap again to get a popup of options, and tap "Ungroup".
 
 ### Physics
 
+Objects can optionally participate in physics.
+When participating objects are off the ground and their scene is played,
+gravity causes them to fall toward the ground.
+
 To cause an object to participate in physics:
 
 - Tap the object to select it.
 - In the Inspector on the right, expand the "Physics" section.
 - Change the "Participates" toggle to be on.
-- Select a "Motion Type" of either "Fixed" or "Dynamic".
+- Select a "Motion Type" of either
+  "Fixed" (never moves) or "Dynamic" (can move).
 - Select a "Material" which can be "Lead", "Plastic", "Wood", or "Rubber".
   This affects how the object responds to
   collisions with surfaces or other objects.
@@ -300,7 +305,8 @@ To add a behavior to the selected object:
 - In the popup that appears, select a behavior type which can be:
   - "Tap & Flip" flips the object when tapped.
   - "Tap & Play Sound" plays a sound when tapped.
-  - "Tap & Add Force" adds "impulse force" when tapped (What is this?).
+  - "Tap & Add Force" adds "impulse force" when tapped.
+    For example, this can be used to propel a ball into a wall.
   - "Start Hidden" hides the object when the scene begins.
   - "Wait & Show" shows the object after a configurable delay.
   - "Proximity & Jiggle" jiggles the object when near another.
