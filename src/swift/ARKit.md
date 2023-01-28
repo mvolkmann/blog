@@ -143,7 +143,8 @@ in order to access it from SwiftUI.
 1. Hover over any row and click the "+" button.
 1. For the value, describe for users why camera access is needed.
    For example, "Need for augmented reality view".
-1. TODO: Finish this!
+1. See code in the example project {% aTargetBlank
+   "https://github.com/mvolkmann/ARKitDemo/", "ARKitDemo" %}.
 
 ## Reality Composer
 
@@ -370,9 +371,8 @@ and saved in "iCloud Drive" to an Xcode project on a Mac:
   and click the "Finish" button.
 - Click the `.rcproject` file in the Project Navigator.
 - Click the "Open in Reality Composer" button in the upper-right.
-  This will open it in "Reality Composer" on the Mac.
-  This is not an app in the Applications directory.
-  TODO: How did this get installed? Is it included with Xcode?
+  This will open it in "Reality Composer" on the Mac
+  which is included with Xcode.
 - Select each object one at a time and click the cloud icon
   in the upper-right to download the model for the object.
 - Select File ... Save to save the downloaded models in the project.
@@ -384,32 +384,73 @@ See {% aTargetBlank "https://github.com/mvolkmann/ARKitDemo/", "ARKitDemo" %}.
 
 ## Object Capture
 
-Take photos of an object from many angles.
-See the sample command-line app HelloPhotogrammetry.
-This creates a .usdz file.
+The "Object Capture" API that is part of the RealityKit framework
+processes a series of object photos taken from many angles
+and produces a 3D model in the USDZ format.
+
+Apple provides the HelloPhotogrammetry Xcode project
+that uses the Object Capture API.
+It can be downloaded at {% aTargetBlank
+"https://developer.apple.com/documentation/realitykit/creating_a_photogrammetry_command-line_app",
+"Creating a Photogrammetry Command-Line App" %}.
+Building this project creates a command-line app
+that generates a model file from a collection of model photos.
+
+To build this app:
+
+1. Double-click the file `HelloPhotogrammetry.xcodeproj`
+   to open the project in Xcode.
+1. Select the top entry in the Project Navigator.
+1. Select the top target.
+1. Select the General tab.
+1. Select a value in the "Team" dropdown.
+1. Select File ... Project Settings...
+1. In the dialog that appears, change the "Derived Data" dropdown
+   to "Custom Location".
+1. Enter the path to your home directory or another easily located directory.
+1. Click the scheme dropdown to the left of the device dropdown
+   at the top of the Xcode window.
+1. Select "Edit Scheme..."
+1. In the dialog that appears, click "Run" in the left nav.
+1. Click the "Info" tab.
+1. Change the "Build Configuration" dropdown from "Debug" to "Release".
+1. Click the "Close" button.
+1. Select Product ... Build For ... Running
+1. Wait for the build to finish.
+1. Copy or move the file named "HelloPhotogrammetry"
+   found below the specified directory in Build/Products/Release
+   to a directory in your PATH.
+
 Models can be produced in four detail levels which are
 Reduced, Medium, Full, and Raw (for custom workflows).
-A Medium detail model can be viewed in the ARQuickLook macOS app.
+The Reduced and Medium levels are good for use in web and mobile apps.
+The Full and Raw levels are intended for high-end usage.
+Medium detail models can be viewed in the ARQuickLook macOS app.
+To display multiple scans in the same scene, use the Reduced level.
 
-Basic workflow:
+To run this app:
 
-- Setup
-  - Create session
-    - Create a `PhotogrammetrySession` object which is a container for images.
-    - Can give this a `FileURL` to a directory of images and it will process each of them.
-  - Connect output stream
-- Process
-  - Request models
+1. From a Terminal window enter `HelloPhotogrammetry`.
+   This will output usage instructions.
+1. Enter `HelloPhotogrammetry {images-dir-path} {output-file-path}`
+   to generate a `.usdz` file from the images in a given directory.
+1. To specify a detail level, add the `-d {level}` option
+   where `{level}` is `preview`, `reduced`, `medium`, `full`, or `raw`.
+
+To create your own app for reading images and producing `.usdz` files,
+write code similar to the following:
 
 ```swift
 import RealityKit
 
+// Create a session.
 let url = URL(fileURLWithPath: "/tmp/photos/", isDirectory: true)
 let session = try! PhotogrammetrySession(
     input: url,
     configuration: PhotogrammetrySession.Configuration()
 )
 
+// Prepare to process outputs.
 Task {
     for try await output in session.outputs {
         switch output {
@@ -429,17 +470,50 @@ Task {
     }
 }
 
-// Request two models to be produced from the input photos.
+// Initiate processing of input photos.
+// This request two models to be produced.
 try! session.process(requests: [
     .modelFile("/tmp/models/reduced.usdz", detail: .reduced),
     .modelFile("/tmp/models/medium.usdz", detail: .medium)
 ])
 ```
 
-Try double-clicking a produced `.usdz` file
-to see what app is used to render it.
+## CaptureSample App
 
-Guidelines for creating models from real objects
+Apple provides the CaptureSample project that implements an iOS app
+for capturing photos of a real-world object
+in preparation for generating a USDZ model file.
+The project can be downloaded from {% aTargetBlank
+"https://developer.apple.com/documentation/realitykit/taking_pictures_for_3d_object_capture",
+"Taking Pictures for 3D Object Capture" %}.
+
+To build and run this app:
+
+1. Double-click the file `CaptureSample.xcodeproj`
+   to open the project in Xcode.
+1. Select the top entry in the Project Navigator.
+1. Select the top target.
+1. Select the General tab.
+1. Select a value in the "Team" dropdown.
+1. Attach an iPhone to the computer with a USB cable.
+1. Select the iPhone from device dropdown at the top of the Xcode window.
+1. Press cmd-r to build and run the app on the iPhone.
+
+## Pre-built models
+
+Apple provides some pre-built USDZ at {% aTargetBlank
+"https://developer.apple.com/augmented-reality/quick-look/", "AR Quick Look" %}.
+
+## Viewing Models
+
+Double-clicking a `.usdz` file opens and displays the model in Xcode.
+Drag around on the image to rotate it around any axis to see all sides.
+Some models appear in shades of black when viewed in Xcode,
+but will be in color when imported into the "Reality Composer" app.
+
+## Guidelines for Creating Models
+
+When creating models from real-world objects:
 
 - Choose an object that has adequate texture detail.
   If an object has low texture or transparent portions,
@@ -457,6 +531,3 @@ Guidelines for creating models from real objects
 - To capture the bottom of the object,
   flip it over and repeat the process of taking photos.
 - Take between 20 and 200 photos.
-
-Try using the "CaptureSample" SwiftUI app
-that is provided in the developer documentation.
