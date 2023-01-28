@@ -506,7 +506,8 @@ Apple provides some pre-built USDZ at {% aTargetBlank
 
 ## Viewing Models
 
-Double-clicking a `.usdz` file opens and displays the model in Xcode.
+Double-clicking a `.usdz` file opens and displays the model
+in Xcode using "AR Quick Look".
 Drag around on the image to rotate it around any axis to see all sides.
 Some models appear in shades of black when viewed in Xcode,
 but will be in color when imported into the "Reality Composer" app.
