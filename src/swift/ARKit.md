@@ -196,9 +196,26 @@ To add a shape to the scene:
 - Tap the "+" in the upper-right.
 - In the dialog that is displayed, tap "Import" to add your own model
   or select a predefined model.
+  A large number of predefined models are provided.
+  They are divided into the following categories and sub-categories:
+
+  - Imported: models you imported from `.usdz` files
+  - Basic: Shapes, Text, Arrows, Callouts, Signs, and Charts
+  - Activities: Billiards, Checkers, Chess, Events, Games, Sports, and Toys
+  - Arts: Frames and Music
+  - Food: Baked Goods, Cookware, Drinks, Fruit, Meals, Scanned, Tableware, and Vegetables
+  - Furnishings: Furniture
+  - Nature: Scanned
+  - Places: Houses and Locations
+  - Retail: Shopping,
+  - Storage: Storage
+  - Symbols: Communication, Finance, Security, and Time
+  - Work: Supplies, Technology, and Tools
+
   For example, tap the "Activities" category in the left nav,
   scroll down to the "Sports" section, and tap the football.
   This will download a 3D model and add it to the center of the scene.
+
 - In the Inspector panel on the right, in the "Object Name" input,
   enter a name that will be used to refer to the object in code.
 
@@ -270,27 +287,6 @@ Any number of behaviors can be added to each object.
 Each behavior has a trigger and a sequence of actions.
 The trigger and each action can be configured.
 
-Each trigger has a type and a set of "Affected Objects".
-The supported trigger types include:
-
-- "Tap" when an object in a specified set is tapped
-- "Scene Start" when the scene is rendered
-- "Proximity to Camera" when an object in a specified set
-  is a specified distance from the camera
-- "Collide" when an object from a specified set
-  collides with an object in another specified set
-- "Notification" when a notification with a specified identifier is received
-
-Each action also has a type and a set of "Affected Objects".
-Example action types include:
-
-- "Emphasize" has "Duration", "Motion Type", and "Style".
-- "Play Sound" has volume and "Audio Clip", and "Triggered while Running".
-- "Add Force" has "Velocity".
-- "Hide" has "Duration" and "Motion Type".
-- "Wait" has "Duration".
-- "Show" has "Duration" and "Motion Type".
-
 To add a behavior to the selected object:
 
 - Tap the circle containing a right-pointing arrow in the upper-right.
@@ -311,6 +307,42 @@ To rename a behavior, long-press it in the left nav,
 tap "Rename", and edit the name.
 Since these names will become property names in code,
 use a camelCase name that starts with a lowercase letter.
+
+### Triggers
+
+Each trigger has a type and a set of "Affected Objects".
+The supported trigger types include:
+
+- "Tap" when an object in a specified set is tapped
+- "Scene Start" when the scene is rendered
+- "Proximity to Camera" when an object in a specified set
+  is a specified distance from the camera
+- "Collide" when an object from a specified set
+  collides with an object in another specified set
+- "Notification" when a notification with a specified identifier is received
+
+### Actions
+
+Each action has a type and a set of "Affected Objects".
+The supported actions include:
+
+- "Emphasize" has Duration, Motion Type, and Style.
+- "Show" has Duration and Motion Type.
+- "Hide" has Duration and Motion Type.
+- "Move, Rotate, Scale To" has Duration, Ease Type, Position, Rotation, and Scale.
+- "Move, Rotate, Scale By" has Duration, Ease Type, Position, Rotation, and Scale.
+- "Add Force" has "Velocity".
+- "Orbit" has Center, Duration, Revolutions, and Orbit Direction.
+- "Spin" has Duration, Iteration, Spin Direction, and Axis.
+- "Change Scene" has Scene.
+- "Play Sound" has volume, Audio Clip, and Triggered while Running.
+- "Play Ambience" has volume and Audio Clip.
+- "Play Music" has volume and Audio Clip.
+- "Wait" has "Duration".
+- "USDZ Animation" has Duration, Iterations, and Triggered while Running.
+- "Look at Camera" has Duration, Facing Direction, and Rotation.
+- "Notify" has a behavior identifier.
+  This can bve used to trigger another behavior.
 
 To change a trigger, long-press its name, select "Replace",
 and select a new trigger from the popup that appears.
