@@ -166,8 +166,8 @@ To create a new "Reality Composer" project:
 - Click the "+" in the upper-right.
 - Choose an anchor such as "Horizontal".
   This creates an initial scene containing a single white cube.
-- To remove the cube, tap the shape and press the delete key.
-  Alternatively, tap the shape, tap it again to get a popup of options,
+- To remove the cube, tap it and press the delete key.
+  Alternatively, tap the cube, tap it again to get a popup of options,
   and tap "Delete".
 - To delete the thing (what is it?) that was below the cube,
   use the same steps.
@@ -189,15 +189,15 @@ To rename a project:
   Editing the project from any device or Mac that shares the iCloud account
   will edit the same project file.
 
-### Adding a Shape
+### Adding an Object
 
-To add a shape to the scene:
+To add an object to the scene:
 
 - Tap the "+" in the upper-right.
-- In the dialog that is displayed, tap "Import" to add your own model
-  or select a predefined model.
-  A large number of predefined models are provided.
-  They are divided into the following categories and sub-categories:
+- In the dialog that is displayed, select from a large set of predefined objects
+  or tap "Import" to add your own model.
+  The predefined objects are divided into
+  the following categories and sub-categories:
 
   - Imported: models you imported from `.usdz` files
   - Basic: Shapes, Text, Arrows, Callouts, Signs, and Charts
@@ -219,7 +219,7 @@ To add a shape to the scene:
 - In the Inspector panel on the right, in the "Object Name" input,
   enter a name that will be used to refer to the object in code.
 
-### Configuring a Shape
+### Configuring an Object
 
 To toggle display of the Inspector panel on the right side,
 tap the button in the upper-right that contains a cube in a gear in a circle.
@@ -233,11 +233,11 @@ To change the position, rotation, and scale of an object:
   just outside the object that represent the x, y, z axes.
   TODO: Does the y-axis value specify the distance above the surface?
   TODO: Does the z-axis value specify the distance away?
-- To rotate a shape around a given axis
-  where the origin is considered to be the center of the shape,
-  select a shape, tap one of the colored cones outside it,
+- To rotate an object around a given axis
+  where the origin is considered to be the center of the object,
+  select an object, tap one of the colored cones outside it,
   and drag the ring that appears.
-- To cause a shape to snap to planes and other objects when dragged near it,
+- To cause an object to snap to planes and other objects when dragged near it,
   tap the magnet button in the upper-left to toggle snap mode on.
 
 To change the "look" of an object:
@@ -249,6 +249,18 @@ To change the "look" of an object:
 Basic shapes can also select a "Material" and a "Material Color".
 Material options include "Glossy Paint", "Matte Paint", "Plastic", "Car Paint",
 "Aluminum", "Brass", "Bronze", "Gold", "Steel", "Rubber", and "Terracotta".
+
+Objects can be grouped so they can be transformed as a single unit.
+To select all objects in the scene,
+tap outside all of them and tap "Select All".
+To select a subset of the objects,
+hold down on one object and tap all the others.
+After selecting the objects to be grouped,
+tap any one of them to get a popup of options, and tap "Group".
+To ungroup the objects in a group, tap the group to selected it,
+tap again to get a popup of options, and tap "Ungroup".
+
+### Physics
 
 To cause an object to participate in physics:
 
@@ -262,20 +274,13 @@ To cause an object to participate in physics:
 - Select a "Collision Shape" which can be
   "Automatic", "Box", "Capsule", or "Sphere".
 
-Shapes can be grouped so they can be transformed as a single unit.
-To select all objects in the scene,
-tap outside all of them and tap "Select All".
-To select a subset of the objects,
-hold down on one object and tap all the others.
-After selecting the shapes to be grouped,
-tap any one of them to get a popup of options, and tap "Group".
-To ungroup the shapes in a group, tap the group to selected it,
-tap again to get a popup of options, and tap "Ungroup".
+### Duplicating an Object
 
-### Duplicate
-
-To duplicate a shape, tap the shape,
+To duplicate an object, tap the object,
 tap it again to get a popup of options, and tap "Duplicate".
+By default this does not copy behaviors.
+To do that, open the settings panel by tapping the ellipsis button
+and toggle "Duplicate with Behaviors" on.
 
 ### Undo
 
@@ -352,6 +357,9 @@ To add another action to the action sequence of a behavior:
 - Tap the "+" after the heading "Action Sequence".
 - In the popup that appears, select a behavior type.
 
+To cause an action to execute simultaneously with the action before it,
+drag it on top of the previous action and drop it.
+
 To play a behavior in order to see its effect:
 
 - Tap a behavior in the left nav to select it.
@@ -384,9 +392,17 @@ To delete a behavior:
 - Long press it in the left nav.
 - Tap "Delete".
 
+### AR Mode
+
+In iOS (iPhone or iPad) display a model and execute its behaviors
+by toggling the "AR" button in the upper-right on.
+This will ask for permission to access the camera
+and them display the model on top of what the camera sees.
+Tap the play button to execute the behaviors.
+
 ### Occlusion
 
-To cause shapes to occlude real-world objects when viewing them,
+To cause objects to occlude real-world objects when viewing them,
 tap the "..." button in the upper-left and
 toggle "Real-World Occlusion" to be on.
 
