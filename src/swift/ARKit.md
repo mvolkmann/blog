@@ -189,6 +189,16 @@ To rename a project:
   Editing the project from any device or Mac that shares the iCloud account
   will edit the same project file.
 
+### Terminology
+
+- **project**: contains one or more scenes
+- **scene**: contains one or more objects
+- **object**: a 3D model that can have one or more behaviors
+- **behavior**: associated with one or more "affected objects";
+  has a trigger and one or more effects
+- **trigger**: determines what causes a behavior to execute
+- **action**: changes one or more objects in specific ways
+
 ### Adding an Object
 
 To add an object to the scene:
