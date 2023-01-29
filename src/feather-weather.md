@@ -19,6 +19,7 @@ The app currently supports three languages: English, French, and Spanish.
 
 To contact the developer of this application, send email to
 <a href="mailto:r.mark.volkmann@gmail.com">R. Mark Volkmann</a>.
+Suggestions for new features are welcome!
 
 ## Current Screen
 
@@ -75,11 +76,10 @@ that indicates the day, hour, and temperature under your finger.
 
 ## Heat Map Screen
 
-The "Heat Map" screen displays a heat map that
-This enables seeing a glance when it will be the warmest and coldest
-over the next five days.
+The "Heat Map" screen displays a heat map that enables seeing at a glance
+when it will be the warmest and coldest over the next five days.
 Drag your finger right and left over the heat map to scroll
-forward and backward over the hours in the next five days.
+forward and backward through the hours in the next five days.
 
 <img alt="Feather Weather Heat Map screen" style="width: 40%"
     src="/blog/assets/FeatherWeather-HeatMap.png?v={{pkg.version}}"
