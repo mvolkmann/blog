@@ -222,7 +222,7 @@ To add an object to the scene:
 ### Configuring an Object
 
 To toggle display of the Inspector panel on the right side,
-tap the button in the upper-right that contains a cube in a gear in a circle.
+tap the properties button in the upper-right (cube in a gear in a circle).
 
 To change the position, rotation, and scale of an object:
 
@@ -445,6 +445,23 @@ This will ask for permission to access the camera
 and them display the model on top of what the camera sees.
 Tap the play button to execute the behaviors.
 
+### Multiple Scenes
+
+A Reality Composer project can include multiple scenes
+that each have a collection of objects.
+
+To toggle display of the list of current scenes,
+tap the left nav button in the upper-left.
+
+To select a scene, tap it in the left nav.
+
+To rename a scene, tap it, tap the properties button in the upper-right
+(cube in a gear in a circle), tap the name, and change it.
+
+To switch from one scene to another when an object is tapped,
+add a "Change Scene" behavior to an object
+and select a destination scene.
+
 ### Occlusion
 
 To cause objects to occlude real-world objects when viewing them,
@@ -485,7 +502,8 @@ To export the current model:
 1. Choose a location where it will be send such as
    AirDrop, Messages, Email, or "Save to Files".
 
-TODO: Why does this seem to only support exporting as a `.reality` file?
+TODO: It seems that Reality Composer now only supports
+TODO: exporting as a `.reality` file?
 
 ## Object Capture
 
