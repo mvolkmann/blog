@@ -461,6 +461,7 @@ To rename a scene, tap it, tap the properties button in the upper-right
 To switch from one scene to another when an object is tapped,
 add a "Change Scene" behavior to an object
 and select a destination scene.
+Perhaps this can be used to simulate exiting a room and entering another.
 
 ### Occlusion
 
