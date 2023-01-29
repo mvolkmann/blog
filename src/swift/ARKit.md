@@ -161,7 +161,20 @@ you are building it for, and then replay it on your iOS device".
 To launch the "Reality Composer" app in macOS, launch Xcode and
 select Xcode ... Open Developer Tool .. Reality Composer.
 
-To create a new "Reality Composer" project:
+### Terminology
+
+- **project**: has one or more scenes
+- **scene**: has one anchor and one or more objects
+- **anchor**: determines how objects are positioned
+- **object**: a 3D model that has any number of behaviors
+- **behavior**: associated with one or more "affected objects";
+  has one trigger and one or more effects
+- **trigger**: determines what causes a behavior to execute
+- **action**: changes one or more objects in specific ways
+
+### Creating a Project
+
+To create a new project:
 
 - Click the "+" in the upper-right.
 - Choose an anchor such as "Horizontal".
@@ -171,12 +184,6 @@ To create a new "Reality Composer" project:
   and tap "Delete".
 - To delete the thing (what is it?) that was below the cube,
   use the same steps.
-
-To transform the scene:
-
-- To pan the scene, drag two fingers on the screen.
-- To rotate the scene, drag one finger on the screen.
-- To zoom the scene, pinch or spread two fingers on the screen.
 
 To rename a project:
 
@@ -189,17 +196,61 @@ To rename a project:
   Editing the project from any device or Mac that shares the iCloud account
   will edit the same project file.
 
-### Terminology
+### Creating a Scene and Anchor
 
-- **project**: contains one or more scenes
-- **scene**: contains one or more objects
-- **object**: a 3D model that can have one or more behaviors
-- **behavior**: associated with one or more "affected objects";
-  has a trigger and one or more effects
-- **trigger**: determines what causes a behavior to execute
-- **action**: changes one or more objects in specific ways
+A project begins with one default scene.
+To create another scene:
 
-### Adding an Object
+- Tap the left nav button in the upper-left
+  to toggle display of the list of current scenes.
+- Tap "+" after the title "Scenes".
+- Select an anchor type.
+- The new scene will be given a default name of "Scene" followed by a number
+  or just "Scene" if no other scene has that name.
+
+To select a scene:
+
+- Tap the left nav button in the upper-left
+  to toggle display of the list of current scenes.
+- Tap a scene.
+
+To rename a scene:
+
+- Tap the left nav button in the upper-left
+  to toggle display of the list of current scenes.
+- Tap the scene to be renamed.
+- Tap the properties button (cube in gear in circle) in the upper-right
+  to open the properties panel on the right.
+- Tap the name input at the top.
+- Modify the scene name.
+
+To delete a scene:
+
+- Tap the left nav button in the upper-left
+  to toggle display of the list of current scenes.
+- Long-press the scene to be deleted.
+- Tap "Delete".
+
+To duplicate a scene:
+
+- Tap the left nav button in the upper-left
+  to toggle display of the list of current scenes.
+- Long-press the scene to be duplicated.
+- Tap "Duplicate".
+
+To enable switching from one scene to another when the project is running,
+add a "Change Scene" action to a behavior and select a destination scene.
+For example, this can be an action in a "Tap" behavior
+so tapping an object triggers a scene change.
+Perhaps this can be used to simulate exiting a room and entering another.
+
+To transform the view of a scene:
+
+- Pan by dragging two fingers on the screen.
+- Rotate by dragging one finger on the screen.
+- Zoom by pinching or spreading two fingers on the screen.
+
+### Creating Objects
 
 To add an object to the scene:
 
@@ -454,24 +505,6 @@ by toggling the "AR" button in the upper-right on.
 This will ask for permission to access the camera
 and them display the model on top of what the camera sees.
 Tap the play button to execute the behaviors.
-
-### Multiple Scenes
-
-A Reality Composer project can include multiple scenes
-that each have a collection of objects.
-
-To toggle display of the list of current scenes,
-tap the left nav button in the upper-left.
-
-To select a scene, tap it in the left nav.
-
-To rename a scene, tap it, tap the properties button in the upper-right
-(cube in a gear in a circle), tap the name, and change it.
-
-To switch from one scene to another when an object is tapped,
-add a "Change Scene" behavior to an object
-and select a destination scene.
-Perhaps this can be used to simulate exiting a room and entering another.
 
 ### Occlusion
 
