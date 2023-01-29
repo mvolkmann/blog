@@ -84,3 +84,19 @@ forward and backward through the hours in the next five days.
 <img alt="Feather Weather Heat Map screen" style="width: 40%"
     src="/blog/assets/FeatherWeather-HeatMap.png?v={{pkg.version}}"
     title="Feather Weather Heat Map screen">
+
+The "Colors" switch can be set to "Relative" or "Absolute".
+
+In Relative mode
+the color blue represents the lowest temperature over the next five days and
+the color red represents the highest temperature over the next next five days.
+All temperatures between those extremes are
+assigned a color of the rainbow between blue and red that represents
+the percentage that temperature is between the low and high.
+
+In Absolute mode
+the color blue represents zero degrees Fahrenheit or less and
+the color red represents 100 degrees Fahrenheit or more.
+All temperatures between those extremes are
+assigned a color of the rainbow between blue and red that represents
+the percentage that temperature is between the zero and 100.
