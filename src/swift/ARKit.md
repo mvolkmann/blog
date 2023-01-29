@@ -398,6 +398,37 @@ To delete a behavior:
 - Long press it in the left nav.
 - Tap "Delete".
 
+### Images
+
+Images can be added to a model.
+One way to do this is to:
+
+1. Copy a photo from the Photos app to the Files app
+   using the share sheet button.
+1. Add a Frame object from the Arts category to a Reality Composer project.
+1. Edit the Frame object and select the image from the Files app.
+
+Another way is to drag an image into a Reality Composer scene.
+This is easy to do in macOS, but it's unclear how to do this in iOS.
+
+### Sounds
+
+Audio files such as those created by the "Voice Memo" app
+can be played by a behavior.
+
+To play a voice memo with an object is tapped:
+
+1. Open the Voice Memo app.
+1. Record a new voice memo.
+1. Tap the share sheet button.
+1. Save the voice memo in the Files app.
+1. In Reality Composer, add a "Tap & Play Sound" behavior to an object.
+1. In the Trigger, select an object that will be tapped to play the sound.
+1. In the "Play Sound" action, tap "Choose" for "Audio Clip".
+1. In the dialog that appears, tap "Import".
+1. Locate the voice memo in the Files app and open it.
+1. Select the newly imported sound.
+
 ### AR Mode
 
 In iOS (iPhone or iPad) display a model and execute its behaviors
@@ -412,7 +443,7 @@ To cause objects to occlude real-world objects when viewing them,
 tap the "..." button in the upper-left and
 toggle "Real-World Occlusion" to be on.
 
-### Accessing Project File
+### Accessing a Project
 
 To add a Reality Composer project that created on a iPad
 and saved in "iCloud Drive" to an Xcode project on a Mac:
@@ -432,9 +463,21 @@ and saved in "iCloud Drive" to an Xcode project on a Mac:
 - Select File ... Save to save the downloaded models in the project.
   They will now appear in the Xcode view of the project.
 
-## Example Project
+### Exporting a Project
 
-See {% aTargetBlank "https://github.com/mvolkmann/ARKitDemo/", "ARKitDemo" %}.
+A project can be exported as a USDZ model (not easily edited)
+or a Reality file (easily edited).
+
+To export the current model:
+
+1. Tap the ellipsis button to open the settings panel.
+1. Tap Export.
+1. Choose between exporting the entire project or only the current scene.
+1. Tap "Export" in the upper-right.
+1. Choose a location where it will be send such as
+   AirDrop, Messages, Email, or "Save to Files".
+
+TODO: Why does this seem to only support exporting as a `.reality` file?
 
 ## Object Capture
 
@@ -586,3 +629,7 @@ When creating models from real-world objects:
 - To capture the bottom of the object,
   flip it over and repeat the process of taking photos.
 - Take between 20 and 200 photos.
+
+## Example Project
+
+See {% aTargetBlank "https://github.com/mvolkmann/ARKitDemo/", "ARKitDemo" %}.
