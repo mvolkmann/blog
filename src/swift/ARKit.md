@@ -65,18 +65,6 @@ Supported configuration types include:
 - {% aTargetBlank "https://developer.apple.com/documentation/arkit/arworldtrackingconfiguration", "ARWorldTrackingConfiguration" %}
   "tracks the position of a device in relation to objects in the environment".
 
-## Anchors
-
-An anchor ties entities to a location in a scene such as
-a coordinate relative to an iPhone location when the app launches.
-There are several kinds of anchors including
-a 3D coordinate (specified by a 3x3 matrix of the type `SIMD3<Scalar>`),
-a horizontal plane (ex. the floor or a desk top),
-a vertical plane (ex. a wall), a face, a body, and image in the scene.
-
-After creating an anchor it must be added to a scene with
-`scene.addAnchor(myAnchor)`.
-
 ## Entities
 
 An entity is a 3D object that can be placed in a scene.
@@ -196,9 +184,10 @@ To rename a project:
   Editing the project from any device or Mac that shares the iCloud account
   will edit the same project file.
 
-### Creating a Scene and Anchor
+### Creating a Scene
 
 A project begins with one default scene.
+
 To create another scene:
 
 - Tap the left nav button in the upper-left
@@ -222,7 +211,7 @@ To rename a scene:
 - Tap the properties button (cube in gear in circle) in the upper-right
   to open the properties panel on the right.
 - Tap the name input at the top.
-- Modify the scene name.
+- Modify the scene name and press the return key.
 
 To delete a scene:
 
@@ -249,6 +238,27 @@ To transform the view of a scene:
 - Pan by dragging two fingers on the screen.
 - Rotate by dragging one finger on the screen.
 - Zoom by pinching or spreading two fingers on the screen.
+
+### Anchors
+
+An anchor ties objects in a scene to a scene location such as
+a coordinate relative to an iPhone location when the app launches.
+
+The supported anchor types include:
+
+- Horizontal: a horizontal plane that can represent a surface
+  such as the floor or table top
+- Vertical: a vertical plane that can represent a surface such as a wall
+- Image: a real-world image such as a painting on a wall;
+  objects in the scene will be positioned relative to the selected image
+- Face: the face of a person
+  objects in the scene will be positioned relative to any human face
+- Object: a real-world object (ex. a globe)
+  objects in the scene will be positioned relative to the object
+  TODO: TRY THIS!
+
+When an anchor is created in code, it must be added to a scene with
+`scene.addAnchor(myAnchor)`.
 
 ### Creating Objects
 
