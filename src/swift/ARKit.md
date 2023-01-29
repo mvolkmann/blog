@@ -413,10 +413,10 @@ This is easy to do in macOS, but it's unclear how to do this in iOS.
 
 ### Sounds
 
-Audio files such as those created by the "Voice Memo" app
-can be played by a behavior.
+Reality Composer provides a large selection of sounds
+and new sounds can be imported from apps like "Voice Memo".
 
-To play a voice memo with an object is tapped:
+To play a sound when an object is tapped:
 
 1. Open the Voice Memo app.
 1. Record a new voice memo.
@@ -425,9 +425,17 @@ To play a voice memo with an object is tapped:
 1. In Reality Composer, add a "Tap & Play Sound" behavior to an object.
 1. In the Trigger, select an object that will be tapped to play the sound.
 1. In the "Play Sound" action, tap "Choose" for "Audio Clip".
-1. In the dialog that appears, tap "Import".
-1. Locate the voice memo in the Files app and open it.
-1. Select the newly imported sound.
+1. In the dialog that appears, either select a provided sound or tap "Import".
+1. If "Import" was tapped, locate a sound file in the Files app,
+   open it, and select the newly imported sound.
+
+### Playing a Project
+
+To play a project tap the play button in the upper-right.
+This will begin executing behaviors that are
+configured to begin when the scene starts.
+It will also display a stop button at the bottom center.
+Tap the stop button to return to editing the project.
 
 ### AR Mode
 
