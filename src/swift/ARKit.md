@@ -31,109 +31,6 @@ excellent YouTube videos on ARKit:
 - [Intro to ARKit 03: Communication via Combine](https://www.youtube.com/watch?v=KbqbU-cCKf4)
 - [Intro to ARKit 04: RealityComposer](https://www.youtube.com/watch?v=brko7EoYJAk)
 
-## Configuration
-
-To change the configuration of an `ARView` session,
-pass a configuration object to the `run` method of the {% aTargetBlank
-"https://developer.apple.com/documentation/arkit/arsession", "ARSession" %}  
-object stored in the `session` property of the `ARView` object.
-Supported configuration types include:
-
-- {% aTargetBlank "https://developer.apple.com/documentation/arkit/arbodytrackingconfiguration", "ARBodyTrackingConfiguration" %}
-  "tracks human body poses, planar surfaces, and images using the rear-facing camera".
-
-- {% aTargetBlank "https://developer.apple.com/documentation/arkit/arfacetrackingconfiguration", "ARFaceTrackingConfiguration" %}
-  "tracks facial movement and expressions using the front camera".
-
-- {% aTargetBlank "https://developer.apple.com/documentation/arkit/argeotrackingconfiguration", "ARGeoTrackingConfiguration" %}
-  "tracks locations with GPS, map data, and a device's compass".
-  For a list of supported cities, scroll to the
-  "Supported Areas and Cities" section of the `ARGeoTrackingConfiguration` page.
-
-- {% aTargetBlank "https://developer.apple.com/documentation/arkit/arimagetrackingconfiguration", "ARImageTrackingConfiguration" %}
-  "tracks known images using the rear-facing camera".
-
-- {% aTargetBlank "https://developer.apple.com/documentation/arkit/arobjectscanningconfiguration", "ARObjectScanningConfiguration" %}
-  "recognizes objects and collects high-fidelity data about specific objects using the rear-facing camera".
-
-- {% aTargetBlank "https://developer.apple.com/documentation/arkit/arorientationtrackingconfiguration", "AROrientationTrackingConfiguration" %}
-  "tracks only the device’s orientation using the rear-facing camera".
-
-- {% aTargetBlank "https://developer.apple.com/documentation/arkit/arpositionaltrackingconfiguration", "ARPositionalTrackingConfiguration" %}
-  "tracks only the device’s position in 3D space".
-
-- {% aTargetBlank "https://developer.apple.com/documentation/arkit/arworldtrackingconfiguration", "ARWorldTrackingConfiguration" %}
-  "tracks the position of a device in relation to objects in the environment".
-
-## Entities
-
-An entity is a 3D object that can be placed in a scene.
-There are many ways to load entities into a project.
-One option is to use a USDZ file.
-The USDZ file format was created by Pixar.
-Many USDZ files can be downloaded from the {% aTargetBlank
-"https://developer.apple.com/augmented-reality/quick-look/",
-"Apple Developer website" %}.
-
-To load an entity from a file and place it at an anchor:
-
-```swift
-let entity = try? Entity. load (named: "usdz-file-name")
-anchor.addChild(entity)
-```
-
-The Apple {% aTargetBlank
-"https://developer.apple.com/augmented-reality/tools/",
-"Augmented Reality Tools" %} web page contains links for downloading
-the tools "Reality Composer" (iPhone and iPad only) and "Reality Converter".
-
-[Reality Composer](#reality-composer) is described below.
-
-The **Reality Converter** macOS app "converts common 3D file formats such as
-`.obj`, `.gltf`, `.fbx`, and `USD` to `USDZ`.
-It also lets you view the converted model,
-customize its material properties with your own textures,
-and edit the file's metadata."
-
-Files produced by these apps can be loaded into an ARKIt app
-in the same way as USDZ files.
-
-Entities can be created using the {% aTargetBlank
-"https://developer.apple.com/documentation/realitykit/meshresource",
-"MeshResource" %} class provided by ARKit.
-This has the methods `generateBox`, `generatePlane`, and `generateSphere`.
-For example, to create and display a blue box:
-
-```swift
-let block = MeshResource.generateBox(size: 1) // 1 meter on all sides
-let material = SimpleMaterial(color: UIColor(Color.blue), isMetallic: false)
-let entity = ModelEntity(mesh: block, materials: [material])
-let anchor = AnchorEntity(plane: .horizontal)
-anchor.addChild(entity)
-scene.addAnchor(anchor)
-```
-
-## Getting Started
-
-An Xcode project that uses ARKit can be created in two ways.
-It can be an SwiftUI "App" or
-an "Augmented Reality App" which does not use SwiftUI.
-We will only consider the first option here.
-
-Currently ARKit views are compatible with UIKit, but not SwiftUI.
-We need to wrap the `ARView` in a `UIViewRepresentable`
-in order to access it from SwiftUI.
-
-1. In Xcode, create a SwiftUI project.
-1. Select the top entry in the Project Navigator.
-1. Select the main target.
-1. Select the "Info" tab.
-1. Hover over any row and click the "+" button.
-1. For the value, describe for users why camera access is needed.
-   For example, "Need for augmented reality view".
-1. See code in the example project {% aTargetBlank
-   "https://github.com/mvolkmann/ARKitDemo/", "ARKitDemo" %}.
-
 ## Reality Composer
 
 The "Reality Composer" iOS app (best used on an iPad)
@@ -654,6 +551,125 @@ try! session.process(requests: [
     .modelFile("/tmp/models/medium.usdz", detail: .medium)
 ])
 ```
+
+## Writing Code
+
+An Xcode project that uses ARKit can be created in two ways.
+It can be an SwiftUI "App" or
+an "Augmented Reality App" which does not use SwiftUI.
+We will only consider the first option here.
+
+Currently ARKit views are compatible with UIKit, but not SwiftUI.
+We need to wrap the `ARView` in a `UIViewRepresentable`
+in order to access it from SwiftUI.
+
+1. In Xcode, create a SwiftUI project.
+1. Select the top entry in the Project Navigator.
+1. Select the main target.
+1. Select the "Info" tab.
+1. Hover over any row and click the "+" button.
+1. For the value, describe for users why camera access is needed.
+   For example, "Need for augmented reality view".
+1. See code in the example project {% aTargetBlank
+   "https://github.com/mvolkmann/ARKitDemo/", "ARKitDemo" %}.
+
+### ARView Configuration
+
+To change the configuration of an `ARView` session,
+pass a configuration object to the `run` method of the {% aTargetBlank
+"https://developer.apple.com/documentation/arkit/arsession", "ARSession" %}  
+object stored in the `session` property of the `ARView` object.
+Supported configuration types include:
+
+- {% aTargetBlank "https://developer.apple.com/documentation/arkit/arbodytrackingconfiguration", "ARBodyTrackingConfiguration" %}
+  "tracks human body poses, planar surfaces, and images using the rear-facing camera".
+
+- {% aTargetBlank "https://developer.apple.com/documentation/arkit/arfacetrackingconfiguration", "ARFaceTrackingConfiguration" %}
+  "tracks facial movement and expressions using the front camera".
+
+- {% aTargetBlank "https://developer.apple.com/documentation/arkit/argeotrackingconfiguration", "ARGeoTrackingConfiguration" %}
+  "tracks locations with GPS, map data, and a device's compass".
+  For a list of supported cities, scroll to the
+  "Supported Areas and Cities" section of the `ARGeoTrackingConfiguration` page.
+
+- {% aTargetBlank "https://developer.apple.com/documentation/arkit/arimagetrackingconfiguration", "ARImageTrackingConfiguration" %}
+  "tracks known images using the rear-facing camera".
+
+- {% aTargetBlank "https://developer.apple.com/documentation/arkit/arobjectscanningconfiguration", "ARObjectScanningConfiguration" %}
+  "recognizes objects and collects high-fidelity data about specific objects using the rear-facing camera".
+
+- {% aTargetBlank "https://developer.apple.com/documentation/arkit/arorientationtrackingconfiguration", "AROrientationTrackingConfiguration" %}
+  "tracks only the device’s orientation using the rear-facing camera".
+
+- {% aTargetBlank "https://developer.apple.com/documentation/arkit/arpositionaltrackingconfiguration", "ARPositionalTrackingConfiguration" %}
+  "tracks only the device’s position in 3D space".
+
+- {% aTargetBlank "https://developer.apple.com/documentation/arkit/arworldtrackingconfiguration", "ARWorldTrackingConfiguration" %}
+  "tracks the position of a device in relation to objects in the environment".
+
+### Important RealityKit Types
+
+- {% aTargetBlank "https://developer.apple.com/documentation/realitykit/arview", "ARView" %}
+  class manages and displays a single `Scene`.
+- {% aTargetBlank "https://developer.apple.com/documentation/realitykit/scene", "Scene" %}
+  class holds a `Scene.AnchorCollection`.
+- {% aTargetBlank "https://developer.apple.com/documentation/realitykit/scene/anchorcollection", "Scene.AnchorCollection" %}
+  struct holds a collection of `AnchorEntity` objects that are accessed by subscript.
+- {% aTargetBlank "https://developer.apple.com/documentation/realitykit/anchorentity/", "AnchorEntity" %}
+  class inherits from `Entity` and anchors any number of entities to a `Scene`.
+- {% aTargetBlank "https://developer.apple.com/documentation/realitykit/entity", "Entity" %}
+  class instances represent virtual or physical objects that can have appearance and behaviors.
+- {% aTargetBlank "https://developer.apple.com/documentation/realitykit/modelentity", "ModelEntity" %}
+  class is a subclass of `Entity`.
+  Instances represent physical objects to be rendered.
+
+An **entity** is a 3D object that can be placed in a scene.
+There are many ways to load entities into an {% aTargetBlank "https://developer.apple.com/documentation/arkit/aranchor", "ARAnchor" %}.
+One option is to use a USDZ file.
+The USDZ file format was created by Pixar.
+Many USDZ files can be downloaded from the {% aTargetBlank
+"https://developer.apple.com/augmented-reality/quick-look/",
+"Apple Developer website" %}.
+
+To load an entity from a file and place it at an anchor:
+
+```swift
+let entity = try? Entity.load(named: "usdz-file-name")
+anchor.addChild(entity)
+```
+
+The Apple {% aTargetBlank
+"https://developer.apple.com/augmented-reality/tools/",
+"Augmented Reality Tools" %} web page contains links for downloading
+the tools "Reality Composer" (iPhone and iPad only) and "Reality Converter".
+
+[Reality Composer](#reality-composer) is described below.
+
+The **Reality Converter** macOS app "converts common 3D file formats such as
+`.obj`, `.gltf`, `.fbx`, and `USD` to `USDZ`.
+It also lets you view the converted model,
+customize its material properties with your own textures,
+and edit the file's metadata."
+
+Files produced by these apps can be loaded into an ARKIt app
+in the same way as USDZ files.
+
+Entities can be created using the {% aTargetBlank
+"https://developer.apple.com/documentation/realitykit/meshresource",
+"MeshResource" %} class provided by ARKit.
+This has the methods `generateBox`, `generatePlane`, and `generateSphere`.
+For example, to create and display a blue box:
+
+```swift
+let block = MeshResource.generateBox(size: 1) // 1 meter on all sides
+let material = SimpleMaterial(color: UIColor(Color.blue), isMetallic: false)
+let entity = ModelEntity(mesh: block, materials: [material])
+let anchor = AnchorEntity(plane: .horizontal)
+anchor.addChild(entity)
+scene.addAnchor(anchor)
+```
+
+## Getting Started
 
 ## CaptureSample App
 
