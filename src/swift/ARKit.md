@@ -35,14 +35,14 @@ excellent YouTube videos on ARKit:
 
 ## Reality Composer
 
-The "Reality Composer" iOS app (best used on an iPad)
-and a macOS app (included with Xcode) that allows users to
+"Reality Composer" is an iOS and macOS app that allows users to
 "easily prototype and produce AR experiences directly
 with no prior 3D experience".
-This includes creating virtual objects from existing 3D models,
-adding animations to them, and
-adding audio that can be triggered in many ways.
-The app can "record sensor and camera data in the actual location
+The macOS version is included with Xcode and cannot be downloaded separately.
+
+The app can import virtual objects from existing 3D models,
+add animations to them, and add audio that can be triggered in many ways.
+The app can also "record sensor and camera data in the actual location
 you are building it for, and then replay it on your iOS device".
 
 To launch the "Reality Composer" app in macOS, launch Xcode and
