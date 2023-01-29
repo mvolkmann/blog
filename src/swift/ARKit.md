@@ -678,7 +678,11 @@ The project can be downloaded from {% aTargetBlank
 "https://developer.apple.com/documentation/realitykit/taking_pictures_for_3d_object_capture",
 "Taking Pictures for 3D Object Capture" %}.
 
-To build and run this app:
+I was able to run this app and capture images, but the images
+were not saved anywhere so I could not use them to create a USDZ model file.
+Consider using the app PhotoCatch in the iOS App Store.
+
+To build and run the CaptureSample app:
 
 1. Double-click the file `CaptureSample.xcodeproj`
    to open the project in Xcode.
