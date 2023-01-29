@@ -12,14 +12,16 @@ is an Apple framework for rendering augmented reality experiences
 in iOS and iPadOS.
 ARKit utilizes device front and rear facing cameras and motion sensors.
 
-One of the most important classes provided by ARKit is {% aTargetBlank
-"https://developer.apple.com/documentation/realitykit/arview", "ARView" %}.
-This displays a camera stream on a device.
-
 {% aTargetBlank "https://developer.apple.com/documentation/realitykit/",
 "RealityKit" %} is another Apple framework that is often used with ARKit.
 It renders 3D images and simulates changes to them.
-It can be used to add virtual objects to an ARKit view.
+RealityKit can be used to add virtual objects to an ARKit view.
+
+ARKit and RealityKit use the USDZ file format to describe 3D objects.
+The USDZ file format was created by Pixar.
+Many USDZ files can be downloaded from the {% aTargetBlank
+"https://developer.apple.com/augmented-reality/quick-look/",
+"Apple Developer website" %}.
 
 ## Resources
 
@@ -610,7 +612,8 @@ Supported configuration types include:
 ### Important RealityKit Types
 
 - {% aTargetBlank "https://developer.apple.com/documentation/realitykit/arview", "ARView" %}
-  class manages and displays a single `Scene`.
+  class manages and displays a single `Scene`
+  along with a camera stream on a device.
 - {% aTargetBlank "https://developer.apple.com/documentation/realitykit/scene", "Scene" %}
   class holds a `Scene.AnchorCollection`.
 - {% aTargetBlank "https://developer.apple.com/documentation/realitykit/scene/anchorcollection", "Scene.AnchorCollection" %}
@@ -623,13 +626,8 @@ Supported configuration types include:
   class is a subclass of `Entity`.
   Instances represent physical objects to be rendered.
 
-An **entity** is a 3D object that can be placed in a scene.
-There are many ways to load entities into an {% aTargetBlank "https://developer.apple.com/documentation/arkit/aranchor", "ARAnchor" %}.
+There are many ways to load entities.
 One option is to use a USDZ file.
-The USDZ file format was created by Pixar.
-Many USDZ files can be downloaded from the {% aTargetBlank
-"https://developer.apple.com/augmented-reality/quick-look/",
-"Apple Developer website" %}.
 
 To load an entity from a file and place it at an anchor:
 
