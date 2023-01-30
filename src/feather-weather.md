@@ -1,14 +1,17 @@
 ---
 eleventyNavigation:
-  key: Feather Weather
+  key: Feather Weather Forecasts
 layout: topic-layout.njk
 ---
 
 ## Overview
 
-Feather Weather is an attractive, free iOS application for
+Feather Weather Forecasts is an attractive, free application for
 viewing weather forecasts obtained from the Apple WeatherKit API.
-Download it from the iOS App Store.
+It runs on iPhones, iPads, and Mac computers.
+Download it from the iOS or Mac {% aTargetBlank
+"https://apps.apple.com/us/app/feather-weather-forecasts/id1667050253",
+"App Store" %}.
 
 Tap the buttons at the bottom of the screen to switch between
 the four weather forecast views described below.
@@ -78,6 +81,10 @@ that indicates the day, hour, and temperature under your finger.
 
 The "Heat Map" screen displays a heat map that enables seeing at a glance
 when it will be the warmest and coldest over the next five days.
+The top row provides temperature forecasts for today
+from midnight this morning to midnight tonight.
+The subsequent rows provide temperature forecasts for the next four days.
+
 Drag your finger right and left over the heat map to scroll
 forward and backward through the hours in the next five days.
 
@@ -87,14 +94,14 @@ forward and backward through the hours in the next five days.
 
 The "Colors" switch can be set to "Relative" or "Absolute".
 
-In Relative mode
+In **Relative** mode
 the color blue represents the lowest temperature over the next five days and
 the color red represents the highest temperature over the next next five days.
 All temperatures between those extremes are
 assigned a color of the rainbow between blue and red that represents
 the percentage that temperature is between the low and high.
 
-In Absolute mode
+In **Absolute** mode
 the color blue represents zero degrees Fahrenheit or less and
 the color red represents 100 degrees Fahrenheit or more.
 All temperatures between those extremes are
