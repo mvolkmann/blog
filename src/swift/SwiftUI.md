@@ -1718,6 +1718,7 @@ switches based on whether the device is in light or dark mode.
 
 SwiftUI doesn't provide its own way to access the background color,
 but it can be obtained from `UIColor.systemBackground`.
+This is typically the opposite of the `primary` color.
 
 To change the semantic colors, override them in an extension as follows:
 
