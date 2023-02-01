@@ -6825,31 +6825,6 @@ without affecting the layout of other views.
 It is passed `x` and `y` arguments that specify the position.
 This is similar to `position: absolute` in CSS.
 
-For example:
-
-<img alt="SwiftUI position" style="width: 60%"
-  src="/blog/assets/SwiftUI-position.png?v={{pkg.version}}"
-  title="SwiftUI position">
-
-```swift
-struct ContentView: View {
-    func shadowDemo(radius: CGFloat) -> some View {
-        Text("Shadow Radius \(String(format: "%.0f", radius))")
-            .font(.system(size: 40))
-            .foregroundColor(.blue)
-            .shadow(color: .gray, radius: radius, x: 10, y: 10)
-    }
-
-    var body: some View {
-        VStack {
-            shadowDemo(radius: 0)
-            shadowDemo(radius: 2)
-            shadowDemo(radius: 4)
-        }
-    }
-}
-```
-
 ### Orientation Modifiers
 
 The following view modifiers change the orientation of a view:
@@ -7261,6 +7236,9 @@ accessibility size.
 
 In apps that use dynamic fonts, test all screens at various font size
 preferences to verify that the resulting layout is acceptable.
+
+Also see the `minimumScaleFactor` view modifier described in the
+[Text Modifiers](#text-modifiers) section.
 
 To scale views based on the dynamic font size
 selected by a user for their device, use the {% aTargetBlank
