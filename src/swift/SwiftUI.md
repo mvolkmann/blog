@@ -4874,7 +4874,7 @@ The {% aTargetBlank
 "minimumScaleFactor" %} view modifier causes the font size
 to be scaled down in order to get the text to fit within its frame.
 Its argument is a percent value between 0 and 1.
-For example, `Text(myTitle).font(.title).minimumScaleFactor(0.75)`
+For example, `Text(myTitle).lineLimit(1).font(.title).minimumScaleFactor(0.75)`
 will use the `title` font size if the text will fit,
 but will scale as low as 75% of that font size.
 It uses the largest size that will fit that is between
