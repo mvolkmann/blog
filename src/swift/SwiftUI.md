@@ -10059,7 +10059,7 @@ When two sizes are specified, the drag indicator is displayed.
 To change the visibility of the drag indicator, apply the {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/list/presentationdragindicator(_:)",
 "presentationDragIndicator" %} view modifier
-to the top view passed to `.sheet` with a `Bool` value.
+to the top view passed to `.sheet` with a value of `.visible`.
 
 To display full screen sheet, use the {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/view/fullscreencover(ispresented:ondismiss:content:)",
