@@ -39,7 +39,7 @@ While the weather forecast is being retrieved,
 the following animated progress indicator is displayed.
 
 <img alt="Feather Weather Progress" style="width: 40%"
-    src="/blog/assets/FeatherWeather-iPhone-Progress.png?v={{pkg.version}}"
+    src="/blog/assets/feather-weather-progress.png?v={{pkg.version}}"
     title="Feather Weather Progress">
 
 After the weather forecast has been retrieved,
@@ -48,7 +48,7 @@ The switch under the city name can be toggled between
 displaying temperatures in Celsius and Fahrenheit.
 
 <img alt="Feather Weather Current screen" style="width: 40%"
-    src="/blog/assets/FeatherWeather-iPhone-Current.png?v={{pkg.version}}"
+    src="/blog/assets/feather-weather-current.png?v={{pkg.version}}"
     title="Feather Weather Current screen">
 
 To see the weather forecast for a city other than your current city,
@@ -68,7 +68,7 @@ Drag your finger down and up on the list to
 move through the hours forward and backward.
 
 <img alt="Feather Weather Forecast screen" style="width: 40%"
-    src="/blog/assets/FeatherWeather-iPhone-Forecast.png?v={{pkg.version}}"
+    src="/blog/assets/feather-weather-forecast.png?v={{pkg.version}}"
     title="Feather Weather Forecast screen">
 
 ## Chart Screen
@@ -80,23 +80,27 @@ Drag your finger right and left over the chart to see an annotation
 that indicates the day, hour, and temperature under your finger.
 
 <img alt="Feather Weather Chart screen" style="width: 40%"
-    src="/blog/assets/FeatherWeather-iPhone-Chart.png?v={{pkg.version}}"
+    src="/blog/assets/feather-weather-chart.png?v={{pkg.version}}"
     title="Feather Weather Chart screen">
 
 ## Heat Map Screen
 
 The "Heat Map" screen displays a heat map that enables seeing at a glance
 when it will be the warmest and coldest over the next five days.
-The top row provides temperature forecasts for today
+The bottom row provides temperature forecasts for today
 from midnight this morning to midnight tonight.
-The subsequent rows provide temperature forecasts for the next four days.
+The rows above the bottom row provide
+temperature forecasts for the next four days.
 
 Drag your finger right and left over the heat map to scroll
 forward and backward through the hours in the next five days.
 
 <img alt="Feather Weather Heat Map screen" style="width: 40%"
-    src="/blog/assets/FeatherWeather-iPhone-HeatMap.png?v={{pkg.version}}"
+    src="/blog/assets/feather-weather-heatmap-left.png?v={{pkg.version}}"
     title="Feather Weather Heat Map screen">
+
+See the Settings screen described below for an option
+to change the orientation of the heat map.
 
 The "Colors" switch can be set to "Relative" or "Absolute".
 
@@ -114,17 +118,23 @@ All temperatures between those extremes are
 assigned a color of the rainbow between blue and red that represents
 the percentage that temperature is between the zero and 100.
 
-## All Screens
+## Navigation Bar
 
-All screens display a refresh button in the upper-left corner
-and a settings button in the upper-right corner.
+The same navigation bar appears at the top of all screens.
+This contains:
 
-The refresh button fetches updated weather data for the currently selected location.
+- a refresh button in the upper-left corner that
+  fetches updated weather data for the currently selected location
+- the app name
+- a settings button in the upper-right corner that
+  opens a sheet containing settings options described below
 
-The settings button opens the following sheet at the bottom of the screen.
+## Settings Sheet
+
+Tapping the gear icon in the upper-right displays the following settings sheet.
 
 <img alt="Feather Weather Settings" style="width: 40%"
-    src="/blog/assets/FeatherWeather-iPhone-Settings.png?v={{pkg.version}}"
+    src="/blog/assets/feather-weather-settings.png?v={{pkg.version}}"
     title="Feather Weather Settings">
 
 The first setting chooses between
@@ -137,7 +147,14 @@ The current setting is indicated at the top of every screen
 with the text "showing {kind} temperatures".
 This defaults to showing actual temperatures.
 
-The third setting chooses between using relative colors and absolute colors
+The third setting chooses between displaying days in the heat map screen
+on the left or top.
+When the days are displayed on the left, the rows represent days
+and the columns represent hours of the day.
+When the days are displayed on the top, the columns represent days
+and the rows represent hours of the day.
+
+The fourth setting chooses between using relative colors and absolute colors
 to describe temperatures on the Forecast and Heat Map screens.
 In absolute mode, blue represents zero degrees Fahrenheit or less
 and red represents 100 degrees Fahrenheit more.
