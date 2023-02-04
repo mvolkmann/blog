@@ -9719,6 +9719,7 @@ Each of these view modifiers are described in the following sections.
 
 Alerts are simple modal dialogs that are displayed in the center of the screen.
 They display a title, an optional message, and buttons.
+"Only unstyled text is supported for the message."
 Tapping any button executes its action and dismisses the dialog.
 
 To define an alert, apply the {% aTargetBlank

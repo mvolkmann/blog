@@ -36,7 +36,9 @@ struct AppInfo {
         }
         print("url =", url)
 
-        let (data, _) = try await URLSession.shared.data(from: url)
+        // Using the ephemeral configuration avoids caching.
+        let session = URLSession(configuration: .ephemeral)
+        let (data, _) = try await session.data(from: url)
         guard let json = try JSONSerialization.jsonObject(
             with: data,
             options: [.allowFragments]
@@ -73,14 +75,13 @@ struct AppInfo {
     }
 
     var appId: Int { int("trackId") }
-    var appURL: String { string("trackViewUrl") }
+    var appURL: String { string("trackViewUrl") + "&country=US" }
     var author: String { string("sellerName") }
     var bundleId: String { string("bundleId") }
     var description: String { string("description") }
     var supportURL: String { string("sellerUrl") }
 
     var haveLatestVersion: Bool {
-        // Why is storeVersion not the latest version actually in the App Store?
         let order = storeVersion.compare(installedVersion, options: .numeric)
         return order != .orderedDescending
     }

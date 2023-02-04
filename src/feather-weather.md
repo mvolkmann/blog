@@ -39,7 +39,7 @@ While the weather forecast is being retrieved,
 the following animated progress indicator is displayed.
 
 <img alt="Feather Weather Progress" style="width: 40%"
-    src="/blog/assets/feather-weather-progress.png?v={{pkg.version}}"
+    src="/blog/assets/1-iphone-6.5-progress.png?v={{pkg.version}}"
     title="Feather Weather Progress">
 
 After the weather forecast has been retrieved,
@@ -48,7 +48,7 @@ The switch under the city name can be toggled between
 displaying temperatures in Celsius and Fahrenheit.
 
 <img alt="Feather Weather Current screen" style="width: 40%"
-    src="/blog/assets/feather-weather-current.png?v={{pkg.version}}"
+    src="/blog/assets/2-iphone-6.5-current.png?v={{pkg.version}}"
     title="Feather Weather Current screen">
 
 To see the weather forecast for a city other than your current city,
@@ -68,7 +68,7 @@ Drag your finger down and up on the list to
 move through the hours forward and backward.
 
 <img alt="Feather Weather Forecast screen" style="width: 40%"
-    src="/blog/assets/feather-weather-forecast.png?v={{pkg.version}}"
+    src="/blog/assets/3-iphone-6.5-forecast.png?v={{pkg.version}}"
     title="Feather Weather Forecast screen">
 
 ## Chart Screen
@@ -80,7 +80,7 @@ Drag your finger right and left over the chart to see an annotation
 that indicates the day, hour, and temperature under your finger.
 
 <img alt="Feather Weather Chart screen" style="width: 40%"
-    src="/blog/assets/feather-weather-chart.png?v={{pkg.version}}"
+    src="/blog/assets/4-iphone-6.5-chart.png?v={{pkg.version}}"
     title="Feather Weather Chart screen">
 
 ## Heat Map Screen
@@ -96,7 +96,7 @@ Drag your finger right and left over the heat map to scroll
 forward and backward through the hours in the next five days.
 
 <img alt="Feather Weather Heat Map screen" style="width: 40%"
-    src="/blog/assets/feather-weather-heatmap-left.png?v={{pkg.version}}"
+    src="/blog/assets/5-iphone-6.5-heatmap-left.png?v={{pkg.version}}"
     title="Feather Weather Heat Map screen">
 
 See the Settings screen described below for an option
@@ -123,18 +123,20 @@ the percentage that temperature is between the zero and 100.
 The same navigation bar appears at the top of all screens.
 This contains:
 
-- a refresh button in the upper-left corner that
-  fetches updated weather data for the currently selected location
+- an info button to get brief information about the app
+- a help button to display the app help page in Safari
 - the app name
-- a settings button in the upper-right corner that
-  opens a sheet containing settings options described below
+- a refresh button that fetches updated weather data
+  for the currently selected location
+- a settings button that opens a sheet
+  containing settings options described below
 
 ## Settings Sheet
 
 Tapping the gear icon in the upper-right displays the following settings sheet.
 
 <img alt="Feather Weather Settings" style="width: 40%"
-    src="/blog/assets/feather-weather-settings.png?v={{pkg.version}}"
+    src="/blog/assets/6-iphone-6.5-settings.png?v={{pkg.version}}"
     title="Feather Weather Settings">
 
 The first setting chooses between
