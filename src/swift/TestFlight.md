@@ -162,15 +162,23 @@ every time a new version of the app is released:
 1. If this is the first time distributing this app ...
 
    1. In the "App Previews and Screenshots" section,
-      add at least one screenshot for each supported device size.
+      add at least three screenshots for each supported device size.
+
       These must have specific pixel dimensions.
-      To capture them, run the app in a simulator once
-      for a device that has the desired size.
-      In the Simulator app, select File ... Save Screen
-      which saves a screenshot in the Desktop directory.
+      A simulator that provides screenshots for a 6.5" iPhone is "iPhone 11 Pro Max".
+      A simulator that provides screenshots for a 5.5" iPhone is "iPhone 8 Plus".
+      A simulator that provides screenshots for a 12.9" iPad is "iPad Pro 6th generation".
+
+      To capture screenshots, run the app in the Simulator
+      once for a device that has the desired size.
+      Click the camera button in the upper-right or press cmd-s.
+      This displays a screenshot thumbnail in the lower-right.
+      Right-click the thumbnail and select "Save to Desktop".
+
       On the App Store Connect page,
       click "Prepare for Submission" in the left nav.
       Drag the screenshot files into the area under "Version Information".
+
    1. Click the "Create Group" link in the light blue rectangle to add testers.
    1. Enter a group name.
    1. Check the "Enable automatic distribution" checkbox.
