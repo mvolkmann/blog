@@ -24,17 +24,17 @@ struct AppInfo {
     var json: [String: Any] = [:]
 
     private init(json: [String: Any]) {
+        // print("json =", json)
         self.json = json
     }
 
     static func create() async throws -> Self {
         let urlPrefix = "https://itunes.apple.com/lookup?bundleId="
         let identifier = infoDict["CFBundleIdentifier"] as? String ?? ""
-        let url = URL(string: "\(urlPrefix)\(identifier)")
+        let url = URL(string: "\(urlPrefix)\(identifier)&country=US")
         guard let url else {
             throw "AppStoreService: bad URL \(String(describing: url))"
         }
-        print("url =", url)
 
         // Using the ephemeral configuration avoids caching.
         let session = URLSession(configuration: .ephemeral)
@@ -75,10 +75,11 @@ struct AppInfo {
     }
 
     var appId: Int { int("trackId") }
-    var appURL: String { string("trackViewUrl") + "&country=US" }
+    var appURL: String { string("trackViewUrl") }
     var author: String { string("sellerName") }
     var bundleId: String { string("bundleId") }
     var description: String { string("description") }
+    var iconURL: String { string("artworkUrl100") }
     var supportURL: String { string("sellerUrl") }
 
     var haveLatestVersion: Bool {
