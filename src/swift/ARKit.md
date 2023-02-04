@@ -45,6 +45,13 @@ add animations to them, and add audio that can be triggered in many ways.
 The app can also "record sensor and camera data in the actual location
 you are building it for, and then replay it on your iOS device".
 
+Non-Apple alternatives to Reality Composer include:
+
+- {% aTargetBlank "https://www.blender.org", "Blender" %}
+- {% aTargetBlank "https://www.autodesk.com/products/maya/", "Maya" %}
+- {% aTargetBlank "https://unity.com", "Unity" %}
+- {% aTargetBlank "https://www.unrealengine.com/", "Unreal Engine" %}
+
 To launch the "Reality Composer" app in macOS, launch Xcode and
 select Xcode ... Open Developer Tool .. Reality Composer.
 
