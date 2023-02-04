@@ -1,6 +1,6 @@
 ---
 eleventyNavigation:
-  key: ActivityKit
+  key: AppInfo
   parent: Swift
 layout: topic-layout.njk
 ---
@@ -9,6 +9,8 @@ layout: topic-layout.njk
 
 It is possible to determine a lot of information about an app
 from its bundle and from the App Store (for released apps).
+
+## AppInfo struct
 
 The following code gathers information about an app
 and makes it available through computed properties.
@@ -87,7 +89,7 @@ struct AppInfo {
     var identifier: String { info("CFBundleIdentifier") }
     var minimumOsVersion: String { string("minimumOsVersion") }
     var name: String { string("trackName") }
-    // "Promotional Text" is not present in the App Store JSON!
+    // "Promotional Text" is not present in the App Store JSON.
     var price: Double { double("price") }
     var releaseDate: Date { date("currentVersionReleaseDate") }
     var releaseNotes: String { string("releaseNotes") }
@@ -95,7 +97,9 @@ struct AppInfo {
 }
 ```
 
-Here is an example of getting an instance of `AppInfo` in a SwiftUI view:
+## Creating Instance
+
+The following code gets an instance of `AppInfo` in a SwiftUI view:
 
 ```swift
 @State private var appInfo: AppInfo?
@@ -111,8 +115,9 @@ Here is an example of getting an instance of `AppInfo` in a SwiftUI view:
 }
 ```
 
-Here is an example of using `AppInfo` to
-add a help button to the navigation bar.
+## Link to Help
+
+The following code uses `AppInfo` to add a help button to the navigation bar.
 Tapping this opens the app support page in Safari.
 
 ```swift
@@ -127,9 +132,11 @@ Tapping this opens the app support page in Safari.
 }
 ```
 
-Here is an example of using `AppInfo` to inform users
-when a newer version of the app is available in App Store and
-provide a link that directs them to the App Store so it can be downloaded.
+## Link to App Store
+
+The following code uses `AppInfo` to inform users when
+a newer version of the app is available in App Store and
+provides a link that directs them to the App Store so it can be installed.
 
 ```swift
 if let appInfo,
