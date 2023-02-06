@@ -5762,8 +5762,11 @@ See the Apple documentation page on {% aTargetBlank
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/dynamictypesize(_:)-1m2tf", "dynamicTypeSize" %}
     sets the dynamic type size of the receiver to one of `.xSmall`, `.small`,
     `.medium`, `.large`, `.xLarge`, `.xxLarge`, or `.xxxLarge`.
+    See an example in the [Fonts](#fonts) section.
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/dynamictypesize(_:)-26aj0", "dynamicTypeSize" %}
     limits the dynamic type size of the receiver to a value in a given range.
+    See an example in the [Fonts](#fonts) section.
+
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/font(_:)", "font" %}
     sets the default font of the receiver.
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/fontdesign(_:)", "fontDesign" %}
@@ -7262,6 +7265,48 @@ struct ContentView: View {
         }
     }
 }
+```
+
+The `dynamicTypeSize` environment property can be used to
+test the user preference in Settings ... Display & Brightness ... Text Size.
+
+For example:
+
+```swift
+@Environment(\.dynamicTypeSize) var dynamicTypeSize
+...
+// Only display something if the user hasn't selected a really large text size.
+if dynamicTypeSize < .xxLarge {
+    Text("Hello, World!")
+}
+```
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/dynamictypesize(_:)-1m2tf",
+"dynamicTypeSize" %} view modifier can be used to set
+the font size of a view to be a specific dynamic type size.
+The supported sizes are `.xSmall`, `.small`, `.medium`,
+`.large`, `.xLarge`, `.xxLarge`, and `.xxxLarge`.
+
+For example:
+
+```swift
+Text("Hello, World!").dynamicTypeSize(.xxxLarge)
+```
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/dynamictypesize(_:)-26aj0",
+"dynamicTypeSize" %} view modifier can also be used to restrict the font size
+of everything in a given container to use a range of dynamic type sizes.
+For example:
+
+```swift
+// Limit the text size of everything inside this container
+// to be less then DynamicTypeSize.xxLarge.
+VStack {
+    ...
+}
+.dynamicTypeSize(..<DynamicTypeSize.xxLarge)
 ```
 
 ## Safe Area
