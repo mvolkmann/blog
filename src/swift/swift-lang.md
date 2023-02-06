@@ -1381,9 +1381,8 @@ For more date formatting options, see {% aTargetBlank
 
 For details on date format strings, see {% aTargetBlank
 "https://www.unicode.org/reports/tr35/tr35-31/tr35-dates.html#Date_Format_Patterns",
-"Date Format Patterns" %}.
-
-https://nsdateformatter.com
+"Date Format Patterns" %} and
+{% aTargetBlank "https://nsdateformatter.com", "NSDateFormatter" %}.
 
 Date/time strings in ISO 8601 format have content like "2022-08-30T15:39:19Z".
 To convert one of these strings to a Swift `Date`:
