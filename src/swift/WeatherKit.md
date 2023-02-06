@@ -15,8 +15,13 @@ and has a monthly cost beyond that.
 
 WeatherKit requires iOS 16+.
 
-See the WWDC 2022 video {% aTargetBlank
-"https://developer.apple.com/videos/play/wwdc2022/10003/", "Meet WeatherKit" %}.
+## Resources
+
+- {% aTargetBlank "https://developer.apple.com/videos/play/wwdc2022/10003/",
+  "Meet WeatherKit" %} WWDC 2022 video
+- {% aTargetBlank "https://developer.apple.com/weatherkit/", "Introducing WeatherKit" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/weatherkit",
+  "Swift Documentation" %}
 
 ## Setup
 
