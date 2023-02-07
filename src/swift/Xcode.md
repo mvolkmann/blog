@@ -1658,6 +1658,54 @@ by following the direction at {% aTargetBlank
 | open new split pane for file in focused editor | cmd-ctrl-t  |
 | fuzzy file finder (open quickly)               | cmd-shift-o |
 
+## Snippets
+
+Snippets are commonly used lines of code that can be quickly inserted.
+To insert a snippet, entering part of its name,
+selecting from the matching options, and press the return key.
+
+There are many predefined snippets and custom snippets can be defined.
+
+To see the existing snippets, select View ... Show Library,
+click the "+" in the upper-right, or press cmd-shift-l.
+Then click the "{}" button at the top center.
+
+Many snippets contain placeholders for text to be inserted.
+After inserting a snippet,
+the cursor will be positioned at the first placeholder.
+After entering text for a placeholder,
+press the return key followed by the tab key to move to the next placeholder.
+
+To create a new snippet:
+
+- Enter text for the snippet in any file.
+- Select the text.
+- Right-click the selected text and select "Create Code Snippet..."
+  or select Editor ... Create Code Snippet....
+- In the dialog that appears:
+  - enter a name for the snippet
+  - enter a summary of what it does
+  - select the Language where the snippet can be used (ex. Swift)
+  - select the Platform where the snippet can be used (ex. iOS or All)
+  - enter the completion text used to trigger the snippet
+    (doesn't use name by default)
+  - select the Availability of the snippet where options include
+    "Class Implementation", "Code Expression", "Function or Method",
+    "String or Comment", and "Top Level"
+
+To add placeholders in a snippet,
+add placeholder names surrounded by "<#" and "#>".
+The placeholder text will be replaced by a
+highlighted version of the placeholder name.
+Unfortunately, using the same placeholder name multiple times within a snippet
+does not cause them to be replaced by the same text.
+
+To edit an existing snippet, select it in the Library
+and click the "Edit" button in the lower-right.
+
+To delete an existing snippet, select it in the Library
+and click the "Delete" button in the lower-left.
+
 ## Using a New Swift Version
 
 See {% aTargetBlank
