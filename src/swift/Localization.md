@@ -197,7 +197,8 @@ print(greeting.localized)
 
 Localized strings can specify arguments accepted and
 where they should be inserted in translations.
-Arguments are represented by `%@` for string values and `%d` for numeric values.
+Arguments are represented by `%@` for `String` values,
+`%lld` for `Int` values, and `%f` for `Double` values.
 Arguments are passed to the `LocalizedStringKey` initializer
 using string interpolation.
 
