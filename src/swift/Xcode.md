@@ -1700,6 +1700,13 @@ highlighted version of the placeholder name.
 Unfortunately, using the same placeholder name multiple times within a snippet
 does not cause them to be replaced by the same text.
 
+The literal expressions `#file`, `#fileID`, `#function`, `#line`, and `#column`
+can be used to provide context in `print` output. For example:
+
+```swift
+print("\(#fileID) \(#function) <#variable#> =", <#variable#>)
+```
+
 To edit an existing snippet, select it in the Library
 and click the "Edit" button in the lower-right.
 
