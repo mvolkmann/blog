@@ -74,7 +74,9 @@ move through the hours forward and backward.
 ## Chart Screen
 
 The "Chart" screen displays an area chart that shows the
-hourly forecasted temperatures over the next five days.
+hourly forecasted temperatures over the next one to five days.
+The number of days defaults to five,
+but can be changed in the Settings sheet described later.
 This enables seeing a glance how the temperature is forecasted to change.
 Drag your finger right and left over the chart to see an annotation
 that indicates the day, hour, and temperature under your finger.
@@ -149,14 +151,18 @@ The current setting is indicated at the top of every screen
 with the text "showing {kind} temperatures".
 This defaults to showing actual temperatures.
 
-The third setting chooses between displaying days in the heat map screen
+The third setting determines the number of days of forecasted temperatures
+that are displayed on the Chart screen.
+This defaults to five, but can be set to any number from one to five.
+
+The fourth setting chooses between displaying days in the heat map screen
 on the left or top.
 When the days are displayed on the left, the rows represent days
 and the columns represent hours of the day.
 When the days are displayed on the top, the columns represent days
 and the rows represent hours of the day.
 
-The fourth setting chooses between using relative colors and absolute colors
+The fifth setting chooses between using relative colors and absolute colors
 to describe temperatures on the Forecast and Heat Map screens.
 In absolute mode, blue represents zero degrees Fahrenheit or less
 and red represents 100 degrees Fahrenheit more.
