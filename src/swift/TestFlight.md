@@ -103,7 +103,13 @@ by completing the form at {% aTargetBlank
 1. Click the "Next" button.
 1. Select the "Upload" radio button.
 1. Click the "Next" button.
-1. In the dialog that appears, uncheck "Manage Version and Build Number".
+1. In the dialog that appears, the "Manage Version and Build Number" checkbox
+   can be unchecked.
+   When this is checked and you have not changed the build number
+   since the last archive, it automatically increments the build number.
+   But is does not also increment the version number, so it isn't useful.
+   If you already modified the version number and build number,
+   leaving this checked has no effect.
    (If you get the error "Metadata/Info.plist Mismatch" when
    uploading the archive, try again with this checkbox checked.)
 1. Click the "Next" button.
