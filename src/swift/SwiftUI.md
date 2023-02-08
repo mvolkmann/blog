@@ -10970,6 +10970,8 @@ For small amounts of basic data, using `@AppStorage` can be
 seen as an alternative to defining a view model
 (with `ObservableObject` and `@Published`) and using the view model
 (with `@StateObject`, `@ObservableObject`, or `@EnvironmentObject`).
+Views that take a binding such as `TextField`
+can use `@AppStorage` properties with a `$` prefix.
 It has the advantage of also persisting the data.
 
 For macOS and iPad apps that have multiple scenes (aka windows),
