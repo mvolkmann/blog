@@ -8075,6 +8075,16 @@ These include:
   To fix this, add a parameter to the closure
   which can be `_` if the value is not used.
 
+  In cases where both the old and new value are needed,
+  the following can be used:
+
+  ```swift
+  .onChange(of: someState) { [someState] newValue in
+      // someState holds the old value.
+      ...
+  }
+  ```
+
 - `onContinueUserActivity`
 - `onHover`
 - `onOpenURL`
