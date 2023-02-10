@@ -1358,6 +1358,30 @@ to produce a locale-specific, formatted string.
 See the example code at {% aTargetBlank
 "https://github.com/mvolkmann/FormattingDemo/tree/main", "FormattingDemo" %}.
 
+Many `String` methods return a `String.SubSequence`.
+Values of this type cannot be passed to functions that expect a `String`.
+There are two ways to resolve this.
+One is to pass the `SubSequence` to the `String` initializer
+to obtain a compatible value.
+The other is to change the function parameter type to `any StringProtocol` which
+works because both `String` and `String.SubSequence` conform to that protocol.
+For example:
+
+```swift
+func printString(_ s: String) {
+    print(s)
+}
+
+func printStringProtocol(_ sp: any StringProtocol) {
+    print(sp)
+}
+
+let s = "test" // String
+let ps = s.prefix(2) // String.SubSequence
+printString(String(ps)) // "te"
+printStringProtocol(ps) // "te"
+```
+
 ### Character Type
 
 The `Character` type is a `struct` that represents a single Unicode character.
@@ -2024,6 +2048,34 @@ let quantities = [5, 2, 4, 7, 1] // 7 and 1 are ignored
 let zipped = Array(zip(prices, quantities))
 print(zipped) // [(1.23, 5), (5.79, 2), (3.48, 4)]
 print(zipped[2].0) // 3.48
+```
+
+Many `Array` methods return an `Array.SubSequence`.
+Values of this type cannot be passed to functions that expect an `Array`.
+There are two ways to resolve this.
+One is to pass the `SubSequence` to the `Array` initializer
+to obtain a compatible value.
+The other is to change the function parameter type to `any Sequence` which
+works because both `Array` and `Array.SubSequence` conform to that protocol.
+For example:
+
+```swift
+func printArray(_ array: [Any]) {
+    for item in array {
+        print(item)
+    }
+}
+
+func printSequence(_ seq: any Sequence) {
+    for item in seq {
+        print(item)
+    }
+}
+
+let a = [1, 2, 3, 4] // Array<Int>
+let pa = a.prefix(2) // Array<Int>.SubSequence
+printArray(Array(pa)) // 1 and 2
+printSequence(pa) // 1 and 2
 ```
 
 ### Sets
