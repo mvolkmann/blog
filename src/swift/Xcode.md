@@ -865,7 +865,7 @@ To **allow Xcode to access your GitHub account**:
   - Click the "Sign In" button.
   - Close the Settings dialog.
 
-## Project Navigator
+### Project Navigator
 
 When a project has a Git repository, the list of files in the Project Navigator
 indicates their source control status with the following letters
