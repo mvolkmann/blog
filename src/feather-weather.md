@@ -19,8 +19,16 @@ Download it from the iOS or Mac {% aTargetBlank
 "https://apps.apple.com/us/app/feather-weather-forecasts/id1667050253",
 "App Store" %}.
 
-Tap the buttons at the bottom of the screen to switch between
-the four weather forecast views described below.
+This app was originally created in order to learn about {% aTargetBlank
+"https://developer.apple.com/documentation/weatherkit", "WeatherKit" %}.
+It was then expanded to use {% aTargetBlank
+"https://developer.apple.com/documentation/charts", "Swift Charts" %}.
+Once it became a useful app and not just a learning exercise,
+it was submitted to the App Store.
+
+Tap the buttons at the bottom of the screen to switch between the
+four weather forecast views "Current", "Forecast", "Chart", and "Heat Map"
+which are described below.
 
 The app currently supports three languages: English, French, and Spanish.
 
