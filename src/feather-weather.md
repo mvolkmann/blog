@@ -24,6 +24,14 @@ the four weather forecast views described below.
 
 The app currently supports three languages: English, French, and Spanish.
 
+When a new version of the app is available,
+an "Update Available" link will appear on the initial screen.
+Tapping this will open the App Store where the new version can be installed.
+
+After each version of the app has been used for some time,
+determined by all the screens being visited multiple times,
+a dialog will appear for rating the app.
+
 ## Contact Information
 
 To contact the developer of this application, send email to
