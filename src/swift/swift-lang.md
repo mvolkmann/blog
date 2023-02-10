@@ -259,6 +259,50 @@ To install a package in Xcode:
 - Select the package
 - Click the "Add Package" button.
 
+## Swift Standard Library
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swift/swift-standard-library",
+"Swift Standard Library" %} defines
+fundamental types, protocols, and global functions.
+These include:
+
+- types like `Bool`, `Int`, `Float`, `Double`, `String`,
+  `Regex`, `KeyPath`, and `Optional`
+- collections like `Array`, `Set`, `Dictionary`, and `Range`
+- protocols like `Comparable`, `Equatable`, `Hashable`,
+  `CaseIterable`, and `Codable`
+- global functions like `abs`, `max`, `min`, `print`, `dump`,
+  `readLine`, and `assert`
+
+The Swift Standard Library is open source and implemented entirely in Swift.
+It is available by default, so nothing needs to be imported
+to use the things it defines.
+
+## Foundation Framework
+
+The {% aTargetBlank "https://developer.apple.com/documentation/foundation",
+"Foundation" %} framework defines many types including
+`AttributedString`, `Bundle`, `Calendar`, `CGFloat`, `Data`, `DateFormatter`,
+`DateInterval`, `Decimal`, `Dimension`, `Error`, `FileManager`,
+`HTTPURLResponse`, `InputStream`, `Locale`, `Measurement`, `NumberFormatter`,
+`NumberFormatter`, `ObservableObject`, `OutputStream`, `Pipe`, `Port`,
+`Process`, `ProcessInfo`, `Published`, `RunLoop`, `Stream`, `Thread`,
+`TimeInterval`, `Timer`, `Timer`, `TimeZone`, `Unit`, `URL`, `URLRequest`,
+`URLResponse`, `URLSession`, `UserDefaults`, `UUID`, and many more.
+
+The Foundation Framework is not open source
+and is mostly implemented in Objective-C.
+However, the post {% aTargetBlank
+"https://www.swift.org/blog/future-of-foundation/",
+"The Future of Foundation" %} from December 2022 states that
+work is underway to rewrite it in Swift and make it open source.
+
+The Foundation Framework must be imported in order to use the things it defines.
+It is not necessary to explicitly import Foundation
+if another framework or package that uses Foundation is imported,
+and most of them do.
+
 ## Libraries
 
 Xcode is aware of many standard libraries such as SwiftUI and UIKit.
