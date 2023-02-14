@@ -249,14 +249,10 @@ To add command-line argument parsing:
        @Argument(help: "The phrase to repeat.")
        var phrase: String
 
-       mutating func run() throws {
-           let repeatCount = count ?? 2
+       func run() throws {
+           let repeatCount = count ?? 1
            for i in 1 ... repeatCount {
-               if includeCounter {
-                   print("\(i): \(phrase)")
-               } else {
-                   print(phrase)
-               }
+               print((includeCounter ? "\(i): " : "") + phrase)
            }
        }
    }
