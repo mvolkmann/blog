@@ -10044,6 +10044,8 @@ struct ContentView: View {
 
 Custom modal dialogs are implemented by displaying a "sheet".
 The sheet slides in from the bottom by default.
+It portrait mode the sheet covers a customizable portion of the screen,
+but in landscape mode it covers the entire screen.
 
 To define a sheet, apply the {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/view/sheet(ispresented:ondismiss:content:)",
@@ -10051,6 +10053,13 @@ To define a sheet, apply the {% aTargetBlank
 It is displayed when a given `Bool` binding is set to `true`.
 
 Users can dismiss a sheet by swiping down.
+In iOS swiping down to dismiss only works in portrait mode.
+If a sheet is displayed and the device is held in landscape mode,
+the device must be rotated to portrait mode in order to dismiss the sheet.
+See this {% aTargetBlank
+"https://www.reddit.com/r/SwiftUI/comments/gso7fo/is_sheet_presentation_not_even_supposed_to_work/",
+"reddit post" %}.
+
 In some cases users must enter data before dismissing a sheet.
 To prevent dismissing by swiping down, apply the {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/view/interactivedismissdisabled(_:)",
