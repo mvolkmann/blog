@@ -198,6 +198,38 @@ After adding this documentation, rebuild the project
 and option-click on the name of a documented item
 to see the documentation in a popup.
 
+## Command-line Executable Example
+
+The following steps generate the files required to
+implement a Swift command-line executable,
+build a development version, run unit tests, run it locally,
+build a production version, and copy it into the PATH:
+
+1. `mkdir mydemo`
+1. `cd mydemo`
+1. `swift package init --type executable`
+1. `swift build`
+1. `swift test` to run unit tests
+1. `swift run` to run as an executable (will print "Hello, World!")
+1. `swift build --configuration release`
+1. `cp -f .build/release/banner /usr/local/bin`
+1. `mydemo`
+
+To add command-line argument parsing:
+
+1. Edit `Package.swift`.
+1. Add the following in the `dependencies` array:
+
+   ```swift
+   .package(url: "https://github.com/apple/swift-argument-parser", from: "0.0.1")
+   ```
+
+1. In the `executableTarget` `dependencies` array, add `"ArgumentParser"`.
+
+1. Edit the `.swift` file in the `Sources` directory.
+1. Add `import SPMUtility`.
+1. TODO: Finish this from https://www.avanderlee.com/swift/command-line-tool-package-manager/
+
 ## Package Contents
 
 The initial package contents are:

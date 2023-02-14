@@ -3140,7 +3140,8 @@ Classes do the following things that structs cannot.
 - refer to instances by reference rather than making a copy
 - inherit properties and methods from one other class
 - use type casting to determine if an object is an instance at runtime
-- define a "deinitializer" to perform cleanup when an instance is destroyed
+- define a "deinitializer" (named `deinit`)
+  to perform cleanup when an instance is destroyed
 - use automatic reference counting (ARC) for garbage collection
 
 Classes are reference types. This means that assigning one to a variable
