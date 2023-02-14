@@ -28,6 +28,28 @@ that conforms to the {% aTargetBlank
 This is explained in the
 [UIViewRepresentable](#uiviewrepresentable) section below.
 
+## Type Hierarchy
+
+The hierarchy of a subset of the types defined by UIKit is shown below:
+
+- NSObject
+  - UIColor
+  - UIResponder
+    - UIView
+      - UIControl
+        - UIButton
+        - UIColorWell
+        - UIDatePicker
+        - UIPageControl
+        - UISegmentedControl
+        - UISlider
+        - UIStepper
+        - UISwitch
+        - UITextField
+      - UILabel
+      - UIWindow
+    - UIViewController
+
 ## UIView
 
 All views in the UIKit framework are classes that inherit from the

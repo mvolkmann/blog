@@ -9703,6 +9703,17 @@ struct ContentView_Previews: PreviewProvider {
 }
 ```
 
+To persist a ViewModel `@Published` property every time it changes,
+add a `didSet` method to the property. For example:
+
+```swift
+@Published var data: [SomeType] = [] {
+    didSet {
+        persistData()
+    }
+}
+```
+
 ## Popovers
 
 Popovers are often used for tooltip or help text.
@@ -10982,12 +10993,21 @@ where you store key-value pairs persistently across launches of your app."
 When an app is deleted, it's `UserDefaults` data is also deleted.
 This is intended for storing small amounts of non-sensitive data.
 
-The `@AppStorage` property wrapper makes it easier to work with `UserDefaults`,
-but it is limited to the following types:
+The `@AppStorage` property wrapper makes it easier to work with `UserDefaults`, but it is limited to the following types:
 `Bool`, `Int`, `Double`, `String`, `URL`, and `Data` (byte buffer).
-It can't be used in the example below because
+It cannot be used in the example below because
 it stores an array of struct instances.
 TODO: Can you store an array objects directly without encoding as JSON?
+
+`@AppStorage` properties can only be defined in `View` subtypes.
+To access the same data in other types, use `UserDefaults`.
+For example, these access the same data:
+
+```swift
+@AppStorage("showFahrenheit") private var showFahrenheit: Bool?
+
+let showFahrenheit = UserDefaults.standard.bool(forKey: "showFahrenheit")
+```
 
 For small amounts of basic data, using `@AppStorage` can be
 seen as an alternative to defining a view model
