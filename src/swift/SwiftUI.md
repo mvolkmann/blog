@@ -9553,6 +9553,7 @@ ViewModels ...
 Views ...
 
 - decide what to render
+- are structs that conform to the `View` protocol
 - should be mostly stateless
 - are declarative rather than imperative because they describe
   what to render based on the current data, not when to render it

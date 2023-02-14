@@ -1047,7 +1047,7 @@ Sibling tasks that are running or waiting to run are cancelled.
 
 ## Actors
 
-Tasks can share mutable data without danger of race conditions
+Tasks can share mutable data across threads without danger of race conditions
 by using an {% aTargetBlank
 "https://developer.apple.com/documentation/swift/actor", "Actor" %}.
 
