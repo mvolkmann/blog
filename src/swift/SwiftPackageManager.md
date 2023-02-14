@@ -212,7 +212,7 @@ build a production version, and copy it into the PATH:
 1. `swift test` to run unit tests
 1. `swift run` to run as an executable (will print "Hello, World!")
 1. `swift build --configuration release`
-1. `cp -f .build/release/banner /usr/local/bin`
+1. `cp -f .build/release/mydemo /usr/local/bin`
 1. `mydemo`
 
 To add command-line argument parsing:
@@ -221,14 +221,50 @@ To add command-line argument parsing:
 1. Add the following in the `dependencies` array:
 
    ```swift
-   .package(url: "https://github.com/apple/swift-argument-parser", from: "0.0.1")
+   .package(url: "https://github.com/apple/swift-argument-parser", from: "1.2.0"),
    ```
 
-1. In the `executableTarget` `dependencies` array, add `"ArgumentParser"`.
+1. In the `executableTarget` `dependencies` array, add the following:
 
-1. Edit the `.swift` file in the `Sources` directory.
-1. Add `import SPMUtility`.
-1. TODO: Finish this from https://www.avanderlee.com/swift/command-line-tool-package-manager/
+   ```swift
+   .product(name: "ArgumentParser", package: "swift-argument-parser"),
+   ```
+
+1. Edit the `.swift` file in the `Sources` directory and replace the contents
+   with something like the following taken from {% aTargetBlank
+   "https://github.com/apple/swift-argument-parser", "swift-argument-parser" %}
+   GitHub repo:
+
+   ```swift
+   import ArgumentParser
+
+   @main
+   struct Repeat: ParsableCommand {
+       @Flag(help: "Include a counter with each repetition.")
+       var includeCounter = false
+
+       @Option(name: .shortAndLong, help: "The number of times to repeat 'phrase'.")
+       var count: Int? = nil
+
+       @Argument(help: "The phrase to repeat.")
+       var phrase: String
+
+       mutating func run() throws {
+           let repeatCount = count ?? 2
+           for i in 1 ... repeatCount {
+               if includeCounter {
+                   print("\(i): \(phrase)")
+               } else {
+                   print(phrase)
+               }
+           }
+       }
+   }
+   ```
+
+For more details, see {% aTargetBlank
+"https://www.avanderlee.com/swift/command-line-tool-package-manager/",
+"Creating a command line tool using the Swift Package Manager" %}.
 
 ## Package Contents
 
