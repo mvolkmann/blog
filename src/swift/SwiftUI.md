@@ -184,7 +184,7 @@ To zoom in and out on the Preview area,
 click the magnifier glass icons in the lower right (minus and plus)
 or select a zoom level from the percent dropdown.
 
-By default the Preview is not in "Live Preview" mode.
+The Preview is in "Live Preview" mode by default.
 Key things to know about not being in this mode include:
 
 - Clicking a View in the Preview selects it rather than triggering tap events.
@@ -199,12 +199,11 @@ Key things to know about not being in this mode include:
   focus is moved out of the modified Navigator field.
   This is a great way to learn about supported view modifiers and their syntax.
 
-To switch to "Live Preview" mode so tap events are honored,
-click the button with a triangle inside a circle.
-This also enables scrolling by dragging
-which is not possible in the default mode.
+When "Live" mode is off, click the button with a triangle inside a circle
+to turn it on.
+This allows tap events to be honored and enables scrolling by dragging.
 Clicking this also triggers the Preview to resume if it is paused
-and rebuild the code.
+and rebuilds the code.
 
 Output from `print` calls does not appear in the Debug area
 when interacting with a preview.
@@ -4046,6 +4045,9 @@ One way to create a new "Image Set" is to:
 - Select `Assets.xcassets` in the Project Navigator.
 - Drag an image from the Finder into in the editor area.
 
+A good source for test images is
+{% aTargetBlank "https://picsum.photos", "Lorem Picsum" %}.
+
 This creates a new "Image Set" whose name matches
 the name of the image file without its file extension.
 The image will appear in the 1x box and will be used for all devices.
@@ -4096,6 +4098,7 @@ Here is an example of correct usage.
 ```swift
 Image("some-name")
     .resizable()
+    .scaledToFit() // enables omitting one dimension below
     .frame(width: 300, height: 300)
     .clipShape(Circle())
     .overlay(Circle().stroke(Color.red, lineWidth: 10))

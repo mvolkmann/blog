@@ -638,6 +638,26 @@ The available priorities from highest to lowest are:
 - `.medium` or `.utility`
 - `.low` or `.background`
 
+To run asynchronous functions sequentially:
+
+```swift
+Task {
+    await asyncFunc1()
+    await asyncFunc2()
+}
+```
+
+To run asynchronous functions concurrently:
+
+```swift
+Task {
+    await asyncFunc1()
+}
+Task {
+    await asyncFunc2()
+}
+```
+
 Another way to create a `Task` is to apply the {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/view/task(priority:_:)",
 "task" %} view modifier which takes
@@ -802,6 +822,13 @@ If neither of these is done, cancelling the `Task` will have no effect.
 The `Task` static property `isCancelled`
 and the static method `checkCancellation`
 apply to the `Task` inside which they are used.
+
+The `Task` static method `sleep` takes a number of nanoseconds
+and sleeps for at least that long. For example:
+
+```swift
+try await Task.sleep(nanoseconds: 3 * 1_000_000_000) // 3 seconds
+```
 
 Many `async` methods in Apple frameworks check for cancellation
 and stop their work gracefully.
