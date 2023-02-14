@@ -810,7 +810,7 @@ When a `Task` is saved in a variable:
 
 - its value can be obtained using `let taskValue = await myTask.value`
 - it can be notified that it is intended to be cancelled
-  by calling `myTask.cancel()`
+  by calling `myTask.cancel()` before doing work
 
 When a `Task` might be cancelled, it is responsible for
 verifying whether it has been cancelled.
@@ -820,12 +820,41 @@ Alternatively, a `Task` can call `try Task.checkCancellation()`
 to throw a `CancellationError` if it has been cancelled.
 If neither of these is done, cancelling the `Task` will have no effect.
 
+The following code creates a `Task` inside in custom SwiftUI `View`
+when it appears and cancels it when the view disappears:
+
+```swift
+import SwiftUI
+
+struct Demo: View {
+    @State private var task: Task<Void, Error>?
+
+    var body: some View {
+        VStack {
+            Text("in Demo")
+        }
+        .onAppear {
+            task = Task {
+                print("in Task")
+            }
+        }
+        .onDisappear {
+            print("cancelling Task")
+            task?.cancel()
+        }
+    }
+}
+```
+
 The `Task` static property `isCancelled`
 and the static method `checkCancellation`
 apply to the `Task` inside which they are used.
 
 The `Task` static method `sleep` takes a number of nanoseconds
 and sleeps for at least that long. For example:
+
+The `Task` static method `yield` lets higher priority tasks
+jump in before continuing. For example: `await Task.yield()`.
 
 ```swift
 try await Task.sleep(nanoseconds: 3 * 1_000_000_000) // 3 seconds
