@@ -3284,6 +3284,24 @@ and can improve build times.
 Definitions of both classes and structs can be nested inside each other
 to limit their visibility and/or scope their names.
 
+## Value vs. Reference Types
+
+Instances of value types are stored on a stack
+and there is a separate stack for each thread.
+Value types include `struct`, `enum`, `Bool`, `Int`,
+`Float`, `Double`, `String`, `Date`, and many more.
+Value types are thread-safe so there are no concurrent access issues.
+Accessing these is faster than accessing reference types.
+When an instance is assigned to another variable or passed to a function,
+a copy-on-write copy is created.
+
+Instances of reference types are stored on the heap
+which is shared by all threads.
+Reference types include `function`, `class`, and `actor`.
+Reference types are not thread-safe.
+If multiple threads might access instances
+then steps must be taken to synchronize access.
+
 ## Initializers
 
 Structs and classes can define `init` methods
