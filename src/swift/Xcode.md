@@ -1619,6 +1619,7 @@ To make it easier to find a particular item in the list, type part of its name.
 | find in project               | cmd-shift-f        |
 | find next in project          | cmd-shift-g        |
 | find and replace in project   | cmd-option-shift-f |
+| rename refactor               | cmd-ctrl-e         |
 
 ### Code Formatting
 
@@ -1650,13 +1651,15 @@ by following the direction at {% aTargetBlank
 
 ### Miscellaneous
 
-| Action                                         | Key         |
-| ---------------------------------------------- | ----------- |
-| increase font size                             | cmd-plus    |
-| decrease font size                             | cmd-minus   |
-| open file                                      | cmd-o       |
-| open new split pane for file in focused editor | cmd-ctrl-t  |
-| fuzzy file finder (open quickly)               | cmd-shift-o |
+| Action                                          | Key         |
+| ----------------------------------------------- | ----------- |
+| context menu for options like "Embed in VStack" | cmd-click   |
+| increase font size                              | cmd-plus    |
+| decrease font size                              | cmd-minus   |
+| open file                                       | cmd-o       |
+| open new split pane for file in focused editor  | cmd-ctrl-t  |
+| fuzzy file finder (open quickly)                | cmd-shift-o |
+| toggle commenting current or selected lines     | cmd-/       |
 
 ## Snippets
 
