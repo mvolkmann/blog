@@ -634,9 +634,10 @@ The `Task` initializer can be passed the priority under which it should run.
 When no priority is specified, the priority of the parent `Task` is used.
 The available priorities from highest to lowest are:
 
-- `.high` or `.userInitiated`
-- `.medium` or `.utility`
-- `.low` or `.background`
+- `.high` or `.userInitiated` (25)
+- `.medium` (21)
+- `.low` or `.utility` (17)
+- `.background` (9)
 
 To run asynchronous functions sequentially:
 
