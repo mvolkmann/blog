@@ -250,7 +250,7 @@ before all calls to other asynchronous functions.
 For example:
 
 ```swift
-function getCurrentCity() async throws -> String {
+func getCurrentCity() async throws -> String {
     let coordinates = await getCurrentCoordinates() // implemented elsewhere
     let address = await getAddress(of: coordinates) // implemented elsewhere
     return address.city

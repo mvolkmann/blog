@@ -27,7 +27,7 @@ and a `Button`. Tapping any of these navigates
 to a detail view for a selected kind of fruit.
 
 <img alt="SwiftUI Navigation Basic" style="width: 50%"
-  src="/blog/assets/SwiftUI-Navigation-Basic.png?v={{pkg.version}}"
+  src="/blog/assets/SwiftUI-navigation-basic.png?v={{pkg.version}}"
   title="SwiftUI Navigation Basic">
 
 ```swift

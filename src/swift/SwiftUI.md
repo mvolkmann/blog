@@ -15,7 +15,7 @@ layout: topic-layout.njk
 ## Overview
 
 {% aTargetBlank "https://developer.apple.com/xcode/swiftui/", "SwiftUI" %}
-is a Swift library for building macOS, iOS, and Apple Watch apps.
+is a Swift framework for building iOS, iPadOS, watchOS, macOS, and tvOS apps.
 It is an alternative to its predecessor
 {% aTargetBlank "https://developer.apple.com/documentation/uikit", "UIKit" %}.
 
@@ -8161,37 +8161,41 @@ The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/focusstate",
 "FocusState" %} property wrapper is used to
 track and modify which input view currently has focus.
-The following code demonstrates its use:
+The following code demonstrates its use.
+Pressing the return key while the focus is in any `TextField`
+moves to the next `TextField`.
 
 ```swift
 struct ContentView: View {
-    enum Field: Hashable {
-        case firstName, lastName
-    }
-
-    @FocusState private var focus: Field? // cannot initialize here
-
+    @FocusState private var focus: AnyKeyPath?
     @State private var firstName = ""
+    @State private var middleName = ""
     @State private var lastName = ""
     @State private var message = ""
     @State private var showError = false
     @State private var showWelcome = false
 
+    private var fullName: String {
+        "\(firstName) \(middleName) \(lastName)"
+    }
+
     var body: some View {
         VStack {
-            TextField("First Name", text: $firstName)
-                .focused($focus, equals: .firstName)
-            TextField("Last Name", text: $lastName)
-                .focused($focus, equals: .lastName)
+            TextField("First Name", text: $firstName, onCommit: nextFocus)
+                .focused($focus, equals: \Self.firstName)
+            TextField("Middle Name", text: $middleName, onCommit: nextFocus)
+                .focused($focus, equals: \Self.middleName)
+            TextField("Last Name", text: $lastName, onCommit: nextFocus)
+                .focused($focus, equals: \Self.lastName)
             Button("Submit", action: submit)
                 .buttonStyle(.borderedProminent)
             Spacer()
         }
-        .autocorrectionDisabled(true)
+        .disableAutocorrection(true)
         .textFieldStyle(.roundedBorder)
         .padding()
         .onAppear {
-            focus = .firstName // initial focus
+            focus = \Self.firstName // initial focus
         }
         .alert(
             "Invalid Input",
@@ -8203,20 +8207,29 @@ struct ContentView: View {
             "Welcome",
             isPresented: $showWelcome,
             actions: {}, // no custom buttons
-            message: { Text("Hello, \(firstName) \(lastName)!") }
+            message: { Text("Hello, \(fullName)!") }
         )
+    }
+
+    private func nextFocus() {
+        switch focus {
+        case \Self.firstName: focus = \Self.middleName
+        case \Self.middleName: focus = \Self.lastName
+        case \Self.lastName: focus = \Self.firstName
+        default: break
+        }
     }
 
     private func submit() {
         if firstName.isEmpty {
             message = "First name is required"
-            focus = .firstName
+            focus = \Self.firstName
         } else if lastName.isEmpty {
             message = "Last name is required"
-            focus = .lastName
+            focus = \Self.lastName
         } else if lastName.count < 2 {
             message = "Last name is too short"
-            focus = .lastName
+            focus = \Self.lastName
         } else {
             message = ""
             focus = nil // dismisses keyboard

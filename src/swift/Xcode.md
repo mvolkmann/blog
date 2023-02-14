@@ -1453,7 +1453,7 @@ TODO: What does this phase do?
 
 The Archive phase specifies the archive name and
 whether a Debug or Release build configuration should used.
-TODO: What is an "archive"?
+An "archive" is a file that can be submitted to TestFlight and the App Store.
 
 ## Hot Reload
 

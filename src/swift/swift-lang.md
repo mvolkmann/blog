@@ -283,8 +283,8 @@ to use the things it defines.
 
 The {% aTargetBlank "https://developer.apple.com/documentation/foundation",
 "Foundation" %} framework defines many types including
-`AttributedString`, `Bundle`, `Calendar`, `CGFloat`, `Data`, `DateFormatter`,
-`DateInterval`, `Decimal`, `Dimension`, `Error`, `FileManager`,
+`AttributedString`, `Bundle`, `Calendar`, `CGFloat`, `Data`, `Date`,
+`DateFormatter`, `DateInterval`, `Decimal`, `Dimension`, `Error`, `FileManager`,
 `HTTPURLResponse`, `InputStream`, `Locale`, `Measurement`, `NumberFormatter`,
 `NumberFormatter`, `ObservableObject`, `OutputStream`, `Pipe`, `Port`,
 `Process`, `ProcessInfo`, `Published`, `RunLoop`, `Stream`, `Thread`,
@@ -738,7 +738,7 @@ as follows:
 
 ```swift
 extension String: LocalizedError {
-    public var errorDescription: String? { return self }
+    public var errorDescription: String? { self }
 }
 ```
 
@@ -1152,7 +1152,7 @@ let metricArea = Measurement(
 The SwiftUI `Text` view supports displaying `Measurement` instances
 including their value and unit.
 
-### String and Character Type
+### String Type
 
 The {% aTargetBlank "https://developer.apple.com/documentation/swift/string",
 "String" %} type is a `struct` that represents a sequence of Unicode characters.
@@ -1574,12 +1574,12 @@ var c2: Color = .red // using shorthand
 print(c2.rawValue) // ff0000
 
 switch c1 {
-    case .red:
-        print("hot") // this prints
-    case .green:
-        print("warm")
-    case .blue:
-        print("color")
+case .red:
+    print("hot") // this prints
+case .green:
+    print("warm")
+case .blue:
+    print("color")
 }
 ```
 
@@ -2664,12 +2664,12 @@ at the end of a `case` block.
 
 ```swift
 switch computeScore(player1) {
-    case 21:
-        print("Winner!");
-    case 18...20:
-        print("Very good hand.")
-    default:
-        print("Will likely lose.")
+case 21:
+    print("Winner!");
+case 18...20:
+    print("Very good hand.")
+default:
+    print("Will likely lose.")
 }
 ```
 
