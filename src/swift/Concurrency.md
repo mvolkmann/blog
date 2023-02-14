@@ -1053,7 +1053,7 @@ by using an {% aTargetBlank
 
 Actors:
 
-- synchronize access to their mutable state
+- synchronize access to their mutable state (thread-safe)
 - are a reference type like classes rather than a value type like structs
 - are written similar to classes,
   substituting the `actor` keyword for the `class` keyword
@@ -1061,9 +1061,12 @@ Actors:
   methods that should be called in a synchronous context
 - can obtain additional functionality from extensions
 
-Accesses to actor properties and methods
-must occur in a concurrent context
+Accesses to actor properties and methods must occur in a
+concurrent context (like a `Task` closure or an `async` function)
 and be preceded by the `await` keyword.
+
+Properties of an `actor` can only be modified inside a method of the `actor`.
+Implement setter methods if this is needed.
 
 `Actor` methods that have no danger of resulting in a race condition
 can be marked with the `nonisolated` keyword.

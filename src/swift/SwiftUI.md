@@ -207,6 +207,7 @@ and rebuilds the code.
 
 Output from `print` calls does not appear in the Debug area
 when interacting with a preview.
+This is a serious deficiency!
 
 To rotate the display to landscape mode,
 click the button above the display that contains
