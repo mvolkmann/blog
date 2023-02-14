@@ -398,10 +398,15 @@ which has four suggested prices, all of which unlock all the features.
 Views in SwiftUI are structs that conform to the {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/view", "View" %} protocol.
 The only requirement this imposes is that conforming types
-must define a `body` computed property whose type is `some View`.
+must define a `body` computed property whose type is `some View`
+which is an opaque type.
 The `some` keyword describes an "opaque type".
-In this case it means that `body` an return
+In this case it means that `body` can return
 an instance of any type that conforms to the `View` protocol.
+
+Typically the value of the `body` property is a single top-level view.
+If more than is more than one top-level view,
+a `TupleView` is automatically returned.
 
 A `body` definition can contain any number of top-level views.
 These are automatically wrapped in a {% aTargetBlank

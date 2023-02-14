@@ -4287,6 +4287,11 @@ to have "associated type requirements".
 Such protocols are incomplete and cannot be used as a type unless
 they are preceded by the `some` or `any` keyword.
 
+When a function returns an opaque type, it always returns a
+single, specific type, but the caller isn't aware of the actual type.
+When a function returns a protocol type, it can return
+any type that conforms to the protocol.
+
 |                        | `some`                                           | `any`                                                       |
 | ---------------------- | ------------------------------------------------ | ----------------------------------------------------------- |
 | variable type          | not useful; must initialize and can never change | useful because value can be changed to any conforming value |
