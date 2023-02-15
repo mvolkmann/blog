@@ -2362,23 +2362,48 @@ a `Bool` binding that is programmatically set to `true`.
   title="SwiftUI DisclosureGroup">
 
 ```swift
-@State private var cyclist = false
-@State private var firstName = ""
-@State private var lastName = ""
-@State private var personalExpanded = true
-@State private var runner = false
+struct ContentView: View {
+    @State private var cyclist = false
+    @State private var firstName = ""
+    @State private var lastName = ""
+    @State private var preferencesExpanded = false
+    @State private var runner = false
 
-var body: some View {
-    Form {
-        DisclosureGroup("Personal", isExpanded: $personalExpanded) {
-            TextField("First Name", text: $firstName)
-            TextField("Last Name", text: $lastName)
-        }
+    var body: some View {
+        // Form { // background doesn't work well with this
+        VStack {
+            DisclosureGroup("Personal") {
+                TextField("First Name", text: $firstName)
+                TextField("Last Name", text: $lastName)
+            }
+            .disableAutocorrection(true)
 
-        DisclosureGroup("Preferences") {
-            Toggle("Runner", isOn: $runner)
-            Toggle("Cyclist", isOn: $cyclist)
+            Button("Toggle Preferences") {
+                withAnimation {
+                    preferencesExpanded.toggle()
+                }
+            }
+            .buttonStyle(.bordered)
+
+            DisclosureGroup(isExpanded: $preferencesExpanded) {
+                Toggle("Runner", isOn: $runner)
+                    .padding(.trailing, 2) // fixes a bug
+                Toggle("Cyclist", isOn: $cyclist)
+                    .padding(.trailing, 2) // fixes a bug
+            } label: {
+                Label("Preferences", systemImage: "gear")
+            }
+            .tint(.red)
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(Color.red)
+                    .opacity(0.1)
+            )
+
+            Spacer()
         }
+        .padding()
     }
 }
 ```

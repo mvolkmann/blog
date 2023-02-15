@@ -2250,9 +2250,9 @@ struct City {
 }
 
 let cities = [
+    City(name: "Chicago", country: "USA"),
     City(name: "London", country: "England"),
     City(name: "Manchester", country: "England"),
-    City(name: "Chicago", country: "USA"),
     City(name: "New York", country: "USA"),
 ]
 
