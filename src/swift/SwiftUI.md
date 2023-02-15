@@ -6303,6 +6303,10 @@ TODO: Resume adding view modifier descriptions here!
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/aspectratio(_:contentmode:)-6j7xz", "aspectRatio" %}
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/aspectratio(_:contentmode:)-771ow", "aspectRatio" %}
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/imagescale(_:)", "imageScale" %}
+
+    This can be applied to an `Image` to scale it to a relative size of
+    `.small`, `.medium`, or `.large`.
+
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/scaledtofill()", "scaledToFill" %}
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/scaledtofit()", "scaledToFit" %}
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/scaleeffect(_:anchor:)-7q7as", "scaleEffect" %}
