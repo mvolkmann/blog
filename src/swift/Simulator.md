@@ -100,6 +100,17 @@ Face ID options include Enrolled (approves use of Face ID),
 Matching Face (simulates a match),
 and Non-Matching Face (simulates failure to match).
 
+## iCloud
+
+To sign in to your iCloud account in the Simulator:
+
+- Open the Settings app.
+- Click "Sign in to your iPhone".
+- Enter your Apple ID.
+- enter your password.
+- Click "Don't Merge" to avoid merging data
+  from the Simulator to your iCloud account.
+
 ## Erasing Data and Settings
 
 To erase all data and settings,

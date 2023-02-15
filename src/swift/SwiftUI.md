@@ -7279,6 +7279,26 @@ Text("Hello").font(.system(size: 24, weight: .bold))
 Image(systemName: "cloud.snow").font(.system(size: 64))
 ```
 
+The code above can be simplified by defining
+the following `View` extension method:
+
+```swift
+import SwiftUI
+
+extension View {
+    func sysFont(_ size: Int, weight: Font.Weight = .regular) -> some View {
+        font(.system(size: CGFloat(size)).weight(weight))
+    }
+}
+```
+
+With this extension in place the previous examples can be rewritten as follows:
+
+```swift
+Text("Hello").sysFont(24, weight: .bold)
+Image(systemName: "cloud.snow").sysFont(64)
+```
+
 Another option is to use "Dynamic Type" font names
 whose size changes based on user preferences.
 The dynamic font names are listed below in order from largest to smallest size.
