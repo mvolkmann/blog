@@ -931,6 +931,7 @@ struct BarChartDemo: View {
             .top
     }
 
+    // ChartProxy is useful for supporting user interactions like tap and drag.
     private func chartOverlay(proxy: ChartProxy) -> some View {
         GeometryReader { geometry in // of the overlay view
             let origin = geometry[proxy.plotAreaFrame].origin
