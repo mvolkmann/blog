@@ -2237,6 +2237,31 @@ collectScore(93, to: "Mark")
 print(scoresMap) // ["Mark": [85, 93], "Tami": [90]]
 ```
 
+To create a `Dictionary` from an array of objects
+where the keys are the values of a given property in the objects
+and the values are arrays of the objects that have that property value,
+use the `Dictionary` initializer that takes `grouping` and `by` arguments.
+For example:
+
+```swift
+struct City {
+    let name: String
+    let country: String
+}
+
+let cities = [
+    City(name: "London", country: "England"),
+    City(name: "Manchester", country: "England"),
+    City(name: "Chicago", country: "USA"),
+    City(name: "New York", country: "USA"),
+]
+
+let cityDict = Dictionary(grouping: cities, by: \.country)
+// Keys are "England" and "USA".
+// Value for England is an array of City objects for London and Manchester.
+// Value for USA is an array of City objects for Chicago and New York.
+```
+
 `Dictionary` instance properties include the following:
 
 | Property   | Description                                                    |
@@ -2273,31 +2298,6 @@ let upperNames = scoreDict.map({$0.key.uppercased()}) // array of uppercase name
 let doubledScoresDict = scoreDict.mapValues({$0 * 2}) // scoreDict w/ doubled scores
 scoreDict.removeValue(forKey: "Mark")
 let sorted = scoreDict.sorted(by: {$0.value > $1.value}); // descending
-```
-
-To create a `Dictionary` from an array of objects
-where the keys are the values of a given property in the objects
-and the values are arrays of the objects that have that property value,
-use the `Dictionary` initializer that takes `grouping` and `by` arguments.
-For example:
-
-```swift
-struct City {
-    let name: String
-    let country: String
-}
-
-let cities = [
-    City(name: "London", country: "England"),
-    City(name: "Manchester", country: "England"),
-    City(name: "Chicago", country: "USA"),
-    City(name: "New York", country: "USA"),
-]
-
-let cityDict = Dictionary(grouping: cities, by: \.country)
-// Keys are "England" and "USA".
-// Value for England is an array of City objects for London and Manchester.
-// Value for USA is an array of City objects for Chicago and New York.
 ```
 
 ### Tuples
