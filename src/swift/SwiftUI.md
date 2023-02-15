@@ -1696,8 +1696,18 @@ It is recommended to use the "system colors" defined by
 `UIColor` static properties because they are dynamic,
 meaning that the actual color used automatically changes
 based on whether the device is in light or dark mode.
+The change is subtle.
+
 To use these in code, enter `Color(UIColor.system`
-and select a system color from the code completion popup.
+and select a system color from the code completion popup
+which includes the following names all preceded by "system":
+Red, Orange, Yellow, Green, Mint, Teal, Cyan, Blue, Indigo, Purple,
+Pink, Brown, Gray, Gray2, Gray3, and Gray4.
+Each new OS version can change the actual colors associated with these names,
+so using these in place of custom colors allows apps to
+continue using Apple-recommended colors across OS versions.
+
+watchOS always uses dark mode.
 
 To see the exact values of the system colors in light and dark mode,
 see the "Specifications" section in the
@@ -1715,6 +1725,11 @@ The table below shows their default colors in light and dark mode.
 | `accentColor`  | blue (007aff)  | slightly lighter blue (0a84ff) |
 | `primary`      | black (000000) | white (ffffff)                 |
 | `secondary`    | gray (8a8a8e)  | slightly lighter gray (8d8d93) |
+
+watchOS always uses dark mode.
+
+The values for `primary` and `secondary` are controlled by the OS
+and cannot be modified in code.
 
 `Color.primary` defaults to the same colors as `UIColor.label`.
 and it is the default `foregroundColor` of `Text` views.
@@ -4070,6 +4085,8 @@ One way to create a new "Image Set" is to:
 
 - Select `Assets.xcassets` in the Project Navigator.
 - Drag an image from the Finder into in the editor area.
+- Optionally add different images for light and dark mode,
+  similar to Color Sets.
 
 A good source for test images is
 {% aTargetBlank "https://picsum.photos", "Lorem Picsum" %}.
@@ -8334,6 +8351,7 @@ struct ContentView: View {
 SwiftUI provides many values to all views through the "environment".
 Any view in the view hierarchy can access environment data
 using the `@Environment` property wrapper.
+For example, `@Environment(\.colorScheme) private var colorScheme`.
 
 Highlights of environment data include:
 
