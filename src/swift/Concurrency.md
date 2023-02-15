@@ -853,12 +853,12 @@ apply to the `Task` inside which they are used.
 The `Task` static method `sleep` takes a number of nanoseconds
 and sleeps for at least that long. For example:
 
+```swift
+try? await Task.sleep(nanoseconds: 3 * 1_000_000_000) // 3 seconds
+```
+
 The `Task` static method `yield` lets higher priority tasks
 jump in before continuing. For example: `await Task.yield()`.
-
-```swift
-try await Task.sleep(nanoseconds: 3 * 1_000_000_000) // 3 seconds
-```
 
 Many `async` methods in Apple frameworks check for cancellation
 and stop their work gracefully.
