@@ -731,12 +731,28 @@ for throwing from your own functions.
 - {% aTargetBlank "https://developer.apple.com/documentation/distributed/localtestingdistributedactorsystemerror", "LocalTestingDistributedActorSystemError" %} is not described in the Apple documentation.
 - {% aTargetBlank "https://developer.apple.com/documentation/swift/never", "Never" %} is the return type of functions that should never return. It's not clear why this conforms to the `Error` protocol.
 
-Typically custom error types are defined in used.
-Often these are define as an `enum` that conforms to the `Error` protocol.
+Typically custom error types are defined and used.
+Often these are define as an `enum` that conforms to the
+{% aTargetBlank "https://developer.apple.com/documentation/swift/error",
+"Error" %} or {% aTargetBlank
+"https://developer.apple.com/documentation/foundation/localizederror",
+"LocalizedError" %} protocol.
 Each `enum` `case` represents a variation of the error
 and specific cases are thrown.
 
-An alternative is to allow any `String` to be thrown by defining
+The `Error` protocol provides a single property, `localizedDescription`,
+which is a `String`.
+
+The `LocalizedError` protocol inherits from the `Error` protocol.
+It supports four additional properties named `errorDescription`,
+`failureReason`, `helpAnchor`, and `recoverySuggestion`.
+These provided more detail about the error.
+Each has the type `String?`.
+These properties can be implemented as computed properties
+in order to provide dynamic values.
+
+An alternative to defining a custom error type
+is to allow any `String` to be thrown by defining
 an `extension` that makes the `String` type conform to the
 `LocalizedError` protocol which inherits from the `Error` protocol
 as follows:
