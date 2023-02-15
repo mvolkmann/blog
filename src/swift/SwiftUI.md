@@ -395,6 +395,13 @@ which has four suggested prices, all of which unlock all the features.
 
 ## Views
 
+Every visible part of an app created with SwiftUI is a view
+and views can render other views.
+
+Views are used for both components and layout.
+Views that layout other views are often referred to as
+"container" or "combiner" views.
+
 Views in SwiftUI are structs that conform to the {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/view", "View" %} protocol.
 The only requirement this imposes is that conforming types
@@ -404,15 +411,48 @@ The `some` keyword describes an "opaque type".
 In this case it means that `body` can return
 an instance of any type that conforms to the `View` protocol.
 
-Typically the value of the `body` property is a single top-level view.
-If more than is more than one top-level view,
-a `TupleView` is automatically returned.
+It should be fast to compute the value of a `body` property.
+For example, evaluating a `body` property should not require
+waiting on network calls.
+It should also not cause side effects such as
+changing `@State` or `@Published` properties.
 
 A `body` definition can contain any number of top-level views.
 These are automatically wrapped in a {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/tupleview", "TupleView" %}
 which becomes the single view that is returned.
 By default this positions its child views vertically like a `VStack`.
+
+Most properties declared in a `View` struct should be `private`.
+Exceptions include the `body` property and
+any properties that are passed in when instances are created.
+The `body` value is a `ViewBuilder` that
+can contain up to 10 child view instances.
+When this limit is exceeded, the rather unhelpful error
+"Extra argument in call" will be reported.
+The `Group` view can be used to work around this limitation
+since each `Group` only counts as one view instance.
+
+Functions that create views often take a `ViewBuilder` their last argument.
+These are typically written as trailing closures.
+
+Views can be given an explicit identifier with the `.id` method
+that is passed an identifier.
+This is useful in methods that take a view identifier
+like the `ScrollViewReader` method `scrollTo`.
+
+To cause a view to take the full width of the screen,
+apply the `frame` view modifier.
+For example, `myView.frame(maxWidth: .infinity)`.
+In can also be useful to specify the height.
+For example, `myView.frame(maxWidth: .infinity, maxHeight: 100)`.
+
+Many views utilize the app accent color, also referred to as "global tint".
+To set this, select the `Assets.xcassets` file in the Navigator,
+select "AccentColor", click the "Universal" swatch,
+and click the "Color" dropdown in the Inspector.
+This does not affect `Toggle` views which require using the view modifier
+`.toggleStyle(SwitchToggleStyle(tint: someColor))`.
 
 The following sections describe the views defined by SwiftUI.
 
@@ -722,6 +762,87 @@ The following sections describe the views defined by SwiftUI.
   - SwiftUI creates this with `TextField`, `SecureField`,
     and `TextEditor` (multi-line).
 
+### View Size
+
+SwiftUI executes the following steps to determine the size of each view:
+
+- The parent view proposes a size to each child view.
+- Each child view selects a size considering six values:
+  - `minWidth` and `minHeight`
+  - `maxWidth` and `maxHeight`
+  - `idealWidth` and `idealHeight`
+- The parent view must honor the size selected by each of its children
+  and uses those sizes to determine their layout.
+
+For the `Image` view, `minWidth` and `minHeight`
+default to the actual size of the image.
+
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/fixedsize()",
+"fixedSize" %} view modifier creates a new wrapping view whose
+minimum size values are the ideal size values
+of the view to which it is applied.
+It is possible to fix the size in only one dimension
+by specifying `horizontal` and `vertical` `Bool` arguments.
+
+### Frames
+
+To specify the width, height, and alignment of a view, apply the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/frame(width:height:alignment:)",
+"frame" %} view modifier.
+The frame of a view is only considered for determining layout.
+To clip a view so any content outside its frame is hidden,
+apply the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/clipped(antialiased:)",
+"clipped" %} view modifier.
+
+### Constants
+
+Custom views often make use of constants.
+One recommended way to define constants that are used by multiple source files
+is to place them in the file `Constants.swift`.
+The contents of this file could be similar to the following:
+
+```swift
+struct Constants {
+    static let someValue = 19
+
+    struct Colors {
+        // This uses a custom Color initializer takes a hex parameter.
+        // It is defined in a Color extension in the Colors section below.
+        static let background = Color(hex: 0xf1faff)
+        static let disabled = Color.gray
+        static let primary = Color(hex: 0x006197)
+        static let secondary = Color(hex: 0x3eb3e5)
+    }
+}
+```
+
+Note how a nested struct is used to group related constants.
+An example reference to one of these is `Constants.Colors.primary`.
+
+### Extracting Views
+
+When the `body` of a view is longer than what can be displayed on the screen
+it is a good idea to extract some of the content.
+There are four ways to move some content from a view to another location:
+
+1. Move it to a constant property (`let`) if it never changes.
+1. Move it to a computed property (`var`) if it can change.
+1. Move it to a method (`func`) if the current location
+   needs to supply data (by passing arguments).
+1. Move it to a new `struct` that inherits from `View`
+   and has its own `body` property.
+
+Creating a computed property is useful for cases where the extracted code
+is only useful in the current view and no arguments need to be provided.
+Creating a method is similar, but allows arguments to be passed.
+Creating a new struct is useful when the new view might be used by other views.
+In this case, consider moving it to its own source file.
+
+Command-click a view to get a context menu that contains the options
+"Extract to Variable", "Extract to Method", and "Extract Subview".
+
 ## Icons
 
 {% aTargetBlank "https://developer.apple.com/sf-symbols/", "SF Symbols" %}
@@ -876,108 +997,6 @@ which stands for "Core Graphics". These include:
 - `CGVector`
 
   This holds `dx` and `dy` properties that have `CGFloat` values.
-
-## Views
-
-Every visible part of an app created with SwiftUI is a view.
-Views can render other views.
-
-Each view is a struct that implements the `View` protocol.
-This requires having a computed property named `body` with the type `Some View`.
-
-Most properties declared in a `View` struct should be `private`.
-Exceptions include the `body` property and
-any properties that are passed in when instances are created.
-The `body` value is a `ViewBuilder` that
-can contain up to 10 child view instances.
-When this limit is exceeded, the rather unhelpful error
-"Extra argument in call" will be reported.
-The `Group` view can be used to work around this limitation
-since each `Group` only counts as one view instance.
-
-Views are used for both components and layout.
-Views that layout other views are often referred to as
-"container" or "combiner" views.
-
-Functions that create views often take a `ViewBuilder` their last argument.
-These are typically written as trailing closures.
-
-Views can be given an explicit identifier with the `.id` method
-that is passed an identifier.
-This is useful in methods that take a view identifier
-like the `ScrollViewReader` method `scrollTo`.
-
-To cause a view to take the full width of the screen,
-apply the `frame` view modifier.
-For example, `myView.frame(maxWidth: .infinity)`.
-In can also be useful to specify the height.
-For example, `myView.frame(maxWidth: .infinity, maxHeight: 100)`.
-
-Many views utilize the app accent color, also referred to as "global tint".
-To set this, select the `Assets.xcassets` file in the Navigator,
-select "AccentColor", click the "Universal" swatch,
-and click the "Color" dropdown in the Inspector.
-Resume Preview to see the change.
-This does not affect `Toggle` views which require using the view modifier
-`.toggleStyle(SwitchToggleStyle(tint: someColor))`.
-
-### Frames
-
-To specify the width, height, and alignment of a view, apply the {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/view/frame(width:height:alignment:)",
-"frame" %} view modifier.
-The frame of a view is only considered for determining layout.
-To clip a view so any content outside its frame is hidden,
-apply the {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/view/clipped(antialiased:)",
-"clipped" %} view modifier.
-
-### Constants
-
-Custom views often make use of constants.
-One recommended way to define constants that are used by multiple source files
-is to place them in the file `Constants.swift`.
-The contents of this file could be similar to the following:
-
-```swift
-struct Constants {
-    static let someValue = 19
-
-    struct Colors {
-        // This uses a custom Color initializer takes a hex parameter.
-        // It is defined in a Color extension in the Colors section below.
-        static let background = Color(hex: 0xf1faff)
-        static let disabled = Color.gray
-        static let primary = Color(hex: 0x006197)
-        static let secondary = Color(hex: 0x3eb3e5)
-    }
-}
-```
-
-Note how a nested struct is used to group related constants.
-An example reference to one of these is `Constants.Colors.primary`.
-
-### Extracting Views
-
-When the `body` of a view is longer than what can be displayed on the screen
-it is a good idea to extract some of the content.
-There are four ways to move some content from a view to another location:
-
-1. Move it to a constant property (`let`) if it never changes.
-1. Move it to a computed property (`var`) if it can change.
-1. Move it to a method (`func`) if the current location
-   needs to supply data (by passing arguments).
-1. Move it to a new `struct` that inherits from `View`
-   and has its own `body` property.
-
-Creating a computed property is useful for cases where the extracted code
-is only useful in the current view and no arguments need to be provided.
-Creating a method is similar, but allows arguments to be passed.
-Creating a new struct is useful when the new view might be used by other views.
-In this case, consider moving it to its own source file.
-
-Command-click a view to get a context menu that contains the options
-"Extract to Variable", "Extract to Method", and "Extract Subview".
 
 ## ViewBuilders
 
@@ -5537,8 +5556,7 @@ Toggle("Hungry", isOn: $hungry).toggleStyle(.button)
 
 The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/tupleview", "TupleView" %}
-view ...
-TODO: What is this?
+view is a view created from a tuple of other views.
 
 ## View Modifiers
 
@@ -5551,6 +5569,9 @@ View modifiers do not modify the view on which they are called.
 They instead create and return a new view that either
 wraps the receiver (ex. `frame`) or
 is a modified version of the receiver (ex. `foregroundColor`).
+For most view modifiers, the type returned is {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/modifiedcontent",
+"ModifiedContent" %}.
 
 In a way, view modifiers are like Svelte components that contain slots.
 They take a view to be "modified" and return a new view
