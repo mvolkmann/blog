@@ -354,6 +354,8 @@ When scrolling down through code, the first line of each
 type and function definition that encloses the code being viewed
 sticks at the top of the editor window to provide context.
 
+To scroll to a sticky header, click it.
+
 ### Multiple Editor Panes
 
 To open a file in a new split pane,
