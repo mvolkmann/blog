@@ -3188,6 +3188,7 @@ Classes do the following things that structs cannot.
 
 - refer to instances by reference rather than making a copy
 - inherit properties and methods from one other class
+- mutable `var` properties of instances held in a `let` variable
 - use type casting to determine if an object is an instance at runtime
 - define a "deinitializer" (named `deinit`)
   to perform cleanup when an instance is destroyed
@@ -3335,21 +3336,27 @@ to limit their visibility and/or scope their names.
 
 ## Value vs. Reference Types
 
+Value types include `Bool`, `Int`, `Float`, `Double`, `String`, `Date`,
+`Array`, `Set`, `Dictionary`, `struct`, `enum`, tuple, and many more.
+
 Instances of value types are stored on a stack
 and there is a separate stack for each thread.
-Value types include `struct`, `enum`, `Bool`, `Int`,
-`Float`, `Double`, `String`, `Date`, and many more.
-Value types are thread-safe so there are no concurrent access issues.
-Accessing these is faster than accessing reference types.
-When an instance is assigned to another variable or passed to a function,
-a copy-on-write copy is created.
+Each thread only accesses value type instances in its own stack,
+so value types are thread-safe (no possibility of concurrent access issues).
 
+When an instance of a value type is assigned to another variable
+or passed to a function, a copy-on-write copy is created.
+
+Accessing value types is faster than accessing reference types.
+
+Reference types include `function`, `class`, and `actor`.
 Instances of reference types are stored on the heap
 which is shared by all threads.
-Reference types include `function`, `class`, and `actor`.
 Reference types are not thread-safe.
 If multiple threads might access instances
 then steps must be taken to synchronize access.
+
+When a choice is possible, structs are typically preferred over classes.
 
 ## Initializers
 
