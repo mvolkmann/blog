@@ -498,7 +498,8 @@ The async/await system provides two ways to do this,
 An `async let` statement is a special variable declaration
 whose value is computed asynchronously in a new, implicit child task.
 These statements must be used inside a concurrent context
-(either a closure passed to `Task` or an `async` function).
+(either a closure passed to `Task` or an `async` function)
+to run multiple tasks concurrently.
 
 The work to compute the value of each `async let` variable
 begins immediately and may occur in different threads.
@@ -812,6 +813,7 @@ When a `Task` is saved in a variable:
 - it can be notified that it is intended to be cancelled
   by calling `myTask.cancel()` before doing work
 
+Cancelling a task is not guaranteed to stop the work it is doing.
 When a `Task` might be cancelled, it is responsible for
 verifying whether it has been cancelled.
 This can be done by testing the static `Bool` property `Task.isCancelled`.

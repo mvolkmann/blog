@@ -1577,6 +1577,14 @@ or click the buttons in the upper-left of each editor split
 that contain an arrow pointing southwest and an arrow pointing northeast.
 When the button has a blue background it means editor splits are hidden.
 
+To add and customize keyboard shortcuts,
+select Xcode ... Settings ... Key Bindings.
+Location a command whose keyboard shortcut is to be changed,
+double-click the "Key" column of that row,
+and press the desired keyboard shortcut.
+If the new keyboard shortcut is already in use,
+a warning will be displayed.
+
 ### Build/Run
 
 | Action          | Key          |
