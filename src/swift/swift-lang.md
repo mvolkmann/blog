@@ -2275,6 +2275,31 @@ scoreDict.removeValue(forKey: "Mark")
 let sorted = scoreDict.sorted(by: {$0.value > $1.value}); // descending
 ```
 
+To create a `Dictionary` from an array of objects
+where the keys are the values of a given property in the objects
+and the values are arrays of the objects that have that property value,
+use the `Dictionary` initializer that takes `grouping` and `by` arguments.
+For example:
+
+```swift
+struct City {
+    let name: String
+    let country: String
+}
+
+let cities = [
+    City(name: "London", country: "England"),
+    City(name: "Manchester", country: "England"),
+    City(name: "Chicago", country: "USA"),
+    City(name: "New York", country: "USA"),
+]
+
+let cityDict = Dictionary(grouping: cities, by: \.country)
+// Keys are "England" and "USA".
+// Value for England is an array of City objects for London and Manchester.
+// Value for USA is an array of City objects for Chicago and New York.
+```
+
 ### Tuples
 
 To define a tuple type, provide a list of elements types in parentheses.
