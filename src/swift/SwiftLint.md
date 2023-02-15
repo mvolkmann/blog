@@ -61,6 +61,15 @@ at the root of each project.
 Here is an example:
 
 ```yaml
+# This is a list of project subdirectories that should be checked.
+included:
+  - Source
+
+# This is a list of project subdirectories that should not be checked.
+excluded:
+  - Carthage
+  - Pods
+
 # This is a list of rules to disable that are enabled by default.
 disabled_rules:
   - todo
@@ -68,6 +77,7 @@ disabled_rules:
 # This is a list of rules to enable that are disabled by default.
 opt_in_rules:
   - closure_end_indentation
+  - empty_count
 
 # This customizes a specific rule.
 identifier_name:
