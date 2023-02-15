@@ -1726,6 +1726,14 @@ and click the "Edit" button in the lower-right.
 To delete an existing snippet, select it in the Library
 and click the "Delete" button in the lower-left.
 
+Snippets I have defined include:
+
+| Completion | Expands To                                                      |
+| ---------- | --------------------------------------------------------------- |
+| `loge`     | `print("\(#fileID) \(#function) entered`                        |
+| `logv`     | `print("\(#fileID) \(#function) <#variable#> =", <#variable#>)` |
+| `spv`      | `@State private var`                                            |
+
 ## Using a New Swift Version
 
 See {% aTargetBlank

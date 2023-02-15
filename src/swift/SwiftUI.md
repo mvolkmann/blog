@@ -5172,6 +5172,17 @@ TextField("First Name", text: $firstName)
     .textFieldStyle(.roundedBorder)
 ```
 
+An alternative to using a rounded border is to
+add a background color in a capsule shape.
+For example:
+
+```swift
+TextField("First Name", text: $firstName)
+    .padding()
+    .background(.yellow.opacity(0.2))
+    .clipShape(Capsule())
+```
+
 To add a clear button ("x" in a circle) that can be tapped
 to clear the value of `TextField` instances add the following
 to a container view that contains all of them:
