@@ -64,6 +64,9 @@ Key facts about Swift include the following:
 - {% aTargetBlank "https://www.apple.com/swift/playgrounds/",
   "Swift Playgrounds" %} iOS app - free
 
+- {% aTargetBlank "https://apps.apple.com/us/app/unwrap/id1440611372",
+  "Unwrap" %} app from Paul Hudson for learning Swift on an iPhone or iPad
+
 - {% aTargetBlank "https://www.youtube.com/c/PaulHudson", "Hacking with Swift" %}
   video series on Swift and SwiftUI by Paul Hudson (@twostraws) - free
 
@@ -274,6 +277,8 @@ These include:
   `CaseIterable`, and `Codable`
 - global functions like `abs`, `max`, `min`, `print`, `dump`,
   `readLine`, and `assert`
+
+Fun Fact: "integer" means "complete" in Latin.
 
 The Swift Standard Library is open source and implemented entirely in Swift.
 It is available by default, so nothing needs to be imported
@@ -1194,6 +1199,9 @@ let taxRate = 0.8
 print("item \(item) costs \(price * (1 + taxRate))") // single string
 print("item", item, "costs", price * (1 + taxRate)) // alternative
 ```
+
+String interpolation is more efficient than concatenating several strings.
+For example, `"\(s1)\(s2)\(s3)"` is more efficient than `s1 + s2 + s3`.
 
 There are two approaches that can be used to included double quotes in a string.
 The first is to escape them by preceding them with a backslash.
