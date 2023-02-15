@@ -9632,6 +9632,10 @@ Views call ViewModel functions referred to as "intents"
 to notify it about user interactions.
 ViewModel methods can trigger Model updates.
 
+To prevent `@Published` properties from being modified from
+outside a ViewModel class, specify `private(set)` access control.
+This will still allow read access from outside.
+
 Here is a basic example of using MVVM.
 It's not exactly MVVM because it combines the Model and ViewModel
 into a single class.

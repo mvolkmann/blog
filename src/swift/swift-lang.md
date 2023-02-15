@@ -4709,6 +4709,9 @@ Specifying `private(set)` on a property means that
 the property can be accessed as if it were `public`,
 but can only be modified as if it were `private`.
 
+Types that are only used inside a single source file
+can use `private` or `fileprivate` access control.
+
 ## Concurrency
 
 See my newer blog page
