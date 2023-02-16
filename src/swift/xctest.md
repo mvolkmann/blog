@@ -57,6 +57,18 @@ The steps for doing this are described in the following sections.
 
 1. Edit the provided `.swift` files in the new target.
 
+## Target Membership
+
+By default the test targets do not have access
+to source files defined in the main target.
+To make a source file available to a test target:
+
+- Select the source file in the Project Navigator.
+- Open the Inspector panel on the right.
+- Select the "File Inspector" tab (first one).
+- Under "Target Membership", check the checkbox for each
+  test target that needs to access the source file.
+
 ## Implementing Tests
 
 For each set of related test methods:
