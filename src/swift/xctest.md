@@ -69,6 +69,9 @@ To make a source file available to a test target:
 - Under "Target Membership", check the checkbox for each
   test target that needs to access the source file.
 
+Repeat this for all source files used by the one being tested,
+including source files that define extensions.
+
 ## Implementing Tests
 
 For each set of related test methods:
