@@ -50,6 +50,8 @@ Option #2 - manual
    - Automate App Store distribution
    - Manual setup
 1. Follow the steps in the instructions that are printed.
+1. Answer many more questions including your Apple ID and password
+   and whether fastlane should upload screenshots to AppStoreConnect.
 
 As of February 2023 the instructions are:
 
@@ -72,3 +74,12 @@ More information: https://docs.fastlane.tools/getting-started/ios/screenshots/
 If you want more details on how to setup automatic screenshots, check out
 https://docs.fastlane.tools/getting-started/ios/screenshots/#setting-up-snapshot
 ```
+
+This results in a new directory named `fastlane`.
+When the option "Automate screenshots" is selected,
+this directory will contain the files
+`Appfile`, `Fastfile`, `Snapfile`, and `SnapshotHelper.swift`.
+
+## Generating Screenshots
+
+Enter `fastlane screenshots`.
