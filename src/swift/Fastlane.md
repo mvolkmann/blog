@@ -57,9 +57,11 @@ As of February 2023 the instructions are:
 
 ```text
 Open your Xcode project and make sure to do the following:
-1) Add a new UI Test target to your project
+1) Add a new UI Test target to your project.
+   (See my XCTest blog page.)
 2) Add the ./fastlane/SnapshotHelper.swift to your UI Test target
-   You can move the file anywhere you want
+   You can move the file anywhere you want.
+   (Move it to the `{project-name}UITests` directory.)
 3) Call `setupSnapshot(app)` when launching your app
 
   let app = XCUIApplication()
@@ -67,8 +69,11 @@ Open your Xcode project and make sure to do the following:
   app.launch()
 
 4) Add `snapshot("0Launch")` to wherever you want to trigger screenshots
-5) Add a new Xcode scheme for the newly created UITest target
-6) Add a Check to enable the `Shared` box of the newly created scheme
+   (It seems this should be `try Self.app.snapshot()` now.)
+5) Add a new Xcode scheme for the newly created UITest target.
+   (Why is this needed?)
+6) Add a Check to enable the `Shared` box of the newly created scheme.
+   (It is checked by default.)
 
 More information: https://docs.fastlane.tools/getting-started/ios/screenshots/
 If you want more details on how to setup automatic screenshots, check out
@@ -79,11 +84,11 @@ This results in a new directory named `fastlane`.
 When the option "Automate screenshots" is selected,
 this directory will contain the files
 `Appfile`, `Fastfile`, `Snapfile`, and `SnapshotHelper.swift`.
-Add this directory to the git repository.
+Add this directory to the Xcode project and to the git repository.
 
 ## Generating Screenshots
 
-Enter `fastlane screenshots`.
+From the root project directory enter `fastlane screenshots`.
 This generates a lot of output and takes about n minutes to complete.
 I see many red messages that says "Caught error... 66"!
 Screenshot .png files are added to the `fastlane/screenshots` directory.
