@@ -41,6 +41,11 @@ Option #2 - manual
 1. Enter `git add Gemfile Gemfile.lock`
 1. Enter `git commit`
 
+Additonal steps:
+
+1. Enter `sudo gem pristine ffi --version 1.12.2`
+   This fails!
+
 ## Configuring
 
 1. Enter `fastlane init`.
@@ -86,9 +91,29 @@ this directory will contain the files
 `Appfile`, `Fastfile`, `Snapfile`, and `SnapshotHelper.swift`.
 Add this directory to the Xcode project and to the git repository.
 
+Edit the `fastlane/Snapfile` file and uncomment lines so it indicates
+the devices and languages to use for creating screenshots.
+
+## Running Tests
+
+To run both unit tests and UI tests from fastlane:
+
+1. Modify the file `fastlane/Fastfile` to contain the following:
+
+   ```ruby
+   platform :ios do
+     desc "Run tests"
+     lane :tests do
+       run_tests(scheme: "{scheme-name}")
+     end
+   end
+   ```
+
+1. From the `fastlane` subdirectory enter `bundle exec fastlane tests`.
+
 ## Generating Screenshots
 
-From the root project directory enter `fastlane screenshots`.
+From the `fastlane` subdirectory enter `fastlane screenshots`.
 This generates a lot of output and takes about n minutes to complete.
 I see many red messages that says "Caught error... 66"!
 Screenshot .png files are added to the `fastlane/screenshots` directory.
