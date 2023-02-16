@@ -79,7 +79,11 @@ This results in a new directory named `fastlane`.
 When the option "Automate screenshots" is selected,
 this directory will contain the files
 `Appfile`, `Fastfile`, `Snapfile`, and `SnapshotHelper.swift`.
+Add this directory to the git repository.
 
 ## Generating Screenshots
 
 Enter `fastlane screenshots`.
+This generates a lot of output and takes about n minutes to complete.
+I see many red messages that says "Caught error... 66"!
+Screenshot .png files are added to the `fastlane/screenshots` directory.
