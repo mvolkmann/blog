@@ -120,6 +120,11 @@ For each set of related test methods:
    The "when" part takes some action to be tested.
    The "then" part makes assertions that should not be true.
 
+   Test methods can use the `print` function and
+   output will appear in the Debug Area Console.
+
+   If the method tests any `async` functions, mark the test method as `async`.
+
 1. Make assertions by calling the `XCTAssert{kind}` functions.
 
    Assertion kind values include `Nil`, `NotNil`, `True`, `False`,
@@ -152,7 +157,7 @@ For each set of related test methods:
 
    ```swift
    do {
-       try someAsyncFunction(someArguments)
+       try someFunction(someArguments)
    } catch {
        XCTFail("some message")
    }
@@ -410,6 +415,13 @@ extension XCTestCase {
         Self.app.buttons[label].tap()
     }
 
+    // Taps a `TabView` tab with a given label.
+    func tapTabBarButton(label: String) {
+        let tabBar = Self.app.tabBars.element
+        let button = tabBar.buttons[label]
+        button.tap()
+    }
+
     // Searches for text anywhere on the screen.
     func textExists(_ text: String) throws {
         XCTAssertTrue(Self.app.staticTexts[text].exists)
@@ -528,6 +540,10 @@ the following functions can be written:
 1. To run all the tests in Project Navigator folder,
    click the diamond to the right of the folder name.
 1. To run all the tests, select Product ... Test or press cmd-u.
+
+I don't see diamonds before UI tests, only before unit tests.
+UI tests can be launched from the Test Inspector
+by clicking diamonds there.
 
 UI tests launch the app on the selected device
 which can be in the Simulator or on a real device.
