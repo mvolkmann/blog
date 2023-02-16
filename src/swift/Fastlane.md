@@ -1,0 +1,74 @@
+---
+eleventyNavigation:
+  key: Fastlane
+  parent: Swift
+layout: topic-layout.njk
+---
+
+## Overview
+
+{% aTargetBlank "https://fastlane.tools/", "Fastlane" %} is a
+command-line tool that simplifies Android and iOS mobile app deployment.
+It can run tests, generate screenshots, deploy iOS apps to TestFlight,
+deploy iOS apps to the App Store, and more.
+
+Fastlane is primarily implemented in Ruby.
+
+Fastlane workflows can be customized with actions and plugins.
+
+This page focuses on usage for iOS apps.
+
+## Installing
+
+Option #1 - using homebrew
+
+Enter `brew install fastlane`
+
+Option #2 - manual
+
+1. Verify that Ruby 2.5 or newer is installed by entering `ruby --version`.
+1. Install Bundler by entering `sudo gem install bundler`.
+1. Create the file `Gemfile` in the root directory of a project
+   containing the following:
+
+   ```ruby
+   source "https://rubygems.org"
+   gem "fastlane"
+   ```
+
+1. Enter `sudo gem update --system 3.2.3`
+1. Enter `sudo bundle update`
+1. Enter `git add Gemfile Gemfile.lock`
+1. Enter `git commit`
+
+## Configuring
+
+1. Enter `fastlane init`.
+1. Select one of the following options:
+   - Automate screenshots
+   - Automate beta distribution to TestFlight
+   - Automate App Store distribution
+   - Manual setup
+1. Follow the steps in the instructions that are printed.
+
+As of February 2023 the instructions are:
+
+```text
+Open your Xcode project and make sure to do the following:
+1) Add a new UI Test target to your project
+2) Add the ./fastlane/SnapshotHelper.swift to your UI Test target
+   You can move the file anywhere you want
+3) Call `setupSnapshot(app)` when launching your app
+
+  let app = XCUIApplication()
+  setupSnapshot(app)
+  app.launch()
+
+4) Add `snapshot("0Launch")` to wherever you want to trigger screenshots
+5) Add a new Xcode scheme for the newly created UITest target
+6) Add a Check to enable the `Shared` box of the newly created scheme
+
+More information: https://docs.fastlane.tools/getting-started/ios/screenshots/
+If you want more details on how to setup automatic screenshots, check out
+https://docs.fastlane.tools/getting-started/ios/screenshots/#setting-up-snapshot
+```
