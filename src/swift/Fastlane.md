@@ -122,10 +122,14 @@ Additional steps:
 
 1. Click the scheme dropdown at the top and select "New Scheme...".
 1. Enter "ScreenshotTests" for the name and click the "OK" button.
+1. Select "Test" in the left nav.
+1. Click "+" at the bottom and add the "ScreenshotTests" target.
+1. In the dialog that appears, select the "ScreenshotTests" target
+   and click the "Add" button.
 1. Click the scheme dropdown at the top again and select "Edit Scheme...".
 1. Select "Build" in the left nav.
 1. Click "+" at the bottom and add the "ScreenshotTests" target.
-1. Uncheck all the checkboxes except "Test".
+1. Uncheck all the checkboxes except "Run" and "Test".
 1. Select the main target and click "-" at the bottom to delete it.
 
 For more information, see {% aTargetBlank
