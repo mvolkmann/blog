@@ -78,7 +78,7 @@ Additional steps:
      "iPhone 8 Plus",
      "iPhone 13 Pro Max",
      "iPad Pro (12.9-inch) (2nd generation)",
-     "iPad Pro (12.9-inch) (5th generation)"
+     "iPad Pro (12.9-inch) (6th generation)"
    ])
 
    languages([
@@ -159,6 +159,17 @@ For more information, see {% aTargetBlank
 
 ## Generating Screenshots
 
+1. Verify that all the Simulators to be used are in the expected
+   light/dark mode. Many seem to default to dark mode.
+   - Open Xcode.
+   - Select Xcode ... Open Developer Tool ... Simulator.
+   - For each device
+     - In the Simulator app, select
+       File ... Open Simulator ... iOS {version} ... {device-type}.
+     - In the device simulator
+       - Open the Settings app.
+       - Select "Developer".
+       - Toggle "Dark Appearance" to the desired setting.
 1. From the `fastlane` subdirectory enter `bundle exec fastlane screenshots`.
    This runs faster than just entering `fastlane screenshots`.
    This generates a lot of output and takes several minutes to complete.
