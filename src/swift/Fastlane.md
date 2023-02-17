@@ -96,7 +96,8 @@ Additional steps:
 1. Uncomment the line `clear_previous_screenshots(true)`.
    This deletes all the `.png` files in the `fastlane/screenshots` directory.
 1. Uncomment the line `override_status_bar(true)`.
-
+1. Add the line `headless(false)`.
+   Tests that need to wait for elements to appear seem to fail without this.
 1. Edit the file `fastlane/Fastfile`.
 1. Change the the contents to the following:
 
@@ -119,6 +120,8 @@ Additional steps:
    - Create a new UI Test target named "ScreenshotTests" that is specifically
      for creating screenshots as described in my XCTest blog page.
      This should be separate from the target that runs the real UI tests.
+   - Delete the file `ScreenshotTests/ScreenshotTestsLaunchTests.swift`.
+     This isn't needed for capturing screenshots.
    - Move the `fastlane/SnapshotHelper.swift` into the new target directory.
    - Edit the file `ScreenshotTests/ScreenshotTests.swift`.
    - In the `setupWithError` method, add the following:
@@ -165,6 +168,11 @@ For more information, see {% aTargetBlank
    will open in your default web browser.
    For me this page does not display any of the screenshots
    even though they are created in the `fastline/screenshots` directory.
+   To skip this, add the following in `fastlane/Snapfile`:
+
+   ```ruby
+   skip_open_summary(true)
+   ```
 
 ## Running Tests
 

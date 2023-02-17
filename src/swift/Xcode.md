@@ -80,7 +80,7 @@ The Navigator panel displays the following nine icon buttons at the top:
   If there is already a temporary view tab and another file is opened, the
   temporary view content will be replaced by the new file content.
   To change the temporary view to a permanent view,
-  double click its tab or edit its contents.
+  double-click its tab or edit its contents.
 
   The order of the groups and files in the Project Navigator
   can be customized by dragging them up and down
@@ -384,6 +384,11 @@ toggling the display of the Canvas area and much more.
 
 To find the matching brace for a given brace,
 hold down the command key and hover over a brace.
+Alternatively, click after either brace to highlight the matching brace.
+When Vim Mode is enabled, this only works in insert mode.
+
+To select all the code in matching braces, including the braces,
+double-click either one of them.
 
 ### Code Completion
 
