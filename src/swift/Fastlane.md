@@ -134,6 +134,7 @@ Additional steps:
      The actual file name will begin with the device name (ex. "iPhone 14-")
      and end with ".png".
      This works in simulators, but does nothing when running on a real device.
+   - Delete the method definition for `testLaunchPerformance`.
 
 1. Click the scheme dropdown at the top and select "New Scheme...".
 1. Enter "ScreenshotTests" for the name
@@ -146,11 +147,6 @@ Additional steps:
 1. In the dialog that appears, select the "ScreenshotTests" target
    and click the "Add" button.
 
-1. NEEDED? Select "Build" in the left nav.
-1. NEEDED? Click "+" at the bottom and add the "ScreenshotTests" target.
-1. NEEDED? Uncheck all the checkboxes except "Run" and "Test".
-1. NEEDED? Select the main target and click "-" at the bottom to delete it.
-
 1. Click the "Close" button.
 
 For more information, see {% aTargetBlank
@@ -161,11 +157,13 @@ For more information, see {% aTargetBlank
 
 1. From the `fastlane` subdirectory enter `bundle exec fastlane screenshots`.
    Supposedly this runs faster than just entering `fastlane screenshots`.
-   This generates a lot of output and takes about {n} minutes to complete.
-1. An HTML file that displays all the screenshots
-   will open in your default web browser.
+   This generates a lot of output and takes several minutes to complete.
 1. The produced screenshot `.png` files will be
    in `fastlane/screenshots` directory.
+1. An HTML file that displays all the screenshots
+   will open in your default web browser.
+   For me this page does not display any of the screenshots
+   even though they are created in the `fastline/screenshots` directory.
 
 ## Running Tests
 
