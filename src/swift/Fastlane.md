@@ -41,7 +41,7 @@ Option #2 - manual
 1. Enter `git add Gemfile Gemfile.lock`
 1. Enter `git commit`
 
-Additonal steps:
+Additional steps:
 
 1. Enter `sudo gem pristine ffi --version 1.12.2`
    This fails!
@@ -54,47 +54,69 @@ Additonal steps:
    - Automate beta distribution to TestFlight
    - Automate App Store distribution
    - Manual setup
-1. Follow the steps in the instructions that are printed.
 1. Answer many more questions including your Apple ID and password
    and whether fastlane should upload screenshots to AppStoreConnect.
+1. This results in a new directory named `fastlane`.
+   When the option "Automate screenshots" is selected,
+   this directory will contain the files
+   `Appfile`, `Fastfile`, `Snapfile`, and `SnapshotHelper.swift`.
+   Add the `fastlane` directory to the Xcode project and to the git repository.
+1. Edit the `fastlane/Snapfile` file.
+1. Uncomment lines so it indicates the devices and languages
+   to use for creating screenshots. For example:
 
-As of February 2023 the instructions are:
+   ```ruby
+   devices([
+     "iPhone 8 Plus",
+     "iPhone 11 Plus",
+     "iPad Pro (12.9-inch)"
+   ])
 
-```text
-Open your Xcode project and make sure to do the following:
-1) Add a new UI Test target to your project.
-   (See my XCTest blog page.)
-2) Add the ./fastlane/SnapshotHelper.swift to your UI Test target
-   You can move the file anywhere you want.
-   (Move it to the `{project-name}UITests` directory.)
-3) Call `setupSnapshot(app)` when launching your app
+   languages([
+     "en-US", # English USA
+     "fr-FR", # French France
+     "es-ES" # Spanish Spain
+   ])
+   ```
 
-  let app = XCUIApplication()
-  setupSnapshot(app)
-  app.launch()
+1. Uncomment the line that calls the `scheme` function
+   and change it to `scheme("SnapshotTests")`.
+1. Uncomment the line `clear_previous_screenshots(true)`.
+1. Uncomment the line `override_status_bar(true)`.
 
-4) Add `snapshot("0Launch")` to wherever you want to trigger screenshots
-   (It seems this should be `try Self.app.snapshot()` now.)
-5) Add a new Xcode scheme for the newly created UITest target.
-   (Why is this needed?)
-6) Add a Check to enable the `Shared` box of the newly created scheme.
-   (It is checked by default.)
+1. Follow the steps in the instructions that are printed which guide you to:
 
-More information: https://docs.fastlane.tools/getting-started/ios/screenshots/
-If you want more details on how to setup automatic screenshots, check out
-https://docs.fastlane.tools/getting-started/ios/screenshots/#setting-up-snapshot
-```
+   - Open the project in Xcode.
+   - Create a new UI Test target named "ScreenshotTests" that is specifically
+     for creating screenshots as described in my XCTest blog page.
+     Verify that the "Shared" checkbox is checked.
+     This should be separate from the target that runs the real UI tests.
+   - Move the `fastlane/SnapshotHelper.swift` into the new target directory.
+   - Edit the file `ScreenshotTests/ScreenshotTests.swift`.
+   - In the `setupWithError` method, add the following:
+     ```swift
+     let app = XCUIApplication()
+     setupSnapshot(app)
+     app.launch()
+     ```
+   - Implement a test that visits each screen in the app.
+   - After the code that visiting each screen,
+     call `snapshot("{screenshot-file-name}")`.
 
-This results in a new directory named `fastlane`.
-When the option "Automate screenshots" is selected,
-this directory will contain the files
-`Appfile`, `Fastfile`, `Snapfile`, and `SnapshotHelper.swift`.
-Add this directory to the Xcode project and to the git repository.
+For more information, see {% aTargetBlank
+"https://docs.fastlane.tools/getting-started/ios/screenshots/",
+"fastlane screenshots" %}.
 
-Edit the `fastlane/Snapfile` file and uncomment lines so it indicates
-the devices and languages to use for creating screenshots.
+## Generating Screenshots
+
+From the `fastlane` subdirectory enter `fastlane screenshots`.
+This generates a lot of output and takes about n minutes to complete.
+I see many red messages that says "Caught error... 66"!
+Screenshot .png files are added to the `fastlane/screenshots` directory.
 
 ## Running Tests
+
+Tests run much faster in Xcode than they do from fastlane.
 
 To run both unit tests and UI tests from fastlane:
 
@@ -111,9 +133,4 @@ To run both unit tests and UI tests from fastlane:
 
 1. From the `fastlane` subdirectory enter `bundle exec fastlane tests`.
 
-## Generating Screenshots
-
-From the `fastlane` subdirectory enter `fastlane screenshots`.
-This generates a lot of output and takes about n minutes to complete.
-I see many red messages that says "Caught error... 66"!
-Screenshot .png files are added to the `fastlane/screenshots` directory.
+TODO: Can you skip editing `Fastfile` and run the tests with `fastlane scan`?
