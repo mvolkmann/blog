@@ -94,6 +94,7 @@ Additional steps:
    and change the path to `./fastlane/screenshots`.
 
 1. Uncomment the line `clear_previous_screenshots(true)`.
+   This deletes all the `.png` files in the `fastlane/screenshots` directory.
 1. Uncomment the line `override_status_bar(true)`.
 
 1. Edit the file `fastlane/Fastfile`.
@@ -156,7 +157,7 @@ For more information, see {% aTargetBlank
 ## Generating Screenshots
 
 1. From the `fastlane` subdirectory enter `bundle exec fastlane screenshots`.
-   Supposedly this runs faster than just entering `fastlane screenshots`.
+   This runs faster than just entering `fastlane screenshots`.
    This generates a lot of output and takes several minutes to complete.
 1. The produced screenshot `.png` files will be
    in `fastlane/screenshots` directory.
