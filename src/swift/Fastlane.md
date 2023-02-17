@@ -7,14 +7,21 @@ layout: topic-layout.njk
 
 ## Overview
 
-{% aTargetBlank "https://fastlane.tools/", "Fastlane" %} is a
-command-line tool that simplifies Android and iOS mobile app deployment.
-It can run tests, generate screenshots, deploy iOS apps to TestFlight,
-deploy iOS apps to the App Store, and more.
+{% aTargetBlank "https://fastlane.tools/", "Fastlane" %}
+is an open source platform that automates many tasks
+related to Android and iOS mobile app deployment.
+This includes running tests, generating screenshots,
+deploying iOS apps to TestFlight,
+deploying iOS apps to the App Store, and more.
+Fastlane actions can be run from the command line or by CI/CD servers.
 
 Fastlane is primarily implemented in Ruby.
 
 Fastlane workflows can be customized with actions and plugins.
+
+The file `Fastfile` defines "lanes" which each automate a specific task
+such as running tests, generating screenshots, deploying to TestFlight,
+or deploying to the App Store.
 
 This page focuses on usage for iOS apps.
 
@@ -48,6 +55,7 @@ Additional steps:
 
 ## Configuring
 
+1. Open a Terminal window and cd to the root project directory.
 1. Enter `fastlane init`.
 1. Select one of the following options:
    - Automate screenshots
@@ -80,6 +88,14 @@ Additional steps:
    ])
    ```
 
+1. Uncomment the line that calls the `scheme` function
+   and change it to `scheme("ScreenshotTests")`.
+1. Uncomment the line `output_directory("./screenshots")`
+   and change the path to `./fastlane/screenshots`.
+
+1. Uncomment the line `clear_previous_screenshots(true)`.
+1. Uncomment the line `override_status_bar(true)`.
+
 1. Edit the file `fastlane/Fastfile`.
 1. Change the the contents to the following:
 
@@ -89,23 +105,18 @@ Additional steps:
    platform :ios do
      desc "Generate localized screenshots"
      lane :screenshots do
-       capture_screenshots(scheme: "ScreenshotTests")
+       capture_screenshots(scheme: "ScreenshotTests") # main change
+       # The "update" step is optional.
        # upload_to_app_store(skip_binary_upload: true, skip_metadata: true)
      end
    end
    ```
-
-1. Uncomment the line that calls the `scheme` function
-   and change it to `scheme("ScreenshotTests")`.
-1. Uncomment the line `clear_previous_screenshots(true)`.
-1. Uncomment the line `override_status_bar(true)`.
 
 1. Follow the steps in the instructions that are printed which guide you to:
 
    - Open the project in Xcode.
    - Create a new UI Test target named "ScreenshotTests" that is specifically
      for creating screenshots as described in my XCTest blog page.
-     Verify that the "Shared" checkbox is checked.
      This should be separate from the target that runs the real UI tests.
    - Move the `fastlane/SnapshotHelper.swift` into the new target directory.
    - Edit the file `ScreenshotTests/ScreenshotTests.swift`.
@@ -115,22 +126,32 @@ Additional steps:
      setupSnapshot(app)
      app.launch()
      ```
-   - Implement a test method named `testScreenshots`
-     that visits each screen in the app.
+   - Rename the test method `testExample` to `testScreenshots`.
+   - Replace the code in this method with code that
+     visits each screen in the app.
    - After the code that visiting each screen,
      call `snapshot("{screenshot-file-name}")`.
+     The actual file name will begin with the device name (ex. "iPhone 14-")
+     and end with ".png".
+     This works in simulators, but does nothing when running on a real device.
 
 1. Click the scheme dropdown at the top and select "New Scheme...".
-1. Enter "ScreenshotTests" for the name and click the "OK" button.
+1. Enter "ScreenshotTests" for the name
+1. Click the "OK" button.
+1. Click the scheme dropdown at the top again and select "Edit Scheme...".
+1. In the dialog that appears, verify that
+   the "Shared" checkbox at the bottom is checked.
 1. Select "Test" in the left nav.
 1. Click "+" at the bottom and add the "ScreenshotTests" target.
 1. In the dialog that appears, select the "ScreenshotTests" target
    and click the "Add" button.
-1. Click the scheme dropdown at the top again and select "Edit Scheme...".
-1. Select "Build" in the left nav.
-1. Click "+" at the bottom and add the "ScreenshotTests" target.
-1. Uncheck all the checkboxes except "Run" and "Test".
-1. Select the main target and click "-" at the bottom to delete it.
+
+1. NEEDED? Select "Build" in the left nav.
+1. NEEDED? Click "+" at the bottom and add the "ScreenshotTests" target.
+1. NEEDED? Uncheck all the checkboxes except "Run" and "Test".
+1. NEEDED? Select the main target and click "-" at the bottom to delete it.
+
+1. Click the "Close" button.
 
 For more information, see {% aTargetBlank
 "https://docs.fastlane.tools/getting-started/ios/screenshots/",
