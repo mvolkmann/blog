@@ -68,8 +68,9 @@ Additional steps:
    ```ruby
    devices([
      "iPhone 8 Plus",
-     "iPhone 11 Plus",
-     "iPad Pro (12.9-inch)"
+     "iPhone 13 Pro Max",
+     "iPad Pro (12.9-inch) (2nd generation)",
+     "iPad Pro (12.9-inch) (5th generation)"
    ])
 
    languages([
@@ -77,6 +78,21 @@ Additional steps:
      "fr-FR", # French France
      "es-ES" # Spanish Spain
    ])
+   ```
+
+1. Edit the file `fastlane/Fastfile`.
+1. Change the the contents to the following:
+
+   ```ruby
+   default_platform(:ios)
+
+   platform :ios do
+     desc "Generate localized screenshots"
+     lane :screenshots do
+       capture_screenshots(scheme: "ScreenshotTests")
+       # upload_to_app_store(skip_binary_upload: true, skip_metadata: true)
+     end
+   end
    ```
 
 1. Uncomment the line that calls the `scheme` function
@@ -99,7 +115,8 @@ Additional steps:
      setupSnapshot(app)
      app.launch()
      ```
-   - Implement a test that visits each screen in the app.
+   - Implement a test method named `testScreenshots`
+     that visits each screen in the app.
    - After the code that visiting each screen,
      call `snapshot("{screenshot-file-name}")`.
 
@@ -109,10 +126,13 @@ For more information, see {% aTargetBlank
 
 ## Generating Screenshots
 
-From the `fastlane` subdirectory enter `fastlane screenshots`.
-This generates a lot of output and takes about n minutes to complete.
-I see many red messages that says "Caught error... 66"!
-Screenshot .png files are added to the `fastlane/screenshots` directory.
+1. From the `fastlane` subdirectory enter `bundle exec fastlane screenshots`.
+   Supposedly this runs faster than just entering `fastlane screenshots`.
+   This generates a lot of output and takes about {n} minutes to complete.
+1. An HTML file that displays all the screenshots
+   will open in your default web browser.
+1. The produced screenshot `.png` files will be
+   in `fastlane/screenshots` directory.
 
 ## Running Tests
 
