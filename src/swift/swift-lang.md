@@ -4845,7 +4845,7 @@ let dirUrl = FileManager.default.homeDirectoryForCurrentUser
 // let dirUrl = FileManager.default.urls(
 //     for: .documentDirectory, in: .userDomainMask).first!
 
-var filePath = dirUrl.appendingPathComponent("demo.txt")
+let filePath = dirUrl.appendingPathComponent("demo.txt")
 // file:///Users/mark/demo.txt
 
 // Write to the file.
@@ -5142,7 +5142,7 @@ This is inspired by the Stewart Lynch video {% aTargetBlank
 
 The following extension from Paul Hudson at {% aTargetBlank
 "https://www.hackingwithswift.com/example-code/system/how-to-decode-json-from-your-app-bundle-the-easy-way",
-"How to decode JSON from you app bundle the easy way" %}
+"How to decode JSON from your app bundle the easy way" %}
 simplifies decoding UTF-8 data from a file in the app `Bundle`:
 
 ```swift
@@ -5195,7 +5195,9 @@ extension Bundle {
 }
 ```
 
-To add files to the app `Bundle`:
+It seems that non-Swift files in a project
+get added to the app `Bundle` automatically.
+If this isn't happening for a given file, it can be added manually as follows:
 
 - Select the top entry in the Project Navigator.
 - Select the main target.
