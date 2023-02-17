@@ -96,7 +96,7 @@ Additional steps:
    ```
 
 1. Uncomment the line that calls the `scheme` function
-   and change it to `scheme("SnapshotTests")`.
+   and change it to `scheme("ScreenshotTests")`.
 1. Uncomment the line `clear_previous_screenshots(true)`.
 1. Uncomment the line `override_status_bar(true)`.
 
@@ -119,6 +119,14 @@ Additional steps:
      that visits each screen in the app.
    - After the code that visiting each screen,
      call `snapshot("{screenshot-file-name}")`.
+
+1. Click the scheme dropdown at the top and select "New Scheme...".
+1. Enter "ScreenshotTests" for the name and click the "OK" button.
+1. Click the scheme dropdown at the top again and select "Edit Scheme...".
+1. Select "Build" in the left nav.
+1. Click "+" at the bottom and add the "ScreenshotTests" target.
+1. Uncheck all the checkboxes except "Test".
+1. Select the main target and click "-" at the bottom to delete it.
 
 For more information, see {% aTargetBlank
 "https://docs.fastlane.tools/getting-started/ios/screenshots/",
@@ -146,7 +154,7 @@ To run both unit tests and UI tests from fastlane:
    platform :ios do
      desc "Run tests"
      lane :tests do
-       run_tests(scheme: "{scheme-name}")
+       run_tests(scheme: "{main-scheme-name}")
      end
    end
    ```
