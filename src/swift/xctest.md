@@ -451,6 +451,10 @@ struct Counter: View {
 
             // Applying the `accessibilityIdentifier` view modifier
             // to a view makes it easy to find it in a UI test.
+            // Most/all kinds of elements can be found
+            // via an accessibility identifier.
+            // Using these is much better than searching for English text,
+            // especially in apps that use localization strings.
             Text("\(count)")
                 .accessibilityIdentifier("count")
 
