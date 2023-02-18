@@ -90,15 +90,21 @@ Additional steps:
 
 1. Uncomment the line that calls the `scheme` function
    and change it to `scheme("ScreenshotTests")`.
+
 1. Uncomment the line `output_directory("./screenshots")`
    and change the path to `./fastlane/screenshots`.
 
 1. Uncomment the line `clear_previous_screenshots(true)`.
    This deletes all the `.png` files in the `fastlane/screenshots` directory.
+   Maybe this isn't always desirable!
+
 1. Uncomment the line `override_status_bar(true)`.
+
 1. Add the line `headless(false)`.
    Tests that need to wait for elements to appear seem to fail without this.
+
 1. Edit the file `fastlane/Fastfile`.
+
 1. Change the the contents to the following:
 
    ```ruby
