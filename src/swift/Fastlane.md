@@ -23,6 +23,13 @@ Fastlane is primarily implemented in Ruby.
 
 This page focuses on usage for iOS apps.
 
+## Resources
+
+- {% aTargetBlank "https://fastlane.tools", "Fastline home page" %}
+- {% aTargetBlank
+  "https://www.runway.team/blog/how-to-build-the-perfect-fastlane-pipeline-for-ios",
+  "How to build the perfect fastlane pipeline for iOS" %}
+
 ## Installing
 
 Option #1 - using homebrew
