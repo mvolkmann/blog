@@ -301,3 +301,20 @@ To run both unit tests and UI tests from fastlane:
 1. From the `fastlane` subdirectory enter `bundle exec fastlane tests`.
 
 TODO: Can you skip editing `Fastfile` and run the tests with `fastlane scan`?
+
+## Code Signing
+
+1. Enter `fastlane match init`
+1. For the storage mode, select "git".
+1. Enter `fastlane match development`
+1. Enter `fastlane match appstore`
+
+TODO: Finish this.
+
+## Deploying to TestFlight
+
+TODO: Finish this.
+
+## Deploying to the App Store
+
+TODO: Finish this.
