@@ -314,7 +314,7 @@ The following table highlights methods in the `XCUIElement` class.
 | `rightClick()`                              | right-clicks the element in a macOS app                                                          |
 | `rotate(angle, withVelocity)`               | rotates with two touches                                                                         |
 | `scroll(byDeltaX, deltaY)`                  | scrolls the view in an iPad or macOS app                                                         |
-| `swipeDown()`                               | swipes down                                                                                      |
+| `swipeDown()`                               | swipes down (useful for dismissing sheets)                                                       |
 | `swipeLeft()`                               | swipes left                                                                                      |
 | `swipeRight()`                              | swipes right                                                                                     |
 | `swipeUp()`                                 | swipes up                                                                                        |
@@ -515,6 +515,16 @@ In the `setUpWithError` method of test files, add the following:
 
 ```swift
 XCTestCase.app.launch()
+```
+
+## Dismissing Sheets
+
+To dismiss the currently displayed sheet in a test,
+find any element on the sheet and call `.swipeDown()` on it.
+For example:
+
+```swift
+app.staticTexts["info-title"].swipeDown()
 ```
 
 ## Screen Navigation

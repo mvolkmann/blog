@@ -183,8 +183,6 @@ For more information, see {% aTargetBlank
    in `fastlane/screenshots` directory.
 1. An HTML file that displays all the screenshots
    will open in your default web browser.
-   For me this page does not display any of the screenshots
-   even though they are created in the `fastline/screenshots` directory.
    To skip this, add the following in `fastlane/Snapfile`:
 
    ```ruby
