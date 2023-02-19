@@ -128,6 +128,15 @@ and just use `app_store_connect_api_key()`:
 - key_content: APP_STORE_CONNECT_API_KEY_KEY
 - in_house: APP_STORE_CONNECT_API_KEY_IN_HOUSE
 
+Calling `app_store_connect_api_key()` with or without arguments
+sets a shared variable that can be used to get the API key in any lane.
+For example:
+
+```ruby
+api_key = lane_context[SharedValues::APP_STORE_CONNECT_API_KEY]
+# Pass api_key to any action.
+```
+
 ### Fastfile
 
 By default `Fastfile` contains code written in the Ruby programming language.
