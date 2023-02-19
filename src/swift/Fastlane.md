@@ -58,6 +58,8 @@ Additional steps:
 1. Enter `sudo gem pristine ffi --version 1.12.2`
    This fails for me!
 
+To see the version of Fastlane that is installed, enter `fastlane --version`.
+
 ## Configuring
 
 1. Open a Terminal window and cd to a root project directory.
@@ -66,13 +68,65 @@ Additional steps:
    - Automate screenshots
    - Automate beta distribution to TestFlight
    - Automate App Store distribution
-   - Manual setup
+   - Manual setup (for implementing multiple lanes)
 1. Answer many more questions including your Apple ID and password.
 1. This results in a new directory named `fastlane`.
    When the option "Automate screenshots" is selected,
    this directory will contain the files
    `Appfile`, `Fastfile`, `Snapfile`, and `SnapshotHelper.swift`.
 1. Add the `fastlane` directory to the Xcode project and to the git repository.
+
+### Appfile
+
+The file `Appfile` contains the application bundle identifier and your Apple ID.
+
+1. Edit the file `fastlane/Appfile`.
+1. Uncomment the line containing `app_identifier(`.
+1. Uncomment the line containing `apple_id(`.
+
+### Authentication
+
+Many actions require authenticating against your App Store Connect account.
+To configure this:
+
+1. Browse {% aTargetBlank "https://appstoreconnect.apple.com",
+   "App Store Connect" %}.
+1. Login
+1. Click the "Users and Access" button.
+1. Select the "Keys" tab.
+1. Click the "Request Access" button.
+1. Check the checkbox to agree to terms.
+1. Click the "Submit" button.
+1. Click the "Generate API Key" button.
+1. Enter a key name such as "fastlane key".
+1. Select an access role such as "App Manager".
+1. Click the "Generate" button.
+1. Click "Download API Key".
+1. Click the "Download" button.
+1. Move the downloaded `.p8` file to the project `fastlane` directory.
+
+To get base64 encoded key content enter `cat {key-name}.p8 | base64`.
+
+In the file `Fastfile` add the following
+before any action that requires authentication:
+
+```ruby
+app_store_connect_api_key(
+  key_id: "{key-id}", # from downloaded key file name
+  issuer_id: "{issuer-id}", # How can this be determined?
+  key_content: "{base64-encoded-key}", # from base64 command above
+  is_key_content_base64: true,
+  in_house: false # indicates whether the team is Enterprise
+)
+```
+
+Alternatively, set the following environment variables
+and just use `app_store_connect_api_key()`:
+
+- key_id: APP_STORE_CONNECT_API_KEY_KEY_ID
+- issuer_id: APP_STORE_CONNECT_API_KEY_ISSUER_ID
+- key_content: APP_STORE_CONNECT_API_KEY_KEY
+- in_house: APP_STORE_CONNECT_API_KEY_IN_HOUSE
 
 ### Fastfile
 
