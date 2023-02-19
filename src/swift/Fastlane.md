@@ -13,15 +13,13 @@ related to Android and iOS mobile app deployment.
 This includes running tests, generating screenshots,
 deploying iOS apps to TestFlight,
 deploying iOS apps to the App Store, and more.
-Fastlane actions can be run from the command line or by CI/CD servers.
+
+The file `Fastfile` defines "lanes" which are sequences of actions
+that automate a specific task such as running tests, generating screenshots,
+deploying to TestFlight, or deploying to the App Store.
+These lanes can be run from the command line or by CI/CD servers.
 
 Fastlane is primarily implemented in Ruby.
-
-Fastlane workflows can be customized with actions and plugins.
-
-The file `Fastfile` defines "lanes" which each automate a specific task
-such as running tests, generating screenshots, deploying to TestFlight,
-or deploying to the App Store.
 
 This page focuses on usage for iOS apps.
 
@@ -51,57 +49,29 @@ Option #2 - manual
 Additional steps:
 
 1. Enter `sudo gem pristine ffi --version 1.12.2`
-   This fails!
+   This fails for me!
 
 ## Configuring
 
-1. Open a Terminal window and cd to the root project directory.
+1. Open a Terminal window and cd to a root project directory.
 1. Enter `fastlane init`.
 1. Select one of the following options:
    - Automate screenshots
    - Automate beta distribution to TestFlight
    - Automate App Store distribution
    - Manual setup
-1. Answer many more questions including your Apple ID and password
-   and whether fastlane should upload screenshots to AppStoreConnect.
+1. Answer many more questions including your Apple ID and password.
 1. This results in a new directory named `fastlane`.
    When the option "Automate screenshots" is selected,
    this directory will contain the files
    `Appfile`, `Fastfile`, `Snapfile`, and `SnapshotHelper.swift`.
-   Add the `fastlane` directory to the Xcode project and to the git repository.
-1. Edit the `fastlane/Snapfile` file.
-1. Uncomment lines so it indicates the devices and languages
-   to use for creating screenshots. For example:
+1. Add the `fastlane` directory to the Xcode project and to the git repository.
 
-   ```ruby
-   devices([
-     "iPhone 8 Plus",
-     "iPhone 13 Pro Max",
-     "iPad Pro (12.9-inch) (2nd generation)",
-     "iPad Pro (12.9-inch) (6th generation)"
-   ])
+### Fastfile
 
-   languages([
-     "en-US", # English USA
-     "fr-FR", # French France
-     "es-ES" # Spanish Spain
-   ])
-   ```
-
-1. Uncomment the line that calls the `scheme` function
-   and change it to `scheme("ScreenshotTests")`.
-
-1. Uncomment the line `output_directory("./screenshots")`
-   and change the path to `./fastlane/screenshots`.
-
-1. Uncomment the line `clear_previous_screenshots(true)`.
-   This deletes all the `.png` files in the `fastlane/screenshots` directory.
-   Maybe this isn't always desirable!
-
-1. Uncomment the line `override_status_bar(true)`.
-
-1. Add the line `headless(false)`.
-   Tests that need to wait for elements to appear seem to fail without this.
+By default `Fastfile` contains code written in the Ruby programming language.
+There is a option to use code written in the Swift programming language,
+but that executes more slowly because it still interacts with Ruby.
 
 1. Edit the file `fastlane/Fastfile`.
 
@@ -146,6 +116,60 @@ Additional steps:
      This works in simulators, but does nothing when running on a real device.
    - Delete the method definition for `testLaunchPerformance`.
 
+1. Click the "Close" button.
+
+A lane can be specific to a given platform (ex. ios or mac)
+or it can be platform independent.
+
+To list the lanes implemented for a given project, enter `fastlane lanes`.
+
+To execute a lane, enter `fastlane {platform} {lane}`.
+For example, `fastlane ios screenshots`.
+
+### Snapfile
+
+1. Edit the `fastlane/Snapfile` file.
+
+1. Uncomment lines so it indicates the devices and languages
+   to use for creating screenshots. For example:
+
+   ```ruby
+   devices([
+     "iPhone 8 Plus",
+     "iPhone 13 Pro Max",
+     "iPad Pro (12.9-inch) (2nd generation)",
+     "iPad Pro (12.9-inch) (6th generation)"
+   ])
+
+   languages([
+     # These are five most used languages in the world
+     # in order from most to least used
+     # including the region in which they are most used.
+     "en-US", # English - USA
+     "zh-CN", # Chinese Simplified - China
+     "hi-IN", # Hindi - India
+     "es-ES", # Spanish - Spain
+     "fr-FR" # French - France
+   ])
+   ```
+
+1. Uncomment the line that calls the `scheme` function
+   and change it to `scheme("ScreenshotTests")`.
+
+1. Uncomment the line `output_directory("./screenshots")`
+   and change the path to `./fastlane/screenshots`.
+
+1. Uncomment the line `clear_previous_screenshots(true)`.
+   This deletes all the `.png` files in the `fastlane/screenshots` directory.
+   Maybe this isn't always desirable!
+
+1. Uncomment the line `override_status_bar(true)`.
+
+1. Add the line `headless(false)`.
+   Tests that need to wait for elements to appear seem to fail without this.
+
+### Configuring Screenshot Generation
+
 1. Click the scheme dropdown at the top and select "New Scheme...".
 1. Enter "ScreenshotTests" for the name
 1. Click the "OK" button.
@@ -156,8 +180,6 @@ Additional steps:
 1. Click "+" at the bottom and add the "ScreenshotTests" target.
 1. In the dialog that appears, select the "ScreenshotTests" target
    and click the "Add" button.
-
-1. Click the "Close" button.
 
 For more information, see {% aTargetBlank
 "https://docs.fastlane.tools/getting-started/ios/screenshots/",
