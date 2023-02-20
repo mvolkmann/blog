@@ -75,6 +75,12 @@ Translation strings can contain Markdown syntax.
 For example, this can be used to make some of the text
 bold, italic, or underlined.
 
+Comments using the syntax `//` or `/* ... */` can be used.
+
+To validate a `Localizable.strings` file,
+cd to the project directory that contains the `.lproj` files and
+enter `plutil -lint {language-code}.lproj/Localizable.strings`.
+
 ## Preview Locale
 
 To select a locale to use in the Preview,

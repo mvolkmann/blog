@@ -8,8 +8,8 @@ layout: topic-layout.njk
 ## Overview
 
 {% aTargetBlank "https://fastlane.tools/", "Fastlane" %}
-is an open source platform that automates many tasks
-related to Android and iOS mobile app deployment.
+is an open source platform managed by Google that automates
+many tasks related to Android and iOS mobile app deployment.
 This includes running tests, generating screenshots,
 deploying iOS apps to TestFlight,
 deploying iOS apps to the App Store, and more.
@@ -38,8 +38,9 @@ There are often issues with using the version of Ruby that comes with macOS.
 To avoid these issues, install a new version of Ruby using Homebrew:
 
 1. Enter `brew install ruby`.
-1. Modify your shell configuration file to add `/opt/homebrew/opt/ruby/bin`
-   to the beginning of the `PATH` environment variable value.
+1. Modify your shell configuration file (such as `.zshrc`)
+   to add `/opt/homebrew/opt/ruby/bin` to
+   the beginning of the `PATH` environment variable value.
 1. Start a new shell session.
 1. Verify by entering `which ruby`.
 
@@ -53,7 +54,7 @@ Option #2 - manual
 
 1. Verify that Ruby 2.5 or newer is installed by entering `ruby --version`.
 1. Install Bundler by entering `sudo gem install bundler`.
-1. Create the file `Gemfile` in the root directory of a project
+1. Create the file `Gemfile` in the project root directory
    containing the following:
 
    ```ruby
@@ -74,6 +75,14 @@ Additional steps:
 To see the version of Fastlane that is installed, enter `fastlane --version`.
 
 ## Configuring
+
+1. Add the following environment variables in your shell configuration file
+   such as `.zshrc`:
+
+   ```bash
+   export LANG=en_US.UTF-8
+   export LC_ALL=en_US.UTF-8
+   ```
 
 1. Open a Terminal window and cd to a root project directory.
 1. Enter `fastlane init`.
@@ -206,8 +215,8 @@ or it can be platform independent.
 
 To list the lanes implemented for a given project, enter `fastlane lanes`.
 
-To execute a lane, enter `fastlane {platform} {lane}`.
-For example, `fastlane ios screenshots`.
+To execute a lane, enter `bundle exec fastlane {platform} {lane}`.
+For example, `bundle exec fastlane ios screenshots`.
 
 ### Snapfile
 
@@ -282,7 +291,6 @@ For more information, see {% aTargetBlank
        - Select "Developer".
        - Toggle "Dark Appearance" to the desired setting.
 1. From the `fastlane` subdirectory enter `bundle exec fastlane screenshots`.
-   This runs faster than just entering `fastlane screenshots`.
    This generates a lot of output and takes several minutes to complete.
 1. The produced screenshot `.png` files will be
    in `fastlane/screenshots` directory.
@@ -396,6 +404,8 @@ These steps will enable Fastline to build the app.
      gym # creates a signed file
    end
    ```
+
+1. From the project root directory, enter `bundle exec fastlane build`.
 
 ## Deploying to TestFlight
 
