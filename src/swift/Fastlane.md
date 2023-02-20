@@ -317,13 +317,85 @@ TODO: Can you skip editing `Fastfile` and run the tests with `fastlane scan`?
 
 ## Code Signing
 
-1. Enter `fastlane match init`
+These steps will generate and install all required
+keys, certificates, and provisioning profiles.
+
+1. From the project root directory, enter `fastlane match init`
 1. For the storage mode, select "1. git".
 1. Paste the URL of the project GitHub repository.
 1. Enter `fastlane match development`
+1. Enter a passphrase that you must remember.
+1. Enter the password for accessing your login keychain.
 1. Enter `fastlane match appstore`
+1. Browse {% aTargetBlank "https://developer.apple.com/account", "developer.apple.com" %}.
+1. Click "Account" and login.
+1. Under "Certificates, Identifiers & Profiles" click "Profiles".
+1. Verify that the list contains a profile whose name begins with
+   "match Development" and another that begins with "match "AppStore".
+1. In order to allow fastlane to manage code signing
+   you must disable automatic code signing in the Xcode project.
+   1. Open the project in Xcode.
+   1. Select the top entry in the Project Navigator.
+   1. Select the main target.
+   1. Select the "Signing & Capabilities" tab.
+   1. Uncheck the checkbox for "Automatically manage signing".
+   1. Change the value in the "Provisioning Profile" dropdown
+      to the one that begins with "match AppStore".
+1. Edit `fastlane/Fastfile`.
+1. Add the following lane definition to synchronize certificates:
 
-TODO: Finish this.
+   ```ruby
+   desc "Sync certificates"
+   lane :sync_certificates do
+     # read-only disables overriding existing certificates.
+     match({readonly: true, type: "appstore"})
+   end
+   ```
+
+## Building
+
+These steps will enable Fastline to build the app.
+
+1. From the project root directory, enter `fastlane gym init`
+   to create the file `fastlane/Gymfile`.
+1. Edit the file `fastlane/Gymfile`.
+1. Replace the contents of the file with the following:
+
+   ```ruby
+   scheme("{main-scheme-name}")
+
+   # Provide provisioning profiles to use.
+   export_options({
+     method: "app-store",
+     provisioningProfiles: {
+       "{bundle-identifier}" => "match AppStore {bundle-identifier}",
+     }
+   })
+
+   # Specify the path to store .ipa file.
+   output_directory("./fastlane/builds")
+
+   include_bitcode(false)
+   include_symbols(false)
+   ```
+
+1. Open the project in Xcode.
+1. Select the top entry in the Project Navigator.
+1. Select the main target.
+1. Select the "Build Settings" tab.
+1. Scroll down to the "Versioning" section.
+1. Verify that "Versioning System" is set to "Apple Generic" (default).
+1. Edit `fastlane/Fastfile`.
+1. Add the following lane definition to synchronize certificates:
+
+   ```ruby
+   desc "Create ipa"
+   lane :build do
+     sync_profiles
+     increment_build_number
+     gym # creates a signed file
+   end
+   ```
 
 ## Deploying to TestFlight
 
