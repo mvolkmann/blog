@@ -32,6 +32,19 @@ This page focuses on usage for iOS apps.
 
 ## Installing
 
+### Ruby
+
+There are often issues with using the version of Ruby that comes with macOS.
+To avoid these issues, install a new version of Ruby using Homebrew:
+
+1. Enter `brew install ruby`.
+1. Modify your shell configuration file to add `/opt/homebrew/opt/ruby/bin`
+   to the beginning of the `PATH` environment variable value.
+1. Start a new shell session.
+1. Verify by entering `which ruby`.
+
+### Fastlane
+
 Option #1 - using homebrew
 
 Enter `brew install fastlane`
@@ -305,7 +318,8 @@ TODO: Can you skip editing `Fastfile` and run the tests with `fastlane scan`?
 ## Code Signing
 
 1. Enter `fastlane match init`
-1. For the storage mode, select "git".
+1. For the storage mode, select "1. git".
+1. Paste the URL of the project GitHub repository.
 1. Enter `fastlane match development`
 1. Enter `fastlane match appstore`
 

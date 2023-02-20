@@ -849,7 +849,9 @@ Type part of a symbol name in the input at the top
 to filter the list of symbols.
 Click a symbol name to see the symbol
 and a list of OSes where it is supported.
-Double-click a symbol name to insert it.
+Double-click a symbol name to insert it at the cursor location
+or drag it to the desired location inside a container view.
+This will insert `Image(systemName: "{symbol-name}")`.
 
 ## Source Control
 

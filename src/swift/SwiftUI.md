@@ -2032,7 +2032,8 @@ To change this, add the `alignment` attribute which can be set to
 `.leading`, `.center`, or `.trailing`.
 
 A default amount of space is added between each child determined by the system.
-In iOS this seems to be 12, but I cannot find a documented value.
+In iOS this seems to be 16 when the children are containers
+and zero when they are views, but I cannot find a documented value.
 To change the space between child views, add the `spacing` attribute.
 
 #### ZStack
@@ -6307,6 +6308,8 @@ There are many view modifiers that change the style of specific kinds of views.
   This selects the amount of padding to apply based on
   the content of the view to which it is applied
   and the environment in which the app is running.
+  When padding is added to an `HStack` or `VStack` in iOS,
+  the amount seems to be 16.
 
 - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/padding(_:_:)", "padding" %}
   adds the same padding to specific sides (edges) of the receiver view.
