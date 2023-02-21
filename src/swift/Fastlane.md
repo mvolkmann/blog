@@ -63,7 +63,7 @@ This page focuses on usage for iOS apps.
   - See the fastlane tool "frameit" for adding device frames around screenshots.
 - Submit the tested app to the App Store.
 
-## Terminology
+## Provisioning Profiles and Code Signing
 
 For details on "code signing" and "provisioning profiles",
 see the Apple Tech Note {% aTargetBlank
@@ -92,7 +92,7 @@ and a bundle ID. They are cryptographically signed.
 
 TODO: Does each developer have their own signing certificate?
 TODO: Can a developer have multiple signing certificates?
-TODO: Are these uses to sign a provisioning profile so it is known who created the provisioning profile?
+TODO: Are these used to sign a provisioning profile so it is known who created the provisioning profile?
 
 ## Installing
 
@@ -107,36 +107,14 @@ To avoid these issues, install a new version of Ruby using Homebrew:
    the beginning of the `PATH` environment variable value.
 1. Start a new shell session.
 1. Verify by entering `which ruby`.
+1. Enter `gem install bundler`.
 
 ### Fastlane
 
-Option #1 - using homebrew
-
-Enter `brew install fastlane`
-
-Option #2 - manual
-
-1. Verify that Ruby 2.5 or newer is installed by entering `ruby --version`.
-1. Install Bundler by entering `sudo gem install bundler`.
-1. Create the file `Gemfile` in the project root directory
-   containing the following:
-
-   ```ruby
-   source "https://rubygems.org"
-   gem "fastlane"
-   ```
-
-1. Enter `sudo gem update --system 3.2.3`
-1. Enter `sudo bundle update`
-1. Enter `git add Gemfile Gemfile.lock`
-1. Enter `git commit`
-
-Additional steps:
-
-1. Enter `sudo gem pristine ffi --version 1.12.2`
-   This fails for me!
-
-To see the version of Fastlane that is installed, enter `fastlane --version`.
+1. Install fastlane by entering `brew install fastlane`.
+1. If git is not already installed, enter `brew install git`.
+1. If the Xcode Command Line Tools are not already installed,
+   enter `xcode-select -install`.
 
 ## Configuring
 
@@ -161,16 +139,6 @@ To see the version of Fastlane that is installed, enter `fastlane --version`.
    this directory will contain the files
    `Appfile`, `Fastfile`, `Snapfile`, and `SnapshotHelper.swift`.
 1. Add the `fastlane` directory to the Xcode project and to the git repository.
-
-## Fastline Tools
-
-- cert
-- sigh
-- deliver
-- Pilot
-- match
-- gym
-- snapshot
 
 ### Appfile
 
@@ -232,6 +200,22 @@ For example:
 api_key = lane_context[SharedValues::APP_STORE_CONNECT_API_KEY]
 # Pass api_key to any action.
 ```
+
+### Appfile
+
+This is a Ruby source file that defines values used in `Fastfile`.
+It can contain code like the following:
+
+```ruby
+app_identifier "{app-bundle-identifier}"
+apple_id "{my-apple-id}"
+
+itc_team_id "{app-store-connect-team-id}" # 9-digit number
+team_id "{developer-portal-team-id}" # 10 characters
+```
+
+For more information about the Appfile, see the fastline docs on
+{% aTargetBlank "https://docs.fastlane.tools/advanced/#appfile", "Appfile" %}.
 
 ### Fastfile
 
