@@ -38,30 +38,103 @@ This page focuses on usage for iOS apps.
 ## High-level Steps
 
 - Enroll in the Apple Developer Program (currently $99/year USD).
+
 - Register the app to be managed on the Apple Developer Portal
   and App Store Connect.
-  See the fastlane tool "produce".
-- If the project is owned by a team, register the certificates and devices
-  of each developer with the project.
-  See the fastlane tools "cert", "sigh", and "match".
+
+  - The fastlane action
+    {% aTargetBlank "https://docs.fastlane.tools/actions/produce/", "produce" %}
+    is an alias for `create_app_online`.
+    It creates a new iOS app on both
+    the Apple Developer Portal and App Store Connect.
+
+- Register the certificates and devices of each developer with the project.
+
+  - The fastlane action
+    {% aTargetBlank "https://docs.fastlane.tools/actions/cert/", "cert" %}
+    is an alias for `get_certificates`.
+    It determines if a new signing certificate is needed. If so it:
+    - creates a new private key
+    - creates a new signing request
+    - generates, downloads, and installs the certificate
+    - imports all the generated files into the Keychain app
+  - The fastlane action
+    {% aTargetBlank "https://docs.fastlane.tools/actions/sigh/", "sigh" %}
+    is an alias for `get_provisioning_profile`.
+    It can create, renew, download, and repair provisioning profiles.
+  - The fastlane action
+    {% aTargetBlank "https://docs.fastlane.tools/actions/match/", "match" %}
+    is an alias for `sync_code_signing`.
+    It creates all required certificates and provisioning profiles
+    and stores them in a private git repository (or another supported location)
+    so a team of developers can share them.
+    The `match` action combines the functionality of `cert` and `sigh`.
+    It is recommended to use `match` in place of `cert` and `sigh`
+    unless the fine-grained control those provide is needed.
+    Perhaps `match` should only be used
+    when a project has more than one developer.
+
 - Register each of the capabilities (ex. CloudKit or MapKit) used by the project
   with the Developer Portal and update the app entitlements.
   This is done manually in Xcode.
 - Test the app.
+
   - Create distribution profiles for testing beta versions of the app
     in a service like TestFlight.
   - Create and code sign an IPA file.
   - Upload the IPA file to a test service like TestFlight.
   - Register beta testers in services like TestFlight.
-  - See the fastlane tool "gym" to build the app.
-  - See the fastlane tool "scan" to run automated tests.
-  - See the fastlane tool "Pilot" to deploy the app to TestFlight.
+
+  - To build the app, see the fastlane tool
+    {% aTargetBlank "https://docs.fastlane.tools/actions/gym/", "gym" %}
+    which is an alias for `build_app`.
+    It builds and packages an app, creating a signed `.ipa` or `.app` file.
+
+  - To run automated tests, see the fastlane tool
+    {% aTargetBlank "https://docs.fastlane.tools/actions/scan/", "scan" %}
+    which is an alias for `run_tests`.
+    It runs all the automated tests in a project
+    in a Simulator or on a connected device.
+
+  - To deploy the app to TestFlight, see the fastlane tool
+    {% aTargetBlank "https://docs.fastlane.tools/actions/pilot/", "pilot" %}
+    which is an alias for `upload_to_testflight`.
+    It can upload a build to TestFlight,
+    add or remove testers,
+    get information about testers and devices,
+    and import or export data describing all the testers.
+
 - Create screenshots for each screen in the app,
   repeating for each supported device size and supported language.
-  - See the fastlane tool "snapshot" for capturing screenshots.
-  - See the fastlane tool "deliver" for copying screenshots to the App Store.
-  - See the fastlane tool "frameit" for adding device frames around screenshots.
+
+  - To capture localized screenshots, see the fastlane tool
+    {% aTargetBlank "https://docs.fastlane.tools/actions/snapshot/", "snapshot" %}
+    which is an alias for `capture_ios_screenshots`.
+    It automates generating screenshots for each screen
+    navigated to in a UI Test.
+    It repeats this for each supported device size and language.
+
+  - To copy screenshots to the App Store, see the fastlane tool
+    {% aTargetBlank "https://docs.fastlane.tools/actions/deliver/", "deliver" %}
+    is an alias for `upload_to_app_store`.
+    It uploads screenshots, metadata, and binaries to App Store Connect.
+    It can also submit an app for review.
+
+  - To add device frames around screenshots, see the fastlane tool "frameit"
+    {% aTargetBlank "https://docs.fastlane.tools/actions/frameit/", "frameit" %}
+    is an alias for `frame_screenshots`.
+    It adds a device frame around screenshots.
+
 - Submit the tested app to the App Store.
+  The {% aTargetBlank "https://docs.fastlane.tools/actions/deliver/", "deliver" %}
+  action described above can do this.
+
+Also consider using these actions:
+
+- The {% aTargetBlank "https://docs.fastlane.tools/actions/slather/", "slather" %}
+  action generates a code coverage report.
+- The {% aTargetBlank "https://docs.fastlane.tools/actions/swiftlint/", "swiftlint" %}
+  action performs code validation using SwiftLint.
 
 ## Provisioning Profiles and Code Signing
 
@@ -231,6 +304,11 @@ but that executes more slowly because it still interacts with Ruby.
    default_platform(:ios)
 
    platform :ios do
+     lane :certs do
+       cert(development: true)
+       sigh(development: true)
+     end
+
      desc "Generate localized screenshots"
      lane :screenshots do
        capture_screenshots(scheme: "ScreenshotTests") # main change
