@@ -919,6 +919,11 @@ struct BarChartDemo: View {
                   }
               }
         }
+
+        // This fixes the chart jump issue during dragging.
+        // See https://developer.apple.com/forums/thread/724770.
+        .chartYScale(domain: minYValue...maxYValue)
+
         .chartOverlay { proxy in chartOverlay(proxy: proxy) }
     }
 
