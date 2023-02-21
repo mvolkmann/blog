@@ -10,9 +10,14 @@ layout: topic-layout.njk
 {% aTargetBlank "https://fastlane.tools/", "Fastlane" %}
 is an open source platform managed by Google that automates
 many tasks related to Android and iOS mobile app deployment.
-This includes running tests, generating screenshots,
+These include running tests, generating screenshots,
 deploying iOS apps to TestFlight,
 deploying iOS apps to the App Store, and more.
+
+Some tasks require interacting with the {% aTargetBlank
+"https://developer.apple.com/account", "Apple Developer Portal" %} and
+{% aTargetBlank "https://appstoreconnect.apple.com/", "App Store Connect" %}.
+Fastlane provides a way to do this from the command line.
 
 The file `Fastfile` defines "lanes" which are sequences of actions
 that automate a specific task such as running tests, generating screenshots,
@@ -29,6 +34,34 @@ This page focuses on usage for iOS apps.
 - {% aTargetBlank
   "https://www.runway.team/blog/how-to-build-the-perfect-fastlane-pipeline-for-ios",
   "How to build the perfect fastlane pipeline for iOS" %}
+
+## High-level Steps
+
+- Enroll in the Apple Developer Program (currently $99/year USD).
+- Register the app to be managed on the Apple Developer Portal
+  and App Store Connect.
+  See the fastlane tool "produce".
+- If the project is owned by a team, register the certificates and devices
+  of each developer with the project.
+  See the fastlane tools "cert", "sigh", and "match".
+- Register each of the capabilities (ex. CloudKit or MapKit) used by the project
+  with the Developer Portal and update the app entitlements.
+  This is done manually in Xcode.
+- Test the app.
+  - Create distribution profiles for testing beta versions of the app
+    in a service like TestFlight.
+  - Create and code sign an IPA file.
+  - Upload the IPA file to a test service like TestFlight.
+  - Register beta testers in services like TestFlight.
+  - See the fastlane tool "gym" to build the app.
+  - See the fastlane tool "scan" to run automated tests.
+  - See the fastlane tool "Pilot" to deploy the app to TestFlight.
+- Create screenshots for each screen in the app,
+  repeating for each supported device size and supported language.
+  - See the fastlane tool "snapshot" for capturing screenshots.
+  - See the fastlane tool "deliver" for copying screenshots to the App Store.
+  - See the fastlane tool "frameit" for adding device frames around screenshots.
+- Submit the tested app to the App Store.
 
 ## Terminology
 
@@ -128,6 +161,16 @@ To see the version of Fastlane that is installed, enter `fastlane --version`.
    this directory will contain the files
    `Appfile`, `Fastfile`, `Snapfile`, and `SnapshotHelper.swift`.
 1. Add the `fastlane` directory to the Xcode project and to the git repository.
+
+## Fastline Tools
+
+- cert
+- sigh
+- deliver
+- Pilot
+- match
+- gym
+- snapshot
 
 ### Appfile
 
@@ -246,7 +289,8 @@ or it can be platform independent.
 
 To list the lanes implemented for a given project, enter `fastlane lanes`.
 
-To execute a lane, enter `bundle exec fastlane {platform} {lane}`.
+The `fastlane` command can be passed the name of an action or a lane to run.
+To execute a lane, enter `bundle exec fastlane {platform} {action-or-lane}`.
 For example, `bundle exec fastlane ios screenshots`.
 
 ### Snapfile
