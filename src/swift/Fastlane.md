@@ -65,18 +65,20 @@ This page focuses on usage for iOS apps.
   - The fastlane action
     {% aTargetBlank "https://docs.fastlane.tools/actions/match/", "match" %}
     is an alias for `sync_code_signing`.
-    It creates all required certificates and provisioning profiles
-    and stores them in a private git repository (or another supported location)
+    It combines the functionality of `cert` and `sigh`.
+    In addition, it stores the certificates and provisioning profiles
+    in a private git repository (or another supported location)
     so a team of developers can share them.
-    The `match` action combines the functionality of `cert` and `sigh`.
     It is recommended to use `match` in place of `cert` and `sigh`
-    unless the fine-grained control those provide is needed.
+    unless the fine-grained control those provide is needed
+    or it is not desired to store the artifacts in a git repository.
     Perhaps `match` should only be used
     when a project has more than one developer.
 
 - Register each of the capabilities (ex. CloudKit or MapKit) used by the project
   with the Developer Portal and update the app entitlements.
   This is done manually in Xcode.
+
 - Test the app.
 
   - Create distribution profiles for testing beta versions of the app
