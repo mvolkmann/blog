@@ -30,6 +30,37 @@ This page focuses on usage for iOS apps.
   "https://www.runway.team/blog/how-to-build-the-perfect-fastlane-pipeline-for-ios",
   "How to build the perfect fastlane pipeline for iOS" %}
 
+## Terminology
+
+For details on "code signing" and "provisioning profiles",
+see the Apple Tech Note {% aTargetBlank
+"https://developer.apple.com/documentation/technotes/tn3125-inside-code-signing-provisioning-profiles",
+"TN3125: Inside Code Signing: Provisioning Profiles" %}.
+This document says the following:
+
+> Apple platforms, except macOS, won't run arbitrary third-party code.
+> All execution of third-party code must be authorized by Apple.
+> This authorization comes in the form of a provisioning profile,
+> which ties together five criteria:
+>
+> - Who is allowed to sign code? (which developers)
+> - What apps are they allowed to sign? (typically a single app id,
+>   but can use a wildcard to match multiple apps)
+> - Where can those apps run? (platforms such as iOS)
+> - When can those apps run? (expiration date
+>   after which the profile becomes invalid)
+> - How can those apps be entitled? (what apps are entitled to do)
+>
+> The exact format of provisioning profiles isn't documented
+> and could change at any time.
+
+Provisioning profiles include signing certificates, device identifiers,
+and a bundle ID. They are cryptographically signed.
+
+TODO: Does each developer have their own signing certificate?
+TODO: Can a developer have multiple signing certificates?
+TODO: Are these uses to sign a provisioning profile so it is known who created the provisioning profile?
+
 ## Installing
 
 ### Ruby
