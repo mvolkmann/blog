@@ -20,13 +20,21 @@ Some tasks require interacting with the {% aTargetBlank
 Fastlane provides a way to do this from the command line.
 
 The file `Fastfile` defines "lanes" which are sequences of actions
-that automate a specific task such as running tests, generating screenshots,
-deploying to TestFlight, or deploying to the App Store.
-These lanes can be run from the command line or by CI/CD servers.
+that automate a specific task.
+Lanes can be run from the command line or by CI/CD servers.
+A lane can be specific to a given platform (ex. ios or mac)
+or it can be platform independent.
+
+The `fastlane` command can be passed the name of an action or a lane to run.
+To execute a lane, enter `fastlane {platform} {action-or-lane}`.
+For example, `fastlane ios screenshots`.
 
 Fastlane is primarily implemented in Ruby.
 
 This page focuses on usage for iOS apps.
+
+Deploying apps to TestFlight and the App Store requires enrolling
+in the Apple Developer Program which is currently $99/year USD.
 
 ## Resources
 
@@ -34,121 +42,6 @@ This page focuses on usage for iOS apps.
 - {% aTargetBlank
   "https://www.runway.team/blog/how-to-build-the-perfect-fastlane-pipeline-for-ios",
   "How to build the perfect fastlane pipeline for iOS" %}
-
-## High-level Steps
-
-- Enroll in the Apple Developer Program (currently $99/year USD).
-
-- Register the app to be managed on the Apple Developer Portal
-  and App Store Connect.
-
-  - The fastlane action
-    {% aTargetBlank "https://docs.fastlane.tools/actions/produce/", "produce" %}
-    is an alias for `create_app_online`.
-    It creates a new iOS app on both
-    the Apple Developer Portal and App Store Connect.
-
-- Register the certificates and devices of each developer with the project.
-
-  - The fastlane action
-    {% aTargetBlank "https://docs.fastlane.tools/actions/cert/", "cert" %}
-    is an alias for `get_certificates`.
-    It determines if a new signing certificate is needed. If so it:
-    - creates a new private key
-    - creates a new signing request
-    - generates, downloads, and installs the certificate
-    - imports all the generated files into the Keychain app
-  - The fastlane action
-    {% aTargetBlank "https://docs.fastlane.tools/actions/sigh/", "sigh" %}
-    is an alias for `get_provisioning_profile`.
-    It can create, renew, download, and repair provisioning profiles.
-  - The fastlane action
-    {% aTargetBlank "https://docs.fastlane.tools/actions/match/", "match" %}
-    is an alias for `sync_code_signing`.
-    It combines the functionality of `cert` and `sigh`.
-    In addition, it stores the certificates and provisioning profiles
-    in a private git repository (or another supported location)
-    so a team of developers can share them.
-    It is recommended to use `match` in place of `cert` and `sigh`
-    unless the fine-grained control those provide is needed
-    or it is not desired to store the artifacts in a git repository.
-    Perhaps `match` should only be used
-    when a project has more than one developer.
-
-- Register each of the capabilities (ex. CloudKit or MapKit) used by the project
-  with the Developer Portal and update the app entitlements.
-  This is done manually in Xcode.
-
-- Test the app.
-
-  - Create distribution profiles for testing beta versions of the app
-    in a service like TestFlight.
-  - Create and code sign an IPA file.
-  - Upload the IPA file to a test service like TestFlight.
-  - Register beta testers in services like TestFlight.
-
-  - To build the app, see the fastlane tool
-    {% aTargetBlank "https://docs.fastlane.tools/actions/gym/", "gym" %}
-    which is an alias for `build_app`.
-    It builds and packages an app, creating a signed `.ipa` or `.app` file.
-
-  - To run automated tests, see the fastlane tool
-    {% aTargetBlank "https://docs.fastlane.tools/actions/scan/", "scan" %}
-    which is an alias for `run_tests`.
-    It runs all the automated tests in a project
-    in a Simulator or on a connected device.
-
-  - To deploy the app to TestFlight, see the fastlane tool
-    {% aTargetBlank "https://docs.fastlane.tools/actions/pilot/", "pilot" %}
-    which is an alias for `upload_to_testflight`.
-    It can upload a build to TestFlight,
-    add or remove testers,
-    get information about testers and devices,
-    and import or export data describing all the testers.
-
-- Create screenshots for each screen in the app,
-  repeating for each supported device size and supported language.
-
-  - To capture localized screenshots, see the fastlane tool
-    {% aTargetBlank "https://docs.fastlane.tools/actions/snapshot/", "snapshot" %}
-    which is an alias for `capture_ios_screenshots`.
-    It automates generating screenshots for each screen
-    navigated to in a UI Test.
-    It repeats this for each supported device size and language.
-
-  - To add device frames around screenshots, see the fastlane tool "frameit"
-    {% aTargetBlank "https://docs.fastlane.tools/actions/frameit/", "frameit" %}
-    is an alias for `frame_screenshots`.
-    It adds a device frame around screenshots.
-    Before running this, enter `brew install imagemagick`.
-    It creates new `.png` files below the `fastlane/screenshots` directory
-    that have `_framed` appended to their names.
-    The framed screenshots are beautiful, but they are all larger than
-    the originals and are incompatible with the sizes the App Store accepts.
-    See this {% aTargetBlank
-    "https://github.com/fastlane/fastlane/issues/21067", "issue" %}.
-
-- Upload to the App Store.
-
-  - The fastlane tool
-    {% aTargetBlank "https://docs.fastlane.tools/actions/deliver/", "deliver" %}
-    is an alias for `upload_to_app_store`.
-    It can upload screenshots, metadata, and binaries to App Store Connect.
-    It can also update the app version number and submit the app for review.
-    There are many parameters whose names begin with `skip_`
-    that control what it does.
-    TODO: Will it upload framed screenshots and not the unframed versions?
-
-- Submit the tested app to the App Store.
-  The {% aTargetBlank "https://docs.fastlane.tools/actions/deliver/", "deliver" %}
-  action described above can do this.
-
-Also consider using these actions:
-
-- The {% aTargetBlank "https://docs.fastlane.tools/actions/slather/", "slather" %}
-  action generates a code coverage report.
-- The {% aTargetBlank "https://docs.fastlane.tools/actions/swiftlint/", "swiftlint" %}
-  action performs code validation using SwiftLint.
 
 ## Provisioning Profiles and Code Signing
 
@@ -176,10 +69,6 @@ This document says the following:
 
 Provisioning profiles include signing certificates, device identifiers,
 and a bundle ID. They are cryptographically signed.
-
-TODO: Does each developer have their own signing certificate?
-TODO: Can a developer have multiple signing certificates?
-TODO: Are these used to sign a provisioning profile so it is known who created the provisioning profile?
 
 ## Installing
 
@@ -213,30 +102,25 @@ To avoid these issues, install a new version of Ruby using Homebrew:
    export LC_ALL=en_US.UTF-8
    ```
 
-1. Open a Terminal window and cd to a root project directory.
+1. Open a Terminal window and cd to the project root directory.
 1. Enter `fastlane init`.
 1. Select one of the following options:
-   - Automate screenshots
+   - Automate screenshots (recommended)
    - Automate beta distribution to TestFlight
    - Automate App Store distribution
    - Manual setup (for implementing multiple lanes)
 1. Answer many more questions including your Apple ID and password.
+   - For the UI testing scheme, choose the default scheme.
+   - For "Enable automatic upload", choose "n".
 1. This results in a new directory named `fastlane`.
    When the option "Automate screenshots" is selected,
    this directory will contain the files
    `Appfile`, `Fastfile`, `Snapfile`, and `SnapshotHelper.swift`.
 1. Add the `fastlane` directory to the Xcode project and to the git repository.
 
-### Appfile
-
-The file `Appfile` contains the application bundle identifier and your Apple ID.
-
-1. Edit the file `fastlane/Appfile`.
-1. Uncomment the line containing `app_identifier(`.
-1. Uncomment the line containing `apple_id(`.
-
 ### Authentication
 
+TODO: It's not clear if anything in this section is actually needed.
 Many actions require authenticating against your App Store Connect account.
 To configure this:
 
@@ -290,7 +174,8 @@ api_key = lane_context[SharedValues::APP_STORE_CONNECT_API_KEY]
 
 ### Appfile
 
-This is a Ruby source file that defines values used in `Fastfile`.
+This is a Ruby source file found in the `fastlane` directory
+that defines values used in the `Fastfile` file.
 It can contain code like the following:
 
 ```ruby
@@ -301,100 +186,39 @@ itc_team_id "{app-store-connect-team-id}" # 9-digit number
 team_id "{developer-portal-team-id}" # 10 characters
 ```
 
-For more information about the Appfile, see the fastline docs on
+For more information about the file `Appfile`, see the fastlane docs on
 {% aTargetBlank "https://docs.fastlane.tools/advanced/#appfile", "Appfile" %}.
 
-### Fastfile
-
-By default `Fastfile` contains code written in the Ruby programming language.
-There is a option to use code written in the Swift programming language,
-but that executes more slowly because it still interacts with Ruby.
-
-1. Edit the file `fastlane/Fastfile`.
-
-1. Change the the contents to the following:
-
-   ```ruby
-   default_platform(:ios)
-
-   platform :ios do
-     lane :certs do
-       cert(development: true)
-       sigh(development: true)
-     end
-
-     desc "Generate localized screenshots"
-     lane :screenshots do
-       capture_screenshots(scheme: "ScreenshotTests") # main change
-       # The "update" step is optional.
-       # upload_to_app_store(skip_binary_upload: true, skip_metadata: true)
-     end
-   end
-   ```
-
-1. Follow the steps in the instructions that are printed which guide you to:
-
-   - Open the project in Xcode.
-   - Create a new UI Test target named "ScreenshotTests" that is specifically
-     for creating screenshots as described in my XCTest blog page.
-     This should be separate from the target that runs the real UI tests.
-   - Delete the file `ScreenshotTests/ScreenshotTestsLaunchTests.swift`.
-     This isn't needed for capturing screenshots.
-   - Move the `fastlane/SnapshotHelper.swift` into the new target directory.
-   - Edit the file `ScreenshotTests/ScreenshotTests.swift`.
-   - In the `setupWithError` method, add the following:
-     ```swift
-     let app = XCUIApplication()
-     setupSnapshot(app)
-     app.launch()
-     ```
-   - Rename the test method `testExample` to `testScreenshots`.
-   - Replace the code in this method with code that
-     visits each screen in the app.
-   - After the code that visiting each screen,
-     call `snapshot("{screenshot-file-name}")`.
-     The actual file name will begin with the device name (ex. "iPhone 14-")
-     and end with ".png".
-     This works in simulators, but does nothing when running on a real device.
-   - Delete the method definition for `testLaunchPerformance`.
-
-1. Click the "Close" button.
-
-A lane can be specific to a given platform (ex. ios or mac)
-or it can be platform independent.
-
-To list the lanes implemented for a given project, enter `fastlane lanes`.
-
-The `fastlane` command can be passed the name of an action or a lane to run.
-To execute a lane, enter `bundle exec fastlane {platform} {action-or-lane}`.
-For example, `bundle exec fastlane ios screenshots`.
-
 ### Snapfile
+
+This is a Ruby source file found in the `fastlane` directory
+that defines the supported device types and languages.
+It is used to determine the variations of screenshots that should be created.
 
 1. Edit the `fastlane/Snapfile` file.
 
 1. Uncomment lines so it indicates the devices and languages
    to use for creating screenshots. For example:
 
-   ```ruby
-   devices([
-     "iPhone 8 Plus",
-     "iPhone 13 Pro Max",
-     "iPad Pro (12.9-inch) (2nd generation)",
-     "iPad Pro (12.9-inch) (6th generation)"
-   ])
+```ruby
+devices([
+  "iPhone 8 Plus",
+  "iPhone 13 Pro Max",
+  "iPad Pro (12.9-inch) (2nd generation)",
+  "iPad Pro (12.9-inch) (6th generation)"
+])
 
-   languages([
-     # These are five most used languages in the world
-     # in order from most to least used
-     # including the region in which they are most used.
-     "en-US", # English - USA
-     "zh-CN", # Chinese Simplified - China
-     "hi-IN", # Hindi - India
-     "es-ES", # Spanish - Spain
-     "fr-FR" # French - France
-   ])
-   ```
+languages([
+  # These are five most used languages in the world
+  # in order from most to least used
+  # including the region in which they are most used.
+  "en-US", # English - USA
+  "zh-CN", # Chinese Simplified - China
+  "hi-IN", # Hindi - India
+  "es-ES", # Spanish - Spain
+  "fr-FR" # French - France
+])
+```
 
 1. Uncomment the line that calls the `scheme` function
    and change it to `scheme("ScreenshotTests")`.
@@ -404,164 +228,375 @@ For example, `bundle exec fastlane ios screenshots`.
 
 1. Uncomment the line `clear_previous_screenshots(true)`.
    This deletes all the `.png` files in the `fastlane/screenshots` directory.
-   Maybe this isn't always desirable!
+   Perhaps this isn't always desirable!
 
-1. Uncomment the line `override_status_bar(true)`.
+1. Uncomment the line `override_status_bar(true)` to set the status bar to
+   Tuesday January 9th at 9:41AM with full battery and reception.
 
 1. Add the line `headless(false)`.
    Tests that need to wait for elements to appear seem to fail without this.
 
-### Configuring Screenshot Generation
+## Registering an App
 
-1. Click the scheme dropdown at the top and select "New Scheme...".
-1. Enter "ScreenshotTests" for the name
-1. Click the "OK" button.
-1. Click the scheme dropdown at the top again and select "Edit Scheme...".
-1. In the dialog that appears, verify that
-   the "Shared" checkbox at the bottom is checked.
-1. Select "Test" in the left nav.
-1. Click "+" at the bottom and add the "ScreenshotTests" target.
-1. In the dialog that appears, select the "ScreenshotTests" target
-   and click the "Add" button.
+To register the app to be managed on the Apple Developer Portal
+and App Store Connect use the fastlane action {% aTargetBlank
+"https://docs.fastlane.tools/actions/produce/", "produce" %}
+which is an alias for `create_app_online`.
 
-For more information, see {% aTargetBlank
-"https://docs.fastlane.tools/getting-started/ios/screenshots/",
-"fastlane screenshots" %}.
+I prefer to do this manually since it is only needed once per app.
 
-## Generating Screenshots
+## Running Tests
+
+To run all the automated unit and UI tests in the project,
+use the fastlane tool {% aTargetBlank
+"https://docs.fastlane.tools/actions/scan/", "scan" %}
+which is an alias for `run_tests`.
+The tests run in a Simulator or on a connected device.
+They run much faster in Xcode than they do from fastlane.
+
+Modify the file `fastlane/Fastfile` to contain the following:
+
+```ruby
+platform :ios do
+  desc "Run tests"
+  lane :tests do
+    run_tests(scheme: "{scheme-name}")
+  end
+end
+```
+
+From the project root directory enter `fastlane tests`.
+
+## Creating a Signing Certificate
+
+To create a signing certificate, use the fastlane action {% aTargetBlank
+"https://docs.fastlane.tools/actions/cert/", "cert" %}
+which is an alias for `get_certificates`.
+This determines if a new signing certificate is needed. If so it:
+
+- creates a new private key
+- creates a new signing request
+- generates, downloads, and installs the certificate
+- imports all the generated files into the Keychain app
+
+This can be combined with the next step.
+
+## Creating a Provisioning Profile
+
+To create a provisioning profile, use the fastlane action {% aTargetBlank
+"https://docs.fastlane.tools/actions/sigh/", "sigh" %}
+which is an alias for `get_provisioning_profile`.
+This can create, renew, download, and repair provisioning profiles.
+
+Add the following lane in `fastlane/Fastfile`:
+
+```ruby
+desc "Creates a signing certificate and provisioning profile"
+lane :certs do
+  get_certificates(development: true)
+  get_provisioning_profile(development: true)
+end
+```
+
+From the project root directory enter `fastlane certs`.
+
+## Team Development
+
+To configure Fastlane for use by a development team,
+use the fastlane action {% aTargetBlank
+"https://docs.fastlane.tools/actions/match/", "match" %}
+which is an alias for `sync_code_signing`.
+This combines the functionality of `cert` and `sigh`.
+In addition, it stores the certificates and provisioning profiles
+in a separate private git repository (or another supported location)
+so a team of developers can share them.
+
+It is recommended to use `match` in place of `cert` and `sigh`
+when an app is being developed by more than one person.
+
+This is the most complex fastlane action
+and I have not used it yet.
+
+## Building an App Archive
+
+To build an app archive file (.ipa),
+use the fastlane tool {% aTargetBlank
+"https://docs.fastlane.tools/actions/gym/", "gym" %}
+which is an alias for `build_app`.
+This builds and packages an app, creating a signed `.ipa` or `.app` file.
+
+To configure the ability to this fastlane action:
+
+1. Verify project build settings.
+
+   1. Open the project in Xcode.
+   1. Select the top entry in the Project Navigator.
+   1. Select the main target.
+   1. Select the "Build Settings" tab.
+   1. Scroll down to the "Versioning" section.
+   1. Verify that "Versioning System" is set to "Apple Generic" (default).
+
+1. From the project root directory, enter `fastlane gym init`
+   to create the file `fastlane/Gymfile`.
+
+1. Edit the file `fastlane/Gymfile` and replace the contents with the following:
+
+   ```ruby
+   scheme("{scheme-name}")
+   export_options({method: "app-store"})
+   output_directory("./fastlane/builds")
+   ```
+
+1. Add the following lane in `fastlane/Fastfile`:
+
+   ```ruby
+   lane :build do
+     build_app
+   end
+   ```
+
+1. Update the project version with the following steps:
+
+   1. In Xcode, select the top entry in the Project Navigator.
+   1. Select the main target.
+   1. Select the General tab.
+   1. In the "Identity" section, update the "Version" and "Build" numbers.
+      The version number should be a semantic version like 1.2.3.
+      The build number should be a sequential integer number like 7.
+
+1. From the project root directory, enter `fastlane build`.
+
+   This creates the files `{scheme-name}.app.dSYM.zip` and `{scheme-name}.ipa`
+   in the `fastlane/builds` directory.
+
+## Registering Beta Testers
+
+To register beta testers in TestFlight:
+
+1. Browse {% aTargetBlank "https://appstoreconnect.apple.com",
+   "App Store Connect" %}.
+1. Click the "My Apps" button.
+1. Click the button for the app to be tested.
+1. Click the "TestFlight" tab.
+1. Create a group of testers by clicking the "+" button
+   after either "Internal Testers" or "External Testers".
+1. Enter a group name.
+1. For each tester to be added, click the "+" after "Testers"
+   and enter their email address and name.
+
+## Deploying TestFlight.
+
+To deploy the app to TestFlight,
+use the fastlane tool {% aTargetBlank
+"https://docs.fastlane.tools/actions/pilot/", "pilot" %}
+which is an alias for `upload_to_testflight`.
+This can upload a build to TestFlight, add or remove testers,
+get information about testers and devices,
+and import or export data describing all the testers.
+
+This requires an app-specific password. To get one:
+
+1. Browse {% aTargetBlank "https://appleid.apple.com/account/manage",
+   "appleid.apple.com" %}.
+1. Click the "Sign In" button and sign in.
+1. Click "App-Specific Passwords".
+1. Click the "Generate an app-specific password" button.
+1. Enter the app name.
+1. Click the "Create" button.
+1. Confirm your Apple ID password.
+1. Copy the generated password so it can be passed in the file described next.
+
+Create the file `fastlane/.env.default` with the following contents:
+
+```bash
+FASTLANE_USER={apple-id}
+FASTLANE_PASSWORD={apple-password}
+FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD={app-specific-password}
+```
+
+Add the following lane in `fastlane/Fastfile`:
+
+```ruby
+lane :beta do
+  # I prefer to update the Version and Build numbers manually in Xcode.
+  # increment_build_number
+  # increment_version_number(bump_type: "patch")
+  upload_to_testflight(
+    ipa: './fastlane/builds/WeatherKitDemo.ipa',
+    # I prefer to submit manually on the App Store Connect web page
+    # so I can enter a description of what changed in this version.
+    skip_submission: true
+  )
+end
+```
+
+From the project root directory, enter `fastlane beta`.
+This waits for processing to complete which takes around four minutes.
+
+## Creating Screenshots
+
+To create localized screenshots for each screen in the app,
+use the fastlane tool {% aTargetBlank
+"https://docs.fastlane.tools/actions/snapshot/", "snapshot" %}
+which is an alias for `capture_ios_screenshots`.
+This automates generating screenshots for each screen navigated to in a UI Test.
+It repeats this for each supported device size and language.
+
+The following steps assume that "Automate screenshots" was selected
+when the `fastlane init` command was run.
+
+1. Add the `fastlane` directory and the files `Gemfile` and `Gemfile.lock`
+   to the Xcode project.
+
+   1. Select File ... Add Files to "{project-name}"...
+   1. Select the `fastlane` directory.
+   1. Click the "Add" button.
+
+1. Add the `fastlane` directory and the files `Gemfile` and `Gemfile.lock`
+   to the git repository.
+
+1. Create a new target.
+
+   1. Select the topmost entry in the Project Navigator.
+   1. Click the "+" button at the bottom of the left nav to create another target
+      that is separate from the main unit and UI test targets.
+   1. Enter "test" to filter the set of templates displayed.
+   1. Select "UI Testing Bundle".
+   1. Click the "Next" button.
+   1. Change the "Product Name" to "ScreenshotTests".
+   1. Click the "Finish" button.
+
+      This creates a new folder that appears in the Project Navigator
+      whose name is "ScreenshotTests".
+      The new folder contains a `.swift` file with the same name
+      containing starter test code.
+
+1. Delete the file `ScreenshotTests/ScreenshotTestsLaunchTests.swift`.
+   This isn't needed for capturing screenshots.
+
+1. Create a new scheme.
+
+   1. Click the scheme dropdown at the top and select "New Scheme...".
+   1. Enter "ScreenshotTests" for the name.
+   1. Click the "OK" button.
+   1. Click the scheme dropdown at the top again and select "Edit Scheme...".
+   1. In the dialog that appears, verify that
+      the "Shared" checkbox at the bottom is checked.
+   1. Select "Test" in the left nav.
+   1. Click "+" at the bottom.
+   1. In the dialog that appears, select the "ScreenshotTests" target
+      and click the "Add" button.
+   1. Click the "Close" button.
+
+1. Implement the UI test.
+
+   1. Move the `fastlane/SnapshotHelper.swift` into the new target directory.
+   1. Edit the file `ScreenshotTests/ScreenshotTests.swift`.
+   1. In the `setupWithError` method, add the following:
+
+      ```swift
+      let app = XCUIApplication()
+      setupSnapshot(app)
+      app.launch()
+      ```
+
+   1. Delete the method definition for `testLaunchPerformance`.
+   1. Rename the test method `testExample` to `testScreenshots`.
+   1. Replace the code in this method with code that
+      visits each screen in the app.
+   1. After the code that visiting each screen,
+      call `snapshot("{sequence-number}-{screen-name}")`.
+      The sequence numbers keep the screenshots in the intended order.
+      The actual file name will begin with the device name (ex. "iPhone 14-")
+      and end with ".png".
+      Screenshots will only be captured when running in a simulator.
+      The `snapshot` function does nothing when running on a real device.
+
+1. Add or modify the following lane in `fastlane/Fastfile`:
+
+```ruby
+desc "Generates localized screenshots"
+lane :screenshots do
+  capture_ios_screenshots(scheme: "{screenshot-scheme-name}")
+end
+```
 
 1. Verify that all the Simulators to be used are in the expected
    light/dark mode. Many seem to default to dark mode.
-   - Open Xcode.
-   - Select Xcode ... Open Developer Tool ... Simulator.
-   - For each device
-     - In the Simulator app, select
-       File ... Open Simulator ... iOS {version} ... {device-type}.
-     - In the device simulator
-       - Open the Settings app.
-       - Select "Developer".
-       - Toggle "Dark Appearance" to the desired setting.
-1. From the `fastlane` subdirectory enter `bundle exec fastlane screenshots`.
-   This generates a lot of output and takes several minutes to complete.
-1. The produced screenshot `.png` files will be
-   in `fastlane/screenshots` directory.
+
+   1. Open Xcode.
+   1. Select Xcode ... Open Developer Tool ... Simulator.
+   1. For each device
+      - In the Simulator app, select
+        File ... Open Simulator ... iOS {version} ... {device-type}.
+      - In the device simulator
+        - Open the Settings app.
+        - Select "Developer".
+        - Toggle "Dark Appearance" to the desired setting.
+
+1. From the project root directory, enter `fastlane screenshots`.
+   This generates `.png` files in the `fastlane/screenshots` directory.
+
 1. An HTML file that displays all the screenshots
    will open in your default web browser.
-   To skip this, add the following in `fastlane/Snapfile`:
+   To skip this, add the following to the `screenshots` lane definition:
 
    ```ruby
    skip_open_summary(true)
    ```
 
-## Running Tests
+For more information, see {% aTargetBlank
+"https://docs.fastlane.tools/getting-started/ios/screenshots/",
+"fastlane screenshots" %}.
 
-Tests run much faster in Xcode than they do from fastlane.
+## Adding Device Frames to Screenshots
 
-To run both unit tests and UI tests from fastlane:
+To add device frames around screenshots,
+use the fastlane tool "frameit" {% aTargetBlank
+"https://docs.fastlane.tools/actions/frameit/", "frameit" %}
+which is an alias for `frame_screenshots`.
 
-1. Modify the file `fastlane/Fastfile` to contain the following:
+Before running this, enter `brew install imagemagick`.
 
-   ```ruby
-   platform :ios do
-     desc "Run tests"
-     lane :tests do
-       run_tests(scheme: "{main-scheme-name}")
-     end
-   end
-   ```
+This action creates new `.png` files below the `fastlane/screenshots` directory
+that have `_framed` appended to their names.
+The framed screenshots are beautiful, but they are all larger than
+the originals and are incompatible with the sizes the App Store accepts.
+See this {% aTargetBlank
+"https://github.com/fastlane/fastlane/issues/21067", "issue" %}.
 
-1. From the `fastlane` subdirectory enter `bundle exec fastlane tests`.
+## Uploading to App Store
 
-TODO: Can you skip editing `Fastfile` and run the tests with `fastlane scan`?
+To upload the app to the App Store,
+use the fastlane tool {% aTargetBlank
+"https://docs.fastlane.tools/actions/deliver/", "deliver" %}
+which is an alias for `upload_to_app_store`.
+This can upload screenshots, metadata, and binaries to App Store Connect.
+It can also update the app version number and submit the app for review.
 
-## Code Signing
+There are many parameters whose names begin with `skip_`
+that control what the action does.
+TODO: Will it upload framed screenshots and not the unframed versions?
 
-These steps will generate and install all required
-keys, certificates, and provisioning profiles.
+I have not used this yet and may prefer to do it manually
+since releasing new versions to the App Store
+is done less frequently than releasing new versions to TestFlight.
 
-1. From the project root directory, enter `fastlane match init`
-1. For the storage mode, select "1. git".
-1. Paste the URL of the project GitHub repository.
-1. Enter `fastlane match development`
-1. Enter a passphrase that you must remember.
-1. Enter the password for accessing your login keychain.
-1. Enter `fastlane match appstore`
-1. Browse {% aTargetBlank "https://developer.apple.com/account", "developer.apple.com" %}.
-1. Click "Account" and login.
-1. Under "Certificates, Identifiers & Profiles" click "Profiles".
-1. Verify that the list contains a profile whose name begins with
-   "match Development" and another that begins with "match "AppStore".
-1. In order to allow fastlane to manage code signing
-   you must disable automatic code signing in the Xcode project.
-   1. Open the project in Xcode.
-   1. Select the top entry in the Project Navigator.
-   1. Select the main target.
-   1. Select the "Signing & Capabilities" tab.
-   1. Uncheck the checkbox for "Automatically manage signing".
-   1. Change the value in the "Provisioning Profile" dropdown
-      to the one that begins with "match AppStore".
-1. Edit `fastlane/Fastfile`.
-1. Add the following lane definition to synchronize certificates:
+## Other Actions
 
-   ```ruby
-   desc "Sync certificates"
-   lane :sync_certificates do
-     # read-only disables overriding existing certificates.
-     match({readonly: true, type: "appstore"})
-   end
-   ```
+Also consider using these actions:
 
-## Building
+- The {% aTargetBlank "https://docs.fastlane.tools/actions/slather/", "slather" %}
+  action generates a code coverage report.
+- The {% aTargetBlank "https://docs.fastlane.tools/actions/swiftlint/", "swiftlint" %}
+  action performs code validation using SwiftLint.
 
-These steps will enable Fastline to build the app.
+### Listing Lanes
 
-1. From the project root directory, enter `fastlane gym init`
-   to create the file `fastlane/Gymfile`.
-1. Edit the file `fastlane/Gymfile`.
-1. Replace the contents of the file with the following:
+To list the lanes implemented for a given project, enter `fastlane lanes`.
 
-   ```ruby
-   scheme("{main-scheme-name}")
+### Ruby vs. Swift
 
-   # Provide provisioning profiles to use.
-   export_options({
-     method: "app-store",
-     provisioningProfiles: {
-       "{bundle-identifier}" => "match AppStore {bundle-identifier}",
-     }
-   })
-
-   # Specify the path to store .ipa file.
-   output_directory("./fastlane/builds")
-
-   include_bitcode(false)
-   include_symbols(false)
-   ```
-
-1. Open the project in Xcode.
-1. Select the top entry in the Project Navigator.
-1. Select the main target.
-1. Select the "Build Settings" tab.
-1. Scroll down to the "Versioning" section.
-1. Verify that "Versioning System" is set to "Apple Generic" (default).
-1. Edit `fastlane/Fastfile`.
-1. Add the following lane definition to synchronize certificates:
-
-   ```ruby
-   desc "Create ipa"
-   lane :build do
-     sync_profiles
-     increment_build_number
-     gym # creates a signed file
-   end
-   ```
-
-1. From the project root directory, enter `bundle exec fastlane build`.
-
-## Deploying to TestFlight
-
-TODO: Finish this.
-
-## Deploying to the App Store
-
-TODO: Finish this.
+By default `Fastfile` contains code written in the Ruby programming language.
+There is a option to use code written in the Swift programming language,
+but that executes more slowly because it still interacts with Ruby.
