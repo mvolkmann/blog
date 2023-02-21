@@ -116,16 +116,28 @@ This page focuses on usage for iOS apps.
     navigated to in a UI Test.
     It repeats this for each supported device size and language.
 
-  - To copy screenshots to the App Store, see the fastlane tool
-    {% aTargetBlank "https://docs.fastlane.tools/actions/deliver/", "deliver" %}
-    is an alias for `upload_to_app_store`.
-    It uploads screenshots, metadata, and binaries to App Store Connect.
-    It can also submit an app for review.
-
   - To add device frames around screenshots, see the fastlane tool "frameit"
     {% aTargetBlank "https://docs.fastlane.tools/actions/frameit/", "frameit" %}
     is an alias for `frame_screenshots`.
     It adds a device frame around screenshots.
+    Before running this, enter `brew install imagemagick`.
+    It creates new `.png` files below the `fastlane/screenshots` directory
+    that have `_framed` appended to their names.
+    The framed screenshots are beautiful, but they are all larger than
+    the originals and are incompatible with the sizes the App Store accepts.
+    See this {% aTargetBlank
+    "https://github.com/fastlane/fastlane/issues/21067", "issue" %}.
+
+- Upload to the App Store.
+
+  - The fastlane tool
+    {% aTargetBlank "https://docs.fastlane.tools/actions/deliver/", "deliver" %}
+    is an alias for `upload_to_app_store`.
+    It can upload screenshots, metadata, and binaries to App Store Connect.
+    It can also update the app version number and submit the app for review.
+    There are many parameters whose names begin with `skip_`
+    that control what it does.
+    TODO: Will it upload framed screenshots and not the unframed versions?
 
 - Submit the tested app to the App Store.
   The {% aTargetBlank "https://docs.fastlane.tools/actions/deliver/", "deliver" %}
