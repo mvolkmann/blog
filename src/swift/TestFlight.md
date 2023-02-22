@@ -32,14 +32,14 @@ by completing the form at {% aTargetBlank
 
 1. Browse {% aTargetBlank "https://developer.apple.com",
    "developer.apple.com" %} and sign in.
-1. In the top nav bar, click "Account".
+1. In the top nav bar, click "Account" and sign in.
 1. In the "Certificates, Identifiers & Profiles" section, click "Identifiers".
 1. To create a new identifier, click the "+" after "Identifiers".
-1. Select "App IDs".
+1. Select "App IDs" radio button.
 1. Click the "Continue" button.
 1. Click the "App" button.
 1. Click the "Continue" button.
-1. Enter an app description.
+1. Enter an app name in the "Description" input.
 1. Open the app in Xcode.
 1. Select the top entry in the Navigator.
 1. Select the first entry under TARGETS.
@@ -56,15 +56,16 @@ by completing the form at {% aTargetBlank
    "appstoreconnect.apple.com" %}.
 1. Click the large "My Apps" button.
 1. Click the "+" button after "Apps".
-1. Select "New App".
-1. Check the platforms the app supports such as "iOS".
-1. Enter a name for the app that is unique across all apps in the app store.
-1. Select a language such as "English (U.S.)".
-1. Select the bundle ID for the app that was created in part 1.
-1. Enter a SKU with no spaces that is unique among your apps.
-1. Choose between limited (restricted set of test users)
-   and full access (any user can access).
-1. Click the "Create" button.
+1. Select "New App" from the dropdown.
+1. In the dialog that appears:
+   1. Select the supported platforms (ex. iOS).
+   1. Enter the app name which must be unique across all apps in the App Store.
+   1. Select the primary language such as "English (U.S.)".
+   1. Select the bundle ID for the app that was created in part 1.
+   1. Enter a SKU with no spaces that is unique among your apps.
+   1. Choose between limited (restricted set of test users)
+      and full access (any user can access; preferred).
+   1. Click the "Create" button.
 1. If a spinner is displayed for a long time, refresh the browser.
 1. The "App Store" tab is selected by default and all the fields
    on this page must be completed to deploy to the app store.

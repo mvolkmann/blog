@@ -255,11 +255,14 @@ languages([
 ## Registering an App
 
 To register the app to be managed on the Apple Developer Portal
-and App Store Connect use the fastlane action {% aTargetBlank
-"https://docs.fastlane.tools/actions/produce/", "produce" %}
-which is an alias for `create_app_online`.
+and App Store Connect, see [TestFlight](/blog/swift/TestFlight).
 
-I prefer to do this manually since it is only needed once per app.
+The fastlane action {% aTargetBlank
+"https://docs.fastlane.tools/actions/produce/", "produce" %}
+which is an alias for `create_app_online`
+can be used to automate this process.
+Since new apps are not created frequently,
+it may be better to do this manually.
 
 ## Lanes
 
