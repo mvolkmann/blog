@@ -28,7 +28,7 @@ by completing the form at {% aTargetBlank
 
 ## Steps
 
-### Part 1 - Creating an Identifier
+### Part 1 - Creating an App Identifier
 
 1. Browse {% aTargetBlank "https://developer.apple.com",
    "developer.apple.com" %} and sign in.

@@ -132,7 +132,15 @@ To avoid these issues, install a new version of Ruby using Homebrew.
    contain the files `Appfile` and `Fastfile`.
    When the option "Automate screenshots" is selected, this directory will
    also contain the files `Snapfile`, and `SnapshotHelper.swift`.
-1. Add the `fastlane` directory to the Xcode project and to the git repository.
+1. Add the `fastlane` directory and the files `Gemfile` and `Gemfile.lock`
+   to the Xcode project.
+
+   1. Select File ... Add Files to "{project-name}"...
+   1. Select the `fastlane` directory.
+   1. Click the "Add" button.
+
+1. Add the `fastlane` directory and the files `Gemfile` and `Gemfile.lock`
+   to the git repository.
 
 ### Authentication
 
@@ -192,7 +200,7 @@ api_key = lane_context[SharedValues::APP_STORE_CONNECT_API_KEY]
 
 This is a Ruby source file found in the `fastlane` directory
 that defines values used in the `Fastfile` file.
-It can contain code like the following:
+It should contain the following:
 
 ```ruby
 app_identifier "{app-bundle-identifier}"
@@ -520,16 +528,6 @@ It repeats this for each supported device size and language.
 
 The following steps assume that "Automate screenshots" was selected
 when the `fastlane init` command was run.
-
-1. Add the `fastlane` directory and the files `Gemfile` and `Gemfile.lock`
-   to the Xcode project.
-
-   1. Select File ... Add Files to "{project-name}"...
-   1. Select the `fastlane` directory.
-   1. Click the "Add" button.
-
-1. Add the `fastlane` directory and the files `Gemfile` and `Gemfile.lock`
-   to the git repository.
 
 1. Create a new target.
 
