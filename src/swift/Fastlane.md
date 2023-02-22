@@ -664,6 +664,8 @@ when the `fastlane init` command was run.
 
 1. From the project root directory, enter `fastlane screenshots`.
    This generates `.png` files in the `fastlane/screenshots` directory.
+   Warning messages that say "deviceType from ...
+   was NULL when -platform called" can be ignored.
 
 1. An HTML file that displays all the screenshots
    will open in your default web browser.
@@ -692,6 +694,17 @@ The framed screenshots are beautiful, but they are all larger than
 the originals and are incompatible with the sizes the App Store accepts.
 See this {% aTargetBlank
 "https://github.com/fastlane/fastlane/issues/21067", "issue" %}.
+
+Modify the file `fastlane/Fastfile` to contain the following:
+
+```ruby
+desc "Creates new screenshots from existing ones that have device frames"
+lane :frames do
+  frame_screenshots
+end
+```
+
+From the project root directory enter `fastlane frames`.
 
 ## Uploading to App Store
 
