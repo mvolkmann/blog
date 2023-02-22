@@ -14,28 +14,18 @@ These include running tests, generating screenshots,
 deploying iOS apps to TestFlight,
 deploying iOS apps to the App Store, and more.
 
+Management of the Fastlane project may be moving from Google to the
+{% aTargetBlank "https://mobilenativefoundation.org",
+"Mobile Native Foundation" %} soon.
+This is seen as a positive move since Google has not
+devoted time to Fastlane development lately.
+
 This page focuses on usage for iOS apps.
 
 Some tasks require interacting with the {% aTargetBlank
 "https://developer.apple.com/", "Apple Developer Portal" %} and
 {% aTargetBlank "https://appstoreconnect.apple.com/", "App Store Connect" %}.
 Fastlane provides a way to do this from the command line.
-
-The file `Fastfile` defines "lanes" which are sequences of actions
-that automate a specific task.
-Lanes can be run from the command line or by CI/CD servers.
-A lane can be specific to a given platform (ex. ios or mac)
-or it can be platform independent.
-
-The `fastlane` command can be passed the name of an action or a lane to run.
-The syntax to enter is `fastlane {platform} {action-or-lane}`.
-For example, `fastlane ios screenshots`.
-
-If a default platform is specified in the `Fastfile`
-using `default_platform :ios` then lanes for that platform
-can be executed without providing the platform.
-For example if `ios` is the default platform then the previous command
-can be executed with `fastlane screenshots`.
 
 Fastlane is primarily implemented in Ruby.
 
@@ -84,23 +74,36 @@ and a bundle ID. They are cryptographically signed.
 
 ### Ruby
 
+Ruby must be installed in order to use Fastlane.
 There are often issues with using the version of Ruby that comes with macOS.
-To avoid these issues, install a new version of Ruby using Homebrew:
+To avoid these issues, install a new version of Ruby using Homebrew.
 
 1. Enter `brew install ruby`.
-1. Modify your shell configuration file (such as `.zshrc`)
-   to add `/opt/homebrew/opt/ruby/bin` to
-   the beginning of the `PATH` environment variable value.
+1. Modify your shell configuration file.
+
+   Add `/opt/homebrew/opt/ruby/bin` to the beginning of
+   the `PATH` environment variable value.
+   When using zsh, the file to edit is `.zshrc` and
+   the line to add is:
+
+   ```bash
+   path=("/opt/homebrew/opt/ruby/bin" $path)
+   ```
+
 1. Start a new shell session.
-1. Verify by entering `which ruby`.
+1. Enter `which ruby` and verify that it outputs
+   `/opt/homebrew/opt/ruby/bin/ruby`.
 1. Enter `gem install bundler`.
 
 ### Fastlane
 
 1. Install fastlane by entering `brew install fastlane`.
 1. If git is not already installed, enter `brew install git`.
-1. If the Xcode Command Line Tools are not already installed,
-   enter `xcode-select -install`.
+1. If the Xcode Command Line Tools are not already installed:
+   1. Enter `xcode-select --install`.
+   1. In the dialog that appears, click the "Install" button.
+   1. Agree to the terms.
+   1. Wait about 10 minutes for the download and install to complete.
 
 ## Configuring
 
@@ -114,6 +117,8 @@ To avoid these issues, install a new version of Ruby using Homebrew:
 
 1. Open a Terminal window and cd to the project root directory.
 1. Enter `fastlane init`.
+1. This will pause several times after outputting tips.
+   After each tip, press the return key to continue.
 1. Select one of the following options:
    - Automate screenshots (recommended)
    - Automate beta distribution to TestFlight
@@ -255,6 +260,24 @@ which is an alias for `create_app_online`.
 
 I prefer to do this manually since it is only needed once per app.
 
+## Lanes
+
+The file `Fastfile` defines "lanes" which are sequences of actions
+that automate a specific task.
+Lanes can be run from the command line or by CI/CD servers.
+A lane can be specific to a given platform (ex. ios or mac)
+or it can be platform independent.
+
+The `fastlane` command can be passed the name of an action or a lane to run.
+The syntax to enter is `fastlane {platform} {action-or-lane}`.
+For example, `fastlane ios screenshots`.
+
+If a default platform is specified in the `Fastfile`
+using `default_platform :ios` then lanes for that platform
+can be executed without providing the platform.
+For example if `ios` is the default platform then the previous command
+can be executed with `fastlane screenshots`.
+
 ## Running Tests
 
 To run all the automated unit and UI tests in the project,
@@ -289,7 +312,17 @@ This determines if a new signing certificate is needed. If so it:
 - generates, downloads, and installs the certificate
 - imports all the generated files into the Keychain app
 
+The types of certificates can be created include
+`development`, `adhoc`, and `appstore`.
+
+A `.cer` file file is created in the project root directory.
+
 This can be combined with the next step.
+
+To see all your certificates, browse {% aTargetBlank
+"https://developer.apple.com", "developer.apple.com" %},
+click "Account", sign in, and click "Certificates" under the
+"Certificates, Identifiers & Profiles" section.
 
 ## Creating a Provisioning Profile
 
@@ -309,6 +342,8 @@ end
 ```
 
 From the project root directory enter `fastlane certs`.
+
+A `.mobileprovision` file is created in the project root directory.
 
 ## Team Development
 
@@ -335,7 +370,7 @@ use the fastlane tool {% aTargetBlank
 which is an alias for `build_app`.
 This builds and packages an app, creating a signed `.ipa` or `.app` file.
 
-To configure the ability to this fastlane action:
+To configure the ability to use this fastlane action:
 
 1. Verify project build settings.
 
@@ -345,6 +380,16 @@ To configure the ability to this fastlane action:
    1. Select the "Build Settings" tab.
    1. Scroll down to the "Versioning" section.
    1. Verify that "Versioning System" is set to "Apple Generic" (default).
+
+1. Verify that the scheme to be used is "shared".
+
+   1. Open the project in Xcode.
+   1. Select the main scheme from the dropdown
+      to the left of the device dropdown at the top.
+   1. Click the scheme dropdown again.
+   1. Select "Edit Scheme...".
+   1. In the dialog that appears,
+      verify that "Shared" checkbox at the bottom is checked.
 
 1. From the project root directory, enter `fastlane gym init`
    to create the file `fastlane/Gymfile`.
@@ -464,6 +509,7 @@ fastlane/.env.default
 To create localized screenshots for each screen in the app,
 use the fastlane tool {% aTargetBlank
 "https://docs.fastlane.tools/actions/snapshot/", "snapshot" %}
+which is an alias for `capture_screenshots`
 which is an alias for `capture_ios_screenshots`.
 This automates generating screenshots for each screen navigated to in a UI Test.
 It repeats this for each supported device size and language.
@@ -543,7 +589,7 @@ when the `fastlane init` command was run.
 ```ruby
 desc "Generates localized screenshots"
 lane :screenshots do
-  capture_ios_screenshots(scheme: "{screenshot-scheme-name}")
+  capture_screenshots(scheme: "{screenshot-scheme-name}")
 end
 ```
 
@@ -610,10 +656,33 @@ is done less frequently than releasing new versions to TestFlight.
 
 ## Other Actions
 
-Also consider using these actions:
+All the actions supported by fastlane are listed at {% aTargetBlank
+"https://docs.fastlane.tools/actions/", "fastlane actions" %}.
+There are many more than were described above!
+
+In addition to the actions already described, consider using these:
+
+- The {% aTargetBlank "https://docs.fastlane.tools/actions/notification/",
+  "notification" %} displays a macOS notification.
+  The first time this is used, the System Settings app will open.
+  To enable "terminal-notifier" to display notifications,
+  toggle "Allow Notifications" to on and select "Alerts".
+  I haven't been able to get this to work yet.
+
+- The {% aTargetBlank "https://docs.fastlane.tools/actions/puts/", "puts" %}
+  prints given text to stdout.
+  `echo` is an alias for this.
+
+- The {% aTargetBlank "https://docs.fastlane.tools/actions/say/", "say" %}
+  action speaks given text.
+  It is useful for announcing when a lane completes.
+
+- The {% aTargetBlank "https://docs.fastlane.tools/actions/sh/", "sh" %}
+  to execute a shell command.
 
 - The {% aTargetBlank "https://docs.fastlane.tools/actions/slather/", "slather" %}
   action generates a code coverage report.
+
 - The {% aTargetBlank "https://docs.fastlane.tools/actions/swiftlint/", "swiftlint" %}
   action performs code validation using SwiftLint.
 
@@ -658,7 +727,7 @@ platform :ios do
 
   desc "Generates localized screenshots"
   lane :screenshots do
-    capture_ios_screenshots(scheme: "ScreenshotTests")
+    capture_screenshots(scheme: "ScreenshotTests")
   end
 
   desc "Creates new screenshots from existing ones that have device frames"
