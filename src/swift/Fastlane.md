@@ -152,19 +152,13 @@ It should contain the following:
 app_identifier "{app-bundle-identifier}"
 apple_id "{my-apple-id}"
 
-itc_team_id "{app-store-connect-team-id}" # 9-digit number
+# The steps below describe how to obtain this value.
 team_id "{developer-portal-team-id}" # 10 characters
+
+# The steps below describe how to obtain this value.
+# Omit this line until the value is known.
+itc_team_id "{app-store-connect-team-id}" # 9-digit number
 ```
-
-To get the AppStoreConnect Team ID:
-
-1. Browse {% aTargetBlank "https://appstoreconnect.apple.com/",
-   "appstoreconnect.apple.com" %}.
-1. Click "Account" and sign in.
-1. Browse the {% aTargetBlank
-   "https://appstoreconnect.apple.com/WebObjects/iTunesConnect.woa/ra/user/detail",
-   "detail page" %} to see a bunch of JSON data.
-1. Copy the "contentProviderId" value near the end of the JSON.
 
 To get the Developer Portal Team ID:
 
@@ -173,6 +167,16 @@ To get the Developer Portal Team ID:
 1. Click "Account" and sign in.
 1. Scroll down to the "Membership Details" section.
 1. Copy the "Team ID" value.
+1. Paste it as the value for `team_id` in `fastlane/Appfile`.
+
+To get the AppStoreConnect Team ID:
+
+1. cd to the project root directory.
+1. Enter `fastfile produce`.
+1. You will be prompted to select a team.
+   Each team name will be followed by the ITC team id in parentheses.
+   Copy the desired ITC team id value.
+1. Paste it as the value for `itc_team_id` in `fastlane/Appfile`.
 
 For more information about the file `Appfile`, see the fastlane docs on
 {% aTargetBlank "https://docs.fastlane.tools/advanced/#appfile", "Appfile" %}.
