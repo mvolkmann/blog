@@ -321,12 +321,15 @@ because they contain data that changes frequently
 and just doesn't need to be persisted.
 
 ```text
-fastlane/report.xml
+fastlane/AuthKey_*.p8
+fastlane/builds
 fastlane/Preview.html
+fastlane/report.xml
 fastlane/screenshots/**/*.png
 fastlane/test_output
-fastlane/AuthKey_*.p8
 fastlane/.env.default
+*.cer
+*.mobileprovision
 ```
 
 ## Running Tests
@@ -370,6 +373,7 @@ The types of certificates can be created include
 `development`, `adhoc`, and `appstore`.
 
 A `.cer` file file is created in the project root directory.
+This file should be excluded from Git by adding it in `.gitignore`.
 
 This can be combined with the next step.
 
@@ -398,6 +402,7 @@ end
 From the project root directory enter `fastlane certs`.
 
 A `.mobileprovision` file is created in the project root directory.
+This file should be excluded from Git by adding it in `.gitignore`.
 
 ## Team Development
 
@@ -423,8 +428,6 @@ use the fastlane tool {% aTargetBlank
 "https://docs.fastlane.tools/actions/gym/", "gym" %}
 which is an alias for `build_app`.
 This builds and packages an app, creating a signed `.ipa` or `.app` file.
-
-To configure the ability to use this fastlane action:
 
 1. Verify project build settings.
 
@@ -501,7 +504,7 @@ To register beta testers in TestFlight:
 1. For each tester to be added, click the "+" after "Testers"
    and enter their email address and name.
 
-## Deploying TestFlight.
+## Deploying TestFlight
 
 To deploy the app to TestFlight,
 use the fastlane tool {% aTargetBlank
@@ -511,44 +514,55 @@ This can upload a build to TestFlight, add or remove testers,
 get information about testers and devices,
 and import or export data describing all the testers.
 
-This requires an app-specific password. To get one:
+1. Create an app-specific password.
 
-1. Browse {% aTargetBlank "https://appleid.apple.com/account/manage",
-   "appleid.apple.com" %}.
-1. Click the "Sign In" button and sign in.
-1. Click "App-Specific Passwords".
-1. Click the "Generate an app-specific password" button.
-1. Enter the app name.
-1. Click the "Create" button.
-1. Confirm your Apple ID password.
-1. Copy the generated password so it can be passed in the file described next.
+   1. Browse {% aTargetBlank "https://appleid.apple.com/account/manage",
+      "appleid.apple.com" %}.
+   1. Click the "Sign In" button and sign in.
+   1. Click "App-Specific Passwords".
+   1. If there are no existing app-specific passwords,
+      click the "Generate an app-specific password" button.
+   1. If there are existing app-specific passwords,
+      click the "+" after "Passwords".
+   1. Enter the app name.
+   1. Click the "Create" button.
+   1. Confirm your Apple ID password.
+   1. Copy the generated password so it can be passed in the file described next.
 
-Create the file `fastlane/.env.default` with the following contents:
+1. Create the file `fastlane/.env.default` with the following contents:
 
-```bash
-FASTLANE_USER={apple-id}
-FASTLANE_PASSWORD={apple-password}
-FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD={app-specific-password}
-```
+   ```bash
+   FASTLANE_USER={apple-id}
+   FASTLANE_PASSWORD={apple-password}
+   FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD={app-specific-password}
+   ```
 
-Add the following lane in `fastlane/Fastfile`:
+1. Add the following lane in `fastlane/Fastfile`:
 
-```ruby
-lane :beta do
-  # I prefer to update the Version and Build numbers manually in Xcode.
-  # increment_build_number
-  # increment_version_number(bump_type: "patch")
-  upload_to_testflight(
-    ipa: './fastlane/builds/WeatherKitDemo.ipa',
-    # I prefer to submit manually on the App Store Connect web page
-    # so I can enter a description of what changed in this version.
-    skip_submission: true
-  )
-end
-```
+   ```ruby
+   lane :beta do
+   # I prefer to update the Version and Build numbers manually in Xcode.
+   # increment_build_number
+   # increment_version_number(bump_type: "patch")
+   upload_to_testflight(
+      ipa: './fastlane/builds/{ipa-name}.ipa', # in fastlane/builds
+      # I prefer to submit manually on the App Store Connect web page
+      # so I can enter a description of what changed in this version.
+      skip_submission: true
+   )
+   end
+   ```
 
-From the project root directory, enter `fastlane beta`.
-This waits for processing to complete which takes around four minutes.
+1. From the project root directory, enter `fastlane beta`.
+   This waits for processing to complete which takes around four minutes.
+
+1. If the error message "The bundle version must be higher than
+   the previously uploaded version" appears:
+
+   1. See the steps in the "Building an App Archive" section
+      to update the "Version" and "Build" numbers.
+   1. Enter `fastlane build` to build a new a app archive.
+   1. Enter `fastlane beta` again.
 
 ## Creating Screenshots
 
