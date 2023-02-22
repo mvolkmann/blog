@@ -142,60 +142,6 @@ To avoid these issues, install a new version of Ruby using Homebrew.
 1. Add the `fastlane` directory and the files `Gemfile` and `Gemfile.lock`
    to the git repository.
 
-### Authentication
-
-TODO: It's not clear if anything in this section is actually needed.
-Many actions require authenticating against your App Store Connect account.
-To configure this:
-
-1. Browse {% aTargetBlank "https://appstoreconnect.apple.com",
-   "App Store Connect" %}.
-1. Login
-1. Click the "Users and Access" button.
-1. Select the "Keys" tab.
-1. Click the "Request Access" button.
-1. Check the checkbox to agree to terms.
-1. Click the "Submit" button.
-1. Click the "Generate API Key" button.
-1. Enter a key name such as "fastlane key".
-1. Select an access role such as "App Manager".
-1. Click the "Generate" button.
-1. Click "Download API Key".
-1. Click the "Download" button.
-1. Move the downloaded `.p8` file to the project `fastlane` directory.
-
-To get base64 encoded key content enter `cat {key-name}.p8 | base64`.
-
-In the file `Fastfile` add the following
-before any action that requires authentication:
-
-```ruby
-app_store_connect_api_key(
-  key_id: "{key-id}", # from downloaded key file name
-  issuer_id: "{issuer-id}", # How can this be determined?
-  key_content: "{base64-encoded-key}", # from base64 command above
-  is_key_content_base64: true,
-  in_house: false # indicates whether the team is Enterprise
-)
-```
-
-Alternatively, set the following environment variables
-and just use `app_store_connect_api_key()`:
-
-- key_id: APP_STORE_CONNECT_API_KEY_KEY_ID
-- issuer_id: APP_STORE_CONNECT_API_KEY_ISSUER_ID
-- key_content: APP_STORE_CONNECT_API_KEY_KEY
-- in_house: APP_STORE_CONNECT_API_KEY_IN_HOUSE
-
-Calling `app_store_connect_api_key()` with or without arguments
-sets a shared variable that can be used to get the API key in any lane.
-For example:
-
-```ruby
-api_key = lane_context[SharedValues::APP_STORE_CONNECT_API_KEY]
-# Pass api_key to any action.
-```
-
 ### Appfile
 
 This is a Ruby source file found in the `fastlane` directory
@@ -791,10 +737,68 @@ In addition to the actions already described, consider using these:
 By default `Fastfile` contains code written in the Ruby programming language.
 There is a option to use code written in the Swift programming language,
 but that executes more slowly because it still interacts with Ruby.
+See {% aTargetBlank
+"https://docs.fastlane.tools/getting-started/ios/fastlane-swift/",
+"Getting Started with Fastlane.swift" %}.
+
+### Authentication
+
+The information in this section may only be needed
+when using the `match` action.
+
+1. Browse {% aTargetBlank "https://appstoreconnect.apple.com",
+   "App Store Connect" %}.
+1. Login
+1. Click the "Users and Access" button.
+1. Select the "Keys" tab.
+1. Click the "Request Access" button.
+1. Check the checkbox to agree to terms.
+1. Click the "Submit" button.
+1. Click the "Generate API Key" button.
+1. Enter a key name such as "fastlane key".
+1. Select an access role such as "App Manager".
+1. Click the "Generate" button.
+1. Click "Download API Key".
+1. Click the "Download" button.
+1. Move the downloaded `.p8` file to the project `fastlane` directory.
+
+To get base64 encoded key content enter `cat {key-name}.p8 | base64`.
+
+In the file `Fastfile` add the following
+before any action that requires authentication:
+
+```ruby
+app_store_connect_api_key(
+  key_id: "{key-id}", # from downloaded key file name
+  issuer_id: "{issuer-id}", # How can this be determined?
+  key_content: "{base64-encoded-key}", # from base64 command above
+  is_key_content_base64: true,
+  in_house: false # indicates whether the team is Enterprise
+)
+```
+
+Alternatively, set the following environment variables
+and just use `app_store_connect_api_key()`:
+
+- key_id: APP_STORE_CONNECT_API_KEY_KEY_ID
+- issuer_id: APP_STORE_CONNECT_API_KEY_ISSUER_ID
+- key_content: APP_STORE_CONNECT_API_KEY_KEY
+- in_house: APP_STORE_CONNECT_API_KEY_IN_HOUSE
+
+Calling `app_store_connect_api_key()` with or without arguments
+sets a shared variable that can be used to get the API key in any lane.
+For example:
+
+```ruby
+api_key = lane_context[SharedValues::APP_STORE_CONNECT_API_KEY]
+# Pass api_key to any action.
+```
 
 ## Complete Fastfile
 
 This is the `Fastfile` for my WeatherKitDemo a project.
+
+TODO: Verify this against the version in SwiftUI-GiftTrack!
 
 ```ruby
 default_platform :ios
