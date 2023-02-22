@@ -27,7 +27,6 @@ The steps for doing this are described in the following sections.
 ## Unit Test Configuration
 
 1. Select the topmost entry in the Project Navigator.
-1. Select the main target.
 1. Click the "+" button at the bottom of the left nav to create a new target.
 1. Enter "test" to filter the set of templates displayed.
 1. Select "Unit Testing Bundle".

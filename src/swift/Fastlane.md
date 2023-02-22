@@ -233,12 +233,16 @@ For more information about the file `Appfile`, see the fastlane docs on
 
 ### Snapfile
 
-This is a Ruby source file found in the `fastlane` directory
-that defines the supported device types and languages.
-It is used to determine the variations of screenshots that should be created.
+This file is used to determine the variations of screenshots
+(device types and languages) that should be created.
+It is only needed if screenshots will be generated.
+It is a Ruby source file found in the `fastlane` directory.
+
+1. If the file `fastlane/Snapfile` does not exist,
+   cd to the project root directory and
+   enter `fastlane snapshot init` to create it
 
 1. Edit the `fastlane/Snapfile` file.
-   TODO: If the Manual option was selected, how should this file be created?
 
 1. Uncomment lines so it indicates the devices and languages
    to use for creating screenshots. For example:
@@ -271,7 +275,7 @@ languages([
 
 1. Uncomment the line `clear_previous_screenshots(true)`.
    This deletes all the `.png` files in the `fastlane/screenshots` directory.
-   Perhaps this isn't always desirable!
+   Perhaps this isn't always desirable.
 
 1. Uncomment the line `override_status_bar(true)` to set the status bar to
    Tuesday January 9th at 9:41AM with full battery and reception.
@@ -300,16 +304,35 @@ A lane can be specific to a given platform (ex. ios or mac)
 or it can be platform independent.
 
 The `fastlane` command can be passed the name of an action or a lane to run.
-The syntax to enter is `fastlane {platform} {action-or-lane}`.
+The syntax is `fastlane {platform} {action-or-lane}`.
 For example, `fastlane ios screenshots`.
 
-If a default platform is specified in the `Fastfile`
+If a default platform is specified in `Fastfile`
 using `default_platform :ios` then lanes for that platform
 can be executed without providing the platform.
 For example if `ios` is the default platform then the previous command
 can be executed with `fastlane screenshots`.
 
+## .gitignore
+
+The following Fastlane-related files should be listed in the `.gitignore` file,
+either because they contain sensitive information or
+because they contain data that changes frequently
+and just doesn't need to be persisted.
+
+```text
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+fastlane/AuthKey_*.p8
+fastlane/.env.default
+```
+
 ## Running Tests
+
+For information on creating unit and UI tests for a project,
+see [XCTest](/blog/swift/XCTest).
 
 To run all the automated unit and UI tests in the project,
 use the fastlane tool {% aTargetBlank
@@ -410,7 +433,7 @@ To configure the ability to use this fastlane action:
    1. Select the main target.
    1. Select the "Build Settings" tab.
    1. Scroll down to the "Versioning" section.
-   1. Verify that "Versioning System" is set to "Apple Generic" (default).
+   1. Set "Versioning System" to "Apple Generic".
 
 1. Verify that the scheme to be used is "shared".
 
@@ -421,6 +444,7 @@ To configure the ability to use this fastlane action:
    1. Select "Edit Scheme...".
    1. In the dialog that appears,
       verify that "Shared" checkbox at the bottom is checked.
+      It should be checked by default.
 
 1. From the project root directory, enter `fastlane gym init`
    to create the file `fastlane/Gymfile`.
@@ -447,6 +471,7 @@ To configure the ability to use this fastlane action:
    1. Select the main target.
    1. Select the General tab.
    1. In the "Identity" section, update the "Version" and "Build" numbers.
+
       The version number should be a semantic version like 1.2.3.
       The build number should be a sequential integer number like 7.
 
@@ -454,6 +479,12 @@ To configure the ability to use this fastlane action:
 
    This creates the files `{scheme-name}.app.dSYM.zip` and `{scheme-name}.ipa`
    in the `fastlane/builds` directory.
+
+1. If you get an error message that says
+   "Provisioning profile ... doesn't include signing certificate",
+   launch the "Keychain Access" app, delete all certificates
+   with the name that appears in the error message,
+   and enter `fastlane build` again.
 
 ## Registering Beta Testers
 
@@ -518,22 +549,6 @@ end
 
 From the project root directory, enter `fastlane beta`.
 This waits for processing to complete which takes around four minutes.
-
-## .gitignore
-
-The following Fastlane-related files should be listed in the `.gitignore` file,
-either because they contain sensitive information or
-because they contain data that changes frequently
-and just doesn't need to be persisted.
-
-```text
-fastlane/report.xml
-fastlane/Preview.html
-fastlane/screenshots/**/*.png
-fastlane/test_output
-fastlane/AuthKey_*.p8
-fastlane/.env.default
-```
 
 ## Creating Screenshots
 
