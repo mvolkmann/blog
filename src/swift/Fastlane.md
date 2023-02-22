@@ -662,12 +662,36 @@ There are many more than were described above!
 
 In addition to the actions already described, consider using these:
 
+- The {% aTargetBlank "https://docs.fastlane.tools/actions/get_version_number/",
+  "get_version_number" %} and {% aTargetBlank
+  "https://docs.fastlane.tools/actions/get_build_number/",
+  "get_build_number" %} actions return values.
+  They can be combined in a lane like the following:
+
+  ```ruby
+  desc "Prints the version and build number"
+  lane :version do
+    version = get_version_number
+    build = get_build_number
+    puts "version #{version}, build #{build}"
+  end
+  ```
+
 - The {% aTargetBlank "https://docs.fastlane.tools/actions/notification/",
   "notification" %} displays a macOS notification.
   The first time this is used, the System Settings app will open.
   To enable "terminal-notifier" to display notifications,
   toggle "Allow Notifications" to on and select "Alerts".
-  I haven't been able to get this to work yet.
+
+  I tried the following, but haven't gotten it to work yet.
+
+  ```ruby
+  notification(
+    title: "Morning Greeting",
+    subtitle: "Daily Advice",
+    message: "Good morning Mark! Learn something today."
+  )
+  ```
 
 - The {% aTargetBlank "https://docs.fastlane.tools/actions/puts/", "puts" %}
   prints given text to stdout.
