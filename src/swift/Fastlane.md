@@ -577,6 +577,9 @@ It repeats this for each supported device size and language.
 The following steps assume that "Automate screenshots" was selected
 when the `fastlane init` command was run.
 
+1. Verify that `fastlane/Snapfile` was created
+   as described in the "Configuring" section above.
+
 1. Create a new target.
 
    1. Select the topmost entry in the Project Navigator.
@@ -612,7 +615,8 @@ when the `fastlane init` command was run.
 
 1. Implement the UI test.
 
-   1. Move the `fastlane/SnapshotHelper.swift` into the new target directory.
+   1. Move the `fastlane/SnapshotHelper.swift`
+      into the new `ScreenshotTests` directory.
    1. Edit the file `ScreenshotTests/ScreenshotTests.swift`.
    1. In the `setupWithError` method, add the following:
 
@@ -628,20 +632,22 @@ when the `fastlane init` command was run.
       visits each screen in the app.
    1. After the code that visiting each screen,
       call `snapshot("{sequence-number}-{screen-name}")`.
+
       The sequence numbers keep the screenshots in the intended order.
       The actual file name will begin with the device name (ex. "iPhone 14-")
       and end with ".png".
+
       Screenshots will only be captured when running in a simulator.
       The `snapshot` function does nothing when running on a real device.
 
-1. Add or modify the following lane in `fastlane/Fastfile`:
+1. Add the following lane in `fastlane/Fastfile`:
 
-```ruby
-desc "Generates localized screenshots"
-lane :screenshots do
-  capture_screenshots(scheme: "{screenshot-scheme-name}")
-end
-```
+   ```ruby
+   desc "Generates localized screenshots"
+   lane :screenshots do
+     capture_screenshots(scheme: "{screenshot-scheme-name}")
+   end
+   ```
 
 1. Verify that all the Simulators to be used are in the expected
    light/dark mode. Many seem to default to dark mode.
