@@ -36,6 +36,10 @@ This page focuses on usage for iOS apps.
 Deploying apps to TestFlight and the App Store requires enrolling
 in the Apple Developer Program which is currently $99/year USD.
 
+Many of the sections below describe how to
+accomplish a specific task using a "lane".
+The final section pulls it all together into a complete `Fastfile`.
+
 ## Resources
 
 - {% aTargetBlank "https://fastlane.tools", "Fastline home page" %}
@@ -433,6 +437,22 @@ end
 From the project root directory, enter `fastlane beta`.
 This waits for processing to complete which takes around four minutes.
 
+## .gitignore
+
+The following Fastlane-related files should be listed in the `.gitignore` file,
+either because they contain sensitive information or
+because they contain data that changes frequently
+and just doesn't need to be persisted.
+
+```text
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+fastlane/AuthKey_*.p8
+fastlane/.env.default
+```
+
 ## Creating Screenshots
 
 To create localized screenshots for each screen in the app,
@@ -600,3 +620,71 @@ To list the lanes implemented for a given project, enter `fastlane lanes`.
 By default `Fastfile` contains code written in the Ruby programming language.
 There is a option to use code written in the Swift programming language,
 but that executes more slowly because it still interacts with Ruby.
+
+## Complete Fastfile
+
+This is the `Fastfile` for my WeatherKitDemo a project.
+
+```ruby
+default_platform(:ios)
+
+platform :ios do
+  desc "Creates a signing certificate and provisioning profile"
+  lane :certs do
+    get_certificates(development: true)
+    get_provisioning_profile(development: true)
+  end
+
+  desc "Runs all unit and UI tests"
+  # This works despite warnings that say
+  # "deviceType from ... was NULL when -platform called".
+  lane :tests do
+    run_tests(
+      devices: ["iPhone 14 Pro"],
+      scheme: "WeatherKitDemo"
+    )
+  end
+
+  desc "Generates localized screenshots"
+  lane :screenshots do
+    capture_ios_screenshots(scheme: "ScreenshotTests")
+  end
+
+  desc "Creates new screenshots from existing ones that have device frames"
+  # The PNG files this produces have sizes that App Store doesn't accept!
+  # See https://github.com/fastlane/fastlane/issues/21067.
+  lane :frames do
+    frame_screenshots(is_complex_framing_mode: true)
+  end
+
+  desc "Uploads localized screenshots to App Store"
+  # I needed to rename the "hi-IN" directory to "hi"
+  # and the "zh-CN" directory to "zh-Hans".
+  lane :upload do
+    # Only uploading screenshots.
+    upload_to_app_store(
+      skip_app_version_update: true,
+      skip_binary_upload: true,
+      skip_metadata: true
+    )
+  end
+
+  desc "Builds the app and produces symbol and ipa files."
+  lane :build do
+    build_app
+  end
+
+  desc "Deploys app to TestFlight"
+  lane :beta do
+    # I prefer to update the Version and Build numbers manually in Xcode.
+    # increment_build_number
+    # increment_version_number(bump_type: "patch")
+    upload_to_testflight(
+      ipa: './fastlane/builds/WeatherKitDemo.ipa',
+      # I prefer to submit manually on the App Store Connect web page
+      # so I can enter a description of what changed in this version.
+      skip_submission: true
+    )
+  end
+end
+```
