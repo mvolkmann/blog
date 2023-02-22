@@ -313,6 +313,13 @@ can be executed without providing the platform.
 For example if `ios` is the default platform then the previous command
 can be executed with `fastlane screenshots`.
 
+To list the lanes implemented for a given project, enter `fastlane lanes`.
+
+To list the lanes in a table and optionally select one to execute,
+enter `fastlane`.
+To execute one of the lanes, enter its number.
+To exit without executing a lane, enter 0 or press ctrl-c.
+
 ## .gitignore
 
 The following Fastlane-related files should be listed in the `.gitignore` file,
@@ -778,15 +785,6 @@ In addition to the actions already described, consider using these:
 
 - The {% aTargetBlank "https://docs.fastlane.tools/actions/swiftlint/", "swiftlint" %}
   action performs code validation using SwiftLint.
-
-## Listing Lanes
-
-To list the lanes implemented for a given project, enter `fastlane lanes`.
-
-To list the lanes in a table and optionally select one to execute,
-enter `fastlane`.
-To execute one of the lanes, enter its number.
-To exit without executing a lane, enter 0 or press ctrl-c.
 
 ## Ruby vs. Swift
 
