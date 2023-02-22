@@ -9,13 +9,15 @@ layout: topic-layout.njk
 
 {% aTargetBlank "https://fastlane.tools/", "Fastlane" %}
 is an open source platform managed by Google that automates
-many tasks related to Android and iOS mobile app deployment.
+many tasks related to iOS and Android mobile app deployment.
 These include running tests, generating screenshots,
 deploying iOS apps to TestFlight,
 deploying iOS apps to the App Store, and more.
 
+This page focuses on usage for iOS apps.
+
 Some tasks require interacting with the {% aTargetBlank
-"https://developer.apple.com/account", "Apple Developer Portal" %} and
+"https://developer.apple.com/", "Apple Developer Portal" %} and
 {% aTargetBlank "https://appstoreconnect.apple.com/", "App Store Connect" %}.
 Fastlane provides a way to do this from the command line.
 
@@ -26,12 +28,16 @@ A lane can be specific to a given platform (ex. ios or mac)
 or it can be platform independent.
 
 The `fastlane` command can be passed the name of an action or a lane to run.
-To execute a lane, enter `fastlane {platform} {action-or-lane}`.
+The syntax to enter is `fastlane {platform} {action-or-lane}`.
 For example, `fastlane ios screenshots`.
 
-Fastlane is primarily implemented in Ruby.
+If a default platform is specified in the `Fastfile`
+using `default_platform :ios` then lanes for that platform
+can be executed without providing the platform.
+For example if `ios` is the default platform then the previous command
+can be executed with `fastlane screenshots`.
 
-This page focuses on usage for iOS apps.
+Fastlane is primarily implemented in Ruby.
 
 Deploying apps to TestFlight and the App Store requires enrolling
 in the Apple Developer Program which is currently $99/year USD.
@@ -611,11 +617,16 @@ Also consider using these actions:
 - The {% aTargetBlank "https://docs.fastlane.tools/actions/swiftlint/", "swiftlint" %}
   action performs code validation using SwiftLint.
 
-### Listing Lanes
+## Listing Lanes
 
 To list the lanes implemented for a given project, enter `fastlane lanes`.
 
-### Ruby vs. Swift
+To list the lanes in a table and optionally select one to execute,
+enter `fastlane`.
+To execute one of the lanes, enter its number.
+To exit without executing a lane, enter 0 or press ctrl-c.
+
+## Ruby vs. Swift
 
 By default `Fastfile` contains code written in the Ruby programming language.
 There is a option to use code written in the Swift programming language,
@@ -626,7 +637,7 @@ but that executes more slowly because it still interacts with Ruby.
 This is the `Fastfile` for my WeatherKitDemo a project.
 
 ```ruby
-default_platform(:ios)
+default_platform :ios
 
 platform :ios do
   desc "Creates a signing certificate and provisioning profile"
