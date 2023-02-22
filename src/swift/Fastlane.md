@@ -238,6 +238,7 @@ that defines the supported device types and languages.
 It is used to determine the variations of screenshots that should be created.
 
 1. Edit the `fastlane/Snapfile` file.
+   TODO: If the Manual option was selected, how should this file be created?
 
 1. Uncomment lines so it indicates the devices and languages
    to use for creating screenshots. For example:
