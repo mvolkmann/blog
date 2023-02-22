@@ -838,50 +838,28 @@ api_key = lane_context[SharedValues::APP_STORE_CONNECT_API_KEY]
 
 This is the `Fastfile` for my WeatherKitDemo a project.
 
-TODO: Verify this against the version in SwiftUI-GiftTrack!
-
 ```ruby
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
 default_platform :ios
 
 platform :ios do
-  desc "Creates a signing certificate and provisioning profile"
-  lane :certs do
-    get_certificates(development: true)
-    get_provisioning_profile(development: true)
-  end
 
   desc "Runs all unit and UI tests"
   # This works despite warnings that say
   # "deviceType from ... was NULL when -platform called".
   lane :tests do
     run_tests(
-      devices: ["iPhone 14 Pro"],
+      devices: ["iPhone 8 Plus", "iPhone 13 Pro Max"],
       scheme: "WeatherKitDemo"
     )
   end
 
-  desc "Generates localized screenshots"
-  lane :screenshots do
-    capture_screenshots(scheme: "ScreenshotTests")
-  end
-
-  desc "Creates new screenshots from existing ones that have device frames"
-  # The PNG files this produces have sizes that App Store doesn't accept!
-  # See https://github.com/fastlane/fastlane/issues/21067.
-  lane :frames do
-    frame_screenshots(is_complex_framing_mode: true)
-  end
-
-  desc "Uploads localized screenshots to App Store"
-  # I needed to rename the "hi-IN" directory to "hi"
-  # and the "zh-CN" directory to "zh-Hans".
-  lane :upload do
-    # Only uploading screenshots.
-    upload_to_app_store(
-      skip_app_version_update: true,
-      skip_binary_upload: true,
-      skip_metadata: true
-    )
+  desc "Creates a signing certificate and provisioning profile"
+  lane :certs do
+    get_certificates(development: true)
+    get_provisioning_profile(development: true)
   end
 
   desc "Builds the app and produces symbol and ipa files."
@@ -889,7 +867,7 @@ platform :ios do
     build_app
   end
 
-  desc "Deploys app to TestFlight"
+  desc "Uploads the app to TestFlight"
   lane :beta do
     # I prefer to update the Version and Build numbers manually in Xcode.
     # increment_build_number
@@ -901,5 +879,41 @@ platform :ios do
       skip_submission: true
     )
   end
+
+  desc "Generates localized screenshots"
+  lane :screenshots do
+    capture_screenshots(scheme: "ScreenshotTests")
+  end
+
+  desc "Creates new screenshots from existing ones that have device frames"
+  lane :frames do
+    frame_screenshots
+  end
+
+  desc "Uploads localized screenshots to App Store"
+  # I needed to rename the "hi-IN" directory to "hi"
+  # and the "zh-CN" directory to "zh-Hans".
+  lane :upload_screenshots do
+    # Only uploading screenshots.
+    upload_to_app_store(
+      skip_app_version_update: true,
+      skip_binary_upload: true,
+      skip_metadata: true
+    )
+  end
+
+  # Uploads the app to the App Store
+  lane :prod do
+    # I prefer to submit manually on the App Store Connect web page
+    # so I can enter a description of what changed in this version.
+    # This has not yet worked for me!
+    upload_to_app_store(
+      ipa: './fastlane/builds/WeatherKitDemo.ipa', # in fastlane/builds
+      skip_metadata: true,
+      skip_screenshots: true
+      # submit_for_review: true # defaults to false
+    )
+  end
+
 end
 ```
