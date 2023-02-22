@@ -38,7 +38,7 @@ The final section pulls it all together into a complete `Fastfile`.
 
 ## Resources
 
-- {% aTargetBlank "https://fastlane.tools", "Fastline home page" %}
+- {% aTargetBlank "https://fastlane.tools", "Fastlane home page" %}
 - {% aTargetBlank
   "https://www.runway.team/blog/how-to-build-the-perfect-fastlane-pipeline-for-ios",
   "How to build the perfect fastlane pipeline for iOS" %}
@@ -297,7 +297,7 @@ which is an alias for `run_tests`.
 The tests run in a Simulator or on a connected device.
 They run much faster in Xcode than they do from fastlane.
 
-Modify the file `fastlane/Fastfile` to contain the following:
+Add the following lane in `fastlane/Fastfile`:
 
 ```ruby
 platform :ios do
@@ -457,7 +457,7 @@ To register beta testers in TestFlight:
 1. For each tester to be added, click the "+" after "Testers"
    and enter their email address and name.
 
-## Deploying TestFlight
+## Deploying to TestFlight
 
 To deploy the app to TestFlight,
 use the fastlane tool {% aTargetBlank
@@ -648,7 +648,7 @@ the originals and are incompatible with the sizes the App Store accepts.
 See this {% aTargetBlank
 "https://github.com/fastlane/fastlane/issues/21067", "issue" %}.
 
-Modify the file `fastlane/Fastfile` to contain the following:
+Add the following lane in `fastlane/Fastfile`:
 
 ```ruby
 desc "Creates new screenshots from existing ones that have device frames"
@@ -659,7 +659,7 @@ end
 
 From the project root directory enter `fastlane frames`.
 
-## Uploading to App Store
+## Uploading Screenshots
 
 To upload the app to the App Store,
 use the fastlane tool {% aTargetBlank
@@ -668,13 +668,49 @@ which is an alias for `upload_to_app_store`.
 This can upload screenshots, metadata, and binaries to App Store Connect.
 It can also update the app version number and submit the app for review.
 
-There are many parameters whose names begin with `skip_`
-that control what the action does.
-TODO: Will it upload framed screenshots and not the unframed versions?
+Add the following lane in `fastlane/Fastfile`:
 
-I have not used this yet and may prefer to do it manually
-since releasing new versions to the App Store
-is done less frequently than releasing new versions to TestFlight.
+```ruby
+  desc "Uploads localized screenshots to App Store"
+  # I needed to rename the "hi-IN" directory to "hi"
+  # and the "zh-CN" directory to "zh-Hans".
+  lane :upload_screenshots do
+    # Only uploading screenshots.
+    upload_to_app_store(
+      skip_app_version_update: true,
+      skip_binary_upload: true,
+      skip_metadata: true
+    )
+  end
+```
+
+From the project root directory enter `fastlane upload_screenshots`.
+
+## Deploying to the App Store
+
+The same fastlane action used to upload screenshots, `deliver`,
+is used to upload an app to the App Store.
+
+I prefer to submit manually on the App Store Connect web page
+so I can enter a description of what changed in the new version.
+
+The lane definition below has not worked for me yet,
+but it provides a starting point.
+
+1. Add the following lane in `fastlane/Fastfile`:
+
+   ```ruby
+   lane :prod do
+     upload_to_app_store(
+       ipa: './fastlane/builds/{ipa-name}.ipa', # in fastlane/builds
+       skip_app_version_update: true,
+       skip_metadata: true,
+       skip_screenshots: true
+     )
+   end
+   ```
+
+1. From the project root directory, enter `fastlane prod`.
 
 ## Other Actions
 
