@@ -128,9 +128,10 @@ To avoid these issues, install a new version of Ruby using Homebrew.
    - For the UI testing scheme, choose the default scheme.
    - For "Enable automatic upload", choose "n".
 1. This results in a new directory named `fastlane`.
-   When the option "Automate screenshots" is selected,
-   this directory will contain the files
-   `Appfile`, `Fastfile`, `Snapfile`, and `SnapshotHelper.swift`.
+   When the option "Manual" is selected, this directory will
+   contain the files `Appfile` and `Fastfile`.
+   When the option "Automate screenshots" is selected, this directory will
+   also contain the files `Snapfile`, and `SnapshotHelper.swift`.
 1. Add the `fastlane` directory to the Xcode project and to the git repository.
 
 ### Authentication
