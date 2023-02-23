@@ -9,7 +9,7 @@ layout: topic-layout.njk
 {% aTargetBlank "https://www.warp.dev", "Warp" %} is
 "the terminal for the 21st century".
 
-Currently it only runs in macOS, but there are plans to
+Currently Warp only runs in macOS, but there are plans to
 support Linux and Windows in the future.
 
 Warp functions more like a standard text editor than most terminal programs.
@@ -22,7 +22,7 @@ and it does so without any configuration.
 If your default shell is not one of these, Warp will default to Zsh.
 The Warp team has stated that they would like to support Nushell in the future.
 
-Warp is implemented in Rust.
+Warp is implemented in Rust which makes it very fast.
 
 Vim keybindings are not currently supported, but
 the Warp team has stated that they want to add support.
@@ -31,13 +31,13 @@ See {% aTargetBlank "https://github.com/warpdotdev/warp/issues/159",
 
 ## Hierarchy
 
-Windows hold tabs.
+Warp uses the terms window, tab, pane, and block.
+These have the following relationships:
 
-Tabs hold panes.
-
-Panes hold blocks.
-
-Blocks hold a command and its output.
+- A windows holds tabs.
+- A tab holds panes.
+- A pane holds blocks.
+- A block holds a command and its output.
 
 ## Installing
 
@@ -67,39 +67,39 @@ The left nav of the Settings dialog contains the following sections:
 
 - Appearance
 
-  When "Sync with OS" is on, Warp switches between light and dark mode
-  based on the current OS setting.
-  It is off by default.
+  When the "Sync with OS" option is on, Warp switches between
+  light and dark mode based on the current OS setting.
+  This option is off by default.
 
   The "Window Opacity" can be adjusted to enable
   seeing content behind Warp windows.
-  It is 100% by default.
+  It is 100% by default, so nothing behind Warp windows is visible.
 
-  When the Panes "Dim inactive panes" is on, all panes except the current one
+  When the Panes "Dim inactive panes" option is on, all panes except the current one
   are dimmed to make it clear which pane is active.
-  It is off by default.
+  This option is off by default.
 
-  When the Blocks "Compact mode" is on, the vertical space
+  When the Blocks "Compact mode" option is on, the vertical space
   around the horizontal lines that separate blocks is removed.
-  It is off by default.
+  This option is off by default.
 
   In the Text section, the "Terminal font", "Font size", and "Line height"
   can be set.
-  I am using "FiraCode Nerd Font Mono" which supports ligatures.
+  I am using the font "FiraCode Nerd Font Mono" which supports ligatures.
 
   In the Cursor section, the "Blinking cursor" option can be toggled.
-  It is on by default.
+  This option is on by default.
 
 - Features
 
   This section contains a large number of settings.
-  The highlights are:
+  The highlights are described below.
 
   - General section
 
     - "Restore windows, tabs, and panes on startup" (on by default)
 
-      When this is on, new Warp sessions begin with all the
+      When this option is on, new Warp sessions begin with all the
       windows, tabs, and panes of the previous session.
       However, processes that were running will not be automatically restarted.
 
@@ -113,6 +113,10 @@ The left nav of the Settings dialog contains the following sections:
       "Launch Configurations" %}.
 
     - "Show sticky command header" (on by default)
+
+      This option causes the command associated with a block to stick
+      to the top of the pane when scrolling the output vertically
+      'so it is always clear which command generated the output.
 
     - "Show tooltip on click on links" (on by default)
 
@@ -128,9 +132,9 @@ The left nav of the Settings dialog contains the following sections:
       Hovering over any file name that is output
       changes it to be blue and underlined.
       Command-clicking it opens the file in the default editor app.
-      Clicking it displays a tooltip appears containing "Open File" or
-      "Open Directory" that can be clicked to open the file
-      or open the directory in a Finder window.
+      Clicking it displays a tooltip containing a button labelled
+      "Open File" or "Open Directory" that can be clicked to
+      open the file or open the directory in a Finder window.
 
     - "Show warning before quitting" (on by default)
 
@@ -247,45 +251,6 @@ Then select "Shared blocks" in the left nav.
 To delete a permalink, click its vertical ellipsis and select "Unshare".
 Confirm this by clicking the "Unshare" button in the dialog that appears.
 
-## Finding Text
-
-The "Find" and "Find Within Block" commands open a dialog
-in the upper-right where search text can be entered.
-
-All matches are highlighted yellow except for
-the currently selected match is highlighted in orange.
-
-The total number of matches found and the number of
-the currently highlighted match are displayed.
-For example, "2/5" indicates that there a five matches
-and the second match is the one highlighted in orange.
-
-In addition, the following buttons are provided:
-
-- navigate to the previous match, cycling to the end after the first is reached
-- navigate to the next match, cycling to the beginning after the last is reached
-- toggle the use of regular expressions
-- toggle whether the search is confined to the block
-  or can search all blocks in the pane
-- toggle whether the search is case-sensitive
-- close the dialog
-
-## Block Bookmarks
-
-Blocks can be bookmarked to make it easy to find them in the future.
-
-To toggle whether a block is bookmarked,
-click its bookmark icon in the upper-right.
-Alternatively if the block is selected, press cmd-b.
-
-The pane scrollbar on the right will contain horizontal lines
-that indicate the location of each bookmarked block in the pane.
-To navigate to a bookmarked block, click one of these lines.
-
-To navigate to the previous bookmarked block, press option-up-arrow.
-
-To navigate to the new bookmarked block, press option-down-arrow.
-
 ## Commands
 
 When entering a command,
@@ -375,6 +340,45 @@ To install additional workflows, see the GitHub repository {% aTargetBlank
 To create custom workflows, see {% aTargetBlank
 "https://docs.warp.dev/features/entry/workflows#creating-custom-workflows",
 "Creating Custom Workflows" %}.
+
+## Finding Text
+
+The "Find" and "Find Within Block" commands open a dialog
+in the upper-right where search text can be entered.
+
+All matches are highlighted yellow except for
+the currently selected match is highlighted in orange.
+
+The total number of matches found and the number of
+the currently highlighted match are displayed.
+For example, "2/5" indicates that there a five matches
+and the second match is the one highlighted in orange.
+
+In addition, the following buttons are provided:
+
+- navigate to the previous match, cycling to the end after the first is reached
+- navigate to the next match, cycling to the beginning after the last is reached
+- toggle the use of regular expressions
+- toggle whether the search is confined to the block
+  or can search all blocks in the pane
+- toggle whether the search is case-sensitive
+- close the dialog
+
+## Block Bookmarks
+
+Blocks can be bookmarked to make it easy to find them in the future.
+
+To toggle whether a block is bookmarked,
+click its bookmark icon in the upper-right.
+Alternatively if the block is selected, press cmd-b.
+
+The pane scrollbar on the right will contain horizontal lines
+that indicate the location of each bookmarked block in the pane.
+To navigate to a bookmarked block, click one of these lines.
+
+To navigate to the previous bookmarked block, press option-up-arrow.
+
+To navigate to the new bookmarked block, press option-down-arrow.
 
 ## Command Palette
 
