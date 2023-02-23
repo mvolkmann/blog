@@ -265,7 +265,7 @@ When entering a command,
 recognized commands are displayed in green and
 unrecognized commands are underlined with a red, dashed line.
 
-For recognized commands, a suggested completion will appear in dimmed text.
+For recognized commands, a suggested completion may appear in dimmed text.
 To accept the suggestion, press the right arrow key.
 
 To execute a command, press the return key.
@@ -280,8 +280,8 @@ To see a brief description of a command, subcommand, or flag
 in a popup provided by the "Command Inspector", hover over it.
 
 To recall a command previously entered in the current pane,
-repeatedly press the up arrow key until the command is highlighted
-and press the return key to execute it.
+repeatedly press the up arrow key until the desired command is highlighted.
+Press the return key to execute it.
 
 To search command history, workflows, and AI commands, press ctrl-r.
 To limit the search to one of these three categories,
@@ -291,7 +291,12 @@ For example, entering "start" will find any command containing those letters
 in that order, but not necessarily together.
 This would match "fastlane screenshots".
 
-TODO: Can you navigate to a block and re-execute it?
+A block cannot be re-executed. However, you can:
+
+- right-click a block
+- select "Copy Command"
+- press cmd-v to paste it into the input area at the bottom of the pane
+- press return to execute it
 
 ## Command Editing
 
