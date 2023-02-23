@@ -10,7 +10,7 @@ layout: topic-layout.njk
 "the terminal for the 21st century".
 
 Currently Warp only runs in macOS, but there are plans to
-support Linux and Windows in the future.
+support web (through WASM), Linux, and Windows in the future.
 
 Warp functions more like a standard text editor than most terminal programs.
 The cursor can be positioned by using the arrow keys
