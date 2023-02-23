@@ -217,10 +217,10 @@ Block actions include:
 - Copy Git Branch
 - Find Within Block
 - Toggle Bookmark
-- Split pane right
-- Split pane left
-- Split pane down
-- Split pane up
+- Split pane right - cmd-d; I changed to cmd-shift-right-arrow
+- Split pane left - I added cmd-shift-left-arrow
+- Split pane down - cmd-shift-d; I changed to cmd-shift-down-arrow
+- Split pane up - I added cmd-shift-up-arrow
 - Toggle maximize pane
 - Close pane
 
@@ -326,6 +326,14 @@ Each pane can hold any number of blocks.
 
 To create a new pane, right-click and select one of the "Split pane" options
 to open a new pane on the right, left, down (bottom), or up (top).
+
+I defined the following keyboard shortcuts of the form cmd-shift-{arrow-key}
+to simplify creating new panes:
+
+- right arrow - Split pane right
+- left arrow - Split pane left
+- down arrow - Split pane down
+- up arrow - Split pane up
 
 To close the currently focused pane, enter "exit" or press cmd-w.
 
