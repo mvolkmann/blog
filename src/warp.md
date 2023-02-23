@@ -47,7 +47,6 @@ This creates `Warp.app` in your `Applications` directory.
 
 Double-click `Warp.app` in your `Applications` directory to launch it.
 The first launch will prompt you to sign up.
-Subsequent launches will prompt you to sign in.
 
 When quitting Warp if there are any processes running in blocks,
 a dialog will appear allowing you to verify that you
@@ -306,12 +305,20 @@ To create custom workflows ... TODO: FINISH THIS!
 
 ## Command Palette
 
-To open the command palette, press cmd-p.
+To quickly find and execute a Warp command (not a shell command),
+open the command palette by pressing cmd-p,
+filter the list of commands by typing part of its name,
+and click a command.
 
 ## Themes
 
 To choose a theme, open the command palette and select "Open Theme Picker"
 or press cmd-ctrl-t.
+
+Each theme is defined by a `.yaml` file.
+
+To use or create a custom theme, see {% aTargetBlank
+"https://docs.warp.dev/appearance/custom-themes", "Custom Themes" %}.
 
 ## Panes
 
