@@ -709,8 +709,12 @@ but it provides a starting point.
      upload_to_app_store(
        ipa: './fastlane/builds/{ipa-name}.ipa', # in fastlane/builds
        skip_app_version_update: true,
+       skip_binary_upload: true, # gets from TestFlight
        skip_metadata: true,
        skip_screenshots: true
+       # I prefer to submit manually on the App Store Connect web page
+       # so I can enter a description of what changed in this version.
+       # submit_for_review: true # defaults to false
      )
    end
    ```
@@ -905,13 +909,15 @@ platform :ios do
 
   # Uploads the app to the App Store
   lane :prod do
-    # I prefer to submit manually on the App Store Connect web page
-    # so I can enter a description of what changed in this version.
-    # This has not yet worked for me!
     upload_to_app_store(
       ipa: './fastlane/builds/WeatherKitDemo.ipa', # in fastlane/builds
+      # run_precheck_before_submit: false,
+      skip_app_version_update: true,
+      skip_binary_upload: true, # gets from TestFlight
       skip_metadata: true,
       skip_screenshots: true
+      # I prefer to submit manually on the App Store Connect web page
+      # so I can enter a description of what changed in this version.
       # submit_for_review: true # defaults to false
     )
   end
