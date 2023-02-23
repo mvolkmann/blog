@@ -379,8 +379,18 @@ and click a command.
 
 ## Themes
 
+Warp supports themes that change the look of the user interface.
+Each theme can define colors, gradients, and background images.
+
 To choose a theme, open the command palette and select "Open Theme Picker"
 or press cmd-ctrl-t.
+This opens a panel on the left that lists all the available themes.
+Selecting a theme changes the display to preview the theme.
+
+To change the theme to the selected one, click the checkmark at the bottom.
+To close the theme picker without changing the theme, click the X at the bottom.
+
+I like the "Cyber Wave" theme.
 
 Each theme is defined by a `.yaml` file.
 
