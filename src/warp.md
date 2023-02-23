@@ -164,9 +164,8 @@ The left nav of the Settings dialog contains the following sections:
 
 - Shared blocks
 
-  These are for collaboration.
-  It's not clear whether this feature has been implemented yet.
-  By default there are no shared blocks.
+  This lists all the permalinks that have been created.
+  See the description of permalinks in the "Blocks" section.
 
 - Keyboard shortcuts
 
@@ -193,7 +192,7 @@ The left nav of the Settings dialog contains the following sections:
 
 ## Blocks
 
-Entering a shell command creates a "block".
+Entering a shell command creates a new "block".
 
 Blocks are divided by thin horizontal lines.
 By default there is a lot of vertical space on both sizes of these lines.
@@ -225,6 +224,19 @@ Block actions include:
 - Split pane up
 - Toggle maximize pane
 - Close pane
+
+Creating a permalink provides a URL that can be shared with others
+to view the command and output for a given block.
+A dialog will appear.
+Click the "Create and Copy Link" button.
+This displays the URL and automatically copies it to the clipboard.
+
+Permalinks remain active until they are deleted.
+To see all the permalinks that have been created,
+open the Settings dialog by pressing cmd-,.
+Then select "Shared blocks" in the left nav.
+To delete a permalink, click its vertical ellipsis and select "Unshare".
+Confirm this by clicking the "Unshare" button in the dialog that appears.
 
 ## Commands
 
@@ -262,6 +274,10 @@ The following table summarizes the most useful shortcuts.
 | Select All            | cmd-a             |
 | Clear Command Editor  | ctrl-c            |
 | Clear Screen          | ctrl-l            |
+
+For more keyboard shortcuts, see the {% aTargetBlank
+"https://docs.warp.dev/features/keyboard-shortcuts#input-editor",
+"Keyboard Shortcuts" %}.
 
 ## AI Commands
 
