@@ -692,7 +692,8 @@ From the project root directory enter `fastlane upload_screenshots`.
 
 ## Deploying to the App Store
 
-The same fastlane action used to upload screenshots, `deliver`,
+The same fastlane action used to upload screenshots, {% aTargetBlank
+"https://docs.fastlane.tools/actions/deliver/", "deliver" %}
 is used to upload an app to the App Store.
 
 I prefer to submit manually on the App Store Connect web page
@@ -781,7 +782,7 @@ See {% aTargetBlank
 "https://docs.fastlane.tools/getting-started/ios/fastlane-swift/",
 "Getting Started with Fastlane.swift" %}.
 
-### Authentication
+## Authentication
 
 The information in this section may only be needed
 when using the `match` action.
