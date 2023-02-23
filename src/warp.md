@@ -371,6 +371,13 @@ To clear all the blocks in the current pane,
 open the command palette and select "Clear Blocks",
 enter the command "clear block", or press cmd-k.
 
+To see a list of all current panes across all tabs, press cmd-shift-p.
+This opens a dialog that lists the panes.
+Alternatively, press cmd-p to open the command palette and type "@".
+For each pane, the current working directory and
+the last command executed are displayed.
+To navigate to one of the panes, click its description.
+
 ## Tabs
 
 Each tab can contain any number of panes.
