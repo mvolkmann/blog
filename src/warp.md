@@ -249,10 +249,17 @@ Confirm this by clicking the "Unshare" button in the dialog that appears.
 
 ## Commands
 
-When entering a command, a suggested completion will appear in dimmed text.
+When entering a command,
+recognized commands are displayed in green and
+unrecognized commands are underlined with a red, dashed line.
+
+For recognized commands, a suggested completion will appear in dimmed text.
 To accept the suggestion, press the right arrow key.
 
 To execute a command, press the return key.
+
+To see a brief description of a command, subcommand, or flag
+in a popup provided by the "Command Inspector", hover over it.
 
 To recall a command previously entered in the current pane,
 repeatedly press the up arrow key until the command is highlighted
@@ -308,10 +315,14 @@ Workflows are named sets of commands (typically just one)
 that are parameterized.
 They are similar to snippets in code editors.
 
-To search for a workflow, press cmd-shift-r.
+Each workflow is defined by a `.yaml` file.
+
+To search for a workflow, press ctrl-shift-r.
 In the popup that appears, select a category in the left nav such as "git".
 Then click one of the workflows to copy it to the current block.
 Replace any placeholders and press return to execute the workflow.
+
+Warp ships with over 100 predefined workflows.
 
 To install additional workflows, see the GitHub repository {% aTargetBlank
 "https://github.com/warpdotdev/workflows", "warpdotdev/workflows" %}.
