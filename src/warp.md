@@ -90,3 +90,5 @@ enter the new name, and press return.
 To navigate to the tab to the right, press cmd-}.
 
 To navigate to the tab to the left, press cmd-{.
+
+To reorder tabs, drag them left or right.
