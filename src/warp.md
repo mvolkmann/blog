@@ -17,7 +17,15 @@ The cursor can be positioned by using the arrow keys
 or clicking anywhere in a command.
 Any text can be selected, copied, and pasted.
 
+Warp currently only supports the shells Xsh, Bash, and Fish.
+If your default shell is not one of these, Warp will default to Zsh.
+
 Warp is implemented in Rust.
+
+Vim keybindings are not currently supported, but
+the Warp team has stated that they want to add support.
+See {% aTargetBlank "https://github.com/warpdotdev/warp/issues/159",
+"issue 159" %}.
 
 ## Hierarchy
 
@@ -244,6 +252,9 @@ For example, entering "delete local git branch"
 suggests "git branch -d branch_name".
 To accept this suggestion, click the "Input Command" button or press cmd-return.
 Replace any placeholders and press return to execute the command.
+
+Sometimes the suggested commands are correct for Linux and not macOS.
+To get macOS equivalents, and "on mac" to the description.
 
 ## Workflows
 
