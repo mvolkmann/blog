@@ -138,7 +138,7 @@ The left nav of the Settings dialog contains the following sections:
 
     - "Show warning before quitting" (on by default)
 
-      When this is on and an attempt is made to quit Warp
+      When this option is on and an attempt is made to quit Warp
       while there are processes running,
       a dialog will appear allowing you to verify that you
       really want to quit which will kill the processes.
@@ -148,10 +148,11 @@ The left nav of the Settings dialog contains the following sections:
 
     - "Honor user's custom prompt (PS1)" (off by default)
 
-      When this is on, custom prompts created in shell configuration files
-      or by utilities like [Starship](/blog/topics/blog/starship)
+      When this option is on, custom prompts
+      created in shell configuration files or
+      by utilities like [Starship](/blog/topics/blog/starship)
       are used.
-      Multi-line prompts may not work.
+      Multi-line prompts are not currently supported.
 
   - Keys section
 
@@ -162,10 +163,11 @@ The left nav of the Settings dialog contains the following sections:
 
     - "Open completions menu as you type" (off by default)
 
-      When this is on, a completions menu is display while typing commands.
+      When this option is on,
+      a completions menu is display while typing commands.
       For example, typing "git" followed by a space displays all the possible
-      git commands followed by brief descriptions.
-      This can be both very helpful and very annoying.
+      git subcommands followed by brief descriptions.
+      This can be both helpful and annoying.
 
     None of the remaining options here are particularly interesting
     and the default settings seem fine.
@@ -186,7 +188,10 @@ The left nav of the Settings dialog contains the following sections:
   Some commands do not have a default keyboard shortcut.
   One example is "Rename the Current Tab".
 
-  To see all the current keyboard shortcuts at any time, press cmd-/.
+  To see all the current keyboard shortcuts in a panel on the right,
+  press cmd-/.
+  The display of this panel can be toggled
+  by clicking the button in the upper-right corner.
 
 - Privacy
 
@@ -195,8 +200,8 @@ The left nav of the Settings dialog contains the following sections:
   Both options are on by default.
 
   Click "Close settings and view network logging" to
-  add a command to the current pane that will
-  display all the communications being sent to the Warp team.
+  add a command in the current pane that displays
+  all the communications being sent to the Warp team.
   After viewing it, press ctrl-c to return to the pane.
 
 - About
@@ -208,23 +213,24 @@ The left nav of the Settings dialog contains the following sections:
 Entering a shell command creates a new "block".
 
 Blocks are divided by thin horizontal lines.
-By default there is a lot of vertical space on both sizes of these lines.
-To remove the space, open Settings, select Appearance,
-and toggle on "Compact mode".
+By default there is some vertical space on both sizes of the lines.
+To remove this space, open Settings, select Appearance,
+and toggle the "Compact mode" option to be on.
 
 There are two ways to select a previous block:
 
 1. Scroll up until it is visible and click it.
-2. Click any block and using the up and down arrow keys to navigate to it.
+2. Click any block and use the up and down arrow keys to navigate to it.
 
-To perform an action on a block, right-click it or
+There are many commands that operate on a block.
+To execute such a command, block, right-click anywhere in the block or
 click the vertical ellipsis in the upper-right corner of the block.
 
-Block actions include:
+Block commands include:
 
 - Copy Command
 - Copy Output
-- Copy Both
+- Copy Both (the command and its output)
 - Create Permalink...
 - Copy Prompt
 - Copy Working Directory
@@ -238,11 +244,13 @@ Block actions include:
 - Toggle maximize pane
 - Close pane
 
-Creating a permalink provides a URL that can be shared with others
-to view the command and output for a given block.
-A dialog will appear.
+## Permalinks
+
+Creating a permalink for a block provides a URL that can be
+shared with others to view the command and output associated with the block.
+When the "Create Permalink..." command is run, a dialog will appear.
 Click the "Create and Copy Link" button.
-This displays the URL and automatically copies it to the clipboard.
+This displays the permalink URL and copies it to the clipboard.
 
 Permalinks remain active until they are deleted.
 To see all the permalinks that have been created,
