@@ -297,6 +297,12 @@ To accept the suggestion, press the right arrow key.
 
 To execute a command, press the return key.
 
+To enter multiple commands on separate lines,
+press ctrl-j (runs the "Insert Newline" command)
+after each command except the last.
+Pressing the return key executes all of the commands
+and displays the output of each command.
+
 To see a brief description of a command, subcommand, or flag
 in a popup provided by the "Command Inspector", hover over it.
 

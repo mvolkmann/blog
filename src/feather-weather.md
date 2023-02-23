@@ -30,7 +30,8 @@ Tap the buttons at the bottom of the screen to switch between the
 four weather forecast views "Current", "Forecast", "Chart", and "Heat Map"
 which are described below.
 
-The app currently supports three languages: English, French, and Spanish.
+The app currently supports five languages:
+English, Chinese (Simplified), Hindi, Spanish, and French.
 
 When a new version of the app is available,
 an "Update Available" link will appear on the initial screen.
