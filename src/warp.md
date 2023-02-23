@@ -9,7 +9,13 @@ layout: topic-layout.njk
 {% aTargetBlank "https://www.warp.dev", "Warp" %} is
 "the terminal for the 21st century".
 
-Currently it only runs in macOS, but there are plans to support Linux and Windows in the future.
+Currently it only runs in macOS, but there are plans to
+support Linux and Windows in the future.
+
+Warp functions more like a standard text editor than most terminal programs.
+The cursor can be positioned by using the arrow keys
+or clicking anywhere in a command.
+Any text can be selected, copied, and pasted.
 
 Warp is implemented in Rust.
 
@@ -170,6 +176,7 @@ The left nav of the Settings dialog contains the following sections:
   Click "Close settings and view network logging" to
   add a command to the current pane that will
   display all the communications being sent to the Warp team.
+  After viewing it, press ctrl-c to return to the pane.
 
 - About
 
@@ -216,6 +223,31 @@ When entering a command, a suggested completion will appear in dimmed text.
 To accept the suggestion, press the right arrow key.
 
 To execute a command, press the return key.
+
+To recall a command previously entered in the current pane,
+repeatedly press the up arrow key until the command is highlighted
+and press the return key to execute it.
+
+To search command history, workflows, and AI commands, press ctrl-r.
+To limit the search to one of these three categories,
+click the "history", "workflows", or "AI command search" button.
+Then enter text to perform a fuzzy search.
+For example, entering "start" will find any command containing those letters
+in that order, but not necessarily together.
+This would match "fastlane screenshots".
+
+## Workflows
+
+Workflows are named sets of commands (typically just one)
+that are parameterized.
+They are similar to snippets in code editors.
+
+To search for a workflow, press cmd-shift-r.
+In the popup that appears, select a category in the left nav such as "git".
+Then click one of the workflows to copy it to the current block.
+Replace any placeholders and press return to execute the workflow.
+
+To create custom workflows ... TODO: FINISH THIS!
 
 ## Command Palette
 
