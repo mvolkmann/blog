@@ -225,7 +225,7 @@ Block actions include:
 - Copy Prompt
 - Copy Working Directory
 - Copy Git Branch
-- Find Within Block
+- Find Within Block - searches only within the block instead of the entire pane
 - Toggle Bookmark
 - Split pane right - cmd-d; I changed to cmd-shift-right-arrow
 - Split pane left - I added cmd-shift-left-arrow
@@ -246,6 +246,29 @@ open the Settings dialog by pressing cmd-,.
 Then select "Shared blocks" in the left nav.
 To delete a permalink, click its vertical ellipsis and select "Unshare".
 Confirm this by clicking the "Unshare" button in the dialog that appears.
+
+## Finding Text
+
+The "Find" and "Find Within Block" commands open a dialog
+in the upper-right where search text can be entered.
+
+All matches are highlighted yellow except for
+the currently selected match is highlighted in orange.
+
+The total number of matches found and the number of
+the currently highlighted match are displayed.
+For example, "2/5" indicates that there a five matches
+and the second match is the one highlighted in orange.
+
+In addition, the following buttons are provided:
+
+- navigate to the previous match, cycling to the end after the first is reached
+- navigate to the next match, cycling to the beginning after the last is reached
+- toggle the use of regular expressions
+- toggle whether the search is confined to the block
+  or can search all blocks in the pane
+- toggle whether the search is case-sensitive
+- close the dialog
 
 ## Block Bookmarks
 
