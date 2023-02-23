@@ -19,6 +19,7 @@ Any text can be selected, copied, and pasted.
 
 Warp currently only supports the shells Xsh, Bash, and Fish.
 If your default shell is not one of these, Warp will default to Zsh.
+The Warp team has stated that they would like to support Nushell in the future.
 
 Warp is implemented in Rust.
 
@@ -243,6 +244,24 @@ Then enter text to perform a fuzzy search.
 For example, entering "start" will find any command containing those letters
 in that order, but not necessarily together.
 This would match "fastlane screenshots".
+
+## Command Editing
+
+There are many keyboard shortcuts that trigger text editing commands.
+The following table summarizes the most useful shortcuts.
+
+| Command               | Keyboard Shortcut |
+| --------------------- | ----------------- |
+| Delete All Left       | cmd-delete        |
+| Delete All Right      | cmd-fn-delete     |
+| Delete Word Left      | option-delete     |
+| Delete Word Right     | option-fn-delete  |
+| Insert Newline        | ctrl-j            |
+| Move to Start of Line | cmd-left-arrow    |
+| Move to End of Line   | cmd-right-arrow   |
+| Select All            | cmd-a             |
+| Clear Command Editor  | ctrl-c            |
+| Clear Screen          | ctrl-l            |
 
 ## AI Commands
 
