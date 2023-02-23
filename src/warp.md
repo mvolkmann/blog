@@ -17,7 +17,8 @@ The cursor can be positioned by using the arrow keys
 or clicking anywhere in a command.
 Any text can be selected, copied, and pasted.
 
-Warp currently only supports the shells Xsh, Bash, and Fish.
+Warp currently only supports the shells Zsh, Bash, and Fish,
+and it does so without any configuration.
 If your default shell is not one of these, Warp will default to Zsh.
 The Warp team has stated that they would like to support Nushell in the future.
 
@@ -101,6 +102,15 @@ The left nav of the Settings dialog contains the following sections:
       When this is on, new Warp sessions begin with all the
       windows, tabs, and panes of the previous session.
       However, processes that were running will not be automatically restarted.
+
+      It is also possible to save multiple "launch configurations"
+      so a specific one can be used in the future.
+      To save the current configuration, open the command palette
+      and select the "Save Current Configuration" command.
+      This opens a dialog containing a "Save Configuration" button.
+      For more detail, see {% aTargetBlank
+      "https://docs.warp.dev/features/sessions/launch-configurations",
+      "Launch Configurations" %}.
 
     - "Show sticky command header" (on by default)
 
@@ -256,6 +266,8 @@ For example, entering "start" will find any command containing those letters
 in that order, but not necessarily together.
 This would match "fastlane screenshots".
 
+TODO: Can you navigate to a block and re-execute it?
+
 ## Command Editing
 
 There are many keyboard shortcuts that trigger text editing commands.
@@ -301,7 +313,12 @@ In the popup that appears, select a category in the left nav such as "git".
 Then click one of the workflows to copy it to the current block.
 Replace any placeholders and press return to execute the workflow.
 
-To create custom workflows ... TODO: FINISH THIS!
+To install additional workflows, see the GitHub repository {% aTargetBlank
+"https://github.com/warpdotdev/workflows", "warpdotdev/workflows" %}.
+
+To create custom workflows, see {% aTargetBlank
+"https://docs.warp.dev/features/entry/workflows#creating-custom-workflows",
+"Creating Custom Workflows" %}.
 
 ## Command Palette
 
@@ -319,6 +336,9 @@ Each theme is defined by a `.yaml` file.
 
 To use or create a custom theme, see {% aTargetBlank
 "https://docs.warp.dev/appearance/custom-themes", "Custom Themes" %}.
+
+To download additional open source themes, see the Git repository
+{% aTargetBlank "https://github.com/warpdotdev/themes", "warpdotdev/themes" %}.
 
 ## Panes
 
