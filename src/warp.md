@@ -80,36 +80,100 @@ The left nav of the Settings dialog contains the following sections:
   This section contains a large number of settings.
   The highlights are:
 
-  - "Restore windows, tabs, and panes on startup" (on by default)
+  - General section
 
-    When this is on, new Warp sessions begin with all the
-    windows, tabs, and panes of the previous session.
-    However, processes that were running will not be automatically restarted.
+    - "Restore windows, tabs, and panes on startup" (on by default)
 
-  - "Show sticky command header" (on by default)
+      When this is on, new Warp sessions begin with all the
+      windows, tabs, and panes of the previous session.
+      However, processes that were running will not be automatically restarted.
 
-  - "Show tooltip on click on links" (on by default)
+    - "Show sticky command header" (on by default)
 
-    Hovering over a URL changes it to be blue and underlined.
-    Command-clicking it opens the URL in the default web browser.
-    When this option is on and a URL is clicked, a tooltip appears
-    containing "Open Link" that can be clicked to open the URL.
+    - "Show tooltip on click on links" (on by default)
 
-  - "Choose an editor to open file links" ("Default App" by default)
-    can be changed to open all file links in VSCode.
+      Hovering over a URL changes it to be blue and underlined.
+      Command-clicking it opens the URL in the default web browser.
+      When this option is on and a URL is clicked, a tooltip appears
+      containing "Open Link" that can be clicked to open the URL.
 
-    One way to get file links is to run the `ls` command.
-    Hovering over any file name that is output
-    changes it to be blue and underlined.
-    Command-clicking it opens the file in the default editor app.
-    Clicking it displays a tooltip appears containing "Open File" or
-    "Open Directory" that can be clicked to open the file
-    or open the directory in a Finder window.
+    - "Choose an editor to open file links" ("Default App" by default)
+      can be changed to open all file links in VSCode.
+
+      One way to get file links is to run the `ls` command.
+      Hovering over any file name that is output
+      changes it to be blue and underlined.
+      Command-clicking it opens the file in the default editor app.
+      Clicking it displays a tooltip appears containing "Open File" or
+      "Open Directory" that can be clicked to open the file
+      or open the directory in a Finder window.
+
+    - "Show warning before quitting" (on by default)
+
+      When this is on and an attempt is made to quit Warp
+      while there are processes running,
+      a dialog will appear allowing you to verify that you
+      really want to quit which will kill the processes.
+      Click the "Show running processes" button to see a list of the processes.
+
+  - Session section
+
+    - "Honor user's custom prompt (PS1)" (off by default)
+
+      When this is on, custom prompts created in shell configuration files
+      or by utilities like [Starship](/blog/topics/blog/starship)
+      are used.
+      Multi-line prompts may not work.
+
+  - Keys section
+
+    None of the options here are particularly interesting
+    and the default settings seem fine.
+
+  - Editor section
+
+    - "Open completions menu as you type" (off by default)
+
+      When this is on, a completions menu is display while typing commands.
+      For example, typing "git" followed by a space displays all the possible
+      git commands followed by brief descriptions.
+      This can be both very helpful and very annoying.
+
+    None of the remaining options here are particularly interesting
+    and the default settings seem fine.
+
+  - Terminal section
+
+    None of the options here are particularly interesting
+    and the default settings seem fine.
 
 - Shared blocks
+
+  These are for collaboration.
+  It's not clear whether this feature has been implemented yet.
+  By default there are no shared blocks.
+
 - Keyboard shortcuts
+
+  The keyboard shortcuts for all commands can be customized here.
+  Some commands do not have a default keyboard shortcut.
+  One example is "Rename the Current Tab".
+
+  To see all the current keyboard shortcuts at any time, press cmd-/.
+
 - Privacy
+
+  This contains options to send app analytics and crash reports
+  to the Warp team to help them improve the product.
+  Both options are on by default.
+
+  Click "Close settings and view network logging" to
+  add a command to the current pane that will
+  display all the communications being sent to the Warp team.
+
 - About
+
+  This displays the current version of Warp.
 
 ## Blocks
 
