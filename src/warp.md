@@ -60,7 +60,8 @@ To open the command palette, press cmd-p.
 
 # Themes
 
-To choose a theme
+To choose a theme, open the command palette and select "Open Theme Picker"
+or press cmd-ctrl-t.
 
 # Panes
 
@@ -70,6 +71,8 @@ to open a new pane on the right, left, down (bottom), or up (top).
 To close the currently focused pane, enter "exit" or press cmd-w.
 
 To close any pane, right-click in it and select "Close pane".
+
+To navigate to a pane in a specific direction, press cmd-option-{any-arrow-key}.
 
 To navigate to the next pane, press cmd-].
 
@@ -83,3 +86,7 @@ To open a new tab, click the "+" to the right of the last open tab.
 
 To rename a tab, right-click it, select "Rename",
 enter the new name, and press return.
+
+To navigate to the tab to the right, press cmd-}.
+
+To navigate to the tab to the left, press cmd-{.
