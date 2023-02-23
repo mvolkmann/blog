@@ -296,7 +296,7 @@ A block cannot be re-executed. However, you can:
 - right-click a block
 - select "Copy Command"
 - press cmd-v to paste it into the input area at the bottom of the pane
-- press return to execute it
+- press the return key to execute it
 
 ## Command Editing
 
@@ -305,16 +305,16 @@ The following table summarizes the most useful shortcuts.
 
 | Command               | Keyboard Shortcut |
 | --------------------- | ----------------- |
-| Delete All Left       | cmd-delete        |
-| Delete All Right      | cmd-fn-delete     |
-| Delete Word Left      | option-delete     |
-| Delete Word Right     | option-fn-delete  |
+| Clear Command Editor  | ctrl-c            |
+| Clear Screen          | ctrl-l            |
 | Insert Newline        | ctrl-j            |
 | Move to Start of Line | cmd-left-arrow    |
 | Move to End of Line   | cmd-right-arrow   |
 | Select All            | cmd-a             |
-| Clear Command Editor  | ctrl-c            |
-| Clear Screen          | ctrl-l            |
+| Delete All Left       | cmd-delete        |
+| Delete All Right      | cmd-fn-delete     |
+| Delete Word Left      | option-delete     |
+| Delete Word Right     | option-fn-delete  |
 
 For more keyboard shortcuts, see the {% aTargetBlank
 "https://docs.warp.dev/features/keyboard-shortcuts#input-editor",
@@ -322,12 +322,13 @@ For more keyboard shortcuts, see the {% aTargetBlank
 
 ## AI Commands
 
-To generate a command using an AI search, press ctrl-`.
-Enter English text describing the desired command and press return.
+To generate a command using an AI search, press ctrl-\`.
+Enter English text describing the desired command and press the return key.
 For example, entering "delete local git branch"
 suggests "git branch -d branch_name".
 To accept this suggestion, click the "Input Command" button or press cmd-return.
-Replace any placeholders and press return to execute the command.
+Replace any placeholders (such as `branch_name` above)
+and press the return key to execute the command.
 
 Sometimes the suggested commands are correct for Linux and not macOS.
 To get macOS equivalents, and "on mac" to the description.
@@ -343,7 +344,7 @@ Each workflow is defined by a `.yaml` file.
 To search for a workflow, press ctrl-shift-r.
 In the popup that appears, select a category in the left nav such as "git".
 Then click one of the workflows to copy it to the current block.
-Replace any placeholders and press return to execute the workflow.
+Replace any placeholders and press the return key to execute the workflow.
 
 Warp ships with over 100 predefined workflows.
 
@@ -468,7 +469,7 @@ Each tab can contain any number of panes.
 To open a new tab, click the "+" to the right of the last open tab.
 
 To rename a tab, right-click it, select "Rename",
-enter the new name, and press return.
+enter the new name, and press the return key.
 
 To change the color of the bottom border and background gradient of a tab,
 right-click it, and select one of the six theme colors
