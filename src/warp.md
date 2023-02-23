@@ -236,6 +236,15 @@ For example, entering "start" will find any command containing those letters
 in that order, but not necessarily together.
 This would match "fastlane screenshots".
 
+## AI Commands
+
+To generate a command using an AI search, press ctrl-`.
+Enter English text describing the desired command and press return.
+For example, entering "delete local git branch"
+suggests "git branch -d branch_name".
+To accept this suggestion, click the "Input Command" button or press cmd-return.
+Replace any placeholders and press return to execute the command.
+
 ## Workflows
 
 Workflows are named sets of commands (typically just one)
