@@ -34,6 +34,11 @@ Double-click `Warp.app` in your `Applications` directory to launch it.
 The first launch will prompt you to sign up.
 Subsequent launches will prompt you to sign in.
 
+When quitting Warp if there are any processes running in blocks,
+a dialog will appear allowing you to verify that you
+really want to quit which will kill the processes.
+Click the "Show running processes" button to see a list of the processes.
+
 ## Settings
 
 To view and modify settings, select Warp ... Settings ... Settings
@@ -71,6 +76,36 @@ The left nav of the Settings dialog contains the following sections:
   It is on by default.
 
 - Features
+
+  This section contains a large number of settings.
+  The highlights are:
+
+  - "Restore windows, tabs, and panes on startup" (on by default)
+
+    When this is on, new Warp sessions begin with all the
+    windows, tabs, and panes of the previous session.
+    However, processes that were running will not be automatically restarted.
+
+  - "Show sticky command header" (on by default)
+
+  - "Show tooltip on click on links" (on by default)
+
+    Hovering over a URL changes it to be blue and underlined.
+    Command-clicking it opens the URL in the default web browser.
+    When this option is on and a URL is clicked, a tooltip appears
+    containing "Open Link" that can be clicked to open the URL.
+
+  - "Choose an editor to open file links" ("Default App" by default)
+    can be changed to open all file links in VSCode.
+
+    One way to get file links is to run the `ls` command.
+    Hovering over any file name that is output
+    changes it to be blue and underlined.
+    Command-clicking it opens the file in the default editor app.
+    Clicking it displays a tooltip appears containing "Open File" or
+    "Open Directory" that can be clicked to open the file
+    or open the directory in a Finder window.
+
 - Shared blocks
 - Keyboard shortcuts
 - Privacy
@@ -158,6 +193,10 @@ To open a new tab, click the "+" to the right of the last open tab.
 
 To rename a tab, right-click it, select "Rename",
 enter the new name, and press return.
+
+To change the color of the bottom border and background gradient of a tab,
+right-click it, and select one of the six theme colors
+at the bottom of the popup.
 
 To navigate to the tab to the right, press cmd-}.
 
