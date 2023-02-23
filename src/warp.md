@@ -247,6 +247,22 @@ Then select "Shared blocks" in the left nav.
 To delete a permalink, click its vertical ellipsis and select "Unshare".
 Confirm this by clicking the "Unshare" button in the dialog that appears.
 
+## Block Bookmarks
+
+Blocks can be bookmarked to make it easy to find them in the future.
+
+To toggle whether a block is bookmarked,
+click its bookmark icon in the upper-right.
+Alternatively if the block is selected, press cmd-b.
+
+The pane scrollbar on the right will contain horizontal lines
+that indicate the location of each bookmarked block in the pane.
+To navigate to a bookmarked block, click one of these lines.
+
+To navigate to the previous bookmarked block, press option-up-arrow.
+
+To navigate to the new bookmarked block, press option-down-arrow.
+
 ## Commands
 
 When entering a command,
