@@ -141,7 +141,7 @@ Block commands include:
 - Copy Command
 - Copy Output
 - Copy Both (the shell command and its output)
-- Create Permalink...
+- Create Permalink... (see the "Permalink" section below)
 - Copy Prompt
 - Copy Working Directory
 - Copy Git Branch
@@ -153,21 +153,6 @@ Block commands include:
 - Split pane up - I added cmd-shift-up-arrow
 - Toggle maximize pane
 - Close pane
-
-## Permalinks
-
-Creating a permalink for a block provides a URL that can be shared with others
-to view the shell command and output associated with the block.
-When the "Create Permalink..." Warp command is run, a dialog will appear.
-Click the "Create and Copy Link" button.
-This displays the permalink URL and copies it to the clipboard.
-
-Permalinks remain active until they are deleted.
-To see all the permalinks that have been created,
-open the Settings dialog by pressing cmd-,.
-Then select "Shared blocks" in the left nav.
-To delete a permalink, click its vertical ellipsis and select "Unshare".
-Confirm this by clicking the "Unshare" button in the dialog that appears.
 
 ## Commands
 
@@ -334,6 +319,21 @@ To use or create a custom theme, see {% aTargetBlank
 
 To download additional open source themes, see the Git repository
 {% aTargetBlank "https://github.com/warpdotdev/themes", "warpdotdev/themes" %}.
+
+## Permalinks
+
+Creating a permalink for a block provides a URL that can be shared with others
+to view the shell command and output associated with the block.
+When the "Create Permalink..." Warp command is run, a dialog will appear.
+Click the "Create and Copy Link" button.
+This displays the permalink URL and copies it to the clipboard.
+
+Permalinks remain active until they are deleted.
+To see all the permalinks that have been created,
+open the Settings dialog by pressing cmd-,.
+Then select "Shared blocks" in the left nav.
+To delete a permalink, click its vertical ellipsis and select "Unshare".
+Confirm this by clicking the "Unshare" button in the dialog that appears.
 
 ## Settings
 
