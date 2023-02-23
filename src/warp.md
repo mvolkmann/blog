@@ -34,9 +34,56 @@ Double-click `Warp.app` in your `Applications` directory to launch it.
 The first launch will prompt you to sign up.
 Subsequent launches will prompt you to sign in.
 
+## Settings
+
+To view and modify settings, select Warp ... Settings ... Settings
+or press cmd-,.
+
+The left nav of the Settings dialog contains the following sections:
+
+- Account
+
+  This displays the logged in username and current version of Warp.
+
+- Appearance
+
+  When "Sync with OS" is on, Warp switches between light and dark mode
+  based on the current OS setting.
+  It is off by default.
+
+  The "Window Opacity" can be adjusted to enable
+  seeing content behind Warp windows.
+  It is 100% by default.
+
+  When the Panes "Dim inactive panes" is on, all panes except the current one
+  are dimmed to make it clear which pane is active.
+  It is off by default.
+
+  When the Blocks "Compact mode" is on, the vertical space
+  around the horizontal lines that separate blocks is removed.
+  It is off by default.
+
+  In the Text section, the "Terminal font", "Font size", and "Line height"
+  can be set.
+  I am using "FiraCode Nerd Font Mono" which supports ligatures.
+
+  In the Cursor section, the "Blinking cursor" option can be toggled.
+  It is on by default.
+
+- Features
+- Shared blocks
+- Keyboard shortcuts
+- Privacy
+- About
+
 ## Blocks
 
 Entering a shell command creates a "block".
+
+Blocks are divided by thin horizontal lines.
+By default there is a lot of vertical space on both sizes of these lines.
+To remove the space, open Settings, select Appearance,
+and toggle on "Compact mode".
 
 There are two ways to select a previous block:
 
@@ -63,6 +110,13 @@ Block actions include:
 - Split pane up
 - Toggle maximize pane
 - Close pane
+
+## Commands
+
+When entering a command, a suggested completion will appear in dimmed text.
+To accept the suggestion, press the right arrow key.
+
+To execute a command, press the return key.
 
 ## Command Palette
 
@@ -91,6 +145,10 @@ To navigate to the next pane, press cmd-].
 To navigate to the previous pane, press cmd-[.
 
 To resize panes, drag a divider line or press cmd-ctrl-{any-arrow-key}.
+
+To clear all the blocks in the current pane,
+open the command palette and select "Clear Blocks",
+enter the command "clear block", or press cmd-k.
 
 ## Tabs
 
