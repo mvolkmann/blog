@@ -13,6 +13,16 @@ Currently it only runs in macOS, but there are plans to support Linux and Window
 
 Warp is implemented in Rust.
 
+## Hierarchy
+
+Windows hold tabs.
+
+Tabs hold panes.
+
+Panes hold blocks.
+
+Blocks hold a command and its output.
+
 ## Installing
 
 To install Warp using Homebrew, enter `brew install warp`.
@@ -54,16 +64,18 @@ Block actions include:
 - Toggle maximize pane
 - Close pane
 
-# Command Palette
+## Command Palette
 
 To open the command palette, press cmd-p.
 
-# Themes
+## Themes
 
 To choose a theme, open the command palette and select "Open Theme Picker"
 or press cmd-ctrl-t.
 
-# Panes
+## Panes
+
+Each pane can hold any number of blocks.
 
 To create a new pane, right-click and select one of the "Split pane" options
 to open a new pane on the right, left, down (bottom), or up (top).
@@ -80,7 +92,9 @@ To navigate to the previous pane, press cmd-[.
 
 To resize panes, drag a divider line or press cmd-ctrl-{any-arrow-key}.
 
-# Tabs
+## Tabs
+
+Each tab can contain any number of panes.
 
 To open a new tab, click the "+" to the right of the last open tab.
 
@@ -92,3 +106,9 @@ To navigate to the tab to the right, press cmd-}.
 To navigate to the tab to the left, press cmd-{.
 
 To reorder tabs, drag them left or right.
+
+## Windows
+
+Each window can contain any number of tabs.
+
+To open a new window, select File ... New Window or press cmd-n.
