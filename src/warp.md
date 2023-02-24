@@ -367,6 +367,14 @@ Alternatively if the block is selected, press cmd-b.
 
 The pane scrollbar on the right will contain horizontal lines
 that indicate the location of each bookmarked block in the pane.
+
+The color of the bookmark icon and the horizontal lines
+is based on the selected theme.
+
+Hovering over one of the horizontal lines displays a popup that contains
+the working directory of the block, the command that was run,
+the first two lines of its output, and the number of lines that were omitted.
+
 To navigate to a bookmarked block, click one of these lines.
 
 To navigate to the previous bookmarked block, press option-up-arrow.
@@ -397,6 +405,9 @@ This opens a panel on the left that lists all the available themes.
 <img alt="Warp Theme Picker" style="width: 50%"
   src="/blog/assets/warp-theme-picker.png?v={{pkg.version}}"
   title="Warp Theme Picker">
+
+The themes listed appear to be in a somewhat random order
+and there is no option to sort them.
 
 Selecting a theme changes the display to preview the theme.
 
@@ -468,6 +479,12 @@ The left nav of the Settings dialog contains the following sections:
   The "Window Opacity" can be adjusted to enable
   seeing content behind Warp windows.
   It is 100% by default, so nothing behind Warp windows is visible.
+
+  The "Window Blur Radius" controls how much
+  the content visible behind the Warp window is blurred.
+  This only has an effect if "Window Opacity" is less than 100.
+  To make it as readable as possible, set this to the minimum value of 1.
+  To make the background less distracting, set this to a higher value.
 
   When the Panes "Dim inactive panes" option is on, all panes except the current one
   are dimmed to make it clear which pane is active.
