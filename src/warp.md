@@ -294,6 +294,11 @@ They are similar to snippets in code editors.
 Each workflow is defined by a `.yaml` file.
 
 To search for a workflow, press ctrl-shift-r.
+
+<img alt="Warp Workflows" style="width: 80%"
+  src="/blog/assets/warp-workflows.png?v={{pkg.version}}"
+  title="Warp Workflows">
+
 In the popup that appears, select a category in the left nav such as "git".
 Then click one of the workflows to copy it to the current block.
 Replace any placeholders and press the return key to execute the workflow.
