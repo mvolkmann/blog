@@ -422,17 +422,14 @@ I like the "Cyber Wave" theme.
 
 ## Custom Themes
 
-To use or create a custom theme, see {% aTargetBlank
-"https://docs.warp.dev/appearance/custom-themes", "Custom Themes" %}.
-
 The files that define custom themes must be
 placed in the `~/.warp/themes` directory.
 Create this directory if it doesn't exist.
 
 To download additional open source themes, see the Git repository
 {% aTargetBlank "https://github.com/warpdotdev/themes", "warpdotdev/themes" %}.
-This contains several subdirectories such as
-`base16`, `holiday`, and `standard`.
+This contains several subdirectories such as `base16`, `holiday`, `standard`,
+and `warp_bundled` (themes that ship with Warp).
 Each subdirectory contains a README.md file that
 displays previews of each theme defined in the directory.
 
@@ -442,6 +439,50 @@ For example, to use the "thanksgiving" theme defined in the `holiday` directory,
 create a `holiday` directory in the `~/.warp/themes` directory
 and download the files `thanksgiving.yaml` and `thanksgiving_bg.jpg` into it.
 Then open the Theme Picker and select the "Thanksgiving" theme.
+
+To create a custom theme, create a `.yaml` file similar to the one shown below.
+Including a background image is optional.
+Each theme defines `accent`, `background`, and `foreground` colors.
+The `details` property indicates whether it is `lighter` or `darker` theme.
+
+A theme defines two sets of ANSI escape "terminal" colors,
+one for "bright" and one for "normal".
+Each set defines the colors to be used in place of
+`black`, `blue`, `cyan`, `green`, `magenta`, `red`, `white`, and `yellow`.
+The selected colors can differ from these color names.
+For example, a theme might choose to use a shade of orange for `yellow`.
+
+```yaml
+background_image:
+  path: holiday/thanksgiving_bg.jpg
+  opacity: 47 # 0 to 100
+accent: '#b3deef'
+background: '#282828'
+details: darker # for dark theme?
+foreground: '#eeeeee'
+terminal_colors:
+  bright:
+    black: '#1d1d1d'
+    blue: '#b8b8b8'
+    cyan: '#a16946'
+    green: '#383838'
+    magenta: '#e8e8e8'
+    red: '#dc9656'
+    white: '#ffffff'
+    yellow: '#484848'
+  normal:
+    black: '#282828'
+    blue: '#b3deef'
+    cyan: '#73cef4'
+    green: '#c9d05c'
+    magenta: '#d3b987'
+    red: '#f43753'
+    white: '#eeeeee'
+    yellow: '#ffc24b'
+```
+
+For more detail see {% aTargetBlank
+"https://docs.warp.dev/appearance/custom-themes", "Custom Themes" %}.
 
 ## Permalinks / Shared Blocks
 
