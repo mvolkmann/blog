@@ -39,6 +39,12 @@ This creates `Warp.app` in your `Applications` directory.
 Double-click `Warp.app` in your `Applications` directory to launch it.
 The first launch will prompt you to sign up.
 
+When an update is available an "Update Available" button will appear
+on the right side of the title bar.
+Clicking displays a popup with an "Install update" option
+that lists the new version number.
+Click it download the new version.
+
 When quitting Warp if there are any processes running inside it,
 a dialog will appear allowing you to verify that you
 really want to quit which will kill the processes.
@@ -253,7 +259,12 @@ To create custom workflows, see {% aTargetBlank
 ## Finding Text
 
 The "Find" and "Find Within Block" commands open a dialog
-in the upper-right where search text can be entered.
+in the upper-right corner of the pane from which they were issued.
+Search text can be entered here.
+
+<img alt="Warp find dialog" style="width: 50%"
+  src="/blog/assets/warp-find-dialog.png?v={{pkg.version}}"
+  title="Warp find dialog">
 
 All matches are highlighted in yellow except for
 the currently selected match is highlighted in orange.
