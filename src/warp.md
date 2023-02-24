@@ -406,6 +406,8 @@ This opens a panel on the left that lists all the available themes.
   src="/blog/assets/warp-theme-picker.png?v={{pkg.version}}"
   title="Warp Theme Picker">
 
+The list of themes can be filtered by entering part of a theme name.
+
 The themes listed appear to be in a somewhat random order
 and there is no option to sort them.
 
@@ -418,11 +420,28 @@ click the X at the bottom.
 
 I like the "Cyber Wave" theme.
 
+## Custom Themes
+
 To use or create a custom theme, see {% aTargetBlank
 "https://docs.warp.dev/appearance/custom-themes", "Custom Themes" %}.
 
+The files that define custom themes must be
+placed in the `~/.warp/themes` directory.
+Create this directory if it doesn't exist.
+
 To download additional open source themes, see the Git repository
 {% aTargetBlank "https://github.com/warpdotdev/themes", "warpdotdev/themes" %}.
+This contains several subdirectories such as
+`base16`, `holiday`, and `standard`.
+Each subdirectory contains a README.md file that
+displays previews of each theme defined in the directory.
+
+To use a theme, download its `.yaml` file and
+corresponding background `.jpg` file, if it has one.
+For example, to use the "thanksgiving" theme defined in the `holiday` directory,
+create a `holiday` directory in the `~/.warp/themes` directory
+and download the files `thanksgiving.yaml` and `thanksgiving_bg.jpg` into it.
+Then open the Theme Picker and select the "Thanksgiving" theme.
 
 ## Permalinks / Shared Blocks
 
@@ -511,8 +530,10 @@ The left nav of the Settings dialog contains the following sections:
     - "Restore windows, tabs, and panes on startup" (on by default)
 
       When this option is on, new Warp sessions begin with all the
-      windows, tabs, and panes of the previous session.
-      However, processes that were running will not be automatically restarted.
+      windows, tabs, panes, and blocks of the previous session.
+      However, the bookmark status of blocks is not retained.
+      This may be a bug.
+      Also, processes that were running will not be automatically restarted.
 
       It is also possible to save multiple "launch configurations"
       so a specific one can be used in the future.
