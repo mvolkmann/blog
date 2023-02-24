@@ -64,8 +64,16 @@ by clicking the button on the right side of the title bar.
 This contains four sections titled
 "What's New?", "Getting Started", "Maximize Warp", and "Advanced Setup".
 
-For online help, browse {% aTargetBlank "https://docs.warp.dev",
-"Warp Documentation" %}.
+<img alt="Warp Essentials panel" style="width: 50%"
+  src="/blog/assets/warp-essentials-panel.png?v={{pkg.version}}"
+  title="Warp Essentials panel">
+
+To view "Keyboard Shortcuts", click the keyboard icon.
+
+To open the Settings dialog, click the gear icon.
+
+For online help, click "Docs" at the bottom of the "Warp Essentials" panel
+or browse {% aTargetBlank "https://docs.warp.dev", "Warp Documentation" %}.
 
 ## Hierarchy
 
