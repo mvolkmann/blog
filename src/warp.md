@@ -396,8 +396,13 @@ Confirm this by clicking the "Unshare" button in the dialog that appears.
 
 ## Settings
 
-To view and modify settings, select Warp ... Settings ... Settings
-or press cmd-,.
+There are several ways to view and modify settings:
+
+- Select Warp ... Settings ... Settings.
+- Open the "Warp Essentials" panel
+  by clicking the button on the right side of the title bar
+  and click the gear icon.
+- Press cmd-,
 
 <img alt="Warp Settings" style="width: 80%"
   src="/blog/assets/warp-settings.png?v={{pkg.version}}"
@@ -498,7 +503,7 @@ The left nav of the Settings dialog contains the following sections:
       are used.
       Multi-line prompts are not currently supported.
 
-  - Keys section
+  - Keyboard shortcuts section
 
     None of the options here are particularly interesting
     and the default settings seem fine.
@@ -562,3 +567,12 @@ The left nav of the Settings dialog contains the following sections:
 - About
 
   This displays the current version of Warp.
+
+## Keyboard Shortcuts
+
+To view all the keyboard shortcuts, open the "Warp Essentials" panel
+by clicking the button on the right side of the title bar
+and click the keyboard icon.
+
+To modify keyboard shortcuts, see "Keyboard shortcuts section"
+described in "Settings" above.
