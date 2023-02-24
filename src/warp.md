@@ -548,9 +548,19 @@ The left nav of the Settings dialog contains the following sections:
       are used.
       Multi-line prompts are not currently supported.
 
-  - Keyboard shortcuts section
+  - Keys section
 
-    None of the options here are particularly interesting
+    - "Hotkey Window" (off by default)
+
+      When this option is on and a keyboard shortcut is assigned,
+      pressing the keyboard shortcut when in any application
+      brings Warp to the front and makes it the active application.
+      This can configure the monitor on which is should appear,
+      the size of the screen to which it should be pinned,
+      the size of the Warp window.
+      I use cmd-shift-w for the keyboard shortcut.
+
+    None of the remaining options here are particularly interesting
     and the default settings seem fine.
 
   - Editor section
