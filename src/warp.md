@@ -23,6 +23,13 @@ If your default shell is not one of these, Warp will default to Zsh.
 The Warp team has stated that they would like to support Nushell in the future.
 
 Warp is implemented in Rust which makes it very fast.
+From the Warp FAQ, "The UI is built on our own rendering layer
+that leverages lower-level graphics APIs like
+{% aTargetBlank "https://developer.apple.com/metal/", "Metal" %}."
+
+Warp uses GPU-acceleration.
+From the Warp FAQ, "Picking GPU acceleration
+has allowed us to be a way over 60fps on a 4K screen."
 
 Vim keybindings are not currently supported, but
 the Warp team has stated that they want to add support.
@@ -256,6 +263,15 @@ To create custom workflows, see {% aTargetBlank
 "https://docs.warp.dev/features/entry/workflows#creating-custom-workflows",
 "Creating Custom Workflows" %}.
 
+## Selecting Text
+
+To select text, perhaps to copy it, drag over it as you would in most editors.
+Additionally "Smart-Select" allows you to to select a
+file path, URL, email address, IP address, or floating point number
+by double-clicking it.
+To enable or disable this feature, see Settings ... Features ...
+Terminal ... Double-click smart selection.
+
 ## Finding Text
 
 The "Find" and "Find Within Block" commands open a dialog
@@ -466,7 +482,13 @@ The left nav of the Settings dialog contains the following sections:
 
   - Terminal section
 
-    None of the options here are particularly interesting
+    - "Double-click smart selection" (on by default)
+
+      When this option is on, double-clicking any of the
+      following kinds of values selects the entire value:
+      file path, URL, email address, IP address, or floating point number.
+
+    None of the remaining options here are particularly interesting
     and the default settings seem fine.
 
 - Shared blocks
