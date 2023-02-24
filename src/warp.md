@@ -452,6 +452,9 @@ Each set defines the colors to be used in place of
 The selected colors can differ from these color names.
 For example, a theme might choose to use a shade of orange for `yellow`.
 
+ANSI colors use numbers 0 to 15.
+Normal colors are 0 to 7 and bright colors are 8 to 15.
+
 ```yaml
 background_image:
   path: holiday/thanksgiving_bg.jpg
@@ -461,24 +464,24 @@ background: '#282828'
 details: darker # for dark theme?
 foreground: '#eeeeee'
 terminal_colors:
-  bright:
-    black: '#1d1d1d'
-    blue: '#b8b8b8'
-    cyan: '#a16946'
-    green: '#383838'
-    magenta: '#e8e8e8'
-    red: '#dc9656'
-    white: '#ffffff'
-    yellow: '#484848'
   normal:
-    black: '#282828'
-    blue: '#b3deef'
-    cyan: '#73cef4'
-    green: '#c9d05c'
-    magenta: '#d3b987'
-    red: '#f43753'
-    white: '#eeeeee'
-    yellow: '#ffc24b'
+    black: '#282828' # 0
+    red: '#f43753' # 1
+    green: '#c9d05c' # 2
+    yellow: '#ffc24b' # 3
+    blue: '#b3deef' # 4
+    magenta: '#d3b987' # 5
+    cyan: '#73cef4' # 6
+    white: '#eeeeee' # 7
+  bright:
+    black: '#1d1d1d' # 8
+    red: '#dc9656' # 9
+    green: '#383838' # 10
+    yellow: '#484848' # 11
+    blue: '#b8b8b8' # 12
+    magenta: '#e8e8e8' # 13
+    cyan: '#a16946' # 14
+    white: '#ffffff' # 15
 ```
 
 For more detail see {% aTargetBlank
