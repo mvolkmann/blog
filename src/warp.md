@@ -376,6 +376,11 @@ and is defined by a `.yaml` file.
 To choose a theme, open the command palette and select "Open Theme Picker"
 or press cmd-ctrl-t.
 This opens a panel on the left that lists all the available themes.
+
+<img alt="Warp Theme Picker" style="width: 50%"
+  src="/blog/assets/warp-theme-picker.png?v={{pkg.version}}"
+  title="Warp Theme Picker">
+
 Selecting a theme changes the display to preview the theme.
 
 To change the theme being used to the selected one,
