@@ -9,6 +9,10 @@ layout: topic-layout.njk
 {% aTargetBlank "https://www.warp.dev", "Warp" %} is
 "the terminal for the 21st century".
 
+<img alt="Warp Logo" style="width: 20%"
+  src="/blog/assets/warp-logo.png?v={{pkg.version}}"
+  title="Warp Logo">
+
 Currently Warp only runs in macOS, but there are plans to
 support web (through WASM), Linux, and Windows in the future.
 
@@ -357,6 +361,10 @@ To toggle whether a block is bookmarked,
 click its bookmark icon in the upper-right.
 Alternatively if the block is selected, press cmd-b.
 
+<img alt="Warp Bookmark" style="width: 20%"
+  src="/blog/assets/warp-bookmark.png?v={{pkg.version}}"
+  title="Warp Bookmark">
+
 The pane scrollbar on the right will contain horizontal lines
 that indicate the location of each bookmarked block in the pane.
 To navigate to a bookmarked block, click one of these lines.
@@ -371,6 +379,10 @@ To quickly find and execute a Warp command (not a shell command),
 open the command palette by pressing cmd-p,
 filter the list of commands by typing part of its name,
 and click a command.
+
+<img alt="Warp Command Palette" style="width: 80%"
+  src="/blog/assets/warp-command-palette.png?v={{pkg.version}}"
+  title="Warp Command Palette">
 
 ## Themes
 
@@ -609,3 +621,7 @@ and click the keyboard icon.
 
 To modify keyboard shortcuts, see "Keyboard shortcuts section"
 described in "Settings" above.
+
+<img alt="Warp Settings Keyboard Shortcuts" style="width: 80%"
+  src="/blog/assets/warp-settings-keyboard-shortcuts.png?v={{pkg.version}}"
+  title="Warp Settings Keyboard Shortcuts">
