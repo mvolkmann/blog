@@ -73,6 +73,14 @@ Each window can contain any number of tabs.
 
 To open a new window, select File ... New Window or press cmd-n.
 
+To move a window to a different monitor,
+select one of the "Move to" options on the Window menu.
+
+To switch to full-screen mode, select "Enter Full Screen" from the Window menu
+or press fn-f.
+To exit full-screen mode, hover over the top of the window
+and click the green circle or press fn-f again.
+
 ## Tabs
 
 Each tab can contain any number of panes.
