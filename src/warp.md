@@ -358,8 +358,14 @@ To download additional open source themes, see the Git repository
 
 Creating a permalink for a block provides a URL that can be shared with others
 to view the shell command and output associated with the block.
-When the "Create Permalink..." Warp command is run, a dialog will appear.
-Click the "Create and Copy Link" button.
+
+There are multiple ways to initiate create a permalink:
+
+- Open the command palette and select the "Share Selected Block" command.
+- Right-click anywhere in the block or click the vertical ellipsis and select "Create Permalink...".
+
+Either way a dialog will appear.
+Click the "Create and Copy Link" button to create the permalink.
 This displays the permalink URL and copies it to the clipboard.
 
 Permalinks remain active until they are deleted.
