@@ -57,6 +57,16 @@ a dialog will appear allowing you to verify that you
 really want to quit which will kill the processes.
 Click the "Show running processes" button to see a list of the processes.
 
+## Help
+
+To get help on using Warp, open the "Warp Essentials" panel
+by clicking the button on the right side of the title bar.
+This contains four sections titled
+"What's New?", "Getting Started", "Maximize Warp", and "Advanced Setup".
+
+For online help, browse {% aTargetBlank "https://docs.warp.dev",
+"Warp Documentation" %}.
+
 ## Hierarchy
 
 Warp uses the terms window, tab, pane, and block.
