@@ -85,7 +85,8 @@ and click the green circle or press fn-f again.
 
 Each tab can contain any number of panes.
 
-To open a new tab, click the "+" to the right of the last open tab.
+To open a new tab, click the "+" to the right of the last open tab
+or press cmd-t.
 
 To rename a tab, right-click it, select "Rename",
 enter the new name, and press the return key.
@@ -133,10 +134,6 @@ open the command palette and select "Toggle Maximize Active Pane"
 or press cmd-shift-return.
 To undo this, execute the same command again.
 
-To clear all the blocks in the current pane,
-open the command palette and select "Clear Blocks",
-enter the Warp command "clear block", or press cmd-k.
-
 To see a list of all current panes across all tabs, press cmd-shift-p.
 This opens a dialog that lists the panes.
 Alternatively, press cmd-p to open the command palette and type "@".
@@ -182,6 +179,13 @@ Block commands include:
 - Toggle maximize pane
 - Close pane
 
+To scroll to the top of the output in a block,
+click its command at the top of the block.
+
+To clear all the blocks in the current pane,
+open the command palette and select "Clear Blocks",
+enter the Warp command "clear block", or press cmd-k.
+
 ## Commands
 
 When entering a shell command or Warp command,
@@ -226,18 +230,20 @@ A block cannot be re-executed. However, you can:
 There are many keyboard shortcuts that trigger text editing commands.
 The following table summarizes the most useful shortcuts.
 
-| Command               | Keyboard Shortcut |
-| --------------------- | ----------------- |
-| Clear Command Editor  | ctrl-c            |
-| Clear Screen          | ctrl-l            |
-| Insert Newline        | ctrl-j            |
-| Move to Start of Line | cmd-left-arrow    |
-| Move to End of Line   | cmd-right-arrow   |
-| Select All            | cmd-a             |
-| Delete All Left       | cmd-delete        |
-| Delete All Right      | cmd-fn-delete     |
-| Delete Word Left      | option-delete     |
-| Delete Word Right     | option-fn-delete  |
+| Command                | Keyboard Shortcut  |
+| ---------------------- | ------------------ |
+| Clear Command Editor   | ctrl-c             |
+| Clear Screen           | ctrl-l             |
+| Insert Newline         | ctrl-j             |
+| Move Backward One Word | option-left-arrow  |
+| Move Forward One Word  | option-right-arrow |
+| Move to Start of Line  | cmd-left-arrow     |
+| Move to End of Line    | cmd-right-arrow    |
+| Select All             | cmd-a              |
+| Delete All Left        | cmd-delete         |
+| Delete All Right       | cmd-fn-delete      |
+| Delete Word Left       | option-delete      |
+| Delete Word Right      | option-fn-delete   |
 
 For more keyboard shortcuts, see the {% aTargetBlank
 "https://docs.warp.dev/features/keyboard-shortcuts#input-editor",
@@ -246,6 +252,11 @@ For more keyboard shortcuts, see the {% aTargetBlank
 ## AI Commands
 
 To generate a shell command using an AI search, press ctrl-\`.
+
+<img alt="Warp AI Command Search" style="width: 80%"
+  src="/blog/assets/warp-ai-command-search.png?v={{pkg.version}}"
+  title="Warp AI Command Search">
+
 Enter English text describing the desired command and press the return key.
 For example, entering "delete local git branch"
 suggests "git branch -d branch_name".
@@ -293,7 +304,7 @@ The "Find" and "Find Within Block" commands open a dialog
 in the upper-right corner of the pane from which they were issued.
 Search text can be entered here.
 
-<img alt="Warp find dialog" style="width: 50%"
+<img alt="Warp find dialog" style="width: 80%"
   src="/blog/assets/warp-find-dialog.png?v={{pkg.version}}"
   title="Warp find dialog">
 
@@ -387,6 +398,10 @@ Confirm this by clicking the "Unshare" button in the dialog that appears.
 
 To view and modify settings, select Warp ... Settings ... Settings
 or press cmd-,.
+
+<img alt="Warp Settings" style="width: 80%"
+  src="/blog/assets/warp-settings.png?v={{pkg.version}}"
+  title="Warp Settings">
 
 The left nav of the Settings dialog contains the following sections:
 
@@ -533,6 +548,11 @@ The left nav of the Settings dialog contains the following sections:
   This contains options to send app analytics and crash reports
   to the Warp team to help them improve the product.
   Both options are on by default.
+
+  The captured telemetry data only contains metadata
+  such as the Warp commands used.
+  It does not contain keystrokes, shell commands entered,
+  or shell command output.
 
   Click "Close settings and view network logging" to
   add a shell command in the current pane that displays
