@@ -120,6 +120,11 @@ To navigate to a pane in a specific direction, press cmd-option-{arrow-key}.
 
 To resize panes, drag a divider line or press cmd-ctrl-{arrow-key}.
 
+To temporarily change the current pane to occupy the entire window,
+open the command palette and select "Toggle Maximize Active Pane"
+or press cmd-shift-return.
+To undo this, execute the same command again.
+
 To clear all the blocks in the current pane,
 open the command palette and select "Clear Blocks",
 enter the Warp command "clear block", or press cmd-k.
@@ -130,6 +135,8 @@ Alternatively, press cmd-p to open the command palette and type "@".
 Each pane is described by providing its current working directory
 and the last command executed in it.
 To navigate to one of the panes, click its description.
+
+Currently there is no way to swap the positions of two panes within their tab.
 
 ## Blocks
 
@@ -414,7 +421,7 @@ The left nav of the Settings dialog contains the following sections:
       It is also possible to save multiple "launch configurations"
       so a specific one can be used in the future.
       To save the current configuration, open the command palette
-      and select the "Save Current Configuration" command.
+      and select the "Save New Launch Configuration" command.
       This opens a dialog containing a "Save Configuration" button.
       For more detail, see {% aTargetBlank
       "https://docs.warp.dev/features/sessions/launch-configurations",
