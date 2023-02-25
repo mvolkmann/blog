@@ -385,6 +385,8 @@ To navigate to the previous bookmarked block, press option-up-arrow.
 
 To navigate to the new bookmarked block, press option-down-arrow.
 
+Block bookmarks are not saved across sessions. This may be a bug.
+
 ## Command Palette
 
 To quickly find and execute a Warp command (not a shell command),
@@ -412,8 +414,9 @@ This opens a panel on the left that lists all the available themes.
 
 The list of themes can be filtered by entering part of a theme name.
 
-The themes listed appear to be in a somewhat random order
-and there is no option to sort them.
+The themes listed appear to be in a somewhat random order.
+Currently there is no option to sort them by name or
+separate them into groups of light and dark themes.
 
 Selecting a theme changes the display to preview the theme.
 
@@ -421,8 +424,6 @@ To change the theme being used to the selected one,
 click the checkmark at the bottom.
 To close the theme picker without changing the theme being used,
 click the X at the bottom.
-
-I like the "Cyber Wave" theme.
 
 ## Custom Themes
 
