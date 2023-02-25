@@ -210,9 +210,13 @@ enter the Warp command "clear block", or press cmd-k.
 
 ## Commands
 
-When entering a shell command or Warp command,
-recognized commands are displayed in green and
-unrecognized commands are underlined with a red, dashed line.
+When entering a shell command or Warp command:
+
+- Recognized commands are displayed in green (ex. `git`).
+- Recognized subcommands are displayed in blue (ex. `branch` in `git branch`).
+- Recognized flags are displayed in yellow (ex. `-all` in `git branch --all`).
+- Environment variable references are displayed in magenta (ex. `$PATH`).
+- Unrecognized commands are underlined with a red, dashed line.
 
 For recognized commands, a suggested completion may appear in dimmed text.
 To accept the suggestion, press the right arrow key.
