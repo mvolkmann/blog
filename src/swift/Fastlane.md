@@ -873,7 +873,9 @@ platform :ios do
   end
 
   desc "Uploads the app to TestFlight"
+  # Update version and build number of target before running this.
   lane :beta do
+    build
     # I prefer to update the Version and Build numbers manually in Xcode.
     # increment_build_number
     # increment_version_number(bump_type: "patch")
@@ -907,8 +909,10 @@ platform :ios do
     )
   end
 
-  # Uploads the app to the App Store
+  desc "Uploads the app to the App Store"
+  # Update version and build number of target before running this.
   lane :prod do
+    build
     upload_to_app_store(
       ipa: './fastlane/builds/WeatherKitDemo.ipa', # in fastlane/builds
       # run_precheck_before_submit: false,
