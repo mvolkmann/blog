@@ -5337,8 +5337,8 @@ struct ContentView: View {
 
     @FocusState private var focusedField: Field?
 
-    @State private var caloriesBurned = 850
-    @State private var cyclingMiles = 20.0
+    @State private var caloriesBurned = "850"
+    @State private var cyclingMiles = "20.0"
 
     var body: some View {
         Form {
