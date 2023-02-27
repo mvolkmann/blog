@@ -722,3 +722,14 @@ described in "Settings" above.
 <img alt="Warp Settings Keyboard Shortcuts" style="width: 80%"
   src="/blog/assets/warp-settings-keyboard-shortcuts.png?v={{pkg.version}}"
   title="Warp Settings Keyboard Shortcuts">
+
+## Issues
+
+I have filed the following issues:
+
+- show time to run in each block:
+  {% aTargetBlank "https://github.com/warpdotdev/Warp/issues/2720", "2720" %}
+- order in theme picker
+  {% aTargetBlank "https://github.com/warpdotdev/Warp/issues/2721", "2721" %}
+- persist bookmarked blocks
+  {% aTargetBlank "https://github.com/warpdotdev/Warp/issues/2722", "2722" %}
