@@ -8516,10 +8516,16 @@ struct ContentView_Previews: PreviewProvider {
 To detect when the app moves between the
 foreground, background, and inactive states, get the {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/scenephase",
-"scenePhase" %} from the environment and apply the {% aTargetBlank
+"scenePhase" %} from the environment.
+Apply the {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/view/onchange(of:perform:)",
 "onChange" %} view modifier to any view
 to watch for changes to the `scenePhase`.
+Values include `active` (in foreground and interactive),
+`inactive` (in foreground but not interactive; should pause work),
+and `background` (not currently visible).
+One use is to reload data that may have changed
+since the last time the app was active.
 
 For example:
 
@@ -8531,6 +8537,9 @@ struct ContentView: View {
         Button("Tap Me!") {
             print("got tap")
         }
+        // To get old and new values ...
+        // .onChange(of: scenePhase) { [scenePhase] newPhase in
+        // To get only the new value ...
         .onChange(of: scenePhase) { newPhase in
             print("phase is now \(newPhase)")
         }

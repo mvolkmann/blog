@@ -97,3 +97,5 @@ and changes made in running apps appear in Realm Studio.
    This will find a package named "realm-swift".
 1. Add this package to obtain both "Realm" and "RealmDatabase".
 1. Create model structs. 23:00 in video
+
+TODO: Add more detail to this page!
