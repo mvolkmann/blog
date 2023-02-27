@@ -8537,11 +8537,13 @@ struct ContentView: View {
         Button("Tap Me!") {
             print("got tap")
         }
-        // To get old and new values ...
-        // .onChange(of: scenePhase) { [scenePhase] newPhase in
         // To get only the new value ...
-        .onChange(of: scenePhase) { newPhase in
-            print("phase is now \(newPhase)")
+        // .onChange(of: scenePhase) { newPhase in
+        // To get old and new values ...
+        .onChange(of: scenePhase) { [scenePhase] newPhase in
+            if scenePhase == .background, newPhase == .inactive {
+                // Reload data here.
+            }
         }
     }
 }
