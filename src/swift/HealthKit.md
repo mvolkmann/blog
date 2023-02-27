@@ -694,22 +694,32 @@ class HealthManager: ObservableObject {
         startDate: Date,
         endDate: Date
     ) async throws -> Double {
-        let quantityType = HKSampleType.quantityType(forIdentifier: identifier)!
-        let datePredicate = HKQuery.predicateForSamples(
-            withStart: startDate,
-            end: endDate
-        )
-        let samplePredicate = HKSamplePredicate.quantitySample(
-            type: quantityType,
-            predicate: datePredicate
-        )
-        let descriptor = HKSampleQueryDescriptor(
-            predicates: [samplePredicate],
-            sortDescriptors: []
-        )
-        let samples = try await descriptor.result(for: store)
-        let sum = samples.reduce(0) { $0 + $1.quantity.doubleValue(for: unit) }
-        return sum / Double(samples.count)
+        try await withCheckedThrowingContinuation { completion in
+            let quantityType = HKQuantityType.quantityType(
+                forIdentifier: identifier
+            )!
+            let predicate: NSPredicate? = HKQuery.predicateForSamples(
+                withStart: startDate,
+                end: endDate,
+                // This option means the values must occur at date where
+                // stateDate <= date < endDate.
+                options: HKQueryOptions.strictEndDate
+            )
+            let query = HKStatisticsQuery(
+                quantityType: quantityType,
+                quantitySamplePredicate: predicate,
+                options: .discreteAverage
+            ) { (_: HKStatisticsQuery, result: HKStatistics?, error: Error?) in
+                if let error {
+                    completion.resume(throwing: error)
+                } else {
+                    let quantity: HKQuantity? = result?.averageQuantity()
+                    let result = quantity?.doubleValue(for: unit)
+                    completion.resume(returning: result ?? 0)
+                }
+            }
+            store.execute(query)
+        }
     }
 
     func sum(
