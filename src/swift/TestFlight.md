@@ -164,6 +164,8 @@ every time a new version of the app is released:
 1. If the build to be distributed has a STATUS of "Missing Compliance",
    click the "Manage" link and answer the questions asked.
    The status should change to "Ready to Submit".
+   To avoid being prompted about this in the future,
+   add the Info key "App Uses Non-Exempt Encryption" with a value of "NO".
 1. Click the build number to be distributed (ex. 4).
 
 1. If this is the first time distributing this app ...
