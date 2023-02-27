@@ -12,21 +12,47 @@ layout: topic-layout.njk
 
 ## Overview
 
-Workout Entry simplifies adding workouts to the Apple Health app.
+This app simplifies entering data about workouts which is useful for
+filling Activity Rings in your Apple Watch Activity App
+or in your iPhone Fitness app.
 
-While it is possible to manually add workouts in the Apple Health app,
-it is a tedious process.
+There are three primary reasons to use this app:
 
-Describe your most common workout on the Settings screen.
-Add a workout from the Workout screen.
-If all the default values taken from the Settings screen
-are correct for the workout being added,
-tapping the "Add Workout" button is all that is required.
-If any characteristics of the workout need to be modified,
-provide new values for any of the following:
-Workout Type, Date, Start Time, End Time, distance (for workouts that
-include a distance such as Cycling, Hiking, Running, Swimming, and Walking),
-and Calories Burned.
+1. You do not have a device that can record your workout.
+1. You have a device, but you forgot to use it.
+1. You have a device and you started it,
+   but something went wrong and the workout was not recorded.
+
+In all of these cases one solution is to
+enter the details workouts manually in the iPhone Health app.
+But doing this is tedious.
+
+This app simplifies the process adding workouts to the Health app.
+
+## Steps to Use
+
+1. Describe your most common workout on the "Settings" screen.
+   The values entered here serve as defaults on the "Workout" screen
+   so they do not need to be entered when similar workouts are repeated.
+
+2. Add a workout from the "Workout" screen.
+
+   If all the default values taken from the "Settings" screen
+   are correct for the workout being added,
+   tapping the "Add Workout" button is all that is required.
+
+   If any details about the workout need to be modified,
+   provide new values for any of the following:
+
+   - Workout Type
+   - Date
+   - Start Time
+   - End Time
+   - Distance, only for workouts that include a distance such as
+     Cycling, Hiking, Running, Swimming, and Walking
+   - Calories Burned
+
+3. View your workout and health statistics on the "Statistics" screen.
 
 ## Contact Information
 
