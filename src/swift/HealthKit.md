@@ -700,10 +700,7 @@ class HealthManager: ObservableObject {
             )!
             let predicate: NSPredicate? = HKQuery.predicateForSamples(
                 withStart: startDate,
-                end: endDate,
-                // This option means the values must occur at date where
-                // stateDate <= date < endDate.
-                options: HKQueryOptions.strictEndDate
+                end: endDate
             )
             let query = HKStatisticsQuery(
                 quantityType: quantityType,
@@ -734,10 +731,7 @@ class HealthManager: ObservableObject {
             )!
             let predicate: NSPredicate? = HKQuery.predicateForSamples(
                 withStart: startDate,
-                end: endDate,
-                // This option means the values must occur at date where
-                // stateDate <= date < endDate.
-                options: HKQueryOptions.strictEndDate
+                end: endDate
             )
             let query = HKStatisticsQuery(
                 quantityType: quantityType,
