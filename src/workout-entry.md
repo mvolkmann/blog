@@ -48,20 +48,22 @@ The "Statistics" screen displays the following health statistics:
 
 - Walk+Run Distance total for this year
 - Cycling Distance total for this year
-- Average Heart Rate over the last seven days
-- Average Resting Heart Rate over the last seven days
-- Steps over the last seven days
-- Calories Burned over the last seven days
+- Heart Rate Average over the last seven days
+- Resting Heart Rate Average over the last seven days
+- Steps per day over the last seven days
+- Active Calories Burned per day over the last seven days
+- Basal Calories Burned per day over the last seven days
+- Total Calories Burned per day over the last seven days
 
 <img alt="Workout Entry Statistics screen" style="width: 40%"
-    src="/blog/assets/workout-entry/1-iphone-6.5-statistics.png?v={{pkg.version}}"
+    src="/blog/assets/workout-entry/2-iphone-6.5-statistics.png?v={{pkg.version}}"
     title="Workout Entry Statistics screen">
 
 ## Settings Screen
 
 The "Settings" screen supports entering default values
-that are used when adding a new workout.
+that are used when adding a new workout on the first screen.
 
 <img alt="Workout Entry Settings screen" style="width: 40%"
-    src="/blog/assets/workout-entry/1-iphone-6.5-settings.png?v={{pkg.version}}"
+    src="/blog/assets/workout-entry/3-iphone-6.5-settings.png?v={{pkg.version}}"
     title="Workout Entry Settings screen">
