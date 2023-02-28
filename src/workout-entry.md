@@ -12,8 +12,8 @@ layout: topic-layout.njk
 
 ## Overview
 
-This app simplifies entering data about workouts which is useful for
-filling Activity Rings in your Apple Watch Activity App
+This app simplifies entering data about workouts which is
+useful for filling Activity Rings in your Apple Watch Activity App
 or in your iPhone Fitness app.
 
 There are three primary reasons to use this app:
@@ -24,7 +24,7 @@ There are three primary reasons to use this app:
    but something went wrong and the workout was not recorded.
 
 In all of these cases one solution is to
-enter the details workouts manually in the iPhone Health app.
+enter the details of workouts manually in the iPhone Health app.
 But doing this is tedious.
 
 This app simplifies the process adding workouts to the Health app.
@@ -48,8 +48,8 @@ This app simplifies the process adding workouts to the Health app.
    - Date
    - Start Time
    - End Time
-   - Distance, only for workouts that include a distance such as
-     Cycling, Hiking, Running, Swimming, and Walking
+   - Distance (only for workouts that include a distance such as
+     Cycling, Hiking, Running, Swimming, and Walking)
    - Calories Burned
 
 3. View your workout and health statistics on the "Statistics" screen.
