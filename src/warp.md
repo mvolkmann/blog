@@ -629,17 +629,17 @@ The left nav of the Settings dialog contains the following sections:
 
     - "Honor user's custom prompt (PS1)" (off by default)
 
-      When this option is on, custom prompts
-      created in shell configuration files or
-      by utilities like [Starship](/blog/topics/blog/starship)
-      are used.
-      Multi-line prompts are not currently supported.
-
       When this option is off, the provided prompt
       displays the working directory.
       If the directory is associated with a git repository,
       it also shows the current branch and the number of
       uncommitted files that are untracked or modified.
+
+      When this option is on, custom prompts
+      created in shell configuration files or
+      by utilities like [Starship](/blog/topics/blog/starship)
+      are used.
+      Multi-line prompts are not currently supported.
 
   - Keys section
 
