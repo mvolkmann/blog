@@ -701,6 +701,8 @@ so I can enter a description of what changed in the new version.
 
 The lane definition below has not worked for me yet,
 but it provides a starting point.
+See {% aTargetBlank "https://docs.fastlane.tools/actions/deliver/#submit-build",
+"deliver - Submit Build" %}.
 
 1. Add the following lane in `fastlane/Fastfile`:
 
@@ -911,6 +913,7 @@ platform :ios do
 
   desc "Uploads the app to the App Store"
   # Update version and build number of target before running this.
+  # See https://docs.fastlane.tools/actions/deliver/#submit-build.
   lane :prod do
     build
     upload_to_app_store(
