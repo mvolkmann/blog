@@ -635,6 +635,12 @@ The left nav of the Settings dialog contains the following sections:
       are used.
       Multi-line prompts are not currently supported.
 
+      When this option is off, the provided prompt
+      displays the working directory.
+      If the directory is associated with a git repository,
+      it also shows the current branch and the number of
+      uncommitted files that are untracked or modified.
+
   - Keys section
 
     - "Hotkey Window" (off by default)
