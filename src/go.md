@@ -1,6 +1,6 @@
 ---
 eleventyNavigation:
-  key: Go Programming Language
+  key: Go
 layout: topic-layout.njk
 ---
 
