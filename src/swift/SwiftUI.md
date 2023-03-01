@@ -2148,6 +2148,15 @@ ScrollView {
 
 ### Grid Containers
 
+#### Grid
+
+The views {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/grid", "Grid" %}
+and {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/gridrow", "GridRow" %}
+are used to arrange other views in a grid of rows and columns.
+See [Grid](/blog/swift/grid) for details.
+
 #### LazyHGrid
 
 The {% aTargetBlank

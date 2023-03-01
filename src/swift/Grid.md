@@ -52,8 +52,10 @@ with a value like `.bottom`, `.center`, or `.top`.
 ## Columns
 
 To set the default horizontal alignment of all cells in a column,
-apply the `gridColumnAlignment` view modifier to any one cell in the column
+apply the `gridColumnAlignment` view modifier to
+the corresponding view in the first `GridRow`
 with a value like `.leading`, `.center`, or `.trailing`.
+The same alignment will be used for all views in that column.
 
 ## Cells
 
