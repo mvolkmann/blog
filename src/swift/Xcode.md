@@ -515,6 +515,10 @@ adds a static `==` method that returns `true` if all the properties are equal.
 There are more context-sensitive Refactor menu options
 that are less frequently used.
 
+For more on Xcode refactoring, see {% aTargetBlank
+"https://www.avanderlee.com/swift/xcode-refactoring/",
+"Xcode refactoring options explained with examples" %} from SwiftLee.
+
 ### Sorting
 
 By default Xcode does not have the ability to sort selected lines.
