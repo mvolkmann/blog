@@ -629,8 +629,9 @@ The left nav of the Settings dialog contains the following sections:
 
     - "Honor user's custom prompt (PS1)" (off by default)
 
-      When this option is off, the provided prompt
-      displays the working directory.
+      When this option is off, executed blocks show
+      the number of seconds it took to run their command.
+      The provided prompt displays the working directory.
       If the directory is associated with a git repository,
       it also shows the current branch and the number of
       uncommitted files that are untracked or modified.
@@ -733,8 +734,6 @@ described in "Settings" above.
 
 I have filed the following issues:
 
-- show time to run in each block:
-  {% aTargetBlank "https://github.com/warpdotdev/Warp/issues/2720", "2720" %}
 - order in theme picker
   {% aTargetBlank "https://github.com/warpdotdev/Warp/issues/2721", "2721" %}
 - persist bookmarked blocks

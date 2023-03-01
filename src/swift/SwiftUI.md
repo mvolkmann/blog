@@ -7240,6 +7240,11 @@ struct ContentView: View {
 }
 ```
 
+For information on choosing between implementing a custom view
+or a custom view modifiers, see {% aTargetBlank
+"https://www.swiftbysundell.com/articles/swiftui-views-versus-modifiers/",
+"SwiftUI views versus modifiers" %} by John Sundell.
+
 ### Conditionally Applying View Modifiers
 
 To enable conditionally applying view modifiers,
