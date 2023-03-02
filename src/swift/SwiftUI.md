@@ -3226,6 +3226,8 @@ struct ContentView: View {
                 // `.delete` to allow deleting rows, but not moving them.
                 // `.move` to allow moving rows, but not deleting them.
                 // `.all` to allow users to delete and move rows.
+                // To delete a row, swipe left and tap the red "Delete" button.
+                // To move a row, long-press and drag it up or down.
                 List($dogs, id: \.name, editActions: .all) { $dog in
                     DogRow(dog: dog)
                 }
