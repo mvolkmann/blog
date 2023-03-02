@@ -1448,6 +1448,10 @@ Literal `Character` values are delimited by double-quotes.
 
 Swift provides the `Date` and `Calendar` structs for operating on dates.
 
+To represent a date that is before all real dates, use `Date.distantPast`.
+
+To represent a date that is after all real dates, use `Date.distantFuture`.
+
 The `formatted` method can return part of a `Date` as a `String`.
 For example:
 

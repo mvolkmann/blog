@@ -213,7 +213,7 @@ enter the Warp command "clear block", or press cmd-k.
 When entering a shell command or Warp command:
 
 - Recognized commands are displayed in green (ex. `git`).
-- Recognized subcommands are displayed in blue (ex. `branch` in `git branch`).
+- Recognized subcommands are displayed in light blue (ex. `branch` in `git branch`).
 - Recognized flags are displayed in yellow (ex. `-all` in `git branch --all`).
 - Environment variable references are displayed in magenta (ex. `$PATH`).
 - Unrecognized commands are underlined with a red, dashed line.
@@ -292,6 +292,11 @@ and press the return key to execute the command.
 
 Sometimes the suggested commands are correct for Linux and not macOS.
 To get macOS equivalents, add "on mac" to the English description.
+
+AI search can also be used to ask questions not related to shell commands.
+For example, asking "What is a Whippet?" gives the suggestion
+"A whippet is a small breed of dog with a distinctively tightly curled tail."
+Unfortunately this is a bad description.
 
 ## Workflows
 
@@ -613,6 +618,7 @@ The left nav of the Settings dialog contains the following sections:
       Hovering over any file name that is output
       changes it to be blue and underlined.
       Command-clicking it opens the file in the default editor app.
+      For directory paths the Finder opens.
       Clicking it displays a tooltip containing a button labelled
       "Open File" or "Open Directory" that can be clicked to
       open the file or open the directory in a Finder window.
