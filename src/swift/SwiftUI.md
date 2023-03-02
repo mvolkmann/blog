@@ -1778,6 +1778,9 @@ apply the {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/path/tint(_:)", "tint" %}
 view modifier.
 For non-control views, apply the `foregroundColor` view modifier.
+To specify the default accent color for all controls,
+apply the `tint` view modifier to the top view (often named `ContentView`).
+
 For example:
 
 ```swift
