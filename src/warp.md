@@ -123,6 +123,9 @@ To navigate to the tab to the left, press cmd-{.
 
 To reorder tabs, drag them left or right.
 
+Dragging a directory from the Finder onto the Warp app dock icon
+opens a new tab in that directory where the title is the directory path.
+
 ## Panes
 
 Each pane can hold any number of blocks.
@@ -222,6 +225,9 @@ For recognized commands, a suggested completion may appear in dimmed text.
 To accept the suggestion, press the right arrow key.
 
 To execute the entered command, press the return key.
+
+Dragging a file or directory from the Finder to the command entry area
+inserts its full path.
 
 To enter multiple commands on separate lines,
 press ctrl-j (runs the "Insert Newline" command)
