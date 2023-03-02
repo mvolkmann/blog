@@ -95,7 +95,7 @@ The Navigator panel displays the following nine icon buttons at the top:
   whose source control status has changed (ex. modified files).
 
   <img alt="Xcode Project Navigator buttons" class="keep-size"
-    src="/blog/assets/Xcode-Project-Navigator-buttons.png?v={{pkg.version}}">
+    src="/blog/assets/xcode-project-navigator-buttons.png?v={{pkg.version}}">
 
 - 2nd tab - Source Control Navigator ("x" in square icon)
 
@@ -203,7 +203,7 @@ This can be toggled between showing and hiding by pressing cmd-option-0
 or tapping the following button on the right side of the title bar:
 
 <img alt="Xcode toggle Inspector panel" class="keep-size"
-  src="/blog/assets/Xcode-toggle-panel.png?v={{pkg.version}}">
+  src="/blog/assets/xcode-toggle-panel.png?v={{pkg.version}}">
 
 ## Files
 
@@ -555,9 +555,6 @@ The output from `print` calls only appears when running in the debug mode.
 
 Xcode used to support debug mode in Previews,
 but now it is only supported in the Simulator.
-This is why `print` output never appears when running in Preview.
-This is really bad because the Simulator
-takes much longer to start than Preview!
 
 To make the console area appear automatically when new text is written to it,
 select Xcode ... Preferences... ... Behaviors ... Generates output,
@@ -825,6 +822,28 @@ and "Dynamic Text Variants" (X Small through XXX Large and AX 1 through AX 5)
 If a preview defines multiple views,
 they are presented in separate tabs in the preview area.
 TODO: How are the tab titles specified?
+
+## Debugging
+
+To open the debug area, select View ... Debug Area ... Show Debug Area,
+press cmd-shift-y, or drag the bottom bar up.
+There are two sides to the debug area.
+The left size displays variable names and values.
+Variable values can also be seen by
+hovering over their names in the editor area.
+The right side displays `print` function output.
+
+Set breakpoints by clicking on source file line numbers.
+
+<img alt="Xcode breakpoint" class="keep-size"
+  src="/blog/assets/xcode-breakpoint.png?v={{pkg.version}}">
+
+Run the app and click the debugger buttons shown below.
+The app runs in debug mode by default because
+the default scheme "Run" settings has "Build Configuration" set to "Debug".
+
+<img alt="Xcode debugger buttons" style="width: 50%"
+  src="/blog/assets/xcode-debugger-buttons.png?v={{pkg.version}}">
 
 ## App Icons
 
