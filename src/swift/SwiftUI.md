@@ -2943,6 +2943,10 @@ struct ContentView: View {
 }
 ```
 
+For more detail on customizing `List` views see {% aTargetBlank
+"https://www.youtube.com/watch?v=GF0OOwygLJo",
+"Customizing Lists in SwiftUI" %}.
+
 ##### Expandable Lists
 
 The `List` view can display a tree of data including
