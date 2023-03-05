@@ -8188,7 +8188,7 @@ These include:
   The {% aTargetBlank
   "https://developer.apple.com/documentation/swiftui/view/onchange(of:perform:)",
   "onChange" %} view modifier registers a closure to be invoked
-  when the value of a given state property changes.
+  when the value of a given state property or computed property changes.
   The closure is passed the new value.
   For example:
 

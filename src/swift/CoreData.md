@@ -24,7 +24,6 @@ The app can be modified to work with other kinds of entities.
 
 Another approach is to uncheck the "Use Core Data" checkbox
 and set up use of Core Data manually.
-The steps to do this are shown later.
 
 ## "Use Core Data" Option
 
@@ -52,6 +51,19 @@ When finished, click the "Done" button at the top
 that replaced the "Edit" button.
 From here you can edit the code to provide your own CRUD functionality.
 
+## Manual Setup
+
+When the "Use Core Data" checkbox was not checked,
+a data model must be created manually as follows:
+
+1. Select File ... New File... or press cmd-n.
+1. Filter the list of templates by entering "Data".
+1. In the "Core Data" section, select "Data Model" template.
+1. Click the "Next" button.
+1. Select the directory where it should be stored.
+1. For most projects the default file name of "Model.xcdatamodeld" is fine.
+1. Click the "Create" button.
+
 ## Defining Entities
 
 To define Core Data entity types,
@@ -61,12 +73,6 @@ This will display an entity editor.
 If the "Use Core Data" option was checked,
 consider deleting the provided `Item` entity
 and any code that is specific to it.
-
-Create a model file by right-clicking in the Navigator
-and selecting "New File...".
-For the template, scroll down to "Core Data" and select "Data Model".
-For most projects only one of these files is needed
-and the default name of "Model.xcdatamodeld" is fine.
 
 Entities are similar to tables in a relational database.
 Add entities to the model by clicking the "Add Entity" button at the bottom.
@@ -318,7 +324,6 @@ for accessing data in Core Data.
   func deletePeople(indexSet: IndexSet) {
       for index in indexSet {
           context.delete(people[index])
-          people.remove(at: index)
       }
       saveContext()
   }
