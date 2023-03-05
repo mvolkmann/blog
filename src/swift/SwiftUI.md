@@ -10321,33 +10321,22 @@ Begin by adding the file `ErrorViewModel.swift` containing the following:
 ```swift
 import SwiftUI
 
-private struct ErrorWrapper: Identifiable {
-    let error: Error?
-    let message: String
-    let id = UUID()
-}
-
 class ErrorViewModel: ObservableObject {
-    @Published var haveError = false
-    @State private var wrapper: ErrorWrapper?
+    @Published var errorOccurred = false
+    @Published private var error: Error?
+    @Published private var message = ""
 
     func alert(error: Error? = nil, message: String) {
         if let error { Log.error(error) }
-        wrapper = ErrorWrapper(error: error, message: message)
-        haveError = true
+        self.error = error
+        self.message = message
+        errorOccurred = true
     }
 
     var text: Text {
-        guard let wrapper else {
-            return Text("No error occurred.")
-        }
-
-        if let error = wrapper.error {
-            let desc = error.localizedDescription
-            return Text(wrapper.message + "\n" + desc)
-        } else {
-            return Text(wrapper.message)
-        }
+        var content = message
+        if let error { content += "\n" + error.localizedDescription }
+        return Text(content)
     }
 }
 ```
@@ -10367,7 +10356,7 @@ struct ContentView: View {
         }
         .alert(
             "Error",
-            isPresented: $errorVM.haveError,
+            isPresented: $errorVM.errorOccurred,
             actions: {}, // no custom buttons
             message: { errorVM.text }
         )
