@@ -10327,7 +10327,7 @@ class ErrorViewModel: ObservableObject {
     @Published private var message = ""
 
     func alert(error: Error? = nil, message: String) {
-        if let error { Log.error(error) }
+        if let error { Log.error(error) } // defined below
         self.error = error
         self.message = message
         errorOccurred = true
