@@ -10305,6 +10305,90 @@ To display full screen sheet, use the {% aTargetBlank
 "fullScreenCover" %} view modifier in place of the `.sheet` view modifier.
 This removes the ability of the user to dismiss the sheet by dragging down.
 
+## Error Handling
+
+SwiftUI doesn't prescribe a particular way to handle errors
+and display messages that are relevant to users.
+Azam Sharp created the YouTube video {% aTargetBlank
+"https://youtu.be/QfDd9GxjFvk",
+"Presenting Errors Globally in SwiftUI Applications" %}
+that implements a nice approach.
+A modified version of his suggestion is described below.
+It displays error messages in an alert.
+
+Begin by adding the file `ErrorViewModel.swift` containing the following:
+
+```swift
+import SwiftUI
+
+private struct ErrorWrapper: Identifiable {
+    let error: Error?
+    let message: String
+    let id = UUID()
+}
+
+class ErrorViewModel: ObservableObject {
+    @Published var haveError = false
+    @State private var wrapper: ErrorWrapper?
+
+    func alert(error: Error? = nil, message: String) {
+        if let error { Log.error(error) }
+        wrapper = ErrorWrapper(error: error, message: message)
+        haveError = true
+    }
+
+    var text: Text {
+        guard let wrapper else {
+            return Text("No error occurred.")
+        }
+
+        if let error = wrapper.error {
+            let desc = error.localizedDescription
+            return Text(wrapper.message + "\n" + desc)
+        } else {
+            return Text(wrapper.message)
+        }
+    }
+}
+```
+
+In the topmost view, typically defined in `ContentView.swift`,
+add code like the following:
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+    @EnvironmentObject private var errorVM: ErrorViewModel
+
+    var body: some View {
+        VStack {
+            ...
+        }
+        .alert(
+            "Error",
+            isPresented: $errorVM.haveError,
+            actions: {}, // no custom buttons
+            message: { errorVM.text }
+        )
+    }
+}
+```
+
+In all `catch` blocks that need to inform the user of an error,
+add code like the following:
+
+```swift
+        do {
+            try ...
+        } catch {
+            errorVM.alert(
+                error: error,
+                message: "Add a message that is relevant to users here."
+            )
+        }
+```
+
 ## Toolbars
 
 Toolbars are collections of buttons that can be
