@@ -748,6 +748,12 @@ enter the following command in a terminal window:
 defaults write com.apple.dt.Xcode ShowBuildOperationDuration -bool YES
 ```
 
+To customize build settings, select the top item in the Project Navigator,
+select a target, click the "Build Settings" tab, and make changes.
+
+For details on the available build settings, see {% aTargetBlank
+"https://xcodebuildsettings.com", "Xcode Build Settings" %}.
+
 ## Clean Builds
 
 Occasionally it is useful to delete all generated files and start over.
