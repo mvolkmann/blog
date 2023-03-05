@@ -8405,21 +8405,26 @@ struct ContentView: View {
     @State private var name = ""
 
     var body: some View {
-        VStack {
-            TextField("Name", text: $name)
-                .textFieldStyle(.roundedBorder)
-                .toolbar {
-                    ToolbarItemGroup(placement: .keyboard) {
-                        Button(action: dismissKeyboard) {
-                            Image(systemName: "keyboard.chevron.compact.down")
-                        }
+        // A NavigationView is required in order for
+        // the keyboard toolbar button to appear and work.
+        NavigationView {
+            VStack {
+                TextField("Name", text: $name)
+                    .textFieldStyle(.roundedBorder)
+                if !name.isEmpty {
+                    Text("Hello, \(name)!")
+                }
+            }
+            .padding()
+            // This applies to all TextField instances inside the VStack.
+            .toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    Button(action: dismissKeyboard) {
+                        Image(systemName: "keyboard.chevron.compact.down")
                     }
                 }
-            if !name.isEmpty {
-                Text("Hello, \(name)!")
             }
         }
-        .padding()
     }
 }
 ```
