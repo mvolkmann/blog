@@ -324,7 +324,10 @@ Add the following lane in `fastlane/Fastfile`:
 platform :ios do
   desc "Run tests"
   lane :tests do
-    run_tests(scheme: "{scheme-name}")
+    run_tests(
+      scheme: "{scheme-name}"
+      devices: ['iPhone 8 Plus', 'iPhone 13 Pro Max']
+    )
   end
 end
 ```
