@@ -6115,15 +6115,15 @@ the features of Swift that are annoying, at least in my opinion.
 
 - Trailing closures
 
-  The syntax for trailing closures is unique to Swift.
+  The syntax for trailing closures is somewhat unique to Swift.
   It's nice when used with methods like `Array` `map`.
   However, the syntax looks strange when more than one
   is used in the same function/method call.
-  Using more than one shouldn't be supported.
+  Perhaps using more than one shouldn't be supported.
 
 - Too many features in enumerations
 
-  It's not clear that enumerations t need to support initializers,
+  It's not clear that enumerations need to support initializers,
   computed properties, methods, and recursive enumerations.
 
 - Some names are way too long
@@ -6150,28 +6150,6 @@ the features of Swift that are annoying, at least in my opinion.
     This is a protocol that could have been named `ToString`.
     It can be given this name with
     `typealias ToString = CustomStringConvertible`.
-
-- Lack of wait cursors
-
-  When creating a new project, there is a long pause after each step
-  and there is no indication that work is happening in the background.
-  This is surprising coming from Apple which
-  has a reputation for building great UIs.
-
-- Code not re-evaluated
-
-  Sometimes after fixing an error reported by the compiler,
-  Xcode doesn't re-evaluate the code and the error remains.
-  Resuming Preview triggers it to compile the code again.
-
-- Flaky builds
-
-  Sometimes a project will fail to build with no errors identified in the code.
-  Pressing the "Diagnostics" button displays error messages
-  that are typically not helpful.
-  Sometimes pressing the "Try Again" button results in a clean build.
-  Other times it is necessary to close the project, reopen it,
-  and build again to resolve the mystery issues.
 
 - Too many warnings about things developers cannot fix
 
@@ -6211,12 +6189,9 @@ the features of Swift that are annoying, at least in my opinion.
 - Why are subclass initializers required to initialize their own properties
   before calling `super.init`?
 
-- Why doesn't Swift assume that any statement in a `do` block can throw?
-  It seems tedious to require the `try` keyword
-  in front of every expression that can throw.
-
 - Why doesn't the `Character` type conform to the
   `Decodable` and `Encodable` protocols like the other primitive types?
+
 - Why is the type `Int` abbreviated from Integer and
   `Bool` is abbreviated from Boolean,
   but the `Character` type is not abbreviated to `Char`?
