@@ -172,11 +172,13 @@ To get the Developer Portal Team ID:
 To get the AppStoreConnect Team ID:
 
 1. cd to the project root directory.
-1. Enter `fastfile produce`.
-1. You will be prompted to select a team.
-   Each team name will be followed by the ITC team id in parentheses.
+1. Enter `fastlane produce`.
+1. You may be prompted to select a team.
+   If so, each team name will be followed by the ITC team id in parentheses.
    Copy the desired ITC team id value.
-1. Paste it as the value for `itc_team_id` in `fastlane/Appfile`.
+   If not prompted to select a team, a summary table should be output.
+   Copy the `itc_team_id` value.
+1. Paste the ITC team id as the value for `itc_team_id` in `fastlane/Appfile`.
 
 For more information about the file `Appfile`, see the fastlane docs on
 {% aTargetBlank "https://docs.fastlane.tools/advanced/#appfile", "Appfile" %}.
@@ -190,32 +192,44 @@ It is a Ruby source file found in the `fastlane` directory.
 
 1. If the file `fastlane/Snapfile` does not exist,
    cd to the project root directory and
-   enter `fastlane snapshot init` to create it
+   enter `fastlane snapshot init` to create it.
+
+   If you get the error "Could not determine installed iOS SDK version.",
+   enter `sudo xcode-select -s /Applications/Xcode.app/Contents/Developer`
+   and try again.
+   Note that the app may have a different name that `Xcode`
+   such as `Xcode-beta`.
 
 1. Edit the `fastlane/Snapfile` file.
 
 1. Uncomment lines so it indicates the devices and languages
    to use for creating screenshots. For example:
 
-```ruby
-devices([
-  "iPhone 8 Plus",
-  "iPhone 13 Pro Max",
-  "iPad Pro (12.9-inch) (2nd generation)",
-  "iPad Pro (12.9-inch) (6th generation)"
-])
+   ```ruby
+   devices([
+     "iPhone 8 Plus",
+     "iPhone 13 Pro Max",
+     "iPad Pro (12.9-inch) (2nd generation)",
+     "iPad Pro (12.9-inch) (6th generation)"
+   ])
 
-languages([
-  # These are five most used languages in the world
-  # in order from most to least used
-  # including the region in which they are most used.
-  "en-US", # English - USA
-  "zh-CN", # Chinese Simplified - China
-  "hi-IN", # Hindi - India
-  "es-ES", # Spanish - Spain
-  "fr-FR" # French - France
-])
-```
+   languages([
+     # These are five most used languages in the world
+     # in order from most to least used
+     # including the region in which they are most used.
+     "en-US", # English - USA
+     "zh-CN", # Chinese Simplified - China
+     "hi-IN", # Hindi - India
+     "es-ES", # Spanish - Spain
+     "fr-FR" # French - France
+   ])
+   ```
+
+1. Add simulators for each of the devices listed above.
+   It may be necessary to add new versions of these devices
+   that use a newer version of iOS if the app requires that.
+   For example, you may have a simulator for "iPhone 8 Plus" running iOS 15.5,
+   but not one running iOS 16.4.
 
 1. Uncomment the line that calls the `scheme` function
    and change it to `scheme("ScreenshotTests")`.
@@ -232,6 +246,8 @@ languages([
 
 1. Add the line `headless(false)`.
    Tests that need to wait for elements to appear seem to fail without this.
+
+1. Add the file `fastlane/Snapfile` to the Git repository.
 
 ## Registering an App
 
@@ -287,6 +303,7 @@ fastlane/test_output
 fastlane/.env.default
 *.cer
 *.mobileprovision
+*.p12
 ```
 
 ## Running Tests
@@ -565,9 +582,10 @@ when the `fastlane init` command was run.
    1. In the dialog that appears, verify that
       the "Shared" checkbox at the bottom is checked.
    1. Select "Test" in the left nav.
-   1. Click "+" at the bottom.
-   1. In the dialog that appears, select the "ScreenshotTests" target
-      and click the "Add" button.
+   1. If "ScreenshotTests" does not appear in the list of "Test Plans"
+      1. Click "+" at the bottom.
+      1. In the dialog that appears, select the "ScreenshotTests" target
+         and click the "Add" button.
    1. Click the "Close" button.
 
 1. Implement the UI test.
@@ -587,7 +605,7 @@ when the `fastlane init` command was run.
    1. Rename the test method `testExample` to `testScreenshots`.
    1. Replace the code in this method with code that
       visits each screen in the app.
-   1. After the code that visiting each screen,
+   1. After the code that visits each screen,
       call `snapshot("{sequence-number}-{screen-name}")`.
 
       The sequence numbers keep the screenshots in the intended order.

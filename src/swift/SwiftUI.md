@@ -4692,8 +4692,7 @@ To change the size of an indeterminate `ProgressView`
 apply the `scaleEffect` modifier. For example:
 
 ```swift
-ProgressView()
-    .scaleEffect(x: 3, y: 3, anchor: .center)
+ProgressView().scaleEffect(1.5)
 ```
 
 Sometimes it is desirable to delay rendering a `ProgressView`
