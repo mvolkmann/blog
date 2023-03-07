@@ -224,6 +224,10 @@ every time a new version of the app is released:
 
 ### Part 6 - Adding External Testing Users
 
+1. If "External Testing" does not appear in the left nav,
+   click the "+" after "Internal Testing", enter any name,
+   and click the "Create" button.
+   This will trigger "External Testing" to appear in the left nav.
 1. Click the "+" after "External Testing" in the left nav.
 1. Enter a group name.
 1. Click the "Create" button.

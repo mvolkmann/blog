@@ -693,6 +693,8 @@ which is an alias for `upload_to_app_store`.
 This can upload screenshots, metadata, and binaries to App Store Connect.
 It can also update the app version number and submit the app for review.
 
+The app must already be registered in order to upload screenshots.
+
 Add the following lane in `fastlane/Fastfile`:
 
 ```ruby

@@ -80,6 +80,7 @@ alias log="git log"
 # For example, `cob feature-compute-score`.
 alias rmb="$HOME/bin/rmb" # defined below
 
+# This displays lists of modified, deleted, and untracked files.
 alias status="git status"
 
 # This cd's up to root directory of current git repository.
