@@ -190,3 +190,107 @@ The paths to files that contain the text are displayed in purple.
 Matching line numbers are displayed in green.
 Text on the matching lines is displayed in white,
 except the matching text which is displayed in red.
+
+## Starship
+
+{% aTargetBlank "https://starship.rs/", "Starship" %} is a
+highly customizable tool for customizing shell prompts.
+It works in nearly all shells including
+Bash, Fish, Nushell, Powershell, and Zsh.
+This removes the need to customize the prompt in shell-specific ways.
+
+Starship can be configured in one place for all shells,
+which is great for users that utilize multiple shells.
+
+To use Starship with zsh, add the following line in `~/.zshrc`:
+
+```bash
+eval "$(starship init zsh)"
+```
+
+Configure Starship by creating the file `~/.config/starship.toml`.
+Here is my configuration. Note the use of unicode characters.
+
+```toml
+format = "$shell$custom$git_branch$git_status$directory$character "
+
+# Displays text, typically a single character,
+# based on the status of the previous command.
+[character]
+success_symbol = "[▶](green)" # normal prompt
+error_symbol = "[✗](bold red)" # used if previous command failed
+
+# Displays current directory.
+[directory]
+format = "[$path]($style)"
+style = "yellow"
+truncate_to_repo = false
+truncation_length = 3 # parent directories to show; default is 3
+truncation_symbol = "…/"
+
+# Displays current Git branch when in a directory of a Git repository.
+[git_branch]
+format = "[$symbol ](green)[$branch ]($style)"
+style = "italic green"
+symbol = ""
+
+# Displays status of Git repository when in a directory of a Git repository.
+[git_status]
+format = "[$all_status$ahead_behind]($style)"
+ahead = "⇡ $count "
+behind = "⇣ $count "
+deleted = "🗑 $count "
+diverged = " $count "
+stashed = "📦 $count "
+modified = "פֿ $count "
+staged = '[ $count ](green)'
+renamed = " $count "
+untracked = "🤷 ‍$count "
+style = "bold red"
+
+[shell]
+disabled = false
+bash_indicator = "🚀"
+fish_indicator = "🐠"
+nu_indicator = "🦀"
+zsh_indicator = "🧙"
+```
+
+For more detail, see {% aTargetBlank
+"https://mvolkmann.github.io/blog/topics/#/blog/starship/", "Starship" %}.
+
+## Use Warp
+
+There are many options for terminal applications.
+In macOS you can use the built-in Terminal app.
+A popular alternative is {% aTargetBlank "https://iterm2.com", "iTerm2" %}.
+Many developers using iTerm2 in conjunction with {% aTargetBlank
+"https://mvolkmann.github.io/blog/topics/#/blog/tmux/", "tmux" %}
+in order to gain features such as multiple tabs that each contain split panes
+where each pane hosts a separate shell session.
+
+{% aTargetBlank "https://mvolkmann.github.io/blog/topics/#/blog/warp/",
+"Warp" %} is a fairly new option, currently only supported on macOS,
+that provides most of the features of iTerm2 and tmux.
+It also adds many features not found in those tools such as
+command "blocks", better command editing capability, workflows,
+a command palette, provided and custom themes,
+permalinks to commands and their output, and "AI Command Search".
+
+AI Command Search helps with discovering the shell command needed
+to perform a task described in English.
+For example, searching for "delete remote git branch"
+suggests `git push origin --delete <branch>`.
+
+Warp makes it easy to create a separate tab
+for each category of work being done.
+This allows you to focus on a task at hand.
+To switch tasks, just click a different tab.
+
+For example, perhaps you editing your blog and working on two projects.
+Create a separate tab for each of these whose names are "blog"
+and the project names.
+Inside each tab create multiple panes by splitting the initially pane
+horizontally, vertically, or both.
+In the panes of a project tab you can run a web server, an API server,
+and a database server. Other panes can be used for executing shell commands.
