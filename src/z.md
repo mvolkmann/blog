@@ -259,6 +259,23 @@ zsh_indicator = "🧙"
 For more detail, see {% aTargetBlank
 "https://mvolkmann.github.io/blog/topics/#/blog/starship/", "Starship" %}.
 
+## Other Shells
+
+{% aTargetBlank "https://mvolkmann.github.io/blog/topics/#/blog/nushell/",
+"Nushell" %} is "a new type of shell".
+"The goal of this project is to take the Unix philosophy of shells,
+where pipes connect simple commands together,
+and bring it to the modern style of development."
+
+The output of many commands is a table
+and there are many commands for manipulating tables.
+
+TODO: Get more content from https://www.nushell.sh/.
+
+## Vim and Nvim
+
+TODO
+
 ## Use Warp
 
 There are many options for terminal applications.
@@ -294,3 +311,6 @@ Inside each tab create multiple panes by splitting the initially pane
 horizontally, vertically, or both.
 In the panes of a project tab you can run a web server, an API server,
 and a database server. Other panes can be used for executing shell commands.
+
+Warp supports the Bash, Zsh, and Fish shells.
+It does not currently support Nushell.
