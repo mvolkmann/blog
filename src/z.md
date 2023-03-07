@@ -50,6 +50,8 @@ If you sometimes work with Git from the command-line,
 defining the following aliases and shell functions can make this easier.
 Use these when you are in or below the root directory of a git repository.
 
+{% raw %}
+
 ```bash
 # This lists all the local branches in the current git repository.
 alias br="git branch"
@@ -99,8 +101,12 @@ function push() {
 }
 ```
 
+{% endraw %}
+
 Here is the shell script `rmb` that must be in a directory
 listed in the `PATH` environment variable.
+
+{% raw %}
 
 ```bash
 #!/usr/bin/env bash
@@ -114,6 +120,8 @@ fi
 git branch -d $1
 git branch -rd origin/$1
 ```
+
+{% endraw %}
 
 ## Avoid Accidents
 
@@ -137,7 +145,7 @@ it's very convenient to have an easy way to kill any process
 that is listening on a given port.
 I do this with the following alias:
 
-```zsh
+```bash
 alias klp="kill-listening-process"
 ```
 
@@ -311,6 +319,8 @@ Inside each tab create multiple panes by splitting the initially pane
 horizontally, vertically, or both.
 In the panes of a project tab you can run a web server, an API server,
 and a database server. Other panes can be used for executing shell commands.
+
+TODO: Add some screenshots!
 
 Warp supports the Bash, Zsh, and Fish shells.
 It does not currently support Nushell.
