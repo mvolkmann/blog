@@ -172,6 +172,13 @@ else
 fi
 ```
 
+Here's the scenario. You attempt to start a server that listens on port 3000,
+but you get the error "Something is already running on port 3000".
+You currently have ten shells open in various terminal windows and panes.
+If you could find the one what is running a server using port 3000
+you could navigate to it and press ctrl-c to kill it.
+But finding it takes too long. Instead just enter `klp 3000`.
+
 ## Searching For Files
 
 There are multiple ways to search for files in and below the current directory
