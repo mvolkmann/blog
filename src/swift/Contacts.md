@@ -70,8 +70,9 @@ To use this in a SwiftUI view, do something like the following:
 import Contacts
 import SwiftUI
 
-struct Demo: View {
+struct ContentView: View {
     @State private var cellNumber = ""
+    @State private var contact: CNContact?
     @State private var firstName = ""
     @State private var lastName = ""
 
