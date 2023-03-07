@@ -831,6 +831,12 @@ TODO: How are the tab titles specified?
 
 ## Debugging
 
+To see an outline of the frame of each view,
+run the app in a Simulator or real device
+and select Debug ... View Debugging ... Show View Frames
+to toggle it on. Select it again to toggle it off.
+This is much easier than modifying code to `border` view modifiers.
+
 To open the debug area, select View ... Debug Area ... Show Debug Area,
 press cmd-shift-y, or drag the bottom bar up.
 There are two sides to the debug area.
