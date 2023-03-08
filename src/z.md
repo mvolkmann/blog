@@ -10,13 +10,14 @@ You might be using the terminal all wrong ...
 or at least not as efficiently as you could.
 Here are ten tips to improve your terminal usage.
 
-## Changing Directory
+## Change Directory
 
 If your work involves switching between projects during a typical day
 then you likely use the `cd` command quite a bit.
 A great time saver is to define aliases in your shell configuration file
 to quickly move to your most commonly used directories.
-For example, if you use the zsh shell then you could add the following in your `~/.zshrc` file
+For example, if you use the zsh shell then you could
+add the following in your `~/.zshrc` file
 
 ```bash
 export DOCUMENTS_DIR=$HOME/Documents
@@ -31,10 +32,11 @@ export DEV_DIR=$DOCUMENTS_DIR/dev
 # This directory contains subdirectories for projects.
 export PROJECTS_DIR=$DOCUMENTS_DIR/projects
 
-# This directory contains subdirectories for various programming languages.
+# This directory contains subdirectories for documentation and code examples
+# in various programming languages.
 export LANG_DIR=$DEV_DIR/lang
 
-# This directory contains example code using the Swift programming language.
+# This directory contains Swift documentation and code examples.
 export SWIFT_DIR=$LANG_DIR/swift
 
 alias cdblog="cd $BLOG_DIR"
@@ -44,7 +46,7 @@ alias cdprojects="cd $PROJECTS_DIR"
 alias cdswift="cd $SWIFT_DIR"
 ```
 
-## Simplifying Command-line Git
+## Command-line Git
 
 If you sometimes work with Git from the command-line,
 defining the following aliases and shell functions can make this easier.
@@ -73,14 +75,14 @@ alias cob="git checkout -b"
 alias co="git checkout"
 
 # This lists all the commits on the current branch from newest to oldest.
-# For each commit, the SHA, author, date, and commit message are output.
+# For each commit the SHA, author, date, and commit message are output.
 alias log="git log"
 
 # This deletes the local AND remote branches with a given name.
-# For example, `cob feature-compute-score`.
+# For example, `rmb feature-compute-score`.
 alias rmb="$HOME/bin/rmb" # defined below
 
-# This displays lists of modified, deleted, and untracked files.
+# This outputs lists of all modified, deleted, and untracked files.
 alias status="git status"
 
 # This cd's up to root directory of current git repository.
@@ -89,13 +91,13 @@ function cdgitroot() {
   cd ..
 }
 
-# This pulls the latest changes from the remote branch
-# down to the corresponding local branch.
+# This pulls down the latest changes from the remote branch
+# that corresponds to the current local branch.
 function pull() {
   git pull origin $(git rev-parse --abbrev-ref HEAD)
 }
 
-# This pushes the latest changes on the local branch
+# This pushes the latest changes on the current local branch
 # up to the corresponding remote branch.
 function push() {
   git push origin $(git rev-parse --abbrev-ref HEAD)
@@ -139,19 +141,27 @@ alias mv="mv -i"
 alias rm="rm -i"
 ```
 
-## Kill Process
+## Kill Processes
 
-If you frequently run servers that listen on a specific port,
-it's very convenient to have an easy way to kill any process
-that is listening on a given port.
-I do this with the following alias:
+Here's a common scenario.
+You attempt to start a server that listens on port 3000,
+but you get the error "Something is already running on port 3000".
+You currently have ten shells open in various terminal windows and panes.
+If you could find the one what is running a server using port 3000
+you could navigate to it and press ctrl-c to kill it.
+But finding it takes too long.
+
+It would be much more convenient if you could enter a command
+that would kill the process that is listening on a given port.
+You can with `klp 3000`!
 
 ```bash
 alias klp="kill-listening-process"
 ```
 
 Ths script `kill-listening-process` will differ somewhat
-based on the operating system. For macOS it is:
+based on the operating system.
+For macOS it can be defined as follows:
 
 ```bash
 #!/usr/bin/env bash
@@ -173,14 +183,7 @@ else
 fi
 ```
 
-Here's the scenario. You attempt to start a server that listens on port 3000,
-but you get the error "Something is already running on port 3000".
-You currently have ten shells open in various terminal windows and panes.
-If you could find the one what is running a server using port 3000
-you could navigate to it and press ctrl-c to kill it.
-But finding it takes too long. Instead just enter `klp 3000`.
-
-## Searching For Files
+## Search For Files
 
 There are multiple ways to search for files in and below the current directory
 that have a specific file extension and contain given text.
@@ -196,11 +199,11 @@ and the output is not color-coded.
 
 A better alternative is to use {% aTargetBlank
 "https://github.com/BurntSushi/ripgrep", "ripgrep" %}.
-This page contains installation instructions for Linux, macOS, and Windows.
+This link contains installation instructions for Linux, macOS, and Windows.
 
 Ripgrep is implemented in Rust and is very fast.
 
-The equivalent of the `find` command above is `rg --type=js 'some text'
+The equivalent of the `find` command above is `rg --type=js 'some text'`.
 
 The paths to files that contain the text are displayed in purple.
 Matching line numbers are displayed in green.
@@ -216,7 +219,7 @@ Bash, Fish, Nushell, Powershell, and Zsh.
 This removes the need to customize the prompt in shell-specific ways.
 
 Starship can be configured in one place for all shells,
-which is great for users that utilize multiple shells.
+which is great for developers that utilize multiple shells.
 
 To use Starship with zsh, add the following line in `~/.zshrc`:
 
