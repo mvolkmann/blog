@@ -341,6 +341,37 @@ Perhaps you are a fan of {% aTargetBlank "https://code.visualstudio.com/",
 Enter `vscode .` in a terminal to launch VS Code use it to
 edit any files in and below the current directory.
 
+## Fun
+
+The terminal is not just for work, it can also be fun.
+If you are a macOS user and you have {% aTargetBlank
+"https://brew.sh/", "Homebrew" %} installed, try these.
+
+- asciiquarium
+
+  Enter `brew install asciiquarium` followed by `asciiquarium`
+  to fill your terminal with an animated aquarium
+  made entirely of ASCII characters.
+  Press ctrl-c to exit.
+
+- cmatrix
+
+  Enter `brew install cmatrix` followed by `cmatrix`
+  to fill your terminal with an animation from the movie "The Matrix".
+  Press ctrl-c to exit.
+
+- myman
+
+  Enter `brew install myman` followed by `myman`
+  to play a version of the game Tetris in the terminal.
+  Press ctrl-c to exit.
+
+- tetris
+
+  Enter `brew install samtay/tui/tetris` followed by `tetris`
+  to play the game Tetris in the terminal.
+  Press q to quit.
+
 ## Other Shells
 
 {% aTargetBlank "https://mvolkmann.github.io/blog/topics/#/blog/nushell/",
