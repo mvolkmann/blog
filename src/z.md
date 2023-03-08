@@ -10,6 +10,22 @@ You might be using the terminal all wrong ...
 or at least not as efficiently as you could.
 Here are ten tips to improve your terminal usage.
 
+## Fonts
+
+Everything looks better in the terminal
+when you configure it to use a nice font!
+
+Personal preference certainly enters in here.
+I prefer to use a monospace font where all characters have the same width.
+I also like fonts that support ligatures which Google describes as follows:
+
+> A ligature is a glyph that combines the shapes of
+> certain sequences of characters into a new form
+> that makes for a more harmonious reading experience.
+
+My current favorite font is {% aTargetBlank
+"https://www.nerdfonts.com/font-downloads", "FiraCode Nerd Font" %}.
+
 ## Change Directory
 
 If your work involves switching between projects during a typical day
@@ -278,20 +294,7 @@ zsh_indicator = "🧙"
 For more detail, see {% aTargetBlank
 "https://mvolkmann.github.io/blog/topics/#/blog/starship/", "Starship" %}.
 
-## Other Shells
-
-{% aTargetBlank "https://mvolkmann.github.io/blog/topics/#/blog/nushell/",
-"Nushell" %} is "a new type of shell".
-"The goal of this project is to take the Unix philosophy of shells,
-where pipes connect simple commands together,
-and bring it to the modern style of development."
-
-The output of many commands is a table
-and there are many commands for manipulating tables.
-
-TODO: Get more content from https://www.nushell.sh/.
-
-## Vim and Neovim
+## Vim
 
 Many software developers know a little bit about Vim and
 grudgingly use it when nothing else is available.
@@ -311,6 +314,19 @@ For a summary of the minimal set of commands you need to know
 to be productive in vim or neovim, see my {% aTargetBlank
 "https://mvolkmann.github.io/blog/topics/#/blog/vim/, "Vim blog page" %}.
 Especially see the section on netrw.
+
+## Other Shells
+
+{% aTargetBlank "https://mvolkmann.github.io/blog/topics/#/blog/nushell/",
+"Nushell" %} is "a new type of shell".
+"The goal of this project is to take the Unix philosophy of shells,
+where pipes connect simple commands together,
+and bring it to the modern style of development."
+
+The output of many commands is a table
+and there are many commands for manipulating tables.
+
+TODO: Get more content from https://www.nushell.sh/.
 
 ## Use Warp
 
