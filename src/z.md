@@ -228,6 +228,7 @@ One way is to use the `find` command as follows:
 
 ```bash
 find . -name '*.js' | xargs grep 'some text'
+find . -type f -name '*.js' -exec grep 'some text'
 ```
 
 This has several issues. The syntax is hard to remember, it is somewhat slow,
@@ -314,6 +315,30 @@ zsh_indicator = "🧙"
 
 For more detail, see {% aTargetBlank
 "https://mvolkmann.github.io/blog/topics/#/blog/starship/", "Starship" %}.
+
+## Command-line Editing
+
+In many terminal programs, the following keyboard shortcuts can be used
+to move the cursor within a command being entered:
+
+| Action                     | Shortcut Key          |
+| -------------------------- | --------------------- |
+| move to beginning of line  | ctrl-a                |
+| move to end of line        | ctrl-e                |
+| move back one word         | meta-b                |
+| move forward one word      | meta-f                |
+| move back one character    | ctrl-b or left arrow  |
+| move forward one character | ctrl-f or right arrow |
+
+Most terminal programs do not support using a mouse or track pad
+to position the cursor by clicking within a command being entered.
+However, this is supported by the
+{% aTargetBlank "https://www.warp.dev", "Warp" %} terminal.
+
+pressing ctrl-a moves the cursor to the beginning of the line and pressing ctrl-e
+Learn how to perform basic editing in your selected shell.
+
+To clear what has been entered, press ctrl-u.
 
 ## Vim
 
