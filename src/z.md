@@ -12,16 +12,18 @@ Here are ten tips to improve your terminal usage.
 
 ## Fonts
 
-Everything looks better in the terminal
-when you configure it to use a nice font!
+Everything looks better in a terminal that is configured to use a nice font!
 
 Personal preference certainly enters in here.
-I prefer to use a monospace font where all characters have the same width.
-I also like fonts that support ligatures which Google describes as follows:
+I prefer to use a monospace font, meaning all characters have the same width.
+I also prefer fonts that support ligatures which Google describes as follows:
 
 > A ligature is a glyph that combines the shapes of
 > certain sequences of characters into a new form
 > that makes for a more harmonious reading experience.
+
+For example, an exclamation point followed by an equal sign
+(meaning not equal) is replaced by an equal sign with a slash through it.
 
 My current favorite font is {% aTargetBlank
 "https://www.nerdfonts.com/font-downloads", "FiraCode Nerd Font" %}.
@@ -314,6 +316,11 @@ For a summary of the minimal set of commands you need to know
 to be productive in vim or neovim, see my {% aTargetBlank
 "https://mvolkmann.github.io/blog/topics/#/blog/vim/", "Vim blog page" %}.
 Especially see the section on netrw.
+
+Perhaps you are a fan of {% aTargetBlank "https://code.visualstudio.com/",
+"VS Code" %} and prefer for avoid using any flavor of Vim.
+Enter `vscode .` in a terminal to launch VS Code use it to
+edit any files in and below the current directory.
 
 ## Other Shells
 
