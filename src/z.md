@@ -318,27 +318,41 @@ For more detail, see {% aTargetBlank
 
 ## Command-line Editing
 
+Learn how to perform basic editing in your selected shell.
+
 In many terminal programs, the following keyboard shortcuts can be used
 to move the cursor within a command being entered:
 
-| Action                     | Shortcut Key          |
-| -------------------------- | --------------------- |
-| move to beginning of line  | ctrl-a                |
-| move to end of line        | ctrl-e                |
-| move back one word         | meta-b                |
-| move forward one word      | meta-f                |
-| move back one character    | ctrl-b or left arrow  |
-| move forward one character | ctrl-f or right arrow |
+| Action                      | Shortcut Key          |
+| --------------------------- | --------------------- |
+| move to beginning of line   | ctrl-a                |
+| move to end of line         | ctrl-e                |
+| move back one word          | meta-b                |
+| move forward one word       | meta-f                |
+| move back one character     | ctrl-b or left arrow  |
+| move forward one character  | ctrl-f or right arrow |
+| clear what has been entered | ctrl-u                |
 
 Most terminal programs do not support using a mouse or track pad
 to position the cursor by clicking within a command being entered.
-However, this is supported by the
-{% aTargetBlank "https://www.warp.dev", "Warp" %} terminal.
+However, the {% aTargetBlank "https://www.warp.dev", "Warp" %} terminal
+behaves much more like a standard text editor.
+It supports positioning the cursor by clicking,
+selecting text with a mouse or trackpad,
+using cmd-c to copy, and using cmd-v to paste.
 
-pressing ctrl-a moves the cursor to the beginning of the line and pressing ctrl-e
-Learn how to perform basic editing in your selected shell.
+Warp uses the following keyboard shortcuts for moving the cursor,
+but these can be modified.
 
-To clear what has been entered, press ctrl-u.
+| Action                      | Warp Shortcut Key  |
+| --------------------------- | ------------------ |
+| move to beginning of line   | cmd-left-arrow     |
+| move to end of line         | cmd-right-arrow    |
+| move back one word          | option-left-arrow  |
+| move forward one word       | option-right-arrow |
+| move back one character     | left arrow         |
+| move forward one character  | right arrow        |
+| clear what has been entered | ctrl-c or ctrl-u   |
 
 ## Vim
 
