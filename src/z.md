@@ -341,6 +341,27 @@ Perhaps you are a fan of {% aTargetBlank "https://code.visualstudio.com/",
 Enter `vscode .` in a terminal to launch VS Code use it to
 edit any files in and below the current directory.
 
+# Windows, Tabs, and Panes
+
+You likely find yourself working on multiple projects throughout the day.
+It is convenient to keep the terminal sessions related to each project
+in a separate window or tab of a single window.
+Each of these can contain multiple panes
+where separate terminal sessions are running.
+This allows you to focus on a task at hand
+by switching to a specific window or tab.
+
+Options for managing terminal windows, tabs, and panes include
+iTerm2, tmux, and Warp. Can the macOS terminal app do this?
+
+For example, perhaps you editing your blog and working on two projects.
+Create a separate tab for each of these whose names are "blog"
+and the project names.
+Inside each tab create multiple panes by splitting the initially pane
+horizontally, vertically, or both.
+In the panes of a project tab you can run a web server, an API server,
+and a database server. Other panes can be used for executing shell commands.
+
 ## Fun
 
 The terminal is not just for work, it can also be fun.
@@ -412,6 +433,8 @@ and there are many commands for manipulating tables.
 TODO: Get more content from https://www.nushell.sh/.
 
 ## Use Warp
+
+TODO: Remove this section, but refer to your Warp blog page somewhere.
 
 There are many options for terminal applications.
 In macOS you can use the built-in Terminal app.
