@@ -366,6 +366,12 @@ If you are a macOS user and you have {% aTargetBlank
   to play a version of the game Tetris in the terminal.
   Press ctrl-c to exit.
 
+- ninvaders
+
+  Enter `brew install ninvaders` followed by `ninvaders`
+  to play a version of the game Space Invaders in the terminal.
+  Press ctrl-c to exit.
+
 - tetris
 
   Enter `brew install samtay/tui/tetris` followed by `tetris`
