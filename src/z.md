@@ -291,9 +291,26 @@ and there are many commands for manipulating tables.
 
 TODO: Get more content from https://www.nushell.sh/.
 
-## Vim and Nvim
+## Vim and Neovim
 
-TODO
+Many software developers know a little bit about Vim and
+grudgingly use it when nothing else is available.
+You don't need to be an expert in Vim or customize it
+in order to derive a lot of its benefits.
+
+In macOS and Linux, vim is already installed.
+Despite this, I recommend installing
+{% aTargetBlank "https://neovim.io", "neovim" %}
+which is a modern replacement for Vim.
+Click the "Install Now" button at the link above
+for installation instructions.
+In macOS it can be installed using the Homebrew command
+`brew install neovim`.
+
+For a summary of the minimal set of commands you need to know
+to be productive in vim or neovim, see my {% aTargetBlank
+"https://mvolkmann.github.io/blog/topics/#/blog/vim/, "Vim blog page" %}.
+Especially see the section on netrw.
 
 ## Use Warp
 
