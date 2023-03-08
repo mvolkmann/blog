@@ -354,6 +354,45 @@ but these can be modified.
 | move forward one character  | right arrow        |
 | clear what has been entered | ctrl-c or ctrl-u   |
 
+## Viewing JSON
+
+JavaScript Object Notation (JSON) is a data format that is
+frequently returned by API services and read from files.
+Often this is not formatted for human readability.
+The tool {% aTargetBlank "https://stedolan.github.io/jq/", "jq" %}
+helps with this.
+
+To install jq in macOX using Homebrew, enter `brew install jq`.
+
+To nicely format the contents of a JSON file,
+enter `cat {file-path} | jq`.
+
+To nicely format the response from an API service,
+enter `curl {service-url} | jq`.
+For example, we can view the JSON response from a public API that returns
+an object where the keys are dog breeds
+and the values are arrays of variety names.
+
+```bash
+curl https://dog.ceo/api/breeds/list/all | jq
+```
+
+A portion of the output is shown below.
+
+<img alt="jq dog breeds" style="width: 100%"
+  src="/blog/assets/jq-dog-breeds.png?v={{pkg.version}}"
+  title="jq dog breeds">
+
+jq can do much more. For example, it can filter the JSON data
+and output a subset.
+
+The command `curl https://dog.ceo/api/breeds/list/all | jq -c '.message.hound'`
+outputs the following which is a compact (`-c`) JSON array of all the hound varieties:
+
+```text
+["afghan","basset","blood","english","ibizan","plott","walker"]
+```
+
 ## Vim
 
 Many software developers know a little bit about Vim and
