@@ -14,8 +14,8 @@ Here are ten tips to improve your terminal usage.
 
 Everything looks better in a terminal that is configured to use a nice font!
 
-Personal preference certainly enters in here.
-I prefer to use a monospace font, meaning all characters have the same width.
+Personal preference enters in here.
+I prefer a monospace font, meaning all characters have the same width.
 I also prefer fonts that support ligatures which Google describes as follows:
 
 > A ligature is a glyph that combines the shapes of
@@ -25,8 +25,27 @@ I also prefer fonts that support ligatures which Google describes as follows:
 For example, an exclamation point followed by an equal sign
 (meaning not equal) is replaced by an equal sign with a slash through it.
 
-My current favorite font is {% aTargetBlank
+Here is some Swift code that can take advantage of ligatures
+for the character sequences `->` and `>=`.
+
+```swift
+func max(n1: Double, n2: Double) -> Bool {
+    n1 >= n2 ? n1 : n2
+}
+```
+
+And here is the same code displayed with ligatures:
+
+<img alt="font ligatures" style="width: 60%"
+  src="/blog/assets/font-ligatures.png?v={{pkg.version}}"
+  title="font ligatures">
+
+My current favorite monospace font that supports ligatures is {% aTargetBlank
 "https://www.nerdfonts.com/font-downloads", "FiraCode Nerd Font" %}.
+
+Note: Warp terminal does not currently display ligatures in block output
+({% aTargetBlank "https://github.com/warpdotdev/Warp/issues/239",
+"issue 239" %}).
 
 ## Change Directory
 
