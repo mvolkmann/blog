@@ -312,7 +312,7 @@ In macOS it can be installed using the Homebrew command
 
 For a summary of the minimal set of commands you need to know
 to be productive in vim or neovim, see my {% aTargetBlank
-"https://mvolkmann.github.io/blog/topics/#/blog/vim/, "Vim blog page" %}.
+"https://mvolkmann.github.io/blog/topics/#/blog/vim/", "Vim blog page" %}.
 Especially see the section on netrw.
 
 ## Other Shells
