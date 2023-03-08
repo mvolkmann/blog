@@ -354,11 +354,19 @@ If you are a macOS user and you have {% aTargetBlank
   made entirely of ASCII characters.
   Press ctrl-c to exit.
 
+  <img alt="asciiquarium" style="width: 100%"
+    src="/blog/assets/asciiquarium.png?v={{pkg.version}}"
+    title="asciiqarium">
+
 - cmatrix
 
   Enter `brew install cmatrix` followed by `cmatrix`
   to fill your terminal with an animation from the movie "The Matrix".
   Press ctrl-c to exit.
+
+  <img alt="cmatrix" style="width: 100%"
+    src="/blog/assets/cmatrix.png?v={{pkg.version}}"
+    title="cmatrix">
 
 - myman
 
@@ -366,17 +374,29 @@ If you are a macOS user and you have {% aTargetBlank
   to play a version of the game Tetris in the terminal.
   Press ctrl-c to exit.
 
+  <img alt="myman" style="width: 100%"
+    src="/blog/assets/myman.png?v={{pkg.version}}"
+    title="myman">
+
 - ninvaders
 
   Enter `brew install ninvaders` followed by `ninvaders`
   to play a version of the game Space Invaders in the terminal.
   Press ctrl-c to exit.
 
+  <img alt="ninvaders" style="width: 100%"
+    src="/blog/assets/ninvaders.png?v={{pkg.version}}"
+    title="ninvaders">
+
 - tetris
 
   Enter `brew install samtay/tui/tetris` followed by `tetris`
   to play the game Tetris in the terminal.
   Press q to quit.
+
+  <img alt="tetris" style="width: 100%"
+    src="/blog/assets/tetris.png?v={{pkg.version}}"
+    title="tetris">
 
 ## Other Shells
 
