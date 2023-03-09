@@ -82,10 +82,6 @@ of all the hound varieties:
 ["afghan","basset","blood","english","ibizan","plott","walker"]
 ```
 
-## Transforming
-
-jq can transform the JSON data given to it into different data.
-
 {% aTargetBlank "https://openlibrary.org", "Open Library" %} supports
 an API for getting publications whose description contains a given word.
 For example, the following command captures JSON describing publications
@@ -198,8 +194,14 @@ whose value is an array of publication objects.
 jq '[.docs[] | select(.author_name[0] | contains("Volkmann"))]' publications.json
 ```
 
-We can transform this JSON into a JSON array of objects that
-only provide the `date`, `author`, and `title` of each publication.
+## Transforming
+
+jq can transform the JSON data given to it into different data
+that may or may not use JSON syntax.
+
+We can transform the `publication.json` file above
+into a JSON array of objects that only provide
+the `date`, `author`, and `title` of each publication.
 The publication objects in the input JSON have
 `publish_date` and `author_name` properties whose values are arrays.
 We only care about the first element and
@@ -238,7 +240,14 @@ where `.[]` represents the set of elements in the top-level array:
 jq '[.[] | select(.date != null)]' pub1.json > pub2.json
 ```
 
-Some of the dates only specify a year while others also specify a month and day.
+## Regular Expressions
+
+jq provides several functions that take regular expressions as arguments.
+These include `capture`, `gsub`, `match`,
+`scan`, `split`, `splits`, `sub`, and `test`.
+
+Some of the dates in the JSON file above
+only specify a year while others also specify a month and day.
 To transform all the dates to only include the year
 we can use the `scan` function as follows.
 This keeps only the last four characters which should be the year.
@@ -248,6 +257,8 @@ For example, "February 1, 2002" will be replaced by "2002".
 jq '[.[] | {year: .date | scan("\\d{4}$"), author, title}]' pub2.json > pub3.json
 ```
 
+## Sorting
+
 To sort the objects on their `date` in reverse order
 we can use the `sort_by` function as follows
 where `.` represents the top-level array:
@@ -255,6 +266,8 @@ where `.` represents the top-level array:
 ```bash
 jq '. | sort_by(.year) | reverse' pub3.json > pub4.json
 ```
+
+## Limiting Output
 
 We can limit the number of array elements to be output.
 For example, adding `| [limit(3; .[])]`
@@ -267,6 +280,8 @@ cause it to output a JSON array rather than just a set of objects.
 ```bash
 jq 'limit(3; .[])' pub4.json
 ```
+
+## Grouping
 
 We can group objects based a common property value.
 For example, adding `| group_by(.date)`.
