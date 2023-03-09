@@ -358,43 +358,29 @@ but these can be modified.
 
 JavaScript Object Notation (JSON) is a data format that is
 frequently returned by API services and read from files.
-Often this is not formatted for human readability.
+Often all the data is on a single line with no added spaces,
+so it is not easy for humans to read.
 The tool {% aTargetBlank "https://stedolan.github.io/jq/", "jq" %}
-helps with this.
+helps with this and does much more.
 
-To install jq in macOX using Homebrew, enter `brew install jq`.
+jq is a command-line JSON processor that is implemented in C.
 
-To nicely format the contents of a JSON file,
-enter `cat {file-path} | jq`.
+The basic functionality of jq is to pretty-print JSON data.
+But can also filter, sort, and transform JSON data.
 
-To nicely format the response from an API service,
-enter `curl {service-url} | jq`.
-For example, we can view the JSON response from a public API that returns
-an object where the keys are dog breeds
-and the values are arrays of variety names.
+In this example we get JSON data from an API endpoint
+and filter it to display all the varieties of the "hound" dog breed.
 
-```bash
-curl https://dog.ceo/api/breeds/list/all | jq
-```
+<img alt="jq-dogs" style="width: 100%"
+  src="/blog/assets/jq-dogs.png?v={{pkg.version}}"
+  title="jq dogs">
 
-A portion of the output is shown below.
+jq is practically a programming language.
+It has a long list of features including
+types, conditionals, regular expressions, math functions,
+custom function definitions, variables, streaming, and more.
 
-<img alt="jq dog breeds" style="width: 100%"
-  src="/blog/assets/jq-dog-breeds.png?v={{pkg.version}}"
-  title="jq dog breeds">
-
-jq can do much more. For example, it can filter the JSON data
-and output a subset.
-
-The command `curl https://dog.ceo/api/breeds/list/all | jq -c '.message.hound'`
-outputs the following which is a compact (`-c`) JSON array of all the hound varieties:
-
-```text
-["afghan","basset","blood","english","ibizan","plott","walker"]
-```
-
-TODO: Add more detail or at least say jq can do much more.
-For more information, see see my [jq blog page](/blog/jq).
+For more information, see my [jq blog page](/blog/jq).
 
 ## Vim
 

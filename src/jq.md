@@ -8,8 +8,8 @@ layout: topic-layout.njk
 
 JavaScript Object Notation (JSON) is a data format that is
 frequently returned by API services and read from files.
-Often this is not formatted for human readability and
-all the data is on a single line with no added spaces.
+Often all the data is on a single line with no added spaces,
+so it is not easy for humans to read.
 The tool {% aTargetBlank "https://stedolan.github.io/jq/", "jq" %}
 helps with this and does much more.
 
@@ -21,7 +21,7 @@ But can also filter, sort, and transform JSON data.
 jq is practically a programming language.
 It has a long list of features including
 types, conditionals, regular expressions, math functions,
-custom function definitions, streaming, and more.
+custom function definitions, variables, streaming, and more.
 
 ## Resources
 
