@@ -229,6 +229,11 @@ jq '[.docs[] | select(.author_name[0] | contains("Volkmann"))]' publications.jso
 jq can transform the JSON data given to it into different data
 that may or may not use JSON syntax.
 
+Many of the examples below create new files whose names begin with `pub`.
+It is not necessary to create multiple intermediate files.
+All the `jq` syntax shown can be combined into one long filter string
+to perform all the processing in a single use of the `jq` command.
+
 We can transform the `publication.json` file above
 into a JSON array of objects that only provide
 the `date`, `author`, and `title` of each publication.
