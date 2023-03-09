@@ -207,3 +207,16 @@ jq "[.docs[] | {date: .publish_date[0], author: .author_name[0], title} | select
 Some of the dates only specify a year while others also specify a month and day.
 This is bad for sorting.
 We can transform all dates to only include the year as follows.
+
+TODO: Add this!
+
+We can limit the number of array elements to be output by adding
+`| [limit(3; .[])]` which only outputs data for the first three publications.
+The `.[]` part specifies what we want to limit
+which in this case is the top-level array.
+The square brackets around the call to the `limit` function
+cause it to output a JSON array rather than just a set of objects.
+
+```bash
+jq "[.docs[] | {date: .publish_date[0], author: .author_name[0], title} | select(.date != null)] | sort_by(.date) | reverse | [limit(3; .[])]" publications.json
+```
