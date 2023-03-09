@@ -189,38 +189,72 @@ Each publication in the `docs` array is described similar to the following:
         },
 ```
 
-We can use `jq` to transform this JSON into a JSON array of objects
-that only provide the `date`, `author`, and `title` of each publication.
+To get only the publications where the author name includes "Volkmann"
+we can use the `select` and `contains` functions as follows
+where `docs` is a top-level property in the input JSON
+whose value is an array of publication objects.
+
+```bash
+jq '[.docs[] | select(.author_name[0] | contains("Volkmann"))]' publications.json
+```
+
+We can transform this JSON into a JSON array of objects that
+only provide the `date`, `author`, and `title` of each publication.
 The publication objects in the input JSON have
 `publish_date` and `author_name` properties whose values are arrays.
-We only care about the first element
-and we want to rename those properties to `date` and `author`.
+We only care about the first element and
+we want to rename those properties to `date` and `author`.
 Wrapping the entire filter expression in square brackets
 causes a JSON array to be output.
+The expression `.docs[]` get the elements in the `docs` property array.
+The part in curly braces after the pipe operator creates
+new JSON objects containing the specified properties.
 
 ```bash
-jq "[.docs[] | {date: .publish_date[0], author: .author_name[0], title}]" publications.json
+jq '[.docs[] | {date: .publish_date[0], author: .author_name[0], title}]' publications.json > pub1.json
 ```
 
-Some of the `date` properties have a `null` value.
-To filter out those publications we can use the `select` function as follows:
+The output will begin as follows:
 
-```bash
-jq "[.docs[] | {date: .publish_date[0], author: .author_name[0], title} | select(.date != null)]" publications.json
+```json
+[
+  {
+    "date": "2018",
+    "author": "Chris Whyatt",
+    "title": "Svelt"
+  },
+  {
+    "date": "2021",
+    "author": "Alex Libby",
+    "title": "Practical Svelte"
+  },
 ```
 
-To sort the objects on their `date` in reverse order
-we can use the `sort_by` function as follows:
+If any of the `date` properties have a `null` value,
+we can filter out those publications using the `select` function as follows
+where `.[]` represents the set of elements in the top-level array:
 
 ```bash
-jq "[.docs[] | {date: .publish_date[0], author: .author_name[0], title} | select(.date != null)] | sort_by(.date) | reverse" publications.json
+jq '[.[] | select(.date != null)]' pub1.json > pub2.json
 ```
 
 Some of the dates only specify a year while others also specify a month and day.
-This is bad for sorting.
-We can transform all dates to only include the year as follows.
+To transform all the dates to only include the year
+we can use the `scan` function as follows.
+This keeps only the last four characters which should be the year.
+For example, "February 1, 2002" will be replaced by "2002".
 
-TODO: Add this!
+```bash
+jq '[.[] | {year: .date | scan("\\d{4}$"), author, title}]' pub2.json > pub3.json
+```
+
+To sort the objects on their `date` in reverse order
+we can use the `sort_by` function as follows
+where `.` represents the top-level array:
+
+```bash
+jq '. | sort_by(.year) | reverse' pub3.json > pub4.json
+```
 
 We can limit the number of array elements to be output.
 For example, adding `| [limit(3; .[])]`
@@ -231,19 +265,71 @@ The square brackets around the call to the `limit` function
 cause it to output a JSON array rather than just a set of objects.
 
 ```bash
-jq "[.docs[] | {date: .publish_date[0], author: .author_name[0], title} | select(.date != null)] | sort_by(.date) | reverse | [limit(3; .[])]" publications.json
+jq 'limit(3; .[])' pub4.json
 ```
 
 We can group objects based a common property value.
 For example, adding `| group_by(.date)`.
 
 ```bash
-jq "[.docs[] | {date: .publish_date[0], author: .author_name[0], title} | select(.date != null)] | group_by(.date)" publications.json
+jq 'group_by(.year)' pub4.json > pub5.json
+```
+
+The output will begin as follows:
+
+```json
+[
+  [
+    {
+      "year": "1852",
+      "author": "Luigi Canina",
+      "title": "Particolare genere di architettura proprio degli usi domestici"
+    },
+    {
+      "year": "1852",
+      "author": "Luigi Canina",
+      "title": "Particolare genere di architettura domestica"
+    },
+    {
+      "year": "1852",
+      "author": "Luigi Canina",
+      "title": "Particolare genere di architettura domestica"
+    }
+  ],
+  [
+    {
+      "year": "1959",
+      "author": "Ben Weider",
+      "title": "Mangez bien et restez svelte"
+    }
+  ],
 ```
 
 Now that the publications are grouped by date,
 we can output the number of publications in each year.
+The date for each group can be obtained from the
+`date` property of the first element in each group array
+using the syntax `.[0].year`.
+The number of elements in each group can be obtained
+using the syntax `. | length`.
+Each of the objects in the resulting JSON array will have `year` and `count` properties.
+We can sort them on `year` in descending order
+with `| sort_by(.year) | reverse`.
 
 ```bash
-jq "[.docs[] | {date: .publish_date[0], author: .author_name[0], title} | select(.date != null)] | group_by(.date) | [.[] | {date: .[0].date, count: . | length}] | sort_by(.date) | reverse" publications.json
+jq '[.[] | {year: .[0].year, count: . | length}] | sort_by(.year) | reverse' pub5.json
+```
+
+The output will begin as follows:
+
+```json
+[
+  {
+    "year": "2023",
+    "count": 2
+  },
+  {
+    "year": "2022",
+    "count": 1
+  },
 ```
