@@ -49,8 +49,12 @@ use a different approach for installing in macOS, see
 ## Basic Usage
 
 To pretty-print the contents of a JSON file, enter `cat {file-path} | jq`.
-Another way to write this is `jq . {file-path)`
-where `.` is the identity filter meaning it keeps the entire contents.
+
+Another way to write this is `jq . {file-path}`
+The first argument to `jq` is a filter string.
+The filter `.` is the identity filter meaning it keeps the entire contents.
+The second argument is the path to a JSON file and can be omitted
+when JSON data is piped into the `jq` command.
 
 To pretty-print the response from an API service,
 enter `curl {service-url} | jq`.
@@ -88,7 +92,7 @@ curl https://dog.ceo/api/breeds/list/all > dogs.json
 
 ## Filtering
 
-jq can filter the JSON data and output a subset.
+`jq` can filter the JSON data and output a subset.
 
 To output on the `status` property, enter `jq .status dogs.json`.
 This outputs `"success"`.
