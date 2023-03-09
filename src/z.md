@@ -354,7 +354,7 @@ but these can be modified.
 | move forward one character  | right arrow        |
 | clear what has been entered | ctrl-c or ctrl-u   |
 
-## Viewing JSON
+## JSON
 
 JavaScript Object Notation (JSON) is a data format that is
 frequently returned by API services and read from files.
@@ -393,6 +393,9 @@ outputs the following which is a compact (`-c`) JSON array of all the hound vari
 ["afghan","basset","blood","english","ibizan","plott","walker"]
 ```
 
+TODO: Add more detail or at least say jq can do much more.
+For more information, see see my [jq blog page](/blog/jq).
+
 ## Vim
 
 Many software developers know a little bit about Vim and
@@ -409,9 +412,9 @@ for installation instructions.
 In macOS it can be installed using the Homebrew command
 `brew install neovim`.
 
-For a summary of the minimal set of commands you need to know
-to be productive in vim or neovim, see my {% aTargetBlank
-"https://mvolkmann.github.io/blog/topics/#/blog/vim/", "Vim blog page" %}.
+For a summary of the minimal set of commands
+you need to know to be productive in vim or neovim,
+see my [Vim blog page](/blog/vim).
 Especially see the section on netrw.
 
 Perhaps you are a fan of {% aTargetBlank "https://code.visualstudio.com/",
