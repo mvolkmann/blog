@@ -112,6 +112,9 @@ This outputs the following which is a compact (`-c`) JSON array.
 ["afghan","basset","blood","english","ibizan","plott","walker"]
 ```
 
+To get the second variety of the "hound" breed
+enter `jq '.message.hound[1]' dogs.json` which outputs `"basset"`.
+
 {% aTargetBlank "https://openlibrary.org", "Open Library" %} supports
 an API for getting publications whose description contains a given word.
 For example, the following command captures JSON describing publications
