@@ -21,6 +21,18 @@ It has a long list of features including
 types, conditionals, regular expressions, math functions,
 custom function definitions, streaming, and more
 
+## Resources
+
+- {% aTargetBlank "https://stedolan.github.io/jq/", "jq Home Page" %}
+- {% aTargetBlank "https://earthly.dev/blog/jq-select/", "An Introduction to JQ" %}
+  by Adam Gordon Bell
+- {% aTargetBlank "https://www.youtube.com/watch?v=FSn_38gDvzM&list=PLKaiHc24qCTSOGkkEpeIMupEmnInqHbbV&index=1",
+  "Processing JSON in the command-line made easy - jq tutorial (first steps)" %}
+  YouTube video by Szymon Stepniak
+- {% aTargetBlank "https://www.youtube.com/watch?v=EIhLl9ebeiA&list=PLKaiHc24qCTSOGkkEpeIMupEmnInqHbbV&index=2",
+  "Transforming, sorting, and grouping JSON documents in the command-line - jq tutorial" %}
+  YouTube video by Szymon Stepniak
+
 ## Installing
 
 To install jq in macOX using Homebrew, enter `brew install jq`.
@@ -210,8 +222,9 @@ We can transform all dates to only include the year as follows.
 
 TODO: Add this!
 
-We can limit the number of array elements to be output by adding
-`| [limit(3; .[])]` which only outputs data for the first three publications.
+We can limit the number of array elements to be output.
+For example, adding `| [limit(3; .[])]`
+only outputs data for the first three publications.
 The `.[]` part specifies what we want to limit
 which in this case is the top-level array.
 The square brackets around the call to the `limit` function
@@ -219,4 +232,18 @@ cause it to output a JSON array rather than just a set of objects.
 
 ```bash
 jq "[.docs[] | {date: .publish_date[0], author: .author_name[0], title} | select(.date != null)] | sort_by(.date) | reverse | [limit(3; .[])]" publications.json
+```
+
+We can group objects based a common property value.
+For example, adding `| group_by(.date)`.
+
+```bash
+jq "[.docs[] | {date: .publish_date[0], author: .author_name[0], title} | select(.date != null)] | group_by(.date)" publications.json
+```
+
+Now that the publications are grouped by date,
+we can output the number of publications in each year.
+
+```bash
+jq "[.docs[] | {date: .publish_date[0], author: .author_name[0], title} | select(.date != null)] | group_by(.date) | [.[] | {date: .[0].date, count: . | length}] | sort_by(.date) | reverse" publications.json
 ```
