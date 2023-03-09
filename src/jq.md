@@ -11,15 +11,17 @@ frequently returned by API services and read from files.
 Often this is not formatted for human readability and
 all the data is on a single line with no added spaces.
 The tool {% aTargetBlank "https://stedolan.github.io/jq/", "jq" %}
-helps with this.
+helps with this and does much more.
 
-jq pretty-prints JSON data.
-It can also filter, sort, and transform the data.
+jq is implemented in C.
+
+The basic functionality of jq is to pretty-print JSON data.
+But can also filter, sort, and transform JSON data.
 
 jq is practically a programming language.
 It has a long list of features including
 types, conditionals, regular expressions, math functions,
-custom function definitions, streaming, and more
+custom function definitions, streaming, and more.
 
 ## Resources
 
@@ -35,7 +37,14 @@ custom function definitions, streaming, and more
 
 ## Installing
 
+There is a {% aTargetBlank "https://jqplay.org/", "web-based UI" %} for jq
+that can be used as an alternative to installing it locally
+or just to experiment.
+
 To install jq in macOX using Homebrew, enter `brew install jq`.
+To install jq in other operating systems or
+use a different approach for installing in macOS, see
+{% aTargetBlank "https://stedolan.github.io/jq/download/", "Download jq" %}.
 
 ## Basic Usage
 
