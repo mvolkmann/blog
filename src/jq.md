@@ -13,7 +13,7 @@ all the data is on a single line with no added spaces.
 The tool {% aTargetBlank "https://stedolan.github.io/jq/", "jq" %}
 helps with this and does much more.
 
-jq is implemented in C.
+jq is a command-line JSON processor that is implemented in C.
 
 The basic functionality of jq is to pretty-print JSON data.
 But can also filter, sort, and transform JSON data.
@@ -50,7 +50,7 @@ use a different approach for installing in macOS, see
 
 To pretty-print the contents of a JSON file, enter `cat {file-path} | jq`.
 Another way to write this is `jq . {file-path)`
-where `.` is a filter that keeps the entire contents.
+where `.` is the identity filter meaning it keeps the entire contents.
 
 To pretty-print the response from an API service,
 enter `curl {service-url} | jq`.
@@ -62,11 +62,22 @@ and the values are arrays of variety names.
 curl https://dog.ceo/api/breeds/list/all | jq
 ```
 
-A portion of the output is shown below.
+The structure of the JSON returned is as follows:
 
-<img alt="jq dog breeds" style="width: 100%"
-  src="/blog/assets/jq-dog-breeds.png?v={{pkg.version}}"
-  title="jq dog breeds">
+```json
+{
+  "message": {
+    ...
+    "bulldog": [
+      "boston",
+      "english",
+      "french"
+    ],
+    ...
+  },
+  "status": "success"
+}
+```
 
 To work repeatedly with the same JSON data returned from an API endpoint,
 consider capturing the data in a local file. For example:
@@ -78,14 +89,20 @@ curl https://dog.ceo/api/breeds/list/all > dogs.json
 ## Filtering
 
 jq can filter the JSON data and output a subset.
-For example, the filter `.message.hound` assumes that the JSON data
+
+To output on the `status` property, enter `jq .status dogs.json`.
+This outputs `"success"`.
+Note that double-quotes around string values are included.
+To output raw values, include the `-r` flag.
+
+To get the varieties of the "hound" breed,
+enter `jq -c .message.hound dogs.json`.
+This assumes that the JSON data
 describes an object rather than an array,
 finds the top-level property named "message",
 assumes its value is an object,
 and finds the property "hound" inside that object.
-To use this filter we can enter `jq -c .message.hound dogs.json`.
-This outputs the following which is a compact (`-c`) JSON array
-of all the hound varieties:
+This outputs the following which is a compact (`-c`) JSON array.
 
 ```text
 ["afghan","basset","blood","english","ibizan","plott","walker"]
