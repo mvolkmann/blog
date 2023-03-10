@@ -599,9 +599,20 @@ when the `fastlane init` command was run.
    1. In the `setupWithError` method, add the following:
 
       ```swift
+      continueAfterFailure = false
       let app = XCUIApplication()
       setupSnapshot(app)
       app.launch()
+      ```
+
+      If using your `XCTestCaseExtension.swift` file,
+      it defines the static property `app` so
+      change the code above the following:
+
+      ```swift
+      continueAfterFailure = false
+      setupSnapshot(Self.app)
+      Self.app.launch()
       ```
 
    1. Delete the method definition for `testLaunchPerformance`.

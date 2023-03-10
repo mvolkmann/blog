@@ -1,18 +1,55 @@
 ---
 eleventyNavigation:
-  key: z
+  key: Terminal Tips
 layout: topic-layout.njk
 ---
 
 ## Overview
 
-You might be using the terminal all wrong ...
-or at least not as efficiently as you could.
-Here are ten tips to improve your terminal usage.
+Most software developers spend some amount of time in terminal windows
+entering commands in their favorite shell, be it
+{% aTargetBlank "https://www.gnu.org/software/bash/", "bash" %},
+{% aTargetBlank "https://zsh.sourceforge.io/", "zsh" %},
+{% aTargetBlank "https://fishshell.com/", "fish" %},
+{% aTargetBlank "https://www.nushell.sh/", "nushell" %},
+or something else.
+
+If this describes you, maybe there are
+things you can do to improve the experience.
+Read on for some suggestions.
+
+## Terminal Programs
+
+For each operating system there are several applications to choose from
+that support interaction with shell sessions.
+Many support simultaneous shell sessions
+running in multiple windows, tabs, and panes.
+
+You likely find yourself working on multiple projects throughout the day.
+It is convenient to keep the terminal sessions related to each project
+in a separate window or in a separate tab of a single window.
+Each of these can contain multiple panes
+where separate terminal sessions are running.
+This allows you to focus on a task at hand
+by switching to a specific window or tab.
+
+For example, perhaps you editing your blog and working on two projects.
+Create a separate tab for each of these whose names are "blog"
+and the project names.
+Inside each tab create multiple panes by splitting the initial pane
+horizontally, vertically, or both.
+In the panes of a project tab you can run a web server, an API server,
+and a database server. Other panes can be used for executing shell commands.
+
+In macOS some of the options for applications that manage terminal sessions
+include Terminal (built-in macOS app),
+{% aTargetBlank "https://iterm2.com/", "iTerm2" %},
+{% aTargetBlank "https://github.com/tmux/tmux/wiki", "tmux" %} (typically run inside iTerm2),
+and {% aTargetBlank "https://www.warp.dev/", "warp" %}.
 
 ## Fonts
 
-Everything looks better in a terminal that is configured to use a nice font!
+Everything looks better in a terminal that is configured to use a nice font.
 
 Personal preference enters in here.
 I prefer a monospace font, meaning all characters have the same width.
@@ -25,8 +62,8 @@ I also prefer fonts that support ligatures which Google describes as follows:
 For example, an exclamation point followed by an equal sign
 (meaning not equal) is replaced by an equal sign with a slash through it.
 
-Here is some Swift code that can take advantage of ligatures
-for the character sequences `->` and `>=`.
+Here is some code in the Swift programming language that can
+take advantage of ligatures for the character sequences `->` and `>=`.
 
 ```swift
 func max(n1: Double, n2: Double) -> Bool {
@@ -407,27 +444,6 @@ Perhaps you are a fan of {% aTargetBlank "https://code.visualstudio.com/",
 "VS Code" %} and prefer for avoid using any flavor of Vim.
 Enter `vscode .` in a terminal to launch VS Code use it to
 edit any files in and below the current directory.
-
-# Windows, Tabs, and Panes
-
-You likely find yourself working on multiple projects throughout the day.
-It is convenient to keep the terminal sessions related to each project
-in a separate window or tab of a single window.
-Each of these can contain multiple panes
-where separate terminal sessions are running.
-This allows you to focus on a task at hand
-by switching to a specific window or tab.
-
-Options for managing terminal windows, tabs, and panes include
-iTerm2, tmux, and Warp. Can the macOS terminal app do this?
-
-For example, perhaps you editing your blog and working on two projects.
-Create a separate tab for each of these whose names are "blog"
-and the project names.
-Inside each tab create multiple panes by splitting the initially pane
-horizontally, vertically, or both.
-In the panes of a project tab you can run a web server, an API server,
-and a database server. Other panes can be used for executing shell commands.
 
 ## Fun
 
