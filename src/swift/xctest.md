@@ -474,13 +474,13 @@ final class CounterTests: XCTestCase {
         // Put setup code here. This method is called before
         // the invocation of each test method in the class.
 
-        // UI tests must launch the application that they test.
-        XCUIApplication().launch()
-
         // In UI tests it is usually best to
         // stop immediately when a failure occurs.
         // This defaults to true, so tests continue after a failure.
         continueAfterFailure = false
+
+        // UI tests must launch the application that they test.
+        Self.app.launch()
 
         // In UI tests it’s important to set the initial state, such as
         // interface orientation, that is required for before your tests run.
@@ -514,6 +514,20 @@ In the `setUpWithError` method of test files, add the following:
 
 ```swift
 XCTestCase.app.launch()
+```
+
+## Unwrapping Optionals
+
+If a test performs a force unwrap on an optional whose value is `nil`,
+the tests will stop running.
+To avoid this, use {% aTargetBlank
+"https://developer.apple.com/documentation/xctest/3380195-xctunwrap",
+"XCTUnwrap" %} which fails the test if the value is `nil`.
+For example:
+
+```swift
+let firstScore = try XCTUnwrap(scores.first)
+XCTAssert(firstScore > 0)
 ```
 
 ## Dismissing Sheets
