@@ -264,8 +264,9 @@ that have a specific file extension and contain given text.
 One way is to use the `find` command as follows:
 
 ```bash
-find . -name '*.js' | xargs grep 'some text'
-find . -type f -name '*.js' -exec grep 'some text'
+find . -type f -name '*.js' | xargs grep 'some text'
+# or
+find . -type f -name '*.js' -exec grep 'some text' {} \;
 ```
 
 This has several issues. The syntax is hard to remember, it is somewhat slow,
@@ -278,12 +279,13 @@ This link contains installation instructions for Linux, macOS, and Windows.
 
 Ripgrep is implemented in Rust and is very fast.
 
-The equivalent of the `find` command above is `rg --type=js 'some text'`.
+The equivalent of the `find` commands above is `rg --type=js 'some text'`.
 
 The paths to files that contain the text are displayed in purple.
 Matching line numbers are displayed in green.
 Text on the matching lines is displayed in white,
 except the matching text which is displayed in red.
+Much better!
 
 ## Starship
 
@@ -291,7 +293,7 @@ except the matching text which is displayed in red.
 highly customizable tool for customizing shell prompts.
 It works in nearly all shells including
 Bash, Fish, Nushell, Powershell, and Zsh.
-This removes the need to customize the prompt in shell-specific ways.
+This removes the need to customize the prompt in multiple, shell-specific ways.
 
 Starship can be configured in one place for all shells,
 which is great for developers that utilize multiple shells.
@@ -303,7 +305,9 @@ eval "$(starship init zsh)"
 ```
 
 Configure Starship by creating the file `~/.config/starship.toml`.
-Here is my configuration. Note the use of unicode characters.
+Here is my configuration.
+Note the use of unicode characters and
+detailed information about the state of git repositories.
 
 ```toml
 format = "$shell$custom$git_branch$git_status$directory$character "
@@ -350,8 +354,23 @@ nu_indicator = "🦀"
 zsh_indicator = "🧙"
 ```
 
-For more detail, see {% aTargetBlank
-"https://mvolkmann.github.io/blog/topics/#/blog/starship/", "Starship" %}.
+Here is a example of the Starship prompt configured above.
+
+<img alt="Starship prompt example" style="width: 100%"
+  src="/blog/assets/Starship-prompt-example.png?v={{pkg.version}}"
+  title="Starship prompt example">
+
+This shows the following in order:
+
+- The current shell is zsh.
+- The directory is inside a Git repository.
+- We are on the "main" branch.
+- One file was deleted.
+- One file was modified.
+- One file is untracked.
+- We are in the directory .../SwiftUI/WeatherKitDemo/WeatherKitDemo.
+
+For more detail, see my [Starship blog page](/blog/starship).
 
 ## Command-line Editing
 
@@ -372,7 +391,7 @@ to move the cursor within a command being entered:
 
 Most terminal programs do not support using a mouse or track pad
 to position the cursor by clicking within a command being entered.
-However, the {% aTargetBlank "https://www.warp.dev", "Warp" %} terminal
+However, the {% aTargetBlank "https://www.warp.dev", "warp" %} terminal
 behaves much more like a standard text editor.
 It supports positioning the cursor by clicking,
 selecting text with a mouse or trackpad,
