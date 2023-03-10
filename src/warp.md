@@ -183,8 +183,11 @@ There are two ways to select a previous block:
 2. Click any block and use the up and down arrow keys to navigate to it.
 
 There are many Warp commands that operate on a block.
-To execute such a command, right-click anywhere in the block or
-click the vertical ellipsis in the upper-right corner of the block.
+To execute such a command, open the block command menu by doing one of the following:
+
+- click the vertical ellipsis in the upper-right corner of the block
+- right-click anywhere in the block
+- select the block and press ctrl-m
 
 Block commands include:
 
