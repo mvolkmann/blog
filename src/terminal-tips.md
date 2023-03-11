@@ -14,7 +14,7 @@ entering commands in their favorite shell, be it
 {% aTargetBlank "https://www.nushell.sh/", "nushell" %},
 or something else.
 
-If this describes you, maybe there are
+If this describes you, perhaps there are
 things you can do to improve the experience.
 Read on for some suggestions.
 
@@ -33,13 +33,14 @@ where separate terminal sessions are running.
 This allows you to focus on a task at hand
 by switching to a specific window or tab.
 
-For example, perhaps you editing your blog and working on two projects.
-Create a separate tab for each of these whose names are "blog"
-and the project names.
+For example, perhaps you are editing your blog and working on two projects.
+Create a separate tab for each of these
+whose names are "blog" and the project names.
 Inside each tab create multiple panes by splitting the initial pane
 horizontally, vertically, or both.
-In the panes of a project tab you can run a web server, an API server,
-and a database server. Other panes can be used for executing shell commands.
+In the panes of a project tab you can run
+a web server, an API server, and a database server.
+Other panes can be used for executing shell commands.
 
 In macOS some of the options for applications that manage terminal sessions
 include Terminal (built-in macOS app),
@@ -79,6 +80,9 @@ And here is the same code displayed with ligatures:
 
 My current favorite monospace font that supports ligatures is {% aTargetBlank
 "https://www.nerdfonts.com/font-downloads", "FiraCode Nerd Font" %}.
+
+Your chosen terminal app should have a settings screen
+that enables specifying the font that it should use.
 
 Note: Warp terminal does not currently display ligatures in block output
 ({% aTargetBlank "https://github.com/warpdotdev/Warp/issues/239",
