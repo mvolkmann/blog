@@ -587,3 +587,10 @@ If you are a macOS user and you have {% aTargetBlank
   <img alt="tetris" style="width: 100%"
     src="/blog/assets/tetris.png?v={{pkg.version}}"
     title="tetris">
+
+## Wrap Up
+
+That's all the terminal tips that come to mind for me now.
+What did I miss?
+Email <a href="mailto:mark@objectcomputing.com?subject=terminal tips">me</a>
+your suggestions!
