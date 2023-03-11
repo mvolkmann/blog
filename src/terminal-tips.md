@@ -45,7 +45,7 @@ In macOS some of the options for applications that manage terminal sessions
 include Terminal (built-in macOS app),
 {% aTargetBlank "https://iterm2.com/", "iTerm2" %},
 {% aTargetBlank "https://github.com/tmux/tmux/wiki", "tmux" %} (typically run inside iTerm2),
-and {% aTargetBlank "https://www.warp.dev/", "warp" %}.
+and {% aTargetBlank "https://app.warp.dev/referral/24D6GX", "warp" %}.
 
 ## Fonts
 
@@ -391,8 +391,8 @@ to move the cursor within a command being entered:
 
 Most terminal programs do not support using a mouse or track pad
 to position the cursor by clicking within a command being entered.
-However, the {% aTargetBlank "https://www.warp.dev", "warp" %} terminal
-behaves much more like a standard text editor.
+However, the {% aTargetBlank "https://app.warp.dev/referral/24D6GX",
+"warp" %} terminal behaves much more like a standard text editor.
 It supports positioning the cursor by clicking,
 selecting text with a mouse or trackpad,
 using cmd-c to copy, and using cmd-v to paste.
@@ -409,6 +409,25 @@ but these can be modified.
 | move back one character     | left arrow         |
 | move forward one character  | right arrow        |
 | clear what has been entered | ctrl-c or ctrl-u   |
+
+## Command Output
+
+In most terminal apps commands that produce large amounts of output cause
+the command to scroll off the top of the pane where the command was entered.
+It is then no longer obvious what command produced the output
+and scrolling back to the command is a tedious process.
+In addition, there is typically no way to search the output of the last command
+without also searching the output of all the previous commands
+that were entered since the last time the terminal was cleared.
+
+The {% aTargetBlank "https://app.warp.dev/referral/24D6GX",
+"warp" %} terminal solves all of these issues.
+The last command entered sticks to the top of the pane
+while its output scrolls below it.
+Clicking the command causes the output to scroll back to the first line.
+Both the command and its output are part of a "block".
+There are many commands that can be executed on a block
+including "Find Within Block" and "Copy Output".
 
 ## JSON
 

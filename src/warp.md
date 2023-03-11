@@ -6,7 +6,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-{% aTargetBlank "https://www.warp.dev", "Warp" %} is
+{% aTargetBlank "https://app.warp.dev/referral/24D6GX", "Warp" %} is
 "the terminal for the 21st century".
 
 <img alt="Warp Logo" style="width: 20%"
