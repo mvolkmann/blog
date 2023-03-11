@@ -226,50 +226,6 @@ alias mv="mv -i"
 alias rm="rm -i"
 ```
 
-## Kill Processes
-
-Here's a common scenario.
-You attempt to start a server that listens on port 3000,
-but you get the error message "Something is already running on port 3000".
-You currently have ten terminal sessions open in various windows and panes.
-If you could find the one what is running a server using port 3000
-you could navigate to it and press ctrl-c to kill it.
-But finding it takes too long.
-
-It would be much more convenient if you could enter a command
-that would kill the process that is listening on a given port.
-You can with `klp 3000`!
-
-Define the following alias in your shell configuration file.
-
-```bash
-alias klp="kill-listening-process"
-```
-
-Ths script `kill-listening-process` will differ somewhat
-based on the operating system.
-For macOS it can be defined as follows:
-
-```bash
-#!/usr/bin/env bash
-# This kills the process listening on a given port.
-
-if [[ $# -ne 1 ]]; then
-  echo usage: kill-listening-process {port}
-  exit 1
-fi
-
-port=$1
-pid=$(lsof -n -iTCP:$port -sTCP:LISTEN -t)
-
-if [[ $pid ]]; then
-  kill $pid
-  echo killed process $pid
-else
-  echo no process is listening on port $port
-fi
-```
-
 ## Search For Files
 
 There are multiple ways to search for files in and below the current directory
@@ -530,6 +486,68 @@ Perhaps you are a fan of {% aTargetBlank "https://code.visualstudio.com/",
 "VS Code" %} and prefer to avoid using any flavor of Vim.
 Enter `vscode .` in a terminal to launch VS Code use it to
 edit any files in and below the current directory.
+
+## Kill Processes
+
+Here's a common scenario.
+You attempt to start a server that listens on port 8000,
+but you get the error message "Something is already running on port 8000".
+You currently have ten terminal sessions open in various windows and panes.
+If you could find the one what is running a server using port 8000
+you could navigate to it and press ctrl-c to kill it.
+But finding it takes too long.
+
+It would be much more convenient if you could enter a command
+that would kill the process that is listening on a given port.
+You can with `klp 8000`!
+
+Define the following alias in your shell configuration file.
+
+```bash
+alias klp="kill-listening-process"
+```
+
+Ths script `kill-listening-process` will differ somewhat
+based on the operating system.
+For macOS it can be defined as follows:
+
+```bash
+#!/usr/bin/env bash
+# This kills the process listening on a given port.
+
+if [[ $# -ne 1 ]]; then
+  echo usage: kill-listening-process {port}
+  exit 1
+fi
+
+port=$1
+pid=$(lsof -n -iTCP:$port -sTCP:LISTEN -t)
+
+if [[ $pid ]]; then
+  kill $pid
+  echo killed process $pid
+else
+  echo no process is listening on port $port
+fi
+```
+
+In the screenshot below we have started a server in the left pane
+and attempted to start another server in the right pane
+listening on the same port.
+Note the OSError message "Address already in use" at the bottom.
+
+<img alt="server before klp" style="width: 100%"
+  src="/blog/assets/kill-listening-process-1.png?v={{pkg.version}}"
+  title="server before klp">
+
+In the screenshot below we have used the `klp` alias
+to kill the process that was listening on port 8000.
+Note that the left pane reports that the server was "terminated"
+and the right pane reports the id of the process that it killed.
+
+<img alt="server after klp" style="width: 100%"
+  src="/blog/assets/kill-listening-process-2.png?v={{pkg.version}}"
+  title="server after klp">
 
 ## Having Fun
 
