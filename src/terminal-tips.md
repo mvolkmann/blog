@@ -48,7 +48,7 @@ include Terminal (built-in macOS app),
 {% aTargetBlank "https://github.com/tmux/tmux/wiki", "tmux" %} (typically run inside iTerm2),
 and {% aTargetBlank "https://app.warp.dev/referral/24D6GX", "warp" %}.
 
-## Fonts
+## Terminal Font
 
 Everything looks better in a terminal that is configured to use a nice font.
 
@@ -308,7 +308,16 @@ Text on the matching lines is displayed in white,
 except the matching text which is displayed in red.
 This is much better!
 
-## Starship
+## Custom Shell Prompts
+
+Shell prompts can provide lots of contextual information
+about the environment in which the next command will be run.
+This might include answers to questions like:
+
+- What directory am I in?
+- What shell am I using?
+- Am I in a directory of a git repository?
+- If so, what branch am I on?
 
 {% aTargetBlank "https://starship.rs/", "Starship" %} is a
 highly customizable tool for customizing shell prompts.
@@ -316,8 +325,12 @@ It works in nearly all shells including
 Bash, Fish, Nushell, Powershell, and Zsh.
 This removes the need to customize the prompt in multiple, shell-specific ways.
 
-Starship can be configured in one place for all shells,
+Starship is configured in one place for all shells,
 which is great for developers that utilize multiple shells.
+
+To install Starship, see the instructions at {% aTargetBlank
+"https://starship.rs/guide/#🚀-installation", "Starship Installation" %}.
+In macOS it can be installed using the Homebrew command `brew install starship`.
 
 To use Starship with zsh, add the following line in `~/.zshrc`:
 
@@ -326,7 +339,7 @@ eval "$(starship init zsh)"
 ```
 
 Configure Starship by creating the file `~/.config/starship.toml`.
-Here is my configuration.
+My configuration is shown below.
 Note the use of unicode characters and
 detailed information about the state of git repositories.
 
@@ -383,19 +396,22 @@ Here is a example of the Starship prompt configured above.
 
 This shows the following in order:
 
-- The current shell is zsh.
-- The directory is inside a Git repository.
+- The current shell is zsh (based in the emoji shown).
+- The directory is inside a Git repository (based on the git emoji).
 - We are on the "main" branch.
-- One file was deleted.
-- One file was modified.
-- One file is untracked.
+- One file was deleted (trash can emoji).
+- One file was modified (pencil emoji).
+- One file is untracked (shrugging person emoji).
 - We are in the directory .../SwiftUI/WeatherKitDemo/WeatherKitDemo.
 
 For more detail, see my [Starship blog page](/blog/starship).
 
 ## Command-line Editing
 
-Learn how to perform basic editing in your selected shell.
+We can't all be perfect when entering shell commands.
+Sometimes we need to edit what we have typed before executing a command.
+So it's helpful to learn how to be productive in
+performing basic editing in your selected shell.
 
 In many terminal programs, the following keyboard shortcuts can be used
 to move the cursor within a command being entered:
@@ -418,8 +434,8 @@ It supports positioning the cursor by clicking,
 selecting text with a mouse or trackpad,
 using cmd-c to copy, and using cmd-v to paste.
 
-Warp uses the following keyboard shortcuts for moving the cursor,
-but these can be modified.
+By default, warp uses the following, easier to remember,
+keyboard shortcuts for moving the cursor.
 
 | Action                      | Warp Shortcut Key  |
 | --------------------------- | ------------------ |
@@ -445,21 +461,22 @@ The {% aTargetBlank "https://app.warp.dev/referral/24D6GX",
 "warp" %} terminal solves all of these issues.
 The last command entered sticks to the top of the pane
 while its output scrolls below it.
-Clicking the command causes the output to scroll back to the first line.
+Clicking the command causes the output to scroll back to its first line.
 Both the command and its output are part of a "block".
 There are many commands that can be executed on a block
 including "Find Within Block" and "Copy Output".
 
-## JSON
+## Using JSON
 
-JavaScript Object Notation (JSON) is a data format that is
-frequently returned by API services and read from files.
-Often all the data is on a single line with no added spaces,
-so it is not easy for humans to read.
+JavaScript Object Notation (JSON) is a data format that is frequently used
+for data returned by API services and data in input files.
+Often all the data is on a single line with no added spaces
+to make the data as compact as possible.
+But this make it difficult for humans to read.
+
 The tool {% aTargetBlank "https://stedolan.github.io/jq/", "jq" %}
 helps with this and does much more.
-
-jq is a command-line JSON processor that is implemented in C.
+It is a command-line JSON processor that is implemented in C.
 
 The basic functionality of jq is to pretty-print JSON data.
 But can also filter, sort, and transform JSON data.
@@ -478,33 +495,43 @@ custom function definitions, variables, streaming, and more.
 
 For more information, see my [jq blog page](/blog/jq).
 
-## Vim
+## Terminal-based File Editing
+
+The ability to edit files within a terminal session is handy and efficient.
+An important use case for this is editing files that
+reside on another server that is accessed using SSH.
+
+The Vim editor has the distinction of being the most common
+text editor that is available by default in terminal sessions.
 
 Many software developers know a little bit about Vim and
 grudgingly use it when nothing else is available.
 You don't need to be an expert in Vim or customize it
 in order to derive a lot of its benefits.
 
-In macOS and Linux, vim is already installed.
-Despite this, I recommend installing
+Even though some version of Vim is already installed
+in macOS and Linux environments, I recommend installing
 {% aTargetBlank "https://neovim.io", "neovim" %}
 which is a modern replacement for Vim.
 Click the "Install Now" button at the link above
 for installation instructions.
-In macOS it can be installed using the Homebrew command
-`brew install neovim`.
+
+In macOS neovim can be installed using
+the Homebrew command `brew install neovim`.
+To run neovim in a terminal, enter `nvim` optionally followed by a file path.
 
 For a summary of the minimal set of commands
-you need to know to be productive in vim or neovim,
+you need to know to be productive in Vim or neovim,
 see my [Vim blog page](/blog/vim).
-Especially see the section on netrw.
+Especially see the section on netrw
+for managing multiple files in a single Vim session.
 
 Perhaps you are a fan of {% aTargetBlank "https://code.visualstudio.com/",
-"VS Code" %} and prefer for avoid using any flavor of Vim.
+"VS Code" %} and prefer to avoid using any flavor of Vim.
 Enter `vscode .` in a terminal to launch VS Code use it to
 edit any files in and below the current directory.
 
-## Fun
+## Having Fun
 
 The terminal is not just for work, it can also be fun.
 If you are a macOS user and you have {% aTargetBlank
@@ -534,7 +561,7 @@ If you are a macOS user and you have {% aTargetBlank
 - myman
 
   Enter `brew install myman` followed by `myman`
-  to play a version of the game Tetris in the terminal.
+  to play a version of the game Pacman in the terminal.
   Press ctrl-c to exit.
 
   <img alt="myman" style="width: 100%"
@@ -560,59 +587,3 @@ If you are a macOS user and you have {% aTargetBlank
   <img alt="tetris" style="width: 100%"
     src="/blog/assets/tetris.png?v={{pkg.version}}"
     title="tetris">
-
-## Other Shells
-
-{% aTargetBlank "https://mvolkmann.github.io/blog/topics/#/blog/nushell/",
-"Nushell" %} is "a new type of shell".
-"The goal of this project is to take the Unix philosophy of shells,
-where pipes connect simple commands together,
-and bring it to the modern style of development."
-
-The output of many commands is a table
-and there are many commands for manipulating tables.
-
-TODO: Get more content from https://www.nushell.sh/.
-
-## Use Warp
-
-TODO: Remove this section, but refer to your Warp blog page somewhere.
-
-There are many options for terminal applications.
-In macOS you can use the built-in Terminal app.
-A popular alternative is {% aTargetBlank "https://iterm2.com", "iTerm2" %}.
-Many developers using iTerm2 in conjunction with {% aTargetBlank
-"https://mvolkmann.github.io/blog/topics/#/blog/tmux/", "tmux" %}
-in order to gain features such as multiple tabs that each contain split panes
-where each pane hosts a separate shell session.
-
-{% aTargetBlank "https://mvolkmann.github.io/blog/topics/#/blog/warp/",
-"Warp" %} is a fairly new option, currently only supported on macOS,
-that provides most of the features of iTerm2 and tmux.
-It also adds many features not found in those tools such as
-command "blocks", better command editing capability, workflows,
-a command palette, provided and custom themes,
-permalinks to commands and their output, and "AI Command Search".
-
-AI Command Search helps with discovering the shell command needed
-to perform a task described in English.
-For example, searching for "delete remote git branch"
-suggests `git push origin --delete <branch>`.
-
-Warp makes it easy to create a separate tab
-for each category of work being done.
-This allows you to focus on a task at hand.
-To switch tasks, just click a different tab.
-
-For example, perhaps you editing your blog and working on two projects.
-Create a separate tab for each of these whose names are "blog"
-and the project names.
-Inside each tab create multiple panes by splitting the initially pane
-horizontally, vertically, or both.
-In the panes of a project tab you can run a web server, an API server,
-and a database server. Other panes can be used for executing shell commands.
-
-TODO: Add some screenshots!
-
-Warp supports the Bash, Zsh, and Fish shells.
-It does not currently support Nushell.
