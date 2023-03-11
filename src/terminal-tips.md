@@ -48,6 +48,14 @@ include Terminal (built-in macOS app),
 {% aTargetBlank "https://github.com/tmux/tmux/wiki", "tmux" %} (typically run inside iTerm2),
 and {% aTargetBlank "https://app.warp.dev/referral/24D6GX", "warp" %}.
 
+The screenshot below shows a window with three tabs.
+The currently selected tab is "Project #1".
+This tab contains four panes that each have a specific purpose.
+
+<img alt="warp panes" style="width: 100%"
+  src="/blog/assets/warp-panes.png?v={{pkg.version}}"
+  title="warp panes">
+
 ## Terminal Font
 
 Everything looks better in a terminal that is configured to use a nice font.
