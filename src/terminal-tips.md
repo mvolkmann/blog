@@ -130,17 +130,19 @@ If you sometimes work with Git from the command-line,
 defining the following aliases and shell functions can make this easier.
 Use these when you are in or below the root directory of a git repository.
 
+For the zsh shell the following can be added in your `~/.zshrc` file.
+
 {% raw %}
 
 ```bash
 # This lists all the local branches in the current git repository.
 alias br="git branch"
 
-# This prompts for a commit message using Vim.
+# This prompts for a commit message to be entered using Vim.
 # Diffs for all the modified files are displayed inside Vim
 # so they can be verified and serve as the basis for a good commit message.
 # After a message is entered and saved (:wq),
-# it commits all the modified files.
+# this commits all the modified files.
 alias ci="git commit -av"
 
 # This creates a new branch off of the current branch
@@ -158,12 +160,12 @@ alias log="git log"
 
 # This deletes the local AND remote branches with a given name.
 # For example, `rmb feature-compute-score`.
-alias rmb="$HOME/bin/rmb" # defined below
+alias rmb="$HOME/bin/rmb" # a shell script defined below
 
 # This outputs lists of all modified, deleted, and untracked files.
 alias status="git status"
 
-# This cd's up to root directory of current git repository.
+# This cd's up to the root directory of current git repository.
 function cdgitroot() {
   cd `git rev-parse --git-dir`
   cd ..
@@ -184,14 +186,14 @@ function push() {
 
 {% endraw %}
 
-Here is the shell script `rmb` that must be in a directory
-listed in the `PATH` environment variable.
+Here is the shell script `rmb` referenced above that
+must be in a directory listed in the `PATH` environment variable.
 
 {% raw %}
 
 ```bash
 #!/usr/bin/env bash
-# Removes a given git branch, both local and remote.
+# Removes the local and remote git branches with a given name.
 
 if [ $# -ne 1 ]; then
   echo usage: rmb {branch-name}
@@ -206,11 +208,20 @@ git branch -rd origin/$1
 
 ## Avoid Accidents
 
+A deadline is looming and you are working as fast as possible to meet it.
+Your fingers are a blur as you crank out shell commands in a terminal.
+But you're human and mistakes can creep in.
+Did you mean to copy over or delete that existing file?
+And has your backup process run since the last time
+that file that just disappeared was modified?
+
 The `cp` (copy), `mv` (move), and `rm` (remove) commands can result in
-loss of data if a file is accidentally replaced or removed.
-To avoid this, define the following aliases that
-shadow those commands with a version that prompts for permission
-before overwriting or deleting a file.
+loss of data if a file is accidentally replaced or deleted.
+To avoid this, define the following aliases in your shell configuration file
+(such as `~/.zshrc`) that shadow those commands with aliases
+that prompt for permission before overwriting or deleting a file.
+This gives you a chance to consider whether you
+really want to carry out a non-reversible action.
 
 ```bash
 # Ask for confirmation before overwriting or deleting files.
@@ -223,8 +234,8 @@ alias rm="rm -i"
 
 Here's a common scenario.
 You attempt to start a server that listens on port 3000,
-but you get the error "Something is already running on port 3000".
-You currently have ten shells open in various terminal windows and panes.
+but you get the error message "Something is already running on port 3000".
+You currently have ten terminal sessions open in various windows and panes.
 If you could find the one what is running a server using port 3000
 you could navigate to it and press ctrl-c to kill it.
 But finding it takes too long.
@@ -232,6 +243,8 @@ But finding it takes too long.
 It would be much more convenient if you could enter a command
 that would kill the process that is listening on a given port.
 You can with `klp 3000`!
+
+Define the following alias in your shell configuration file.
 
 ```bash
 alias klp="kill-listening-process"
@@ -273,13 +286,17 @@ find . -type f -name '*.js' | xargs grep 'some text'
 find . -type f -name '*.js' -exec grep 'some text' {} \;
 ```
 
-This has several issues. The syntax is hard to remember, it is somewhat slow,
-the output doesn't indicate the line numbers where matches were found,
-and the output is not color-coded.
+This has several issues:
+
+- The syntax is hard to remember.
+- It is somewhat slow.
+- The output doesn't indicate the line numbers where matches were found.
+- The output is not color-coded.
 
 A better alternative is to use {% aTargetBlank
 "https://github.com/BurntSushi/ripgrep", "ripgrep" %}.
 This link contains installation instructions for Linux, macOS, and Windows.
+In macOS it can be installed using the Homebrew command `brew install ripgrep`.
 
 Ripgrep is implemented in Rust and is very fast.
 
@@ -289,7 +306,7 @@ The paths to files that contain the text are displayed in purple.
 Matching line numbers are displayed in green.
 Text on the matching lines is displayed in white,
 except the matching text which is displayed in red.
-Much better!
+This is much better!
 
 ## Starship
 
