@@ -84,10 +84,6 @@ My current favorite monospace font that supports ligatures is {% aTargetBlank
 Your chosen terminal app should have a settings screen
 that enables specifying the font that it should use.
 
-Note: Warp terminal does not currently display ligatures in block output
-({% aTargetBlank "https://github.com/warpdotdev/Warp/issues/239",
-"issue 239" %}).
-
 ## Change Directory
 
 If your work involves switching between projects during a typical day
@@ -447,25 +443,6 @@ keyboard shortcuts for moving the cursor.
 | move forward one character  | right arrow        |
 | clear what has been entered | ctrl-c or ctrl-u   |
 
-## Command Output
-
-In most terminal apps commands that produce large amounts of output cause
-the command to scroll off the top of the pane where the command was entered.
-It is then no longer obvious what command produced the output
-and scrolling back to the command is a tedious process.
-In addition, there is typically no way to search the output of the last command
-without also searching the output of all the previous commands
-that were entered since the last time the terminal was cleared.
-
-The {% aTargetBlank "https://app.warp.dev/referral/24D6GX",
-"warp" %} terminal solves all of these issues.
-The last command entered sticks to the top of the pane
-while its output scrolls below it.
-Clicking the command causes the output to scroll back to its first line.
-Both the command and its output are part of a "block".
-There are many commands that can be executed on a block
-including "Find Within Block" and "Copy Output".
-
 ## Using JSON
 
 JavaScript Object Notation (JSON) is a data format that is frequently used
@@ -494,6 +471,29 @@ types, conditionals, regular expressions, math functions,
 custom function definitions, variables, streaming, and more.
 
 For more information, see my [jq blog page](/blog/jq).
+
+## Command Output
+
+In most terminal apps commands that produce large amounts of output cause
+the command to scroll off the top of the pane where the command was entered.
+It is then no longer obvious what command produced the output
+and scrolling back to the command is a tedious process.
+In addition, there is typically no way to search the output of the last command
+without also searching the output of all the previous commands
+that were entered since the last time the terminal was cleared.
+
+The {% aTargetBlank "https://app.warp.dev/referral/24D6GX",
+"warp" %} terminal solves all of these issues.
+The last command entered sticks to the top of the pane
+while its output scrolls below it.
+Clicking the command causes the output to scroll back to its first line.
+Both the command and its output are part of a "block".
+There are many commands that can be executed on a block
+including "Find Within Block" and "Copy Output".
+
+<img alt="warp block commands" style="width: 100%"
+  src="/blog/assets/warp-block-commands.png?v={{pkg.version}}"
+  title="warp-block-commands">
 
 ## Terminal-based File Editing
 
