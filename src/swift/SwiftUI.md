@@ -10601,6 +10601,34 @@ struct ContentView: View {
 }
 ```
 
+To add a toolbar item that is only present for a given screen,
+write code similar to the following:
+
+```swift
+struct SomeView: View {
+    @State private var isActive = false
+
+    var body: some View {
+        VStack {
+            ...
+        }
+        .onAppear { isActive = true }
+        .onDisappear { isActive = false }
+        .toolbar {
+            if isActive {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        ...
+                    }) {
+                        Image(systemName: "plus.circle.fill")
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
 ## Navigation
 
 The approach described here is deprecated in iOS 16. See the new approach at
