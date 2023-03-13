@@ -5396,8 +5396,18 @@ func getData() -> AsyncStream<Int> {
             while count > 0 {
                 // Sleep for 1 to 3 seconds.
                 let seconds = Int.random(in: 1 ... 3)
+
+                /*
+                // Approach #1
                 let nanoseconds = UInt64(seconds * 1_000_000_000)
                 try await Task.sleep(nanoseconds: nanoseconds)
+                */
+
+                // Approach #2
+                try await Task.sleep(
+                    until: .now + .seconds(seconds),
+                    clock: .continuous
+                )
 
                 // Yield a random integer from 1 to 10.
                 let n = Int.random(in: 1 ... 10)
@@ -5411,10 +5421,14 @@ func getData() -> AsyncStream<Int> {
 }
 
 Task {
-    for await n in getData() {
-        print("got", n)
+    // Measure how long it takes to get data from the stream until it is empty.
+    let clock = ContinuousClock()
+    let time = await clock.measure {
+        for await n in getData() {
+            print("got", n)
+        }
     }
-    print("finished")
+    print("finished in \(time.components.seconds) seconds")
 }
 ```
 
