@@ -74,8 +74,11 @@ These screenshots are useful for uploading to
 
 ## Videos
 
-To record a video of a Simulator session, hold the option key
-and click the start icon that replaces the camera icon in the upper-right.
+To begin recording a video of a Simulator session,
+select File ... Record Screen, press cmd-r, or
+hold the option key and click the start icon
+that replaces the camera icon in the upper-right.
+Audio is not captured.
 When finished recording, click the stop button in the upper-right
 that replaced the start button.
 
