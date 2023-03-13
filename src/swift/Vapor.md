@@ -9,6 +9,14 @@ layout: topic-layout.njk
 
 {% aTargetBlank "https://vapor.codes", "Vapor" %} is a web server framework
 for macOS that is written in Swift.
+It is under active development as of March 11, 2023.
+
+## Alternatives
+
+Alternatives to Vapor include:
+
+- {% aTargetBlank "https://www.kitura.dev", "Kitura" %} (last commit on Oct. 7, 2022)
+- {% aTargetBlank "https://perfect.org", "Perfect" %} (last commit on Feb. 8, 2021)
 
 ## Installing
 
