@@ -2378,6 +2378,179 @@ let sortedPeople = people.sorted {
 }
 ```
 
+## Regular Expressions
+
+Swift 5.7 added support for regular expressions.
+
+The {% aTargetBlank "https://developer.apple.com/documentation/swift/regex",
+"Regex" %} struct represents a regular expression.
+Instances can be created in three ways:
+
+- Use the literal syntax that surrounds the regular expression with slashes.
+- Use one of several `Regex` initializers.
+- Use the {% aTargetBlank
+  "https://developer.apple.com/documentation/regexbuilder", "RegexBuilder" %}
+  framework which supports passing a closure to `Regex`
+  that contains DSL-like syntax.
+
+Here are examples that capture data from a sentence describing a sports score:
+
+```swift
+import RegexBuilder
+
+let sentence = "The Chiefs beat the Eagles 38 to 35." // 2023 Super Bowl
+
+// This is the type of a Regex that has five capture groups.
+typealias MyRegex =
+    Regex<(Substring, Substring, Substring, Substring, Substring)>
+
+// This is a compile-time regular expression.
+// These are parsed at compile-time to verify that their syntax is correct.
+// They use the same syntax as Perl, Python, Ruby,
+// and many other programming languages.
+// #/.../# is the extended delimiter syntax
+// which allows having slashes inside without escaping them.
+let re1: MyRegex = #/^The (\w+) beat the (\w+) (\d+) to (\d+).$/#
+
+// This is a runtime regular expression,
+// useful when string interpolation is used to define
+// the regular expression using data only known at runtime.
+let namePattern = #"\w+"#
+let scorePattern = #"\d+"#
+let re2: MyRegex = try! Regex(
+    "The (\(namePattern)) beat the (\(namePattern)) " +
+        "(\(scorePattern)) to (\(scorePattern))."
+)
+
+// This regular expression is defined using the builder syntax.
+
+// `OneOrMore` is a struct defined by the RegexBuilder framework.
+// Other such structs include:
+// - `One`: exactly one
+// - `Optionally`: zero or one
+// - `OneOrMore`: one or more
+// - `Repeat`: range of occurrences
+
+// `word` and `digit` are static properties of the `RegexComponent` protocol.
+// `word` represents a single word character
+// `digit` represents a single digit
+// Other static properties include
+// `whitespace`, `any`, `anyOf(sequence)`, and more.
+
+let name = OneOrMore(.word)
+let score = OneOrMore(.digit)
+
+// `Capture` is a struct defined by the RegexBuilder framework.
+// Also see `TryCapture` which backtracks if the match fails.
+
+let re3: MyRegex = Regex {
+    "The "
+    Capture { name }
+    " beat the "
+    Capture { name }
+    " "
+    Capture { score }
+    " to "
+    Capture { score }
+    "."
+}
+```
+
+Each of the regular expressions defined above produce the same results.
+The following code demonstrates using each of them.
+The `match` variable below is a {% aTargetBlank
+"https://developer.apple.com/documentation/swift/regex/match", "Match" %}
+struct instance.
+This has an `output` property whose value is a tuple containing
+the full match and each of the capture group values.
+
+```swift
+func tryRegex(_ re: MyRegex) {
+    if let match = sentence.firstMatch(of: re) {
+        // This uses an underscore to ignore the full match value.
+        let (_, team1, team2, score1, score2) = match.output
+        print(team1) // Chiefs
+        print(team2) // Eagles
+        print(score1) // 38
+        print(score2) // 35
+    } else {
+        print("not matched")
+    }
+}
+
+tryRegex(re1)
+tryRegex(re2)
+tryRegex(re3)
+```
+
+The `String` methods `firstMatch`, `wholeMatch`, `prefixMatch`, `starts`,
+`replacing`, and `trimmingPrefix` can take regular expressions as arguments.
+The following code demonstrates each of these:
+
+```swift
+let digitsRE = #/\d+/#
+if let result = sentence.firstMatch(of: digitsRE) {
+    print(result.output) // 38
+}
+
+let wholeRE = #/^The (\w+) beat the (\w+) (\d+) to (\d+).$/#
+if let result = sentence.wholeMatch(of: wholeRE) {
+    // result.output is a tuple that can be destructured.
+    let (whole, name1, name2, score1, score2) = result.output
+    print(whole) // The Chiefs beat the Eagles 38 to 35.
+    print(name1) // Chiefs
+    print(name2) // Eagles
+    print(score1) // 38
+    print(score2) // 35
+}
+
+let prefixRE = #/The (\w+) /#
+if let result = sentence.prefixMatch(of: prefixRE) {
+    let (whole, name) = result.output
+    print(whole) // The Chiefs
+    print(name) // Chiefs
+}
+
+if sentence.starts(with: prefixRE) {
+    print("starts with success")
+}
+
+let newSentence = sentence.replacing(digitsRE, with: "?")
+print(newSentence) // The Chiefs beat the Eagles ? to ?.
+
+let trimmedSentence = sentence.trimmingPrefix(prefixRE)
+print(trimmedSentence) // beat the Eagles 38 to 35.
+
+let family = "Mark, Tami, Amanda, and Jeremy"
+let names = family.split(separator: #/, and |, /#)
+print(names) // ["Mark", "Tami", "Amanda", "Jeremy"]
+```
+
+There were plans to allow switch cases to match regular expressions.
+It was shown in the WWDC video {% aTargetBlank
+"https://developer.apple.com/videos/play/wwdc2022/110358/",
+"Swift Regex: Beyond the basics" %} but it doesn't seem to be supported yet.
+See this {% aTargetBlank
+"https://stackoverflow.com/questions/75078966/how-to-use-swift-literal-regex-expressions-in-switch-case-pattern-statements",
+"StackOverflow post" %}.
+
+```swift
+func classify(_ token: String) {
+    switch token {
+    case /\d+/:
+        print("found number")
+    case /\w+/:
+        print("found word")
+    default:
+        print("found something else")
+    }
+}
+
+classify("123")
+classify("Hello")
+classify("!@#")
+```
+
 ## Variables
 
 Mutable variables are declared with the `var` keyword.
