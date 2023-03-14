@@ -852,11 +852,14 @@ The `Task` static property `isCancelled`
 and the static method `checkCancellation`
 apply to the `Task` inside which they are used.
 
-The `Task` static method `sleep` takes a number of nanoseconds
-and sleeps for at least that long. For example:
+The `Task` static method `sleep` has two forms
+that each sleep for least a given amount of time.
+For example:
 
 ```swift
 try? await Task.sleep(nanoseconds: 3 * 1_000_000_000) // 3 seconds
+
+try? await Task.sleep(until: .now + .seconds(3), clock: .continuous)
 ```
 
 The `Task` static method `yield` lets higher priority tasks
