@@ -2485,8 +2485,9 @@ tryRegex(re2)
 tryRegex(re3)
 ```
 
-The `String` methods `firstMatch`, `wholeMatch`, `prefixMatch`, `starts`,
-`replacing`, and `trimmingPrefix` can take regular expressions as arguments.
+The `String` methods `contains`, `firstMatch`, `wholeMatch`, `prefixMatch`,
+`starts`, `replacing`, and `trimmingPrefix`
+can take regular expressions as arguments.
 The following code demonstrates each of these:
 
 ```swift
