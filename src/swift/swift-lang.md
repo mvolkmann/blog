@@ -2401,6 +2401,9 @@ import RegexBuilder
 let sentence = "The Chiefs defeated the Eagles 38 to 35." // 2023 Super Bowl
 
 // This is the type of a Regex that has five capture groups.
+// The generic type is a tuple containing the capture types.
+// The return value of some Regex and String methods is a
+// Regex.Match object whose `output` property has this generic type.
 typealias MyRegex =
     Regex<(Substring, Substring, Substring, Substring, Substring)>
 
