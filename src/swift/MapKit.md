@@ -21,6 +21,19 @@ to invoke app-specific actions.
   "https://holyswift.app/new-mapkit-configurations-with-swiftui/",
   "New MapKit Configurations with SwiftUI" %}
 
+## Getting Started
+
+To enable use of MapKit in a project:
+
+- Select the top entry in the file navigator.
+- Select the main target.
+- Select the "Signing & Capabilities" tab.
+- Click the "+ Capability" button in the upper-left.
+- Enter "MapKit".
+- Double-click that capability to add it to the project.
+- Check the checkboxes for the desired routing modes such as
+  "Bike", "Car", and "Pedestrian".
+
 ## Example App
 
 See the demo app at {% aTargetBlank
@@ -429,19 +442,6 @@ The `coordinate` property has the type `CLLocationCoordinate2D`.
 
 MKPlacemark -> CLLocation -> CLLocationCoordinate2D
 
-## Getting Started
-
-To enable use of MapKit in a project:
-
-- Select the top entry in the file navigator.
-- Select the main target.
-- Select the "Signing & Capabilities" tab.
-- Click the "+ Capability" button in the upper-left.
-- Enter "MapKit".
-- Double-click that capability to add it to the project.
-- Check the checkboxes for the desired routing modes such as
-  "Bike", "Car", and "Pedestrian".
-
 ## Showing Current Location
 
 To show the current location of the user on the map,
@@ -494,6 +494,41 @@ In the Simulator the location defaults to the location of
 Apple headquarters in Cupertino, California near San Jose.
 To change this, select Features ... Location ... Custom Location...
 and enter latitude and longitude values.
+
+## Deploying
+
+The `Info.plist` file in one of my apps needed the following
+in order to deploy an archive without warnings:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>MKDirectionsRequest</string>
+			<key>LSHandlerRank</key>
+			<string>None</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.apple.maps.directionsrequest</string>
+			</array>
+		</dict>
+	</array>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
+	<key>MKDirectionsApplicationSupportedModes</key>
+	<array>
+		<string>MKDirectionsModeBike</string>
+		<string>MKDirectionsModeCar</string>
+		<string>MKDirectionsModePedestrian</string>
+	</array>
+</dict>
+</plist>
+```
 
 ## More
 
