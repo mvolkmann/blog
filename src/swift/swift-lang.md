@@ -2391,11 +2391,14 @@ Instances can be created in three ways:
 - Use the {% aTargetBlank
   "https://developer.apple.com/documentation/regexbuilder", "RegexBuilder" %}
   framework which supports passing a closure to `Regex`
-  that contains DSL-like syntax.
+  that contains DSL-like syntax using types defined by this framework.
 
 Here are examples that capture data from a sentence describing a sports score:
 
 ```swift
+// This import is only needed to use types defined by the RegexBuilder
+// framework such as One, Optionally, ZeroOrMore, OneOrMore, Repeat,
+// ChoiceOf, Capture, and TryCapture.
 import RegexBuilder
 
 let sentence = "The Chiefs defeated the Eagles 38 to 35." // 2023 Super Bowl
@@ -2451,9 +2454,17 @@ let score = OneOrMore(.digit)
 // Also see `TryCapture` which backtracks if the match fails.
 
 let re3: MyRegex = Regex {
+    // Builder types that can be used here include
+    // One, Optionally, ZeroOrMore, OneOrMore, Repeat,
+    // ChoiceOf, Capture, and TryCapture.
     "The "
     Capture { name }
-    " (?:beat|defeated) the "
+    " "
+    ChoiceOf {
+        "beat"
+        "defeated"
+    }
+    " "
     Capture { name }
     " "
     Capture { score }
