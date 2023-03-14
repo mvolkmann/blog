@@ -2398,7 +2398,7 @@ Here are examples that capture data from a sentence describing a sports score:
 ```swift
 import RegexBuilder
 
-let sentence = "The Chiefs beat the Eagles 38 to 35." // 2023 Super Bowl
+let sentence = "The Chiefs defeated the Eagles 38 to 35." // 2023 Super Bowl
 
 // This is the type of a Regex that has five capture groups.
 typealias MyRegex =
@@ -2408,17 +2408,21 @@ typealias MyRegex =
 // These are parsed at compile-time to verify that their syntax is correct.
 // They use the same syntax as Perl, Python, Ruby,
 // and many other programming languages.
-// #/.../# is the extended delimiter syntax
-// which allows having slashes inside without escaping them.
-let re1: MyRegex = #/^The (\w+) beat the (\w+) (\d+) to (\d+).$/#
+// #/.../# is the extended delimiter syntax which is usually needed
+// for Swift to correctly interpret any non-trivial regular expression
+// and also to prevent Xcode from adding spaces inside it.
+// Adding ?: inside parentheses allows a choice
+// between words to be matched, but not captured.
+let re1: MyRegex = #/^The (\w+) (?:beat|defeated) the (\w+) (\d+) to (\d+).$/#
 
 // This is a runtime regular expression,
 // useful when string interpolation is used to define
 // the regular expression using data only known at runtime.
 let namePattern = #"\w+"#
 let scorePattern = #"\d+"#
+let winWords = "(?:beat|defeated)"
 let re2: MyRegex = try! Regex(
-    "The (\(namePattern)) beat the (\(namePattern)) " +
+    "The (\(namePattern)) \(winWords) the (\(namePattern)) " +
         "(\(scorePattern)) to (\(scorePattern))."
 )
 
@@ -2446,7 +2450,7 @@ let score = OneOrMore(.digit)
 let re3: MyRegex = Regex {
     "The "
     Capture { name }
-    " beat the "
+    " (?:beat|defeated) the "
     Capture { name }
     " "
     Capture { score }
@@ -2506,13 +2510,13 @@ if let result = sentence.firstMatch(of: digitsRE) {
 }
 
 // This tests whether a whole String matches a Regex.
-let wholeRE = #/^The (\w+) beat the (\w+) (\d+) to (\d+).$/#
+let wholeRE = #/^The (\w+) (?:beat|defeated) the (\w+) (\d+) to (\d+).$/#
 if let result = sentence.wholeMatch(of: wholeRE) {
 // The previous line can also be written as follows:
 // if let result = try wholeRE.wholeMatch(in: sentence) {
     // result.output is a tuple that can be destructured.
     let (whole, name1, name2, score1, score2) = result.output
-    print(whole) // The Chiefs beat the Eagles 38 to 35.
+    print(whole) // The Chiefs defeated the Eagles 38 to 35.
     print(name1) // Chiefs
     print(name2) // Eagles
     print(score1) // 38
@@ -2533,10 +2537,10 @@ if sentence.starts(with: prefixRE) {
 }
 
 let newSentence = sentence.replacing(digitsRE, with: "?")
-print(newSentence) // The Chiefs beat the Eagles ? to ?.
+print(newSentence) // The Chiefs defeated the Eagles ? to ?.
 
 let trimmedSentence = sentence.trimmingPrefix(prefixRE)
-print(trimmedSentence) // beat the Eagles 38 to 35.
+print(trimmedSentence) // defeated the Eagles 38 to 35.
 
 let family = "Mark, Tami, Amanda, and Jeremy"
 let names = family.split(separator: #/, and |, /#)
@@ -2578,6 +2582,50 @@ func classify(_ token: String) {
 classify("123")
 classify("Hello")
 classify("!@#")
+```
+
+Xcode can convert a literal regular expression to a Regex Builder.
+To do this, right-click anywhere in a literal regular expression
+and select Refactor ... Convert to Regex Builder.
+
+For example, here is a line we saw earlier
+that defines a literal regular expression:
+
+```swift
+let re1: MyRegex = #/^The (\w+) (?:beat|defeated) the (\w+) (\d+) to (\d+).$/#
+```
+
+Converting this results in the following:
+
+```swift
+let re1: MyRegex = Regex {
+    /^/
+    "The "
+    Capture {
+        OneOrMore(.word)
+    }
+    " "
+    // Without the ?: in the parentheses of the literal regular expression
+    // this would be wrapped in a Capture.
+    ChoiceOf {
+        "beat"
+        "defeated"
+    }
+    " the "
+    Capture {
+        OneOrMore(.word)
+    }
+    " "
+    Capture {
+        OneOrMore(.digit)
+    }
+    " to "
+    Capture {
+        OneOrMore(.digit)
+    }
+    /./
+    /$/
+}
 ```
 
 ## Variables
