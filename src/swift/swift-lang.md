@@ -2467,6 +2467,8 @@ the full match and each of the capture group values.
 ```swift
 func tryRegex(_ re: MyRegex) {
     if let match = sentence.firstMatch(of: re) {
+    // The previously line can also be written as follows:
+    // if let match = try! re.firstMatch(in: sentence) {
         // This uses an underscore to ignore the full match value.
         let (_, team1, team2, score1, score2) = match.output
         print(team1) // Chiefs
@@ -2489,12 +2491,19 @@ The following code demonstrates each of these:
 
 ```swift
 let digitsRE = #/\d+/#
+
+print(sentence.contains(digitsRE)) // true
+
 if let result = sentence.firstMatch(of: digitsRE) {
+// The previously line can also be written as follows:
+// if let result = try! digitsRE.firstMatch(in: sentence) {
     print(result.output) // 38
 }
 
 let wholeRE = #/^The (\w+) beat the (\w+) (\d+) to (\d+).$/#
 if let result = sentence.wholeMatch(of: wholeRE) {
+// The previous line can also be written as follows:
+// if let result = try wholeRE.wholeMatch(in: sentence) {
     // result.output is a tuple that can be destructured.
     let (whole, name1, name2, score1, score2) = result.output
     print(whole) // The Chiefs beat the Eagles 38 to 35.
@@ -2506,6 +2515,8 @@ if let result = sentence.wholeMatch(of: wholeRE) {
 
 let prefixRE = #/The (\w+) /#
 if let result = sentence.prefixMatch(of: prefixRE) {
+// The previous line can also be written as follows:
+// if let result = try prefixRE.prefixMatch(in: sentence) {
     let (whole, name) = result.output
     print(whole) // The Chiefs
     print(name) // Chiefs
@@ -2524,6 +2535,18 @@ print(trimmedSentence) // beat the Eagles 38 to 35.
 let family = "Mark, Tami, Amanda, and Jeremy"
 let names = family.split(separator: #/, and |, /#)
 print(names) // ["Mark", "Tami", "Amanda", "Jeremy"]
+```
+
+A regular expression can ignore case
+as shown in the following example:
+
+```swift
+// let re = /test/i // This syntax is not supported.
+let re = /test/.ignoresCase(true)
+print("test".contains(re)) // true
+print("Test".contains(re)) // true
+print("TEST".contains(re)) // true
+print("tes".contains(re)) // false
 ```
 
 There were plans to allow switch cases to match regular expressions.
