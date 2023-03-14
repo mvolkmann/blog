@@ -2504,6 +2504,43 @@ tryRegex(re2)
 tryRegex(re3)
 ```
 
+The builder syntax supports transforming captured text
+to a type other than `String`.
+For example, we can change the type and definition of `re3` defined above
+to the following so that the captured scores have `Int` values.
+
+```swift
+typealias MyTypedRegex = Regex<(Substring, Substring, Substring, Int, Int)>
+
+let name = OneOrMore(.word)
+let score = OneOrMore(.digit)
+
+let re3: MyTypedRegex = Regex {
+    "The "
+    Capture { name }
+    " "
+    ChoiceOf {
+        "beat"
+        "defeated"
+    }
+    " the "
+    Capture { name }
+    " "
+    Capture {
+        score
+    } transform: {
+        Int($0)! // safe because this only matches digits
+    }
+    " to "
+    Capture {
+        score
+    } transform: {
+        Int($0)! // safe because this only matches digits
+    }
+    "."
+}
+```
+
 The `String` methods `contains`, `firstMatch`, `wholeMatch`, `prefixMatch`,
 `starts`, `replacing`, and `trimmingPrefix`
 can take regular expressions as arguments.
