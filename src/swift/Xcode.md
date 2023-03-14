@@ -1429,7 +1429,8 @@ The Run phase specifies many things including:
 - run options including:
 
   - whether to run the app in a debug or release build configuration
-  - argument to be passed to the executable
+
+  - arguments to be passed to the executable
 
     TODO: Are these only boolean flags (present or not)?
 
@@ -1447,10 +1448,22 @@ The Run phase specifies many things including:
     `ProcessInfo.processInfo.environment`
     which has the type `[String:String]`.
 
+  - "App Language" which defaults to "System Language"
+    but can be changed to a language like "French"
+
+  - "App Region" which defaults to "System Region"
+    but can be changed to a language like "France"
+
   - diagnostics to collect while the target executes
 
 - shell scripts to run AFTER the run ends (post-actions)
 - emails to send AFTER the run ends (post-actions)
+
+The screenshot below shows changing the language and region
+which affects those values when the app is run in the Simulator or on a device.
+
+<img alt="Xcode scheme language and region" style="width: 100%"
+  src="/blog/assets/xcode-scheme-language-region.png?v={{pkg.version}}">
 
 The Test phase specifies:
 
