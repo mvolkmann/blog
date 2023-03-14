@@ -2449,6 +2449,7 @@ let re2: MyRegex = try! Regex(
 
 let name = OneOrMore(.word)
 let score = OneOrMore(.digit)
+// Use .any to match any single character.
 
 // `Capture` is a struct defined by the RegexBuilder framework.
 // Also see `TryCapture` which backtracks if the match fails.
