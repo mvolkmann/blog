@@ -2493,14 +2493,19 @@ The following code demonstrates each of these:
 ```swift
 let digitsRE = #/\d+/#
 
+// This tests whether any part of a String matches a Regex
+// and returns a Bool value.
 print(sentence.contains(digitsRE)) // true
 
+// This finds any match of the Regex in a String.
+// This tests whether any part of a String matches a Regex.
 if let result = sentence.firstMatch(of: digitsRE) {
 // The previously line can also be written as follows:
 // if let result = try! digitsRE.firstMatch(in: sentence) {
     print(result.output) // 38
 }
 
+// This tests whether a whole String matches a Regex.
 let wholeRE = #/^The (\w+) beat the (\w+) (\d+) to (\d+).$/#
 if let result = sentence.wholeMatch(of: wholeRE) {
 // The previous line can also be written as follows:
