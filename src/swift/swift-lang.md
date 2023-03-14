@@ -2398,7 +2398,7 @@ Here are examples that capture data from a sentence describing a sports score:
 ```swift
 // This import is only needed to use types defined by the RegexBuilder
 // framework such as One, Optionally, ZeroOrMore, OneOrMore, Repeat,
-// ChoiceOf, Capture, and TryCapture.
+// ChoiceOf, Capture, TryCapture, and Reference.
 import RegexBuilder
 
 let sentence = "The Chiefs defeated the Eagles 38 to 35." // 2023 Super Bowl
@@ -2450,9 +2450,6 @@ let re2: MyRegex = try! Regex(
 let name = OneOrMore(.word)
 let score = OneOrMore(.digit)
 // Use .any to match any single character.
-
-// `Capture` is a struct defined by the RegexBuilder framework.
-// Also see `TryCapture` which backtracks if the match fails.
 
 let re3: MyRegex = Regex {
     // Builder types that can be used here include
