@@ -275,7 +275,11 @@ for accessing data in Core Data.
       let request = NSFetchRequest<PersonEntity>(entityName: "PersonEntity")
       // Optionally specify how the instances should be sorted.
       request.sortDescriptors = [
-          NSSortDescriptor(key: "name", ascending: true)
+          NSSortDescriptor(
+              key: "name",
+              ascending: true,
+              #selector(NSString.localizedStandardCompare) // case-insensitive
+          )
       ]
       do {
           // people here must be the name of the
@@ -407,7 +411,11 @@ let request = NSFetchRequest<PersonEntity>(entityName: "PersonEntity")
 
 // Sort in ascending order on the "name" property.
 request.sortDescriptors = [
-    NSSortDescriptor(key: "name", ascending: true)
+    NSSortDescriptor(
+        key: "name",
+        ascending: true,
+        #selector(NSString.localizedStandardCompare) // case-insensitive
+    )
 ]
 
 // Filter so only entities with a name beginning with "T" are fetched.
