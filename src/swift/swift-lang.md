@@ -2175,8 +2175,11 @@ Dictionaries are hash tables that hold key/value pairs.
 They can be created by listing key/value pairs in square brackets,
 separated by commas.
 Keys and values are separated by colons.
+
 While typically the keys are strings,
 they can be any type that conforms to the `Hashable` protocol.
+Tuples cannot be made to conform to `Hashable`,
+so they cannot be used as `Dictionary` keys.
 For details on the `Hashable` protocol, see the
 {% aTargetBlank "https://developer.apple.com/documentation/swift/hashable",
 "Apple Developer Documentation" %}.

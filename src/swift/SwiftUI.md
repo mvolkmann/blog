@@ -11754,9 +11754,6 @@ whereas widgets cannot.
 
 ## Questions/Thoughts
 
-- How can I change the default device used by new projects?
-  It defaults to "iPod touch (7th generation)".
-
 - With over 4000 icons in SF Symbols,
   how can there be none related to animals?
   Perhaps Apple feels that emojis should be used for these.
