@@ -286,7 +286,8 @@ For more keyboard shortcuts, see the {% aTargetBlank
 
 ## AI Commands
 
-To generate a shell command using an AI search, press ctrl-\`.
+To generate a shell command using an AI search,
+enter a # character of press ctrl-\`.
 
 <img alt="Warp AI Command Search" style="width: 80%"
   src="/blog/assets/warp-ai-command-search.png?v={{pkg.version}}"

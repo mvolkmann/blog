@@ -18,7 +18,7 @@ If this describes you, perhaps there are
 things you can do to improve the experience.
 Read on for some suggestions.
 
-## Terminal Programs
+## Managing Multiple Sessions
 
 For each operating system there are several applications to choose from
 that support interaction with shell sessions.
@@ -46,15 +46,113 @@ In macOS some of the options for applications that manage terminal sessions
 include Terminal (built-in macOS app),
 {% aTargetBlank "https://iterm2.com/", "iTerm2" %},
 {% aTargetBlank "https://github.com/tmux/tmux/wiki", "tmux" %} (typically run inside iTerm2),
-and {% aTargetBlank "https://app.warp.dev/referral/24D6GX", "warp" %}.
+and {% aTargetBlank "https://app.warp.dev/referral/24D6GX", "Warp" %}.
 
 The screenshot below shows a window with three tabs.
 The currently selected tab is "Project #1".
 This tab contains four panes that each have a specific purpose.
 
-<img alt="warp panes" style="width: 100%"
+<img alt="Warp panes" style="width: 100%"
   src="/blog/assets/warp-panes.png?v={{pkg.version}}"
-  title="warp panes">
+  title="Warp panes">
+
+## Custom Shell Prompts
+
+Shell prompts can provide lots of contextual information
+about the environment in which the next command will be run.
+This might include answers to questions like:
+
+- What directory am I in?
+- What shell am I using?
+- Am I in a directory of a git repository?
+- If so, what branch am I on?
+
+{% aTargetBlank "https://starship.rs/", "Starship" %} is a
+highly customizable tool for customizing shell prompts.
+It works in nearly all shells including
+Bash, Fish, Nushell, Powershell, and Zsh.
+This removes the need to customize the prompt in multiple, shell-specific ways.
+
+Starship is configured in one place for all shells,
+which is great for developers that utilize multiple shells.
+
+To install Starship, see the instructions at {% aTargetBlank
+"https://starship.rs/guide/#🚀-installation", "Starship Installation" %}.
+In macOS it can be installed using the Homebrew command `brew install starship`.
+
+To use Starship with zsh, add the following line in `~/.zshrc`:
+
+```bash
+eval "$(starship init zsh)"
+```
+
+Configure Starship by creating the file `~/.config/starship.toml`.
+My configuration is shown below.
+Note the use of unicode characters and
+detailed information about the state of git repositories.
+
+```toml
+format = "$shell$custom$git_branch$git_status$directory$character "
+
+# Displays text, typically a single character,
+# based on the status of the previous command.
+[character]
+success_symbol = "[▶](green)" # normal prompt
+error_symbol = "[✗](bold red)" # used if previous command failed
+
+# Displays current directory.
+[directory]
+format = "[$path]($style)"
+style = "yellow"
+truncate_to_repo = false
+truncation_length = 3 # parent directories to show; default is 3
+truncation_symbol = "…/"
+
+# Displays current Git branch when in a directory of a Git repository.
+[git_branch]
+format = "[$symbol ](green)[$branch ]($style)"
+style = "italic green"
+symbol = ""
+
+# Displays status of Git repository when in a directory of a Git repository.
+[git_status]
+format = "[$all_status$ahead_behind]($style)"
+ahead = "⇡ $count "
+behind = "⇣ $count "
+deleted = "🗑 $count "
+diverged = " $count "
+stashed = "📦 $count "
+modified = "פֿ $count "
+staged = '[ $count ](green)'
+renamed = " $count "
+untracked = "🤷 ‍$count "
+style = "bold red"
+
+[shell]
+disabled = false
+bash_indicator = "🚀"
+fish_indicator = "🐠"
+nu_indicator = "🦀"
+zsh_indicator = "🧙"
+```
+
+Here is a example of the Starship prompt configured above.
+
+<img alt="Starship prompt example" style="width: 70%"
+  src="/blog/assets/Starship-prompt-example.png?v={{pkg.version}}"
+  title="Starship prompt example">
+
+This shows the following in order:
+
+- The current shell is zsh (based in the emoji shown).
+- The directory is inside a Git repository (based on the git emoji).
+- We are on the "main" branch.
+- One file was deleted (trash can emoji).
+- One file was modified (pencil emoji).
+- One file is untracked (shrugging person emoji).
+- We are in the directory .../SwiftUI/WeatherKitDemo/WeatherKitDemo.
+
+For more detail, see my [Starship blog page](/blog/starship).
 
 ## Terminal Font
 
@@ -246,7 +344,16 @@ find . -type f -name '*.js' | xargs grep 'some text'
 find . -type f -name '*.js' -exec grep 'some text' {} \;
 ```
 
-This has several issues:
+When using Warp, its "A.I. Command Search" feature
+can be used to build the command.
+Press the # key and enter a phrase like
+"find all js files containing some text".
+This suggests the command
+`find . -name "*.js" -exec grep -l "some text" {} \;`.
+To accept the suggestion, press cmd-return to copy the command
+into the input area and press return again to execute it.
+
+The `find` command has several issues:
 
 - The syntax is hard to remember.
 - It is somewhat slow.
@@ -267,104 +374,6 @@ Matching line numbers are displayed in green.
 Text on the matching lines is displayed in white,
 except the matching text which is displayed in red.
 This is much better!
-
-## Custom Shell Prompts
-
-Shell prompts can provide lots of contextual information
-about the environment in which the next command will be run.
-This might include answers to questions like:
-
-- What directory am I in?
-- What shell am I using?
-- Am I in a directory of a git repository?
-- If so, what branch am I on?
-
-{% aTargetBlank "https://starship.rs/", "Starship" %} is a
-highly customizable tool for customizing shell prompts.
-It works in nearly all shells including
-Bash, Fish, Nushell, Powershell, and Zsh.
-This removes the need to customize the prompt in multiple, shell-specific ways.
-
-Starship is configured in one place for all shells,
-which is great for developers that utilize multiple shells.
-
-To install Starship, see the instructions at {% aTargetBlank
-"https://starship.rs/guide/#🚀-installation", "Starship Installation" %}.
-In macOS it can be installed using the Homebrew command `brew install starship`.
-
-To use Starship with zsh, add the following line in `~/.zshrc`:
-
-```bash
-eval "$(starship init zsh)"
-```
-
-Configure Starship by creating the file `~/.config/starship.toml`.
-My configuration is shown below.
-Note the use of unicode characters and
-detailed information about the state of git repositories.
-
-```toml
-format = "$shell$custom$git_branch$git_status$directory$character "
-
-# Displays text, typically a single character,
-# based on the status of the previous command.
-[character]
-success_symbol = "[▶](green)" # normal prompt
-error_symbol = "[✗](bold red)" # used if previous command failed
-
-# Displays current directory.
-[directory]
-format = "[$path]($style)"
-style = "yellow"
-truncate_to_repo = false
-truncation_length = 3 # parent directories to show; default is 3
-truncation_symbol = "…/"
-
-# Displays current Git branch when in a directory of a Git repository.
-[git_branch]
-format = "[$symbol ](green)[$branch ]($style)"
-style = "italic green"
-symbol = ""
-
-# Displays status of Git repository when in a directory of a Git repository.
-[git_status]
-format = "[$all_status$ahead_behind]($style)"
-ahead = "⇡ $count "
-behind = "⇣ $count "
-deleted = "🗑 $count "
-diverged = " $count "
-stashed = "📦 $count "
-modified = "פֿ $count "
-staged = '[ $count ](green)'
-renamed = " $count "
-untracked = "🤷 ‍$count "
-style = "bold red"
-
-[shell]
-disabled = false
-bash_indicator = "🚀"
-fish_indicator = "🐠"
-nu_indicator = "🦀"
-zsh_indicator = "🧙"
-```
-
-Here is a example of the Starship prompt configured above.
-
-<img alt="Starship prompt example" style="width: 100%"
-  src="/blog/assets/Starship-prompt-example.png?v={{pkg.version}}"
-  title="Starship prompt example">
-
-This shows the following in order:
-
-- The current shell is zsh (based in the emoji shown).
-- The directory is inside a Git repository (based on the git emoji).
-- We are on the "main" branch.
-- One file was deleted (trash can emoji).
-- One file was modified (pencil emoji).
-- One file is untracked (shrugging person emoji).
-- We are in the directory .../SwiftUI/WeatherKitDemo/WeatherKitDemo.
-
-For more detail, see my [Starship blog page](/blog/starship).
 
 ## Command-line Editing
 
@@ -389,12 +398,12 @@ to move the cursor within a command being entered:
 Most terminal programs do not support using a mouse or track pad
 to position the cursor by clicking within a command being entered.
 However, the {% aTargetBlank "https://app.warp.dev/referral/24D6GX",
-"warp" %} terminal behaves much more like a standard text editor.
+"Warp" %} terminal behaves much more like a standard text editor.
 It supports positioning the cursor by clicking,
 selecting text with a mouse or trackpad,
 using cmd-c to copy, and using cmd-v to paste.
 
-By default, warp uses the following, easier to remember,
+By default, Warp uses the following, easier to remember,
 keyboard shortcuts for moving the cursor.
 
 | Action                      | Warp Shortcut Key  |
@@ -447,7 +456,7 @@ without also searching the output of all the previous commands
 that were entered since the last time the terminal was cleared.
 
 The {% aTargetBlank "https://app.warp.dev/referral/24D6GX",
-"warp" %} terminal solves all of these issues.
+"Warp" %} terminal solves all of these issues.
 The last command entered sticks to the top of the pane
 while its output scrolls below it.
 Clicking the command causes the output to scroll back to its first line.
@@ -455,9 +464,9 @@ Both the command and its output are part of a "block".
 There are many commands that can be executed on a block
 including "Find Within Block" and "Copy Output".
 
-<img alt="warp block commands" style="width: 100%"
+<img alt="Warp block commands" style="width: 100%"
   src="/blog/assets/warp-block-commands.png?v={{pkg.version}}"
-  title="warp-block-commands">
+  title="Warp block commands">
 
 ## Terminal-based File Editing
 
