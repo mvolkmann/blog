@@ -18,44 +18,6 @@ If this describes you, perhaps there are
 things you can do to improve the experience.
 Read on for some suggestions.
 
-## Managing Multiple Sessions
-
-For each operating system there are several applications to choose from
-that support interaction with shell sessions.
-Many support simultaneous shell sessions
-running in multiple windows, tabs, and panes.
-
-You likely find yourself working on multiple projects throughout the day.
-It is convenient to keep the terminal sessions related to each project
-in a separate window or in a separate tab of a single window.
-Each of these can contain multiple panes
-where separate terminal sessions are running.
-This allows you to focus on a task at hand
-by switching to a specific window or tab.
-
-For example, perhaps you are editing your blog and working on two projects.
-Create a separate tab for each of these
-whose names are "blog" and the project names.
-Inside each tab create multiple panes by splitting the initial pane
-horizontally, vertically, or both.
-In the panes of a project tab you can run
-a web server, an API server, and a database server.
-Other panes can be used for executing shell commands.
-
-In macOS some of the options for applications that manage terminal sessions
-include Terminal (built-in macOS app),
-{% aTargetBlank "https://iterm2.com/", "iTerm2" %},
-{% aTargetBlank "https://github.com/tmux/tmux/wiki", "tmux" %} (typically run inside iTerm2),
-and {% aTargetBlank "https://app.warp.dev/referral/24D6GX", "Warp" %}.
-
-The screenshot below shows a window with three tabs.
-The currently selected tab is "Project #1".
-This tab contains four panes that each have a specific purpose.
-
-<img alt="Warp panes" style="width: 100%"
-  src="/blog/assets/warp-panes.png?v={{pkg.version}}"
-  title="Warp panes">
-
 ## Custom Shell Prompts
 
 Shell prompts can provide lots of contextual information
@@ -153,6 +115,44 @@ This shows the following in order:
 - We are in the directory .../SwiftUI/WeatherKitDemo/WeatherKitDemo.
 
 For more detail, see my [Starship blog page](/blog/starship).
+
+## Managing Multiple Sessions
+
+For each operating system there are several applications to choose from
+that support interaction with shell sessions.
+Many support simultaneous shell sessions
+running in multiple windows, tabs, and panes.
+
+You likely find yourself working on multiple projects throughout the day.
+It is convenient to keep the terminal sessions related to each project
+in a separate window or in a separate tab of a single window.
+Each of these can contain multiple panes
+where separate terminal sessions are running.
+This allows you to focus on a task at hand
+by switching to a specific window or tab.
+
+For example, perhaps you are editing your blog and working on two projects.
+Create a separate tab for each of these
+whose names are "blog" and the project names.
+Inside each tab create multiple panes by splitting the initial pane
+horizontally, vertically, or both.
+In the panes of a project tab you can run
+a web server, an API server, and a database server.
+Other panes can be used for executing shell commands.
+
+In macOS some of the options for applications that manage terminal sessions
+include Terminal (built-in macOS app),
+{% aTargetBlank "https://iterm2.com/", "iTerm2" %},
+{% aTargetBlank "https://github.com/tmux/tmux/wiki", "tmux" %} (typically run inside iTerm2),
+and {% aTargetBlank "https://app.warp.dev/referral/24D6GX", "Warp" %}.
+
+The screenshot below shows a window with three tabs.
+The currently selected tab is "Project #1".
+This tab contains four panes that each have a specific purpose.
+
+<img alt="Warp panes" style="width: 100%"
+  src="/blog/assets/warp-panes.png?v={{pkg.version}}"
+  title="Warp panes">
 
 ## Terminal Font
 
