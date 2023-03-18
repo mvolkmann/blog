@@ -407,6 +407,10 @@ It supports positioning the cursor by clicking,
 selecting text with a mouse or trackpad,
 using cmd-c to copy, and using cmd-v to paste.
 
+<img alt="Warp command-line editing" style="width: 100%"
+  src="/blog/assets/warp-command-editing.gif?v={{pkg.version}}"
+  title="Warp command-line editing">
+
 By default, Warp uses the following, easier to remember,
 keyboard shortcuts for moving the cursor.
 
