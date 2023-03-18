@@ -31,7 +31,7 @@ Another way to create an animated GIF from a `.mov` file is to use
 To install this in macOS using Homebrew, enter `brew install ffmpeg`.
 This takes around 10 minutes to complete.
 
-To convert a `.mov` file to a `.gif` file, enter the following command:
+To convert a `.mov` file to a GIF, enter the following command:
 
 ```bash
 ffmpeg -i sample.mov -r 24 sample.gif
@@ -41,7 +41,7 @@ ffmpeg -i sample.mov -r 24 sample.gif
 
 To create a `.mov` file from a screen recording in macOS:
 
-- Press cmd-shift-5
+- Press cmd-shift-5.
 - Move and size the rectangle the defines the
   portion of the screen that will be recorded.
 - Click the "Record" button.
