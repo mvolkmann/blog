@@ -353,6 +353,10 @@ This suggests the command
 To accept the suggestion, press cmd-return to copy the command
 into the input area and press return again to execute it.
 
+<img alt="Warp AI Command" style="width: 100%"
+  src="/blog/assets/warp-ai-command.gif?v={{pkg.version}}"
+  title="Warp AI Command">
+
 The `find` command has several issues:
 
 - The syntax is hard to remember.
@@ -464,9 +468,9 @@ Both the command and its output are part of a "block".
 There are many commands that can be executed on a block
 including "Find Within Block" and "Copy Output".
 
-<img alt="Warp block commands" style="width: 100%"
-  src="/blog/assets/warp-block-commands.png?v={{pkg.version}}"
-  title="Warp block commands">
+<img alt="Warp command output" style="width: 100%"
+  src="/blog/assets/warp-command-output.gif?v={{pkg.version}}"
+  title="Warp command output">
 
 ## Terminal-based File Editing
 
