@@ -141,10 +141,10 @@ a web server, an API server, and a database server.
 Other panes can be used for executing shell commands.
 
 In macOS some of the options for applications that manage terminal sessions
-include Terminal (built-in macOS app),
+include {% aTargetBlank "https://app.warp.dev/referral/24D6GX", "Warp" %},
 {% aTargetBlank "https://iterm2.com/", "iTerm2" %},
-{% aTargetBlank "https://github.com/tmux/tmux/wiki", "tmux" %} (typically run inside iTerm2),
-and {% aTargetBlank "https://app.warp.dev/referral/24D6GX", "Warp" %}.
+{% aTargetBlank "https://github.com/tmux/tmux/wiki", "tmux" %}
+(typically run inside iTerm2), and Terminal (built-in macOS app).
 
 The screenshot below shows a window with three tabs.
 The currently selected tab is "Project #1".
@@ -344,8 +344,8 @@ find . -type f -name '*.js' | xargs grep 'some text'
 find . -type f -name '*.js' -exec grep 'some text' {} \;
 ```
 
-When using Warp, its "A.I. Command Search" feature
-can be used to build the command.
+When using {% aTargetBlank "https://app.warp.dev/referral/24D6GX", "Warp" %},
+its "A.I. Command Search" feature can be used to build the command.
 Press the # key and enter a phrase like
 "find all js files containing some text".
 This suggests the command
