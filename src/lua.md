@@ -23,6 +23,20 @@ Lua has a small standard library, but has a
 large collection of packages that can be installed using the
 {% aTargetBlank "https://luarocks.org", "LuaRocks" %} package manager.
 
+## Where Used
+
+Notable uses of Lua include:
+
+- {% aTargetBlank "https://www.minecraft.net/", "Minecraft" %} game
+- {% aTargetBlank "https://www.roblox.com", "Roblox" %} game
+- {% aTargetBlank "http://www.legoengineering.com/platform/nxt/", "Lego Mindstorms NXT" %}
+- {% aTargetBlank "https://neovim.io", "Neovim" %} text editor
+- {% aTargetBlank "https://redis.io", "Redis" %} database
+
+For an extensive, see the {% aTargetBlank
+"https://en.wikipedia.org/wiki/List_of_applications_using_Lua",
+"List of applications using Lua" %} Wikipedia page.
+
 ## Installing
 
 Lua can be installed in macOS using Homebrew.
