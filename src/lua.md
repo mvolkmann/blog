@@ -123,15 +123,16 @@ To iterate over keys and values, use a `for` loop with the `pairs` function.
 
 ## Standard Library
 
-- {% aTargetBlank "https://www.lua.org/manual/5.4/manual.html#6.1", "basic" %}.
-- {% aTargetBlank "https://www.lua.org/manual/5.4/manual.html#6.2", "coroutine" %}
-- {% aTargetBlank "https://www.lua.org/manual/5.4/manual.html#6.10", "debug" %}
-- {% aTargetBlank "https://www.lua.org/manual/5.4/manual.html#6.8", "io" %}
-- {% aTargetBlank "https://www.lua.org/manual/5.4/manual.html#6.7", "math" %}
-- {% aTargetBlank "https://www.lua.org/manual/5.4/manual.html#6.3", "modules/package" %}
-- {% aTargetBlank "https://www.lua.org/manual/5.4/manual.html#6.4", "string" %}
-- {% aTargetBlank "https://www.lua.org/manual/5.4/manual.html#6.6", "table" %}
-- {% aTargetBlank "https://www.lua.org/manual/5.4/manual.html#6.5", "utf8" %}
+- <a href="https://www.lua.org/manual/5.4/manual.html#6.1" target="_blank">basic</a>
+- <a href="https://www.lua.org/manual/5.4/manual.html#6.2" target="_blank">coroutine</a>
+- <a href="https://www.lua.org/manual/5.4/manual.html#6.10" target="_blank">debug</a>
+- <a href="https://www.lua.org/manual/5.4/manual.html#6.8" target="_blank">io</a>
+- <a href="https://www.lua.org/manual/5.4/manual.html#6.7" target="_blank">math</a>
+- <a href="https://www.lua.org/manual/5.4/manual.html#6.3" target="_blank">modules/package</a>
+- <a href="https://www.lua.org/manual/5.4/manual.html#6.9" target="_blank">os</a>
+- <a href="https://www.lua.org/manual/5.4/manual.html#6.4" target="_blank">string</a>
+- <a href="https://www.lua.org/manual/5.4/manual.html#6.6" target="_blank">table</a>
+- <a href="https://www.lua.org/manual/5.4/manual.html#6.5" target="_blank">utf8</a>
 
 ## Multitasking
 
