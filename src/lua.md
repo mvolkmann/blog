@@ -342,8 +342,6 @@ Can multiline comments end with just ]] instead of —]] ?
 
 An alternative to the print function is io.write. What is the difference?
 
-#someVar when someVar holds a string gives its length.
-
 Can convert between types.
 tostring(numberOrBoolean)
 toboolean?
