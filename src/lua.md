@@ -136,9 +136,89 @@ are never specified and are always inferred.
 Variables are global by default.
 Use the `local` keyword to make scoped to their environment.
 
+Variables with no assigned value have the value `nil`.
+
 ## Strings
 
 Strings can be delimited with either single or double quotes.
+
+String indexes start from zero.
+
+String operations include:
+
+- `string.len(var)` or `#var`
+- `string.gsub(source, oldValue, newValue)`
+- `string.find(source, target)`
+- `string.upper(var)`
+- `string.lower(var)`
+
+## Operators
+
+Lua supports the following relational operators:
+
+- `==` equal
+- `~=` not equal
+- `<` less than
+- `>` greater than
+- `<=` less than or equal to
+- `>=` greater than or equal to
+
+Lua supports the following logical operators:
+
+- `and`
+- `or`
+- `not`
+
+## Conditional Logic
+
+Parentheses are not required around conditions.
+
+In an `if` statement, the `elseif` and `else` blocks shown below are optional.
+
+All the parts of the `if` statement can be written on a single line if desired.
+
+```lua
+if condition then
+  ...
+elseif condition then
+  ...
+else
+  ...
+end
+```
+
+Lua does not have a `switch` statement or an equivalent.
+
+Lua does not have a ternary operator, but the
+same functionality can be achieved with the following:
+
+```lua
+let result = condition and trueValue or falseValue
+```
+
+## Iteration
+
+```lua
+for i = 1, 10, 2 do
+  ...
+end
+
+for key, value in pairs(mytable) do
+  ...
+end
+
+while condition do — top-tested
+  ...
+end
+
+
+repeat — bottom-tested
+  ...
+until condition
+```
+
+Loops can use the `break` keyword,
+but the `continue` keyword is not supported.
 
 ## Functions
 
@@ -187,6 +267,14 @@ To iterate over keys and values, use a `for` loop with the `pairs` function.
 - <a href="https://www.lua.org/manual/5.4/manual.html#6.6" target="_blank">table</a>
 - <a href="https://www.lua.org/manual/5.4/manual.html#6.5" target="_blank">utf8</a>
 
+## math module
+
+- `math.randomseed(os.time())` seeds the random number generator
+- `math.random()` returns a number in the range [0, 1)
+- `math.random(10)` returns a number in the range [0, 10)
+- `math.random(5, 10)` returns a nubmer in the range [5, 10)
+- `print(string.format('pi is %.2f', math.pi)` outputs `pi is 3.14`
+
 ## Multitasking
 
 Lua supports collaborative multitasking with coroutines.
@@ -203,3 +291,32 @@ v1 = coroutine.resume(co)
 v2 = coroutine.resume(co)
 v3 = coroutine.resume(co) — error
 ```
+
+## Unorganized Content
+
+Can Lua be compiled to an executable?
+
+Delimit multiline strings with [[and]]
+Concatenate strings with ..
+Can multiline comments end with just ]] instead of —]] ?
+An alternative to the print function is io.write. What is the difference?
+You can assign multiple types of values to a variable over time.
+#someVar when someVar holds a string gives its length.
+
+type(someVar) returns a string containing the type name. What are all the possibilities?
+boolean, number, string, …
+
+All numbers are floating point (double precision?).
+Does it have shorthand assignment operators like += ? NO!
+boolean literal values are true and false.
+
+Math operators include +, -, \*, /, and %.
+See the math module for functions like sin and cos.
+The ++ and — operators are not supported.
+
+Can convert between types.
+tostring(numberOrBoolean)
+toboolean?
+tonumber?
+
+input = io.read()
