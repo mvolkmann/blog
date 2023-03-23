@@ -35,10 +35,16 @@ For installing in other operating systems, see
 To experiment with Lua on the web without installing anything,
 see {% aTargetBlank "http://www.lua.org/demo.html", "Lua Demo" %}.
 
+## Resources
+
+- {% aTargetBlank "https://www.lua.org/manual/", "Lua Reference Manual" %}
+- {% aTargetBlank "https://www.amazon.com/exec/obidos/ASIN/8590379868/lua-pilindex-20", "Programming in Lua" %} book
+
 ## Cheat Sheets
 
-- {% aTargetBlank "https://quickref.me/kotlin", "QuickRef.ME" %}
-- {% aTargetBlank "https://www.kodeco.com/6362971-kotlin-cheat-sheet-and-quick-reference", "Kodeco" %}
+- {% aTargetBlank "https://www.codecademy.com/learn/learn-lua/modules/learn-lua-introduction/cheatsheet", "codecademy" %}
+- {% aTargetBlank "https://devhints.io/lua", "DevHints.io" %}
+- {% aTargetBlank "https://cheatography.com/srgmc/cheat-sheets/lua-scripting-5-1/", "Cheatography" %}
 
 ## Source Files
 
@@ -91,6 +97,8 @@ For example:
 function add(n1, n2)
   return n1 + n2
 end
+
+print(add(2, 3)) -- 5
 ```
 
 Functions in Lua are first-class.
@@ -113,9 +121,21 @@ Tables are indexed starting from 1 instead of 0.
 
 To iterate over keys and values, use a `for` loop with the `pairs` function.
 
+## Standard Library
+
+- {% aTargetBlank "https://www.lua.org/manual/5.4/manual.html#6.1", "basic" %}.
+- {% aTargetBlank "https://www.lua.org/manual/5.4/manual.html#6.2", "coroutine" %}
+- {% aTargetBlank "https://www.lua.org/manual/5.4/manual.html#6.10", "debug" %}
+- {% aTargetBlank "https://www.lua.org/manual/5.4/manual.html#6.8", "io" %}
+- {% aTargetBlank "https://www.lua.org/manual/5.4/manual.html#6.7", "math" %}
+- {% aTargetBlank "https://www.lua.org/manual/5.4/manual.html#6.3", "modules/package" %}
+- {% aTargetBlank "https://www.lua.org/manual/5.4/manual.html#6.4", "string" %}
+- {% aTargetBlank "https://www.lua.org/manual/5.4/manual.html#6.6", "table" %}
+- {% aTargetBlank "https://www.lua.org/manual/5.4/manual.html#6.5", "utf8" %}
+
 ## Multitasking
 
-Supports collaborative multitasking with coroutines.
+Lua supports collaborative multitasking with coroutines.
 
 ```lua
 co = coroutine.create(function ()
