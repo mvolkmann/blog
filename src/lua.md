@@ -335,6 +335,17 @@ function myFn(...)
 end
 ````
 
+Anonymous functions (unnamed) are closures and can be stored in variables.
+For example:
+
+```lua
+product = function(n1, n2)
+  return n1 * n2
+end
+
+print(product(2, 3)) -- 6
+```
+
 ## Data Structures
 
 Lua only provides one data structure called a "table".
@@ -437,10 +448,3 @@ my2D = []
 my2D[i] = {}
 my2D[i][j] = value
 print(my2D[i][j])
-
-Maybe one difference between print and io.write is tht print always includes a newline and io.write does not.
-
-Anonymous functions can be stored in variables and they are closures.
-anonFn = function(p1, p2)
-…
-end
