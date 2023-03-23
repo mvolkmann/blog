@@ -125,11 +125,53 @@ Other:
 Single-line comments begin with two dashes.
 Multiline comments are delimited by `--[[` and `--]]`.
 
+## Input/Output
+
+To write to stdout, use the `print` function or the`io.write` function.
+Both take any number of arguments.
+
+The `print` function adds a tab character between each value
+and a newline at the end of its output
+
+The `io.write` function does not add any characters between values
+and does not add a newline at the end.
+Boolean values must be converted to strings
+before being passed to `io.write`.
+
+For example:
+
+```lua
+print('Hello World!', true, 7)
+io.write('Hello World!', tostring(true), 7)
+```
+
+To read from stdin, use the `io.read` function.
+For example:
+
+```lua
+n1 = io.read()
+n2 = io.read()
+sum = number(n1) + number(n2)
+print(sum)
+```
+
 ## Types
 
 Lua uses dynamic types.
 The types of variables and function parameters
 are never specified and are always inferred.
+
+To convert a boolean or number value to a string,
+pass it to the `tostring` function.
+
+To convert a string value to a number,
+pass it to the `tonumber` function.
+
+To convert a string value to a boolean,
+pass it to the `toboolean` function.
+
+There are no builtin functions for converting
+a boolean to a number or a number to a boolean.
 
 ## Variables
 
@@ -170,6 +212,7 @@ String operations include:
 - `string.find(source, target)`
 - `string.upper(var)`
 - `string.lower(var)`
+- `string.match(someString, 'regular-expression')` returns a table of matches?
 
 ## Operators
 
@@ -269,6 +312,29 @@ Functions in Lua are first-class.
 This means they can take other functions as arguments
 and can return functions.
 
+Functions can return multiple values.
+For example:
+
+````lua
+function getStooges()
+  return "Moe", "Larry", "Curly"
+end
+
+s1, s2, s3 = getStooges()
+print(s1, s2, s3) -- Moe Larry Curly
+```
+
+Functions can take a variable number of arguments.
+For example:
+
+```lua
+function myFn(...)
+  for key, value in pairs(...) do
+    ...
+  end
+end
+````
+
 ## Data Structures
 
 Lua only provides one data structure called a "table".
@@ -279,9 +345,13 @@ Instead it uses a combination of tables and functions for everything.
 
 ### Tables
 
-A table is an associative array.
-Values for keys are defined integer values by default starting from 1.
+A Lua table is an associative array.
+
 Tables are indexed starting from 1 instead of 0.
+
+Values for keys are defined integer values by default starting from 1.
+
+The last element in all tables has the value `nil`.
 
 To iterate over keys and values, use a `for` loop with the `pairs` function.
 
@@ -319,18 +389,25 @@ Trigonometry functions:
 ## Multitasking
 
 Lua supports collaborative multitasking with coroutines.
+Coroutines are like threads, but they do not run in parallel.
 
 ```lua
+-- TODO: Can this function have parameters?
 co = coroutine.create(function ()
-…
-coroutine.yield(“intermediate value”)
-…
-return “final value”
+  ...
+  coroutine.yield("value #1")
+  ...
+  coroutine.yield("value #1")
+  ...
+  return "value #3"
 end)
 
-v1 = coroutine.resume(co)
-v2 = coroutine.resume(co)
-v3 = coroutine.resume(co) — error
+v1 = coroutine.resume(co) -- "value #1"
+print(coroutine.status(co)) -- "running"
+v2 = coroutine.resume(co) -- "value #2"
+v3 = coroutine.resume(co) -- "value #3"
+v4 = coroutine.resume(co) — error
+print(coroutine.status(co)) -- "suspended"
 ```
 
 ## Unorganized Content
@@ -348,3 +425,22 @@ toboolean?
 tonumber?
 
 input = io.read()
+
+myTable = {}
+myTable[index] = value — indexes start at 1
+print(myTable[index])
+print(‘length =‘, #myTable)
+table.insert(myTable, index, value)
+table.concat(myTable, “, “) — returns a string of concatenated table elements
+table.remove(myTable, index)
+my2D = []
+my2D[i] = {}
+my2D[i][j] = value
+print(my2D[i][j])
+
+Maybe one difference between print and io.write is tht print always includes a newline and io.write does not.
+
+Anonymous functions can be stored in variables and they are closures.
+anonFn = function(p1, p2)
+…
+end
