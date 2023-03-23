@@ -138,11 +138,30 @@ Use the `local` keyword to make scoped to their environment.
 
 Variables with no assigned value have the value `nil`.
 
+New values of any type can be assigned to a variable at any time.
+
+The `type(someVar)` function returns a string containing
+the type name of the variable value.
+This can be `nil`, `boolean`, `number`, `string`, `table`, or `function`.
+
+## Booleans
+
+Boolean literal values are `true` and `false`.
+
+## Numbers
+
+TODO: Are all numbers represented by double-precision floating point?
+
 ## Strings
 
 Strings can be delimited with either single or double quotes.
 
 String indexes start from zero.
+
+Use the `..` operator to concatenate strings.
+For example, `fullName = firstName .. ' ' .. lastName`.
+
+TODO: Does Lua support string interpolation?
 
 String operations include:
 
@@ -154,6 +173,15 @@ String operations include:
 
 ## Operators
 
+Lua supports the following mathematical operators:
+
+- `+` addition
+- `-` subtraction
+- `*` multiplication
+- `/` division
+- `%` modulo
+
+The ++ and — operators are not supported.
 Lua supports the following relational operators:
 
 - `==` equal
@@ -168,6 +196,9 @@ Lua supports the following logical operators:
 - `and`
 - `or`
 - `not`
+
+Lua does not support shorthand assignment operators like +=.
+Adding a number to a variable must be done with `myVar = myVar + n`.
 
 ## Conditional Logic
 
@@ -269,11 +300,21 @@ To iterate over keys and values, use a `for` loop with the `pairs` function.
 
 ## math module
 
+Random numbers:
+
 - `math.randomseed(os.time())` seeds the random number generator
 - `math.random()` returns a number in the range [0, 1)
 - `math.random(10)` returns a number in the range [0, 10)
 - `math.random(5, 10)` returns a nubmer in the range [5, 10)
 - `print(string.format('pi is %.2f', math.pi)` outputs `pi is 3.14`
+
+Trigonometry functions:
+
+- `math.sin(angle)`
+- `math.cos(angle)`
+- `math.tan(angle)`
+
+- TODO: Add more!
 
 ## Multitasking
 
@@ -297,22 +338,11 @@ v3 = coroutine.resume(co) — error
 Can Lua be compiled to an executable?
 
 Delimit multiline strings with [[and]]
-Concatenate strings with ..
 Can multiline comments end with just ]] instead of —]] ?
+
 An alternative to the print function is io.write. What is the difference?
-You can assign multiple types of values to a variable over time.
+
 #someVar when someVar holds a string gives its length.
-
-type(someVar) returns a string containing the type name. What are all the possibilities?
-boolean, number, string, …
-
-All numbers are floating point (double precision?).
-Does it have shorthand assignment operators like += ? NO!
-boolean literal values are true and false.
-
-Math operators include +, -, \*, /, and %.
-See the math module for functions like sin and cos.
-The ++ and — operators are not supported.
 
 Can convert between types.
 tostring(numberOrBoolean)
