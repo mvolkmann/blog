@@ -19,7 +19,7 @@ The Lua programming language was named after the Moon.
 One reason Lua is popular is that it is easy to embed in a C/C++ application.
 It is easy to run C code from Lua and run Lua code from C.
 
-Lua has a small standard library, but has a
+Lua has a relatively small standard library, but has a
 large collection of packages that can be installed using the
 {% aTargetBlank "https://luarocks.org", "LuaRocks" %} package manager.
 
@@ -79,7 +79,46 @@ Lua only defines 21 keywords.
 Some of the keywords such as `end`, `and`, `or`, and `then`
 make the syntax similar to the Ruby programming language.
 
-TODO: List all the keywords with a brief explanation of each.
+Boolean literal values:
+
+- true
+- false
+
+Conditional Logic:
+
+- if
+- then
+- elseif
+- else
+
+Functions:
+
+- function
+- return
+
+Iteration:
+
+- for: loop over numbers or pairs
+- in: specifies what to loop over
+- while: top-tested loop
+- repeat and until: bottom-tested loop
+- break: exit loop early
+
+Logical Operators:
+
+- and
+- or
+- not
+
+Variables:
+
+- local
+
+Other:
+
+- do: begins a new lexical block
+- end: marks the end of a lexical block
+- nil: represents having no value
 
 ## Comments
 
