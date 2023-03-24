@@ -107,7 +107,10 @@ To install this:
   `ln -sf luajit-2.1.0-beta3 /usr/local/bin/luajit`.
   Enter that command.
 
-TODO: Can luajit create an executable?
+To compile a Lua program to bytecode and save it,
+enter a command like `luajit -b demo.lua demo.out`
+To execute the saved bytecode, enter a command like `luajit demo.out`.
+This will start faster than entering `luajit demo.lua`.
 
 # VS Code Setup
 
