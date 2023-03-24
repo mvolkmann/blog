@@ -28,12 +28,20 @@ Pros of Lua include:
 - considered to be the fastest scripting language
 - free and open sources under the MIT license
 - simple syntax with only 21 keywords
-- dynamic variables that do not require specifying types
+- uses dynamic variables that do not require specifying types
+- functions are first class and are closures
+- implements tail call optimization
 - easy to run C code from Lua and run Lua code from C
-- easy to embed in C/C++ applications
+- easy to embed in C/C++ applications (interpreter is only 182K)
+- highly portable (runs on all major OSes and most microcontrollers)
+- native support for multitasking with coroutines
+- provides automatic, incremental garbage collection
 
 Cons of Lua include:
 
+- lack of type checking
+- lack of support for object oriented programming (OOP),
+  although it can be simulated with metatables and functions
 - limited support for error handling
 - limited support for pattern matching
 
@@ -77,8 +85,7 @@ For installing in other operating systems, see
 To experiment with Lua on the web without installing anything,
 see {% aTargetBlank "http://www.lua.org/demo.html", "Lua Demo" %}.
 
-For faster performance, use
-{% aTargetBlank "https://luajit.org/install.html", "LuaJIT" %}.
+For faster performance, use {% aTargetBlank "https://luajit.org/", "LuaJIT" %}.
 To install this:
 
 - Download the source from {% aTargetBlank "", "" %}
@@ -90,6 +97,8 @@ To install this:
 - The previous command will ask you to create a symlink with a command like
   `ln -sf luajit-2.1.0-beta3 /usr/local/bin/luajit`.
   Enter that command.
+
+TODO: Can luajit create an executable?
 
 # VS Code Setup
 
@@ -271,6 +280,13 @@ The `type(someVar)` function returns a string containing
 the type name of the variable value.
 This can be `nil`, `boolean`, `number`, `string`, `table`, or `function`.
 
+Multi-variable assignment is supported.
+For example:
+
+````lua
+a, b, c = 1, 2, 3
+a, b = b, a -- swaps values
+
 ## Booleans
 
 Boolean literal values are `true` and `false`.
@@ -293,23 +309,35 @@ Out of memory.
 We wish to hold the sky.
 But we never will.
 ]]
-```
+````
 
-String indexes start from zero.
+Strings are indexed starting from 1 instead of 0.
 
 Use the `..` operator to concatenate strings.
 For example, `fullName = firstName .. ' ' .. lastName`.
 
-TODO: Does Lua support string interpolation?
-
 String operations include:
 
-- `string.len(var)` or `#var`
-- `string.gsub(source, oldValue, newValue)`
-- `string.find(source, target)`
-- `string.upper(var)`
-- `string.lower(var)`
-- `string.match(someString, 'regular-expression')` returns a table of matches?
+- length: `string.len(var)` or `#var`
+- substring: `string.sub(source, startIndex, endIndex)` or
+  `source:sub(startIndex, endIndex)`
+- global substitute: `string.gsub(source, oldValue, newValue)`
+- find start and end index: `string.find(source, target)` or
+  `source:find(target)`
+- uppercase: `string.upper(var)` or `var:upper()`
+- lowercase: `string.lower(var)` or `var:lower()`
+- regular expression matches:
+  `string.match(someString, 'regular-expression')` returns a table of matches?
+
+Lua does not support string interpolation.
+The closest Lua feature to this is the `string.format` function.
+For example:
+
+```lua
+name = "Mark"
+color = "yellow"
+sentence = string.format("%s's favorite color is %s.", name, color)
+```
 
 ## Operators
 
