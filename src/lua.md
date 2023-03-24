@@ -73,6 +73,16 @@ For example:
 require "other"
 ```
 
+## Running Programs
+
+To run a Lua program, enter `lua {filename}.lua`.
+This runs the source file through the Lua interpreter to produce
+bytecode and uses the Lua virtual machine to execute the bytecode.
+
+There are several tools that claim to
+produce executable files from Lua programs.
+But none seem to be popular or actively maintained.
+
 ## Keywords
 
 Lua only defines 21 keywords.
@@ -123,7 +133,7 @@ Other:
 ## Comments
 
 Single-line comments begin with two dashes.
-Multiline comments are delimited by `--[[` and `--]]`.
+Multiline comments begin with `--[[` and end with `--]]` or just `]]`.
 
 ## Types
 
@@ -463,7 +473,3 @@ print(coroutine.status(co)) -- "suspended"
 ```
 
 ## Unorganized Content
-
-Can Lua be compiled to an executable?
-
-Can multiline comments end with just ]] instead of —]] ?
