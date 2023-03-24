@@ -39,11 +39,20 @@ Pros of Lua include:
 
 Cons of Lua include:
 
+- limited Unicode support
+
+  Strings can contain unicode characters,
+  but indexing into such strings does not account for their size.
+  See {% aTargetBlank "http://lua-users.org/wiki/LuaUnicode", "Lua Unicode" %}.
+
+- variables and functions are global by default
 - lack of type checking
 - lack of support for object oriented programming (OOP),
   although it can be simulated with metatables and functions
 - limited support for error handling
-- limited support for pattern matching
+- limited support for regular expressions
+
+TODO: Get more from http://notebook.kulchenko.com/programming/lua-good-different-bad-and-ugly-parts.
 
 ## Used By
 
