@@ -125,36 +125,6 @@ Other:
 Single-line comments begin with two dashes.
 Multiline comments are delimited by `--[[` and `--]]`.
 
-## Input/Output
-
-To write to stdout, use the `print` function or the`io.write` function.
-Both take any number of arguments.
-
-The `print` function adds a tab character between each value
-and a newline at the end of its output
-
-The `io.write` function does not add any characters between values
-and does not add a newline at the end.
-Boolean values must be converted to strings
-before being passed to `io.write`.
-
-For example:
-
-```lua
-print('Hello World!', true, 7)
-io.write('Hello World!', tostring(true), 7)
-```
-
-To read from stdin, use the `io.read` function.
-For example:
-
-```lua
-n1 = io.read()
-n2 = io.read()
-sum = number(n1) + number(n2)
-print(sum)
-```
-
 ## Types
 
 Lua uses dynamic types.
@@ -172,6 +142,49 @@ pass it to the `toboolean` function.
 
 There are no builtin functions for converting
 a boolean to a number or a number to a boolean.
+
+## Input/Output
+
+To write to stdout, use the `print` function or the`io.write` function.
+Both take any number of arguments.
+
+The `print` function adds a tab character between each value
+and a newline at the end of its output
+
+The `io.write` function does not add any characters between values
+and does not add a newline at the end.
+Boolean values must be converted to strings
+before being passed to `io.write`.
+
+For example:
+
+```lua
+print('Hello', true, 7) -- Hello   true    7
+io.write('Hello', tostring(true), 7) -- Hellotrue7
+```
+
+To read from stdin, use the `io.read` function.
+
+The following code prompts for two numbers and prints their sum.
+
+```lua
+io.write('First Number: ')
+s1 = io.read()
+n1 = tonumber(s1) -- returns nil if not a number
+
+io.write('Second Number: ')
+s2 = io.read()
+n2 = tonumber(s2)
+
+if n1 == nil then
+  print('The first value "' .. s1 .. '" is not a number.')
+elseif n2 == nil then
+  print('The second value "' .. s2 .. '" is not a number.')
+else
+  sum = tonumber(n1) + tonumber(n2)
+  print('Sum: ' .. sum)
+end
+```
 
 ## Variables
 
