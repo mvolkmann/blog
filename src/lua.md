@@ -11,17 +11,31 @@ dynamically typed scripting language created in 1993
 by a team at {% aTargetBlank "http://www.puc-rio.br",
 "Pontifical Catholic University of Rio de Janeiro" %} in Brazil.
 
-Lua is considered to be the fastest scripting language.
-Compared to Python, Lua is simpler (only 21 keywords) and faster.
-
 The Lua programming language was named after the Moon.
 
-One reason Lua is popular is that it is easy to embed in a C/C++ application.
-It is easy to run C code from Lua and run Lua code from C.
+Lua has an interpreter and a virtual machine.
+The interpreter is written in C and
+produces bytecode that runs in the virtual machine.
+Compiling to bytecode can be done at runtime or ahead of time
+(although I haven't found a recommended way to do it).
 
 Lua has a relatively small standard library, but has a
 large collection of packages that can be installed using the
 {% aTargetBlank "https://luarocks.org", "LuaRocks" %} package manager.
+
+Pros of Lua include:
+
+- considered to be the fastest scripting language
+- free and open sources under the MIT license
+- simple syntax with only 21 keywords
+- dynamic variables that do not require specifying types
+- easy to run C code from Lua and run Lua code from C
+- easy to embed in C/C++ applications
+
+Cons of Lua include:
+
+- limited support for error handling
+- limited support for pattern matching
 
 ## Where Used
 
@@ -32,6 +46,9 @@ Notable uses of Lua include:
 - {% aTargetBlank "http://www.legoengineering.com/platform/nxt/", "Lego Mindstorms NXT" %}
 - {% aTargetBlank "https://neovim.io", "Neovim" %} text editor
 - {% aTargetBlank "https://redis.io", "Redis" %} database
+
+Roblox uses a variant of Lua called Luau.
+TODO: How does that differ?
 
 For an extensive, see the {% aTargetBlank
 "https://en.wikipedia.org/wiki/List_of_applications_using_Lua",
@@ -448,6 +465,10 @@ Trigonometry functions:
 
 - TODO: Add more!
 
+## Modules
+
+A module is a collection of variables and functions
+
 ## Multitasking
 
 Lua supports collaborative multitasking with coroutines.
@@ -476,29 +497,6 @@ print(coroutine.status(co)) -- "suspended"
 
 when calling functions of a module, can you separate the module name from the function name with either a period or a colon?
 
-A module is a collection of variables and functions
-
 are there linters in code formatters for Lua?
 
-does the print function take multiple arguments?
-
-The Roblox game uses a variant of Lua called Luau. How does that differ?
-
-say that one reason to learn lua is that it can be used as the scripting language for neovim.
-
-Lua has an interpreter and a virtual machine
-The interpreter is written in C and produces bytecode that runs in the virtual machine.
-Compiling to bytecode can be done at runtime or ahead of time.
-
 learn about metamethods and metatables.
-
-Lua is free and open sources under the MIT license.
-
-pros of lua
-
-- easy application integration
-- Simple syntax with only 21 keywords
-- Dynamic variables that do not require specifying types
-  cons of Lua
-- Limited support for error handling
-- Limited support for pattern matching
