@@ -473,3 +473,32 @@ print(coroutine.status(co)) -- "suspended"
 ```
 
 ## Unorganized Content
+
+when calling functions of a module, can you separate the module name from the function name with either a period or a colon?
+
+A module is a collection of variables and functions
+
+are there linters in code formatters for Lua?
+
+does the print function take multiple arguments?
+
+The Roblox game uses a variant of Lua called Luau. How does that differ?
+
+say that one reason to learn lua is that it can be used as the scripting language for neovim.
+
+Lua has an interpreter and a virtual machine
+The interpreter is written in C and produces bytecode that runs in the virtual machine.
+Compiling to bytecode can be done at runtime or ahead of time.
+
+learn about metamethods and metatables.
+
+Lua is free and open sources under the MIT license.
+
+pros of lua
+
+- easy application integration
+- Simple syntax with only 21 keywords
+- Dynamic variables that do not require specifying types
+  cons of Lua
+- Limited support for error handling
+- Limited support for pattern matching
