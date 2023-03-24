@@ -37,7 +37,7 @@ Cons of Lua include:
 - limited support for error handling
 - limited support for pattern matching
 
-## Where Used
+## Used By
 
 Notable uses of Lua include:
 
@@ -54,18 +54,6 @@ For an extensive, see the {% aTargetBlank
 "https://en.wikipedia.org/wiki/List_of_applications_using_Lua",
 "List of applications using Lua" %} Wikipedia page.
 
-## Installing
-
-Lua can be installed in macOS using Homebrew.
-Enter `brew install lua` to install it
-and enter `lua -v` to verify that it worked and see the version.
-
-For installing in other operating systems, see
-{% aTargetBlank "http://www.lua.org/start.html", "Getting Started" %}.
-
-To experiment with Lua on the web without installing anything,
-see {% aTargetBlank "http://www.lua.org/demo.html", "Lua Demo" %}.
-
 ## Resources
 
 - {% aTargetBlank "https://www.lua.org/manual/", "Lua Reference Manual" %}
@@ -76,6 +64,63 @@ see {% aTargetBlank "http://www.lua.org/demo.html", "Lua Demo" %}.
 - {% aTargetBlank "https://www.codecademy.com/learn/learn-lua/modules/learn-lua-introduction/cheatsheet", "codecademy" %}
 - {% aTargetBlank "https://devhints.io/lua", "DevHints.io" %}
 - {% aTargetBlank "https://cheatography.com/srgmc/cheat-sheets/lua-scripting-5-1/", "Cheatography" %}
+
+## Installing
+
+Lua can be installed in macOS using Homebrew.
+Enter `brew install lua` to install it.
+Enter `lua -v` to verify that it worked and see the version.
+
+For installing in other operating systems, see
+{% aTargetBlank "http://www.lua.org/start.html", "Getting Started" %}.
+
+To experiment with Lua on the web without installing anything,
+see {% aTargetBlank "http://www.lua.org/demo.html", "Lua Demo" %}.
+
+For faster performance, use
+{% aTargetBlank "https://luajit.org/install.html", "LuaJIT" %}.
+To install this:
+
+- Download the source from {% aTargetBlank "", "" %}
+  by entering `git clone https://luajit.org/git/luajit.git`.
+- Enter `cd luajit`
+- In macOS enter `export MACOSX_DEPLOYMENT_TARGET={version}`
+  where `version` is a value like `13.2`.
+- Enter `make && sudo make install`
+- The previous command will ask you to create a symlink with a command like
+  `ln -sf luajit-2.1.0-beta3 /usr/local/bin/luajit`.
+  Enter that command.
+
+# VS Code Setup
+
+VS Code has great support for Lua.
+
+The {% aTargetBlank "https://github.com/LuaLS/lua-language-server", "Lua" %}
+extension from sumneko is a Lua language server.
+It provides code annotations, syntax checking, dynamic type checking,
+code formatting, spell checking, and more.
+
+The {% aTargetBlank "https://github.com/Koihik/vscode-lua-format",
+"vscode-lua-format" %} extension from Koihik
+is a popular Lua code formatting extension.
+To configure this, open Settings, filter on "Lua", and enter the path
+to a configuration file in "Vscode-lua-format: Config Path" such as
+`/Users/{your-user}/Documents/dev/lang/lua/style.config`.
+Then create the file `style.config` in that location
+containing something like the following:
+
+```text
+# See all the Lua code formatting options at
+# https://github.com/Koihik/LuaFormatter/blob/master/docs/Style-Config.md
+
+column_limit: 80
+continuation_indent_width: 2
+indent_width: 2
+keep_simple_control_block_one_line: true
+keep_simple_function_one_line: true
+single_quote_to_double_quote: true
+use_tab: false
+```
 
 ## Source Files
 
@@ -92,7 +137,7 @@ require "other"
 
 ## Running Programs
 
-To run a Lua program, enter `lua {filename}.lua`.
+To run a Lua program, enter `lua {filename}.lua` or `luajit {filename}.lua`.
 This runs the source file through the Lua interpreter to produce
 bytecode and uses the Lua virtual machine to execute the bytecode.
 
@@ -432,6 +477,24 @@ my2D = []
 my2D[i] = {}
 my2D[i][j] = value
 print(my2D[i][j])
+```
+
+The <a href="https://www.lua.org/manual/5.4/manual.html#6.6"
+target="_blank">table</a> library does not include
+functions such as `map`, `filter`, and `reduce`.
+These can be found in the {% aTargetBlank "https://luafun.github.io/",
+"Lua Functional Library" %}.
+
+To download the file `fun.lua`,
+enter `wget https://raw.github.com/luafun/luafun/master/fun.lua`.
+
+To use this library,
+To install this, enter `luarocks install luafun`.
+
+The following code demonstrates uses this library:
+
+```lua
+fun = require('fun')
 ```
 
 ## Standard Library
