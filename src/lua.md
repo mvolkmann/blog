@@ -210,6 +210,18 @@ TODO: Are all numbers represented by double-precision floating point?
 ## Strings
 
 Strings can be delimited with either single or double quotes.
+For example, `'Hello World!'` or `"Hello World!"`.
+
+Multiline strings are delimiting with `[[` and `]]`.
+For example:
+
+```lua
+haiku = [[
+Out of memory.
+We wish to hold the sky.
+But we never will.
+]]
+```
 
 String indexes start from zero.
 
@@ -379,6 +391,22 @@ The last element in all tables has the value `nil`.
 
 To iterate over keys and values, use a `for` loop with the `pairs` function.
 
+For example:
+
+```lua
+myTable = {}
+myTable[index] = value -- indexes start at 1
+print(myTable[index])
+print('length =', #myTable)
+table.insert(myTable, index, value)
+table.concat(myTable, “, “) -- returns a string of concatenated table elements
+table.remove(myTable, index)
+my2D = []
+my2D[i] = {}
+my2D[i][j] = value
+print(my2D[i][j])
+```
+
 ## Standard Library
 
 - <a href="https://www.lua.org/manual/5.4/manual.html#6.1" target="_blank">basic</a>
@@ -438,26 +466,4 @@ print(coroutine.status(co)) -- "suspended"
 
 Can Lua be compiled to an executable?
 
-Delimit multiline strings with [[and]]
 Can multiline comments end with just ]] instead of —]] ?
-
-An alternative to the print function is io.write. What is the difference?
-
-Can convert between types.
-tostring(numberOrBoolean)
-toboolean?
-tonumber?
-
-input = io.read()
-
-myTable = {}
-myTable[index] = value — indexes start at 1
-print(myTable[index])
-print(‘length =‘, #myTable)
-table.insert(myTable, index, value)
-table.concat(myTable, “, “) — returns a string of concatenated table elements
-table.remove(myTable, index)
-my2D = []
-my2D[i] = {}
-my2D[i][j] = value
-print(my2D[i][j])
