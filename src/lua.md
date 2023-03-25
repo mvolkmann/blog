@@ -442,6 +442,20 @@ String operations include:
 
 Lua does not support string interpolation.
 The closest Lua feature to this is the `string.format` function.
+It takes a format string as its first argument.
+This can contain literal text to be output and
+formatting directives that begin with a percent sign.
+The supported formatting directives are:
+
+- `%o` for octal numbers
+- `%x` for hexadecimal numbers
+- `%d` for decimal numbers
+- `%f` for floating point numbers
+- `%s` for strings
+
+The `%f` directive can specify the number of decimal places to output.
+For example, to output two decimal places use `%.2f`.
+
 For example:
 
 ```lua
@@ -902,10 +916,15 @@ To write to a file:
 file:write(data)
 ```
 
-To read the entire contents of a file:
+To read from a file:
 
 ```lua
-data = file:read("*a")
+contents = file:read("*all") -- reads the entire contents
+line = file:read("*line") -- reads the next line
+number = file:read("*number") -- reads a number
+n1, n2 = file:read("*number", "*number") -- reads two numbers
+text = file:read(n) -- reads a string of up to "n" characters
+end_test = file:read(0) -- returns nil if at end of file; otherwise returns ""
 ```
 
 To seek to a specific byte offset:
@@ -971,6 +990,74 @@ v2 = coroutine.resume(co) -- "value #2"
 v3 = coroutine.resume(co) -- "value #3"
 v4 = coroutine.resume(co) — error
 print(coroutine.status(co)) -- "suspended"
+```
+
+## Error Handling
+
+Lua does not have a mechanism for throwing and catching exceptions.
+In many cases errors result in a function returning the value `nil`
+and it left to developers to check for `nil` values.
+Failing to do so often results in programs crashing
+and outputting a stack trace.
+
+The only error handling mechanism Lua provides is the `pcall` function
+(short for "protected call").
+This function is passed a function to execute and
+optionally arguments to be passed to it.
+It returns a boolean indicating whether the call completed without error
+and an error message if one did occur.
+
+The `error` function is the Lua equivalent of
+a `throw` statement in many other programming languages.
+It is passed a message and an optional integer error level.
+The message can be any type, but is typically a string or a table.
+
+The following code demonstrates using the `pcall` function.
+It repeated prompts for a dividend and a divisor
+and displays their quotient.
+When invalid values are entered, error messages are output,
+but the program does not crash.
+
+```lua
+function read_number(prompt)
+  io.write(prompt .. ": ")
+  local number = io.read("*number")
+  -- The previous line does not consume the newline character.
+  -- Unless that is done, the next attempt to read a number will return `nil`.
+  -- The following line consumes the newline character.
+  local _ = io.read()
+  return number
+end
+
+function process()
+  local dividend = read_number("Enter a dividend")
+  if not dividend then
+    -- Error messages here are tables containing a message and a code.
+    error({message = "dividend is invalid", code = 1})
+  end
+
+  local divisor = read_number("Enter a divisor")
+  if not divisor then
+    error({message = "divisor is invalid", code = 2})
+  end
+  if divisor == 0 then
+    error({message = "cannot divide by zero", code = 3})
+  end
+
+  local quotient = dividend / divisor
+  io.write(string.format("The quotient is %.3f\n\n", quotient))
+end
+
+while true do
+  local success, err = pcall(process)
+  if not success then
+    if err then
+      print(string.format("%s (code %d)", err.message, err.code))
+    end
+    -- print(debug.traceback()) -- prints a stack trace
+    print() -- extra newline
+  end
+end
 ```
 
 ## Unorganized Content
