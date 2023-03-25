@@ -386,8 +386,13 @@ a, b = b, a -- swaps values
 ## Booleans
 
 Boolean literal values are `true` and `false`.
+
 In conditions the only values treated as false are `false` and `nil`.
 The number zero, an empty string, and an empty table are all treated as true.
+
+Variables can be set to a condition to get a boolean value.
+For example, `is_bigger = my_score > your_score`
+sets `is_bigger` to `true` or `false`.
 
 ## Numbers
 
@@ -433,8 +438,11 @@ String operations include:
 - substring: `string.sub(source, startIndex, endIndex)` or
   `source:sub(startIndex, endIndex)`
 - global substitute: `string.gsub(source, oldValue, newValue)`
-- find start and end index: `string.find(source, target)` or
-  `source:find(target)`
+
+  This returns a new string and the number of occurrences that were replaced.
+
+- find start and end index inclusive:
+  `string.find(source, target)` or `source:find(target)`
 - uppercase: `string.upper(var)` or `var:upper()`
 - lowercase: `string.lower(var)` or `var:lower()`
 - regular expression matches:
@@ -1095,20 +1103,8 @@ end
 
 learn about metamethods and metatables.
 
-summarize the constants and functions in the math library and all The Standard, Libraries in markdown tables.
-
-how does the math random function know whether you want a floating point or an integer value?
+summarize the constants and functions in all the standard libraries
 
 can a function that takes an arbitrary number of arguments specify names for the initial arguments?
 
-do the math library trigonometry functions expect degrees or radians?
-
 does the: syntax for calling a function only work when the variable has a type that maps to a Standard Library like String and number and table and function?
-
-what are all the formatting types that string.format supports? Like %s, %i, and %f.
-
-string.find returns the start and end indexes inclusive
-
-string.gsub returns a new string, and the number of occurrences that were replaced.
-
-can you set a variable to a condition to get a Boolean value?
