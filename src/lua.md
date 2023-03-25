@@ -1,6 +1,6 @@
 ---
 eleventyNavigation:
-  key: Lua
+key: Lua
 layout: topic-layout.njk
 ---
 
@@ -380,9 +380,10 @@ This can be `nil`, `boolean`, `number`, `string`,
 Multi-variable assignment is supported.
 For example:
 
-````lua
+```lua
 a, b, c = 1, 2, 3
 a, b = b, a -- swaps values
+```
 
 ## Booleans
 
@@ -396,6 +397,9 @@ TODO: Are all numbers represented by double-precision floating point?
 
 ## Strings
 
+The string type is used single and multiple character text.
+Lua does not have a dedicated type for single characters.
+
 Strings can be delimited with either single or double quotes.
 For example, `'Hello World!'` or `"Hello World!"`.
 
@@ -408,7 +412,9 @@ Out of memory.
 We wish to hold the sky.
 But we never will.
 ]]
-````
+```
+
+Newlines and indentation inside the square brackets are retained.
 
 Strings are indexed starting from 1 instead of 0.
 
@@ -545,6 +551,9 @@ but the `continue` keyword is not supported.
 ## Functions
 
 Functions are defined with the `function` keyword.
+This is longest keyword in Lua.
+It's too bad the designers didn't choose a shorter keyword
+like `func`, `fun`, or `fn`.
 
 For example:
 
@@ -945,20 +954,16 @@ print(coroutine.status(co)) -- "suspended"
 
 ## Unorganized Content
 
-when calling functions of a module, can you separate the module name from the function name with either a period or a colon?
-
-are there linters in code formatters for Lua?
-
 learn about metamethods and metatables.
 
-is there a toboolean function?
 summarize the constants and functions in the math library and all The Standard, Libraries in markdown tables.
+
 how does the math random function know whether you want a floating point or an integer value?
+
 can a function that takes an arbitrary number of arguments specify names for the initial arguments?
+
 do the math library trigonometry functions expect degrees or radians?
-there is no character type, only a string tape.
-multiline strings include the indentations specified.
-it’s a shame that Lua didn’t choose an abbreviation for the function keyword.
+
 can you tell the print function to separate values by a space instead of a tab?
 Cover using\is to escape characters inside a string literal.
 \n and \t and \” and \’ and \\
