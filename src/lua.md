@@ -112,7 +112,7 @@ enter a command like `luajit -b demo.lua demo.out`
 To execute the saved bytecode, enter a command like `luajit demo.out`.
 This will start faster than entering `luajit demo.lua`.
 
-# VS Code Setup
+## VS Code Setup
 
 VS Code has great support for Lua.
 
@@ -120,6 +120,12 @@ The {% aTargetBlank "https://github.com/LuaLS/lua-language-server", "Lua" %}
 extension from sumneko is a Lua language server.
 It provides code annotations, syntax checking, dynamic type checking,
 code formatting, spell checking, and more.
+
+To disable specific diagnostics,
+open Settings, filter on "Lua", scroll down to "Lua > Diagnostics: Disable",
+click the "Add Item" button, select a diagnostic name from the dropdown,
+and click the "OK" button.
+For example, you may wish to disable "lowercase-global".
 
 The {% aTargetBlank "https://github.com/Koihik/vscode-lua-format",
 "vscode-lua-format" %} extension from Koihik
@@ -418,6 +424,10 @@ for key, value in pairs(mytable) do
   ...
 end
 
+for index, value in ipairs(mytable) do
+  ...
+end
+
 while condition do — top-tested
   ...
 end
@@ -483,6 +493,46 @@ end
 print(product(2, 3)) -- 6
 ```
 
+## Utility Functions
+
+The following functions are helpful for debugging.
+They can be defined in a file like `utility.lua`
+and required where needed.
+
+```lua
+-- Returns a string description of the keys and values in a table.
+-- Values can be nested tables.
+function dump(value)
+  if type(value) ~= "table" then
+    return tostring(value)
+  end
+
+  local s = "{ "
+  for k, v in pairs(value) do
+    if type(k) ~= "number" then
+      k = "\"" .. k .. "\""
+    end
+    s = s .. k .. "=" .. dump(v) .. ", " -- recursive
+  end
+  return s .. "} "
+end
+
+-- Returns a string containing all the values in a table,
+-- each separated by a comma and a space.
+-- Values cannot be nested tables.
+function valuesString(obj)
+  if type(obj) ~= "table" then
+    return ""
+  end
+
+  s = ""
+  for index, v in ipairs(obj) do
+    s = s .. v .. ", "
+  end
+  return s:sub(1, -3)
+end
+```
+
 ## Data Structures
 
 Lua only provides one data structure called a "table".
@@ -518,6 +568,8 @@ my2D[i] = {}
 my2D[i][j] = value
 print(my2D[i][j])
 ```
+
+## Lua Functional (luafun)
 
 The <a href="https://www.lua.org/manual/5.4/manual.html#6.6"
 target="_blank">table</a> library does not include
