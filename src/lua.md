@@ -167,7 +167,10 @@ For example:
 require "other"
 ```
 
-## Running Programs
+## Running Code
+
+To start a Lua REPL, enter `lua` and then enter Lua statements.
+To exit the REPL, press ctrl-c or ctrl-d.
 
 To run a Lua program, enter `lua {filename}.lua` or `luajit {filename}.lua`.
 This runs the source file through the Lua interpreter to produce
@@ -292,8 +295,23 @@ end
 
 ## Variables
 
+Variable names can contain letters, digits, and underscores,
+but cannot start with a digit. Hyphens are not allowed.
+In multi-word names the words can be separated by underscores (preferred)
+or written in camel-case.
+For example, `one_long_name` or `oneLongName`.
+
+To assign a value to a variable, use the `=` operator.
+
 Variables are global by default.
-Use the `local` keyword to make scoped to their environment.
+Use the `local` keyword to make them only exist in their scope.
+
+For example:
+
+```lua
+a = 1 -- global, even if assigned inside a function
+local b = 2 -- local to the current scope
+```
 
 Variables with no assigned value have the value `nil`.
 
@@ -301,7 +319,8 @@ New values of any type can be assigned to a variable at any time.
 
 The `type(someVar)` function returns a string containing
 the type name of the variable value.
-This can be `nil`, `boolean`, `number`, `string`, `table`, or `function`.
+This can be `nil`, `boolean`, `number`, `string`,
+`table`, `function`, or `thread`.
 
 Multi-variable assignment is supported.
 For example:
@@ -313,6 +332,8 @@ a, b = b, a -- swaps values
 ## Booleans
 
 Boolean literal values are `true` and `false`.
+In conditions the only values treated as false are `false` and `nil`.
+The number zero, an empty string, and an empty table are all treated as true.
 
 ## Numbers
 
