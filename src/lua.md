@@ -893,3 +893,34 @@ when calling functions of a module, can you separate the module name from the fu
 are there linters in code formatters for Lua?
 
 learn about metamethods and metatables.
+
+are variables declared inside a function without the local keyword really global?
+\_G.name for global variables?
+The tonumber function takes a string and returns nil if the string cannot be converted to a number.
+is there a toboolean function?
+summarize the constants and functions in the math library and all The Standard, Libraries in markdown tables.
+how does the math random function know whether you want a floating point or an integer value?
+can a function that takes an arbitrary number of arguments specify names for the initial arguments?
+do the math library trigonometry functions expect degrees or radians?
+there is no character type, only a string tape.
+multiline strings include the indentations specified.
+it’s a shame that Lua didn’t choose an abbreviation for the function keyword.
+can you tell the print function to separate values by a space instead of a tab?
+Cover using\is to escape characters inside a string literal.
+\n and \t and \” and \’ and \\
+does the: syntax for calling a function only work when the variable has a type that maps to a Standard Library like String and number and table and function?
+what are all the formatting types that string.format supports? Like %s, %i, and %f.
+string.find returns the start and end indexes inclusive
+The local keyword can define multiple variables on a single line.
+ex. local a, b, c = 1, 2, 3
+string.gsub returns a new string, and the number of occurrences that were replaced.
+nil is treated the same as false in a condition. all other values are treated as true.
+which operators have higher precedence, comparison or logical? This affects whether parentheses are needed in complex conditions.
+Add a table of Lua operators that list them in precedence order from highest to lowest.
+can you set a variable to a condition to get a Boolean value?
+The variable assigned in a for loop is local to the loop.
+while variable and function names can use camel case, the Lua community seems to prefer using underscores.
+Is {“a”, “b”, “c”} the same as {1 = “a”, 2 = “b”, 3 = “c”} ?
+3
+#table_var gives its length.
+Do tables support methods like push, pop, shift, and shift?
