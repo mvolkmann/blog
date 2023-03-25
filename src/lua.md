@@ -49,7 +49,7 @@ Cons of Lua include:
 - lack of type checking
 - lack of support for object oriented programming (OOP),
   although it can be simulated with metatables and functions
-- limited support for error handling
+- limited support for error handling (see the `error` and `pcall` functions)
 - limited support for regular expressions
 
 TODO: Get more from http://notebook.kulchenko.com/programming/lua-good-different-bad-and-ugly-parts.
@@ -872,23 +872,54 @@ end
 - <a href="https://www.lua.org/manual/5.4/manual.html#6.6" target="_blank">table</a>
 - <a href="https://www.lua.org/manual/5.4/manual.html#6.5" target="_blank">utf8</a>
 
-## math module
+### math module
 
-Random numbers:
+Constants defined by this library include:
+
+- `math.huge` - floating point value greater than any other number
+- `math.maxinteger` - maximum integer value
+- `math.mininteger` - minimum integer value
+- `math.pi` - value of π
+
+Trigonometry functions defined by this library include
+`sin`, `cos`, `tan`, `asin`, `acos`, and `atan`.
+All of these take and return angles in radians.
+To convert an angle from degrees to radians, use the `math.rad(x)` function.
+To convert an angle from radians to degrees, use the `math.deg(x)` function.
+
+To generate random numbers, use the
+`math.randomseed` and `math.random` functions.
 
 - `math.randomseed(os.time())` seeds the random number generator
-- `math.random()` returns a number in the range [0, 1)
-- `math.random(10)` returns a number in the range [0, 10)
-- `math.random(5, 10)` returns a nubmer in the range [5, 10)
-- `print(string.format('pi is %.2f', math.pi)` outputs `pi is 3.14`
+- `math.random()` returns a floating point number in the range [0, 1)
+- `math.random(10)` returns an integer in the range [1, 10]
+- `math.random(5, 10)` returns an integer in the range [5, 10]
 
-Trigonometry functions:
+Other functions defined in this library include:
 
-- `math.sin(angle)`
-- `math.cos(angle)`
-- `math.tan(angle)`
+- `math.abs(x)` for absolute value
+- `math.ceil(x)` for ceiling (rounds up)
+- `math.exp(x)` for e raised to the x power
+- `math.floor(x)` for floor (rounds down)
+- `math.fmod(x, y)` for floating point remainder of x / y
+- `math.log(x, [base])` for logarithm of x with specified base or e
+- `math.max(...)` for maximum of a set of numbers
+- `math.min(...)` for minimum of a set of numbers
+- `math.modf(x)` for integral and fractional parts of a floating point number
 
-- TODO: Add more!
+  For example, `math.modf(3.14)` returns `3` and `0.14`
+
+- `math.sqrt(x)` for square root
+- `math.tointeger(x)` returns an integer value if x
+  can be converted to an integer; otherwise `nil`
+
+  The value passed can be a number or string.
+  For example, `math.tointeger(3.0)` and `math.tointeger("3.0")` returns `3`,
+  and `math.tointeger(3.1)` returns `nil`.
+
+- `math.type(x)` returns `"integer"`, `"float"`, or `nil`
+- `math.ult(m, n)` returns `true` if m < n when
+  compared as unsigned integers; otherwise `false`
 
 ## File I/O
 
