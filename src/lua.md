@@ -595,7 +595,7 @@ end
 ## Data Structures
 
 Lua only provides one data structure called a "table".
-It can represent arrays, dictionaries, trees, and graphs.
+It is used to represent arrays, dictionaries, trees, and graphs.
 
 Lua does not support defining classes.
 Instead it uses a combination of tables and functions for everything.
@@ -604,28 +604,99 @@ Instead it uses a combination of tables and functions for everything.
 
 A Lua table is an associative array.
 
-Tables are indexed starting from 1 instead of 0.
-
-Values for keys are defined integer values by default starting from 1.
-
-The last element in all tables has the value `nil`.
-
-To iterate over keys and values, use a `for` loop with the `pairs` function.
+To create a table, surround key/value pairs in curly braces.
+Each key and value are separated by `=`.
+Non-string keys must be encloses in square brackets.
 
 For example:
 
 ```lua
-myTable = {}
-myTable[index] = value -- indexes start at 1
-print(myTable[index])
-print('length =', #myTable)
-table.insert(myTable, index, value)
-table.concat(myTable, “, “) -- returns a string of concatenated table elements
-table.remove(myTable, index)
-my2D = []
-my2D[i] = {}
-my2D[i][j] = value
-print(my2D[i][j])
+fill_later = {} -- creates an empty table
+
+scores = {Mark = 7, Tami = 9} -- uses string keys
+
+-- For string keys that include special characters such as spaces,
+-- enclose them in square brackets and quotes.
+full_scores = {["Mark Volkmann"] = 7, Tami = 9} -- uses string keys
+
+days_in_month = {[1]=31, [2]=28, [3]=31, [4]=30} -- uses number keys
+
+-- This has the same result as the previous line,
+-- but values are specified without keys.
+-- Number keys are provided starting from 1.
+days_in_month = {31, 28, 31, 30}
+
+words = {[true]="yes", [false]="no"} -- uses boolean keys
+```
+
+To get the value corresponding to a table key, use square brackets
+as follows:
+
+```lua
+print("Tami's score is " .. scores["Tami"]) -- 9
+
+-- When a key is not found, the value returned is `nil`.
+print("Mary's score is " .. (scores["Mary"] or "unknown")) -- unknown
+
+print("April has " .. days_in_month[4] .. " days.") -- 30
+```
+
+To iterate over keys and values, use a `for` loop
+with the `pairs` or `ipairs` function.
+For example:
+
+```lua
+for name, score in pairs(scores) do
+  print(name, score) -- Mark 7 and Tami 9 in random order
+end
+
+for index, score in ipairs(scores) do
+  print(index, score) -- 1 7 and 2 9
+end
+```
+
+To add a key/value pair to a table:
+
+To insert a key/value pair into a table that uses integer keys
+so the keys past the insertion point move up by one:
+
+```lua
+TODO: TEST THIS!
+table.insert(my_table, index, value)
+```
+
+To remove a key/value pair from a table:
+
+```lua
+TODO: TEST THIS!
+table.remove(scores, "Mark")
+```
+
+To create a string from a table by concatenating all of its values
+using a given delimiter, use the `concat` function.
+For example:
+
+```lua
+TODO: TEST THIS!
+print(table.concat(scores, ", ")) -- 7, 9
+```
+
+Tables do not store the number of key/value pairs that they contain.
+To get the count it is necessary to iterate over the table and count the pairs.
+In tables that contain consecutive integer keys starting from one,
+`#table_var` returns the length.
+The "Lua Functional" library described later defines a `length` function
+for computing the size of a table, but it has O(n) complexity.
+
+Table values can be other tables.
+This supports creating the equivalent of multi-dimensional arrays.
+For example:
+
+```lua
+my2d = {}
+my2d[i] = {}
+my2D[i][j] = "some-value"
+print(my2D[i][j]) -- "some-value"
 ```
 
 ## Lua Functional (luafun)

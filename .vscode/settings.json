@@ -365,6 +365,7 @@
     "interp",
     "ipadx",
     "ipady",
+    "ipairs",
     "iphonesimulator",
     "ipykernel",
     "ipynb",
