@@ -309,7 +309,8 @@ To write to stdout, use the `print` function or the`io.write` function.
 Both take any number of arguments.
 
 The `print` function adds a tab character between each value
-and a newline at the end of its output
+and a newline at the end of its output.
+It can be called with no arguments to only write a newline character.
 
 The `io.write` function does not add any characters between values
 and does not add a newline at the end.
@@ -328,21 +329,18 @@ To read from stdin, use the `io.read` function.
 The following code prompts for two numbers and prints their sum.
 
 ```lua
-io.write('First Number: ')
-s1 = io.read()
-n1 = tonumber(s1) -- returns nil if not a number
+io.write("First Number: ")
+-- This form of `io.read` returns a number or nil if a non-number is entered.
+n1 = io.read("*number")
 
-io.write('Second Number: ')
-s2 = io.read()
-n2 = tonumber(s2)
+io.write("Second Number: ")
+n2 = io.read("*number")
 
-if n1 == nil then
-  print('The first value "' .. s1 .. '" is not a number.')
-elseif n2 == nil then
-  print('The second value "' .. s2 .. '" is not a number.')
+if n1 and n2 then
+  sum = n1 + n2
+  print("Sum: " .. sum)
 else
-  sum = tonumber(n1) + tonumber(n2)
-  print('Sum: ' .. sum)
+  print("An invalid number was entered.")
 end
 ```
 
