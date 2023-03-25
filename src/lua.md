@@ -534,32 +534,40 @@ let result = condition and trueValue or falseValue
 ## Iteration
 
 ```lua
+-- Use a `for` loop to iterate over a range of numbers with a given step size.
 -- The loop variable, `i` in this case, is local to the loop
 -- and cannot be accessed outside it.
 for i = 1, 10, 2 do
   ...
 end
 
+-- Use a `for` loop to iterate over the key/value pairs in a table.
 for key, value in pairs(mytable) do
   ...
 end
 
+-- Use a `for` loop to iterate over the indexes and values pairs
+-- in a table whose keys are consecutive integers starting at 1.
 for index, value in ipairs(mytable) do
   ...
 end
 
-while condition do — top-tested
+-- Use a `while` loop for a top-tested loop
+-- that stops when a given condition is no longer true.
+while condition do
   ...
 end
 
-
+-- Use a `repeat`/`until` loop for a bottom-tested loop
+-- that stops when a given condition becomes true.
+-- The body is guaranteed to run at least once.
 repeat — bottom-tested
   ...
 until condition
 ```
 
-Loops can use the `break` keyword,
-but the `continue` keyword is not supported.
+Loops can use the `break` keyword to exit, but the `continue` keyword
+for advancing to the next iteration is not supported.
 
 ## Functions
 
