@@ -149,6 +149,11 @@ single_quote_to_double_quote: true
 use_tab: false
 ```
 
+The {% aTargetBlank
+"https://marketplace.visualstudio.com/items?itemName=actboy168.lua-debug",
+"Lua Debug" %} VS Code extension supports
+debugging Lua code with breakpoints and watches.
+
 ## Source Files
 
 Source files have a `.lua` extension.
@@ -590,16 +595,47 @@ functions such as `map`, `filter`, and `reduce`.
 These can be found in the {% aTargetBlank "https://luafun.github.io/",
 "Lua Functional Library" %}.
 
-To download the file `fun.lua`,
-enter `wget https://raw.github.com/luafun/luafun/master/fun.lua`.
+This library is distributed in the single file `fun.lua`.
+To download the file, enter
+`wget https://raw.github.com/luafun/luafun/master/fun.lua`.
 
-To use this library,
-To install this, enter `luarocks install luafun`.
-
-The following code demonstrates uses this library:
+The following code demonstrates basic use of this library:
 
 ```lua
-fun = require('fun')
+fun = require("fun")
+
+scores = {7, 4, 13}
+
+-- The `map` and `filter` methods returns an iterator.
+-- Calling `:totable()` on an iterator returns a table.
+
+-- Using `map` to double numbers in a table.
+function double(n) return n * 2 end
+doubled_iter = fun.map(double, scores)
+print("Doubled Scores")
+fun.each(print, doubled_iter) -- 14 8 26
+
+-- Using `filter` to get odd numbers from a table.
+function odd(n) return n % 2 == 1 end
+odd_iter = fun.filter(odd, scores)
+print("Odd Scores")
+fun.each(print, odd_iter) -- 7 3
+
+-- Using `reduce` to sum numbers in a table.
+function add(a, b) return a + b end
+total = fun.reduce(add, 0, scores)
+print("Total is " .. total) -- 24
+
+-- Doing the same with the `sum` function.
+print("Total is " .. fun.sum(scores)) -- 24
+
+-- There are MANY more functions in the luafun library!
+
+-- Can you use a for loop to iterate over values in an interator?
+-- for k, v in pairs(doubled_scores) do
+for k, v in doubled_iter:unwrap() do
+  print(v) -- 14 8 26
+end
 ```
 
 ## Standard Library
