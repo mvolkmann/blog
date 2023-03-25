@@ -657,28 +657,36 @@ end
 
 To add a key/value pair to a table:
 
-To insert a key/value pair into a table that uses integer keys
+To insert a key/value pair into a table that uses
+consecutive integer keys starting from one
 so the keys past the insertion point move up by one:
 
 ```lua
-TODO: TEST THIS!
-table.insert(my_table, index, value)
+names = {"Mark", "Tami"}
+table.insert(names, 2, "Comet")
+for k, v in pairs(names) do print(v) end -- Mark Comet Tami
 ```
 
 To remove a key/value pair from a table:
 
 ```lua
-TODO: TEST THIS!
-table.remove(scores, "Mark")
+-- For tables with consecutive integer keys starting from one
+-- where you want the remaining pairs to move down ...
+table.remove(my_table, index) -- can omit index to remove last pair
+
+-- For all other cases ...
+scores["Mark"] = nil
 ```
 
 To create a string from a table by concatenating all of its values
 using a given delimiter, use the `concat` function.
+This only works for tables that have consecutive integer keys starting from one
+and values that are strings or numbers.
 For example:
 
 ```lua
-TODO: TEST THIS!
-print(table.concat(scores, ", ")) -- 7, 9
+t = {"Mark", 7, "Tami", 9}
+print(table.concat(t, ", ")) -- "Mark, 7, Tami, 9"
 ```
 
 Tables do not store the number of key/value pairs that they contain.
