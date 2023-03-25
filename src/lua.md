@@ -284,17 +284,24 @@ Lua uses dynamic types.
 The types of variables and function parameters
 are never specified and are always inferred.
 
-To convert a boolean or number value to a string,
-pass it to the `tostring` function.
-
-To convert a string value to a number,
-pass it to the `tonumber` function.
-
-To convert a string value to a boolean,
-pass it to the `toboolean` function.
-
+Primitive type conversions are supported by
+the `tonumber` and `tostring` functions.
 There are no builtin functions for converting
-a boolean to a number or a number to a boolean.
+a boolean to a number, a number to a boolean, or a string to a boolean.
+
+The following table shows how to convert each primitive type
+to the other primitive types.
+
+| From        | To Boolean    | To Number      | To String     |
+| ----------- | ------------- | -------------- | ------------- |
+| boolean `b` | not needed    | `b and 1 or 0` | `tostring(b)` |
+| number `n`  | `n == 0`      | not needed     | `tostring(n)` |
+| string `s`  | `s == "true"` | `tonumber(s)`  | not needed    |
+
+The conversion from a number to a boolean above
+assumes that all numbers except zero should be treated as false.
+
+The `tonumber` function returns `nil` if the conversion is not possible.
 
 ## Input/Output
 
@@ -944,7 +951,6 @@ are there linters in code formatters for Lua?
 
 learn about metamethods and metatables.
 
-The tonumber function takes a string and returns nil if the string cannot be converted to a number.
 is there a toboolean function?
 summarize the constants and functions in the math library and all The Standard, Libraries in markdown tables.
 how does the math random function know whether you want a floating point or an integer value?
@@ -968,4 +974,3 @@ Add a table of Lua operators that list them in precedence order from highest to 
 can you set a variable to a condition to get a Boolean value?
 The variable assigned in a for loop is local to the loop.
 while variable and function names can use camel case, the Lua community seems to prefer using underscores.
-Is {“a”, “b”, “c”} the same as {1 = “a”, 2 = “b”, 3 = “c”} ?
