@@ -615,7 +615,7 @@ and can return functions.
 Functions can return multiple values.
 For example:
 
-````lua
+```lua
 function getStooges()
   return "Moe", "Larry", "Curly"
 end
@@ -1136,4 +1136,7 @@ summarize the constants and functions in all the standard libraries
 can a function that takes an arbitrary number of arguments specify names for the initial arguments?
 
 does the: syntax for calling a function only work when the variable has a type that maps to a Standard Library like String and number and table and function?
-````
+
+```
+
+```
