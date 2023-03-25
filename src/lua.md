@@ -665,7 +665,7 @@ so the keys past the insertion point move up by one:
 
 ```lua
 names = {"Mark", "Tami"}
-table.insert(names, 2, "Comet")
+table.insert(names, 2, "Comet") -- expensive for large tables
 table.insert(names, "Bob") -- pushes onto end
 for k, v in pairs(names) do print(v) end -- Mark Comet Tami Bob
 ```
@@ -675,7 +675,7 @@ To remove a key/value pair from a table:
 ```lua
 -- For tables with consecutive integer keys starting from one
 -- where you want the remaining pairs to move down ...
-table.remove(my_table, index)
+table.remove(my_table, index) -- expensive for large tables
 last_value = table.remove(my_table) -- pops the last value and returns it
 
 -- For all other cases ...
@@ -923,6 +923,3 @@ can you set a variable to a condition to get a Boolean value?
 The variable assigned in a for loop is local to the loop.
 while variable and function names can use camel case, the Lua community seems to prefer using underscores.
 Is {“a”, “b”, “c”} the same as {1 = “a”, 2 = “b”, 3 = “c”} ?
-3
-#table_var gives its length.
-Do tables support methods like push, pop, shift, and shift?
