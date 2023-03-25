@@ -95,44 +95,67 @@ For installing in other operating systems, see
 To experiment with Lua on the web without installing anything,
 see {% aTargetBlank "http://www.lua.org/demo.html", "Lua Demo" %}.
 
+## Compiling
+
+Lua programs can be compiled to bytecode before runtime.
+This enables faster program startup because
+runtime bytecode generation is no longer needed.
+
+There are multiple ways to produce and execute Lua bytecode.
+
 ### luac
 
 {% aTargetBlank "https://www.lua.org/manual/5.1/luac.html", "luac" %}
 is the standard Lua compiler.
-It enables faster program startup because it compiles a Lua program
-to bytecode before it is run.
-To execute a file containing bytecode, run the `lua` command on it.
 
 By default `luac` creates the file `luac.out`
 Use the `-o` option to change this.
-For example:
 
-```bash
-luac demo.lua -o demo.luac
-lua demo.luac
-```
+To generate a bytecode file, enter a command like
+`luac demo.lua -o demo.luac`.
+
+To execute a bytecode file, enter a command like
+`lua demo.luac`.
 
 ### LuaJIT
 
 {% aTargetBlank "https://luajit.org/", "LuaJIT" %} is an alternative
-to `luac` that produces smaller bytecode files and
-typically produces bytecode with better performance.
+to `luac` that produces smaller bytecode files.
+LuaJIT also executes bytecode files and provides runtime optimizations
+that typically result in better performance.
+
+From {% aTargetBlank "https://api7.ai/learning-center/openresty/luajit-vs-lua",
+"api7.ai" %}:
+
+> The LuaJIT runtime environment ... has a JIT compiler
+> that can generate machine code directly.
+> The LuaJIT interpreter records some runtime statistics while executing the
+> bytecode, such as the actual number of times each Lua function call entry
+> is run and the actual number of times each Lua loop is executed.
+> When these counts exceed a random threshold,
+> the corresponding Lua function entry or Lua loop is considered hot enough
+> to trigger the JIT compiler to start working.
+> The JIT compiler tries to compile the corresponding Lua code path,
+> starting from the hot function's entry or the hot loop's location.
+> The compilation process converts the LuaJIT bytecode into LuaJIT's own
+> defined Intermediate Representation (IR) and
+> then generates machine code for the target architecture.
 
 To install LuaJIT:
 
 - Download the source from {% aTargetBlank "", "" %}
   by entering `git clone https://luajit.org/git/luajit.git`.
 - Enter `cd luajit`
-- In macOS enter `export MACOSX_DEPLOYMENT_TARGET={version}`
+- In macOS, enter `export MACOSX_DEPLOYMENT_TARGET={version}`
   where `version` is a value like `13.2`.
 - Enter `make && sudo make install`
 - The previous command will ask you to create a symlink with a command like
   `ln -sf luajit-2.1.0-beta3 /usr/local/bin/luajit`.
   Enter that command.
 
-To compile a Lua program to bytecode and save it,
+To generate a bytecode file from a Lua program,
 enter a command like `luajit -b demo.lua demo.out`
-To execute the saved bytecode, enter a command like `luajit demo.out`.
+To execute a bytecode file, enter a command like `luajit demo.out`.
 This will start faster than entering `luajit demo.lua`.
 
 ## VS Code Setup
