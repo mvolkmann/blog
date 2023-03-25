@@ -620,9 +620,78 @@ Trigonometry functions:
 
 - TODO: Add more!
 
+## File I/O
+
+Files can be opened in one of the following modes
+where the columns indicate the capabilities of each mode:
+
+| Mode | New | Overwrite | Read | Write | Append |
+| ---- | --- | --------- | ---- | ----- | ------ |
+| `r`  |     |           | X    |       |        |
+| `w`  | X   | X         |      | X     |        |
+| `a`  | X   |           |      |       | X      |
+| `r+` |     |           | X    | X     |        |
+| `w+` | X   | X         | X    | X     |        |
+| `a+` | X   |           | X    |       | X      |
+
+To open a file:
+
+```lua
+file = io.open(file_path, mode) -- mode defaults to "r"
+```
+
+To write to a file:
+
+```lua
+file:write(data)
+```
+
+To read the entire contents of a file:
+
+```lua
+data = file:read("*a")
+```
+
+To seek to a specific byte offset:
+
+```lua
+file:seek("set", offset)
+```
+
+TODO: How do you read a given number of bytes from the current offset?
+
+To close a file:
+
+```lua
+file:close()
+```
+
 ## Modules
 
-A module is a collection of variables and functions
+A module is a collection of variables and functions.
+
+To define a module named `my_module`, create a file
+named `my_module.lua` containing code like the following:
+
+```lua
+local my_module = {} -- a table
+
+my_module.some_variable = "some value"
+
+function my_module.some_function(p1, p2)
+  print("some_function was passed " .. p1 .. " and " .. p2)
+end
+
+return my_module
+```
+
+To use this module:
+
+```lua
+mm = require("my_module")
+mm.some_function(1, 2)
+print(mm.some_variable)
+```
 
 ## Multitasking
 
