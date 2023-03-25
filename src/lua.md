@@ -628,12 +628,40 @@ Functions can take a variable number of arguments.
 For example:
 
 ```lua
-function myFn(...)
-  for key, value in pairs(...) do
-    ...
+function add(...)
+  local sum = 0
+  local args = {...} -- creates a table containing the arguments
+  for _, n in ipairs(args) do
+    sum = sum + n
   end
+  return sum
 end
-````
+
+print("The sum is " .. add(1, 2, 3) .. ".") -- 6
+
+function report(name, age, ...)
+  local count = select("#", ...)
+  local text = "%s is %d years old and likes %d things.\nThey are"
+  local s = string.format(text, name, age, count)
+  local things = {...}
+  for index, thing in ipairs(things) do
+    local prefix = " "
+    if index == 1 then
+      prefix = " "
+    elseif index > 1 and index < count then
+      prefix = ", "
+    else
+      prefix = ", and "
+    end
+    s = s .. prefix .. thing
+  end
+  return s .. "."
+end
+
+print(report("Mark", 61, "running", "biking", "programming"))
+-- Mark is 61 years old and likes 3 things.
+-- They are running, biking, and programming.
+```
 
 Anonymous functions (unnamed) are closures and can be stored in variables.
 For example:
@@ -1108,3 +1136,4 @@ summarize the constants and functions in all the standard libraries
 can a function that takes an arbitrary number of arguments specify names for the initial arguments?
 
 does the: syntax for calling a function only work when the variable has a type that maps to a Standard Library like String and number and table and function?
+````
