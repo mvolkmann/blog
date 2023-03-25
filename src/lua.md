@@ -313,6 +313,8 @@ a = 1 -- global, even if assigned inside a function
 local b = 2 -- local to the current scope
 ```
 
+TODO: What does `_G.name = value` do?
+
 Variables with no assigned value have the value `nil`.
 
 New values of any type can be assigned to a variable at any time.
@@ -664,7 +666,8 @@ so the keys past the insertion point move up by one:
 ```lua
 names = {"Mark", "Tami"}
 table.insert(names, 2, "Comet")
-for k, v in pairs(names) do print(v) end -- Mark Comet Tami
+table.insert(names, "Bob") -- pushes onto end
+for k, v in pairs(names) do print(v) end -- Mark Comet Tami Bob
 ```
 
 To remove a key/value pair from a table:
@@ -672,7 +675,8 @@ To remove a key/value pair from a table:
 ```lua
 -- For tables with consecutive integer keys starting from one
 -- where you want the remaining pairs to move down ...
-table.remove(my_table, index) -- can omit index to remove last pair
+table.remove(my_table, index)
+last_value = table.remove(my_table) -- pops the last value and returns it
 
 -- For all other cases ...
 scores["Mark"] = nil
@@ -894,8 +898,6 @@ are there linters in code formatters for Lua?
 
 learn about metamethods and metatables.
 
-are variables declared inside a function without the local keyword really global?
-\_G.name for global variables?
 The tonumber function takes a string and returns nil if the string cannot be converted to a number.
 is there a toboolean function?
 summarize the constants and functions in the math library and all The Standard, Libraries in markdown tables.
