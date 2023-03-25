@@ -379,7 +379,7 @@ Multi-variable assignment is supported.
 For example:
 
 ```lua
-a, b, c = 1, 2, 3
+local a, b, c = 1, 2, 3
 a, b = b, a -- swaps values
 ```
 
@@ -400,6 +400,14 @@ Lua does not have a dedicated type for single characters.
 
 Strings can be delimited with either single or double quotes.
 For example, `'Hello World!'` or `"Hello World!"`.
+
+Escaping certain characters by preceding them with a backslash
+changes how they are interpreted.
+For example, `\n` produces a newline character,
+`\t` produces a tab character,
+`\"` produces a double quote inside a string delimited by double quotes, and
+`\'` produces a single quote inside a string delimited by single quotes, and
+`\\` produces a backslash character.
 
 Multiline strings are delimiting with `[[` and `]]`.
 For example:
@@ -487,6 +495,11 @@ Lua operators have the following precedence from highest to lowest:
 - `and`
 - `or`
 
+Parentheses can be used to change the
+evaluation order of parts of a long expression.
+For example, `(a + b) / (c - d)` is
+evaluated differently than `a + b / c - d`.
+
 All operators are left associative except for
 `^` and `..` which are right associative.
 For example, `2 ^ 2 ^ 3` is the same as `2 ^ 8` and not `4 ^ 3`.
@@ -521,6 +534,8 @@ let result = condition and trueValue or falseValue
 ## Iteration
 
 ```lua
+-- The loop variable, `i` in this case, is local to the loop
+-- and cannot be accessed outside it.
 for i = 1, 10, 2 do
   ...
 end
@@ -962,18 +977,14 @@ can a function that takes an arbitrary number of arguments specify names for the
 
 do the math library trigonometry functions expect degrees or radians?
 
-can you tell the print function to separate values by a space instead of a tab?
-Cover using\is to escape characters inside a string literal.
-\n and \t and \” and \’ and \\
 does the: syntax for calling a function only work when the variable has a type that maps to a Standard Library like String and number and table and function?
+
 what are all the formatting types that string.format supports? Like %s, %i, and %f.
+
 string.find returns the start and end indexes inclusive
-The local keyword can define multiple variables on a single line.
-ex. local a, b, c = 1, 2, 3
+
 string.gsub returns a new string, and the number of occurrences that were replaced.
-nil is treated the same as false in a condition. all other values are treated as true.
-which operators have higher precedence, comparison or logical? This affects whether parentheses are needed in complex conditions.
+
 Add a table of Lua operators that list them in precedence order from highest to lowest.
 can you set a variable to a condition to get a Boolean value?
-The variable assigned in a for loop is local to the loop.
 while variable and function names can use camel case, the Lua community seems to prefer using underscores.
