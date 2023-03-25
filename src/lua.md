@@ -388,16 +388,19 @@ sentence = string.format("%s's favorite color is %s.", name, color)
 Lua supports the following mathematical operators:
 
 - `+` addition
-- `-` subtraction
+- `-` subtraction or negation
 - `*` multiplication
 - `/` division
 - `%` modulo
+- `^` exponentiation
 
-The ++ and — operators are not supported.
+The `++` and `--` operators found in many other programming languages
+are not supported.
+
 Lua supports the following relational operators:
 
 - `==` equal
-- `~=` not equal
+- `~=` not equal (differs from other languages that use `!=`)
 - `<` less than
 - `>` greater than
 - `<=` less than or equal to
@@ -409,8 +412,25 @@ Lua supports the following logical operators:
 - `or`
 - `not`
 
-Lua does not support shorthand assignment operators like +=.
+Lua only supports one assignment operator which is `=`.
+It does not support shorthand assignment operators like `+=`.
 Adding a number to a variable must be done with `myVar = myVar + n`.
+
+The operator `..` is used to concatenate strings.
+
+Lua operators have the following precedence from highest to lowest:
+
+- `^`
+- `not` and unary `-`
+- `+` and binary `-`
+- `..`
+- `<`, `>`, `<=`, `>=`, `==`, and `~=`
+- `and`
+- `or`
+
+All operators are left associative except for
+`^` and `..` which are right associative.
+For example, `2 ^ 2 ^ 3` is the same as `2 ^ 8` and not `4 ^ 3`.
 
 ## Conditional Logic
 
