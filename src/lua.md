@@ -993,6 +993,4 @@ string.find returns the start and end indexes inclusive
 
 string.gsub returns a new string, and the number of occurrences that were replaced.
 
-Add a table of Lua operators that list them in precedence order from highest to lowest.
 can you set a variable to a condition to get a Boolean value?
-while variable and function names can use camel case, the Lua community seems to prefer using underscores.
