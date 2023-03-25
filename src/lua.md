@@ -493,6 +493,19 @@ end
 print(product(2, 3)) -- 6
 ```
 
+There are two ways to call functions defined in a module/library.
+
+```lua
+-- Approach #1
+library_name.function_name(target_value, arg1, arg2)
+
+-- Approach #2
+-- This implicitly passes `target_value` as the first argument.
+-- Does this only work when the type of `target_value`
+-- matches `library_name`?
+target_value:function_name(arg1, arg2)
+```
+
 ## Utility Functions
 
 The following functions are helpful for debugging.
