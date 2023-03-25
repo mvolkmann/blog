@@ -58,11 +58,12 @@ TODO: Get more from http://notebook.kulchenko.com/programming/lua-good-different
 
 Notable uses of Lua include:
 
-- {% aTargetBlank "https://www.minecraft.net/", "Minecraft" %} game
-- {% aTargetBlank "https://www.roblox.com", "Roblox" %} game
 - {% aTargetBlank "http://www.legoengineering.com/platform/nxt/", "Lego Mindstorms NXT" %}
+- {% aTargetBlank "https://www.minecraft.net/", "Minecraft" %} game
 - {% aTargetBlank "https://neovim.io", "Neovim" %} text editor
 - {% aTargetBlank "https://redis.io", "Redis" %} database
+- {% aTargetBlank "https://www.roblox.com", "Roblox" %} game
+- {% aTargetBlank "https://worldofwarcraft.blizzard.com/", "World of Warcraft" %}
 
 Roblox uses a variant of Lua called Luau.
 TODO: How does that differ?
@@ -94,8 +95,30 @@ For installing in other operating systems, see
 To experiment with Lua on the web without installing anything,
 see {% aTargetBlank "http://www.lua.org/demo.html", "Lua Demo" %}.
 
-For faster performance, use {% aTargetBlank "https://luajit.org/", "LuaJIT" %}.
-To install this:
+### luac
+
+{% aTargetBlank "https://www.lua.org/manual/5.1/luac.html", "luac" %}
+is the standard Lua compiler.
+It enables faster program startup because it compiles a Lua program
+to bytecode before it is run.
+To execute a file containing bytecode, run the `lua` command on it.
+
+By default `luac` creates the file `luac.out`
+Use the `-o` option to change this.
+For example:
+
+```bash
+luac demo.lua -o demo.luac
+lua demo.luac
+```
+
+### LuaJIT
+
+{% aTargetBlank "https://luajit.org/", "LuaJIT" %} is an alternative
+to `luac` that produces smaller bytecode files and
+typically produces bytecode with better performance.
+
+To install LuaJIT:
 
 - Download the source from {% aTargetBlank "", "" %}
   by entering `git clone https://luajit.org/git/luajit.git`.
