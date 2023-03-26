@@ -1035,6 +1035,68 @@ mm.some_function(1, 2)
 print(mm.some_variable)
 ```
 
+## Object Oriented Programming (OOP)
+
+```lua
+-- Define Animal class with properties `name` and `says`.
+Animal = {name = "", says = ""}
+
+-- Animal constructor
+function Animal:new(kind, name, says)
+  setmetatable({}, self)
+
+  -- Set properties.
+  self.kind = kind
+  self.name = name
+  self.says = says
+
+  return self
+end
+
+-- Animal method
+function Animal:toString()
+  local text = "%s is a %s and says %s."
+  return string.format(text, self.name, self.kind, self.says)
+end
+
+-- Create an Animal instance.
+dog = Animal:new("dog", "Comet", "bark")
+
+print(dog.says) -- access property; bark
+print(dog:toString()) -- call method; Comet is a dog and says bark.
+
+-- Define Giraffe class inheriting from the Animal class.
+Giraffe = Animal:new()
+
+-- Giraffe constuctor
+function Giraffe:new(name, height)
+  setmetatable({}, self)
+
+  -- Set superclass properties.
+  self.kind = "giraffe"
+  self.name = name
+  self.says = "nothing"
+
+  -- Set properties unique to this class.
+  self.height = height
+
+  return self
+end
+
+-- Giraffe method
+function Giraffe:report()
+  local text = "%s %s is %d feet tall."
+  return string.format(text, self.name, self.kind, self.height)
+end
+
+-- Create Giraffe instance.
+g = Giraffe:new("Geoffrey", 18) -- creates an instance
+
+print(g.height) -- access property; 18
+print(g:toString()) -- call method; Geoffrey is a giraffe and says nothing.
+print(g:report()) -- call method; Geoffrey giraffe is 18 feet tall.
+```
+
 ## Multitasking
 
 Lua supports collaborative multitasking with coroutines.
@@ -1068,14 +1130,15 @@ Failing to do so often results in programs crashing
 and outputting a stack trace.
 
 The only error handling mechanism Lua provides is the `pcall` function
-(short for "protected call").
-This function is passed a function to execute and
+(short for "protected call"), which can be compared
+to a try block in other programming languages.
+The `pcall` function is passed a function to execute and
 optionally arguments to be passed to it.
 It returns a boolean indicating whether the call completed without error
 and an error message if one did occur.
 
 The `error` function is the Lua equivalent of
-a `throw` statement in many other programming languages.
+a `throw` statement in other programming languages.
 It is passed a message and an optional integer error level.
 The message can be any type, but is typically a string or a table.
 
