@@ -1037,6 +1037,11 @@ print(mm.some_variable)
 
 ## Object Oriented Programming (OOP)
 
+While Lua does not support defining classes and creating instances,
+it can simulate those using metatables.
+The following code demonstrates defining
+classes, properties, constructors, methods, and subclasses.
+
 ```lua
 -- Define Animal class with properties `name` and `says`.
 Animal = {name = "", says = ""}
