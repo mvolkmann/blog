@@ -780,79 +780,126 @@ Instead it uses a combination of tables and functions for everything.
 ### Tables
 
 A Lua table is an associative array.
+Their two primary purposes are be either array-like or dictionary-like,
+although those uses can be combined.
 
-To create a table, surround key/value pairs in curly braces.
-Each key and value are separated by `=`.
-Non-string keys must be encloses in square brackets.
+To create a table that is array-like,
+provide a comma-separated values inside curly braces.
+For example:
 
+```lua
+scores = {5, 2, 7}
+
+names = {"Mark", "Tami"}
+```
+
+To create a table that is dictionary-like,
+provide keys and values inside curly braces.
+String keys only require quotes if
+they contain special characters such as spaces.
+String keys in quotes and non-string keys must be enclosed in square brackets.
+String values must be enclosed in quotes.
+Each key is followed by `=` and its value.
+For example:
+
+```lua
+scores = {Mark=5, Tami=7, ["Unknown Player"]=3} -- uses string keys
+
+words = {[true]="yes", [false]="no"} -- uses boolean keys
+
+months = {[1]="January", [2]="February"} -- uses integer keys
+
+-- This has the same result as the previous line,
+-- but values are specified without keys.
+-- Integer keys are provided starting from 1.
+months = {"January", "February"}
+```
+
+The keys and values in tables can be any kind of value including other tables.
+
+It is possible to create an empty table and fill it later.
 For example:
 
 ```lua
 fill_later = {} -- creates an empty table
 
-scores = {Mark = 7, Tami = 9} -- uses string keys
-
--- For string keys that include special characters such as spaces,
--- enclose them in square brackets and quotes.
-full_scores = {["Mark Volkmann"] = 7, Tami = 9} -- uses string keys
-
-days_in_month = {[1]=31, [2]=28, [3]=31, [4]=30} -- uses number keys
-
--- This has the same result as the previous line,
--- but values are specified without keys.
--- Number keys are provided starting from 1.
-days_in_month = {31, 28, 31, 30}
-
-words = {[true]="yes", [false]="no"} -- uses boolean keys
+fill_later[1] = "Hello"
+fill_later["condition"] = "sunny"
 ```
 
 To get the value corresponding to a table key, use square brackets
 as follows:
 
 ```lua
-print("Tami's score is " .. scores["Tami"]) -- 9
+print("Tami's score is " .. scores["Tami"]) -- 7
 
 -- When a key is not found, the value returned is `nil`.
 print("Mary's score is " .. (scores["Mary"] or "unknown")) -- unknown
 
-print("April has " .. days_in_month[4] .. " days.") -- 30
+print("The second month is " .. months[2] .. ".") -- February
 ```
 
 To iterate over keys and values, use a `for` loop
 with the `pairs` or `ipairs` function.
+
+The `pairs` function visits all the key/value pairs, but not
+necessarily in the order in which they were added to the table.
+
+The `ipairs` function is intended for iterating over array-like tables.
+It only visits the consecutive integer keys starting with `1`.
+As soon as it fails to find the next integer key, it stops.
+
+The code below demonstrates these functions and
+also shows that a table can be both array-like AND dictionary-like.
+
+```lua
+-- The entries `5` and `3` are array-like.
+-- `5` is assigned the key `1` because it is the first array-like entry.
+-- `3` is assigned the key `2` because it is the second array-like entry.
+-- The entries `foo=2` and `bar=4` are dictionary-like.
+t = {5, foo=2, 3, bar=4}
+
+print("keys and values")
+for k, v in pairs(t) do
+  print(k, v)
+end
+-- 1       5
+-- 2       3
+-- bar     4
+-- foo     2
+
+print("indexes and values")
+for i, v in ipairs(t) do
+  print(i, v)
+end
+-- 1       5
+-- 2       3
+```
+
+The `table.insert` function inserts an array-like entry so the
+array-like entries past the insertion point move up by one.
+This can be expensive if a large number of entries need to be moved.
 For example:
 
 ```lua
-for name, score in pairs(scores) do
-  print(name, score) -- Mark 7 and Tami 9 in random order
-end
-
-for index, score in ipairs(scores) do
-  print(index, score) -- 1 7 and 2 9
-end
-```
-
-To add a key/value pair to a table:
-
-To insert a key/value pair into a table that uses
-consecutive integer keys starting from one
-so the keys past the insertion point move up by one:
-
-```lua
 names = {"Mark", "Tami"}
-table.insert(names, 2, "Comet") -- expensive for large tables
-table.insert(names, "Bob") -- pushes onto end
-for k, v in pairs(names) do print(v) end -- Mark Comet Tami Bob
+table.insert(names, 2, "Comet") -- Mark Comet Tami
+table.insert(names, "Bob") -- pushes onto end; Mark Comet Tami Bob
 ```
 
-To remove a key/value pair from a table:
+The `table.remove` function removes an array-like entry
+so the array-like entries past the removal point move down by one.
+This can be expensive if a large number of entries need to be moved.
+For example:
 
 ```lua
--- For tables with consecutive integer keys starting from one
--- where you want the remaining pairs to move down ...
-table.remove(my_table, index) -- expensive for large tables
-last_value = table.remove(my_table) -- pops the last value and returns it
+names = {"Mark", "Comet", "Tami", "Bob"}
+table.remove(names, 2) -- changes to Mark Tami Bob and returns Comet
+-- Omitting the index pops the last entry.
+last_name = table.remove(names) -- changes to Mark Tami and returns Bob
+```
 
+```lua
 -- For all other cases ...
 scores["Mark"] = nil
 ```
