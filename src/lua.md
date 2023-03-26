@@ -918,6 +918,30 @@ t = {5, foo=2, 3, bar=4}
 print(table.concat(t, " and ")) -- 5 and 3
 ```
 
+The `table.sort` function sorts an array-like table in place.
+For example:
+
+```lua
+names = {"Tami", "Mark", "Amanda", "Jeremy"}
+
+-- When no comparator function is specified,
+-- the values are compared using the `<` operator.
+table.sort(names)
+print(table.concat(names, ", ")) -- Amanda, Jeremy, Mark, Tami
+
+-- This specifies a comparator function.
+-- Values with the same length are sorted using the `<` operator.
+-- When values lengths differ, shorter lengths come first.
+table.sort(names, function (a, b)
+  if #a == #b then
+    return a < b
+  else
+    return #a < #b
+  end
+end)
+print(table.concat(names, ", ")) -- Mark, Tami, Amanda, Jeremy
+```
+
 To get the length of an array-like table, use `#my_table`.
 The returns the highest consecutive integer index starting from `1`.
 
@@ -925,6 +949,26 @@ Dictionary-like tables do not store their number of entries.
 To get the count it is necessary to iterate over the table and count them.
 The "Lua Functional" library described later defines a `length` function
 for computing the size of a table, but it has O(n) complexity.
+
+The `table.pack` function provides another way to create an array-like table
+that adds the key `n` which holds the number of entries.
+The value of the `n` is not updated when entries are inserted or removed.
+For example:
+
+```lua
+t = table.pack("Mark", 7, "Tami", 9)
+print(t.n) -- 4
+```
+
+The `table.unpack` function returns consecutive array-like entries
+with keys starting from `1`.
+For example:
+
+```lua
+names = {"Mark", "Tami", "Comet"}
+father, mother, dog = table.unpack(names)
+print(father, mother, dog) -- Mark    Tami    Comet
+```
 
 Table values can be other tables.
 This supports creating the equivalent of multi-dimensional arrays.
