@@ -1011,6 +1011,8 @@ A metatable changes the behavior of a table.
 By default Lua tables do not have a metatable, but one can be added
 with the `setmetatable` function.
 
+TODO: Add much more here!
+
 ## Lua Functional (luafun)
 
 The <a href="https://www.lua.org/manual/5.4/manual.html#6.6"
