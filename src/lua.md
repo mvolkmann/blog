@@ -687,6 +687,28 @@ library_name.function_name(target_value, arg1, arg2)
 target_value:function_name(arg1, arg2)
 ```
 
+## Default Parameter Values
+
+Lua does not provide an explicit way to define
+default values for function parameters.
+A workaround is to implement a function to have table parameter and
+specify default values in that table using the `setmetatable` function.
+
+For example:
+
+```lua
+function volume(t)
+  -- This supplies default values for keys missing in the table t.
+  setmetatable(t, {__index={width=1, height=1, depth=1}})
+  return t.width * t.height * t.depth
+end
+
+print(volume({width=2, height=3, depth=4})) -- 24
+print(volume({width=2, height=3})) -- 6
+print(volume({width=2, depth=4})) -- 8
+print(volume({})) -- 1
+```
+
 ## Utility Functions
 
 The following functions are helpful for debugging.
