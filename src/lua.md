@@ -684,6 +684,7 @@ library_name.function_name(target_value, arg1, arg2)
 -- This implicitly passes `target_value` as the first argument.
 -- Does this only work when the type of `target_value`
 -- matches `library_name`?
+TODO: I'm still confused about this usage!
 target_value:function_name(arg1, arg2)
 ```
 
@@ -1121,13 +1122,13 @@ Files can be opened in one of the following modes
 where the columns indicate the capabilities of each mode:
 
 | Mode | New | Overwrite | Read | Write | Append |
-| ---- | --- | --------- | ---- | ----- | ------ |
-| `r`  |     |           | X    |       |        |
-| `w`  | X   | X         |      | X     |        |
-| `a`  | X   |           |      |       | X      |
-| `r+` |     |           | X    | X     |        |
-| `w+` | X   | X         | X    | X     |        |
-| `a+` | X   |           | X    |       | X      |
+| ---- | :-: | :-------: | :--: | :---: | :----: |
+| `r`  |     |           |  X   |       |        |
+| `w`  |  X  |     X     |      |   X   |        |
+| `a`  |  X  |           |      |       |   X    |
+| `r+` |     |           |  X   |   X   |        |
+| `w+` |  X  |     X     |  X   |   X   |        |
+| `a+` |  X  |           |  X   |       |   X    |
 
 To open a file:
 
