@@ -396,7 +396,7 @@ sets `is_bigger` to `true` or `false`.
 
 ## Numbers
 
-TODO: Are all numbers represented by double-precision floating point?
+Numbers in Lua are all double precision floating point numbers.
 
 ## Strings
 
@@ -901,6 +901,12 @@ dump_table({foo=1, bar=2})
 dump_table{foo=1, bar=2} -- same as previous line
 ```
 
+### Metatables and Metamethods
+
+A metatable changes the behavior of a table.
+By default Lua tables do not have a metatable, but one can be added
+with the `setmetatable` function.
+
 ## Lua Functional (luafun)
 
 The <a href="https://www.lua.org/manual/5.4/manual.html#6.6"
@@ -1253,8 +1259,6 @@ end
 ```
 
 ## Unorganized Content
-
-learn about metamethods and metatables.
 
 summarize the constants and functions in all the standard libraries
 
