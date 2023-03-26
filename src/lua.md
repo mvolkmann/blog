@@ -1,6 +1,6 @@
 ---
 eleventyNavigation:
-key: Lua
+  key: Lua
 layout: topic-layout.njk
 ---
 
