@@ -67,6 +67,7 @@ Notable uses of Lua include:
 
 Roblox uses a variant of Lua called Luau.
 TODO: How does that differ?
+TODO: Learn more about Roblox programming.
 
 For an extensive, see the {% aTargetBlank
 "https://en.wikipedia.org/wiki/List_of_applications_using_Lua",
@@ -818,7 +819,7 @@ months = {"January", "February"}
 
 The keys and values in tables can be any kind of value including other tables.
 
-It is possible to create an empty table and fill it later.
+An empty table can be created and filled later.
 For example:
 
 ```lua
@@ -980,6 +981,13 @@ my2d = {}
 my2d[i] = {}
 my2D[i][j] = "some-value"
 print(my2D[i][j]) -- "some-value"
+
+points = {
+  {x=2, y=3},
+  {x=5, y=1},
+  {x=3, y=7}
+}
+print(points[2].x) -- 5
 ```
 
 When passing a single table to a function,
