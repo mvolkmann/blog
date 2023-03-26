@@ -1128,6 +1128,26 @@ Other functions defined in this library include:
 
 ## File I/O
 
+The following code shows the most basic way to write to a new file.
+If the file already exists, it is overwritten.
+
+```lua
+-- TODO: What does this do if file_path is omitted?
+io.output(file_path)
+io.write(some_string)
+io.close()
+```
+
+The following code shows the most basic way to read from a file.
+
+```lua
+-- TODO: What does this do if file_path is omitted?
+io.input(file_path)
+-- TODO: What arguments does this accept and what do they do?
+local data = io.read()
+io.close()
+```
+
 Files can be opened in one of the following modes
 where the columns indicate the capabilities of each mode:
 
@@ -1369,3 +1389,60 @@ end
 summarize the constants and functions in all the standard libraries
 
 does the: syntax for calling a function only work when the variable has a type that maps to a Standard Library like String and number and table and function?
+
+How do you work with dates and times in Lua?
+Are there functions for formatting them?
+
+Can precede function with local keyword to make it local to the current source file. Correct?
+
+The ternary trick probably doesn’t work if the desired true value is false or nil.
+
+Can assign a default value to a function parameter like this:
+
+function foo(p1)
+p1 = p1 or default_value
+…
+end
+
+Functions don’t specify the type they return or even if they do return a value.
+Functions must use the return keyword to return a value.
+
+Are there recommended Lua linters and code formatters that run outside of VS Code?
+
+What is the difference between these?
+my_var = 1 — Is this only global within the current source file?
+\_G.my_var = 1 — Does this make it accessible outside the current source file?
+
+When getting multiple return values from a function, you can use underscore to act as a placeholder for values you don’t want. ex. pairs function when you don’t want the key or ipairs function when you don’t want the index.
+
+Functions can call themselves recursively.
+
+Did you describe the fact that there is no compact syntax for defining them?
+
+Coroutine status values include running, suspended, normal, and dead (computed or stopped due to error).
+coroutine.resume(my_coroutine) — starts or resumes a coroutine
+
+Can a Lua program create multiple threads that run concurrently?
+What happens if you call coroutine.resume on a coroutine that has a status of dead?
+
+The things in the standard library are “modules”, not “libraries”.
+io.read(…) returns nil if there is no more file content to read.
+There are addition file mode values that include “b” to work with binary files.
+
+Cover the os library.
+os.time() returns ms since 1970 or.a given date/time
+os.difftime() returns ms difference between two times
+os.date()
+os.getenv(“environment-variable-name”)
+os.rename(current_file_path, new_file_path) ?
+os.remove(current_file_path) — deletes the file
+os.execute(shell_command)
+
+To get the time it takes to run some code:
+local start = os.clock()
+— some code here
+print(os.clock() - start)
+
+os.exit(code) — code can be true (exits with EXIT_SUCCESS; default), false (exits with EXIT_FAILURE), or a number
+
+A module source file returns a table containing variables and functions.
