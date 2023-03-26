@@ -143,6 +143,7 @@
     "columnpath",
     "columnspan",
     "composability",
+    "concat",
     "cond",
     "conda",
     "condarc",

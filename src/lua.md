@@ -899,26 +899,30 @@ table.remove(names, 2) -- changes to Mark Tami Bob and returns Comet
 last_name = table.remove(names) -- changes to Mark Tami and returns Bob
 ```
 
+To remove a dictionary-like entry, set its value to `nil`.
+For example:
+
 ```lua
--- For all other cases ...
 scores["Mark"] = nil
 ```
 
-To create a string from a table by concatenating all of its values
-using a given delimiter, use the `concat` function.
-This only works for tables that have consecutive integer keys starting from one
-and values that are strings or numbers.
+The `table.concat` function returns a string created by
+concatenating all of its array-like values using a given delimiter.
+This only includes values for consecutive integer keys starting from one.
 For example:
 
 ```lua
 t = {"Mark", 7, "Tami", 9}
-print(table.concat(t, ", ")) -- "Mark, 7, Tami, 9"
+print(table.concat(t, " and ")) -- "Mark and 7 and Tami and 9"
+t = {5, foo=2, 3, bar=4}
+print(table.concat(t, " and ")) -- 5 and 3
 ```
 
-Tables do not store the number of key/value pairs that they contain.
-To get the count it is necessary to iterate over the table and count the pairs.
-In tables that contain consecutive integer keys starting from one,
-`#table_var` returns the length.
+To get the length of an array-like table, use `#my_table`.
+The returns the highest consecutive integer index starting from `1`.
+
+Dictionary-like tables do not store their number of entries.
+To get the count it is necessary to iterate over the table and count them.
 The "Lua Functional" library described later defines a `length` function
 for computing the size of a table, but it has O(n) complexity.
 
