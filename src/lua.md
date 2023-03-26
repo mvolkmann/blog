@@ -698,7 +698,7 @@ For example:
 
 ```lua
 function volume(t)
-  -- This supplies default values for keys missing in the table t.
+  -- This supplies default values for missing keys in the table t.
   setmetatable(t, {__index={width=1, height=1, depth=1}})
   return t.width * t.height * t.depth
 end
@@ -707,6 +707,26 @@ print(volume({width=2, height=3, depth=4})) -- 24
 print(volume({width=2, height=3})) -- 6
 print(volume({width=2, depth=4})) -- 8
 print(volume({})) -- 1
+```
+
+It's debatable whether this is better than the following approach
+that achieves the same result without using a metatable:
+
+```lua
+function volume(t)
+  local w = t.width or 1
+  local h = t.height or 1
+  local d = t.depth or 1
+  return w * h * d
+end
+```
+
+The `volume` function could also be implemented as follows:
+
+```lua
+function volume(t)
+  return (t.width or 1) * (t.height or 1) * (t.depth or 1)
+end
 ```
 
 ## Utility Functions
