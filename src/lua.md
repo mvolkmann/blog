@@ -844,6 +844,21 @@ my2D[i][j] = "some-value"
 print(my2D[i][j]) -- "some-value"
 ```
 
+When passing a single table to a function,
+it is not necessary to include parentheses.
+For example:
+
+```lua
+function dump_table(t)
+  for k, v in pairs(t) do
+    print(k, v)
+  end
+end
+
+dump_table({foo=1, bar=2})
+dump_table{foo=1, bar=2} -- same as previous line
+```
+
 ## Lua Functional (luafun)
 
 The <a href="https://www.lua.org/manual/5.4/manual.html#6.6"
