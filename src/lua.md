@@ -1028,6 +1028,29 @@ dump_table({foo=1, bar=2})
 dump_table{foo=1, bar=2} -- same as previous line
 ```
 
+The `table.move` function copies entries from one array-like table to another.
+It does not remove entries from the source table.
+Existing destination table entries at target indexes are replaced.
+
+For example:
+
+```lua
+function dump(t)
+  for _, v in ipairs(t) do
+    print("  " .. v)
+  end
+end
+
+t1 = {1, 2, 3}
+t2 = {4, 5, 6}
+-- Copy table t1 elements 1 to 3 into table t2 starting at 4.
+-- The arguments are source table, start index, end index,
+-- destination index, and destination table.
+table.move(t1, 1, 3, 3, t2)
+dump(t1) -- 1 2 3
+dump(t2) -- 4 5 1 2 3; existing value 6 was replaced with 1
+```
+
 ### Metatables
 
 A metatable changes the behavior of a table.
