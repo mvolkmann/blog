@@ -1041,6 +1041,7 @@ TODO: Add much more here!
 TODO: See your metamethods.lua file.
 
 Metamethods enable defining the functionality of Lua operators.
+TODO: Verify that all of these work. Maybe \_\_le isn't supported.
 
 | Metamethod | Operator    |
 | ---------- | ----------- |
@@ -1055,7 +1056,7 @@ Metamethods enable defining the functionality of Lua operators.
 | `__eq`     | `==`        |
 | `__ne`     | `~=`        |
 | `__lt`     | `<`         |
-| `__le`     | `,=`        |
+| `__le`     | `<=`        |
 | `__gt`     | `>`         |
 | `__ge`     | `>=`        |
 | `__unm`    | `-` (unary) |
