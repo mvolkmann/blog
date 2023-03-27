@@ -1237,12 +1237,21 @@ Animal = {name = "", says = ""}
 
 -- Animal constructor
 function Animal:new(kind, name, says)
+  -- TODO: This must return a table, but it's not
+  -- TODO: clear that it needs to have a metatable.
+  -- `self` is a special variable name, not a keyword.
   setmetatable({}, self)
 
   -- Set properties.
   self.kind = kind
   self.name = name
   self.says = says
+
+  -- Define methods.
+  -- TODO: It seems each instance will have its own copy of every method.
+  self.someMethod = function (p1, p2)
+    -- Implement the method.
+  end
 
   return self
 end
@@ -1275,6 +1284,13 @@ function Giraffe:new(name, height)
   self.height = height
 
   return self
+
+  -- TODO: Maybe all the code above can be replaced by the following:
+  --[[
+  instance = Animal("giraffe", name, "nothing")
+  instance.height = height
+  return instance
+  ]]
 end
 
 -- Giraffe method
@@ -1446,3 +1462,6 @@ print(os.clock() - start)
 os.exit(code) — code can be true (exits with EXIT_SUCCESS; default), false (exits with EXIT_FAILURE), or a number
 
 A module source file returns a table containing variables and functions.
+
+There are probably many variable assignments in the
+examples here that should be preceded by `local`.
