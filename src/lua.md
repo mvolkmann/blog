@@ -1028,13 +1028,57 @@ dump_table({foo=1, bar=2})
 dump_table{foo=1, bar=2} -- same as previous line
 ```
 
-### Metatables and Metamethods
+### Metatables
 
 A metatable changes the behavior of a table.
 By default Lua tables do not have a metatable, but one can be added
 with the `setmetatable` function.
 
 TODO: Add much more here!
+
+## Metamethods
+
+TODO: See your metamethods.lua file.
+
+Metamethods enable defining the functionality of Lua operators.
+
+| Metamethod | Operator    |
+| ---------- | ----------- |
+| `__add`    | `+`         |
+| `__sub`    | `-`         |
+| `__mul`    | `*`         |
+| `__div`    | `/`         |
+| `__mod`    | `%`         |
+| `__pow`    | `^`         |
+| `__concat` | `..`        |
+| `__len`    | `#`         |
+| `__eq`     | `==`        |
+| `__ne`     | `~=`        |
+| `__lt`     | `<`         |
+| `__le`     | `,=`        |
+| `__gt`     | `>`         |
+| `__ge`     | `>=`        |
+| `__unm`    | `-` (unary) |
+
+Metamethods also support implementing functions
+that are called when specific things occur.
+
+| Metamethod    | Operator                                        |
+| ------------- | ----------------------------------------------- |
+| `__call`      | called when the table is called like a function |
+| `__gc`        | called after garbage collection runs            |
+| `__index`     | called if a key is not found in the table       |
+| `__metatable` | prevents changes to metatable; see below        |
+| `__mode`      | returns a string; see below                     |
+| `__newindex`  | called when an entry is added to the table      |
+| `__tostring`  | returns a string representation                 |
+
+When the `__metatable` function is defined,
+the metatable cannot be modified and this returns an error message.
+
+When the `__mode` function returns a string that contains `k`,
+keys are weak. When it contains `v`, values are weak.
+Both can be true.
 
 ## Lua Functional (luafun)
 
@@ -1423,6 +1467,11 @@ while true do
 end
 ```
 
+## Games
+
+{% aTargetBlank "https://love2d.org", "LÖVE" %}
+is a Lua framework for building 2D games.
+
 ## Unorganized Content
 
 summarize the constants and functions in all the standard libraries
@@ -1488,3 +1537,12 @@ A module source file returns a table containing variables and functions.
 
 There are probably many variable assignments in the
 examples here that should be preceded by `local`.
+
+A Lua “package” is a collection of modules.
+
+Modules in the standard library like io and table do not need to be imported to use them.
+
+Cover the `self` special variable.
+
+OO-like objects hold their properties and methods in a table.
+Does each object get its own copy of every method?
