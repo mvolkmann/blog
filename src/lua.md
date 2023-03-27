@@ -599,6 +599,9 @@ This is longest keyword in Lua.
 It's too bad the designers didn't choose a shorter keyword
 like `func`, `fun`, or `fn`.
 
+Parameters are specified in parentheses after the function name
+and are separated by commas.
+
 For example:
 
 ```lua
@@ -607,6 +610,26 @@ function add(n1, n2)
 end
 
 print(add(2, 3)) -- 5
+```
+
+Primitive parameters are passed by value
+and tables are passed by reference.
+For example:
+
+```lua
+function foo(b, n, s, t)
+  b = true
+  n = 2
+  s = "yes"
+  t.x = 2
+end
+
+b = false
+n = 1
+s = "no"
+t = {x = 1}
+foo(b, n, s, t)
+print(b, n, s, t.x) -- false 1 no 2
 ```
 
 Functions in Lua are first-class.
