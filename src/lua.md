@@ -1053,9 +1053,28 @@ dump(t2) -- 4 5 1 2 3; existing value 6 was replaced with 1
 
 ### Metatables
 
-A metatable changes the behavior of a table.
-By default Lua tables do not have a metatable, but one can be added
-with the `setmetatable` function.
+A metatable is a table that defines metamethods.
+All metamethods have names that begin with two underscores.
+Examples include `__add` which defines how the `+` operator works and
+`__index` which defines the value that should be returned
+when an attempt is made to access a missing key in a table.
+
+By default tables do not have a metatable.
+A metatable only becomes useful when it is assigned to a table.
+This is done with the `setmetatable(table, metatable)` function.
+This returns its first argument which is useful when a literal table is passed.
+The same metatable can be assigned to multiple tables.
+The `getmetatable(table)` function returns the metatable that has been
+assigned to a given table or `nil` if one has not be assigned.
+
+An important use of metatables is simulating the
+object-oriented programming concepts of classes and inheritance.
+
+The `__index` method can be implemented in two ways.
+It can be a table that supplies default values for missing properties
+or it can be a function that is passed the ? table and a key.
+
+TODO: Get examples from metatables.lua!
 
 TODO: Add much more here!
 
