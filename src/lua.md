@@ -1592,6 +1592,29 @@ end
 
 {% aTargetBlank "https://love2d.org", "LÖVE" %}
 is a Lua framework for building 2D games.
+It can be downloaded from the previous link.
+
+For macOS, click the "64-bit zipped" link under "macOS" to download `love.app`.
+Drag this file into the "Applications" directory.
+Double-click `love.app` to launch the app.
+This will fail the first time with the message
+"love.app cannot be opened because the developer cannot be verified".
+To fix this, open the Settings app, select "Privacy & Security",
+scroll down to "love.app was blocked ..." and click the "Open Anyway" button.
+
+Create a directory for a new game.
+Create a file in this directory named "main.lua".
+
+If using VS Code:
+
+- Install the extension "Love2D Support" from Pixelbyte Studios.
+- Click the gear icon and select "Extension Settings".
+- Change "Pixelbyte > love2d: Path" to
+  "/Applications/love.app/Contents/MacOS/love".
+- Open a "main.lua" file in an editor tab.
+- Press cmd-l to run the game.
+
+TODO: See lua/love-game/main.lua.
 
 ## Unorganized Content
 
