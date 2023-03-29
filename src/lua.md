@@ -1062,11 +1062,13 @@ There are two syntaxes for defining table functions outside a table literal:
 - `MyTable.my_function(p1, p2)` referred to below as a "dot function"
 - `MyTable:my_function(p1, p2)` referred to below as a "colon function"
 
-Dot functions should always be called with a dot, not a colon.
+Dot functions are somewhat like object-oriented class methods.
+They should always be called with a dot, not a colon.
 For example, `MyTable.my_function(v1, v2)`.
 
-Colon functions are supplied with a hidden first parameter named `self`.
-Dot functions are not.
+Colon functions are like object-oriented instance methods.
+They are supplied with a hidden first parameter named `self`,
+whereas dot functions are not.
 
 Colon functions should always be called with a colon, not a dot.
 For example, `MyTable:my_function(v1, v2)`.
