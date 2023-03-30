@@ -1811,3 +1811,5 @@ Cover the `self` special variable.
 
 OO-like objects hold their properties and methods in a table.
 Does each object get its own copy of every method?
+
+{% include "_intersection-observer-headings.html" %}
