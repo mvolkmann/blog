@@ -1205,6 +1205,78 @@ so it can access the class table using the `self` variable.
 
 ### Simplifying
 
+The following `class` function defined in the file `oop.lua`
+greatly simplifies creating Lua tables that simulate OOP classes.
+
+```lua
+-- The `defaults` parameter is a table that holds default property values
+-- and optional metamethods like `__tostring`.
+function class(defaults)
+  assert(type(defaults) == "table")
+
+  local metatable = {__index = defaults}
+
+  -- Copy functions starting with "__" from `defaults` to `metatable`
+  -- and remove them from `defaults`.
+  for k, v in pairs(defaults) do
+    if k:find("__", 1, true) == 1 then
+      metatable[k] = v
+      defaults[k] = nil
+    end
+  end
+
+  -- Create and return a table to represent the class.
+  return {
+    -- The `new` function creates and returns an instance.
+    new = function(initial)
+      local instance = initial or {}
+      setmetatable(instance, metatable)
+      return instance
+    end
+  }
+end
+```
+
+The following code demonstates using the `class` method defined above.
+
+```lua
+require "oop"
+
+Point = class({
+  -- Properties
+  x = 0,
+  y = 0,
+
+  -- Methods
+  distanceFromOrigin = function(p)
+    return math.sqrt(p.x ^ 2 + p.y ^ 2)
+  end,
+  print = function(p)
+    print(p) -- uses __tostring below
+  end,
+
+  -- Metamethods
+  __add = function(p1, p2)
+    return Point.new({x = p1.x + p2.x, y = p1.y + p2.y})
+  end,
+  __tostring = function(p)
+    return string.format("(%.2f, %.2f)", p.x, p.y)
+  end
+})
+
+p1 = Point.new({x = 3, y = 4})
+print("p1 is", p1) -- p1 is   (3.00, 4.00)
+p1:print() -- (3.00, 4.00)
+print("distance = " .. p1:distanceFromOrigin()) -- 5.0
+
+p2 = Point.new({x = 5, y = 1})
+p3 = p1 + p2
+p3:print() -- (8.0, 5.0)
+
+p4 = Point.new({y = 7})
+p4:print() -- (0.00, 7.00)
+```
+
 ## Metamethods
 
 TODO: See your metamethods.lua file.
