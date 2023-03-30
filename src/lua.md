@@ -1129,32 +1129,81 @@ MyTable:colonOuter(1, 2) -- self = MyTable, p1 = 1, p2 = 2
 MyTable.colonOuter(MyTable, 1, 2) -- self = MyTable, p1 = 1, p2 = 2
 ```
 
-### Metatables
+## Metatables
 
 A metatable is a table that defines metamethods.
 All metamethods have names that begin with two underscores.
-Examples include `__add` which defines how the `+` operator works and
+Examples include
+`__tostring` which defines the string representation of a table,
+`__add` which defines how the `+` operator adds a value to a table, and
 `__index` which defines the value that should be returned
 when an attempt is made to access a missing key in a table.
 
 By default tables do not have a metatable.
 A metatable only becomes useful when it is assigned to a table.
 This is done with the `setmetatable(table, metatable)` function.
-This returns its first argument which is useful when a literal table is passed.
+
+The `setmetatable` function returns its first argument
+which is useful when a literal table is passed.
 The same metatable can be assigned to multiple tables.
+
 The `getmetatable(table)` function returns the metatable that has been
 assigned to a given table or `nil` if one has not be assigned.
 
-An important use of metatables is simulating the
-object-oriented programming concepts of classes and inheritance.
-
 The `__index` method can be implemented in two ways.
 It can be a table that supplies default values for missing properties
-or it can be a function that is passed the ? table and a key.
+or it can be a function that is passed an associated table and a key.
 
 TODO: Get examples from metatables.lua!
 
 TODO: Add much more here!
+
+### Table Delegation
+
+### Classes
+
+Lua does include support for defining classes and creating instances.
+However, these can be simulated using a combination of tables,
+metatables, and function.
+
+A class can be represented by a table.
+A `new` function can be added to the table and used to
+create instances which are represented by new tables.
+There is nothing special about the name "new",
+but many other programming languages use that name for creating instances
+of a class, so it's a good idea to stick with that convention.
+
+The `new` function should:
+
+- Create a new table to represent the instance OR
+  use a table that is passed in.
+- Associated a metatable with the new table
+  that holds default property values and
+  functions that act as methods of the class.
+- Return the table that represents the instance.
+
+There are a few common approaches for implementing all of this.
+
+Approach #1:
+
+The metatable can be a separate table defined outside the new function
+in a variable.
+
+Approach #2:
+
+The metatable can be a property of the class table.
+
+Approach #3:
+
+The metatable can be the class table itself.
+This approach requires defining the `new` function with a colon
+so it can access the class table using the `self` variable.
+
+### Inheritance
+
+### Multiple Inheritance
+
+### Simplifying
 
 ## Metamethods
 
