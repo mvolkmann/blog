@@ -84,6 +84,9 @@ For an extensive, see the {% aTargetBlank
 
 - {% aTargetBlank "https://www.lua.org/manual/", "Lua Reference Manual" %}
 - {% aTargetBlank "https://www.amazon.com/exec/obidos/ASIN/8590379868/lua-pilindex-20", "Programming in Lua" %} book
+- {% aTargetBlank "https://github.com/nanotee/nvim-lua-guide", "Getting started using Lua in Neovim" %}
+- {% aTargetBlank "https://www.lua.org/pil/", "Programming in Lua" %} official book
+- {% aTargetBlank "", "" %}
 
 ## Cheat Sheets
 
@@ -387,6 +390,7 @@ The `type(someVar)` function returns a string containing
 the type name of the variable value.
 This can be `nil`, `boolean`, `number`, `string`,
 `table`, `function`, or `thread`.
+TODO: Is `userdata` a type?
 
 Multi-variable assignment is supported.
 For example:
@@ -674,7 +678,7 @@ until condition
 ```
 
 Loops can use the `break` keyword to exit, but the `continue` keyword
-for advancing to the next iteration is not supported.
+for advancing to the next iteration is not currently supported.
 
 ## Functions
 
@@ -707,6 +711,11 @@ From the Lua reference manual:
 This means that if a function has only one argument and
 the argument is either a literal string or a table constructor,
 calls to the function do not require parentheses.
+
+To avoid writing functions that take a large number of arguments,
+use a parameter that expects a table.
+This simulates having named arguments and
+allows values to be specified in any order.
 
 Primitive parameters are passed by value
 and tables are passed by reference.
@@ -1102,12 +1111,14 @@ print(t.n) -- 4
 
 The `table.unpack` function returns consecutive array-like entries
 with keys starting from `1`.
+It does not work with dictionary-like tables.
 For example:
 
 ```lua
 names = {"Mark", "Tami", "Comet"}
 father, mother, dog = table.unpack(names)
 print(father, mother, dog) -- Mark    Tami    Comet
+print(table.unpack(names)) -- same
 ```
 
 Table values can be other tables.
@@ -1710,6 +1721,8 @@ Constants defined by this library include:
 - `math.mininteger` - minimum integer value
 - `math.pi` - value of π
 
+A constant for `e` is not defined, but it can be obtained from `math.exp(1)`.
+
 Trigonometry functions defined by this library include
 `sin`, `cos`, `tan`, `asin`, `acos`, and `atan`.
 All of these take and return angles in radians.
@@ -2037,7 +2050,8 @@ TODO: Add detail on calling Lua from C.
 
 {% aTargetBlank "https://love2d.org", "LÖVE" %}
 is a Lua framework for building 2D games.
-It can be downloaded from the previous link.
+It is free and open source.
+LÖVE can be downloaded from the previous link.
 
 For macOS, click the "64-bit zipped" link under "macOS" to download `love.app`.
 Drag this file into the "Applications" directory.
@@ -2072,6 +2086,25 @@ the number of seconds requires to display each frame.
 This value can vary among devices.
 For example, when `dt` is `0.1`, the device displays 10 frames per second.
 This is used to make game updates frame rate independent.
+
+Add a `conf.lua` file to your game project directory
+to configure the game. For example:
+
+```lua
+function love.conf(t)
+  t.title = "My Game"
+  t.version = "1.2.3"
+  t.console = true
+  t.window.width = 1280
+  t.window.height = 720
+end
+```
+
+To run a game, use one of these approaches:
+
+- Drag the game directory onto the Love application icon.
+- If VS Code has been configured property, press cmd-l.
+- TODO: Other options?
 
 TODO: See lua/love-game/main.lua.
 
@@ -2151,3 +2184,44 @@ OO-like objects hold their properties and methods in a table.
 Does each object get its own copy of every method?
 
 {% include "_intersection-observer-headings.html" %}
+
+you can use the or operator to avoid setting instance values to know when they are missing in the passed table.
+but beware of cases where are the table passed in contains false values because those will not be used if you simply check with the or operator.
+
+this video suggest multiple ways to handle this: https://youtu.be/IQf82d3cr20
+
+Use the assert function to test a condition and crash the program if it is not true.
+The assert function takes a condition and a message.
+ex. assert(type(param) == “table”), “The argument must be a table.”)
+add this to the error handling section of your Lua blog page.
+
+function foo(p1, p2) is just syntactic sugar for foo = function (p1, p2)
+
+did you say that the table.sort function sorts a table in place?
+
+assigning a table to a variable assigns the reference, not a copy of the table.
+
+In the table section, describe copying tables like the following.
+Is there a way to make a deep copy? Maybe something recursive?
+
+```lua
+t = {"alpha", {"beta", "gamma"}}
+for k, v in pairs(t) do
+  print(k, v)
+end
+
+-- This makes a shallow copy.
+copy = {table.unpack(t)}
+for k, v in pairs(copy) do
+  print(k, v)
+end
+
+-- This wraps the approach above in a function.
+function table.copy(source)
+  return {table.unpack(source)}
+end
+copy2 = table.copy(t)
+for k, v in pairs(copy2) do
+  print(k, v)
+end
+```
