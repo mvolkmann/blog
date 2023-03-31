@@ -56,7 +56,8 @@ Cons of Lua include:
 - lack of support for object oriented programming (OOP),
   although it can be simulated with metatables and functions
 - limited support for error handling (see the `error` and `pcall` functions)
-- limited support for regular expressions
+- limited support for string pattern matching, using
+  string "patterns" which are a simplified version of regular expressions
 
 TODO: Get more from http://notebook.kulchenko.com/programming/lua-good-different-bad-and-ugly-parts.
 
@@ -366,6 +367,8 @@ To assign a value to a variable, use the `=` operator.
 
 Variables are global by default.
 Use the `local` keyword to make them only exist in their scope.
+It's too bad the designers didn't choose to make variables local by default
+and use a `global` keyword to make them exist outside their scope.
 
 For example:
 
@@ -455,8 +458,8 @@ String operations include:
   `string.find(source, target)` or `source:find(target)`
 - uppercase: `string.upper(var)` or `var:upper()`
 - lowercase: `string.lower(var)` or `var:lower()`
-- regular expression matches:
-  `string.match(someString, 'regular-expression')` returns a table of matches?
+- pattern matches:
+  `string.match(someString, 'pattern')` returns a table of matches?
 
 Some common string operations are not directly supported.
 For example, there are no functions that test whether a string
@@ -515,6 +518,44 @@ name = "Mark"
 color = "yellow"
 sentence = string.format("%s's favorite color is %s.", name, color)
 ```
+
+### Patterns
+
+A Lua pattern is a string containing character classes and magic characters.
+
+The character classes include:
+
+| Character Class | Meaning                             |
+| --------------- | ----------------------------------- |
+| `.`             | all characters                      |
+| `%a`            | letters                             |
+| `%c`            | control characters                  |
+| `%d`            | digits                              |
+| `%l`            | lower case letters                  |
+| `%p`            | punctuation characters              |
+| `%s`            | space characters                    |
+| `%u`            | upper case letters                  |
+| `%w`            | alphanumeric characters             |
+| `%x`            | hexadecimal digits                  |
+| `%z`            | the character with representation 0 |
+
+The magic characters include:
+
+| Magic Character | Meaning |
+| --------------- | ------- |
+| `(`             |         |
+| `)`             |         |
+| `.`             |         |
+| `%`             |         |
+| `+`             |         |
+| `-`             |         |
+| `*`             |         |
+| `?`             |         |
+| `[`             |         |
+| `^`             |         |
+| `$`             |         |
+
+TODO: Add content from https://www.lua.org/pil/20.2.html.
 
 ## Operators
 
@@ -901,7 +942,8 @@ months = {[1]="January", [2]="February"} -- uses integer keys
 months = {"January", "February"}
 ```
 
-The keys and values in tables can be any kind of value including other tables.
+The keys and values in tables can be any kind of value
+including other tables nested to any level.
 
 There are two ways to assign a key/value pair to a table.
 
@@ -1891,7 +1933,8 @@ print(g:report()) -- call method; Geoffrey giraffe is 18 feet tall.
 
 ## Multitasking
 
-Lua supports collaborative multitasking with coroutines.
+Lua is single-threaded like JavaScript.
+It supports collaborative multitasking with coroutines.
 Coroutines are like threads, but they do not run in parallel.
 
 ```lua
@@ -1912,6 +1955,8 @@ v3 = coroutine.resume(co) -- "value #3"
 v4 = coroutine.resume(co) — error
 print(coroutine.status(co)) -- "suspended"
 ```
+
+TODO: How can you create concurrently running threads in Lua?
 
 ## Error Handling
 
@@ -1981,6 +2026,12 @@ while true do
   end
 end
 ```
+
+# C Integration
+
+TODO: Add detail on calling C from Lua.
+
+TODO: Add detail on calling Lua from C.
 
 ## Games
 
