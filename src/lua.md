@@ -450,22 +450,37 @@ String operations include:
   `string.match(someString, 'regular-expression')` returns a table of matches?
 
 Some common string operations are not directly supported.
-For example, there is no function that tests whether
-a string contains a substring and returns a boolean.
-We can define this using the provided `find` function
+For example, there are no functions that test whether a string
+contains, starts with, or ends with a substring.
+We can define these using the provided `find` function
 as follows:
 
 ```lua
-text = "This is a test of our contains function."
-
 function string.contains(source, target)
   return source:find(target, 1, true) ~= nil
 end
 
--- This can be called in two ways.
+function string.startsWith(source, target)
+  return source:find(target, 1, true) == 1
+end
+
+function string.endsWith(source, target)
+  startIndex, endIndex = source:find(target, 1, true)
+  return endIndex == #source
+end
+
+text = "This is used to test of our new functions."
+
+-- These functions can be called in two ways.
 print(string.contains(text, "test")) -- true
 print(text:contains("test")) -- true
+
+-- More example calls
 print(text:contains("missing")) -- false
+print(text:startsWith("This")) -- true
+print(text:startsWith("Test")) -- false
+print(text:endsWith("functions.")) -- true
+print(text:endsWith("test.")) -- false
 ```
 
 Lua does not support string interpolation.
@@ -1324,6 +1339,10 @@ made available in multiple sources files with a `require` statement.
 The `class` function can be defined as follows:
 
 ```lua
+function string.startsWith(source, target)
+  return source:find(target, 1, true) == 1
+end
+
 -- The `defaults` parameter is a table that holds default property values
 -- and optional metamethods like `__tostring`.
 -- Metamethods will be described later.
@@ -1338,7 +1357,7 @@ function class(defaults)
     -- This tests whether `k` begins with two underscores.
     -- 1 is the index at which to start the search.
     -- true turns of regular expressions.
-    if k:find("__", 1, true) == 1 then
+    if k:startsWith("__") then
       metatable[k] = v
       defaults[k] = nil
     end
