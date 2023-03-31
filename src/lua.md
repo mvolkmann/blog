@@ -6,12 +6,18 @@ layout: topic-layout.njk
 
 ## Overview
 
+<img alt="Lua logo" style="width: 40%"
+    src="/blog/assets/lua-logo.svg?v={{pkg.version}}"
+    title="Lua logo">
+
 {% aTargetBlank "https://www.lua.org/", "Lua" %} is a
 dynamically typed scripting language created in 1993
 by a team at {% aTargetBlank "http://www.puc-rio.br",
 "Pontifical Catholic University of Rio de Janeiro" %} in Brazil.
 
-The Lua programming language was named after the Moon.
+The Portuguese word "Lua" means "Moon".
+The logo depicts the Moon orbiting around the Earth
+and its shadow being cast onto the Earth.
 
 Lua has an interpreter and a virtual machine.
 The interpreter is written in C and
@@ -348,10 +354,13 @@ end
 ## Variables
 
 Variable names can contain letters, digits, and underscores,
-but cannot start with a digit. Hyphens are not allowed.
+but not any other symbols.
+They cannot start with a digit.
 In multi-word names the words can be separated by underscores (preferred)
 or written in camel-case.
 For example, `one_long_name` or `oneLongName`.
+
+Variable names, function names, and table keys are case-sensitive.
 
 To assign a value to a variable, use the `=` operator.
 
@@ -894,6 +903,17 @@ months = {"January", "February"}
 
 The keys and values in tables can be any kind of value including other tables.
 
+There are two ways to assign a key/value pair to a table.
+
+```lua
+point = {x = 0, y = 0}
+point["x"] = 1
+
+-- If the key is a valid variable name then
+-- a value can be assigned using a dot as follows:
+point.x = 1 -- same as previous line
+```
+
 An empty table can be created and filled later.
 For example:
 
@@ -902,6 +922,7 @@ fill_later = {} -- creates an empty table
 
 fill_later[1] = "Hello"
 fill_later["condition"] = "sunny"
+fill_later.condition = "sunny" -- sames
 ```
 
 To get the value corresponding to a table key, use square brackets
@@ -1115,8 +1136,15 @@ There are two syntaxes for defining table functions outside a table literal:
 - `MyTable:my_function(p1, p2)` referred to below as a "colon function"
 
 Dot functions are somewhat like object-oriented class methods.
-They should always be called with a dot, not a colon.
-For example, `MyTable.my_function(v1, v2)`.
+They can be called with a dot and sometimes with a colon.
+For example:
+
+```lua
+MyTable.my_function(v1, v2)
+
+-- Using a colon is only allowed when v1 has its metatable set to MyTable.
+v1:my_function(v2)
+```
 
 Colon functions are like object-oriented instance methods.
 They are supplied with a hidden first parameter named `self`,
@@ -1979,6 +2007,20 @@ If using VS Code:
   "/Applications/love.app/Contents/MacOS/love".
 - Open a "main.lua" file in an editor tab.
 - Press cmd-l to run the game.
+
+Love2D programs always define the functions
+`love.load()`, `love.draw()`, and `love.update(dt)`.
+The `love.load()` function performs initial game setup.
+The `love.draw()` function specifies what should be
+drawn on the screen at any point in time.
+The `love.update(dt)` function implements the game logic.
+
+The parameter `dt` in the `love.update` function is short for "delta time".
+It is a floating point number that indicates
+the number of seconds requires to display each frame.
+This value can vary among devices.
+For example, when `dt` is `0.1`, the device displays 10 frames per second.
+This is used to make game updates frame rate independent.
 
 TODO: See lua/love-game/main.lua.
 
