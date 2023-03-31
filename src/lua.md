@@ -859,6 +859,9 @@ although those uses can be combined.
 
 To create a table that is array-like,
 provide a comma-separated values inside curly braces.
+Curly braces are only used to construct tables.
+They are not used to delimit blocks of code.
+
 For example:
 
 ```lua
