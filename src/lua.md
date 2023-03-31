@@ -801,6 +801,9 @@ It is used to represent arrays, dictionaries, trees, and graphs.
 
 Lua does not support defining classes.
 Instead it uses a combination of tables and functions for everything.
+However, the combination of functions, tables, and metatables
+can be used to simulate classes.
+See the "Metatables" section for details.
 
 ### Tables
 
@@ -1136,29 +1139,66 @@ All metamethods have names that begin with two underscores.
 Examples include
 `__tostring` which defines the string representation of a table,
 `__add` which defines how the `+` operator adds a value to a table, and
-`__index` which defines the value that should be returned
+`__index` which determines the value that should be returned
 when an attempt is made to access a missing key in a table.
 
 By default tables do not have a metatable.
 A metatable only becomes useful when it is assigned to a table.
 This is done with the `setmetatable(table, metatable)` function.
+The same metatable can be assigned to multiple tables.
 
 The `setmetatable` function returns its first argument
 which is useful when a literal table is passed.
-The same metatable can be assigned to multiple tables.
 
 The `getmetatable(table)` function returns the metatable that has been
-assigned to a given table or `nil` if one has not be assigned.
+assigned to a given table or `nil` if one has not been assigned.
 
 The `__index` method can be implemented in two ways.
 It can be a table that supplies default values for missing properties
-or it can be a function that is passed an associated table and a key.
+or it can be a function that is passed a table and a key.
+We will see both approaches below.
 
 TODO: Get examples from metatables.lua!
 
 TODO: Add much more here!
 
 ### Table Delegation
+
+The simplest use of metatables is to associated one with a single table.
+The following code demonstrates this.
+
+```lua
+my_table = {alpha = 7}
+print(getmetatable(my_table)) -- nil; no metatable assigned yet
+
+-- Create a metatable containing one metamethod named `__index`.
+-- Its value is a table holding default key/value pairs.
+my_metatable = {__index = {alpha = 1, beta = 2}}
+
+-- Associated the metatable with the table.
+setmetatable(my_table, my_metatable)
+
+print(my_table.alpha, my_table.beta, my_table.gamma) -- 7 2 nil
+```
+
+There is no need to hold the metatable in a variable.
+It can be assigned directly to the table as follows:
+
+```lua
+setmetatable(my_table, {__index = {alpha = 1, beta = 2}})
+```
+
+Instead of defining a separate table for the metatable,
+we can make the table serve as its own metatable as follows:
+
+```lua
+my_table.__index = {alpha = 1, beta = 2}
+setmetatable(my_table, my_table)
+```
+
+All these variations produce the same results.
+A downside is that you many encounter all of these approaches
+in code that others write, so it is necessary to understand all of them.
 
 ### Classes
 
@@ -1186,12 +1226,44 @@ There are a few common approaches for implementing all of this.
 
 Approach #1:
 
-The metatable can be a separate table defined outside the new function
-in a variable.
+The metatable can be a separate table defined
+outside the `new` function in a variable.
+
+```lua
+-- Define a Shape class.
+Shape = {name = "unknown", sides = 0}
+local metatable = {__index = Shape}
+
+-- Constructor
+function Shape.new(name, sides)
+  local instance = setmetatable({}, metatable)
+  instance.name = name
+  instance.sides = sides
+  return instance
+end
+
+-- Method
+function Shape:report()
+  print(string.format("%s has %d sides", self.name, self.sides))
+end
+
+my_shape = Shape.new("triangle", 3)
+my_shape:report() -- triangle has 3 sides
+```
 
 Approach #2:
 
 The metatable can be a property of the class table.
+
+This only requires the following minor changes to the code in Approach #1.
+
+```lua
+-- Replace the line starting with `local metatable` with this.
+Shape.metatable = {__index = Shape}
+
+-- Replace the line starting with `local instance` with this.
+local instance = setmetatable({}, Shape.metatable)
+```
 
 Approach #3:
 
@@ -1199,26 +1271,42 @@ The metatable can be the class table itself.
 This approach requires defining the `new` function with a colon
 so it can access the class table using the `self` variable.
 
-### Inheritance
+This only requires the following minor changes to the code in Approach #2.
 
-### Multiple Inheritance
+```lua
+-- Replace the line starting with `Shape.metatable =` with this.
+Shape.__index = Shape
 
-### Simplifying
+-- Replace the line starting with `local instance` with this.
+local instance = setmetatable({}, Shape)
+```
 
-The following `class` function defined in the file `oop.lua`
-greatly simplifies creating Lua tables that simulate OOP classes.
+### Simplifying Classes
+
+There is a fair amount boilerplate code in the examples above
+and plenty of opportunity to make mistakes.
+We can address this by writing a `class` function
+that does all the work for us.
+It could be defined in the file `oop.lua` and then
+made available in multiple sources files with a `require` statement.
+
+The `class` function can be defined as follows:
 
 ```lua
 -- The `defaults` parameter is a table that holds default property values
 -- and optional metamethods like `__tostring`.
+-- Metamethods will be described later.
 function class(defaults)
   assert(type(defaults) == "table")
 
   local metatable = {__index = defaults}
 
-  -- Copy functions starting with "__" from `defaults` to `metatable`
-  -- and remove them from `defaults`.
+  -- Copy all the metamethod functions (start with "__")
+  -- from `defaults` to `metatable` and remove them from `defaults`.
   for k, v in pairs(defaults) do
+    -- This tests whether `k` begins with two underscores.
+    -- 1 is the index at which to start the search.
+    -- true turns of regular expressions.
     if k:find("__", 1, true) == 1 then
       metatable[k] = v
       defaults[k] = nil
@@ -1237,7 +1325,7 @@ function class(defaults)
 end
 ```
 
-The following code demonstates using the `class` method defined above.
+The following code demonstrates using the `class` function defined above.
 
 ```lua
 require "oop"
@@ -1267,15 +1355,19 @@ Point = class({
 p1 = Point.new({x = 3, y = 4})
 print("p1 is", p1) -- p1 is   (3.00, 4.00)
 p1:print() -- (3.00, 4.00)
-print("distance = " .. p1:distanceFromOrigin()) -- 5.0
+print("distance = " .. p1:distanceFromOrigin()) -- distance = 5.0
 
 p2 = Point.new({x = 5, y = 1})
-p3 = p1 + p2
+p3 = p1 + p2 -- uses the __add metamethod
 p3:print() -- (8.0, 5.0)
 
 p4 = Point.new({y = 7})
 p4:print() -- (0.00, 7.00)
 ```
+
+### Inheritance
+
+### Multiple Inheritance
 
 ## Metamethods
 
