@@ -2106,6 +2106,11 @@ To run a game, use one of these approaches:
 - If VS Code has been configured property, press cmd-l.
 - TODO: Other options?
 
+When comparing the distance between two points to some value,
+compare the square of the distance.
+This removes the need to use the `math.sqrt` function
+which can hurt game performance.
+
 TODO: See lua/love-game/main.lua.
 
 ## Unorganized Content
