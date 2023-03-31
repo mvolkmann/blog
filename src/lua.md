@@ -449,6 +449,25 @@ String operations include:
 - regular expression matches:
   `string.match(someString, 'regular-expression')` returns a table of matches?
 
+Some common string operations are not directly supported.
+For example, there is no function that tests whether
+a string contains a substring and returns a boolean.
+We can define this using the provided `find` function
+as follows:
+
+```lua
+text = "This is a test of our contains function."
+
+function string.contains(source, target)
+  return source:find(target, 1, true) ~= nil
+end
+
+-- This can be called in two ways.
+print(string.contains(text, "test")) -- true
+print(text:contains("test")) -- true
+print(text:contains("missing")) -- false
+```
+
 Lua does not support string interpolation.
 The closest Lua feature to this is the `string.format` function.
 It takes a format string as its first argument.
@@ -611,6 +630,18 @@ end
 
 print(add(2, 3)) -- 5
 ```
+
+From the Lua reference manual:
+
+> A call of the form f{fields} is syntactic sugar for f({fields});
+> that is, the argument list is a single new table.
+> A call of the form f'string' (or f"string" or f[[string]])
+> is syntactic sugar for f('string');
+> that is, the argument list is a single literal string.
+
+This means that if a function has only one argument and
+the argument is either a literal string or a table constructor,
+calls to the function do not require parentheses.
 
 Primitive parameters are passed by value
 and tables are passed by reference.
