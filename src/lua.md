@@ -1367,7 +1367,107 @@ p4:print() -- (0.00, 7.00)
 
 ### Inheritance
 
+We can simulate class inheritance by setting the metatable
+of a class to its superclass.
+
+The following code demonstrates this.
+
+The `Shape` class is a abstract class,
+meaning we cannot create instances from it.
+Its purpose is to serve as a based class
+for other classes that wish to inherit from it.
+The lack of a `new` function is what makes it abstract.
+
+The `Triangle` and `Rectangle` classes both inherit from the `Shape` class.
+The `Square` class inherits from the `Rectangle` class.
+
+```lua
+-- Define a Shape class.
+Shape = {name = "unknown", sides = 0}
+Shape.__index = Shape
+
+-- Method
+function Shape:report()
+  print(string.format(
+    "%s has %d sides and area %.1f.",
+    self.name,
+    self.sides,
+    self:area()
+  ))
+end
+
+-- Define a Triangle class.
+Triangle = {name = "triangle", sides = 3}
+Triangle.__index = Triangle
+setmetatable(Triangle, Shape)
+
+-- Constructor
+function Triangle.new(base, height)
+  local instance = setmetatable({}, Triangle)
+  instance.base = base
+  instance.height = height
+  return instance
+end
+
+-- Method
+function Triangle:area()
+  return self.base * self.height / 2
+end
+
+triangle = Triangle.new(4, 6)
+triangle:report() -- triangle has 3 sides and area 12.0
+
+-- Define a Rectangle class.
+Rectangle = {name = "rectangle", sides = 4}
+Rectangle.__index = Rectangle
+setmetatable(Rectangle, Shape)
+
+-- Constructor
+function Rectangle.new(width, height)
+  local instance = setmetatable({}, Rectangle)
+  instance.width = width
+  instance.height = height
+  return instance
+end
+
+-- Method
+function Rectangle:area()
+  return self.width * self.height
+end
+
+rectangle = Rectangle.new(4, 6)
+rectangle:report() -- rectangle has 4 sides and area 24.0
+
+-- Define a Square class.
+-- Note that we didn't specify the number of sides.
+-- It will get that from its superclass Rectangle.
+Square = {name = "square"}
+Square.__index = Square
+setmetatable(Square, Rectangle)
+
+-- Constructor
+function Square.new(side)
+  local instance = setmetatable({}, Square)
+  instance.side = side
+  return instance
+end
+
+-- Method
+function Square:area()
+  -- TODO: Is it possible to compute this using the superclass method?
+  return self.side ^ 2
+end
+
+square = Square.new(5)
+square:report() -- square has 4 sides and area 25.0
+```
+
+TODO: Can you simplify inheritance similar to how you simplified defining a class?
+TODO: Maybe you should show this example again using your `class` function.
+
 ### Multiple Inheritance
+
+TODO: Add this based on https://www.youtube.com/watch?v=1BFoprD30dE&t=97s.
 
 ## Metamethods
 
