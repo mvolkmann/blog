@@ -6,6 +6,10 @@ layout: topic-layout.njk
 
 ## Overview
 
+<img alt="neovim logo" style="width: 40%"
+    src="/blog/assets/neovim.png?v={{pkg.version}}"
+    title="neovim logo">
+
 {% aTargetBlank "https://neovim.io", "Neovim" %} is a modern rewrite of
 the Vim text editor.
 
