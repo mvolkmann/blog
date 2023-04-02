@@ -427,7 +427,7 @@ use {
   end)
   ```
 
-## Treesitter
+## Tree-sitter
 
 {% aTargetBlank "https://github.com/tree-sitter/tree-sitter", "Tree-sitter" %}
 is a parser generator and incremental parser implemented in Rust and C
@@ -446,9 +446,61 @@ The Neovim plugin {% aTargetBlank
 "https://github.com/nvim-treesitter/nvim-treesitter", "nvim-treesitter" %}
 integrates Tree-sitter with Neovim and provides functionality such as
 syntax highlighting based on the tokens that Treesitter reports.
+Syntax highlighting is one of the main motivations for using Tree-sitter.
 
-TODO: Add details on installing and configuring this in Neovim.
+To install and configure Tree-sitter:
+
+1. Add the following in `~/.config/nvim/lua/plugins.lua`:
+
+   ```lua
+   use("nvim-treesitter/nvim-treesitter", {run = ":TSUpdate"})
+   ```
+
+1. Enter `:PackerSync`
+
+1. Create the file `~/.config/nvim/after/plugin/treesitter.lua`
+   containing the following:
+
+   ```lua
+   require "nvim-treesitter.configs".setup {
+     -- A list of parser names, or "all" (the five listed parsers should always be installed)
+     ensure_installed = { "c", "javascript", "lua", "query", "rust", "swift", "typescript", "vim", "vimdoc" },
+
+     -- Install parsers synchronously (only applied to `ensure_installed`)
+     sync_install = false,
+
+     -- Automatically install missing parsers when entering buffer
+     -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+     auto_install = true,
+
+     -- List of parsers to ignore installing (for "all")
+     ignore_install = { },
+
+     highlight = {
+       enable = true
+
+       -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+       -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+       -- Using this option may slow down your editor, and you may see some duplicate highlights.
+       -- Instead of true it can also be a list of languages
+       additional_vim_regex_highlighting = false,
+     },
+   }
+   ```
+
+1. Enter `:so` to source this file.
+
+## LuaSnips
+
+{% aTargetBlank "https://github.com/L3MON4D3/LuaSnip", "LuaSnips" %}
+supports text snippets in Neovim.
+
+TODO: Document how to install, configure, and use this.
 
 ## Unorganized Content
 
 You need periods (all operators?) to be white. Make your own theme or override specific things?
+
+I need to change the syntax highlighting for . and : in Lua function calls
+to be white because they are hard to see currently.
+See https://vi.stackexchange.com/questions/41763/syntax-highlighting-for-and-in-lua-function-calls
