@@ -207,6 +207,27 @@ maps to an install language server.
 Completions will appear while typing.
 To select a completion, ...
 
+### Key Bindings
+
+LSP Zero defines the following key bindings that all being with the leader key:
+
+- K: displays information about the symbol under the cursor in a floating window
+- gd: jumps to the definition of the symbol under the cursor
+- gD: jumps to the declaration of the symbol under the cursor
+  (some servers don't implement this)
+- gi: lists all implementations for the symbol under the cursor
+  in the quickfix window
+- go: jumps to the definition of the type of the symbol under the cursor
+- gr: lists all references to the symbol under the cursor in the quickfix window
+- gs: displays signature information about the symbol under the cursor
+  in a floating window
+- <F2>: renames all references to the symbol under the cursor
+- <F3>: format code in current buffer
+- <F4>: selects a code action available at the current cursor position
+- gl: show diagnostics in a floating window
+- [d: moves to the previous diagnostic in the current buffer
+- ]d: moves to the next diagnostic in the current buffer
+
 ## Telescope
 
 {% aTargetBlank "https://github.com/nvim-telescope/telescope.nvim",

@@ -615,6 +615,7 @@
     "pyzmq",
     "Quadtrees",
     "Queryable",
+    "quickfix",
     "Ramus",
     "randint",
     "randomseed",
