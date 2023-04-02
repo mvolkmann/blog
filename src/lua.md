@@ -716,6 +716,9 @@ To avoid writing functions that take a large number of arguments,
 use a parameter that expects a table.
 This simulates having named arguments and
 allows values to be specified in any order.
+Table entries with no key (array-like)
+can be thought of as positional parameters and
+table entries with a key can be thought of as named parameters.
 
 Primitive parameters are passed by value
 and tables are passed by reference.
@@ -913,8 +916,7 @@ See the "Metatables" section for details.
 ### Tables
 
 A Lua table is an associative array.
-Their two primary purposes are be either array-like or dictionary-like,
-although those uses can be combined.
+They can be array-like, dictionary-like, or both.
 
 To create a table that is array-like,
 provide a comma-separated values inside curly braces.
@@ -949,6 +951,24 @@ months = {[1]="January", [2]="February"} -- uses integer keys
 -- but values are specified without keys.
 -- Integer keys are provided starting from 1.
 months = {"January", "February"}
+```
+
+To create a table that is both array-like and dictionary-like,
+provide some values with keys and some values without.
+Each value without a key is assigned a consecutive index key starting from 1.
+For example:
+
+```lua
+mixed = { "apple", month="April", "banana", season="Spring", "cherry" }
+for k, v in pairs(mixed) do
+  print(k, v)
+end
+-- Output is:
+-- 1	apple
+-- 2	banana
+-- 3	cherry
+-- month	April
+-- season	Spring
 ```
 
 The keys and values in tables can be any kind of value
