@@ -1,14 +1,14 @@
 ---
 eleventyNavigation:
-  key: neovim
+  key: Neovim
 layout: topic-layout.njk
 ---
 
 ## Overview
 
-<img alt="neovim logo" style="width: 40%"
+<img alt="Neovim logo" style="width: 40%"
     src="/blog/assets/neovim.png?v={{pkg.version}}"
-    title="neovim logo">
+    title="Neovim logo">
 
 {% aTargetBlank "https://neovim.io", "Neovim" %} is a free, open source, modern
 fork of the {% aTargetBlank "https://www.vim.org", "Vim" %} text editor.
@@ -17,14 +17,14 @@ asynchronous I/O, and support for Lua scripting.
 
 The Neovim project started in 2014 and was officially released in November 2015.
 
-The source for neovim is in a public {% aTargetBlank
+The source for Neovim is in a public {% aTargetBlank
 "https://github.com/neovim/neovim", "GitHub repository" %}.
 As of April 2023 there were 963 contributors and
 the code was 44% VimScript, 31% C, and 23% Lua.
 
 ## Installing
 
-In macos, neovim can be installed using Homebrew.
+In macos, Neovim can be installed using Homebrew.
 by entering `brew install neovim`.
 
 If you are already in the habit of using Vim,
@@ -39,7 +39,7 @@ or both.
 
 The easiest way to get started is to use {% aTargetBlank
 "https://github.com/nvim-lua/kickstart.nvim", "kickstart.nvim" %}.
-The following steps bypass this and configure neovim in a more personalized way.
+The following steps bypass this and configure Neovim in a more personalized way.
 
 Create the file `~/.config/nvim/init.lua`.
 
@@ -93,7 +93,7 @@ vim.cmd([[
 ]])
 ```
 
-To see the directories that neovim searches for packages,
+To see the directories that Neovim searches for packages,
 enter `:help rtp` or `:set packpath?`.
 One directory should be `~/.config/nvim` and
 another should be `!/.config/nvim/after`.
@@ -117,7 +117,7 @@ in order for the changes to take effect.
 
 ## Plugins
 
-Some popular neovim plugins include:
+Some popular Neovim plugins include:
 
 - {% aTargetBlank "https://github.com/dense-analysis/ale",
   "Asynchronous Lint Engine" %} (ALE)
@@ -130,25 +130,25 @@ Some popular neovim plugins include:
   anywhere in a file with minimal keystrokes.
 - {% aTargetBlank "https://github.com/VonHeikemen/lsp-zero.nvim", "LSP Zero" %}
 - {% aTargetBlank "https://github.com/nvim-lualine/lualine.nvim",
-  "lualine.nvim" %} for configuring the neovim status line
+  "lualine.nvim" %} for configuring the Neovim status line
 - {% aTargetBlank "https://github.com/preservim/nerdcommenter",
   "NERD Commenter" %} to simplify entering code comments
 - {% aTargetBlank "https://github.com/EdenEast/nightfox.nvim", "Nightfox" %}
   theme with support for LSP, Treesitter, and more
 - {% aTargetBlank "https://github.com/nvim-tree/nvim-tree.lua",
-  "nvim-tree.lua" %} file explorer for neovim
+  "nvim-tree.lua" %} file explorer for Neovim
 - {% aTargetBlank "https://github.com/rose-pine/neovim",
   "Rosé Pine for Neovim" %} color theme
 - {% aTargetBlank "https://github.com/nvim-telescope/telescope.nvim",
   "Telescope" %} fuzzy finder
 - {% aTargetBlank "https://github.com/nvim-treesitter/nvim-treesitter",
-  "nvim-treesitter" %} neovim interface to {% aTargetBlank
+  "nvim-treesitter" %} Neovim interface to {% aTargetBlank
   "https://github.com/tree-sitter/tree-sitter", "Treesitter" %}
   which is a parser generator tool and an incremental parsing library.
 
 ## Plugin Manager
 
-The most popular plugin manager for neovim is
+The most popular plugin manager for Neovim is
 {% aTargetBlank "https://github.com/wbthomason/packer.nvim", "packer" %}.
 To install this:
 
@@ -192,18 +192,18 @@ To install this:
 ## LSP Zero
 
 The Language Server Protocol (LSP) was designed by Microsoft for use in VS Code.
-It can be used by other text editors such as neovim.
+It can be used by other text editors such as Neovim.
 
 {% aTargetBlank "https://github.com/VonHeikemen/lsp-zero.nvim", "LSP Zero" %}
-is a neovim plugin that bundles all the code require to get
+is a Neovim plugin that bundles all the code require to get
 {% aTargetBlank "https://github.com/hrsh7th/nvim-cmp", "nvim-cmp" %}
 (a popular autocompletion plugin) and
 {% aTargetBlank "https://github.com/neovim/nvim-lspconfig", "nvim-lspconfig" %}
-(configuration for the Nvim LSP client that is bundled with neovim)
+(configuration for the Nvim LSP client that is bundled with Neovim)
 to work together.
 It also uses {% aTargetBlank "https://github.com/williamboman/mason.nvim",
 "mason.nvim" %} (another package manager)
-to allow you to install language servers from inside neovim.
+to allow you to install language servers from inside Neovim.
 
 To install and configure LSP Zero:
 
@@ -244,7 +244,7 @@ To install and configure LSP Zero:
       lsp.default_keymaps({buffer = bufnr})
    end)
 
-   -- Configure the Lua language server for neovim.
+   -- Configure the Lua language server for Neovim.
    require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 
    lsp.ensure_installed {
@@ -342,7 +342,7 @@ lsp.default_keymaps({
 ## Lua Snip
 
 {% aTargetBlank "https://github.com/L3MON4D3/LuaSnip", "LuaSnip" %} is a
-snippet manager for neovim.
+snippet manager for Neovim.
 
 To install it:
 
@@ -370,7 +370,7 @@ To install it:
 ## Telescope
 
 {% aTargetBlank "https://github.com/nvim-telescope/telescope.nvim",
-"Telescope" %} is a fuzzy finder for neovim.
+"Telescope" %} is a fuzzy finder for Neovim.
 
 To install it:
 
@@ -420,3 +420,25 @@ use {
   ```
 
 ## Treesitter
+
+{% aTargetBlank "https://github.com/tree-sitter/tree-sitter", "Tree-sitter" %}
+is a parser generator and incremental parser implemented in Rust and C
+that can be embedded in applications like text editors.
+
+Grammars can be supplied to enable Tree-sitter to
+parse source files for any programming language.
+
+Tree-sitter builds a syntax tree from a single source file
+that can contain syntax errors.
+It can then efficiently update the syntax tree when the source file is modified
+without re-parsing the entire source file.
+This allows it to run after every keystroke in a text editor.
+
+The Neovim plugin {% aTargetBlank
+"https://github.com/nvim-treesitter/nvim-treesitter", "nvim-treesitter" %}
+integrates Tree-sitter with Neovim and provides functionality such as
+syntax highlighting based on the tokens that Treesitter reports.
+
+## Unorganized Content
+
+You need periods (all operators?) to be white. Make your own theme or override specific things?
