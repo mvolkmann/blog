@@ -242,11 +242,19 @@ To install and configure LSP Zero:
 1. Enter ":Mason" to open a window that displays
    a list of the installed language servers and
    a list of the available language servers that have not been installed.
-   To toggle between showing help and showing lists of language servers,
-   enter "g?".
-   To install a language server, move the cursor to its name and press "i".
-   To uninstall a language server, move the cursor to its name and press "X".
-   To close the Mason window, press esc.
+
+   By default, all known language servers are displayed
+   regardless of their capabilities.
+   To filter the lists based on capabilities,
+   type a number from 1 to 5 where 1 shows All,
+   2 shows only LSPs, 3 shows only DAPs (Debug Adapter Protocol),
+   4 shows only Linters, and 5 shows only Formatters.
+
+   - To toggle between showing help and showing lists of language servers,
+     enter "g?".
+   - To install a language server, move the cursor to its name and press "i".
+   - To uninstall a language server, move the cursor to its name and press "X".
+   - To close the Mason window, press esc.
 
 To use LSP Zero, open any file whose file extension
 maps to an install language server.
