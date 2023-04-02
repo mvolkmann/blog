@@ -239,11 +239,14 @@ To install and configure LSP Zero:
 
 1. Enter `:PackerSync`
 
-1. Enter ":Mason" to see a list of the installed language servers
-   and a list of the available language servers that have not been installed.
-   To get help, enter "g?".
+1. Enter ":Mason" to open a window that displays
+   a list of the installed language servers and
+   a list of the available language servers that have not been installed.
+   To toggle between showing help and showing lists of language servers,
+   enter "g?".
    To install a language server, move the cursor to its name and press "i".
    To uninstall a language server, move the cursor to its name and press "X".
+   To close the Mason window, press esc.
 
 To use LSP Zero, open any file whose file extension
 maps to an install language server.
