@@ -25,7 +25,12 @@ For zsh, edit `~/.zshrc` and add `alias vim="nvim"`.
 
 ## Configuring
 
-Neovim is configured using Vimscript or the Lua programming language.
+Neovim can be configured using Vimscript, the Lua programming language,
+or both.
+
+The easiest way to get started is to use {% aTargetBlank
+"https://github.com/nvim-lua/kickstart.nvim", "kickstart.nvim" %}.
+The following steps bypass this and configure neovim in a more personalized way.
 
 Create the file `~/.config/nvim/init.lua`.
 
