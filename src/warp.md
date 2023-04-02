@@ -579,7 +579,7 @@ The left nav of the Settings dialog contains the following sections:
 
   In the Text section, the "Terminal font", "Font size", and "Line height"
   can be set.
-  I am using the font "FiraCode Nerd Font Mono" which supports ligatures.
+  I am using the font "Cascadia Code" which supports ligatures.
 
   In the Cursor section, the "Blinking cursor" option can be toggled.
   This option is on by default.

@@ -30,6 +30,7 @@ Neovim is configured using Vimscript or the Lua programming language.
 Create the file `~/.config/nvim/init.lua`.
 
 Some suggested content for this file is the following:
+TODO: Copy more from your init.lua file!
 
 ```lua
 require "plugins"
@@ -62,6 +63,37 @@ When editing a configuration file, to execute it enter `:source` or `:so`.
 This is useful after making changes to configuration files
 so you don't need to exit and restart nvim
 in order for the changes to take effect.
+
+## Plugins
+
+Some popular neovim plugins include:
+
+- {% aTargetBlank "https://github.com/dense-analysis/ale",
+  "Asynchronous Lint Engine" %} (ALE)
+- {% aTargetBlank "https://github.com/sindrets/diffview.nvim",
+  "diffview.nvim" %} for cycling through git diffs
+- {% aTargetBlank "https://github.com/tpope/vim-fugitive", "fugitive.vim" %}
+  for Git integration
+- {% aTargetBlank "https://github.com/phaazon/hop.nvim", "Hop" %}
+  EasyMotion-like plugin for jumping to
+  anywhere in a file with minimal keystrokes.
+- {% aTargetBlank "https://github.com/VonHeikemen/lsp-zero.nvim", "LSP Zero" %}
+- {% aTargetBlank "https://github.com/nvim-lualine/lualine.nvim",
+  "lualine.nvim" %} for configuring the neovim status line
+- {% aTargetBlank "https://github.com/preservim/nerdcommenter",
+  "NERD Commenter" %} to simplify entering code comments
+- {% aTargetBlank "https://github.com/EdenEast/nightfox.nvim", "Nightfox" %}
+  theme with support for LSP, Treesitter, and more
+- {% aTargetBlank "https://github.com/nvim-tree/nvim-tree.lua",
+  "nvim-tree.lua" %} file explorer for neovim
+- {% aTargetBlank "https://github.com/rose-pine/neovim",
+  "Rosé Pine for Neovim" %} color theme
+- {% aTargetBlank "https://github.com/nvim-telescope/telescope.nvim",
+  "Telescope" %} fuzzy finder
+- {% aTargetBlank "https://github.com/nvim-treesitter/nvim-treesitter",
+  "nvim-treesitter" %} neovim interface to {% aTargetBlank
+  "https://github.com/tree-sitter/tree-sitter", "Treesitter" %}
+  which is a parser generator tool and an incremental parsing library.
 
 ## Plugin Manager
 
@@ -98,6 +130,83 @@ To install this:
 
 - To manually update Packer, enter `:PackerSync`.
 
+## LSP Zero
+
+{% aTargetBlank "https://github.com/VonHeikemen/lsp-zero.nvim", "LSP Zero" %}
+bundles all the code require to get
+{% aTargetBlank "https://github.com/hrsh7th/nvim-cmp", "nvim-cmp" %}
+(a popular autocompletion plugin) and
+{% aTargetBlank "https://github.com/neovim/nvim-lspconfig", "nvim-lspconfig" %}
+(configuration for the Nvim LSP client that is bundled with neovim)
+to work together.
+It also uses {% aTargetBlank "https://github.com/williamboman/mason.nvim",
+"mason.nvim" %} (another package manager)
+to allow you to install language servers from inside neovim.
+
+To install and configure LSP Zero:
+
+1. Add the following in `~/config/nvim/lua/plugins.lua`:
+
+   ```lua
+   use {
+     'VonHeikemen/lsp-zero.nvim',
+     branch = 'v2.x',
+     requires = {
+       -- LSP Support
+       {'neovim/nvim-lspconfig'},             -- Required
+       {                                      -- Optional
+         'williamboman/mason.nvim',
+         run = function()
+           pcall(vim.cmd, 'MasonUpdate')
+         end,
+       },
+       {'williamboman/mason-lspconfig.nvim'}, -- Optional
+
+       -- Autocompletion
+       {'hrsh7th/nvim-cmp'},     -- Required
+       {'hrsh7th/cmp-nvim-lsp'}, -- Required
+       {'L3MON4D3/LuaSnip'},     -- Required
+     }
+   }
+   ```
+
+1. Create the file `~/.config/nvim/after/plugin/lsp.lua`
+   containing the following:
+
+   ```lua
+   local lsp = require('lsp-zero')
+
+   lsp.preset("recommended")
+
+   lsp.on_attach(function(client, bufnr)
+      lsp.default_keymaps({buffer = bufnr})
+   end)
+
+   -- Configure the Lua language server for neovim.
+   require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
+
+   lsp.ensure_installed {
+     "eslint",
+     "lua_ls",
+     "tsserver"
+   }
+
+   lsp.setup()
+   ```
+
+1. Enter `:so` to source the current file.
+
+1. Enter `:PackerSync`
+
+1. To install additional language servers, enter ":Mason".
+   This displays a long list of available language servers.
+   To install one, move the cursor to its name and press "i".
+
+To use LSP Zero, open any file whose file extension
+maps to an install language server.
+Completions will appear while typing.
+To select a completion, ...
+
 ## Telescope
 
 {% aTargetBlank "https://github.com/nvim-telescope/telescope.nvim",
@@ -107,13 +216,13 @@ To install it:
 
 - Add the following in `~/.config/nvim/lua/plugins.lua`:
 
-  ```lua
-  use {
-    'nvim-telescope/telescope.nvim',
-    requires = { {'nvim-lua/plenary.nvim'} }
-  }
+```lua
+use {
+ 'nvim-telescope/telescope.nvim',
+ requires = { {'nvim-lua/plenary.nvim'} }
+}
 
-  ```
+```
 
 - Enter `:PluginSync`
 
