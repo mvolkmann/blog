@@ -276,6 +276,10 @@ To install and configure LSP Zero:
    a list of the installed language servers and
    a list of the available language servers that have not been installed.
 
+   As of April 2023, no LSPs for Swift appear in the available list.
+   {% aTargetBlank "https://github.com/apple/sourcekit-lsp", "SourceKit-LSP" %}
+   is an LSP for Swift, but it does not appear to work with Neovim yet.
+
    By default, all known language servers are displayed
    regardless of their capabilities.
    To filter the lists based on capabilities,
@@ -438,6 +442,8 @@ The Neovim plugin {% aTargetBlank
 "https://github.com/nvim-treesitter/nvim-treesitter", "nvim-treesitter" %}
 integrates Tree-sitter with Neovim and provides functionality such as
 syntax highlighting based on the tokens that Treesitter reports.
+
+TODO: Add details on installing and configuring this in Neovim.
 
 ## Unorganized Content
 
