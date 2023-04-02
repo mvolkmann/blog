@@ -33,6 +33,8 @@ Some suggested content for this file is the following:
 TODO: Copy more from your init.lua file!
 
 ```lua
+-- TODO: Does this only look for "plugins.lua" in the "lua" subdirectory?
+-- TODO: Can "lua/plugins.lua" be moved to the same directory as this file?
 require "plugins"
 
 print("I am in init.lua!")
@@ -168,8 +170,11 @@ To install this:
 
 ## LSP Zero
 
+The Language Server Protocol (LSP) was designed by Microsoft for use in VS Code.
+It can be used by other text editors such as neovim.
+
 {% aTargetBlank "https://github.com/VonHeikemen/lsp-zero.nvim", "LSP Zero" %}
-bundles all the code require to get
+is a neovim plugin that bundles all the code require to get
 {% aTargetBlank "https://github.com/hrsh7th/nvim-cmp", "nvim-cmp" %}
 (a popular autocompletion plugin) and
 {% aTargetBlank "https://github.com/neovim/nvim-lspconfig", "nvim-lspconfig" %}
