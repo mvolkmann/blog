@@ -10,8 +10,17 @@ layout: topic-layout.njk
     src="/blog/assets/neovim.png?v={{pkg.version}}"
     title="neovim logo">
 
-{% aTargetBlank "https://neovim.io", "Neovim" %} is a modern rewrite of
-the Vim text editor.
+{% aTargetBlank "https://neovim.io", "Neovim" %} is a free, open source, modern
+fork of the {% aTargetBlank "https://www.vim.org", "Vim" %} text editor.
+It provides built-in Language Server Protocol (LSP) support,
+asynchronous I/O, and support for Lua scripting.
+
+The Neovim project started in 2014 and was officially released in November 2015.
+
+The source for neovim is in a public {% aTargetBlank
+"https://github.com/neovim/neovim", "GitHub repository" %}.
+As of April 2023 there were 963 contributors and
+the code was 44% VimScript, 31% C, and 23% Lua.
 
 ## Installing
 
@@ -34,15 +43,14 @@ The following steps bypass this and configure neovim in a more personalized way.
 
 Create the file `~/.config/nvim/init.lua`.
 
-Some suggested content for this file is the following:
-TODO: Copy more from your init.lua file!
+Some suggested content for this file is the following.
+This assumes the use of the {% aTargetBlank
+"https://github.com/wbthomason/packer.nvim", "Packer" %} plugin manager.
 
 ```lua
 -- TODO: Does this only look for "plugins.lua" in the "lua" subdirectory?
 -- TODO: Can "lua/plugins.lua" be moved to the same directory as this file?
 require "plugins"
-
-print("I am in init.lua!")
 
 -- TODO: Improve color of line numbers.
 -- TODO: Configure cmd-s to save.
@@ -171,7 +179,15 @@ To install this:
     ]])
     ```
 
-- To manually update Packer, enter `:PackerSync`.
+- Describe the desired plugins in `~/config/nvim/lua/plugins.lua`
+  by calling the `use` function for each.
+
+- To install new plugins added in `plugins.lua`,
+  update previously installed plugins,
+  and delete plugins no longer described in `plugins.lua`,
+  enter `:PackerSync`.
+
+- To list the installed plugins, enter `:PackerStatus`.
 
 ## LSP Zero
 
@@ -238,6 +254,18 @@ To install and configure LSP Zero:
    }
 
    lsp.setup()
+
+   local cmp = require('cmp')
+   local cmp_action = lsp.cmp_action()
+
+   cmp.setup({
+     -- This configures LSP key mappings.
+     mapping = {
+       -- This enables selecting a suggested completion by
+       -- pressing the return key in addition to the default of ctrl-y.
+       ['<cr>'] = cmp.mapping.confirm({select = true})
+     }
+   })
    ```
 
 1. Enter `:so` to source the current file.
@@ -311,6 +339,34 @@ lsp.default_keymaps({
 })
 ```
 
+## Lua Snip
+
+{% aTargetBlank "https://github.com/L3MON4D3/LuaSnip", "LuaSnip" %} is a
+snippet manager for neovim.
+
+To install it:
+
+- Add the following in `~/.config/nvim/lua/plugins.lua`:
+
+  ```lua
+    use({
+      "L3MON4D3/LuaSnip",
+      -- use latest release.
+      tag = "v<CurrentMajor>.*",
+      -- install optional jsregexp package
+      run = "make install_jsregexp"
+    })
+  ```
+
+- Enter `:PluginSync`
+
+- Create the file `~/.config/nvim/lua/after/plugin/luasnip.lua`
+  with the following content:
+
+  ```lua
+
+  ```
+
 ## Telescope
 
 {% aTargetBlank "https://github.com/nvim-telescope/telescope.nvim",
@@ -325,7 +381,6 @@ use {
  'nvim-telescope/telescope.nvim',
  requires = { {'nvim-lua/plenary.nvim'} }
 }
-
 ```
 
 - Enter `:PluginSync`
@@ -334,11 +389,34 @@ use {
 - Create the file `telescope.lua` in that directory with the following content:
 
   ```lua
-  local builtin = require('telescope.builtin')
-  vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-  vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-  vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-  vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+  local builtin = require "telescope.builtin"
+
+  -- This finds buffers by their name.
+  vim.keymap.set('n', '<leader>fb', builtin.buffers, {desc = '[F]ind [B]uffers'})
+
+  -- This may not be particularly useful.
+  vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = '[F]ind in [D]iagnostics' })
+
+  -- This finds files by their name.
+  vim.keymap.set('n', '<leader>ff', builtin.find_files, {desc = '[F]ind [F]iles'})
+
+  -- This finds files by their content.
+  vim.keymap.set('n', '<leader>fg', builtin.live_grep, {desc = '[F]ind by [G]rep'})
+
+  -- This finds Git controlled files by their name.
+  -- It avoids excluded files such as those under a `node_modules` directory.
+  vim.keymap.set('n', '<leader>fG', builtin.git_files, {desc = '[F]ind in [G]it'})
+
+  -- This finds help files by their content.
+  vim.keymap.set('n', '<leader>fh', builtin.help_tags, {desc = '[F]ind in [H]elp'})
+
+  -- This fines files whose content includes the word under the cursor.
+  vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[F]ind current [W]ord' })
+
+  -- Project Search (from ThePrimeagen)
+  vim.keymap.set('n', '<leader>ps', function()
+    builtin.grep_string({search = vim.fn.input("Grep> ")})
+  end)
   ```
 
 ## Treesitter
