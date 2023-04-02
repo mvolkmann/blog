@@ -276,10 +276,6 @@ To install and configure LSP Zero:
    a list of the installed language servers and
    a list of the available language servers that have not been installed.
 
-   As of April 2023, no LSPs for Swift appear in the available list.
-   {% aTargetBlank "https://github.com/apple/sourcekit-lsp", "SourceKit-LSP" %}
-   is an LSP for Swift, but it does not appear to work with Neovim yet.
-
    By default, all known language servers are displayed
    regardless of their capabilities.
    To filter the lists based on capabilities,
@@ -292,6 +288,14 @@ To install and configure LSP Zero:
    - To install a language server, move the cursor to its name and press "i".
    - To uninstall a language server, move the cursor to its name and press "X".
    - To close the Mason window, press esc.
+
+As of April 2023, no LSPs for Swift appear in the available list.
+{% aTargetBlank "https://github.com/apple/sourcekit-lsp", "SourceKit-LSP" %}
+is an LSP for Swift, but it does not appear to work with Neovim yet.
+The documentation {% aTargetBlank
+"https://github.com/apple/sourcekit-lsp/blob/main/Editors/README.md", "here" %}
+claims that SourceKit-LSP can be configured to work with Neovim,
+but it does not work for me.
 
 To use LSP Zero, open any file whose file extension
 maps to an install language server.
