@@ -35,19 +35,55 @@ TODO: Copy more from your init.lua file!
 ```lua
 require "plugins"
 
-vim.g.mapleader = " "
+print("I am in init.lua!")
 
-vim.opt.relativenumber= true
+-- TODO: Improve color of line numbers.
+-- TODO: Configure cmd-s to save.
 
--- This causes the yank command to copy to the system clipboard
--- so the copied text can be pasted into another app.
+vim.g.mapleader = " " -- many people use comman instead of space
+
+-- This causes the yank(copy) and delete(cut) commands to copy to the
+-- system clipboard so the copied text can be pasted into another app.
 vim.opt.clipboard = 'unnamed'
+
+local indent = 2
+vim.opt.shiftwidth=indent -- indent code with two spaces
+vim.opt.softtabstop=indent -- tabs take two spaces
+vim.opt.tabstop=indent -- tabs take two spaces
+
+vim.opt.colorcolumn = "80" -- displays a vertical strip at column 80 (not 81)
+vim.opt.expandtab = true -- replace tabs with spaces
+vim.opt.hlsearch = true -- highlights all search matches, not just first
+vim.opt.incsearch = true -- performs incremental searching.
+vim.opt.number = true -- shows line numbers
+vim.opt.relativenumber= true -- shows relative line numbers
+vim.opt.shiftround = true --round indent to multiples of shiftwidth
+vim.opt.smartindent = true -- pressing tab key in insert mode insert spaces
+vim.opt.smarttab = true -- pressing tab key in insert mode insert spaces
+vim.opt.termguicolors = true -- uses 24-bit colors
+vim.opt.wrap = false -- prevents line wrapping at end of window or pane
+
+-- Key mappings
+-- These are supposed to map cmd-s to save, but I can't get them to work.
+vim.keymap.set('n', '<D-s>', ":w<kEnter>")
+vim.keymap.set('i', '<D-s', "<Esc>:w<kEnter>i")
+
+-- This automatically runs the `:PackerCompile` command
+-- every time the `~/.config/nvim/lua/plugins.lua` file is updated.
+vim.cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+  augroup end
+]])
 ```
 
 To see the directories that neovim searches for packages,
 enter `:help rtp` or `:set packpath?`.
 One directory should be `~/.config/nvim` and
 another should be `!/.config/nvim/after`.
+
+To check for configuration issues, enter `:checkhealth`.
 
 ## Creating Files and Directories
 
@@ -205,7 +241,9 @@ To install and configure LSP Zero:
 To use LSP Zero, open any file whose file extension
 maps to an install language server.
 Completions will appear while typing.
-To select a completion, ...
+To accept the first suggestion, press ctrl-y.
+To accept another suggestion,
+press the down arrow key to move to it and press ctrl-y.
 
 ### Key Bindings
 
@@ -221,12 +259,34 @@ LSP Zero defines the following key bindings that all being with the leader key:
 - gr: lists all references to the symbol under the cursor in the quickfix window
 - gs: displays signature information about the symbol under the cursor
   in a floating window
+
 - <F2>: renames all references to the symbol under the cursor
 - <F3>: format code in current buffer
 - <F4>: selects a code action available at the current cursor position
+
 - gl: show diagnostics in a floating window
 - [d: moves to the previous diagnostic in the current buffer
 - ]d: moves to the next diagnostic in the current buffer
+
+- <Ctrl-y>: confirms selection
+- <Ctrl-e>: cancels completion
+- <Down>: navigates to next suggested completion
+- <Up>: navigates to previous suggested completion
+- <Ctrl-n>: if completion menu is visible, go to next item; otherwise trigger completion menu
+- <Ctrl-p>: if completion menu is visible, go to previous item; otherwise trigger completion menu
+- <Ctrl-d>: scrolls downs the documentation window
+- <Ctrl-u>: scrolls up the documentation window
+
+From the docs,
+"By default lsp-zero will not create a keybinding if it is taken.
+You can force lsp-zero's bindings by adding ..."
+
+```lua
+lsp.default_keymaps({
+  buffer = bufnr,
+  preserve_mappings = false
+})
+```
 
 ## Telescope
 
