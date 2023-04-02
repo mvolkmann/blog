@@ -291,7 +291,7 @@ LSP Zero defines the following key bindings that all being with the leader key:
 - [d: moves to the previous diagnostic in the current buffer
 - ]d: moves to the next diagnostic in the current buffer
 
-- <Ctrl-y>: confirms selection
+- <Ctrl-y>: confirms selection (TODO: Can this be configured to use the return key?)
 - <Ctrl-e>: cancels completion
 - <Down>: navigates to next suggested completion
 - <Up>: navigates to previous suggested completion
