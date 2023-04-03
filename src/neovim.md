@@ -146,7 +146,7 @@ Some popular Neovim plugins include:
   "https://github.com/tree-sitter/tree-sitter", "Treesitter" %}
   which is a parser generator tool and an incremental parsing library.
 
-## Plugin Manager
+## Packer
 
 The most popular plugin manager for Neovim is
 {% aTargetBlank "https://github.com/wbthomason/packer.nvim", "packer" %}.
@@ -188,6 +188,13 @@ To install this:
   enter `:PackerSync`.
 
 - To list the installed plugins, enter `:PackerStatus`.
+
+By default Packer stores downloaded plugins in
+`~/.local/share/nvim/site/pack/packer/start`.
+The local Git repository for each installed plugin
+is a directory in the `start` directory.
+To see the version of a plugin that was installed,
+TODO: Look at what?
 
 ## LSP Zero
 
@@ -446,7 +453,8 @@ The Neovim plugin {% aTargetBlank
 "https://github.com/nvim-treesitter/nvim-treesitter", "nvim-treesitter" %}
 integrates Tree-sitter with Neovim and provides functionality such as
 syntax highlighting based on the tokens that Treesitter reports.
-Syntax highlighting is one of the main motivations for using Tree-sitter.
+A common motivation for installing Tree-sitter is to get the best
+syntax highlighting from a theme that is compatible with Tree-sitter.
 
 To install and configure Tree-sitter:
 
@@ -496,6 +504,54 @@ To install and configure Tree-sitter:
 supports text snippets in Neovim.
 
 TODO: Document how to install, configure, and use this.
+
+## Premade Configurations
+
+The three most popular Neovim premade configurations are
+{% aTargetBlank "https://github.com/AstroNvim/AstroNvim", "AstroNvim" %},
+{% aTargetBlank "https://www.lunarvim.org", "LunarVim" %}, and
+{% aTargetBlank "https://github.com/NvChad/NvChad", "NvChad" %}.
+
+### AstroNvim
+
+To install
+{% aTargetBlank "https://github.com/AstroNvim/AstroNvim", "AstroNvim" %},
+
+1. Make a backup copy of your `~/.config/nvim` directory if you have one.
+1. `cd` to your `~/.config/nvim` directory.
+1. Delete all the files and directories inside it.
+1. Enter `git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim`
+1. Enter `nvim`. On first launch this will install many things.
+1. Install language parsers by enter `:TSInstall {language-name}`
+   for each language.
+   For example, use the language names "javascript", "lua", and "swift".
+1. Enter `:Lazy sync` to update plugins and remove unused plugins.
+1. Enter `:AstroUpdatePackages` to get the latest AstroNvim updates.
+
+The {% aTargetBlank "https://astronvim.com/Basic%20Usage/mappings",
+"Default Mappings" %} page lists all the key mappings
+that AstroNvim provides by default.
+
+### LunarVim
+
+To install
+
+1. Make a backup copy of your `~/.config/nvim` directory if you have one.
+1. `cd` to your `~/.config/nvim` directory.
+1. Delete all the files and directories inside it.
+1. Enter `LV_BRANCH='release-1.2/neovim-0.8' bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/fc6873809934917b470bff1b072171879899a36b/utils/installer/install.sh)`
+1. Enter "y" when prompted about installing NodeJS dependencies.
+1. Enter "y" when prompted about installing Python dependencies.
+1. Enter "y" when prompted about installing Rust dependencies.
+1. Add `~/.local/bin` to your PATH.
+1. Enter `lvim`
+1. Select "Configuration".
+   I get an error that says "incompatible architecture".
+   Apparently it installed a Windows version on my Mac.
+1. Enter `:LvimUpdate` to get the latest updates.
+1. Enter `:LvimSyncCorePlugins` to update all the plugins.
+
+### NvChad
 
 ## Unorganized Content
 
