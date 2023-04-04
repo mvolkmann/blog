@@ -586,10 +586,68 @@ that AstroNvim provides by default.
 
 The leader key defaults to space.
 
+To create a horizontal split, enter `<leader>/`.
+
+To create a vertical split, enter `<leader>|`.
+
+To close a split, enter `:clo` or `<leader>c`.
+TODO: `<leader>c` does not work, but `<leader>q` does.
+
+To move between splits, enter `ctrl-h` (left),
+`ctrl-j` (down), `ctrl-k` (up), and `ctrl-l` (right).
+
+To toggle commenting of the current line or selected lines, press `<leader>/`.
+
 ### File Explorer
 
 Press <leader>e to open the file explorer.
 Once in it, press `?' to see the default key mappings.
+
+Navigate down and up with `j` and `k`.
+To open a selected directory or file, press the return key.
+
+## Find Commands
+
+To find files using the fuzzy finder Telescope:
+
+- Press `<leader>fa` to find AstroNvim configuration files.
+- Press `<leader>fb` to find buffers by name.
+- Press `<leader>fc` to find files that contain the word under the cursor.
+- Press `<leader>fC` to find Vim plugin commands.
+- Press `<leader>ff` to find files by name.
+- Press `<leader>fh` to find a help file by its name.
+- Press `<leader>fk` to find key mappings.
+- Press `<leader>fo` to find files opened recently (old files)
+- Press `<leader>fr` to find Vim registers (can see their contents)
+- Press `<leader>ft` to find a theme (can see previews and select one)
+- Press `<leader>fw` to find files by a word in their content.
+- Press `<leader>fW` to find files containing multiple consecutive words.
+
+## Go To Commands
+
+To go to the definition of the symbol under the cursor, press `gd`.
+
+## Git Commands
+
+To see all the keys mapped to Git commands, press `<leader>g` and pause.
+
+To open a window that displays the Git status of the current project,
+press `<leader>gt`. Press `esc` twice to close the window.
+
+To list all the branches and optionally switch to one,
+press `<leader>gb`.
+
+To see a side-by-side diff for the current file, press `<leader>gd`.
+
+To list all the commits for the current file, press `<leader>gc`.
+
+To open a lazygit window, press `<leader>gg`.
+To close a lazygit window, press `q`.
+See the lazygit {% aTargetBlank
+"https://github.com/jesseduffield/lazygit/blob/master/docs/keybindings/Keybindings_en.md",
+"key bindings" %}.
+For more information, watch this {% aTargetBlank
+"https://www.youtube.com/watch?v=CPLdltN7wgE", "YouTube video" %}.
 
 ### Color Themes
 
@@ -675,11 +733,13 @@ return {
 
 TODO: Describe the LuaSnips syntax for defining snippets.
 
-### Snippets
+### Symbol List
 
-To create custom snippets:
-
-- Create a directory in `~/.config/nvim/lua/user/snippets.lua
+To list symbols in a right pane, enter `<leader>lS`".
+This lists symbols like variable, function, and type declarations.
+Select a symbol name to scroll to it in the source file.
+The list of symbols automatically updates
+when focus moves to a different buffer.
 
 ## LunarVim
 
