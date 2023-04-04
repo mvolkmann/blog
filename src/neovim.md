@@ -512,7 +512,9 @@ The three most popular Neovim premade configurations are
 {% aTargetBlank "https://www.lunarvim.org", "LunarVim" %}, and
 {% aTargetBlank "https://github.com/NvChad/NvChad", "NvChad" %}.
 
-### AstroNvim
+## AstroNvim
+
+### Installing
 
 To install
 {% aTargetBlank "https://github.com/AstroNvim/AstroNvim", "AstroNvim" %},
@@ -521,6 +523,7 @@ To install
 1. `cd` to your `~/.config/nvim` directory.
 1. Delete all the files and directories inside it.
 1. Enter `git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim`
+1. Enter `brew install lua-language-server`.
 1. Enter `nvim`. On first launch this will install many things.
 1. Install language parsers by enter `:TSInstall {language-name}`
    for each language.
@@ -528,30 +531,159 @@ To install
 1. Enter `:Lazy sync` to update plugins and remove unused plugins.
 1. Enter `:AstroUpdatePackages` to get the latest AstroNvim updates.
 
+### Configuration
+
+AstroNvim configuration files are in `~/.config/nvim`.
+The main configuration file is `init.lua`.
+The `lua` subdirectory contains the directories `astronvim` and `plugins`.
+
+The `astronvim` directory contains:
+
+- `autocmds.lua`
+- `bootstrap.lua`
+- `health.lua`
+- `lazy.lua`
+- `mappings.lua` - defines key mappings
+- `options.lua`
+
+The `plugins` directory contains a separate config `.lua` file for each plugin.
+Initially this includes:
+
+- `alpha.lua`
+- `cmp.lua`
+- `core.lua`
+- `dap.lua`
+- `git.lua`
+- `heirline.lua`
+- `lsp.lua`
+- `mason.lua`
+- `neo-tree.lua`
+- `telescope.lua`
+- `treesitter.lua`
+- `ui.lua`
+
+To check the status of your installation, enter `:checkhealth`.
+
+{% aTargetBlank "https://github.com/jesseduffield/lazygit#homebrew",
+"lazygit" %} is a terminal UI for Git commands.
+To install it, enter `brew install lazygit`.
+
+{% aTargetBlank "https://clementtsang.github.io/bottom/", "bottom" %}
+is a "graphical process/system monitor for the terminal".
+To install it, enter `brew install bottom`.
+This installs the command `btm`.
+
+For the best Ruby support, enter `gem install neovim`.
+
+For the best Node.js support, enter `npm install -g neovim`.
+E
+
+### Basics
+
 The {% aTargetBlank "https://astronvim.com/Basic%20Usage/mappings",
 "Default Mappings" %} page lists all the key mappings
 that AstroNvim provides by default.
 
-### LunarVim
+The leader key defaults to space.
 
-To install
+### File Explorer
 
-1. Make a backup copy of your `~/.config/nvim` directory if you have one.
-1. `cd` to your `~/.config/nvim` directory.
-1. Delete all the files and directories inside it.
-1. Enter `LV_BRANCH='release-1.2/neovim-0.8' bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/fc6873809934917b470bff1b072171879899a36b/utils/installer/install.sh)`
-1. Enter "y" when prompted about installing NodeJS dependencies.
-1. Enter "y" when prompted about installing Python dependencies.
-1. Enter "y" when prompted about installing Rust dependencies.
-1. Add `~/.local/bin` to your PATH.
-1. Enter `lvim`
-1. Select "Configuration".
-   I get an error that says "incompatible architecture".
-   Apparently it installed a Windows version on my Mac.
-1. Enter `:LvimUpdate` to get the latest updates.
-1. Enter `:LvimSyncCorePlugins` to update all the plugins.
+Press <leader>e to open the file explorer.
+Once in it, press `?' to see the default key mappings.
 
-### NvChad
+### Color Themes
+
+To see all the installed color themes and select one,
+enter `:colo` followed by a space and the tab key.
+TODO: How do you move the selection to a different one in the list?
+Selecting a theme that is compatible with Tree-sitter results in better syntax highlighting.
+
+### Completions
+
+To select a suggested completion from a provided list,
+use ctrl-j and ctrl-k to move down and up
+and press return to select the highlighted completion.
+
+### Snippets
+
+AstroNvim uses the LuaSnips plugin to provide snippets.
+LuaSnip supports two syntaxes for defining snippets,
+the VS Code style and the LuaSnips style.
+
+To create custom snippets:
+
+1. Create the directory `~/.config/nvim/lua/user/snippets`.
+
+1. Create the file `~/.config/nvim/lua/user/init.lua` containing the following:
+
+```lua
+return {
+  plugins = {
+    {
+      "L3MON4D3/LuaSnip",
+      config = function(plugin, opts)
+        require "plugins.configs.luasnip"(plugin, opts) -- include the default astronvim config that calls the setup call
+        require("luasnip.loaders.from_vscode").lazy_load { paths = { "./lua/user/snippets" } } -- load snippets paths
+      end,
+    },
+  },
+}
+```
+
+1. For the VS Code style, create the file
+   `~/.config/nvim/lua/user/snippets/package.json` containing the following:
+
+   ```json
+   {
+     "name": "user snippets",
+     "engines": {
+       "vscode": "^1.11.0"
+     },
+     "contributes": {
+       "snippets": [
+         {
+           "language": "javascript",
+           "path": "./javascript.json"
+         }
+       ]
+     }
+   }
+   ```
+
+1. For the VS Code style, create a file like the following
+   for each language that needs snippets.
+   For JavaScript the file name should be `javascript.json`.
+
+   ```json
+   {
+     "Log Entry": {
+       "prefix": "loge",
+       "body": ["console.log('$TM_FILENAME $1: entered');"],
+       "description": "Log function entry"
+     },
+     "Log Variable": {
+       "prefix": "logv",
+       "body": ["console.log('$TM_FILENAME $1: $2 =', $2);"],
+       "description": "Log variable to console"
+     }
+   }
+   ```
+
+   Using `$2` twice in the previous snippet is NOT WORKING
+   like it does in VS Code! See {% aTargetBlank
+   "https://github.com/L3MON4D3/LuaSnip/issues/857", "issue" %}.
+
+TODO: Describe the LuaSnips syntax for defining snippets.
+
+### Snippets
+
+To create custom snippets:
+
+- Create a directory in `~/.config/nvim/lua/user/snippets.lua
+
+## LunarVim
+
+## NvChad
 
 ## Unorganized Content
 
@@ -559,4 +691,4 @@ You need periods (all operators?) to be white. Make your own theme or override s
 
 I need to change the syntax highlighting for . and : in Lua function calls
 to be white because they are hard to see currently.
-See https://vi.stackexchange.com/questions/41763/syntax-highlighting-for-and-in-lua-function-calls
+See <https://vi.stackexchange.com/questions/41763/syntax-highlighting-for-and-in-lua-function-calls>
