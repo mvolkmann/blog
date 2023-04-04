@@ -32,6 +32,48 @@ it's a good idea to add an alias from "vim" to "nvim"
 in your shell configuration file.
 For zsh, edit `~/.zshrc` and add `alias vim="nvim"`.
 
+## Functionality Needed
+
+Vanilla Neovim lacks many features that are frequently desired.
+There are plugins available to add all the important features.
+Some of the most popular plugins for Neovim
+are summarized in the table below.
+
+| Feature             | Popular Plugins                             |
+| ------------------- | ------------------------------------------- |
+| auto pairs          | nvim-autopairs                              |
+| better navigation   | Hop                                         |
+| better status line  | heirline, lualine                           |
+| code formatting     | null-ls.nvim                                |
+| color themes        | many; want Tree-sitter support              |
+| completions         | cmp-buffer, cmp-luasnip, cmp-path, nvim-cmp |
+| commenting          | Comment.nvim                                |
+| debugger            | nvim-dap, nvim-dap-ui                       |
+| file explorer       | neo-tree.nvim, nvim-tree.lua                |
+| fuzzy finder        | telescope.nvim, telescope-fzf-native.nvim   |
+| Git support         | fugitive.vim, gitsigns.nvim                 |
+| icons               | nvim-web-devicons                           |
+| keymap display      | which-key.nvim                              |
+| linting             | null-ls.nvim                                |
+| LSP client          | nvim-lspconfig                              |
+| LSP servers         | LSP Zero                                    |
+| notifications       | nvim-notify                                 |
+| package manager     | mason.nvim                                  |
+| plugin manager      | lazy.nvim, packer.nvim                      |
+| snippets            | LuaSnip, friendly-snippets                  |
+| split panes         | smart-splits.nvim                           |
+| syntax highlighting | nvim-treesitter, nvim-colorizer.lua         |
+| syntax parsing      | nvim-treesitter                             |
+| terminal            | toggleterm.nvim                             |
+
+Configuring all of these is a daunting task.
+For these reason, prebuilt Neovim configurations are popular.
+There are many to choose from, but the most popular seem to be:
+
+- {% aTargetBlank "https://astronvim.com", "AstroNvim" %},
+- {% aTargetBlank "https://www.lunarvim.org", "LunarVim" %}, and
+- {% aTargetBlank "https://github.com/NvChad/NvChad", "NvChad" %}.
+
 ## Configuring
 
 Neovim can be configured using Vimscript, the Lua programming language,
@@ -508,11 +550,29 @@ TODO: Document how to install, configure, and use this.
 ## Premade Configurations
 
 The three most popular Neovim premade configurations are
-{% aTargetBlank "https://github.com/AstroNvim/AstroNvim", "AstroNvim" %},
+{% aTargetBlank "https://astronvim.com", "AstroNvim" %},
 {% aTargetBlank "https://www.lunarvim.org", "LunarVim" %}, and
 {% aTargetBlank "https://github.com/NvChad/NvChad", "NvChad" %}.
 
 ## AstroNvim
+
+{% aTargetBlank "https://astronvim.com", "AstroNvim" %} is
+"an aesthetic and feature-rich neovim config
+that is extensible and easy to use with a great set of plugins".
+
+For a list of plugins used by AstroNvim by default, see {% aTargetBlank
+"https://astronvim.com/acknowledgements", "Acknowledgements" %}.
+
+There are several optional commands that
+AstroNvim will use if they are installed.
+These include:
+
+- {% aTargetBlank "https://github.com/BurntSushi/ripgrep", "ripgrep" %} - for live grep Telescope search (<leader>fw)
+- {% aTargetBlank "https://github.com/jesseduffield/lazygit", "lazygit" %} - Git UI (<leader>tl or <leader>gg)
+- {% aTargetBlank "https://github.com/dundee/gdu", "gdu" %} - disk usage (<leader>tu)
+- {% aTargetBlank "https://github.com/ClementTsang/bottom", "bottom" %}- process viewer (<leader>tt)
+- {% aTargetBlank "https://www.python.org", "Python" %}- for the Python REPL (<leader>tp)
+- {% aTargetBlank "https://nodejs.org/en", "Node" %}- needed by many LSPs and for the Node REPL (<leader>tn)
 
 ### Installing
 
@@ -530,6 +590,8 @@ To install
    For example, use the language names "javascript", "lua", and "swift".
 1. Enter `:Lazy sync` to update plugins and remove unused plugins.
 1. Enter `:AstroUpdatePackages` to get the latest AstroNvim updates.
+
+To check the status of your installation, enter `:checkhealth`.
 
 ### Configuration
 
@@ -562,8 +624,6 @@ Initially this includes:
 - `treesitter.lua`
 - `ui.lua`
 
-To check the status of your installation, enter `:checkhealth`.
-
 {% aTargetBlank "https://github.com/jesseduffield/lazygit#homebrew",
 "lazygit" %} is a terminal UI for Git commands.
 To install it, enter `brew install lazygit`.
@@ -576,7 +636,29 @@ This installs the command `btm`.
 For the best Ruby support, enter `gem install neovim`.
 
 For the best Node.js support, enter `npm install -g neovim`.
-E
+
+For better snippet support,
+modify `~/.config/nvim/lua/plugins/config/luasnip.lua` to match the following:
+
+```lua
+return function(_, opts)
+  local ls = require("luasnip")
+
+  ls.config.set_config({
+    history = true,
+    updateevents = "TextChanged,TextChangedI"
+  })
+
+  if opts then ls.config.setup(opts) end
+
+  vim.tbl_map(
+    function(type)
+      require("luasnip.loaders.from_" .. type).lazy_load()
+    end,
+    { "vscode", "snipmate", "lua" }
+  )
+end
+```
 
 ### Basics
 
@@ -664,7 +746,15 @@ and press return to select the highlighted completion.
 
 ### Snippets
 
-AstroNvim uses the LuaSnips plugin to provide snippets.
+AstroNvim uses the LuaSnips plugin to support snippets.
+Snippet suggests appear when the beginning of their trigger words are typed.
+When a list of possible snippets appears,
+press ctrl-j and ctrl-k to highlight one,
+press enter to select it.
+For snippets that have placeholders, type text into each one.
+Press tab to jump to the next placeholder
+and shift-tab to jump to the previous placeholder.
+
 LuaSnip supports two syntaxes for defining snippets,
 the VS Code style and the LuaSnips style.
 
