@@ -754,6 +754,8 @@ press enter to select it.
 For snippets that have placeholders, type text into each one.
 Press tab to jump to the next placeholder
 and shift-tab to jump to the previous placeholder.
+After entering text for the last placeholder,
+press tab one more tab to move the end of the snippet and continue typing.
 
 LuaSnip supports two syntaxes for defining snippets,
 the VS Code style and the LuaSnips style.
