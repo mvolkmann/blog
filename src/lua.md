@@ -952,6 +952,9 @@ scores = {5, 2, 7}
 names = {"Mark", "Tami"}
 ```
 
+Assigning a table to a variable assigns the reference,
+not a copy of the table.
+
 To create a table that is dictionary-like,
 provide keys and values inside curly braces.
 String keys only require quotes if
@@ -2286,8 +2289,6 @@ A Lua “package” is a collection of modules.
 
 Modules in the standard library like io and table do not need to be imported to use them.
 
-Cover the `self` special variable.
-
 OO-like objects hold their properties and methods in a table.
 Does each object get its own copy of every method?
 
@@ -2301,8 +2302,6 @@ this video suggest multiple ways to handle this: https://youtu.be/IQf82d3cr20
 function foo(p1, p2) is just syntactic sugar for foo = function (p1, p2)
 
 did you say that the table.sort function sorts a table in place?
-
-assigning a table to a variable assigns the reference, not a copy of the table.
 
 In the table section, describe copying tables like the following.
 Is there a way to make a deep copy? Maybe something recursive?
