@@ -314,6 +314,24 @@ assumes that all numbers except zero should be treated as false.
 
 The `tonumber` function returns `nil` if the conversion is not possible.
 
+While it is not commonly done, functions can validate the
+types of arguments passed to them using the `assert` function.
+It takes a condition and
+an optional message that defaults to "assertion failed!".
+It prints the message and terminates the programming
+if the condition evaluates to `false`.
+For example:
+
+```lua
+function demo(s)
+  assert(type(s) == "string", "demo requires a string")
+  print("success")
+end
+
+demo("yes") -- success
+demo(7) -- demo requires a string
+```
+
 ## Input/Output
 
 To write to stdout, use the `print` function or the`io.write` function.
@@ -583,6 +601,9 @@ Lua supports the following relational operators:
 - `>` greater than
 - `<=` less than or equal to
 - `>=` greater than or equal to
+
+Tables are compared by their memory addresses,
+not by their contents.
 
 Lua supports the following logical operators:
 
@@ -2276,11 +2297,6 @@ you can use the or operator to avoid setting instance values to know when they a
 but beware of cases where are the table passed in contains false values because those will not be used if you simply check with the or operator.
 
 this video suggest multiple ways to handle this: https://youtu.be/IQf82d3cr20
-
-Use the assert function to test a condition and crash the program if it is not true.
-The assert function takes a condition and a message.
-ex. assert(type(param) == “table”), “The argument must be a table.”)
-add this to the error handling section of your Lua blog page.
 
 function foo(p1, p2) is just syntactic sugar for foo = function (p1, p2)
 

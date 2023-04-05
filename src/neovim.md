@@ -594,6 +594,11 @@ To install
 
 To check the status of your installation, enter `:checkhealth`.
 
+### Key Mappings
+
+The default key mappings provided by AstroNvim are described
+{% aTargetBlank "https://astronvim.com/Basic%20Usage/mappings", "here" %}.
+
 ### Font
 
 Several parts of AstroNvim attempt to display icons.
@@ -670,6 +675,31 @@ return function(_, opts)
 end
 ```
 
+| auto pairs | nvim-autopairs |
+| better navigation | Hop |
+| better status line | heirline, lualine |
+| code formatting | null-ls.nvim |
+| color themes | many; want Tree-sitter support |
+| completions | cmp-buffer, cmp-luasnip, cmp-path, nvim-cmp |
+| commenting | Comment.nvim |
+| debugger | nvim-dap, nvim-dap-ui |
+| file explorer | neo-tree.nvim, nvim-tree.lua |
+| fuzzy finder | telescope.nvim, telescope-fzf-native.nvim |
+| Git support | fugitive.vim, gitsigns.nvim |
+| icons | nvim-web-devicons |
+| keymap display | which-key.nvim |
+| linting | null-ls.nvim |
+| LSP client | nvim-lspconfig |
+| LSP servers | LSP Zero |
+| notifications | nvim-notify |
+| package manager | mason.nvim |
+| plugin manager | lazy.nvim, packer.nvim |
+| snippets | LuaSnip, friendly-snippets |
+| split panes | smart-splits.nvim |
+| syntax highlighting | nvim-treesitter, nvim-colorizer.lua |
+| syntax parsing | nvim-treesitter |
+| terminal | toggleterm.nvim |
+
 ### Basics
 
 The {% aTargetBlank "https://astronvim.com/Basic%20Usage/mappings",
@@ -720,7 +750,14 @@ To find files using the fuzzy finder Telescope:
 
 ### Go To Commands
 
-To go to the definition of the symbol under the cursor, press `gd`.
+- Press `gd` to go to the definition of the symbol under the cursor.
+- Press `gf` to open the file under the cursor in Neovim.
+- Press `gI` to go to the implementation of the symbol under the cursor.
+- Press `gr` to show references to the symbol under the cursor.
+  TODO: This doesn't seem to work!
+- Press `gT` to go to the type definition of the symbol under the cursor.
+- Press `gx` to open the file under the cursor in the associated app.
+- Press `%` to move backwards through results.
 
 ### Comments
 
