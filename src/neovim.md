@@ -10,8 +10,9 @@ layout: topic-layout.njk
     src="/blog/assets/neovim.png?v={{pkg.version}}"
     title="Neovim logo">
 
-{% aTargetBlank "https://neovim.io", "Neovim" %} is a free, open source, modern
-fork of the {% aTargetBlank "https://www.vim.org", "Vim" %} text editor.
+{% aTargetBlank "https://neovim.io", "Neovim" %}, or nvim for short,
+is a free, open source, modern fork of the
+{% aTargetBlank "https://www.vim.org", "Vim" %} text editor.
 It provides built-in Language Server Protocol (LSP) support,
 asynchronous I/O, and support for Lua scripting.
 
@@ -593,6 +594,15 @@ To install
 
 To check the status of your installation, enter `:checkhealth`.
 
+### Font
+
+Several parts of AstroNvim attempt to display icons.
+This requires using a
+{% aTargetBlank "https://www.nerdfonts.com/", "Nerd font" %}.
+One that I recommend is "Caskaydia Cove Nerd Font" which is very similar to
+the non-Nerd font {% aTargetBlank "https://github.com/microsoft/cascadia-code",
+"Cascadia Code" %} from Microsoft.
+
 ### Configuration
 
 AstroNvim configuration files are in `~/.config/nvim`.
@@ -668,6 +678,19 @@ that AstroNvim provides by default.
 
 The leader key defaults to space.
 
+### File Explorer
+
+Press <leader>e to open the file explorer.
+Once in it, press `?' to see the default key mappings.
+
+Navigate down and up with `j` and `k`.
+To open a selected directory or file, press the return key.
+
+### Splits
+
+The editing area display multiple buffers
+that are displayed in multiple split panes.
+
 To create a horizontal split, enter `<leader>/`.
 
 To create a vertical split, enter `<leader>|`.
@@ -678,17 +701,7 @@ TODO: `<leader>c` does not work, but `<leader>q` does.
 To move between splits, enter `ctrl-h` (left),
 `ctrl-j` (down), `ctrl-k` (up), and `ctrl-l` (right).
 
-To toggle commenting of the current line or selected lines, press `<leader>/`.
-
-### File Explorer
-
-Press <leader>e to open the file explorer.
-Once in it, press `?' to see the default key mappings.
-
-Navigate down and up with `j` and `k`.
-To open a selected directory or file, press the return key.
-
-## Find Commands
+### Find Commands
 
 To find files using the fuzzy finder Telescope:
 
@@ -705,11 +718,15 @@ To find files using the fuzzy finder Telescope:
 - Press `<leader>fw` to find files by a word in their content.
 - Press `<leader>fW` to find files containing multiple consecutive words.
 
-## Go To Commands
+### Go To Commands
 
 To go to the definition of the symbol under the cursor, press `gd`.
 
-## Git Commands
+### Comments
+
+To toggle commenting of the current line or selected lines, press `<leader>/`.
+
+### Git Commands
 
 To see all the keys mapped to Git commands, press `<leader>g` and pause.
 
