@@ -162,8 +162,6 @@ in order for the changes to take effect.
 
 Some popular Neovim plugins include:
 
-- {% aTargetBlank "https://github.com/dense-analysis/ale",
-  "Asynchronous Lint Engine" %} (ALE)
 - {% aTargetBlank "https://github.com/sindrets/diffview.nvim",
   "diffview.nvim" %} for cycling through git diffs
 - {% aTargetBlank "https://github.com/tpope/vim-fugitive", "fugitive.vim" %}
@@ -188,6 +186,9 @@ Some popular Neovim plugins include:
   "nvim-treesitter" %} Neovim interface to {% aTargetBlank
   "https://github.com/tree-sitter/tree-sitter", "Treesitter" %}
   which is a parser generator tool and an incremental parsing library.
+
+To run a Lua function exposed by a plugin,
+enter `:{function-name}({arguments})`.
 
 ## Packer
 
@@ -541,13 +542,6 @@ To install and configure Tree-sitter:
 
 1. Enter `:so` to source this file.
 
-## LuaSnips
-
-{% aTargetBlank "https://github.com/L3MON4D3/LuaSnip", "LuaSnips" %}
-supports text snippets in Neovim.
-
-TODO: Document how to install, configure, and use this.
-
 ## Premade Configurations
 
 The three most popular Neovim premade configurations are
@@ -580,6 +574,7 @@ These include:
 To install
 {% aTargetBlank "https://github.com/AstroNvim/AstroNvim", "AstroNvim" %},
 
+1. Install Neovim. In macOS enter `brew install neovim`.
 1. Make a backup copy of your `~/.config/nvim` directory if you have one.
 1. `cd` to your `~/.config/nvim` directory.
 1. Delete all the files and directories inside it.
@@ -675,22 +670,17 @@ return function(_, opts)
 end
 ```
 
-| auto pairs | nvim-autopairs |
+TODO: Should you cover all of these in the sections that follow?
+
 | better navigation | Hop |
-| better status line | heirline, lualine |
 | code formatting | null-ls.nvim |
 | color themes | many; want Tree-sitter support |
 | completions | cmp-buffer, cmp-luasnip, cmp-path, nvim-cmp |
 | commenting | Comment.nvim |
 | debugger | nvim-dap, nvim-dap-ui |
 | file explorer | neo-tree.nvim, nvim-tree.lua |
-| fuzzy finder | telescope.nvim, telescope-fzf-native.nvim |
-| Git support | fugitive.vim, gitsigns.nvim |
-| icons | nvim-web-devicons |
 | keymap display | which-key.nvim |
 | linting | null-ls.nvim |
-| LSP client | nvim-lspconfig |
-| LSP servers | LSP Zero |
 | notifications | nvim-notify |
 | package manager | mason.nvim |
 | plugin manager | lazy.nvim, packer.nvim |
@@ -731,7 +721,7 @@ TODO: `<leader>c` does not work, but `<leader>q` does.
 To move between splits, enter `ctrl-h` (left),
 `ctrl-j` (down), `ctrl-k` (up), and `ctrl-l` (right).
 
-### Find Commands
+### Fuzzy Find Commands
 
 To find files using the fuzzy finder Telescope:
 
@@ -753,15 +743,35 @@ To find files using the fuzzy finder Telescope:
 - Press `gd` to go to the definition of the symbol under the cursor.
 - Press `gf` to open the file under the cursor in Neovim.
 - Press `gI` to go to the implementation of the symbol under the cursor.
+- Press `gl` to see a full error message when an error is displayed.
 - Press `gr` to show references to the symbol under the cursor.
   TODO: This doesn't seem to work!
 - Press `gT` to go to the type definition of the symbol under the cursor.
 - Press `gx` to open the file under the cursor in the associated app.
-- Press `%` to move backwards through results.
+- Press `ctrl-o` to move backwards through results.
+
+### Telescope Commands
+
+- Press `K` to see the type of the symbol under the cursor.
 
 ### Comments
 
 To toggle commenting of the current line or selected lines, press `<leader>/`.
+
+### Auto-pairs
+
+AstroNvim uses the {% aTargetBlank "https://github.com/windwp/nvim-autopairs",
+"nvim-autopairs" %} plugin.
+This automatically closes parentheses, sqaure brackets, and curly braces.
+It is not enabled by default.
+TODO: How can it be enabled?
+
+### Status Line
+
+AstroNvim uses the {% aTargetBlank "https://github.com/rebelot/heirline.nvim",
+"heirline.nvim" %} plugin to render a nice status line
+that includes lots of information about the current Git repository.
+This is enabled by default.
 
 ### Git Commands
 
@@ -794,9 +804,14 @@ Selecting a theme that is compatible with Tree-sitter results in better syntax h
 
 ### Completions
 
+AstroNvim provides language-specific code completions.
 To select a suggested completion from a provided list,
 use ctrl-j and ctrl-k to move down and up
 and press return to select the highlighted completion.
+
+### Syntax Highlighting
+
+AstroNvim provides language-specific syntax highlighting.
 
 ### Snippets
 

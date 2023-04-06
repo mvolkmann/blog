@@ -957,11 +957,16 @@ not a copy of the table.
 
 To create a table that is dictionary-like,
 provide keys and values inside curly braces.
+Each key is followed by `=` and its value.
+
+Keys can be any value except `nil`, including other tables.
 String keys only require quotes if
 they contain special characters such as spaces.
-String keys in quotes and non-string keys must be enclosed in square brackets.
+Non-string keys and string keys in quotes must be enclosed in square brackets.
+
+Values can be of any type, including other tables.
 String values must be enclosed in quotes.
-Each key is followed by `=` and its value.
+
 For example:
 
 ```lua
@@ -2151,6 +2156,11 @@ end
 TODO: Add detail on calling C from Lua.
 
 TODO: Add detail on calling Lua from C.
+
+## HTTP
+
+The {% aTargetBlank "https://github.com/daurnimator/lua-http", "lua-http" %}
+is a Lua library that supports implementing HTTP servers and clients.
 
 ## Games
 
