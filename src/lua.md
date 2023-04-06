@@ -440,6 +440,7 @@ Lua does not have a dedicated type for single characters.
 
 Strings can be delimited with either single or double quotes.
 For example, `'Hello World!'` or `"Hello World!"`.
+This syntax is referred to as a "short literal string".
 
 Escaping certain characters by preceding them with a backslash
 changes how they are interpreted.
@@ -450,6 +451,9 @@ For example, `\n` produces a newline character,
 `\\` produces a backslash character.
 
 Multiline strings are delimiting with `[[` and `]]`.
+This syntax is referred to as a "long brackets".
+A newline after `[[` is ignored.
+A newline before `]]` is not ignored.
 For example:
 
 ```lua
@@ -459,6 +463,10 @@ We wish to hold the sky.
 But we never will.
 ]]
 ```
+
+There can be any number of `=` characters between the
+opening and closing square brackets as long as the count matches.
+For example, `[==[some text]==]`.
 
 Newlines and indentation inside the square brackets are retained.
 
