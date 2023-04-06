@@ -702,6 +702,24 @@ The leader key defaults to space.
 
 Press <leader>e to open the file explorer.
 Once in it, press `?' to see the default key mappings.
+Some of the useful key mappings include:
+
+- # to perform fuzzy filtering
+- A to add a new directory
+- H to toggle display of hidden files
+- P to toggle previous display of the file under the cursor
+- S to open the file under the cursor in a new horizontal split
+- s to open the file under the cursor in a new vertical split
+- ? to see all the file explorer key mappings
+- a to add a new file or directory
+- c to copy the file under the cursor (will prompt for new name)
+- d to delete the file or directory under the cursor
+- m to move the file or directory under the cursor to a different directory
+- o or return key to open the file or directory under the cursor
+- r to rename the file or directory under the cursor
+- t to open the file under the cursor in a new tab (new set of files!)
+- y to copy file to clipboard
+- p to paste file from clipboard into the selected directory
 
 Navigate down and up with `j` and `k`.
 To open a selected directory or file, press the return key.
@@ -715,7 +733,7 @@ To create a horizontal split, enter `<leader>/`.
 
 To create a vertical split, enter `<leader>|`.
 
-To close a split, enter `:clo` or `<leader>c`.
+To close a split, press ctrl-q or enter `:clo` or `<leader>c`.
 TODO: `<leader>c` does not work, but `<leader>q` does.
 
 To move between splits, enter `ctrl-h` (left),
@@ -820,6 +838,7 @@ Snippet suggests appear when the beginning of their trigger words are typed.
 When a list of possible snippets appears,
 press ctrl-j and ctrl-k to highlight one,
 press enter to select it.
+
 For snippets that have placeholders, type text into each one.
 Press tab to jump to the next placeholder
 and shift-tab to jump to the previous placeholder.
@@ -893,6 +912,17 @@ return {
    "https://github.com/L3MON4D3/LuaSnip/issues/857", "issue" %}.
 
 TODO: Describe the LuaSnips syntax for defining snippets.
+
+### Emmet
+
+{% aTargetBlank "https://docs.emmet.io", "Emmet" %} is an editor plugin
+for quickly entering HTML, XML, and CSS.
+It also supports many "actions" that operate on HTML and XML elements.
+The most commonly used action is to expand an abbreviation or snippet.
+
+AstroNvim does not ship with Emmett support.
+To add it, see {% aTargetBlank "https://github.com/mattn/emmet-vim",
+"emmet-vim" %}.
 
 ### Symbol List
 
