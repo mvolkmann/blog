@@ -701,25 +701,29 @@ The leader key defaults to space.
 ### File Explorer
 
 Press <leader>e to open the file explorer.
-Once in it, press `?' to see the default key mappings.
+Once open, press `?' to see the default key mappings.
+Press ctrl-j and ctrl-k to navigate down and up to select a file or directory.
+
 Some of the useful key mappings include:
 
 - # to perform fuzzy filtering
-- A to add a new directory
-- H to toggle display of hidden files
-- P to toggle previous display of the file under the cursor
-- S to open the file under the cursor in a new horizontal split
-- s to open the file under the cursor in a new vertical split
-- ? to see all the file explorer key mappings
-- a to add a new file or directory
-- c to copy the file under the cursor (will prompt for new name)
-- d to delete the file or directory under the cursor
-- m to move the file or directory under the cursor to a different directory
-- o or return key to open the file or directory under the cursor
-- r to rename the file or directory under the cursor
-- t to open the file under the cursor in a new tab (new set of files!)
-- y to copy file to clipboard
-- p to paste file from clipboard into the selected directory
+- `a` to add a new file or directory
+- `A` to add a new directory
+- `H` to toggle display of hidden files (hidden by default)
+- `P` to toggle preview display of selected file
+- `S` to open selected file in a new horizontal split
+- `s` to open selected file in a new vertical split
+- `?` to see all file explorer key mappings
+- `c` to copy selected file; prompts for new name
+- `d` to delete selected file or directory
+- `m` to move selected file or directory; prompts for destination directory
+- `o` or return key to open selected file or directory
+- `r` to rename selected file or directory
+- `t` to open selected file in a new tab (new set of files)
+- `y` to copy selected file to clipboard
+- `p` to paste file from clipboard into selected directory
+- `<` to go to previous tab (File, Bufs, or Git)
+- `>` to go to next tab (File, Bufs, or Git)
 
 Navigate down and up with `j` and `k`.
 To open a selected directory or file, press the return key.
