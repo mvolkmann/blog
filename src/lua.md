@@ -14,6 +14,9 @@ layout: topic-layout.njk
 dynamically typed scripting language created in 1993
 by a team at {% aTargetBlank "http://www.puc-rio.br",
 "Pontifical Catholic University of Rio de Janeiro" %} in Brazil.
+The team includes is {% aTargetBlank
+"https://en.wikipedia.org/wiki/Roberto_Ierusalimschy",
+"Roberto Ierusalimschy" %}, Walemar Celes, and Luiz Henrique de Figueiredo.
 
 The Portuguese word "Lua" means "Moon".
 The logo depicts the Moon orbiting around the Earth
@@ -84,9 +87,22 @@ For an extensive, see the {% aTargetBlank
 
 - {% aTargetBlank "https://www.lua.org/manual/", "Lua Reference Manual" %}
 - {% aTargetBlank "https://www.amazon.com/exec/obidos/ASIN/8590379868/lua-pilindex-20", "Programming in Lua" %} book
+- {% aTargetBlank "https://www.lua.org/gems/", "Lua Programming Gems" %}
 - {% aTargetBlank "https://github.com/nanotee/nvim-lua-guide", "Getting started using Lua in Neovim" %}
 - {% aTargetBlank "https://www.lua.org/pil/", "Programming in Lua" %} official book
-- {% aTargetBlank "", "" %}
+- {% aTargetBlank "https://www.youtube.com/watch?v=XxcSvnEIUq4", "Why (and why not) Lua" %} talk by Roberto Ierusalimschy (2019)
+- {% aTargetBlank "https://www.youtube.com/watch?v=H3inzGGFefg", "Lua and Pallene" %} talk by Roberto Ierusalimschy (2022)
+- {% aTargetBlank "https://github.com/pallene-lang/pallene", "Pallene" %}
+
+  "Pallene is a statically typed and ahead-of-time compiled sister language
+  to Lua, with a focus on performance. It is intended for
+  writing performance sensitive code that interacts with Lua,
+  a space that is currently filled by C modules and by LuaJIT.
+  Compared to C, Pallene should offer better
+  support for interacting with Lua data types,
+  bypassing the unfriendly syntax and performance overhead of the Lua-C API.
+  Compared to LuaJIT, Pallene aims to offer
+  more predictable run-time performance."
 
 ## Cheat Sheets
 
