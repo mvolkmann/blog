@@ -74,6 +74,9 @@ Notable uses of Lua include:
 - {% aTargetBlank "https://redis.io", "Redis" %} database
 - {% aTargetBlank "https://www.roblox.com", "Roblox" %} game
 - {% aTargetBlank "https://worldofwarcraft.blizzard.com/", "World of Warcraft" %}
+- Texas Instruments {% aTargetBlank
+  "https://education.ti.com/en/resources/lua-scripting",
+  "TI-Nspire" %} graphing calculators
 
 Roblox uses a variant of Lua called Luau.
 TODO: How does that differ?
