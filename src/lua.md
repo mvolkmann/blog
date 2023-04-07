@@ -748,6 +748,9 @@ end
 print(add(2, 3)) -- 5
 ```
 
+The function definition above is just syntactic sugar for
+`add = function (n1, n2) return n1 + n2 end`
+
 From the Lua reference manual:
 
 > A call of the form f{fields} is syntactic sugar for f({fields});
@@ -1847,6 +1850,8 @@ end
 
 ## Standard Library
 
+The Lua standard library defines the following modules:
+
 - <a href="https://www.lua.org/manual/5.4/manual.html#6.1" target="_blank">basic</a>
 - <a href="https://www.lua.org/manual/5.4/manual.html#6.2" target="_blank">coroutine</a>
 - <a href="https://www.lua.org/manual/5.4/manual.html#6.10" target="_blank">debug</a>
@@ -1857,6 +1862,8 @@ end
 - <a href="https://www.lua.org/manual/5.4/manual.html#6.4" target="_blank">string</a>
 - <a href="https://www.lua.org/manual/5.4/manual.html#6.6" target="_blank">table</a>
 - <a href="https://www.lua.org/manual/5.4/manual.html#6.5" target="_blank">utf8</a>
+
+Modules in the standard library do not need to be imported to use them.
 
 ### math module
 
@@ -1909,7 +1916,7 @@ Other functions defined in this library include:
 - `math.ult(m, n)` returns `true` if m < n when
   compared as unsigned integers; otherwise `false`
 
-## File I/O
+### io Module
 
 The following code shows the most basic way to write to a new file.
 If the file already exists, it is overwritten.
@@ -1980,9 +1987,57 @@ To close a file:
 file:close()
 ```
 
+### os Module
+
+- `os.time()` returns ms since 1970 or a given date/time
+- `os.difftime()` returns ms difference between two times
+- `os.date()` returns a string describing the current date and time
+- `os.exit(code)` — code can be true (exits with EXIT_SUCCESS; default),
+  false (exits with EXIT_FAILURE), or a number
+- `os.getenv("environment-variable-name")`
+- `os.rename(current_file_path, new_file_path)`
+- `os.remove(current_file_path)` — deletes the file
+- `os.execute(shell_command)`
+
+The `os.date` function takes a format string
+and an option time that defines to now.
+The format string uses the same characters as the C {% aTargetBlank
+"https://man7.org/linux/man-pages/man3/strftime.3.html", "strftime" %} function
+For example:
+
+```lua
+now = os.date()
+print(now) -- Fri Apr  7 03:09:52 2023
+print(type(now)) -- string
+
+time = os.time({
+  year = 1961,
+  month = 4,
+  day = 16,
+  hour = 10,
+  min = 20,
+  sec = 19,
+  isdst = true -- daylight savings time
+})
+print(t) -- -274891181
+print(type(t)) -- number
+
+format = "%A, %B %e, %Y"
+print(os.date(format, time)) -- Sunday, April 16, 1961
+```
+
+To get the time it takes to run some code:
+
+```lua
+local start = os.clock()
+— some code here
+print(os.clock() - start)
+```
+
 ## Modules
 
-A module is a collection of variables and functions.
+A module is defined by a source file that
+returns a table containing variables and functions.
 
 To define a module named `my_module`, create a file
 named `my_module.lua` containing code like the following:
@@ -2006,6 +2061,8 @@ mm = require("my_module")
 mm.some_function(1, 2)
 print(mm.some_variable)
 ```
+
+A Lua "package" is a collection of modules.
 
 ## Object Oriented Programming (OOP)
 
@@ -2309,30 +2366,8 @@ The things in the standard library are “modules”, not “libraries”.
 io.read(…) returns nil if there is no more file content to read.
 There are addition file mode values that include “b” to work with binary files.
 
-Cover the os library.
-os.time() returns ms since 1970 or.a given date/time
-os.difftime() returns ms difference between two times
-os.date()
-os.getenv(“environment-variable-name”)
-os.rename(current_file_path, new_file_path) ?
-os.remove(current_file_path) — deletes the file
-os.execute(shell_command)
-
-To get the time it takes to run some code:
-local start = os.clock()
-— some code here
-print(os.clock() - start)
-
-os.exit(code) — code can be true (exits with EXIT_SUCCESS; default), false (exits with EXIT_FAILURE), or a number
-
-A module source file returns a table containing variables and functions.
-
 There are probably many variable assignments in the
 examples here that should be preceded by `local`.
-
-A Lua “package” is a collection of modules.
-
-Modules in the standard library like io and table do not need to be imported to use them.
 
 OO-like objects hold their properties and methods in a table.
 Does each object get its own copy of every method?
@@ -2343,10 +2378,6 @@ you can use the or operator to avoid setting instance values to know when they a
 but beware of cases where are the table passed in contains false values because those will not be used if you simply check with the or operator.
 
 this video suggest multiple ways to handle this: https://youtu.be/IQf82d3cr20
-
-function foo(p1, p2) is just syntactic sugar for foo = function (p1, p2)
-
-did you say that the table.sort function sorts a table in place?
 
 In the table section, describe copying tables like the following.
 Is there a way to make a deep copy? Maybe something recursive?
