@@ -305,8 +305,13 @@ Other:
 
 ## Comments
 
-Single-line comments begin with two dashes.
-Multiline comments begin with `--[[` and end with `--]]` or just `]]`.
+A single-line comment begins with two dashes.
+
+A multiline comment is a single-line comment followed by a multiline string.
+They begin with `--[[` and end with `]]`.
+No characters are allowed between the beginning `--` and `[[`.
+Sometimes multiline comments end with `--]]` to make the end easier to see,
+but the `--` is really just part of the multiline string.
 
 ## Types
 
@@ -2019,7 +2024,7 @@ time = os.time({
   sec = 19,
   isdst = true -- daylight savings time
 })
-print(t) -- -274891181
+print(t)
 print(type(t)) -- number
 
 format = "%A, %B %e, %Y"
