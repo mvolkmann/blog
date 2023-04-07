@@ -475,6 +475,16 @@ TODO: `<leader>c` does not work, but `<leader>q` does.
 To move between splits, enter `ctrl-h` (left),
 `ctrl-j` (down), `ctrl-k` (up), and `ctrl-l` (right).
 
+To resize the current split, press ctrl and
+an arrow key to make it larger in that direction.
+In macOS this will likely not work due to default key mappings in System Settings.
+The following screenshot shows the key mappings that need to changed or
+disabled to allow the AstroNvim default resize key mappings to work.
+
+<img alt="AstroNvim smart-splits keys" style="width: 80%"
+    src="/blog/assets/astronvim-smart-splits-keys.png?v={{pkg.version}}"
+    title="AstroNvim smart-splits keys">
+
 ### Fuzzy Find Commands
 
 To find files using the fuzzy finder Telescope:
@@ -667,15 +677,3 @@ This lists symbols like variable, function, and type declarations.
 Select a symbol name to scroll to it in the source file.
 The list of symbols automatically updates
 when focus moves to a different buffer.
-
-## LunarVim
-
-## NvChad
-
-## Unorganized Content
-
-You need periods (all operators?) to be white. Make your own theme or override specific things?
-
-I need to change the syntax highlighting for . and : in Lua function calls
-to be white because they are hard to see currently.
-See <https://vi.stackexchange.com/questions/41763/syntax-highlighting-for-and-in-lua-function-calls>
