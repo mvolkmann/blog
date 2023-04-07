@@ -952,6 +952,14 @@ provide a comma-separated values inside curly braces.
 Curly braces are only used to construct tables.
 They are not used to delimit blocks of code.
 
+_Implementation Detail from {% aTargetBlank "https://www.lua.org/gems/", "Lua Programming Gems" %}_
+
+> "Every table in Lua has two parts: the array part and the hash part.
+> The array part stores entries with integer keys in the range 1 to n,
+> for some particular n.
+> All other entries (including integer keys outside that range)
+> go to the hash part."
+
 For example:
 
 ```lua
