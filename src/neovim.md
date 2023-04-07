@@ -40,32 +40,34 @@ There are plugins available to add all the important features.
 Some of the most popular plugins for Neovim
 are summarized in the table below.
 
-| Feature             | Popular Plugins                             |
-| ------------------- | ------------------------------------------- |
-| auto pairs          | nvim-autopairs                              |
-| better navigation   | Hop                                         |
-| better status line  | heirline, lualine                           |
-| code formatting     | null-ls.nvim                                |
-| color themes        | many; want Tree-sitter support              |
-| completions         | cmp-buffer, cmp-luasnip, cmp-path, nvim-cmp |
-| commenting          | Comment.nvim                                |
-| debugger            | nvim-dap, nvim-dap-ui                       |
-| file explorer       | neo-tree.nvim, nvim-tree.lua                |
-| fuzzy finder        | telescope.nvim, telescope-fzf-native.nvim   |
-| Git support         | fugitive.vim, gitsigns.nvim                 |
-| icons               | nvim-web-devicons                           |
-| keymap display      | which-key.nvim                              |
-| linting             | null-ls.nvim                                |
-| LSP client          | nvim-lspconfig                              |
-| LSP servers         | LSP Zero                                    |
-| notifications       | nvim-notify                                 |
-| package manager     | mason.nvim                                  |
-| plugin manager      | lazy.nvim, packer.nvim                      |
-| snippets            | LuaSnip, friendly-snippets                  |
-| split panes         | smart-splits.nvim                           |
-| syntax highlighting | nvim-treesitter, nvim-colorizer.lua         |
-| syntax parsing      | nvim-treesitter                             |
-| terminal            | toggleterm.nvim                             |
+| Feature             | Popular Plugins                                                                                               |
+| ------------------- | ------------------------------------------------------------------------------------------------------------- |
+| auto pairs          | nvim-autopairs                                                                                                |
+| better navigation   | {% aTargetBlank "https://github.com/phaazon/hop.nvim", "Hop" %}                                               |
+| better status line  | heirline, lualine                                                                                             |
+| code formatting     | null-ls.nvim                                                                                                  |
+| color themes        | many; want Tree-sitter support                                                                                |
+| completions         | cmp-buffer, cmp-luasnip, cmp-path, nvim-cmp                                                                   |
+| commenting          | Comment.nvim                                                                                                  |
+| debugger            | nvim-dap, nvim-dap-ui                                                                                         |
+| file explorer       | neo-tree.nvim, nvim-tree.lua                                                                                  |
+| fuzzy finder        | {% aTargetBlank "https://github.com/nvim-telescope/telescope.nvim", "Telescope" %}, telescope-fzf-native.nvim |
+| Git support         | {% aTargetBlank "https://github.com/tpope/vim-fugitive", "fugitive.vim" %}, gitsigns.nvim                     |
+| icons               | nvim-web-devicons                                                                                             |
+| keymap display      | which-key.nvim                                                                                                |
+| linting             | null-ls.nvim                                                                                                  |
+| LSP client          | nvim-lspconfig                                                                                                |
+| LSP servers         | LSP Zero                                                                                                      |
+| notifications       | nvim-notify                                                                                                   |
+| package manager     | mason.nvim                                                                                                    |
+| plugin manager      | lazy.nvim, packer.nvim                                                                                        |
+| snippets            | LuaSnip, friendly-snippets                                                                                    |
+| split panes         | smart-splits.nvim                                                                                             |
+| syntax highlighting | nvim-treesitter, nvim-colorizer.lua                                                                           |
+| syntax parsing      | nvim-treesitter                                                                                               |
+| terminal            | toggleterm.nvim                                                                                               |
+
+TODO: Try the Hop plugin
 
 Configuring all of these is a daunting task.
 For these reason, prebuilt Neovim configurations are popular.
@@ -91,11 +93,9 @@ This assumes the use of the {% aTargetBlank
 "https://github.com/wbthomason/packer.nvim", "Packer" %} plugin manager.
 
 ```lua
--- TODO: Does this only look for "plugins.lua" in the "lua" subdirectory?
--- TODO: Can "lua/plugins.lua" be moved to the same directory as this file?
+-- TODO: Is this needed with AstroNvim?
 require "plugins"
 
--- TODO: Improve color of line numbers.
 -- TODO: Configure cmd-s to save.
 
 vim.g.mapleader = " " -- many people use comman instead of space
@@ -145,6 +145,9 @@ To check for configuration issues, enter `:checkhealth`.
 
 ## Creating Files and Directories
 
+The following key mappings work in Neovim.
+Prebuilt configurations can provide different mappings.
+
 Enter `%` to create a new file.
 You will be prompted for the name.
 
@@ -158,204 +161,24 @@ This is useful after making changes to configuration files
 so you don't need to exit and restart nvim
 in order for the changes to take effect.
 
-## Plugins
+## Folds
 
-Some popular Neovim plugins include:
+Code folding is a feature of Vim that is also present in Neovim.
 
-- {% aTargetBlank "https://github.com/sindrets/diffview.nvim",
-  "diffview.nvim" %} for cycling through git diffs
-- {% aTargetBlank "https://github.com/tpope/vim-fugitive", "fugitive.vim" %}
-  for Git integration
-- {% aTargetBlank "https://github.com/phaazon/hop.nvim", "Hop" %}
-  EasyMotion-like plugin for jumping to
-  anywhere in a file with minimal keystrokes.
-- {% aTargetBlank "https://github.com/VonHeikemen/lsp-zero.nvim", "LSP Zero" %}
-- {% aTargetBlank "https://github.com/nvim-lualine/lualine.nvim",
-  "lualine.nvim" %} for configuring the Neovim status line
-- {% aTargetBlank "https://github.com/preservim/nerdcommenter",
-  "NERD Commenter" %} to simplify entering code comments
-- {% aTargetBlank "https://github.com/EdenEast/nightfox.nvim", "Nightfox" %}
-  theme with support for LSP, Treesitter, and more
-- {% aTargetBlank "https://github.com/nvim-tree/nvim-tree.lua",
-  "nvim-tree.lua" %} file explorer for Neovim
-- {% aTargetBlank "https://github.com/rose-pine/neovim",
-  "Rosé Pine for Neovim" %} color theme
-- {% aTargetBlank "https://github.com/nvim-telescope/telescope.nvim",
-  "Telescope" %} fuzzy finder
-- {% aTargetBlank "https://github.com/nvim-treesitter/nvim-treesitter",
-  "nvim-treesitter" %} Neovim interface to {% aTargetBlank
-  "https://github.com/tree-sitter/tree-sitter", "Treesitter" %}
-  which is a parser generator tool and an incremental parsing library.
+- `zm` - fold more (close)
+- `zr` - fold less (open)
+- `zM` - close all folds
+- `zR` - open all folds
+
+## Lua Functions
 
 To run a Lua function exposed by a plugin,
 enter `:{function-name}({arguments})`.
 
-## Packer
-
-The most popular plugin manager for Neovim is
-{% aTargetBlank "https://github.com/wbthomason/packer.nvim", "packer" %}.
-To install this:
-
-- Copy a `git clone` command from the link above.
-- Paste that command into a terminal window and execute it.
-- Create the directory `~/.config/nvim/lua`.
-- Create the file `plugins.lua` in that directory containing the following:
-
-  ```lua
-  return require('packer').startup(function(use)
-    -- Packer can manage itself
-    use 'wbthomason/packer.nvim'
-  end)
-  ```
-
-- Edit `~/.config/nvim/init.lua`.
-
-  - Add `require "plugins"`.
-  - Add the following to cause the `:PackerCompile` command
-    to run automatically when `plugins.lua` is updated.
-
-    ```
-    vim.cmd([[
-      augroup packer_user_config
-        autocmd!
-        autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-      augroup end
-    ]])
-    ```
-
-- Describe the desired plugins in `~/config/nvim/lua/plugins.lua`
-  by calling the `use` function for each.
-
-- To install new plugins added in `plugins.lua`,
-  update previously installed plugins,
-  and delete plugins no longer described in `plugins.lua`,
-  enter `:PackerSync`.
-
-- To list the installed plugins, enter `:PackerStatus`.
-
-By default Packer stores downloaded plugins in
-`~/.local/share/nvim/site/pack/packer/start`.
-The local Git repository for each installed plugin
-is a directory in the `start` directory.
-To see the version of a plugin that was installed,
-TODO: Look at what?
-
-## LSP Zero
-
-The Language Server Protocol (LSP) was designed by Microsoft for use in VS Code.
-It can be used by other text editors such as Neovim.
-
-{% aTargetBlank "https://github.com/VonHeikemen/lsp-zero.nvim", "LSP Zero" %}
-is a Neovim plugin that bundles all the code require to get
-{% aTargetBlank "https://github.com/hrsh7th/nvim-cmp", "nvim-cmp" %}
-(a popular autocompletion plugin) and
-{% aTargetBlank "https://github.com/neovim/nvim-lspconfig", "nvim-lspconfig" %}
-(configuration for the Nvim LSP client that is bundled with Neovim)
-to work together.
-It also uses {% aTargetBlank "https://github.com/williamboman/mason.nvim",
-"mason.nvim" %} (another package manager)
-to allow you to install language servers from inside Neovim.
-
-To install and configure LSP Zero:
-
-1. Add the following in `~/config/nvim/lua/plugins.lua`:
-
-   ```lua
-   use {
-     'VonHeikemen/lsp-zero.nvim',
-     branch = 'v2.x',
-     requires = {
-       -- LSP Support
-       {'neovim/nvim-lspconfig'},             -- Required
-       {                                      -- Optional
-         'williamboman/mason.nvim',
-         run = function()
-           pcall(vim.cmd, 'MasonUpdate')
-         end,
-       },
-       {'williamboman/mason-lspconfig.nvim'}, -- Optional
-
-       -- Autocompletion
-       {'hrsh7th/nvim-cmp'},     -- Required
-       {'hrsh7th/cmp-nvim-lsp'}, -- Required
-       {'L3MON4D3/LuaSnip'},     -- Required
-     }
-   }
-   ```
-
-1. Create the file `~/.config/nvim/after/plugin/lsp.lua`
-   containing the following:
-
-   ```lua
-   local lsp = require('lsp-zero')
-
-   lsp.preset("recommended")
-
-   lsp.on_attach(function(client, bufnr)
-      lsp.default_keymaps({buffer = bufnr})
-   end)
-
-   -- Configure the Lua language server for Neovim.
-   require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
-
-   lsp.ensure_installed {
-     "eslint",
-     "lua_ls",
-     "tsserver"
-   }
-
-   lsp.setup()
-
-   local cmp = require('cmp')
-   local cmp_action = lsp.cmp_action()
-
-   cmp.setup({
-     -- This configures LSP key mappings.
-     mapping = {
-       -- This enables selecting a suggested completion by
-       -- pressing the return key in addition to the default of ctrl-y.
-       ['<cr>'] = cmp.mapping.confirm({select = true})
-     }
-   })
-   ```
-
-1. Enter `:so` to source the current file.
-
-1. Enter `:PackerSync`
-
-1. Enter ":Mason" to open a window that displays
-   a list of the installed language servers and
-   a list of the available language servers that have not been installed.
-
-   By default, all known language servers are displayed
-   regardless of their capabilities.
-   To filter the lists based on capabilities,
-   type a number from 1 to 5 where 1 shows All,
-   2 shows only LSPs, 3 shows only DAPs (Debug Adapter Protocol),
-   4 shows only Linters, and 5 shows only Formatters.
-
-   - To toggle between showing help and showing lists of language servers,
-     enter "g?".
-   - To install a language server, move the cursor to its name and press "i".
-   - To uninstall a language server, move the cursor to its name and press "X".
-   - To close the Mason window, press esc.
-
-As of April 2023, no LSPs for Swift appear in the available list.
-{% aTargetBlank "https://github.com/apple/sourcekit-lsp", "SourceKit-LSP" %}
-is an LSP for Swift, but it does not appear to work with Neovim yet.
-The documentation {% aTargetBlank
-"https://github.com/apple/sourcekit-lsp/blob/main/Editors/README.md", "here" %}
-claims that SourceKit-LSP can be configured to work with Neovim,
-but it does not work for me.
-
-To use LSP Zero, open any file whose file extension
-maps to an install language server.
-Completions will appear while typing.
-To accept the first suggestion, press ctrl-y.
-To accept another suggestion,
-press the down arrow key to move to it and press ctrl-y.
-
 ### Key Bindings
+
+TODO: Delete this section after verify whether there are any key mappings here
+TODO: that work in AstroNvim and are not described in that section.
 
 LSP Zero defines the following key bindings that all being with the leader key:
 
@@ -386,97 +209,6 @@ LSP Zero defines the following key bindings that all being with the leader key:
 - <Ctrl-p>: if completion menu is visible, go to previous item; otherwise trigger completion menu
 - <Ctrl-d>: scrolls downs the documentation window
 - <Ctrl-u>: scrolls up the documentation window
-
-From the docs,
-"By default lsp-zero will not create a keybinding if it is taken.
-You can force lsp-zero's bindings by adding ..."
-
-```lua
-lsp.default_keymaps({
-  buffer = bufnr,
-  preserve_mappings = false
-})
-```
-
-## Lua Snip
-
-{% aTargetBlank "https://github.com/L3MON4D3/LuaSnip", "LuaSnip" %} is a
-snippet manager for Neovim.
-
-To install it:
-
-- Add the following in `~/.config/nvim/lua/plugins.lua`:
-
-  ```lua
-    use({
-      "L3MON4D3/LuaSnip",
-      -- use latest release.
-      tag = "v<CurrentMajor>.*",
-      -- install optional jsregexp package
-      run = "make install_jsregexp"
-    })
-  ```
-
-- Enter `:PluginSync`
-
-- Create the file `~/.config/nvim/lua/after/plugin/luasnip.lua`
-  with the following content:
-
-  ```lua
-
-  ```
-
-## Telescope
-
-{% aTargetBlank "https://github.com/nvim-telescope/telescope.nvim",
-"Telescope" %} is a fuzzy finder for Neovim.
-
-To install it:
-
-- Add the following in `~/.config/nvim/lua/plugins.lua`:
-
-```lua
-use {
- 'nvim-telescope/telescope.nvim',
- requires = { {'nvim-lua/plenary.nvim'} }
-}
-```
-
-- Enter `:PluginSync`
-
-- Create the directory `~/.config/nvim/after/plugin`.
-- Create the file `telescope.lua` in that directory with the following content:
-
-  ```lua
-  local builtin = require "telescope.builtin"
-
-  -- This finds buffers by their name.
-  vim.keymap.set('n', '<leader>fb', builtin.buffers, {desc = '[F]ind [B]uffers'})
-
-  -- This may not be particularly useful.
-  vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = '[F]ind in [D]iagnostics' })
-
-  -- This finds files by their name.
-  vim.keymap.set('n', '<leader>ff', builtin.find_files, {desc = '[F]ind [F]iles'})
-
-  -- This finds files by their content.
-  vim.keymap.set('n', '<leader>fg', builtin.live_grep, {desc = '[F]ind by [G]rep'})
-
-  -- This finds Git controlled files by their name.
-  -- It avoids excluded files such as those under a `node_modules` directory.
-  vim.keymap.set('n', '<leader>fG', builtin.git_files, {desc = '[F]ind in [G]it'})
-
-  -- This finds help files by their content.
-  vim.keymap.set('n', '<leader>fh', builtin.help_tags, {desc = '[F]ind in [H]elp'})
-
-  -- This fines files whose content includes the word under the cursor.
-  vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[F]ind current [W]ord' })
-
-  -- Project Search (from ThePrimeagen)
-  vim.keymap.set('n', '<leader>ps', function()
-    builtin.grep_string({search = vim.fn.input("Grep> ")})
-  end)
-  ```
 
 ## Tree-sitter
 
