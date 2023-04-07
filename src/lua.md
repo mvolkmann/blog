@@ -22,6 +22,18 @@ The Portuguese word "Lua" means "Moon".
 The logo depicts the Moon orbiting around the Earth
 and its shadow being cast onto the Earth.
 
+The goals of Lua are:
+
+- portability: runs on any OS targeted by the ANSI C compiler
+- simplicity: easy to use by non-professional programmers
+- small size: supports embedding in non-Lua applications
+- scripting: easy to invoke from system language such as C
+
+Examples of Lua simplicity include having a small number of keywords (21)
+and indexing from 1 instead 0 (like matrices in math).
+The Lua reference manual that describes every language feature
+is around 100 pages.
+
 Lua has an interpreter and a virtual machine.
 The interpreter is written in C and
 produces bytecode that runs in the virtual machine.
@@ -34,7 +46,7 @@ large collection of packages that can be installed using the
 
 Pros of Lua include:
 
-- considered to be the fastest scripting language
+- considered to be the fastest scripting language when compiled
 - free and open sources under the MIT license
 - simple syntax with only 21 keywords
 - uses dynamic variables that do not require specifying types
@@ -97,16 +109,6 @@ For an extensive, see the {% aTargetBlank
 - {% aTargetBlank "https://www.youtube.com/watch?v=H3inzGGFefg", "Lua and Pallene" %} talk by Roberto Ierusalimschy (2022)
 - {% aTargetBlank "https://github.com/pallene-lang/pallene", "Pallene" %}
 
-  "Pallene is a statically typed and ahead-of-time compiled sister language
-  to Lua, with a focus on performance. It is intended for
-  writing performance sensitive code that interacts with Lua,
-  a space that is currently filled by C modules and by LuaJIT.
-  Compared to C, Pallene should offer better
-  support for interacting with Lua data types,
-  bypassing the unfriendly syntax and performance overhead of the Lua-C API.
-  Compared to LuaJIT, Pallene aims to offer
-  more predictable run-time performance."
-
 ## Cheat Sheets
 
 - {% aTargetBlank "https://www.codecademy.com/learn/learn-lua/modules/learn-lua-introduction/cheatsheet", "codecademy" %}
@@ -131,7 +133,15 @@ Lua programs can be compiled to bytecode before runtime.
 This enables faster program startup because
 runtime bytecode generation is no longer needed.
 
+The performance of standard Lua is worse that many scripting languages,
+including Python, unless it is compiled
+ahead of time (AOT) or just in time (JIT).
+
 There are multiple ways to produce and execute Lua bytecode.
+
+For a comparison of the performance of each approach, see {% aTargetBlank
+"https://eklausmeier.goip.de/blog/2020/05-14-performance-comparison-pallene-vs-lua-5-1-5-2-5-3-5-4-vs-c/",
+"Performance Comparison Pallene vs. Lua 5.1, 5.2, 5.3, 5.4 vs. C" %}.
 
 ### luac
 
@@ -153,6 +163,8 @@ To execute a bytecode file, enter a command like
 to `luac` that produces smaller bytecode files.
 LuaJIT also executes bytecode files and provides runtime optimizations
 that typically result in better performance.
+
+LuaJIT is implemented by a separate team from the team that maintains Lua.
 
 From {% aTargetBlank "https://api7.ai/learning-center/openresty/luajit-vs-lua",
 "api7.ai" %}:
@@ -187,6 +199,23 @@ To generate a bytecode file from a Lua program,
 enter a command like `luajit -b demo.lua demo.out`
 To execute a bytecode file, enter a command like `luajit demo.out`.
 This will start faster than entering `luajit demo.lua`.
+
+### Pallene
+
+"{% aTargetBlank "https://github.com/pallene-lang/pallene", "Pallene" %}
+is a statically typed and ahead-of-time compiled sister language
+to Lua, with a focus on performance. It is intended for
+writing performance sensitive code that interacts with Lua,
+a space that is currently filled by C modules and by LuaJIT.
+Compared to C, Pallene should offer better
+support for interacting with Lua data types,
+bypassing the unfriendly syntax and performance overhead of the Lua-C API.
+Compared to LuaJIT, Pallene aims to offer
+more predictable run-time performance."
+
+Pallene is the name of a Saturn moon.
+The name of the moon is pronounced "puh lee nee",
+but the language designer pronounces it "pah lean".
 
 ## VS Code Setup
 
