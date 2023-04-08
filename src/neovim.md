@@ -82,28 +82,10 @@ There are many to choose from, but the most popular seem to be:
 Neovim can be configured using Vimscript, the Lua programming language,
 or both.
 
-The easiest way to get started is to use {% aTargetBlank
-"https://github.com/nvim-lua/kickstart.nvim", "kickstart.nvim" %}.
-The following steps bypass this and configure Neovim in a more personalized way.
-
-Create the file `~/.config/nvim/init.lua`.
-
-Some suggested content for this file is the following.
-This assumes the use of the {% aTargetBlank
-"https://github.com/wbthomason/packer.nvim", "Packer" %} plugin manager.
+Create the file `~/.config/nvim/init.lua`
+and add content similar to the following.
 
 ```lua
--- TODO: Is this needed with AstroNvim?
-require "plugins"
-
--- TODO: Configure cmd-s to save.
-
-vim.g.mapleader = " " -- many people use comman instead of space
-
--- This causes the yank(copy) and delete(cut) commands to copy to the
--- system clipboard so the copied text can be pasted into another app.
-vim.opt.clipboard = 'unnamed'
-
 local indent = 2
 vim.opt.shiftwidth=indent -- indent code with two spaces
 vim.opt.softtabstop=indent -- tabs take two spaces
@@ -122,41 +104,18 @@ vim.opt.termguicolors = true -- uses 24-bit colors
 vim.opt.wrap = false -- prevents line wrapping at end of window or pane
 
 -- Key mappings
--- These are supposed to map cmd-s to save, but I can't get them to work.
+-- TODO: These are supposed to map cmd-s to save, but I can't get them to work.
 vim.keymap.set('n', '<D-s>', ":w<kEnter>")
 vim.keymap.set('i', '<D-s', "<Esc>:w<kEnter>i")
-
--- This automatically runs the `:PackerCompile` command
--- every time the `~/.config/nvim/lua/plugins.lua` file is updated.
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-  augroup end
-]])
+vim.keymap.set('n', '<80><fd>hs', ":w<kEnter>")
+vim.keymap.set('i', '<80><fd>hs', "<Esc>:w<kEnter>i")
 ```
-
-To see the directories that Neovim searches for packages,
-enter `:help rtp` or `:set packpath?`.
-One directory should be `~/.config/nvim` and
-another should be `!/.config/nvim/after`.
 
 To check for configuration issues, enter `:checkhealth`.
 
-## Creating Files and Directories
-
-The following key mappings work in Neovim.
-Prebuilt configurations can provide different mappings.
-
-Enter `%` to create a new file.
-You will be prompted for the name.
-
-Enter `d` to create a new directory.
-You will be prompted for the name.
-
 ## Sourcing Files
 
-When editing a configuration file, to execute it enter `:source` or `:so`.
+After editing a configuration file, enter `:source` or `:so` to execute it.
 This is useful after making changes to configuration files
 so you don't need to exit and restart nvim
 in order for the changes to take effect.
@@ -175,7 +134,7 @@ Code folding is a feature of Vim that is also present in Neovim.
 To run a Lua function exposed by a plugin,
 enter `:{function-name}({arguments})`.
 
-### Key Bindings
+## Key Bindings
 
 TODO: Delete this section after verify whether there are any key mappings here
 TODO: that work in AstroNvim and are not described in that section.
@@ -325,6 +284,7 @@ To check the status of your installation, enter `:checkhealth`.
 
 The default key mappings provided by AstroNvim are described
 {% aTargetBlank "https://astronvim.com/Basic%20Usage/mappings", "here" %}.
+Most of these are defined in `~/.config/nvim/lua/astronvim/mappings.lua`
 
 ### Font
 
