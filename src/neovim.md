@@ -464,6 +464,12 @@ press `<leader>gt`. Press `esc` twice to close the window.
 
 To list all the branches and optionally switch to one,
 press `<leader>gb`.
+- Enter text in the "Git Branches" input to filter the branches.
+- Press tab to jump to the "Results" pane that lists the branches.
+- Press ctrl-j and ctrl-k to move down and up in the list.
+  Repeatedly pressing tab also moves down in the list.
+- Press the return key to switch to the selected branch.
+- The "Git Branch Preview" pane on the right shows the commits on the branch.
 
 To see a side-by-side diff for the current file, press `<leader>gd`.
 
