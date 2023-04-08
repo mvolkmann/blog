@@ -477,6 +477,8 @@ See the lazygit {% aTargetBlank
 For more information, watch this {% aTargetBlank
 "https://www.youtube.com/watch?v=CPLdltN7wgE", "YouTube video" %}.
 
+TODO: How can you commit changes and push them from inside AstroNvim?
+
 ### Color Themes
 
 To see all the installed color themes and select one,
