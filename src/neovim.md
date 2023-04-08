@@ -111,8 +111,6 @@ vim.keymap.set('n', '<80><fd>hs', ":w<kEnter>")
 vim.keymap.set('i', '<80><fd>hs', "<Esc>:w<kEnter>i")
 ```
 
-To check for configuration issues, enter `:checkhealth`.
-
 ## Sourcing Files
 
 After editing a configuration file, enter `:source` or `:so` to execute it.
@@ -191,48 +189,6 @@ syntax highlighting based on the tokens that Treesitter reports.
 A common motivation for installing Tree-sitter is to get the best
 syntax highlighting from a theme that is compatible with Tree-sitter.
 
-To install and configure Tree-sitter:
-
-1. Add the following in `~/.config/nvim/lua/plugins.lua`:
-
-   ```lua
-   use("nvim-treesitter/nvim-treesitter", {run = ":TSUpdate"})
-   ```
-
-1. Enter `:PackerSync`
-
-1. Create the file `~/.config/nvim/after/plugin/treesitter.lua`
-   containing the following:
-
-   ```lua
-   require "nvim-treesitter.configs".setup {
-     -- A list of parser names, or "all" (the five listed parsers should always be installed)
-     ensure_installed = { "c", "javascript", "lua", "query", "rust", "swift", "typescript", "vim", "vimdoc" },
-
-     -- Install parsers synchronously (only applied to `ensure_installed`)
-     sync_install = false,
-
-     -- Automatically install missing parsers when entering buffer
-     -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-     auto_install = true,
-
-     -- List of parsers to ignore installing (for "all")
-     ignore_install = { },
-
-     highlight = {
-       enable = true
-
-       -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-       -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-       -- Using this option may slow down your editor, and you may see some duplicate highlights.
-       -- Instead of true it can also be a list of languages
-       additional_vim_regex_highlighting = false,
-     },
-   }
-   ```
-
-1. Enter `:so` to source this file.
-
 ## Premade Configurations
 
 The three most popular Neovim premade configurations are
@@ -279,21 +235,6 @@ To install
 1. Enter `:AstroUpdatePackages` to get the latest AstroNvim updates.
 
 To check the status of your installation, enter `:checkhealth`.
-
-### Key Mappings
-
-The default key mappings provided by AstroNvim are described
-{% aTargetBlank "https://astronvim.com/Basic%20Usage/mappings", "here" %}.
-Most of these are defined in `~/.config/nvim/lua/astronvim/mappings.lua`
-
-### Font
-
-Several parts of AstroNvim attempt to display icons.
-This requires using a
-{% aTargetBlank "https://www.nerdfonts.com/", "Nerd font" %}.
-One that I recommend is "Caskaydia Cove Nerd Font" which is very similar to
-the non-Nerd font {% aTargetBlank "https://github.com/microsoft/cascadia-code",
-"Cascadia Code" %} from Microsoft.
 
 ### Configuration
 
@@ -361,6 +302,23 @@ return function(_, opts)
   )
 end
 ```
+
+### Key Mappings
+
+The default key mappings provided by AstroNvim are described
+{% aTargetBlank "https://astronvim.com/Basic%20Usage/mappings", "here" %}.
+Most of these are defined in `~/.config/nvim/lua/astronvim/mappings.lua`
+
+### Font
+
+Several parts of AstroNvim attempt to display icons.
+This requires using a
+{% aTargetBlank "https://www.nerdfonts.com/", "Nerd font" %}.
+One that I recommend is "Caskaydia Cove Nerd Font" which is very similar to
+the non-Nerd font {% aTargetBlank "https://github.com/microsoft/cascadia-code",
+"Cascadia Code" %} from Microsoft.
+
+### More Configuration
 
 TODO: Should you cover all of these in the sections that follow?
 
