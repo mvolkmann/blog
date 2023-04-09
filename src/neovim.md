@@ -478,7 +478,7 @@ To toggle commenting of the current line or selected lines, press `<leader>/`.
 
 AstroNvim uses the {% aTargetBlank "https://github.com/windwp/nvim-autopairs",
 "nvim-autopairs" %} plugin.
-This automatically closes parentheses, sqaure brackets, and curly braces.
+This automatically closes parentheses, square brackets, and curly braces.
 It is not enabled by default.
 TODO: How can it be enabled?
 
@@ -727,7 +727,7 @@ this plugin recognizes in JavaScript code.
 ```
 
 There are multiple ways to display a list of all these kinds of comments
-found in all files within the currrent project
+found in all files within the current project
 (in and below the starting directory).
 
 - To see them in a Telescope window, enter `:TodoTelescope`.

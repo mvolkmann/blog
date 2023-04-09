@@ -271,64 +271,60 @@ The entire grammar is described below.
 - "unop" is short for "unary operator".
 - "var" is short for "variable".
 
-```text
-chunk ::= {stat [`;´]} [laststat[`;´]]
+{% raw %}
+<code>
+chunk ::= {stat [';']} [laststat[';']]
 
 block ::= chunk
 
-stat ::=  varlist1 `=´ explist1  |
-          functioncall  |
-          do block end  |
-          while exp do block end  |
-          repeat block until exp  |
-          if exp then block {elseif exp then block} [else block] end  |
-          for Name `=´ exp `,´ exp [`,´ exp] do block end  |
-          for namelist in explist1 do block end  |
-          function funcname funcbody  |
-          local function Name funcbody  |
-          local namelist [`=´ explist1]
+stat ::= varlist1 '=' explist1 | functioncall | do block end | while exp do block end | repeat block until exp | if exp then block {elseif exp then block} [else block] end | for Name '=' exp ',' exp [',' exp] do block end |
+for namelist in explist1 do block end |
+function funcname funcbody |
+local function Name funcbody |
+local namelist ['=' explist1]
 
-laststat ::= return [explist1]  |  break
+laststat ::= return [explist1] | break
 
-funcname ::= Name {`.´ Name} [`:´ Name]
+funcname ::= Name {'.' Name} [':' Name]
 
-varlist1 ::= var {`,´ var}
+varlist1 ::= var {',' var}
 
-var ::=  Name  |  prefixexp `[´ exp `]´  |  prefixexp `.´ Name
+var ::= Name | prefixexp '[' exp ']' | prefixexp '.' Name
 
-namelist ::= Name {`,´ Name}
+namelist ::= Name {',' Name}
 
-explist1 ::= {exp `,´} exp
+explist1 ::= {exp ','} exp
 
-exp ::=  nil  |  false  |  true  |  Number  |  String  |  `...´  |
-          function  |  prefixexp  |  tableconstructor  |  exp binop exp  |  unop exp
+exp ::= nil | false | true | Number | String | '...' |
+function | prefixexp | tableconstructor | exp binop exp | unop exp
 
-prefixexp ::= var  |  functioncall  |  `(´ exp `)´
+prefixexp ::= var | functioncall | '(' exp ')'
 
-functioncall ::=  prefixexp args  |  prefixexp `:´ Name args
+functioncall ::= prefixexp args | prefixexp ':' Name args
 
-args ::=  `(´ [explist1] `)´  |  tableconstructor  |  String
+args ::= '(' [explist1] ')' | tableconstructor | String
 
 function ::= function funcbody
 
-funcbody ::= `(´ [parlist1] `)´ block end
+funcbody ::= '(' [parlist1] ')' block end
 
-parlist1 ::= namelist [`,´ `...´]  |  `...´
+parlist1 ::= namelist [',' '...'] | '...'
 
-tableconstructor ::= `{´ [fieldlist] `}´
+tableconstructor ::= '{' [fieldlist] '}'
 
 fieldlist ::= field {fieldsep field} [fieldsep]
 
-field ::= `[´ exp `]´ `=´ exp  |  Name `=´ exp  |  exp
+field ::= '[' exp ']' '=' exp | Name '=' exp | exp
 
-fieldsep ::= `,´  |  `;´
+fieldsep ::= ',' | ';'
 
-binop ::= `+´  |  `-´  |  `*´  |  `/´  |  `^´  |  `%´  |  `..´  |
-          `<´  |  `<=´  |  `>´  |  `>=´  |  `==´  |  `~=´  |
-          and  |  or
+binop ::= '+' | '-' | '\*' | '/' | '^' | '%' | '..' | '<' | '<=' | '>' | '>=' | '==' | '~=' |
+and | or
 
-unop ::= `-´  |  not  |  `#´
-```
+unop ::= '-' | not | '#'
+</code>
+
+{% endraw %}
 
 ## Source Files
 
