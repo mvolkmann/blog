@@ -437,10 +437,14 @@ To find files using the fuzzy finder Telescope:
 - Press `<leader>fo` to find files opened recently (old files)
 - Press `<leader>fr` to find Vim registers (can see their contents)
 - Press `<leader>ft` to find a theme (can see previews and select one)
-- Press `<leader>fw` to find files by a word in their content.
+- Press `<leader>fw` to find files by a word in their content (live_grep).
 - Press `<leader>fW` to find files containing multiple consecutive words.
 
 ### Telescope Commands
+
+When a Telescope window is displayed, to see its key mappings
+press `esc` to exit insert mode and press `?`.
+The key mappings will appear at the bottom of the window.
 
 For symbols:
 
@@ -469,6 +473,9 @@ For file paths:
 
 - Press `gf` to open the file under the cursor in Neovim.
 - Press `gx` to open the file under the cursor in the associated app.
+
+To close a Telescope window, press `esc` twice or
+press `esc` to exit insert mode and press `q` to quit.
 
 ### Comments
 
