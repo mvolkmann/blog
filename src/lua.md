@@ -259,6 +259,77 @@ The {% aTargetBlank
 "Lua Debug" %} VS Code extension supports
 debugging Lua code with breakpoints and watches.
 
+## Grammar
+
+Lua is a very simple language.
+The entire grammar is described below.
+
+- "binop" is short for "binary operator".
+- "exp" is short for "expression".
+- "fieldsep" is short for "field separator".
+- "stat" is short for "statement".
+- "unop" is short for "unary operator".
+- "var" is short for "variable".
+
+```text
+chunk ::= {stat [`;´]} [laststat[`;´]]
+
+block ::= chunk
+
+stat ::=  varlist1 `=´ explist1  |
+          functioncall  |
+          do block end  |
+          while exp do block end  |
+          repeat block until exp  |
+          if exp then block {elseif exp then block} [else block] end  |
+          for Name `=´ exp `,´ exp [`,´ exp] do block end  |
+          for namelist in explist1 do block end  |
+          function funcname funcbody  |
+          local function Name funcbody  |
+          local namelist [`=´ explist1]
+
+laststat ::= return [explist1]  |  break
+
+funcname ::= Name {`.´ Name} [`:´ Name]
+
+varlist1 ::= var {`,´ var}
+
+var ::=  Name  |  prefixexp `[´ exp `]´  |  prefixexp `.´ Name
+
+namelist ::= Name {`,´ Name}
+
+explist1 ::= {exp `,´} exp
+
+exp ::=  nil  |  false  |  true  |  Number  |  String  |  `...´  |
+          function  |  prefixexp  |  tableconstructor  |  exp binop exp  |  unop exp
+
+prefixexp ::= var  |  functioncall  |  `(´ exp `)´
+
+functioncall ::=  prefixexp args  |  prefixexp `:´ Name args
+
+args ::=  `(´ [explist1] `)´  |  tableconstructor  |  String
+
+function ::= function funcbody
+
+funcbody ::= `(´ [parlist1] `)´ block end
+
+parlist1 ::= namelist [`,´ `...´]  |  `...´
+
+tableconstructor ::= `{´ [fieldlist] `}´
+
+fieldlist ::= field {fieldsep field} [fieldsep]
+
+field ::= `[´ exp `]´ `=´ exp  |  Name `=´ exp  |  exp
+
+fieldsep ::= `,´  |  `;´
+
+binop ::= `+´  |  `-´  |  `*´  |  `/´  |  `^´  |  `%´  |  `..´  |
+          `<´  |  `<=´  |  `>´  |  `>=´  |  `==´  |  `~=´  |
+          and  |  or
+
+unop ::= `-´  |  not  |  `#´
+```
+
 ## Source Files
 
 Source files have a `.lua` extension.

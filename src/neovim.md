@@ -67,8 +67,6 @@ are summarized in the table below.
 | syntax parsing      | nvim-treesitter                                                                                               |
 | terminal            | toggleterm.nvim                                                                                               |
 
-TODO: Try the Hop plugin
-
 Configuring all of these is a daunting task.
 For these reason, prebuilt Neovim configurations are popular.
 There are many to choose from, but the most popular seem to be:
@@ -126,46 +124,12 @@ Code folding is a feature of Vim that is also present in Neovim.
 - `zr` - fold less (open)
 - `zM` - close all folds
 - `zR` - open all folds
+- `zp` - peek at folded lines; next keystroke hides again
 
 ## Lua Functions
 
 To run a Lua function exposed by a plugin,
 enter `:{function-name}({arguments})`.
-
-## Key Bindings
-
-TODO: Delete this section after verify whether there are any key mappings here
-TODO: that work in AstroNvim and are not described in that section.
-
-LSP Zero defines the following key bindings that all being with the leader key:
-
-- K: displays information about the symbol under the cursor in a floating window
-- gd: jumps to the definition of the symbol under the cursor
-- gD: jumps to the declaration of the symbol under the cursor
-  (some servers don't implement this)
-- gi: lists all implementations for the symbol under the cursor
-  in the quickfix window
-- go: jumps to the definition of the type of the symbol under the cursor
-- gr: lists all references to the symbol under the cursor in the quickfix window
-- gs: displays signature information about the symbol under the cursor
-  in a floating window
-
-- <F2>: renames all references to the symbol under the cursor
-- <F3>: format code in current buffer
-- <F4>: selects a code action available at the current cursor position
-
-- gl: show diagnostics in a floating window
-- [d: moves to the previous diagnostic in the current buffer
-- ]d: moves to the next diagnostic in the current buffer
-
-- <Ctrl-y>: confirms selection (TODO: Can this be configured to use the return key?)
-- <Ctrl-e>: cancels completion
-- <Down>: navigates to next suggested completion
-- <Up>: navigates to previous suggested completion
-- <Ctrl-n>: if completion menu is visible, go to next item; otherwise trigger completion menu
-- <Ctrl-p>: if completion menu is visible, go to previous item; otherwise trigger completion menu
-- <Ctrl-d>: scrolls downs the documentation window
-- <Ctrl-u>: scrolls up the documentation window
 
 ## Tree-sitter
 
@@ -188,6 +152,15 @@ integrates Tree-sitter with Neovim and provides functionality such as
 syntax highlighting based on the tokens that Treesitter reports.
 A common motivation for installing Tree-sitter is to get the best
 syntax highlighting from a theme that is compatible with Tree-sitter.
+
+The configuration file for Tree-sitter is
+`~/.config/nvim/lua/plugins/treesitter.lua`.
+In the `opts` table, add a line like the following
+to ensure support for specified languages is installed:
+
+```lua
+    ensure_installed = { "javascript", "lua", "typescript" },
+```
 
 ## Premade Configurations
 
@@ -228,11 +201,22 @@ To install
 1. Enter `git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim`
 1. Enter `brew install lua-language-server`.
 1. Enter `nvim`. On first launch this will install many things.
-1. Install language parsers by enter `:TSInstall {language-name}`
+1. Install language parsers by entering `:TSInstall {language-name}`
    for each language.
    For example, use the language names "javascript", "lua", and "swift".
+1. Install LSP servers by entering `:LspInstall {server-name}`
+   for each server.
+   For example, use the server names "eslint", "tsserver", and "lua_ls".
+1. Enter `NullLsInstall prettier`.
+1. Optionally enter `DapInstall {debug-adapter}`
+   for each language-specific Debug Adapter Protocol server.
+   (I could not find any of these.)
 1. Enter `:Lazy sync` to update plugins and remove unused plugins.
 1. Enter `:AstroUpdatePackages` to get the latest AstroNvim updates.
+1. If JavaScript will be edited then
+   it is likely that Babel will be used parse files.
+   This requires setting the environment variable `NODE_ENV`.
+   When using zsh, add `export NODE_ENV=development` in `~/.zshrc`.
 
 To check the status of your installation, enter `:checkhealth`.
 
@@ -348,10 +332,43 @@ that AstroNvim provides by default.
 
 The leader key defaults to space.
 
+Press `<leader>h` to open the AstroNvim home screen.
+This displays a menu of common commands that includes:
+
+- "New File"
+
+  This creates a new, unnamed file.
+
+- "Find File"
+
+  This opens a window where text can be entered to
+  find files that contain it in their name.
+  Move the cursor to one of the matching files
+  and press the return key to open it.
+
+- "Recents"
+
+  This opens a list of recently opened files
+  and makes it easy to reopen one of them.
+
+- "Find Word"
+
+  This opens a window where words can be entered to find files that contain them.
+  Move the cursor to one of the matching files
+  and press the return key to open it.
+
+- "Bookmarks"
+
+  TODO: Learn how to create bookmarks!
+
+- "Last Session".
+
+  TODO: Learn why this is useful and how to return to the current session.
+
 ### File Explorer
 
 Press <leader>e to open the file explorer.
-Once open, press `?' to see the default key mappings.
+Once open, press `?` to see the default key mappings.
 Press ctrl-j and ctrl-k to navigate down and up to select a file or directory.
 
 Some of the useful key mappings include:
@@ -366,6 +383,10 @@ Some of the useful key mappings include:
 - `?` to see all file explorer key mappings
 - `c` to copy selected file; prompts for new name
 - `d` to delete selected file or directory
+- `h` or return key to close an expanded directory
+- `j` to move down to the next file or directory
+- `k` to move up to the next file or directory
+- `l` or return key to open the selected file or directory
 - `m` to move selected file or directory; prompts for destination directory
 - `o` or return key to open selected file or directory
 - `r` to rename selected file or directory
@@ -388,7 +409,6 @@ To create a horizontal split, enter `<leader>/`.
 To create a vertical split, enter `<leader>|`.
 
 To close a split, press ctrl-q or enter `:clo` or `<leader>c`.
-TODO: `<leader>c` does not work, but `<leader>q` does.
 
 To move between splits, enter `ctrl-h` (left),
 `ctrl-j` (down), `ctrl-k` (up), and `ctrl-l` (right).
@@ -420,21 +440,35 @@ To find files using the fuzzy finder Telescope:
 - Press `<leader>fw` to find files by a word in their content.
 - Press `<leader>fW` to find files containing multiple consecutive words.
 
-### Go To Commands
-
-- Press `gd` to go to the definition of the symbol under the cursor.
-- Press `gf` to open the file under the cursor in Neovim.
-- Press `gI` to go to the implementation of the symbol under the cursor.
-- Press `gl` to see a full error message when an error is displayed.
-- Press `gr` to show references to the symbol under the cursor.
-  TODO: This doesn't seem to work!
-- Press `gT` to go to the type definition of the symbol under the cursor.
-- Press `gx` to open the file under the cursor in the associated app.
-- Press `ctrl-o` to move backwards through results.
-
 ### Telescope Commands
 
+For symbols:
+
+- Press `gd` to go to the definition of the symbol under the cursor.
+- Press `gD` to go to the declaration of the symbol under the cursor.
+  Some LSP servers don't implement this.
+- Press `gi` to list all implementations for the symbol under the cursor
+  in a quickfix window.
+- Press `gI` to go to the implementation of the symbol under the cursor.
+- Press `gr` to show references to the symbol under the cursor
+  in a quickfix window.
+  TODO: This doesn't seem to work!
+- Press `gs` to display signature information about the symbol under the cursor
+  in a floating window.
+- Press `gT` to go to the type definition of the symbol under the cursor.
 - Press `K` to see the type of the symbol under the cursor.
+- Press `ctrl-o` to move backwards through results.
+
+For diagnostic messages:
+
+- Press `gl` to see a full error message when an error is displayed.
+- Press `[d` to move to the previous diagnostic in the current buffer.
+- Press `]d` to move to the next diagnostic in the current buffer.
+
+For file paths:
+
+- Press `gf` to open the file under the cursor in Neovim.
+- Press `gx` to open the file under the cursor in the associated app.
 
 ### Comments
 
@@ -464,6 +498,7 @@ press `<leader>gt`. Press `esc` twice to close the window.
 
 To list all the branches and optionally switch to one,
 press `<leader>gb`.
+
 - Enter text in the "Git Branches" input to filter the branches.
 - Press tab to jump to the "Results" pane that lists the branches.
 - Press ctrl-j and ctrl-k to move down and up in the list.
@@ -499,6 +534,20 @@ To select a suggested completion from a provided list,
 use ctrl-j and ctrl-k to move down and up
 and press return to select the highlighted completion.
 
+- Press `Ctrl-y>` to confirm selection of a completion.
+- Press `<Ctrl-e>` to cancel completion.
+- Press `<Down>` to navigate to the next suggested completion.
+- Press `<Up>` to navigate to the previous suggested completion.
+- If a completion menu is visible, press `<Ctrl-n>` to go to next item.
+  Otherwise pressing this displays the completion menu.
+- If a completion menu is visible, press `<Ctrl-p>` to go to previous item.
+  Otherwise pressing this displays the completion menu.
+
+### Documentation Windows
+
+- Press `<Ctrl-d>` to scroll down in the documentation window.
+- Press `<Ctrl-u>` to scroll up in the documentation window.
+
 ### Syntax Highlighting
 
 AstroNvim provides language-specific syntax highlighting.
@@ -526,19 +575,19 @@ To create custom snippets:
 
 1. Create the file `~/.config/nvim/lua/user/init.lua` containing the following:
 
-```lua
-return {
-  plugins = {
-    {
-      "L3MON4D3/LuaSnip",
-      config = function(plugin, opts)
-        require "plugins.configs.luasnip"(plugin, opts) -- include the default astronvim config that calls the setup call
-        require("luasnip.loaders.from_vscode").lazy_load { paths = { "./lua/user/snippets" } } -- load snippets paths
-      end,
-    },
-  },
-}
-```
+   ```lua
+   return {
+     plugins = {
+       {
+         "L3MON4D3/LuaSnip",
+         config = function(plugin, opts)
+           require "plugins.configs.luasnip"(plugin, opts) -- include the default astronvim config that calls the setup call
+           require("luasnip.loaders.from_vscode").lazy_load { paths = { "./lua/user/snippets" } } -- load snippets paths
+         end,
+       },
+     },
+   }
+   ```
 
 1. For the VS Code style, create the file
    `~/.config/nvim/lua/user/snippets/package.json` containing the following:
@@ -584,6 +633,105 @@ return {
    "https://github.com/L3MON4D3/LuaSnip/issues/857", "issue" %}.
 
 TODO: Describe the LuaSnips syntax for defining snippets.
+
+### Custom Plugins
+
+To install a custom plugin,
+create a file in the `~/.config/nvim/lua/plugins` directory
+whose name is `{plugin-name}.lua`.
+The contents of this file should be similar to those
+shown in the "Hop" and "Todo Comments" sections below.
+
+For help on a custom plugin, enter `:h {name}-config`.
+
+### Hop
+
+The {% aTargetBlank "https://github.com/phaazon/hop.nvim", "hop.nvim" %}
+plugin is a rewrite of the {% aTargetBlank
+"https://github.com/easymotion/vim-easymotion", "EasyMotion" %} Vim plugin
+for Neovim.
+It provides an interesting way to jump to a specific place within a file
+that is currently visible.
+
+To configure Hop, create the file `~/.config/nvim/lua/plugins/hop.lua`
+containing the following:
+
+```lua
+return {
+  "phaazon/hop.nvim",
+  branch = 'v2', -- optional but strongly recommended
+  config = function()
+    require "hop".setup { keys = 'etovxqpdygfblzhckisuran' }
+    -- Configure Hop the way you like here. See `:h hop-config`
+    vim.keymap.set('n', '<leader>H', ":HopWord<cr>")
+  end,
+  event = "User AstroFile"
+}
+```
+
+Enter `:Lazy sync` to install the plugin.
+This opens a window that show the status of the install.
+When this completes, press `q` to close the window.
+
+To "hop" to a visible word, look at the target word
+and enter `:HopWord` or press `<leader>H`.
+This replaces the first two characters of every visible word
+with a unique pair of letters.
+Type the letters for the target word to jump to it.
+
+To "hop" to a visible line, enter `:HopLine`.
+This replaces the first two characters of every visible line
+with a unique pair of letters.
+Type the letters for the target line to jump to it.
+
+The Hop plugin defines more commands, but `HopWord` and `HopLine`
+are the most frequently used.
+
+## Todo Comments
+
+The {% aTargetBlank "https://github.com/folke/todo-comments.nvim",
+"todo-comments.nvim" %} plugin highlights comments that begin with
+"FIX:", "HACK:", "NOTE:", "PERF:", "TODO:", or "WARNING:"
+... each with a different background color.
+It also defines commands for navigating to these comments.
+
+To install todo-comments, create the file
+`~/.config/nvim/lua/plugins/todo-comments.lua` containing the following:
+
+```lua
+return {
+  "folke/todo-comments.nvim",
+  requires = "nvim-lua/plenary.nvim",
+  config = function()
+    require("todo-comments").setup {
+      print("todo-comments setup entered")
+      -- Add your configuration comes here or
+      -- leave it empty to use the default settings.
+    }
+  end,
+  event = "User AstroFile"
+}
+```
+
+The comment syntax this plugin looks for is language specific.
+The following are examples of comment prefixes that
+this plugin recognizes in JavaScript code.
+
+```js
+// FIX: Please fix this.
+// HACK: I really should not have done this.
+// NOTE: For more information, see https://some-tutorial.com.
+// PERF: This may cause a performance issue.
+// TODO: Please do this.
+// WARNING: This may break if invalid input is received.
+```
+
+There are multiple ways to display a list of all these kinds of comments
+found in all files within the currrent project
+(in and below the starting directory).
+
+- To see them in a Telescope window, enter `:TodoTelescope`.
+- To see them in a quick fix list, enter `:TodoQuickFix`.
 
 ### Emmet
 
