@@ -103,10 +103,10 @@ vim.opt.wrap = false -- prevents line wrapping at end of window or pane
 
 -- Key mappings
 -- TODO: These are supposed to map cmd-s to save, but I can't get them to work.
-vim.keymap.set('n', '<D-s>', ":w<kEnter>")
-vim.keymap.set('i', '<D-s', "<Esc>:w<kEnter>i")
-vim.keymap.set('n', '<80><fd>hs', ":w<kEnter>")
-vim.keymap.set('i', '<80><fd>hs', "<Esc>:w<kEnter>i")
+vim.keymap.set('n', '<D-s>', ":w<cr>")
+vim.keymap.set('i', '<D-s', "<Esc>:w<cr>i")
+vim.keymap.set('n', '<80><fd>hs', ":w<cr>")
+vim.keymap.set('i', '<80><fd>hs', "<Esc>:w<cr>i")
 ```
 
 ## Sourcing Files

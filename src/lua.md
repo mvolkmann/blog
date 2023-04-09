@@ -262,7 +262,7 @@ debugging Lua code with breakpoints and watches.
 ## Grammar
 
 Lua is a very simple language.
-The entire grammar is described below.
+The entire grammar, except comment syntax, is described below.
 
 - "binop" is short for "binary operator".
 - "exp" is short for "expression".
@@ -272,16 +272,25 @@ The entire grammar is described below.
 - "var" is short for "variable".
 
 {% raw %}
+
 <code>
 chunk ::= {stat [';']} [laststat[';']]
 
 block ::= chunk
 
-stat ::= varlist1 '=' explist1 | functioncall | do block end | while exp do block end | repeat block until exp | if exp then block {elseif exp then block} [else block] end | for Name '=' exp ',' exp [',' exp] do block end |
+// TODO: Fix formatting of this part!!!
+stat ::=
+varlist1 '=' explist1 |
+local namelist ['=' explist1] |
+if exp then block {elseif exp then block} [else block] end |
+do block end |
+while exp do block end |
+repeat block until exp |
+for Name '=' exp ',' exp [',' exp] do block end |
 for namelist in explist1 do block end |
 function funcname funcbody |
 local function Name funcbody |
-local namelist ['=' explist1]
+functioncall |
 
 laststat ::= return [explist1] | break
 
