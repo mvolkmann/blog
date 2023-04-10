@@ -183,7 +183,7 @@ AstroNvim will use if they are installed.
 These include:
 
 - {% aTargetBlank "https://github.com/BurntSushi/ripgrep", "ripgrep" %} - for live grep Telescope search (<leader>fw)
-- {% aTargetBlank "https://github.com/jesseduffield/lazygit", "lazygit" %} - Git UI (<leader>tl or <leader>gg)
+- {% aTargetBlank "https://github.com/jesseduffield/lazygit", "lazygit" %} - Git UI (<leader>gg for Git Gui or <leader>tl)
 - {% aTargetBlank "https://github.com/dundee/gdu", "gdu" %} - disk usage (<leader>tu)
 - {% aTargetBlank "https://github.com/ClementTsang/bottom", "bottom" %}- process viewer (<leader>tt)
 - {% aTargetBlank "https://www.python.org", "Python" %}- for the Python REPL (<leader>tp)
@@ -423,30 +423,9 @@ disabled to allow the AstroNvim default resize key mappings to work.
     src="/blog/assets/astronvim-smart-splits-keys.png?v={{pkg.version}}"
     title="AstroNvim smart-splits keys">
 
-### Fuzzy Find Commands
-
-To find files using the fuzzy finder Telescope:
-
-- Press `<leader>fa` to find AstroNvim configuration files.
-- Press `<leader>fb` to find buffers by name.
-- Press `<leader>fc` to find files that contain the word under the cursor.
-- Press `<leader>fC` to find Vim plugin commands.
-- Press `<leader>ff` to find files by name.
-- Press `<leader>fh` to find a help file by its name.
-- Press `<leader>fk` to find key mappings.
-- Press `<leader>fo` to find files opened recently (old files)
-- Press `<leader>fr` to find Vim registers (can see their contents)
-- Press `<leader>ft` to find a theme (can see previews and select one)
-- Press `<leader>fw` to find files by a word in their content (live_grep).
-- Press `<leader>fW` to find files containing multiple consecutive words.
-
 ### Telescope Commands
 
-When a Telescope window is displayed, to see its key mappings
-press `esc` to exit insert mode and press `?`.
-The key mappings will appear at the bottom of the window.
-
-For symbols:
+To operate on the symbol under the cursor:
 
 - Press `gd` to go to the definition of the symbol under the cursor.
 - Press `gD` to go to the declaration of the symbol under the cursor.
@@ -456,7 +435,7 @@ For symbols:
 - Press `gI` to go to the implementation of the symbol under the cursor.
 - Press `gr` to show references to the symbol under the cursor
   in a quickfix window.
-  TODO: This doesn't seem to work!
+  This is only supported by some LSP servers.
 - Press `gs` to display signature information about the symbol under the cursor
   in a floating window.
 - Press `gT` to go to the type definition of the symbol under the cursor.
@@ -474,8 +453,36 @@ For file paths:
 - Press `gf` to open the file under the cursor in Neovim.
 - Press `gx` to open the file under the cursor in the associated app.
 
+Some telescope commands display a new window containing multiple sections.
+The upper-left section contains a text input
+used to filter the content in the lower-left section.
+The right section displays a preview
+of what is selected in the lower-left section.
+
+To move the focus to another section, press the tab key.
+To scroll the content of the preview up and down, press ctrl-u and ctrl-d.
+
+To see all the Telescope key mappings,
+press the `esc` key to exit insert mode and press `?`.
+The key mappings will appear at the bottom of the window.
+
 To close a Telescope window, press `esc` twice or
 press `esc` to exit insert mode and press `q` to quit.
+
+To find files using the Telescope fuzzy finder:
+
+- Press `<leader>fa` to find AstroNvim configuration files.
+- Press `<leader>fb` to find buffers by name.
+- Press `<leader>fc` to find files that contain the word under the cursor.
+- Press `<leader>fC` to find Vim plugin commands.
+- Press `<leader>ff` to find files by name.
+- Press `<leader>fh` to find a help file by its name.
+- Press `<leader>fk` to find key mappings.
+- Press `<leader>fo` to find files opened recently (old files)
+- Press `<leader>fr` to find Vim registers (can see their contents)
+- Press `<leader>ft` to find a theme (can see previews and select one)
+- Press `<leader>fw` to find files by a word in their content (live_grep).
+- Press `<leader>fW` to find files containing multiple consecutive words.
 
 ### Comments
 
@@ -526,6 +533,75 @@ For more information, watch this {% aTargetBlank
 "https://www.youtube.com/watch?v=CPLdltN7wgE", "YouTube video" %}.
 
 TODO: How can you commit changes and push them from inside AstroNvim?
+
+#### Lazygit
+
+{% aTargetBlank "https://github.com/jesseduffield/lazygit", "Lazygit" %}
+is a terminal UI for executing Git commands.
+To start this from AstroVim, enter `<leader>gg` for Git GUI.
+This opens a new window with a left and right side.
+To close this window, press `q`.
+
+The left side contains five numbered sections,
+Status (1), Files (2), Local Branches (3), Commits (4), and Stash (5).
+To move focus to the next section press the `tab` key.
+Pressing `shift-tab` does not move focus to the previous section.
+To move to a specific section press its number.
+
+To move down and up within a section,
+use the `j` and `k` keys or the down and up arrow keys.
+
+The right side contains information on the item selected on the left side.
+
+The "Status" section shows the repository name and the current branch.
+
+The "Files" section lists all the modified files.
+
+- To see diffs for a file on the right side, select the file.
+  For a side-by-side diff:
+
+  - Enter `brew install git-delta` to install the delta pager.
+  - Add the following in `~/.gitconfig`
+    ```text
+    [core]
+      pager = delta
+    [delta]
+      side-by-side = true
+    ```
+
+- To toggle whether the selected file is staged for inclusion in a commit,
+  press the space bar.
+- To discard all changes in a selected file, press `d`.
+  In the confirmation dialog that appears, press `d` again.
+- To commit all the staged files, press `c`.
+  If no files have been staged, a dialog will appear
+  that asks whether you wish to commit all changes.
+  Next, a dialog will appear where a commit message can be entered.
+  After entering a commit message,
+  press the `return` key to perform the commit.
+
+The "Local Branches" section lists all the local branches.
+Selecting a local branch shows all of its commits on the right side.
+
+- To switch to the selected local branch, press the space bar.
+- To pull changes in the remote of the selected local branch, press `p`.
+- To push changes to the selected local branch to its remote, press `P`.
+- Press the `return` key to see all the commits on the selected local branch
+  within this section.
+  Press the `esc` key to return to seeing a list of local branches.
+- To delete the selected local branch, press `d`.
+  In the confirmation dialog that appears, press `y` to confirm.
+- TODO: How can you delete the corresponding remote branch?
+
+The "Commits" section lists all the commits on the current local branch.
+Selecting a commit shows detail about it on the right side including
+the commit comment and a list of the new, modified, and deleted files.
+
+The "Stash" section lists all the current stashes.
+Selecting a stash shows the stashed changes on the right side.
+
+- To delete the selected stash, press `d`.
+  In the confirmation dialog that appears, press `y` to confirm.
 
 ### Color Themes
 
@@ -641,17 +717,25 @@ To create custom snippets:
 
 TODO: Describe the LuaSnips syntax for defining snippets.
 
+### Symbol List
+
+To list symbols in a right pane, enter `<leader>lS`".
+This lists symbols like variable, function, and type declarations.
+Select a symbol name to scroll to it in the source file.
+The list of symbols automatically updates
+when focus moves to a different buffer.
+
 ### Custom Plugins
 
 To install a custom plugin,
-create a file in the `~/.config/nvim/lua/plugins` directory
+create a file in the `~/.config/nvim/lua/user/plugins` directory
 whose name is `{plugin-name}.lua`.
 The contents of this file should be similar to those
 shown in the "Hop" and "Todo Comments" sections below.
 
 For help on a custom plugin, enter `:h {name}-config`.
 
-### Hop
+#### hop.nvim Plugin
 
 The {% aTargetBlank "https://github.com/phaazon/hop.nvim", "hop.nvim" %}
 plugin is a rewrite of the {% aTargetBlank
@@ -660,7 +744,7 @@ for Neovim.
 It provides an interesting way to jump to a specific place within a file
 that is currently visible.
 
-To configure Hop, create the file `~/.config/nvim/lua/plugins/hop.lua`
+To configure Hop, create the file `~/.config/nvim/lua/user/plugins/hop.lua`
 containing the following:
 
 ```lua
@@ -675,6 +759,16 @@ return {
   event = "User AstroFile"
 }
 ```
+
+The `event` value specifies when the plugin should be triggered.
+This can be a single event or a table of them.
+The supported events are:
+
+- `VeryLazy`: triggered after starting Neovim
+- `BufEnter *.lua`: triggered after opening a `.lua` file
+- `User AstroFile`: triggered after opening any file
+- `LspAttach`: triggered after starting LSP servers
+- `InsertEnter`: triggered after entering insert mode
 
 Enter `:Lazy sync` to install the plugin.
 This opens a window that show the status of the install.
@@ -694,7 +788,7 @@ Type the letters for the target line to jump to it.
 The Hop plugin defines more commands, but `HopWord` and `HopLine`
 are the most frequently used.
 
-## Todo Comments
+#### todo-comments.nvim Plugin
 
 The {% aTargetBlank "https://github.com/folke/todo-comments.nvim",
 "todo-comments.nvim" %} plugin highlights comments that begin with
@@ -703,7 +797,7 @@ The {% aTargetBlank "https://github.com/folke/todo-comments.nvim",
 It also defines commands for navigating to these comments.
 
 To install todo-comments, create the file
-`~/.config/nvim/lua/plugins/todo-comments.lua` containing the following:
+`~/.config/nvim/lua/user/plugins/todo-comments.lua` containing the following:
 
 ```lua
 return {
@@ -740,7 +834,27 @@ found in all files within the current project
 - To see them in a Telescope window, enter `:TodoTelescope`.
 - To see them in a quick fix list, enter `:TodoQuickFix`.
 
-### Emmet
+#### smartcolumn.nvim Plugin
+
+The {% aTargetBlank "https://github.com/m4xshen/smartcolumn.nvim",
+"smartcolumn.nvim" %} plugin displays a vertical line at a given column
+only if a visible line extends past that column.
+
+To install smartcolumn.nvim, create the file
+`~/.config/nvim/lua/user/plugins/smartcolumn.lua` containing the following:
+
+```lua
+return {
+  "m4xshen/smartcolumn.nvim",
+  opts = {
+    -- colorcolumn = 80 -- This is the default.
+    disabled_filetypes = {} -- default is {"help", "text", "markdown"}
+  },
+  event = "User AstroFile"
+}
+```
+
+#### Emmet
 
 {% aTargetBlank "https://docs.emmet.io", "Emmet" %} is an editor plugin
 for quickly entering HTML, XML, and CSS.
@@ -751,10 +865,29 @@ AstroNvim does not ship with Emmett support.
 To add it, see {% aTargetBlank "https://github.com/mattn/emmet-vim",
 "emmet-vim" %}.
 
-### Symbol List
+### AstroNvim Community
 
-To list symbols in a right pane, enter `<leader>lS`".
-This lists symbols like variable, function, and type declarations.
-Select a symbol name to scroll to it in the source file.
-The list of symbols automatically updates
-when focus moves to a different buffer.
+The {% aTargetBlank "https://github.com/AstroNvim/astrocommunity",
+"AstroNvim Community Repository" %} is a collection of
+AstroNvim plugins and their configurations.
+These are typically easier to install that configuring them manually.
+
+TODO: why is `~/.config/lua/user` a hidden directory?
+To add these to your AstroNvim setup, create the file
+`~/.config/lua/user/plugins/community.lua` and add content the like the following:
+
+```lua
+return {
+  "AstroNvim/astrocommunity",
+  { import = "astrocommunity.colorscheme.catppuccin", enabled = true },
+  { import = "astrocommunity.colorscheme.nightfox", enabled = false },
+  { import = "astrocommunity.bars-and-lines.smartcolumn-nvim" },
+  {
+    "m4xshen/smartcolumn.nvim",
+    opts = {
+      colorcolumn = 80,
+      disabled_filetypes = { "help" },
+    },
+  }
+}
+```
