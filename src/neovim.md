@@ -1,9 +1,3 @@
----
-eleventyNavigation:
-  key: Neovim
-layout: topic-layout.njk
----
-
 ## Overview
 
 <img alt="Neovim logo" style="width: 40%"
@@ -367,13 +361,16 @@ This displays a menu of common commands that includes:
 
 ### File Explorer
 
-Press <leader>e to open the file explorer.
+AstroNvim uses the {% aTargetBlank
+"https://github.com/nvim-neo-tree/neo-tree.nvim", "neo-tree.nvim" %} plugin.
+for the file explorer that appears on the left when `<leader>e` is pressed.
+
 Once open, press `?` to see the default key mappings.
-Press ctrl-j and ctrl-k to navigate down and up to select a file or directory.
+Press `j` and `k` to navigate down and up to select a file or directory.
 
-Some of the useful key mappings include:
+Some of the useful neo-tree key mappings include:
 
-- # to perform fuzzy filtering
+- # to perform fuzzy filtering; press `esc` to exit
 - `a` to add a new file or directory
 - `A` to add a new directory
 - `H` to toggle display of hidden files (hidden by default)
@@ -398,6 +395,28 @@ Some of the useful key mappings include:
 
 Navigate down and up with `j` and `k`.
 To open a selected directory or file, press the return key.
+
+By default neo-tree hides the directory `~/.config/nvim/lua/user`.
+This directory contains files that configure plugins,
+including overriding default AstroNvim plugin configurations.
+To make this directory always be visible,
+create the file `~/.config/nvim/lua/user/plugins/neo-tree.lua`
+with the following content:
+
+```lua
+return {
+  "nvim-neo-tree/neo-tree.nvim",
+  opts = function()
+    return {
+      filesystem = {
+        filtered_items = {
+          always_show = { "user" }
+        }
+      }
+    }
+  end
+}
+```
 
 ### Splits
 
@@ -548,6 +567,9 @@ To move focus to the next section press the `tab` key.
 Pressing `shift-tab` does not move focus to the previous section.
 To move to a specific section press its number.
 
+To see the key mappings that apply to the section that currently has focus,
+press `?`.
+
 To move down and up within a section,
 use the `j` and `k` keys or the down and up arrow keys.
 
@@ -586,6 +608,8 @@ Selecting a local branch shows all of its commits on the right side.
 - To switch to the selected local branch, press the space bar.
 - To pull changes in the remote of the selected local branch, press `p`.
 - To push changes to the selected local branch to its remote, press `P`.
+- To create a new branch, press `n`.
+  A dialog will appear for entering a name for the branch.
 - Press the `return` key to see all the commits on the selected local branch
   within this section.
   Press the `esc` key to return to seeing a list of local branches.
@@ -727,12 +751,24 @@ when focus moves to a different buffer.
 
 ### Custom Plugins
 
-To install a custom plugin,
-create a file in the `~/.config/nvim/lua/user/plugins` directory
+When AstroNvim starts it executes all the `.lua` files
+in the `~/.config/nvim/lua/plugins` directory
+followed by all the `.lua` files
+in the `~/.config/nvim/lua/user/plugins` directory.
+Each of these files serves to configure a specific plugin.
+Any names can be used for these files, but it's standard practice
+to name them after the plugin they configure.
+
+Having a separate directory for the configuration files you create,
+makes it easier to avoid losing custom configurations
+when updating to a new version of AstroNvim.
+
+To install a custom plugin, create a configuration file for it
+in the `~/.config/nvim/lua/user/plugins` directory
 whose name is `{plugin-name}.lua`.
-This file could be placed in the `~/.config/nvim/lua/plugins`
-directory instead, but that could make it more difficult
-to update AstroNvim in the future without losing your customizations.
+After doing this it may be necessary to
+enter `:Lazy` and press `S` to sync the plugins.
+This downloads the latest version of each plugin being used.
 
 The contents of the plugin configuation files
 should be similar to those shown in subsections below.
@@ -756,9 +792,9 @@ return {
   "phaazon/hop.nvim",
   branch = 'v2', -- optional but strongly recommended
   config = function()
-    require "hop".setup { keys = 'etovxqpdygfblzhckisuran' }
-    -- Configure Hop the way you like here. See `:h hop-config`
-    vim.keymap.set('n', '<leader>H', ":HopWord<cr>")
+    require "hop".setup {}
+    -- When in normal mode, initiate with just the "h" key.
+    vim.keymap.set('n', 'h', ":HopWord<cr>")
   end,
   event = "User AstroFile"
 }

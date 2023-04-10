@@ -720,7 +720,7 @@ TODO: Add content from https://www.lua.org/pil/20.2.html.
 
 Lua supports the following mathematical operators:
 
-- `+` addition
+- `+` addition (not string concatenation)
 - `-` subtraction or negation
 - `*` multiplication
 - `/` division
