@@ -730,10 +730,14 @@ when focus moves to a different buffer.
 To install a custom plugin,
 create a file in the `~/.config/nvim/lua/user/plugins` directory
 whose name is `{plugin-name}.lua`.
-The contents of this file should be similar to those
-shown in the "Hop" and "Todo Comments" sections below.
+This file could be placed in the `~/.config/nvim/lua/plugins`
+directory instead, but that could make it more difficult
+to update AstroNvim in the future without losing your customizations.
 
-For help on a custom plugin, enter `:h {name}-config`.
+The contents of the plugin configuation files
+should be similar to those shown in subsections below.
+
+For help on a specific custom plugin, enter `:h {name}-config`.
 
 #### hop.nvim Plugin
 
