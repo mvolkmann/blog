@@ -604,6 +604,9 @@ TODO: How can you commit changes and push them from inside AstroNvim?
 
 #### Lazygit
 
+See {% aTargetBlank "https://github.com/kdheepak/lazygit.nvim/issues/92",
+"issue 92" %}.
+
 {% aTargetBlank "https://github.com/jesseduffield/lazygit", "Lazygit" %}
 is a terminal UI for executing Git commands.
 To start this from AstroVim, enter `<leader>gg` for Git GUI.
@@ -927,7 +930,7 @@ found in all files within the current project
 
 The {% aTargetBlank "https://github.com/m4xshen/smartcolumn.nvim",
 "smartcolumn.nvim" %} plugin displays a vertical line at a given column
-only if a visible line extends past that column.
+only if at least one line in the file extends past that column.
 
 To install smartcolumn.nvim, create the file
 `~/.config/nvim/lua/user/plugins/smartcolumn.lua` containing the following:
