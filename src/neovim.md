@@ -121,6 +121,9 @@ To configure using Lua:
 - See the section below on "Custom Plugins"
   to learn about the files that should be created in the `plugins` directory.
 
+See the official example of this customization approach at {% aTargetBlank
+"https://github.com/AstroNvim/user_example", "AstroNvim/user_example" %}.
+
 TODO: Do you need any of this in the configuration files described above?
 
 ```lua
