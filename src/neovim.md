@@ -1,3 +1,9 @@
+---
+eleventyNavigation:
+  key: Neovim
+layout: topic-layout.njk
+---
+
 ## Overview
 
 <img alt="Neovim logo" style="width: 40%"
@@ -37,7 +43,7 @@ are summarized in the table below.
 | Feature             | Popular Plugins                                                                                               |
 | ------------------- | ------------------------------------------------------------------------------------------------------------- |
 | auto pairs          | nvim-autopairs                                                                                                |
-| better navigation   | {% aTargetBlank "https://github.com/phaazon/hop.nvim", "Hop" %}                                               |
+| better navigation   | {% aTargetBlank "https://github.com/phaazon/hop.nvim", "hop.nvim" %}                                          |
 | better status line  | heirline, lualine                                                                                             |
 | code formatting     | null-ls.nvim                                                                                                  |
 | color themes        | many; want Tree-sitter support                                                                                |
@@ -74,8 +80,48 @@ There are many to choose from, but the most popular seem to be:
 Neovim can be configured using Vimscript, the Lua programming language,
 or both.
 
-Create the file `~/.config/nvim/init.lua`
-and add content similar to the following.
+To configure using Lua:
+
+- Create the directory `~/.config/nvim/lua/user`.
+
+- In the new directory, create the file `init.lua`,
+  the file `options.lua`, the file `mappings.lua`,
+  and the directory `plugins`.
+
+- In the `init.lua` file, return a table like the following:
+  For example:
+
+  ```lua
+  return {
+    colorscheme = "astrolight"
+  }
+  ```
+
+- In the `mappings.lua` file, return a table like the following:
+  For example:
+
+  ```lua
+  return {
+    -- TODO: Add examples of custom key mappings here.
+  }
+  ```
+
+- In the `optoins.lua` file, return a table like the following:
+  For example:
+
+  ```lua
+  return {
+    opt = {
+      scrolloff = 0,
+      wrap = false
+    }
+  }
+  ```
+
+- See the section below on "Custom Plugins"
+  to learn about the files that should be created in the `plugins` directory.
+
+TODO: Do you need any of this in the configuration files described above?
 
 ```lua
 local indent = 2
@@ -793,8 +839,8 @@ return {
   branch = 'v2', -- optional but strongly recommended
   config = function()
     require "hop".setup {}
-    -- When in normal mode, initiate with just the "h" key.
-    vim.keymap.set('n', 'h', ":HopWord<cr>")
+    -- When in normal mode, initiate with a capital "H".
+    vim.keymap.set('n', 'H', ":HopWord<cr>")
   end,
   event = "User AstroFile"
 }
