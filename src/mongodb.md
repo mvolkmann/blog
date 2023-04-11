@@ -233,6 +233,17 @@ db.dropDatabase()
 show dbs
 ```
 
+## Criteria
+
+The following are example criteria for finding documents.
+
+| Target                      | Query                                   |
+| --------------------------- | --------------------------------------- |
+| string property begins with | `{ propertyName: { $regex: "^text" } }` |
+| string property ends with   | `{ propertyName: { $regex: "text$" } }` |
+| string property contains    | `{ propertyName: { $regex: "text" } }`  |
+| array property contains     | `{ propertyName: { $all: ["text"] } }`  |
+
 ## Joins
 
 The `$lookup` operator can be used to join collections in a query.

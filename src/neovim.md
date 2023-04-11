@@ -995,6 +995,27 @@ Type the letters for the target line to jump to it.
 The Hop plugin defines more commands, but `HopWord` and `HopLine`
 are the most frequently used.
 
+#### Neoformat Plugin
+
+The {% aTargetBlank "https://github.com/sbdchd/neoformat", "Neoformat" %} plugin
+"uses a variety of formatters for many filetypes.
+Currently, Neoformat will run a formatter using the current buffer data,
+and on success it will update the current buffer with the formatted text.
+On a formatter failure, Neoformat will try the next formatter
+defined for the filetype."
+
+Prettier is one of the supported formatters.
+
+To install and configure this, create the file
+`~/.config/nvim/lua/user/plugins/neoformat.lua` with the following content:
+
+```lua
+return {
+  "sbdchd/neoformat",
+  event = "User AstroFile"
+}
+```
+
 #### todo-comments.nvim Plugin
 
 The {% aTargetBlank "https://github.com/folke/todo-comments.nvim",
