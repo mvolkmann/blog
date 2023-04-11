@@ -592,26 +592,29 @@ To see a side-by-side diff for the current file, press `<leader>gd`.
 
 To list all the commits for the current file, press `<leader>gc`.
 
-To open a lazygit window, press `<leader>gg`.
-To close a lazygit window, press `q`.
+### Lazygit
+
+A better way to manage Git repositories from inside Neovim is to use
+{% aTargetBlank "https://github.com/jesseduffield/lazygit", "Lazygit" %}
+which is a terminal UI for executing Git commands.
+Lazygit is an alternative to {% aTargetBlank
+"https://github.com/tpope/vim-fugitive", "git-fugitive" %}.
+
+To launch lazygit from a terminal window,
+cd to a repository directory and enter `lazygit`.
+
+To launch lazygit from within AstroVim, enter `<leader>gg` for Git GUI.
+This opens a new window with a left and right side.
+To close this window, press `q`.
+
 See the lazygit {% aTargetBlank
 "https://github.com/jesseduffield/lazygit/blob/master/docs/keybindings/Keybindings_en.md",
 "key bindings" %}.
 For more information, watch this {% aTargetBlank
 "https://www.youtube.com/watch?v=CPLdltN7wgE", "YouTube video" %}.
 
-TODO: How can you commit changes and push them from inside AstroNvim?
-
-#### Lazygit
-
 See {% aTargetBlank "https://github.com/kdheepak/lazygit.nvim/issues/92",
 "issue 92" %}.
-
-{% aTargetBlank "https://github.com/jesseduffield/lazygit", "Lazygit" %}
-is a terminal UI for executing Git commands.
-To start this from AstroVim, enter `<leader>gg` for Git GUI.
-This opens a new window with a left and right side.
-To close this window, press `q`.
 
 The left side contains five numbered sections,
 Status (1), Files (2), Local Branches (3), Commits (4), and Stash (5).
@@ -620,14 +623,26 @@ Pressing `shift-tab` does not move focus to the previous section.
 To move to a specific section press its number.
 
 To see the key mappings that apply to the section that currently has focus,
-press `?`.
+press `?` or `x`.
 
 To move down and up within a section,
 use the `j` and `k` keys or the down and up arrow keys.
 
-The right side contains information on the item selected on the left side.
+The right side contains information about the item selected on the left side.
+To scroll down and up, press `ctrl-d` and `ctrl-u`.
+TODO: Is there a way to scroll by full pages?
+
+#### Status Section
 
 The "Status" section shows the repository name and the current branch.
+
+| Key      | Action                                                             |
+| -------- | ------------------------------------------------------------------ |
+| `a`      | shows the log for all branches                                     |
+| `u`      | checks for a lazygit update                                        |
+| `return` | enables switching to a different repository selected from a dialog |
+
+#### Files Section
 
 The "Files" section lists all the modified files.
 
@@ -643,41 +658,72 @@ The "Files" section lists all the modified files.
       side-by-side = true
     ```
 
-- To toggle whether the selected file is staged for inclusion in a commit,
-  press the space bar.
-- To discard all changes in a selected file, press `d`.
-  In the confirmation dialog that appears, press `d` again.
-- To commit all the staged files, press `c`.
-  If no files have been staged, a dialog will appear
-  that asks whether you wish to commit all changes.
-  Next, a dialog will appear where a commit message can be entered.
-  After entering a commit message,
-  press the `return` key to perform the commit.
+TODO: THIS DOES NOT WORK!
+TODO: I can use `delta` to display side-by-side diffs using the `git diff` command,
+TODO: but I cannot get it to work with Lazygit.
+TODO: See ~/.config/lazygit/config.yaml.
+TODO: See https://github.com/jesseduffield/lazygit/issues/2337.
+
+| Key      | Action                                                                     |
+| -------- | -------------------------------------------------------------------------- |
+| spacebar | toggle whether the selected file is staged for inclusion in a commit       |
+| `a`      | toggle all modified files between being staged and not staged              |
+| `c`      | commits all staged files; prompts whether to commit all if none are staged |
+| `d`      | discards all changes in the selected file; press `d` again to confirm      |
+| `f`      | fetches changes from remote branch                                         |
+| `r`      | refreshes list of files; useful when modified outside of Neovim            |
+| `s`      | stashes all changes; prompts for stash name                                |
+| \`       | toggles the file list between flat and tree views                          |
+| `ctrl-w` | toggles hiding lines in right side that only differ by whitespace          |
+
+When committing changes a dialog will appear where a commit message can be entered.
+After entering a commit message, press the `return` key to perform the commit.
+
+#### Local Branches Section
 
 The "Local Branches" section lists all the local branches.
 Selecting a local branch shows all of its commits on the right side.
 
-- To switch to the selected local branch, press the space bar.
-- To pull changes in the remote of the selected local branch, press `p`.
-- To push changes to the selected local branch to its remote, press `P`.
-- To create a new branch, press `n`.
-  A dialog will appear for entering a name for the branch.
-- Press the `return` key to see all the commits on the selected local branch
-  within this section.
-  Press the `esc` key to return to seeing a list of local branches.
-- To delete the selected local branch, press `d`.
-  In the confirmation dialog that appears, press `y` to confirm.
-- TODO: How can you delete the corresponding remote branch?
+| Key        | Action                                                                             |
+| ---------- | ---------------------------------------------------------------------------------- |
+| `return`   | displays all commits selected local branch in this section; press `esc` to restore |
+| `spacebar` | switches to the selected branch                                                    |
+| `c`        | creates a new remote branch                                                        |
+| `d`        | deletes the selected local branch after confirming                                 |
+| `f`        | fetches changes from remote branch                                                 |
+| `M`        | merges the selected branch into the checked out branch                             |
+| `n`        | creates a new local branch                                                         |
+| `p`        | pulls changes from the corresponding remote branch                                 |
+| `P`        | pushes changes to the corresponding remote branch                                  |
+
+TODO: How can you delete the corresponding remote branch?
+
+If a merge results in conflicts, a dialog will appear explaining that.
+Press `esc` to abort the merge or `return` to resolve the conflicts.
+Each conflict will be described by a pair of "hunks".
+To keep one of the hunks, move the cursor to it with `j` and `k`
+and press the spacebar. The other hunk will be discarded.
+To keep both hunks, press `b`.
+Another dialog will appear after all merge conflicts have been resolved.
+
+#### Commits Section
 
 The "Commits" section lists all the commits on the current local branch.
 Selecting a commit shows detail about it on the right side including
 the commit comment and a list of the new, modified, and deleted files.
 
+#### Stash Section
+
 The "Stash" section lists all the current stashes.
 Selecting a stash shows the stashed changes on the right side.
 
-- To delete the selected stash, press `d`.
-  In the confirmation dialog that appears, press `y` to confirm.
+| Key      | Action                                             |
+| -------- | -------------------------------------------------- |
+| `d`      | drops the selected stash after confirming          |
+| `g`      | gets (pops) the selected stash after confirming    |
+| `r`      | renames the selected stash                         |
+| \`       | toggles the stash list between flat and tree views |
+| `return` | displays diffs for the stash in the right side     |
 
 ### Color Themes
 
