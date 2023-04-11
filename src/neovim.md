@@ -124,33 +124,25 @@ To configure using Lua:
 See the official example of this customization approach at {% aTargetBlank
 "https://github.com/AstroNvim/user_example", "AstroNvim/user_example" %}.
 
-TODO: Do you need any of this in the configuration files described above?
+TODO: I want to map cmd-s to save, but I can't get these to work.
 
 ```lua
-local indent = 2
-vim.opt.shiftwidth=indent -- indent code with two spaces
-vim.opt.softtabstop=indent -- tabs take two spaces
-vim.opt.tabstop=indent -- tabs take two spaces
-
-vim.opt.colorcolumn = "80" -- displays a vertical strip at column 80 (not 81)
-vim.opt.expandtab = true -- replace tabs with spaces
-vim.opt.hlsearch = true -- highlights all search matches, not just first
-vim.opt.incsearch = true -- performs incremental searching.
-vim.opt.number = true -- shows line numbers
-vim.opt.relativenumber= true -- shows relative line numbers
-vim.opt.shiftround = true --round indent to multiples of shiftwidth
-vim.opt.smartindent = true -- pressing tab key in insert mode insert spaces
-vim.opt.smarttab = true -- pressing tab key in insert mode insert spaces
-vim.opt.termguicolors = true -- uses 24-bit colors
-vim.opt.wrap = false -- prevents line wrapping at end of window or pane
-
--- Key mappings
--- TODO: These are supposed to map cmd-s to save, but I can't get them to work.
 vim.keymap.set('n', '<D-s>', ":w<cr>")
 vim.keymap.set('i', '<D-s', "<Esc>:w<cr>i")
 vim.keymap.set('n', '<80><fd>hs', ":w<cr>")
 vim.keymap.set('i', '<80><fd>hs', "<Esc>:w<cr>i")
 ```
+
+The AstroNvim default settings found in
+`~/.config/nvim/lua/astronvim/options.lua` use:
+
+- 2-space indentation (`shiftwidth = 2` and `tabstop = 2`)
+- relative line numbers (`relativenumber = true`)
+- 24-bit colors (`termguicolors = true`)
+- tabs expand to spaces (`expandtab = true`)
+- line numbers shown (`number = true`)
+- automatic indentation (`smartindent = true`)
+- no line wrapping (`wrap = false`)
 
 ## Sourcing Files
 
@@ -642,6 +634,12 @@ The right side contains information about the item selected on the left side.
 To scroll down and up, press `ctrl-d` and `ctrl-u`.
 TODO: Is there a way to scroll by full pages?
 
+To execute an arbitrary shell command without leaving lazygit, press `:`.
+This opens a dialog where a shell command can be entered.
+Press `return` to execute it.
+The output temporarily replaces the lazygit UI.
+Press `return` again to return to lazygit.
+
 #### Status Section
 
 The "Status" section shows the repository name and the current branch.
@@ -682,15 +680,27 @@ TODO: See https://github.com/jesseduffield/lazygit/issues/2337.
 | `c`      | commits all staged files; prompts whether to commit all if none are staged        |
 | `C`      | same as `c`, but opens a Vim window to enter commit message (broken in AstroNvim) |
 | `d`      | discards all changes in the selected file; press `d` again to confirm             |
+| `D`      | opens a menu of options where one is "hard reset"                                 |
 | `f`      | fetches changes from remote branch                                                |
 | `i`      | adds file to `.gitignore`                                                         |
 | `r`      | refreshes list of files; useful when modified outside of Neovim                   |
 | `s`      | stashes all changes; prompts for stash name                                       |
+| `S`      | stashes only staged changes; prompts for stash name                               |
 | \`       | toggles the file list between flat and tree views                                 |
 | `ctrl-w` | toggles hiding lines in right side that only differ by whitespace                 |
 
 When committing changes a dialog will appear where a commit message can be entered.
 After entering a commit message, press the `return` key to perform the commit.
+
+The menu that appears when `D` is pressed contains:
+
+- nuke working tree - runs `git reset --hard HEAD && git clean -fd`
+- discard unstaged changes
+- discard untracked files
+- discard staged changes
+- soft reset - discards the last commit
+- mixed reset - discards the last commit and stages (add)
+- hard reset - discards the last commit and stages (add) and all changes
 
 #### Local Branches Section
 
@@ -747,18 +757,29 @@ the commit comment and a list of the new, modified, and deleted files.
 From the git docs, "Reflogs record when the tips of branches and
 other references were updated in the local repository.
 
+| Key     | Action                                         |
+| ------- | ---------------------------------------------- |
+| `d`     | deletes the selected commit                    |
+| `o`     | opens the selected commit in a new browser tab |
+| `s`     | squashes the selected commit                   |
+| `S`     | squashes all commits above the selected commit |
+| `T`     | adds a tag to the selected commit              |
+| `t`     | reverts the selected commit after confirming   |
+| `space` | checks out the selected commit                 |
+
 #### Stash Section
 
 The "Stash" section lists all the current stashes.
 Selecting a stash shows the stashed changes on the right side.
 
-| Key      | Action                                             |
-| -------- | -------------------------------------------------- |
-| `d`      | drops the selected stash after confirming          |
-| `g`      | gets (pops) the selected stash after confirming    |
-| `r`      | renames the selected stash                         |
-| \`       | toggles the stash list between flat and tree views |
-| `return` | displays diffs for the stash in the right side     |
+| Key      | Action                                                          |
+| -------- | --------------------------------------------------------------- |
+| `d`      | drops the selected stash after confirming                       |
+| `space`  | applies the selected stash without dropping it after confirming |
+| `g`      | applies the selected stash and drops it after confirming        |
+| `r`      | renames the selected stash                                      |
+| \`       | toggles the stash list between flat and tree views              |
+| `return` | displays diffs for the stash in the right side                  |
 
 ### Color Themes
 
