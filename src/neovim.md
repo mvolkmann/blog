@@ -523,33 +523,46 @@ For file paths:
 Some telescope commands display a new window containing multiple sections.
 The upper-left section contains a text input
 used to filter the content in the lower-left section.
+The selected item displays a `>` to its left and has a gray background.
 The right section displays a preview
 of what is selected in the lower-left section.
 
-To move the focus to another section, press the tab key.
-To scroll the content of the preview up and down, press ctrl-u and ctrl-d.
+The Telescope fuzzy finder can find many things including
+files, buffers, key mappings, help, and more.
+The key mappings to initiate fuzzy finder searches include:
+
+| Key          | Action                                             |
+| ------------ | -------------------------------------------------- |
+| `<leader>fa` | finds AstroNvim configuration files                |
+| `<leader>fb` | finds buffers by name                              |
+| `<leader>fc` | finds files that contain the word under the cursor |
+| `<leader>fC` | finds Vim plugin commands                          |
+| `<leader>ff` | finds files by name                                |
+| `<leader>fh` | finds a help file by its name                      |
+| `<leader>fk` | finds key mappings                                 |
+| `<leader>fo` | finds files opened recently (old files)            |
+| `<leader>fr` | finds Vim registers (can see their contents)       |
+| `<leader>ft` | finds a theme (can see previews and select one)    |
+| `<leader>fw` | finds files by a word in their content (live_grep) |
+| `<leader>fW` | finds files containing multiple consecutive words  |
+
+In a Telescope window the key mappings include:
+
+| Key         | Action                                                                |
+| ----------- | --------------------------------------------------------------------- |
+| `esc` `esc` | closes the window                                                     |
+| `ctrl-c`    | also closes the window                                                |
+| `ctrl-x`    | opens the selected file in a horizontal split (below current buffer)  |
+| `ctrl-v`    | opens the selected file in a vertical split (right of current buffer) |
+| `ctrl-d`    | scrolls down in file preview                                          |
+| `ctrl-u`    | scrolls up in file preview                                            |
+| `tab`       | moves focus from "Find Files" input to "Results" section              |
+| `tab`       | when in "Results" section, moves down to next item                    |
+| `shift-tab` | moves focus from "Results" section to "Find Files" input              |
 
 To see all the Telescope key mappings,
 press the `esc` key to exit insert mode and press `?`.
 The key mappings will appear at the bottom of the window.
-
-To close a Telescope window, press `esc` twice or
-press `esc` to exit insert mode and press `q` to quit.
-
-To find files using the Telescope fuzzy finder:
-
-- Press `<leader>fa` to find AstroNvim configuration files.
-- Press `<leader>fb` to find buffers by name.
-- Press `<leader>fc` to find files that contain the word under the cursor.
-- Press `<leader>fC` to find Vim plugin commands.
-- Press `<leader>ff` to find files by name.
-- Press `<leader>fh` to find a help file by its name.
-- Press `<leader>fk` to find key mappings.
-- Press `<leader>fo` to find files opened recently (old files)
-- Press `<leader>fr` to find Vim registers (can see their contents)
-- Press `<leader>ft` to find a theme (can see previews and select one)
-- Press `<leader>fw` to find files by a word in their content (live_grep).
-- Press `<leader>fW` to find files containing multiple consecutive words.
 
 ### Comments
 
