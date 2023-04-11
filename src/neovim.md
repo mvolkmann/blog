@@ -159,6 +159,13 @@ This is useful after making changes to configuration files
 so you don't need to exit and restart nvim
 in order for the changes to take effect.
 
+## Buffers
+
+The contents of opened files are held in buffers.
+Editing a buffer and writing it saves the modified content back to its file.
+Neovim indicates buffers that have been modified and not written
+with a dot after the file name.
+
 ## Folds
 
 Code folding is a feature of Vim that is also present in Neovim.
@@ -618,8 +625,9 @@ See {% aTargetBlank "https://github.com/kdheepak/lazygit.nvim/issues/92",
 
 The left side contains five numbered sections,
 Status (1), Files (2), Local Branches (3), Commits (4), and Stash (5).
-To move focus to the next section press the `tab` key.
-Pressing `shift-tab` does not move focus to the previous section.
+To move focus to the next section press the `tab` key or the right arrow key.
+To move focus to the previous section
+press the left arrow key (`shift-tab` does not work).
 To move to a specific section press its number.
 
 To see the key mappings that apply to the section that currently has focus,
@@ -627,6 +635,8 @@ press `?` or `x`.
 
 To move down and up within a section,
 use the `j` and `k` keys or the down and up arrow keys.
+
+To search in any section, press `/`.
 
 The right side contains information about the item selected on the left side.
 To scroll down and up, press `ctrl-d` and `ctrl-u`.
@@ -644,7 +654,8 @@ The "Status" section shows the repository name and the current branch.
 
 #### Files Section
 
-The "Files" section lists all the modified files.
+This section contains two tabs, "Files" and "Submodules".
+The "Files" tab lists all the modified files.
 
 - To see diffs for a file on the right side, select the file.
   For a side-by-side diff:
@@ -664,53 +675,77 @@ TODO: but I cannot get it to work with Lazygit.
 TODO: See ~/.config/lazygit/config.yaml.
 TODO: See https://github.com/jesseduffield/lazygit/issues/2337.
 
-| Key      | Action                                                                     |
-| -------- | -------------------------------------------------------------------------- |
-| spacebar | toggle whether the selected file is staged for inclusion in a commit       |
-| `a`      | toggle all modified files between being staged and not staged              |
-| `c`      | commits all staged files; prompts whether to commit all if none are staged |
-| `d`      | discards all changes in the selected file; press `d` again to confirm      |
-| `f`      | fetches changes from remote branch                                         |
-| `r`      | refreshes list of files; useful when modified outside of Neovim            |
-| `s`      | stashes all changes; prompts for stash name                                |
-| \`       | toggles the file list between flat and tree views                          |
-| `ctrl-w` | toggles hiding lines in right side that only differ by whitespace          |
+| Key      | Action                                                                            |
+| -------- | --------------------------------------------------------------------------------- |
+| `space`  | toggle whether the selected file is staged for inclusion in a commit              |
+| `a`      | toggle all modified files between being staged and not staged                     |
+| `c`      | commits all staged files; prompts whether to commit all if none are staged        |
+| `C`      | same as `c`, but opens a Vim window to enter commit message (broken in AstroNvim) |
+| `d`      | discards all changes in the selected file; press `d` again to confirm             |
+| `f`      | fetches changes from remote branch                                                |
+| `i`      | adds file to `.gitignore`                                                         |
+| `r`      | refreshes list of files; useful when modified outside of Neovim                   |
+| `s`      | stashes all changes; prompts for stash name                                       |
+| \`       | toggles the file list between flat and tree views                                 |
+| `ctrl-w` | toggles hiding lines in right side that only differ by whitespace                 |
 
 When committing changes a dialog will appear where a commit message can be entered.
 After entering a commit message, press the `return` key to perform the commit.
 
 #### Local Branches Section
 
-The "Local Branches" section lists all the local branches.
+This section contains three tabs named "Local Branches", "Remotes", and "Tags".
+The "Local Branches" tab lists all the local branches.
+The currently checked out branch that name is preceded by `*`.
 Selecting a local branch shows all of its commits on the right side.
 
-| Key        | Action                                                                             |
-| ---------- | ---------------------------------------------------------------------------------- |
-| `return`   | displays all commits selected local branch in this section; press `esc` to restore |
-| `spacebar` | switches to the selected branch                                                    |
-| `c`        | creates a new remote branch                                                        |
-| `d`        | deletes the selected local branch after confirming                                 |
-| `f`        | fetches changes from remote branch                                                 |
-| `M`        | merges the selected branch into the checked out branch                             |
-| `n`        | creates a new local branch                                                         |
-| `p`        | pulls changes from the corresponding remote branch                                 |
-| `P`        | pushes changes to the corresponding remote branch                                  |
+| Key      | Action                                                                             |
+| -------- | ---------------------------------------------------------------------------------- |
+| `return` | displays all commits selected local branch in this section; press `esc` to restore |
+| `space`  | checks out the selected branch                                                     |
+| `c`      | creates a new remote branch                                                        |
+| `d`      | deletes the selected local branch after confirming                                 |
+| `f`      | fetches changes from remote branch                                                 |
+| `M`      | merges the selected branch into the checked out branch after confirming            |
+| `n`      | creates a new local branch                                                         |
+| `o`      | starts process of opening a pull request in a new browser tab (must push first)    |
+| `p`      | pulls changes from the corresponding remote branch                                 |
+| `P`      | pushes changes to the corresponding remote branch                                  |
+| `R`      | renames the selected branch                                                        |
+| `r`      | rebases the selected branch into the checked out branch after confirming           |
 
-TODO: How can you delete the corresponding remote branch?
+When attempting to checkout a different branch, if there are
+uncommitted changes a dialog will appear that offers to stash the changes.
 
 If a merge results in conflicts, a dialog will appear explaining that.
 Press `esc` to abort the merge or `return` to resolve the conflicts.
 Each conflict will be described by a pair of "hunks".
 To keep one of the hunks, move the cursor to it with `j` and `k`
-and press the spacebar. The other hunk will be discarded.
+and press `space`. The other hunk will be discarded.
 To keep both hunks, press `b`.
 Another dialog will appear after all merge conflicts have been resolved.
 
+To delete a remote branch, switch to the "Remotes" tab in this section,
+select a branch, and press `d`.
+
+To create a new remote branch, switch to the "Remotes" tab in this section,
+and press `n`.
+
+To create a new tag, switch to the "Tags" tab in this section,
+and press `n`.
+
+To delete a tag, switch to the "Tags" tab in this section,
+select a tag, and press `d`.
+
 #### Commits Section
 
-The "Commits" section lists all the commits on the current local branch.
+This section contains two tabs, "Commits" and "Reflog".
+The "Commits" tab lists all the commits on the current local branch.
 Selecting a commit shows detail about it on the right side including
 the commit comment and a list of the new, modified, and deleted files.
+
+From the git docs, "Reflogs record when the tips of branches and
+other references were updated in the local repository.
 
 #### Stash Section
 
