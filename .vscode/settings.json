@@ -846,6 +846,7 @@
     "Unprocessable",
     "unserialize",
     "unsqueeze",
+    "unstaged",
     "unstar",
     "untars",
     "untracked",

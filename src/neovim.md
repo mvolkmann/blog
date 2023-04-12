@@ -409,28 +409,6 @@ One that I recommend is "Caskaydia Cove Nerd Font" which is very similar to
 the non-Nerd font {% aTargetBlank "https://github.com/microsoft/cascadia-code",
 "Cascadia Code" %} from Microsoft.
 
-### More Configuration
-
-TODO: Should you cover all of these in the sections that follow?
-
-| better navigation | Hop |
-| code formatting | null-ls.nvim |
-| color themes | many; want Tree-sitter support |
-| completions | cmp-buffer, cmp-luasnip, cmp-path, nvim-cmp |
-| commenting | Comment.nvim |
-| debugger | nvim-dap, nvim-dap-ui |
-| file explorer | neo-tree.nvim, nvim-tree.lua |
-| keymap display | which-key.nvim |
-| linting | null-ls.nvim |
-| notifications | nvim-notify |
-| package manager | mason.nvim |
-| plugin manager | lazy.nvim, packer.nvim |
-| snippets | LuaSnip, friendly-snippets |
-| split panes | smart-splits.nvim |
-| syntax highlighting | nvim-treesitter, nvim-colorizer.lua |
-| syntax parsing | nvim-treesitter |
-| terminal | toggleterm.nvim |
-
 ### Basics
 
 The {% aTargetBlank "https://astronvim.com/Basic%20Usage/mappings",
@@ -934,8 +912,10 @@ Selecting a stash shows the stashed changes on the right side.
 
 To see all the installed color themes and select one,
 enter `:colo` followed by a space and the tab key.
-TODO: How do you move the selection to a different one in the list?
-Selecting a theme that is compatible with Tree-sitter results in better syntax highlighting.
+Press the `tab` key repeatedly to select a theme.
+Press the `return` key activate the selected theme.
+Selecting a theme that is compatible with Tree-sitter
+results in better syntax highlighting.
 
 ### Completions
 
@@ -1259,7 +1239,6 @@ The {% aTargetBlank "https://github.com/AstroNvim/astrocommunity",
 AstroNvim plugins and their configurations.
 These are typically easier to install that configuring them manually.
 
-TODO: why is `~/.config/lua/user` a hidden directory?
 To add these to your AstroNvim setup, create the file
 `~/.config/lua/user/plugins/community.lua` and add content the like the following:
 
