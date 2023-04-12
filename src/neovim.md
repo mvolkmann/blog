@@ -335,6 +335,18 @@ The default key mappings provided by AstroNvim are described
 {% aTargetBlank "https://astronvim.com/Basic%20Usage/mappings", "here" %}.
 Most of these are defined in `~/.config/nvim/lua/astronvim/mappings.lua`
 
+AstroNvim uses the {% aTargetBlank "https://github.com/folke/which-key.nvim",
+"which-key" %} plugin to display applicable key mappings
+at the bottom of the screen when you pause during entry.
+This includes default and custom key mappings.
+
+For example, press the leader key (`space` by default) and pause.
+All the key mappings that begin with the leader key will be displayed.
+The ones in blue require pressing additional keys
+that are displayed when you press their key.
+These include "Buffers", "Find", "Git", and more.
+For example, type `<leader>f` to see all the "Find" key mappings.
+
 ### Font
 
 Several parts of AstroNvim attempt to display icons.
@@ -490,35 +502,42 @@ disabled to allow the AstroNvim default resize key mappings to work.
     src="/blog/assets/astronvim-smart-splits-keys.png?v={{pkg.version}}"
     title="AstroNvim smart-splits keys">
 
-### Telescope Commands
+### Telescope
+
+The {% aTargetBlank "https://github.com/nvim-telescope/telescope.nvim",
+"telescope.nvim" %} plugin "is a highly extendable fuzzy finder over lists".
+It provides many commands and default key mappings them.
 
 To operate on the symbol under the cursor:
 
-- Press `gd` to go to the definition of the symbol under the cursor.
-- Press `gD` to go to the declaration of the symbol under the cursor.
-  Some LSP servers don't implement this.
-- Press `gi` to list all implementations for the symbol under the cursor
-  in a quickfix window.
-- Press `gI` to go to the implementation of the symbol under the cursor.
-- Press `gr` to show references to the symbol under the cursor
-  in a quickfix window.
-  This is only supported by some LSP servers.
-- Press `gs` to display signature information about the symbol under the cursor
-  in a floating window.
-- Press `gT` to go to the type definition of the symbol under the cursor.
-- Press `K` to see the type of the symbol under the cursor.
-- Press `ctrl-o` to move backwards through results.
+| Key      | Action                                                                                |
+| -------- | ------------------------------------------------------------------------------------- |
+| `gd`     | goes to the definition of the symbol under the cursor                                 |
+| `gD`     | goes to the declaration of the symbol under the cursor                                |
+| `gi`     | lists all implementations for the symbol under the cursor in a quickfix window        |
+| `gI`     | goes to the implementation of the symbol under the cursor                             |
+| `gr`     | shows references to the symbol under the cursor in a quickfix window                  |
+| `gs`     | displays signature information about the symbol under the cursor in a floating window |
+| `gT`     | goes to the type definition of the symbol under the cursor                            |
+| `K`      | shows the type of the symbol under the cursor                                         |
+| `ctrl-o` | moves backwards through results                                                       |
+
+Some LSP servers to not support all these action.
 
 For diagnostic messages:
 
-- Press `gl` to see a full error message when an error is displayed.
-- Press `[d` to move to the previous diagnostic in the current buffer.
-- Press `]d` to move to the next diagnostic in the current buffer.
+| Key  | Action                                                  |
+| ---- | ------------------------------------------------------- |
+| `gl` | shows the full error message when an error is displayed |
+| `[d` | move to the previous diagnostic in the current buffer   |
+| `]d` | move to the next diagnostic in the current buffer       |
 
 For file paths:
 
-- Press `gf` to open the file under the cursor in Neovim.
-- Press `gx` to open the file under the cursor in the associated app.
+| Key  | Action                                                |
+| ---- | ----------------------------------------------------- |
+| `gf` | opens the file under the cursor in Neovim             |
+| `gx` | opens the file under the cursor in its associated app |
 
 Some telescope commands display a new window containing multiple sections.
 The upper-left section contains a text input
