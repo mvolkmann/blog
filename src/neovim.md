@@ -173,13 +173,38 @@ with a dot after the file name.
 
 ## Folds
 
-Code folding is a feature of Vim that is also present in Neovim.
+Code folding is a Vim feature that is also present in Neovim.
+To see all the default key mappings related to folding,
+press `z` and pause.
 
-- `zm` - fold more (close)
-- `zr` - fold less (open)
-- `zM` - close all folds
-- `zR` - open all folds
-- `zp` - peek at folded lines; next keystroke hides again
+| Key  | Action                                              |
+| ---- | --------------------------------------------------- |
+| `za` | toggles the fold on the cursor line                 |
+| `zA` | toggles all folds on the cursor line (nested folds) |
+| `zo` | opens fold on the cursor line                       |
+| `zm` | folds more over entire buffer                       |
+| `zr` | folds less over entire buffer                       |
+| `zM` | closes all folds                                    |
+| `zR` | opens all folds                                     |
+| `zp` | peeks at folded lines; next keystroke hides again   |
+
+Of these, `za` and `zR` are the most useful.
+
+## Line Moving
+
+To move the line under the cursor:
+
+| Key         | Action                   |
+| ----------- | ------------------------ |
+| `zt`        | moves to top             |
+| `z<return>` | also moves to top        |
+| `zz`        | moves to vertical center |
+
+## Spelling
+
+To see spelling suggestions for the word under the cursor, press `z=`.
+This displays suggestions at the bottom of the screen.
+Press the number or letter in front of a suggestion to substitute it.
 
 ## Lua Functions
 
@@ -598,6 +623,9 @@ For diagnostic messages:
 | `lD` | displays all diagnostics in a Telescope window          |
 
 To close a diagnostic popup, move the cursor.
+
+After pressing `gl`, press it again to move focus into the diagnostic popup.
+For focus is in a diagnostic popup, press `q` to close it.
 
 For file paths:
 
@@ -1040,7 +1068,7 @@ In the load dialog, select a session and press `return` to load it.
 
 In the delete dialog, select a session and press `return` to delete it.
 
-To close one of these dialogs, press the `esc` key.
+To close one of these dialogs, press the `esc` key twice.
 
 ### Terminal
 
