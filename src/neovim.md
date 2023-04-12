@@ -356,6 +356,13 @@ The default key mappings provided by AstroNvim are described
 {% aTargetBlank "https://astronvim.com/Basic%20Usage/mappings", "here" %}.
 Most of these are defined in `~/.config/nvim/lua/astronvim/mappings.lua`
 
+While a primary reason for using Vim is to
+keep your hands on the keyboard for maximum efficiency,
+many actions can also be accomplished using a mouse or trackpad.
+For example, ctrl-clicking a symbol jumps to its definition.
+
+AstroNvim defines `jj` and `jk` to exit insert mode just as the `esc` key does.
+
 AstroNvim uses the {% aTargetBlank "https://github.com/folke/which-key.nvim",
 "which-key" %} plugin to display applicable key mappings
 at the bottom of the screen when you pause during entry.
@@ -442,7 +449,8 @@ This displays a menu of common commands that includes:
 
 - "Last Session".
 
-  TODO: Learn why this is useful and how to return to the current session.
+  This restores the most recent session.
+  See the "Sessions" section for details.
 
 ### File Explorer
 
@@ -550,19 +558,33 @@ The {% aTargetBlank "https://github.com/nvim-telescope/telescope.nvim",
 "telescope.nvim" %} plugin "is a highly extendable fuzzy finder over lists".
 It provides many commands and default key mappings them.
 
+To operate on the current buffer:
+
+| Key          | Action                                                                           |
+| ------------ | -------------------------------------------------------------------------------- |
+| `<leader>lf` | formats the contents                                                             |
+| `<leader>lS` | toggles display of a right pane containing a list of symbols defined in the file |
+
+Symbols include variables, functions, and type declarations.
+Select a symbol name to scroll to it in the buffer.
+The list of symbols automatically updates
+when focus moves to a different buffer.
+
 To operate on the symbol under the cursor:
 
-| Key      | Action                                                                                |
-| -------- | ------------------------------------------------------------------------------------- |
-| `gd`     | goes to the definition of the symbol under the cursor                                 |
-| `gD`     | goes to the declaration of the symbol under the cursor                                |
-| `gi`     | lists all implementations for the symbol under the cursor in a quickfix window        |
-| `gI`     | goes to the implementation of the symbol under the cursor                             |
-| `gr`     | shows references to the symbol under the cursor in a quickfix window                  |
-| `gs`     | displays signature information about the symbol under the cursor in a floating window |
-| `gT`     | goes to the type definition of the symbol under the cursor                            |
-| `K`      | shows the type of the symbol under the cursor                                         |
-| `ctrl-o` | moves backwards through results                                                       |
+| Key          | Action                                                                                |
+| ------------ | ------------------------------------------------------------------------------------- |
+| `gd`         | goes to the definition of the symbol under the cursor                                 |
+| `gD`         | goes to the declaration of the symbol under the cursor                                |
+| `gi`         | lists all implementations for the symbol under the cursor in a quickfix window        |
+| `gI`         | goes to the implementation of the symbol under the cursor                             |
+| `gr`         | shows references to the symbol under the cursor in a quickfix window                  |
+| `gs`         | displays signature information about the symbol under the cursor in a floating window |
+| `gT`         | goes to the type definition of the symbol under the cursor                            |
+| `K`          | shows the type of the symbol under the cursor                                         |
+| `<leader>la` | opens a menu of applicable code actions in a Telescope window                         |
+| `<leader>lr` | renames the symbol under the cursor; prompts for new name                             |
+| `ctrl-o`     | moves backwards through results                                                       |
 
 Some LSP servers to not support all these action.
 
@@ -995,13 +1017,35 @@ To create custom snippets:
 
 TODO: Describe the LuaSnips syntax for defining snippets.
 
-### Symbol List
+### Sessions
 
-To list symbols in a right pane, enter `<leader>lS`".
-This lists symbols like variable, function, and type declarations.
-Select a symbol name to scroll to it in the source file.
-The list of symbols automatically updates
-when focus moves to a different buffer.
+A session records the directory from which AstroNvim was started
+and the buffers that were open (but not their order).
+There can only be one session per directory.
+Once a session has been loaded, the list of open buffers
+in the session is automatically updated.
+
+The following key mappings must be used while focus is in a buffer,
+not in the file explorer.
+
+| Key          | Action                                                                 |
+| ------------ | ---------------------------------------------------------------------- |
+| `<leader>Ss` | creates a new session for the starting directory if it doesn't exist   |
+| `<leader>Sf` | opens a dialog that lists saved sessions and allows loading to one     |
+| `<leader>S.` | loads the session for the current directory if it exists               |
+| `<leader>Sl` | loads the last (most recent) session                                   |
+| `<leader>Sd` | opens a dialog that lists saved sessions and allows them to be deleted |
+
+In the load dialog, select a session and press `return` to load it.
+
+In the delete dialog, select a session and press `return` to delete it.
+
+To close one of these dialogs, press the `esc` key.
+
+### Terminal
+
+To open a floating terminal window, press `F7`.
+On a MacBook keyword, hold the `fn` key and press `F7`.
 
 ### Custom Plugins
 
