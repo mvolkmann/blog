@@ -450,12 +450,19 @@ AstroNvim uses the {% aTargetBlank
 "https://github.com/nvim-neo-tree/neo-tree.nvim", "neo-tree.nvim" %} plugin.
 for the file explorer that appears on the left when `<leader>e` is pressed.
 
+The file explorer contains three tabs.
+The "File" tab displays files and directories in and below
+the directory from which Neovim was started.
+The "Bufs" tab displays a list of all the current buffers.
+The "Git" tab displays a list of modified, uncommitted files.
+Press the `<` and `>` keys to navigate between these tabs.
+
 Once open, press `?` to see the default key mappings.
 Press `j` and `k` to navigate down and up to select a file or directory.
 
 Some of the useful neo-tree key mappings include:
 
-- # to perform fuzzy filtering; press `esc` to exit
+- `#` to perform fuzzy filtering; press `esc` to exit
 - `a` to add a new file or directory
 - `A` to add a new directory
 - `H` to toggle display of hidden files (hidden by default)
@@ -671,18 +678,12 @@ To see all the keys mapped to Git commands, press `<leader>g` and pause.
 | Key          | Action                                                                                  |
 | ------------ | --------------------------------------------------------------------------------------- |
 | `<leader>gb` | displays a list of local Git branches in a Telescope window and allows switching to one |
+| `<leader>gc` | lists all the commits for the current file                                              |
+| `<leader>gd` | displays a side-by-side diff for the current file                                       |
 | `<leader>gt` | open a window that displays the Git status of the current project                       |
-| ``           |                                                                                         |
-| ``           |                                                                                         |
-| ``           |                                                                                         |
-| ``           |                                                                                         |
-| ``           |                                                                                         |
 
-The "Git Branch Preview" pane on the right shows the commits on the branch.
-
-To see a side-by-side diff for the current file, press `<leader>gd`.
-
-To list all the commits for the current file, press `<leader>gc`.
+In the Telescope window displayed by `<leader>gb`,
+the "Git Branch Preview" pane on the right shows the commits on the branch.
 
 ### Lazygit
 
