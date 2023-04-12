@@ -462,31 +462,33 @@ Press `j` and `k` to navigate down and up to select a file or directory.
 
 Some of the useful neo-tree key mappings include:
 
-- `#` to perform fuzzy filtering; press `esc` to exit
-- `a` to add a new file or directory
-- `A` to add a new directory
-- `H` to toggle display of hidden files (hidden by default)
-- `P` to toggle preview display of selected file
-- `S` to open selected file in a new horizontal split
-- `s` to open selected file in a new vertical split
-- `?` to see all file explorer key mappings
-- `c` to copy selected file; prompts for new name
-- `d` to delete selected file or directory
-- `h` or return key to close an expanded directory
-- `j` to move down to the next file or directory
-- `k` to move up to the next file or directory
-- `l` or return key to open the selected file or directory
-- `m` to move selected file or directory; prompts for destination directory
-- `o` or return key to open selected file or directory
-- `r` to rename selected file or directory
-- `t` to open selected file in a new tab (new set of files)
-- `y` to copy selected file to clipboard
-- `p` to paste file from clipboard into selected directory
-- `<` to go to previous tab (File, Bufs, or Git)
-- `>` to go to next tab (File, Bufs, or Git)
+| Key      | Action                                                              |
+| -------- | ------------------------------------------------------------------- |
+| `?`      | shows all file explorer key mappings                                |
+| `#`      | performs fuzzy filtering; press `esc` to exit                       |
+| `return` | opens selected file or directory                                    |
+| `a`      | adds a new file or directory                                        |
+| `A`      | adds a new directory                                                |
+| `H`      | toggles display of hidden files (hidden by default)                 |
+| `S`      | opens selected file in a new horizontal split                       |
+| `s`      | opens selected file in a new vertical split                         |
+| `c`      | copies selected file; prompts for new name                          |
+| `d`      | deletes selected file or directory                                  |
+| `j`      | moves down to the next file or directory                            |
+| `k`      | moves up to the next file or directory                              |
+| `m`      | moves selected file or directory; prompts for destination directory |
+| `r`      | renames selected file or directory                                  |
+| `t`      | opens selected file in a new tab (new set of files)                 |
+| `y`      | copies selected file to clipboard                                   |
+| `p`      | pastes file from clipboard into selected directory                  |
+| `<`      | navigates to previous tab (File, Bufs, or Git)                      |
+| `>`      | navigates to next tab (File, Bufs, or Git)                          |
 
-Navigate down and up with `j` and `k`.
-To open a selected directory or file, press the return key.
+When `t` is pressed, a new tab is created.
+These are represented by numbered buttons starting from 1 in the upper-right.
+Clicking these switches to the corresponding tab.
+To close a tab, select it and click the red circle containing an "X"
+that appears after the last tab number.
 
 By default neo-tree hides the directory `~/.config/nvim/lua/user`.
 This directory contains files that configure plugins,
@@ -568,9 +570,12 @@ For diagnostic messages:
 
 | Key  | Action                                                  |
 | ---- | ------------------------------------------------------- |
-| `gl` | shows the full error message when an error is displayed |
 | `[d` | move to the previous diagnostic in the current buffer   |
 | `]d` | move to the next diagnostic in the current buffer       |
+| `gl` | shows the full error message when an error is displayed |
+| `lD` | displays all diagnostics in a Telescope window          |
+
+To close a diagnostic popup, move the cursor.
 
 For file paths:
 
@@ -889,14 +894,15 @@ To select a suggested completion from a provided list,
 use ctrl-j and ctrl-k to move down and up
 and press return to select the highlighted completion.
 
-- Press `Ctrl-y>` to confirm selection of a completion.
-- Press `<Ctrl-e>` to cancel completion.
-- Press `<Down>` to navigate to the next suggested completion.
-- Press `<Up>` to navigate to the previous suggested completion.
-- If a completion menu is visible, press `<Ctrl-n>` to go to next item.
-  Otherwise pressing this displays the completion menu.
-- If a completion menu is visible, press `<Ctrl-p>` to go to previous item.
-  Otherwise pressing this displays the completion menu.
+| Key          | Action                                         |
+| ------------ | ---------------------------------------------- |
+| `ctrl-space` | manually opens a list of suggestions           |
+| `ctrl-y`     | confirms selection of a completion             |
+| `ctrl-e`     | cancels completion and closes the list         |
+| `ctrl-n`     | navigates to the next suggested completion     |
+| `ctrl-p`     | navigates to the previous suggested completion |
+| down arrow   | navigates to the next suggested completion     |
+| up arrow     | navigates to the previous suggested completion |
 
 ### Documentation Windows
 
