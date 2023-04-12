@@ -121,8 +121,8 @@ To configure using Lua:
   }
   ```
 
-- See the section below on "Custom Plugins"
-  to learn about the files that should be created in the `plugins` directory.
+- See the "Custom Plugins" section below to learn about
+  the files that should be created in the `plugins` directory.
 
 See the official example of this customization approach at {% aTargetBlank
 "https://github.com/AstroNvim/user_example", "AstroNvim/user_example" %}.
@@ -448,12 +448,14 @@ This displays a menu of common commands that includes:
 
 - "Bookmarks"
 
-  TODO: Learn how to create bookmarks!
+  This displays all the current marks in a Telescope window.
+  Selecting one and pressing `return` jumps to it.
+  See the "Marks" section below for more detail.
 
 - "Last Session".
 
   This restores the most recent session.
-  See the "Sessions" section for details.
+  See the "Sessions" section below for more detail.
 
 ### File Explorer
 
@@ -1024,6 +1026,28 @@ To create custom snippets:
    "https://github.com/L3MON4D3/LuaSnip/issues/857", "issue" %}.
 
 TODO: Describe the LuaSnips syntax for defining snippets.
+
+### Marks
+
+Vim supports marking locations in files and easily returning to them.
+
+| Key                   | Action                                                      |
+| --------------------- | ----------------------------------------------------------- |
+| `m{lowercase-letter}` | creates a mark that is local to the current file            |
+| `m{uppercase-letter}` | creates a global mark                                       |
+| `'{letter}`           | jumps to first non-whitespace character on line of the mark |
+| <pre>\`{letter}</pre> | jumps to line and column of the mark                        |
+| `:marks`              | lists all the marks                                         |
+| `<leader>f'`          | lists all the marks in a Telescope window                   |
+
+When marks are displayed in a Telescope window,
+select one an press `return` to jump to it.
+
+To delete marks, enter `:delmarks {letter}, {letter}, ...`
+
+There are many special marks that are automatically set.
+All of them seem to have limited usefulness.
+These are displayed by both `:marks` and `<leader>f'`.
 
 ### Sessions
 
