@@ -154,9 +154,17 @@ in order for the changes to take effect.
 ## Buffers
 
 The contents of opened files are held in buffers.
+
 Editing a buffer and writing it saves the modified content back to its file.
+
 Neovim indicates buffers that have been modified and not written
 with a dot after the file name.
+
+| Key         | Action                               |
+| ----------- | ------------------------------------ |
+| `<leader>c` | closes the current buffer            |
+| `[b`        | navigates to the buffer on the right |
+| `]b`        | navigates to the buffer on the left  |
 
 ## Folds
 
@@ -384,7 +392,11 @@ The {% aTargetBlank "https://astronvim.com/Basic%20Usage/mappings",
 "Default Mappings" %} page lists all the key mappings
 that AstroNvim provides by default.
 
-The leader key defaults to space.
+The leader key defaults to `space`.
+
+To open a new, empty buffer, press `<leader>n`.
+To write the buffer to a file in the directory from which Neovim was launched,
+enter `:w {file-name}`.
 
 Press `<leader>h` to open the AstroNvim home screen.
 This displays a menu of common commands that includes:
@@ -483,18 +495,25 @@ return {
 The editing area display multiple buffers
 that are displayed in multiple split panes.
 
-To create a horizontal split, enter `<leader>/`.
+| Key            | Action                                                                |
+| -------------- | --------------------------------------------------------------------- |
+| `<leader>/`    | creates a horizontal split (below)                                    |
+| `<leader>`     | creates a vertical split (right)                                      |
+| `ctrl-q`       | closes the current split                                              |
+| `:clo`         | closes the current split                                              |
+| `ctrl-h`       | moves to the split on the left                                        |
+| `ctrl-j`       | moves to the split below                                              |
+| `ctrl-k`       | moves to the split above                                              |
+| `ctrl-l`       | moves to the split on the right                                       |
+| `ctrl-{arrow}` | increases the size of the current split in the direction of the arrow |
+| ``             |                                                                       |
 
-To create a vertical split, enter `<leader>|`.
+Moving to a different split includes
+moving from the file explorer to the first buffer
+and from the first buffer to the file explorer.
 
-To close a split, press ctrl-q or enter `:clo` or `<leader>c`.
-
-To move between splits, enter `ctrl-h` (left),
-`ctrl-j` (down), `ctrl-k` (up), and `ctrl-l` (right).
-
-To resize the current split, press ctrl and
-an arrow key to make it larger in that direction.
-In macOS this will likely not work due to default key mappings in System Settings.
+In macOS the `ctrl-{arrow}` mappings will likely not work
+due to default key mappings in System Settings.
 The following screenshot shows the key mappings that need to changed or
 disabled to allow the AstroNvim default resize key mappings to work.
 
@@ -541,10 +560,30 @@ For file paths:
 
 Some telescope commands display a new window containing multiple sections.
 The upper-left section contains a text input
-used to filter the content in the lower-left section.
+used to filter the results displayed in the lower-left section.
+Initially the focus will be in this text input and it will be in insert mode.
+We will refer to this section as "filter".
+
+The lower-left section displays the filtered results.
+We will refer to this section as "results".
+To move focus from the the filter section to the results section,
+press `ctrl-j`.
 The selected item displays a `>` to its left and has a gray background.
+To select a different item, press `ctrl-j` (down), `ctrl-k` (up),
+or the down and up arrow keys.
+To open a selected file, press the `return` key.
+
 The right section displays a preview
 of what is selected in the lower-left section.
+We will refer to this section as "preview".
+
+Press the `esc` key to exit insert mode.
+When this is done you move the cursor left and right in the filter input
+by pressing `h` and `l`.
+You can also change the selection in the result section
+by pressing `j` and `k`.
+When not in insert mode, press `?`
+to see all the applicable Telescope key mappings.
 
 The Telescope fuzzy finder can find many things including
 files, buffers, key mappings, help, and more.
