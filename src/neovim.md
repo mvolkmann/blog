@@ -102,11 +102,14 @@ To configure using Lua:
 
   ```lua
   return {
-    -- TODO: Add examples of custom key mappings here.
+    -- normal mode
+    n = {
+      ["<leader>-"] = { "<cmd>split<cr>", desc = "Horizontal Split" }
+    }
   }
   ```
 
-- In the `optoins.lua` file, return a table like the following:
+- In the `options.lua` file, return a table like the following:
   For example:
 
   ```lua
@@ -160,11 +163,13 @@ Editing a buffer and writing it saves the modified content back to its file.
 Neovim indicates buffers that have been modified and not written
 with a dot after the file name.
 
-| Key         | Action                               |
-| ----------- | ------------------------------------ |
-| `<leader>c` | closes the current buffer            |
-| `[b`        | navigates to the buffer on the right |
-| `]b`        | navigates to the buffer on the left  |
+| Key         | Action                                             |
+| ----------- | -------------------------------------------------- |
+| `<leader>c` | closes the current buffer                          |
+| `[b`        | navigates to the buffer on the right               |
+| `]b`        | navigates to the buffer on the left                |
+| `<b`        | swaps the current buffer with the one on the left  |
+| `>b`        | swaps the current buffer with the one on the right |
 
 ## Folds
 
@@ -269,6 +274,14 @@ To install
    When using zsh, add `export NODE_ENV=development` in `~/.zshrc`.
 
 To check the status of your installation, enter `:checkhealth`.
+
+### Updating
+
+To update to the latest version of AstroNvim:
+
+- Enter `:AstroUpdate`
+- Enter `:AstroUpdatePackages`
+- Enter `:Lazy Sync`
 
 ### Configuration
 
@@ -498,6 +511,7 @@ that are displayed in multiple split panes.
 | Key            | Action                                                                |
 | -------------- | --------------------------------------------------------------------- |
 | `<leader>/`    | creates a horizontal split (below)                                    |
+| `<leader>-`    | same as above using a custom key mapping I added                      |
 | `<leader>`     | creates a vertical split (right)                                      |
 | `ctrl-q`       | closes the current split                                              |
 | `:clo`         | closes the current split                                              |
@@ -567,10 +581,10 @@ We will refer to this section as "filter".
 The lower-left section displays the filtered results.
 We will refer to this section as "results".
 To move focus from the the filter section to the results section,
-press `ctrl-j`.
+press `tab` or `ctrl-j`.
 The selected item displays a `>` to its left and has a gray background.
-To select a different item, press `ctrl-j` (down), `ctrl-k` (up),
-or the down and up arrow keys.
+To select a different item, press `tab` (down),
+`ctrl-j` (down), `ctrl-k` (up), or the down and up arrow keys.
 To open a selected file, press the `return` key.
 
 The right section displays a preview
@@ -641,22 +655,30 @@ AstroNvim uses the {% aTargetBlank "https://github.com/rebelot/heirline.nvim",
 that includes lots of information about the current Git repository.
 This is enabled by default.
 
-### Git Commands
+### Git Integration
+
+When editing a file in a Git repository,
+colored vertical lines appear in the gutter to indicate
+added lines (green), delete lines (red), and modified lines (orange).
+
+The left side of the status bar at the bottom displays
+the number of new, modified, and deleted files.
+
+The file explorer `Git` tab lists the modified files.
 
 To see all the keys mapped to Git commands, press `<leader>g` and pause.
 
-To open a window that displays the Git status of the current project,
-press `<leader>gt`. Press `esc` twice to close the window.
+| Key          | Action                                                                                  |
+| ------------ | --------------------------------------------------------------------------------------- |
+| `<leader>gb` | displays a list of local Git branches in a Telescope window and allows switching to one |
+| `<leader>gt` | open a window that displays the Git status of the current project                       |
+| ``           |                                                                                         |
+| ``           |                                                                                         |
+| ``           |                                                                                         |
+| ``           |                                                                                         |
+| ``           |                                                                                         |
 
-To list all the branches and optionally switch to one,
-press `<leader>gb`.
-
-- Enter text in the "Git Branches" input to filter the branches.
-- Press tab to jump to the "Results" pane that lists the branches.
-- Press ctrl-j and ctrl-k to move down and up in the list.
-  Repeatedly pressing tab also moves down in the list.
-- Press the return key to switch to the selected branch.
-- The "Git Branch Preview" pane on the right shows the commits on the branch.
+The "Git Branch Preview" pane on the right shows the commits on the branch.
 
 To see a side-by-side diff for the current file, press `<leader>gd`.
 
