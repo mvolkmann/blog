@@ -25,8 +25,9 @@ the code was 44% VimScript, 31% C, and 23% Lua.
 
 ## Installing
 
-In macos, Neovim can be installed using Homebrew.
-by entering `brew install neovim`.
+In macOs, Neovim can be installed using Homebrew.
+To install it, enter `brew install neovim`.
+To upgrade after it has been installed, enter `brew upgrade neovim`.
 
 If you are already in the habit of using Vim,
 it's a good idea to add an alias from "vim" to "nvim"
@@ -83,6 +84,10 @@ or both.
 To configure using Lua:
 
 - Create the directory `~/.config/nvim/lua/user`.
+
+- If your `.config` directory is in a Git repo (and it probably should be),
+  remove the line `lua/user` from `~/.config/nvim/.gitignore`
+  so it can be saved.
 
 - In the new directory, create the file `init.lua`,
   the file `options.lua`, the file `mappings.lua`,
@@ -276,8 +281,7 @@ To install
 
 1. Install Neovim. In macOS enter `brew install neovim`.
 1. Make a backup copy of your `~/.config/nvim` directory if you have one.
-1. `cd` to your `~/.config/nvim` directory.
-1. Delete all the files and directories inside it.
+1. Delete the `~/.config/nvim` directory.
 1. Enter `git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim`
 1. Enter `brew install lua-language-server`.
 1. Enter `nvim`. On first launch this will install many things.
@@ -287,8 +291,8 @@ To install
 1. Install LSP servers by entering `:LspInstall {server-name}`
    for each server.
    For example, use the server names "eslint", "tsserver", and "lua_ls".
-1. Enter `NullLsInstall prettier`.
-1. Optionally enter `DapInstall {debug-adapter}`
+1. Enter `:NullLsInstall prettier`.
+1. Optionally enter `:DapInstall {debug-adapter}`
    for each language-specific Debug Adapter Protocol server.
    (I could not find any of these.)
 1. Enter `:Lazy sync` to update plugins and remove unused plugins.
@@ -503,25 +507,29 @@ Clicking these switches to the corresponding tab.
 To close a tab, select it and click the red circle containing an "X"
 that appears after the last tab number.
 
-By default neo-tree hides the directory `~/.config/nvim/lua/user`.
-This directory contains files that configure plugins,
-including overriding default AstroNvim plugin configurations.
-To make this directory always be visible,
-create the file `~/.config/nvim/lua/user/plugins/neo-tree.lua`
+The file explorer indicates when there are hidden files in a directory.
+To show them, press `H`.
+
+By default neo-tree hides all files and directories
+listed in `~/.config/nvim/.gitignore`.
+One of the directories listed is `lua/user`
+which contains files that configure plugins.
+One way to make this directory visible is to
+remove the `lua/user` line from the `.gitignore` file.
+Another way is to create the file `~/.config/nvim/lua/user/plugins/neo-tree.lua`
 with the following content:
 
 ```lua
 return {
   "nvim-neo-tree/neo-tree.nvim",
-  opts = function()
-    return {
-      filesystem = {
-        filtered_items = {
-          always_show = { "user" }
-        }
+  opts = {
+    filesystem = {
+      filtered_items = {
+        always_show = { "user" } -- option #1 targets a specific entry
+        -- hide_gitignored = false -- option #2 targets all .gitignore entries
       }
     }
-  end
+  }
 }
 ```
 
@@ -996,6 +1004,10 @@ To create custom snippets:
          {
            "language": "javascript",
            "path": "./javascript.json"
+         },
+         {
+           "language": "markdown",
+           "path": "./markdown.json"
          }
        ]
      }
