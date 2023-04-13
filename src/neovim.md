@@ -331,6 +331,8 @@ To install
 1. Install LSP servers by entering `:LspInstall {server-name}`
    for each server.
    For example, use the server names "eslint", "tsserver", and "lua_ls".
+   To see a list of all the available LSP servers for a given file type,
+   open a file of that type and enter `:LspInstall`.
 1. Enter `:NullLsInstall prettier`.
 1. Optionally enter `:DapInstall {debug-adapter}`
    for each language-specific Debug Adapter Protocol server.
