@@ -1200,7 +1200,7 @@ To close one of these dialogs, press the `esc` key twice.
 
 ### Terminal
 
-To open a floating terminal window, press `F7`.
+To open a floating terminal window, press `F7` or enter `:ToggleTerm`.
 On a MacBook keyword, hold the `fn` key and press `F7`.
 
 ### Lazy
