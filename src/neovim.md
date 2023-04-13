@@ -1022,10 +1022,10 @@ AstroNvim provides language-specific syntax highlighting.
 AstroNvim uses the LuaSnips plugin to support snippets.
 Snippet suggests appear when the beginning of their trigger words are typed.
 When a list of possible snippets appears,
-press ctrl-j and ctrl-k to highlight one,
-press enter to select it.
+press the `tab` key or `ctrl-j` and `ctrl-k` to highlight one,
+and press the `return` key to select it.
 
-For snippets that have placeholders, type text into each one.
+For snippets that have placeholders, type text or paste text into each one.
 Press tab to jump to the next placeholder
 and shift-tab to jump to the previous placeholder.
 After entering text for the last placeholder,
