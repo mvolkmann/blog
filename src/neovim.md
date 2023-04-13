@@ -195,9 +195,9 @@ press `z` and pause.
 
 Of these, `za` and `zR` are the most useful.
 
-## Line Moving
+## Buffer Scrolling
 
-To move the line under the cursor:
+To scroll the current buffer based on the line under the cursor:
 
 | Key         | Action                   |
 | ----------- | ------------------------ |
@@ -210,6 +210,47 @@ To move the line under the cursor:
 To see spelling suggestions for the word under the cursor, press `z=`.
 This displays suggestions at the bottom of the screen.
 Press the number or letter in front of a suggestion to substitute it.
+
+## Macros
+
+Macros record a series of keystrokes and assign them to a lowercase letter
+so they can be replayed any number of times.
+
+To define a macro:
+
+1. Press `q` followed by the lowercase letter to which it will be assigned.
+1. Type the keystrokes to be recorded.
+1. Press `q` to end recording.
+
+To replay a macro:
+
+1. Move the cursor to where it should be when the macro begins playing.
+1. Press `@` followed by the assigned lowercase letter.
+
+To replay the last macro used, press `@@`.
+
+To replay a macro multiple times, type the desired number
+followed by `@` and the assigned macro letter.
+
+For example, suppose we want to define a macro named "i" that
+adds a hyphen and a space to the beginning of a line
+and add a period at the end.
+
+- Move the cursor to the beginning of line that needs these changes.
+- Press `qi`.
+- Type `i` to go into insert mode.
+- Type `-` and a space.
+- Press `esc` to exit insert mode.
+- Press `$` to move the end of the line.
+- Press `a` (append) to enter insert mode after the current position.
+- Type `.`
+- Press `esc` to exit insert mode.
+- Press `0` to move the beginning of the line and
+  press `j` to move down to the next line.
+  These prepare for executing the macro again on the next line.
+- Press `q` to end macro recording.
+
+To execute this macro on the next 15 lines, type `15@i` or `15@@`.
 
 ## Lua Functions
 
