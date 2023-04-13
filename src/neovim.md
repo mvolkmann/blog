@@ -98,7 +98,7 @@ To configure using Lua:
 
   ```lua
   return {
-    colorscheme = "astrolight"
+    colorscheme = "astrodark"
   }
   ```
 
@@ -356,8 +356,9 @@ For the best Ruby support, enter `gem install neovim`.
 
 For the best Node.js support, enter `npm install -g neovim`.
 
-For better snippet support,
-modify `~/.config/nvim/lua/plugins/config/luasnip.lua` to match the following:
+TODO: Should you do this?
+For better snippet support, create the file
+`~/.config/nvim/lua/user/plugins/luasnip.lua` containing the following:
 
 ```lua
 return function(_, opts)
@@ -777,6 +778,28 @@ Press `return` to execute it.
 The output temporarily replaces the lazygit UI.
 Press `return` again to return to lazygit.
 
+To customize the configuration of lazygit, create the file
+`~/.config/nvim/lua/user/plugins/lazygit.lua`.
+For example:
+
+```lua
+return {
+  "kdheepak/lazygit.nvim"
+  -- TODO: I want this to configure side-by-side diffs using the delta pager
+  -- TODO: which must be installed, but this is not working!
+  -- TODO: See https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Pagers.md.
+  --[[
+  config = function()
+    require("lazygit").setup {
+      pager = "delta",
+      delta = "side-by-size"
+    }
+  end,
+  event = "User AstroFile" -- need this?
+  --]]
+}
+```
+
 #### Status Section
 
 The "Status" section shows the repository name and the current branch.
@@ -974,19 +997,18 @@ To create custom snippets:
 
 1. Create the directory `~/.config/nvim/lua/user/snippets`.
 
-1. Create the file `~/.config/nvim/lua/user/init.lua` containing the following:
+1. Create the file `~/.config/nvim/lua/user/plugins/luasnip.lua`
+   containing the following:
 
    ```lua
    return {
-     plugins = {
-       {
-         "L3MON4D3/LuaSnip",
-         config = function(plugin, opts)
-           require "plugins.configs.luasnip"(plugin, opts) -- include the default astronvim config that calls the setup call
-           require("luasnip.loaders.from_vscode").lazy_load { paths = { "./lua/user/snippets" } } -- load snippets paths
-         end,
-       },
-     },
+     "L3MON4D3/LuaSnip",
+     config = function(plugin, opts)
+       require "plugins.configs.luasnip" (plugin, opts)
+       require("luasnip.loaders.from_vscode").lazy_load {
+         paths = { "./lua/user/snippets" }
+       }
+     end
    }
    ```
 
@@ -1016,7 +1038,9 @@ To create custom snippets:
 
 1. For the VS Code style, create a file like the following
    for each language that needs snippets.
+
    For JavaScript the file name should be `javascript.json`.
+   For example:
 
    ```json
    {
@@ -1036,6 +1060,26 @@ To create custom snippets:
    Using `$2` twice in the previous snippet is NOT WORKING
    like it does in VS Code! See {% aTargetBlank
    "https://github.com/L3MON4D3/LuaSnip/issues/857", "issue" %}.
+
+   For Markdown the file name should be `markdown.json`.
+   For example:
+
+   ```json
+   {
+     "Anchor Target Blank": {
+       "prefix": "atb",
+       "body": ["{% aTargetBlank \"$1\", \"$2\" %}"],
+       "description": "Markdown 11ty aTargetBlank shortcode"
+     },
+     "Image": {
+       "prefix": "img",
+       "body": [
+         "<img alt=\"$1\" style=\"width: 50%\"\n  src=\"/blog/assets/$2.png?v={{pkg.version}}\"\n  title=\"$1\">"
+       ],
+       "description": "Markdown <img>"
+     }
+   }
+   ```
 
 TODO: Describe the LuaSnips syntax for defining snippets.
 
@@ -1251,6 +1295,7 @@ return {
   "m4xshen/smartcolumn.nvim",
   opts = {
     -- colorcolumn = 80 -- This is the default.
+    -- Don't disable any file types.
     disabled_filetypes = {} -- default is {"help", "text", "markdown"}
   },
   event = "User AstroFile"
@@ -1281,15 +1326,8 @@ To add these to your AstroNvim setup, create the file
 ```lua
 return {
   "AstroNvim/astrocommunity",
+  { import = "astrocommunity.pack.typescript" },
   { import = "astrocommunity.colorscheme.catppuccin", enabled = true },
-  { import = "astrocommunity.colorscheme.nightfox", enabled = false },
-  { import = "astrocommunity.bars-and-lines.smartcolumn-nvim" },
-  {
-    "m4xshen/smartcolumn.nvim",
-    opts = {
-      colorcolumn = 80,
-      disabled_filetypes = { "help" },
-    },
-  }
+  { import = "astrocommunity.colorscheme.nightfox", enabled = true }
 }
 ```
