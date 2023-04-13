@@ -336,7 +336,7 @@ To install
 1. Optionally enter `:DapInstall {debug-adapter}`
    for each language-specific Debug Adapter Protocol server.
    (I could not find any of these.)
-1. Enter `:Lazy sync` to update plugins and remove unused plugins.
+1. Enter `:Lazy sync` to update used plugins and remove unused plugins.
 1. Enter `:AstroUpdatePackages` to get the latest AstroNvim updates.
 1. If JavaScript will be edited then
    it is likely that Babel will be used parse files.
@@ -1019,7 +1019,8 @@ AstroNvim provides language-specific syntax highlighting.
 
 ### Snippets
 
-AstroNvim uses the LuaSnips plugin to support snippets.
+AstroNvim uses the {% aTargetBlank "https://github.com/L3MON4D3/LuaSnip",
+"LuaSnip" %} plugin to support snippets.
 Snippet suggests appear when the beginning of their trigger words are typed.
 When a list of possible snippets appears,
 press the `tab` key or `ctrl-j` and `ctrl-k` to highlight one,
@@ -1079,6 +1080,11 @@ To create custom snippets:
 
 1. For the VS Code style, create a file like the following
    for each language that needs snippets.
+   Placeholders are represented by a `$` followed by a number starting from `1`.
+   For example, a snippet with three placeholders
+   will contain `$1`, `$2`, and `$3`.
+   The final placeholder can be represented by `$0` instead of `$3`,
+   but its not clear what advantage that provides.
 
    For JavaScript the file name should be `javascript.json`.
    For example:
@@ -1097,10 +1103,6 @@ To create custom snippets:
      }
    }
    ```
-
-   Using `$2` twice in the previous snippet is NOT WORKING
-   like it does in VS Code! See {% aTargetBlank
-   "https://github.com/L3MON4D3/LuaSnip/issues/857", "issue" %}.
 
    For Markdown the file name should be `markdown.json`.
    For example:
@@ -1175,6 +1177,19 @@ To close one of these dialogs, press the `esc` key twice.
 
 To open a floating terminal window, press `F7`.
 On a MacBook keyword, hold the `fn` key and press `F7`.
+
+### Lazy
+
+{% aTargetBlank "https://github.com/folke/lazy.nvim", "lazy.nvim" %}
+"is a modern plugin manager for Neovim".
+It is the plugin manager used by AstroNvim.
+The configuration for lazy.nvim can be found in
+`~/.config/nvim/lua/astronvim/lazy.lua`.
+
+To verify that `lazy.nvim` is properly configured,
+enter `:checkhealth lazy`.
+
+Enter `:Lazy sync` to update used plugins and remove unused plugins.
 
 ### Custom Plugins
 
