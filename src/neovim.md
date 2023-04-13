@@ -23,7 +23,7 @@ The source for Neovim is in a public {% aTargetBlank
 As of April 2023 there were 963 contributors and
 the code was 44% VimScript, 31% C, and 23% Lua.
 
-## Installing
+## Installing Neovim
 
 In macOs, Neovim can be installed using Homebrew.
 To install it, enter `brew install neovim`.
@@ -308,14 +308,13 @@ There are several optional commands that
 AstroNvim will use if they are installed.
 These include:
 
-- {% aTargetBlank "https://github.com/BurntSushi/ripgrep", "ripgrep" %} - for live grep Telescope search (<leader>fw)
-- {% aTargetBlank "https://github.com/jesseduffield/lazygit", "lazygit" %} - Git UI (<leader>gg for Git Gui or <leader>tl)
-- {% aTargetBlank "https://github.com/dundee/gdu", "gdu" %} - disk usage (<leader>tu)
-- {% aTargetBlank "https://github.com/ClementTsang/bottom", "bottom" %}- process viewer (<leader>tt)
-- {% aTargetBlank "https://www.python.org", "Python" %}- for the Python REPL (<leader>tp)
-- {% aTargetBlank "https://nodejs.org/en", "Node" %}- needed by many LSPs and for the Node REPL (<leader>tn)
+- {% aTargetBlank "https://github.com/BurntSushi/ripgrep", "ripgrep" %} - for live grep Telescope search (`<leader>fw`)
+- {% aTargetBlank "https://github.com/jesseduffield/lazygit", "lazygit" %} - Git UI (`<leader>gg` for Git Gui or `<leader>tl`)
+- {% aTargetBlank "https://github.com/ClementTsang/bottom", "bottom" %}- process viewer (`<leader>tt`)
+- {% aTargetBlank "https://www.python.org", "Python" %}- for the Python REPL (`<leader>tp`)
+- {% aTargetBlank "https://nodejs.org/en", "Node" %}- needed by many LSPs and for the Node REPL (`<leader>tn`)
 
-### Installing
+### Installing AstroNvim
 
 To install
 {% aTargetBlank "https://github.com/AstroNvim/AstroNvim", "AstroNvim" %},
@@ -690,6 +689,28 @@ You can also change the selection in the result section
 by pressing `j` and `k`.
 When not in insert mode, press `?`
 to see all the applicable Telescope key mappings.
+
+To close a Telescope window, press `q`.
+
+To configure Telescope so pressing the `esc` key closes
+the Telescope window just like pressing `q`, create the file
+`~/.config/nvim/lua/user/plugins/telescope.lua` containing the following:
+
+```lua
+return {
+  "nvim-telescope/telescope.nvim",
+  opts = function()
+    local actions = require "telescope.actions"
+    return {
+      defaults = {
+        mappings = {
+          n = { ["<Esc>"] = actions.close }
+        },
+      },
+    }
+  end
+}
+```
 
 The Telescope fuzzy finder can find many things including
 files, buffers, key mappings, help, and more.
