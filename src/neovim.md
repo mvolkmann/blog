@@ -694,7 +694,9 @@ To close a Telescope window, press `q`.
 
 To configure Telescope so pressing the `esc` key closes
 the Telescope window just like pressing `q`, create the file
-`~/.config/nvim/lua/user/plugins/telescope.lua` containing the following:
+`~/.config/nvim/lua/user/plugins/telescope.lua` containing the code below.
+When in insert mode, it is necessary to press `esc` twice,
+once to exit insert mode and once to close the window.
 
 ```lua
 return {
