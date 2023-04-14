@@ -48,15 +48,49 @@ press `gx`.
 
 ### Spell Checking
 
-The commands configure the use of spell checking.
+Spell checking is a builtin feature of Vim, but it is not enabled by default
+in Vim, Neovim, or AstroNvim.
 
-| Command                | Action                  |
-| ---------------------- | ----------------------- |
-| `:set spell`           | enables spell checking  |
-| `:set spelllang=en_us` | sets the language       |
-| `:set nospell`         | disables spell checking |
+To enable spell checking in Vim, add the following in your `.vimrc` file:
 
-The following key mappings perform actions related to spell checking.
+```
+set spell spelllang=en_us
+```
+
+To enable spell checking in AstroNvim, add the following in
+`~/.config/nvim/lua/user/init.lua`:
+
+```lua
+return {
+  polish = function()
+    vim.opt.spell = true
+    -- vim.opt.spelllang = "en_us" -- defaults to "en"
+    vim.opt.spelloptions = "camel"
+
+    vim.api.nvim_set_hl(
+      0, -- global highlight group
+      'SpellBad',
+      { fg = "red", underline = true }
+    )
+  end
+}
+```
+
+I'm encounter two issues.
+The first is that misspelled words are not underlined.
+I'd really like to use "undercurl" instead of "underline",
+but it seems that is not supported.
+The second is that camel-cased words are not handled properly.
+For example, "catDog" is marked as misspelled.
+See this {% aTargetBlank
+"https://www.reddit.com/r/AstroNvim/comments/12lxn7j/spell_checking/?utm_source=share&utm_medium=web2x&context=3",
+"reddit post" %}.
+
+For more detail on spell checking options for Neovim, see {% aTargetBlank
+"https://neovim.io/doc/user/options.html", "Neovim Options" %}.
+
+The following Vim default key mappings
+perform actions related to spell checking.
 
 | Key  | Action                                                |
 | ---- | ----------------------------------------------------- |
@@ -69,30 +103,6 @@ The following key mappings perform actions related to spell checking.
 The list of suggested replacements appears at the bottom of the window.
 Each suggestion is identified by a number or letter
 that can be pressed to substitute it.
-
-A major shortcoming of the builtin spell checker is that
-it doesn't handle camel-cased words.
-For example, it will mark "catDog" as an error.
-
-TODO: See ~/.config/nvim/lua/user/init.lua for configuring this in AstroNvim.
-
-```lua
-return {
-  polish = function()
-    vim.opt.spell = true
-    vim.opt.spelllang = "en_us"
-
-    -- TODO: It seems Warp terminal or the font I'm using doesn't
-    -- TODO: support undercurl text, but it does support underline text.
-    vim.api.nvim_set_hl(
-      0, -- global highlight group
-      'SpellBad',
-      -- { bg = "gray", fg = "red", underline = true }
-      { fg = "red", underline = true }
-    )
-  end
-}
-```
 
 ## Shell Commands
 
