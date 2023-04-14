@@ -15,7 +15,7 @@ This post is split into three major sections.
 
 ## Vim Review
 
-<img alt="Vim logo" style="width: 30%"
+<img alt="Vim logo" style="width: 25%"
     src="/blog/assets/vim-logo.png?v={{pkg.version}}"
     title="Vim logo">
 
@@ -263,12 +263,109 @@ the code was 44% VimScript, 31% C, and 23% Lua.
 
 In macOs, Neovim can be installed using Homebrew.
 To install it, enter `brew install neovim`.
-To upgrade after it has been installed, enter `brew upgrade neovim`.
 
 If you are already in the habit of using Vim,
 it's a good idea to add an alias from "vim" to "nvim"
 in your shell configuration file.
-For zsh, edit `~/.zshrc` and add `alias vim="nvim"`.
+For zsh, edit `~/.zshrc` and add the following:
+
+```bash
+alias vim="nvim"
+```
+
+### Upgrading Neovim
+
+To upgrade Neovim after it has been installed, enter `brew upgrade neovim`.
+
+### Configuring Neovim
+
+Neovim can be configured using Vimscript, the Lua programming language,
+or both.
+
+To configure using Lua:
+
+- Create the directory `~/.config/nvim/lua/user`.
+
+- If your `~/.config` directory is in a Git repo (and it probably should be),
+  remove the line `lua/user` from `~/.config/nvim/.gitignore`
+  so it can be saved.
+
+- In the new `~/.config/nvim/lua/user` directory,
+  create the files `init.lua`, `options.lua`, and `mappings.lua`.
+
+- In the `init.lua` file, return a table like the following:
+
+  ```lua
+  return {
+    colorscheme = "astrodark"
+  }
+  ```
+
+- In the `mappings.lua` file, return a table like the following:
+
+  ```lua
+  return {
+    -- normal mode
+    n = {
+      ["<leader>-"] = { "<cmd>split<cr>", desc = "Horizontal Split" }
+    }
+  }
+  ```
+
+- In the `options.lua` file, return a table like the following:
+
+  ```lua
+  return {
+    opt = {
+      scrolloff = 0,
+      wrap = false
+    }
+  }
+  ```
+
+- In the new `~/.config/nvim/lua/user` directory,
+  create the directory `plugins`.
+
+- See the "Custom Plugins" section below to learn about
+  the files that should be created in the `user/plugins` directory.
+
+See an official example of this customization approach at {% aTargetBlank
+"https://github.com/AstroNvim/user_example", "AstroNvim/user_example" %}.
+
+TODO: I want to map cmd-s to save, but I can't get these to work.
+
+```lua
+vim.keymap.set('n', '<D-s>', ":w<cr>")
+vim.keymap.set('i', '<D-s', "<Esc>:w<cr>i")
+vim.keymap.set('n', '<80><fd>hs', ":w<cr>")
+vim.keymap.set('i', '<80><fd>hs', "<Esc>:w<cr>i")
+```
+
+### Buffers
+
+The contents of opened files are held in buffers.
+
+Editing a buffer and writing it saves the modified content back to its file.
+
+Neovim indicates buffers that have been modified and not written
+by placing a dot after the file name in the buffer tab.
+
+Neovim provides the following default key mappings related to buffers:
+
+| Key                   | Action                                 |
+| --------------------- | -------------------------------------- |
+| `<leader>c` or `:clo` | closes current buffer                  |
+| `[b`                  | navigates to buffer on right           |
+| `]b`                  | navigates to buffer on left            |
+| `<b`                  | swaps current buffer with one on left  |
+| `>b`                  | swaps current buffer with one on right |
+
+### Lua Functions
+
+Lua functions exposed by plugins can be run by mapping them to a key sequence
+and then pressing that key sequence.
+Alternatively, Lua functions can be run in command mode by entering
+`:{function-name}({arguments})`.
 
 ### Missing Functionality
 
@@ -308,162 +405,25 @@ Configuring all of these is a daunting task.
 For these reason, prebuilt Neovim configurations are popular.
 There are many to choose from, but the most popular seem to be:
 
-- {% aTargetBlank "https://astronvim.com", "AstroNvim" %},
-- {% aTargetBlank "https://www.lunarvim.org", "LunarVim" %}, and
-- {% aTargetBlank "https://github.com/NvChad/NvChad", "NvChad" %}.
-
-### Configuring Neovim
-
-Neovim can be configured using Vimscript, the Lua programming language,
-or both.
-
-To configure using Lua:
-
-- Create the directory `~/.config/nvim/lua/user`.
-
-- If your `.config` directory is in a Git repo (and it probably should be),
-  remove the line `lua/user` from `~/.config/nvim/.gitignore`
-  so it can be saved.
-
-- In the new directory, create the file `init.lua`,
-  the file `options.lua`, the file `mappings.lua`,
-  and the directory `plugins`.
-
-- In the `init.lua` file, return a table like the following:
-  For example:
-
-  ```lua
-  return {
-    colorscheme = "astrodark"
-  }
-  ```
-
-- In the `mappings.lua` file, return a table like the following:
-  For example:
-
-  ```lua
-  return {
-    -- normal mode
-    n = {
-      ["<leader>-"] = { "<cmd>split<cr>", desc = "Horizontal Split" }
-    }
-  }
-  ```
-
-- In the `options.lua` file, return a table like the following:
-  For example:
-
-  ```lua
-  return {
-    opt = {
-      scrolloff = 0,
-      wrap = false
-    }
-  }
-  ```
-
-- See the "Custom Plugins" section below to learn about
-  the files that should be created in the `plugins` directory.
-
-See the official example of this customization approach at {% aTargetBlank
-"https://github.com/AstroNvim/user_example", "AstroNvim/user_example" %}.
-
-TODO: I want to map cmd-s to save, but I can't get these to work.
-
-```lua
-vim.keymap.set('n', '<D-s>', ":w<cr>")
-vim.keymap.set('i', '<D-s', "<Esc>:w<cr>i")
-vim.keymap.set('n', '<80><fd>hs', ":w<cr>")
-vim.keymap.set('i', '<80><fd>hs', "<Esc>:w<cr>i")
-```
-
-The AstroNvim default settings found in
-`~/.config/nvim/lua/astronvim/options.lua` use:
-
-- 2-space indentation (`shiftwidth = 2` and `tabstop = 2`)
-- relative line numbers (`relativenumber = true`)
-- 24-bit colors (`termguicolors = true`)
-- tabs expand to spaces (`expandtab = true`)
-- line numbers shown (`number = true`)
-- automatic indentation (`smartindent = true`)
-- no line wrapping (`wrap = false`)
-
-### Buffers
-
-The contents of opened files are held in buffers.
-
-Editing a buffer and writing it saves the modified content back to its file.
-
-Neovim indicates buffers that have been modified and not written
-with a dot after the file name.
-
-Neovim provides the following default key mappings related to buffers:
-
-| Key                   | Action                                             |
-| --------------------- | -------------------------------------------------- |
-| `<leader>c` or `:clo` | closes the current buffer                          |
-| `[b`                  | navigates to the buffer on the right               |
-| `]b`                  | navigates to the buffer on the left                |
-| `<b`                  | swaps the current buffer with the one on the left  |
-| `>b`                  | swaps the current buffer with the one on the right |
-
-### Lua Functions
-
-To run a Lua function exposed by a plugin,
-enter `:{function-name}({arguments})`.
-
-### Tree-sitter
-
-{% aTargetBlank "https://github.com/tree-sitter/tree-sitter", "Tree-sitter" %}
-is a parser generator and incremental parser implemented in Rust and C
-that can be embedded in applications like text editors.
-
-Grammars can be supplied to enable Tree-sitter to
-parse source files for any programming language.
-
-Tree-sitter builds a syntax tree from a single source file
-that can contain syntax errors.
-It can then efficiently update the syntax tree when the source file is modified
-without re-parsing the entire source file.
-This allows it to run after every keystroke in a text editor.
-
-The Neovim plugin {% aTargetBlank
-"https://github.com/nvim-treesitter/nvim-treesitter", "nvim-treesitter" %}
-integrates Tree-sitter with Neovim and provides functionality such as
-syntax highlighting based on the tokens that Treesitter reports.
-A common motivation for installing Tree-sitter is to get the best
-syntax highlighting from a theme that is compatible with Tree-sitter.
-
-The configuration file for Tree-sitter is
-`~/.config/nvim/lua/plugins/treesitter.lua`.
-In the `opts` table, add a line like the following
-to ensure support for specified languages is installed:
-
-```lua
-    ensure_installed = { "javascript", "lua", "typescript" },
-```
-
-### Pre-made Configurations
-
-The three most popular Neovim pre-made configurations are
-{% aTargetBlank "https://astronvim.com", "AstroNvim" %},
-{% aTargetBlank "https://www.lunarvim.org", "LunarVim" %}, and
-{% aTargetBlank "https://github.com/NvChad/NvChad", "NvChad" %}.
+- {% aTargetBlank "https://astronvim.com", "AstroNvim" %}
+- {% aTargetBlank "https://www.lunarvim.org", "LunarVim" %}
+- {% aTargetBlank "https://github.com/NvChad/NvChad", "NvChad" %}
 
 ## AstroNvim
 
-<img alt="AstroNvim logo" style="width: 30%"
+<img alt="AstroNvim logo" style="width: 25%"
     src="/blog/assets/astronvim-logo.png?v={{pkg.version}}"
     title="AstroNvim logo">
 
 {% aTargetBlank "https://astronvim.com", "AstroNvim" %} is
-"an aesthetic and feature-rich neovim config
+a popular pre-made configuration for Neovim.
+It describes itself as "an aesthetic and feature-rich neovim config
 that is extensible and easy to use with a great set of plugins".
 
 For a list of plugins used by AstroNvim by default, see {% aTargetBlank
 "https://astronvim.com/acknowledgements", "Acknowledgements" %}.
 
-There are several optional commands that
+There are several optional tools that
 AstroNvim will use if they are installed.
 These include:
 
@@ -475,8 +435,7 @@ These include:
 
 ### Installing AstroNvim
 
-To install
-{% aTargetBlank "https://github.com/AstroNvim/AstroNvim", "AstroNvim" %},
+To install AstroNvim:
 
 1. Install Neovim. In macOS enter `brew install neovim`.
 1. Make a backup copy of your `~/.config/nvim` directory if you have one.
@@ -485,14 +444,16 @@ To install
 1. Enter `brew install lua-language-server`.
 1. Enter `nvim`. On first launch this will install many things.
 1. Install language parsers by entering `:TSInstall {language-name}`
-   for each language.
-   For example, use the language names "javascript", "lua", and "swift".
+   for each language. For example, supported language names include
+   "javascript", "lua", and "swift".
 1. Install LSP servers by entering `:LspInstall {server-name}`
    for each server.
-   For example, use the server names "eslint", "tsserver", and "lua_ls".
+   For example, supported server names include
+   "eslint", "tsserver", and "lua_ls".
    To see a list of all the available LSP servers for a given file type,
    open a file of that type and enter `:LspInstall`.
-1. Enter `:NullLsInstall prettier`.
+1. For code formatting of JavaScript and TypeScript,
+   enter `:NullLsInstall prettier`.
 1. Optionally enter `:DapInstall {debug-adapter}`
    for each language-specific Debug Adapter Protocol server.
    (I could not find any of these.)
@@ -504,8 +465,9 @@ To install
    When using zsh, add `export NODE_ENV=development` in `~/.zshrc`.
 
 To check the status of your installation, enter `:checkhealth`.
+Fix any issues this identifies.
 
-### Updating
+### Updating AstroNvim
 
 To update to the latest version of AstroNvim:
 
@@ -513,7 +475,7 @@ To update to the latest version of AstroNvim:
 - Enter `:AstroUpdatePackages`
 - Enter `:Lazy Sync`
 
-### Configuration
+### Configuring AstroNvim
 
 AstroNvim configuration files are in `~/.config/nvim`.
 The main configuration file is `init.lua`.
@@ -545,6 +507,22 @@ Initially this includes:
 - `treesitter.lua`
 - `ui.lua`
 
+The AstroNvim default settings found in
+`~/.config/nvim/lua/astronvim/options.lua` use:
+
+- 2-space indentation (`shiftwidth = 2` and `tabstop = 2`)
+- relative line numbers (`relativenumber = true`)
+- 24-bit colors (`termguicolors = true`)
+- tabs expand to spaces (`expandtab = true`)
+- line numbers shown (`number = true`)
+- automatic indentation (`smartindent = true`)
+- no line wrapping (`wrap = false`)
+
+AstroNvim uses the {% aTargetBlank "", "Lazy" %} plugin manager.
+For details on the options for configuring plugins using this plugin manager,
+see the Lazy {% aTargetBlank "https://github.com/folke/lazy.nvim#-plugin-spec",
+"Plugin Spec" %}.
+
 {% aTargetBlank "https://github.com/jesseduffield/lazygit#homebrew",
 "lazygit" %} is a terminal UI for Git commands.
 To install it, enter `brew install lazygit`.
@@ -553,8 +531,6 @@ To install it, enter `brew install lazygit`.
 is a "graphical process/system monitor for the terminal".
 To install it, enter `brew install bottom`.
 This installs the command `btm`.
-
-For the best Ruby support, enter `gem install neovim`.
 
 For the best Node.js support, enter `npm install -g neovim`.
 
@@ -735,6 +711,37 @@ return {
     }
   }
 }
+```
+
+### Tree-sitter
+
+{% aTargetBlank "https://github.com/tree-sitter/tree-sitter", "Tree-sitter" %}
+is a parser generator and incremental parser implemented in Rust and C
+that can be embedded in applications like text editors.
+
+Grammars can be supplied to enable Tree-sitter to
+parse source files for any programming language.
+
+Tree-sitter builds a syntax tree from a single source file
+that can contain syntax errors.
+It can then efficiently update the syntax tree when the source file is modified
+without re-parsing the entire source file.
+This allows it to run after every keystroke in a text editor.
+
+The Neovim plugin {% aTargetBlank
+"https://github.com/nvim-treesitter/nvim-treesitter", "nvim-treesitter" %}
+integrates Tree-sitter with Neovim and provides functionality such as
+syntax highlighting based on the tokens that Treesitter reports.
+A common motivation for installing Tree-sitter is to get the best
+syntax highlighting from a theme that is compatible with Tree-sitter.
+
+The configuration file for Tree-sitter is
+`~/.config/nvim/lua/plugins/treesitter.lua`.
+In the `opts` table, add a line like the following
+to ensure support for specified languages is installed:
+
+```lua
+    ensure_installed = { "javascript", "lua", "typescript" },
 ```
 
 ### Splits
