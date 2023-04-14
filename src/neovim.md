@@ -1566,6 +1566,9 @@ To install todo-comments, create the file
 return {
   "folke/todo-comments.nvim",
   requires = "nvim-lua/plenary.nvim",
+  config = function()
+    require("todo-comments").setup {}
+  end,
   event = "User AstroFile"
 }
 ```
