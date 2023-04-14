@@ -1579,7 +1579,7 @@ this plugin recognizes in JavaScript code.
 // HACK: I really should not have done this.
 // NOTE: For more information, see https://some-tutorial.com.
 // PERF: This may cause a performance issue.
-// TODO: Please do this.
+// TODO: Please do this in the future.
 // WARNING: This may break if invalid input is received.
 ```
 
