@@ -928,19 +928,19 @@ Changing the theme using `<leader>ft` on affects the current session.
 To change the default theme used in future sections,
 specify a `colorscheme` in `~/config/nvim/lua/user/init.lua`.
 
-In a Telescope window the key mappings include:
+Key mappings for operating on a Telescope window include:
 
-| Key         | Action                                                                |
-| ----------- | --------------------------------------------------------------------- |
-| `esc` `esc` | closes the window                                                     |
-| `ctrl-c`    | also closes the window                                                |
-| `ctrl-x`    | opens the selected file in a horizontal split (below current buffer)  |
-| `ctrl-v`    | opens the selected file in a vertical split (right of current buffer) |
-| `ctrl-d`    | scrolls down in file preview                                          |
-| `ctrl-u`    | scrolls up in file preview                                            |
-| `tab`       | moves focus from "Find Files" input to "Results" section              |
-| `tab`       | when in "Results" section, moves down to next item                    |
-| `shift-tab` | moves focus from "Results" section to "Find Files" input              |
+| Key         | Action                                                            |
+| ----------- | ----------------------------------------------------------------- |
+| `esc` `esc` | closes the window                                                 |
+| `ctrl-c`    | also closes the window                                            |
+| `ctrl-x`    | opens selected file in a horizontal split (below current buffer)  |
+| `ctrl-v`    | opens selected file in a vertical split (right of current buffer) |
+| `ctrl-d`    | scrolls down in file preview                                      |
+| `ctrl-u`    | scrolls up in file preview                                        |
+| `tab`       | moves focus from filter input to "Results" section                |
+| `tab`       | when in "Results" section, moves down to next item                |
+| `shift-tab` | moves focus from "Results" section to filter input                |
 
 To see all the Telescope key mappings,
 press the `esc` key to exit insert mode and press `?`.
@@ -954,14 +954,14 @@ To toggle commenting of the current line or selected lines, press `<leader>/`.
 
 AstroNvim uses the {% aTargetBlank
 "https://github.com/jose-elias-alvarez/null-ls.nvim", "null-ls.vim" %} plugin
-to perform code formatting. I think, but have not confirmed,
+to perform code formatting. I suspect, but have not confirmed,
 that `null-ls.vim` provides formatting of Markdown tables.
 
 ### Auto-pairs
 
 AstroNvim uses the {% aTargetBlank "https://github.com/windwp/nvim-autopairs",
-"nvim-autopairs" %} plugin.
-This handles pairs of parentheses, square brackets, and curly braces.
+"nvim-autopairs" %} plugin to manage
+pairs of parentheses, square brackets, and curly braces.
 When one of the opening characters (`(`, `[`, or `{`) is typed,
 the closing character (`)`, `]`, or `}`) is automatically supplied
 and the cursor is placed between them.
@@ -969,9 +969,9 @@ and the cursor is placed between them.
 ### Status Line
 
 AstroNvim uses the {% aTargetBlank "https://github.com/rebelot/heirline.nvim",
-"heirline.nvim" %} plugin to render a nice status line
-that includes lots of information about the current Git repository.
-This is enabled by default.
+"heirline.nvim" %} plugin to render a nice status line.
+This includes information about the current Git repository
+such as the current branch and number of modified files.
 
 ### Git Integration
 
@@ -980,18 +980,19 @@ colored vertical lines appear in the gutter to indicate
 added lines (green), delete lines (red), and modified lines (orange).
 
 The left side of the status bar at the bottom displays
-the number of new, modified, and deleted files.
+the current branch and the numbers of new, modified, and deleted files.
 
 The file explorer `Git` tab lists the modified files.
 
 To see all the keys mapped to Git commands, press `<leader>g` and pause.
+These include:
 
 | Key          | Action                                                                                  |
 | ------------ | --------------------------------------------------------------------------------------- |
 | `<leader>gb` | displays a list of local Git branches in a Telescope window and allows switching to one |
-| `<leader>gc` | lists all the commits for the current file                                              |
+| `<leader>gc` | lists all commits for the current file                                                  |
 | `<leader>gd` | displays a side-by-side diff for the current file                                       |
-| `<leader>gt` | open a window that displays the Git status of the current project                       |
+| `<leader>gt` | displays Git status of current project in a Telescope window                            |
 
 In the Telescope window displayed by `<leader>gb`,
 the "Git Branch Preview" pane on the right shows the commits on the branch.
