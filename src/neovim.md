@@ -23,7 +23,100 @@ The source for Neovim is in a public {% aTargetBlank
 As of April 2023 there were 963 contributors and
 the code was 44% VimScript, 31% C, and 23% Lua.
 
-## Installing Neovim
+## Vim Review
+
+All features of Vim are also present in Neovim.
+This section reviews a selected subset of them.
+
+### Buffer Scrolling
+
+To scroll the current buffer based on the line under the cursor:
+
+| Key         | Action                   |
+| ----------- | ------------------------ |
+| `zt`        | moves to top             |
+| `z<return>` | also moves to top        |
+| `zz`        | moves to vertical center |
+
+### Spelling
+
+To see spelling suggestions for the word under the cursor, press `z=`.
+This displays suggestions at the bottom of the screen.
+Press the number or letter in front of a suggestion to substitute it.
+
+### Macros
+
+Macros record a series of keystrokes and assign them to a lowercase letter
+so they can be replayed any number of times.
+
+To define a macro:
+
+1. Press `q` followed by the lowercase letter to which it will be assigned.
+1. Type the keystrokes to be recorded.
+1. Press `q` to end recording.
+
+To replay a macro:
+
+1. Move the cursor to where it should be when the macro begins playing.
+1. Press `@` followed by the assigned lowercase letter.
+
+To replay the last macro used, press `@@`.
+
+To replay a macro multiple times, type the desired number
+followed by `@` and the assigned macro letter.
+
+For example, suppose we want to define a macro named "i" that
+adds a hyphen and a space to the beginning of a line
+and add a period at the end.
+
+- Move the cursor to the beginning of line that needs these changes.
+- Press `qi`.
+- Type `i` to go into insert mode.
+- Type `-` and a space.
+- Press `esc` to exit insert mode.
+- Press `$` to move the end of the line.
+- Press `a` (append) to enter insert mode after the current position.
+- Type `.`
+- Press `esc` to exit insert mode.
+- Press `0` to move the beginning of the line and
+  press `j` to move down to the next line.
+  These prepare for executing the macro again on the next line.
+- Press `q` to end macro recording.
+
+To execute this macro on the next 15 lines, type `15@i` or `15@@`.
+
+### Quickfix Lists
+
+TODO: Add this content.
+
+### Folds
+
+| Key  | Action                                              |
+| ---- | --------------------------------------------------- |
+| `za` | toggles the fold on the cursor line                 |
+| `zA` | toggles all folds on the cursor line (nested folds) |
+| `zo` | opens fold on the cursor line                       |
+| `zm` | folds more over entire buffer                       |
+| `zr` | folds less over entire buffer                       |
+| `zM` | closes all folds                                    |
+| `zR` | opens all folds                                     |
+| `zp` | peeks at folded lines; next keystroke hides again   |
+
+Of these, `za` and `zR` are the most useful.
+
+In AstroNvim press `z` and pause to see
+all the key mappings related to folding.
+
+### Sourcing Files
+
+After editing a configuration file, enter `:source` or `:so` to execute it.
+This is useful after making changes to configuration files
+so you don't need to exit and restart nvim
+in order for the changes to take effect.
+
+## Neovim
+
+### Installing Neovim
 
 In macOs, Neovim can be installed using Homebrew.
 To install it, enter `brew install neovim`.
@@ -34,7 +127,7 @@ it's a good idea to add an alias from "vim" to "nvim"
 in your shell configuration file.
 For zsh, edit `~/.zshrc` and add `alias vim="nvim"`.
 
-## Functionality Needed
+### Missing Functionality
 
 Vanilla Neovim lacks many features that are frequently desired.
 There are plugins available to add all the important features.
@@ -76,7 +169,7 @@ There are many to choose from, but the most popular seem to be:
 - {% aTargetBlank "https://www.lunarvim.org", "LunarVim" %}, and
 - {% aTargetBlank "https://github.com/NvChad/NvChad", "NvChad" %}.
 
-## Configuring
+### Configuring Neovim
 
 Neovim can be configured using Vimscript, the Lua programming language,
 or both.
@@ -152,14 +245,7 @@ The AstroNvim default settings found in
 - automatic indentation (`smartindent = true`)
 - no line wrapping (`wrap = false`)
 
-## Sourcing Files
-
-After editing a configuration file, enter `:source` or `:so` to execute it.
-This is useful after making changes to configuration files
-so you don't need to exit and restart nvim
-in order for the changes to take effect.
-
-## Buffers
+### Buffers
 
 The contents of opened files are held in buffers.
 
@@ -167,6 +253,8 @@ Editing a buffer and writing it saves the modified content back to its file.
 
 Neovim indicates buffers that have been modified and not written
 with a dot after the file name.
+
+Neovim provides the following default key mappings related to buffers:
 
 | Key         | Action                                             |
 | ----------- | -------------------------------------------------- |
@@ -176,88 +264,12 @@ with a dot after the file name.
 | `<b`        | swaps the current buffer with the one on the left  |
 | `>b`        | swaps the current buffer with the one on the right |
 
-## Folds
-
-Code folding is a Vim feature that is also present in Neovim.
-To see all the default key mappings related to folding,
-press `z` and pause.
-
-| Key  | Action                                              |
-| ---- | --------------------------------------------------- |
-| `za` | toggles the fold on the cursor line                 |
-| `zA` | toggles all folds on the cursor line (nested folds) |
-| `zo` | opens fold on the cursor line                       |
-| `zm` | folds more over entire buffer                       |
-| `zr` | folds less over entire buffer                       |
-| `zM` | closes all folds                                    |
-| `zR` | opens all folds                                     |
-| `zp` | peeks at folded lines; next keystroke hides again   |
-
-Of these, `za` and `zR` are the most useful.
-
-## Buffer Scrolling
-
-To scroll the current buffer based on the line under the cursor:
-
-| Key         | Action                   |
-| ----------- | ------------------------ |
-| `zt`        | moves to top             |
-| `z<return>` | also moves to top        |
-| `zz`        | moves to vertical center |
-
-## Spelling
-
-To see spelling suggestions for the word under the cursor, press `z=`.
-This displays suggestions at the bottom of the screen.
-Press the number or letter in front of a suggestion to substitute it.
-
-## Macros
-
-Macros record a series of keystrokes and assign them to a lowercase letter
-so they can be replayed any number of times.
-
-To define a macro:
-
-1. Press `q` followed by the lowercase letter to which it will be assigned.
-1. Type the keystrokes to be recorded.
-1. Press `q` to end recording.
-
-To replay a macro:
-
-1. Move the cursor to where it should be when the macro begins playing.
-1. Press `@` followed by the assigned lowercase letter.
-
-To replay the last macro used, press `@@`.
-
-To replay a macro multiple times, type the desired number
-followed by `@` and the assigned macro letter.
-
-For example, suppose we want to define a macro named "i" that
-adds a hyphen and a space to the beginning of a line
-and add a period at the end.
-
-- Move the cursor to the beginning of line that needs these changes.
-- Press `qi`.
-- Type `i` to go into insert mode.
-- Type `-` and a space.
-- Press `esc` to exit insert mode.
-- Press `$` to move the end of the line.
-- Press `a` (append) to enter insert mode after the current position.
-- Type `.`
-- Press `esc` to exit insert mode.
-- Press `0` to move the beginning of the line and
-  press `j` to move down to the next line.
-  These prepare for executing the macro again on the next line.
-- Press `q` to end macro recording.
-
-To execute this macro on the next 15 lines, type `15@i` or `15@@`.
-
-## Lua Functions
+### Lua Functions
 
 To run a Lua function exposed by a plugin,
 enter `:{function-name}({arguments})`.
 
-## Tree-sitter
+### Tree-sitter
 
 {% aTargetBlank "https://github.com/tree-sitter/tree-sitter", "Tree-sitter" %}
 is a parser generator and incremental parser implemented in Rust and C
@@ -288,9 +300,9 @@ to ensure support for specified languages is installed:
     ensure_installed = { "javascript", "lua", "typescript" },
 ```
 
-## Premade Configurations
+### Pre-made Configurations
 
-The three most popular Neovim premade configurations are
+The three most popular Neovim pre-made configurations are
 {% aTargetBlank "https://astronvim.com", "AstroNvim" %},
 {% aTargetBlank "https://www.lunarvim.org", "LunarVim" %}, and
 {% aTargetBlank "https://github.com/NvChad/NvChad", "NvChad" %}.
@@ -369,7 +381,8 @@ The `astronvim` directory contains:
 - `mappings.lua` - defines key mappings
 - `options.lua`
 
-The `plugins` directory contains a separate config `.lua` file for each plugin.
+The `plugins` directory contains a separate config `.lua` file
+for many of the plugins that AstroNvim uses by default.
 Initially this includes:
 
 - `alpha.lua`
@@ -757,13 +770,21 @@ The key mappings will appear at the bottom of the window.
 
 To toggle commenting of the current line or selected lines, press `<leader>/`.
 
+### Code Formatting
+
+AstroNvim uses the {% aTargetBlank
+"https://github.com/jose-elias-alvarez/null-ls.nvim", "null-ls.vim" %} plugin
+to perform code formatting. I think, but have not confirmed,
+that `null-ls.vim` provides formatting of Markdown tables.
+
 ### Auto-pairs
 
 AstroNvim uses the {% aTargetBlank "https://github.com/windwp/nvim-autopairs",
 "nvim-autopairs" %} plugin.
-This automatically closes parentheses, square brackets, and curly braces.
-It is not enabled by default.
-TODO: How can it be enabled?
+This handles pairs of parentheses, square brackets, and curly braces.
+When one of the opening characters (`(`, `[`, or `{`) is typed,
+the closing character (`)`, `]`, or `}`) is automatically supplied
+and the cursor is placed between them.
 
 ### Status Line
 
