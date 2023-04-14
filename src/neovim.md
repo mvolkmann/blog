@@ -85,9 +85,53 @@ and add a period at the end.
 
 To execute this macro on the next 15 lines, type `15@i` or `15@@`.
 
-### Quickfix Lists
+### Quickfix List
 
-TODO: Add this content.
+The Quickfix list holds, displays, and jumps to the locations of:
+
+- search matches
+- compile errors
+- test errors
+- linting errors
+
+Many Vim commands update the quickfix list, including `vimgrep` and `make`.
+The `vimgrep` command takes a regular expression
+and an indicator of which files should be searched.
+For example, `:vimgrep /help/ %` searches for the word "help"
+only in the current buffer and
+`:vimgrep /help/ **/*.js` searches for the word "help" in all
+JavaScript files in and below the directory from which Vim was started.
+
+The `vimgrep` command is considerably slower than using
+{% aTargetBlank "https://github.com/BurntSushi/ripgrep", "ripgrep" %}
+which is integrated with the Neovim plugin {% aTargetBlank
+"https://github.com/nvim-telescope/telescope.nvim", "Telescope" %}.
+
+Each row in the quickfix list identifies a file, line number, column number,
+and some text such as a match or error message.
+
+The commands summarized below are the most frequently used commands
+that operate on the quickfix list.
+
+| Command           | Action                                                              |
+| ----------------- | ------------------------------------------------------------------- |
+| `copen`           | opens the quickfix list window                                      |
+| `cclose` or `ccl` | closes the quickfix list window                                     |
+| `cnext` or `cn`   | jumps to the location of the **next** item in the quickfix list     |
+| `cprev` or `cp`   | jumps to the location of the **previous** item in the quickfix list |
+| `cfirst`          | jumps to the location of the **first** item in the quickfix list    |
+| `clast`           | jumps to the location of the **last** item in the quickfix list     |
+| `cc<n>`           |                                                                     |
+
+To navigate within the quickfix window,
+use the normal vim key mappings such as `j` and `k`.
+
+To jump to the location of the selected row, press the `return` key.
+
+For more details on the quickfix list, location lists (which are similar),
+and more, see {% aTargetBlank
+"https://freshman.tech/vim-quickfix-and-location-list/",
+"The quickfix and location lists in Vim" %}.
 
 ### Folds
 
