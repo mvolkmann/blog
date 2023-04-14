@@ -605,39 +605,42 @@ the non-Nerd font {% aTargetBlank "https://github.com/microsoft/cascadia-code",
 
 The leader key defaults to `space`.
 
-To open a new, empty buffer, press `<leader>n`.
+To open a new, unnamed, empty buffer, press `<leader>n`.
 To write the buffer to a file relative to the directory from which
-`nvim` was launched, enter `:w {file-path}`.
+`nvim` was launched, enter `:w {file-name}`.
 
-Press `<leader>h` to open the AstroNvim home screen.
-This displays a menu of common commands that include:
+To open the AstroNvim home screen, press `<leader>h`.
+This displays a menu of common commands that includes:
 
 - "New File"
 
-  This creates a new, unnamed file.
+  This creates a new, unnamed, empty buffer.
 
 - "Find File"
 
-  This opens a window where text can be entered to
-  find files that contain it in their name.
-  Move the cursor to one of the matching files
-  and press the return key to open it.
+  This opens a Telescope window where text can be entered
+  to find files that contain it in their name.
+  Move the cursor to one of the matching file paths
+  and press the `return` key to open it.
 
 - "Recents"
 
-  This opens a list of recently opened files
-  and makes it easy to reopen one of them.
+  This opens a Telescope window that lists recently opened files.
+  Move the cursor to one of the file paths in the list
+  and press the `return` key to reopen it.
 
 - "Find Word"
 
-  This opens a window where words can be entered to find files that contain them.
-  Move the cursor to one of the matching files
-  and press the return key to open it.
+  This opens a Telescope window where words can be entered
+  to find files that contain them.
+  Move the cursor to one of the matching file paths
+  and press the `return` key to open it.
 
 - "Bookmarks"
 
   This displays all the current marks in a Telescope window.
-  Selecting one and pressing `return` jumps to it.
+  Move the cursor to one of the marks
+  and press the `return` key to jump to it.
   See the "Marks" section below for more detail.
 
 - "Last Session".
@@ -648,7 +651,7 @@ This displays a menu of common commands that include:
 ### File Explorer
 
 AstroNvim uses the {% aTargetBlank
-"https://github.com/nvim-neo-tree/neo-tree.nvim", "neo-tree.nvim" %} plugin.
+"https://github.com/nvim-neo-tree/neo-tree.nvim", "neo-tree.nvim" %} plugin
 for the file explorer that appears on the left when `<leader>e` is pressed.
 
 The file explorer contains three tabs.
@@ -658,33 +661,46 @@ The "Bufs" tab displays a list of all the current buffers.
 The "Git" tab displays a list of modified, uncommitted files.
 Press the `<` and `>` keys to navigate between these tabs.
 
-Once open, press `?` to see the default key mappings.
 Press `j` and `k` to navigate down and up to select a file or directory.
+Press the `return` key to open the selected file or directory.
 
-Some of the useful neo-tree key mappings include:
+Some of the most useful key mappings that can be used
+when focus is in the file explorer include:
 
-| Key      | Action                                                               |
-| -------- | -------------------------------------------------------------------- |
-| `?`      | shows all file explorer key mappings                                 |
-| `#`      | performs fuzzy filtering; press `esc` to exit                        |
-| `return` | opens selected file or directory                                     |
-| `a`      | adds a new file or directory                                         |
-| `A`      | adds a new directory                                                 |
-| `H`      | toggles display of hidden files (hidden by default)                  |
-| `S`      | opens selected file in a new horizontal split                        |
-| `s`      | opens selected file in a new vertical split                          |
-| `c`      | copies selected file; prompts for new name                           |
-| `d`      | deletes selected file or directory                                   |
-| `j`      | moves down to the next file or directory                             |
-| `k`      | moves up to the next file or directory                               |
-| `m`      | moves selected file or directory; prompts for destination directory  |
-| `O`      | opens selected file using associated app (in macOS image -> Preview) |
-| `r`      | renames selected file or directory                                   |
-| `t`      | opens selected file in a new tab (new set of files)                  |
-| `y`      | copies selected file to clipboard                                    |
-| `p`      | pastes file from clipboard into selected directory                   |
-| `<`      | navigates to previous tab (File, Bufs, or Git)                       |
-| `>`      | navigates to next tab (File, Bufs, or Git)                           |
+| Key      | Action                                                                |
+| -------- | --------------------------------------------------------------------- |
+| `?`      | shows all file explorer key mappings                                  |
+| `/`      | filters the list of files and directories based on entered text       |
+| `#`      | fuzzy filters the list of files and directories based on entered text |
+| `<`      | navigates to previous tab (File, Bufs, or Git)                        |
+| `>`      | navigates to next tab (File, Bufs, or Git)                            |
+| `return` | opens selected file or directory                                      |
+| `a`      | adds a new file or directory                                          |
+| `A`      | adds a new directory                                                  |
+| `H`      | toggles display of hidden files (hidden by default)                   |
+| `S`      | opens selected file in a new horizontal split (below)                 |
+| `s`      | opens selected file in a new vertical split (on right)                |
+| `c`      | copies selected file or directory; prompts for new name               |
+| `d`      | deletes selected file or directory                                    |
+| `j`      | moves down to the next file or directory                              |
+| `k`      | moves up to the previous file or directory                            |
+| `m`      | moves selected file or directory; prompts for destination             |
+| `O`      | opens selected file using associated app (in macOS image -> Preview)  |
+| `r`      | renames selected file or directory                                    |
+| `t`      | opens selected file in a new tab (new set of files)                   |
+| `y`      | copies selected file to clipboard                                     |
+| `p`      | pastes file from clipboard into selected directory                    |
+
+With both `/` and `#` filtering, select a file or directory
+using the up and down arrow keys or by pressing
+`ctrl-n` (for next) or `ctrl-p` (for previous).
+Press the `return` key to open the selected file or directory.
+To clear filtering and return to displaying the
+full list of files and directories, press the `esc` key.
+The `/` filtering looks for names that contain the entered text.
+For example, "raf" matches the name "giraffe".
+The `#` filtering is similar, but is fuzzy.
+For example, "ife" matches the name "giraffe".
 
 When `t` is pressed, a new tab is created.
 These are represented by numbered buttons starting from 1 in the upper-right.
@@ -701,6 +717,8 @@ One of the directories listed is `lua/user`
 which contains files that configure plugins.
 One way to make this directory visible is to
 remove the `lua/user` line from the `.gitignore` file.
+This is a good option when your `.config` directory
+is stored in a Git repository.
 Another way is to create the file `~/.config/nvim/lua/user/plugins/neo-tree.lua`
 with the following content:
 
@@ -726,11 +744,11 @@ that can be embedded in applications like text editors.
 
 Grammars can be supplied to enable Tree-sitter to
 parse source files for any programming language.
-
 Tree-sitter builds a syntax tree from a single source file
 that can contain syntax errors.
-It can then efficiently update the syntax tree when the source file is modified
-without re-parsing the entire source file.
+
+Tree-sitter can then efficiently update the syntax tree when
+the source file is modified without re-parsing the entire source file.
 This allows it to run after every keystroke in a text editor.
 
 The Neovim plugin {% aTargetBlank
@@ -740,35 +758,39 @@ syntax highlighting based on the tokens that Treesitter reports.
 A common motivation for installing Tree-sitter is to get the best
 syntax highlighting from a theme that is compatible with Tree-sitter.
 
-The configuration file for Tree-sitter is
+AstroNvim uses the `nvim-treesitter` plugin.
+Its configuration file for Tree-sitter is
 `~/.config/nvim/lua/plugins/treesitter.lua`.
-In the `opts` table, add a line like the following
-to ensure support for specified languages is installed:
 
-```lua
-    ensure_installed = { "javascript", "lua", "typescript" },
-```
+You do not need to interact with Tree-sitter directly.
+Everything you need it to do is handled automatically.
 
 ### Splits
 
-The editing area display multiple buffers
-that are displayed in multiple split panes.
+The editing area displays tabs across the top
+that correspond to each of the current buffers.
+The area below the tabs can be split into
+multiple panes referred to as "splits".
+To edit one of the buffers inside a specific pane,
+move focus to the pane and then click the tab of the desired buffer.
 
-| Key            | Action                                                |
-| -------------- | ----------------------------------------------------- |
-| `<leader>/`    | creates a horizontal split (below)                    |
-| `<leader>-`    | same as above using a custom key mapping I added      |
-| `<leader>\|`   | creates a vertical split (right)                      |
-| `ctrl-q`       | closes current split                                  |
-| `:clo`         | closes current split                                  |
-| `ctrl-h`       | moves to split on left                                |
-| `ctrl-j`       | moves to split below                                  |
-| `ctrl-k`       | moves to split above                                  |
-| `ctrl-l`       | moves to split on right                               |
-| `ctrl-{arrow}` | increases size of current split in direction of arrow |
+The following key mappings perform actions related to the editing area.
 
-Moving to a different split includes
-moving from the file explorer to the first buffer
+| Key            | Action                                                  |
+| -------------- | ------------------------------------------------------- |
+| `<leader>/`    | creates a horizontal split (below)                      |
+| `<leader>-`    | same as above using a custom key mapping I added        |
+| `<leader>\|`   | creates a vertical split (right)                        |
+| `ctrl-q`       | closes current split and quits `nvim` if it is the last |
+| `:clo`         | same as `ctrl-q` above                                  |
+| `ctrl-h`       | moves focus to split on left                            |
+| `ctrl-j`       | moves focus to split below                              |
+| `ctrl-k`       | moves focus to split above                              |
+| `ctrl-l`       | moves focus to split on right                           |
+| `ctrl-{arrow}` | increases size of current split in arrow direction      |
+
+Moving focus to a different split includes
+moving focus from the file explorer to the first buffer
 and from the first buffer to the file explorer.
 
 In macOS the `ctrl-{arrow}` mappings will likely not work
@@ -786,11 +808,14 @@ The {% aTargetBlank "https://github.com/nvim-telescope/telescope.nvim",
 "telescope.nvim" %} plugin "is a highly extendable fuzzy finder over lists".
 It provides many commands and default key mappings them.
 
-To operate on the current buffer:
+AstroNvim uses the `telescope.vim` plugin.
+Its configuration file is `~/.config/nvim/lua/plugins/telescope.lua`.
+
+Key mappings for operating on the current buffer include:
 
 | Key          | Action                                                                           |
 | ------------ | -------------------------------------------------------------------------------- |
-| `<leader>lf` | formats the contents                                                             |
+| `<leader>lf` | formats the contents of the current buffer                                       |
 | `<leader>lS` | toggles display of a right pane containing a list of symbols defined in the file |
 
 Symbols include variables, functions, and type declarations.
@@ -798,44 +823,37 @@ Select a symbol name to scroll to it in the buffer.
 The list of symbols automatically updates
 when focus moves to a different buffer.
 
-To operate on the symbol under the cursor:
+Key mappings for operating on the symbol under the cursor
+include those described below.
+Note that some LSP servers to not support all of these actions.
 
-| Key          | Action                                                                                |
-| ------------ | ------------------------------------------------------------------------------------- |
-| `gd`         | goes to the definition of the symbol under the cursor                                 |
-| `gD`         | goes to the declaration of the symbol under the cursor                                |
-| `gi`         | lists all implementations for the symbol under the cursor in a quickfix window        |
-| `gI`         | goes to the implementation of the symbol under the cursor                             |
-| `gr`         | shows references to the symbol under the cursor in a quickfix window                  |
-| `gs`         | displays signature information about the symbol under the cursor in a floating window |
-| `gT`         | goes to the type definition of the symbol under the cursor                            |
-| `K`          | shows the type of the symbol under the cursor                                         |
-| `<leader>la` | opens a menu of applicable code actions in a Telescope window                         |
-| `<leader>lr` | renames the symbol under the cursor; prompts for new name                             |
-| `ctrl-o`     | moves backwards through results                                                       |
+| Key          | Action                                                        |
+| ------------ | ------------------------------------------------------------- |
+| `gd`         | goes to the definition                                        |
+| `gD`         | goes to the declaration                                       |
+| `gi`         | lists all implementations in a Telescope window               |
+| `gI`         | goes to the implementation                                    |
+| `gr`         | shows references in a Telescope window                        |
+| `gs`         | displays signature information in a floating window           |
+| `gT`         | goes to the type definition                                   |
+| `K`          | shows the type of the symbol under the cursor                 |
+| `<leader>la` | opens a menu of applicable code actions in a Telescope window |
+| `<leader>lr` | renames the symbol under the cursor; prompts for new name     |
+| `ctrl-o`     | moves backward through location jumps                         |
 
-Some LSP servers to not support all these action.
+Key mappings for operating on diagnostic messages include:
 
-For diagnostic messages:
+| Key  | Action                                              |
+| ---- | --------------------------------------------------- |
+| `[d` | move to previous diagnostic in current buffer       |
+| `]d` | move to next diagnostic in current buffer           |
+| `gl` | shows full error message when an error is displayed |
+| `lD` | displays all diagnostics in a Telescope window      |
 
-| Key  | Action                                                  |
-| ---- | ------------------------------------------------------- |
-| `[d` | move to the previous diagnostic in the current buffer   |
-| `]d` | move to the next diagnostic in the current buffer       |
-| `gl` | shows the full error message when an error is displayed |
-| `lD` | displays all diagnostics in a Telescope window          |
-
-To close a diagnostic popup, move the cursor.
+To close a diagnostic popup, move the cursor in any way.
 
 After pressing `gl`, press it again to move focus into the diagnostic popup.
-For focus is in a diagnostic popup, press `q` to close it.
-
-For file paths:
-
-| Key  | Action                                                |
-| ---- | ----------------------------------------------------- |
-| `gf` | opens the file under the cursor in Neovim             |
-| `gx` | opens the file under the cursor in its associated app |
+When focus is in a diagnostic popup, press `q` to close it.
 
 Some telescope commands display a new window containing multiple sections.
 The upper-left section contains a text input
@@ -857,17 +875,16 @@ of what is selected in the lower-left section.
 We will refer to this section as "preview".
 
 Press the `esc` key to exit insert mode.
-When this is done you move the cursor left and right in the filter input
-by pressing `h` and `l`.
-You can also change the selection in the result section
-by pressing `j` and `k`.
-When not in insert mode, press `?`
-to see all the applicable Telescope key mappings.
+When not in insert mode, the following key mappings can be used:
+
+- Move the filter section cursor left and right by pressing `h` and `l`.
+- Change the result section selection by pressing `j` and `k`.
+- Display all applicable Telescope key mappings by pressing `?`.
 
 To close a Telescope window, press `q`.
 
-To configure Telescope so pressing the `esc` key closes
-the Telescope window just like pressing `q`, create the file
+To configure Telescope so pressing the `esc` key
+also closes the Telescope window, create the file
 `~/.config/nvim/lua/user/plugins/telescope.lua` containing the code below.
 When in insert mode, it is necessary to press `esc` twice,
 once to exit insert mode and once to close the window.
@@ -881,8 +898,8 @@ return {
       defaults = {
         mappings = {
           n = { ["<Esc>"] = actions.close }
-        },
-      },
+        }
+      }
     }
   end
 }
@@ -892,20 +909,24 @@ The Telescope fuzzy finder can find many things including
 files, buffers, key mappings, help, and more.
 The key mappings to initiate fuzzy finder searches include:
 
-| Key          | Action                                             |
-| ------------ | -------------------------------------------------- |
-| `<leader>fa` | finds AstroNvim configuration files                |
-| `<leader>fb` | finds buffers by name                              |
-| `<leader>fc` | finds files that contain the word under the cursor |
-| `<leader>fC` | finds Vim plugin commands                          |
-| `<leader>ff` | finds files by name                                |
-| `<leader>fh` | finds a help file by its name                      |
-| `<leader>fk` | finds key mappings                                 |
-| `<leader>fo` | finds files opened recently (old files)            |
-| `<leader>fr` | finds Vim registers (can see their contents)       |
-| `<leader>ft` | finds a theme (can see previews and select one)    |
-| `<leader>fw` | finds files by a word in their content (live_grep) |
-| `<leader>fW` | finds files containing multiple consecutive words  |
+| Key          | Action                                                        |
+| ------------ | ------------------------------------------------------------- |
+| `<leader>fa` | finds AstroNvim configuration files                           |
+| `<leader>fb` | finds buffers by name                                         |
+| `<leader>fc` | finds files that contain the word under the cursor            |
+| `<leader>fC` | finds commands made available by plugins                      |
+| `<leader>ff` | finds files by name                                           |
+| `<leader>fh` | finds help files by their name                                |
+| `<leader>fk` | finds key mappings                                            |
+| `<leader>fo` | finds files opened recently (old files)                       |
+| `<leader>fr` | finds Vim registers (can see their contents)                  |
+| `<leader>ft` | finds themes (can see previews and select one)                |
+| `<leader>fw` | finds files by consecutive words in their content (live_grep) |
+| `<leader>fW` | same as above, but also searches hidden files                 |
+
+Changing the theme using `<leader>ft` on affects the current session.
+To change the default theme used in future sections,
+specify a `colorscheme` in `~/config/nvim/lua/user/init.lua`.
 
 In a Telescope window the key mappings include:
 
