@@ -38,6 +38,20 @@ To scroll the current buffer based on the line under the cursor:
 | `z<return>` | also moves to top        |
 | `zz`        | moves to vertical center |
 
+### Numbers
+
+To increment the number under the cursor, press `ctrl-a`.
+
+To decrement the number under the cursor, press `ctrl-x`.
+
+If the number has decimal places, these key mappings affect
+either the number before or after the decimal point.
+For example, if the number is `12.34` and
+the cursor is on the `1` or `2` before the decimal point
+then pressing `ctrl-a` changes `12` to `13`.
+If the cursor is on the `3` or `4` after the decimal point
+then pressing `ctrl-a` changes `34` to `35`.
+
 ### Opening Files and URLs
 
 To open a file whose relative or absolute path is under the cursor,
