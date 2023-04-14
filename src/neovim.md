@@ -273,9 +273,9 @@ For zsh, edit `~/.zshrc` and add the following:
 alias vim="nvim"
 ```
 
-### Upgrading Neovim
+### Updating Neovim
 
-To upgrade Neovim after it has been installed, enter `brew upgrade neovim`.
+To update Neovim after it has been installed, enter `brew upgrade neovim`.
 
 ### Configuring Neovim
 
@@ -423,15 +423,20 @@ that is extensible and easy to use with a great set of plugins".
 For a list of plugins used by AstroNvim by default, see {% aTargetBlank
 "https://astronvim.com/acknowledgements", "Acknowledgements" %}.
 
+AstroNvim uses the {% aTargetBlank "https://github.com/folke/lazy.nvim",
+"Lazy" %} plugin manager.
+For details on the options for configuring plugins using this plugin manager,
+see the "Plugin Spec" section at the previous link.
+
 There are several optional tools that
 AstroNvim will use if they are installed.
 These include:
 
-- {% aTargetBlank "https://github.com/BurntSushi/ripgrep", "ripgrep" %} - for live grep Telescope search (`<leader>fw`)
-- {% aTargetBlank "https://github.com/jesseduffield/lazygit", "lazygit" %} - Git UI (`<leader>gg` for Git Gui or `<leader>tl`)
-- {% aTargetBlank "https://github.com/ClementTsang/bottom", "bottom" %}- process viewer (`<leader>tt`)
-- {% aTargetBlank "https://www.python.org", "Python" %}- for the Python REPL (`<leader>tp`)
-- {% aTargetBlank "https://nodejs.org/en", "Node" %}- needed by many LSPs and for the Node REPL (`<leader>tn`)
+- {% aTargetBlank "https://github.com/BurntSushi/ripgrep", "ripgrep" %} - for live grep Telescope search; `<leader>fw`
+- {% aTargetBlank "https://github.com/jesseduffield/lazygit", "lazygit" %} - Git UI; `<leader>gg` for Git Gui or `<leader>tl`
+- {% aTargetBlank "https://github.com/ClementTsang/bottom", "bottom" %} - process viewer; `<leader>tt`
+- {% aTargetBlank "https://www.python.org", "Python" %} - for the Python REPL; `<leader>tp`
+- {% aTargetBlank "https://nodejs.org/en", "Node" %} - required by many LSPs and for the Node REPL; `<leader>tn`
 
 ### Installing AstroNvim
 
@@ -469,17 +474,24 @@ Fix any issues this identifies.
 
 ### Updating AstroNvim
 
-To update to the latest version of AstroNvim:
+To update AstroNvim after it has been installed,
+enter the following inside an AstroNvim session:
 
-- Enter `:AstroUpdate`
-- Enter `:AstroUpdatePackages`
-- Enter `:Lazy Sync`
+- `:AstroUpdate`
+- `:AstroUpdatePackages`
+- `:Lazy Sync`
 
 ### Configuring AstroNvim
 
-AstroNvim configuration files are in `~/.config/nvim`.
-The main configuration file is `init.lua`.
-The `lua` subdirectory contains the directories `astronvim` and `plugins`.
+AstroNvim configuration files are stored in `~/.config/nvim`.
+It's best to not modify these files and instead
+override the default configurations if desired
+with files under the `~/.config/nvim/lua/user` directory.
+
+The main configuration file is `~/.config/nvim/init.lua`.
+
+The `~/.config/nvim/lua` directory contains
+the subdirectories `astronvim` and `plugins`.
 
 The `astronvim` directory contains:
 
@@ -490,9 +502,9 @@ The `astronvim` directory contains:
 - `mappings.lua` - defines key mappings
 - `options.lua`
 
-The `plugins` directory contains a separate config `.lua` file
+The `plugins` directory contains separate configuration `.lua` files
 for many of the plugins that AstroNvim uses by default.
-Initially this includes:
+These include:
 
 - `alpha.lua`
 - `cmp.lua`
@@ -510,18 +522,13 @@ Initially this includes:
 The AstroNvim default settings found in
 `~/.config/nvim/lua/astronvim/options.lua` use:
 
-- 2-space indentation (`shiftwidth = 2` and `tabstop = 2`)
-- relative line numbers (`relativenumber = true`)
-- 24-bit colors (`termguicolors = true`)
-- tabs expand to spaces (`expandtab = true`)
-- line numbers shown (`number = true`)
-- automatic indentation (`smartindent = true`)
-- no line wrapping (`wrap = false`)
-
-AstroNvim uses the {% aTargetBlank "", "Lazy" %} plugin manager.
-For details on the options for configuring plugins using this plugin manager,
-see the Lazy {% aTargetBlank "https://github.com/folke/lazy.nvim#-plugin-spec",
-"Plugin Spec" %}.
+- 2-space indentation; `shiftwidth = 2` and `tabstop = 2`
+- relative line numbers; `relativenumber = true`
+- 24-bit colors; `termguicolors = true`
+- tabs expand to spaces; `expandtab = true`
+- line numbers shown; `number = true`
+- automatic indentation; `smartindent = true`
+- no line wrapping; `wrap = false`
 
 {% aTargetBlank "https://github.com/jesseduffield/lazygit#homebrew",
 "lazygit" %} is a terminal UI for Git commands.
