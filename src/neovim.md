@@ -38,6 +38,14 @@ To scroll the current buffer based on the line under the cursor:
 | `z<return>` | also moves to top        |
 | `zz`        | moves to vertical center |
 
+### Opening Files and URLs
+
+To open a file whose relative or absolute path is under the cursor,
+press `gf` for "go to file".
+
+To open a URL under the cursor in a new tab of the default web browser,
+press `gx`.
+
 ### Spell Checking
 
 The commands configure the use of spell checking.
@@ -85,6 +93,15 @@ return {
   end
 }
 ```
+
+## Shell Commands
+
+To run a shell command from Vim, type `!` followed by the command.
+
+Any selected text is passed to the command as `stdin`
+and is replaced by the `stdout` of the command.
+An example of when this is useful is sorting lines.
+Select any number of lines and enter `!sort` to sort them.
 
 ### Macros
 
@@ -342,13 +359,13 @@ with a dot after the file name.
 
 Neovim provides the following default key mappings related to buffers:
 
-| Key         | Action                                             |
-| ----------- | -------------------------------------------------- |
-| `<leader>c` | closes the current buffer                          |
-| `[b`        | navigates to the buffer on the right               |
-| `]b`        | navigates to the buffer on the left                |
-| `<b`        | swaps the current buffer with the one on the left  |
-| `>b`        | swaps the current buffer with the one on the right |
+| Key                   | Action                                             |
+| --------------------- | -------------------------------------------------- |
+| `<leader>c` or `:clo` | closes the current buffer                          |
+| `[b`                  | navigates to the buffer on the right               |
+| `]b`                  | navigates to the buffer on the left                |
+| `<b`                  | swaps the current buffer with the one on the left  |
+| `>b`                  | swaps the current buffer with the one on the right |
 
 ### Lua Functions
 
