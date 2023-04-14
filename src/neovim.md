@@ -6,24 +6,18 @@ layout: topic-layout.njk
 
 ## Overview
 
-<img alt="Neovim logo" style="width: 40%"
-    src="/blog/assets/neovim.png?v={{pkg.version}}"
-    title="Neovim logo">
+This post is split into three major sections.
 
-{% aTargetBlank "https://neovim.io", "Neovim" %}, or nvim for short,
-is a free, open source, modern fork of the
-{% aTargetBlank "https://www.vim.org", "Vim" %} text editor.
-It provides built-in Language Server Protocol (LSP) support,
-asynchronous I/O, and support for Lua scripting.
-
-The Neovim project started in 2014 and was officially released in November 2015.
-
-The source for Neovim is in a public {% aTargetBlank
-"https://github.com/neovim/neovim", "GitHub repository" %}.
-As of April 2023 there were 963 contributors and
-the code was 44% VimScript, 31% C, and 23% Lua.
+- The first section reviews some features of Vim.
+- The second section provides an introduction to Neovim.
+- The third section introduces a specific pre-made configuration for NeoVim
+  called AstroNvim.
 
 ## Vim Review
+
+<img alt="Vim logo" style="width: 30%"
+    src="/blog/assets/vim-logo.png?v={{pkg.version}}"
+    title="Vim logo">
 
 All features of Vim are also present in Neovim.
 This section reviews a selected subset of them.
@@ -90,7 +84,7 @@ return {
 }
 ```
 
-I'm encounter two issues.
+I'm encountering two issues.
 The first is that misspelled words are not underlined.
 I'd really like to use "undercurl" instead of "underline",
 but it seems that is not supported.
@@ -118,7 +112,7 @@ The list of suggested replacements appears at the bottom of the window.
 Each suggestion is identified by a number or letter
 that can be pressed to substitute it.
 
-## Shell Commands
+### Shell Commands
 
 To run a shell command from Vim, type `!` followed by the command.
 
@@ -152,13 +146,12 @@ For example, suppose we want to define a macro named "i" that
 adds a hyphen and a space to the beginning of a line
 and add a period at the end.
 
-- Move the cursor to the beginning of line that needs these changes.
+- Move the cursor to the beginning of a line that needs these changes.
 - Press `qi`.
 - Type `i` to go into insert mode.
 - Type `-` and a space.
 - Press `esc` to exit insert mode.
-- Press `$` to move the end of the line.
-- Press `a` (append) to enter insert mode after the current position.
+- Press `A` to move the end of the line and enter insert mode.
 - Type `.`
 - Press `esc` to exit insert mode.
 - Press `0` to move the beginning of the line and
@@ -170,12 +163,15 @@ To execute this macro on the next 15 lines, type `15@i` or `15@@`.
 
 ### Quickfix List
 
-The Quickfix list holds, displays, and jumps to the locations of:
+The Quickfix list stores locations of:
 
 - search matches
 - compile errors
 - test errors
 - linting errors
+
+The list can be displayed and there are commands
+for jumping to the locations it describes.
 
 Many Vim commands update the quickfix list, including `vimgrep` and `make`.
 The `vimgrep` command takes a regular expression
@@ -184,11 +180,6 @@ For example, `:vimgrep /help/ %` searches for the word "help"
 only in the current buffer and
 `:vimgrep /help/ **/*.js` searches for the word "help" in all
 JavaScript files in and below the directory from which Vim was started.
-
-The `vimgrep` command is considerably slower than using
-{% aTargetBlank "https://github.com/BurntSushi/ripgrep", "ripgrep" %}
-which is integrated with the Neovim plugin {% aTargetBlank
-"https://github.com/nvim-telescope/telescope.nvim", "Telescope" %}.
 
 Each row in the quickfix list identifies a file, line number, column number,
 and some text such as a match or error message.
@@ -216,7 +207,15 @@ and more, see {% aTargetBlank
 "https://freshman.tech/vim-quickfix-and-location-list/",
 "The quickfix and location lists in Vim" %}.
 
+The `vimgrep` command is considerably slower than using
+{% aTargetBlank "https://github.com/BurntSushi/ripgrep", "ripgrep" %}
+which is integrated with the Neovim plugin {% aTargetBlank
+"https://github.com/nvim-telescope/telescope.nvim", "Telescope" %}.
+
 ### Folds
+
+The following key mappings support code folding
+which temporarily hides blocks of code.
 
 | Key  | Action                                              |
 | ---- | --------------------------------------------------- |
@@ -238,10 +237,27 @@ all the key mappings related to folding.
 
 After editing a configuration file, enter `:source` or `:so` to execute it.
 This is useful after making changes to configuration files
-so you don't need to exit and restart nvim
+so it isn't necessary to exit and restart Vim
 in order for the changes to take effect.
 
 ## Neovim
+
+<img alt="Neovim logo" style="width: 50%"
+    src="/blog/assets/neovim.png?v={{pkg.version}}"
+    title="Neovim logo">
+
+{% aTargetBlank "https://neovim.io", "Neovim" %}, or nvim for short,
+is a free, open source, modern fork of the
+{% aTargetBlank "https://www.vim.org", "Vim" %} text editor.
+It provides built-in Language Server Protocol (LSP) support,
+asynchronous I/O, and support for Lua scripting.
+
+The Neovim project started in 2014 and was officially released in November 2015.
+
+The source for Neovim is in a public {% aTargetBlank
+"https://github.com/neovim/neovim", "GitHub repository" %}.
+As of April 2023 there were 963 contributors and
+the code was 44% VimScript, 31% C, and 23% Lua.
 
 ### Installing Neovim
 
@@ -435,6 +451,10 @@ The three most popular Neovim pre-made configurations are
 {% aTargetBlank "https://github.com/NvChad/NvChad", "NvChad" %}.
 
 ## AstroNvim
+
+<img alt="AstroNvim logo" style="width: 30%"
+    src="/blog/assets/astronvim-logo.png?v={{pkg.version}}"
+    title="AstroNvim logo">
 
 {% aTargetBlank "https://astronvim.com", "AstroNvim" %} is
 "an aesthetic and feature-rich neovim config
