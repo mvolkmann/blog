@@ -1446,6 +1446,11 @@ When this completes, press `q` to close the window.
 
 ### Custom Plugins
 
+There are a large number of plugins available for Neovim.
+A nice summary of them can be found at {% aTargetBlank
+"https://www.trackawesomelist.com/rockerBOO/awesome-neovim/readme/#media",
+"Awesome Neovim Overview" %}.
+
 When AstroNvim starts, it executes all the `.lua` files
 in the `~/.config/nvim/lua/plugins` directory
 followed by all the `.lua` files
