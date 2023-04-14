@@ -541,7 +541,8 @@ This installs the command `btm`.
 
 For the best Node.js support, enter `npm install -g neovim`.
 
-TODO: Should you do this?
+TODO: Should you do the following or is the default configuration good enough?
+
 For better snippet support, create the file
 `~/.config/nvim/lua/user/plugins/luasnip.lua` containing the following:
 
@@ -569,30 +570,31 @@ end
 
 The default key mappings provided by AstroNvim are described
 {% aTargetBlank "https://astronvim.com/Basic%20Usage/mappings", "here" %}.
-Most of these are defined in `~/.config/nvim/lua/astronvim/mappings.lua`
+Most of these are defined in `~/.config/nvim/lua/astronvim/mappings.lua`.
 
-While a primary reason for using Vim is to
-keep your hands on the keyboard for maximum efficiency,
-many actions can also be accomplished using a mouse or trackpad.
-For example, ctrl-clicking a symbol jumps to its definition.
-
-AstroNvim defines `jj` and `jk` to exit insert mode just as the `esc` key does.
+AstroNvim defines `jj` and `jk` to exit insert mode
+as alternatives to pressing the `esc` key.
 
 AstroNvim uses the {% aTargetBlank "https://github.com/folke/which-key.nvim",
 "which-key" %} plugin to display applicable key mappings
 at the bottom of the screen when you pause during entry.
 This includes default and custom key mappings.
-
 For example, press the leader key (`space` by default) and pause.
-All the key mappings that begin with the leader key will be displayed.
-The ones in blue require pressing additional keys
+All key mappings that begin with the leader key will be displayed.
+The ones in blue (submenus) require pressing additional keys
 that are displayed when you press their key.
 These include "Buffers", "Find", "Git", and more.
 For example, type `<leader>f` to see all the "Find" key mappings.
 
-### Font
+While a primary reason for using Vim is to
+keep your hands on the keyboard for maximum efficiency,
+many actions can also be accomplished using a mouse or trackpad.
+For example, positioning the cursor and switching between buffer tabs
+can be accomplished by clicking.
 
-Several parts of AstroNvim attempt to display icons.
+### Fonts
+
+Several areas of the AstroNvim UI attempt to display icons.
 This requires using a
 {% aTargetBlank "https://www.nerdfonts.com/", "Nerd font" %}.
 One that I recommend is "Caskaydia Cove Nerd Font" which is very similar to
@@ -601,18 +603,14 @@ the non-Nerd font {% aTargetBlank "https://github.com/microsoft/cascadia-code",
 
 ### Basics
 
-The {% aTargetBlank "https://astronvim.com/Basic%20Usage/mappings",
-"Default Mappings" %} page lists all the key mappings
-that AstroNvim provides by default.
-
 The leader key defaults to `space`.
 
 To open a new, empty buffer, press `<leader>n`.
-To write the buffer to a file in the directory from which Neovim was launched,
-enter `:w {file-name}`.
+To write the buffer to a file relative to the directory from which
+`nvim` was launched, enter `:w {file-path}`.
 
 Press `<leader>h` to open the AstroNvim home screen.
-This displays a menu of common commands that includes:
+This displays a menu of common commands that include:
 
 - "New File"
 
