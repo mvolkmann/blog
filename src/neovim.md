@@ -38,11 +38,53 @@ To scroll the current buffer based on the line under the cursor:
 | `z<return>` | also moves to top        |
 | `zz`        | moves to vertical center |
 
-### Spelling
+### Spell Checking
 
-To see spelling suggestions for the word under the cursor, press `z=`.
-This displays suggestions at the bottom of the screen.
-Press the number or letter in front of a suggestion to substitute it.
+The commands configure the use of spell checking.
+
+| Command                | Action                  |
+| ---------------------- | ----------------------- |
+| `:set spell`           | enables spell checking  |
+| `:set spelllang=en_us` | sets the language       |
+| `:set nospell`         | disables spell checking |
+
+The following key mappings perform actions related to spell checking.
+
+| Key  | Action                                                |
+| ---- | ----------------------------------------------------- |
+| `]s` | jumps to the next misspelled word                     |
+| `[s` | jumps to the previous misspelled word                 |
+| `z=` | opens a list of suggested replacements                |
+| `zg` | adds the word under the cursor to the dictionary      |
+| `zw` | removes the word under the cursor from the dictionary |
+
+The list of suggested replacements appears at the bottom of the window.
+Each suggestion is identified by a number or letter
+that can be pressed to substitute it.
+
+A major shortcoming of the builtin spell checker is that
+it doesn't handle camel-cased words.
+For example, it will mark "catDog" as an error.
+
+TODO: See ~/.config/nvim/lua/user/init.lua for configuring this in AstroNvim.
+
+```lua
+return {
+  polish = function()
+    vim.opt.spell = true
+    vim.opt.spelllang = "en_us"
+
+    -- TODO: It seems Warp terminal or the font I'm using doesn't
+    -- TODO: support undercurl text, but it does support underline text.
+    vim.api.nvim_set_hl(
+      0, -- global highlight group
+      'SpellBad',
+      -- { bg = "gray", fg = "red", underline = true }
+      { fg = "red", underline = true }
+    )
+  end
+}
+```
 
 ### Macros
 
@@ -579,27 +621,28 @@ Press `j` and `k` to navigate down and up to select a file or directory.
 
 Some of the useful neo-tree key mappings include:
 
-| Key      | Action                                                              |
-| -------- | ------------------------------------------------------------------- |
-| `?`      | shows all file explorer key mappings                                |
-| `#`      | performs fuzzy filtering; press `esc` to exit                       |
-| `return` | opens selected file or directory                                    |
-| `a`      | adds a new file or directory                                        |
-| `A`      | adds a new directory                                                |
-| `H`      | toggles display of hidden files (hidden by default)                 |
-| `S`      | opens selected file in a new horizontal split                       |
-| `s`      | opens selected file in a new vertical split                         |
-| `c`      | copies selected file; prompts for new name                          |
-| `d`      | deletes selected file or directory                                  |
-| `j`      | moves down to the next file or directory                            |
-| `k`      | moves up to the next file or directory                              |
-| `m`      | moves selected file or directory; prompts for destination directory |
-| `r`      | renames selected file or directory                                  |
-| `t`      | opens selected file in a new tab (new set of files)                 |
-| `y`      | copies selected file to clipboard                                   |
-| `p`      | pastes file from clipboard into selected directory                  |
-| `<`      | navigates to previous tab (File, Bufs, or Git)                      |
-| `>`      | navigates to next tab (File, Bufs, or Git)                          |
+| Key      | Action                                                               |
+| -------- | -------------------------------------------------------------------- |
+| `?`      | shows all file explorer key mappings                                 |
+| `#`      | performs fuzzy filtering; press `esc` to exit                        |
+| `return` | opens selected file or directory                                     |
+| `a`      | adds a new file or directory                                         |
+| `A`      | adds a new directory                                                 |
+| `H`      | toggles display of hidden files (hidden by default)                  |
+| `S`      | opens selected file in a new horizontal split                        |
+| `s`      | opens selected file in a new vertical split                          |
+| `c`      | copies selected file; prompts for new name                           |
+| `d`      | deletes selected file or directory                                   |
+| `j`      | moves down to the next file or directory                             |
+| `k`      | moves up to the next file or directory                               |
+| `m`      | moves selected file or directory; prompts for destination directory  |
+| `O`      | opens selected file using associated app (in macOS image -> Preview) |
+| `r`      | renames selected file or directory                                   |
+| `t`      | opens selected file in a new tab (new set of files)                  |
+| `y`      | copies selected file to clipboard                                    |
+| `p`      | pastes file from clipboard into selected directory                   |
+| `<`      | navigates to previous tab (File, Bufs, or Git)                       |
+| `>`      | navigates to next tab (File, Bufs, or Git)                           |
 
 When `t` is pressed, a new tab is created.
 These are represented by numbered buttons starting from 1 in the upper-right.
@@ -638,19 +681,18 @@ return {
 The editing area display multiple buffers
 that are displayed in multiple split panes.
 
-| Key            | Action                                                                |
-| -------------- | --------------------------------------------------------------------- |
-| `<leader>/`    | creates a horizontal split (below)                                    |
-| `<leader>-`    | same as above using a custom key mapping I added                      |
-| `<leader>`     | creates a vertical split (right)                                      |
-| `ctrl-q`       | closes the current split                                              |
-| `:clo`         | closes the current split                                              |
-| `ctrl-h`       | moves to the split on the left                                        |
-| `ctrl-j`       | moves to the split below                                              |
-| `ctrl-k`       | moves to the split above                                              |
-| `ctrl-l`       | moves to the split on the right                                       |
-| `ctrl-{arrow}` | increases the size of the current split in the direction of the arrow |
-| ``             |                                                                       |
+| Key            | Action                                                |
+| -------------- | ----------------------------------------------------- |
+| `<leader>/`    | creates a horizontal split (below)                    |
+| `<leader>-`    | same as above using a custom key mapping I added      |
+| `<leader>\|`   | creates a vertical split (right)                      |
+| `ctrl-q`       | closes current split                                  |
+| `:clo`         | closes current split                                  |
+| `ctrl-h`       | moves to split on left                                |
+| `ctrl-j`       | moves to split below                                  |
+| `ctrl-k`       | moves to split above                                  |
+| `ctrl-l`       | moves to split on right                               |
+| `ctrl-{arrow}` | increases size of current split in direction of arrow |
 
 Moving to a different split includes
 moving from the file explorer to the first buffer
