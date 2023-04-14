@@ -62,7 +62,7 @@ Cons of Lua include:
 
 - limited Unicode support
 
-  Strings can contain unicode characters,
+  Strings can contain Unicode characters,
   but indexing into such strings does not account for their size.
   See {% aTargetBlank "http://lua-users.org/wiki/LuaUnicode", "Lua Unicode" %}.
 
@@ -228,7 +228,7 @@ code formatting, spell checking, and more.
 
 To disable specific diagnostics,
 open Settings, filter on "Lua", scroll down to "Lua > Diagnostics: Disable",
-click the "Add Item" button, select a diagnostic name from the dropdown,
+click the "Add Item" button, select a diagnostic name from the drop-down,
 and click the "OK" button.
 For example, you may wish to disable "lowercase-global".
 
@@ -412,11 +412,11 @@ Other:
 
 A single-line comment begins with two dashes.
 
-A multiline comment is a single-line comment followed by a multiline string.
+A multi-line comment is a single-line comment followed by a multi-line string.
 They begin with `--[[` and end with `]]`.
 No characters are allowed between the beginning `--` and `[[`.
-Sometimes multiline comments end with `--]]` to make the end easier to see,
-but the `--` is really just part of the multiline string.
+Sometimes multi-line comments end with `--]]` to make the end easier to see,
+but the `--` is really just part of the multi-line string.
 
 ## Types
 
@@ -681,6 +681,13 @@ sentence = string.format("%s's favorite color is %s.", name, color)
 ### Patterns
 
 A Lua pattern is a string containing character classes and magic characters.
+These provided a simpler alternative to regular expressions
+which are not directly supported in Lua.
+The code to support patterns is much smaller than
+the code required to support regular expressions.
+This is important since one of the goals of Lua to is to be small.
+
+Patterns are used in the string library functions `find`, `gfind`, and `gsub`.
 
 The character classes include:
 
