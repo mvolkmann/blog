@@ -842,6 +842,7 @@ Key mappings for operating on the current buffer include:
 | ------------ | -------------------------------------------------------------------------------- |
 | `<leader>lf` | formats the contents of the current buffer                                       |
 | `<leader>lS` | toggles display of a right pane containing a list of symbols defined in the file |
+| `<leader>ls` | opens a Telescope window for finding symbol references                           |
 
 Symbols include variables, functions, and type declarations.
 Select a symbol name to scroll to it in the buffer.

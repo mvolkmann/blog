@@ -228,6 +228,10 @@ To install Pallene:
 {% aTargetBlank "https://github.com/teal-language/tl", "Teal" %} is a
 typed dialect of Lua.
 
+The supported types are `any`, `nil`, `boolean`, `integer`, `number`,
+`string`, `function`, `enum`, `record`, `thread`, and
+table types described by their allowed key and value types.
+
 To install Teal, enter `luarocks install tl`.
 
 To run a Teal script, enter `tl run {file-name}.tl`.
