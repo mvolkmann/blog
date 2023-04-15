@@ -1564,6 +1564,44 @@ For details on the supported keys, see the "Plugin Spec" section in the
 
 For help on a specific custom plugin, enter `:h {name}-config`.
 
+#### Comment.nvim Plugin
+
+The {% aTargetBlank "https://github.com/numToStr/Comment.nvim",
+"Comment.nvim" %} plugin integrates with Tree-sitter
+to provide language-specific smart commenting.
+
+To configure Comment.nvim, create the file
+`~/.config/nvim/lua/user/plugins/comment.lua`
+containing the following:
+
+```lua
+return {
+  "numToStr/Comment.nvim",
+  config = function()
+    require("Comment").setup {
+      opleader = {
+        block = "gb",
+        line = "gc"
+      },
+      mappings = {
+        basic = true,
+        extra = true
+      }
+    }
+  end
+}
+```
+
+| Key   | Action                                        |
+| ----- | --------------------------------------------- |
+| `gb`  | block comment toggle selected lines           |
+| `gc`  | line comment toggle selected lines            |
+| `gcb` | ???                                           |
+| `gcc` | toggles whether the current line is commented |
+| `gco` | inserts line comment above                    |
+| `gcO` | inserts line comment below                    |
+| `gcA` | inserts line comment at end of line           |
+
 #### hop.nvim Plugin
 
 The {% aTargetBlank "https://github.com/phaazon/hop.nvim", "hop.nvim" %}
