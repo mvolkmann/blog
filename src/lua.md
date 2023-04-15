@@ -579,7 +579,7 @@ For example, `\n` produces a newline character,
 `\'` produces a single quote inside a string delimited by single quotes, and
 `\\` produces a backslash character.
 
-Multiline strings are delimiting with `[[` and `]]`.
+Multi-line strings are delimiting with `[[` and `]]`.
 This syntax is referred to as a "long brackets".
 A newline after `[[` is ignored.
 A newline before `]]` is not ignored.
@@ -707,21 +707,28 @@ The character classes include:
 
 The magic characters include:
 
-| Magic Character | Meaning |
-| --------------- | ------- |
-| `(`             |         |
-| `)`             |         |
-| `.`             |         |
-| `%`             |         |
-| `+`             |         |
-| `-`             |         |
-| `*`             |         |
-| `?`             |         |
-| `[`             |         |
-| `^`             |         |
-| `$`             |         |
+| Magic Character | Meaning                                            |
+| --------------- | -------------------------------------------------- |
+| `(`             |                                                    |
+| `)`             |                                                    |
+| `.`             |                                                    |
+| `%`             | escapes the other magic characters (ex. %$ is a $) |
+| `+`             |                                                    |
+| `-`             |                                                    |
+| `*`             |                                                    |
+| `?`             |                                                    |
+| `[`             |                                                    |
+| `^`             |                                                    |
+| `$`             |                                                    |
+
+A "char-set" is a custom character class defined by
+listing allowed characters inside square brackets.
+For example, `[13579]` describes odd, single-digit numbers and
+`[%dABCDEF]` is the equivalent of `%x` for describe a hexadecimal digit.
 
 TODO: Add content from https://www.lua.org/pil/20.2.html.
+
+TODO: See examples in dev/lua/patterns.lua.
 
 ## Operators
 
