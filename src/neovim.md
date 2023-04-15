@@ -676,7 +676,8 @@ This displays a menu of common commands that includes:
 
 AstroNvim uses the {% aTargetBlank
 "https://github.com/nvim-neo-tree/neo-tree.nvim", "neo-tree.nvim" %} plugin
-for the file explorer that appears on the left when `<leader>e` is pressed.
+for the file explorer that appears on the left side.
+To toggle display of the file explorer, press `<leader>e`.
 
 The file explorer contains three tabs.
 The "File" tab displays files and directories in and below
@@ -1448,10 +1449,56 @@ In the delete dialog, select a session and press `return` to delete it.
 
 To close either of these dialogs, press the `esc` key twice.
 
+### Bottom (btm)
+
+{% aTargetBlank "https://clementtsang.github.io/bottom/", "bottom" %}
+is a "graphical process/system monitor for the terminal".
+
+To install btm in MacOS, enter `brew install bottom`.
+
+To run `btm` inside Neovim, enter `<leader>tt` (for "top").
+This opens a floating terminal and runs `btm` inside it.
+
+To quit `btm` and close the terminal that is running it, press `q`.
+
+### Go DiskUsage (gdu)
+
+{% aTargetBlank "https://github.com/dundee/gdu", "gdu" %}
+is a disk usage analyzer written in Go.
+
+To install gdu in MacOS using Homebrew, enter the following command:
+
+- `brew install -f gdu`
+- `brew link --overwrite gdu`
+
+To run `gdu` inside Neovim, enter `<leader>tu` for "usage".
+This opens a floating terminal and runs `gdu` inside it.
+
+Initially this shows the disk space occupied by all the
+files and directories in the directory from which `nvim` was launched.
+To see the disk space occupied by the files and directories inside
+one of these directories, select the directory and press the `return` key.
+To return to the parent directory, select `..` and press the `return` key.
+
+To quit `gui` and close the terminal that is running it, press `q`.
+
 ### Terminal
 
-To open a floating terminal window, press `F7` or enter `:ToggleTerm`.
-On a MacBook keyword, hold the `fn` key and press `F7`.
+There are many ways to open a terminal window.
+
+| Key          | Action                                                   |
+| ------------ | -------------------------------------------------------- |
+| `<leader>tf` | opens a floating terminal                                |
+| `F7`         | same as above; on a MacBook keyboard, also hold `fn` key |
+| `<leader>th` | opens a terminal at the bottom of the nvim window        |
+| `<leader>tn` | opens a floating terminal that runs a Node REPL          |
+| `<leader>tp` | opens a floating terminal that runs a Python REPL        |
+| `<leader>tt` | opens a floating terminal that runs `btm`                |
+| `<leader>tv` | opens a terminal on the right side of the nvim window    |
+| `<leader>tu` | opens a floating terminal that runs `gdu`                |
+| ``           |                                                          |
+
+Another way to open a floating terminal is to enter `:ToggleTerm`.
 
 ### Lazy
 
