@@ -1498,7 +1498,10 @@ There are many ways to open a terminal window.
 
 Another way to open a floating terminal is to enter `:ToggleTerm`.
 
-The working directory will be the directory from which `nvim` was started.
+The working directory of the terminal session
+will be the directory from which `nvim` was started.
+
+The terminal cannot be split into multiple panes.
 
 To close the terminal and return to `nvim`, enter `exit`.
 
