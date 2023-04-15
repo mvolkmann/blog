@@ -604,79 +604,8 @@ Strings are indexed starting from 1 instead of 0.
 Use the `..` operator to concatenate strings.
 For example, `fullName = firstName .. ' ' .. lastName`.
 
-String operations include:
-
-- length: `string.len(var)` or `#var`
-- substring: `string.sub(source, startIndex, endIndex)` or
-  `source:sub(startIndex, endIndex)`
-- global substitute: `string.gsub(source, oldValue, newValue)`
-
-  This returns a new string and the number of occurrences that were replaced.
-
-- find start and end index inclusive:
-  `string.find(source, target)` or `source:find(target)`
-- uppercase: `string.upper(var)` or `var:upper()`
-- lowercase: `string.lower(var)` or `var:lower()`
-- pattern matches:
-  `string.match(someString, 'pattern')` returns a table of matches?
-
-Some common string operations are not directly supported.
-For example, there are no functions that test whether a string
-contains, starts with, or ends with a substring.
-We can define these using the provided `find` function
-as follows:
-
-```lua
-function string.contains(source, target)
-  return source:find(target, 1, true) ~= nil
-end
-
-function string.startsWith(source, target)
-  return source:find(target, 1, true) == 1
-end
-
-function string.endsWith(source, target)
-  startIndex, endIndex = source:find(target, 1, true)
-  return endIndex == #source
-end
-
-text = "This is used to test of our new functions."
-
--- These functions can be called in two ways.
-print(string.contains(text, "test")) -- true
-print(text:contains("test")) -- true
-
--- More example calls
-print(text:contains("missing")) -- false
-print(text:startsWith("This")) -- true
-print(text:startsWith("Test")) -- false
-print(text:endsWith("functions.")) -- true
-print(text:endsWith("test.")) -- false
-```
-
-Lua does not support string interpolation.
-The closest Lua feature to this is the `string.format` function.
-It takes a format string as its first argument.
-This can contain literal text to be output and
-formatting directives that begin with a percent sign.
-The supported formatting directives are:
-
-- `%o` for octal numbers
-- `%x` for hexadecimal numbers
-- `%d` for decimal numbers
-- `%f` for floating point numbers
-- `%s` for strings
-
-The `%f` directive can specify the number of decimal places to output.
-For example, to output two decimal places use `%.2f`.
-
-For example:
-
-```lua
-name = "Mark"
-color = "yellow"
-sentence = string.format("%s's favorite color is %s.", name, color)
-```
+String operations are supported by the `string` standard library
+which is described later.
 
 ### Patterns
 
@@ -724,7 +653,7 @@ The magic characters include:
 A "char-set" is a custom character class defined by
 listing allowed characters inside square brackets.
 For example, `[13579]` describes odd, single-digit numbers and
-`[%dABCDEF]` is the equivalent of `%x` for describe a hexadecimal digit.
+`[%da-fA-F]` is the equivalent of `%x` for describe a hexadecimal digit.
 
 TODO: Add content from https://www.lua.org/pil/20.2.html.
 
@@ -2156,6 +2085,82 @@ To get the time it takes to run some code:
 local start = os.clock()
 — some code here
 print(os.clock() - start)
+```
+
+### string Module
+
+String operations supported by this module include:
+
+- length: `string.len(var)` or `#var`
+- substring: `string.sub(source, startIndex, endIndex)` or
+  `source:sub(startIndex, endIndex)`
+- global substitute: `string.gsub(source, oldValue, newValue)`
+
+  This returns a new string and the number of occurrences that were replaced.
+
+- find start and end index inclusive:
+  `string.find(source, target)` or `source:find(target)`
+- uppercase: `string.upper(var)` or `var:upper()`
+- lowercase: `string.lower(var)` or `var:lower()`
+- pattern matches:
+  `string.match(someString, 'pattern')` returns a table of matches?
+
+Some common string operations are not directly supported.
+For example, there are no functions that test whether a string
+contains, starts with, or ends with a substring.
+We can define these using the provided `find` function
+as follows:
+
+```lua
+function string.contains(source, target)
+  return source:find(target, 1, true) ~= nil
+end
+
+function string.startsWith(source, target)
+  return source:find(target, 1, true) == 1
+end
+
+function string.endsWith(source, target)
+  startIndex, endIndex = source:find(target, 1, true)
+  return endIndex == #source
+end
+
+text = "This is used to test of our new functions."
+
+-- These functions can be called in two ways.
+print(string.contains(text, "test")) -- true
+print(text:contains("test")) -- true
+
+-- More example calls
+print(text:contains("missing")) -- false
+print(text:startsWith("This")) -- true
+print(text:startsWith("Test")) -- false
+print(text:endsWith("functions.")) -- true
+print(text:endsWith("test.")) -- false
+```
+
+Lua does not support string interpolation.
+The closest Lua feature to this is the `string.format` function.
+It takes a format string as its first argument.
+This can contain literal text to be output and
+formatting directives that begin with a percent sign.
+The supported formatting directives are:
+
+- `%o` for octal numbers
+- `%x` for hexadecimal numbers
+- `%d` for decimal numbers
+- `%f` for floating point numbers
+- `%s` for strings
+
+The `%f` directive can specify the number of decimal places to output.
+For example, to output two decimal places use `%.2f`.
+
+For example:
+
+```lua
+name = "Mark"
+color = "yellow"
+sentence = string.format("%s's favorite color is %s.", name, color)
 ```
 
 ## Modules
