@@ -233,6 +233,29 @@ Of these, `za` and `zR` are the most useful.
 In AstroNvim press `z` and pause to see
 all the key mappings related to folding.
 
+### Executing Buffer
+
+There are multiple ways to execute the code inside a buffer.
+For example, if the current buffer contains Lua code,
+it can be executed in any of the following ways:
+
+1. Execute a shell command.
+
+   1. Enter `!lua %`.
+   1. The output is displayed in the message area at bottom.
+
+1. Execute a shell command in a temporary terminal.
+
+   1. Enter `:term lua %`.
+   1. The output is displayed in a new buffer.
+   1. Enter `:bd` to close the buffer.
+
+1. Use a floating terminal.
+
+   1. Press F7 to toggle it open.
+   1. Enter `lua {file-name}.lua`
+   1. Press F7 again to toggle it closed.
+
 ### Sourcing Files
 
 After editing a configuration file, enter `:source` or `:so` to execute it.
