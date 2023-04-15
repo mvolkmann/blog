@@ -718,7 +718,7 @@ when focus is in the file explorer include:
 
 With both `/` and `#` filtering, select a file or directory
 using the up and down arrow keys or by pressing
-`ctrl-n` (for next) or `ctrl-p` (for previous).
+`ctrl-n` (for "next") or `ctrl-p` (for "previous").
 Press the `return` key to open the selected file or directory.
 To clear filtering and return to displaying the
 full list of files and directories, press the `esc` key.
@@ -1033,9 +1033,12 @@ Lazygit is an alternative to {% aTargetBlank
 To launch lazygit from a terminal window,
 cd to a repository directory and enter `lazygit`.
 
-To launch lazygit from within AstroVim, enter `<leader>gg` for Git GUI.
-This opens a new window with a left and right side.
+To launch lazygit from within AstroNvim,
+enter `<leader>gg` (for "Git GUI") or `<leader>tl` (for "terminal lazygit").
+This opens a floating terminal and runs `lazygit` inside it.
 To close this window, press `q`.
+
+The `lazygit` UI has a left and right side.
 
 The left side contains five numbered sections,
 Status (1), Files (2), Local Branches (3), Commits (4), and Stash (5).
@@ -1492,6 +1495,7 @@ There are many ways to open a terminal window.
 | `F7`         | same as above; on a MacBook keyboard, also hold `fn` key |
 | `<leader>th` | opens a terminal at the bottom of the nvim window        |
 | `<leader>tn` | opens a floating terminal that runs a Node REPL          |
+| `<leader>tl` | opens a floating terminal that runs `lazygit`            |
 | `<leader>tp` | opens a floating terminal that runs a Python REPL        |
 | `<leader>tt` | opens a floating terminal that runs `btm`                |
 | `<leader>tv` | opens a terminal on the right side of the nvim window    |
