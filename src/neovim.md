@@ -975,6 +975,9 @@ The key mappings will appear at the bottom of the window.
 
 To toggle commenting of the current line or selected lines, press `<leader>/`.
 
+For more advanced comment support, see the `Comment.nvim` plugin
+described in the "Custom Plugins" section.
+
 ### Code Formatting
 
 AstroNvim uses the {% aTargetBlank
@@ -1569,6 +1572,9 @@ For help on a specific custom plugin, enter `:h {name}-config`.
 The {% aTargetBlank "https://github.com/numToStr/Comment.nvim",
 "Comment.nvim" %} plugin integrates with Tree-sitter
 to provide language-specific smart commenting.
+It can recognizes different syntaxes in the same file,
+such as JavaScript, HTML, and CSS in a Svelte file,
+and apply the correct comment syntax for each.
 
 To configure Comment.nvim, create the file
 `~/.config/nvim/lua/user/plugins/comment.lua`
@@ -1601,6 +1607,8 @@ return {
 | `gco` | inserts line comment above                    |
 | `gcO` | inserts line comment below                    |
 | `gcA` | inserts line comment at end of line           |
+
+`gcc` as the same effect as the builtin mapping `<leader>/`.
 
 #### hop.nvim Plugin
 
