@@ -217,6 +217,67 @@ Pallene is the name of a Saturn moon.
 The name of the moon is pronounced "puh lee nee",
 but the language designer pronounces it "pah lean".
 
+To install Pallene:
+
+- Install a special version of Lua that exposes some required C APIs.
+- Install Luarocks.
+- Install Pallene with `luarocks make pallend-dev-1.rockspace`.
+
+### Teal
+
+{% aTargetBlank "https://github.com/teal-language/tl", "Teal" %} is a
+typed dialect of Lua.
+
+To install Teal, enter `luarocks install tl`.
+
+To run a Teal script, enter `tl run {file-name}.tl`.
+
+To perform type checking of a Teal script, enter `tl check {file-name}.tl`.
+
+To perform type checking and generate a `.lua` file with type annotations removed,
+enter `tl gen {file-name}.tl`.
+
+Also see `tl build`.
+
+To add support for Teal in Neovim, create the file
+`~/.config/nvim/lua/user/plugins/vim-teal.lua` containing the following.
+This may require also using ALE.
+
+```lua
+return {
+  "teal-language/vim-teal"
+}
+```
+
+Here is an example Teal script that implements {% aTargetBlank
+"https://en.wikipedia.org/wiki/Fizz_buzz", "Fizz buzz" %}.
+
+```lua
+-- This type describes a number and the text that should
+-- be printed if a given number is divisible by it.
+local type Rule = {number, string}
+
+local function fizzBuzz(limit: number, rules: {Rule})
+  for n = 1, limit do
+    local matched = false
+    for _, rule in ipairs(rules) do
+      local number = rule[1] as number
+      local text = rule[2] as string
+      if n % number == 0 then
+        print(text)
+        matched = true
+      end
+    end
+    if not matched then print(n) end
+  end
+end
+
+fizzBuzz(30, {
+  {3, "fizz"},
+  {5, "buzz"}
+})
+```
+
 ## VS Code Setup
 
 VS Code has great support for Lua.
