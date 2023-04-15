@@ -1491,18 +1491,27 @@ There are many ways to open a terminal window.
 
 | Key          | Action                                                   |
 | ------------ | -------------------------------------------------------- |
-| `<leader>tf` | opens a floating terminal                                |
+| `<leader>tf` | opens a floating terminal (f for "float")                |
 | `F7`         | same as above; on a MacBook keyboard, also hold `fn` key |
-| `<leader>th` | opens a terminal at the bottom of the nvim window        |
-| `<leader>tn` | opens a floating terminal that runs a Node REPL          |
-| `<leader>tl` | opens a floating terminal that runs `lazygit`            |
-| `<leader>tp` | opens a floating terminal that runs a Python REPL        |
-| `<leader>tt` | opens a floating terminal that runs `btm`                |
-| `<leader>tv` | opens a terminal on the right side of the nvim window    |
-| `<leader>tu` | opens a floating terminal that runs `gdu`                |
-| ``           |                                                          |
+| `<leader>th` | opens a terminal at the bottom (h for "horizontal")      |
+| `<leader>tv` | opens a terminal on the right side (v for "vertical")    |
 
 Another way to open a floating terminal is to enter `:ToggleTerm`.
+
+The working directory will be the directory from which `nvim` was started.
+
+To close the terminal and return to `nvim`, enter `exit`.
+
+There are also many key mappings that open a floating terminal
+whose only purpose is top run a specific command.
+
+| Key          | Action in Floating Terminal             |
+| ------------ | --------------------------------------- |
+| `<leader>tn` | runs a Node REPL (n for "Node")         |
+| `<leader>tl` | runs `lazygit` (l for "lazygit")        |
+| `<leader>tp` | runs a Python REPL (p for "for Python") |
+| `<leader>tt` | runs `btm` (t for "top")                |
+| `<leader>tu` | runs `gdu` (u for "usage")              |
 
 ### Lazy
 
