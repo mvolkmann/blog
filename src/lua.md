@@ -1904,6 +1904,9 @@ The `loadfile` function is similar,
 but it takes a file path from which code is read.
 If no file path is provided, it reads code from `stndin`.
 
+TODO: Is there an `eval` function that just executes code in a string
+TODO: and doesn't return a function that executes the code?
+
 ## Lua Functional (luafun)
 
 The <a href="https://www.lua.org/manual/5.4/manual.html#6.6"
