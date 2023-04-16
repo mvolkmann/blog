@@ -80,6 +80,7 @@ TODO: Get more from http://notebook.kulchenko.com/programming/lua-good-different
 
 Notable uses of Lua include:
 
+- {% aTargetBlank "https://www.angrybirds.com", "Angry Birds" %} game
 - {% aTargetBlank "http://www.legoengineering.com/platform/nxt/", "Lego Mindstorms NXT" %}
 - {% aTargetBlank "https://www.minecraft.net/", "Minecraft" %} game
 - {% aTargetBlank "https://neovim.io", "Neovim" %} text editor
@@ -583,20 +584,6 @@ Variable names, function names, and table keys are case-sensitive.
 
 To assign a value to a variable, use the `=` operator.
 
-Variables are global by default.
-Use the `local` keyword to make them only exist in their scope.
-It's too bad the designers didn't choose to make variables local by default
-and use a `global` keyword to make them exist outside their scope.
-
-For example:
-
-```lua
-a = 1 -- global, even if assigned inside a function
-local b = 2 -- local to the current scope
-```
-
-TODO: What does `_G.name = value` do?
-
 Variables with no assigned value have the value `nil`.
 
 New values of any type can be assigned to a variable at any time.
@@ -613,6 +600,35 @@ For example:
 ```lua
 local a, b, c = 1, 2, 3
 a, b = b, a -- swaps values
+```
+
+Variables are global by default, even when defined in a different source file.
+Use the `local` keyword to make them only exist in their scope.
+It's too bad the designers didn't choose to make variables local by default
+and use a `global` keyword to make them exist outside their scope.
+
+For example:
+
+```lua
+a = 1 -- global, even if assigned inside a function
+local b = 2 -- local to the current scope
+```
+
+It is a convention, but not enforced, for
+global variables to begin with a capital letter and
+for the names of constants to be all uppercase.
+
+All variables assigned without the `local` keyword
+are added to the global table `_G`.
+For example:
+
+```
+MyGlobal = "demo"
+_G.MyGlobal = "demo" -- same as previous line
+
+print(MyGlobal) -- demo
+print(_G["MyGlobal"]) -- demo
+print(_G.MyGlobal) -- demo
 ```
 
 ## Booleans
@@ -641,11 +657,13 @@ This syntax is referred to as a "short literal string".
 
 Escaping certain characters by preceding them with a backslash
 changes how they are interpreted.
-For example, `\n` produces a newline character,
-`\t` produces a tab character,
-`\"` produces a double quote inside a string delimited by double quotes, and
-`\'` produces a single quote inside a string delimited by single quotes, and
-`\\` produces a backslash character.
+For example:
+
+- `\n` produces a newline character
+- `\t` produces a tab character
+- `\"` produces a double quote inside a string delimited by double quotes
+- `\'` produces a single quote inside a string delimited by single quotes
+- `\\` produces a backslash character
 
 Multi-line strings are delimiting with `[[` and `]]`.
 This syntax is referred to as a "long brackets".
