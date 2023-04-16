@@ -1856,13 +1856,15 @@ When the `__mode` function returns a string that contains `k`,
 keys are weak. When it contains `v`, values are weak.
 Both can be true.
 
-## load Function
+## Evaluting Code at Runtime
 
 The `load` function takes a string or a function.
+It returns a function and message, either of which can be `nil`.
 
-When a string is passed it parses it as Lua code
-and returns a function that executes the code.
-If there are errors in the code it ...
+When a string is passed it parses it as Lua code and
+returns a function that executes the code and `nil` for the message.
+If there are errors in the code it returns
+`nil` for the function and a string for an error message.
 
 When a function is passed, the function must return a string of code.
 It is called repeatedly until it returns an empty string or `nil`.
@@ -1897,6 +1899,10 @@ end
 fn = load(getCode)
 if fn then print(fn()) end -- 1       2       3       4       5
 ```
+
+The `loadfile` function is similar,
+but it takes a file path from which code is read.
+If no file path is provided, it reads code from `stndin`.
 
 ## Lua Functional (luafun)
 
