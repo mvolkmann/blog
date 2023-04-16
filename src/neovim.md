@@ -752,14 +752,25 @@ with the following content:
 ```lua
 return {
   "nvim-neo-tree/neo-tree.nvim",
-  opts = {
-    filesystem = {
-      filtered_items = {
-        always_show = { "user" } -- option #1 targets a specific entry
-        -- hide_gitignored = false -- option #2 targets all .gitignore entries
+  opts = function(_, opts)
+    -- This part adds key mappings related to incremental selection.
+    require 'nvim-treesitter.configs'.setup {
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = "<leader>sw",    -- select word
+          node_incremental = "<leader>sn",  -- incremental select node
+          scope_incremental = "<leader>ss", -- incremental select scope
+          node_decremental = "<leader>su"   -- incremental select undo
+        }
       }
     }
-  }
+    opts.filesystem.filtered_items = {
+      always_show = { "user" }
+      -- hide_gitignored = false
+
+    }
+  end
 }
 ```
 
@@ -789,8 +800,31 @@ AstroNvim uses the `nvim-treesitter` plugin.
 Its configuration file for Tree-sitter is
 `~/.config/nvim/lua/plugins/treesitter.lua`.
 
-You do not need to interact with Tree-sitter directly.
-Everything you need it to do is handled automatically.
+One feature of Tree-sitter is incremental selection.
+Key mappings for operating on the currently selected text include:
+
+| Key   | Action                                                    |
+| ----- | --------------------------------------------------------- |
+| `gnn` | initializes selection to node under cursor (n for "node") |
+| `grn` | increases selection to containing node (n for "node")     |
+| `grc` | increases selection to containing block (c for "contain") |
+| `grm` | decreases selection to contained block (m for "minus"?)   |
+
+If nothing is selected, but the cursor on the desired starting node,
+begin by pressing `gnn` to select that node.
+To expand the selection to the containing node, press `grn`.
+To expand the selection to the containing block, press `grc`.
+To undo the last expand, press `grm`.
+
+These are very difficult key mappings to remember.
+Consider adding alternate key mappings such as:
+
+- `<leader>sw` (for "select word") in place of `gnn`
+- `<leader>sn` (for "select node") in place of `grn`
+- `<leader>ss` (for "select scope") in place of `grc`
+- `<leader>su` (for "select undo") in place of `grm`
+
+These mappings are configured in the previous section "File Explorer".
 
 ### Splits
 
