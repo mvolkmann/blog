@@ -29,7 +29,7 @@ The goals of Lua are:
 - small size: supports embedding in non-Lua applications
 - scripting: easy to invoke from system language such as C
 
-Examples of Lua simplicity include having a small number of keywords (21)
+Examples of Lua simplicity include having a small number of keywords (22)
 and indexing from 1 instead 0 (like matrices in math).
 The Lua reference manual that describes every language feature
 is around 100 pages.
@@ -48,7 +48,7 @@ Pros of Lua include:
 
 - considered to be the fastest scripting language when compiled
 - free and open sources under the MIT license
-- simple syntax with only 21 keywords
+- simple syntax with only 22 keywords
 - uses dynamic variables that do not require specifying types
 - functions are first class and are closures
 - implements tail call optimization
@@ -432,50 +432,51 @@ But none seem to be popular or actively maintained.
 
 ## Keywords
 
-Lua only defines 21 keywords.
+Lua only defines 22 keywords.
 Some of the keywords such as `end`, `and`, `or`, and `then`
 make the syntax similar to the Ruby programming language.
 
 Boolean literal values:
 
-- true
-- false
+- `true`
+- `false`
 
 Conditional Logic:
 
-- if
-- then
-- elseif
-- else
+- `if`
+- `then`
+- `elseif`
+- `else`
 
 Functions:
 
-- function
-- return
+- `function`
+- `return`
 
 Iteration:
 
-- for: loop over numbers or pairs
-- in: specifies what to loop over
-- while: top-tested loop
-- repeat and until: bottom-tested loop
-- break: exit loop early
+- `for`: loop over numbers or pairs
+- `in`: specifies what to loop over
+- `while`: top-tested loop
+- `repeat` and `until`: bottom-tested loop
+- `break`: exit loop early
 
 Logical Operators:
 
-- and
-- or
-- not
+- `and`
+- `or`
+- `not`
 
 Variables:
 
-- local
+- `local`
 
 Other:
 
-- do: begins a new lexical block
-- end: marks the end of a lexical block
-- nil: represents having no value
+- `do`: begins a new lexical block
+- `end`: marks the end of a lexical block
+- `goto`: jumps to a label
+- `nil`: represents having no value
 
 ## Comments
 
@@ -1920,10 +1921,11 @@ if fn then print(fn()) end -- 1       2       3       4       5
 
 The `loadfile` function is similar,
 but it takes a file path from which code is read.
-If no file path is provided, it reads code from `stndin`.
+If no file path is provided, it reads code from `stdin`.
 
-TODO: Is there an `eval` function that just executes code in a string
-TODO: and doesn't return a function that executes the code?
+The `dofile` function reads code from a file or `stdin`,
+executes it, and returns all values returned by the code
+rather than returning a function to be executed later.
 
 ## Lua Functional (luafun)
 
