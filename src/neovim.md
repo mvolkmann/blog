@@ -920,15 +920,9 @@ once to exit insert mode and once to close the window.
 ```lua
 return {
   "nvim-telescope/telescope.nvim",
-  opts = function()
+  opts = function(_, opts)
     local actions = require "telescope.actions"
-    return {
-      defaults = {
-        mappings = {
-          n = { ["<Esc>"] = actions.close }
-        }
-      }
-    }
+    opts.defaults.mappings.n["<Esc>"] = actions.close
   end
 }
 ```
