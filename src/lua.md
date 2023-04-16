@@ -217,6 +217,9 @@ Pallene is the name of a Saturn moon.
 The name of the moon is pronounced "puh lee nee",
 but the language designer pronounces it "pah lean".
 
+One use case is to write performance-critical modules in Pallene,
+compile them, and require them in Lua code.
+
 To install Pallene:
 
 - Install a special version of Lua that exposes some required C APIs.
@@ -1852,6 +1855,48 @@ the metatable cannot be modified and this returns an error message.
 When the `__mode` function returns a string that contains `k`,
 keys are weak. When it contains `v`, values are weak.
 Both can be true.
+
+## load Function
+
+The `load` function takes a string or a function.
+
+When a string is passed it parses it as Lua code
+and returns a function that executes the code.
+If there are errors in the code it ...
+
+When a function is passed, the function must return a string of code.
+It is called repeatedly until it returns an empty string or `nil`.
+The returned strings are concatenated to form the entire code to be compiled.
+
+Here are two contrived examples.
+
+```lua
+local name = "World"
+local code = "print('Hello, " .. name .. "!')"
+local fn = load(code)
+if fn then print(fn()) end -- Hello, World!
+
+local n = 0
+local last = 4
+local function getCode()
+  -- local code
+  if n == 0 then
+    code = "print("
+  elseif n < last then
+    code = n .. ","
+  elseif n == last then
+    code = n .. ")"
+  elseif n > last then
+    code = nil
+  end
+
+  n = n + 1
+  return code
+end
+
+fn = load(getCode)
+if fn then print(fn()) end -- 1       2       3       4       5
+```
 
 ## Lua Functional (luafun)
 
