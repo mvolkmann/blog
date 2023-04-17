@@ -778,11 +778,15 @@ Lua supports the following logical operators:
 - `or`
 - `not`
 
+TODO: Does Lua support the bitwise operators `&`, `|`, `~`, `<<`, and `>>`?
+
 Lua only supports one assignment operator which is `=`.
 It does not support shorthand assignment operators like `+=`.
 Adding a number to a variable must be done with `myVar = myVar + n`.
 
 The operator `..` is used to concatenate strings.
+
+The `#` operator is applied on the left side of a string to get its length.
 
 Lua operators have the following precedence from highest to lowest:
 
@@ -888,6 +892,7 @@ end
 print(add(2, 3)) -- 5
 ```
 
+All Lua function are anonymous.
 The function definition above is just syntactic sugar for
 `add = function (n1, n2) return n1 + n2 end`
 
@@ -2300,6 +2305,40 @@ For example:
 name = "Mark"
 color = "yellow"
 sentence = string.format("%s's favorite color is %s.", name, color)
+```
+
+The `string.gsub` function performs global substituation.
+It takes source string, a pattern for finding text to replace,
+the replacement (a string, table, or function),
+and an option limit on the number of replacements that should be made.
+It returns a new version of the source string with the replacements made.
+For example:
+
+```lua
+local s = "The 2nd time was easier than the 1st, and the 4th was a piece of cake."
+local pattern = "%d%l%l"
+
+local replTable = {
+  ["1st"] = "first",
+  ["2nd"] = "second",
+  ["3rd"] = "third"
+}
+-- If no match is found in `replTable`, it keeps the match.
+local s2 = string.gsub(s, pattern, replTable)
+print(s2)
+-- The second time was easier than the first, and the 4th was a piece of cake.
+
+-- This function produces the same result as using `replTable`.
+local function replFn(match)
+  if match == "1st" then return "first" end
+  if match == "2nd" then return "second" end
+  if match == "3rd" then return "third" end
+  return match
+end
+
+local s3 = string.gsub(s, pattern, replFn)
+print(s3)
+-- The second time was easier than the first, and the 4th was a piece of cake.
 ```
 
 ## Modules
