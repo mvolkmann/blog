@@ -746,6 +746,52 @@ TODO: Add content from https://www.lua.org/pil/20.2.html.
 
 TODO: See examples in dev/lua/patterns.lua.
 
+The `string.match` function takes a source string and a pattern.
+When the pattern contains capture groups, `string.match` returns
+the text matched by each capture group.
+For example:
+
+```lua
+local s = "The score was 19 to 7."
+local pattern = "(%d+).+(%d+)"
+local score1, score2 = string.match(s, pattern)
+print(score1, score2) -- 19      7
+```
+
+The `string.gsub` function performs global substitution.
+It takes source string, a pattern for finding text to replace,
+the replacement (a string, table, or function),
+and an option limit on the number of replacements that should be made.
+It returns a new version of the source string with the replacements made.
+For example:
+
+```lua
+local s = "The 2nd time was easier than the 1st, and the 4th was a piece of cake."
+local pattern = "%d%l%l"
+
+local replTable = {
+  ["1st"] = "first",
+  ["2nd"] = "second",
+  ["3rd"] = "third"
+}
+-- If no match is found in `replTable`, it keeps the match.
+local s2 = string.gsub(s, pattern, replTable)
+print(s2)
+-- The second time was easier than the first, and the 4th was a piece of cake.
+
+-- This function produces the same result as using `replTable`.
+local function replFn(match)
+  if match == "1st" then return "first" end
+  if match == "2nd" then return "second" end
+  if match == "3rd" then return "third" end
+  return match
+end
+
+local s3 = string.gsub(s, pattern, replFn)
+print(s3)
+-- The second time was easier than the first, and the 4th was a piece of cake.
+```
+
 ## Operators
 
 Lua supports the following mathematical operators:
@@ -2305,40 +2351,6 @@ For example:
 name = "Mark"
 color = "yellow"
 sentence = string.format("%s's favorite color is %s.", name, color)
-```
-
-The `string.gsub` function performs global substituation.
-It takes source string, a pattern for finding text to replace,
-the replacement (a string, table, or function),
-and an option limit on the number of replacements that should be made.
-It returns a new version of the source string with the replacements made.
-For example:
-
-```lua
-local s = "The 2nd time was easier than the 1st, and the 4th was a piece of cake."
-local pattern = "%d%l%l"
-
-local replTable = {
-  ["1st"] = "first",
-  ["2nd"] = "second",
-  ["3rd"] = "third"
-}
--- If no match is found in `replTable`, it keeps the match.
-local s2 = string.gsub(s, pattern, replTable)
-print(s2)
--- The second time was easier than the first, and the 4th was a piece of cake.
-
--- This function produces the same result as using `replTable`.
-local function replFn(match)
-  if match == "1st" then return "first" end
-  if match == "2nd" then return "second" end
-  if match == "3rd" then return "third" end
-  return match
-end
-
-local s3 = string.gsub(s, pattern, replFn)
-print(s3)
--- The second time was easier than the first, and the 4th was a piece of cake.
 ```
 
 ## Modules
