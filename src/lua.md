@@ -1987,7 +1987,7 @@ It's not difficult to write these though.
 The following code implements and demonstrates using each of them.
 
 ```lua
-function map(fn, t)
+local function map(fn, t)
   local result = {}
   for i, v in ipairs(t) do
     result[i] = fn(v)
@@ -1995,14 +1995,14 @@ function map(fn, t)
   return result
 end
 
-local numbers = {1, 2, 3, 4, 5}
-function square(n) return n * n end
+local numbers = { 1, 2, 3, 4, 5 }
+local function square(n) return n * n end
 local squares = map(square, numbers)
 print(table.concat(squares, ", ")) -- 1, 4, 9, 16, 25
 
-function filter(fn, t)
+local function filter(fn, t)
   local result = {}
-  for i, v in ipairs(t) do
+  for _, v in ipairs(t) do
     if fn(v) then
       table.insert(result, v)
     end
@@ -2010,37 +2010,36 @@ function filter(fn, t)
   return result
 end
 
-function isEven(n) return n % 2 == 0 end
+local function isEven(n) return n % 2 == 0 end
 local evens = filter(isEven, numbers)
 print(table.concat(evens, ", ")) -- 2, 4
 
-function reduce(fn, t, initial)
+local function reduce(fn, t, initial)
   local acc = initial
-  for i, v in ipairs(t) do
+  for _, v in ipairs(t) do
     acc = fn(acc, v)
   end
   return acc
 end
 
-local sum = reduce(function(acc, x) return acc + x end, numbers, 0)
-print(sum) -- 15
+local function sum(n1, n2) return n1 + n2 end
+print(reduce(sum, numbers, 0)) -- 15
 
-function some(fn, t)
-  for i, v in ipairs(t) do
-    f fn(v) then return true end
+local function some(fn, t)
+  for _, v in ipairs(t) do
+    if fn(v) then return true end
   end
   return false
 end
 
-print(some(function(n) return n > 3 end, numbers)) -- true
-
-function every(fn, t)
+local function every(fn, t)
   for i, v in ipairs(t) do
     if not fn(v) then return false end
   end
   return true
 end
 
+print(some(function(n) return n > 3 end, numbers))  -- true
 print(every(function(n) return n < 7 end, numbers)) -- true
 ```
 
