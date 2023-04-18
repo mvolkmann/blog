@@ -1094,8 +1094,8 @@ takeString [[some text]]
 Likewise, the following are equivalent ways to pass a table to a function.
 
 ```lua
-takTable({1, 2, 3})
-takTable {1, 2, 3}
+takeTable({1, 2, 3})
+takeTable {1, 2, 3}
 ```
 
 To avoid writing functions that take a large number of arguments,
@@ -1247,26 +1247,16 @@ function volume(t)
 end
 ```
 
-## Data Structures
+## Tables
 
-Lua only provides one data structure called a "table".
+Lua only provides one data structure called a "table"
+which is an associative array.
 It is used to represent arrays, dictionaries, trees, and graphs.
 
-Lua does not support defining classes.
-Instead it uses a combination of tables and functions for everything.
-However, the combination of functions, tables, and metatables
-can be used to simulate classes.
-See the "Metatables" section for details.
+A single table can be array-like, dictionary-like, or both.
 
-### Tables
-
-A Lua table is an associative array.
-They can be array-like, dictionary-like, or both.
-
-To create a table that is array-like,
-provide a comma-separated values inside curly braces.
-Curly braces are only used to construct tables.
-They are not used to delimit blocks of code.
+Assigning a table to a variable assigns the reference,
+not a copy of the table.
 
 _Implementation Detail from {% aTargetBlank "https://www.lua.org/gems/", "Lua Programming Gems" %}_
 
@@ -1276,16 +1266,18 @@ _Implementation Detail from {% aTargetBlank "https://www.lua.org/gems/", "Lua Pr
 > All other entries (including integer keys outside that range)
 > go to the hash part."
 
+To create a table that is array-like,
+provide a comma-separated values inside curly braces.
+Curly braces are only used to construct tables.
+They are not used to delimit blocks of code.
+
 For example:
 
 ```lua
-scores = {5, 2, 7}
+local scores = {5, 2, 7}
 
-names = {"Mark", "Tami"}
+local names = {"Mark", "Tami"}
 ```
-
-Assigning a table to a variable assigns the reference,
-not a copy of the table.
 
 To create a table that is dictionary-like,
 provide keys and values inside curly braces.
@@ -1302,16 +1294,16 @@ String values must be enclosed in quotes.
 For example:
 
 ```lua
-scores = {Mark=5, Tami=7, ["Unknown Player"]=3} -- uses string keys
+local scores = {Mark=5, Tami=7, ["Unknown Player"]=3} -- uses string keys
 
-words = {[true]="yes", [false]="no"} -- uses boolean keys
+local words = {[true]="yes", [false]="no"} -- uses boolean keys
 
-months = {[1]="January", [2]="February"} -- uses integer keys
+local months = {[1]="January", [2]="February"} -- uses integer keys
 
 -- This has the same result as the previous line,
 -- but values are specified without keys.
 -- Integer keys are provided starting from 1.
-months = {"January", "February"}
+local months = {"January", "February"}
 ```
 
 To create a table that is both array-like and dictionary-like,
@@ -1320,7 +1312,7 @@ Each value without a key is assigned a consecutive index key starting from 1.
 For example:
 
 ```lua
-mixed = { "apple", month="April", "banana", season="Spring", "cherry" }
+local mixed = { "apple", month="April", "banana", season="Spring", "cherry" }
 for k, v in pairs(mixed) do
   print(k, v)
 end
@@ -1332,17 +1324,14 @@ end
 -- season	Spring
 ```
 
-The keys and values in tables can be any kind of value
-including other tables nested to any level.
-
 There are two ways to assign a key/value pair to a table.
+The square bracket syntax works with any key value.
+The dot syntax works with keys that are value variable names.
+For example:
 
 ```lua
-point = {x = 0, y = 0}
+local point = {x = 0, y = 0}
 point["x"] = 1
-
--- If the key is a valid variable name then
--- a value can be assigned using a dot as follows:
 point.x = 1 -- same as previous line
 ```
 
@@ -1350,23 +1339,25 @@ An empty table can be created and filled later.
 For example:
 
 ```lua
-fill_later = {} -- creates an empty table
-
-fill_later[1] = "Hello"
-fill_later["condition"] = "sunny"
-fill_later.condition = "sunny" -- sames
+local later = {} -- creates an empty table
+later[1] = "Hello"
+later["condition"] = "sunny"
+later.condition = "sunny" -- same
 ```
 
-To get the value corresponding to a table key, use square brackets
-as follows:
+To get the corresponding value of a table key,
+use the square bracket or dot syntax.
+For example:
 
 ```lua
-print("Tami's score is " .. scores["Tami"]) -- 7
+print(scores.Tami) -- 7
+print(scores["Tami"]) -- 7
 
 -- When a key is not found, the value returned is `nil`.
-print("Mary's score is " .. (scores["Mary"] or "unknown")) -- unknown
+-- The `or` operator can be used to provide a default value.
+print(scores["Mary"] or "unknown") -- unknown
 
-print("The second month is " .. months[2] .. ".") -- February
+print(months[2]) -- February
 ```
 
 To iterate over keys and values, use a `for` loop
@@ -1375,9 +1366,9 @@ with the `pairs` or `ipairs` function.
 The `pairs` function visits all the key/value pairs, but not
 necessarily in the order in which they were added to the table.
 
-The `ipairs` function is intended for iterating over array-like tables.
-It only visits the consecutive integer keys starting with `1`.
-As soon as it fails to find the next integer key, it stops.
+The `ipairs` function iterates over array-like entries,
+only visiting consecutive integer keys starting with `1`.
+It stops as soon as it fails to find the next integer key.
 
 The code below demonstrates these functions and
 also shows that a table can be both array-like AND dictionary-like.
@@ -1387,10 +1378,9 @@ also shows that a table can be both array-like AND dictionary-like.
 -- `5` is assigned the key `1` because it is the first array-like entry.
 -- `3` is assigned the key `2` because it is the second array-like entry.
 -- The entries `foo=2` and `bar=4` are dictionary-like.
-t = {5, foo=2, 3, bar=4}
+local t = {5, foo=2, 3, bar=4}
 
-print("keys and values")
-for k, v in pairs(t) do
+for k, v in pairs(t) do -- keys and values
   print(k, v)
 end
 -- 1       5
@@ -1398,35 +1388,34 @@ end
 -- bar     4
 -- foo     2
 
-print("indexes and values")
-for i, v in ipairs(t) do
+for i, v in ipairs(t) do -- indexes and values
   print(i, v)
 end
 -- 1       5
 -- 2       3
 ```
 
-The `table.insert` function inserts an array-like entry so the
-array-like entries past the insertion point move up by one.
+The `table.insert` function inserts an array-like entry.
+The array-like entries past the insertion point move up by one.
 This can be expensive if a large number of entries need to be moved.
 For example:
 
 ```lua
-names = {"Mark", "Tami"}
+local names = {"Mark", "Tami"}
 table.insert(names, 2, "Comet") -- Mark Comet Tami
 table.insert(names, "Bob") -- pushes onto end; Mark Comet Tami Bob
 ```
 
-The `table.remove` function removes an array-like entry
-so the array-like entries past the removal point move down by one.
+The `table.remove` function removes an array-like entry.
+The array-like entries past the removal point move down by one.
 This can be expensive if a large number of entries need to be moved.
 For example:
 
 ```lua
-names = {"Mark", "Comet", "Tami", "Bob"}
+local names = {"Mark", "Comet", "Tami", "Bob"}
 table.remove(names, 2) -- changes to Mark Tami Bob and returns Comet
 -- Omitting the index pops the last entry.
-last_name = table.remove(names) -- changes to Mark Tami and returns Bob
+table.remove(names) -- changes to Mark Tami and returns Bob
 ```
 
 To remove a dictionary-like entry, set its value to `nil`.
@@ -1442,17 +1431,17 @@ This only includes values for consecutive integer keys starting from one.
 For example:
 
 ```lua
-t = {"Mark", 7, "Tami", 9}
+local t = {"Mark", 7, "Tami", 9}
 print(table.concat(t, " and ")) -- "Mark and 7 and Tami and 9"
-t = {5, foo=2, 3, bar=4}
-print(table.concat(t, " and ")) -- 5 and 3
+local t = {5, foo=2, 3, bar=4}
+print(table.concat(t, " and ")) -- 5 and 3; dictonary-like entries ignored
 ```
 
 The `table.sort` function sorts an array-like table in place.
 For example:
 
 ```lua
-names = {"Tami", "Mark", "Amanda", "Jeremy"}
+local names = {"Tami", "Mark", "Amanda", "Jeremy"}
 
 -- When no comparator function is specified,
 -- the values are compared using the `<` operator.
@@ -1476,7 +1465,7 @@ To get the length of an array-like table, use `#my_table`.
 The returns the highest consecutive integer index starting from `1`.
 
 Dictionary-like tables do not store their number of entries.
-To get the count it is necessary to iterate over the table and count them.
+To get the count, it is necessary to iterate over the table and count them.
 The "Lua Functional" library described later defines a `length` function
 for computing the size of a table, but it has O(n) complexity.
 
@@ -1486,7 +1475,7 @@ The value of the `n` is not updated when entries are inserted or removed.
 For example:
 
 ```lua
-t = table.pack("Mark", 7, "Tami", 9)
+local t = table.pack("Mark", 7, "Tami", 9)
 print(t.n) -- 4
 ```
 
@@ -1496,8 +1485,8 @@ It does not work with dictionary-like tables.
 For example:
 
 ```lua
-names = {"Mark", "Tami", "Comet"}
-father, mother, dog = table.unpack(names)
+local names = {"Mark", "Tami", "Comet"}
+local father, mother, dog = table.unpack(names)
 print(father, mother, dog) -- Mark    Tami    Comet
 print(table.unpack(names)) -- same
 ```
@@ -1507,32 +1496,17 @@ This supports creating the equivalent of multi-dimensional arrays.
 For example:
 
 ```lua
-my2d = {}
+local my2d = {}
 my2d[i] = {}
 my2D[i][j] = "some-value"
-print(my2D[i][j]) -- "some-value"
+print(my2D[i][j]) -- some-value
 
-points = {
+local points = {
   {x=2, y=3},
   {x=5, y=1},
   {x=3, y=7}
 }
 print(points[2].x) -- 5
-```
-
-When passing a single table to a function,
-it is not necessary to include parentheses.
-For example:
-
-```lua
-function dump_table(t)
-  for k, v in pairs(t) do
-    print(k, v)
-  end
-end
-
-dump_table({foo=1, bar=2})
-dump_table{foo=1, bar=2} -- same as previous line
 ```
 
 The `table.move` function copies entries from one array-like table to another.
@@ -1542,15 +1516,15 @@ Existing destination table entries at target indexes are replaced.
 For example:
 
 ```lua
-function dump(t)
+local function dump(t)
   for _, v in ipairs(t) do
     print("  " .. v)
   end
 end
 
-t1 = {1, 2, 3}
-t2 = {4, 5, 6}
--- Copy table t1 elements 1 to 3 into table t2 starting at 4.
+local t1 = {1, 2, 3}
+local t2 = {4, 5, 6}
+-- Copy table t1 elements 1 to 3 into table t2 starting at index 3.
 -- The arguments are source table, start index, end index,
 -- destination index, and destination table.
 table.move(t1, 1, 3, 3, t2)
@@ -1668,6 +1642,12 @@ The `__index` method can be implemented in two ways.
 It can be a table that supplies default values for missing properties
 or it can be a function that is passed a table and a key.
 We will see both approaches below.
+
+Lua does not support defining classes.
+Instead it uses a combination of tables and functions for everything.
+However, the combination of functions, tables, and metatables
+can be used to simulate classes.
+See the "Metatables" section for details.
 
 TODO: Get examples from metatables.lua!
 
