@@ -14,65 +14,67 @@ layout: topic-layout.njk
 dynamically typed scripting language created in 1993
 by a team at {% aTargetBlank "http://www.puc-rio.br",
 "Pontifical Catholic University of Rio de Janeiro" %} in Brazil.
-The team includes is {% aTargetBlank
+The team members include {% aTargetBlank
 "https://en.wikipedia.org/wiki/Roberto_Ierusalimschy",
-"Roberto Ierusalimschy" %}, Walemar Celes, and Luiz Henrique de Figueiredo.
+"Roberto Ierusalimschy" %},
+{% aTargetBlank "https://web.tecgraf.puc-rio.br/~celes/", "Walemar Celes" %},
+and {% aTargetBlank "https://lhf.impa.br/", "Luiz Henrique de Figueiredo" %}.
 
 The Portuguese word "Lua" means "Moon".
-The logo depicts the Moon orbiting around the Earth
+The Lua logo depicts the Moon orbiting around the Earth
 and its shadow being cast onto the Earth.
 
 The goals of Lua are:
 
-- portability: runs on any OS targeted by the ANSI C compiler
 - simplicity: easy to use by non-professional programmers
 - small size: supports embedding in non-Lua applications
-- scripting: easy to invoke from system language such as C
+- scripting: easy to invoke from system languages such as C
+- portability: runs on any OS targeted by the ANSI C compiler
 
 Examples of Lua simplicity include having a small number of keywords (22)
 and indexing from 1 instead 0 (like matrices in math).
 The Lua reference manual that describes every language feature
-is around 100 pages.
+is only around 100 pages.
 
-Lua has an interpreter and a virtual machine.
+Standard Lua has an interpreter and a virtual machine.
 The interpreter is written in C and
 produces bytecode that runs in the virtual machine.
 Compiling to bytecode can be done at runtime or ahead of time
-(although I haven't found a recommended way to do it).
 
-Lua has a relatively small standard library, but has a
-large collection of packages that can be installed using the
+Lua has a relatively small standard library, but a
+large collection of optional packages can be installed using the
 {% aTargetBlank "https://luarocks.org", "LuaRocks" %} package manager.
 
 Pros of Lua include:
 
-- considered to be the fastest scripting language when compiled
-- free and open sources under the MIT license
 - simple syntax with only 22 keywords
+- easy to embed in C/C++ applications; interpreter is only 182K
+- easy to run C code from Lua and run Lua code from C
+- highly portable; runs on all major OSes and most microcontrollers
+- free and open source under the MIT license
+- considered to be the fastest scripting language when compiled
 - uses dynamic variables that do not require specifying types
+- provides automatic, incremental garbage collection
 - functions are first class and are closures
 - implements tail call optimization
-- easy to run C code from Lua and run Lua code from C
-- easy to embed in C/C++ applications (interpreter is only 182K)
-- highly portable (runs on all major OSes and most microcontrollers)
-- native support for multitasking with coroutines
-- provides automatic, incremental garbage collection
+- native support for collaborative multitasking with coroutines
 
 Cons of Lua include:
 
+- lack of type checking
+- lack of support for object oriented programming (OOP),
+  although it can be simulated with metatables and functions
+- limited support for error handling (see the `error` and `pcall` functions)
+- limited support for string pattern matching, using "patterns"
+  which are a simplified version of regular expressions
 - limited Unicode support
 
   Strings can contain Unicode characters,
   but indexing into such strings does not account for their size.
   See {% aTargetBlank "http://lua-users.org/wiki/LuaUnicode", "Lua Unicode" %}.
 
-- variables and functions are global by default
-- lack of type checking
-- lack of support for object oriented programming (OOP),
-  although it can be simulated with metatables and functions
-- limited support for error handling (see the `error` and `pcall` functions)
-- limited support for string pattern matching, using
-  string "patterns" which are a simplified version of regular expressions
+- variables and functions are global by default,
+  but can be declared `local`
 
 TODO: Get more from http://notebook.kulchenko.com/programming/lua-good-different-bad-and-ugly-parts.
 
@@ -81,21 +83,25 @@ TODO: Get more from http://notebook.kulchenko.com/programming/lua-good-different
 Notable uses of Lua include:
 
 - {% aTargetBlank "https://www.angrybirds.com", "Angry Birds" %} game
-- {% aTargetBlank "http://www.legoengineering.com/platform/nxt/", "Lego Mindstorms NXT" %}
+- {% aTargetBlank "http://www.legoengineering.com/platform/nxt/", "Lego Mindstorms NXT" %} robotics platform
 - {% aTargetBlank "https://www.minecraft.net/", "Minecraft" %} game
 - {% aTargetBlank "https://neovim.io", "Neovim" %} text editor
 - {% aTargetBlank "https://redis.io", "Redis" %} database
 - {% aTargetBlank "https://www.roblox.com", "Roblox" %} game
-- {% aTargetBlank "https://worldofwarcraft.blizzard.com/", "World of Warcraft" %}
+- {% aTargetBlank "https://worldofwarcraft.blizzard.com/", "World of Warcraft" %} game
 - Texas Instruments {% aTargetBlank
   "https://education.ti.com/en/resources/lua-scripting",
   "TI-Nspire" %} graphing calculators
 
-Roblox uses a variant of Lua called Luau.
-TODO: How does that differ?
-TODO: Learn more about Roblox programming.
+Roblox uses a variant of Lua called Luau. From {% aTargetBlank
+"https://devforum.roblox.com/t/what-is-the-difference-between-lua-and-luau/2181620/2",
+"veilict" %}, "Luau's main focus was for much needed optimizations
+to the Lua VM and to add more complex type checking,
+which allows you to see more in-depth errors before runtime.
+You can specify the type of a given variable yourself,
+or you can have Luau infer the type for you."
 
-For an extensive, see the {% aTargetBlank
+For a more extensive list, see the {% aTargetBlank
 "https://en.wikipedia.org/wiki/List_of_applications_using_Lua",
 "List of applications using Lua" %} Wikipedia page.
 
@@ -148,15 +154,15 @@ For a comparison of the performance of each approach, see {% aTargetBlank
 
 {% aTargetBlank "https://www.lua.org/manual/5.1/luac.html", "luac" %}
 is the standard Lua compiler.
+It reads Lua source code and outputs Lua bytecode.
 
-By default `luac` creates the file `luac.out`
-Use the `-o` option to change this.
+To generate a bytecode file, enter a command like `luac demo.lua`.
+This creates the bytecode file `luac.out`.
+To change the file name, use the `-o` option.
+For example, `luac demo.lua -o demo.luac`.
 
-To generate a bytecode file, enter a command like
-`luac demo.lua -o demo.luac`.
-
-To execute a bytecode file, enter a command like
-`lua demo.luac`.
+To execute a bytecode file, pass it to the Lua interpreter.
+For example, `lua demo.luac`.
 
 ### LuaJIT
 
