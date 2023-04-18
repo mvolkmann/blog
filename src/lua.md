@@ -1858,12 +1858,11 @@ p4:print() -- (0.00, 7.00)
 
 We can simulate class inheritance by setting the metatable
 of a class to its superclass.
-
 The following code demonstrates this.
 
 The `Shape` class is a abstract class,
 meaning we cannot create instances from it.
-Its purpose is to serve as a based class
+Its purpose is to serve as a base class
 for other classes that wish to inherit from it.
 The lack of a `new` function is what makes it abstract.
 
@@ -1888,7 +1887,7 @@ end
 -- Define a Triangle class.
 Triangle = {name = "triangle", sides = 3}
 Triangle.__index = Triangle
-setmetatable(Triangle, Shape)
+setmetatable(Triangle, Shape) -- Triangle inherits from Shape
 
 -- Constructor
 function Triangle.new(base, height)
@@ -1898,7 +1897,7 @@ function Triangle.new(base, height)
   return instance
 end
 
--- Method
+-- Instance Method
 function Triangle:area()
   return self.base * self.height / 2
 end
@@ -1909,7 +1908,7 @@ triangle:report() -- triangle has 3 sides and area 12.0
 -- Define a Rectangle class.
 Rectangle = {name = "rectangle", sides = 4}
 Rectangle.__index = Rectangle
-setmetatable(Rectangle, Shape)
+setmetatable(Rectangle, Shape) -- Rectangle inherits from Shape
 
 -- Constructor
 function Rectangle.new(width, height)
@@ -1919,7 +1918,7 @@ function Rectangle.new(width, height)
   return instance
 end
 
--- Method
+-- Instance Method
 function Rectangle:area()
   return self.width * self.height
 end
@@ -1932,7 +1931,7 @@ rectangle:report() -- rectangle has 4 sides and area 24.0
 -- It will get that from its superclass Rectangle.
 Square = {name = "square"}
 Square.__index = Square
-setmetatable(Square, Rectangle)
+setmetatable(Square, Rectangle) -- Square inherits from Rectangle
 
 -- Constructor
 function Square.new(side)
@@ -1941,7 +1940,7 @@ function Square.new(side)
   return instance
 end
 
--- Method
+-- Instance Method
 function Square:area()
   -- TODO: Is it possible to compute this using the superclass method?
   return self.side ^ 2
