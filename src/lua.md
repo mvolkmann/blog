@@ -471,7 +471,7 @@ Functions:
 Iteration:
 
 - `for`: loop over numbers or pairs
-- `in`: specifies what to loop over
+- `in`: used with `for` to specify what to loop over
 - `while`: top-tested loop
 - `repeat` and `until`: bottom-tested loo
 - `break`: exit loop early
@@ -484,7 +484,7 @@ Logical Operators:
 
 Variables:
 
-- `local`
+- `local`: default to global without this
 
 Other:
 
@@ -496,12 +496,22 @@ Other:
 ## Comments
 
 A single-line comment begins with two dashes.
+For example, `-- This is a comment.`
 
 A multi-line comment is a single-line comment followed by a multi-line string.
 They begin with `--[[` and end with `]]`.
 No characters are allowed between the beginning `--` and `[[`.
 Sometimes multi-line comments end with `--]]` to make the end easier to see,
 but the `--` is really just part of the multi-line string.
+For example:
+
+```lua
+--[[
+This is a multi-line comment
+that could contain Lua code
+which is temporarily disabled.
+--]]
+```
 
 ## Types
 
@@ -514,6 +524,9 @@ the `tonumber` and `tostring` functions.
 There are no builtin functions for converting
 a boolean to a number, a number to a boolean, or a string to a boolean.
 
+The only values treated as `false` in conditions are `false` and `nil`.
+The number zero and empty strings are not treated as `false`.
+
 The following table shows how to convert each primitive type
 to the other primitive types.
 
@@ -524,16 +537,16 @@ to the other primitive types.
 | string `s`  | `s == "true"` | `tonumber(s)`  | not needed    |
 
 The conversion from a number to a boolean above
-assumes that all numbers except zero should be treated as false.
+assumes that all numbers except zero should be treated as `false`.
 
 The `tonumber` function returns `nil` if the conversion is not possible.
 
 While it is not commonly done, functions can validate the
 types of arguments passed to them using the `assert` function.
-It takes a condition and
+This takes a condition and
 an optional message that defaults to "assertion failed!".
-It prints the message and terminates the programming
-if the condition evaluates to `false`.
+If the condition evaluates to `false`,
+it prints the message and terminates the program.
 For example:
 
 ```lua
@@ -581,11 +594,13 @@ n2 = io.read("*number")
 
 if n1 and n2 then
   sum = n1 + n2
-  print("Sum: " .. sum)
+  print("Sum: " .. sum) -- The `..` operator performs string concatenation.
 else
   print("An invalid number was entered.")
 end
 ```
+
+For information on reading and writing files, see the "File I/O" section below.
 
 ## Variables
 
