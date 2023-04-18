@@ -1077,6 +1077,9 @@ local add = function (n1, n2)
 end
 ```
 
+All functions are closures. This means they capture in-scope variables
+and can use them later when called.
+
 When a function call passes a single literal string or literal table,
 the parentheses can be omitted.
 For example, the following are equivalent ways
@@ -1175,7 +1178,7 @@ function add(...)
   return sum
 end
 
-print("The sum is " .. add(1, 2, 3) .. ".") -- 6
+print(add(1, 2, 3)) -- 6
 
 function report(name, age, ...)
   local count = select("#", ...)
@@ -1196,43 +1199,19 @@ function report(name, age, ...)
   return s .. "."
 end
 
-print(report("Mark", 61, "running", "biking", "programming"))
--- Mark is 61 years old and likes 3 things.
+print(report("Mark", 62, "running", "biking", "programming"))
+-- Mark is 62 years old and likes 3 things.
 -- They are running, biking, and programming.
-```
-
-Anonymous functions (unnamed) are closures and can be stored in variables.
-For example:
-
-```lua
-product = function(n1, n2)
-  return n1 * n2
-end
-
-print(product(2, 3)) -- 6
-```
-
-There are two ways to call functions defined in a module/library.
-
-```lua
--- Approach #1
-library_name.function_name(target_value, arg1, arg2)
-
--- Approach #2
--- This implicitly passes `target_value` as the first argument.
--- Does this only work when the type of `target_value`
--- matches `library_name`?
-TODO: I'm still confused about this usage!
-target_value:function_name(arg1, arg2)
 ```
 
 ## Default Parameter Values
 
 Lua does not provide an explicit way to define
 default values for function parameters.
-A workaround is to implement a function to have table parameter and
-specify default values in that table using the `setmetatable` function.
+There are approaches to implement this.
 
+The first approach is to accept a table argument and
+specify default values in that table using the `setmetatable` function.
 For example:
 
 ```lua
@@ -1248,8 +1227,8 @@ print(volume({width=2, depth=4})) -- 8
 print(volume({})) -- 1
 ```
 
-It's debatable whether this is better than the following approach
-that achieves the same result without using a metatable:
+The second approach achieves the same result without using a metatable.
+For example:
 
 ```lua
 function volume(t)
