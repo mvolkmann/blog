@@ -756,8 +756,7 @@ For example:
 haiku = [[
 Out of memory.
 We wish to hold the sky.
-But we never will.
-]]
+But we never will.]]
 ```
 
 There can be any number of `=` characters between the
@@ -768,7 +767,8 @@ closing square brackets with a different number of equal signs between them.
 
 Strings are indexed starting from 1 instead of 0.
 
-Use the `..` operator to concatenate strings.
+To concatenate strings, use the `..` operator.
+This creates a new string and does not modifier either operand.
 For example, `fullName = firstName .. ' ' .. lastName`.
 
 Strings are immutable.
@@ -778,51 +778,67 @@ which is described later.
 
 ### Patterns
 
-A Lua pattern is a string containing character classes and magic characters.
-These provided a simpler alternative to regular expressions
+A pattern is a string containing character classes and magic characters.
+These provide a simpler alternative to regular expressions
 which are not directly supported in Lua.
+
 The code to support patterns is much smaller than
 the code required to support regular expressions.
 This is important since one of the goals of Lua to is to be small.
 
 Patterns are used in the string library functions `find`, `gfind`, and `gsub`.
 
-The character classes include:
+Character classes are used to match sets of characters.
+The provided character classes begin with a `%` character
+rather than a backslash as they do in regular expression.
+This was chosen because Lua patterns are strings and
+strings use the backslash character to escape characters (ex. `\n`).
+If character classes also began with a backslash,
+they would need to be escaped (ex. `\\d` instead of `%d`).
 
-| Character Class | Meaning                             |
-| --------------- | ----------------------------------- |
-| `.`             | all characters                      |
-| `%a`            | letters                             |
-| `%c`            | control characters                  |
-| `%d`            | digits                              |
-| `%l`            | lower case letters                  |
-| `%p`            | punctuation characters              |
-| `%s`            | space characters                    |
-| `%u`            | upper case letters                  |
-| `%w`            | alphanumeric characters             |
-| `%x`            | hexadecimal digits                  |
-| `%z`            | the character with representation 0 |
+These include:
 
+| Character Class | Meaning                            |
+| --------------- | ---------------------------------- |
+| `%a`            | letters                            |
+| `%c`            | control characters                 |
+| `%d`            | digits                             |
+| `%g`            | printable characters except spaces |
+| `%l`            | lowercase letters                  |
+| `%p`            | punctuation characters             |
+| `%s`            | space characters                   |
+| `%u`            | uppercase letters                  |
+| `%w`            | alphanumeric characters            |
+| `%x`            | hexadecimal digits                 |
+
+Custom character sets can be defined by listing individual characters
+and/or ranges of characters inside square brackets.
+For example:
+
+- `[13579]` describes odd, single-digit numbers
+- `[abcA-C]` allows the characters `a`, `b`, `c`, `A`, `B`, and `C`
+- `[%da-fA-F]` is the equivalent of `%x` to describe a hexadecimal digit
+
+Characters referred to as "magic characters"
+have special meaning in patterns.
+To include them as literal characters without their special meaning,
+precede them with a `%` character.
 The magic characters include:
 
-| Magic Character | Meaning                                            |
-| --------------- | -------------------------------------------------- |
-| `(`             |                                                    |
-| `)`             |                                                    |
-| `.`             |                                                    |
-| `%`             | escapes the other magic characters (ex. %$ is a $) |
-| `+`             |                                                    |
-| `-`             |                                                    |
-| `*`             |                                                    |
-| `?`             |                                                    |
-| `[`             |                                                    |
-| `^`             |                                                    |
-| `$`             |                                                    |
-
-A "char-set" is a custom character class defined by
-listing allowed characters inside square brackets.
-For example, `[13579]` describes odd, single-digit numbers and
-`[%da-fA-F]` is the equivalent of `%x` for describe a hexadecimal digit.
+| Magic Character | Meaning                                             |
+| --------------- | --------------------------------------------------- |
+| `^`             | start anchor or negates a character class           |
+| `$`             | end anchor                                          |
+| `.`             | matches any single character                        |
+| `?`             | zero or one                                         |
+| `*`             | zero or more                                        |
+| `+`             | one or more                                         |
+| `[`             | begins a character class                            |
+| `]`             | ends a character class                              |
+| `-`             | forms a range in a custom character class           |
+| `(`             | begins a capture group                              |
+| `)`             | ends a capture group                                |
+| `%`             | escapes a magic character (ex. `%$` represents `$`) |
 
 TODO: Add content from https://www.lua.org/pil/20.2.html.
 
