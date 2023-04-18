@@ -1959,31 +1959,60 @@ TODO: Add this based on https://www.youtube.com/watch?v=1BFoprD30dE&t=97s.
 
 ## Metamethods
 
-TODO: See your metamethods.lua file.
+Metamethods are special methods from a predefined list
+that can be defined in a metatable.
+Many of them define the functionality of Lua operators
+on tables associated with the metatable.
 
-Metamethods enable defining the functionality of Lua operators.
-TODO: Verify that all of these work. Maybe \_\_le isn't supported.
+The following metamethods define the operation of mathematical operators.
+
+| Metamethod | Operator |
+| ---------- | -------- |
+| `__add`    | `+`      |
+| `__sub`    | `-`      |
+| `__mul`    | `*`      |
+| `__div`    | `/`      |
+| `__idiv`   | `//`     |
+| `__mod`    | `%`      |
+| `__pow`    | `^`      |
+
+The following metamethods define the operation of logical operators.
+
+| Metamethod | Operator |
+| ---------- | -------- |
+| `__eq`     | `==`     |
+| `__lt`     | `<`      |
+| `__le`     | `<=`     |
+
+There are no metamethods that correspond to the logical operators
+`~=`, `>`, and `>=`.
+Those are derived from the negation of the other logical operators.
+
+There are no metamethods that correspond to the logical operators
+`and`, `or`, and `not`.
+
+The following metamethods define the operation of bitwise operators.
+
+| Metamethod | Operator |
+| ---------- | -------- |
+| `__band`   | `&`      |
+| `__bor`    | `\|`     |
+| `__bxor`   | `~`      |
+| `__bnot`   | `!`      |
+| `__shl`    | `<<`     |
+| `__shr`    | `>>`     |
+
+The following metamethods define the operation other operators.
 
 | Metamethod | Operator    |
 | ---------- | ----------- |
-| `__add`    | `+`         |
-| `__sub`    | `-`         |
-| `__mul`    | `*`         |
-| `__div`    | `/`         |
-| `__mod`    | `%`         |
-| `__pow`    | `^`         |
 | `__concat` | `..`        |
 | `__len`    | `#`         |
-| `__eq`     | `==`        |
-| `__ne`     | `~=`        |
-| `__lt`     | `<`         |
-| `__le`     | `<=`        |
-| `__gt`     | `>`         |
-| `__ge`     | `>=`        |
 | `__unm`    | `-` (unary) |
 
 Metamethods also support implementing functions
-that are called when specific things occur.
+that are called when specific things occur
+that are unrelated to operators.
 
 | Metamethod    | Operator                                        |
 | ------------- | ----------------------------------------------- |
@@ -1993,14 +2022,22 @@ that are called when specific things occur.
 | `__metatable` | prevents changes to metatable; see below        |
 | `__mode`      | returns a string; see below                     |
 | `__newindex`  | called when an entry is added to the table      |
+| `__pairs`     | `pairs` function                                |
 | `__tostring`  | returns a string representation                 |
+
+TODO: Verify that all of these work. Maybe \_\_le isn't supported.
 
 When the `__metatable` function is defined,
 the metatable cannot be modified and this returns an error message.
 
-When the `__mode` function returns a string that contains `k`,
-keys are weak. When it contains `v`, values are weak.
+When the `__mode` function returns a string.
+When it contains `k`, the keys are weak.
+When it contains `v`, the values are weak.
 Both can be true.
+
+The `__pairs` method method enables iterating over metatable entries.
+
+TODO: See your metamethods.lua file.
 
 ## Evaluting Code at Runtime
 
