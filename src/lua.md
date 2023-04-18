@@ -73,10 +73,12 @@ Cons of Lua include:
   but indexing into such strings does not account for their size.
   See {% aTargetBlank "http://lua-users.org/wiki/LuaUnicode", "Lua Unicode" %}.
 
-- variables and functions are global by default,
+- variables and functions are global by default,s
   but can be declared `local`
 
-TODO: Get more from http://notebook.kulchenko.com/programming/lua-good-different-bad-and-ugly-parts.
+For a more extensive list of pros and cons, see {% aTargetBlank
+"http://notebook.kulchenko.com/programming/lua-good-different-bad-and-ugly-parts",
+"Lua: Good, bad, and ugly parts" %}.
 
 ## Used By
 
@@ -101,26 +103,30 @@ which allows you to see more in-depth errors before runtime.
 You can specify the type of a given variable yourself,
 or you can have Luau infer the type for you."
 
-For a more extensive list, see the {% aTargetBlank
+For a more extensive list of Lua use, see the {% aTargetBlank
 "https://en.wikipedia.org/wiki/List_of_applications_using_Lua",
 "List of applications using Lua" %} Wikipedia page.
 
 ## Resources
 
 - {% aTargetBlank "https://www.lua.org/manual/", "Lua Reference Manual" %}
-- {% aTargetBlank "https://www.amazon.com/exec/obidos/ASIN/8590379868/lua-pilindex-20", "Programming in Lua" %} book
-- {% aTargetBlank "https://www.lua.org/gems/", "Lua Programming Gems" %}
-- {% aTargetBlank "https://github.com/nanotee/nvim-lua-guide", "Getting started using Lua in Neovim" %}
 - {% aTargetBlank "https://www.lua.org/pil/", "Programming in Lua" %} official book
+- {% aTargetBlank "https://www.lua.org/gems/", "Lua Programming Gems" %} -
+  "a collection of articles recording some of the wisdom and practice
+  on how to program well in Lua"
 - {% aTargetBlank "https://www.youtube.com/watch?v=XxcSvnEIUq4", "Why (and why not) Lua" %} talk by Roberto Ierusalimschy (2019)
+- {% aTargetBlank "https://github.com/pallene-lang/pallene", "Pallene" %},
+  "a statically typed and ahead-of-time compiled sister language to Lua,
+  with a focus on performance"
 - {% aTargetBlank "https://www.youtube.com/watch?v=H3inzGGFefg", "Lua and Pallene" %} talk by Roberto Ierusalimschy (2022)
-- {% aTargetBlank "https://github.com/pallene-lang/pallene", "Pallene" %}
+- {% aTargetBlank "https://www.youtube.com/@teej_dv", "TJ DeVries" %} YouTube channel
+- {% aTargetBlank "https://github.com/nanotee/nvim-lua-guide", "Getting started using Lua in Neovim" %}
 
 ## Cheat Sheets
 
-- {% aTargetBlank "https://www.codecademy.com/learn/learn-lua/modules/learn-lua-introduction/cheatsheet", "codecademy" %}
 - {% aTargetBlank "https://devhints.io/lua", "DevHints.io" %}
 - {% aTargetBlank "https://cheatography.com/srgmc/cheat-sheets/lua-scripting-5-1/", "Cheatography" %}
+- {% aTargetBlank "https://www.codecademy.com/learn/learn-lua/modules/learn-lua-introduction/cheatsheet", "codecademy" %}
 
 ## Installing
 
@@ -128,7 +134,7 @@ Lua can be installed in macOS using Homebrew.
 Enter `brew install lua` to install it.
 Enter `lua -v` to verify that it worked and see the version.
 
-For installing in other operating systems, see
+To install in other operating systems, see
 {% aTargetBlank "http://www.lua.org/start.html", "Getting Started" %}.
 
 To experiment with Lua on the web without installing anything,
@@ -140,7 +146,7 @@ Lua programs can be compiled to bytecode before runtime.
 This enables faster program startup because
 runtime bytecode generation is no longer needed.
 
-The performance of standard Lua is worse that many scripting languages,
+The performance of standard Lua is worse than many scripting languages,
 including Python, unless it is compiled
 ahead of time (AOT) or just in time (JIT).
 
@@ -148,7 +154,7 @@ There are multiple ways to produce and execute Lua bytecode.
 
 For a comparison of the performance of each approach, see {% aTargetBlank
 "https://eklausmeier.goip.de/blog/2020/05-14-performance-comparison-pallene-vs-lua-5-1-5-2-5-3-5-4-vs-c/",
-"Performance Comparison Pallene vs. Lua 5.1, 5.2, 5.3, 5.4 vs. C" %}.
+"Performance Comparison Pallene vs. Lua vs. C" %}.
 
 ### luac
 
@@ -171,7 +177,7 @@ to `luac` that produces smaller bytecode files.
 LuaJIT also executes bytecode files and provides runtime optimizations
 that typically result in better performance.
 
-LuaJIT is implemented by a separate team from the team that maintains Lua.
+LuaJIT is implemented by a separate team from the one that maintains Lua.
 
 From {% aTargetBlank "https://api7.ai/learning-center/openresty/luajit-vs-lua",
 "api7.ai" %}:
@@ -192,8 +198,8 @@ From {% aTargetBlank "https://api7.ai/learning-center/openresty/luajit-vs-lua",
 
 To install LuaJIT:
 
-- Download the source from {% aTargetBlank "", "" %}
-  by entering `git clone https://luajit.org/git/luajit.git`.
+- Download the source by entering
+  `git clone https://luajit.org/git/luajit.git`.
 - Enter `cd luajit`
 - In macOS, enter `export MACOSX_DEPLOYMENT_TARGET={version}`
   where `version` is a value like `13.2`.
@@ -205,7 +211,8 @@ To install LuaJIT:
 To generate a bytecode file from a Lua program,
 enter a command like `luajit -b demo.lua demo.out`
 To execute a bytecode file, enter a command like `luajit demo.out`.
-This will start faster than entering `luajit demo.lua`.
+This will start faster than entering `luajit demo.lua`
+which performs just-in-time compilation at runtime.
 
 ### Pallene
 
@@ -220,18 +227,14 @@ bypassing the unfriendly syntax and performance overhead of the Lua-C API.
 Compared to LuaJIT, Pallene aims to offer
 more predictable run-time performance."
 
-Pallene is the name of a Saturn moon.
+Pallene is the name of one of the moons of Saturn.
 The name of the moon is pronounced "puh lee nee",
 but the language designer pronounces it "pah lean".
 
 One use case is to write performance-critical modules in Pallene,
 compile them, and require them in Lua code.
 
-To install Pallene:
-
-- Install a special version of Lua that exposes some required C APIs.
-- Install Luarocks.
-- Install Pallene with `luarocks make pallend-dev-1.rockspace`.
+To install Pallene, see the detailed instructions at the Pallene link above.
 
 ### Teal
 
@@ -244,18 +247,17 @@ table types described by their allowed key and value types.
 
 To install Teal, enter `luarocks install tl`.
 
+To perform type checking of a Teal script without running it,
+enter `tl check {file-name}.tl`.
+
+To perform type checking and generate a `.lua` file
+with type annotations removed, enter `tl gen {file-name}.tl`.
+
 To run a Teal script, enter `tl run {file-name}.tl`.
-
-To perform type checking of a Teal script, enter `tl check {file-name}.tl`.
-
-To perform type checking and generate a `.lua` file with type annotations removed,
-enter `tl gen {file-name}.tl`.
-
-Also see `tl build`.
 
 To add support for Teal in Neovim, create the file
 `~/.config/nvim/lua/user/plugins/vim-teal.lua` containing the following.
-This may require also using ALE.
+This may require also using ALE to get syntax highlighting.
 
 ```lua
 return {
@@ -263,7 +265,7 @@ return {
 }
 ```
 
-Here is an example Teal script that implements {% aTargetBlank
+The following code demonstrates using Teal to implement {% aTargetBlank
 "https://en.wikipedia.org/wiki/Fizz_buzz", "Fizz buzz" %}.
 
 ```lua
@@ -292,7 +294,7 @@ fizzBuzz(30, {
 })
 ```
 
-## VS Code Setup
+## VS Code Support
 
 VS Code has great support for Lua.
 
@@ -305,7 +307,6 @@ To disable specific diagnostics,
 open Settings, filter on "Lua", scroll down to "Lua > Diagnostics: Disable",
 click the "Add Item" button, select a diagnostic name from the drop-down,
 and click the "OK" button.
-For example, you may wish to disable "lowercase-global".
 
 The {% aTargetBlank "https://github.com/Koihik/vscode-lua-format",
 "vscode-lua-format" %} extension from Koihik
@@ -353,19 +354,18 @@ chunk ::= {stat [';']} [laststat[';']]
 
 block ::= chunk
 
-// TODO: Fix formatting of this part!!!
-stat ::=
-varlist1 '=' explist1 |
-local namelist ['=' explist1] |
-if exp then block {elseif exp then block} [else block] end |
-do block end |
-while exp do block end |
-repeat block until exp |
-for Name '=' exp ',' exp [',' exp] do block end |
-for namelist in explist1 do block end |
-function funcname funcbody |
-local function Name funcbody |
-functioncall |
+stat ::=  
+ varlist1 '=' explist1 |  
+ local namelist ['=' explist1] |  
+ if exp then block {elseif exp then block} [else block] end |  
+ do block end |  
+ while exp do block end |  
+ repeat block until exp |  
+ for Name '=' exp ',' exp [',' exp] do block end |  
+ for namelist in explist1 do block end |  
+ function funcname funcbody |  
+ local function Name funcbody |  
+ functioncall
 
 laststat ::= return [explist1] | break
 
@@ -379,8 +379,9 @@ namelist ::= Name {',' Name}
 
 explist1 ::= {exp ','} exp
 
-exp ::= nil | false | true | Number | String | '...' |
-function | prefixexp | tableconstructor | exp binop exp | unop exp
+exp ::=  
+ nil | false | true | Number | String | '...' |  
+ function | prefixexp | tableconstructor | exp binop exp | unop exp
 
 prefixexp ::= var | functioncall | '(' exp ')'
 
@@ -402,8 +403,10 @@ field ::= '[' exp ']' '=' exp | Name '=' exp | exp
 
 fieldsep ::= ',' | ';'
 
-binop ::= '+' | '-' | '\*' | '/' | '^' | '%' | '..' | '<' | '<=' | '>' | '>=' | '==' | '~=' |
-and | or
+binop ::=  
+ '+' | '-' | '\*' | '/' | '^' | '%' | '..' |  
+ '<' | '<=' | '>' | '>=' | '==' | '~=' |  
+ and | or
 
 unop ::= '-' | not | '#'
 </code>
@@ -412,35 +415,41 @@ unop ::= '-' | not | '#'
 
 ## Source Files
 
-Source files have a `.lua` extension.
-To execute a source file, enter `lua filename.lua`.
+Lua source files have a `.lua` extension.
 
-A source file can use the variables and functions
-defined in another source file by using the `require` function.
-For example:
+A source file can use variables and functions defined in
+another source file by using the `require` function.
+The following statement loads the file `other.lua`:
 
 ```lua
 require "other"
 ```
 
+For more information on using `require`, see the "Modules" section.
+
 ## Running Code
 
-To start a Lua REPL, enter `lua` and then enter Lua statements.
+To use the Lua {% aTargetBlank
+"https://en.wikipedia.org/wiki/Read–eval–print_loop", "REPL" %},
+enter `lua` and then enter Lua statements.
 To exit the REPL, press ctrl-c or ctrl-d.
 
-To run a Lua program, enter `lua {filename}.lua` or `luajit {filename}.lua`.
-This runs the source file through the Lua interpreter to produce
-bytecode and uses the Lua virtual machine to execute the bytecode.
+To run a Lua program, enter `lua {filename}.lua`.
+This runs the Lua interpreter on the source file to produce bytecode
+and uses the Lua virtual machine to execute the bytecode.
+Alternatively, consider using `luajit`.
 
 There are several tools that claim to
 produce executable files from Lua programs.
-But none seem to be popular or actively maintained.
+However, none of them seem to be popular or actively maintained.
 
 ## Keywords
 
-Lua only defines 22 keywords.
-Some of the keywords such as `end`, `and`, `or`, and `then`
+The Lua programming language only defines 22 keywords.
+Some of the keywords such as `then`, `and`, `or`, and `end`
 make the syntax similar to the Ruby programming language.
+
+Each of the 22 keywords are summarized below.
 
 Boolean literal values:
 
@@ -464,7 +473,7 @@ Iteration:
 - `for`: loop over numbers or pairs
 - `in`: specifies what to loop over
 - `while`: top-tested loop
-- `repeat` and `until`: bottom-tested loop
+- `repeat` and `until`: bottom-tested loo
 - `break`: exit loop early
 
 Logical Operators:
@@ -2049,7 +2058,7 @@ print(some(function(n) return n > 3 end, numbers))  -- true
 print(every(function(n) return n < 7 end, numbers)) -- true
 ```
 
-The functions `map`, `filter`, and `reduce (and many more)
+The functions `map`, `filter`, and `reduce` (and many more)
 can be found in the {% aTargetBlank "https://luafun.github.io/",
 "Lua Functional Library" %}.
 
@@ -2371,6 +2380,7 @@ local my_module = {} -- a table
 
 my_module.some_variable = "some value"
 
+-- Function names containing a dot cannot be declared `local`.
 function my_module.some_function(p1, p2)
   print("some_function was passed " .. p1 .. " and " .. p2)
 end
@@ -2378,12 +2388,23 @@ end
 return my_module
 ```
 
+The following code shows an equivalent way to write the code above:
+
+```lua
+return {
+  some_variable = "some value",
+  some_function = function(p1, p2)
+    print("some_function was passed " .. p1 .. " and " .. p2)
+  end
+}
+```
+
 To use this module:
 
 ```lua
-mm = require("my_module")
-mm.some_function(1, 2)
-print(mm.some_variable)
+local mm = require("my_module")
+print(mm.some_variable) -- some value
+mm.some_function(1, 2) -- some_function was passed 1 and 2
 ```
 
 A Lua "package" is a collection of modules.
@@ -2695,8 +2716,6 @@ examples here that should be preceded by `local`.
 
 OO-like objects hold their properties and methods in a table.
 Does each object get its own copy of every method?
-
-{% include "_intersection-observer-headings.html" %}
 
 you can use the or operator to avoid setting instance values to know when they are missing in the passed table.
 but beware of cases where are the table passed in contains false values because those will not be used if you simply check with the or operator.

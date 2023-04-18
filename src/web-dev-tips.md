@@ -6547,7 +6547,7 @@ useful to define the alias `nr` to do this.
 The details on creating this alias differ based on the shell being used.
 Some examples include:
 
-- bash: `alias nr="npm run"
+- bash: `alias nr="npm run"`
 - zsh: same as bash
 - fish: `abbr --add nr npm run`
 - nushell: `alias nr = npm run`

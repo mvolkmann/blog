@@ -277,6 +277,10 @@ is a free, open source, modern fork of the
 It provides built-in Language Server Protocol (LSP) support,
 asynchronous I/O, and support for Lua scripting.
 
+Neovim uses {% aTargetBlank "https://luajit.org", "LuaJIT" %}
+which provides just-in-time compilation of Lua code,
+resulting in better performance.
+
 The Neovim project started in 2014 and was officially released in November 2015.
 
 The source for Neovim is in a public {% aTargetBlank
