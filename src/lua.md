@@ -85,7 +85,8 @@ For a more extensive list of pros and cons, see {% aTargetBlank
 Notable uses of Lua include:
 
 - {% aTargetBlank "https://www.angrybirds.com", "Angry Birds" %} game
-- {% aTargetBlank "http://www.legoengineering.com/platform/nxt/", "Lego Mindstorms NXT" %} robotics platform
+- {% aTargetBlank "http://www.legoengineering.com/platform/nxt/",
+  "Lego Mindstorms NXT" %} robotics platform
 - {% aTargetBlank "https://www.minecraft.net/", "Minecraft" %} game
 - {% aTargetBlank "https://neovim.io", "Neovim" %} text editor
 - {% aTargetBlank "https://redis.io", "Redis" %} database
@@ -114,19 +115,25 @@ For a more extensive list of Lua use, see the {% aTargetBlank
 - {% aTargetBlank "https://www.lua.org/gems/", "Lua Programming Gems" %} -
   "a collection of articles recording some of the wisdom and practice
   on how to program well in Lua"
-- {% aTargetBlank "https://www.youtube.com/watch?v=XxcSvnEIUq4", "Why (and why not) Lua" %} talk by Roberto Ierusalimschy (2019)
+- {% aTargetBlank "https://www.youtube.com/watch?v=XxcSvnEIUq4",
+  "Why (and why not) Lua" %} talk by Roberto Ierusalimschy (2019)
 - {% aTargetBlank "https://github.com/pallene-lang/pallene", "Pallene" %},
   "a statically typed and ahead-of-time compiled sister language to Lua,
   with a focus on performance"
-- {% aTargetBlank "https://www.youtube.com/watch?v=H3inzGGFefg", "Lua and Pallene" %} talk by Roberto Ierusalimschy (2022)
-- {% aTargetBlank "https://www.youtube.com/@teej_dv", "TJ DeVries" %} YouTube channel
-- {% aTargetBlank "https://github.com/nanotee/nvim-lua-guide", "Getting started using Lua in Neovim" %}
+- {% aTargetBlank "https://www.youtube.com/watch?v=H3inzGGFefg",
+  "Lua and Pallene" %} talk by Roberto Ierusalimschy (2022)
+- {% aTargetBlank "https://www.youtube.com/@teej_dv", "TJ DeVries" %}
+  YouTube channel
+- {% aTargetBlank "https://github.com/nanotee/nvim-lua-guide",
+  "Getting started using Lua in Neovim" %}
 
 ## Cheat Sheets
 
 - {% aTargetBlank "https://devhints.io/lua", "DevHints.io" %}
-- {% aTargetBlank "https://cheatography.com/srgmc/cheat-sheets/lua-scripting-5-1/", "Cheatography" %}
-- {% aTargetBlank "https://www.codecademy.com/learn/learn-lua/modules/learn-lua-introduction/cheatsheet", "codecademy" %}
+- {% aTargetBlank "https://cheatography.com/srgmc/cheat-sheets/lua-scripting-5-1/",
+  "Cheatography" %}
+- {% aTargetBlank "https://www.codecademy.com/learn/learn-lua/modules/learn-lua-introduction/cheatsheet",
+  "codecademy" %}
 
 ## Installing
 
@@ -513,6 +520,23 @@ which is temporarily disabled.
 --]]
 ```
 
+To create a comment around lines that already contain multi-line comments,
+include any number of equal sizes between the square brackets.
+This is useful for commented out a section of code
+that contains a commented out section.
+For example:
+
+```lua
+--[=[
+  print("one")
+  --[[
+  print("two")
+  print("three")
+  --]]
+  print("four")
+--]=]
+```
+
 ## Types
 
 Lua uses dynamic types.
@@ -568,7 +592,8 @@ The `print` function adds a tab character between each value
 and a newline at the end of its output.
 I find its use of tabs annoying and there is no way to
 configure it to use spaces instead of tabs.
-The `print` function can be called with no arguments to only write a newline character.
+The `print` function can be called with no arguments
+to only write a newline character.
 
 The `io.write` function does not add any characters between values
 and does not add a newline at the end.
@@ -605,16 +630,18 @@ end
 
 For information on reading and writing files, see the "File I/O" section below.
 
-## Variables
+## Names
 
-Variable names can contain letters, digits, and underscores,
-but not any other symbols.
-They cannot start with a digit.
-In multi-word names the words can be separated by underscores (preferred)
+Variable and function names can contain letters, digits, and underscores,
+but no other symbols. They cannot start with a digit.
+
+In multi-word names, the words can be separated by underscores (preferred)
 or written in camel-case.
 For example, `one_long_name` or `oneLongName`.
 
 Variable names, function names, and table keys are case-sensitive.
+
+## Variables
 
 To assign a value to a variable, use the `=` operator.
 
@@ -622,11 +649,15 @@ Variables with no assigned value have the value `nil`.
 
 New values of any type can be assigned to a variable at any time.
 
-The `type(someVar)` function returns a string containing
+The `type(some_variable)` function returns a string containing
 the type name of the variable value.
 This can be `nil`, `boolean`, `number`, `string`,
-`table`, `function`, or `thread`.
-TODO: Is `userdata` a type?
+`table`, `function`, `thread`, or `userdata`.
+
+The `thread` type represents a coroutine
+which is described in the "Coroutines" section below.
+
+The `userdata` type represents raw data provided through the C API.
 
 Multi-variable assignment is supported.
 For example:
@@ -637,7 +668,7 @@ a, b = b, a -- swaps values
 ```
 
 Variables are global by default, even when defined in a different source file.
-Use the `local` keyword to make them only exist in their scope.
+Use the `local` keyword to confine their use to the current scope.
 It's too bad the designers didn't choose to make variables local by default
 and use a `global` keyword to make them exist outside their scope.
 
@@ -648,7 +679,7 @@ a = 1 -- global, even if assigned inside a function
 local b = 2 -- local to the current scope
 ```
 
-It is a convention, but not enforced, for
+It is an unenforced convention for
 global variables to begin with a capital letter and
 for the names of constants to be all uppercase.
 
@@ -667,23 +698,39 @@ print(_G.MyGlobal) -- demo
 
 ## Booleans
 
-Boolean literal values are `true` and `false`.
+The boolean literal values are `true` and `false`.
 
-In conditions the only values treated as false are `false` and `nil`.
+In conditions, the only values treated as false are `false` and `nil`.
 The number zero, an empty string, and an empty table are all treated as true.
 
-Variables can be set to a condition to get a boolean value.
-For example, `is_bigger = my_score > your_score`
-sets `is_bigger` to `true` or `false`.
+Variables can be set to a condition to obtain a boolean value.
+For example, `is_higher = my_score > your_score`
+sets `is_higher` to `true` or `false`.
 
 ## Numbers
 
-Numbers in Lua are all double precision floating point numbers.
+The `number` type typically represents numbers with
+64-bit integers or double precision floats.
+However, implementations are free to use other sizes.
+
+Lua automatic converts numbers between integer and float representations
+as needed.
+
+The `math.type` function returns a string indicating
+the specific type of a number. For example:
+
+```lua
+local i = 19
+print(type(i), math.type(i)) -- number  integer
+
+local f = 3.14
+print(type(f), math.type(f)) -- number   float
+```
 
 ## Strings
 
-The string type is used single and multiple character text.
-Lua does not have a dedicated type for single characters.
+The `string` type is used for single and multiple character text.
+There is no dedicated type for single characters.
 
 Strings can be delimited with either single or double quotes.
 For example, `'Hello World!'` or `"Hello World!"`.
@@ -699,10 +746,10 @@ For example:
 - `\'` produces a single quote inside a string delimited by single quotes
 - `\\` produces a backslash character
 
-Multi-line strings are delimiting with `[[` and `]]`.
-This syntax is referred to as a "long brackets".
-A newline after `[[` is ignored.
-A newline before `]]` is not ignored.
+Multi-line strings are delimited by `[[` and `]]`.
+This syntax is referred to as a "long strings".
+A newline after `[[` is ignored and a newline before `]]` is not ignored.
+Otherwise newlines and indentation inside the square brackets are retained.
 For example:
 
 ```lua
@@ -716,14 +763,16 @@ But we never will.
 There can be any number of `=` characters between the
 opening and closing square brackets as long as the count matches.
 For example, `[==[some text]==]`.
-
-Newlines and indentation inside the square brackets are retained.
+This enables creating strings that contain `]]` or
+closing square brackets with a different number of equal signs between them.
 
 Strings are indexed starting from 1 instead of 0.
 
 Use the `..` operator to concatenate strings.
 For example, `fullName = firstName .. ' ' .. lastName`.
 
+Strings are immutable.
+Operations on them create new strings.
 String operations are supported by the `string` standard library
 which is described later.
 
@@ -2510,11 +2559,12 @@ print(g:toString()) -- call method; Geoffrey is a giraffe and says nothing.
 print(g:report()) -- call method; Geoffrey giraffe is 18 feet tall.
 ```
 
-## Multitasking
+## Coroutines
 
 Lua is single-threaded like JavaScript.
 It supports collaborative multitasking with coroutines.
-Coroutines are like threads, but they do not run in parallel.
+At any point in time on only one coroutine is running.
+They do not run in parallel.
 
 ```lua
 -- TODO: Can this function have parameters?
