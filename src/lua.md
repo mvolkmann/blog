@@ -776,51 +776,20 @@ Operations on them create new strings.
 String operations are supported by the `string` standard library
 which is described later.
 
-### Patterns
+## Patterns
 
-A pattern is a string containing character classes and magic characters.
-These provide a simpler alternative to regular expressions
+A pattern is a string containing magic characters and character classes.
+They provide a simpler alternative to regular expressions
 which are not directly supported in Lua.
 
 The code to support patterns is much smaller than
 the code required to support regular expressions.
 This is important since one of the goals of Lua to is to be small.
 
-Patterns are used in the string library functions `find`, `gfind`, and `gsub`.
+Patterns are used in the string library functions
+`find`, `gmatch`, `gsub`, and `match`.
 
-Character classes are used to match sets of characters.
-The provided character classes begin with a `%` character
-rather than a backslash as they do in regular expression.
-This was chosen because Lua patterns are strings and
-strings use the backslash character to escape characters (ex. `\n`).
-If character classes also began with a backslash,
-they would need to be escaped (ex. `\\d` instead of `%d`).
-
-These include:
-
-| Character Class | Meaning                            |
-| --------------- | ---------------------------------- |
-| `%a`            | letters                            |
-| `%c`            | control characters                 |
-| `%d`            | digits                             |
-| `%g`            | printable characters except spaces |
-| `%l`            | lowercase letters                  |
-| `%p`            | punctuation characters             |
-| `%s`            | space characters                   |
-| `%u`            | uppercase letters                  |
-| `%w`            | alphanumeric characters            |
-| `%x`            | hexadecimal digits                 |
-
-Custom character sets can be defined by listing individual characters
-and/or ranges of characters inside square brackets.
-For example:
-
-- `[13579]` describes odd, single-digit numbers
-- `[abcA-C]` allows the characters `a`, `b`, `c`, `A`, `B`, and `C`
-- `[%da-fA-F]` is the equivalent of `%x` to describe a hexadecimal digit
-
-Characters referred to as "magic characters"
-have special meaning in patterns.
+Characters referred to as "magic characters" have special meaning in patterns.
 To include them as literal characters without their special meaning,
 precede them with a `%` character.
 The magic characters include:
@@ -839,6 +808,37 @@ The magic characters include:
 | `(`             | begins a capture group                              |
 | `)`             | ends a capture group                                |
 | `%`             | escapes a magic character (ex. `%$` represents `$`) |
+
+Character classes are used to match sets of characters.
+The provided character classes begin with a `%` character
+rather than a backslash as they do in regular expression.
+This was chosen because Lua patterns are strings and
+strings use backslash to escape characters (ex. `\n`).
+If character classes also began with a backslash,
+they would need to be escaped (ex. `\\d` instead of `%d`).
+
+The provided character classes include:
+
+| Character Class | Meaning                            |
+| --------------- | ---------------------------------- |
+| `%a`            | letters                            |
+| `%c`            | control characters                 |
+| `%d`            | digits                             |
+| `%g`            | printable characters except spaces |
+| `%l`            | lowercase letters                  |
+| `%p`            | punctuation characters             |
+| `%s`            | space characters                   |
+| `%u`            | uppercase letters                  |
+| `%w`            | alphanumeric characters            |
+| `%x`            | hexadecimal digits                 |
+
+Custom character classes can be defined by listing individual characters
+and/or ranges of characters inside square brackets.
+For example:
+
+- `[13579]` describes odd, single-digit numbers
+- `[abcA-C]` allows the characters `a`, `b`, `c`, `A`, `B`, and `C`
+- `[%da-fA-F]` is the equivalent of `%x` to describe a hexadecimal digit
 
 TODO: Add content from https://www.lua.org/pil/20.2.html.
 
@@ -864,7 +864,8 @@ It returns a new version of the source string with the replacements made.
 For example:
 
 ```lua
-local s = "The 2nd time was easier than the 1st, and the 4th was a piece of cake."
+local s =
+  "The 2nd time was easier than the 1st, and the 4th was a piece of cake."
 local pattern = "%d%l%l"
 
 local replTable = {
@@ -872,7 +873,7 @@ local replTable = {
   ["2nd"] = "second",
   ["3rd"] = "third"
 }
--- If no match is found in `replTable`, it keeps the match.
+-- If a key for the match is not found in `replTable`, it keeps the match.
 local s2 = string.gsub(s, pattern, replTable)
 print(s2)
 -- The second time was easier than the first, and the 4th was a piece of cake.
@@ -895,11 +896,12 @@ print(s3)
 Lua supports the following mathematical operators:
 
 - `+` addition (not string concatenation)
-- `-` subtraction or negation
+- `-` subtraction (binary) or negation (unary)
 - `*` multiplication
-- `/` division
-- `%` modulo
-- `^` exponentiation
+- `/` division; ex. `7 / 4` gives `1.75`
+- `//` floor division; ex. `7 // 4` gives `1`
+- `%` modulo; ex. `7 % 4` gives `3`
+- `^` exponentiation; ex. `2 ^ 3` gives `8`
 
 The `++` and `--` operators found in many other programming languages
 are not supported.
@@ -1036,7 +1038,7 @@ end
 print(add(2, 3)) -- 5
 ```
 
-All Lua function are anonymous.
+All functions are anonymous.
 The function definition above is just syntactic sugar for
 `add = function (n1, n2) return n1 + n2 end`
 
