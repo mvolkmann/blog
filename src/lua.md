@@ -1247,46 +1247,6 @@ function volume(t)
 end
 ```
 
-## Utility Functions
-
-The following functions are helpful for debugging.
-They can be defined in a file like `utility.lua`
-and required where needed.
-
-```lua
--- Returns a string description of the keys and values in a table.
--- Values can be nested tables.
-function dump(value)
-  if type(value) ~= "table" then
-    return tostring(value)
-  end
-
-  local s = "{ "
-  for k, v in pairs(value) do
-    if type(k) ~= "number" then
-      k = "\"" .. k .. "\""
-    end
-    s = s .. k .. "=" .. dump(v) .. ", " -- recursive
-  end
-  return s .. "} "
-end
-
--- Returns a string containing all the values in a table,
--- each separated by a comma and a space.
--- Values cannot be nested tables.
-function valuesString(obj)
-  if type(obj) ~= "table" then
-    return ""
-  end
-
-  s = ""
-  for index, v in ipairs(obj) do
-    s = s .. v .. ", "
-  end
-  return s:sub(1, -3)
-end
-```
-
 ## Data Structures
 
 Lua only provides one data structure called a "table".
@@ -2197,27 +2157,27 @@ To download the file, enter
 The following code demonstrates basic use of this library:
 
 ```lua
-fun = require("fun")
+local fun = require("fun")
 
-scores = {7, 4, 13}
+local scores = {7, 4, 13}
 
 -- The `map` and `filter` methods returns an iterator.
 -- Calling `:totable()` on an iterator returns a table.
 
 -- Using `map` to double numbers in a table.
-function double(n) return n * 2 end
+local function double(n) return n * 2 end
 doubled_iter = fun.map(double, scores)
 print("Doubled Scores")
 fun.each(print, doubled_iter) -- 14 8 26
 
 -- Using `filter` to get odd numbers from a table.
-function odd(n) return n % 2 == 1 end
+local function odd(n) return n % 2 == 1 end
 odd_iter = fun.filter(odd, scores)
 print("Odd Scores")
 fun.each(print, odd_iter) -- 7 3
 
 -- Using `reduce` to sum numbers in a table.
-function add(a, b) return a + b end
+local function add(a, b) return a + b end
 total = fun.reduce(add, 0, scores)
 print("Total is " .. total) -- 24
 
@@ -2647,6 +2607,51 @@ print(coroutine.status(co)) -- "suspended"
 ```
 
 TODO: How can you create concurrently running threads in Lua?
+
+## Utility Functions
+
+The following functions are helpful for debugging.
+They can be defined in a file like `utility.lua`
+and required where needed.
+
+```lua
+local mod = {}
+
+-- Returns a string description of the keys and values in a table.
+-- Values can be nested tables.
+function mod.dump(value)
+  if type(value) ~= "table" then
+    return tostring(value)
+  end
+
+  local s = "{ "
+  for k, v in pairs(value) do
+    if type(k) ~= "number" then
+      k = "\"" .. k .. "\""
+    end
+    s = s .. k .. "=" .. mod.dump(v) .. ", " -- recursive
+  end
+  if #s > 2 then s = s:sub(1, -3) end        -- removes last comma and space
+  return s .. " }"
+end
+
+-- Returns a string containing all the values in a table,
+-- each separated by a comma and a space.
+-- Values cannot be nested tables.
+function mod.valuesString(obj)
+  if type(obj) ~= "table" then
+    return ""
+  end
+
+  s = ""
+  for index, v in ipairs(obj) do
+    s = s .. v .. ", "
+  end
+  return s:sub(1, -3)
+end
+
+return mod
+```
 
 ## Error Handling
 
