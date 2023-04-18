@@ -1606,7 +1606,7 @@ MyTable:colonOuter(1, 2) -- MyTable address, 1, 2
 
 -- This is equivalent to the previous line.
 -- While this works, it is overly verbose.
-MyTable.colonOuter(MyTable, 1, 2) -- self = MyTable, p1 = 1, p2 = 2
+MyTable.colonOuter(MyTable, 1, 2) -- MyTable address, 1, 2
 ```
 
 ## Metatables
@@ -1617,12 +1617,13 @@ Examples include
 `__tostring` which defines the string representation of a table,
 `__add` which defines how the `+` operator adds a value to a table, and
 `__index` which determines the value that should be returned
-when an attempt is made to access a missing key in a table.
+when an attempt is made to access a missing key.
 
 By default tables do not have a metatable.
-A metatable only becomes useful when it is assigned to a table.
+Metatables are only useful when they are assigned to a table.
 This is done with the `setmetatable(table, metatable)` function.
 The same metatable can be assigned to multiple tables.
+This allows them to share both functionality and data.
 
 The `setmetatable` function returns its first argument
 which is useful when a literal table is passed.
@@ -1633,13 +1634,13 @@ assigned to a given table or `nil` if one has not been assigned.
 The `__index` method can be implemented in two ways.
 It can be a table that supplies default values for missing properties
 or it can be a function that is passed a table and a key.
-We will see both approaches below.
+Both approaches are shown below.
 
 Lua does not support defining classes.
 Instead it uses a combination of tables and functions for everything.
 However, the combination of functions, tables, and metatables
 can be used to simulate classes.
-See the "Metatables" section for details.
+See the "Objected Oriented Programming" section below for details.
 
 TODO: Get examples from metatables.lua!
 
@@ -1658,7 +1659,7 @@ print(getmetatable(my_table)) -- nil; no metatable assigned yet
 -- Its value is a table holding default key/value pairs.
 my_metatable = {__index = {alpha = 1, beta = 2}}
 
--- Associated the metatable with the table.
+-- Associate the metatable with the table.
 setmetatable(my_table, my_metatable)
 
 print(my_table.alpha, my_table.beta, my_table.gamma) -- 7 2 nil
@@ -1680,8 +1681,8 @@ setmetatable(my_table, my_table)
 ```
 
 All these variations produce the same results.
-A downside is that you many encounter all of these approaches
-in code that others write, so it is necessary to understand all of them.
+A downside is that you may encounter all of these approaches in code
+that others write, so it is necessary to understand all of them.
 
 ### Classes
 
