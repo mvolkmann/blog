@@ -1010,7 +1010,8 @@ one that iterates over a range of numbers and
 one that iterates over table entries.
 
 ```lua
--- Use a `for` loop to iterate over a range of numbers with a given step size.
+-- Use a `for` loop to iterate over a range of numbers
+   with a given step size.
 -- The loop variable, `i` in this case, is local to the loop
 -- and cannot be accessed outside it.
 for i = 1, 10, 2 do
@@ -1055,11 +1056,12 @@ like `func`, `fun`, or `fn`.
 
 Parameters are specified in parentheses after the function name
 and are separated by commas.
+The parentheses are required even if there are no parameters.
 
 For example:
 
 ```lua
-function add(n1, n2)
+local function add(n1, n2)
   return n1 + n2
 end
 
@@ -1067,20 +1069,31 @@ print(add(2, 3)) -- 5
 ```
 
 All functions are anonymous.
-The function definition above is just syntactic sugar for
-`add = function (n1, n2) return n1 + n2 end`
+The function definition above is just syntactic sugar for the following:
 
-From the Lua reference manual:
+```lua
+local add = function (n1, n2)
+  return n1 + n2
+end
+```
 
-> A call of the form f{fields} is syntactic sugar for f({fields});
-> that is, the argument list is a single new table.
-> A call of the form f'string' (or f"string" or f[[string]])
-> is syntactic sugar for f('string');
-> that is, the argument list is a single literal string.
+When a function call passes a single literal string or literal table,
+the parentheses can be omitted.
+For example, the following are equivalent ways
+to pass a literal string to a function:
 
-This means that if a function has only one argument and
-the argument is either a literal string or a table constructor,
-calls to the function do not require parentheses.
+```lua
+takeString("some text")
+takeString "some text"
+takeString [[some text]]
+```
+
+Likewise, the following are equivalent ways to pass a table to a function.
+
+```lua
+takTable({1, 2, 3})
+takTable {1, 2, 3}
+```
 
 To avoid writing functions that take a large number of arguments,
 use a parameter that expects a table.
@@ -1090,7 +1103,7 @@ Table entries with no key (array-like)
 can be thought of as positional parameters and
 table entries with a key can be thought of as named parameters.
 
-Primitive parameters are passed by value
+Primitive arguments are passed by value
 and tables are passed by reference.
 For example:
 
@@ -1106,13 +1119,36 @@ b = false
 n = 1
 s = "no"
 t = {x = 1}
-foo(b, n, s, t)
+foo(b, n, s, t) -- only t.x is modified in this scope
 print(b, n, s, t.x) -- false 1 no 2
 ```
 
 Functions in Lua are first-class.
-This means they can take other functions as arguments
-and can return functions.
+This means they can accept other functions as arguments
+and they can return other functions.
+For example:
+
+```lua
+function pow(n1, n2) return n1 ^ n2 end
+
+-- This function accepts another function as an argument.
+function combine(n1, n2, operation)
+  return operation(n1, n2)
+end
+
+print(combine(2, 3, pow)) -- 8.0
+
+-- This function returns another function.
+function makeGreetFn(greeting)
+  return function (name)
+    print(greeting .. " " .. name .. "!")
+  end
+end
+
+local greet = makeGreetFn("Hola");
+
+greet("Mark") -- Hola Mark!
+```
 
 Functions can return multiple values.
 For example:
