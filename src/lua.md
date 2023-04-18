@@ -924,22 +924,41 @@ Lua supports the following logical operators:
 - `or`
 - `not`
 
-TODO: Does Lua support the bitwise operators `&`, `|`, `~`, `<<`, and `>>`?
+Lua supports the following bitwise operators:
 
-Lua only supports one assignment operator which is `=`.
-It does not support shorthand assignment operators like `+=`.
-Adding a number to a variable must be done with `myVar = myVar + n`.
+- `&` bitwise and
+- `|` bitwise or
+- `~` bitwise exclusive or (binary) or bitwise not (unary)
+- `<<` bit shift left
+- `>>` bit shift right
+
+The only supported assignment operator `=`.
+Shorthand assignment operators like `+=` that are supported
+by many other programming languages are not supported in Lua.
+To add a number to a variable, use the form `myVar = myVar + n`.
 
 The operator `..` is used to concatenate strings.
+Both operands must be either a string or number.
+Numbers are automatically converted to strings.
 
-The `#` operator is applied on the left side of a string to get its length.
+The `#` operator is applied on the left side of a string or table
+to get its length.
+For a string, this returns the number of bytes which can differ
+from the number of characters when Unicode characters are included.
+For a table, this returns the last consecutive integer index starting from `1`.
+In a table with the keys `1`, `2`, `3`, and `7`, the length is reported as `3`.
 
 Lua operators have the following precedence from highest to lowest:
 
 - `^`
-- `not` and unary `-`
+- unary `-`, `~`, `#`, and `not`
+- `*`, `/`, `//`, `%`
 - `+` and binary `-`
 - `..`
+- `<<` and `>>`
+- `&`
+- binary `~`
+- `|`
 - `<`, `>`, `<=`, `>=`, `==`, and `~=`
 - `and`
 - `or`
@@ -955,9 +974,11 @@ For example, `2 ^ 2 ^ 3` is the same as `2 ^ 8` and not `4 ^ 3`.
 
 ## Conditional Logic
 
-Parentheses are not required around conditions.
+Lua supports an `if` statement, but not a `switch` statement.
 
 In an `if` statement, the `elseif` and `else` blocks shown below are optional.
+
+Parentheses are not required around conditions.
 
 All the parts of the `if` statement can be written on a single line if desired.
 
@@ -971,8 +992,6 @@ else
 end
 ```
 
-Lua does not have a `switch` statement or an equivalent.
-
 Lua does not have a ternary operator, but the
 same functionality can be achieved with the following:
 
@@ -980,7 +999,15 @@ same functionality can be achieved with the following:
 let result = condition and trueValue or falseValue
 ```
 
+For the condition, recall that `false` and `nil` are treated as `false`
+and all other values are treated as `true`.
+
 ## Iteration
+
+Lua supports `for`, `while` (top tested), and `repeat` (botto tested) loops.
+The `for` loop has two variations,
+one that iterates over a range of numbers and
+one that iterates over table entries.
 
 ```lua
 -- Use a `for` loop to iterate over a range of numbers with a given step size.
@@ -995,7 +1022,7 @@ for key, value in pairs(mytable) do
   ...
 end
 
--- Use a `for` loop to iterate over the indexes and values pairs
+-- Use a `for` loop to iterate over the index/value pairs
 -- in a table whose keys are consecutive integers starting at 1.
 for index, value in ipairs(mytable) do
   ...
@@ -1015,8 +1042,9 @@ repeat — bottom-tested
 until condition
 ```
 
-Loops can use the `break` keyword to exit, but the `continue` keyword
-for advancing to the next iteration is not currently supported.
+Loops can use the `break` keyword to exit early.
+The `continue` keyword for advancing to the next iteration
+is not currently supported.
 
 ## Functions
 
