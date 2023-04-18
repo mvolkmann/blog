@@ -566,7 +566,9 @@ Both take any number of arguments.
 
 The `print` function adds a tab character between each value
 and a newline at the end of its output.
-It can be called with no arguments to only write a newline character.
+I find its use of tabs annoying and there is no way to
+configure it to use spaces instead of tabs.
+The `print` function can be called with no arguments to only write a newline character.
 
 The `io.write` function does not add any characters between values
 and does not add a newline at the end.
@@ -586,7 +588,8 @@ The following code prompts for two numbers and prints their sum.
 
 ```lua
 io.write("First Number: ")
--- This form of `io.read` returns a number or nil if a non-number is entered.
+-- This form of `io.read` returns a number
+-- or nil if a non-number is entered.
 n1 = io.read("*number")
 
 io.write("Second Number: ")
@@ -594,7 +597,7 @@ n2 = io.read("*number")
 
 if n1 and n2 then
   sum = n1 + n2
-  print("Sum: " .. sum) -- The `..` operator performs string concatenation.
+  print("Sum: " .. sum) -- `..` operator performs string concatenation
 else
   print("An invalid number was entered.")
 end
