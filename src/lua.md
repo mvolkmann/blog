@@ -1686,9 +1686,9 @@ that others write, so it is necessary to understand all of them.
 
 ### Classes
 
-Lua does include support for defining classes and creating instances.
+Lua does not directly support defining classes and creating instances.
 However, these can be simulated using a combination of tables,
-metatables, and function.
+metatables, and functions.
 
 A class can be represented by a table.
 A `new` function can be added to the table and used to
@@ -1701,9 +1701,9 @@ The `new` function should:
 
 - Create a new table to represent the instance OR
   use a table that is passed in.
-- Associated a metatable with the new table
+- Associate a metatable with the new table
   that holds default property values and
-  functions that act as methods of the class.
+  functions that act as instance methods of the class.
 - Return the table that represents the instance.
 
 There are a few common approaches for implementing all of this.
@@ -1769,15 +1769,18 @@ local instance = setmetatable({}, Shape)
 
 There is a fair amount boilerplate code in the examples above
 and plenty of opportunity to make mistakes.
-We can address this by writing a `class` function
+We can address this by writing a function named `class`
 that does all the work for us.
-It could be defined in the file `oop.lua` and then
+This could be defined in the file `oop.lua` and then
 made available in multiple sources files with a `require` statement.
 
 The `class` function can be defined as follows:
 
 ```lua
+-- This adds a function to the builtin `string` module.
 function string.startsWith(source, target)
+  -- 1 is the index at which to start the search.
+  -- true turns off use of patterns which improves performance.
   return source:find(target, 1, true) == 1
 end
 
@@ -1793,8 +1796,6 @@ function class(defaults)
   -- from `defaults` to `metatable` and remove them from `defaults`.
   for k, v in pairs(defaults) do
     -- This tests whether `k` begins with two underscores.
-    -- 1 is the index at which to start the search.
-    -- true turns of regular expressions.
     if k:startsWith("__") then
       metatable[k] = v
       defaults[k] = nil
@@ -1804,7 +1805,7 @@ function class(defaults)
   -- Create and return a table to represent the class.
   return {
     -- The `new` function creates and returns an instance.
-    new = function(initial)
+    new = function (initial)
       local instance = initial or {}
       setmetatable(instance, metatable)
       return instance
@@ -1827,29 +1828,29 @@ Point = class({
   distanceFromOrigin = function(p)
     return math.sqrt(p.x ^ 2 + p.y ^ 2)
   end,
-  print = function(p)
+  print = function (p)
     print(p) -- uses __tostring below
   end,
 
   -- Metamethods
-  __add = function(p1, p2)
+  __add = function (p1, p2)
     return Point.new({x = p1.x + p2.x, y = p1.y + p2.y})
   end,
-  __tostring = function(p)
+  __tostring = function (p)
     return string.format("(%.2f, %.2f)", p.x, p.y)
   end
 })
 
-p1 = Point.new({x = 3, y = 4})
-print("p1 is", p1) -- p1 is   (3.00, 4.00)
+local p1 = Point.new {x = 3, y = 4}
+print(p1) -- (3.00, 4.00)
 p1:print() -- (3.00, 4.00)
-print("distance = " .. p1:distanceFromOrigin()) -- distance = 5.0
+print(p1:distanceFromOrigin()) -- 5.0
 
-p2 = Point.new({x = 5, y = 1})
-p3 = p1 + p2 -- uses the __add metamethod
+local p2 = Point.new {x = 5, y = 1}
+local p3 = p1 + p2 -- uses the __add metamethod
 p3:print() -- (8.0, 5.0)
 
-p4 = Point.new({y = 7})
+local p4 = Point.new {y = 7}
 p4:print() -- (0.00, 7.00)
 ```
 
