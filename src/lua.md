@@ -972,6 +972,13 @@ All operators are left associative except for
 `^` and `..` which are right associative.
 For example, `2 ^ 2 ^ 3` is the same as `2 ^ 8` and not `4 ^ 3`.
 
+All operators and special characters in Lua have a single meaning.
+For example:
+
+- `+` always performs addition, not string concatenation which uses `..`
+- `{' and `}' always construct a table and do not delimit a code block
+- `:` always define or calls a function that can be used in the "method" style
+
 ## Conditional Logic
 
 Lua supports an `if` statement, but not a `switch` statement.
@@ -1961,7 +1968,7 @@ TODO: Add this based on https://www.youtube.com/watch?v=1BFoprD30dE&t=97s.
 
 Metamethods are special methods from a predefined list
 that can be defined in a metatable.
-Many of them define the functionality of Lua operators
+Many of metamethods define the functionality of Lua operators
 on tables associated with the metatable.
 
 The following metamethods define the operation of mathematical operators.
@@ -2024,6 +2031,10 @@ that are unrelated to operators.
 | `__newindex`  | called when an entry is added to the table      |
 | `__pairs`     | `pairs` function                                |
 | `__tostring`  | returns a string representation                 |
+
+The `__index` metamethod is perhaps the most important one
+in terms of the breadth of functionality it unlocks.
+This was covered in previous sections on "Metatables" and "Classes".
 
 When the `__metatable` function is defined,
 the metatable cannot be modified and this returns an error message.
