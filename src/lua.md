@@ -2218,7 +2218,6 @@ print("Total is " .. total) -- 24
 print("Total is " .. fun.sum(scores)) -- 24
 
 -- There are MANY more functions in the luafun library!
-
 ```
 
 TODO: How can you use a for loop to iterate over values in an iterator?
@@ -2244,10 +2243,12 @@ Modules in the standard library do not need to be imported to use them.
 
 Constants defined by this module include:
 
-- `math.huge` - floating point value greater than any other number
-- `math.maxinteger` - maximum integer value
-- `math.mininteger` - minimum integer value
-- `math.pi` - value of π
+| Constant          | Meaning                                            |
+| ----------------- | -------------------------------------------------- |
+| `math.huge`       | floating point value greater than any other number |
+| `math.maxinteger` | maximum integer value                              |
+| `math.mininteger` | minimum integer value                              |
+| `math.pi`         | value of π                                         |
 
 A constant for `e` is not defined, but it can be obtained from `math.exp(1)`.
 
@@ -2259,6 +2260,7 @@ To convert an angle from radians to degrees, use the `math.deg(x)` function.
 
 To generate random numbers, use the
 `math.randomseed` and `math.random` functions.
+For example:
 
 - `math.randomseed(os.time())` seeds the random number generator
 - `math.random()` returns a floating point number in the range [0, 1)
@@ -2286,8 +2288,11 @@ Other functions defined in this module include:
 `math.modf(3.14)` returns `3` and `0.14`
 
 The value passed to `math.tointeger` can be a number or string.
-For example, `math.tointeger(3.0)` and `math.tointeger("3.0")` both return `3`,
-and `math.tointeger(3.1)` returns `nil`.
+For example:
+
+- `math.tointeger(3.0)` and `math.tointeger("3.0")` both return `3`
+- `math.tointeger(3.1)` returns `nil`
+  because it cannot be converted to an integer
 
 ### io Module
 
@@ -2295,20 +2300,32 @@ The following code shows the most basic way to write to a new file.
 If the file already exists, it is overwritten.
 
 ```lua
--- TODO: What does this do if file_path is omitted?
+-- Open a file in text mode and make it the default output file.
+-- If `file_path` is omitted, this just
+-- returns the current default output file, if any.
 io.output(file_path)
+
+-- Write to the default output file.
 io.write(some_string)
+
+-- Close the default output file.
 io.close()
 ```
 
 The following code shows the most basic way to read from a file.
 
 ```lua
--- TODO: What does this do if file_path is omitted?
+-- Open a file in text mode and make it the default input file.
+-- If `file_path` is omitted, this just
+-- returns the current default input file, if any.
 io.input(file_path)
+
+-- Read from the default input file.
 -- TODO: What arguments does this accept and what do they do?
 local data = io.read()
-io.close()
+
+-- Close the default input file.
+io.input():close()
 ```
 
 Files can be opened in one of the following modes
@@ -2323,41 +2340,44 @@ where the columns indicate the capabilities of each mode:
 | `w+` |  X  |     X     |  X   |   X   |        |
 | `a+` |  X  |           |  X   |       |   X    |
 
-To open a file:
+To open a file in a specific mode:
 
 ```lua
-file = io.open(file_path, mode) -- mode defaults to "r"
+local stream = io.open(file_path, mode) -- mode defaults to "r"
 ```
 
-To write to a file:
+To write to a file using the method syntax:
 
 ```lua
-file:write(data)
+stream:write(data)
 ```
 
-To read from a file:
+The following code demonstrates many ways to read from a stream.
 
 ```lua
-contents = file:read("*all") -- reads the entire contents
-line = file:read("*line") -- reads the next line
-number = file:read("*number") -- reads a number
-n1, n2 = file:read("*number", "*number") -- reads two numbers
-text = file:read(n) -- reads a string of up to "n" bytes
-end_test = file:read(0) -- returns nil if at end of file; otherwise ""
+contents = stream:read("*all") -- reads the entire contents
+
+line = stream:read("*line") -- reads the next line
+
+number = stream:read("*number") -- reads a number
+
+n1, n2 = stream:read("*number", "*number") -- reads two numbers
+
+text = stream:read(n) -- reads a string of up to "n" bytes
+
+end_test = stream:read(0) -- returns nil if at end of file; otherwise ""
 ```
 
-To seek to a specific byte offset:
+To seek to a specific byte offset in a stream:
 
 ```lua
-file:seek("set", offset)
+stream:seek("set", offset)
 ```
 
-TODO: How do you read a given number of bytes from the current offset?
-
-To close a file:
+To close a stream:
 
 ```lua
-file:close()
+stream:close()
 ```
 
 ### os Module
