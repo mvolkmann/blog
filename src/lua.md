@@ -2025,8 +2025,6 @@ that are unrelated to operators.
 | `__pairs`     | `pairs` function                                |
 | `__tostring`  | returns a string representation                 |
 
-TODO: Verify that all of these work. Maybe \_\_le isn't supported.
-
 When the `__metatable` function is defined,
 the metatable cannot be modified and this returns an error message.
 
@@ -2046,7 +2044,7 @@ It returns a function and message, either of which can be `nil`.
 
 When a string is passed it parses it as Lua code and
 returns a function that executes the code and `nil` for the message.
-If there are errors in the code it returns
+If there are errors in the code, it returns
 `nil` for the function and a string for an error message.
 
 When a function is passed, the function must return a string of code.
@@ -2080,15 +2078,15 @@ local function getCode()
 end
 
 fn = load(getCode)
-if fn then print(fn()) end -- 1       2       3       4       5
+if fn then print(fn()) end -- 1       2       3       4
 ```
 
-The `loadfile` function is similar,
+The `loadfile` function is similar to the `load` function,
 but it takes a file path from which code is read.
 If no file path is provided, it reads code from `stdin`.
 
 The `dofile` function reads code from a file or `stdin`,
-executes it, and returns all values returned by the code
+executes it, and returns all the values returned by the code
 rather than returning a function to be executed later.
 
 ## Lua Functional (luafun)
@@ -2100,7 +2098,7 @@ It's not difficult to write these though.
 The following code implements and demonstrates using each of them.
 
 ```lua
-local function map(fn, t)
+function map(fn, t)
   local result = {}
   for i, v in ipairs(t) do
     result[i] = fn(v)
@@ -2113,7 +2111,7 @@ local function square(n) return n * n end
 local squares = map(square, numbers)
 print(table.concat(squares, ", ")) -- 1, 4, 9, 16, 25
 
-local function filter(fn, t)
+function filter(fn, t)
   local result = {}
   for _, v in ipairs(t) do
     if fn(v) then
@@ -2127,7 +2125,7 @@ local function isEven(n) return n % 2 == 0 end
 local evens = filter(isEven, numbers)
 print(table.concat(evens, ", ")) -- 2, 4
 
-local function reduce(fn, t, initial)
+function reduce(fn, t, initial)
   local acc = initial
   for _, v in ipairs(t) do
     acc = fn(acc, v)
@@ -2138,14 +2136,14 @@ end
 local function sum(n1, n2) return n1 + n2 end
 print(reduce(sum, numbers, 0)) -- 15
 
-local function some(fn, t)
+function some(fn, t)
   for _, v in ipairs(t) do
     if fn(v) then return true end
   end
   return false
 end
 
-local function every(fn, t)
+function every(fn, t)
   for i, v in ipairs(t) do
     if not fn(v) then return false end
   end
@@ -2174,34 +2172,31 @@ local scores = {7, 4, 13}
 -- The `map` and `filter` methods returns an iterator.
 -- Calling `:totable()` on an iterator returns a table.
 
--- Using `map` to double numbers in a table.
+-- Use `map` to double the numbers in a table.
 local function double(n) return n * 2 end
 doubled_iter = fun.map(double, scores)
 print("Doubled Scores")
 fun.each(print, doubled_iter) -- 14 8 26
 
--- Using `filter` to get odd numbers from a table.
+-- Use `filter` to get odd numbers from a table.
 local function odd(n) return n % 2 == 1 end
 odd_iter = fun.filter(odd, scores)
 print("Odd Scores")
 fun.each(print, odd_iter) -- 7 3
 
--- Using `reduce` to sum numbers in a table.
+-- Use `reduce` to sum the numbers in a table.
 local function add(a, b) return a + b end
 total = fun.reduce(add, 0, scores)
 print("Total is " .. total) -- 24
 
--- Doing the same with the `sum` function.
+-- Do the same with the `sum` function.
 print("Total is " .. fun.sum(scores)) -- 24
 
 -- There are MANY more functions in the luafun library!
 
--- Can you use a for loop to iterate over values in an interator?
--- for k, v in pairs(doubled_scores) do
-for k, v in doubled_iter:unwrap() do
-  print(v) -- 14 8 26
-end
 ```
+
+TODO: How can you use a for loop to iterate over values in an iterator?
 
 ## Standard Library
 
@@ -2222,7 +2217,7 @@ Modules in the standard library do not need to be imported to use them.
 
 ### math module
 
-Constants defined by this library include:
+Constants defined by this module include:
 
 - `math.huge` - floating point value greater than any other number
 - `math.maxinteger` - maximum integer value
@@ -2231,9 +2226,9 @@ Constants defined by this library include:
 
 A constant for `e` is not defined, but it can be obtained from `math.exp(1)`.
 
-Trigonometry functions defined by this library include
+Trigonometry functions defined by this module include
 `sin`, `cos`, `tan`, `asin`, `acos`, and `atan`.
-All of these take and return angles in radians.
+All of these take or return angles in radians.
 To convert an angle from degrees to radians, use the `math.rad(x)` function.
 To convert an angle from radians to degrees, use the `math.deg(x)` function.
 
@@ -2245,31 +2240,29 @@ To generate random numbers, use the
 - `math.random(10)` returns an integer in the range [1, 10]
 - `math.random(5, 10)` returns an integer in the range [5, 10]
 
-Other functions defined in this library include:
+Other functions defined in this module include:
 
-- `math.abs(x)` for absolute value
-- `math.ceil(x)` for ceiling (rounds up)
-- `math.exp(x)` for e raised to the x power
-- `math.floor(x)` for floor (rounds down)
-- `math.fmod(x, y)` for floating point remainder of x / y
-- `math.log(x, [base])` for logarithm of x with specified base or e
-- `math.max(...)` for maximum of a set of numbers
-- `math.min(...)` for minimum of a set of numbers
-- `math.modf(x)` for integral and fractional parts of a floating point number
+| Function              | Returns                                                               |
+| --------------------- | --------------------------------------------------------------------- |
+| `math.abs(x)`         | absolute value                                                        |
+| `math.ceil(x)`        | ceiling (rounds up)                                                   |
+| `math.exp(x)`         | e raised to the x power                                               |
+| `math.floor(x)`       | floor (rounds up)                                                     |
+| `math.fmod(x, y)`     | floating point remainder of x / y                                     |
+| `math.log(x, [base])` | logarithm of x with specified base or e                               |
+| `math.max(...)`       | maximum of a set of numbers                                           |
+| `math.min(...)`       | minimum of a set of numbers                                           |
+| `math.modf(x)`        | integral and fractional parts of a floating point number              |
+| `math.sqrt(x)`        | square root                                                           |
+| `math.tointeger(x)`   | integer value if x can be converted to an integer; otherwise `nil`    |
+| `math.type(x)`        | `"integer"`, `"float"`, or `nil`                                      |
+| `math.ult(m, n)`      | `true` if m < n when compared as unsigned integers; otherwise `false` |
 
-  For example, `math.modf(3.14)` returns `3` and `0.14`
+`math.modf(3.14)` returns `3` and `0.14`
 
-- `math.sqrt(x)` for square root
-- `math.tointeger(x)` returns an integer value if x
-  can be converted to an integer; otherwise `nil`
-
-  The value passed can be a number or string.
-  For example, `math.tointeger(3.0)` and `math.tointeger("3.0")` returns `3`,
-  and `math.tointeger(3.1)` returns `nil`.
-
-- `math.type(x)` returns `"integer"`, `"float"`, or `nil`
-- `math.ult(m, n)` returns `true` if m < n when
-  compared as unsigned integers; otherwise `false`
+The value passed to `math.tointeger` can be a number or string.
+For example, `math.tointeger(3.0)` and `math.tointeger("3.0")` both return `3`,
+and `math.tointeger(3.1)` returns `nil`.
 
 ### io Module
 
@@ -2324,8 +2317,8 @@ contents = file:read("*all") -- reads the entire contents
 line = file:read("*line") -- reads the next line
 number = file:read("*number") -- reads a number
 n1, n2 = file:read("*number", "*number") -- reads two numbers
-text = file:read(n) -- reads a string of up to "n" characters
-end_test = file:read(0) -- returns nil if at end of file; otherwise returns ""
+text = file:read(n) -- reads a string of up to "n" bytes
+end_test = file:read(0) -- returns nil if at end of file; otherwise ""
 ```
 
 To seek to a specific byte offset:
@@ -2344,18 +2337,21 @@ file:close()
 
 ### os Module
 
-- `os.time()` returns ms since 1970 or a given date/time
-- `os.difftime()` returns ms difference between two times
-- `os.date()` returns a string describing the current date and time
-- `os.exit(code)` — code can be true (exits with EXIT_SUCCESS; default),
-  false (exits with EXIT_FAILURE), or a number
-- `os.getenv("environment-variable-name")`
-- `os.rename(current_file_path, new_file_path)`
-- `os.remove(current_file_path)` — deletes the file
-- `os.execute(shell_command)`
+The `os` module defines the following functions:
+
+| Function                                      | Purpose                                                                                           |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `os.time()`                                   | returns ms since 1970 or a given date/time                                                        |
+| `os.difftime()`                               | returns ms difference between two times                                                           |
+| `os.date()`                                   | returns a string describing the current date and time                                             |
+| `os.exit(code)`                               | code can be true (exits with EXIT_SUCCESS; default), false (exits with EXIT_FAILURE), or a number |
+| `os.getenv("environment-variable-name")`      | returns the value of an environment variables                                                     |
+| `os.rename(current_file_path, new_file_path)` | renames a file or directory                                                                       |
+| `os.remove(current_file_path)`                | deletes a file or empty directory                                                                 |
+| `os.execute(shell_command)`                   | executes a shell command                                                                          |
 
 The `os.date` function takes a format string
-and an option time that defines to now.
+and an optional time that defaults to now.
 The format string uses the same characters as the C {% aTargetBlank
 "https://man7.org/linux/man-pages/man3/strftime.3.html", "strftime" %} function
 For example:
@@ -2374,18 +2370,18 @@ time = os.time({
   sec = 19,
   isdst = true -- daylight savings time
 })
-print(t)
-print(type(t)) -- number
+print(time) -- -274891181; negative because it is before 1970
+print(type(time)) -- number
 
 format = "%A, %B %e, %Y"
 print(os.date(format, time)) -- Sunday, April 16, 1961
 ```
 
-To get the time it takes to run some code:
+To get the time required to run some code:
 
 ```lua
 local start = os.clock()
-— some code here
+-— Add some code here.
 print(os.clock() - start)
 ```
 
