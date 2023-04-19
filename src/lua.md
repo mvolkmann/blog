@@ -2481,12 +2481,19 @@ function string.endsWith(source, target)
 end
 
 text = "This is used to test of our new functions."
+```
 
--- These functions can be called in two ways.
+The `contains` function defined above can be called in two ways.
+
+```lua
 print(string.contains(text, "test")) -- true
 print(text:contains("test")) -- true
+```
 
--- More example calls using method syntax.
+Here are more examples of calling the functions defined above
+using the method syntax.
+
+```lua
 print(text:contains("missing")) -- false
 print(text:startsWith("This")) -- true
 print(text:startsWith("Test")) -- false
@@ -2496,19 +2503,17 @@ print(text:endsWith("test.")) -- false
 
 Lua does not support string interpolation.
 The closest Lua feature to this is the `string.format` function.
-It takes a format string as its first argument.
-This can contain literal text to be output and
+This takes a format string as its first argument.
+This can contain literal text and
 formatting directives that begin with a percent sign.
+
 The supported formatting directives are:
 
 - `%o` for octal numbers
-- `%x` for hexadecimal numbers
 - `%d` for decimal numbers
+- `%x` for hexadecimal numbers
 - `%f` for floating point numbers
 - `%s` for strings
-
-The `%f` directive can specify the number of decimal places to output.
-For example, to output two decimal places use `%.2f`.
 
 For example:
 
@@ -2516,6 +2521,14 @@ For example:
 name = "Mark"
 color = "yellow"
 sentence = string.format("%s's favorite color is %s.", name, color)
+```
+
+The `%f` directive can specify the number of decimal places to output.
+For example:
+
+```lua
+-- Print pi to four decimal places.
+print(string.format("pi is %.4f", math.pi)) -- pi is 3.1416
 ```
 
 ## Modules
@@ -2559,89 +2572,6 @@ mm.some_function(1, 2) -- some_function was passed 1 and 2
 ```
 
 A Lua "package" is a collection of modules.
-
-## Object Oriented Programming (OOP)
-
-While Lua does not support defining classes and creating instances,
-it can simulate those using metatables.
-The following code demonstrates defining
-classes, properties, constructors, methods, and subclasses.
-
-```lua
--- Define Animal class with properties `name` and `says`.
-Animal = {name = "", says = ""}
-
--- Animal constructor
-function Animal:new(kind, name, says)
-  -- TODO: This must return a table, but it's not
-  -- TODO: clear that it needs to have a metatable.
-  -- `self` is a special variable name, not a keyword.
-  setmetatable({}, self)
-
-  -- Set properties.
-  self.kind = kind
-  self.name = name
-  self.says = says
-
-  -- Define methods.
-  -- TODO: It seems each instance will have its own copy of every method.
-  self.someMethod = function (p1, p2)
-    -- Implement the method.
-  end
-
-  return self
-end
-
--- Animal method
-function Animal:toString()
-  local text = "%s is a %s and says %s."
-  return string.format(text, self.name, self.kind, self.says)
-end
-
--- Create an Animal instance.
-dog = Animal:new("dog", "Comet", "bark")
-
-print(dog.says) -- access property; bark
-print(dog:toString()) -- call method; Comet is a dog and says bark.
-
--- Define Giraffe class inheriting from the Animal class.
-Giraffe = Animal:new()
-
--- Giraffe constuctor
-function Giraffe:new(name, height)
-  setmetatable({}, self)
-
-  -- Set superclass properties.
-  self.kind = "giraffe"
-  self.name = name
-  self.says = "nothing"
-
-  -- Set properties unique to this class.
-  self.height = height
-
-  return self
-
-  -- TODO: Maybe all the code above can be replaced by the following:
-  --[[
-  instance = Animal("giraffe", name, "nothing")
-  instance.height = height
-  return instance
-  ]]
-end
-
--- Giraffe method
-function Giraffe:report()
-  local text = "%s %s is %d feet tall."
-  return string.format(text, self.name, self.kind, self.height)
-end
-
--- Create Giraffe instance.
-g = Giraffe:new("Geoffrey", 18) -- creates an instance
-
-print(g.height) -- access property; 18
-print(g:toString()) -- call method; Geoffrey is a giraffe and says nothing.
-print(g:report()) -- call method; Geoffrey giraffe is 18 feet tall.
-```
 
 ## Coroutines
 
