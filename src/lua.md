@@ -2432,21 +2432,33 @@ print(os.clock() - start)
 
 ### string Module
 
-String operations supported by this module include:
+String operations supported by this module include the following,
+all using method syntax where `s` is a string:
 
-- length: `string.len(var)` or `#var`
-- substring: `string.sub(source, startIndex, endIndex)` or
-  `source:sub(startIndex, endIndex)`
-- global substitute: `string.gsub(source, oldValue, newValue)`
+| Function                             | Description                                                   |
+| ------------------------------------ | ------------------------------------------------------------- |
+| `s:len()` or `#s`                    | returns length in bytes                                       |
+| `s:sub(startIndex, endIndex)`        | returns a substring                                           |
+| `s:gsub(source, oldValue, newValue)` | performs global substitution                                  |
+| `s:find(target)`                     | returns start and end index inclusive                         |
+| `s:upper()`                          | returns uppercase version                                     |
+| `s:lower()`                          | returns lowercase version                                     |
+| `s:match('pattern', i=1)`            | returns first match found in s starting at index i            |
+| `s:gmatch('pattern', i=1)`           | returns iterator over all matches found in s start at index i |
 
-  This returns a new string and the number of occurrences that were replaced.
+The `gsub` function returns a new string and
+the number of occurrences that were replaced.
 
-- find start and end index inclusive:
-  `string.find(source, target)` or `source:find(target)`
-- uppercase: `string.upper(var)` or `var:upper()`
-- lowercase: `string.lower(var)` or `var:lower()`
-- pattern matches:
-  `string.match(someString, 'pattern')` returns a table of matches?
+The following code demonstrates using the `gmatch` function
+to find all the integers in a string:
+
+```lua
+local s = "apple 19 banana 7 cherry 21"
+local matches = s:gmatch("%d+")
+for match in matches do
+  print(match) -- 19, 7, and 21
+end
+```
 
 Some common string operations are not directly supported.
 For example, there are no functions that test whether a string
@@ -2474,7 +2486,7 @@ text = "This is used to test of our new functions."
 print(string.contains(text, "test")) -- true
 print(text:contains("test")) -- true
 
--- More example calls
+-- More example calls using method syntax.
 print(text:contains("missing")) -- false
 print(text:startsWith("This")) -- true
 print(text:startsWith("Test")) -- false
