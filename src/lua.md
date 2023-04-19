@@ -590,10 +590,24 @@ Both take any number of arguments.
 
 The `print` function adds a tab character between each value
 and a newline at the end of its output.
-I find its use of tabs annoying and there is no way to
-configure it to use spaces instead of tabs.
 The `print` function can be called with no arguments
 to only write a newline character.
+
+I prefer for the `print` function to separate values
+with a single space instead of a tab.
+To override it to do that, add the following function.
+
+```lua
+function print(...)
+  local t = { ... }
+  local len = #t
+  for i, v in ipairs({ ... }) do
+    io.write(tostring(v))
+    if i < len then io.write(' ') end
+  end
+  io.write('\n')
+end
+```
 
 The `io.write` function does not add any characters between values
 and does not add a newline at the end.
