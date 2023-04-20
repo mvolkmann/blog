@@ -1695,6 +1695,8 @@ MyTable:colonOuter(1, 2) -- MyTable address, 1, 2
 MyTable.colonOuter(MyTable, 1, 2) -- MyTable address, 1, 2
 ```
 
+TODO: See my question about the colon syntax at https://www.reddit.com/r/lua/comments/12tc33n/colon_syntax/
+
 ## Metatables
 
 A metatable is a table that defines metamethods.
@@ -1812,7 +1814,7 @@ function Shape.new(name, sides)
   return instance
 end
 
--- Method
+-- Method - note the colon
 function Shape:report()
   print(string.format("%s has %d sides", self.name, self.sides))
 end
@@ -1851,15 +1853,19 @@ Shape.__index = Shape
 local instance = setmetatable({}, Shape)
 ```
 
-Here is one more example of defining and using a class.
-The class represents a person.
+Here is one more example of defining and using
+a class that represents a person.
 
 ```lua
 local mt = {
   __index = {
+    -- Taking a "self" argument allows calling with the method syntax.
+    -- There is no way to define a method with a colon inside a table.
     haveBirthday = function (self)
       self.age = self.age + 1
     end,
+
+    -- Taking a "self" argument allows calling with the method syntax.
     report = function (self)
       print(string.format("%s is %d years old.", self.name, self.age))
     end
@@ -2710,6 +2716,63 @@ mm.some_function(1, 2) -- some_function was passed 1 and 2
 ```
 
 A Lua "package" is a collection of modules.
+
+## Environments
+
+"Free variables" are variables that are not declared with the `local` keyword.
+They are stored in the current "environment"
+which is a table referred to with the name `_ENV`.
+By default the value of `_ENV` is the same as `_G`.
+For example:
+
+```lua
+fruit = "apple"
+local fruit = "banana"
+print(fruit) -- banana
+print(_ENV.fruit) -- apple
+print(_G.fruit) -- apple
+```
+
+A function or `do` block can change its environment.
+Doing so changes where free variables are stored.
+This can be useful to avoid changing variables in the outer scope.
+For example:
+
+```lua
+fruit = "apple"
+
+function demo1()
+  -- Create a new environment that is only used by this function.
+  -- It starts empty and looks in the global environment
+  -- for anything it doesn't have.
+  -- We can't set _ENV to {} here because that
+  -- would prevent us from calling setmetatable.
+  env = {}
+  setmetatable(env, {__index = _G})
+  -- If `local` is not used here, the value of
+  -- `_ENV` outside this function will be changed.
+  local _ENV = env
+
+  -- Assign a variable in the new environment.
+  fruit = "banana"
+
+  -- The print function is not in the new environment,
+  -- so the version in the global environment will be used.
+  print(fruit) -- banana
+
+  -- Functions called from here will use the global _ENV
+  -- rather the local one we created above
+  -- unless we pass it.
+  demo2(_ENV)
+end
+
+function demo2(_ENV)
+  print(fruit) -- banana
+end
+
+demo1()
+print(fruit) -- apple
+```
 
 ## Coroutines
 
