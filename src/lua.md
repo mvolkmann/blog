@@ -1851,6 +1851,34 @@ Shape.__index = Shape
 local instance = setmetatable({}, Shape)
 ```
 
+Here is one more example of defining and using a class.
+The class represents a person.
+
+```lua
+local mt = {
+  __index = {
+    haveBirthday = function (self)
+      self.age = self.age + 1
+    end,
+    report = function (self)
+      print(string.format("%s is %d years old.", self.name, self.age))
+    end
+  }
+}
+
+local Person = {
+  new = function (p)
+    p = p or {name = "unknown", age = 0}
+    setmetatable(p, mt)
+    return p
+  end
+}
+
+local me = Person.new({name = "Mark", age = 61})
+me:haveBirthday()
+me:report() -- Mark is 62 years old.
+```
+
 ### Simplifying Classes
 
 There is a fair amount boilerplate code in the examples above
