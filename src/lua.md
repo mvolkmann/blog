@@ -1129,6 +1129,10 @@ for i, v in odds(t) do
 end
 ```
 
+Other custom implementations could build and return
+a state based on the table passed in and
+could start with a control value other than `nil`.
+
 ## Functions
 
 Functions are defined with the `function` keyword.
