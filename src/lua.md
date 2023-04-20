@@ -2578,28 +2578,46 @@ A Lua "package" is a collection of modules.
 Lua is single-threaded like JavaScript.
 It supports collaborative multitasking with coroutines.
 At any point in time on only one coroutine is running.
-They do not run in parallel.
+Coroutines do not run in parallel.
+
+The following code demonstrates using a coroutine
+to generate integers in given multiples
+stopping at a given limit.
 
 ```lua
--- TODO: Can this function have parameters?
-co = coroutine.create(function ()
-  ...
-  coroutine.yield("value #1")
-  ...
-  coroutine.yield("value #1")
-  ...
-  return "value #3"
+local n = 0
+
+-- We only need to pass arguments in the
+-- first call to `resume` for this coroutine.
+local thread = coroutine.create(function(delta, limit)
+  while true do
+    local next = n + delta
+    if next > limit then break end
+    n = next
+    coroutine.yield(n)
+  end
 end)
 
-v1 = coroutine.resume(co) -- "value #1"
-print(coroutine.status(co)) -- "running"
-v2 = coroutine.resume(co) -- "value #2"
-v3 = coroutine.resume(co) -- "value #3"
-v4 = coroutine.resume(co) — error
-print(coroutine.status(co)) -- "suspended"
+print(type(thread)) -- thread
+
+print(coroutine.status(thread)) -- "suspended"
+
+local success, v = coroutine.resume(thread, 3, 15)
+while success and v do
+  print(v) -- 3, 6, 9, 12, and 15
+  success, v = coroutine.resume(thread)
+end
+
+print(coroutine.status(thread)) -- "dead"
 ```
 
-TODO: How can you create concurrently running threads in Lua?
+Lua does not directly support concurrently running threads,
+but they can be implemented using the approach described in
+chapter 26 of the "Programming in Lua - Fourth edition" book.
+
+For sending HTTP requests, see the {% aTargetBlank
+"https://luarocks.org/modules/pintsized/lua-resty-http",
+"lua-resty-http" %} library.
 
 ## Utility Functions
 
