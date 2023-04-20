@@ -2616,9 +2616,18 @@ Lua does not directly support concurrently running threads,
 but they can be implemented using the approach described in
 chapter 26 of the "Programming in Lua - Fourth edition" book.
 
-For sending HTTP requests, see the {% aTargetBlank
-"https://luarocks.org/modules/pintsized/lua-resty-http",
-"lua-resty-http" %} library.
+For sending HTTP requests, see the "Networking" section below.
+
+## Networking
+
+There are several popular Lua networking libraries.
+
+- {% aTargetBlank "https://github.com/daurnimator/lua-http", "lua-http" %} -
+  supports implementing HTTP servers and clients
+- {% aTargetBlank "https://lunarmodules.github.io/luasocket/", "LuaSocket" %} -
+  "a C core that provides support for the TCP and UDP transport layers, and
+  a set of Lua modules that add support for functionality
+  commonly needed by applications that deal with the Internet"
 
 ## Utility Functions
 
@@ -2739,17 +2748,6 @@ end
 TODO: Add detail on calling C from Lua.
 
 TODO: Add detail on calling Lua from C.
-
-## Networking
-
-There are several popular Lua networking libraries.
-
-- {% aTargetBlank "https://github.com/daurnimator/lua-http", "lua-http" %} -
-  supports implementing HTTP servers and clients
-- {% aTargetBlank "https://lunarmodules.github.io/luasocket/", "LuaSocket" %} -
-  "a C core that provides support for the TCP and UDP transport layers, and
-  a set of Lua modules that add support for functionality
-  commonly needed by applications that deal with the Internet"
 
 ## Games
 
