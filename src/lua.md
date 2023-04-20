@@ -3113,3 +3113,6 @@ for k, v in pairs(copy2) do
   print(k, v)
 end
 ```
+
+Reorder some of the sections above so no section relies on
+information found in a section that follows it (if possible).
