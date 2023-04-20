@@ -630,6 +630,7 @@ io.write('Hello', tostring(true), 7) -- Hellotrue7
 ```
 
 To read from stdin, use the `io.read` function.
+By default this returns a string, but it can also be asked to return a number.
 
 The following code prompts for two numbers and prints their sum.
 
@@ -637,10 +638,10 @@ The following code prompts for two numbers and prints their sum.
 io.write("First Number: ")
 -- This form of `io.read` returns a number
 -- or nil if a non-number is entered.
-n1 = io.read("*number")
+n1 = io.read("n")
 
 io.write("Second Number: ")
-n2 = io.read("*number")
+n2 = io.read("n")
 
 if n1 and n2 then
   sum = n1 + n2
@@ -650,7 +651,8 @@ else
 end
 ```
 
-For information on reading and writing files, see the "File I/O" section below.
+For information on reading and writing files,
+see the "Standard Library" "io Module" section below.
 
 ## Names
 
@@ -1151,6 +1153,9 @@ Parameters are specified in parentheses after the function name
 and are separated by commas.
 The parentheses are required even if there are no parameters.
 
+The `return` keyword is used to exit a function
+and return zero or more values to the caller.
+
 For example:
 
 ```lua
@@ -1256,6 +1261,17 @@ end
 
 s1, s2, s3 = getStooges()
 print(s1, s2, s3) -- Moe Larry Curly
+```
+
+An underscore can be used as a placeholder for unneeded return values.
+For example:
+
+```lua
+_, s2 = getStooges()
+print(s2) -- Larry
+
+_, _, s3 = getStooges()
+print(s3) -- Curly
 ```
 
 When getting multiple return values from a function,
@@ -2521,13 +2537,14 @@ stream:write(data)
 The following code demonstrates many ways to read from a stream.
 
 ```lua
-contents = stream:read("*all") -- reads the entire contents
+contents = stream:read("a") -- reads entire contents
 
-line = stream:read("*line") -- reads the next line
+line = stream:read("l") -- reads next line, discarding newline
+line = stream:read("L") -- reads next line, keeiping newline
 
-number = stream:read("*number") -- reads a number
+number = stream:read("n") -- reads one number
 
-n1, n2 = stream:read("*number", "*number") -- reads two numbers
+n1, n2 = stream:read("n", "n") -- reads two numbers
 
 text = stream:read(n) -- reads a string of up to "n" bytes
 
@@ -2845,6 +2862,11 @@ Lua does not directly support concurrently running threads,
 but they can be implemented using the approach described in
 chapter 26 of the "Programming in Lua - Fourth edition" book.
 
+Lua does not have the equivalent of the `async` and `await` keywords
+in other programming languages, but those can be simulated.
+See {% aTargetBlank "https://github.com/iamcco/async-await.lua",
+"async-await.lua" %}.
+
 For sending HTTP requests, see the "Networking" section below.
 
 ## Networking
@@ -3079,9 +3101,6 @@ function foo(p1)
 p1 = p1 or default_value
 …
 end
-
-Functions don’t specify the type they return or even if they do return a value.
-Functions must use the return keyword to return a value.
 
 Are there recommended Lua linters and code formatters that run outside of VS Code?
 
