@@ -274,6 +274,7 @@ return {
 
 The following code demonstrates using Teal to implement {% aTargetBlank
 "https://en.wikipedia.org/wiki/Fizz_buzz", "Fizz buzz" %}.
+This code will make more sense after reading the sections that follow.
 
 ```lua
 -- This type describes a number and the text that should
@@ -1025,7 +1026,7 @@ and all other values are treated as `true`.
 
 ## Iteration
 
-Lua supports `for`, `while` (top tested), and `repeat` (botto tested) loops.
+Lua supports `for`, `while` (top tested), and `repeat` (bottom tested) loops.
 The `for` loop has two variations,
 one that iterates over a range of numbers and
 one that iterates over table entries.
@@ -1067,6 +1068,66 @@ until condition
 Loops can use the `break` keyword to exit early.
 The `continue` keyword for advancing to the next iteration
 is not currently supported.
+
+## Iterators
+
+The `pairs` and `ipairs` functions that are used to iterate over tables
+return three values needed by a `for` loop.
+Understanding the purpose of these three values isn't necessary
+unless there is a reason to implement custom iterators.
+
+The following code exposes the three values returned by the `pairs` function
+and provides insights on how a custom iterator might be implemented.
+A `for` loop that uses the `pairs` function could be replaced
+by code like the following:
+
+```lua
+local t = {'a', 'b', 'c'}
+
+local iterator, state, control = pairs(t)
+-- `iterator` is a function that can be called
+-- to get the next control and value.
+-- `state` returned by pairs is just a reference to `t`.
+-- `control` returned by `pairs` is `nil`.
+
+while true do
+  -- Get the next control (table key) and its value.
+  control, value = iterator(state, control)
+  if not control then break end -- reached end
+  print(control, value)
+end
+```
+
+The output of the code above is:
+
+```lua
+1       a
+2       b
+3       c
+```
+
+The following custom function can be used to
+iterate over only the odd numbers in an array-like table.
+Note how it returns an iterator function, a state, and a control value.
+
+```lua
+function odds(t)
+  local function iterator(state, control)
+    control = control or 0
+    repeat
+      control = control + 1
+      value = t[control]
+    until control == nil or (value ~= nil and value % 2 == 1)
+    return control, value
+  end
+  return iterator, state, nil
+end
+
+local t = {2, 3, 7, 8, 10, 13}
+for i, v in odds(t) do
+  print(v) -- 3, 7, and 13
+end
+```
 
 ## Functions
 
