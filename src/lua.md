@@ -2569,8 +2569,8 @@ The `os` module defines the following functions:
 
 | Function                                      | Purpose                                                                                           |
 | --------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `os.time()`                                   | returns ms since 1970 or a given date/time                                                        |
-| `os.difftime()`                               | returns ms difference between two times                                                           |
+| `os.time()`                                   | returns seconds since 1970 or a given date/time                                                   |
+| `os.difftime()`                               | returns difference in seconds between two times                                                   |
 | `os.date()`                                   | returns a string describing the current date and time                                             |
 | `os.exit(code)`                               | code can be true (exits with EXIT_SUCCESS; default), false (exits with EXIT_FAILURE), or a number |
 | `os.getenv("environment-variable-name")`      | returns the value of an environment variables                                                     |
@@ -2720,8 +2720,9 @@ TODO: Add detail on this module.
 
 ## Modules
 
-A module is defined by a source file that
-returns a table containing variables and functions.
+A module is defined by a table whose entries are variables and functions.
+Typically each module is defined in its own source file
+and made available in other source files using the `require` function.
 
 To define a module named `my_module`, create a file
 named `my_module.lua` containing code like the following:
@@ -2751,7 +2752,9 @@ return {
 }
 ```
 
-To use this module:
+The following code demonstrates using the module defined above.
+Note that the string passed to the `require` function
+does not include the `.lua` file extension.
 
 ```lua
 local mm = require("my_module")
