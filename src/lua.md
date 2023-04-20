@@ -2636,11 +2636,11 @@ They can be defined in a file like `utility.lua`
 and required where needed.
 
 ```lua
-local mod = {}
+local M = {}
 
 -- Returns a string description of the keys and values in a table.
 -- Values can be nested tables.
-function mod.dump(value)
+function M.dump(value)
   if type(value) ~= "table" then
     return tostring(value)
   end
@@ -2659,7 +2659,7 @@ end
 -- Returns a string containing all the values in a table,
 -- each separated by a comma and a space.
 -- Values cannot be nested tables.
-function mod.valuesString(obj)
+function M.valuesString(obj)
   if type(obj) ~= "table" then
     return ""
   end
@@ -2671,24 +2671,28 @@ function mod.valuesString(obj)
   return s:sub(1, -3)
 end
 
-return mod
+return M
 ```
 
 ## Error Handling
 
 Lua does not have a mechanism for throwing and catching exceptions.
 In many cases errors result in a function returning the value `nil`
-and it left to developers to check for `nil` values.
-Failing to do so often results in programs crashing
+and it is left to developers to check for `nil` values.
+Failing to do so can result in programs crashing
 and outputting a stack trace.
 
-The only error handling mechanism Lua provides is the `pcall` function
-(short for "protected call"), which can be compared
-to a try block in other programming languages.
+The only error handling mechanism Lua provides are the
+`pcall` and `xpcall` functions (short for "protected call").
+These can be compared to a try block in other programming languages.
+
 The `pcall` function is passed a function to execute and
 optionally arguments to be passed to it.
 It returns a boolean indicating whether the call completed without error
 and an error message if one did occur.
+
+The `xpcall` function is similar, but accepts a message handler function
+that can be used to capture additional information about the error.
 
 The `error` function is the Lua equivalent of
 a `throw` statement in other programming languages.
