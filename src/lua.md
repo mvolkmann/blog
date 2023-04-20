@@ -123,7 +123,14 @@ For a more extensive list of Lua use, see the {% aTargetBlank
 - {% aTargetBlank "https://www.youtube.com/watch?v=H3inzGGFefg",
   "Lua and Pallene" %} talk by Roberto Ierusalimschy (2022)
 - {% aTargetBlank "https://www.youtube.com/@teej_dv", "TJ DeVries" %}
-  YouTube channel
+  YouTube channel; TJ is a Neovim core maintainer and
+  is the creator of several Neovim plugins including:
+
+  - {% aTargetBlank "https://github.com/nvim-telescope/telescope.nvim", "telescope.nvim" %} "highly extendable fuzzy finder"
+  - {% aTargetBlank "https://github.com/nvim-lua/plenary.nvim", "plenary.nvim" %} collection of Lua functions used to write Neovim plugins
+  - {% aTargetBlank "https://github.com/tjdevries/tree-sitter-lua", "tree-sitter-lua" %} Tree-sitter grammar for Lua
+  - {% aTargetBlank "https://github.com/tjdevries/colorbuddy.nvim", "colorbuddy.nvim" %} for creating Neovim color schemes
+
 - {% aTargetBlank "https://github.com/nanotee/nvim-lua-guide",
   "Getting started using Lua in Neovim" %}
 
