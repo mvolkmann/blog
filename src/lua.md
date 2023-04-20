@@ -2700,13 +2700,13 @@ It is passed a message and an optional integer error level.
 The message can be any type, but is typically a string or a table.
 
 The following code demonstrates using the `pcall` function.
-It repeated prompts for a dividend and a divisor
+It repeatedly prompts for a dividend and a divisor
 and displays their quotient.
 When invalid values are entered, error messages are output,
 but the program does not crash.
 
 ```lua
-function read_number(prompt)
+local function read_number(prompt)
   io.write(prompt .. ": ")
   local number = io.read("*number")
   -- The previous line does not consume the newline character.
@@ -2716,7 +2716,7 @@ function read_number(prompt)
   return number
 end
 
-function process()
+local function process()
   local dividend = read_number("Enter a dividend")
   if not dividend then
     -- Error messages here are tables containing a message and a code.
@@ -2750,7 +2750,6 @@ end
 # C Integration
 
 TODO: Add detail on calling C from Lua.
-
 TODO: Add detail on calling Lua from C.
 
 ## Games
@@ -2768,16 +2767,20 @@ The source code is available at {% aTargetBlank
 "https://github.com/coltonoscopy/cs502019games-track/tree/master/mario",
 "cs502019games-track" %}.
 
-For macOS, click the "64-bit zipped" link under "macOS" to download `love.app`.
-Drag this file into the "Applications" directory.
-Double-click `love.app` to launch the app.
-This will fail the first time with the message
-"love.app cannot be opened because the developer cannot be verified".
-To fix this, open the Settings app, select "Privacy & Security",
-scroll down to "love.app was blocked ..." and click the "Open Anyway" button.
+For macOS:
 
-Create a directory for a new game.
-Create a file in this directory named "main.lua".
+- Click the "64-bit zipped" link under "macOS" to download `love.app`.
+- Drag this file into the "Applications" directory.
+- Double-click `love.app` to launch the app.
+  This will fail the first time with the message
+  "love.app cannot be opened because the developer cannot be verified".
+  To fix this, open the Settings app, select "Privacy & Security",
+  scroll down to "love.app was blocked ..." and click the "Open Anyway" button.
+
+To get started creating a game:
+
+- Create a directory for a new game.
+- Create a file in this directory named "main.lua".
 
 If using VS Code:
 
@@ -2785,7 +2788,7 @@ If using VS Code:
 - Click the gear icon and select "Extension Settings".
 - Change "Pixelbyte > love2d: Path" to
   "/Applications/love.app/Contents/MacOS/love".
-- Open a "main.lua" file in an editor tab.
+- Open a `main.lua` file in an editor tab.
 - Press cmd-l to run the game.
 
 Love2D programs always define the functions
@@ -2796,14 +2799,14 @@ drawn on the screen at any point in time.
 The `love.update(dt)` function implements the game logic.
 
 The parameter `dt` in the `love.update` function is short for "delta time".
+This is used to make game updates frame rate independent.
 It is a floating point number that indicates
 the number of seconds requires to display each frame.
 This value can vary among devices.
 For example, when `dt` is `0.1`, the device displays 10 frames per second.
-This is used to make game updates frame rate independent.
 
-Add a `conf.lua` file to your game project directory
-to configure the game. For example:
+To configure a game, add a `conf.lua` file to your game project directory.
+For example:
 
 ```lua
 function love.conf(t)
@@ -2819,14 +2822,14 @@ To run a game, use one of these approaches:
 
 - Drag the game directory onto the Love application icon.
 - If VS Code has been configured property, press cmd-l.
-- TODO: Other options?
+- TODO: What other options are available?
 
 When comparing the distance between two points to some value,
 compare the square of the distance.
 This removes the need to use the `math.sqrt` function
 which can hurt game performance.
 
-TODO: See lua/love-game/main.lua.
+TODO: See lua/love/love-game/main.lua.
 
 ## Unorganized Content
 
