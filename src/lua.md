@@ -1301,17 +1301,26 @@ print(report("Mark", 62, "running", "biking", "programming"))
 
 Lua does not provide an explicit way to define
 default values for function parameters.
-There are approaches to implement this.
+There are approaches two implement this.
 
-The first approach is to accept a table argument and
-specify default values in that table using the `setmetatable` function.
+The first approach assigns default values using the `or` operator.
 For example:
 
 ```lua
+function greet(greeting, name)
+  greeting = greeting or "Hello"
+  name = name or "World"
+  print(string.format("%s, %s!", greeting, name))
+end
+
+greet() -- Hello, World!
+greet("Hola", "Mark") -- Hola, Mark!
+
 function volume(t)
-  -- This supplies default values for missing keys in the table t.
-  setmetatable(t, {__index={width=1, height=1, depth=1}})
-  return t.width * t.height * t.depth
+  local w = t.width or 1
+  local h = t.height or 1
+  local d = t.depth or 1
+  return w * h * d
 end
 
 print(volume({width=2, height=3, depth=4})) -- 24
@@ -1320,23 +1329,23 @@ print(volume({width=2, depth=4})) -- 8
 print(volume({})) -- 1
 ```
 
-The second approach achieves the same result without using a metatable.
-For example:
-
-```lua
-function volume(t)
-  local w = t.width or 1
-  local h = t.height or 1
-  local d = t.depth or 1
-  return w * h * d
-end
-```
-
-The `volume` function could also be implemented as follows:
+The `volume` function can also be implemented as follows:
 
 ```lua
 function volume(t)
   return (t.width or 1) * (t.height or 1) * (t.depth or 1)
+end
+```
+
+The second approach is to accept a table argument and
+specify default values in that table using the `setmetatable` function.
+For example:
+
+```lua
+function volume(t)
+  -- This supplies default values for missing keys in the table t.
+  setmetatable(t, {__index={width=1, height=1, depth=1}})
+  return t.width * t.height * t.depth
 end
 ```
 
