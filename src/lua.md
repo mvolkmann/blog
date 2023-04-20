@@ -2758,6 +2758,14 @@ is a Lua framework for building 2D games.
 It is free and open source.
 LÖVE can be downloaded from the previous link.
 
+For a great YouTube video on the LÖVE framework, see {% aTargetBlank
+"https://www.youtube.com/watch?v=3k4CMAaNCuk&t=3309s",
+"Falling in LÖVE with Lua" %}. In the video Colton Ogden
+walks through the beginnings of writing a Super Mario game.
+The source code is available at {% aTargetBlank
+"https://github.com/coltonoscopy/cs502019games-track/tree/master/mario",
+"cs502019games-track" %}.
+
 For macOS, click the "64-bit zipped" link under "macOS" to download `love.app`.
 Drag this file into the "Applications" directory.
 Double-click `love.app` to launch the app.
