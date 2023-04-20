@@ -2540,16 +2540,17 @@ To define a module named `my_module`, create a file
 named `my_module.lua` containing code like the following:
 
 ```lua
-local my_module = {} -- a table
+-- It is a convention to name this "M".
+local M = {} -- a table
 
-my_module.some_variable = "some value"
+M.some_variable = "some value"
 
 -- Function names containing a dot cannot be declared `local`.
-function my_module.some_function(p1, p2)
+function M.some_function(p1, p2)
   print("some_function was passed " .. p1 .. " and " .. p2)
 end
 
-return my_module
+return M
 ```
 
 The following code shows an equivalent way to write the code above:
@@ -2739,10 +2740,16 @@ TODO: Add detail on calling C from Lua.
 
 TODO: Add detail on calling Lua from C.
 
-## HTTP
+## Networking
 
-The {% aTargetBlank "https://github.com/daurnimator/lua-http", "lua-http" %}
-is a Lua library that supports implementing HTTP servers and clients.
+There are several popular Lua networking libraries.
+
+- {% aTargetBlank "https://github.com/daurnimator/lua-http", "lua-http" %} -
+  supports implementing HTTP servers and clients
+- {% aTargetBlank "https://lunarmodules.github.io/luasocket/", "LuaSocket" %} -
+  "a C core that provides support for the TCP and UDP transport layers, and
+  a set of Lua modules that add support for functionality
+  commonly needed by applications that deal with the Internet"
 
 ## Games
 
