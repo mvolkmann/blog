@@ -13,6 +13,13 @@ This post is split into three major sections.
 - The third section introduces a specific pre-made configuration for NeoVim
   called AstroNvim.
 
+## Resources
+
+For help on using Lua to configure Neovim see:
+
+- {% aTargetBlank "https://neovim.io/doc/user/lua-guide.html#lua-guide", "Neovim Lua Guide" %}
+- {% aTargetBlank "https://neovim.io/doc/user/lua.html", "Neovim Lua" %}
+
 ## Vim Review
 
 <img alt="Vim logo" style="width: 25%"
@@ -369,6 +376,11 @@ vim.keymap.set('i', '<D-s', "<Esc>:w<cr>i")
 vim.keymap.set('n', '<80><fd>hs', ":w<cr>")
 vim.keymap.set('i', '<80><fd>hs', "<Esc>:w<cr>i")
 ```
+
+To see all the options supported by the `vim` API,
+enter `vim.api.` and `vim.opt.` and
+scroll through all the provided completions.
+Help for each is displayed in a pop-up window.
 
 ### Buffers
 
@@ -1601,6 +1613,11 @@ For details on the supported keys, see the "Plugin Spec" section in the
 {% aTargetBlank "https://github.com/folke/lazy.nvim", "Lazy doc" %}.
 
 For help on a specific custom plugin, enter `:h {name}-config`.
+
+For information on writing your own Neovim plugins, see {% aTargetBlank
+"https://www.youtube.com/watch?v=PdaObkGazoU",
+"Writing Plugins - It's Never Been Easier" %}
+from DevOnDuty at NeovimConf 2022.
 
 #### Comment.nvim Plugin
 
