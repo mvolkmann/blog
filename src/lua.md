@@ -2243,32 +2243,33 @@ Modules in the standard library do not need to be imported to use them.
 
 The `basic` module defines the following core Lua functions.
 
-| Function                                      | Description                                     |
-| --------------------------------------------- | ----------------------------------------------- |
-| `assert(v [,message])`                        | raises an error if `v` is `false` or `nil`      |
-| `collectgarbage([opt [,arg]])`                | controls the operation of the garbage collector |
-| `dofile([filename])`                          |                                                 |
-| `error(message [, level])`                    |                                                 |
-| `_G`                                          |                                                 |
-| `getmetatable(object)`                        |                                                 |
-| `ipairs(t)`                                   |                                                 |
-| `load(chunk, [, chunkname [, mode [, env]]])` |                                                 |
-| `loadfile([filename [, mode, [, env]]])`      |                                                 |
-| `next(table [, index])`                       |                                                 |
-| `pairs(t)`                                    |                                                 |
-| `pcall(f, [, arg1, ...])`                     |                                                 |
-| `print(...)`                                  |                                                 |
-| `rawequal(v1, v2)`                            |                                                 |
-| `rawlen(v)`                                   |                                                 |
-| `rawset(table, index, value)`                 |                                                 |
-| `select(index, ...)`                          |                                                 |
-| `setmetatable(table, metatable)`              |                                                 |
-| `tonumber(e [, base])`                        |                                                 |
-| `tostring(v)`                                 |                                                 |
-| `type(v)`                                     |                                                 |
-| `_VERSION`                                    |                                                 |
-| `warn(msg1, ...)`                             |                                                 |
-| `xpcall(f, msgh, [, arg1, ...])`              |                                                 |
+| Function                                      | Description                                                                                                |
+| --------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `assert(v [,message])`                        | raises an error if `v` is `false` or `nil`                                                                 |
+| `collectgarbage([opt [,arg]])`                | controls the operation of the garbage collector                                                            |
+| `dofile([filename])`                          | opens a file containing Lua code and executes it                                                           |
+| `error(message [, level])`                    | raises an error that can be caught with `pcall` and `xpcall`                                               |
+| `_G`                                          | holds the global environment                                                                               |
+| `getmetatable(object)`                        | gets the metatable of a given object                                                                       |
+| `ipairs(t)`                                   | returns three values needed to iterate over the indexes and values in an array-like table                  |
+| `load(chunk, [, chunkname [, mode [, env]]])` | loads Lua code from a string or function and returns a function that will execute it                       |
+| `loadfile([filename [, mode, [, env]]])`      | loads Lua code from a file and returns a function that will execute it                                     |
+| `next(table [, index])`                       | gets the next index and value in array-like table                                                          |
+| `pairs(t)`                                    | returns three values needed to iterate over the keys and values in a dictionary-like table                 |
+| `pcall(f, [, arg1, ...])`                     | takes a function and arguments to pass to it; performs a "protected call" that catches errors              |
+| `print(...)`                                  | takes any number of arguments and sends their `tostring` values to `stdout`                                |
+| `rawequal(v1, v2)`                            | compares values without using their `__eq` metamethods                                                     |
+| `rawget(table, index)`                        | gets the value at a given table index without using the `__index` metamethod                               |
+| `rawlen(v)`                                   | gets the length of a value without using its `__len` metamethod                                            |
+| `rawset(table, index, value)`                 | sets the value at a given table index without using the `__newindex` metamethod                            |
+| `select(index, ...)`                          | returns a subset of its arguments starting at a given index or the number of arguments if the first is `#` |
+| `setmetatable(table, metatable)`              | sets the metatable of a given table                                                                        |
+| `tonumber(e [, base])`                        | converts a string to a number in a given base (defaults to 10)                                             |
+| `tostring(v)`                                 | converts a value to a string                                                                               |
+| `type(v)`                                     | returns the type of a value as a string                                                                    |
+| `_VERSION`                                    | a global variable that holds a string that describes the current Lua version (ex. "Lua 5.4")               |
+| `warn(msg1, ...)`                             | writes a warning message to `stdout` that constructed by concatenating its string arguments                |
+| `xpcall(f, msgh, [, arg1, ...])`              | similar to `pcall`, but takes a message handler that can be used to capture additional error information   |
 
 ### debug module
 
@@ -2627,6 +2628,8 @@ Coroutines do not run in parallel.
 The following code demonstrates using a coroutine
 to generate integers in given multiples
 stopping at a given limit.
+The `coroutine.create` function returns a value with the type `thread`,
+but it is a coroutine instance, not a thread in the usual sense.
 
 ```lua
 local n = 0
