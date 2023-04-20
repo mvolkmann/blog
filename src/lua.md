@@ -2231,13 +2231,52 @@ The Lua standard library defines the following modules:
 - <a href="https://www.lua.org/manual/5.4/manual.html#6.10" target="_blank">debug</a>
 - <a href="https://www.lua.org/manual/5.4/manual.html#6.8" target="_blank">io</a>
 - <a href="https://www.lua.org/manual/5.4/manual.html#6.7" target="_blank">math</a>
-- <a href="https://www.lua.org/manual/5.4/manual.html#6.3" target="_blank">modules/package</a>
+- <a href="https://www.lua.org/manual/5.4/manual.html#6.3" target="_blank">modules</a>
 - <a href="https://www.lua.org/manual/5.4/manual.html#6.9" target="_blank">os</a>
 - <a href="https://www.lua.org/manual/5.4/manual.html#6.4" target="_blank">string</a>
 - <a href="https://www.lua.org/manual/5.4/manual.html#6.6" target="_blank">table</a>
 - <a href="https://www.lua.org/manual/5.4/manual.html#6.5" target="_blank">utf8</a>
 
 Modules in the standard library do not need to be imported to use them.
+
+### basic module
+
+The `basic` module defines the following core Lua functions.
+
+| Function                                      | Description                                     |
+| --------------------------------------------- | ----------------------------------------------- |
+| `assert(v [,message])`                        | raises an error if `v` is `false` or `nil`      |
+| `collectgarbage([opt [,arg]])`                | controls the operation of the garbage collector |
+| `dofile([filename])`                          |                                                 |
+| `error(message [, level])`                    |                                                 |
+| `_G`                                          |                                                 |
+| `getmetatable(object)`                        |                                                 |
+| `ipairs(t)`                                   |                                                 |
+| `load(chunk, [, chunkname [, mode [, env]]])` |                                                 |
+| `loadfile([filename [, mode, [, env]]])`      |                                                 |
+| `next(table [, index])`                       |                                                 |
+| `pairs(t)`                                    |                                                 |
+| `pcall(f, [, arg1, ...])`                     |                                                 |
+| `print(...)`                                  |                                                 |
+| `rawequal(v1, v2)`                            |                                                 |
+| `rawlen(v)`                                   |                                                 |
+| `rawset(table, index, value)`                 |                                                 |
+| `select(index, ...)`                          |                                                 |
+| `setmetatable(table, metatable)`              |                                                 |
+| `tonumber(e [, base])`                        |                                                 |
+| `tostring(v)`                                 |                                                 |
+| `type(v)`                                     |                                                 |
+| `_VERSION`                                    |                                                 |
+| `warn(msg1, ...)`                             |                                                 |
+| `xpcall(f, msgh, [, arg1, ...])`              |                                                 |
+
+### debug module
+
+TODO: Add detail on this module.
+
+### io module
+
+TODO: Add detail on this module.
 
 ### math module
 
@@ -2530,6 +2569,10 @@ For example:
 -- Print pi to four decimal places.
 print(string.format("pi is %.4f", math.pi)) -- pi is 3.1416
 ```
+
+### table module
+
+TODO: Add detail on this module.
 
 ## Modules
 
