@@ -1258,6 +1258,17 @@ s1, s2, s3 = getStooges()
 print(s1, s2, s3) -- Moe Larry Curly
 ```
 
+When getting multiple return values from a function,
+underscores can be used as a placeholder for unneeded values.
+For example, when calling the `ipairs` function,
+if the index isn't needed then it can be used as follows:
+
+```lua
+for _, v in ipairs(t) do
+  ...
+end
+```
+
 Functions can take a variable number of arguments.
 For example:
 
@@ -3077,8 +3088,6 @@ Are there recommended Lua linters and code formatters that run outside of VS Cod
 What is the difference between these?
 my_var = 1 — Is this only global within the current source file?
 \_G.my_var = 1 — Does this make it accessible outside the current source file?
-
-When getting multiple return values from a function, you can use underscore to act as a placeholder for values you don’t want. ex. pairs function when you don’t want the key or ipairs function when you don’t want the index.
 
 Functions can call themselves recursively.
 
