@@ -1370,6 +1370,9 @@ end
 
 The second approach is to accept a table argument and
 specify default values in that table using the `setmetatable` function.
+Metatables are discussed in more detail later.
+Basically they can provide an alternate place to look
+when a given key is not found in a table.
 For example:
 
 ```lua
@@ -1717,8 +1720,9 @@ A metatable is a table that defines metamethods.
 All metamethods have names that begin with two underscores.
 Examples include:
 
+- `__add` - defines how the `+` operator adds values
+  represented by specific kinds of tables
 - `__tostring` - defines the string representation of a value
-- `__add` - defines how the `+` operator adds values of the type
 - `__index` - determines the value that should be returned
   when an attempt is made to access a missing key
 
@@ -1727,51 +1731,56 @@ associated with a given value or `nil` if one has not been assigned.
 
 Any value can have a metatable.
 Of the eight types defined by Lua,
-only instances of the string type have a metatable by default.
+only instances of the `string` type have a metatable by default.
 The following code demonstrates this:
 
 ```lua
-assert(getmetatable(nil) == nil) -- nil
-assert(getmetatable(true) == nil) -- boolean
-assert(getmetatable(123) == nil) -- number
+assert(getmetatable(nil) == nil) -- nil type
+assert(getmetatable(true) == nil) -- boolean type
+assert(getmetatable(123) == nil) -- number type
 
-assert(getmetatable("test") ~= nil) -- string
+assert(getmetatable("test") ~= nil) -- string type
 assert(getmetatable("test").__index == string)
+-- This shows that the alternate place to look
+-- for string functions is the `string` module.
 
 local t = {}
-assert(getmetatable(t) == nil) -- table
+assert(getmetatable(t) == nil) -- table tuype
 
 local function fn() end
-assert(getmetatable(fn) == nil) -- function
+assert(getmetatable(fn) == nil) -- function type
 
 local thread = coroutine.create(fn)
-assert(getmetatable(thread) == nil) -- thread
+assert(getmetatable(thread) == nil) -- thread type
 ```
 
 The colon operator provides syntactic sugar for an alternate way
 to call a function that is defined as a table entry.
-For example, the `string` metatable contains all the string functions.
+For example, the metatable of all `string` instances
+contains all the string functions.
 There are two ways to get the uppercase version of a string.
 
 ```lua
 local s = "test"
-print(string.upper(s)) -- TEST
-print(s:upper()) -- TEST
+print(string.upper(s)) -- uses the dot operator and returns "TEST"
+print(s:upper()) -- uses the colon operator and returns "TEST"
 ```
 
-In the second call to `upper` above
-Lua attempts to find an `upper` function in `s`.
-But `s` is a string rather than a table, so it is not found there.
+In the last call to `upper` above
+Lua attempts to find an `upper` function in the value of `s`.
+But `s` refers to a string rather than a table,
+so the `upper` function is not found there.
 Next Lua gets the metatable of `s` and looks for `upper`
 in the table that is the value of its `__index` entry.
 It finds `upper` defined there and calls it,
 passing it the value before the colon which is `s`.
 
 The same approach does not work with table instances.
-Table instances do not have a metatable whose `__index` key is set to `table`.
-It is possible to configure this a specific table instance.
+Table instances do not have a metatable,
+much less one whose `__index` key is set to `table`.
+It is possible to configure this for a specific table instance.
 But doing so only adds the ability to use the colon operator
-with a specific table instance.
+with that specific table instance.
 For example:
 
 ```lua
@@ -1784,14 +1793,20 @@ print(t:concat(" and ")) -- apple and banana and cherry
 Another issue with this approach is that assigning keys in the table `t`
 that have the same name as a table function
 makes those functions inaccessible using the colon operator.
+For example:
+
+```lua
+t.concat = "broken"
+print(t:concat(" and ")) -- attempt to call a string value (method 'concat')
+```
 
 ### Table Delegation
 
 Custom metatables can be added to tables, but not to any other Lua types.
 This is done with the `setmetatable(table, metatable)` function.
 
-The `setmetatable` function returns its first argument
-which is useful when a table constructor is passed.
+The `setmetatable` function returns its first argument which is
+useful for getting a reference when a table constructor is passed.
 
 The `__index` entry can be implemented in two ways.
 It can be a table that supplies default values for missing properties
@@ -1805,37 +1820,49 @@ The simplest use of metatables is to associated one with a single table.
 The following code demonstrates this.
 
 ```lua
-my_table = {alpha = 7}
-print(getmetatable(my_table)) -- nil; no metatable assigned yet
+local t = {alpha = 7}
+print(getmetatable(t)) -- nil; no metatable assigned yet
 
 -- Create a metatable containing one metamethod named `__index`.
 -- Its value is a table holding default key/value pairs.
-my_metatable = {__index = {alpha = 1, beta = 2}}
+local my_metatable = {__index = {alpha = 1, beta = 2}}
 
 -- Associate the metatable with the table.
-setmetatable(my_table, my_metatable)
+setmetatable(t, my_metatable)
 
-print(my_table.alpha, my_table.beta, my_table.gamma) -- 7 2 nil
+print(t.alpha, t.beta, t.gamma) -- 7 2 nil
 ```
 
 There is no need to hold the metatable in a variable.
 It can be assigned directly to the table as follows:
 
 ```lua
-setmetatable(my_table, {__index = {alpha = 1, beta = 2}})
+setmetatable(t, {__index = {alpha = 1, beta = 2}})
 ```
 
 Instead of defining a separate table for the metatable,
 we can make the table serve as its own metatable as follows:
 
 ```lua
-my_table.__index = {alpha = 1, beta = 2}
-setmetatable(my_table, my_table)
+t.__index = {alpha = 1, beta = 2}
+setmetatable(t, t)
+```
+
+The value of `__index` can be a function instead of a table.
+For example:
+
+```lua
+t.__index = function (table, key)
+  if key == "beta" then return 2 end
+  return nil
+end
+setmetatable(t, t)
+print(t.alpha, t.beta, t.gamma) -- 7 2 nil
 ```
 
 All these variations produce the same results.
-A downside is that you may encounter all of these approaches in code
-that others write, so it is necessary to understand all of them.
+You may encounter all of these approaches in code that others write,
+so it is necessary to understand all of them.
 
 Adding a metatable to a single table instance is not nearly as useful as
 adding a metatable to all instances of a given kind of table
