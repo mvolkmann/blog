@@ -797,18 +797,22 @@ For example, `fullName = firstName .. ' ' .. lastName`.
 
 Strings are immutable.
 Operations on them create new strings.
+
 String operations are supported by the `string` standard library
 which is described later.
 
 ## Patterns
 
 A pattern is a string containing magic characters and character classes.
-They provide a simpler alternative to regular expressions
-which are not directly supported in Lua.
+Patterns are similar to regular expressions,
+but are bit simpler and not quite as powerful.
 
-The code to support patterns is much smaller than
+Regular expressions are not directly supported in Lua.
+The reason for this is that
+the code to support patterns is much smaller than
 the code required to support regular expressions.
-This is important since one of the goals of Lua to is to be small.
+Opting out of regular expression support
+helps achieve the Lua goal of being small.
 
 Patterns are used in the string library functions
 `find`, `gmatch`, `gsub`, and `match`.
@@ -1661,123 +1665,123 @@ dump(t1) -- 1 2 3
 dump(t2) -- 4 5 1 2 3; existing value 6 was replaced with 1
 ```
 
-## self Parameter
+## Modules
 
-Tables can have entries where the key is a function name
-and the value is a function.
-These can be defined inside a table literal or outside.
+A module is defined by a table whose entries are variables and functions.
+Typically each module is defined in its own source file
+and made available in other source files using the `require` function.
 
-There are two syntaxes for defining table functions outside a table literal:
-
-- `MyTable.my_function(p1, p2)` referred to below as a "dot function"
-- `MyTable:my_function(p1, p2)` referred to below as a "colon function"
-
-Dot functions are somewhat like object-oriented class methods.
-They can be called with a dot and sometimes with a colon.
-For example:
+To define a module named `my_module`, create a file
+named `my_module.lua` containing code like the following:
 
 ```lua
-MyTable.my_function(v1, v2)
+-- It is a convention to name this "M".
+local M = {} -- a table
 
--- Using a colon is only allowed when v1 has its metatable set to MyTable.
-v1:my_function(v2)
+M.some_variable = "some value"
+
+-- Function names containing a dot cannot be declared `local`.
+function M.some_function(p1, p2)
+  print("some_function was passed " .. p1 .. " and " .. p2)
+end
+
+return M
 ```
 
-Colon functions are like object-oriented instance methods.
-They are supplied with a hidden first parameter named `self`,
-whereas dot functions are not.
-
-Colon functions should always be called with a colon, not a dot.
-For example, `MyTable:my_function(v1, v2)`.
-
-The following code demonstrates defining and calling
-dot functions and colon functions.
+The following code shows an equivalent way to write the code above:
 
 ```lua
-MyTable = {
-  dotInner = function(p1, p2)
-    print(p1, p2)
+return {
+  some_variable = "some value",
+  some_function = function(p1, p2)
+    print("some_function was passed " .. p1 .. " and " .. p2)
   end
 }
-
-MyTable.dotInner(1, 2) -- 1, 2
-
--- This is an alternate way to write the dotInner function,
--- defining it outside the table literal.
-function MyTable.dotOuter(p1, p2)
-  print(p1, p2)
-end
-
-MyTable.dotOuter(1, 2) -- 1, 2
-
--- Here dotOuter is called with a colon.
--- Calling any function using a colon causes the variable
--- before the colon to be passed as the first argument.
--- This makes 1 the second argument and 2 the third.
--- Dot function should never be called like this.
-MyTable:dotOuter(1, 2) -- MyTable address, 1 (last argument 2 is ignored)
-
--- Colon functions cannot be defined inside a table literal.
--- They have an invisible first parameter named `self`.
-function MyTable:colonOuter(p1, p2)
-  print(self, p1, p2)
-end
-
--- Here `colonOuter` is called without a colon,
--- so MyTable is not passed as the first argument.
--- Colon functions should never be called like this.
-MyTable.colonOuter(1, 2, 3) -- 1, 2, 3
-
--- Here colonOuter is called with a colon,
--- so MyTable is passed as the first argument.
--- Colon functions should always be called like this.
-MyTable:colonOuter(1, 2) -- MyTable address, 1, 2
-
--- This is equivalent to the previous line.
--- While this works, it is overly verbose.
-MyTable.colonOuter(MyTable, 1, 2) -- MyTable address, 1, 2
 ```
 
-TODO: See my question about the colon syntax at https://www.reddit.com/r/lua/comments/12tc33n/colon_syntax/
+The following code demonstrates using the module defined above.
+Note that the string passed to the `require` function
+does not include the `.lua` file extension.
+
+```lua
+local mm = require("my_module")
+print(mm.some_variable) -- some value
+mm.some_function(1, 2) -- some_function was passed 1 and 2
+```
+
+A Lua "package" is a collection of modules.
 
 ## Metatables
 
 A metatable is a table that defines metamethods.
 All metamethods have names that begin with two underscores.
-Examples include
-`__tostring` which defines the string representation of a table,
-`__add` which defines how the `+` operator adds a value to a table, and
-`__index` which determines the value that should be returned
-when an attempt is made to access a missing key.
+Examples include:
 
-By default tables do not have a metatable.
-Metatables are only useful when they are assigned to a table.
+- `__tostring` - defines the string representation of a value
+- `__add` - defines how the `+` operator adds values of the type
+- `__index` - determines the value that should be returned
+  when an attempt is made to access a missing key
+
+The `getmetatable(table)` function returns the metatable
+associated with a given value or `nil` if one has not been assigned.
+
+Any value can have a metatable.
+Of the eight types defined by Lua,
+only instances of the string type have a metatable by default.
+The following code demonstrates this:
+
+```lua
+assert(getmetatable(nil) == nil) -- nil
+assert(getmetatable(true) == nil) -- boolean
+assert(getmetatable(123) == nil) -- number
+
+assert(getmetatable("test") ~= nil) -- string
+assert(getmetatable("test").__index == string)
+
+local t = {}
+assert(getmetatable(t) == nil) -- table
+
+local function fn() end
+assert(getmetatable(fn) == nil) -- function
+
+local thread = coroutine.create(fn)
+assert(getmetatable(thread) == nil) -- thread
+```
+
+The colon operator provides syntactic sugar for an alternate way
+to call a function that is defined as a table entry.
+For example, the `string` metatable contains all the string functions.
+There are two ways to get the uppercase version of a string.
+
+```lua
+local s = "test"
+print(string.upper(s)) -- TEST
+print(s:upper()) -- TEST
+```
+
+In the second call to `upper` above
+Lua attempts to find an `upper` function in `s`.
+But `s` is a string rather than a table, so it is not found there.
+Next Lua gets the metatable of `s` and looks for `upper`
+in the table that is the value of its `__index` entry.
+It finds `upper` defined there and calls it,
+passing it the value before the colon which is `s`.
+
+### Table Delegation
+
+Custom metatables can be added to tables, but not to any other Lua types.
 This is done with the `setmetatable(table, metatable)` function.
-The same metatable can be assigned to multiple tables.
-This allows them to share both functionality and data.
 
 The `setmetatable` function returns its first argument
-which is useful when a literal table is passed.
+which is useful when a table constructor is passed.
 
-The `getmetatable(table)` function returns the metatable that has been
-assigned to a given table or `nil` if one has not been assigned.
-
-The `__index` method can be implemented in two ways.
+The `__index` entry can be implemented in two ways.
 It can be a table that supplies default values for missing properties
 or it can be a function that is passed a table and a key.
 Both approaches are shown below.
 
-Lua does not support defining classes.
-Instead it uses a combination of tables and functions for everything.
-However, the combination of functions, tables, and metatables
-can be used to simulate classes.
-See the "Objected Oriented Programming" section below for details.
-
-TODO: Get examples from metatables.lua!
-
-TODO: Add much more here!
-
-### Table Delegation
+The same metatable can be assigned to multiple tables.
+Doing so allows them to share both functionality and data.
 
 The simplest use of metatables is to associated one with a single table.
 The following code demonstrates this.
@@ -1814,6 +1818,11 @@ setmetatable(my_table, my_table)
 All these variations produce the same results.
 A downside is that you may encounter all of these approaches in code
 that others write, so it is necessary to understand all of them.
+
+Adding a metatable to a single table instance is not nearly as useful as
+adding a metatable to all instances of a given kind of table
+when they are created.
+This is the topic of the next section.
 
 ### Classes
 
@@ -2015,6 +2024,195 @@ p3:print() -- (8.0, 5.0)
 
 local p4 = Point.new {y = 7}
 p4:print() -- (0.00, 7.00)
+```
+
+### Method Syntax
+
+syntactic sugar
+
+Tables can have entries where the key is a function name
+and the value is a function.
+While this can be done in any table, it makes the most sense to do this
+in tables that are the values the `__index` property in a metatable.
+The reason for this is that those functions can be shared
+by multiple other tables that use the metatable.
+
+These functions can be referred to as "methods" because
+they are intended to be invoked on a specific table instance
+
+Methods can be defined inside or outside of a table constructor.
+There is one syntax for defining them inside a table constructor
+and two syntaxes for defining them outside.
+
+The following code demonstrates all three approaches:
+
+```lua
+-- File point.lua
+local M = {}
+
+local mt = {
+  __index = {
+    distance1 = function (point)
+      return math.sqrt(point.x^2 + point.y^2)
+    end
+  }
+}
+
+function mt.distance2(point)
+  return math.sqrt(point.x^2 + point.y^2)
+end
+
+function mt:distance3()
+  return math.sqrt(self.x^2 + self.y^2)
+end
+
+function M.new(p)
+  p = p or {x = 0, y = 0}
+  setmetatable(p, mt)
+  return p
+end
+
+return M
+```
+
+The following code demonstrates using the module defined above:
+
+```lua
+local Point = require("point")
+
+local p = Point.new({x = 3, y = 4})
+print(Point.distance1(p)) -- 5.0
+print(p:distance1()) -- 5.0
+print(Point.distance2(p)) -- 5.0
+print(p:distance2()) -- 5.0
+print(Point.distance3(p)) -- 5.0
+print(p:distance3()) -- 5.0
+```
+
+- `MyTable.my_function(p1, p2)` referred to below as a "dot function"
+- `MyTable:my_function(p1, p2)` referred to below as a "colon function"
+
+Dot functions are somewhat like object-oriented class methods and
+colon functions are somewhat like object-oriented instance methods.
+The only difference between these is that colon functions
+are supplied with a hidden first parameter named self
+whose value is the value on which the function was called.
+
+Functions defined on table can be called using either a dot or a colon,
+regardless of whether the function was defined with a dot or a colon.
+The only difference between these is that
+calling a table function using a colon
+automatically passes the value on which it is called as the first argument,
+moving all the explicit arguments to the right.
+
+Let's clear up the confusion with some examples.
+
+```lua
+local point = { x = 3, y = 4 }
+function Point.dot_distance(self)
+  return math.sqrt(self.x^2 + self.y^2)
+end
+function Point:colon_distance()
+  return math.sqrt(self.x^2 + self.y^2)
+end
+print()
+
+Point = class({
+  -- Properties
+  x = 0,
+  y = 0,
+
+  -- Methods
+  distanceFromOrigin = function(p)
+    return math.sqrt(p.x ^ 2 + p.y ^ 2)
+  end,
+  print = function (p)
+    print(p) -- uses __tostring below
+  end,
+
+  -- Metamethods
+  __add = function (p1, p2)
+    return Point.new({x = p1.x + p2.x, y = p1.y + p2.y})
+  end,
+  __tostring = function (p)
+    return string.format("(%.2f, %.2f)", p.x, p.y)
+  end
+})
+
+local p1 = Point.new {x = 3, y = 4}
+print(p1) -- (3.00, 4.00)
+p1:print() -- (3.00, 4.00)
+print(p1:distanceFromOrigin()) -- 5.0
+
+local p2 = Point.new {x = 5, y = 1}
+local p3 = p1 + p2 -- uses the __add metamethod
+p3:print() -- (8.0, 5.0)
+
+local p4 = Point.new {y = 7}
+p4:print() -- (0.00, 7.00)
+MyType = {
+  operation = function(p1, p2)
+    print(p1, p2)
+  end
+}
+
+MyTable.dotInner(1, 2) -- 1, 2
+
+-- This is an alternate way to write the dotInner function,
+-- defining it outside the table constructor.
+function MyTable.dotOuter(p1, p2)
+  print(p1, p2)
+end
+
+MyTable.dotOuter(1, 2) -- 1, 2
+
+-- Here dotOuter is called with a colon.
+-- Calling any function using a colon causes the variable
+-- before the colon to be passed as the first argument.
+-- This makes 1 the second argument and 2 the third.
+-- Dot function should never be called like this.
+MyTable:dotOuter(1, 2) -- MyTable address, 1 (last argument 2 is ignored)
+
+-- Colon functions cannot be defined inside a table constructor.
+-- They have an invisible first parameter named `self`.
+function MyTable:colonOuter(p1, p2)
+  print(self, p1, p2)
+end
+
+-- Here `colonOuter` is called without a colon,
+-- so MyTable is not passed as the first argument.
+-- Colon functions should never be called like this.
+MyTable.colonOuter(1, 2, 3) -- 1, 2, 3
+
+-- Here colonOuter is called with a colon,
+-- so MyTable is passed as the first argument.
+-- Colon functions should always be called like this.
+MyTable:colonOuter(1, 2) -- MyTable address, 1, 2
+
+-- This is equivalent to the previous line.
+-- While this works, it is overly verbose.
+MyTable.colonOuter(MyTable, 1, 2) -- MyTable address, 1, 2
+```
+
+TODO: See my question about the colon syntax at https://www.reddit.com/r/lua/comments/12tc33n/colon_syntax/
+TODO: The answer is provided in the example code below!
+
+```lua
+s = "test"
+print(s:upper()) -- TEST
+-- The previous line works because all string instances have a metatable
+-- with `__index` set to the table `string` that defines all the string functions.
+print(getmetatable(s).__index.upper)
+
+-- Tables do not do the same thing.
+t = {"a", "b", "c"}
+print(table.concat(t, " ")) -- a b c
+-- print(t:concat(" ")) -- attempt to call a nil value (method 'concat')
+print(getmetatable(t)) -- nil
+
+-- We can fix this for individual tables, not for all of them at once.
+setmetatable(t, {__index = table})
+print(t:concat(" ")) -- a b c
 ```
 
 ### Inheritance
@@ -2717,52 +2915,6 @@ print(string.format("pi is %.4f", math.pi)) -- pi is 3.1416
 ### table module
 
 TODO: Add detail on this module.
-
-## Modules
-
-A module is defined by a table whose entries are variables and functions.
-Typically each module is defined in its own source file
-and made available in other source files using the `require` function.
-
-To define a module named `my_module`, create a file
-named `my_module.lua` containing code like the following:
-
-```lua
--- It is a convention to name this "M".
-local M = {} -- a table
-
-M.some_variable = "some value"
-
--- Function names containing a dot cannot be declared `local`.
-function M.some_function(p1, p2)
-  print("some_function was passed " .. p1 .. " and " .. p2)
-end
-
-return M
-```
-
-The following code shows an equivalent way to write the code above:
-
-```lua
-return {
-  some_variable = "some value",
-  some_function = function(p1, p2)
-    print("some_function was passed " .. p1 .. " and " .. p2)
-  end
-}
-```
-
-The following code demonstrates using the module defined above.
-Note that the string passed to the `require` function
-does not include the `.lua` file extension.
-
-```lua
-local mm = require("my_module")
-print(mm.some_variable) -- some value
-mm.some_function(1, 2) -- some_function was passed 1 and 2
-```
-
-A Lua "package" is a collection of modules.
 
 ## Environments
 
