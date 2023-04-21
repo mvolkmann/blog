@@ -3088,24 +3088,22 @@ It returns a boolean indicating if it was successful
 and any values passed to `coroutine.yield`.
 
 ```lua
-local n = 0
+local function nextNumber(delta, limit, previous)
+  local next = (previous or 0) + delta
+  if next <= limit then
+    coroutine.yield(next)
+    nextNumber(delta, limit, next) -- recursive call
+  end
+end
+
+local thread = coroutine.create(nextNumber)
+print(type(thread)) -- thread
+print(coroutine.status(thread)) -- "suspended"
 
 -- We only need to pass arguments in the
 -- first call to `resume` for this coroutine.
-local thread = coroutine.create(function(delta, limit)
-  while true do
-    local next = n + delta
-    if next > limit then break end
-    n = next
-    coroutine.yield(n)
-  end
-end)
-
-print(type(thread)) -- thread
-
-print(coroutine.status(thread)) -- "suspended"
-
 local success, v = coroutine.resume(thread, 3, 15)
+
 while success and v do
   print(v) -- 3, 6, 9, 12, and 15
   success, v = coroutine.resume(thread)
@@ -3122,25 +3120,17 @@ it only returns the values passed to `coroutine.yield`,
 
 The following code re-implements the previous example
 to use `coroutine.wrap` instead of `coroutine.create`.
+The `nextNumber` function remains unchanged.
 
 ```lua
-local n = 0
+local iterator = coroutine.wrap(nextNumber)
 
-local next = coroutine.wrap(function(delta, limit)
-  while true do
-    local next = n + delta
-    if next > limit then break end
-    n = next
-    coroutine.yield(n)
-  end
-end)
+print(type(iterator)) -- function
 
-print(type(next)) -- function
-
-local v = next(3, 15)
+local v = iterator(3, 15)
 while v do
   print(v) -- 3, 6, 9, 12, and 15
-  v = next()
+  v = iterator()
 end
 ```
 
