@@ -1989,26 +1989,26 @@ computes the distance from the origin to a point.
 local Point = {}
 
 local mt = {
-\_\_index = {
-distance1 = function(point)
-return math.sqrt(point.x ^ 2 + point.y ^ 2)
-end
-}
+  __index = {
+    distance1 = function(point)
+      return math.sqrt(point.x ^ 2 + point.y ^ 2)
+    end
+  }
 }
 
 function Point.distance2(point)
-return math.sqrt(point.x ^ 2 + point.y ^ 2)
+  return math.sqrt(point.x ^ 2 + point.y ^ 2)
 end
 
 function Point.new(p)
-p = p or { x = 0, y = 0 }
+  p = p or { x = 0, y = 0 }
 
-function p:distance3()
-return math.sqrt(self.x ^ 2 + self.y ^ 2)
-end
+  function p:distance3()
+    return math.sqrt(self.x ^ 2 + self.y ^ 2)
+  end
 
-setmetatable(p, mt)
-return p
+  setmetatable(p, mt)
+  return p
 end
 
 local pt = Point.new({ x = 3, y = 4 })
@@ -2034,7 +2034,7 @@ print(pt:distance1()) -- 5.0
 
 ### Simplifying Classes
 
-There is a fair amount boilerplate code in the examples above
+There is a fair amount boilerplate code in all the examples above
 and plenty of opportunity to make mistakes.
 We can address this by writing a function named `class`
 that does all the work for us.
