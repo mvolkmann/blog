@@ -1781,6 +1781,10 @@ setmetatable(t, {__index = table})
 print(t:concat(" and ")) -- apple and banana and cherry
 ```
 
+Another issue with this approach is that assigning keys in the table `t`
+that have the same name as a table function
+makes those functions inaccessible using the colon operator.
+
 ### Table Delegation
 
 Custom metatables can be added to tables, but not to any other Lua types.
