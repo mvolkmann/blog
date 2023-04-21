@@ -1767,6 +1767,20 @@ in the table that is the value of its `__index` entry.
 It finds `upper` defined there and calls it,
 passing it the value before the colon which is `s`.
 
+The same approach does not work with table instances.
+Table instances do not have a metatable whose `__index` key is set to `table`.
+It is possible to configure this a specific table instance.
+But doing so only adds the ability to use the colon operator
+with a specific table instance.
+For example:
+
+```lua
+local t = {"apple", "banana", "cherry"}
+print(table.concat(t, " and ")) -- apple and banana and cherry
+setmetatable(t, {__index = table})
+print(t:concat(" and ")) -- apple and banana and cherry
+```
+
 ### Table Delegation
 
 Custom metatables can be added to tables, but not to any other Lua types.
