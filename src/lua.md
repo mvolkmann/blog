@@ -3078,8 +3078,14 @@ Coroutines do not run in parallel.
 The following code demonstrates using a coroutine
 to generate integers in given multiples
 stopping at a given limit.
+
 The `coroutine.create` function returns a value with the type `thread`,
 but it is a coroutine instance, not a thread in the usual sense.
+
+The `coroutine.resume` function takes a thread and]
+arguments to be passed to the coroutine function.
+It returns a boolean indicating if it was successful
+and any values passed to `coroutine.yield`.
 
 ```lua
 local n = 0
@@ -3106,6 +3112,36 @@ while success and v do
 end
 
 print(coroutine.status(thread)) -- "dead"
+```
+
+The `coroutine.wrap` function provides an alternative to `coroutine.create`.
+Rather than returning a `thread`, `coroutine.wrap` returns a function
+than can be called to resume the `thread`.
+Rather than returning a boolean status and the values passed to `coroutine.yield`,
+it only returns the values passed to `coroutine.yield`,
+
+The following code re-implements the previous example
+to use `coroutine.wrap` instead of `coroutine.create`.
+
+```lua
+local n = 0
+
+local next = coroutine.wrap(function(delta, limit)
+  while true do
+    local next = n + delta
+    if next > limit then break end
+    n = next
+    coroutine.yield(n)
+  end
+end)
+
+print(type(next)) -- function
+
+local v = next(3, 15)
+while v do
+  print(v) -- 3, 6, 9, 12, and 15
+  v = next()
+end
 ```
 
 Lua does not directly support concurrently running threads,
