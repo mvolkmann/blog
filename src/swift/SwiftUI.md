@@ -54,18 +54,18 @@ Most example code here assumes this is done and does not include it.
 
 ## Getting Started
 
-- open Xcode which includes Swift and SwiftUI
-- select "Create a new Xcode project"
-- select an Application type such as "App" and click "Next"
-- enter a Product Name
-- select a Team such as "your name (Personal Team)"
-- enter an Organization Identifier such as your email address
-- select the Interface such as "SwiftUI"
-- select the Language such as "Swift"
-- check "Use Core Data" to enable persisting data in a local database
-- check "Include Tests" to get a jump start on enable writing unit tests
-- click "Next"
-- select the directory where the project will be stored and click "Create"
+- Open Xcode which includes Swift and SwiftUI.
+- Select "Create a new Xcode project".
+- Select an Application type such as "App" and click "Next".
+- Enter a Product Name.
+- Select a Team such as "your name (Personal Team)".
+- Enter an Organization Identifier such as your email address.
+- Select an Interface such as "SwiftUI".
+- Select a Language such as "Swift".
+- Check "Use Core Data" to enable persisting data in a local database.
+- Check "Include Tests" to get a jump start on enable writing unit tests.
+- Click "Next".
+- Select the directory where the project will be stored and click "Create".
 
 The new project will have the following structure and files:
 
@@ -77,7 +77,7 @@ The group contains the following files:
   This defines the main struct which implements the `App` protocol.
   It is preceded by the `@main` attribute
   which marks the entry point of the app.
-  It has computed property named `body`
+  It has a computed property named `body`
   whose value implements the `Scene` protocol.
   The actual value is an instance of `WindowGroup`.
   This renders an instance of `ContentView` which is defined in the next file.
@@ -107,8 +107,8 @@ The group contains the following files:
 
 - `{ProjectName}.xcodeproj`
 
-  This file is not visible in the Navigator,
-  but can be viewed and edited by clicking the top entry in the navigator.
+  This file is not visible in the Project Navigator, but can be
+  viewed and edited by clicking the top entry in the Project Navigator.
   The editor for this data contains the following tabs:
   General, Signing & Capabilities, Resource Tags, Info,
   Build Settings, Build Phases, and Build Rules.
