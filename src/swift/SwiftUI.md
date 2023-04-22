@@ -19,14 +19,6 @@ is a Swift framework for building iOS, iPadOS, watchOS, macOS, and tvOS apps.
 It is an alternative to its predecessor
 {% aTargetBlank "https://developer.apple.com/documentation/uikit", "UIKit" %}.
 
-While much code can be reused between apps that target different platforms,
-SwiftUI is not intended to be used for
-creating single apps that run on multiple platforms.
-Some features of SwiftUI are only available on specific platforms.
-
-To use SwiftUI in a source file, add `import SwiftUI` at the top of the file.
-Most example code here assumes this is done and does not include it.
-
 By comparison SwiftUI ...
 
 - is declarative in nature than imperative
@@ -42,8 +34,10 @@ By comparison SwiftUI ...
   "https://learnappmaking.com/scene-delegate-app-delegate-xcode-11-ios-13/",
   "here" %})
 
-Much of the same code can be used to build apps across all Apple platforms.
-However, there are platform differences that require different code.
+While much code can be reused between apps that target different platforms,
+SwiftUI is not intended to be used for
+creating single apps that run on multiple platforms.
+Some features of SwiftUI are only available on specific platforms.
 
 Many SwiftUI views are built on UIKit components,
 but knowing their relationships is not necessary.
@@ -54,6 +48,9 @@ by wrapping them in a struct that conforms to the {% aTargetBlank
 "UIViewRepresentable" %} protocol.
 However, there is enough functionality in SwiftUI
 that this is typically not necessary.
+
+To use SwiftUI in a source file, add `import SwiftUI` at the top of the file.
+Most example code here assumes this is done and does not include it.
 
 ## Getting Started
 

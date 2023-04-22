@@ -16,7 +16,7 @@ This article highlights many features of the {% aTargetBlank
 "https://developer.apple.com/swift/", "Swift" %} programming language
 that make it an attractive alternative to other programming languages.
 For a more complete introduction to Swift, see {% aTargetBlank
-"https://docs.swift.org/swift-book/GuidedTour/GuidedTour.html",
+"https://docs.swift.org/swift-book/documentation/the-swift-programming-language/guidedtour/",
 "A Swift Tour" %}.
 
 My goal is to provide clear, concise descriptions of a large number
@@ -59,7 +59,7 @@ Functions that do not specify a return type cannot return a value.
 Each parameter is described by an optional argument label,
 a parameter name, a type, and an optional default value.
 Argument labels are used in calls to functions
-to specify the values to be passed.
+to specify the values being passed.
 Parameter names are used to access the values inside the function body.
 
 The argument label for each parameter has three possibilities:
