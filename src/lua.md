@@ -656,7 +656,32 @@ end
 To print to the terminal using colors, see:
 
 - {% aTargetBlank "https://github.com/kikito/ansicolors.lua", "ansicolors.lua" %}
+
+  To install, enter `luarocks install ansicolors`
+
+  ```lua
+  local term = require 'term'
+  local colors = term.colors
+
+  print(colors.red 'red')
+  print(colors.yellow 'yellow')
+  print(colors.blue 'blue')
+  print('white')
+  ```
+
 - {% aTargetBlank "https://github.com/hoelzro/lua-term", "lua-term" %}
+
+  To install, enter `luarocks install lua-term`
+
+  ```lua
+  local term = require 'term'
+  local colors = term.colors
+
+  print(colors.red 'red')
+  print(colors.yellow 'yellow')
+  print(colors.blue 'blue')
+  print('white')
+  ```
 
 For information on reading and writing files,
 see the "Standard Library" "io Module" section below.
