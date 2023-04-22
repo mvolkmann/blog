@@ -133,6 +133,8 @@ For a more extensive list of Lua use, see the {% aTargetBlank
 
 - {% aTargetBlank "https://github.com/nanotee/nvim-lua-guide",
   "Getting started using Lua in Neovim" %}
+- {% aTargetBlank "https://github.com/LewisJEllis/awesome-lua",
+  "Awesome Lua" %} - "a curated list of quality Lua packages and resources."
 
 ## Cheat Sheets
 
@@ -650,6 +652,11 @@ else
   print("An invalid number was entered.")
 end
 ```
+
+To print to the terminal using colors, see:
+
+- {% aTargetBlank "https://github.com/kikito/ansicolors.lua", "ansicolors.lua" %}
+- {% aTargetBlank "https://github.com/hoelzro/lua-term", "lua-term" %}
 
 For information on reading and writing files,
 see the "Standard Library" "io Module" section below.
@@ -3137,6 +3144,8 @@ end
 Lua does not directly support concurrently running threads,
 but they can be implemented using the approach described in
 chapter 26 of the "Programming in Lua - Fourth edition" book.
+There are many Lua libraries that support multithreading including
+{% aTargetBlank "http://lualanes.github.io/lanes/", "Lua Lanes" %}.
 
 Lua does not have the equivalent of the `async` and `await` keywords
 in other programming languages, but those can be simulated.
@@ -3149,12 +3158,16 @@ For sending HTTP requests, see the "Networking" section below.
 
 There are several popular Lua networking libraries.
 
+- {% aTargetBlank "http://openresty.org/en/", "OpenResty" %} is
+  "a dynamic web platform based on NGINX and LuaJIT."
 - {% aTargetBlank "https://github.com/daurnimator/lua-http", "lua-http" %} -
   supports implementing HTTP servers and clients
 - {% aTargetBlank "https://lunarmodules.github.io/luasocket/", "LuaSocket" %} -
   "a C core that provides support for the TCP and UDP transport layers, and
   a set of Lua modules that add support for functionality
   commonly needed by applications that deal with the Internet"
+- {% aTargetBlank "https://luvit.io", "Luvit" %} -
+  "asynchronous I/O for Lua; implements the same APIs as Node.js"
 
 ## Utility Functions
 
@@ -3281,6 +3294,8 @@ TODO: Add detail on calling Lua from C.
 
 ## Games
 
+### LÖVE
+
 {% aTargetBlank "https://love2d.org", "LÖVE" %}
 is a Lua framework for building 2D games.
 It is free and open source.
@@ -3357,6 +3372,11 @@ This removes the need to use the `math.sqrt` function
 which can hurt game performance.
 
 TODO: See lua/love/love-game/main.lua.
+
+### LÖVR
+
+{% aTargetBlank "https://lovr.org", "LÖVR" %} is
+"an open source framework for rapidly building immersive 3D experiences."
 
 ## Unorganized Content
 
