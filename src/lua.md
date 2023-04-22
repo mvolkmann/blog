@@ -663,9 +663,9 @@ To print to the terminal using colors, see:
   local term = require 'term'
   local colors = term.colors
 
-  print(colors.red 'red')
-  print(colors.yellow 'yellow')
-  print(colors.blue 'blue')
+  print(colors("%{bright red}red"))
+  print(colors("%{bright yellow}yellow"))
+  print(colors("%{bright blue}blue"))
   print('white')
   ```
 
@@ -677,10 +677,10 @@ To print to the terminal using colors, see:
   local term = require 'term'
   local colors = term.colors
 
-  print(colors.red 'red')
-  print(colors.yellow 'yellow')
-  print(colors.blue 'blue')
-  print('white')
+  print(colors.bright .. colors.red 'red')
+  print(colors.bright .. colors.yellow 'yellow')
+  print(colors.bright .. colors.blue .. 'blue')
+  print(colors.reset 'white')
   ```
 
 For information on reading and writing files,
