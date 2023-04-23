@@ -64,7 +64,8 @@ Cons of Lua include:
 - lack of type checking
 - lack of support for object oriented programming (OOP),
   although it can be simulated with metatables and functions
-- limited support for error handling (see the `error` and `pcall` functions)
+- limited support for error handling;
+  see `error`, `pcall`, and `xpcall` functions
 - limited support for string pattern matching, using "patterns"
   which are a simplified version of regular expressions
 - limited Unicode support
@@ -611,7 +612,7 @@ To override it to do that, add the following function.
 function print(...)
   local t = { ... }
   local len = #t
-  for i, v in ipairs({ ... }) do
+  for i, v in ipairs(t) do
     io.write(tostring(v))
     if i < len then io.write(' ') end
   end
@@ -1063,7 +1064,7 @@ Lua does not have a ternary operator, but the
 same functionality can be achieved with the following:
 
 ```lua
-let result = condition and trueValue or falseValue
+local result = condition and trueValue or falseValue
 ```
 
 For the condition, recall that `false` and `nil` are treated as `false`
@@ -2068,14 +2069,14 @@ print(pt:distance1()) -- 5.0
 
 There is a fair amount boilerplate code in all the examples above
 and plenty of opportunity to make mistakes.
-We can address this by writing a function named `class`
-that does all the work for us.
-This could be defined in the file `oop.lua` and then
-made available in multiple sources files with a `require` statement.
+We can address this by creating an "oo" module that defines the
+functions `class` and `subclass` that do all the work for us.
 
-The `class` function can be defined as follows:
+The `oo` module can be defined as follows:
 
 ```lua
+local M = {}
+
 -- This adds a function to the builtin `string` module.
 function string.startsWith(source, target)
   -- 1 is the index at which to start the search.
@@ -2083,74 +2084,130 @@ function string.startsWith(source, target)
   return source:find(target, 1, true) == 1
 end
 
--- The `defaults` parameter is a table that holds default property values
--- and optional metamethods like `__tostring`.
--- Metamethods will be described later.
-function class(defaults)
-  assert(type(defaults) == "table")
-
-  local metatable = {__index = defaults}
-
-  -- Copy all the metamethod functions (start with "__")
-  -- from `defaults` to `metatable` and remove them from `defaults`.
-  for k, v in pairs(defaults) do
-    -- This tests whether `k` begins with two underscores.
+local function move_metamethods(source, target)
+  for k, v in pairs(source) do
     if k:startsWith("__") then
-      metatable[k] = v
-      defaults[k] = nil
+      target[k] = v
+      source[k] = nil
     end
   end
+end
 
-  -- Create and return a table to represent the class.
+-- This creates a table that simulates an OO class.
+-- The `defaults` parameter is a table that holds default property values
+-- and optional metamethods like `__tostring`.
+function M.class(defaults)
+  assert(type(defaults) == "table", "defaults must be a table")
+
+  local metatable = { __index = defaults }
+  move_metamethods(defaults, metatable)
+
   return {
-    -- The `new` function creates and returns an instance.
-    new = function (initial)
+    meta = metatable, -- used by subclass function
+    new = function(initial)
+      assert(not defaults.abstract, "cannot create instance of abstract class")
       local instance = initial or {}
       setmetatable(instance, metatable)
       return instance
     end
   }
 end
+
+-- This creates a table that simulates an OO subclass.
+-- The `defaults` parameter is a table that holds default property values
+-- and optional metamethods like `__tostring`.
+function M.subclass(baseClass, defaults)
+  assert(type(baseClass) == "table", "base class must be a table")
+  assert(type(defaults) == "table", "defaults must be a table")
+
+  local metatable = { __index = defaults }
+  move_metamethods(defaults, metatable)
+  setmetatable(metatable.__index, baseClass.meta)
+
+  return {
+    meta = metatable, -- used by subclass function
+    new = function(initial)
+      local instance = initial or {}
+      setmetatable(instance, metatable)
+      return instance
+    end
+  }
+end
+
+return M
 ```
 
-The following code demonstrates using the `class` function defined above.
+The following code demonstrates using the
+`class` and `subclass` functions defined in the "oo" module.
 
 ```lua
-require "oop"
+local oo = require "oo"
 
-Point = class({
+Point = oo.class({
   -- Properties
   x = 0,
   y = 0,
-
   -- Methods
   distanceFromOrigin = function(p)
     return math.sqrt(p.x ^ 2 + p.y ^ 2)
   end,
-  print = function (p)
+  print = function(p)
     print(p) -- uses __tostring below
   end,
-
   -- Metamethods
-  __add = function (p1, p2)
-    return Point.new({x = p1.x + p2.x, y = p1.y + p2.y})
+  __add = function(p1, p2)
+    return Point.new({ x = p1.x + p2.x, y = p1.y + p2.y })
   end,
-  __tostring = function (p)
+  __tostring = function(p)
     return string.format("(%.2f, %.2f)", p.x, p.y)
   end
 })
 
-local p1 = Point.new {x = 3, y = 4}
-print(p1) -- (3.00, 4.00)
-p1:print() -- (3.00, 4.00)
+local p1 = Point.new { x = 3, y = 4 }
+print(p1)                      -- (3.00, 4.00)
+p1:print()                     -- (3.00, 4.00)
 print(p1:distanceFromOrigin()) -- 5.0
 
-local p2 = Point.new {x = 5, y = 1}
-local p3 = p1 + p2 -- uses the __add metamethod
+local p2 = Point.new { x = 5, y = 1 }
+local p3 = p1 + p2
 p3:print() -- (8.0, 5.0)
 
-local p4 = Point.new {y = 7}
+local p4 = Point.new({ y = 7 })
 p4:print() -- (0.00, 7.00)
+
+Shape = oo.class({
+  abstract = true,
+  report = function(self)
+    print(string.format("%s has %d sides and area %f", self.name, self.sides,
+      self:area()))
+  end
+})
+
+Triangle = oo.subclass(Shape, {
+  name = "triangle",
+  sides = 3,
+  area = function(self) return 0.5 * self.base * self.height end
+})
+local triangle = Triangle.new({ base = 4, height = 6 })
+print("triangle area =", triangle:area()) -- 12.0
+triangle:report()                         -- triangle has 3 sides and area 12.000000
+
+Rectangle = oo.subclass(Shape, {
+  name = "rectangle",
+  sides = 4,
+  area = function(self) return self.width * self.height end
+})
+local rectangle = Rectangle.new({ width = 4, height = 6 })
+rectangle:report()                             -- rectangle has 4 sides
+print("rectangle area = " .. rectangle:area()) -- 24
+
+Square = oo.subclass(Rectangle, {
+  name = "square",
+  area = function(self) return self.side ^ 2 end
+})
+local square = Square.new({ side = 5 })
+square:report()                          -- square has 4 sides
+print("square area = " .. square:area()) -- 25.0
 ```
 
 ### Method Syntax
