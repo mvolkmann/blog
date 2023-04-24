@@ -1534,6 +1534,7 @@ with the `pairs` or `ipairs` function.
 
 The `pairs` function visits all the key/value pairs, but not
 necessarily in the order in which they were added to the table.
+Entries where the value is set to `nil` are not visited.
 
 The `ipairs` function iterates over array-like entries,
 only visiting consecutive integer keys starting with `1`.
@@ -2555,7 +2556,7 @@ Metamethods also support implementing functions
 that are called when specific things occur
 that are unrelated to operators.
 
-| Metamethod    | Operator                                        |
+| Metamethod    | Operation                                       |
 | ------------- | ----------------------------------------------- |
 | `__call`      | called when the table is called like a function |
 | `__gc`        | called after garbage collection runs            |
