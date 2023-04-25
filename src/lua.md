@@ -3371,6 +3371,25 @@ end
 TODO: Add detail on calling C from Lua.
 TODO: Add detail on calling Lua from C.
 
+The steps to build a C program that calls Lua are:
+
+- Download the Lua source code from {% aTargetBlank
+  "https://www.lua.org/download.html", "Lua Download" %}.
+- Unzip and untar the downloaded file.
+- `cd` to the resulting directory.
+- Enter `make all test`
+- Enter `sudo make install` which will:
+  - install the `lua` and `luac` executables in `/usr/local/bin`
+  - copy the header files `lua.h`, `luaconf.h`, `lualib.h`,
+    `lauxlib.h`, and `lua.hpp` in `/usr/local/include`
+  - copy the library `liblua.a` to `/usr/local/lib`
+  - copy the man pages for `lua` and `luac` to `/usr/local/man/man1`
+
+To compile a C programming that uses the Lua C API and build an executable,
+enter `gcc -llua -llualib -o main main.c`
+TODO: WHY DOESN'T THIS WORK?
+TODO: Should you create a Makefile to automate the steps?
+
 ## Games
 
 ### LÖVE
