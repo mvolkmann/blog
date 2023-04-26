@@ -726,8 +726,9 @@ a, b = b, a -- swaps values
 
 Variables are global by default, even when defined in a different source file.
 Use the `local` keyword to confine their use to the current scope.
-It's too bad the designers didn't choose to make variables local by default
-and use a `global` keyword to make them exist outside their scope.
+It is common in Lua configuration files to expose values as global variables.
+This is likely the reason that variables are
+global, rather than local, by default.
 
 For example:
 
@@ -3366,7 +3367,15 @@ while true do
 end
 ```
 
-# C Integration
+## C Integration
+
+Lua can be used as a configuration language.
+It has many advantages over other configuration options
+such as JSON and Python.
+TODO: Describe the advantages.
+
+It is common in Lua configuration files to expose values as global variables.
+This is likely the reason that variables are global by default.
 
 Download the source for Lua and build it
 by following these steps:
@@ -3401,6 +3410,31 @@ Run the executable by entering `./main`
 TODO: Add detail on calling C from Lua.
 TODO: Add detail on calling Lua from C.
 
+TODO: Are there two stacks, one for data going from C to Lua
+TODO: and one for data going from Lua to C?
+
+Calling `lua_openLibs` makes the standard library functions available.
+Lua code that does not call those can be executed without this.
+
+TODO: Write utility functions that get values of specific types from Lua code
+TODO: and do all the error checking.
+
+TODO: Does `lua_pcall` remove the function and its arguments from the stack?
+
+See {% aTargetBlank
+"http://www.troubleshooters.com/codecorn/lua/lua_c_calls_lua.htm",
+"Calling Lua From a C Program" %}.
+
+TODO: How can you prevent Lua code executed from C from
+TODO: doing something dangerous like deleting files?
+
+For calling Lua from JavaScript,
+see https://daurnimator.github.io/lua.vm.js/lua.vm.js.html
+and https://github.com/Doridian/LuaJS.
+
+For calling Lua from Swift, see
+https://www.larsgregori.de/2019/12/27/lua-and-swift-in-ios/.
+
 ## Games
 
 ### LÖVE
@@ -3427,6 +3461,9 @@ For macOS:
   "love.app cannot be opened because the developer cannot be verified".
   To fix this, open the Settings app, select "Privacy & Security",
   scroll down to "love.app was blocked ..." and click the "Open Anyway" button.
+
+TODO: Does Love2D include its own version of Lua
+TODO: and ignore the installed version?
 
 To get started creating a game:
 
