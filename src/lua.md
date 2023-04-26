@@ -3114,6 +3114,20 @@ print(_ENV.fruit) -- apple
 print(_G.fruit) -- apple
 ```
 
+To see all the keys defined in the current environment,
+execute the following code.
+This typically includes standard libraries such as `coroutine`, `debug`,
+`io`, `math`, `os`, `string`, `table`, and `utf8`.
+It also typically includes functions and variables defined in the
+`basic` standard library such as `assert`, `print`, `pairs`, `ipairs`,
+`pcall`, `getmetatable`, `setmetatable`, and `_G`.
+
+```lua
+for k, v in pairs(_ENV) do
+  print(k)
+end
+```
+
 A function or `do` block can change its environment.
 Doing so changes where free variables are stored.
 This can be useful to avoid changing variables in the outer scope.
@@ -3451,7 +3465,11 @@ int main(void) {
 }
 ```
 
-Compile and link the C program by entering `gcc main.c -o main -llua`
+To compile and link the C program, enter:
+
+```bash
+gcc main.c -o main -llua
+```
 
 Run the executable by entering `./main`
 
