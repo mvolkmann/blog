@@ -3369,10 +3369,15 @@ end
 
 ## C Integration
 
-Lua can be used as a configuration language.
-It has many advantages over other configuration options
+A common reason to integrate Lua with C is to
+use Lua as a configuration language.
+This has many advantages over other configuration options
 such as JSON and Python.
-TODO: Describe the advantages.
+
+- clean, minimal syntax
+- can include comments
+- can be dynamic, using data such as environment variables
+- can write simple code to compute values
 
 It is common in Lua configuration files to expose values as global variables.
 This is likely the reason that variables are global by default.
@@ -3380,8 +3385,6 @@ This is likely the reason that variables are global by default.
 Download the source for Lua and build it
 by following these steps:
 
-- If Lua was installed with Homebrew, uninstall it by
-  entering `brew uninstall lua`
 - Download the Lua source code from {% aTargetBlank
   "https://www.lua.org/download.html", "Lua Download" %}.
 - Unzip and untar the downloaded file.
@@ -3393,15 +3396,60 @@ by following these steps:
     `lauxlib.h`, and `lua.hpp` in `/usr/local/include`
   - copy the library `liblua.a` to `/usr/local/lib`
   - copy the man pages for `lua` and `luac` to `/usr/local/man/man1`
-- Remove the dynamic library by entering
+- If compiling and linking with gcc (see below) results in
+  the error "ignoring file /usr/local/lib/liblua.dylib,
+  it may be necessary to remove the dynamic library by entering
   `rm /usr/local/lib/liblua.dylib`
   This will cause gcc to use `/usr/local/lib/liblua.a` instead
-  which avoids the error "ignoring file /usr/local/lib/liblua.dylib,
   building for macOS-arm64 but attempting to link with
   file built for macOS-x86_64".
-  I don't know why this is necessary.
 
 Write C code that loads and runs a Lua script.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "lauxlib.h"
+#include "lua.h"
+#include "lualib.h"
+
+int main(void) {
+  // Create a Lua virtual machine.
+  lua_State *L = luaL_newstate();
+
+  // Make the standard library functions available in Lua code.
+  luaL_openlibs(L);
+
+  // Execute a Lua source file.
+  luaL_dofile(L, "config.lua");
+
+  // To check if the top of the stack contains nil ...
+  // if (lua_isnil(L, -1))
+
+  lua_getglobal(L, "myBoolean");
+  int myBoolean = lua_toboolean(L, -1);
+  printf("myBoolean = %d\n", myBoolean);
+
+  lua_getglobal(L, "myInteger");
+  lua_Integer myInteger = lua_tointeger(L, -1);
+  // lld is long long decimal
+  printf("myInteger = %lld\n", myInteger);
+
+  lua_getglobal(L, "myFloat");
+  lua_Number myFloat = lua_tonumber(L, -1);
+  printf("myFloat = %f\n", myFloat);
+
+  lua_getglobal(L, "myString");
+  const char *myString = lua_tostring(L, -1);
+  printf("myString = %s\n", myString);
+
+  // Close the Lua virtual machine.
+  lua_close(L);
+
+  return 0; // success
+}
+```
 
 Compile and link the C program by entering `gcc main.c -o main -llua`
 
