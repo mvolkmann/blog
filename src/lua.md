@@ -3368,11 +3368,11 @@ end
 
 # C Integration
 
-TODO: Add detail on calling C from Lua.
-TODO: Add detail on calling Lua from C.
+Download the source for Lua and build it
+by following these steps:
 
-The steps to build a C program that calls Lua are:
-
+- If Lua was installed with Homebrew, uninstall it by
+  entering `brew uninstall lua`
 - Download the Lua source code from {% aTargetBlank
   "https://www.lua.org/download.html", "Lua Download" %}.
 - Unzip and untar the downloaded file.
@@ -3384,11 +3384,22 @@ The steps to build a C program that calls Lua are:
     `lauxlib.h`, and `lua.hpp` in `/usr/local/include`
   - copy the library `liblua.a` to `/usr/local/lib`
   - copy the man pages for `lua` and `luac` to `/usr/local/man/man1`
+- Remove the dynamic library by entering
+  `rm /usr/local/lib/liblua.dylib`
+  This will cause gcc to use `/usr/local/lib/liblua.a` instead
+  which avoids the error "ignoring file /usr/local/lib/liblua.dylib,
+  building for macOS-arm64 but attempting to link with
+  file built for macOS-x86_64".
+  I don't know why this is necessary.
 
-To compile a C programming that uses the Lua C API and build an executable,
-enter `gcc -llua -llualib -o main main.c`
-TODO: WHY DOESN'T THIS WORK?
-TODO: Should you create a Makefile to automate the steps?
+Write C code that loads and runs a Lua script.
+
+Compile and link the C program by entering `gcc main.c -o main -llua`
+
+Run the executable by entering `./main`
+
+TODO: Add detail on calling C from Lua.
+TODO: Add detail on calling Lua from C.
 
 ## Games
 
