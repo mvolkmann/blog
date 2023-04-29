@@ -36,7 +36,7 @@ A primary benefit of being modal is that keyboard shortcuts can be simplified.
 For example, in insert mode, pressing the "j" key inserts the letter "j".
 But when in normal mode, pressing the "j" key moves the cursor down.
 
-Vim focuses on allowing users to keep their hands on the keyboard
+Vim focuses on allowing users to keep their fingers on the keyboard
 rather than constantly moving between the keyboard and a mouse or trackpad.
 This substantially increases efficiency, decreasing the time required
 to convert thoughts to code.
@@ -311,6 +311,11 @@ The ones in blue (submenus) require pressing additional keys
 that are displayed when you press their key.
 These include "Buffers", "Find", "Git", and more.
 For example, type `<leader>f` to see all the "Find" key mappings.
+
+In order reach maximum efficient with Neovim it is necessary to
+make a large number of keyboard shortcuts part of your muscle memory.
+The "which-key" plugin described above is an important tool for
+helping you through the journey of learning the keyboard shortcuts.
 
 While a primary reason for using Vim is to
 keep your hands on the keyboard for maximum efficiency,
@@ -1271,3 +1276,18 @@ return {
   { import = "astrocommunity.colorscheme.nightfox", enabled = true }
 }
 ```
+
+## Conclusion
+
+Neovim plus a selection of plugins delivers an IDE-like experience
+that is comparable to popular IDEs such as VS Code.
+
+Configuring the plugins is a time-consuming, error-prone task.
+Starting with a pre-built configuration simplifies this significantly.
+
+I encourage you to give Neovim a try for at least two weeks
+before deciding whether it is a fit for you.
+It can take that long to get through the bulk of the learning curve.
+That should be enough time to determine whether using an editor
+that allows you to keep your fingers on the keyboard
+makes you more efficient.
