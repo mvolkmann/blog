@@ -601,6 +601,25 @@ return {
 }
 ```
 
+### Buffers
+
+The contents of opened files are held in buffers.
+
+Editing a buffer and writing it saves the modified content back to its file.
+
+Neovim indicates buffers that have been modified and not written
+by placing a dot after the file name in the buffer tab.
+
+Neovim provides the following default key mappings related to buffers:
+
+| Key                   | Action                                 |
+| --------------------- | -------------------------------------- |
+| `<leader>c` or `:clo` | closes current buffer                  |
+| `[b`                  | navigates to buffer on right           |
+| `]b`                  | navigates to buffer on left            |
+| `<b`                  | swaps current buffer with one on left  |
+| `>b`                  | swaps current buffer with one on right |
+
 ### Splits
 
 The editing area displays tabs across the top
