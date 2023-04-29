@@ -203,6 +203,14 @@ To install AstroNvim:
 To check the status of the installation, enter `:checkhealth`.
 Fix any issues this identifies.
 
+Once you ready to commit to using Neovim instead of Vim,
+it is a good idea to create a `vim` alias that runs `nvim`.
+If using zsh, add the following in your `.zshrc` file:
+
+```bash
+alias vim="nvim"
+```
+
 ### Updating AstroNvim
 
 To update AstroNvim after it has been installed,
@@ -1042,7 +1050,7 @@ To see the disk space occupied by the files and directories inside
 one of these directories, select the directory and press the `return` key.
 To return to the parent directory, select `..` and press the `return` key.
 
-To quit `gui` and close the terminal that is running it, press `q`.
+To quit `gdu` and close the terminal that is running it, press `q`.
 
 ### Terminal
 

@@ -1533,7 +1533,7 @@ To see the disk space occupied by the files and directories inside
 one of these directories, select the directory and press the `return` key.
 To return to the parent directory, select `..` and press the `return` key.
 
-To quit `gui` and close the terminal that is running it, press `q`.
+To quit `gdu` and close the terminal that is running it, press `q`.
 
 ### Terminal
 
