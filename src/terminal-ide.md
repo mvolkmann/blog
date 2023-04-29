@@ -745,4 +745,718 @@ The right side contains information about the item selected on the left side.
 To scroll down and up, press `ctrl-d` and `ctrl-u`.
 TODO: Is there a way to scroll by full pages?
 
-To execute an arbitrary sh
+To execute an arbitrary shell command without leaving lazygit, press `:`.
+This opens a dialog where a shell command can be entered.
+Press `return` to execute it.
+The output temporarily replaces the lazygit UI.
+Press `return` again to return to the lazygit UI.
+
+To customize the configuration of lazygit, create the file
+`~/.config/nvim/lua/user/plugins/lazygit.lua`.
+For example:
+
+```lua
+return {
+  "kdheepak/lazygit.nvim"
+  -- TODO: I want this to configure side-by-side diffs using the delta pager
+  -- TODO: which must be installed, but this is not working!
+  -- TODO: See https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Pagers.md.
+  --[[
+  config = function()
+    require("lazygit").setup {
+      pager = "delta",
+      delta = "side-by-size"
+    }
+  end,
+  event = "User AstroFile" -- need this?
+  --]]
+}
+```
+
+See {% aTargetBlank "https://github.com/kdheepak/lazygit.nvim/issues/92",
+"issue 92" %} which is related to configuring lazygit.
+
+For more information on lazygit key bindings, see {% aTargetBlank
+"https://github.com/jesseduffield/lazygit/blob/master/docs/keybindings/Keybindings_en.md",
+"key bindings" %}.
+
+For more information on lazygit, watch this {% aTargetBlank
+"https://www.youtube.com/watch?v=CPLdltN7wgE", "YouTube video" %}.
+
+#### Status Section
+
+Ths section shows the repository name and the current branch.
+The following key mappings apply to this section:
+
+| Key      | Action                                                 |
+| -------- | ------------------------------------------------------ |
+| `a`      | shows the log for all branches                         |
+| `u`      | checks for a lazygit update                            |
+| `return` | opens a dialog for switching to a different repository |
+
+#### Files Section
+
+This section contains two tabs, "Files" and "Submodules".
+The "Files" tab lists all the modified files.
+
+To see diffs for a file on the right side, select the file.
+
+For a side-by-side diff:
+
+- Enter `brew install git-delta` to install the delta pager.
+- Add the following in `~/.gitconfig`
+
+  ```text
+  [core]
+    pager = delta
+  [delta]
+    side-by-side = true
+  ```
+
+After making this change, entering `git diff`
+in a terminal displays a side-by-side diff.
+But lazy git does not honor this.
+
+I created the file `~/.config/lazygit/config.yaml` with the following contents,
+but that did not resolve the issue.
+
+```yaml
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never --side-by-side
+    useConfig: true
+gui:
+  showIcons: true
+```
+
+TODO: See {% aTargetBlank
+"https://github.com/jesseduffield/lazygit/issues/2337", "issue 2337" %}.
+
+The following key mappings apply to the Files section:
+
+| Key      | Action                                                                            |
+| -------- | --------------------------------------------------------------------------------- |
+| `space`  | toggles whether the selected file is staged for inclusion in a commit             |
+| `a`      | toggles all modified files between being staged and not staged                    |
+| `c`      | commits all staged files; prompts whether to commit all if none are staged        |
+| `C`      | same as `c`, but opens a Vim window to enter commit message (broken in AstroNvim) |
+| `d`      | discards all changes in the selected file; press `d` again to confirm             |
+| `D`      | opens a menu of options where one is "hard reset"                                 |
+| `f`      | fetches changes from remote branch                                                |
+| `i`      | adds file to `.gitignore`                                                         |
+| `r`      | refreshes list of files; useful when files are modified outside of Neovim         |
+| `s`      | stashes all changes; prompts for stash name                                       |
+| `S`      | stashes only staged changes; prompts for stash name                               |
+| \`       | toggles file list between flat and tree views                                     |
+| `ctrl-w` | toggles hiding lines in right side that only differ by whitespace                 |
+
+When committing changes, a dialog will appear where a commit message can be entered.
+After entering a commit message, press the `return` key to perform the commit.
+
+The menu that appears when `D` is pressed contains the following options:
+
+- nuke working tree - runs `git reset --hard HEAD && git clean -fd`
+- discard unstaged changes
+- discard untracked files
+- discard staged changes
+- soft reset - discards the last commit
+- mixed reset - discards the last commit and stages (add)
+- hard reset - discards the last commit and stages (add) and all changes
+
+#### Local Branches Section
+
+This section contains three tabs named "Local Branches", "Remotes", and "Tags".
+The "Local Branches" tab lists all the local branches.
+The currently checked out branch name is preceded by `*`.
+Selecting a local branch shows all of its commits on the right side.
+
+The following key mappings apply to this section:
+
+| Key      | Action                                                                                    |
+| -------- | ----------------------------------------------------------------------------------------- |
+| `return` | displays all commits to the selected local branch; press `<esc>` to return to branch list |
+| `space`  | checks out the selected branch                                                            |
+| `c`      | creates a new remote branch                                                               |
+| `d`      | deletes the selected local branch after confirming                                        |
+| `f`      | fetches changes from remote branch                                                        |
+| `M`      | merges the selected branch into the checked out branch after confirming                   |
+| `n`      | creates a new local branch                                                                |
+| `o`      | starts process of opening a pull request in a new browser tab (must push first)           |
+| `p`      | pulls changes from the corresponding remote branch                                        |
+| `P`      | pushes changes to the corresponding remote branch                                         |
+| `R`      | renames the selected branch                                                               |
+| `r`      | rebases the selected branch into the checked out branch after confirming                  |
+
+When attempting to checkout a different branch, if there are
+uncommitted changes a dialog will appear that offers to stash the changes.
+
+If a merge results in conflicts, a dialog will appear explaining that.
+Press `<esc>` to abort the merge or `return` to resolve the conflicts.
+Each conflict will be described by a pair of "hunks".
+To keep one of the hunks, move the cursor to it with `j` and `k`
+and press `space`. The other hunk will be discarded.
+To keep both hunks, press `b`.
+Another dialog will appear after all merge conflicts have been resolved.
+
+To delete a remote branch, switch to the "Remotes" tab in this section,
+select the branch, and press `d`.
+
+To create a new remote branch, switch to the "Remotes" tab in this section,
+and press `n`.
+
+To create a new tag, switch to the "Tags" tab in this section,
+and press `n`.
+
+To delete a tag, switch to the "Tags" tab in this section,
+select the tag, and press `d`.
+
+#### Commits Section
+
+This section contains two tabs, "Commits" and "Reflog".
+The "Commits" tab lists all the commits on the current local branch.
+Selecting a commit shows detail about it on the right side including
+the commit comment and a list of the new, modified, and deleted files.
+
+From the git docs, "Reflogs record when the tips of branches and
+other references were updated in the local repository."
+
+The following key mappings apply to this section:
+
+| Key     | Action                                         |
+| ------- | ---------------------------------------------- |
+| `d`     | deletes the selected commit                    |
+| `o`     | opens the selected commit in a new browser tab |
+| `s`     | squashes the selected commit                   |
+| `S`     | squashes all commits above the selected commit |
+| `T`     | adds a tag to the selected commit              |
+| `t`     | reverts the selected commit after confirming   |
+| `space` | checks out the selected commit                 |
+
+#### Stash Section
+
+This section lists all the current stashes.
+Selecting a stash shows the stashed changes on the right side.
+
+The following key mappings apply to this section:
+
+| Key      | Action                                                          |
+| -------- | --------------------------------------------------------------- |
+| `d`      | drops the selected stash after confirming                       |
+| `space`  | applies the selected stash without dropping it after confirming |
+| `g`      | applies the selected stash and drops it after confirming        |
+| `r`      | renames the selected stash                                      |
+| \`       | toggles the stash list between flat and tree views              |
+| `return` | displays diffs for the stash in the right side                  |
+
+### Color Themes
+
+To see all the installed color themes and select one,
+enter `:colo` followed by a space and the tab key.
+Press the `tab` key repeatedly to select a theme.
+Press the `return` key activate the selected theme.
+Selecting a theme that is compatible with Tree-sitter
+results in better syntax highlighting.
+
+A better way to see the available color themes and switch to one
+is to press `<leader>ft` as described in the "Telescope" section above.
+
+Changing the theme in this way only affects the current session.
+To change the default theme used in future sections,
+specify a `colorscheme` in `~/config/nvim/lua/user/init.lua`.
+
+### Completions
+
+AstroNvim provides language-specific code completions.
+To select a suggested completion from a provided list,
+use `ctrl-j` and `ctrl-k` to move down and up
+and press `return` to select the highlighted completion.
+
+The key mappings related to code completion include:
+
+| Key                    | Action                                         |
+| ---------------------- | ---------------------------------------------- |
+| `ctrl-space`           | manually opens a list of suggestions           |
+| `ctrl-y`               | confirms selection of a completion             |
+| `ctrl-e`               | cancels completion and closes the list         |
+| down arrow or `ctrl-n` | navigates to the next suggested completion     |
+| up arrow or `ctrl-p`   | navigates to the previous suggested completion |
+
+### Snippets
+
+AstroNvim uses the {% aTargetBlank "https://github.com/L3MON4D3/LuaSnip",
+"LuaSnip" %} plugin to support snippets.
+Snippet suggestions appear when the beginning of their trigger words are typed.
+When a list of possible snippets appears,
+repeatedly press the `tab` key, `ctrl-j`, or `ctrl-k` to highlight one,
+and press the `return` key to select it.
+
+For snippets that have placeholders, type text or paste text into each one.
+Press tab to jump to the next placeholder
+and shift-tab to jump to the previous placeholder.
+After entering text for the last placeholder,
+press tab one more tab to move the end of the snippet and continue typing.
+
+LuaSnip supports two syntaxes for defining snippets,
+the VS Code style and the LuaSnips style.
+
+To define custom snippets:
+
+1. Create the file `~/.config/nvim/lua/user/plugins/luasnip.lua`
+   containing the following:
+
+   ```lua
+   return {
+     "L3MON4D3/LuaSnip",
+     config = function(plugin, opts)
+       require "plugins.configs.luasnip" (plugin, opts)
+       require("luasnip.loaders.from_vscode").lazy_load {
+         paths = { "./lua/user/snippets" }
+       }
+     end
+   }
+   ```
+
+1. Create the directory `~/.config/nvim/lua/user/snippets`.
+
+1. For the VS Code style, create the file
+   `~/.config/nvim/lua/user/snippets/package.json` containing the following:
+
+   ```json
+   {
+     "name": "user snippets",
+     "engines": {
+       "vscode": "^1.11.0"
+     },
+     "contributes": {
+       "snippets": [
+         {
+           "language": "javascript",
+           "path": "./javascript.json"
+         },
+         {
+           "language": "markdown",
+           "path": "./markdown.json"
+         }
+       ]
+     }
+   }
+   ```
+
+1. For the VS Code style, create a file like the following
+   for each file type that needs snippets.
+   Placeholders are represented by a `$` followed by a number starting from `1`.
+   For example, a snippet with three placeholders
+   will contain `$1`, `$2`, and `$3`.
+   The final placeholder can be represented by `$0` instead of `$3`,
+   but its not clear what advantage that provides.
+
+   For JavaScript the file name should be `javascript.json`.
+   For example:
+
+   ```json
+   {
+     "Log Entry": {
+       "prefix": "loge",
+       "body": ["console.log('$TM_FILENAME $1: entered');"],
+       "description": "Log function entry"
+     },
+     "Log Variable": {
+       "prefix": "logv",
+       "body": ["console.log('$TM_FILENAME $1: $2 =', $2);"],
+       "description": "Log variable to console"
+     }
+   }
+   ```
+
+   For Markdown the file name should be `markdown.json`.
+   For example:
+
+   ```json
+   {
+     "Anchor Target Blank": {
+       "prefix": "atb",
+       "body": ["{% aTargetBlank \"$1\", \"$2\" %}"],
+       "description": "Markdown 11ty aTargetBlank shortcode"
+     },
+     "Image": {
+       "prefix": "img",
+       "body": [
+         "<img alt=\"$1\" style=\"width: 50%\"\n  src=\"/blog/assets/$2.png?v={{pkg.version}}\"\n  title=\"$1\">"
+       ],
+       "description": "Markdown <img>"
+     }
+   }
+   ```
+
+TODO: Describe the LuaSnips syntax for defining snippets.
+
+### Marks
+
+Vim supports marking locations in files and easily returning to them.
+
+| Key                   | Action                                                      |
+| --------------------- | ----------------------------------------------------------- |
+| `m{lowercase-letter}` | creates a mark that is local to the current file            |
+| `m{uppercase-letter}` | creates a global mark                                       |
+| `'{letter}`           | jumps to first non-whitespace character on line of the mark |
+| <pre>\`{letter}</pre> | jumps to line and column of the mark                        |
+| `:marks`              | lists all the marks                                         |
+| `<leader>f'`          | lists all the marks in a Telescope window                   |
+
+When marks are displayed in a Telescope window,
+select one an press `return` to jump to it.
+
+To delete marks, enter `:delmarks {letter}, {letter}, ...`
+
+There are many special marks that are automatically set.
+All of them seem to have limited usefulness.
+These are displayed by both `:marks` and `<leader>f'`.
+
+### Sessions
+
+A session records the directory from which AstroNvim was started
+and the buffers that were open (but not their order).
+Only one session per directory can be saved.
+Once a session has been loaded, the list of open buffers
+in the session is automatically updated.
+
+The following key mappings related to sessions only apply
+when focus is in a buffer, not in the file explorer.
+
+| Key          | Action                                                                 |
+| ------------ | ---------------------------------------------------------------------- |
+| `<leader>Ss` | creates a new session for the starting directory if it doesn't exist   |
+| `<leader>Sf` | opens a dialog that lists saved sessions and allows loading to one     |
+| `<leader>S.` | loads the session for the current directory if it exists               |
+| `<leader>Sl` | loads the last (most recent) session                                   |
+| `<leader>Sd` | opens a dialog that lists saved sessions and allows them to be deleted |
+
+In the load dialog, select a session and press `return` to load it.
+
+In the delete dialog, select a session and press `return` to delete it.
+
+To close either of these dialogs, press the `<esc>` key twice.
+
+### Bottom (btm)
+
+{% aTargetBlank "https://clementtsang.github.io/bottom/", "bottom" %}
+is a "graphical process/system monitor for the terminal".
+
+To install btm in MacOS, enter `brew install bottom`.
+
+To run `btm` inside Neovim, enter `<leader>tt` (for "top").
+This opens a floating terminal and runs `btm` inside it.
+
+To quit `btm` and close the terminal that is running it, press `q`.
+
+### Go DiskUsage (gdu)
+
+{% aTargetBlank "https://github.com/dundee/gdu", "gdu" %}
+is a disk usage analyzer written in Go.
+
+To install gdu in MacOS using Homebrew, enter the following command:
+
+- `brew install -f gdu`
+- `brew link --overwrite gdu`
+
+To run `gdu` inside Neovim, enter `<leader>tu` for "usage".
+This opens a floating terminal and runs `gdu` inside it.
+
+Initially this shows the disk space occupied by all the
+files and directories in the directory from which `nvim` was launched.
+To see the disk space occupied by the files and directories inside
+one of these directories, select the directory and press the `return` key.
+To return to the parent directory, select `..` and press the `return` key.
+
+To quit `gui` and close the terminal that is running it, press `q`.
+
+### Terminal
+
+There are many ways to open a terminal window.
+
+| Key          | Action                                                   |
+| ------------ | -------------------------------------------------------- |
+| `<leader>tf` | opens a floating terminal (f for "float")                |
+| `F7`         | same as above; on a MacBook keyboard, also hold `fn` key |
+| `<leader>th` | opens a terminal at the bottom (h for "horizontal")      |
+| `<leader>tv` | opens a terminal on the right side (v for "vertical")    |
+
+Another way to open a floating terminal is to enter `:ToggleTerm`.
+
+The working directory of the terminal session
+will be the directory from which `nvim` was started.
+
+The terminal cannot be split into multiple panes.
+
+To close the terminal and return to `nvim`, enter `exit`.
+
+There are also many key mappings that open a floating terminal
+whose only purpose is top run a specific command.
+
+| Key          | Action in Floating Terminal             |
+| ------------ | --------------------------------------- |
+| `<leader>tn` | runs a Node REPL (n for "Node")         |
+| `<leader>tl` | runs `lazygit` (l for "lazygit")        |
+| `<leader>tp` | runs a Python REPL (p for "for Python") |
+| `<leader>tt` | runs `btm` (t for "top")                |
+| `<leader>tu` | runs `gdu` (u for "usage")              |
+
+### Lazy
+
+{% aTargetBlank "https://github.com/folke/lazy.nvim", "lazy.nvim" %}
+"is a modern plugin manager for Neovim".
+It is the plugin manager used by AstroNvim.
+The configuration for `lazy.nvim` is in the file
+`~/.config/nvim/lua/astronvim/lazy.lua`.
+
+To verify that `lazy.nvim` is properly configured,
+enter `:checkhealth lazy`.
+
+Enter `:Lazy sync` to update used plugins and remove unused plugins.
+When this completes, press `q` to close the window.
+
+### Custom Plugins
+
+There are a large number of plugins available for Neovim.
+A nice summary of them can be found at {% aTargetBlank
+"https://www.trackawesomelist.com/rockerBOO/awesome-neovim/readme/#media",
+"Awesome Neovim Overview" %}.
+
+When AstroNvim starts, it executes all the `.lua` files
+in the `~/.config/nvim/lua/plugins` directory
+followed by all the `.lua` files
+in the `~/.config/nvim/lua/user/plugins` directory.
+Each of these files serves to configure a specific plugin.
+Any names can be used for these files, but it's standard practice
+to name them after the plugin they configure.
+
+Storing the plugin configuration files provided by AstroNvim
+in a different directory from the configuration files you create
+makes it easier to avoid losing custom configurations
+when updating to a new version of AstroNvim.
+
+To install a custom plugin, create a configuration file for it
+in the `~/.config/nvim/lua/user/plugins` directory
+whose name is `{plugin-name}.lua`.
+After doing this it may be necessary to enter `:Lazy sync`.
+This downloads the latest version of each plugin being used.
+When this completes, press `q` to close the window.
+
+The contents of the plugin configuration files
+should be similar to those shown in subsections below.
+For details on the supported keys, see the "Plugin Spec" section in the  
+{% aTargetBlank "https://github.com/folke/lazy.nvim", "Lazy doc" %}.
+
+For help on a specific custom plugin, enter `:h {name}-config`.
+
+For information on writing your own Neovim plugins, see {% aTargetBlank
+"https://www.youtube.com/watch?v=PdaObkGazoU",
+"Writing Plugins - It's Never Been Easier" %}
+from DevOnDuty at NeovimConf 2022.
+
+#### Comment.nvim Plugin
+
+The {% aTargetBlank "https://github.com/numToStr/Comment.nvim",
+"Comment.nvim" %} plugin integrates with Tree-sitter
+to provide language-specific smart commenting.
+It can recognizes different syntaxes in the same file,
+such as JavaScript, HTML, and CSS in a Svelte file,
+and apply the correct comment syntax for each.
+
+To configure Comment.nvim, create the file
+`~/.config/nvim/lua/user/plugins/comment.lua`
+containing the following:
+
+```lua
+return {
+  "numToStr/Comment.nvim",
+  config = function()
+    require("Comment").setup {
+      opleader = {
+        block = "gb",
+        line = "gc"
+      },
+      mappings = {
+        basic = true,
+        extra = true
+      }
+    }
+  end
+}
+```
+
+| Key   | Action                                        |
+| ----- | --------------------------------------------- |
+| `gb`  | block comment toggle selected lines           |
+| `gc`  | line comment toggle selected lines            |
+| `gcb` | ???                                           |
+| `gcc` | toggles whether the current line is commented |
+| `gco` | inserts line comment above                    |
+| `gcO` | inserts line comment below                    |
+| `gcA` | inserts line comment at end of line           |
+
+`gcc` as the same effect as the builtin mapping `<leader>/`.
+
+#### hop.nvim Plugin
+
+The {% aTargetBlank "https://github.com/phaazon/hop.nvim", "hop.nvim" %}
+plugin is a rewrite of the {% aTargetBlank
+"https://github.com/easymotion/vim-easymotion", "EasyMotion" %} Vim plugin
+for Neovim.
+It provides an efficient way to jump to a specific place within a file
+that is currently visible.
+
+To configure Hop, create the file `~/.config/nvim/lua/user/plugins/hop.lua`
+containing the following:
+
+```lua
+return {
+  "phaazon/hop.nvim",
+  branch = 'v2', -- optional but strongly recommended
+  config = function()
+    require "hop".setup {}
+    -- When in normal mode, initiate with a capital "H".
+    vim.keymap.set('n', 'H', ":HopWord<cr>")
+  end,
+  event = "User AstroFile"
+}
+```
+
+The `event` value specifies when the plugin should be triggered.
+This can be a single event or a table of them.
+The supported events are:
+
+- `VeryLazy`: triggered after starting Neovim
+- `BufEnter *.lua`: triggered after opening a `.lua` file
+- `User AstroFile`: triggered after opening any file
+- `LspAttach`: triggered after starting LSP servers
+- `InsertEnter`: triggered after entering insert mode
+
+Enter `:Lazy sync` to install the plugin.
+This opens a window that show the status of the install.
+When this completes, press `q` to close the window.
+
+To "hop" to a visible word, look at the target word
+and press `<leader>H` or enter `:HopWord`.
+This replaces the first one or two characters of every visible word
+with one or two unique letters.
+Type the letter(s) for the target word to jump to it.
+
+To "hop" to a visible line, enter `:HopLine`.
+This replaces the first one or two characters of every visible line
+with one or two unique letters.
+Type the letters for the target line to jump to it.
+
+The Hop plugin defines more commands, but `HopWord` and `HopLine`
+are the most frequently used.
+
+#### neoformat Plugin
+
+The {% aTargetBlank "https://github.com/sbdchd/neoformat", "neoformat" %} plugin
+formats text with many file types.
+It selects a formatter to use based on file type of the current buffer.
+The text in the buffer is then formatted.
+If this is successful, the buffer contents are replaced by the formatted text.
+If the formatter is unable to format the text
+and additional formatters for the file type are available,
+it will try the next one.
+
+Prettier is one of the supported formatters.
+
+To install and configure this plugin, create the file
+`~/.config/nvim/lua/user/plugins/neoformat.lua` with the following content:
+
+```lua
+return {
+  "sbdchd/neoformat",
+  event = "User AstroFile"
+}
+```
+
+By default AstroNvim formats files on save.
+
+#### todo-comments.nvim Plugin
+
+The {% aTargetBlank "https://github.com/folke/todo-comments.nvim",
+"todo-comments.nvim" %} plugin highlights comments that begin with
+"FIX:", "HACK:", "NOTE:", "PERF:", "TODO:", or "WARNING:".
+Each of these are highlighted with a different background color.
+This plugin also defines commands for navigating to these comments.
+
+To install todo-comments, create the file
+`~/.config/nvim/lua/user/plugins/todo-comments.lua` containing the following:
+
+```lua
+return {
+  "folke/todo-comments.nvim",
+  requires = "nvim-lua/plenary.nvim",
+  config = function()
+    require("todo-comments").setup {}
+  end,
+  event = "User AstroFile"
+}
+```
+
+The comment syntax this plugin looks for is language-specific.
+The following are examples of comment prefixes that
+this plugin recognizes in JavaScript code.
+
+```js
+// FIX: Please fix this.
+// HACK: I really should not have done this.
+// NOTE: For more information, see https://some-tutorial.com.
+// PERF: This may cause a performance issue.
+// TODO: Please do this in the future.
+// WARNING: This may break if invalid input is received.
+```
+
+There are multiple ways to display a list of all these kinds of comments
+found in all files that are in and below the starting directory.
+
+To see them in a Telescope window, enter `:TodoTelescope`.
+
+To see them in a quick fix list, enter `:TodoQuickFix`.
+
+These commands are not available until at least one file has been opened.
+It's unclear why that is necessary.
+
+#### smartcolumn.nvim Plugin
+
+The {% aTargetBlank "https://github.com/m4xshen/smartcolumn.nvim",
+"smartcolumn.nvim" %} plugin displays a vertical line at a given column
+only if at least one line in the file extends past that column.
+
+To install smartcolumn.nvim, create the file
+`~/.config/nvim/lua/user/plugins/smartcolumn.lua` containing the following:
+
+```lua
+return {
+  "m4xshen/smartcolumn.nvim",
+  opts = {
+    -- colorcolumn = 80 -- This is the default.
+    -- Don't disable any file types.
+    disabled_filetypes = {} -- default is {"help", "text", "markdown"}
+  },
+  event = "User AstroFile"
+}
+```
+
+### AstroNvim Community
+
+The {% aTargetBlank "https://github.com/AstroNvim/astrocommunity",
+"AstroNvim Community Repository" %} is a collection of
+AstroNvim plugins and their configurations.
+These are typically easier to install that configuring them manually.
+
+To add these to your AstroNvim setup, create the file
+`~/.config/lua/user/plugins/community.lua` and add content the like the following:
+
+```lua
+return {
+  "AstroNvim/astrocommunity",
+  { import = "astrocommunity.pack.typescript" },
+  { import = "astrocommunity.colorscheme.catppuccin", enabled = true },
+  { import = "astrocommunity.colorscheme.nightfox", enabled = true }
+}
+```
