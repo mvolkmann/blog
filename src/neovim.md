@@ -1608,7 +1608,7 @@ This downloads the latest version of each plugin being used.
 When this completes, press `q` to close the window.
 
 The contents of the plugin configuration files
-should be similar to those shown in subsections below.
+should be similar to those shown in the subsections below.
 For details on the supported keys, see the "Plugin Spec" section in the  
 {% aTargetBlank "https://github.com/folke/lazy.nvim", "Lazy doc" %}.
 

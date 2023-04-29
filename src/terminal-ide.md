@@ -1083,20 +1083,6 @@ whose only purpose is top run a specific command.
 | `<leader>tt` | runs `btm` (t for "top")                |
 | `<leader>tu` | runs `gdu` (u for "usage")              |
 
-### Lazy
-
-{% aTargetBlank "https://github.com/folke/lazy.nvim", "lazy.nvim" %}
-"is a modern plugin manager for Neovim".
-It is the plugin manager used by AstroNvim.
-The configuration for `lazy.nvim` is in the file
-`~/.config/nvim/lua/astronvim/lazy.lua`.
-
-To verify that `lazy.nvim` is properly configured,
-enter `:checkhealth lazy`.
-
-Enter `:Lazy sync` to update used plugins and remove unused plugins.
-When this completes, press `q` to close the window.
-
 ### Custom Plugins
 
 There are a large number of plugins available for Neovim.
@@ -1125,9 +1111,7 @@ This downloads the latest version of each plugin being used.
 When this completes, press `q` to close the window.
 
 The contents of the plugin configuration files
-should be similar to those shown in subsections below.
-For details on the supported keys, see the "Plugin Spec" section in the  
-{% aTargetBlank "https://github.com/folke/lazy.nvim", "Lazy doc" %}.
+should be similar to those shown in the subsections below.
 
 For help on a specific custom plugin, enter `:h {name}-config`.
 
