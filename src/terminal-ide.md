@@ -756,21 +756,20 @@ To see diffs for a file on the right side, select the file.
 
 The following key mappings apply to the Files section:
 
-| Key      | Action                                                                            |
-| -------- | --------------------------------------------------------------------------------- |
-| `space`  | toggles whether the selected file is staged for inclusion in a commit             |
-| `a`      | toggles all modified files between being staged and not staged                    |
-| `c`      | commits all staged files; prompts whether to commit all if none are staged        |
-| `C`      | same as `c`, but opens a Vim window to enter commit message (broken in AstroNvim) |
-| `d`      | discards all changes in the selected file; press `d` again to confirm             |
-| `D`      | opens a menu of options where one is "hard reset"                                 |
-| `f`      | fetches changes from remote branch                                                |
-| `i`      | adds file to `.gitignore`                                                         |
-| `r`      | refreshes list of files; useful when files are modified outside of Neovim         |
-| `s`      | stashes all changes; prompts for stash name                                       |
-| `S`      | stashes only staged changes; prompts for stash name                               |
-| \`       | toggles file list between flat and tree views                                     |
-| `ctrl-w` | toggles hiding lines in right side that only differ by whitespace                 |
+| Key      | Action                                                                     |
+| -------- | -------------------------------------------------------------------------- |
+| `space`  | toggles whether the selected file is staged for inclusion in a commit      |
+| `a`      | toggles all modified files between being staged and not staged             |
+| `c`      | commits all staged files; prompts whether to commit all if none are staged |
+| `d`      | discards all changes in the selected file; press `d` again to confirm      |
+| `D`      | opens a menu of options where one is "hard reset"                          |
+| `f`      | fetches changes from remote branch                                         |
+| `i`      | adds file to `.gitignore`                                                  |
+| `r`      | refreshes list of files; useful when files are modified outside of Neovim  |
+| `s`      | stashes all changes; prompts for stash name                                |
+| `S`      | stashes only staged changes; prompts for stash name                        |
+| \`       | toggles file list between flat and tree views                              |
+| `ctrl-w` | toggles hiding lines in right side that only differ by whitespace          |
 
 When committing changes, a dialog will appear where a commit message can be entered.
 After entering a commit message, press the `return` key to perform the commit.
@@ -990,28 +989,6 @@ To define custom snippets:
    }
    ```
 
-   For Markdown the file name should be `markdown.json`.
-   For example:
-
-   ```json
-   {
-     "Anchor Target Blank": {
-       "prefix": "atb",
-       "body": ["{% aTargetBlank \"$1\", \"$2\" %}"],
-       "description": "Markdown 11ty aTargetBlank shortcode"
-     },
-     "Image": {
-       "prefix": "img",
-       "body": [
-         "<img alt=\"$1\" style=\"width: 50%\"\n  src=\"/blog/assets/$2.png?v={{pkg.version}}\"\n  title=\"$1\">"
-       ],
-       "description": "Markdown <img>"
-     }
-   }
-   ```
-
-TODO: Describe the LuaSnips syntax for defining snippets.
-
 ### Marks
 
 Vim supports marking locations in files and easily returning to them.
@@ -1033,31 +1010,6 @@ To delete marks, enter `:delmarks {letter}, {letter}, ...`
 There are many special marks that are automatically set.
 All of them seem to have limited usefulness.
 These are displayed by both `:marks` and `<leader>f'`.
-
-### Sessions
-
-A session records the directory from which AstroNvim was started
-and the buffers that were open (but not their order).
-Only one session per directory can be saved.
-Once a session has been loaded, the list of open buffers
-in the session is automatically updated.
-
-The following key mappings related to sessions only apply
-when focus is in a buffer, not in the file explorer.
-
-| Key          | Action                                                                 |
-| ------------ | ---------------------------------------------------------------------- |
-| `<leader>Ss` | creates a new session for the starting directory if it doesn't exist   |
-| `<leader>Sf` | opens a dialog that lists saved sessions and allows loading to one     |
-| `<leader>S.` | loads the session for the current directory if it exists               |
-| `<leader>Sl` | loads the last (most recent) session                                   |
-| `<leader>Sd` | opens a dialog that lists saved sessions and allows them to be deleted |
-
-In the load dialog, select a session and press `return` to load it.
-
-In the delete dialog, select a session and press `return` to delete it.
-
-To close either of these dialogs, press the `<esc>` key twice.
 
 ### Bottom (btm)
 
