@@ -3441,7 +3441,10 @@ int main(void) {
   // To check if the top of the stack contains nil ...
   // if (lua_isnil(L, -1))
 
+  // Retrieve a global variable from the Lua virtual machine
+  // and place in on the top of the stack.
   lua_getglobal(L, "myBoolean");
+  // Get the value from the top of the stack as a specific data type.
   int myBoolean = lua_toboolean(L, -1);
   printf("myBoolean = %d\n", myBoolean);
 

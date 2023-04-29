@@ -524,16 +524,13 @@ The {% aTargetBlank "https://github.com/nvim-telescope/telescope.nvim",
 "telescope.nvim" %} plugin "is a highly extendable fuzzy finder over lists".
 It provides many commands and default key mappings them.
 
-AstroNvim uses the `telescope.vim` plugin.
-Its configuration file is `~/.config/nvim/lua/plugins/telescope.lua`.
-
 Key mappings for operating on the current buffer include:
 
 | Key          | Action                                                                           |
 | ------------ | -------------------------------------------------------------------------------- |
 | `<leader>lf` | formats the contents of the current buffer                                       |
-| `<leader>lS` | toggles display of a right pane containing a list of symbols defined in the file |
 | `<leader>ls` | opens a Telescope window for finding symbol references                           |
+| `<leader>lS` | toggles display of a right pane containing a list of symbols defined in the file |
 
 Symbols include variables, functions, and type declarations.
 Select a symbol name to scroll to it in the buffer.

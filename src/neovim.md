@@ -443,7 +443,7 @@ are summarized in the table below.
 | terminal            | toggleterm.nvim                                                                                               |
 
 Configuring all of these is a daunting task.
-For these reason, prebuilt Neovim configurations are popular.
+For this reason, prebuilt Neovim configurations are popular.
 There are many to choose from, but the most popular seem to be:
 
 - {% aTargetBlank "https://astronvim.com", "AstroNvim" %}
@@ -479,13 +479,24 @@ These include:
 - {% aTargetBlank "https://www.python.org", "Python" %} - for the Python REPL; `<leader>tp`
 - {% aTargetBlank "https://nodejs.org/en", "Node" %} - required by many LSPs and for the Node REPL; `<leader>tn`
 
+{% aTargetBlank "https://github.com/jesseduffield/lazygit#homebrew",
+"lazygit" %} is a terminal UI for Git commands.
+To install it, enter `brew install lazygit`.
+
+{% aTargetBlank "https://clementtsang.github.io/bottom/", "bottom" %}
+is a "graphical process/system monitor for the terminal".
+To install it, enter `brew install bottom`.
+This installs the command `btm`.
+
+For the best Node.js support, enter `npm install -g neovim`.
+
 ### Installing AstroNvim
 
 To install AstroNvim:
 
 1. Install Neovim. In macOS enter `brew install neovim`.
-1. Make a backup copy of your `~/.config/nvim` directory if you have one.
-1. Delete the `~/.config/nvim` directory.
+1. If you already have a `~/.config/nvim` directory,
+   rename is to something like `nvim-backup`.
 1. Enter `git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim`
 1. Enter `brew install lua-language-server`.
 1. Enter `nvim`. On first launch this will install many things.
@@ -511,7 +522,7 @@ To install AstroNvim:
    This requires setting the environment variable `NODE_ENV`.
    When using zsh, add `export NODE_ENV=development` in `~/.zshrc`.
 
-To check the status of your installation, enter `:checkhealth`.
+To check the status of the installation, enter `:checkhealth`.
 Fix any issues this identifies.
 
 ### Updating AstroNvim
@@ -571,19 +582,6 @@ The AstroNvim default settings found in
 - line numbers shown; `number = true`
 - automatic indentation; `smartindent = true`
 - no line wrapping; `wrap = false`
-
-{% aTargetBlank "https://github.com/jesseduffield/lazygit#homebrew",
-"lazygit" %} is a terminal UI for Git commands.
-To install it, enter `brew install lazygit`.
-
-{% aTargetBlank "https://clementtsang.github.io/bottom/", "bottom" %}
-is a "graphical process/system monitor for the terminal".
-To install it, enter `brew install bottom`.
-This installs the command `btm`.
-
-For the best Node.js support, enter `npm install -g neovim`.
-
-TODO: Should you do the following or is the default configuration good enough?
 
 For better snippet support, create the file
 `~/.config/nvim/lua/user/plugins/luasnip.lua` containing the following:
@@ -697,15 +695,18 @@ AstroNvim uses the {% aTargetBlank
 for the file explorer that appears on the left side.
 To toggle display of the file explorer, press `<leader>e`.
 
-The file explorer contains three tabs.
-The "File" tab displays files and directories in and below
-the directory from which Neovim was started.
-The "Bufs" tab displays a list of all the current buffers.
-The "Git" tab displays a list of modified, uncommitted files.
+The file explorer contains three tabs:
+
+- File: displays files and directories in and below
+  the directory from which Neovim was started
+- Bufs: displays a list of all the current buffers
+- Git: displays a list of modified, uncommitted files
+
 Press the `<` and `>` keys to navigate between these tabs.
 
-Press `j` and `k` to navigate down and up to select a file or directory.
-Press the `return` key to open the selected file or directory.
+Press `j` and `k` to navigate down and up
+to select a file, directory, or buffer.
+Press the `return` key to open the selected item.
 
 Some of the most useful key mappings that can be used
 when focus is in the file explorer include:
@@ -725,8 +726,8 @@ when focus is in the file explorer include:
 | `s`      | opens selected file in a new vertical split (on right)                |
 | `c`      | copies selected file or directory; prompts for new name               |
 | `d`      | deletes selected file or directory                                    |
-| `j`      | moves down to the next file or directory                              |
-| `k`      | moves up to the previous file or directory                            |
+| `j`      | moves down to the next item                                           |
+| `k`      | moves up to the previous item                                         |
 | `m`      | moves selected file or directory; prompts for destination             |
 | `O`      | opens selected file using associated app (in macOS image -> Preview)  |
 | `r`      | renames selected file or directory                                    |
@@ -734,16 +735,17 @@ when focus is in the file explorer include:
 | `y`      | copies selected file to clipboard                                     |
 | `p`      | pastes file from clipboard into selected directory                    |
 
+The `/` filtering looks for names that contain the entered text.
+For example, "raf" matches the name "giraffe".
+The `#` filtering is similar, but is fuzzy.
+For example, "ife" matches the name "giraffe".
+
 With both `/` and `#` filtering, select a file or directory
 using the up and down arrow keys or by pressing
 `ctrl-n` (for "next") or `ctrl-p` (for "previous").
 Press the `return` key to open the selected file or directory.
 To clear filtering and return to displaying the
 full list of files and directories, press the `esc` key.
-The `/` filtering looks for names that contain the entered text.
-For example, "raf" matches the name "giraffe".
-The `#` filtering is similar, but is fuzzy.
-For example, "ife" matches the name "giraffe".
 
 When `t` is pressed, a new tab is created.
 These are represented by numbered buttons starting from 1 in the upper-right.
