@@ -1660,7 +1660,7 @@ return {
 | `gcO` | inserts line comment below                    |
 | `gcA` | inserts line comment at end of line           |
 
-`gcc` as the same effect as the builtin mapping `<leader>/`.
+Entering `gcc` as the same effect as the builtin mapping `<leader>/`.
 
 #### hop.nvim Plugin
 
@@ -1718,7 +1718,7 @@ are the most frequently used.
 #### neoformat Plugin
 
 The {% aTargetBlank "https://github.com/sbdchd/neoformat", "neoformat" %} plugin
-formats text with many file types.
+formats text in many file types.
 It selects a formatter to use based on file type of the current buffer.
 The text in the buffer is then formatted.
 If this is successful, the buffer contents are replaced by the formatted text.

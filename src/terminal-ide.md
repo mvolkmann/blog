@@ -1155,71 +1155,17 @@ return {
 | ----- | --------------------------------------------- |
 | `gb`  | block comment toggle selected lines           |
 | `gc`  | line comment toggle selected lines            |
-| `gcb` | ???                                           |
 | `gcc` | toggles whether the current line is commented |
 | `gco` | inserts line comment above                    |
 | `gcO` | inserts line comment below                    |
 | `gcA` | inserts line comment at end of line           |
 
-`gcc` as the same effect as the builtin mapping `<leader>/`.
-
-#### hop.nvim Plugin
-
-The {% aTargetBlank "https://github.com/phaazon/hop.nvim", "hop.nvim" %}
-plugin is a rewrite of the {% aTargetBlank
-"https://github.com/easymotion/vim-easymotion", "EasyMotion" %} Vim plugin
-for Neovim.
-It provides an efficient way to jump to a specific place within a file
-that is currently visible.
-
-To configure Hop, create the file `~/.config/nvim/lua/user/plugins/hop.lua`
-containing the following:
-
-```lua
-return {
-  "phaazon/hop.nvim",
-  branch = 'v2', -- optional but strongly recommended
-  config = function()
-    require "hop".setup {}
-    -- When in normal mode, initiate with a capital "H".
-    vim.keymap.set('n', 'H', ":HopWord<cr>")
-  end,
-  event = "User AstroFile"
-}
-```
-
-The `event` value specifies when the plugin should be triggered.
-This can be a single event or a table of them.
-The supported events are:
-
-- `VeryLazy`: triggered after starting Neovim
-- `BufEnter *.lua`: triggered after opening a `.lua` file
-- `User AstroFile`: triggered after opening any file
-- `LspAttach`: triggered after starting LSP servers
-- `InsertEnter`: triggered after entering insert mode
-
-Enter `:Lazy sync` to install the plugin.
-This opens a window that show the status of the install.
-When this completes, press `q` to close the window.
-
-To "hop" to a visible word, look at the target word
-and press `<leader>H` or enter `:HopWord`.
-This replaces the first one or two characters of every visible word
-with one or two unique letters.
-Type the letter(s) for the target word to jump to it.
-
-To "hop" to a visible line, enter `:HopLine`.
-This replaces the first one or two characters of every visible line
-with one or two unique letters.
-Type the letters for the target line to jump to it.
-
-The Hop plugin defines more commands, but `HopWord` and `HopLine`
-are the most frequently used.
+Entering `gcc` has the same effect as the builtin mapping `<leader>/`.
 
 #### neoformat Plugin
 
 The {% aTargetBlank "https://github.com/sbdchd/neoformat", "neoformat" %} plugin
-formats text with many file types.
+formats text in many file types.
 It selects a formatter to use based on file type of the current buffer.
 The text in the buffer is then formatted.
 If this is successful, the buffer contents are replaced by the formatted text.
