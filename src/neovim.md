@@ -159,10 +159,10 @@ and add a period at the end.
 - Press `qi`.
 - Type `i` to go into insert mode.
 - Type `-` and a space.
-- Press `esc` to exit insert mode.
+- Press `<esc>` to exit insert mode.
 - Press `A` to move the end of the line and enter insert mode.
 - Type `.`
-- Press `esc` to exit insert mode.
+- Press `<esc>` to exit insert mode.
 - Press `0` to move the beginning of the line and
   press `j` to move down to the next line.
   These prepare for executing the macro again on the next line.
@@ -613,7 +613,7 @@ The default key mappings provided by AstroNvim are described
 Most of these are defined in `~/.config/nvim/lua/astronvim/mappings.lua`.
 
 AstroNvim defines `jj` and `jk` to exit insert mode
-as alternatives to pressing the `esc` key.
+as alternatives to pressing the `<esc>` key.
 
 AstroNvim uses the {% aTargetBlank "https://github.com/folke/which-key.nvim",
 "which-key" %} plugin to display applicable key mappings
@@ -745,7 +745,7 @@ using the up and down arrow keys or by pressing
 `ctrl-n` (for "next") or `ctrl-p` (for "previous").
 Press the `return` key to open the selected file or directory.
 To clear filtering and return to displaying the
-full list of files and directories, press the `esc` key.
+full list of files and directories, press the `<esc>` key.
 
 When `t` is pressed, a new tab is created.
 These are represented by numbered buttons starting from 1 in the upper-right.
@@ -905,7 +905,7 @@ when focus moves to a different buffer.
 
 Key mappings for operating on the symbol under the cursor
 include those described below.
-Note that some LSP servers to not support all of these actions.
+Note that some LSP servers do not support all of these actions.
 
 | Key          | Action                                                        |
 | ------------ | ------------------------------------------------------------- |
@@ -943,7 +943,7 @@ We will refer to this section as "filter".
 
 The lower-left section displays the filtered results.
 We will refer to this section as "results".
-To move focus from the the filter section to the results section,
+To move focus from the filter section to the results section,
 press `tab` or `ctrl-j`.
 The selected item displays a `>` to its left and has a gray background.
 To select a different item, press `tab` (down),
@@ -954,7 +954,7 @@ The right section displays a preview
 of what is selected in the lower-left section.
 We will refer to this section as "preview".
 
-Press the `esc` key to exit insert mode.
+Press the `<esc>` key to exit insert mode.
 When not in insert mode, the following key mappings can be used:
 
 - Move the filter section cursor left and right by pressing `h` and `l`.
@@ -963,10 +963,10 @@ When not in insert mode, the following key mappings can be used:
 
 To close a Telescope window, press `q`.
 
-To configure Telescope so pressing the `esc` key
+To configure Telescope so pressing the `<esc>` key
 also closes the Telescope window, create the file
 `~/.config/nvim/lua/user/plugins/telescope.lua` containing the code below.
-When in insert mode, it is necessary to press `esc` twice,
+When in insert mode, it is necessary to press `<esc>` twice,
 once to exit insert mode and once to close the window.
 
 ```lua
@@ -1017,7 +1017,7 @@ Key mappings for operating on a Telescope window include:
 | `shift-tab` | moves focus from "Results" section to filter input                |
 
 To see all the Telescope key mappings,
-press the `esc` key to exit insert mode and press `?`.
+press the `<esc>` key to exit insert mode and press `?`.
 The key mappings will appear at the bottom of the window.
 
 ### Comments
@@ -1239,26 +1239,26 @@ Selecting a local branch shows all of its commits on the right side.
 
 The following key mappings apply to this section:
 
-| Key      | Action                                                                                  |
-| -------- | --------------------------------------------------------------------------------------- |
-| `return` | displays all commits to the selected local branch; press `esc` to return to branch list |
-| `space`  | checks out the selected branch                                                          |
-| `c`      | creates a new remote branch                                                             |
-| `d`      | deletes the selected local branch after confirming                                      |
-| `f`      | fetches changes from remote branch                                                      |
-| `M`      | merges the selected branch into the checked out branch after confirming                 |
-| `n`      | creates a new local branch                                                              |
-| `o`      | starts process of opening a pull request in a new browser tab (must push first)         |
-| `p`      | pulls changes from the corresponding remote branch                                      |
-| `P`      | pushes changes to the corresponding remote branch                                       |
-| `R`      | renames the selected branch                                                             |
-| `r`      | rebases the selected branch into the checked out branch after confirming                |
+| Key      | Action                                                                                    |
+| -------- | ----------------------------------------------------------------------------------------- |
+| `return` | displays all commits to the selected local branch; press `<esc>` to return to branch list |
+| `space`  | checks out the selected branch                                                            |
+| `c`      | creates a new remote branch                                                               |
+| `d`      | deletes the selected local branch after confirming                                        |
+| `f`      | fetches changes from remote branch                                                        |
+| `M`      | merges the selected branch into the checked out branch after confirming                   |
+| `n`      | creates a new local branch                                                                |
+| `o`      | starts process of opening a pull request in a new browser tab (must push first)           |
+| `p`      | pulls changes from the corresponding remote branch                                        |
+| `P`      | pushes changes to the corresponding remote branch                                         |
+| `R`      | renames the selected branch                                                               |
+| `r`      | rebases the selected branch into the checked out branch after confirming                  |
 
 When attempting to checkout a different branch, if there are
 uncommitted changes a dialog will appear that offers to stash the changes.
 
 If a merge results in conflicts, a dialog will appear explaining that.
-Press `esc` to abort the merge or `return` to resolve the conflicts.
+Press `<esc>` to abort the merge or `return` to resolve the conflicts.
 Each conflict will be described by a pair of "hunks".
 To keep one of the hunks, move the cursor to it with `j` and `k`
 and press `space`. The other hunk will be discarded.
@@ -1502,7 +1502,7 @@ In the load dialog, select a session and press `return` to load it.
 
 In the delete dialog, select a session and press `return` to delete it.
 
-To close either of these dialogs, press the `esc` key twice.
+To close either of these dialogs, press the `<esc>` key twice.
 
 ### Bottom (btm)
 

@@ -291,7 +291,7 @@ The default key mappings provided by AstroNvim are described
 Most of these are defined in `~/.config/nvim/lua/astronvim/mappings.lua`.
 
 AstroNvim defines `jj` and `jk` to exit insert mode
-as alternatives to pressing the `esc` key.
+as alternatives to pressing the `<esc>` key.
 
 AstroNvim uses the {% aTargetBlank "https://github.com/folke/which-key.nvim",
 "which-key" %} plugin to display applicable key mappings
@@ -435,7 +435,7 @@ using the up and down arrow keys or by pressing
 `ctrl-n` (for "next") or `ctrl-p` (for "previous").
 Press the `return` key to open the selected file or directory.
 To clear filtering and return to displaying the
-full list of files and directories, press the `esc` key.
+full list of files and directories, press the `<esc>` key.
 
 When `t` is pressed, a new tab is created.
 These are represented by numbered buttons starting from 1 in the upper-right.
@@ -539,7 +539,7 @@ when focus moves to a different buffer.
 
 Key mappings for operating on the symbol under the cursor
 include those described below.
-Note that some LSP servers to not support all of these actions.
+Note that some LSP servers do not support all of these actions.
 
 | Key          | Action                                                        |
 | ------------ | ------------------------------------------------------------- |
@@ -577,7 +577,7 @@ We will refer to this section as "filter".
 
 The lower-left section displays the filtered results.
 We will refer to this section as "results".
-To move focus from the the filter section to the results section,
+To move focus from the filter section to the results section,
 press `tab` or `ctrl-j`.
 The selected item displays a `>` to its left and has a gray background.
 To select a different item, press `tab` (down),
@@ -588,7 +588,7 @@ The right section displays a preview
 of what is selected in the lower-left section.
 We will refer to this section as "preview".
 
-Press the `esc` key to exit insert mode.
+Press `<esc>` key to exit insert mode.
 When not in insert mode, the following key mappings can be used:
 
 - Move the filter section cursor left and right by pressing `h` and `l`.
@@ -597,10 +597,10 @@ When not in insert mode, the following key mappings can be used:
 
 To close a Telescope window, press `q`.
 
-To configure Telescope so pressing the `esc` key
+To configure Telescope so pressing the `<esc>` key
 also closes the Telescope window, create the file
 `~/.config/nvim/lua/user/plugins/telescope.lua` containing the code below.
-When in insert mode, it is necessary to press `esc` twice,
+When in insert mode, it is necessary to press `<esc>` twice,
 once to exit insert mode and once to close the window.
 
 ```lua
@@ -651,7 +651,7 @@ Key mappings for operating on a Telescope window include:
 | `shift-tab` | moves focus from "Results" section to filter input                |
 
 To see all the Telescope key mappings,
-press the `esc` key to exit insert mode and press `?`.
+press the `<esc>` key to exit insert mode and press `?`.
 The key mappings will appear at the bottom of the window.
 
 ### Comments
@@ -745,186 +745,4 @@ The right side contains information about the item selected on the left side.
 To scroll down and up, press `ctrl-d` and `ctrl-u`.
 TODO: Is there a way to scroll by full pages?
 
-To execute an arbitrary shell command without leaving lazygit, press `:`.
-This opens a dialog where a shell command can be entered.
-Press `return` to execute it.
-The output temporarily replaces the lazygit UI.
-Press `return` again to return to the lazygit UI.
-
-To customize the configuration of lazygit, create the file
-`~/.config/nvim/lua/user/plugins/lazygit.lua`.
-For example:
-
-```lua
-return {
-  "kdheepak/lazygit.nvim"
-  -- TODO: I want this to configure side-by-side diffs using the delta pager
-  -- TODO: which must be installed, but this is not working!
-  -- TODO: See https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Pagers.md.
-  --[[
-  config = function()
-    require("lazygit").setup {
-      pager = "delta",
-      delta = "side-by-size"
-    }
-  end,
-  event = "User AstroFile" -- need this?
-  --]]
-}
-```
-
-See {% aTargetBlank "https://github.com/kdheepak/lazygit.nvim/issues/92",
-"issue 92" %} which is related to configuring lazygit.
-
-For more information on lazygit key bindings, see {% aTargetBlank
-"https://github.com/jesseduffield/lazygit/blob/master/docs/keybindings/Keybindings_en.md",
-"key bindings" %}.
-
-For more information on lazygit, watch this {% aTargetBlank
-"https://www.youtube.com/watch?v=CPLdltN7wgE", "YouTube video" %}.
-
-#### Status Section
-
-Ths section shows the repository name and the current branch.
-The following key mappings apply to this section:
-
-| Key      | Action                                                 |
-| -------- | ------------------------------------------------------ |
-| `a`      | shows the log for all branches                         |
-| `u`      | checks for a lazygit update                            |
-| `return` | opens a dialog for switching to a different repository |
-
-#### Files Section
-
-This section contains two tabs, "Files" and "Submodules".
-The "Files" tab lists all the modified files.
-
-To see diffs for a file on the right side, select the file.
-
-For a side-by-side diff:
-
-- Enter `brew install git-delta` to install the delta pager.
-- Add the following in `~/.gitconfig`
-
-  ```text
-  [core]
-    pager = delta
-  [delta]
-    side-by-side = true
-  ```
-
-After making this change, entering `git diff`
-in a terminal displays a side-by-side diff.
-But lazy git does not honor this.
-
-I created the file `~/.config/lazygit/config.yaml` with the following contents,
-but that did not resolve the issue.
-
-```yaml
-git:
-  paging:
-    colorArg: always
-    pager: delta --dark --paging=never --side-by-side
-    useConfig: true
-gui:
-  showIcons: true
-```
-
-TODO: See {% aTargetBlank
-"https://github.com/jesseduffield/lazygit/issues/2337", "issue 2337" %}.
-
-The following key mappings apply to the Files section:
-
-| Key      | Action                                                                            |
-| -------- | --------------------------------------------------------------------------------- |
-| `space`  | toggles whether the selected file is staged for inclusion in a commit             |
-| `a`      | toggles all modified files between being staged and not staged                    |
-| `c`      | commits all staged files; prompts whether to commit all if none are staged        |
-| `C`      | same as `c`, but opens a Vim window to enter commit message (broken in AstroNvim) |
-| `d`      | discards all changes in the selected file; press `d` again to confirm             |
-| `D`      | opens a menu of options where one is "hard reset"                                 |
-| `f`      | fetches changes from remote branch                                                |
-| `i`      | adds file to `.gitignore`                                                         |
-| `r`      | refreshes list of files; useful when files are modified outside of Neovim         |
-| `s`      | stashes all changes; prompts for stash name                                       |
-| `S`      | stashes only staged changes; prompts for stash name                               |
-| \`       | toggles file list between flat and tree views                                     |
-| `ctrl-w` | toggles hiding lines in right side that only differ by whitespace                 |
-
-When committing changes, a dialog will appear where a commit message can be entered.
-After entering a commit message, press the `return` key to perform the commit.
-
-The menu that appears when `D` is pressed contains the following options:
-
-- nuke working tree - runs `git reset --hard HEAD && git clean -fd`
-- discard unstaged changes
-- discard untracked files
-- discard staged changes
-- soft reset - discards the last commit
-- mixed reset - discards the last commit and stages (add)
-- hard reset - discards the last commit and stages (add) and all changes
-
-#### Local Branches Section
-
-This section contains three tabs named "Local Branches", "Remotes", and "Tags".
-The "Local Branches" tab lists all the local branches.
-The currently checked out branch name is preceded by `*`.
-Selecting a local branch shows all of its commits on the right side.
-
-The following key mappings apply to this section:
-
-| Key      | Action                                                                                  |
-| -------- | --------------------------------------------------------------------------------------- |
-| `return` | displays all commits to the selected local branch; press `esc` to return to branch list |
-| `space`  | checks out the selected branch                                                          |
-| `c`      | creates a new remote branch                                                             |
-| `d`      | deletes the selected local branch after confirming                                      |
-| `f`      | fetches changes from remote branch                                                      |
-| `M`      | merges the selected branch into the checked out branch after confirming                 |
-| `n`      | creates a new local branch                                                              |
-| `o`      | starts process of opening a pull request in a new browser tab (must push first)         |
-| `p`      | pulls changes from the corresponding remote branch                                      |
-| `P`      | pushes changes to the corresponding remote branch                                       |
-| `R`      | renames the selected branch                                                             |
-| `r`      | rebases the selected branch into the checked out branch after confirming                |
-
-When attempting to checkout a different branch, if there are
-uncommitted changes a dialog will appear that offers to stash the changes.
-
-If a merge results in conflicts, a dialog will appear explaining that.
-Press `esc` to abort the merge or `return` to resolve the conflicts.
-Each conflict will be described by a pair of "hunks".
-To keep one of the hunks, move the cursor to it with `j` and `k`
-and press `space`. The other hunk will be discarded.
-To keep both hunks, press `b`.
-Another dialog will appear after all merge conflicts have been resolved.
-
-To delete a remote branch, switch to the "Remotes" tab in this section,
-select the branch, and press `d`.
-
-To create a new remote branch, switch to the "Remotes" tab in this section,
-and press `n`.
-
-To create a new tag, switch to the "Tags" tab in this section,
-and press `n`.
-
-To delete a tag, switch to the "Tags" tab in this section,
-select the tag, and press `d`.
-
-#### Commits Section
-
-This section contains two tabs, "Commits" and "Reflog".
-The "Commits" tab lists all the commits on the current local branch.
-Selecting a commit shows detail about it on the right side including
-the commit comment and a list of the new, modified, and deleted files.
-
-From the git docs, "Reflogs record when the tips of branches and
-other references were updated in the local repository."
-
-The following key mappings apply to this section:
-
-| Key | Action                                         |
-| --- | ---------------------------------------------- |
-| `d` | deletes the selected commit                    |
-| `o` | opens the selected commit in a new browser tab |
-| `s` | squashes the selected co                       |
+To execute an arbitrary sh
