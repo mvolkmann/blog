@@ -47,6 +47,112 @@ that you have become more efficient that using a non-modal editor.
 When I was learning Vim if had to move my mouse behind my monitor
 to prevent myself for using it out of habit.
 
+## Vim Basics
+
+The following sections describe the use of selected Vim features
+that are not unique to Neovim, but important to know.
+
+### Spell Checking
+
+Spell checking is a builtin feature of Vim, but it is not enabled by default
+in Vim, Neovim, or AstroNvim.
+
+To enable spell checking, add the following in your `.vimrc` file:
+
+```
+set spell spelllang=en_us
+```
+
+To enable spell checking in AstroNvim, add the following in
+`~/.config/nvim/lua/user/init.lua`:
+
+```lua
+return {
+  polish = function()
+    vim.opt.spell = true
+    -- vim.opt.spelllang = "en_us" -- defaults to "en"
+    vim.opt.spelloptions = "camel"
+
+    vim.api.nvim_set_hl(
+      0, -- global highlight group
+      'SpellBad',
+      { fg = "red", underline = true }
+    )
+  end
+}
+```
+
+I have encountered two issues in Vim spell checking.
+The first is that misspelled words are not underlined.
+The second is that camel-cased words are not handled properly.
+For example, "catDog" is marked as misspelled.
+See this {% aTargetBlank
+"https://www.reddit.com/r/AstroNvim/comments/12lxn7j/spell_checking/?utm_source=share&utm_medium=web2x&context=3",
+"reddit post" %}.
+
+The following default key mappings perform actions related to spell checking.
+
+| Key  | Action                                                       |
+| ---- | ------------------------------------------------------------ |
+| `]s` | jumps to the next misspelled word                            |
+| `[s` | jumps to the previous misspelled word                        |
+| `zg` | good; adds the word under the cursor to the dictionary       |
+| `zw` | wrong; removes the word under the cursor from the dictionary |
+| `z=` | opens a list of suggested replacements                       |
+
+The list of suggested replacements appears at the bottom of the window.
+Each suggestion is identified by a number or letter
+that can be pressed to substitute it.
+
+### Shell Commands
+
+To run a shell command from Vim, type `!` followed by the command.
+
+Any selected text is passed to the command as `stdin`
+and is replaced by the `stdout` of the command.
+An example of when this is useful is sorting lines.
+Select any number of lines and enter `!sort` to sort them.
+
+### Macros
+
+Macros record a series of keystrokes and assign them to a lowercase letter
+so they can be replayed any number of times.
+
+To define a macro:
+
+1. Press `q` followed by the lowercase letter to which it will be assigned.
+1. Type the keystrokes to be recorded.
+1. Press `q` to end recording.
+
+To replay a macro:
+
+1. Move the cursor to where it should be when the macro begins playing.
+1. Press `@` followed by the assigned lowercase letter.
+
+To replay the last macro used, press `@@`.
+
+To replay a macro multiple times, type the desired number
+followed by `@` and the assigned macro letter.
+
+For example, suppose we want to define a macro named "i" that
+adds a hyphen and a space to the beginning of a line
+and add a period at the end.
+
+- Move the cursor to the beginning of a line that needs these changes.
+- Press `qi`.
+- Type `i` to go into insert mode.
+- Type `-` and a space.
+- Press `<esc>` to exit insert mode.
+- Press `A` to move the end of the line and enter insert mode.
+- Type `.`
+- Press `<esc>` to exit insert mode.
+- Press `0` to move the beginning of the line and
+  press `j` to move down to the next line.
+  These prepare for executing the macro again on the next line.
+- Press `q` to end macro recording.
+
+To execute this macro on the next 15 lines, type `15@i` or `15@@`.
+
 ## Language Server Protocol (LSP)
 
 Microsoft invented the {% aTargetBlank

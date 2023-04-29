@@ -93,7 +93,7 @@ return {
 }
 ```
 
-I'm encountering two issues.
+I have encountered two issues in Vim spell checking.
 The first is that misspelled words are not underlined.
 I'd really like to use "undercurl" instead of "underline",
 but it seems that is not supported.
@@ -113,9 +113,9 @@ perform actions related to spell checking.
 | ---- | ------------------------------------------------------------ |
 | `]s` | jumps to the next misspelled word                            |
 | `[s` | jumps to the previous misspelled word                        |
-| `z=` | opens a list of suggested replacements                       |
 | `zg` | good; adds the word under the cursor to the dictionary       |
 | `zw` | wrong; removes the word under the cursor from the dictionary |
+| `z=` | opens a list of suggested replacements                       |
 
 The list of suggested replacements appears at the bottom of the window.
 Each suggestion is identified by a number or letter
