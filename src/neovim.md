@@ -961,7 +961,7 @@ When not in insert mode, the following key mappings can be used:
 - Change the result section selection by pressing `j` and `k`.
 - Display all applicable Telescope key mappings by pressing `?`.
 
-To close a Telescope window, press `q`.
+To close a Telescope window, press `<esc>` to exit insert mode and press `q`.
 
 To configure Telescope so pressing the `<esc>` key
 also closes the Telescope window, create the file
@@ -1064,12 +1064,12 @@ The file explorer `Git` tab lists the modified files.
 To see all the keys mapped to Git commands, press `<leader>g` and pause.
 These include:
 
-| Key          | Action                                                                                  |
-| ------------ | --------------------------------------------------------------------------------------- |
-| `<leader>gb` | displays a list of local Git branches in a Telescope window and allows switching to one |
-| `<leader>gc` | lists all commits for the current file                                                  |
-| `<leader>gd` | displays a side-by-side diff for the current file                                       |
-| `<leader>gt` | displays Git status of current project in a Telescope window                            |
+| Key          | Action                                                            |
+| ------------ | ----------------------------------------------------------------- |
+| `<leader>gb` | displays a list of local Git branches and allows switching to one |
+| `<leader>gc` | lists all commits for the current file                            |
+| `<leader>gd` | displays a side-by-side diff for the current file                 |
+| `<leader>gt` | displays Git status of current project in a Telescope window      |
 
 In the Telescope window displayed by `<leader>gb`,
 the "Git Branch Preview" pane on the right shows the commits on the branch.
@@ -1079,8 +1079,6 @@ the "Git Branch Preview" pane on the right shows the commits on the branch.
 A better way to manage Git repositories from inside Neovim is to use
 {% aTargetBlank "https://github.com/jesseduffield/lazygit", "lazygit" %}
 which is a terminal UI for executing Git commands.
-Lazygit is an alternative to {% aTargetBlank
-"https://github.com/tpope/vim-fugitive", "git-fugitive" %}.
 
 To launch lazygit from a terminal window,
 cd to a repository directory and enter `lazygit`.
@@ -1151,7 +1149,7 @@ For more information on lazygit, watch this {% aTargetBlank
 
 #### Status Section
 
-Ths section shows the repository name and the current branch.
+This section shows the repository name and the current branch.
 The following key mappings apply to this section:
 
 | Key      | Action                                                 |

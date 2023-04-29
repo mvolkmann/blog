@@ -375,8 +375,8 @@ This displays a menu of common commands that includes:
   This restores the most recent session.
   See the "Sessions" section below for more detail.
 
-To close any Telescope window, press `<esc>` to exit insert mode
-and press either `<esc>` or `q`.
+To close any Telescope window,
+press `<esc>` to exit insert mode and press `q`.
 
 ### File Explorer
 
@@ -595,7 +595,8 @@ When not in insert mode, the following key mappings can be used:
 - Change the result section selection by pressing `j` and `k`.
 - Display all applicable Telescope key mappings by pressing `?`.
 
-To close a Telescope window, press `q`.
+To close any Telescope window,
+press `<esc>` to exit insert mode and press `q`.
 
 To configure Telescope so pressing the `<esc>` key
 also closes the Telescope window, create the file
@@ -661,13 +662,6 @@ To toggle commenting of the current line or selected lines, press `<leader>/`.
 For more advanced comment support, see the `Comment.nvim` plugin
 described in the "Custom Plugins" section.
 
-### Code Formatting
-
-AstroNvim uses the {% aTargetBlank
-"https://github.com/jose-elias-alvarez/null-ls.nvim", "null-ls.vim" %} plugin
-to perform code formatting. I suspect, but have not confirmed,
-that `null-ls.vim` provides formatting of Markdown tables.
-
 ### Auto-pairs
 
 AstroNvim uses the {% aTargetBlank "https://github.com/windwp/nvim-autopairs",
@@ -698,12 +692,12 @@ The file explorer `Git` tab lists the modified files.
 To see all the keys mapped to Git commands, press `<leader>g` and pause.
 These include:
 
-| Key          | Action                                                                                  |
-| ------------ | --------------------------------------------------------------------------------------- |
-| `<leader>gb` | displays a list of local Git branches in a Telescope window and allows switching to one |
-| `<leader>gc` | lists all commits for the current file                                                  |
-| `<leader>gd` | displays a side-by-side diff for the current file                                       |
-| `<leader>gt` | displays Git status of current project in a Telescope window                            |
+| Key          | Action                                                            |
+| ------------ | ----------------------------------------------------------------- |
+| `<leader>gb` | displays a list of local Git branches and allows switching to one |
+| `<leader>gc` | lists all commits for the current file                            |
+| `<leader>gd` | displays a side-by-side diff for the current file                 |
+| `<leader>gt` | displays Git status of current project in a Telescope window      |
 
 In the Telescope window displayed by `<leader>gb`,
 the "Git Branch Preview" pane on the right shows the commits on the branch.
@@ -713,8 +707,6 @@ the "Git Branch Preview" pane on the right shows the commits on the branch.
 A better way to manage Git repositories from inside Neovim is to use
 {% aTargetBlank "https://github.com/jesseduffield/lazygit", "lazygit" %}
 which is a terminal UI for executing Git commands.
-Lazygit is an alternative to {% aTargetBlank
-"https://github.com/tpope/vim-fugitive", "git-fugitive" %}.
 
 To launch lazygit from a terminal window,
 cd to a repository directory and enter `lazygit`.
@@ -743,49 +735,10 @@ To search within any section, press `/`.
 
 The right side contains information about the item selected on the left side.
 To scroll down and up, press `ctrl-d` and `ctrl-u`.
-TODO: Is there a way to scroll by full pages?
-
-To execute an arbitrary shell command without leaving lazygit, press `:`.
-This opens a dialog where a shell command can be entered.
-Press `return` to execute it.
-The output temporarily replaces the lazygit UI.
-Press `return` again to return to the lazygit UI.
-
-To customize the configuration of lazygit, create the file
-`~/.config/nvim/lua/user/plugins/lazygit.lua`.
-For example:
-
-```lua
-return {
-  "kdheepak/lazygit.nvim"
-  -- TODO: I want this to configure side-by-side diffs using the delta pager
-  -- TODO: which must be installed, but this is not working!
-  -- TODO: See https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Pagers.md.
-  --[[
-  config = function()
-    require("lazygit").setup {
-      pager = "delta",
-      delta = "side-by-size"
-    }
-  end,
-  event = "User AstroFile" -- need this?
-  --]]
-}
-```
-
-See {% aTargetBlank "https://github.com/kdheepak/lazygit.nvim/issues/92",
-"issue 92" %} which is related to configuring lazygit.
-
-For more information on lazygit key bindings, see {% aTargetBlank
-"https://github.com/jesseduffield/lazygit/blob/master/docs/keybindings/Keybindings_en.md",
-"key bindings" %}.
-
-For more information on lazygit, watch this {% aTargetBlank
-"https://www.youtube.com/watch?v=CPLdltN7wgE", "YouTube video" %}.
 
 #### Status Section
 
-Ths section shows the repository name and the current branch.
+This section shows the repository name and the current branch.
 The following key mappings apply to this section:
 
 | Key      | Action                                                 |
@@ -800,38 +753,6 @@ This section contains two tabs, "Files" and "Submodules".
 The "Files" tab lists all the modified files.
 
 To see diffs for a file on the right side, select the file.
-
-For a side-by-side diff:
-
-- Enter `brew install git-delta` to install the delta pager.
-- Add the following in `~/.gitconfig`
-
-  ```text
-  [core]
-    pager = delta
-  [delta]
-    side-by-side = true
-  ```
-
-After making this change, entering `git diff`
-in a terminal displays a side-by-side diff.
-But lazy git does not honor this.
-
-I created the file `~/.config/lazygit/config.yaml` with the following contents,
-but that did not resolve the issue.
-
-```yaml
-git:
-  paging:
-    colorArg: always
-    pager: delta --dark --paging=never --side-by-side
-    useConfig: true
-gui:
-  showIcons: true
-```
-
-TODO: See {% aTargetBlank
-"https://github.com/jesseduffield/lazygit/issues/2337", "issue 2337" %}.
 
 The following key mappings apply to the Files section:
 
