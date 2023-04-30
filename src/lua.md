@@ -173,8 +173,6 @@ For a comparison of the performance of each approach, see {% aTargetBlank
 "https://eklausmeier.goip.de/blog/2020/05-14-performance-comparison-pallene-vs-lua-5-1-5-2-5-3-5-4-vs-c/",
 "Performance Comparison Pallene vs. Lua vs. C" %}.
 
-### luac
-
 {% aTargetBlank "https://www.lua.org/manual/5.1/luac.html", "luac" %}
 is the standard Lua compiler.
 It reads Lua source code and outputs Lua bytecode.
@@ -187,6 +185,8 @@ For example, `luac demo.lua -o demo.luac`.
 To execute a bytecode file, pass it to the Lua interpreter.
 For example, `lua demo.luac`.
 
+## Flavors of Lua
+
 ### LuaJIT
 
 {% aTargetBlank "https://luajit.org/", "LuaJIT" %} is an alternative
@@ -195,6 +195,8 @@ LuaJIT also executes bytecode files and provides runtime optimizations
 that typically result in better performance.
 
 LuaJIT is implemented by a separate team from the one that maintains Lua.
+
+LuaJIT is based on Lua 5.1, so it is missing features of Lua added since then.
 
 From {% aTargetBlank "https://api7.ai/learning-center/openresty/luajit-vs-lua",
 "api7.ai" %}:
@@ -212,6 +214,13 @@ From {% aTargetBlank "https://api7.ai/learning-center/openresty/luajit-vs-lua",
 > The compilation process converts the LuaJIT bytecode into LuaJIT's own
 > defined Intermediate Representation (IR) and
 > then generates machine code for the target architecture.
+
+In some cases when using LuaJIT it is necessary to write code differently
+than you would in vanilla Lua in order to get the best performance.
+
+The LuaJIT foreign function interface (FFI) makes it easier to call
+functions implemented in other languages than vanilla Lua.
+Using the Lua C API in LuaJIT is slower than using it in vanilla Lua.
 
 To install LuaJIT:
 
@@ -235,7 +244,7 @@ which performs just-in-time compilation at runtime.
 
 "{% aTargetBlank "https://github.com/pallene-lang/pallene", "Pallene" %}
 is a statically typed and ahead-of-time compiled sister language
-to Lua, with a focus on performance. It is intended for
+to Lua with a focus on performance. It is intended for
 writing performance sensitive code that interacts with Lua,
 a space that is currently filled by C modules and by LuaJIT.
 Compared to C, Pallene should offer better
@@ -311,6 +320,27 @@ fizzBuzz(30, {
   {5, "buzz"}
 })
 ```
+
+## Languages Based on Lua
+
+{% aTargetBlank "http://ravilang.github.io/", "Ravi" %} is
+a "dialect of Lua with limited optional static typing and JIT/AOT compilers".
+The name comes from Sanskrit word for "Sun".
+
+{% aTargetBlank "https://moonscript.org/", "MoonScript" %} is
+"programmer friendly language that compiles into Lua".
+It "gives you the power of the fastest scripting language
+combined with a rich set of features".
+
+{% aTargetBlank "https://terralang.org/", "Terra" %} is a
+"low-level system programming language that is designed to
+interoperate seamlessly with the Lua programming language".
+It "shares Lua's syntax and control-flow constructs".
+
+{% aTargetBlank "http://squirrel-lang.org/", "Squirrel" %} is a
+"high level imperative, object-oriented programming language,
+designed to be a light-weight scripting language"."
+It was "inspired by languages like Python,Javascript and especially Lua".
 
 ## VS Code Support
 
