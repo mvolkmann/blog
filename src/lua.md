@@ -3450,6 +3450,8 @@ by following these steps:
 
 Write C code that loads and runs a Lua script.
 
+TODO: Update this to use code from your `c-calls-lua` example.
+
 ```c
 #include <stdio.h>
 #include <stdlib.h>
@@ -3518,7 +3520,8 @@ Lua code that does not call those can be executed without this.
 TODO: Write utility functions that get values of specific types from Lua code
 TODO: and do all the error checking.
 
-TODO: Does `lua_pcall` remove the function and its arguments from the stack?
+Before `lua_pcall` pushes return values onto the stack it
+remove the function and its arguments from the stack.
 
 See {% aTargetBlank
 "http://www.troubleshooters.com/codecorn/lua/lua_c_calls_lua.htm",
