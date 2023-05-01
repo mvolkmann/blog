@@ -86,6 +86,8 @@ For a more extensive list of pros and cons, see {% aTargetBlank
 Notable uses of Lua include:
 
 - {% aTargetBlank "https://www.angrybirds.com", "Angry Birds" %} game
+- {% aTargetBlank "https://codea.io", "Codea" %}
+  creates games and simulations on an iPad using Lua
 - {% aTargetBlank "http://www.legoengineering.com/platform/nxt/",
   "Lego Mindstorms NXT" %} robotics platform
 - {% aTargetBlank "https://www.minecraft.net/", "Minecraft" %} game
