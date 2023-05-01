@@ -2969,10 +2969,6 @@ For example:
 - `math.tointeger(3.1)` returns `nil`
   because it cannot be converted to an integer
 
-### package Module
-
-TODO: Add details about the `package module.
-
 ### os Module
 
 The `os` module defines the following functions:
@@ -3022,6 +3018,10 @@ local start = os.clock()
 -— Add some code here.
 print(os.clock() - start)
 ```
+
+### package Module
+
+TODO: Add details about the `package module.
 
 ### string Module
 
