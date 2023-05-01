@@ -2827,65 +2827,6 @@ The `basic` module defines the following core Lua functions.
 
 TODO: Add detail on this module.
 
-### io module
-
-TODO: Add detail on this module.
-
-### math module
-
-Constants defined by this module include:
-
-| Constant          | Meaning                                            |
-| ----------------- | -------------------------------------------------- |
-| `math.huge`       | floating point value greater than any other number |
-| `math.maxinteger` | maximum integer value                              |
-| `math.mininteger` | minimum integer value                              |
-| `math.pi`         | value of π                                         |
-
-A constant for `e` is not defined, but it can be obtained from `math.exp(1)`.
-
-Trigonometry functions defined by this module include
-`sin`, `cos`, `tan`, `asin`, `acos`, and `atan`.
-All of these take or return angles in radians.
-To convert an angle from degrees to radians, use the `math.rad(x)` function.
-To convert an angle from radians to degrees, use the `math.deg(x)` function.
-
-To generate random numbers, use the
-`math.randomseed` and `math.random` functions.
-For example:
-
-- `math.randomseed(os.time())` seeds the random number generator
-- `math.random()` returns a floating point number in the range [0, 1)
-- `math.random(10)` returns an integer in the range [1, 10]
-- `math.random(5, 10)` returns an integer in the range [5, 10]
-
-Other functions defined in this module include:
-
-| Function              | Returns                                                               |
-| --------------------- | --------------------------------------------------------------------- |
-| `math.abs(x)`         | absolute value                                                        |
-| `math.ceil(x)`        | ceiling (rounds up)                                                   |
-| `math.exp(x)`         | e raised to the x power                                               |
-| `math.floor(x)`       | floor (rounds up)                                                     |
-| `math.fmod(x, y)`     | floating point remainder of x / y                                     |
-| `math.log(x, [base])` | logarithm of x with specified base or e                               |
-| `math.max(...)`       | maximum of a set of numbers                                           |
-| `math.min(...)`       | minimum of a set of numbers                                           |
-| `math.modf(x)`        | integral and fractional parts of a floating point number              |
-| `math.sqrt(x)`        | square root                                                           |
-| `math.tointeger(x)`   | integer value if x can be converted to an integer; otherwise `nil`    |
-| `math.type(x)`        | `"integer"`, `"float"`, or `nil`                                      |
-| `math.ult(m, n)`      | `true` if m < n when compared as unsigned integers; otherwise `false` |
-
-`math.modf(3.14)` returns `3` and `0.14`
-
-The value passed to `math.tointeger` can be a number or string.
-For example:
-
-- `math.tointeger(3.0)` and `math.tointeger("3.0")` both return `3`
-- `math.tointeger(3.1)` returns `nil`
-  because it cannot be converted to an integer
-
 ### io Module
 
 The following code shows the most basic way to write to a new file.
@@ -2972,6 +2913,61 @@ To close a stream:
 ```lua
 stream:close()
 ```
+
+### math module
+
+Constants defined by this module include:
+
+| Constant          | Meaning                                            |
+| ----------------- | -------------------------------------------------- |
+| `math.huge`       | floating point value greater than any other number |
+| `math.maxinteger` | maximum integer value                              |
+| `math.mininteger` | minimum integer value                              |
+| `math.pi`         | value of π                                         |
+
+A constant for `e` is not defined, but it can be obtained from `math.exp(1)`.
+
+Trigonometry functions defined by this module include
+`sin`, `cos`, `tan`, `asin`, `acos`, and `atan`.
+All of these take or return angles in radians.
+To convert an angle from degrees to radians, use the `math.rad(x)` function.
+To convert an angle from radians to degrees, use the `math.deg(x)` function.
+
+To generate random numbers, use the
+`math.randomseed` and `math.random` functions.
+For example:
+
+- `math.randomseed(os.time())` seeds the random number generator
+- `math.random()` returns a floating point number in the range [0, 1)
+- `math.random(10)` returns an integer in the range [1, 10]
+- `math.random(5, 10)` returns an integer in the range [5, 10]
+
+Other functions defined in this module include:
+
+| Function              | Returns                                                               |
+| --------------------- | --------------------------------------------------------------------- |
+| `math.abs(x)`         | absolute value                                                        |
+| `math.ceil(x)`        | ceiling (rounds up)                                                   |
+| `math.exp(x)`         | e raised to the x power                                               |
+| `math.floor(x)`       | floor (rounds up)                                                     |
+| `math.fmod(x, y)`     | floating point remainder of x / y                                     |
+| `math.log(x, [base])` | logarithm of x with specified base or e                               |
+| `math.max(...)`       | maximum of a set of numbers                                           |
+| `math.min(...)`       | minimum of a set of numbers                                           |
+| `math.modf(x)`        | integral and fractional parts of a floating point number              |
+| `math.sqrt(x)`        | square root                                                           |
+| `math.tointeger(x)`   | integer value if x can be converted to an integer; otherwise `nil`    |
+| `math.type(x)`        | `"integer"`, `"float"`, or `nil`                                      |
+| `math.ult(m, n)`      | `true` if m < n when compared as unsigned integers; otherwise `false` |
+
+`math.modf(3.14)` returns `3` and `0.14`
+
+The value passed to `math.tointeger` can be a number or string.
+For example:
+
+- `math.tointeger(3.0)` and `math.tointeger("3.0")` both return `3`
+- `math.tointeger(3.1)` returns `nil`
+  because it cannot be converted to an integer
 
 ### package Module
 
