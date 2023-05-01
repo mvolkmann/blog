@@ -230,6 +230,10 @@ It is a Ruby source file found in the `fastlane` directory.
    that use a newer version of iOS if the app requires that.
    For example, you may have a simulator for "iPhone 8 Plus" running iOS 15.5,
    but not one running iOS 16.4.
+   If when running Fastlane you get an error saying it cannot find
+   a certain simulator and you have multiple version of Xcode installed,
+   verify that it is using the intended version by entering
+   `xcode-select -p`.
 
 1. Uncomment the line that calls the `scheme` function
    and change it to `scheme("ScreenshotTests")`.
