@@ -61,15 +61,17 @@ To use a C library from Swift:
 
 1. Create a group within the Xcode project named "include".
 1. Copy the `.h` files for each library into this directory.
-1. Create a group within the Xcode project named "lib".
-1. Copy the `.a` files for each library into this directory.
 1. Select the top entry in the project navigator.
 1. Select the project.
 1. Select the "Build Settings" tab.
 1. Open the "Search" section.
 1. Open the "Header Search Paths" entry.
 1. In the "Release" section, add the string "include".
-1. Open the "Library Search Paths" entry.
+
+TODO: Restore information about setting the library path from a previous commit!
+
+## Invoking Lua
+
 1. Build a version of Lua that is compatible with iOS.
    See {% aTargetBlank "https://github.com/apotocki/lua-iosx", "lua-iosx" %}.
    Enter the following commands to generate
@@ -83,6 +85,7 @@ To use a C library from Swift:
    check the "Copy items if needed" checkbox
    and click the "Finish" button.
 
-It should be possible now to call functions from the Lua C API
+It is now possible to call functions from the Lua C API
 from functions defined in C source files.
 Those C functions can be called from Swift code.
+See the project SwiftUICallsC for an example of doing this.
