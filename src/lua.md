@@ -3547,6 +3547,12 @@ LUALIB_API void openlibs(lua_State *L) {
 }
 ```
 
+It is probably possible to load a standard library and
+then disable some of its functions by setting them to `nil`.
+For example, it may be desirable to allow reading files,
+but not writing them.
+TODO: Try this.
+
 TODO: Add detail on calling C from Lua.
 TODO: Add detail on calling Lua from C.
 
