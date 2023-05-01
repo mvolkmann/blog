@@ -54,3 +54,35 @@ that includes C code and calls its functions.
    ```swift
    Text("Factorial is \(factorial(5)).") // 120
    ```
+
+## Libraries
+
+To use a C library from Swift:
+
+1. Create a group within the Xcode project named "include".
+1. Copy the `.h` files for each library into this directory.
+1. Create a group within the Xcode project named "lib".
+1. Copy the `.a` files for each library into this directory.
+1. Select the top entry in the project navigator.
+1. Select the project.
+1. Select the "Build Settings" tab.
+1. Open the "Search" section.
+1. Open the "Header Search Paths" entry.
+1. In the "Release" section, add the string "include".
+1. Open the "Library Search Paths" entry.
+1. Build a version of Lua that is compatible with iOS.
+   See {% aTargetBlank "https://github.com/apotocki/lua-iosx", "lua-iosx" %}.
+   Enter the following commands to generate
+   the directory `frameworks/lua.xcframework`:
+   - `git clone -b 5.4.4 https://github.com/apotocki/lua-iosx`
+   - `cd lua-iosx`
+   - `scripts/build.sh`
+1. Create a "Frameworks" group.
+1. Drag the `lua-ios/frameworks/lua.xcframework` directory into the group.
+1. In the dialog that appears,
+   check the "Copy items if needed" checkbox
+   and click the "Finish" button.
+
+It should be possible now to call functions from the Lua C API
+from functions defined in C source files.
+Those C functions can be called from Swift code.
