@@ -2842,7 +2842,7 @@ io.output(file_path)
 io.write(some_string)
 
 -- Close the default output file.
-io.output():close()
+io.close()
 ```
 
 The following code shows the most basic way to read from a file.
@@ -2857,7 +2857,7 @@ io.input(file_path)
 -- TODO: What arguments does this accept and what do they do?
 local data = io.read()
 
--- Close the default input file.
+-- Get and close the default input file.
 io.input():close()
 ```
 
@@ -3540,6 +3540,13 @@ LUALIB_API void openlibs(lua_State *L) {
     luaL_requiref(L, lib->name, lib->func, 1);
     lua_pop(L, 1);  /* remove lib */
   }
+
+  // Assuming the io library is loaded,
+  // remove the ability to change the default output file.
+  // It will remain set to stdout, so `io.write` can be
+  // used to write to stdout, but not to a file.
+  getGlobalTable("io");
+  setTableKeyValue("output", 0);
 }
 ```
 
