@@ -2842,7 +2842,7 @@ io.output(file_path)
 io.write(some_string)
 
 -- Close the default output file.
-io.close()
+io.output():close()
 ```
 
 The following code shows the most basic way to read from a file.
