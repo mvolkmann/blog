@@ -2783,8 +2783,8 @@ The Lua standard library defines the following modules:
 - <a href="https://www.lua.org/manual/5.4/manual.html#6.10" target="_blank">debug</a>
 - <a href="https://www.lua.org/manual/5.4/manual.html#6.8" target="_blank">io</a>
 - <a href="https://www.lua.org/manual/5.4/manual.html#6.7" target="_blank">math</a>
-- <a href="https://www.lua.org/manual/5.4/manual.html#6.3" target="_blank">modules</a>
 - <a href="https://www.lua.org/manual/5.4/manual.html#6.9" target="_blank">os</a>
+- <a href="https://www.lua.org/manual/5.4/manual.html#6.3" target="_blank">package</a>
 - <a href="https://www.lua.org/manual/5.4/manual.html#6.4" target="_blank">string</a>
 - <a href="https://www.lua.org/manual/5.4/manual.html#6.6" target="_blank">table</a>
 - <a href="https://www.lua.org/manual/5.4/manual.html#6.5" target="_blank">utf8</a>
@@ -2972,6 +2972,10 @@ To close a stream:
 ```lua
 stream:close()
 ```
+
+### package Module
+
+TODO: Add details about the `package module.
 
 ### os Module
 
@@ -3464,7 +3468,7 @@ int main(void) {
   // Create a Lua virtual machine.
   lua_State *L = luaL_newstate();
 
-  // Make the standard library functions available in Lua code.
+  // Make ALL the standard library functions available in Lua code.
   luaL_openlibs(L);
 
   // Execute a Lua source file.
@@ -3507,6 +3511,41 @@ gcc main.c -o main -llua
 ```
 
 Run the executable by entering `./main`
+
+To restrict what loaded Lua code is able to do,
+only load a subset of the standard libraries.
+Copy the following code from the Lua source file `linit.c`
+and call `openlibs` in place of `luaL_openlibs`.
+
+```c
+static const luaL_Reg loadedlibs[] = {
+  // This loads the "basic" standard library into the global environment.
+  // It includes functions like pairs, ipairs, print,
+  // tonumber, tostring, setmetatable, and getmetatable
+  {LUA_GNAME, luaopen_base},
+
+  // Comment out any of these to prevent their use.
+  // It seems the order of these lines does not matter.
+  {LUA_LOADLIBNAME, luaopen_package},
+  {LUA_COLIBNAME, luaopen_coroutine},
+  {LUA_TABLIBNAME, luaopen_table},
+  {LUA_IOLIBNAME, luaopen_io},
+  {LUA_OSLIBNAME, luaopen_os},
+  {LUA_STRLIBNAME, luaopen_string},
+  {LUA_MATHLIBNAME, luaopen_math},
+  {LUA_UTF8LIBNAME, luaopen_utf8},
+  {LUA_DBLIBNAME, luaopen_debug},
+  {NULL, NULL} // marks end for for loop in openlibs below
+};
+
+LUALIB_API void openlibs(lua_State *L) {
+  const luaL_Reg *lib;
+  for (lib = loadedlibs; lib->func; lib++) {
+    luaL_requiref(L, lib->name, lib->func, 1);
+    lua_pop(L, 1);  /* remove lib */
+  }
+}
+```
 
 TODO: Add detail on calling C from Lua.
 TODO: Add detail on calling Lua from C.

@@ -888,7 +888,7 @@ Double-click a symbol name to insert it at the cursor location
 or drag it to the desired location inside a container view.
 This will insert `Image(systemName: "{symbol-name}")`.
 
-## Source Control
+## Source Control (Git)
 
 Xcode has excellent builtin support for
 source control (aka version control) using Git.
