@@ -3428,6 +3428,10 @@ such as JSON and Python.
 It is common in Lua configuration files to expose values as global variables.
 This is likely the reason that variables are global by default.
 
+The Lua interpreter is small, only around 250 kb.
+The total size of the Lua standard libraries is around 500 kb.
+These are combined into the file `liblua.a`.
+
 Download the source for Lua and build it
 by following these steps:
 
@@ -3450,57 +3454,10 @@ by following these steps:
   building for macOS-arm64 but attempting to link with
   file built for macOS-x86_64".
 
-Write C code that loads and runs a Lua script.
-
-TODO: Update this to use code from your `c-calls-lua` example.
-
-```c
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "lauxlib.h"
-#include "lua.h"
-#include "lualib.h"
-
-int main(void) {
-  // Create a Lua virtual machine.
-  lua_State *L = luaL_newstate();
-
-  // Make ALL the standard library functions available in Lua code.
-  luaL_openlibs(L);
-
-  // Execute a Lua source file.
-  luaL_dofile(L, "config.lua");
-
-  // To check if the top of the stack contains nil ...
-  // if (lua_isnil(L, -1))
-
-  // Retrieve a global variable from the Lua virtual machine
-  // and place in on the top of the stack.
-  lua_getglobal(L, "myBoolean");
-  // Get the value from the top of the stack as a specific data type.
-  int myBoolean = lua_toboolean(L, -1);
-  printf("myBoolean = %d\n", myBoolean);
-
-  lua_getglobal(L, "myInteger");
-  lua_Integer myInteger = lua_tointeger(L, -1);
-  // lld is long long decimal
-  printf("myInteger = %lld\n", myInteger);
-
-  lua_getglobal(L, "myFloat");
-  lua_Number myFloat = lua_tonumber(L, -1);
-  printf("myFloat = %f\n", myFloat);
-
-  lua_getglobal(L, "myString");
-  const char *myString = lua_tostring(L, -1);
-  printf("myString = %s\n", myString);
-
-  // Close the Lua virtual machine.
-  lua_close(L);
-
-  return 0; // success
-}
-```
+For an example of embedding the Lua interpreter in a C application, see
+the GitHub repository {% aTargetBlank
+"https://github.com/mvolkmann/lua-examples/tree/main/c-calls-lua",
+"c-calls-lua" %}.
 
 To compile and link the C program, enter:
 
@@ -3509,6 +3466,11 @@ gcc main.c -o main -llua
 ```
 
 Run the executable by entering `./main`
+
+For an example of embedding the Lua interpreter in a SwiftUI application, see
+{% aTargetBlank "/blog/topics/#/blog/swift/CallingC", "Swift Calling C" %} and
+the GitHub respository {% aTargetBlank
+"https://github.com/mvolkmann/SwiftUICallsC", "SwiftUICallsC" %}.
 
 To restrict what loaded Lua code is able to do,
 only load a subset of the standard libraries.
