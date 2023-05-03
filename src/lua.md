@@ -1514,7 +1514,7 @@ Each value without a key is assigned a consecutive index key starting from 1.
 For example:
 
 ```lua
-local mixed = { "apple", month="April", "banana", season="Spring", "cherry" }
+local mixed = { "apple", month = "April", "banana", season = "Spring", "cherry" }
 for k, v in pairs(mixed) do
   print(k, v)
 end
