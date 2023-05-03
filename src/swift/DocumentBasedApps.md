@@ -73,7 +73,9 @@ The steps to create a document-based app are:
        // This is called when the system wants to save text in a file.
        // The file name will be "Untitled" (possibly followed by a number)
        // until the user renames it
-       func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+       func fileWrapper(
+           configuration: WriteConfiguration
+       ) throws -> FileWrapper {
            let data = Data(text.utf8)
            return FileWrapper(regularFileWithContents: data)
        }
@@ -109,7 +111,13 @@ The steps to create a document-based app are:
 
 ## Result
 
-When users run the app they will be presented with a document picker screen.
+The app in the screenshots below can be found at {% aTargetBlank
+"https://github.com/mvolkmann/SwiftUICallsC", "SwiftUICallsC" %}.
+It demonstrates embedding the Lua interpreter in a SwiftUI app.
+Each document contains Lua code that is
+executed by tapping the "Execute" button.
+
+When users run the app they are presented with a document picker screen.
 There are three tabs at the bottom labelled "Recents", "Shared", and "Browse".
 The "Recents" tab displays thumbnail buttons for recently accessed documents.
 Initially there will not be any.

@@ -79,7 +79,7 @@ For details on the Lua programming language, see
 {% aTargetBlank "/blog/topics/#/blog/lua/", "Lua" %}.
 This contains details on starting the Lua virtual machine from C
 and deciding which standard libraries should be loaded.
-For example, but not loading the "os" library,
+For example, by not loading the "os" library,
 Lua code is unable to read or write files.
 
 1. Build a version of Lua that is compatible with iOS.
@@ -103,5 +103,3 @@ For an example of embedding the Lua interpreter in a SwiftUI application, see
 {% aTargetBlank "/blog/topics/#/blog/swift/CallingC", "Swift Calling C" %} and
 the GitHub respository {% aTargetBlank
 "https://github.com/mvolkmann/SwiftUICallsC", "SwiftUICallsC" %}.
-
-TODO: In iOS can you read a Lua file that is in the Files app?
