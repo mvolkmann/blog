@@ -48,7 +48,8 @@ large collection of optional packages can be installed using the
 Pros of Lua include:
 
 - simple syntax with only 22 keywords
-- easy to embed in C/C++ applications; interpreter is only 182K
+- easy to embed in C/C++ applications
+  (interpreter is ~250K and standard libraries are ~ 500K)
 - easy to run C code from Lua and run Lua code from C
 - highly portable; runs on all major OSes and most microcontrollers
 - free and open source under the MIT license
