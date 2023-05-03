@@ -1662,6 +1662,26 @@ return {
 
 Entering `gcc` as the same effect as the builtin mapping `<leader>/`.
 
+### git-blame.nvim Plugin
+
+The {% aTargetBlank "https://github.com/f-person/git-blame.nvim",
+"git-blame.nvim" %} plugin displays a git blame description
+after the current line in source files that are in a git repository.
+
+To install and configure this plugin, create the file
+`~/.config/nvim/lua/user/plugins/git-blame.lua` with the following content:
+
+```
+return {
+  {
+    "f-person/git-blame.nvim",
+    event = "VeryLazy"
+  }
+}
+```
+
+To toggle display of Git blame text, enter `:GitBlameToggle`.
+
 #### hop.nvim Plugin
 
 The {% aTargetBlank "https://github.com/phaazon/hop.nvim", "hop.nvim" %}
@@ -1770,6 +1790,27 @@ where `{d}` is replaced by delimiter text:
 | `cst`            | changes surrounding HTML tag; prompts for new tag |
 | `dst`            | deletes surrounding HTML tag                      |
 
+#### smartcolumn.nvim Plugin
+
+The {% aTargetBlank "https://github.com/m4xshen/smartcolumn.nvim",
+"smartcolumn.nvim" %} plugin displays a vertical line at a given column
+only if at least one line in the file extends past that column.
+
+To install smartcolumn.nvim, create the file
+`~/.config/nvim/lua/user/plugins/smartcolumn.lua` containing the following:
+
+```lua
+return {
+  "m4xshen/smartcolumn.nvim",
+  opts = {
+    -- colorcolumn = 80 -- This is the default.
+    -- Don't disable any file types.
+    disabled_filetypes = {} -- default is {"help", "text", "markdown"}
+  },
+  event = "User AstroFile"
+}
+```
+
 #### todo-comments.nvim Plugin
 
 The {% aTargetBlank "https://github.com/folke/todo-comments.nvim",
@@ -1815,25 +1856,38 @@ To see them in a quick fix list, enter `:TodoQuickFix`.
 These commands are not available until at least one file has been opened.
 It's unclear why that is necessary.
 
-#### smartcolumn.nvim Plugin
+#### treesj Plugin
 
-The {% aTargetBlank "https://github.com/m4xshen/smartcolumn.nvim",
-"smartcolumn.nvim" %} plugin displays a vertical line at a given column
-only if at least one line in the file extends past that column.
+The {% aTargetBlank "https://github.com/Wansmer/treesj",
+"treesj" %} plugin makes it easy to split and join "blocks of code
+like arrays, hashes, statements, objects, dictionaries, etc."
 
-To install smartcolumn.nvim, create the file
-`~/.config/nvim/lua/user/plugins/smartcolumn.lua` containing the following:
+To install and configure this plugin, create the file
+`~/.config/nvim/lua/user/plugins/treesj.lua` with the following content:
 
 ```lua
 return {
-  "m4xshen/smartcolumn.nvim",
-  opts = {
-    -- colorcolumn = 80 -- This is the default.
-    -- Don't disable any file types.
-    disabled_filetypes = {} -- default is {"help", "text", "markdown"}
-  },
-  event = "User AstroFile"
+  {
+    "AstroNvim/astrocommunity",
+    { import = "astrocommunity.editing-support.treej" }
+  }
 }
+```
+
+To toggle whether the syntax under the cursor is
+split across multiple lines or joined onto a single line,
+enter `:TSJToggle`. Enter this again to reverse the change.
+
+For example, the follow shows the definition of a JavaScript object
+in both its split and joined forms:
+
+```js
+const person = {
+  firstName: 'Mark',
+  lastName: 'Volkmann'
+};
+
+const person = {firstName: 'Mark', lastName: 'Volkmann'};
 ```
 
 #### Emmet
