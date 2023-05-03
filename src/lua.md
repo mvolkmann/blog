@@ -53,22 +53,21 @@ Pros of Lua include:
 - easy to run C code from Lua and run Lua code from C
 - highly portable; runs on all major OSes and most microcontrollers
 - free and open source under the MIT license
-- considered to be the fastest scripting language when compiled
+- considered fastest scripting language when compiled
 - uses dynamic variables that do not require specifying types
 - provides automatic, incremental garbage collection
 - functions are first class and are closures
 - implements tail call optimization
-- native support for collaborative multitasking with coroutines
+- supports collaborative multitasking with coroutines
 
 Cons of Lua include:
 
 - lack of type checking
-- lack of support for object oriented programming (OOP),
+- lack of direct support for object-oriented programming (OOP),
   although it can be simulated with metatables and functions
 - limited support for error handling;
-  see `error`, `pcall`, and `xpcall` functions
-- limited support for string pattern matching, using "patterns"
-  which are a simplified version of regular expressions
+  see `pcall`, `xpcall`, and `error` functions
+- uses string "patterns" which are a simplified version of regular expressions
 - limited Unicode support
 
   Strings can contain Unicode characters,
