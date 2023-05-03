@@ -1224,7 +1224,8 @@ and are separated by commas.
 The parentheses are required even if there are no parameters.
 
 The `return` keyword is used to exit a function
-and return zero or more values to the caller.
+and return zero or more values to the caller
+specified with a comma-separated list.
 
 For example:
 
