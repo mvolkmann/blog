@@ -1740,6 +1740,36 @@ return {
 
 By default AstroNvim formats files on save.
 
+#### nvim-surround Plugin
+
+The {% aTargetBlank "https://github.com/kylechui/nvim-surround",
+"nvim-surround" %} plugin makes it easy to
+add, change, or delete the delimiter surrounding a word or selected text.
+
+To install and configure this plugin, create the file
+`~/.config/nvim/lua/user/plugins/nvim-surround.lua` with the following content:
+
+```lua
+return {
+  {
+    "AstroNvim/astrocommunity",
+    { import = "astrocommunity.motion.nvim-surround" }
+  }
+}
+```
+
+The following keyboard shortcuts are supported by default
+where `{d}` is replaced by delimiter text:
+
+| Key              | Action                                            |
+| ---------------- | ------------------------------------------------- |
+| `ysw{d}`         | surrounds the word under the cursor (y for "you") |
+| `S{d}`           | surrounds visual selection                        |
+| `cs{oldD}{newD}` | changes surrounding delimiter                     |
+| `ds{d}`          | deletes surrounding delimiter                     |
+| `cst`            | changes surrounding HTML tag; prompts for new tag |
+| `dst`            | deletes surrounding HTML tag                      |
+
 #### todo-comments.nvim Plugin
 
 The {% aTargetBlank "https://github.com/folke/todo-comments.nvim",
