@@ -1619,7 +1619,7 @@ For information on writing your own Neovim plugins, see {% aTargetBlank
 "Writing Plugins - It's Never Been Easier" %}
 from DevOnDuty at NeovimConf 2022.
 
-#### Comment.nvim Plugin
+#### Comment.nvim
 
 The {% aTargetBlank "https://github.com/numToStr/Comment.nvim",
 "Comment.nvim" %} plugin integrates with Tree-sitter
@@ -1662,7 +1662,18 @@ return {
 
 Entering `gcc` as the same effect as the builtin mapping `<leader>/`.
 
-### git-blame.nvim Plugin
+#### Emmet
+
+{% aTargetBlank "https://docs.emmet.io", "Emmet" %} is an editor plugin
+for quickly entering HTML, XML, and CSS.
+It also supports many "actions" that operate on HTML and XML elements.
+The most commonly used action is to expand an abbreviation or snippet.
+
+AstroNvim does not ship with Emmett support.
+To add it, see {% aTargetBlank "https://github.com/mattn/emmet-vim",
+"emmet-vim" %}.
+
+#### git-blame.nvim
 
 The {% aTargetBlank "https://github.com/f-person/git-blame.nvim",
 "git-blame.nvim" %} plugin displays a git blame description
@@ -1682,7 +1693,7 @@ return {
 
 To toggle display of Git blame text, enter `:GitBlameToggle`.
 
-#### hop.nvim Plugin
+#### hop.nvim
 
 The {% aTargetBlank "https://github.com/phaazon/hop.nvim", "hop.nvim" %}
 plugin is a rewrite of the {% aTargetBlank
@@ -1735,7 +1746,7 @@ Type the letters for the target line to jump to it.
 The Hop plugin defines more commands, but `HopWord` and `HopLine`
 are the most frequently used.
 
-#### neoformat Plugin
+#### neoformat
 
 The {% aTargetBlank "https://github.com/sbdchd/neoformat", "neoformat" %} plugin
 formats text in many file types.
@@ -1760,7 +1771,7 @@ return {
 
 By default AstroNvim formats files on save.
 
-#### nvim-surround Plugin
+#### nvim-surround
 
 The {% aTargetBlank "https://github.com/kylechui/nvim-surround",
 "nvim-surround" %} plugin makes it easy to
@@ -1790,7 +1801,7 @@ where `{d}` is replaced by delimiter text:
 | `cst`            | changes surrounding HTML tag; prompts for new tag |
 | `dst`            | deletes surrounding HTML tag                      |
 
-#### smartcolumn.nvim Plugin
+#### smartcolumn.nvim
 
 The {% aTargetBlank "https://github.com/m4xshen/smartcolumn.nvim",
 "smartcolumn.nvim" %} plugin displays a vertical line at a given column
@@ -1811,7 +1822,7 @@ return {
 }
 ```
 
-#### todo-comments.nvim Plugin
+#### todo-comments.nvim
 
 The {% aTargetBlank "https://github.com/folke/todo-comments.nvim",
 "todo-comments.nvim" %} plugin highlights comments that begin with
@@ -1856,7 +1867,7 @@ To see them in a quick fix list, enter `:TodoQuickFix`.
 These commands are not available until at least one file has been opened.
 It's unclear why that is necessary.
 
-#### treesj Plugin
+#### treesj
 
 The {% aTargetBlank "https://github.com/Wansmer/treesj",
 "treesj" %} plugin makes it easy to split and join "blocks of code
@@ -1889,17 +1900,6 @@ const person = {
 
 const person = {firstName: 'Mark', lastName: 'Volkmann'};
 ```
-
-#### Emmet
-
-{% aTargetBlank "https://docs.emmet.io", "Emmet" %} is an editor plugin
-for quickly entering HTML, XML, and CSS.
-It also supports many "actions" that operate on HTML and XML elements.
-The most commonly used action is to expand an abbreviation or snippet.
-
-AstroNvim does not ship with Emmett support.
-To add it, see {% aTargetBlank "https://github.com/mattn/emmet-vim",
-"emmet-vim" %}.
 
 ### AstroNvim Community
 
