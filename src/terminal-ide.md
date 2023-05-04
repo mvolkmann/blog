@@ -1242,6 +1242,8 @@ When this completes, press `q` to close the window.
 
 The contents of the plugin configuration files
 should be similar to those shown in the subsections below.
+For details on the supported keys, see the "Plugin Spec" section in the  
+{% aTargetBlank "https://github.com/folke/lazy.nvim", "Lazy doc" %}.
 
 For help on a specific custom plugin, enter `:h {name}-config`.
 
@@ -1250,7 +1252,7 @@ For information on writing your own Neovim plugins, see {% aTargetBlank
 "Writing Plugins - It's Never Been Easier" %}
 from DevOnDuty at NeovimConf 2022.
 
-#### Comment.nvim Plugin
+#### Comment.nvim
 
 The {% aTargetBlank "https://github.com/numToStr/Comment.nvim",
 "Comment.nvim" %} plugin integrates with Tree-sitter
@@ -1285,14 +1287,99 @@ return {
 | ----- | --------------------------------------------- |
 | `gb`  | block comment toggle selected lines           |
 | `gc`  | line comment toggle selected lines            |
+| `gcb` | ???                                           |
 | `gcc` | toggles whether the current line is commented |
 | `gco` | inserts line comment above                    |
 | `gcO` | inserts line comment below                    |
 | `gcA` | inserts line comment at end of line           |
 
-Entering `gcc` has the same effect as the builtin mapping `<leader>/`.
+Entering `gcc` as the same effect as the builtin mapping `<leader>/`.
 
-#### neoformat Plugin
+#### Emmet
+
+{% aTargetBlank "https://docs.emmet.io", "Emmet" %} is an editor plugin
+for quickly entering HTML, XML, and CSS.
+It also supports many "actions" that operate on HTML and XML elements.
+The most commonly used action is to expand an abbreviation or snippet.
+
+AstroNvim does not ship with Emmett support.
+To add it, see {% aTargetBlank "https://github.com/mattn/emmet-vim",
+"emmet-vim" %}.
+
+#### git-blame.nvim
+
+The {% aTargetBlank "https://github.com/f-person/git-blame.nvim",
+"git-blame.nvim" %} plugin displays a git blame description
+after the current line in source files that are in a git repository.
+
+To install and configure this plugin, create the file
+`~/.config/nvim/lua/user/plugins/git-blame.lua` with the following content:
+
+```
+return {
+  {
+    "f-person/git-blame.nvim",
+    event = "VeryLazy"
+  }
+}
+```
+
+To toggle display of Git blame text, enter `:GitBlameToggle`.
+
+#### hop.nvim
+
+The {% aTargetBlank "https://github.com/phaazon/hop.nvim", "hop.nvim" %}
+plugin is a rewrite of the {% aTargetBlank
+"https://github.com/easymotion/vim-easymotion", "EasyMotion" %} Vim plugin
+for Neovim.
+It provides an efficient way to jump to a specific place within a file
+that is currently visible.
+
+To configure Hop, create the file `~/.config/nvim/lua/user/plugins/hop.lua`
+containing the following:
+
+```lua
+return {
+  "phaazon/hop.nvim",
+  branch = 'v2', -- optional but strongly recommended
+  config = function()
+    require "hop".setup {}
+    -- When in normal mode, initiate with a capital "H".
+    vim.keymap.set('n', 'H', ":HopWord<cr>")
+  end,
+  event = "User AstroFile"
+}
+```
+
+The `event` value specifies when the plugin should be triggered.
+This can be a single event or a table of them.
+The supported events are:
+
+- `VeryLazy`: triggered after starting Neovim
+- `BufEnter *.lua`: triggered after opening a `.lua` file
+- `User AstroFile`: triggered after opening any file
+- `LspAttach`: triggered after starting LSP servers
+- `InsertEnter`: triggered after entering insert mode
+
+Enter `:Lazy sync` to install the plugin.
+This opens a window that show the status of the install.
+When this completes, press `q` to close the window.
+
+To "hop" to a visible word, look at the target word
+and press `<leader>H` or enter `:HopWord`.
+This replaces the first one or two characters of every visible word
+with one or two unique letters.
+Type the letter(s) for the target word to jump to it.
+
+To "hop" to a visible line, enter `:HopLine`.
+This replaces the first one or two characters of every visible line
+with one or two unique letters.
+Type the letters for the target line to jump to it.
+
+The Hop plugin defines more commands, but `HopWord` and `HopLine`
+are the most frequently used.
+
+#### neoformat
 
 The {% aTargetBlank "https://github.com/sbdchd/neoformat", "neoformat" %} plugin
 formats text in many file types.
@@ -1317,7 +1404,58 @@ return {
 
 By default AstroNvim formats files on save.
 
-#### todo-comments.nvim Plugin
+#### nvim-surround
+
+The {% aTargetBlank "https://github.com/kylechui/nvim-surround",
+"nvim-surround" %} plugin makes it easy to
+add, change, or delete the delimiter surrounding a word or selected text.
+
+To install and configure this plugin, create the file
+`~/.config/nvim/lua/user/plugins/nvim-surround.lua` with the following content:
+
+```lua
+return {
+  {
+    "AstroNvim/astrocommunity",
+    { import = "astrocommunity.motion.nvim-surround" }
+  }
+}
+```
+
+The following keyboard shortcuts are supported by default
+where `{d}` is replaced by delimiter text:
+
+| Key              | Action                                            |
+| ---------------- | ------------------------------------------------- |
+| `ysw{d}`         | surrounds the word under the cursor (y for "you") |
+| `S{d}`           | surrounds visual selection                        |
+| `cs{oldD}{newD}` | changes surrounding delimiter                     |
+| `ds{d}`          | deletes surrounding delimiter                     |
+| `cst`            | changes surrounding HTML tag; prompts for new tag |
+| `dst`            | deletes surrounding HTML tag                      |
+
+#### smartcolumn.nvim
+
+The {% aTargetBlank "https://github.com/m4xshen/smartcolumn.nvim",
+"smartcolumn.nvim" %} plugin displays a vertical line at a given column
+only if at least one line in the file extends past that column.
+
+To install smartcolumn.nvim, create the file
+`~/.config/nvim/lua/user/plugins/smartcolumn.lua` containing the following:
+
+```lua
+return {
+  "m4xshen/smartcolumn.nvim",
+  opts = {
+    -- colorcolumn = 80 -- This is the default.
+    -- Don't disable any file types.
+    disabled_filetypes = {} -- default is {"help", "text", "markdown"}
+  },
+  event = "User AstroFile"
+}
+```
+
+#### todo-comments.nvim
 
 The {% aTargetBlank "https://github.com/folke/todo-comments.nvim",
 "todo-comments.nvim" %} plugin highlights comments that begin with
@@ -1362,25 +1500,38 @@ To see them in a quick fix list, enter `:TodoQuickFix`.
 These commands are not available until at least one file has been opened.
 It's unclear why that is necessary.
 
-#### smartcolumn.nvim Plugin
+#### treesj
 
-The {% aTargetBlank "https://github.com/m4xshen/smartcolumn.nvim",
-"smartcolumn.nvim" %} plugin displays a vertical line at a given column
-only if at least one line in the file extends past that column.
+The {% aTargetBlank "https://github.com/Wansmer/treesj",
+"treesj" %} plugin makes it easy to split and join "blocks of code
+like arrays, hashes, statements, objects, dictionaries, etc."
 
-To install smartcolumn.nvim, create the file
-`~/.config/nvim/lua/user/plugins/smartcolumn.lua` containing the following:
+To install and configure this plugin, create the file
+`~/.config/nvim/lua/user/plugins/treesj.lua` with the following content:
 
 ```lua
 return {
-  "m4xshen/smartcolumn.nvim",
-  opts = {
-    -- colorcolumn = 80 -- This is the default.
-    -- Don't disable any file types.
-    disabled_filetypes = {} -- default is {"help", "text", "markdown"}
-  },
-  event = "User AstroFile"
+  {
+    "AstroNvim/astrocommunity",
+    { import = "astrocommunity.editing-support.treej" }
+  }
 }
+```
+
+To toggle whether the syntax under the cursor is
+split across multiple lines or joined onto a single line,
+enter `:TSJToggle`. Enter this again to reverse the change.
+
+For example, the follow shows the definition of a JavaScript object
+in both its split and joined forms:
+
+```js
+const person = {
+  firstName: 'Mark',
+  lastName: 'Volkmann'
+};
+
+const person = {firstName: 'Mark', lastName: 'Volkmann'};
 ```
 
 ### AstroNvim Community
