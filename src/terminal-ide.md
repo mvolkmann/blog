@@ -474,6 +474,11 @@ To write the buffer to a file relative to the directory from which
 `nvim` was launched, enter `:w {file-name}`.
 
 To open the AstroNvim home screen, press `<leader>h`.
+
+<img alt="AstroNvim home screen" style="width: 50%"
+  src="/blog/assets/AstroNvim-home-screen.png?v={{pkg.version}}"
+  title="AstroNvim home screen">
+
 This displays a menu of common commands that includes:
 
 - "New File"
@@ -492,6 +497,10 @@ This displays a menu of common commands that includes:
 
   The keyboard shortcut for this is `<leader>ff` for "Find File".
 
+  <img alt="AstroNvim Find File" style="width: 100%"
+    src="/blog/assets/AstroNvim-Find-File.png?v={{pkg.version}}"
+    title="AstroNvim Find File">
+
 - "Recents"
 
   This opens a Telescope window that lists recently opened files.
@@ -499,6 +508,10 @@ This displays a menu of common commands that includes:
   and press the `return` key to reopen it.
 
   The keyboard shortcut for this is `<leader>fo` for "Find Old".
+
+  <img alt="AstroNvim Recents" style="width: 100%"
+    src="/blog/assets/AstroNvim-Recents.png?v={{pkg.version}}"
+    title="AstroNvim Recents">
 
 - "Find Word"
 
@@ -508,6 +521,10 @@ This displays a menu of common commands that includes:
   and press the `return` key to open it.
 
   The keyboard shortcut for this is `<leader>fw` for "Find Word".
+
+  <img alt="AstroNvim Find Word" style="width: 100%"
+    src="/blog/assets/AstroNvim-Find-Word.png?v={{pkg.version}}"
+    title="AstroNvim Find Word">
 
 - "Bookmarks"
 
@@ -530,6 +547,10 @@ AstroNvim uses the {% aTargetBlank
 "https://github.com/nvim-neo-tree/neo-tree.nvim", "neo-tree.nvim" %} plugin
 for the file explorer that appears on the left side.
 To toggle display of the file explorer, press `<leader>e`.
+
+<img alt="AstroNvim File Explorer" style="width: 40%"
+  src="/blog/assets/AstroNvim-File-Explorer.png?v={{pkg.version}}"
+  title="AstroNvim File Explorer">
 
 The file explorer contains three tabs:
 
@@ -655,6 +676,10 @@ The area below the tabs can be split into
 multiple panes referred to as "splits".
 To edit one of the buffers inside a specific pane,
 move focus to the pane and then click the tab of the desired buffer.
+
+<img alt="AstroNvim Splits" style="width: 100%"
+    src="/blog/assets/AstroNvim-splits.png?v={{pkg.version}}"
+    title="AstroNvim Splits">
 
 The following key mappings perform actions related to the editing area.
 
@@ -843,6 +868,10 @@ AstroNvim uses the {% aTargetBlank "https://github.com/rebelot/heirline.nvim",
 This includes information about the current Git repository
 such as the current branch and number of modified files.
 
+<img alt="AstroNvim heirline" style="width: 40%"
+    src="/blog/assets/astronvim-heirline.png?v={{pkg.version}}"
+    title="AstroNvim heirline">
+
 ### Git Integration
 
 When editing a file in a Git repository,
@@ -880,6 +909,10 @@ To launch lazygit from within AstroNvim,
 enter `<leader>gg` (for "Git GUI") or `<leader>tl` (for "terminal lazygit").
 This opens a floating terminal and runs `lazygit` inside it.
 To close this window, press `q`.
+
+<img alt="AstroNvim lazygit" style="width: 100%"
+    src="/blog/assets/astronvim-lazygit.png?v={{pkg.version}}"
+    title="AstroNvim lazygit">
 
 The `lazygit` UI has a left and right side.
 
@@ -1352,6 +1385,8 @@ return {
 ```
 
 To toggle display of Git blame text, enter `:GitBlameToggle`.
+
+Consider adding a "gb" key mapping that runs the `GitBlameToggle` command.
 
 #### hop.nvim
 

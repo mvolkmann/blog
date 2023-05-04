@@ -1063,6 +1063,10 @@ AstroNvim uses the {% aTargetBlank "https://github.com/rebelot/heirline.nvim",
 This includes information about the current Git repository
 such as the current branch and number of modified files.
 
+<img alt="AstroNvim heirline" style="width: 40%"
+    src="/blog/assets/astronvim-heirline.png?v={{pkg.version}}"
+    title="AstroNvim heirline">
+
 ### Git Integration
 
 When editing a file in a Git repository,
@@ -1100,6 +1104,10 @@ To launch lazygit from within AstroNvim,
 enter `<leader>gg` (for "Git GUI") or `<leader>tl` (for "terminal lazygit").
 This opens a floating terminal and runs `lazygit` inside it.
 To close this window, press `q`.
+
+<img alt="AstroNvim lazygit" style="width: 100%"
+    src="/blog/assets/astronvim-lazygit.png?v={{pkg.version}}"
+    title="AstroNvim lazygit">
 
 The `lazygit` UI has a left and right side.
 
@@ -1705,6 +1713,8 @@ return {
 ```
 
 To toggle display of Git blame text, enter `:GitBlameToggle`.
+
+Consider adding a "gb" key mapping that runs the `GitBlameToggle` command.
 
 #### hop.nvim
 
