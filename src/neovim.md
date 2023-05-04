@@ -526,11 +526,15 @@ Fix any issues this identifies.
 
 ### Updating AstroNvim
 
-To update AstroNvim after it has been installed,
-enter the following inside an AstroNvim session:
+To update AstroNvim after it has been installed:
 
-- `:AstroUpdate`
-- `:AstroUpdatePackages`
+- If you created the directory `~/.config/nvim/lua/user`,
+  copy it to another location such as your home directory.
+- Start a Neovim session.
+- Enter `:AstroUpdate`.
+- Enter `:AstroUpdatePackages`.
+- If you copied to `user` directory somewhere else,
+  move it back to its original location.
 
 ### Configuring AstroNvim
 
@@ -610,7 +614,7 @@ The default key mappings provided by AstroNvim are described
 {% aTargetBlank "https://astronvim.com/Basic%20Usage/mappings", "here" %}.
 Most of these are defined in `~/.config/nvim/lua/astronvim/mappings.lua`.
 
-AstroNvim defines `jj` and `jk` to exit insert mode
+AstroNvim defines the key mappings `jj` and `jk` to exit insert mode
 as alternatives to pressing the `<esc>` key.
 
 AstroNvim uses the {% aTargetBlank "https://github.com/folke/which-key.nvim",
@@ -622,7 +626,18 @@ All key mappings that begin with the leader key will be displayed.
 The ones in blue (submenus) require pressing additional keys
 that are displayed when you press their key.
 These include "Buffers", "Find", "Git", and more.
-For example, type `<leader>f` to see all the "Find" key mappings.
+
+For example, type `<leader>` to see all the key mappings
+that begin with the `<leader>` key and
+type `<leader>f` to see all the "Find" key mappings.
+
+<img alt="which-key <leader>" style="width: 100%"
+    src="/blog/assets/neovim-which-key-1.png?v={{pkg.version}}"
+    title="which-key <leader>">
+
+<img alt="which-key <leader>f" style="width: 100%"
+    src="/blog/assets/neovim-which-key-2.png?v={{pkg.version}}"
+    title="which-key <leader>f">
 
 While a primary reason for using Vim is to
 keep your hands on the keyboard for maximum efficiency,
