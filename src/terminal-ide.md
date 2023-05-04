@@ -52,6 +52,10 @@ to prevent myself for using it out of habit.
 
 ## Vim Basics
 
+<img alt="Vim logo" style="width: 20%"
+  src="/blog/assets/vim-logo.png?v={{pkg.version}}"
+  title="Vim logo">
+
 The following sections describe the use of selected Vim features
 that are not unique to Neovim, but important to know.
 If you are new to Vim, checkout {% aTargetBlank
@@ -218,6 +222,10 @@ along with recommended plugins.
 
 ## Neovim Bundles
 
+<img alt="Neovim logo" style="width: 50%"
+  src="/blog/assets/neovim.png?v={{pkg.version}}"
+  title="Neovim logo">
+
 Configuring a large number of plugins is a daunting task.
 For this reason, pre-built Neovim configurations are popular.
 There are many to choose from, but the most popular seem to be:
@@ -232,9 +240,9 @@ Using other pre-built configurations will be similar.
 
 ## AstroNvim
 
-<img alt="AstroNvim logo" style="width: 25%"
-    src="/blog/assets/astronvim-logo.png?v={{pkg.version}}"
-    title="AstroNvim logo">
+<img alt="AstroNvim logo" style="width: 15%"
+  src="/blog/assets/astronvim-logo.png?v={{pkg.version}}"
+  title="AstroNvim logo">
 
 {% aTargetBlank "https://astronvim.com", "AstroNvim" %} is
 a popular pre-built configuration for Neovim.
@@ -678,8 +686,8 @@ To edit one of the buffers inside a specific pane,
 move focus to the pane and then click the tab of the desired buffer.
 
 <img alt="AstroNvim Splits" style="width: 100%"
-    src="/blog/assets/AstroNvim-splits.png?v={{pkg.version}}"
-    title="AstroNvim Splits">
+  src="/blog/assets/AstroNvim-splits.png?v={{pkg.version}}"
+  title="AstroNvim Splits">
 
 The following key mappings perform actions related to the editing area.
 
@@ -705,8 +713,8 @@ The following screenshot shows the key mappings that need to changed or
 disabled to allow the AstroNvim default resize key mappings to work.
 
 <img alt="AstroNvim smart-splits keys" style="width: 80%"
-    src="/blog/assets/astronvim-smart-splits-keys.png?v={{pkg.version}}"
-    title="AstroNvim smart-splits keys">
+  src="/blog/assets/astronvim-smart-splits-keys.png?v={{pkg.version}}"
+  title="AstroNvim smart-splits keys">
 
 ### Telescope
 
@@ -869,8 +877,8 @@ This includes information about the current Git repository
 such as the current branch and number of modified files.
 
 <img alt="AstroNvim heirline" style="width: 40%"
-    src="/blog/assets/astronvim-heirline.png?v={{pkg.version}}"
-    title="AstroNvim heirline">
+  src="/blog/assets/astronvim-heirline.png?v={{pkg.version}}"
+  title="AstroNvim heirline">
 
 ### Git Integration
 
@@ -911,8 +919,8 @@ This opens a floating terminal and runs `lazygit` inside it.
 To close this window, press `q`.
 
 <img alt="AstroNvim lazygit" style="width: 100%"
-    src="/blog/assets/astronvim-lazygit.png?v={{pkg.version}}"
-    title="AstroNvim lazygit">
+  src="/blog/assets/astronvim-lazygit.png?v={{pkg.version}}"
+  title="AstroNvim lazygit">
 
 The `lazygit` UI has a left and right side.
 

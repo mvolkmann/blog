@@ -22,7 +22,7 @@ For help on using Lua to configure Neovim see:
 
 ## Vim Review
 
-<img alt="Vim logo" style="width: 25%"
+<img alt="Vim logo" style="width: 20%"
   src="/blog/assets/vim-logo.png?v={{pkg.version}}"
   title="Vim logo">
 
@@ -274,8 +274,8 @@ in order for the changes to take effect.
 ## Neovim
 
 <img alt="Neovim logo" style="width: 50%"
-    src="/blog/assets/neovim.png?v={{pkg.version}}"
-    title="Neovim logo">
+  src="/blog/assets/neovim.png?v={{pkg.version}}"
+  title="Neovim logo">
 
 {% aTargetBlank "https://neovim.io", "Neovim" %}, or nvim for short,
 is a free, open source, modern fork of the
@@ -451,9 +451,9 @@ There are many to choose from, but the most popular seem to be:
 
 ## AstroNvim
 
-<img alt="AstroNvim logo" style="width: 25%"
-    src="/blog/assets/astronvim-logo.png?v={{pkg.version}}"
-    title="AstroNvim logo">
+<img alt="AstroNvim logo" style="width: 15%"
+  src="/blog/assets/astronvim-logo.png?v={{pkg.version}}"
+  title="AstroNvim logo">
 
 {% aTargetBlank "https://astronvim.com", "AstroNvim" %} is
 a popular pre-made configuration for Neovim.
@@ -665,6 +665,10 @@ To write the buffer to a file relative to the directory from which
 To open the AstroNvim home screen, press `<leader>h`.
 This displays a menu of common commands that includes:
 
+<img alt="AstroNvim home screen" style="width: 50%"
+  src="/blog/assets/AstroNvim-home-screen.png?v={{pkg.version}}"
+  title="AstroNvim home screen">
+
 - "New File"
 
   This creates a new, unnamed, empty buffer.
@@ -676,11 +680,19 @@ This displays a menu of common commands that includes:
   Move the cursor to one of the matching file paths
   and press the `return` key to open it.
 
+  <img alt="AstroNvim Find File" style="width: 100%"
+    src="/blog/assets/AstroNvim-Find-File.png?v={{pkg.version}}"
+    title="AstroNvim Find File">
+
 - "Recents"
 
   This opens a Telescope window that lists recently opened files.
   Move the cursor to one of the file paths in the list
   and press the `return` key to reopen it.
+
+  <img alt="AstroNvim Recents" style="width: 100%"
+    src="/blog/assets/AstroNvim-Recents.png?v={{pkg.version}}"
+    title="AstroNvim Recents">
 
 - "Find Word"
 
@@ -688,6 +700,10 @@ This displays a menu of common commands that includes:
   to find files that contain them.
   Move the cursor to one of the matching file paths
   and press the `return` key to open it.
+
+  <img alt="AstroNvim Find Word" style="width: 100%"
+    src="/blog/assets/AstroNvim-Find-Word.png?v={{pkg.version}}"
+    title="AstroNvim Find Word">
 
 - "Bookmarks"
 
@@ -707,6 +723,10 @@ AstroNvim uses the {% aTargetBlank
 "https://github.com/nvim-neo-tree/neo-tree.nvim", "neo-tree.nvim" %} plugin
 for the file explorer that appears on the left side.
 To toggle display of the file explorer, press `<leader>e`.
+
+<img alt="AstroNvim File Explorer" style="width: 40%"
+  src="/blog/assets/AstroNvim-File-Explorer.png?v={{pkg.version}}"
+  title="AstroNvim File Explorer">
 
 The file explorer contains three tabs:
 
@@ -865,6 +885,10 @@ The area below the tabs can be split into
 multiple panes referred to as "splits".
 To edit one of the buffers inside a specific pane,
 move focus to the pane and then click the tab of the desired buffer.
+
+<img alt="AstroNvim Splits" style="width: 100%"
+  src="/blog/assets/AstroNvim-splits.png?v={{pkg.version}}"
+  title="AstroNvim Splits">
 
 The following key mappings perform actions related to the editing area.
 
@@ -1064,8 +1088,8 @@ This includes information about the current Git repository
 such as the current branch and number of modified files.
 
 <img alt="AstroNvim heirline" style="width: 40%"
-    src="/blog/assets/astronvim-heirline.png?v={{pkg.version}}"
-    title="AstroNvim heirline">
+  src="/blog/assets/astronvim-heirline.png?v={{pkg.version}}"
+  title="AstroNvim heirline">
 
 ### Git Integration
 
