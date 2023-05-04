@@ -4,8 +4,6 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-TODO: Add lots of hyperlinks and screenshots.
-
 ## Overview
 
 There are many popular integrated development environments (IDEs)
