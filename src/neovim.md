@@ -28,6 +28,9 @@ For help on using Lua to configure Neovim see:
 
 All features of Vim are also present in Neovim.
 This section reviews a selected subset of them.
+If you are new to Vim, checkout {% aTargetBlank
+"https://objectcomputing.com/resources/publications/sett/december-2017-vim-jump-start",
+"Vim Jump Start" %}.
 
 ### Buffer Scrolling
 
@@ -74,7 +77,7 @@ To enable spell checking in Vim, add the following in your `.vimrc` file:
 set spell spelllang=en_us
 ```
 
-To enable spell checking in AstroNvim, add the following in
+To enable spell checking in Neovim, add the following in
 `~/.config/nvim/lua/user/init.lua`:
 
 ```lua
@@ -93,11 +96,7 @@ return {
 }
 ```
 
-I have encountered two issues in Vim spell checking.
-The first is that misspelled words are not underlined.
-I'd really like to use "undercurl" instead of "underline",
-but it seems that is not supported.
-The second is that camel-cased words are not handled properly.
+Camel-cased words are not handled properly.
 For example, "catDog" is marked as misspelled.
 See this {% aTargetBlank
 "https://www.reddit.com/r/AstroNvim/comments/12lxn7j/spell_checking/?utm_source=share&utm_medium=web2x&context=3",
@@ -1900,7 +1899,7 @@ const person = {
 const person = {firstName: 'Mark', lastName: 'Volkmann'};
 ```
 
-Consider adding a "tsj" key mapping that runs the `TSJToggle` command.
+Consider adding a "sj" key mapping that runs the `TSJToggle` command.
 
 ### AstroNvim Community
 

@@ -4,33 +4,36 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-TODO: Add lots of hyperlinks.
+TODO: Add lots of hyperlinks and screenshots.
 
 ## Overview
 
 There are many popular integrated development environments (IDEs)
 for creating software applications.
-Popular examples include VS Code and various JetBrains products
-such as Intellij IDEA, GoLand, PyCharm, and WebStorm.
+Popular examples include {% aTargetBlank "https://vscode.dev", "VS Code" %}
+and various {% aTargetBlank "https://www.jetbrains.com", "JetBrains" %}
+products such as Intellij IDEA, GoLand, PyCharm, and WebStorm
 that are all native applications.
 But is it possible to get the same level of features
 from a terminal based editor?
 This article hopes to convince you that you can using Neovim.
 
-Neovim is a modern fork of Vim that adds many features
-such as Language Server Protocol (LSP) integration and
-configuration using the Lua programming language.
+{% aTargetBlank "https://neovim.io", "Neovim" %} is a modern fork of
+{% aTargetBlank "https://www.vim.org", "Vim" %} that adds many features such as
+{% aTargetBlank "https://microsoft.github.io/language-server-protocol/",
+"Language Server Protocol" %} (LSP) integration and configuration using
+the {% aTargetBlank "https://www.lua.org", "Lua" %} programming language.
 
 In general software developers either love or hate Vim.
 This is heavily influenced by the fact that it is a modal editor.
 Being modal means that at any point in time
 it is in one of the following modes:
 
-- normal: for navigating document content and selecting next in a non-visual way
-- insert: for inserting new text
-- replace: for replacing existing text
-- command: for entering commands such as "write" to save and "quit" to exit
-- visual: for visually selecting text
+- **normal**: for navigating document content and selecting text in a non-visual way
+- **insert**: for inserting new text
+- **replace**: for replacing existing text
+- **command**: for entering commands such as "write" to save and "quit" to exit
+- **visual**: for visually selecting text
 
 A primary benefit of being modal is that keyboard shortcuts can be simplified.
 For example, in insert mode, pressing the "j" key inserts the letter "j".
@@ -51,20 +54,23 @@ to prevent myself for using it out of habit.
 
 The following sections describe the use of selected Vim features
 that are not unique to Neovim, but important to know.
+If you are new to Vim, checkout {% aTargetBlank
+"https://objectcomputing.com/resources/publications/sett/december-2017-vim-jump-start",
+"Vim Jump Start" %}.
 
 ### Spell Checking
 
 Spell checking is a builtin feature of Vim, but it is not enabled by default
 in Vim, Neovim, or AstroNvim.
 
-To enable spell checking, add the following in your `.vimrc` file:
+To enable spell checking in Vim, add the following in your `.vimrc` file:
 
 ```
 set spell spelllang=en_us
 ```
 
-To enable spell checking in AstroNvim, add the following in
-`~/.config/nvim/lua/user/init.lua`:
+To enable spell checking in Neovim,
+add the following in `~/.config/nvim/lua/user/init.lua`:
 
 ```lua
 return {
@@ -72,19 +78,17 @@ return {
     vim.opt.spell = true
     -- vim.opt.spelllang = "en_us" -- defaults to "en"
     vim.opt.spelloptions = "camel"
-
     vim.api.nvim_set_hl(
       0, -- global highlight group
       'SpellBad',
+      -- { bg = "gray", fg = "red", underline = true }
       { fg = "red", underline = true }
     )
   end
 }
 ```
 
-I have encountered two issues in Vim spell checking.
-The first is that misspelled words are not underlined.
-The second is that camel-cased words are not handled properly.
+Camel-cased words are not handled properly.
 For example, "catDog" is marked as misspelled.
 See this {% aTargetBlank
 "https://www.reddit.com/r/AstroNvim/comments/12lxn7j/spell_checking/?utm_source=share&utm_medium=web2x&context=3",
@@ -157,7 +161,7 @@ To execute this macro on the next 15 lines, type `15@i` or `15@@`.
 
 Microsoft invented the {% aTargetBlank
 "https://microsoft.github.io/language-server-protocol/", "LSP" %}
-in order to provided better support for TypeScript in VS Code.
+in order to provide better support for TypeScript in VS Code.
 LSP is an open protocol that anyone can implement.
 
 An LSP client sends source code to an LSP server.
@@ -176,7 +180,7 @@ LSP servers have been implemented for many programming languages.
 Any text editor or IDE can embed an LSP client
 to manage communication with LSP servers.
 This is exactly what Neovim does.
-Doing so enables the same level of language-specific support
+This enables the same level of language-specific support
 that is available in VS Code.
 
 ## Desired Features
@@ -224,6 +228,7 @@ There are many to choose from, but the most popular seem to be:
 - {% aTargetBlank "", "SpaceVim" %}
 
 The remainder of this article focuses on AstroNvim.
+Using other pre-built configurations will be similar.
 
 ## AstroNvim
 
@@ -1533,7 +1538,7 @@ const person = {
 const person = {firstName: 'Mark', lastName: 'Volkmann'};
 ```
 
-Consider adding a "tsj" key mapping that runs the `TSJToggle` command.
+Consider adding a "sj" key mapping that runs the `TSJToggle` command.
 
 ### AstroNvim Community
 
