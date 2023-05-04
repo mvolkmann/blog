@@ -532,7 +532,6 @@ enter the following inside an AstroNvim session:
 
 - `:AstroUpdate`
 - `:AstroUpdatePackages`
-- `:Lazy Sync`
 
 ### Configuring AstroNvim
 
@@ -1900,6 +1899,8 @@ const person = {
 
 const person = {firstName: 'Mark', lastName: 'Volkmann'};
 ```
+
+Consider adding a "tsj" key mapping that runs the `TSJToggle` command.
 
 ### AstroNvim Community
 
