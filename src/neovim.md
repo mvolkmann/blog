@@ -23,8 +23,8 @@ For help on using Lua to configure Neovim see:
 ## Vim Review
 
 <img alt="Vim logo" style="width: 25%"
-    src="/blog/assets/vim-logo.png?v={{pkg.version}}"
-    title="Vim logo">
+  src="/blog/assets/vim-logo.png?v={{pkg.version}}"
+  title="Vim logo">
 
 All features of Vim are also present in Neovim.
 This section reviews a selected subset of them.
@@ -1357,6 +1357,10 @@ To select a suggested completion from a provided list,
 use `ctrl-j` and `ctrl-k` to move down and up
 and press `return` to select the highlighted completion.
 
+<img alt="AstroNvim completions" style="width: 40%"
+  src="/blog/assets/AstroNvim-completions.png?v={{pkg.version}}"
+  title="AstroNvim completions">
+
 The key mappings related to code completion include:
 
 | Key                    | Action                                         |
@@ -1375,6 +1379,10 @@ Snippet suggestions appear when the beginning of their trigger words are typed.
 When a list of possible snippets appears,
 repeatedly press the `tab` key, `ctrl-j`, or `ctrl-k` to highlight one,
 and press the `return` key to select it.
+
+<img alt="AstroNvim snippets" style="width: 70%"
+  src="/blog/assets/AstroNvim-snippets.png?v={{pkg.version}}"
+  title="AstroNvim snippets">
 
 For snippets that have placeholders, type text or paste text into each one.
 Press tab to jump to the next placeholder
@@ -1528,6 +1536,10 @@ To close either of these dialogs, press the `<esc>` key twice.
 {% aTargetBlank "https://clementtsang.github.io/bottom/", "bottom" %}
 is a "graphical process/system monitor for the terminal".
 
+<img alt="AstroNvim bottom" style="width: 100%"
+  src="/blog/assets/AstroNvim-bottom.png?v={{pkg.version}}"
+  title="AstroNvim bottom">
+
 To install btm in MacOS, enter `brew install bottom`.
 
 To run `btm` inside Neovim, enter `<leader>tt` (for "top").
@@ -1539,6 +1551,10 @@ To quit `btm` and close the terminal that is running it, press `q`.
 
 {% aTargetBlank "https://github.com/dundee/gdu", "gdu" %}
 is a disk usage analyzer written in Go.
+
+<img alt="AstroNvim Go DiskUsage" style="width: 100%"
+  src="/blog/assets/AstroNvim-Go-DiskUsage.png?v={{pkg.version}}"
+  title="AstroNvim Go DiskUsage">
 
 To install gdu in MacOS using Homebrew, enter the following command:
 
