@@ -22,18 +22,28 @@ in a SwiftUI app.
 
 The steps to create such a document-based app are:
 
+1. Add the `.icns` file to the project.
+
+1. Define a custom file extension for your documents.
+   If the type is known outside of your app,
+   add an entry in the "Imported Type Identifiers" section.
+   If the type is unique to your app,
+   add an entry in the "Exported Type Identifiers" section.
+   The form fields in each section are the same.
+   Then add an entry in the "Document Types" section.
+
+   <img alt="Xcode Custom File Type" style="width: 100%"
+     src="/blog/assets/xcode-custom-file-type.png?v={{pkg.version}}"
+     title="Xcode Custom File Type">
+
 1. Optionally create an icon for your file type.
    Create an image that is 1024 x 1024.
    Browse {% aTargetBlank "https://cloudconvert.com/png-to-icns",
    "cloudconvert" %}, click the "Select File" button, select your file,
    select "ICNS" in the "Convert to" dropdown, and click the "Convert" button.
    When it completes, click the "Download" button.
-
-1. Define a custom file extension for your documents.
-
-<img alt="SwiftUI Exported Type Identifiers" style="width: 100%"
-    src="/blog/assets/SwiftUI-Exported-Type-Identifiers.png?v={{pkg.version}}"
-    title="SwiftUI Exported Type Identifiers">
+   Within the "Icons" section, click the "+" button,
+   select your `.icns` file, and click the "Add" button.
 
 1. In the struct that conforms to `App`, in the computed property `body`,
    replace the following:
@@ -65,7 +75,9 @@ The steps to create such a document-based app are:
    import UniformTypeIdentifiers
 
    extension UTType {
-       static let luaSource = UTType(exportedAs: "org.lua")
+       // If you defined an "Imported Type Identifier" use "importedAs" here.
+       // If you defined an "Exported Type Identifier" use "exportedAs" here.
+       static let luaSource = UTType(importedAs: "org.lua")
    }
 
    struct LuaFile: FileDocument {
