@@ -154,3 +154,152 @@ begins in the `lua` subdirectory of my home directory.
 To automatically require files from this directory
 on startup of Neovim, add calls to the `require` function
 in `~/.config/nvim/lua/user/init.lua`.
+
+## Neovim API
+
+The {% aTargetBlank "https://neovim.io/doc/user/api.html", "Neovim API" %}
+provides functions in many categories.
+Each of these are summarized in the following subsections.
+
+### Events
+
+### Autocmd Functions
+
+| Function                           | Description |
+| ---------------------------------- | ----------- |
+| `nvim_clear_autocmds(*opts)`       |             |
+| `nvim_create_augroup(name, *opts)` |             |
+| `nvim_create_autocm(event, *opts)` |             |
+| `nvim_del_augroup_by_id(id)`       |             |
+| `nvim_del_augroup_by_name(name)`   |             |
+| `nvim_del_autocmd(id)`             |             |
+| `nvim_create_autocmd()`            |             |
+| `nvim_get_autocmds(*opts)`         |             |
+| ``                                 |             |
+| ``                                 |             |
+
+### Buffer Functions
+
+| Function | Description |
+| -------- | ----------- |
+| ``       |             |
+
+### Command Functions
+
+| Function | Description |
+| -------- | ----------- |
+| ``       |             |
+
+### Extmark Functions
+
+| Function | Description |
+| -------- | ----------- |
+| ``       |             |
+
+### Global Functions
+
+| Function                                                         | Description |
+| ---------------------------------------------------------------- | ----------- |
+| `nvim__get_runtime(pat, all, *opts)`                             |             |
+| `nvim__id(obj)`                                                  |             |
+| `nvim__id_array(arr)`                                            |             |
+| `nvim__id_dictionary(dct)`                                       |             |
+| `nvim__id_float(flt)`                                            |             |
+| `nvim__inspect_cell(grid, row, col)`                             |             |
+| `nvim__stats()`                                                  |             |
+| `nvim_call_atomic(calls)`                                        |             |
+| `nvim_chan_send(chan, data)`                                     |             |
+| `nvim_create_buf(listed, scratch)`                               |             |
+| `nvim_del_current_line()`                                        |             |
+| `nvim_del_keymap(mode, lhs)`                                     |             |
+| `nvim_del_mark(name)`                                            |             |
+| `nvim_del_var(name)`                                             |             |
+| `nvim_echo(chunks, history, *opts)`                              |             |
+| `nvim_err_write(str)`                                            |             |
+| `nvim_err_writeln(str)`                                          |             |
+| `nvim_eval_statusline(str, *opts)`                               |             |
+| `nvim_exec_lua(code, args)`                                      |             |
+| `nvim_feedkeys(keys, mode, escape_ks)`                           |             |
+| `nvim_get_api_info()`                                            |             |
+| `nvim_get_chan_info(chan)`                                       |             |
+| `nvim_get_context(*opts)`                                        |             |
+| `nvim_get_current_tabpage()`                                     |             |
+| `nvim_get_current_win()`                                         |             |
+| `nvim_get_hl(ns_id, *opts)`                                      |             |
+| `nvim_get_hl_id_by_name(name)`                                   |             |
+| `nvim_get_keymap(mode)`                                          |             |
+| `nvim_get_mark(name, opts)`                                      |             |
+| `nvim_get_mode()`                                                |             |
+| `nvim_get_proc(pid)`                                             |             |
+| `nvim_get_proc_children(pid)`                                    |             |
+| `nvim_get_runtime_file(name, all)`                               |             |
+| `nvim_get_var(name)`                                             |             |
+| `nvim_get_vvar(name)`                                            |             |
+| `nvim_input(keys)`                                               |             |
+| `nvim_input_mouse(button, action, modifier, grid, row, col)`     |             |
+| `nvim_list_bufs()`                                               |             |
+| `nvim_list_chans()`                                              |             |
+| `nvim_list_runtime_paths()`                                      |             |
+| `nvim_list_tabpages()`                                           |             |
+| `nvim_list_uis`                                                  |             |
+| `nvim_list_wins`                                                 |             |
+| `nvim_load_context(dict)`                                        |             |
+| `nvim_notify(msg, log_level, opts)`                              |             |
+| `nvim_open_term(buffer, opts)`                                   |             |
+| `nvim_out_write(str)`                                            |             |
+| `nvim_paste(data, crlf, phase)`                                  |             |
+| `nvim_put(lines, type, after, follow)`                           |             |
+| `nvim_replace_termcodes(str, from_part, do_lt)`                  |             |
+| `nvim_select_popupmenu_item(item, insert, finish, opts)`         |             |
+| `nvim_set_client_info(name, version, type, methods, attributes)` |             |
+| `nvim_set_current_buf(buffer)`                                   |             |
+| `nvim_set_current_line(line)`                                    |             |
+| `nvim_set_current_tabpage(tabpage)`                              |             |
+| `nvim_set_current_win(window)`                                   |             |
+| `nvim_set_hl(ns_id, name, *val)`                                 |             |
+| `nvim_set_hl_ns(ns_id)`                                          |             |
+| `nvim_set_hl_ns_fast(ns_id)`                                     |             |
+| `nvim_set_keymap(mode, lhs, rhs, *opts)`                         |             |
+| `nvim_set_var(name, value)`                                      |             |
+| `nvim_set_vvar(name, value)`                                     |             |
+| `nvim_strwidth(text)`                                            |             |
+| `nvim_subscribe(event)`                                          |             |
+
+### Options Functions
+
+| Function | Description |
+| -------- | ----------- |
+| ``       |             |
+
+### Tabpage Functions
+
+| Function | Description |
+| -------- | ----------- |
+| ``       |             |
+
+### UI Functions
+
+"pum" is an acronym for "popup menu".
+
+| Function                                          | Description |
+| ------------------------------------------------- | ----------- |
+| `nvim_ui_atttach(width, height, options)`         |             |
+| `nvim_ui_detach()`                                |             |
+| `nvim_ui_pum_set_bounds(width, height, row, col)` |             |
+| `nvim_ui_pum_set_height(height)`                  |             |
+| `nvim_ui_set_focus(gained)`                       |             |
+| `nvim_ui_set_option(name, value)`                 |             |
+| `nvim_ui_try_resize(width, height)`               |             |
+| `nvim_ui_try_resize_grid(grid, width, height)`    |             |
+
+### Vimscript Functions
+
+| Function | Description |
+| -------- | ----------- |
+| ``       |             |
+
+### Window Functions
+
+| Function | Description |
+| -------- | ----------- |
+| ``       |             |
