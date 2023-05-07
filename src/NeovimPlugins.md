@@ -175,26 +175,61 @@ Each of these are summarized in the following subsections.
 | `nvim_del_autocmd(id)`             |             |
 | `nvim_create_autocmd()`            |             |
 | `nvim_get_autocmds(*opts)`         |             |
-| ``                                 |             |
-| ``                                 |             |
 
 ### Buffer Functions
 
-| Function | Description |
-| -------- | ----------- |
-| ``       |             |
+| Function                                                                         | Description |
+| -------------------------------------------------------------------------------- | ----------- |
+| `nvim_buf_attach(buffer, send_buffer, opts)`                                     |             |
+| `nvim_buf_call(buffer, fun)`                                                     |             |
+| `nvim_buf_del_keymap(buffer, mode, lhs)`                                         |             |
+| `nvim_buf_del_mark(buffer, name)`                                                |             |
+| `nvim_buf_del_var(buffer, name)`                                                 |             |
+| `nvim_buf_delete(buffer, opts)`                                                  |             |
+| `nvim_buf_detach(buffer)`                                                        |             |
+| `nvim_buf_get_changedtick(buffer)`                                               |             |
+| `nvim_buf_get_keymap(buffer, mode)`                                              |             |
+| `nvim_buf_get_lines(buffer, start, end, strick_indexing)`                        |             |
+| `nvim_buf_get_mark(buffer, name)`                                                |             |
+| `nvim_buf_get_name(buffer)`                                                      |             |
+| `nvim_buf_get_offset(buffer, index)`                                             |             |
+| `nvim_buf_get_text(buffer, start_row, start_col, end_row, end_col, opts)`        |             |
+| `nvim_buf_get_var(buffer, name)`                                                 |             |
+| `nvim_buf_is_loaded(buffer)`                                                     |             |
+| `nvim_buf_is_valid(buffer)`                                                      |             |
+| `nvim_buf_line_count(buffer)`                                                    |             |
+| `nvim_buf_set_keymap(buffer, mode, lhs, rhs, *opt)`                              |             |
+| `nvim_buf_set_lines(buffer, start, end, strict_indexing, replacement)`           |             |
+| `nvim_buf_set_mark(buffer, name, line, col, opts)`                               |             |
+| `nvim_buf_set_name(buffer, name)`                                                |             |
+| `nvim_buf_set_text(buffer, start_row, start_col, end_row, end_col, replacement)` |             |
+| `nvim_buf_set_var(buffer, name, value)`                                          |             |
 
 ### Command Functions
 
-| Function | Description |
-| -------- | ----------- |
-| ``       |             |
+| Function                                         | Description |
+| ------------------------------------------------ | ----------- |
+| `nvim_buf_create_user_command(buffer, name)`     |             |
+| `nvim_buf_del_user_command(buffer, name)`        |             |
+| `nvim_buf_get_commands(buffer, *opts)`           |             |
+| `nvim_cmd(*cmd, *opts)`                          |             |
+| `nvim_create_user_command(name, command, *opts)` |             |
+| `nvim_del_user_command(name)`                    |             |
+| `nvim_get_commands(*opts)`                       |             |
+| `nvim_parse_cmd(str, opts)`                      |             |
 
 ### Extmark Functions
 
-| Function | Description |
-| -------- | ----------- |
-| ``       |             |
+| Function                                                                    | Description |
+| --------------------------------------------------------------------------- | ----------- |
+| `nvim_buf_add_highlight(buffer, ns_id, hl_group, line, col_start, col_end)` |             |
+| `nvim_buf_clear_namespace(buffer, ns_id, line_start, line_end)`             |             |
+| `nvim_buf_del_extmark(buffer, ns_id, id)`                                   |             |
+| `nvim_buf_get_extmark_by_id(buffer, ns_id, id, opts)                        |             |
+| `nvim_buf_set_extmark(buffer, ns_id, line, col, *opts)`                     |             |
+| `nvim_create_namespace(name)`                                               |             |
+| `nvim_get_namespaces()`                                                     |             |
+| `nvim_set_decoration_provider(ns_id, *opts)`                                |             |
 
 ### Global Functions
 
@@ -268,9 +303,16 @@ Each of these are summarized in the following subsections.
 
 ### Options Functions
 
-| Function | Description |
-| -------- | ----------- |
-| ``       |             |
+| Function                                    | Description |
+| ------------------------------------------- | ----------- |
+| `nvim_buf_get_option(buffer, name)`         |             |
+| `nvim_buf_set_option(buffer, name, value)`  |             |
+| `nvim_get_all_options_info()`               |             |
+| `nvim_get_option(name)`                     |             |
+| `nvim_get_option_info2(name, *opts)`        |             |
+| `nvim_get_option_value(name, value, *opts)` |             |
+| `nvim_win_get_option(window, name)`         |             |
+| `nvim_win_set_option(window, name, value)`  |             |
 
 ### Tabpage Functions
 
