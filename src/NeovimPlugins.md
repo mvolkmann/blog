@@ -122,6 +122,14 @@ enter the following in Neovim:
 
 This should display "Hello, World!" in the message area at the bottom.
 
+I configured the key mapping <leader>x
+to write and source the current buffer.
+This is useful when developing a Neovim plugin.
+
+## Auto Commands
+
+Read ":help autocmd"
+
 ## autorun Example
 
 See an example Neovim plugin in {% aTargetBlank
