@@ -122,6 +122,24 @@ enter the following in Neovim:
 
 This should display "Hello, World!" in the message area at the bottom.
 
+## autorun Example
+
+See an example Neovim plugin in {% aTargetBlank
+"https://github.com/mvolkmann/autorun.nvim", "GitHub" %}.
+
+To configure use of this plugin, create the file
+`~/.config/nvim/lua/user/plugins/autorun.lua` containing the following:
+
+```lua
+return {
+  "mvolkmann/autorun.nvim",
+  lazy = false, -- load on startup, not just when required
+  config = function()
+    require("autorun").setup()
+  end
+}
+```
+
 ## LUA_PATH
 
 To see the places that the Lua `require` function looks for `.lua` files,
