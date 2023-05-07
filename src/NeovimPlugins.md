@@ -207,16 +207,16 @@ Each of these are summarized in the following subsections.
 
 ### Command Functions
 
-| Function                                         | Description |
-| ------------------------------------------------ | ----------- |
-| `nvim_buf_create_user_command(buffer, name)`     |             |
-| `nvim_buf_del_user_command(buffer, name)`        |             |
-| `nvim_buf_get_commands(buffer, *opts)`           |             |
-| `nvim_cmd(*cmd, *opts)`                          |             |
-| `nvim_create_user_command(name, command, *opts)` |             |
-| `nvim_del_user_command(name)`                    |             |
-| `nvim_get_commands(*opts)`                       |             |
-| `nvim_parse_cmd(str, opts)`                      |             |
+| Function                                                                                                                                     | Description                                             |
+| -------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| `nvim_buf_create_user_command(buffer, name)`                                                                                                 |                                                         |
+| `nvim_buf_del_user_command(buffer, name)`                                                                                                    |                                                         |
+| `nvim_buf_get_commands(buffer, *opts)`                                                                                                       |                                                         |
+| `nvim_cmd(*cmd, *opts)`                                                                                                                      |                                                         |
+| <a href="https://neovim.io/doc/user/api.html#nvim_create_user_command()" target="_blank">nvim_create_user_command(name, command, \*opts)</a> | creates a user command; `command` can be a Lua function |
+| `nvim_del_user_command(name)`                                                                                                                |                                                         |
+| `nvim_get_commands(*opts)`                                                                                                                   |                                                         |
+| `nvim_parse_cmd(str, opts)`                                                                                                                  |                                                         |
 
 ### Extmark Functions
 
