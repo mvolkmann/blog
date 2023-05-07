@@ -316,9 +316,15 @@ Each of these are summarized in the following subsections.
 
 ### Tabpage Functions
 
-| Function | Description |
-| -------- | ----------- |
-| ``       |             |
+| Function                                     | Description |
+| -------------------------------------------- | ----------- |
+| `nvim_tabpage_del_var(tabpage, name)`        |             |
+| `nvim_tabpage_get_number(tabpage)`           |             |
+| `nvim_tabpage_get_var(tabpage, name)`        |             |
+| `nvim_tabpage_get_win(tabpage)`              |             |
+| `nvim_tabpage_is_valid(tabpage)`             |             |
+| `nvim_tabpage_list_wins(tabpage)`            |             |
+| `nvim_tabpage_set_var(tabpage, name, value)` |             |
 
 ### UI Functions
 
@@ -348,6 +354,30 @@ Each of these are summarized in the following subsections.
 
 ### Window Functions
 
-| Function | Description |
-| -------- | ----------- |
-| ``       |             |
+| Function                                | Description |
+| --------------------------------------- | ----------- |
+| `nvim_win_call(window, fun)`            |             |
+| `nvim_win_close(window, force)`         |             |
+| `nvim_win_del_var(window, name)`        |             |
+| `nvim_win_get_buf(window)`              |             |
+| `nvim_win_get_cursor(window)`           |             |
+| `nvim_win_get_height(window)`           |             |
+| `nvim_win_get_position(window)`         |             |
+| `nvim_win_get_tabpage(window)`          |             |
+| `nvim_win_get_var(window, name)`        |             |
+| `nvim_win_get_width(window)`            |             |
+| `nvim_win_hide(window)`                 |             |
+| `nvim_win_is_valid(window)`             |             |
+| `nvim_win_set_buf(window, buffer)`      |             |
+| `nvim_win_set_cursor(window, pos)`      |             |
+| `nvim_win_set_height(window, height)`   |             |
+| `nvim_win_set_hl_ns(window, ns_id)`     |             |
+| `nvim_win_set_var(window, name, value)` |             |
+| `nvim_win_set_width(window, width)`     |             |
+
+### Win_Config Functions
+
+| Function                                | Description |
+| --------------------------------------- | ----------- |
+| `nvim_open_win(buffer, enter, *config)` |             |
+| `nvim_win_get_config(window, *config)`  |             |
