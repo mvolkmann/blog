@@ -264,6 +264,7 @@ Each of these are summarized in the following subsections.
 | `nvim_set_vvar(name, value)`                                     |             |
 | `nvim_strwidth(text)`                                            |             |
 | `nvim_subscribe(event)`                                          |             |
+| `nvim_unsubscribe(event)`                                        |             |
 
 ### Options Functions
 
@@ -294,9 +295,14 @@ Each of these are summarized in the following subsections.
 
 ### Vimscript Functions
 
-| Function | Description |
-| -------- | ----------- |
-| ``       |             |
+| Function                                        | Description |
+| ----------------------------------------------- | ----------- |
+| `nvim_call_dict_function(dict, fn, args)`       |             |
+| `nvim_call_function(fn, args)`                  |             |
+| `nvim_command(command)`                         |             |
+| `nvim_eval(expr)`                               |             |
+| `nvim_exec2(src, *opts)`                        |             |
+| `nvim_parse_expression(expr, flags, highlight)` |             |
 
 ### Window Functions
 
