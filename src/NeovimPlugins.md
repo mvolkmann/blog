@@ -68,3 +68,36 @@ TODO: Is "<leader>g" already in use?
 ```lua
 vim.keymap.set("n", "<leader>g", Greet)
 ```
+
+## LUA_PATH
+
+To see the places that the Lua `require` function looks for `.lua` files,
+enter `lua` to start it in interactive mode and
+then enter `print(package.path)`.
+By default this will include the following:
+
+- `/usr/local/share/lua/5.4/?.lua`
+- `/usr/local/share/lua/5.4/?/init.lua`
+- `/usr/local/lib/lua/5.4/?.lua`
+- `/usr/local/lib/lua/5.4/?/init.lua`
+- `/?.lua`
+- `/?/init.lua`
+
+To add more paths to the beginning of this list,
+define the environment variable `LUA_PATH`.
+For example, when using zsh, add the following in `~/.zshrc`:
+
+```bash
+export LUA_PATH="${HOME}/lua/?.lua;;"
+```
+
+The second semicolon at the end is replaced by
+the current value of `package.path`.
+
+For me this adds `/Users/volkmannm/lua/?.lua;` to the beginning.
+This makes it so searches for `.lua` files
+begins in the `lua` subdirectory of my home directory.
+
+To automatically require files from this directory
+on startup of Neovim, add calls to the `require` function
+in `~/.config/nvim/lua/user/init.lua`.
