@@ -189,73 +189,75 @@ Each of these are summarized in the following subsections.
 
 ### Events
 
+TODO: Add a list of all the supported events.
+
 ### Autocmd Functions
 
-| Function                            | Description                                                       |
-| ----------------------------------- | ----------------------------------------------------------------- |
-| `nvim_clear_autocmds(*opts)`        |                                                                   |
-| `nvim_create_augroup(name, *opts)`  | creates an auto-command group                                     |
-| `nvim_create_autocmd(event, *opts)` | creates an auto-command that runs every time a given event occurs |
-| `nvim_del_augroup_by_id(id)`        |                                                                   |
-| `nvim_del_augroup_by_name(name)`    |                                                                   |
-| `nvim_del_autocmd(id)`              |                                                                   |
-| `nvim_create_autocmd()`             |                                                                   |
-| `nvim_get_autocmds(*opts)`          |                                                                   |
+| Function                                                                                                                    | Description                  |
+| --------------------------------------------------------------------------------------------------------------------------- | ---------------------------- |
+| <a href="https://neovim.io/doc/user/api.html#nvim_clear_autocmds()" target="_blank">nvim_clear_autocmds(\*opts)</a>         |                              |
+| <a href="https://neovim.io/doc/user/api.html#nvim_create_augroup()" target="_blank">nvim_create_augroup(name, \*opts)</a>   | crates an auto-command group |
+| <a href="https://neovim.io/doc/user/api.html#nvim_create_autocmd()" target="_blank">nvim_create_autocmd(event, \*opts)</a>  |                              |
+| <a href="https://neovim.io/doc/user/api.html#nvim_del_augroup_by_id()" target="_blank">nvim_del_augroup_by_id(id)</a>       |                              |
+| <a href="https://neovim.io/doc/user/api.html#nvim_del_augroup_by_name()" target="_blank">nvim_del_augroup_by_name(name)</a> |                              |
+| <a href="https://neovim.io/doc/user/api.html#nvim_del_autocmd()" target="_blank">nvim_del_autocmd(id)</a>                   |                              |
+| <a href="https://neovim.io/doc/user/api.html#nvim_create_autocmd()</a>                                                      |                              |
+| <a href="https://neovim.io/doc/user/api.html#nvim_get_autocmds()" target="_blank">nvim_get_autocmds(\*opts)</a>             |                              |
 
 ### Buffer Functions
 
-| Function                                                                         | Description                 |
-| -------------------------------------------------------------------------------- | --------------------------- |
-| `nvim_buf_attach(buffer, send_buffer, opts)`                                     |                             |
-| `nvim_buf_call(buffer, fun)`                                                     |                             |
-| `nvim_buf_del_keymap(buffer, mode, lhs)`                                         |                             |
-| `nvim_buf_del_mark(buffer, name)`                                                |                             |
-| `nvim_buf_del_var(buffer, name)`                                                 |                             |
-| `nvim_buf_delete(buffer, opts)`                                                  |                             |
-| `nvim_buf_detach(buffer)`                                                        |                             |
-| `nvim_buf_get_changedtick(buffer)`                                               |                             |
-| `nvim_buf_get_keymap(buffer, mode)`                                              |                             |
-| `nvim_buf_get_lines(buffer, start, end, strick_indexing)`                        |                             |
-| `nvim_buf_get_mark(buffer, name)`                                                |                             |
-| `nvim_buf_get_name(buffer)`                                                      |                             |
-| `nvim_buf_get_offset(buffer, index)`                                             |                             |
-| `nvim_buf_get_text(buffer, start_row, start_col, end_row, end_col, opts)`        |                             |
-| `nvim_buf_get_var(buffer, name)`                                                 |                             |
-| `nvim_buf_is_loaded(buffer)`                                                     |                             |
-| `nvim_buf_is_valid(buffer)`                                                      |                             |
-| `nvim_buf_line_count(buffer)`                                                    |                             |
-| `nvim_buf_set_keymap(buffer, mode, lhs, rhs, *opt)`                              |                             |
-| `nvim_buf_set_lines(buffer, start, end, strict_indexing, replacement)`           | adds text in a given buffer |
-| `nvim_buf_set_mark(buffer, name, line, col, opts)`                               |                             |
-| `nvim_buf_set_name(buffer, name)`                                                |                             |
-| `nvim_buf_set_text(buffer, start_row, start_col, end_row, end_col, replacement)` |                             |
-| `nvim_buf_set_var(buffer, name, value)`                                          |                             |
+| Function                                                                                                                                                             | Description                 |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
+| <a href="https://neovim.io/doc/user/api.html#nvim_buf_attach()" target="_blank">nvim_buf_attach(buffer, send_buffer, opts)</a>                                       |                             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_buf_call()" target="_blank">nvim_buf_call(buffer, fun)</a>                                                         |                             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_buf_del_keymap()" target="_blank">nvim_buf_del_keymap(buffer, mode, lhs)</a>                                       |                             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_buf_del_mark()" target="_blank">nvim_buf_del_mark(buffer, name)</a>                                                |                             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_buf_del_var()" target="_blank">nvim_buf_del_var(buffer, name)</a>                                                  |                             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_buf_delete()" target="_blank">nvim_buf_delete(buffer, opts)</a>                                                    |                             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_buf_detach()" target="_blank">nvim_buf_detach(buffer)</a>                                                          |                             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_buf_get_changedtick()" target="_blank">nvim_buf_get_changedtick(buffer)</a>                                        |                             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_buf_get_keymap()" target="_blank">nvim_buf_get_keymap(buffer, mode)</a>                                            |                             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_buf_get_lines()" target="_blank">nvim_buf_get_lines(buffer, start, end, strick_indexing)</a>                       |                             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_buf_get_mark()" target="_blank">nvim_buf_get_mark(buffer, name)</a>                                                |                             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_buf_get_name()" target="_blank">nvim_buf_get_name(buffer)</a>                                                      |                             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_buf_get_offset()" target="_blank">nvim_buf_get_offset(buffer, index)</a>                                           |                             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_buf_get_text()" target="_blank">nvim_buf_get_text(buffer, start_row, start_col, end_row, end_col, opts)</a>        |                             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_buf_get_var()" target="_blank">nvim_buf_get_var(buffer, name)</a>                                                  |                             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_buf_is_loaded()" target="_blank">nvim_buf_is_loaded(buffer)</a>                                                    |                             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_buf_is_valid()" target="_blank">nvim_buf_is_valid(buffer)</a>                                                      |                             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_buf_line_count()" target="_blank">nvim_buf_line_count(buffer)</a>                                                  |                             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_buf_set_keymap()" target="_blank">nvim_buf_set_keymap(buffer, mode, lhs, rhs, \*opt)</a>                           |                             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_buf_set_lines()" target="_blank">nvim_buf_set_lines(buffer, start, end, strict_indexing, replacement)</a>          | adds text in a given buffer |
+| <a href="https://neovim.io/doc/user/api.html#nvim_buf_set_mark()" target="_blank">nvim_buf_set_mark(buffer, name, line, col, opts)</a>                               |                             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_buf_set_name()" target="_blank">nvim_buf_set_name(buffer, name)</a>                                                |                             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_buf_set_text()" target="_blank">nvim_buf_set_text(buffer, start_row, start_col, end_row, end_col, replacement)</a> |                             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_buf_set_var()" target="_blank">nvim_buf_set_var(buffer, name, value)</a>                                           |                             |
 
 ### Command Functions
 
 | Function                                                                                                                                     | Description                                             |
 | -------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
-| <a href="https://neovim.io/doc/user/api.html#nvim_buf_create_user_command()">nvim_buf_create_user_command(buffer, name)</a>                  | creates a global user command                           |
-| `nvim_buf_del_user_command(buffer, name)`                                                                                                    |                                                         |
-| `nvim_buf_get_commands(buffer, *opts)`                                                                                                       |                                                         |
-| `nvim_cmd(*cmd, *opts)`                                                                                                                      |                                                         |
+| <a href="https://neovim.io/doc/user/api.html#nvim_buf_create_user_command()" target="_blank">nvim_buf_create_user_command(buffer, name)</a>  | creates a global user command                           |
+| <a href="https://neovim.io/doc/user/api.html#nvim_buf_del_user_command()" target="_blank">nvim_buf_del_user_command(buffer, name)</a>        |                                                         |
+| <a href="https://neovim.io/doc/user/api.html#nvim_buf_get_commands()" target="_blank">nvim_buf_get_commands(buffer, \*opts)</a>              |                                                         |
+| <a href="https://neovim.io/doc/user/api.html#nvim_cmd()" target="_blank">nvim_cmd(*cmd, *opts)</a>                                           |                                                         |
 | <a href="https://neovim.io/doc/user/api.html#nvim_create_user_command()" target="_blank">nvim_create_user_command(name, command, \*opts)</a> | creates a user command; `command` can be a Lua function |
-| `nvim_del_user_command(name)`                                                                                                                |                                                         |
-| `nvim_get_commands(*opts)`                                                                                                                   |                                                         |
-| `nvim_parse_cmd(str, opts)`                                                                                                                  |                                                         |
+| <a href="https://neovim.io/doc/user/api.html#nvim_del_user_command()" target="_blank">nvim_del_user_command(name)</a>                        |                                                         |
+| <a href="https://neovim.io/doc/user/api.html#nvim_get_commands()" target="_blank">nvim_get_commands(\*opts)</a>                              |                                                         |
+| <a href="https://neovim.io/doc/user/api.html#nvim_parse_cmd()" target="_blank">nvim_parse_cmd(str, opts)</a>                                 |                                                         |
 
 ### Extmark Functions
 
-| Function                                                                    | Description |
-| --------------------------------------------------------------------------- | ----------- |
-| `nvim_buf_add_highlight(buffer, ns_id, hl_group, line, col_start, col_end)` |             |
-| `nvim_buf_clear_namespace(buffer, ns_id, line_start, line_end)`             |             |
-| `nvim_buf_del_extmark(buffer, ns_id, id)`                                   |             |
-| `nvim_buf_get_extmark_by_id(buffer, ns_id, id, opts)                        |             |
-| `nvim_buf_set_extmark(buffer, ns_id, line, col, *opts)`                     |             |
-| `nvim_create_namespace(name)`                                               |             |
-| `nvim_get_namespaces()`                                                     |             |
-| `nvim_set_decoration_provider(ns_id, *opts)`                                |             |
+| Function                                                                                                                                                             | Description |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| <a href="https://neovim.io/doc/user/api.html#nvim_buf_add_highlight()" target="_blank">nvim_buf_add_highlight(buffer, ns_id, hl_group, line, col_start, col_end)</a> |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_buf_clear_namespace()" target="_blank">nvim_buf_clear_namespace(buffer, ns_id, line_start, line_end)</a>           |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_buf_del_extmark()" target="_blank">nvim_buf_del_extmark(buffer, ns_id, id)</a>                                     |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_buf_get_extmark_by_id()" target="_blank">nvim_buf_get_extmark_by_id(buffer, ns_id, id, opts)</a>                   |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_buf_set_extmark()" target="_blank">nvim_buf_set_extmark(buffer, ns_id, line, col, \*opts)</a>                      |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_create_namespace()" target="_blank">nvim_create_namespace(name)</a>                                                |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_get_namespaces()" target="_blank">nvim_get_namespaces()</a>                                                        |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_set_decoration_provider()" target="_blank">nvim_set_decoration_provider(ns_id, \*opts)</a>                         |             |
 
 ### Global Functions
 
