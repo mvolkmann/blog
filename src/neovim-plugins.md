@@ -482,8 +482,9 @@ The following key mappings can be used when focus is in the AST buffer:
 
 See an example Neovim plugin that uses Treesitter in {% aTargetBlank
 "https://github.com/mvolkmann/todo-quickfix.nvim", "GitHub" %}.
-This parses the source code in the current buffer
-and populates the quickfix list will all comment lines that contain "TODO".
+This parses the source code in the current buffer,
+populates the quickfix list will all comment lines that contain "TODO",
+and opens the quickfix list.
 
 To configure use of this plugin, create the file
 `~/.config/nvim/lua/user/plugins/todo-quickfix.lua` containing the following:
@@ -495,6 +496,8 @@ return {
   config = true -- require the plugin and call its setup function
 }
 ```
+
+Open a source file containing TODO comments and enter `:TodoQF`.
 
 ## Neovim API
 
