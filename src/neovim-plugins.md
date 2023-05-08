@@ -73,10 +73,21 @@ For example:
 
 The third way to run the function is to create an autocommand
 and cause the action that triggers it.
-Add the following after the function definition inside the buffer.
+For this approach we can return to a simpler version of the `Greet` function.
+The event in this example is writing any buffer whose file name ends in `.lua`.
 
 ```lua
-vim.api.nvim_create_autocmd("event-name", { callback = Greet })
+function Greet(name)
+  name = name or "World"
+  print("Hello, " .. name .. "!")
+end
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+  -- TODO: Is this necessary? If so, explain it.
+  group = vim.api.nvim_create_augroup("RMV", { clear = true }),
+  pattern = "*.lua",
+  callback = function() Greet("Mark") end
+})
 ```
 
 To see a list of the supported events, enter `:h events`.
