@@ -476,6 +476,24 @@ The following key mappings can be used when focus is in the AST buffer:
 | `I`    | toggles display of the language to which each node belongs        |
 | `<cr>` | moves cursor to corresponding source code token                   |
 
+## Plugin Using Treesitter
+
+See an example Neovim plugin that uses Treesitter in {% aTargetBlank
+"https://github.com/mvolkmann/todo-quickfix.nvim", "GitHub" %}.
+This parses the source code in the current buffer
+and populates the quickfix list will all comment lines that contain "TODO".
+
+To configure use of this plugin, create the file
+`~/.config/nvim/lua/user/plugins/todo-quickfix.lua` containing the following:
+
+```lua
+return {
+  "mvolkmann/todo-quickfix.nvim",
+  lazy = false, -- load on startup, not just when required
+  config = true -- require the plugin and call its setup function
+}
+```
+
 ## Neovim API
 
 The {% aTargetBlank "https://neovim.io/doc/user/api.html", "Neovim API" %}
