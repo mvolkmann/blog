@@ -1759,7 +1759,9 @@ return {
 
 To toggle display of Git blame text, enter `:GitBlameToggle`.
 
-Consider adding a "gb" key mapping that runs the `GitBlameToggle` command.
+Consider adding a "<leader>gB" key mapping
+that runs the `GitBlameToggle` command.
+The mapping "<leader>gb" is already used for "git branches".
 
 #### hop.nvim
 
