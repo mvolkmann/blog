@@ -201,7 +201,7 @@ TODO: Add a list of all the supported events.
 | <a href="https://neovim.io/doc/user/api.html#nvim_del_augroup_by_id()" target="_blank">nvim_del_augroup_by_id(id)</a>       |                              |
 | <a href="https://neovim.io/doc/user/api.html#nvim_del_augroup_by_name()" target="_blank">nvim_del_augroup_by_name(name)</a> |                              |
 | <a href="https://neovim.io/doc/user/api.html#nvim_del_autocmd()" target="_blank">nvim_del_autocmd(id)</a>                   |                              |
-| <a href="https://neovim.io/doc/user/api.html#nvim_create_autocmd()</a>                                                      |                              |
+| <a href="https://neovim.io/doc/user/api.html#nvim_create_autocmd()" target="_blank">nvim_create_autocmd()</a>               |                              |
 | <a href="https://neovim.io/doc/user/api.html#nvim_get_autocmds()" target="_blank">nvim_get_autocmds(\*opts)</a>             |                              |
 
 ### Buffer Functions
@@ -261,74 +261,74 @@ TODO: Add a list of all the supported events.
 
 ### Global Functions
 
-| Function                                                                                                                                                | Description                   |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
-| <a href="https://neovim.io/doc/user/api.html#nvim__get_runtime()" target="_blank">nvim\_\_get_runtime(pat, all, \*opts)</a>                             |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim__id()" target="_blank">nvim\_\_id(obj)</a>                                                            |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim__id_array()" target="_blank">nvim\_\_id_array(arr)</a>                                                |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim__id_dictionary()" target="_blank">nvim\_\_id_dictionary(dct)</a>                                      |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim__id_float()" target="_blank">nvim\_\_id_float(flt)</a>                                                |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim__inspect_cell()" target="_blank">nvim\_\_inspect_cell(grid, row, col)</a>                             |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim__stats()" target="_blank">nvim\_\_stats()</a>                                                         |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_call_atomic()" target="_blank">nvim_call_atomic(calls)</a>                                            |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_chan_send()" target="_blank">nvim_chan_send(chan, data)</a>                                           |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_create_buf()" target="_blank">nvim_create_buf(listed, scratch)</a>                                    |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_del_current_line()" target="_blank">nvim_del_current_line()</a>                                       |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_del_keymap()" target="_blank">nvim_del_keymap(mode, lhs)</a>                                          |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_del_mark()" target="_blank">nvim_del_mark(name)</a>                                                   |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_del_var()" target="_blank">nvim_del_var(name)</a>                                                     |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_echo()" target="_blank">nvim_echo(chunks, history, \*opts)</a>                                        |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_err_write()" target="_blank">nvim_err_write(str)</a>                                                  |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_err_writeln()" target="_blank">nvim_err_writeln(str)</a>                                              |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_eval_statusline()" target="_blank">nvim_eval_statusline(str, \*opts)</a>                              |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_exec_lua()" target="_blank">nvim_exec_lua(code, args)</a>                                             |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_feedkeys()" target="_blank">nvim_feedkeys(keys, mode, escape_ks)</a>                                  |                               |
-| `nvim_get_api_info()`                                                                                                                                   |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_get_chan_info()" target="_blank">nvim_get_chan_info(chan)</a>                                         |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_get_context()" target="_blank">nvim_get_context(\*opts)</a>                                           |                               |
-| `nvim_get_current_buf()`                                                                                                                                | gets number of current buffer |
-| `nvim_get_current_tabpage()`                                                                                                                            |                               |
-| `nvim_get_current_win()`                                                                                                                                |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_get_hl()" target="_blank">nvim_get_hl(ns_id, \*opts)</a>                                              |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_get_hl_id_by_name()" target="_blank">nvim_get_hl_id_by_name(name)</a>                                 |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_get_keymap()" target="_blank">nvim_get_keymap(mode)</a>                                               |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_get_mark()" target="_blank">nvim_get_mark(name, opts)</a>                                             |                               |
-| `nvim_get_mode()`                                                                                                                                       |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_get_proc()" target="_blank">nvim_get_proc(pid)</a>                                                    |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_get_proc_children()" target="_blank">nvim_get_proc_children(pid)</a>                                  |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_get_runtime_file()" target="_blank">nvim_get_runtime_file(name, all)</a>                              |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_get_var()" target="_blank">nvim_get_var(name)</a>                                                     |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_get_vvar()" target="_blank">nvim_get_vvar(name)</a>                                                   |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_input()" target="_blank">nvim_input(keys)</a>                                                         |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_input_mouse()" target="_blank">nvim_input_mouse(button, action, modifier, grid, row, col)</a>         |                               |
-| `nvim_list_bufs()`                                                                                                                                      |                               |
-| `nvim_list_chans()`                                                                                                                                     |                               |
-| `nvim_list_runtime_paths()`                                                                                                                             |                               |
-| `nvim_list_tabpages()`                                                                                                                                  |                               |
-| `nvim_list_uis()`                                                                                                                                       |                               |
-| `nvim_list_wins()`                                                                                                                                      |                               |
-| `nvim_load_context(dict)`                                                                                                                               |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_notify()" target="_blank">nvim_notify(msg, log_level, opts)</a>                                       |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_open_term()" target="_blank">nvim_open_term(buffer, opts)</a>                                         |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_out_write()" target="_blank">nvim_out_write(str)</a>                                                  |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_paste()" target="_blank">nvim_paste(data, crlf, phase)</a>                                            |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_put()" target="_blank">nvim_put(lines, type, after, follow)</a>                                       |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_replace_termcodes()" target="_blank">nvim_replace_termcodes(str, from_part, do_lt)</a>                |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_select_popupmenu_item()" target="_blank">nvim_select_popupmenu_item(item, insert, finish, opts)</a>   |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_set_client_info()" target="_blank">nvim_set_client_info(name, version, type, methods, attributes)</a> |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_set_current_buf()" target="_blank">nvim_set_current_buf(buffer)</a>                                   |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_set_current_line()" target="_blank">nvim_set_current_line(line)</a>                                   |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_set_current_tabpage()" target="_blank">nvim_set_current_tabpage(tabpage)</a>                          |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_set_current_win()" target="_blank">nvim_set_current_win(window)</a>                                   |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_set_hl()" target="_blank">nvim_set_hl(ns_id, name, \*val)</a>                                         |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_set_hl_ns()" target="_blank">nvim_set_hl_ns(ns_id)</a>                                                |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_set_hl_ns_fast()" target="_blank">nvim_set_hl_ns_fast(ns_id)</a>                                      |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_set_keymap()" target="_blank">nvim_set_keymap(mode, lhs, rhs, \*opts)</a>                             |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_set_var()" target="_blank">nvim_set_var(name, value)</a>                                              |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_set_vvar()" target="_blank">nvim_set_vvar(name, value)</a>                                            |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_strwidth()" target="_blank">nvim_strwidth(text)</a>                                                   |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_subscribe()" target="_blank">nvim_subscribe(event)</a>                                                |                               |
-| <a href="https://neovim.io/doc/user/api.html#nvim_unsubscribe()" target="_blank">nvim_unsubscribe(event)</a>                                            |                               |
+| Function                                                                                                                                                | Description |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| <a href="https://neovim.io/doc/user/api.html#nvim__get_runtime()" target="_blank">nvim\_\_get_runtime(pat, all, \*opts)</a>                             |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim__id()" target="_blank">nvim\_\_id(obj)</a>                                                            |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim__id_array()" target="_blank">nvim\_\_id_array(arr)</a>                                                |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim__id_dictionary()" target="_blank">nvim\_\_id_dictionary(dct)</a>                                      |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim__id_float()" target="_blank">nvim\_\_id_float(flt)</a>                                                |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim__inspect_cell()" target="_blank">nvim\_\_inspect_cell(grid, row, col)</a>                             |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim__stats()" target="_blank">nvim\_\_stats()</a>                                                         |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_call_atomic()" target="_blank">nvim_call_atomic(calls)</a>                                            |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_chan_send()" target="_blank">nvim_chan_send(chan, data)</a>                                           |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_create_buf()" target="_blank">nvim_create_buf(listed, scratch)</a>                                    |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_del_current_line()" target="_blank">nvim_del_current_line()</a>                                       |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_del_keymap()" target="_blank">nvim_del_keymap(mode, lhs)</a>                                          |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_del_mark()" target="_blank">nvim_del_mark(name)</a>                                                   |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_del_var()" target="_blank">nvim_del_var(name)</a>                                                     |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_echo()" target="_blank">nvim_echo(chunks, history, \*opts)</a>                                        |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_err_write()" target="_blank">nvim_err_write(str)</a>                                                  |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_err_writeln()" target="_blank">nvim_err_writeln(str)</a>                                              |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_eval_statusline()" target="_blank">nvim_eval_statusline(str, \*opts)</a>                              |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_exec_lua()" target="_blank">nvim_exec_lua(code, args)</a>                                             |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_feedkeys()" target="_blank">nvim_feedkeys(keys, mode, escape_ks)</a>                                  |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_get_api_info()" target="_blank">nvim_get_api_info()</a>                                               |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_get_chan_info()" target="_blank">nvim_get_chan_info(chan)</a>                                         |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_get_context()" target="_blank">nvim_get_context(\*opts)</a>                                           |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_get_current_buf()" target="_blank">nvim_get_current_buf()</a>                                         |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_get_current_tabpage()" target="_blank">nvim_get_current_tabpage()</a>                                 |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_get_current_win()" target="_blank">nvim_get_current_win()</a>                                         |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_get_hl()" target="_blank">nvim_get_hl(ns_id, \*opts)</a>                                              |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_get_hl_id_by_name()" target="_blank">nvim_get_hl_id_by_name(name)</a>                                 |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_get_keymap()" target="_blank">nvim_get_keymap(mode)</a>                                               |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_get_mark()" target="_blank">nvim_get_mark(name, opts)</a>                                             |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_get_mode()" target="_blank">nvim_get_mode()</a>                                                       |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_get_proc()" target="_blank">nvim_get_proc(pid)</a>                                                    |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_get_proc_children()" target="_blank">nvim_get_proc_children(pid)</a>                                  |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_get_runtime_file()" target="_blank">nvim_get_runtime_file(name, all)</a>                              |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_get_var()" target="_blank">nvim_get_var(name)</a>                                                     |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_get_vvar()" target="_blank">nvim_get_vvar(name)</a>                                                   |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_input()" target="_blank">nvim_input(keys)</a>                                                         |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_input_mouse()" target="_blank">nvim_input_mouse(button, action, modifier, grid, row, col)</a>         |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_list_bufs()" target="_blank">nvim_list_bufs()</a>                                                     |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_list_chans()" target="_blank">nvim_list_chans()</a>                                                   |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_list_runtime_paths()" target="_blank">nvim_list_runtime_paths()</a>                                   |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_list_tabpages()" target="_blank">nvim_list_tabpages()</a>                                             |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_list_uis()" target="_blank">nvim_list_uis()</a>                                                       |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_list_wins()" target="_blank">nvim_list_wins()</a>                                                     |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_load_context(dict)" target="_blank">nvim_load_context(dict)</a>                                       |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_notify()" target="_blank">nvim_notify(msg, log_level, opts)</a>                                       |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_open_term()" target="_blank">nvim_open_term(buffer, opts)</a>                                         |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_out_write()" target="_blank">nvim_out_write(str)</a>                                                  |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_paste()" target="_blank">nvim_paste(data, crlf, phase)</a>                                            |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_put()" target="_blank">nvim_put(lines, type, after, follow)</a>                                       |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_replace_termcodes()" target="_blank">nvim_replace_termcodes(str, from_part, do_lt)</a>                |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_select_popupmenu_item()" target="_blank">nvim_select_popupmenu_item(item, insert, finish, opts)</a>   |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_set_client_info()" target="_blank">nvim_set_client_info(name, version, type, methods, attributes)</a> |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_set_current_buf()" target="_blank">nvim_set_current_buf(buffer)</a>                                   |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_set_current_line()" target="_blank">nvim_set_current_line(line)</a>                                   |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_set_current_tabpage()" target="_blank">nvim_set_current_tabpage(tabpage)</a>                          |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_set_current_win()" target="_blank">nvim_set_current_win(window)</a>                                   |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_set_hl()" target="_blank">nvim_set_hl(ns_id, name, \*val)</a>                                         |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_set_hl_ns()" target="_blank">nvim_set_hl_ns(ns_id)</a>                                                |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_set_hl_ns_fast()" target="_blank">nvim_set_hl_ns_fast(ns_id)</a>                                      |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_set_keymap()" target="_blank">nvim_set_keymap(mode, lhs, rhs, \*opts)</a>                             |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_set_var()" target="_blank">nvim_set_var(name, value)</a>                                              |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_set_vvar()" target="_blank">nvim_set_vvar(name, value)</a>                                            |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_strwidth()" target="_blank">nvim_strwidth(text)</a>                                                   |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_subscribe()" target="_blank">nvim_subscribe(event)</a>                                                |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_unsubscribe()" target="_blank">nvim_unsubscribe(event)</a>                                            |             |
 
 ### Options Functions
 
@@ -336,7 +336,7 @@ TODO: Add a list of all the supported events.
 | ------------------------------------------------------------------------------------------------------------------------------------ | ----------- |
 | <a href="https://neovim.io/doc/user/api.html#nvim_buf_get_option()" target="_blank">nvim_buf_get_option(buffer, name)</a>            |             |
 | <a href="https://neovim.io/doc/user/api.html#nvim_buf_set_option()" target="_blank">nvim_buf_set_option(buffer, name, value)</a>     |             |
-| <a href="https://neovim.io/doc/user/api.html#nvim_get_all_options_info()</a>                                                         |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_get_all_options_info()" target="_blank">nvim_get_all_options_info()</a>            |             |
 | <a href="https://neovim.io/doc/user/api.html#nvim_get_option()" target="_blank">nvim_get_option(name)</a>                            |             |
 | <a href="https://neovim.io/doc/user/api.html#nvim_get_option_info2()" target="_blank">nvim_get_option_info2(name, \*opts)</a>        |             |
 | <a href="https://neovim.io/doc/user/api.html#nvim_get_option_value()" target="_blank">nvim_get_option_value(name, value, \*opts)</a> |             |
@@ -362,7 +362,7 @@ TODO: Add a list of all the supported events.
 | Function                                                                                                                                   | Description |
 | ------------------------------------------------------------------------------------------------------------------------------------------ | ----------- |
 | <a href="https://neovim.io/doc/user/api.html#nvim_ui_atttach()" target="_blank">nvim_ui_atttach(width, height, options)</a>                |             |
-| `nvim_ui_detach()`                                                                                                                         |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_ui_detach()" target="_blank">nvim_ui_detach()</a>                                        |             |
 | <a href="https://neovim.io/doc/user/api.html#nvim_ui_pum_set_bounds()" target="_blank">nvim_ui_pum_set_bounds(width, height, row, col)</a> |             |
 | <a href="https://neovim.io/doc/user/api.html#nvim_ui_pum_set_height()" target="_blank">nvim_ui_pum_set_height(height)</a>                  |             |
 | <a href="https://neovim.io/doc/user/api.html#nvim_ui_set_focus()" target="_blank">nvim_ui_set_focus(gained)</a>                            |             |
