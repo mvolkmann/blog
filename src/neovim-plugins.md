@@ -83,8 +83,11 @@ function Greet(name)
 end
 
 vim.api.nvim_create_autocmd("BufWritePost", {
-  -- TODO: Is this necessary? If so, explain it.
-  group = vim.api.nvim_create_augroup("RMV", { clear = true }),
+  -- Placing the autocmd inside an augroup allows us to clear
+  -- existing autocmds in the group every time this file is sourced.
+  -- We need to do this so sourcing this file multiple times
+  -- doesn't register multiple callbacks to run when the event occurs.
+  group = vim.api.nvim_create_augroup("autocmd", { clear = true }),
   pattern = "*.lua",
   callback = function() Greet("Mark") end
 })
@@ -111,7 +114,7 @@ The supported event names include:
 - `BufWinLeave`
 - `BufWipeout`
 - `BufWriteCmd`
-- `BufWritePost`
+- `BufWritePost`: after a buffer has been written
 - `BufWrite` or `BufWritePre`
 - `ChanInfo`
 - `ChanOpen`
