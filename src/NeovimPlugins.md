@@ -20,30 +20,55 @@ There are four ways to trigger a Lua function in Neovim.
 Begin by defining a function in any buffer such as:
 
 ```lua
-function Greet() print("Hello!") end
+function Greet(name)
+  name = name or "World"
+  print("Hello, " .. name .. "!")
+end
 ```
 
-The first way to run the function is to source the file and use the `lua` command.
-The `%` represents the current buffer.
+The first way to run the function is to source the current buffer
+and use the `lua` command to call the function.
 
 ```bash
-:so %
-:lua Greet()
+:so
+:lua Greet("Mark")
 ```
 
+By default the `source` command sources the current buffer
+which can also be specified by `:so %`.
+
 The second way to run the function is to create a user command.
+This requires changing the definition of the function
+to accept an options table as shown below.
+This contains the keys `args` and `fargs`.
+The value of the `args` key is a single string containing
+the values of all arguments passed to the command.
+The value of the `fargs` key is a sequence table
+containing the values of all arguments.
+
+```lua
+function Greet(opts)
+  -- vim.print(opts) -- pretty prints a value for debugging
+  local name = #opts.fargs > 0 and opts.args or "World"
+  name = name:gsub('"', '') -- removes double quotes
+  print("Hello, " .. name .. "!")
+end
+```
+
 Add the following after the function definition inside the buffer.
-The last argument is a table of options.
+The last argument is a table of options and is required.
 
 ```lua
 vim.api.nvim_create_user_command("Greet", Greet, {})
 ```
 
-Now source the buffer and use the new command.
+Source the buffer again and then use the new command.
+For example:
 
 ```bash
-:so %
+:so
 :Greet
+:Greet "Mark"
 ```
 
 The third way to run the function is to create an autocommand
@@ -54,7 +79,128 @@ Add the following after the function definition inside the buffer.
 vim.api.nvim_create_autocmd("event-name", { callback = Greet })
 ```
 
-To get a list of supported event names, ...
+To see a list of the supported events, enter `:h events`.
+The supported event names include:
+
+- `BufAdd`
+- `BufDelete`
+- `BufEnter`
+- `BufFilePost`
+- `BufFilePre`
+- `BufHidden`
+- `BufLeave`
+- `BufModifiedSet`
+- `BufNew`
+- `BufNewFile`
+- `BufRead` of `BufReadPost`
+- `BufReadCmd`
+- `BufReadPre`
+- `BufUnload`
+- `BufWinEnter`
+- `BufWinLeave`
+- `BufWipeout`
+- `BufWrite` or `BufWritePre`
+- `BufWriteCmd`
+- `BufWritePost`
+- `ChanInfo`
+- `ChanOpen` ``
+- `ChanUndefined`
+- `CmdLineChange`
+- `CmdLineEnter`
+- `CmdLineLeave`
+- `CmdwinEnter`
+- `CmdwinLeave`
+- `ColorScheme`
+- `ColorSchemePre`
+- `CompleteChanged`
+- `CompleteDonePre`
+- `CompleteDone`
+- `CursorHold`: when no key has been pressed for some amount of time in normal mode
+- `CursorHoldI`: when no key has been pressed for some amount of time in insert mode
+- `CursorMoved`: when cursor is moved in normal or visual mode
+- `CursorMovedI`: when cursor is moved in insert mode
+- `DiffUpdated`
+- `DiffChanged`
+- `DiffChangedPre`
+- `ExitPre`
+- `FileAppendedCmd`
+- `FileAppendedPost`
+- `FileAppendedPre`
+- `FileChangedRO`
+- `FileChangedShell`
+- `FileChangedShellPost`
+- `FileReadCmd`
+- `FileReadPost`
+- `FileReadPre`
+- `FileType`
+- `FileWriteCmd`
+- `FileWritePost`
+- `FileWritePre`
+- `FocusGained`
+- `FocusLost`
+- `FuncUndefined`
+- `UIEnter`
+- `UILeave`
+- `InsertChange`
+- `InsertCharPre`
+- `InsertEnter`
+- `InsertLeavePre`
+- `InsertLeave`
+- `MenuPopup`
+- `ModeChanged`
+- `OptionSet`
+- `QuickFixCmdPre`
+- `QuickFixCmdPost`
+- `QuitPre`
+- `RemoteReply`
+- `SearchWrapped`
+- `RecordingEnter`
+- `RecordingLeave`
+- `SessionLoadPost`
+- `ShellCmdPost`
+- `Signal`
+- `ShellFilterPost`
+- `SourcePre`
+- `SourcePost`
+- `SourceCmd`
+- `SpellFileMissing`
+- `StdinReadPost`
+- `StdinReadPre`
+- `SwapExists`
+- `Syntax`
+- `TabEnter`
+- `TabLeave`
+- `TabNew`
+- `TabNewEntered`
+- `TabCosed`
+- `TermOpen`
+- `TermEnter`
+- `TermLeave`
+- `TermClose`
+- `TermResponse`
+- `TextChanged`
+- `TextChangedI`
+- `TextChangedP`
+- `TextChangedT`
+- `TextYankPost`
+- `User`
+- `UserGettingBored`
+- `VimEnter`
+- `VimLeave`
+- `VimLeavePre`
+- `VimResized`
+- `VimResume`
+- `VimSuspend`
+- `WinClosed`
+- `WinEnter`
+- `Winleave`
+- `WinNew`
+- `WinScrolled`
+- `WinResized`
+- `nvim_buf_attach` `nvim_buf_changedtick_event`
+- `nvim_buf_detach_event`
+- `nvim_buf_lines_event`
+- `nvim_error_event`
 
 This can be triggered multiple times.
 To see all the output, enter `:messages`.
@@ -69,7 +215,7 @@ TODO: Is "<leader>g" already in use?
 vim.keymap.set("n", "<leader>g", Greet)
 ```
 
-## Buiding a Plugin
+## Building a Plugin
 
 To build a Neovim plugin that can be shared with others:
 
@@ -84,7 +230,14 @@ To build a Neovim plugin that can be shared with others:
 
    ```lua
    local M = {}
+
    M.greet = function() print("Hello!") end
+
+   M.setup = function()
+     -- Define user commands here.
+     -- Define key mappings here.
+   end
+
    return M
    ```
 
@@ -142,10 +295,29 @@ To configure use of this plugin, create the file
 return {
   "mvolkmann/autorun.nvim",
   lazy = false, -- load on startup, not just when required
+  config = true -- require the plugin and call its setup function
+}
+```
+
+Setting `config` to `true` is the equivalent of the following:
+
+```lua
   config = function()
     require("autorun").setup()
   end
-}
+```
+
+## Plugin Caching
+
+Plugins are cached after they are loaded by the `require` function.
+Additional calls to `require` for a loaded plugin
+will find it in the cache and return it without reloading it.
+To force a plugin to reload, perhaps because its code has changed,
+remove it from the cache before calling `require` with the following:
+
+```lua
+package.loaded.{plugin-name} = nil
+require "plugin-name"
 ```
 
 ## LUA_PATH
@@ -345,8 +517,8 @@ TODO: Add a list of all the supported events.
 
 ### Tabpage Functions
 
-| Function                                                                                                                            | Description |
-| ----------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| Function | Description |
+| -----------------------------------------------------------------------------------------------------
 | <a href="https://neovim.io/doc/user/api.html#nvim_tabpage_del_var()" target="_blank">nvim_tabpage_del_var(tabpage, name)</a>        |             |
 | <a href="https://neovim.io/doc/user/api.html#nvim_tabpage_get_number()" target="_blank">nvim_tabpage_get_number(tabpage)</a>        |             |
 | <a href="https://neovim.io/doc/user/api.html#nvim_tabpage_get_var()" target="_blank">nvim_tabpage_get_var(tabpage, name)</a>        |             |
