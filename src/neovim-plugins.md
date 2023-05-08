@@ -401,8 +401,7 @@ To use the playground plugin:
    ```lua
    return {
      "nvim-treesitter/playground",
-     lazy = false, -- load on startup, not just when required
-     config = true
+     lazy = false -- load on startup, not just when required
    }
    ```
 
