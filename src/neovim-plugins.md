@@ -90,45 +90,45 @@ The supported event names include:
 - `BufHidden`
 - `BufLeave`
 - `BufModifiedSet`
-- `BufNew`
 - `BufNewFile`
-- `BufRead` of `BufReadPost`
+- `BufNew`
 - `BufReadCmd`
 - `BufReadPre`
+- `BufRead` of `BufReadPost`
 - `BufUnload`
 - `BufWinEnter`
 - `BufWinLeave`
 - `BufWipeout`
-- `BufWrite` or `BufWritePre`
 - `BufWriteCmd`
 - `BufWritePost`
+- `BufWrite` or `BufWritePre`
 - `ChanInfo`
-- `ChanOpen` ``
+- `ChanOpen`
 - `ChanUndefined`
 - `CmdLineChange`
 - `CmdLineEnter`
 - `CmdLineLeave`
 - `CmdwinEnter`
 - `CmdwinLeave`
-- `ColorScheme`
 - `ColorSchemePre`
+- `ColorScheme`
 - `CompleteChanged`
 - `CompleteDonePre`
 - `CompleteDone`
-- `CursorHold`: when no key has been pressed for some amount of time in normal mode
 - `CursorHoldI`: when no key has been pressed for some amount of time in insert mode
-- `CursorMoved`: when cursor is moved in normal or visual mode
+- `CursorHold`: when no key has been pressed for some amount of time in normal mode
 - `CursorMovedI`: when cursor is moved in insert mode
-- `DiffUpdated`
-- `DiffChanged`
+- `CursorMoved`: when cursor is moved in normal or visual mode
 - `DiffChangedPre`
+- `DiffChanged`
+- `DiffUpdated`
 - `ExitPre`
 - `FileAppendedCmd`
 - `FileAppendedPost`
 - `FileAppendedPre`
 - `FileChangedRO`
-- `FileChangedShell`
 - `FileChangedShellPost`
+- `FileChangedShell`
 - `FileReadCmd`
 - `FileReadPost`
 - `FileReadPre`
@@ -139,8 +139,6 @@ The supported event names include:
 - `FocusGained`
 - `FocusLost`
 - `FuncUndefined`
-- `UIEnter`
-- `UILeave`
 - `InsertChange`
 - `InsertCharPre`
 - `InsertEnter`
@@ -149,54 +147,56 @@ The supported event names include:
 - `MenuPopup`
 - `ModeChanged`
 - `OptionSet`
-- `QuickFixCmdPre`
 - `QuickFixCmdPost`
+- `QuickFixCmdPre`
 - `QuitPre`
-- `RemoteReply`
-- `SearchWrapped`
 - `RecordingEnter`
 - `RecordingLeave`
+- `RemoteReply`
+- `SearchWrapped`
 - `SessionLoadPost`
 - `ShellCmdPost`
-- `Signal`
 - `ShellFilterPost`
-- `SourcePre`
-- `SourcePost`
+- `Signal`
 - `SourceCmd`
+- `SourcePost`
+- `SourcePre`
 - `SpellFileMissing`
 - `StdinReadPost`
 - `StdinReadPre`
 - `SwapExists`
 - `Syntax`
+- `TabCosed`
 - `TabEnter`
 - `TabLeave`
-- `TabNew`
 - `TabNewEntered`
-- `TabCosed`
-- `TermOpen`
+- `TabNew`
+- `TermClose`
 - `TermEnter`
 - `TermLeave`
-- `TermClose`
+- `TermOpen`
 - `TermResponse`
-- `TextChanged`
 - `TextChangedI`
 - `TextChangedP`
 - `TextChangedT`
+- `TextChanged`
 - `TextYankPost`
-- `User`
+- `UIEnter`
+- `UILeave`
 - `UserGettingBored`
+- `User`
 - `VimEnter`
-- `VimLeave`
 - `VimLeavePre`
+- `VimLeave`
 - `VimResized`
 - `VimResume`
 - `VimSuspend`
 - `WinClosed`
 - `WinEnter`
-- `Winleave`
 - `WinNew`
-- `WinScrolled`
 - `WinResized`
+- `WinScrolled`
+- `Winleave`
 - `nvim_buf_attach` `nvim_buf_changedtick_event`
 - `nvim_buf_detach_event`
 - `nvim_buf_lines_event`
@@ -519,13 +519,13 @@ TODO: Add a list of all the supported events.
 
 | Function | Description |
 | -----------------------------------------------------------------------------------------------------
-| <a href="https://neovim.io/doc/user/api.html#nvim_tabpage_del_var()" target="_blank">nvim_tabpage_del_var(tabpage, name)</a>        |             |
-| <a href="https://neovim.io/doc/user/api.html#nvim_tabpage_get_number()" target="_blank">nvim_tabpage_get_number(tabpage)</a>        |             |
-| <a href="https://neovim.io/doc/user/api.html#nvim_tabpage_get_var()" target="_blank">nvim_tabpage_get_var(tabpage, name)</a>        |             |
-| <a href="https://neovim.io/doc/user/api.html#nvim_tabpage_get_win()" target="_blank">nvim_tabpage_get_win(tabpage)</a>              |             |
-| <a href="https://neovim.io/doc/user/api.html#nvim_tabpage_is_valid()" target="_blank">nvim_tabpage_is_valid(tabpage)</a>            |             |
-| <a href="https://neovim.io/doc/user/api.html#nvim_tabpage_list_wins()" target="_blank">nvim_tabpage_list_wins(tabpage)</a>          |             |
-| <a href="https://neovim.io/doc/user/api.html#nvim_tabpage_set_var()" target="_blank">nvim_tabpage_set_var(tabpage, name, value)</a> |             |
+| <a href="https://neovim.io/doc/user/api.html#nvim_tabpage_del_var()" target="_blank">nvim_tabpage_del_var(tabpage, name)</a> | |
+| <a href="https://neovim.io/doc/user/api.html#nvim_tabpage_get_number()" target="_blank">nvim_tabpage_get_number(tabpage)</a> | |
+| <a href="https://neovim.io/doc/user/api.html#nvim_tabpage_get_var()" target="_blank">nvim_tabpage_get_var(tabpage, name)</a> | |
+| <a href="https://neovim.io/doc/user/api.html#nvim_tabpage_get_win()" target="_blank">nvim_tabpage_get_win(tabpage)</a> | |
+| <a href="https://neovim.io/doc/user/api.html#nvim_tabpage_is_valid()" target="_blank">nvim_tabpage_is_valid(tabpage)</a> | |
+| <a href="https://neovim.io/doc/user/api.html#nvim_tabpage_list_wins()" target="_blank">nvim_tabpage_list_wins(tabpage)</a> | |
+| <a href="https://neovim.io/doc/user/api.html#nvim_tabpage_set_var()" target="_blank">nvim_tabpage_set_var(tabpage, name, value)</a> | |
 
 ### UI Functions
 
