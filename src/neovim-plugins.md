@@ -247,6 +247,9 @@ To build a Neovim plugin that can be shared with others:
 
    M.greet = function() print("Hello!") end
 
+   -- It is a convention for plugins to have a `setup` function
+   -- that can be called to configure it.
+   -- The plugin managers Lazy and Packer both assume this.
    M.setup = function()
      -- Define user commands here.
      -- Define key mappings here.
