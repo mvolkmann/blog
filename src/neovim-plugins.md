@@ -13,6 +13,8 @@ This article describes how to implement and share a custom plugin.
 - {% aTargetBlank "https://www.youtube.com/watch?v=PdaObkGazoU&t=924s", "Writing Plugins - It's Never Been Easier" %} by DevOnDuty
 - {% aTargetBlank "https://www.youtube.com/watch?v=9gUatBHuXE0", "Automatically Execute *Anything* in Nvim" %}
 - {% aTargetBlank "https://www.youtube.com/watch?v=HlfjpstqXwE", "Execute **anything** in neovim (now customizable)" %}
+- {% aTargetBlank "https://www.barbarianmeetscoding.com/notes/neovim-plugins/",
+  "Neovim Plugins - Enhancing your Neovim editor with awesome plugins" %}
 
 ## Basics
 
@@ -49,6 +51,7 @@ containing the values of all arguments.
 ```lua
 function Greet(opts)
   -- vim.print(opts) -- pretty prints a value for debugging
+  -- Also see vim.inspect(value).
   local name = #opts.fargs > 0 and opts.args or "World"
   name = name:gsub('"', '') -- removes double quotes
   print("Hello, " .. name .. "!")
