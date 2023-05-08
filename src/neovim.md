@@ -356,6 +356,9 @@ To configure using Lua:
   }
   ```
 
+  Among other things, these key mappings enable saving changes in a buffer
+  by pressing ctrl-s in either normal or insert mode.
+
 - In the `options.lua` file, return a table like the following:
 
   ```lua
