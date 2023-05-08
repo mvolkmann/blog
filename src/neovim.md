@@ -19,6 +19,9 @@ For help on using Lua to configure Neovim see:
 
 - {% aTargetBlank "https://neovim.io/doc/user/lua-guide.html#lua-guide", "Neovim Lua Guide" %}
 - {% aTargetBlank "https://neovim.io/doc/user/lua.html", "Neovim Lua" %}
+- {% aTargetBlank "https://github.com/vscode-neovim/vscode-neovim",
+  "vscode-neovim" %} is a VS Code extension that provides "almost fully
+  feature-complete VIM integration by utilizing Neovim as a backend".
 
 ## Vim Review
 
