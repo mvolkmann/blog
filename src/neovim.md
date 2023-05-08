@@ -536,6 +536,11 @@ To update AstroNvim after it has been installed:
 - If you copied to `user` directory somewhere else,
   move it back to its original location.
 
+If your `~/config` directory is in your own Git repository,
+it may also be necessary to edit `~/.config/nvim/.gitignore`
+to delete or comment out the line `lua/user`.
+Updating AstroNvim seems to add that line back in.
+
 ### Configuring AstroNvim
 
 AstroNvim configuration files are stored in `~/.config/nvim`.
