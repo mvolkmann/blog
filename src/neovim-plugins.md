@@ -304,6 +304,13 @@ Read ":help autocmd"
 
 See an example Neovim plugin in {% aTargetBlank
 "https://github.com/mvolkmann/autorun.nvim", "GitHub" %}.
+This opens a new buffer in a vertical split,
+prompts for a file matching pattern (ex. `*.lua`), and
+prompts for a command to run if any matching files are saved
+(ex. `lua demo.lua`).
+Each time the command is run, the contents of the new buffer
+are replaced anything the command writes to stdout or stderr.
+This is great for debugging apps that have command-line output.
 
 To configure use of this plugin, create the file
 `~/.config/nvim/lua/user/plugins/autorun.lua` containing the following:
