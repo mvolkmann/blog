@@ -342,13 +342,13 @@ Setting `config` to `true` is the equivalent of the following:
   end
 ```
 
-## Plugin Caching
+## Library/Plugin Caching
 
-Plugins are cached after they are loaded by the `require` function.
-Additional calls to `require` for a loaded plugin
+Lua caches all libraries loaded by the `require` function.
+Additional calls to `require` for a loaded library
 will find it in the cache and return it without reloading it.
-To force a plugin to reload, perhaps because its code has changed,
-remove it from the cache before calling `require` with the following:
+To force a library to reload, perhaps because its code has changed,
+remove it from the cache and then call `require` as follows:
 
 ```lua
 package.loaded.{plugin-name} = nil
