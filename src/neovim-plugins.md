@@ -50,7 +50,6 @@ containing the values of all arguments.
 
 ```lua
 function Greet(opts)
-  -- vim.print(opts) -- pretty prints a value for debugging
   -- Also see vim.inspect(value).
   local name = #opts.fargs > 0 and opts.args or "World"
   name = name:gsub('"', '') -- removes double quotes
@@ -306,6 +305,14 @@ This should display "Hello, World!" in the message area at the bottom.
 I configured the key mapping <leader>x
 to write and source the current buffer.
 This is useful when developing a Neovim plugin.
+
+## Debugging
+
+When debugging a plugin it is helpful to print values of variables.
+The function `vim.print` performs pretty-printing of all kinds of values
+including tables.
+The function `vim.inspect` is similar,
+but returns a pretty-printed string rather than printing anything.
 
 ## Auto Commands
 
