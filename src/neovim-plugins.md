@@ -265,12 +265,14 @@ To build a Neovim plugin that can be shared with others:
 
 ## Installing a Plugin
 
-There are several popular plugin managers for Neovim.
-One that is highly recommended is {% aTargetBlank
-"https://github.com/folke/lazy.nvim", "lazy.nvim" %}.
-The instructions here assume that this plugin manager is being used.
+When `nvim` is started it runs all `.lua` files found in the
+`~/.config/nvim/lua/plugins` and `~/.config/nvim/lua/user/plugins` directories.
+A popular approach for configuring plugins is to create the file
+`~/.config/nvim/lua/user/plugins/{plugin-name}.lua`
+for each plugin to be configured.
 
-Create the file `~/.config/nvim/lua/user/plugins/greet.lua`
+For example, to configure a plugin named "greet",
+create the file `~/.config/nvim/lua/user/plugins/greet.lua`
 containing the following:
 
 ```lua
@@ -280,7 +282,13 @@ return {
 }
 ```
 
-In Neovim, enter `:Lazy sync`
+There are several popular plugin managers for Neovim.
+One that is highly recommended is {% aTargetBlank
+"https://github.com/folke/lazy.nvim", "lazy.nvim" %}.
+If this is being used, enter `:Lazy sync` to install
+any missing plugins that were configured,
+update any that have a new version,
+and remove any that are no longer being used.
 
 ## Testing a Plugin
 
