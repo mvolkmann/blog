@@ -323,6 +323,15 @@ or both.
 To configure using Lua:
 
 - Create the directory `~/.config/nvim/lua/user`.
+  Alternatively, create this directory somewhere else
+  and create a symbolic link to it.
+  For example, I created the directory `~/MyUnixEnv/nvim/lua/user`
+  and created a symbolic link with the following:
+
+  ```bash
+  cd ~/.config/nvim/lua
+  ln -s ~/MyUnixEnv/nvim/lua/user user
+  ```
 
 - If your `~/.config` directory is in a Git repo (and it probably should be),
   remove the line `lua/user` from `~/.config/nvim/.gitignore`
@@ -550,6 +559,9 @@ To update AstroNvim after it has been installed:
 - Enter `:AstroUpdatePackages`.
 - If you copied to `user` directory somewhere else,
   move it back to its original location.
+- If you created a symbolic link to to somewhere else,
+  recreate the symbolic link using the instructions in the
+  "Configuring Neovim" section above.
 
 If your `~/config` directory is in your own Git repository,
 it may also be necessary to edit `~/.config/nvim/.gitignore`
