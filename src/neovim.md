@@ -1153,8 +1153,41 @@ A better way to manage Git repositories from inside Neovim is to use
 {% aTargetBlank "https://github.com/jesseduffield/lazygit", "lazygit" %}
 which is a terminal UI for executing Git commands.
 
+To install lazygit, enter `brew install lazygit`.
+It is also recommended to install {% aTargetBlank
+"https://github.com/dandavison/delta", "delta" %} to get
+side-by-side diffs and more.
+To install this, enter `brew install git-delta`
+which installs the `delta` command.
+
+To customize the configuration of lazygit, create the file
+`~/Library/Application\ Support/lazygit/config.yml`.
+For example:
+
+```lua
+gui:
+  theme:
+    selectedLineBgColor:
+      - underline
+    selectedRangeBgColor:
+      - underline
+git:
+  paging:
+    colorArg: never
+    pager: delta --dark --paging=never
+```
+
 To launch lazygit from a terminal window,
 cd to a repository directory and enter `lazygit`.
+
+To enable running lazygit from inside Neovim, create the file
+`~/.config/nvim/lua/user/plugins/lazygit.lua` containing the following:
+
+```lua
+return {
+  "kdheepak/lazygit.nvim"
+}
+```
 
 To launch lazygit from within AstroNvim,
 enter `<leader>gg` (for "Git GUI") or `<leader>tl` (for "terminal lazygit").
@@ -1191,28 +1224,6 @@ This opens a dialog where a shell command can be entered.
 Press `return` to execute it.
 The output temporarily replaces the lazygit UI.
 Press `return` again to return to the lazygit UI.
-
-To customize the configuration of lazygit, create the file
-`~/.config/nvim/lua/user/plugins/lazygit.lua`.
-For example:
-
-```lua
-return {
-  "kdheepak/lazygit.nvim"
-  -- TODO: I want this to configure side-by-side diffs using the delta pager
-  -- TODO: which must be installed, but this is not working!
-  -- TODO: See https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Pagers.md.
-  --[[
-  config = function()
-    require("lazygit").setup {
-      pager = "delta",
-      delta = "side-by-size"
-    }
-  end,
-  event = "User AstroFile" -- need this?
-  --]]
-}
-```
 
 See {% aTargetBlank "https://github.com/kdheepak/lazygit.nvim/issues/92",
 "issue 92" %} which is related to configuring lazygit.
