@@ -45,6 +45,13 @@ To scroll the current buffer based on the line under the cursor:
 | `z<return>` | also moves to top        |
 | `zz`        | moves to vertical center |
 
+### Messages
+
+To see messages that were output by commands and functions,
+enter `:messages` or just `:mes`.
+
+To clear the messages, enter `:messages clear` or just `:mes clear`.
+
 ### Numbers
 
 To increment the number under the cursor, press `ctrl-a`.
