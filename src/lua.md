@@ -1166,8 +1166,17 @@ until condition
 ```
 
 Loops can use the `break` keyword to exit early.
-The `continue` keyword for advancing to the next iteration
-is not currently supported.
+A `continue` keyword for advancing to the next iteration
+is not supported. This can be simulated with a `goto`.
+For example:
+
+```lua
+for k, v in pairs(t) do
+  if v == 0 then goto continue
+  -- Do something here.
+  ::continue::
+end
+```
 
 ## Iterators
 
