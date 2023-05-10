@@ -261,6 +261,8 @@ To build a Neovim plugin that can be shared with others:
    describes the functionality of the plugin and the steps to install it.
 1. Create the directories `lua` and `plugin` directory inside it.
 1. Create the file `{plugin-name}.lua` inside the `lua` directory.
+   Alternatively, create a subdirectory whose name is the plugin name
+   and create the file `init.lua` inside it.
 1. In this file, define and return a Lua module. For example:
 
    ```lua
