@@ -652,6 +652,16 @@ function print(...)
 end
 ```
 
+Alternatively, define a `log` function like the following.
+For example, this can be called with `log("score", score)`
+to log the value of a variable.
+
+```lua
+function log(name, value)
+  print(string.format("%s = %s", name, value)
+end
+```
+
 The `io.write` function does not add any characters between values
 and does not add a newline at the end.
 Boolean values must be converted to strings

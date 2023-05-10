@@ -517,11 +517,20 @@ return {
 
 Open a source file containing TODO comments and enter `:TodoQF`.
 
+## Highlight Groups
+
+A highlight group associate a name with a
+foreground color, background color, and style such a bold.
+
+To see a list of defined highlight groups, enter `:hi`.
+
 ## Neovim API
 
 The {% aTargetBlank "https://neovim.io/doc/user/api.html", "Neovim API" %}
 provides functions in many categories.
 Each of these are summarized in the following subsections.
+
+To see help for a given function, enter `:h {function-name}`.
 
 ### Autocmd Functions
 
