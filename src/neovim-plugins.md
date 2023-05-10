@@ -94,7 +94,12 @@ We need to do this so sourcing this file multiple times
 doesn't register multiple callbacks to run when the event occurs.
 
 To see a list of currently defined augroups, enter `:au`.
-To delete a given augroup, enter `:au! {name}`.
+
+To display the augroup with a given name, enter `:au {group-name}`
+
+To delete the augroup with a given name, enter `:au! {group-name}`.
+
+To see a list of augroups defined for a given event, enter `:au {event-name}`.
 
 ```lua
 function Greet(name)
