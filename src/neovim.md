@@ -1165,16 +1165,9 @@ To customize the configuration of lazygit, create the file
 For example:
 
 ```lua
-gui:
-  theme:
-    selectedLineBgColor:
-      - underline
-    selectedRangeBgColor:
-      - underline
 git:
   paging:
-    colorArg: never
-    pager: delta --dark --paging=never
+    pager: delta
 ```
 
 To launch lazygit from a terminal window,
