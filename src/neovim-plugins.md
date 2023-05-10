@@ -254,24 +254,53 @@ To build a Neovim plugin that can be shared with others:
    end in ".nvim". For example, "greet.nvim"
 1. Create a `README.md` file in this directory that
    describes the functionality of the plugin and the steps to install it.
-1. Create a `lua` directory inside it.
+1. Create the directories `lua` and `plugin` directory inside it.
 1. Create the file `{plugin-name}.lua` inside the `lua` directory.
 1. In this file, define and return a Lua module. For example:
 
    ```lua
    local M = {}
 
-   M.greet = function() print("Hello!") end
+   M.greet = function(name)
+     name = name or "World"
+     print("Hello, " .. name .. "!")
+   end
 
-   -- It is a convention for plugins to have a `setup` function
+   -- Some plugins define a `setup` function
    -- that can be called to configure it.
-   -- The plugin managers Lazy and Packer both assume this.
    M.setup = function()
-     -- Define user commands here.
-     -- Define key mappings here.
+     -- This is one place where key mappings, user commands,
+     -- and autocommands can be defined.
+     -- Another is in a .lua file inside the plugin directory
+     -- described below.
    end
 
    return M
+   ```
+
+1. Create the file `{plugin-name}.lua` inside the `plugin` directory.
+   This is where key mappings, user commands, and autocommands
+   related to the plugin should be defined.
+   The code in this file is run when the plugin is required.
+
+   ```lua
+   vim.api.nvim_create_user_command(
+     "Greet",
+     function(opts)
+       -- vim.print(opts) -- for debugging
+
+       local greet = require("greet").greet
+
+       -- Get the first argument.
+       local arg1 = opts.fargs[1]
+
+       -- Remove surrounding quotes.
+       local unquoted = arg1 and arg1:gsub('"(%w*)"', "%1")
+
+       greet(unquoted or arg1)
+     end,
+     {}
+   )
    ```
 
 1. Create a GitHub repository for the plugin and push this directory to it.
