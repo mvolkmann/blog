@@ -74,7 +74,7 @@ Cons of Lua include:
   but indexing into such strings does not account for their size.
   See {% aTargetBlank "http://lua-users.org/wiki/LuaUnicode", "Lua Unicode" %}.
 
-- variables and functions are global by default,s
+- variables and functions are global by default,
   but can be declared `local`
 
 For a more extensive list of pros and cons, see {% aTargetBlank
@@ -795,6 +795,17 @@ print(MyGlobal) -- demo
 print(_G["MyGlobal"]) -- demo
 print(_G.MyGlobal) -- demo
 ```
+
+The module `strict.lua` can be used to raise an error if
+an attempt is made to get or set a non-existent global variable.
+To use this:
+
+1. Copy the file `strict.lua` from {% aTargetBlank
+   "https://github.com/deepmind/strict/blob/master/strict.lua",
+   "deepmind/strict" %}.
+1. Place the file in `/usr/local/share/lua/5.4/`
+   which is a directory in `package.path`.
+1. Run code with `lua -l strict {file-name}.lua`
 
 ## Booleans
 
