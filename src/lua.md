@@ -1790,6 +1790,9 @@ print(mm.some_variable) -- some value
 mm.some_function(1, 2) -- some_function was passed 1 and 2
 ```
 
+By convention, module members whose names begin with an underscore
+are considered private.
+
 A Lua "package" is a collection of modules.
 
 ## Metatables

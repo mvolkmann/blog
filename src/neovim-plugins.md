@@ -73,10 +73,28 @@ For example:
 :Greet "Mark"
 ```
 
-The third way to run the function is to create an autocommand
-and cause the action that triggers it.
+The third way to run the function is to create an autocommand.
+An autocommand associates a function with an event.
+Any number of autocommands can be created for the same event.
+When the event occurs, all of them are run.
+
+Autocommands can be defined to only run
+when their event occurs in a specific buffer.
+
 For this approach we can return to a simpler version of the `Greet` function.
 The event in this example is writing any buffer whose file name ends in `.lua`.
+
+Placing the autocommands inside an augroup allows us to clear
+existing autocommands in the group every time the group is recreated.
+This is done by specifying "clear = true" (the default)
+when creating an augroup.
+This allows code that creates an augroup and
+defines autocommands in the group to be idempotent.
+We need to do this so sourcing this file multiple times
+doesn't register multiple callbacks to run when the event occurs.
+
+To see a list of currently defined augroups, enter `:au`.
+To delete a given augroup, enter `:au! {name}`.
 
 ```lua
 function Greet(name)
@@ -85,10 +103,6 @@ function Greet(name)
 end
 
 vim.api.nvim_create_autocmd("BufWritePost", {
-  -- Placing the autocmd inside an augroup allows us to clear
-  -- existing autocmds in the group every time this file is sourced.
-  -- We need to do this so sourcing this file multiple times
-  -- doesn't register multiple callbacks to run when the event occurs.
   group = vim.api.nvim_create_augroup("autocmd", { clear = true }),
   pattern = "*.lua",
   callback = function() Greet("Mark") end
