@@ -274,20 +274,20 @@ To build a Neovim plugin that can be shared with others:
    end
 
    -- Some plugins define a `setup` function
-   -- that can be called to configure it.
-   M.setup = function()
-     -- This is one place where key mappings, user commands,
-     -- and autocommands can be defined.
-     -- Another is in a .lua file inside the plugin directory
-     -- described below.
+   -- that users can call to configure the plugin.
+   -- This is typically passed a table of options.
+   M.setup = function(opts)
+     -- Configure the plugin here.
    end
 
    return M
    ```
 
 1. Create the file `{plugin-name}.lua` inside the `plugin` directory.
-   This is where key mappings, user commands, and autocommands
-   related to the plugin should be defined.
+   This is a good place to configure user commands and autocommands
+   related to the plugin that do no require options provided by the user.
+   Key mappings can also be defined here, but generally this is
+   left to users so they can select the mappings they prefer.
    The code in this file is run when the plugin is required.
 
    ```lua
