@@ -897,7 +897,7 @@ but are bit simpler and not quite as powerful.
 Regular expressions are not directly supported in Lua.
 The reason for this is that
 the code to support patterns is much smaller than
-the code required to support regular expressions.
+the code required to support regular expressions (only about 15%).
 Opting out of regular expression support
 helps achieve the Lua goal of being small.
 
