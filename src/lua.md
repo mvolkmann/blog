@@ -901,7 +901,7 @@ the code required to support regular expressions (only about 15%).
 Opting out of regular expression support
 helps achieve the Lua goal of being small.
 
-Patterns are used in the string library functions
+Patterns are used in the `string` library functions
 `find`, `gmatch`, `gsub`, and `match`.
 
 Characters referred to as "magic characters" have special meaning in patterns.
