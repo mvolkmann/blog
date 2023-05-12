@@ -60,6 +60,11 @@ and use the following instead of an anchor tag:
 
 Routes can be in deeper subdirectories to require a deeper URL path.
 
+## Outlet component
+
+The `Outlet` component rendered in `root.tsx`
+renders the content of the current page.
+
 ## Styling
 
 Global CSS can be defined in a file inside the `app` directory.

@@ -1169,6 +1169,14 @@ To define custom snippets:
          {
            "language": "markdown",
            "path": "./markdown.json"
+         },
+         {
+           "language": "typescript",
+           "path": "./javascript.json"
+         },
+         {
+           "language": "typescriptreact",
+           "path": "./javascript.json"
          }
        ]
      }
