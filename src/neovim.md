@@ -2019,6 +2019,34 @@ const person = {firstName: 'Mark', lastName: 'Volkmann'};
 
 Consider adding a "sj" key mapping that runs the `TSJToggle` command.
 
+#### vim-bbye
+
+When there are multiple open buffers and the `:bdelete` or `:close` command
+is issued, closes the buffer AND the window it is inside.
+Typically there is only one window, so Vim exits.
+And typically this is NOT the desired behavior!
+
+To fix this, install the {% aTargetBlank "https://github.com/moll/vim-bbye",
+"vim-bbye" %} plugin.
+This provides the commands `Bdelete` and `Bwipeout`.
+The `Bdelete` command "removes the file from the buffer list and
+clears its options, variables and mappings. However, it remains in the
+jumplist, so Ctrl-o takes you back and reopens the file."
+The `Bwipeout` command removes the file from the buffer list and the jumplist.
+
+To configure this plugin, create the file
+`~/.config/nvim/lua/user/plugins/vim-bbye.lua`
+containing the following:
+
+```lua
+return {
+  "moll/vim-bbye"
+}
+```
+
+I prefer to always use `Bwipeout` in places of the builtin `bdelete` command.
+To do this, enter `:Bw` in place of `:bd`.
+
 ### AstroNvim Community
 
 The {% aTargetBlank "https://github.com/AstroNvim/astrocommunity",
