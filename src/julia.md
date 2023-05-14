@@ -50,9 +50,9 @@ for x = 0:5
 end
 ```
 
-## Jupyter Notebook
+## Jupyter Notebooks
 
-Jupyter Notebook can be configured to run Julia code as described
+Jupyter Notebooks can be configured to run Julia code as described
 {% aTargetBlank "https://datatofish.com/add-julia-to-jupyter/", "here" %}.
 
 ## Outstanding Queestions

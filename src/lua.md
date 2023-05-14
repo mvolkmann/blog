@@ -199,6 +199,9 @@ that typically result in better performance.
 LuaJIT is implemented by a separate team from the one that maintains Lua.
 
 LuaJIT is based on Lua 5.1, so it is missing features of Lua added since then.
+From Paul Ducklin, Lua and LuaJIT are
+"independent, incommensurate, and unlikely-ever-to-be-reunited projects
+that have been on very different journeys for more than 15 years now."
 
 From {% aTargetBlank "https://api7.ai/learning-center/openresty/luajit-vs-lua",
 "api7.ai" %}:
