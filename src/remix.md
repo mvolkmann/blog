@@ -122,3 +122,7 @@ export async function loader({params}) {
   return data;
 }
 ```
+
+## Spinners
+
+See {% aTargetBlank "https://github.com/smeijer/spin-delay", "spin-delay" %}.
