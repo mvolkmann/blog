@@ -48,12 +48,21 @@ f(x) = 3x^2 + 7x - 2 3 # polynomial definition
 for x = 0:5
   println("f($x) = $(f(x))")
 end
+
+# Can precede a variable with a constant for implicit multiplication.
+f(x, y) = 3x^2 + 5x*y - 6y^2 + 4x - y + 8
+
+# Can use Unicode characters and π is a predefined constant.
+circleArea(r) = π*r^2
 ```
 
 ## Jupyter Notebooks
 
 Jupyter Notebooks can be configured to run Julia code as described
 {% aTargetBlank "https://datatofish.com/add-julia-to-jupyter/", "here" %}.
+
+A popular alternative is {% aTargetBlank "https://juliahub.com", "JuliaHub" %}
+which is the successor to JuliaBox.
 
 ## Outstanding Queestions
 
