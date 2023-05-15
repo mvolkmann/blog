@@ -30,6 +30,9 @@ Julia source files have an extension of `.jl`.
 Julia is great for applications that involve math.
 It supports a very concise syntax for defining functions like polynomials.
 
+Julia uses the {% aTargetBlank "https://llvm.org", "LLVM" %}
+compiler infrastructure.
+
 ## Installing
 
 To install in macOS using Homebrew, enter `brew install julia`.
