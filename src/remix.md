@@ -107,7 +107,12 @@ For example:
 import type { LinksFunction } from "@remix-run/node";
 import styles from "./Demo.css";
 
-export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
+// Objects in the returned array can also contain a "media" property
+// to specify a media query that must be satisfied to use the styles.
+// For example, media: "screen and (min-width: 768px)"
+export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: styles }
+];
 ```
 
 Remix only looks for "links" and "meta" functions in route components.
@@ -136,6 +141,9 @@ This must be imported from "@remix-run/react".
 The `Link` `to` prop supports absolute and relative paths.
 Absolute paths begin with a slash.
 Relative paths do not and are appended to the current URL.
+
+To include a link that refreshes the current page,
+use `<Link to=".">Refresh</Link>`.
 
 ## Loaders
 
