@@ -99,6 +99,86 @@ The `Link` `to` prop supports absolute and relative paths.
 Absolute paths begin with a slash.
 Relative paths do not and are appended to the current URL.
 
+## Loaders
+
+Any route can export a `loader` function that is optionally async.
+This is invoked before the route is rendered.
+It processes GET requests to the route.
+It is used to fetch data needed by the page.
+
+For example:
+
+```ts
+export function loader({ request }) {
+  // Could authenticate with something like
+  // await requireUserId(request);
+  // which could throw if the user is not authenticated.
+
+  // We could support a query parameter like this:
+  // const query = new URL(request.url).searchParams.get('query') ?? '';
+  // const todos = await searchTodos(query);
+  // Can also return other content types including plain text.
+  // return json(todos);
+
+  return getTodos();
+  // TODO: Why doesn't this also work?
+  // return json(getTodos())
+}
+```
+
+## Actions
+
+Any route can export an `action` function that is optionally async.
+These are invoked when a `form` on the page is submitted.
+They only exist and run on the server, never in the browser.
+These enable implementing both client and server functionality
+for a route in the same source file.
+
+`action` functions process POST requests to the route.
+Often it is also used to process requests that would have used `PUT` or `DELETE`
+if those were supported by HTML forms.
+As a workaround, an property named "intent" can be used to signal
+to the `action` function whether it should perform
+a create, update, or delete operation.
+
+For example:
+
+```tsx
+// Note how the front and back end are implemented in the same file.
+export const action: ActionFunction = async ({ request }) => {
+  try {
+    // No need to use the Fetch API or axios because
+    // we are already running in the server.
+    let todos = await getTodos();
+    const formData = await request.formData();
+    const intent = formData.get("intent") as string;
+
+    if (intent === "add") {
+      await sleep(1); // to demonstrate "isSubmitting" state
+      const id = Date.now()
+      const todo = { id, text: formData.get("text") };
+      todos.push(todo);
+      await saveTodos(todos);
+    } else if (intent?.startsWith("delete-")) {
+      const id = Number(intent.split("-")[1]);
+      const index = todos.findIndex((t: Todo) => t.id === id)
+      if (index === -1) {
+        return json(
+          { message: `No todo with id ${id} found.` },
+          { status: 404 }
+        );
+      }
+      todos.splice(index, 1);
+      await saveTodos(todos);
+    }
+
+    return null; // stays on current page
+    // return redirect(path); // redirects to another page
+  } catch (e) {
+    console.error("todos.tsx action:", e);
+  }
+};
+```
 
 ## Prefetching
 
@@ -106,6 +186,11 @@ The `Link` and `NavLink` components can be configured
 to prefetch all data they need when the user hovers over them.
 This makes rendering the associated routes faster.
 To this, add the prop `prefetch="intent"`.
+
+## Nested Routes
+
+Any route can render its own HTML and the HTML of a child route
+by including `<Outlet />` in its JSX.
 
 ## Dynamic Routes
 
@@ -147,3 +232,9 @@ export async function loader({params}) {
 ## Spinners
 
 See {% aTargetBlank "https://github.com/smeijer/spin-delay", "spin-delay" %}.
+
+## Building
+
+To prepare a Remix app for deployment, enter `npm build`.
+The generated files for the server are placed in the `build` directory.
+The generated files for the client are placed in the `public/build` directory.
