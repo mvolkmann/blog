@@ -6,6 +6,13 @@ layout: topic-layout.njk
 
 ## Overview
 
+{% aTargetBlank "https://remix.run", "Remix" %} is
+"a full stack web framework that lets you
+focus on the user interface and work back through web standards
+to deliver a fast, slick, and resilient user experience."
+
+Remix is heavily based on React Router.
+
 ## Creating a new project
 
 1. Install Node.js.
@@ -69,3 +76,49 @@ renders the content of the current page.
 
 Global CSS can be defined in a file inside the `app` directory.
 This can be included in `app/root.jsx` to make it available to all pages.
+
+## Links
+
+To create a link to another page, use the `Link` component.
+This must be imported from "@remix-run/react".
+
+The `Link` `to` prop supports absolute and relative paths.
+Absolute paths begin with a slash.
+Relative paths do not and are appended to the current URL.
+
+## Dynamic Routes
+
+Dynamic routes have access to data from the URL used to render them.
+
+Dynamic routes are defined by creating a source file in the `routes` directory
+whose name contains `$`.
+For example, `notes.$id.tsx`.
+The `.` after `notes` is translated to a `/`, so the path for visiting this page
+will be `notes/{some-id}`.
+
+For example:
+
+```ts
+import {useLoaderData} from '@remix-run/react';
+
+export default function MyDynamicPage() {
+  const data = useLoaderData();
+  return (
+    <main>
+      <p>{data.someProperty}</p>
+    </main>
+  )
+}
+
+export async function loader({params}) {
+  const id = params.id;
+  const data = await getMyData(id);
+  if (!data) {
+    throw json(
+      {message: 'Could not find data.'},
+      {status: 404}
+    );
+  }
+  return data;
+}
+```
