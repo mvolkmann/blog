@@ -42,13 +42,53 @@ Prisma consists of three parts:
   when changes are required.
 - "Prisma Studio" is a "GUI to view and edit data in your database".
 
-## Steps to Use
+## Installing
 
-1. Define a Prisma schema for a database.
+Enter the following commands to create a project
+that uses Prisma, TypeScript, and SQLite.
+Slightly different steps are needed to add use of Prisma to an existing project
+and select different options.
+
+1. `mkdir my-project`
+1. `cd my-project`
+1. `npm init -y`
+1. `npm install -D typescript ts-node @types/node`
+1. `npm tsc --init`
+1. `npm install -D prisma`
+1. `npx prisma init --datasource-provider sqlite`
+1. Add your schema definition in the file `prisma/schema.prisma`.
    This has it's own syntax which is similar to DDL, but not identical.
-   This can be generated from the schema of an existing database.
-1. Install Prisma Client by entering "npm install @prisma/client".
-1. Generate code for accessing the database by entering "prisma generate".
+   This can also be generated from the schema of an existing database.
+   See "Example Schema" below.
+1. `npx prisma migrate dev --name init`
+1. `npm install @prisma/client`
+1. `prisma generate`
+
+## Example Schema
+
+This example comes from the Prisma {% aTargetBlank
+"https://www.prisma.io/docs/getting-started/quickstart", "Quickstart" %} page.
+
+```
+model User {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
+  posts Post[]
+}
+
+model Post {
+  id        Int     @id @default(autoincrement())
+  title     String
+  content   String?
+  published Boolean @default(false)
+  author    User    @relation(fields: [authorId], references: [id])
+  authorId  Int
+}  id    Int     @id @default(autoincrement())
+```
+
+## Creating Client Instance
+
 1. Create an instance of the generated `PrismaClient` with the following code:
 
    ```js
@@ -63,7 +103,7 @@ The following example creates a User record and an associated Address record.
 ```js
 const user = await prisma.user.create({
   data: {
-    // Can ids be auto-generated?
+    // id is an autoincrement property.
     name: 'Mark Volkmann',
     email: 'mark@gmail.com',
     address: {
@@ -120,5 +160,3 @@ const users = await prisma.user.deleteMany({
   where: { state: 'CA' },
 });
 ```
-
-
