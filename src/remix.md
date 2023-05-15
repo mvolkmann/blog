@@ -93,6 +93,13 @@ This can be included in `app/root.jsx` to make it available to all pages.
 Styling that is specific to a page or component can be defined in `.css` files
 that are imported into the source file for the page or component.
 
+CSS files for components can be placed in the same directory
+as the corresponding `.tsx` file
+and imported using the path `./{some-name}.css`.
+
+CSS files for routes should be placed in the `app/styles` directory
+and imported using the path `~/styles/{some-name}.css`.
+
 For example:
 
 ```ts
