@@ -90,6 +90,35 @@ renders the content of the current page.
 Global CSS can be defined in a file inside the `app` directory.
 This can be included in `app/root.jsx` to make it available to all pages.
 
+Styling that is specific to a page or component can be defined in `.css` files
+that are imported into the source file for the page or component.
+
+For example:
+
+```ts
+import styles from "./Demo.css";
+
+export const links = () => [{ rel: "stylesheet", href: styles }];
+```
+
+Remix only looks for "links" and "meta" functions in route components.
+So users of components (not pages) need to call these functions
+to get the array and spread it into their own links array.
+This pattern is called "surfacing links" in the Remix docs.
+
+For example, the file `app/routes/some-route.tsx` could contain the following:
+
+```ts
+import Demo, { links as demoLinks } from "~/components/Heading";
+
+import styles from "~/styles/some-route.css";
+
+export const links = () => [
+  { rel: "stylesheet", href: styles },
+  ...demoLinks(),
+];
+```
+
 ## Links
 
 To create a link to another page, use the `Link` component.
@@ -124,6 +153,13 @@ export function loader({ request }) {
   // TODO: Why doesn't this also work?
   // return json(getTodos())
 }
+```
+
+To access the data in the page component, use the `useLoaderData` hook.
+For example:
+
+```ts
+const todos: Todo[] = useLoaderData();
 ```
 
 ## Actions
