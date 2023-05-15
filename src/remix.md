@@ -13,6 +13,16 @@ to deliver a fast, slick, and resilient user experience."
 
 Remix is heavily based on React Router.
 
+The hooks `useState` and `useEffect` can be used in Remix apps,
+but they tend to be used much less than in standard React apps.
+
+Remix apps use a database for application state instead of a library like Redux
+
+## Resources
+
+- {% aTargetBlank "https://www.epicweb.dev/", "EpicWeb.dev" %} -
+  hosts articles and tutorials on Remix from Kent C. Dodds
+
 ## Creating a new project
 
 1. Install Node.js.
@@ -48,6 +58,9 @@ Often no changes are needed in this file.
 The `app/routes` directory defines all the routes of the app
 that are mapped to URL paths.
 This begins with only the file `_index.tsx`.
+To create additional routes, add more `.tsx` files
+and subdirectories in this directory.
+Subdirectories define URL paths and support nested routes.
 
 To create a new page in the app,
 create a new file in the `app/routes` directory.
@@ -85,6 +98,14 @@ This must be imported from "@remix-run/react".
 The `Link` `to` prop supports absolute and relative paths.
 Absolute paths begin with a slash.
 Relative paths do not and are appended to the current URL.
+
+
+## Prefetching
+
+The `Link` and `NavLink` components can be configured
+to prefetch all data they need when the user hovers over them.
+This makes rendering the associated routes faster.
+To this, add the prop `prefetch="intent"`.
 
 ## Dynamic Routes
 
