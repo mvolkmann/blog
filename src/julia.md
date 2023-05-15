@@ -43,14 +43,14 @@ To execute a Julia source file, enter `julia {file-name}.jl`.
 ## Examples
 
 ```julia
-f(x) = 3x^2 + 7x - 2 3 # polynomial definition
+# Can precede a variable with a constant for implicit multiplication.
+f(x) = 3x^2 + 7x - 2
 
 for x = 0:5
   println("f($x) = $(f(x))")
 end
 
-# Can precede a variable with a constant for implicit multiplication.
-f(x, y) = 3x^2 + 5x*y - 6y^2 + 4x - y + 8
+g(x, y) = 3x^2 + 5x*y - 6y^2 + 4x - y + 8
 
 # Can use Unicode characters and π is a predefined constant.
 circleArea(r) = π*r^2
