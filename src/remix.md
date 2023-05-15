@@ -99,18 +99,20 @@ and imported using the path `./{some-name}.css`.
 
 CSS files for routes should be placed in the `app/styles` directory
 and imported using the path `~/styles/{some-name}.css`.
+The tilde (`~`) at the beginning of the path maps to the `app` directory.
 
 For example:
 
 ```ts
+import type { LinksFunction } from "@remix-run/node";
 import styles from "./Demo.css";
 
-export const links = () => [{ rel: "stylesheet", href: styles }];
+export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
 ```
 
 Remix only looks for "links" and "meta" functions in route components.
-So users of components (not pages) need to call these functions
-to get the array and spread it into their own links array.
+So users of components (not pages) need to import and call those functions
+to get arrays and spread them into their own links array.
 This pattern is called "surfacing links" in the Remix docs.
 
 For example, the file `app/routes/some-route.tsx` could contain the following:
