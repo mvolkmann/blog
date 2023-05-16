@@ -384,6 +384,17 @@ export default function Todos() {
 Consider using {% aTargetBlank "https://zod.dev", "zod" %}
 for schema validation.
 
+## Client Only Code
+
+To prevent code from running on the server and only run it on the client-side,
+surround the code with a check like the following:
+
+```js
+if (typeof window !== 'undefined') {
+  // Do client-side things here.
+}
+```
+
 ## Building
 
 To prepare a Remix app for deployment, enter `npm build`.
