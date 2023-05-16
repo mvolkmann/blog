@@ -16,7 +16,9 @@ Remix is heavily based on React Router.
 The hooks `useState` and `useEffect` can be used in Remix apps,
 but they tend to be used much less than in standard React apps.
 
-Remix apps use a database for application state instead of a library like Redux
+Remix apps use a database for application state instead of a library like Redux.
+
+Remix automatically provides route-level code splitting.
 
 ## Resources
 
