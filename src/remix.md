@@ -155,7 +155,10 @@ and is used to fetch data needed by the page.
 For example:
 
 ```ts
-export function loader({ request }) {
+
+type LoaderData = Todo[];
+
+export function loader({ params, request }) {
   // We could authenticate with something like
   // await requireUserId(request);
   // which could throw if the user is not authenticated.
@@ -176,7 +179,7 @@ To access the data in the page component, use the `useLoaderData` hook.
 For example:
 
 ```ts
-const todos: Todo[] = useLoaderData();
+const todos = useLoaderData<Todo[]>();
 ```
 
 ## Actions
@@ -197,6 +200,8 @@ a create, update, or delete operation.
 For example:
 
 ```tsx
+import {redirect} from '@remix-run/node';
+
 // Note how the front and back end are implemented in the same file.
 export const action: ActionFunction = async ({ request }) => {
   try {
@@ -227,6 +232,9 @@ export const action: ActionFunction = async ({ request }) => {
 
     return null; // stays on current page
     // return redirect(path); // redirects to another page
+    // In the case of a POST request, this could redirect
+    // to a page that displays the newly created resource.
+    // For example, return redirect(`/todo/${todo.id}`);
   } catch (e) {
     console.error("todos.tsx action:", e);
   }
@@ -244,6 +252,9 @@ To this, add the prop `prefetch="intent"`.
 
 Any route can render its own HTML and the HTML of a child route
 by including `<Outlet />` in its JSX.
+
+When a nested route is visited, all of its ancestor routes are also rendered.
+This includes calling all the `loader` functions in the ancestor routes.
 
 ## Resource Routes
 
@@ -292,6 +303,84 @@ export async function loader({params}) {
 ## Spinners
 
 See {% aTargetBlank "https://github.com/smeijer/spin-delay", "spin-delay" %}.
+
+## Input Validation
+
+Remix favors validating input after a submit button is pressed.
+The `action` function can call custom functions to validate each input.
+It constructs an object containing a `fieldErrors` property
+whose value is an object containing an error message for each invalid input.
+The React component that renders the form can then
+display an error message below each invalid input.
+The following code demonstrates this approach.
+
+```ts
+import { type ActionFunction } from "@remix-run/node";
+
+type ActionData = {
+  fields: { text?: string }, // values entered for each field
+  fieldErrors: { text?: string }, // error messages for each field
+  formError?: string // describes error at form level, not individual input
+}
+
+// Define one function like this for each input to be validated.
+function validateText(text: string) {
+  if (text.length < 3) {
+    return "Todo text must be at least three characters."
+  }
+}
+
+export const action: ActionFunction =
+  async ({ request }): Promise<Response | ActionData> => {
+    const fieldErrors = {
+      // Add a line like this for each form input.
+      text: validateText(text)
+    };
+
+    // This determines if there are one or more validation errors.
+    if (Object.values(fieldErrors).some(Boolean)) {
+      return { fieldErrors, fields: { text } };
+    }
+
+    // If we reach here then there were no validation errors.
+    const id = Date.now()
+    const todo = { id, text };
+    todos.push(todo);
+    await saveTodos(todos);
+    return null; // stays on current page
+  };
+
+export default function Todos() {
+  const [text, setText] = useState("");
+  const actionData = useActionData<ActionData>();
+  const fieldErrors = actionData?.fieldErrors;
+
+  return (
+    <div className="todos">
+      <Form method="post" id="todo-form">
+        <input
+          name="text"
+          onChange={e => setText(e.target.value)}
+          placeholder="enter new todo here"
+          value={text}
+        />
+        {fieldErrors?.text && (
+          <div className="error">Error: {fieldErrors.text}</div>
+        )}
+
+        {/* There can be more form inputs here. */}
+
+        <button>Add</button>
+      </Form>
+    </div>
+  );
+}
+```
+
+## Schema Validation
+
+Consider using {% aTargetBlank "https://zod.dev", "zod" %}
+for schema validation.
 
 ## Building
 
