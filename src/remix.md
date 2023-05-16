@@ -245,6 +245,13 @@ To this, add the prop `prefetch="intent"`.
 Any route can render its own HTML and the HTML of a child route
 by including `<Outlet />` in its JSX.
 
+## Resource Routes
+
+Resource routes are routes that expose `loader` and `action` functions,
+but do not export a React component.
+These are only used for defining API endpoints
+and are not associated with a specific page in the UI.
+
 ## Dynamic Routes
 
 Dynamic routes have access to data from the URL used to render them.

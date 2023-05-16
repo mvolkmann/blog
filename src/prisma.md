@@ -160,3 +160,10 @@ const users = await prisma.user.deleteMany({
   where: { state: 'CA' },
 });
 ```
+
+## Pagination
+
+Prisma supports {% aTargetBlank
+"https://www.prisma.io/docs/concepts/components/prisma-client/pagination",
+"pagination" %} with the `skip` and `take` properties
+of the object passed to the `findMany` method.
