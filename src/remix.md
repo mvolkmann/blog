@@ -149,22 +149,22 @@ use `<Link to=".">Refresh</Link>`.
 
 Any route can export a `loader` function that is optionally async.
 This is invoked before the route is rendered.
-It processes GET requests to the route.
-It is used to fetch data needed by the page.
+It processes GET requests to the route
+and is used to fetch data needed by the page.
 
 For example:
 
 ```ts
 export function loader({ request }) {
-  // Could authenticate with something like
+  // We could authenticate with something like
   // await requireUserId(request);
   // which could throw if the user is not authenticated.
 
   // We could support a query parameter like this:
   // const query = new URL(request.url).searchParams.get('query') ?? '';
   // const todos = await searchTodos(query);
-  // Can also return other content types including plain text.
   // return json(todos);
+  // We can also return other content types including plain text.
 
   return getTodos();
   // TODO: Why doesn't this also work?
