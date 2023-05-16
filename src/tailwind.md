@@ -73,6 +73,14 @@ such as those that support preprocessors like Sass.
 
 ## Cons
 
+- **Feels like giving up**
+  CSS emphasizes defining classes that describe sets of CSS properties
+  that can be applied to multiple HTML elements.
+  Thought goes into identifying well-named, cohesive sets of these properties.
+  Using Tailwind feels like giving up on trying to do this.
+  It encourages treating every HTML element as a one-off,
+  just applying the styling that each element needs.
+
 - **Learning curve**  
   CSS has a steep learning curve. Tailwind adds to that.
   Effective use of Tailwind requires good knowledge of CSS.
