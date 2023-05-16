@@ -41,6 +41,7 @@ Prisma consists of three parts:
 - "Prisma Migrate" is a tool for migrating database schemas
   when changes are required.
 - "Prisma Studio" is a "GUI to view and edit data in your database".
+  To run this, enter `npx prisma studio`
 
 ## Installing
 
