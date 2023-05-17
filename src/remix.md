@@ -50,6 +50,8 @@ The `app` directory defines the routes and components of the app.
 The file `root.jsx` defines the root component.
 This renders an `Output` component
 which is responsible for rendering each page.
+Content that should appear on every page such as a top navigation bar
+can be rendered here.
 
 The file `entry.server.tsx` defines the server code that runs on every request.
 Often no changes are needed in this file.
@@ -62,6 +64,10 @@ that are mapped to URL paths.
 This begins with only the file `_index.tsx`.
 To create additional routes, add more `.tsx` files
 and subdirectories in this directory.
+A route named "demo" can be defined by the file `demo.tsx`
+or by the directory "demo" containing the file `index.tsx`.
+The latter approach supports placing additional route-specific files
+in the same directory as `index.tsx`.
 Subdirectories define URL paths and support nested routes.
 
 To create a new page in the app,
