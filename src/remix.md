@@ -93,6 +93,13 @@ Routes can be in deeper subdirectories to require a deeper URL path.
 The `Outlet` component rendered in `root.tsx`
 renders the content of the current page.
 
+## UI Components
+
+Consider using the React component library
+{% aTargetBlank "https://reach.tech", "Reach UI" %}.
+It provides many components including `Accordion`, `Alert`, `Combobox`,
+`Dialog`, `Portal`, `Slider`, `Tabs`, and `Tooltip`.
+
 ## Styling
 
 Global CSS can be defined in a file inside the `app` directory.
@@ -486,6 +493,10 @@ export function CatchBoundary({ error }) {
   </main>
 }
 ```
+
+If the `CatchBoundary` function throws an error
+and an `ErrorBoundary` function is defined,
+it will determine what to render.
 
 ## Building
 
