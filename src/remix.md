@@ -121,6 +121,70 @@ File names containing dots in a addition to the one before the file extension
 define route paths.  For example, the file `foo.bar.baz.tsx`
 defines the route `foo/bar/baz`.
 
+## Dynamic Routes
+
+Dynamic routes have access to data from the URL used to render them.
+
+Dynamic routes are defined by creating a source file in the `routes` directory
+whose name contains `$`.
+For example, `notes.$id.tsx`.
+The `.` after `notes` is translated to a `/`, so the path for visiting this page
+will be `notes/{some-id}`.
+
+For example:
+
+```ts
+import {useLoaderData} from '@remix-run/react';
+
+export default function MyDynamicPage() {
+  const data = useLoaderData();
+  return (
+    <main>
+      <p>{data.someProperty}</p>
+    </main>
+  )
+}
+
+export async function loader({params}) {
+  const id = params.id;
+  const data = await getMyData(id);
+  if (!data) {
+    throw json(
+      {message: 'Could not find data.'},
+      {status: 404}
+    );
+  }
+  return data;
+}
+```
+
+## Nested Routes
+
+Any route can render its own HTML and the HTML of a child route
+by including `<Outlet />` in its JSX.
+
+When a nested route is visited, all of its ancestor routes are also rendered.
+This includes calling all the `loader` functions in the ancestor routes.
+
+## Resource Routes
+
+Resource routes are routes that expose `loader` and `action` functions,
+but do not export a React component.
+These are only used for defining API endpoints
+and are not associated with a specific page in the UI.
+
+A `loader` function can just return a JavaScript object
+and Remix will convert it to a JSON response and include
+a "Content-Type" header with a value of "application/json; charset=utf-8".
+For example, the file `routes/song.tsx` could contain the following:
+
+```ts
+export const loader = () => ({
+  artist: 'Phoebe Bridgers',
+  song: 'Graceland Too'
+});
+```
+
 ## Styling
 
 Global CSS can be defined in a file inside the `app` directory.
@@ -302,70 +366,6 @@ The `Link` and `NavLink` components can be configured
 to prefetch all data they need when the user hovers over them.
 This makes rendering the associated routes faster.
 To this, add the prop `prefetch="intent"`.
-
-## Nested Routes
-
-Any route can render its own HTML and the HTML of a child route
-by including `<Outlet />` in its JSX.
-
-When a nested route is visited, all of its ancestor routes are also rendered.
-This includes calling all the `loader` functions in the ancestor routes.
-
-## Resource Routes
-
-Resource routes are routes that expose `loader` and `action` functions,
-but do not export a React component.
-These are only used for defining API endpoints
-and are not associated with a specific page in the UI.
-
-A `loader` function can just return a JavaScript object
-and Remix will convert it to a JSON response and include
-a "Content-Type" header with a value of "application/json; charset=utf-8".
-For example, the file `routes/song.tsx` could contain the following:
-
-```ts
-export const loader = () => ({
-  artist: 'Phoebe Bridgers',
-  song: 'Graceland Too'
-});
-```
-
-## Dynamic Routes
-
-Dynamic routes have access to data from the URL used to render them.
-
-Dynamic routes are defined by creating a source file in the `routes` directory
-whose name contains `$`.
-For example, `notes.$id.tsx`.
-The `.` after `notes` is translated to a `/`, so the path for visiting this page
-will be `notes/{some-id}`.
-
-For example:
-
-```ts
-import {useLoaderData} from '@remix-run/react';
-
-export default function MyDynamicPage() {
-  const data = useLoaderData();
-  return (
-    <main>
-      <p>{data.someProperty}</p>
-    </main>
-  )
-}
-
-export async function loader({params}) {
-  const id = params.id;
-  const data = await getMyData(id);
-  if (!data) {
-    throw json(
-      {message: 'Could not find data.'},
-      {status: 404}
-    );
-  }
-  return data;
-}
-```
 
 ## Spinners
 
