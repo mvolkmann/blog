@@ -428,6 +428,65 @@ useEffect(() => {
 });
 ```
 
+## Error Boundaries
+
+Each route and `root.tsx` can befine an `ErrorBoundary` function
+which returns JSX to be rendered if an unhandled error occurs.
+This replaces the content that would otherwise be rendered by <Outlet />.
+
+In the case of nested routes, the closes such function
+to where the error occurs is used.
+The `ErrorBoundary` function in `root.tsx` serves as a catch-all.
+
+```ts
+export function ErrorBoundary({ error }) {
+  console.log('root.tsx ErrorBoundary: error =', error);
+  return (
+    <main className="error">
+      <h1>An error occurred.</h1>
+      <p>{error?.message ?? "unknown"}</p>
+      <p>Back to <Link to="/">safety</Link>.</p>
+    </main>
+  );
+}
+```
+
+## Catch Boundaries
+
+A `CatchBoundary` function is similar to an `ErrorBoundary`.
+Like that we can define it in the root component or specific routes.
+Remix renders this component when a `Response` object is thrown.
+If anything other than an error is thrown
+then `ErrorBoundary` is used instead of `CatchBoundary`.
+
+One place a `Response` object can be thrown is in a `loader` function.
+For example:
+
+```ts
+if (some-condition) {
+  throw json( // creates a Response object
+    {message: 'some-message'},
+    {status: 404, statusText: 'some-status-text'}
+  );
+}
+```
+
+The following code demonstrates defining a `CatchBoundary` function:
+
+```ts
+import { useCatch } from "@remix-run/react";
+
+export function CatchBoundary({ error }) {
+  const response = useCatch();
+  const message = response.data?.message || "unspecified error";
+  return <main>
+    <h1>An error occurred.</h1>
+    <p>status: {response.status}</p>
+    <p>{message}</p>
+  </main>
+}
+```
+
 ## Building
 
 To prepare a Remix app for deployment, enter `npm build`.
