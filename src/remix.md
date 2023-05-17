@@ -184,6 +184,9 @@ For example:
 const todos = useLoaderData<Todo[]>();
 ```
 
+In nested routes, the `loader` function for that route
+and the `loader` functions of all ancestor routes are called.
+
 ## Actions
 
 Any route can export an `action` function that is optionally async.
@@ -211,6 +214,12 @@ export const action: ActionFunction = async ({ request }) => {
     // we are already running in the server.
     let todos = await getTodos();
     const formData = await request.formData();
+
+    // This gets an object whose key/value pairs
+    // represent all the data passed in the request.
+    const data = Object.fromEntries(formData);
+
+    // This gets the value of a specific piece of data passed in the request.
     const intent = formData.get("intent") as string;
 
     if (intent === "add") {
@@ -242,6 +251,9 @@ export const action: ActionFunction = async ({ request }) => {
   }
 };
 ```
+
+In nested routes, only the `action` function for that route is called.
+The `action` functions ancestor routes are not called.
 
 ## Prefetching
 
@@ -391,8 +403,17 @@ surround the code with a check like the following:
 
 ```js
 if (typeof window !== 'undefined') {
-  // Do client-side things here.
+  // Do client-only things here.
 }
+```
+
+For code inside a React component that should only run on the client-side,
+place it in a call to `useEffect` as follows:
+
+```js
+useEffect(() => {
+  // Do client-only things here.
+});
 ```
 
 ## Building
