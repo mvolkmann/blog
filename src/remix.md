@@ -100,6 +100,9 @@ Consider using the React component library
 It provides many components including `Accordion`, `Alert`, `Combobox`,
 `Dialog`, `Portal`, `Slider`, `Tabs`, and `Tooltip`.
 
+The Remix team plans to implement Remix-specific versions of these components
+in the future.
+
 ## Styling
 
 Global CSS can be defined in a file inside the `app` directory.
@@ -438,7 +441,7 @@ useEffect(() => {
 ## Error Boundaries
 
 Each route and `root.tsx` can befine an `ErrorBoundary` function
-which returns JSX to be rendered if an unhandled error occurs.
+which returns JSX to be rendered if an unexpected error occurs.
 This replaces the content that would otherwise be rendered by <Outlet />.
 
 In the case of nested routes, the closes such function
@@ -460,7 +463,8 @@ export function ErrorBoundary({ error }) {
 
 ## Catch Boundaries
 
-A `CatchBoundary` function is similar to an `ErrorBoundary`.
+A `CatchBoundary` function is similar to an `ErrorBoundary`,
+but is focused on expected rather than unexpected errors.
 Like that we can define it in the root component or specific routes.
 Remix renders this component when a `Response` object is thrown.
 If anything other than an error is thrown
