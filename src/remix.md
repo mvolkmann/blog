@@ -255,6 +255,12 @@ export const action: ActionFunction = async ({ request }) => {
 In nested routes, only the `action` function for that route is called.
 The `action` functions ancestor routes are not called.
 
+A route component can contain multiple `form` elements.
+When any of them are submitted, the same `action` function is called.
+One way to determine which `form` submit triggered a call to `action`
+is to have the submit buttons in each `form` all have `name="intent"`
+and different values for their `value` attribute.
+
 ## Prefetching
 
 The `Link` and `NavLink` components can be configured
