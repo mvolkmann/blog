@@ -4,6 +4,15 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+## Client Questions
+
+Do you plan to use any of these?
+
+- Tailwind for CSS
+- zod for object validation
+- Reach UI component library
+- Prisma for database ORM
+
 ## Overview
 
 {% aTargetBlank "https://remix.run", "Remix" %} is
@@ -212,8 +221,9 @@ These enable implementing both client and server functionality
 for a route in the same source file.
 
 `action` functions process POST requests to the route.
-Often it is also used to process requests that would have used `PUT` or `DELETE`
-if those were supported by HTML forms.
+HTML `form` elements only support two methods, `GET` and `POST`.
+Often `action` functions are used to process requests that would have
+used `PUT` or `DELETE` if those were supported by HTML forms.
 As a workaround, an property named "intent" can be used to signal
 to the `action` function whether it should perform
 a create, update, or delete operation.
