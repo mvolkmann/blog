@@ -8,10 +8,11 @@ layout: topic-layout.njk
 
 Do you plan to use any of these?
 
+- TypeScript instead of JavaScript
 - Tailwind for CSS
-- zod for object validation
 - Reach UI component library
 - Prisma for database ORM
+- zod for object validation
 
 ## Overview
 
@@ -308,6 +309,18 @@ Resource routes are routes that expose `loader` and `action` functions,
 but do not export a React component.
 These are only used for defining API endpoints
 and are not associated with a specific page in the UI.
+
+A `loader` function can just return a JavaScript object
+and Remix will convert it to a JSON response and include
+a "Content-Type" header with a value of "application/json; charset=utf-8".
+For example, the file `routes/song.tsx` could contain the following:
+
+```ts
+export const loader = () => ({
+  artist: 'Phoebe Bridgers',
+  song: 'Graceland Too'
+});
+```
 
 ## Dynamic Routes
 
