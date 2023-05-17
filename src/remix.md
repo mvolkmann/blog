@@ -72,13 +72,6 @@ Often no changes are needed in this file.
 The `app/routes` directory defines all the routes of the app
 that are mapped to URL paths.
 This begins with only the file `_index.tsx`.
-To create additional routes, add more `.tsx` files
-and subdirectories in this directory.
-A route named "demo" can be defined by the file `demo.tsx`
-or by the directory "demo" containing the file `index.tsx`.
-The latter approach supports placing additional route-specific files
-in the same directory as `index.tsx`.
-Subdirectories define URL paths and support nested routes.
 
 To create a new page in the app,
 create a new file in the `app/routes` directory.
@@ -112,6 +105,21 @@ It provides many components including `Accordion`, `Alert`, `Combobox`,
 
 The Remix team plans to implement Remix-specific versions of these components
 in the future.
+
+## Routes
+
+To define routes, add `.tsx` files in and under the `routes` directory.
+
+A route named "demo" can be defined by the file `demo.tsx`
+or by the directory "demo" containing the file `index.tsx`.
+The latter approach supports placing additional route-specific files
+in the same directory as `index.tsx`.
+
+Subdirectories define URL paths and support nested routes.
+
+File names containing dots in a addition to the one before the file extension
+define route paths.  For example, the file `foo.bar.baz.tsx`
+defines the route `foo/bar/baz`.
 
 ## Styling
 
