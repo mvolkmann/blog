@@ -21,6 +21,8 @@ Do you plan to use any of these?
 focus on the user interface and work back through web standards
 to deliver a fast, slick, and resilient user experience."
 
+Remix enables many web applications to work with no client-side JavaScript code.
+
 Remix is heavily based on React Router.
 
 The hooks `useState` and `useEffect` can be used in Remix apps,
@@ -248,9 +250,15 @@ use `<Link to=".">Refresh</Link>`.
 ## Loaders
 
 Any route can export a `loader` function that is optionally async.
-This is invoked before the route is rendered.
-It processes GET requests to the route
-and is used to fetch data needed by the page.
+These functions process GET requests to routes and are
+used to fetch data needed by pages before they are rendered.
+
+These functions only exist and run on the server, never in the browser.
+They enable implementing both client and server functionality
+for a route in the same source file.
+Because these functions run on the server, they never have CORS issues.
+
+The code in `loader` functions can communicate directly with a database.
 
 For example:
 
@@ -289,8 +297,9 @@ and the `loader` functions of all ancestor routes are called.
 
 Any route can export an `action` function that is optionally async.
 These are invoked when a `form` on the page is submitted.
-They only exist and run on the server, never in the browser.
-These enable implementing both client and server functionality
+Like `loader` functions, these functions only
+exist and run on the server, never in the browser.
+They enable implementing both client and server functionality
 for a route in the same source file.
 
 `action` functions process POST requests to the route.
@@ -369,7 +378,11 @@ To this, add the prop `prefetch="intent"`.
 
 ## Spinners
 
-See {% aTargetBlank "https://github.com/smeijer/spin-delay", "spin-delay" %}.
+Remix automatically displays a spinner in the browser tab
+when it is waiting for a `loader` or `action` function to complete.
+
+For spinners on the page, see {% aTargetBlank
+"https://github.com/smeijer/spin-delay", "spin-delay" %}.
 
 ## Input Validation
 
@@ -424,6 +437,7 @@ export default function Todos() {
 
   return (
     <div className="todos">
+      {/* Using Form instead of form prevents full-page reloads. */}
       <Form method="post" id="todo-form">
         <input
           name="text"

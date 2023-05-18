@@ -63,7 +63,7 @@ and select different options.
    See "Example Schema" below.
 1. `npx prisma migrate dev --name init`
 1. `npm install @prisma/client`
-1. `prisma generate`
+1. `npx prisma generate`
 
 ## Example Schema
 
