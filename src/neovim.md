@@ -2019,6 +2019,33 @@ const person = {firstName: 'Mark', lastName: 'Volkmann'};
 
 Consider adding a "sj" key mapping that runs the `TSJToggle` command.
 
+#### trouble
+
+The {% aTargetBlank "https://github.com/folke/trouble.nvim", "trouble.nvim" %}
+plugin provides "a pretty list for showing diagnostics, references,
+telescope results, quickfix and location lists
+to help you solve all the trouble your code is causing."
+
+To configure this plugin, create the file
+`~/.config/nvim/lua/user/plugins/trouble.lua`
+containing the following:
+
+```lua
+return {
+  {
+    "AstroNvim/astrocommunity",
+    { import = "astrocommunity.diagnostics.trouble-nvim" }
+  }
+}
+```
+
+To show diagnostics for the current document, press `<leader>xx`.
+
+To show diagnostics for all documents in the workspace, press `<leader>xX`.
+
+When diagnostics are displayed and focus is in that panel,
+press `m` to toggle between document and workspace mode.
+
 #### vim-bbye
 
 When there are multiple open buffers and the `:bdelete` or `:close` command
