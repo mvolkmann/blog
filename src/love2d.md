@@ -12,6 +12,8 @@ It's free, open-source, and works on Windows, Mac OS X, Linux, Android and iOS."
 
 LÖVE can be downloaded from the previous link.
 
+## Resources
+
 For a great YouTube video on the LÖVE framework, see {% aTargetBlank
 "https://www.youtube.com/watch?v=3k4CMAaNCuk&t=3309s",
 "Falling in LÖVE with Lua" %}. In the video Colton Ogden
@@ -19,6 +21,25 @@ walks through the beginnings of writing a Super Mario game.
 The source code is available at {% aTargetBlank
 "https://github.com/coltonoscopy/cs502019games-track/tree/master/mario",
 "cs502019games-track" %}.
+
+## Documentation
+
+The LÖVE home page is shown below:
+
+<img alt="LÖVE Home Page" style="width: 100%"
+    src="/blog/assets/love2d-home-page.png?v={{pkg.version}}"
+    title="LÖVE Home Page">
+
+Clicking the "Wiki" button in the upper-right navigates to the following page:
+
+<img alt="LÖVE Wiki" style="width: 100%"
+    src="/blog/assets/love2d-wiki.png?v={{pkg.version}}"
+    title="LÖVE Wiki">
+
+Click a module name in the left nav to see documentation
+on all of its functions.
+
+## Installing
 
 For macOS:
 
@@ -29,6 +50,17 @@ For macOS:
   "love.app cannot be opened because the developer cannot be verified".
   To fix this, open the Settings app, select "Privacy & Security",
   scroll down to "love.app was blocked ..." and click the "Open Anyway" button.
+
+## Running
+
+When the LÖVE app is run without a `main.lua` file,
+a window matching the screenshot below is displayed.
+
+<img alt="LÖVE No Game" style="width: 80%"
+    src="/blog/assets/love2d-no-game.png?v={{pkg.version}}"
+    title="LÖVE No Game">
+
+## Unorganized Content
 
 TODO: Does Love2D include its own version of Lua
 TODO: and ignore the installed version?
