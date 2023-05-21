@@ -14,13 +14,26 @@ LÖVE can be downloaded from the previous link.
 
 ## Resources
 
-For a great YouTube video on the LÖVE framework, see {% aTargetBlank
-"https://www.youtube.com/watch?v=3k4CMAaNCuk&t=3309s",
-"Falling in LÖVE with Lua" %}. In the video Colton Ogden
-walks through the beginnings of writing a Super Mario game.
-The source code is available at {% aTargetBlank
-"https://github.com/coltonoscopy/cs502019games-track/tree/master/mario",
-"cs502019games-track" %}.
+- {% aTargetBlank "https://www.youtube.com/watch?v=3k4CMAaNCuk&t=3309s",
+  "Falling in LÖVE with Lua" %}
+
+  This is a great YouTube video on the LÖVE framework.
+  Colton Ogden walks through the beginnings of writing a Super Mario game.
+  The source code is available at {% aTargetBlank
+  "https://github.com/coltonoscopy/cs502019games-track/tree/master/mario",
+  "cs502019games-track" %}.
+
+- {% aTargetBlank "https://www.sheepolution.com/learn", "Sheepolution" %}
+
+  "Learn how to make games with LÖVE."
+  This provides a series of articles and videos.
+
+- {% aTargetBlank "https://love2d-community.github.io/love2d-book/",
+  "love2d-book" %}
+
+  This is a collaborative book about LÖVE.
+  Clone the repository and follow the directions to generate a PDF.
+ 
 
 ## Documentation
 
