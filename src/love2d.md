@@ -73,6 +73,8 @@ a window matching the screenshot below is displayed.
     src="/blog/assets/love2d-no-game.png?v={{pkg.version}}"
     title="LÖVE No Game">
 
+Note that the kite tail on the balloon says "NO GAME".
+
 ## Unorganized Content
 
 TODO: Does Love2D include its own version of Lua
