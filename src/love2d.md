@@ -66,7 +66,8 @@ For macOS:
 
 ## Running
 
-When the LÖVE app is run without a `main.lua` file,
+The initial source file must be named `main.lua`.
+When the LÖVE app is run without this file,
 a window matching the screenshot below is displayed.
 
 <img alt="LÖVE No Game" style="width: 80%"
