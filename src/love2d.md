@@ -76,6 +76,23 @@ a window matching the screenshot below is displayed.
 
 Note that the kite tail on the balloon says "NO GAME".
 
+## Bundling
+
+Create a shell script named `bundle` in the top directory
+of the project containing the following where
+`{project-name}` is replaced by the name of the project:
+
+```bash
+#!/usr/bin/env zsh
+rm -f {project-name}.love
+zip -r {project-name}.love .
+```
+
+Make the `bundle` script executable by entering `chmod a+x bundle`.
+
+Enter `./bundle` to bundle the LOVE project into a `.love` file.
+This file can be double-clicked to run the app locally.
+
 ## Deploying
 
 LÖVE apps can be deployed to Windows, macOS, Linux, Android, and iOS.
@@ -105,21 +122,9 @@ The following steps create a default iOS project and run it:
 1. In the simulator, tap "No-game screen"
    to see the default "NO GAME" screen.
 
-Create a shell script named `bundle` in the top directory
-of the project containing the following where
-`{project-name}` is replaced by the name of the project:
-
-```bash
-#!/usr/bin/env zsh
-rm -f {project-name}.love
-zip -r {project-name}.love .
-```
-
-Make the `bundle` script executable by entering `chmod a+x bundle`.
-
 The following steps customize the default project to run your game.
 
-1. Enter `./bundle` to bundle the LOVE project.
+1. Enter `./bundle` to bundle the LOVE project into a `.love` file.
 1. Back in Xcode, select the top-most project navigator item
    to edit the LÖVE project.
 1. Select the "love.ios" target.
