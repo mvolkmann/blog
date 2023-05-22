@@ -12,7 +12,13 @@ It's free, open-source, and works on Windows, Mac OS X, Linux, Android and iOS."
 
 LÖVE can be downloaded from the previous link.
 
+LÖVE use LuaJIT which mostly only supports Lua 5.1.
+It includes some Lua 5.2 and 5.3 features.
+
 ## Resources
+
+- {% aTargetBlank "https://discord.gg/r5JjuFU8",
+  "LÖVE Game Framework Discord Channel" %}
 
 - {% aTargetBlank "https://www.youtube.com/watch?v=3k4CMAaNCuk&t=3309s",
   "Falling in LÖVE with Lua" %}
