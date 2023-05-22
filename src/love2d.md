@@ -95,7 +95,7 @@ The following steps create a default iOS project and run it:
 1. If not already installed, install Xcode.
 1. Download iOS source by clicking the "iOS source /libraries" link
    in the Download section of the
-   {% aTargetBlank "https://love2d.org/", "LÖVE " %} home page.
+   {% aTargetBlank "https://love2d.org/", "LÖVE" %} home page.
 1. Double-click the downloaded file to unzip it.
 1. Move this directory to its desired location and rename it.
 1. In the Finder, navigate to `platform/xcode`.
@@ -105,15 +105,27 @@ The following steps create a default iOS project and run it:
 1. In the simulator, tap "No-game screen"
    to see the default "NO GAME" screen.
 
+Create a shell script named `bundle` in the top directory
+of the project containing the following where
+`{project-name}` is replaced by the name of the project:
+
+```bash
+#!/usr/bin/env zsh
+rm -f {project-name}.love
+zip -r {project-name}.love .
+```
+
+Make the `bundle` script executable by entering `chmod a+x bundle`.
+
 The following steps customize the default project to run your game.
 
-1. Create a zip file containing all the files and directories
-   in the top level of the LÖVE project. This will include `main.lua`.
-1. Rename the zip file to `{project-name}.love`.
+1. Enter `./bundle` to bundle the LOVE project.
 1. Back in Xcode, select the top-most project navigator item
-   to edit the project.
+   to edit the LÖVE project.
 1. Select the "love.ios" target.
 1. Select the "General" tab.
+1. In the "Identity" section, enter a "Display Name".
+   TODO: Why is the displayed app name "love" instead of this value?
 1. In the "Deployment Info" section under "iPhone Orientation",
    consider only checking "Portrait".
 1. Select the "Signing & Capabilities" tab.
@@ -134,10 +146,16 @@ To run the app on a real device:
 
 To size the window appropriately, the following settings in the `conf.lua` file:
 
+To change the app icon, use Xcode to replace the images
+in the file `Images.xcassets`.
+
 ```lua
   t.window.width = 590   -- half of 1179 (iPhone 14 Pro width)
   t.window.height = 1276 -- half of 2556 (iPhone 14 Pro height)
 ```
+
+After making changes to the Lua code, enter `./bundle` again
+to create a new `.love` file and then re-run the iOS project.
 
 ## Unorganized Content
 
