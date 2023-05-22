@@ -76,6 +76,69 @@ a window matching the screenshot below is displayed.
 
 Note that the kite tail on the balloon says "NO GAME".
 
+## Deploying
+
+LÖVE apps can be deployed to Windows, macOS, Linux, Android, and iOS.
+Details can be found at {% aTargetBlank
+"https://love2d.org/wiki/Game_Distribution", "Game Distribution" %}.
+
+### iOS
+
+The YouTube video {% aTargetBlank
+"https://www.youtube.com/watch?v=MsYanwcU42E&list=WL&index=108&t=6s",
+"Build LOVE2D for iOS iPhone, iPad, iPod Touch" %}
+walks through the steps to deploy a LÖVE app to iOS.
+This must be done in macOS.
+
+The following steps create a default iOS project and run it:
+
+1. If not already installed, install Xcode.
+1. Download iOS source by clicking the "iOS source /libraries" link
+   in the Download section of the
+   {% aTargetBlank "https://love2d.org/", "LÖVE " %} home page.
+1. Double-click the downloaded file to unzip it.
+1. Move this directory to its desired location and rename it.
+1. In the Finder, navigate to `platform/xcode`.
+1. Double-click the file `love.xcodeproj` to open it in Xcode.
+1. Select a simulator device.
+1. Build and run the app.
+1. In the simulator, tap "No-game screen"
+   to see the default "NO GAME" screen.
+
+The following steps customize the default project to run your game.
+
+1. Create a zip file containing all the files and directories
+   in the top level of the LÖVE project. This will include `main.lua`.
+1. Rename the zip file to `{project-name}.love`.
+1. Back in Xcode, select the top-most project navigator item
+   to edit the project.
+1. Select the "love.ios" target.
+1. Select the "General" tab.
+1. In the "Deployment Info" section under "iPhone Orientation",
+   consider only checking "Portrait".
+1. Select the "Signing & Capabilities" tab.
+1. In the "Team" dropdown, select your development team.
+1. Change the bundle identifier to uniquely identify your project.
+1. Select the "Build Phases" tab.
+1. Expand the "Copy Bundle Resources" section.
+1. Click the "+" button and add your `.love` zip file.
+1. Check the "Copy items if needed" checkbox.
+1. Select the "Create folder references" radio button.
+1. Click the "Finish" button.
+
+To run the app on a real device:
+
+1. Attach the device to the mac with a USB cable.
+1. Select the device from the device menu.
+1. Build and run the project.
+
+To size the window appropriately, the following settings in the `conf.lua` file:
+
+```lua
+  t.window.width = 590   -- half of 1179 (iPhone 14 Pro width)
+  t.window.height = 1276 -- half of 2556 (iPhone 14 Pro height)
+```
+
 ## Unorganized Content
 
 TODO: Does Love2D include its own version of Lua
