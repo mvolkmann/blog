@@ -99,6 +99,33 @@ Make the `bundle` script executable by entering `chmod a+x bundle`.
 Enter `./bundle` to bundle the LOVE project into a `.love` file.
 This file can be double-clicked to run the app locally.
 
+## Auto-Restarts
+
+It is convenient to configure the app to restart
+any time a file within the project is modified.
+The Lua module {% aTargetBlank "https://github.com/rxi/lurker", "lurker" %}
+is perfect for this!
+
+To configure this:
+
+1. Download the file `lurker.lua` into the project directory.
+1. Download the file `lume.lua` into the project directory.
+1. Add the following lines near the top of `main.lua`:
+
+   ```lua
+   local lurker = require "lurker"
+   lurker.postswap = function(file) love.load() end
+   ```
+
+1. Add the following line at the beginning of the `love.update` function:
+
+   ```lua
+   lurker.update()
+   ```
+
+Now when the app is run it will watch for changes to files within the project
+and restart the app when a change is detected.
+
 ## Deploying
 
 LÖVE apps can be deployed to Windows, macOS, Linux, Android, and iOS.
