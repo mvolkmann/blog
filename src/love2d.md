@@ -114,10 +114,10 @@ To configure this:
 
    ```lua
    local lurker = require "lurker"
-   lurker.postswap = function(file) love.load() end
+   lurker.postswap = function() love.event.quit "restart" end
    ```
 
-1. Add the following line at the beginning of the `love.update` function:
+1. Add the following line at the end of the `love.update` function:
 
    ```lua
    lurker.update()
