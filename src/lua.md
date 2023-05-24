@@ -191,17 +191,70 @@ For example, `lua demo.luac`.
 
 ### LuaJIT
 
-{% aTargetBlank "https://luajit.org/", "LuaJIT" %} is an alternative
-to `luac` that produces smaller bytecode files.
+{% aTargetBlank "https://luajit.org/", "LuaJIT" %}
+is a just-in-time Lua compiler.
+It can be used as an alternative to `luac` to produces smaller bytecode files.
 LuaJIT also executes bytecode files and provides runtime optimizations
 that typically result in better performance.
 
-LuaJIT is implemented by a separate team from the one that maintains Lua.
+LuaJIT was created in 2005 by Mike Pall.
+It is maintained by a separate team from the one that maintains Lua.
 
 LuaJIT is based on Lua 5.1, so it is missing features of Lua added since then.
+It has optional support for some Lua 5.2 and 5.3 features.
 From Paul Ducklin, Lua and LuaJIT are
 "independent, incommensurate, and unlikely-ever-to-be-reunited projects
 that have been on very different journeys for more than 15 years now."
+
+LuaJIT does not support Lua's bitwise operators, but it includes
+the `bit` library that defines functions that can used instead.
+For example, instead of `n1 & n2`, use `bit.band(n1, n2)`.
+
+LuaJIT uses a different syntax for vararg functions.
+
+TODO: Does LuaJIT only support 32-bit signed integers?
+
+Lua 5.2 changes from 5.1 are summarized {% aTargetBlank
+"https://www.lua.org/manual/5.2/readme.html#changes", "here" %}.
+These include:
+
+- ephemeron tables (tables with weak keys and strong values)
+- library for bitwise operations
+- `goto` statement
+- new `package` function `searchpath`
+- new metamethods `__pairs` and `__ipairs`
+- frontier patterns
+- `io.read` supports a new option `*L`
+- `io.lines` supports new options
+- many new functions in the C API
+
+Lua 5.3 changes from 5.2 are summarized {% aTargetBlank
+"https://www.lua.org/manual/5.3/readme.html#changes", "here" %}.
+These include:
+
+- support for integers that are 64-bit by default
+- support for 32-bit numbers
+- bitwise operators
+- basic utf-8 support
+- functions for packing and unpacking values
+- floor division
+- new `table` function `move`
+- new `string` functions `pack`, `unpack`, and `packsize`
+- many new functions in the C API
+- standalone interpreter
+
+Lua 5.4 changes from 5.3 are summarized {% aTargetBlank
+"https://www.lua.org/manual/5.4/readme.html#changes", "here" %}.
+They include:
+
+- `const` variables
+- to-be-closed variables
+- new function `coroutine.close`
+
+LuaJIT adds many {% aTargetBlank "https://luajit.org/extensions.html",
+"extensions" %} on top of Lua 5.1.
+These include the `bit`, `ffi`, and `jit` modules.
+It also enhances some of the C API functions.
 
 From {% aTargetBlank "https://api7.ai/learning-center/openresty/luajit-vs-lua",
 "api7.ai" %}:
@@ -224,8 +277,8 @@ In some cases when using LuaJIT it is necessary to write code differently
 than you would in vanilla Lua in order to get the best performance.
 
 The LuaJIT foreign function interface (FFI) makes it easier to call
-functions implemented in other languages than vanilla Lua.
-Using the Lua C API in LuaJIT is slower than using it in vanilla Lua.
+functions implemented in other languages than standard Lua.
+Using the Lua C API in LuaJIT is slower than using it in standard Lua.
 
 To install LuaJIT:
 
