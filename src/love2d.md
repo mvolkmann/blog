@@ -130,6 +130,8 @@ To configure this:
 
 Now when the app is run it will watch for changes to files within the project
 and restart the app when a change is detected.
+One issue with this is that every time the game is restarted,
+focus will move from the code editor to the game.
 
 ## Deploying
 
