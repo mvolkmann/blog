@@ -324,6 +324,7 @@ To install Pallene, see the detailed instructions at the Pallene link above.
 
 {% aTargetBlank "https://github.com/teal-language/tl", "Teal" %} is a
 typed dialect of Lua.
+Currently it can target Lua 5.1 or 5.3.
 
 The supported types are `any`, `nil`, `boolean`, `integer`, `number`,
 `string`, `function`, `enum`, `record`, `thread`, and

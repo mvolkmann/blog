@@ -38,15 +38,14 @@ To create a new SvelteKit project:
 
 1. Install Node.js
 
-1. Enter `npm init svelte@next [project-name]`  
+1. Enter `npm create svelte@latest [project-name]`  
    Omit the project name to create a SvelteKit project in the current directory.
 
 1. Answer the following question:
 
-   - Use TypeScript in components? defaults to no
-   - What do you want to use for writing Styles in Svelte components? CSS (default), Less, or SCSS
-   - Add ESLint for code listing? defaults to no
-   - Add Prettier for code formatting? defaults to no
+   - Which SvelteKit app template? "Skeleton project" is recommended.
+   - Add type checking with TypeScript? "Yes, using TypeScript syntax" is recommended.
+   - Select additional options. All are recommended.
 
 1. Following instructions for next steps that are output.
 
