@@ -200,6 +200,25 @@ in the file `Images.xcassets`.
 After making changes to the Lua code, enter `./bundle` again
 to create a new `.love` file and then re-run the iOS project.
 
+## Graphics
+
+The `love.graphics` module provides many functions for drawing.
+To simplify calling functions from the submodules of the `love` module,
+create and use variables like these to refer to the functions:
+
+```lua
+local g = love.graphics
+local p = love.physics
+```
+
+## Physics
+
+The `love.physics` module provides many functions that wrap the functionality
+of {% aTargetBlank "https://box2d.org/", "Box2D" %} which is
+a C++-based 2D physics engine.
+Box2D was created by Erin Catto who works at Blizzard Games.
+Box2D is used by many games including Angry Birds.
+
 ## Frame Rate
 
 To display the frames per second being rendered
@@ -207,6 +226,16 @@ add code like the following in the `love.draw` function:
 
 ```lua
 love.graphics.print("FPS: " .. love.timer.getFPS(), 10, 5)
+```
+
+## Cursor
+
+The following code draws a circle at the cursor position
+when placed in the `love.draw` function:
+
+```lua
+love.graphics.setColor(colors.yellow)
+love.graphics.circle("fill", x, y, 10) ]]
 ```
 
 ## Unorganized Content
