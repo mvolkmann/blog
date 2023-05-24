@@ -238,6 +238,68 @@ love.graphics.setColor(colors.yellow)
 love.graphics.circle("fill", x, y, 10) ]]
 ```
 
+## Keys
+
+There are multiple ways to process key presses.
+
+One way is to write the function `love.keypressed`.
+For example, the following code causes the app
+to be restarted when the escape key is pressed.
+
+```lua
+function love.keypressed(k)
+  if k == "escape" then love.event.quit("restart") end
+end
+```
+
+Another way is to use the `love.keyboard.isDown` function.
+This takes arguments that are the key names to check
+and returns a boolean indicating if any of them are down.
+A table that maps key names to functions that should be called
+when they are pressed can be defined as follows:
+
+```lua
+local keyMap = {
+  left = function() dec(monkeyPosition, "x") end,
+  right = function() inc(monkeyPosition, "x") end,
+  up = function() dec(monkeyPosition, "y") end,
+  down = function() inc(monkeyPosition, "y") end
+}
+```
+
+Then add code like the following in the `love.update` function:
+
+```lua
+  -- Process keys being held down.
+  for key, fn in pairs(keyMap) do
+    if love.keyboard.isDown(key) then fn() end
+  end
+```
+
+## Mouse Clicks
+
+There are several ways to process mouse clicks.
+
+One way is to write the function `love.mousepressed`.
+For example, the following code causes the app
+to be restarted when the escape key is pressed.
+
+```lua
+function love.mousepressed(x, y, button)
+  -- button holds the number of the mouse button that was pressed
+  -- where 1 is the left mouse button.
+  if button ~= 1 then return end -- only processing left clicks
+
+  -- For all shapes that should process mouse clicks,
+  -- determine whether (x,y) is on the shape
+  -- and execute the appropriate code if it is.
+end
+```
+
+Another may is to use the `love.mouse.isDown` function.
+This takes arguments that are the button numbers to check
+and returns a boolean indicating if any of them are down.
+
 ## Unorganized Content
 
 TODO: Does Love2D include its own version of Lua
