@@ -200,6 +200,15 @@ in the file `Images.xcassets`.
 After making changes to the Lua code, enter `./bundle` again
 to create a new `.love` file and then re-run the iOS project.
 
+## Frame Rate
+
+To display the frames per second being rendered
+add code like the following in the `love.draw` function:
+
+```lua
+love.graphics.print("FPS: " .. love.timer.getFPS(), 10, 5)
+```
+
 ## Unorganized Content
 
 TODO: Does Love2D include its own version of Lua
