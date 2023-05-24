@@ -39,7 +39,12 @@ It includes some Lua 5.2 and 5.3 features.
 
   This is a collaborative book about LÖVE.
   Clone the repository and follow the directions to generate a PDF.
- 
+
+- The LÖVE {% aTargetBlank "https://love2d.org/wiki/Category:Snippets",
+  "Snippets" %} page includes a list of snippets that each provide
+  code that be copied for specific functionality.
+  For example, it provides code for generating gradients
+  and testing whether a point is in a shape.
 
 ## Documentation
 
@@ -220,6 +225,14 @@ The `love.load()` function performs initial game setup.
 The `love.draw()` function specifies what should be
 drawn on the screen at any point in time.
 The `love.update(dt)` function implements the game logic.
+
+The `love.draw` and `love.update` functions
+are typically called 60 times per second (frame rate).
+The `vsync` option can be set to synchronize the frame rate
+with the refresh rate of the monitor.
+It can be set in the `conf.lua` file with `t.window.vsync = 1`.
+Alternatively it can be passed as an argument
+to the `love.graphics.setMode` function.
 
 The parameter `dt` in the `love.update` function is short for "delta time".
 This is used to make game updates frame rate independent.
