@@ -477,6 +477,46 @@ Another may is to use the `love.mouse.isDown` function.
 This takes arguments that are the button numbers to check
 and returns a boolean indicating if any of them are down.
 
+## Background Scrolling
+
+A single image can be scrolled across the background in any direction.
+The image should have the same dimensions at the window
+and the opposite edges should match to avoid a visible "seam".
+
+For example:
+
+```lua
+local love = require "love"
+
+local g = love.graphics
+local image = love.graphics.newImage("background.jpg")
+local position
+local speed = 100
+local windowWidth, windowHeight = g.getDimensions()
+
+function love.load()
+  position = 0
+end
+
+function love.draw()
+  -- To scroll vertically ...
+  -- love.graphics.draw(image, 0, position)
+  -- love.graphics.draw(image, 0, position - windowHeight)
+
+  -- To scroll horizontally ...
+  g.draw(image, position, 0)
+  g.draw(image, position - windowWidth, 0)
+end
+
+function love.update(dt)
+  -- To scroll vertically ...
+  -- position = (position + speed * dt) % image:getHeight()
+
+  -- To scroll horizontally ...
+  position = (position - speed * dt) % windowWidth
+end
+```
+
 ## Physics
 
 The `love.physics` module provides many functions that wrap the functionality
@@ -499,6 +539,9 @@ Details can be found at {% aTargetBlank
 
 One way to deploy a LÖVE app to the web is to use {% aTargetBlank
 "https://github.com/Davidobot/love.js", "love.js" %}.
+This uses {% aTargetBlank "https://emscripten.org/", "Emscripten" %}
+to compile the C code from Lua and LÖVE to WebAssembly
+so it can be run in web browsers.
 
 Generate a web application from a LÖVE project in the current directory
 with the following steps.
