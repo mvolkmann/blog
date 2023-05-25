@@ -89,6 +89,17 @@ Note that the kite tail on the balloon says "NO GAME".
 
 ## Bundling
 
+The source code and asset files (fonts, sounds, and images) can be
+bundled into a single file that can be double-clicked to run the app.
+To do this, create a zip file containing all the required files
+and make its extension `.love`.
+
+Some projects contain files in the top project directory
+(such as shell scripts and documentation)
+that should not be included in the bundle file.
+To accommodate this, consider moving all the `.lua` and asset files
+into a subdirectory named `src`.
+
 Create a shell script named `bundle` in the top directory
 of the project containing the following where
 `{project-name}` is replaced by the name of the project:
@@ -96,13 +107,15 @@ of the project containing the following where
 ```bash
 #!/usr/bin/env zsh
 rm -f {project-name}.love
-zip -r {project-name}.love .
+pushd src
+zip -r ../{project-name}.love *
+popd
 ```
 
 Make the `bundle` script executable by entering `chmod a+x bundle`.
 
-Enter `./bundle` to bundle the LOVE project into a `.love` file.
-This file can be double-clicked to run the app locally.
+Enter `./bundle` to bundle the app into a `.love` file.
+Double-click this file to run the app locally.
 
 ## Auto-Restarts
 
@@ -329,9 +342,12 @@ This must be done in macOS.
 The following steps create a default iOS project and run it:
 
 1. If not already installed, install Xcode.
-1. Download iOS source by clicking the "iOS source /libraries" link
+1. Download iOS source by clicking the "iOS source" link
    in the Download section of the
    {% aTargetBlank "https://love2d.org/", "LÖVE" %} home page.
+   <img alt="LÖVE iOS Source" style="width: 100%"
+    src="/blog/assets/love2d-ios-source.png?v={{pkg.version}}"
+    title="LÖVE iOS Source">
 1. Double-click the downloaded file to unzip it.
 1. Move this directory to its desired location and rename it.
 1. In the Finder, navigate to `platform/xcode`.
@@ -344,6 +360,7 @@ The following steps create a default iOS project and run it:
 The following steps customize the default project to run your game.
 
 1. Enter `./bundle` to bundle the LOVE project into a `.love` file.
+   (See the "Bundling" section above.)
 1. Back in Xcode, select the top-most project navigator item
    to edit the LÖVE project.
 1. Select the "love.ios" target.
@@ -368,7 +385,13 @@ To run the app on a real device:
 1. Select the device from the device menu.
 1. Build and run the project.
 
-To size the window appropriately, the following settings in the `conf.lua` file:
+To size the window appropriately, add the following
+settings in the `conf.lua` file:
+
+```lua
+  t.window.width = 393  -- third of 1179 (iPhone 14 Pro width)
+  t.window.height = 852 -- third of 2556 (iPhone 14 Pro height)
+```
 
 To change the app icon, use Xcode to replace the images
 in the file `Images.xcassets`.
