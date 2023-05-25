@@ -160,7 +160,49 @@ TODO: Add detail here.
 
 ## Sounds
 
-TODO: Add detail here.
+LÖVE supports the sound formats `wav`, `mp3`, `ogg`, and many others.
+
+To create a sound, specify its file path and source type as follows:
+
+```lua
+local mySound = love.audio.newSource("sounds/my-sound.mp3", "static")
+```
+
+The last argument is the source type.
+"static" is preferred for short sounds.
+"stream" is the default and is preferred for longer sounds
+because it avoids holding the entire sound in memory.
+
+To play a sound, use `mySound:play()`.
+
+To cause a sound to loop continuously,
+use `mySound:setLooping(true)` before playing it.
+
+To stop a sound, use `mySound:stop()`.
+
+To temporarily pause a sound, use `mySound:pause()`.
+To resume it later, use `mySound:resume()`.
+
+Consider creating all the sound `Source` objects that the app will need
+on startup and holding them in a table.  For example:
+
+```lua
+local sounds = {
+  success = love.audio.newSource("sounds/success.mp3", "static"),
+  failure = love.audio.newSource("sounds/failure.mp3", "static"),
+  song = love.audio.newSource("sounds/song.mp3")
+}
+```
+
+To play one of these sounds later, use `sounds.success:play()`.
+
+To allow multiple occurrences of the same sound to play simultaneously,
+clone it and play the clone. For example:
+
+```lua
+local clone = sounds.failure:clone()
+clone:play()
+```
 
 ## Graphics
 
@@ -359,7 +401,7 @@ The following steps create a default iOS project and run it:
 
 The following steps customize the default project to run your game.
 
-1. Enter `./bundle` to bundle the LOVE project into a `.love` file.
+1. Enter `./bundle` to bundle the LÖVE project into a `.love` file.
    (See the "Bundling" section above.)
 1. Back in Xcode, select the top-most project navigator item
    to edit the LÖVE project.
