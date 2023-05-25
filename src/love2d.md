@@ -675,6 +675,8 @@ in the file `Images.xcassets`.
 After making changes to the Lua code, enter `./bundle` again
 to create a new `.love` file and then re-run the iOS project.
 
+If no sounds play, it is likely because the phone mute switch is on.
+
 ## Optimizations
 
 When comparing the distance between two points to some value,
