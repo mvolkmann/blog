@@ -258,7 +258,7 @@ Details can be found at {% aTargetBlank
 ### Web
 
 One way to deploy a LÖVE app to the web is to use {% aTargetBlank
-"https://github.com/Davidobot/love.js". "love.js" %}.
+"https://github.com/Davidobot/love.js", "love.js" %}.
 
 Generate a web application from a LÖVE project in the current directory
 with the following steps:
