@@ -187,220 +187,6 @@ For example, `luac demo.lua -o demo.luac`.
 To execute a bytecode file, pass it to the Lua interpreter.
 For example, `lua demo.luac`.
 
-## Flavors of Lua
-
-### LuaJIT
-
-{% aTargetBlank "https://luajit.org/", "LuaJIT" %}
-is a just-in-time Lua compiler.
-It can be used as an alternative to `luac` to produces smaller bytecode files.
-LuaJIT also executes bytecode files and provides runtime optimizations
-that typically result in better performance.
-
-LuaJIT was created in 2005 by Mike Pall.
-It is maintained by a separate team from the one that maintains Lua.
-
-LuaJIT is based on Lua 5.1, so it is missing features of Lua added since then.
-It has optional support for some Lua 5.2 and 5.3 features.
-From Paul Ducklin, Lua and LuaJIT are
-"independent, incommensurate, and unlikely-ever-to-be-reunited projects
-that have been on very different journeys for more than 15 years now."
-
-LuaJIT does not support Lua's bitwise operators, but it includes
-the `bit` library that defines functions that can used instead.
-For example, instead of `n1 & n2`, use `bit.band(n1, n2)`.
-
-LuaJIT uses a different syntax for vararg functions.
-
-TODO: Does LuaJIT only support 32-bit signed integers?
-
-Lua 5.2 changes from 5.1 are summarized {% aTargetBlank
-"https://www.lua.org/manual/5.2/readme.html#changes", "here" %}.
-These include:
-
-- ephemeron tables (tables with weak keys and strong values)
-- library for bitwise operations
-- `goto` statement
-- new `package` function `searchpath`
-- new metamethods `__pairs` and `__ipairs`
-- frontier patterns
-- `io.read` supports a new option `*L`
-- `io.lines` supports new options
-- many new functions in the C API
-
-Lua 5.3 changes from 5.2 are summarized {% aTargetBlank
-"https://www.lua.org/manual/5.3/readme.html#changes", "here" %}.
-These include:
-
-- support for integers that are 64-bit by default
-- support for 32-bit numbers
-- bitwise operators
-- basic utf-8 support
-- functions for packing and unpacking values
-- floor division
-- new `table` function `move`
-- new `string` functions `pack`, `unpack`, and `packsize`
-- many new functions in the C API
-- standalone interpreter
-
-Lua 5.4 changes from 5.3 are summarized {% aTargetBlank
-"https://www.lua.org/manual/5.4/readme.html#changes", "here" %}.
-They include:
-
-- `const` variables
-- to-be-closed variables
-- new function `coroutine.close`
-
-LuaJIT adds many {% aTargetBlank "https://luajit.org/extensions.html",
-"extensions" %} on top of Lua 5.1.
-These include the `bit`, `ffi`, and `jit` modules.
-It also enhances some of the C API functions.
-
-From {% aTargetBlank "https://api7.ai/learning-center/openresty/luajit-vs-lua",
-"api7.ai" %}:
-
-> The LuaJIT runtime environment ... has a JIT compiler
-> that can generate machine code directly.
-> The LuaJIT interpreter records some runtime statistics while executing the
-> bytecode, such as the actual number of times each Lua function call entry
-> is run and the actual number of times each Lua loop is executed.
-> When these counts exceed a random threshold,
-> the corresponding Lua function entry or Lua loop is considered hot enough
-> to trigger the JIT compiler to start working.
-> The JIT compiler tries to compile the corresponding Lua code path,
-> starting from the hot function's entry or the hot loop's location.
-> The compilation process converts the LuaJIT bytecode into LuaJIT's own
-> defined Intermediate Representation (IR) and
-> then generates machine code for the target architecture.
-
-In some cases when using LuaJIT it is necessary to write code differently
-than you would in vanilla Lua in order to get the best performance.
-
-The LuaJIT foreign function interface (FFI) makes it easier to call
-functions implemented in other languages than standard Lua.
-Using the Lua C API in LuaJIT is slower than using it in standard Lua.
-
-To install LuaJIT:
-
-- Download the source by entering
-  `git clone https://luajit.org/git/luajit.git`.
-- Enter `cd luajit`
-- In macOS, enter `export MACOSX_DEPLOYMENT_TARGET={version}`
-  where `version` is a value like `13.2`.
-- Enter `make && sudo make install`
-- The previous command will ask you to create a symlink with a command like
-  `ln -sf luajit-2.1.0-beta3 /usr/local/bin/luajit`.
-  Enter that command.
-
-To generate a bytecode file from a Lua program,
-enter a command like `luajit -b demo.lua demo.out`
-To execute a bytecode file, enter a command like `luajit demo.out`.
-This will start faster than entering `luajit demo.lua`
-which performs just-in-time compilation at runtime.
-
-### Pallene
-
-"{% aTargetBlank "https://github.com/pallene-lang/pallene", "Pallene" %}
-is a statically typed and ahead-of-time compiled sister language
-to Lua with a focus on performance. It is intended for
-writing performance sensitive code that interacts with Lua,
-a space that is currently filled by C modules and by LuaJIT.
-Compared to C, Pallene should offer better
-support for interacting with Lua data types,
-bypassing the unfriendly syntax and performance overhead of the Lua-C API.
-Compared to LuaJIT, Pallene aims to offer
-more predictable run-time performance."
-
-Pallene is the name of one of the moons of Saturn.
-The name of the moon is pronounced "puh lee nee",
-but the language designer pronounces it "pah lean".
-
-One use case is to write performance-critical modules in Pallene,
-compile them, and require them in Lua code.
-
-To install Pallene, see the detailed instructions at the Pallene link above.
-
-### Teal
-
-{% aTargetBlank "https://github.com/teal-language/tl", "Teal" %} is a
-typed dialect of Lua.
-Currently it can target Lua 5.1 or 5.3.
-
-The supported types are `any`, `nil`, `boolean`, `integer`, `number`,
-`string`, `function`, `enum`, `record`, `thread`, and
-table types described by their allowed key and value types.
-
-To install Teal, enter `luarocks install tl`.
-
-To perform type checking of a Teal script without running it,
-enter `tl check {file-name}.tl`.
-
-To perform type checking and generate a `.lua` file
-with type annotations removed, enter `tl gen {file-name}.tl`.
-
-To run a Teal script, enter `tl run {file-name}.tl`.
-
-To add support for Teal in Neovim, create the file
-`~/.config/nvim/lua/user/plugins/vim-teal.lua` containing the following.
-This may require also using ALE to get syntax highlighting.
-
-```lua
-return {
-  "teal-language/vim-teal"
-}
-```
-
-The following code demonstrates using Teal to implement {% aTargetBlank
-"https://en.wikipedia.org/wiki/Fizz_buzz", "Fizz buzz" %}.
-This code will make more sense after reading the sections that follow.
-
-```lua
--- This type describes a number and the text that should
--- be printed if a given number is divisible by it.
-local type Rule = {number, string}
-
-local function fizzBuzz(limit: number, rules: {Rule})
-  for n = 1, limit do
-    local matched = false
-    for _, rule in ipairs(rules) do
-      local number = rule[1] as number
-      local text = rule[2] as string
-      if n % number == 0 then
-        print(text)
-        matched = true
-      end
-    end
-    if not matched then print(n) end
-  end
-end
-
-fizzBuzz(30, {
-  {3, "fizz"},
-  {5, "buzz"}
-})
-```
-
-## Languages Based on Lua
-
-{% aTargetBlank "http://ravilang.github.io/", "Ravi" %} is
-a "dialect of Lua with limited optional static typing and JIT/AOT compilers".
-The name comes from Sanskrit word for "Sun".
-
-{% aTargetBlank "https://moonscript.org/", "MoonScript" %} is
-"programmer friendly language that compiles into Lua".
-It "gives you the power of the fastest scripting language
-combined with a rich set of features".
-
-{% aTargetBlank "https://terralang.org/", "Terra" %} is a
-"low-level system programming language that is designed to
-interoperate seamlessly with the Lua programming language".
-It "shares Lua's syntax and control-flow constructs".
-
-{% aTargetBlank "http://squirrel-lang.org/", "Squirrel" %} is a
-"high level imperative, object-oriented programming language,
-designed to be a light-weight scripting language"."
-It was "inspired by languages like Python,Javascript and especially Lua".
-
 ## VS Code Support
 
 VS Code has great support for Lua.
@@ -3686,6 +3472,222 @@ For details, see my [blog page](/blog/love2d/).
 
 {% aTargetBlank "https://lovr.org", "LÖVR" %} is
 "an open source framework for rapidly building immersive 3D experiences."
+
+## Flavors of Lua
+
+### LuaJIT
+
+{% aTargetBlank "https://luajit.org/", "LuaJIT" %}
+is a just-in-time Lua compiler.
+It can be used as an alternative to `luac` to produces smaller bytecode files.
+LuaJIT also executes bytecode files and provides runtime optimizations
+that typically result in better performance.
+
+LuaJIT was created in 2005 by Mike Pall.
+It is maintained by a separate team from the one that maintains Lua.
+
+LuaJIT is based on Lua 5.1, so it is missing features of Lua added since then.
+It has optional support for some Lua 5.2 and 5.3 features.
+From Paul Ducklin, Lua and LuaJIT are
+"independent, incommensurate, and unlikely-ever-to-be-reunited projects
+that have been on very different journeys for more than 15 years now."
+
+LuaJIT does not support Lua's bitwise operators, but it includes
+the `bit` library that defines functions that can used instead.
+For example, instead of `n1 & n2`, use `bit.band(n1, n2)`.
+
+LuaJIT does not support the `goto` statement.
+
+LuaJIT uses a different syntax for vararg functions.
+
+TODO: Does LuaJIT only support 32-bit signed integers?
+
+Lua 5.2 changes from 5.1 are summarized {% aTargetBlank
+"https://www.lua.org/manual/5.2/readme.html#changes", "here" %}.
+These include:
+
+- ephemeron tables (tables with weak keys and strong values)
+- library for bitwise operations
+- `goto` statement
+- new `package` function `searchpath`
+- new metamethods `__pairs` and `__ipairs`
+- frontier patterns
+- `io.read` supports a new option `*L`
+- `io.lines` supports new options
+- many new functions in the C API
+
+Lua 5.3 changes from 5.2 are summarized {% aTargetBlank
+"https://www.lua.org/manual/5.3/readme.html#changes", "here" %}.
+These include:
+
+- support for integers that are 64-bit by default
+- support for 32-bit numbers
+- bitwise operators
+- basic utf-8 support
+- functions for packing and unpacking values
+- floor division
+- new `table` function `move`
+- new `string` functions `pack`, `unpack`, and `packsize`
+- many new functions in the C API
+- standalone interpreter
+
+Lua 5.4 changes from 5.3 are summarized {% aTargetBlank
+"https://www.lua.org/manual/5.4/readme.html#changes", "here" %}.
+They include:
+
+- `const` variables
+- to-be-closed variables
+- new function `coroutine.close`
+
+LuaJIT adds many {% aTargetBlank "https://luajit.org/extensions.html",
+"extensions" %} on top of Lua 5.1.
+These include the `bit`, `ffi`, and `jit` modules.
+It also enhances some of the C API functions.
+
+From {% aTargetBlank "https://api7.ai/learning-center/openresty/luajit-vs-lua",
+"api7.ai" %}:
+
+> The LuaJIT runtime environment ... has a JIT compiler
+> that can generate machine code directly.
+> The LuaJIT interpreter records some runtime statistics while executing the
+> bytecode, such as the actual number of times each Lua function call entry
+> is run and the actual number of times each Lua loop is executed.
+> When these counts exceed a random threshold,
+> the corresponding Lua function entry or Lua loop is considered hot enough
+> to trigger the JIT compiler to start working.
+> The JIT compiler tries to compile the corresponding Lua code path,
+> starting from the hot function's entry or the hot loop's location.
+> The compilation process converts the LuaJIT bytecode into LuaJIT's own
+> defined Intermediate Representation (IR) and
+> then generates machine code for the target architecture.
+
+In some cases when using LuaJIT it is necessary to write code differently
+than you would in vanilla Lua in order to get the best performance.
+
+The LuaJIT foreign function interface (FFI) makes it easier to call
+functions implemented in other languages than standard Lua.
+Using the Lua C API in LuaJIT is slower than using it in standard Lua.
+
+To install LuaJIT:
+
+- Download the source by entering
+  `git clone https://luajit.org/git/luajit.git`.
+- Enter `cd luajit`
+- In macOS, enter `export MACOSX_DEPLOYMENT_TARGET={version}`
+  where `version` is a value like `13.2`.
+- Enter `make && sudo make install`
+- The previous command will ask you to create a symlink with a command like
+  `ln -sf luajit-2.1.0-beta3 /usr/local/bin/luajit`.
+  Enter that command.
+
+To generate a bytecode file from a Lua program,
+enter a command like `luajit -b demo.lua demo.out`
+To execute a bytecode file, enter a command like `luajit demo.out`.
+This will start faster than entering `luajit demo.lua`
+which performs just-in-time compilation at runtime.
+
+### Pallene
+
+"{% aTargetBlank "https://github.com/pallene-lang/pallene", "Pallene" %}
+is a statically typed and ahead-of-time compiled sister language
+to Lua with a focus on performance. It is intended for
+writing performance sensitive code that interacts with Lua,
+a space that is currently filled by C modules and by LuaJIT.
+Compared to C, Pallene should offer better
+support for interacting with Lua data types,
+bypassing the unfriendly syntax and performance overhead of the Lua-C API.
+Compared to LuaJIT, Pallene aims to offer
+more predictable run-time performance."
+
+Pallene is the name of one of the moons of Saturn.
+The name of the moon is pronounced "puh lee nee",
+but the language designer pronounces it "pah lean".
+
+One use case is to write performance-critical modules in Pallene,
+compile them, and require them in Lua code.
+
+To install Pallene, see the detailed instructions at the Pallene link above.
+
+### Teal
+
+{% aTargetBlank "https://github.com/teal-language/tl", "Teal" %} is a
+typed dialect of Lua.
+Currently it can target Lua 5.1 or 5.3.
+
+The supported types are `any`, `nil`, `boolean`, `integer`, `number`,
+`string`, `function`, `enum`, `record`, `thread`, and
+table types described by their allowed key and value types.
+
+To install Teal, enter `luarocks install tl`.
+
+To perform type checking of a Teal script without running it,
+enter `tl check {file-name}.tl`.
+
+To perform type checking and generate a `.lua` file
+with type annotations removed, enter `tl gen {file-name}.tl`.
+
+To run a Teal script, enter `tl run {file-name}.tl`.
+
+To add support for Teal in Neovim, create the file
+`~/.config/nvim/lua/user/plugins/vim-teal.lua` containing the following.
+This may require also using ALE to get syntax highlighting.
+
+```lua
+return {
+  "teal-language/vim-teal"
+}
+```
+
+The following code demonstrates using Teal to implement {% aTargetBlank
+"https://en.wikipedia.org/wiki/Fizz_buzz", "Fizz buzz" %}.
+This code will make more sense after reading the sections that follow.
+
+```lua
+-- This type describes a number and the text that should
+-- be printed if a given number is divisible by it.
+local type Rule = {number, string}
+
+local function fizzBuzz(limit: number, rules: {Rule})
+  for n = 1, limit do
+    local matched = false
+    for _, rule in ipairs(rules) do
+      local number = rule[1] as number
+      local text = rule[2] as string
+      if n % number == 0 then
+        print(text)
+        matched = true
+      end
+    end
+    if not matched then print(n) end
+  end
+end
+
+fizzBuzz(30, {
+  {3, "fizz"},
+  {5, "buzz"}
+})
+```
+
+## Languages Based on Lua
+
+{% aTargetBlank "http://ravilang.github.io/", "Ravi" %} is
+a "dialect of Lua with limited optional static typing and JIT/AOT compilers".
+The name comes from Sanskrit word for "Sun".
+
+{% aTargetBlank "https://moonscript.org/", "MoonScript" %} is
+"programmer friendly language that compiles into Lua".
+It "gives you the power of the fastest scripting language
+combined with a rich set of features".
+
+{% aTargetBlank "https://terralang.org/", "Terra" %} is a
+"low-level system programming language that is designed to
+interoperate seamlessly with the Lua programming language".
+It "shares Lua's syntax and control-flow constructs".
+
+{% aTargetBlank "http://squirrel-lang.org/", "Squirrel" %} is a
+"high level imperative, object-oriented programming language,
+designed to be a light-weight scripting language"."
+It was "inspired by languages like Python,Javascript and especially Lua".
 
 ## Unorganized Content
 
