@@ -590,6 +590,12 @@ Start the web server and run the game with the following steps:
 - Enter `node server.js`
 - Browse localhost:1919
 
+If running the app results in the error
+"Uncaught RangeError: offset is out of bounds",
+try adding the `--memory` flag to the `npx love.js` command
+in order to allow it to use more memory.
+The default is 16,777,216 bytes.
+
 During development it will be necessary to rebuild the web app
 and restart the web server many times.
 The following shell script automates those tasks.
