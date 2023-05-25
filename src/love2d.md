@@ -261,12 +261,12 @@ One way to deploy a LÖVE app to the web is to use {% aTargetBlank
 "https://github.com/Davidobot/love.js", "love.js" %}.
 
 Generate a web application from a LÖVE project in the current directory
-with the following steps:
+with the following steps.
+This creates the subdirectory `web` containing many generated files.
 
 - Enter `npx love.js . web`
 - Press return to proceed.
 - Enter a name for the game.
-- This creates the directory `web` containing many generated files.
 
 Create a web server that sets the appropriate HTTP headers
 to enable use of `SharedArrayBuffer` with the following steps:
@@ -293,13 +293,30 @@ to enable use of `SharedArrayBuffer` with the following steps:
   ));
 
   const PORT = 1919;
-  app.listen(PORT, () => console.log('ready'));
+  app.listen(PORT, () => console.log('browse localhost:' + PORT));
   ```
 
 Start the web server and run the game with the following steps:
 
 - Enter `node server.js`
 - Browse localhost:1919
+
+During development it will be necessary to rebuild the web app
+and restart the web server many times.
+The following shell script automates those tasks.
+Consider naming it `websrv` and make it executable.
+
+```sh
+#!/usr/bin/env zsh
+
+rm -rf web
+npx love.js src web
+pushd server
+node server.js
+popd
+```
+
+To run this, enter `./websrv`.
 
 ### iOS
 
