@@ -75,6 +75,59 @@ For macOS:
   To fix this, open the Settings app, select "Privacy & Security",
   scroll down to "love.app was blocked ..." and click the "Open Anyway" button.
 
+## Getting Started
+
+To creating a new LÖVE app:
+
+- Create a directory for the app.
+- Create the file `main.lua` in this directory.
+- Define the functions `love.load`, `love.update`, and `love.draw` in this file
+- Create the file `conf.lua` in this directory.
+- Add content like the following to configure the app:
+
+  ```lua
+  local love = require "love"
+
+  function love.conf(t)
+    t.modules.joystick = false -- when not supporting joystick use
+    t.title = "Monkey Nim"
+    t.version = "11.4"    -- version of Love2D
+    t.window.width = 393  -- third of 1179 (iPhone 14 Pro width)
+    t.window.height = 852 -- third of 2556 (iPhone 14 Pro height)
+    t.window.resizable = true -- defaults to false
+  end
+  ```
+For a list of additional configuration options, see {% aTargetBlank
+"https://love2d.org/wiki/Config_Files", "Config Files" %}.
+
+LÖVE apps always define the functions
+`love.load()`, `love.draw()`, and `love.update(dt)` in their `main.lua` file.
+The `love.load()` function performs initial game setup.
+The `love.draw()` function specifies what should be
+drawn on the screen at any point in time.
+The `love.update(dt)` function implements the game logic.
+
+Variables whose values never change can be defined at the top level
+before the `love.load` function.
+Variables whose values change while the app runs
+can be declare as `local` at the top level,
+but should be set in the `love.load` function.
+
+The `love.draw` and `love.update` functions
+are typically called 60 times per second (frame rate).
+The `vsync` option can be set to synchronize the frame rate
+with the refresh rate of the monitor.
+It can be set in the `conf.lua` file with `t.window.vsync = 1`.
+Alternatively it can be passed as an argument
+to the `love.graphics.setMode` function.
+
+The parameter `dt` in the `love.update` function is short for "delta time".
+This is used to make game updates frame rate independent.
+It is a floating point number that indicates
+the number of seconds requires to display each frame.
+This value can vary among devices.
+For example, when `dt` is `0.1`, the device displays 10 frames per second.
+
 ## Running
 
 The initial source file must be named `main.lua`.
@@ -233,7 +286,7 @@ end
 
 LÖVE uses the font "Bitstream Vera Sans" by default.
 Any font types supported by {% aTargetBlank "https://freetype.org/",
-"FreeType 2" %} can be also be used.
+"loFreeType 2" %} can be also be used.
 This includes TrueType, WOFF, and many others.
 
 To create a font object, use 
@@ -432,6 +485,10 @@ a C++-based 2D physics engine.
 Box2D was created by Erin Catto who works at Blizzard Games.
 Box2D is used by many games including Angry Birds.
 
+For an example project that uses `love.physics`, see {% aTargetBlank
+"https://github.com/mvolkmann/lua-examples/tree/main/love/monkey-nim",
+"Monkey Nim" %}.
+
 ## Deploying
 
 LÖVE apps can be deployed to Windows, macOS, Linux, Android, and iOS.
@@ -576,46 +633,6 @@ After making changes to the Lua code, enter `./bundle` again
 to create a new `.love` file and then re-run the iOS project.
 
 ## Unorganized Content
-
-To get started creating a game:
-
-- Create a directory for a new game.
-- Create a file in this directory named "main.lua".
-
-Love2D programs always define the functions
-`love.load()`, `love.draw()`, and `love.update(dt)`.
-The `love.load()` function performs initial game setup.
-The `love.draw()` function specifies what should be
-drawn on the screen at any point in time.
-The `love.update(dt)` function implements the game logic.
-
-The `love.draw` and `love.update` functions
-are typically called 60 times per second (frame rate).
-The `vsync` option can be set to synchronize the frame rate
-with the refresh rate of the monitor.
-It can be set in the `conf.lua` file with `t.window.vsync = 1`.
-Alternatively it can be passed as an argument
-to the `love.graphics.setMode` function.
-
-The parameter `dt` in the `love.update` function is short for "delta time".
-This is used to make game updates frame rate independent.
-It is a floating point number that indicates
-the number of seconds requires to display each frame.
-This value can vary among devices.
-For example, when `dt` is `0.1`, the device displays 10 frames per second.
-
-To configure a game, add a `conf.lua` file to your game project directory.
-For example:
-
-```lua
-function love.conf(t)
-  t.title = "My Game"
-  t.version = "11.4" -- version of Love2d
-  t.window.width = 1280
-  t.window.height = 720
-  t.window.resizable = false
-end
-```
 
 When comparing the distance between two points to some value,
 compare the square of the distance.
