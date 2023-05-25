@@ -87,6 +87,34 @@ a window matching the screenshot below is displayed.
 
 Note that the kite tail on the balloon says "NO GAME".
 
+There are many ways to run a LÖVE app:
+
+- Start from a terminal window.
+
+  1. Add the following in `~/.zshrc`:
+    ```bash
+    alias love="/Applications/love.app/Contents/MacOS/love"
+    ```
+  1. Open a new terminal session.
+  1. `cd` to your project directory.
+  1. Enter `love .`
+
+- Bundle the app files (as described in the next section)
+  and double-click the bundle file.
+
+- Drag the app directory onto the Love application icon.
+  In macOS, drag from the Finder.
+
+- Use VS Code.
+
+  1. Start VS Code and open the project directory.
+  1. Install the extension "Love2D Support" from Pixelbyte Studios.
+  1. Click the gear icon and select "Extension Settings".
+  1. Change "Pixelbyte > love2d: Path" to
+     "/Applications/love.app/Contents/MacOS/love".
+  1. Open the `main.lua` file in an editor tab.
+  1. Press cmd-l to run the game.
+
 ## Bundling
 
 The source code and asset files (fonts, sounds, and images) can be
@@ -153,7 +181,8 @@ The current color can be set using
 where all the arguments are floating point numbers from 0 to 1.
 The color parameters are required.
 The `alpha` parameter can be omitted and defaults to 1.
-This affects many things that are drawn after the call.
+This remains in effect until it is changed again
+and affects many things that are drawn including text and shapes.
 
 The `setColor` function can also be passed an array-like table of color values.
 
@@ -202,11 +231,35 @@ end
 
 ## Fonts
 
-TODO: Add detail here.
+LÖVE uses the font "Bitstream Vera Sans" by default.
+Any font types supported by {% aTargetBlank "https://freetype.org/",
+"FreeType 2" %} can be also be used.
+This includes TrueType, WOFF, and many others.
+
+To create a font object, use 
+`local myFont = love.graphics.newFont(fontFilePath, fontSize)`.
+
+To change the current font, use `love.graphics.setFont(myFont)`.
+This remains in effect until it is changed again.
+It affects what is rendered by `love.graphics.print(text, x, y)`.
+
+Consider creating all the `Font` objects that the app will need
+on startup and holding them in a table.  For example:
+
+```lua
+local fonts = {
+  default = g.newFont("Pangolin-Regular.ttf", 18),
+  button = g.newFont("Pangolin-Regular.ttf", 30)
+}
+```
+
+To use one of these fonts later,
+use `love.graphics.setFont(fonts.button, x, y)`.
 
 ## Images
 
-LÖVE supports the image formats ...
+LÖVE supports the image formats jpg, png, bmp, and many others.
+It does not support gif files
 
 To create an `Image` object: 
 
@@ -235,7 +288,7 @@ use `love.graphics.draw(images.monkey, x, y)`.
 
 ## Sounds
 
-LÖVE supports the sound formats `wav`, `mp3`, `ogg`, and many others.
+LÖVE supports the sound formats mp3, ogg, wav, and many others.
 
 To create a sound, specify its file path and source type as follows:
 
@@ -529,15 +582,6 @@ To get started creating a game:
 - Create a directory for a new game.
 - Create a file in this directory named "main.lua".
 
-If using VS Code:
-
-- Install the extension "Love2D Support" from Pixelbyte Studios.
-- Click the gear icon and select "Extension Settings".
-- Change "Pixelbyte > love2d: Path" to
-  "/Applications/love.app/Contents/MacOS/love".
-- Open a `main.lua` file in an editor tab.
-- Press cmd-l to run the game.
-
 Love2D programs always define the functions
 `love.load()`, `love.draw()`, and `love.update(dt)`.
 The `love.load()` function performs initial game setup.
@@ -573,25 +617,8 @@ function love.conf(t)
 end
 ```
 
-To run a game, use one of these approaches:
-
-- Drag the game directory onto the Love application icon.
-  In macOS, drag from the Finder.
-- If VS Code has been configured property, press cmd-l.
-- Start from a terminal window.
-
-  - Add the following in `~/.zshrc`:
-    ```bash
-    alias love="/Applications/love.app/Contents/MacOS/love"
-    ```
-  - Open a new terminal session.
-  - `cd` to your project directory.
-  - Enter `love .`
-
 When comparing the distance between two points to some value,
 compare the square of the distance.
 This removes the need to use the `math.sqrt` function
 which can hurt game performance.
-
-TODO: See lua/love/love-game/main.lua.
 
