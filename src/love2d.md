@@ -488,32 +488,38 @@ For example:
 ```lua
 local love = require "love"
 
+local backgroundPosition
+local backgroundSpeed = 100
 local g = love.graphics
 local image = love.graphics.newImage("background.jpg")
-local position
-local speed = 100
 local windowWidth, windowHeight = g.getDimensions()
 
 function love.load()
-  position = 0
+    backgroundPosition = 0
 end
 
 function love.draw()
-  -- To scroll vertically ...
-  -- love.graphics.draw(image, 0, position)
-  -- love.graphics.draw(image, 0, position - windowHeight)
+    -- To scroll vertically ...
+    -- love.graphics.draw(image, 0, backgroundPosition)
+    -- love.graphics.draw(image, 0, backgroundPosition - windowHeight)
 
-  -- To scroll horizontally ...
-  g.draw(image, position, 0)
-  g.draw(image, position - windowWidth, 0)
+    -- To scroll horizontally ...
+    g.draw(image, backgroundPosition, 0)
+    g.draw(image, backgroundPosition - windowWidth, 0)
 end
 
 function love.update(dt)
-  -- To scroll vertically ...
-  -- position = (position + speed * dt) % image:getHeight()
+    -- To scroll vertically ...
+    -- backgroundPosition = (backgroundPosition + backgroundSpeed * dt) % image:getHeight()
 
-  -- To scroll horizontally ...
-  position = (position - speed * dt) % windowWidth
+    -- To scroll horizontally ...
+    backgroundPosition = (backgroundPosition - backgroundSpeed * dt) % windowWidth
+end
+
+function love.keypressed(key)
+    if key == "escape" then
+        love.event.quit()
+    end
 end
 ```
 
