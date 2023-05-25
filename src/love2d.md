@@ -260,17 +260,46 @@ Details can be found at {% aTargetBlank
 One way to deploy a LÖVE app to the web is to use {% aTargetBlank
 "https://github.com/Davidobot/love.js". "love.js" %}.
 
-To generate a web application from a LÖVE project in the current directory:
+Generate a web application from a LÖVE project in the current directory
+with the following steps:
 
-- Enter `npx love.js . web`.
+- Enter `npx love.js . web`
 - Press return to proceed.
 - Enter a name for the game.
 - This creates the directory `web` containing many generated files.
-- Enter `cd web`.
-- Verify that Python 3 is installed by entering `python -V`.
-- Install Python 3 if not already installed.
-- Start a local http server by entering `python -m http.server`.
-- Browse localhost:8000.
+
+Create a web server that sets the appropriate HTTP headers
+to enable use of `SharedArrayBuffer` with the following steps:
+
+- Install Node.js.
+- Enter `mkdir server`
+- Enter `cd server`
+- Enter `touch server.js`
+- Edit `server.js` and add the following code:
+
+  ```js
+  const express = require('express');
+
+  const app = express();
+
+  app.use(express.static(
+    '../web',
+    {
+      setHeaders: res => {
+        res.set('Cross-Origin-Opener-Policy', 'same-origin');
+        res.set('Cross-Origin-Embedder-Policy', 'require-corp');
+      }
+    }
+  ));
+
+  const PORT = 1919;
+  app.listen(PORT, () => console.log('ready'));
+  ```
+
+Start the web server and run the game with the following steps:
+
+- Enter `node server.js`
+- Browse localhost:1919
 
 ### iOS
 
