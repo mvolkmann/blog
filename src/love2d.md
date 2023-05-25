@@ -148,7 +148,57 @@ focus will move from the code editor to the game.
 
 ## Colors
 
-TODO: Add detail here.
+The current color can be set using
+`love.graphics.setColor(red, green, blue, alpha)`
+where all the arguments are floating point numbers from 0 to 1.
+The color parameters are required.
+The `alpha` parameter can be omitted and defaults to 1.
+This affects many things that are drawn after the call.
+
+The `setColor` function can also be passed an array-like table of color values.
+
+The following function can be used to convert color values
+in the range 0 to 255 into the range 0 to 1:
+
+```lua
+local function rgb(red, green, blue)
+  return red / 255, green / 255, blue / 255
+end
+```
+
+Consider defining all the colors that the app will need
+on startup and holding them in a table.  For example:
+
+```lua
+return {
+  black = { 0, 0, 0 },
+  blue = { 0, 0, 1 },
+  brown = { rgb(150, 75, 0) },
+  gray = { rgb(150, 150, 150) },
+  green = { 0, 1, 0 },
+  purple = { rgb(148, 0, 211) },
+  red = { 1, 0, 0 },
+  white = { 1, 1, 1 },
+  yellow = { 1, 1, 0 }
+}
+```
+
+To use one of these colors later,
+use `love.graphics.setColor(colors.yellow)`.
+
+The following function can be used to generate a random color:
+
+```lua
+function randomColor()
+  local r = math.random()
+  local g = math.random()
+  local b = math.random()
+
+  -- This makes sure the color isn't too dark.
+  local total = r + g + b
+  return total >= 1 and { r, g, b } or randomColor()
+end
+```
 
 ## Fonts
 
