@@ -133,74 +133,21 @@ and restart the app when a change is detected.
 One issue with this is that every time the game is restarted,
 focus will move from the code editor to the game.
 
-## Deploying
+## Colors
 
-LÖVE apps can be deployed to Windows, macOS, Linux, Android, and iOS.
-Details can be found at {% aTargetBlank
-"https://love2d.org/wiki/Game_Distribution", "Game Distribution" %}.
+TODO: Add detail here.
 
-### iOS
+## Fonts
 
-The YouTube video {% aTargetBlank
-"https://www.youtube.com/watch?v=MsYanwcU42E&list=WL&index=108&t=6s",
-"Build LOVE2D for iOS iPhone, iPad, iPod Touch" %}
-walks through the steps to deploy a LÖVE app to iOS.
-This must be done in macOS.
+TODO: Add detail here.
 
-The following steps create a default iOS project and run it:
+## Images
 
-1. If not already installed, install Xcode.
-1. Download iOS source by clicking the "iOS source /libraries" link
-   in the Download section of the
-   {% aTargetBlank "https://love2d.org/", "LÖVE" %} home page.
-1. Double-click the downloaded file to unzip it.
-1. Move this directory to its desired location and rename it.
-1. In the Finder, navigate to `platform/xcode`.
-1. Double-click the file `love.xcodeproj` to open it in Xcode.
-1. Select a simulator device.
-1. Build and run the app.
-1. In the simulator, tap "No-game screen"
-   to see the default "NO GAME" screen.
+TODO: Add detail here.
 
-The following steps customize the default project to run your game.
+## Sounds
 
-1. Enter `./bundle` to bundle the LOVE project into a `.love` file.
-1. Back in Xcode, select the top-most project navigator item
-   to edit the LÖVE project.
-1. Select the "love.ios" target.
-1. Select the "General" tab.
-1. In the "Identity" section, enter a "Display Name".
-   TODO: Why is the displayed app name "love" instead of this value?
-1. In the "Deployment Info" section under "iPhone Orientation",
-   consider only checking "Portrait".
-1. Select the "Signing & Capabilities" tab.
-1. In the "Team" dropdown, select your development team.
-1. Change the bundle identifier to uniquely identify your project.
-1. Select the "Build Phases" tab.
-1. Expand the "Copy Bundle Resources" section.
-1. Click the "+" button and add your `.love` zip file.
-1. Check the "Copy items if needed" checkbox.
-1. Select the "Create folder references" radio button.
-1. Click the "Finish" button.
-
-To run the app on a real device:
-
-1. Attach the device to the mac with a USB cable.
-1. Select the device from the device menu.
-1. Build and run the project.
-
-To size the window appropriately, the following settings in the `conf.lua` file:
-
-To change the app icon, use Xcode to replace the images
-in the file `Images.xcassets`.
-
-```lua
-  t.window.width = 590   -- half of 1179 (iPhone 14 Pro width)
-  t.window.height = 1276 -- half of 2556 (iPhone 14 Pro height)
-```
-
-After making changes to the Lua code, enter `./bundle` again
-to create a new `.love` file and then re-run the iOS project.
+TODO: Add detail here.
 
 ## Graphics
 
@@ -212,14 +159,6 @@ create and use variables like these to refer to the functions:
 local g = love.graphics
 local p = love.physics
 ```
-
-## Physics
-
-The `love.physics` module provides many functions that wrap the functionality
-of {% aTargetBlank "https://box2d.org/", "Box2D" %} which is
-a C++-based 2D physics engine.
-Box2D was created by Erin Catto who works at Blizzard Games.
-Box2D is used by many games including Angry Birds.
 
 ## Frame Rate
 
@@ -302,10 +241,101 @@ Another may is to use the `love.mouse.isDown` function.
 This takes arguments that are the button numbers to check
 and returns a boolean indicating if any of them are down.
 
-## Unorganized Content
+## Physics
 
-TODO: Does Love2D include its own version of Lua
-TODO: and ignore the installed version?
+The `love.physics` module provides many functions that wrap the functionality
+of {% aTargetBlank "https://box2d.org/", "Box2D" %} which is
+a C++-based 2D physics engine.
+Box2D was created by Erin Catto who works at Blizzard Games.
+Box2D is used by many games including Angry Birds.
+
+## Deploying
+
+LÖVE apps can be deployed to Windows, macOS, Linux, Android, and iOS.
+Details can be found at {% aTargetBlank
+"https://love2d.org/wiki/Game_Distribution", "Game Distribution" %}.
+
+### Web
+
+One way to deploy a LÖVE app to the web is to use {% aTargetBlank
+"https://github.com/Davidobot/love.js". "love.js" %}.
+
+To generate a web application from a LÖVE project in the current directory:
+
+- Enter `npx love.js . web`.
+- Press return to proceed.
+- Enter a name for the game.
+- This creates the directory `web` containing many generated files.
+- Enter `cd web`.
+- Verify that Python 3 is installed by entering `python -V`.
+- Install Python 3 if not already installed.
+- Start a local http server by entering `python -m http.server`.
+- Browse localhost:8000.
+
+### iOS
+
+The YouTube video {% aTargetBlank
+"https://www.youtube.com/watch?v=MsYanwcU42E&list=WL&index=108&t=6s",
+"Build LOVE2D for iOS iPhone, iPad, iPod Touch" %}
+walks through the steps to deploy a LÖVE app to iOS.
+This must be done in macOS.
+
+The following steps create a default iOS project and run it:
+
+1. If not already installed, install Xcode.
+1. Download iOS source by clicking the "iOS source /libraries" link
+   in the Download section of the
+   {% aTargetBlank "https://love2d.org/", "LÖVE" %} home page.
+1. Double-click the downloaded file to unzip it.
+1. Move this directory to its desired location and rename it.
+1. In the Finder, navigate to `platform/xcode`.
+1. Double-click the file `love.xcodeproj` to open it in Xcode.
+1. Select a simulator device.
+1. Build and run the app.
+1. In the simulator, tap "No-game screen"
+   to see the default "NO GAME" screen.
+
+The following steps customize the default project to run your game.
+
+1. Enter `./bundle` to bundle the LOVE project into a `.love` file.
+1. Back in Xcode, select the top-most project navigator item
+   to edit the LÖVE project.
+1. Select the "love.ios" target.
+1. Select the "General" tab.
+1. In the "Identity" section, enter a "Display Name".
+   TODO: Why is the displayed app name "love" instead of this value?
+1. In the "Deployment Info" section under "iPhone Orientation",
+   consider only checking "Portrait".
+1. Select the "Signing & Capabilities" tab.
+1. In the "Team" dropdown, select your development team.
+1. Change the bundle identifier to uniquely identify your project.
+1. Select the "Build Phases" tab.
+1. Expand the "Copy Bundle Resources" section.
+1. Click the "+" button and add your `.love` zip file.
+1. Check the "Copy items if needed" checkbox.
+1. Select the "Create folder references" radio button.
+1. Click the "Finish" button.
+
+To run the app on a real device:
+
+1. Attach the device to the mac with a USB cable.
+1. Select the device from the device menu.
+1. Build and run the project.
+
+To size the window appropriately, the following settings in the `conf.lua` file:
+
+To change the app icon, use Xcode to replace the images
+in the file `Images.xcassets`.
+
+```lua
+  t.window.width = 590   -- half of 1179 (iPhone 14 Pro width)
+  t.window.height = 1276 -- half of 2556 (iPhone 14 Pro height)
+```
+
+After making changes to the Lua code, enter `./bundle` again
+to create a new `.love` file and then re-run the iOS project.
+
+## Unorganized Content
 
 To get started creating a game:
 
