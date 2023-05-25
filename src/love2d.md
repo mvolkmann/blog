@@ -374,7 +374,8 @@ The following steps customize the default project to run your game.
 1. Change the bundle identifier to uniquely identify your project.
 1. Select the "Build Phases" tab.
 1. Expand the "Copy Bundle Resources" section.
-1. Click the "+" button and add your `.love` zip file.
+1. Click the "+" button, click the "Add Other..." button,
+   and add your `.love` zip file.
 1. Check the "Copy items if needed" checkbox.
 1. Select the "Create folder references" radio button.
 1. Click the "Finish" button.
