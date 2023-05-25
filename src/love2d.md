@@ -156,7 +156,32 @@ TODO: Add detail here.
 
 ## Images
 
-TODO: Add detail here.
+LÖVE supports the image formats ...
+
+To create an `Image` object: 
+
+```lua
+local monkey = love.graphics.newImage('images/monkey.png')
+```
+
+To draw an image at a given x,y location,
+use `love.graphics.draw(monkeyImage, x, y)`.
+
+The `draw` function also takes argments for the rotation,
+x scale, y scale, origin x offset, origin y offset.
+
+Consider creating all the `Image` objects that the app will need
+on startup and holding them in a table.  For example:
+
+```lua
+local image = {
+  monkey = love.graphics.newImage('images/monkey.png'),
+  banana = love.graphics.newImage('images/banana.png'),
+}
+```
+
+To draw one of these images later,
+use `love.graphics.draw(images.monkey, x, y)`.
 
 ## Sounds
 
