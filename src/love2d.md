@@ -477,6 +477,20 @@ Another may is to use the `love.mouse.isDown` function.
 This takes arguments that are the button numbers to check
 and returns a boolean indicating if any of them are down.
 
+## Mouse Cursor
+
+The following code hides the default mouse cursor
+and display an image in its place.
+
+```lua
+love.mouse.setVisible(false)
+
+local x, y = love.mouse.getPosition()
+local h = monkeyImage:getHeight()
+local w = monkeyImage:getWidth()
+g.draw(monkeyImage, x - w/2, y - h/2)
+```
+
 ## Background Scrolling
 
 A single image can be scrolled across the background in any direction.
