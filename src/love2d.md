@@ -17,6 +17,10 @@ It includes some Lua 5.2 and 5.3 features.
 
 ## Resources
 
+- {% aTargetBlank "https://github.com/love2d-community/awesome-love2d",
+  "Awesome Löve" %} - "A categorized community-driven collection of
+  high-quality, awesome LÖVE libraries, projects, and resources."
+
 - {% aTargetBlank "https://discord.gg/r5JjuFU8",
   "LÖVE Game Framework Discord Channel" %}
 
@@ -498,8 +502,12 @@ g.draw(monkeyImage, x - w/2, y - h/2)
 ## Background Scrolling
 
 A single image can be scrolled across the background in any direction.
-The image should have the same dimensions at the window
-and the opposite edges should match to avoid a visible "seam".
+It is best if the image being scrolled is pre-scaled
+so one of its dimensions matches the corresponding window dimension.
+For example, for horizontal scrolling
+the image height should match the window height.
+It order to achieve seamless scrolling,
+the opposite edges should match.
 
 For example:
 
