@@ -575,6 +575,13 @@ end
 
 ## Tweening
 
+Tweening is the process of gradually changing a value over time.
+It is often used to implement animations.
+The values changed can include the coordinates of an item on the screen,
+the size of an item, a font size, a sound volume, and more.
+Typically an easing function is selected to control the rate of change
+over the duration.
+
 There are several libraries that implementing tweening.
 One example is {% aTargetBlank "https://github.com/kikito/tween.lua",
 "tween.lua" %}.
