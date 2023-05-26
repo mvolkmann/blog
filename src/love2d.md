@@ -86,6 +86,8 @@ To creating a new LÖVE app:
 - Add content like the following to configure the app:
 
   ```lua
+  -- This is not required, but prevents warnings in code editors
+  -- about "love" being undefined.
   local love = require "love"
 
   function love.conf(t)
