@@ -582,6 +582,8 @@ One example is {% aTargetBlank "https://github.com/kikito/tween.lua",
 To install this, copy the `tween.lua` from the link above into your project.
 
 The following example tweens the location of a piece of text.
+The text decreases in font size as it drops down the screen
+and bounces when it reaches the bottom.
 
 ```lua
 -- Describe the subject which is the thing to be tweened.
