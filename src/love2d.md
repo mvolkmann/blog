@@ -573,6 +573,35 @@ function processFutures()
 end
 ```
 
+## Tweening
+
+There are several libraries that implementing tweening.
+One example is {% aTargetBlank "https://github.com/kikito/tween.lua",
+"tween.lua" %}.
+
+To install this, copy the `tween.lua` from the link above into your project.
+
+The following example tweens the location of a piece of text.
+
+```lua
+-- Describe the subject which is the thing to be tweened.
+-- x and y define the starting location.
+local label = { text = "TWEENING!", x = 100, y = 0 }
+
+-- Define the tween.  The arguments are the duration in seconds,
+-- the subject, the target, and the easing function.
+-- The target is the set of properties be modified during the tween.
+-- Any number of properties can be modified.
+local labelTween = tween.new(4, label, { y = windowHeight - 28 }, 'outBounce')
+
+-- Draw the thing being tweened in the "love.draw" function
+-- at its current location.
+love.graphics.print(label.text, label.x, label.y)
+
+-- Update the thing being tweened in the "love.update" function.
+labelTween:update(dt)
+```
+
 ## Physics
 
 The `love.physics` module provides many functions that wrap the functionality
