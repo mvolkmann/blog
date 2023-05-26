@@ -586,19 +586,26 @@ The following example tweens the location of a piece of text.
 ```lua
 -- Describe the subject which is the thing to be tweened.
 -- x and y define the starting location.
-local label = { text = "TWEENING!", x = 100, y = 0 }
+local label = { text = "TWEENING!", fontSize = 60, x = 100, y = 0, }
 
 -- Define the tween.  The arguments are the duration in seconds,
 -- the subject, the target, and the easing function.
 -- The target is the set of properties be modified during the tween.
 -- Any number of properties can be modified.
-local labelTween = tween.new(4, label, { y = windowHeight - 28 }, 'outBounce')
+local labelTween = tween.new(
+  4,
+  label,
+  { fontSize = 20, y = windowHeight - 28 },
+  'outBounce'
+)
 
--- Draw the thing being tweened in the "love.draw" function
--- at its current location.
+-- Draw the thing being tweened using its current properties
+-- in the "love.draw" function.
+love.graphics.setFont(g.newFont("Pangolin-Regular.ttf", label.fontSize))
 love.graphics.print(label.text, label.x, label.y)
 
--- Update the thing being tweened in the "love.update" function.
+-- Update the properties of the thing being tweened
+-- in the "love.update" function.
 labelTween:update(dt)
 ```
 
