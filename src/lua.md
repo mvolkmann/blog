@@ -336,6 +336,12 @@ There are several tools that claim to
 produce executable files from Lua programs.
 However, none of them seem to be popular or actively maintained.
 
+## Debugging
+
+TODO: Add information about the `debug` standard library
+TODO: and debuggers built using its features.
+See https://github.com/LewisJEllis/awesome-lua?v=1.0.21#debugging-and-profiling.
+
 ## Keywords
 
 The Lua programming language only defines 22 keywords.

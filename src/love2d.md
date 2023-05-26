@@ -297,6 +297,8 @@ To create a font object, use
 To change the current font, use `love.graphics.setFont(myFont)`.
 This remains in effect until it is changed again.
 It affects what is rendered by `love.graphics.print(text, x, y)`.
+and `love.graphics.printf(text, x, y, limit, align)`.
+The latter differs in that it provides word wrapping and alignment.
 
 Consider creating all the `Font` objects that the app will need
 on startup and holding them in a table.  For example:
