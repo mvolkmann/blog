@@ -549,6 +549,30 @@ function love.keypressed(key)
 end
 ```
 
+## Futures
+
+The following code can be used to schedule functions
+to be called in the future.
+
+```lua
+local futures = {}
+
+-- This schedules a function to run in the future.
+function future(fn, seconds)
+  futures[fn] = os.time() + seconds
+end
+
+-- Call this near the beginning of love.update.
+function processFutures()
+  for fn, time in pairs(futures) do
+    if time <= os.time() then
+      futures[fn] = nil
+      fn()
+    end
+  end
+end
+```
+
 ## Physics
 
 The `love.physics` module provides many functions that wrap the functionality
