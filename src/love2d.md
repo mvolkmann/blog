@@ -549,24 +549,27 @@ function love.keypressed(key)
 end
 ```
 
-## Futures
+## Calling Functions Later
 
 The following code can be used to schedule functions
-to be called in the future.
+to be called later.
 
 ```lua
-local futures = {}
+local laters = {}
 
--- This schedules a function to run in the future.
-function future(fn, seconds)
-  futures[fn] = os.time() + seconds
+-- This schedules a function to run a given number of seconds later.
+function later(fn, seconds)
+  -- os.time() only returns the time in seconds as an integer.
+  -- socket.gettime() is similar but returns
+  -- a floating point value for subsecond precision.
+  laters[fn] = socket.gettime() + seconds
 end
 
 -- Call this near the beginning of love.update.
-function processFutures()
-  for fn, time in pairs(futures) do
+function processLaters()
+  for fn, time in pairs(laters) do
     if time <= os.time() then
-      futures[fn] = nil
+      laters[fn] = nil
       fn()
     end
   end
