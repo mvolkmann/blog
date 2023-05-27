@@ -98,11 +98,14 @@ To creating a new LÖVE app:
     t.modules.joystick = false -- when not supporting joystick use
     t.title = "Monkey Nim"
     t.version = "11.4"    -- version of Love2D
-    t.window.width = 393  -- third of 1179 (iPhone 14 Pro width)
-    t.window.height = 852 -- third of 2556 (iPhone 14 Pro height)
+    -- When t.window.width and t.window.height are not set,
+    -- love.graphics.getDimensions() returns the screen width and height.
+    -- t.window.width = 393 -- iPhone 14 Pro width
+    -- t.window.height = 852 -- iPhone 14 Pro height
     t.window.resizable = true -- defaults to false
   end
   ```
+
 For a list of additional configuration options, see {% aTargetBlank
 "https://love2d.org/wiki/Config_Files", "Config Files" %}.
 
@@ -518,6 +521,9 @@ local backgroundPosition
 local backgroundSpeed = 100
 local g = love.graphics
 local image = love.graphics.newImage("background.jpg")
+
+-- When t.window.width and t.window.height are not set,
+-- love.graphics.getDimensions() returns the screen width and height.
 local windowWidth, windowHeight = g.getDimensions()
 
 function love.load()
