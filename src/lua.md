@@ -2987,7 +2987,7 @@ function string.startsWith(source, target)
 end
 
 function string.endsWith(source, target)
-  startIndex, endIndex = source:find(target, 1, true)
+  local _, endIndex = source:find(target, 1, true)
   return endIndex == #source
 end
 
