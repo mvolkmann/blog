@@ -14,6 +14,37 @@ was added in iOS 17.
 > You can query and filter data using regular Swift code.
 > And it’s designed to integrate seamlessly with SwiftUI.
 
+## Projects
+
+To create a new project that uses SwiftData:
+
+- Select File ... New ... Project...
+- In the dialog that appears, select "App".
+- Click the "Next" button.
+- Enter a "Product Name".
+- For the Interface, select "SwiftUI".
+- For the Language, select "Swift".
+- For the Storage, select "SwiftData".
+- Optionally check the checkbox for "Host in CloudKit"
+  to enable sharing the data between devices.
+  When not checked, the data will only be stored
+  in the device where the app runs.
+- Click the "Next" button.
+- Select the directory where the project will be stored.
+- Click the "Create" button.
+
+This creates a project containing the following files:
+
+- `Item.swift` - an example model definition
+  where the only property is `timestamp`
+- `ContentView.swift` - a `View` subtype that supports
+  creating, retrieving, and deleting `Item` instances
+- `Assets.xcassets` - an asset file that contains
+  placeholders for `AccentColor` and `AppIcon`
+- `{project-name}App.swift` - an `App` subtype that
+  creates a model container for `Item` instances
+  and displays a `ContentView`
+
 ## Models
 
 To define a model, add the `@Model` macro to a `class` definition.
