@@ -7,7 +7,7 @@ layout: topic-layout.njk
 ## Overview
 
 {% aTargetBlank "https://love2d.org/", "LÖVE" %} is
-"an *awesome* framework you can use to make 2D games in Lua.
+"an _awesome_ framework you can use to make 2D games in Lua.
 It's free, open-source, and works on Windows, Mac OS X, Linux, Android and iOS."
 
 LÖVE can be downloaded from the previous link.
@@ -154,9 +154,11 @@ There are many ways to run a LÖVE app:
 - Start from a terminal window.
 
   1. Add the following in `~/.zshrc`:
-    ```bash
-    alias love="/Applications/love.app/Contents/MacOS/love"
-    ```
+
+  ```bash
+  alias love="/Applications/love.app/Contents/MacOS/love"
+  ```
+
   1. Open a new terminal session.
   1. `cd` to your project directory.
   1. Enter `love .`
@@ -258,7 +260,7 @@ end
 ```
 
 Consider defining all the colors that the app will need
-on startup and holding them in a table.  For example:
+on startup and holding them in a table. For example:
 
 ```lua
 return {
@@ -298,7 +300,7 @@ Any font types supported by {% aTargetBlank "https://freetype.org/",
 "loFreeType 2" %} can be also be used.
 This includes TrueType, WOFF, and many others.
 
-To create a font object, use 
+To create a font object, use
 `local myFont = love.graphics.newFont(fontFilePath, fontSize)`.
 
 To change the current font, use `love.graphics.setFont(myFont)`.
@@ -308,7 +310,7 @@ and `love.graphics.printf(text, x, y, limit, align)`.
 The latter differs in that it provides word wrapping and alignment.
 
 Consider creating all the `Font` objects that the app will need
-on startup and holding them in a table.  For example:
+on startup and holding them in a table. For example:
 
 ```lua
 local fonts = {
@@ -325,7 +327,7 @@ use `love.graphics.setFont(fonts.button, x, y)`.
 LÖVE supports the image formats jpg, png, bmp, and many others.
 It does not support gif files
 
-To create an `Image` object: 
+To create an `Image` object:
 
 ```lua
 local monkey = love.graphics.newImage('images/monkey.png')
@@ -338,7 +340,7 @@ The `draw` function also takes argments for the rotation,
 x scale, y scale, origin x offset, origin y offset.
 
 Consider creating all the `Image` objects that the app will need
-on startup and holding them in a table.  For example:
+on startup and holding them in a table. For example:
 
 ```lua
 local image = {
@@ -376,7 +378,7 @@ To temporarily pause a sound, use `mySound:pause()`.
 To resume it later, use `mySound:resume()`.
 
 Consider creating all the sound `Source` objects that the app will need
-on startup and holding them in a table.  For example:
+on startup and holding them in a table. For example:
 
 ```lua
 local sounds = {
@@ -561,6 +563,8 @@ The following code can be used to schedule functions
 to be called later.
 
 ```lua
+local socket = require "socket"
+
 local laters = {}
 
 -- This schedules a function to run a given number of seconds later.
@@ -675,15 +679,14 @@ to enable use of `SharedArrayBuffer` with the following steps:
 
   const app = express();
 
-  app.use(express.static(
-    '../web',
-    {
+  app.use(
+    express.static('../web', {
       setHeaders: res => {
         res.set('Cross-Origin-Opener-Policy', 'same-origin');
         res.set('Cross-Origin-Embedder-Policy', 'require-corp');
       }
-    }
-  ));
+    })
+  );
 
   const PORT = 1919;
   app.listen(PORT, () => console.log('browse localhost:' + PORT));
@@ -799,4 +802,3 @@ When comparing the distance between two points to some value,
 compare the square of the distance.
 This removes the need to use the `math.sqrt` function
 which can hurt game performance.
-

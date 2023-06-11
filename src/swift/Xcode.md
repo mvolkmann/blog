@@ -1604,6 +1604,7 @@ The following table summarize the most commonly used keyboard shortcuts.
 
 | Action                                              | Key                   |
 | --------------------------------------------------- | --------------------- |
+| show quick actions                                  | cmd-shift-a           |
 | show file navigator                                 | cmd-1                 |
 | show local changes navigator                        | cmd-2                 |
 | show symbols navigator                              | cmd-3                 |
@@ -1625,6 +1626,13 @@ The following table summarize the most commonly used keyboard shortcuts.
 | open developer documentation                        | cmd-shift-0           |
 | open library                                        | cmd-shift-l           |
 | toggle editor focus                                 | cmd-ctrl-shift-return |
+
+"Show Quick Actions" was added to the "Tools" menu in Xcode 15.
+It has perhaps the most important keyboard shortcut, cmd-shift-a.
+Pressing that opens a dialog that can run any menu command.
+Type part of the command to filter the list.
+For example, to run the "Clean Build Folder" command from the "Tools" menu,
+press cmd-shift-a, type "cle", and press return.
 
 When the editor area is split, toggle focusing on just the split that has focus
 by selecting View ... Editor ... Focus and
