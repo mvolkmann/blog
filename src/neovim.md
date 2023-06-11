@@ -1074,6 +1074,10 @@ The key mappings to initiate fuzzy finder searches include:
 | `<leader>fw` | finds files by consecutive words in their content (live_grep) |
 | `<leader>fW` | same as above, but also searches hidden files                 |
 
+After performing a search and closing the Telescope window,
+enter `:Tel resume` to reopen the window
+containing the results of the previous search.
+
 Changing the theme using `<leader>ft` only affects the current session.
 To change the default theme used in future sections,
 specify a `colorscheme` in `~/config/nvim/lua/user/init.lua`.
