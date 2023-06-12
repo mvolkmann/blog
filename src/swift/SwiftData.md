@@ -246,16 +246,32 @@ in order to delete multiple objects in a single call.
 
 When the object schema being persisted needs to change
 after data has already been persisted, migration is necessary.
-To do this, define a {% aTargetBlank
-"https://developer.apple.com/documentation/swiftdata/versionedschema",
-"VersionedSchema" %} for each version of the schema
-and define a {% aTargetBlank
-"https://developer.apple.com/documentation/swiftdata/schemamigrationplan",
-"SchemaMigrationPlan" %} that holds
-an ordered array of the `VersionSchema` obejcts.
 
-Migrations can used a "lightweight" stage (no additional code)
-or a "custom" stage (for more complex changes).
+Define a {% aTargetBlank
+"https://developer.apple.com/documentation/swiftdata/versionedschema",
+"VersionedSchema" %} for each version of the schema.
+Each contains all the model classes it supports.
+
+Next, define a custom `enum` that is a subtype of {% aTargetBlank
+"https://developer.apple.com/documentation/swiftdata/schemamigrationplan",
+"SchemaMigrationPlan" %}.
+This should contain the following `static` properties:
+
+- `schemas`: an ordered array of the `VersionSchema` objects
+- `stages`: an ordered array of `MigrationStage` objects
+- multiple stage objects
+
+Stage objects can be lightweight or custom.
+
+To create a lightweight stage, call `Migration.lightweight`,
+passing it `fromVersion` and `toVersion` arguments.
+
+To create a custom state, call `MigrationState.custom`
+which also takes `fromVersion` and `toVersion` arguments.
+Optionally pass a `willMigrate` function to run code that can
+perform transformations before the migration takes place.
+Optionally pass a `ditMigrate` function to run code
+after the migration takes place.
 
 ## @Observable and @Bindable
 
