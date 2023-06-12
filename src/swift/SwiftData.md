@@ -299,6 +299,10 @@ When each user runs the app, it will detect
 the schema version that was in use the last time they ran the app
 and automatically perform the needed migrations to the newest version.
 
+For more detail, see the WWDC 2023 video {% aTargetBlank
+"https://developer.apple.com/wwdc23/10195",
+"Model your schema with SwiftData" %}.
+
 ## @Observable and @Bindable
 
 This section is not really related to SwiftData.
