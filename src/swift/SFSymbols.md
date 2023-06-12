@@ -7,7 +7,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-SF Symbols is a macOS app from Apple that provides over 4,000 icons.
+SF Symbols is a macOS app from Apple that provides over 5,000 icons.
 These can be rendered in custom app using the `Image` view
 with the `systemName` argument.
 
@@ -112,5 +112,8 @@ The presets include:
   but not retaining the changes.
   Changes can also be reversed after each layer has changed.
 
-- Replace - one symbol is replaced by another,
-  either one layer at a time or the whole symbol
+- Replace - one symbol is replaced by another
+
+  This can happen either one layer at a time
+  or all layers at once (whole symbol).
+  A good example is switching between the play and pause icons.
