@@ -7,8 +7,8 @@ layout: topic-layout.njk
 
 ## Overview
 
-{% aTargetBlank "SwiftData", "https://developer.apple.com/xcode/swiftdata/" %}
-was added in iOS 17.
+{% aTargetBlank "https://developer.apple.com/xcode/swiftdata/", "SwiftData" %}
+was added in iOS 17. From Apple,
 
 > SwiftData makes it easy to persist data using declarative code.
 > You can query and filter data using regular Swift code.
@@ -33,7 +33,7 @@ To create a new project that uses SwiftData:
 - Select the directory where the project will be stored.
 - Click the "Create" button.
 
-This creates a project containing the following files:
+The new project will contain the following files:
 
 - `Item.swift` - an example model definition
   where the only property is `timestamp`
@@ -52,8 +52,10 @@ Define additional models in new `.swift` files.
 Optionally delete `Item.swift` if not needed.
 
 To define a model, add the `@Model` macro to a `class` definition.
-I suspect it needs to be a `class` instead of a `struct`
-to support updating existing data.
+This macro cannot be applied to `struct` definitions.
+The macro causes the class to conform to the {% aTargetBlank
+"https://developer.apple.com/documentation/SwiftData/PersistentModel",
+"PersistentModel" %} protocol.
 
 Declarations can be added class properties to customize how they are persisted.
 For example:
@@ -115,22 +117,105 @@ let context = container.mainContext
 let context = ModelContext(container)
 ```
 
-## Fetching Data
+The `ModelContext` object has an `autosaveEnabled` property
+that defaults to `true`. When this is `true`, there is no need to call
+the `save` method after creating, updating, or deleting persisted objects
+because it happens automatically.
+An alternative approach is to set `autosaveEnabled` to `false` and
+manually call the `save` method after a batch of changes are made.
 
-To fetch specific data, create and use a predicate:
+## Creating Data
+
+To create and persist an object,
+create it using an initializer of a `class`
+that is decorated with the {% aTargetBlank "", "Model" %} macro
+and pass the object to the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftdata/modelcontext",
+"ModelContext" %} `insert` method.
+For example:
 
 ```swift
-let predicate = #Predicate<Person> {
-  $0.state == “MO” && $0.alive
-}
-let people = try context.fetch(predicate)
+let todo = Todo(title: "some new title")
+context.insert(todo)
 ```
 
-To fetch sorted people:
+## Retrieving Data
+
+A view can specify the data it needs using the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftdata/query", "Query" %}
+property wrapper.
+Any time persisted data matching the query changes, the view will update.
+
+The `Query` property wrapper supports many initializers
+that accept the following:
+
+- `filter`: a {% aTargetBlank
+  "https://developer.apple.com/documentation/foundation/predicate",
+  "Predicate" %} object that describes criteria for the objects to return
+- `sort`: a `KeyPath` or array of {% aTargetBlank
+  "https://developer.apple.com/documentation/foundation/sortdescriptor",
+  "SortDescriptor" %} objects that describe
+  how the returned objects should be sorted
+- `order`: a {% aTargetBlank
+  "https://developer.apple.com/documentation/foundation/sortorder",
+  "SortOrder" %} enum value of `.forward` or `.reverse`
+- `animation`: an {% aTargetBlank
+  "https://developer.apple.com/documentation/SwiftUI/Animation", "Animation" %}
+  to apply when the data changes
+
+For example, the following query fetches `Todo` objects
+sorted on their title, returning only those not completed:
 
 ```swift
-let descriptor =
+@Query(
+    filter: #Predicate<Todo> { $0.completed == false },
+    sort: \Todo.title,
+    order: .forward,
+    animation: .spring
+)
 ```
+
+To fetch data outside of a `Query`, create and use
+a `Predicate` and a {% aTargetBlank
+"https://developer.apple.com/documentation/swiftdata/fetchdescriptor",
+"FetchDescriptor" %}.
+For example:
+
+```swift
+// Can't use ! operator here.
+let predicate = #Predicate<Todo> { $0.completed == false }
+let descriptor = FetchDescriptor(
+    predicate: predicate,
+    sortBy: [SortDescriptor(\Todo.created, order: .reverse)]
+let uncompletedTodos = try? context.fetch(descriptor)
+```
+
+## Updating Data
+
+To update the properties of persisted objects,
+directly modify their properties.
+For example:
+
+```swift
+todo.title = "some new title"
+```
+
+SwiftData will detect and persist the change
+with no further action on your part
+
+## Deleting Data
+
+To delete persisted objects, pass them to the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftdata/modelcontext",
+"ModelContext" %} `delete` method.
+For example:
+
+```swift
+context.delete(todos[index])
+```
+
+The delete method can also be passed a model type and a predicate
+in order to delete multiple objects in a single call.
 
 ## @Observable and @Bindable
 
