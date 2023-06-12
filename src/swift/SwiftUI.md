@@ -1593,6 +1593,10 @@ The {% aTargetBlank
 "@Environment" %} property wrapper is used to access environment values.
 See the [Environment](#environment) section.
 
+In iOS 17+, `@Environment` can also be used as an alternative to
+passing a view model through multiple layers of the view hierarchy.
+It this sense it replaces the need for `@EnvironmentObject`.
+
 ### @EnvironmentObject
 
 The {% aTargetBlank
@@ -1602,6 +1606,7 @@ to share access to a view model.
 It offers an alternative to passing a view model
 through multiple layers of the view hierarchy
 using the `@ObservedObject` property wrapper.
+Note that in iOS17+ this can instead be done using `@Environment`.
 
 The following code demonstrates this.
 It works in the Simulator, but not in Preview.

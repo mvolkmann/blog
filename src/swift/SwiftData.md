@@ -316,6 +316,7 @@ for sharing data between views that is not persisted.
 The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/bindable", "Bindable" %}
 property wrapper provides a new way to access view models.
+It allows child views to modify `@Observable` data held in parent view.
 Both are new in iOS 17.
 
 ```swift
