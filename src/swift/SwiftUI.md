@@ -1597,7 +1597,91 @@ In iOS 17+, `@Environment` can also be used as an alternative to
 passing a view model through multiple layers of the view hierarchy.
 It this sense it replaces the need for `@EnvironmentObject`.
 
+The following code demonstrates this.
+
+```swift
+// EnvironmentDemoApp.swift
+import SwiftUI
+
+@main
+struct EnvironmentDemoApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+                .environment(SharedData())
+        }
+    }
+}
+```
+
+```swift
+// ContentView.swift
+import Observation
+import SwiftUI
+
+@Observable
+class SharedData {
+    var name = "Mark"
+    var score = 0
+}
+
+// A custom view must be created in order to
+// modify properties of Observable objects because they must
+// be accessed using the Bindable property wrapper.
+struct ScoreButton: View {
+    @Bindable var sharedData: SharedData
+
+    var body: some View {
+        Button("Increment Score") {
+            // This change will be reflected in all views
+            // that get SharedData from the environment.
+            sharedData.score += 1
+        }
+        .buttonStyle(.bordered)
+    }
+}
+
+struct ChildView: View {
+    @Environment(SharedData.self) private var sharedData
+
+    var body: some View {
+        VStack {
+            Text("ChildView: name = \(sharedData.name)")
+            Text("ChildView: score = \(sharedData.score)")
+            ScoreButton(sharedData: sharedData)
+            GrandchildView()
+        }
+    }
+}
+
+struct GrandchildView: View {
+    @Environment(SharedData.self) private var sharedData
+
+    var body: some View {
+        VStack {
+            Text("GrandchildView: name = \(sharedData.name)")
+            Text("GrandchildView: score = \(sharedData.score)")
+        }
+    }
+}
+
+struct ContentView: View {
+    @Environment(SharedData.self) private var sharedData
+
+    var body: some View {
+        VStack {
+            Text("ContentView: name = \(sharedData.name)")
+            Text("ContentView: score = \(sharedData.score)")
+            ChildView()
+        }
+    }
+}
+```
+
 ### @EnvironmentObject
+
+This should only be used in pre-iOS 17 code!
+In iOS17+ `@Environment`, described above, should be used instead.
 
 The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/environmentobject",
@@ -1606,7 +1690,6 @@ to share access to a view model.
 It offers an alternative to passing a view model
 through multiple layers of the view hierarchy
 using the `@ObservedObject` property wrapper.
-Note that in iOS17+ this can instead be done using `@Environment`.
 
 The following code demonstrates this.
 It works in the Simulator, but not in Preview.
