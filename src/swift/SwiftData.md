@@ -134,15 +134,19 @@ let descriptor =
 
 ## @Observable and @Bindable
 
-The `@Observable` macro provides a new way to define view models.
-The `@Bindable` property wrapper provides a new way to access view models.
-Both are new in iOS 17 and are defined in the SwiftData package.
+The {% aTargetBlank
+"https://developer.apple.com/documentation/observation/observable-swift.macro",
+"Observable" %} macro provides a new way to define view models.
+The {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/bindable", "Bindable" %}
+property wrapper provides a new way to access view models.
+Both are new in iOS 17.
 
 ```swift
-import SwiftData
+import Observation
 import SwiftUI
 
-@Observable // defined in SwiftData
+@Observable
 class MyViewModel {
     // No longer need @Published on each property.
     var name = ""
