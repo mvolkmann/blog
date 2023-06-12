@@ -79,3 +79,38 @@ Image(systemName: "doc.fill.badge.plus")
     .scaledToFit()
     .frame(width: 100, height: 100)
 ```
+
+## Animation
+
+iOS 17 added the ability to animate SF Symbols.
+
+SF Symbols are composed of layers can be individually animated.
+By default the layers animate one at a time,
+but they can be configured to animate at the same tim.
+
+Many SF Symbols define multiple layers.
+Animation presets can be applied to specific layers of any SF Symbol.
+The presets include:
+
+- Appear - fades in
+
+- Disappear - fades out
+
+- Bounce - quickly scales up and down
+
+- Scale - scales up or down until the effect is removed
+
+  For example, scale up on hover or
+  scale down and back up on click.
+
+- Pulse - cycles through a range of opacitie
+
+- Variable Color - cumulative or interative color change
+
+  Cumulative gradually applies color to each layer, retaining the changes.
+  Iterative applies color to each layer one at a time,
+  but not retaining the changes.
+  Changes can also be reversed after each layer has changed.
+
+- Replace - one symbol is replaced by another,
+  either one layer at a time or the whole symbol
