@@ -47,6 +47,10 @@ This creates a project containing the following files:
 
 ## Models
 
+An example model is provided in `Item.swift`.
+Define additional models in new `.swift` files.
+Optionally delete `Item.swift` if not needed.
+
 To define a model, add the `@Model` macro to a `class` definition.
 I suspect it needs to be a `class` instead of a `struct`
 to support updating existing data.
@@ -56,7 +60,9 @@ For example:
 
 ```swift
 @Attribute(.unique) var id: int
+
 @Relationship(.cascade) var cars: [Car] // for cascading deletes
+
 @Transient var socialSecurityNumber // to prevent from being persisted
 ```
 
@@ -125,3 +131,38 @@ To fetch sorted people:
 ```swift
 let descriptor =
 ```
+
+## @Observable and @Bindable
+
+The `@Observable` macro provides a new way to define view models.
+The `@Bindable` property wrapper provides a new way to access view models.
+Both are new in iOS 17 and are defined in the SwiftData package.
+
+```swift
+import SwiftData
+import SwiftUI
+
+@Observable // defined in SwiftData
+class MyViewModel {
+    // No longer need @Published on each property.
+    var name = ""
+}
+
+struct ContentView: View {
+    @Bindable var model = MyViewModel()
+
+    var body: some View {
+        VStack {
+            TextField("Name", text: $model.name)
+                .textFieldStyle(.roundedBorder)
+            Text("Hello, \(model.name)!")
+        }
+        .padding()
+    }
+}
+```
+
+## Example Project
+
+See {% aTargetBlank "https://github.com/mvolkmann/SwiftDataDemo",
+"SwiftDataDemo" %}.

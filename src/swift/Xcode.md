@@ -305,7 +305,7 @@ to automatically fix the error.
 
 To hide the first error message, only displaying
 the number of errors and the error icon,
-select Preferences ... General ... Issues ... Show Minimized.
+select Xcode ... Settings ... General ... Issues ... Show Minimized.
 With this setting, click anywhere on a red bar,
 to see the text for all the errors on the line.
 
@@ -414,7 +414,7 @@ A faint red line will be displayed under all misspelled words.
 
 ### Code Folding
 
-To enable code folding, select Xcode ... Preferences ... Text Editing
+To enable code folding, select Xcode ... Settings ... Text Editing
 and check the checkbox for "Code folding ribbon".
 
 To fold the code in any construct (function, argument list, struct, class, ...),
@@ -557,7 +557,7 @@ Xcode used to support debug mode in Previews,
 but now it is only supported in the Simulator.
 
 To make the console area appear automatically when new text is written to it,
-select Xcode ... Preferences... ... Behaviors ... Generates output,
+select Xcode ... Settings ... Behaviors ... Generates output,
 click the "Show" checkbox, and select "Variables & Console View".
 
 ## Playgrounds
@@ -652,7 +652,7 @@ To install SwiftFormat as an Xcode extension:
 - The SwiftFormat app can also be used to customize the rules.
 - restart Xcode
 - add a keyboard shortcut
-  - select Xcode ... Preferences ... Key Bindings
+  - select Xcode ... Settings ... Key Bindings
   - enter "SwiftFormat" in the Filter input
   - double-click in the Key column for "SwiftFormat - Format File"
   - press a key combination to assign like option-f
@@ -736,7 +736,7 @@ or press cmd-ctrl-M.
 To build a project, select Product ... Build or press cmd-b.
 
 To hear sounds that indicate whether the build was successful or failed,
-select Xcode ... Preferences ... Behaviors.
+select Xcode ... Settings ... Behaviors.
 Then select "Succeeds, check "Play sound", and select a sound.
 Repeat for "Fails" and select a different sound.
 
@@ -1177,8 +1177,8 @@ To **commit changes**:
 - One at a time click the name of each file to be committed
   to see a side-by-side diff where you can verify all the changes.
   By default the new version is displayed on the left.
-  To switch this, select Preferences ... Source Control ... Comparison View
-  ... Local Revision on Right Side.
+  To switch this, select Xcode ... Settings ... Source Control ...
+  Comparison View ... Local Revision on Right Side.
 - Undesired changes can be discarded by clicking a numbered blue button
   in the gutter between the old and new versions of the file
   and selecting "Discard Changes" from the popup.
@@ -1300,24 +1300,25 @@ This must be done from the command-line or in another Git-aware tool.
 
 ## Themes
 
-To choose a different theme, select Xcode ... Preferences ... Themes.
+To choose a different theme, select Xcode ... Settings ... Themes.
 From here you can add, delete, and select themes.
 I like the "Classic (Dark)" theme.
 This only affects editor windows. To change the entire Xcode UI
 to use a dark theme regardless of the system setting,
-select Preferences ... General and select "Dark" from the Appearance dropdown.
+select Xcode ... Settings ... General and select "Dark" from the Appearance dropdown.
 
 ## Column Marker
 
 To add a vertical line at a given column width,
-select Xcode ... Preferences ... Text Editing,
+select Xcode ... Settings ... Text Editing,
 check "Page guide column at:", and choose a column number.
 The indentation amount and type (spaces vs. tabs)
 can also be specified here.
 
 ## Code Folding
 
-To enable code folding, select Preferences ... Text Editing ... Display ... Code Folding Ribbon.
+To enable code folding, select Xcode ... Settings ...
+Text Editing ... Display ... Code Folding Ribbon.
 This adds a code folding ribbon on the left side of editor panes.
 Click in the ribbon to fold the code at the corresponding line.
 To unfold, click again or double-click the ellipsis in the code.
