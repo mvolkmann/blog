@@ -247,10 +247,12 @@ in order to delete multiple objects in a single call.
 When the object schema being persisted needs to change
 after data has already been persisted, migration is necessary.
 
-Define a {% aTargetBlank
+Define a custom `enum` that is a subtype of {% aTargetBlank
 "https://developer.apple.com/documentation/swiftdata/versionedschema",
 "VersionedSchema" %} for each version of the schema.
-Each contains all the model classes it supports.
+Each of these contain the `static` property `models`
+whose value is an array of all the supported model types.
+They also contain definitions of all these model classes.
 
 Next, define a custom `enum` that is a subtype of {% aTargetBlank
 "https://developer.apple.com/documentation/swiftdata/schemamigrationplan",
@@ -272,6 +274,30 @@ Optionally pass a `willMigrate` function to run code that can
 perform transformations before the migration takes place.
 Optionally pass a `ditMigrate` function to run code
 after the migration takes place.
+
+To enable the app to perform any necessary migrations,
+pass the migration plan to the `ModelContainer` initializer.
+For example:
+
+```swift
+struct TodoApp: App {
+    let container = ModelContainer(
+        for: Todo.self,
+        migrationPlan, TodoMigrationPlan.self
+    )
+
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+    }
+    .modelContainer(container)
+}
+```
+
+When each user runs the app, it will detect
+the schema version that was in use the last time they ran the app
+and automatically perform the needed migrations to the newest version.
 
 ## @Observable and @Bindable
 
