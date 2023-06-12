@@ -124,6 +124,12 @@ because it happens automatically.
 An alternative approach is to set `autosaveEnabled` to `false` and
 manually call the `save` method after a batch of changes are made.
 
+Also see the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftdata/modelcontext/transaction(block:)",
+"transaction" %} and {% aTargetBlank
+"https://developer.apple.com/documentation/swiftdata/modelcontext/rollback()",
+"rollback" %} methods.
+
 ## Creating Data
 
 To create and persist an object,
