@@ -263,6 +263,10 @@ three of which are Bars, Views, and Controls.
 The following summarizes what is found in those sections
 and how the described components map to SwiftUI views.
 
+## SF Symbols
+
+See [SF Symbols](/blog/swift/SFSymbols).
+
 ## App Icons
 
 Each app can have an app icon that is uploaded into the `Assets.xcassets` file

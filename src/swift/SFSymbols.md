@@ -1,6 +1,6 @@
 ---
 eleventyNavigation:
-  key: SF Symols
+  key: SF Symbols
   parent: Swift
 layout: topic-layout.njk
 ---
