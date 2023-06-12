@@ -61,11 +61,28 @@ Declarations can be added class properties to customize how they are persisted.
 For example:
 
 ```swift
+// Add a uniqueness constraint to a property.
+// If a persisted object exists with the same value for this attribute,
+// an "upsert" is performed instead of an insert.
+// No error is thrown.
 @Attribute(.unique) var id: int
 
-@Relationship(.cascade) var cars: [Car] // for cascading deletes
+// Change the name of an existing property after data has been persisted.
+// Existing and future persisted objects will continue using the original name,
+// but code can be changed to use the new name (creationDate in this case.)
+@Attribute(originalName: "creation_date") var creationDate: Date
 
-@Transient var socialSecurityNumber // to prevent from being persisted
+// If an object is deleted, also delete the objects
+// referrred to by this property (cascading delete).
+// If a referenced object is deleted,
+// persisted references to it will automatically be removed.
+@Relationship(.cascade) var cars: [Car]
+
+// It is also possible to specify the `min` and `max` occurrences
+// allowed in a relationship.
+
+// Do not persist this property.
+@Transient var socialSecurityNumber
 ```
 
 TODO: Watch the session “Model your schema with SwiftData” session.
@@ -228,6 +245,9 @@ in order to delete multiple objects in a single call.
 The {% aTargetBlank
 "https://developer.apple.com/documentation/observation/observable-swift.macro",
 "Observable" %} macro provides a new way to define view models.
+It is a useful alternative to the `Model` macro
+for sharing data between views that is not persisted.
+
 The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/bindable", "Bindable" %}
 property wrapper provides a new way to access view models.
@@ -255,6 +275,30 @@ struct ContentView: View {
         .padding()
     }
 }
+```
+
+`Observable` objects can be passed to views
+that accept them as `Bindable` properties.
+
+For example, the code above can be modified as follows:
+
+```swift
+// Add this view definition.
+struct Greet: View {
+    @Bindable var model = MyViewModel()
+
+    // Note that we do not need to define an initializer
+    // in order to pass in "model".
+
+    var body: some View {
+        Text("Hello, \(model.name)!")
+    }
+}
+
+// Replace the following:
+// Text("Hello, \(model.name)!")
+// With this:
+Greet(model: model)
 ```
 
 ## Example Project
