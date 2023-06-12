@@ -82,7 +82,9 @@ For example:
 // allowed in a relationship.
 
 // Do not persist this property.
-@Transient var socialSecurityNumber
+// These properties should have a default value that is
+// used when objects are fetched using SwiftData.
+@Transient var socialSecurityNumber = ""
 ```
 
 TODO: Watch the session “Model your schema with SwiftData” session.
@@ -240,7 +242,24 @@ context.delete(todos[index])
 The delete method can also be passed a model type and a predicate
 in order to delete multiple objects in a single call.
 
+## Migration
+
+When the object schema being persisted needs to change
+after data has already been persisted, migration is necessary.
+To do this, define a {% aTargetBlank
+"https://developer.apple.com/documentation/swiftdata/versionedschema",
+"VersionedSchema" %} for each version of the schema
+and define a {% aTargetBlank
+"https://developer.apple.com/documentation/swiftdata/schemamigrationplan",
+"SchemaMigrationPlan" %} that holds
+an ordered array of the `VersionSchema` obejcts.
+
+Migrations can used a "lightweight" stage (no additional code)
+or a "custom" stage (for more complex changes).
+
 ## @Observable and @Bindable
+
+This section is not really related to SwiftData.
 
 The {% aTargetBlank
 "https://developer.apple.com/documentation/observation/observable-swift.macro",
