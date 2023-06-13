@@ -129,8 +129,46 @@ The presets include:
 - **Appear** effect fades in a symbol when added to UI.
   This can have indefinite or transition behavior.
 
+  To maintain the layout when the symbol no longer appears,
+  use an indefinite effect.
+
+  The Appear effect is similar to the Disappear effect.
+  See examples in that section below.
+
 - **Disappear** effect fades out a symbol when removed from UI.
   This can have indefinite or transition behavior.
+
+  For example:
+
+  ```swift
+  @State private var showHeart = false
+  ...
+  VStack {
+      Button(showHeart ? "Hide Heart" : "Show Heart") {
+          showHeart.toggle()
+      }
+      HStack {
+          Image(systemName: "chevron.left")
+          // This approach maintains the space occupied by the symbol
+          // even when it no longer appears.
+          Image(systemName: "heart")
+              .symbolEffect(.disappear, isActive: !showHeart)
+          Image(systemName: "chevron.right")
+      }
+      .imageScale(.large)
+      HStack {
+          Image(systemName: "chevron.left")
+          // This approach closes the space occupied by the symbol
+          // when it no longer appears.
+          if showHeart {
+              Image(systemName: "heart")
+                  .transition(.symbolEffect(.disappear))
+          }
+          Image(systemName: "chevron.right")
+      }
+      .imageScale(.large)
+  }
+  ```
 
 - **Bounce** effect quickly scales a symbol up and down.
   This has discrete behavior.
