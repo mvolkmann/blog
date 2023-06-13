@@ -47,6 +47,18 @@ The generated file structure will contain the following:
         Add new macro definitions in this file and
         optionally delete the definition for the `stringify` macro.
 
+        ```swift
+        @freestanding(expression)
+        public macro stringify<T>(_ value: T) -> (T, String) =
+            #externalMacro(
+                // This refers to a Swift file below.
+                module: "MyFirstMacroMacros",
+                // This refers to the name of an ExpressionMacro subtype
+                // define in the Swift file.
+                type: "StringifyMacro"
+            )
+        ```
+
     - `{package-name}Client`
 
       - `main.swift`
@@ -63,6 +75,31 @@ The generated file structure will contain the following:
         This file contains the implementation of the `stringify` macro.
         Add new macro implementations in this file and
         optionally delete the implementation for the `stringify` macro.
+
+        The following code is the stringify macro implementation
+        with comments added:
+
+        ```swift
+        public struct StringifyMacro: ExpressionMacro {
+            // This method is required by the ExpressionMacro protocol.
+            public static func expansion(
+                // This argument is the AST of the passed expression.
+                of node: some FreestandingMacroExpansionSyntax,
+                // This argument provides access to surrounding data.
+                in context: some MacroExpansionContext
+            ) -> ExprSyntax {
+                // This evaluates the expression passed in
+                // which was defined to be an Int.
+                guard let argument = node.argumentList.first?.expression else {
+                    fatalError("compiler bug: the macro does not have any arguments")
+                }
+
+                // The string expression returned here
+                // is automatically parsed into an AST.
+                return "(\(argument), \(literal: argument.description))"
+            }
+        }
+        ```
 
   - `Tests` directory
 
