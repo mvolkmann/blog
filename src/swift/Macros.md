@@ -128,7 +128,7 @@ a name, parameter list, and return type.
 
 ## Macro Types
 
-- `@freestanding(expression)` - creates code that returns a value;
+- `@freestanding(expression)` - creates code that returns a value
 - `@freestanding(declaration)` - creates one or more declarations
 - `@attached(peer)` - adds peer declarations next to a declaration
 - `@attached(accessor)` - adds accessors to a property of a type
@@ -159,6 +159,14 @@ such as variables, functions, enums, structs, and classes.
 
 Macros can be declared to use generic types
 in order to make them usable in more scenarios.
+
+## Debugging Macros
+
+To view the AST made available to a custom macro,
+set a breakpoint in the macro implementation
+and run a test that uses the macro.
+In the debugger, use the `po` command to
+pretty-print a variable that holds the AST.
 
 ## Using Custom Macros
 
