@@ -30,22 +30,37 @@ The generated file structure will contain the following:
 
 - `{package-name}` directory
 
+  - `Package.swift`
+
+    This describes the platforms on which the macro can run,
+    its dependencies, and the targets it can create
+    (definining library, client example, and unit tests).
+
   - `Sources` directory
 
     - `{package-name}` directory
 
       - `{package-name}.swift`
 
-        This file begins with the definition of the `stringify` macro
+        This file contains the declaration of the `stringify` macro
         which serves as an example.
-        Add new macro definitions in this file and
-        optionally delete the `stringify` macro.
+        Add new macro declarations in this file and
+        optionally delete the declaration for the `stringify` macro.
 
     - `{package-name}Client`
 
       - `main.swift`
 
         This file contains an example of using the `stringify` macro.
+        To run this, ???
+
+    - `{package-name}Macros`
+
+      - `{package-name}Macro.swift`
+
+        This file contains the implementation of the `stringify` macro.
+        Add new macro implementations in this file and
+        optionally delete the implementation for the `stringify` macro.
 
   - `Tests` directory
 
