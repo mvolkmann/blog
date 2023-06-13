@@ -83,37 +83,133 @@ Image(systemName: "doc.fill.badge.plus")
 ## Animation
 
 iOS 17 added the ability to animate SF Symbols.
+See the folloing WWDC 2023 sessions:
+
+- {% aTargetBlank "https://developer.apple.com/wwdc23/10197",
+  "What's new in SF Symbols 5" %}
+- {% aTargetBlank "https://developer.apple.com/wwdc23/10258",
+  "Animate symbols in your app" %}
+
+SF Symbols 5 added an Animation Inspector, shown in the screenshot below.
+This provides a way to see all the animation options available
+for a given SF Symbol and preview them without writing any code.
+
+<img alt="SF Symbols Animation Inspector" style="width: 100%"
+  src="/blog/assets/SFSymbols-animation-inspector.png?v={{pkg.version}}"
+  title="SF Symbols Animation Inspector">
+
+There are four animation behaviors:
+
+- **Discrete** behaviors run for some duration and
+  returns the symbol to its initial state on completion.
+  The `bounce` effect has this behavior.
+  Use the `value` argument to specify a variable where
+  any change to its value should trigger the effect.
+
+- **Indefinite** behaviors run indefinitely and
+  do not return the symbol to its initial state
+  on completion. The `scale` effect has this behavior.
+  Use the `isActive` argument to specify a boolean variable
+  that indicates whether the effect should be active.
+
+- **Transition** behaviors transition the symbol in or out of view.
+  The `appear` and `disappear` effects have this behavior.
+
+- **Content Transition** behaviors animate from one symbol to another.
+  The `replace` effect has this behavior
 
 SF Symbols are composed of layers can be individually animated.
 By default the layers animate one at a time,
-but they can be configured to animate at the same tim.
+but they can be configured to animate at the same time.
 
 Many SF Symbols define multiple layers.
-Animation presets can be applied to specific layers of any SF Symbol.
+Animation presets can be applied to all or specific layers of any SF Symbol.
 The presets include:
 
-- Appear - fades in
+- **Appear** effect fades in a symbol when added to UI.
+  This can have indefinite or transition behavior.
 
-- Disappear - fades out
+- **Disappear** effect fades out a symbol when removed from UI.
+  This can have indefinite or transition behavior.
 
-- Bounce - quickly scales up and down
+- **Bounce** effect quickly scales a symbol up and down.
+  This has discrete behavior.
+  By default the symbol bounces once.
+  Use the `option` argument to specify the number of times it should bounce.
+  For example, `options: .repeat(3)`.
 
-- Scale - scales up or down until the effect is removed
+- **Pulse** effect cycles a symbol through a range of opacities.
+  This can have discrete or indefinite behavior.
 
-  For example, scale up on hover or
-  scale down and back up on click.
+- **Replace** effect replaces one symbol with another.
 
-- Pulse - cycles through a range of opacitie
+  This can happen either one layer at a time
+  or all layers at once (whole symbol).
+  A good example is switching between the play and pause icons.
+  This has content transition behavior.
 
-- Variable Color - cumulative or interative color change
+  For example:
+
+  ```swift
+  @State private var isActive = false
+  ...
+  Button {
+      isActive.toggle()
+  } label: {
+      Image(systemName: isActive ? "play.circle" : "pause.circle")
+          .resizable()
+          .scaledToFit()
+          .frame(width: 50, height: 50)
+          .contentTransition(
+              .symbolEffect(.replace.downUp.byLayer)
+          )
+  }
+  ```
+
+- **Scale** effect scales a symbol up or down until the effect is removed.
+
+  For example, scale up on hover or scale down and back up on click.
+  This has indefinite behavior.
+
+- **Variable Color** effect causes a cumulative or iterative color change.
 
   Cumulative gradually applies color to each layer, retaining the changes.
   Iterative applies color to each layer one at a time,
   but not retaining the changes.
   Changes can also be reversed after each layer has changed.
+  This can have discrete or indefinite behavior.
 
-- Replace - one symbol is replaced by another
+To add an effect to an SF Symbol, apply the `symbolEffect` view modifier,
+passing it an `enum` value that specifies the effect.
+Effects can be configured by chaining values.
+For example, `.symbolEffect(.variableColor.iterative.reversing)`.
 
-  This can happen either one layer at a time
-  or all layers at once (whole symbol).
-  A good example is switching between the play and pause icons.
+To combine effects, apply the `symbolEffect` view modifier multiple times.
+For example:
+
+```swift
+Image(systemName: "wifi.router")
+    .symbolEffect(.variableColor.iterative.reversing)`.
+    .symbolEffect(.scale.up)`.
+```
+
+To cause an effect to stop when a boolean value becomes `false`,
+add the `isActive` argument.
+For example:
+
+```sift
+@State private var isActive = false
+let size = 100.0
+
+Image(systemName: "ifi")
+    // .imageScale(.large)
+    .resizable()
+    .scaledToFit()
+    .frame(width: size, height: size)
+    .foregroundStyle(.tint)
+    .symbolEffect(
+        .pulse,
+        options: .speed(2),
+        isActive: isActive
+     )
+```
