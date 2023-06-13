@@ -42,16 +42,18 @@ The generated file structure will contain the following:
 
       - `{package-name}.swift`
 
-        This file contains the declaration of the `stringify` macro
+        This file contains the definition of the `stringify` macro
         which serves as an example.
-        Add new macro declarations in this file and
-        optionally delete the declaration for the `stringify` macro.
+        Add new macro definitions in this file and
+        optionally delete the definition for the `stringify` macro.
 
     - `{package-name}Client`
 
       - `main.swift`
 
         This file contains an example of using the `stringify` macro.
+        To see the definition (not implementation) of a given macro invocation,
+        right-click it and select "Jump to Definition".
         To run this, ???
 
     - `{package-name}Macros`
