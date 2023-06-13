@@ -130,11 +130,11 @@ a name, parameter list, and return type.
 
 - `@freestanding(expression)` - creates code that returns a value
 - `@freestanding(declaration)` - creates one or more declarations
-- `@attached(peer)` - adds peer declarations next to a declaration
+- `@attached(peer)` - adds peer declarations next to an existing declaration
 - `@attached(accessor)` - adds accessors to a property of a type
 - `@attached(memberAttribute)` - adds attributes to declarations in a type
 - `@attached(member)` - adds declarations inside a type on which it is applied
-- `@attached(conformance)` - adds conformances to a type
+- `@attached(conformance)` - adds protocol conformances to a type
 
 Freestanding macros are invoked with a `#`.
 Attached macros are invoked with a `@`.
