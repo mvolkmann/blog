@@ -11,6 +11,8 @@ SF Symbols is a macOS app from Apple that provides over 5,000 icons.
 These can be rendered in custom app using the `Image` view
 with the `systemName` argument.
 
+## Rendering Modes
+
 Some symbols support multiple symbol rendering modes
 that enable using different colors for parts of the icon.
 To see the available rendering modes for a given icon,
@@ -31,6 +33,8 @@ To specify a symbol rendering mode, apply the {% aTargetBlank
 
 When the symbol rendering mode is not specified,
 the preferred rendering mode of the icon of is used.
+
+## Variable Colors
 
 Icons that support variable colors are grouped in the "Variable" category.
 These display additional parts of the icon as a percentage value increases.
@@ -63,6 +67,8 @@ Button("Increase") {
 See the {% aTargetBlank
 "https://github.com/mvolkmann/SFSymbolsDemo/tree/main", "SFSymbolsDemo" %}
 app in GitHub.
+
+## Template Mode
 
 To ignore the colors in a multicolor SF Symbol icon
 and just use it as a template for applying a single specified color,
@@ -129,16 +135,15 @@ Animation presets can be applied to all or specific layers of any SF Symbol.
 The presets include:
 
 - **Appear** effect fades in a symbol when added to UI.
-  This can have indefinite or transition behavior.
 
-  To maintain the layout when the symbol no longer appears,
-  use an indefinite effect.
+  This effect can have indefinite or transition behavior.
 
-  The Appear effect is similar to the Disappear effect.
-  See examples in that section below.
+  This effect is similar to the Disappear effect.
+  See examples below.
 
 - **Disappear** effect fades out a symbol when removed from UI.
-  This can have indefinite or transition behavior.
+
+  This effect can have indefinite or transition behavior.
 
   For example:
 
@@ -149,19 +154,21 @@ The presets include:
       Button(showHeart ? "Hide Heart" : "Show Heart") {
           showHeart.toggle()
       }
+
       HStack {
           Image(systemName: "chevron.left")
-          // This approach maintains the space occupied by the symbol
-          // even when it no longer appears.
+          // This approach uses an indefinite behavior to maintain the
+          // space occupied by the symbol even when it no longer appears.
           Image(systemName: "heart")
               .symbolEffect(.disappear, isActive: !showHeart)
           Image(systemName: "chevron.right")
       }
       .imageScale(.large)
+
       HStack {
           Image(systemName: "chevron.left")
-          // This approach closes the space occupied by the symbol
-          // when it no longer appears.
+          // This approach uses a transition behavior to closes the
+          // space occupied by the symbol when it no longer appears.
           if showHeart {
               Image(systemName: "heart")
                   .transition(.symbolEffect(.disappear))
@@ -173,20 +180,57 @@ The presets include:
   ```
 
 - **Bounce** effect quickly scales a symbol up and down.
-  This has discrete behavior.
+
+  This effect has discrete behavior.
+
   By default the symbol bounces once.
   Use the `option` argument to specify the number of times it should bounce.
-  For example, `options: .repeat(3)`.
 
-- **Pulse** effect cycles a symbol through a range of opacities.
-  This can have discrete or indefinite behavior.
+  For example:
+
+  ```swift
+  Image(systemName: "wifi")
+      .symbolEffect(
+          .bounce.up, // gets larger, then returns to original size
+          // .bounce.down, // gets smaller, then returns to original size
+          options: .repeat(3).speed(2),
+          value: isActive
+      )
+  ```
+
+- **Pulse** effect cycles a symbol through a range of opacities,
+  gradually making it more transparent and then returning to full opacity.
+
+  This effect can have discrete or indefinite behavior.
+  With indefinite behavior, the effect continues until it is removed.
+
+  For some symbols, only specific layers are pulsed.
+  In "rectangle.inset.filled.and.person.filled"
+  which displays a computer monitor and a person,
+  only the screen is pulsed.
+
+  For example:
+
+  ```swift
+  Image(systemName: "rectangle.inset.filled.and.person.filled")
+      .resizable()
+      .scaledToFit()
+      .frame(width: size, height: size)
+      .foregroundStyle(.tint)
+      .symbolEffect(
+          .pulse,
+          options: .speed(2),
+          isActive: isActive
+      )
+  ```
 
 - **Replace** effect replaces one symbol with another.
 
-  This can happen either one layer at a time
-  or all layers at once (whole symbol).
+  This effect has content transition behavior.
+
+  This effect can happen either one layer at a time
+  or replacing all layers at once (whole symbol).
   A good example is switching between the play and pause icons.
-  This has content transition behavior.
 
   For example:
 
@@ -208,16 +252,32 @@ The presets include:
 
 - **Scale** effect scales a symbol up or down until the effect is removed.
 
-  For example, scale up on hover or scale down and back up on click.
-  This has indefinite behavior.
+  This effect has indefinite behavior.
+
+  For example:
+
+  ```swift
+  @State private var liked = false
+  ...
+  Button {
+      liked.toggle()
+  } label: {
+      Image(systemName: "heart")
+          .resizable()
+          .scaledToFit()
+          .frame(width: 50, height: 50)
+          .symbolEffect(.scale.up.byLayer, isActive: liked)
+  }
+  ```
 
 - **Variable Color** effect causes a cumulative or iterative color change.
+
+  This effect can have discrete or indefinite behavior.
 
   Cumulative gradually applies color to each layer, retaining the changes.
   Iterative applies color to each layer one at a time,
   but not retaining the changes.
   Changes can also be reversed after each layer has changed.
-  This can have discrete or indefinite behavior.
 
 To add an effect to an SF Symbol, apply the `symbolEffect` view modifier,
 passing it an `enum` value that specifies the effect.
@@ -253,3 +313,8 @@ Image(systemName: "ifi")
         isActive: isActive
      )
 ```
+
+The `symbolEffect` view modifier can be applied to a parent view such as
+an `HStack` or `VStack` in order to apply it to all SF Symbols inside.
+To remove the effect from a specific `Image` view inside the parent view,
+apply the `symbolEffectsRemoved` view modifier.
