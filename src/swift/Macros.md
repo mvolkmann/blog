@@ -42,9 +42,10 @@ The generated file structure will contain the following:
 
       - `{package-name}.swift`
 
-        This file contains the definition of the `stringify` macro
-        which serves as an example.
-        Add new macro definitions in this file and
+        This file contains the declaration of the `stringify` macro
+        which serves as an example macro
+        This defines the macro signature.
+        Add new macro declarations in this file and
         optionally delete the definition for the `stringify` macro.
 
         ```swift
@@ -119,6 +120,17 @@ The generated file structure will contain the following:
 Macro definitions are similar to function definitions.
 They begin with the `macro` keyword and are followed by
 a name, parameter list, and return type.
+
+## Macro Types
+
+- `@freestanding(expression)` - creates code that returns a value;
+  invoked with `#`
+- `@freestanding(declaration)` - creates one or more declarations
+- `@attached(peer)` - adds peer declarations next to a declaration
+- `@attached(accessor)` - adds accessors to a property of a type
+- `@attached(memberAttribute)` - adds attributes to declarations in a type
+- `@attached(member)` - adds declarations inside a type on which it is applied
+- `@attached(conformance)` - adds conformances to a type
 
 ## Freestanding Macros
 
