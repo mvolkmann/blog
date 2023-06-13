@@ -93,6 +93,8 @@ See the folloing WWDC 2023 sessions:
 SF Symbols 5 added an Animation Inspector, shown in the screenshot below.
 This provides a way to see all the animation options available
 for a given SF Symbol and preview them without writing any code.
+To copy Swift code for a specified animation, click the clipboard icon
+and select "Copy Configuration for Swift".
 
 <img alt="SF Symbols Animation Inspector" style="width: 100%"
   src="/blog/assets/SFSymbols-animation-inspector.png?v={{pkg.version}}"
@@ -235,7 +237,7 @@ To cause an effect to stop when a boolean value becomes `false`,
 add the `isActive` argument.
 For example:
 
-```sift
+```swift
 @State private var isActive = false
 let size = 100.0
 
