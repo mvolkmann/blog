@@ -155,6 +155,11 @@ which is used to generate source code that is then passed to the compiler.
 Attached macros augument Swift declarations for entities they decorate
 such as variables, functions, enums, structs, and classes.
 
+## Generics in Macros
+
+Macros can be declared to use generic types
+in order to make them usable in more scenarios.
+
 ## Using Custom Macros
 
 To use custom macros in a Swift project:
@@ -207,3 +212,7 @@ enum MyCustomError: CustomStringConvertible, Error {
     }
 }
 ```
+
+When non-test code uses a macro in a way that throws an error,
+the error message will appear in Xcode next to the offending line
+just like other compiler generated errors.
