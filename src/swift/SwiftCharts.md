@@ -5,6 +5,12 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+<style>
+    img {
+        border: 1px solid gray;
+    }
+</style>
+
 ## Overview
 
 Apple introduced the {% aTargetBlank
@@ -502,7 +508,7 @@ through the mark being dragged over.
 Information about the data point is displayed
 at the top of the line, above the chart.
 
-## SectorMark
+### SectorMark
 
 Instances of the {% aTargetBlank
 "https://developer.apple.com/documentation/charts/sectormark", "SectorMark" %}
@@ -541,6 +547,10 @@ TODO: Is there a way to place text in each `SectorMark`?
 For an example, see the example app in the GitHub repository {% aTargetBlank
 "https://github.com/mvolkmann/SwiftChartsPieDonut", "SwiftChartsPieDonut" %}.
 
+<img alt="Swift Charts donut" style="width: 45%"
+  src="/blog/assets/swift-charts-donut.png?v={{pkg.version}}"
+  title="Swift Charts donut">
+
 ## Selection
 
 iOS 17 added the `chartXSelection` and `chartYSelection` methods
@@ -550,6 +560,10 @@ and trigger the display of annotations.
 
 For an example, see the example app in the GitHub repository {% aTargetBlank
 "https://github.com/mvolkmann/SwiftChartsSelection", "SwiftChartsSelection" %}.
+
+<img alt="Swift Charts selection" style="width: 45%"
+  src="/blog/assets/swift-charts-selection.png?v={{pkg.version}}"
+  title="Swift Charts selection">
 
 ## Example Charts
 
