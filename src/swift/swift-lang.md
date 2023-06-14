@@ -1471,14 +1471,24 @@ print(now.formatted(.dateTime.weekday(.wide))) // Saturday
 print(now.formatted(.dateTime.year())) // 2022
 ```
 
-For more date formatting options, see {% aTargetBlank
+For custom date formats, create a {% aTargetBlank
 "https://developer.apple.com/documentation/foundation/dateformatter",
-"DateFormatter" %}.
-
-For details on date format strings, see {% aTargetBlank
-"https://www.unicode.org/reports/tr35/tr35-31/tr35-dates.html#Date_Format_Patterns",
-"Date Format Patterns" %} and
+"DateFormater" %} object, set its `dateFormat` property,
+and call its `string` method, passing it a `Date` object.
+The characters that can be used in `dateFormat` strings
+are summarized in {% aTargetBlank
+"https://www.advancedswift.com/date-formatter-cheatsheet-formulas-swift/#date-format-cheatsheet",
+"Date Format Cheatsheet" %} and
 {% aTargetBlank "https://nsdateformatter.com", "NSDateFormatter" %}.
+
+For example:
+
+```swift
+var formatter = DateFormatter()
+formatter.dateFormat = "h a" // just the hour and AM/PM
+let now = Date()
+let dateString = formatter.string(from: now)
+```
 
 Date/time strings in ISO 8601 format have content like "2022-08-30T15:39:19Z".
 To convert one of these strings to a Swift `Date`:
