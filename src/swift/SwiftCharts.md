@@ -553,10 +553,16 @@ For an example, see the example app in the GitHub repository {% aTargetBlank
 
 ## Selection
 
-iOS 17 added the `chartXSelection` and `chartYSelection` methods
-to the `Chart` struct.
-They are useful for allowing users to swipe over a chart
-and trigger the display of annotations.
+iOS 17 added the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/chartxselection(value:)",
+"chartXSelection" %}, {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/chartyselection(value:)",
+"chartYSelection" %}, and {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view/chartangleselection(_:)",
+"chartAngleSelection" %} methods to the `Chart` struct.
+These are useful for allowing users to swipe over a chart
+trigger changes to the way a chart is rendered
+such as triggering the display of annotations.
 
 For an example, see the example app in the GitHub repository {% aTargetBlank
 "https://github.com/mvolkmann/SwiftChartsSelection", "SwiftChartsSelection" %}.
