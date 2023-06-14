@@ -21,9 +21,7 @@ combine to develop a broad range of data-driven charts."
 Swift Charts supports creating bar charts, line charts,
 area charts, scatter plots, and heat maps.
 
-Pie charts are not supported. This is an intentional omission
-based on the opinion that pie charts are often not the best choice
-for indicating the differences between values that are somewhat close.
+Support for pie and donut charts was added in iOS 17.
 
 Values to be plotted can be quantitative (`Int`, `Double`, or `Decimal`),
 nominal (`String` or enum with `String` values),
@@ -50,6 +48,9 @@ by their parent view.
 - {% aTargetBlank "https://www.youtube.com/watch?v=lB3poCA8ZN4",
   "Charts Framework 2 - Visualizing Large Data Sets with Bar Charts" %}
   from Stewart Lynch
+- {% aTargetBlank "https://developer.apple.com/videos/play/wwdc2023/10037/",
+  "Explore pie charts and interactivity in Swift Charts" %}
+  from Apple WWDC 2023
 
 ## Example App
 
@@ -57,7 +58,7 @@ See {% aTargetBlank "https://github.com/mvolkmann/ChartsDemo", "ChartsDemo" %}
 which is a SwiftUI app that demonstrates nearly everything
 shared in the Steward Lynch videos linked above.
 
-## `Chart`
+## Chart
 
 The {% aTargetBlank "https://developer.apple.com/documentation/charts/chart",
 "Chart" %} view contains marks that define the chart to be displayed.
@@ -113,6 +114,7 @@ They include:
 - {% aTargetBlank "https://developer.apple.com/documentation/charts/pointmark", "PointMark" %}
 - {% aTargetBlank "https://developer.apple.com/documentation/charts/rectanglemark", "RectangleMark" %}
 - {% aTargetBlank "https://developer.apple.com/documentation/charts/rulemark", "RuleMark" %}
+- {% aTargetBlank "https://developer.apple.com/documentation/charts/sectormark", "SectorMark" %}
 
 The initializer for each mark type takes `x` and `y` arguments
 that have the type {% aTargetBlank
@@ -134,7 +136,7 @@ the collection can be passed to the `Chart` initializer
 and the `ForEach` can be removed.
 The `Chart` initializer also supports the `id` argument.
 
-### `BarMark`
+### BarMark
 
 Instances of the {% aTargetBlank
 "https://developer.apple.com/documentation/charts/barmark", "BarMark" %}
@@ -196,7 +198,7 @@ BarMark(x: value1, y: value2)
 }
 ```
 
-### `LineMark`
+### LineMark
 
 Instances of the {% aTargetBlank
 "https://developer.apple.com/documentation/charts/linemark", "LineMark" %}
@@ -234,7 +236,7 @@ LineMark(x: ageCategory, y: male)
     .interpolationMethod(.catmullRom)
 ```
 
-### `PointMark`
+### PointMark
 
 Instances of the {% aTargetBlank
 "https://developer.apple.com/documentation/charts/pointmark", "PointMark" %}
@@ -262,7 +264,7 @@ The values `"Male"` and `"Female"` identify the data series
 to which each point belongs.
 These values could come of the data objects rather than being literal values.
 
-### `AreaMark`
+### AreaMark
 
 Instances of the {% aTargetBlank
 "https://developer.apple.com/documentation/charts/areamark", "AreaMark" %}
@@ -284,7 +286,7 @@ The example app draws one line for male data and one line for female data.
 Toggling the "Show Area" option causes it to only shade below the male line
 due to this restriction.
 
-### `RectangleMark`
+### RectangleMark
 
 Instances of the {% aTargetBlank
 "https://developer.apple.com/documentation/charts/rectanglemark", "RectangleMark" %}
@@ -470,7 +472,7 @@ struct ContentView: View {
 }
 ```
 
-### `RuleMark`
+### RuleMark
 
 Instances of the {% aTargetBlank
 "https://developer.apple.com/documentation/charts/rulemark", "RuleMark" %}
@@ -499,6 +501,33 @@ adds a red, dashed, vertical line
 through the mark being dragged over.
 Information about the data point is displayed
 at the top of the line, above the chart.
+
+## SectorMark
+
+Instances of the {% aTargetBlank
+"https://developer.apple.com/documentation/charts/sectormark", "SectorMark" %}
+struct are used to add slices to pie and donut charts.
+This was added in iOS 17.
+
+Each `SectorMark` specifies an `angle` argument
+whose value is an instance of the `PlottableValue` struct
+which has many static `value` methods.
+The first argument of the `value` method can be
+a `String`, `LocalizedStringKey`, or `Text`.
+The second argument can be a `Double` (quantitative),
+`Date` (temporal), or `String` (categorical).
+
+that specifies a text label and a value.
+To create a donut chart instead of a pie chart,
+each `SectorMark` must also specify an `innerRadius` argument.
+Optionally also specify an `outerRadius` argument.
+To add a gap between the sectors, specify an `angularInset` argument
+To round the corners of a sector, apply the `cornerRadius` view modifier.
+
+TODO: What happens when the `SectorMark` have differing values
+for `innerRadius` and/or `outerRadius`?
+
+TODO: What happens when the angles do not add up to 100?
 
 ## Example Charts
 
