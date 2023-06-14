@@ -544,7 +544,7 @@ for `innerRadius` and/or `outerRadius`, but this is also not typical.
 
 TODO: Is there a way to place text in each `SectorMark`?
 
-For an example, see the example app in the GitHub repository {% aTargetBlank
+For an example, see the app in the GitHub repository {% aTargetBlank
 "https://github.com/mvolkmann/SwiftChartsPieDonut", "SwiftChartsPieDonut" %}.
 
 <img alt="Swift Charts donut" style="width: 45%"
@@ -567,12 +567,28 @@ These are useful for allowing users to swipe over a chart
 trigger changes to the way a chart is rendered
 such as triggering the display of annotations.
 
-For an example, see the example app in the GitHub repository {% aTargetBlank
+For an example, see the app in the GitHub repository {% aTargetBlank
 "https://github.com/mvolkmann/SwiftChartsSelection", "SwiftChartsSelection" %}.
 
 <img alt="Swift Charts selection" style="width: 45%"
   src="/blog/assets/swift-charts-selection.png?v={{pkg.version}}"
   title="Swift Charts selection">
+
+## Scrolling
+
+For charts with a large number of data points,
+it is convenient to all the chart to be wider than the screen
+and scroll when the user drags past its ends.
+This is enabled by calling `.chartScrollableAxes(.horizontal)` on the`Chart`.
+
+For an example, see the app in the GitHub repository {% aTargetBlank
+"https://github.com/mvolkmann/SwiftChartsScrollable",
+"SwiftChartsScrollable" %}.
+
+It seems that when scrolling is enabled, selection is disabled.
+I haven't found a way to enable both.
+See the issue {% aTargetBlank
+"https://feedbackassistant.apple.com/feedback/12348843", "here" %}.
 
 ## Example Charts
 
