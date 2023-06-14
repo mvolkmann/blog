@@ -550,6 +550,9 @@ For an example, see the example app in the GitHub repository {% aTargetBlank
 <img alt="Swift Charts donut" style="width: 45%"
   src="/blog/assets/swift-charts-donut.png?v={{pkg.version}}"
   title="Swift Charts donut">
+<img alt="Swift Charts donut selected" style="width: 45%"
+  src="/blog/assets/swift-charts-donut-selected.png?v={{pkg.version}}"
+  title="Swift Charts donut selected">
 
 ## Selection
 
