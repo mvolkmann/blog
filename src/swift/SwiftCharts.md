@@ -517,17 +517,26 @@ a `String`, `LocalizedStringKey`, or `Text`.
 The second argument can be a `Double` (quantitative),
 `Date` (temporal), or `String` (categorical).
 
-that specifies a text label and a value.
+The size (angle) of each `SectorMark` is computed based on
+the proportion of its value to the total.
+The total of the values does not need to be 100.
+
+To add a gap between the sectors, specify an `angularInset` argument.
+For example, `angularInset: 2`.
+
+To round the corners of a sector, apply the `cornerRadius` view modifier
+to a `SectorMark`. For example, `.cornerRadius(10)`.
+
 To create a donut chart instead of a pie chart,
 each `SectorMark` must also specify an `innerRadius` argument.
-Optionally also specify an `outerRadius` argument.
-To add a gap between the sectors, specify an `angularInset` argument
-To round the corners of a sector, apply the `cornerRadius` view modifier.
+For example, `innerRadius: .ratio(0.618)`.
 
-TODO: What happens when the `SectorMark` have differing values
-for `innerRadius` and/or `outerRadius`?
+Each `SectorMark` can also specify an `outerRadius` argument,
+although doing so is not typical.
+Each `SectorMark` can have different values
+for `innerRadius` and/or `outerRadius`, but this is also not typical.
 
-TODO: What happens when the angles do not add up to 100?
+TODO: Is there a way to place text in each `SectorMark`?
 
 ## Example Charts
 
