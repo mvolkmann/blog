@@ -5291,6 +5291,12 @@ But this doesn't prevent entering multiple decimal points.
 Also, on iPads the keyboards for `.numberPad` and `.decimalPad`
 contain additional keys that should not be allowed in numbers.
 
+The supported keyboard types include the following:
+
+<img alt="SwiftUI keyboard types"
+  src="https://s3.amazonaws.com/kajabi-storefronts-production/file-uploads/sites/2147616721/themes/2151954913/downloads/bfbc807-a4f1-50cd-417-a86308c35cdb_more.png"
+  title="SwiftUI keyboard types" />
+
 A more robust solution is to use the following custom view modifier
 inspired by the Stewart Lynch video {% aTargetBlank
 "https://www.youtube.com/watch?v=dd079CQ4Fr4&t=2s",

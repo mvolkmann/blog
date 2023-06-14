@@ -538,6 +538,19 @@ for `innerRadius` and/or `outerRadius`, but this is also not typical.
 
 TODO: Is there a way to place text in each `SectorMark`?
 
+For an example, see the example app in the GitHub repository {% aTargetBlank
+"https://github.com/mvolkmann/SwiftChartsPieDonut", "SwiftChartsPieDonut" %}.
+
+## Selection
+
+iOS 17 added the `chartXSelection` and `chartYSelection` methods
+to the `Chart` struct.
+They are useful for allowing users to swipe over a chart
+and trigger the display of annotations.
+
+For an example, see the example app in the GitHub repository {% aTargetBlank
+"https://github.com/mvolkmann/SwiftChartsSelection", "SwiftChartsSelection" %}.
+
 ## Example Charts
 
 This example plots hourly temperature forecasts from hard-coded data.
