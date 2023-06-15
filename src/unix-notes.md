@@ -152,31 +152,27 @@ To change the default shell, enter `ypchsh`.
 
 ## Find
 
-- If the first argument starts with -
-  then the search begins in the current directory
-  - in other words "find . -name 'foo.bar'"
-    is the same as "find -name 'foo.bar'"
-- To delete all matching files below the current directory,
-  - find . -name 'name-pattern' -delete
-    - -delete is much shorter than -exec rm {} \;
-- grep
-  - stands for Global Regular Expression Print
-  - It came from the ed editor command g/RE/p
-    where RE is replaced by a regular expression.
-    It globally operates on every line in the file
-    and prints all lines that match the regular expression.
-- To find all files of a given type in and below the current directory
-  that contain a given string,
-  find -name '_.{type}' | xargs grep "{string}"
-  You can also use
-  find -name '_.{type}' -exec grep "{string}" {} \;
-  Better yet, use ripgrep like this:
-  rg "{string}" --type={type} OR rg "{string}" \*_/_.{type}
-  The quotes around the string are only needed if
-  the string contains spaces or other special characters.
-- If only files in the current directory are needed,
-  grep "{string}" \*.{type}
-- When -name is omitted, it defaults to -name '\*'.
+There are multiple commands that search files,
+including `find`, `grep`, and `rg` (ripgrep).
+
+### find
+
+If the first argument starts with `-`
+then the search begins in the current directory.
+This means that `find . -name 'foo.bar'`
+is the same as `find -name 'foo.bar'`.
+If `-name` is omitted, it defaults to `-name '\*'`.
+
+To delete all matching files below the current directory,
+`find . -name 'name-pattern' -delete`.
+`-delete` is much shorter than the alternative `-exec rm {} \;`.
+
+To find all files of a given type in and below the current directory
+that contain a given string,
+`find -name '_.{type}' | xargs grep "{string}"`.
+An alternative is `find -name '_.{type}' -exec grep "{string}" {} \;`
+Consider using ripgrep instead because it is much faster.
+
 - To output only file names containing a match and not the matching lines
   find -name '\*.{type}' | xargs grep -l "{string}"
 - To find all .h and .cpp files that contain "foo",
@@ -201,6 +197,62 @@ To change the default shell, enter `ypchsh`.
   - the 001 is mask that specifies the x bit
 - To limit the depth of the search (# of directories deep),
   add -maxdepth n
+
+### grep
+
+`grep` stands for Global Regular Expression Print.
+It came from the `ed` editor command `g/RE/p`
+where `RE` is replaced by a regular expression.
+It globally operates on every line in the file
+and prints all lines that match the regular expression.
+
+To find all files with a given extension in the current directory
+that contain a given string, enter `grep '{string}' *.{extension}`.
+
+### ripgrep
+
+ripgrep implements the `rg` command in Rust
+which is a much faster alternative to the `find` command.
+
+To find all occurrences of a string within a specific file,
+enter `rg '{string}' {file-path}`.
+Quotes around the string are only needed if
+it contains spaces, other special characters, or a regular expression.
+
+To find all files in and below the current directory
+that contain a given string, enter `rg '{string}'`.
+By default it does not search the following files:
+
+- hidden files (whose names begin with `.`)
+- files in a Git repository that match patterns
+  in its `.gitignore` file
+- binary files
+- files referenced by symbolic links
+
+To search these files, add `--no-ignore`.
+To only add searching of hidden files, add `--hidden` or `-.`.
+To follow and search files referenced by symbolic links,
+add `--follow` or `-L`.
+
+To find all files in and below a given directory
+that contain a given string, enter `rg '{string}' {dir-path}`.
+
+To find all files with a given type (such as rust)
+or file extension (such as `.r`)
+in and below the current directory that contain a given string,
+use one of the following:
+
+```bash
+rg '{string} --type rust'
+rg '{string} trust'
+rg '{string}' -g '*.rs'
+```
+
+Some file types map to multiple file extensions.
+For example, `-tc` is the same as `-g '*.{c.h}`.
+To see all the supported file types, enter `rg --type-list`.
+To see the glob pattern used by a given file type,
+enter `rg --type-list | rg '^{type}:`.
 
 ## FTP
 
