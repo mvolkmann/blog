@@ -26,6 +26,8 @@ to invoke app-specific actions.
 - {% aTargetBlank
   "https://holyswift.app/new-mapkit-configurations-with-swiftui/",
   "New MapKit Configurations with SwiftUI" %}
+- {% aTargetBlank "https://developer.apple.com/videos/play/wwdc2023/10043/",
+  "Meet MapKit for SwiftUI" %} from WWDC 2023
 
 ## Getting Started
 
