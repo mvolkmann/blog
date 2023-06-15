@@ -150,7 +150,7 @@ To change the default shell, enter `ypchsh`.
 - To unset in bash,
   unset name
 
-## Find
+## Finding/Searching Files
 
 There are multiple commands that search files,
 including `find`, `grep`, and `rg` (ripgrep).
@@ -173,30 +173,63 @@ that contain a given string,
 An alternative is `find -name '_.{type}' -exec grep "{string}" {} \;`
 Consider using ripgrep instead because it is much faster.
 
-- To output only file names containing a match and not the matching lines
-  find -name '\*.{type}' | xargs grep -l "{string}"
-- To find all .h and .cpp files that contain "foo",
-  find -regex ".\*[.h|.cpp]" | xargs grep foo
-- To avoid "Permission denied" messages
-  when find tries to search certain directories,
-  find -name 'whatever' 2> /dev/null
-- To find all directories that contain files
-  that have been modified today,
-  find . -ctime -1 -type d
-- To find all files in and below the current directory
-  whose contents have been modified in the last n days,
-  find . -type f -mtime -n
-- To edit all the files that contain a given string,
-  vim $(find -name '\*.filetype' | xargs grep -l "string")
-- To find all files that contain text that matches a regular expression,
-  for example, .h files that define a class that inherits from another (:),
-  find . -name '\*.h' -exec grep -E 'class \w+ :' {} \;
-- To find all files with a given extension that are executable
-  and make them not executable
-  find . -name '\*.{ext}' -perm 001 -exec chmod a-x {} \;
-  - the 001 is mask that specifies the x bit
-- To limit the depth of the search (# of directories deep),
-  add -maxdepth n
+To output only file names containing a match and not the matching lines:
+
+```bash
+find -name '\*.{type}' | xargs grep -l "{string}"
+```
+
+To find all .h and .cpp files that contain "foo":
+
+```bash
+find -regex ".\*[.h|.cpp]" | xargs grep foo
+```
+
+To avoid "Permission denied" messages
+when find tries to search certain directories:
+
+```bash
+find -name 'whatever' 2> /dev/null
+```
+
+To find all directories that contain files
+that have been modified today:
+
+```bash
+find . -ctime -1 -type d
+```
+
+To find all files in and below the current directory
+whose contents have been modified in the last n days:
+
+```bash
+find . -type f -mtime -n
+```
+
+To edit all the files that contain a given string:
+
+```bash
+vim $(find -name '\*.filetype' | xargs grep -l "string")
+```
+
+To find all files that contain text that matches a regular expression,
+for example, .h files that define a class that inherits from another (:):
+
+```bash
+find . -name '\*.h' -exec grep -E 'class \w+ :' {} \;
+```
+
+To find all files with a given extension that are executable
+and make them not executable:
+
+```bash
+find . -name '\*.{ext}' -perm 001 -exec chmod a-x {} \;
+```
+
+The `001` is a mask that specifies the x bit.
+
+To limit the depth of the search (# of directories deep),
+add `-maxdepth n`.
 
 ### grep
 
