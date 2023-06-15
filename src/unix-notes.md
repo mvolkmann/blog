@@ -157,6 +157,12 @@ including `find`, `grep`, and `rg` (ripgrep).
 
 ### find
 
+To find all files of a given type in and below the current directory
+that contain a given string,
+`find -name '_.{type}' | xargs grep "{string}"`.
+An alternative is `find -name '_.{type}' -exec grep "{string}" {} \;`
+Consider using ripgrep instead because it is much faster.
+
 If the first argument starts with `-`
 then the search begins in the current directory.
 This means that `find . -name 'foo.bar'`
@@ -166,12 +172,6 @@ If `-name` is omitted, it defaults to `-name '\*'`.
 To delete all matching files below the current directory,
 `find . -name 'name-pattern' -delete`.
 `-delete` is much shorter than the alternative `-exec rm {} \;`.
-
-To find all files of a given type in and below the current directory
-that contain a given string,
-`find -name '_.{type}' | xargs grep "{string}"`.
-An alternative is `find -name '_.{type}' -exec grep "{string}" {} \;`
-Consider using ripgrep instead because it is much faster.
 
 To output only file names containing a match and not the matching lines:
 
