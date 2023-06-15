@@ -107,6 +107,11 @@ To detect tap and drag gestures on the chart, apply the {% aTargetBlank
 "chartBackground" %} view modifier.
 For more on these, see the "Event Handling" section below.
 
+For a list of all view modifiers that can be applied to a `Chart`,
+see {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/view-chart-view",
+"Chart view modifiers" %}.
+
 ## Marks
 
 Swift Charts supports six kinds of "marks" for creating various kinds of charts.
