@@ -3048,6 +3048,31 @@ If the value of the `switch` expression is an `enum`,
 there must either be a `case` that matches each value of the `enum`
 or the `default` case must be included.
 
+Swift ? added the ability to use `if` and `switch` as expressions.
+For example:
+
+```swift
+// This function demonstrates three approaches that achieve the same result.
+func word(_ value: Int) -> String {
+    // Using ternary operator
+    // value < 0 ? "negative" : value > 0 ? "positive" : "zero"
+
+    // Using if expression
+    // if value < 0 { "negative" } else if value > 0 { "positive" } else { "zero" }
+
+    // Using switch expression
+    switch value.signum() {
+    case -1: "negative"
+    case 1: "positive"
+    default: "zero"
+    }
+}
+
+print(word(-7)) // negative
+print(word(3)) // positive
+print(word(0)) // zero
+```
+
 ### Iteration
 
 To iterate over a range of integers, use a `for`-`in` loop with a range operator.
