@@ -247,14 +247,13 @@ that contain a given string, enter `grep '{string}' *.{extension}`.
 ripgrep implements the `rg` command in Rust
 which is a much faster alternative to the `find` command.
 
-To find all occurrences of a string within a specific file,
-enter `rg '{string}' {file-path}`.
+To find all occurrences of a string within
+any file that is in or below the current directory,
+enter `rg '{string}'.
 Quotes around the string are only needed if
 it contains spaces, other special characters, or a regular expression.
 
-To find all files in and below the current directory
-that contain a given string, enter `rg '{string}'`.
-By default it does not search the following files:
+By default `rg` does not search the following files:
 
 - hidden files (whose names begin with `.`)
 - files in a Git repository that match patterns
@@ -267,12 +266,14 @@ To only add searching of hidden files, add `--hidden` or `-.`.
 To follow and search files referenced by symbolic links,
 add `--follow` or `-L`.
 
-To find all files in and below a given directory
-that contain a given string, enter `rg '{string}' {dir-path}`.
+To limit the search to a specific file,
+enter `rg '{string}' {file-path}`.
 
-To find all files with a given type (such as rust)
-or file extension (such as `.r`)
-in and below the current directory that contain a given string,
+To limit the search to files that are in and below a given directory,
+enter `rg '{string}' {dir-path}`.
+
+To limit the search to files with
+a given type (such as rust) or file extension (such as `.r`),
 use one of the following:
 
 ```bash
@@ -282,10 +283,10 @@ rg '{string}' -g '*.rs'
 ```
 
 Some file types map to multiple file extensions.
-For example, `-tc` is the same as `-g '*.{c.h}`.
+For example, `-tc` is the same as `-g '*.{c.h}'`.
 To see all the supported file types, enter `rg --type-list`.
 To see the glob pattern used by a given file type,
-enter `rg --type-list | rg '^{type}:`.
+enter `rg --type-list | rg '^{type}:'`.
 
 ## FTP
 
