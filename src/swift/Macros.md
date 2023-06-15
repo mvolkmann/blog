@@ -19,6 +19,28 @@ For more detail, watch the WWDC 2023 videos {% aTargetBlank
 {% aTargetBlank "https://developer.apple.com/wwdc23/10167",
 "Expand on Swift macros" %}.
 
+## Provided Macros
+
+The following macros are provided by Swift and SwiftUI:
+
+- {% aTargetBlank
+  "https://developer.apple.com/documentation/swift/optionset-swift.macro",
+  "@OptionSet" %} creates an option set from a `struct`
+  that contains a nested `Options` `enum`.
+- {% aTargetBlank
+  "https://developer.apple.com/documentation/widgetkit/preview-macros",
+  "#Preview" %} generates code to
+  display a preview of a SwiftUI widget in Xcode.
+
+- TODO: Find more of these.
+
+## Third Party Macros
+
+The following macros are not provided by Apple:
+
+- {% aTargetBlank "https://github.com/ailtonvivaz/swift-request",
+  "SwiftRequest" %} provides macros for sending all kinds of HTTP requests.
+
 ## Defining Macros
 
 The steps to define a new macro are:

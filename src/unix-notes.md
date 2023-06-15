@@ -244,8 +244,9 @@ that contain a given string, enter `grep '{string}' *.{extension}`.
 
 ### ripgrep
 
-ripgrep implements the `rg` command in Rust
-which is a much faster alternative to the `find` command.
+{% aTargetBlank "https://github.com/BurntSushi/ripgrep", "ripgrep" %}
+implements the `rg` command in Rust
+and is a much faster alternative to the `find` command.
 
 To find all occurrences of a string within
 any file that is in or below the current directory,
