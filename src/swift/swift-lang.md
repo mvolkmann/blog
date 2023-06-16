@@ -3048,7 +3048,7 @@ If the value of the `switch` expression is an `enum`,
 there must either be a `case` that matches each value of the `enum`
 or the `default` case must be included.
 
-Swift ? added the ability to use `if` and `switch` as expressions.
+Swift 5.9 added the ability to use `if` and `switch` as expressions.
 For example:
 
 ```swift
