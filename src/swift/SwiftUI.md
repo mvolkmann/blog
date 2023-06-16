@@ -1222,16 +1222,11 @@ struct CircleButton: View {
 
     var body: some View {
         Button(action: action, label: {
-            ZStack {
-                Circle().fill(color)
-                // Conditional logic can be implemented with an "if" statement,
-                // but iteration cannot be implemented with a "for-in" loop.
-                // A "ForEach" View must be used instead.
-                if selected {
-                    Circle().strokeBorder(Color.black, lineWidth: 5)
-                }
-            }
-        })
+            Circle()
+                .stroke(selected ? color : .black, lineWidth: 5)
+                .fill(color)
+                .frame(height: 50)
+        }
     }
 }
 
@@ -7628,10 +7623,10 @@ To fill a shape apply the {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/shape/fill(style:)",
 "fill" %} view modifier.
 
-It is not possible to apply both the `fill` view modifier
+Before iOS 17 it was not possible to apply both the `fill` view modifier
 and either the `stroke` or `strokeBorder` view modifier.
 One way to render a shape is filled AND has a border
-is to render it twice in a `ZStack` where
+was to render it twice in a `ZStack` where
 the bottom shape is filled and the top shape has a stroke.
 Another way is to render the shape once with a stroke
 and add a background version of the shape that is filled.
@@ -7648,6 +7643,16 @@ Circle()
     .stroke(.red, lineWidth: 10)
     .background(Circle().fill(.yellow))
     .frame(width: 100, height: 100)
+```
+
+Starting in iOS 17, both code examples above
+can be replaced with the following:
+
+```swift
+Circle()
+    .fill(Color.yellow)
+    .stroke(.red, lineWidth: 10)
+    .frame(height: 100)
 ```
 
 The following example code draws several shapes:
