@@ -1708,7 +1708,7 @@ SwiftUI uses the following color terminology:
   Accent color is not automatically applied to
   text-based views like `Text` and `Label`.
   To apply the accent color to text-based views,
-  call `.foregroundColor(.accentColor)` on them.
+  call `.foregroundStyle(.accentColor)` on them.
 
 - Tint
 
@@ -1721,7 +1721,7 @@ SwiftUI uses the following color terminology:
 
   This takes precedence over both the tint and accent color of a view.
   It is typically only applied to text-based views.
-  To set it, call the `foregroundColor` view modifier on a specific view.
+  To set it, call the `foregroundStyle` view modifier on a specific view.
 
 ### System Colors
 
@@ -1765,7 +1765,7 @@ The values for `primary` and `secondary` are controlled by the OS
 and cannot be modified in code.
 
 `Color.primary` defaults to the same colors as `UIColor.label`.
-and it is the default `foregroundColor` of `Text` views.
+and it is the default `foregroundStyle` of `Text` views.
 `Color.primary` is typically used for text because it automatically
 switches based on whether the device is in light or dark mode.
 
@@ -1791,7 +1791,7 @@ To override the accent color for a specific control view,
 apply the {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/path/tint(_:)", "tint" %}
 view modifier.
-For non-control views, apply the `foregroundColor` view modifier.
+For non-control views, apply the `foregroundStyle` view modifier.
 To specify the default accent color for all controls,
 apply the `tint` view modifier to the top view (often named `ContentView`).
 
@@ -1805,7 +1805,7 @@ Button("Love") {
 }
 .tint(.red)
 
-Image(systemName: love ? "heart.fill" : "heart").foregroundColor(.red)
+Image(systemName: love ? "heart.fill" : "heart").foregroundStyle(.red)
 ```
 
 The {% aTargetBlank
@@ -2089,7 +2089,7 @@ struct ContentView: View {
             Text(text)
                 .padding(10)
                 // Use a view as a background.
-                .background(Rectangle().foregroundColor(bgColor))
+                .background(Rectangle().foregroundStyle(bgColor))
 
             // Approach #3: Use the overlay view modifier.
             rect.overlay(Text(text))
@@ -2697,7 +2697,7 @@ View modifiers applied to the `Group` are applied to each of the children.
 Group {
     Text("One")
     Text("Two")
-}.foregroundColor(.blue)
+}.foregroundStyle(.blue)
 ```
 
 #### GroupBox
@@ -3153,7 +3153,7 @@ struct ContentView: View {
                 List(dogs, selection: $selectedIds) { dog in
                     let desc = String(describing: dog)
                     if selectedIds.contains(where: {$0 == dog.id}) {
-                        Text(desc).bold().foregroundColor(.green)
+                        Text(desc).bold().foregroundStyle(.green)
                     } else {
                         Text(desc)
                     }
@@ -3631,7 +3631,7 @@ struct Page: View {
                 .resizable()
                 .scaledToFit() // or .scaledToFill()
                 .frame(width: 100, height: 100)
-                .foregroundColor(.red)
+                .foregroundStyle(.red)
             Text(description)
         }
     }
@@ -3780,7 +3780,7 @@ or `.roundedRectangle(radius: cornerRadius)`.
 This only takes effect when the `buttonStyle` view modifier is also applied.
 
 To change the text color,
-apply the `tint` or `foregroundColor` view modifier passing it a `Color`.
+apply the `tint` or `foregroundStyle` view modifier passing it a `Color`.
 
 When their `role` attribute is set to `.destructive`, the text is red.
 When their `role` attribute is set to `.cancel`, `.none`, or not specified,
@@ -3860,7 +3860,7 @@ struct MyButtonStyle: ButtonStyle {
         configuration.label
             .font(.system(size: 30, weight: .bold))
             .padding(15)
-            .foregroundColor(.white)
+            .foregroundStyle(.white)
             .background(.purple)
             .clipShape(Capsule())
             .overlay(Capsule().strokeBorder(.blue, lineWidth: 3))
@@ -4062,7 +4062,7 @@ struct MyGauge: View {
 
             Text(String(format: "%.0f", value))
                 .font(.system(size: fontSize, weight: .bold))
-                .foregroundColor(textColor)
+                .foregroundStyle(textColor)
         }
     }
 }
@@ -4569,9 +4569,9 @@ To set the background color, apply the `background` view modifier
 For example, `.background(Color.yellow.opacity(0.3))`.
 The `tint` view modifier does not effect `Picker` views.
 
-To set the font and foreground color, apply the `font` and `foregroundColor`
+To set the font and foreground color, apply the `font` and `foregroundStyle`
 view modifiers to the `Text` views used to render the options.
-For example, `.font(.headline).foregroundColor(.red)`.
+For example, `.font(.headline).foregroundStyle(.red)`.
 This only applies to `automatic` and `wheel` pickers,
 not `menu` or `segmented` pickers.
 
@@ -4908,11 +4908,11 @@ and pass the number of lines that can be used (perhaps 1).
 If the text doesn't fit in the allowed number of lines,
 it will be elided and an ellipsis will appear at the end.
 
-To set the foreground color, apply the `foregroundColor` view modifier.
+To set the foreground color, apply the `foregroundStyle` view modifier.
 To set the font size, apply the `font` view modifier.
 
 ```swift
-Text("Hello World").foregroundColor(.red).font(.system(size: 24))
+Text("Hello World").foregroundStyle(.red).font(.system(size: 24))
 ```
 
 The `Text` view can only be passed a `String`.
@@ -4936,9 +4936,9 @@ To render text with multiple styles and no space between them,
 use the "+" operator between `Text` views. For example:
 
 ```swift
-Text("Red").foregroundColor(.red) +
-Text("Green").foregroundColor(.green) +
-Text("Blue").foregroundColor(.blue)
+Text("Red").foregroundStyle(.red) +
+Text("Green").foregroundStyle(.green) +
+Text("Blue").foregroundStyle(.blue)
 ```
 
 TODO: Describe the use of {% aTargetBlank
@@ -4956,7 +4956,7 @@ view modifier changes the font used by a `Text` view to bold.
 
 The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/text/foregroundcolor(_:)",
-"foregroundColor" %} view modifier changes the text color of a `Text` view
+"foregroundStyle" %} view modifier changes the text color of a `Text` view
 to a given `Color`.
 
 The {% aTargetBlank
@@ -5124,8 +5124,10 @@ For example:
 
 ```swift
 struct ContentView: View {
-    private let run = Text(Image(systemName: "figure.run")).foregroundColor(.red)
-    private let cycle = Text(Image(systemName: "figure.indoor.cycle"))
+    private let run =
+        Text(Image(systemName: "figure.run")).foregroundStyle(.red)
+    private let cycle =
+        Text(Image(systemName: "figure.indoor.cycle"))
 
     var body: some View {
         VStack {
@@ -5432,7 +5434,7 @@ TextField("my placeholder", text: $locationVM.searchQuery)
     .background(
         RoundedRectangle(cornerRadius: 10).fill(.background)
     )
-    .foregroundColor(.primary)
+    .foregroundStyle(.primary)
 ```
 
 By default the on-screen keyboard that appears
@@ -5463,7 +5465,7 @@ struct ContentView: View {
                 }
             if !name.isEmpty {
                 Text("Hello, \(name)!")
-                    .foregroundColor(textColor)
+                    .foregroundStyle(textColor)
             }
         }
         .padding()
@@ -5616,7 +5618,7 @@ Each view modifier conforms to the {% aTargetBlank
 View modifiers do not modify the view on which they are called.
 They instead create and return a new view that either
 wraps the receiver (ex. `frame`) or
-is a modified version of the receiver (ex. `foregroundColor`).
+is a modified version of the receiver (ex. `foregroundStyle`).
 For most view modifiers, the type returned is {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/modifiedcontent",
 "ModifiedContent" %}.
@@ -5658,11 +5660,11 @@ Text("Marching Ants")
 
 Calls to view modifiers can be chained since each returns a view.
 The following example demonstrates using the
-`foregroundColor`, `padding`, and `stroke` view modifiers.
+`foregroundStyle`, `padding`, and `stroke` view modifiers.
 
 ```swift
 Text("Hello, World!")
-    .foregroundColor(.red)
+    .foregroundStyle(.red)
 
 RoundedRectangle(cornerRadius: 20)
     .stroke(lineWidth: 3)
@@ -5749,8 +5751,6 @@ See the Apple documentation page on {% aTargetBlank
     sets primary and secondary foreground styles.
   - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/foregroundstyle(_:_:_:)", "foregroundStyle" %}
     sets primary, secondary, and tertiary foreground styles.
-  - {% aTargetBlank "https://developer.apple.com/documentation/swiftui/view/foregroundcolor(_:)", "foregroundColor" %}
-    sets foreground color.
 
 - `List` views
 
@@ -6809,8 +6809,7 @@ See {% aTargetBlank
 The following view modifiers can change the colors used in a view.
 
 - `background(alignment, content)`
-- `foregroundColor(Color?)`
-- `foregroundStyle(ShapeStyle)`
+- `foregroundStyle(ShapeStyle)` - can be a `Color`
 - `opacity(Double)`
 - `shadow(color: Color, radius: CGFloat, x: CGFloat, y: CGFloat)`
 - `tint(Color?)`
@@ -6820,10 +6819,6 @@ The {% aTargetBlank
 "background" %} view modifier takes a `content` argument whose value is
 a `ViewBuilder` function that can return any kind of `View`
 including a `Color`, `Shape`, or `Image`.
-The name of this view modifier doesn't end in `Color` like {% aTargetBlank
-"https://developer.apple.com/documentation/swiftui/list/foregroundcolor(_:)",
-"foregroundColor" %} because it can specify background content that is
-any `View` and is not restricted to only being a color.
 
 The {% aTargetBlank
 "https://developer.apple.com/documentation/swiftui/view/foregroundstyle(_:)",
@@ -6888,7 +6883,7 @@ struct ContentView: View {
     func shadowDemo(radius: CGFloat) -> some View {
         Text("Shadow Radius \(String(format: "%.0f", radius))")
             .font(.system(size: 40))
-            .foregroundColor(.blue)
+            .foregroundStyle(.blue)
             .shadow(color: .gray, radius: radius, x: 10, y: 10)
     }
 
@@ -7125,7 +7120,7 @@ VStack {
         Text("Beta")
         Text("Gamma")
     }
-}.foregroundColor(.red)
+}.foregroundStyle(.red)
 ```
 
 ### Custom View Modifiers
@@ -7519,7 +7514,7 @@ struct FloatingActionButton: View {
                         .frame(width: diameter, height: diameter)
                     Text(label)
                         .font(.system(size: 60))
-                        .foregroundColor(.white)
+                        .foregroundStyle(.white)
                         .padding(.bottom, 7)
                         .frame(height: diameter)
                 }
@@ -7725,7 +7720,7 @@ struct ContentView: View {
                     .fill(ImagePaint(image: Image("Comet"), scale: 0.34))
                 Text("RoundedRectangle with ImagePaint")
                 .font(.largeTitle)
-                .foregroundColor(.purple)
+                .foregroundStyle(.purple)
             }
         }
         .padding()
@@ -8138,7 +8133,7 @@ One example, shown below, is displaying a background image.
 VStack {
     Spacer()
     Text("Comet the Whippet")
-        .foregroundColor(.white)
+        .foregroundStyle(.white)
         .font(.system(size: 36))
     Spacer()
 }
@@ -8529,7 +8524,7 @@ struct ChildView: View {
     var body: some View {
         VStack {
             // Renders in blue.
-            Text("in ChildView").foregroundColor(primaryColor)
+            Text("in ChildView").foregroundStyle(primaryColor)
             GrandchildView()
         }
     }
@@ -8540,7 +8535,7 @@ struct GrandchildView: View {
 
     var body: some View {
         // Renders in blue.
-        Text("in GrandchildView").foregroundColor(primaryColor)
+        Text("in GrandchildView").foregroundStyle(primaryColor)
     }
 }
 
@@ -8551,7 +8546,7 @@ struct ContentView: View {
         VStack {
             // Renders in red when run in the Simulator
             // and in green when run in Preview.
-            Text("in ContentView").foregroundColor(primaryColor)
+            Text("in ContentView").foregroundStyle(primaryColor)
             // Override the default value of primaryColor
             // for all views under ChildView.
             ChildView().environment(\.primaryColor, .blue)
@@ -10108,7 +10103,7 @@ struct ContentView: View {
                 }
             } else {
                 if !username.isEmpty || !password.isEmpty {
-                    Text("Invalid Credentials").foregroundColor(.red)
+                    Text("Invalid Credentials").foregroundStyle(.red)
                 }
                 Button("Login") {
                     isShowingAlert = true
@@ -10813,7 +10808,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = .systemRed // a bit more muted than .red
         appearance.largeTitleTextAttributes = [
-            .foregroundColor: UIColor.white
+            .foregroundStyle: UIColor.white
             //.font: UIFont.monospacedSystemFont(ofSize: 36, weight: .bold)
         ]
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
@@ -10993,12 +10988,12 @@ struct ContentView: View {
             .navigationBarItems(
                 leading:
                     Button("Down") { data.v1 -= 1 }
-                    .foregroundColor(.white),
+                    .foregroundStyle(.white),
                 trailing:
                     HStack {
                         Button("Up") { data.v1 += 1 }
                         Button("Double") { data.v1 *= 2 }
-                    }.foregroundColor(.white)
+                    }.foregroundStyle(.white)
             )
         }
         .statusBarHidden(fullScreen)
