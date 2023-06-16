@@ -7,17 +7,22 @@ layout: topic-layout.njk
 
 ## Overview
 
-Swift macros "allow you to generate repetitive code at compile-time."
+Swift macros "allow you to generate repetitive code at compile-time".
 
-Unlike C macros which are applied before compile-time,
-Swift macros are type-checked by the compiler before they are applied.
+Swift macros are:
 
-Macros are implemented in Swift and defined in compiler plugins.
+- type-checked by the compiler before they are applied,
+  unlike C macros which are applied before compile-time
+- additive, never modifying or deleting existing code
+- implemented in Swift
+- defined in compiler plugins
 
-For more detail, watch the WWDC 2023 videos {% aTargetBlank
-"https://developer.apple.com/wwdc23/10166", "Write Swift macros" %} and
-{% aTargetBlank "https://developer.apple.com/wwdc23/10167",
-"Expand on Swift macros" %}.
+For more detail, watch the WWDC 2023 videos:
+
+- {% aTargetBlank "https://developer.apple.com/wwdc23/10166",
+  "Write Swift macros" %}
+- {% aTargetBlank "https://developer.apple.com/wwdc23/10167",
+  "Expand on Swift macros" %}.
 
 ## Provided Macros
 
