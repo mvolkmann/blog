@@ -8241,6 +8241,12 @@ These include:
   the following can be used:
 
   ```swift
+  // iOS 17 and above
+  .onChange(of: someState) { oldValue, newValue in
+      ...
+  }
+
+  // iOS 16 and below
   .onChange(of: someState) { [someState] newValue in
       // someState holds the old value.
       ...
@@ -8850,9 +8856,11 @@ An easing function controls the speed at which an animation advances
 over its duration.
 
 Provided easing functions include
-`linear`, `easeIn`, `easeOut`, `easeInOut` (default), and `spring`.
+`linear`, `easeIn`, `easeOut`, `easeInOut` (default in iOS 16 and earlier),
+`spring` (default in iOS 17 and later), `interactiveSpring`,
+`interpolatingSpring`, `bouncy`, `smooth`, and `snappy`.
 These are static functions on the `Animation` struct.
-All but `spring` take a single, optional argument
+Most of them take a single, optional argument
 which is the `duration` in seconds.
 The `spring` function takes three optional arguments named
 `response`, `dampingFunction`, and `blendDuration`.
