@@ -1916,8 +1916,14 @@ change the slider type drop-down to "HSB Sliders",
 and reduce the value for Brightness (perhaps to 50%).
 
 To use a custom color in code, enter `Color("some-name")`.
-To avoid typos when using these named colors, consider defining a
-`Color` extension that defines computed properties like the following:
+
+iOS 17 added automatic generation of constants for colors and images
+defined in `.xcassets` files.
+This allows replacing `Color("some-name")` with just `.someName`.
+
+Before iOS 17 it was recommended to avoid typos when named colors
+by defining a `Color` extension that
+defines computed properties like the following:
 
 ```swift
 extension Color {
@@ -4117,6 +4123,10 @@ Click the "+" in the lower-left to add an entry.
 Give the entry a name and drag images into the 1x, 2x, and 3x boxes.
 Pass the name to the `Image` view as an unlabelled argument.
 For example, `Image("Comet")`.
+
+iOS 17 added automatic generation of constants for colors and images
+defined in `.xcassets` files.
+This allows replacing `Image("Comet")` with `Image(.comet)`.
 
 Newer devices use 3x images, slightly older devices use 2x images,
 and really old devices use 1x images. See {% aTargetBlank
