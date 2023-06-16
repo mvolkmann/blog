@@ -232,7 +232,7 @@ For example:
 ```swift
 enum MyCustomError: CustomStringConvertible, Error {
     case badThing1
-    case badThingw
+    case badThing2
 
     var description: String {
         switch self {
@@ -246,3 +246,9 @@ enum MyCustomError: CustomStringConvertible, Error {
 When non-test code uses a macro in a way that throws an error,
 the error message will appear in Xcode next to the offending line
 just like other compiler generated errors.
+
+## Examples
+
+- {% aTargetBlank "https://github.com/mvolkmann/TypeInitMacro", "TypeInitMacro" %}
+
+  This macro adds a member-wise initializer to a `class` or `struct`.
