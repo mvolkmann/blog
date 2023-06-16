@@ -10,6 +10,7 @@ layout: topic-layout.njk
 Swift macros "allow you to generate repetitive code at compile-time".
 
 Swift macros are:
+:
 
 - type-checked by the compiler before they are applied,
   unlike C macros which are applied before compile-time
@@ -31,7 +32,7 @@ For xample, they cannot interact with the file system or the network.
   "Expand on Swift macros" %} WWDC 2023 video
 
 - {% aTargetBlank
-  "https://swiftpackageindex.com/apple/swift-syntax/main/documentation/swiftsyntax,
+  "https://swiftpackageindex.com/apple/swift-syntax/main/documentation/swiftsyntax",
   "SwiftSyntax" %} framework documentation
 
   This package parses, inspects, manipulates, and generates Swift source code.
