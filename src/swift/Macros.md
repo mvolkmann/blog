@@ -17,12 +17,33 @@ Swift macros are:
 - implemented in Swift
 - defined in compiler plugins
 
-For more detail, watch the WWDC 2023 videos:
+Macro implementations should be pure functions,
+using only the information provided to them by the compiler.
+They run in a sandbox to prevent certain operations.
+For xample, they cannot interact with the file system or the network.
+
+## Resources
 
 - {% aTargetBlank "https://developer.apple.com/wwdc23/10166",
-  "Write Swift macros" %}
+  "Write Swift macros" %} WWDC 2023 video
+
 - {% aTargetBlank "https://developer.apple.com/wwdc23/10167",
-  "Expand on Swift macros" %}.
+  "Expand on Swift macros" %} WWDC 2023 video
+
+- {% aTargetBlank
+  "https://swiftpackageindex.com/apple/swift-syntax/main/documentation/swiftsyntax,
+  "SwiftSyntax" %} framework documentation
+
+  This package parses, inspects, manipulates, and generates Swift source code.
+
+- SwiftSyntaxBuilder
+
+  This package provides functions for constructing ASTs
+  that describe new code to be generated.
+
+- `SwiftSyntaxMacros`
+
+  This package defines protocols and types needed to write Swift macros.
 
 ## Provided Macros
 
@@ -161,12 +182,20 @@ a name, parameter list, and return type.
 - `@attached(accessor)` - adds accessors to a property of a type
 - `@attached(memberAttribute)` - adds attributes to declarations in a type
 - `@attached(member)` - adds declarations inside a type on which it is applied
-- `@attached(conformance)` - adds protocol conformances to a type
+- `@attached(conformance)` - adds protocol conformances to a type or extensio
 
-Freestanding macros are invoked with a `#`.
-Attached macros are invoked with a `@`.
+The value passed to these is its role.
+Each role has a corresponding protocol.
+Macro implementations must conform to the protocol
+for each of the roles it supports.
+Often a macro only supports a single role, but they can support multiple roles
+
+All the methods required by these role protocols are static
 
 ## Freestanding Macros
+
+Freestanding macros are invoked with the `#` character.
+They can only use data passed to them.
 
 Freestanding macro definitions begin with `@freestanding(expression)`
 and can be applied to any expression.
@@ -177,10 +206,20 @@ in an abstract syntax tree (AST).
 The macro can transform the AST to provide the result AST
 which is used to generate source code that is then passed to the compiler.
 
+An implementation of a freestanding macro can play only play one of the roles
+`expression` and `declaration`.
+
 ## Attached Macros
 
-Attached macros augument Swift declarations for entities they decorate
-such as variables, functions, enums, structs, and classes.
+Attached macros are attached to a declaration
+such as a variable, function, type, or property.
+They can use data passed to them and
+data in the declaration to which they are attached.
+They are invoked with the `@` character.
+
+An implementation of an attached macro can play one or more of the roles
+`peer`, `accessor`, `memberAttribute`, `member`, and `conformance`.
+The role used is determined by where the macro is applied
 
 ## Generics in Macros
 
