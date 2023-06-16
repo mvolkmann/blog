@@ -5740,7 +5740,7 @@ to get data from the stream until it is empty.
 
 ```swift
 // Returns a stream of five random integers from 1 to 10.
-func getData() -> AsyncStream<Int> {
+func getData(clock: any Clock<Duration>) -> AsyncStream<Int> {
     AsyncStream(Int.self) { continuation in
         Task {
             var count = 5
@@ -5754,11 +5754,16 @@ func getData() -> AsyncStream<Int> {
                 try await Task.sleep(nanoseconds: nanoseconds)
                 */
 
+                /*
                 // Approach #2
                 try await Task.sleep(
                     until: .now + .seconds(seconds),
                     clock: .continuous
                 )
+                */
+
+                // Approach #3 - added in Swift 5.9.
+                try await clock.sleep(for: .seconds(seconds))
 
                 // Yield a random integer from 1 to 10.
                 let n = Int.random(in: 1 ... 10)
@@ -5775,7 +5780,7 @@ Task {
     // Measure how long it takes to get data from the stream until it is empty.
     let clock = ContinuousClock()
     let time = await clock.measure {
-        for await n in getData() {
+        for await n in getData(clock: clock) {
             print("got", n)
         }
     }
