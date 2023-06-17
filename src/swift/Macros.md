@@ -292,6 +292,8 @@ When non-test code uses a macro in a way that throws an error,
 the error message will appear in Xcode next to the offending line
 just like other compiler generated errors.
 
+To run the tests, select Product ... Test or press cmd-u
+
 ## Examples
 
 - {% aTargetBlank "https://github.com/mvolkmann/TypeInitMacro", "TypeInitMacro" %}
