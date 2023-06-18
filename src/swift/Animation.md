@@ -561,3 +561,15 @@ struct ContentView: View {
     }
 }
 ```
+
+## phaseAnimator
+
+See the demo project at {% aTargetBlank
+"https://github.com/mvolkmann/KeyframeAnimatorDemo/blob/main/KeyframeAnimatorDemo/ContentView.swift",
+"KeyframeAnimatorDemo" %}.
+
+## keyframeAnimator
+
+See the demo project at {% aTargetBlank
+"https://github.com/mvolkmann/KeyframeAnimatorDemo/blob/main/KeyframeAnimatorDemo/ContentView.swift",
+"KeyframeAnimatorDemo" %}.

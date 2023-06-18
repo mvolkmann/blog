@@ -44,9 +44,14 @@ To enable use of MapKit in a project:
 
 ## Example App
 
-See the demo app at {% aTargetBlank
+See the demo apps at {% aTargetBlank
+"https://github.com/mvolkmann/MapKitForSwiftUI", "MapKitForSwiftUI" %}
+(iOS 17+) and {% aTargetBlank
 "https://github.com/mvolkmann/swiftui-mapkit", "swiftui-mapkit" %}.
 
+<img alt="MapKit iOS 17+" style="width: 32%"
+  src="/blog/assets/mapkit-initial.jpg?v={{pkg.version}}"
+  title="MapKit Initial">
 <img alt="MapKit Initial" style="width: 32%"
   src="/blog/assets/mapkit-initial.jpg?v={{pkg.version}}"
   title="MapKit Initial">
@@ -367,7 +372,7 @@ and markers for each match can be added to the map.
 
 ## Look Around
 
-"Look Around" capabilities, introduced in iOS16,
+"Look Around" capabilities, introduced in iOS 16,
 can be added to display street level views.
 See https://developer.apple.com/videos/play/wwdc2022/10035/.
 
