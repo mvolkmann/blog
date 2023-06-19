@@ -574,6 +574,11 @@ By default this continues indefinitely.
 A trigger can be used to only run through the phases
 one time each time the trigger value changes.
 
+See the WWDC 2023 video {% aTargetBlank
+"https://developer.apple.com/wwdc23/10157",
+"Wind your way through advanced animations in SwiftUI" %}
+that was the basis for the following code.
+
 This demonstrates basic use of phaseAnimator.
 The first argument specifies an array of values
 to be used as the values of the closure phase argument.
@@ -657,6 +662,14 @@ at which to modify a specific property.
 There can be any number of tracks with different timings,
 one for each property whose changes should be animated.
 Keyframes can animate any property that conforms to the Animatable protocol.
+
+See the WWDC 2023 video {% aTargetBlank
+"https://developer.apple.com/wwdc23/10157",
+"Wind your way through advanced animations in SwiftUI" %}
+that was the basis for the following code.
+
+This demonstrates using keyframes to raise a view up, make it larger,
+shake it, and return it to its original location.
 
 ```swift
 struct AnimationValues {
