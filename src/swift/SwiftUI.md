@@ -7118,6 +7118,16 @@ VStack {
 }.foregroundStyle(.red)
 ```
 
+iOS 17 added support for the {% aTargetBlank
+"https://developer.apple.com/documentation/swiftui/input-events?changes=_3",
+"onKeyPress" %} view modifier.
+See my example at {% aTargetBlank
+"https://github.com/mvolkmann/OnKeyPressDemo/blob/main/OnKeyPressDemo/ContentView.swift",
+"OnKeyPressDemo" %} GitHub repository.
+also see the Hacking With Swift post {% aTargetBlank
+"https://www.hackingwithswift.com/quick-start/swiftui/how-to-detect-and-respond-to-key-press-events",
+"How to detect and respond to key press events" %}.
+
 ### Custom View Modifiers
 
 Custom view modifiers can be created by defining
