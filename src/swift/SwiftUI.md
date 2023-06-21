@@ -8283,6 +8283,25 @@ extension View {
 }
 ```
 
+## Gestures
+
+SwiftUI supports detecting the following gestures on a view:
+
+- `TapGesture`
+- `LongPressGesture`
+- `DragGesture`
+- `RotateGesture` (iOS 17+) and `RotationGesture` (pre-iOS 17)
+- `MagnifyGesture` (iOS 17+) and `MagnificationGesture` (pre-iOS 17)
+
+Supporting multiple gestures on a single view
+is easy for some combinations, but not others.
+For example, supporting both rotate and magnify gestures is easy,
+but supporting both drag and rotate gestures is problematic
+
+See the example project {% aTargetBlank
+"https://github.com/mvolkmann/SwiftUIGesturesDemo/blob/main/SwiftUIGesturesDemo/ContentView.swift",
+"SwiftUIGesturesDemo" %}.
+
 ## Keyboard Shortcuts
 
 To defined keyboard shortcuts, apply the `keyboardShortcut` view modifier.
