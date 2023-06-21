@@ -4536,6 +4536,7 @@ The label is only rendered by some styles.
   "https://developer.apple.com/documentation/swiftui/pickerstyle/palette",
   "palette" %} - added in iOS 17
 
+  This "presents the options as a row of compact elements".
   See the example project {% aTargetBlank
   "https://github.com/mvolkmann/PickerStyleDemo/blob/main/PickerStyleDemo/ContentView.swift",
   "PickerStyleDemo" %}.
