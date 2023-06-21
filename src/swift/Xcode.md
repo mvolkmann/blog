@@ -1334,6 +1334,8 @@ To duplicate a source file, select it in the Navigator
 and click File ... Duplicate.
 Oddly the context sensitive menu that is displayed when
 a file in the Navigator is right clicked does not include this option.
+Alternatively, hold down the option key and drag a file
+to a different group or within the same group.
 
 ## App Name
 

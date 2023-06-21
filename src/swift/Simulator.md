@@ -25,11 +25,11 @@ If there are errors or warnings, the number of each will be displayed
 on the right side of the code editor header.
 Click either number to display the messages in the "Issue Navigator".
 
-## Zooming
+## Rotate and Zoom
 
-For UI views that support pinch-to-zoom such as maps,
-that can be performed in the Simulator by holding down the option key
-and using two fingers on a trackpad.
+For UI views that support rotation and/or pinch-to-zoom (such as maps),
+these can be performed in the Simulator by holding down the option key
+and dragging on a trackpad.
 
 ## Comparison to Preview
 
