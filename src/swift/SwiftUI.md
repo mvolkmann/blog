@@ -4475,7 +4475,9 @@ to change the way the options are rendered, passing it a {% aTargetBlank
 The label is only rendered by some styles.
 `PickerStyle` values include:
 
-- `.automatic` (default)
+- {% aTargetBlank
+  "https://developer.apple.com/documentation/swiftui/pickerstyle/automatic",
+  "automatic" %} (default)
 
   This selects a style based on the context in which the `Picker` is used.
   It is typically either `.menu` or `.wheel`.
@@ -4496,7 +4498,9 @@ The label is only rendered by some styles.
     <figcaption>automatic picker new page after clicking</figcaption>
   </figure>
 
-- `.inline`
+- {% aTargetBlank
+  "https://developer.apple.com/documentation/swiftui/pickerstyle/inline",
+  "inline" %}
 
   This displays the prompt and all the options (visible simultaneously)
   in the current sheet.
@@ -4504,7 +4508,9 @@ The label is only rendered by some styles.
   This works when the `Picker` is inside a `Form`.
   Otherwise it uses the `.wheel` style.
 
-- `.menu`
+- {% aTargetBlank
+  "https://developer.apple.com/documentation/swiftui/pickerstyle/menu",
+  "menu" %}
 
   This does not display the prompt and
   only displays the currently selected value.
@@ -4526,9 +4532,21 @@ The label is only rendered by some styles.
     <figcaption>menu picker after clicking</figcaption>
   </figure>
 
-- `.radioGroup` - not available in iOS
+- {% aTargetBlank
+  "https://developer.apple.com/documentation/swiftui/pickerstyle/palette",
+  "palette" %} - added in iOS 17
 
-- `.segmented`
+  See the example project {% aTargetBlank
+  "https://github.com/mvolkmann/PickerStyleDemo/blob/main/PickerStyleDemo/ContentView.swift",
+  "PickerStyleDemo" %}.
+
+- {% aTargetBlank
+  "https://developer.apple.com/documentation/swiftui/pickerstyle/radiogroup",
+  "radioGroup" %} - not available in iOS
+
+- {% aTargetBlank
+  "https://developer.apple.com/documentation/swiftui/pickerstyle/segmented",
+  "segmented" %}
 
   This does not display the prompt,
   and renders the options as a "Segmented Control"
@@ -4543,7 +4561,9 @@ The label is only rendered by some styles.
     <figcaption>segmented picker</figcaption>
   </figure>
 
-- `.wheel`
+- {% aTargetBlank
+  "https://developer.apple.com/documentation/swiftui/pickerstyle/wheel",
+  "wheel" %}
 
   This does not display the prompt,
   and renders all the options as a scrollable wheel.
