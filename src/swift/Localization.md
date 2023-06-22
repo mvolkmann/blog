@@ -26,8 +26,9 @@ These include `Text`, `Label`, and `Button`.
 
 ## String Catalogs
 
-String catalogs were added in iOS 17.
-They supercede "Strings" and "StringsDict" files.
+Support for string catalogs was added in iOS 17.
+These supercede "Strings" and "StringsDict" files.
+They are JSON files that have a specialized Xcode editor.
 
 To create a string catalog:
 
@@ -50,24 +51,29 @@ To enable this:
 
 Once this is enabled, the string catalog file will be updated during each build.
 
-The string catalog will contain a separate table for each supported language.
-To add translations for a given language,
-select the string catalog file, select a language,
-and enter the text to be used for each key.
-For languages that are missing translations, a percentage of
-supplied translations is displayed after the language name.
-Once all the translations for a language are supplied,
-the percentage is replaced by a green check mark.
+The build process looks for string literals in view code.
+It uses all strings passed to functions where
+the parameter type is `LocalizedStringKey`.
 
-It looks for string literals passed to any function
-where the parameter type is `LocalizedStringKey`.
-By default the catalog file is named "Localizable.xcstrings".
+It also looks for the following kinds of values in non-view code.
+Use these instead of plain String values
+to indicate that they require language translation.
 
-The translated strings can vary by device.
-For example, the word "tap" which is appropriate for iOS and iPadOS
-can be changed to "click" for macOS.
+```swift
+LocalizedStringResource(
+    "some text",
+    table: "SomeTable", // optional
+    local: someLocale, // optional
+    comment: "some comment" // optiona
+)
 
-Localizable strings have four components:
+String(localized: "some text")
+
+AtributedString(localized: "some text")
+```
+
+`LocalizedStringResource` is a new type that can hold
+the following four components of localizable strings:
 
 - key
 
@@ -91,24 +97,28 @@ Localizable strings have four components:
   One or more files where translations are stored.
   By default the "localizable" table is used.
 
-`LocalizedStringResource` is a new type that can hold
-all four of the components described above.
+The string catalog contains a separate table for each supported language.
 
-In non-view code, use one of the following in place of literal strings
-to indicate string values that require localization:
+To add translations for a given language,
+select the string catalog file, select a language,
+and enter the text to be used for each key.
 
-```swift
-LocalizedStringResource(
-    "some text",
-    table: "SomeTable", // optional
-    local: someLocale, // optional
-    comment: "some comment" // optiona
-)
+For languages that are missing translations, a percentage of
+supplied translations is displayed after the language name.
+Once all the translations for a language are supplied,
+the percentage is replaced by a green check mark.
 
-String(localized: "some text")
+The last column in the translations tables indicates the state of the translations which can be one of the following:
 
-AtributedString(localized: "some text")
-```
+- "NEW" - found in code, but no translation has been supplied yet
+- "STALE" - no longer found in code, but a translation has been supplied
+- NEEDS REVIEW - someone marked the translation as needing review by right-clicking the row and selecting
+
+To delete a translation row, select it and press the delete key.
+
+The translated strings can vary by device.
+For example, the word "tap" which is appropriate for iOS and iPadOS
+can be changed to "click" for macOS.
 
 ## Creating a "Strings" File
 
