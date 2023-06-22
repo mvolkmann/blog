@@ -73,9 +73,8 @@ For example:
 
 ## @Bindable
 
-The `@Bindable` marks an instance of a class
-to which the @Observable macro is applied.
-It can be used to create a two-way binding
+The `@Bindable` property wrapper creates a two-way binding to a property
+in a class to which the `@Observable` property wrapper is applied.
 
 TODO: Add information about this.
 
