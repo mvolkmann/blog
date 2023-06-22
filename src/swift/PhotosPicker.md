@@ -91,12 +91,15 @@ and the "Done" button (closes picker when not inline).
 It seems there is no need to disable any of the capabilities
 if they are configured to be hidden using the
 `photosPickerAccessoryVisibility` view modifier.
-The first argument specifies whether you wish to indicate
+The first argument specifies whether you will indicate
 which edges containing controls should be `.visible` or `.hidden`.
-The navigation bar contains the Clear and Done buttons
+The association of controls to edges differs based on the platform.
+In iOS, the navigation bar is at the top and contains
+the Clear button, the Done button,
 and a segmented Picker to select "Photos" or "Albums".
-The toolbar contains the "Options" button and some text.
-The following hides all edges:
+In iOS, the toolbar is at the bottom and contains
+the "Options" button and some text.
+The following view modifier hides all edges:
 
 ```swift
 .photosPickerAccessoryVisibility(.hidden, edges: .all)
