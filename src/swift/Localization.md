@@ -24,6 +24,92 @@ These include `Text`, `Label`, and `Button`.
    For each additional language to be supported,
    click the "+" Button and select a language.
 
+## String Catalogs
+
+String catalogs were added in iOS 17.
+They supercede "Strings" and "StringsDict" files.
+
+To create a string catalog:
+
+- Select File ... New or press cmd-n.
+- Select "String Catalog" in the "Resource" section.
+- Click the "Next" button.
+- Specify the name of the file.
+  Typically the default name "Localizable.xcstrings" is retained.
+- Click the "Create" button.
+
+A string catalog can be automatically populated from string literals
+in source files that define SwiftUI views.
+To enable this:
+
+- select the top-most entry in the Project Navigator
+- select the project
+- select the "Build Settings" tab
+- scroll down to the "Localization" section
+- change "Use Compiler to Extract Swift Strings" from "No" to "Yes"
+
+Once this is enabled, the string catalog file will be updated during each build.
+
+The string catalog will contain a separate table for each supported language.
+To add translations for a given language,
+select the string catalog file, select a language,
+and enter the text to be used for each key.
+For languages that are missing translations, a percentage of
+supplied translations is displayed after the language name.
+Once all the translations for a language are supplied,
+the percentage is replaced by a green check mark.
+
+It looks for string literals passed to any function
+where the parameter type is `LocalizedStringKey`.
+By default the catalog file is named "Localizable.xcstrings".
+
+The translated strings can vary by device.
+For example, the word "tap" which is appropriate for iOS and iPadOS
+can be changed to "click" for macOS.
+
+Localizable strings have four components:
+
+- key
+
+  This is a unique identifier (within a table) that is used at runtime
+  to lookup the text to render. It can match the English text.
+
+- defaultValue
+
+  This is an optional value that defaults to the value
+  corresponding to the key in the default locale.
+  Specifying this value is useful when the
+  strings in the source files are not in English.
+  The default locale can be selected in the project editor.
+
+- comment
+
+  This describes where and how a particular translation is being used in the UI.
+
+- table
+
+  One or more files where translations are stored.
+  By default the "localizable" table is used.
+
+`LocalizedStringResource` is a new type that can hold
+all four of the components described above.
+
+In non-view code, use one of the following in place of literal strings
+to indicate string values that require localization:
+
+```swift
+LocalizedStringResource(
+    "some text",
+    table: "SomeTable", // optional
+    local: someLocale, // optional
+    comment: "some comment" // optiona
+)
+
+String(localized: "some text")
+
+AtributedString(localized: "some text")
+```
+
 ## Creating a "Strings" File
 
 Translations are described in a "Strings" file.
@@ -373,7 +459,7 @@ demo(.decimal)
 
 demo(.percent)
 // 123,457%
-// 123 457 %
+// 123 457 %
 
 demo(.scientific)
 // 1.2345678E3
@@ -389,7 +475,7 @@ demo(.ordinal)
 
 demo(.currency)
 // $1,234.57
-// 1 234,57 €
+// 1 234,57 €
 
 // From the Apple documentation,
 // "This style behaves like the .currency style,
@@ -397,7 +483,7 @@ demo(.currency)
 // surrounded by parentheses rather than preceded by a negative symbol.
 demo(.currencyAccounting)
 // $1,234.57
-// 1 234,57 €
+// 1 234,57 €
 
 demo(.currencyPlural)
 // 1,234.57 US dollars
