@@ -115,12 +115,12 @@ The app above renders a `PhotoPicker` with the following:
 PhotosPicker(
     selection: $imageSelections,
 
-    // Places checkmarks in blue circles on each selected image.
-    // Most buttons are hidden when the value is
-    // `.continuous` or `.continuousAndOrdered`
+    // When `selectionBehavior` is `continuous` or `continuousAndOrdered`,
+    // the `selection` binding is updated when each selection is made
+    // and most buttons are hidden.
+    // This value places checkmarks in blue circles on each selected image.
     selectionBehavior: .continuous, // value added in iOS 17
-
-    // Places numbered blue circles on each selected image.
+    // This value places numbered blue circles on each selected image.
     // selectionBehavior: .continuousAndOrdered, // value added in iOS 17
 
     // matching: .images,
