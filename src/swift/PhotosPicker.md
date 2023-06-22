@@ -137,6 +137,11 @@ PhotosPicker(
 // rendering it in a sheet controlled by a separate process.
 .photosPickerStyle(.inline)
 
+// This also embeds the PhotosPicker,
+// but it renders the photos in a single, scrollable row.
+// .photosPickerStyle(.inline)
+
+
 // This hides all controls normally rendered by the PhotosPicker.
 .photosPickerAccessoryVisibility(.hidden, edges: .all)
 
