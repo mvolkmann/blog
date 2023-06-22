@@ -116,6 +116,8 @@ PhotosPicker(
     selection: $imageSelections,
 
     // Places checkmarks in blue circles on each selected image.
+    // Most buttons are hidden when the value is
+    // `.continuous` or `.continuousAndOrdered`
     selectionBehavior: .continuous, // value added in iOS 17
 
     // Places numbered blue circles on each selected image.
