@@ -252,6 +252,28 @@ enter a new name that still begins with `@`.
 In the example above, `@arg1` might be renamed to `@dogs`
 and `@arg2` might be renamed to `@squirrels`.
 
+```swift
+VStack {
+    HStack {
+        Stepper("Dog Count", value: $dogCount)
+        Text("\(dogCount)")
+    }
+    HStack {
+        Stepper("Squirrel Count", value: $squirrelCount)
+        Text("\(squirrelCount)")
+    }
+    Text(
+        String(
+            localized: "The \(dogCount) dogs barked at the \(squirrelCount) squirrels."
+        )
+    )
+}
+```
+
+<img alt="Xcode Strings Catalog plurals" style="width: 80%"
+  src="/blog/assets/xcode-strings-catalog-plurals.png?v={{pkg.version}}"
+  title="Xcode Strings Catalog plurals">
+
 ### Device-specific Translations
 
 The translated strings can vary by device.
@@ -536,9 +558,10 @@ Text("Annie \(sun) \(tomorrow)")
 
 TODO: How can we translate the strings "sun" and "tomorrow"?
 
-## Plurals (old way)
+## Stringsdict Files
 
-This approach for supporting plurals was used before iOS 17.
+Stringsdict files provide a way to define pluralization rules for translations.
+These were used before iOS 17.
 For iOS 17 and beyond, using String Catalogs is preferred.
 
 SwiftUI can automate displaying phrases that describe a number of things
