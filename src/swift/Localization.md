@@ -234,7 +234,7 @@ change the value for "Managed" from "Manually" to "Automatically".
 To support plurals in a translation:
 
 - Add count placeholders for each count in the key.
-  For example, "The %lld dog barked at the %lld squirrel.".
+  For example, "The %lld dogs barked at the %lld squirrels.".
   Note that `%lld` is a C-style format specifier.
 - For each count placeholder, right-click the row and select "Vary by Plural".
   This adds sub-rows that are appropriate for the language.
@@ -251,6 +251,8 @@ enter a new name that still begins with `@`.
 
 In the example above, `@arg1` might be renamed to `@dogs`
 and `@arg2` might be renamed to `@squirrels`.
+
+The following view code might be used with the example translation.
 
 ```swift
 VStack {
@@ -270,7 +272,10 @@ VStack {
 }
 ```
 
-<img alt="Xcode Strings Catalog plurals" style="width: 80%"
+The following screenshot shows the definition for this plural translation
+in the Strings Catalog file.
+
+<img alt="Xcode Strings Catalog plurals" style="width: 100%"
   src="/blog/assets/xcode-strings-catalog-plurals.png?v={{pkg.version}}"
   title="Xcode Strings Catalog plurals">
 
