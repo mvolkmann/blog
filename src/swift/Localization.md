@@ -166,6 +166,8 @@ For languages that are missing translations, a percentage of
 supplied translations is displayed after the language name.
 Once all the translations for a language are supplied,
 the percentage is replaced by a green check mark.
+When all languages have a green check mark,
+language translation is complete for the current set of keys.
 
 The last column in the translations tables indicates the
 state of the translations which can be one of the following:
@@ -174,6 +176,7 @@ state of the translations which can be one of the following:
 - "STALE" - no longer found in code, but a translation has been supplied
 - NEEDS REVIEW - someone marked the translation as needing review
   by right-clicking the row and selecting "Mark for Review"
+- green check mark - successfully translateds
 
 Keys for stale translations can be deleted
 if it is suspected that it will never be used in the future.
@@ -201,6 +204,16 @@ To add a new key:
 - For each language:
   - Select the language.
   - Enter a translation for the key.
+
+Manually added keys are not managed by Xcode.
+This means they will not be automatically updated or removed by Xcode.
+To cause a manually added key to be managed by Xcode,
+select its row, open the inspector on the right, and
+change the value for "Managed" from "Manually" to "Automatically".
+
+<img alt="Xcode Strings Catalog Inspector" style="width: 50%"
+  src="/blog/assets/xcode-strings-catalog-inspector.png?v={{pkg.version}}"
+  title="Xcode Strings Catalog Inspector">
 
 ### Previews
 
@@ -245,8 +258,9 @@ platform-specific translations.
 
 When there is more than one number placeholder in a key,
 each is given a name like `@arg1`.
-To rename them, click the name in its sub-row and
-enter a new name that begins with `@`.
+These placeholders can be renamed to make their meaning more clear.
+To rename a placeholder, click the name in its sub-row and
+enter a new name that still begins with `@`.
 
 In the example above, `@arg1` might be renamed to `@dogs`
 and `@arg2` might be renamed to `@squirrels`.
@@ -269,7 +283,7 @@ begins with a platform name or "Other".
 
 <img alt="Xcode Strings Catalog Vary by Device" style="width: 100%"
   src="/blog/assets/xcode-strings-catalog-vary-by-device.png?v={{pkg.version}}"
-  title="Strings Catalog Vary by Device">
+  title="Xcode Strings Catalog Vary by Device">
 
 Repeat the steps above for each language that requires
 platform-specific translations.
