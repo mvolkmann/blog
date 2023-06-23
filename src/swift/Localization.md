@@ -219,33 +219,6 @@ change the value for "Managed" from "Manually" to "Automatically".
   src="/blog/assets/xcode-strings-catalog-inspector.png?v={{pkg.version}}"
   title="Xcode Strings Catalog Inspector">
 
-### Previews
-
-A view can have multiple previews.
-A button for each preview is displays at the top of the canvas.
-Click a button to see the corresponding preview.
-
-<img alt="Xcode Preview buttons" style="width: 50%"
-  src="/blog/assets/xcode-preview-buttons.png?v={{pkg.version}}"
-  title="Xcode Preview buttons">
-
-```swift
-#Preview("English") {
-    ContentView()
-        .environment(\.locale, .init(identifier: "en"))
-}
-
-#Preview("Spanish") {
-    ContentView()
-        .environment(\.locale, .init(identifier: "es"))
-}
-
-#Preview("French") {
-    ContentView()
-        .environment(\.locale, .init(identifier: "fr"))
-}
-```
-
 ### Plurals
 
 To support plurals in a translation:
@@ -364,7 +337,7 @@ To validate a `Localizable.strings` file,
 cd to the project directory that contains the `.lproj` files and
 enter `plutil -lint {language-code}.lproj/Localizable.strings`.
 
-## Preview Locale
+### Preview Locale
 
 To select a locale to use in the Preview,
 apply the `environment` view modifier to the top-most view.
@@ -377,6 +350,31 @@ ContentView()
 
 where `la` is replaced by a language abbreviation such as `en` for English
 or a combination of a language and region abbreviation such as `en-US`.
+
+A view can have multiple previews.
+A button for each preview is displays at the top of the canvas.
+Click a button to see the corresponding preview.
+
+<img alt="Xcode Preview buttons" style="width: 50%"
+  src="/blog/assets/xcode-preview-buttons.png?v={{pkg.version}}"
+  title="Xcode Preview buttons">
+
+```swift
+#Preview("English") {
+    ContentView()
+        .environment(\.locale, .init(identifier: "en"))
+}
+
+#Preview("Spanish") {
+    ContentView()
+        .environment(\.locale, .init(identifier: "es"))
+}
+
+#Preview("French") {
+    ContentView()
+        .environment(\.locale, .init(identifier: "fr"))
+}
+```
 
 ## Simulator and Device Locale
 
@@ -838,6 +836,7 @@ To export the localizations:
   (defaults to the project directory).
 - Enter a name for the new directory
   (defaults to "{project-name} Localizations").
+- Uncheck any languages whose translations should not be exported.
 - Click the "Export" button.
 
 The new directory will contain one localization catalog (`.xcloc` directory)
@@ -863,6 +862,6 @@ To import modified localizations:
   translations to be imported will be displayed side-by-side.
   No editing can be performed here.
 - If the differences are acceptable, click the "Import" button.
-  The changes will be merged into the Strings File
-  which by default is named `Localizable.strings`.
+  The changes will be merged into the file from which they originated,
+  a Strings Catalog file or a Strings File.
   However, it seems that modified comments are not merged.
