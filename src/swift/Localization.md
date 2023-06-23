@@ -32,6 +32,13 @@ Behind the scenes the build process compiles
 String Catalog files to Strings and StringsDict files,
 but those do not appear in the Project Navigator.
 
+Existing String and StringsDict files can be converted to String Catalog files.
+To do so, right-click on any one of them
+and select "Migrate to String Catalog...".
+In the dialog that appears, select
+all the migratable files that should be migrated.
+Then click the "Migrate" button.
+
 A String Catalog is a JSON file
 that stores the translations for all supported languages.
 Most projects will have a single String Catalog file.
