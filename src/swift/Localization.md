@@ -28,9 +28,17 @@ These include `Text`, `Label`, and `Button`.
 
 Support for string catalogs was added in iOS 17.
 These supercede "Strings" and "StringsDict" files.
-They are JSON files that have a specialized Xcode editor.
 
-To create a string catalog:
+A string catalog is a JSON file
+that stores the translations for all supported languages.
+Most projects will have a single string catalog file.
+
+Xcode provides a specialized editor for string catalog files
+that displays a separate table for each supported language.
+
+### Creating
+
+To create a string catalog file:
 
 - Select File ... New or press cmd-n.
 - Select "String Catalog" in the "Resource" section.
@@ -38,6 +46,45 @@ To create a string catalog:
 - Specify the name of the file.
   Typically the default name "Localizable.xcstrings" is retained.
 - Click the "Create" button.
+
+A project can use multiple string catalog,
+but for most projects there is no reason to have more than one.
+
+### Languages
+
+There are two ways to add a language to a project.
+
+The older, long way is to:
+
+- Select the topmost entry in the Project Navigator.
+- Select the project.
+- Select the "Info" tab.
+- Expand the "Localizations" section.
+- Click the "+" at the bottom of the section.
+- Select a language from the dropdown.
+
+The newer, short way is to:
+
+- Select the string catalog file which is typically named `Localized.xcstrings`.
+- Click the "+" in the lower-left corner of the language list.
+- Select a language from the dropdown.
+
+Either way all current translation keys will now appear
+in the string catalog editor for the new language,
+ready for their translations to be entered.
+
+To delete a language:
+
+- Select the topmost entry in the Project Navigator.
+- Select the project.
+- Select the "Info" tab.
+- Expand the "Localizations" section.
+- Select the language to be deleted.
+- Click the "-" at the bottom of the section.
+
+Languages cannot be deleted from the string catalog editor.
+
+### Automatic Keys
 
 A string catalog can be automatically populated from string literals
 in source files that define SwiftUI views.
@@ -97,7 +144,40 @@ the following four components of localizable strings:
   One or more files where translations are stored.
   By default the "localizable" table is used.
 
-The string catalog contains a separate table for each supported language.
+For long sentences or paragraphs, it is useful to choose a key
+rather than typing the full text into a source file.
+This requires entering the translation for the default locale
+(often English).
+
+For example, the key "app-overview" could have the English translation
+"This app provides weather forecasts in a delightful way."
+
+### Manual Keys
+
+Translations can be manually added to string catalog.
+This enables working on translations before
+their keys are actually used in the code.
+
+To add a new key:
+
+- Select any language on the left.
+- Click the "+" at the top of the list of keys.
+- Enter a key which adds it to the table for all current languages.
+- For each language:
+  - Select the language.
+  - Enter a translation for the key.
+
+### Previews
+
+for multiple languages
+
+### Reviewing
+
+### Plurals
+
+### Platform-specific Translations
+
+### Exporting and Importing
 
 To add translations for a given language,
 select the string catalog file, select a language,
