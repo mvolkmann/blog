@@ -9922,10 +9922,16 @@ defines helper methods for logging errors using the {% aTargetBlank
 "https://developer.apple.com/documentation/os/logger", "Logger" %} struct
 provided by the Apple {% aTargetBlank
 "https://developer.apple.com/documentation/os", "os" %} framework.
+Logger output appears in the Console pane.
+The amount of detail shown for each logged item can be configured
+with a popup accessed at the bottom of the Console pane.
+Right-clicking a logged item offers many actions including "Jump to Source"
+to jump to the line of code that produced the logged item.
 
 ```swift
 import Foundation // for Bundle
-import os
+import os // needed?
+import OSLog // for Logger
 
 // This is necessary to allow OSLogType values to be Dictionary keys.
 extension OSLogType: Hashable {}
