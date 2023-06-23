@@ -109,6 +109,9 @@ See the demo app {% aTargetBlank
 "https://github.com/mvolkmann/PhotosPicker2023Demo/blob/main/PhotosPicker2023Demo/ContentView.swift",
 "PhotosPicker2023Demo" %}.
 
+<img alt="PhotosPicker Single" style="width: 50%"
+  src="/blog/assets/swiftui-photospicker-embedded.png?v={{pkg.version}}">
+
 The app above renders a `PhotoPicker` with the following:
 
 ```swift

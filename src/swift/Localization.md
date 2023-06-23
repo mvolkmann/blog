@@ -152,6 +152,36 @@ This requires entering the translation for the default locale
 For example, the key "app-overview" could have the English translation
 "This app provides weather forecasts in a delightful way."
 
+### Translations
+
+To add or edit translations for a given language:
+
+- Select the Project Navigator.
+- Select the string catalog file, typically named `Localized.xcstrings`.
+- Select a language on the left side of the string catalog editor.
+- Select a key.
+- Enter or modify the translation text for the key.
+
+For languages that are missing translations, a percentage of
+supplied translations is displayed after the language name.
+Once all the translations for a language are supplied,
+the percentage is replaced by a green check mark.
+
+The last column in the translations tables indicates the
+state of the translations which can be one of the following:
+
+- "NEW" - found in code, but no translation has been supplied yet
+- "STALE" - no longer found in code, but a translation has been supplied
+- NEEDS REVIEW - someone marked the translation as needing review
+  by right-clicking the row and selecting "Mark for Review"
+
+After a translation that needs review is reviewed,
+right-click it and select "Mark as Reviewed".
+
+To delete a translation, select it and press the delete key.
+This removes the key from all languages,
+not just from the currently selected language.
+
 ### Manual Keys
 
 Translations can be manually added to string catalog.
@@ -169,7 +199,30 @@ To add a new key:
 
 ### Previews
 
-for multiple languages
+A view can have multiple previews.
+A button for each preview is displays at the top of the canvas.
+Click a button to see the corresponding preview.
+
+<img alt="Xcode Preview buttons" style="width: 50%"
+  src="/blog/assets/xcode-preview-buttons.png?v={{pkg.version}}"
+  title="Xcode Preview buttons">
+
+```swift
+#Preview("English") {
+    ContentView()
+        .environment(\.locale, .init(identifier: "en"))
+}
+
+#Preview("Spanish") {
+    ContentView()
+        .environment(\.locale, .init(identifier: "es"))
+}
+
+#Preview("French") {
+    ContentView()
+        .environment(\.locale, .init(identifier: "fr"))
+}
+```
 
 ### Reviewing
 
@@ -177,30 +230,16 @@ for multiple languages
 
 ### Platform-specific Translations
 
-### Exporting and Importing
-
-To add translations for a given language,
-select the string catalog file, select a language,
-and enter the text to be used for each key.
-
-For languages that are missing translations, a percentage of
-supplied translations is displayed after the language name.
-Once all the translations for a language are supplied,
-the percentage is replaced by a green check mark.
-
-The last column in the translations tables indicates the state of the translations which can be one of the following:
-
-- "NEW" - found in code, but no translation has been supplied yet
-- "STALE" - no longer found in code, but a translation has been supplied
-- NEEDS REVIEW - someone marked the translation as needing review by right-clicking the row and selecting
-
-To delete a translation row, select it and press the delete key.
-
 The translated strings can vary by device.
 For example, the word "tap" which is appropriate for iOS and iPadOS
 can be changed to "click" for macOS.
 
-## Creating a "Strings" File
+## Strings Files
+
+These were used before iOS 17.
+For iOS 17 and beyond, using string catalogs is preferred.
+
+### Creating a Strings File
 
 Translations are described in a "Strings" file.
 To create one:
@@ -220,7 +259,7 @@ To create one:
    This will add one entry under "Localizable.strings"
    in the Project Navigator for each selected language.
 
-## Populating the "Strings" File
+### Populating a Strings File
 
 1. In the Project Navigator, expand the "Localizable.strings" entry
    to expose an entry for each supported language.
@@ -411,7 +450,10 @@ Text("Annie \(sun) \(tomorrow)")
 
 TODO: How can we translate the strings "sun" and "tomorrow"?
 
-## Plurals
+## Plurals (old way)
+
+This approach for supporting plurals was used before iOS 17.
+For iOS 17 and beyond, using string catalogs is preferred.
 
 SwiftUI can automate displaying phrases that describe a number of things
 where the word that describes the thing varies based on the count.
