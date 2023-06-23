@@ -28,6 +28,9 @@ These include `Text`, `Label`, and `Button`.
 
 Support for String Catalogs was added in iOS 17.
 These supercede "Strings" and "StringsDict" files.
+Behind the scenes the build process compiles
+String Catalog files to Strings and StringsDict files,
+but those do not appear in the Project Navigator.
 
 A String Catalog is a JSON file
 that stores the translations for all supported languages.
