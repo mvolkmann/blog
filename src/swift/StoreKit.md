@@ -150,6 +150,12 @@ iOS, iPadOS, macOS, and watchOS.
 
 This is best tested in the Simulator rather than in Previews.
 
+The `productViewStyle` view modifier can be applied to `StoreView`
+to change the size and layout of each product section.
+It takes one argument which can be `.regular` (default),
+`.large`, or `.compact`.
+The `.large` option has an issue with horizontal alignment.
+
 ## Testing from Xcode
 
 Xcode and the Simulator can be used to test in-app purchases
@@ -209,3 +215,9 @@ To test an in-app purchase:
 1. For subscriptions,
    click the "Subscription Options" button below a transaction
    to get a dialog where the subscription can be cancelled.
+
+## Example Project
+
+See {% aTargetBlank "https://github.com/mvolkmann/StoreKitDemo",
+"StoreKitDemo" %} which is not yet fully functional.
+StoreKit still seems difficult to correctly configure and use!
