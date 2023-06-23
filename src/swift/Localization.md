@@ -175,12 +175,17 @@ state of the translations which can be one of the following:
 - NEEDS REVIEW - someone marked the translation as needing review
   by right-clicking the row and selecting "Mark for Review"
 
+Keys for stale translations can be deleted
+if it is suspected that it will never be used in the future.
+
 After a translation that needs review is reviewed,
 right-click it and select "Mark as Reviewed".
 
 To delete a translation, select it and press the delete key.
 This removes the key from all languages,
 not just from the currently selected language.
+Do not press cmd-delete because that offers to
+delete the entire string catalog file!
 
 ### Manual Keys
 
@@ -224,15 +229,30 @@ Click a button to see the corresponding preview.
 }
 ```
 
-### Reviewing
-
 ### Plurals
 
-### Platform-specific Translations
+### Device-specific Translations
 
 The translated strings can vary by device.
 For example, the word "tap" which is appropriate for iOS and iPadOS
 can be changed to "click" for macOS.
+
+To add device-specific translations for a key:
+
+- Select a language.
+- Right-click a translation row.
+- Select "Vary by Device" and a device type such as "Mac".
+- Enter the translation text for each device type.
+
+This will add sub-rows to the row where each row
+begins with a platform name or "Other".
+
+<img alt="Xcode Strings Catalog Vary by Device" style="width: 100%"
+  src="/blog/assets/xcode-strings-catalog-vary-by-device.png?v={{pkg.version}}"
+  title="Strings Catalog Vary by Device">
+
+Repeat the steps above for each language that requires
+platform-specific translations.
 
 ## Strings Files
 
