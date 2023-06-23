@@ -274,6 +274,14 @@ begins with a platform name or "Other".
 Repeat the steps above for each language that requires
 platform-specific translations.
 
+### More Strings Catalog Editor Features
+
+The "Filter" input can be used to filter the list of translations
+to those that contain given text in their key or translation.
+
+Any table column heading can be clicked to sort the rows on that column
+in either ascending or descending order.
+
 ## Strings Files
 
 These were used before iOS 17.
