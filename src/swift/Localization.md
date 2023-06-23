@@ -391,6 +391,16 @@ To select a locale in the Simulator or on a device:
 - Tap the "Continue" button.
 - Return to the app being tested.
 
+Another way to select the locale to use is to:
+
+- Click the project name in top-center of Xcode.
+- Select "Edit Scheme..."
+- Select "Run" in the left nav.
+- Select the "Options" tab.
+- Change the value of the "App Language" dropdown from "System Language" to the language to be used.
+- Click the "Close" button.
+- Run the app.
+
 ## User-selected Locale
 
 The `environment` view modifier can be used to
