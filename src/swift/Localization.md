@@ -26,19 +26,19 @@ These include `Text`, `Label`, and `Button`.
 
 ## String Catalogs
 
-Support for string catalogs was added in iOS 17.
+Support for String Catalogs was added in iOS 17.
 These supercede "Strings" and "StringsDict" files.
 
-A string catalog is a JSON file
+A String Catalog is a JSON file
 that stores the translations for all supported languages.
-Most projects will have a single string catalog file.
+Most projects will have a single String Catalog file.
 
-Xcode provides a specialized editor for string catalog files
+Xcode provides a specialized editor for String Catalog files
 that displays a separate table for each supported language.
 
 ### Creating
 
-To create a string catalog file:
+To create a String Catalog file:
 
 - Select File ... New or press cmd-n.
 - Select "String Catalog" in the "Resource" section.
@@ -47,7 +47,7 @@ To create a string catalog file:
   Typically the default name "Localizable.xcstrings" is retained.
 - Click the "Create" button.
 
-A project can use multiple string catalog,
+A project can use multiple String Catalog,
 but for most projects there is no reason to have more than one.
 
 ### Languages
@@ -65,12 +65,12 @@ The older, long way is to:
 
 The newer, short way is to:
 
-- Select the string catalog file which is typically named `Localized.xcstrings`.
+- Select the String Catalog file which is typically named `Localized.xcstrings`.
 - Click the "+" in the lower-left corner of the language list.
 - Select a language from the dropdown.
 
 Either way all current translation keys will now appear
-in the string catalog editor for the new language,
+in the String Catalog editor for the new language,
 ready for their translations to be entered.
 
 To delete a language:
@@ -82,11 +82,11 @@ To delete a language:
 - Select the language to be deleted.
 - Click the "-" at the bottom of the section.
 
-Languages cannot be deleted from the string catalog editor.
+Languages cannot be deleted from the String Catalog editor.
 
 ### Automatic Keys
 
-A string catalog can be automatically populated from string literals
+A String Catalog can be automatically populated from string literals
 in source files that define SwiftUI views.
 To enable this:
 
@@ -96,7 +96,11 @@ To enable this:
 - scroll down to the "Localization" section
 - change "Use Compiler to Extract Swift Strings" from "No" to "Yes"
 
-Once this is enabled, the string catalog file will be updated during each build.
+<img alt="Xcode Build Settings for Localization" style="width: 80%"
+  src="/blog/assets/xcode-build-settings-localization.png?v={{pkg.version}}"
+  title="Xcode Build Settings for Localization">
+
+Once this is enabled, the String Catalog file will be updated during each build.
 
 The build process looks for string literals in view code.
 It uses all strings passed to functions where
@@ -157,8 +161,8 @@ For example, the key "app-overview" could have the English translation
 To add or edit translations for a given language:
 
 - Select the Project Navigator.
-- Select the string catalog file, typically named `Localized.xcstrings`.
-- Select a language on the left side of the string catalog editor.
+- Select the String Catalog file, typically named `Localized.xcstrings`.
+- Select a language on the left side of the String Catalog editor.
 - Select a key.
 - Enter or modify the translation text for the key.
 
@@ -188,11 +192,11 @@ To delete a translation, select it and press the delete key.
 This removes the key from all languages,
 not just from the currently selected language.
 Do not press cmd-delete because that offers to
-delete the entire string catalog file!
+delete the entire String Catalog file!
 
 ### Manual Keys
 
-Translations can be manually added to string catalog.
+Translations can be manually added to String Catalog.
 This enables working on translations before
 their keys are actually used in the code.
 
@@ -275,8 +279,10 @@ To add device-specific translations for a key:
 
 - Select a language.
 - Right-click a translation row.
-- Select "Vary by Device" and a device type such as "Mac".
+- Select "Vary by Device" and a device type such as "Mac" or "Apple Watch".
 - Enter the translation text for each device type.
+  For example, it may be desirable to have shorter translation strings
+  on "Apple Watch" to fit on the smaller screen.
 
 This will add sub-rows to the row where each row
 begins with a platform name or "Other".
@@ -299,7 +305,7 @@ in either ascending or descending order.
 ## Strings Files
 
 These were used before iOS 17.
-For iOS 17 and beyond, using string catalogs is preferred.
+For iOS 17 and beyond, using String Catalogs is preferred.
 
 ### Creating a Strings File
 
@@ -515,7 +521,7 @@ TODO: How can we translate the strings "sun" and "tomorrow"?
 ## Plurals (old way)
 
 This approach for supporting plurals was used before iOS 17.
-For iOS 17 and beyond, using string catalogs is preferred.
+For iOS 17 and beyond, using String Catalogs is preferred.
 
 SwiftUI can automate displaying phrases that describe a number of things
 where the word that describes the thing varies based on the count.
@@ -807,9 +813,23 @@ To also change the default region on an iOS device:
 
 ## Exporting and Importing Localizations
 
-Localization strings can be exported to a file that can be
-sent to a localization expert that will supply translations.
-Once the file is returned, it can be imported into the project.
+Localization strings found in String Catalog files, Strings files,
+and StringsDict files can be exported to a file that can be
+sent to localization experts that will supply translations.
+Once the file is returned, it can be imported into the project
+to update the files that define them.
+
+When using String Catalogs:
+
+- Select the top-most entry in the Project Navigator.
+- Select the project.
+- Select the "Build Settings" tab.
+- Scroll down to the "Localizations" section.
+- Verify that "Localization Prefers String Catalogs" is set to "Yes"
+
+<img alt="Xcode Build Settings for Localization" style="width: 80%"
+  src="/blog/assets/xcode-build-settings-localization.png?v={{pkg.version}}"
+  title="Xcode Build Settings for Localization">
 
 To export the localizations:
 
@@ -820,12 +840,16 @@ To export the localizations:
   (defaults to "{project-name} Localizations").
 - Click the "Export" button.
 
-The new directory will contain one `.xcloc` directory
+The new directory will contain one localization catalog (`.xcloc` directory)
 for each supported language.
-These directories will contain several subdirectories and files.
-The translations can be found in the `.xliff` file
-found in the "Localized Contents" subdirectory.
-This is an XML file that contains one `trans-unit` element for each translation.
+A localization catalog contains several subdirectories and files.
+The translations for a localization catalog can be found in the `.xliff` file
+inside the "Localized Contents" subdirectory.
+
+{% aTargetBlank
+"http://docs.oasis-open.org/xliff/xliff-core/v2.1/os/xliff-core-v2.1-os.html",
+"XLIFF" %} is an industry standard XML format.
+XLIFF files contains one `trans-unit` element for each translation.
 These elements contain the child elements `source`, `target`, and `comment`.
 People with language translation experience can edit these files,
 modifying the `target` and `comment` element contents.
