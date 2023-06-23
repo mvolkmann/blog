@@ -279,6 +279,13 @@ in the Strings Catalog file.
   src="/blog/assets/xcode-strings-catalog-plurals.png?v={{pkg.version}}"
   title="Xcode Strings Catalog plurals">
 
+The full code for this project can be found at {% aTargetBlank
+"https://github.com/mvolkmann/Localization2023Demo", "Localization2023Demo" %}.
+
+As of Xcode 15 beta, translated plurals
+always display English in previews instead of the requested locale.
+However, they display correctly in the Simulator.
+
 ### Device-specific Translations
 
 The translated strings can vary by device.
