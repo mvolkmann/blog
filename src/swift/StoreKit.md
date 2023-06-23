@@ -36,8 +36,8 @@ To use StoreKit in an app:
 1. Enter a "Description" of the purchasable item.
 1. Click "+" under "Localizations" to add more supported locales.
 1. Repeat steps 5-12 for each additional non-consumable that can be purchased.
-1. Create a new Swift file. A good name is `StoreKit.svelte`.
-1. Add the following in `StoreKitStore.svelte`:
+1. Create a new Swift file. A good name is `StoreKit.swift`.
+1. Add the following in `StoreKitStore.swift`:
 
    ```swift
     import StoreKit
