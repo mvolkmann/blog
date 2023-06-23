@@ -231,6 +231,26 @@ Click a button to see the corresponding preview.
 
 ### Plurals
 
+To support plurals in a translation:
+
+- Add count placeholders for each count in the key.
+  For example, "The %lld dog barked at the %lld squirrel.".
+  Note that `%lld` is a C-style format specifier.
+- For each count placeholder, right-click the row and select "Vary by Plural".
+  This adds sub-rows that are appropriate for the language.
+- Enter translations for each plural option.
+
+Repeat the steps above for each language that requires
+platform-specific translations.
+
+When there is more than one number placeholder in a key,
+each is given a name like `@arg1`.
+To rename them, click the name in its sub-row and
+enter a new name that begins with `@`.
+
+In the example above, `@arg1` might be renamed to `@dogs`
+and `@arg2` might be renamed to `@squirrels`.
+
 ### Device-specific Translations
 
 The translated strings can vary by device.
