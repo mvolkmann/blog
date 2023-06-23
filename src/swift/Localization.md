@@ -15,6 +15,15 @@ Each of these are discussed here.
 Many SwiftUI views automatically perform translations.
 These include `Text`, `Label`, and `Button`.
 
+## Resources
+
+- WWDC 2023 video {% aTargetBlank
+  "https://developer.apple.com/videos/play/wwdc2022/10110/",
+  "Build global apps: Localization by example" %}
+- WWDC 2023 video {% aTargetBlank
+  "https://developer.apple.com/videos/play/wwdc2023/10155/",
+  "Discover String Catalogs" %}
+
 ## Specifying Supported Languages
 
 1. Select the top entry in the Project Navigator.

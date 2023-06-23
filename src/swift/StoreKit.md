@@ -12,6 +12,17 @@ layout: topic-layout.njk
 in-app purchases, ad network attribution, Apple Music integration,
 and enabling app ratings and reviews.
 
+## Resources
+
+- WWDC 2022 video {% aTargetBlank "https://developer.apple.com/videos/play/wwdc2022/10007/",
+  "What's new with in-app purchase" %}
+- WWDC 2022 video {% aTargetBlank "https://developer.apple.com/videos/play/wwdc2022/110404/",
+  "Implement proactive in-app purchase restore" %}
+- WWDC 2022 video {% aTargetBlank "https://developer.apple.com/videos/play/wwdc2022/10039/",
+  "What's new in StoreKit testing" %}
+- WWDC 2023 video {% aTargetBlank "https://developer.apple.com/wwdc23/10013",
+  "Meet StoreKit for SwiftUI" %}
+
 ## Usage
 
 To use StoreKit in an app:
@@ -124,6 +135,20 @@ To use StoreKit in an app:
 1. Change the value of "StoreKit Configuration"
    from "None" to "Configuration.storekit".
 1. Click the "Close" button.
+
+## Displaying Products
+
+To display products in SwiftUI, get an array of product ids
+where each is a `String` and pass it to the `StoreView` view.
+
+```swift
+StoreView(ids: productIds)
+```
+
+This produces a UI that works on all platforms including
+iOS, iPadOS, macOS, and watchOS.
+
+This is best tested in the Simulator rather than in Previews.
 
 ## Testing from Xcode
 
