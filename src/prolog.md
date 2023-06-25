@@ -6,6 +6,8 @@ layout: topic-layout.njk
 
 ## Overview
 
+Prolog is a logic-based programming language.
+
 ## Installing
 
 There are many implementations of the Prolog programming language.
@@ -21,6 +23,8 @@ The most popular seems to be {% aTargetBlank
 > driven by the needs of real world applications.
 > SWI-Prolog is widely used in research and education
 > as well as commercial applications."
+
+SWI-Prolog is implemented in a combination of C (48%) and Prolog (39%).
 
 To install the terminal command `swipl` in macOS,
 enter `brew install swi-prolog`
