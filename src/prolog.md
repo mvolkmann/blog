@@ -12,13 +12,20 @@ There are many implementations of the Prolog programming language.
 The most popular seems to be {% aTargetBlank
 "https://www.swi-prolog.org", "SWI-Prolog" %}.
 
+<img alt="SWI-Prolog" style="width: 20%"
+    src="/blog/assets/swipl-logo.png?v={{pkg.version}}"
+    title="SWI-Prolog">
+
 > SWI-Prolog offers a comprehensive free Prolog environment.
 > Since its start in 1987, SWI-Prolog development has been
 > driven by the needs of real world applications.
 > SWI-Prolog is widely used in research and education
 > as well as commercial applications."
 
-To install a stable, binary version of SWI-Prolog, browse {% aTargetBlank
+To install the terminal command `swipl` in macOS,
+enter `brew install swi-prolog`
+
+To install a stable, binary version of SWI-Prolog app, browse {% aTargetBlank
 "https://www.swi-prolog.org/download/stable",
 "Download SWI-Prolog stable version" %}.
 
@@ -30,38 +37,13 @@ Drag the file `SWI-Prolog.app` to the `Applications` directory.
 
 Prolog programs are composed of facts, rules, and queries.
 
-The following are examples of facts:
+For example:
 
 ```prolog
-whippet(comet).
-fast(whippet).
+whippet(comet). % a fact
+fast(X) :- whippet(X). % a rule
+fast(comet). % a query
 ```
-
-The following is an example of a rule:
-
-```prolog
-fast(X) :- whippet(X).
-```
-
-The following is an example of a query:
-
-```prolog
-fast(comet).
-```
-
-## Running
-
-Double-click the SWI-Prolog app to open a window
-where Prolog commands can be entered.
-Initially macOS will not open the app because it is deemed untrusted.
-To make it trusted, open the "System Settings" app, select "Privacy & Security",
-and allowing opening `SWI-Prolog.app`.
-
-The steps to run a Prolog program are:
-
-1. Add facts and rules to a Prolog source file that has an extension of `.pl`
-1. Load Prolog source files into the Prolog app.
-1. Enter queries in the Prolog app.
 
 ## Online REPL
 
@@ -72,6 +54,54 @@ Enter facts and rules in the left pane.
 Enter a query in the lower-right pane.
 Press the "Run!" button or ctrl-return to execute the query.
 
+## Running
+
+Double-click the SWI-Prolog app to open a window
+where Prolog commands can be entered.
+Initially macOS will not open the app because it is deemed untrusted.
+To make it trusted, open the "System Settings" app, select "Privacy & Security",
+and allowing opening `SWI-Prolog.app`.
+
+The typical steps to run a Prolog program are:
+
+1. Add facts and rules to a Prolog source file that has an extension of `.pl`
+1. Load Prolog source files into the Prolog app.
+1. Enter queries in the Prolog app.
+
+To load a `.pl` file, enter `[file-name].`
+For example, to load the file `demo.pl`, `enter [demo].`
+
+## Exiting
+
+To exit the SWI-Prolog interpreter, enter `halt.` or press ctrl-d.
+## Comments
+
+Single-line comments begin with `%`.
+
+Multi-line comments are surrounded by `/*` and `*/`.
+
+## Special Characters
+
+`:-` means "if".
+`,` means "logical and".
+`;` means "logical or".
+`not` means "logical not".
+
+## Case-sensitive
+
+Terms that begin with a lowercase letter represent objects or relationships.
+
+Terms that begin with an uppercase letter represent variables.
+
 ## Calling From Other Languages
 
-TODO: Which programming languages can invoke Prolog code?
+SWI-Prolog can be called from C. See {% aTargetBlank
+"https://www.swi-prolog.org/pldoc/man?section=calling-prolog-from-c",
+"Calling Prolog from C" %}.
+
+TODO: Which other programming languages can call SWI-Prolog?
+
+## Language Server
+
+TODO: How can you install a Prolog language server in Neovim?
+TODO: See https://github.com/jamesnvc/lsp_server.

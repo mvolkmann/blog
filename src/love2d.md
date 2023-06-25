@@ -55,8 +55,8 @@ It includes some Lua 5.2 and 5.3 features.
 The LÖVE home page is shown below:
 
 <img alt="LÖVE Home Page" style="width: 100%"
-    src="/blog/assets/love2d-home-page.png?v={{pkg.version}}"
-    title="LÖVE Home Page">
+  src="/blog/assets/love2d-home-page.png?v={{pkg.version}}"
+  title="LÖVE Home Page">
 
 Clicking the "Wiki" button in the upper-right navigates to the following page:
 
