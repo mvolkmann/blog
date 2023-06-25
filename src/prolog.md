@@ -147,7 +147,7 @@ TODO: I get "ERROR: No permission to modify static procedure".
 | `,`           | logical and                 |
 | `;`           | logical or                  |
 | `not`         | logical not                 |
-| `?:`          | begins a query              |
+| `?-`          | begins a query              |
 | `.`           | terminates all commands     |
 | `%`           | begins single-line comment  |
 | `/*` and `*/` | delimits multi-line comment |
@@ -157,6 +157,19 @@ TODO: I get "ERROR: No permission to modify static procedure".
 Terms that begin with a lowercase letter represent objects or relationships.
 
 Terms that begin with an uppercase letter represent variables.
+
+## Conjunctions
+
+The comma operator is used to form queries where multiple goals must be met.
+For example:
+
+```prolog
+% This asks if mark loves tami AND tami loves mark.
+?- loves(mark, tami), loves(tami, mark)`
+
+% This searches for things that both mark and tami love.
+?- loves(mark, X), loves(tami, X)
+```
 
 ## Calling From Other Languages
 
