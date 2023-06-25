@@ -78,7 +78,7 @@ cheetah(spots).
 fast(X) :- whippet(X).
 fast(X) :- cheetah(X).
 % The previous two lines can be replaced with this.
-fast(X) :- cheetah(X); whippet(X).
+% fast(X) :- cheetah(X); whippet(X).
 
 % This is a query that asks whether comet is fast.
 % It returns "true".
@@ -95,6 +95,18 @@ To search for something else that is fast,
 enter a semicolon and press the return key.
 After the last match is found, the prompt for another query will appear.
 
+Suppose the following facts are loaded:
+
+```prolog
+likes(mark, tacos).
+likes(mark, books).
+likes(mark, running).
+```
+
+The query `likes(mark, X)` will find
+tacos, books, and running that in that order.
+The query `likes(X, running)` will find mark.
+
 ## Typical Flow
 
 The typical steps to run a Prolog program are:
@@ -105,6 +117,23 @@ The typical steps to run a Prolog program are:
 
 To load a `.pl` file, enter `[file-name].`
 For example, to load the file `demo.pl`, `enter [demo].`
+
+After modifying source files that have already been loaded,
+enter `make.` to reload all of them.
+
+To enter new facts and rules in a running session:
+
+- Enter `[user].` to open stdin as a pseudo file.
+- Enter facts and rules.
+- Press ctrl-d to close and load the pseudo file.
+
+It seems this can replace existing facts rather than add to them.
+
+Another way to add a fact or rule is to enter
+`assertz(fact-or-rule).`
+
+To remove a fact or rule, enter `retract(fact-or-rule).`
+
 
 ## Special Characters
 
