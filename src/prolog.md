@@ -33,18 +33,6 @@ On macOS, double-click the downloaded `.dmg` file.
 This opens a Finder window containing several files and directories.
 Drag the file `SWI-Prolog.app` to the `Applications` directory.
 
-## Basics
-
-Prolog programs are composed of facts, rules, and queries.
-
-For example:
-
-```prolog
-whippet(comet). % a fact
-fast(X) :- whippet(X). % a rule
-fast(comet). % a query
-```
-
 ## Online REPL
 
 To enter and run Prolog code in a web browser, browse
@@ -74,18 +62,53 @@ For example, to load the file `demo.pl`, `enter [demo].`
 ## Exiting
 
 To exit the SWI-Prolog interpreter, enter `halt.` or press ctrl-d.
-## Comments
 
-Single-line comments begin with `%`.
+## Terminology
 
-Multi-line comments are surrounded by `/*` and `*/`.
+| Term           | Meaning                                                        |
+|----------------|----------------------------------------------------------------|
+| fact           | description of something that is true                          |
+| rule           | description of a relationship about at least one unknown thing |
+| question/query | asks if something is true or asks for a matching value         |
+| database       | a collection of facts and rules                                |
+
+## Basic Syntax
+
+Prolog programs are composed of facts, rules, and queries.
+
+For example:
+
+```prolog
+% These are facts that say comet is a whippet and spots is a cheetah.
+whippet(comet).
+cheetah(spots).
+
+% This is a rule that says if something is a whippet then it is fast.
+fast(X) :- whippet(X).
+fast(X) :- cheetah(X).
+
+% This is a query that asks whether comet is fast.
+% It returns "true".
+?: fast(comet).
+
+% This is a query that asks for something that is fast.
+% It returns "comet".
+% To stop searching for things that are fast, press the return key.
+% To check for something else that is fast,
+% enter a semicolon and press the return key.
+?: fast(X).
+```
 
 ## Special Characters
 
-`:-` means "if".
-`,` means "logical and".
-`;` means "logical or".
-`not` means "logical not".
+| Characters    | Meaning                     |
+|---------------|-----------------------------|
+| `:-`          | if; used to define rules    |
+| `,`           | logical and                 |
+| `;`           | logical or                  |
+| `not`         | logical not                 |
+| `%`           | begins single-line comment  |
+| `/*` and `*/` | delimits multi-line comment |
 
 ## Case-sensitive
 
