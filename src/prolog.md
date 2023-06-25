@@ -50,15 +50,6 @@ Initially macOS will not open the app because it is deemed untrusted.
 To make it trusted, open the "System Settings" app, select "Privacy & Security",
 and allowing opening `SWI-Prolog.app`.
 
-The typical steps to run a Prolog program are:
-
-1. Add facts and rules to a Prolog source file that has an extension of `.pl`
-1. Load Prolog source files into the Prolog app.
-1. Enter queries in the Prolog app.
-
-To load a `.pl` file, enter `[file-name].`
-For example, to load the file `demo.pl`, `enter [demo].`
-
 ## Exiting
 
 To exit the SWI-Prolog interpreter, enter `halt.` or press ctrl-d.
@@ -104,6 +95,17 @@ To search for something else that is fast,
 enter a semicolon and press the return key.
 After the last match is found, the prompt for another query will appear.
 
+## Typical Flow
+
+The typical steps to run a Prolog program are:
+
+1. Add facts and rules to a Prolog source file that has an extension of `.pl`
+1. Load Prolog source files into the Prolog app.
+1. Enter queries in the Prolog app.
+
+To load a `.pl` file, enter `[file-name].`
+For example, to load the file `demo.pl`, `enter [demo].`
+
 ## Special Characters
 
 | Characters    | Meaning                     |
@@ -112,6 +114,8 @@ After the last match is found, the prompt for another query will appear.
 | `,`           | logical and                 |
 | `;`           | logical or                  |
 | `not`         | logical not                 |
+| `?:`          | begins a query              |
+| `.`           | terminates all commands     |
 | `%`           | begins single-line comment  |
 | `/*` and `*/` | delimits multi-line comment |
 
