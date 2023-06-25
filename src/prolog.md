@@ -133,7 +133,7 @@ Another way to add a fact or rule is to enter
 `assertz(fact-or-rule).`
 
 To remove a fact or rule, enter `retract(fact-or-rule).`
-
+TODO: I get "ERROR: No permission to modify static procedure".
 
 ## Special Characters
 
