@@ -86,6 +86,8 @@ cheetah(spots).
 % This is a rule that says if something is a whippet then it is fast.
 fast(X) :- whippet(X).
 fast(X) :- cheetah(X).
+% The previous two lines can be replaced with this.
+fast(X) :- cheetah(X); whippet(X).
 
 % This is a query that asks whether comet is fast.
 % It returns "true".
@@ -93,11 +95,14 @@ fast(X) :- cheetah(X).
 
 % This is a query that asks for something that is fast.
 % It returns "comet".
-% To stop searching for things that are fast, press the return key.
-% To check for something else that is fast,
-% enter a semicolon and press the return key.
 ?: fast(X).
 ```
+
+To stop searching for things that are fast, press the return key.
+
+To search for something else that is fast,
+enter a semicolon and press the return key.
+After the last match is found, the prompt for another query will appear.
 
 ## Special Characters
 
