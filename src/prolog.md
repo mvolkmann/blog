@@ -18,15 +18,25 @@ Robert Kowalski (USA/Britan).
 
 ## Resources
 
-- {% aTargetBlank "https://en.wikipedia.org/wiki/Prolog", "Wikipedia" %}
+- {% aTargetBlank "http://www.gprolog.org", "GNU Prolog" %}
+
+- {% aTargetBlank "https://www.iso.org/standard/21413.html",
+  "ISO Standard for Prolog" %}
+
+- {% aTargetBlank "https://www.metalevel.at/prolog", "The Power of Prolog" %}
+  free, online book by {% aTargetBlank "https://www.metalevel.at",
+  "Markus Triska" %}
+
 - {% aTargetBlank "https://link.springer.com/book/10.1007/978-3-642-55481-0",
   "Programming in Prolog" %} Fifth edition book by Clocksin and Mellish
+
 - {% aTargetBlank "https://www.swi-prolog.org", "SWI-Prolog" %}
+
 - {% aTargetBlank
   "https://www.linuxlinks.com/excellent-free-books-learn-prolog/",
   "13 Excellent Free Books to Learn Prolog" %}
-- {% aTargetBlank "https://www.iso.org/standard/21413.html",
-  "Prolog ISO Standard" %}
+
+- {% aTargetBlank "https://en.wikipedia.org/wiki/Prolog", "Wikipedia" %}
 
 ## Installing
 
@@ -40,9 +50,9 @@ both were being actively maintained as of June 2023.
 
 ### SWI-Prolog
 
-<img alt="SWI-Prolog" style="width: 20%"
-    src="/blog/assets/swipl-logo.png?v={{pkg.version}}"
-    title="SWI-Prolog">
+<img alt="SWI-Prolog logo" style="width: 20%"
+  src="/blog/assets/swipl-logo.png?v={{pkg.version}}"
+  title="SWI-Prolog logo">
 
 > SWI-Prolog offers a comprehensive free Prolog environment.
 > Since its start in 1987, SWI-Prolog development has been
@@ -63,11 +73,18 @@ On macOS, double-click the downloaded `.dmg` file.
 This opens a Finder window containing several files and directories.
 Drag the file `SWI-Prolog.app` to the `Applications` directory.
 
+To run SWI-Prolog from a terminal, enter `swipl`.
+
 ### GNU Prolog
+
+<img alt="GNU Prolog logo" style="width: 20%"
+  src="/blog/assets/gnu-prolog-logo.png?v={{pkg.version}}"
+  title="GNU Prolog logo">
 
 To install the terminal command `gprolog` in macOS,
 enter `brew install gnu-prolog`.
 
+To run GNU Prolog from a terminal, enter `gprolog`.
 
 ## Online REPL
 
@@ -130,11 +147,19 @@ fast(X) :- cheetah(X).
 % This rule ... TODO
 ```
 
-To stop searching for things that are fast, press the return key.
+A fact is a degenerate case of a rule whose body only contains `true`.
+For example, the following are equivalent:
 
-To search for something else that is fast,
-enter a semicolon and press the return key.
+```prolog
+likes(mark, ice-cream).
+likes(mark, ice-cream) :- true.
+```
+
+When a query has multiple matches, the system will wait for further input.
+To search for the next match, press the semicolon key.
 After the last match is found, the prompt for another query will appear.
+
+To stop searching for things that are fast, press the return key.
 
 Suppose the following facts are loaded:
 
@@ -156,7 +181,10 @@ The typical steps to run a Prolog program are:
 1. Load Prolog source files into the Prolog app.
 1. Enter queries in the Prolog app.
 
-To load a `.pl` file, enter `[file-name].`
+Unfortunately Prolog and Perl use the same file extension
+for their source files.
+
+To load a `.pl` file, enter `[file-name].` or `consult('file-name').`
 For example, to load the file `demo.pl`, `enter [demo].`
 
 After modifying source files that have already been loaded,
@@ -225,6 +253,14 @@ likes(mark, x) := female(X), likes(X, cycling).
 ?- loves(mark, X), loves(tami, X)
 ```
 
+## Listing
+
+To list all the facts and rules known in the current session,
+enter `listing.`.  The output will contain many clauses created by the system in addition to those you loaded.
+
+To list only the facts and rules for a given predicate,
+enter `listing(predicate-name).`
+
 ## Calling From Other Languages
 
 SWI-Prolog can be called from C. See {% aTargetBlank
@@ -237,3 +273,5 @@ TODO: Which other programming languages can call SWI-Prolog?
 
 TODO: How can you install a Prolog language server in Neovim?
 TODO: See https://github.com/jamesnvc/lsp_server.
+
+TODO: Can you run Prolog code inside Neovim?
