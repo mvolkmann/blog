@@ -344,6 +344,21 @@ These include
 - `truncate`: similar to `floor`, but rounds toward zero for negative numbers
 - trigonometry functions
 
+## Conditional Logic
+
+TODO: Add this.
+
+## Iteration
+
+To get all the integers starting from one integer and ending at another,
+use the `between` function.
+For example:
+
+```prolog
+% This sets V to 3, 4, 5, 6, and 7.
+?- between(3, 7, V).
+```
+
 ## Lists
 
 Lists are sequential collections of values.
