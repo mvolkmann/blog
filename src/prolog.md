@@ -593,6 +593,10 @@ Lists can be nested.  For example:
 TODO: Can you append and insert values in list? 
 TODO: Can you remove values from a list? 
 
+For implementations of map, filter, and reduce, see {% aTargetBlank
+"https://pbrown.me/blog/functional-prolog-map-filter-and-reduce/",
+"Functional Prolog" %}.
+
 ## Rules
 
 Rules can write to the current output stream.
