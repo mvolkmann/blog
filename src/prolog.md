@@ -402,6 +402,14 @@ To escape a quote inside a literal string, precede it with a backslash.
 
 A string is represented by a list of characters.
 
+To get the length of a string, use the `atom_length` function.
+For example:
+
+```prolog
+?- atom_length("Mark", X).
+X = 4.
+```
+
 To create a list of ASCII values from a literal string,
 use the `name` function.
 For example:
