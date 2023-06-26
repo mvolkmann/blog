@@ -203,11 +203,30 @@ To enter new facts and rules in a running session:
 
 It seems this can replace existing facts rather than add to them.
 
-Another way to add a fact or rule is to enter
-`assertz(fact-or-rule).`
+## Dynamic Predicates
 
-To remove a fact or rule, enter `retract(fact-or-rule).`
-TODO: I get "ERROR: No permission to modify static procedure".
+By default predicates cannot be added or deleted in a session.
+To enable this, run a `dynamic` query.
+Once this is done, the `assertz` function can be used to add a predicate
+and the `retract` function can be used to remove one.
+
+For example, suppose we have the file `likes.pl` containing the following:
+
+```prolog
+% Enable adding and removing "likes" predicates that take two arguments.
+:- dynamic(likes/2).
+likes(mark, books).
+likes(mark, running).
+```
+
+A session can do the following:
+
+```prolog
+?- [likes].
+?- assertz(likes(mark, reeces)).
+?- retract(likes(mark, books)).
+?- likes(mark, X). % outputs running and reeces
+```
 
 ## Input
 
@@ -250,6 +269,9 @@ readFile(File) :-
 
 readFile("demo.txt").
 ```
+
+TODO: Is there an open source library that provides a similar function
+TODO: that places the file contents in a variable as a string?
 
 ## Output
 
@@ -409,6 +431,8 @@ TODO: Add this.
 
 ## Iteration
 
+Iteration in Prolog is done with recursion.
+
 To get all the integers starting from one integer and ending at another,
 use the `between` function.
 For example:
@@ -547,3 +571,8 @@ TODO: How can you install a Prolog language server in Neovim?
 TODO: See https://github.com/jamesnvc/lsp_server.
 
 TODO: Can you run Prolog code inside Neovim?
+
+## Libraries
+
+TODO: Is there a popular collection of open source Prolog libraries?
+
