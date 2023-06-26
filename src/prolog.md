@@ -454,6 +454,15 @@ Lists are sequential collections of values.
 They are created by including a comma-separated list of values
 in square brackets.
 
+To create a new list that results from adding a value
+to the beginning of an existing list, use the pipe operator.
+For example:
+
+```prolog
+?- L is [2, 3], [1 | L].
+
+```
+
 The following rule computes the sum of numbers in a list:
 
 ```prolog
@@ -481,6 +490,20 @@ For example:
 ```prolog
 ?- length([2, 5, 7], L).
 L = 3.
+```
+
+TODO: Show an example where a list is destructured in the argument list using `[H|T]`
+
+Anonymous variables (`_`) can be used to destructure value from a list.
+For example, the following gets the first and third values.
+The `| _` syntax at the end of the list on the left side
+indicates that we do not care about values in the tail of the list
+which includes all values after the third.
+
+```prolog
+?- [V1, _, V3 | _] = [9, 8, 7, 6, 5].
+V1 = 9,
+V3 = 7.
 ```
 
 TODO: Can you append and insert values in list? 
