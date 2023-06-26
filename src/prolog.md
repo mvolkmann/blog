@@ -209,6 +209,23 @@ Another way to add a fact or rule is to enter
 To remove a fact or rule, enter `retract(fact-or-rule).`
 TODO: I get "ERROR: No permission to modify static procedure".
 
+## Input
+
+The `read` function reads a string from stdin.
+For example:
+
+```prolog
+greet :-
+  write("Enter your name: "),
+  read(Name),
+  format("Hello, ~w!", [Name]).
+
+greet().
+% Enter a name in single or double quotes followed by a period.
+% Entering 'Mark'. results in the following output:
+% Hello, Mark!
+```
+
 ## Output
 
 The `write` predicate writes to the current output stream,
@@ -330,6 +347,7 @@ These include
 - `ceiling`: smallest integer that is greater than or equal to a value
 - `e`: value of e (2.71828...)
 - `floor`: largest integer that is less than or equal to a value
+- `exp`: e to a given power
 - `gcd`: greatest common denominator
 - `inf`: positive infinity
 - `lcm`: least common multiple
