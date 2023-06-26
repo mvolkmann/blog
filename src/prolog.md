@@ -266,6 +266,18 @@ The following ? can be used in format strings:
 The `put` function writes a single ASCII value to the current output stream.
 It is the counterpart to the `get` function.
 
+To write to a file, use the `open`, `write`, and `close` functions.
+For example:
+
+```prolog
+writeFile(File, Text) :- 
+  open(File, write, Stream),
+  write(Stream, Text), nl,
+  close(Stream).
+
+writeFile("demo.txt", "first line\nsecond line").
+```
+
 ## Special Characters
 
 | Characters    | Meaning                     |
