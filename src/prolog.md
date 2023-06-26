@@ -7,12 +7,38 @@ layout: topic-layout.njk
 ## Overview
 
 Prolog is a logic-based programming language.
+The name is a contraction of "programming in logic".
+Prolog has many uses including artificial intelligence,
+abstract problem solving, symbolic equation solving, and more.
+A core feature is search with backtracking.
+
+Prolog first appeared in 1972. It was designed by three computer scientists,
+Alain Colmerauer (France), Phillipe Roussel (France), and
+Robert Kowalski (USA/Britan).
+
+## Resources
+
+- {% aTargetBlank "https://en.wikipedia.org/wiki/Prolog", "Wikipedia" %}
+- {% aTargetBlank "https://link.springer.com/book/10.1007/978-3-642-55481-0",
+  "Programming in Prolog" %} Fifth edition book by Clocksin and Mellish
+- {% aTargetBlank "https://www.swi-prolog.org", "SWI-Prolog" %}
+- {% aTargetBlank
+  "https://www.linuxlinks.com/excellent-free-books-learn-prolog/",
+  "13 Excellent Free Books to Learn Prolog" %}
+- {% aTargetBlank "https://www.iso.org/standard/21413.html",
+  "Prolog ISO Standard" %}
 
 ## Installing
 
 There are many implementations of the Prolog programming language.
 The most popular seems to be {% aTargetBlank
 "https://www.swi-prolog.org", "SWI-Prolog" %}.
+Another option is {% aTargetBlank "http://www.gprolog.org", "GNU Prolog" %}.
+
+Both SWI-Prolog and GNU Prolog conform to the ISO standard and
+both were being actively maintained as of June 2023.
+
+### SWI-Prolog
 
 <img alt="SWI-Prolog" style="width: 20%"
     src="/blog/assets/swipl-logo.png?v={{pkg.version}}"
@@ -36,6 +62,12 @@ To install a stable, binary version of SWI-Prolog app, browse {% aTargetBlank
 On macOS, double-click the downloaded `.dmg` file.
 This opens a Finder window containing several files and directories.
 Drag the file `SWI-Prolog.app` to the `Applications` directory.
+
+### GNU Prolog
+
+To install the terminal command `gprolog` in macOS,
+enter `brew install gnu-prolog`.
+
 
 ## Online REPL
 
@@ -67,6 +99,9 @@ To exit the SWI-Prolog interpreter, enter `halt.` or press ctrl-d.
 | question/query | asks if something is true or asks for a matching value         |
 | database       | a collection of facts and rules                                |
 
+A rule can be thought of as a special kind of fact
+that depends on a set of facts.
+
 ## Basic Syntax
 
 Prolog programs are composed of facts, rules, and queries.
@@ -86,11 +121,13 @@ fast(X) :- cheetah(X).
 
 % This is a query that asks whether comet is fast.
 % It returns "true".
-?: fast(comet).
+?- fast(comet).
 
 % This is a query that asks for something that is fast.
 % It returns "comet".
-?: fast(X).
+?- fast(X).
+
+% This rule ... TODO
 ```
 
 To stop searching for things that are fast, press the return key.
@@ -139,6 +176,18 @@ Another way to add a fact or rule is to enter
 To remove a fact or rule, enter `retract(fact-or-rule).`
 TODO: I get "ERROR: No permission to modify static procedure".
 
+## Hello World
+
+The `write` predicate writes to stdout.
+
+```prolog
+write('Hello World!'), nl.
+```
+
+The `format` predicate also writes to stdout,
+but substitutes values into the text.
+TODO: Add more on format.
+
 ## Special Characters
 
 | Characters    | Meaning                     |
@@ -160,14 +209,19 @@ Terms that begin with an uppercase letter represent variables.
 
 ## Conjunctions
 
-The comma operator is used to form queries where multiple goals must be met.
+The comma operator is used to form rules and queries
+where multiple goals must be met.
 For example:
 
 ```prolog
-% This asks if mark loves tami AND tami loves mark.
+% This rule says that mark likes females that like cycling.
+likes(mark, x) := female(X), likes(X, cycling).
+
+% This query asks if mark loves tami AND tami loves mark.
 ?- loves(mark, tami), loves(tami, mark)`
 
-% This searches for things that both mark and tami love.
+% This query searches for things that both mark and tami love.
+% X stands for the same value in both goals.
 ?- loves(mark, X), loves(tami, X)
 ```
 
