@@ -296,6 +296,18 @@ Prolog supports the following math operators:
 | `**`     | exponentiation          |
 | `mod`    | modulo                  |
 
+One way to evaluate a mathematical expression is to assign it to a variable.
+For example, we can compute the angle in degrees
+whose `sin` is `0.5` as follows:
+
+```prolog
+% The asin function returns an angle in radians.
+?- Angle is asin(0.5) * 180 / pi.
+Angle = 29.999999999999996.
+```
+
+After evaluating this, the variable `Angle` is no longer defined.
+
 ## Strings
 
 Literal strings can be delimited with single or double quotes.
