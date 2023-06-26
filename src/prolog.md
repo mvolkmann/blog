@@ -209,7 +209,8 @@ By default predicates cannot be added or deleted in a session.
 To enable this, run a `dynamic` query on a specific predicate.
 Once this is done, a predicate of that type can be
 added to the beginning with `asserta` or added to the end with `assertz`.
-And a predicate of that type can be removed with the `retract` function.
+And predicates of that type can be removed
+with the `retract` and `retractall` functions.
 
 For example, suppose we have the file `likes.pl` containing the following:
 
@@ -227,6 +228,10 @@ A session can do the following:
 ?- assertz(likes(mark, reeces)). % adds after existing predicates
 ?- retract(likes(mark, books)). % removes
 ?- likes(mark, X). % outputs running and reeces
+
+?- retractall(likes(mark, _)). % removes everything that mark likes
+?- retractall(likes(_, _)). % removes everything that anybody likes
+?- likes(mark, X). % outputs nothing
 ```
 
 ## Input
