@@ -142,12 +142,10 @@ fast(X) :- cheetah(X).
 % fast(X) :- cheetah(X); whippet(X).
 
 % This is a query that asks whether comet is fast.
-% It returns "true".
-?- fast(comet).
+?- fast(comet). % true
 
 % This is a query that asks for something that is fast.
-% It returns "comet".
-?- fast(X).
+?- fast(X). % comet
 
 % This rule ... TODO
 ```
@@ -241,9 +239,9 @@ For example:
 
 ```prolog
 greet :-
-  write("Enter your name: "),
+  write('Enter your name: '),
   read(Name),
-  format("Hello, ~w!", [Name]).
+  format('Hello, ~w!', [Name]).
 
 greet().
 ```
@@ -273,7 +271,7 @@ readFile(File) :-
   processStream(Char, Stream),
   close(Stream).
 
-readFile("demo.txt").
+readFile('demo.txt').
 ```
 
 TODO: Is there an open source library that provides a similar function
@@ -302,7 +300,7 @@ to be substituted into the format string.
 For example:
 
 ```prolog
-format('~w likes ~w.', [mark, "Prolog"]).
+format('~w likes ~w.', [mark, 'Prolog']).
 ```
 
 The following ? can be used in format strings:
@@ -325,7 +323,7 @@ writeFile(File, Text) :-
   write(Stream, Text), nl,
   close(Stream).
 
-writeFile("demo.txt", "first line\nsecond line").
+writeFile('demo.txt', 'first line\nsecond line').
 ```
 
 ## Special Characters
@@ -399,9 +397,28 @@ After evaluating this, the variable `Angle` is no longer defined.
 ## Strings
 
 Literal strings can be delimited with single or double quotes.
+Single quotes seem to be preferred.
 To escape a quote inside a literal string, precede it with a backslash.
 
 A string is represented by a list of characters.
+
+To create a list of ASCII values from a literal string,
+use the `name` function.
+For example:
+
+```prolog
+?- name('ABC', X).
+X = [65, 66, 67].
+```
+
+To create a string from a list of ASCII values,
+also use the `name` function.
+For example:
+
+```prolCog
+?- name(X, [65, 66, 67]).
+X = 'ABC'.
+```
 
 ## Arithmetic Functions
 
@@ -553,7 +570,7 @@ For example:
 ```prolog
 greet(Name) :- format('Hello, ~w!', [Name]).
 
-greet("Mark")
+greet('Mark')
 Hello, Mark!
 ```
 
@@ -571,7 +588,7 @@ area(rectangle, Width, Height, X) :- X is Width * Height.
 X = 12.566370614359172.
 ```
 
-Each of the `area` rules uses the "is" keyword
+Each of the `area` rules uses the `is` keyword
 to assign a value to the X argument.
 
 Rules can be recursive.
@@ -628,7 +645,7 @@ TODO: Which other programming languages can call SWI-Prolog?
 ## Efficiency
 
 For information about the performance of Prolog, see {% aTargetBlank
-"https://www.metalevel.at/prolog/efficiency", "lEfficiency of Prolog" %}.
+"https://www.metalevel.at/prolog/efficiency", "Efficiency of Prolog" %}.
 
 ## Language Server
 
