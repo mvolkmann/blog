@@ -328,6 +328,17 @@ sum(List, Sum) :-
 X = 6.
 ```
 
+To get the length of a list, use the `length` rule.
+For example:
+
+```prolog
+?- length([2, 5, 7], L).
+L = 3.
+```
+
+TODO: Can you append and insert values in list? 
+TODO: Can you remove values from a list? 
+
 ## Rules
 
 Rules can write to the current output stream.
@@ -405,7 +416,7 @@ TODO: Which other programming languages can call SWI-Prolog?
 ## Efficiency
 
 For information about the performance of Prolog, see {% aTargetBlank
-"https://www.metalevel.at/prolog/efficiency", "Efficiency of Prolog" %}.
+"https://www.metalevel.at/prolog/efficiency", "lEfficiency of Prolog" %}.
 
 ## Language Server
 
