@@ -299,7 +299,19 @@ A string is represented by a list of characters.
 
 ## Rules
 
-Rules can compute a numeric value.
+Rules can write to the current output stream.
+For example:
+
+```prolog
+greet(Name) :- format('Hello, ~w!', [Name]).
+
+greet("Mark")
+Hello, Mark!
+```
+
+Rules do not return values like a function,
+but then can set the values of their arguments.
+
 For example:
 
 ```prolog
