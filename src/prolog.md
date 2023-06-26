@@ -226,6 +226,9 @@ greet().
 % Hello, Mark!
 ```
 
+The `get` function reads a single character
+and sets a variable to its integer ASCII value.
+
 ## Output
 
 The `write` predicate writes to the current output stream,
@@ -259,6 +262,9 @@ The following ? can be used in format strings:
 - `~s`: substitutes a literal string
 - `~w`: substitutes a word derived from an atom name
 - TODO: Add more!
+
+The `put` function writes a single ASCII value to the current output stream.
+It is the counterpart to the `get` function.
 
 ## Special Characters
 
