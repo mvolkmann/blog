@@ -323,6 +323,7 @@ sum(List, Sum) :-
     % Compute the sum of the remaining numbers.
     sum(Tail, TailSum),
     % The result is the first number plus that sum.
+    % Note the use of the "is" keyword to assign a value to the Sum argument.
     Sum is TailSum + Head.
 
 ?- sum([1, 2, 3], X).
@@ -365,6 +366,9 @@ area(rectangle, Width, Height, X) :- X is Width * Height.
 ?- area(circle, 2, X).
 X = 12.566370614359172.
 ```
+
+Each of the `area` rules uses the "is" keyword
+to assign a value to the X argument.
 
 Rules can be recursive.
 See the `sum` example above.
