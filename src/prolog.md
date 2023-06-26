@@ -341,6 +341,7 @@ These include
 - `pi`: value of pi (3.14159...)
 - `random`: random integer between zero and an upper bound
 - `random_float`: random float between zero and one (exclusive on both ends)
+- `succ`: successive value; `succ(2, X)` gives `3`; `succ(X, 3)` gives `2`
 - `truncate`: similar to `floor`, but rounds toward zero for negative numbers
 - trigonometry functions
 
