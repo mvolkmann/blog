@@ -415,9 +415,24 @@ To create a string from a list of ASCII values,
 also use the `name` function.
 For example:
 
-```prolCog
+```prolog
 ?- name(X, [65, 66, 67]).
 X = 'ABC'.
+```
+
+To append two strings, convert them to lists of ASCII codes,
+append those lists, and convert the result back to a string.
+For example:
+
+```prolog
+appendStrings(S1, S2, SR) :-
+  name(S1, L1),
+  name(S2, L2),
+  append(L1, L2, LR),
+  name(SR, LR).
+
+appendStrings('first ', 'second', X).
+X = 'first second'
 ```
 
 ## Arithmetic Functions
