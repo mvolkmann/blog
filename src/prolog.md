@@ -230,7 +230,26 @@ Entering 'Mark'. results in the following output: `Hello, Mark!`.
 The `get` function reads a single character
 and sets a variable to its integer ASCII value.
 
-TODO: Show how to read from a file.
+To read from a file and write the contents to stdout,
+use the `open`, `get_char`, and `close` functions.
+For example:
+
+```prolog
+processStream(end_of_file, _) :- !. % a "cut" that stops execution
+
+processStream(Char, Stream) :-
+  write(Char),
+  get_char(Stream, NextChar),
+  processStream(NextChar, Stream).
+
+readFile(File) :- 
+  open(File, read, Stream),
+  get_char(Stream, Char),
+  processStream(Char, Stream),
+  close(Stream).
+
+readFile("demo.txt").
+```
 
 ## Output
 
