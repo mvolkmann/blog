@@ -221,13 +221,16 @@ greet :-
   format("Hello, ~w!", [Name]).
 
 greet().
-% Enter a name in single or double quotes followed by a period.
-% Entering 'Mark'. results in the following output:
-% Hello, Mark!
 ```
+
+Enter a name in single or double quotes followed by a period.
+This is an odd requirement for users!
+Entering 'Mark'. results in the following output: `Hello, Mark!`.
 
 The `get` function reads a single character
 and sets a variable to its integer ASCII value.
+
+TODO: Show how to read from a file.
 
 ## Output
 
