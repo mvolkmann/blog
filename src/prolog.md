@@ -435,6 +435,14 @@ appendStrings('first ', 'second', X).
 X = 'first second'
 ```
 
+To get a single character from a string, convert it to a list of ASCII codes,
+and use the `nth0` function.
+For example:
+
+```prolog
+?- name("Mark", L), nth0(2, L, C), put(C). % 114 (ASCII code for 'r')
+```
+
 ## Arithmetic Functions
 
 Prolog supports a large number of functions that return a number.
