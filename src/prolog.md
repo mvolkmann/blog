@@ -274,12 +274,14 @@ Prolog supports the following relational operators:
 
 | Operator | Meaning               |
 | -------- | --------------------- |
-| `=`      | equal                 |
-| `\=`     | not equal             |
+| `=:=`    | equal                 |
+| `=\=`    | not equal             |
 | `<`      | less than             |
 | `>`      | greater than          |
 | `=<`     | less than or equal    |
 | `>=`     | greater than or equal |
+
+The syntax for "equal" and "not equal" is quite odd!
 
 The odd syntax for "less than or equal" was
 chosen so it doesn't look like an arrow.
@@ -294,6 +296,7 @@ Prolog supports the following math operators:
 | `/`      | floating point division |
 | `//`     | integer division        |
 | `**`     | exponentiation          |
+| `^`      | exponentiation          |
 | `mod`    | modulo                  |
 
 One way to evaluate a mathematical expression is to assign it to a variable.
@@ -314,6 +317,32 @@ Literal strings can be delimited with single or double quotes.
 To escape a quote inside a literal string, precede it with a backslash.
 
 A string is represented by a list of characters.
+
+## Arithmetic Functions
+
+Prolog supports a large number of functions that return a number.
+See {% aTargetBlank "https://www.swi-prolog.org/pldoc/man?section=functions",
+"Arithmetic Functions" %}.
+These include
+
+- `abs`: absolute value
+- bitwise operations such as shift and `xor`
+- `ceiling`: smallest integer that is greater than or equal to a value
+- `e`: value of e (2.71828...)
+- `floor`: largest integer that is less than or equal to a value
+- `gcd`: greatest common denominator
+- `inf`: positive infinity
+- `lcm`: least common multiple
+- `log`: logarithm base e (natural logarithm)
+- `log10`: logarithm base 10
+- `max`: maximum of two values
+- `min`: minimum of two values
+- `nan`: not a number value
+- `pi`: value of pi (3.14159...)
+- `random`: random integer between zero and an upper bound
+- `random_float`: random float between zero and one (exclusive on both ends)
+- `truncate`: similar to `floor`, but rounds toward zero for negative numbers
+- trigonometry functions
 
 ## Lists
 
@@ -371,8 +400,8 @@ but then can set the values of their arguments.
 For example:
 
 ```prolog
-area(circle, Radius, X) :- X is pi * Radius ** 2.
-area(square, Side, X) :- X is Side ** 2.
+area(circle, Radius, X) :- X is pi * Radius^2.
+area(square, Side, X) :- X is Side^2.
 area(rectangle, Width, Height, X) :- X is Width * Height.
 
 ?- area(circle, 2, X).
