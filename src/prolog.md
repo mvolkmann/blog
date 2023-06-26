@@ -81,6 +81,8 @@ To run SWI-Prolog from a terminal, enter `swipl`.
   src="/blog/assets/gnu-prolog-logo.png?v={{pkg.version}}"
   title="GNU Prolog logo">
 
+GNU Prolog is implemented in a combination of C (84%) and Prolog (15%).
+
 To install the terminal command `gprolog` in macOS,
 enter `brew install gnu-prolog`.
 
@@ -111,7 +113,10 @@ To exit the SWI-Prolog interpreter, enter `halt.` or press ctrl-d.
 
 | Term           | Meaning                                                        |
 |----------------|----------------------------------------------------------------|
+| atom           |                                                                |
 | fact           | description of something that is true                          |
+| functor        |                                                                |
+| predicate      | name of a rule; appears in head before left parenthesis        |
 | rule           | description of a relationship about at least one unknown thing |
 | question/query | asks if something is true or asks for a matching value         |
 | database       | a collection of facts and rules                                |
@@ -204,17 +209,38 @@ Another way to add a fact or rule is to enter
 To remove a fact or rule, enter `retract(fact-or-rule).`
 TODO: I get "ERROR: No permission to modify static procedure".
 
-## Hello World
+## Output
 
-The `write` predicate writes to stdout.
+The `write` predicate writes to the current output stream,
+which defaults to stdout.
+The atom `nl` is a built-in that writes a newline character
+to the current output stream.
+
+For example:
 
 ```prolog
 write('Hello World!'), nl.
+
+writeln('Hello World!'). % same as previous line
 ```
 
-The `format` predicate also writes to stdout,
-but substitutes values into the text.
-TODO: Add more on format.
+The {% aTargetBlank "https://www.swi-prolog.org/pldoc/man?predicate=format/2",
+"format" %} predicate also writes to the current output stream.
+It takes a format string and a list of values
+to be substituted into the format string.
+
+For example:
+
+```prolog
+format('~w likes ~w.', [mark, "Prolog"]).
+```
+
+The following ? can be used in format strings:
+
+- `~n`: newline character
+- `~s`: substitutes a literal string
+- `~w`: substitutes a word derived from an atom name
+- TODO: Add more!
 
 ## Special Characters
 
@@ -229,11 +255,61 @@ TODO: Add more on format.
 | `%`           | begins single-line comment  |
 | `/*` and `*/` | delimits multi-line comment |
 
-## Case-sensitive
+## Naming Conventions
 
 Terms that begin with a lowercase letter represent objects or relationships.
 
 Terms that begin with an uppercase letter represent variables.
+
+TODO: Summarize valid names for predicates, atoms, and variables.
+
+An underscore represents an anonymous variable.
+
+## Operators
+
+Prolog supports the following relational operators:
+
+| Operator | Meaning               |
+| -------- | --------------------- |
+| `=:=`    | equal                 |
+| `=\=`    | not equal             |
+| `<`      | less than             |
+| `>`      | greater than          |
+| `=<`     | less than or equal    |
+| `>=`     | greater than or equal |
+
+Prolog supports the following math operators:
+
+| Operator | Meaning                 |
+| -------- | ----------------------- |
+| `+`      | addition                |
+| `-`      | subtraction             |
+| `*`      | multiplication          |
+| `/`      | floating point division |
+| `//`     | integer division        |
+| `**`     | exponentiation          |
+| `mod`    | modulo                  |
+
+## Strings
+
+Literal strings can be delimited with single or double quotes.
+To escape a quote inside a literal string, precede it with a backslash.
+
+A string is represented by a list of characters.
+
+## Rules
+
+Rules can compute a numeric value.
+For example:
+
+```prolog
+area(circle, Radius, X) :- X is pi * Radius ** 2.
+area(square, Side, X) :- X is Side ** 2.
+area(rectangle, Width, Height, X) :- X is Width * Height.
+
+?- area(circle, 2, X).
+X = 12.566370614359172.
+```
 
 ## Conjunctions
 
@@ -268,6 +344,11 @@ SWI-Prolog can be called from C. See {% aTargetBlank
 "Calling Prolog from C" %}.
 
 TODO: Which other programming languages can call SWI-Prolog?
+
+## Efficiency
+
+For information about the performance of Prolog, see {% aTargetBlank
+"https://www.metalevel.at/prolog/efficiency", "Efficiency of Prolog" %}.
 
 ## Language Server
 
