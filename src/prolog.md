@@ -206,9 +206,10 @@ It seems this can replace existing facts rather than add to them.
 ## Dynamic Predicates
 
 By default predicates cannot be added or deleted in a session.
-To enable this, run a `dynamic` query.
-Once this is done, the `assertz` function can be used to add a predicate
-and the `retract` function can be used to remove one.
+To enable this, run a `dynamic` query on a specific predicate.
+Once this is done, a predicate of that type can be
+added to the beginning with `asserta` or added to the end with `assertz`.
+And a predicate of that type can be removed with the `retract` function.
 
 For example, suppose we have the file `likes.pl` containing the following:
 
@@ -223,8 +224,8 @@ A session can do the following:
 
 ```prolog
 ?- [likes].
-?- assertz(likes(mark, reeces)).
-?- retract(likes(mark, books)).
+?- assertz(likes(mark, reeces)). % adds after existing predicates
+?- retract(likes(mark, books)). % removes
 ?- likes(mark, X). % outputs running and reeces
 ```
 
