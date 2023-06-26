@@ -312,6 +312,7 @@ in square brackets.
 The following rule computes the sum of numbers in a list:
 
 ```prolog
+% This is an example of a recursive rule.
 sum(List, Sum) :-
   % If the list is empty then the sum is zero.
   List = [] -> Sum = 0;
@@ -364,6 +365,9 @@ area(rectangle, Width, Height, X) :- X is Width * Height.
 ?- area(circle, 2, X).
 X = 12.566370614359172.
 ```
+
+Rules can be recursive.
+See the `sum` example above.
 
 ## Conjunctions
 
