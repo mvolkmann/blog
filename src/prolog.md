@@ -115,7 +115,7 @@ To exit the SWI-Prolog interpreter, enter `halt.` or press ctrl-d.
 |----------------|----------------------------------------------------------------|
 | atom           |                                                                |
 | fact           | description of something that is true                          |
-| functor        |                                                                |
+| functor        | Is this just another term for "predicate"?                     |
 | predicate      | name of a rule; appears in head before left parenthesis        |
 | rule           | description of a relationship about at least one unknown thing |
 | question/query | asks if something is true or asks for a matching value         |
@@ -237,6 +237,7 @@ format('~w likes ~w.', [mark, "Prolog"]).
 
 The following ? can be used in format strings:
 
+- `~2f`: substitutes a float value and only outputs two decimal places
 - `~n`: newline character
 - `~s`: substitutes a literal string
 - `~w`: substitutes a word derived from an atom name
@@ -264,6 +265,8 @@ Terms that begin with an uppercase letter represent variables.
 TODO: Summarize valid names for predicates, atoms, and variables.
 
 An underscore represents an anonymous variable.
+These can be used as arguments to predicates
+when the value of an argument does not matter.
 
 ## Operators
 
@@ -271,12 +274,15 @@ Prolog supports the following relational operators:
 
 | Operator | Meaning               |
 | -------- | --------------------- |
-| `=:=`    | equal                 |
-| `=\=`    | not equal             |
+| `=`      | equal                 |
+| `\=`     | not equal             |
 | `<`      | less than             |
 | `>`      | greater than          |
 | `=<`     | less than or equal    |
 | `>=`     | greater than or equal |
+
+The odd syntax for "less than or equal" was
+chosen so it doesn't look like an arrow.
 
 Prolog supports the following math operators:
 
@@ -296,6 +302,31 @@ Literal strings can be delimited with single or double quotes.
 To escape a quote inside a literal string, precede it with a backslash.
 
 A string is represented by a list of characters.
+
+## Lists
+
+Lists are sequential collections of values.
+They are created by including a comma-separated list of values
+in square brackets.
+
+The following rule computes the sum of numbers in a list:
+
+```prolog
+sum(List, Sum) :-
+  % If the list is empty then the sum is zero.
+  List = [] -> Sum = 0;
+  % Otherwise ...
+  List =
+    % Get the first number and a list of the remaining numbers.
+    [Head|Tail],
+    % Compute the sum of the remaining numbers.
+    sum(Tail, TailSum),
+    % The result is the first number plus that sum.
+    Sum is TailSum + Head.
+
+?- sum([1, 2, 3], X).
+X = 6.
+```
 
 ## Rules
 
@@ -348,6 +379,10 @@ enter `listing.`.  The output will contain many clauses created by the system in
 
 To list only the facts and rules for a given predicate,
 enter `listing(predicate-name).`
+
+## Structures
+
+TODO: Add this detail.
 
 ## Calling From Other Languages
 
