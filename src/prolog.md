@@ -380,6 +380,16 @@ enter `listing.`.  The output will contain many clauses created by the system in
 To list only the facts and rules for a given predicate,
 enter `listing(predicate-name).`
 
+## Debugging
+
+To see all the steps used to evaluate a predicate,
+turn on trace mode by entering `trace.`
+
+Enter a query and press the return key after
+viewing the result of each step in the evaluation.
+
+When finished debugging, enter `notrace.` to turn this mode off.
+
 ## Structures
 
 TODO: Add this detail.
