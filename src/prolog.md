@@ -506,6 +506,42 @@ V1 = 9,
 V3 = 7.
 ```
 
+To test whether a value is a member of a list, use the `member` function.
+For example:
+
+```prolog
+TODO: WHY DOESN'T THIS WORK?
+TODO: How can you set a variable and then use it in a subsequest predicate?
+MyList = [3, 7, 9].
+member(7, MyList). % true
+member(4, MyList). % false
+```
+
+The `member` function can also be used to iterate over the values in a list.
+For example, `member(X, [3, 7, 9])` will set `X`
+to each value in the list one at a time.
+
+The `reverse` function creates a new list containing
+all the values in a given list in reverse order.
+For example:
+
+```prolog
+?- reverse([1, 2, 3], X). % X = [3, 2, 1]
+```
+
+The `append` function creates a new list by appending two existing lists.
+For example:
+
+```prolog
+?- append([1, 2, 3], [4, 5], X). % X = [1, 2, 3, 4, 5]
+```
+
+Lists can be nested.  For example:
+
+```prolog
+[a, [b, c], d, e, [f, g, h]]
+```
+
 TODO: Can you append and insert values in list? 
 TODO: Can you remove values from a list? 
 
