@@ -10,7 +10,8 @@ Prolog is a logic-based programming language.
 The name is a contraction of "programming in logic".
 Prolog has many uses including artificial intelligence,
 abstract problem solving, symbolic equation solving, and more.
-A core feature is search with backtracking, also referred to as "unification".
+A core feature is pattern matching search with backtracking,
+also referred to as "unification".
 
 Prolog first appeared in 1972. It was designed by three computer scientists,
 Alain Colmerauer (France), Phillipe Roussel (France), and
@@ -119,29 +120,29 @@ Enter facts and rules in the left pane.
 Enter a query in the lower-right pane.
 Press the "Run!" button or ctrl-return to execute the query.
 
-## Running
-
-Double-click the SWI-Prolog app to open a window
-where Prolog commands can be entered.
-Initially macOS will not open the app because it is deemed untrusted.
-To make it trusted, open the "System Settings" app, select "Privacy & Security",
-and allowing opening `SWI-Prolog.app`.
-
 ## Exiting
 
-To exit the SWI-Prolog interpreter, enter `halt.` or press ctrl-d.
+To exit from any Prolog interpreter, enter `halt.` or press ctrl-d.
 
 ## Terminology
 
 | Term           | Meaning                                                        |
 |----------------|----------------------------------------------------------------|
-| atom           |                                                                |
+| atom           | an identifier that represents a specific thing                 |
+| clause         | a fact or rule built from terms                                |
+| database       | a collection of facts and rules                                |
 | fact           | description of something that is true                          |
-| functor        | Is this just another term for "predicate"?                     |
+| functor        | name of a predicate                                            |
 | predicate      | name of a rule; appears in head before left parenthesis        |
 | rule           | description of a relationship about at least one unknown thing |
 | question/query | asks if something is true or asks for a matching value         |
-| database       | a collection of facts and rules                                |
+| term           | the only datatype; has four subtypes                           |
+| unification    | process of searching for values that satisfy a rule            |
+
+The four subtypes of "term" are numbers, atoms, variables, and compound terms.
+
+A compound term is a functor followed by an argument list.
+Each argument is an atom, a variable, or a destructuring of variables.
 
 A rule can be thought of as a special kind of fact
 that depends on a set of facts.
@@ -363,11 +364,16 @@ writeFile('demo.txt', 'first line\nsecond line').
 
 ## Naming Conventions
 
-Terms that begin with a lowercase letter represent objects or relationships.
+Atoms are sequences of letters, numbers, and underscores
+that begin with a lowercase letter.
+They can also be any text enclosed in single quotes (allows spaces).
+There are also the following special atoms:
+`;`, `!`, `[]`, and `{}`.
 
-Terms that begin with an uppercase letter represent variables.
+Variables are also sequences of letters, numbers, and underscores,
+but they begin with an uppercase letter.
 
-TODO: Summarize valid names for predicates, atoms, and variables.
+Predicate names are atoms.
 
 An underscore represents an anonymous variable.
 These can be used as arguments to predicates
