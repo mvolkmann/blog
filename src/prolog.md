@@ -27,6 +27,9 @@ Robert Kowalski (USA/Britain).
 capable of answering questions posed in natural language."
 It is partially implemented in Prolog.
 
+The Prolog unification process relies on the properties of {% aTargetBlank
+"https://en.wikipedia.org/wiki/Horn_clause", "Horn clauses" %}.
+
 ## Resources
 
 - {% aTargetBlank "http://www.gprolog.org", "GNU Prolog" %}
@@ -794,6 +797,41 @@ For implementations of map, filter, and reduce, see {% aTargetBlank
 "https://pbrown.me/blog/functional-prolog-map-filter-and-reduce/",
 "Functional Prolog" %}.
 
+## Help
+
+To find information about built-ins related to a specific word in SWI-Prolog,
+enter `apropos(word).`. For example, `apropos(pair).` outputs the following:
+
+```prolog
+% LIB pairs_keys/2                        Remove the values from a list of Key-Value pairs.
+% LIB pairs_values/2                      Remove the keys from a list of Key-Value pairs.
+% LIB pairs_keys_values/3                 True if Keys holds the keys of Pairs and Values the values.
+% SWI dict_pairs/3                        Bi-directional mapping between a dict and an ordered list of pairs (see secti ...
+%   C 'PL_is_pair'()                      Returns non-zero if term is a compound term using the list constructor.
+% SWI stream_pair/3                       This predicate can be used in mode (-,+,+) to create a stream-pair from an in ...
+% SEC 'summary-lib-pairs'                 library(pairs)
+% LIB protobuf_map_pairs/3                Convert between a list of protobuf map entries (in the form DictTag{key:Key,  ...
+% LIB transpose_pairs/2                   Swap Key-Value to Value-Key.
+% LIB json_dict_pairs/2                   This hook may be used to order the keys of an object.
+% LIB map_list_to_pairs/3                 Create a Key-Value list by mapping each element of List.
+% LIB group_pairs_by_key/2                Group values with equivalent (==/2) consecutive keys.
+% ISO keysort/2                           Sort a list of pairs.
+% LIB all_distinct/1                      True iff Vars are pairwise distinct.
+%   C 'PL_clear_hash_table'()             Delete all key-value pairs from the table.
+%   C 'PL_advance_hash_table_enum'()      Get the next key-value pair from a cursor.
+%   C 'PL_new_hash_table'()               Create a new table for size key-value pairs.
+% SEC pairs                               library(pairs): Operations on key-value lists
+% LIB assoc_to_list/2                     Translate Assoc to a list Pairs of Key-Value pairs.
+%   C 'PL_STRINGS_MARK'()                 These macros must be paired and create a C block ({...}).
+% Showing 20 of 52 matches
+%
+% Use ?- apropos(Type:Query) or multiple words in Query
+% to restrict your search.  For example:
+%
+%   ?- apropos(iso:open).
+%   ?- apropos('open file').
+```
+
 ## Listing
 
 To list all the facts and rules known in the current session,
@@ -828,6 +866,22 @@ TODO: Which other programming languages can call SWI-Prolog?
 
 For information about the performance of Prolog, see {% aTargetBlank
 "https://www.metalevel.at/prolog/efficiency", "Efficiency of Prolog" %}.
+
+## Constraint Logic Programming over Finite Domains: CLP(FD)
+
+The library clpfd implmenents Constraint Logic Programming over Finite Domains.
+This supports two primary use cases:
+
+- declarative integer arithmetic
+- combinatorial problems
+
+This library supports a different, powerful way to write Prolog rules.
+
+For example, the following rule computes the area of various geometry shapes.
+
+```prolog
+
+```
 
 ## Language Server
 
