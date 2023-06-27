@@ -12,8 +12,9 @@ It uses a declarative syntax rather than a procedural one.
 
 A core feature of Prolog is pattern matching search with backtracking,
 also referred to as "unification".
-This is the process of searching a set of facts and rules
-to find values that match a given ???.
+This is the process of searching a set of facts and rules (called a database)
+to find values that match a given predicate.
+Prolog is highly optimized to handle searching large databases.
 
 Prolog has many uses including artificial intelligence,
 abstract problem solving, symbolic equation solving, and more.
