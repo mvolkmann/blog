@@ -42,7 +42,7 @@ It is partially implemented in Prolog.
 
 - {% aTargetBlank "https://en.wikipedia.org/wiki/Prolog", "Wikipedia" %}
 
-## Installing
+## Implementations
 
 There are many implementations of the Prolog programming language.
 The most popular seems to be {% aTargetBlank
@@ -96,6 +96,24 @@ To install the terminal command `gprolog` in macOS,
 enter `brew install gnu-prolog`.
 
 To run GNU Prolog from a terminal, enter `gprolog`.
+
+### Scryer Prolog
+
+{% aTargetBlank "https://www.scryer.pl", "Scryer Prolog" %}
+"is a free software ISO Prolog system intended to be an
+industrial strength production environment and
+a testbed for bleeding edge research in logic and constraint programming."
+
+Scryer Prolog is implemented in a combination of Rust (64%) and Prolog (36%).
+
+To install, enter the following commands:
+
+```bash
+git clone https://github.com/mthom/scryer-prolog
+cd scryer-prolog
+curl https://sh.rustup.rs -sSf | sh # if cargo is not yet installed
+cargo build --release
+```
 
 ## Online REPL
 
