@@ -10,7 +10,7 @@ Prolog is a logic-based programming language.
 The name is a contraction of "programming in logic".
 Prolog has many uses including artificial intelligence,
 abstract problem solving, symbolic equation solving, and more.
-A core feature is search with backtracking.
+A core feature is search with backtracking, also referred to as "unification".
 
 Prolog first appeared in 1972. It was designed by three computer scientists,
 Alain Colmerauer (France), Phillipe Roussel (France), and
@@ -73,14 +73,6 @@ SWI-Prolog is implemented in a combination of C (48%) and Prolog (39%).
 
 To install the terminal command `swipl` in macOS,
 enter `brew install swi-prolog`
-
-To install a stable, binary version of SWI-Prolog app, browse {% aTargetBlank
-"https://www.swi-prolog.org/download/stable",
-"Download SWI-Prolog stable version" %}.
-
-On macOS, double-click the downloaded `.dmg` file.
-This opens a Finder window containing several files and directories.
-Drag the file `SWI-Prolog.app` to the `Applications` directory.
 
 To run SWI-Prolog from a terminal, enter `swipl`.
 
