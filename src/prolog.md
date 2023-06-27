@@ -115,6 +115,9 @@ curl https://sh.rustup.rs -sSf | sh # if cargo is not yet installed
 cargo build --release
 ```
 
+This creates the executable file `target/release/scryer-prolog`.
+Define an alias to make this easier to run.
+
 ## Online REPL
 
 To enter and run Prolog code in a web browser, browse
