@@ -8,10 +8,14 @@ layout: topic-layout.njk
 
 Prolog is a logic-based programming language.
 The name is a contraction of "programming in logic".
+
+A core feature of Prolog is pattern matching search with backtracking,
+also referred to as "unification".
+This is the process of searching a set of facts and rules
+to find values that match a given ???.
+
 Prolog has many uses including artificial intelligence,
 abstract problem solving, symbolic equation solving, and more.
-A core feature is pattern matching search with backtracking,
-also referred to as "unification".
 
 Prolog first appeared in 1972. It was designed by three computer scientists,
 Alain Colmerauer (France), Phillipe Roussel (France), and
@@ -127,7 +131,7 @@ To exit from any Prolog interpreter, enter `halt.` or press ctrl-d.
 ## Terminology
 
 | Term           | Meaning                                                        |
-|----------------|----------------------------------------------------------------|
+| -------------- | -------------------------------------------------------------- |
 | atom           | an identifier that represents a specific thing                 |
 | clause         | a fact or rule built from terms                                |
 | database       | a collection of facts and rules                                |
@@ -139,7 +143,8 @@ To exit from any Prolog interpreter, enter `halt.` or press ctrl-d.
 | term           | the only datatype; has four subtypes                           |
 | unification    | process of searching for values that satisfy a rule            |
 
-The four subtypes of "term" are numbers, atoms, variables, and compound terms.
+The four subtypes of "term" are numbers (integer or floating point),
+atoms, variables, and compound terms.
 
 A compound term is a functor followed by an argument list.
 Each argument is an atom, a variable, or a destructuring of variables.
@@ -147,39 +152,9 @@ Each argument is an atom, a variable, or a destructuring of variables.
 A rule can be thought of as a special kind of fact
 that depends on a set of facts.
 
-## Basic Syntax
+## Syntax
 
 Prolog programs are composed of facts, rules, and queries.
-
-For example:
-
-```prolog
-% These are facts that say comet is a whippet and spots is a cheetah.
-whippet(comet).
-cheetah(spots).
-
-% This is a rule that says if something is a whippet then it is fast.
-fast(X) :- whippet(X).
-fast(X) :- cheetah(X).
-% The previous two lines can be replaced with this.
-% fast(X) :- cheetah(X); whippet(X).
-
-% This is a query that asks whether comet is fast.
-?- fast(comet). % true
-
-% This is a query that asks for something that is fast.
-?- fast(X). % comet
-
-% This rule ... TODO
-```
-
-A fact is a degenerate case of a rule whose body only contains `true`.
-For example, the following are equivalent:
-
-```prolog
-likes(mark, ice-cream).
-likes(mark, ice-cream) :- true.
-```
 
 When a query has multiple matches, the system will wait for further input.
 To search for the next match, press the semicolon key.
@@ -199,6 +174,131 @@ The query `likes(mark, X)` will find
 tacos, books, and running that in that order.
 The query `likes(X, running)` will find mark.
 
+### Facts
+
+A fact states that some relationship is always true.
+
+A fact is written as a functor (atom) followed by
+an argument list that is surrounded by parentheses.
+The argument list contains only atoms, not variables.
+
+For example:
+
+```prolog
+runner(mark). % says mark is a runner
+likes(mark, prolog) % says mark likes prolog
+```
+
+These are facts that say comet is a whippet and spots is a cheetah:
+
+```prolog
+whippet(comet).
+cheetah(spots).
+```
+
+### Rules
+
+A rule is written as a head and a body separated by
+the "if" symbol `:-` and terminated by a period.
+
+The head is a functor (atom) followed by
+an argument list that is surrounded by parentheses.
+The head syntax is similar to that of a fact,
+but its argument list can contain variables.
+
+The body is a comma (means "and") or semicolon (means "or")
+separated list of goals.
+
+The following rules state that if something is
+a whippet or a cheetah then it is fast.
+
+```prolog
+fast(X) :- whippet(X).
+fast(X) :- cheetah(X).
+
+% The previous two lines can be replaced with this.
+% fast(X) :- cheetah(X); whippet(X).
+```
+
+A fact is a degenerate case of a rule whose body only contains `true`.
+For example, the following are equivalent:
+
+```prolog
+likes(mark, ice-cream).
+likes(mark, ice-cream) :- true.
+```
+
+The following rules define what it means
+for two people to be siblings or sisters.
+
+```prolog
+% This states that siblings must have the same father and the same mother.
+sibling(X, Y) :-
+  father(F, X),
+  father(F, Y),
+  mother(M, X),
+  mother(M, Y).
+
+sister_of(X, Y) :-
+  \+ X = Y, % can't be sister of self
+  female(X),
+  sibling(X, Y).
+```
+
+Rules do not return values like a function,
+but they can set the values of their arguments.
+
+For example:
+
+```prolog
+area(circle, Radius, X) :- X is pi * Radius^2.
+area(square, Side, X) :- X is Side^2.
+area(rectangle, Width, Height, X) :- X is Width * Height.
+
+?- area(circle, 2, X).
+X = 12.566370614359172.
+```
+
+Each of the `area` rules uses the `is` keyword
+to assign a value to the X argument.
+
+Rules can be recursive.
+See the `sum` example above.
+
+## Queries
+
+Queries test whether a clause is true or
+they find variable values for which the clause is true.
+Queries are written after the characters `?-`.
+
+For example:
+
+```prolog
+% This is a query that asks whether comet is fast.
+?- fast(comet). % true
+
+% This is a query that asks for something that is fast.
+?- fast(X). % comet
+```
+
+## Conjunctions
+
+The comma operator is used to form rules and queries
+where multiple goals must be met.
+For example:
+
+```prolog
+% This rule says that mark likes females that like cycling.
+likes(mark, x) := female(X), likes(X, cycling).
+
+% This query asks if mark loves tami AND tami loves mark.
+?- loves(mark, tami), loves(tami, mark)`
+
+% This query searches for things that both mark and tami love.
+% X stands for the same value in both goals.
+?- loves(mark, X), loves(tami, X)
+```
+
 ## Typical Flow
 
 The typical steps to run a Prolog program are:
@@ -212,6 +312,8 @@ for their source files.
 
 To load a `.pl` file, enter `[file-name].` or `consult('file-name').`
 For example, to load the file `demo.pl`, `enter [demo].`
+Alternatively, pass a source file to the interpreter when starting it.
+For example, `swipl demo.pl`
 
 After modifying source files that have already been loaded,
 enter `make.` to reload all of them.
@@ -288,7 +390,7 @@ processStream(Char, Stream) :-
   get_char(Stream, NextChar),
   processStream(NextChar, Stream).
 
-readFile(File) :- 
+readFile(File) :-
   open(File, read, Stream),
   get_char(Stream, Char),
   processStream(Char, Stream),
@@ -324,9 +426,20 @@ For example:
 
 ```prolog
 format('~w likes ~w.', [mark, 'Prolog']).
+% Outputs "mark likes Prolog."
 ```
 
-The following ? can be used in format strings:
+Rules can write to the current output stream.
+For example:
+
+```prolog
+greet(Name) :- format('Hello, ~w!', [Name]).
+
+greet('Mark')
+% Outputs "Hello, Mark!"
+```
+
+The following special sequences can be used in format strings:
 
 - `~2f`: substitutes a float value and only outputs two decimal places
 - `~n`: newline character
@@ -341,7 +454,7 @@ To write to a file, use the `open`, `write`, and `close` functions.
 For example:
 
 ```prolog
-writeFile(File, Text) :- 
+writeFile(File, Text) :-
   open(File, write, Stream),
   write(Stream, Text), nl,
   close(Stream).
@@ -352,7 +465,7 @@ writeFile('demo.txt', 'first line\nsecond line').
 ## Special Characters
 
 | Characters    | Meaning                     |
-|---------------|-----------------------------|
+| ------------- | --------------------------- |
 | `:-`          | if; used to define rules    |
 | `,`           | logical and                 |
 | `;`           | logical or                  |
@@ -371,11 +484,8 @@ There are also the following special atoms:
 `;`, `!`, `[]`, and `{}`.
 
 Variables are also sequences of letters, numbers, and underscores,
-but they begin with an uppercase letter.
-
-Predicate names are atoms.
-
-An underscore represents an anonymous variable.
+but they begin with an uppercase letter or an underscore.
+An underscore by itself represents an anonymous variable.
 These can be used as arguments to predicates
 when the value of an argument does not matter.
 
@@ -612,73 +722,23 @@ For example:
 ?- append([1, 2, 3], [4, 5], X). % X = [1, 2, 3, 4, 5]
 ```
 
-Lists can be nested.  For example:
+Lists can be nested. For example:
 
 ```prolog
 [a, [b, c], d, e, [f, g, h]]
 ```
 
-TODO: Can you append and insert values in list? 
-TODO: Can you remove values from a list? 
+TODO: Can you append and insert values in list?
+TODO: Can you remove values from a list?
 
 For implementations of map, filter, and reduce, see {% aTargetBlank
 "https://pbrown.me/blog/functional-prolog-map-filter-and-reduce/",
 "Functional Prolog" %}.
 
-## Rules
-
-Rules can write to the current output stream.
-For example:
-
-```prolog
-greet(Name) :- format('Hello, ~w!', [Name]).
-
-greet('Mark')
-Hello, Mark!
-```
-
-Rules do not return values like a function,
-but then can set the values of their arguments.
-
-For example:
-
-```prolog
-area(circle, Radius, X) :- X is pi * Radius^2.
-area(square, Side, X) :- X is Side^2.
-area(rectangle, Width, Height, X) :- X is Width * Height.
-
-?- area(circle, 2, X).
-X = 12.566370614359172.
-```
-
-Each of the `area` rules uses the `is` keyword
-to assign a value to the X argument.
-
-Rules can be recursive.
-See the `sum` example above.
-
-## Conjunctions
-
-The comma operator is used to form rules and queries
-where multiple goals must be met.
-For example:
-
-```prolog
-% This rule says that mark likes females that like cycling.
-likes(mark, x) := female(X), likes(X, cycling).
-
-% This query asks if mark loves tami AND tami loves mark.
-?- loves(mark, tami), loves(tami, mark)`
-
-% This query searches for things that both mark and tami love.
-% X stands for the same value in both goals.
-?- loves(mark, X), loves(tami, X)
-```
-
 ## Listing
 
 To list all the facts and rules known in the current session,
-enter `listing.`.  The output will contain many clauses created by the system in addition to those you loaded.
+enter `listing.`. The output will contain many clauses created by the system in addition to those you loaded.
 
 To list only the facts and rules for a given predicate,
 enter `listing(predicate-name).`
@@ -720,4 +780,3 @@ TODO: Can you run Prolog code inside Neovim?
 ## Libraries
 
 TODO: Is there a popular collection of open source Prolog libraries?
-
