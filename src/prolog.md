@@ -14,7 +14,11 @@ A core feature is search with backtracking.
 
 Prolog first appeared in 1972. It was designed by three computer scientists,
 Alain Colmerauer (France), Phillipe Roussel (France), and
-Robert Kowalski (USA/Britan).
+Robert Kowalski (USA/Britain).
+
+"IBM Watson is a question-answering computer system
+capable of answering questions posed in natural language."
+It is partially implemented in Prolog.
 
 ## Resources
 
@@ -59,6 +63,11 @@ both were being actively maintained as of June 2023.
 > driven by the needs of real world applications.
 > SWI-Prolog is widely used in research and education
 > as well as commercial applications."
+
+> Its main author is Jan Wielemaker.
+> The name SWI is derived from Sociaal-Wetenschappelijke Informatica
+> ("Social Science Informatics"), the former name of the group at
+> the University of Amsterdam, where Wielemaker is employed.
 
 SWI-Prolog is implemented in a combination of C (48%) and Prolog (39%).
 
