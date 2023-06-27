@@ -131,26 +131,30 @@ To exit from any Prolog interpreter, enter `halt.` or press ctrl-d.
 
 ## Terminology
 
-| Term            | Meaning                                                         |
-| --------------- | --------------------------------------------------------------- |
-| term            | the only datatype; has four subtypes listed below               |
-| - number        | integer or floating point                                       |
-| - atom          | identifier that represents a specific thing                     |
-| - variable      | represents a value to be determined                             |
-| - compound term | specific combination of terms; more detail below                |
-| fact            | description of something that is true                           |
-| rule            | relationship involving one or more unknown things (variables)   |
-| predicate       | a fact or rule                                                  |
-| clause          | another name for a predicate                                    |
-| query           | asks if a clause is true or asks for satisfying variable values |
-| database        | collection of predicates                                        |
-| functor name    | name of a predicate                                             |
-| arity           | number of predicate arguments                                   |
-| functor         | function name and its arity; written with a slash between       |
-| unification     | process of searching for values that satisfy a rule             |
+| Term              | Meaning                                                         |
+| ----------------- | --------------------------------------------------------------- |
+| term              | the only datatype; has four subtypes listed below               |
+| - number          | integer or floating point                                       |
+| - atom            | identifier that represents a specific thing                     |
+| - variable        | represents a value to be determined                             |
+| - compound term   | specific combination of terms; more detail below                |
+| fact              | description of something that is true                           |
+| rule              | relationship involving one or more unknown things (variables)   |
+| predicate         | a fact or rule                                                  |
+| clause            | another name for a predicate                                    |
+| query             | asks if a clause is true or asks for satisfying variable values |
+| database          | collection of predicates                                        |
+| functor name      | name of a predicate                                             |
+| arity             | number of predicate arguments                                   |
+| functor           | function name and its arity; written with a slash between       |
+| list notation     | comma-separated terms inside square brackets; ex. `[a, B, 7]`   |
+| operator notation | terms separated by operators; ex. `Y = m\*X + b`                |
+| unification       | process of searching for variable values that satisfy a rule    |
 
-A compound term is a functor followed by an argument list.
-Each argument is an atom, a variable, or a destructuring of variables.
+A compound term is a functor name followed by an argument list.
+Each argument can be an atom, a variable, a destructuring of variables,
+or another compound term.
+Nested compound terms can be represented by a tree structure.
 
 A rule can be thought of as a special kind of fact
 that depends on a set of other facts.
@@ -158,6 +162,8 @@ that depends on a set of other facts.
 Numbers can include underscores for readability.
 For example, `1_234_567` makes it more clear
 that this number is greater than one million.
+
+The functor for `foo(bar, baz)` is written as `foo/2`.
 
 ## Syntax
 
