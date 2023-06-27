@@ -310,6 +310,10 @@ appends two lists to create a new list.
 Here are several examples of how this can be used:
 
 ```prolog
+% Is the result of appending two lists a given result list?
+?- append([1, 2], [3, 4], [1, 2, 3, 4]).
+true.
+
 % What is the result of appending two lists?
 ?- append([1, 2], [3, 4], X).
 X = [1, 2, 3, 4].
