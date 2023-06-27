@@ -294,11 +294,47 @@ The query `likes(mark, X)` will find
 "tacos", "books", and "running" that in that order.
 When a query has multiple matches, as in this example,
 the interpreter will wait for further input.
+
 To search for the next match, press the semicolon key.
-After the last match is found, a prompt for the next query will appear.
+(SWI-Prolog also supports pressing the n, r, space, or tab keys to do this.)
 
 To stop searching for matches before the last one is found,
 press the return key.
+(SWI-Prolog also supports pressing the c or a keys to do this.)
+
+After the last match is found, a prompt for the next query will appear.
+
+Variables can be used for any argument of a predicate.
+For example, the built-in predicate `append`
+appends two lists to create a new list.
+Here are several examples of how this can be used:
+
+```prolog
+% What is the result of appending two lists?
+?- append([1, 2], [3, 4], X).
+X = [1, 2, 3, 4].
+
+% What list must be appended to a given list to obtain a given result?
+?- append([1, 2], X, [1, 2, 3, 4]).
+X = [3, 4].
+
+% What list must be prepended to a given list to obtain a given result?
+?- append(X, [3, 4], [1, 2, 3, 4]).
+X = [1, 2]
+
+% What lists can be appended to obtain a given result?
+?- append(X, Y, [1, 2, 3, 4]).
+X = [],
+Y = [1, 2, 3, 4] ;
+X = [1],
+Y = [2, 3, 4] ;
+X = [1, 2],
+Y = [3, 4] ;
+X = [1, 2, 3],
+Y = [4] ;
+X = [1, 2, 3, 4],
+Y = [] ;
+```
 
 ## Conjunctions
 
