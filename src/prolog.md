@@ -131,27 +131,33 @@ To exit from any Prolog interpreter, enter `halt.` or press ctrl-d.
 
 ## Terminology
 
-| Term            | Meaning                                                |
-| --------------- | ------------------------------------------------------ |
-| term            | the only datatype; has four subtypes listed below      |
-| - number        | integer or floating point                              |
-| - atom          | an identifier that represents a specific thing         |
-| - variable      | represents a value to be determined                    |
-| - compound term | specific combination of terms; more detail below       |
-| fact            | description of something that is true                  |
-| rule            | relationship involving one or more unknown thing       |
-| predicate       | a fact or rule                                         |
-| clause          | another name for a predicate                           |
-| query           | asks if a clause is true or asks for satisfying values |
-| database        | collection of predicates                               |
-| functor         | name of a predicate                                    |
-| unification     | process of searching for values that satisfy a rule    |
+| Term            | Meaning                                                         |
+| --------------- | --------------------------------------------------------------- |
+| term            | the only datatype; has four subtypes listed below               |
+| - number        | integer or floating point                                       |
+| - atom          | identifier that represents a specific thing                     |
+| - variable      | represents a value to be determined                             |
+| - compound term | specific combination of terms; more detail below                |
+| fact            | description of something that is true                           |
+| rule            | relationship involving one or more unknown things (variables)   |
+| predicate       | a fact or rule                                                  |
+| clause          | another name for a predicate                                    |
+| query           | asks if a clause is true or asks for satisfying variable values |
+| database        | collection of predicates                                        |
+| functor name    | name of a predicate                                             |
+| arity           | number of predicate arguments                                   |
+| functor         | function name and its arity; written with a slash between       |
+| unification     | process of searching for values that satisfy a rule             |
 
 A compound term is a functor followed by an argument list.
 Each argument is an atom, a variable, or a destructuring of variables.
 
 A rule can be thought of as a special kind of fact
 that depends on a set of other facts.
+
+Numbers can include underscores for readability.
+For example, `1_234_567` makes it more clear
+that this number is greater than one million.
 
 ## Syntax
 
@@ -564,5 +570,220 @@ For example:
 
 ```prolog
 ?- name(X, [65, 66, 67]).
-X = 'AB
+X = 'ABC'.
 ```
+
+To append two strings, convert them to lists of ASCII codes,
+append those lists, and convert the result back to a string.
+For example:
+
+```prolog
+appendStrings(S1, S2, SR) :-
+  name(S1, L1),
+  name(S2, L2),
+  append(L1, L2, LR),
+  name(SR, LR).
+
+appendStrings('first ', 'second', X).
+X = 'first second'
+```
+
+To get a single character from a string, convert it to a list of ASCII codes,
+and use the `nth0` function.
+For example:
+
+```prolog
+?- name("Mark", L), nth0(2, L, C), put(C). % 114 (ASCII code for 'r')
+```
+
+## Arithmetic Functions
+
+Prolog supports a large number of functions that return a number.
+See {% aTargetBlank "https://www.swi-prolog.org/pldoc/man?section=functions",
+"Arithmetic Functions" %}.
+These include
+
+- `abs`: absolute value
+- bitwise operations such as shift and `xor`
+- `ceiling`: smallest integer that is greater than or equal to a value
+- `e`: value of e (2.71828...)
+- `floor`: largest integer that is less than or equal to a value
+- `exp`: e to a given power
+- `gcd`: greatest common denominator
+- `inf`: positive infinity
+- `lcm`: least common multiple
+- `log`: logarithm base e (natural logarithm)
+- `log10`: logarithm base 10
+- `max`: maximum of two values
+- `min`: minimum of two values
+- `nan`: not a number value
+- `pi`: value of pi (3.14159...)
+- `random`: random integer between zero and an upper bound
+- `random_float`: random float between zero and one (exclusive on both ends)
+- `succ`: successive value; `succ(2, X)` gives `3`; `succ(X, 3)` gives `2`
+- `truncate`: similar to `floor`, but rounds toward zero for negative numbers
+- trigonometry functions
+
+## Conditional Logic
+
+TODO: Add this.
+
+## Iteration
+
+Iteration in Prolog is done with recursion.
+
+To get all the integers starting from one integer and ending at another,
+use the `between` function.
+For example:
+
+```prolog
+% This sets V to 3, 4, 5, 6, and 7.
+?- between(3, 7, V).
+```
+
+## Lists
+
+Lists are sequential collections of values.
+They are created by including a comma-separated list of values
+in square brackets.
+
+To create a new list that results from adding a value
+to the beginning of an existing list, use the pipe operator.
+For example:
+
+```prolog
+?- L is [2, 3], [1 | L].
+
+```
+
+The following rule computes the sum of numbers in a list:
+
+```prolog
+% This is an example of a recursive rule.
+sum(List, Sum) :-
+  % If the list is empty then the sum is zero.
+  List = [] -> Sum = 0;
+  % Otherwise ...
+  List =
+    % Get the first number and a list of the remaining numbers.
+    [Head|Tail],
+    % Compute the sum of the remaining numbers.
+    sum(Tail, TailSum),
+    % The result is the first number plus that sum.
+    % Note the use of the "is" keyword to assign a value to the Sum argument.
+    Sum is TailSum + Head.
+
+?- sum([1, 2, 3], X).
+X = 6.
+```
+
+To get the length of a list, use the `length` rule.
+For example:
+
+```prolog
+?- length([2, 5, 7], L).
+L = 3.
+```
+
+TODO: Show an example where a list is destructured in the argument list using `[H|T]`
+
+Anonymous variables (`_`) can be used to destructure value from a list.
+For example, the following gets the first and third values.
+The `| _` syntax at the end of the list on the left side
+indicates that we do not care about values in the tail of the list
+which includes all values after the third.
+
+```prolog
+?- [V1, _, V3 | _] = [9, 8, 7, 6, 5].
+V1 = 9,
+V3 = 7.
+```
+
+To test whether a value is a member of a list, use the `member` function.
+For example:
+
+```prolog
+TODO: WHY DOESN'T THIS WORK?
+TODO: How can you set a variable and then use it in a subsequest predicate?
+MyList = [3, 7, 9].
+member(7, MyList). % true
+member(4, MyList). % false
+```
+
+The `member` function can also be used to iterate over the values in a list.
+For example, `member(X, [3, 7, 9])` will set `X`
+to each value in the list one at a time.
+
+The `reverse` function creates a new list containing
+all the values in a given list in reverse order.
+For example:
+
+```prolog
+?- reverse([1, 2, 3], X). % X = [3, 2, 1]
+```
+
+The `append` function creates a new list by appending two existing lists.
+For example:
+
+```prolog
+?- append([1, 2, 3], [4, 5], X). % X = [1, 2, 3, 4, 5]
+```
+
+Lists can be nested. For example:
+
+```prolog
+[a, [b, c], d, e, [f, g, h]]
+```
+
+TODO: Can you append and insert values in list?
+TODO: Can you remove values from a list?
+
+For implementations of map, filter, and reduce, see {% aTargetBlank
+"https://pbrown.me/blog/functional-prolog-map-filter-and-reduce/",
+"Functional Prolog" %}.
+
+## Listing
+
+To list all the facts and rules known in the current session,
+enter `listing.`. The output will contain many clauses created by the system in addition to those you loaded.
+
+To list only the facts and rules for a given predicate,
+enter `listing(predicate-name).`
+
+## Debugging
+
+To see all the steps used to evaluate a predicate,
+turn on trace mode by entering `trace.`
+
+Enter a query and press the return key after
+viewing the result of each step in the evaluation.
+
+When finished debugging, enter `notrace.` to turn this mode off.
+
+## Structures
+
+TODO: Add this detail.
+
+## Calling From Other Languages
+
+SWI-Prolog can be called from C. See {% aTargetBlank
+"https://www.swi-prolog.org/pldoc/man?section=calling-prolog-from-c",
+"Calling Prolog from C" %}.
+
+TODO: Which other programming languages can call SWI-Prolog?
+
+## Efficiency
+
+For information about the performance of Prolog, see {% aTargetBlank
+"https://www.metalevel.at/prolog/efficiency", "Efficiency of Prolog" %}.
+
+## Language Server
+
+TODO: How can you install a Prolog language server in Neovim?
+TODO: See https://github.com/jamesnvc/lsp_server.
+
+TODO: Can you run Prolog code inside Neovim?
+
+## Libraries
+
+TODO: Is there a popular collection of open source Prolog libraries?
