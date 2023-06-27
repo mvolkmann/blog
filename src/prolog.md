@@ -169,24 +169,7 @@ The functor for `foo(bar, baz)` is written as `foo/2`.
 ## Syntax
 
 Prolog programs are composed of facts, rules, and queries.
-
-When a query has multiple matches, the system will wait for further input.
-To search for the next match, press the semicolon key.
-After the last match is found, the prompt for another query will appear.
-
-To stop searching for things that are fast, press the return key.
-
-Suppose the following facts are loaded:
-
-```prolog
-likes(mark, tacos).
-likes(mark, books).
-likes(mark, running).
-```
-
-The query `likes(mark, X)` will find
-tacos, books, and running that in that order.
-The query `likes(X, running)` will find mark.
+All of these are terminated by a period.
 
 ### Facts
 
@@ -273,6 +256,8 @@ area(rectangle, Width, Height, X) :- X is Width * Height.
 X = 12.566370614359172.
 ```
 
+TODO: See the version of the area rule that uses clpr in geometry.pl.
+
 Each of the `area` rules uses the `is` keyword
 to assign a value to the X argument.
 
@@ -294,6 +279,26 @@ For example:
 % This is a query that asks for something that is fast.
 ?- fast(X). % comet
 ```
+
+Suppose the following facts are loaded:
+
+```prolog
+likes(mark, tacos).
+likes(mark, books).
+likes(mark, running).
+```
+
+The query `likes(X, running)` will find "mark".
+
+The query `likes(mark, X)` will find
+"tacos", "books", and "running" that in that order.
+When a query has multiple matches, as in this example,
+the interpreter will wait for further input.
+To search for the next match, press the semicolon key.
+After the last match is found, a prompt for the next query will appear.
+
+To stop searching for matches before the last one is found,
+press the return key.
 
 ## Conjunctions
 
