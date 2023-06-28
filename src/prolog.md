@@ -154,6 +154,7 @@ To exit from any Prolog interpreter, enter `halt.` or press ctrl-d.
 | list notation     | comma-separated terms inside square brackets; ex. `[a, B, 7]`   |
 | operator notation | terms separated by operators; ex. `Y = m\*X + b`                |
 | unification       | process of searching for variable values that satisfy a rule    |
+| choice point      | TODO: ADD THIS!                                                 |
 
 A compound term is a functor name followed by an argument list.
 Each argument can be an atom, a variable, a destructuring of variables,
