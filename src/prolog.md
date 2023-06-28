@@ -136,7 +136,7 @@ To exit from any Prolog interpreter, enter `halt.` or press ctrl-d.
 ## Terminology
 
 | Term              | Meaning                                                         |
-| ----------------- | --------------------------------------------------------------- |
+| ----------------- | --------------------------------------------------------------- | --- |
 | term              | the only datatype; has four subtypes listed below               |
 | - number          | integer or floating point                                       |
 | - atom            | identifier that represents a specific thing                     |
@@ -154,7 +154,7 @@ To exit from any Prolog interpreter, enter `halt.` or press ctrl-d.
 | list notation     | comma-separated terms inside square brackets; ex. `[a, B, 7]`   |
 | operator notation | terms separated by operators; ex. `Y = m\*X + b`                |
 | unification       | process of searching for variable values that satisfy a rule    |
-| choice point      | TODO: ADD THIS!                                                 |
+| choice point      | represents a choice in the search for a solution                |     |
 
 A compound term is a functor name followed by an argument list.
 Each argument can be an atom, a variable, a destructuring of variables,
@@ -169,6 +169,10 @@ For example, `1_234_567` makes it more clear
 that this number is greater than one million.
 
 The functor for `foo(bar, baz)` is written as `foo/2`.
+
+For more, see {% aTargetBlank
+"https://www.swi-prolog.org/pldoc/man?section=glossary",
+"Glossary of Terms" %}.
 
 ## Syntax
 
@@ -401,6 +405,50 @@ To enter new facts and rules in a running session:
 - Press ctrl-d to close and load the pseudo file.
 
 It seems this can replace existing facts rather than add to them.
+
+## Data Structures
+
+ISO Prolog supports two data structures, lists and pairs.
+
+SWI-Prolog also supports dicts (a.k.a dictionaries).
+See {% aTargetBlank "https://eu.swi-prolog.org/pldoc/man?section=bidicts",
+"Dicts: structures with named arguments" %}.
+
+### Lists
+
+TODO: Add detail here.
+
+### Pairs
+
+A Prolog "pair" is a key and a value.
+There are two ways to write a pair, `k-v` or `-(k, v)`.
+
+A list of pairs can be sorted using `keysort`.
+For example:
+
+```prolog
+?- keysort([c-cow, b-bear, a-apple], Ps).
+Ps = [a-apple, b-bear, c-cow].
+```
+
+TODO: Add detail here.
+
+The following code implements rules to determine if a queen on a chess board
+can attach another piece.
+
+```prolog
+queen_can_attack((R, _), (R, _)).
+queen_can_attack((_, C), (_, C)).
+queen_can_attack((R1, C1), (R2, C2)) :-
+  abs(R1 - R2) =:= abs(C1 - C2).
+```
+
+See {% aTargetBlank "https://eu.swi-prolog.org/pldoc/man?section=pairs",
+"library(pairs): Operations on key-value lists" %}.
+
+### Dicts
+
+TODO: Add detail here.
 
 ## Dynamic Predicates
 
@@ -893,9 +941,58 @@ This library supports a different, powerful way to write Prolog rules.
 
 For example, the following rule computes the area of various geometry shapes.
 
-```prolog
+````prolog
 
-```
+## Unit Tests
+
+SCI-Prolog includes a unit testing framework called "Test Box".
+See {% aTargetBlank
+"https://www.swi-prolog.org/pldoc/doc_for?object=section(%27packages/plunit.html%27)",
+"Prolog Unit Tests" %}.
+
+Code for unit tests can be placed in the same source file
+as the rules they test.
+Alternatively, they can be placed in a separate file
+with an extension of `.plt`.
+
+The following code demonstrates implementing unit tests
+for the built-in `append` rule.
+
+```prolog
+% The next line is only needed to load predicates from another file.
+% :- consult({file-name}).
+
+:- begin_tests(append).
+
+test(append_assertions) :-
+  append([], [], []),
+  append([a], [], [a]),
+  append([], [a], [a]),
+  append([a, b], [c, d], [a, b, c, d]),
+  !.
+
+test(append_make_first) :-
+  append(X, [c, d], [a, b, c, d]),
+  X == [a, b],
+  !.
+
+test(append_make_second) :-
+  append([a, b], X, [a, b, c, d]),
+  X == [c, d],
+  !.
+
+test(append_make_third) :-
+  append([a, b], [c, d], X),
+  X == [a, b, c, d],
+  !.
+
+:- end_tests(append).
+:- run_tests.
+:- halt.
+````
+
+If the code above is in a file named `append.plt`
+then the tests can be run by entering `swipl append.plt`.
 
 ## Language Server
 
