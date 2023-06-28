@@ -952,14 +952,14 @@ See {% aTargetBlank
 
 Code for unit tests can be placed in the same source file
 as the rules they test.
-Alternatively, they can be placed in a separate file
+Alternatively, test code can be placed in a separate file
 with an extension of `.plt`.
 
 The following code demonstrates implementing unit tests
 for the built-in `append` rule.
 
 ```prolog
-% The next line is only needed to load predicates from another file.
+% This line is only needed to load predicates from another file.
 % :- consult({file-name}).
 
 :- begin_tests(append).
@@ -990,6 +990,9 @@ test(append_make_third) :-
 
 If the code above is in a file named `append.plt`
 then the tests can be run by entering `swipl append.plt`.
+If the last two lines in the code above are omitted,
+use the following instead:
+`swipl -g run_tests -t halt your/file.pl`
 
 The `test` rule takes a test name (atom or string)
 and an optional list of options.
@@ -1006,7 +1009,7 @@ The `assertion` rule prints assertions that fail.
 When this is not used, the output will only provide
 the name of the test that failed.
 
-If a test ends with a choicepoint, a warning message will be output.
+If a test ends with a choice point, a warning message will be output.
 To prevent this, end the test with the cut operator (`, !.`)
 or include the option `nondet`.
 
