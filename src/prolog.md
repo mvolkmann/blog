@@ -311,7 +311,20 @@ After the last match is found, a prompt for the next query will appear.
 Variables can be used for any argument of a predicate.
 For example, the built-in predicate `append`
 appends two lists to create a new list.
-Here are several examples of how this can be used:
+
+If this were not built-in, it could be implemented as follows:
+
+```prolog
+% Appending an empty list to any list gives the second list.
+append([], L, L).
+
+% Appending two lists is the same as appending
+% the head of the first list (H) to the result of appending
+% the tail of the first list (L1) to the second list (L2).
+append([H|L1], L2, [H|L3]) :- append(L1, L2, L3).
+```
+
+Here are several examples of how `append` can be used:
 
 ```prolog
 % Is the result of appending two lists a given result list?
