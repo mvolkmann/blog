@@ -968,23 +968,20 @@ test(append_assertions) :-
   append([], [], []),
   append([a], [], [a]),
   append([], [a], [a]),
-  append([a, b], [c, d], [a, b, c, d]),
-  !.
+  append([a, b], [c, d], [a, b, c, d]).
 
 test(append_make_first) :-
   append(X, [c, d], [a, b, c, d]),
-  X == [a, b],
+  assertion(X == [a, b]),
   !.
 
 test(append_make_second) :-
   append([a, b], X, [a, b, c, d]),
-  X == [c, d],
-  !.
+  assertion(X == [c, d]).
 
 test(append_make_third) :-
   append([a, b], [c, d], X),
-  X == [a, b, c, d],
-  !.
+  assertion(X == [a, b, c, d]).
 
 :- end_tests(append).
 :- run_tests.
@@ -993,6 +990,25 @@ test(append_make_third) :-
 
 If the code above is in a file named `append.plt`
 then the tests can be run by entering `swipl append.plt`.
+
+The `test` rule takes a test name (atom or string)
+and an optional list of options.
+Supported options include:
+
+- `setup`: takes a goal to execute before the test is run
+- `cleanup`: takes a goal to execute after the test is run
+- `forall`: takes a generator and runs the test for each generated value
+- `throws`: takes an error and verifies that the test throws the error
+- `error`: takes an error and verifies that the test throws `error(Error, _Context)`
+- several other options that seem less valuable
+
+The `assertion` rule prints assertions that fail.
+When this is not used, the output will only provide
+the name of the test that failed.
+
+If a test ends with a choicepoint, a warning message will be output.
+To prevent this, end the test with the cut operator (`, !.`)
+or include the option `nondet`.
 
 ## Language Server
 
