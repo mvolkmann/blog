@@ -490,14 +490,26 @@ For example:
 
 ```prolog
 report(P) :-
-  % Note how the dot operator is used to get the value of a dict key.
   format('Hello, ~w ~w!~n', [P.first, P.last]),
-  format('I see you are ~w years old.', P.age).
+  format('I see you are ~w years old~n.', P.age),
+  format('Your zip is ~w.~n', P.address.zip).
 
-?- P = person{first: 'Mark', last: 'Volkmann', age: 62}, report(P).
+?- P = person{
+  first: 'Mark',
+  last: 'Volkmann',
+  age: 62,
+  address: _{
+    street: '123 Some Street',
+    city: 'Somewhere',
+    state: 'MO',
+    zip: 12345
+  }
+},
+report(P).
 % The output is:
 % Hello, Mark Volkmann!
 % I see you are 62 years old.
+% Your zip is 12345.
 ```
 
 ## Dynamic Predicates
