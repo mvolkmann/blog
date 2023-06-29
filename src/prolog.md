@@ -387,6 +387,18 @@ likes(mark, x) := female(X), likes(X, cycling).
 
 ## Typical Flow
 
+To evaluate a query in an interactive session,
+enter a query terminated with a period.
+If the query does not contain any variables
+then `true` or `false` will be output.
+If the query does contain variables,
+the first set of values that satisfy the query will be output.
+To see the next set, press the semicolon key.
+
+To evaluate operators that result in value,
+assign the expression to a variable.
+For example, entering `X = 1 + 2.` will output `X = 3.`
+
 The typical steps to run a Prolog program are:
 
 1. Add facts and rules to a Prolog source file that has an extension of `.pl`
@@ -642,14 +654,22 @@ For example, `a + b` can be written as `+(a, b)`.
 
 Prolog supports the following relational operators:
 
-| Operator | Meaning               |
-| -------- | --------------------- |
-| `=:=`    | equal                 |
-| `=\=`    | not equal             |
-| `<`      | less than             |
-| `>`      | greater than          |
-| `=<`     | less than or equal    |
-| `>=`     | greater than or equal |
+| Operator | Meaning                              |
+| -------- | ------------------------------------ |
+| `==`     | identical                            |
+| `\==`    | not identical                        |
+| `=:=`    | equal value                          |
+| `=\=`    | not equal value                      |
+| `<`      | less than                            |
+| `>`      | greater than                         |
+| `=<`     | less than or equal                   |
+| `>=`     | greater than or equal                |
+| `@<`     | alphabetically less than             |
+| `@=<`    | alphabetically less than or equal    |
+| `@>`     | alphabetically greater than          |
+| `@>=`    | alphabetically greater than or equal |
+| `=@=`    | structurally equivalent              |
+| `\=@=`   | not structurally equivalent          |
 
 The syntax for "equal" and "not equal" is quite odd!
 
@@ -658,22 +678,25 @@ chosen so it doesn't look like an arrow.
 
 Prolog supports the following math operators:
 
-| Operator | Meaning                 |
-| -------- | ----------------------- |
-| `+`      | addition                |
-| `-`      | subtraction             |
-| `*`      | multiplication          |
-| `/`      | floating point division |
-| `//`     | integer division        |
-| `**`     | exponentiation          |
-| `^`      | exponentiation          |
-| `mod`    | modulo                  |
+| Operator | Meaning                       |
+| -------- | ----------------------------- |
+| `+`      | addition                      |
+| `-`      | subtraction                   |
+| `*`      | multiplication                |
+| `/`      | floating point division       |
+| `//`     | integer division              |
+| `div`    | integer division              |
+| `rem`    | remainder of integer division |
+| `rdiv`   | rational number division      |
+| `mod`    | modulo                        |
+| `**`     | exponentiation                |
+| `^`      | exponentiation                |
 
 Prolog supports the following additonal operators:
 
 | Operator | Meaning                                                       |
 | -------- | ------------------------------------------------------------- |
-| `-->`    |                                                               |
+| `-->`    | used in grammar rules for implementing parsers                |
 | `:-`     | appears between the head and body of every rule; read as "if" |
 | `=>`     |                                                               |
 | `?-`     | appears before every query                                    |
@@ -681,38 +704,26 @@ Prolog supports the following additonal operators:
 | `;`      | separates clauses to be or'ed                                 |
 | `,`      | separates clauses to be and'ed                                |
 | `->`     |                                                               |
-| `\*->`   |                                                               |
+| `*->`    | soft cut; rarely used                                         |
 | `:=`     |                                                               |
 | `\+`     | negates the value of the expression that follows              |
-| `=`      | unifies the expressions on the left and right                 |
-| `=..`    |                                                               |
-| `=@=`    |                                                               |
-| `\=@=`   |                                                               |
-| `==`     |                                                               |
-| `@<`     |                                                               |
-| `@=<`    |                                                               |
-| `@>`     |                                                               |
-| `@>=`    |                                                               |
-| `\=`     |                                                               |
-| `\==`    |                                                               |
+| `=`      | tests whether two terms can be unified                        |
+| `\=`     | tests whether two terms cannot be unified                     |
+| `=..`    | gets the functor and arguments of a clause; pronounced "univ" |
 | `as`     |                                                               |
 | `is`     |                                                               |
 | `>:<`    |                                                               |
 | `:<`     |                                                               |
 | `:`      |                                                               |
 | `\\`     |                                                               |
-| `xor`    |                                                               |
+| `xor`    | bitwise exclusive or                                          |
 | `?`      |                                                               |
 | `\_`     |                                                               |
 | `/`      |                                                               |
-| `//`     |                                                               |
-| `div`    |                                                               |
-| `rdiv`   |                                                               |
 | `<<`     | bitwise shift left                                            |
 | `>>`     | bitwise shift right                                           |
-| `mod`    |                                                               |
-| `rem`    |                                                               |
 | `.`      |                                                               |
+| `!`      | cut; prevents further backtracking                            |
 | `$`      |                                                               |
 
 One way to evaluate a mathematical expression is to assign it to a variable.
