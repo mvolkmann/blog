@@ -479,7 +479,26 @@ See {% aTargetBlank "https://eu.swi-prolog.org/pldoc/man?section=pairs",
 
 ### Dicts
 
-TODO: Add detail here.
+A dictionary, or dict for short, is a hash map.
+To create one, specify a tag followed by an open curly brace,
+key/value pairs where there is a colon between each key and value,
+and the pairs are separated by commas, and a closing curly brace.
+The tag optionally begins with a module name and a colon.
+Then it must specific an atom or variable.
+
+For example:
+
+```prolog
+report(P) :-
+  % Note how the dot operator is used to get the value of a dict key.
+  format('Hello, ~w ~w!~n', [P.first, P.last]),
+  format('I see you are ~w years old.', P.age).
+
+?- P = person{first: 'Mark', last: 'Volkmann', age: 62}, report(P).
+% The output is:
+% Hello, Mark Volkmann!
+% I see you are 62 years old.
+```
 
 ## Dynamic Predicates
 
@@ -727,13 +746,14 @@ Prolog supports the following math operators:
 | `**`     | exponentiation                |
 | `^`      | exponentiation                |
 
-Prolog supports the following additonal operators:
+Prolog supports the following additional operators:
+
+TODO: Finish documenting the meaning of some of these operators.
 
 | Operator | Meaning                                                       |
 | -------- | ------------------------------------------------------------- |
 | `-->`    | used in grammar rules for implementing parsers                |
 | `:-`     | appears between the head and body of every rule; read as "if" |
-| `=>`     |                                                               |
 | `?-`     | appears before every query                                    |
 | `\|`     | separates the head and tail of a list in `[H\| T]`            |
 | `;`      | separates clauses to be or'ed                                 |
@@ -745,9 +765,8 @@ Prolog supports the following additonal operators:
 | `=`      | tests whether two terms can be unified                        |
 | `\=`     | tests whether two terms cannot be unified                     |
 | `=..`    | gets the functor and arguments of a clause; pronounced "univ" |
-| `as`     |                                                               |
-| `is`     |                                                               |
-| `>:<`    |                                                               |
+| `is`     | assigns right value to variable on left                       |
+| `>:<`    | partial unification between to dictionaries                   |
 | `:<`     |                                                               |
 | `:`      |                                                               |
 | `\\`     |                                                               |
@@ -760,6 +779,8 @@ Prolog supports the following additonal operators:
 | `.`      |                                                               |
 | `!`      | cut; prevents further backtracking                            |
 | `$`      |                                                               |
+| `as`     |                                                               |
+| `=>`     |                                                               |
 
 One way to evaluate a mathematical expression is to assign it to a variable.
 For example, we can compute the angle in degrees
