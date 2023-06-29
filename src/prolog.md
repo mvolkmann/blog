@@ -150,13 +150,14 @@ To exit from any Prolog interpreter, enter `halt.` or press ctrl-d.
 | - compound term   | specific combination of terms; more detail below                |
 | fact              | description of something that is true                           |
 | rule              | relationship involving one or more unknown things (variables)   |
-| predicate         | a fact or rule                                                  |
-| clause            | another name for a predicate                                    |
+| predicate         | collection of clauses with the same functor                     |
+| clause            | a fact or rule                                                  |
 | query             | asks if a clause is true or asks for satisfying variable values |
 | database          | collection of predicates                                        |
 | functor name      | name of a predicate                                             |
 | arity             | number of predicate arguments                                   |
 | functor           | function name and its arity; written with a slash between       |
+| goal              | a question                                                      |
 | list notation     | comma-separated terms inside square brackets; ex. `[a, B, 7]`   |
 | operator notation | terms separated by operators; ex. `Y = m\*X + b`                |
 | unification       | process of searching for variable values that satisfy a rule    |
@@ -410,6 +411,19 @@ To enter new facts and rules in a running session:
 - Press ctrl-d to close and load the pseudo file.
 
 It seems this can replace existing facts rather than add to them.
+
+## Tree Representation
+
+Every Prolog predicate and query can be represented as a tree
+where parent nodes are functors and arguments are children.
+For example, `a(b, c(d, e), f)` can be represented as the following tree:
+
+- a/3
+  - b
+  - c/2
+    - d
+    - e
+  - f
 
 ## Data Structures
 
