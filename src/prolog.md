@@ -414,7 +414,7 @@ It seems this can replace existing facts rather than add to them.
 
 ## Tree Representation
 
-Every Prolog predicate and query can be represented as a tree
+Every Prolog clause and query can be represented as a tree
 where parent nodes are functors and arguments are children.
 For example, `a(b, c(d, e), f)` can be represented as the following tree:
 
