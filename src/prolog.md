@@ -101,6 +101,10 @@ To run GNU Prolog from a terminal, enter `gprolog`.
 
 ### Scryer Prolog
 
+<img alt="Scryer Prolog logo" style="width: 20%"
+  src="/blog/assets/scryer-prolog-logo.png?v={{pkg.version}}"
+  title="Scryer Prolog logo">
+
 {% aTargetBlank "https://www.scryer.pl", "Scryer Prolog" %}
 "is a free software ISO Prolog system intended to be an
 industrial strength production environment and
