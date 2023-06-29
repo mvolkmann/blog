@@ -8,7 +8,9 @@ layout: topic-layout.njk
 
 Prolog is a logic-based programming language.
 The name is a contraction of "programming in logic".
-It uses a declarative syntax rather than a procedural one.
+
+Prolog uses a declarative syntax rather than a procedural one.
+It is a homoiconic language which means its code can be treated as data.
 
 A core feature of Prolog is pattern matching search with backtracking,
 also referred to as "unification".
@@ -140,7 +142,7 @@ To exit from any Prolog interpreter, enter `halt.` or press ctrl-d.
 ## Terminology
 
 | Term              | Meaning                                                         |
-| ----------------- | --------------------------------------------------------------- | --- |
+| ----------------- | --------------------------------------------------------------- |
 | term              | the only datatype; has four subtypes listed below               |
 | - number          | integer or floating point                                       |
 | - atom            | identifier that represents a specific thing                     |
@@ -158,7 +160,7 @@ To exit from any Prolog interpreter, enter `halt.` or press ctrl-d.
 | list notation     | comma-separated terms inside square brackets; ex. `[a, B, 7]`   |
 | operator notation | terms separated by operators; ex. `Y = m\*X + b`                |
 | unification       | process of searching for variable values that satisfy a rule    |
-| choice point      | represents a choice in the search for a solution                |     |
+| choice point      | represents a choice in the search for a solution                |
 
 A compound term is a functor name followed by an argument list.
 Each argument can be an atom, a variable, a destructuring of variables,
@@ -166,7 +168,7 @@ or another compound term.
 Nested compound terms can be represented by a tree structure.
 
 A rule can be thought of as a special kind of fact
-that depends on a set of other facts.
+that depends on a set of other facts
 
 Numbers can include underscores for readability.
 For example, `1_234_567` makes it more clear
@@ -174,9 +176,8 @@ that this number is greater than one million.
 
 The functor for `foo(bar, baz)` is written as `foo/2`.
 
-For more, see {% aTargetBlank
-"https://www.swi-prolog.org/pldoc/man?section=glossary",
-"Glossary of Terms" %}.
+For more, see <a href="https://swi-prolog.org/pldoc/man?section=glossary"
+target="_blank">Glossary of Terms</a>.
 
 ## Syntax
 
