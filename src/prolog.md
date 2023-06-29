@@ -656,8 +656,6 @@ Prolog supports the following relational operators:
 
 | Operator | Meaning                              |
 | -------- | ------------------------------------ |
-| `==`     | identical                            |
-| `\==`    | not identical                        |
 | `=:=`    | equal value                          |
 | `=\=`    | not equal value                      |
 | `<`      | less than                            |
@@ -668,13 +666,50 @@ Prolog supports the following relational operators:
 | `@=<`    | alphabetically less than or equal    |
 | `@>`     | alphabetically greater than          |
 | `@>=`    | alphabetically greater than or equal |
-| `=@=`    | structurally equivalent              |
-| `\=@=`   | not structurally equivalent          |
+| `==`     | identical terms                      |
+| `\==`    | not identical terms                  |
+| `=@=`    | structurally equivalent terms        |
+| `\=@=`   | not structurally equivalent terms    |
 
-The syntax for "equal" and "not equal" is quite odd!
+The odd syntax for "equal" and "not equal"
+was chosen because `=` is used for unification.
 
 The odd syntax for "less than or equal" was
 chosen so it doesn't look like an arrow.
+
+The following tests demonstrate many of the relational operators:
+
+```prolog
+test(equal) :-
+  X is 1,
+  Y is 1,
+  X =:= Y.
+
+test(not_equal) :-
+  X is 1,
+  Y is 2,
+  X =\= Y.
+
+test(alphabetically) :-
+  'dog' @< 'fox',
+  'fox' @> 'dog',
+  'dog' == 'dog',
+  'dog' @=< 'dog',
+  'dog' @>= 'dog'.
+
+test(identical) :-
+  x(A, B) == x(A, B). % same functor name and argument variables
+
+test(not_identical) :-
+  x(A, B) \== x(C, D). % different argument variables
+
+test(structurally_equivalent) :-
+  x(A, B) =@= x(C, D).
+
+test(not_structurally_equivalent) :-
+  x(A, B) \=@= x(C, D, E), % different arity
+  x(A, B) \=@= y(C, D). % different functor name
+```
 
 Prolog supports the following math operators:
 
