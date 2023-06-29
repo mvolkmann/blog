@@ -634,6 +634,12 @@ when the value of an argument does not matter.
 
 ## Operators
 
+Prolog operators can be prefix, infix, or postfix.
+Each operator has left, right, or no associativity.
+
+Operators can be used in function form.
+For example, `a + b` can be written as `+(a, b)`.
+
 Prolog supports the following relational operators:
 
 | Operator | Meaning               |
@@ -662,6 +668,52 @@ Prolog supports the following math operators:
 | `**`     | exponentiation          |
 | `^`      | exponentiation          |
 | `mod`    | modulo                  |
+
+Prolog supports the following additonal operators:
+
+| Operator | Meaning                                                       |
+| -------- | ------------------------------------------------------------- |
+| `-->`    |                                                               |
+| `:-`     | appears between the head and body of every rule; read as "if" |
+| `=>`     |                                                               |
+| `?-`     | appears before every query                                    |
+| `\|`     | separates the head and tail of a list in `[H\| T]`            |
+| `;`      | separates clauses to be or'ed                                 |
+| `,`      | separates clauses to be and'ed                                |
+| `->`     |                                                               |
+| `\*->`   |                                                               |
+| `:=`     |                                                               |
+| `\+`     | negates the value of the expression that follows              |
+| `=`      | unifies the expressions on the left and right                 |
+| `=..`    |                                                               |
+| `=@=`    |                                                               |
+| `\=@=`   |                                                               |
+| `==`     |                                                               |
+| `@<`     |                                                               |
+| `@=<`    |                                                               |
+| `@>`     |                                                               |
+| `@>=`    |                                                               |
+| `\=`     |                                                               |
+| `\==`    |                                                               |
+| `as`     |                                                               |
+| `is`     |                                                               |
+| `>:<`    |                                                               |
+| `:<`     |                                                               |
+| `:`      |                                                               |
+| `\\`     |                                                               |
+| `xor`    |                                                               |
+| `?`      |                                                               |
+| `\_`     |                                                               |
+| `/`      |                                                               |
+| `//`     |                                                               |
+| `div`    |                                                               |
+| `rdiv`   |                                                               |
+| `<<`     | bitwise shift left                                            |
+| `>>`     | bitwise shift right                                           |
+| `mod`    |                                                               |
+| `rem`    |                                                               |
+| `.`      |                                                               |
+| `$`      |                                                               |
 
 One way to evaluate a mathematical expression is to assign it to a variable.
 For example, we can compute the angle in degrees
