@@ -606,6 +606,13 @@ L = [3, 7, 9], member(7, L). % true
 L = [3, 7, 9], member(4, L). % false
 ```
 
+To test whether a list begins with a given sub-list:
+
+```prolog
+L = [a, b, c, d], prefix([a, b], L).
+% output is true.
+```
+
 The `member` function can also be used to iterate over the values in a list.
 or example, `member(X, [3, 7, 9])` will set `X`
 to each value in the list one at a time.
