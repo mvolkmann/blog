@@ -468,15 +468,39 @@ For example, `.(E, Es)` where `E` is a single element that is the head
 and `Es` is a list of elements in the tail.
 By convention, variable names that end in "s" represent lists.
 
-A string is represented by a list of atoms
-that correspond to the characters in the string.
+If the double_quotes flag is set then
+a double-quoted string (not single-quoted) provides a way to write
+a list of atoms that correspond to the characters in the string.
+For example:
+
+```prolog
+?- set_prolog_flag(double_quotes, chars).
+L = "abc".
+% L = [a, b, c].
+```
 
 The following are all equivalent ways to write the same list:
 
 ```prolog
 [red, green, blue] % list notation
-[red | [green | [blue | []]]]
 .(red, .(green, .(blue, []))) % functional notation
+[red | [green | [blue]]] % head-tail separator notation
+% specifying a tail of [] for [blue] is optional.
+```
+
+Lists can be nested.
+For example:
+
+```prolog
+[a, [b, c], d, [e, [f, g]]]
+```
+
+A "partial list" is a term that could become a list.
+For example:
+
+```prolog
+[a | T] % will be a list if T is a list
+[A, B, C | T] % will be a list of at least three elements if T is a list
 ```
 
 The `|` operator can be used to get the head and tail of a list.
