@@ -148,6 +148,7 @@ To exit from any Prolog interpreter, enter `halt.` or press ctrl-d.
 | - atom            | identifier that represents a specific thing                     |
 | - variable        | represents a value to be determined                             |
 | - compound term   | specific combination of terms; more detail below                |
+| structure         | another name for a compound term                                |
 | fact              | description of something that is true                           |
 | rule              | relationship involving one or more unknown things (variables)   |
 | predicate         | collection of clauses with the same functor                     |
@@ -385,55 +386,6 @@ likes(mark, x) := female(X), likes(X, cycling).
 ?- loves(mark, X), loves(tami, X)
 ```
 
-### Structures
-
-Structures (a.k.a. compound terms) are a bit like
-structs in some other programming languages.
-They group related values.
-
-For example, `dog(whippet, comet)` is a structure
-that describes a dog whose breed is "whippet" and whose name is "comet".
-In this example, whippet and comet are the components of the structured.
-Developers determine the meaning and order of the components.
-
-The syntax for a structure is the same as the syntax for a fact.
-
-Structures can be used in facts and rules.
-Components of structures can be atoms or variables.
-For example:
-
-```prolog
-owns(tami, pet(dog, comet)).
-owns(amanda, pet(dog, maisey)).
-owns(amanda, pet(dog, oscar)).
-owns(jeremy, pet(dog, ramsay)).
-
-main :-
-  owns(tami, A),
-  format('pet = ~w~n', A), % pet(dog,comet)
-
-  owns(tami, pet(dog, B)),
-  format('name = ~w~n', B), % comet
-
-  owns(tami, pet(C, D)),
-  format('kind = ~w, name = ~w~n', [C, D]). % dog and comet
-
-:- main.
-```
-
-Structures can be nested.
-For example:
-
-```prolog
-person(mark, address('123 Some Street', 'Somewhere', 'MO', 12345)).
-
-main :-
-  person(mark, address(S, _, _, _)),
-  format('street = ~w~n', S). % 123 Some Street
-
-:- main.
-```
-
 ## Typical Flow
 
 To evaluate a query in an interactive session,
@@ -488,11 +440,61 @@ For example, `a(b, c(d, e), f)` can be represented as the following tree:
 
 ## Data Structures
 
-ISO Prolog supports two data structures, lists and pairs.
+ISO Prolog supports three data structures, structures, lists, and pairs.
+Some Prolog implementations, such as SWI-Prolog, also support dicts.
 
 SWI-Prolog also supports dicts (a.k.a dictionaries).
 See {% aTargetBlank "https://eu.swi-prolog.org/pldoc/man?section=bidicts",
 "Dicts: structures with named arguments" %}.
+
+### Structures
+
+Structures (a.k.a. compound terms) are a bit like
+structs in some other programming languages.
+They group related values.
+
+For example, `dog(whippet, comet)` is a structure
+that describes a dog whose breed is "whippet" and whose name is "comet".
+In this example, whippet and comet are the components of the structured.
+Developers determine the meaning and order of the components.
+
+The syntax for a structure is the same as the syntax for a fact.
+
+Structures can be used in facts and rules.
+Components of structures can be atoms or variables.
+For example:
+
+```prolog
+owns(tami, pet(dog, comet)).
+owns(amanda, pet(dog, maisey)).
+owns(amanda, pet(dog, oscar)).
+owns(jeremy, pet(dog, ramsay)).
+
+main :-
+  owns(tami, A),
+  format('pet = ~w~n', A), % pet(dog,comet)
+
+  owns(tami, pet(dog, B)),
+  format('name = ~w~n', B), % comet
+
+  owns(tami, pet(C, D)),
+  format('kind = ~w, name = ~w~n', [C, D]). % dog and comet
+
+:- main.
+```
+
+Structures can be nested.
+For example:
+
+```prolog
+person(mark, address('123 Some Street', 'Somewhere', 'MO', 12345)).
+
+main :-
+  person(mark, address(S, _, _, _)),
+  format('street = ~w~n', S). % 123 Some Street
+
+:- main.
+```
 
 ### Lists
 
