@@ -539,14 +539,6 @@ sum(List, Sum) :-
 % output is X = 6.
 ```
 
-To get the length of a list, use the `length` rule.
-For example:
-
-```prolog
-?- length([2, 5, 7], L).
-L = 3.
-```
-
 Anonymous variables (`_`) can be used to destructure values from a list.
 For example, the following gets the first and third values.
 The `| _` syntax at the end of the list on the left side
@@ -597,6 +589,14 @@ For example:
 ?- reverse([1, 2, 3], X). % X = [3, 2, 1]
 ```
 
+To get the length of a list, use the `length` rule.
+For example:
+
+```prolog
+?- length([2, 5, 7], L).
+L = 3.
+```
+
 To test whether a value is a member of a list, use the `member` function.
 For example:
 
@@ -609,18 +609,46 @@ L = [3, 7, 9], member(4, L). % false
 To test whether a list begins with a given sub-list:
 
 ```prolog
+TODO: Why doesn't this work?
 L = [a, b, c, d], prefix([a, b], L).
 % output is true.
+```
+
+To get the first element of a list:
+
+```prolog
+TODO: Why doesn't this work?
+L = [a, b, c, d], prefix(L, E).
+% output is E = a.
+```
+
+To test whether a list ends with a given sub-list:
+
+```prolog
+TODO: Why doesn't this work?
+L = [a, b, c, d], last(L, d).
+% output is true.
+```
+
+To get the last element of a list:
+
+```prolog
+TODO: Why doesn't this work?
+L = [a, b, c, d], last(L, E).
+% output is E = d.
 ```
 
 The `member` function can also be used to iterate over the values in a list.
 or example, `member(X, [3, 7, 9])` will set `X`
 to each value in the list one at a time.
 
-To get the list element at a given zero-based index:
+To get the list element at a given index:
 
 ```prolog
-L = [a, b, c], nth0(1, L, E).
+L = [a, b, c], nth0(1, L, E). % zero-based index
+% output is E = b.
+
+L = [a, b, c], nth1(2, L, E). % one-based index
 % output is E = b.
 ```
 
@@ -650,10 +678,32 @@ L1 = [a, b, c], nth0(2, L2, x, L1).
 ```
 
 To create a new list that results from
-removing every occurrence of a given value:
+removing only the first occurrence of a given value:
 
 ```prolog
-delete([a, b, c, b], b, L).
+selectchk(b, [a, b, c, b], L).
+% output is L = [a, c, b].
+```
+
+The `select/3` predicate is similar to `selectchk/3`,
+but it iterates through every possible removal.
+
+To create a new list that results from
+replacing only the first occurrence of a given value:
+
+```prolog
+selectchk(b, [a, b, c, b], x, L).
+% output is L = [a, x, c, b].
+```
+
+The `select/4` predicate is similar to `selectchk/4`,
+but it iterates through every possible replacement.
+
+To create a new list that results from
+removing every occurrence of given values:
+
+```prolog
+subtract([a, b, c, b], [b], L). % could remove more than just b elements
 % output is L = [a, c].
 ```
 
