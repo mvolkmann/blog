@@ -503,11 +503,10 @@ The following are all equivalent ways to write the same list:
 % Specifying a tail of [] for [blue] is optional.
 ```
 
-Lists can be nested.
-For example:
+Lists can be nested. For example:
 
 ```prolog
-[a, [b, c], d, [e, [f, g]]]
+[a, [b, c], d, [e, [f, g, h]]]
 ```
 
 A "partial list" is a term that could become a list.
@@ -560,69 +559,6 @@ V1 = 9,
 V3 = 7.
 ```
 
-To test whether a value is a member of a list, use the `member` function.
-For example:
-
-```prolog
-TODO: WHY DOESN'T THIS WORK?
-L = [3, 7, 9], member(7, L). % true
-L = [3, 7, 9], member(4, L). % false
-```
-
-The `member` function can also be used to iterate over the values in a list.
-or example, `member(X, [3, 7, 9])` will set `X`
-to each value in the list one at a time.
-
-The `reverse` function creates a new list containing
-all the values in a given list in reverse order.
-For example:
-
-```prolog
-?- reverse([1, 2, 3], X). % X = [3, 2, 1]
-```
-
-The `append` function creates a new list by appending two existing lists.
-For example:
-
-```prolog
-?- append([1, 2, 3], [4, 5], X).
-% output is X = [1, 2, 3, 4, 5]
-```
-
-Lists can be nested. For example:
-
-```prolog
-[a, [b, c], d, e, [f, g, h]]
-```
-
-To create a new list that results from adding a value
-to the beginning of an existing list, use the pipe operator.
-For example:
-
-```prolog
-L1 = [b, c, d], L2 = [a | L1].
-```
-
-To create a new list that results from adding a value
-to the end of an existing list, use the pipe operator.
-For example:
-
-```prolog
-L1 = [a, b, c], append(L1, [d], L2).
-% L2 = [a, b, c, d].
-```
-
-To create a new list that results from inserting a value
-after a given position in an existing list ... TODO.
-
-To create a new list that results from
-removing every occurrence of a given value:
-
-```prolog
-delete([a, b, c, b], b, L).
-% output is L = [a, c].
-```
-
 The `|` operator can be used to get the head and tail of a list.
 For example:
 
@@ -653,9 +589,85 @@ print_elements([H|T]) :=
 % blue
 ```
 
-The built-in predicate `append` appends two lists to create a new list.
+The `reverse` function creates a new list containing
+all the values in a given list in reverse order.
+For example:
 
-If this were not built-in, it could be implemented as follows:
+```prolog
+?- reverse([1, 2, 3], X). % X = [3, 2, 1]
+```
+
+To test whether a value is a member of a list, use the `member` function.
+For example:
+
+```prolog
+TODO: WHY DOESN'T THIS WORK?
+L = [3, 7, 9], member(7, L). % true
+L = [3, 7, 9], member(4, L). % false
+```
+
+The `member` function can also be used to iterate over the values in a list.
+or example, `member(X, [3, 7, 9])` will set `X`
+to each value in the list one at a time.
+
+To get the list element at a given zero-based index:
+
+```prolog
+L = [a, b, c], nth0(1, L, E).
+% output is E = b.
+```
+
+To create a new list that results from adding a value
+to the beginning of an existing list:
+
+```prolog
+L1 = [b, c, d], L2 = [a | L1].
+% output is L2 = [a, b, c, d].
+```
+
+To create a new list that results from adding a value
+to the end of an existing list:
+
+```prolog
+L1 = [a, b, c], append(L1, [d], L2).
+% output is L2 = [a, b, c, d].
+```
+
+To create a new list that results from inserting a value
+at a given zero-based index in an existing list:
+
+```prolog
+% Inserts x after 2nd element.
+L1 = [a, b, c], nth0(2, L2, x, L1).
+% output is L2 = [a, b, x, c].
+```
+
+To create a new list that results from
+removing every occurrence of a given value:
+
+```prolog
+delete([a, b, c, b], b, L).
+% output is L = [a, c].
+```
+
+The built-in predicate `append` can
+create a new list by appending two existing lists.
+For example:
+
+```prolog
+?- append([1, 2, 3], [4, 5], X).
+% output is X = [1, 2, 3, 4, 5]
+```
+
+The `append` predicate can also create a new list by appending multiple lists.
+For example:
+
+```prolog
+L1 = [a, b], L2 = [c, d, e], L3 = [f], append([L1, L2, L3], L4).
+% Output is L4 = [a, b, c, d, e, f].
+```
+
+If `append` were not built-in, it could be implemented as follows:
 
 ```prolog
 % Appending an empty list to any list gives the second list.
