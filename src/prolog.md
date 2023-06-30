@@ -367,7 +367,7 @@ X = [1, 2, 3, 4],
 Y = [] ;
 ```
 
-## Conjunctions
+### Conjunctions
 
 The comma operator is used to form rules and queries
 where multiple goals must be met.
@@ -383,6 +383,42 @@ likes(mark, x) := female(X), likes(X, cycling).
 % This query searches for things that both mark and tami love.
 % X stands for the same value in both goals.
 ?- loves(mark, X), loves(tami, X)
+```
+
+### Structures
+
+Structures (a.k.a. compound terms) are a bit like
+structs in some other programming languages.
+They group related values.
+
+For example, `dog(whippet, comet)` is a structure
+that describes a dog whose breed is "whippet" and whose name is "comet".
+In this example, whippet and comet are the components of the structured.
+Developers determine the meaning and order of the components.
+
+The syntax for a structure is the same as the syntax for a fact.
+
+Structures can be used in facts and rules.
+Components of structures can be atoms or variables.
+For example:
+
+```prolog
+owns(tami, pet(dog, comet)).
+owns(amanda, pet(dog, maisey)).
+owns(amanda, pet(dog, oscar)).
+owns(jeremy, pet(dog, ramsay)).
+
+main :-
+  owns(tami, A),
+  format('pet = ~w~n', A), % pet(dog,comet)
+
+  owns(tami, pet(dog, B)),
+  format('name = ~w~n', B), % comet
+
+  owns(tami, pet(C, D)),
+  format('kind = ~w, name = ~w~n', [C, D]). % dog and comet
+
+:- main.
 ```
 
 ## Typical Flow
@@ -486,6 +522,8 @@ and the pairs are separated by commas, and a closing curly brace.
 The tag optionally begins with a module name and a colon.
 Then it must specific an atom or variable.
 
+Values in dicts can be other dicts.
+
 For example:
 
 ```prolog
@@ -511,6 +549,8 @@ report(P).
 % I see you are 62 years old.
 % Your zip is 12345.
 ```
+
+TODO: Add more detail on working with dicts.
 
 ## Dynamic Predicates
 
@@ -806,6 +846,23 @@ Angle = 29.999999999999996.
 
 After evaluating this, the variable `Angle` is no longer defined.
 
+### Custom Operators
+
+Custom operators can be defined.
+There are two required parts, characteristics and implementation.
+
+For example:
+
+```prolog
+% Priority is a number between 0 and 1200 where 0 is the highest.
+% Type is prefix, infix, or postfix.
+% Name is the characters to be used.
+:- op( 0, fx, [ dbl ]).
+dbl(N) :- N * 2.
+```
+
+TODO: The above does not work! Find out why.
+
 ## Strings
 
 Literal strings can be delimited with single or double quotes.
@@ -1049,8 +1106,9 @@ enter `apropos(word).`. For example, `apropos(pair).` outputs the following:
 To list all the facts and rules known in the current session,
 enter `listing.`. The output will contain many clauses created by the system in addition to those you loaded.
 
-To list only the facts and rules for a given predicate,
+To list only the clauses (facts and rules) for a given predicate,
 enter `listing(predicate-name).`
+This will list all matching clauses regardless of arity.
 
 ## Debugging
 
