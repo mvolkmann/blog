@@ -421,6 +421,19 @@ main :-
 :- main.
 ```
 
+Structures can be nested.
+For example:
+
+```prolog
+person(mark, address('123 Some Street', 'Somewhere', 'MO', 12345)).
+
+main :-
+  person(mark, address(S, _, _, _)),
+  format('street = ~w~n', S). % 123 Some Street
+
+:- main.
+```
+
 ## Typical Flow
 
 To evaluate a query in an interactive session,
