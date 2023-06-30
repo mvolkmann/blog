@@ -495,9 +495,12 @@ The following are all equivalent ways to write the same list:
 
 ```prolog
 [red, green, blue] % list notation
+
 .(red, .(green, .(blue, []))) % functional notation
+% In SWI-Prolog, the dots must be replaced by `'[|]'`.
+
 [red | [green | [blue]]] % head-tail separator notation
-% specifying a tail of [] for [blue] is optional.
+% Specifying a tail of [] for [blue] is optional.
 ```
 
 Lists can be nested.
@@ -513,6 +516,111 @@ For example:
 ```prolog
 [a | T] % will be a list if T is a list
 [A, B, C | T] % will be a list of at least three elements if T is a list
+```
+
+The following rule computes the sum of numbers in a list:
+
+```prolog
+% This is an example of a recursive rule.
+sum(List, Sum) :-
+  % If the list is empty then the sum is zero.
+  List = [] -> Sum = 0;
+
+  % Otherwise ...
+  List =
+    % Get the first number and a list of the remaining numbers.
+    [Head|Tail],
+    % Compute the sum of the remaining numbers.
+    sum(Tail, TailSum),
+    % The result is the first number plus that sum.
+    % Note the use of the "is" keyword to assign a value to the Sum argument.
+    Sum is TailSum + Head.
+
+?- sum([1, 2, 3], X).
+% output is X = 6.
+```
+
+To get the length of a list, use the `length` rule.
+For example:
+
+```prolog
+?- length([2, 5, 7], L).
+L = 3.
+```
+
+Anonymous variables (`_`) can be used to destructure values from a list.
+For example, the following gets the first and third values.
+The `| _` syntax at the end of the list on the left side
+indicates that we do not care about values in the tail of the list
+which includes all values after the third.
+
+```prolog
+?- [V1, _, V3 | _] = [9, 8, 7, 6, 5].
+V1 = 9,
+V3 = 7.
+```
+
+To test whether a value is a member of a list, use the `member` function.
+For example:
+
+```prolog
+TODO: WHY DOESN'T THIS WORK?
+L = [3, 7, 9], member(7, L). % true
+L = [3, 7, 9], member(4, L). % false
+```
+
+The `member` function can also be used to iterate over the values in a list.
+or example, `member(X, [3, 7, 9])` will set `X`
+to each value in the list one at a time.
+
+The `reverse` function creates a new list containing
+all the values in a given list in reverse order.
+For example:
+
+```prolog
+?- reverse([1, 2, 3], X). % X = [3, 2, 1]
+```
+
+The `append` function creates a new list by appending two existing lists.
+For example:
+
+```prolog
+?- append([1, 2, 3], [4, 5], X).
+% output is X = [1, 2, 3, 4, 5]
+```
+
+Lists can be nested. For example:
+
+```prolog
+[a, [b, c], d, e, [f, g, h]]
+```
+
+To create a new list that results from adding a value
+to the beginning of an existing list, use the pipe operator.
+For example:
+
+```prolog
+L1 = [b, c, d], L2 = [a | L1].
+```
+
+To create a new list that results from adding a value
+to the end of an existing list, use the pipe operator.
+For example:
+
+```prolog
+L1 = [a, b, c], append(L1, [d], L2).
+% L2 = [a, b, c, d].
+```
+
+To create a new list that results from inserting a value
+after a given position in an existing list ... TODO.
+
+To create a new list that results from
+removing every occurrence of a given value:
+
+```prolog
+delete([a, b, c, b], b, L).
+% output is L = [a, c].
 ```
 
 The `|` operator can be used to get the head and tail of a list.
@@ -591,6 +699,10 @@ Y = [4] ;
 X = [1, 2, 3, 4],
 Y = [] ;
 ```
+
+For implementations of map, filter, and reduce, see {% aTargetBlank
+"https://pbrown.me/blog/functional-prolog-map-filter-and-reduce/",
+"Functional Prolog" %}.
 
 ### Pairs
 
@@ -1071,107 +1183,6 @@ For example:
 % This sets V to 3, 4, 5, 6, and 7.
 ?- between(3, 7, V).
 ```
-
-## Lists
-
-Lists are sequential collections of values.
-They are created by including a comma-separated list of values
-in square brackets.
-
-To create a new list that results from adding a value
-to the beginning of an existing list, use the pipe operator.
-For example:
-
-```prolog
-?- L is [2, 3], [1 | L].
-
-```
-
-The following rule computes the sum of numbers in a list:
-
-```prolog
-% This is an example of a recursive rule.
-sum(List, Sum) :-
-  % If the list is empty then the sum is zero.
-  List = [] -> Sum = 0;
-  % Otherwise ...
-  List =
-    % Get the first number and a list of the remaining numbers.
-    [Head|Tail],
-    % Compute the sum of the remaining numbers.
-    sum(Tail, TailSum),
-    % The result is the first number plus that sum.
-    % Note the use of the "is" keyword to assign a value to the Sum argument.
-    Sum is TailSum + Head.
-
-?- sum([1, 2, 3], X).
-X = 6.
-```
-
-To get the length of a list, use the `length` rule.
-For example:
-
-```prolog
-?- length([2, 5, 7], L).
-L = 3.
-```
-
-TODO: Show an example where a list is destructured in the argument list using `[H|T]`
-
-Anonymous variables (`_`) can be used to destructure value from a list.
-For example, the following gets the first and third values.
-The `| _` syntax at the end of the list on the left side
-indicates that we do not care about values in the tail of the list
-which includes all values after the third.
-
-```prolog
-?- [V1, _, V3 | _] = [9, 8, 7, 6, 5].
-V1 = 9,
-V3 = 7.
-```
-
-To test whether a value is a member of a list, use the `member` function.
-For example:
-
-```prolog
-TODO: WHY DOESN'T THIS WORK?
-TODO: How can you set a variable and then use it in a subsequest predicate?
-MyList = [3, 7, 9].
-member(7, MyList). % true
-member(4, MyList). % false
-```
-
-The `member` function can also be used to iterate over the values in a list.
-For example, `member(X, [3, 7, 9])` will set `X`
-to each value in the list one at a time.
-
-The `reverse` function creates a new list containing
-all the values in a given list in reverse order.
-For example:
-
-```prolog
-?- reverse([1, 2, 3], X). % X = [3, 2, 1]
-```
-
-The `append` function creates a new list by appending two existing lists.
-For example:
-
-```prolog
-?- append([1, 2, 3], [4, 5], X). % X = [1, 2, 3, 4, 5]
-```
-
-Lists can be nested. For example:
-
-```prolog
-[a, [b, c], d, e, [f, g, h]]
-```
-
-TODO: Can you append and insert values in list?
-TODO: Can you remove values from a list?
-
-For implementations of map, filter, and reduce, see {% aTargetBlank
-"https://pbrown.me/blog/functional-prolog-map-filter-and-reduce/",
-"Functional Prolog" %}.
 
 ## Help
 
