@@ -453,6 +453,10 @@ main :-
 
 ### Lists
 
+A list is commonly used to hold a collection of elements when
+there can be any number of elements (even zero), their order matters,
+and all the elements have the same type (ex. all numbers).
+
 A list can be written as a comma-separated set of terms
 surrounded by square brackets.
 For example, `[red, green, blue]` is a list of atoms
