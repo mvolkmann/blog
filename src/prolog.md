@@ -320,53 +320,8 @@ press the return key.
 After the last match is found, a prompt for the next query will appear.
 
 Variables can be used for any argument of a predicate.
-For example, the built-in predicate `append`
-appends two lists to create a new list.
-
-If this were not built-in, it could be implemented as follows:
-
-```prolog
-% Appending an empty list to any list gives the second list.
-append([], L, L).
-
-% Appending two lists is the same as appending
-% the head of the first list (H) to the result of appending
-% the tail of the first list (L1) to the second list (L2).
-append([H|L1], L2, [H|L3]) :- append(L1, L2, L3).
-```
-
-Here are several examples of how `append` can be used:
-
-```prolog
-% Is the result of appending two lists a given result list?
-?- append([1, 2], [3, 4], [1, 2, 3, 4]).
-true.
-
-% What is the result of appending two lists?
-?- append([1, 2], [3, 4], X).
-X = [1, 2, 3, 4].
-
-% What list must be appended to a given list to obtain a given result?
-?- append([1, 2], X, [1, 2, 3, 4]).
-X = [3, 4].
-
-% What list must be prepended to a given list to obtain a given result?
-?- append(X, [3, 4], [1, 2, 3, 4]).
-X = [1, 2]
-
-% What lists can be appended to obtain a given result?
-?- append(X, Y, [1, 2, 3, 4]).
-X = [],
-Y = [1, 2, 3, 4] ;
-X = [1],
-Y = [2, 3, 4] ;
-X = [1, 2],
-Y = [3, 4] ;
-X = [1, 2, 3],
-Y = [4] ;
-X = [1, 2, 3, 4],
-Y = [] ;
-```
+The unification process will find each set of variable values
+that cause the predicate to succeed, one set at a time.
 
 ### Conjunctions
 
@@ -498,7 +453,108 @@ main :-
 
 ### Lists
 
-TODO: Add detail here.
+A list can be written as a comma-separated set of terms
+surrounded by square brackets.
+For example, `[red, green, blue]` is a list of atoms
+and `[R, G, B]` is a list of variables that can be
+unified with any list containing exactly three elements.
+
+An empty list is written as `[]` which is called "nil".
+
+There are also other ways to construct a list.
+The dot function is the list constructor.
+It is passed the head and the tail of the list to be constructed.
+For example, `.(E, Es)` where `E` is a single element that is the head
+and `Es` is a list of elements in the tail.
+By convention, variable names that end in "s" represent lists.
+
+A string is represented by a list of atoms
+that correspond to the characters in the string.
+
+The following are all equivalent ways to write the same list:
+
+```prolog
+[red, green, blue] % list notation
+[red | [green | [blue | []]]]
+.(red, .(green, .(blue, []))) % functional notation
+```
+
+The `|` operator can be used to get the head and tail of a list.
+For example:
+
+```prolog
+print_list_parts(L) :-
+  [H|T] = L,
+  format('head is ~w, tail is ~w', [H, T]).
+
+?- print_list_parts([red, green, blue]).
+% head is red, tail is [green,blue]
+```
+
+The `|` operator can be used in a recursive rule
+to iterate over all elements of a list.
+Destructuring a list into its head and tail can be done in the argument list.
+For example:
+
+```prolog
+print_elements([]).
+
+print_elements([H|T]) :=
+  writeln(H),
+  print_elements(T).
+
+?- print_elements([red, green, blue]).
+% red
+% green
+% blue
+```
+
+The built-in predicate `append` appends two lists to create a new list.
+
+If this were not built-in, it could be implemented as follows:
+
+```prolog
+% Appending an empty list to any list gives the second list.
+append([], L, L).
+
+% Appending two lists is the same as appending
+% the head of the first list (H) to the result of appending
+% the tail of the first list (L1) to the second list (L2).
+append([H|L1], L2, [H|L3]) :- append(L1, L2, L3).
+```
+
+Here are several examples of how `append` can be used:
+
+```prolog
+% Is the result of appending two lists a given result list?
+?- append([1, 2], [3, 4], [1, 2, 3, 4]).
+true.
+
+% What is the result of appending two lists?
+?- append([1, 2], [3, 4], X).
+X = [1, 2, 3, 4].
+
+% What list must be appended to a given list to obtain a given result?
+?- append([1, 2], X, [1, 2, 3, 4]).
+X = [3, 4].
+
+% What list must be prepended to a given list to obtain a given result?
+?- append(X, [3, 4], [1, 2, 3, 4]).
+X = [1, 2]
+
+% What lists can be appended to obtain a given result?
+?- append(X, Y, [1, 2, 3, 4]).
+X = [],
+Y = [1, 2, 3, 4] ;
+X = [1],
+Y = [2, 3, 4] ;
+X = [1, 2],
+Y = [3, 4] ;
+X = [1, 2, 3],
+Y = [4] ;
+X = [1, 2, 3, 4],
+Y = [] ;
+```
 
 ### Pairs
 
