@@ -461,14 +461,22 @@ unified with any list containing exactly three elements.
 
 An empty list is written as `[]` which is called "nil".
 
-There are also other ways to construct a list.
+There are other ways to construct a list.
+
 The dot function is the list constructor.
 It is passed the head and the tail of the list to be constructed.
 For example, `.(E, Es)` where `E` is a single element that is the head
 and `Es` is a list of elements in the tail.
 By convention, variable names that end in "s" represent lists.
 
-If the double_quotes flag is set then
+The head-tail separator `|` creates a list
+if the term that follows it is a list.
+For example, `[a | []]` is a list containing only `a`
+and `[a | [b, c]]` is equivalent to `[a, b, c]`.
+Use of the `|` operator can be nested.
+For example, `[a | [b | [c]]]` is also equivalent to `[a, b, c]`.
+
+If the `double_quotes` flag is set then
 a double-quoted string (not single-quoted) provides a way to write
 a list of atoms that correspond to the characters in the string.
 For example:
