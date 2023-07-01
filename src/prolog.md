@@ -517,7 +517,14 @@ For example:
 [A, B, C | T] % will be a list of at least three elements if T is a list
 ```
 
-The following rule computes the sum of numbers in a list:
+To get the sum of numbers in a list:
+
+```prolog
+L = [1, 2, 3], sum_list(L, Sum).
+% output is Sum = 6.
+```
+
+The `sum` predicate could be implemented as follows:
 
 ```prolog
 % This is an example of a recursive rule.
@@ -742,14 +749,20 @@ L = [dog, dog, cat, dog, dog, dog, rabbit, rabbit], clumped(L, C).
 % output is C = [dog-2, cat-1, dog-3, rabbit-2].
 ```
 
-To get the smallest or largest number in a list:
+To get the smallest or largest value in a list:
 
 ```prolog
-L = [3, 9, 2, 4], min_member(Min, L).
+L = [3, 9, 2, 4], min_list(L, Min).
 % output is Min = 2.
 
-L = [3, 9, 2, 4], max_member(Max, L).
+L = [c, a, d, b], min_member(Min, L).
+% output is Min = a.
+
+L = [3, 9, 2, 4], max_list(L, Max).
 % output is Max = 9.
+
+L = [c, a, d, b], max_member(Max, L).
+% output is Max = d.
 
 younger(P1, P2) :-
   person(_, A1) = P1,
