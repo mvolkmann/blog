@@ -384,7 +384,14 @@ likes(mark, x) := female(X), likes(X, cycling).
 ```
 
 Variables retain their values across query conjunctions,
-but are their values are lost when a query ends.
+but their values are lost when a query ends.
+This is a feature of {% aTargetBlank
+"https://en.wikipedia.org/wiki/Static_single-assignment_form",
+"static single-assignment" %} (SSA) that is used by Prolog.
+In SSA,
+"each variable to be assigned exactly once and defined before it is used."
+and "every definition (Prolog fact, rule, or query) gets its own version."
+
 For example:
 
 ```prolog
