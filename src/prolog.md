@@ -305,7 +305,21 @@ The last goal in a rule can be the built-in predicate `true` to always succeed.
 It can also be `false` or `fail` to always fail.
 
 Rules can be recursive.
-See the `sum` example in the "Lists" section.
+The following rules compute the factorial of an integer:
+
+```prolog
+factorial(0, 1) :- !.
+
+factorial(N, F) :-
+  N1 is N - 1,
+  factorial(N1, F1),
+  F is N * F1.
+
+?- factorial(5, F).
+% Output is F = 120.
+```
+
+Also see the `sum` example in the "Lists" section.
 
 ## Queries
 
