@@ -822,6 +822,26 @@ L1 = [a, b, c], L2 = [c, b, d], union(L1, L2, L3).
 % output is L3 = [a, c, b, d].
 ```
 
+To sort a list:
+
+```prolog
+L = [c, b, d, a], sort(L, S).
+% output is [a, b, c, d].
+
+age_compare(>, person(_, A1), person(_, A2)) :- A1 > A2.
+age_compare(<, person(_, A1), person(_, A2)) :- A1 < A2.
+age_compare(=, person(_, A1), person(_, A2)) :- A1 = A2.
+
+?- P1 = person(ann, 35),
+   P2 = person(bob, 50),
+   P3 = person(carl, 19),
+   People = [P1, P2, P3],
+
+   predsort(age_compare, People, Sorted),
+   writeln(Sorted).
+   % output is [person(carl,19),person(ann,35),person(bob,50)]
+```
+
 For implementations of map, filter, and reduce, see {% aTargetBlank
 "https://pbrown.me/blog/functional-prolog-map-filter-and-reduce/",
 "Functional Prolog" %}.
