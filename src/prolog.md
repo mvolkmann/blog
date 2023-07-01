@@ -402,16 +402,20 @@ X is 6, Y is X * 2, Z is Y / 3.
 
 ## Typical Flow
 
-To evaluate a query in an interactive session,
-enter a query terminated with a period.
+To start a Prolog REPL, enter an implementation command
+such as `swipl` or `gprolog`.
+
+To evaluate a query in the REPL,
+enter the query terminated with a period.
 If the query does not contain any variables
 then `true` or `false` will be output.
 If the query does contain variables,
 the first set of values that satisfy the query will be output.
 To see the next set, press the semicolon key.
+A period will be output after the last set.
 
-To evaluate operators that result in value,
-assign the expression to a variable.
+To evaluate arithmetic operators that result in a numeric value,
+assign the expression to a variable using the `=` operator.
 For example, entering `X = 1 + 2.` will output `X = 3.`
 
 The typical steps to run a Prolog program are:
@@ -423,9 +427,15 @@ The typical steps to run a Prolog program are:
 Unfortunately Prolog and Perl use the same file extension
 for their source files.
 
-To load a `.pl` file, enter `[file-name].` or `consult('file-name').`
-For example, to load the file `demo.pl`, `enter [demo].`
-Alternatively, pass a source file to the interpreter when starting it.
+To load a `.pl` file in the REPL,
+enter `['file-path'].` or `consult('file-path').`
+If the file is in the current directory,
+its name can be used without the `.pl` extension
+and quotes are not needed inside the square brackets.
+For example, to load the file `demo.pl` in the current directory,
+enter `[demo].`
+
+Alternatively, pass a source file to the REPL when starting it.
 For example, `swipl demo.pl`
 
 After modifying source files that have already been loaded,
