@@ -613,8 +613,7 @@ L1 = [a, b, c], L2 = [9, 8, 7], same_length(L1, L2).
 % doesn't output true, but also doesn't fail
 ```
 
-To test whether a value is a member of a list, use the `member` function.
-For example:
+To test whether a value is a member of a list:
 
 ```prolog
 L = [3, 7, 9], member(7, L).
