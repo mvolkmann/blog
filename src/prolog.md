@@ -539,7 +539,8 @@ sum(List, Sum) :-
     % Compute the sum of the remaining numbers.
     sum(Tail, TailSum),
     % The result is the first number plus that sum.
-    % Note the use of the "is" keyword to assign a value to the Sum argument.
+    % Note the use of the "is" keyword to assign the
+    % result of an arithmetic expression to the Sum argument.
     Sum is TailSum + Head.
 
 ?- sum([1, 2, 3], X).
@@ -1248,10 +1249,10 @@ TODO: Finish documenting the meaning of some of these operators.
 | `*->`    | soft cut; rarely used                                         |
 | `:=`     |                                                               |
 | `\+`     | negates the value of the expression that follows              |
-| `=`      | tests whether two terms can be unified                        |
+| `=`      | attempts to unify LHS with RHS                                |
 | `\=`     | tests whether two terms cannot be unified                     |
 | `=..`    | gets the functor and arguments of a clause; pronounced "univ" |
-| `is`     | assigns right value to variable on left                       |
+| `is`     | attempts to unify LHS with RHS arithmetic expression result   |
 | `>:<`    | partial unification between to dictionaries                   |
 | `:<`     |                                                               |
 | `:`      |                                                               |
@@ -1267,6 +1268,10 @@ TODO: Finish documenting the meaning of some of these operators.
 | `$`      |                                                               |
 | `as`     |                                                               |
 | `=>`     |                                                               |
+
+There are two primary differences between `=` and `is`.
+The first is that the RHS of `is` must be an arithmetic expression.
+The second is that `is` evaluates the RHS whereas `=` does not.
 
 One way to evaluate a mathematical expression is to assign it to a variable.
 For example, we can compute the angle in degrees
