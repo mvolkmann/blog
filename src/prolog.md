@@ -842,6 +842,16 @@ age_compare(=, person(_, A1), person(_, A2)) :- A1 = A2.
    % output is [person(carl,19),person(ann,35),person(bob,50)]
 ```
 
+To determine if one list contains a subset of another:
+
+```prolog
+L = [c, d, b, a], subset([b, c], L).
+% doesn't output true, but also doesn't fail
+
+L = [c, d, b, a], subset([b, e], L).
+% outputs false
+```
+
 For implementations of map, filter, and reduce, see {% aTargetBlank
 "https://pbrown.me/blog/functional-prolog-map-filter-and-reduce/",
 "Functional Prolog" %}.
