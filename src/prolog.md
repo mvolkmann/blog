@@ -610,7 +610,7 @@ To determine if two lists have the same length:
 
 ```prolog
 L1 = [a, b, c], L2 = [9, 8, 7], same_length(L1, L2).
-% doesn't output false, but also doesn't fail
+% doesn't output true, but also doesn't fail
 ```
 
 To test whether a value is a member of a list, use the `member` function.
@@ -618,7 +618,7 @@ For example:
 
 ```prolog
 L = [3, 7, 9], member(7, L).
-% doesn't output false, but also doesn't fail
+% doesn't output true, but also doesn't fail
 
 L = [3, 7, 9], member(4, L).
 % output is false
@@ -628,7 +628,7 @@ To test whether a list begins with a given sub-list:
 
 ```prolog
 L = [a, b, c, d], prefix([a, b], L).
-% doesn't output false, but also doesn't fail
+% doesn't output true, but also doesn't fail
 ```
 
 To get the first element of a list:
@@ -642,7 +642,7 @@ To test whether a list ends with a given sub-list:
 
 ```prolog
 L = [a, b, c, d], last(L, d).
-% doesn't output false, but also doesn't fail
+% doesn't output true, but also doesn't fail
 ```
 
 To get the last element of a list:
@@ -790,6 +790,36 @@ To create a list containing a range of sequential integers:
 ```prolog
 numlist(3, 7, L).
 % output is L = [3, 4, 5, 6, 7].
+```
+
+To determine if all the elements in a list are unique:
+
+```prolog
+L = [b, a, c], is_set(L).
+% doesn't output true, but also doesn't fail
+L = [b, a, b], is_set(L).
+% output is false.
+```
+
+To remove duplicate elements from a list:
+
+```prolog
+L = [b, a, a, b, c, d, c], list_to_set(L, S).
+% output is S = [b, a, c, d].
+```
+
+To find the intersection of two lists:
+
+```prolog
+L1 = [a, b, c], L2 = [c, b, d], intersection(L1, L2, L3).
+% output is L3 = [b, c].
+```
+
+To find the union of two lists:
+
+```prolog
+L1 = [a, b, c], L2 = [c, b, d], union(L1, L2, L3).
+% output is L3 = [a, c, b, d].
 ```
 
 For implementations of map, filter, and reduce, see {% aTargetBlank
