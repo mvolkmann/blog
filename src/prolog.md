@@ -1314,15 +1314,20 @@ After evaluating this, the variable `Angle` is no longer defined.
 ### Custom Operators
 
 Custom operators can be defined.
-There are two required parts, characteristics and implementation.
-Characteristics define the precedence, type, and name of the operator.
+There are two required parts, declaration and implementation.
+The `op` predicate declares the precedence, type, and name of an operator.
 
 The precedence is a number between 0 and 1200 where 0 is the highest precedence.
 This is used to determine the order in which operators are evaluated
 in expressions that include multiple operators.
 
-The type defines whether the operator is
-prefix (`fx`), infix (`xfy`), or postfix (`xf`).
+The type defines whether the operator is:
+
+- prefix: `fx` or `fy`
+- infix: `xfx`, `xfy`, or `yfx`
+- postfix: `xf` or `yf`
+
+The name can be any symbol.
 
 For example:
 
@@ -1330,11 +1335,25 @@ For example:
 % Priority is a number between 0 and 1200 where 0 is the highest.
 % Type is prefix, infix, or postfix.
 % Name is the characters to be used.
-:- op( 0, fx, [ dbl ]).
-dbl(N) :- N * 2.
+:- op( 0, fx, dbl).
+dbl(N) :- N is N * 2.
 ```
 
 TODO: The above does not work! Find out why.
+
+The `current_op` predicate queries operators.
+For example:
+
+```prolog
+% Get the priority and type of the "is" operator.
+current_op(P, T, 'is').
+% output is P = 700, T = xfx.
+
+% Get all prefix operators.
+current_op(P, fx, N).
+% output is P = 1, N = ($); and many more
+% All the names are output inside parentheses. Why?
+```
 
 ## Strings
 
@@ -1472,6 +1491,9 @@ enter `apropos(word).`. For example, `apropos(pair).` outputs the following:
 %   ?- apropos(iso:open).
 %   ?- apropos('open file').
 ```
+
+For more detailed help on a specific predicate, enter `help(functor/arity).`
+For example, `help(between/3).`
 
 ## Listing
 
