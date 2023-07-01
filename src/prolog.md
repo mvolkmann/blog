@@ -546,9 +546,10 @@ indicates that we do not care about values in the tail of the list
 which includes all values after the third.
 
 ```prolog
-?- [V1, _, V3 | _] = [9, 8, 7, 6, 5].
-V1 = 9,
-V3 = 7.
+[V1, _, V3 | _] = [9, 8, 7, 6, 5].
+% output is
+% V1 = 9,
+% V3 = 7.
 ```
 
 The `|` operator can be used to get the head and tail of a list.
@@ -560,7 +561,7 @@ print_list_parts(L) :-
   format('head is ~w, tail is ~w', [H, T]).
 
 ?- print_list_parts([red, green, blue]).
-% head is red, tail is [green,blue]
+% output is head is red, tail is [green,blue]
 ```
 
 The `|` operator can be used in a recursive rule
@@ -576,6 +577,7 @@ print_elements([H|T]) :=
   print_elements(T).
 
 ?- print_elements([red, green, blue]).
+% output is
 % red
 % green
 % blue
@@ -590,12 +592,18 @@ For example:
 % output is X = [3, 2, 1].
 ```
 
-To get the length of a list, use the `length` rule.
-For example:
+To get the length of a list:
 
 ```prolog
-?- length([2, 5, 7], L).
-% output is L = 3.
+L = [a, b, c], length(L, X).
+% output is X = 3.
+```
+
+To determine if two lists have the same length:
+
+```prolog
+L1 = [a, b, c], L2 = [9, 8, 7], same_length(L1, L2).
+% doesn't output false, but also doesn't fail
 ```
 
 To test whether a value is a member of a list, use the `member` function.
@@ -706,6 +714,33 @@ subtract([a, b, c, b], [b], L). % could remove more than just b elements
 % output is L = [a, c].
 ```
 
+To get all permutations of a list:
+
+```prolog
+L = [a, b, c], permutation(L, Ps).
+% output is
+% Ps = [1, 2, 3] ;
+% Ps = [1, 3, 2] ;
+% Ps = [2, 1, 3] ;
+% Ps = [2, 3, 1] ;
+% Ps = [3, 1, 2] ;
+% Ps = [3, 2, 1] ;
+false.
+```
+
+To flatten nested lists:
+
+```prolog
+L1 = [[a, b], c, [d, [e, f]]], flatten(L1, L2).
+% output is [a, b, c, d, e, f].
+```
+
+For implementations of map, filter, and reduce, see {% aTargetBlank
+"https://pbrown.me/blog/functional-prolog-map-filter-and-reduce/",
+"Functional Prolog" %}.
+
+#### Appending
+
 The built-in predicate `append` can
 create a new list by appending two existing lists.
 For example:
@@ -767,10 +802,6 @@ Y = [4] ;
 X = [1, 2, 3, 4],
 Y = [] ;
 ```
-
-For implementations of map, filter, and reduce, see {% aTargetBlank
-"https://pbrown.me/blog/functional-prolog-map-filter-and-reduce/",
-"Functional Prolog" %}.
 
 ### Pairs
 
