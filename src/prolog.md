@@ -32,6 +32,14 @@ It is partially implemented in Prolog.
 The Prolog unification process relies on the properties of {% aTargetBlank
 "https://en.wikipedia.org/wiki/Horn_clause", "Horn clauses" %}.
 
+## Learning Curve
+
+The primary concepts in Prolog such as facts, rules, and queries
+are easy to understand after seeing a few basic examples.
+
+However, Prolog supports a large number of operators and built-in predicates
+can take considerable time to learn and master.
+
 ## Resources
 
 - {% aTargetBlank "http://www.gprolog.org", "GNU Prolog" %}
@@ -126,6 +134,15 @@ cargo build --release
 This creates the executable file `target/release/scryer-prolog`.
 Define an alias to make this easier to run.
 
+### Other Implementations
+
+- {% aTargetBlank "https://ciao-lang.org", "Ciao" %}
+  implemented in Prolog (72%) and C (23%)
+- {% aTargetBlank "http://tau-prolog.org", "Tau" %}
+  implemented in JavaScript (95%) and Prolog (5%)
+- {% aTargetBlank "https://github.com/trealla-prolog/trealla", "Trealla" %}
+  implemented in C (82%) and Prolog (18%)
+
 ## Online REPL
 
 To enter and run Prolog code in a web browser, browse
@@ -158,10 +175,10 @@ To exit from any Prolog interpreter, enter `halt.` or press ctrl-d.
 | functor name      | name of a predicate                                             |
 | arity             | number of predicate arguments                                   |
 | functor           | function name and its arity; written with a slash between       |
-| goal              | a question                                                      |
+| goal              | rule body expression to be satisfied                            |
 | list notation     | comma-separated terms inside square brackets; ex. `[a, B, 7]`   |
 | operator notation | terms separated by operators; ex. `Y = m\*X + b`                |
-| unification       | process of searching for variable values that satisfy a rule    |
+| unification       | process of searching for variable values that satisfy a goal    |
 | choice point      | represents a choice in the search for a solution                |
 
 A compound term is a functor name followed by an argument list.
