@@ -244,6 +244,8 @@ but its argument list can contain variables.
 
 The body is a comma (means "and") or semicolon (means "or")
 separated list of goals.
+Typically each goal is written on a separated line and indented,
+but this is not required.
 
 The following rules state that if something is
 a whippet or a cheetah then it is fast.
@@ -1313,6 +1315,14 @@ After evaluating this, the variable `Angle` is no longer defined.
 
 Custom operators can be defined.
 There are two required parts, characteristics and implementation.
+Characteristics define the precedence, type, and name of the operator.
+
+The precedence is a number between 0 and 1200 where 0 is the highest precedence.
+This is used to determine the order in which operators are evaluated
+in expressions that include multiple operators.
+
+The type defines whether the operator is
+prefix (`fx`), infix (`xfy`), or postfix (`xf`).
 
 For example:
 
