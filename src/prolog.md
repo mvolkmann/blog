@@ -785,6 +785,13 @@ younger(P1, P2) :-
    % output is oldest is bob at age 50
 ```
 
+To create a list containing a range of sequential integers:
+
+```prolog
+numlist(3, 7, L).
+% output is L = [3, 4, 5, 6, 7].
+```
+
 For implementations of map, filter, and reduce, see {% aTargetBlank
 "https://pbrown.me/blog/functional-prolog-map-filter-and-reduce/",
 "Functional Prolog" %}.
