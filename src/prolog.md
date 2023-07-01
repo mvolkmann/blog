@@ -1315,27 +1315,27 @@ TODO: Finish documenting the meaning of some of these operators.
 | `\|`     | separates the head and tail of a list in `[H\| T]`            |
 | `;`      | separates clauses to be or'ed                                 |
 | `,`      | separates clauses to be and'ed                                |
-| `->`     |                                                               |
-| `*->`    | soft cut; rarely used                                         |
-| `:=`     |                                                               |
+| `->`     | similar to the ternary operator `?:` in other languages       |
 | `\+`     | negates the value of the expression that follows              |
 | `=`      | attempts to unify LHS with RHS                                |
 | `\=`     | tests whether two terms cannot be unified                     |
 | `=..`    | gets the functor and arguments of a clause; pronounced "univ" |
 | `is`     | attempts to unify LHS with RHS arithmetic expression result   |
 | `>:<`    | partial unification between to dictionaries                   |
+| `<<`     | bitwise shift left                                            |
+| `>>`     | bitwise shift right                                           |
+| `xor`    | bitwise exclusive or                                          |
+| `!`      | cut; prevents further backtracking                            |
+| `$`      | similar to `!` TODO How does it differ?                       |
+| `*->`    | soft cut; rarely used                                         |
+| `:=`     |                                                               |
 | `:<`     |                                                               |
 | `:`      |                                                               |
 | `\\`     |                                                               |
-| `xor`    | bitwise exclusive or                                          |
 | `?`      |                                                               |
 | `\_`     |                                                               |
 | `/`      |                                                               |
-| `<<`     | bitwise shift left                                            |
-| `>>`     | bitwise shift right                                           |
 | `.`      |                                                               |
-| `!`      | cut; prevents further backtracking                            |
-| `$`      | similar to `!` TODO How does it differ?                       |
 | `as`     |                                                               |
 | `=>`     |                                                               |
 
@@ -1489,7 +1489,18 @@ These include
 
 ## Conditional Logic
 
-TODO: Add this.
+Prolog does not have the equivalent of an `if` or `select` statement
+found in many other programming languages.
+But it does have the `->` operator which is somewhat like
+the ternary operator in other programming languages.
+For example:
+
+```prolog
+sign_word(X, Y) :-
+  (X = 0 -> Y = 'zero';
+  (X > 0 -> Y = 'positive';
+  Y = 'negative')).
+```
 
 ## Iteration
 
@@ -1667,8 +1678,4 @@ or include the option `nondet`.
 TODO: How can you install a Prolog language server in Neovim?
 TODO: See https://github.com/jamesnvc/lsp_server.
 
-TODO: Can you run Prolog code inside Neovim?
-
-## Libraries
-
-TODO: Is there a popular collection of open source Prolog libraries?
+TODO: Can you run Prolog code inside
