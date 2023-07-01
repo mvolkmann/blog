@@ -289,6 +289,8 @@ but they can set the values of their arguments.
 For example:
 
 ```prolog
+% The "is" operator evaluates its RHS as an arithmetic expression
+% and assign the result to its LHS.
 area(circle, Radius, X) :- X is pi * Radius^2.
 area(square, Side, X) :- X is Side^2.
 area(rectangle, Width, Height, X) :- X is Width * Height.
@@ -299,11 +301,11 @@ X = 12.566370614359172.
 
 TODO: See the version of the area rule that uses clpr in geometry.pl.
 
-Each of the `area` rules uses the `is` keyword
-to assign a value to the X argument.
+The last goal in a rule can be the built-in predicate `true` to always succeed.
+It can also be `false` or `fail` to always fail.
 
 Rules can be recursive.
-See the `sum` example above.
+See the `sum` example in the "Lists" section.
 
 ## Queries
 
@@ -1261,7 +1263,7 @@ test(not_structurally_equivalent) :-
   x(A, B) \=@= y(C, D). % different functor name
 ```
 
-Prolog supports the following math operators:
+Prolog supports the following arithmetic operators:
 
 | Operator | Meaning                       |
 | -------- | ----------------------------- |
