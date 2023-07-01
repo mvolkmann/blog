@@ -383,6 +383,16 @@ likes(mark, x) := female(X), likes(X, cycling).
 ?- loves(mark, X), loves(tami, X)
 ```
 
+Variables retain their values across query conjunctions,
+but are their values are lost when a query ends.
+For example:
+
+```prolog
+X is 6, Y is X * 2, Z is Y / 3.
+% Output is X = 6, Y = 12, Z = 4.
+% Subsequent queries cannot access these values.
+```
+
 ## Typical Flow
 
 To evaluate a query in an interactive session,
@@ -1367,10 +1377,8 @@ The name can be any symbol.
 For example:
 
 ```prolog
-% Priority is a number between 0 and 1200 where 0 is the highest.
-% Type is prefix, infix, or postfix.
-% Name is the characters to be used.
-:- op( 0, fx, dbl).
+:- op(10, fx, dbl).
+% TODO: Is it possible to define an operator that returns a value?
 dbl(N) :- N is N * 2.
 ```
 
