@@ -735,6 +735,43 @@ L1 = [[a, b], c, [d, [e, f]]], flatten(L1, L2).
 % output is [a, b, c, d, e, f].
 ```
 
+To perform run length encoding:
+
+```prolog
+L = [dog, dog, cat, dog, dog, dog, rabbit, rabbit], clumped(L, C).
+% output is C = [dog-2, cat-1, dog-3, rabbit-2].
+```
+
+To get the smallest or largest number in a list:
+
+```prolog
+L = [3, 9, 2, 4], min_member(Min, L).
+% output is Min = 2.
+
+L = [3, 9, 2, 4], max_member(Max, L).
+% output is Max = 9.
+
+younger(P1, P2) :-
+  person(_, A1) = P1,
+  person(_, A2) = P2,
+  A1 < A2.
+
+?- P1 = person(ann, 35),
+   P2 = person(bob, 50),
+   P3 = person(carl, 19),
+   People = [P1, P2, P3],
+
+   min_member(younger, Py, People),
+   person(N1, A1) = Py,
+   format("youngest is ~w at age ~w~n", [N1, A1]),
+   % output is youngest is carl at age 19
+
+   max_member(younger, Po, People),
+   person(N2, A2) = Po,
+   format("oldest is ~w at age ~w~n", [N2, A2]).
+   % output is oldest is bob at age 50
+```
+
 For implementations of map, filter, and reduce, see {% aTargetBlank
 "https://pbrown.me/blog/functional-prolog-map-filter-and-reduce/",
 "Functional Prolog" %}.
