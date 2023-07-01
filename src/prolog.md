@@ -1184,24 +1184,34 @@ Each operator has left, right, or no associativity.
 Operators can be used in function form.
 For example, `a + b` can be written as `+(a, b)`.
 
-Prolog supports the following relational operators:
+Prolog supports the following relational operators
+for numbers and arithmetic expressions.
+When the left and/or right side is an expression (ex. `X * 2`)
+it is evaluated before the comparison is performed.
 
-| Operator | Meaning                              |
-| -------- | ------------------------------------ |
-| `=:=`    | equal value                          |
-| `=\=`    | not equal value                      |
-| `<`      | less than                            |
-| `>`      | greater than                         |
-| `=<`     | less than or equal                   |
-| `>=`     | greater than or equal                |
-| `@<`     | alphabetically less than             |
-| `@=<`    | alphabetically less than or equal    |
-| `@>`     | alphabetically greater than          |
-| `@>=`    | alphabetically greater than or equal |
-| `==`     | identical terms                      |
-| `\==`    | not identical terms                  |
-| `=@=`    | structurally equivalent terms        |
-| `\=@=`   | not structurally equivalent terms    |
+| Operator | Meaning               |
+| -------- | --------------------- |
+| `=:=`    | equal value           |
+| `=\=`    | not equal value       |
+| `<`      | less than             |
+| `>`      | greater than          |
+| `=<`     | less than or equal    |
+| `>=`     | greater than or equal |
+
+Prolog supports the following relational operators for strings:
+
+| `@<` | alphabetically less than |
+| `@=<` | alphabetically less than or equal |
+| `@>` | alphabetically greater than |
+| `@>=` | alphabetically greater than or equal |
+
+Prolog supports the following relational operators
+for single and compound terms:
+
+| `==` | identical terms |
+| `\==` | not identical terms |
+| `=@=` | structurally equivalent terms |
+| `\=@=` | not structurally equivalent terms |
 
 The odd syntax for "equal" and "not equal"
 was chosen because `=` is used for unification.
@@ -1317,7 +1327,8 @@ Custom operators can be defined.
 There are two required parts, declaration and implementation.
 The `op` predicate declares the precedence, type, and name of an operator.
 
-The precedence is a number between 0 and 1200 where 0 is the highest precedence.
+The precedence is a number between 0 and 1200
+where 0 removes the declaration and 1 is the highest precedence.
 This is used to determine the order in which operators are evaluated
 in expressions that include multiple operators.
 
@@ -1340,6 +1351,10 @@ dbl(N) :- N is N * 2.
 ```
 
 TODO: The above does not work! Find out why.
+
+Existing operators, except the comma operator, can be redefined.
+The `|` operator can only be redefined as an infix operator
+whose precedence is at least 1001.
 
 The `current_op` predicate queries operators.
 For example:
