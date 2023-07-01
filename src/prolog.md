@@ -436,7 +436,8 @@ They group related values.
 
 For example, `dog(whippet, comet)` is a structure
 that describes a dog whose breed is "whippet" and whose name is "comet".
-In this example, whippet and comet are the components of the structured.
+In this example, one could think of `dog` as the type,
+and whippet and comet are the components of the structure.
 Developers determine the meaning and order of the components.
 
 The syntax for a structure is the same as the syntax for a fact.
@@ -1200,18 +1201,25 @@ it is evaluated before the comparison is performed.
 
 Prolog supports the following relational operators for strings:
 
-| `@<` | alphabetically less than |
-| `@=<` | alphabetically less than or equal |
-| `@>` | alphabetically greater than |
-| `@>=` | alphabetically greater than or equal |
+| Operator | Meaning                              |
+| -------- | ------------------------------------ |
+| `@<`     | alphabetically less than             |
+| `@=<`    | alphabetically less than or equal    |
+| `@>`     | alphabetically greater than          |
+| `@>=`    | alphabetically greater than or equal |
 
 Prolog supports the following relational operators
 for single and compound terms:
 
-| `==` | identical terms |
-| `\==` | not identical terms |
-| `=@=` | structurally equivalent terms |
-| `\=@=` | not structurally equivalent terms |
+| Operator | Meaning                           |
+| -------- | --------------------------------- |
+| `==`     | identical terms                   |
+| `\==`    | not identical terms               |
+| `=@=`    | structurally equivalent terms     |
+| `\=@=`   | not structurally equivalent terms |
+
+The `dif/2` predicate is an alternative to the `\==` operator.
+For example, `dif(a, b)` is the same as `a \== b`.
 
 The odd syntax for "equal" and "not equal"
 was chosen because `=` is used for unification.
@@ -1301,7 +1309,7 @@ TODO: Finish documenting the meaning of some of these operators.
 | `>>`     | bitwise shift right                                           |
 | `.`      |                                                               |
 | `!`      | cut; prevents further backtracking                            |
-| `$`      |                                                               |
+| `$`      | similar to `!` TODO How does it differ?                       |
 | `as`     |                                                               |
 | `=>`     |                                                               |
 
