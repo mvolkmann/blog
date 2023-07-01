@@ -10,7 +10,7 @@ Prolog is a logic-based programming language.
 The name is a contraction of "programming in logic".
 
 Prolog uses a declarative syntax rather than a procedural one.
-It is a homoiconic language which means its code can be treated as data.
+It is a homoiconic language, which means its code can be treated as data.
 
 A core feature of Prolog is pattern matching search with backtracking,
 also referred to as "unification".
@@ -42,6 +42,9 @@ can take considerable time to learn and master.
 
 ## Resources
 
+- {% aTargetBlank "https://www.covingtoninnovations.com/mc/plcoding.pdf",
+  "Coding guidelines for Prolog" %}
+
 - {% aTargetBlank "http://www.gprolog.org", "GNU Prolog" %}
 
 - {% aTargetBlank "https://www.iso.org/standard/21413.html",
@@ -71,6 +74,10 @@ Another option is {% aTargetBlank "http://www.gprolog.org", "GNU Prolog" %}.
 
 Both SWI-Prolog and GNU Prolog conform to the ISO standard and
 both were being actively maintained as of June 2023.
+
+Several Prolog implementations compile source code to
+abstract machine code for the Warren Abstract Machine (WAM).
+Searches in WAM use an efficient hash-based approach.
 
 ### SWI-Prolog
 
