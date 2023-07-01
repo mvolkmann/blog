@@ -586,7 +586,8 @@ all the values in a given list in reverse order.
 For example:
 
 ```prolog
-?- reverse([1, 2, 3], X). % X = [3, 2, 1]
+?- reverse([1, 2, 3], X).
+% output is X = [3, 2, 1].
 ```
 
 To get the length of a list, use the `length` rule.
@@ -594,46 +595,44 @@ For example:
 
 ```prolog
 ?- length([2, 5, 7], L).
-L = 3.
+% output is L = 3.
 ```
 
 To test whether a value is a member of a list, use the `member` function.
 For example:
 
 ```prolog
-TODO: WHY DOESN'T THIS WORK?
-L = [3, 7, 9], member(7, L). % true
-L = [3, 7, 9], member(4, L). % false
+L = [3, 7, 9], member(7, L).
+% doesn't output false, but also doesn't fail
+
+L = [3, 7, 9], member(4, L).
+% output is false
 ```
 
 To test whether a list begins with a given sub-list:
 
 ```prolog
-TODO: Why doesn't this work?
 L = [a, b, c, d], prefix([a, b], L).
-% output is true.
+% doesn't output false, but also doesn't fail
 ```
 
 To get the first element of a list:
 
 ```prolog
-TODO: Why doesn't this work?
-L = [a, b, c, d], prefix(L, E).
-% output is E = a.
+L = [a, b, c, d], [H|_] = L.
+% output is H = a.
 ```
 
 To test whether a list ends with a given sub-list:
 
 ```prolog
-TODO: Why doesn't this work?
 L = [a, b, c, d], last(L, d).
-% output is true.
+% doesn't output false, but also doesn't fail
 ```
 
 To get the last element of a list:
 
 ```prolog
-TODO: Why doesn't this work?
 L = [a, b, c, d], last(L, E).
 % output is E = d.
 ```
