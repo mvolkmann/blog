@@ -29,7 +29,6 @@ Nearly all Prolog code has one of these four purposes:
    if `G` is the father of `P` AND `P` is either the father or mother of `C`:
 
    ```prolog
-   % G
    grandfather(G, C) :=
      father(G, P),
      (father(P, C); mother(P, C)).
@@ -271,10 +270,12 @@ cheetah(spots).
 
 ### Rules
 
-A rule is written as a head and a body separated by
-the "if" symbol `:-` and terminated by a period.
+Rules are written as a head and a body separated by
+the "if" operator `:-` and terminated by a period.
+They states that the head holds if all the goals in the body hold.
+Rules do not return a value like functions in other programming languages.
 
-The head is a functor (atom) followed by
+The head is a functor name followed by
 an argument list that is surrounded by parentheses.
 The head syntax is similar to that of a fact,
 but its argument list can contain variables.
@@ -284,12 +285,12 @@ separated list of goals.
 Typically each goal is written on a separated line and indented,
 but this is not required.
 
-The following rules state that if something is
-a whippet or a cheetah then it is fast.
+The following rules state that
+something is fast if it is a cheetah or a whippet.
 
 ```prolog
-fast(X) :- whippet(X).
 fast(X) :- cheetah(X).
+fast(X) :- whippet(X).
 
 % The previous two lines can be replaced with this.
 % fast(X) :- cheetah(X); whippet(X).
@@ -307,7 +308,8 @@ The following rules define what it means
 for two people to be siblings or sisters.
 
 ```prolog
-% This states that siblings must have the same father and the same mother.
+% This rule states that siblings must have the same father and the same mother.
+% It has four goals.
 sibling(X, Y) :-
   father(F, X),
   father(F, Y),
@@ -320,14 +322,18 @@ sister_of(X, Y) :-
   sibling(X, Y).
 ```
 
-Rules do not return values like a function,
-but they can set the values of their arguments.
+Often functor names describe the arguments
+whose relationship is being described, separated by underscores.
+For example, the rule head `parent_child(P, C)` makes it clear that
+the first argument represents a parent
+and the second argument represents a child.
+Some might also use the functor name `parent_of` or simply `parent`.
 
+The `is` operator evaluates its right-hand side as an arithmetic expression
+and assign the result to its left-hand side.
 For example:
 
 ```prolog
-% The "is" operator evaluates its RHS as an arithmetic expression
-% and assign the result to its LHS.
 area(circle, Radius, X) :- X is pi * Radius^2.
 area(square, Side, X) :- X is Side^2.
 area(rectangle, Width, Height, X) :- X is Width * Height.
@@ -338,8 +344,12 @@ X = 12.566370614359172.
 
 TODO: See the version of the area rule that uses clpr in geometry.pl.
 
+Rules can only set the value of each argument and variable one time.
+Once set, they cannot be modified.
+
 The last goal in a rule can be the built-in predicate `true` to always succeed.
 It can also be `false` or `fail` to always fail.
+None of these approaches are commonly used.
 
 Rules can be recursive.
 The following rules compute the factorial of an integer:
@@ -357,6 +367,13 @@ factorial(N, F) :-
 ```
 
 Also see the `sum` example in the "Lists" section.
+
+When a rule is not working as expected,
+it may be too general (true for invalid values)
+or too specific (false for valid values).
+A common way to fix a rule that is too general is to add more goals.
+A common way to fix a rule that is too specific
+is to add more versions of the rule.
 
 ## Queries
 
