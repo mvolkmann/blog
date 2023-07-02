@@ -1751,12 +1751,15 @@ For example, `help(between/3).`
 
 ## Listing
 
-To list all the facts and rules known in the current session,
-enter `listing.`. The output will contain many clauses created by the system in addition to those you loaded.
+To list all the clauses (facts and rules) known in the current session,
+enter `listing.`.
+The output will contain many built-in clauses in addition to those you loaded.
 
-To list only the clauses (facts and rules) for a given predicate,
-enter `listing(predicate-name).`
+To list only the clauses for a given functor name,
+enter `listing(functor-name).`
 This will list all matching clauses regardless of arity.
+
+For example, `listing(append).` shows the implementation of this functor name.
 
 ## Debugging
 
