@@ -1094,6 +1094,30 @@ report(P).
 
 TODO: Add more detail on working with dicts.
 
+## Type Checking
+
+Prolog provides many built-in predicates that can be used
+to assert the type of arguments.
+
+| Predicate                             | Meaning                                                       |
+| ------------------------------------- | ------------------------------------------------------------- |
+| `var(V)`                              | V is a variable                                               |
+| `nonvar(V)`                           | V is not a variable                                           |
+| `number(V)`                           | V is any kind of number                                       |
+| `integer(V)`                          | V is an integer                                               |
+| `float(V)`                            | V is a floating point number                                  |
+| `rational(V)`                         | V is a rational number                                        |
+| `rational(V, Numerator, Denominator)` | V is a rational number with given a numerator and denominator |
+| `atom(V)`                             | V is an atom                                                  |
+| `blob(V)`                             | V is a blob                                                   |
+| `string(V)`                           | V is a string                                                 |
+| `atomic(V)`                           | V is not a variable or compound term                          |
+| `compound(V)`                         | V is a compound term                                          |
+| `callable(V)`                         | V is an atom or a compound term                               |
+| `ground(V)`                           | V is not a variable or a compound term that holds variables   |
+| `cyclic_term(V)`                      | V contains cycles (circular references)                       |
+| `acyclic_term(V)`                     | V does not contain cycles (circular references)               |
+
 ## Dynamic Predicates
 
 By default predicates cannot be added or deleted in a session.
