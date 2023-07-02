@@ -1384,10 +1384,15 @@ when the value of an argument does not matter.
 ## Operators
 
 Prolog operators can be prefix, infix, or postfix.
+Of the built-in operators, most are infix,
+a few are prefix, and none are postfix.
+Prefix operators are noted below.
+
 Each operator has left, right, or no associativity.
 
 Operators can be used in function form.
-For example, `a + b` can be written as `+(a, b)`.
+For example, infix operators like `+` that are typically
+written like `a + b` can instead be written as `+(a, b)`.
 
 Prolog supports the following relational operators
 for numbers and arithmetic expressions.
@@ -1467,55 +1472,65 @@ test(not_structurally_equivalent) :-
 
 Prolog supports the following arithmetic operators:
 
-| Operator | Meaning                       |
-| -------- | ----------------------------- |
-| `+`      | addition                      |
-| `-`      | subtraction                   |
-| `*`      | multiplication                |
-| `/`      | floating point division       |
-| `//`     | integer division              |
-| `div`    | integer division              |
-| `rem`    | remainder of integer division |
-| `rdiv`   | rational number division      |
-| `mod`    | modulo                        |
-| `**`     | exponentiation                |
-| `^`      | exponentiation                |
+| Operator | Meaning                        |
+| -------- | ------------------------------ |
+| `+`      | addition (infix and prefix)    |
+| `-`      | subtraction (infix and prefix) |
+| `*`      | multiplication                 |
+| `/`      | floating point division        |
+| `//`     | integer division               |
+| `div`    | integer division               |
+| `rem`    | remainder of integer division  |
+| `rdiv`   | rational number division       |
+| `mod`    | modulo                         |
+| `**`     | exponentiation                 |
+| `^`      | exponentiation                 |
+
+Prolog supports the following bitwise operators:
 
 Prolog supports the following additional operators:
 
+| Operator | Meaning              |
+| -------- | -------------------- |
+| `/\`     | bitwise and          |
+| `\/`     | bitwise or           |
+| `xor`    | bitwise exclusive or |
+| `\`      | bitwise not (prefix) |
+| `<<`     | bitwise shift left   |
+| `>>`     | bitwise shift right  |
+
 TODO: Finish documenting the meaning of some of these operators.
 
-| Operator | Meaning                                                       |
-| -------- | ------------------------------------------------------------- |
-| `-->`    | used in grammar rules for implementing parsers                |
-| `:-`     | appears between the head and body of every rule; read as "if" |
-| `?-`     | appears before every query                                    |
-| `\|`     | separates the head and tail of a list in `[H\| T]`            |
-| `;`      | separates clauses to be or'ed                                 |
-| `,`      | separates clauses to be and'ed                                |
-| `->`     | similar to the ternary operator `?:` in other languages       |
-| `\+`     | negates the value of the expression that follows              |
-| `=`      | attempts to unify LHS with RHS                                |
-| `\=`     | tests whether two terms cannot be unified                     |
-| `=..`    | gets the functor and arguments of a clause; pronounced "univ" |
-| `is`     | attempts to unify LHS with RHS arithmetic expression result   |
-| `>:<`    | partial unification between to dictionaries                   |
-| `<<`     | bitwise shift left                                            |
-| `>>`     | bitwise shift right                                           |
-| `xor`    | bitwise exclusive or                                          |
-| `!`      | cut; prevents further backtracking                            |
-| `$`      | similar to `!` TODO How does it differ?                       |
-| `*->`    | soft cut; rarely used                                         |
-| `:=`     |                                                               |
-| `:<`     |                                                               |
-| `:`      |                                                               |
-| `\\`     |                                                               |
-| `?`      |                                                               |
-| `\_`     |                                                               |
-| `/`      |                                                               |
-| `.`      |                                                               |
-| `as`     |                                                               |
-| `=>`     |                                                               |
+| Operator | Meaning                                                                |
+| -------- | ---------------------------------------------------------------------- |
+| `-->`    | used in grammar rules for implementing parsers                         |
+| `:-`     | appears between the head and body of every rule; read as "if"          |
+| `?-`     | prefix operator that appears before every query                        |
+| `\|`     | separates the head and tail of a list in `[H\| T]`                     |
+| `;`      | separates clauses to be or'ed                                          |
+| `,`      | separates clauses to be and'ed                                         |
+| `->`     | similar to the ternary operator `?:` in other languages                |
+| `\+`     | prefix operator that succeeds when the goal that follows does not hold |
+| `=`      | attempts to unify LHS with RHS                                         |
+| `\=`     | tests whether two terms cannot be unified                              |
+| `=..`    | gets the functor and arguments of a clause; pronounced "univ"          |
+| `is`     | attempts to unify LHS with RHS arithmetic expression result            |
+| `>:<`    | partial unification between to dictionaries                            |
+| `!`      | cut; prevents further backtracking                                     |
+| `$`      | similar to `!` TODO How does it differ?                                |
+| `*->`    | soft cut; rarely used                                                  |
+| `:=`     | evaluates RHS as JavaScript (odd!)                                     |
+| `:<`     | succeeds when LHS is a sub-dict of RHS dict                            |
+| `:`      |                                                                        |
+| `?`      |                                                                        |
+| `\_`     |                                                                        |
+| `/`      |                                                                        |
+| `.`      |                                                                        |
+| `as`     |                                                                        |
+| `=>`     |                                                                        |
+
+The `:-` prefix operator marks a directive to the Prolog system.
+For example, `:- use_module(library(clpfd)).`
 
 There are two primary differences between `=` and `is`.
 The first is that the RHS of `is` must be an arithmetic expression.
