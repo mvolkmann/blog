@@ -1118,6 +1118,64 @@ to assert the type of arguments.
 | `cyclic_term(V)`                      | V contains cycles (circular references)                       |
 | `acyclic_term(V)`                     | V does not contain cycles (circular references)               |
 
+The following code in the file `type_checking.pl` implements simple rules that
+perform type checking of an argument.
+
+```prolog
+demo(V, T) :- integer(V), T = 'integer', !.
+demo(V, T) :- float(V), T = 'float', !.
+demo(V, T) :- rational(V), T = 'rational', !.
+% In SWI-Prolog, only double-quoted strings are considered strings.
+demo(V, T) :- string(V), T = 'string', !.
+demo(V, T) :- atom(V), T = 'atom', !.
+
+demo2(V, T) :- number(V), T = 'number', !.
+
+demo3(V, T) :- atomic(V), T = 'atomic', !.
+demo3(V, T) :- compound(V), T = 'compound', !.
+
+demo4(V, T) :- ground(V) -> T = 'ground'; T = 'nonground', !.
+```
+
+The following unit test code in the file `type_checking.pl`
+demonstrates using the rules defined above:
+
+```prolog
+% To run these tests, enter `swipl type-checking.plt`
+
+:- consult(type_checking).
+:- begin_tests(type_checking).
+
+test(integer) :- demo(5, T), T == 'integer'.
+test(float) :- demo(1.2, T), T == 'float'.
+% See rational_syntax flag to enable 2/3 to be treated as rational.
+test(rational) :- demo(2r3, T), T == 'rational'.
+test(number) :- demo2(1.2, T), T == 'number'.
+test(string) :- demo("hello", T), T == 'string'.
+test(atom) :- demo(a, T), T == 'atom'.
+
+test(atomic) :- demo3(true, T), T == 'atomic'.
+test(atomic) :- demo3(5, T), T == 'atomic'.
+test(atomic) :- demo3(1.2, T), T == 'atomic'.
+test(atomic) :- demo3("Hello", T), T == 'atomic'.
+
+test(compound) :- demo3(2 + 3, T), T == 'compound'.
+test(compound) :- demo3(a(b), T), T == 'compound'.
+test(compound) :- demo3(a-b, T), T == 'compound'.
+test(compound) :- demo3([a, b], T), T == 'compound'.
+
+test(ground) :- demo4(5, T), T == 'ground'.
+test(ground) :- V = 5, demo4(V, T), T == 'ground'.
+
+% The next line suppresses warning about singleton variable V.
+:-style_check(-singleton).
+test(ground) :- demo4(V, T), T \== 'ground'.
+
+:- end_tests(type_checking).
+:- run_tests.
+:- halt.
+```
+
 ## Dynamic Predicates
 
 By default predicates cannot be added or deleted in a session.
@@ -1486,7 +1544,7 @@ current_op(P, fx, N).
 ## Strings
 
 Literal strings can be delimited with single or double quotes.
-Single quotes seem to be preferred.
+SWI-Prolog prefers double quotes.
 To escape a quote inside a literal string, precede it with a backslash.
 
 A string is represented by a list of characters.
