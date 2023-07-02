@@ -1428,15 +1428,18 @@ The type defines whether the operator is:
 
 The name can be any symbol.
 
-For example:
+The following code defines an operator named `dbl` that doubles a number:
 
 ```prolog
+:- arithmetic_function(dbl/1).
 :- op(10, fx, dbl).
-% TODO: Is it possible to define an operator that returns a value?
-dbl(N) :- N is N * 2.
+dbl(X, Y) :- Y is X * 2.
+
+?- X is dbl 5. % gives 10
 ```
 
-TODO: The above does not work! Find out why.
+The expression `dbl 5` generates the arithmetic expression `5 * 2`
+and the `is` operator evaluates that to get `10`.
 
 Existing operators, except the comma operator, can be redefined.
 The `|` operator can only be redefined as an infix operator
