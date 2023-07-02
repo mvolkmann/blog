@@ -1,85 +1,4 @@
 ---
-
-## Unit Tests
-
-SCI-Prolog includes a unit testing framework called "Test Box".
-See {% aTargetBlank
-"https://www.swi-prolog.org/pldoc/doc_for?object=section(%27packages/plunit.html%27)",
-"Prolog Unit Tests" %}.
-
-Code for unit tests can be placed in the same source file
-as the rules they test.
-Alternatively, test code can be placed in a separate file
-with an extension of `.plt`.
-
-The following code demonstrates implementing unit tests
-for the built-in `append` rule.
-
-  ```prolog
-  % This line is only needed to load predicates from another file.
-  % :- consult({file-name}).
-
-  :- begin_tests(append).
-
-  test(append_assertions) :-
-    append([], [], []),
-      append([a], [], [a]),
-        append([], [a], [a]),
-          append([a, b], [c, d], [a, b, c, d]).
-
-          test(append_make_first) :-
-            append(X, [c, d], [a, b, c, d]),
-              assertion(X == [a, b]),
-                !.
-
-                test(append_make_second) :-
-                  append([a, b], X, [a, b, c, d]),
-                    assertion(X == [c, d]).
-
-                    test(append_make_third) :-
-                      append([a, b], [c, d], X),
-                        assertion(X == [a, b, c, d]).
-
-                        :- end_tests(append).
-                        :- run_tests.
-                        :- halt.
-                        ````
-
-                        If the code above is in a file named `append.plt`
-                        then the tests can be run by entering `swipl append.plt`.
-                        If the last two lines in the code above are omitted,
-                        use the following instead:
-                        `swipl -g run_tests -t halt your/file.pl`
-
-                        The `test` rule takes a test name (atom or string)
-                        and an optional list of options.
-                        Supported options include:
-
-                        - `setup`: takes a goal to execute before the test is run
-                        - `cleanup`: takes a goal to execute after the test is run
-                        - `forall`: takes a generator and runs the test for each generated value
-                        - `throws`: takes an error and verifies that the test throws the error
-                        - `error`: takes an error and verifies that the test throws `error(Error, _Context)`
-                        - several other options that seem less valuable
-
-                        The `assertion` rule prints assertions that fail.
-                        When this is not used, the output will only provide
-                        the name of the test that failed.
-
-                        If a test ends with a choice point, a warning message will be output.
-                        To prevent this, end the test with the cut operator (`, !.`)
-                        or include the option `nondet`.
-
-## Language Server
-
-TODO: How can you install a Prolog language server in Neovim?
-TODO: See https://github.com/jamesnvc/lsp_server.
-
-TODO: Can you run Prolog code inside Neovim?
-
-## Libraries
-
-TODO: Is there a popular collection of open source Prolog libraries?
 eleventyNavigation:
   key: Prolog
 layout: topic-layout.njk
@@ -1707,10 +1626,6 @@ viewing the result of each step in the evaluation.
 
 When finished debugging, enter `notrace.` to turn this mode off.
 
-## Structures
-
-TODO: Add this detail.
-
 ## Calling From Other Languages
 
 SWI-Prolog can be called from C. See {% aTargetBlank
@@ -1738,7 +1653,6 @@ For example, the following rules describe the relationship
 between a geometry shape and its area:
 
 ```prolog
-
 :- use_module(library(clpr)).
 
 area(circle, Radius, X) :- Pi is pi, {X = Pi * Radius^2}.
