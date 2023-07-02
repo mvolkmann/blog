@@ -1,4 +1,85 @@
 ---
+
+## Unit Tests
+
+SCI-Prolog includes a unit testing framework called "Test Box".
+See {% aTargetBlank
+"https://www.swi-prolog.org/pldoc/doc_for?object=section(%27packages/plunit.html%27)",
+"Prolog Unit Tests" %}.
+
+Code for unit tests can be placed in the same source file
+as the rules they test.
+Alternatively, test code can be placed in a separate file
+with an extension of `.plt`.
+
+The following code demonstrates implementing unit tests
+for the built-in `append` rule.
+
+  ```prolog
+  % This line is only needed to load predicates from another file.
+  % :- consult({file-name}).
+
+  :- begin_tests(append).
+
+  test(append_assertions) :-
+    append([], [], []),
+      append([a], [], [a]),
+        append([], [a], [a]),
+          append([a, b], [c, d], [a, b, c, d]).
+
+          test(append_make_first) :-
+            append(X, [c, d], [a, b, c, d]),
+              assertion(X == [a, b]),
+                !.
+
+                test(append_make_second) :-
+                  append([a, b], X, [a, b, c, d]),
+                    assertion(X == [c, d]).
+
+                    test(append_make_third) :-
+                      append([a, b], [c, d], X),
+                        assertion(X == [a, b, c, d]).
+
+                        :- end_tests(append).
+                        :- run_tests.
+                        :- halt.
+                        ````
+
+                        If the code above is in a file named `append.plt`
+                        then the tests can be run by entering `swipl append.plt`.
+                        If the last two lines in the code above are omitted,
+                        use the following instead:
+                        `swipl -g run_tests -t halt your/file.pl`
+
+                        The `test` rule takes a test name (atom or string)
+                        and an optional list of options.
+                        Supported options include:
+
+                        - `setup`: takes a goal to execute before the test is run
+                        - `cleanup`: takes a goal to execute after the test is run
+                        - `forall`: takes a generator and runs the test for each generated value
+                        - `throws`: takes an error and verifies that the test throws the error
+                        - `error`: takes an error and verifies that the test throws `error(Error, _Context)`
+                        - several other options that seem less valuable
+
+                        The `assertion` rule prints assertions that fail.
+                        When this is not used, the output will only provide
+                        the name of the test that failed.
+
+                        If a test ends with a choice point, a warning message will be output.
+                        To prevent this, end the test with the cut operator (`, !.`)
+                        or include the option `nondet`.
+
+## Language Server
+
+TODO: How can you install a Prolog language server in Neovim?
+TODO: See https://github.com/jamesnvc/lsp_server.
+
+TODO: Can you run Prolog code inside Neovim?
+
+## Libraries
+
+TODO: Is there a popular collection of open source Prolog libraries?
 eleventyNavigation:
   key: Prolog
 layout: topic-layout.njk
@@ -9,36 +90,73 @@ layout: topic-layout.njk
 Prolog is a logic-based programming language.
 The name is a contraction of "programming in logic".
 
-Prolog uses a declarative syntax rather than a procedural one.
-It is a homoiconic language, which means its code can be treated as data.
-
-A core feature of Prolog is pattern matching search with backtracking,
-also referred to as "unification".
-This is the process of searching a set of facts and rules (called a database)
-to find values that match a given predicate.
-Prolog is highly optimized to handle searching large databases.
-
-Prolog has many uses including artificial intelligence,
-abstract problem solving, symbolic equation solving, and more.
-
 Prolog first appeared in 1972. It was designed by three computer scientists,
 Alain Colmerauer (France), Phillipe Roussel (France), and
 Robert Kowalski (USA/Britain).
+
+Prolog uses a declarative syntax rather than a procedural one.
+Instead of writing code that describes "what" to do,
+the code describes relationships between data values.
+
+Nearly all Prolog code has one of these four purposes:
+
+1. Describe a relationship that is always true (aka holds) ... a fact.
+
+   For example: `father(mark, amanda).`
+
+1. Describe a relationship that is conditionally true ... a rule.
+
+   For example, the following rule states that `G` is a grandfather of `C`
+   if `G` is the father of `P` AND `P` is either the father or mother of `C`:
+
+   ```prolog
+   % G
+   grandfather(G, C) :=
+     father(G, P),
+     (father(P, C); mother(P, C)).
+   ```
+
+1. Ask whether a specific relationship is true ... a query with no variables.
+
+   For example, `?- grandfather(richard, amanda).` outputs `true`.
+
+1. Ask for values for which a relationship is true ...
+   a query with variables.
+
+   For example, `?- grandfather(G, amanda).` sets `G` to `richard`.
+   Sometimes there are multiple values for which a query holds.
+   This would be the case if `amanda` had more than one grandfather.
+
+Queries perform "unification" which basically means finding
+values for variables that cause a relationship to hold.
+This requires pattern matching search and backtracking.
+Unification relies on the properties of {% aTargetBlank
+"https://en.wikipedia.org/wiki/Horn_clause", "Horn clauses" %}.
+
+The set of facts and rules supplied to the Prolog engine is called a database.
+Prolog is highly optimized to handle searching large databases.
+
+Prolog is a homoiconic language, which means its code can be treated as data.
+
+Prolog has many uses including artificial intelligence,
+abstract problem solving, symbolic equation solving, and more.
 
 "IBM Watson is a question-answering computer system
 capable of answering questions posed in natural language."
 It is partially implemented in Prolog.
 
-The Prolog unification process relies on the properties of {% aTargetBlank
-"https://en.wikipedia.org/wiki/Horn_clause", "Horn clauses" %}.
-
 ## Learning Curve
 
 The primary concepts in Prolog such as facts, rules, and queries
-are easy to understand after seeing a few basic examples.
+are easy to understand after seeing a few examples.
 
-However, Prolog supports a large number of operators and built-in predicates
-can take considerable time to learn and master.
+However, writing programs that are entirely
+based on relationships rather than imperative code
+makes Prolog very different from other programming languages.
+This makes learning Prolog somewhat challenging initially.
+
+Also, Prolog supports a large number of operators and built-in predicates.
+These take considerable time to learn and master.
 
 ## Resources
 
@@ -1616,9 +1734,30 @@ This supports two primary use cases:
 
 This library supports a different, powerful way to write Prolog rules.
 
-For example, the following rule computes the area of various geometry shapes.
+For example, the following rules describe the relationship
+between a geometry shape and its area:
 
-````prolog
+```prolog
+
+:- use_module(library(clpr)).
+
+area(circle, Radius, X) :- Pi is pi, {X = Pi * Radius^2}.
+area(square, Side, X) :- {X = Side^2}.
+area(rectangle, Width, Height, X) :- {X = Width * Height}.
+```
+
+The following is another way to describe the relationship
+between a circle and its area without using CLP:
+
+```prolog
+radius_area(R, A) :-
+    ground(R), % tests whether R is not a free variable
+    A is pi * R^2.
+
+radius_area(R, A) :-
+    ground(A), % tests whether A is not a free variable
+    R is sqrt(A / pi).
+```
 
 ## Unit Tests
 
@@ -1663,7 +1802,7 @@ test(append_make_third) :-
 :- end_tests(append).
 :- run_tests.
 :- halt.
-````
+```
 
 If the code above is in a file named `append.plt`
 then the tests can be run by entering `swipl append.plt`.
@@ -1695,4 +1834,8 @@ or include the option `nondet`.
 TODO: How can you install a Prolog language server in Neovim?
 TODO: See https://github.com/jamesnvc/lsp_server.
 
-TODO: Can you run Prolog code inside
+TODO: Can you run Prolog code inside Neovim?
+
+## Libraries
+
+TODO: Is there a popular collection of open source Prolog libraries?
