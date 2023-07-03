@@ -591,7 +591,7 @@ enter `[demo].`
 Alternatively, pass a source file to the REPL when starting it.
 For example, `swipl demo.pl`
 
-After modifying source files that have already been loaded,
+In SWI-Prolog, after modifying source files that have already been loaded,
 enter `make.` to reload all of them.
 
 To enter new facts and rules in a running session:
@@ -722,11 +722,12 @@ For example, `[a | [b | [c]]]` is also equivalent to `[a, b, c]`.
 If the `double_quotes` flag is set then
 a double-quoted string (not single-quoted) provides a way to write
 a list of atoms that correspond to the characters in the string.
+TODO: Is setting this flag only required in SWI-Prolog?
 For example:
 
 ```prolog
 ?- set_prolog_flag(double_quotes, chars).
-L = "abc".
+L = "abc". % atoms, not characters
 % L = [a, b, c].
 ```
 
@@ -753,6 +754,7 @@ For example:
 
 ```prolog
 [a | T] % will be a list if T is a list
+[a | b] % not a list because b is not a list
 [A, B, C | T] % will be a list of at least three elements if T is a list
 ```
 
