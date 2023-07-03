@@ -1168,6 +1168,9 @@ Y = [] ;
 A Prolog "pair" is a key and a value.
 There are two ways to write a pair, `k-v` or `-(k, v)`.
 
+Searches for specific pairs in a list of pairs are sequential.
+For a more efficient key lookup see the "Dicts" section.
+
 For details on predicates that operate on pairs, see {% aTargetBlank
 "https://eu.swi-prolog.org/pldoc/man?section=pairs",
 "library(pairs): Operations on key-value lists" %}.
