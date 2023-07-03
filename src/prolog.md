@@ -175,7 +175,7 @@ cargo build --release
 ```
 
 This creates the executable file `target/release/scryer-prolog`.
-Define an alias to make this easier to run.
+Define an alias like `scryerp` to make this easier to run.
 
 ### Other Implementations
 
@@ -1887,6 +1887,103 @@ the name of the test that failed.
 If a test ends with a choice point, a warning message will be output.
 To prevent this, end the test with the cut operator (`, !.`)
 or include the option `nondet`.
+
+## Sudoku
+
+Prolog can be used to solve puzzles such as {% aTargetBlank
+"https://en.wikipedia.org/wiki/Sudoku", "Sudoku" %}.
+
+The following code is based on code from Markus Triska in the SWI-Prolog manual.
+
+```prolog
+:- use_module(library(clpfd)).
+
+sudoku(Rows) :-
+  % Verify that Rows is a list with 9 elements.
+  length(Rows, 9),
+
+  % Verify that all elements are lists
+  % with the same length as Rows which is 9.
+  maplist(same_length(Rows), Rows),
+
+  % Create a flattened list of all the values (Vs), and verify
+  % that all elements in Vs are a number in the range 1 to 9.
+  append(Rows, Vs), Vs ins 1..9,
+
+  % Verify that all element values in all rows
+  % are unique within their row.
+  maplist(all_distinct, Rows),
+
+  % Create a list of lists that represent the columns.
+  transpose(Rows, Columns),
+
+  % Verify that all element values in all columns
+  % are unique within their column.
+  maplist(all_distinct, Columns),
+
+  % Assign a variable name to each of the 9 rows.
+  [R1, R2, R3, R4, R5, R6, R7, R8, R9] = Rows,
+
+  % Verify that the element values in every 3x3 block
+  % are unique within their block.
+  blocks(R1, R2, R3),
+  blocks(R4, R5, R6),
+  blocks(R7, R8, R9).
+
+% When a block is empty, its element values (which are none)
+% can be considered unique.
+blocks([], [], []).
+
+% When a block is not empty, get its 9 values
+% and verify that they are unique.
+blocks([R1C1,R1C2,R1C3|T1], [R2C1,R2C2,R2C3|T2], [R3C1,R3C2,R3C3|T3]) :-
+  all_distinct([R1C1, R1C2, R1C3, R2C1, R2C2, R2C3, R3C1, R3C2, R3C3]),
+  blocks(T1, T2, T3).
+
+% When there a no more rows, stop printing.
+print_rows([]).
+
+% When there are more rows, print the first row.
+print_rows([H|T]) :- print_row(H), print_rows(T).
+
+% When the last element of a row has been printed, print a newline.
+print_row([]) :- nl.
+
+% When there are more row elements,
+% print the first one followed by a space.
+print_row([H|T]) :- format("~w ", H), print_row(T).
+
+% Each puzzle must contain at least 17 clues.
+
+problem(1, % can solve
+  [[_,_,_, _,_,_, _,_,_],
+   [_,_,_, _,_,3, _,8,5],
+   [_,_,1, _,2,_, _,_,_],
+
+   [_,_,_, 5,_,7, _,_,_],
+   [_,_,4, _,_,_, 1,_,_],
+   [_,9,_, _,_,_, _,_,_],
+
+   [5,_,_, _,_,_, _,7,3],
+   [_,_,2, _,1,_, _,_,_],
+   [_,_,_, _,4,_, _,_,9]]).
+
+:- problem(1, Rows), sudoku(Rows), print_rows(Rows).
+```
+
+This outputs the following solution:
+
+```text
+9 8 7 6 5 4 3 2 1
+2 4 6 1 7 3 9 8 5
+3 5 1 9 2 8 7 4 6
+1 2 8 5 3 7 6 9 4
+6 3 4 8 9 2 1 5 7
+7 9 5 4 6 1 8 3 2
+5 1 9 2 8 6 4 7 3
+4 7 2 3 1 9 5 6 8
+8 6 3 7 4 5 2 1 9
+```
 
 ## Language Server
 
