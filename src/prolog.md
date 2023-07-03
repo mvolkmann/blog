@@ -1231,13 +1231,14 @@ For example, the following uses the `length` predicate.
 % output is Ps = [2-[apple, apricot], 2-[banana, blueberry], 1-[cherry]].
 ```
 
-The following code implements rules to determine if a queen on a chess board
-can attach another piece.
+The following code implements rules to determine if
+a queen on a chess board can attach another piece.
+Each board position is represented by a row-column pair.
 
 ```prolog
-queen_can_attack((R, _), (R, _)).
-queen_can_attack((_, C), (_, C)).
-queen_can_attack((R1, C1), (R2, C2)) :-
+queen_can_attack(R-_, R-_). % same row
+queen_can_attack(_-C, _-C). % same column
+queen_can_attack(R1-C1, R2-C2) :- % same diagonal
   abs(R1 - R2) =:= abs(C1 - C2).
 ```
 
