@@ -104,6 +104,7 @@ These take considerable time to learn and master.
 - {% aTargetBlank "https://www.metalevel.at/prolog", "The Power of Prolog" %}
   free, online book with accompanying videos by
   {% aTargetBlank "https://www.metalevel.at", "Markus Triska" %}
+  from the University of Technology in Austria
 
 - {% aTargetBlank "https://link.springer.com/book/10.1007/978-3-642-55481-0",
   "Programming in Prolog" %} Fifth edition book by Clocksin and Mellish
@@ -691,18 +692,28 @@ For example, `[red, green, blue]` is a list of atoms
 and `[R, G, B]` is a list of variables that can be
 unified with any list containing exactly three elements.
 
-An empty list is written as `[]` which is called "nil".
+An empty list is written as the atom `[]` which is called "nil".
 
 There are other ways to construct a list.
 
-The dot function is the list constructor.
+The dot function (`./2`) is the list constructor.
 It is passed the head and the tail of the list to be constructed.
-For example, `.(E, Es)` where `E` is a single element that is the head
-and `Es` is a list of elements in the tail.
-By convention, variable names that end in "s" represent lists.
+For example, `.(H, T)` creates a list
+where `H` is a single element that is the head
+and `T` is a list of elements in the tail.
+Often variables that represent lists end in "s" (ex. `.(E, Es)`).
 
-The head-tail separator `|` creates a list
-if the term that follows it is a list.
+SWI-Prolog uses a different function name for the list constructor.
+For example:
+
+```prolog
+L = '[|]'(a, [b, c]).
+% output is L = [a, b, c].
+```
+
+The head-tail separator `|` in `[H|T]` creates a list
+where H is a single element that is the head
+and `T` is a list of elements in the tail.
 For example, `[a | []]` is a list containing only `a`
 and `[a | [b, c]]` is equivalent to `[a, b, c]`.
 Use of the `|` operator can be nested.
