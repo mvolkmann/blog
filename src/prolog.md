@@ -681,7 +681,7 @@ main :-
 
 ### Lists
 
-A list is commonly used to hold a collection of elements when
+Lists are commonly used to hold collections of elements when
 there can be any number of elements (even zero), their order matters,
 and all the elements have the same type (ex. all numbers).
 
@@ -752,11 +752,11 @@ L = [1, 2, 3], sum_list(L, Sum).
 % output is Sum = 6.
 ```
 
-The `sum` predicate could be implemented as follows:
+If the `sum_list` predicate didn't exist,
+it could be implemented with a recursive rule as follows:
 
 ```prolog
-% This is an example of a recursive rule.
-sum(List, Sum) :-
+sum_list(List, Sum) :-
   % If the list is empty then the sum is zero.
   List = [] -> Sum = 0;
 
@@ -765,13 +765,13 @@ sum(List, Sum) :-
     % Get the first number and a list of the remaining numbers.
     [Head|Tail],
     % Compute the sum of the remaining numbers.
-    sum(Tail, TailSum),
+    sum_list(Tail, TailSum),
     % The result is the first number plus that sum.
     % Note the use of the "is" keyword to assign the
     % result of an arithmetic expression to the Sum argument.
     Sum is TailSum + Head.
 
-?- sum([1, 2, 3], X).
+?- sum_list([1, 2, 3], X).
 % output is X = 6.
 ```
 
@@ -841,6 +841,18 @@ list_without([H|T], E, L) :-
     % Otherwise the result list L is a new list with head H
     % and tail is the same as T with E removed.
     list_without(T, E, L2), L = [H|L2].
+```
+
+The `maplist` predicate can be used to create a list
+that is derived by applying a given predicate to each element of another list.
+For example:
+
+```prolog
+double(A, B) :-
+  var(A) -> A is B / 2; B is A * 2.
+
+:- maplist(double, [1, 2, 3], L), writeln(L).
+% output is [2, 4, 6]
 ```
 
 The `reverse` function creates a new list containing
@@ -1477,6 +1489,7 @@ The `write` predicate writes to the current output stream,
 which defaults to stdout.
 The atom `nl` is a built-in that writes a newline character
 to the current output stream.
+The `writeln` predicate combines these.
 
 For example:
 
