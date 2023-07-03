@@ -1243,13 +1243,17 @@ For example, the following uses the `length` predicate.
 
 The following code implements rules to determine if
 a queen on a chess board can attach another piece.
-Each board position is represented by a row-column pair.
-Note how the arguments destructure the keys and values
-of pairs that are passed in.
+Note that:
+
+- Each board position is represented by a row-column pair.
+- The arguments destructure the keys and values
+  of pairs that are passed in.
+- Underscore anonymous variables are used for values that do not matter.
+- The cut operator `!` stops searching after the first solution is found.
 
 ```prolog
-queen_can_attack(R-_, R-_). % same row
-queen_can_attack(_-C, _-C). % same column
+queen_can_attack(R-_, R-_) :- !. % same row
+queen_can_attack(_-C, _-C) :- !. % same column
 queen_can_attack(R1-C1, R2-C2) :- % same diagonal
   abs(R1 - R2) =:= abs(C1 - C2).
 ```
@@ -1321,6 +1325,7 @@ The following code in the file `type_checking.pl` implements simple rules that
 perform type checking of an argument.
 
 ```prolog
+% The cut operator `!` tells Prolog to stop searching once a solution is found.
 demo(V, T) :- integer(V), T = 'integer', !.
 demo(V, T) :- float(V), T = 'float', !.
 demo(V, T) :- rational(V), T = 'rational', !.
