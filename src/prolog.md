@@ -1884,7 +1884,8 @@ For information about the performance of Prolog, see {% aTargetBlank
 
 ## Constraint Logic Programming over Finite Domains: CLP(FD)
 
-The library clpfd implmenents Constraint Logic Programming over Finite Domains.
+The library {% aTargetBlank "https://www.swi-prolog.org/man/clpfd.html",
+"clpfd" %} implements Constraint Logic Programming over Finite Domains.
 This supports two primary use cases:
 
 - declarative integer arithmetic
@@ -1915,6 +1916,8 @@ radius_area(R, A) :-
     ground(A), % tests whether A is not a free variable
     R is sqrt(A / pi).
 ```
+
+When using CLP, compare values with `#=` instead of `=:=`.
 
 ## Unit Tests
 

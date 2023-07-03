@@ -62,6 +62,10 @@ The Simulator supports many useful keyboard shortcuts.
 | show home screen                              | Device ... Home                                   | cmd-shift-h       |
 | show app switcher (to switch or quit apps)    | Device ... App Switcher                           | cmd-ctrl-shift-h  |
 
+## Custom Images
+
+To use custom images in the photo picker, drag them in.
+
 ## Screenshots
 
 To capture a screenshot, click the camera icon in the upper-right.
