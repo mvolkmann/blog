@@ -21,7 +21,13 @@ Nearly all Prolog code has one of these four purposes:
 
 1. Describe a relationship that is always true (aka holds) ... a fact.
 
-   For example: `father(mark, amanda).`
+   For example:
+
+```prolog
+father(richard, mark).
+father(mark, amanda).
+father(mark, jeremy).
+```
 
 1. Describe a relationship that is conditionally true ... a rule.
 
@@ -41,9 +47,12 @@ Nearly all Prolog code has one of these four purposes:
 1. Ask for values for which a relationship is true ...
    a query with variables.
 
-   For example, `?- grandfather(G, amanda).` sets `G` to `richard`.
+   For example, `?- grandfather(G, amanda).` sets `G` to `richard`
    Sometimes there are multiple values for which a query holds.
-   This would be the case if `amanda` had more than one grandfather.
+   For example, the query `?- grandfather(richard, G).`
+   sets `G` to `amanda` and then `jeremy`.
+   Note how a rule can be used to find values for any of its arguments,
+   searching in multiple directions.
 
 Queries perform "unification" which basically means finding
 values for variables that cause a relationship to hold.
@@ -402,6 +411,11 @@ For example, the rule head `parent_child(P, C)` makes it clear that
 the first argument represents a parent
 and the second argument represents a child.
 Some might also use the functor name `parent_of` or simply `parent`.
+
+Good functor names are general and describe relationships
+without implying a direction. Bad function names do neither.
+For example, functor names containing words like "count", "drop", or "find"
+imply that the clause is meant to be used in a specific direction.
 
 The `is` operator evaluates its right-hand side as an arithmetic expression
 and assign the result to its left-hand side.
