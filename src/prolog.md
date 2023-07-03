@@ -183,6 +183,9 @@ to begin searching for the next solution.
   src="/blog/assets/swi-prolog-trace.png?v={{pkg.version}}"
   title="SWI-Prolog trace">
 
+The `trace` predicate enables both the trace and debug modes.
+To disable these, enter `notrace.` and `nodebug.`
+
 #### Executables
 
 In SWI-Prolog, to compile a Prolog source file to an executable,
@@ -273,6 +276,7 @@ To exit from any Prolog interpreter, enter `halt.` or press ctrl-d.
 | goal              | rule body expression to be satisfied                            |
 | list notation     | comma-separated terms inside square brackets; ex. `[a, B, 7]`   |
 | operator notation | terms separated by operators; ex. `Y = m*X + b`                 |
+| function notation | operators are written as function calls; ex. `*(3, +(1, 2))`    |
 | unification       | process of searching for variable values that satisfy a goal    |
 | choice point      | represents a choice in the search for a solution                |
 
@@ -673,7 +677,7 @@ The following are all equivalent ways to write the same list:
 ```prolog
 [red, green, blue] % list notation
 
-.(red, .(green, .(blue, []))) % functional notation
+.(red, .(green, .(blue, []))) % function notation
 % In SWI-Prolog, the dots must be replaced by `'[|]'`.
 
 [red | [green | [blue]]] % head-tail separator notation
@@ -1447,6 +1451,11 @@ For example, infix operators like `+` whose usage s typically
 written like `a + b` can instead be written as `+(a, b)`.
 As another example, `X is 3 * (1 + 2).` gives the same result (`9`)
 as `X is *(3, +(1, 2)).`
+
+The `write_canonical` predicate takes any clause
+and outputs it in its equivalent function notation.
+For example, entering `write_canonical(3 * 1 + 2).`
+outputs `*(3,+(1,2))`.
 
 Prolog supports the following relational operators
 for numbers and arithmetic expressions.
