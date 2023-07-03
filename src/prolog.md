@@ -90,6 +90,9 @@ These take considerable time to learn and master.
 
 ## Resources
 
+- {% aTargetBlank "https://www.youtube.com/watch?v=dKn-BbS_zQQ",
+  "A Brief Introduction to Prolog" %} YouTube video by Erik Schierboom
+
 - {% aTargetBlank "https://www.covingtoninnovations.com/mc/plcoding.pdf",
   "Coding guidelines for Prolog" %}
 
