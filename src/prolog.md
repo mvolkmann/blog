@@ -561,10 +561,10 @@ To evaluate a query in the REPL,
 enter the query terminated with a period.
 If the query does not contain any variables
 then `true` or `false` will be output.
-If the query does contain variables,
-the first set of values that satisfy the query will be output.
+If the query does contain variables, a lazy search will be performed
+to find the first set of values that satisfy the query will be output.
 To see the next set, press the semicolon key.
-A period will be output after the last set.
+A period will be output after the last set is found.
 
 To evaluate arithmetic operators that result in a numeric value,
 assign the expression to a variable using the `=` operator.
@@ -1413,6 +1413,19 @@ A session can do the following:
 ?- likes(mark, X). % outputs nothing
 ```
 
+## Runtime Predicates
+
+A predicate can be placed in a variable at runtime
+and later used to create a clause with the `:..` operator
+which is evaluated using the `call` predicate.
+For example:
+
+```prolog
+P = <, % could be set to a different relational operator
+Clause =.. [P, 3, 5], % builds clause from list containing functor and arguments
+call(Clause). % evaluates clause
+```
+
 ## Input
 
 The `read` function reads a string from stdin.
@@ -1672,33 +1685,33 @@ Prolog supports the following additional operators:
 
 TODO: Finish documenting the meaning of some of these operators.
 
-| Operator | Meaning                                                                |
-| -------- | ---------------------------------------------------------------------- |
-| `-->`    | used in grammar rules for implementing parsers                         |
-| `:-`     | appears between the head and body of every rule; read as "if"          |
-| `?-`     | prefix operator that appears before every query                        |
-| `\|`     | separates the head and tail of a list in `[H\| T]`                     |
-| `;`      | separates clauses to be or'ed                                          |
-| `,`      | separates clauses to be and'ed                                         |
-| `->`     | similar to the ternary operator `?:` in other languages                |
-| `\+`     | prefix operator that succeeds when the goal that follows does not hold |
-| `=`      | attempts to unify LHS with RHS                                         |
-| `\=`     | tests whether two terms cannot be unified                              |
-| `=..`    | gets the functor and arguments of a clause; pronounced "univ"          |
-| `is`     | attempts to unify LHS with RHS arithmetic expression result            |
-| `>:<`    | partial unification between to dictionaries                            |
-| `!`      | cut; prevents further backtracking                                     |
-| `$`      | similar to `!` TODO How does it differ?                                |
-| `*->`    | soft cut; rarely used                                                  |
-| `:=`     | evaluates RHS as JavaScript (odd!)                                     |
-| `:<`     | succeeds when LHS is a sub-dict of RHS dict                            |
-| `?`      | TODO: Does this compose two predicates?                                |
-| `:`      |                                                                        |
-| `\_`     |                                                                        |
-| `/`      |                                                                        |
-| `.`      |                                                                        |
-| `as`     |                                                                        |
-| `=>`     |                                                                        |
+| Operator | Meaning                                                                               |
+| -------- | ------------------------------------------------------------------------------------- |
+| `-->`    | used in grammar rules for implementing parsers                                        |
+| `:-`     | appears between the head and body of every rule; read as "if"                         |
+| `?-`     | prefix operator that appears before every query                                       |
+| `\|`     | separates the head and tail of a list in `[H\| T]`                                    |
+| `;`      | separates clauses to be or'ed                                                         |
+| `,`      | separates clauses to be and'ed                                                        |
+| `->`     | similar to the ternary operator `?:` in other languages                               |
+| `\+`     | prefix operator that succeeds when the goal that follows does not hold                |
+| `=`      | attempts to unify LHS with RHS                                                        |
+| `\=`     | tests whether two terms cannot be unified                                             |
+| `=..`    | equates a clause with a list containing its functor name and arguments; called "univ" |
+| `is`     | attempts to unify LHS with RHS arithmetic expression result                           |
+| `>:<`    | partial unification between to dictionaries                                           |
+| `!`      | cut; prevents further backtracking                                                    |
+| `$`      | similar to `!` TODO How does it differ?                                               |
+| `*->`    | soft cut; rarely used                                                                 |
+| `:=`     | evaluates RHS as JavaScript (odd!)                                                    |
+| `:<`     | succeeds when LHS is a sub-dict of RHS dict                                           |
+| `?`      | TODO: Does this compose two predicates?                                               |
+| `:`      |                                                                                       |
+| `\_`     |                                                                                       |
+| `/`      |                                                                                       |
+| `.`      |                                                                                       |
+| `as`     |                                                                                       |
+| `=>`     |                                                                                       |
 
 The `:-` prefix operator marks a directive to the Prolog system.
 For example, `:- use_module(library(clpfd)).`
