@@ -381,7 +381,8 @@ something is fast if it is a cheetah or a whippet.
 fast(X) :- cheetah(X).
 fast(X) :- whippet(X).
 
-% The previous two lines can be replaced with this.
+% The previous two lines can be replaced with the following
+% where the `;` operator or's its left and right values.
 % fast(X) :- cheetah(X); whippet(X).
 ```
 
@@ -1872,6 +1873,15 @@ For example:
 ```prolog
 % This sets V to 3, 4, 5, 6, and 7.
 ?- between(3, 7, V).
+```
+
+The `between` predicate can also be used to test
+whether a value is between two numbers inclusively.
+For example, the following are equivalent:
+
+```prolog
+Row >= 0, Row =< 7.
+between(0, 7, Row).
 ```
 
 ## Help
