@@ -644,9 +644,15 @@ owns(amanda, pet(dog, maisey)).
 owns(amanda, pet(dog, oscar)).
 owns(jeremy, pet(dog, ramsay)).
 
+% This takes a pet structure and destructures its kind and name.
+print_pet(pet(Kind, Name)) :-
+  format("~w is a ~w.~n", [Name, Kind]).
+
 main :-
   owns(tami, A),
   format('pet = ~w~n', A), % pet(dog,comet)
+
+  print_pet(A), % comet is a dog.
 
   owns(tami, pet(dog, B)),
   format('name = ~w~n', B), % comet
@@ -783,8 +789,8 @@ The `|` operator can be used to get the head and tail of a list.
 For example:
 
 ```prolog
-print_list_parts(L) :-
-  [H|T] = L,
+% This destructures the list passed in into its head and tail.
+print_list_parts([H|T]) :-
   format('head is ~w, tail is ~w', [H, T]).
 
 ?- print_list_parts([red, green, blue]).
@@ -1237,6 +1243,8 @@ For example, the following uses the `length` predicate.
 The following code implements rules to determine if
 a queen on a chess board can attach another piece.
 Each board position is represented by a row-column pair.
+Note how the arguments destructure the keys and values
+of pairs that are passed in.
 
 ```prolog
 queen_can_attack(R-_, R-_). % same row
