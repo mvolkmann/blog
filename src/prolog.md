@@ -81,8 +81,11 @@ However, writing programs that are entirely
 based on relationships rather than imperative code
 makes Prolog very different from other programming languages.
 This makes learning Prolog somewhat challenging initially.
+For example, to write a program that compiles some source code
+into its target representation, define the relationship that describes
+when source code is related to the target representation.
 
-Also, Prolog supports a large number of operators and built-in predicates.
+Prolog supports a large number of operators and built-in predicates.
 These take considerable time to learn and master.
 
 ## Resources
