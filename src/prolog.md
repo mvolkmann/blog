@@ -458,7 +458,7 @@ factorial(N, F) :-
   F is N * F1.
 
 ?- factorial(5, F).
-% Output is F = 120.
+% output is F = 120.
 ```
 
 Also see the `sum` example in the "Lists" section.
@@ -545,7 +545,7 @@ For example:
 
 ```prolog
 X is 6, Y is X * 2, Z is Y / 3.
-% Output is X = 6, Y = 12, Z = 4.
+% output is X = 6, Y = 12, Z = 4.
 % Subsequent queries cannot access these values.
 ```
 
@@ -1115,7 +1115,7 @@ For example:
 
 ```prolog
 L1 = [a, b], L2 = [c, d, e], L3 = [f], append([L1, L2, L3], L4).
-% Output is L4 = [a, b, c, d, e, f].
+% output is L4 = [a, b, c, d, e, f].
 ```
 
 If `append` were not built-in, it could be implemented as follows:
@@ -1168,15 +1168,68 @@ Y = [] ;
 A Prolog "pair" is a key and a value.
 There are two ways to write a pair, `k-v` or `-(k, v)`.
 
-A list of pairs can be sorted using `keysort`.
-For example:
+For details on predicates that operate on pairs, see {% aTargetBlank
+"https://eu.swi-prolog.org/pldoc/man?section=pairs",
+"library(pairs): Operations on key-value lists" %}.
+
+To sort a list of pairs on their keys:
 
 ```prolog
 ?- keysort([c-cow, b-bear, a-apple], Ps).
-Ps = [a-apple, b-bear, c-cow].
+% output is Ps = [a-apple, b-bear, c-cow].
 ```
 
-TODO: Add detail here.
+To get the keys from a list of pairs:
+
+```prolog
+?- pairs_keys([c-cow, b-bear, a-apple], Ks).
+% output is Ks = [c, b, a].
+```
+
+To get the values from a list of pairs:
+
+```prolog
+?- pairs_values([c-cow, b-bear, a-apple], Vs).
+% output is Vs = [cow, bear, apple].
+```
+
+To get both the keys and the values from a list of pairs:
+
+```prolog
+?- pairs_keys_values([c-cow, b-bear, a-apple], Ks, Vs).
+% output is Ks = [c, b, a], Vs = [cow, bear, apple].
+```
+
+When a list contains pairs with duplicate keys is sorted on those keys,
+we can get a new list where the keys are unique values
+and their values are lists of values.
+For example:
+
+```prolog
+%- group_pairs_by_key([a-apple, a-apricot, b-banana, b-blueberry, c-cherry], G).
+% output is G = [a-[apple, apricot], b-[banana, blueberry], c-[cherry]].
+```
+
+To swap keys and values in a list of pairs AND sort the pairs on their key:
+
+```prolog
+?- transpose_pairs([c-cow, b-bear, a-apple], Ts).
+% output is Ts = [apple-a, bear-b, cow-c].
+```
+
+The `map_list_to_pairs` predicate takes a predicate and a list of list.
+It creates a list of pairs where the key of each pair is
+the result of passing one of the sub-lists to a predicate
+and the associated value is the sub-list.
+For example, the following uses the `length` predicate.
+
+```prolog
+?- map_list_to_pairs(
+     length,
+     [[apple, apricot], [banana, blueberry], [cherry]],
+     Ps).
+% output is Ps = [2-[apple, apricot], 2-[banana, blueberry], 1-[cherry]].
+```
 
 The following code implements rules to determine if a queen on a chess board
 can attach another piece.
@@ -1187,9 +1240,6 @@ queen_can_attack((_, C), (_, C)).
 queen_can_attack((R1, C1), (R2, C2)) :-
   abs(R1 - R2) =:= abs(C1 - C2).
 ```
-
-See {% aTargetBlank "https://eu.swi-prolog.org/pldoc/man?section=pairs",
-"library(pairs): Operations on key-value lists" %}.
 
 ### Dicts
 
@@ -1412,7 +1462,7 @@ For example:
 
 ```prolog
 format('~w likes ~w.', [mark, 'Prolog']).
-% Outputs "mark likes Prolog."
+% outputs "mark likes Prolog."
 ```
 
 Rules can write to the current output stream.
@@ -1422,7 +1472,7 @@ For example:
 greet(Name) :- format('Hello, ~w!', [Name]).
 
 greet('Mark')
-% Outputs "Hello, Mark!"
+% outputs "Hello, Mark!"
 ```
 
 The following special sequences can be used in format strings:
@@ -1622,8 +1672,8 @@ TODO: Finish documenting the meaning of some of these operators.
 | `*->`    | soft cut; rarely used                                                  |
 | `:=`     | evaluates RHS as JavaScript (odd!)                                     |
 | `:<`     | succeeds when LHS is a sub-dict of RHS dict                            |
+| `?`      | TODO: Does this compose two predicates?                                |
 | `:`      |                                                                        |
-| `?`      |                                                                        |
 | `\_`     |                                                                        |
 | `/`      |                                                                        |
 | `.`      |                                                                        |
