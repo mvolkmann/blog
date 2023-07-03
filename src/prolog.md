@@ -220,7 +220,7 @@ To exit from any Prolog interpreter, enter `halt.` or press ctrl-d.
 | functor           | function name and its arity; written with a slash between       |
 | goal              | rule body expression to be satisfied                            |
 | list notation     | comma-separated terms inside square brackets; ex. `[a, B, 7]`   |
-| operator notation | terms separated by operators; ex. `Y = m\*X + b`                |
+| operator notation | terms separated by operators; ex. `Y = m*X + b`                 |
 | unification       | process of searching for variable values that satisfy a goal    |
 | choice point      | represents a choice in the search for a solution                |
 
@@ -1391,8 +1391,10 @@ Prefix operators are noted below.
 Each operator has left, right, or no associativity.
 
 Operators can be used in function form.
-For example, infix operators like `+` that are typically
+For example, infix operators like `+` whose usage s typically
 written like `a + b` can instead be written as `+(a, b)`.
+As another example, `X is 3 * (1 + 2).` gives the same result (`9`)
+as `X is *(3, +(1, 2)).`
 
 Prolog supports the following relational operators
 for numbers and arithmetic expressions.
