@@ -139,6 +139,24 @@ enter `brew install swi-prolog`
 
 To run SWI-Prolog from a terminal, enter `swipl`.
 
+#### Packs
+
+Packs are add-on libraries.
+
+To see a list of known packages, browse {% aTargetBlank
+"https://www.swi-prolog.org/pack/list?p$=$plml",
+"Packs (add-ons) for SWI-Prolog" %}.
+Alternatively, enter `pack_list(substring)` where
+substring is part of one or more pack names.
+
+To install a pack, enter `pack_install(name)`.
+This will download the code from `https://www.swi-prolog.org/pack/query`
+and install it.
+
+The "reif" pack (reified if) implements the `if_` predicate
+which is similar to the `->` operator, but has some advantages.
+I could not find good examples of using and could not get it to work.
+
 #### Debugging
 
 For information on using the debugger in SWI-Prolog, see {% aTargetBlank
@@ -2054,10 +2072,6 @@ TODO: How can you install a Prolog language server in Neovim?
 TODO: See https://github.com/jamesnvc/lsp_server.
 
 TODO: Can you run Prolog code inside Neovim?
-
-## Libraries
-
-TODO: Is there a popular collection of open source Prolog libraries?
 
 ## Miscellaneous Topics
 
