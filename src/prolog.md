@@ -139,6 +139,58 @@ enter `brew install swi-prolog`
 
 To run SWI-Prolog from a terminal, enter `swipl`.
 
+#### Debugging
+
+For information on using the debugger in SWI-Prolog, see {% aTargetBlank
+"https://www.swi-prolog.org/pldoc/man?section=debugoverview",
+"Overview of the Debugger" %}.
+
+The `trace` predicate enables tracing of the search to find a query solution.
+
+The following code defines fact about my family and a rule about grandfathers.
+
+```prolog
+female(amanda).
+female(judi).
+female(tami).
+
+male(jeremy).
+male(mark).
+male(richard).
+
+father(richard, mark).
+father(mark, amanda).
+father(mark, jeremy).
+
+mother(judi, mark).
+mother(tami, amanda).
+mother(tami, jeremy).
+
+grandfather_of(X, Y) :-
+  father(X, P),
+  (father(P, Y); mother(P, Y)).
+```
+
+To trace the execution of the query `grandfather_of(richard, X).`,
+enter `trace.` and then the query.
+The screenshot below shows the output.
+After each line in the trace, press the spacebar
+to advance to the next clause to be evaluated.
+After a solution is found, press the semicolon key
+to begin searching for the next solution.
+
+<img alt="SWI-Prolog trace" style="width: 60%"
+  src="/blog/assets/swi-prolog-trace.png?v={{pkg.version}}"
+  title="SWI-Prolog trace">
+
+#### Executables
+
+In SWI-Prolog, to compile a Prolog source file to an executable,
+enter `swipl -o {exe-name} -c {source-name}.pl`.
+For example, `swipl -o sukuko -c suduko.pl`.
+Running this executable with `./suduko` starts a REPL session
+and loads the compiled facts and rules.
+
 ### GNU Prolog
 
 <img alt="GNU Prolog logo" style="width: 20%"
@@ -1997,14 +2049,6 @@ TODO: Can you run Prolog code inside Neovim?
 ## Libraries
 
 TODO: Is there a popular collection of open source Prolog libraries?
-
-## Creating an Executable
-
-In SWI-Prolog, to compile a Prolog source file to an executable,
-enter `swipl -o {exe-name} -c {source-name}.pl`.
-For example, `swipl -o sukuko -c suduko.pl`.
-Running this executable with `./suduko` starts a REPL session
-and loads the compiled facts and rules.
 
 ## Miscellaneous Topics
 
