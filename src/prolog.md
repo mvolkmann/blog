@@ -102,8 +102,8 @@ These take considerable time to learn and master.
   "ISO Standard for Prolog" %}
 
 - {% aTargetBlank "https://www.metalevel.at/prolog", "The Power of Prolog" %}
-  free, online book by {% aTargetBlank "https://www.metalevel.at",
-  "Markus Triska" %}
+  free, online book with accompanying videos by
+  {% aTargetBlank "https://www.metalevel.at", "Markus Triska" %}
 
 - {% aTargetBlank "https://link.springer.com/book/10.1007/978-3-642-55481-0",
   "Programming in Prolog" %} Fifth edition book by Clocksin and Mellish
@@ -152,7 +152,7 @@ SWI-Prolog is implemented in a combination of C (48%) and Prolog (39%).
 To install the terminal command `swipl` in macOS,
 enter `brew install swi-prolog`
 
-To run SWI-Prolog from a terminal, enter `swipl`.
+To start a SWI-Prolog REPL from a terminal, enter `swipl`.
 
 #### Packs
 
@@ -238,7 +238,7 @@ GNU Prolog is implemented in a combination of C (84%) and Prolog (15%).
 To install the terminal command `gprolog` in macOS,
 enter `brew install gnu-prolog`.
 
-To run GNU Prolog from a terminal, enter `gprolog`.
+To start a GNU Prolog REPL from a terminal, enter `gprolog`.
 
 ### Scryer Prolog
 
@@ -264,6 +264,8 @@ cargo build --release
 
 This creates the executable file `target/release/scryer-prolog`.
 Define an alias like `scryerp` to make this easier to run.
+
+To start a Scryer Prolog REPL from a terminal, enter `scryerp`.
 
 ### Other Implementations
 
