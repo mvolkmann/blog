@@ -1995,3 +1995,16 @@ TODO: Can you run Prolog code inside Neovim?
 ## Libraries
 
 TODO: Is there a popular collection of open source Prolog libraries?
+
+## Creating an Executable
+
+In SWI-Prolog, to compile a Prolog source file to an executable,
+enter `swipl -o {exe-name} -c {source-name}.pl`.
+For example, `swipl -o sukuko -c suduko.pl`.
+Running this executable with `./suduko` starts a REPL session
+and loads the compiled facts and rules.
+
+## Miscellaneous Topics
+
+For multithreading, see the {% aTargetBlank
+"http://packs.ndrix.com/spawn/index.html", "spawn" %} library.
