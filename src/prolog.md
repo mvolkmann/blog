@@ -59,6 +59,8 @@ values for variables that cause a relationship to hold.
 This requires pattern matching search and backtracking.
 Unification relies on the properties of {% aTargetBlank
 "https://en.wikipedia.org/wiki/Horn_clause", "Horn clauses" %}.
+A related term is "ground" which refers to an expression
+that contains no uninstantiated variables.
 
 The set of facts and rules supplied to the Prolog engine is called a database.
 Prolog is highly optimized to handle searching large databases.
@@ -129,8 +131,10 @@ Many implementations add features beyond the ISO standard.
 
 The ISO standard does not require implementations to provide a
 top level or REPL, but most do.
-A top level supports interactive entry and evaluation of Prolog code.
-The top level of some implementations also supports interactive debugging.
+A top level supports interactive entry and evaluation of Prolog queries.
+The output is a new query, often containing semicolons,
+that describes the possible solutions.
+Some top level implementations also supports interactive debugging.
 
 Several Prolog implementations compile source code to
 abstract machine code for the Warren Abstract Machine (WAM).
@@ -527,8 +531,8 @@ that cause the predicate to succeed, one set at a time.
 
 ### Conjunctions
 
-The comma operator is used to form rules and queries
-where multiple goals must be met.
+The comma operator, read as "and", is used in clauses where
+multiple goals must be met.
 For example:
 
 ```prolog
@@ -558,6 +562,19 @@ For example:
 X is 6, Y is X * 2, Z is Y / 3.
 % output is X = 6, Y = 12, Z = 4.
 % Subsequent queries cannot access these values.
+```
+
+### Disjunctions
+
+The semicolon operator, read as "or", is used in clauses where
+one of a set of goals must be met.
+
+Earlier we saw a rule that stated something is fast
+if it is a cheetah or whippet.
+The following way of writing the rule uses disjunction:
+
+```prolog
+% fast(X) :- cheetah(X); whippet(X).
 ```
 
 ## Typical Flow
@@ -2225,3 +2242,5 @@ TODO: Can you run Prolog code inside Neovim?
 
 For multithreading, see the {% aTargetBlank
 "http://packs.ndrix.com/spawn/index.html", "spawn" %} library.
+
+TODO: Can you create an HTTP server that returns results of a Prolog program?
