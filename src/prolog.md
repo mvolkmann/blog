@@ -120,12 +120,17 @@ These take considerable time to learn and master.
 ## Implementations
 
 There are many implementations of the Prolog programming language.
-The most popular seems to be {% aTargetBlank
-"https://www.swi-prolog.org", "SWI-Prolog" %}.
-Another option is {% aTargetBlank "http://www.gprolog.org", "GNU Prolog" %}.
+The most popular are described below.
 
-Both SWI-Prolog and GNU Prolog conform to the ISO standard and
-both were being actively maintained as of June 2023.
+Many Prolog implementations conform to the {% aTargetBlank
+"https://www.iso.org/standard/21413.html", "ISO Standard for Prolog" %}.
+This defines the minimum requirements for conforming implementations.
+Many implementations add features beyond the ISO standard.
+
+The ISO standard does not require implementations to provide a
+top level or REPL, but most do.
+A top level supports interactive entry and evaluation of Prolog code.
+The top level of some implementations also supports interactive debugging.
 
 Several Prolog implementations compile source code to
 abstract machine code for the Warren Abstract Machine (WAM).
@@ -148,7 +153,8 @@ Searches in WAM use an efficient hash-based approach.
 > ("Social Science Informatics"), the former name of the group at
 > the University of Amsterdam, where Wielemaker is employed.
 
-SWI-Prolog is implemented in a combination of C (48%) and Prolog (39%).
+{% aTargetBlank "https://www.swi-prolog.org", "SWI-Prolog" %}.
+is implemented in a combination of C (48%) and Prolog (39%).
 
 To install the terminal command `swipl` in macOS,
 enter `brew install swi-prolog`
@@ -234,7 +240,8 @@ and loads the compiled facts and rules.
   src="/blog/assets/gnu-prolog-logo.png?v={{pkg.version}}"
   title="GNU Prolog logo">
 
-GNU Prolog is implemented in a combination of C (84%) and Prolog (15%).
+{% aTargetBlank "http://www.gprolog.org", "GNU Prolog" %}.
+is implemented in a combination of C (84%) and Prolog (15%).
 
 To install the terminal command `gprolog` in macOS,
 enter `brew install gnu-prolog`.
