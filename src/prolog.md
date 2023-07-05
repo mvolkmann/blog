@@ -1580,7 +1580,8 @@ The `write` predicate writes to the current output stream,
 which defaults to stdout.
 The atom `nl` is a built-in that writes a newline character
 to the current output stream.
-The `writeln` predicate combines these.
+The `writeln` predicate combines these
+(in SWI-Prolog, but not in Scryer Prolog).
 
 For example:
 
@@ -1594,6 +1595,8 @@ The {% aTargetBlank "https://www.swi-prolog.org/pldoc/man?predicate=format/2",
 "format" %} predicate also writes to the current output stream.
 It takes a format string and a list of values
 to be substituted into the format string.
+(In Scryer Prolog, `use_module(library(format)).`
+and use the `format_` predicate.)
 
 The format string can contain the following control sequences
 that all begin with a tilde:
@@ -2561,8 +2564,8 @@ Predefined non-terminals include:
 - `(,)//2`: concatenation; read as "and then"
 - `(|)//2`: alternatives; read as "or"
 
-The predicate `phrase(GRBody, Ls)` holds if
-`Ls` is a list that matches `GRBody`.
+The predicate `phrase(GRBody, L)` holds if
+`L` is a list that matches `GRBody` and nothing remains in `L`.
 
 For example, the following grammar rules describe sequences
 that contain any number of `x` characters.
@@ -2669,6 +2672,40 @@ phrase(
 
 DCGs can be used for parsing by describing a relationship
 between lists of characters and syntax trees.
+
+Grammar bodies can contain Prolog goals in curly braces.
+
+To enable termination it is sometimes useful to include `{false}`.
+
+Another way to achieve termination is to use a different execution strategy
+such as "SLG resolution".
+To enable this, execute the following:
+
+```prolog
+:- use_module(library(tabling)).
+:- table expr//0.
+```
+
+The following DCG that describes sequences like `1+1+1`
+doesn't naturally terminate due to its use of left recursion.
+However, it does terminate when SLG resolution is enabled.
+
+```prolog
+expr --> "1".
+expr --> expr, "+", expr. % uses left recursion
+```
+
+This can be rewritten as follows so it terminates without SLG resolution.
+
+```prolog
+expr --> "1", expr_rest.
+expr_rest --> [].
+expr_rest --> "+", expr.
+```
+
+Using SLG resolution with DCGs is called "Packrat Parsing".
+
+Lexical analysis is a relationship between a string and sequence of tokens.
 
 ## Language Server
 
