@@ -517,11 +517,12 @@ When a query has multiple matches, as in this example,
 the interpreter will wait for further input.
 
 To search for the next match, press the semicolon key.
-(SWI-Prolog also supports pressing the n, r, space, or tab keys to do this.)
+SWI-Prolog also supports pressing the n, r, space, or tab keys to do this.
+Scryer Prolog supports pressing a to output all remaining solutions.
 
 To stop searching for matches before the last one is found,
 press the return key.
-(SWI-Prolog also supports pressing the c or a keys to do this.)
+SWI-Prolog also supports pressing the c or a keys to do this.
 
 After the last match is found, a prompt for the next query will appear.
 
@@ -2229,6 +2230,212 @@ This outputs the following solution:
 5 1 9 2 8 6 4 7 3
 4 7 2 3 1 9 5 6 8
 8 6 3 7 4 5 2 1 9
+```
+
+## Einstein's Riddle
+
+Einstein's riddle, aka {% aTargetBlank
+"https://en.wikipedia.org/wiki/Zebra_Puzzle", "Zebra Puzzle" %},
+describes a set of known facts and relationships
+and asks you to find some set of unknown values.
+
+There are several examples of this type of puzzle.
+
+One begins with "Three kids went to a superheroes dress birthday party."
+The following code solves this puzzle.
+
+```prolog
+% The names of the three kids are Ethan, Ali and Anya.
+kid(ethan).
+kid(ali).
+kid(anya).
+
+% They dressed up as Spiderman, Captain America and Iron Man.
+hero(spiderman).
+hero(captain_america).
+hero(iron_man).
+
+% The kids are 6, 8 and 10 years old.
+age(6).
+age(8).
+age(10).
+
+% Anya was dressed up as Spiderman.
+kid_hero_age(anya, spiderman, A) :- age(A).
+
+% Ethan was not dressed up as Captain America.
+kid_hero_age(ethan, H, A) :- hero(H), age(A), H\=captain_america.
+
+% The youngest kid dressed up as Spiderman.
+kid_hero_age(K, spiderman, 6):- kid(K).
+
+% The kid who is 8 years old dressed up as Captain America.
+kid_hero_age(K, captain_america, 8) :- kid(K).
+
+% Three values are distinct if this holds.
+different(A, B, C) :-
+  A \= B, A \= C, B \= C. % use distinct list?
+
+% Determine the missing information.
+solve(K1, H1, A1, K2, H2, A2, K3, H3, A3) :-
+  kid_hero_age(K1, H1, A1),
+  kid_hero_age(K2, H2, A2),
+  kid_hero_age(K3, H3, A3),
+  different(K1, K2, K3),
+  different(H1, H2, H3),
+  different(A1, A2, A3),
+  !.
+
+:- solve(K1, H1, A1, K2, H2, A2, K3, H3, A3),
+   S = "~w is ~w and dressed as ~w.~n",
+   format(S, [K1, A1, H1]),
+   format(S, [K2, A2, H2]),
+   format(S, [K3, A3, H3]),
+   halt.
+```
+
+The output is:
+
+```
+anya is 6 and dressed as spiderman.
+ethan is 10 and dressed as iron_man.
+ali is 8 and dressed as captain_america.
+```
+
+The classic Zebra puzzle is a bit more difficult.
+It asks you to determine who owns a zebra.
+
+There are five nationalities:
+englishman, japanese, norwegian, spaniard, and ukrainian.
+
+There are five houses colors:
+blue, green, ivory, red, and yellow.
+
+There are five drinks:
+coffee, milk, orange_juice, tea, and water.
+
+There are five smokes:
+chesterfields, kools, lucky_strike, old_gold, and parliaments.
+
+There are five pets:
+dog, fox, horse, snails, and zebra.
+
+The following code solves this puzzle.
+
+```prolog
+% The relation arguments are Nationality, Color, Drinks, Smokes, and Pet.
+
+% List element A is on the left of list element B
+% if appending $ something onto a list
+% beginning with A,B results in a given list.
+on_left(A, B, Ls) :- append(_, [A,B|_], Ls).
+
+% List element A is on the right of list element B
+% if B is on the left of A.
+on_right(A, B, Ls) :- on_left(B, A, Ls).
+
+% List elements A and B are adjacent
+% if A is on the left or right side of B.
+adjacent(A, B, Ls) :- on_left(A, B, Ls); on_right(A, B, Ls).
+
+% This gets a list of all the houses contain all their details.
+houses(Hs) :-
+  % There are five houses.
+  length(Hs, 5),
+
+  % The Englishman lives in the red house.
+  member(relation(englishman, red, _, _, _), Hs),
+
+  % The Spaniard owns the dog.
+  member(relation(spaniard, _, _, _, dog), Hs),
+
+  % Coffee is drunk in the green house.
+  member(relation(_, green, coffee, _, _), Hs),
+
+  % The Ukrainian drinks tea.
+  member(relation(ukrainian, _, tea, _, _), Hs),
+
+  % The green house is immediately to the right of the ivory house.
+  on_left(
+    relation(_, ivory, _, _, _),
+    relation(_, green, _, _, _),
+    Hs),
+
+  % The Old Gold smoker owns snails.
+  member(relation(_, _, _, old_gold, snails), Hs),
+
+  % Kools are smoked in the yellow house.
+  member(relation(_, yellow, _, kools, _), Hs),
+
+  % Milk is drunk in the middle house.
+  Hs = [_, _, relation(_, _, milk, _, _), _, _],
+
+  % The Norwegian lives in the first house.
+  Hs = [relation(norwegian, _, _, _, _) | _],
+
+  % The man who smokes Chesterfields lives in
+  % the house next to the man with the fox.
+  adjacent(
+    relation(_, _, _, chesterfields, _),
+    relation(_, _, _, _, fox),
+    Hs),
+
+  % Kools are smoked in the house next to the house where the horse is kept.
+  adjacent(
+    relation(_, _, _, kools, _),
+    relation(_, _, _, _, horse),
+    Hs),
+
+  % The Lucky Strike smoker drinks orange juice.
+  member(relation(_, _, orange_juice, lucky_strike, _), Hs),
+
+  % The Japanese smokes Parliaments.
+  member(relation(japanese, _, _, parliaments, _), Hs),
+
+  % The Norwegian lives next to the blue house.
+  adjacent(
+    relation(norwegian, _, _, _, _),
+    relation(_, blue, _, _, _),
+    Hs),
+
+  % Someone drinks water.
+  member(relation(_, _, water, _, _), Hs),
+
+  % Someone owns a zebra.
+  member(relation(_, _, _, _, zebra), Hs).
+
+zebra_owner(N) :-
+	houses(Hs),
+	member(relation(N, _, _, _, zebra), Hs),
+	!.
+
+water_drinker(N) :-
+	houses(Hs),
+	member(relation(N, _, water, _, _), Hs),
+	!.
+
+print_houses([]).
+
+print_houses([H|T]) :-
+  relation(N, C, D, S, P) = H,
+  %S = "The ~w lives in the ~w house, drinks ~w, smokes ~w, and owns a ~w.~n",
+  %format(S, [N, C, D, S, P]),
+  format(
+    "The ~w lives in the ~w house, drinks ~w, smokes ~w, and owns a ~w.~n",
+    [N, C, D, S, P]),
+  print_houses(T).
+
+:- houses(Hs), print_houses(Hs).
+```
+
+The output is:
+
+```
+The norwegian lives in the yellow house, drinks water, smokes kools, and owns a fox.
+The ukrainian lives in the blue house, drinks tea, smokes chesterfields, and owns a horse.
+The englishman lives in the red house, drinks milk, smokes old_gold, and owns a snails.
+The spaniard lives in the ivory house, drinks orange_juice, smokes lucky_strike, and owns a dog.
+The japanese lives in the green house, drinks coffee, smokes parliaments, and owns a zebra.
 ```
 
 ## Language Server
