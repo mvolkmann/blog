@@ -2542,6 +2542,7 @@ The japanese lives in the green house, drinks coffee, smokes parliaments, and ow
 A DCG defines a set of grammar rules (GR)
 where each has the syntax `GRHead --> GRBody`.
 These describe a sequence of allowed terminals, non-terminals, and goals.
+Be careful to include two dashes in the arrow and not just one.
 
 DCGs are not yet part of the ISO Prolog standard, but they are being considered.
 Most Prolog implementations already support DCGs.
