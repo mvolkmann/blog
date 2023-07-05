@@ -347,10 +347,14 @@ To exit from any Prolog interpreter, enter `halt.` or press ctrl-d.
 | conjunction       | and'ing terms with comma operator                               |
 | disjunction       | or'ing terms with semicolon operator                            |
 
-A compound term is a functor name followed by an argument list.
-Each argument can be an atom, a variable, a destructuring of variables,
-or another compound term.
-Nested compound terms can be represented by a tree structure.
+A string is treated as a list of atoms where each atom represents a character.
+This makes it a compound term.
+
+Every compound term can be written as
+a functor name followed by an argument list.
+Each argument can be an atom, a variable, or another compound term.
+All compound terms, including nested ones,
+can be represented by a tree structure.
 
 A rule can be thought of as a special kind of fact
 that depends on a set of other facts
