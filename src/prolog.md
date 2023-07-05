@@ -237,7 +237,7 @@ To trace the execution of the query `grandfather_of(richard, X).`,
 enter `trace.` and then the query.
 The screenshot below shows the output.
 After each line in the trace, press the spacebar
-to advance to the next clause to be evaluated.
+to advance to the next term to be evaluated.
 After a solution is found, press the semicolon key
 to begin searching for the next solution.
 
@@ -321,31 +321,31 @@ To exit from any Prolog interpreter, enter `halt.` or press ctrl-d.
 
 ## Terminology
 
-| Term              | Meaning                                                         |
-| ----------------- | --------------------------------------------------------------- |
-| term              | the only datatype; has four subtypes listed below               |
-| - number          | integer or floating point                                       |
-| - atom            | identifier that represents a specific thing                     |
-| - variable        | represents a value to be determined                             |
-| - compound term   | specific combination of terms; more detail below                |
-| structure         | another name for a compound term                                |
-| fact              | description of something that is true                           |
-| rule              | relationship involving one or more unknown things (variables)   |
-| predicate         | collection of clauses with the same functor                     |
-| clause            | a fact or rule                                                  |
-| query             | asks if a clause is true or asks for satisfying variable values |
-| database          | collection of predicates                                        |
-| functor name      | name of a predicate                                             |
-| arity             | number of predicate arguments                                   |
-| functor           | function name and its arity; written with a slash between       |
-| goal              | rule body expression to be satisfied                            |
-| list notation     | comma-separated terms inside square brackets; ex. `[a, B, 7]`   |
-| operator notation | terms separated by operators; ex. `Y = m*X + b`                 |
-| function notation | operators are written as function calls; ex. `*(3, +(1, 2))`    |
-| unification       | process of searching for variable values that satisfy a goal    |
-| choice point      | represents a choice in the search for a solution                |
-| conjunction       | and'ing terms with comma operator                               |
-| disjunction       | or'ing terms with semicolon operator                            |
+| Term              | Meaning                                                       |
+| ----------------- | ------------------------------------------------------------- |
+| term              | the only datatype; has four subtypes listed below             |
+| - number          | integer or floating point                                     |
+| - atom            | identifier that represents a specific thing                   |
+| - variable        | represents a value to be determined                           |
+| - compound term   | specific combination of terms; more detail below              |
+| structure         | another name for a compound term                              |
+| fact              | description of something that is true                         |
+| rule              | relationship involving one or more unknown things (variables) |
+| predicate         | collection of clauses with the same functor                   |
+| clause            | a fact or rule                                                |
+| query             | asks if a term is true or asks for satisfying variable values |
+| database          | collection of predicates                                      |
+| functor name      | name of a predicate                                           |
+| arity             | number of predicate arguments                                 |
+| functor           | function name and its arity; written with a slash between     |
+| goal              | rule body expression to be satisfied                          |
+| list notation     | comma-separated terms inside square brackets; ex. `[a, B, 7]` |
+| operator notation | terms separated by operators; ex. `Y = m*X + b`               |
+| function notation | operators are written as function calls; ex. `*(3, +(1, 2))`  |
+| unification       | process of searching for variable values that satisfy a goal  |
+| choice point      | represents a choice in the search for a solution              |
+| conjunction       | and'ing terms with comma operator                             |
+| disjunction       | or'ing terms with semicolon operator                          |
 
 A string is treated as a list of atoms where each atom represents a character.
 This makes it a compound term.
@@ -511,8 +511,8 @@ is to add more versions of the rule.
 
 ## Queries
 
-Queries test whether a clause is true or
-they find variable values for which the clause is true.
+Queries test whether a term is true or
+they find variable values for which the term is true.
 Queries are written after the characters `?-`.
 
 For example:
@@ -556,8 +556,8 @@ that cause the predicate to succeed, one set at a time.
 
 ### Conjunctions
 
-The comma operator, read as "and", is used in clauses where
-multiple goals must be met.
+The comma operator, read as "and", is used in rules or queries
+where multiple goals must be met.
 For example:
 
 ```prolog
@@ -591,8 +591,8 @@ X is 6, Y is X * 2, Z is Y / 3.
 
 ### Disjunctions
 
-The semicolon operator, read as "or", is used in clauses where
-one of a set of goals must be met.
+The semicolon operator, read as "or", is used in rules or queries
+where one of a set of goals must be met.
 
 Earlier we saw a rule that stated something is fast
 if it is a cheetah or whippet.
@@ -653,7 +653,7 @@ It seems this can replace existing facts rather than add to them.
 
 ## Tree Representation
 
-Every Prolog clause and query can be represented as a tree
+Every Prolog term can be represented as a tree
 where parent nodes are functors and arguments are children.
 For example, `a(b, c(d, e), f)` can be represented as the following tree:
 
@@ -1490,14 +1490,14 @@ A session can do the following:
 ## Runtime Predicates
 
 A predicate can be placed in a variable at runtime
-and later used to create a clause with the `:..` operator
+and later used to create a term with the `:..` operator
 which is evaluated using the `call` predicate.
 For example:
 
 ```prolog
 P = <, % could be set to a different relational operator
-Clause =.. [P, 3, 5], % builds clause from list containing functor and arguments
-call(Clause). % evaluates clause
+Term =.. [P, 3, 5], % builds term from list containing functor and arguments
+call(Term). % evaluates term
 ```
 
 ## Input
@@ -1690,7 +1690,7 @@ written like `a + b` can instead be written as `+(a, b)`.
 As another example, `X is 3 * (1 + 2).` gives the same result (`9`)
 as `X is *(3, +(1, 2)).`
 
-The `write_canonical` predicate takes any clause
+The `write_canonical` predicate takes any term
 and outputs it in its equivalent function notation.
 For example, entering `write_canonical(3 * 1 + 2).`
 outputs `*(3,+(1,2))`.
@@ -1802,33 +1802,33 @@ Prolog supports the following additional operators:
 
 TODO: Finish documenting the meaning of some of these operators.
 
-| Operator | Meaning                                                                               |
-| -------- | ------------------------------------------------------------------------------------- |
-| `-->`    | used in grammar rules for implementing parsers                                        |
-| `:-`     | appears between the head and body of every rule; read as "if"                         |
-| `?-`     | prefix operator that appears before every query                                       |
-| `\|`     | separates the head and tail of a list in `[H\| T]`                                    |
-| `;`      | separates clauses to be or'ed                                                         |
-| `,`      | separates clauses to be and'ed                                                        |
-| `->`     | similar to ternary operator `?:` in other languages; called "if-then"                 |
-| `\+`     | prefix operator that succeeds when the goal that follows does not hold                |
-| `=`      | attempts to unify LHS with RHS                                                        |
-| `\=`     | tests whether two terms cannot be unified                                             |
-| `=..`    | equates a clause with a list containing its functor name and arguments; called "univ" |
-| `is`     | attempts to unify LHS with RHS arithmetic expression result                           |
-| `>:<`    | partial unification between to dictionaries                                           |
-| `!`      | cut; prevents further backtracking                                                    |
-| `$`      | similar to `!` TODO How does it differ?                                               |
-| `*->`    | soft cut; rarely used                                                                 |
-| `:=`     | evaluates RHS as JavaScript (odd!)                                                    |
-| `:<`     | succeeds when LHS is a sub-dict of RHS dict                                           |
-| `?`      | TODO: Does this compose two predicates?                                               |
-| `:`      |                                                                                       |
-| `\_`     |                                                                                       |
-| `/`      |                                                                                       |
-| `.`      |                                                                                       |
-| `as`     |                                                                                       |
-| `=>`     |                                                                                       |
+| Operator | Meaning                                                                             |
+| -------- | ----------------------------------------------------------------------------------- |
+| `-->`    | used in grammar rules for implementing parsers                                      |
+| `:-`     | appears between the head and body of every rule; read as "if"                       |
+| `?-`     | prefix operator that appears before every query                                     |
+| `\|`     | separates the head and tail of a list in `[H\| T]`                                  |
+| `,`      | separates terms to be and'ed                                                        |
+| `;`      | separates terms to be or'ed                                                         |
+| `->`     | similar to ternary operator `?:` in other languages; called "if-then"               |
+| `\+`     | prefix operator that succeeds when the goal that follows does not hold              |
+| `=`      | attempts to unify LHS with RHS                                                      |
+| `\=`     | tests whether two terms cannot be unified                                           |
+| `=..`    | equates a term with a list containing its functor name and arguments; called "univ" |
+| `is`     | attempts to unify LHS with RHS arithmetic expression result                         |
+| `>:<`    | partial unification between to dictionaries                                         |
+| `!`      | cut; prevents further backtracking                                                  |
+| `$`      | similar to `!` TODO How does it differ?                                             |
+| `*->`    | soft cut; rarely used                                                               |
+| `:=`     | evaluates RHS as JavaScript (odd!)                                                  |
+| `:<`     | succeeds when LHS is a sub-dict of RHS dict                                         |
+| `?`      | TODO: Does this compose two predicates?                                             |
+| `:`      |                                                                                     |
+| `\_`     |                                                                                     |
+| `/`      |                                                                                     |
+| `.`      |                                                                                     |
+| `as`     |                                                                                     |
+| `=>`     |                                                                                     |
 
 The `:-` prefix operator marks a directive to the Prolog system.
 For example, `:- use_module(library(clpfd)).`
