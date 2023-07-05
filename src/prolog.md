@@ -1574,10 +1574,12 @@ that all begin with a tilde:
   `~16r` outputs a number in lowercase hexadecimal,
   and `~16R` outputs an integer in uppercase hexadecimal.
 - `~s`: literal string
-- `~t`: multiple spaces up to the next tab stop;
-  performs left, center, or right alignment based on placement and tab stops
+- `~t`: inserts multiple spaces up to the next tab stop;
+  used to left, center, or right align what follows
 - `~w`: writes value of a variable or atom
-- `~C+`: sets a tab stop at column C
+- `~N|`: sets a tab stop at column N
+- `~N+`: sets a tab stop at N columns past last tab stop
+  (A tab stop is assumed at column zero.)
 
 For more control sequences, see the "format" link above.
 
@@ -1591,11 +1593,35 @@ format('~w likes ~s.', [mark, 'Prolog']).
 Rules can write to the current output stream.
 For example:
 
-```prolog
+````prolog
 greet(Name) :- format('Hello, ~w!', [Name]).
 
 greet('Mark')
 % outputs "Hello, Mark!"
+```
+
+Tab stops can be used to output aligned columns.
+For example:
+
+```prolog
+print_row(Row) :-
+  % The 1st list element is left-aligned.
+  % The 2nd list element is center-aligned.
+  % The 3rd list element is right-aligned.
+  format("~w~t~10+~t~w~t~10+~t~w~10+~n", Row).
+
+:- Rows = [
+     ["foo", "bar", "baz"],
+     ["foolish", "barking", "bazooka"]
+   ],
+   maplist(print_row, Rows).
+````
+
+The output is:
+
+```text
+foo          bar           baz
+foolish     barking     bazooka
 ```
 
 The `put` function writes a single ASCII value to the current output stream.
