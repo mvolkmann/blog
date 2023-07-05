@@ -297,10 +297,28 @@ Define an alias like `scryerp` to make this easier to run.
 
 To start a Scryer Prolog REPL from a terminal, enter `scryerp`.
 
+### Ciao Prolog
+
+{% aTargetBlank "https://ciao-lang.org", "Ciao" %}
+"is a modern Prolog implementation that builds up from a
+logic-based simple kernel designed to be portable, extensible, and modular."
+
+Ciao is implemented in Prolog (72%) and C (23%)
+
+To install:
+
+1. Install emacs. In macOS, this can be done by entering `brew install emacs`
+1. Enter `curl https://ciao-lang.org/boot -sSfL | sh`
+1. Create an alias to the executable. For example:
+
+   ```bash
+   alias ciao="$HOME/.ciaoroot/v1.22.0-m5/build/bin/ciao"
+   ```
+
+To start a Ciao REPL from a terminal, enter `ciao`.
+
 ### Other Implementations
 
-- {% aTargetBlank "https://ciao-lang.org", "Ciao" %}
-  implemented in Prolog (72%) and C (23%)
 - {% aTargetBlank "http://tau-prolog.org", "Tau" %}
   implemented in JavaScript (95%) and Prolog (5%)
 - {% aTargetBlank "https://github.com/trealla-prolog/trealla", "Trealla" %}
