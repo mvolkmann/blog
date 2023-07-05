@@ -344,6 +344,8 @@ To exit from any Prolog interpreter, enter `halt.` or press ctrl-d.
 | function notation | operators are written as function calls; ex. `*(3, +(1, 2))`    |
 | unification       | process of searching for variable values that satisfy a goal    |
 | choice point      | represents a choice in the search for a solution                |
+| conjunction       | and'ing terms with comma operator                               |
+| disjunction       | or'ing terms with semicolon operator                            |
 
 A compound term is a functor name followed by an argument list.
 Each argument can be an atom, a variable, a destructuring of variables,
@@ -1804,7 +1806,7 @@ TODO: Finish documenting the meaning of some of these operators.
 | `\|`     | separates the head and tail of a list in `[H\| T]`                                    |
 | `;`      | separates clauses to be or'ed                                                         |
 | `,`      | separates clauses to be and'ed                                                        |
-| `->`     | similar to the ternary operator `?:` in other languages                               |
+| `->`     | similar to ternary operator `?:` in other languages; called "if-then"                 |
 | `\+`     | prefix operator that succeeds when the goal that follows does not hold                |
 | `=`      | attempts to unify LHS with RHS                                                        |
 | `\=`     | tests whether two terms cannot be unified                                             |
