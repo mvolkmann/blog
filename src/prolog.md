@@ -181,7 +181,15 @@ is implemented in a combination of C (48%) and Prolog (39%).
 To install the terminal command `swipl` in macOS,
 enter `brew install swi-prolog`
 
-To start a SWI-Prolog REPL from a terminal, enter `swipl`.
+To start a SWI-Prolog top level from a terminal, enter `swipl`.
+
+To specify configuration for all top level sessions,
+create the file `$HOME/.config/swi-prolog/init.pl`.
+For example, this file might contain the following:
+
+```prolog
+:- set_prolog_flag(double_quotes, chars).
+```
 
 #### Packs
 
@@ -253,7 +261,7 @@ To disable these, enter `notrace.` and `nodebug.`
 In SWI-Prolog, to compile a Prolog source file to an executable,
 enter `swipl -o {exe-name} -c {source-name}.pl`.
 For example, `swipl -o sukuko -c suduko.pl`.
-Running this executable with `./suduko` starts a REPL session
+Running this executable with `./suduko` starts a top level session
 and loads the compiled facts and rules.
 
 ### GNU Prolog
@@ -268,7 +276,7 @@ is implemented in a combination of C (84%) and Prolog (15%).
 To install the terminal command `gprolog` in macOS,
 enter `brew install gnu-prolog`.
 
-To start a GNU Prolog REPL from a terminal, enter `gprolog`.
+To start a GNU Prolog top level from a terminal, enter `gprolog`.
 
 ### Scryer Prolog
 
@@ -295,7 +303,10 @@ cargo build --release
 This creates the executable file `target/release/scryer-prolog`.
 Define an alias like `scryerp` to make this easier to run.
 
-To start a Scryer Prolog REPL from a terminal, enter `scryerp`.
+To start a Scryer Prolog top level from a terminal, enter `scryerp`.
+
+To specify configuration for all top level sessions,
+create the file `$HOME/.scryerrc`.
 
 ### Ciao Prolog
 
@@ -315,7 +326,7 @@ To install:
    alias ciao="$HOME/.ciaoroot/v1.22.0-m5/build/bin/ciao"
    ```
 
-To start a Ciao REPL from a terminal, enter `ciao`.
+To start a Ciao top level from a terminal, enter `ciao`.
 
 ### Other Implementations
 
@@ -324,7 +335,7 @@ To start a Ciao REPL from a terminal, enter `ciao`.
 - {% aTargetBlank "https://github.com/trealla-prolog/trealla", "Trealla" %}
   implemented in C (82%) and Prolog (18%)
 
-## Online REPL
+## Online Top Level
 
 To enter and run Prolog code in a web browser, browse
 {% aTargetBlank "https://swish.swi-prolog.org", "SWISH" %}.
@@ -622,10 +633,10 @@ The following way of writing the rule uses disjunction:
 
 ## Typical Flow
 
-To start a Prolog REPL, enter an implementation command
+To start a Prolog top level, enter an implementation-specific command
 such as `swipl` or `gprolog`.
 
-To evaluate a query in the REPL,
+To evaluate a query in the top level,
 enter the query terminated with a period.
 If the query does not contain any variables
 then `true` or `false` will be output.
@@ -647,7 +658,7 @@ The typical steps to run a Prolog program are:
 Unfortunately Prolog and Perl use the same file extension
 for their source files.
 
-To load a `.pl` file in the REPL,
+To load a `.pl` file in the top level,
 enter `['file-path'].` or `consult('file-path').`
 If the file is in the current directory,
 its name can be used without the `.pl` extension
@@ -655,7 +666,7 @@ and quotes are not needed inside the square brackets.
 For example, to load the file `demo.pl` in the current directory,
 enter `[demo].`
 
-Alternatively, pass a source file to the REPL when starting it.
+Alternatively, pass a source file to the top level when starting it.
 For example, `swipl demo.pl`
 
 In SWI-Prolog, after modifying source files that have already been loaded,
@@ -2561,10 +2572,39 @@ then `"abc"` is the same as `[a, b, c]`.
 ```prolog
 xs --> "".
 xs --> "x", xs.
+
+% To test solutions ...
 phrase(xs, "xyx"). % false
 phrase(xs, "xxx"). % true
+
+% To complete solutions ...
 phrase(xs, [x, A, x, x, B, x]). % solution is A = B, B = x.
+
+% To generate solutions ...
 phrase(xs, Ls). % finds all possible solutions
+```
+
+Every DSG rule can be translated to a standard Prolog rule
+which is typically longer.
+Most DSG implementations do this behind the scenes.
+
+The predicate `seq(L)` describes a sequence of values.
+For example, the following finds all combinations of `Xs` and `Ys` values
+that can be concatenated to form `"abc"`:
+
+```prolog
+?- phrase((seq(Xs), seq(Ys)), "abc").
+% output is:
+% Xs = [], Ys = "abc"
+% ;  Xs = "a", Ys = "bc"
+% ;  Xs = "ab", Ys = "c"
+% ;  Xs = "abc", Ys = []
+```
+
+The following code implements predicates that are often useful when using DCGs:
+
+```prolog
+
 ```
 
 ## Language Server
