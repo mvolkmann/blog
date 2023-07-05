@@ -118,6 +118,9 @@ These take considerable time to learn and master.
 - {% aTargetBlank "https://www.iso.org/standard/21413.html",
   "ISO Standard for Prolog" %}
 
+- {% aTargetBlank "http://lpn.swi-prolog.org/lpnpage.php?pageid=online",
+  "Learn Prolog Now!" %}
+
 - {% aTargetBlank "https://www.metalevel.at/prolog", "The Power of Prolog" %}
   free, online book with accompanying videos by
   {% aTargetBlank "https://www.metalevel.at", "Markus Triska" %}
