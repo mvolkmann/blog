@@ -1542,10 +1542,34 @@ The {% aTargetBlank "https://www.swi-prolog.org/pldoc/man?predicate=format/2",
 It takes a format string and a list of values
 to be substituted into the format string.
 
+The format string can contain the following control sequences
+that all begin with a tilde:
+
+- `~d`: decimal
+- `~D`: decimal with commas every three digits
+- `~e`: floating point in exponential notation
+- `~E`: same as `~e` but with a capital E
+- `~f`: floating point without exponential notation
+- `~i`: ignores corresponding value; no output
+- `~Nf`: float value with only N decimal places
+- `~n`: single newline character
+- `~Nn`: N newline characters
+- `~Nr`: integer converted to radix N
+  For example, `~2r` outputs a number in binary,
+  `~16r` outputs a number in lowercase hexadecimal,
+  and `~16R` outputs an integer in uppercase hexadecimal.
+- `~s`: literal string
+- `~t`: multiple spaces up to the next tab stop;
+  performs left, center, or right alignment based on placement and tab stops
+- `~w`: writes value of a variable or atom
+- `~C+`: sets a tab stop at column C
+
+For more control sequences, see the "format" link above.
+
 For example:
 
 ```prolog
-format('~w likes ~w.', [mark, 'Prolog']).
+format('~w likes ~s.', [mark, 'Prolog']).
 % outputs "mark likes Prolog."
 ```
 
@@ -1558,14 +1582,6 @@ greet(Name) :- format('Hello, ~w!', [Name]).
 greet('Mark')
 % outputs "Hello, Mark!"
 ```
-
-The following special sequences can be used in format strings:
-
-- `~2f`: substitutes a float value and only outputs two decimal places
-- `~n`: newline character
-- `~s`: substitutes a literal string
-- `~w`: substitutes a word derived from an atom name
-- TODO: Add more!
 
 The `put` function writes a single ASCII value to the current output stream.
 It is the counterpart to the `get` function.
