@@ -1924,6 +1924,10 @@ SWI-Prolog prefers double quotes.
 To escape a quote inside a literal string, precede it with a backslash.
 
 A string is represented by a list of characters.
+In some implementations, such as Scryer Prolog, this is the case by default.
+In others, such as SWI-Prolog, this must be enabled
+with `?- set_prolog_flag(double_quotes, chars).`
+This means predicates that operate on lists can also operate on strings.
 
 To get the length of a string, use the `atom_length` function.
 For example:
@@ -2520,6 +2524,47 @@ The ukrainian lives in the blue house, drinks tea, smokes chesterfields, and own
 The englishman lives in the red house, drinks milk, smokes old_gold, and owns a snails.
 The spaniard lives in the ivory house, drinks orange_juice, smokes lucky_strike, and owns a dog.
 The japanese lives in the green house, drinks coffee, smokes parliaments, and owns a zebra.
+```
+
+## Definite Clause Grammars (DCGs)
+
+A DCG defines a set of grammar rules (GR)
+where each has the syntax `GRHead --> GRBody`.
+These describe a sequence of allowed terminals, non-terminals, and goals.
+
+DCGs are not yet part of the ISO Prolog standard, but they are being considered.
+Most Prolog implementations already support DCGs.
+
+DCGs are enabled by default in SWI-Prolog,
+but not in all Prolog implementations.
+To enable DCGs, it may be necessary to enter `:- use_module(library(dcgs)).`
+This can be added to the configuration file for a Prolog implementation
+so the `dcg` library is always available.
+For example, in Scryer Prolog the configuration file is `~/.scryerrc`.
+
+`F//N` refers to the non-terminal `F` with `N` arguments.
+
+Predefined non-terminals include:
+
+- `(,)//2`: concatenation; read as "and then"
+- `(|)//2`: alternatives; read as "or"
+
+The predicate `phrase(GRBody, Ls)` holds if
+`Ls` is a list that matches `GRBody`.
+
+For example, the following grammar rules describe sequences
+that contain any number of `x` characters.
+
+Recall that when the `double_quotes` flag is set to `chars`
+then `"abc"` is the same as `[a, b, c]`.
+
+```prolog
+xs --> "".
+xs --> "x", xs.
+phrase(xs, "xyx"). % false
+phrase(xs, "xxx"). % true
+phrase(xs, [x, A, x, x, B, x]). % solution is A = B, B = x.
+phrase(xs, Ls). % finds all possible solutions
 ```
 
 ## Language Server
