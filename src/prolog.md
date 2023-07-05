@@ -74,6 +74,21 @@ abstract problem solving, symbolic equation solving, and more.
 capable of answering questions posed in natural language."
 It is partially implemented in Prolog.
 
+## Use Cases
+
+Prolog is used in many kinds of applications including:
+
+- problem solving
+- specification language
+
+  For example, the Java Virtual Machine (JVM) specification uses Prolog.
+
+- rule-based systems
+- automation systems
+- robot planning
+- natural language understanding
+- intelligent database retrieval
+
 ## Learning Curve
 
 The primary concepts in Prolog such as facts, rules, and queries
