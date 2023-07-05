@@ -1571,8 +1571,13 @@ readFile(File) :-
 readFile('demo.txt').
 ```
 
-TODO: Is there an open source library that provides a similar function
-TODO: that places the file contents in a variable as a string?
+To read from a text file in Scryer Prolog:
+
+```prolog
+:- use_module(library(pio)). % for phrase_from_file and phrase_to_stream
+phrase_from_file(seq(Cs), "input.txt"),
+phrase_to_stream(Cs, user_output). % writes to stdout
+```
 
 ## Output
 
@@ -1678,6 +1683,20 @@ writeFile(File, Text) :-
   close(Stream).
 
 writeFile('demo.txt', 'first line\nsecond line').
+```
+
+To write to a text file in Scryer Prolog:
+
+```prolog
+:- use_module(library(pio)). % for phrase_to_file
+phrase_to_file("This is\na test.", "output.txt").
+```
+
+To write to a stream in Scryer Prolog (in this case stdout):
+
+```prolog
+:- use_module(library(pio)). % for phrase_to_stream
+phrase_to_stream("Hello, World!", user_output). % writes to stdout
 ```
 
 ## Special Characters
@@ -2706,6 +2725,42 @@ expr_rest --> "+", expr.
 Using SLG resolution with DCGs is called "Packrat Parsing".
 
 Lexical analysis is a relationship between a string and sequence of tokens.
+For example:
+
+```prolog
+% This uses the "eager consumer rule" which causes
+% tokens to extend to their maximum length.
+% Eager consumes check for the nil case ([]) last.
+% Curly braces on needed here to evaluate a Prolog predicate in a DCG rule.
+% The char_type predicate here asserts that H is an alphabetic character.
+word([H|T]) --> [H], { char_type(H, alphabetic) }, word(T).
+word([]) --> [].
+
+words([]) --> [].
+words([H|T]) --> ws, word(H), ws, words(T).
+
+ws --> [W], { char_type(W, whitespace) }, ws | [].
+
+% The once predicate wraps another predicate and gives only the first solution.
+% once(phrase(words(Ws), "The quick brown fox jumps over the lazy dog")).
+% This does not terminate if the string contains
+% characters that are not alphabetic or whitespace such as a period.
+
+integer(I) --> digits(Ds), { number_chars(I, Ds) }.
+
+digits([H|T]) --> digit(H), digits_remaining(T).
+digits_remaining([H|T]) --> digit(H), digits_remaining(T).
+digits_remaining([]) --> [].
+
+digit(D) --> [D], { char_type(D, decimal_digit) }.
+
+% phrase((ws, integer(I), ws), "  1961 ").
+% I = 1961.
+
+assignment(V, I) --> ws, word(V), ws, ":=", ws, integer(I), ws.
+% once(phrase(assignment(V, I), "  gretzky := 99 ")).
+% V = "gretzky", I = 99.
+```
 
 ## Language Server
 
