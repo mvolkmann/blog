@@ -175,13 +175,13 @@ Searches in WAM use an efficient hash-based approach.
 > ("Social Science Informatics"), the former name of the group at
 > the University of Amsterdam, where Wielemaker is employed.
 
-{% aTargetBlank "https://www.swi-prolog.org", "SWI-Prolog" %}.
+{% aTargetBlank "https://www.swi-prolog.org", "SWI-Prolog" %}
 is implemented in a combination of C (48%) and Prolog (39%).
 
 Documentation of built-in predicates uses **argument mode indicators**
-that are documented at {% aTargetBlank
-"https://www.swi-prolog.org/pldoc/man?section=preddesc",
-"Notation of Predicate Descriptions" %}.
+that are documented at
+<a href="https://www.swi-prolog.org/pldoc/man?section=preddesc" target="_blank">
+Notation of Predicate Descriptions</a>.
 Argument mode indicators include `++` (ground), `+` (instantiated),
 `-` (output), `--` (unbound), `?` (partially bound),
 `:` (meta-argument such as a goal), `@` (will not be instantiated),
