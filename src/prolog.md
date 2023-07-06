@@ -2982,6 +2982,18 @@ home_page(_Request) :-
   ).
 ```
 
+To start the server, enter `swipl {filename}.pl`.
+Then browse localhost:{port-number}.
+
+Another way to run Prolog code in an HTTP server is to use {% aTargetBlank
+"https://pengines.swi-prolog.org/docs/index.htm", "Pengines" %}.
+However, the getting started page says
+"We cannot at this time guarantee the safety of the Pengines platform.
+We think it is safe, but only if you know what you are doing.
+You run it at your own risk!"
+This coupled with the fact that the code has not been modified
+since November, 2020 leads me to think this may not be a good option.
+
 ## Language Server
 
 TODO: How can you install a Prolog language server in Neovim?
