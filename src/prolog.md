@@ -1506,33 +1506,42 @@ test(ground) :- demo4(V, T), T \== 'ground'.
 
 ## Dynamic Predicates
 
-By default predicates cannot be added or deleted in a session.
+By default predicates cannot be added or deleted in a top level session.
 To enable this, run a `dynamic` query on a specific predicate.
+For example, to enable adding and removing "likes" predicates
+that take two arguments:
+
+```prolog
+dynamic(likes/2).
+```
+
 Once this is done, a predicate of that type can be
 added to the beginning with `asserta` or added to the end with `assertz`.
-And predicates of that type can be removed
+Also, predicates of that type can be removed
 with the `retract` and `retractall` functions.
 
 For example, suppose we have the file `likes.pl` containing the following:
 
 ```prolog
-% Enable adding and removing "likes" predicates that take two arguments.
-:- dynamic(likes/2).
 likes(mark, books).
 likes(mark, running).
+likes(tami, bikes).
 ```
 
 A session can do the following:
+TODO: TEST ALL OF THIS!
 
 ```prolog
-?- [likes].
-?- assertz(likes(mark, reeces)). % adds after existing predicates
-?- retract(likes(mark, books)). % removes
-?- likes(mark, X). % outputs running and reeces
+[likes].
+dynamic(likes/2).
+assertz(likes(mark, reeces)). % adds after existing predicates
+retract(likes(mark, books)). % removes
+likes(mark, X). % outputs running and reeces
 
-?- retractall(likes(mark, _)). % removes everything that mark likes
-?- retractall(likes(_, _)). % removes everything that anybody likes
-?- likes(mark, X). % outputs nothing
+retractall(likes(mark, _)). % removes everything that mark likes
+likes(X, Y). % outputs X = tami, Y = bikes.
+retractall(likes(_, _)). % removes everything that anybody likes
+likes(X, Y). % outputs false.
 ```
 
 ## Runtime Predicates
@@ -2917,6 +2926,10 @@ goal = 'grandfather_of(richard, X)';
 query = new swipl.Query(goal);
 printSolutions(goal, query);
 ```
+
+The Prolog code is not prevented from performing "unsafe" operations.
+For example if it invokes the `halt` predicate
+then no further queries will be processed. I
 
 ## Creating an HTTP Server
 
