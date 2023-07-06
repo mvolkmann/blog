@@ -178,6 +178,15 @@ Searches in WAM use an efficient hash-based approach.
 {% aTargetBlank "https://www.swi-prolog.org", "SWI-Prolog" %}.
 is implemented in a combination of C (48%) and Prolog (39%).
 
+Documentation of built-in predicates uses **argument mode indicators**
+that are documented at {% aTargetBlank
+"https://www.swi-prolog.org/pldoc/man?section=preddesc",
+"Notation of Predicate Descriptions" %}.
+Argument mode indicators include `++` (ground), `+` (instantiated),
+`-` (output), `--` (unbound), `?` (partially bound),
+`:` (meta-argument such as a goal), `@` (will not be instantiated),
+and `!` (mutable).
+
 To install the terminal command `swipl` in macOS,
 enter `brew install swi-prolog`
 
