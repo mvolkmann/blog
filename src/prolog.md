@@ -1858,7 +1858,8 @@ TODO: Finish documenting the meaning of some of these operators.
 | Operator | Meaning                                                                             |
 | -------- | ----------------------------------------------------------------------------------- |
 | `-->`    | used in grammar rules for implementing parsers                                      |
-| `:-`     | appears between the head and body of every rule; read as "if"                       |
+| `:-`     | prefix; appears before a compiler directive                                         |
+| `:-`     | infix; appears between the head and body of every rule; read as "if"                |
 | `?-`     | prefix operator that appears before every query                                     |
 | `\|`     | separates the head and tail of a list in `[H\| T]`                                  |
 | `,`      | separates terms to be and'ed                                                        |
@@ -1883,8 +1884,35 @@ TODO: Finish documenting the meaning of some of these operators.
 | `as`     |                                                                                     |
 | `=>`     |                                                                                     |
 
-The `:-` prefix operator marks a directive to the Prolog system.
-For example, `:- use_module(library(clpfd)).`
+Directives provide information to the Prolog compiler.
+They are preceded by the `:-` prefix operator.
+Highlights include:
+
+- `dynamic(functors)`: allows adding and removing clauses for given functors
+- `if`, `elif`, `else`, and `endif`: support conditional compilation
+- `include(file)`: includes a given source file
+- `initialization(goal)`: executes a given goal at startup;
+  multiple initializations are executed in the order they appear
+- `module`: declares a module definition
+- `multifile(functors)`: allows clauses for given functors
+  to reside in multiple source files
+- `op(priority, kind, name)`: defines a custom operator
+- `public(functors)`: allows inspecting clauses of given functors
+- `set_prolog_flag(flag, value)`: sets a flag to change compiler operation
+- `use_module(library)`: declares usage of a module;
+  for example, `:- use_module(library(clpfd)).`
+
+Some Prolog implementations allow placing `:-` before any goals
+to execute it when the file is loaded.
+But the ISO standard requires using the `initialization` directive.
+The goals do not need to be wrapped in parentheses.
+For example:
+
+```prolog
+:- initialization
+  writeln('Hello'),
+  writeln('Goodbye').
+```
 
 There are two primary differences between `=` and `is`.
 The first is that the RHS of `is` must be an arithmetic expression.
