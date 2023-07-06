@@ -1404,8 +1404,10 @@ TODO: Add more detail on working with dicts.
 
 ## Type Checking
 
-Prolog provides many built-in predicates that can be used
+ISO Prolog provides many built-in predicates that can be used
 to assert the type of arguments.
+These are not supported in Scryer Prolog.
+Instead see {% aTargetBlank "https://www.scryer.pl/si.html", "Module si" %}.
 
 | Predicate                             | Meaning                                                       |
 | ------------------------------------- | ------------------------------------------------------------- |
@@ -2557,6 +2559,49 @@ The ukrainian lives in the blue house, drinks tea, smokes chesterfields, and own
 The englishman lives in the red house, drinks milk, smokes old_gold, and owns a snails.
 The spaniard lives in the ivory house, drinks orange_juice, smokes lucky_strike, and owns a dog.
 The japanese lives in the green house, drinks coffee, smokes parliaments, and owns a zebra.
+```
+
+## Reading from URLs
+
+The following code prints all the tag names found in an HTML document.
+They are indented to represent their position in the DOM hierarchy.
+This was only tested in SWI-Prolog.
+
+```prolog
+:- use_module(library(http/http_open)). % for http_open
+
+% N occurrences of the ASCII code A is described by the string S.
+% For example, repeat(5, 32, S) sets S to a string containing 5 spaces.
+repeat(N, A, S) :-
+  length(L, N),
+  maplist(=(A), L),
+  atom_codes(S, L).
+
+% This is used if 2nd argument is an element structure.
+% element structure components are Tag, Attributes, and Children.
+print_tag(Level, element(Tag, _, Children)) :-  %
+  Indent is Level * 2,
+  repeat(Indent, 32, Spaces),
+  write(Spaces), write(Tag), nl,
+  NextLevel is Level + 1,
+  maplist(print_tag(NextLevel), Children).
+
+% This is used if 2nd argument is not an element structure.
+print_tag(_, _). % ignore
+
+% This provides a starting level of 0.
+print_tag(E) :- print_tag(0, E).
+
+process(In) :-
+  % copy_stream_data(In, user_output). % for debugging
+  load_html(In, DOM, []),
+  maplist(print_tag, DOM).
+
+:- setup_call_cleanup(
+     % Must use single, not double quotes around URL!
+     http_open('https://mvolkmann.github.io', In, []),
+     process(In),
+     close(In)).
 ```
 
 ## Definite Clause Grammars (DCGs)
