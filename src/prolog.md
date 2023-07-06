@@ -2576,7 +2576,7 @@ repeat(N, A, S) :- length(L, N), maplist(=(A), L), atom_codes(S, L).
 
 % This is used if 2nd argument is an element structure.
 % element structure components are Tag, Attributes, and Children.
-print_tag(Level, element(Tag, _, Children)) :-  %
+print_tag(Level, element(Tag, _, Children)) :-
   Indent is Level * 2,
   repeat(Indent, 32, Spaces),
   write(Spaces), write(Tag), nl,
@@ -2802,6 +2802,62 @@ digit(D) --> [D], { char_type(D, decimal_digit) }.
 assignment(V, I) --> ws, word(V), ws, ":=", ws, integer(I), ws.
 % once(phrase(assignment(V, I), "  gretzky := 99 ")).
 % V = "gretzky", I = 99.
+```
+
+## Calling From JavaScript
+
+The npm package {% aTargetBlank "https://github.com/rla/node-swipl#readme",
+"swipl" %} makes it easy to run Prolog queries from a Node.js application
+which can be an Express server.
+This requires installing Node.js and SWI-Prolog.
+
+To create a Node.js application that does this:
+
+1. Create a directory for the application and cd to it.
+1. Enter `npm init` to create a `package.json` file.
+1. Enter `npm install swipl` to install the package.
+1. Edit `package.json` and add the script `"start": "node index.js"`.
+1. Create the file `index.js` containing code similar to the following:
+
+```js
+const swipl = require('swipl');
+
+function loadFile(directory, fileName) {
+  swipl.call(`working_directory(_, '${directory}')`);
+  swipl.call(`consult(${fileName})`);
+}
+
+function printSolution(goal, solution) {
+  console.log('Solution for', goal);
+  if (solution) {
+    console.log(' ', solution.X);
+  } else {
+    console.error('No solution returned');
+  }
+}
+
+function printSolutions(goal, query) {
+  console.log('Solutions for', goal);
+  while (query && (solution = query.next())) {
+    console.log(' ', solution.X);
+  }
+  // Only one query can be open at a time.
+  query.close();
+}
+
+// This only gets the first solution.
+let goal = 'member(X, [1,2,3,4])';
+printSolution(goal, swipl.call('member(X, [1,2,3,4])'));
+
+// This gets all solutions.
+let query = new swipl.Query(goal);
+printSolutions(goal, query);
+
+// This loads a Prolog source file and runs a query against it.
+loadFile('..', 'exercise1_3');
+goal = 'grandfather_of(richard, X)';
+query = new swipl.Query(goal);
+printSolutions(goal, query);
 ```
 
 ## Language Server
