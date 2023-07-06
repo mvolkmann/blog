@@ -218,6 +218,10 @@ The "reif" pack (reified if) implements the `if_` predicate
 which is similar to the `->` operator, but has some advantages.
 I could not find good examples of using and could not get it to work.
 
+The {% aTargetBlank "https://www.swi-prolog.org/pack/list?p=gvterm",
+"gvterm" %} pack generates a graphviz file from a Prolog term.
+This is useful for visualizing the tree structure of a term.
+
 #### Debugging
 
 For information on using the debugger in SWI-Prolog, see {% aTargetBlank
