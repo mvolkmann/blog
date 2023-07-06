@@ -194,11 +194,7 @@ To start a SWI-Prolog top level from a terminal, enter `swipl`.
 
 To specify configuration for all top level sessions,
 create the file `$HOME/.config/swi-prolog/init.pl`.
-For example, this file might contain the following:
-
-```prolog
-:- set_prolog_flag(double_quotes, chars).
-```
+For example, this file might set [prolog flags](#prolog-flags).
 
 #### Packs
 
@@ -693,6 +689,26 @@ To enter new facts and rules in a running session:
 
 It seems this can replace existing facts rather than add to them.
 
+## Prolog Flags
+
+Prolog flags configure the operation of a Prolog compiler.
+
+To get the value of a prolog flag, use the `current_prolog_flag` predicate.
+For example, `current_prolog_flag(double_quotes, F)` sets `F` to the value.
+
+To set the value of the prolog flag, use the directive `set_prolog_flag`.
+For example:
+
+```prolog
+:- set_prolog_flag(double_quotes, chars).
+```
+
+For details on the `double_quotes` flag, see the [Strings](#strings) section.
+
+All the prolog flags supported by SWI-Prolog are documented at
+<a href="https://www.swi-prolog.org/pldoc/man?section=flags" target="_blank">
+Environment Control (Prolog flags)</a>.
+
 ## Tree Representation
 
 Every Prolog term can be represented as a tree
@@ -809,18 +825,6 @@ For example, `[a | []]` is a list containing only `a`
 and `[a | [b, c]]` is equivalent to `[a, b, c]`.
 Use of the `|` operator can be nested.
 For example, `[a | [b | [c]]]` is also equivalent to `[a, b, c]`.
-
-If the `double_quotes` flag is set then
-a double-quoted string (not single-quoted) provides a way to write
-a list of atoms that correspond to the characters in the string.
-TODO: Is setting this flag only required in SWI-Prolog?
-For example:
-
-```prolog
-?- set_prolog_flag(double_quotes, chars).
-L = "abc". % atoms, not characters
-% L = [a, b, c].
-```
 
 The following are all equivalent ways to write the same list:
 
@@ -2003,11 +2007,22 @@ Literal strings can be delimited with single or double quotes.
 SWI-Prolog prefers double quotes.
 To escape a quote inside a literal string, precede it with a backslash.
 
-A string is represented by a list of characters.
-In some implementations, such as Scryer Prolog, this is the case by default.
-In others, such as SWI-Prolog, this must be enabled
-with `?- set_prolog_flag(double_quotes, chars).`
-This means predicates that operate on lists can also operate on strings.
+The `double_quotes` compiler flag specifies how
+double-quoted (not single) strings are treated.
+When set to `string` (default in SWI-Prolog), they remain strings.
+When set to `chars`, (default in Scryer Prolog),
+they become lists of single-character atoms.
+When set to `codes`, they become lists of Unicode code-point integers.
+When set to `atom`, they become a single atom containing all the characters.
+For example:
+
+```prolog
+?- set_prolog_flag(double_quotes, chars).
+L = "abc". % atoms, not characters
+% L = [a, b, c].
+```
+
+When strings become lists, predicates that operate on lists can be used.
 
 To get the length of a string, use the `atom_length` function.
 For example:
