@@ -2572,10 +2572,7 @@ This was only tested in SWI-Prolog.
 
 % N occurrences of the ASCII code A is described by the string S.
 % For example, repeat(5, 32, S) sets S to a string containing 5 spaces.
-repeat(N, A, S) :-
-  length(L, N),
-  maplist(=(A), L),
-  atom_codes(S, L).
+repeat(N, A, S) :- length(L, N), maplist(=(A), L), atom_codes(S, L).
 
 % This is used if 2nd argument is an element structure.
 % element structure components are Tag, Attributes, and Children.
