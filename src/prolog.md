@@ -1923,6 +1923,10 @@ For example:
   writeln('Goodbye').
 ```
 
+The `?-` operator precedes queries.
+The top level of most Prolog implementations displays that operator as a prompt.
+I have not found a reason to actually used the `?-` operator in code.
+
 There are two primary differences between `=` and `is`.
 The first is that the RHS of `is` must be an arithmetic expression.
 The second is that `is` evaluates the RHS whereas `=` does not.
