@@ -2630,6 +2630,21 @@ The spaniard lives in the ivory house, drinks orange_juice, smokes lucky_strike,
 The japanese lives in the green house, drinks coffee, smokes parliaments, and owns a zebra.
 ```
 
+## Search Strategies
+
+Prolog implementations can employ many search strategies.
+
+A forward chaining search strategy starts from a starting state
+and derives new states that can follow using rules describing valid changes
+until a goal state is reached.
+
+A backward chaining search strategy starts from a goal state
+and derives new states that can precede it using rules describing valid changes
+until the starting state is reached.
+
+TODO: Add information about other search strategies
+TODO: that Prolog implementations typically use.
+
 ## Reading from URLs
 
 The following code prints all the tag names found in an HTML document.
