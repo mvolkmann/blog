@@ -1417,6 +1417,33 @@ report(P).
 % Your zip is 12345.
 ```
 
+To get the value of a key in dict:
+
+```prolog
+Value = MyDict.get(key) % returns false if key is missing?
+Value = MyDict.get(key, defaultValue) % uses default value if key is missing
+```
+
+To use a default value when a kys is missing:
+
+```prolog
+MyDict = demo{a: 1, b: 2},
+Key = b,
+Value = MyDict.get(Key, 0),
+format('key ~w = ~w~n', [Key, Value]).
+```
+
+To test whether a key exists in a dict:
+
+```prolog
+MyDict = demo{a: 1, b: 2},
+Key = b,
+(Value = MyDict.get(Key) ->
+    format('key ~w = ~w~n', [Key, Value]);
+    format('key ~w not found', Key)
+).
+```
+
 TODO: Add more detail on working with dicts.
 
 ## Type Checking
