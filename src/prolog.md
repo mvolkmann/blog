@@ -1114,6 +1114,15 @@ subtract([a, b, c, b], [b], L). % could remove more than just b elements
 % output is L = [a, c].
 ```
 
+To create a new list that results from
+removing all elements from an existing list that fail a goal:
+
+```prolog
+isOdd(N) :- N mod 2 = 1.
+exclude(isOdd, [1, 2, 3, 4], L).
+% output is L = [2, 4].
+```
+
 To get all permutations of a list:
 
 ```prolog
@@ -2078,6 +2087,17 @@ current_op(P, fx, N).
 % output is P = 1, N = ($); and many more
 % All the names are output inside parentheses. Why?
 ```
+
+## Numbers
+
+The following rules determine whether a given number is even or odd:
+
+```prolog
+even(N) :- mod(N, 2) =:= 0.
+odd(N) :- mod(N, 2) =:= 1.
+```
+
+TODO: Add more detail here!
 
 ## Strings
 
