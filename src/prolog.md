@@ -2135,6 +2135,22 @@ For example:
 X = 4.
 ```
 
+To test whether a string contains a given substring,
+which could be a single character, use the `sub_string` predicate.
+For example:
+
+```prolog
+% 1st argument is the string to search.
+% 2nd argument is the number of characters before the substring.
+% 3rd argument is the number of characters in the substring.
+% 4th argument is the number of characters after the substring.
+% 5th argument is the substring to find.
+% It is not necessary to capture arguments 2-4.
+once(sub_string(S, _, _, _, C)) ->
+  writeln('found');
+  writeln('not found').
+```
+
 To create a list of ASCII values from a literal string,
 use the `name` function.
 For example:
