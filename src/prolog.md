@@ -1114,12 +1114,17 @@ subtract([a, b, c, b], [b], L). % could remove more than just b elements
 % output is L = [a, c].
 ```
 
-To create a new list that results from
-removing all elements from an existing list that fail a goal:
+To create a new list that results from either retaining or removing
+all elements from an existing list that satisfy or fail to satisfy a goal:
 
 ```prolog
-isOdd(N) :- N mod 2 = 1.
-exclude(isOdd, [1, 2, 3, 4], L).
+even(N) :- mod(N, 2) =:= 0.
+odd(N) :- mod(N, 2) =:= 1.
+
+include(even, [1, 2, 3, 4], L).
+% output is L = [2, 4].
+
+exclude(odd, [1, 2, 3, 4], L).
 % output is L = [2, 4].
 ```
 
