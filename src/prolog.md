@@ -2168,6 +2168,18 @@ appendStrings('first ', 'second', X).
 X = 'first second'
 ```
 
+To append multiple atomic values, including strings,
+use the `atomics_to_string` predicate. For example:
+
+```prolog
+atomics_to_string(["foo", 3, 'bar'], S).
+```
+
+The above approach will not work with double-quoted strings
+if the `double_quotes` flag is set to `chars` because in that case
+double-quotes strings will be treated as lists of atoms
+and lists are not atomic.
+
 To get a single character from a string, convert it to a list of ASCII codes,
 and use the `nth0` function.
 For example:
