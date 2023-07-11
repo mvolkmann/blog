@@ -433,6 +433,18 @@ whippet(comet).
 cheetah(spots).
 ```
 
+Facts provide a convenient way to define constants
+that are used in several places within a program.
+For example, a "size" constant can be defined and used as follows:
+
+```prolog
+size(6).
+
+some_rule(Arg1, Arg2) :-
+  size(Size),
+  format('The size is ~w.~n', [Size]).
+```
+
 ### Rules
 
 Rules are written as a head and a body separated by
