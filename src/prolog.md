@@ -54,8 +54,8 @@ father(mark, jeremy).
    Note how a rule can be used to find values for any of its arguments,
    searching in multiple directions.
 
-Questions perform "unification" which basically means finding
-values for variables on that cause a relationship to hold.
+Questions (aka queries) perform "unification" which basically means
+finding values for variables that cause a relationship to hold.
 This requires pattern matching search and backtracking.
 Unification relies on the properties of {% aTargetBlank
 "https://en.wikipedia.org/wiki/Horn_clause", "Horn clauses" %}.
