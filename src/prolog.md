@@ -1673,7 +1673,7 @@ writeln('Hello World!'). % same as previous line
 ```
 
 The {% aTargetBlank "https://www.swi-prolog.org/pldoc/man?predicate=format/2",
-"format" %} predicate also writes to the current output stream.
+"format" %} predicate can also write to the current output stream.
 It takes a format string and a list of values
 to be substituted into the format string.
 (In Scryer Prolog, `use_module(library(format)).`
@@ -1744,6 +1744,15 @@ The output is:
 ```text
 foo          bar           baz
 foolish     barking     bazooka
+```
+
+The 3-argument version of `format` can write to any stream, including a string.
+For example, the following code sets `S` to a formatted string.
+
+```prolog
+Language = 'Prolog',
+Assessment = 'fun',
+format(string(S), '~w is ~w.~n', [Language, Assessment]).
 ```
 
 The `put` function writes a single ASCII value to the current output stream.
