@@ -1929,34 +1929,34 @@ Prolog supports the following additional operators:
 
 TODO: Finish documenting the meaning of some of these operators.
 
-| Operator | Meaning                                                                             |
-| -------- | ----------------------------------------------------------------------------------- |
-| `-->`    | used in DCG grammar rules for implementing parsers                                  |
-| `:-`     | prefix; appears before a compiler directive                                         |
-| `:-`     | infix; appears between the head and body of every rule; read as "if"                |
-| `?-`     | prefix operator that appears before every question                                  |
-| `\|`     | separates the head and tail of a list in `[H\| T]`                                  |
-| `,`      | separates terms to be and'ed                                                        |
-| `;`      | separates terms to be or'ed                                                         |
-| `->`     | similar to ternary operator `?:` in other languages; called "if-then"               |
-| `\+`     | prefix operator that succeeds when the goal that follows does not hold              |
-| `=`      | attempts to unify by finding satisfying variable values on LHS and RHS              |
-| `\=`     | tests whether two terms cannot be unified                                           |
-| `=..`    | equates a term with a list containing its functor name and arguments; called "univ" |
-| `is`     | attempts to unify LHS with RHS arithmetic expression result                         |
-| `>:<`    | partial unification between to dictionaries                                         |
-| `!`      | cut; prevents further backtracking                                                  |
-| `$`      | similar to `!` TODO How does it differ?                                             |
-| `*->`    | soft cut; rarely used                                                               |
-| `:=`     | evaluates RHS as JavaScript (odd!)                                                  |
-| `:<`     | succeeds when LHS is a sub-dict of RHS dict                                         |
-| `?`      | TODO: Does this compose two predicates?                                             |
-| `:`      |                                                                                     |
-| `\_`     |                                                                                     |
-| `/`      |                                                                                     |
-| `.`      |                                                                                     |
-| `as`     |                                                                                     |
-| `=>`     |                                                                                     |
+| Operator | Meaning                                                                           |
+| -------- | --------------------------------------------------------------------------------- |
+| `-->`    | used in DCG grammar rules for implementing parsers                                |
+| `:-`     | prefix; appears before a compiler directive                                       |
+| `:-`     | infix; appears between the head and body of every rule; read as "if"              |
+| `?-`     | prefix operator that appears before every question                                |
+| `\|`     | separates the head and tail of a list in `[H\| T]`                                |
+| `,`      | separates terms to be and'ed                                                      |
+| `;`      | separates terms to be or'ed                                                       |
+| `->`     | similar to ternary operator `?:` in other languages; called "if-then"             |
+| `\+`     | prefix operator that succeeds when the goal that follows does not hold            |
+| `=`      | attempts to unify by finding satisfying variable values on LHS and RHS            |
+| `\=`     | tests whether two terms cannot be unified                                         |
+| `=..`    | creates a goal from a list containing a functor name and arguments; called "univ" |
+| `is`     | attempts to unify LHS with RHS arithmetic expression result                       |
+| `>:<`    | partial unification between to dictionaries                                       |
+| `!`      | cut; prevents further backtracking                                                |
+| `$`      | similar to `!` TODO How does it differ?                                           |
+| `*->`    | soft cut; rarely used                                                             |
+| `:=`     | evaluates RHS as JavaScript (odd!)                                                |
+| `:<`     | succeeds when LHS is a sub-dict of RHS dict                                       |
+| `?`      | TODO: Does this compose two predicates?                                           |
+| `:`      |                                                                                   |
+| `\_`     |                                                                                   |
+| `/`      |                                                                                   |
+| `.`      |                                                                                   |
+| `as`     |                                                                                   |
+| `=>`     |                                                                                   |
 
 Directives provide information to the Prolog compiler.
 They are preceded by the `:-` prefix operator.
@@ -2007,6 +2007,18 @@ Angle = 29.999999999999996.
 ```
 
 After evaluating this, the variable `Angle` is no longer defined.
+
+The `=..` operator is typically used in conjunction with the `call` predicate
+to dynamically create a goal and execute it. For example:
+
+```prolog
+Format = 'X=~w and Y=~w~n',
+Args = [1, 2],
+Goal =.. [format, Format, Args],
+call(Goal). % outputs "X=1 and Y=2"
+% This is equivalent to the non-dynamic
+% format('X=~w and Y=~w~n', [1, 2])
+```
 
 ### Custom Operators
 
