@@ -107,8 +107,14 @@ These take considerable time to learn and master.
 
 ## Resources
 
+- {% aTargetBlank "https://mitpress.mit.edu/9780262691635/the-art-of-prolog/",
+  "The Art of Prolog" %} Second Edition book by Sterling and Shapiro
+
 - {% aTargetBlank "https://www.youtube.com/watch?v=dKn-BbS_zQQ",
   "A Brief Introduction to Prolog" %} YouTube video by Erik Schierboom
+
+- {% aTargetBlank "https://link.springer.com/book/10.1007/978-3-642-58274-5",
+  "Clause and Effect" %} book by Clocksin
 
 - {% aTargetBlank "https://www.covingtoninnovations.com/mc/plcoding.pdf",
   "Coding guidelines for Prolog" %}
