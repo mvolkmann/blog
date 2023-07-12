@@ -1888,7 +1888,8 @@ my_goal :-
   write(S).
 ```
 
-Another way to write to a string is to use a memory file
+Another way to write to a string is to use a {% aTargetBlank
+"https://www.swi-prolog.org/pldoc/man?section=memory-files", "memory file" %}
 which may be specific to SWI-Prolog.
 This has the advantage that rules can be written to accept any stream,
 allowing them to write to a file or a string.
