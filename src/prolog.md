@@ -784,7 +784,7 @@ owns(jeremy, pet(dog, ramsay)).
 
 % This takes a pet structure and destructures its kind and name.
 print_pet(pet(Kind, Name)) :-
-  format("~w is a ~w.~n", [Name, Kind]).
+  format('~w is a ~w.~n', [Name, Kind]).
 
 main :-
   owns(tami, A),
@@ -1189,12 +1189,12 @@ younger(P1, P2) :-
 
    min_member(younger, Py, People),
    person(N1, A1) = Py,
-   format("youngest is ~w at age ~w~n", [N1, A1]),
+   format('youngest is ~w at age ~w~n', [N1, A1]),
    % output is youngest is carl at age 19
 
    max_member(younger, Po, People),
    person(N2, A2) = Po,
-   format("oldest is ~w at age ~w~n", [N2, A2]).
+   format('oldest is ~w at age ~w~n', [N2, A2]).
    % output is oldest is bob at age 50
 ```
 
@@ -1331,45 +1331,6 @@ X = [1, 2, 3],
 Y = [4] ;
 X = [1, 2, 3, 4],
 Y = [] ;
-```
-
-### Linked Lists
-
-Dictionary (`dict`) instances can have properties that refer to other instances.
-This can be used to implement a linked list.
-The following code demonstrates how to iterate over such instances:
-
-```prolog
-% This prints all the values found in a linked list.
-print_list(nil) :- !.
-print_list(Node) :-
-  writeln(Node.value),
-  print_list(Node.next).
-
-% This relates a node in a linked list to
-% a list of values found in all reachable nodes.
-linked_list(nil, []).
-linked_list(Node, L) :-
-  linked_list(Node.next, L2),
-  % This appends in the order encounter.
-  % append([Node.value], L2, L).
-  % This appends in reverse order.
-  append(L2, [Node.value], L).
-
-:- initialization
-  N1 = node{value: 'alpha', next: nil},
-  N2 = node{value: 'beta', next: N1},
-  N3 = node{value: 'gamma', next: N2},
-
-  print_list(N3), % prints gamma then beta then alpha
-
-  linked_list(N3, L), % [alpha, beta, gamma]
-
-  % This creates a string containing joined values from a list.
-  atomics_to_string(L, ',', S),
-
-  writeln(S), % alpha,beta,gamma
-  halt.
 ```
 
 ### Pairs
@@ -1526,6 +1487,45 @@ Key = b,
 
 TODO: Add more detail on working with dicts.
 
+### Linked Lists
+
+Dictionary (`dict`) instances can have properties that refer to other instances.
+This can be used to implement a linked list.
+The following code demonstrates how to iterate over such instances:
+
+```prolog
+% This prints all the values found in a linked list.
+print_list(nil) :- !.
+print_list(Node) :-
+  writeln(Node.value),
+  print_list(Node.next).
+
+% This relates a node in a linked list to
+% a list of values found in all reachable nodes.
+linked_list(nil, []).
+linked_list(Node, L) :-
+  linked_list(Node.next, L2),
+  % This appends in the order encounter.
+  % append([Node.value], L2, L).
+  % This appends in reverse order.
+  append(L2, [Node.value], L).
+
+:- initialization
+  N1 = node{value: 'alpha', next: nil},
+  N2 = node{value: 'beta', next: N1},
+  N3 = node{value: 'gamma', next: N2},
+
+  print_list(N3), % prints gamma then beta then alpha
+
+  linked_list(N3, L), % [alpha, beta, gamma]
+
+  % This creates a string containing joined values from a list.
+  atomics_to_string(L, ',', S),
+
+  writeln(S), % alpha,beta,gamma
+  halt.
+```
+
 ## Type Checking
 
 ISO Prolog provides many built-in predicates that can be used
@@ -1586,13 +1586,13 @@ test(float) :- demo(1.2, T), T == 'float'.
 % See rational_syntax flag to enable 2/3 to be treated as rational.
 test(rational) :- demo(2r3, T), T == 'rational'.
 test(number) :- demo2(1.2, T), T == 'number'.
-test(string) :- demo("hello", T), T == 'string'.
+test(string) :- demo('hello', T), T == 'string'.
 test(atom) :- demo(a, T), T == 'atom'.
 
 test(atomic) :- demo3(true, T), T == 'atomic'.
 test(atomic) :- demo3(5, T), T == 'atomic'.
 test(atomic) :- demo3(1.2, T), T == 'atomic'.
-test(atomic) :- demo3("Hello", T), T == 'atomic'.
+test(atomic) :- demo3('Hello', T), T == 'atomic'.
 
 test(compound) :- demo3(2 + 3, T), T == 'compound'.
 test(compound) :- demo3(a(b), T), T == 'compound'.
@@ -1792,7 +1792,7 @@ print_row(Row) :-
   % The 1st list element is left-aligned.
   % The 2nd list element is center-aligned.
   % The 3rd list element is right-aligned.
-  format("~w~t~10+~t~w~t~10+~t~w~10+~n", Row).
+  format('~w~t~10+~t~w~t~10+~t~w~10+~n', Row).
 
 :- Rows = [
      ["foo", "bar", "baz"],
@@ -1836,14 +1836,14 @@ To write to a text file in Scryer Prolog:
 
 ```prolog
 :- use_module(library(pio)). % for phrase_to_file
-phrase_to_file("This is\na test.", "output.txt").
+phrase_to_file('This is\na test.', "output.txt").
 ```
 
 To write to a stream in Scryer Prolog (in this case stdout):
 
 ```prolog
 :- use_module(library(pio)). % for phrase_to_stream
-phrase_to_stream("Hello, World!", user_output). % writes to stdout
+phrase_to_stream('Hello, World!', user_output). % writes to stdout
 ```
 
 ## Special Characters
@@ -2156,7 +2156,6 @@ TODO: Add more detail here!
 ## Strings
 
 Literal strings can be delimited with single or double quotes.
-SWI-Prolog prefers double quotes.
 To escape a quote inside a literal string, precede it with a backslash.
 
 The `double_quotes` compiler flag specifies how
@@ -2174,13 +2173,23 @@ L = "abc". % atoms, not characters
 % L = [a, b, c].
 ```
 
+{% aTargetBlank "https://www.swi-prolog.org/pldoc/man?section=string",
+"The string type and its double quoted syntax" %} section 5.2.3
+discusses the pros and cons of the string options.
+In some cases it seems best to use single quotes
+so the meaning stays the same regardless of the flags set.
+
+A single quoted string containing no special characters such as spaces
+is equivalent to an atom with the same characters.
+For example, `'demo' == demo` is true.
+
 When strings become lists, predicates that operate on lists can be used.
 
 To get the length of a string, use the `atom_length` function.
 For example:
 
 ```prolog
-?- atom_length("Mark", X).
+?- atom_length('Mark', X).
 X = 4.
 ```
 
@@ -2259,7 +2268,7 @@ and use the `nth0` function.
 For example:
 
 ```prolog
-?- name("Mark", L), nth0(2, L, C), put(C). % 114 (ASCII code for 'r')
+?- name('Mark', L), nth0(2, L, C), put(C). % 114 (ASCII code for 'r')
 ```
 
 ## Arithmetic Functions
@@ -2570,7 +2579,7 @@ print_row([]) :- nl.
 
 % When there are more row elements,
 % print the first one followed by a space.
-print_row([H|T]) :- format("~w ", H), print_row(T).
+print_row([H|T]) :- format('~w ', H), print_row(T).
 
 % Each puzzle must contain at least 17 clues.
 
@@ -2659,7 +2668,7 @@ solve(K1, H1, A1, K2, H2, A2, K3, H3, A3) :-
   !.
 
 :- solve(K1, H1, A1, K2, H2, A2, K3, H3, A3),
-   S = "~w is ~w and dressed as ~w.~n",
+   S = '~w is ~w and dressed as ~w.~n',
    format(S, [K1, A1, H1]),
    format(S, [K2, A2, H2]),
    format(S, [K3, A3, H3]),
@@ -2790,10 +2799,10 @@ print_houses([]).
 
 print_houses([H|T]) :-
   relation(N, C, D, S, P) = H,
-  %S = "The ~w lives in the ~w house, drinks ~w, smokes ~w, and owns a ~w.~n",
+  %S = 'The ~w lives in the ~w house, drinks ~w, smokes ~w, and owns a ~w.~n',
   %format(S, [N, C, D, S, P]),
   format(
-    "The ~w lives in the ~w house, drinks ~w, smokes ~w, and owns a ~w.~n",
+    'The ~w lives in the ~w house, drinks ~w, smokes ~w, and owns a ~w.~n',
     [N, C, D, S, P]),
   print_houses(T).
 
@@ -2938,7 +2947,7 @@ seq([H|T]) --> [H], seq(T).
 
 % Concatenation of two lists.
 append(Xs, Ys, Zs) :- phrase((seq(Xs), seq(Ys)), Zs).
-% append("abc", "xyz", L), writeln(L). % output is [a,b,c,x,y,z]
+% append('abc', "xyz", L), writeln(L). % output is [a,b,c,x,y,z]
 
 % Concatenation of any number of lists.
 % Scryer Prolog provides this in its dcg library.
@@ -2951,8 +2960,8 @@ qes([]) --> [].
 qes([H|T]) --> qes(T), [H].
 
 palindrome(L) :- phrase(qes(L), L).
-% palindrome("mother"). % false
-% palindrome("mom"). % true
+% palindrome('mother'). % false
+% palindrome('mom'). % true
 
 % This describes any sequence.
 ... --> [] | [_], ... .
