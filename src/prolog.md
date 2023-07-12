@@ -1356,7 +1356,6 @@ linked_list(Node, L) :-
   % This appends in reverse order.
   append(L2, [Node.value], L).
 
-
 :- initialization
   N1 = node{value: 'alpha', next: nil},
   N2 = node{value: 'beta', next: N1},
@@ -1768,6 +1767,9 @@ For more control sequences, see the "format" link above.
 For example:
 
 ```prolog
+% This is the equivalent of JavaScript console.log.
+format('MyVariable = ~w~n', [MyVariable]).
+
 format('~w likes ~s.', [mark, 'Prolog']).
 % outputs "mark likes Prolog."
 ```
