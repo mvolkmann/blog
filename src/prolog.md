@@ -1893,6 +1893,8 @@ and outputs it in its equivalent function notation.
 For example, entering `write_canonical(3 * 1 + 2).`
 outputs `*(3,+(1,2))`.
 
+### Number Operators
+
 Prolog supports the following relational operators
 for numbers and arithmetic expressions.
 When the left and/or right side is an expression (ex. `X * 2`)
@@ -1907,6 +1909,8 @@ it is evaluated before the comparison is performed.
 | `=<`     | less than or equal    |
 | `>=`     | greater than or equal |
 
+### Atom and String Operators
+
 Prolog supports the following relational operators
 for atoms and strings (also works with numbers):
 
@@ -1916,6 +1920,8 @@ for atoms and strings (also works with numbers):
 | `@=<`    | alphabetically less than or equal    |
 | `@>`     | alphabetically greater than          |
 | `@>=`    | alphabetically greater than or equal |
+
+### Term Operators
 
 Prolog supports the following relational operators
 for single and compound terms:
@@ -1970,6 +1976,8 @@ test(not_structurally_equivalent) :-
   x(A, B) \=@= y(C, D). % different functor name
 ```
 
+### Arithmetic Operators
+
 Prolog supports the following arithmetic operators:
 
 | Operator | Meaning                        |
@@ -1986,9 +1994,9 @@ Prolog supports the following arithmetic operators:
 | `**`     | exponentiation                 |
 | `^`      | exponentiation                 |
 
-Prolog supports the following bitwise operators:
+### Bitwise Operators
 
-Prolog supports the following additional operators:
+Prolog supports the following bitwise operators:
 
 | Operator | Meaning              |
 | -------- | -------------------- |
@@ -1998,6 +2006,10 @@ Prolog supports the following additional operators:
 | `\`      | bitwise not (prefix) |
 | `<<`     | bitwise shift left   |
 | `>>`     | bitwise shift right  |
+
+### Other Operators
+
+Prolog supports the following additional operators:
 
 TODO: Finish documenting the meaning of some of these operators.
 
