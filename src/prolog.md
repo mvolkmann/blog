@@ -712,10 +712,12 @@ It seems this can replace existing facts rather than add to them.
 When an attempt to run a Prolog program fails,
 it is often for one of these reasons.
 
-- One of the rules has `:=` between its head and body instead of `:-`.
-- One of the goals in an intended conjunction
-  ends with a period instead of a comma.
-- The second argument to the `format` predicate is a single value
+- A token intended to be a variable starts with
+  a lowercase letter instead of uppercase.
+- A rule has `:=` between its head and body instead of `:-`.
+- A goal in an intended conjunction ends with a period instead of a comma.
+  Look for the error message "Full stop in clause-body?".
+- The last argument to the `format` predicate is a single value
   instead of a list of values to be inserted in the format string.
 
 ## Prolog Flags
@@ -1858,6 +1860,52 @@ To write to a stream in Scryer Prolog (in this case stdout):
 ```prolog
 :- use_module(library(pio)). % for phrase_to_stream
 phrase_to_stream('Hello, World!', user_output). % writes to stdout
+```
+
+### Streams
+
+The `write`, `writeln`, and `format` predicates all take an
+additional first argument that is the stream to which they should write.
+
+To create a stream associated with a file, use the `open` predicate,
+passing it a file path string, a mode (`read`, `write`, `append`, or `update`),
+and a variable to capture the stream. For example:
+
+```prolog
+open('demo.txt', write, Stream)
+```
+
+It is also possible to capture everything a goal writes to stdout in a string.
+For example:
+
+```prolog
+my_goal :-
+  writeln('line #1'),
+  writeln('line #2').
+
+:- initialization
+  with_output_to(string(S), my_goal),
+  write(S).
+```
+
+Another way to write to a string is to use a memory file
+which may be specific to SWI-Prolog.
+This has the advantage that rules can be written to accept any stream,
+allowing them to write to a file or a string.
+For example:
+
+```prolog
+% Create a handle for a memory file.
+new_memory_file(Handle),
+% Open a stream to a memory file.
+open_memory_file(Handle, write, Stream, [free_on_close(true)]),
+% Write to the stream.
+writeln(Stream, 'line #1'),
+writeln(Stream, 'line #2'),
+close(Stream),
+% Copy the contents of the stream into a string.
+memory_file_to_string(Handle, S),
+write(S).
 ```
 
 ## Special Characters
