@@ -1865,7 +1865,8 @@ it is evaluated before the comparison is performed.
 | `=<`     | less than or equal    |
 | `>=`     | greater than or equal |
 
-Prolog supports the following relational operators for strings:
+Prolog supports the following relational operators
+for atoms and strings (also works with numbers):
 
 | Operator | Meaning                              |
 | -------- | ------------------------------------ |
@@ -2195,12 +2196,21 @@ use the `atomics_to_string` predicate. For example:
 
 ```prolog
 atomics_to_string(["foo", 3, 'bar'], S).
+% output is "foo3bar"
 ```
 
 The above approach will not work with double-quoted strings
 if the `double_quotes` flag is set to `chars` because in that case
 double-quotes strings will be treated as lists of atoms
 and lists are not atomic.
+
+To join multiple atomic values with a delimiter between each,
+use the 3-argument version of `atomics_to_string`. For example:
+
+```prolog
+atomics_to_string(["foo", 3, 'bar'], '|', S).
+% output is "foo|3|bar"
+```
 
 To get a single character from a string, convert it to a list of ASCII codes,
 and use the `nth0` function.
