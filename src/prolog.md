@@ -715,6 +715,8 @@ it is often for one of these reasons.
 - One of the rules has `:=` between its head and body instead of `:-`.
 - One of the goals in an intended conjunction
   ends with a period instead of a comma.
+- The second argument to the `format` predicate is a single value
+  instead of a list of values to be inserted in the format string.
 
 ## Prolog Flags
 
@@ -1023,6 +1025,12 @@ L = [3, 7, 9], member(4, L).
 % output is false
 ```
 
+To test whether all elements in a list are a given value:
+
+```prolog
+maplist(=(V), L).
+```
+
 To test whether a list begins with a given sub-list:
 
 ```prolog
@@ -1063,6 +1071,12 @@ L = [a, b, c], nth0(1, L, E). % zero-based index
 
 L = [a, b, c], nth1(2, L, E). % one-based index
 % output is E = b.
+```
+
+To create a copy of a list, or any term, including nested lists:
+
+```prolog
+copy_term(ListIn, ListOut)
 ```
 
 To create a new list that results from adding a value
@@ -1424,11 +1438,11 @@ queen_can_attack(R1-C1, R2-C2) :- % same diagonal
 ### Dicts
 
 A dictionary, or dict for short, is a hash map.
-To create one, specify a tag followed by an open curly brace,
+To create a dict, specify a tag followed by an open curly brace,
 key/value pairs where there is a colon between each key and value,
 and the pairs are separated by commas, and a closing curly brace.
-The tag optionally begins with a module name and a colon.
-Then it must specific an atom or variable.
+The tag can optionally begin with a module name and a colon.
+Then it must specify an atom or variable, which can be `_`.
 
 Values in dicts can be other dicts.
 
@@ -1969,6 +1983,7 @@ test(not_identical) :-
   x(A, B) \== x(C, D). % different argument variables
 
 test(structurally_equivalent) :-
+  [a, [b, c], d] =@= [a, [b, c], d],
   x(A, B) =@= x(C, D).
 
 test(not_structurally_equivalent) :-
@@ -2153,6 +2168,15 @@ current_op(P, fx, N).
 % output is P = 1, N = ($); and many more
 % All the names are output inside parentheses. Why?
 ```
+
+## Booleans
+
+There is no Boolean type in Prolog.
+Often the atoms `true` and `false` are used to represent Boolean values,
+but these do not have a predefined meaning.
+
+Rather than writing a rule that set an argument to `true` or `false`,
+it is preferable to write a rule that succeeds or fails.
 
 ## Numbers
 
