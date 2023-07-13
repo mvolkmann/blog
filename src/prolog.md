@@ -674,8 +674,8 @@ To see the next set, press the semicolon key.
 A period will be output after the last set is found.
 
 To evaluate arithmetic operators that result in a numeric value,
-assign the expression to a variable using the `=` operator.
-For example, entering `X = 1 + 2.` will output `X = 3.`
+assign the expression to a variable using the `is` operator.
+For example, entering `X is 1 + 2.` will output `X = 3.`
 
 The typical steps to run a Prolog program are:
 
@@ -720,6 +720,16 @@ it is often for one of these reasons.
   Look for the error message "Full stop in clause-body?".
 - The last argument to the `format` predicate is a single value
   instead of a list of values to be inserted in the format string.
+
+## Including Source Files
+
+One Prolog source file can textually include another
+using the `include/1` directive.
+For example:
+
+```prolog
+:- include(util). % includes the source file util.pl
+```
 
 ## Prolog Flags
 
@@ -1669,6 +1679,38 @@ likes(X, Y). % outputs false.
 ```
 
 ## Runtime Predicates
+
+Prolog automatically supports currying by passing
+fewer arguments to a predicate than it requires.
+For example:
+
+```prolog
+sum4(A1, A2, A3, A4) :-
+  A4 is A1 + A2 + A3.
+
+mystery(X, Y, Z) :-
+  Z is X + Y.
+
+:- initialization
+  % Not currying.
+  sum4(1, 2, 3, R1),
+  writeln(R1), % 6
+
+  % Currying one argument.
+  call(sum4(10), 20, 30, R2),
+  writeln(R2), % 60
+
+  % Currying two arguments.
+  call(sum4(10, 20), 30, R3),
+  writeln(R3), % 60
+
+  % Currying a goal passed to maplist.
+  Numbers = [1, 2, 3],
+  maplist(mystery(10), Numbers, R4),
+  writeln(R4), % [11,12,13]
+
+  halt.
+```
 
 A predicate can be placed in a variable at runtime
 and later used to create a term with the `:..` operator
