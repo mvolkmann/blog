@@ -456,7 +456,8 @@ some_rule(Arg1, Arg2) :-
 Rules are written as a head and a body separated by
 the "if" operator `:-` and terminated by a period.
 They states that the head holds if all the goals in the body hold.
-Rules do not return a value like functions in other programming languages.
+Rules do not return a value like functions in other programming languages,
+but they can set the values of variables provided as arguments.
 
 The head is a functor name followed by
 an argument list that is surrounded by parentheses.
@@ -2093,9 +2094,51 @@ Prolog supports the following bitwise operators:
 | `<<`     | bitwise shift left   |
 | `>>`     | bitwise shift right  |
 
-### CLP(FD) Operators
+### Constraint Logic Programming (CLP)
 
-See {% aTargetBlank "https://www.swi-prolog.org/man/clpfd.html", "CLP(FD)" %}.
+<a href="https://www.swi-prolog.org/pldoc/man?section=clp" target="_blank">CLP<a>
+provides a different way of expression Prolog constraints
+for values in specific domains.
+There are four supported domains:
+
+- <a href="https://www.swi-prolog.org/pldoc/man?section=clpfd"
+  target="_blank">CLP(FD)<a> for integers
+- <a href="https://www.swi-prolog.org/pldoc/man?section=clpb"
+  target="_blank">CLP(B)<a> for Booleans
+- <a href="https://www.swi-prolog.org/pldoc/man?section=clpqr"
+  target="_blank">CLP(Q)<a> for rational numbers
+- <a href="https://www.swi-prolog.org/pldoc/man?section=clpqr"
+  target="_blank">CLP(R)<a> for floating point numbers
+
+Each of these libraries define new operators
+and must be loaded in order to use them.
+For example:
+
+```prolog
+:- use_module(library(clpfd)).
+
+% Find sub-ranges of the given ranges for X and Y
+% where the X value is larger than the Y value.
+X in 5..10, Y in 7..14, X #> Y, label([X, Y]).
+% output is:
+% X in 8..10, % determined that X cannot be less than 8
+% Y#=<X+ -1, % means Y is less than or equal to X - 1
+% Y in 7..9. % determined that Y cannot be greater than 9
+
+% Find values for X and Y in their respective ranges
+% where the X value is larger than the Y value.
+% The label predicate finds specific values for which this holds.
+X in 5..10, Y in 7..14, X #> Y, label([X, Y]).
+% output is:
+% X = 8, Y = 7 ;
+% X = 9, Y = 7 ;
+% X = 9, Y = 8 ;
+% X = 10, Y = 7 ;
+% X = 10, Y = 8 ;
+% X = 10, Y = 9.
+```
+
+The following operators are provided by the `clpfd` library:
 
 | Operator             | Meaning                                                                  |
 | -------------------- | ------------------------------------------------------------------------ |
@@ -2123,7 +2166,6 @@ TODO: Finish documenting the meaning of some of these operators.
 
 | Operator | Meaning                                                                           |
 | -------- | --------------------------------------------------------------------------------- |
-| `-->`    | used in DCG grammar rules for implementing parsers                                |
 | `:-`     | prefix; appears before a compiler directive                                       |
 | `:-`     | infix; appears between the head and body of every rule; read as "if"              |
 | `?-`     | prefix operator that appears before every question                                |
@@ -2131,6 +2173,7 @@ TODO: Finish documenting the meaning of some of these operators.
 | `,`      | separates terms to be and'ed                                                      |
 | `;`      | separates terms to be or'ed                                                       |
 | `->`     | similar to ternary operator `?:` in other languages; called "if-then"             |
+| `-->`    | used in DCG grammar rules for implementing parsers                                |
 | `\+`     | prefix operator that succeeds when the goal that follows does not hold            |
 | `=`      | attempts to unify by finding satisfying variable values on LHS and RHS            |
 | `\=`     | tests whether two terms cannot be unified                                         |
@@ -2199,6 +2242,15 @@ Angle = 29.999999999999996.
 ```
 
 After evaluating this, the variable `Angle` is no longer defined.
+
+The `->` operator provides the equivalent of an "if" statement
+or ternary operator in other programming languages.
+The expression on the left can be a goal or conditional expression.
+There can be two parts on the right separated by a semicolon.
+The first part is used if the left side holds and
+the second part is used if it does not.
+Note that Prolog does not support the concept of Booleans,
+so this is not decided based on whether the left side evaluates to "true".
 
 The `=..` operator is typically used in conjunction with the `call` predicate
 to dynamically create a goal and execute it. For example:
