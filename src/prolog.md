@@ -1682,7 +1682,20 @@ call(Term). % evaluates term
 
 ## Input
 
-The `read` function reads a string from stdin.
+Input can be read from a stream using the ???.
+
+There are two stream aliases, `user_input` (defaults to stdin)
+and `current_input` (defaults to stdin).
+The stream associated with `user_input`
+can be changed by the `set_prolog_IO` predicate.
+The stream associated with `current_input`
+can be changed by the `set_input` and `see` predicates.
+
+Additional streams can be opened with the `open` predicate
+and closed with the `close` predicate.
+
+The following predicates write to the `current_output` stream
+or a specified stream: `read`, `get_byte`, `get_char`, and `get_code`.
 For example:
 
 ```prolog
@@ -1702,7 +1715,7 @@ The `get` function reads a single character
 and sets a variable to its integer ASCII value.
 
 To read from a file and write the contents to stdout,
-use the `open`, `get_char`, and `close` functions.
+use the `open`, `get_char`, `get_code`, and `close` functions.
 For example:
 
 ```prolog
@@ -1732,18 +1745,27 @@ phrase_to_stream(Cs, user_output). % writes to stdout
 
 ## Output
 
-The `write` predicate writes to the current output stream,
-which defaults to stdout.
-The atom `nl` is a built-in that writes a newline character
-to the current output stream.
-The `writeln` predicate combines these
-(in SWI-Prolog, but not in Scryer Prolog).
+Output can be written to a stream using the ???.
 
+There are three output stream aliases,
+`user_output` (defaults to stdout),
+`user_error` (defaults to stderr),
+and `current_output` (defaults to stdout).
+The streams associated with `user_output` and `user_error`
+can be changed by the `set_prolog_IO` predicate.
+The stream associated with `current_output`
+can be changed by the `set_output` and `tell` predicates.
+
+Additional streams can be opened with the `open` predicate
+and closed with the `close` predicate.
+
+The following predicates write to the `current_output` stream
+or a specified stream: `write`, `writeln`, `format`,
+`put_byte`, `put_char`, `put_code`, and `nl` (writes a newline character).
 For example:
 
 ```prolog
 write('Hello World!'), nl.
-
 writeln('Hello World!'). % same as previous line
 ```
 
