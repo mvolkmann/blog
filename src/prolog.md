@@ -2071,6 +2071,28 @@ Prolog supports the following bitwise operators:
 | `<<`     | bitwise shift left   |
 | `>>`     | bitwise shift right  |
 
+### CLP(FD) Operators
+
+See {% aTargetBlank "https://www.swi-prolog.org/man/clpfd.html", "CLP(FD)" %}.
+
+| Operator             | Meaning                                                                  |
+| -------------------- | ------------------------------------------------------------------------ |
+| `#=`                 | evaluates arithmetic expression on right and assigns to variable on left |
+| `#\=`                |                                                                          |
+| `#<`                 |                                                                          |
+| `#=<`                |                                                                          |
+| `#>=`                |                                                                          |
+| `#>`                 |                                                                          |
+| `in`                 |                                                                          |
+| `ins`                |                                                                          |
+| `indomain`           |                                                                          |
+| `label`              |                                                                          |
+| `labelling`          |                                                                          |
+| `all_distinct`       |                                                                          |
+| `global_cardinality` |                                                                          |
+| `#<===>`             |                                                                          |
+| `fd_dom`             |                                                                          |
+
 ### Other Operators
 
 Prolog supports the following additional operators:
