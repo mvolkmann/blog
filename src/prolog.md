@@ -720,6 +720,9 @@ it is often for one of these reasons.
   Look for the error message "Full stop in clause-body?".
 - The last argument to the `format` predicate is a single value
   instead of a list of values to be inserted in the format string.
+- An attempt assign an arithmetic expression to a variable
+  uses the `=` operator instead of the `is` operator
+  resulting in the expression not being evaluated.
 
 ## Including Source Files
 
