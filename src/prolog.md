@@ -1681,36 +1681,43 @@ retractall(likes(_, _)). % removes everything that anybody likes
 likes(X, Y). % outputs false.
 ```
 
-## Runtime Predicates
+## Currying (Runtime Predicates)
 
-Prolog automatically supports currying by passing
+Prolog supports a form currying by passing
 fewer arguments to a predicate than it requires.
+The result must be passed to the `call` predicate in order to use it.
 For example:
 
 ```prolog
-sum4(A1, A2, A3, A4) :-
-  A4 is A1 + A2 + A3.
+:- use_module(library(clpfd)).
 
-mystery(X, Y, Z) :-
-  Z is X + Y.
+sum2(X, Y, Z) :-
+  Z #= X + Y.
+
+sum3(A1, A2, A3, A4) :-
+  A4 #= A1 + A2 + A3.
 
 :- initialization
-  % Not currying.
-  sum4(1, 2, 3, R1),
+  sum3(1, 2, 3, R1),
   writeln(R1), % 6
 
   % Currying one argument.
-  call(sum4(10), 20, 30, R2),
+  call(sum3(10), 20, 30, R2),
   writeln(R2), % 60
 
   % Currying two arguments.
-  call(sum4(10, 20), 30, R3),
+  call(sum3(10, 20), 30, R3),
   writeln(R3), % 60
 
-  % Currying a goal passed to maplist.
+  % Currying goal passed to maplist.
   Numbers = [1, 2, 3],
-  maplist(mystery(10), Numbers, R4),
+  maplist(sum2(10), Numbers, R4),
   writeln(R4), % [11,12,13]
+
+  P = <, % could be set to a different relational operator
+  Term =.. [P, 3, 5], % builds term from list containing functor and arguments
+  % call(Term), % evaluates term
+  (call(Term) -> writeln('yes'); writeln('no')), % yes
 
   halt.
 ```
