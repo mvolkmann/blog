@@ -998,6 +998,8 @@ list_without([H|T], E, L) :-
 
 The `maplist` predicate can be used to create a list
 that is derived by applying a given predicate to each element of another list.
+Predicates like this that take another predicate as an argument
+are called "higher-order predicates".
 For example:
 
 ```prolog
@@ -2266,7 +2268,7 @@ Highlights include:
 Some Prolog implementations allow placing `:-` before any goals
 to execute it when the file is loaded.
 But the ISO standard requires using the `initialization` directive.
-The goals do not need to be wrapped in parentheses.
+The goals that follow do not need to be wrapped in parentheses.
 For example:
 
 ```prolog
@@ -2304,18 +2306,7 @@ the second part is used if it does not.
 Note that Prolog does not support the concept of Booleans,
 so this is not decided based on whether the left side evaluates to "true".
 
-When the `->` operator is used to form one of many goals in a conjunction,
-the whole goal should be wrapped in parentheses. For example:
-
-```prolog
-some_rule(Arg1, Arg2) ->
-  writeln('before arrow'),
-  (Arg1 > Arg2 ->
-    writeln('greater');
-    writeln('less')
-  ),
-  writeln('after arrow').
-```
+See the "Conditional Logic" section for details on the `->` operator.
 
 The `=..` operator is typically used in conjunction with the `call` predicate
 to dynamically create a goal and execute it. For example:
@@ -2551,13 +2542,37 @@ Prolog does not have the equivalent of an `if` or `select` statement
 found in many other programming languages.
 But it does have the `->` operator which is somewhat like
 the ternary operator in other programming languages.
+An "else" part is often chained onto this using the `;` operator.
 For example:
 
 ```prolog
-sign_word(X, Y) :-
-  (X = 0 -> Y = 'zero';
-  (X > 0 -> Y = 'positive';
-  Y = 'negative')).
+sign_word(N, Word) :-
+  (N = 0 -> Word = 'zero';
+  (N > 0 -> Word = 'positive';
+  Word = 'negative')).
+```
+
+When expressions using the `->` operator appear in a conjunction
+(comma-separated list of goals), it must be wrapped in parentheses
+in order to be treated as a single goal in the conjunction.
+
+When the `;` operator is not used,
+it is treated as if it were specified with the `fail` predicate.
+This means that `condition -> true-part` is
+the same as `condition -> true-part; fail`.
+For example:
+
+```prolog
+N = -3,
+writeln('before'), % will print
+(N > 0 -> writeln('positive')), % will not print due to failing
+writeln('after'), % will not print due to failing
+```
+
+To fix the scenario above, replace the arrow line with the following:
+
+```prolog
+(N > 0 -> writeln('positive'); true),
 ```
 
 ## Iteration
