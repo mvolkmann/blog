@@ -1770,8 +1770,6 @@ phrase_to_stream(Cs, user_output). % writes to stdout
 
 ## Output
 
-Output can be written to a stream using the ???.
-
 There are three output stream aliases,
 `user_output` (defaults to stdout),
 `user_error` (defaults to stderr),
@@ -1791,7 +1789,9 @@ For example:
 
 ```prolog
 write('Hello World!'), nl.
+write(current_output, 'Hello World!\n'). % same as previous line
 writeln('Hello World!'). % same as previous line
+writeln(current_output, 'Hello World!'). % same as previous line
 ```
 
 The {% aTargetBlank "https://www.swi-prolog.org/pldoc/man?predicate=format/2",
@@ -1908,11 +1908,6 @@ To write to a stream in Scryer Prolog (in this case stdout):
 :- use_module(library(pio)). % for phrase_to_stream
 phrase_to_stream('Hello, World!', user_output). % writes to stdout
 ```
-
-### Streams
-
-The `write`, `writeln`, and `format` predicates all take an
-additional first argument that is the stream to which they should write.
 
 To create a stream associated with a file, use the `open` predicate,
 passing it a file path string, a mode (`read`, `write`, `append`, or `update`),
