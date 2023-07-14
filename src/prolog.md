@@ -1295,6 +1295,31 @@ L = [c, d, b, a], subset([b, e], L).
 % outputs false
 ```
 
+There are no built-in predicates that determine if
+every or some element of a list satisfies a given predicate.
+Those can be implemented as follows:
+
+```prolog
+% This succeeds if every element in List satisfies Predicate
+% and fails otherwise.
+every(Predicate, List) :- maplist(Predicate, List).
+
+% This succeeds if at least one element in List satisfies Predicate
+% and fails otherwise.
+some(_, []) :- fail.
+some(Predicate, [H|T]) :-
+  call(Predicate, H), !; some(Predicate, T).
+```
+
+The `every` and `some` predicates defined above can be used as follows:
+
+```prolog
+every(clpfd:even, [2, 6, 8]) % succeeds
+every(clpfd:even, [2, 5, 8]) % fails
+some(clpfd:even, [1, 6, 9]) % succeeds
+some(clpfd:even, [1, 5, 9]) % fails
+```
+
 For implementations of map, filter, and reduce, see {% aTargetBlank
 "https://pbrown.me/blog/functional-prolog-map-filter-and-reduce/",
 "Functional Prolog" %}.
@@ -2715,9 +2740,8 @@ For information about the performance of Prolog, see {% aTargetBlank
 ## Unit Tests
 
 SCI-Prolog includes a unit testing framework called "Test Box".
-See {% aTargetBlank
-"https://www.swi-prolog.org/pldoc/doc_for?object=section(%27packages/plunit.html%27)",
-"Prolog Unit Tests" %}.
+See <a href="https://www.swi-prolog.org/pldoc/doc_for?object=section(%27packages/plunit.html%27)"
+target="_blank"> Prolog Unit Tests</a>.
 
 Code for unit tests can be placed in the same source file
 as the rules they test.
