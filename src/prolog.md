@@ -2141,6 +2141,13 @@ Prolog supports the following bitwise operators:
 
 ### Constraint Logic Programming (CLP)
 
+The CLP libraries implements Constraint Logic Programming
+through a series of new operators.
+These supports two primary use cases:
+
+- declarative integer arithmetic
+- combinatorial problems
+
 <a href="https://www.swi-prolog.org/pldoc/man?section=clp" target="_blank">CLP<a>
 provides a different way of expression Prolog constraints
 for values in specific domains.
@@ -2202,6 +2209,32 @@ The following operators are provided by the `clpfd` library:
 | `global_cardinality` |                                                                          |
 | `#<===>`             |                                                                          |
 | `fd_dom`             |                                                                          |
+
+When using CLP, compare values with `#=` instead of `=:=`.
+
+The following rules describe the relationship between a geometry shape
+and its area using operators defined by the "clpr" library:
+
+```prolog
+:- use_module(library(clpr)).
+
+area(circle, Radius, X) :- Pi is pi, {X = Pi * Radius^2}.
+area(square, Side, X) :- {X = Side^2}.
+area(rectangle, Width, Height, X) :- {X = Width * Height}.
+```
+
+The following is another way to describe the relationship
+between a circle and its area without using CLP:
+
+```prolog
+radius_area(R, A) :-
+    ground(R), % tests whether R is not a free variable
+    A is pi * R^2.
+
+radius_area(R, A) :-
+    ground(A), % tests whether A is not a free variable
+    R is sqrt(A / pi).
+```
 
 ### Other Operators
 
@@ -2296,6 +2329,19 @@ The first part is used if the left side holds and
 the second part is used if it does not.
 Note that Prolog does not support the concept of Booleans,
 so this is not decided based on whether the left side evaluates to "true".
+
+When the `->` operator is used to form one of many goals in a conjunction,
+the whole goal should be wrapped in parentheses. For example:
+
+```prolog
+some_rule(Arg1, Arg2) ->
+  writeln('before arrow'),
+  (Arg1 > Arg2 ->
+    writeln('greater');
+    writeln('less')
+  ),
+  writeln('after arrow').
+```
 
 The `=..` operator is typically used in conjunction with the `call` predicate
 to dynamically create a goal and execute it. For example:
@@ -2634,43 +2680,6 @@ TODO: Which other programming languages can call SWI-Prolog?
 
 For information about the performance of Prolog, see {% aTargetBlank
 "https://www.metalevel.at/prolog/efficiency", "Efficiency of Prolog" %}.
-
-## Constraint Logic Programming over Finite Domains: CLP(FD)
-
-The library {% aTargetBlank "https://www.swi-prolog.org/man/clpfd.html",
-"clpfd" %} implements Constraint Logic Programming over Finite Domains.
-This supports two primary use cases:
-
-- declarative integer arithmetic
-- combinatorial problems
-
-This library supports a different, powerful way to write Prolog rules.
-
-For example, the following rules describe the relationship
-between a geometry shape and its area:
-
-```prolog
-:- use_module(library(clpr)).
-
-area(circle, Radius, X) :- Pi is pi, {X = Pi * Radius^2}.
-area(square, Side, X) :- {X = Side^2}.
-area(rectangle, Width, Height, X) :- {X = Width * Height}.
-```
-
-The following is another way to describe the relationship
-between a circle and its area without using CLP:
-
-```prolog
-radius_area(R, A) :-
-    ground(R), % tests whether R is not a free variable
-    A is pi * R^2.
-
-radius_area(R, A) :-
-    ground(A), % tests whether A is not a free variable
-    R is sqrt(A / pi).
-```
-
-When using CLP, compare values with `#=` instead of `=:=`.
 
 ## Unit Tests
 
