@@ -1666,7 +1666,6 @@ likes(tami, bikes).
 ```
 
 A session can do the following:
-TODO: TEST ALL OF THIS!
 
 ```prolog
 [likes].
@@ -1679,58 +1678,6 @@ retractall(likes(mark, _)). % removes everything that mark likes
 likes(X, Y). % outputs X = tami, Y = bikes.
 retractall(likes(_, _)). % removes everything that anybody likes
 likes(X, Y). % outputs false.
-```
-
-## Currying (Runtime Predicates)
-
-Prolog supports a form currying by passing
-fewer arguments to a predicate than it requires.
-The result must be passed to the `call` predicate in order to use it.
-For example:
-
-```prolog
-:- use_module(library(clpfd)).
-
-sum2(X, Y, Z) :-
-  Z #= X + Y.
-
-sum3(A1, A2, A3, A4) :-
-  A4 #= A1 + A2 + A3.
-
-:- initialization
-  sum3(1, 2, 3, R1),
-  writeln(R1), % 6
-
-  % Currying one argument.
-  call(sum3(10), 20, 30, R2),
-  writeln(R2), % 60
-
-  % Currying two arguments.
-  call(sum3(10, 20), 30, R3),
-  writeln(R3), % 60
-
-  % Currying goal passed to maplist.
-  Numbers = [1, 2, 3],
-  maplist(sum2(10), Numbers, R4),
-  writeln(R4), % [11,12,13]
-
-  P = <, % could be set to a different relational operator
-  Term =.. [P, 3, 5], % builds term from list containing functor and arguments
-  % call(Term), % evaluates term
-  (call(Term) -> writeln('yes'); writeln('no')), % yes
-
-  halt.
-```
-
-A predicate can be placed in a variable at runtime
-and later used to create a term with the `:..` operator
-which is evaluated using the `call` predicate.
-For example:
-
-```prolog
-P = <, % could be set to a different relational operator
-Term =.. [P, 3, 5], % builds term from list containing functor and arguments
-call(Term). % evaluates term
 ```
 
 ## Input
@@ -2613,6 +2560,80 @@ For example, the following are equivalent:
 ```prolog
 Row >= 0, Row =< 7.
 between(0, 7, Row).
+```
+
+## List of Solutions
+
+The combination of the `findall` and `label` predicates are useful for
+creating a list of values that satisfy given constraints.
+For example:
+
+```prolog
+:- use_module(library(clpfd)).
+
+add(A, B, C) :- C #= A + B.
+
+:- initialization
+  findall(
+    [A, B], % transform each solution into the list [A, B]
+    % Find all pairs of integers that satisfy these constraints.
+    (add(A, B, 5), A in 1..5, A #> B, label([A, B])),
+    Results % set this
+  ),
+  format('Results = ~w~n', [Results]), % [[3,2],[4,1],[5,0]]
+  halt.
+```
+
+## Currying (Runtime Predicates)
+
+Prolog supports a form currying by passing
+fewer arguments to a predicate than it requires.
+The result must be passed to the `call` predicate in order to use it.
+For example:
+
+```prolog
+:- use_module(library(clpfd)).
+
+sum2(X, Y, Z) :-
+  Z #= X + Y.
+
+sum3(A1, A2, A3, A4) :-
+  A4 #= A1 + A2 + A3.
+
+:- initialization
+  sum3(1, 2, 3, R1),
+  writeln(R1), % 6
+
+  % Currying one argument.
+  call(sum3(10), 20, 30, R2),
+  writeln(R2), % 60
+
+  % Currying two arguments.
+  call(sum3(10, 20), 30, R3),
+  writeln(R3), % 60
+
+  % Currying goal passed to maplist.
+  Numbers = [1, 2, 3],
+  maplist(sum2(10), Numbers, R4),
+  writeln(R4), % [11,12,13]
+
+  P = <, % could be set to a different relational operator
+  Term =.. [P, 3, 5], % builds term from list containing functor and arguments
+  % call(Term), % evaluates term
+  (call(Term) -> writeln('yes'); writeln('no')), % yes
+
+  halt.
+```
+
+A predicate can be placed in a variable at runtime
+and later used to create a term with the `:..` operator
+which is evaluated using the `call` predicate.
+For example:
+
+```prolog
+P = <, % could be set to a different relational operator
+Term =.. [P, 3, 5], % builds term from list containing functor and arguments
+call(Term). % evaluates term
 ```
 
 ## Help
