@@ -182,7 +182,7 @@ Searches in WAM use an efficient hash-based approach.
 > the University of Amsterdam, where Wielemaker is employed.
 
 {% aTargetBlank "https://www.swi-prolog.org", "SWI-Prolog" %}
-is implemented in a combination of C (48%) and Prolog (39%).
+is implemented in C (48%) and Prolog (39%).
 
 Documentation of built-in predicates uses **argument mode indicators**
 that are documented at
@@ -286,7 +286,7 @@ and loads the compiled facts and rules.
   title="GNU Prolog logo">
 
 {% aTargetBlank "http://www.gprolog.org", "GNU Prolog" %}.
-is implemented in a combination of C (84%) and Prolog (15%).
+is implemented in C (84%) and Prolog (15%).
 
 To install the terminal command `gprolog` in macOS,
 enter `brew install gnu-prolog`.
@@ -304,7 +304,7 @@ To start a GNU Prolog top level from a terminal, enter `gprolog`.
 industrial strength production environment and
 a testbed for bleeding edge research in logic and constraint programming."
 
-Scryer Prolog is implemented in a combination of Rust (64%) and Prolog (36%).
+Scryer Prolog is implemented in Rust (64%) and Prolog (36%).
 
 To install, enter the following commands:
 
@@ -329,7 +329,7 @@ create the file `$HOME/.scryerrc`.
 "is a modern Prolog implementation that builds up from a
 logic-based simple kernel designed to be portable, extensible, and modular."
 
-Ciao is implemented in Prolog (72%) and C (23%)
+Ciao is implemented in Prolog (72%) and C (23%).
 
 To install:
 
@@ -382,7 +382,7 @@ To exit from any Prolog interpreter, enter `halt.` or press ctrl-d.
 | functor name      | name of a predicate                                           |
 | arity             | number of predicate arguments                                 |
 | functor           | function name and its arity; written with a slash between     |
-| goal              | rule body expression to be satisfied                          |
+| goal              | compound term in a rule body or question                      |
 | list notation     | comma-separated terms inside square brackets; ex. `[a, B, 7]` |
 | operator notation | terms separated by operators; ex. `Y = m*X + b`               |
 | function notation | operators are written as function calls; ex. `*(3, +(1, 2))`  |
@@ -724,17 +724,17 @@ it is often for one of these reasons.
   uses the `=` operator instead of the `is` operator
   resulting in the expression not being evaluated.
 
-## Including Source Files
+## Compiler Directives
 
-One Prolog source file can textually include another
-using the `include/1` directive.
-For example:
+Compiler directives in source files begin with `:-`.
+They have several purposed including:
 
-```prolog
-:- include(util). % includes the source file util.pl
-```
+- setting compiler flags
+- including other source files
+- including a module or library
+- evaluate goals when the source file is loaded
 
-## Prolog Flags
+### Compiler Flags
 
 Prolog flags configure the operation of a Prolog compiler.
 
@@ -753,6 +753,45 @@ For details on the `double_quotes` flag, see the [Strings](#strings) section.
 All the prolog flags supported by SWI-Prolog are documented at
 <a href="https://www.swi-prolog.org/pldoc/man?section=flags" target="_blank">
 Environment Control (Prolog flags)</a>.
+
+### Including Source Files
+
+One Prolog source file can textually include another
+using the `include/1` directive.
+For example:
+
+```prolog
+:- include(util). % includes the source file util.pl
+```
+
+### Including a Module/Library
+
+To include a library (ex. clpfd), include a line like the following:
+
+```prolog
+:- use_module(library(clpfd)).
+```
+
+### Evaluating Goals on Load
+
+To evaluate goals when a source file is loaded, precede them with `:-`.
+For example:
+
+```prolog
+:- writeln('Hello, World!').
+```
+
+A source file can contain any number of these.
+
+Alternatively, to specify a conjunction of several goals to be evaluated,
+use `initialization`. For example:
+
+```prolog
+:- initialization
+  goal1,
+  goal2,
+  goal3
+```
 
 ## Tree Representation
 
@@ -2137,6 +2176,9 @@ There are four supported domains:
   target="_blank">CLP(Q)<a> for rational numbers
 - <a href="https://www.swi-prolog.org/pldoc/man?section=clpqr"
   target="_blank">CLP(R)<a> for floating point numbers
+
+When using SICStus Prolog, consider using {% aTargetBlank
+"https://github.com/triska/clpz", "CLP(Z)" %} as an alternative to CLP(F).
 
 Each of these libraries define new operators
 and must be loaded in order to use them.
