@@ -1132,6 +1132,16 @@ L = [a, b, c], nth1(2, L, E). % one-based index
 % output is E = b.
 ```
 
+To get the index of a given element in a list:
+
+```prolog
+L = [a, b, c], nth0(Index, L, b). % zero-based index
+% output is Index = 1.
+
+L = [a, b, c], nth1(Index, L, b). % one-based index
+% output is Index = 2.
+```
+
 To create a copy of a list, or any term, including nested lists:
 
 ```prolog
