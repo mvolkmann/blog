@@ -1538,6 +1538,8 @@ and the pairs are separated by commas, and a closing curly brace.
 The tag can optionally begin with a module name and a colon.
 Then it must specify an atom or variable, which can be `_`.
 
+Keys must be atoms or integers that are no larger than `max_tagged_integer`.
+
 Values in dicts can be other dicts.
 
 For example:
