@@ -3463,6 +3463,180 @@ assignment(V, I) --> ws, word(V), ws, ":=", ws, integer(I), ws.
 % V = "gretzky", I = 99.
 ```
 
+### Parsing Sentences
+
+The following code provides a basic example of using a DCG
+to perform Natural Language Processing (NLP).
+It is based on code in the video "Build Syntax Trees in Prolog with DCGs"
+at https://youtu.be/QGXypIkV-GU.
+
+```prolog
+:- include(sentences). % This file is shown below.
+
+% From Wikipedia, "English determiners are words such as
+% the, a, each, some, which, this, and six
+% that are most commonly used with nouns to specify their referents."
+determiner --> [the] | [a].
+
+noun --> [cat] | [dog].
+noun_phrase --> determiner, noun.
+verb --> [chased].
+verb_phrase --> verb, noun_phrase.
+sentence --> noun_phrase, verb_phrase.
+
+% Enter `test.`
+test :-
+  phrase(sentence, [the,cat,chased,a,dog]), % matches
+  \+ phrase(sentence, [the,cat,chased,a,mouse]), % does not match
+  !.
+
+% Enter `complete1.`
+complete1 :-
+  findall(X, phrase(sentence, [the,X,chased,the,dog]), Solutions),
+  format('Solutions = ~w~n', [Solutions]).
+
+% Enter `complete2.`
+complete2 :-
+  findall(Rest, phrase(sentence, [the,cat,chased | Rest]), Solutions),
+  format('Solutions = ~w~n', [Solutions]).
+
+% Enter `generate.`
+generate :-
+  findall(X, phrase(sentence, X), Solutions),
+  maplist(atoms_sentence, Solutions, Sentences),
+  maplist(writeln, Sentences).
+
+/*
+This is a basic example of using a DCG to perform
+Natural Language Processing (NLP) in Prolog.
+It is based on code in the video "Build Syntax Trees in Prolog with DCGs"
+at https://youtu.be/QGXypIkV-GU.
+*/
+
+:- include(sentences).
+
+% From Wikipedia, "English determiners are words such as
+% the, a, each, some, which, this, and six
+% that are most commonly used with nouns to specify their referents."
+determiner --> [the] | [a].
+
+noun --> [cat] | [dog].
+noun_phrase --> determiner, noun.
+verb --> [chased].
+verb_phrase --> verb, noun_phrase.
+sentence --> noun_phrase, verb_phrase.
+
+% Enter `test.`
+test :-
+  phrase(sentence, [the,cat,chased,a,dog]), % matches
+  \+ phrase(sentence, [the,cat,chased,a,mouse]), % does not match
+  !.
+
+% Enter `complete1.`
+complete1 :-
+  findall(X, phrase(sentence, [the,X,chased,the,dog]), Solutions),
+  format('Solutions = ~w~n', [Solutions]).
+
+% Enter `complete2.`
+complete2 :-
+  findall(Rest, phrase(sentence, [the,cat,chased | Rest]), Solutions),
+  format('Solutions = ~w~n', [Solutions]).
+
+% Enter `generate.`
+generate :-
+  findall(X, phrase(sentence, X), Solutions),
+  maplist(atoms_sentence, Solutions, Sentences),
+  maplist(writeln, Sentences).
+```
+
+The following code is from the file `sentences.pl`
+which is included in the code above:
+
+```prolog
+% This relates a string to the same string,
+% but with the first letter capitalized.
+capitalize(S0, S1) :-
+  string_chars(S0, [H|T]),
+  string_upper(H, U),
+  atomics_to_string([U|T], S1).
+
+% This relates a list of atoms to a sentence.
+atoms_sentence(Atoms, Sentence) :-
+  % Convert the list atoms into a list of strings.
+  maplist(atom_string, Atoms, Strings),
+  % Get the first word and a list of the remaining words.
+  [W | Ws] = Strings,
+  % Capitalize the first word.
+  capitalize(W, C),
+  % Join the words back into a single string
+  % with a space between each word.
+  atomics_to_string([C | Ws], ' ', S),
+  % Add period at end.
+  string_concat(S, ".", Sentence).
+
+% This converts a list of atoms to a sentence
+% and writes it to the current output stream.
+write_sentence(Atoms) :-
+  atoms_sentence(Atoms, Sentence),
+  writeln(Sentence).
+```
+
+### Generating Syntax Trees
+
+The following code is an alternate version of the code in the previous section.
+It uses grammar goal arguments to capture nested structures
+that describe a syntax tree for a parsed sentence.
+
+To capture the atoms that match each grammar rule,
+we specify a structure as the argument of each rule.
+These structures can contain arguments that are fixed atoms
+or variables that are set in the grammar rule body.
+The grammar rule arguments are "accumulators"
+in that they accumulate the result of parsing in a syntax tree.
+
+This enables each grammar rule to generate a tree of structures
+that describe what was matched.
+
+```prolog
+:- include(sentences).
+
+determiner(d(a)) --> [a].
+determiner(d(the)) --> [the].
+
+noun(n(cat)) --> [cat].
+noun(n(dog)) --> [dog].
+noun_phrase(np(D, N)) --> determiner(D), noun(N).
+verb(v(chased)) --> [chased].
+verb_phrase(vp(V, Np)) --> verb(V), noun_phrase(Np).
+sentence(s(Np, Vp)) --> noun_phrase(Np), verb_phrase(Vp).
+
+% To see a sample tree, enter
+% `phrase(sentence(Tree), [a,cat,chased,the,dog]).`
+
+% Enter `test.`
+test :-
+  phrase(sentence(Tree), [the,cat,chased,a,dog]), % matches
+  % Tree = s(np(d(the), n(cat)), vp(v(chased), np(d(a), n(dog)))).
+  \+ phrase(sentence(Tree), [the,cat,chased,a,mouse]), % does not match
+  !.
+
+% Enter `complete1.`
+complete1 :-
+  findall(X, phrase(sentence(Tree), [the,X,chased,the,dog]), Solutions),
+  format('Solutions = ~w~n', [Solutions]).
+
+% Enter `complete2.`
+complete2 :-
+  findall(Rest, phrase(sentence(Tree), [the,cat,chased | Rest]), Solutions),
+  format('Solutions = ~w~n', [Solutions]).
+
+% Enter `generate.`
+generate :-
+  findall(X, phrase(sentence(Tree), X), Solutions),
+  maplist(atoms_sentence, Solutions, Sentences),
+  maplist(writeln, Sentences).
+```
+
 ## Calling From JavaScript
 
 The npm package {% aTargetBlank "https://github.com/rla/node-swipl#readme",
