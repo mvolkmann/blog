@@ -79,6 +79,8 @@ It is partially implemented in Prolog.
 Prolog is used in many kinds of applications including:
 
 - problem solving
+- parsing
+- natural language processing (NLP)
 - specification language
 
   For example, the Java Virtual Machine (JVM) specification uses Prolog.
