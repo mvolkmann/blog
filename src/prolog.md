@@ -2454,6 +2454,16 @@ L = "abc". % atoms, not characters
 % L = [a, b, c].
 ```
 
+The benefits of representing strings as lists of characters are that
+list predicates can be used to operate on them and
+they can be partially instantiated with variable characters.
+
+When the `double_quotes` flag is set to `chars`, the following are equivalent:
+
+- `""` and `[]`
+- `"a"` and `[a]`
+- `"abc"` and `[a, b, c]`
+
 {% aTargetBlank "https://www.swi-prolog.org/pldoc/man?section=string",
 "The string type and its double quoted syntax" %} section 5.2.3
 discusses the pros and cons of the string options.
@@ -2550,6 +2560,24 @@ For example:
 
 ```prolog
 ?- name('Mark', L), nth0(2, L, C), put(C). % 114 (ASCII code for 'r')
+```
+
+To get the tail of a string when the `double_quotes` flag is set to `chars`,
+use the `append` predicate. For example:
+
+```prolog
+append("foo", T, "foobarbaz")
+% sets T to "barbaz"
+```
+
+To split a string on a delimiter such as a space
+when the `double_quotes` flag is set to `chars`,
+use the `append` predicate. For example:
+
+```prolog
+append(Word1, [' '|Rest], "Red Green Blue").
+% sets Word1 to "Red" and Rest to "Green Blue" as the first solution
+% sets Word1 to "Red Green" and Rest to "Blue" as the second solution
 ```
 
 ## Arithmetic Functions
@@ -3228,20 +3256,35 @@ Most Prolog implementations already support DCGs.
 
 DCGs are enabled by default in SWI-Prolog,
 but not in all Prolog implementations.
-To enable DCGs, it may be necessary to enter `:- use_module(library(dcgs)).`
+To enable DCGs, it may be necessary to include the `dcg` library
+with `:- use_module(library(dcgs)).`
 This can be added to the configuration file for a Prolog implementation
 so the `dcg` library is always available.
-For example, in Scryer Prolog the configuration file is `~/.scryerrc`.
 
-`F//N` refers to the non-terminal `F` with `N` arguments.
+Grammar rules have the syntax `GRHead -> GRBody.`
+
+The name at the beginning of `GRHead` is used to refer to the rule.
+Grammar rule names typically describe the kinds of sequences they allow
+rather than describe their arguments as is common in Prolog predicates.
+
+Each GRBody consists of terminals, non-terminals, and grammar body goals.
+A terminal is an allowed value.
+A non-terminal is written as Prolog goal.
+
+The notation `F//N` refers to the non-terminal `F` with `N` arguments.
 
 Predefined non-terminals include:
 
-- `(,)//2`: concatenation; read as "and then"
+- `(,)//2`: concatenation; read as "and then" or "followed by"
 - `(|)//2`: alternatives; read as "or"
 
 The predicate `phrase(GRBody, L)` holds if
-`L` is a list that matches `GRBody` and nothing remains in `L`.
+`L` is a list that matches `GRBody`.
+This is the main way to find solutions to a DCG rule.
+It can be used to test, complete, and generate solutions.
+Since grammar rules can be used in all of these usage modes,
+it is preferable to say that a grammar rule "describes" conforming sequences
+rather than using words like "generates" and "consumes".
 
 For example, the following grammar rules describe sequences
 that contain any number of `x` characters.
@@ -3264,9 +3307,10 @@ phrase(xs, [x, A, x, x, B, x]). % solution is A = B, B = x.
 phrase(xs, Ls). % finds all possible solutions
 ```
 
-Every DSG rule can be translated to a standard Prolog rule
-which is typically longer.
-Most DSG implementations do this behind the scenes.
+All DCG rules can be translated to a standard Prolog rules
+which typically require longer code.
+Most DCG implementations do this behind the scenes
+and then consider those rules at runtime instead of the DCG rules.
 
 The predicate `seq(L)` describes a sequence of values.
 For example, the following finds all combinations of `Xs` and `Ys` values
