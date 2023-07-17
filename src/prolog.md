@@ -1573,7 +1573,7 @@ Value = MyDict.get(key) % returns false if key is missing?
 Value = MyDict.get(key, defaultValue) % uses default value if key is missing
 ```
 
-To use a default value when a kys is missing:
+To use a default value when a keys is missing:
 
 ```prolog
 MyDict = demo{a: 1, b: 2},
@@ -1591,6 +1591,13 @@ Key = b,
     format('key ~w = ~w~n', [Key, Value]);
     format('key ~w not found', Key)
 ).
+```
+
+To create a new dict where a key/value part has been added or modified:
+
+```prolog
+MyDict = demo{a: 1, b: 2},
+NewDict = MyDict.put(b, 3)
 ```
 
 TODO: Add more detail on working with dicts.
