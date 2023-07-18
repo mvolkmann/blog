@@ -377,8 +377,8 @@ To exit from any Prolog interpreter, enter `halt.` or press ctrl-d.
 | structure         | another name for a compound term                              |
 | fact              | description of something that is true                         |
 | rule              | relationship involving one or more unknown things (variables) |
-| predicate         | collection of clauses with the same functor                   |
-| clause            | a fact or rule                                                |
+| clause            | a single fact or rule                                         |
+| predicate         | collection of clauses with the same functor name              |
 | question          | asks if a term is true or asks for satisfying variable values |
 | database          | collection of predicates                                      |
 | functor name      | name of a predicate                                           |
