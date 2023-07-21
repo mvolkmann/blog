@@ -725,6 +725,8 @@ it is often for one of these reasons.
 - An attempt assign an arithmetic expression to a variable
   uses the `=` operator instead of the `is` operator
   resulting in the expression not being evaluated.
+- The `->` operator is used in one goal of a multiple goal conjunction
+  and so must be wrapped in parentheses.
 
 ## Compiler Directives
 
@@ -1439,6 +1441,7 @@ X = [1, 2, 3],
 Y = [4] ;
 X = [1, 2, 3, 4],
 Y = [] ;
+false.
 ```
 
 ### Pairs
