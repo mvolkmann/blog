@@ -109,6 +109,9 @@ These take considerable time to learn and master.
 
 ## Resources
 
+- {% aTargetBlank "https://swi-prolog.discourse.group/",
+  "SWI Prolog Discourse group" %}
+
 - {% aTargetBlank "https://mitpress.mit.edu/9780262691635/the-art-of-prolog/",
   "The Art of Prolog" %} Second Edition book by Sterling and Shapiro
 
@@ -743,7 +746,8 @@ They have several purposed including:
 Prolog flags configure the operation of a Prolog compiler.
 
 To get the value of a prolog flag, use the `current_prolog_flag` predicate.
-For example, `current_prolog_flag(double_quotes, F)` sets `F` to the value.
+For example, `current_prolog_flag(double_quotes, F)`
+sets `F` to the current value.
 
 To set the value of the prolog flag, use the directive `set_prolog_flag`.
 For example:
@@ -2480,6 +2484,11 @@ The benefits of representing strings as lists of characters are that
 list predicates can be used to operate on them and
 they can be partially instantiated with variable characters.
 
+Some libraries such as `dcg/basic` assume `double_quotes` is
+set to `string` and the predicates they provide
+do not work correctly if it is set to another value like `chars`.
+For this reason it is recommended to not change this setting.
+
 When the `double_quotes` flag is set to `chars`, the following are equivalent:
 
 - `""` and `[]`
@@ -2592,14 +2601,12 @@ append("foo", T, "foobarbaz")
 % sets T to "barbaz"
 ```
 
-To split a string on a delimiter such as a space
-when the `double_quotes` flag is set to `chars`,
-use the `append` predicate. For example:
+To split a string on a delimiter such as a space,
+use the `split_string` predicate: For example:
 
 ```prolog
-append(Word1, [' '|Rest], "Red Green Blue").
-% sets Word1 to "Red" and Rest to "Green Blue" as the first solution
-% sets Word1 to "Red Green" and Rest to "Blue" as the second solution
+split_string('foo,bar,baz', ',', '', L).
+% sets L to ["foo", "bar", "baz"]
 ```
 
 ## Arithmetic Functions
