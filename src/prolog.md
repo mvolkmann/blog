@@ -169,6 +169,12 @@ Several Prolog implementations compile source code to
 abstract machine code for the Warren Abstract Machine (WAM).
 Searches in WAM use an efficient hash-based approach.
 
+The table at {% aTargetBlank "http://www.complang.tuwien.ac.at/ulrich/iso-prolog/conformity_testing", "Conforming Testing" %}
+describes the degree to which each implementation conforms to the ISO standard.
+One reason to select a conforming implementation is that it increases
+the likelihood that your code will run in other implementations.
+Switch may be necessary in order to gain performance or specific features.
+
 ### SWI-Prolog
 
 <img alt="SWI-Prolog logo" style="width: 20%"
@@ -350,10 +356,12 @@ To start a Ciao top level from a terminal, enter `ciao`.
 
 ### Other Implementations
 
+- {% aTargetBlank "https://sicstus.sics.se", "SICStus Prolog" %}
+  is a commercial, high-performance implementation.
 - {% aTargetBlank "http://tau-prolog.org", "Tau" %}
-  implemented in JavaScript (95%) and Prolog (5%)
+  is implemented in JavaScript (95%) and Prolog (5%).
 - {% aTargetBlank "https://github.com/trealla-prolog/trealla", "Trealla" %}
-  implemented in C (82%) and Prolog (18%)
+  is implemented in C (82%) and Prolog (18%).
 
 ## Online Top Level
 
@@ -3297,15 +3305,16 @@ Predefined non-terminals include:
 
 The predicate `phrase(GRBody, L)` holds if
 `L` is a list of ASCII codes that matches `GRBody`.
-Recall that such a list can be created
+Recall that such a list can be created (in SWI-Prolog only!)
 by surrounding literal text with backticks.
 This can be used to test, complete, and generate solutions for a DCG rule.
 Since grammar rules can be used in all of these usage modes,
 it is preferable to say that a grammar rule "describes" conforming sequences
 rather than using words like "generates" and "consumes".
 
-Within DCG rules, double-quoted strings are treated as lists of
-ASCII code integers regardless of the `double_quotes` compiler flag setting.
+When using SWI-Prolog, within DCG rules double-quoted strings
+are treated as lists of ASCII code integers
+regardless of the `double_quotes` compiler flag setting.
 
 For example, the following grammar rules describe sequences
 that contain any number of `x` characters.
