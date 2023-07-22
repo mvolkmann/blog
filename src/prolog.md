@@ -2462,16 +2462,25 @@ TODO: Add more detail here!
 
 ## Strings
 
-Literal strings can be delimited with single or double quotes.
+Literal strings can be delimited with
+single quotes, double quotes, or backticks.
+When single quotes are used, it becomes an atom.
+When backticks are used, it becomes a list of ASCII code integers.
+When double quotes are used, the setting of
+the `double_quotes` flag determines what it becomes.
+
+| `double_quotes`` | `"text"`` becomes           |
+| ---------------- | --------------------------- |
+| `atom`           | atom                        |
+| `chars`          | list of character atoms     |
+| `codes`          | list of ASCII code integers |
+| `string`         | string                      |
+
+The default setting of `double_quotes` is
+`string` in SWI-Prolog and `chars` in Scryer Prolog.
+
 To escape a quote inside a literal string, precede it with a backslash.
 
-The `double_quotes` compiler flag specifies how
-double-quoted (not single) strings are treated.
-When set to `string` (default in SWI-Prolog), they remain strings.
-When set to `chars`, (default in Scryer Prolog),
-they become lists of single-character atoms.
-When set to `codes`, they become lists of Unicode code-point integers.
-When set to `atom`, they become a single atom containing all the characters.
 For example:
 
 ```prolog
@@ -2529,6 +2538,14 @@ For example:
 once(sub_string(S, _, _, _, C)) ->
   writeln('found');
   writeln('not found').
+```
+
+To concatenate two strings, use the `string_concat` predicate.
+For example:
+
+```prolog
+string_concat('foo', 'bar', S).
+% sets S to "foobar"
 ```
 
 To create a list of ASCII values from a literal string,
@@ -3318,9 +3335,6 @@ rather than using words like "generates" and "consumes".
 For example, the following grammar rules describe sequences
 that contain any number of `x` characters.
 
-Recall that when the `double_quotes` flag is set to `chars`
-then `"abc"` is the same as `[a, b, c]`.
-
 ```prolog
 xs --> "".
 xs --> "x", xs.
@@ -3335,6 +3349,22 @@ phrase(xs, [x, A, x, x, B, x]). % solution is A = B, B = x.
 % To generate solutions ...
 phrase(xs, Ls). % finds all possible solutions
 ```
+
+The DCG operator `-->` and the `phrase` predicate
+are available by default in SWI-Prolog.
+
+The libraries `dcg/basics` and `dcg/higher_order` provide
+additional predicates that are useful in writing DCG rules.
+These must be included to use them. For example:
+
+```prolog
+:- use_module(library(dcg/basics)).
+```
+
+Setting the Prolog flag `double_quotes` to a value
+other than `string` can break the operation of predicates
+in the `dcg/*` libraries.
+TODO: What value is recommended? `codes` seems to work best.
 
 All DCG rules can be translated to a standard Prolog rules
 which typically require longer code.
@@ -3396,7 +3426,10 @@ palindrome(L) :- phrase(qes(L), L).
 % phrase((..., [X, X], ...), "Mississippi"). % finds s, s, and p
 ```
 
-A DCG can be used to describe a tree structure.
+A DCG can be used to describe a tree structure
+and capture it as a nested structure.
+DCG rule heads can contain an optional structure for capturing parsed data.
+The functor names of these structures identify the kind of data captured.
 
 ```prolog
 nodes(nil) --> [].
