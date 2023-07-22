@@ -2437,12 +2437,12 @@ When backticks are used, it becomes a list of ASCII code integers.
 When double quotes are used, the setting of
 the `double_quotes` flag determines what it becomes.
 
-| `double_quotes`` | `"abc"`` becomes                           |
-| ---------------- | ------------------------------------------ |
-| `atom`           | atom `abc`                                 |
-| `chars`          | list of character atoms `[a, b, c]`        |
-| `codes`          | list of ASCII code integers `[97, 98, 99]` |
-| `string`         | string "abc"                               |
+| `double_quotes``   | `"abc"`` becomes                           |
+| ------------------ | ------------------------------------------ |
+| `atom`             | atom `abc`                                 |
+| `chars`            | list of character atoms `[a, b, c]`        |
+| `codes`            | list of ASCII code integers `[97, 98, 99]` |
+| `string` (not ISO) | string "abc"; specific to SWI-Prolog       |
 
 The default setting of `double_quotes` is
 `string` in SWI-Prolog and `chars` in Scryer Prolog.
@@ -3304,6 +3304,9 @@ Since grammar rules can be used in all of these usage modes,
 it is preferable to say that a grammar rule "describes" conforming sequences
 rather than using words like "generates" and "consumes".
 
+Within DCG rules, double-quoted strings are treated as lists of
+ASCII code integers regardless of the `double_quotes` compiler flag setting.
+
 For example, the following grammar rules describe sequences
 that contain any number of `x` characters.
 
@@ -3312,8 +3315,8 @@ xs --> "".
 xs --> "x", xs.
 
 % To test solutions ...
-phrase(xs, "xyx"). % false
-phrase(xs, "xxx"). % true
+phrase(xs, `xyx`). % false
+phrase(xs, `xxx`). % true
 
 % To complete solutions ...
 phrase(xs, [x, A, x, x, B, x]). % solution is A = B, B = x.
@@ -3343,7 +3346,7 @@ For example, the following finds all combinations of `Xs` and `Ys` values
 that can be concatenated to form `"abc"`:
 
 ```prolog
-?- phrase((seq(Xs), seq(Ys)), "abc").
+?- phrase((seq(Xs), seq(Ys)), `abc`).
 % output is:
 % Xs = [], Ys = "abc"
 % ;  Xs = "a", Ys = "bc"
@@ -3381,16 +3384,16 @@ palindrome(L) :- phrase(qes(L), L).
 ... --> [] | [_], ... .
 
 % ... can be used to get the last element in a list.
-% phrase((..., [Last]), "xyz"). % output is Last = z; false.
+% phrase((..., [Last]), `xyz`). % output is Last = z; false.
 
 % ... can be used to determine if a given sublist
 % occurs anywhere in a list.
-% phrase((..., "y", ...), "xyz"). % output is true
-% phrase((..., "ar", ...), "Mark"). % output is true
+% phrase((..., "y", ...), `xyz`). % output is true
+% phrase((..., "ar", ...), `Mark`). % output is true
 
 % ... can be used to determine if
 % any element occurs twice in succession in a list.
-% phrase((..., [X, X], ...), "Mississippi"). % finds s, s, and p
+% phrase((..., [X, X], ...), `Mississippi`). % finds s, s, and p
 ```
 
 A DCG can be used to describe a tree structure
@@ -3472,7 +3475,7 @@ words([H|T]) --> ws, word(H), ws, words(T).
 ws --> [W], { char_type(W, whitespace) }, ws | [].
 
 % The once predicate wraps another predicate and gives only the first solution.
-% once(phrase(words(Ws), "The quick brown fox jumps over the lazy dog")).
+% once(phrase(words(Ws), `The quick brown fox jumps over the lazy dog`)).
 % This does not terminate if the string contains
 % characters that are not alphabetic or whitespace such as a period.
 
@@ -3484,12 +3487,41 @@ digits_remaining([]) --> [].
 
 digit(D) --> [D], { char_type(D, decimal_digit) }.
 
-% phrase((ws, integer(I), ws), "  1961 ").
+% phrase((ws, integer(I), ws), `  1961 `).
 % I = 1961.
 
 assignment(V, I) --> ws, word(V), ws, ":=", ws, integer(I), ws.
-% once(phrase(assignment(V, I), "  gretzky := 99 ")).
+% once(phrase(assignment(V, I), `  gretzky := 99 `)).
 % V = "gretzky", I = 99.
+```
+
+For simple text matching and extraction,
+using a regular expression in other programming languages
+is an easier alternative.
+However, DCGs can be used for this purpose.
+The following code provides two examples:
+
+```prolog
+:- use_module(library(dcg/basics)).
+
+% To test this, enter something like
+% phrase(hello(Name), `Hello, World!`).
+hello(Name) -->
+  "Hello, ", string(S), "!", !,
+  { string_codes(Name, S) }.
+
+% To test this, enter something like
+% phrase(player(Name, Number), `Player Gretzky wears number 99.`).
+player(Name, Number) -->
+  "Player ",
+  string_without(" ", Cs),
+  " wears number ",
+  digits(Ds),
+  ".",
+  {
+    string_codes(Name, Cs),
+    number_codes(Number, Ds)
+  }.
 ```
 
 ### Parsing Sentences
