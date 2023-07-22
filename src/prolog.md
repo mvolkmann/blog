@@ -2427,6 +2427,9 @@ TODO: Add more detail here!
 Literal strings can be delimited with
 single quotes, double quotes, or backticks.
 
+Prolog can represent strings in three ways:
+as an atom, a list of ASCII code integers, or as an actual string.
+
 When single quotes are used, it becomes an atom.
 
 When backticks are used, it becomes a list of ASCII code integers.
@@ -2434,17 +2437,17 @@ When backticks are used, it becomes a list of ASCII code integers.
 When double quotes are used, the setting of
 the `double_quotes` flag determines what it becomes.
 
-| `double_quotes`` | `"text"`` becomes           |
-| ---------------- | --------------------------- |
-| `atom`           | atom                        |
-| `chars`          | list of character atoms     |
-| `codes`          | list of ASCII code integers |
-| `string`         | string                      |
+| `double_quotes`` | `"abc"`` becomes                           |
+| ---------------- | ------------------------------------------ |
+| `atom`           | atom `abc`                                 |
+| `chars`          | list of character atoms `[a, b, c]`        |
+| `codes`          | list of ASCII code integers `[97, 98, 99]` |
+| `string`         | string "abc"                               |
 
 The default setting of `double_quotes` is
 `string` in SWI-Prolog and `chars` in Scryer Prolog.
 
-Technically speaking, the only want to actually create a string
+The only way to get a value whose type is `string`
 is to set `double_quotes` to `string` and use double quotes.
 
 To escape a quote inside a literal string, precede it with a backslash.
