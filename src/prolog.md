@@ -3296,9 +3296,10 @@ Predefined non-terminals include:
 - `(|)//2`: alternatives; read as "or"
 
 The predicate `phrase(GRBody, L)` holds if
-`L` is a list that matches `GRBody`.
-This is the main way to find solutions to a DCG rule.
-It can be used to test, complete, and generate solutions.
+`L` is a list of ASCII codes that matches `GRBody`.
+Recall that such a list can be created
+by surrounding literal text with backticks.
+This can be used to test, complete, and generate solutions for a DCG rule.
 Since grammar rules can be used in all of these usage modes,
 it is preferable to say that a grammar rule "describes" conforming sequences
 rather than using words like "generates" and "consumes".
@@ -3331,11 +3332,6 @@ These must be included to use them. For example:
 ```prolog
 :- use_module(library(dcg/basics)).
 ```
-
-Setting the Prolog flag `double_quotes` to a value
-other than `string` can break the operation of predicates
-in the `dcg/*` libraries.
-TODO: What value is recommended? `codes` seems to work best.
 
 All DCG rules can be translated to a standard Prolog rules
 which typically require longer code.
