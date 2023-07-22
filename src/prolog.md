@@ -762,6 +762,12 @@ All the prolog flags supported by SWI-Prolog are documented at
 <a href="https://www.swi-prolog.org/pldoc/man?section=flags" target="_blank">
 Environment Control (Prolog flags)</a>.
 
+To suppress warnings about singleton variables, use the following directive:
+
+```prolog
+:- style_check(-singleton).
+```
+
 ### Including Source Files
 
 One Prolog source file can textually include another
@@ -1664,7 +1670,7 @@ Instead see {% aTargetBlank "https://www.scryer.pl/si.html", "Module si" %}.
 | `number(V)`                           | V is any kind of number                                       |
 | `integer(V)`                          | V is an integer                                               |
 | `float(V)`                            | V is a floating point number                                  |
-| `rational(V)`                         | V is a rational number                                        |
+| `rational(V)`                         | V is a rational number (ex. 2r3)                              |
 | `rational(V, Numerator, Denominator)` | V is a rational number with given a numerator and denominator |
 | `atom(V)`                             | V is an atom                                                  |
 | `blob(V)`                             | V is a blob                                                   |
@@ -1676,63 +1682,19 @@ Instead see {% aTargetBlank "https://www.scryer.pl/si.html", "Module si" %}.
 | `cyclic_term(V)`                      | V contains cycles (circular references)                       |
 | `acyclic_term(V)`                     | V does not contain cycles (circular references)               |
 
-The following code in the file `type_checking.pl` implements simple rules that
-perform type checking of an argument.
+The following rule uses many of the predicates described above
+to output the type of a given value:
 
 ```prolog
-% The cut operator `!` tells Prolog to stop searching once a solution is found.
-demo(V, T) :- integer(V), T = 'integer', !.
-demo(V, T) :- float(V), T = 'float', !.
-demo(V, T) :- rational(V), T = 'rational', !.
-% In SWI-Prolog, only double-quoted strings are considered strings.
-demo(V, T) :- string(V), T = 'string', !.
-demo(V, T) :- atom(V), T = 'atom', !.
-
-demo2(V, T) :- number(V), T = 'number', !.
-
-demo3(V, T) :- atomic(V), T = 'atomic', !.
-demo3(V, T) :- compound(V), T = 'compound', !.
-
-demo4(V, T) :- ground(V) -> T = 'ground'; T = 'nonground', !.
-```
-
-The following unit test code in the file `type_checking.pl`
-demonstrates using the rules defined above:
-
-```prolog
-% To run these tests, enter `swipl type-checking.plt`
-
-:- consult(type_checking).
-:- begin_tests(type_checking).
-
-test(integer) :- demo(5, T), T == 'integer'.
-test(float) :- demo(1.2, T), T == 'float'.
-% See rational_syntax flag to enable 2/3 to be treated as rational.
-test(rational) :- demo(2r3, T), T == 'rational'.
-test(number) :- demo2(1.2, T), T == 'number'.
-test(string) :- demo('hello', T), T == 'string'.
-test(atom) :- demo(a, T), T == 'atom'.
-
-test(atomic) :- demo3(true, T), T == 'atomic'.
-test(atomic) :- demo3(5, T), T == 'atomic'.
-test(atomic) :- demo3(1.2, T), T == 'atomic'.
-test(atomic) :- demo3('Hello', T), T == 'atomic'.
-
-test(compound) :- demo3(2 + 3, T), T == 'compound'.
-test(compound) :- demo3(a(b), T), T == 'compound'.
-test(compound) :- demo3(a-b, T), T == 'compound'.
-test(compound) :- demo3([a, b], T), T == 'compound'.
-
-test(ground) :- demo4(5, T), T == 'ground'.
-test(ground) :- V = 5, demo4(V, T), T == 'ground'.
-
-% The next line suppresses warning about singleton variable V.
-:-style_check(-singleton).
-test(ground) :- demo4(V, T), T \== 'ground'.
-
-:- end_tests(type_checking).
-:- run_tests.
-:- halt.
+write_type(Thing) :-
+  atom(Thing) -> writeln("atom"); % ex. a
+  is_list(Thing) -> writeln("list"); % ex. [a]
+  compound(Thing) -> writeln("compound"); % ex. a(b)
+  float(Thing) -> writeln("float"); % ex. 3.1
+  integer(Thing) -> writeln("integer"); % ex. 3
+  string(Thing) -> writeln("string"); % ex. "a"
+  var(Thing) -> writeln("variable"); % ex. A
+  writeln("unknown").
 ```
 
 ## Dynamic Predicates
