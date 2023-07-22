@@ -2426,8 +2426,11 @@ TODO: Add more detail here!
 
 Literal strings can be delimited with
 single quotes, double quotes, or backticks.
+
 When single quotes are used, it becomes an atom.
+
 When backticks are used, it becomes a list of ASCII code integers.
+
 When double quotes are used, the setting of
 the `double_quotes` flag determines what it becomes.
 
@@ -2440,6 +2443,9 @@ the `double_quotes` flag determines what it becomes.
 
 The default setting of `double_quotes` is
 `string` in SWI-Prolog and `chars` in Scryer Prolog.
+
+Technically speaking, the only want to actually create a string
+is to set `double_quotes` to `string` and use double quotes.
 
 To escape a quote inside a literal string, precede it with a backslash.
 
