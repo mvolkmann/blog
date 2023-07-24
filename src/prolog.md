@@ -335,6 +335,16 @@ To start a Scryer Prolog top level from a terminal, enter `scryerp`.
 To specify configuration for all top level sessions,
 create the file `$HOME/.scryerrc`.
 
+This file often imports commonly used libraries.
+For example:
+
+```prolog
+:- use_module(library(clpz)).
+:- use_module(library(dcgs)).
+:- use_module(library(format)).
+:- use_module(library(lists)).
+```
+
 ### Ciao Prolog
 
 {% aTargetBlank "https://ciao-lang.org", "Ciao" %}
