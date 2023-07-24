@@ -62,8 +62,9 @@ Unification relies on the properties of {% aTargetBlank
 A related term is "ground" which refers to an expression
 that contains no uninstantiated variables.
 
-The set of facts and rules supplied to the Prolog engine is called a database.
-Prolog is highly optimized to handle searching large databases.
+The set of facts and rules supplied to the Prolog engine
+is called the knowledge base (or database).
+Prolog is highly optimized to handle searching large knowledge bases.
 
 Prolog is a homoiconic language, which means its code can be treated as data.
 
@@ -389,10 +390,10 @@ To exit from any Prolog interpreter, enter `halt.` or press ctrl-d.
 | fact              | description of something that is true                         |
 | rule              | relationship involving one or more unknown things (variables) |
 | clause            | a single fact or rule                                         |
-| predicate         | collection of clauses with the same functor name              |
+| predicate         | collection of clauses with the same principal functor         |
+| principal functor | name of a predicate                                           |
 | question          | asks if a term is true or asks for satisfying variable values |
-| database          | collection of predicates                                      |
-| functor name      | name of a predicate                                           |
+| knowledge base    | collection of predicate clauses (aka database)                |
 | arity             | number of predicate arguments                                 |
 | functor           | function name and its arity; written with a slash between     |
 | goal              | compound term in a rule body or question                      |
@@ -1707,7 +1708,7 @@ write_type(Thing) :-
 
 ## Dynamic Predicates
 
-By default predicates cannot be added or deleted in a top level session.
+By default clauses cannot be added to or deleted from the knowledge base.
 To enable this, run a `dynamic` question on a specific predicate.
 For example, to enable adding and removing "likes" predicates
 that take two arguments:
@@ -1716,7 +1717,7 @@ that take two arguments:
 dynamic(likes/2).
 ```
 
-Once this is done, a predicate of that type can be
+Once this is done, a clause of that type can be
 added to the beginning with `asserta` or added to the end with `assertz`.
 Also, predicates of that type can be removed
 with the `retract` and `retractall` functions.
@@ -2410,7 +2411,9 @@ current_op(P, fx, N).
 % All the names are output inside parentheses. Why?
 ```
 
-## Booleans
+## Primitive Types
+
+### Booleans
 
 There is no Boolean type in Prolog.
 Often the atoms `true` and `false` are used to represent Boolean values,
@@ -2419,7 +2422,7 @@ but these do not have a predefined meaning.
 Rather than writing a rule that set an argument to `true` or `false`,
 it is preferable to write a rule that succeeds or fails.
 
-## Numbers
+### Numbers
 
 The following rules determine whether a given number is even or odd:
 
@@ -2430,22 +2433,22 @@ odd(N) :- mod(N, 2) =:= 1.
 
 TODO: Add more detail here!
 
-## Strings
-
-Literal strings can be delimited with
-single quotes, double quotes, or backticks.
+### Strings
 
 Prolog can represent strings in three ways:
 as an atom, a list of ASCII code integers, or as an actual string.
 
+Literal strings can be delimited with
+single quotes, double quotes, or backticks (only in SWI-Prolog).
+
 When single quotes are used, it becomes an atom.
 
-When backticks are used, it becomes a list of ASCII code integers.
+When backticks are used in SWI-Prolog, it becomes a list of ASCII code integers.
 
 When double quotes are used, the setting of
 the `double_quotes` flag determines what it becomes.
 
-| `double_quotes``   | `"abc"`` becomes                           |
+| `double_quotes`    | `"abc"`` becomes                           |
 | ------------------ | ------------------------------------------ |
 | `atom`             | atom `abc`                                 |
 | `chars`            | list of character atoms `[a, b, c]`        |
