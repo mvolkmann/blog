@@ -2433,49 +2433,51 @@ TODO: Add more detail here!
 ### Strings
 
 Prolog can represent strings in three ways:
-as an atom, a list of ASCII code integers, or as an actual string.
+a list of character atoms, a list of ASCII code integers, or an atom.
 
 Literal strings can be delimited with
-single quotes, double quotes, or backticks (only in SWI-Prolog).
+double quotes or single quotes.
+SWI-Prolog adds the use of backticks which are non-standard.
 
-When single quotes are used, it becomes an atom.
+To escape a quote inside a literal string, precede it with a backslash.
 
-When backticks are used in SWI-Prolog, it becomes a list of ASCII code integers.
+When single quotes are used, the value becomes an atom.
+A single quoted string containing no special characters such as spaces
+is equivalent to an atom with the same characters.
+For example, `'demo' == demo` is true.
+
+In SWI-Prolog, when backticks are used,
+the value becomes a list of ASCII code integers.
 
 When double quotes are used, the setting of
-the `double_quotes` flag determines what it becomes.
+the `double_quotes` flag determines what the value becomes.
 
-| `double_quotes`    | `"abc"`` becomes                           |
-| ------------------ | ------------------------------------------ |
-| `atom`             | atom `abc`                                 |
-| `chars`            | list of character atoms `[a, b, c]`        |
-| `codes`            | list of ASCII code integers `[97, 98, 99]` |
-| `string` (not ISO) | string "abc"; specific to SWI-Prolog       |
+| `double_quotes` | `"abc"`` becomes                           |
+| --------------- | ------------------------------------------ |
+| `atom`          | atom `abc`                                 |
+| `chars`         | list of character atoms `[a, b, c]`        |
+| `codes`         | list of ASCII code integers `[97, 98, 99]` |
+
+SWI-Prolog also supports the `double_quotes` value `string`
+which causes double-quoted strings to become
+a string type that is specific to SWI-Prolog.
+
+The benefits of representing strings as lists of characters are that
+they can be output in a human-readable way,
+list predicates can be used to operate on them, and
+they can be partially instantiated with variable characters.
 
 The default setting of `double_quotes` is
 `string` in SWI-Prolog and `chars` in Scryer Prolog.
-
-The only way to get a value whose type is `string`
-is to set `double_quotes` to `string` and use double quotes.
-
-To escape a quote inside a literal string, precede it with a backslash.
+It is recommended to change this setting to `chars` in all implementations.
 
 For example:
 
 ```prolog
 ?- set_prolog_flag(double_quotes, chars).
-L = "abc". % atoms, not characters
+L = "abc".  % becomes a list of character atoms
 % L = [a, b, c].
 ```
-
-The benefits of representing strings as lists of characters are that
-list predicates can be used to operate on them and
-they can be partially instantiated with variable characters.
-
-Some libraries such as `dcg/basic` assume `double_quotes` is
-set to `string` and the predicates they provide
-do not work correctly if it is set to another value like `chars`.
-For this reason it is recommended to not change this setting.
 
 When the `double_quotes` flag is set to `chars`, the following are equivalent:
 
@@ -2486,16 +2488,16 @@ When the `double_quotes` flag is set to `chars`, the following are equivalent:
 {% aTargetBlank "https://www.swi-prolog.org/pldoc/man?section=string",
 "The string type and its double quoted syntax" %} section 5.2.3
 discusses the pros and cons of the string options.
-In some cases it seems best to use single quotes
-so the meaning stays the same regardless of the flags set.
 
-A single quoted string containing no special characters such as spaces
-is equivalent to an atom with the same characters.
-For example, `'demo' == demo` is true.
+To get the length of a double-quoted string, use the `length` function.
+For example:
 
-When strings become lists, predicates that operate on lists can be used.
+```prolog
+?- length("Mark", L).
+L = 4.
+```
 
-To get the length of a string, use the `atom_length` function.
+To get the length of a single-quoted string, use the `atom_length` function.
 For example:
 
 ```prolog
@@ -3393,16 +3395,16 @@ palindrome(L) :- phrase(qes(L), L).
 ... --> [] | [_], ... .
 
 % ... can be used to get the last element in a list.
-% phrase((..., [Last]), `xyz`). % output is Last = z; false.
+% phrase((..., [Last]), "xyz"). % output is Last = z; false.
 
 % ... can be used to determine if a given sublist
 % occurs anywhere in a list.
-% phrase((..., "y", ...), `xyz`). % output is true
-% phrase((..., "ar", ...), `Mark`). % output is true
+% phrase((..., "y", ...), "xyz"). % output is true
+% phrase((..., "ar", ...), "Mark"). % output is true
 
 % ... can be used to determine if
 % any element occurs twice in succession in a list.
-% phrase((..., [X, X], ...), `Mississippi`). % finds s, s, and p
+% phrase((..., [X, X], ...), "Mississippi"). % finds s, s, and p
 ```
 
 A DCG can be used to describe a tree structure
