@@ -700,11 +700,8 @@ The typical steps to run a Prolog program are:
 Unfortunately Prolog and Perl use the same file extension
 for their source files.
 
-To load a `.pl` file in the top level,
-enter `['file-path'].` or `consult('file-path').`
-If the file is in the current directory,
-its name can be used without the `.pl` extension
-and quotes are not needed inside the square brackets.
+To load a `.pl` file in the top level, enter `[f].` or `consult(f).`
+where `f` is a file name without quotes or a file path in quotes.
 For example, to load the file `demo.pl` in the current directory,
 enter `[demo].`
 
