@@ -872,15 +872,8 @@ current_prolog_flag(argv, Argv)
 To get command-line arguments in Scryer Prolog:
 
 ```prolog
-'$toplevel':argv(Args),
+argv(Args)
 ```
-
-`$toplevel` is unique to Scryer Prolog.
-The syntax `:(module-name, predicate)` loads a given module and
-executes the given predicate that is typically defined in that module.
-So the code above loads the `$toplevel` module and
-executes the `argv` predicate to set the variable `Args`
-to a list of the command-line arguments.
 
 ## Tree Representation
 
