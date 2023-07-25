@@ -2234,8 +2234,66 @@ There are four supported domains:
 When using Scryer or SICStus Prolog, consider using {% aTargetBlank
 "https://github.com/triska/clpz", "CLP(Z)" %} as an alternative to CLP(FD).
 
-Each of these libraries define new operators
-and must be loaded in order to use them.
+Each of these libraries define new operators.
+Highlights include the following:
+
+- arithmetic constraints:
+
+  - `#=` equal
+  - `#\=` not equal
+  - `#>` greater
+  - `#>=` greater or equal
+  - `#<` less
+  - `#=<` less or equal
+
+- combinatorial constraints:
+
+  - `all_distinct` holds when all elements in a list have distinct values
+
+    For example, this does not hold:
+    `Values = [2, 5, 2], all_distinct(Values).`
+
+  - `global_cardinality` checks number of occurrences of each value in a list
+
+    The first argument is a list of values to check.
+    The second argument is a list of pairs
+    where the key in each pair is a vale from the first list and
+    the value in each pair is the number of times it occurs in the first list.
+
+    For example, this holds:
+    `Vs = [2, 4, 2, 3, 2, 4], global_cardinality(Vs, [2-3, 3-1, 4-2]).`
+
+- integer range: `..`
+
+  For example, `2..7` is the range of integers
+  from 2 to 7 inclusive on both ends.
+
+- membership constraints:
+
+  - `in`: single value is in an inclusive range
+
+    For example, this holds:
+    `Value = 3, Range = 2..7, Value in Range.`
+
+  - `ins`: list of values all all in a range
+
+    For example, this holds:
+    `Values = [3, 4, 7], Range = 2..7, Values ins Range.`
+
+- enumeration:
+
+  - `indomain` ?
+
+  - `label` is the same as `labeling` with empty list of options
+
+    T
+
+  - `labeling` finds specific solutions to constraints
+
+- reification: `#<==>` equivalent terms?
+
+- reflection: `fd_dom` ?
+
 For example:
 
 ```prolog
