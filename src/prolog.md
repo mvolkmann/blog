@@ -1988,6 +1988,20 @@ Assessment = 'fun',
 format(string(S), '~w is ~w.~n', [Language, Assessment]).
 ```
 
+The `format_` predicate is similar to `format`,
+but rather than writing to a stream it can be used
+with `phrase` to capture the output as a list of character atoms.
+For example:
+
+```prolog
+S = 'World',
+phrase(format_("Hello, ~w!~n", [S]), Result),
+
+% Result is a list of character atoms.
+% This writes each one to stdout.
+maplist(write, Result).
+```
+
 The `put` function writes a single ASCII value to the current output stream.
 It is the counterpart to the `get` function.
 
