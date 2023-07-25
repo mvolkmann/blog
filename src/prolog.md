@@ -3461,10 +3461,10 @@ process(In) :-
 
 ## Definite Clause Grammars (DCGs)
 
-A DCG defines a set of grammar rules (GR)
-that are used for parsing text.
+A DCG defines a set of grammar rules (GR) that are used for
+testing, completing, generating, and parsing text.
 Each grammar rule has the syntax `GRHead --> GRBody`
-and describes sequences of characters that match.
+and describes sequences of characters or tokens that match.
 Be careful to include two dashes in the arrow and not just one.
 
 DCGs are not yet part of the ISO Prolog standard, but they are being considered.
