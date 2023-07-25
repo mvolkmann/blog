@@ -2657,10 +2657,18 @@ append("foo", T, "foobarbaz")
 % sets T to "barbaz"
 ```
 
-To split a string on a delimiter such as a space,
-use the `split_string` predicate: For example:
+To split a string on a delimiter such as a space:
 
 ```prolog
+split(S, Delimiter, Prefix, Suffix) :-
+  once(append(Prefix, [Delimiter|Suffix], S)).
+
+% Example: filename_extension("foo.bar", F, E).
+% gives F = "foo", E = "bar"
+filename_extension(S, Filename, Extension) :-
+  split(S, ., Filename, Extension).
+
+% In SWI-Prolog the split_string predicate can be used.
 split_string('foo,bar,baz', ',', '', L).
 % sets L to ["foo", "bar", "baz"]
 ```
