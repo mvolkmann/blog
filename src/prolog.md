@@ -318,6 +318,9 @@ a testbed for bleeding edge research in logic and constraint programming."
 
 Scryer Prolog is implemented in Rust (64%) and Prolog (36%).
 
+A "scryer" is somehow who sees, hears or otherwise interprets
+spirit communications, usually on behalf of a magician who isn't so gifted.
+
 To install, enter the following commands:
 
 ```bash
@@ -563,8 +566,9 @@ X = 12.566370614359172.
 
 TODO: See the version of the area rule that uses clpr in geometry.pl.
 
-Rules can only set the value of each argument and variable one time.
-Once set, they cannot be modified.
+Rules only set the values variables that are
+arguments or used in body goals one time.
+Once set, they cannot be modified except through backtracking.
 
 The last goal in a rule can be the built-in predicate `true` to always succeed.
 It can also be `false` or `fail` to always fail.
