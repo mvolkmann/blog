@@ -2305,15 +2305,23 @@ Highlights include the following:
 
   - `indomain` ?
 
-  - `label` is the same as `labeling` with empty list of options
+  - `labeling` finds specific solutions to constraints.
+    It takes a list of options and a list of constrained variables
+    to which specific values should be assigned.
 
-    T
+  - `label` is a shorthand for `labeling` that uses an empty option list
 
-  - `labeling` finds specific solutions to constraints
+    For example:
 
-- reification: `#<==>` equivalent terms?
-
-- reflection: `fd_dom` ?
+    ```prolog
+    findall(
+      [X, Y],
+      (X in 5..10, Y in 7..14, X #> Y, label([X, Y])),
+      Results
+    ),
+    writeln(Results)
+    % output is [[8,7],[9,7],[9,8],[10,7],[10,8],[10,9]]
+    ```
 
 For example:
 
