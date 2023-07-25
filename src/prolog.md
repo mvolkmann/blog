@@ -1903,8 +1903,8 @@ The {% aTargetBlank "https://www.swi-prolog.org/pldoc/man?predicate=format/2",
 "format" %} predicate can also write to the current output stream.
 It takes a format string and a list of values
 to be substituted into the format string.
-In Scryer Prolog, include the `format` library
-which defines the `format` and `format_` predicates.
+In Scryer Prolog, include the `format` library which defines
+the `format` predicate and the `format_` DCG non-terminal.
 
 The format string can contain the following control sequences
 that all begin with a tilde:
