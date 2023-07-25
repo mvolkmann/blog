@@ -3463,8 +3463,8 @@ process(In) :-
 
 A DCG defines a set of grammar rules (GR) that are used for
 testing, completing, generating, and parsing text.
-Each grammar rule has the syntax `GRHead --> GRBody`
-and describes sequences of characters or tokens that match.
+Each grammar rule has the syntax `GRHead --> GRBody` and describes
+sequences of characters or tokens (often represented as atoms) that match.
 Be careful to include two dashes in the arrow and not just one.
 
 DCGs are not yet part of the ISO Prolog standard, but they are being considered.
@@ -3482,8 +3482,8 @@ Grammar rule names typically describe the kinds of sequences they allow
 rather than describe their arguments as is common in Prolog predicates.
 
 Each GRBody consists of terminals, non-terminals, and grammar goals.
-A terminal is a fixed, allowed value,
-typically written as a string in double quotes.
+A terminal is a fixed, allowed value, often written as
+a string in double quotes or an atom.
 A non-terminal refers to another DCG rule
 and typical includes a variable argument to capture matching text.
 A grammar goal is a single Prolog goal or conjunction of them,
