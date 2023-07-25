@@ -3462,8 +3462,9 @@ process(In) :-
 ## Definite Clause Grammars (DCGs)
 
 A DCG defines a set of grammar rules (GR)
-where each has the syntax `GRHead --> GRBody`.
-These describe a sequence of allowed terminals, non-terminals, and goals.
+that are used for parsing text.
+Each grammar rule has the syntax `GRHead --> GRBody`
+and describes sequences of characters that match.
 Be careful to include two dashes in the arrow and not just one.
 
 DCGs are not yet part of the ISO Prolog standard, but they are being considered.
@@ -3476,17 +3477,59 @@ with `:- use_module(library(dcgs)).`
 This can be added to the configuration file for a Prolog implementation
 so the `dcg` library is always available.
 
-Grammar rules have the syntax `GRHead -> GRBody.`
-
 The name at the beginning of `GRHead` is used to refer to the rule.
 Grammar rule names typically describe the kinds of sequences they allow
 rather than describe their arguments as is common in Prolog predicates.
 
-Each GRBody consists of terminals, non-terminals, and grammar body goals.
-A terminal is an allowed value.
-A non-terminal is written as Prolog goal.
+Each GRBody consists of terminals, non-terminals, and grammar goals.
+A terminal is a fixed, allowed value,
+typically written as a string in double quotes.
+A non-terminal refers to another DCG rule
+and typical includes a variable argument to capture matching text.
+A grammar goal is a single Prolog goal or conjunction of them,
+written inside curly braces,
+whose purpose is typically to set values of variables
+that appear in the GRHead argument.
 
-The notation `F//N` refers to the non-terminal `F` with `N` arguments.
+The following basic example demonstrates using a DCG
+to describe a string that can contain a name.
+It uses the `seq` DCG predicate to capture text.
+
+```prolog
+:- use_module(library(dcg)).
+
+% To use this, enter something like the following:
+% phrase(hello(Name), "Hello, World!").
+% The cut at the end allows the rule to terminate after matching once.
+hello(Name) --> "Hello, ", seq(Name), "!", !.
+```
+
+To test whether a specific string matches this grammar rule for a specific name,
+enter something like `phrase(hello("World"), "Hello, World!").`
+which outputs `true`.
+
+To extract a name from a matching string,
+enter something like `phrase(hello(Name), "Hello, World!").`
+which outputs `Name = "World"`.
+
+To generate the matching string for a given name,
+enter something like `phrase(hello("World"), X).`
+which outputs `X = "Hello, World!"`.
+
+To generate all possible matching strings,
+enter something like `phrase(hello(Name), S).`
+which outputs many possible solutions such as:
+
+```prolog
+   Name = [], S = "Hello, !"
+;  Name = [_A], S = ['H',e,l,l,o,',',' ',_A|"!"]
+;  Name = [_A,_B], S = ['H',e,l,l,o,',',' ',_A,_B|"!"]
+and more
+```
+
+The notation `F//N` refers to the DCG non-terminal `F` with `N` arguments.
+Using two slashes instead of one distinguishes it
+from a normal Prolog predicate.
 
 Predefined non-terminals include:
 
@@ -3494,9 +3537,7 @@ Predefined non-terminals include:
 - `(|)//2`: alternatives; read as "or"
 
 The predicate `phrase(GRBody, L)` holds if
-`L` is a list of ASCII codes that matches `GRBody`.
-Recall that such a list can be created (in SWI-Prolog only!)
-by surrounding literal text with backticks.
+`L` is a list of character atoms that match `GRBody`.
 This can be used to test, complete, and generate solutions for a DCG rule.
 Since grammar rules can be used in all of these usage modes,
 it is preferable to say that a grammar rule "describes" conforming sequences
@@ -3509,31 +3550,9 @@ regardless of the `double_quotes` compiler flag setting.
 For example, the following grammar rules describe sequences
 that contain any number of `x` characters.
 
-```prolog
-xs --> "".
-xs --> "x", xs.
-
-% To test solutions ...
-phrase(xs, `xyx`). % false
-phrase(xs, `xxx`). % true
-
-% To complete solutions ...
-phrase(xs, [x, A, x, x, B, x]). % solution is A = B, B = x.
-
-% To generate solutions ...
-phrase(xs, Ls). % finds all possible solutions
-```
-
-The DCG operator `-->` and the `phrase` predicate
-are available by default in SWI-Prolog.
-
-The libraries `dcg/basics` and `dcg/higher_order` provide
-additional predicates that are useful in writing DCG rules.
-These must be included to use them. For example:
-
-```prolog
-:- use_module(library(dcg/basics)).
-```
+The SWI-Prolog libraries `dcg/basics` and `dcg/higher_order`
+provide additional predicates that are useful in writing DCG rules.
+These must be included to use them.
 
 All DCG rules can be translated to a standard Prolog rules
 which typically require longer code.
@@ -3561,11 +3580,11 @@ The following code implements predicates that are often useful when using DCGs:
 seq([]) --> [].
 seq([H|T]) --> [H], seq(T).
 
-% Concatenation of two lists.
+% Alternate way to implement append using DCGs.
 append(Xs, Ys, Zs) :- phrase((seq(Xs), seq(Ys)), Zs).
 % append('abc', "xyz", L), writeln(L). % output is [a,b,c,x,y,z]
 
-% seqq represents a list of sequences.
+% seqq represents a sequence of sequences.
 % Scryer Prolog provides this in its dcgs library.
 seqq([]) --> [].
 seqq([H|T]) --> seq(H), seqq(T).
@@ -3579,12 +3598,12 @@ palindrome(L) :- phrase(qes(L), L).
 % palindrome('mother'). % false
 % palindrome('mom'). % true
 
-% ... represents any sequence.
+% ... represents any sequence without capturing it.
 % Scryer Prolog provides this in its dcgs library.
 ... --> [] | [_], ... .
 
 % ... can be used to get the last element in a list.
-% phrase((..., [Last]), "xyz"). % output is Last = z; false.
+% phrase((..., [Last]), "xyz"). % output is Last = z
 
 % ... can be used to determine if a given sublist
 % occurs anywhere in a list.
@@ -3600,27 +3619,39 @@ A DCG can be used to describe a tree structure
 and capture it as a nested structure.
 DCG rule heads can contain an optional structure for capturing parsed data.
 The functor names of these structures identify the kind of data captured.
+This is ideal for parsing programming language syntax
+and producing an abstract syntax tree (AST).
+
+For example, the following grammar rules describe a binary tree:
 
 ```prolog
+:- use_module(library(dcgs)).
+
 nodes(nil) --> [].
 nodes(node(Node, L, R)) --> [Node], nodes(L), nodes(R).
-/*
-phrase(
-  nodes(
-    node(
-      a,
-      nil,
+
+:- initialization((
+  phrase(
+    nodes(
       node(
-        b,
-        node(c, nil, nil),
-        nil
+        a,
+        nil,
+        node(
+          b,
+          node(c, nil, nil),
+          nil
+        )
       )
-    )
+    ),
+    L
   ),
-  L
-). % output is a list of the leaf node values [a, b, c].
-*/
+  write(L),
+  nl
+  % output is list of leaf node values [a,b,c].
+)).
 ```
+
+TODO: Continue reviewing this section from here.
 
 DCGs can be used for parsing by describing a relationship
 between lists of characters and syntax trees.
