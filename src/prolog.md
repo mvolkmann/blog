@@ -1988,7 +1988,7 @@ Assessment = 'fun',
 format(string(S), '~w is ~w.~n', [Language, Assessment]).
 ```
 
-The `format_` predicate is similar to `format`,
+The `format_` DCG non-terminal is similar to `format`,
 but rather than writing to a stream it can be used
 with `phrase` to capture the output as a list of character atoms.
 For example:
