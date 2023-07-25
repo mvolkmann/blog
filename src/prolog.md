@@ -1889,8 +1889,8 @@ The {% aTargetBlank "https://www.swi-prolog.org/pldoc/man?predicate=format/2",
 "format" %} predicate can also write to the current output stream.
 It takes a format string and a list of values
 to be substituted into the format string.
-(In Scryer Prolog, `use_module(library(format)).`
-and use the `format_` predicate.)
+In Scryer Prolog, include the `format` library
+which defines the `format` and `format_` predicates.
 
 The format string can contain the following control sequences
 that all begin with a tilde:
@@ -1918,8 +1918,8 @@ that all begin with a tilde:
 
 For more control sequences, see the "format" link above.
 
-A double-quoted string should be passed
-as the first argument to the `format` predicate.
+A list of character atoms (which can be produced by a double-quoted string)
+should be passed as the first argument to the `format` predicate.
 
 For example:
 
@@ -2231,8 +2231,8 @@ There are four supported domains:
 - <a href="https://www.swi-prolog.org/pldoc/man?section=clpqr"
   target="_blank">CLP(R)<a> for floating point numbers
 
-When using SICStus Prolog, consider using {% aTargetBlank
-"https://github.com/triska/clpz", "CLP(Z)" %} as an alternative to CLP(F).
+When using Scryer or SICStus Prolog, consider using {% aTargetBlank
+"https://github.com/triska/clpz", "CLP(Z)" %} as an alternative to CLP(FD).
 
 Each of these libraries define new operators
 and must be loaded in order to use them.
