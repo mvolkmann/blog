@@ -1849,6 +1849,7 @@ readFile('demo.txt').
 To read from a text file in Scryer Prolog:
 
 ```prolog
+:- use_module(library(dcgs)). % for seq
 :- use_module(library(pio)). % for phrase_from_file and phrase_to_stream
 phrase_from_file(seq(Cs), "input.txt"),
 phrase_to_stream(Cs, user_output). % writes to stdout
@@ -3368,7 +3369,7 @@ Most Prolog implementations already support DCGs.
 
 DCGs are enabled by default in SWI-Prolog,
 but not in all Prolog implementations.
-To enable DCGs, it may be necessary to include the `dcg` library
+To enable DCGs, it may be necessary to include the `dcgs` library
 with `:- use_module(library(dcgs)).`
 This can be added to the configuration file for a Prolog implementation
 so the `dcg` library is always available.
@@ -3453,8 +3454,8 @@ that can be concatenated to form `"abc"`:
 The following code implements predicates that are often useful when using DCGs:
 
 ```prolog
-% Definition of a sequence.
-% Scryer Prolog provides this in its dcg library.
+% seq represents a sequence of elements.
+% Scryer Prolog provides this in its dcgs library.
 seq([]) --> [].
 seq([H|T]) --> [H], seq(T).
 
@@ -3462,8 +3463,8 @@ seq([H|T]) --> [H], seq(T).
 append(Xs, Ys, Zs) :- phrase((seq(Xs), seq(Ys)), Zs).
 % append('abc', "xyz", L), writeln(L). % output is [a,b,c,x,y,z]
 
-% Concatenation of any number of lists.
-% Scryer Prolog provides this in its dcg library.
+% seqq represents a list of sequences.
+% Scryer Prolog provides this in its dcgs library.
 seqq([]) --> [].
 seqq([H|T]) --> seq(H), seqq(T).
 % phrase(seqq(["ab", "cd", "ef"]), L), writeln(L). % output is [a,b,c,d,e,f].
@@ -3476,7 +3477,8 @@ palindrome(L) :- phrase(qes(L), L).
 % palindrome('mother'). % false
 % palindrome('mom'). % true
 
-% This describes any sequence.
+% ... represents any sequence.
+% Scryer Prolog provides this in its dcgs library.
 ... --> [] | [_], ... .
 
 % ... can be used to get the last element in a list.
