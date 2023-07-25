@@ -861,6 +861,27 @@ use `initialization`. For example:
 :- initialization((goal1, goal2, goal3)).
 ```
 
+### Command-line Arguments
+
+To get command-line arguments in SWI-Prolog:
+
+```prolog
+current_prolog_flag(argv, Argv)
+```
+
+To get command-line arguments in Scryer Prolog:
+
+```prolog
+'$toplevel':argv(Args),
+```
+
+`$toplevel` is unique to Scryer Prolog.
+The syntax `:(module-name, predicate)` loads a given module and
+executes the given predicate that is typically defined in that module.
+So the code above loads the `$toplevel` module and
+executes the `argv` predicate to set the variable `Args`
+to a list of the command-line arguments.
+
 ## Tree Representation
 
 Every Prolog term can be represented as a tree
