@@ -1791,7 +1791,7 @@ can be changed by the `set_input` and `see` predicates.
 Additional streams can be opened with the `open` predicate
 and closed with the `close` predicate.
 
-The following predicates write to the `current_output` stream
+The following predicates read from the `current_output` stream
 or a specified stream: `read`, `get_byte`, `get_char`, and `get_code`.
 For example:
 
@@ -1860,10 +1860,12 @@ or a specified stream: `write`, `writeln`, `format`,
 For example:
 
 ```prolog
+% Note that a single-quoted string should be passed to the write predicate.
+% The following four lines all produce the same output.
 write('Hello World!'), nl.
-write(current_output, 'Hello World!\n'). % same as previous line
-writeln('Hello World!'). % same as previous line
-writeln(current_output, 'Hello World!'). % same as previous line
+write(current_output, 'Hello World!\n').
+writeln('Hello World!'). % SWI-Prolog only
+writeln(current_output, 'Hello World!'). % SWI-Prolog only
 ```
 
 The {% aTargetBlank "https://www.swi-prolog.org/pldoc/man?predicate=format/2",
