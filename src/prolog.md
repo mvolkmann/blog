@@ -162,9 +162,9 @@ Many implementations add features beyond the ISO standard.
 The ISO standard does not require implementations to provide a
 top level or REPL, but most do.
 A top level supports interactive entry and evaluation of Prolog questions.
-The output is a new question, often containing semicolons,
-that describes the possible solutions.
-Some top level implementations also supports interactive debugging.
+
+Some top level implementations also support
+tab completion, interactive debugging.
 
 Several Prolog implementations compile source code to
 abstract machine code for the Warren Abstract Machine (WAM).
@@ -344,6 +344,10 @@ For example:
 :- use_module(library(format)).
 :- use_module(library(lists)).
 ```
+
+The Scryer Prolog top level supports pressing the `a` key after
+entering a question to output all possible solutions instead of
+outputting them one at a time as is done when the `;` key is pressed.
 
 ### Ciao Prolog
 
@@ -594,7 +598,14 @@ is to add more versions of the rule.
 
 Questions test whether a term is true or
 they find variable values for which the term is true.
+
 Questions are written after the characters `?-`.
+
+The output from a question is a new, equivalent question
+that is often a disjunction (containing semicolons)
+that describes the possible solutions.
+Solutions assign values to all variables in a question,
+which is referred to as making them "ground".
 
 For example:
 
@@ -690,12 +701,19 @@ such as `swipl` or `gprolog`.
 
 To evaluate a question in the top level,
 enter the question terminated with a period.
+
 If the question does not contain any variables
 then `true` or `false` will be output.
+
 If the question does contain variables, a lazy search will be performed
 to find the first set of values that satisfy the question will be output.
-To see the next set, press the semicolon key.
+To see the next possible solution, press the semicolon key.
 A period will be output after the last set is found.
+To stop outputting solutions before the last one has been output,
+press the period key.
+
+In some top level implementations such as SWI-Prolog,
+pressing `?` outputs help on supported key commands.
 
 To evaluate arithmetic operators that result in a numeric value,
 assign the expression to a variable using the `is` operator.
@@ -794,6 +812,9 @@ For example:
 :- include(util). % includes the source file util.pl
 ```
 
+This is not currently supported in Scryer Prolog.
+A workaround is it to use `:- initialization(consult(file-name)).`
+
 ### Including a Module/Library
 
 To include a library (ex. clpfd), include a line like the following:
@@ -817,10 +838,9 @@ Alternatively, to specify a conjunction of several goals to be evaluated,
 use `initialization`. For example:
 
 ```prolog
-:- initialization
-  goal1,
-  goal2,
-  goal3
+:- initialization(goal).
+% or for multiple goals ...
+:- initialization((goal1, goal2, goal3)).
 ```
 
 ## Tree Representation
@@ -1656,7 +1676,7 @@ linked_list(Node, L) :-
   % This appends in reverse order.
   append(L2, [Node.value], L).
 
-:- initialization
+:- initialization((
   N1 = node{value: 'alpha', next: nil},
   N2 = node{value: 'beta', next: N1},
   N3 = node{value: 'gamma', next: N2},
@@ -1669,7 +1689,8 @@ linked_list(Node, L) :-
   atomics_to_string(L, ',', S),
 
   writeln(S), % alpha,beta,gamma
-  halt.
+  halt
+)).
 ```
 
 ## Type Checking
@@ -1972,9 +1993,10 @@ my_goal :-
   writeln('line #1'),
   writeln('line #2').
 
-:- initialization
+:- initialization((
   with_output_to(string(S), my_goal),
-  write(S).
+  write(S)
+)).
 ```
 
 Another way to write to a string is to use a {% aTargetBlank
@@ -2316,13 +2338,13 @@ Highlights include:
 Some Prolog implementations allow placing `:-` before any goals
 to execute it when the file is loaded.
 But the ISO standard requires using the `initialization` directive.
-The goals that follow do not need to be wrapped in parentheses.
 For example:
 
 ```prolog
-:- initialization
+:- initialization((
   writeln('Hello'),
-  writeln('Goodbye').
+  writeln('Goodbye')
+)).
 ```
 
 The `?-` operator precedes questions.
@@ -2684,6 +2706,21 @@ To fix the scenario above, replace the arrow line with the following:
 (N > 0 -> writeln('positive'); true),
 ```
 
+Replacing the arrow operator with the comma operator
+produces a very similar result.
+The only difference is that without the arrow operator,
+if the "true goal" backtracks then the "false goal" will execute.
+
+For example, the `sign_word` predicate above could be written as follows.
+Since no backtracking occurs in this example, the behavior is identical.
+
+```prolog
+sign_word(N, Word) :-
+  (N = 0, Word = 'zero';
+  (N > 0, Word = 'positive';
+  Word = 'negative')).
+```
+
 ## Iteration
 
 Iteration in Prolog is done with recursion.
@@ -2717,7 +2754,7 @@ For example:
 
 add(A, B, C) :- C #= A + B.
 
-:- initialization
+:- initialization((
   findall(
     [A, B], % transform each solution into the list [A, B]
     % Find all pairs of integers that satisfy these constraints.
@@ -2725,7 +2762,8 @@ add(A, B, C) :- C #= A + B.
     Results % set this
   ),
   format('Results = ~w~n', [Results]), % [[3,2],[4,1],[5,0]]
-  halt.
+  halt
+)).
 ```
 
 ## Currying (Runtime Predicates)
@@ -2744,7 +2782,7 @@ sum2(X, Y, Z) :-
 sum3(A1, A2, A3, A4) :-
   A4 #= A1 + A2 + A3.
 
-:- initialization
+:- initialization((
   sum3(1, 2, 3, R1),
   writeln(R1), % 6
 
@@ -2769,7 +2807,8 @@ sum3(A1, A2, A3, A4) :-
   % call(Term), % evaluates term
   (call(Term) -> writeln('yes'); writeln('no')), % yes
 
-  halt.
+  halt
+)).
 ```
 
 A predicate can be placed in a variable at runtime
@@ -2842,6 +2881,15 @@ Enter a question and press the return key after
 viewing the result of each step in the evaluation.
 
 When finished debugging, enter `notrace.` to turn this mode off.
+
+To determine how long it takes to evaluate a question,
+use the `time` predicate from the `time` library.
+For example:
+
+```prolog
+:- use_module(library(time)).
+?- time(append("abc", "def", L)).
+```
 
 ## Calling From Other Languages
 
@@ -3274,6 +3322,8 @@ process(In) :-
   load_html(In, DOM, []),
   maplist(print_tag, DOM).
 
+% This ensures that close is called regardless of whether
+% the first argument goal succeeds, fails, or raises an exception.
 :- setup_call_cleanup(
      % Must use single, not double quotes around URL!
      http_open('https://mvolkmann.github.io', In, []),
@@ -3825,9 +3875,10 @@ For example:
 ```prolog
 :- use_module(library(http/http_server)).
 
-:- initialization
+:- initialization((
   consult(exercise1_3),
-  http_server([port(8081)]).
+  http_server([port(8081)])
+)).
 
 :- http_handler(
   root(.),
