@@ -321,6 +321,20 @@ Scryer Prolog is implemented in Rust (64%) and Prolog (36%).
 A "scryer" is somehow who sees, hears or otherwise interprets
 spirit communications, usually on behalf of a magician who isn't so gifted.
 
+From the Scryer website, it's main features include:
+
+- ISO standard compliant
+- integrated Constraint Logic Programming (CLP) libraries
+- supports Definite Clause Grammars (DCGs)
+- coroutine support
+- tabling and SLG resolution
+- compact string representation
+- network libraries (TCP sockets, HTTP server, HTTP client, ...)
+- cryptography predicates
+- WAM-based engine
+- cross-platform
+- implemented in Rust
+
 To install, enter the following commands:
 
 ```bash
@@ -1857,10 +1871,12 @@ and closed with the `close` predicate.
 The following predicates write to the `current_output` stream
 or a specified stream: `write`, `writeln`, `format`,
 `put_byte`, `put_char`, `put_code`, and `nl` (writes a newline character).
+A single-quoted string should be passed
+as the first argument to the `write` predicate.
+
 For example:
 
 ```prolog
-% Note that a single-quoted string should be passed to the write predicate.
 % The following four lines all produce the same output.
 write('Hello World!'), nl.
 write(current_output, 'Hello World!\n').
@@ -1900,6 +1916,9 @@ that all begin with a tilde:
   (A tab stop is assumed at column zero.)
 
 For more control sequences, see the "format" link above.
+
+A double-quoted string should be passed
+as the first argument to the `format` predicate.
 
 For example:
 
