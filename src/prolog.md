@@ -3559,6 +3559,8 @@ which typically require longer code.
 Most DCG implementations do this behind the scenes
 and then consider those rules at runtime instead of the DCG rules.
 
+### DCG Predicates
+
 The predicate `seq(L)` describes a sequence of values.
 For example, the following finds all combinations of `Xs` and `Ys` values
 that can be concatenated to form `"abc"`:
@@ -3615,12 +3617,12 @@ palindrome(L) :- phrase(qes(L), L).
 % phrase((..., [X, X], ...), "Mississippi"). % finds s, s, and p
 ```
 
+### Representing Trees
+
 A DCG can be used to describe a tree structure
 and capture it as a nested structure.
 DCG rule heads can contain an optional structure for capturing parsed data.
 The functor names of these structures identify the kind of data captured.
-This is ideal for parsing programming language syntax
-and producing an abstract syntax tree (AST).
 
 For example, the following grammar rules describe a binary tree:
 
@@ -3651,17 +3653,16 @@ nodes(node(Node, L, R)) --> [Node], nodes(L), nodes(R).
 )).
 ```
 
-TODO: Continue reviewing this section from here.
+DCGs can be used for parsing text by describing
+a relationship between lists of characters and syntax trees.
+This makes them ideal for parsing programming language syntax
+and producing an abstract syntax tree (AST).
 
-DCGs can be used for parsing by describing a relationship
-between lists of characters and syntax trees.
+### DCG Rule Termination
 
-Grammar bodies can contain Prolog goals in curly braces.
-
-To enable termination it is sometimes useful to include `{false}`.
-
-Another way to achieve termination is to use a different execution strategy
-such as "SLG resolution".
+Some grammar rules do not naturally terminate.
+One way to cause them to terminate is to use
+a different execution strategy such as "SLG resolution".
 To enable this, execute the following:
 
 ```prolog
@@ -3688,8 +3689,12 @@ expr_rest --> "+", expr.
 
 Using SLG resolution with DCGs is called "Packrat Parsing".
 
-Lexical analysis is a relationship between a string and sequence of tokens.
+### Lexical Analysis
+
+Lexical analysis defines relationships between strings and sequences of tokens.
 For example:
+
+TODO: Verify this code!
 
 ```prolog
 % This uses the "eager consumer rule" which causes
