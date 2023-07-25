@@ -1871,8 +1871,8 @@ and closed with the `close` predicate.
 The following predicates write to the `current_output` stream
 or a specified stream: `write`, `writeln`, `format`,
 `put_byte`, `put_char`, `put_code`, and `nl` (writes a newline character).
-A single-quoted string should be passed
-as the first argument to the `write` predicate.
+An atom (which can be produced by a single-quoted string)
+should be passed as the first argument to the `write` predicate.
 
 For example:
 
