@@ -1787,6 +1787,8 @@ Instead see {% aTargetBlank "https://www.scryer.pl/si.html", "Module si" %}.
 | `string(V)`                           | V is a string                                                 |
 | `atomic(V)`                           | V is not a variable or compound term                          |
 | `compound(V)`                         | V is a compound term                                          |
+| `functor(Term, Name, Arity)`          | gets the name and arity of any term                           |
+| `current_predicate(functor)`          | tests whether functor (ex. `op/3`) is a known predicate       |
 | `callable(V)`                         | V is an atom or a compound term                               |
 | `ground(V)`                           | V is not a variable or a compound term that holds variables   |
 | `cyclic_term(V)`                      | V contains cycles (circular references)                       |
@@ -1806,6 +1808,8 @@ write_type(Thing) :-
   var(Thing) -> writeln("variable"); % ex. A
   writeln("unknown").
 ```
+
+Entering `functor(2 + 3, F, A).` sets `F` to `(+)` and `A` to `2`.
 
 ## Dynamic Predicates
 
