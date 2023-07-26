@@ -831,7 +831,11 @@ For example:
 ```
 
 This is not currently supported in Scryer Prolog.
-A workaround is it to use `:- initialization(consult(file-name)).`
+A workaround is it to use the following:
+
+```prolog
+:- initialization(consult(file-name)).
+```
 
 ### Including a Module/Library
 
@@ -969,7 +973,7 @@ An empty list is written as the atom `[]` which is called "nil".
 
 There are other ways to construct a list.
 
-The dot predicate (`./2`) is the list constructor.
+The dot operator (`./2`) is the list constructor.
 It is passed the head and the tail of the list to be constructed.
 For example, `.(H, T)` creates a list
 where `H` is a single element that is the head
@@ -1131,8 +1135,8 @@ double(A, B) :-
 % output is [2, 4, 6]
 ```
 
-The `reverse` predicate creates a new list containing
-all the values in a given list in reverse order.
+The `reverse` predicate relates a list to another list
+containing the same elements in reverse order.
 For example:
 
 ```prolog
