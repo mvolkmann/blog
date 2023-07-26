@@ -837,6 +837,41 @@ A workaround is it to use the following:
 :- initialization(consult(file-name)).
 ```
 
+Another way to include another source file is to define it as a module
+and use the `use_module` compiler directive.
+For example, we could create the file `strings.pl` containing the following:
+
+```prolog
+:- module(strings, []).
+% This is intended to be run in Scryer Prolog which
+% defines the seq predicate in its dcgs library.
+
+% DCG rules are passed two more arguments than appear.
+:- module(strings, [filename_extension/4, split/5]).
+
+:- use_module(library(dcgs)).
+
+% To test this, enter phrase(split(",", P, S), "foo,bar").
+split(Delimiter, Prefix, Suffix) --> seq(Prefix), Delimiter, seq(Suffix).
+
+% To test this, enter phrase(filename_extension(F, E), "foo.bar").
+filename_extension(Filename, Extension) --> split(".", Filename, Extension).
+```
+
+To use this module from another source file
+
+```prolog
+% The strings module defined in strings.pl is specific to Scryer Prolog.
+:- use_module(strings).
+:- use_module(library(format)).
+
+:- initialization((
+  phrase(filename_extension(F, E), "foo.bar"),
+  format("F = ~s, E = ~s~n", [F, E])
+  % outputs "F = foo, E = bar"
+)).
+```
+
 ### Including a Module/Library
 
 To include a library (ex. clpfd), include a line like the following:
