@@ -426,7 +426,7 @@ To exit from any Prolog interpreter, enter `halt.` or press ctrl-d.
 | question          | asks if a term is true or asks for satisfying variable values |
 | knowledge base    | collection of predicate clauses (aka database)                |
 | arity             | number of predicate arguments                                 |
-| functor           | function name and its arity; written with a slash between     |
+| functor           | predicate name and its arity; written with a slash between    |
 | goal              | compound term in a rule body or question                      |
 | list notation     | comma-separated terms inside square brackets; ex. `[a, B, 7]` |
 | operator notation | terms separated by operators; ex. `Y = m*X + b`               |
@@ -560,7 +560,7 @@ and the second argument represents a child.
 Some might also use the functor name `parent_of` or simply `parent`.
 
 Good functor names are general and describe relationships
-without implying a direction. Bad function names do neither.
+without implying a direction. Bad functor names do neither.
 For example, functor names containing words like "count", "drop", or "find"
 imply that the clause is meant to be used in a specific direction.
 
@@ -969,14 +969,14 @@ An empty list is written as the atom `[]` which is called "nil".
 
 There are other ways to construct a list.
 
-The dot function (`./2`) is the list constructor.
+The dot predicate (`./2`) is the list constructor.
 It is passed the head and the tail of the list to be constructed.
 For example, `.(H, T)` creates a list
 where `H` is a single element that is the head
 and `T` is a list of elements in the tail.
 Often variables that represent lists end in "s" (ex. `.(E, Es)`).
 
-SWI-Prolog uses a different function name for the list constructor.
+SWI-Prolog uses a different functor name for the list constructor.
 For example:
 
 ```prolog
@@ -1131,7 +1131,7 @@ double(A, B) :-
 % output is [2, 4, 6]
 ```
 
-The `reverse` function creates a new list containing
+The `reverse` predicate creates a new list containing
 all the values in a given list in reverse order.
 For example:
 
@@ -1198,7 +1198,7 @@ L = [a, b, c, d], last(L, E).
 % output is E = d.
 ```
 
-The `member` function can also be used to iterate over the values in a list.
+The `member` predicate can also be used to iterate over the values in a list.
 or example, `member(X, [3, 7, 9])` will set `X`
 to each value in the list one at a time.
 
@@ -1780,7 +1780,7 @@ dynamic(likes/2).
 Once this is done, a clause of that type can be
 added to the beginning with `asserta` or added to the end with `assertz`.
 Also, predicates of that type can be removed
-with the `retract` and `retractall` functions.
+with the `retract` and `retractall` predicates.
 
 For example, suppose we have the file `likes.pl` containing the following:
 
@@ -1836,11 +1836,11 @@ Enter a name in single or double quotes followed by a period.
 This is an odd requirement for users!
 Entering 'Mark'. results in the following output: `Hello, Mark!`.
 
-The `get` function reads a single character
+The `get` predicate reads a single character
 and sets a variable to its integer ASCII value.
 
 To read from a file and write the contents to stdout,
-use the `open`, `get_char`, `get_code`, and `close` functions.
+use the `open`, `get_char`, `get_code`, and `close` predicates.
 For example:
 
 ```prolog
@@ -1991,6 +1991,9 @@ format(string(S), '~w is ~w.~n', [Language, Assessment]).
 The `format_` DCG non-terminal is similar to `format`,
 but rather than writing to a stream it can be used
 with `phrase` to capture the output as a list of character atoms.
+This is typically preferred over using `format`
+so the result can be tested.
+
 For example:
 
 ```prolog
@@ -2002,10 +2005,10 @@ phrase(format_("Hello, ~w!~n", [S]), Result),
 maplist(write, Result).
 ```
 
-The `put` function writes a single ASCII value to the current output stream.
-It is the counterpart to the `get` function.
+The `put` predicate writes a single ASCII value to the current output stream.
+It is the counterpart to the `get` predicate.
 
-To write to a file, use the `open`, `write`, and `close` functions.
+To write to a file, use the `open`, `write`, and `close` predicates.
 For example:
 
 ```prolog
@@ -2641,7 +2644,8 @@ When the `double_quotes` flag is set to `chars`, the following are equivalent:
 "The string type and its double quoted syntax" %} section 5.2.3
 discusses the pros and cons of the string options.
 
-To get the length of a double-quoted string, use the `length` function.
+Since a double-quoted string becomes a list of character atoms,
+its length can be obtained using the `length` predicate.
 For example:
 
 ```prolog
@@ -2649,7 +2653,8 @@ For example:
 L = 4.
 ```
 
-To get the length of a single-quoted string, use the `atom_length` function.
+Since a single-quoted string becomes an atom,
+its length can be obtained using the `atom_length` predicate.
 For example:
 
 ```prolog
@@ -2682,7 +2687,7 @@ string_concat('foo', 'bar', S).
 ```
 
 To create a list of ASCII values from a literal string,
-use the `name` function.
+use the `name` predicate.
 For example:
 
 ```prolog
@@ -2691,7 +2696,7 @@ X = [65, 66, 67].
 ```
 
 To create a string from a list of ASCII values,
-also use the `name` function.
+also use the `name` predicate.
 For example:
 
 ```prolog
@@ -2736,7 +2741,7 @@ atomics_to_string(["foo", 3, 'bar'], '|', S).
 ```
 
 To get a single character from a string, convert it to a list of ASCII codes,
-and use the `nth0` function.
+and use the `nth0` predicate.
 For example:
 
 ```prolog
@@ -2854,7 +2859,7 @@ sign_word(N, Word) :-
 Iteration in Prolog is done with recursion.
 
 To get all the integers starting from one integer and ending at another,
-use the `between` function.
+use the `between` predicate.
 For example:
 
 ```prolog
