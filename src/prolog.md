@@ -846,7 +846,9 @@ For example, we could create the file `strings.pl` containing the following:
 % This is intended to be run in Scryer Prolog which
 % defines the seq predicate in its dcgs library.
 
-% DCG rules are passed two more arguments than appear.
+% The first argument to the module predicate is the name of the module being defined.
+% The second argument is a list of functors being exported.
+% Note that DCG rules are passed two more arguments than appear.
 :- module(strings, [filename_extension/4, split/5]).
 
 :- use_module(library(dcgs)).
