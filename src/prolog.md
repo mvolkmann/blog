@@ -2559,7 +2559,7 @@ Existing operators, except the comma operator, can be redefined.
 The `|` operator can only be redefined as an infix operator
 whose precedence is at least 1001.
 
-The `current_op` predicate questions operators.
+The `current_op` predicate asks questions operators.
 For example:
 
 ```prolog
@@ -2571,6 +2571,9 @@ current_op(P, T, 'is').
 current_op(P, fx, N).
 % output is P = 1, N = ($); and many more
 % All the names are output inside parentheses. Why?
+
+% Get all operators.
+current_op(P, F, N).
 ```
 
 ## Primitive Types
