@@ -1905,7 +1905,10 @@ writeln(current_output, 'Hello World!'). % SWI-Prolog only
 
 The {% aTargetBlank "https://www.swi-prolog.org/pldoc/man?predicate=format/2",
 "format" %} predicate can also write to the current output stream.
-It takes a format string and a list of values
+Often it is better to use the `format_` DCG non-terminal (described later)
+instead so the result can be captured and tested.
+
+The `format` predicate takes a format string and a list of values
 to be substituted into the format string.
 In Scryer Prolog, include the `format` library which defines
 the `format` predicate and the `format_` DCG non-terminal.
