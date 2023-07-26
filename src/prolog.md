@@ -973,7 +973,7 @@ An empty list is written as the atom `[]` which is called "nil".
 
 There are other ways to construct a list.
 
-The dot operator (`./2`) is the list constructor.
+The dot functor (`./2`) is the list constructor.
 It is passed the head and the tail of the list to be constructed.
 For example, `.(H, T)` creates a list
 where `H` is a single element that is the head
