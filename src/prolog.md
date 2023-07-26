@@ -2879,7 +2879,8 @@ between(0, 7, Row).
 ## List of Solutions
 
 The combination of the `findall` and `label` predicates are useful for
-creating a list of values that satisfy given constraints.
+creating a list of solutions that satisfy given constraints
+when there is a finite set of solutions.
 For example:
 
 ```prolog
@@ -2897,6 +2898,67 @@ add(A, B, C) :- C #= A + B.
   format('Results = ~w~n', [Results]), % [[3,2],[4,1],[5,0]]
   halt
 )).
+```
+
+## Unfair Enumerations
+
+When a question has an infinite number of solutions,
+there are situations where some solutions will never be generated.
+This is referred to as an "unfair enumeration".
+
+For example, the following code defines DCG rules that describe:
+
+- a sequence of one or more "a" atoms named `as`
+- a sequence of one or more "b" atoms named `bs`
+- a sequence that combines these named `as_and_bs`
+
+```prolog
+:- use_module(library(dcgs)). % needed in Scryer Prolog
+:- use_module(library(lists)). % needed in Scryer Prolog
+
+as --> "a", as_.
+as_ --> [] | as.
+
+bs --> "b", bs_.
+bs_ --> [] | bs.
+
+as_and_bs --> as, bs.
+```
+
+If we ask for all possible solutions for `as_and_bs`, we get the following:
+
+```prolog
+?- phrase(as_and_bs, Cs).
+   Cs = "ab"
+;  Cs = "abb"
+;  Cs = "abbb"
+% and more!
+```
+
+This will continue forever, giving solutions
+that contain more of the letter "b".
+But we will never see a solution with more than one "a".
+
+This can be changed using "iterative deepening" which will
+iteratively increase the length of the solutions that are output.
+It will begin with the shortest solution which is "ab".
+Then it will generate all solutions of length 3
+which only include "abb" and "aab".
+Then it will generate all solutions of length 4, and so on.
+
+To add iterative deepening, we must add the `length` predicate
+with an unspecified length before the `phrase` predicate as follows:
+
+```prolog
+?- length(Cs, _), phrase(as_and_bs, Cs).
+   Cs = "ab"
+;  Cs = "abb"
+;  Cs = "aab"
+;  Cs = "abbb"
+;  Cs = "aabb"
+;  Cs = "aaab"
+;  Cs = "abbbb"
+% and more!
 ```
 
 ## Currying (Runtime Predicates)
