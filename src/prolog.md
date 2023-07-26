@@ -1995,8 +1995,8 @@ Assessment = 'fun',
 format(string(S), '~w is ~w.~n', [Language, Assessment]).
 ```
 
-The `format_` DCG non-terminal is similar to `format`,
-but rather than writing to a stream it can be used
+The `format_` DCG non-terminal is similar to `format`.
+Rather than writing to a stream it can be used
 with `phrase` to capture the output as a list of character atoms.
 This is typically preferred over using `format`
 so the result can be tested.
@@ -2011,6 +2011,9 @@ phrase(format_("Hello, ~w!~n", [S]), Result),
 % This writes each one to stdout.
 maplist(write, Result).
 ```
+
+The `format_` DCG non-terminal can also be used with the
+`phrase_to_stream` predicate to write the result to a given stream.
 
 The `put` predicate writes a single ASCII value to the current output stream.
 It is the counterpart to the `get` predicate.
@@ -2965,7 +2968,7 @@ with an unspecified length before the `phrase` predicate as follows:
 ;  Cs = "aabb"
 ;  Cs = "aaab"
 ;  Cs = "abbbb"
-% and more!
+; ... .
 ```
 
 ## Currying (Runtime Predicates)
@@ -3599,7 +3602,7 @@ which outputs many possible solutions such as:
    Name = [], S = "Hello, !"
 ;  Name = [_A], S = ['H',e,l,l,o,',',' ',_A|"!"]
 ;  Name = [_A,_B], S = ['H',e,l,l,o,',',' ',_A,_B|"!"]
-and more
+; ... .
 ```
 
 The notation `F//N` refers to the DCG non-terminal `F` with `N` arguments.
