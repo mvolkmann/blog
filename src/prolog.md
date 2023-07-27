@@ -439,6 +439,7 @@ To exit from any Prolog interpreter, enter `halt.` or press ctrl-d.
 | choice point      | represents a choice in the search for a solution              |
 | conjunction       | and'ing terms with comma operator                             |
 | disjunction       | or'ing terms with semicolon operator                          |
+| monotonic         | described below                                               |
 
 A string is treated as a list of atoms where each atom represents a character.
 This makes it a compound term.
@@ -457,6 +458,14 @@ For example, `1_234_567` makes it more clear
 that this number is greater than one million.
 
 The functor for `foo(bar, baz)` is written as `foo/2`.
+
+The term "monotonic", when used in the context of Prolog,
+is the property that:
+
+1. Adding constraints or conjunctions to a rule can only
+   **decrease** the number of possible solutions.
+2. Adding clauses or disjunctions can only
+   **increase** the number of possible solutions.
 
 For more, see <a href="https://swi-prolog.org/pldoc/man?section=glossary"
 target="_blank">Glossary of Terms</a>.
@@ -2365,8 +2374,9 @@ Highlights include the following:
 
 - integer range: `..`
 
-  For example, `2..7` is the range of integers
-  from 2 to 7 inclusive on both ends.
+  For example,
+  `2..7` is the range of integers from 2 to 7 inclusive on both ends and
+  `100..sup` is the range of integers from 100 to positive infinity.
 
 - membership constraints:
 
