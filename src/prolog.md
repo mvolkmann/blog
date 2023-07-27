@@ -200,18 +200,37 @@ The Prolog implementations that are currently popular are described below.
 {% aTargetBlank "https://www.swi-prolog.org", "SWI-Prolog" %}
 is implemented in C (48%) and Prolog (39%).
 
+To install the terminal command `swipl` in macOS,
+enter `brew install swi-prolog`
+
+To start a SWI-Prolog top level from a terminal, enter `swipl`.
+
+To specify configuration for all top level sessions,
+create the file `$HOME/.config/swi-prolog/init.pl`.
+For example, this file might set [prolog flags](#prolog-flags).
+
+#### Conformance
+
 SWI-Prolog adds features beyond the ISO standard,
 some of which contradict the standard, making it non-conforming.
 One example is the addition of a string type.
 Many dedicated predicates are needed to operate on these strings
 rather than using list predicates.
 Another example is the addition of a custom dict type.
+
 It is very easy to write code that runs in SWI-Prolog,
 but does not run in other Prolog implementations.
 In addition, some code that is valid according to the ISO standard
 does not run in SWI-Prolog.
+
 For a detailed take on this issue, see {% aTargetBlank
 "https://www.youtube.com/watch?v=kGQNeeRp4sM", "Preparing Prolog" %}.
+
+Also see {% aTargetBlank
+"https://www.complang.tuwien.ac.at/ulrich/iso-prolog/SWI7_and_ISO",
+"SWI7 and ISO Prolog" %}.
+
+#### Documentation
 
 Documentation of built-in predicates uses **argument mode indicators**
 that are documented at
@@ -221,15 +240,6 @@ Argument mode indicators include `++` (ground), `+` (instantiated),
 `-` (output), `--` (unbound), `?` (partially bound),
 `:` (meta-argument such as a goal), `@` (will not be instantiated),
 and `!` (mutable).
-
-To install the terminal command `swipl` in macOS,
-enter `brew install swi-prolog`
-
-To start a SWI-Prolog top level from a terminal, enter `swipl`.
-
-To specify configuration for all top level sessions,
-create the file `$HOME/.config/swi-prolog/init.pl`.
-For example, this file might set [prolog flags](#prolog-flags).
 
 #### Packs
 
