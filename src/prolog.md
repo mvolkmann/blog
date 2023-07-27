@@ -152,17 +152,19 @@ These take considerable time to learn and master.
 ## Implementations
 
 There are many implementations of the Prolog programming language.
-The most popular are described below.
+The first Prolog implementation was Marseilles Prolog
+developed at Marseilles University.
+The second was DEC-10 Prolog developed at Edinburgh University,
+commonly referred to as Edinburgh Prolog.
 
-Many Prolog implementations conform to the {% aTargetBlank
+Many current Prolog implementations conform to the {% aTargetBlank
 "https://www.iso.org/standard/21413.html", "ISO Standard for Prolog" %}.
 This defines the minimum requirements for conforming implementations.
-Many implementations add features beyond the ISO standard.
+Most implementations also add features beyond the ISO standard.
 
-The ISO standard does not require implementations to provide a
-top level or REPL, but most do.
+The ISO standard does not require implementations to
+provide a "top level" or REPL, but most do.
 A top level supports interactive entry and evaluation of Prolog questions.
-
 Some top level implementations also support
 tab completion, interactive debugging.
 
@@ -175,6 +177,8 @@ describes the degree to which each implementation conforms to the ISO standard.
 One reason to select a conforming implementation is that it increases
 the likelihood that your code will run in other implementations.
 Switch may be necessary in order to gain performance or specific features.
+
+The Prolog implementations that are currently popular are described below.
 
 ### SWI-Prolog
 
