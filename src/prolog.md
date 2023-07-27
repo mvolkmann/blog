@@ -1803,7 +1803,8 @@ linked_list(Node, L) :-
 ISO Prolog provides many built-in predicates that can be used
 to assert the type of arguments.
 These are not supported in Scryer Prolog.
-Instead see {% aTargetBlank "https://www.scryer.pl/si.html", "Module si" %}.
+Instead see the "sufficiently instantiated" (si) family of predicates in
+{% aTargetBlank "https://www.scryer.pl/si.html", "Module si" %}.
 
 | Predicate                             | Meaning                                                       |
 | ------------------------------------- | ------------------------------------------------------------- |
@@ -2248,7 +2249,13 @@ for single and compound terms:
 | `\=@=`   | not structurally equivalent terms |
 
 The `dif/2` predicate is an alternative to the `\==` operator.
-For example, `dif(a, b)` is the same as `a \== b`.
+For example, `dif(A, B)` is similar to `A \== B`,
+but the difference is somewhat complicated.
+The `dif/2` predicate expresses that its arguments can never become identical
+and handles cases where this is not immediately known.
+For more detail, see {% aTargetBlank
+"https://github.com/dtonhofer/prolog_notes/tree/master/swipl_notes/about_dif",
+"About dif/2" %}.
 
 The odd syntax for "equal" and "not equal"
 was chosen because `=` is used for unification.
@@ -2658,8 +2665,8 @@ There is no Boolean type in Prolog.
 Often the atoms `true` and `false` are used to represent Boolean values,
 but these do not have a predefined meaning.
 
-Rather than writing a rule that set an argument to `true` or `false`,
-it is preferable to write a rule that succeeds or fails.
+Rather than writing a rule that sets an argument to `true` or `false`,
+it is preferable to write a rule that either succeeds or fails.
 
 ### Numbers
 
@@ -2940,6 +2947,9 @@ sign_word(N, Word) :-
   (N > 0, Word = 'positive';
   Word = 'negative')).
 ```
+
+The `if_` predicate ...
+TODO: Finish this.
 
 ## Iteration
 
