@@ -943,6 +943,13 @@ use `initialization`. For example:
 :- initialization((goal1, goal2, goal3)).
 ```
 
+Another way to run a goal on load is to use the `-g` option.
+For example, `scryerp -g run,halt my_file.pl`
+loads a Prolog source file, executes its `run` goal,
+and executes `halt` to exit from top level.
+Omit the `halt` goal to remain in the top level
+so other goals can be interactively explored.
+
 ### Command-line Arguments
 
 To get command-line arguments in SWI-Prolog:
