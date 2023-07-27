@@ -1844,6 +1844,15 @@ write_type(Thing) :-
 
 Entering `functor(2 + 3, F, A).` sets `F` to `(+)` and `A` to `2`.
 
+## Higher-order Predicates
+
+Some predicates take another predicate as an argument and call it.
+Examples include `maplist`, `findall`, `call`,
+`foldl` (in the `lists` library), and `if_` (in the `reif` library).
+Also, the custom predicates `every` and `some`
+defined in the "Lists" section above also do this.
+These are all examples of higher-order predicates, aka meta-predicates.
+
 ## Dynamic Predicates
 
 By default clauses cannot be added to or deleted from the knowledge base.
@@ -3058,12 +3067,13 @@ with an unspecified length before the `phrase` predicate as follows:
 ; ... .
 ```
 
-## Currying (Runtime Predicates)
+## Partial Goals
 
-Prolog supports a form currying by passing
-fewer arguments to a predicate than it requires.
-The result must be passed to the `call` predicate in order to evaluate it.
-For example:
+Prolog supports adding arguments to goals before they are called.
+This creates a "partial goal" and is similar to
+function currying in other programming languages.
+The resulting predicate can be passed to the `call` predicate
+in order to evaluate it. For example:
 
 ```prolog
 :- use_module(library(clpfd)).
@@ -4158,6 +4168,20 @@ generate :-
   maplist(atoms_sentence, Solutions, Sentences),
   maplist(writeln, Sentences).
 ```
+
+## Meta-interprers
+
+The topic of meta-interpreters is covered well at
+{% aTargetBlank "https://www.metalevel.at/acomip/",
+"A Couple of Meta-interpreters in Prolog" %}.
+Some key quotes from this post are:
+
+- "An interpreter is a program that evaluates programs."
+- "Many programs are interpreters for domain-specific languages.
+  For example, a program reading settings from a configuration file."
+- "An interpreter for a language similar or identical to
+  its own implementation language is called meta-interpreter (MI)."
+- "Prolog is exceptionally well-suited for writing MIs."
 
 ## Calling From JavaScript
 
