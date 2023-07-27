@@ -243,7 +243,7 @@ and install it.
 
 The "reif" pack (reified if) implements the `if_` predicate
 which is similar to the `->` operator, but has some advantages.
-I could not find good examples of using and could not get it to work.
+See the section "Higher-order Predicates" for examples.
 
 The {% aTargetBlank "https://www.swi-prolog.org/pack/list?p=gvterm",
 "gvterm" %} pack generates a graphviz file from a Prolog term.
@@ -1880,9 +1880,40 @@ Also, the custom predicates `every` and `some`
 defined in the "Lists" section above also do this.
 These are all examples of higher-order predicates, aka meta-predicates.
 
-TODO: Add examples of using several predicates in the reif library.
-TODO: See https://github.com/mthom/scryer-prolog/discussions/1924
-TODO: See https://github.com/mthom/scryer-prolog/discussions/1925
+The following code demonstrates using the `reif` library
+`if_` and `tpartition` predicates.
+
+```prolog
+:- use_module(library(format)).
+:- use_module(library(reif)).
+
+dog(comet).
+dog(maisey).
+dog(oscar).
+dog(ramsay).
+
+is_dog(X, B) :- dog(X) -> B = true; B = false.
+
+report_reif(Name) :-
+  % The first argument must be a predicate that accepts
+  % an extra variable argument to receive true or false.
+  if_(
+    is_dog(Name),
+    writeln('dog'),
+    writeln('not a dog')
+  ).
+
+writeln(X) :- write(X), nl.
+
+run :-
+  report_reif(comet), % dog
+  report_reif(mark), % not a dog
+
+  Beings = [mark, comet, tami, maisey, ramsay, oscar],
+  tpartition(is_dog, Beings, Dogs, NonDogs),
+  format("dogs include ~w~n", [Dogs]), % [comet,maisey,ramsay,oscar]
+  format("non-dogs include ~w~n", [NonDogs]). % [mark,tami]
+```
 
 ## Dynamic Predicates
 
