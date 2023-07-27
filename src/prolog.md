@@ -1853,6 +1853,10 @@ Also, the custom predicates `every` and `some`
 defined in the "Lists" section above also do this.
 These are all examples of higher-order predicates, aka meta-predicates.
 
+TODO: Add examples of using several predicates in the reif library.
+TODO: See https://github.com/mthom/scryer-prolog/discussions/1924
+TODO: See https://github.com/mthom/scryer-prolog/discussions/1925
+
 ## Dynamic Predicates
 
 By default clauses cannot be added to or deleted from the knowledge base.
