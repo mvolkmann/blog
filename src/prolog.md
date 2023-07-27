@@ -440,6 +440,7 @@ To exit from any Prolog interpreter, enter `halt.` or press ctrl-d.
 | conjunction       | and'ing terms with comma operator                             |
 | disjunction       | or'ing terms with semicolon operator                          |
 | monotonic         | described below                                               |
+| homoiconic        | described below                                               |
 
 A string is treated as a list of atoms where each atom represents a character.
 This makes it a compound term.
@@ -466,6 +467,10 @@ is the property that:
    **decrease** the number of possible solutions.
 2. Adding clauses or disjunctions can only
    **increase** the number of possible solutions.
+
+Prolog is a "homoiconic" language in that everything,
+including question results and complete Prolog programs,
+can be described by a term.
 
 For more, see <a href="https://swi-prolog.org/pldoc/man?section=glossary"
 target="_blank">Glossary of Terms</a>.
