@@ -200,6 +200,15 @@ The Prolog implementations that are currently popular are described below.
 {% aTargetBlank "https://www.swi-prolog.org", "SWI-Prolog" %}
 is implemented in C (48%) and Prolog (39%).
 
+SWI-Prolog adds features beyond the ISO standard that some find questionable.
+One example is the addition of a string type.
+Many dedicated predicates are needed to operate on these strings
+rather than using list predicates.
+It is very easy to write code that runs in SWI-Prolog,
+but does not run in other Prolog implementations.
+For a detailed take on this issue, see {% aTargetBlank
+"https://www.youtube.com/watch?v=kGQNeeRp4sM", "Preparing Prolog" %}.
+
 Documentation of built-in predicates uses **argument mode indicators**
 that are documented at
 <a href="https://www.swi-prolog.org/pldoc/man?section=preddesc" target="_blank">
@@ -1683,7 +1692,18 @@ queen_can_attack(R1-C1, R2-C2) :- % same diagonal
   abs(R1 - R2) =:= abs(C1 - C2).
 ```
 
-### Dicts
+### Key/Value Pairs
+
+#### assoc library
+
+Scryer Prolog supports collections of key/value pairs using the
+{% aTargetBlank "https://www.scryer.pl/assoc.html", "assoc library" %}.
+
+TODO: Add more detail here. See assoc.pl.
+
+#### dict type
+
+SWI-Prolog supports collections of key/value pairs using its custom dict type.
 
 A dictionary, or dict for short, is a hash map.
 To create a dict, specify a tag followed by an open curly brace,
