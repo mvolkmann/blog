@@ -200,10 +200,12 @@ The Prolog implementations that are currently popular are described below.
 {% aTargetBlank "https://www.swi-prolog.org", "SWI-Prolog" %}
 is implemented in C (48%) and Prolog (39%).
 
-SWI-Prolog adds features beyond the ISO standard that some find questionable.
+SWI-Prolog adds features beyond the ISO standard,
+some of which contradict the standard, making it non-conforming.
 One example is the addition of a string type.
 Many dedicated predicates are needed to operate on these strings
 rather than using list predicates.
+Another example is the addition of a custom dict type.
 It is very easy to write code that runs in SWI-Prolog,
 but does not run in other Prolog implementations.
 For a detailed take on this issue, see {% aTargetBlank
@@ -1711,6 +1713,9 @@ TODO: Add more detail here. See assoc.pl.
 #### dict type
 
 SWI-Prolog supports collections of key/value pairs using its custom dict type.
+Like the custom string type added in SWI-Prolog,
+the dict implementation violates the ISO standard in ways that allow
+writing code for SWI-Prolog that does not run in other implementations.
 
 A dictionary, or dict for short, is a hash map.
 To create a dict, specify a tag followed by an open curly brace,
