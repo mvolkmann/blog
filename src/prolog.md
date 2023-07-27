@@ -208,6 +208,8 @@ rather than using list predicates.
 Another example is the addition of a custom dict type.
 It is very easy to write code that runs in SWI-Prolog,
 but does not run in other Prolog implementations.
+In addition, some code that is valid according to the ISO standard
+does not run in SWI-Prolog.
 For a detailed take on this issue, see {% aTargetBlank
 "https://www.youtube.com/watch?v=kGQNeeRp4sM", "Preparing Prolog" %}.
 
