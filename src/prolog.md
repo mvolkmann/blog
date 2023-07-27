@@ -557,12 +557,22 @@ whose relationship is being described, separated by underscores.
 For example, the rule head `parent_child(P, C)` makes it clear that
 the first argument represents a parent
 and the second argument represents a child.
-Some might also use the functor name `parent_of` or simply `parent`.
 
-Good functor names are general and describe relationships
-without implying a direction. Bad functor names do neither.
-For example, functor names containing words like "count", "drop", or "find"
-imply that the clause is meant to be used in a specific direction.
+Good rules can be used in multiple directions,
+supporting multiple usage modes.
+For example, it should be possible to use the `parent_child` rule
+to find the children of a given parent, find the parents of a given child,
+and find all known combinations of parent and child.
+Using a name such as `parent_of` and `parent` makes this less clear.
+
+Good functor names are general and
+describe a relationship rather than an action.
+Functor names containing words like "count", "drop", "find", or "sort"
+imply that it performs an action rather than describing a relationship.
+For example, a rule that describes a relationship between a list
+and a sorted version of the list might be named "list_sorted" or "list_ascending".
+These indicate that the rule has two arguments
+which are an unsorted list and a sorted list.
 
 The `is` operator evaluates its right-hand side as an arithmetic expression
 and assign the result to its left-hand side.
@@ -3835,6 +3845,9 @@ digit(D) --> [D], { char_type(D, decimal_digit) }.
 % This matches any non-empty list of digits.
 digits([D|Ds]) --> digit(D), digits_(Ds).
 
+% This is an "auxiliary rule" that is not intended to be used directly.
+% Typically the names of such rules match that of the rule that uses it
+% with an underscore added at the end.
 % This matches any list of digits including an empty list.
 digits_([D|Ds]) --> digit(D), digits_(Ds).
 digits_([]) --> [].
