@@ -1898,12 +1898,29 @@ Entering `functor(2 + 3, F, A).` sets `F` to `(+)` and `A` to `2`.
 
 ## Higher-order Predicates
 
-Some predicates take another predicate as an argument and call it.
+Higher-order predicates, aka meta-predicates, are predicates
+that take another predicate as an argument and call it.
 Examples include `maplist`, `findall`, `call`,
-`foldl` (in the `lists` library), and `if_` (in the `reif` library).
+`foldl` (in the `lists` library), `if_` (in the `reif` library),
+and `tpartition` (in the `reif` library).
 Also, the custom predicates `every` and `some`
 defined in the "Lists" section above also do this.
-These are all examples of higher-order predicates, aka meta-predicates.
+
+The following code demonstrates using
+the `foldl` predicate in the `lists` library.
+
+```prolog
+:- use_module(library(clpz)). % for #=
+:- use_module(library(format)). % for format
+:- use_module(library(lists)). % for foldl
+
+add(A, B, C) :- C #= A + B.
+
+run :-
+  Numbers = [1, 2, 3],
+  foldl(add, Numbers, 0, Sum),
+  format("Sum = ~d~n", [Sum]).
+```
 
 The following code demonstrates using the `reif` library
 `if_` and `tpartition` predicates.
