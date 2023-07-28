@@ -4004,6 +4004,9 @@ words([H|T]) --> ws, word(H), ws, words(T).
 % that corresponds to each decimal number.
 % char_type(C, whitespace) then filters the output
 % to only the character codes that are whitespace characters.
+% After the last character is output, the following error message will appear,
+% because there are no Unicode code points above some integer.
+% error(representation_error(character_code),char_code/2).
 ws --> [W], { char_type(W, whitespace) }, ws.
 ws --> [].
 ```
