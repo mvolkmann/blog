@@ -141,6 +141,8 @@ These take considerable time to learn and master.
 - {% aTargetBlank "https://link.springer.com/book/10.1007/978-3-642-55481-0",
   "Programming in Prolog" %} Fifth edition book by Clocksin and Mellish
 
+- {% aTargetBlank "https://www.scryer.pl", "Scryer Prolog" %}
+
 - {% aTargetBlank "https://www.swi-prolog.org", "SWI-Prolog" %}
 
 - {% aTargetBlank
@@ -179,6 +181,87 @@ the likelihood that your code will run in other implementations.
 Switch may be necessary in order to gain performance or specific features.
 
 The Prolog implementations that are currently popular are described below.
+
+### Scryer Prolog
+
+<img alt="Scryer Prolog logo" style="width: 20%"
+  src="/blog/assets/scryer-prolog-logo.png?v={{pkg.version}}"
+  title="Scryer Prolog logo">
+
+{% aTargetBlank "https://www.scryer.pl", "Scryer Prolog" %}
+"is a free software ISO Prolog system intended to be an
+industrial strength production environment and
+a testbed for bleeding edge research in logic and constraint programming."
+
+Scryer Prolog is implemented in Rust (64%) and Prolog (36%).
+
+A "scryer" is somehow who sees, hears or otherwise interprets
+spirit communications, usually on behalf of a magician who isn't so gifted.
+
+From the Scryer website, it's main features include:
+
+- ISO standard compliant
+- integrated Constraint Logic Programming (CLP) libraries
+- supports Definite Clause Grammars (DCGs)
+- coroutine support
+- tabling and SLG resolution
+- compact string representation
+- network libraries (TCP sockets, HTTP server, HTTP client, ...)
+- cryptography predicates
+- WAM-based engine
+- cross-platform
+- implemented in Rust
+
+To install, enter the following commands:
+
+```bash
+git clone https://github.com/mthom/scryer-prolog
+cd scryer-prolog
+curl https://sh.rustup.rs -sSf | sh # if cargo is not yet installed
+cargo build --release
+```
+
+This creates the executable file `target/release/scryer-prolog`.
+Define an alias like `scryerp` to make this easier to run.
+
+To update your version of Scryer Prolog:
+
+1. cd to the directory containing the cloned GitHub repository.
+1. Enter `git pull`
+1. Enter `cargo build --release`
+
+To start a Scryer Prolog top level from a terminal, enter `scryerp`.
+
+To specify configuration for all top level sessions,
+create the file `$HOME/.scryerrc`.
+
+This file often imports commonly used libraries.
+For example:
+
+```prolog
+:- use_module(library(clpz)).
+:- use_module(library(dcgs)).
+:- use_module(library(format)).
+:- use_module(library(lists)).
+```
+
+The Scryer Prolog top level supports pressing the `a` key after
+entering a question to output all possible solutions instead of
+outputting them one at a time as is done when the `;` key is pressed.
+
+### GNU Prolog
+
+<img alt="GNU Prolog logo" style="width: 20%"
+  src="/blog/assets/gnu-prolog-logo.png?v={{pkg.version}}"
+  title="GNU Prolog logo">
+
+{% aTargetBlank "http://www.gprolog.org", "GNU Prolog" %}.
+is implemented in C (84%) and Prolog (15%).
+
+To install the terminal command `gprolog` in macOS,
+enter `brew install gnu-prolog`.
+
+To start a GNU Prolog top level from a terminal, enter `gprolog`.
 
 ### SWI-Prolog
 
@@ -317,81 +400,6 @@ enter `swipl -o {exe-name} -c {source-name}.pl`.
 For example, `swipl -o sukuko -c suduko.pl`.
 Running this executable with `./suduko` starts a top level session
 and loads the compiled facts and rules.
-
-### GNU Prolog
-
-<img alt="GNU Prolog logo" style="width: 20%"
-  src="/blog/assets/gnu-prolog-logo.png?v={{pkg.version}}"
-  title="GNU Prolog logo">
-
-{% aTargetBlank "http://www.gprolog.org", "GNU Prolog" %}.
-is implemented in C (84%) and Prolog (15%).
-
-To install the terminal command `gprolog` in macOS,
-enter `brew install gnu-prolog`.
-
-To start a GNU Prolog top level from a terminal, enter `gprolog`.
-
-### Scryer Prolog
-
-<img alt="Scryer Prolog logo" style="width: 20%"
-  src="/blog/assets/scryer-prolog-logo.png?v={{pkg.version}}"
-  title="Scryer Prolog logo">
-
-{% aTargetBlank "https://www.scryer.pl", "Scryer Prolog" %}
-"is a free software ISO Prolog system intended to be an
-industrial strength production environment and
-a testbed for bleeding edge research in logic and constraint programming."
-
-Scryer Prolog is implemented in Rust (64%) and Prolog (36%).
-
-A "scryer" is somehow who sees, hears or otherwise interprets
-spirit communications, usually on behalf of a magician who isn't so gifted.
-
-From the Scryer website, it's main features include:
-
-- ISO standard compliant
-- integrated Constraint Logic Programming (CLP) libraries
-- supports Definite Clause Grammars (DCGs)
-- coroutine support
-- tabling and SLG resolution
-- compact string representation
-- network libraries (TCP sockets, HTTP server, HTTP client, ...)
-- cryptography predicates
-- WAM-based engine
-- cross-platform
-- implemented in Rust
-
-To install, enter the following commands:
-
-```bash
-git clone https://github.com/mthom/scryer-prolog
-cd scryer-prolog
-curl https://sh.rustup.rs -sSf | sh # if cargo is not yet installed
-cargo build --release
-```
-
-This creates the executable file `target/release/scryer-prolog`.
-Define an alias like `scryerp` to make this easier to run.
-
-To start a Scryer Prolog top level from a terminal, enter `scryerp`.
-
-To specify configuration for all top level sessions,
-create the file `$HOME/.scryerrc`.
-
-This file often imports commonly used libraries.
-For example:
-
-```prolog
-:- use_module(library(clpz)).
-:- use_module(library(dcgs)).
-:- use_module(library(format)).
-:- use_module(library(lists)).
-```
-
-The Scryer Prolog top level supports pressing the `a` key after
-entering a question to output all possible solutions instead of
-outputting them one at a time as is done when the `;` key is pressed.
 
 ### Ciao Prolog
 
