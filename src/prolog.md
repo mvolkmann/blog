@@ -232,6 +232,11 @@ To update your version of Scryer Prolog:
 
 To start a Scryer Prolog top level from a terminal, enter `scryerp`.
 
+By default, Scryer Prolog only provides built-in predicates
+that are defined in the ISO standard.
+But it bundles many libraries that define non-ISO predicates that can
+easily be made available with `:- use_module(library(library-name)).`
+
 To specify configuration for all top level sessions,
 create the file `$HOME/.scryerrc`.
 
