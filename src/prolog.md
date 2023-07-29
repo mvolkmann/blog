@@ -1716,7 +1716,9 @@ queen_can_attack(R1-C1, R2-C2) :- % same diagonal
 
 #### assoc library
 
-Scryer Prolog and SWI-Prolog support collections of key/value pairs using the
+Several Prolog implementations including
+Scryer Prolog, SICStus Prolog, and SWI-Prolog
+support collections of key/value pairs using the
 {% aTargetBlank "https://www.scryer.pl/assoc.html", "assoc library" %}.
 
 The following code demonstrates the most commonly used
