@@ -3108,7 +3108,18 @@ Iteration in Prolog is done with recursion or the `repeat` predicate.
 The following code demonstrates several approaches to sum the numbers in a list.
 
 ```prolog
-TODO: Finish this!
+TODO: Finish this!  See sum.pl.
+```
+
+The following code demonstrates using the `repeat` predicate:
+
+```prolog
+repeat,
+  read(Term), % include a period at end of each entry
+  ( Term = stop, ! % stops backtracking
+  ; write(Term),
+    fail % triggers backtracking
+  ).
 ```
 
 To get all the integers starting from one integer and ending at another,
