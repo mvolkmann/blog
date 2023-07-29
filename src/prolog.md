@@ -40,21 +40,21 @@ father(mark, jeremy).
      (father(P, C); mother(P, C)).
    ```
 
-1. Ask whether a specific relationship is true ... a question with no variables.
+1. Ask whether a specific relationship is true ... a query with no variables.
 
    For example, `?- grandfather(richard, amanda).` outputs `true`.
 
 1. Ask for values for which a relationship is true ...
-   a question with variables.
+   a query with variables.
 
    For example, `?- grandfather(G, amanda).` sets `G` to `richard`
-   Sometimes there are multiple values for which a question holds.
-   For example, the question `?- grandfather(richard, G).`
+   Sometimes there are multiple values for which a query holds.
+   For example, the query `?- grandfather(richard, G).`
    sets `G` to `amanda` and then `jeremy`.
    Note how a rule can be used to find values for any of its arguments,
    searching in multiple directions.
 
-Questions (aka queries) perform "unification" which basically means
+Queries (aka questions) perform "unification" which basically means
 finding values for variables that cause a relationship to hold.
 This requires pattern matching search and backtracking.
 Unification relies on the properties of {% aTargetBlank
@@ -94,7 +94,7 @@ Prolog is used in many kinds of applications including:
 
 ## Learning Curve
 
-The primary concepts in Prolog such as facts, rules, and questions
+The primary concepts in Prolog such as facts, rules, and queries
 are easy to understand after seeing a few examples.
 
 However, writing programs that are entirely
@@ -135,7 +135,7 @@ These take considerable time to learn and master.
 
 - {% aTargetBlank "https://www.metalevel.at/prolog", "The Power of Prolog" %}
   free, online book with accompanying videos by
-  {% aTargetBlank "https://www.metalevel.at", "Markus Triska" %}
+  {% aTargetBlank "https://www.metalevel.at", "Dr. Markus Triska" %}
   from the University of Technology in Austria
 
 - {% aTargetBlank "https://link.springer.com/book/10.1007/978-3-642-55481-0",
@@ -166,7 +166,7 @@ Most implementations also add features beyond the ISO standard.
 
 The ISO standard does not require implementations to
 provide a "top level" or REPL, but most do.
-A top level supports interactive entry and evaluation of Prolog questions.
+A top level supports interactive entry and evaluation of Prolog queries.
 Some top level implementations also support
 tab completion, interactive debugging.
 
@@ -246,7 +246,7 @@ For example:
 ```
 
 The Scryer Prolog top level supports pressing the `a` key after
-entering a question to output all possible solutions instead of
+entering a query to output all possible solutions instead of
 outputting them one at a time as is done when the `;` key is pressed.
 
 ### GNU Prolog
@@ -329,14 +329,13 @@ and `!` (mutable).
 Packs are add-on libraries.
 
 To see a list of known packages, browse {% aTargetBlank
-"https://www.swi-prolog.org/pack/list?p$=$plml",
+"https://www.swi-prolog.org/pack/list",
 "Packs (add-ons) for SWI-Prolog" %}.
 Alternatively, enter `pack_list(substring)` where
 substring is part of one or more pack names.
 
 To install a pack, enter `pack_install(name)`.
-This will download the code from `https://www.swi-prolog.org/pack/question`
-and install it.
+This will download the code and install it.
 
 The "reif" pack (reified if) implements the `if_` predicate
 which is similar to the `->` operator, but has some advantages.
@@ -352,7 +351,7 @@ For information on using the debugger in SWI-Prolog, see {% aTargetBlank
 "https://www.swi-prolog.org/pldoc/man?section=debugoverview",
 "Overview of the Debugger" %}.
 
-The `trace` predicate enables tracing of the search to find a question solution.
+The `trace` predicate enables tracing of the search to find a query solution.
 
 The following code defines fact about my family and a rule about grandfathers.
 
@@ -378,8 +377,8 @@ grandfather_of(X, Y) :-
   (father(P, Y); mother(P, Y)).
 ```
 
-To trace the execution of the question `grandfather_of(richard, X).`,
-enter `trace.` and then the question.
+To trace the execution of the query `grandfather_of(richard, X).`,
+enter `trace.` and then the query.
 The screenshot below shows the output.
 After each line in the trace, press the spacebar
 to advance to the next term to be evaluated.
@@ -436,8 +435,8 @@ To enter and run Prolog code in a web browser, browse
 {% aTargetBlank "https://swish.swi-prolog.org", "SWISH" %}.
 
 Enter facts and rules in the left pane.
-Enter a question in the lower-right pane.
-Press the "Run!" button or ctrl-return to execute the question.
+Enter a query in the lower-right pane.
+Press the "Run!" button or ctrl-return to execute the query.
 
 ## Exiting
 
@@ -458,11 +457,11 @@ To exit from any Prolog interpreter, enter `halt.` or press ctrl-d.
 | clause            | a single fact or rule                                         |
 | predicate         | collection of clauses with the same principal functor         |
 | principal functor | name of a predicate                                           |
-| question          | asks if a term is true or asks for satisfying variable values |
+| query             | asks if a term is true or asks for satisfying variable values |
 | knowledge base    | collection of predicate clauses (aka database)                |
 | arity             | number of predicate arguments                                 |
 | functor           | predicate name and its arity; written with a slash between    |
-| goal              | compound term in a rule body or question                      |
+| goal              | compound term in a rule body or query                         |
 | list notation     | comma-separated terms inside square brackets; ex. `[a, B, 7]` |
 | operator notation | terms separated by operators; ex. `Y = m*X + b`               |
 | function notation | operators are written as function calls; ex. `*(3, +(1, 2))`  |
@@ -500,7 +499,7 @@ is the property that:
    **increase** the number of possible solutions.
 
 Prolog is a "homoiconic" language in that everything,
-including question results and complete Prolog programs,
+including query results and complete Prolog programs,
 can be described by a term.
 
 For more, see <a href="https://swi-prolog.org/pldoc/man?section=glossary"
@@ -508,7 +507,7 @@ target="_blank">Glossary of Terms</a>.
 
 ## Syntax
 
-Prolog programs are composed of facts, rules, and questions.
+Prolog programs are composed of facts, rules, and queries.
 All of these are terminated by a period.
 
 ### Facts
@@ -671,26 +670,26 @@ A common way to fix a rule that is too general is to add more goals.
 A common way to fix a rule that is too specific
 is to add more versions of the rule.
 
-## Questions
+## Queries
 
-Questions test whether a term is true or
+Queries test whether a term is true or
 they find variable values for which the term is true.
 
-Questions are written after the characters `?-`.
+Queries are written after the characters `?-`.
 
-The output from a question is a new, equivalent question
+The output from a query is a new, equivalent query
 that is often a disjunction (containing semicolons)
 that describes the possible solutions.
-Solutions assign values to all variables in a question,
+Solutions assign values to all variables in a query,
 which is referred to as making them "ground".
 
 For example:
 
 ```prolog
-% This is a question that asks whether comet is fast.
+% This is a query that asks whether comet is fast.
 ?- fast(comet). % true
 
-% This is a question that asks for something that is fast.
+% This is a query that asks for something that is fast.
 ?- fast(X). % comet
 ```
 
@@ -702,11 +701,11 @@ likes(mark, books).
 likes(mark, running).
 ```
 
-The question `likes(X, running)` will find "mark".
+The query `likes(X, running)` will find "mark".
 
-The question `likes(mark, X)` will find
+The query `likes(mark, X)` will find
 "tacos", "books", and "running" that in that order.
-When a question has multiple matches, as in this example,
+When a query has multiple matches, as in this example,
 the interpreter will wait for further input.
 
 To search for the next match, press the semicolon key.
@@ -717,7 +716,7 @@ To stop searching for matches before the last one is found,
 press the return key.
 SWI-Prolog also supports pressing the c or a keys to do this.
 
-After the last match is found, a prompt for the next question will appear.
+After the last match is found, a prompt for the next query will appear.
 
 Variables can be used for any argument of a predicate.
 The unification process will find each set of variable values
@@ -729,7 +728,7 @@ or predicates where only the first solution is needed.
 
 ### Conjunctions
 
-The comma operator, read as "and", is used in rules or questions
+The comma operator, read as "and", is used in rules or queries
 where multiple goals must be met.
 For example:
 
@@ -737,34 +736,34 @@ For example:
 % This rule says that mark likes females that like cycling.
 likes(mark, x) := female(X), likes(X, cycling).
 
-% This question asks if mark loves tami AND tami loves mark.
+% This query asks if mark loves tami AND tami loves mark.
 ?- loves(mark, tami), loves(tami, mark)`
 
-% This question searches for things that both mark and tami love.
+% This query searches for things that both mark and tami love.
 % X stands for the same value in both goals.
 ?- loves(mark, X), loves(tami, X)
 ```
 
-Variables retain their values across question conjunctions,
-but their values are lost when a question ends.
+Variables retain their values across query conjunctions,
+but their values are lost when a query ends.
 This is a feature of {% aTargetBlank
 "https://en.wikipedia.org/wiki/Static_single-assignment_form",
 "static single-assignment" %} (SSA) that is used by Prolog.
 In SSA,
 "each variable to be assigned exactly once and defined before it is used."
-and "every definition (Prolog fact, rule, or question) gets its own version."
+and "every definition (Prolog fact, rule, or query) gets its own version."
 
 For example:
 
 ```prolog
 X is 6, Y is X * 2, Z is Y / 3.
 % output is X = 6, Y = 12, Z = 4.
-% Subsequent questions cannot access these values.
+% Subsequent queries cannot access these values.
 ```
 
 ### Disjunctions
 
-The semicolon operator, read as "or", is used in rules or questions
+The semicolon operator, read as "or", is used in rules or queries
 where one of a set of goals must be met.
 
 Earlier we saw a rule that stated something is fast
@@ -780,14 +779,14 @@ The following way of writing the rule uses disjunction:
 To start a Prolog top level, enter an implementation-specific command
 such as `swipl` or `gprolog`.
 
-To evaluate a question in the top level,
-enter the question terminated with a period.
+To evaluate a query in the top level,
+enter the query terminated with a period.
 
-If the question does not contain any variables
+If the query does not contain any variables
 then `true` or `false` will be output.
 
-If the question does contain variables, a lazy search will be performed
-to find the first set of values that satisfy the question will be output.
+If the query does contain variables, a lazy search will be performed
+to find the first set of values that satisfy the query will be output.
 To see the next possible solution, press the semicolon key.
 A period will be output after the last set is found.
 To stop outputting solutions before the last one has been output,
@@ -804,7 +803,7 @@ The typical steps to run a Prolog program are:
 
 1. Add facts and rules to a Prolog source file that has an extension of `.pl`
 1. Load Prolog source files into the Prolog app.
-1. Enter questions in the Prolog app.
+1. Enter queries in the Prolog app.
 
 Unfortunately Prolog and Perl use the same file extension
 for their source files.
@@ -1960,7 +1959,7 @@ run :-
 ## Dynamic Predicates
 
 By default clauses cannot be added to or deleted from the knowledge base.
-To enable this, run a `dynamic` question on a specific predicate.
+To enable this, run a `dynamic` query on a specific predicate.
 For example, to enable adding and removing "likes" predicates
 that take two arguments:
 
@@ -2282,7 +2281,7 @@ write(S).
 | `,`           | logical and                 |
 | `;`           | logical or                  |
 | `not`         | logical not                 |
-| `?-`          | begins a question           |
+| `?-`          | begins a query              |
 | `.`           | terminates all commands     |
 | `%`           | begins single-line comment  |
 | `/*` and `*/` | delimits multi-line comment |
@@ -2619,7 +2618,7 @@ TODO: Finish documenting the meaning of some of these operators.
 | -------- | --------------------------------------------------------------------------------- |
 | `:-`     | prefix; appears before a compiler directive                                       |
 | `:-`     | infix; appears between the head and body of every rule; read as "if"              |
-| `?-`     | prefix operator that appears before every question                                |
+| `?-`     | prefix operator that appears before every query                                   |
 | `\|`     | separates the head and tail of a list in `[H\| T]`                                |
 | `,`      | separates terms to be and'ed                                                      |
 | `;`      | separates terms to be or'ed                                                       |
@@ -2674,7 +2673,7 @@ For example:
 )).
 ```
 
-The `?-` operator precedes questions.
+The `?-` operator precedes queries.
 The top level of most Prolog implementations displays that operator as a prompt.
 I have not found a reason to actually used the `?-` operator in code.
 
@@ -2753,7 +2752,7 @@ Existing operators, except the comma operator, can be redefined.
 The `|` operator can only be redefined as an infix operator
 whose precedence is at least 1001.
 
-The `current_op` predicate asks questions operators.
+The `current_op` predicate asks queries operators.
 For example:
 
 ```prolog
@@ -3112,7 +3111,7 @@ add(A, B, C) :- C #= A + B.
 
 ## Unfair Enumerations
 
-When a question has an infinite number of solutions,
+When a query has an infinite number of solutions,
 there are situations where some solutions will never be generated.
 This is referred to as an "unfair enumeration".
 
@@ -3283,12 +3282,12 @@ For example, `listing(append).` shows the implementation of this functor name.
 To see all the steps used to evaluate a predicate,
 turn on trace mode by entering `trace.`
 
-Enter a question and press the return key after
+Enter a query and press the return key after
 viewing the result of each step in the evaluation.
 
 When finished debugging, enter `notrace.` to turn this mode off.
 
-To determine how long it takes to evaluate a question,
+To determine how long it takes to evaluate a query,
 use the `time` predicate from the `time` library.
 For example:
 
@@ -4293,7 +4292,7 @@ Some key quotes from this post are:
 ## Calling From JavaScript
 
 The npm package {% aTargetBlank "https://github.com/rla/node-swipl#readme",
-"swipl" %} makes it easy to run Prolog questions from a Node.js application
+"swipl" %} makes it easy to run Prolog queries from a Node.js application
 which can be an Express server.
 This requires installing Node.js and SWI-Prolog.
 
@@ -4322,13 +4321,13 @@ function printSolution(goal, solution) {
   }
 }
 
-function printSolutions(goal, question) {
+function printSolutions(goal, query) {
   console.log('Solutions for', goal);
-  while (question && (solution = question.next())) {
+  while (query && (solution = query.next())) {
     console.log(' ', solution.X);
   }
-  // Only one question can be open at a time.
-  question.close();
+  // Only one query can be open at a time.
+  query.close();
 }
 
 // This only gets the first solution.
@@ -4336,24 +4335,24 @@ let goal = 'member(X, [1,2,3,4])';
 printSolution(goal, swipl.call('member(X, [1,2,3,4])'));
 
 // This gets all solutions.
-let question = new swipl.Query(goal);
-printSolutions(goal, question);
+let query = new swipl.Query(goal);
+printSolutions(goal, query);
 
-// This loads a Prolog source file and runs a question against it.
+// This loads a Prolog source file and runs a query against it.
 loadFile('..', 'exercise1_3');
 goal = 'grandfather_of(richard, X)';
-question = new swipl.Query(goal);
-printSolutions(goal, question);
+query = new swipl.Query(goal);
+printSolutions(goal, query);
 ```
 
 The Prolog code is not prevented from performing "unsafe" operations.
 For example if it invokes the `halt` predicate
-then no further questions will be processed. I
+then no further queries will be processed. I
 
 ## Creating an HTTP Server
 
 SWI-Prolog supports creating an HTTP server that
-runs Prolog questions and servers HTML pages contain the results.
+runs Prolog queries and servers HTML pages contain the results.
 For example:
 
 ```prolog
@@ -4375,7 +4374,7 @@ For example:
   []).
 
 home_page(_Request) :-
-  % findall gathers all the solutions from the 2nd argument question,
+  % findall gathers all the solutions from the 2nd argument query,
   % transforms them with the first argument,
   % and places the resulting list in the 3rd argument.
   findall(h2(P), grandfather_of(richard, P), L),
