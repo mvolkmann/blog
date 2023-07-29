@@ -586,16 +586,19 @@ The following rules define what it means
 for two people to be siblings or sisters.
 
 ```prolog
+:- use_module(library(dif)).
+
 % This rule states that siblings must have the same father and the same mother.
 % It has four goals.
 sibling(X, Y) :-
+  dif(X, Y), % can't be sibling of self
   father(F, X),
   father(F, Y),
   mother(M, X),
   mother(M, Y).
 
 sister_of(X, Y) :-
-  \+ X = Y, % can't be sister of self
+  dif(X, Y), % can't be sister of self
   female(X),
   sibling(X, Y).
 ```
