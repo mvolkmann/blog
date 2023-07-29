@@ -1716,14 +1716,37 @@ queen_can_attack(R1-C1, R2-C2) :- % same diagonal
 
 #### assoc library
 
-Scryer Prolog supports collections of key/value pairs using the
+Scryer Prolog and SWI-Prolog support collections of key/value pairs using the
 {% aTargetBlank "https://www.scryer.pl/assoc.html", "assoc library" %}.
 
-TODO: Add more detail here. See assoc.pl.
+The following code demonstrates the most commonly used
+predicates from this library, but there are more.
+
+```prolog
+:- use_module(library(assoc)).
+:- use_module(library(format)).
+
+demo :-
+  % Create an empty assoc.
+  empty_assoc(A0),
+
+  % Add a key/value pair, resulting in a new assoc.
+  put_assoc(name, A0, 'Mark', A1),
+
+  % Retrieve the value corresponding to a given key.
+  get_assoc(name, A1, Name),
+  format("Name = ~w~n", [Name]),
+
+  % Delete the key/value pair for a given key.
+  % The third argument can be a non-anonymous variable
+  % that will be set to the value that was deleted.
+  del_assoc(name, A1, _, A2).
+```
 
 #### dict type
 
-SWI-Prolog supports collections of key/value pairs using its custom dict type.
+SWI-Prolog supports another way to represent collections of key/value pairs
+using its custom dict type.
 Like the custom string type added in SWI-Prolog,
 the dict implementation violates the ISO standard in ways that allow
 writing code for SWI-Prolog that does not run in other implementations.
