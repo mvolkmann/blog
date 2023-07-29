@@ -2012,8 +2012,7 @@ likes(X, Y). % outputs false.
 
 ## Input
 
-Input can be read from a stream using the ???.
-
+Input can be read from a stream.
 There are two stream aliases, `user_input` (defaults to stdin)
 and `current_input` (defaults to stdin).
 The stream associated with `user_input`
@@ -2040,6 +2039,19 @@ greet().
 Enter a name in single or double quotes followed by a period.
 This is an odd requirement for users!
 Entering 'Mark'. results in the following output: `Hello, Mark!`.
+
+To remove the required for the user to surround the value being entered
+in quotes and end with a period, SWI-Prolog provides the
+`read_line_to_string` predicate.
+This allows the user to enter any text and press the return key.
+For example:
+
+```prolog
+read_line_to_string(user_input, Name),
+format("Hello, ~w!~n", [Name]).
+```
+
+TODO: How can this be done in Scryer Prolog?
 
 The `get` predicate reads a single character
 and sets a variable to its integer ASCII value.
@@ -3080,7 +3092,13 @@ TODO: Finish this.
 
 ## Iteration
 
-Iteration in Prolog is done with recursion.
+Iteration in Prolog is done with recursion or the `repeat` predicate.
+
+The following code demonstrates several approaches to sum the numbers in a list.
+
+```prolog
+TODO: Finish this!
+```
 
 To get all the integers starting from one integer and ending at another,
 use the `between` predicate.
