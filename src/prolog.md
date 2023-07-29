@@ -2040,10 +2040,12 @@ Enter a name in single or double quotes followed by a period.
 This is an odd requirement for users!
 Entering 'Mark'. results in the following output: `Hello, Mark!`.
 
-To remove the required for the user to surround the value being entered
+To remove the requirement for the user to surround the value being entered
 in quotes and end with a period, SWI-Prolog provides the
 `read_line_to_string` predicate.
 This allows the user to enter any text and press the return key.
+Note that this predicate name violates Prolog naming convention for I/O
+that "read" is reserved for predicates that read entire Prolog terms.
 For example:
 
 ```prolog
@@ -2051,7 +2053,9 @@ read_line_to_string(user_input, Name),
 format("Hello, ~w!~n", [Name]).
 ```
 
-TODO: How can this be done in Scryer Prolog?
+The Scryer Prolog `charsio` library provides a similar predicate
+`get_line_to_chars/3`.
+TODO: Add an example from your `repeat.pl` file.
 
 The `get` predicate reads a single character
 and sets a variable to its integer ASCII value.
