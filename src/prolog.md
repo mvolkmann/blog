@@ -292,7 +292,7 @@ To specify configuration for all top level sessions,
 create the file `$HOME/.config/swi-prolog/init.pl`.
 For example, this file might set [prolog flags](#prolog-flags).
 
-#### Conformance
+#### SWI-Prolog Conformance
 
 SWI-Prolog adds features beyond the ISO standard,
 some of which contradict the standard, making it non-conforming.
@@ -313,18 +313,7 @@ Also see {% aTargetBlank
 "https://www.complang.tuwien.ac.at/ulrich/iso-prolog/SWI7_and_ISO",
 "SWI7 and ISO Prolog" %}.
 
-#### Documentation
-
-Documentation of built-in predicates uses **argument mode indicators**
-that are documented at
-<a href="https://www.swi-prolog.org/pldoc/man?section=preddesc" target="_blank">
-Notation of Predicate Descriptions</a>.
-Argument mode indicators include `++` (ground), `+` (instantiated),
-`-` (output), `--` (unbound), `?` (partially bound),
-`:` (meta-argument such as a goal), `@` (will not be instantiated),
-and `!` (mutable).
-
-#### Packs
+#### SWI-Prolog Packs
 
 Packs are add-on libraries.
 
@@ -345,7 +334,7 @@ The {% aTargetBlank "https://www.swi-prolog.org/pack/list?p=gvterm",
 "gvterm" %} pack generates a graphviz file from a Prolog term.
 This is useful for visualizing the tree structure of a term.
 
-#### Debugging
+#### SWI-Prolog Debugging
 
 For information on using the debugger in SWI-Prolog, see {% aTargetBlank
 "https://www.swi-prolog.org/pldoc/man?section=debugoverview",
@@ -392,9 +381,9 @@ to begin searching for the next solution.
 The `trace` predicate enables both the trace and debug modes.
 To disable these, enter `notrace.` and `nodebug.`
 
-#### Executables
+#### SWI-Prolog Executables
 
-In SWI-Prolog, to compile a Prolog source file to an executable,
+To compile a Prolog source file to an executable,
 enter `swipl -o {exe-name} -c {source-name}.pl`.
 For example, `swipl -o sukuko -c suduko.pl`.
 Running this executable with `./suduko` starts a top level session
@@ -3232,6 +3221,18 @@ call(Term). % evaluates term
 
 ## Help
 
+Documentation of predicates uses **argument mode indicators**
+that are described at
+<a href="https://www.swi-prolog.org/pldoc/man?section=preddesc" target="_blank">
+Notation of Predicate Descriptions</a>.
+These include `++` (ground), `+` (instantiated),
+`-` (output), `--` (unbound), `?` (partially bound),
+`:` (meta-argument such as a goal), `@` (will not be instantiated),
+and `!` (mutable).
+
+SWI-Prolog provides predicates that output information about predicates.
+These include `apropos`, `help`, and `listing`.
+
 To find information about built-ins related to a specific word in SWI-Prolog,
 enter `apropos(word).`. For example, `apropos(pair).` outputs the following:
 
@@ -3267,8 +3268,6 @@ enter `apropos(word).`. For example, `apropos(pair).` outputs the following:
 
 For more detailed help on a specific predicate, enter `help(functor/arity).`
 For example, `help(between/3).`
-
-## Listing
 
 To list all the clauses (facts and rules) known in the current session,
 enter `listing.`.
