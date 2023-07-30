@@ -3375,16 +3375,41 @@ The following builtin error types are provided
   this error is raised with ArgNo set to 0
   when an undefined predicate is called.
 
+- `consistency_error(Culprit1,Culprit2,Message)` or
+  `consistency_error(Goal,Culprit1,Culprit2,Message)`
+
+  This indicates that a consistency error occurs when
+  two otherwise valid values or operations have been specified
+  that are inconsistent with each other.
+
+- `context_error(ContextType,CommandType)` or
+  `context_error(Goal,ContextType,CommandType)`
+
+  This indicates that the `CommandType` is not permitted in `ContextType`.
+
+- `evaluation_error(ErrorType,Culprit)` or
+  `evaluation_error(Goal,ArgNo,ErrorType,Culprit)`
+
+  This indicates that an incorrect arithmetic expression was evaluated.
+  This only occurs in `iso` execution mode.
+
 - `permission_error(Operation,ObjectType,Culprit)` or
   `permission_error(Goal,Operation,ObjectType,Culprit,Reserved)`
 
   This indicates that the `Operation` is not permitted
   on `Culprit` of the type `ObjectType`.
 
-- `context_error(ContextType,CommandType)` or
-  `context_error(Goal,ContextType,CommandType)`
+- `representation_error(ErrorType)` or
+  `representation_error(Goal,ArgNo,ErrorType)`
 
-  This indicates that the `CommandType` is not permitted in `ContextType`.
+  This indicates that a representation error occurs when the program tries to
+  compute some well-defined value that cannot be represented,
+  such as a compound term with arity > 255.
+
+- `resource_error(ResourceType)` or `resource_error(Goal,ResourceType)`
+
+  This indicates that a resource error occurs when
+  there are insufficient resources (ex. memory) to complete execution.
 
 - `syntax_error(Message)` or
   `syntax_error(Goal,Position,Message,Tokens,AfterError)`
@@ -3394,31 +3419,6 @@ The following builtin error types are provided
   assembling a number from its characters with `number_chars/2`.
   In the former case this error is raised only if
   the `syntax_errors` compiler flag is set to `error`.
-
-- `evaluation_error(ErrorType,Culprit)` or
-  `evaluation_error(Goal,ArgNo,ErrorType,Culprit)`
-
-  This indicates that an incorrect arithmetic expression was evaluated.
-  This only occurs in `iso` execution mode.
-
-- `representation_error(ErrorType)` or
-  `representation_error(Goal,ArgNo,ErrorType)`
-
-  This indicates that a representation error occurs when the program tries to
-  compute some well-defined value that cannot be represented,
-  such as a compound term with arity > 255.
-
-- `consistency_error(Culprit1,Culprit2,Message)` or
-  `consistency_error(Goal,Culprit1,Culprit2,Message)`
-
-  This indicates that a consistency error occurs when
-  two otherwise valid values or operations have been specified
-  that are inconsistent with each other.
-
-- `resource_error(ResourceType)` or `resource_error(Goal,ResourceType)`
-
-  This indicates that a resource error occurs when
-  there are insufficient resources (ex. memory) to complete execution.
 
 - `system_error` or `system_error(Message)`
 
@@ -3585,7 +3585,13 @@ If a test ends with a choice point, a warning message will be output.
 To prevent this, end the test with the cut operator (`, !.`)
 or include the option `nondet`.
 
-## Sudoku
+## Puzzles
+
+### Jug Problem
+
+TODO: Add this!
+
+### Sudoku
 
 Prolog can be used to solve puzzles such as {% aTargetBlank
 "https://en.wikipedia.org/wiki/Sudoku", "Sudoku" %}.
@@ -3682,7 +3688,7 @@ This outputs the following solution:
 8 6 3 7 4 5 2 1 9
 ```
 
-## Einstein's Riddle
+### Einstein's Riddle
 
 Einstein's riddle, aka {% aTargetBlank
 "https://en.wikipedia.org/wiki/Zebra_Puzzle", "Zebra Puzzle" %},
