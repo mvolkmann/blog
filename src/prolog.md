@@ -291,6 +291,12 @@ error messages that are output by Scryer Prolog.
   Often the cause is a rule body that contains a goal which is
   not the last goal and is terminated by a period instead of a comma.
 
+- `error(syntax_error(incomplete_reduction),read_term/3:3).`
+
+  This error can occur when a goal uses a non-builtin operator
+  that has not been loaded.
+  For example, using the `#=` requires loading the `clpz` library.
+
 ### GNU Prolog
 
 <img alt="GNU Prolog logo" style="width: 20%"
@@ -984,7 +990,7 @@ To evaluate goals when a source file is loaded, precede them with `:-`.
 For example:
 
 ```prolog
-:- writeln('Hello, World!').
+:- write('Hello, World!'), nl.
 ```
 
 A source file can contain any number of these.
@@ -1227,7 +1233,7 @@ For example:
 print_elements([]).
 
 print_elements([H|T]) :=
-  writeln(H),
+  write(H), nl,
   print_elements(T).
 
 ?- print_elements([red, green, blue]).
@@ -1271,7 +1277,7 @@ For example:
 double(A, B) :-
   var(A) -> A is B / 2; B is A * 2.
 
-:- maplist(double, [1, 2, 3], L), writeln(L).
+:- maplist(double, [1, 2, 3], L), write(L), nl.
 % output is [2, 4, 6]
 ```
 
@@ -1558,7 +1564,7 @@ age_compare(=, person(_, A1), person(_, A2)) :- A1 = A2.
    People = [P1, P2, P3],
 
    predsort(age_compare, People, Sorted),
-   writeln(Sorted).
+   write(Sorted), nl.
    % output is [person(carl,19),person(ann,35),person(bob,50)]
 ```
 
@@ -1878,7 +1884,7 @@ The following code demonstrates how to iterate over such instances:
 % This prints all the values found in a linked list.
 print_list(nil) :- !.
 print_list(Node) :-
-  writeln(Node.value),
+  write(Node.value), nl,
   print_list(Node.next).
 
 % This relates a node in a linked list to
@@ -1903,7 +1909,7 @@ linked_list(Node, L) :-
   % This creates a string containing joined values from a list.
   atomics_to_string(L, ',', S),
 
-  writeln(S), % alpha,beta,gamma
+  write(S), nl, % alpha,beta,gamma
   halt
 )).
 ```
@@ -1941,6 +1947,8 @@ The following rule uses many of the predicates described above
 to output the type of a given value:
 
 ```prolog
+writeln(X) :- write(X), nl. % predefined in SWI-Prolog
+
 write_type(Thing) :-
   atom(Thing) -> writeln("atom"); % ex. a
   is_list(Thing) -> writeln("list"); % ex. [a]
@@ -1999,7 +2007,7 @@ report_reif(Name) :-
   % an extra variable argument to receive true or false.
   if_(
     is_dog(Name),
-    writeln('dog'),
+    writeln(dog),
     writeln('not a dog')
   ).
 
@@ -2149,14 +2157,17 @@ Additional streams can be opened with the `open` predicate
 and closed with the `close` predicate.
 
 The following predicates write to the `current_output` stream
-or a specified stream: `write`, `writeln`, `format`,
+or a specified stream: `write`, `format`,
 `put_byte`, `put_char`, `put_code`, and `nl` (writes a newline character).
-An atom (which can be produced by a single-quoted string)
-should be passed as the first argument to the `write` predicate.
+
+The first argument to the `write` predicate should be an atom,
+which can be produced by a single-quoted string.
 
 For example:
 
 ```prolog
+writeln(X) :- write(X), nl. % predefined in SWI-Prolog
+
 % The following four lines all produce the same output.
 write('Hello World!'), nl.
 write(current_output, 'Hello World!\n').
@@ -2171,6 +2182,10 @@ instead so the result can be captured and tested.
 
 The `format` predicate takes a format string and a list of values
 to be substituted into the format string.
+The format string should be a list of character atoms,
+which can be produced by a double-quoted string
+when the `double_quotes` compiler flag is set to `chars`.
+
 In Scryer Prolog, include the `format` library which defines
 the `format` predicate and the `format_` DCG non-terminal.
 
@@ -2207,9 +2222,9 @@ For example:
 
 ```prolog
 % This is the equivalent of JavaScript console.log.
-format('MyVariable = ~w~n', [MyVariable]).
+format("MyVariable = ~w~n", [MyVariable]).
 
-format('~w likes ~s.', [mark, 'Prolog']).
+format("~w likes ~s.", [mark, "Prolog"]).
 % outputs "mark likes Prolog."
 ```
 
@@ -2217,9 +2232,9 @@ Rules can write to the current output stream.
 For example:
 
 ````prolog
-greet(Name) :- format('Hello, ~w!', [Name]).
+greet(Name) :- format("Hello, ~w!", [Name]).
 
-greet('Mark')
+greet("Mark")
 % outputs "Hello, Mark!"
 ```
 
@@ -2252,8 +2267,8 @@ For example, the following code sets `S` to a formatted string.
 
 ```prolog
 Language = 'Prolog',
-Assessment = 'fun',
-format(string(S), '~w is ~w.~n', [Language, Assessment]).
+Assessment = fun,
+format(string(S), "~w is ~w.~n", [Language, Assessment]).
 ```
 
 The `format_` DCG non-terminal is similar to `format`.
@@ -2288,21 +2303,21 @@ writeFile(File, Text) :-
   write(Stream, Text), nl,
   close(Stream).
 
-writeFile('demo.txt', 'first line\nsecond line').
+writeFile("demo.txt", "first line\nsecond line").
 ```
 
 To write to a text file in Scryer Prolog:
 
 ```prolog
 :- use_module(library(pio)). % for phrase_to_file
-phrase_to_file('This is\na test.', "output.txt").
+phrase_to_file("This is\na test.", "output.txt").
 ```
 
 To write to a stream in Scryer Prolog (in this case stdout):
 
 ```prolog
 :- use_module(library(pio)). % for phrase_to_stream
-phrase_to_stream('Hello, World!', user_output). % writes to stdout
+phrase_to_stream("Hello, World!", user_output). % writes to stdout
 ```
 
 To create a stream associated with a file, use the `open` predicate,
