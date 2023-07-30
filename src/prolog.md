@@ -3342,6 +3342,88 @@ Term =.. [P, 3, 5], % builds term from list containing functor and arguments
 call(Term). % evaluates term
 ```
 
+## Error Handling
+
+Prolog provides `throw` and `catch` predicates for error handling.
+
+The following builtin error types are provided
+(copied from {% aTargetBlank
+"https://sicstus.sics.se/sicstus/docs/3.12.11/html/sicstus/Exception.html",
+"SICStus Error and Exception Handling" %}):
+
+- `instantiation_error` or `instantiation_error(Goal, ArgNo)`
+
+  This indicates that a goal was called with
+  insufficiently instantiated variables.
+
+- `type_error(TypeName,Culprit)` or `type_error(Goal,ArgNo,TypeName,Culprit)`
+
+  This indicates that a goal was called with the wrong type of arguments.
+  `TypeName` is the expected type and `Culprit` what was actually found.
+
+- `domain_error(Domain,Culprit)` and `domain_error(Goal,ArgNo,Domain,Culprit)`
+
+  This indicates that a goal was called with arguments of the right type,
+  but with illegal values.
+  `Domain` is the expected domain and `Culprit` what was actually found.
+
+- `existence_error(ObjectType,Culprit)` or
+  `existence_error(Goal,ArgNo,ObjectType,Culprit,Reserved)`
+
+  This indicates that something does not exist.
+  If the `unknown` compiler flag is set to `error`,
+  this error is raised with ArgNo set to 0
+  when an undefined predicate is called.
+
+- `permission_error(Operation,ObjectType,Culprit)` or
+  `permission_error(Goal,Operation,ObjectType,Culprit,Reserved)`
+
+  This indicates that the `Operation` is not permitted
+  on `Culprit` of the type `ObjectType`.
+
+- `context_error(ContextType,CommandType)` or
+  `context_error(Goal,ContextType,CommandType)`
+
+  This indicates that the `CommandType` is not permitted in `ContextType`.
+
+- `syntax_error(Message)` or
+  `syntax_error(Goal,Position,Message,Tokens,AfterError)`
+
+  This indicates that a syntax error was found when
+  reading a term with `read/[1,2]` or
+  assembling a number from its characters with `number_chars/2`.
+  In the former case this error is raised only if
+  the `syntax_errors` compiler flag is set to `error`.
+
+- `evaluation_error(ErrorType,Culprit)` or
+  `evaluation_error(Goal,ArgNo,ErrorType,Culprit)`
+
+  This indicates that an incorrect arithmetic expression was evaluated.
+  This only occurs in `iso` execution mode.
+
+- `representation_error(ErrorType)` or
+  `representation_error(Goal,ArgNo,ErrorType)`
+
+  This indicates that a representation error occurs when the program tries to
+  compute some well-defined value that cannot be represented,
+  such as a compound term with arity > 255.
+
+- `consistency_error(Culprit1,Culprit2,Message)` or
+  `consistency_error(Goal,Culprit1,Culprit2,Message)`
+
+  This indicates that a consistency error occurs when
+  two otherwise valid values or operations have been specified
+  that are inconsistent with each other.
+
+- `resource_error(ResourceType)` or `resource_error(Goal,ResourceType)`
+
+  This indicates that a resource error occurs when
+  there are insufficient resources (ex. memory) to complete execution.
+
+- `system_error` or `system_error(Message)`
+
+  This indicates that an error occurred while dealing with the operating system.
+
 ## Help
 
 Documentation of predicates uses **argument mode indicators**
