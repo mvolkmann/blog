@@ -250,9 +250,46 @@ For example:
 :- use_module(library(lists)).
 ```
 
-The Scryer Prolog top level supports pressing the `a` key after
-entering a query to output all possible solutions instead of
-outputting them one at a time as is done when the `;` key is pressed.
+#### Scryer Help
+
+After entering a query, press "h" to get the following help:
+
+```text
+SPACE, "n" or ";": next solution, if any
+RETURN or ".": stop enumeration
+"a": enumerate all solutions
+"f": enumerate the next 5 solutions
+"h": display this help message
+"w": write terms without depth limit
+"p": print terms with depth limit
+```
+
+#### Scryer Common Errors
+
+The following list describes some of the most commonly seen
+error messages that are output by Scryer Prolog.
+
+- `Warning: singleton variables Name at line N of file-name.pl`.
+
+  This means that the variable `Name` appears as an argument of a rule,
+  but it is not used by any goal in the rule body.
+
+- `error(existence_error(source_sink,"file-name.pl"),open/4).`
+
+  This error occurs when Scryer Prolog is started with a file path
+  and the file is not found.
+
+- `error(syntax_error(incomplete_reduction),read_term/3:line-number).`
+
+  This error means that the source file contains a term with invalid syntax.
+  Often the cause is a rule body whose last goal
+  is terminated by a comma instead of a period.
+
+- `error(permission_error(modify,static_procedure,(',')/2),load/1).`
+
+  This error means that the source file contains a term with invalid syntax.
+  Often the cause is a rule body that contains a goal which is
+  not the last goal and is terminated by a period instead of a comma.
 
 ### GNU Prolog
 
@@ -2812,8 +2849,9 @@ current_op(P, F, N).
 ### Booleans
 
 There is no Boolean type in Prolog.
-Often the atoms `true` and `false` are used to represent Boolean values,
-but these do not have a predefined meaning.
+Prolog does have the builtin predicates
+`true` (always succeeds) and `false` (same as `fail` and always fails).
+Often these are used to represent Boolean values.
 
 Rather than writing a rule that sets an argument to `true` or `false`,
 it is preferable to write a rule that either succeeds or fails.
