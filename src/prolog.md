@@ -250,6 +250,13 @@ For example:
 :- use_module(library(lists)).
 ```
 
+There is currently an {% aTargetBlank
+"https://github.com/mthom/scryer-prolog/issues/1775", "issue" %}
+where operators defined in modules that are loaded in `.scryerrc`
+are not available in source files passed to the Scryer interpreter.
+A workaround is to explicitly load the module in the source file
+with `:- use_module(library(library-name)).`
+
 #### Scryer Help
 
 After entering a query, press "h" to get the following help:
