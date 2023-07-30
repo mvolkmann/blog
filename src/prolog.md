@@ -278,8 +278,11 @@ error messages that are output by Scryer Prolog.
 
 - `Warning: singleton variables Name at line N of file-name.pl`.
 
-  This means that the variable `Name` appears as an argument of a rule,
-  but it is not used by any goal in the rule body.
+  This means that the variable `Name` either:
+
+  - is an argument of a rule, but is not used by any rule body goal
+  - appears in a rule body goal, but is not an argument
+    and is not set in a previous goal
 
 - `error(existence_error(source_sink,"file-name.pl"),open/4).`
 
@@ -289,8 +292,9 @@ error messages that are output by Scryer Prolog.
 - `error(syntax_error(incomplete_reduction),read_term/3:line-number).`
 
   This error means that the source file contains a term with invalid syntax.
-  Often the cause is a rule body whose last goal
-  is terminated by a comma instead of a period.
+  Often the cause is
+  a rule body whose last goal is terminated by a comma instead of a period or
+  a rule body goal that is not the last one and is not followed by a comma.
 
 - `error(permission_error(modify,static_procedure,(',')/2),load/1).`
 
@@ -303,6 +307,12 @@ error messages that are output by Scryer Prolog.
   This error can occur when a goal uses a non-builtin operator
   that has not been loaded.
   For example, using the `#=` requires loading the `clpz` library.
+
+- `error(type_error(list,6),must_be/2).`
+
+  This error can occur when a predicate argument is
+  expected to be a list, but is some other type.
+  For example, this happens when the second argument to `format` is not a list.
 
 ### GNU Prolog
 
@@ -3423,6 +3433,55 @@ The following builtin error types are provided
 - `system_error` or `system_error(Message)`
 
   This indicates that an error occurred while dealing with the operating system.
+
+The following code demonstrates writing a rule that can throw
+and writing another rule uses the first rule and catches errors from it.
+
+```prolog
+:- use_module(library(clpz)).
+
+% This throws if N is less than zero.
+double(N, D) :-
+  ( N #>= 0 ->
+    D #= N * 2
+  ; throw(error(
+      domain_error(non_negative_integer, N),
+      double/2
+    ))
+  ).
+
+demo :-
+  catch(
+    % The first argument specifies the goal to try.
+    % Change -3 to 3 to see what happens when no error is thrown.
+    double(-3, D),
+
+    % The second argument specifies the kinds of errors to handle.
+    error(domain_error(Domain, Value), Context),
+
+    % The second argument can also be a variable to catch any kind of error.
+    % Error,
+
+    % The third argument specifies what to do after an error is caught.
+    (
+      format(
+        "~w was passed ~w which is not in the domain ~w.~n",
+        [Context, Value, Domain]
+      ),
+
+      % Use this instead of the previous line
+      % when the second argument is a variable.
+      % format("Error = ~w~n", [Error]),
+
+      % optionally fail this rule when an error is caught.
+      % fail
+
+      % This provides a value for D when an error is caught.
+      D = 0
+    )
+  ),
+  format("D = ~d~n", [D]).
+```
 
 ## Help
 
