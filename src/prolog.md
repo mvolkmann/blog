@@ -321,6 +321,8 @@ is a commercial, high-performance implementation.
 The {% aTargetBlank "https://sicstus.sics.se/eval.html",
 "evaluation version" %} is free of charge.
 
+SICS is an acronym for the Swedish Institute of Computer Science.
+
 It is one of the most conforming and sophisticated Prolog systems.
 No other system is even remotely comparable in terms of robustness.
 
