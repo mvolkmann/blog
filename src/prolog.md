@@ -314,6 +314,16 @@ error messages that are output by Scryer Prolog.
   expected to be a list, but is some other type.
   For example, this happens when the second argument to `format` is not a list.
 
+### SICStus Prolog
+
+{% aTargetBlank "https://sicstus.sics.se", "SICStus Prolog" %}
+is a commercial, high-performance implementation.
+The {% aTargetBlank "https://sicstus.sics.se/eval.html",
+"evaluation version" %} is free of charge.
+
+It is one of the most conforming and sophisticated Prolog systems.
+No other system is even remotely comparable in terms of robustness.
+
 ### GNU Prolog
 
 <img alt="GNU Prolog logo" style="width: 20%"
@@ -476,8 +486,6 @@ To start a Ciao top level from a terminal, enter `ciao`.
 
 ### Other Implementations
 
-- {% aTargetBlank "https://sicstus.sics.se", "SICStus Prolog" %}
-  is a commercial, high-performance implementation.
 - {% aTargetBlank "http://tau-prolog.org", "Tau" %}
   is implemented in JavaScript (95%) and Prolog (5%).
 - {% aTargetBlank "https://github.com/trealla-prolog/trealla", "Trealla" %}
