@@ -318,7 +318,7 @@ error messages that are output by Scryer Prolog.
 
 {% aTargetBlank "https://sicstus.sics.se", "SICStus Prolog" %}
 is a commercial, high-performance implementation.
-The {% aTargetBlank "https://sicstus.sics.se/eval.html",
+A 30-day {% aTargetBlank "https://sicstus.sics.se/eval.html",
 "evaluation version" %} is free of charge.
 
 SICS is an acronym for the Swedish Institute of Computer Science.
