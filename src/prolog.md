@@ -2623,12 +2623,17 @@ There are four supported domains:
 When using Scryer or SICStus Prolog, consider using {% aTargetBlank
 "https://github.com/triska/clpz", "CLP(Z)" %} as an alternative to CLP(FD).
 
-In the domain of integers:
+The atoms `inf` and `sup` represent extreme values in a given domain.
+For example, when the `clpfd` (or `clpz`) library is loaded,
+they represent extreme values of integers.
+They can only be used as range bounds specified with the `..` operator.
 
-- The atom `inf` represents the greatest value
+In the case of the integer domain:
+
+- `inf` represents the greatest value
   that is less than or equal to all integers.
   This can be thought of as negative infinity.
-- The atom `sup` represents the least value
+- `sup` represents the least value
   that is greater than or equal to all integers.
   This can be thought of as positive infinity.
 
