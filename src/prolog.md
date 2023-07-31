@@ -79,6 +79,7 @@ It is partially implemented in Prolog.
 
 Prolog is used in many kinds of applications including:
 
+- explainable AI (as opposed to approaches like neural networks)
 - problem solving
 - parsing
 - natural language processing (NLP)
@@ -1208,7 +1209,8 @@ L = [1, 2, 3], sum_list(L, Sum).
 ```
 
 If the `sum_list` predicate didn't exist,
-it could be implemented with a recursive rule as follows:
+it could be implemented with a recursive rule
+or with `foldl` in the `lists` library as follows:
 
 ```prolog
 sum_list(List, Sum) :-
@@ -1225,6 +1227,13 @@ sum_list(List, Sum) :-
     % Note the use of the "is" keyword to assign the
     % result of an arithmetic expression to the Sum argument.
     Sum is TailSum + Head.
+
+/* Alternate implementation
+:- use_module(library(clpz)).
+:- use_module(library(lists)).
+add(A, B, C) :- C #= A + B.
+sum_list(List, Sum) :- foldl(add, List, 0, Sum).
+*/
 
 ?- sum_list([1, 2, 3], X).
 % output is X = 6.
@@ -1343,6 +1352,28 @@ L = [3, 7, 9], member(7, L).
 
 L = [3, 7, 9], member(4, L).
 % output is false
+```
+
+The `member` predicate can be used find a member of a list
+that is unique from all others. For example:
+
+```prolog
+max_member(List, Max) :-
+  member(Max, List), % Max is a member of List.
+  % It is not true that there is any member of List
+  % whose value is greater than Max.
+  \+ (member(E, List), E > Max).
+```
+
+Compare the `max_member` rule to the following recursive rule
+which provides the same results.
+
+```prolog
+% The second argument to max_ is the maximum value found so far.
+max([H|T], Max) :- max_(T, H, Max).
+max_([], Max, Max).
+max_([H|T], Max0, Max) :- H > Max0, max_(T, H, Max).
+max_([H|T], Max0, Max) :- H =< Max0, max_(T, Max0, Max).
 ```
 
 To test whether all elements in a list are a given value:
@@ -1515,6 +1546,8 @@ L = [3, 9, 2, 4], min_list(L, Min).
 L = [c, a, d, b], min_member(Min, L).
 % output is Min = a.
 
+% max_list is defined in SWI-Prolog.
+% In Scryer Prolog, use list_max defined in the lists library.
 L = [3, 9, 2, 4], max_list(L, Max).
 % output is Max = 9.
 
