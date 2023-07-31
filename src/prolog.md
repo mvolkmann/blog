@@ -2623,6 +2623,15 @@ There are four supported domains:
 When using Scryer or SICStus Prolog, consider using {% aTargetBlank
 "https://github.com/triska/clpz", "CLP(Z)" %} as an alternative to CLP(FD).
 
+In the domain of integers:
+
+- The atom `inf` represents the greatest value
+  that is less than or equal to all integers.
+  This can be thought of as negative infinity.
+- The atom `sup` represents the least value
+  that is greater than or equal to all integers.
+  This can be thought of as positive infinity.
+
 Each of these libraries define new operators.
 Highlights include the following:
 
@@ -2667,8 +2676,21 @@ Highlights include the following:
 
   - `ins`: list of values all all in a range
 
-    For example, this holds:
+    For example, the following holds:
     `Values = [3, 4, 7], Range = 2..7, Values ins Range.`
+
+    The following code finds all combinations of integers >= 0 whose sum is 3.
+
+    ```prolog
+    :- use_module(library(clpz)). % for ins, #=, and label
+    :- use_module(library(format)).
+
+    demo :-
+      [A, B, C] ins 0..sup,
+      A + B + C #= 3,
+      label([A, B, C]),
+      format("~d + ~d + ~d = 3~n", [A, B, C]).
+    ```
 
 - enumeration:
 
