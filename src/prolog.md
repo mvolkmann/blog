@@ -276,7 +276,7 @@ RETURN or ".": stop enumeration
 The following list describes some of the most commonly seen
 error messages that are output by Scryer Prolog.
 
-- `Warning: singleton variables Name at line N of file-name.pl`.
+- <pre>Warning: <b>singleton variable</b> Name at line N of file-name.pl.</pre>
 
   This means that the variable `Name` either:
 
@@ -284,31 +284,31 @@ error messages that are output by Scryer Prolog.
   - appears in a rule body goal, but is not an argument
     and is not set in a previous goal
 
-- `error(existence_error(source_sink,"file-name.pl"),open/4).`
+- <pre>error(<b>existence_error</b>(source_sink,"file-name.pl"),open/4).</pre>
 
   This error occurs when Scryer Prolog is started with a file path
   and the file is not found.
 
-- `error(syntax_error(incomplete_reduction),read_term/3:line-number).`
+- <pre>error(<b>syntax_error</b>(incomplete_reduction),read_term/3:line-number).</pre>
 
   This error means that the source file contains a term with invalid syntax.
   Often the cause is
   a rule body whose last goal is terminated by a comma instead of a period or
   a rule body goal that is not the last one and is not followed by a comma.
 
-- `error(permission_error(modify,static_procedure,(',')/2),load/1).`
+- <pre>error(<b>permission_error</b>(modify,static_procedure,(',')/2),load/1).</pre>
 
   This error means that the source file contains a term with invalid syntax.
   Often the cause is a rule body that contains a goal which is
   not the last goal and is terminated by a period instead of a comma.
 
-- `error(syntax_error(incomplete_reduction),read_term/3:3).`
+- <pre>error(<b>syntax_error</b>(incomplete_reduction),read_term/3:3).</pre>
 
   This error can occur when a goal uses a non-builtin operator
   that has not been loaded.
   For example, using the `#=` requires loading the `clpz` library.
 
-- `error(type_error(list,6),must_be/2).`
+- <pre>error(<b>type_error</b>(list,6),must_be/2).</pre>
 
   This error can occur when a predicate argument is
   expected to be a list, but is some other type.
@@ -317,11 +317,15 @@ error messages that are output by Scryer Prolog.
 ### SICStus Prolog
 
 {% aTargetBlank "https://sicstus.sics.se", "SICStus Prolog" %}
-is a commercial, high-performance implementation.
+is a commercial, high-performance implementation that began in 1986.
 A 30-day {% aTargetBlank "https://sicstus.sics.se/eval.html",
 "evaluation version" %} is free of charge.
 
-SICS is an acronym for the Swedish Institute of Computer Science.
+SICS is an acronym for the Swedish Institute of Computer Science
+where SICStus was created.
+The "tus" suffix is a play on Quintus Prolog (released in 1985)
+which was a fifth generation Prolog implementation.
+Think of "SICS" as having an alternative meaning of "sixth".
 
 It is one of the most conforming and sophisticated Prolog systems.
 No other system is even remotely comparable in terms of robustness.
