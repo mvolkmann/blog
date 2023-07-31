@@ -156,9 +156,11 @@ These take considerable time to learn and master.
 
 There are many implementations of the Prolog programming language.
 The first Prolog implementation was Marseilles Prolog
+(also referred to as Prolog 0 to Prolog IV)
 developed at Marseilles University.
-The second was DEC-10 Prolog developed at Edinburgh University,
-commonly referred to as Edinburgh Prolog.
+The second Prolog implementation was DEC-10 Prolog
+developed at Edinburgh University,
+and commonly referred to as Edinburgh Prolog.
 
 Many current Prolog implementations conform to the {% aTargetBlank
 "https://www.iso.org/standard/21413.html", "ISO Standard for Prolog" %}.
