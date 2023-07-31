@@ -4672,15 +4672,41 @@ then no further queries will be processed. I
 
 ## Creating an HTTP Server
 
-SWI-Prolog supports creating an HTTP server that
-runs Prolog queries and servers HTML pages contain the results.
+Scryer Prolog supports creating an HTTP server that
+that can run Prolog queries and serves HTML pages containing the results.
 For example:
 
 ```prolog
 :- use_module(library(http/http_server)).
 
+echo_handler(_, Response) :-
+  http_status_code(Response, 200),
+  % TODO: Change this to render the results of a grandfather_of query!
+  http_body(Response, text("Welcome to Scryer Prolog!")).
+
+favicon_handler(_, Response) :-
+  http_status_code(Response, 200),
+  http_body(Response, text("")). % not providing an icon
+
+start :-
+  consult(family),
+  http_listen(8081, [
+    % GET /echo
+    get(echo, echo_handler),
+    % GET /favicon.ico
+    get('favicon.ico', favicon_handler)
+  ]).
+```
+
+After loading this file into Scryer Prolog, enter `start.` to start the server.
+
+The following code implements similar functionality in SWI-Prolog:
+
+```prolog
+:- use_module(library(http/http_server)).
+
 :- initialization((
-  consult(exercise1_3),
+  consult(family),
   http_server([port(8081)])
 )).
 
