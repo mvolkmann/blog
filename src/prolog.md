@@ -142,6 +142,9 @@ These take considerable time to learn and master.
 - {% aTargetBlank "https://link.springer.com/book/10.1007/978-3-642-55481-0",
   "Programming in Prolog" %} Fifth edition book by Clocksin and Mellish
 
+- {% aTargetBlank "https://www.softwarepreservation.org/projects/prolog",
+  "Prolog and Logic Programming Historical Sources Archive" %}
+
 - {% aTargetBlank "https://www.scryer.pl", "Scryer Prolog" %}
 
 - {% aTargetBlank "https://www.swi-prolog.org", "SWI-Prolog" %}
