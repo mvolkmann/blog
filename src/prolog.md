@@ -40,12 +40,12 @@ father(mark, jeremy).
      (father(P, C); mother(P, C)).
    ```
 
-1. Ask whether a specific relationship is true ... a query with no variables.
+1. Ask whether a specific relationship is true using a query with no variables.
 
    For example, `?- grandfather(richard, amanda).` outputs `true`.
 
-1. Ask for values for which a relationship is true ...
-   a query with variables.
+1. Ask for values for which a relationship is true
+   using a query with variables.
 
    For example, `?- grandfather(G, amanda).` sets `G` to `richard`
    Sometimes there are multiple values for which a query holds.
@@ -749,15 +749,29 @@ is to add more versions of the rule.
 
 ## Queries
 
-Queries test whether a term is true or
-they find variable values for which the term is true.
+To ask a question in a top level, enter a query.
+after the `?-` operator.
+Top levels typical provide this operator as a prompt.
 
-Queries are written after the characters `?-`.
+This is also referred to as "posting" a query.
+
+The main point of Prolog is to find solutions to queries
+or determine that there are no solutions.
+
+A query ask whether or how a goal can be satisfied, aka hold.
+When a query has no uninstantiated variables,
+the result is `true` or `false`.
+When uninstantiated variables are present,
+the result is a set of solutions.
+Each solution is expressed as a conjunction of variable values
+and the set of solutions is expressed as a disjunction.
+Conjunction (and'ed expressions) and disjunction (or'ed expressions)
+are described below.
+This makes the result a valid Prolog term.
 
 The output from a query is a new, equivalent query
-that is often a disjunction (containing semicolons)
 that describes the possible solutions.
-Solutions assign values to all variables in a query,
+Solutions assign values to all variables in the query,
 which is referred to as making them "ground".
 
 For example:
@@ -784,6 +798,13 @@ The query `likes(mark, X)` will find
 "tacos", "books", and "running" that in that order.
 When a query has multiple matches, as in this example,
 the interpreter will wait for further input.
+
+The query `likes(X, Y)` will find all known combinations
+of people and things that they like.
+When all arguments in a query are uninstantiated variables,
+it is referred to as a "most general query".
+It is recommended to write nearly all rules
+in a way that supports the most general query.
 
 To search for the next match, press the semicolon key.
 SWI-Prolog also supports pressing the n, r, space, or tab keys to do this.
