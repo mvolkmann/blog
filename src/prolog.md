@@ -586,7 +586,8 @@ All of these are terminated by a period.
 
 ### Facts
 
-A fact states that some relationship is always true.
+A fact states that some relationship holds (always true).
+A fact cannot state relationships that do not hold.
 
 A fact is written as a functor (atom) followed by
 an argument list that is surrounded by parentheses.
@@ -596,6 +597,7 @@ For example:
 
 ```prolog
 runner(mark). % says mark is a runner
+% We cannot use a rule to state that tami is not a runner.
 likes(mark, prolog) % says mark likes prolog
 ```
 
@@ -759,20 +761,34 @@ The main point of Prolog is to find solutions to queries
 or determine that there are no solutions.
 
 A query ask whether or how a goal can be satisfied, aka hold.
+
 When a query has no uninstantiated variables,
 the result is `true` or `false`.
+
 When uninstantiated variables are present,
 the result is a set of solutions.
-Each solution is expressed as a conjunction of variable values
+Each solution is expressed as a conjunction of variable values or constraints
 and the set of solutions is expressed as a disjunction.
 Conjunction (and'ed expressions) and disjunction (or'ed expressions)
 are described below.
 This makes the result a valid Prolog term.
 
 The output from a query is a new, equivalent query
-that describes the possible solutions.
+that describes the possible known solutions.
 Solutions assign values to all variables in the query,
 which is referred to as making them "ground".
+We say that only "known" solutions are found because
+it is possible that other solutions exist but cannot be found
+because they are not described by the provided facts and rules.
+
+In summary, a query always has one of these four kinds of results:
+
+- `true` or `false`
+- answer substitution expressed as sets of
+  variable values for which the query holds
+- a conditional solution (aka residual goal)
+  expressed as constraints on variable values
+- an exception describing why the query failed
 
 For example:
 
