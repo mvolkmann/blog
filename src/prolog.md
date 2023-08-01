@@ -163,6 +163,29 @@ These take considerable time to learn and master.
 
 - {% aTargetBlank "https://en.wikipedia.org/wiki/Prolog", "Wikipedia" %}
 
+## Pure Monotonic Core
+
+The following is from Dr. Markus Triska:
+
+> To benefit most from Prolog, you must keep to its **pure monotonic core**.
+> Side-effects and extra-logical predicates are well outside this core.
+> Try to think in terms of relations and state what you want to describe,
+> using only the predicates from the pure core.
+> A small number of predicates suffices to express
+> a great number of programs in this way.
+
+> As a guidance, the enumeration of libraries at
+> https://github.com/mthom/scryer-prolog/ is ordered roughly
+> in proportion of their expected need when keeping to the pure monotonic core,
+> with `lists`, `dcgs`, `dif`, `reif` and `clpz` at the start.
+> These 5 libraries broadly suffice for a good 1-year course about Prolog.
+> The library `format` is down further in this list, and
+> the documentation makes it clear that `format_//2` should be used to
+> declaratively describe the output instead of only emitting it via side-effects.
+> The predicates from the `iso_ext` library such as `bb_get/2`, etc.
+> are even further down in this list and
+> may be interesting for internal use by authors of constraint solvers.
+
 ## Implementations
 
 There are many implementations of the Prolog programming language.
