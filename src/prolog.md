@@ -3048,10 +3048,8 @@ current_op(P, F, N).
 
 ### Booleans
 
-There is no Boolean type in Prolog.
-Prolog does have the builtin predicates
+Prolog represents Boolean values with the builtin predicates
 `true` (always succeeds) and `false` (same as `fail` and always fails).
-Often these are used to represent Boolean values.
 
 Rather than writing a rule that sets an argument to `true` or `false`,
 it is preferable to write a rule that either succeeds or fails.
