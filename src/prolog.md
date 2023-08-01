@@ -2732,34 +2732,39 @@ Highlights include the following:
     For example, the following holds:
     `Values = [3, 4, 7], Range = 2..7, Values ins Range.`
 
-    The following code finds all combinations of integers >= 0 whose sum is 3.
-    To try it, enter the query `demo(T).`
+    The rule `demo` defined below code relates
+    three integers >= 0 whose sum is 3.
 
     ```prolog
     :- use_module(library(clpz)). % for ins, #=, and label
 
     demo(A + B + C = 3) :-
-      % Find all combinations of integers >= 0 whose sum is 3.
+      % Relate three integers >= 0 whose sum is 3.
       Vs = [A, B, C],
       Vs ins 0..sup,
       A + B + C #= 3,
       label(Vs).
     ```
 
-    The output will be:
+    To test this, enter queries like the following:
 
-    ```prolog
-       T = (0+0+3=3)
-    ;  T = (0+1+2=3)
-    ;  T = (0+2+1=3)
-    ;  T = (0+3+0=3)
-    ;  T = (1+0+2=3)
-    ;  T = (1+1+1=3)
-    ;  T = (1+2+0=3)
-    ;  T = (2+0+1=3)
-    ;  T = (2+1+0=3)
-    ;  T = (3+0+0=3).
-    ```
+    - `demo(1 + 0 + 2 = 3).` - result is `true`.
+    - `demo(1 + 2 + 3 = 3).` - result is `false`.
+    - `demo(1 + 0 + X = 3).` - result is `X = 2.`
+    - `demo(T).` - result is the following:
+
+      ```prolog
+        T = (0+0+3=3)
+      ;  T = (0+1+2=3)
+      ;  T = (0+2+1=3)
+      ;  T = (0+3+0=3)
+      ;  T = (1+0+2=3)
+      ;  T = (1+1+1=3)
+      ;  T = (1+2+0=3)
+      ;  T = (2+0+1=3)
+      ;  T = (2+1+0=3)
+      ;  T = (3+0+0=3).
+      ```
 
 - enumeration:
 
