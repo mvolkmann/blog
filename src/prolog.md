@@ -82,12 +82,20 @@ Prolog is used in many kinds of applications including:
 - explainable AI (as opposed to approaches like neural networks)
 - problem solving
 - parsing
+
+  This includes parsing programming language source code.
+
 - natural language processing (NLP)
+
+  This includes automatic translation from one human language to another.
+  It also includes translating human language to direct a computer
+  and possibly generating a human language response (ex. Alexa and Siri).
+
 - specification language
 
   For example, the Java Virtual Machine (JVM) specification uses Prolog.
 
-- rule-based systems
+- rule-based systems (ex. Eliza)
 - automation systems
 - robot planning
 - natural language understanding
@@ -2725,16 +2733,32 @@ Highlights include the following:
     `Values = [3, 4, 7], Range = 2..7, Values ins Range.`
 
     The following code finds all combinations of integers >= 0 whose sum is 3.
+    To try it, enter the query `demo(T).`
 
     ```prolog
     :- use_module(library(clpz)). % for ins, #=, and label
-    :- use_module(library(format)).
 
-    demo :-
-      [A, B, C] ins 0..sup,
+    demo(A + B + C = 3) :-
+      % Find all combinations of integers >= 0 whose sum is 3.
+      Vs = [A, B, C],
+      Vs ins 0..sup,
       A + B + C #= 3,
-      label([A, B, C]),
-      format("~d + ~d + ~d = 3~n", [A, B, C]).
+      label(Vs).
+    ```
+
+    The output will be:
+
+    ```prolog
+       T = (0+0+3=3)
+    ;  T = (0+1+2=3)
+    ;  T = (0+2+1=3)
+    ;  T = (0+3+0=3)
+    ;  T = (1+0+2=3)
+    ;  T = (1+1+1=3)
+    ;  T = (1+2+0=3)
+    ;  T = (2+0+1=3)
+    ;  T = (2+1+0=3)
+    ;  T = (3+0+0=3).
     ```
 
 - enumeration:
