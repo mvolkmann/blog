@@ -259,7 +259,7 @@ cargo build --release
 ```
 
 This creates the executable file `target/release/scryer-prolog`.
-Define an alias like `scryerp` to make this easier to run.
+Define an alias like `scryerp` or just `scry` to make this easier to run.
 
 To update your version of Scryer Prolog:
 
@@ -267,7 +267,7 @@ To update your version of Scryer Prolog:
 1. Enter `git pull`
 1. Enter `cargo build --release`
 
-To start a Scryer Prolog top level from a terminal, enter `scryerp`.
+To start a Scryer Prolog top level from a terminal, enter `scry`.
 
 By default, Scryer Prolog only provides built-in predicates
 that are defined in the ISO standard.
@@ -780,7 +780,7 @@ A common way to fix a rule that is too general is to add more goals.
 A common way to fix a rule that is too specific
 is to add more versions of the rule.
 
-## Queries
+### Queries
 
 To ask a question in a top level, enter a query.
 after the `?-` operator.
@@ -1110,7 +1110,7 @@ use `initialization`. For example:
 ```
 
 Another way to run a goal on load is to use the `-g` option.
-For example, `scryerp -g run,halt my_file.pl`
+For example, `scry -g run,halt my_file.pl`
 loads a Prolog source file, executes its `run` goal,
 and executes `halt` to exit from top level.
 Omit the `halt` goal to remain in the top level
@@ -1354,30 +1354,6 @@ print_elements([H|T]) :=
 % red
 % green
 % blue
-```
-
-The `subtract` predicate can be used to create a list
-that is derived by removing a given element from another list.
-
-The following code shows how this can be implemented.
-It serves as one more example of using the `|` operator.
-
-```prolog
-% Removing anything from an empty list matches an empty list.
-list_without([], _, []).
-
-% H is the head of the 1st argument list and T is its tail.
-% E is the element to removed.
-% L is a list containing all elements of the first list
-% with all occurrences of E removed.
-list_without([H|T], E, L) :-
-  % If H matches E ...
-  H == E ->
-    % Then the result list L is the same as T with E removed.
-    list_without(T, E, L);
-    % Otherwise the result list L is a new list with head H
-    % and tail is the same as T with E removed.
-    list_without(T, E, L2), L = [H|L2].
 ```
 
 The `maplist` predicate can be used to create a list
@@ -2557,6 +2533,30 @@ but they begin with an uppercase letter or an underscore.
 An underscore by itself represents an anonymous variable.
 These can be used as arguments to predicates
 when the value of an argument does not matter.
+
+Predicate names should describe a relationship rather than an imperative action.
+It is also recommended that they indicate the kinds of arguments they take
+and the order of the arguments.
+For example, using the name `sort` for a predicate that can
+generate a sorted list from an unsorted one
+is imperative and does not describe its arguments.
+A better name is `list_ascending` because:
+
+1. It indicates that there are two arguments.
+1. It indicates the order of the arguments which is
+   the unsorted list followed by the sorted list.
+1. It does not favor a specific direction and can be used to
+   generate a sorted list or determine whether a list is already sorted.
+
+The following built-in predicates are examples of good names:
+`atom_chars`, `atom_codes`, `atom_length`, `atom_prefix`,
+`number_chars`, and `number_codes`.
+
+Only predicates with side effects such as producing output
+should have imperative names.
+The following built-in predicates are examples of this:
+`asserta`, `assertz`, `retract`, `retractall`,
+`write`, `write_canonical`, and `write_term`.
 
 ## Operators
 
