@@ -175,8 +175,10 @@ The following is from Dr. Markus Triska:
 > a great number of programs in this way.
 
 > As a guidance, the enumeration of libraries at
-> https://github.com/mthom/scryer-prolog/ is ordered roughly
-> in proportion of their expected need when keeping to the pure monotonic core,
+> <a href="https://github.com/mthom/scryer-prolog/#modules"
+> target="_blank">Scryer Prolog Modules</a>
+> is ordered roughly in proportion of their expected need
+> when keeping to the pure monotonic core,
 > with `lists`, `dcgs`, `dif`, `reif` and `clpz` at the start.
 > These 5 libraries broadly suffice for a good 1-year course about Prolog.
 > The library `format` is down further in this list, and
