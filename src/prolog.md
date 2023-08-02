@@ -3742,6 +3742,8 @@ For example, `listing(append).` shows the implementation of this functor name.
 
 ## Debugging
 
+### trace Predicate
+
 To see all the steps used to evaluate a predicate,
 turn on trace mode by entering `trace.`
 
@@ -3749,6 +3751,67 @@ Enter a query and press the return key after
 viewing the result of each step in the evaluation.
 
 When finished debugging, enter `notrace.` to turn this mode off.
+
+### debug Library
+
+The `debug` library defines three prefix operators
+that can be useful for debugging.
+
+The `*` operator generalizes away a goal,
+which essentially acts as though the goal is not present.
+This can be placed before any goal,
+even the last one which is followed by a period.
+This is an advantage over commenting out a goal.
+
+The `$` operator adds tracing output to a goal.
+It will write `call:{namespace}:{goal-name}.`
+to stdout before evaluating the goal and write
+`exit:{namespace}:{goal-name}.` to stdout after evaluating it.
+For user defined goals, the namespace is `user`.
+
+The `$-` operator will catch and portray any errors thrown
+when the goal is evaluated.
+If no errors are thrown, it has no effect.
+The output will be
+`exception:{normal-error-message}:{namespace}:{goal-name}({arguments}).`
+The main benefit of using this is that it outputs the name of the goal
+that triggered the error and the arguments that were provided.
+
+The following code demonstrates using each of the `debug` library operators:
+
+```prolog
+:- use_module(library(debug)).
+
+writeln(X) :- write(X), nl.
+
+anger(Level) :-
+  ( Level < 10 ->
+    writeln(red)
+  ; throw(error(
+      domain_error(too_angry, Level),
+      anger/1
+    ))
+  ).
+
+envy :- writeln(green).
+
+demo :-
+  $- anger(9),
+  $ envy,
+  * writeln(blue).
+```
+
+The output of the `demo` rule is:
+
+```text
+red
+call:user:envy.
+green
+exit:user:envy.
+   true.
+```
+
+### time Predicate
 
 To determine how long it takes to evaluate a query,
 use the `time` predicate from the `time` library.
