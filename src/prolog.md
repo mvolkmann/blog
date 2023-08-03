@@ -1123,6 +1123,214 @@ For example, `a(b, c(d, e), f)` can be represented as the following tree:
     - e
   - f
 
+## Primitive Types
+
+### Booleans
+
+Prolog represents Boolean values with the builtin predicates
+`true` (always succeeds) and `false` (same as `fail` and always fails).
+
+Rather than writing a rule that sets an argument to `true` or `false`,
+it is preferable to write a rule that either succeeds or fails.
+
+### Numbers
+
+The following rules determine whether a given number is even or odd:
+
+```prolog
+even(N) :- mod(N, 2) =:= 0.
+odd(N) :- mod(N, 2) =:= 1.
+```
+
+TODO: Add more detail here!
+
+### Strings
+
+Prolog can represent strings in three ways:
+a list of character atoms, a list of ASCII code integers, or an atom.
+
+Literal strings can be delimited with
+double quotes or single quotes.
+SWI-Prolog adds the use of backticks which are non-standard.
+
+To escape a quote inside a literal string, precede it with a backslash.
+
+When single quotes are used, the value becomes an atom.
+A single quoted string containing no special characters such as spaces
+is equivalent to an atom with the same characters.
+For example, `'demo' == demo` is true.
+
+In SWI-Prolog, when backticks are used,
+the value becomes a list of ASCII code integers.
+
+When double quotes are used, the setting of
+the `double_quotes` flag determines what the value becomes.
+
+| `double_quotes` | `"abc"`` becomes                           |
+| --------------- | ------------------------------------------ |
+| `atom`          | atom `abc`                                 |
+| `chars`         | list of character atoms `[a, b, c]`        |
+| `codes`         | list of ASCII code integers `[97, 98, 99]` |
+
+SWI-Prolog also supports the `double_quotes` value `string`
+which causes double-quoted strings to become
+a string type that is specific to SWI-Prolog.
+
+The benefits of representing strings as lists of characters are that
+they can be output in a human-readable way,
+list predicates can be used to operate on them, and
+they can be partially instantiated with variable characters.
+
+The default setting of `double_quotes` is
+`string` in SWI-Prolog and `chars` in Scryer Prolog.
+It is recommended to change this setting to `chars` in all implementations.
+
+For example:
+
+```prolog
+?- set_prolog_flag(double_quotes, chars).
+L = "abc".  % becomes a list of character atoms
+% L = [a, b, c].
+```
+
+When the `double_quotes` flag is set to `chars`, the following are equivalent:
+
+- `""` and `[]`
+- `"a"` and `[a]`
+- `"abc"` and `[a, b, c]`
+
+{% aTargetBlank "https://www.swi-prolog.org/pldoc/man?section=string",
+"The string type and its double quoted syntax" %} section 5.2.3
+discusses the pros and cons of the string options.
+
+Since a double-quoted string becomes a list of character atoms,
+its length can be obtained using the `length` predicate.
+For example:
+
+```prolog
+?- length("Mark", L).
+L = 4.
+```
+
+Since a single-quoted string becomes an atom,
+its length can be obtained using the `atom_length` predicate.
+For example:
+
+```prolog
+?- atom_length('Mark', X).
+X = 4.
+```
+
+To test whether a string contains a given substring,
+which could be a single character, use the `sub_string` predicate.
+For example:
+
+```prolog
+% 1st argument is the string to search.
+% 2nd argument is the number of characters before the substring.
+% 3rd argument is the number of characters in the substring.
+% 4th argument is the number of characters after the substring.
+% 5th argument is the substring to find.
+% It is not necessary to capture arguments 2-4.
+once(sub_string(S, _, _, _, C)) ->
+  writeln('found');
+  writeln('not found').
+```
+
+To concatenate two strings, use the `string_concat` predicate.
+For example:
+
+```prolog
+string_concat('foo', 'bar', S).
+% sets S to "foobar"
+```
+
+To create a list of ASCII values from a literal string,
+use the `name` predicate.
+For example:
+
+```prolog
+?- name('ABC', X).
+X = [65, 66, 67].
+```
+
+To create a string from a list of ASCII values,
+also use the `name` predicate.
+For example:
+
+```prolog
+?- name(X, [65, 66, 67]).
+X = 'ABC'.
+```
+
+To append two strings, convert them to lists of ASCII codes,
+append those lists, and convert the result back to a string.
+For example:
+
+```prolog
+appendStrings(S1, S2, SR) :-
+  name(S1, L1),
+  name(S2, L2),
+  append(L1, L2, LR),
+  name(SR, LR).
+
+appendStrings('first ', 'second', X).
+X = 'first second'
+```
+
+To append multiple atomic values, including strings,
+use the `atomics_to_string` predicate. For example:
+
+```prolog
+atomics_to_string(["foo", 3, 'bar'], S).
+% output is "foo3bar"
+```
+
+The above approach will not work with double-quoted strings
+if the `double_quotes` flag is set to `chars` because in that case
+double-quotes strings will be treated as lists of atoms
+and lists are not atomic.
+
+To join multiple atomic values with a delimiter between each,
+use the 3-argument version of `atomics_to_string`. For example:
+
+```prolog
+atomics_to_string(["foo", 3, 'bar'], '|', S).
+% output is "foo|3|bar"
+```
+
+To get a single character from a string, convert it to a list of ASCII codes,
+and use the `nth0` predicate.
+For example:
+
+```prolog
+?- name('Mark', L), nth0(2, L, C), put(C). % 114 (ASCII code for 'r')
+```
+
+To get the tail of a string when the `double_quotes` flag is set to `chars`,
+use the `append` predicate. For example:
+
+```prolog
+append("foo", T, "foobarbaz")
+% sets T to "barbaz"
+```
+
+To split a string on a delimiter such as a space:
+
+```prolog
+split(S, Delimiter, Prefix, Suffix) :-
+  once(append(Prefix, [Delimiter|Suffix], S)).
+
+% Example: filename_extension("foo.bar", F, E).
+% gives F = "foo", E = "bar"
+filename_extension(S, Filename, Extension) :-
+  split(S, ., Filename, Extension).
+
+% In SWI-Prolog the split_string predicate can be used.
+split_string('foo,bar,baz', ',', '', L).
+% sets L to ["foo", "bar", "baz"]
+```
+
 ## Data Structures
 
 ISO Prolog supports three data structures, structures, lists, and pairs.
@@ -3077,214 +3285,6 @@ current_op(P, fx, N).
 
 % Get all operators.
 current_op(P, F, N).
-```
-
-## Primitive Types
-
-### Booleans
-
-Prolog represents Boolean values with the builtin predicates
-`true` (always succeeds) and `false` (same as `fail` and always fails).
-
-Rather than writing a rule that sets an argument to `true` or `false`,
-it is preferable to write a rule that either succeeds or fails.
-
-### Numbers
-
-The following rules determine whether a given number is even or odd:
-
-```prolog
-even(N) :- mod(N, 2) =:= 0.
-odd(N) :- mod(N, 2) =:= 1.
-```
-
-TODO: Add more detail here!
-
-### Strings
-
-Prolog can represent strings in three ways:
-a list of character atoms, a list of ASCII code integers, or an atom.
-
-Literal strings can be delimited with
-double quotes or single quotes.
-SWI-Prolog adds the use of backticks which are non-standard.
-
-To escape a quote inside a literal string, precede it with a backslash.
-
-When single quotes are used, the value becomes an atom.
-A single quoted string containing no special characters such as spaces
-is equivalent to an atom with the same characters.
-For example, `'demo' == demo` is true.
-
-In SWI-Prolog, when backticks are used,
-the value becomes a list of ASCII code integers.
-
-When double quotes are used, the setting of
-the `double_quotes` flag determines what the value becomes.
-
-| `double_quotes` | `"abc"`` becomes                           |
-| --------------- | ------------------------------------------ |
-| `atom`          | atom `abc`                                 |
-| `chars`         | list of character atoms `[a, b, c]`        |
-| `codes`         | list of ASCII code integers `[97, 98, 99]` |
-
-SWI-Prolog also supports the `double_quotes` value `string`
-which causes double-quoted strings to become
-a string type that is specific to SWI-Prolog.
-
-The benefits of representing strings as lists of characters are that
-they can be output in a human-readable way,
-list predicates can be used to operate on them, and
-they can be partially instantiated with variable characters.
-
-The default setting of `double_quotes` is
-`string` in SWI-Prolog and `chars` in Scryer Prolog.
-It is recommended to change this setting to `chars` in all implementations.
-
-For example:
-
-```prolog
-?- set_prolog_flag(double_quotes, chars).
-L = "abc".  % becomes a list of character atoms
-% L = [a, b, c].
-```
-
-When the `double_quotes` flag is set to `chars`, the following are equivalent:
-
-- `""` and `[]`
-- `"a"` and `[a]`
-- `"abc"` and `[a, b, c]`
-
-{% aTargetBlank "https://www.swi-prolog.org/pldoc/man?section=string",
-"The string type and its double quoted syntax" %} section 5.2.3
-discusses the pros and cons of the string options.
-
-Since a double-quoted string becomes a list of character atoms,
-its length can be obtained using the `length` predicate.
-For example:
-
-```prolog
-?- length("Mark", L).
-L = 4.
-```
-
-Since a single-quoted string becomes an atom,
-its length can be obtained using the `atom_length` predicate.
-For example:
-
-```prolog
-?- atom_length('Mark', X).
-X = 4.
-```
-
-To test whether a string contains a given substring,
-which could be a single character, use the `sub_string` predicate.
-For example:
-
-```prolog
-% 1st argument is the string to search.
-% 2nd argument is the number of characters before the substring.
-% 3rd argument is the number of characters in the substring.
-% 4th argument is the number of characters after the substring.
-% 5th argument is the substring to find.
-% It is not necessary to capture arguments 2-4.
-once(sub_string(S, _, _, _, C)) ->
-  writeln('found');
-  writeln('not found').
-```
-
-To concatenate two strings, use the `string_concat` predicate.
-For example:
-
-```prolog
-string_concat('foo', 'bar', S).
-% sets S to "foobar"
-```
-
-To create a list of ASCII values from a literal string,
-use the `name` predicate.
-For example:
-
-```prolog
-?- name('ABC', X).
-X = [65, 66, 67].
-```
-
-To create a string from a list of ASCII values,
-also use the `name` predicate.
-For example:
-
-```prolog
-?- name(X, [65, 66, 67]).
-X = 'ABC'.
-```
-
-To append two strings, convert them to lists of ASCII codes,
-append those lists, and convert the result back to a string.
-For example:
-
-```prolog
-appendStrings(S1, S2, SR) :-
-  name(S1, L1),
-  name(S2, L2),
-  append(L1, L2, LR),
-  name(SR, LR).
-
-appendStrings('first ', 'second', X).
-X = 'first second'
-```
-
-To append multiple atomic values, including strings,
-use the `atomics_to_string` predicate. For example:
-
-```prolog
-atomics_to_string(["foo", 3, 'bar'], S).
-% output is "foo3bar"
-```
-
-The above approach will not work with double-quoted strings
-if the `double_quotes` flag is set to `chars` because in that case
-double-quotes strings will be treated as lists of atoms
-and lists are not atomic.
-
-To join multiple atomic values with a delimiter between each,
-use the 3-argument version of `atomics_to_string`. For example:
-
-```prolog
-atomics_to_string(["foo", 3, 'bar'], '|', S).
-% output is "foo|3|bar"
-```
-
-To get a single character from a string, convert it to a list of ASCII codes,
-and use the `nth0` predicate.
-For example:
-
-```prolog
-?- name('Mark', L), nth0(2, L, C), put(C). % 114 (ASCII code for 'r')
-```
-
-To get the tail of a string when the `double_quotes` flag is set to `chars`,
-use the `append` predicate. For example:
-
-```prolog
-append("foo", T, "foobarbaz")
-% sets T to "barbaz"
-```
-
-To split a string on a delimiter such as a space:
-
-```prolog
-split(S, Delimiter, Prefix, Suffix) :-
-  once(append(Prefix, [Delimiter|Suffix], S)).
-
-% Example: filename_extension("foo.bar", F, E).
-% gives F = "foo", E = "bar"
-filename_extension(S, Filename, Extension) :-
-  split(S, ., Filename, Extension).
-
-% In SWI-Prolog the split_string predicate can be used.
-split_string('foo,bar,baz', ',', '', L).
-% sets L to ["foo", "bar", "baz"]
 ```
 
 ## Arithmetic Functions
