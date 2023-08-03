@@ -1185,6 +1185,30 @@ main :-
 :- main.
 ```
 
+The parts of a structure can be obtained in multiple ways.
+For example:
+
+```prolog
+:- use_module(library(format)).
+
+report(Structure) :-
+  functor(Structure, Name, Arity),
+  format("Name = ~w~n", [Name]),
+  format("Arity = ~w~n", [Arity]),
+  arg(1, Structure, Arg),
+  format("First Arg = ~w~n", [Arg]),
+  Structure =.. List, % uses the "univ" operator
+  format("List = ~w~n", [List]).
+
+report(a(b, c)).
+% The output is
+% Name = a
+% Arity = 2
+% First Arg = b
+% List = [a,b,c]
+%   true.
+```
+
 ### Lists
 
 Lists are commonly used to hold collections of elements when
