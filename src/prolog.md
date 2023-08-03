@@ -67,6 +67,9 @@ is called the knowledge base (or database).
 Prolog is highly optimized to handle searching large knowledge bases.
 
 Prolog is a homoiconic language, which means its code can be treated as data.
+Everything in Prolog is some kind of "term".
+A program is a list of clauses.
+A list and a clause can both be represented as terms.
 
 Prolog has many uses including artificial intelligence,
 abstract problem solving, symbolic equation solving, and more.
