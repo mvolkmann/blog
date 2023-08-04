@@ -306,12 +306,11 @@ error messages that are output by Scryer Prolog.
   This error occurs when Scryer Prolog is started with a file path
   and the file is not found.
 
-- <pre>error(<b>syntax_error</b>(incomplete_reduction),read_term/3:line-number).</pre>
+- <pre>error(permission_error(access,private_procedure,module_does_not_contain_claimed_export),load/1).</pre>
 
-  This error means that the source file contains a term with invalid syntax.
-  Often the cause is
-  a rule body whose last goal is terminated by a comma instead of a period or
-  a rule body goal that is not the last one and is not followed by a comma.
+  This error means that a module is being defined and the list of exports
+  contains a functor that is not defined in the file.
+  Sadly, the error does not indicate which function is undefined.
 
 - <pre>error(<b>permission_error</b>(modify,static_procedure,(',')/2),load/1).</pre>
 
@@ -319,9 +318,14 @@ error messages that are output by Scryer Prolog.
   Often the cause is a rule body that contains a goal which is
   not the last goal and is terminated by a period instead of a comma.
 
-- <pre>error(<b>syntax_error</b>(incomplete_reduction),read_term/3:3).</pre>
+- <pre>error(<b>syntax_error</b>(incomplete_reduction),read_term/3:line-number).</pre>
 
-  This error can occur when a goal uses a non-builtin operator
+  This error means that the source file contains a term with invalid syntax.
+  Often the cause is
+  a rule body whose last goal is terminated by a comma instead of a period or
+  a rule body goal that is not the last one and is not followed by a comma.
+
+  This error can also occur when a goal uses a non-builtin operator
   that has not been loaded.
   For example, using the `#=` requires loading the `clpz` library.
 
