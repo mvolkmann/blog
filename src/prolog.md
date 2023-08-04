@@ -1486,43 +1486,7 @@ For example:
 [A, B, C | T] % will be a list of at least three elements if T is a list
 ```
 
-To get the sum of numbers in a list:
-
-```prolog
-L = [1, 2, 3], sum_list(L, Sum).
-% output is Sum = 6.
-```
-
-If the `sum_list` predicate didn't exist,
-it could be implemented with a recursive rule
-or with `foldl` in the `lists` library as follows:
-
-```prolog
-sum_list(List, Sum) :-
-  % If the list is empty then the sum is zero.
-  List = [] -> Sum = 0;
-
-  % Otherwise ...
-  List =
-    % Get the first number and a list of the remaining numbers.
-    [Head|Tail],
-    % Compute the sum of the remaining numbers.
-    sum_list(Tail, TailSum),
-    % The result is the first number plus that sum.
-    % Note the use of the "is" keyword to assign the
-    % result of an arithmetic expression to the Sum argument.
-    Sum is TailSum + Head.
-
-/* Alternate implementation
-:- use_module(library(clpz)).
-:- use_module(library(lists)).
-add(A, B, C) :- C #= A + B.
-sum_list(List, Sum) :- foldl(add, List, 0, Sum).
-*/
-
-?- sum_list([1, 2, 3], X).
-% output is X = 6.
-```
+#### Anonymous Variables
 
 Anonymous variables (`_`) can be used to destructure values from a list.
 For example, the following gets the first and third values.
@@ -1536,6 +1500,74 @@ which includes all values after the third.
 % V1 = 9,
 % V3 = 7.
 ```
+
+#### append
+
+The built-in predicate `append` relates two lists to a list
+that is the result of appending the first two lists.
+
+If `append` were not built-in, it could be implemented as follows:
+
+```prolog
+% Appending an empty list to any list gives the second list.
+append([], L, L).
+
+% Appending two lists is the same as appending
+% the head of the first list (H) to the result of appending
+% the tail of the first list (L1) to the second list (L2).
+append([H|L1], L2, [H|L3]) :- append(L1, L2, L3).
+```
+
+Here are several examples of how `append` can be used:
+
+```prolog
+% Is the result of appending two lists a given result list?
+?- append([1, 2], [3, 4], [1, 2, 3, 4]).
+true.
+
+% What is the result of appending two lists?
+?- append([1, 2], [3, 4], X).
+X = [1, 2, 3, 4].
+
+% What list must be appended to a given list to obtain a given result?
+?- append([1, 2], X, [1, 2, 3, 4]).
+X = [3, 4].
+
+% What list must be prepended to a given list to obtain a given result?
+?- append(X, [3, 4], [1, 2, 3, 4]).
+X = [1, 2]
+
+% What lists can be appended to obtain a given result?
+?- append(X, Y, [1, 2, 3, 4]).
+X = [],
+Y = [1, 2, 3, 4] ;
+X = [1],
+Y = [2, 3, 4] ;
+X = [1, 2],
+Y = [3, 4] ;
+X = [1, 2, 3],
+Y = [4] ;
+X = [1, 2, 3, 4],
+Y = [] ;
+false.
+```
+
+To create a new list that is the result of appending multiple lists:
+
+```prolog
+L1 = [a, b], L2 = [c, d, e], L3 = [f], append([L1, L2, L3], L4).
+% output is L4 = [a, b, c, d, e, f].
+```
+
+To create a new list that is the result of adding a value
+to the end of an existing list:
+
+```prolog
+L1 = [a, b, c], append(L1, [d], L2).
+% output is L2 = [a, b, c, d].
+```
+
+#### Bar Operator
 
 The `|` operator can be used to get the head and tail of a list.
 For example:
@@ -1568,6 +1600,62 @@ print_elements([H|T]) :=
 % blue
 ```
 
+TODO: VERIFY THAT ALL THE DESCRIBED LIST PREDICATES ARE ISO.
+
+#### copy_term
+
+To create a copy of a list, or any term, including nested lists:
+
+```prolog
+copy_term(ListIn, ListOut)
+```
+
+To create a new list that results from adding a value
+to the beginning of an existing list:
+
+```prolog
+L1 = [b, c, d], L2 = [a | L1].
+% output is L2 = [a, b, c, d].
+```
+
+#### include
+
+To create a new list that results from either retaining or removing
+all elements from an existing list that satisfy or fail to satisfy a goal:
+
+```prolog
+even(N) :- mod(N, 2) =:= 0.
+odd(N) :- mod(N, 2) =:= 1.
+
+include(even, [1, 2, 3, 4], L).
+% output is L = [2, 4].
+
+exclude(odd, [1, 2, 3, 4], L).
+% output is L = [2, 4].
+```
+
+#### length
+
+To get the length of a list:
+
+```prolog
+length([a, b, c], L). % L = 3
+```
+
+#### list_min and list_max
+
+To get the smallest or largest value in a list:
+
+```prolog
+L = [3, 9, 2, 4], list_min(L, Min).
+% output is Min = 2.
+
+L = [3, 9, 2, 4], list_max(L, Max).
+% output is Max = 9.
+```
+
+#### maplist
+
 The `maplist` predicate can be used to create a list
 that is derived by applying a given predicate to each element of another list.
 Predicates like this that take another predicate as an argument
@@ -1581,6 +1669,83 @@ double(A, B) :-
 :- maplist(double, [1, 2, 3], L), write(L), nl.
 % output is [2, 4, 6]
 ```
+
+#### member
+
+The `member` predicate can be used find a member of a list
+that is unique from all others. For example:
+
+```prolog
+max_member(List, Max) :-
+  member(Max, List), % Max is a member of List.
+  % It is not true that there is any member of List
+  % whose value is greater than Max.
+  \+ (member(E, List), E > Max).
+```
+
+Compare the `max_member` rule to the following recursive rule
+which provides the same results.
+
+```prolog
+% The second argument to max_ is the maximum value found so far.
+max([H|T], Max) :- max_(T, H, Max).
+max_([], Max, Max).
+max_([H|T], Max0, Max) :- H > Max0, max_(T, H, Max).
+max_([H|T], Max0, Max) :- H =< Max0, max_(T, Max0, Max).
+```
+
+The `member` predicate can also be used to iterate over the values in a list.
+or example, `member(X, [3, 7, 9])` will set `X`
+to each value in the list one at a time.
+
+#### nth0 and nth1
+
+To get the list element at a given index:
+
+```prolog
+L = [a, b, c], nth0(1, L, E). % zero-based index
+% output is E = b.
+
+L = [a, b, c], nth1(2, L, E). % one-based index
+% output is E = b.
+```
+
+To get the index of a given element in a list:
+
+```prolog
+L = [a, b, c], nth0(Index, L, b). % zero-based index
+% output is Index = 1.
+
+L = [a, b, c], nth1(Index, L, b). % one-based index
+% output is Index = 2.
+```
+
+To create a new list that results from inserting a value
+at a given zero-based index in an existing list:
+
+```prolog
+% Inserts x after 2nd element.
+L1 = [a, b, c], nth0(2, L2, x, L1).
+% output is L2 = [a, b, x, c].
+```
+
+#### permutation
+
+To get all permutations of a list:
+
+```prolog
+L = [a, b, c], permutation(L, Ps).
+% output is
+% Ps = [1, 2, 3] ;
+% Ps = [1, 3, 2] ;
+% Ps = [2, 1, 3] ;
+% Ps = [2, 3, 1] ;
+% Ps = [3, 1, 2] ;
+% Ps = [3, 2, 1] ;
+false.
+```
+
+#### reverse
 
 The `reverse` predicate relates a list to another list
 containing the same elements in reverse order.
@@ -1615,249 +1780,8 @@ L = [3, 7, 9], member(4, L).
 % output is false
 ```
 
-The `member` predicate can be used find a member of a list
-that is unique from all others. For example:
-
-```prolog
-max_member(List, Max) :-
-  member(Max, List), % Max is a member of List.
-  % It is not true that there is any member of List
-  % whose value is greater than Max.
-  \+ (member(E, List), E > Max).
-```
-
-Compare the `max_member` rule to the following recursive rule
-which provides the same results.
-
-```prolog
-% The second argument to max_ is the maximum value found so far.
-max([H|T], Max) :- max_(T, H, Max).
-max_([], Max, Max).
-max_([H|T], Max0, Max) :- H > Max0, max_(T, H, Max).
-max_([H|T], Max0, Max) :- H =< Max0, max_(T, Max0, Max).
-```
-
-To test whether all elements in a list are a given value:
-
-```prolog
-maplist(=(V), L).
-```
-
-To test whether a list begins with a given sub-list:
-
-```prolog
-L = [a, b, c, d], prefix([a, b], L).
-% doesn't output true, but also doesn't fail
-```
-
-To get the first element of a list:
-
-```prolog
-L = [a, b, c, d], [H|_] = L.
-% output is H = a.
-```
-
-To test whether a list ends with a given sub-list:
-
-```prolog
-L = [a, b, c, d], last(L, d).
-% doesn't output true, but also doesn't fail
-```
-
-To get the last element of a list:
-
-```prolog
-L = [a, b, c, d], last(L, E).
-% output is E = d.
-```
-
-The `member` predicate can also be used to iterate over the values in a list.
-or example, `member(X, [3, 7, 9])` will set `X`
-to each value in the list one at a time.
-
-To get the list element at a given index:
-
-```prolog
-L = [a, b, c], nth0(1, L, E). % zero-based index
-% output is E = b.
-
-L = [a, b, c], nth1(2, L, E). % one-based index
-% output is E = b.
-```
-
-To get the index of a given element in a list:
-
-```prolog
-L = [a, b, c], nth0(Index, L, b). % zero-based index
-% output is Index = 1.
-
-L = [a, b, c], nth1(Index, L, b). % one-based index
-% output is Index = 2.
-```
-
-To create a copy of a list, or any term, including nested lists:
-
-```prolog
-copy_term(ListIn, ListOut)
-```
-
-To create a new list that results from adding a value
-to the beginning of an existing list:
-
-```prolog
-L1 = [b, c, d], L2 = [a | L1].
-% output is L2 = [a, b, c, d].
-```
-
-To create a new list that results from adding a value
-to the end of an existing list:
-
-```prolog
-L1 = [a, b, c], append(L1, [d], L2).
-% output is L2 = [a, b, c, d].
-```
-
-To create a new list that results from inserting a value
-at a given zero-based index in an existing list:
-
-```prolog
-% Inserts x after 2nd element.
-L1 = [a, b, c], nth0(2, L2, x, L1).
-% output is L2 = [a, b, x, c].
-```
-
-To create a new list that results from
-removing only the first occurrence of a given value:
-
-```prolog
-selectchk(b, [a, b, c, b], L).
-% output is L = [a, c, b].
-```
-
-The `select/3` predicate is similar to `selectchk/3`,
-but it iterates through every possible removal.
-
-To create a new list that results from
-replacing only the first occurrence of a given value:
-
-```prolog
-selectchk(b, [a, b, c, b], x, L).
-% output is L = [a, x, c, b].
-```
-
-The `select/4` predicate is similar to `selectchk/4`,
-but it iterates through every possible replacement.
-
-To create a new list that results from
-removing every occurrence of given values:
-
-```prolog
-subtract([a, b, c, b], [b], L). % could remove more than just b elements
-% output is L = [a, c].
-```
-
-To create a new list that results from either retaining or removing
-all elements from an existing list that satisfy or fail to satisfy a goal:
-
-```prolog
-even(N) :- mod(N, 2) =:= 0.
-odd(N) :- mod(N, 2) =:= 1.
-
-include(even, [1, 2, 3, 4], L).
-% output is L = [2, 4].
-
-exclude(odd, [1, 2, 3, 4], L).
-% output is L = [2, 4].
-```
-
-To get all permutations of a list:
-
-```prolog
-L = [a, b, c], permutation(L, Ps).
-% output is
-% Ps = [1, 2, 3] ;
-% Ps = [1, 3, 2] ;
-% Ps = [2, 1, 3] ;
-% Ps = [2, 3, 1] ;
-% Ps = [3, 1, 2] ;
-% Ps = [3, 2, 1] ;
-false.
-```
-
-To flatten nested lists:
-
-```prolog
-L1 = [[a, b], c, [d, [e, f]]], flatten(L1, L2).
-% output is [a, b, c, d, e, f].
-```
-
-To perform run length encoding:
-
-```prolog
-L = [dog, dog, cat, dog, dog, dog, rabbit, rabbit], clumped(L, C).
-% output is C = [dog-2, cat-1, dog-3, rabbit-2].
-```
-
-To get the smallest or largest value in a list:
-
-```prolog
-L = [3, 9, 2, 4], min_list(L, Min).
-% output is Min = 2.
-
-L = [c, a, d, b], min_member(Min, L).
-% output is Min = a.
-
-% max_list is defined in SWI-Prolog.
-% In Scryer Prolog, use list_max defined in the lists library.
-L = [3, 9, 2, 4], max_list(L, Max).
-% output is Max = 9.
-
 L = [c, a, d, b], max_member(Max, L).
 % output is Max = d.
-
-younger(P1, P2) :-
-  person(_, A1) = P1,
-  person(_, A2) = P2,
-  A1 < A2.
-
-?- P1 = person(ann, 35),
-   P2 = person(bob, 50),
-   P3 = person(carl, 19),
-   People = [P1, P2, P3],
-
-   min_member(younger, Py, People),
-   person(N1, A1) = Py,
-   format('youngest is ~w at age ~w~n', [N1, A1]),
-   % output is youngest is carl at age 19
-
-   max_member(younger, Po, People),
-   person(N2, A2) = Po,
-   format('oldest is ~w at age ~w~n', [N2, A2]).
-   % output is oldest is bob at age 50
-```
-
-To create a list containing a range of sequential integers:
-
-```prolog
-numlist(3, 7, L).
-% output is L = [3, 4, 5, 6, 7].
-```
-
-To determine if all the elements in a list are unique:
-
-```prolog
-L = [b, a, c], is_set(L).
-% doesn't output true, but also doesn't fail
-L = [b, a, b], is_set(L).
-% output is false.
-```
-
-To remove duplicate elements from a list:
-
-```prolog
-L = [b, a, a, b, c, d, c], list_to_set(L, S).
-% output is S = [b, a, c, d].
-```
 
 To find the intersection of two lists:
 
@@ -1932,69 +1856,123 @@ For implementations of map, filter, and reduce, see {% aTargetBlank
 "https://pbrown.me/blog/functional-prolog-map-filter-and-reduce/",
 "Functional Prolog" %}.
 
-#### Appending
+#### select and selectchk
 
-The built-in predicate `append` can
-create a new list by appending two existing lists.
-For example:
+To create a new list that results from
+removing only the first occurrence of a given value:
 
 ```prolog
-?- append([1, 2, 3], [4, 5], X).
-% output is X = [1, 2, 3, 4, 5]
+selectchk(b, [a, b, c, b], L).
+% output is L = [a, c, b].
 ```
 
-The `append` predicate can also create a new list by appending multiple lists.
-For example:
+The `select/3` predicate is similar to `selectchk/3`,
+but it iterates through every possible removal.
+
+To create a new list that results from
+replacing only the first occurrence of a given value:
 
 ```prolog
-L1 = [a, b], L2 = [c, d, e], L3 = [f], append([L1, L2, L3], L4).
-% output is L4 = [a, b, c, d, e, f].
+selectchk(b, [a, b, c, b], x, L).
+% output is L = [a, x, c, b].
 ```
 
-If `append` were not built-in, it could be implemented as follows:
+The `select/4` predicate is similar to `selectchk/4`,
+but it iterates through every possible replacement.
+
+### sort
+
+The `sort` predicate relates a list to a sorted version of the list.
 
 ```prolog
-% Appending an empty list to any list gives the second list.
-append([], L, L).
-
-% Appending two lists is the same as appending
-% the head of the first list (H) to the result of appending
-% the tail of the first list (L1) to the second list (L2).
-append([H|L1], L2, [H|L3]) :- append(L1, L2, L3).
+sort([banana, cherry, apple], S). % S = [apple, banana, cherry]
 ```
 
-Here are several examples of how `append` can be used:
+There is a define sort order when the elements have different types.
+The order from lowest to highest is:
+
+- variables sorted by their names
+- floating point numbers from lowest to highest
+- integers from lowest to highest
+- atoms sorted by their names
+- compound terms (structures) sorted by their arity and then by their functor name
+
+TODO: Add examples of lists with mixed element types and verify what is described above.
+
+#### sumlist
+
+To get the sum of numbers in a list:
 
 ```prolog
-% Is the result of appending two lists a given result list?
-?- append([1, 2], [3, 4], [1, 2, 3, 4]).
-true.
+L = [1, 2, 3], sum_list(L, Sum).
+% output is Sum = 6.
+```
 
-% What is the result of appending two lists?
-?- append([1, 2], [3, 4], X).
-X = [1, 2, 3, 4].
+If the `sum_list` predicate didn't exist,
+it could be implemented with a recursive rule
+or with `foldl` in the `lists` library as follows:
 
-% What list must be appended to a given list to obtain a given result?
-?- append([1, 2], X, [1, 2, 3, 4]).
-X = [3, 4].
+```prolog
+sum_list(List, Sum) :-
+  % If the list is empty then the sum is zero.
+  List = [] -> Sum = 0;
 
-% What list must be prepended to a given list to obtain a given result?
-?- append(X, [3, 4], [1, 2, 3, 4]).
-X = [1, 2]
+  % Otherwise ...
+  List =
+    % Get the first number and a list of the remaining numbers.
+    [Head|Tail],
+    % Compute the sum of the remaining numbers.
+    sum_list(Tail, TailSum),
+    % The result is the first number plus that sum.
+    % Note the use of the "is" keyword to assign the
+    % result of an arithmetic expression to the Sum argument.
+    Sum is TailSum + Head.
 
-% What lists can be appended to obtain a given result?
-?- append(X, Y, [1, 2, 3, 4]).
-X = [],
-Y = [1, 2, 3, 4] ;
-X = [1],
-Y = [2, 3, 4] ;
-X = [1, 2],
-Y = [3, 4] ;
-X = [1, 2, 3],
-Y = [4] ;
-X = [1, 2, 3, 4],
-Y = [] ;
-false.
+/* Alternate implementation
+:- use_module(library(clpz)).
+:- use_module(library(lists)).
+add(A, B, C) :- C #= A + B.
+sum_list(List, Sum) :- foldl(add, List, 0, Sum).
+*/
+
+?- sum_list([1, 2, 3], X).
+% output is X = 6.
+```
+
+#### miscellaneous (MOVE THESE!)
+
+To test whether all elements in a list are a given value:
+
+```prolog
+maplist(=(V), L).
+```
+
+To test whether a list begins with a given sub-list:
+
+```prolog
+L = [a, b, c, d], prefix([a, b], L).
+% doesn't output true, but also doesn't fail
+```
+
+To get the first element of a list:
+
+```prolog
+L = [a, b, c, d], [H|_] = L.
+% output is H = a.
+```
+
+To test whether a list ends with a given sub-list:
+
+```prolog
+L = [a, b, c, d], last(L, d).
+% doesn't output true, but also doesn't fail
+```
+
+To get the last element of a list:
+
+```prolog
+L = [a, b, c, d], last(L, E).
+% output is E = d.
 ```
 
 ### Pairs
