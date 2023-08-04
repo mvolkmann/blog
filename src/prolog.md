@@ -997,7 +997,13 @@ For example:
 
 For details on the `double_quotes` flag, see the [Strings](#strings) section.
 
-All the prolog flags supported by SWI-Prolog are documented at
+Scryer prolog supports the following flags: `bounded`, `double_quotes`,
+`integer_rounding_function`, `max_arity`, `max_integer`, `min_integer`,
+`occurs_check`, and `unknown`.
+These are documented in the source file `src/lib/builtins.pl`.
+before the clauses for `current_prolog_flag`.`
+
+SWI-Prolog supports many more flags. These are documented at
 <a href="https://www.swi-prolog.org/pldoc/man?section=flags" target="_blank">
 Environment Control (Prolog flags)</a>.
 
