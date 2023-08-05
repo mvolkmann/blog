@@ -306,6 +306,10 @@ error messages that are output by Scryer Prolog.
   This error occurs when Scryer Prolog is started with a file path
   and the file is not found.
 
+- <pre>error(syntax_error(inconsistent_entry),load/1).</pre>
+
+  This error can occur when there is a typo in a compiler directive.
+
 - <pre>error(permission_error(access,private_procedure,module_does_not_contain_claimed_export),load/1).</pre>
 
   This error means that a module is being defined and the list of exports
@@ -4328,10 +4332,13 @@ There are multiple ways to construct such lists including
 strings in double quotes and atoms in square brackets.
 A non-terminal refers to another DCG rule
 and typical includes a variable argument to capture matching text.
+
 A grammar goal is a single Prolog goal or conjunction of them,
-written inside curly braces,
-whose purpose is typically to set values of variables
-that appear in the GRHead argument.
+written inside curly braces.
+Typically the purpose of a grammar goal is to set the values of variables
+that appear in the GRHead argument or a GRBody non-terminal.
+Grammar goals that set variables used in GRBody non-terminals
+should appear **before** all such non-terminals.
 
 The following basic example demonstrates using a DCG
 to describe a string that can contain a name.
