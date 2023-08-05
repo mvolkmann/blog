@@ -1450,8 +1450,8 @@ The dot functor (`./2`) is the list constructor.
 It is passed the head and the tail of the list to be constructed.
 For example, `.(H, T)` creates a list
 where `H` is a single element that is the head
-and `T` is a list of elements in the tail.
-Often variables that represent lists end in "s" (ex. `.(E, Es)`).
+and `T` is a list of elements that is the tail.
+Often the names of variables that hold lists end in "s" (ex. `.(E, Es)`).
 
 SWI-Prolog uses a different functor name for the list constructor.
 For example:
@@ -1463,8 +1463,8 @@ L = '[|]'(a, [b, c]).
 
 The head-tail separator `|` in `[H|T]` creates a list
 where H is a single element that is the head
-and `T` is a list of elements in the tail.
-For example, `[a | []]` is a list containing only `a`
+and `T` is a list of elements that is the tail.
+For example, `[a]` and `[a | []]` are both lists that only contain `a`
 and `[a | [b, c]]` is equivalent to `[a, b, c]`.
 Use of the `|` operator can be nested.
 For example, `[a | [b | [c]]]` is also equivalent to `[a, b, c]`.
