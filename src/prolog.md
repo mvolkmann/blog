@@ -2279,9 +2279,10 @@ Entering `functor(2 + 3, F, A).` sets `F` to `(+)` and `A` to `2`.
 
 Higher-order predicates, aka meta-predicates, are predicates
 that take another predicate as an argument and call it.
-Examples include `maplist`, `findall`, `call`,
-`foldl` (in the `lists` library), `if_` (in the `reif` library),
-and `tpartition` (in the `reif` library).
+Examples from the `lists` library include
+`call`, `findall`, `foldl`, and `maplist`.
+Examples from the `reif` library include
+`if_`, `tfilter`, and `tpartition`.
 Also, the custom predicates `every` and `some`
 defined in the "Lists" section above also do this.
 
@@ -2302,7 +2303,7 @@ run :-
 ```
 
 The following code demonstrates using the `reif` library
-`if_` and `tpartition` predicates.
+`if_`, `tfilter`, and `tpartition` predicates.
 
 ```prolog
 :- use_module(library(format)).
@@ -2331,6 +2332,10 @@ run :-
   report_reif(mark), % not a dog
 
   Beings = [mark, comet, tami, maisey, ramsay, oscar],
+
+  tfilter(is_dog, Beings, JustDogs),
+  format("JustDogs = ~w~n", [JustDogs]), % [comet,maisey,ramsay,oscar]
+
   tpartition(is_dog, Beings, Dogs, NonDogs),
   format("dogs include ~w~n", [Dogs]), % [comet,maisey,ramsay,oscar]
   format("non-dogs include ~w~n", [NonDogs]). % [mark,tami]
