@@ -1894,7 +1894,7 @@ selectchk(b, [a, b, c, b], x, L).
 The `select/4` predicate is similar to `selectchk/4`,
 but it iterates through every possible replacement.
 
-### sort
+#### sort
 
 The `sort` predicate relates a list to a sorted version of the list.
 
@@ -2353,7 +2353,7 @@ For example, to enable adding and removing "likes" predicates
 that take two arguments:
 
 ```prolog
-dynamic(likes/2).
+:- dynamic(likes/2).
 ```
 
 Once this is done, a clause of that type can be
@@ -3431,6 +3431,13 @@ add(A, B, C) :- C #= A + B.
   halt
 )).
 ```
+
+The `bagof` predicate is similar to the `findall` predicate,
+but `bagof` fails when their a no solutions
+whereas `findall` unifies with the empty list.
+
+The `setof` predicate is similar to the `bagof` predicate,
+but it sorts the solutions and removes duplicates.
 
 ## Unfair Enumerations
 
