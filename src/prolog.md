@@ -2822,6 +2822,24 @@ and outputs it in its equivalent function notation.
 For example, entering `write_canonical(3 * 1 + 2).`
 outputs `*(3,+(1,2))`.
 
+### Arithmetic Operators
+
+Prolog supports the following arithmetic operators:
+
+| Operator | Meaning                        |
+| -------- | ------------------------------ |
+| `+`      | addition (infix and prefix)    |
+| `-`      | subtraction (infix and prefix) |
+| `*`      | multiplication                 |
+| `/`      | floating point division        |
+| `//`     | integer division               |
+| `div`    | integer division               |
+| `rem`    | remainder of integer division  |
+| `rdiv`   | rational number division       |
+| `mod`    | modulo                         |
+| `**`     | exponentiation                 |
+| `^`      | exponentiation                 |
+
 ### Number Operators
 
 Prolog supports the following relational operators
@@ -2911,24 +2929,6 @@ test(not_structurally_equivalent) :-
   x(A, B) \=@= x(C, D, E), % different arity
   x(A, B) \=@= y(C, D). % different functor name
 ```
-
-### Arithmetic Operators
-
-Prolog supports the following arithmetic operators:
-
-| Operator | Meaning                        |
-| -------- | ------------------------------ |
-| `+`      | addition (infix and prefix)    |
-| `-`      | subtraction (infix and prefix) |
-| `*`      | multiplication                 |
-| `/`      | floating point division        |
-| `//`     | integer division               |
-| `div`    | integer division               |
-| `rem`    | remainder of integer division  |
-| `rdiv`   | rational number division       |
-| `mod`    | modulo                         |
-| `**`     | exponentiation                 |
-| `^`      | exponentiation                 |
 
 ### Bitwise Operators
 
@@ -3162,8 +3162,6 @@ radius_area(R, A) :-
 
 Prolog supports the following additional operators:
 
-TODO: Finish documenting the meaning of some of these operators.
-
 | Operator | Meaning                                                                           |
 | -------- | --------------------------------------------------------------------------------- |
 | `:-`     | prefix; appears before a compiler directive                                       |
@@ -3181,17 +3179,16 @@ TODO: Finish documenting the meaning of some of these operators.
 | `is`     | attempts to unify LHS with RHS arithmetic expression result                       |
 | `>:<`    | partial unification between to dictionaries                                       |
 | `!`      | cut; prevents further backtracking                                                |
-| `$`      | similar to `!` TODO How does it differ?                                           |
 | `*->`    | soft cut; rarely used                                                             |
 | `:=`     | evaluates RHS as JavaScript (odd!)                                                |
 | `:<`     | succeeds when LHS is a sub-dict of RHS dict                                       |
+| `:`      | separates a namespace qualifier from a predicate name                             |
+| `$`      | similar to `!` TODO How does it differ?                                           |
 | `?`      | TODO: Does this compose two predicates?                                           |
-| `:`      |                                                                                   |
-| `\_`     |                                                                                   |
-| `/`      |                                                                                   |
-| `.`      |                                                                                   |
-| `as`     |                                                                                   |
-| `=>`     |                                                                                   |
+| `\_`     | TODO: I can't find any information on this.                                       |
+| `.`      | TODO: I can't find any information on this.                                       |
+| `as`     | TODO: I can't find any information on this.                                       |
+| `=>`     | TODO: I can't find any information on this.                                       |
 
 Directives provide information to the Prolog compiler.
 They are preceded by the `:-` prefix operator.
@@ -3358,9 +3355,12 @@ For example:
 
 ```prolog
 sign_word(N, Word) :-
-  (N = 0 -> Word = 'zero';
-  (N > 0 -> Word = 'positive';
-  Word = 'negative')).
+  ( N =:= 0 ->
+    Word = zero
+  ; N > 0 ->
+    Word = positive
+  ; Word = negative
+  ).
 ```
 
 When expressions using the `->` operator appear in a conjunction
@@ -3375,15 +3375,15 @@ For example:
 
 ```prolog
 N = -3,
-writeln('before'), % will print
-(N > 0 -> writeln('positive')), % will not print due to failing
-writeln('after'), % will not print due to failing
+writeln(before), % will print
+(N > 0 -> writeln(positive)), % will not print due to failing
+writeln(after), % will not print due to failing
 ```
 
 To fix the scenario above, replace the arrow line with the following:
 
 ```prolog
-(N > 0 -> writeln('positive'); true),
+(N > 0 -> writeln(positive); true),
 ```
 
 Replacing the arrow operator with the comma operator
@@ -3392,17 +3392,42 @@ The only difference is that without the arrow operator,
 if the "true goal" backtracks then the "false goal" will execute.
 
 For example, the `sign_word` predicate above could be written as follows.
-Since no backtracking occurs in this example, the behavior is identical.
+The first solution will be correct, but a second, incorrect solution
+of `negative` will be provided when `N` is zero or positive.
 
 ```prolog
 sign_word(N, Word) :-
-  (N = 0, Word = 'zero';
-  (N > 0, Word = 'positive';
-  Word = 'negative')).
+  ( N =:= 0
+  , Word = zero
+  ; N > 0
+  , Word = positive
+  ; Word = negative
+  ).
 ```
 
-The `if_` predicate ...
-TODO: Finish this.
+The `if_` predicate defined in the library `reif` takes three arguments.
+The first is a predicate that sets its last argument to `true` or `false`.
+The second is a goal to evaluate
+if the first argument sets its argument to `true`.
+The third is a goal to evaluate
+if the first argument sets its argument to `false`.
+
+For example:
+
+```prolog
+is_zero(N, B) :- N =:= 0 -> B = true; B = false.
+is_positive(N, B) :- N > 0 -> B = true; B = false.
+sign_word(N, Word) :-
+  if_(
+    is_zero(N),
+    Word = zero,
+    if_(
+      is_positive(N),
+      Word = positive,
+      Word = negative
+    )
+  ).
+```
 
 ## Iteration
 
