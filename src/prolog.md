@@ -3949,14 +3949,6 @@ For example:
 ?- time(append("abc", "def", L)).
 ```
 
-## Calling From Other Languages
-
-SWI-Prolog can be called from C. See {% aTargetBlank
-"https://www.swi-prolog.org/pldoc/man?section=calling-prolog-from-c",
-"Calling Prolog from C" %}.
-
-TODO: Which other programming languages can call SWI-Prolog?
-
 ## Efficiency
 
 For information about the performance of Prolog, see {% aTargetBlank
@@ -4951,7 +4943,23 @@ Some key quotes from this post are:
   its own implementation language is called meta-interpreter (MI)."
 - "Prolog is exceptionally well-suited for writing MIs."
 
-## Calling From JavaScript
+## Calling From Other Languages
+
+Prolog implementations differ in their support for
+calling from other languages/environments.
+
+For Scryer Prolog, work is underway to allow it to be called from Rust.
+Currently it only supports calling from an HTTP server.
+
+SWI-Prolog can be called from C, JavaScript, and an HTTP server.
+
+### Calling SWI-Prolog From C
+
+For calling SWI-Prolog from C, see {% aTargetBlank
+"https://www.swi-prolog.org/pldoc/man?section=calling-prolog-from-c",
+"Calling Prolog from C" %}.
+
+### Calling SWI-Prolog From JavaScript
 
 The npm package {% aTargetBlank "https://github.com/rla/node-swipl#readme",
 "swipl" %} makes it easy to run Prolog queries from a Node.js application
@@ -5011,100 +5019,16 @@ The Prolog code is not prevented from performing "unsafe" operations.
 For example if it invokes the `halt` predicate
 then no further queries will be processed. I
 
-## Creating an HTTP Server
+### Calling SWI-Prolog from an HTTP Server
 
-Scryer Prolog supports creating an HTTP server that
-that can run Prolog queries and serves HTML pages containing the results.
+SWI-Prolog has built-in predicates that:
+
+1. start an HTTP server
+1. load predicates from Prolog source files
+1. register routes
+1. respond to HTTP GET requests with HTML generated from query results
+
 For example:
-
-```prolog
-:- use_module(library(dcgs)).
-:- use_module(library(http/http_server)).
-:- initialization(consult(family)).
-
-% All the code from here to END could be moved to a module for reuse.
-tag1(Name, Content) --> "<", Name, ">", Content, "</", Name, ">".
-tag2(Name, Children) --> "<", Name, ">", children(Children), "</", Name, ">".
-
-children([]) --> [].
-children([H|T]) --> H, children(T).
-
-a(URL, Text) --> "<a href=\"", URL, "\">", Text, "</a>".
-body(Content) --> tag2("body", Content).
-div(Content) --> "<h1>", Content, "</h1>".
-h1(Content) --> tag1("h1", Content).
-h2(Content) --> tag1("h2", Content).
-head(Content) --> tag2("head", Content).
-html(Head, Body) --> "<html>", Head, Body, "</html>".
-li(Content) --> tag1("li", Content).
-style(Content) --> tag2("style", Content).
-title(Content) --> tag1("title", Content).
-ul(Content) --> tag2("ul", Content).
-
-not_found_handler(_, Response) :-
-  http_status_code(Response, 404). % not providing an icon
-% END
-
-home_handler(_, Response) :-
-  % http_status_code(Response, 200), % default status
-  % http_body(Response, text("Welcome to Scryer Prolog!")).
-  phrase(html(
-    head([]),
-    body([
-      h1("Welcome to Scryer Prolog!"),
-      a("/grandchildren", "Grandchildren")
-    ])
-  ), Content),
-  http_body(Response, text(Content)).
-
-person_li(Person, Li) :-
-  atom_chars(Person, Cs),
-  Li = li(Cs).
-
-grandchildren_handler(_, Response) :-
-  findall(P, grandfather(richard, P), Ps),
-  maplist(person_li, Ps, Lis),
-
-  Title = "Grandchildren of Richard",
-  phrase(html(
-    head([
-      title(Title),
-      style([
-        "body { background-color: linen; }",
-        "h1 { color: red; }",
-        "h2 { color: blue; }",
-        "li { color: purple; }"
-      ])
-    ]),
-    body([
-      h1(Title),
-      ul(Lis),
-
-      h2("Colors"),
-      ul([
-        li("red"),
-        li("green"),
-        li("blue")
-      ])
-    ])
-  ), Content),
-  http_body(Response, text(Content)). % not providing an icon
-
-listen :-
-  % This cannot be stopped with ctrl-c.
-  % See https://github.com/mthom/scryer-prolog/issues/485.
-  % As a workaround, run the command `killall scryer-prolog`.
-  http_listen(8081, [
-    get('/', home_handler),
-    get('favicon.ico', not_found_handler),
-    get(grandchildren, grandchildren_handler)
-  ]).
-```
-
-After loading this file into Scryer Prolog, enter `listen.` to start the server.
-Then browse "http://localhost:8081".
-
-The following code implements similar functionality in SWI-Prolog:
 
 ```prolog
 :- use_module(library(http/http_server)).
@@ -5140,6 +5064,10 @@ home_page(_Request) :-
 To start the server, enter `swipl {filename}.pl`.
 Then browse localhost:{port-number}.
 
+For more detail, see {% aTargetBlank
+"https://www.swi-prolog.org/pldoc/man?section=httpserver",
+"The HTTP server libraries" %}.
+
 Another way to run Prolog code in an HTTP server is to use {% aTargetBlank
 "https://pengines.swi-prolog.org/docs/index.htm", "Pengines" %}.
 However, the getting started page says
@@ -5148,6 +5076,176 @@ We think it is safe, but only if you know what you are doing.
 You run it at your own risk!"
 This coupled with the fact that the code has not been modified
 since November, 2020 leads me to think this may not be a good option.
+
+### Calling Scryer Prolog from an HTTP Server
+
+Scryer Prolog supports creating an HTTP server that
+that can run Prolog queries and serves HTML pages containing the results.
+For example:
+
+```prolog
+:- use_module(library(charsio)).
+:- use_module(library(dcgs)).
+:- use_module(library(format)).
+:- use_module(library(http/http_server)).
+
+:- use_module('lib/html_gen.pl').
+:- use_module('lib/json.pl').
+:- use_module('lib/list_util.pl').
+:- use_module('lib/strings.pl').
+
+:- initialization(consult(family)).
+
+grandchildren_handler(Request, Response) :-
+  % Get and print all request headers.
+  http_headers(Request, Headers),
+  maplist(print_pair, Headers),
+
+  % Get and print the request body.
+  http_body(Request, text(Body)),
+  format("Body = ~w~n", [Body]),
+
+  % Get the "name" query parameter.
+  ( http_query(Request, "name", NameChars) ->
+    have_name(Response, NameChars)
+  ; missing_query_parameter(Response, "name")
+  ).
+
+grandchildren_json_handler(Request, Response) :-
+  ( http_query(Request, "name", NameChars) ->
+    % Get the grandchildren for the given name.
+    atom_chars(NameAtom, NameChars),
+    setof(P, grandfather(NameAtom, P), Ps),
+    phrase(json(Ps), Json),
+    http_headers(Response, ["Content-Type"-"application/json"]),
+    http_body(Response, text(Json))
+  ; missing_query_parameter(Response, "name")
+  ).
+
+have_grandchildren(Response, NameChars, Grandchildren) :-
+  chars_capitalized(NameChars, Name),
+  phrase(format_("Grandchildren of ~s!", [Name]), Title),
+  maplist(person_li, Grandchildren, Lis),
+
+  phrase(html(
+    head([
+      title(Title),
+      style([
+        "body { background-color: linen; }",
+        "h1 { color: red; }",
+        "h2 { color: blue; }",
+        "li { color: purple; }"
+      ])
+    ]),
+    body([
+      h1(Title),
+      ul(Lis),
+
+      h2("Colors"),
+      ul([
+        li("red"),
+        li("green"),
+        li("blue")
+      ])
+    ])
+  ), Content),
+  http_body(Response, text(Content)). % not providing an icon
+
+have_name(Response, NameChars) :-
+  atom_chars(NameAtom, NameChars),
+  % Get the grandchildren for the given name.
+  setof(P, grandfather(NameAtom, P), Ps),
+  length(Ps, Length),
+  ( Length > 0 ->
+    have_grandchildren(Response, NameChars, Ps)
+  ; have_no_grandchildren(Response, NameChars)
+  ).
+
+have_no_grandchildren(Response, NameChars) :-
+  chars_capitalized(NameChars, Name),
+  phrase(format_("~w has no grandchildren.", [Name]), Content),
+  http_body(Response, text(Content)). % not providing an icon
+
+have_query(Response, QueryChars) :-
+  string_list(QueryChars, ',', Words),
+  maplist(string_term, Words, Terms),
+  Goal =.. Terms,
+
+  tfilter(is_var, Terms, Variables),
+  length(Variables, Count),
+  ( Count == 0 ->
+    ( call(Goal) -> Results = true; Results = false )
+  ; Count == 1 ->
+    [Variable|_] = Variables,
+    setof(Variable, call(Goal), Results)
+  ; setof(Variables, call(Goal), Results)
+  ),
+
+  phrase(json(Results), Json),
+  http_headers(Response, ["Content-Type"-"application/json"]),
+  http_body(Response, text(Json)).
+
+home_handler(_, Response) :-
+  % http_status_code(Response, 200), % default status
+  phrase(html(
+    head([]),
+    body([
+      h1("Welcome to Scryer Prolog!"),
+      a("/grandchildren", "Grandchildren") % hyperlink
+    ])
+  ), Content),
+  http_body(Response, text(Content)).
+
+% Dr. Triska won't like this use of ->,
+% but I do not yet see a better way to handle this.
+is_var(Term, Bool) :-
+  var(Term) -> Bool = true; Bool = false.
+
+listen :-
+  % This cannot be stopped with ctrl-c.
+  % See https://github.com/mthom/scryer-prolog/issues/485.
+  % As a workaround, run the command `killall scryer-prolog`.
+  http_listen(8081, [
+    get('/', home_handler),
+    get('favicon.ico', not_found_handler),
+    get(grandchildren, grandchildren_handler),
+    get('grandchildren.json', grandchildren_json_handler),
+    get('query', query_handler)
+  ]).
+
+missing_query_parameter(Response, Name) :-
+  phrase(format_("query parameter \"~s\" is missing", [Name]), Content),
+  http_status_code(Response, 400),
+  http_body(Response, text(Content)). % not providing an icon
+
+not_found_handler(_, Response) :-
+  http_status_code(Response, 404). % not providing an icon
+
+person_li(Person, Li) :-
+  atom_chars(Person, Cs),
+  Li = li(Cs).
+
+% For debugging
+print_pair(Name-Value) :-
+  format("~s = ~s~n", [Name, Value]).
+
+query_handler(Request, Response) :-
+  ( http_query(Request, "q", Query) ->
+    have_query(Response, Query)
+  ; missing_query_parameter(Response, "q")
+  ).
+
+string_term(String, Term) :-
+  append(String, [.], S), % append period to terminate
+  read_from_chars(S, Term).
+```
+
+The code above is in a file named `http_server_scryer.pl`.
+To run this server, enter `scry -g listen http_server_scryer.pl`.
+Then browse "http://localhost:8081".
+
+Pressing ctrl-c will not stop the server.
+To stop it, enter `killall scryer-prolog`.
 
 ## Language Server
 
