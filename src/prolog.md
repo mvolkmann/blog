@@ -2348,7 +2348,7 @@ run :-
 ## Dynamic Predicates
 
 By default clauses cannot be added to or deleted from the knowledge base.
-To enable this, run a `dynamic` query on a specific predicate.
+To enable this, run a `dynamic` query on a specific functor.
 For example, to enable adding and removing "likes" predicates
 that take two arguments:
 
@@ -2356,10 +2356,22 @@ that take two arguments:
 :- dynamic(likes/2).
 ```
 
-Once this is done, a clause of that type can be
+Once this is done, a clause matching that head (`likes/2`) can be
 added to the beginning with `asserta` or added to the end with `assertz`.
-Also, predicates of that type can be removed
-with the `retract` and `retractall` predicates.
+
+In addition, clauses matching that head can be
+removed with the following predicates:
+
+- `retract` removes a specific clause identified by a term (head and body).
+  Other clauses that match the head can still be used.
+
+- `retractall` removes all clauses that match a given head.
+  The predicate is still known to the runtime,
+  but attempts to use the predicate after this will fail.
+
+- `abolish` also removes all clauses that match a given head,
+  but attempts to use the predicate after this
+  result in a predicate existence error.
 
 For example, suppose we have the file `likes.pl` containing the following:
 
