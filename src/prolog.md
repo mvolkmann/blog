@@ -477,7 +477,7 @@ enter `trace.` and then the query.
 The screenshot below shows the output.
 After each line in the trace, press the spacebar
 to advance to the next term to be evaluated.
-After a solution is found, press the semicolon key
+After a solution is found, press the semicolon key or the spacebar
 to begin searching for the next solution.
 
 <img alt="SWI-Prolog trace" style="width: 60%"
@@ -524,8 +524,8 @@ To start a Ciao top level from a terminal, enter `ciao`.
 
 ## Online Top Level
 
-To enter and run Prolog code in a web browser, browse
-{% aTargetBlank "https://swish.swi-prolog.org", "SWISH" %}.
+To enter and run Prolog code in a web browser using SWI-Prolog,
+browse {% aTargetBlank "https://swish.swi-prolog.org", "SWISH" %}.
 
 Enter facts and rules in the left pane.
 Enter a query in the lower-right pane.
@@ -841,7 +841,7 @@ it is referred to as a "most general query".
 It is recommended to write nearly all rules
 in a way that supports the most general query.
 
-To search for the next match, press the semicolon key.
+To search for the next match, press the semicolon key or the spacebar.
 SWI-Prolog also supports pressing the n, r, space, or tab keys to do this.
 Scryer Prolog supports pressing a to output all remaining solutions.
 
