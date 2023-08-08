@@ -1538,7 +1538,7 @@ For example:
 [A, B, C | T] % will be a list of at least three elements if T is a list
 ```
 
-#### Anonymous Variables
+#### Destructuring
 
 Anonymous variables (`_`) can be used to destructure values from a list.
 For example, the following gets the first and third values.
@@ -1553,7 +1553,7 @@ which includes all values after the third.
 % V3 = 7.
 ```
 
-#### append
+#### append Predicate
 
 The built-in predicate `append` relates two lists to a list
 that is the result of appending the first two lists.
@@ -1652,9 +1652,7 @@ print_elements([H|T]) :=
 % blue
 ```
 
-TODO: VERIFY THAT ALL THE DESCRIBED LIST PREDICATES ARE ISO.
-
-#### copy_term
+#### copy_term Predicate
 
 To create a copy of a list, or any term, including nested lists:
 
@@ -1670,23 +1668,7 @@ L1 = [b, c, d], L2 = [a | L1].
 % output is L2 = [a, b, c, d].
 ```
 
-#### include
-
-To create a new list that results from either retaining or removing
-all elements from an existing list that satisfy or fail to satisfy a goal:
-
-```prolog
-even(N) :- mod(N, 2) =:= 0.
-odd(N) :- mod(N, 2) =:= 1.
-
-include(even, [1, 2, 3, 4], L).
-% output is L = [2, 4].
-
-exclude(odd, [1, 2, 3, 4], L).
-% output is L = [2, 4].
-```
-
-#### length
+#### length Predicate
 
 To get the length of a list:
 
@@ -1694,9 +1676,15 @@ To get the length of a list:
 length([a, b, c], L). % L = 3
 ```
 
-#### list_min and list_max
+#### list_min and list_max Predicates
 
-To get the smallest or largest value in a list:
+The `list_min` and `list_max` predicates
+find the smallest and largest numbers in a list.
+
+The `list_min` and `list_max` predicates are not defined in the ISO standard.
+They are present in the Scryer Prolog `lists` library.
+
+For example:
 
 ```prolog
 L = [3, 9, 2, 4], list_min(L, Min).
@@ -1706,12 +1694,17 @@ L = [3, 9, 2, 4], list_max(L, Max).
 % output is Max = 9.
 ```
 
-#### maplist
+#### maplist Predicate
 
 The `maplist` predicate can be used to create a list
 that is derived by applying a given predicate to each element of another list.
 Predicates like this that take another predicate as an argument
 are called "higher-order predicates".
+
+The `maplist` predicate is not defined in the ISO standard.
+It is present in the Scryer Prolog `lists` library.
+It is also present in the SWI-Prolog `apply` library.
+
 For example:
 
 ```prolog
@@ -1722,10 +1715,16 @@ double(A, B) :-
 % output is [2, 4, 6]
 ```
 
-#### member
+#### member Predicate
 
 The `member` predicate can be used find a member of a list
-that is unique from all others. For example:
+that is unique from all others.
+
+The `member` predicate is not defined in the ISO standard.
+It is present in the Scryer Prolog `lists` library.
+It is also present in the SWI-Prolog `lists` library.
+
+For example:
 
 ```prolog
 max_member(List, Max) :-
@@ -1750,7 +1749,13 @@ The `member` predicate can also be used to iterate over the values in a list.
 or example, `member(X, [3, 7, 9])` will set `X`
 to each value in the list one at a time.
 
-#### nth0 and nth1
+#### nth0 and nth1 Predicates
+
+The `nth0` and `nth1` predicates get a list element at a given index.
+
+The `nth0` and `nth1` predicates are not defined in the ISO standard.
+They are present in the Scryer Prolog `lists` library.
+They are also present in the SWI-Prolog `lists` library.
 
 To get the list element at a given index:
 
@@ -1781,9 +1786,16 @@ L1 = [a, b, c], nth0(2, L2, x, L1).
 % output is L2 = [a, b, x, c].
 ```
 
-#### permutation
+#### permutation Predicate
 
-To get all permutations of a list:
+The `permutation` predicate gets all permutations
+of the elements in a given list.
+
+The `permutation` predicate is not defined in the ISO standard.
+It is present in the Scryer Prolog `lists` library.
+It is also present in the SWI-Prolog `lists` library.
+
+For example:
 
 ```prolog
 L = [a, b, c], permutation(L, Ps).
@@ -1797,16 +1809,110 @@ L = [a, b, c], permutation(L, Ps).
 false.
 ```
 
-#### reverse
+#### reverse Predicate
 
 The `reverse` predicate relates a list to another list
 containing the same elements in reverse order.
+
+The `reverse` predicate is not defined in the ISO standard.
+It is present in the Scryer Prolog `lists` library.
+It is also present in the SWI-Prolog `lists` library.
+
 For example:
 
 ```prolog
 ?- reverse([1, 2, 3], X).
 % output is X = [3, 2, 1].
 ```
+
+TODO: VERIFY THAT ALL THE DESCRIBED LIST PREDICATES ARE ISO.
+
+#### select and selectchk Predicates
+
+TODO: Continue editing from here to match previous sections.
+
+To create a new list that results from
+removing only the first occurrence of a given value:
+
+```prolog
+selectchk(b, [a, b, c, b], L).
+% output is L = [a, c, b].
+```
+
+The `select/3` predicate is similar to `selectchk/3`,
+but it iterates through every possible removal.
+
+To create a new list that results from
+replacing only the first occurrence of a given value:
+
+```prolog
+selectchk(b, [a, b, c, b], x, L).
+% output is L = [a, x, c, b].
+```
+
+The `select/4` predicate is similar to `selectchk/4`,
+but it iterates through every possible replacement.
+
+#### sort
+
+The `sort` predicate relates a list to a sorted version of the list.
+
+```prolog
+sort([banana, cherry, apple], S). % S = [apple, banana, cherry]
+```
+
+There is a define sort order when the elements have different types.
+The order from lowest to highest is:
+
+- variables sorted by their names
+- floating point numbers from lowest to highest
+- integers from lowest to highest
+- atoms sorted by their names
+- compound terms (structures) sorted by their arity and then by their functor name
+
+TODO: Add examples of lists with mixed element types and verify what is described above.
+
+#### sumlist
+
+To get the sum of numbers in a list:
+
+```prolog
+L = [1, 2, 3], sum_list(L, Sum).
+% output is Sum = 6.
+```
+
+If the `sum_list` predicate didn't exist,
+it could be implemented with a recursive rule
+or with `foldl` in the `lists` library as follows:
+
+```prolog
+sum_list(List, Sum) :-
+  % If the list is empty then the sum is zero.
+  List = [] -> Sum = 0;
+
+  % Otherwise ...
+  List =
+    % Get the first number and a list of the remaining numbers.
+    [Head|Tail],
+    % Compute the sum of the remaining numbers.
+    sum_list(Tail, TailSum),
+    % The result is the first number plus that sum.
+    % Note the use of the "is" keyword to assign the
+    % result of an arithmetic expression to the Sum argument.
+    Sum is TailSum + Head.
+
+/* Alternate implementation
+:- use_module(library(clpz)).
+:- use_module(library(lists)).
+add(A, B, C) :- C #= A + B.
+sum_list(List, Sum) :- foldl(add, List, 0, Sum).
+*/
+
+?- sum_list([1, 2, 3], X).
+% output is X = 6.
+```
+
+#### Miscellaneous (MOVE THESE!)
 
 To get the length of a list:
 
@@ -1907,91 +2013,6 @@ some(clpfd:even, [1, 5, 9]) % fails
 For implementations of map, filter, and reduce, see {% aTargetBlank
 "https://pbrown.me/blog/functional-prolog-map-filter-and-reduce/",
 "Functional Prolog" %}.
-
-#### select and selectchk
-
-To create a new list that results from
-removing only the first occurrence of a given value:
-
-```prolog
-selectchk(b, [a, b, c, b], L).
-% output is L = [a, c, b].
-```
-
-The `select/3` predicate is similar to `selectchk/3`,
-but it iterates through every possible removal.
-
-To create a new list that results from
-replacing only the first occurrence of a given value:
-
-```prolog
-selectchk(b, [a, b, c, b], x, L).
-% output is L = [a, x, c, b].
-```
-
-The `select/4` predicate is similar to `selectchk/4`,
-but it iterates through every possible replacement.
-
-#### sort
-
-The `sort` predicate relates a list to a sorted version of the list.
-
-```prolog
-sort([banana, cherry, apple], S). % S = [apple, banana, cherry]
-```
-
-There is a define sort order when the elements have different types.
-The order from lowest to highest is:
-
-- variables sorted by their names
-- floating point numbers from lowest to highest
-- integers from lowest to highest
-- atoms sorted by their names
-- compound terms (structures) sorted by their arity and then by their functor name
-
-TODO: Add examples of lists with mixed element types and verify what is described above.
-
-#### sumlist
-
-To get the sum of numbers in a list:
-
-```prolog
-L = [1, 2, 3], sum_list(L, Sum).
-% output is Sum = 6.
-```
-
-If the `sum_list` predicate didn't exist,
-it could be implemented with a recursive rule
-or with `foldl` in the `lists` library as follows:
-
-```prolog
-sum_list(List, Sum) :-
-  % If the list is empty then the sum is zero.
-  List = [] -> Sum = 0;
-
-  % Otherwise ...
-  List =
-    % Get the first number and a list of the remaining numbers.
-    [Head|Tail],
-    % Compute the sum of the remaining numbers.
-    sum_list(Tail, TailSum),
-    % The result is the first number plus that sum.
-    % Note the use of the "is" keyword to assign the
-    % result of an arithmetic expression to the Sum argument.
-    Sum is TailSum + Head.
-
-/* Alternate implementation
-:- use_module(library(clpz)).
-:- use_module(library(lists)).
-add(A, B, C) :- C #= A + B.
-sum_list(List, Sum) :- foldl(add, List, 0, Sum).
-*/
-
-?- sum_list([1, 2, 3], X).
-% output is X = 6.
-```
-
-#### miscellaneous (MOVE THESE!)
 
 To test whether all elements in a list are a given value:
 
