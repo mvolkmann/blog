@@ -1540,8 +1540,21 @@ For example:
 
 #### Destructuring
 
-Anonymous variables (`_`) can be used to destructure values from a list.
-For example, the following gets the first and third values.
+The ISO `|` operator can be used to get the head and tail of a list.
+Anonymous variables (`_`) can be used as placeholders for
+elements whose values we don't care about.
+
+For example:
+
+```prolog
+print_list_parts([H|T]) :-
+  format('head is ~w, tail is ~w', [H, T]).
+
+?- print_list_parts([red, green, blue]).
+% output is head is red, tail is [green,blue]
+```
+
+The following code gets the first and third values from a list.
 The `| _` syntax at the end of the list on the left side
 indicates that we do not care about values in the tail of the list
 which includes all values after the third.
@@ -1551,6 +1564,32 @@ which includes all values after the third.
 % output is
 % V1 = 9,
 % V3 = 7.
+```
+
+To create a new list that results from adding a value
+to the beginning of an existing list:
+
+```prolog
+L1 = [b, c, d], L2 = [a | L1].
+% output is L2 = [a, b, c, d].
+```
+
+The follow recursive rule iterates over all the elements in a list.
+Note how destructuring a list into its head and tail
+can be done in the argument list.
+
+```prolog
+print_elements([]). % When the list is empty, do nothing.
+
+print_elements([H|T]) :=
+  write(H), nl,
+  print_elements(T).
+
+?- print_elements([red, green, blue]).
+% output is
+% red
+% green
+% blue
 ```
 
 #### append Predicate
@@ -1619,39 +1658,6 @@ L1 = [a, b, c], append(L1, [d], L2).
 % output is L2 = [a, b, c, d].
 ```
 
-#### Bar Operator
-
-The ISO `|` operator can be used to get the head and tail of a list.
-For example:
-
-```prolog
-% This destructures the list passed in into its head and tail.
-print_list_parts([H|T]) :-
-  format('head is ~w, tail is ~w', [H, T]).
-
-?- print_list_parts([red, green, blue]).
-% output is head is red, tail is [green,blue]
-```
-
-The `|` operator can be used in a recursive rule
-to iterate over all elements of a list.
-Destructuring a list into its head and tail can be done in the argument list.
-For example:
-
-```prolog
-print_elements([]).
-
-print_elements([H|T]) :=
-  write(H), nl,
-  print_elements(T).
-
-?- print_elements([red, green, blue]).
-% output is
-% red
-% green
-% blue
-```
-
 #### copy_term Predicate
 
 The built-in, ISO `copy_term` predicate creates a copy of any term which can be
@@ -1713,13 +1719,27 @@ double(A, B) :-
 
 #### member Predicate
 
-The `member` predicate can be used find a member of a list
-that is unique from all others.
+The `member` predicate can be used determine if a value is a member of a list.
 
 The `member` predicate is not defined in the ISO standard.
 It is present in the Scryer Prolog and SWI-Prolog `lists` libraries.
 
 For example:
+
+```prolog
+L = [3, 7, 9], member(7, L).
+% doesn't output true, but also doesn't fail
+
+L = [3, 7, 9], member(4, L).
+% output is false
+```
+
+The `member` predicate can be used to iterate over the values in a list.
+For example, `member(X, [3, 7, 9])` will set `X`
+to each value in the list one at a time.
+
+The `member` predicate can be used to implement
+the equivalent of the `list_max` predicate.
 
 ```prolog
 max_member(List, Max) :-
@@ -1739,10 +1759,6 @@ max_([], Max, Max).
 max_([H|T], Max0, Max) :- H > Max0, max_(T, H, Max).
 max_([H|T], Max0, Max) :- H =< Max0, max_(T, Max0, Max).
 ```
-
-The `member` predicate can also be used to iterate over the values in a list.
-or example, `member(X, [3, 7, 9])` will set `X`
-to each value in the list one at a time.
 
 #### nth0 and nth1 Predicates
 
@@ -1891,24 +1907,6 @@ L = [1, 2, 3], sum_list(L, Sum).
 ```
 
 #### Miscellaneous (MOVE THESE!)
-
-To test whether a value is a member of a list:
-
-```prolog
-L = [3, 7, 9], member(7, L).
-% doesn't output true, but also doesn't fail
-
-L = [3, 7, 9], member(4, L).
-% output is false
-```
-
-To create a new list that results from adding a value
-to the beginning of an existing list:
-
-```prolog
-L1 = [b, c, d], L2 = [a | L1].
-% output is L2 = [a, b, c, d].
-```
 
 L = [c, a, d, b], max_member(Max, L).
 % output is Max = d.
