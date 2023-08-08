@@ -960,6 +960,44 @@ To enter new facts and rules in a running session:
 
 It seems this can replace existing facts rather than add to them.
 
+## Naming Conventions
+
+Atoms are sequences of letters, numbers, and underscores
+that begin with a lowercase letter.
+They can also be any text enclosed in single quotes (allows spaces).
+There are also the following special atoms:
+`;`, `!`, `[]`, and `{}`.
+
+Variables are also sequences of letters, numbers, and underscores,
+but they begin with an uppercase letter or an underscore.
+An underscore by itself represents an anonymous variable.
+These can be used as arguments to predicates
+when the value of an argument does not matter.
+
+Predicate names should describe a relationship rather than an imperative action.
+It is also recommended that they indicate the kinds of arguments they take
+and the order of the arguments.
+For example, using the name `sort` for a predicate that can
+generate a sorted list from an unsorted one
+is imperative and does not describe its arguments.
+A better name is `list_ascending` because:
+
+1. It indicates that there are two arguments.
+1. It indicates the order of the arguments which is
+   the unsorted list followed by the sorted list.
+1. It does not favor a specific direction and can be used to
+   generate a sorted list or determine whether a list is already sorted.
+
+The following built-in predicates are examples of good names:
+`atom_chars`, `atom_codes`, `atom_length`, `atom_prefix`,
+`number_chars`, and `number_codes`.
+
+Only predicates with side effects such as producing output
+should have imperative names.
+The following built-in predicates are examples of this:
+`asserta`, `assertz`, `retract`, `retractall`,
+`write`, `write_canonical`, and `write_term`.
+
 ## Common Errors
 
 When an attempt to run a Prolog program fails,
@@ -2067,7 +2105,7 @@ Note that:
 - Each board position is represented by a row-column pair.
 - The arguments destructure the keys and values
   of pairs that are passed in.
-- Underscore anonymous variables are used for values that do not matter.
+- Anonymous variables (underscore) are used for values that do not matter.
 - The cut operator `!` stops searching after the first solution is found.
 
 ```prolog
@@ -2740,44 +2778,6 @@ write(S).
 | `.`           | terminates all commands     |
 | `%`           | begins single-line comment  |
 | `/*` and `*/` | delimits multi-line comment |
-
-## Naming Conventions
-
-Atoms are sequences of letters, numbers, and underscores
-that begin with a lowercase letter.
-They can also be any text enclosed in single quotes (allows spaces).
-There are also the following special atoms:
-`;`, `!`, `[]`, and `{}`.
-
-Variables are also sequences of letters, numbers, and underscores,
-but they begin with an uppercase letter or an underscore.
-An underscore by itself represents an anonymous variable.
-These can be used as arguments to predicates
-when the value of an argument does not matter.
-
-Predicate names should describe a relationship rather than an imperative action.
-It is also recommended that they indicate the kinds of arguments they take
-and the order of the arguments.
-For example, using the name `sort` for a predicate that can
-generate a sorted list from an unsorted one
-is imperative and does not describe its arguments.
-A better name is `list_ascending` because:
-
-1. It indicates that there are two arguments.
-1. It indicates the order of the arguments which is
-   the unsorted list followed by the sorted list.
-1. It does not favor a specific direction and can be used to
-   generate a sorted list or determine whether a list is already sorted.
-
-The following built-in predicates are examples of good names:
-`atom_chars`, `atom_codes`, `atom_length`, `atom_prefix`,
-`number_chars`, and `number_codes`.
-
-Only predicates with side effects such as producing output
-should have imperative names.
-The following built-in predicates are examples of this:
-`asserta`, `assertz`, `retract`, `retractall`,
-`write`, `write_canonical`, and `write_term`.
 
 ## Operators
 
