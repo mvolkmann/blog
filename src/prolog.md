@@ -1730,7 +1730,7 @@ length_at_least(Length, List, Bool) :-
 demo :-
   L0 = ["apple", "banana", "cherry", "date"],
   tfilter(length_at_least(6), L0, L),
-  L == ["banana", "cherry"]. % succeeds
+  write(L), nl. % ["banana", "cherry"]
 ```
 
 #### foldl Predicate
