@@ -955,10 +955,10 @@ enter `make.` to reload all of them.
 To enter new facts and rules in a running session:
 
 - Enter `[user].` to open stdin as a pseudo file.
-- Enter facts and rules.
+- Enter facts and rules, pressing the return key after each.
 - Press ctrl-d to close and load the pseudo file.
 
-It seems this can replace existing facts rather than add to them.
+This replaces all existing clauses that match rather than adding to them.
 
 ## Naming Conventions
 
@@ -2443,9 +2443,8 @@ retractall(likes(_, _)). % removes everything that anybody likes
 likes(X, Y). % outputs false.
 ```
 
-Another way to add predicates from the top level
-is to enter `[user].`, type the desired predicates,
-and press ctrl-d to return to the top level.
+Another way to add predicates from the top level is to use `[user].`
+as described in the "Typical Flow" section.
 
 ## Input
 
