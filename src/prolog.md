@@ -2379,7 +2379,8 @@ dog(maisey).
 dog(oscar).
 dog(ramsay).
 
-is_dog(X, B) :- dog(X) -> B = true; B = false.
+is_dog(X, true) :- dog(X).
+is_dog(X, false) :- \+ dog(X).
 
 report_reif(Name) :-
   % The first argument must be a predicate that accepts
@@ -3418,8 +3419,12 @@ if the first argument sets its argument to `false`.
 For example:
 
 ```prolog
-is_zero(N, B) :- N =:= 0 -> B = true; B = false.
-is_positive(N, B) :- N > 0 -> B = true; B = false.
+is_zero(N, true) :- N =:= 0.
+is_zero(N, false) :- N =\= 0.
+
+is_positive(N, true) :- N > 0.
+is_positive(N, false) :- N =< 0.
+
 sign_word(N, Word) :-
   if_(
     is_zero(N),
@@ -3601,6 +3606,8 @@ sum2(X, Y, Z) :-
 sum3(A1, A2, A3, A4) :-
   A4 #= A1 + A2 + A3.
 
+writeln(X) :- write(X), nl.
+
 :- initialization((
   sum3(1, 2, 3, R1),
   writeln(R1), % 6
@@ -3624,7 +3631,7 @@ sum3(A1, A2, A3, A4) :-
   P = <, % could be set to a different relational operator
   Term =.. [P, 3, 5], % builds term from list containing functor and arguments
   % call(Term), % evaluates term
-  (call(Term) -> writeln('yes'); writeln('no')), % yes
+  ( call(Term) -> writeln(yes); writeln(no) ), % yes
 
   halt
 )).
@@ -5173,6 +5180,7 @@ have_query(Response, QueryChars) :-
 
   tfilter(is_var, Terms, Variables),
   length(Variables, Count),
+  % When a query does not contain any variables, we want a Boolean result.
   ( Count == 0 ->
     ( call(Goal) -> Results = true; Results = false )
   ; Count == 1 ->
