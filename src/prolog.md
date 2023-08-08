@@ -5196,10 +5196,8 @@ home_handler(_, Response) :-
   ), Content),
   http_body(Response, text(Content)).
 
-% Dr. Triska won't like this use of ->,
-% but I do not yet see a better way to handle this.
-is_var(Term, Bool) :-
-  var(Term) -> Bool = true; Bool = false.
+is_var(Term, false) :- \+ var(Term).
+is_var(Term, true) :- var(Term).
 
 listen :-
   % This cannot be stopped with ctrl-c.
