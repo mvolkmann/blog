@@ -1544,14 +1544,10 @@ The ISO `|` operator can be used to get the head and tail of a list.
 Anonymous variables (`_`) can be used as placeholders for
 elements whose values we don't care about.
 
-For example:
+To get the head and tail of a list:
 
 ```prolog
-print_list_parts([H|T]) :-
-  format('head is ~w, tail is ~w', [H, T]).
-
-?- print_list_parts([red, green, blue]).
-% output is head is red, tail is [green,blue]
+L = [foo, bar, baz], [H|T] = L. % H = foo, T = [bar, baz].
 ```
 
 The following code gets the first and third values from a list.
@@ -1667,6 +1663,97 @@ a list or structure, possibly containing uninstantiated variables.
 copy_term(ListIn, ListOut)
 ```
 
+#### every and some Predicates
+
+There are no built-in predicates that determine if
+every or some element in a list satisfies a given predicate.
+These can be implemented as follows:
+
+```prolog
+% This succeeds if every element in List satisfies Predicate
+% and fails otherwise.
+every(Predicate, List) :- maplist(Predicate, List).
+
+% This succeeds if at least one element in a list satisfies Predicate.
+some(_, []) :- fail.
+some(Predicate, [H|T]) :-
+  (call(Predicate, H) ->
+    true
+  ; some(Predicate, T)
+  ).
+```
+
+The `every` and `some` predicates defined above can be used as follows:
+
+```prolog
+every(clpfd:even, [2, 6, 8]) % succeeds
+every(clpfd:even, [2, 5, 8]) % fails
+some(clpfd:even, [1, 6, 9]) % succeeds
+some(clpfd:even, [1, 5, 9]) % fails
+```
+
+#### filtering
+
+The `tfilter` predicate in the `reif` library
+can be used to implement the predicate `list_matching`
+that relates a list to another list which only contains
+elements from the first list that satisfy a given predicate.
+
+```prolog
+% This relates the list L0 to the list L
+% which contains all elements for which predicate P holds.
+check(P, E, B) :-
+  Goal =.. [P, E],
+  ( Goal -> B = true; B = false).
+
+list_matching(L0, P, L) :- tfilter(check(P), L0, L).
+```
+
+The following code takes a list of strings
+and generates a list of those whose length is greater than 5.
+
+```prolog
+is_long(S) :- length(S, Len), Len > 5.
+L0 = ["apple", "banana", "cherry", "date"],
+list_matching(L0, is_long, L).
+% L = ["banana", "cherry"]
+```
+
+#### foldl Predicate
+
+The `foldl` predicate is similar to what is called "reduce"
+in other programming languages.
+It is used to related a list of values to a single value
+that is computed from the list values.
+For example:
+
+```prolog
+add(A, B, C) :- C #= A + B.
+
+Numbers = [1, 2, 3], foldl(add, Numbers, 0, Sum). # Sum = 6
+```
+
+#### Last Element
+
+There is no provided predicate that relates a list to its last element.
+The following predicate, `list_last`, implements this.
+
+```prolog
+% This relates a list to its last element.
+list_last([], []).
+list_last(List, Last) :-
+  length(List, Length),
+  nth1(Length, List, Last).
+```
+
+For example:
+
+```prolog
+list_last([], Last). % Last = []
+
+list_last([foo, bar, baz], Last). % Last = baz
+```
+
 #### length Predicate
 
 The built-in, ISO `length` predicate relates a list to its length.
@@ -1700,6 +1787,7 @@ L = [3, 9, 2, 4], list_max(L, Max).
 
 The `maplist` predicate can be used to create a list
 that is derived by applying a given predicate to each element of another list.
+This is similar to what is called "map" in other programming languages.
 Predicates like this that take another predicate as an argument
 are called "higher-order predicates".
 
@@ -1906,118 +1994,6 @@ L = [1, 2, 3], sum_list(L, Sum).
 % output is Sum = 6.
 ```
 
-#### Miscellaneous (MOVE THESE!)
-
-L = [c, a, d, b], max_member(Max, L).
-% output is Max = d.
-
-To find the intersection of two lists:
-
-```prolog
-L1 = [a, b, c], L2 = [c, b, d], intersection(L1, L2, L3).
-% output is L3 = [b, c].
-```
-
-To find the union of two lists:
-
-```prolog
-L1 = [a, b, c], L2 = [c, b, d], union(L1, L2, L3).
-% output is L3 = [a, c, b, d].
-```
-
-To sort a list:
-
-```prolog
-L = [c, b, d, a], sort(L, S).
-% output is [a, b, c, d].
-
-age_compare(>, person(_, A1), person(_, A2)) :- A1 > A2.
-age_compare(<, person(_, A1), person(_, A2)) :- A1 < A2.
-age_compare(=, person(_, A1), person(_, A2)) :- A1 = A2.
-
-?- P1 = person(ann, 35),
-   P2 = person(bob, 50),
-   P3 = person(carl, 19),
-   People = [P1, P2, P3],
-
-   predsort(age_compare, People, Sorted),
-   write(Sorted), nl.
-   % output is [person(carl,19),person(ann,35),person(bob,50)]
-```
-
-To determine if one list contains a subset of another:
-
-```prolog
-L = [c, d, b, a], subset([b, c], L).
-% doesn't output true, but also doesn't fail
-
-L = [c, d, b, a], subset([b, e], L).
-% outputs false
-```
-
-There are no built-in predicates that determine if
-every or some element of a list satisfies a given predicate.
-Those can be implemented as follows:
-
-```prolog
-% This succeeds if every element in List satisfies Predicate
-% and fails otherwise.
-every(Predicate, List) :- maplist(Predicate, List).
-
-% This succeeds if at least one element in List satisfies Predicate
-% and fails otherwise.
-some(_, []) :- fail.
-some(Predicate, [H|T]) :-
-  call(Predicate, H), !; some(Predicate, T).
-```
-
-The `every` and `some` predicates defined above can be used as follows:
-
-```prolog
-every(clpfd:even, [2, 6, 8]) % succeeds
-every(clpfd:even, [2, 5, 8]) % fails
-some(clpfd:even, [1, 6, 9]) % succeeds
-some(clpfd:even, [1, 5, 9]) % fails
-```
-
-For implementations of map, filter, and reduce, see {% aTargetBlank
-"https://pbrown.me/blog/functional-prolog-map-filter-and-reduce/",
-"Functional Prolog" %}.
-
-To test whether all elements in a list are a given value:
-
-```prolog
-maplist(=(V), L).
-```
-
-To test whether a list begins with a given sub-list:
-
-```prolog
-L = [a, b, c, d], prefix([a, b], L).
-% doesn't output true, but also doesn't fail
-```
-
-To get the first element of a list:
-
-```prolog
-L = [a, b, c, d], [H|_] = L.
-% output is H = a.
-```
-
-To test whether a list ends with a given sub-list:
-
-```prolog
-L = [a, b, c, d], last(L, d).
-% doesn't output true, but also doesn't fail
-```
-
-To get the last element of a list:
-
-```prolog
-L = [a, b, c, d], last(L, E).
-% output is E = d.
-```
-
 ### Pairs
 
 A Prolog "pair" is a key and a value.
@@ -2217,8 +2193,6 @@ To create a new dict where a key/value part has been added or modified:
 MyDict = demo{a: 1, b: 2},
 NewDict = MyDict.put(b, 3)
 ```
-
-TODO: Add more detail on working with dicts.
 
 ### Linked Lists
 
@@ -2424,6 +2398,10 @@ likes(X, Y). % outputs X = tami, Y = bikes.
 retractall(likes(_, _)). % removes everything that anybody likes
 likes(X, Y). % outputs false.
 ```
+
+Another way to add predicates from the top level
+is to enter `[user].`, type the desired predicates,
+and press ctrl-d to return to the top level.
 
 ## Input
 
