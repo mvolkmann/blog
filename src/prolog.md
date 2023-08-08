@@ -1555,7 +1555,7 @@ which includes all values after the third.
 
 #### append Predicate
 
-The built-in predicate `append` relates two lists to a list
+The built-in, ISO predicate `append` relates two lists to a list
 that is the result of appending the first two lists.
 
 If `append` were not built-in, it could be implemented as follows:
@@ -1621,7 +1621,7 @@ L1 = [a, b, c], append(L1, [d], L2).
 
 #### Bar Operator
 
-The `|` operator can be used to get the head and tail of a list.
+The ISO `|` operator can be used to get the head and tail of a list.
 For example:
 
 ```prolog
@@ -1654,26 +1654,20 @@ print_elements([H|T]) :=
 
 #### copy_term Predicate
 
-To create a copy of a list, or any term, including nested lists:
+The built-in, ISO `copy_term` predicate creates a copy of any term which can be
+a list or structure, possibly containing uninstantiated variables.
 
 ```prolog
 copy_term(ListIn, ListOut)
 ```
 
-To create a new list that results from adding a value
-to the beginning of an existing list:
-
-```prolog
-L1 = [b, c, d], L2 = [a | L1].
-% output is L2 = [a, b, c, d].
-```
-
 #### length Predicate
 
-To get the length of a list:
+The built-in, ISO `length` predicate relates a list to its length.
+For example:
 
 ```prolog
-length([a, b, c], L). % L = 3
+L = [a, b, c], length(L, Len). % Len = 3
 ```
 
 #### list_min and list_max Predicates
@@ -1683,6 +1677,8 @@ find the smallest and largest numbers in a list.
 
 The `list_min` and `list_max` predicates are not defined in the ISO standard.
 They are present in the Scryer Prolog `lists` library.
+In SWI-Prolog, the `min_list` and `max_list` predicates
+provide the same functionality and are present in the `lists` library.
 
 For example:
 
@@ -1721,8 +1717,7 @@ The `member` predicate can be used find a member of a list
 that is unique from all others.
 
 The `member` predicate is not defined in the ISO standard.
-It is present in the Scryer Prolog `lists` library.
-It is also present in the SWI-Prolog `lists` library.
+It is present in the Scryer Prolog and SWI-Prolog `lists` libraries.
 
 For example:
 
@@ -1754,8 +1749,7 @@ to each value in the list one at a time.
 The `nth0` and `nth1` predicates get a list element at a given index.
 
 The `nth0` and `nth1` predicates are not defined in the ISO standard.
-They are present in the Scryer Prolog `lists` library.
-They are also present in the SWI-Prolog `lists` library.
+They are present in the Scryer Prolog and SWI-Prolog `lists` libraries.
 
 To get the list element at a given index:
 
@@ -1792,8 +1786,7 @@ The `permutation` predicate gets all permutations
 of the elements in a given list.
 
 The `permutation` predicate is not defined in the ISO standard.
-It is present in the Scryer Prolog `lists` library.
-It is also present in the SWI-Prolog `lists` library.
+It is present in the Scryer Prolog and SWI-Prolog `lists` libraries.
 
 For example:
 
@@ -1815,8 +1808,7 @@ The `reverse` predicate relates a list to another list
 containing the same elements in reverse order.
 
 The `reverse` predicate is not defined in the ISO standard.
-It is present in the Scryer Prolog `lists` library.
-It is also present in the SWI-Prolog `lists` library.
+It is present in the Scryer Prolog and SWI-Prolog `lists` libraries.
 
 For example:
 
@@ -1825,43 +1817,47 @@ For example:
 % output is X = [3, 2, 1].
 ```
 
-TODO: VERIFY THAT ALL THE DESCRIBED LIST PREDICATES ARE ISO.
+#### same_length Predicate
 
-#### select and selectchk Predicates
+The `same_length` predicate succeeds if two given lists have the same length.
 
-TODO: Continue editing from here to match previous sections.
+The `same_length` predicate is not defined in the ISO standard.
+It is present in the Scryer Prolog and SWI-Prolog `lists` libraries.
 
-To create a new list that results from
-removing only the first occurrence of a given value:
+For example:
 
 ```prolog
-selectchk(b, [a, b, c, b], L).
+L1 = [a, b, c], L2 = [9, 8, 7], same_length(L1, L2).
+% doesn't output true, but also doesn't fail
+```
+
+#### select Predicate
+
+The `select` predicate relates a list to another list
+where the first instance of a given element is removed.
+
+The `select` predicate is not defined in the ISO standard.
+It is present in the Scryer Prolog and SWI-Prolog `lists` libraries.
+
+To create a new list that results from
+removing the first occurrence of a given value:
+
+```prolog
+select(b, [a, b, c, b], L).
 % output is L = [a, c, b].
 ```
 
-The `select/3` predicate is similar to `selectchk/3`,
-but it iterates through every possible removal.
+#### sort Predicate
 
-To create a new list that results from
-replacing only the first occurrence of a given value:
-
-```prolog
-selectchk(b, [a, b, c, b], x, L).
-% output is L = [a, x, c, b].
-```
-
-The `select/4` predicate is similar to `selectchk/4`,
-but it iterates through every possible replacement.
-
-#### sort
-
-The `sort` predicate relates a list to a sorted version of the list.
+The built-in, ISO predicate `sort` relates
+a list to a sorted version of the list.
+For example:
 
 ```prolog
 sort([banana, cherry, apple], S). % S = [apple, banana, cherry]
 ```
 
-There is a define sort order when the elements have different types.
+There is a defined sort order when the elements have different types.
 The order from lowest to highest is:
 
 - variables sorted by their names
@@ -1870,63 +1866,31 @@ The order from lowest to highest is:
 - atoms sorted by their names
 - compound terms (structures) sorted by their arity and then by their functor name
 
-TODO: Add examples of lists with mixed element types and verify what is described above.
+The following code demonstrates sorting a list
+containing all these kinds of elements.
 
-#### sumlist
+```prolog
+L0 = [b(a1, a2), b(a1), a(a1, a2), a(a1), foo, bar, 2, 1, 2.2, 1.1, B, A],
+sort(L0, L)
+% L = [_580800,_580802,1.1,2.2,1,2,bar,foo,a(a1),b(a1),a(a1,a2),b(a1,a2)]
+% The variables A and B were assigned the names _580800 and _580802.
+```
 
-To get the sum of numbers in a list:
+#### sum_list Predicate
+
+The `sum_list` predicate relates a list of numbers to its sum.
+
+The `sum_list` predicate is not defined in the ISO standard.
+It is present in the Scryer Prolog and SWI-Prolog `lists` libraries.
+
+For example:
 
 ```prolog
 L = [1, 2, 3], sum_list(L, Sum).
 % output is Sum = 6.
 ```
 
-If the `sum_list` predicate didn't exist,
-it could be implemented with a recursive rule
-or with `foldl` in the `lists` library as follows:
-
-```prolog
-sum_list(List, Sum) :-
-  % If the list is empty then the sum is zero.
-  List = [] -> Sum = 0;
-
-  % Otherwise ...
-  List =
-    % Get the first number and a list of the remaining numbers.
-    [Head|Tail],
-    % Compute the sum of the remaining numbers.
-    sum_list(Tail, TailSum),
-    % The result is the first number plus that sum.
-    % Note the use of the "is" keyword to assign the
-    % result of an arithmetic expression to the Sum argument.
-    Sum is TailSum + Head.
-
-/* Alternate implementation
-:- use_module(library(clpz)).
-:- use_module(library(lists)).
-add(A, B, C) :- C #= A + B.
-sum_list(List, Sum) :- foldl(add, List, 0, Sum).
-*/
-
-?- sum_list([1, 2, 3], X).
-% output is X = 6.
-```
-
 #### Miscellaneous (MOVE THESE!)
-
-To get the length of a list:
-
-```prolog
-L = [a, b, c], length(L, X).
-% output is X = 3.
-```
-
-To determine if two lists have the same length:
-
-```prolog
-L1 = [a, b, c], L2 = [9, 8, 7], same_length(L1, L2).
-% doesn't output true, but also doesn't fail
-```
 
 To test whether a value is a member of a list:
 
@@ -1936,6 +1900,14 @@ L = [3, 7, 9], member(7, L).
 
 L = [3, 7, 9], member(4, L).
 % output is false
+```
+
+To create a new list that results from adding a value
+to the beginning of an existing list:
+
+```prolog
+L1 = [b, c, d], L2 = [a | L1].
+% output is L2 = [a, b, c, d].
 ```
 
 L = [c, a, d, b], max_member(Max, L).
