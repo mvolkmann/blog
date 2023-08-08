@@ -734,8 +734,6 @@ area(rectangle, Width, Height, X) :- X is Width * Height.
 X = 12.566370614359172.
 ```
 
-TODO: See the version of the area rule that uses clpr in geometry.pl.
-
 Rules only set the values variables that are
 arguments or used in body goals one time.
 Once set, they cannot be modified except through backtracking.
@@ -1187,14 +1185,27 @@ it is preferable to write a rule that either succeeds or fails.
 
 ### Numbers
 
+Prolog supports three kinds of numbers, integer, floating point, and rational.
+
+The following code demonstrates each of these:
+
+```prolog
+IntegerSum is 2 + 3,
+write(IntegerSum), nl. % 5
+
+FloatSum is 2.1 + 3.2,
+write(FloatSum), nl. % 5.300000000000001
+
+RationalSum is 1 rdiv 3 + 1 rdiv 6,
+write(RationalSum), nl. % 0.5
+```
+
 The following rules determine whether a given number is even or odd:
 
 ```prolog
-even(N) :- mod(N, 2) =:= 0.
-odd(N) :- mod(N, 2) =:= 1.
+even(N) :- N mod 2 =:= 0.
+odd(N) :- N mod 2 =:= 1.
 ```
-
-TODO: Add more detail here!
 
 ### Strings
 
