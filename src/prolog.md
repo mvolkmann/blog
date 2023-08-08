@@ -1733,6 +1733,50 @@ add(A, B, C) :- C #= A + B.
 Numbers = [1, 2, 3], foldl(add, Numbers, 0, Sum). # Sum = 6
 ```
 
+#### forall Predicate
+
+The `forall` predicate tests whether all possible bindings
+in a given term, result in another expression holding.
+In this sense it is somewhat like the `every` predicate implemented above.
+
+The `forall` predicate can also be used to execute a goal all possible bindings.
+In this sense it is somewhat like a loop in other programming languages.
+
+The `forall` predicate is not defined in the ISO standard.
+It is present in the Scryer Prolog `ios_ext` library.
+It is a built-in predicate in SWI-Prolog.
+
+The following code determines if all numbers in a list are even:
+
+```prolog
+:- use_module(library(iso_ext)).
+
+all_even(L) :- forall(member(N, L), N mod 2 =:= 0).
+
+demo :-
+  L = [2, 4, 8],
+  ( all_even(L) -> write(yes); write(no) ).
+```
+
+The following code executes a goal for all matching facts.
+The goal outputs information about unified variables.
+
+```prolog
+:- use_module(library(format)).
+:- use_module(library(iso_ext)).
+
+dog(comet, whippet).
+dog(maisey, treeing_walker_coonhound).
+dog(oscar, german_shorthaired_pointer).
+dog(ramsay, native_american_indian_dog).
+
+demo :-
+  forall(
+    dog(Name, Breed),
+    format("~w is a ~w.~n", [Name, Breed])
+  ).
+```
+
 #### Last Element
 
 There is no provided predicate that relates a list to its last element.
