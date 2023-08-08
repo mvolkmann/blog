@@ -1710,24 +1710,27 @@ can be used to implement the predicate `list_matching`
 that relates a list to another list which only contains
 elements from the first list that satisfy a given predicate.
 
-```prolog
-% This relates the list L0 to the list L
-% which contains all elements for which predicate P holds.
-check(P, E, B) :-
-  Goal =.. [P, E],
-  ( Goal -> B = true; B = false).
-
-list_matching(L0, P, L) :- tfilter(check(P), L0, L).
-```
-
-The following code takes a list of strings
-and generates a list of those whose length is greater than 5.
+The following code takes a list of strings and
+generates a list of those whose length is greater than or equal to 6.
 
 ```prolog
-is_long(S) :- length(S, Len), Len > 5.
-L0 = ["apple", "banana", "cherry", "date"],
-list_matching(L0, is_long, L).
-% L = ["banana", "cherry"]
+:- use_module(library(clpz)). % for zcompare
+:- use_module(library(reif)). % for tfilter
+
+% Greater or equal
+ge(=, true).
+ge(>, true).
+ge(<, false).
+
+length_at_least(Length, List, Bool) :-
+  length(List, Len),
+  zcompare(Compare, Len, Length), % sets Compare to =, >, or <
+  ge(Compare, Bool). % sets Bool to true or false
+
+demo :-
+  L0 = ["apple", "banana", "cherry", "date"],
+  tfilter(length_at_least(6), L0, L),
+  L == ["banana", "cherry"]. % succeeds
 ```
 
 #### foldl Predicate
