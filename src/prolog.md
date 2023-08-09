@@ -3812,14 +3812,18 @@ The following is a list of built-in predicates
 that are considered to ber part of the pure monotonic core:
 
 - `true/0`, `false/0`, `fail/0`
-- `unify_with_occurs_check/2` (sound alternative to `=/2`)
-- `(=)/2`, `dif/2`
-- arithemetic constraints from library clpfd/clpz such as
-  `(#=)/2` and `(#\=)/2`
-- `call(Goal)` if `Goal` is pure
-- `maplist(Goal, Ls)` if `Goal` is pure
+- `(=)/2`, `unify_with_occurs_check/2` (sound alternative to `=/2`)
 - conjunction `(A, B)` and disjunction `(A; B)` if `A` and `B` are pure
 - `repeat/0`
+- `is/2`?
+- `call(Goal)` if `Goal` is pure
+- predicates in library(clpfd/clpz) such as `(#=)/2` and `(#\=)/2`
+- `dif/2` in library(dif)
+- `dif_si/2` in library(si)
+- `number_chars/2`, `number_codes/2`
+- if-then-else with `(;)/2`
+- `maplist(Goal, Ls)` if `Goal` is pure
+- user-defined predicates that only use predicates listed above
 
 ## Help
 
