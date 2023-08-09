@@ -1872,18 +1872,12 @@ It is present in the Scryer Prolog and SWI-Prolog `lists` libraries.
 
 For example:
 
-```prolog
+````prolog
 L = [3, 7, 9], member(7, L).
 % doesn't output true, but also doesn't fail
 
 L = [3, 7, 9], member(4, L).
 % output is false
-```
-
-The `member` predicate can be used to iterate over the values in a list.
-For example, `member(X, [3, 7, 9])` will set `X`
-to each value in the list one at a time.
-
 The `member` predicate can be used to implement
 the equivalent of the `list_max` predicate.
 
@@ -1893,7 +1887,7 @@ max_member(List, Max) :-
   % It is not true that there is any member of List
   % whose value is greater than Max.
   \+ (member(E, List), E > Max).
-```
+````
 
 Compare the `max_member` rule to the following recursive rule
 which provides the same results.
