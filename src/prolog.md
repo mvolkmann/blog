@@ -3808,6 +3808,19 @@ adding a clause for a predicate or removing a goal from a clause
 only makes the predicate more general.
 This allows more solutions rather than removing any.
 
+The following is a list of built-in predicates
+that are considered to ber part of the pure monotonic core:
+
+- `true/0`, `false/0`, `fail/0`
+- `unify_with_occurs_check/2` (sound alternative to `=/2`)
+- `(=)/2`, `dif/2`
+- arithemetic constraints from library clpfd/clpz such as
+  `(#=)/2` and `(#\=)/2`
+- `call(Goal)` if `Goal` is pure
+- `maplist(Goal, Ls)` if `Goal` is pure
+- conjunction `(A, B)` and disjunction `(A; B)` if `A` and `B` are pure
+- `repeat/0`
+
 ## Help
 
 Documentation of predicates uses **argument mode indicators**
