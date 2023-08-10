@@ -100,6 +100,10 @@ For example, "TodoPage".
 Adding the name suffix "Page" is often useful when TypeScript is being used
 because there will likely be a custom type named "Page.
 
+In React, unlike in Svelte, the JSX returned by a component can be split
+into related pieces by writing functions that return snippets of JSX.
+Often this makes the code easier to read and understand.
+
 ## Non-page Components
 
 Components used by page components can be defined in two places.
@@ -216,6 +220,14 @@ to specify a path that begins at the root of the project
 rather than being relative to the current directory. See {% aTargetBlank
 "https://nextjs.org/docs/app/building-your-application/configuring/absolute-imports-and-module-aliases#module-aliases",
 "Module Aliases" %}.
+
+## Custom Types
+
+Custom TypeScript types can be defined in many places.
+One option is to create the top-level file `types.d.ts`
+and define all custom types used by a project there.
+This file is automatically imported,
+so any source file in the project can use the types without importing them.
 
 ## Server Routes
 
