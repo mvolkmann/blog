@@ -191,6 +191,20 @@ This will not result in duplicate fetches.
 Next.js will automatically cache the result of the first call
 and use it for the result of subsequent calls.
 
+To cause cached results to expire after a given number of seconds,
+add an option to the `fetch` call. For example:
+
+```js
+const res = await fetch(url, {next: {revalidate: 60}});
+```
+
+To cause all `fetch` calls made from a given page to
+expire after a given number of seconds, add the following:
+
+```js
+export const revalidate = 60;
+```
+
 ## Error Pages
 
 Error pages are rendered when an error is thrown from a page component.
