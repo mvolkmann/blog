@@ -302,6 +302,8 @@ export default async function TodoPage({params: {id}}: Params) {
 
 The return value of the `notFound` function can be
 returned from a component when data it needs is not found.
+This provides a default 404 page that just says
+"404 | This page could not be found."
 For example, suppose we can't find a todo item with a specific id.
 We could handle that as follows:
 
@@ -326,6 +328,25 @@ export default async function TodoPage({ params: { id } }: Params) {
   return (
     ... content when found ...
   )
+}
+```
+
+To provide a custom 404 page, create the file `non-found.tsx`.
+This supports having a different 404 page for each route.
+For example:
+
+```js
+import Link from 'next/link';
+
+export default function NotFound() {
+  return (
+    <div>
+      <h2>Out of luck today!</h2>
+      <Link href="/todos">
+        <span className="button">Back to List</span>
+      </Link>
+    </div>
+  );
 }
 ```
 
