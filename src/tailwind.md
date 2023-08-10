@@ -1261,11 +1261,33 @@ For example, `text-red` is not a valid Tailwind CSS class name.
 | `text-left`               | `text-align: left;`                                                         |
 | `text-right`              | `text-align: right;`                                                        |
 |                           |                                                                             |
-| `text-black`              | `color: #000;`                                                              |
 | `text-current`            | `color: currentColor;`                                                      |
-| `text-{color}-{n}`        | `color: {color-hex-code};`<br>where n is 100 to 900 in increments of 100    |
-| `text-transparent`        | `color: transparent;`                                                       |
+| `text-black`              | `color: #000;`                                                              |
 | `text-white`              | `color: #fff;`                                                              |
+| `text-transparent`        | `color: transparent;`                                                       |
+| `text-{color}-{n}`        | `color: {color-hex-code};`<br>where n is 100 to 900 in increments of 100    |
+| `text-slate-n`            | `color: #X;`<br>where X is 50, 950, or a multiple of 100                    |
+| `text-gray-n`             | `color: #X;`<br>where X is 50, 950, or a multiple of 100                    |
+| `text-zinc-n`             | `color: #X;`<br>where X is 50, 950, or a multiple of 100                    |
+| `text-neutral-n`          | `color: #X;`<br>where X is 50, 950, or a multiple of 100                    |
+| `text-stone-n`            | `color: #X;`<br>where X is 50, 950, or a multiple of 100                    |
+| `text-red-n`              | `color: #X;`<br>where X is 50, 950, or a multiple of 100                    |
+| `text-orange-n`           | `color: #X;`<br>where X is 50, 950, or a multiple of 100                    |
+| `text-amber-n`            | `color: #X;`<br>where X is 50, 950, or a multiple of 100                    |
+| `text-yellow-n`           | `color: #X;`<br>where X is 50, 950, or a multiple of 100                    |
+| `text-lime-n`             | `color: #X;`<br>where X is 50, 950, or a multiple of 100                    |
+| `text-green-n`            | `color: #X;`<br>where X is 50, 950, or a multiple of 100                    |
+| `text-emerald-n`          | `color: #X;`<br>where X is 50, 950, or a multiple of 100                    |
+| `text-teal-n`             | `color: #X;`<br>where X is 50, 950, or a multiple of 100                    |
+| `text-cyan-n`             | `color: #X;`<br>where X is 50, 950, or a multiple of 100                    |
+| `text-sky-n`              | `color: #X;`<br>where X is 50, 950, or a multiple of 100                    |
+| `text-blue-n`             | `color: #X;`<br>where X is 50, 950, or a multiple of 100                    |
+| `text-indigo-n`           | `color: #X;`<br>where X is 50, 950, or a multiple of 100                    |
+| `text-violet-n`           | `color: #X;`<br>where X is 50, 950, or a multiple of 100                    |
+| `text-purple-n`           | `color: #X;`<br>where X is 50, 950, or a multiple of 100                    |
+| `text-fuchsia-n`          | `color: #X;`<br>where X is 50, 950, or a multiple of 100                    |
+| `text-pink-n`             | `color: #X;`<br>where X is 50, 950, or a multiple of 100                    |
+| `text-rose-n`             | `color: #X;`<br>where X is 50, 950, or a multiple of 100                    |
 |                           |                                                                             |
 | `text-opacity-{n}`        | `--text-opacity: {n}/100;`<br>where n is 0, 25, 50, 75, or 100              |
 |                           |                                                                             |
