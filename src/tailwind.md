@@ -1064,6 +1064,8 @@ Also see the classes in the
 | Name Prefix   | CSS Properties                                                                   |
 | ------------- | -------------------------------------------------------------------------------- |
 | `m-{n}`       | `margin: {n}*0.25rem;`<br>where n is 0 to 8, 10, 12, 16, or 20                   |
+| `mr-*`        | `margin-right: {n}*0.25rem; margin-right: {n}*0.25rem;`<br>where n = 0, 1, or 2  |
+| `mt-*`        | `margin-top: {n}*0.25rem; margin-right: {n}*0.25rem;`<br>where n = 0, 1, or 2    |
 | `mx-*`        | `margin-left: {n}*0.25rem; margin-right: {n}*0.25rem;`<br>where n = 0, 1, or 2   |
 | `my-*`        | `margin-bottom: {n}*0.25rem; margin-top: {n}*0.25rem;`<br>where n = 0, 1, or 2   |
 | `p-{n}`       | `padding: {n}*0.25rem;`<br>where n is 0 to 8, 10, 12, 16, or 20                  |

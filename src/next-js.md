@@ -223,7 +223,7 @@ import Link from 'next/Link';
 
 ## Import Aliases
 
-Import statements can use paths that begin with a character like `@`
+Import statements can use paths that begin with the character `@`
 to specify a path that begins at the root of the project
 rather than being relative to the current directory. See {% aTargetBlank
 "https://nextjs.org/docs/app/building-your-application/configuring/absolute-imports-and-module-aliases#module-aliases",
