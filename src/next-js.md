@@ -88,6 +88,14 @@ Then browse `localhost:3000`.
 
 See the provided `README.md` file in each project for more detail.
 
+## Tailwind
+
+To configure the use of Tailwind in a Next.js project, see {% aTargetBlank
+"https://tailwindcss.com/docs/guides/nextjs",
+"Install Tailwind CSS with Next.js" %}.
+These steps should not be necessary if you opted into use of Tailwind
+when the project was created.
+
 ## Modifying App
 
 Begin by modifying `src/app/page.tsx`.
@@ -228,6 +236,53 @@ to specify a path that begins at the root of the project
 rather than being relative to the current directory. See {% aTargetBlank
 "https://nextjs.org/docs/app/building-your-application/configuring/absolute-imports-and-module-aliases#module-aliases",
 "Module Aliases" %}.
+
+## Dynamic Routes
+
+Dynamic routes are pages whose URLs contain path parameters
+that are used to render the page.
+For example, the path parameter can be the ID of an object
+whose data should be rendered.
+
+Path parameters are represented in the directory structure
+below the `app` directory with directories
+whose names begin with `[` and end with `]`.
+The name between the square brackets is the parameter name.
+
+For example, suppose we want to render the todo with a given id
+using the URL `/todo/{id}`.
+We would create the directory `app/todo/[id]`
+and create the file `page.tsx` inside it.
+The follow code could be in this file:
+
+```js
+import Link from 'next/link';
+import {getTodos} from '@/lib/apis';
+
+type Params = {
+  params: {
+    id: number
+  }
+};
+
+export default async function TodoPage({params: {id}}: Params) {
+  const todos: Todo[] = await getTodos();
+
+  // The param properties are always strings.
+  const number = Number(id);
+  const todo = todos.find(t => t.id === number);
+
+  return (
+    <section>
+      <h1>Todo</h1>
+      <p>Id: {todo.id}</p>
+      <p>Title: {todo?.title ?? 'missing title'}</p>
+      <p>Completed: {String(todo.completed)}</p>
+      <Link href="/todos">Back</Link>
+    </section>
+  );
+}
+```
 
 ## Custom Types
 
