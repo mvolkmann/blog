@@ -16,12 +16,20 @@ It claims to be 10 times faster than Vite and 700 times faster than Webpack.
 
 Next.js supports the following features:
 
-- server-side rendering (SSR) for first render efficiency
-  and better search engine optimization (SEO);
-  hydrates JavaScript in client
+- server-side rendering (SSR)
+
+  This improves first render efficiency
+  and search engine optimization (SEO).
+  JavaScript is hydrated in the client.
+
 - static site generation (SSG) at build time and on request
 - code splitting
 - prefetching
+
+  In dev mode this occurs when hovering over a link.
+  In prod mode this occurs for all links on a page when the page is loaded.
+  To run in prod mode, enter `npm run build` and `npm run start`.
+
 - serverless functions
 
 Next.js requires Node.js 16.8 or later.
