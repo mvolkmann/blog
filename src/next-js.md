@@ -29,6 +29,8 @@ Next.js supports the following features:
   In dev mode this occurs when hovering over a link.
   In prod mode this occurs for all links on a page when the page is loaded.
   To run in prod mode, enter `npm run build` and `npm run start`.
+  The output of `npm run build` will indicate
+  which pages are static, SSR, or SSG.
 
 - serverless functions
 
@@ -127,6 +129,25 @@ Page-specific components can be defined in
 the same directory as the page that uses them.
 Components that can potentially be reused across multiple pages
 should be placed in a top-level directory named "components".
+
+## Google Fonts
+
+To use a Google Font, import it as follows:
+
+```js
+import {Borel} from 'next/font/google';
+const font = Borel({
+  // This allows a fallback font to be used until the
+  // requested font has been loaded and can be swapped in.
+  display: 'swap',
+  subsets: ['latin'],
+  // "Variable fonts" do not need to specify weights.
+  weight: '400' // can be an array of weight strings
+});
+```
+
+Specify the font on the element that should use it
+with `className={font.className}`.
 
 ## Static Resources
 
