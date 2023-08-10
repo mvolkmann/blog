@@ -600,6 +600,28 @@ setting the value of a CSS variables (a.k.a. CSS custom properties).
 | `bg-current`        | `background-color: currentColor;`                                                        |
 | `bg-black`          | `background-color: #000;`                                                                |
 | `bg-white`          | `background-color: #fff;`                                                                |
+| `bg-slate-n`        | `background-color: #X;`<br>where X is 50, 950, or a multiple of 100                      |
+| `bg-gray-n`         | `background-color: #X;`<br>where X is 50, 950, or a multiple of 100                      |
+| `bg-zinc-n`         | `background-color: #X;`<br>where X is 50, 950, or a multiple of 100                      |
+| `bg-neutral-n`      | `background-color: #X;`<br>where X is 50, 950, or a multiple of 100                      |
+| `bg-stone-n`        | `background-color: #X;`<br>where X is 50, 950, or a multiple of 100                      |
+| `bg-red-n`          | `background-color: #X;`<br>where X is 50, 950, or a multiple of 100                      |
+| `bg-orange-n`       | `background-color: #X;`<br>where X is 50, 950, or a multiple of 100                      |
+| `bg-amber-n`        | `background-color: #X;`<br>where X is 50, 950, or a multiple of 100                      |
+| `bg-yellow-n`       | `background-color: #X;`<br>where X is 50, 950, or a multiple of 100                      |
+| `bg-lime-n`         | `background-color: #X;`<br>where X is 50, 950, or a multiple of 100                      |
+| `bg-green-n`        | `background-color: #X;`<br>where X is 50, 950, or a multiple of 100                      |
+| `bg-emerald-n`      | `background-color: #X;`<br>where X is 50, 950, or a multiple of 100                      |
+| `bg-teal-n`         | `background-color: #X;`<br>where X is 50, 950, or a multiple of 100                      |
+| `bg-cyan-n`         | `background-color: #X;`<br>where X is 50, 950, or a multiple of 100                      |
+| `bg-sky-n`          | `background-color: #X;`<br>where X is 50, 950, or a multiple of 100                      |
+| `bg-blue-n`         | `background-color: #X;`<br>where X is 50, 950, or a multiple of 100                      |
+| `bg-indigo-n`       | `background-color: #X;`<br>where X is 50, 950, or a multiple of 100                      |
+| `bg-violet-n`       | `background-color: #X;`<br>where X is 50, 950, or a multiple of 100                      |
+| `bg-purple-n`       | `background-color: #X;`<br>where X is 50, 950, or a multiple of 100                      |
+| `bg-fuchsia-n`      | `background-color: #X;`<br>where X is 50, 950, or a multiple of 100                      |
+| `bg-pink-n`         | `background-color: #X;`<br>where X is 50, 950, or a multiple of 100                      |
+| `bg-rose-n`         | `background-color: #X;`<br>where X is 50, 950, or a multiple of 100                      |
 | `bg-{color}-{n}`    | `background-color: {color-hex-code};`<br>where n is 100 to 900 in increments of 100      |
 |                     |                                                                                          |
 | `bg-opacity-{n}`    | `--bg-opacity: {n}/100;`<br>where n = 0, 25, 50, 75, or 100                              |
