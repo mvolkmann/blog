@@ -78,26 +78,56 @@ It will contain a `package.json` file that defines the following scripts:
 To start a local web server for running the app, enter `npm run dev`.
 Then browse `localhost:3000`.
 
+See the provided `README.md` file in each project for more detail.
+
 ## Modifying App
 
 Begin by modifying `src/app/page.tsx`.
 
-## Page Routes
+## Page Components
 
-The "app" directory holds source files that define page routes.
+The "app" directory holds source files that define page components.
 The directory structure maps directly to the URLs used to access the pages.
 
 To add a new page, create a directory in `src/app`
 whose name is the route name and
 create the file `page.tsx` (or `page.js`) inside that directory.
 
-Source files for page-specific components can be added in the same directory.
+While the file must have the name "page",
+the name of the function that defines the page component
+should reflect the route name.
+For example, "TodoPage".
+Adding the name suffix "Page" is often useful when TypeScript is being used
+because there will likely be a custom type named "Page.
+
+## Non-page Components
+
+Components used by page components can be defined in two places.
+Page-specific components can be defined in
+the same directory as the page that uses them.
+Components that can potentially be reused across multiple pages
+should be placed in a top-level directory named "components".
 
 ## Static Resources
 
 Static resources like images are typically placed in
 a top-level "public" directory.
 This directory can have subdirectories such as "images".
+
+## Client vs. Server Components
+
+Components that perform data fetching through HTTP requests
+are considered to be "server" components.
+By default, components are server components.
+
+Components that contain client-side logic like DOM event handling
+are considered to be "client" components.
+Their source files must begin with `'use client';`.
+
+Client components cannot send HTTP requested and
+server components cannot perform DOM event handling.
+Sometimes both are needed.
+A solution is to use client components inside server components.
 
 ## Layouts
 
@@ -106,10 +136,51 @@ Additional `layout.tsx` files in page route directories define
 the layout for all pages at specific URL routes.
 These are nested inside the main layout.
 
+## Data Fetching
+
+Components can use the fetch API to send API requests.
+These can fetch data that is then presented in a page.
+
+The following code is an example of a function that fetches data:
+
+```js
+async function getTodos(): Promise<Todo[]> {
+  const url = 'https://jsonplaceholder.typicode.com/todosx';
+  const res = await fetch(url);
+
+  // Throwing an error triggers the error boundary
+  // defined in error.ts.
+  if (!res.ok) throw new Error('Failed to fetch todos.');
+  return res.json();
+}
+```
+
+Functions like the one above can be defined
+in the source files of components that use them.
+They can also be defined in separate source files,
+often in the top-level "lib" directory, and imported where needed.
+
+A component can call a data fetching function as follows:
+
+```js
+const todos: Todo[] = await getTodos();
+```
+
+Sometimes it is convenient to call such a function in multiple places.
+This will not result in duplicate fetches.
+Next.js will automatically cache the result of the first call
+and use it for the result of subsequent calls.
+
 ## Error Pages
 
-Error pages are rendered when an error occurs
-while loading a corresponding route.
+Error pages are rendered when an error is thrown from a page component.
+A common example is errors that occur when fetching data.
+
+Error pages wrap the page in a "React Error Boundary" and
+must be written in a specific way that differs from normal components.
+See {% aTargetBlank
+"https://nextjs.org/docs/app/building-your-application/routing/error-handling",
+"Error Handling" %}.
 
 ## Page Metadata
 
@@ -124,7 +195,9 @@ export const metadata: Metadata = {
 };
 ```
 
-Older versions of Next.js used a `head.tsx` file to specify these.
+Older versions of Next.js used `head.tsx` files to specify these.
+These define a component that renders a fragment containing
+elements to add as children of the `<head>` element.
 
 ## Hyperlinks
 
@@ -135,6 +208,14 @@ import Link from 'next/Link';
 
 <Link href="some-url">link text</Link>;
 ```
+
+## Import Aliases
+
+Import statements can use paths that begin with a character like `@`
+to specify a path that begins at the root of the project
+rather than being relative to the current directory. See {% aTargetBlank
+"https://nextjs.org/docs/app/building-your-application/configuring/absolute-imports-and-module-aliases#module-aliases",
+"Module Aliases" %}.
 
 ## Server Routes
 
