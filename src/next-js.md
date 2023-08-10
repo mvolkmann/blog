@@ -298,6 +298,37 @@ export default async function TodoPage({params: {id}}: Params) {
 }
 ```
 
+## Not Found Pages
+
+The return value of the `notFound` function can be
+returned from a component when data it needs is not found.
+For example, suppose we can't find a todo item with a specific id.
+We could handle that as follows:
+
+```js
+import { notFound } from 'next/navigation';
+import { getTodos } from '@/lib/apis';
+
+type Params = {
+  params: {
+    id: number
+  }
+}
+
+export default async function TodoPage({ params: { id } }: Params) {
+  // params properties are always strings.
+  const number = Number(id);
+
+  const todos: Todo[] = await getTodos();
+  const todo = todos.find(t => t.id === number);
+  if (!todo) return notFound();
+
+  return (
+    ... content when found ...
+  )
+}
+```
+
 ## Custom Types
 
 Custom TypeScript types can be defined in many places.
@@ -305,6 +336,17 @@ One option is to create the top-level file `types.d.ts`
 and define all custom types used by a project there.
 This file is automatically imported,
 so any source file in the project can use the types without importing them.
+
+## Generating Static Pages
+
+To generate static pages (SSG) that use path parameters at build time,
+define and export the `generateStaticParams` function.
+This only works if the `dynamicParams` configuration option is set to `true`,
+which it is by default.
+This function should return an array of objects.
+TODO: How does it know which pages to generate?
+The generated pages can still be generated again at runtime
+using the `revalidate` option described in the "Data Fetching" section.
 
 ## Server Routes
 
