@@ -556,7 +556,24 @@ that will be used to send HTTP requests.
 For each server route, create a directory under `app/api`
 and create a source file named `route.ts` in the directory.
 
-For example, the following file is `app/api/dogs/route.ts`:
+For example, the code below is in the file `app/api/dogs/route.ts`.
+It implements all the CRUD operations for a collection of dogs.
+
+To get all the dogs, send a GET request to `http://localhost:3000/api/dogs`.
+
+To get the dog with a given name, send a GET request to
+`http://localhost:3000/api/dogs?name=Comet` where Comet is a dog name.
+
+To add a dog, send a POST request to `http://localhost:3000/api/dogs`
+with a JSON body like `{ "name": "Snoopy", "breed": "Beagle" }`.
+
+To update an existing dog,
+send a PUT request to `http://localhost:3000/api/dogs`
+with a JSON body like `{ "name": "Snoopy", "breed": "Great Dane" }`.
+
+To delete an existing dog,
+send a DELETE request to `http://localhost:3000/api/dogs?name=Snoopy`
+where "Snoopy" is the name of the dog to delete.
 
 ```js
 import {NextResponse} from 'next/server';
@@ -566,28 +583,63 @@ type Dog = {
   breed: string
 };
 
+let dogs: Dog[] = [
+  {name: 'Comet', breed: 'whippet'},
+  {name: 'Maisey', breed: 'Treeing Walker Coonhound'},
+  {name: 'Oscar', breed: 'German Shorthaired Pointer'},
+  {name: 'Ramsay', breed: 'Native American Indian Dog'}
+];
+
+export async function DELETE(request: Request) {
+  const {searchParams} = new URL(request.url);
+  const name = searchParams.get('name');
+  if (!name) {
+    return NextResponse.json('name is required', {status: 400});
+  }
+
+  const dog = dogs.find(d => d.name === name);
+  if (!dog) {
+    return NextResponse.json({}, {status: 404});
+  }
+
+  dogs = dogs.filter(d => d.name !== name);
+  return NextResponse.json({});
+}
+
 // This function Can optionally be async.
 // The request parameter is optional.
 export function GET(request: Request) {
-  export function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
+  const {searchParams} = new URL(request.url);
   const name = searchParams.get('name');
-
-  const dogs: Dog[] = [
-    { name: 'Comet', breed: 'whippet' },
-    { name: 'Maisey', breed: 'Treeing Walker Coonhound' },
-    { name: 'Oscar', breed: 'German Shorthaired Pointer' },
-    { name: 'Ramsay', breed: 'Native American Indian Dog' },
-  ];
 
   // If a "name" query parameter was supplied,
   // only return the matching dog.
   // Otherwise return an array of all the dogs.
-  const dog = name ? dogs.find(d => d.name === name) : null;
-  return NextResponse.json(dog || dogs);
+  if (name) {
+    const dog = dogs.find(d => d.name === name);
+    if (dog) {
+      return NextResponse.json(dog || dogs);
+    } else {
+      return NextResponse.json({}, {status: 404});
+    }
+  } else {
+    return NextResponse.json(dogs);
+  }
+}
+
+export async function POST(request: Request) {
+  const dog: Dog = await request.json();
+  dogs.push(dog);
+  return NextResponse.json(dog);
+}
+
+export async function PUT(request: Request) {
+  const dog: Dog = await request.json();
+  const index = dogs.findIndex(d => d.name === dog.name);
+  if (index === -1) {
+    return NextResponse.json({}, {status: 404});
+  }
+  dogs[index] = dog;
+  return NextResponse.json(dog);
 }
 ```
-
-To invoke this endpoint from a browser,
-browse `localhost:3000/api/dogs`
-or `localhost:3000/api/dogs/name=Comet`.
