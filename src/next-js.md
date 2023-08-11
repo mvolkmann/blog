@@ -228,6 +228,13 @@ expire after a given number of seconds, add the following:
 export const revalidate = 60;
 ```
 
+To manually control caching, use React's `cache` function.
+See {% aTargetBlank
+"https://nextjs.org/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating#fetching-data-on-the-server-with-third-party-libraries",
+"Fetching data on the Server with third-party libraries" %}.
+This is especially useful when data is fetched
+in a way that does not use the `fetch` function.
+
 ## Loading Pages
 
 Page route directories that contain a `loading.tsx` file
@@ -449,8 +456,11 @@ To generate static pages (SSG) that use path parameters at build time,
 define and export the `generateStaticParams` function.
 This only works if the `dynamicParams` configuration option is set to `true`,
 which it is by default.
-This function should return an array of objects.
-TODO: How does it know which pages to generate?
+
+The `generateStaticParams` function should return an array of objects
+that are the props required by the page component.
+A static page will be generated corresponding to each of the objects.
+
 The generated pages can still be generated again at runtime
 using the `revalidate` option described in the "Data Fetching" section.
 
