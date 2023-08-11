@@ -172,6 +172,18 @@ server components cannot perform DOM event handling.
 Sometimes both are needed.
 A solution is to use client components inside server components.
 
+## Event Handling
+
+To determine the TypeScript type of an event
+that is passed to an event handling function in VSCode,
+temporarily change the value of the event handling prop
+to be an anonymous function whose parameter is `e`
+and hover over it.
+The type will be displayed in a popup and can be copied.
+
+For example, temporarily change `<button onClick={handleClick}`
+to `<button onClick={e => handleClick(e)}`.
+
 ## Layouts
 
 The file `app/layout.tsx` defines the layout for all pages in the app.
