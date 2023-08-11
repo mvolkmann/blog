@@ -228,6 +228,35 @@ expire after a given number of seconds, add the following:
 export const revalidate = 60;
 ```
 
+## Loading Pages
+
+Page route directories that contain a `loading.tsx` file
+will display that while data is being loaded.
+These pages automatically use React Suspense under the hood
+to allow other content to render while waiting for a Promise to resolve.
+
+For example:
+
+```js
+export default function TodoLoading() {
+  return (
+    <section>
+      <h2>The Todos page is loading.</h2>
+    </section>
+  );
+}
+```
+
+When testing loading functionality,
+it is useful to simulate long-running requests.
+The following function simplifies this.
+Just call `await sleep(1000);` before sending a fetch request.
+
+```js
+const sleep = async (ms: number) =>
+  new Promise(resolve => setTimeout(resolve, ms));
+```
+
 ## Error Pages
 
 Error pages are rendered when an error is thrown from a page component.
