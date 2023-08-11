@@ -546,5 +546,39 @@ using the `revalidate` option described in the "Data Fetching" section.
 
 ## Server Routes
 
-REST APIs can be implemented by defining server routes
-in files without the "pages/api" directory. CORRECT?
+REST APIs can be implemented by defining "route handlers"
+in files under the "app" directory.
+Often they are placed in a subdirectory of `app` named `api`.
+
+Like page routes, the directory structure defines the URL paths
+that will be used to send HTTP requests.
+
+For each server route, create a directory under `app/api`
+and create a source file named `route.ts` in the directory.
+
+For example, the following file is `app/api/dogs/route.ts`:
+
+```js
+import {NextResponse} from 'next/server';
+
+type Dog = {
+  name: string,
+  breed: string
+};
+
+// This function Can optionally be async.
+// The request parameter is optional.
+export function GET(request: Request) {
+  const {searchParams} = new URL(request.url);
+  const name = searchParams.get('name');
+  const dogs = [
+    {name: 'Comet', breed: 'whippet'},
+    {name: 'Maisey', breed: 'Treeing Walker Coonhound'},
+    {name: 'Oscar', breed: 'German Shorthaired Pointer'},
+    {name: 'Ramsay', breed: 'Native American Indian Dog'}
+  ];
+  return NextResponse.json(dogs);
+}
+```
+
+To invoke this endpoint from a browser, browse `localhost:3000/api/dogs`.
