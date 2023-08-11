@@ -573,7 +573,7 @@ export function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const name = searchParams.get('name');
 
-  const dogs = [
+  const dogs: Dog[] = [
     { name: 'Comet', breed: 'whippet' },
     { name: 'Maisey', breed: 'Treeing Walker Coonhound' },
     { name: 'Oscar', breed: 'German Shorthaired Pointer' },
