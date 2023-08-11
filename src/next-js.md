@@ -643,3 +643,38 @@ export async function PUT(request: Request) {
   return NextResponse.json(dog);
 }
 ```
+
+## Environment Variables
+
+To provide environment variables to a Next.js app,
+define them in the file `.env.local` in the root project directory.
+See {% aTargetBlank
+"https://nextjs.org/docs/app/building-your-application/configuring/environment-variables",
+"Environment Variables" %}.
+
+The default `.gitignore` file in Next.js apps includes this file,
+so it will not be committed.
+
+Environment variables whose names that begin with "NEXT_PUBLIC\_"
+are available in both client and server code.
+Other variables are only available in server code.
+
+For example, suppose the following is in `.env.local`:
+
+```text
+DB_HOST=somehost
+DB_USER=someuser
+DB_PASS=somepswd
+NEXT_PUBLIC_DOG=Comet
+```
+
+Suppose the following code is in a `page.tsx` file:
+
+```js
+console.log('DB_PASS =', process.env.DB_PASS);
+console.log('DOG =', process.env.NEXT_PUBLIC_DOG);
+```
+
+When this code runs on the server, both values will print.
+When this code runs on the client, `DB_PASS` will be undefined,
+but `NEXT_PUBLIC_DOG` will print.
