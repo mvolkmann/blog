@@ -453,7 +453,9 @@ so any source file in the project can use the types without importing them.
 ## Generating Static Pages
 
 To generate static pages (SSG) that use path parameters at build time,
-define and export the `generateStaticParams` function.
+define and export the {% aTargetBlank
+"https://nextjs.org/docs/app/api-reference/functions/generate-static-params",
+"generateStaticParams" %} function.
 This only works if the `dynamicParams` configuration option is set to `true`,
 which it is by default.
 
