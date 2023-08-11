@@ -209,7 +209,34 @@ A component can call a data fetching function as follows:
 const todos: Todo[] = await getTodos();
 ```
 
-Sometimes it is convenient to call such a function in multiple places.
+To fetch data from multiple sources in parallel,
+call each of the data fetching functions without the `await` keyword
+so `Promise` objects are obtained.
+Then call `await Promise.all(promises)`
+where `promises` is an array of the promises.
+
+To allow data from the first fetch call to render
+before data from the next fetch call is available, use React Suspense.
+For example:
+
+```js
+const promise2 = getData2(...);
+const data1 = await getData1(...);
+return (
+  <>
+    <div>{data1.someProperty}</div>
+    <Suspense fallback={<p>loading data2</p>}>
+      {/* The Data2 component will render in place of the fallback content
+          when promise2 resolves. */}
+      <Data2 promise={promise2} />
+    </Suspense>
+  </>
+);
+```
+
+## Data Caching
+
+Sometimes it is convenient to call a data fetching function in multiple places.
 This will not result in duplicate fetches.
 Next.js will automatically cache the result of the first call
 and use it for the result of subsequent calls.
