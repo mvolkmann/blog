@@ -90,6 +90,23 @@ Then browse `localhost:3000`.
 
 See the provided `README.md` file in each project for more detail.
 
+## VS Code Tips
+
+The extension "ES7+ React/Redux/React-Native snippets" is quite useful.
+For example, the snippet "tsrfc" inserts the boilerplate code for a
+TypeScript React Functional Component which is the following
+when the filename is `Foo.tsx`:
+
+```js
+import React from 'react';
+
+type Props = {};
+
+export default function Foo({}: Props) {
+  return <div>Foo</div>;
+}
+```
+
 ## Tailwind
 
 To configure the use of Tailwind in a Next.js project, see {% aTargetBlank
@@ -338,10 +355,14 @@ elements to add as children of the `<head>` element.
 To add hyperlinks to a page:
 
 ```js
-import Link from 'next/Link';
+import Link from 'next/link';
 
 <Link href="some-url">link text</Link>;
 ```
+
+To add query parameters to a URL, consider using {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams",
+"URLSearchParams" %}.
 
 ## Router
 
@@ -486,8 +507,15 @@ export default function NotFound() {
 Custom TypeScript types can be defined in many places.
 One option is to create the top-level file `types.d.ts`
 and define all custom types used by a project there.
-This file is automatically imported,
-so any source file in the project can use the types without importing them.
+
+The file `tsconfig.json` specifies files that should be automatically imported
+in the `"include"` option.
+By default this includes `**/*.ts`, but this can be modified for each project.
+With the default setting, `types.d.ts` is automatically imported.
+Any source file in the project can use the types defined there
+without importing them.
+However, code editors may not recognized the types as being defined
+unless they are imported.
 
 ## Generating Static Pages
 

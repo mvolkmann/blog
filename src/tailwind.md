@@ -419,6 +419,7 @@ when a certain condition holds.
 | --------------- | -------------------------------------------------------------------------- |
 | `active`        | element is active (ex. a `<button>` is being pressed)                      |
 | `checked`       | checkbox or radio button is checked                                        |
+| `dark`          | user set their OS to use dark mode                                         |
 | `disabled`      | form element is disabled                                                   |
 | `even-child`    | element is an event-numbered child of its parent (zero-based index is odd) |
 | `first-child`   | element is the first child of its parent                                   |
