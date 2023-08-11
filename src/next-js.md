@@ -436,13 +436,13 @@ The follow code could be in this file:
 import Link from 'next/link';
 import {getTodos} from '@/lib/apis';
 
-type Params = {
+type Props = {
   params: {
     id: number
   }
 };
 
-export default async function TodoPage({params: {id}}: Params) {
+export default async function TodoPage({params: {id}}: Props) {
   const todos: Todo[] = await getTodos();
 
   // The param properties are always strings.
@@ -474,13 +474,13 @@ We could handle that as follows:
 import { notFound } from 'next/navigation';
 import { getTodos } from '@/lib/apis';
 
-type Params = {
+type Props = {
   params: {
     id: number
   }
 }
 
-export default async function TodoPage({ params: { id } }: Params) {
+export default async function TodoPage({ params: { id } }: Props) {
   // params properties are always strings.
   const number = Number(id);
 
@@ -678,3 +678,138 @@ console.log('DOG =', process.env.NEXT_PUBLIC_DOG);
 When this code runs on the server, both values will print.
 When this code runs on the client, `DB_PASS` will be undefined,
 but `NEXT_PUBLIC_DOG` will print.
+
+It is safe to use this for API keys and other secrets
+as long as names do not begin with `NEXT_PUBLIC_`.
+
+## Context API in Next.js
+
+React hooks can only be used in client components.
+That includes the `useContext` hook.
+
+The first step in using the Context API in a Next.js application
+is to create a source file that creates and exports two things.
+The first is a component that takes a `children` prop
+and renders it inside a custom context provider.
+The second is a function that calls `useContext`,
+passing it a custom context.
+
+The following is an example of such a file, named `dog-context.tsx`.
+It is recommended to create a `context` directory inside the `app` directory
+and store this file there.
+
+```js
+'use client';
+
+import {createContext, ReactNode, useContext, useState} from 'react';
+
+interface DogData {
+  breed: string;
+  name: string;
+  setBreed: (breed: string) => void;
+  setName: (name: string) => void;
+}
+
+const DogContext =
+  createContext <
+  DogData >
+  {
+    breed: '',
+    name: '',
+    setBreed: string => '',
+    setName: string => ''
+  };
+
+interface Props {
+  children: ReactNode;
+}
+
+export const DogContextProvider = ({children}: Props) => {
+  const [breed, setBreed] = useState('Whippet');
+  const [name, setName] = useState('Comet');
+
+  return (
+    <DogContext.Provider value={{breed, name, setBreed, setName}}>
+      {children}
+    </DogContext.Provider>
+  );
+};
+
+export const useDogContext = () => useContext(DogContext);
+```
+
+The second step is to use the custom provider in some client component
+at a location in the component hierarchy such that
+no components above it need the context data and
+all components below it have the option to use the context data.
+A good choice is to select one of the `layout.tsx` files.
+Choosing the topmost `layout.tsx` makes
+the context data available throughout the app.
+
+The following code from a `layout.tsx` demonstrates
+configuring a custom provider:
+
+```js
+import './globals.css';
+import {DogContextProvider} from '@/app/context/dog-context';
+
+type Props = {children: React.ReactNode};
+
+export default function RootLayout({children}: Props) {
+  return (
+    <html lang="en">
+      <body>
+        <DogContextProvider>
+          <h1>My App Title</h1>
+          {children}
+        </DogContextProvider>
+      </body>
+    </html>
+  );
+}
+```
+
+The third step is to use the context function
+in every component that needs to access the data.
+
+Here is an example of a component the only reads the data:
+
+```js
+import React from 'react';
+import {useDogContext} from '@/app/context/dog-context';
+
+export default function Dog() {
+  const {breed, name} = useDogContext();
+  return (
+    <section>
+      <p>
+        Dog {name} is a {breed}.
+      </p>
+    </section>
+  );
+}
+```
+
+Here is an example of a component the modifies the data.
+It could of course render addition JSX.
+
+```js
+'use client';
+
+import {useDogContext} from '@/app/context/dog-context';
+
+export default async function DogManager() {
+  const {setBreed, setName} = useDogContext();
+
+  function handleClick() {
+    setBreed('Beagle');
+    setName('Snoopy');
+  }
+
+  return (
+    <section>
+      <button onClick={handleClick}>Change Dog</button>
+    </section>
+  );
+}
+```
