@@ -701,6 +701,8 @@ The following is an example of a file described above, named `dog-context.tsx`.
 It is recommended to create a `context` directory inside the `app` directory
 and store this file there.
 
+{% raw %}
+
 ```js
 'use client';
 
@@ -741,6 +743,8 @@ export const DogContextProvider = ({children}: Props) => {
 
 export const useDogContext = () => useContext(DogContext);
 ```
+
+{% endraw %}
 
 The second step is to use the custom provider in some client component
 at a location in the component hierarchy such that
