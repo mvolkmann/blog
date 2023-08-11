@@ -684,17 +684,20 @@ as long as names do not begin with `NEXT_PUBLIC_`.
 
 ## Context API in Next.js
 
+The first step in using the Context API in a Next.js application
+is to create a source file that creates and exports two things.
+
+The first export is a component that takes a `children` prop
+and renders it inside a custom context provider.
+
+The second export is a function that calls `useContext`,
+passing it a custom context. This second export is not strictly necessary,
+but it simplifies the code in components that need access to the context data.
+
 React hooks can only be used in client components.
 That includes the `useContext` hook.
 
-The first step in using the Context API in a Next.js application
-is to create a source file that creates and exports two things.
-The first is a component that takes a `children` prop
-and renders it inside a custom context provider.
-The second is a function that calls `useContext`,
-passing it a custom context.
-
-The following is an example of such a file, named `dog-context.tsx`.
+The following is an example of a file described above, named `dog-context.tsx`.
 It is recommended to create a `context` directory inside the `app` directory
 and store this file there.
 
@@ -710,6 +713,7 @@ interface DogData {
   setName: (name: string) => void;
 }
 
+// My editor performed bad code formatting here.
 const DogContext =
   createContext <
   DogData >
@@ -746,8 +750,8 @@ A good choice is to select one of the `layout.tsx` files.
 Choosing the topmost `layout.tsx` makes
 the context data available throughout the app.
 
-The following code from a `layout.tsx` demonstrates
-configuring a custom provider:
+The following code from the top-level `layout.tsx`
+demonstrates configuring a custom provider:
 
 ```js
 import './globals.css';
@@ -773,9 +777,9 @@ The third step is to use the context function
 in every component that needs to access the data.
 
 Here is an example of a component the only reads the data:
+It could of course render additional JSX.
 
 ```js
-import React from 'react';
 import {useDogContext} from '@/app/context/dog-context';
 
 export default function Dog() {
@@ -791,7 +795,7 @@ export default function Dog() {
 ```
 
 Here is an example of a component the modifies the data.
-It could of course render addition JSX.
+It could of course render additional JSX.
 
 ```js
 'use client';
