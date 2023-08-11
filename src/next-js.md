@@ -159,10 +159,12 @@ This directory can have subdirectories such as "images".
 
 Components that perform data fetching through HTTP requests
 are considered to be "server" components.
+Functions that define server components are typically `async`.
 By default, components are server components.
 
 Components that contain client-side logic like DOM event handling
 are considered to be "client" components.
+Functions that define client components cannot be `async`.
 Their source files must begin with `'use client';`.
 
 Client components cannot send HTTP requested and
@@ -237,6 +239,8 @@ See {% aTargetBlank
 "https://nextjs.org/docs/app/building-your-application/routing/error-handling",
 "Error Handling" %}.
 
+Source files for error pages must begin with `'use client';`.
+
 ## Page Metadata
 
 To add static metadata such as title and description to a page:
@@ -263,6 +267,37 @@ import Link from 'next/Link';
 
 <Link href="some-url">link text</Link>;
 ```
+
+## Router
+
+The `useRouter` hook creates a router object.
+Call the `push` method on the router, passing it a URL,
+for for programmatic navigation.
+This can only be used in client components.
+
+For example:
+
+```js
+'use client';
+import {useRouter} from 'next/navigation';
+
+export default function BlogButton() {
+  const router = useRouter();
+
+  function goToBlog() {
+    router.push('https://mvolkmann.github.io/blog/');
+  }
+
+  return (
+    <button className="button" onClick={goToBlog}>
+      My Blog
+    </button>
+  );
+}
+```
+
+The router object also has the methods `back`, `forward`, `prefetch`,
+`refresh`, and `replace`.
 
 ## Import Aliases
 
