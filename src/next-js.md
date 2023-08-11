@@ -107,6 +107,9 @@ export default function Foo({}: Props) {
 }
 ```
 
+When using Tailwind, consider installing the extensions
+"Tailwind CSS IntelliSense" and "Tailwind Fold".
+
 ## Tailwind
 
 To configure the use of Tailwind in a Next.js project, see {% aTargetBlank
