@@ -684,6 +684,11 @@ as long as names do not begin with `NEXT_PUBLIC_`.
 
 ## Context API in Next.js
 
+The React Context API is a great option for
+sharing data across multiple React components.
+While it isn't particularly easy to configure, it requires far less code
+than using other React state management approaches such as Redux.
+
 The first step in using the Context API in a Next.js application
 is to create a source file that creates and exports two things.
 
