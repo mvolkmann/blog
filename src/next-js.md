@@ -871,15 +871,87 @@ Next.js supports defining {% aTargetBlank
 "https://nextjs.org/docs/app/building-your-application/routing/middleware",
 "middleware" %} that runs before API calls are processed.
 
-For example, we can configure middleware to perform rate limiting
-which limits the number of requests that can be
-sent to a given API endpoint or set of them.
+Each Next.js app can include one `middleware.ts` file in the
+project root directory which is typically the `src` directory.
 
-TODO: Add more detail from todo app.
+The middleware can do many things including:
 
-## CORS
+- access and set cookies
+- add request headers
+- return a response and bypass the intended URL
+- redirect to a different URL
+
+The middleware runs on every request including
+requests for static assets (like images),
+requests for client-side files, and API requests.
+To configure the middleware to only run on certain request paths,
+export a `config` object.
+The example below configures it to only run for API requests.
 
 By default, all API routes only accept requests from
 the same origin as the Next.js app due to CORS restrictions.
+The example below configures CORS so domains other than
+the one where the app is deployed can send API requests.
+The allowed origins can differ based on whether
+we are running in production or development mode.
+
+```js
+// src/middleware.ts
+import {type NextRequest, NextResponse} from 'next/server';
+
+const allowedOrigins =
+  process.env.NODE_ENV === 'production'
+    ? ['http://www.mysite.com', 'https://mysite.com']
+    : ['http://locahost:3000', 'https://www.google.com']; // for testing CORS
+
+// This function can optionally be async.
+export function middleware(request: NextRequest) {
+  const {headers, method, nextUrl, url} = request;
+
+  const origin = headers.get('origin');
+
+  // method is GET, POST, PUT, or DELETE.
+  // url is a string like "http://localhost:3000/api/dogs".
+  // origin can be null or a string like "http://localhost:3000".
+  // nextURL is a URL object w/ many properties.
+  console.log('middleware:', method, url, 'from', origin);
+
+  // This enforces CORS restrictions.
+  // In production mode you may want to add "|| !origin"
+  // to block access from tools like Postman or Thunder Client.
+  if (origin && !allowedOrigins.includes(origin)) {
+    return new NextResponse(null, {
+      status: 400,
+      statusText: 'Bad Request'
+    });
+  }
+
+  // Proceed to intended URL.
+  return NextResponse.next();
+}
+
+// Only run the middleware for API requests.
+export const config = {
+  // Can specify an array of paths.
+  // Each path can be a regular expression.
+  matcher: '/api/:path*'
+};
+```
+
+For testing purposes, we can send requests from the google.com domain
+when running in development mode.
+To do this, browse google.com, open the DevTools console,
+and enter the following:
+
+```js
+const res = await fetch('http://localhost:3000/api/dogs');
+console.log(await res.json());
+```
+
+## Rate Limiting
+
+For example, we can configure middleware to perform rate limiting
+which limits the number of requests that can be
+sent to a given API endpoint or set of them.
 
 TODO: Add more detail from todo app.
