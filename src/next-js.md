@@ -950,8 +950,57 @@ console.log(await res.json());
 
 ## Rate Limiting
 
-For example, we can configure middleware to perform rate limiting
-which limits the number of requests that can be
-sent to a given API endpoint or set of them.
+We can configure routes to perform rate limiting
+which limits the number of requests that can be sent to
+a given API endpoint or set of them over a given period of time.
 
-TODO: Add more detail from todo app.
+First, install the NPM package `limiter" by entering `npm install limiter`.
+
+Second, create the following file which defines the limits to enforce and
+exports a function that simplifies checking for requests that exceed the limit.
+Routes can call this function and
+test whether `null` or a `NextResponse` object is returned.
+If `null` is returned, the limit has not been exceeded.
+If a `NextResponse` object is returned, the limit has been exceeded
+and the route should return that response.
+
+```js
+// src/app/api/limiter.ts
+import {RateLimiter} from 'limiter';
+import {NextResponse} from 'next/server';
+
+const limiter = new RateLimiter({
+  fireImmediately: true,
+  interval: 'min',
+  tokensPerInterval: 8
+});
+
+export async function getLimitedResponse(
+  request: Request
+): Promise<NextResponse | null> {
+  const remaining = await limiter.removeTokens(1);
+  console.log('limiter.ts: remaining =', remaining);
+  if (remaining >= 0) return null; // allow request
+
+  // Reject request.
+  const origin = request.headers.get('origin');
+  return new NextResponse(null, {
+    status: 429,
+    statusText: 'Too Many Requests',
+    headers: {
+      // '*' allows tools like Postman and Thunder Client to send requests.
+      'Access-Control-Allow-Origin': origin || '*',
+      'Content-Type': 'text/plain'
+    }
+  });
+}
+```
+
+Each route that wishes to enforce the limit can include the following code:
+
+```js
+import {getLimitedResponse} from '@/app/api/limiter';
+
+const response = await getLimitedResponse(request);
+if (response) return response;
+```
