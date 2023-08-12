@@ -544,11 +544,11 @@ A static page will be generated corresponding to each of the objects.
 The generated pages can still be generated again at runtime
 using the `revalidate` option described in the "Data Fetching" section.
 
-## Server Routes
+## Route Handlers
 
-REST APIs can be implemented by defining "route handlers"
-in files under the "app" directory.
-Often they are placed in a subdirectory of `app` named `api`.
+REST APIs can be implemented by defining {% aTargetBlank
+"https://nextjs.org/docs/app/building-your-application/routing/route-handlers",
+"route handlers" %}.
 
 Like page routes, the directory structure defines the URL paths
 that will be used to send HTTP requests.
@@ -556,13 +556,22 @@ that will be used to send HTTP requests.
 For each server route, create a directory under `app/api`
 and create a source file named `route.ts` in the directory.
 
-For example, the code below is in the file `app/api/dogs/route.ts`.
-It implements all the CRUD operations for a collection of dogs.
+Directory names beginning with `[` and ending with `]`
+can be used to capture path parameters.
+
+For example, the code below is in the directory `app/api/dogs`
+which has the subdirectory `[name]`.
+The file `dog.ts` maintains the collection of dogs
+and exports functions to perform all the CRUD operations.
+The file `route.ts` defines handlers for getting all the dogs,
+adding a new dog, and updating an existing dog.
+The file `[name]/route.ts` defines handlers for getting a specific dog
+and deleting a specific dog.
 
 To get all the dogs, send a GET request to `http://localhost:3000/api/dogs`.
 
 To get the dog with a given name, send a GET request to
-`http://localhost:3000/api/dogs?name=Comet` where Comet is a dog name.
+`http://localhost:3000/api/dogs/Comet` where Comet is a dog name.
 
 To add a dog, send a POST request to `http://localhost:3000/api/dogs`
 with a JSON body like `{ "name": "Snoopy", "breed": "Beagle" }`.
@@ -572,76 +581,105 @@ send a PUT request to `http://localhost:3000/api/dogs`
 with a JSON body like `{ "name": "Snoopy", "breed": "Great Dane" }`.
 
 To delete an existing dog,
-send a DELETE request to `http://localhost:3000/api/dogs?name=Snoopy`
+send a DELETE request to `http://localhost:3000/api/dogs/Snoopy`
 where "Snoopy" is the name of the dog to delete.
 
 ```js
-import {NextResponse} from 'next/server';
-
-type Dog = {
+// app/api/dogs/dogs.ts
+export type Dog = {
   name: string,
   breed: string
 };
 
-let dogs: Dog[] = [
+export let dogs: Dog[] = [
   {name: 'Comet', breed: 'whippet'},
   {name: 'Maisey', breed: 'Treeing Walker Coonhound'},
   {name: 'Oscar', breed: 'German Shorthaired Pointer'},
   {name: 'Ramsay', breed: 'Native American Indian Dog'}
 ];
 
-export async function DELETE(request: Request) {
-  const {searchParams} = new URL(request.url);
-  const name = searchParams.get('name');
-  if (!name) {
-    return NextResponse.json('name is required', {status: 400});
-  }
-
-  const dog = dogs.find(d => d.name === name);
-  if (!dog) {
-    return NextResponse.json({}, {status: 404});
-  }
-
-  dogs = dogs.filter(d => d.name !== name);
-  return NextResponse.json({});
+export function addDog(dog: Dog) {
+  dogs.push(dog);
 }
 
-// This function Can optionally be async.
-// The request parameter is optional.
-export function GET(request: Request) {
-  const {searchParams} = new URL(request.url);
-  const name = searchParams.get('name');
+export function deleteDog(name: string): Dog | undefined {
+  const dog = dogs.find(d => d.name === name);
+  if (dog) dogs = dogs.filter(d => d.name !== name);
+  return dog;
+}
 
-  // If a "name" query parameter was supplied,
-  // only return the matching dog.
-  // Otherwise return an array of all the dogs.
-  if (name) {
-    const dog = dogs.find(d => d.name === name);
-    if (dog) {
-      return NextResponse.json(dog || dogs);
-    } else {
-      return NextResponse.json({}, {status: 404});
-    }
-  } else {
-    return NextResponse.json(dogs);
-  }
+export const getDogs = () => dogs;
+
+export function getDog(name: string): Dog | undefined {
+  return dogs.find(d => d.name === name);
+}
+
+export function updateDog(dog: Dog): Dog | undefined {
+  const {breed, name} = dog;
+  const existingDog = dogs.find(d => d.name === name);
+  if (existingDog) existingDog.breed = breed;
+  return existingDog;
+}
+```
+
+```js
+// app/api/dogs/route.ts
+import {NextResponse} from 'next/server';
+import {addDog, getDogs, updateDog, type Dog} from './dogs';
+
+export function GET(request: Request) {
+  const dogs = getDogs();
+  return NextResponse.json(dogs);
 }
 
 export async function POST(request: Request) {
   const dog: Dog = await request.json();
-  dogs.push(dog);
+  addDog(dog);
   return NextResponse.json(dog);
 }
 
 export async function PUT(request: Request) {
   const dog: Dog = await request.json();
-  const index = dogs.findIndex(d => d.name === dog.name);
-  if (index === -1) {
-    return NextResponse.json({}, {status: 404});
+  const result = updateDog(dog);
+  if (result) {
+    return NextResponse.json(dog);
+  } else {
+    return NextResponse.json(null, {status: 404});
   }
-  dogs[index] = dog;
-  return NextResponse.json(dog);
 }
+```
+
+```js
+// app/api/dogs/[name]/route.ts
+import {NextResponse} from 'next/server';
+import {deleteDog, getDog, type Dog} from '../dogs';
+
+type Props = {
+  params: {name: string}
+};
+
+export async function DELETE(request: Request, {params: {name}}: Props) {
+  const result = deleteDog(name);
+  const status = result ? 200 : 404;
+  return NextResponse.json(null, {status});
+}
+
+export function GET(request: Request, {params: {name}}: Props) {
+  const dog = getDog(name);
+  if (dog) {
+    return NextResponse.json(dog);
+  } else {
+    return NextResponse.json(null, {status: 404});
+  }
+}
+```
+
+For API routes that use query parameters,
+they can be obtained as follows:
+
+```js
+const {searchParams} = new URL(request.url);
+const name = searchParams.get('name');
 ```
 
 ## Environment Variables
