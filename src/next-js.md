@@ -870,3 +870,16 @@ as long as names do not begin with `NEXT_PUBLIC_`.
 Next.js supports defining {% aTargetBlank
 "https://nextjs.org/docs/app/building-your-application/routing/middleware",
 "middleware" %} that runs before API calls are processed.
+
+For example, we can configure middleware to perform rate limiting
+which limits the number of requests that can be
+sent to a given API endpoint or set of them.
+
+TODO: Add more detail from todo app.
+
+## CORS
+
+By default, all API routes only accept requests from
+the same origin as the Next.js app due to CORS restrictions.
+
+TODO: Add more detail from todo app.
