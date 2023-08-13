@@ -173,6 +173,46 @@ server components cannot perform DOM event handling.
 Sometimes both are needed.
 A solution is to use client components inside server components.
 
+## CSS
+
+One way to use vanilla CSS is to
+create a `.css` file for each component source file.
+For example, `Foo.tsx` can have a corresponding `Foo.css` file.
+
+To attempt to scope CSS rules to the component:
+
+1. Add a `className` to the component root element that
+   matches its name, but in lowercase. For example, `foo`.
+1. Begin the selector of all rules in the `.css` file with that class name.
+   For example:
+
+   ```css
+   .foo button {
+     border-color: red;
+     border-width: 1px;
+   }
+   .foo span {
+     font-weight: bold;
+   }
+   ```
+
+Newer browser versions can use {% aTargetBlank
+"https://caniuse.com/css-nesting", "CSS Nesting" %} to
+avoid having to repeat the root element CSS class name.
+For example:
+
+```css
+.dog-component {
+  > button {
+    border-color: red;
+    border-width: 1px;
+  }
+  > span {
+    font-weight: bold;
+  }
+}
+```
+
 ## Event Handling
 
 To determine the TypeScript type of an event
@@ -374,6 +414,8 @@ import Link from 'next/link';
 To add query parameters to a URL, consider using {% aTargetBlank
 "https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams",
 "URLSearchParams" %}.
+
+To prevent prefetching of the `Link` target, add `prefetch={false}`.
 
 ## Router
 
@@ -902,7 +944,7 @@ import {type NextRequest, NextResponse} from 'next/server';
 const allowedOrigins =
   process.env.NODE_ENV === 'production'
     ? ['http://www.mysite.com', 'https://mysite.com']
-    : ['http://locahost:3000', 'https://www.google.com']; // for testing CORS
+    : ['http://localhost:3000', 'https://www.google.com']; // for testing CORS
 
 // This function can optionally be async.
 export function middleware(request: NextRequest) {
