@@ -1035,7 +1035,7 @@ export async function getLimitedResponse(
 }
 ```
 
-Each route that wishes to enforce the limit can include the following code:
+Each route that wishes to enforce the limit should include the following code:
 
 ```js
 import {getLimitedResponse} from '@/app/api/limiter';
@@ -1043,3 +1043,8 @@ import {getLimitedResponse} from '@/app/api/limiter';
 const response = await getLimitedResponse(request);
 if (response) return response;
 ```
+
+This cannot be done in `middleware.ts` and I don't know why.
+When I tried that I got
+"error Cannot read properties of undefined (reading 'now')"
+when `limiter.ts` tries to create a `RateLimiter` object.
