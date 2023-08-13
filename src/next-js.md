@@ -938,6 +938,45 @@ export const config = {
 };
 ```
 
+Create the following file which exports a function that simplifies
+creating responses that include the headers required to support CORS:
+
+```js
+// src/api/cors.ts
+import {NextResponse} from 'next/server';
+
+export function jsonCorsResponse(
+  request: Request,
+  object: Object | null,
+  status: number = 200
+): NextResponse {
+  const origin = request.headers.get('origin');
+  const body = object ? JSON.stringify(object) : '';
+  return new NextResponse(body, {
+    headers: {
+      // '*' allows tools like Postman and Thunder Client to send requests.
+      'Access-Control-Allow-Origin': origin || '*',
+      'Content-Type': 'application/json'
+    },
+    status
+  });
+}
+```
+
+Change all router handler functions that return a response
+to use the function above. For example,
+in the handler that retrieves an array of all dogs, change
+
+```js
+return NextResponse.json(dogs);
+```
+
+to
+
+```js
+return jsonCorsResponse(request, dogs);
+```
+
 For testing purposes, we can send requests from the google.com domain
 when running in development mode.
 To do this, browse google.com, open the DevTools console,
