@@ -91,6 +91,9 @@ such as those that support preprocessors like Sass.
   a `class` attribute with a long value.
   This makes it more difficult to understand
   the nested structure of the elements at a glance.
+  The VS Code extension "Tailwind Fold" addresses this
+  by automatically folding long `class` attribute values
+  (and `className` property values in React).
 
 - **Inability to override**  
   When Tailwind classes are used in components of frameworks
