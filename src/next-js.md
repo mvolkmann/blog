@@ -213,6 +213,16 @@ For example:
 }
 ```
 
+To enable using CSS Nesting in conjunction with Tailwind:
+
+1. Enter `npm install -D postcss-nesting`
+1. Edit `postcss.config.js`
+1. Add the following line in the `plugins` object:
+
+```js
+'tailwindcss/nesting': 'postcss-nesting',
+```
+
 ## Event Handling
 
 To determine the TypeScript type of an event
@@ -416,6 +426,15 @@ To add query parameters to a URL, consider using {% aTargetBlank
 "URLSearchParams" %}.
 
 To prevent prefetching of the `Link` target, add `prefetch={false}`.
+
+## Images
+
+The npm package {% aTargetBlank "https://www.npmjs.com/package/sharp",
+"sharp" %} is used to "convert large images in common formats to smaller,
+web-friendly JPEG, PNG, WebP, GIF and AVIF images of varying dimensions."
+
+To use this, install it with `npm install sharp`
+and import it with `import sharp;`.
 
 ## Router
 
@@ -1090,3 +1109,43 @@ This cannot be done in `middleware.ts` and I don't know why.
 When I tried that I got
 "error Cannot read properties of undefined (reading 'now')"
 when `limiter.ts` tries to create a `RateLimiter` object.
+
+## Sitemaps
+
+From {% aTargetBlank
+"https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview",
+"Learn about sitemaps" %}:
+
+> A sitemap is a file where you provide information about the pages, videos,
+> and other files on your site, and the relationships between them.
+> Search engines like Google read this file to crawl your site more efficiently.
+> A sitemap tells Google which pages and files you think are important
+> in your site, and also provides valuable information about these files.
+> For example, when the page was last updated and any alternate language versions of the page.
+
+To generate a sitemap for a Next.js application:
+
+1. Enter `npm install next-sitemap`
+
+1. Create the file `next-sitemap.config.js` in the root project directory.
+
+1. Add the following in that file:
+
+   ```js
+   /** @type { import('next-sitemap').IConfig } */
+   module.exports = {
+     // Set this environment variable in ".env.local".
+     siteUrl: process.env.SITE_URL || 'http://localhost:3000',
+     generateRobotsTxt: true,
+     generateIndexSitemap: false
+   };
+   ```
+
+1. Add the following script in `package.json`:
+
+   ```json
+   "postbuild": "next-sitemap"
+   ```
+
+1. Enter `npm run build`.
+   This generates the files `public/robots.txt` and `public/sitemap.xml`.
