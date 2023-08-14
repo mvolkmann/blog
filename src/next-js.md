@@ -158,20 +158,33 @@ This directory can have subdirectories such as "images".
 
 ## Client vs. Server Components
 
-Components that perform data fetching through HTTP requests
-are considered to be "server" components.
-Functions that define server components are typically `async`.
-By default, components are server components.
+In Next.js, React components are either server or client components.
+They are server components by default and
+become client components when they begin with `'use client';`.
 
-Components that contain client-side logic like DOM event handling
-are considered to be "client" components.
-Functions that define client components cannot be `async`.
-Their source files must begin with `'use client';`.
+Server components can:
 
-Client components cannot send HTTP requested and
-server components cannot perform DOM event handling.
-Sometimes both are needed.
-A solution is to use client components inside server components.
+- be async
+- fetch data using HTTP requests
+- access sensitive information such as non-public environment variables
+
+Client components can:
+
+- handle DOM events (`onClick`, `onChange`, ...)
+- use provided hooks (`useEffect`, `useState`, `useContext`, ...)
+- use custom hooks that use the provided hooks
+- use browser-only APIs (such as accessing the `window` object)
+
+The functions that define client components cannot be `async`.
+
+When a component needs to play both roles,
+it must be split into server and client components.
+Server components can render client components,
+but the opposite is not allowed.
+
+For more detail, see {% aTargetBlank
+"https://nextjs.org/docs/getting-started/react-essentials",
+"React Essentials" %}.
 
 ## CSS
 
