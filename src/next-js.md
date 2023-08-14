@@ -546,6 +546,19 @@ Older versions of Next.js used `head.tsx` files to specify these.
 These define a component that renders a fragment containing
 elements to add as children of the `<head>` element.
 
+To add dynamic metadata, export the function `generateMetadata`.
+For example:
+
+```ts
+export async function generateMetadata({params, searchParams}) {
+  // getData is an API function you must write and import.
+  const data = await getData(params.id);
+  return {
+    title: data.title
+  };
+}
+```
+
 ## Hyperlinks
 
 To add hyperlinks to a page:
