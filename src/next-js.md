@@ -382,12 +382,16 @@ async function getTodos(): Promise<Todo[]> {
 }
 ```
 
+The `fetch` function can be passed a second argument that specifies options
+such as the HTTP method, request headers, and caching details.
+For example, passing `{ cache: 'no-store' }` disables caching of the response.
+
 Functions like the one above can be defined
 in the source files of components that use them.
 They can also be defined in separate source files,
 often in the top-level "lib" directory, and imported where needed.
 
-A component can call a data fetching function as follows:
+A server component can call a data fetching function as follows:
 
 ```js
 const todos: Todo[] = await getTodos();
@@ -398,6 +402,8 @@ call each of the data fetching functions without the `await` keyword
 so `Promise` objects are obtained.
 Then call `await Promise.all(promises)`
 where `promises` is an array of the promises.
+
+## React Suspense
 
 To allow data from the first fetch call to render
 before data from the next fetch call is available, use React Suspense.
@@ -849,6 +855,8 @@ export default async function DogManager() {
 REST APIs can be implemented by defining {% aTargetBlank
 "https://nextjs.org/docs/app/building-your-application/routing/route-handlers",
 "route handlers" %}.
+These can export any of the following functions:
+`DELETE`, `GET`, `HEAD`, `OPTIONS`, `PATCH`, `POST`, and `PUT`.
 
 Like page routes, the directory structure defines the URL paths
 that will be used to send HTTP requests.
