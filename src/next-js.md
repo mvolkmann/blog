@@ -559,7 +559,7 @@ export async function generateMetadata({params, searchParams}) {
 }
 ```
 
-## Hyperlinks
+## Links
 
 To add hyperlinks to a page:
 
@@ -577,9 +577,25 @@ To prevent prefetching of the `Link` target, add `prefetch={false}`.
 
 ## Images
 
+Next.js provides an {% aTargetBlank
+"https://nextjs.org/docs/app/building-your-application/optimizing/images",
+"Image" %} component that optimizes images.
+This should be used in place of the HTML `img` element.
+For example:
+
+```js
+import Image from 'next/image';
+...
+<Image src={someImageURL} alt="some description" />
+```
+
+For other supported props, see {% aTargetBlank
+"https://nextjs.org/docs/app/api-reference/components/image", "<Image>" %}.
+
 The npm package {% aTargetBlank "https://www.npmjs.com/package/sharp",
 "sharp" %} is used to "convert large images in common formats to smaller,
 web-friendly JPEG, PNG, WebP, GIF and AVIF images of varying dimensions."
+TODO: Should this be used in conjunction with the `Image` component?
 
 To use this, install it with `npm install sharp`
 and import it with `import sharp;`.
