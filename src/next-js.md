@@ -159,8 +159,13 @@ This directory can have subdirectories such as "images".
 ## Client vs. Server Components
 
 In Next.js, React components are either server or client components.
-They are server components by default and
+Server components are rendered on the server.
+Client components are pre-rendered on the server and hydrated on the client.
+Components are server components by default and
 become client components when they begin with `'use client';`.
+
+Server components have faster initial load times
+and are better for search engine optimization (SEO).
 
 Server components can:
 
@@ -179,8 +184,8 @@ The functions that define client components cannot be `async`.
 
 When a component needs to play both roles,
 it must be split into server and client components.
-Server components can render client components,
-but the opposite is not allowed.
+Typically server component render client components,
+but the opposite is also supported.
 
 For more detail, see {% aTargetBlank
 "https://nextjs.org/docs/getting-started/react-essentials",
