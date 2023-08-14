@@ -120,16 +120,20 @@ when the project was created.
 
 ## Modifying App
 
-Begin by modifying `src/app/page.tsx`.
+Begin by modifying `app/page.tsx` which is used to
+render the page at the `/` URL path.
 
 ## Page Components
 
 The "app" directory holds source files that define page components.
 The directory structure maps directly to the URLs used to access the pages.
 
-To add a new page, create a directory in `src/app`
+To add a new page, create a directory in `app`
 whose name is the route name and
-create the file `page.tsx` (or `page.js`) inside that directory.
+create the file `page.tsx` inside that directory.
+
+The file `app/page.tsx` defines the home page
+that is rendered for the `/` URL path.
 
 While the file must have the name "page",
 the name of the function that defines the page component
@@ -192,6 +196,9 @@ For more detail, see {% aTargetBlank
 "React Essentials" %}.
 
 ## CSS
+
+The file `app/global.css` defines CSS rules that affect elements on all pages.
+This should be imported in `app/layout.tsx`.
 
 One way to use vanilla CSS is to
 create a `.css` file for each component source file.
@@ -283,6 +290,11 @@ To use Fontawesome Icons:
 ## Layouts
 
 The file `app/layout.tsx` defines the layout for all pages in the app.
+This renders the topmost HTML elements like `html`, `head`, and `body`.
+It is a good place to render a header, footer, and nav
+that should present on every page of the app.
+Site-wide fonts can also be configured here.
+
 Additional `layout.tsx` files in page route directories define
 the layout for all pages at specific URL routes.
 These are nested inside the main layout.
@@ -455,8 +467,10 @@ in a way that does not use the `fetch` function.
 ## Loading Pages
 
 Page route directories that contain a `loading.tsx` file
-will display that while data is being loaded.
-These pages automatically use React Suspense under the hood
+will render that while data is being loaded.
+This can be any content including only a spinner.
+
+Page routes that have a `loading.tsx` file automatically use React Suspense
 to allow other content to render while waiting for a Promise to resolve.
 
 For example:
