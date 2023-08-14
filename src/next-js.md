@@ -1046,6 +1046,65 @@ const {searchParams} = new URL(request.url);
 const name = searchParams.get('name');
 ```
 
+## Authentication
+
+The {% aTargetBlank "https://next-auth.js.org", "NextAuth.js" %} library
+makes it very easy to add authentication
+using any of the following OAuth providers: Apple, Facebook, Google.
+Password-less email authentication is also supported.
+
+To install this, enter `npm install next-auth`.
+
+To configure the providers to be used,
+create the file `app/api/auth/[...nextauth].js`
+containing code like the following:
+
+```js
+import NextAuth from 'next-auth';
+import GithubProvider from 'next-auth/providers/github';
+// Import additional providers here.
+import {getProviders, signIn, signOut, useSession} from 'next-auth/react';
+
+export const authOptions = {
+  providers: [
+    GithubProvider({
+      clientId: process.env.GITHUB_ID,
+      clientSecret: process.env.GITHUB_SECRET
+    })
+    // Configure additional providers here.
+  ]
+};
+
+export default NextAuth(authOptions);
+```
+
+To render the UI for sign in, create a component with code like the following:
+
+```js
+const [providers, setProviders] = useState(null);
+
+async function setProviders() {
+  const response = await getProviders();
+  setProviders(response);
+}
+
+useEffect(() => {
+  setProviders();
+});
+
+...
+
+{providers && Object.values(providers).map(provider => (
+  <button
+    key={provider.name}
+    onClick={() => signIn(provider.id)}
+    type="button"
+  >
+    Sign In
+  </button>
+)}
+```
+
 ## Environment Variables
 
 To provide environment variables to a Next.js app,
