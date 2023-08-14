@@ -118,6 +118,27 @@ To configure the use of Tailwind in a Next.js project, see {% aTargetBlank
 These steps should not be necessary if you opted into use of Tailwind
 when the project was created.
 
+## Import Aliases
+
+Import statements can use paths that begin with the character `@`
+to specify a path that begins at the root of the project
+rather than being relative to the current directory. See {% aTargetBlank
+"https://nextjs.org/docs/app/building-your-application/configuring/absolute-imports-and-module-aliases#module-aliases",
+"Module Aliases" %}.
+
+By default the file `tsconfig.json` contains the following:
+
+```json
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+```
+
+This enables imports from paths like `@app/api/some-name`.
+To remove the need for including a slash after `@`,
+modify the key in the `paths` object above to be `"@*"`.
+All imports on this page assume this has been done.
+
 ## Modifying App
 
 Begin by modifying `app/page.tsx` which is used to
@@ -581,14 +602,6 @@ export default function BlogButton() {
 The router object also has the methods `back`, `forward`, `prefetch`,
 `refresh`, and `replace`.
 
-## Import Aliases
-
-Import statements can use paths that begin with the character `@`
-to specify a path that begins at the root of the project
-rather than being relative to the current directory. See {% aTargetBlank
-"https://nextjs.org/docs/app/building-your-application/configuring/absolute-imports-and-module-aliases#module-aliases",
-"Module Aliases" %}.
-
 ## Dynamic Routes
 
 Dynamic routes are pages whose URLs contain path parameters
@@ -609,7 +622,7 @@ The follow code could be in this file:
 
 ```js
 import Link from 'next/link';
-import {getTodos} from '@/lib/apis';
+import {getTodos} from '@lib/apis';
 
 type Props = {
   params: {
@@ -647,7 +660,7 @@ We could handle that as follows:
 
 ```js
 import { notFound } from 'next/navigation';
-import { getTodos } from '@/lib/apis';
+import { getTodos } from '@lib/apis';
 
 type Props = {
   params: {
@@ -801,7 +814,7 @@ demonstrates configuring a custom provider:
 
 ```js
 import './globals.css';
-import {DogContextProvider} from '@/app/context/dog-context';
+import {DogContextProvider} from '@app/context/dog-context';
 
 type Props = {children: React.ReactNode};
 
@@ -826,7 +839,7 @@ Here is an example of a component the only reads the data:
 It could of course render additional JSX.
 
 ```js
-import {useDogContext} from '@/app/context/dog-context';
+import {useDogContext} from '@app/context/dog-context';
 
 export default function Dog() {
   const {breed, name} = useDogContext();
@@ -846,7 +859,7 @@ It could of course render additional JSX.
 ```js
 'use client';
 
-import {useDogContext} from '@/app/context/dog-context';
+import {useDogContext} from '@app/context/dog-context';
 
 export default async function DogManager() {
   const {setBreed, setName} = useDogContext();
@@ -1215,7 +1228,7 @@ export async function getLimitedResponse(
 Each route that wishes to enforce the limit should include the following code:
 
 ```js
-import {getLimitedResponse} from '@/app/api/limiter';
+import {getLimitedResponse} from '@app/api/limiter';
 
 const response = await getLimitedResponse(request);
 if (response) return response;
