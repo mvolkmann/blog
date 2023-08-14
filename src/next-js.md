@@ -287,6 +287,82 @@ Additional `layout.tsx` files in page route directories define
 the layout for all pages at specific URL routes.
 These are nested inside the main layout.
 
+## Page Generation
+
+Next.js supports four kinds of page generation.
+
+- {% aTargetBlank
+  "https://nextjs.org/docs/pages/building-your-application/rendering/client-side-rendering",
+  "Client-side Rendering" %}
+
+  CSR pages are generated on the client.
+  These pages can perform data fetching in a `useEffect` hook
+  or using the `useSWR` hook ("stale-while-revalidate").
+  Another way to indicate that a page should be rendered on the client
+  is to begin the source file with `'use client';`.
+
+  This option is the least desirable for search engine optimization (SEO).
+
+- {% aTargetBlank
+  "https://nextjs.org/docs/pages/building-your-application/rendering/server-side-rendering",
+  "Server Side Rendering (SSR)" %}
+
+  SSR pages are dynamically generated on the server on **every** request.
+  SSR is used for pages that export the function `getServerSideProps`.
+  This function should return an object with the property `props`
+  which provides data to the function that defines the component.
+
+  For example:
+
+  ```js
+  export async function getServerSideProps() {
+    // Can fetch data here.
+    return { props: { some-data } };
+  }
+
+  export default MySSRPage(props: Props) {
+    return (
+      some-JSX
+    );
+  }
+  ```
+
+- {% aTargetBlank
+  "https://nextjs.org/docs/pages/building-your-application/data-fetching/incremental-static-regeneration",
+  "Incremental Static Regeneration (ISR)" %}
+
+  ISR pages are statically generated when each page is requested
+  instead of at build time.
+  ISR is used for pages that export the function `getStaticProps`.
+  This function should return an object with the property `props`
+  which provides data to the function that defines the component.
+  The object can optionally include a `revalidate` prop
+  that specifies the number of seconds that the page
+  can be cached before it will be recreated.
+
+  For example:
+
+  ```js
+  export async function getStaticProps() {
+    // Can fetch data here.
+    return { props: { some-data }, revalidate: 60 };
+  }
+
+  export default MyISRPage(props: Props) {
+    return (
+      some-JSX
+    );
+  }
+  ```
+
+- {% aTargetBlank
+  "https://nextjs.org/docs/pages/building-your-application/rendering/static-site-generation",
+  "Static Site Generation (SSG)" %}
+
+  SSG pages do not render any dynamic data and are generated at build time.
+  This is preferred when possible and is the default
+  when the criteria for the options above are not present.
+
 ## Data Fetching
 
 Components can use the fetch API to send API requests.
