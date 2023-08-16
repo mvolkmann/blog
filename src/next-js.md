@@ -197,6 +197,7 @@ Server components can:
 - be async
 - fetch data using HTTP requests
 - access sensitive information such as non-public environment variables
+- use Node.js packages
 
 Client components can:
 
@@ -919,6 +920,10 @@ that will be used to send HTTP requests.
 
 For each server route, create a directory under `app/api`
 and create a source file named `route.ts` in the directory.
+
+Since the code in these files runs on the server,
+they can import and use Node.js packages.
+For example, the `fs` package can be used to read and write to the file system.
 
 Directory names beginning with `[` and ending with `]`
 can be used to capture path parameters.
