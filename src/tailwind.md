@@ -29,9 +29,11 @@ Tailwind is implemented as a PostCSS plugin.
 It can be used in conjunction with other PostCSS plugins
 such as those that support preprocessors like Sass.
 
+The base styles in Tailwind provide a CSS reset known as "Preflight".
+
 ## Pros
 
-- **Colocates markdown and styling**  
+- **Collocates markdown and styling**  
   Placing styles with the elements they affect makes it easier
   to visualize the result while looking at the HTML.
 
@@ -271,13 +273,17 @@ are specified, modify the font name lists in the arrays below:
     },
 ```
 
-To add a custom font size, add it to the object
-that is the value of the `fontSize` property.
+To register new fonts and add custom font sizes,
+specify the `fontFamily` and `fontSize` properties
+in the `extend` object.
 For example:
 
 ```js
   theme: {
     extend: {
+      fontFamily: {
+        body: ['SomeFont1', 'SomeFont2']
+      },
       fontSize: {
         "hero": "6rem"
       },
@@ -381,6 +387,13 @@ hover over its name.
 
 A small color swatch is displayed in front of each
 Tailwind class name that represents a color.
+
+The VS Code extension {% aTargetBlank
+"https://marketplace.visualstudio.com/items?itemName=stivo.tailwind-fold",
+"Tailwind Fold " %} automatically folds the values of
+`class` attributes in HTML and `className` props in JSX.
+To see one of these values, move the cursor to its line.
+To toggle the folding behavior off and on, press ctrl-option-a.
 
 To enable {% aTargetBlank "https://emmet.io/", "Emmet" %}
 completions of Tailwind CSS class names,
@@ -578,6 +591,17 @@ This same information is available in the official docs at
 {% aTargetBlank "https://tailwindcss.com/docs/", "tailwindcss.com/docs" %}.
 It is included here in a more compact manner that is
 more easily searchable because they are all on a single page.
+
+Many Tailwind class names end with a numeric strength value.
+Often this represents a multiple of `0.25rem`.
+For example, the class `p-4` adds padding of `1rem` to all sides of an element.
+Class names for colors can specify strength values that are multiples of 100.
+For example, the class `text-red-400` specifies a certain shade of red.
+
+Many Tailwind class names support specifying
+an arbitrary value in square brackets.
+For example, the class `p-[19px]`
+adds padding of `19px` to all sides of an element.
 
 In class names that include `-color`, `color` should be replaced by one of
 `gray`, `red`, `orange`, `yellow`, `green`,
