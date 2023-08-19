@@ -10,7 +10,7 @@ layout: topic-layout.njk
 provides a way to scope CSS rules with selectors that are class names
 to a component in a web framework.
 It does not support scoping CSS rules with
-selectors that target specific HTML elements.
+selectors that only target specific HTML elements.
 
 Web frameworks that have built-in support for CSS scoping such as
 Svelte and Vue have no need for CSS Modules.
