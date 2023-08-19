@@ -1244,28 +1244,28 @@ The size of the button also increases slightly on hover.
 The `animation` and `@keyframe` values set by the `animate` classes
 are somewhat complicated. For details see the {% aTargetBlank
 "https://tailwindcss.com/docs/animation", "Animation" %} docs.
-:
-| Name Prefix | CSS Property |
+
+| Name Prefix            | CSS Property                                                                                                           |
 | ---------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `transition` | `transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;` |
-| `transition-all` | `transition-property: all;` |
-| `transition-colors` | `transition-property: background-color, border-color, color, fill, stroke;` |
-| `transition-none` | `transition-property: none;` |
-| `transition-opacity` | `transition-property: opacity;` |
-| `transition-shadow` | `transition-property: box-shadow;` |
-| `transition-transform` | `transition-property: transform;` |
-| | |
-| `duration-{n}` | `transition-duration: {n}ms;`<br>where n is 75, 100, 150, 200, 300, 500, 700, or 1000 |
-| | |
-| `ease-linear` | `transition-timing-function: linear;` |
-| `ease-in` | `transition-timing-function: cubic-bezier(0.4, 0, 1, 1);` |
-| `ease-out` | `transition-timing-function: cubic-bezier(0, 0, 0.2, 1);` |
-| `ease-in-out` | `transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);` |
-| | |
-| `delay-{n}` | `transition-delay: {n}ms;`<br>where n is 75, 100, 150, 200, 300, 500, 700, or 1000 |
-| | |
-| `animate-none` | `animation: none;` |
-| `animate-{effect}` | `animation: {effect} ...; @keyframes {effect} {...}`<br>where effect is `bounce`, `ping`, `pulse` or, `spin`; see docs |
+| `transition`           | `transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;`            |
+| `transition-all`       | `transition-property: all;`                                                                                            |
+| `transition-colors`    | `transition-property: background-color, border-color, color, fill, stroke;`                                            |
+| `transition-none`      | `transition-property: none;`                                                                                           |
+| `transition-opacity`   | `transition-property: opacity;`                                                                                        |
+| `transition-shadow`    | `transition-property: box-shadow;`                                                                                     |
+| `transition-transform` | `transition-property: transform;`                                                                                      |
+|                        |                                                                                                                        |
+| `duration-{n}`         | `transition-duration: {n}ms;`<br>where n is 75, 100, 150, 200, 300, 500, 700, or 1000                                  |
+|                        |                                                                                                                        |
+| `ease-linear`          | `transition-timing-function: linear;`                                                                                  |
+| `ease-in`              | `transition-timing-function: cubic-bezier(0.4, 0, 1, 1);`                                                              |
+| `ease-out`             | `transition-timing-function: cubic-bezier(0, 0, 0.2, 1);`                                                              |
+| `ease-in-out`          | `transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);`                                                            |
+|                        |                                                                                                                        |
+| `delay-{n}`            | `transition-delay: {n}ms;`<br>where n is 75, 100, 150, 200, 300, 500, 700, or 1000                                     |
+|                        |                                                                                                                        |
+| `animate-none`         | `animation: none;`                                                                                                     |
+| `animate-{effect}`     | `animation: {effect} ...; @keyframes {effect} {...}`<br>where effect is `bounce`, `ping`, `pulse` or, `spin`; see docs |
 
 ### Typography/Fonts
 
