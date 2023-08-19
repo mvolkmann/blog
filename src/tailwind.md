@@ -403,7 +403,36 @@ add the following in the VS Code `settings.json` file:
   "tailwindCSS.emmetCompletions": true
 ```
 
-## Breakpoints
+## Icons
+
+The makers of Tailwind created
+{% aTargetBlank "https://heroicons.com", "heroicons" %}
+which is a website that provides a large collection of free SVG icons.
+Hover over an icon to expose buttons for downloading it in SVG or JSX.
+Paste this into an HTML file or React component.
+
+The icons come in three variations with a `viewBox` of a specific size:
+
+- Outline icons are 24x24 pixels and use a 1.5px stroke.
+- Solid icons are 24x24 pixels and are filled.
+- Mini icons are 20x20 and are filled.
+
+By default the icons have the Tailwind classes `w-6` and `h-6`
+which makes them a `24px` square.
+To change the size of an icon, change these `w` and `h` classes.
+
+To set the color of an icon, set its CSS `color` property.
+
+When using React or Next.js,
+another option is to enter `npm install @heroicons/react`
+and import specific icons in component source files.
+For example:
+
+```js
+import {BeakerIcon} from '@heroicons/react/24/solid';
+```
+
+## Responsive Breakpoints
 
 By default Tailwind uses the following responsive breakpoints:
 
