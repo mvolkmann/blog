@@ -1222,6 +1222,25 @@ For all the classes in this section, `n` can be
 
 ### Transitions and Animation
 
+The Tailwind `transition-*`, `ease-*`, and `duration-*` classes
+can be combined to easily create
+transitions from one CSS property value to another.
+For example, the following set of Tailwind classes on a button
+cause it to transition from having a red border and light red background
+to a green border and light green background on hover.
+The size of the button also increases slightly on hover.
+
+```css
+<button className="
+  border-2 px-2 py-1 rounded-full
+  border-red-700 bg-red-300
+  hover:border-green-700 hover:bg-green-300 hover:scale-110
+  transition ease-linear duration-500
+">
+  Press Me
+</button>
+```
+
 The `animation` and `@keyframe` values set by the `animate` classes
 are somewhat complicated. For details see the {% aTargetBlank
 "https://tailwindcss.com/docs/animation", "Animation" %} docs.
