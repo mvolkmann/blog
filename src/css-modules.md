@@ -54,9 +54,12 @@ but support a small number of extensions including:
 It is recommended to use camelCase names for
 CSS classes define in CSS Modules source files.
 The reason is that these become properties on an exported JavaScript object.
-Referencing properties with snake_case or kebab-case names is somewhat tedious.
+Referencing properties with snake_case or kebab-case names is somewhat tedious
+because they must be inside quotes that are inside square brackets.
+For example, writing `styles.myClassName`
+is easier than writing `styles['my-class-name']`.
 
-The following file, `MyComponent.module.css` defines styles
+The following file, `MyComponent.module.css`, defines styles
 that will be scoped to the component `MyComponent`.
 
 ```css
@@ -71,7 +74,7 @@ that will be scoped to the component `MyComponent`.
 }
 ```
 
-The following file, `MyComponent.tsx` defines
+The following file, `MyComponent.tsx`, defines
 a component that uses the styles defined above.
 
 ```js
