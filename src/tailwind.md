@@ -58,7 +58,7 @@ The base styles in Tailwind provide a CSS reset known as "Preflight".
   Because Tailwind directly associates CSS classes with HTML elements,
   those classes are always used regardless of the specificity of other rules.
 
-- **Easier Responsive UIs**  
+- **Easier responsive UIs**  
   Tailwind enables creating responsive UIs without writing media queries.
   This is done by prefixing Tailwind class names
   with a breakpoint name followed by a colon.
@@ -414,13 +414,24 @@ By default Tailwind uses the following responsive breakpoints:
 | `lg` | 1024px      |
 | `xl` | 1280px      |
 
-Since these specify `min-width` values, a mobile-first approach is used.
+These specify `min-width` values, so a mobile-first approach is used.
 
 Precede Tailwind CSS class names with a breakpoint name and a colon
 to only apply the CSS class when the screen/window width is
 greater than or equal to the corresponding `min-width` value.
 For example: `lg:m-4` applies a margin of `1rem` only if
 the screen/window width is greater than or equal to `1024px`.
+
+Class names with no breakpoint prefix are used when the screen/window width
+is smaller than the largest prefix used.
+For example `text-red md:text-green` makes the text red for all widths
+less than 768px and green for all widths greater than or equal to 768px.
+
+To show an element only when on a mobile device, use `md:hidden`.
+To hide an element when on a mobile device, use `hidden md:block`.
+
+This approach for making UIs responsive is
+easier than writing CSS media queries.
 
 The breakpoint values can be overridden by modifying the `tailwind.config.js`
 file as shown in the [Configuration](#configuration) section.
