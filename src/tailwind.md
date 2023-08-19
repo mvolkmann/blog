@@ -418,7 +418,7 @@ The icons come in three variations with a `viewBox` of a specific size:
 - Mini icons are 20x20 and are filled.
 
 By default the icons have the Tailwind classes `w-6` and `h-6`
-which makes them a `24px` square.
+which makes them a `1.5rem` square.
 To change the size of an icon, change these `w` and `h` classes.
 
 To set the color of an icon, set its CSS `color` property.
