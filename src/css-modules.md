@@ -4,6 +4,12 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+<style>
+    img {
+        border: 1px solid gray;
+    }
+</style>
+
 ## Overview
 
 {% aTargetBlank "https://github.com/css-modules/css-modules", "CSS Modules" %}
@@ -104,6 +110,10 @@ This component can be used as follows:
 ```js
 <MyComponent title="My Story" content="Once upon a time ..." />
 ```
+
+<img alt="CSS Modules demo" style="width: 40%"
+  src="/blog/assets/css-modules-demo.png?v={{pkg.version}}"
+  title="CSS Modules demo">
 
 The `styles` object imported above will have a value similar to the following:
 
