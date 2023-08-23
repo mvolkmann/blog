@@ -32,7 +32,7 @@ These can be found at
 <https://objectcomputing.com/resources/publications/mark-volkmann>.
 
 In my spare time I do a lot of running.
-So far I have run 50 marathons in 40 states,
+So far I have run 51 marathons in 41 states,
 including the Boston Marathon in 2013.
 
 [![GitHub](/blog/assets/github.svg)](https://github.com/mvolkmann)
