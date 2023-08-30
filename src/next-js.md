@@ -712,7 +712,7 @@ export default async function TodoPage({ params: { id } }: Props) {
 }
 ```
 
-To provide a custom 404 page, create the file `non-found.tsx`.
+To provide a custom 404 page, create the file `not-found.tsx`.
 This supports having a different 404 page for each route.
 For example:
 
