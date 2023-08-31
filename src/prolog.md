@@ -168,7 +168,9 @@ These take considerable time to learn and master.
 
 ## Implementations
 
-There are many implementations of the Prolog programming language.
+There are many {% aTargetBlank
+"https://en.wikipedia.org/wiki/Comparison_of_Prolog_implementations",
+"implementations of the Prolog programming language" %}.
 The first Prolog implementation was Marseilles Prolog
 (also referred to as Prolog 0 to Prolog IV)
 developed at Marseilles University.
@@ -189,6 +191,7 @@ tab completion, interactive debugging.
 
 Several Prolog implementations compile source code to
 abstract machine code for the Warren Abstract Machine (WAM).
+David Warren pioneered efficient Prolog implementation in 1977.
 Searches in WAM use an efficient hash-based approach.
 
 The table at {% aTargetBlank "http://www.complang.tuwien.ac.at/ulrich/iso-prolog/conformity_testing", "Conforming Testing" %}
