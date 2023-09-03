@@ -3465,6 +3465,242 @@ and `h1` elements will be both bold and red.
 }
 ```
 
+### Container Query Length Units
+
+Container query length units specify sizes relative to
+the size of a container element.
+The following units are supported:
+
+- `cqw`: 1% of container width
+- `cqh`: 1% of container height
+- `cqi`: 1% of container inline size
+- `cqb`: 1% of container block size
+- `cqmin`: smallest of `cqi` or `cqb`
+- `cqmax`: largest of `cqi` or `cqb`
+
+The following example demonstrates rendering playing cards
+where the rank and suit are centered on each card.
+The font size is relative to the card width.
+The card width changes based on the window width
+and the card heights are controlled by an aspect ratio.
+
+<img alt="CSS container query units" style="width: 80%"
+  src="/blog/assets/css-container-query-units.gif?v={{pkg.version}}"
+  title="CSS container query units">
+
+```html
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>CSS Container Queries</title>
+    <style>
+      body {
+        background-color: tan;
+        margin: 0;
+        padding: 2vw;
+      }
+
+      .card {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 100%; /* take as much width as possible */
+        flex-grow: 1; /* shrink so all are same width */
+        aspect-ratio: 0.7143; /* playing cards are 2.5" by 3.5" */
+
+        container-type: inline-size;
+
+        background-color: white;
+        border-radius: 3vw;
+        padding: 3vw;
+      }
+
+      .hand {
+        display: flex;
+        gap: 3vw;
+        width: 100%;
+      }
+
+      .name {
+        font-size: 50cqw;
+      }
+
+      .diamond,
+      .heart {
+        color: red;
+      }
+
+      .club,
+      .spade {
+        color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hand">
+      <div class="card heart">
+        <div class="name">J♥</div>
+      </div>
+      <div class="card spade">
+        <div class="name">Q♠</div>
+      </div>
+      <div class="card diamond">
+        <div class="name">K♦</div>
+      </div>
+      <div class="card club">
+        <div class="name">A♣</div>
+      </div>
+    </div>
+  </body>
+</html>
+```
+
+### Container Queries
+
+Media queries style elements based the window size.
+Container queries style elements based on their container size.
+
+Specific elements can be identified as containers.
+Container queries can then define CSS rules that
+only apply to elements inside those containers.
+
+To declare an element to be a container,
+use the CSS property `container-type`.
+The value must be `inline-size` (most common), `size`,
+or `normal` (not a query container).
+Containers can optionally be given names.
+
+For example:
+
+```css
+.card {
+  container-name: card;
+  container-type: inline-size;
+
+  /*
+  The previous two lines can be replaced by this shorthand:
+  container: card / inline-size;
+  */
+}
+```
+
+To specify CSS rules that only apply to elements inside a container,
+define an `@container` query which is similar to a media query.
+For example:
+
+```css
+/* This only applies to elements inside containers named "card"
+   that are at least 800px wide.
+   To apply to elements inside all containers that are at least 800px wide,
+   omit the container name. */
+@container card (min-width: 800px) {
+  .suit {
+    border: 1px solid red;
+  }
+}
+```
+
+The following example uses a container query to change the
+`flex-direction` CSS property based on the width of a container.
+
+<img alt="CSS container query" style="width: 80%"
+  src="/blog/assets/css-container-query.gif?v={{pkg.version}}"
+  title="CSS container query">
+
+```html
+<html>
+  <head>
+    <title>CSS Container Queries</title>
+    <style>
+      body {
+        display: flex;
+        margin: 0;
+
+        font-family: sans-serif;
+        font-size: 2rem;
+      }
+
+      h1 {
+        margin-top: 0;
+      }
+
+      main {
+        container: main / inline-size;
+
+        flex-grow: 1;
+
+        background-color: cornflowerblue;
+        color: white;
+        padding: 2rem;
+      }
+
+      nav {
+        flex-grow: 0;
+        background-color: tan;
+        padding: 1rem;
+        max-width: 10rem;
+        min-width: 10rem;
+      }
+
+      nav > ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .story {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .story > p {
+        background-color: white;
+        border-radius: 1rem;
+        color: black;
+        margin: 0;
+        padding: 1rem;
+      }
+
+      @container main (min-width: 800px) {
+        .story {
+          flex-direction: row;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li>Item #1</li>
+        <li>Item #2</li>
+        <li>Item #3</li>
+        <li>Item #4</li>
+      </ul>
+    </nav>
+    <main>
+      <h1>Story</h1>
+      <p>
+        An interesting story is presented below.
+      </p>
+      <section class="story">
+        <p>
+          This is the first paragraph. It contains enough text to require
+          wrapping. More text is required to achieve this, so I add a lot more.
+          I hope this is enough.
+        </p>
+        <p>
+          This is the second paragraph. It contains enough text to require
+          wrapping. More text is required to achieve this, so I add a lot more.
+          I hope this is enough.
+        </p>
+      </div>
+    </main>
+  </body>
+</html>
+```
+
 ### Light and dark modes
 
 The CSS Object Model (CSSOM) {% aTargetBlank

@@ -6,7 +6,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-Video files in many formats include `.mov` can be converted to animated GIFs.
+Video files in many formats including `.mov` can be converted to animated GIFs.
 
 ## Using cloudconvert
 
