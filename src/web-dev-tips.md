@@ -3474,7 +3474,7 @@ The following units are supported:
 - `cqw`: 1% of container width (independent of writing direction)
 - `cqh`: 1% of container height (independent of writing direction)
 - `cqi`: 1% of container inline size (width considering writing direction)
-- `cqb`: 1% of container block size (height considering writing direction)
+- `cqb`: 1% of container block size (width AND height considering writing direction)
 - `cqmin`: smallest of `cqi` or `cqb`
 - `cqmax`: largest of `cqi` or `cqb`
 
@@ -3568,7 +3568,7 @@ only apply to elements inside those containers.
 To declare an element to be a container,
 use the CSS property `container-type`.
 The value must be `inline-size` (sizes based on width; most common),
-`size` (sizes based on height), or `normal` (not a query container).
+`size` (sizes based on width AND height), or `normal` (not a query container).
 Containers can optionally be given names.
 
 For example:
