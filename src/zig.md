@@ -35,12 +35,18 @@ It is maintained by the Zig Software Foundation (ZSF).
 
 ## Used By
 
-{% aTargetBlank "https://bun.sh", "Bun" %}, a JavaScript/TypeScript
-runtime and toolchain, is primarily written in Zig.
-Bun has many advantages over Node.js and Deno including much better performance.
+- {% aTargetBlank "https://bun.sh", "Bun" %} - a JavaScript/TypeScript
+  runtime and toolchain, is primarily written in Zig.
+  Bun has many advantages over Node.js and Deno including much better performance.
 
-{% aTargetBlank "https://machengine.org", "Mach" %},
-a game engine and graphics toolkit, is implemented in Zig.
+- {% aTargetBlank "https://www.roc-lang.org", "Roc" %} -
+  "a fast, friendly, functional language"
+  "Roc's compiler has always been written in Rust.
+  Roc's standard library was briefly written in Rust,
+  but was soon rewritten in Zig."
+
+- {% aTargetBlank "https://machengine.org", "Mach" %} -
+  a game engine and graphics toolkit, is implemented in Zig.
 
 ## Installing
 
