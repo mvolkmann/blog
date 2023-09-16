@@ -4,12 +4,71 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-These notes are currently in a very rough form!
+## Overview
+
+<img alt="Ziggy, the Zig mascot" style="width: 50%"
+  src="/blog/assets/ziggy.svg?v={{pkg.version}}"
+  title="Ziggy, the Zig mascot">
+
+{% aTargetBlank "https://ziglang.org", "Zig" %}
+is a free, open source, high performance, systems programming language.
+It is suitable for applications that care deeply
+about performance and/or binary size
+which justifies the tedium and verbosity of manual memory management.
+
+## Installing
+
+To install Zig in macOS using Homebrew, enter `brew install zig`.
+This may only work on Macs with Intel-based processors.
+
+For other options, see {% aTargetBlank
+"https://ziglang.org/learn/getting-started/#installing-zig", "Installing Zig" %}.
+
+## Getting Started
+
+The following code, in the file `hello.zig` is a basic hello world program.
+
+```zig
+const std = @import("std");
+
+pub fn main() void {
+    // s for string, d for decimal
+    std.debug.print("Hello {s}! {d}\n", .{"Zig", 2023});
+}
+```
+
+The print methods expects a certain type of struct as its second argument.
+Creating an instance with .{} uses that type.
+
+To build and run this program, enter `zig run hello.zig`.
+
+To create an executable, enter `zig build-exe --name hello hello.zig`.
+To create an executable for a different OS, specify the -target option.
+For example, `-target x86_64-windows`.
+
+To customize the executable, add one of these compiler flags:
+
+| Compiler flag   | Runtime safety checks | Optimizations |
+| --------------- | --------------------- | ------------- |
+| -O Debug        | Yes                   | No            |
+| -O ReleaseSafe  | Yes                   | Yes (speed)   |
+| -O ReleaseSmall | No                    | Yes (size)    |
+
+To run the executable, enter `./hello`.
+
+To format a `.zig` source file, enter `zig fmt {file-name}.zig`.
+
+There is no linter for Zig, but the Zig compiler
+provides more guidance than most compilers.
+
+## Tools
+
+For VS Code, see the extension {% aTargetBlank
+"https://github.com/ziglang/vscode-zig", "Zig Language" %}.
+
+## CLEANUP EVERYTHING BELOW HERE!
 
 - see https://blog.logrocket.com/getting-started-zig-programming-language/
-- https://ziglang.org
-- high performance systems programming language
-- suitable for applications that care deeply about performance and/or binary size which justify the tedium and verbosity of manual memory management
 - does it always catch when memory is not freed?
 - a complete toolchain for creating, developing, building, and testing apps written in Zig, C, and C++
 - includes a package manager, a build system API (used in build.zig files), cross-compilation support, and a test runner
@@ -39,27 +98,6 @@ To install, download a platform-specific zip file and unzip it.
 In macOS, enter “brew install zig”.
 
 A recommended learning resource is ziglings at https://github.com/ratfactor/ziglings.
-
-Hello World in Zig in the file hello.zig.
-
-const std = @import("std");
-
-pub fn main() void {
-std.debug.print("Hello {s}! {d}\n", .{"Zig", 2023});
-}
-
-The print methods expects a certain type of struct as its second argument. Creating an instance with .{} uses that type.
-To build and run, enter zig run hello.zig
-To create an executable, enter zig build-exe --name hello hello.zig
-To customize the executable, add one of these compiler flags:
-
-Compiler flag Runtime safety checks Optimizations
--O Debug Yes No
--O ReleaseSafe Yes Yes (speed)
--O ReleaseSmall No Yes (size
-
-To run the executable, enter ./hello
-To create a binary for a different OS, specify the -target option. For example, -target x86_64-windows
 
 To create a new project, create a directory for it, cd to the directory, and enter `zip init-exe`.
 This creates the file `build.zig` and a `src` directory containing `main.zig`.
@@ -441,4 +479,3 @@ Zig has an official style guide that is not enforced by the compiler
 - names of files that define a struct should have the same name as the struct which uses TitleCase
 - all other file names should be snake_case
 - directory names should be snake_case
-- Is there a Zig code formatter?
