@@ -6,22 +6,55 @@ layout: topic-layout.njk
 
 ## Overview
 
-<img alt="Ziggy, the Zig mascot" style="width: 50%"
-  src="/blog/assets/ziggy.svg?v={{pkg.version}}"
-  title="Ziggy, the Zig mascot">
+<figure style="width: 50%">
+  <img alt="Ziggy, the Zig mascot"
+    src="/blog/assets/ziggy.svg?v={{pkg.version}}">
+  <figcaption>Ziggy, the lizard Zig mascot</figcaption>
+</figure>
 
 {% aTargetBlank "https://ziglang.org", "Zig" %}
 is a free, open source, high performance, systems programming language.
-It is suitable for applications that care deeply
+It is a modern alternative to C with much of the same syntax
+such as statements terminated with semicolons and conditions in parentheses.
+
+Zig is suitable for applications that care deeply
 about performance and/or binary size
 which justifies the tedium and verbosity of manual memory management.
 
+Zig provides a complete toolchain for creating, developing, building,
+and testing apps written in Zig, C, and C++.
+It supports LLVM cross-compilation to integrate with C and C++.
+There are advantages to building apps with the Zig compiler
+even if they have not Zig code and only use C and/or C++ code.
+
+Zig includes a package manager, a build system API (used in `build.zig`` files),
+cross-compilation support, and a test runner.
+
+Zig was created by Andrew Kelly in 2016.
+It is maintained by the Zig Software Foundation (ZSF).
+
+## Used By
+
+{% aTargetBlank "https://bun.sh", "Bun" %}, a JavaScript/TypeScript
+runtime and toolchain, is primarily written in Zig.
+Bun has many advantages over Node.js and Deno including much better performance.
+
+{% aTargetBlank "https://machengine.org", "Mach" %},
+a game engine and graphics toolkit, is implemented in Zig.
+
 ## Installing
 
-To install Zig in macOS using Homebrew, enter `brew install zig`.
-This may only work on Macs with Intel-based processors.
+To install, download a platform-specific zip or tar file from
+the {% aTargetBlank "https://ziglang.org/download/", "Releases" %} page,
+expand it, move the directory this creates to a desired location,
+set the environment variable `ZIG_PATH` to point to this directory, and
+add `ZIG_PATH` to the list of directories in the `PATH` environment variable.
 
-For other options, see {% aTargetBlank
+In macOS and easier option is to install Zig
+with Homebrew by entering `brew install zig`.
+However, this may currently only work on Macs with Intel-based processors.
+
+For more detail on installation options, see {% aTargetBlank
 "https://ziglang.org/learn/getting-started/#installing-zig", "Installing Zig" %}.
 
 ## Getting Started
@@ -46,7 +79,9 @@ To create an executable, enter `zig build-exe --name hello hello.zig`.
 To create an executable for a different OS, specify the -target option.
 For example, `-target x86_64-windows`.
 
-To customize the executable, add one of these compiler flags:
+To customize the executable, add one of the following compiler flags.
+These cause the executable to be optimized for
+some combination of size, speed, and runtime safety.
 
 | Compiler flag   | Runtime safety checks | Optimizations |
 | --------------- | --------------------- | ------------- |
@@ -66,19 +101,74 @@ provides more guidance than most compilers.
 For VS Code, see the extension {% aTargetBlank
 "https://github.com/ziglang/vscode-zig", "Zig Language" %}.
 
+## Resources
+
+- {% aTargetBlank "https://ziglang.org", "Zig home page" %}
+- {% aTargetBlank "https://blog.logrocket.com/getting-started-zig-programming-language/",
+  "Getting started with the Zig programming language" %}
+- {% aTargetBlank "https://github.com/ratfactor/ziglings", "Ziglings" %} -
+  "A series of tiny broken programs ...
+  By fixing them, you'll learn how to read and write Zig code."
+
+## Zig Projects
+
+To create a new project, create a directory for it, cd to the directory,
+and enter `zig init-exe`.
+This creates the file `build.zig` and
+a `src` directory containing the file `main.zig`.
+
+The file `build.zig` is a build script that uses the compiler API.
+Modify this file to change the characteristics of executable that is produced.
+
+The file `main.sig` is the starting point of the application.
+Like many `.zig` files, this begins by importing the standard library
+with `const std = @import("std");`
+It also defines the main function with `pub fn main() !void { ... }`.
+The `!` means the function can return an error value.
+
+To run the app, enter `zig build run`.
+
+## Comments
+
+Single-line comments begin with `//`.
+
+Zig does not support multi-line comments.
+
+Doc comments begin with `///`.
+These are used to document variables and functions.
+
+Top-level comments begin with `//!`.
+These are used to document the current module (source file).
+
+## Primitive Types
+
+Zig supports a large number of primitive types.
+
+- signed integers: `i8`, `i16`, `i32`, `i64`, `i128`
+- unsigned integers: `u8`, `u16`, `u32`, `u64`, `u128`
+  The `u8` type can be used to hold a single character.
+  Single character literals are enclosed in single quotes.
+- floating point: `f16`, `f32`, `f64`, `f80`, `f128`
+- `isize`, `usize`
+- C types: `c_char`, `c_short`, `c_ushort`, `c_int`, `c_uint`,
+  `c_long`, `c_ulong`, `c_longlong`, `c_ulonglong`, `c_longdouble`
+- `bool`
+- `anyopaque`
+- `void`
+- `noreturn`
+- `type`
+- `anyerror`
+- `comptime_int`
+- `comptime_float`
+
+In addition to these primitive types, "arbitrary bit-width integers can be
+referenced by using an identifier of `i` or `u` followed by digits."
+For example, the identifier `u3` refers to an unsigned 3-bit integer.
+"The maximum allowed bit-width of an integer type is 65535."
+
 ## CLEANUP EVERYTHING BELOW HERE!
 
-- see https://blog.logrocket.com/getting-started-zig-programming-language/
 - does it always catch when memory is not freed?
-- a complete toolchain for creating, developing, building, and testing apps written in Zig, C, and C++
-- includes a package manager, a build system API (used in build.zig files), cross-compilation support, and a test runner
-- mascot is a lizard
-- can use with existing apps that only use C or C++
-- the Zig language is a modern alternative to C with much of the same syntax (statements are terminated with a semicolon, conditions are in parentheses, …)
-- it was created by Andrew Kelly in 2016
-- maintained by the Zig Software Foundation (ZSF)
-- Bun, a JS/TS runtime and toolchain, is primarily written in Zig
-- Mach, a game engine and graphics toolkit, is implemented in Zig
 - supports low-level memory control using allocators
   - page_allocator, c_allocator, ArenaAllocator, FixedBufferAllocator
 - not memory-safe like Rust
@@ -86,24 +176,11 @@ For VS Code, see the extension {% aTargetBlank
 - no exceptions; functions that can fail must return an error value (typically an enum?)
 - comptime blocks run at compile time; takes the place of preprocessor directives and macros
 - comptime variables are initialized at compile time
-- supports LLVM cross-compilation to integrate with C and C++
 - has a builtin testing framework that uses the `test` keyword followed by a description string and a block of code that implements the test; enter `zig test {file-path}` to run the tests in a given file
-- builds executables with `zig build-exe {file-path}`; flags can specify how the code should be optimized (for size, speed, speed and runtime safety, or none for debugging)
 - `zig cc` is an alternate C/C++ compiler
   - can build a platform-specific executable for the current platform
   - can build an executable for a specified platform
   - can find bugs that standard C/C++ compilers do not
-
-To install, download a platform-specific zip file and unzip it.
-In macOS, enter “brew install zig”.
-
-A recommended learning resource is ziglings at https://github.com/ratfactor/ziglings.
-
-To create a new project, create a directory for it, cd to the directory, and enter `zip init-exe`.
-This creates the file `build.zig` and a `src` directory containing `main.zig`.
-`.zig` files often begin with `const std = @import(“std”);`
-The main function is defined with `pub fn main() !void { … }`
-The ! means the function can return an error value.
 
 To create a new library, enter `zip init-lib`.
 
@@ -118,31 +195,6 @@ Also see `errdefer` which specifies a function to call if an error occurs in the
 Zig standard library
 
 - document this
-
-Comments
-
-- single-line with //
-- no multi-line comments
-- doc comments begin with /// and document variables and functions
-- top-level comments begin with //! and document the current module
-
-Primitive Types
-
-- Zig supports a large number of primitive types
-- signed integers: i8, i16, i32, i64, i128
-- unsigned integers: u8, u16, u32, u64, u128; u8 can hold a single character (literals in single quotes)
-- floating point: f16, f32, f64, f80, f128
-- isize, usize
-- C types: c_char, c_short, c_ushort, c_int, c_uint, c_long, c_ulong, c_longlong, c_ulonglong, c_longdouble
-- bool
-- anyopaque
-- void
-- noreturn
-- type
-- anyerror
-- comptime_int
-- comptime_float
-- “arbitrary bit-width integers can be referenced by using an identifier of i or u followed by digits. For example, the identifier i7 refers to a signed 7-bit integer. The maximum allowed bit-width of an integer type is 65535.”
 
 Primitive Values
 
