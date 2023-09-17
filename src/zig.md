@@ -286,29 +286,82 @@ if (variable == null) {
 
 ### switch Expressions
 
-- switch statements are a bit different than in C
-  - cases are referred to as “branches”
-  - branches do not fall through
-  - switch (expression) {
-  -         1…10 => { // range of values
-  -             …
-  -         },
-  -         20, 30 => { // list of values
-  -             …
-  -         },
-  -         else => { // required unless the branches are exhaustive
-  -             …
-  -         }
-  -     }
-  - it must be possible to coerce all branch values to a common type
-  - can switch on number and enum values; can it switch on string values?
-  - switch statements can be used as expressions
-    - const result = switch (expression) {
-    - 1 => “single”,
-    - 2 => “couple”,
-    - 3 => “few”,
-    - else => “many”
-    - }
+The syntax for `switch` expressions is a bit different
+than in C `switch` statements.
+
+Cases are referred to as "branches".
+Branches can match a single value, a list of values, or a range of values.
+These are followed by the `=>` operator which is followed by
+an expression, a statement, or a block of code.
+
+It must be possible to coerce all branch values to a common type.
+Supported branch value types include numbers and enums.
+Switching on strings is not supported.
+
+Here is an example that demonstrates all the branch options:
+
+```zig
+const std = @import("std");
+const print = std.debug.print;
+
+// The value of the first argument to print must be known at compile time.
+fn log(comptime text: []const u8) void {
+    print(text ++ "\n", .{});
+}
+
+pub fn main() !void {
+    // prng is short for pseudo random number generator.
+    var prng = std.rand.DefaultPrng.init(blk: {
+        var seed: u64 = undefined;
+        // try can only be used inside a function.
+        try std.os.getrandom(std.mem.asBytes(&seed));
+        break :blk seed;
+    });
+
+    // Generate a random integer from 1 to 3.
+    const value = prng.random().intRangeAtMost(u8, 1, 10);
+    print("value = {}\n", .{value});
+
+    switch (value) {
+        1 => log("one"),
+        2...5 => { // braces are only required for multiple statements
+            log("two to five");
+        },
+        6, 8, 10 => {
+            log("six, eight, or ten");
+        },
+        // The else branch must be specified
+        // unless the other branches are exhaustive.
+        else => log("other")
+    }
+}
+```
+
+Here is an example of a `switch` expression used to obtain a value:
+
+```zig
+    const result = switch (value) {
+        1 => "single",
+        2 => "couple",
+        3 => "few",
+        else => "many",
+    };
+    print("result = {s}\n", .{result});
+```
+
+Here is an example of switching on an `enum` value.
+The `else` branch is not needed because the branches are exhaustive.
+
+```zig
+    const Color = enum { red, green, blue };
+    var favorite = Color.blue;
+    // var favorite: Color = .blue; // alternate syntax
+    switch (favorite) {
+        .red => log("hot"),
+        .green => log("warm"),
+        .blue => log("cold"),
+    }
+```
 
 ### while Expressions
 
