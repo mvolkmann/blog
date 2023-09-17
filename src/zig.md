@@ -497,9 +497,10 @@ pub fn main() !void {
 
 ### for Expressions
 
-`for` expressions can be used in several ways.
+The syntax for `for` expressions is very different from C `for` statements.
+They can be used in several ways.
 
-They can iterate over the items in an array or slice:
+A `for` expression can iterate over the items in an array or slice.
 Here is an example.
 
 ```zig
@@ -526,7 +527,7 @@ pub fn main() !void {
 }
 ```
 
-They can iterate over a range of integers:
+A `for` expression can iterate over a range of integers.
 Here is an example:
 
 ```zig
@@ -538,8 +539,8 @@ Here is an example:
     }
 ```
 
-A `for` expression can iterate over multiple arrays or slices at the same time.
-Each must have the same length.
+A `for` expression can iterate over any number of arrays and slices
+at the same time. Each must have the same length.
 Here is an example:
 
 ```zig
@@ -554,8 +555,8 @@ Here is an example:
 
 An open-ended range starting from zero can be iterated over
 at the same time as other arrays or slices.
-Here is an example that outputs the index of each value in the numbers array
-along with the corresponding number:
+Here is an example that outputs the index of each value
+in the `numbers`` array along with the corresponding number:
 
 ```zig
     for (0.., numbers) |index, number| {
@@ -586,9 +587,10 @@ The `else` clause is only evaluated if the loop does not `break`.
 Here is an example:
 
 ```zig
-    value = 0;
-    // result is "triple" if value starts a 1
-    // and "not found" if value starts at 0.
+    // result is "triple" if the range starts a 1
+    // and "not found" if the range starts at 0.
+    // It seems "for" expressions can use double-dot ranges,
+    // but not triple-dot ranges. Why?
     const result = for (1..10) {
         if (value == 3) break "triple";
         value += 2;
@@ -596,12 +598,9 @@ Here is an example:
     print("result = {s}\n", .{result});
 ```
 
-- for loops are expressions
-  - to specify their value, `break someValue;`
-  - if the loop can exit without breaking, add an else clause to specify the value
-    - for (condition) { … } else someValue;
-  - else is only evaluated if the loop does not break
-- like while loops, nested for loops can be labelled to enable breaking out of or continuing an outer loop
+Like `while` expressions, `for` expressions
+can use `break` and `continue` statements
+which can optionally be followed by a label to jump to an outer loop.
 
 ## Unreachable Code Paths
 
