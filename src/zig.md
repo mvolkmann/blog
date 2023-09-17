@@ -666,11 +666,11 @@ TODO: Add an example.
 Unit tests can be included in source files
 in order to test the functions they define.
 
-Tests are executed by running `zig test {file-name}.zig`.
+Each test is described by the `test` keyword
+followed by a function name or a test description string and
+a block of code that uses the `expect` function to make assertions.
 
-If a test fails, the remaining tests are not executed, the message
-"Test [{m}/{n}] test.{test-description}... FAIL (TestUnexpectedResult)"
-is output, and a stack trace is output that shows the failing `expect`.
+Tests are executed by running `zig test {file-name}.zig`.
 
 Here is a basic example:
 
@@ -682,11 +682,24 @@ pub fn add(a: i32, b: i32) i32 {
     return a + b;
 }
 
-test "add works" {
+test add { // uses a function name
+    try expect(add(1, 2) == 3); // passes
+}
+
+test "add works" { // uses a description string
     try expect(add(1, 2) == 3); // passes
     try expect(add(2, 3) == 50); // fails
 }
 ```
+
+If an `expect` call fails, its test stops, but other tests are still run.
+The output includes the following:
+
+- a message of the form
+  "Test [{m}/{n}] test.{test-description}... FAIL (TestUnexpectedResult)"
+  for each failed test
+- a stack trace is output that shows the failing `expect` (only one of them?)
+- a summary of the form "{n1} passed; {n2} skipped; {n3} failed"
 
 ## CLEANUP EVERYTHING BELOW HERE!
 
