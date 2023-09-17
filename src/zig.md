@@ -365,43 +365,151 @@ The `else` branch is not needed because the branches are exhaustive.
 
 ### while Expressions
 
-- while loops are just like in C
-  - while (condition) { … }
-  - while (condition) : (updates) { … }
-    - this uses while like a C for loop
-    - for example, var i: i32 = 1; while (i < 10) : (i += 1) { … }
-  - if condition is a function call that returns an optional value, the loop exits if null is returned
-    - for example, while (iterator.next()) |item| { … }
-  - can use break to exit (break :someLabel;)
-  - can use continue to skip to the next iteration (continue :someLabel)
-  - can break or continue or a labelled outer loop
-  - outer: while (condition1) {
-  - while (condition2) {
-  -     if (condition3) break :outer;
-  - }
-  - }
-- while loops are expressions
-  - to specify their value, `break someValue;`
-  - if the loop can exit without breaking, add an else clause to specify the value
-    - while (condition) { … } else someValue;
-  - else is only evaluated if the loop does not break
-- while loops can catch errors when the condition is a function call that returns an error union type
-  - while (someFunction()) |value| {
-  - // Process non-error value here.
-  - } else |err| {
-  - // Handle err here.
-  - }
-  - The else block is only evaluated if someFunction returns an error value.
+The syntax for `while` expressions is nearly identical
+to that of C `while` statements.
+
+Here are examples of `while` expressions
+that demonstrate using the `break` and `continue` statements
+which can optionally be followed by a label to jump to an outer loop.
+
+```zig
+const std = @import("std");
+const print = std.debug.print;
+
+pub fn main() !void {
+    var value: u8 = 0;
+
+    // This loop outputs 1, 2, 3.
+    while (true) {
+        value += 1;
+        print("{}\n", .{value});
+        if (value == 3) break;
+    }
+
+    value = 0;
+    // This loop outputs 1, 2, 4, 5.
+    while (value < 5) {
+        value += 1;
+        if (value == 3) continue;
+
+        print("{}\n", .{value});
+    }
+}
+```
+
+A `while` expression can be used like a `C` `for` loop
+where a single update is specified in a second pair of parentheses
+that is separated from the first pair with a colon.
+Here is an example.
+
+```zig
+    value = 1;
+    // This loop outputs 1, 2, 3.
+    while (value <= 3) : (value += 1) {
+        print("{}\n", .{value});
+    }
+```
+
+If the condition passed to a `while` expression evaluates to `null`,
+the loop exits.
+This can be used to iterate over the return values
+of a function that has a optional return type.
+Here is an example:
+
+```zig
+const std = @import("std");
+const print = std.debug.print;
+
+var counter: u8 = 0;
+fn nextCounter() ?u8 {
+    counter += 2;
+    if (counter > 6) return null;
+    return counter;
+}
+
+pub fn main() !void {
+    // This loop terminates when the nextCounter function returns null.
+    // It outputs 2, 4, 6.
+    while (nextCounter()) |c| {
+        print("{}\n", .{c});
+    }
+}
+```
+
+TODO: Add an example of iterating over an array and an ArrayList.
+
+A `while` expression used to obtain a value.
+The value is specified by a `break` statement with a value.
+If it is possible for the loop to exit without hitting a `break` statement,
+add an `else` clause to specify the value.
+The `else` clause is only evaluated if the loop does not `break`.
+Here is an example:
+
+```zig
+    value = 0;
+    // result is "triple" if value starts a 1
+    // and "not found" if value starts at 0.
+    const result = while (value < 10) {
+        if (value == 3) break "triple";
+        value += 2;
+    } else "not found";
+    print("result = {s}\n", .{result});
+```
+
+A `while` expression can catch errors when its expression evaluates to an error.
+The `else` clause is only evaluated if an error occurs.
+Here is an example:
+
+```zig
+const std = @import("std");
+const print = std.debug.print;
+
+const FetchError = error{TooBig};
+var count: u8 = 0;
+fn fetchCount() FetchError!u8 {
+    count += 2;
+    return if (count > 6) FetchError.TooBig else count;
+}
+
+pub fn main() !void {
+    // This loop terminates when the fetchCount function returns an error.
+    // It outputs 2, 4, 6 followed by "error.TooBig".
+    while (fetchCount()) |c| {
+        print("{}\n", .{c});
+    } else |err| {
+        print("err = {}\n", .{err});
+    }
+}
+```
 
 ### for Expressions
 
 `for` expressions can be used in several ways.
 
 They can iterate over the items in an array or slice:
+Here is an example.
 
 ```zig
-for (sequence) |item| {
-    // do something with item
+const std = @import("std");
+const print = std.debug.print;
+
+pub fn main() !void {
+    // Create an array of numbers.
+    const numbers = [_]u8{ 10, 20, 30, 40, 50 };
+
+    // This loop outputs all the numbers.
+    for (numbers) |number| {
+        print("{}\n", .{number});
+    }
+
+    // Create a slice from an inclusive index to an exclusive index.
+    const slice = numbers[1..4];
+
+    // This loop outputs 20, 30, 40
+    // which are the numbers at index 1, 2, and 3.
+    for (slice) |number| {
+        print("{}\n", .{number});
+    }
 }
 ```
 
@@ -433,6 +541,8 @@ with the message "reached unreachable code"
 which terminates the application and outputs a stack trace.
 
 ## Functions
+
+## Tests in Code
 
 ## CLEANUP EVERYTHING BELOW HERE!
 
