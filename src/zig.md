@@ -18,8 +18,9 @@ It is a modern alternative to C with much of the same syntax
 such as statements terminated with semicolons and conditions in parentheses.
 
 Zig is suitable for applications that care deeply
-about performance and/or binary size
+about performance and/or binary size.
 which justifies the tedium and verbosity of manual memory management.
+Zig does not provide automated garbage collection.
 
 Zig provides a complete toolchain for creating, developing, building,
 and testing apps written in Zig, C, and C++.
@@ -110,6 +111,8 @@ For VS Code, see the extension {% aTargetBlank
 ## Resources
 
 - {% aTargetBlank "https://ziglang.org", "Zig home page" %}
+- {% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std",
+  "Zig Standard Library" %}
 - {% aTargetBlank "https://blog.logrocket.com/getting-started-zig-programming-language/",
   "Getting started with the Zig programming language" %}
 - {% aTargetBlank "https://github.com/ratfactor/ziglings", "Ziglings" %} -
@@ -172,8 +175,218 @@ referenced by using an identifier of `i` or `u` followed by digits."
 For example, the identifier `u3` refers to an unsigned 3-bit integer.
 "The maximum allowed bit-width of an integer type is 65535."
 
+## Variables
+
+## Control Structures
+
+Zig supports four control structures, `if`, `switch`, `while`, and `for`.
+All of these can be used as expressions that result in a value.
+
+### if Expressions
+
+The syntax for `if` expressions is nearly
+identical to that of C `if` statements.
+The most basic form follows:
+
+```zig
+if (cond1) {
+    // code goes here
+} else if (cond2) {
+    // code goes here
+} else {
+    // code goes here
+}
+```
+
+Here is an example that includes random number generation and
+simplifies output of strings type is typically `[]const u8`.
+
+```zig
+const std = @import("std");
+const print = std.debug.print;
+
+// The value of the first argument to print must be known at compile time.
+fn log(comptime text: []const u8) void {
+    print(text ++ "\n", .{});
+}
+
+pub fn main() !void {
+    // prng is short for pseudo random number generator.
+    var prng = std.rand.DefaultPrng.init(blk: {
+        var seed: u64 = undefined;
+        // try can only be used inside a function.
+        try std.os.getrandom(std.mem.asBytes(&seed));
+        break :blk seed;
+    });
+
+    // Generate a random integer from 1 to 3.
+    const value = prng.random().intRangeAtMost(u8, 1, 3);
+    print("value = {}\n", .{value});
+
+    if (value == 1) {
+        log("one");
+    } else if (value == 2) {
+        log("two");
+    } else {
+        log("other");
+    }
+}
+```
+
+Zig does not support the ternary operator from C.
+An `if` expression can be used instead.
+The following example sets the variable `value` to either `19` or `21`.
+
+```zig
+const value = if (condition) 19 else 21;
+```
+
+An `if` expression can test whether a variable with an optional type
+is currently set to `null`.
+If not, the value is unwrapped and made available in the body.
+
+```zig
+if (variable) |value| {
+    // use value here
+} else { // optional part
+    // value was null
+}
+```
+
+Here is an example that demonstrates using an optional integer.
+
+```zig
+const std = @import("std");
+const print = std.debug.print;
+
+fn report(wrapper: ?i8) void {
+    if (wrapper) |value| {
+        print("value = {}\n", .{value});
+    } else {
+        print("value is null\n", .{});
+    }
+}
+
+pub fn main() void {
+    var wrapper: ?i8 = null;
+    report(wrapper);
+    wrapper = 19;
+    report(wrapper);
+}
+```
+
+The following code demonstrates testing whether a variable with an optional type
+is currently set to null without unwrapping the value.
+
+```zig
+if (variable == null) {
+    // code goes here
+}
+```
+
+### switch Expressions
+
+- switch statements are a bit different than in C
+  - cases are referred to as “branches”
+  - branches do not fall through
+  - switch (expression) {
+  -         1…10 => { // range of values
+  -             …
+  -         },
+  -         20, 30 => { // list of values
+  -             …
+  -         },
+  -         else => { // required unless the branches are exhaustive
+  -             …
+  -         }
+  -     }
+  - it must be possible to coerce all branch values to a common type
+  - can switch on number and enum values; can it switch on string values?
+  - switch statements can be used as expressions
+    - const result = switch (expression) {
+    - 1 => “single”,
+    - 2 => “couple”,
+    - 3 => “few”,
+    - else => “many”
+    - }
+
+### while Expressions
+
+- while loops are just like in C
+  - while (condition) { … }
+  - while (condition) : (updates) { … }
+    - this uses while like a C for loop
+    - for example, var i: i32 = 1; while (i < 10) : (i += 1) { … }
+  - if condition is a function call that returns an optional value, the loop exits if null is returned
+    - for example, while (iterator.next()) |item| { … }
+  - can use break to exit (break :someLabel;)
+  - can use continue to skip to the next iteration (continue :someLabel)
+  - can break or continue or a labelled outer loop
+  - outer: while (condition1) {
+  - while (condition2) {
+  -     if (condition3) break :outer;
+  - }
+  - }
+- while loops are expressions
+  - to specify their value, `break someValue;`
+  - if the loop can exit without breaking, add an else clause to specify the value
+    - while (condition) { … } else someValue;
+  - else is only evaluated if the loop does not break
+- while loops can catch errors when the condition is a function call that returns an error union type
+  - while (someFunction()) |value| {
+  - // Process non-error value here.
+  - } else |err| {
+  - // Handle err here.
+  - }
+  - The else block is only evaluated if someFunction returns an error value.
+
+### for Expressions
+
+`for` expressions can be used in several ways.
+
+They can iterate over the items in an array or slice:
+
+```zig
+for (sequence) |item| {
+    // do something with item
+}
+```
+
+They can iterate over a range of integers:
+
+```zig
+for (start..end) |value| {
+    // do something with value
+}
+```
+
+- to get both item values and indexes
+  - for (sequence, 0..) |item, index| { … }
+- to iterate over multiple arrays or slices that have the same length at the same time, for (seq1, seq2) |v1, v2| { … }
+- to iterate over a sequence by value so the items can be mutated, for (&sequence) |_item| { item._ = newValue }
+
+- for loops are expressions
+  - to specify their value, `break someValue;`
+  - if the loop can exit without breaking, add an else clause to specify the value
+    - for (condition) { … } else someValue;
+  - else is only evaluated if the loop does not break
+- like while loops, nested for loops can be labelled to enable breaking out of or continuing an outer loop
+
+## Unreachable Code Paths
+
+The `unreachable` statement asserts that a code path should never be reached.
+This calls the builtin `panic` function
+with the message "reached unreachable code"
+which terminates the application and outputs a stack trace.
+
+## Functions
+
 ## CLEANUP EVERYTHING BELOW HERE!
 
+- Functions can specify the type of errors they can return by preceding the
+  ! in the return type with an error type or probably an error set.
+- Precede function return types with ? if null can be returned.
+- Investigate Zig string libraries.
 - does it always catch when memory is not freed?
 - supports low-level memory control using allocators
   - page_allocator, c_allocator, ArenaAllocator, FixedBufferAllocator
@@ -373,83 +586,6 @@ Unions
 - const DataTypeTag = enum { number, truth };
 - const DataType = union(DataTagType) { number: i32, truth: bool };
 - can get the tag type of a union type with std.meta.Tag(DataType) which returns DataTypeTag
-
-Control Structures
-
-- if statements are just like in C
-  - if (cond1) { … } else if (cond2) { … } else { … }
-  - but they are expressions
-  - the ternary operator is not supported, but an if expression can be used instead
-    - const value = if (condition) 19 else 21;
-  - to test whether a variable with an optional type is currently set to null, if (variable) |value| { use value here } else { value was null }; else part is optional
-  - could use `unreachable` statement in else to intentionally crash; asserts that a code location should never be reached
-  - can also just compare to null if value isn’t needed; if (variable == null) …
-- switch statements are a bit different than in C
-  - cases are referred to as “branches”
-  - branches do not fall through
-  - switch (expression) {
-  -         1…10 => { // range of values
-  -             …
-  -         },
-  -         20, 30 => { // list of values
-  -             …
-  -         },
-  -         else => { // required unless the branches are exhaustive
-  -             …
-  -         }
-  -     }
-  - it must be possible to coerce all branch values to a common type
-  - can switch on number and enum values; can it switch on string values?
-  - switch statements can be used as expressions
-    - const result = switch (expression) {
-    - 1 => “single”,
-    - 2 => “couple”,
-    - 3 => “few”,
-    - else => “many”
-    - }
-- while loops are just like in C
-  - while (condition) { … }
-  - while (condition) : (updates) { … }
-    - this uses while like a C for loop
-    - for example, var i: i32 = 1; while (i < 10) : (i += 1) { … }
-  - if condition is a function call that returns an optional value, the loop exits if null is returned
-    - for example, while (iterator.next()) |item| { … }
-  - can use break to exit (break :someLabel;)
-  - can use continue to skip to the next iteration (continue :someLabel)
-  - can break or continue or a labelled outer loop
-  - outer: while (condition1) {
-  - while (condition2) {
-  -     if (condition3) break :outer;
-  - }
-  - }
-- while loops are expressions
-  - to specify their value, `break someValue;`
-  - if the loop can exit without breaking, add an else clause to specify the value
-    - while (condition) { … } else someValue;
-  - else is only evaluated if the loop does not break
-- while loops can catch errors when the condition is a function call that returns an error union type
-  - while (someFunction()) |value| {
-  - // Process non-error value here.
-  - } else |err| {
-  - // Handle err here.
-  - }
-  - The else block is only evaluated if someFunction returns an error value.
-- for loops are different than in C
-  - in this example, sequence is an array or a slice
-  - for (sequence) |item| {
-  -     …
-  - }
-  - to get both item values and indexes
-    - for (sequence, 0..) |item, index| { … }
-  - to iterate over a range of integers, for (start..end) |value| { … }
-  - to iterate over multiple arrays or slices that have the same length at the same time, for (seq1, seq2) |v1, v2| { … }
-  - to iterate over a sequence by value so the items can be mutated, for (&sequence) |_item| { item._ = newValue }
-- for loops are expressions
-  - to specify their value, `break someValue;`
-  - if the loop can exit without breaking, add an else clause to specify the value
-    - for (condition) { … } else someValue;
-  - else is only evaluated if the loop does not break
-- like while loops, nested for loops can be labelled to enable breaking out of or continuing an outer loop
 
 Functions
 
