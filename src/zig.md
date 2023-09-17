@@ -449,8 +449,6 @@ pub fn main() !void {
 }
 ```
 
-TODO: Add an example of iterating over an ArrayList.
-
 A `while` expression can be used to obtain a value.
 The value is specified by a `break` statement with a value.
 If it is possible for the loop to exit without hitting a `break` statement,
@@ -647,7 +645,48 @@ pub fn main() !void {
 }
 ```
 
+### HashMap
+
+The {% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std:HashMap",
+"HashMap" %} data structure is a collection of key/value pairs.
+
+TODO: Add an example.
+
+### MultiArrayList
+
+The {% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std:MultiArrayList",
+"MultiArrayList" %} data structure "stores a list of a struct or tagged union type".
+"Instead of storing a single list of items, MultiArrayList stores
+separate lists for each field of the struct or lists of tags and bare unions."
+
+TODO: Add an example.
+
 ## Tests in Code
+
+Unit tests can be included in source files
+in order to test the functions they define.
+
+Tests are executed by running `zig test {file-name}.zig`.
+
+If a test fails, the remaining tests are not executed, the message
+"Test [{m}/{n}] test.{test-description}... FAIL (TestUnexpectedResult)"
+is output, and a stack trace is output that shows the failing `expect`.
+
+Here is a basic example:
+
+```zig
+const std = @import("std");
+const expect = std.testing.expect;
+
+pub fn add(a: i32, b: i32) i32 {
+    return a + b;
+}
+
+test "add works" {
+    try expect(add(1, 2) == 3); // passes
+    try expect(add(2, 3) == 50); // fails
+}
+```
 
 ## CLEANUP EVERYTHING BELOW HERE!
 
