@@ -177,6 +177,13 @@ For example, the identifier `u3` refers to an unsigned 3-bit integer.
 
 ## Variables
 
+## Ranges
+
+Ranges of numbers have an inclusive lower bound
+and an upper bound that is either exclusive or inclusive.
+For example, the range `5..7` includes the values 5 and 6
+and the range `5...7` includes the values 5, 6 and 7.
+
 ## Control Structures
 
 Zig supports four control structures, `if`, `switch`, `while`, and `for`.
@@ -324,12 +331,17 @@ pub fn main() !void {
 
     switch (value) {
         1 => log("one"),
+
+        // Double-dot ranges have an exclusive upper bound.
+        // Triple-dot ranges have an inclusive upper bound.
         2...5 => { // braces are only required for multiple statements
             log("two to five");
         },
+
         6, 8, 10 => {
             log("six, eight, or ten");
         },
+
         // The else branch must be specified
         // unless the other branches are exhaustive.
         else => log("other")
@@ -438,7 +450,7 @@ pub fn main() !void {
 
 TODO: Add an example of iterating over an ArrayList.
 
-A `while` expression used to obtain a value.
+A `while` expression can be used to obtain a value.
 The value is specified by a `break` statement with a value.
 If it is possible for the loop to exit without hitting a `break` statement,
 add an `else` clause to specify the value.
@@ -464,6 +476,7 @@ Here is an example:
 const std = @import("std");
 const print = std.debug.print;
 
+// TODO: Can errors contain associated data?
 const FetchError = error{TooBig};
 var count: u8 = 0;
 fn fetchCount() FetchError!u8 {
@@ -550,7 +563,38 @@ along with the corresponding number:
     }
 ```
 
-- to iterate over a sequence by value so the items can be mutated, for (&sequence) |_item| { item._ = newValue }
+To mutate array or slice items in a loop, iterate over pointers to the items.
+Here is an example:
+
+```zig
+    var mutable = [_]u8{ 1, 2, 3 };
+    for (&mutable) |*item| {
+        item.* *= 2; // doubles
+    }
+    const expected = [_]u8{ 2, 4, 6 };
+    // If this fails, the output is "error: TestExpectedEqual"
+    // followed by a stack trace.
+    // It does not indicate which items are not equal.
+    try std.testing.expectEqualSlices(u8, &mutable, &expected);
+```
+
+A `for` expression can be used to obtain a value.
+The value is specified by a `break` statement with a value.
+If it is possible for the loop to exit without hitting a `break` statement,
+add an `else` clause to specify the value.
+The `else` clause is only evaluated if the loop does not `break`.
+Here is an example:
+
+```zig
+    value = 0;
+    // result is "triple" if value starts a 1
+    // and "not found" if value starts at 0.
+    const result = for (1..10) {
+        if (value == 3) break "triple";
+        value += 2;
+    } else "not found";
+    print("result = {s}\n", .{result});
+```
 
 - for loops are expressions
   - to specify their value, `break someValue;`
