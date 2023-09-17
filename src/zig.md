@@ -436,7 +436,7 @@ pub fn main() !void {
 }
 ```
 
-TODO: Add an example of iterating over an array and an ArrayList.
+TODO: Add an example of iterating over an ArrayList.
 
 A `while` expression used to obtain a value.
 The value is specified by a `break` statement with a value.
@@ -514,16 +514,42 @@ pub fn main() !void {
 ```
 
 They can iterate over a range of integers:
+Here is an example:
 
 ```zig
-for (start..end) |value| {
-    // do something with value
-}
+    // Iterate over a range of numbers where
+    // the first is included and the last is not.
+    // This loop outputs 10, 11, 12, 13, 14, but not 15.
+    for (10..15) |number| {
+        print("{}\n", .{number});
+    }
 ```
 
-- to get both item values and indexes
-  - for (sequence, 0..) |item, index| { … }
-- to iterate over multiple arrays or slices that have the same length at the same time, for (seq1, seq2) |v1, v2| { … }
+A `for` expression can iterate over multiple arrays or slices at the same time.
+Each must have the same length.
+Here is an example:
+
+```zig
+    const letters = "ABCDE";
+    // This loop outputs the ASCII code of each letter
+    // followed by the number at the same index.
+    // The letters and numbers arrays must have the same length.
+    for (letters, numbers) |letter, number| {
+        print("{} - {}\n", .{ letter, number });
+    }
+```
+
+An open-ended range starting from zero can be iterated over
+at the same time as other arrays or slices.
+Here is an example that outputs the index of each value in the numbers array
+along with the corresponding number:
+
+```zig
+    for (0.., numbers) |index, number| {
+        print("{} - {}\n", .{ index, number });
+    }
+```
+
 - to iterate over a sequence by value so the items can be mutated, for (&sequence) |_item| { item._ = newValue }
 
 - for loops are expressions
