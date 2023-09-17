@@ -70,10 +70,11 @@ The following code, in the file `hello.zig` is a basic hello world program.
 
 ```zig
 const std = @import("std");
+const print = std.debug.print;
 
 pub fn main() void {
     // s for string, d for decimal
-    std.debug.print("Hello {s}! {d}\n", .{"Zig", 2023});
+    print("Hello {s}! {d}\n", .{"Zig", 2023});
 }
 ```
 
@@ -610,6 +611,41 @@ with the message "reached unreachable code"
 which terminates the application and outputs a stack trace.
 
 ## Functions
+
+## Standard Library
+
+### ArrayList
+
+The {% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std:ArrayList",
+"ArrayList" %} data structure is "a contiguous, growable list of items in memory."
+
+Instances of `ArrayList` have the fields `items`, `capacity`, and `allocator`.
+Instances have the methods `append`, `appendSlice`, `clone`, `deinit`,
+`getLast`, `getLastOrNull`, `init`, `insert`, `insertSlice`, `orderedRemove`,
+`pop`, `popOrNull`, `replaceRange`, `writer`, and many more.
+
+Here is an example that creates an `ArrayList` instance,
+adds items to it, and iterates over them.
+
+```zig
+const std = @import("std");
+const print = std.debug.print;
+const allocator = std.heap.page_allocator;
+
+pub fn main() !void {
+    var list = std.ArrayList(i32).init(allocator);
+    defer list.deinit(); // frees when function exits
+    // The append method can return an error if the allocator
+    // cannot allocate enough memory for the item being added.
+    try list.append(19);
+    try list.append(21);
+
+    // This loop outputs 19 and 21.
+    for (list.items) |value| {
+        print("{}\n", .{value});
+    }
+}
+```
 
 ## Tests in Code
 
