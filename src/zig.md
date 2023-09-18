@@ -603,7 +603,10 @@ which can optionally be followed by a label to jump to an outer loop.
 
 ## Error Handling
 
-TODO: Add detail here!
+Errors are represented by enum values.
+TODO: Can they carry additional data?
+
+TODO: Add more detail here!
 
 ```zig
 const std = @import("std");
