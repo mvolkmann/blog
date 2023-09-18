@@ -278,8 +278,8 @@ a given type (such as rust) or file extension (such as `.r`),
 use one of the following:
 
 ```bash
-rg '{string} --type rust'
-rg '{string} trust'
+rg '{string}' --type rust
+rg '{string}' trust
 rg '{string}' -g '*.rs'
 ```
 
