@@ -119,6 +119,7 @@ For VS Code, see the extension {% aTargetBlank
 - {% aTargetBlank "https://github.com/ratfactor/ziglings", "Ziglings" %} -
   "A series of tiny broken programs ...
   By fixing them, you'll learn how to read and write Zig code."
+- {% aTargetBlank "https://ziglearn.org", "ziglearn.org" %}
 
 ## Zig Projects
 
@@ -411,7 +412,8 @@ pub fn main() !void {
 ```
 
 A `while` expression can be used like a `C` `for` loop
-where a single update is specified in a second pair of parentheses
+where a single update is specified in a
+second pair of parentheses (referred to as a "continue expression")
 that is separated from the first pair with a colon.
 Here is an example.
 
@@ -735,6 +737,97 @@ The output includes the following:
 
 ## CLEANUP EVERYTHING BELOW HERE!
 
+Using a for loop to modify array items:
+
+```zig
+pub fn main() anyerror!void {
+    var string = [_Jus 'a', 'b', 'c' };
+    for (string) \*character| {
+        std.log.info("{c}", •{character. *});
+        character.* = 'd';
+    }
+    for (string) |character| {
+        std.log.info("{c}", •{character});
+    }
+}
+```
+
+Can functions be defined like this?
+`const theFunc = fn() void { ... }`
+
+Example of a tagged union:
+
+```zig
+const Tagged = union (Tag) { a: u8, b: f32, c: bool };
+
+pub fn main() anyerror!void {
+    var value = Tagged{ .b = 1.5 };
+    switch (value) {
+        .a => |×| std.log.info("a: {}", .{x}),
+        .b => |x| std.log.info("b: {}", .{x}),
+        .c => |x| std.log.info("c: (" , .{x}),
+    }
+}
+```
+
+Do switch branch ranges require three dots and slice ranges require two dots?
+Runtime safety includes array bounds checking, …
+To get a pointer to the data of a variable, use &var.
+To dereference a pointer, use var._; his syntax can be used with chaining with the value is a struct; ex. personPtr._.firstName ?
+When the value of a non-const pointer is a number, shorthand operators can be used to modify the value; ex. numPtr.\* += 1;
+The values of const pointers cannot be modified.
+To use a for loop to iterate over an array (not a slice), do you have to dereference it with & to turn it into a slice?
+arr[n..] returns a slice from index n to the end.
+Can create a slice from an array, another slice, or a. multi-pointer (define).
+Use @enumToInt(enumValue) to get its ordinal value.
+Enum definitions can contain const and var variables that become namespaced to the enum type, and not associated with individual instances.
+Can enum instances have associated data? I think not.
+Generally want to define types like a enums at the global scope instead of inside a function.
+
+Are strings just byte slices?
+
+Each enum ordinal value is the previous plus one unless specified.
+enums can define methods that can be called on instances.
+Can call on an instance OR pass an instance to it.
+An enum type can be inferred; ex. Color.red vs. .red
+
+In a type definition, can refer to the type with @This()
+
+Knows how to print struct instances with an empty format specifier.
+Struct Fields can be given default values.
+Structs can define methods.
+
+std.debug.print or std.log.info ? What else can output to stdout?
+
+Zig Software Foundation is a non-profit organization dedicated to improving the craft of software engineering as a whole.
+
+Zig is a C/C++ compiler toolchain and build system that can be used to simplify maintenance of your existing projects.
+
+Zig is a simple, powerful programming language that excels in the most demanding environments.
+
+Create an example of a struct that includes methods.
+
+defer allows specifying freeing of memory immediately after it is allocated.
+defer runs when its block exits, not only when a function exits
+
+Work on zig started in August 2015 - first commit.
+
+About pointer dereference syntax ...
+"""
+ident.* does seem weird at first glance, but it allows for much nicer chaining - instead of something like (*foo).bar (or even doing what C does and introducing a whole new operator -> for that special case), you can just do foot.bar, and the nice thing is that it works over multiple levels of indirection (even in C before I've had to do (\*foo)->bar).
+Regarding ], I assume you're talking about the calls to std.log.info. Those are creating empty tuples for the format arguments - std.log.info takes two arguments, a format string and a tuple of the values to interpolate into it, much like e.g. printf in C. Quite often in the video he actually uses {×} to specify a format argument. An alternative syntax here would be to use varargs
+
+in an earlier phase of its design Zig did have varargs, and they were used here, but for a few reasons it was decided to remove them from the language and replace them with tuples in cases like these. Yes, it results in a few extra characters when you're logging constant messages, but in practice that's not really an issue, and removing varargs had advantages for the language from the perspective of simplicity.
+
+I don't know why this chaining you consider to be better. To me, it's just different, not better or worse. And bringing confusion without having significan... Read more
+
+how do you consider (_foo) ->bar (or worse, (_(\*foo)).bar) to be better than foo.\*\* bar? This situation can get even worse with more complex structures,
+"""
+
+Learn about async/await.
+Zig strives for having only one way to accomplish each task.
+Learn about arena allocators.
+
 - Functions can specify the type of errors they can return by preceding the
   ! in the return type with an error type or probably an error set.
 - Precede function return types with ? if null can be returned.
@@ -753,6 +846,144 @@ The output includes the following:
   - can build an executable for a specified platform
   - can find bugs that standard C/C++ compilers do not
 
+From ziglearn.org:
+
+Blocks in Zig are expressions and can be given labels,
+which are used to yield values. Here, we are using a label called blk.
+Blocks yield values, meaning that they can be used in place of a value.
+The value of an empty block + is a value of the type void
+
+```zig
+test "labelled blocks"
+    const count = bik: {
+        var sum: u32 = 0;
+        var i: u32 = 0;
+        while (i < 10) : (i += 1) sum += i;
+        break blk sum;
+    };
+    expect (count == 45);
+    expect (@Type0f (count) == u32);
+}
+```
+
+This can be seen as being equivalent to C's i++.
+
+```zig
+blk: {
+    const tmp = i;
+    i += 1
+    break :blk tmp;
+}
+```
+
+Are these the same return types?
+!i32
+anyerror!i32
+
+Learn about anonymous structs.
+Can they be used like JavaScript objects.
+
+Printing type names:
+
+```zig
+const m1 = try allocator.alloc(u8, 1);
+const m2 = try allocator.alloc(u8, 10);
+const m3 = try allocator.alloc(u8, 100);
+std.log.info("{s}", .{@typeName (@Type0f(m3))});
+```
+
+Iterating over struct fields:
+
+```zig
+pub fn main() !void {
+    const my_val = Foo{ .x = 10, .y = 20 };
+
+    inline for (std.meta.fields (Foo)) |something| {
+        std.log.info("{}", .{@field (my_val, something .name)});
+    }
+}
+```
+
+A struct responsible for managing its own memory:
+
+```zig
+pub const PathManager = struct {
+    paths: std.ArrayList([]const u8),
+    allocator: std.mem.Allocator,
+
+    // ...
+
+    fn appendFilePaths(self: *PathManager, path: []const u8) !void {
+        const dir = std.fs.cwd();
+        const file = try dir.openFile(path, .{ .mode = .read _only });
+        defer file.close();
+        const metadata = try file.metadata();
+        switch (metadata.kind()) {
+            std.fs.File.Kind.file => {
+                const abs_path = try dir.realpathAlloc(self.allocator, path);
+                errdefer self.allocator.free(abs_path);
+                try self.paths.append (abs_path);
+            },
+            std.fs.File.Kind. directory => {
+                var next_dir = try dir.openIterableDir(path, .{});
+                defer next_dir.close();
+                var iter = next_dir.iterate();
+                while (try iter.next()) |entry| {
+                    const next_path = try std.fs.path.join(self.allocator, &[_][]const u8{ path, entry. name });
+                    defer self.allocator.free(next_path);
+                    try self.appendFilePaths(next_path);
+                }
+            },
+            else => return,
+        }
+    }
+};
+```
+
+Using the custom struct above:
+
+```zig
+pub fn main() !void {
+    const allocator = std.heap.page_allocator;
+    var manager = try PathManager.init(allocator, &[_][]const u8{ "src", "test" });
+    defer manager.deinit();
+}
+```
+
+See zig-arena-allocator.jpg in Downloads.
+
+Lambdas are not supported, but there aren't often needed in Zig.
+You can do something like this instead with a struct:
+
+```zig
+var map = std.StringArrayHashMap([]const u8).init(allocator);
+defer map.deinit();
+try map.put("c", "c");
+try map.put("b", "b");
+try map.put("a", "a");
+
+const SortContext = struct {
+    keys: [][]const u8,
+    pub fn lessThan(ctx: @This(), a_index: usize, b_index: usize) bool {
+        return std.mem.lessThan(u8, ctx.keys[a_index], ctx.keys[b_index]);
+    }
+};
+
+map.sort(SortContext{ .keys = map.keys () });
+```
+
+See zig-error-with-associated-data.jpg in Downloads.
+
+See zig-struct-with-method.png in Downloads.
+See zig-struct-with-method-calling-2-ways.png in Downloads.
+See zig-generics.jpg in Downloads.
+
+Demonstrate calling your own C and C++. ode from Zig.
+No support for interfaces.
+Errors cannot hold associated data. Use out parameters.
+Can transpile Zig to C.
+having a trailing comma after the last field in a struct changes how zig formats the code. It will keep each field on a separate line. If you remove the trailing comma from the last field, and all the fields will fit on a single line, then the formatter will do that.
+
 To create a new library, enter `zip init-lib`.
 
 Data types include u8 (single byte unsigned integer), …
@@ -762,6 +993,17 @@ The `defer` keyword specifies a function to be called when the function it is in
 This is often used to deallocate memory allocated on the line before.
 For example, `var allocator = std.heap.page_allocator; var myList = std.ArrayList(10).init(allocator); defer myList.deinit();`
 Also see `errdefer` which specifies a function to call if an error occurs in the current scope.
+
+Constant and variable declarations must be initialized to some value.
+When can the type be inferred from the initial value?
+If the initial value is “undefined” (means uninitialized), does the compiler enforce that it is assigned before it is used? I assume this is different from making it nullable with a “?” before the type.
+
+To declare an array,
+
+- can be const or var
+- number of elements comes first, then the type, then the initial values in curly braces
+- ex. const name = [3]i32{10, 20, 30};
+- ex. var name = [_]i32{10, 20, 30}; // length is inferred from initial values
 
 Zig standard library
 
