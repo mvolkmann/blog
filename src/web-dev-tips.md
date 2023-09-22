@@ -1376,6 +1376,92 @@ See the comments in the code for details.
 </html>
 ```
 
+### Gradient Borders
+
+It's easy to create gradient borders using `border-image-source`.
+For example:
+
+<img alt="CSS gradient border" style="width: 30%"
+  src="/blog/assets/css-gradient-border.png?v={{pkg.version}}"
+  title="CSS gradient border">
+
+```html
+<html>
+  <head>
+    <style>
+      body {
+        background-color: black;
+        font-family: sans-serif;
+        padding: 1rem;
+      }
+
+      .bordered {
+        border-image-source: linear-gradient(to bottom right, red, yellow, red);
+        border-image-slice: 1;
+        border-radius: 0.5rem;
+        border-style: solid;
+        border-width: 1px;
+        color: white;
+        display: inline-block;
+        padding: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bordered">Some Text</div>
+  </body>
+</html>
+```
+
+Unfortunately, this approach doesn't work if a `border-radius` is needed.
+But the somewhat more complicated approach below does work.
+See {% aTargetBlank "https://dev.to/afif/border-with-gradient-and-radius-387f",
+"Border with gradient and radius" %}.
+
+<img alt="CSS gradient border rounded" style="width: 30%"
+  src="/blog/assets/css-gradient-border-rounded.png?v={{pkg.version}}"
+  title="CSS gradient border rounded">
+
+```html
+<html>
+  <head>
+    <style>
+      body {
+        background-color: black;
+        font-family: sans-serif;
+        padding: 1rem;
+      }
+
+      .bordered {
+        color: white;
+        display: inline-block;
+        font-size: 1rem;
+        padding: 1rem;
+        position: relative;
+      }
+
+      .bordered::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+
+        border-radius: 0.5rem;
+        border: 1px solid transparent;
+        background: linear-gradient(to bottom right, red, yellow, red) border-box;
+        -webkit-mask: linear-gradient(white 0 0) padding-box, linear-gradient(
+            white 0 0
+          );
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bordered">Some Text</div>
+  </body>
+</html>
+```
+
 ### Centering
 
 There are many ways to center content using CSS.
