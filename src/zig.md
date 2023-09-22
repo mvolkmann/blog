@@ -28,8 +28,12 @@ It supports LLVM cross-compilation to integrate with C and C++.
 There are advantages to building apps with the Zig compiler
 even if they have not Zig code and only use C and/or C++ code.
 
-Zig includes a package manager, a build system API (used in `build.zig`` files),
-cross-compilation support, and a test runner.
+Zig includes:
+
+- a package manager
+- a build system API (used in `build.zig` files)
+- cross-compilation support
+- a test runner.
 
 Zig was created by Andrew Kelly in 2016.
 It is maintained by the Zig Software Foundation (ZSF).
@@ -646,6 +650,106 @@ which terminates the application and outputs a stack trace.
 
 ## Standard Library
 
+TODO: Add detail here.
+
+## Structs
+
+A `struct` is a custom type that holds a collection of fields
+and optional methods. Here is an example:
+
+TODO: Test this code!
+
+```zig
+const std = @import("std");
+const print = std.debug.print;
+const sqrt = std.math.sqrt;
+
+const Point = struct {
+    x: f32,
+    y: f32,
+
+    pub fn distanceToOrigin(self: Point): f32 {
+        return sqrt(self.x ** 2 + self.y ** 2);
+    }
+
+    pub fn distanceTo(self: Point, other: Point): f32 {
+        return sqrt((self.x - other.x) ** 2 + (self.y - other.y) ** 2);
+    }
+};
+
+pub fn main() void {
+    const p1 = Point{ .x = 1, .y = 2 };
+    print("p1 = {}\n", .{p1});
+    print("p1 to origin = {}\n", .{p1.distanceToOrigin()});
+
+    const p2 = Point{ .x = 1, .y = 2 };
+    print("p1 to p2 = {}\n", .{p1.distanceTo(p2)});
+    print("p1 to p2 = {}\n", .{Point.distanceTo(p1, p2)});
+}
+```
+
+Create an example of a struct that includes methods.
+
+Iterating over struct fields:
+
+```zig
+pub fn main() !void {
+    const my_val = Foo{ .x = 10, .y = 20 };
+
+    inline for (std.meta.fields (Foo)) |something| {
+        std.log.info("{}", .{@field (my_val, something .name)});
+    }
+}
+```
+
+A struct responsible for managing its own memory:
+
+```zig
+pub const PathManager = struct {
+    paths: std.ArrayList([]const u8),
+    allocator: std.mem.Allocator,
+
+    // ...
+
+    fn appendFilePaths(self: *PathManager, path: []const u8) !void {
+        const dir = std.fs.cwd();
+        const file = try dir.openFile(path, .{ .mode = .read _only });
+        defer file.close();
+        const metadata = try file.metadata();
+        switch (metadata.kind()) {
+            std.fs.File.Kind.file => {
+                const abs_path = try dir.realpathAlloc(self.allocator, path);
+                errdefer self.allocator.free(abs_path);
+                try self.paths.append (abs_path);
+            },
+            std.fs.File.Kind.directory => {
+                var next_dir = try dir.openIterableDir(path, .{});
+                defer next_dir.close();
+                var iter = next_dir.iterate();
+                while (try iter.next()) |entry| {
+                    const next_path = try std.fs.path.join(self.allocator, &[_][]const u8{ path, entry. name });
+                    defer self.allocator.free(next_path);
+                    try self.appendFilePaths(next_path);
+                }
+            },
+            else => return,
+        }
+    }
+};
+```
+
+Using the custom struct above:
+
+```zig
+pub fn main() !void {
+    const allocator = std.heap.page_allocator;
+    var manager = try PathManager.init(allocator, &[_][]const u8{ "src", "test" });
+    defer manager.deinit();
+}
+```
+
+TODO: Add an example of a generic struct using `comptime`.
+
 ### ArrayList
 
 The {% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std:ArrayList",
@@ -735,6 +839,95 @@ The output includes the following:
 - a stack trace is output that shows the failing `expect` (only one of them?)
 - a summary of the form "{n1} passed; {n2} skipped; {n3} failed"
 
+## Stack Example
+
+This example is based on the Primeagen video at {% aTargetBlank
+"https://www.youtube.com/watch?v=xIPrwrBAU2c", "Zig Data Structure Katas" %}.
+
+```zig
+const std = @import("std");
+const log = std.debug.print;
+const Allocator = std.mem.Allocator; // memory allocator interface
+const expect = std.testing.expect;
+
+// This creates a struct that represents
+// a stack whose values are a given type.
+fn Stack(comptime T: type) type {
+    return struct {
+        const Node = struct { value: T, next: ?*Node };
+
+        // Gets the type of the struct we are inside.
+        const Self = @This();
+
+        length: usize,
+        head: ?*Node, // optional pointer
+        allocator: Allocator, // passed to init below
+
+        pub fn init(allocator: Allocator) Self {
+            return .{ .length = 0, .head = null, .allocator = allocator };
+        }
+
+        pub fn deinit(self: *Self) void {
+            while (self.length > 0) _ = self.pop();
+            self.* = undefined;
+        }
+
+        pub fn push(self: *Self, value: T) !void {
+            var node = try self.allocator.create(Node);
+            node.value = value;
+            node.next = self.head;
+            self.length += 1;
+            self.head = node;
+        }
+
+        pub fn pop(self: *Self) ?T {
+            if (self.head) |unwrapped| {
+                defer self.allocator.destroy(unwrapped);
+                self.length -= 1;
+                self.head = unwrapped.next;
+                return unwrapped.value;
+            }
+            return null;
+        }
+
+        pub fn print(self: *Self) void {
+            log("\nStack length is {}.\n", .{self.length});
+            var node = self.head;
+            while (node) |unwrapped| {
+                log("=> {}\n", .{unwrapped.value});
+                node = unwrapped.next;
+            }
+        }
+    };
+}
+
+test "stack" {
+    const IntStack = Stack(i32);
+    var stack = IntStack.init(std.testing.allocator);
+    defer stack.deinit();
+
+    try stack.push(19);
+    try expect(stack.length == 1);
+
+    try stack.push(20);
+    try expect(stack.length == 2);
+
+    stack.print(); // output is suppressed in tests
+
+    var value = stack.pop();
+    try expect(stack.length == 1);
+    try expect(value == 20);
+
+    value = stack.pop();
+    try expect(stack.length == 0);
+    try expect(value == 19);
+
+    value = stack.pop();
+    try expect(stack.length == 0);
+    try expect(value == null);
+}
+```
+
 ## CLEANUP EVERYTHING BELOW HERE!
 
 Using a for loop to modify array items:
@@ -805,8 +998,6 @@ Zig is a C/C++ compiler toolchain and build system that can be used to simplify 
 
 Zig is a simple, powerful programming language that excels in the most demanding environments.
 
-Create an example of a struct that includes methods.
-
 defer allows specifying freeing of memory immediately after it is allocated.
 defer runs when its block exits, not only when a function exits
 
@@ -834,7 +1025,7 @@ Learn about arena allocators.
 - Investigate Zig string libraries.
 - does it always catch when memory is not freed?
 - supports low-level memory control using allocators
-  - page_allocator, c_allocator, ArenaAllocator, FixedBufferAllocator
+  - page_allocator, c_allocator, ArenaAllocator, FixedBufferAllocator, GeneralPurposeAllocator, std.testing.allocator
 - not memory-safe like Rust
 - no operator overloading
 - no exceptions; functions that can fail must return an error value (typically an enum?)
@@ -892,64 +1083,6 @@ const m3 = try allocator.alloc(u8, 100);
 std.log.info("{s}", .{@typeName (@Type0f(m3))});
 ```
 
-Iterating over struct fields:
-
-```zig
-pub fn main() !void {
-    const my_val = Foo{ .x = 10, .y = 20 };
-
-    inline for (std.meta.fields (Foo)) |something| {
-        std.log.info("{}", .{@field (my_val, something .name)});
-    }
-}
-```
-
-A struct responsible for managing its own memory:
-
-```zig
-pub const PathManager = struct {
-    paths: std.ArrayList([]const u8),
-    allocator: std.mem.Allocator,
-
-    // ...
-
-    fn appendFilePaths(self: *PathManager, path: []const u8) !void {
-        const dir = std.fs.cwd();
-        const file = try dir.openFile(path, .{ .mode = .read _only });
-        defer file.close();
-        const metadata = try file.metadata();
-        switch (metadata.kind()) {
-            std.fs.File.Kind.file => {
-                const abs_path = try dir.realpathAlloc(self.allocator, path);
-                errdefer self.allocator.free(abs_path);
-                try self.paths.append (abs_path);
-            },
-            std.fs.File.Kind. directory => {
-                var next_dir = try dir.openIterableDir(path, .{});
-                defer next_dir.close();
-                var iter = next_dir.iterate();
-                while (try iter.next()) |entry| {
-                    const next_path = try std.fs.path.join(self.allocator, &[_][]const u8{ path, entry. name });
-                    defer self.allocator.free(next_path);
-                    try self.appendFilePaths(next_path);
-                }
-            },
-            else => return,
-        }
-    }
-};
-```
-
-Using the custom struct above:
-
-```zig
-pub fn main() !void {
-    const allocator = std.heap.page_allocator;
-    var manager = try PathManager.init(allocator, &[_][]const u8{ "src", "test" });
-    defer manager.deinit();
-}
-```
-
 See zig-arena-allocator.jpg in Downloads.
 
 Lambdas are not supported, but there aren't often needed in Zig.
@@ -977,6 +1110,7 @@ See zig-error-with-associated-data.jpg in Downloads.
 See zig-struct-with-method.png in Downloads.
 See zig-struct-with-method-calling-2-ways.png in Downloads.
 See zig-generics.jpg in Downloads.
+See zip-enum-and-associated-data.jpg in Downloads.
 
 Demonstrate calling your own C and C++. ode from Zig.
 No support for interfaces.
