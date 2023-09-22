@@ -164,12 +164,14 @@ To run the app, enter `zig build run`.
 Single-line comments begin with `//`.
 
 Zig does not support multi-line comments.
-
-Doc comments begin with `///`.
-These are used to document variables and functions.
+It relies on code editors to make it
+easy to comment and uncomment ranges of lines.
 
 Top-level comments begin with `//!`.
 These are used to document the current module (source file).
+
+Doc comments begin with `///`.
+These are used to document variables and functions.
 
 ## Primitive Types
 
@@ -673,38 +675,39 @@ TODO: Add detail here.
 A `struct` is a custom type that holds a collection of fields
 and optional methods. Here is an example:
 
-TODO: Test this code!
-
 ```zig
 const std = @import("std");
-const print = std.debug.print;
 const sqrt = std.math.sqrt;
+const expect = std.testing.expect;
+
+fn square(n: f32) f32 {
+    return std.math.pow(f32, n, 2);
+}
 
 const Point = struct {
     x: f32,
     y: f32,
 
-    pub fn distanceToOrigin(self: Point): f32 {
-        return sqrt(self.x ** 2 + self.y ** 2);
+    pub fn distanceToOrigin(self: Point) f32 {
+        return sqrt(square(self.x) + square(self.y));
     }
 
-    pub fn distanceTo(self: Point, other: Point): f32 {
-        return sqrt((self.x - other.x) ** 2 + (self.y - other.y) ** 2);
+    pub fn distanceTo(self: Point, other: Point) f32 {
+        const dx = self.x - other.x;
+        const dy = self.y - other.y;
+        return sqrt(square(dx) + square(dy));
     }
 };
 
-pub fn main() void {
-    const p1 = Point{ .x = 1, .y = 2 };
-    print("p1 = {}\n", .{p1});
-    print("p1 to origin = {}\n", .{p1.distanceToOrigin()});
+test "Point struct" {
+    const p1 = Point{ .x = 3, .y = 4 };
+    try expect(p1.distanceToOrigin() == 5);
 
-    const p2 = Point{ .x = 1, .y = 2 };
-    print("p1 to p2 = {}\n", .{p1.distanceTo(p2)});
-    print("p1 to p2 = {}\n", .{Point.distanceTo(p1, p2)});
+    const p2 = Point{ .x = 6, .y = 8 };
+    try expect(p1.distanceTo(p2) == 5);
+    try expect(Point.distanceTo(p1, p2) == 5);
 }
 ```
-
-Create an example of a struct that includes methods.
 
 Iterating over struct fields:
 
@@ -945,6 +948,36 @@ test "stack" {
 ```
 
 ## CLEANUP EVERYTHING BELOW HERE!
+
+assignment syntax: [const|var] identifier[: type] = value;
+Can omit the type if it can be inferred from the value.
+
+@as performs an explicit type coercion.
+const inferred_constant = @as(i32, 5);
+var inferred_variable = @as(u32, 5000);
+
+Prefer const.
+
+Value can be undefined if not known yet.
+Does the compiler enforce that it is set before it is used?
+
+const array = [_]u8{ 'h', 'e', 'l', 'l', ‘o’];
+This shows declaring an array where the length is inferred from the initial elements.
+
+Arrays have a len field.
+
+if condition must evaluate to a boolean. There are no other truths or falsely values.
+
+expect must be called with try and takes a single boolean value.
+
+When a while loop condition is an optional variable,
+does the capture in pipes comes before the optional colon and continue expression?
+
+To call a function that returns a value and not use it, assign to \_.
+
+Function parameters are immutable.
+
+Convention is to use snake case for variables and snake case for function names.
 
 .{} makes a literal that's either an array literal or struct literal.
 Strings are just arrays too.
