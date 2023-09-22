@@ -28,9 +28,25 @@ It supports LLVM cross-compilation to integrate with C and C++.
 There are advantages to building apps with the Zig compiler
 even if they have not Zig code and only use C and/or C++ code.
 
+Zig emphasizes:
+
+- No hidden control flow.
+
+  Examples of hidden control flow in other languages include
+  exception handling, operator overloading, and destructors.
+
+- No hidden memory allocations.
+
+- No preprocessors or macros.
+
+  In place of these, Zig uses code that runs at compile-time,
+  indicated by the `comptime` keyword.
+
 Zig includes:
 
 - a package manager
+- a build system that is simpler that the
+  combinations of build tools typically used with C and C++
 - a build system API (used in `build.zig` files)
 - cross-compilation support
 - a test runner.
@@ -929,6 +945,11 @@ test "stack" {
 ```
 
 ## CLEANUP EVERYTHING BELOW HERE!
+
+.{} makes a literal that's either an array literal or struct literal.
+Strings are just arrays too.
+There are no vararg functions in Zig, so functions that would be varargs
+in other languages take this kind of literal instead.
 
 Using a for loop to modify array items:
 
