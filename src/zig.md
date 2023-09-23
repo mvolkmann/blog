@@ -98,8 +98,10 @@ pub fn main() void {
 }
 ```
 
-The print methods expects a certain type of struct as its second argument.
-Creating an instance with .{} uses that type.
+The print methods expects a literal array as its second argument.
+The syntax for a literal array or struct is `.{}`
+where array elements or struct fields appear in
+a comma-separated list inside the curly braces.
 
 To build and run this program, enter `zig run hello.zig`.
 
@@ -256,6 +258,15 @@ const dice_rolls = [_]u8{ 2, 6, 1, 5 };
 ```
 
 Arrays have a len field.
+
+## Strings
+
+Strings are represented by arrays of type `[]u8`.
+Zig only provides the ability to operator on strings as byte arrays.
+
+For more functionality, use a string library such as
+{% aTargetBlank "https://github.com/JakubSzark/zig-string", "zig-string" %} or
+{% aTargetBlank "https://codeberg.org/dude_the_builder/zigstr", "zigstr" %}.
 
 ## Slices
 
@@ -751,6 +762,10 @@ Function parameters cannot be modified.
 To call a function that returns a value and not use it, assign it to `_`.
 For example, `_ = someFn();`
 
+Zig does not support "vararg" functions,
+so functions that would have a variable number of arguments
+in other languages take a literal array (`.{}`) instead.
+
 ## Reflection
 
 The following builtin functions support reflection:
@@ -1181,7 +1196,6 @@ test "stack" {
 ## CLEANUP EVERYTHING BELOW HERE!
 
 .{} makes a literal that's either an array literal or struct literal.
-Strings are just arrays too.
 There are no vararg functions in Zig, so functions that would be varargs
 in other languages take this kind of literal instead.
 
