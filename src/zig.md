@@ -289,6 +289,57 @@ and an upper bound that is either exclusive or inclusive.
 For example, the range `5..7` includes the values 5 and 6
 and the range `5...7` includes the values 5, 6 and 7.
 
+## Enumerations
+
+The `enum` keyword is used to define an enumeration.
+For example, `const Color = enum { red, yellow, blue };`.
+
+Enum instances like `Color.yellow` have a unique ordinal value.
+These values start from zero by default and increment by one.
+Enum instances cannot have associated data.
+
+To get the ordinal value of an enum instance,
+use the builtin function `@intFromEnum(enumValue)`.
+For example, `@intFromEnum(Color.yellow)` returns `1`.
+
+Enums are typically defined at the global scope rather than inside a function.
+
+Enum values can override their default ordinal value.
+Subsequent enum values that do not also override their default value
+increment from the ordinal value of the previous enum value.
+
+Enums can define methods that can be called on instances.
+These methods can be called on an instance or an instance can be passed to them.
+
+```zig
+const std = @import("std");
+const print = std.debug.print;
+
+pub fn main() void {
+    // A type must be specified for an enum
+    // in order to override its default ordinal values.
+    const Color = enum(u8) {
+        red, // defaults to 0
+        yellow, // assigned 1
+        blue = 7, // overrides default of 2
+        green, // assigned 8
+
+        // const favorite = yellow
+        const Self = @This();
+        pub fn isPrimary(self: Self) bool {
+            return self == Self.red or self == Self.yellow or self == Self.blue;
+        }
+    };
+
+    const c = Color.green;
+    print("c = {}\n", .{c}); // enum_demo.main.Color.green
+    print("c = {}\n", .{@intFromEnum(c)}); // 8
+    print("green primary? {}\n", .{c.isPrimary()}); // false
+    print("green primary? {}\n", .{Color.isPrimary(c)}); // false
+    print("yellow primary? {}\n", .{Color.yellow.isPrimary()}); // true
+}
+```
+
 ## Arrays
 
 Array types have the syntax `[length]type`.
@@ -1263,17 +1314,6 @@ Runtime safety includes array bounds checking, …
 To use a for loop to iterate over an array (not a slice), do you have to dereference it with & to turn it into a slice?
 arr[n..] returns a slice from index n to the end.
 Can create a slice from an array, another slice, or a. multi-pointer (define).
-Use @enumToInt(enumValue) to get its ordinal value.
-Enum definitions can contain const and var variables that become namespaced to the enum type, and not associated with individual instances.
-Can enum instances have associated data? I think not.
-Generally want to define types like a enums at the global scope instead of inside a function.
-
-Are strings just byte slices?
-
-Each enum ordinal value is the previous plus one unless specified.
-enums can define methods that can be called on instances.
-Can call on an instance OR pass an instance to it.
-An enum type can be inferred; ex. Color.red vs. .red
 
 In a type definition, can refer to the type with @This()
 
