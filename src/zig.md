@@ -204,18 +204,26 @@ For example, the identifier `u3` refers to an unsigned 3-bit integer.
 The syntax for declaring a variable is:
 
 ```zig
-{const|var} identifier[: type] = value;
+{const|var} {name}[: type] = {value};
 ```
+
+The parts inside curly braces are required and
+the parts inside square brackets are optional.
 
 Variable declared with `const` are immutable and
 variable declared with `var` are mutable.
 Using `const` is preferred when possible.
 
+The convention for variable names is to use snake_case.
+
 The type can be omitted if it can be inferred from the value.
 
-An initial value is required, but can be set to `undefined`
-as long as another value is assigned before the variable is used.
-TODO: Does the compiler enforce that it is set before it is used?
+An initial value is required, but can be set to `undefined`.
+The compiler does not currently check that
+the variable is set to another value before it is used.
+This can produce undesirable results or errors,
+so it's best not to set variables to `undefined`.
+Runtime checks for this may be added in the future.
 
 The builtin function `@as` performs an explicit type coercion.
 This can be used to ensure that the initial value is treated as a specific type.
@@ -235,6 +243,21 @@ Ranges of numbers have an inclusive lower bound
 and an upper bound that is either exclusive or inclusive.
 For example, the range `5..7` includes the values 5 and 6
 and the range `5...7` includes the values 5, 6 and 7.
+
+## Arrays
+
+Array types have the syntax `[length]type`.
+For example, `[5]i32` is an array of five integers.
+The length can be replaced by an underscore when it can be inferred from an initial value.
+For example:
+
+```zig
+const dice_rolls = [_]u8{ 2, 6, 1, 5 };
+```
+
+Arrays have a len field.
+
+## Slices
 
 ## Control Structures
 
@@ -256,6 +279,9 @@ if (cond1) {
     // code goes here
 }
 ```
+
+The conditions must evaluate to a `bool` value.
+Other types of values are not interpreted as truthy or falsely.
 
 Here is an example that includes random number generation and
 simplifies output of strings type is typically `[]const u8`.
@@ -479,6 +505,7 @@ If the condition passed to a `while` expression evaluates to `null`,
 the loop exits.
 This can be used to iterate over the return values
 of a function that has a optional return type.
+
 Here is an example:
 
 ```zig
@@ -495,6 +522,8 @@ fn nextCounter() ?u8 {
 pub fn main() !void {
     // This loop terminates when the nextCounter function returns null.
     // It outputs 2, 4, 6.
+    // If a "continue expression" is included,
+    // the colon and that come after the capture in pipes.
     while (nextCounter()) |c| {
         print("{}\n", .{c});
     }
@@ -694,13 +723,94 @@ which terminates the application and outputs a stack trace.
 
 ## Functions
 
+The syntax for defining a function is:
+
+```zig
+[pub] fn {name}([parameter-list]) {return-type} {
+    {body}
+}
+```
+
+Marking a function as `pub` makes it available outside its source file.
+
+The parameter list is a comma-separated list of parameter declarations.
+The syntax for each parameter declaration is `{name}: {type}`.
+
+The convention for function names is to use camelCase.
+
+The return type syntax is `[error-type][!][return-type]`.
+For example:
+
+- `i32` means an integer is returned and no errors can be returned
+- `!i32` means an integer or one of the errors inferred from the function body is returned
+- `anyerror!i32` means an integer or any kind of error is returned
+- `MyErrorSet!i32` means an integer or one of the errors in `MyErrorSet` is returned
+
+Function parameters cannot be modified.
+
+To call a function that returns a value and not use it, assign it to `_`.
+For example, `_ = someFn();`
+
 ## Reflection
 
 The following builtin functions support reflection:
 
-- `@TypeOf` returns the type of a given variable
-- `@typeName` returns the name of a given type as a string
-- `@typeInfo` returns ...
+- `@TypeOf` returns the type of a given variable.
+- `@typeName` returns the name of a given type as a string.
+- `@typeInfo` returns information about a given type.
+- `std.meta.fields` returns information about the fields in a struct.
+- `std.meta.trait.hasField` methods determine if a struct
+  contains a field with a given name.
+- `std.meta.trait.hasFn` methods determine if a struct
+  contains a function with a given name.
+- `std.meta.trait.*` methods determine the kind of a type. These include
+  `isConstPtr`, `isContainer`, `isExtern`, `isFloat`, `isIndexable`, `isIntegral`,
+  `isManyItemPtr`, `isNumber`, `isPacked`, `isPtrTo`, `isSignedInt`, `isSingleItemPtr`,
+  `isSlice`, `isSliceOf`, `isTuple`, `isUnsignedInt`, and `isZigString`.
+
+```zig
+const std = @import("std");
+const print = std.debug.print;
+const trait = std.meta.trait;
+
+const Dog = struct { name: []const u8, breed: []const u8, age: u8 };
+
+fn nextInteger(n: i32, bigger: bool) i32 {
+    return if (bigger) n + 1 else n - 1;
+}
+
+pub fn main() void {
+    const d = Dog{ .name = "Comet", .breed = "whippet", .age = 3 };
+
+    // Struct reflection
+    // This for loop must be inline.
+    inline for (std.meta.fields(Dog)) |field| {
+        const T = field.type;
+        print(
+            "Dog struct has field \"{s}\" with type {s}\n",
+            .{ field.name, @typeName(T) }
+        );
+
+        const value = @field(d, field.name);
+        // comptime is required here because the compiler needs to know the type.
+        if (comptime trait.isNumber(T)) print("value is {d}\n", .{value});
+        if (comptime trait.isZigString(T)) print("value is {s}\n", .{value});
+    }
+
+    // Function reflection
+    const T = @TypeOf(nextInteger);
+    print("nextInteger type is {}\n", .{T}); // fn(i32, bool) i32
+    const info = @typeInfo(T);
+    if (info == .Fn) { // if T is a function type ...
+        // This for loop must be inline.
+        inline for (1.., info.Fn.params) |number, param| {
+            // Can't get parameter name, only type.
+            print("parameter {d} type is {any}\n", .{ number, param.type });
+        }
+        print("return type is {any}\n", .{info.Fn.return_type});
+    }
+}
+```
 
 ## Allocators
 
@@ -932,11 +1042,15 @@ TODO: Add an example.
 Unit tests can be included in source files
 in order to test the functions they define.
 
-Each test is described by the `test` keyword
-followed by a function name or a test description string and
-a block of code that uses the `expect` function to make assertions.
+Each test is described by the `test` keyword followed by
+a function name or a test description string and a block of code.
 
-Tests are executed by running `zig test {file-name}.zig`.
+The block of code uses the `expect` function to make assertions.
+The `expect` function takes a single argument
+that must be an expression that evaluates to a `bool` value.
+It can return an error and so must be preceded by the `try` keyword.
+
+All tests is a source file are executed by running `zig test {file-name}.zig`.
 
 Here is a basic example:
 
@@ -1057,24 +1171,6 @@ test "stack" {
 ```
 
 ## CLEANUP EVERYTHING BELOW HERE!
-
-const array = [_]u8{ 'h', 'e', 'l', 'l', ‘o’];
-This shows declaring an array where the length is inferred from the initial elements.
-
-Arrays have a len field.
-
-if condition must evaluate to a boolean. There are no other truths or falsely values.
-
-expect must be called with try and takes a single boolean value.
-
-When a while loop condition is an optional variable,
-does the capture in pipes comes before the optional colon and continue expression?
-
-To call a function that returns a value and not use it, assign to \_.
-
-Function parameters are immutable.
-
-Convention is to use snake case for variables and snake case for function names.
 
 .{} makes a literal that's either an array literal or struct literal.
 Strings are just arrays too.
