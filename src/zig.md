@@ -239,6 +239,49 @@ print("{d} is {s}\n", .{ limit, @typeName(@TypeOf(limit)) }); // 5 is i8
 Variable shadowing is not allowed.
 Variables cannot have the same name as another in an outer scope.
 
+## Pointers
+
+To get a pointer to the data of a variable, use `&variable_name`.
+
+To dereference a pointer, use `variable_name.*`.
+This syntax can be used with chaining when the value is a `struct`
+to access a struct field.
+For example, `dogPtr.*.name`.
+
+A pointer to a non-`const` value can be used to modify the value
+regardless of whether the pointer itself is `const`.
+A pointer to `const` value cannot be used to modify the value.
+
+Here are examples of obtaining and using pointers.
+
+```zig
+const std = @import("std");
+const print = std.debug.print;
+
+const Dog = struct { name: []const u8, breed: []const u8, age: u8 };
+
+pub fn main() void {
+    var dog = Dog{ .name = "Comet", .breed = "whippet", .age = 3 };
+    const dogPtr = &dog;
+    print("name = {s}\n", .{dog.name});
+    print("name = {s}\n", .{dogPtr.*.name});
+
+    // Pointers can only be used to modify a struct property
+    // if the struct instance is not const.
+    dogPtr.*.name = "Oscar";
+    print("name = {s}\n", .{dog.name});
+
+    var number: u8 = 1;
+    print("number = {d}\n", .{number}); // 1
+
+    // Shorthand operators can be used to
+    // modify the value referenced by a pointer.
+    const numberPtr = &number;
+    numberPtr.* += 1;
+    print("number = {d}\n", .{number}); // 2
+}
+```
+
 ## Ranges
 
 Ranges of numbers have an inclusive lower bound
@@ -1195,25 +1238,6 @@ test "stack" {
 
 ## CLEANUP EVERYTHING BELOW HERE!
 
-.{} makes a literal that's either an array literal or struct literal.
-There are no vararg functions in Zig, so functions that would be varargs
-in other languages take this kind of literal instead.
-
-Using a for loop to modify array items:
-
-```zig
-pub fn main() anyerror!void {
-    var string = [_Jus 'a', 'b', 'c' };
-    for (string) \*character| {
-        std.log.info("{c}", •{character. *});
-        character.* = 'd';
-    }
-    for (string) |character| {
-        std.log.info("{c}", •{character});
-    }
-}
-```
-
 Can functions be defined like this?
 `const theFunc = fn() void { ... }`
 
@@ -1233,11 +1257,9 @@ pub fn main() anyerror!void {
 ```
 
 Do switch branch ranges require three dots and slice ranges require two dots?
+
 Runtime safety includes array bounds checking, …
-To get a pointer to the data of a variable, use &var.
-To dereference a pointer, use var._; his syntax can be used with chaining with the value is a struct; ex. personPtr._.firstName ?
-When the value of a non-const pointer is a number, shorthand operators can be used to modify the value; ex. numPtr.\* += 1;
-The values of const pointers cannot be modified.
+
 To use a for loop to iterate over an array (not a slice), do you have to dereference it with & to turn it into a slice?
 arr[n..] returns a slice from index n to the end.
 Can create a slice from an array, another slice, or a. multi-pointer (define).
