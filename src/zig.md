@@ -311,6 +311,8 @@ increment from the ordinal value of the previous enum value.
 Enums can define methods that can be called on instances.
 These methods can be called on an instance or an instance can be passed to them.
 
+Here is a an example that demonstrates all of these features.
+
 ```zig
 const std = @import("std");
 const print = std.debug.print;
