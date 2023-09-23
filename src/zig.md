@@ -812,6 +812,14 @@ pub fn main() void {
 }
 ```
 
+In the code above, `info` is a `std.builtin.Type` instance.
+It is compared to `.Fn` to test whether `T` is a function type.
+A `Type` instance can be compared to any of these:
+`.AnyFrame`, `.Array`, `.Bool`, `.ComptimeFloat`, `.ComptimeInt`, `.Enum`,
+`.EnumLiteral`, `.ErrorSet`, `.ErrorUnion`, `.Float`, `.Fn`, `.Frame`, `.Int`,
+`.NoReturn`, `.Null`, `.Opaque`, `.Optional`, `.Pointer`, `.Struct`,
+`.Undefined`, `.Union`, `.Vector`, and `.Void`
+
 ## Allocators
 
 See https://ziglang.org/documentation/master/#toc-Choosing-an-Allocator.
