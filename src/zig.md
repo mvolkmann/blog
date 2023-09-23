@@ -201,6 +201,34 @@ For example, the identifier `u3` refers to an unsigned 3-bit integer.
 
 ## Variables
 
+The syntax for declaring a variable is:
+
+```zig
+{const|var} identifier[: type] = value;
+```
+
+Variable declared with `const` are immutable and
+variable declared with `var` are mutable.
+Using `const` is preferred when possible.
+
+The type can be omitted if it can be inferred from the value.
+
+An initial value is required, but can be set to `undefined`
+as long as another value is assigned before the variable is used.
+TODO: Does the compiler enforce that it is set before it is used?
+
+The builtin function `@as` performs an explicit type coercion.
+This can be used to ensure that the initial value is treated as a specific type.
+For example:
+
+```zig
+const limit = @as(i8, 5);
+print("{d} is {s}\n", .{ limit, @typeName(@TypeOf(limit)) }); // 5 is i8
+```
+
+Variable shadowing is not allowed.
+Variables cannot have the same name as another in an outer scope.
+
 ## Ranges
 
 Ranges of numbers have an inclusive lower bound
@@ -666,6 +694,83 @@ which terminates the application and outputs a stack trace.
 
 ## Functions
 
+## Reflection
+
+The following builtin functions support reflection:
+
+- `@TypeOf` returns the type of a given variable
+- `@typeName` returns the name of a given type as a string
+- `@typeInfo` returns ...
+
+## Allocators
+
+See https://ziglang.org/documentation/master/#toc-Choosing-an-Allocator.
+for guidelines on choosing an allocator.
+
+- `std.heap.page_allocator`
+
+  Your system/Target page allocator, will give you a whole OS page.
+
+- `std.heap.ArenaAllocator`
+
+  Will use an arena to amortize the freeing of memory, you alloc, you free all at once
+
+- `std.heap.GeneralPurposeAllocator`
+
+  Welp, is a configurable allocator that let you as an extra detect certain errors while using heap
+
+- `std.heap.MemoryPool`
+
+  It allocates one and only one type, but is really fast at it
+
+- `std.heap.FixedBufferAllocator`
+
+  Takes a buffer (any buffer) and transform it into an allocator, which is useful to reuse memory while using alloc functions
+
+- `std.heap.c_allocator`
+
+  If you linked C, you get to use malloc covered in zig info
+
+- `std.heap.raw_c_allocator`
+
+  Same than above, but raw
+
+- `std.heap.HeapAllocator`
+
+  Sooooo windows Heap Allocator
+
+- `std.heap.ThreadSafeAllocator`
+
+  Covers an allocator in a way that calling it between threads is safe (not exactly fast tho)
+
+- `std.heap.SbrkAllocator`
+
+  use Sbrk to alloc, I don't like it, search for Sbrk
+
+- `std.heap.WasmAllocator`
+
+  Wasm is your friend, use this to allocate. Generally used as a backing allocator for GeneralPurpose or Arena
+
+- `std.heap.WasmPageAllocator`
+
+  Dumber WasmAllocator, useful for when you actually wanna do your own memory management via "pages"
+
+- `std.heap.LogToWriterAllocator`
+
+  Allocs never where this easy to track, writes to a custom writer alloc information (When they happenend and such)
+
+- `std.heap.LoggingAllocator`
+
+  Allocs are logged into std.log
+
+- `std.heap.ScopedLoggingAllocator`
+
+  Same as the above but it goes directly to the std.log function, this time with our good ol' scope
+
+- `std.heap.StackFallbackAllocator`
+
+  Some stack, some heap: IF the stack is not enough, go to the heap
+
 ## Standard Library
 
 TODO: Add detail here.
@@ -709,19 +814,23 @@ test "Point struct" {
 }
 ```
 
-Iterating over struct fields:
+To get information about all the fields in a struct, use `std.meta.fields`.
+For example, the following code can be added to the test above.
+For each field it prints the name, the type, and its value in the `p1` instance.
+TODO: Maybe add a section just on Zig reflection.
 
 ```zig
-pub fn main() !void {
-    const my_val = Foo{ .x = 10, .y = 20 };
-
-    inline for (std.meta.fields (Foo)) |something| {
-        std.log.info("{}", .{@field (my_val, something .name)});
+    print("\n", .{});
+    // TODO: Why does this only work with "inline"?
+    inline for (std.meta.fields(@TypeOf(p1))) |field| {
+        print("found field {s} with type {s}\n", .{ field.name, @typeName(field.type) });
+        print("value in p1 is {}\n", .{@as(field.type, @field(p1, field.name))});
     }
 }
+
 ```
 
-A struct responsible for managing its own memory:
+A `struct` can be responsible for managing its own memory.
 
 ```zig
 pub const PathManager = struct {
@@ -948,18 +1057,6 @@ test "stack" {
 ```
 
 ## CLEANUP EVERYTHING BELOW HERE!
-
-assignment syntax: [const|var] identifier[: type] = value;
-Can omit the type if it can be inferred from the value.
-
-@as performs an explicit type coercion.
-const inferred_constant = @as(i32, 5);
-var inferred_variable = @as(u32, 5000);
-
-Prefer const.
-
-Value can be undefined if not known yet.
-Does the compiler enforce that it is set before it is used?
 
 const array = [_]u8{ 'h', 'e', 'l', 'l', ‘o’];
 This shows declaring an array where the length is inferred from the initial elements.
