@@ -227,8 +227,15 @@ from `std.log.info` and `std-log-debug`.
 
 ```zig
 pub const std_options = struct {
-    // Set this to .info, .debug, .warn, or .err.
-    pub const log_level = .info;
+    // This sets the default logging level.
+    // Set to .info, .debug, .warn, or .err.
+    pub const log_level = .warn;
+
+    // This sets scope-specific logging levels.
+    pub const log_scope_levels = &[_]std.log.ScopeLevel{
+        // Can have one line like this for each scope.
+        .{ .scope = .my_library, .level = .info },
+    };
 };
 ```
 
@@ -244,6 +251,10 @@ log.info("testing", .{}); // output is "info(my_library): testing"
 ```
 
 TODO: How can you specify scope-specific logging levels?
+
+For more detail, see {% aTargetBlank
+"https://gist.github.com/kassane/a81d1ae2fa2e8c656b91afee8b949426",
+"A simple overview of Zig's std.log" %}.
 
 To write to stdout instead of stderr, do the following:
 
