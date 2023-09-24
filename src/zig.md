@@ -362,7 +362,12 @@ For example:
 const dice_rolls = [_]u8{ 2, 6, 1, 5 };
 ```
 
-Arrays have a len field.
+Arrays have a `len` field that holds its length.
+
+To get a subset of an array, reference a range of its items.
+For example, `dice_rolls[2..4]` gives a "slice" of the items at index 2 and 3.
+The upper index can be omitted to get all the items from a given index to the end.
+For example,`dice_rolls[2..]`
 
 ## Strings
 
@@ -875,6 +880,7 @@ in other languages take a literal array (`.{}`) instead.
 
 The following builtin functions support reflection:
 
+- `@This()` when inside a `struct` definition, returns its type.
 - `@TypeOf` returns the type of a given variable.
 - `@typeName` returns the name of a given type as a string.
 - `@typeInfo` returns information about a given type.
@@ -1165,7 +1171,7 @@ separate lists for each field of the struct or lists of tags and bare unions."
 
 TODO: Add an example.
 
-## Tests in Code
+## Unit Tests
 
 Unit tests can be included in source files
 in order to test the functions they define.
@@ -1173,22 +1179,26 @@ in order to test the functions they define.
 Each test is described by the `test` keyword followed by
 a function name or a test description string and a block of code.
 
-The block of code uses the `expect` function to make assertions.
+The block of code uses functions whose
+names begin with `expect` to make assertions.
+For information about these functions, see the {% aTargetBlank
+"https://ziglang.org/documentation/master/std/#A;std:testing",
+"std.testing documentation" %}.
+
 The `expect` function takes a single argument
 that must be an expression that evaluates to a `bool` value.
-
 If the expression can return an error,
 the `assert` must be preceded by the `try` keyword.
 Otherwise it cannot be preceded by `try`.
 The test will fail if an error is returned.
 
-See the {% aTargetBlank
-"https://ziglang.org/documentation/master/std/#A;std:testing",
-"std.testing documentation" %}
-for additional functions that can be used in tests.
-These include the functions `expect`, `expectApproxEqAbs`,
-`expectApproxEqRel`, `expectEqual`, `expectEqualDeep`, `expectEqualSentinel`,
-`expectEqualSlices`, `expectEqualStrings`, `expectError`, `expectFmt`,
+The `expectEquals` function takes two arguments
+which are expressions representing an expected and actual value.
+Using `expectedEquals` provided better failure messages than `equal`.
+
+Other testing functions include `expectApproxEqAbs`, `expectApproxEqRel`,
+`expectEqualDeep`, `expectEqualSentinel`, `expectEqualSlices`,
+`expectEqualStrings`, `expectError`, `expectFmt`,
 `expectStringEndsWith`, and `expectStringStartsWith`.
 
 All tests is a source file are executed by running `zig test {file-name}.zig`.
@@ -1375,8 +1385,6 @@ Runtime safety includes array bounds checking, …
 To use a for loop to iterate over an array (not a slice), do you have to dereference it with & to turn it into a slice?
 arr[n..] returns a slice from index n to the end.
 Can create a slice from an array, another slice, or a. multi-pointer (define).
-
-In a type definition, can refer to the type with @This()
 
 Knows how to print struct instances with an empty format specifier.
 Struct Fields can be given default values.
