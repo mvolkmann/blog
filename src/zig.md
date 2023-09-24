@@ -181,8 +181,10 @@ These are used to document variables and functions.
 
 ## Printing
 
-Zig provides several functions that write to stdout.
+Zig provides several functions that write to stderr.
 Perhaps the most commonly used is `std.debug.print`.
+Others include `std.log.info`, `std.log.debug`, `std.log.warn`,
+and `std.log.err`, in order from least to most severe.
 
 The `print` function takes a format string
 and a possibly empty literal array of values
@@ -212,6 +214,22 @@ The following format specifiers are supported:
 Often placeholders do not need to specify a format
 because the correct formatting is used by default.
 In these cases, placeholders can be written as `{}`.
+
+The `std.log.*` functions take the same arguments as `std.debug.print`,
+but produce output the begins with their level followed by a colon and a space.
+For example, `std.log.warn("{} is too large!\n", .{score});`
+prints a message like "warning: 19 is too large!".
+
+To set the logging level, define the public constant `std_options`.
+For example, the following suppresses output
+from `std.log.info` and `std-log-debug`.
+
+```zig
+pub const std_options = struct {
+    // Set this to .info, .debug, .warn, or .err.
+    pub const log_level = .info;
+};
+```
 
 Structs can specify how they should be formatted for printing
 by implementing the `format` function.
