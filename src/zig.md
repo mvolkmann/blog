@@ -232,6 +232,27 @@ pub const std_options = struct {
 };
 ```
 
+Log messages can be scoped to a particular part of an application.
+This is useful for better identifying log messages and
+for filtering log output from specific parts of an application.
+
+Use the following instead of `std.log` to scope the log messages.
+
+```zig
+const log = std.log.scoped(.my_library);
+log.info("testing", .{}); // output is "info(my_library): testing"
+```
+
+TODO: How can you specify scope-specific logging levels?
+
+To write to stdout instead of stderr, do the following:
+
+```zig
+const stdout = std.io.getStdOut();
+const sow = stdout.writer();
+try sow.print("Hello, {s}!\n", .{"world"});
+```
+
 Structs can specify how they should be formatted for printing
 by implementing the `format` function.
 For example:
@@ -1530,6 +1551,8 @@ TODO: See https://github.com/zigzap/zap which may be the only Zig HTTP server no
 
 ## CLEANUP EVERYTHING BELOW HERE!
 
+Can create a slice from an array, another slice, or a. multi-pointer (define).
+
 Can functions be defined like this?
 `const theFunc = fn() void { ... }`
 
@@ -1549,13 +1572,6 @@ pub fn main() anyerror!void {
 ```
 
 Runtime safety includes array bounds checking, …
-
-To use a for loop to iterate over an array (not a slice), do you have to dereference it with & to turn it into a slice?
-
-arr[n..] returns a slice from index n to the end.
-Can create a slice from an array, another slice, or a. multi-pointer (define).
-
-std.debug.print or std.log.info ? What else can output to stdout?
 
 Zig Software Foundation is a non-profit organization dedicated to improving the craft of software engineering as a whole.
 
