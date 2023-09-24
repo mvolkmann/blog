@@ -14,38 +14,30 @@ layout: topic-layout.njk
 
 {% aTargetBlank "https://ziglang.org", "Zig" %}
 is a free, open source, high performance, systems programming language.
-It is a modern alternative to C with much of the same syntax
+It is a modern alternative to C with similar syntax
 such as statements terminated with semicolons and conditions in parentheses.
 
-Zig is also a C/C++ compiler toolchain and build system that can be used to simplify maintenance of your existing projects.
-
-Development of Zig is managed by the Zig Software Foundation
-which is a non-profit organization.
-"The mission of the Zig Software Foundation is to promote, protect, and advance the Zig programming language, to support and facilitate the growth of a diverse and international community of Zig programmers, and to provide education and guidance to students, teaching the next generation of programmers to be competent, ethical, and to hold each other to high standards."
-
-Zig is a simple, powerful programming language that excels in the most demanding environments.
-
-Zig is suitable for applications that care deeply
-about performance, binary size, and/or memory usage.
-Often these justify the tedium and verbosity of manual memory management.
-Zig does not provide automated garbage collection.
-
-Zig provides a complete toolchain for creating, developing, building,
-and testing apps written in Zig, C, and C++.
-It supports LLVM cross-compilation to integrate with C and C++.
+Zig provides a complete, LLVM-based toolchain for creating, developing,
+building, and testing apps written in Zig, C, and C++.
 There are advantages to building apps with the Zig compiler
-even if they have not Zig code and only use C and/or C++ code.
+even if they have no Zig code and only use C and/or C++ code.
+
+Zig is suitable for applications that care deeply about
+performance, binary size, and/or memory usage.
+Often these concerns justify the tedium and verbosity of
+manual memory management that is required
+due to lack of automated garbage collection.
 
 Zig emphasizes:
 
-- No hidden control flow.
+- No hidden control flow
 
   Examples of hidden control flow in other languages include
   exception handling, operator overloading, and destructors.
 
-- No hidden memory allocations.
+- No hidden memory allocations
 
-- No preprocessors or macros.
+- No preprocessors or macros
 
   In place of these, Zig uses code that runs at compile-time,
   indicated by the `comptime` keyword.
@@ -57,7 +49,7 @@ Zig includes:
   combinations of build tools typically used with C and C++
 - a build system API (used in `build.zig` files)
 - cross-compilation support
-- a test runner.
+- a test runner
 
 Andrew Kelly began work on Zig in August, 2015 (first commit).
 The first public release was in February, 2016.
@@ -66,7 +58,14 @@ Despite still being in beta, it has been adopted by many projects.
 The current version of Zig is 0.11.0
 and is expected to reach 1.0 in 2025.
 
-It is maintained by the Zig Software Foundation (ZSF).
+Development of Zig is managed by the Zig Software Foundation (ZSF)
+which is a non-profit organization.
+"The mission of the Zig Software Foundation is to promote, protect, and advance
+the Zig programming language, to support and facilitate
+the growth of a diverse and international community of Zig programmers,
+and to provide education and guidance to students,
+teaching the next generation of programmers to be competent, ethical,
+and to hold each other to high standards."
 
 ## Used By
 
@@ -171,7 +170,7 @@ a `src` directory containing the file `main.zig`.
 The file `build.zig` is a build script that uses the compiler API.
 Modify this file to change the characteristics of executable that is produced.
 
-The file `main.sig` is the starting point of the application.
+The file `main.sig` is the starting point of the project.
 Like many `.zig` files, this begins by importing the standard library
 with `const std = @import("std");`
 It also defines the main function with `pub fn main() !void { ... }`.
@@ -253,9 +252,9 @@ pub const std_options = struct {
 };
 ```
 
-Log messages can be scoped to a particular part of an application.
+Log messages can be scoped to a particular part of an project.
 This is useful for better identifying log messages and
-for filtering log output from specific parts of an application.
+for filtering log output from specific parts of a project.
 
 Use the following instead of `std.log` to scope the log messages.
 
