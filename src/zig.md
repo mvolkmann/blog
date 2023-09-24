@@ -98,10 +98,14 @@ pub fn main() void {
 }
 ```
 
-The print methods expects a literal array as its second argument.
-The syntax for a literal array or struct is `.{}`
-where array elements or struct fields appear in
-a comma-separated list inside the curly braces.
+The first argument to `print` is a format string
+that can contain `{}` placeholders where values are to be inserted.
+The second argument to `print` is a literal array that holds
+values to be inserted in place of the format string placeholders.
+The syntax `.{}` is the literal syntax for
+both arrays and structs (more on these later).
+This can contain a comma-separated list of either
+array items or struct field assignments.
 
 To build and run this program, enter `zig run hello.zig`.
 
@@ -174,6 +178,40 @@ These are used to document the current module (source file).
 
 Doc comments begin with `///`.
 These are used to document variables and functions.
+
+## Printing
+
+Zig provides several functions that write to stdout.
+Perhaps the most commonly used is `std.debug.print`.
+
+The `print` function takes a format string
+and a possibly empty literal array of values
+to be inserted in place of the format string placeholders.
+The format string can contain placeholders with the syntax `{specifier}`
+that indicate where values in the second argument are to be inserted.
+
+The following format specifiers are supported:
+
+| Specifier | Prints                                                                                                                                          |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `any`     | value of any type using its default format                                                                                                      |
+| `b`       | integer value in binary notation                                                                                                                |
+| `c`       | integer as ASCII character (maximum of 8 bits)                                                                                                  |
+| `d`       | numeric value in decimal notation                                                                                                               |
+| `e`       | floating point value in scientific notation                                                                                                     |
+| `o`       | integer value in octal notation                                                                                                                 |
+| `s`       | slices of `u8`                                                                                                                                  |
+| `s`       | pointer-to-many and C pointers of `u8`                                                                                                          |
+| `u`       | integer as UTF-8 sequence (maximum of 21 bits)                                                                                                  |
+| `X`       | numeric value in uppercase hexadecimal notation                                                                                                 |
+| `x`       | numeric value in lowercase hexadecimal notation                                                                                                 |
+| `?`       | optional value as either the unwrapped value or `null`;<br>may be followed by a format specifier for the underlying value                       |
+| `!`       | error union value as either the unwrapped value or the formatted error value;<br>may be followed by a format specifier for the underlying value |
+| `*`       | address of the value                                                                                                                            |
+
+Often placeholders do not need to specify a format
+because the correct formatting is used by default.
+In these cases, placeholders can be written as `{}`.
 
 ## Primitive Types
 
