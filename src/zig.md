@@ -317,22 +317,31 @@ Here is a an example that demonstrates all of these features.
 const std = @import("std");
 const print = std.debug.print;
 
+// A type must be specified for an enum
+// in order to override its default ordinal values.
+const Color = enum(u8) {
+    red, // defaults to 0
+    yellow, // assigned 1
+    blue = 7, // overrides default of 2
+    green, // assigned 8
+
+    const favorite = Color.yellow;
+
+    // The type name "Color" is available here when define outside a function,
+    // but not when defined inside a function (container-scope).
+    // pub fn isPrimary(self: Color) bool {
+    //     return self == Color.red or self == Color.yellow or self == Color.blue;
+    // }
+
+    // Using "Self" like this works regardless of whether the enum
+    // is defined inside or outside of a function.
+    const Self = @This();
+    pub fn isPrimary(self: Self) bool {
+        return self == Self.red or self == Self.yellow or self == Self.blue;
+    }
+};
+
 pub fn main() void {
-    // A type must be specified for an enum
-    // in order to override its default ordinal values.
-    const Color = enum(u8) {
-        red, // defaults to 0
-        yellow, // assigned 1
-        blue = 7, // overrides default of 2
-        green, // assigned 8
-
-        // const favorite = yellow
-        const Self = @This();
-        pub fn isPrimary(self: Self) bool {
-            return self == Self.red or self == Self.yellow or self == Self.blue;
-        }
-    };
-
     const c = Color.green;
     print("c = {}\n", .{c}); // enum_demo.main.Color.green
     print("c = {}\n", .{@intFromEnum(c)}); // 8
@@ -1167,9 +1176,28 @@ a function name or a test description string and a block of code.
 The block of code uses the `expect` function to make assertions.
 The `expect` function takes a single argument
 that must be an expression that evaluates to a `bool` value.
-It can return an error and so must be preceded by the `try` keyword.
+
+If the expression can return an error,
+the `assert` must be preceded by the `try` keyword.
+Otherwise it cannot be preceded by `try`.
+The test will fail if an error is returned.
+
+See the {% aTargetBlank
+"https://ziglang.org/documentation/master/std/#A;std:testing",
+"std.testing documentation" %}
+for additional functions that can be used in tests.
+These include the functions `expect`, `expectApproxEqAbs`,
+`expectApproxEqRel`, `expectEqual`, `expectEqualDeep`, `expectEqualSentinel`,
+`expectEqualSlices`, `expectEqualStrings`, `expectError`, `expectFmt`,
+`expectStringEndsWith`, and `expectStringStartsWith`.
 
 All tests is a source file are executed by running `zig test {file-name}.zig`.
+To run specific tests, add the `--test-filter {text}` option
+which causes it to only run tests whose description contains the given text.
+
+To temporarily skip a test, add the line `return error.SkipZigTest`.
+TODO: Will the compiler complain about unreachable code
+TODO: if this is the first line in the test?
 
 Here is a basic example:
 
@@ -1199,6 +1227,33 @@ The output includes the following:
   for each failed test
 - a stack trace is output that shows the failing `expect` (only one of them?)
 - a summary of the form "{n1} passed; {n2} skipped; {n3} failed"
+
+To test for memory leaks, use the `std.testing.allocator`
+for all memory allocation.
+
+To run tests in multiple source files,
+create a new source file that imports all of them
+and pass that source file to `zig test`.
+For example:
+
+```zig
+test {
+  _ = @import("file1.zig");
+  _ = @import("file2.zig");
+  _ = @import("file3.zig");
+}
+```
+
+TODO: Also see std.testing.refAllDecls and std.testing.refAllDeclsRecursive.
+TODO: Is there another way to do this by modifying a project `build.zig` file?
+
+To determine whether code is running in a test, import the variable `is_test`
+with `@import("builtin").is_test`.
+This can be used to avoid running certain code in a test
+or only run certain code in a test.
+It can also be used only use `std.testing.allocator` when running in a test.
+
+Enter `zig test --help` to see options that affect tests.
 
 ## Stack Example
 
@@ -1288,6 +1343,10 @@ test "stack" {
     try expect(value == null);
 }
 ```
+
+## HTTP
+
+TODO: See https://github.com/zigzap/zap which may be the only Zig HTTP server now.
 
 ## CLEANUP EVERYTHING BELOW HERE!
 
