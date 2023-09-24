@@ -357,8 +357,14 @@ pub fn main() void {
 
 Ranges of numbers have an inclusive lower bound
 and an upper bound that is either exclusive or inclusive.
-For example, the range `5..7` includes the values 5 and 6
-and the range `5...7` includes the values 5, 6 and 7.
+For example, the range `5..7` with two dots includes the values 5 and 6
+and the range `5...7` with three dots includes the values 5, 6 and 7.
+
+Exclusive ranges can be used to create a slice from an array, but not inclusive.
+
+Inclusive ranges can be used in switch branches, but not exclusive.
+
+I was unable to find rationale for these limitations.
 
 ## Enumerations
 
@@ -426,17 +432,20 @@ pub fn main() void {
 
 Array types have the syntax `[length]type`.
 For example, `[5]i32` is an array of five integers.
-The length can be replaced by an underscore when it can be inferred from an initial value.
+The length can be replaced by an underscore
+when it can be inferred from an initial value.
 For example:
 
 ```zig
-const dice_rolls = [_]u8{ 2, 6, 1, 5 };
+const dice_rolls = [_]u8{ 4, 2, 5, 1, 2 };
 ```
 
 Arrays have a `len` field that holds its length.
 
-To get a subset of an array, reference a range of its items.
+To get a subset of an array, called a "slice", reference a range of its items.
 For example, `dice_rolls[2..4]` gives a "slice" of the items at index 2 and 3.
+TODO: Why can't `...` be used?
+
 The upper index can be omitted to get all the items from a given index to the end.
 For example,`dice_rolls[2..]`
 
