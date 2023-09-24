@@ -17,6 +17,14 @@ is a free, open source, high performance, systems programming language.
 It is a modern alternative to C with much of the same syntax
 such as statements terminated with semicolons and conditions in parentheses.
 
+Zig is also a C/C++ compiler toolchain and build system that can be used to simplify maintenance of your existing projects.
+
+Development of Zig is managed by the Zig Software Foundation
+which is a non-profit organization.
+"The mission of the Zig Software Foundation is to promote, protect, and advance the Zig programming language, to support and facilitate the growth of a diverse and international community of Zig programmers, and to provide education and guidance to students, teaching the next generation of programmers to be competent, ethical, and to hold each other to high standards."
+
+Zig is a simple, powerful programming language that excels in the most demanding environments.
+
 Zig is suitable for applications that care deeply
 about performance, binary size, and/or memory usage.
 Often these justify the tedium and verbosity of manual memory management.
@@ -51,7 +59,13 @@ Zig includes:
 - cross-compilation support
 - a test runner.
 
-Zig was created by Andrew Kelly in 2016.
+Andrew Kelly began work on Zig in August, 2015 (first commit).
+The first public release was in February, 2016.
+
+Despite still being in beta, it has been adopted by many projects.
+The current version of Zig is 0.11.0
+and is expected to reach 1.0 in 2025.
+
 It is maintained by the Zig Software Foundation (ZSF).
 
 ## Used By
@@ -1560,6 +1574,38 @@ test "stack" {
 
 TODO: See https://github.com/zigzap/zap which may be the only Zig HTTP server now.
 
+## Compiling C and C++
+
+Zig provides tooling to compile both C and C++ code.
+
+Here is a C hello world program in the file `hello.c`.
+
+```c
+#include <stdio.h>
+
+int main() {
+  printf("Hello, World!\n");
+  return 0;
+}
+```
+
+To build this, enter `zig cc hello.c -o hello`.
+To run the resulting executable, enter `./hello`.
+
+Here is a C++ hello world program in the file `hello.cpp`.
+
+```cpp
+#include <iostream>
+
+int main() {
+  std::cout << "Hello World!" << std::endl;
+  return 0;
+}
+```
+
+To build this, enter `zig c++ hello.cpp -o hello`.
+To run the resulting executable, enter `./hello`.
+
 ## CLEANUP EVERYTHING BELOW HERE!
 
 Can create a slice from an array, another slice, or a. multi-pointer (define).
@@ -1584,16 +1630,8 @@ pub fn main() anyerror!void {
 
 Runtime safety includes array bounds checking, …
 
-Zig Software Foundation is a non-profit organization dedicated to improving the craft of software engineering as a whole.
-
-Zig is a C/C++ compiler toolchain and build system that can be used to simplify maintenance of your existing projects.
-
-Zig is a simple, powerful programming language that excels in the most demanding environments.
-
 defer allows specifying freeing of memory immediately after it is allocated.
 defer runs when its block exits, not only when a function exits
-
-Work on zig started in August 2015 - first commit.
 
 About pointer dereference syntax ...
 """
