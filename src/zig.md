@@ -18,8 +18,8 @@ It is a modern alternative to C with much of the same syntax
 such as statements terminated with semicolons and conditions in parentheses.
 
 Zig is suitable for applications that care deeply
-about performance and/or binary size.
-which justifies the tedium and verbosity of manual memory management.
+about performance, binary size, and/or memory usage.
+Often these justify the tedium and verbosity of manual memory management.
 Zig does not provide automated garbage collection.
 
 Zig provides a complete toolchain for creating, developing, building,
@@ -1191,6 +1191,23 @@ test "Point struct" {
 }
 ```
 
+The fields of a `struct` can be given default values that are used
+when instances are created without specifying a value for each field.
+For example, the declaration of the field `x` in the `Point` struct above
+can be replaced with `x: f32 = 1`.
+We can then create a `Point` instances without specifying a value for `x`.
+For example, `const my_point = Point{.y = 2}` creates
+an instance where the `x` field has the value `1`.
+
+The `std.debug.print` function does a reasonable job
+of printing `struct` instances without any format specifier.
+For example, after setting the `p1` variable in the code above,
+we could add `print("p1 = {}\n", .{p1});` to produce the following output:
+
+```text
+p1 = struct_demo.Point{ .x = 3.0e+00, .y = 4.0e+00 }
+```
+
 To get information about all the fields in a struct, use `std.meta.fields`.
 For example, the following code can be added to the test above.
 For each field it prints the name, the type, and its value in the `p1` instance.
@@ -1518,10 +1535,6 @@ Runtime safety includes array bounds checking, …
 To use a for loop to iterate over an array (not a slice), do you have to dereference it with & to turn it into a slice?
 arr[n..] returns a slice from index n to the end.
 Can create a slice from an array, another slice, or a. multi-pointer (define).
-
-Knows how to print struct instances with an empty format specifier.
-Struct Fields can be given default values.
-Structs can define methods.
 
 std.debug.print or std.log.info ? What else can output to stdout?
 
