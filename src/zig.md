@@ -217,8 +217,9 @@ In these cases, placeholders can be written as `{}`.
 
 The `std.log.*` functions take the same arguments as `std.debug.print`,
 but produce output the begins with their level followed by a colon and a space.
-For example, `std.log.warn("{} is too large!\n", .{score});`
+For example, `std.log.warn("{} is too large!", .{score});`
 prints a message like "warning: 19 is too large!".
+These log functions add their own newline at the end of each output.
 
 To set the logging level, define the public constant `std_options`.
 For example, the following suppresses output
@@ -684,6 +685,7 @@ pub fn main() !void {
 
         // Double-dot ranges have an exclusive upper bound.
         // Triple-dot ranges have an inclusive upper bound.
+        // Only triple-dot ranges are allowed here.
         2...5 => { // braces are only required for multiple statements
             log("two to five");
         },
@@ -1546,11 +1548,10 @@ pub fn main() anyerror!void {
 }
 ```
 
-Do switch branch ranges require three dots and slice ranges require two dots?
-
 Runtime safety includes array bounds checking, …
 
 To use a for loop to iterate over an array (not a slice), do you have to dereference it with & to turn it into a slice?
+
 arr[n..] returns a slice from index n to the end.
 Can create a slice from an array, another slice, or a. multi-pointer (define).
 
