@@ -397,6 +397,13 @@ print("{d} is {s}\n", .{ limit, @typeName(@TypeOf(limit)) }); // 5 is i8
 Variable shadowing is not allowed.
 Variables cannot have the same name as another in an outer scope.
 
+Zig does not allow unused variables.
+Editor extensions/plugins such as vscode-zig
+can add lines like `_ = my_variable` for each unused variable on save
+so they appear to be used.
+This feature may be enabled by default, can be disabled.
+In vscode-zig, the "Zls: Enable Autofix" option controls this.
+
 ## Pointers
 
 To get a pointer to the data of a variable, use `&variable_name`.
