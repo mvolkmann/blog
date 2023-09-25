@@ -1146,8 +1146,25 @@ A `Type` instance can be compared to any of these:
 
 ## Allocators
 
-See https://ziglang.org/documentation/master/#toc-Choosing-an-Allocator.
-for guidelines on choosing an allocator.
+All memory allocation in Zig is done through allocators.
+There are many provided allocators that each
+use a different memory management strategy.
+New allocators can be defined to implement custom memory management strategies.
+
+For guidelines on selecting an allocator, see {% aTargetBlank
+"https://ziglang.org/documentation/master/#Choosing-an-Allocator",x
+"Choosing an Allocator" %}.
+
+TODO: Show an example of creating and using an allocator.
+TODO: You have already done this somewhere in this file.
+
+The `defer` keyword is followed by a statement or block of code
+to be executed when the containing block terminates.
+This is often used to free memory that was allocated by an allocator.
+Keeping code that allocates and frees memory together
+is less error-prone than allocating memory,
+writing a bunch of code that uses it, and
+having to remember to free it after all that code.
 
 - `std.heap.page_allocator`
 
@@ -1628,9 +1645,6 @@ pub fn main() anyerror!void {
 ```
 
 Runtime safety includes array bounds checking, …
-
-defer allows specifying freeing of memory immediately after it is allocated.
-defer runs when its block exits, not only when a function exits
 
 About pointer dereference syntax ...
 """
