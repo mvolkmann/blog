@@ -160,6 +160,25 @@ For VS Code, see the extension {% aTargetBlank
   By fixing them, you'll learn how to read and write Zig code."
 - {% aTargetBlank "https://ziglearn.org", "ziglearn.org" %}
 
+## Style
+
+Zig has an official {% aTargetBlank
+"https://ziglang.org/documentation/0.11.0/#Style-Guide", "Style Guide" %}
+that is not enforced by the compiler.
+At a high level it specifies the following:
+
+- 4-space indentation
+- open braces on the same line or the last of wrapped lines
+- maximum line length is 100
+- function names should be camelCase
+  - but functions that return a type should be TitleCase
+- type names should be TitleCase
+- variable names should be snake_case
+- names of files that define a struct should have
+  the same name as the struct which uses TitleCase
+- all other file names should be snake_case
+- directory names should be snake_case
+
 ## Zig Projects
 
 To create a new project, create a directory for it, cd to the directory,
@@ -2068,16 +2087,3 @@ noreturn
 
 - the type of functions that never finish
 - also the type of break, continue, return, unreachable, and the while construct `while (true) { … }`
-
-Zig has an official style guide that is not enforced by the compiler
-
-- 4-space indentation
-- open braces on the same line or the last of wrapped lines
-- maximum line length is 100
-- function names should be camelCase
-  - but functions that return a type should be TitleCase
-- type names should be TitleCase
-- variable names should be snake_case
-- names of files that define a struct should have the same name as the struct which uses TitleCase
-- all other file names should be snake_case
-- directory names should be snake_case
