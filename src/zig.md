@@ -28,6 +28,8 @@ Often these concerns justify the tedium and verbosity of
 manual memory management that is required
 due to lack of automated garbage collection.
 
+One appeal of Zig is that it is much simpler than C++ and Rust.
+
 Zig emphasizes:
 
 - No hidden control flow
@@ -159,6 +161,8 @@ For VS Code, see the extension {% aTargetBlank
   "A series of tiny broken programs ...
   By fixing them, you'll learn how to read and write Zig code."
 - {% aTargetBlank "https://ziglearn.org", "ziglearn.org" %}
+- {% aTargetBlank "https://en.wikipedia.org/wiki/Zig_(programming_language)",
+  "Wikipedia" %}
 
 ## Style
 
@@ -588,9 +592,21 @@ Multidimensional arrays are created by nesting single-dimension arrays.
 ## Strings
 
 Strings are represented by arrays of type `[]u8`.
+This treats strings like a collection of bytes rather than Unicode characters.
+Literal strings are delimited by double quotes.
 Zig only provides the ability to operator on strings as byte arrays.
 
-For more functionality, use a string library such as
+The following string operations are supported using byte arrays.
+
+| Operation          | Example                       |
+| ------------------ | ----------------------------- |
+| assign to variable | var name: []u8 = "Mark";      |
+| get a byte         | const letter2 = name[1]; // a |
+| modify a byte      | name[1] = 'o'; // now "Mork"  |
+
+TODO: Finish from https://www.huy.rocks/everyday/01-04-2022-zig-strings-in-5-minutes
+
+For more functionality, including Unicode support, use a string library such as
 {% aTargetBlank "https://github.com/JakubSzark/zig-string", "zig-string" %} or
 {% aTargetBlank "https://codeberg.org/dude_the_builder/zigstr", "zigstr" %}.
 
@@ -1076,6 +1092,9 @@ The syntax for each parameter declaration is `{name}: {type}`.
 
 The convention for function names is to use camelCase.
 
+When an error occurs in a function, an error `enum` value is returned.
+Zig does not support throwing exceptions.
+
 The return type syntax is `[error-type][!][return-type]`.
 For example:
 
@@ -1171,7 +1190,7 @@ use a different memory management strategy.
 New allocators can be defined to implement custom memory management strategies.
 
 For guidelines on selecting an allocator, see {% aTargetBlank
-"https://ziglang.org/documentation/master/#Choosing-an-Allocator",x
+"https://ziglang.org/documentation/master/#Choosing-an-Allocator",
 "Choosing an Allocator" %}.
 
 TODO: Show an example of creating and using an allocator.
@@ -1258,6 +1277,11 @@ TODO: Add detail here.
 A `struct` is a custom type that holds a collection of fields
 and optional methods. Here is an example:
 
+Types in Zig, such as builtin types lik `i32` and custom `struct` types,
+are first-class values.
+This means they can be assigned to variables, assigned to struct fields,
+passed to functions, and returned from functions.
+
 ```zig
 const std = @import("std");
 const sqrt = std.math.sqrt;
@@ -1307,6 +1331,37 @@ we could add `print("p1 = {}\n", .{p1});` to produce the following output:
 
 ```text
 p1 = struct_demo.Point{ .x = 3.0e+00, .y = 4.0e+00 }
+```
+
+The syntax for a literal struct is the same as the syntax for a literal array.
+`.{}` can contain a comma-separated list of either
+array items or struct field assignments.
+This syntax can be used to assign a struct instance to a variable
+or pass one to a function.
+A struct definition specified with the `struct` keyword is not required.
+In this sense it is similar to creating objects in JavaScript.
+
+The following example creates a `struct` instance with four properties.
+
+```zig
+    const instance = .{
+        .key1 = true, // type is bool
+        .key2 = 19, // type is comptime_int
+        .key3 = 'x', // type is comptime_int (value is 120)
+        .key4 = "text", // type is *const [4:0]u8; 0 is the alignment
+    };
+
+    try expectEqual(bool, @TypeOf(instance.key1));
+    try expectEqual(true, instance.key1);
+
+    try expectEqual(comptime_int, @TypeOf(instance.key2));
+    try expectEqual(19, instance.key2);
+
+    try expectEqual(comptime_int, @TypeOf(instance.key3));
+    try expectEqual('x', instance.key3);
+
+    try expectEqual(*const [4:0]u8, @TypeOf(instance.key4));
+    try expectEqual("text", instance.key4);
 ```
 
 To get information about all the fields in a struct, use `std.meta.fields`.
@@ -2087,3 +2142,26 @@ noreturn
 
 - the type of functions that never finish
 - also the type of break, continue, return, unreachable, and the while construct `while (true) { … }`
+
+when running test, use the std.testing.allocator so when tests are run, it will flag when memory is not freed.
+
+Add resources link to Zig Discord.
+
+A function return type can be a switch expression that determines the actual type returned.
+
+function names that begin with @ built-in functions.
+some built-in functions do things that user created functions cannot.
+what does it mean when the name of a built-in function begins with at symbol, followed by an uppercase letter?
+Runtime safety checks won’t protect you from every possible mistake, but they come close. More safety checks are planned in the future.
+
+does the undefined behavior section of the official docs list all the current runtime safety checks?
+
+Did you document multiline string literals?
+
+Add the Ghosty terminal emulator to your list of Ziggy’s cases.
+
+describe difference between defer and errdefer.
+
+std.process.args to get command line args. Learn how to use this.
+
+Maybe the purpose of std.heap.ArenaAllocator is that you can use it for allocating many things that don’t need to be individually freed. You just defer arena.deinit() one time right after it is created.
