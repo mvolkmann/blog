@@ -145,6 +145,8 @@ To format a `.zig` source file, enter `zig fmt {file-name}.zig`.
 There is no linter for Zig, but the Zig compiler
 provides more guidance than most compilers.
 
+To see a list of Zig guiding principles, enter `zig zen`.
+
 ## Tools
 
 For VS Code, see the extension {% aTargetBlank
@@ -161,6 +163,8 @@ For VS Code, see the extension {% aTargetBlank
   "A series of tiny broken programs ...
   By fixing them, you'll learn how to read and write Zig code."
 - {% aTargetBlank "https://ziglearn.org", "ziglearn.org" %}
+- {% aTargetBlank "https://discord.com/servers/zig-programming-language-605571803288698900",
+  "Zig Discord server" %}
 - {% aTargetBlank "https://en.wikipedia.org/wiki/Zig_(programming_language)",
   "Wikipedia" %}
 
@@ -618,6 +622,20 @@ For more functionality, including Unicode support, use a string library such as
 {% aTargetBlank "https://codeberg.org/dude_the_builder/zigstr", "zigstr" %}.
 
 ## Slices
+
+## Blocks
+
+Blocks are lines of code surrounded by curly braces that define a variable scope.
+
+Labelled blocks are expressions that return a value.
+For example:
+
+```zig
+const value = myLabel: {
+    // Add code to compute a value here.
+    break :myLabel some_value;
+}
+```
 
 ## Control Structures
 
@@ -1118,6 +1136,16 @@ For example, `_ = someFn();`
 Zig does not support "vararg" functions,
 so functions that would have a variable number of arguments
 in other languages take a literal array (`.{}`) instead.
+
+## comptime
+
+The `comptime` keyword marks function parameters
+whose value must be known at compile time.
+This has many uses, one of which is implementing generics.
+
+Can `comptime` functions perform I/O?
+
+"Zig's comptime is limited to pure functions, they can't access the disk or network, right? Where's the superpowers there? Just like in clojure, rust's macros can slurp up config files, or make connections to servers at compile time, and bundle that into the release binary. I COULDN'T give up this superpower, it's what made me take Rust seriously. Everyone's afraid of arbitrary code execution at compile time, but we lisp programmers know it's worth a bit of confusing syntax to have such a power."
 
 ## Reflection
 
@@ -2098,12 +2126,6 @@ Functions
     - what are the properties and methods on a Type object?
 - can use reflection to get details about the parameters and return type of a given function with `@typeInfo(@TypeOf(someFunction)).Fn` which gives an object with the fields `params` (an array of objects with `type` and `name`? fields?) and `return_type` (a type)
 
-Blocks
-
-- lines of code surrounded by curly braces that define a variable scope
-- labelled blocks are expressions that return a value
-- const value = myLabel: { add code to compute value here; break :myLabel value }
-
 Errors
 
 - The `try` keyword provides error handling.
@@ -2151,8 +2173,6 @@ noreturn
 - also the type of break, continue, return, unreachable, and the while construct `while (true) { … }`
 
 when running test, use the std.testing.allocator so when tests are run, it will flag when memory is not freed.
-
-Add resources link to Zig Discord.
 
 A function return type can be a switch expression that determines the actual type returned.
 
