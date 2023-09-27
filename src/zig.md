@@ -617,7 +617,11 @@ The following string operations are supported using byte arrays.
 
 TODO: Finish from https://www.huy.rocks/everyday/01-04-2022-zig-strings-in-5-minutes
 
-The following code demonstrates several string operations.
+The following code demonstrates using the zig-string library.
+
+For more functionality, including Unicode support, use a string library such as
+{% aTargetBlank "https://github.com/JakubSzark/zig-string", "zig-string" %} or
+{% aTargetBlank "https://codeberg.org/dude_the_builder/zigstr", "zigstr" %}.
 
 ```zig
 // This demonstrates using the zig-string library
@@ -704,10 +708,6 @@ test "strings" {
     }
 }
 ```
-
-For more functionality, including Unicode support, use a string library such as
-{% aTargetBlank "https://github.com/JakubSzark/zig-string", "zig-string" %} or
-{% aTargetBlank "https://codeberg.org/dude_the_builder/zigstr", "zigstr" %}.
 
 ## Slices
 
@@ -1278,6 +1278,35 @@ pub fn main() !void {
     // Since total is computed at compile-time, the generated
     // binary doesn't compute it and only has to print 150.
     print("total = {d}\n", .{total});
+}
+```
+
+The {% aTargetBlank "https://godbolt.org/", "Compiler Explorer" %} website
+provides an online code editor and compiler for many languages.
+The screenshot below demonstrates the effect of evaluating code at compile-time
+on the generated assembly language instructions.
+Note that the generated code for the `demo` function just returns 150
+and doesn't need to compute it because that is already done at compile-time.
+
+<img alt="Zig in Compiler Explorer" style="width: 100%"
+  src="/blog/assets/zig-godbolt.png?v={{pkg.version}}"
+  title="Zig in Compiler Explorer">
+
+The builtin types `comptime_int` and `comptime_float` represent
+integer and floating point values that are known at compile-time
+and whose size is not specified.
+For example:
+
+```zig
+const std = @import("std");
+const print = std.debug.print;
+
+const my_int = 19;
+const my_float = 3.14;
+
+pub fn main() !void {
+    print("my_int type is {}\n", .{@TypeOf(my_int)}); // comptime_int
+    print("my_float type is {}\n", .{@TypeOf(my_float)}); // comptime_float
 }
 ```
 
