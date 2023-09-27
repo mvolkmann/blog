@@ -617,6 +617,94 @@ The following string operations are supported using byte arrays.
 
 TODO: Finish from https://www.huy.rocks/everyday/01-04-2022-zig-strings-in-5-minutes
 
+The following code demonstrates several string operations.
+
+```zig
+// This demonstrates using the zig-string library
+// at https://github.com/JakubSzark/zig-string.
+// You can just copy the file zig-string.zig.
+const std = @import("std");
+const assert = std.debug.assert;
+const print = std.debug.print;
+const String = @import("./zig-string.zig").String;
+
+test "strings" {
+    const allocator = std.testing.allocator;
+
+    var myString = String.init(allocator);
+    defer myString.deinit();
+
+    // Use functions provided
+    try myString.concat("abc");
+    _ = myString.pop();
+    assert(myString.cmp("ab"));
+    try myString.concat("cde");
+
+    assert(myString.cmp("abcde"));
+    assert(myString.len() == 5);
+
+    // TODO: This is not working!
+    // const mySubstr = myString.substr(1, 3);
+    // print("mySubstr = {any}\n", .{mySubstr});
+
+    myString.toUppercase(); // modifies in place
+    assert(myString.cmp("ABCDE"));
+
+    myString.toLowercase(); // modifies in place
+    assert(myString.cmp("abcde"));
+
+    var copy = try myString.clone();
+    defer copy.deinit();
+    copy.reverse(); // modifies in place
+    assert(copy.cmp("edcba"));
+
+    assert(!myString.isEmpty());
+    myString.clear();
+    assert(myString.isEmpty());
+
+    var santa = try String.init_with_contents(allocator, "Ho");
+    defer santa.deinit();
+    assert(santa.cmp("Ho"));
+    try santa.repeat(2); // will have 3 occurrences after this
+    assert(santa.cmp("HoHoHo"));
+
+    // TODO: Why must this be var and not const?
+    var colors = try String.init_with_contents(allocator, "red,green,blue");
+    defer colors.deinit();
+    // Splits into []u8 slices.  This works.
+    if (colors.split(",", 0)) |c1| {
+        assert(std.mem.eql(u8, c1, "red"));
+        if (colors.split(",", 4)) |c2| {
+            assert(std.mem.eql(u8, c2, "green"));
+        }
+    }
+
+    var padded = try String.init_with_contents(allocator, "  foo ");
+    padded.trim(); // trims in place
+    // Also see trimStart and trimEnd.
+    assert(padded.cmp("foo"));
+
+    // Splits into String slices.  This does not work!
+    // var color1 = try colors.splitToString(",", 0);
+    // if (color1) |c1| {
+    //     defer c1.deinit();
+    //     assert(c1.cmp("red"));
+    //     const color2 = try colors.splitToString(",", 4);
+    //     if (color2) |c2| {
+    //         defer c2.deinit();
+    //         assert(c2.cmp("green"));
+    //     }
+    // }
+
+    // This demonstrates splitting a []u8 instead of a zig-string String.
+    const colorsArray = "red,green,blue";
+    var splits = std.mem.split(u8, colorsArray, ",");
+    while (splits.next()) |chunk| {
+        print("chunk = {s}\n", .{chunk});
+    }
+}
+```
+
 For more functionality, including Unicode support, use a string library such as
 {% aTargetBlank "https://github.com/JakubSzark/zig-string", "zig-string" %} or
 {% aTargetBlank "https://codeberg.org/dude_the_builder/zigstr", "zigstr" %}.
@@ -1139,13 +1227,59 @@ in other languages take a literal array (`.{}`) instead.
 
 ## comptime
 
-The `comptime` keyword marks function parameters
-whose value must be known at compile time.
-This has many uses, one of which is implementing generics.
+The `comptime` keyword marks items that must be known at compile-time.
+It can be applied to:
+
+- function parameters
+- variables declared inside functions
+- expressions such as function calls
+- blocks of code
+
+Code executed at compile-time has several limitations.
+
+- It cannot have side-effects such as
+  performing I/O operations or sending network requests.
+- It cannot perform more that a fixed number of branching operations
+  such as loop iterations an recursive calls.
+  This limit can be set by calling `@setEvalBranchQuota(quota)`.
+  The limit defaults to 1000 and cannot be set lower than that.
+
+Compile-time calls to the `assert` function that fail
+result in compile errors.
+
+The `comptime` keyword has many uses, one of which is implementing generics.
 
 Can `comptime` functions perform I/O?
 
 "Zig's comptime is limited to pure functions, they can't access the disk or network, right? Where's the superpowers there? Just like in clojure, rust's macros can slurp up config files, or make connections to servers at compile time, and bundle that into the release binary. I COULDN'T give up this superpower, it's what made me take Rust seriously. Everyone's afraid of arbitrary code execution at compile time, but we lisp programmers know it's worth a bit of confusing syntax to have such a power."
+
+```zig
+const std = @import("std");
+const print = std.debug.print;
+
+// []u32 is a slice which is a pointer type already.
+fn sum(numbers: []const u32) u32 {
+    // When this function is called at the container level, the
+    // next line gives the error "comptime call of extern function".
+    // print("in sum\n", .{});
+    var _sum: u32 = 0;
+    for (numbers) |number| {
+        _sum += number;
+    }
+    return _sum;
+}
+
+const scores = [_]u32{ 10, 20, 30, 40, 50 };
+
+// This is executed at compile-time.
+const total = sum(&scores);
+
+pub fn main() !void {
+    // Since total is computed at compile-time, the generated
+    // binary doesn't compute it and only has to print 150.
+    print("total = {d}\n", .{total});
+}
+```
 
 ## Reflection
 
