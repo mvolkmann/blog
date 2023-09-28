@@ -1575,6 +1575,23 @@ is less error-prone than allocating memory,
 writing a bunch of code that uses it, and
 having to remember to free it after all that code.
 
+- std.testing.allocator
+
+  This can only be used inside a `test` block.
+  It detects memory leaks.
+
+- std.testing.FailingAllocator
+
+  This fails after a given number of allocations.
+  It is useful for testing how a program handles out of memory conditions.
+  It must be passed another allocator such as `std.testing.allocator`.
+  For example:
+
+  ```zig
+  const testing = std.testing;
+  var allocator = testing.FailingAllocator.init(testing.allocator, 5);
+  ```
+
 - `std.heap.page_allocator`
 
   Your system/Target page allocator, will give you a whole OS page.
@@ -1837,7 +1854,64 @@ pub fn main() !void {
 The {% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std:HashMap",
 "HashMap" %} data structure is a collection of key/value pairs.
 
-TODO: Add an example.
+{% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std:HashMap",
+"std.HashMap" %} is a low-level implementation that
+requires supplying a hashing function.
+
+{% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std:AutoHashMap",
+"std.AutoHashMap" %} provides a good hashing function for most key types.
+The first argument is the key type and the second is the value type.
+When the key type is `[]const u8`, the following error is triggered:
+"std.auto_hash.autoHash does not allow slices here ([]const u8)
+because the intent is unclear. Consider using std.StringHashMap
+for hashing the contents of []const u8."
+// var map = std.AutoHashMap([]const u8, u8).init(allocator);
+
+{% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std:StringHashMap",
+"std.StringHashMap" %} provides a good hashing function for string keys.
+The argument is the value type.
+
+A `HashMap` can be used as a set where the values are `{}`.
+
+```zig
+const std = @import("std");
+const print = std.debug.print;
+const expect = std.testing.expect;
+const expectEqual = std.testing.expectEqual;
+
+test "HashMap" {
+    const allocator = std.testing.allocator;
+    var map = std.StringHashMap(u8).init(allocator);
+    defer map.deinit();
+
+    try map.put("Gretzky", 99);
+    try map.put("Orr", 4);
+    try map.put("Ratelle", 19);
+    try expect(map.count() == 3);
+
+    // Iterate over the map entries.
+    print("\n", .{});
+    var iter = map.iterator();
+    while (iter.next()) |entry| {
+        print("{s} number is {d}.\n", .{ entry.key_ptr.*, entry.value_ptr.* });
+    }
+
+    // Iterate over the map keys.
+    var iter2 = map.keyIterator();
+    while (iter2.next()) |key| {
+        print("{s} number is {any}.\n", .{ key.*, map.get(key.*) });
+    }
+
+    try expect(map.contains("Gretzky"));
+
+    // The `get` method returns an optional value.
+    try expectEqual(@as(?u8, 99), map.get("Gretzky"));
+
+    const removed = map.remove("Gretzky");
+    try expect(removed);
+    try expectEqual(@as(?u8, null), map.get("Gretzky"));
+}
+```
 
 ### MultiArrayList
 
