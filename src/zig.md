@@ -1864,13 +1864,28 @@ When the key type is `[]const u8`, the following error is triggered:
 "std.auto_hash.autoHash does not allow slices here ([]const u8)
 because the intent is unclear. Consider using std.StringHashMap
 for hashing the contents of []const u8."
-// var map = std.AutoHashMap([]const u8, u8).init(allocator);
+
+The following code creates an `AutoHashMap` where
+the keys are strings and the values are unsigned integers.
+
+```zig
+var map = std.AutoHashMap([]const u8, u8).init(allocator);
+```
 
 {% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std:StringHashMap",
 "std.StringHashMap" %} provides a good hashing function for string keys.
 The argument is the value type.
 
+The following code creates a `StringHashMap` where
+the keys are strings and the values are unsigned integers.
+
+```zig
+var map = std.StringHashMap(u8).init(allocator);
+```
+
 A `HashMap` can be used as a set where the values are `{}`.
+
+The following code demonstrates common operations on HashMaps.
 
 ```zig
 const std = @import("std");
