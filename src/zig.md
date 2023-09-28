@@ -1826,26 +1826,54 @@ Instances have the methods `append`, `appendSlice`, `clone`, `deinit`,
 `getLast`, `getLastOrNull`, `init`, `insert`, `insertSlice`, `orderedRemove`,
 `pop`, `popOrNull`, `replaceRange`, `writer`, and many more.
 
-Here is an example that creates an `ArrayList` instance,
-adds items to it, and iterates over them.
+The following code demonstrates common operations on HashMaps.
 
 ```zig
 const std = @import("std");
 const print = std.debug.print;
-const allocator = std.heap.page_allocator;
+const allocator = std.testing.allocator;
+const expect = std.testing.expect;
+const expectEqual = std.testing.expectEqual;
+const expectEqualStrings = std.testing.expectEqualStrings;
 
-pub fn main() !void {
-    var list = std.ArrayList(i32).init(allocator);
-    defer list.deinit(); // frees when function exits
-    // The append method can return an error if the allocator
-    // cannot allocate enough memory for the item being added.
-    try list.append(19);
-    try list.append(21);
+const String = []const u8;
 
-    // This loop outputs 19 and 21.
+test "ArrayList" {
+    var list = std.ArrayList(String).init(allocator);
+    defer list.deinit();
+
+    try list.append("red");
+    try list.appendSlice(&[_]String{ "green", "blue" });
+    try expect(list.items.len == 3);
+
+    // Iterate over the list entries.
+    print("\n", .{});
     for (list.items) |value| {
-        print("{}\n", .{value});
+        print("{s}\n", .{value});
     }
+
+    // There is no method to test if an ArrayList` contains a given value.
+    // It's more efficient to use a `BufSet` when that is needed.
+
+    try expectEqual(@as(?String, "blue"), list.getLastOrNull());
+
+    try expectEqual(@as(?String, "blue"), list.popOrNull());
+    try expect(list.items.len == 2);
+
+    try list.insert(1, "pink");
+    try expect(list.items.len == 3);
+    // Also see the replaceRange method.
+
+    const removed = list.orderedRemove(1);
+    try expectEqual(@as(String, "pink"), removed);
+    try expect(list.items.len == 2);
+
+    try list.appendNTimes("black", 2);
+    try expect(list.items.len == 4); // length was 2
+    try expectEqual(@as(String, "black"), list.getLast());
+
+    list.clearAndFree();
+    try expect(list.items.len == 0);
 }
 ```
 
@@ -1890,11 +1918,11 @@ The following code demonstrates common operations on HashMaps.
 ```zig
 const std = @import("std");
 const print = std.debug.print;
+const allocator = std.testing.allocator;
 const expect = std.testing.expect;
 const expectEqual = std.testing.expectEqual;
 
 test "HashMap" {
-    const allocator = std.testing.allocator;
     var map = std.StringHashMap(u8).init(allocator);
     defer map.deinit();
 
