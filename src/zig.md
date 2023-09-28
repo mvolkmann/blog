@@ -4,6 +4,12 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+<style>
+    img {
+        border: 1px solid gray;
+    }
+</style>
+
 ## Overview
 
 <figure style="width: 50%">
@@ -254,6 +260,10 @@ The following format specifiers are supported:
 Often placeholders do not need to specify a format
 because the correct formatting is used by default.
 In these cases, placeholders can be written as `{}`.
+
+A common error is to pass a single value as the second argument
+instead of a literal array.  The compiler will output the error
+"expected tuple or struct argument, found {type-passed}".
 
 The `std.log.*` functions take the same arguments as `std.debug.print`,
 but produce output the begins with their level followed by a colon and a space.
@@ -1225,7 +1235,7 @@ Zig does not support "vararg" functions,
 so functions that would have a variable number of arguments
 in other languages take a literal array (`.{}`) instead.
 
-## comptime
+## comptime Keyword
 
 The `comptime` keyword marks items that must be known at compile-time.
 It can be applied to:
@@ -1440,6 +1450,7 @@ and doesn't need to compute it because that is already done at compile-time.
 The builtin types `comptime_int` and `comptime_float` represent
 integer and floating point values that are known at compile-time
 and whose size is not specified.
+Variables of these types must be either `const` or `comptime`.
 For example:
 
 ```zig
@@ -1454,6 +1465,23 @@ pub fn main() !void {
     print("my_float type is {}\n", .{@TypeOf(my_float)}); // comptime_float
 }
 ```
+
+## inline Keyword
+
+The `inline` keyword can be applied to functions, for loops, and while loops.
+
+This screenshot shows the assembly code generated for a non-inline function.
+
+<img alt="Zig non-inline function" style="width: 100%"
+  src="/blog/assets/zig-non-inline-function.png?v={{pkg.version}}"
+  title="Zig non-inline function">
+
+This screenshot shows the assembly code generated for the same function
+when changed to be `inline`.
+
+<img alt="Zig inline function" style="width: 100%"
+  src="/blog/assets/zig-inline-function.png?v={{pkg.version}}"
+  title="Zig inline function">
 
 ## Reflection
 
