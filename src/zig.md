@@ -1851,8 +1851,7 @@ pub fn main() !void {
 
 ### HashMap
 
-The {% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std:HashMap",
-"HashMap" %} data structure is a collection of key/value pairs.
+The HashMap is a collection of key/value pairs.
 
 {% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std:HashMap",
 "std.HashMap" %} is a low-level implementation that
