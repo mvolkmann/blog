@@ -2319,6 +2319,8 @@ To run the resulting executable, enter `./hello`.
 
 ## CLEANUP EVERYTHING BELOW HERE!
 
+Supposedly Zig has destructuring, but only from indexables like tuples.
+
 Can create a slice from an array, another slice, or a. multi-pointer (define).
 
 Can functions be defined like this?
