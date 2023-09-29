@@ -418,6 +418,29 @@ so they appear to be used.
 This feature may be enabled by default, can be disabled.
 In vscode-zig, the "Zls: Enable Autofix" option controls this.
 
+## Operators
+
+- arithmetic: `+`, `-`, `*`, `/`, `%`
+- operator assignment: `+=`, `-=`, `\*=`, `/=`, `%/`
+- relational: `==`, `!=`, `>`, `>=`, `<`, `<=`
+- logical: `and` (not `&&`), `or` (not `||`), `!` (not `not`)
+
+  The first two provide short-circuiting and therefore can affect control flow.
+  Operators that merely produce a value, like `!`, are symbols instead of words.
+
+- bitwise: `<<`, `>>`, `&`, `|`, `^`, `~`
+- bitwise assignment: `<<=`, `>>=`, `&=`, `|=`, `^=`
+- optional chaining: `.?`
+- unwrapped value or other value: `orelse`
+- array concatenation: `++`
+- array multiplication: `**`
+- pointer dereference: `.*`
+- address of: `&`
+- merge error sets: `||`
+- many wrapping operators
+- many saturating operators
+- does not support the `++` and `-—` operators found in C
+
 ## Pointers
 
 To get a pointer to the data of a variable, use `&variable_name`.
@@ -2560,25 +2583,6 @@ Optionals
 - Zig prevents null references by using optional pointers whose usages are checked by the compiler
 - the `orelse` operator unwraps optional values and provides a value to use if it is null
   - const ptr = optionalPtr orelse 0; // assumes optionalPtr is a pointer to an integer
-
-Operators
-
-- +, -, \*, /, %
-- operator assignment: +=, -=, \*=, /=, %/
-- bitwise: <<, >>, &, |, ^, ~
-- bitwise assignment: <<=, >>=, &=, |=, ^=
-- orelse, .?
-- and (not &&), or (not ||), ! (not not; inconsistent!)
-- catch
-- ==, !=, >, >=, <, <=
-- array concatenation with ++
-- array multiplication with \*\*
-- pointer dereference with .\*
-- address of with &
-- merge error sets with ||
-- many wrapping operators
-- many saturating operators
-- does not support the ++ and — operators found in C
 
 Structs
 
