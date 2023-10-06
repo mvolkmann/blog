@@ -1919,14 +1919,16 @@ test "ArrayList" {
 
 ### HashMap
 
-The HashMap is a collection of key/value pairs.
+A hash map is a collection of key/value pairs.
 
-{% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std:HashMap",
-"std.HashMap" %} is a low-level implementation that
+<a href="https://ziglang.org/documentation/master/std/#A;std:HashMap"
+target="_blank">std.HashMap</a> is a low-level implementation that
 requires supplying a hashing function.
+<br>
 
-{% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std:AutoHashMap",
-"std.AutoHashMap" %} provides a good hashing function for most key types.
+<a href="https://ziglang.org/documentation/master/std/#A;std:AutoHashMap"
+target="_blank">std.AutoHashMap</a>
+provides a good hashing function for most key types.
 The first argument is the key type and the second is the value type.
 When the key type is `[]const u8`, the following error is triggered:
 "std.auto_hash.autoHash does not allow slices here ([]const u8)
@@ -1940,8 +1942,9 @@ the keys are strings and the values are unsigned integers.
 var map = std.AutoHashMap([]const u8, u8).init(allocator);
 ```
 
-{% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std:StringHashMap",
-"std.StringHashMap" %} provides a good hashing function for string keys.
+<a href="https://ziglang.org/documentation/master/std/#A;std:StringHashMap"
+target="_blank">std.StringHashMap</a>
+provides a good hashing function for string keys.
 The argument is the value type.
 
 The following code creates a `StringHashMap` where
@@ -1953,7 +1956,7 @@ var map = std.StringHashMap(u8).init(allocator);
 
 A `HashMap` can be used as a set where the values are `{}`.
 
-The following code demonstrates common operations on HashMaps.
+The following code demonstrates common operations on `HashMap`s.
 
 ```zig
 const std = @import("std");
@@ -1962,7 +1965,7 @@ const allocator = std.testing.allocator;
 const expect = std.testing.expect;
 const expectEqual = std.testing.expectEqual;
 
-test "HashMap" {
+test "StringHashMap" {
     var map = std.StringHashMap(u8).init(allocator);
     defer map.deinit();
 
@@ -1992,6 +1995,50 @@ test "HashMap" {
     const removed = map.remove("Gretzky");
     try expect(removed);
     try expectEqual(@as(?u8, null), map.get("Gretzky"));
+}
+```
+
+<a href="https://ziglang.org/documentation/master/std/#A;std:ComptimeStringMap"
+target="_blank">std.ComptimeStringMap</a>
+provides an alternative to `StringHashMap` for immutable hash maps
+with string keys whose entries are fixed at compile-time.
+It has a much simpler API that the hash maps described above
+and does not require memory cleanup by calling a `deinit` method.
+
+The `ComptimeStringMap` function takes two arguments.
+The first is the value type and the second is an array of key/value tuples.
+
+The following code demonstrates common operations on a `ComptimeStringMap`.
+
+```zig
+const std = @import("std");
+const print = std.debug.print;
+const expect = std.testing.expect;
+const expectEqual = std.testing.expectEqual;
+
+test "ComptimeStringMap" {
+    // Create an array of tuples.
+    const list = .{
+        .{ "Gretzky", 99 },
+        .{ "Orr", 4 },
+        .{ "Ratelle", 19 },
+    };
+    try expect(list.len == 3);
+
+    // Create a compile-time map of string keys to u8 values.
+    const map = std.ComptimeStringMap(u8, list);
+
+    for (map.kvs) |kv| {
+        print("{s} number is {d}.\n", .{ kv.key, kv.value });
+    }
+
+    try expect(map.has("Gretzky"));
+    try expect(map.has("Orr"));
+    try expect(map.has("Ratelle"));
+
+    try expectEqual(@as(u8, 99), map.get("Gretzky").?);
+    try expectEqual(@as(u8, 4), map.get("Orr").?);
+    try expectEqual(@as(u8, 19), map.get("Ratelle").?);
 }
 ```
 
