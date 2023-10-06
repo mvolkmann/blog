@@ -388,6 +388,8 @@ Variable declared with `const` are immutable and
 variable declared with `var` are mutable.
 Using `const` is preferred when possible.
 
+Variable names must begin with a letter and are composed of letters, numbers, and ?.
+Variable names cannot match a keyword (listed in the next section).
 The convention for variable names is to use snake_case.
 
 The type can be omitted if it can be inferred from the value.
@@ -417,6 +419,19 @@ can add lines like `_ = my_variable` for each unused variable on save
 so they appear to be used.
 This feature may be enabled by default, can be disabled.
 In vscode-zig, the "Zls: Enable Autofix" option controls this.
+
+## Keywords
+
+Zig supports the following keywords which cannot be used as
+the names of variables, function parameters, or struct fields:
+
+`addrspace`, `align`, `allowzero`, `and`, `anyframe`, `anytype`, `asm`, 
+`async`, `await`, `break`, `callconv`, `catch`, `comptime`, `const`, `continue`, 
+`defer`, `else`, `enum`, `errdefer`, `error`, `export`, `extern`, `fn`, `for`, 
+`if`, `inline`, `linksection`, `noalias`, `noinline`, `nosuspend`, `opaque`, 
+`or`, `orelse`, `packed`, `pub`, `resume`, `return`, `struct`, `suspend`, 
+`switch`, `test`, `threadlocal`, `try`, `union`, `unreachable`, 
+`usingnamespace`, `var`, `volatile`,  and `while`.
 
 ## Operators
 
@@ -743,6 +758,164 @@ test "strings" {
 ```
 
 ## Slices
+
+TODO: Add this content.
+
+## Structs
+
+A `struct` is a custom type that holds a collection of fields
+and optional methods. Here is an example:
+
+Types in Zig, such as builtin types lik `i32` and custom `struct` types,
+are first-class values.
+This means they can be assigned to variables, assigned to struct fields,
+passed to functions, and returned from functions.
+
+```zig
+const std = @import("std");
+const sqrt = std.math.sqrt;
+const expect = std.testing.expect;
+
+fn square(n: f32) f32 {
+    return std.math.pow(f32, n, 2);
+}
+
+const Point = struct {
+    x: f32,
+    y: f32,
+
+    pub fn distanceToOrigin(self: Point) f32 {
+        return sqrt(square(self.x) + square(self.y));
+    }
+
+    pub fn distanceTo(self: Point, other: Point) f32 {
+        const dx = self.x - other.x;
+        const dy = self.y - other.y;
+        return sqrt(square(dx) + square(dy));
+    }
+};
+
+test "Point struct" {
+    const p1 = Point{ .x = 3, .y = 4 };
+    try expect(p1.distanceToOrigin() == 5);
+
+    const p2 = Point{ .x = 6, .y = 8 };
+    try expect(p1.distanceTo(p2) == 5);
+    try expect(Point.distanceTo(p1, p2) == 5);
+}
+```
+
+The fields of a `struct` can be given default values that are used
+when instances are created without specifying a value for each field.
+For example, the declaration of the field `x` in the `Point` struct above
+can be replaced with `x: f32 = 1`.
+We can then create a `Point` instances without specifying a value for `x`.
+For example, `const my_point = Point{.y = 2}` creates
+an instance where the `x` field has the value `1`.
+
+The `std.debug.print` function does a reasonable job
+of printing `struct` instances without any format specifier.
+For example, after setting the `p1` variable in the code above,
+we could add `print("p1 = {}\n", .{p1});` to produce the following output:
+
+```text
+p1 = struct_demo.Point{ .x = 3.0e+00, .y = 4.0e+00 }
+```
+
+The syntax for a literal struct is the same as the syntax for a literal array.
+`.{}` can contain a comma-separated list of either
+array items or struct field assignments.
+This syntax can be used to assign a struct instance to a variable
+or pass one to a function.
+A struct definition specified with the `struct` keyword is not required.
+In this sense it is similar to creating objects in JavaScript.
+
+The following example creates a `struct` instance with four properties.
+
+```zig
+    const instance = .{
+        .key1 = true, // type is bool
+        .key2 = 19, // type is comptime_int
+        .key3 = 'x', // type is comptime_int (value is 120)
+        .key4 = "text", // type is *const [4:0]u8; 0 is the alignment
+    };
+
+    try expectEqual(bool, @TypeOf(instance.key1));
+    try expectEqual(true, instance.key1);
+
+    try expectEqual(comptime_int, @TypeOf(instance.key2));
+    try expectEqual(19, instance.key2);
+
+    try expectEqual(comptime_int, @TypeOf(instance.key3));
+    try expectEqual('x', instance.key3);
+
+    try expectEqual(*const [4:0]u8, @TypeOf(instance.key4));
+    try expectEqual("text", instance.key4);
+```
+
+To get information about all the fields in a struct, use `std.meta.fields`.
+For example, the following code can be added to the test above.
+For each field it prints the name, the type, and its value in the `p1` instance.
+TODO: Maybe add a section just on Zig reflection.
+
+```zig
+    print("\n", .{});
+    // TODO: Why does this only work with "inline"?
+    inline for (std.meta.fields(@TypeOf(p1))) |field| {
+        print("found field {s} with type {s}\n", .{ field.name, @typeName(field.type) });
+        print("value in p1 is {}\n", .{@as(field.type, @field(p1, field.name))});
+    }
+}
+
+```
+
+A `struct` can be responsible for managing its own memory.
+
+```zig
+pub const PathManager = struct {
+    paths: std.ArrayList([]const u8),
+    allocator: std.mem.Allocator,
+
+    // ...
+
+    fn appendFilePaths(self: *PathManager, path: []const u8) !void {
+        const dir = std.fs.cwd();
+        const file = try dir.openFile(path, .{ .mode = .read _only });
+        defer file.close();
+        const metadata = try file.metadata();
+        switch (metadata.kind()) {
+            std.fs.File.Kind.file => {
+                const abs_path = try dir.realpathAlloc(self.allocator, path);
+                errdefer self.allocator.free(abs_path);
+                try self.paths.append (abs_path);
+            },
+            std.fs.File.Kind.directory => {
+                var next_dir = try dir.openIterableDir(path, .{});
+                defer next_dir.close();
+                var iter = next_dir.iterate();
+                while (try iter.next()) |entry| {
+                    const next_path = try std.fs.path.join(self.allocator, &[_][]const u8{ path, entry. name });
+                    defer self.allocator.free(next_path);
+                    try self.appendFilePaths(next_path);
+                }
+            },
+            else => return,
+        }
+    }
+};
+```
+
+Using the custom struct above:
+
+```zig
+pub fn main() !void {
+    const allocator = std.heap.page_allocator;
+    var manager = try PathManager.init(allocator, &[_][]const u8{ "src", "test" });
+    defer manager.deinit();
+}
+```
+
+TODO: Add an example of a generic struct using `comptime`.
 
 ## Blocks
 
@@ -1683,162 +1856,6 @@ having to remember to free it after all that code.
 
 TODO: Add detail here.
 
-## Structs
-
-A `struct` is a custom type that holds a collection of fields
-and optional methods. Here is an example:
-
-Types in Zig, such as builtin types lik `i32` and custom `struct` types,
-are first-class values.
-This means they can be assigned to variables, assigned to struct fields,
-passed to functions, and returned from functions.
-
-```zig
-const std = @import("std");
-const sqrt = std.math.sqrt;
-const expect = std.testing.expect;
-
-fn square(n: f32) f32 {
-    return std.math.pow(f32, n, 2);
-}
-
-const Point = struct {
-    x: f32,
-    y: f32,
-
-    pub fn distanceToOrigin(self: Point) f32 {
-        return sqrt(square(self.x) + square(self.y));
-    }
-
-    pub fn distanceTo(self: Point, other: Point) f32 {
-        const dx = self.x - other.x;
-        const dy = self.y - other.y;
-        return sqrt(square(dx) + square(dy));
-    }
-};
-
-test "Point struct" {
-    const p1 = Point{ .x = 3, .y = 4 };
-    try expect(p1.distanceToOrigin() == 5);
-
-    const p2 = Point{ .x = 6, .y = 8 };
-    try expect(p1.distanceTo(p2) == 5);
-    try expect(Point.distanceTo(p1, p2) == 5);
-}
-```
-
-The fields of a `struct` can be given default values that are used
-when instances are created without specifying a value for each field.
-For example, the declaration of the field `x` in the `Point` struct above
-can be replaced with `x: f32 = 1`.
-We can then create a `Point` instances without specifying a value for `x`.
-For example, `const my_point = Point{.y = 2}` creates
-an instance where the `x` field has the value `1`.
-
-The `std.debug.print` function does a reasonable job
-of printing `struct` instances without any format specifier.
-For example, after setting the `p1` variable in the code above,
-we could add `print("p1 = {}\n", .{p1});` to produce the following output:
-
-```text
-p1 = struct_demo.Point{ .x = 3.0e+00, .y = 4.0e+00 }
-```
-
-The syntax for a literal struct is the same as the syntax for a literal array.
-`.{}` can contain a comma-separated list of either
-array items or struct field assignments.
-This syntax can be used to assign a struct instance to a variable
-or pass one to a function.
-A struct definition specified with the `struct` keyword is not required.
-In this sense it is similar to creating objects in JavaScript.
-
-The following example creates a `struct` instance with four properties.
-
-```zig
-    const instance = .{
-        .key1 = true, // type is bool
-        .key2 = 19, // type is comptime_int
-        .key3 = 'x', // type is comptime_int (value is 120)
-        .key4 = "text", // type is *const [4:0]u8; 0 is the alignment
-    };
-
-    try expectEqual(bool, @TypeOf(instance.key1));
-    try expectEqual(true, instance.key1);
-
-    try expectEqual(comptime_int, @TypeOf(instance.key2));
-    try expectEqual(19, instance.key2);
-
-    try expectEqual(comptime_int, @TypeOf(instance.key3));
-    try expectEqual('x', instance.key3);
-
-    try expectEqual(*const [4:0]u8, @TypeOf(instance.key4));
-    try expectEqual("text", instance.key4);
-```
-
-To get information about all the fields in a struct, use `std.meta.fields`.
-For example, the following code can be added to the test above.
-For each field it prints the name, the type, and its value in the `p1` instance.
-TODO: Maybe add a section just on Zig reflection.
-
-```zig
-    print("\n", .{});
-    // TODO: Why does this only work with "inline"?
-    inline for (std.meta.fields(@TypeOf(p1))) |field| {
-        print("found field {s} with type {s}\n", .{ field.name, @typeName(field.type) });
-        print("value in p1 is {}\n", .{@as(field.type, @field(p1, field.name))});
-    }
-}
-
-```
-
-A `struct` can be responsible for managing its own memory.
-
-```zig
-pub const PathManager = struct {
-    paths: std.ArrayList([]const u8),
-    allocator: std.mem.Allocator,
-
-    // ...
-
-    fn appendFilePaths(self: *PathManager, path: []const u8) !void {
-        const dir = std.fs.cwd();
-        const file = try dir.openFile(path, .{ .mode = .read _only });
-        defer file.close();
-        const metadata = try file.metadata();
-        switch (metadata.kind()) {
-            std.fs.File.Kind.file => {
-                const abs_path = try dir.realpathAlloc(self.allocator, path);
-                errdefer self.allocator.free(abs_path);
-                try self.paths.append (abs_path);
-            },
-            std.fs.File.Kind.directory => {
-                var next_dir = try dir.openIterableDir(path, .{});
-                defer next_dir.close();
-                var iter = next_dir.iterate();
-                while (try iter.next()) |entry| {
-                    const next_path = try std.fs.path.join(self.allocator, &[_][]const u8{ path, entry. name });
-                    defer self.allocator.free(next_path);
-                    try self.appendFilePaths(next_path);
-                }
-            },
-            else => return,
-        }
-    }
-};
-```
-
-Using the custom struct above:
-
-```zig
-pub fn main() !void {
-    const allocator = std.heap.page_allocator;
-    var manager = try PathManager.init(allocator, &[_][]const u8{ "src", "test" });
-    defer manager.deinit();
-}
-```
-
-TODO: Add an example of a generic struct using `comptime`.
-
 ### ArrayList
 
 The {% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std:ArrayList",
@@ -1978,7 +1995,7 @@ test "HashMap" {
 }
 ```
 
-## Sets
+### Sets
 
 A {% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std:BufSet",
 "BufSet" %} is a set of string values.
