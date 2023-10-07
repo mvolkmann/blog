@@ -173,6 +173,7 @@ For VS Code, see the extension {% aTargetBlank
   "Zig Discord server" %}
 - {% aTargetBlank "https://en.wikipedia.org/wiki/Zig_(programming_language)",
   "Wikipedia" %}
+- {% aTargetBlank "https://zig.news", "Zig News" %}
 
 ## Style
 
@@ -1373,7 +1374,12 @@ which can optionally be followed by a label to jump to an outer loop.
 ## Error Handling
 
 Errors are represented by enum values.
-TODO: Can they carry additional data?
+They cannot carry additional data.
+
+When calling a function that can return an error,
+preceding it with the `try` keyword causes the calling function
+to return the error that is returned by the called function.
+Note that `try someFn();` is equivalent to `someFn() catch |e| return e;`.
 
 TODO: Add more detail here!
 
@@ -1980,6 +1986,72 @@ const print = std.debug.print;
 const allocator = std.testing.allocator;
 const expect = std.testing.expect;
 const expectEqual = std.testing.expectEqual;
+const expectEqualStrings = std.testing.expectEqualStrings;
+const String = []const u8;
+
+test "AutoHashMap" {
+    var map = std.AutoHashMap(u8, String).init(allocator);
+    defer map.deinit();
+
+    try map.put(99, "Gretzky");
+    try map.put(4, "Orr");
+    try map.put(19, "Ratelle");
+    try expect(map.count() == 3);
+
+    // Iterate over the map entries.
+    print("\n", .{});
+    var iter = map.iterator();
+    while (iter.next()) |entry| {
+        print("{s} number is {d}.\n", .{ entry.value_ptr.*, entry.key_ptr.* });
+    }
+
+    // Iterate over the map keys.
+    var iter2 = map.keyIterator();
+    while (iter2.next()) |key| {
+        const number = key.*;
+        if (map.get(number)) |name| {
+            print("{s} number is {d}.\n", .{ name, number });
+        }
+    }
+
+    try expect(map.contains(99));
+
+    // The `get` method returns an optional value.
+    var name = map.get(99) orelse "";
+    try expectEqualStrings("Gretzky", name);
+
+    const removed = map.remove(99);
+    try expect(removed);
+    // try expect(map.get(99) == null);
+    try expectEqual(@as(?[]const u8, null), map.get(99));
+}
+
+test "ComptimeStringMap" {
+    // Create an array of tuples.
+    const list = .{
+        .{ "Gretzky", 99 },
+        .{ "Orr", 4 },
+        .{ "Ratelle", 19 },
+    };
+    try expect(list.len == 3);
+
+    // Create a compile-time map of string keys to u8 values.
+    // Since an immutable map with a fixed size is being created,
+    // there is no need to deinit it.
+    const map = std.ComptimeStringMap(u8, list);
+
+    for (map.kvs) |kv| {
+        print("{s} number is {d}.\n", .{ kv.key, kv.value });
+    }
+
+    try expect(map.has("Gretzky"));
+    try expect(map.has("Orr"));
+    try expect(map.has("Ratelle"));
+
+    try expectEqual(@as(u8, 99), map.get("Gretzky").?);
+    try expectEqual(@as(u8, 4), map.get("Orr").?);
+    try expectEqual(@as(u8, 19), map.get("Ratelle").?);
+}
 
 test "StringHashMap" {
     var map = std.StringHashMap(u8).init(allocator);
@@ -2618,6 +2690,7 @@ Vectors
   - const v1 = @Vector(_, f32){ 1.2, 2.3, 3.4 }; // need to specify length instead of using _?
   - const v2 = @Vector(\_, f32){ 9.8, 8.7, 7.6 };
   - const v3 = v1 + v2;
+- {% aTargetBlank "https://en.wikipedia.org/wiki/Single_instruction,_multiple_data", "SIMD" %}
 - vectors are compatible with fixed-length arrays with the same length or slices of arrays with the same length; can be assigned to each other
 
 Enumerations
