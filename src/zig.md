@@ -589,8 +589,9 @@ const dice_rolls = [_]u8{ 4, 2, 5, 1, 2 };
 
 Arrays have a `len` field that holds its length.
 The length of an array cannot be changed.
-For a dynamically-sized array, consider using {% aTargetBlank
-"https://ziglang.org/documentation/master/std/#A;std:ArrayList", "ArrayList" %}.
+For a dynamically-sized array, consider using
+<a href="https://ziglang.org/documentation/master/std/#A;std:ArrayList"
+target="_blank">ArrayList</a>.
 
 To get a subset of an array, called a "slice", reference a range of its items.
 For example, `dice_rolls[2..4]` gives a "slice" of the items at index 2 and 3.
@@ -662,6 +663,20 @@ The following string operations are supported using byte arrays.
 | assign to variable | var name: []u8 = "Mark";      |
 | get a byte         | const letter2 = name[1]; // a |
 | modify a byte      | name[1] = 'o'; // now "Mork"  |
+
+To write to a string, use `std.fmt.bufPrint`.  For example:
+
+```zig
+const std = @import("std");
+const bufPrint = std.fmt.bufPrint;
+const expectEqualStrings = std.testing.expectEqualStrings;
+
+test "bufPrint" {
+    var buffer: [20]u8 = undefined;
+    const result = try bufPrint(&buffer, "{d} {s} {d}", .{ 'A', "Hello", 19 });
+    try expectEqualStrings("65 Hello 19", result);
+}
+```
 
 TODO: Finish from https://www.huy.rocks/everyday/01-04-2022-zig-strings-in-5-minutes
 
@@ -1858,8 +1873,9 @@ TODO: Add detail here.
 
 ### ArrayList
 
-The {% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std:ArrayList",
-"ArrayList" %} data structure is "a contiguous, growable list of items in memory."
+The <a href="https://ziglang.org/documentation/master/std/#A;std:ArrayList"
+target="_blank">ArrayList</a> data structure
+is "a contiguous, growable list of items in memory."
 
 Instances of `ArrayList` have the fields `items`, `capacity`, and `allocator`.
 Instances have the methods `append`, `appendSlice`, `clone`, `deinit`,
