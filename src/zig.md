@@ -665,17 +665,33 @@ The following string operations are supported using byte arrays.
 | get a byte         | const letter2 = name[1]; // a |
 | modify a byte      | name[1] = 'o'; // now "Mork"  |
 
-To write to a string, use `std.fmt.bufPrint`.  For example:
+To write to a string, use `std.fmt.bufPrint` or `std.io.fixedBufferStream`.
+Using `bufPrint` is good when all the content can be specified in one call.
+Using `fixedBufferStream` allows content to be collected over multiple calls.
+The following code demonstrates both approaches.
 
 ```zig
 const std = @import("std");
-const bufPrint = std.fmt.bufPrint;
 const expectEqualStrings = std.testing.expectEqualStrings;
 
 test "bufPrint" {
     var buffer: [20]u8 = undefined;
-    const result = try bufPrint(&buffer, "{d} {s} {d}", .{ 'A', "Hello", 19 });
+    const result = try std.fmt.bufPrint(
+        &buffer,
+        "{d} {s} {d}",
+        .{ 'A', "Hello", 19 },
+    );
     try expectEqualStrings("65 Hello 19", result);
+}
+
+test "fixedBufferStream" {
+    var buffer: [20]u8 = undefined;
+    var fbs = std.io.fixedBufferStream(&buffer);
+    var writer = fbs.writer();
+    _ = try writer.write("one");
+    try writer.print("-{s}", .{"two"});
+    try writer.print("-{s}", .{"three"});
+    try expectEqualStrings("one-two-three", fbs.getWritten());
 }
 ```
 
