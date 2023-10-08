@@ -652,10 +652,19 @@ Multidimensional arrays are created by nesting single-dimension arrays.
 
 ## Strings
 
-Strings are represented by arrays of type `[]u8`.
+Strings are represented by arrays of type `[]u8` or `[]const u8`.
 This treats strings like a collection of bytes rather than Unicode characters.
+It is convenient to define an alias for this type with the following:
+
+```zig
+const String = []const u8;
+```
+
 Literal strings are delimited by double quotes.
-Zig only provides the ability to operator on strings as byte arrays.
+
+Zig only provides the ability to operate on strings as byte arrays.
+There are Zig libraries that provide additional capabilities
+such as operating on Unicode characters.
 
 The following string operations are supported using byte arrays.
 
@@ -664,6 +673,12 @@ The following string operations are supported using byte arrays.
 | assign to variable | var name: []u8 = "Mark";      |
 | get a byte         | const letter2 = name[1]; // a |
 | modify a byte      | name[1] = 'o'; // now "Mork"  |
+
+One way to create an array of strings is to use an array initializer as follows:
+
+```zig
+const colors = [_]String{ "red", "green", "blue" };
+```
 
 To write to a string, use `std.fmt.bufPrint` or `std.io.fixedBufferStream`.
 Using `bufPrint` is good when all the content can be specified in one call.
