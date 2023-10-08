@@ -2048,17 +2048,20 @@ the keys are strings and the values are unsigned integers.
 var map = std.AutoHashMap([]const u8, u8).init(allocator);
 ```
 
+<a href="https://ziglang.org/documentation/master/std/#A;std:AutoArrayHashMap"
+target="_blank">std.AutoArrayHashMap</a> is similar to `std.AutoHashMap`.
+It differs in the following was described in the docs:
+
+- "Insertion order is preserved."
+- "Deletions perform a swap removal on the entries list."
+- "Modifying the hash map while iterating is allowed, however,
+  one must understand the well-defined behavior
+  when mixing insertions and deletions with iteration.
+
 <a href="https://ziglang.org/documentation/master/std/#A;std:StringHashMap"
 target="_blank">std.StringHashMap</a>
 provides a good hashing function for string keys.
 The argument is the value type.
-
-The following code creates a `StringHashMap` where
-the keys are strings and the values are unsigned integers.
-
-```zig
-var map = std.StringHashMap(u8).init(allocator);
-```
 
 A `HashMap` can be used as a set where the values are `{}`.
 
@@ -2072,6 +2075,33 @@ const expect = std.testing.expect;
 const expectEqual = std.testing.expectEqual;
 const expectEqualStrings = std.testing.expectEqualStrings;
 const String = []const u8;
+
+test "AutoArrayHashMap" {
+    var map = std.AutoArrayHashMap(u8, String).init(allocator);
+    defer map.deinit();
+
+    try map.put(99, "Gretzky");
+    try map.put(4, "Orr");
+    try map.put(19, "Ratelle");
+    try expect(map.count() == 3);
+
+    // Iterate over the map entries.
+    print("\n", .{});
+    var iter = map.iterator();
+    while (iter.next()) |entry| {
+        print("{s} number is {d}.\n", .{ entry.value_ptr.*, entry.key_ptr.* });
+    }
+
+    try expect(map.contains(99));
+
+    // The `get` method returns an optional value.
+    var name = map.get(99) orelse "";
+    try expectEqualStrings("Gretzky", name);
+
+    const removed = map.orderedRemove(99);
+    try expect(removed);
+    try expectEqual(@as(?[]const u8, null), map.get(99));
+}
 
 test "AutoHashMap" {
     var map = std.AutoHashMap(u8, String).init(allocator);
@@ -2138,6 +2168,7 @@ test "ComptimeStringMap" {
 }
 
 test "StringHashMap" {
+    // The keys are strings and the values are unsigned integers.
     var map = std.StringHashMap(u8).init(allocator);
     defer map.deinit();
 
