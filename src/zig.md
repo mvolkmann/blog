@@ -2194,6 +2194,64 @@ test "ArrayList" {
 }
 ```
 
+### MultiArrayList
+
+A `MultiArrayList` is similar to an `ArrayList`
+in that it to stores a sequence of elements.
+However, the elements must be instances of a `struct` or `union` type.
+Each field is stored in a separate array which makes it easy
+to obtain a slice containing all the values for a given field.
+Such a slice can used to create a `Vector` which supports {% aTargetBlank
+"https://en.wikipedia.org/wiki/Single_instruction,_multiple_data", "SIMD" %}
+operations.
+
+The following code demonstrates several common operations
+on `MultiArrayList` instances:
+
+```zig
+const std = @import("std");
+const allocator = std.testing.allocator;
+const expectEqual = std.testing.expectEqual;
+
+const Range = struct {
+    min: f32,
+    max: f32,
+    current: f32,
+};
+
+test "MultiArrayList" {
+    // Unlike "ArrayList" instances, "MultiArrayList" instances
+    // do not store an allocator in order to optimize memory used.
+    // This is why an allocator must be passed
+    // to methods like "append" and "insert".
+    var list = std.MultiArrayList(Range){};
+    defer list.deinit(allocator);
+
+    // Optionally set the total capacity before appending elements
+    // to avoid having to allocate memory multiple times.
+    try list.ensureTotalCapacity(allocator, 10);
+
+    const r1 = Range{ .min = 0, .max = 100, .current = 50 };
+    try list.append(allocator, r1);
+
+    try list.append(allocator, Range{ .min = 10, .max = 50, .current = 25 });
+
+    // Insert an element at a specific index, zero in this case.
+    try list.insert(allocator, 0, Range{ .min = 1000, .max = 9999, .current = 1234 });
+
+    try expectEqual(list.len, 3);
+
+    // After the insert, r1 was moved to index 1.
+    try expectEqual(list.get(1), r1);
+
+    // The "items" method gets a slice of the values for a given field.
+    const currents: []f32 = list.items(.current);
+
+    const vector: @Vector(3, f32) = currents[0..3].*;
+    const sum = @reduce(.Add, vector);
+    try expectEqual(sum, 1309.0);
+}
+```
 ### HashMap
 
 A hash map is a collection of key/value pairs.
@@ -2506,20 +2564,17 @@ Unit tests can be included in source files
 in order to test the functions they define.
 
 Each test is described by the `test` keyword followed by
-a function name or a test description string and a block of code.
+a test description string (or a function name) and a block of code.
 
 The block of code uses functions whose
 names begin with `expect` to make assertions.
+Calls to these functions must be preceded by the `try` keyword.
 For information about these functions, see the {% aTargetBlank
 "https://ziglang.org/documentation/master/std/#A;std:testing",
 "std.testing documentation" %}.
 
 The `expect` function takes a single argument
 that must be an expression that evaluates to a `bool` value.
-If the expression can return an error,
-the `assert` must be preceded by the `try` keyword.
-Otherwise it cannot be preceded by `try`.
-The test will fail if an error is returned.
 
 The `expectEquals` function takes two arguments
 which are expressions representing an expected and actual value.
@@ -2531,7 +2586,7 @@ Other testing functions include `expectApproxEqAbs`, `expectApproxEqRel`,
 `expectStringEndsWith`, and `expectStringStartsWith`.
 
 The functions `expectApproxEqAbs`, `expectApproxEqRel`,
-`expectEqual`, and `expectEqualDeep` all have the arguments
+`expectEqual`, and `expectEqualDeep` all have the parameters
 `expected: anytype, actual: @TypeOf(expected)`.
 This causes the second argument to be cast to the type of the first.
 If the expected value is a literal value,
@@ -2860,7 +2915,7 @@ Are these the same return types?
 !i32
 anyerror!i32
 
-Learn about anonymous structs.
+Learn about anonymous structs which are called "tuples".
 Can they be used like JavaScript objects.
 
 Printing type names:
@@ -2987,7 +3042,6 @@ Vectors
   - const v1 = @Vector(_, f32){ 1.2, 2.3, 3.4 }; // need to specify length instead of using _?
   - const v2 = @Vector(\_, f32){ 9.8, 8.7, 7.6 };
   - const v3 = v1 + v2;
-- {% aTargetBlank "https://en.wikipedia.org/wiki/Single_instruction,_multiple_data", "SIMD" %}
 - vectors are compatible with fixed-length arrays with the same length or slices of arrays with the same length; can be assigned to each other
 
 Enumerations
