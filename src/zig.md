@@ -98,6 +98,8 @@ expand it, move the directory this creates to a desired location,
 set the environment variable `ZIG_PATH` to point to this directory, and
 add `ZIG_PATH` to the list of directories in the `PATH` environment variable.
 
+Consider downloading a nightly build in order to use the very latest version.
+
 In macOS and easier option is to install Zig
 with Homebrew by entering `brew install zig`.
 However, this may currently only work on Macs with Intel-based processors.
@@ -2182,8 +2184,74 @@ having to remember to free it after all that code.
 
 ## Standard Library
 
-TODO: Add detail here.
+The Zig {% aTargetBlank "https://ziglang.org/documentation/master/std/",
+"standard library" %} provides many
+"commonly used algorithms, data structures, and definitions".
 
+To use the standard library in a source file,
+add the following line near the top of the file:
+
+```zig
+const std = @import("std");
+```
+
+The standard library defines many namespaces that define
+types, functions, values, and error sets.
+Some of these define additional child namespaces.
+
+The top-level namespaces in the standard library include the following:
+
+- `array_hash_map` - defines several kinds of hash maps that preserve insertion order
+- `ascii` - ASCII text processing
+- `atomic` - memory ordering, atomic data structures, and operations
+- `base64` - Base64 encoding/decoding
+- `bit_set` - bit manipulation data structures
+- `builtin` - comptime-available information about the build environment, such as the target and optimization mode
+- `c` - provides access to many standard C functions such as `bind`, `connect`, `fork`, `free`, `malloc`, and `send`
+- `coff` - Common Object File Format (COFF)
+- `compress` - compression algorithms such as zlib, zstd, and more
+- `comptime_string_map` - defines compile-time known has maps with string keys
+- `crypto` - cryptography
+- `cstr` - defines values used when working with C strings 
+- `debug` - debug printing, allocation and other debug helpers
+- `dwarf` - Debugging With Arbitrary Record Formats (DWARF) debugging data format
+- `elf` - Executable and Linking Format (ELF)
+- `enums` - enum-related metaprogramming helpers
+- `event` - evented I/O data structures
+- `fifo` - first in, first out data structures
+- `fmt` - string formatting and parsing (e.g. parsing numbers out of strings)
+- `fs` - file system-related functionality
+- `hash_map` - defines several kinds of hash maps that do not preserve insertion order
+- `hash` - fast hashing functions (i.e. not cryptographically secure)
+- `heap` - allocator implementations
+- `http` - HTTP client and server
+- `io` - I/O streams, reader/writer interfaces and common helpers
+- `json` - JSON parsing and serialization
+- `leb` - Little Endian Base (LEB128) encoding
+- `log` - standardized interface for logging
+- `macho` - Mach Object (Mach-O) file format
+- `math` - mathematical constants and operations
+- `mem` - functions for comparing, searching, and manipulating memory
+- `meta` - metaprogramming helpers
+- `net` - networking
+- `os` - wrappers around OS-specific APIs
+- `packed_int_array` - a set of array and slice types that bit-pack integer elements
+- `pdb` - Program Database (PDB) file format
+- `process` - accessors for process-related info (e.g. command line arguments) and spawning of child processes
+- `rand` - fast pseudo-random number generators (i.e. not cryptographically secure)
+- `simd` - single Instruction Multiple Data (SIMD) helpers
+- `sort` - sorting
+- `start` - defines a couple of undocumented functions
+- `tar` - Tape Archive (tar) archive format compression/decompression
+- `testing` - testing allocator, testing assertions, and other helpers for testing code
+- `time` - sleep, obtaining the current time, conversion constants, and more
+- `tz` - time zones
+- `unicode` - UTF-8 and UTF-16LE encoding/decoding
+- `valgrind` - helpers for integrating with Valgrind
+- `wasm` - constants and types representing the WebAssembly (Wasm) binary format
+- `zig` - tokenizing and parsing of Zig code and other Zig-specific language tooling
+
+Some of the most commonly used parts are described in the subsections below.
 ### ArrayList
 
 The <a href="https://ziglang.org/documentation/master/std/#A;std:ArrayList"
