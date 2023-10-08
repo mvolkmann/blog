@@ -577,6 +577,20 @@ pub fn main() void {
 
 ## Arrays
 
+Arrays are contiguous memory with compile-time known length.
+Arrays in zig are zero-indexed.
+
+Slices are similar to arrays, but have run-time known length.
+A slice is created by getting a subset of an array or other slice.
+
+Both arrays and slices are indexed from zero.
+
+Both arrays and slices have a `len` field that holds their length.
+The length cannot be changed.
+For a dynamically-sized array, consider using
+<a href="https://ziglang.org/documentation/master/std/#A;std:ArrayList"
+target="_blank">ArrayList</a>.
+
 Array types have the syntax `[length]type`.
 For example, `[5]i32` is an array of five integers.
 
@@ -588,11 +602,6 @@ For example:
 const dice_rolls = [_]u8{ 4, 2, 5, 1, 2 };
 ```
 
-Arrays have a `len` field that holds its length.
-The length of an array cannot be changed.
-For a dynamically-sized array, consider using
-<a href="https://ziglang.org/documentation/master/std/#A;std:ArrayList"
-target="_blank">ArrayList</a>.
 
 To get a subset of an array, called a "slice", reference a range of its items.
 For example, `dice_rolls[2..4]` gives a "slice" of the items at index 2 and 3.
