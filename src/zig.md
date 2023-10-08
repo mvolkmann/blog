@@ -421,6 +421,121 @@ so they appear to be used.
 This feature may be enabled by default, can be disabled.
 In vscode-zig, the "Zls: Enable Autofix" option controls this.
 
+## Optionals (aka Nullables)
+
+The types of variables, struct fields, and function parameters can be optional.
+This allows them to have the value `null`.
+To declare a type to be optional, add a question mark before their type
+and give them a default value which may be `null`.
+
+The following code demonstrates many features of working with optionals:
+
+```zig
+const std = @import("std");
+const print = std.debug.print;
+const expectEqual = std.testing.expectEqual;
+const String = []const u8;
+
+test "optional" {
+    var a: i8 = 0; // not optional
+    // Placing "?" before a type makes it optional.
+    // Only optional variables can be set to "null".
+    var b: ?i8 = null;
+
+    //TODO: Why does Zig require casting the 0 and null values here?
+    try expectEqual(@as(i8, 0), a);
+    try expectEqual(@as(?i8, null), b);
+
+    a = 1;
+    b = 2;
+    try expectEqual(@as(i8, 1), a);
+    try expectEqual(@as(?i8, 2), b);
+
+    // This form of "if" statement can only be used with optional values.
+    // If non-null, the unwrapped value is placed in value.
+    if (b) |value| {
+        try expectEqual(@as(i8, 2), value);
+    } else {
+        unreachable; // verifies that b is non-null
+    }
+
+    // The orelse operator unwraps the value if non-null
+    // and uses the value that follows if null.
+    // This is why the cast here is to i8 instead of ?i8.
+    try expectEqual(@as(i8, 2), b orelse 0);
+
+    // "b.?" is equivalent to "b orelse unreachable".
+    // It unwraps the value which is why the cast here is to i8 instead of ?i8.
+    try expectEqual(@as(i8, 2), b.?);
+
+    b = null;
+    try expectEqual(@as(?i8, null), b);
+    try expectEqual(@as(i8, 0), b orelse 0);
+    // _ = b.?; // results in "panic: attempt to use null value"
+
+    if (b) |_| { // not using the unwrapped value
+        unreachable; // verifies that b is null
+    } else {
+        try expectEqual(@as(?i8, null), b);
+    }
+}
+
+// This is a struct with optional fields.
+const Dog = struct {
+    name: ?String = null,
+    breed: ?String = null,
+};
+
+// This demonstrates using the orelse operator
+// which unwraps the value if non-null
+// and uses the value that follows if null.
+fn present(dog: Dog) String {
+    return dog.name orelse dog.breed orelse "unknown";
+}
+
+test "struct with optional fields" {
+    const dog1 = Dog{ .name = "Comet", .breed = "Whippet" };
+    const dog2 = Dog{ .name = "Oscar" };
+    const dog3 = Dog{ .breed = "Beagle" };
+    const dog4 = Dog{};
+    const dogs = [_]Dog{ dog1, dog2, dog3, dog4 };
+
+    try expectEqual(@as(?String, "Comet"), dog1.name);
+    try expectEqual(@as(?String, "Whippet"), dog1.breed);
+
+    try expectEqual(@as(?String, "Oscar"), dog2.name);
+    try expectEqual(@as(?String, null), dog2.breed);
+
+    try expectEqual(@as(?String, null), dog3.name);
+    try expectEqual(@as(?String, "Beagle"), dog3.breed);
+
+    try expectEqual(@as(?String, null), dog4.name);
+    try expectEqual(@as(?String, null), dog4.breed);
+
+    //TODO: Why is the cast to String necessary here?
+    try expectEqual(@as(String, "Comet"), present(dog1));
+    try expectEqual(@as(String, "Oscar"), present(dog2));
+    try expectEqual(@as(String, "Beagle"), present(dog3));
+    try expectEqual(@as(String, "unknown"), present(dog4));
+
+    // The output from this loop should be:
+    // name = Comet
+    // breed = Whippet
+    // present = Comet
+    // name = Oscar
+    // present = Oscar
+    // breed = Beagle
+    // present = Beagle
+    // present = unknown
+    for (dogs) |dog| {
+        if (dog.name) |name| print("name = {s}\n", .{name});
+        if (dog.breed) |breed| print("breed = {s}\n", .{breed});
+        print("present = {s}\n", .{present(dog)});
+    }
+}
+
+```
+
 ## Keywords
 
 Zig supports the following keywords which cannot be used as
@@ -446,15 +561,17 @@ the names of variables, function parameters, or struct fields:
 
 - bitwise: `<<`, `>>`, `&`, `|`, `^`, `~`
 - bitwise assignment: `<<=`, `>>=`, `&=`, `|=`, `^=`
-- optional chaining: `.?`
 - unwrapped value or other value: `orelse`
 - array concatenation: `++`
 - array multiplication: `**`
 - pointer dereference: `.*`
 - address of: `&`
 - merge error sets: `||`
-- many wrapping operators
-- many saturating operators
+- many {% aTargetBlank "https://en.wikipedia.org/wiki/Integer_overflow",
+  "wrapping" %} operators
+- many {% aTargetBlank
+  "https://en.wikipedia.org/wiki/Saturation_arithmetic#:~:text=Saturation%20arithmetic%20is%20a%20version,a%20minimum%20and%20maximum%20value.",
+  "saturating" %} operators
 - does not support the `++` and `-—` operators found in C
 
 ## Pointers
@@ -1465,30 +1582,85 @@ preceding it with the `try` keyword causes the calling function
 to return the error that is returned by the called function.
 Note that `try someFn();` is equivalent to `someFn() catch |e| return e;`.
 
-TODO: Add more detail here!
+The following code demonstrates many features of Zig error handling:
 
 ```zig
 const std = @import("std");
 const print = std.debug.print;
 
-const DemoError = error{Demo};
-fn demo(good: bool) DemoError!u8 {
-    return if (good) 19 else DemoError.Demo;
+// The "expectEqual" function has the following signature:
+// fn expectEqual(expected: anytype, actual: @TypeOf(expected)) !void
+// So the second argument is cast to the type of the first.
+// If the expected value is a literal value,
+// it must be cast with "@as" if it is the first argument,
+// but not if it is the second.
+const expectEqual = std.testing.expectEqual;
+
+const expectError = std.testing.expectError;
+
+const EvalError = error{ Negative, TooHigh };
+
+fn double(n: i8) EvalError!i8 {
+    if (n < 0) return EvalError.Negative;
+    if (n > 100) return EvalError.TooHigh;
+    return n * 2;
 }
 
-// Only need ! in return type if errors are not caught.
-pub fn main() !void {
-    // Not catching possible errors.
-    var result = try demo(true);
-    print("result = {}\n", .{result});
+test "error handling" {
+    // The "try" before the call to "double"
+    // causes any error returned by "double" to be returned,
+    // which would cause this test to fail.
+    // "try someFn();" is equivalent to "someFn() catch |err| return err;"
+    // try expectEqual(@as(i8, 4), try double(2)); // requires cast
+    try expectEqual(try double(2), 4); // does not require cast
 
-    // Catching possible errors.
-    // result = demo(false) catch |err| {
-    result = demo(false) catch |err| {
-        print("err = {}\n", .{err});
-        return;
+    try expectError(EvalError.Negative, double(-1));
+
+    try expectError(EvalError.TooHigh, double(101));
+
+    // "catch" provides a value to use if *any* error is returned.
+    var result = double(-1) catch @as(i8, 0);
+    try expectEqual(result, 0);
+
+    result = double(101) catch @as(i8, 100);
+    try expectEqual(result, 100);
+
+    // We can test for specific errors.
+    try expectEqual(double(-1), EvalError.Negative);
+    try expectEqual(double(101), EvalError.TooHigh);
+}
+
+fn safeDouble(n: i8) i8 {
+    return double(n) catch |err| {
+        print("safeDouble caught {}\n", .{err});
+        if (err == EvalError.Negative) return 0;
+        if (err == EvalError.TooHigh) return 100;
+        return 0;
     };
-    print("result = {}\n", .{result});
+}
+
+test "catch" {
+    try expectEqual(safeDouble(2), 4);
+    try expectEqual(safeDouble(-1), 0);
+    try expectEqual(safeDouble(101), 100);
+}
+
+// This function differs from "double" in that in uses "errdefer".
+// Defer expressions cannot use the "return" keyword,
+// but they can execute code that typically performs some kind of cleanup.
+fn doubleErrdefer(n: i8) EvalError!i8 {
+    errdefer print("double returned an error for {d}\n", .{n});
+    return double(n);
+}
+
+test "errdefer" {
+    try expectEqual(doubleErrdefer(2), 4);
+
+    // This prints "double returned an error for -1".
+    try expectEqual(doubleErrdefer(-1), EvalError.Negative);
+
+    // This prints "double returned an error for 101".
+    try expectEqual(doubleErrdefer(101), EvalError.TooHigh);
 }
 ```
 
@@ -2057,6 +2229,7 @@ It differs in the following was described in the docs:
 - "Modifying the hash map while iterating is allowed, however,
   one must understand the well-defined behavior
   when mixing insertions and deletions with iteration.
+- The `values` method "returns the backing array of values".
 
 <a href="https://ziglang.org/documentation/master/std/#A;std:StringHashMap"
 target="_blank">std.StringHashMap</a>
