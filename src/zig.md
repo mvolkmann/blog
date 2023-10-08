@@ -2530,7 +2530,17 @@ Other testing functions include `expectApproxEqAbs`, `expectApproxEqRel`,
 `expectEqualStrings`, `expectError`, `expectFmt`,
 `expectStringEndsWith`, and `expectStringStartsWith`.
 
-All tests is a source file are executed by running `zig test {file-name}.zig`.
+The functions `expectApproxEqAbs`, `expectApproxEqRel`,
+`expectEqual`, and `expectEqualDeep` all have the arguments
+`expected: anytype, actual: @TypeOf(expected)`.
+This causes the second argument to be cast to the type of the first.
+If the expected value is a literal value,
+it must be cast with "@as" if it is the first argument,
+but not if it is the second.
+So it is typically easier to pass the actual value as the first argument
+and the expected value as the second argument.
+
+All tests in a source file are executed by running `zig test {file-name}.zig`.
 To run specific tests, add the `--test-filter {text}` option
 which causes it to only run tests whose description contains the given text.
 
