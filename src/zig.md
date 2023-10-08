@@ -1222,6 +1222,57 @@ test "tuple" {
 }
 ```
 
+## Unions
+
+A bare `union` defines a set of fields that a value can have
+where only one is active at a time.
+Each field can have a different type.
+
+A tagged `union` adds the use of an `enum` that
+lists the possible field names s in a union.
+This allows the union to be used in a `switch` statement.
+
+The following code demonstrates using both kinds of unions:
+
+```zig
+const std = @import("std");
+const print = std.debug.print;
+const expectEqual = std.testing.expectEqual;
+
+test "union" {
+    const Identifier = union {
+        name: []const u8,
+        number: i32,
+    };
+    const id1 = Identifier{ .name = "top secret" };
+    const id2 = Identifier{ .number = 1234 };
+    try expectEqual(id1.name, "top secret");
+    try expectEqual(id2.number, 1234);
+}
+
+test "tagged union" {
+    const IdentifierTag = enum { name, number };
+    const Identifier = union(IdentifierTag) {
+        name: []const u8,
+        number: i32,
+    };
+
+    const ids = [_]Identifier{
+        Identifier{ .number = 1234 },
+        Identifier{ .name = "top secret" },
+    };
+
+    for (ids) |id| {
+        switch (id) {
+            .name => |name| {
+                print("got Identifier named \"{s}\"\n", .{name});
+            },
+            .number => |number| print("got Identifier #{d}\n", .{number}),
+        }
+    }
+}
+```
+
 ## Blocks
 
 Blocks are lines of code surrounded by curly braces that define a variable scope.
@@ -1768,6 +1819,10 @@ The syntax for defining a function is:
     {body}
 }
 ```
+
+Anonymous functions (lambdas) are not supported.
+For the rationale, see {% aTargetBlank
+"https://github.com/ziglang/zig/issues/1717", "issue 1717" %}.
 
 Marking a function as `pub` makes it available outside its source file.
 
@@ -2982,24 +3037,6 @@ To build this, enter `zig c++ hello.cpp -o hello`.
 To run the resulting executable, enter `./hello`.
 
 ## CONTINUE CLEANUP OF EVERYTHING BELOW HERE!
-
-Can functions be defined like this?
-`const theFunc = fn() void { ... }`
-
-Example of a tagged union:
-
-```zig
-const Tagged = union (Tag) { a: u8, b: f32, c: bool };
-
-pub fn main() anyerror!void {
-    var value = Tagged{ .b = 1.5 };
-    switch (value) {
-        .a => |×| std.log.info("a: {}", .{x}),
-        .b => |x| std.log.info("b: {}", .{x}),
-        .c => |x| std.log.info("c: (" , .{x}),
-    }
-}
-```
 
 Runtime safety includes array bounds checking, …
 
