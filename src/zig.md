@@ -977,7 +977,39 @@ test "strings" {
 
 ## Slices
 
-TODO: Add this content.
+A slice is an array-like collection of values
+that is created by copying a range of indexes from an array or another slice.
+The range must be specified with indexes separated by two dots
+which means the start index is inclusive and the end index is exclusive.
+
+The following code demonstrates creating, accessing, and modifying slices:
+
+```zig
+const std = @import("std");
+const expectEqual = std.testing.expectEqual;
+
+test "slice" {
+    var array = [_]u8{ 1, 2, 3, 4, 5 };
+    try expectEqual(array.len, 5);
+
+    // This slice is immutable.
+    const slice = array[2..4];
+    try expectEqual(slice.len, 2);
+    try expectEqual(slice[0], 3);
+    try expectEqual(slice[1], 4);
+
+    // This slice is mutable because it was
+    // created from a pointer to an array.
+    const arrayPtr = &array;
+    const slice2 = arrayPtr[2..4];
+    // The slice and array share memory,
+    // so modifying one also modifies the other.
+    slice2[0] = 30;
+    try expectEqual(array[2], 30);
+    array[3] = 40;
+    try expectEqual(array[3], 40);
+}
+```
 
 ## Structs
 
@@ -1137,7 +1169,8 @@ TODO: Add an example of a generic struct using `comptime`.
 
 ## Tuples
 
-Tuples are anonymous structs whose field names default to indexes.
+Tuples are anonymous structs without specified field names.
+The field names default to indexes.
 
 The following code demonstrates using a tuple:
 
@@ -1168,7 +1201,8 @@ test "tuple" {
     inline for (tuple) |value| {
         const T = @TypeOf(value);
         print("type of {any} is {}\n", .{ value, T });
-        // comptime must be used here because ...
+        // comptime must be used here because the argument
+        // to isZigString must be comptime-known.
         if (comptime trait.isZigString(T)) {
             print("value is {s}\n", .{value});
         } else {
@@ -1178,6 +1212,7 @@ test "tuple" {
 
     // Destructuring can be used to get the elements of a tuple,
     // but all the elements must be matched.
+    // Zig only supports destructuring of tuples.
     const e1, const e2, const e3, const e4, const e5 = tuple;
     _ = e3;
     _ = e4;
@@ -2252,6 +2287,7 @@ The top-level namespaces in the standard library include the following:
 - `zig` - tokenizing and parsing of Zig code and other Zig-specific language tooling
 
 Some of the most commonly used parts are described in the subsections below.
+
 ### ArrayList
 
 The <a href="https://ziglang.org/documentation/master/std/#A;std:ArrayList"
@@ -2945,11 +2981,7 @@ int main() {
 To build this, enter `zig c++ hello.cpp -o hello`.
 To run the resulting executable, enter `./hello`.
 
-## CLEANUP EVERYTHING BELOW HERE!
-
-Supposedly Zig has destructuring, but only from indexables like tuples.
-
-Can create a slice from an array, another slice, or a. multi-pointer (define).
+## CONTINUE CLEANUP OF EVERYTHING BELOW HERE!
 
 Can functions be defined like this?
 `const theFunc = fn() void { ... }`
