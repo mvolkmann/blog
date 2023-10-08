@@ -443,18 +443,18 @@ test "optional" {
     var b: ?i8 = null;
 
     //TODO: Why does Zig require casting the 0 and null values here?
-    try expectEqual(@as(i8, 0), a);
-    try expectEqual(@as(?i8, null), b);
+    try expectEqual(a, 0);
+    try expectEqual(b, null);
 
     a = 1;
     b = 2;
-    try expectEqual(@as(i8, 1), a);
-    try expectEqual(@as(?i8, 2), b);
+    try expectEqual(a, 1);
+    try expectEqual(b, 2);
 
     // This form of "if" statement can only be used with optional values.
     // If non-null, the unwrapped value is placed in value.
     if (b) |value| {
-        try expectEqual(@as(i8, 2), value);
+        try expectEqual(value, 2);
     } else {
         unreachable; // verifies that b is non-null
     }
@@ -462,21 +462,21 @@ test "optional" {
     // The orelse operator unwraps the value if non-null
     // and uses the value that follows if null.
     // This is why the cast here is to i8 instead of ?i8.
-    try expectEqual(@as(i8, 2), b orelse 0);
+    try expectEqual(b orelse 0, 2);
 
     // "b.?" is equivalent to "b orelse unreachable".
     // It unwraps the value which is why the cast here is to i8 instead of ?i8.
-    try expectEqual(@as(i8, 2), b.?);
+    try expectEqual(b.?, 2);
 
     b = null;
-    try expectEqual(@as(?i8, null), b);
-    try expectEqual(@as(i8, 0), b orelse 0);
+    try expectEqual(b, null);
+    try expectEqual(b orelse 0, 0);
     // _ = b.?; // results in "panic: attempt to use null value"
 
     if (b) |_| { // not using the unwrapped value
         unreachable; // verifies that b is null
     } else {
-        try expectEqual(@as(?i8, null), b);
+        try expectEqual(b, null);
     }
 }
 
@@ -500,23 +500,23 @@ test "struct with optional fields" {
     const dog4 = Dog{};
     const dogs = [_]Dog{ dog1, dog2, dog3, dog4 };
 
-    try expectEqual(@as(?String, "Comet"), dog1.name);
-    try expectEqual(@as(?String, "Whippet"), dog1.breed);
+    try expectEqual(dog1.name, "Comet");
+    try expectEqual(dog1.breed, "Whippet");
 
-    try expectEqual(@as(?String, "Oscar"), dog2.name);
-    try expectEqual(@as(?String, null), dog2.breed);
+    try expectEqual(dog2.name, "Oscar");
+    try expectEqual(dog2.breed, null);
 
-    try expectEqual(@as(?String, null), dog3.name);
-    try expectEqual(@as(?String, "Beagle"), dog3.breed);
+    try expectEqual(dog3.name, null);
+    try expectEqual(dog3.breed, "Beagle");
 
-    try expectEqual(@as(?String, null), dog4.name);
-    try expectEqual(@as(?String, null), dog4.breed);
+    try expectEqual(dog4.name, null);
+    try expectEqual(dog4.breed, null);
 
     //TODO: Why is the cast to String necessary here?
-    try expectEqual(@as(String, "Comet"), present(dog1));
-    try expectEqual(@as(String, "Oscar"), present(dog2));
-    try expectEqual(@as(String, "Beagle"), present(dog3));
-    try expectEqual(@as(String, "unknown"), present(dog4));
+    try expectEqual(present(dog1), "Comet");
+    try expectEqual(present(dog2), "Oscar");
+    try expectEqual(present(dog3), "Beagle");
+    try expectEqual(present(dog4), "unknown");
 
     // The output from this loop should be:
     // name = Comet
@@ -533,7 +533,6 @@ test "struct with optional fields" {
         print("present = {s}\n", .{present(dog)});
     }
 }
-
 ```
 
 ## Keywords
