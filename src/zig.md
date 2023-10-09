@@ -90,6 +90,35 @@ and to hold each other to high standards."
 - {% aTargetBlank "https://machengine.org", "Mach" %} -
   a game engine and graphics toolkit, is implemented in Zig.
 
+## Run-time Checks
+
+Zig provides the following run-time checks:
+
+- bounds checking of array and slice indexing
+  at compile-time when index is known at compile-time and at run-time otherwise
+- pointers cannot be null unless declared to be optional
+- optional pointers must be checked for null before they are dereferenced
+- tagged unions cannot be accessed without verifying the tag
+- detects arithmetic underflow and overflow when casting between numeric types
+- checks for correct alignment when casting between pointer types
+
+## Resources
+
+- {% aTargetBlank "https://ziglang.org", "Zig home page" %}
+- {% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std",
+  "Zig Standard Library" %}
+- {% aTargetBlank "https://blog.logrocket.com/getting-started-zig-programming-language/",
+  "Getting started with the Zig programming language" %}
+- {% aTargetBlank "https://github.com/ratfactor/ziglings", "Ziglings" %} -
+  "A series of tiny broken programs ...
+  By fixing them, you'll learn how to read and write Zig code."
+- {% aTargetBlank "https://ziglearn.org", "ziglearn.org" %}
+- {% aTargetBlank "https://discord.com/servers/zig-programming-language-605571803288698900",
+  "Zig Discord server" %}
+- {% aTargetBlank "https://en.wikipedia.org/wiki/Zig_(programming_language)",
+  "Wikipedia" %}
+- {% aTargetBlank "https://zig.news", "Zig News" %}
+
 ## Installing
 
 To install, download a platform-specific zip or tar file from
@@ -159,23 +188,6 @@ To see a list of Zig guiding principles, enter `zig zen`.
 
 For VS Code, see the extension {% aTargetBlank
 "https://github.com/ziglang/vscode-zig", "Zig Language" %}.
-
-## Resources
-
-- {% aTargetBlank "https://ziglang.org", "Zig home page" %}
-- {% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std",
-  "Zig Standard Library" %}
-- {% aTargetBlank "https://blog.logrocket.com/getting-started-zig-programming-language/",
-  "Getting started with the Zig programming language" %}
-- {% aTargetBlank "https://github.com/ratfactor/ziglings", "Ziglings" %} -
-  "A series of tiny broken programs ...
-  By fixing them, you'll learn how to read and write Zig code."
-- {% aTargetBlank "https://ziglearn.org", "ziglearn.org" %}
-- {% aTargetBlank "https://discord.com/servers/zig-programming-language-605571803288698900",
-  "Zig Discord server" %}
-- {% aTargetBlank "https://en.wikipedia.org/wiki/Zig_(programming_language)",
-  "Wikipedia" %}
-- {% aTargetBlank "https://zig.news", "Zig News" %}
 
 ## Style
 
@@ -3037,8 +3049,6 @@ To build this, enter `zig c++ hello.cpp -o hello`.
 To run the resulting executable, enter `./hello`.
 
 ## CONTINUE CLEANUP OF EVERYTHING BELOW HERE!
-
-Runtime safety includes array bounds checking, …
 
 About pointer dereference syntax ...
 """
