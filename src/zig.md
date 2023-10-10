@@ -277,7 +277,7 @@ because the correct formatting is used by default.
 In these cases, placeholders can be written as `{}`.
 
 A common error is to pass a single value as the second argument
-instead of a literal array.  The compiler will output the error
+instead of a literal array. The compiler will output the error
 "expected tuple or struct argument, found {type-passed}".
 
 The `std.log.*` functions take the same arguments as `std.debug.print`,
@@ -554,13 +554,13 @@ test "struct with optional fields" {
 Zig supports the following keywords which cannot be used as
 the names of variables, function parameters, or struct fields:
 
-`addrspace`, `align`, `allowzero`, `and`, `anyframe`, `anytype`, `asm`, 
-`async`, `await`, `break`, `callconv`, `catch`, `comptime`, `const`, `continue`, 
-`defer`, `else`, `enum`, `errdefer`, `error`, `export`, `extern`, `fn`, `for`, 
-`if`, `inline`, `linksection`, `noalias`, `noinline`, `nosuspend`, `opaque`, 
-`or`, `orelse`, `packed`, `pub`, `resume`, `return`, `struct`, `suspend`, 
-`switch`, `test`, `threadlocal`, `try`, `union`, `unreachable`, 
-`usingnamespace`, `var`, `volatile`,  and `while`.
+`addrspace`, `align`, `allowzero`, `and`, `anyframe`, `anytype`, `asm`,
+`async`, `await`, `break`, `callconv`, `catch`, `comptime`, `const`, `continue`,
+`defer`, `else`, `enum`, `errdefer`, `error`, `export`, `extern`, `fn`, `for`,
+`if`, `inline`, `linksection`, `noalias`, `noinline`, `nosuspend`, `opaque`,
+`or`, `orelse`, `packed`, `pub`, `resume`, `return`, `struct`, `suspend`,
+`switch`, `test`, `threadlocal`, `try`, `union`, `unreachable`,
+`usingnamespace`, `var`, `volatile`, and `while`.
 
 ## Operators
 
@@ -731,7 +731,6 @@ For example:
 ```zig
 const dice_rolls = [_]u8{ 4, 2, 5, 1, 2 };
 ```
-
 
 To get a subset of an array, called a "slice", reference a range of its items.
 For example, `dice_rolls[2..4]` gives a "slice" of the items at index 2 and 3.
@@ -2314,7 +2313,7 @@ The top-level namespaces in the standard library include the following:
 - `compress` - compression algorithms such as zlib, zstd, and more
 - `comptime_string_map` - defines compile-time known has maps with string keys
 - `crypto` - cryptography
-- `cstr` - defines values used when working with C strings 
+- `cstr` - defines values used when working with C strings
 - `debug` - debug printing, allocation and other debug helpers
 - `dwarf` - Debugging With Arbitrary Record Formats (DWARF) debugging data format
 - `elf` - Executable and Linking Format (ELF)
@@ -2784,6 +2783,1141 @@ The {% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std:MultiAr
 separate lists for each field of the struct or lists of tags and bare unions."
 
 TODO: Add an example.
+
+## Builtin Functions
+
+TODO: Delete lines for ones that have been removed. Maybe 8 of them.
+
+Zig provides over 100 (118 as of 10/23) {% aTargetBlank
+"https://ziglang.org/documentation/master/#Builtin-Functions", "builtin functions" %}.
+These are known to the compiler and
+do not require importing in order to use them.
+
+The name of every builtin function begins with "@".
+If `@` is followed by an uppercase letter then the function returns a type.
+
+While the builtin functions are invoked like normal functions,
+some have behavior that normal functions cannot replicate.
+
+The official documentation at the link above does not categorize
+the builtin functions.
+The YouTube video {% aTargetBlank "https://www.youtube.com/watch?v=V0sthxzzN3U",
+"A Look at Zig's Built-ins" %} from Loris Cro uses the categories below:
+
+### Math Builtin Functions (25)
+
+The math builtin functions can take advantage of CPU-specific capabilities
+to achieve better performance than
+functions in the standard library found in `std.math`.
+However, this is partially achieved by providing less error checking.
+
+Some of these functions can operator on `Vector` types.
+TODO: Which ones?
+
+- `@abs` -
+- `@addWithOverflow` -
+- `@ceil` -
+- `@cos` -
+- `@divExact` -
+- `@divFloor` -
+- `@divTrunc` -
+- `@exp` -
+- `@exp2` -
+- `@floor` -
+- `@log` -
+- `@log10` -
+- `@log2` -
+- `@max` -
+- `@min` -
+- `@mod` -
+- `@mulAdd` -
+- `@mulWithOverflow` -
+- `@rem` -
+- `@round` -
+- `@sin` -
+- `@sqrt` -
+- `@subWithOverflow` -
+- `@tan` -
+- `@trunc` -
+
+### Bitwise Builtin Functions (8)
+
+- `@bitReverse` -
+- `@byteSwap` -
+- `@clz` -
+- `@ctz` -
+- `@popCount` -
+- `@shlExact` -
+- `@shlWithOverflow` -
+- `@shrExact` -
+
+### Atomic and Memory Builtin Functions (12)
+
+- `@atomicLoad` -
+- `@atomicRmw` -
+- `@atomicStore` -
+- `@cmpxchgStrong` -
+- `@cmpxchgWeak` -
+- `@fence` -
+- `@memcpy` -
+- `@memset` -
+- `@shuffle` -
+- `@splat` -
+- `@wasmMemoryGrow` -
+- `@wasmMemorySize` -
+
+### Cast and Conversion Builtin Functions (20)
+
+In general, using `@as` is preferred over other casting functions.
+Casts can be combined with introspection functions
+to achieve better error handling.
+
+- `@alignCast` -
+- `@addrSpaceCast` -
+- `@as` -
+- `@bitCast` -
+- `@constCast` -
+- `@enumFromInt` -
+- `@errorCast` -
+- `@errorFromInt` -
+- `@floatCast` -
+- `@floatFromInt` -
+- `@intCast` -
+- `@intFromBool` -
+- `@intFromEnum` -
+- `@intFromError` -
+- `@intFromFloat` -
+- `@intFromPtr` -
+- `@ptrCast` -
+- `@ptrFromInt` -
+- `@truncate` -
+- `@volatileCast` -
+
+### Programming Builtin Functions (18)
+
+- `@cDefine` -
+- `@cImport` -
+- `@cInclude` -
+- `@cUndef` -
+- `@cVaArg`
+- `@cVaCopy`
+- `@cVaEnd`
+- `@cVaStart`
+- `@compileError` -
+- `@compileLog` -
+- `@embedFile` -
+- `@export` -
+- `@import` -
+- `@setAlignStack` -
+- `@setCold` -
+- `@setEvalBranchQuota` -
+- `@setFloatMode` -
+- `@setRuntimeSafety` -
+
+### Runtime and Async Builtin Functions (3)
+
+- `@breakpoint` -
+- `@frameAddress` -
+- `@panic` -
+
+### Introspection Builtin Functions (11)
+
+- `@alignOf` -
+- `@bitOffsetOf` -
+- `@bitSizeOf` -
+- `@errorName` -
+- `@errorReturnTrace` -
+- `@fieldParentPtr` -
+- `@frameAddress` -
+- `@returnAddress` -
+- `@sizeOf` -
+- `@src` -
+- `@tagName` -
+
+### Metaprogramming Builtin Functions (10)
+
+- `@This` -
+- `@Type` -
+- `@TypeOf` -
+- `@call` -
+- `@field` -
+- `@hasDecl` -
+- `@hasField` -
+- `@typeInfo` -
+- `@typeName` -
+- `@unionInit` -
+
+### Other Builtin Functions (11)
+
+TODO: Find the proper category for these!
+
+- `@Vector` -
+- `@extern` -
+- `@inComptime` -
+- `@offsetOf` -
+- `@prefetch` -
+- `@reduce` -
+- `@select` -
+- `@trap` -
+- `@workGroupId` -
+- `@workGroupSize` -
+- `@workItemId` -
+
+### HashMap
+
+A hash map is a collection of key/value pairs.
+
+<a href="https://ziglang.org/documentation/master/std/#A;std:HashMap"
+target="_blank">std.HashMap</a> is a low-level implementation that
+requires supplying a hashing function.
+<br>
+
+<a href="https://ziglang.org/documentation/master/std/#A;std:AutoHashMap"
+target="_blank">std.AutoHashMap</a>
+provides a good hashing function for most key types.
+The first argument is the key type and the second is the value type.
+When the key type is `[]const u8`, the following error is triggered:
+"std.auto_hash.autoHash does not allow slices here ([]const u8)
+because the intent is unclear. Consider using std.StringHashMap
+for hashing the contents of []const u8."
+
+The following code creates an `AutoHashMap` where
+the keys are strings and the values are unsigned integers.
+
+```zig
+var map = std.AutoHashMap([]const u8, u8).init(allocator);
+```
+
+<a href="https://ziglang.org/documentation/master/std/#A;std:AutoArrayHashMap"
+target="_blank">std.AutoArrayHashMap</a> is similar to `std.AutoHashMap`.
+It differs in the following was described in the docs:
+
+- "Insertion order is preserved."
+- "Deletions perform a swap removal on the entries list."
+- "Modifying the hash map while iterating is allowed, however,
+  one must understand the well-defined behavior
+  when mixing insertions and deletions with iteration.
+- The `values` method "returns the backing array of values".
+
+<a href="https://ziglang.org/documentation/master/std/#A;std:StringHashMap"
+target="_blank">std.StringHashMap</a>
+provides a good hashing function for string keys.
+The argument is the value type.
+
+A `HashMap` can be used as a set where the values are `{}`.
+
+The following code demonstrates common operations on `HashMap`s.
+
+```zig
+const std = @import("std");
+const print = std.debug.print;
+const allocator = std.testing.allocator;
+const expect = std.testing.expect;
+const expectEqual = std.testing.expectEqual;
+const expectEqualStrings = std.testing.expectEqualStrings;
+const String = []const u8;
+
+test "AutoArrayHashMap" {
+    var map = std.AutoArrayHashMap(u8, String).init(allocator);
+    defer map.deinit();
+
+    try map.put(99, "Gretzky");
+    try map.put(4, "Orr");
+    try map.put(19, "Ratelle");
+    try expect(map.count() == 3);
+
+    // Iterate over the map entries.
+    print("\n", .{});
+    var iter = map.iterator();
+    while (iter.next()) |entry| {
+        print("{s} number is {d}.\n", .{ entry.value_ptr.*, entry.key_ptr.* });
+    }
+
+    try expect(map.contains(99));
+
+    // The `get` method returns an optional value.
+    var name = map.get(99) orelse "";
+    try expectEqualStrings("Gretzky", name);
+
+    const removed = map.orderedRemove(99);
+    try expect(removed);
+    try expectEqual(@as(?[]const u8, null), map.get(99));
+}
+
+test "AutoHashMap" {
+    var map = std.AutoHashMap(u8, String).init(allocator);
+    defer map.deinit();
+
+    try map.put(99, "Gretzky");
+    try map.put(4, "Orr");
+    try map.put(19, "Ratelle");
+    try expect(map.count() == 3);
+
+    // Iterate over the map entries.
+    print("\n", .{});
+    var iter = map.iterator();
+    while (iter.next()) |entry| {
+        print("{s} number is {d}.\n", .{ entry.value_ptr.*, entry.key_ptr.* });
+    }
+
+    // Iterate over the map keys.
+    var iter2 = map.keyIterator();
+    while (iter2.next()) |key| {
+        const number = key.*;
+        if (map.get(number)) |name| {
+            print("{s} number is {d}.\n", .{ name, number });
+        }
+    }
+
+    try expect(map.contains(99));
+
+    // The `get` method returns an optional value.
+    var name = map.get(99) orelse "";
+    try expectEqualStrings("Gretzky", name);
+
+    const removed = map.remove(99);
+    try expect(removed);
+    // try expect(map.get(99) == null);
+    try expectEqual(@as(?[]const u8, null), map.get(99));
+}
+
+test "ComptimeStringMap" {
+    // Create an array of tuples.
+    const list = .{
+        .{ "Gretzky", 99 },
+        .{ "Orr", 4 },
+        .{ "Ratelle", 19 },
+    };
+    try expect(list.len == 3);
+
+    // Create a compile-time map of string keys to u8 values.
+    // Since an immutable map with a fixed size is being created,
+    // there is no need to deinit it.
+    const map = std.ComptimeStringMap(u8, list);
+
+    for (map.kvs) |kv| {
+        print("{s} number is {d}.\n", .{ kv.key, kv.value });
+    }
+
+    try expect(map.has("Gretzky"));
+    try expect(map.has("Orr"));
+    try expect(map.has("Ratelle"));
+
+    try expectEqual(@as(u8, 99), map.get("Gretzky").?);
+    try expectEqual(@as(u8, 4), map.get("Orr").?);
+    try expectEqual(@as(u8, 19), map.get("Ratelle").?);
+}
+
+test "StringHashMap" {
+    // The keys are strings and the values are unsigned integers.
+    var map = std.StringHashMap(u8).init(allocator);
+    defer map.deinit();
+
+    try map.put("Gretzky", 99);
+    try map.put("Orr", 4);
+    try map.put("Ratelle", 19);
+    try expect(map.count() == 3);
+
+    // Iterate over the map entries.
+    print("\n", .{});
+    var iter = map.iterator();
+    while (iter.next()) |entry| {
+        print("{s} number is {d}.\n", .{ entry.key_ptr.*, entry.value_ptr.* });
+    }
+
+    // Iterate over the map keys.
+    var iter2 = map.keyIterator();
+    while (iter2.next()) |key| {
+        print("{s} number is {any}.\n", .{ key.*, map.get(key.*) });
+    }
+
+    try expect(map.contains("Gretzky"));
+
+    // The `get` method returns an optional value.
+    try expectEqual(@as(?u8, 99), map.get("Gretzky"));
+
+    const removed = map.remove("Gretzky");
+    try expect(removed);
+    try expectEqual(@as(?u8, null), map.get("Gretzky"));
+}
+```
+
+<a href="https://ziglang.org/documentation/master/std/#A;std:ComptimeStringMap"
+target="_blank">std.ComptimeStringMap</a>
+provides an alternative to `StringHashMap` for immutable hash maps
+with string keys whose entries are fixed at compile-time.
+It has a much simpler API that the hash maps described above
+and does not require memory cleanup by calling a `deinit` method.
+
+The `ComptimeStringMap` function takes two arguments.
+The first is the value type and the second is an array of key/value tuples.
+
+The following code demonstrates common operations on a `ComptimeStringMap`.
+
+```zig
+const std = @import("std");
+const print = std.debug.print;
+const expect = std.testing.expect;
+const expectEqual = std.testing.expectEqual;
+
+test "ComptimeStringMap" {
+    // Create an array of tuples.
+    const list = .{
+        .{ "Gretzky", 99 },
+        .{ "Orr", 4 },
+        .{ "Ratelle", 19 },
+    };
+    try expect(list.len == 3);
+
+    // Create a compile-time map of string keys to u8 values.
+    const map = std.ComptimeStringMap(u8, list);
+
+    for (map.kvs) |kv| {
+        print("{s} number is {d}.\n", .{ kv.key, kv.value });
+    }
+
+    try expect(map.has("Gretzky"));
+    try expect(map.has("Orr"));
+    try expect(map.has("Ratelle"));
+
+    try expectEqual(@as(u8, 99), map.get("Gretzky").?);
+    try expectEqual(@as(u8, 4), map.get("Orr").?);
+    try expectEqual(@as(u8, 19), map.get("Ratelle").?);
+}
+```
+
+### Sets
+
+A {% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std:BufSet",
+"BufSet" %} is a set of string values.
+
+An {% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std:EnumSet",
+"EnumSet" %} is a set of enum values.
+
+The following code demonstrates common operations on both of these kinds of sets.
+
+```zig
+const std = @import("std");
+const print = std.debug.print;
+const expect = std.testing.expect;
+
+test "BufSet" {
+    const allocator = std.testing.allocator;
+    var set = std.BufSet.init(allocator);
+    defer set.deinit();
+
+    try set.insert("Gretzky");
+    try set.insert("Orr");
+    try set.insert("Ratelle");
+    try expect(set.count() == 3);
+
+    // Iterate over the set keys.
+    print("\n", .{});
+    var iter = set.iterator();
+    while (iter.next()) |key| {
+        print("{s}\n", .{key.*});
+    }
+
+    try expect(set.contains("Gretzky"));
+
+    set.remove("Gretzky");
+    try expect(!set.contains("Gretzky"));
+}
+
+test "EnumSet" {
+    const Color = enum { red, orange, yellow, green, blue, purple, white, black };
+
+    // This does not use an allocator and does not have a `deinit` method.
+    var set = std.EnumSet(Color).initEmpty();
+
+    // To begin with all enum values in the set ...
+    // var set = std.EnumSet(Color).initFull();
+
+    // To begin with a subset of the enum values in the set ...
+    // var set = std.EnumSet(Color).initMany(&[_]Color{ .orange, .yellow });
+
+    // To begin with one of the enum values in the set ...
+    // var set = std.EnumSet(Color).initOne(.orange);
+
+    set.insert(.orange);
+    set.insert(.yellow);
+    set.insert(.black);
+    try expect(set.count() == 3);
+
+    // Iterate over the set keys.
+    print("\n", .{});
+    var iter = set.iterator();
+    while (iter.next()) |key| {
+        print("{}\n", .{key});
+    }
+
+    try expect(set.contains(.yellow));
+
+    set.remove(.yellow);
+    try expect(!set.contains(.yellow));
+
+    // There are many more methods on `EnumSet` instances.
+}
+```
+
+### MultiArrayList
+
+The {% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std:MultiArrayList",
+"MultiArrayList" %} data structure "stores a list of a struct or tagged union type".
+"Instead of storing a single list of items, MultiArrayList stores
+separate lists for each field of the struct or lists of tags and bare unions."
+
+TODO: Add an example.
+
+## Builtin Functions
+
+Zig provides over 100 {% aTargetBlank
+"https://ziglang.org/documentation/master/#Builtin-Functions", "builtin functions" %}.
+These are known to the compiler and
+do not require importing in order to use them.
+
+The name of every builtin function begins with "@".
+If `@` is followed by an uppercase letter then the function returns a type.
+
+While the builtin functions are invoked like normal functions,
+some have behavior that normal functions cannot replicate.
+
+The official documentation at the link above does not categorize
+the builtin functions.
+The YouTube video {% aTargetBlank "https://www.youtube.com/watch?v=V0sthxzzN3U",
+"A Look at Zig's Built-ins" %} from Loris Cro uses the categories below:
+
+### Math Builtin Functions
+
+The math builtin functions can take advantage of CPU-specific capabilities
+to achieve better performance than
+functions in the standard library found in `std.math`.
+However, this is partially achieved by providing less error checking.
+
+Some of these functions can operator on `Vector` types.
+TODO: Which ones?
+
+- `@abs` -
+- `@addWithOverflow` -
+- `@ceil` -
+- `@cos` -
+- `@divExact` -
+- `@divFloor` -
+- `@divTrunc` -
+- `@exp` -
+- `@exp2` -
+- `@flor` -
+- `@log` -
+- `@log10` -
+- `@log2` -
+- `@max` -
+- `@min` -
+- `@mod` -
+- `@mulAdd` -
+- `@mulWithOverflow` -
+- `@rem` -
+- `@round` -
+- `@sin` -
+- `@sqrt` -
+- `@subWithOverflow` -
+- `@tan` -
+- `@trunc` -
+
+### Bitwise Builtin Functions
+
+- `@bitReverse` -
+- `@byteSwap` -
+- `@clz` -
+- `@ctz` -
+- `@popCount` -
+- `@shlExact` -
+- `@shlWithOverflow` -
+- `@shrExact` -
+
+### Atomic and Memory Builtin Functions
+
+- `@atomicLoad` -
+- `@atomicRmw` -
+- `@atomicStore` -
+- `@cmpxchgStrong` -
+- `@cmpxchgWeak` -
+- `@fence` -
+- `@memcpy` -
+- `@memset` -
+- `@shuffle` -
+- `@splat` -
+- `@wasmMemoryGrow` -
+- `@wasmMemorySize` -
+
+### Cast and Conversion Builtin Functions
+
+In general, using `@as` is preferred over other casting functions.
+Casts can be combined with introspection functions
+to achieve better error handling.
+
+- `@alignCast` -
+- `@addrSpaceCast` -
+- `@as` -
+- `@bitCast` -
+- `@boolToInt` -
+- `@constCast` -
+- `@enumFroInt` -
+- `@errSetCast` -
+- `@errorCas` -
+- `@errorFromInt` -
+- `@floatCast` -
+- `@floatFromInt` -
+- `@intCast` -
+- `@intFromBool` -
+- `@intFromEnum` -
+- `@intFromError` -
+- `@intFromFloat` -
+- `@intFromPtr` -
+- `@ptrCast` -
+- `@ptrFromInt` -
+- `@truncate` -
+- `@volatileCast` -
+
+### Programming Builtin Functions
+
+- `@cDefine` -
+- `@cImport` -
+- `@cInclude` -
+- `@cUndef` -
+- `@cVaArg`
+- `@cVaCopy`
+- `@cVaEnd`
+- `@cVaStart`
+- `@compileError` -
+- `@compileLog` -
+- `@embedFile` -
+- `@export` -
+- `@import` -
+- `@setAlignStack` -
+- `@setCold` -
+- `@setEvalBranchQuota` -
+- `@setFloatMode` -
+- `@setRuntimeSafety` -
+
+### Runtime and Async Builtin Functions
+
+- `@Frame` -
+- `@asyncCall` -
+- `@breakpoint` -
+- `@frameSize` -
+- `@frame` -
+- `@panic` -
+
+### Introspection Builtin Functions
+
+- `@alignOf` -
+- `@bitOffsetOf` -
+- `@bitSizeOf` -
+- `@byteOffsetOf` -
+- `@errorName` -
+- `@errorReturnTrace` -
+- `@fieldParentPtr` -
+- `@frameAddress` -
+- `@returnAddress` -
+- `@sizeOf` -
+- `@src` -
+- `@tagName` -
+
+### Metaprogramming Builtin Functions
+
+- `@TagType` -
+- `@This` -
+- `@TypeOf` -
+- `@Type` -
+- `@call` -
+- `@field` -
+- `@hasDecl` -
+- `@hasField` -
+- `@typeInfo` -
+- `@typeName` -
+- `@unionInit` -
+
+### Other Builtin Functions
+
+-
+
+### HashMap
+
+A hash map is a collection of key/value pairs.
+
+<a href="https://ziglang.org/documentation/master/std/#A;std:HashMap"
+target="_blank">std.HashMap</a> is a low-level implementation that
+requires supplying a hashing function.
+<br>
+
+<a href="https://ziglang.org/documentation/master/std/#A;std:AutoHashMap"
+target="_blank">std.AutoHashMap</a>
+provides a good hashing function for most key types.
+The first argument is the key type and the second is the value type.
+When the key type is `[]const u8`, the following error is triggered:
+"std.auto_hash.autoHash does not allow slices here ([]const u8)
+because the intent is unclear. Consider using std.StringHashMap
+for hashing the contents of []const u8."
+
+The following code creates an `AutoHashMap` where
+the keys are strings and the values are unsigned integers.
+
+```zig
+var map = std.AutoHashMap([]const u8, u8).init(allocator);
+```
+
+<a href="https://ziglang.org/documentation/master/std/#A;std:AutoArrayHashMap"
+target="_blank">std.AutoArrayHashMap</a> is similar to `std.AutoHashMap`.
+It differs in the following was described in the docs:
+
+- "Insertion order is preserved."
+- "Deletions perform a swap removal on the entries list."
+- "Modifying the hash map while iterating is allowed, however,
+  one must understand the well-defined behavior
+  when mixing insertions and deletions with iteration.
+- The `values` method "returns the backing array of values".
+
+<a href="https://ziglang.org/documentation/master/std/#A;std:StringHashMap"
+target="_blank">std.StringHashMap</a>
+provides a good hashing function for string keys.
+The argument is the value type.
+
+A `HashMap` can be used as a set where the values are `{}`.
+
+The following code demonstrates common operations on `HashMap`s.
+
+```zig
+const std = @import("std");
+const print = std.debug.print;
+const allocator = std.testing.allocator;
+const expect = std.testing.expect;
+const expectEqual = std.testing.expectEqual;
+const expectEqualStrings = std.testing.expectEqualStrings;
+const String = []const u8;
+
+test "AutoArrayHashMap" {
+    var map = std.AutoArrayHashMap(u8, String).init(allocator);
+    defer map.deinit();
+
+    try map.put(99, "Gretzky");
+    try map.put(4, "Orr");
+    try map.put(19, "Ratelle");
+    try expect(map.count() == 3);
+
+    // Iterate over the map entries.
+    print("\n", .{});
+    var iter = map.iterator();
+    while (iter.next()) |entry| {
+        print("{s} number is {d}.\n", .{ entry.value_ptr.*, entry.key_ptr.* });
+    }
+
+    try expect(map.contains(99));
+
+    // The `get` method returns an optional value.
+    var name = map.get(99) orelse "";
+    try expectEqualStrings("Gretzky", name);
+
+    const removed = map.orderedRemove(99);
+    try expect(removed);
+    try expectEqual(@as(?[]const u8, null), map.get(99));
+}
+
+test "AutoHashMap" {
+    var map = std.AutoHashMap(u8, String).init(allocator);
+    defer map.deinit();
+
+    try map.put(99, "Gretzky");
+    try map.put(4, "Orr");
+    try map.put(19, "Ratelle");
+    try expect(map.count() == 3);
+
+    // Iterate over the map entries.
+    print("\n", .{});
+    var iter = map.iterator();
+    while (iter.next()) |entry| {
+        print("{s} number is {d}.\n", .{ entry.value_ptr.*, entry.key_ptr.* });
+    }
+
+    // Iterate over the map keys.
+    var iter2 = map.keyIterator();
+    while (iter2.next()) |key| {
+        const number = key.*;
+        if (map.get(number)) |name| {
+            print("{s} number is {d}.\n", .{ name, number });
+        }
+    }
+
+    try expect(map.contains(99));
+
+    // The `get` method returns an optional value.
+    var name = map.get(99) orelse "";
+    try expectEqualStrings("Gretzky", name);
+
+    const removed = map.remove(99);
+    try expect(removed);
+    // try expect(map.get(99) == null);
+    try expectEqual(@as(?[]const u8, null), map.get(99));
+}
+
+test "ComptimeStringMap" {
+    // Create an array of tuples.
+    const list = .{
+        .{ "Gretzky", 99 },
+        .{ "Orr", 4 },
+        .{ "Ratelle", 19 },
+    };
+    try expect(list.len == 3);
+
+    // Create a compile-time map of string keys to u8 values.
+    // Since an immutable map with a fixed size is being created,
+    // there is no need to deinit it.
+    const map = std.ComptimeStringMap(u8, list);
+
+    for (map.kvs) |kv| {
+        print("{s} number is {d}.\n", .{ kv.key, kv.value });
+    }
+
+    try expect(map.has("Gretzky"));
+    try expect(map.has("Orr"));
+    try expect(map.has("Ratelle"));
+
+    try expectEqual(@as(u8, 99), map.get("Gretzky").?);
+    try expectEqual(@as(u8, 4), map.get("Orr").?);
+    try expectEqual(@as(u8, 19), map.get("Ratelle").?);
+}
+
+test "StringHashMap" {
+    // The keys are strings and the values are unsigned integers.
+    var map = std.StringHashMap(u8).init(allocator);
+    defer map.deinit();
+
+    try map.put("Gretzky", 99);
+    try map.put("Orr", 4);
+    try map.put("Ratelle", 19);
+    try expect(map.count() == 3);
+
+    // Iterate over the map entries.
+    print("\n", .{});
+    var iter = map.iterator();
+    while (iter.next()) |entry| {
+        print("{s} number is {d}.\n", .{ entry.key_ptr.*, entry.value_ptr.* });
+    }
+
+    // Iterate over the map keys.
+    var iter2 = map.keyIterator();
+    while (iter2.next()) |key| {
+        print("{s} number is {any}.\n", .{ key.*, map.get(key.*) });
+    }
+
+    try expect(map.contains("Gretzky"));
+
+    // The `get` method returns an optional value.
+    try expectEqual(@as(?u8, 99), map.get("Gretzky"));
+
+    const removed = map.remove("Gretzky");
+    try expect(removed);
+    try expectEqual(@as(?u8, null), map.get("Gretzky"));
+}
+```
+
+<a href="https://ziglang.org/documentation/master/std/#A;std:ComptimeStringMap"
+target="_blank">std.ComptimeStringMap</a>
+provides an alternative to `StringHashMap` for immutable hash maps
+with string keys whose entries are fixed at compile-time.
+It has a much simpler API that the hash maps described above
+and does not require memory cleanup by calling a `deinit` method.
+
+The `ComptimeStringMap` function takes two arguments.
+The first is the value type and the second is an array of key/value tuples.
+
+The following code demonstrates common operations on a `ComptimeStringMap`.
+
+```zig
+const std = @import("std");
+const print = std.debug.print;
+const expect = std.testing.expect;
+const expectEqual = std.testing.expectEqual;
+
+test "ComptimeStringMap" {
+    // Create an array of tuples.
+    const list = .{
+        .{ "Gretzky", 99 },
+        .{ "Orr", 4 },
+        .{ "Ratelle", 19 },
+    };
+    try expect(list.len == 3);
+
+    // Create a compile-time map of string keys to u8 values.
+    const map = std.ComptimeStringMap(u8, list);
+
+    for (map.kvs) |kv| {
+        print("{s} number is {d}.\n", .{ kv.key, kv.value });
+    }
+
+    try expect(map.has("Gretzky"));
+    try expect(map.has("Orr"));
+    try expect(map.has("Ratelle"));
+
+    try expectEqual(@as(u8, 99), map.get("Gretzky").?);
+    try expectEqual(@as(u8, 4), map.get("Orr").?);
+    try expectEqual(@as(u8, 19), map.get("Ratelle").?);
+}
+```
+
+### Sets
+
+A {% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std:BufSet",
+"BufSet" %} is a set of string values.
+
+An {% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std:EnumSet",
+"EnumSet" %} is a set of enum values.
+
+The following code demonstrates common operations on both of these kinds of sets.
+
+```zig
+const std = @import("std");
+const print = std.debug.print;
+const expect = std.testing.expect;
+
+test "BufSet" {
+    const allocator = std.testing.allocator;
+    var set = std.BufSet.init(allocator);
+    defer set.deinit();
+
+    try set.insert("Gretzky");
+    try set.insert("Orr");
+    try set.insert("Ratelle");
+    try expect(set.count() == 3);
+
+    // Iterate over the set keys.
+    print("\n", .{});
+    var iter = set.iterator();
+    while (iter.next()) |key| {
+        print("{s}\n", .{key.*});
+    }
+
+    try expect(set.contains("Gretzky"));
+
+    set.remove("Gretzky");
+    try expect(!set.contains("Gretzky"));
+}
+
+test "EnumSet" {
+    const Color = enum { red, orange, yellow, green, blue, purple, white, black };
+
+    // This does not use an allocator and does not have a `deinit` method.
+    var set = std.EnumSet(Color).initEmpty();
+
+    // To begin with all enum values in the set ...
+    // var set = std.EnumSet(Color).initFull();
+
+    // To begin with a subset of the enum values in the set ...
+    // var set = std.EnumSet(Color).initMany(&[_]Color{ .orange, .yellow });
+
+    // To begin with one of the enum values in the set ...
+    // var set = std.EnumSet(Color).initOne(.orange);
+
+    set.insert(.orange);
+    set.insert(.yellow);
+    set.insert(.black);
+    try expect(set.count() == 3);
+
+    // Iterate over the set keys.
+    print("\n", .{});
+    var iter = set.iterator();
+    while (iter.next()) |key| {
+        print("{}\n", .{key});
+    }
+
+    try expect(set.contains(.yellow));
+
+    set.remove(.yellow);
+    try expect(!set.contains(.yellow));
+
+    // There are many more methods on `EnumSet` instances.
+}
+```
+
+### MultiArrayList
+
+The {% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std:MultiArrayList",
+"MultiArrayList" %} data structure "stores a list of a struct or tagged union type".
+"Instead of storing a single list of items, MultiArrayList stores
+separate lists for each field of the struct or lists of tags and bare unions."
+
+TODO: Add an example.
+
+## Builtin Functions
+
+Zig provides over 100 {% aTargetBlank
+"https://ziglang.org/documentation/master/#Builtin-Functions", "builtin functions" %}.
+These are known to the compiler and
+do not require importing in order to use them.
+
+The name of every builtin function begins with "@".
+If `@` is followed by an uppercase letter then the function returns a type.
+
+While the builtin functions are invoked like normal functions,
+some have behavior that normal functions cannot replicate.
+
+The official documentation at the link above does not categorize
+the builtin functions.
+The YouTube video {% aTargetBlank "https://www.youtube.com/watch?v=V0sthxzzN3U",
+"A Look at Zig's Built-ins" %} from Loris Cro uses the categories below:
+
+### Math Builtin Functions
+
+The math builtin functions can take advantage of CPU-specific capabilities
+to achieve better performance than
+functions in the standard library found in `std.math`.
+However, this is partially achieved by providing less error checking.
+
+Some of these functions can operator on `Vector` types.
+TODO: Which ones?
+
+- `@abs` -
+- `@addWithOverflow` -
+- `@ceil` -
+- `@cos` -
+- `@divExact` -
+- `@divFloor` -
+- `@divTrunc` -
+- `@exp` -
+- `@exp2` -
+- `@flor` -
+- `@log` -
+- `@log10` -
+- `@log2` -
+- `@max` -
+- `@min` -
+- `@mod` -
+- `@mulAdd` -
+- `@mulWithOverflow` -
+- `@rem` -
+- `@round` -
+- `@sin` -
+- `@sqrt` -
+- `@subWithOverflow` -
+- `@tan` -
+- `@trunc` -
+
+### Bitwise Builtin Functions
+
+- `@bitReverse` -
+- `@byteSwap` -
+- `@clz` -
+- `@ctz` -
+- `@popCount` -
+- `@shlExact` -
+- `@shlWithOverflow` -
+- `@shrExact` -
+
+### Atomic and Memory Builtin Functions
+
+- `@atomicLoad` -
+- `@atomicRmw` -
+- `@atomicStore` -
+- `@cmpxchgStrong` -
+- `@cmpxchgWeak` -
+- `@fence` -
+- `@memcpy` -
+- `@memset` -
+- `@shuffle` -
+- `@splat` -
+- `@wasmMemoryGrow` -
+- `@wasmMemorySize` -
+
+### Cast and Conversion Builtin Functions
+
+In general, using `@as` is preferred over other casting functions.
+Casts can be combined with introspection functions
+to achieve better error handling.
+
+- `@alignCast` -
+- `@addrSpaceCast` -
+- `@as` -
+- `@bitCast` -
+- `@boolToInt` -
+- `@constCast` -
+- `@enumFroInt` -
+- `@errSetCast` -
+- `@errorCas` -
+- `@errorFromInt` -
+- `@floatCast` -
+- `@floatFromInt` -
+- `@intCast` -
+- `@intFromBool` -
+- `@intFromEnum` -
+- `@intFromError` -
+- `@intFromFloat` -
+- `@intFromPtr` -
+- `@ptrCast` -
+- `@ptrFromInt` -
+- `@truncate` -
+- `@volatileCast` -
+
+### Programming Builtin Functions
+
+- `@cDefine` -
+- `@cImport` -
+- `@cInclude` -
+- `@cUndef` -
+- `@cVaArg`
+- `@cVaCopy`
+- `@cVaEnd`
+- `@cVaStart`
+- `@compileError` -
+- `@compileLog` -
+- `@embedFile` -
+- `@export` -
+- `@import` -
+- `@setAlignStack` -
+- `@setCold` -
+- `@setEvalBranchQuota` -
+- `@setFloatMode` -
+- `@setRuntimeSafety` -
+
+### Runtime and Async Builtin Functions
+
+- `@Frame` -
+- `@asyncCall` -
+- `@breakpoint` -
+- `@frameSize` -
+- `@frame` -
+- `@panic` -
+
+### Introspection Builtin Functions
+
+- `@alignOf` -
+- `@bitOffsetOf` -
+- `@bitSizeOf` -
+- `@byteOffsetOf` -
+- `@errorName` -
+- `@errorReturnTrace` -
+- `@fieldParentPtr` -
+- `@frameAddress` -
+- `@returnAddress` -
+- `@sizeOf` -
+- `@src` -
+- `@tagName` -
+
+### Metaprogramming Builtin Functions
+
+- `@TagType` -
+- `@This` -
+- `@TypeOf` -
+- `@Type` -
+- `@call` -
+- `@field` -
+- `@hasDecl` -
+- `@hasField` -
+- `@typeInfo` -
+- `@typeName` -
+- `@unionInit` -
+
+### Other Builtin Functions
+
+-
 
 ## Unit Tests
 
