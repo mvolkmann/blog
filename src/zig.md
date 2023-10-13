@@ -189,6 +189,11 @@ To see a list of Zig guiding principles, enter `zig zen`.
 For VS Code, see the extension {% aTargetBlank
 "https://github.com/ziglang/vscode-zig", "Zig Language" %}.
 
+Editor extensions typically handle unused variables
+by adding a line that uses them.
+For example, if the variable `foo` is unused,
+the line `_ = foo;` will be added immediately after its declaration.
+
 ## Style
 
 Zig has an official {% aTargetBlank
@@ -223,6 +228,8 @@ Like many `.zig` files, this begins by importing the standard library
 with `const std = @import("std");`
 It also defines the main function with `pub fn main() !void { ... }`.
 The `!` means the function can return an error value.
+If an error is returned from the `main` function,
+it panics and prints a stack trace.
 
 To run the app, enter `zig build run`.
 
@@ -848,8 +855,14 @@ test "fixedBufferStream" {
 }
 ```
 
-The `std.io` namespace provides several functions for tokenizing strings
+The `std.io` namespace provides several functions for split/tokenize strings
 based on specified delimiters.
+Split returns a slice from each delimiter
+whereas tokenize treats consecutive delimiters as one.
+For example, splitting `"red,green,,,blue"` on the comma delimiter
+gives `"red"`, `"green"`, `""`, `""`, and `"blue"` and
+tokenizing the same string gives `"red"`, `"green"`, and `"blue"`.
+
 The following code demonstrates each of these.
 
 ```zig
@@ -857,33 +870,67 @@ const std = @import("std");
 const expectEqualStrings = std.testing.expectEqualStrings;
 const String = []const u8;
 
-test "tokenize" {
-    const expected = [_]String{ "red", "green", "blue" };
+test "split" {
+    const expected = [_]String{ "red", "green", "", "", "blue" };
 
-    var colors1 = "red,green;blue";
+    const colors1 = "red,green,,,blue";
     // This returns an iterator that provides values obtained by
-    // splitting on any one of the given delimiters.
-    var iter = std.mem.tokenizeAny(u8, colors1, ",; ");
+    // splitting on a single delimiter that is a single value.
+    var iter1 = std.mem.splitScalar(u8, colors1, ',');
     var index: u8 = 0;
-    while (iter.next()) |color| {
+    while (iter1.next()) |color| {
         try expectEqualStrings(expected[index], color);
         index += 1;
     }
 
-    const colors2 = "red,green,blue";
+    const colors2 = "red;-)green;-);-);-)blue";
     // This returns an iterator that provides values obtained by
-    // splitting on a single delimiter that is a single value.
-    var iter2 = std.mem.tokenizeScalar(u8, colors2, ',');
+    // splitting on a single delimiter that is a sequence of values.
+    var iter2 = std.mem.splitSequence(u8, colors2, ";-)");
     index = 0;
     while (iter2.next()) |color| {
         try expectEqualStrings(expected[index], color);
         index += 1;
     }
 
-    const colors3 = "red;-)green;-)blue";
+    var colors3 = "red,green,; blue";
+    // This returns an iterator that provides values obtained by
+    // splitting on any one of the given delimiters.
+    var iter3 = std.mem.splitAny(u8, colors3, ",; ");
+    index = 0;
+    while (iter3.next()) |color| {
+        try expectEqualStrings(expected[index], color);
+        index += 1;
+    }
+}
+
+test "tokenize" {
+    const expected = [_]String{ "red", "green", "blue" };
+
+    const colors1 = "red,green,,,blue";
+    // This returns an iterator that provides values obtained by
+    // splitting on a single delimiter that is a single value.
+    var iter1 = std.mem.tokenizeScalar(u8, colors1, ',');
+    var index: u8 = 0;
+    while (iter1.next()) |color| {
+        try expectEqualStrings(expected[index], color);
+        index += 1;
+    }
+
+    const colors2 = "red;-)green;-);-);-)blue";
     // This returns an iterator that provides values obtained by
     // splitting on a single delimiter that is a sequence of values.
-    var iter3 = std.mem.tokenizeSequence(u8, colors3, ";-)");
+    var iter2 = std.mem.tokenizeSequence(u8, colors2, ";-)");
+    index = 0;
+    while (iter2.next()) |color| {
+        try expectEqualStrings(expected[index], color);
+        index += 1;
+    }
+
+    var colors3 = "red,green,; ,; blue";
+    // This returns an iterator that provides values obtained by
+    // splitting on any one of the given delimiters.
+    var iter3 = std.mem.tokenizeAny(u8, colors3, ",; ");
     index = 0;
     while (iter3.next()) |color| {
         try expectEqualStrings(expected[index], color);
@@ -2519,8 +2566,6 @@ target="_blank">std.StringHashMap</a>
 provides a good hashing function for string keys.
 The argument is the value type.
 
-A `HashMap` can be used as a set where the values are `{}`.
-
 The following code demonstrates common operations on `HashMap`s.
 
 ```zig
@@ -2709,6 +2754,12 @@ A {% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std:BufSet",
 An {% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std:EnumSet",
 "EnumSet" %} is a set of enum values.
 
+A {% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std:DynamicBitSet",
+"DynamicBitSet" %} is a set of bit values.
+
+For sets of other kinds of values, consider using a `HashMap`
+where the values have the type `void`.
+
 The following code demonstrates common operations on both of these kinds of sets.
 
 ```zig
@@ -2811,19 +2862,20 @@ to achieve better performance than
 functions in the standard library found in `std.math`.
 However, this is partially achieved by providing less error checking.
 
-Some of these functions can operator on `Vector` types.
-TODO: Which ones?
+Most of the math builtin functions can
+operator on a single float or a `Vector` of floats.
+When passed a `Vector` of floats, they return a new `Vector` of floats.
 
-- `@abs` -
 - `@addWithOverflow` -
-- `@ceil` -
-- `@cos` -
-- `@divExact` -
+- `@ceil` - returns the ceiling of a float or Vector of floats
+- `@cos` - returns the cosine of a float or Vector of floats
+- `@divExact` - returns the quotient of two numbers
 - `@divFloor` -
 - `@divTrunc` -
 - `@exp` -
 - `@exp2` -
-- `@floor` -
+- `@fabs` - returns the absolute value of the float or Vector of floats
+- `@floor` - returns the floor of a float or Vector of floats
 - `@log` -
 - `@log10` -
 - `@log2` -
@@ -2834,10 +2886,10 @@ TODO: Which ones?
 - `@mulWithOverflow` -
 - `@rem` -
 - `@round` -
-- `@sin` -
-- `@sqrt` -
+- `@sin` - returns the sine of a float or Vector of floats
+- `@sqrt` -returns the square root of a float or Vector of floats
 - `@subWithOverflow` -
-- `@tan` -
+- `@tan` - returns the tangent of a float or Vector of floats
 - `@trunc` -
 
 ### Bitwise Builtin Functions (8)
