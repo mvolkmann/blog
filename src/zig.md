@@ -369,6 +369,13 @@ pub fn main() !void {
 }
 ```
 
+## Types
+
+Types in Zig, such as builtin types like `i32` and custom `struct` types,
+are first-class values.
+This means they can be assigned to variables, assigned to struct fields,
+passed to functions, and returned from functions.
+
 ## Primitive Types
 
 Zig supports a large number of primitive types.
@@ -1072,12 +1079,11 @@ test "slice" {
 ## Structs
 
 A `struct` is a custom type that holds a collection of fields
-and optional methods. Here is an example:
+and optional methods.
+Struct fields and methods cannot be made private.
+They are always visible outside the `struct` definition.
 
-Types in Zig, such as builtin types lik `i32` and custom `struct` types,
-are first-class values.
-This means they can be assigned to variables, assigned to struct fields,
-passed to functions, and returned from functions.
+The following code demonstrates defining and using a `struct`:
 
 ```zig
 const std = @import("std");
@@ -1771,13 +1777,79 @@ which can optionally be followed by a label to jump to an outer loop.
 
 ## Error Handling
 
-Errors are represented by enum values.
-They cannot carry additional data.
+Errors are represented by enum values that cannot carry additional data.
+For example, the following defines an error set with two possible values:
+
+```zig
+const EvalError = error { Negative, TooHigh };
+```
+
+An error can be returned from a function in the same way as returning a value.
+For example:
+
+```zig
+return EvalError.TooHigh;
+```
+
+Functions that can return errors must indicate this
+by preceding their return type with `!`.
+They can optionally specify an error set before the `!`
+that describes the possible errors that can be returned.
+If no error set is specified, the compiler determines
+the possible errors from the function body.
 
 When calling a function that can return an error,
-preceding it with the `try` keyword causes the calling function
+preceding the call with the `try` keyword causes the calling function
 to return the error that is returned by the called function.
 Note that `try someFn();` is equivalent to `someFn() catch |e| return e;`.
+
+The following code demonstrates defining a function
+that specifies an error set:
+
+```zig
+const EvalError = error{ Negative, TooHigh };
+
+fn double(n: i8) EvalError!i8 {
+    if (n < 0) return EvalError.Negative;
+    if (n > 100) return EvalError.TooHigh;
+    return n * 2;
+}
+
+pub fn main() !void {
+    var result = try double(4); // 8
+    print("result = {d}\n", .{result});
+    result = try double(-1); // panics with error: .Negative
+    print("result = {d}\n", .{result});
+}
+```
+
+Omitting the error set from a function return type
+is not the same as specifying the error set `anyerror`.
+Using `anyerror` means that absolutely any kind of error can be returned,
+whereas omiting the error set means
+the compiler will determine the possible errors.
+
+When the error set is omitted from the function return type,
+the function can return single error values
+that are no part of a predefined error set.
+
+The following code demonstrates defining a function
+that does not specify an error set:
+
+```zig
+fn double(n: i32) !i32 {
+    if (n < 0) return error.Negative; // note use of error keyword
+    if (n > 100) return error.TooHigh;
+    return n * 2;
+}
+
+pub fn main() !void {
+    var result = try double(4); // 8
+    print("result = {d}\n", .{result});
+    result = try double(-1); // panics with error: Negative
+    print("result = {d}\n", .{result});
+}
+```
 
 The following code demonstrates many features of Zig error handling:
 
