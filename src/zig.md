@@ -657,6 +657,18 @@ A pointer to a non-`const` value can be used to modify the value
 regardless of whether the pointer itself is `const`.
 A pointer to `const` value cannot be used to modify the value.
 
+The following table describes several types that involve pointers.
+
+| Type       | Meaning                                                    |
+|------------|------------------------------------------------------------|
+| `*T`       | pointer to a T value                                       |
+| `[*]T`     | pointer to an unknown number of T values                   |
+| `?[*]T`    | optional pointer to an unknown number of T values          |
+| `[*]?T`    | pointer to an unknown number of optional T values          |
+| `?[*]?T`   | optional pointer to an unknown number of optional T values |
+
+The type `[*]T` is a slice of pointers to values of type T.
+
 Here are examples of obtaining and using pointers.
 
 ```zig
@@ -764,11 +776,12 @@ pub fn main() void {
 
 ## Arrays
 
-Arrays are contiguous memory with compile-time known length
+Arrays are contiguous memory with compile-time known, fixed length
 and zero-based indexes.
 
-Slices are similar to arrays, but have run-time known length.
-A slice is created by getting a subset of an array or other slice.
+Slices are similar to arrays, but their length is not known until run-time.
+A slice is created by referencing (not copying) a subset of
+an array or other slice using range syntax.
 
 Both arrays and slices have a `len` field that holds their length.
 The length cannot be changed.
@@ -850,7 +863,9 @@ Multidimensional arrays are created by nesting single-dimension arrays.
 ## Slices
 
 A slice is an array-like collection of values
-that is created by copying a range of indexes from an array or another slice.
+whose length is not known until run-time.
+A slice references (doesn't copy) a range of indexes
+from an array or another slice.
 The range must be specified with indexes separated by two dots
 which means the start index is inclusive and the end index is exclusive.
 
