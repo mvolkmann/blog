@@ -458,7 +458,7 @@ the parts inside square brackets are optional.
 
 Variable declared with `const` are immutable and
 variable declared with `var` are mutable.
-Using `const` is preferred when possible.
+Using `const` is preferred when the value will not be modified.
 
 Variable names must begin with a letter and are composed of letters, numbers, and ?.
 Variable names cannot match a keyword (listed in the next section).
@@ -928,8 +928,10 @@ test "slice" {
 
 ## Strings
 
-Strings are represented by arrays of type `[]u8` or `[]const u8`.
+Strings are represented by arrays of type
+`[]u8` (mutable) or `[]const u8` (immutable).
 This treats strings like a collection of bytes rather than Unicode characters.
+
 It is convenient to define an alias for this type with the following:
 
 ```zig
