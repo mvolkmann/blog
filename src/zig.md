@@ -657,13 +657,19 @@ A pointer to a non-`const` value can be used to modify the value
 regardless of whether the pointer itself is `const`.
 A pointer to `const` value cannot be used to modify the value.
 
+Pointer variables cannot be set to `null`
+unless they are declared to be optional with `?`.
+
 Zig supports two kinds of pointers, single-item and many-item.
 The following table describes several types that involve pointers.
-The first is an single-item pointer and the rest are many-item pointers.
+The first three are a single-item pointer and
+the rest (ones with square brackets) are many-item pointers.
 
 | Type       | Meaning                                                    |
 |------------|------------------------------------------------------------|
 | `*T`       | pointer to a T value                                       |
+| `?*T`      | optional pointer to a T value                              |
+| `*?T`      | pointer to an optional T value                             |
 | `[*]T`     | pointer to an unknown number of T values                   |
 | `?[*]T`    | optional pointer to an unknown number of T values          |
 | `[*]?T`    | pointer to an unknown number of optional T values          |
