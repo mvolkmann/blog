@@ -709,10 +709,12 @@ test "pointers" {
         .{ .name = "Comet", .breed = "whippet", .age = 3 },
         .{ .name = "Oscar", .breed = "whippet", .age = 7 },
     };
+
     // Iterate over the dogs and increment their age.
     // &dogs gives a many-item pointer.
     for (&dogs) |*d| {
-        d.*.age += 1; // note syntax to access fields from a pointer
+        // d.*.age += 1; // works
+        d.age += 1; // also works and is shorter.
     }
     try expectEqual(dogs[0].age, 4);
     try expectEqual(dogs[1].age, 8);
