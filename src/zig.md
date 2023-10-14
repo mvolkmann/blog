@@ -2612,9 +2612,11 @@ test "ArrayList" {
 
 ### MultiArrayList
 
-A `MultiArrayList` is similar to an `ArrayList`
+A {% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std:MultiArrayList",
+"MultiArrayList" %} is similar to an `ArrayList`
 in that it to stores a sequence of elements.
 However, the elements must be instances of a `struct` or `union` type.
+
 Each field is stored in a separate array which makes it easy
 to obtain a slice containing all the values for a given field.
 Such a slice can used to create a `Vector` which supports {% aTargetBlank
@@ -2973,18 +2975,7 @@ test "EnumSet" {
 }
 ```
 
-### MultiArrayList
-
-The {% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std:MultiArrayList",
-"MultiArrayList" %} data structure "stores a list of a struct or tagged union type".
-"Instead of storing a single list of items, MultiArrayList stores
-separate lists for each field of the struct or lists of tags and bare unions."
-
-TODO: Add an example.
-
 ## Builtin Functions
-
-TODO: Delete lines for ones that have been removed. Maybe 8 of them.
 
 Zig provides over 100 (118 as of 10/23) {% aTargetBlank
 "https://ziglang.org/documentation/master/#Builtin-Functions", "builtin functions" %}.
