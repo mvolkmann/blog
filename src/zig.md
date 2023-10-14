@@ -3138,7 +3138,35 @@ to achieve better error handling.
 - `@This` -
 - `@Type` -
 - `@TypeOf` -
-- `@call` -
+
+- `@call` - calls a given function with arguments in a tuple
+
+  The {% aTargetBlank "", "@call" %} function takes a {% aTargetBlank
+  "https://ziglang.org/documentation/master/std/#A;std:builtin.CallModifier",
+  "CallModifier" %} enum value, a function, and arguments in a tuple.
+  The CallModifier enum values are `auto` (most common), `always_inline`,
+  `always_tail`, `async_kw`, `compile_time`, `never_inline`, `never_tail`,
+  and `no_async`.
+
+  The following code demonstrates using `@call`.
+
+  ```zig
+  const std = @import("std");
+  const expectEqual = std.testing.expectEqual;
+
+  fn add(a: i32, b: i32) i32 {
+      return a + b;
+  }
+
+  test "@call" {
+      const args = .{ 2, 3 };
+
+      const result = @call(.auto, add, args);
+
+      try expectEqual(result, 5);
+  }
+  ```
+
 - `@field` -
 - `@hasDecl` -
 - `@hasField` -
