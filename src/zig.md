@@ -818,8 +818,12 @@ test "arrays" {
         try expectEqual(roll, dice_rolls[index]);
     }
 
+    // Copy an array.
+    const copy: [5]u8 = dice_rolls;
+    try expectEqual(copy[0], dice_rolls[0]);
+    try expect(&copy != &dice_rolls);
+
     // Get a slice of an array.
-    // Indexes begin at zero.
     const subset = dice_rolls[2..4];
     var expected_subset = [_]u8{ 6, 1 };
     try expectEqualSlices(u8, &expected_subset, subset);
@@ -850,6 +854,10 @@ that is created by copying a range of indexes from an array or another slice.
 The range must be specified with indexes separated by two dots
 which means the start index is inclusive and the end index is exclusive.
 
+Slice types have the syntax `[]type`
+with no length specified in the square brackets.
+For example, `[]u8` is a slice of `u8` values.
+
 The following code demonstrates creating, accessing, and modifying slices:
 
 ```zig
@@ -861,10 +869,10 @@ test "slice" {
     try expectEqual(array.len, 5);
 
     // This slice is immutable.
-    const slice = array[2..4];
+    const slice = array[2..4]; // use [0..] to include all elements
     try expectEqual(slice.len, 2);
-    try expectEqual(slice[0], 3);
-    try expectEqual(slice[1], 4);
+    try expectEqual(slice[0], array[2]);
+    try expectEqual(slice[1], array[3]);
 
     // This slice is mutable because it was
     // created from a pointer to an array.
