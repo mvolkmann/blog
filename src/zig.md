@@ -34,16 +34,20 @@ Often these concerns justify the tedium and verbosity of
 manual memory management that is required
 due to lack of automated garbage collection.
 
-One appeal of Zig is that it is much simpler than C++ and Rust.
+One appeal of Zig is that it is simpler than C++ and Rust.
 
 Zig emphasizes:
 
 - No hidden control flow
 
   Examples of hidden control flow in other languages include
-  exception handling, operator overloading, and destructors.
+  exception handling, operator overloading, destructors, and decorators.
 
 - No hidden memory allocations
+
+  All memory allocation is performed by allocators that the developer selects.
+  Each kind of allocation implements a different allocation strategy.
+  Zig does not support closures, so allocations to not outlive their scope.
 
 - No preprocessors or macros
 
@@ -58,6 +62,7 @@ Zig includes:
 - a build system API (used in `build.zig` files)
 - cross-compilation support
 - a test runner
+- ability to target all platforms supported by LLVM, including WebAssembly
 
 Andrew Kelly began work on Zig in August, 2015 (first commit).
 The first public release was in February, 2016.
@@ -74,6 +79,10 @@ the growth of a diverse and international community of Zig programmers,
 and to provide education and guidance to students,
 teaching the next generation of programmers to be competent, ethical,
 and to hold each other to high standards."
+
+Originally the Zig compiler was implemented in C++.
+The 0.10.0 version of Zig changed to a self-hosted compiler
+which means it is implemented in Zig.
 
 ## Used By
 
@@ -721,13 +730,11 @@ pub fn main() void {
 
 ## Arrays
 
-Arrays are contiguous memory with compile-time known length.
-Arrays in zig are zero-indexed.
+Arrays are contiguous memory with compile-time known length
+and zero-based indexes.
 
 Slices are similar to arrays, but have run-time known length.
 A slice is created by getting a subset of an array or other slice.
-
-Both arrays and slices are indexed from zero.
 
 Both arrays and slices have a `len` field that holds their length.
 The length cannot be changed.
@@ -801,6 +808,42 @@ test "arrays" {
 ```
 
 Multidimensional arrays are created by nesting single-dimension arrays.
+
+## Slices
+
+A slice is an array-like collection of values
+that is created by copying a range of indexes from an array or another slice.
+The range must be specified with indexes separated by two dots
+which means the start index is inclusive and the end index is exclusive.
+
+The following code demonstrates creating, accessing, and modifying slices:
+
+```zig
+const std = @import("std");
+const expectEqual = std.testing.expectEqual;
+
+test "slice" {
+    var array = [_]u8{ 1, 2, 3, 4, 5 };
+    try expectEqual(array.len, 5);
+
+    // This slice is immutable.
+    const slice = array[2..4];
+    try expectEqual(slice.len, 2);
+    try expectEqual(slice[0], 3);
+    try expectEqual(slice[1], 4);
+
+    // This slice is mutable because it was
+    // created from a pointer to an array.
+    const arrayPtr = &array;
+    const slice2 = arrayPtr[2..4];
+    // The slice and array share memory,
+    // so modifying one also modifies the other.
+    slice2[0] = 30;
+    try expectEqual(array[2], 30);
+    array[3] = 40;
+    try expectEqual(array[3], 40);
+}
+```
 
 ## Strings
 
@@ -1037,42 +1080,6 @@ test "strings" {
     while (splits.next()) |chunk| {
         print("chunk = {s}\n", .{chunk});
     }
-}
-```
-
-## Slices
-
-A slice is an array-like collection of values
-that is created by copying a range of indexes from an array or another slice.
-The range must be specified with indexes separated by two dots
-which means the start index is inclusive and the end index is exclusive.
-
-The following code demonstrates creating, accessing, and modifying slices:
-
-```zig
-const std = @import("std");
-const expectEqual = std.testing.expectEqual;
-
-test "slice" {
-    var array = [_]u8{ 1, 2, 3, 4, 5 };
-    try expectEqual(array.len, 5);
-
-    // This slice is immutable.
-    const slice = array[2..4];
-    try expectEqual(slice.len, 2);
-    try expectEqual(slice[0], 3);
-    try expectEqual(slice[1], 4);
-
-    // This slice is mutable because it was
-    // created from a pointer to an array.
-    const arrayPtr = &array;
-    const slice2 = arrayPtr[2..4];
-    // The slice and array share memory,
-    // so modifying one also modifies the other.
-    slice2[0] = 30;
-    try expectEqual(array[2], 30);
-    array[3] = 40;
-    try expectEqual(array[3], 40);
 }
 ```
 
@@ -1774,6 +1781,40 @@ Here is an example:
 Like `while` expressions, `for` expressions
 can use `break` and `continue` statements
 which can optionally be followed by a label to jump to an outer loop.
+
+### Labeled Blocks
+
+Labeled blocks turn a block into an expression with a value.
+They can be used to compute the value of a variable or a switch branch.
+
+The syntax for labeled blocks was borrowed from {% aTargetBlank
+"https://doc.rust-lang.org/reference/expressions/loop-expr.html#labelled-block-expressions",
+"Rust" %}.
+
+The value of a labeled block is specified using a `break` statement
+that includes the block label.
+
+By convention, must block labels in Zig are "blk".
+
+For example:
+
+```zig
+const std = @import("std");
+const expectEqual = std.testing.expectEqual;
+
+test "labeled block" {
+    const s1 = blk: {
+        const ms = std.time.milliTimestamp();
+        const s = @divFloor(ms + 500, 1000);
+        break :blk s;
+    };
+
+    // Often labeled blocks can be replaced by a single expression.
+    const s2 = @divFloor(std.time.milliTimestamp() + 500, 1000);
+
+    try expectEqual(s1, s2);
+}
+```
 
 ## Error Handling
 
