@@ -966,6 +966,7 @@ const std = @import("std");
 const expectEqualStrings = std.testing.expectEqualStrings;
 
 test "basic" {
+    // s is a pointer to the string.
     const s = "Hello, world!";
     const T = @TypeOf(s);
     // 13 is the length and 0 is the sentinel (terminator) value.
