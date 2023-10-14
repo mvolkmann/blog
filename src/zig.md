@@ -783,6 +783,8 @@ Slices are similar to arrays, but their length is not known until run-time.
 A slice is created by referencing (not copying) a subset of
 an array or other slice using range syntax.
 
+Arrays own their data, whereas slices are pointers to data they do not own.
+
 Both arrays and slices have a `len` field that holds their length.
 The length cannot be changed.
 For a dynamically-sized array, consider using
