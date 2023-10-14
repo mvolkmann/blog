@@ -232,7 +232,7 @@ a `src` directory containing the file `main.zig`.
 The file `build.zig` is a build script that uses the compiler API.
 Modify this file to change the characteristics of executable that is produced.
 
-The file `main.sig` is the starting point of the project.
+The file `main.zig` is the starting point of the project.
 Like many `.zig` files, this begins by importing the standard library
 with `const std = @import("std");`
 It also defines the main function with `pub fn main() !void { ... }`.
@@ -240,7 +240,41 @@ The `!` means the function can return an error value.
 If an error is returned from the `main` function,
 it panics and prints a stack trace.
 
-To run the app, enter `zig build run`.
+Zig source files can import other source files
+in order to access their `pub` values, including functions.
+
+```zig
+// In the file my_module.zig:
+pub const gretzky = 99;
+
+pub fn double(n: i32) i32 {
+    return n * 2;
+}
+
+// In the file main.zig:
+const std = @import("std");
+// mod is a struct instance whose fields
+// are the pub values in my_module.zig.
+const mod = @import("my_module.zig");
+
+pub fn main() !void {
+    std.debug.print("{}\n", .{mod.gretzky}); // 99
+
+    const value = 3;
+    const result = mod.double(value);
+    std.debug.print("{}\n", .{result}); // 6
+}
+```
+
+To build and run the app, enter `zig build run`.
+
+The object files produced by the compiler
+are stored in the `zig-cache` directory.
+This allows subsequent builds to avoid recompiling source files
+that have not changed since the last build.
+
+The executable file produced by a build
+is stored in `zig-out/bin/{project-name}`.
 
 ## Comments
 
