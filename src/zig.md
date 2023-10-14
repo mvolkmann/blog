@@ -965,6 +965,13 @@ The following code demonstrates both approaches.
 const std = @import("std");
 const expectEqualStrings = std.testing.expectEqualStrings;
 
+test "basic" {
+    const s = "Hello, world!";
+    const T = @TypeOf(s);
+    // 13 is the length and 0 is the sentinel (terminator) value.
+    try expectEqualStrings(@typeName(T), "*const [13:0]u8");
+}
+
 test "bufPrint" {
     var buffer: [20]u8 = undefined;
     const result = try std.fmt.bufPrint(
@@ -3173,9 +3180,9 @@ to achieve better error handling.
 
 ### Metaprogramming Builtin Functions (10)
 
-- `@This` -
-- `@Type` -
-- `@TypeOf` -
+- `@This` - returns the type of the containing `enum`, `struct`, or `union` 
+- `@Type` - returns the type that corresponds to an instance of the `std.builtin.Type` struct
+- `@TypeOf` - returns the type of a given value
 
 - `@call` - calls a given function with arguments in a tuple
 
@@ -3208,8 +3215,8 @@ to achieve better error handling.
 - `@field` -
 - `@hasDecl` -
 - `@hasField` -
-- `@typeInfo` -
-- `@typeName` -
+- `@typeInfo` - returns an instance of the `std.builtin.Type` struct that describes a given type
+- `@typeName` - returns the string name of a given type
 - `@unionInit` -
 
 ### Other Builtin Functions (11)
