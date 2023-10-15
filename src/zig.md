@@ -4576,29 +4576,29 @@ The following is a list of the current checks from the {% aTargetBlank
 "https://ziglang.org/documentation/0.11.0/#Undefined-Behavior",
 "Undefined Behavior" %} section of the Zig Language Reference:
 
-- Reaching Unreachable Code
-- Index out of Bounds
-- Cast Negative Number to Unsigned Integer
-- Cast Truncates Data
-- Integer Overflow
-- Default Operations
-- Standard Library Math Functions
-- Builtin Overflow Functions
-- Wrapping Operations
-- Exact Left Shift Overflow
-- Exact Right Shift Overflow
-- Division by Zero
-- Remainder Division by Zero
-- Exact Division Remainder
-- Attempt to Unwrap Null
-- Attempt to Unwrap Error
-- Invalid Error Code
-- Invalid Enum Cast
-- Invalid Error Set Cast
-- Incorrect Pointer Alignment
-- Wrong Union Field Access
-- Out of Bounds Float to Integer Cast
-- Pointer Cast Invalid Null
+- attempt to unwrap error
+- attempt to unwrap null
+- builtin overflow functions
+- cast negative number to unsigned integer
+- cast truncates data
+- default operations
+- division by zero
+- exact division remainder
+- exact left shift overflow
+- exact right shift overflow
+- incorrect pointer alignment
+- index out of bounds
+- integer overflow
+- invalid enum cast
+- invalid error code
+- invalid error set cast
+- out of bounds float to integer cast
+- pointer cast invalid null
+- reaching unreachable code
+- remainder division by zero
+- standard library math functions
+- wrapping operations
+- wrong union field access
 
 ## Stack Example
 
