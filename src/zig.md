@@ -113,6 +113,8 @@ which means it is implemented in Zig.
 - {% aTargetBlank "https://www.uber.com/blog/bootstrapping-ubers-infrastructure-on-arm64-with-zig/",
   "Uber" %} uses Zig to build its C++ applications for x86_64 and arm64.
 
+- {% aTargetBlank "https://mitchellh.com/ghostty", "Ghosty" %} terminal emulator
+
 ## Run-time Checks
 
 Zig provides the following run-time checks:
@@ -993,6 +995,18 @@ const String = []const u8;
 
 Literal strings are delimited by double quotes.
 
+Multi-line strings precede each line with double backslashes.
+A newline character is added at the end of each line except the last.
+For example:
+
+```zig
+const multiline =
+    \\Out of memory.
+    \\We wish to hold the whole sky,
+    \\But we never will.
+;
+```
+
 Zig only provides the ability to operate on strings as byte arrays.
 There are Zig libraries that provide additional capabilities
 such as operating on Unicode characters.
@@ -1026,6 +1040,16 @@ test "basic" {
     const T = @TypeOf(s);
     // 13 is the length and 0 is the sentinel (terminator) value.
     try expectEqualStrings(@typeName(T), "*const [13:0]u8");
+}
+
+test "multiline" {
+    const singleLine = "Out of memory.\nWe wish to hold the whole sky,\nBut we never will.";
+    const multiline =
+        \\Out of memory.
+        \\We wish to hold the whole sky,
+        \\But we never will.
+    ;
+    try expectEqualStrings(singleLine, multiline);
 }
 
 test "bufPrint" {
@@ -5061,7 +5085,3 @@ what does it mean when the name of a built-in function begins with at symbol, fo
 Runtime safety checks won’t protect you from every possible mistake, but they come close. More safety checks are planned in the future.
 
 does the undefined behavior section of the official docs list all the current runtime safety checks?
-
-Did you document multiline string literals?
-
-Add the Ghosty terminal emulator to your list of Ziggy’s cases.
