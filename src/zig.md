@@ -4569,6 +4569,37 @@ pub fn main() !void {
 }
 ```
 
+## Safety Checks
+
+The Zig compiler detects many code issues and run-time safety checks catch even more.
+The following is a list of the current checks from the {% aTargetBlank
+"https://ziglang.org/documentation/0.11.0/#Undefined-Behavior",
+"Undefined Behavior" %} section of the Zig Language Reference:
+
+- Reaching Unreachable Code
+- Index out of Bounds
+- Cast Negative Number to Unsigned Integer
+- Cast Truncates Data
+- Integer Overflow
+- Default Operations
+- Standard Library Math Functions
+- Builtin Overflow Functions
+- Wrapping Operations
+- Exact Left Shift Overflow
+- Exact Right Shift Overflow
+- Division by Zero
+- Remainder Division by Zero
+- Exact Division Remainder
+- Attempt to Unwrap Null
+- Attempt to Unwrap Error
+- Invalid Error Code
+- Invalid Enum Cast
+- Invalid Error Set Cast
+- Incorrect Pointer Alignment
+- Wrong Union Field Access
+- Out of Bounds Float to Integer Cast
+- Pointer Cast Invalid Null
+
 ## Stack Example
 
 This example is based on the Primeagen video at {% aTargetBlank
@@ -5083,5 +5114,3 @@ function names that begin with @ built-in functions.
 some built-in functions do things that user created functions cannot.
 what does it mean when the name of a built-in function begins with at symbol, followed by an uppercase letter?
 Runtime safety checks won’t protect you from every possible mistake, but they come close. More safety checks are planned in the future.
-
-does the undefined behavior section of the official docs list all the current runtime safety checks?
