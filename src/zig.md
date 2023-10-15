@@ -30,7 +30,7 @@ even if they have no Zig code and only use C and/or C++ code.
 
 Zig is suitable for applications that care deeply about
 performance, binary size, and/or memory usage.
-Often these concerns justify the tedium and verbosity of
+Often these concerns justify the tedium of
 manual memory management that is required
 due to lack of automated garbage collection.
 
@@ -64,6 +64,12 @@ Zig includes:
 - a test runner
 - ability to target all platforms supported by LLVM, including WebAssembly
 
+Zig is not an object-oriented (OO) programming language.
+There is no support for defining classes, using inheritance,
+or using polymorphism.
+However, Zig does support defining structs with methods
+and for many applications that is close enough to OO.
+
 Andrew Kelly began work on Zig in August, 2015 (first commit).
 The first public release was in February, 2016.
 
@@ -90,6 +96,9 @@ which means it is implemented in Zig.
   runtime and toolchain, is primarily written in Zig.
   Bun has many advantages over Node.js and Deno including much better performance.
 
+- {% aTargetBlank "https://tigerbeetle.com", "TigerBeetle" %} is
+  "the world's fastest financial accounting database".
+
 - {% aTargetBlank "https://www.roc-lang.org", "Roc" %} -
   "a fast, friendly, functional language"
   "Roc's compiler has always been written in Rust.
@@ -98,6 +107,9 @@ which means it is implemented in Zig.
 
 - {% aTargetBlank "https://machengine.org", "Mach" %} -
   a game engine and graphics toolkit, is implemented in Zig.
+
+- {% aTargetBlank "https://www.uber.com/blog/bootstrapping-ubers-infrastructure-on-arm64-with-zig/",
+  "Uber" %} uses Zig to build its C++ applications for x86_64 and arm64.
 
 ## Run-time Checks
 
@@ -777,6 +789,8 @@ Here is a an example that demonstrates all of these features.
 ```zig
 const std = @import("std");
 const print = std.debug.print;
+const expect = std.testing.expect;
+const expectEqual = std.testing.expectEqual;
 
 // A type must be specified for an enum
 // in order to override its default ordinal values.
@@ -802,13 +816,13 @@ const Color = enum(u8) {
     }
 };
 
-pub fn main() void {
+test "enum" {
     const c = Color.green;
     print("c = {}\n", .{c}); // enum_demo.main.Color.green
-    print("c = {}\n", .{@intFromEnum(c)}); // 8
-    print("green primary? {}\n", .{c.isPrimary()}); // false
-    print("green primary? {}\n", .{Color.isPrimary(c)}); // false
-    print("yellow primary? {}\n", .{Color.yellow.isPrimary()}); // true
+    try expectEqual(@intFromEnum(c), 8);
+    try expect(!c.isPrimary());
+    try expect(!Color.isPrimary(c));
+    try expect(Color.yellow.isPrimary());
 }
 ```
 
