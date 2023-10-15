@@ -2188,7 +2188,7 @@ stored in memory that is not part of the stack or the heap.
 A function can create a literal string and return it
 since it will not be freed when the function exits.
 
-## anytype
+## Duck Typing with anytype
 
 Functions can have parameters with the type `anytype`.
 As the name implies, this allows any kind of value to be passed.
