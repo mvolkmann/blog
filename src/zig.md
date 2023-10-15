@@ -2160,10 +2160,16 @@ Zig does not support throwing exceptions.
 To call a function that returns a value and not use it, assign it to `_`.
 For example, `_ = someFn();`
 
-When a function returns, all memory allocations made in the function are freed.
+When a function returns, all stack memory allocations
+made in the function are freed.
 A common way to allow a function to modify data
 that is not freed when the function returns is to
 pass a pointer to data owned by the caller and modify that inside the function.
+
+Literal strings are known and compile-time and
+stored in memory that is not part of the stack or the heap.
+A function can create a literal string and return it
+since it will not be freed when the function exits.
 
 ## comptime Keyword
 
