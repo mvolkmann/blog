@@ -4488,6 +4488,43 @@ It can also be used only use `std.testing.allocator` when running in a test.
 
 Enter `zig test --help` to see options that affect tests.
 
+## Command-line Arguments
+
+When running a Zig programming using `zig run`,
+command-line arguments must be preceded by `--`.
+For example, `zig run commmand_line_args_demo.zig -- foo bar`.
+The first argument will be the path to the executable
+and the remaining arguments will be the actual command-line arguments.
+
+
+The following code demonstrates getting command-line arguments
+and copying them into an `ArrayList` to simply using them.
+
+```zig
+const std = @import("std");
+const print = std.debug.print;
+const allocator = std.heap.page_allocator;
+
+fn getCmdLineArgs(list: anytype) !void {
+    var iter = std.process.args();
+    while (iter.next()) |arg| {
+        try list.append(arg);
+    }
+}
+
+pub fn main() !void {
+    var args = std.ArrayList([]const u8).init(allocator);
+    defer args.deinit();
+    try getCmdLineArgs(&args);
+
+    print("arg count is {d}\n", .{args.items.len});
+    print("second arg is {s}\n", .{args.items[1]});
+    for (args.items) |arg| {
+        print("{s}\n", .{arg});
+    }
+}
+```
+
 ## Stack Example
 
 This example is based on the Primeagen video at {% aTargetBlank
@@ -5015,5 +5052,3 @@ Did you document multiline string literals?
 Add the Ghosty terminal emulator to your list of Ziggy’s cases.
 
 describe difference between defer and errdefer.
-
-std.process.args to get command line args. Learn how to use this.
