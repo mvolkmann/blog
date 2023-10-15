@@ -54,6 +54,8 @@ Zig emphasizes:
   In place of these, Zig uses code that runs at compile-time,
   indicated by the `comptime` keyword.
 
+- Having only one way to accomplish each task.
+
 Zig includes:
 
 - a package manager
@@ -725,6 +727,7 @@ test "struct pointers" {
     const dogPtr = &dog; // single-item pointer
     try expectEqual(dog.name, "Comet");
     try expectEqual(dogPtr.*.name, "Comet");
+    try expectEqual(dogPtr.name, "Comet"); // automatic dereferencing
 
     // Pointers can only be used to modify a struct property
     // if the struct instance is not const.
@@ -2185,6 +2188,92 @@ stored in memory that is not part of the stack or the heap.
 A function can create a literal string and return it
 since it will not be freed when the function exits.
 
+## anytype
+
+Functions can have parameters with the type `anytype`.
+As the name implies, this allows any kind of value to be passed.
+However, the compiler will verify that the value
+can be used correctly by the function body.
+This supports "duck typing".
+
+The following code demonstrates using `anytype` for duck typing.
+
+```zig
+const std = @import("std");
+const expectApproxEqAbs = std.testing.expectApproxEqAbs;
+
+const String = []const u8;
+
+const Animal = struct {
+    name: String,
+    top_speed: u32, // miles per hour
+};
+
+const Car = struct {
+    make: String,
+    model: String,
+    year: u16,
+    top_speed: u32, // miles per hour
+};
+
+const Wrong = struct {
+    top_speed: f32, // not expected type of u32
+};
+
+// The first argument must be a struct with
+// a top_speed field that is an integer.
+fn travelTime(thing: anytype, distance: u32) !f32 {
+    // We could use @TypeOf(thing) and functions like
+    // std.meta.trait.hasField and std.meta.trait.isIntegral
+    // to verify that "thing" meets our criteria.
+    // However, there is no need to do that because the compiler will
+    // verify that "thing" has a "top_speed" field that is an integer
+    // just because it is used that way here.
+    const s: f32 = @floatFromInt(thing.top_speed);
+
+    // We can't eliminate the local variable d because
+    // @floatFromInt requires that we specify the result type.
+    const d: f32 = @floatFromInt(distance);
+
+    return d / s;
+}
+
+test "anytype" {
+    const cheetah = Animal{
+        .name = "cheetah",
+        .top_speed = 75,
+    };
+    const distance = 20; // miles
+    const tolerance = 0.001;
+    try expectApproxEqAbs(
+        try travelTime(cheetah, distance),
+        0.2667,
+        tolerance,
+    );
+
+    const ferrari = Car{
+        .make = "Ferrari",
+        .model = "F40",
+        .year = 1992,
+        .top_speed = 201,
+    };
+    try expectApproxEqAbs(
+        try travelTime(ferrari, distance),
+        0.0995,
+        tolerance,
+    );
+
+    // This results in a compile error which is good because
+    // the first argument is struct whose top_speed field is not an integer.
+    // const wrong = Wrong{ .top_speed = 1.0 };
+    // _ = try travelTime(wrong, distance);
+
+    // This results in a compile error which is good because
+    // the first argument is not a struct with a "top_speed" field.
+    // _ = try travelTime("wrong", distance);
+}
+```
+
 ## comptime Keyword
 
 The `comptime` keyword marks items that must be known at compile-time.
@@ -2548,7 +2637,39 @@ having to remember to free it after all that code.
 
 - `std.heap.ArenaAllocator`
 
-  Will use an arena to amortize the freeing of memory, you alloc, you free all at once
+  This uses an "arena" to handle the task of freeing the memory
+  of everything allocated by it when it goes out of scope.
+  This allows allocating memory for many things
+  that don’t need to be individually freed.
+  All that is required is to use `defer arena.deinit();` one time
+  right after the `ArenaAllocator` is created.
+
+  The following code demonstrates using this allocator.
+
+  ```zig
+  const std = @import("std");
+  const base_allocator = std.testing.allocator;
+  const expectEqual = std.testing.expectEqual;
+
+  test "ArenaAllocator" {
+      var arena = std.heap.ArenaAllocator.init(base_allocator);
+      defer arena.deinit();
+      const allocator = arena.allocator();
+
+      var list1 = std.ArrayList([]const u8).init(allocator); // no need to deinit
+      try list1.append("one");
+      try list1.append("two");
+      try list1.append("three");
+      try expectEqual(list1.items.len, 3);
+
+      var list2 = std.ArrayList(u8).init(allocator); // no need to deinit
+      try list2.append(7);
+      try list2.append(13);
+      try expectEqual(list2.items.len, 2);
+
+      // No memory is leaked even though we didn't deinit the lists.
+  }
+  ```
 
 - `std.heap.GeneralPurposeAllocator`
 
@@ -4531,21 +4652,7 @@ To run the resulting executable, enter `./hello`.
 
 ## CONTINUE CLEANUP OF EVERYTHING BELOW HERE!
 
-About pointer dereference syntax ...
-"""
-ident.* does seem weird at first glance, but it allows for much nicer chaining - instead of something like (*foo).bar (or even doing what C does and introducing a whole new operator -> for that special case), you can just do foot.bar, and the nice thing is that it works over multiple levels of indirection (even in C before I've had to do (\*foo)->bar).
-Regarding ], I assume you're talking about the calls to std.log.info. Those are creating empty tuples for the format arguments - std.log.info takes two arguments, a format string and a tuple of the values to interpolate into it, much like e.g. printf in C. Quite often in the video he actually uses {×} to specify a format argument. An alternative syntax here would be to use varargs
-
-in an earlier phase of its design Zig did have varargs, and they were used here, but for a few reasons it was decided to remove them from the language and replace them with tuples in cases like these. Yes, it results in a few extra characters when you're logging constant messages, but in practice that's not really an issue, and removing varargs had advantages for the language from the perspective of simplicity.
-
-I don't know why this chaining you consider to be better. To me, it's just different, not better or worse. And bringing confusion without having significan... Read more
-
-how do you consider (_foo) ->bar (or worse, (_(\*foo)).bar) to be better than foo.\*\* bar? This situation can get even worse with more complex structures,
-"""
-
 Learn about async/await.
-Zig strives for having only one way to accomplish each task.
-Learn about arena allocators.
 
 - Functions can specify the type of errors they can return by preceding the
   ! in the return type with an error type or probably an error set.
@@ -4910,5 +5017,3 @@ Add the Ghosty terminal emulator to your list of Ziggy’s cases.
 describe difference between defer and errdefer.
 
 std.process.args to get command line args. Learn how to use this.
-
-Maybe the purpose of std.heap.ArenaAllocator is that you can use it for allocating many things that don’t need to be individually freed. You just defer arena.deinit() one time right after it is created.
