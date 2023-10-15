@@ -959,6 +959,26 @@ test "slice" {
 }
 ```
 
+## defer and errdefer
+
+The `defer` keyword specifies an expression to evaluate
+when the containing block exits.
+This is often used to deallocate memory allocated on the preceding line
+or perform some other kind of cleanup.
+For example:
+
+```zig
+var allocator = std.heap.page_allocator;
+var myList = std.ArrayList(10).init(allocator);
+defer myList.deinit();
+```
+
+Defer expressions cannot use the "return" keyword.
+
+The `errdefer` keyword specifies an expression to evaluate
+if an error is returned from the current scope.
+See the example in the "Error Handling" section.
+
 ## Strings
 
 Strings are represented by arrays of type
@@ -1357,7 +1377,9 @@ pub const PathManager = struct {
         const dir = std.fs.cwd();
         const file = try dir.openFile(path, .{ .mode = .read _only });
         defer file.close();
+
         const metadata = try file.metadata();
+
         switch (metadata.kind()) {
             std.fs.File.Kind.file => {
                 const abs_path = try dir.realpathAlloc(self.allocator, path);
@@ -2110,8 +2132,6 @@ test "catch" {
 }
 
 // This function differs from "double" in that in uses "errdefer".
-// Defer expressions cannot use the "return" keyword,
-// but they can execute code that typically performs some kind of cleanup.
 fn doubleErrdefer(n: i8) EvalError!i8 {
     errdefer print("double returned an error for {d}\n", .{n});
     return double(n);
@@ -4795,11 +4815,6 @@ To create a new library, enter `zip init-lib`.
 Data types include u8 (single byte unsigned integer), …
 Strings are delimited with double quotes.
 
-The `defer` keyword specifies a function to be called when the function it is inside exits.
-This is often used to deallocate memory allocated on the line before.
-For example, `var allocator = std.heap.page_allocator; var myList = std.ArrayList(10).init(allocator); defer myList.deinit();`
-Also see `errdefer` which specifies a function to call if an error occurs in the current scope.
-
 Constant and variable declarations must be initialized to some value.
 When can the type be inferred from the initial value?
 If the initial value is “undefined” (means uninitialized), does the compiler enforce that it is assigned before it is used? I assume this is different from making it nullable with a “?” before the type.
@@ -5050,5 +5065,3 @@ does the undefined behavior section of the official docs list all the current ru
 Did you document multiline string literals?
 
 Add the Ghosty terminal emulator to your list of Ziggy’s cases.
-
-describe difference between defer and errdefer.
