@@ -713,8 +713,10 @@ test "pointers" {
     // Iterate over the dogs and increment their age.
     // &dogs gives a many-item pointer.
     for (&dogs) |*d| {
-        // d.*.age += 1; // works
-        d.age += 1; // also works and is shorter.
+        // d.*.age += 1; // This works.
+        d.age += 1; // But this also works and is shorter.
+        // In C we could use "d->age++;",
+        // but Zig doesn't support the arrow or ++ operators.
     }
     try expectEqual(dogs[0].age, 4);
     try expectEqual(dogs[1].age, 8);
@@ -1193,8 +1195,8 @@ fn square(n: f32) f32 {
 }
 
 const Point = struct {
-    x: f32,
-    y: f32,
+    x: f32 = 1, // default value
+    y: f32 = 2, // default value
 
     pub fn distanceToOrigin(self: Point) f32 {
         return sqrt(square(self.x) + square(self.y));
@@ -1207,13 +1209,43 @@ const Point = struct {
     }
 };
 
-test "Point struct" {
-    const p1 = Point{ .x = 3, .y = 4 };
-    try expect(p1.distanceToOrigin() == 5);
+// Typically this would be a method on the Point struct,
+// but we want to demonstrate passing a pointer to a struct
+// to enable modifying fields.
+fn translate(pt: *Point, dx: f32, dy: f32) void {
+    pt.x += dx;
+    pt.y += dy;
+}
 
-    const p2 = Point{ .x = 6, .y = 8 };
-    try expect(p1.distanceTo(p2) == 5);
-    try expect(Point.distanceTo(p1, p2) == 5);
+test "Point struct" {
+    var p1 = Point{}; // modified later
+    try expectEqual(p1.x, 1);
+    try expectEqual(p1.y, 2);
+
+    const p2 = Point{ .y = 3 };
+    try expectEqual(p2.x, 1);
+    try expectEqual(p2.y, 3);
+
+    const p3 = Point{ .x = 3, .y = 4 };
+    try expectEqual(p3.distanceToOrigin(), 5);
+
+    const p4 = Point{ .x = 6, .y = 8 };
+    try expectEqual(p3.distanceTo(p4), 5);
+    try expectEqual(Point.distanceTo(p3, p4), 5);
+
+    // This iterates over all the fields of the Point struct,
+    // prints the name, the type, and the value in the p1 instance.
+    print("\n", .{});
+    // TODO: Why does this only work with "inline"?
+    inline for (std.meta.fields(@TypeOf(p1))) |field| {
+        print("found field {s} with type {s}\n", .{ field.name, @typeName(field.type) });
+        print("value in p1 is {}\n", .{@as(field.type, @field(p1, field.name))});
+    }
+
+    // Passing a pointer so the struct instance can be modified.
+    translate(&p1, 2, 3);
+    try expectEqual(p1.x, 3);
+    try expectEqual(p1.y, 5);
 }
 ```
 
@@ -2086,15 +2118,19 @@ Anonymous functions (lambdas) are not supported.
 For the rationale, see {% aTargetBlank
 "https://github.com/ziglang/zig/issues/1717", "issue 1717" %}.
 
-Marking a function as `pub` makes it available outside its source file.
+Marking a function as `pub` makes it available
+to be imported from outside its source file.
+
+The convention for function names is to use camelCase.
 
 The parameter list is a comma-separated list of parameter declarations.
 The syntax for each parameter declaration is `{name}: {type}`.
 
-The convention for function names is to use camelCase.
+Zig does not support "vararg" functions,
+so functions that would have a variable number of arguments
+in other languages take a literal array (`.{}`) instead.
 
-When an error occurs in a function, an error `enum` value is returned.
-Zig does not support throwing exceptions.
+Function parameters cannot be modified.
 
 The return type syntax is `[error-type][!][return-type]`.
 For example:
@@ -2104,14 +2140,16 @@ For example:
 - `anyerror!i32` means an integer or any kind of error is returned
 - `MyErrorSet!i32` means an integer or one of the errors in `MyErrorSet` is returned
 
-Function parameters cannot be modified.
+When an error occurs in a function, an error `enum` value is returned.
+Zig does not support throwing exceptions.
 
 To call a function that returns a value and not use it, assign it to `_`.
 For example, `_ = someFn();`
 
-Zig does not support "vararg" functions,
-so functions that would have a variable number of arguments
-in other languages take a literal array (`.{}`) instead.
+When a function returns, all memory allocations made in the function are freed.
+A common way to allow a function to modify data
+that is not freed when the function returns is to
+pass a pointer to data owned by the caller and modify that inside the function.
 
 ## comptime Keyword
 
