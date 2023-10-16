@@ -1052,6 +1052,14 @@ test "multiline" {
     try expectEqualStrings(singleLine, multiline);
 }
 
+test "starts and ends with" {
+    const s = "abcde";
+    try expect(std.mem.startsWith(u8, s, "ab"));
+    try expectStringStartsWith(s, "ab");
+    try expect(std.mem.endsWith(u8, s, "de"));
+    try expectStringEndsWith(s, "de");
+}
+
 test "bufPrint" {
     var buffer: [20]u8 = undefined;
     const result = try std.fmt.bufPrint(
