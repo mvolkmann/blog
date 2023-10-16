@@ -1340,8 +1340,8 @@ test "strings" {
 
 ## Structs
 
-A `struct` is a custom type that holds a collection of fields
-and optional methods.
+A `struct` is a custom type that holds a collection of
+optional fields and optional methods.
 Struct fields and methods cannot be made private.
 They are always visible outside the `struct` definition.
 
@@ -1368,6 +1368,14 @@ const Point = struct {
         const dx = self.x - other.x;
         const dy = self.y - other.y;
         return sqrt(square(dx) + square(dy));
+    }
+
+    // This function is called on the struct name instead of an instance
+    // because its first parameter is not an instance.
+    // Invoke this with Point.identify("I am a");
+    // to print "I am a Point."
+    pub fn identify(prefix: []const u8) void {
+        std.debug.print("{s} Point.\n", .{prefix});
     }
 };
 
