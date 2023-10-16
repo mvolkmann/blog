@@ -440,21 +440,42 @@ passed to functions, and returned from functions.
 Zig supports a large number of primitive types.
 
 - signed integers: `i8`, `i16`, `i32`, `i64`, `i128`
+
 - unsigned integers: `u8`, `u16`, `u32`, `u64`, `u128`
+
   The `u8` type can be used to hold a single character.
   Single character literals are enclosed in single quotes.
+
 - floating point: `f16`, `f32`, `f64`, `f80`, `f128`
+
 - `isize`, `usize`
+
+  These are signed and unsigned integers
+  whose size is the pointer size of the current CPU.
+
 - C types: `c_char`, `c_short`, `c_ushort`, `c_int`, `c_uint`,
   `c_long`, `c_ulong`, `c_longlong`, `c_ulonglong`, `c_longdouble`
-- `bool`
+
+- `bool` - boolean
+
 - `anyopaque`
-- `void`
+
+- `void` - no value
+
 - `noreturn`
-- `type`
+
+  This is the type of functions that never finish.
+  It is also the type of `break`, `continue`, `return`, `unreachable`,
+  and the construct `while (true) { … }`.
+
+- `type` - describes a type
+
 - `anyerror`
-- `comptime_int`
-- `comptime_float`
+
+- `comptime_int` and `comptime_float`
+
+  These are the types of compile-time known, literal
+  integer and floating point values.
 
 In addition to these primitive types, "arbitrary bit-width integers can be
 referenced by using an identifier of `i` or `u` followed by digits."
@@ -5149,10 +5170,5 @@ Memory Management
   - std.testing.FailingAllocator
   - DESCRIBE EACH OF THESE
   - ARE THERE MORE PREDEFINED ALLOCATORS?
-
-noreturn
-
-- the type of functions that never finish
-- also the type of break, continue, return, unreachable, and the while construct `while (true) { … }`
 
 A function return type can be a switch expression that determines the actual type returned.
