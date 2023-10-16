@@ -2318,6 +2318,31 @@ test "anytype" {
 }
 ```
 
+The return type of a function can be inferred
+from the type of one of its arguments.
+The following code demonstrates this with a function that
+squares any kind of number, returning the same type.
+
+```zig
+const std = @import("std");
+const expectEqual = std.testing.expectEqual;
+const expectApproxEqAbs = std.testing.expectApproxEqAbs;
+
+// Calls with a non-number do not compile
+// because the "*" cannot be applied to them.
+fn square(x: anytype) @TypeOf(x) {
+    return x * x;
+}
+
+test "function return type inference" {
+    const n: i8 = 2;
+    try expectEqual(square(n), 4);
+
+    const x: f32 = 3.1;
+    try expectApproxEqAbs(square(x), 9.61, 0.001);
+}
+```
+
 ## comptime Keyword
 
 The `comptime` keyword marks items that must be known at compile-time.
@@ -4571,7 +4596,11 @@ pub fn main() !void {
 
 ## Safety Checks
 
-The Zig compiler detects many code issues and run-time safety checks catch even more.
+The Zig compiler detects many code issues
+and run-time safety checks catch even more.
+These safety checks don't flag every possible mistake, but they come close.
+More safety checks are planned in the future.
+
 The following is a list of the current checks from the {% aTargetBlank
 "https://ziglang.org/documentation/0.11.0/#Undefined-Behavior",
 "Undefined Behavior" %} section of the Zig Language Reference:
@@ -5109,8 +5138,3 @@ noreturn
 when running test, use the std.testing.allocator so when tests are run, it will flag when memory is not freed.
 
 A function return type can be a switch expression that determines the actual type returned.
-
-function names that begin with @ built-in functions.
-some built-in functions do things that user created functions cannot.
-what does it mean when the name of a built-in function begins with at symbol, followed by an uppercase letter?
-Runtime safety checks won’t protect you from every possible mistake, but they come close. More safety checks are planned in the future.
