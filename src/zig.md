@@ -2228,6 +2228,7 @@ test "error handling" {
 }
 
 fn safeDouble(n: i8) i8 {
+    // This makes the specific error available in the catch block.
     return double(n) catch |err| {
         print("safeDouble caught {}\n", .{err});
         if (err == EvalError.Negative) return 0;
