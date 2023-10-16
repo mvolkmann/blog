@@ -2240,6 +2240,9 @@ stored in memory that is not part of the stack or the heap.
 A function can create a literal string and return it
 since it will not be freed when the function exits.
 
+Async functions are not currently supported,
+but there are plans to support them in the future.
+
 ## Duck Typing with anytype
 
 Functions can have parameters with the type `anytype`.
@@ -5141,12 +5144,6 @@ Memory Management
   - std.testing.FailingAllocator
   - DESCRIBE EACH OF THESE
   - ARE THERE MORE PREDEFINED ALLOCATORS?
-
-Builtin Functions
-
-- list all of these
-- Async Functions
-- not currently supported, but will be in the future
 
 noreturn
 
