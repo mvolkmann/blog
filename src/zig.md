@@ -4456,7 +4456,7 @@ to achieve better error handling.
 
 -
 
-## Unit Tests
+## Tests
 
 Unit tests can be included in source files
 in order to test the functions they define.
@@ -4478,10 +4478,19 @@ The `expectEquals` function takes two arguments
 which are expressions representing an expected and actual value.
 Using `expectedEquals` provided better failure messages than `equal`.
 
-Other testing functions include `expectApproxEqAbs`, `expectApproxEqRel`,
-`expectEqualDeep`, `expectEqualSentinel`, `expectEqualSlices`,
-`expectEqualStrings`, `expectError`, `expectFmt`,
-`expectStringEndsWith`, and `expectStringStartsWith`.
+Other testing functions include:
+
+- `expectApproxEqAbs` - tests that two numbers are within a given tolerance
+- `expectApproxEqRel` - similar to `expectApproxEqAbs`, but the tolerance is multiplied
+  by the larger of the absolute values of the two numbers being compared
+- `expectEqualDeep` - tests deep equality of arrays, slices, structs, unions, vectors, and more
+- `expectEqualSentinel` - compares sequences that are terminated by a sentinel value
+- `expectEqualSlices` - compares slices
+- `expectEqualStrings` - compares strings
+- `expectError` - compares a value to an expected error
+- `expectFmt` - tests the string produced by inserting arguments into a format string
+- `expectStringEndsWith` - tests whether a ends begins with another
+- `expectStringStartsWith` - tests whether a string begins with another
 
 The functions `expectApproxEqAbs`, `expectApproxEqRel`,
 `expectEqual`, and `expectEqualDeep` all have the parameters
@@ -4532,6 +4541,7 @@ The output includes the following:
 
 To test for memory leaks, use the `std.testing.allocator`
 for all memory allocation.
+This allocation can only be used in `test` blocks.
 
 To run tests in multiple source files,
 create a new source file that imports all of them
@@ -5134,7 +5144,5 @@ noreturn
 
 - the type of functions that never finish
 - also the type of break, continue, return, unreachable, and the while construct `while (true) { … }`
-
-when running test, use the std.testing.allocator so when tests are run, it will flag when memory is not freed.
 
 A function return type can be a switch expression that determines the actual type returned.
