@@ -272,8 +272,8 @@ is stored in `zig-out/bin/{project-name}`.
 Zig uses the terms "package" and "module" interchangeably to refer to a
 collection of public variables and functions that are defined in a source file.
 
-To define a package, create a source file whose file name is the package name
-and prefix all constants and functions to be exposed with the `pub` keyword.
+To define a package, create a source file whose file name is the package name.
+Prefix all constants and functions to be exposed with the `pub` keyword.
 The file can also define non-public variables and functions
 that are only used by other functions defined in the file.
 
@@ -302,19 +302,51 @@ const print = std.debug.print;
 const pkg = @import("my_package.zig");
 
 pub fn main() !void {
-    print("gretzky = {}\n", .{pkg.gretzky});
+    print("gretzky = {}\n", .{pkg.gretzky}); // 99
 
     const value = 3;
     const result = pkg.double(value);
-    print("result = {}\n", .{result});
+    print("result = {}\n", .{result}); // 6
 }
 ```
 
-The Zig standard library uses the same mechanism describe above,
+The Zig standard library uses the same mechanism described above,
 but in a nested fashion.
+Here is a portion of the files in the Zig GitHub repository
+that define the standard library:
 
-TODO: Document how the standard library is implemented by
-TODO: examining https://github.com/ziglang/zig/tree/master/lib/std.
+- `lib`
+  - `std`
+    - `std.zig`
+
+      ```zig
+      pub const array_hash_map = @import("array_hash_map.zig");
+      pub const ArrayHashMap = array_hash_map.ArrayHashMap;
+      pub const ArrayHashMapUnmanaged =
+          array_hash_map.ArrayHashMapUnmanaged;
+      pub const ArrayList = @import("array_list.zig").ArrayList;
+      // more top-level types
+
+      pub const atomic = @import("atomic.zig");
+      // more top-level namespaces from other source files
+
+      // more stuff
+      ```
+
+    - `array_hash_map.zig`: imported by `std.zig`
+    - `array_list.zig`: imported by `std.zig`
+
+    - `atomic.zig`: imported by `std.zig`
+    - `atomic`
+      - `Atomic.zig`: imported by `atomic.zig`
+      - `queue.zig`: imported by `atomic.zig`
+      - `stack.zig`: imported by `atomic.zig`
+
+    - `math.zig`: imported by `std.zig`
+    - `math`
+      - `acos.zig`: imported by `math.zig`
+      - `acosh.zig`: imported by `math.zig`
+      - ... more `.zig` files imported by `math.zig`
 
 ## Comments
 
