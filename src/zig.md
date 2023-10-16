@@ -132,6 +132,7 @@ Zig provides the following run-time checks:
 - {% aTargetBlank "https://ziglang.org", "Zig home page" %}
 - {% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std",
   "Zig Standard Library" %}
+- {% aTargetBlank "https://github.com/ziglang/zig", "Zig GitHub repository" %}
 - {% aTargetBlank "https://blog.logrocket.com/getting-started-zig-programming-language/",
   "Getting started with the Zig programming language" %}
 - {% aTargetBlank "https://ziglings.org", "Ziglings" %} -
@@ -256,32 +257,6 @@ The `!` means the function can return an error value.
 If an error is returned from the `main` function,
 it panics and prints a stack trace.
 
-Zig source files can import other source files
-in order to access their `pub` values, including functions.
-
-```zig
-// In the file my_module.zig:
-pub const gretzky = 99;
-
-pub fn double(n: i32) i32 {
-    return n * 2;
-}
-
-// In the file main.zig:
-const std = @import("std");
-// mod is a struct instance whose fields
-// are the pub values in my_module.zig.
-const mod = @import("my_module.zig");
-
-pub fn main() !void {
-    std.debug.print("{}\n", .{mod.gretzky}); // 99
-
-    const value = 3;
-    const result = mod.double(value);
-    std.debug.print("{}\n", .{result}); // 6
-}
-```
-
 To build and run the app, enter `zig build run`.
 
 The object files produced by the compiler
@@ -291,6 +266,55 @@ that have not changed since the last build.
 
 The executable file produced by a build
 is stored in `zig-out/bin/{project-name}`.
+
+## Packages/Modules
+
+Zig uses the terms "package" and "module" interchangeably to refer to a
+collection of public variables and functions that are defined in a source file.
+
+To define a package, create a source file whose file name is the package name
+and prefix all constants and functions to be exposed with the `pub` keyword.
+The file can also define non-public variables and functions
+that are only used by other functions defined in the file.
+
+For example, the file `my_package.zig` could contains the following:
+
+```zig
+pub const gretzky = 99;
+
+pub fn double(n: i32) i32 {
+    return n * 2;
+}
+```
+
+To import a package, use the builtin function `@import`.
+The file path passed to this function can be absolute, relative,
+or the name of a builtin packages such as "std".
+The `@import` function returns a `struct` instance whose
+fields are the public values defined in the imported file.
+
+For example, to import and use the package defined in `my_package.zig` above
+within the file `main.zig`, write the following:
+
+```zig
+const std = @import("std");
+const print = std.debug.print;
+const pkg = @import("my_package.zig");
+
+pub fn main() !void {
+    print("gretzky = {}\n", .{pkg.gretzky});
+
+    const value = 3;
+    const result = pkg.double(value);
+    print("result = {}\n", .{result});
+}
+```
+
+The Zig standard library uses the same mechanism describe above,
+but in a nested fashion.
+
+TODO: Document how the standard library is implemented by
+TODO: examining https://github.com/ziglang/zig/tree/master/lib/std.
 
 ## Comments
 
