@@ -1715,6 +1715,7 @@ const value = if (condition) 19 else 21;
 An `if` expression can test whether a variable with an optional type
 is currently set to `null`.
 If not, the value is unwrapped and made available in the body.
+For example:
 
 ```zig
 if (variable) |value| {
@@ -1752,6 +1753,18 @@ is currently set to null without unwrapping the value.
 ```zig
 if (variable == null) {
     // code goes here
+}
+```
+
+An `if` expression can test whether a value is an error or a non-error value.
+For example:
+
+```zig
+if (canReturnError(args)) |value| {
+    // handle success
+} else |err| switch (err) {
+    MyErrorSet.FirstCase => // handle this error
+    ...
 }
 ```
 
