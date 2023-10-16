@@ -890,6 +890,8 @@ The upper index of the range can be omitted
 to get all the items from a given index to the end.
 For example, `dice_rolls[2..]`.
 
+It is idiomatic to use the type `usize` for variables that hold array indexes.
+
 The following code demonstrates several operations on arrays.
 
 ```zig
@@ -3451,7 +3453,22 @@ to achieve better error handling.
 - `@cVaStart`
 - `@compileError` -
 - `@compileLog` -
-- `@embedFile` -
+- `@embedFile`
+
+   This reads a file at compile time and embeds the text
+   in the compiled code as if it were a literal string.
+   The file path can be absolute or relative.
+
+   ```zig
+   const std = @import("std");
+   const expectEqualStrings = std.testing.expectEqualStrings;
+
+   test "embedFile" {
+       const data = @embedFile("./file_io/data.txt");
+       try expectEqualStrings(data, "Hello, World!");
+   }
+   ```
+
 - `@export` -
 - `@import` -
 - `@setAlignStack` -
