@@ -134,7 +134,7 @@ Zig provides the following run-time checks:
   "Zig Standard Library" %}
 - {% aTargetBlank "https://blog.logrocket.com/getting-started-zig-programming-language/",
   "Getting started with the Zig programming language" %}
-- {% aTargetBlank "https://github.com/ratfactor/ziglings", "Ziglings" %} -
+- {% aTargetBlank "https://ziglings.org", "Ziglings" %} -
   "A series of tiny broken programs ...
   By fixing them, you'll learn how to read and write Zig code."
 - {% aTargetBlank "https://ziglearn.org", "ziglearn.org" %}
@@ -747,7 +747,7 @@ test "struct pointers" {
         // d.*.age += 1; // This works.
         d.age += 1; // But this also works and is shorter.
         // In C we could use "d->age++;",
-        // but Zig doesn't support the arrow or ++ operators.
+        // but Zig only uses ++ to concatenate arrays.
     }
     try expectEqual(dogs[0].age, 4);
     try expectEqual(dogs[1].age, 8);
