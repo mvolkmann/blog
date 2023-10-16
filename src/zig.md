@@ -2243,6 +2243,36 @@ since it will not be freed when the function exits.
 Async functions are not currently supported,
 but there are plans to support them in the future.
 
+The return type of a function can be inferred
+from the type of one of its arguments.
+The following code demonstrates this with a function that
+squares any kind of number, returning the same type.
+
+```zig
+const std = @import("std");
+const expectEqual = std.testing.expectEqual;
+const expectApproxEqAbs = std.testing.expectApproxEqAbs;
+
+// Calls with a non-number do not compile
+// because the "*" cannot be applied to them.
+fn square(x: anytype) @TypeOf(x) {
+    return x * x;
+}
+
+test "function return type inference" {
+    const n: i8 = 2;
+    try expectEqual(square(n), 4);
+
+    const x: f32 = 3.1;
+    try expectApproxEqAbs(square(x), 9.61, 0.001);
+}
+```
+
+The return type of a function can be determined with a `switch` expression
+For examples of this, see this {% aTargetBlank
+"https://sourcegraph.com/search?q=context:global+lang:Zig+fn.*%5C)%5C+switch&patternType=regexp&sm=1&groupBy=repo",
+"Sourcegraph search" %}.
+
 ## Duck Typing with anytype
 
 Functions can have parameters with the type `anytype`.
@@ -2326,31 +2356,6 @@ test "anytype" {
     // This results in a compile error which is good because
     // the first argument is not a struct with a "top_speed" field.
     // _ = try travelTime("wrong", distance);
-}
-```
-
-The return type of a function can be inferred
-from the type of one of its arguments.
-The following code demonstrates this with a function that
-squares any kind of number, returning the same type.
-
-```zig
-const std = @import("std");
-const expectEqual = std.testing.expectEqual;
-const expectApproxEqAbs = std.testing.expectApproxEqAbs;
-
-// Calls with a non-number do not compile
-// because the "*" cannot be applied to them.
-fn square(x: anytype) @TypeOf(x) {
-    return x * x;
-}
-
-test "function return type inference" {
-    const n: i8 = 2;
-    try expectEqual(square(n), 4);
-
-    const x: f32 = 3.1;
-    try expectApproxEqAbs(square(x), 9.61, 0.001);
 }
 ```
 
