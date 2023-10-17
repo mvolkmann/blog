@@ -491,7 +491,7 @@ are first-class values.
 This means they can be assigned to variables, assigned to struct fields,
 passed to functions, and returned from functions.
 
-## Primitive Types
+### Primitive Types
 
 Zig supports a large number of primitive types.
 
@@ -537,6 +537,42 @@ In addition to these primitive types, "arbitrary bit-width integers can be
 referenced by using an identifier of `i` or `u` followed by digits."
 For example, the identifier `u3` refers to an unsigned 3-bit integer.
 "The maximum allowed bit-width of an integer type is 65535."
+
+### Non-primitive Types
+
+The following is summary of Zig types from the Ziglings exercise #058.
+These will be discussed in more detail in subsequent sections.
+
+| Type          | Meaning                                          |
+|---------------|--------------------------------------------------|
+| `u8`          | single item |
+| `*u8`         | single-item pointer |
+| `[]u8`        | slice (size known at runtime) |
+| `[5]u8`       | array of 5 u8s |
+| `[*]u8`       | many-item pointer (zero or more) |
+| `enum`        | `{a, b}`  set of unique values a and b |
+| `error`       | `{e, f}`  set of unique error values e and f |
+| `struct`      | `{y: u8, z: i32}`  group of values y and z |
+| `union(enum)` | `{a: u8, b: i32}`  single value either u8 or i32 |
+
+<br>
+<aside>
+Values of any of the above types can be assigned as "var" or "const"
+to allow or disallow changes (mutability) via the assigned name:
+
+```zig
+const a: u8 = 5; // immutable
+var b: u8 = 5; //   mutable
+```
+
+We can also make error unions or optional types from any of the above:
+
+```zig
+var a: E!u8 = 5; // can be u8 or error from set E
+var b: ?u8 = 5;  // can be u8 or null
+```
+</aside>
+
 
 ## Variables
 
