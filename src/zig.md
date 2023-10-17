@@ -1493,6 +1493,9 @@ TODO: Maybe add a section just on Zig reflection.
 
 ```
 
+When a struct instance in one variable is assigned to another,
+a copy is created.  To avoid making a copy, get a pointer instead.
+
 A `struct` can be responsible for managing its own memory.
 
 ```zig
@@ -1608,7 +1611,10 @@ A tagged `union` adds the use of an `enum` that
 lists the possible field names s in a union.
 This allows the union to be used in a `switch` statement.
 
-The following code demonstrates using both kinds of unions:
+An "inferred enum" union is a simpler alternative to a tagged `union`
+that is useful when a separate `enum`` is not needed for other purposes.
+
+The following code demonstrates using all three kinds of unions:
 
 ```zig
 const std = @import("std");
@@ -1641,9 +1647,30 @@ test "tagged union" {
     for (ids) |id| {
         switch (id) {
             .name => |name| {
-                print("got Identifier named \"{s}\"\n", .{name});
+                try expectEqual(name, "top secret");
             },
-            .number => |number| print("got Identifier #{d}\n", .{number}),
+            .number => |number| try expectEqual(number, 1234),
+        }
+    }
+}
+
+test "inferred enum union" {
+    const Identifier = union(enum) {
+        name: []const u8,
+        number: i32,
+    };
+
+    const ids = [_]Identifier{
+        Identifier{ .number = 1234 },
+        Identifier{ .name = "top secret" },
+    };
+
+    for (ids) |id| {
+        switch (id) {
+            .name => |name| {
+                try expectEqual(name, "top secret");
+            },
+            .number => |number| try expectEqual(number, 1234),
         }
     }
 }
