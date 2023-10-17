@@ -559,11 +559,12 @@ The convention for variable names is to use snake_case.
 
 The type can be omitted if it can be inferred from the value.
 
-An initial value is required, but can be set to `undefined`.
+An initial value is required, but can be set to `undefined`
+as way of stating that a value will be assigned later.
 The compiler does not currently check that
 the variable is set to another value before it is used.
-This can produce undesirable results or errors,
-so it's best not to set variables to `undefined`.
+Accessing a variable that is still set to `undefined`
+produces unexpected results.
 Runtime checks for this may be added in the future.
 
 The builtin function `@as` performs an explicit type coercion.
