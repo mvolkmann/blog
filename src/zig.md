@@ -567,6 +567,15 @@ Accessing a variable that is still set to `undefined`
 produces unexpected results.
 Runtime checks for this may be added in the future.
 
+There are four kinds of values a variable or expression can have
+that indicate that it doesn't have a real value,
+each with a different meaning.
+
+- `undefined`: no value yet and should not be used until one is assigned
+- `null`: currently has no value, but may have before and may have later
+- `void`: there will never be a value
+- any kind of error: no value because an error occurred
+
 The builtin function `@as` performs an explicit type coercion.
 This can be used to ensure that the initial value is treated as a specific type.
 For example:
