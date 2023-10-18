@@ -239,15 +239,27 @@ At a high level it specifies the following:
 - all other file names should be snake_case
 - directory names should be snake_case
 
-## Zig Projects
+## Projects
 
-To create a new project, create a directory for it, cd to the directory,
+To create a new Zig project, create a directory for it, cd to the directory,
 and enter `zig init-exe`.
 This creates the file `build.zig` and
 a `src` directory containing the file `main.zig`.
 
 The file `build.zig` is a build script that uses the compiler API.
-Modify this file to change the characteristics of executable that is produced.
+Modify this file to change the characteristics of executable that is produced
+and to modify the "steps".
+
+For help on build options, enter `zig build --help` or `-h`.
+
+Build steps are similar to npm `package.json` scripts.
+To see the available steps, enter `zig build --list-steps` or `-l`.
+The steps provided by default are:
+
+- `install`: copies build artifacts to the default install path
+- `uninstall`: removes build artifacts from the default install path
+- `run`: runs the app
+- `test`: runs all the unit tests
 
 The file `main.zig` is the starting point of the project.
 Like many `.zig` files, this begins by importing the standard library
@@ -257,7 +269,19 @@ The `!` means the function can return an error value.
 If an error is returned from the `main` function,
 it panics and prints a stack trace.
 
+To build an executable, enter `zig build`.
+These creates an executable file with same name as the project
+in the `zig-out/bin` directory.
+
+To build an executable for a different OS, add the `--Dtarget` option
+with a value that describes a CPU architecture
+followed by a dash and an operating system.
+For example, to build a Windows executable add `-Dtarget=x86_64-windows`.
+This creates a file with a `.exe` extension in the `zig-out/bin` directory.
+
 To build and run the app, enter `zig build run`.
+
+To build and run tests, enter `zig build test`.
 
 The object files produced by the compiler
 are stored in the `zig-cache` directory.
@@ -2873,30 +2897,9 @@ is less error-prone than allocating memory,
 writing a bunch of code that uses it, and
 having to remember to free it after all that code.
 
-- std.testing.allocator
-
-  This can only be used inside a `test` block.
-  It detects memory leaks.
-
-- std.testing.FailingAllocator
-
-  This fails after a given number of allocations.
-  It is useful for testing how a program handles out of memory conditions.
-  It must be passed another allocator such as `std.testing.allocator`.
-  For example:
-
-  ```zig
-  const testing = std.testing;
-  var allocator = testing.FailingAllocator.init(testing.allocator, 5);
-  ```
-
-- `std.heap.page_allocator`
-
-  Your system/Target page allocator, will give you a whole OS page.
-
 - `std.heap.ArenaAllocator`
 
-  This uses an "arena" to handle the task of freeing the memory
+  This allocator uses an "arena" to handle the task of freeing the memory
   of everything allocated by it when it goes out of scope.
   This allows allocating memory for many things
   that don’t need to be individually freed.
@@ -2930,37 +2933,109 @@ having to remember to free it after all that code.
   }
   ```
 
-- `std.heap.GeneralPurposeAllocator`
+- `std.heap.c_allocator`
 
-  Welp, is a configurable allocator that let you as an extra detect certain errors while using heap
-
-- `std.heap.MemoryPool`
-
-  It allocates one and only one type, but is really fast at it
+  When C code is linked, this allocator allows using `malloc`.
 
 - `std.heap.FixedBufferAllocator`
 
-  Takes a buffer (any buffer) and transform it into an allocator, which is useful to reuse memory while using alloc functions
+  This takes a buffer and transform it into an allocator.
+  It is useful to reuse previously allocated memory.
 
-- `std.heap.c_allocator`
+- `std.heap.GeneralPurposeAllocator`
 
-  If you linked C, you get to use malloc covered in zig info
+  This is a configurable allocator that can
+  detect certain errors while using heap memory.
+
+- `std.heap.LogToWriterAllocator`
+
+  This allocator is similar to `std.heap.LoggingAllocator`, but
+  allows specifying where the log messages should be written (such as a file).
+
+- `std.heap.LoggingAllocator`
+
+  This wraps another allocator and logs all the allocations and frees
+  for debugging purposes.  The following code demonstrates this.
+
+  ```zig
+  const std = @import("std");
+  const String = []const u8;
+  const print = std.debug.print;
+
+  fn log(text: String) void {
+      print("{s}\n", .{text});
+  }
+
+  pub fn main() !void {
+      var gpa = std.heap.GeneralPurposeAllocator(.{}){}; // can't be const
+      var la = std.heap.loggingAllocator(gpa.allocator()); // can't be const
+      const allocator = la.allocator();
+  
+      var list = std.ArrayList(String).init(allocator);
+      defer list.deinit();
+  
+      log("appending red");
+      try list.append("red"); // allocates 128 bytes
+      log("appending orange");
+      try list.append("orange");
+      log("appending yellow");
+      try list.append("yellow");
+      log("appending green");
+      try list.append("green");
+      log("appending blue");
+      try list.append("blue");
+      log("appending purple");
+      try list.append("purple");
+      log("appending white");
+      try list.append("white");
+      log("appending gray");
+      try list.append("gray");
+      log("appending black");
+      try list.append("black"); // allocs 320 bytes & deallocs previous 128 bytes
+      log("appending brown");
+      try list.append("brown");
+  
+      for (list.items) |color| {
+          log(color);
+      }
+
+      log("end of main"); // frees 320 bytes
+  }
+  ```
+
+- `std.heap.MemoryPool`
+
+  This allocator allocates memory for only one type and is very fast.
+  Use this in code that needs to allocate
+  a large number of instances of one type.
+
+- `std.heap.page_allocator`
+
+  This allocator allocates memory in chunks of the OS page size.
 
 - `std.heap.raw_c_allocator`
 
-  Same than above, but raw
+  This allocator asserts that allocations are within `@alignOf(std.c.max_align_t)`
+  and directly calls `malloc`/`free`.
+  It can be used with `ArenaAllocator` and is
+  more optimal in that case than `std.heap.c_allocator``.
 
-- `std.heap.HeapAllocator`
+- `std.heap.SbrkAllocator`
 
-  Sooooo windows Heap Allocator
+  This is a low-level allocator.
+  See {% aTargetBlank "https://en.wikipedia.org/wiki/Sbrk", "sbrk" %}.
+
+- `std.heap.ScopedLoggingAllocator`
+
+  Same as the above but it goes directly to the std.log function, this time with our good ol' scope
+
+- `std.heap.StackFallbackAllocator`
+
+  Some stack, some heap: IF the stack is not enough, go to the heap
 
 - `std.heap.ThreadSafeAllocator`
 
   Covers an allocator in a way that calling it between threads is safe (not exactly fast tho)
-
-- `std.heap.SbrkAllocator`
-
-  use Sbrk to alloc, I don't like it, search for Sbrk
 
 - `std.heap.WasmAllocator`
 
@@ -2970,21 +3045,22 @@ having to remember to free it after all that code.
 
   Dumber WasmAllocator, useful for when you actually wanna do your own memory management via "pages"
 
-- `std.heap.LogToWriterAllocator`
+- `std.testing.allocator`
 
-  Allocs never where this easy to track, writes to a custom writer alloc information (When they happenend and such)
+  This can only be used inside a `test` block.
+  It detects memory leaks.
 
-- `std.heap.LoggingAllocator`
+- `std.testing.FailingAllocator``
 
-  Allocs are logged into std.log
+  This fails after a given number of allocations.
+  It is useful for testing how a program handles out of memory conditions.
+  It must be passed another allocator such as `std.testing.allocator`.
+  For example:
 
-- `std.heap.ScopedLoggingAllocator`
-
-  Same as the above but it goes directly to the std.log function, this time with our good ol' scope
-
-- `std.heap.StackFallbackAllocator`
-
-  Some stack, some heap: IF the stack is not enough, go to the heap
+  ```zig
+  const testing = std.testing;
+  var allocator = testing.FailingAllocator.init(testing.allocator, 5);
+  ```
 
 ## Standard Library
 
