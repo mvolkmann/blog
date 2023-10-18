@@ -279,7 +279,10 @@ This creates a file with a `.exe` extension in the `zig-out/bin` directory.
 
 To build and run the app, enter `zig build run`.
 
-To build and run tests, enter `zig build test`.
+To build and run all the tests, enter `zig build test`.
+This runs all tests found in `main.zig` and all `.zig` files
+that are directly or indirectly imported from `main.zig`.
+Tests in unused `.zig` files are not run.
 
 The object files produced by the compiler
 are stored in the `zig-cache` directory.
@@ -3193,7 +3196,6 @@ The following code demonstrates common operations on HashMaps.
 const std = @import("std");
 const print = std.debug.print;
 const allocator = std.testing.allocator;
-const expect = std.testing.expect;
 const expectEqual = std.testing.expectEqual;
 const expectEqualStrings = std.testing.expectEqualStrings;
 
@@ -3205,7 +3207,7 @@ test "ArrayList" {
 
     try list.append("red");
     try list.appendSlice(&[_]String{ "green", "blue" });
-    try expect(list.items.len == 3);
+    try expectEqual(list.items.len, 3);
 
     // Iterate over the list entries.
     print("\n", .{});
@@ -3219,22 +3221,22 @@ test "ArrayList" {
     try expectEqual(@as(?String, "blue"), list.getLastOrNull());
 
     try expectEqual(@as(?String, "blue"), list.popOrNull());
-    try expect(list.items.len == 2);
+    try expectEqual(list.items.len, 2);
 
     try list.insert(1, "pink");
-    try expect(list.items.len == 3);
+    try expectEqual(list.items.len, 3);
     // Also see the replaceRange method.
 
     const removed = list.orderedRemove(1);
     try expectEqual(@as(String, "pink"), removed);
-    try expect(list.items.len == 2);
+    try expectEqual(list.items.len, 2);
 
     try list.appendNTimes("black", 2);
-    try expect(list.items.len == 4); // length was 2
+    try expectEqual(list.items.len, 4); // length was 2
     try expectEqual(@as(String, "black"), list.getLast());
 
     list.clearAndFree();
-    try expect(list.items.len == 0);
+    try expectEqual(list.items.len, 0);
 }
 ```
 
@@ -3361,7 +3363,7 @@ test "AutoArrayHashMap" {
     try map.put(99, "Gretzky");
     try map.put(4, "Orr");
     try map.put(19, "Ratelle");
-    try expect(map.count() == 3);
+    try expectEqual(map.count(), 3);
 
     // Iterate over the map entries.
     print("\n", .{});
@@ -3388,7 +3390,7 @@ test "AutoHashMap" {
     try map.put(99, "Gretzky");
     try map.put(4, "Orr");
     try map.put(19, "Ratelle");
-    try expect(map.count() == 3);
+    try expectEqual(map.count(), 3);
 
     // Iterate over the map entries.
     print("\n", .{});
@@ -3414,7 +3416,7 @@ test "AutoHashMap" {
 
     const removed = map.remove(99);
     try expect(removed);
-    // try expect(map.get(99) == null);
+    // try expectEqual(map.get(99), null);
     try expectEqual(@as(?[]const u8, null), map.get(99));
 }
 
@@ -3425,7 +3427,7 @@ test "ComptimeStringMap" {
         .{ "Orr", 4 },
         .{ "Ratelle", 19 },
     };
-    try expect(list.len == 3);
+    try expectEqual(list.len, 3);
 
     // Create a compile-time map of string keys to u8 values.
     // Since an immutable map with a fixed size is being created,
@@ -3453,7 +3455,7 @@ test "StringHashMap" {
     try map.put("Gretzky", 99);
     try map.put("Orr", 4);
     try map.put("Ratelle", 19);
-    try expect(map.count() == 3);
+    try expectEqual(map.count(), 3);
 
     // Iterate over the map entries.
     print("\n", .{});
@@ -3504,7 +3506,7 @@ test "ComptimeStringMap" {
         .{ "Orr", 4 },
         .{ "Ratelle", 19 },
     };
-    try expect(list.len == 3);
+    try expectEqual(list.len, 3);
 
     // Create a compile-time map of string keys to u8 values.
     const map = std.ComptimeStringMap(u8, list);
@@ -3543,6 +3545,7 @@ The following code demonstrates common operations on both of these kinds of sets
 const std = @import("std");
 const print = std.debug.print;
 const expect = std.testing.expect;
+const expectEqual = std.testing.expectEqual;
 
 test "BufSet" {
     const allocator = std.testing.allocator;
@@ -3552,7 +3555,7 @@ test "BufSet" {
     try set.insert("Gretzky");
     try set.insert("Orr");
     try set.insert("Ratelle");
-    try expect(set.count() == 3);
+    try expectEqual(set.count(), 3);
 
     // Iterate over the set keys.
     print("\n", .{});
@@ -3585,7 +3588,7 @@ test "EnumSet" {
     set.insert(.orange);
     set.insert(.yellow);
     set.insert(.black);
-    try expect(set.count() == 3);
+    try expectEqual(set.count(), 3);
 
     // Iterate over the set keys.
     print("\n", .{});
@@ -3885,7 +3888,7 @@ test "AutoArrayHashMap" {
     try map.put(99, "Gretzky");
     try map.put(4, "Orr");
     try map.put(19, "Ratelle");
-    try expect(map.count() == 3);
+    try expectEqual(map.count(), 3);
 
     // Iterate over the map entries.
     print("\n", .{});
@@ -3912,7 +3915,7 @@ test "AutoHashMap" {
     try map.put(99, "Gretzky");
     try map.put(4, "Orr");
     try map.put(19, "Ratelle");
-    try expect(map.count() == 3);
+    try expectEqual(map.count(), 3);
 
     // Iterate over the map entries.
     print("\n", .{});
@@ -3938,7 +3941,7 @@ test "AutoHashMap" {
 
     const removed = map.remove(99);
     try expect(removed);
-    // try expect(map.get(99) == null);
+    // try expectEqual(map.get(99), null);
     try expectEqual(@as(?[]const u8, null), map.get(99));
 }
 
@@ -3949,7 +3952,7 @@ test "ComptimeStringMap" {
         .{ "Orr", 4 },
         .{ "Ratelle", 19 },
     };
-    try expect(list.len == 3);
+    try expectEqual(list.len, 3);
 
     // Create a compile-time map of string keys to u8 values.
     // Since an immutable map with a fixed size is being created,
@@ -3977,7 +3980,7 @@ test "StringHashMap" {
     try map.put("Gretzky", 99);
     try map.put("Orr", 4);
     try map.put("Ratelle", 19);
-    try expect(map.count() == 3);
+    try expectEqual(map.count(), 3);
 
     // Iterate over the map entries.
     print("\n", .{});
@@ -4028,7 +4031,7 @@ test "ComptimeStringMap" {
         .{ "Orr", 4 },
         .{ "Ratelle", 19 },
     };
-    try expect(list.len == 3);
+    try expectEqual(list.len, 3);
 
     // Create a compile-time map of string keys to u8 values.
     const map = std.ComptimeStringMap(u8, list);
@@ -4061,6 +4064,7 @@ The following code demonstrates common operations on both of these kinds of sets
 const std = @import("std");
 const print = std.debug.print;
 const expect = std.testing.expect;
+const expectEqual = std.testing.expectEqual;
 
 test "BufSet" {
     const allocator = std.testing.allocator;
@@ -4070,7 +4074,7 @@ test "BufSet" {
     try set.insert("Gretzky");
     try set.insert("Orr");
     try set.insert("Ratelle");
-    try expect(set.count() == 3);
+    try expectEqual(set.count(), 3);
 
     // Iterate over the set keys.
     print("\n", .{});
@@ -4103,7 +4107,7 @@ test "EnumSet" {
     set.insert(.orange);
     set.insert(.yellow);
     set.insert(.black);
-    try expect(set.count() == 3);
+    try expectEqual(set.count(), 3);
 
     // Iterate over the set keys.
     print("\n", .{});
@@ -4363,7 +4367,7 @@ test "AutoArrayHashMap" {
     try map.put(99, "Gretzky");
     try map.put(4, "Orr");
     try map.put(19, "Ratelle");
-    try expect(map.count() == 3);
+    try expectEqual(map.count(), 3);
 
     // Iterate over the map entries.
     print("\n", .{});
@@ -4390,7 +4394,7 @@ test "AutoHashMap" {
     try map.put(99, "Gretzky");
     try map.put(4, "Orr");
     try map.put(19, "Ratelle");
-    try expect(map.count() == 3);
+    try expectEqual(map.count(), 3);
 
     // Iterate over the map entries.
     print("\n", .{});
@@ -4416,7 +4420,7 @@ test "AutoHashMap" {
 
     const removed = map.remove(99);
     try expect(removed);
-    // try expect(map.get(99) == null);
+    // try expectEqual(map.get(99), null);
     try expectEqual(@as(?[]const u8, null), map.get(99));
 }
 
@@ -4427,7 +4431,7 @@ test "ComptimeStringMap" {
         .{ "Orr", 4 },
         .{ "Ratelle", 19 },
     };
-    try expect(list.len == 3);
+    try expectEqual(list.len, 3);
 
     // Create a compile-time map of string keys to u8 values.
     // Since an immutable map with a fixed size is being created,
@@ -4455,7 +4459,7 @@ test "StringHashMap" {
     try map.put("Gretzky", 99);
     try map.put("Orr", 4);
     try map.put("Ratelle", 19);
-    try expect(map.count() == 3);
+    try expectEqual(map.count(), 3);
 
     // Iterate over the map entries.
     print("\n", .{});
@@ -4506,7 +4510,7 @@ test "ComptimeStringMap" {
         .{ "Orr", 4 },
         .{ "Ratelle", 19 },
     };
-    try expect(list.len == 3);
+    try expectEqual(list.len, 3);
 
     // Create a compile-time map of string keys to u8 values.
     const map = std.ComptimeStringMap(u8, list);
@@ -4539,6 +4543,7 @@ The following code demonstrates common operations on both of these kinds of sets
 const std = @import("std");
 const print = std.debug.print;
 const expect = std.testing.expect;
+const expectEqual = std.testing.expectEqual;
 
 test "BufSet" {
     const allocator = std.testing.allocator;
@@ -4548,7 +4553,7 @@ test "BufSet" {
     try set.insert("Gretzky");
     try set.insert("Orr");
     try set.insert("Ratelle");
-    try expect(set.count() == 3);
+    try expectEqual(set.count(), 3);
 
     // Iterate over the set keys.
     print("\n", .{});
@@ -4581,7 +4586,7 @@ test "EnumSet" {
     set.insert(.orange);
     set.insert(.yellow);
     set.insert(.black);
-    try expect(set.count() == 3);
+    try expectEqual(set.count(), 3);
 
     // Iterate over the set keys.
     print("\n", .{});
@@ -4838,19 +4843,19 @@ Here is a basic example:
 
 ```zig
 const std = @import("std");
-const expect = std.testing.expect;
+const expectEqual = std.testing.expectEqual;
 
 pub fn add(a: i32, b: i32) i32 {
     return a + b;
 }
 
 test add { // uses a function name
-    try expect(add(1, 2) == 3); // passes
+    try expectEqual(add(1, 2), 3); // passes
 }
 
 test "add works" { // uses a description string
-    try expect(add(1, 2) == 3); // passes
-    try expect(add(2, 3) == 50); // fails
+    try expectEqual(add(1, 2), 3); // passes
+    try expectEqual(add(2, 3), 50); // fails
 }
 ```
 
@@ -4972,7 +4977,7 @@ This example is based on the Primeagen video at {% aTargetBlank
 const std = @import("std");
 const log = std.debug.print;
 const Allocator = std.mem.Allocator; // memory allocator interface
-const expect = std.testing.expect;
+const expectEqual = std.testing.expectEqual;
 
 // This creates a struct that represents
 // a stack whose values are a given type.
@@ -5031,24 +5036,24 @@ test "stack" {
     defer stack.deinit();
 
     try stack.push(19);
-    try expect(stack.length == 1);
+    try expectEqual(stack.length, 1);
 
     try stack.push(20);
-    try expect(stack.length == 2);
+    try expectEqual(stack.length, 2);
 
     stack.print(); // output is suppressed in tests
 
     var value = stack.pop();
-    try expect(stack.length == 1);
-    try expect(value == 20);
+    try expectEqual(stack.length, 1);
+    try expectEqual(value, 20);
 
     value = stack.pop();
-    try expect(stack.length == 0);
-    try expect(value == 19);
+    try expectEqual(stack.length, 0);
+    try expectEqual(value, 19);
 
     value = stack.pop();
-    try expect(stack.length == 0);
-    try expect(value == null);
+    try expectEqual(stack.length, 0);
+    try expectEqual(value, null);
 }
 ```
 
