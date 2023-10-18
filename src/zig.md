@@ -517,9 +517,9 @@ passed to functions, and returned from functions.
 
 Zig supports a large number of primitive types.
 
-- signed integers: `i8`, `i16`, `i32`, `i64`, `i128`
+- signed integers: `i8`, `i16`, `i32`, `i64`, `i128`, or `i{any-number}`
 
-- unsigned integers: `u8`, `u16`, `u32`, `u64`, `u128`
+- unsigned integers: `u8`, `u16`, `u32`, `u64`, `u128`, or `u{any-number}`
 
   The `u8` type can be used to hold a single character.
   Single character literals are enclosed in single quotes.
