@@ -188,18 +188,6 @@ array items or struct field assignments.
 To build and run this program, enter `zig run hello.zig`.
 
 To create an executable, enter `zig build-exe --name hello hello.zig`.
-To create an executable for a different OS, specify the -target option.
-For example, `-target x86_64-windows`.
-
-To customize the executable, add one of the following compiler flags.
-These cause the executable to be optimized for
-some combination of size, speed, and runtime safety.
-
-| Compiler flag   | Runtime safety checks | Optimizations |
-| --------------- | --------------------- | ------------- |
-| -O Debug        | Yes                   | No            |
-| -O ReleaseSafe  | Yes                   | Yes (speed)   |
-| -O ReleaseSmall | No                    | Yes (size)    |
 
 To run the executable, enter `./hello`.
 
@@ -273,7 +261,17 @@ To build an executable, enter `zig build`.
 These creates an executable file with same name as the project
 in the `zig-out/bin` directory.
 
-To build an executable for a different OS, add the `--Dtarget` option
+To customize the optimizations to be performed, add the `-Doptimize=value`
+where `value` is one of the following:
+
+| `-Doptimize` value | Runtime safety checks | Optimizations |
+| ------------------ | --------------------- | ------------- |
+| `Debug`            | Yes                   | No            |
+| `ReleaseSafe`      | Yes                   | Yes (speed)   |
+| `ReleaseFast`      | No                    | Yes (speed)   |
+| `ReleaseSmall`     | No                    | Yes (size)    |
+
+To build an executable for a different OS, add the `-Dtarget` option
 with a value that describes a CPU architecture
 followed by a dash and an operating system.
 For example, to build a Windows executable add `-Dtarget=x86_64-windows`.
