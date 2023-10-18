@@ -289,6 +289,34 @@ that have not changed since the last build.
 The executable file produced by a build
 is stored in `zig-out/bin/{project-name}`.
 
+### Custom Steps
+
+The `build.zig` file in a project can define additional steps.
+To do this, define what the step does in a function like the following:
+
+```zig
+// First parameter is "self" and second is "progress", but use "_" if unused.
+fn demoTask(_: *std.build.Step, _: *std.Progress.Node) !void {
+    print("in demo task\n", .{});
+}
+```
+
+Then register this function inside the provided `build` function as follows:
+
+```zig
+    // The first argument is the step name and the second is the
+    // description that appears when `zig build --list-steps` is entered.
+    const demo_step = b.step("demo", "does stuff");
+
+    demo_step.makeFn = demoTask;
+
+    // Optionally depend on another step such as the "run" step
+    // to execute it before the custom step.
+    // demo_step.dependOn(&run_cmd.step);
+```
+
+To run this custom step, enter `zig build demo`.
+
 ## Packages/Modules
 
 Zig uses the terms "package" and "module" interchangeably to refer to a
