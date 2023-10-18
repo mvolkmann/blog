@@ -295,9 +295,25 @@ The `build.zig` file in a project can define additional steps.
 To do this, define what the step does in a function like the following:
 
 ```zig
-// First parameter is "self" and second is "progress", but use "_" if unused.
-fn demoTask(_: *std.build.Step, _: *std.Progress.Node) !void {
-    print("in demo task\n", .{});
+// The first parameter is "self" and second is "progress",
+// but use "_" if unused.
+// The fields in a std.build.Step struct instance include
+// name, dependencies, dependants, state, and more.
+// The std.Progress.Node struct instance doesn't seem very useful.
+fn demoTask(step: *std.build.Step, _: *std.Progress.Node) !void {
+    print("in {s} task\n", .{step.name}); // demo
+
+    // Print the name of each step field.
+    // const fieldNames = std.meta.fieldNames(std.build.Step);
+    // for (fieldNames) |fieldName| {
+    //     print("step field = {s}\n", .{fieldName});
+    // }
+
+    // Print the name of each progress field.
+    // const fieldNames = std.meta.fieldNames(std.Progress.Node);
+    // for (fieldNames) |fieldName| {
+    //     print("progress field = {s}\n", .{fieldName});
+    // }
 }
 ```
 
