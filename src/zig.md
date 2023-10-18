@@ -1424,6 +1424,7 @@ fn square(n: f32) f32 {
     return std.math.pow(f32, n, 2);
 }
 
+// Structs must be defined with const or comptime, not var.
 const Point = struct {
     x: f32 = 1, // default value
     y: f32 = 2, // default value
