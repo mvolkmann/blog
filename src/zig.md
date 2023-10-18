@@ -144,6 +144,8 @@ Zig provides the following run-time checks:
 - {% aTargetBlank "https://en.wikipedia.org/wiki/Zig_(programming_language)",
   "Wikipedia" %}
 - {% aTargetBlank "https://zig.news", "Zig News" %}
+- {% aTargetBlank "https://github.com/nrdmn/awesome-zig", "awesome-zig" %}
+  collection of open-source Zig libraries
 
 ## Installing
 
@@ -249,6 +251,9 @@ The steps provided by default are:
 - `run`: runs the app
 - `test`: runs all the unit tests
 
+To run a step, enter `zig build {step-name}`.
+If no step name is provided, it defaults to `install`.
+
 The file `main.zig` is the starting point of the project.
 Like many `.zig` files, this begins by importing the standard library
 with `const std = @import("std");`
@@ -257,8 +262,10 @@ The `!` means the function can return an error value.
 If an error is returned from the `main` function,
 it panics and prints a stack trace.
 
-To build an executable, enter `zig build`.
-These creates an executable file with same name as the project
+To build an executable, `cd` to a project directory that contains
+a `build.zig` file and enter `zig build`.
+This runs the `build` function defined in the `build.zig` file.
+It creates an executable file with same name as the project
 in the `zig-out/bin` directory.
 
 To customize the optimizations to be performed, add the `-Doptimize=value`
@@ -271,11 +278,18 @@ where `value` is one of the following:
 | `ReleaseFast`      | No                    | Yes (speed)   |
 | `ReleaseSmall`     | No                    | Yes (size)    |
 
-To build an executable for a different OS, add the `-Dtarget` option
+By default, executables are created for the current CPU architecture and OS
+and the `Debug` optimizations are applied.
+
+To build an executable for a different target, add the `-Dtarget` option
 with a value that describes a CPU architecture
 followed by a dash and an operating system.
 For example, to build a Windows executable add `-Dtarget=x86_64-windows`.
 This creates a file with a `.exe` extension in the `zig-out/bin` directory.
+
+To see a list of supported targets, enter `zig targets`.
+This outputs a large amount of JSON.  See the values of
+the keys "arch" and "os" which are JSON arrays of string values.
 
 To build and run the app, enter `zig build run`.
 
