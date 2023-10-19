@@ -609,11 +609,25 @@ Zig supports a large number of primitive types.
 - C types: `c_char`, `c_short`, `c_ushort`, `c_int`, `c_uint`,
   `c_long`, `c_ulong`, `c_longlong`, `c_ulonglong`, `c_longdouble`
 
-- `bool` - boolean
+- `anyerror`
+
+  This matches any kind of error.
 
 - `anyopaque`
 
-- `void` - no value
+  This used when interfacing with C to describe a type-erased pointer.
+
+- `anytype`
+
+  This matches any type and is typically used for function parameters
+  in functions that support duck typing.
+
+- `bool` - boolean
+
+- `comptime_int` and `comptime_float`
+
+  These are the types of compile-time known, literal
+  integer and floating point values.
 
 - `noreturn`
 
@@ -623,12 +637,7 @@ Zig supports a large number of primitive types.
 
 - `type` - describes a type
 
-- `anyerror`
-
-- `comptime_int` and `comptime_float`
-
-  These are the types of compile-time known, literal
-  integer and floating point values.
+- `void` - no value
 
 Arbitrary bit-width integers can be declared by following
 `i` or `u` with any positive integer value.
