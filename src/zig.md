@@ -1244,6 +1244,14 @@ One way to create an array of strings is to use an array initializer as follows:
 const colors = [_]String{ "red", "green", "blue" };
 ```
 
+To compare two strings, use the `std.mem.eql` function.
+For example:
+
+```zig
+const s = "hello";
+if (std.mem.eql(u8, s, "hello")) { ... }
+```
+
 To write to a string, use `std.fmt.bufPrint` or `std.io.fixedBufferStream`.
 Using `bufPrint` is good when all the content can be specified in one call.
 Using `fixedBufferStream` allows content to be collected over multiple calls.
@@ -1968,9 +1976,10 @@ Here is an example that demonstrates all the branch options:
 ```zig
 const std = @import("std");
 const print = std.debug.print;
+const String = []const u8;
 
 // The value of the first argument to print must be known at compile time.
-fn log(comptime text: []const u8) void {
+fn log(comptime text: String) void {
     print(text ++ "\n", .{});
 }
 
@@ -2050,6 +2059,25 @@ For example:
             .{count},
         ),
     }
+```
+
+The left-side value of switch branch can come from a function call.
+For example:
+
+```zig
+fn highestScore(game: String) u32 {
+    if (std.mem.eql(u8, game, "bowling")) return 300;
+    if (std.mem.eql(u8, game, "blackjack")) return 21;
+    return 0; // unknown
+}
+...
+    const game = "blackjack";
+    const score = 21;
+    switch (score) {
+        highestScore(game) => log("You have the highest score."),
+        else => print("Your score is {}.\n", .{score}),
+    }
+}
 ```
 
 ### while Expressions
