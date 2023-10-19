@@ -187,7 +187,11 @@ both arrays and structs (more on these later).
 This can contain a comma-separated list of either
 array items or struct field assignments.
 
-To build and run this program, enter `zig run hello.zig`.
+The `zig` executable handles everything that can be done with a Zig program.
+For help on what it can do, enter `zig --help`.
+For help on a specific command that follows `zig`, enter `zig {command} --help`.
+
+To build and run the program above, enter `zig run hello.zig`.
 
 To create an executable, enter `zig build-exe --name hello hello.zig`.
 
@@ -199,6 +203,9 @@ There is no linter for Zig, but the Zig compiler
 provides more guidance than most compilers.
 
 To see a list of Zig guiding principles, enter `zig zen`.
+
+Later we will discuss Zig projects that
+typically contain multiple `.zig` source files.
 
 ## Tools
 
@@ -235,6 +242,8 @@ To create a new Zig project, create a directory for it, cd to the directory,
 and enter `zig init-exe`.
 This creates the file `build.zig` and
 a `src` directory containing the file `main.zig`.
+
+### Zig build
 
 The file `build.zig` is a build script that uses the compiler API.
 Modify this file to change the characteristics of executable that is produced
