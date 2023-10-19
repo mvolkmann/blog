@@ -204,7 +204,7 @@ provides more guidance than most compilers.
 
 To see a list of Zig guiding principles, enter `zig zen`.
 
-Later we will discuss Zig projects that
+Later we will discuss Zig packages that
 typically contain multiple `.zig` source files.
 
 ## Tools
@@ -326,7 +326,7 @@ To do this, define what the step does in a function like the following:
 // The first parameter is "self" and second is "progress",
 // but use "_" if unused.
 // The fields in a std.build.Step struct instance include
-// name, dependencies, dependants, state, and more.
+// name, dependencies, dependents, state, and more.
 // The std.Progress.Node struct instance doesn't seem very useful.
 fn demoTask(step: *std.build.Step, _: *std.Progress.Node) !void {
     print("in {s} task\n", .{step.name}); // demo
@@ -361,17 +361,20 @@ Then register this function inside the provided `build` function as follows:
 
 To run this custom step, enter `zig build demo`.
 
-## Packages/Modules
+## Modules and Packages
 
-Zig uses the terms "package" and "module" interchangeably to refer to a
-collection of public variables and functions that are defined in a source file.
+A module is defined by a single `.zig` file that
+defines a collection of variables and functions.
 
-To define a package, create a source file whose file name is the package name.
-Prefix all constants and functions to be exposed with the `pub` keyword.
+A package is a directory that contains a `build.zig` file
+and an `src` directory that includes any number of modules.
+
+To define a module, create a source file whose file name is the module name.
+Prefix all variables and functions to be exposed with the `pub` keyword.
 The file can also define non-public variables and functions
 that are only used by other functions defined in the file.
 
-For example, the file `my_package.zig` could contains the following:
+For example, the file `my_module.zig` could contains the following:
 
 ```zig
 pub const gretzky = 99;
@@ -381,25 +384,25 @@ pub fn double(n: i32) i32 {
 }
 ```
 
-To import a package, use the builtin function `@import`.
+To import a module, use the builtin function `@import`.
 The file path passed to this function can be absolute, relative,
-or the name of a builtin packages such as "std".
+or the name of a builtin module such as "std".
 The `@import` function returns a `struct` instance whose
 fields are the public values defined in the imported file.
 
-For example, to import and use the package defined in `my_package.zig` above
+For example, to import and use the module defined in `my_module.zig` above
 within the file `main.zig`, write the following:
 
 ```zig
 const std = @import("std");
 const print = std.debug.print;
-const pkg = @import("my_package.zig");
+const mod = @import("my_module.zig");
 
 pub fn main() !void {
-    print("gretzky = {}\n", .{pkg.gretzky}); // 99
+    print("gretzky = {}\n", .{mod.gretzky}); // 99
 
     const value = 3;
-    const result = pkg.double(value);
+    const result = mod.double(value);
     print("result = {}\n", .{result}); // 6
 }
 ```
@@ -627,10 +630,13 @@ Zig supports a large number of primitive types.
   These are the types of compile-time known, literal
   integer and floating point values.
 
-In addition to these primitive types, "arbitrary bit-width integers can be
-referenced by using an identifier of `i` or `u` followed by digits."
+Arbitrary bit-width integers can be declared by following
+`i` or `u` with any positive integer value.
 For example, the identifier `u3` refers to an unsigned 3-bit integer.
 "The maximum allowed bit-width of an integer type is 65535."
+
+Literal number can contain underscores for readability.
+For example, `1_234_567`.
 
 ### Non-primitive Types
 
@@ -665,6 +671,7 @@ We can also make error unions or optional types from any of the above:
 var a: E!u8 = 5; // can be u8 or error from set E
 var b: ?u8 = 5;  // can be u8 or null
 ```
+
 </aside>
 
 
@@ -683,7 +690,8 @@ Variable declared with `const` are immutable and
 variable declared with `var` are mutable.
 Using `const` is preferred when the value will not be modified.
 
-Variable names must begin with a letter and are composed of letters, numbers, and ?.
+Variable names must begin with a letter
+and are composed of letters, numbers, and underscores.
 Variable names cannot match a keyword (listed in the next section).
 The convention for variable names is to use snake_case.
 
