@@ -159,7 +159,7 @@ Consider downloading a nightly build in order to use the very latest version.
 
 In macOS and easier option is to install Zig
 with Homebrew by entering `brew install zig`.
-However, this may currently only work on Macs with Intel-based processors.
+However, currently this may only work on Macs with Intel-based processors.
 
 For more detail on installation options, see {% aTargetBlank
 "https://ziglang.org/learn/getting-started/#installing-zig", "Installing Zig" %}.
@@ -245,12 +245,14 @@ a `src` directory containing the file `main.zig`.
 
 ### Zig build
 
-The file `build.zig` is a build script that uses the compiler API.
+The file `build.zig` is a build script implemented in Zig
+that uses the compiler API.
 Modify this file to change the characteristics of executable that is produced
 and to modify the "steps".
 
 For help on build options, enter `zig build --help` or `-h`.
 
+The `zig build` command is typically followed by the name of a build step.
 Build steps are similar to npm `package.json` scripts.
 To see the available steps, enter `zig build --list-steps` or `-l`.
 The steps provided by default are:
@@ -1947,6 +1949,11 @@ if (canReturnError(args)) |value| {
 The syntax for `switch` expressions is a bit different
 than in C `switch` statements.
 
+The expression that follows `switch` must
+evaluate to an integer, enum value, or `bool`.
+Zig does not support `switch` expressions that
+evaluate to any other type including strings.
+
 Cases are referred to as "branches".
 Branches can match a single value, a list of values, or a range of values.
 These are followed by the `=>` operator which is followed by
@@ -2024,6 +2031,24 @@ The `else` branch is not needed because the branches are exhaustive.
         .red => log("hot"),
         .green => log("warm"),
         .blue => log("cold"),
+    }
+```
+
+A `switch` branch can capture the expression value.
+This is useful when the expression is not just a variable.
+For example:
+
+```zig
+    switch (getItemCount()) {
+        0 => log("You have no items.\n"),
+        1...7 => |count| print(
+            "You have {} items and can use the express lane.\n",
+            .{count},
+        ),
+        else => |count| print(
+            "You have {} items and cannot use the express lane.\n",
+            .{count},
+        ),
     }
 ```
 
@@ -2472,6 +2497,7 @@ Marking a function as `pub` makes it available
 to be imported from outside its source file.
 
 The convention for function names is to use camelCase.
+If the function returns a type, the name should begin with an uppercase letter.
 
 The parameter list is a comma-separated list of parameter declarations.
 The syntax for each parameter declaration is `{name}: {type}`.
