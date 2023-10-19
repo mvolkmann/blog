@@ -2017,6 +2017,10 @@ pub fn main() !void {
 }
 ```
 
+All `switch` branches must be distinct.
+If more than one branch matches the same value,
+a "duplicate switch value" error will be reported at run-time.
+
 Here is an example of a `switch` expression used to obtain a value:
 
 ```zig
@@ -3191,6 +3195,12 @@ The Zig {% aTargetBlank "https://ziglang.org/documentation/master/std/",
 "standard library" %} provides many
 "commonly used algorithms, data structures, and definitions".
 
+Documentation on the standard library is somewhat sparse as of 2023.
+Fortunately the source code typically provides useful information.
+Click "src" links in the documentation to view the source code.
+Look for doc comments on public (`pub`) declarations
+and `test` blocks that demonstrate usage.
+
 To use the standard library in a source file,
 add the following line near the top of the file:
 
@@ -3267,7 +3277,7 @@ Instances have the methods `append`, `appendSlice`, `clone`, `deinit`,
 `getLast`, `getLastOrNull`, `init`, `insert`, `insertSlice`, `orderedRemove`,
 `pop`, `popOrNull`, `replaceRange`, `writer`, and many more.
 
-The following code demonstrates common operations on HashMaps.
+The following code demonstrates common operations on ArrayLists.
 
 ```zig
 const std = @import("std");
@@ -3279,7 +3289,10 @@ const expectEqualStrings = std.testing.expectEqualStrings;
 const String = []const u8;
 
 test "ArrayList" {
+    // Beginning with no capacity cannot return an error.
     var list = std.ArrayList(String).init(allocator);
+    // Beginning with a specified capacity can return an error.
+    // var list = try std.ArrayList(String).initCapacity(allocator, 500);
     defer list.deinit();
 
     try list.append("red");
