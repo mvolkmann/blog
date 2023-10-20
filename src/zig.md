@@ -495,6 +495,12 @@ Often placeholders do not need to specify a format
 because the correct formatting is used by default.
 In these cases, placeholders can be written as `{}`.
 
+Errors in format strings are flagged at compile-time.
+This includes having more placeholders than values ("too few arguments"),
+having more values than placeholders ("unused argument"), and
+using specifiers that are incompatible with the corresponding value
+("invalid format string ... for type").
+
 A common error is to pass a single value as the second argument
 instead of a literal array. The compiler will output the error
 "expected tuple or struct argument, found {type-passed}".
@@ -1023,7 +1029,7 @@ increment from the ordinal value of the previous enum value.
 Enums can define methods that can be called on instances.
 These methods can be called on an instance or an instance can be passed to them.
 
-Here is a an example that demonstrates all of these features.
+The following code demonstrates all of these features.
 
 ```zig
 const std = @import("std");
@@ -1040,6 +1046,7 @@ const Color = enum(u8) {
     green, // assigned 8
 
     const favorite = Color.yellow;
+    // const favorite: Color = .yellow; // alternatively
 
     // The type name "Color" is available here when define outside a function,
     // but not when defined inside a function (container-scope).
