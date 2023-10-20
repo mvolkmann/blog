@@ -192,8 +192,10 @@ For help on what it can do, enter `zig --help`.
 For help on a specific command that follows `zig`, enter `zig {command} --help`.
 
 To build and run the program above, enter `zig run hello.zig`.
+The executable is not saved.
 
-To create an executable, enter `zig build-exe --name hello hello.zig`.
+To create an executable and save it,
+enter `zig build-exe --name hello hello.zig`.
 
 To run the executable, enter `./hello`.
 
@@ -1037,6 +1039,7 @@ const print = std.debug.print;
 const expect = std.testing.expect;
 const expectEqual = std.testing.expectEqual;
 
+// Enums must be defined with const or comptime, not var.
 // A type must be specified for an enum
 // in order to override its default ordinal values.
 const Color = enum(u8) {
@@ -1785,6 +1788,7 @@ const print = std.debug.print;
 const expectEqual = std.testing.expectEqual;
 
 test "union" {
+    // Unions must be defined with const or comptime, not var.
     const Identifier = union {
         name: []const u8,
         number: i32,
