@@ -5219,8 +5219,10 @@ const Place = struct {
     long: f32,
 };
 
+// T cannot contain any comptime fields, so
+// anonymous structs with numeric values won't work.
 fn fromJSON(T: anytype, allocator: std.mem.Allocator, json: String) !T {
-    const parsed = try std.json.parseFromSlice(Place, allocator, json, .{});
+    const parsed = try std.json.parseFromSlice(T, allocator, json, .{});
     defer parsed.deinit();
     return parsed.value;
 }
