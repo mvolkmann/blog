@@ -333,6 +333,15 @@ To do this, define what each step should do in functions like the following:
 fn myStep1(step: *std.build.Step, _: *std.Progress.Node) !void {
     print("in {s}\n", .{step.name});
 
+    // To pass command-line arguments,
+    // enter "zig build step1 -- arg1 arg2 etc`.
+    // To access the command-line arguments ...
+    if (step.owner.args) |args| {
+        for (args) |arg| {
+            print("arg = {s}\n", .{arg});
+        }
+    }
+
     // Print the name of each step field.
     // const fieldNames = std.meta.fieldNames(std.build.Step);
     // for (fieldNames) |fieldName| {
@@ -355,7 +364,7 @@ fn myStep3(step: *std.build.Step, _: *std.Progress.Node) !void {
 }
 ```
 
-Then register the functions inside the provided `build` function as follows:
+Next, register the functions inside the provided `build` function as follows:
 
 ```zig
     // The first argument is the step name and the second is the
@@ -376,7 +385,9 @@ Then register the functions inside the provided `build` function as follows:
     // Entering "zig build step3" will run step1, step2, and step3.
 ```
 
-To run this custom step, enter `zig build demo`.
+To run a custom step, enter `zig build {step-name}`.
+To pass command-line arguments to the step,
+append `--` followed by a space-separated list of arguments.
 
 ## Modules and Packages
 
