@@ -1768,7 +1768,13 @@ test "tuple" {
     try expectEqual(tuple[4], "hello");
     try expectEqual(tuple.@"4", "hello"); // alternate way to index
 
-    // This loop must be "inline".
+    // "for" loops require each captured value to
+    // have the same type that is known at compile-time.
+    // That is not guaranteed for tuples.
+    // Making it inline removes the "for" loop
+    // by repeating the body for each item in the tuple.
+    // Typically this does not result in a large increase in generated code
+    // because tuples usually do not contain a large number of items.
     inline for (tuple) |value| {
         const T = @TypeOf(value);
         print("type of {any} is {}\n", .{ value, T });
