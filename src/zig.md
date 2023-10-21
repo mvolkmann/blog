@@ -322,7 +322,7 @@ is stored in `zig-out/bin/{project-name}`.
 ### Custom Steps
 
 The `build.zig` file in a project can define additional steps.
-To do this, define what the step does in a function like the following:
+To do this, define what each step should do in functions like the following:
 
 ```zig
 // The first parameter is "self" and second is "progress",
@@ -330,8 +330,8 @@ To do this, define what the step does in a function like the following:
 // The fields in a std.build.Step struct instance include
 // name, dependencies, dependents, state, and more.
 // The std.Progress.Node struct instance doesn't seem very useful.
-fn demoTask(step: *std.build.Step, _: *std.Progress.Node) !void {
-    print("in {s} task\n", .{step.name}); // demo
+fn myStep1(step: *std.build.Step, _: *std.Progress.Node) !void {
+    print("in {s}\n", .{step.name});
 
     // Print the name of each step field.
     // const fieldNames = std.meta.fieldNames(std.build.Step);
@@ -345,20 +345,35 @@ fn demoTask(step: *std.build.Step, _: *std.Progress.Node) !void {
     //     print("progress field = {s}\n", .{fieldName});
     // }
 }
+
+fn myStep2(step: *std.build.Step, _: *std.Progress.Node) !void {
+    print("in {s}\n", .{step.name});
+}
+
+fn myStep3(step: *std.build.Step, _: *std.Progress.Node) !void {
+    print("in {s}\n", .{step.name});
+}
 ```
 
-Then register this function inside the provided `build` function as follows:
+Then register the functions inside the provided `build` function as follows:
 
 ```zig
     // The first argument is the step name and the second is the
     // description that appears when `zig build --list-steps` is entered.
-    const demo_step = b.step("demo", "does stuff");
+    const step1 = b.step("step1", "first step");
+    step1.makeFn = myStep1;
 
-    demo_step.makeFn = demoTask;
+    const step2 = b.step("step2", "second step");
+    step2.makeFn = myStep2;
+    // Can optionally depend on any number of other steps.
+    step2.dependOn(step1);
+    // Entering "zig build step2" will run step1 and then step2.
 
-    // Optionally depend on another step such as the "run" step
-    // to execute it before the custom step.
-    // demo_step.dependOn(&run_cmd.step);
+    const step3 = b.step("step3", "third step");
+    step3.makeFn = myStep3;
+    step3.dependOn(step1);
+    step3.dependOn(step2);
+    // Entering "zig build step3" will run step1, step2, and step3.
 ```
 
 To run this custom step, enter `zig build demo`.
