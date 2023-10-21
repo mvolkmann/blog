@@ -5370,6 +5370,27 @@ pub fn main() !void {
 }
 ```
 
+## Shell Commands
+
+Zig can execute shell commands and capture output written to stdout and stderr.
+The following code demonstrates this.
+
+```zig
+const std = @import("std");
+const String = []const u8;
+
+pub fn main() !void {
+    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var allocator = gpa.allocator();
+    const result = try std.ChildProcess.exec(.{
+        .allocator = allocator,
+        // .argv = &[_]String{ "echo", "Hello, World!" },
+        .argv = &[_]String{"date"},
+    });
+    std.debug.print("{s}\n", .{result.stdout});
+}
+```
+
 ## JSON
 
 The `std.json` package provides functions for
