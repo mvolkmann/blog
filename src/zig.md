@@ -717,7 +717,6 @@ var b: ?u8 = 5;  // can be u8 or null
 
 </aside>
 
-
 ## Variables
 
 The syntax for declaring a variable is:
@@ -778,10 +777,32 @@ In vscode-zig, the "Zls: Enable Autofix" option controls this.
 
 ## Optionals (aka Nullables)
 
-The types of variables, struct fields, and function parameters can be optional.
+The types of variables, struct fields, and function parameters
+can be made optional by preceding the type with `?`.
 This allows them to have the value `null`.
-To declare a type to be optional, add a question mark before their type
-and give them a default value which may be `null`.
+For example, `const maybeNumber: ?i32 = null;`
+
+The `orelse` operator unwraps an optional value.
+If the value is `null`, the value that follows `orelse` is used.
+For example:
+
+```zig
+const std = @import("std");
+const expectEqual = std.testing.expectEqual;
+
+test "orelse" {
+    var maybeNumber: ?i32 = null;
+    var number = maybeNumber orelse 0;
+    try expectEqual(number, 0);
+
+    maybeNumber = 42;
+    number = maybeNumber orelse 0;
+    try expectEqual(number, 42);
+}
+```
+
+Zig prevents null pointer references by using optional pointers
+whose usages are checked by the compiler.
 
 The following code demonstrates many features of working with optionals:
 
@@ -814,9 +835,6 @@ test "optional" {
         unreachable; // verifies that b is non-null
     }
 
-    // The orelse operator unwraps the value if non-null
-    // and uses the value that follows if null.
-    // This is why the cast here is to i8 instead of ?i8.
     try expectEqual(b orelse 0, 2);
 
     // "b.?" is equivalent to "b orelse unreachable".
@@ -5908,14 +5926,6 @@ Variables
 - non-conforming names can be used with `@“some name”`
 - variables declared outside any function are referred to as “container-level variables”
   - includes variables declared inside struct, union, enum, and opaque (similar to a struct; used for interacting with C code that doesn’t expose field details) definitions (only top-level ones?)
-
-Optionals
-
-- to allow a value to have a specific type or `null`, precede the type with `?`
-- for example, const maybeNumber: ?i32 = null;
-- Zig prevents null references by using optional pointers whose usages are checked by the compiler
-- the `orelse` operator unwraps optional values and provides a value to use if it is null
-  - const ptr = optionalPtr orelse 0; // assumes optionalPtr is a pointer to an integer
 
 Structs
 
