@@ -1741,7 +1741,9 @@ TODO: Add an example of a generic struct using `comptime`.
 ## Tuples
 
 Tuples are anonymous structs without specified field names.
-The field names default to indexes.
+The field names default to indexes starting from zero.
+The field values can all be of different types.
+Field values are accessed with the syntax `some_tuple[index]`.
 
 The following code demonstrates using a tuple:
 
@@ -1801,16 +1803,20 @@ test "tuple" {
 
 ## Unions
 
+
 A bare `union` defines a set of fields that a value can have
 where only one is active at a time.
 Each field can have a different type.
 
 A tagged `union` adds the use of an `enum` that
-lists the possible field names s in a union.
+lists the possible field names in a union.
 This allows the union to be used in a `switch` statement.
+To get the enum value for a given tagged union instance,
+use the `std.meta.Tag(union_instance)` function.
 
 An "inferred enum" union is a simpler alternative to a tagged `union`
-that is useful when a separate `enum`` is not needed for other purposes.
+that is useful when a separate `enum` is not needed for other purposes
+such as `switch` statements.
 
 The following code demonstrates using all three kinds of unions:
 
@@ -1839,8 +1845,8 @@ test "tagged union" {
     };
 
     const ids = [_]Identifier{
-        Identifier{ .number = 1234 },
-        Identifier{ .name = "top secret" },
+        .{ .number = 1234 },
+        .{ .name = "top secret" },
     };
 
     for (ids) |id| {
@@ -1851,6 +1857,9 @@ test "tagged union" {
             .number => |number| try expectEqual(number, 1234),
         }
     }
+
+    try expectEqual(std.meta.activeTag(ids[0]), IdentifierTag.number);
+    try expectEqual(std.meta.activeTag(ids[1]), IdentifierTag.name);
 }
 
 test "inferred enum union" {
@@ -5912,27 +5921,6 @@ Structs
   - const NumberList = LinkedList(i32);
   - var node = NumberList.Node { .prev = null, .next = null, .value = 19 };
   - var numberList = LinkedList(i32) { .first = @node, .last = &node, .length = 1 };
-
-Tuples
-
-- defined by an anonymous struct with no field names
-- fields are given names that are integers starting from 0
-- access a field value with [index] syntax
-- const myTuple = { true, “hello”, @as(u32, 19) };
-- myTuple[1] is “hello”
--
-
-Unions
-
-- defines a set of possible types for a value
-- const DataType = union { number: i32, truth: bool };
-- var data1 = DataType { .number = 19 };
-- var data2 = DataType { .truth = true };
-- anonymous union syntax alternative: `var data2: DataType = .{ .number = 19 };`
-- tagged union types use an enum for their cases and can be used in switch expressions
-- const DataTypeTag = enum { number, truth };
-- const DataType = union(DataTagType) { number: i32, truth: bool };
-- can get the tag type of a union type with std.meta.Tag(DataType) which returns DataTypeTag
 
 Functions
 
