@@ -5236,8 +5236,11 @@ The following code demonstrates how functional programming
 can be modeled in Zig.
 The goal is compute the total cost of red fruits from a list of fruits.
 It is messy to say the least.
+
 Code near the end shows how the same result can be obtained
 just using a `for` loop with much less code.
+A take-away is that it is best not to try to
+force Zig to act like a functional programming language.
 
 ```zig
 const std = @import("std");
