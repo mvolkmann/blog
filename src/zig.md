@@ -2658,6 +2658,54 @@ For examples of this, see this {% aTargetBlank
 "https://sourcegraph.com/search?q=context:global+lang:Zig+fn.*%5C)%5C+switch&patternType=regexp&sm=1&groupBy=repo",
 "Sourcegraph search" %}.
 
+### Anonymous Functions
+
+Anonymous functions in Zig is somewhat tedious to use
+because they must be wrapped in a `struct` and then extracted from it.
+It's probably best to make it a named function outside the struct
+and just use that.
+
+A struct containing only functions and no fields
+is just a namespace and doesn't consume any extra memory.
+
+The following code demonstrates using an anonymous function.
+It is passed to the `map` function.
+
+```zig
+const std = @import("std");
+const tAlloc = std.testing.allocator;
+const expectEqualSlices = std.testing.expectEqualSlices;
+
+fn map(
+    comptime InT: type,
+    comptime OutT: type,
+    allocator: std.mem.Allocator,
+    data: []const InT,
+    function: fn (InT) OutT,
+) ![]OutT {
+    var list = try std.ArrayList(OutT).initCapacity(allocator, data.len);
+    defer list.deinit();
+    for (data) |item| {
+        try list.append(function(item));
+    }
+    return try list.toOwnedSlice();
+}
+
+test "anonymous function" {
+    const T = u32;
+    const numbers = [_]T{ 1, 2, 3 };
+
+    const result = try map(T, T, tAlloc, &numbers, struct {
+        fn double(n: T) T {
+            return n * 2;
+        }
+    }.double);
+    defer tAlloc.free(result);
+    const expected = [_]T{ 2, 4, 6 };
+    try expectEqualSlices(T, result, &expected);
+}
+```
+
 ## Duck Typing with anytype
 
 Functions can have parameters with the type `anytype`.
