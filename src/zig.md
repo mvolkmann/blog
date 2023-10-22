@@ -2418,8 +2418,37 @@ test "labeled block" {
 
 ## Error Handling
 
-Errors are represented by enum values that cannot carry additional data.
-For example, the following defines an error set with two possible values:
+When calling a function that can return an error,
+that possibility cannot be ignored.
+Calls must do one of the following:
+
+1. Precede the call with the `try` keyword to specify that errors
+   should be returned to the function that called the current function.
+   For example, `try number = parseU64(str, 10);`
+1. Follow the call with the `catch` keyword
+   to supply a value to be used instead of the error,
+   regardless of the kind of error that is returned.
+   For example, `const number = parseU64(str, 10) catch 0;`
+
+Typically either `try` or `catch` is applied to a function call,
+not both.
+
+Note that `try someFn();` is equivalent to `someFn() catch |e| return e;`.
+
+The `catch` keyword can be followed by a labeled block
+that computes the value to be used.
+For example:
+
+```zig
+some_function() catch blk: {
+    // Compute some_value.
+    break :blk some_value;
+};
+```
+
+Errors that can be returned by functions are represented by
+special enum-like values that cannot carry additional data.
+For example, the following defines an "error set" with two possible values:
 
 ```zig
 const EvalError = error { Negative, TooHigh };
@@ -2438,11 +2467,6 @@ They can optionally specify an error set before the `!`
 that describes the possible errors that can be returned.
 If no error set is specified, the compiler determines
 the possible errors from the function body.
-
-When calling a function that can return an error,
-preceding the call with the `try` keyword causes the calling function
-to return the error that is returned by the called function.
-Note that `try someFn();` is equivalent to `someFn() catch |e| return e;`.
 
 The following code demonstrates defining a function
 that specifies an error set:
@@ -5943,20 +5967,6 @@ Functions
     - @typeInfo(@TypeOf) returns a std.builtin.Type object
     - what are the properties and methods on a Type object?
 - can use reflection to get details about the parameters and return type of a given function with `@typeInfo(@TypeOf(someFunction)).Fn` which gives an object with the fields `params` (an array of objects with `type` and `name`? fields?) and `return_type` (a type)
-
-Errors
-
-- The `try` keyword provides error handling.
-- Possible errors cannot be ignored.
-- The catch keyword is used to provide a default value for an expression that results in an error. - const number = parseU64(str, 10) catch 0; - can compute value with a labeled block -
-  catch blk: {
-  // do things - break :blk 13; - }; -
-- If no `catch` block is included, the error is returned to the caller
-- error sets are similar to enums and describe the errors that can be thrown by functions
-- example from official docs
-  - const FileOpenError = error { AccessDenied, OutOfMemory, FileNotFound };
-  - const String = [_]u8; // TODO: Is this the proper way to describe a string type?
-  - fn processFile(filePath: \*String) FileOpenError { … }
 
 Type Coercion and Casting
 
