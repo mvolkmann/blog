@@ -662,6 +662,8 @@ Zig supports a large number of primitive types.
 
 - `bool` - boolean
 
+  As expected, the literal values are `true` and `false`.
+
 - `comptime_int` and `comptime_float`
 
   These are the types of compile-time known, literal
@@ -1153,7 +1155,7 @@ Arrays own their data, whereas slices are pointers to data they do not own.
 
 Both arrays and slices have a `len` field that holds their length.
 The length cannot be changed.
-For a dynamically-sized array, consider using
+For a dynamically-sized array, consider using the standard library type
 <a href="https://ziglang.org/documentation/master/std/#A;std:ArrayList"
 target="_blank">ArrayList</a>.
 
@@ -1165,10 +1167,23 @@ when it can be inferred from an initial value.
 For example:
 
 ```zig
+// Using const makes this an immutable array.
 const dice_rolls = [_]u8{ 4, 2, 5, 1, 2 };
 ```
 
-To get a subset of an array, called a "slice", reference a range of its items.
+To initialize all elements to same value, use the `**` operator.
+For example:
+
+```zig
+// Using var makes this a mutable array.
+var dice_rolls = [_]u8{0} ** 5; // array of 5 zero elements
+```
+
+To access a single element of an array,
+follow it with square brackets containing an index.
+For example, `dice_rolls[2] = 6;`.
+
+To get a subset of an array as a slice, reference a range of its items.
 For example, `dice_rolls[2..4]` gives a "slice" of the items at index 2 and 3.
 Note that the `..` operator creates a range where the upper bound is exclusive.
 The `...` operator, which creates a range where the upper bound is inclusive,
@@ -1179,6 +1194,21 @@ to get all the items from a given index to the end.
 For example, `dice_rolls[2..]`.
 
 It is idiomatic to use the type `usize` for variables that hold array indexes.
+
+To concatenate arrays, use the `++` operator which returns a new array.
+Recall that strings are arrays of characters.
+For example:
+
+```zig
+var name = "Ma" ++ "rk"; // "Mark"
+```
+
+To repeat an array, use the `**` operator which returns a new array.
+For example:
+
+```zig
+const santa = "Ho " ** 3; // "Ho Ho Ho "
+```
 
 The following code demonstrates several operations on arrays.
 
@@ -1196,7 +1226,8 @@ test "arrays" {
 
     // Use a for loop to iterate over the items in an array or slice.
     // A for loop can iterate over multiple arrays at the same time.
-    // This is being used to iterate over the array elements AND their indices.
+    // This is being used to iterate over
+    // the array elements AND their indices.
     for (dice_rolls, 0..) |roll, index| {
         try expectEqual(roll, dice_rolls[index]);
     }
@@ -1229,6 +1260,28 @@ test "arrays" {
 ```
 
 Multidimensional arrays are created by nesting single-dimension arrays.
+For example:
+
+```zig
+test "multi-dimensional array" {
+    var matrix = [3][3]f64{
+        [_]f64{ 1.0, 2.0, 3.0 },
+        [_]f64{ 4.0, 5.0, 6.0 },
+        [_]f64{ 7.0, 8.0, 9.0 },
+    };
+
+    const row_index = 1;
+    const column_index = 2;
+    try expectEqual(matrix[row_index][column_index], 6.0);
+
+    for (matrix) |row| {
+        print("\n", .{});
+        for (row) |value| {
+            print("{} ", .{value});
+        }
+    }
+}
+```
 
 ## Slices
 
@@ -5943,36 +5996,6 @@ To declare an array,
 - number of elements comes first, then the type, then the initial values in curly braces
 - ex. const name = [3]i32{10, 20, 30};
 - ex. var name = [_]i32{10, 20, 30}; // length is inferred from initial values
-
-Primitive Values
-
-- null, undefined
-- true, false
-
-Arrays
-
-- to create an array from a literal, const numbers = [_]u32{ 19, 21, 7 }; // \_ indicates not specifying size
-- to initialize all elements to same value, const numbers = [_]u32{0} \*\* 3; // array of 3 zero elements
-- use var instead of const to make them mutable
-- have a `len` field
-- to get an array element, numbers[1]
-- to mutate an array element, numbers[1] = 3;
-- ++ operator concatenates arrays, returning a new array
-  - applies to strings; var name = “Ma” ++ “rk”;
-- \*\* operator multiplies arrays, returning a new array
-- multidimensional arrays are created by nesting arrays
-  - var matrix = [3][3]f64 {
-  - [_]f64{ 1.0, 2.0, 3.0 },
-  - [_]f64{ 4.0, 5.0, 6.0 },
-  - [_]f64{ 7.0, 8.0, 9.0 }
-  - };
-  - access elements with matrix[row][column]
-  - iterate over with nested for loops
-  - for (matrix, 0..) |row, rowIndex| {
-  - for (row, 0..) |value, columnIndex| {
-  -     // use value, rowIndex, and columnIndex here
-  - }
-  - }
 
 Slices
 
