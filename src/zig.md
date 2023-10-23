@@ -3163,7 +3163,7 @@ The following builtin functions support reflection:
 - `@This()` when inside a `struct` definition, returns its type.
 - `@TypeOf` returns the type of a given variable.
 - `@typeName` returns the name of a given type as a string.
-- `@typeInfo` returns information about a given type.
+- `@typeInfo` returns a tagged union that describes a type.
 - `std.meta.fields` returns information about the fields in a struct.
 - `std.meta.trait.hasField` methods determine if a struct
   contains a field with a given name.
