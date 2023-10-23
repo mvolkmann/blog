@@ -1285,7 +1285,9 @@ It is convenient to define an alias for this type with the following:
 const String = []const u8;
 ```
 
-Literal strings are delimited by double quotes.
+Literal strings are delimited by double quotes
+and represented by null-terminated byte arrays that use UTF-8 encoding.
+For example, `var name = "Mark";`
 
 Multi-line strings precede each line with double backslashes.
 A newline character is added at the end of each line except the last.
@@ -1310,6 +1312,7 @@ The following string operations are supported using byte arrays.
 | assign to variable | var name: []u8 = "Mark";      |
 | get a byte         | const letter2 = name[1]; // a |
 | modify a byte      | name[1] = 'o'; // now "Mork"  |
+| iterate over bytes | for (name) |byte| { ... }     |
 
 One way to create an array of strings is to use an array initializer as follows:
 
@@ -1325,10 +1328,15 @@ const s = "hello";
 if (std.mem.eql(u8, s, "hello")) { ... }
 ```
 
+The standard library provides many more functions that operate on strings
+in the `std.mem` namespace.
+See the "Standard Library" section for details.
+
 To write to a string, use `std.fmt.bufPrint` or `std.io.fixedBufferStream`.
 Using `bufPrint` is good when all the content can be specified in one call.
 Using `fixedBufferStream` allows content to be collected over multiple calls.
-The following code demonstrates both approaches.
+
+The following code demonstrates many operations on strings.
 
 ```zig
 const std = @import("std");
@@ -1340,6 +1348,13 @@ test "basic" {
     const T = @TypeOf(s);
     // 13 is the length and 0 is the sentinel (terminator) value.
     try expectEqualStrings(@typeName(T), "*const [13:0]u8");
+}
+
+test "chars" {
+    const name = [_]u8{ 'M', 'a', 'r', 'k' };
+    // Note the use of & to pass a pointer to the string.
+    // Literal strings are automatically passed by pointer.
+    try expectEqualStrings(&name, "Mark");
 }
 
 test "multiline" {
@@ -1381,8 +1396,8 @@ test "fixedBufferStream" {
 }
 ```
 
-The `std.io` namespace provides several functions for split/tokenize strings
-based on specified delimiters.
+The `std.io` namespace provides several functions that
+split/tokenize strings based on specified delimiters.
 Split returns a slice from each delimiter
 whereas tokenize treats consecutive delimiters as one.
 For example, splitting `"red,green,,,blue"` on the comma delimiter
@@ -1466,6 +1481,8 @@ test "tokenize" {
 ```
 
 TODO: Finish from https://www.huy.rocks/everyday/01-04-2022-zig-strings-in-5-minutes
+
+### zig-string Library
 
 The following code demonstrates using the zig-string library.
 
@@ -3445,7 +3462,9 @@ add the following line near the top of the file:
 const std = @import("std");
 ```
 
-The standard library defines many namespaces that define
+### Standard Library Namespaces
+
+The standard library defines many namespaces that provide
 types, functions, values, and error sets.
 Some of these define additional child namespaces.
 
@@ -3635,7 +3654,7 @@ The top-level namespaces in the standard library include the following:
 
 Some of the most commonly used parts are described in the subsections below.
 
-### ArrayList
+### ArrayList type
 
 The <a href="https://ziglang.org/documentation/master/std/#A;std:ArrayList"
 target="_blank">ArrayList</a> data structure
@@ -3699,7 +3718,7 @@ test "ArrayList" {
 }
 ```
 
-### MultiArrayList
+### MultiArrayList type
 
 A {% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std:MultiArrayList",
 "MultiArrayList" %} is similar to an `ArrayList`
@@ -3763,7 +3782,7 @@ test "MultiArrayList" {
 }
 ```
 
-### HashMap
+### HashMap type
 
 A hash map is a collection of key/value pairs.
 
@@ -3984,7 +4003,7 @@ test "ComptimeStringMap" {
 }
 ```
 
-### Sets
+### Set types
 
 A {% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std:BufSet",
 "BufSet" %} is a set of string values.
@@ -5906,24 +5925,10 @@ To declare an array,
 - ex. const name = [3]i32{10, 20, 30};
 - ex. var name = [_]i32{10, 20, 30}; // length is inferred from initial values
 
-Zig standard library
-
-- document this
-
 Primitive Values
 
 - null, undefined
 - true, false
-
-Strings
-
-- “String literals are constant single-item points to null-terminated byte arrays.”
-- var name = “Mark”;
-- dereferencing converts to array of characters
-- default encoding is UTF-8
-- multi-line string literals precede each line with `\\`
-- to iterate over the bytes in a string (characters if ASCII), for (name) |byte| { … }
-- - operator can be used to create a string by concatenating characters; var name = ‘M’ + ‘a’ + ‘r’ + ‘k’
 
 Arrays
 
