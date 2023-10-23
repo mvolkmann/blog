@@ -1183,6 +1183,9 @@ To access a single element of an array,
 follow it with square brackets containing an index.
 For example, `dice_rolls[2] = 6;`.
 
+Bounds checking is performed on array element accesses
+at compile-time for known indexes and at run-time for run-time indexes.
+
 To get a subset of an array as a slice, reference a range of its items.
 For example, `dice_rolls[2..4]` gives a "slice" of the items at index 2 and 3.
 Note that the `..` operator creates a range where the upper bound is exclusive.
@@ -1287,14 +1290,26 @@ test "multi-dimensional array" {
 
 A slice is an array-like collection of values
 whose length is not known until run-time.
+Recall that the length of an array is part of its type and is known at compile-time.
 A slice references (doesn't copy) a range of indexes
 from an array or another slice.
 The range must be specified with indexes separated by two dots
 which means the start index is inclusive and the end index is exclusive.
 
+Slices are represented by a pointer and a length.
+
 Slice types have the syntax `[]type`
 with no length specified in the square brackets.
 For example, `[]u8` is a slice of `u8` values.
+
+Slice elements are accessed with square brackets that include an index,
+just like array elements.
+Modifying an element of a slice
+actually modifies the corresponding array element.
+Both see the same values.
+
+Like with arrays, bounds checking is performed on slice element accesses
+at compile-time for known indexes and at run-time for run-time indexes.
 
 The following code demonstrates creating, accessing, and modifying slices:
 
@@ -5996,14 +6011,6 @@ To declare an array,
 - number of elements comes first, then the type, then the initial values in curly braces
 - ex. const name = [3]i32{10, 20, 30};
 - ex. var name = [_]i32{10, 20, 30}; // length is inferred from initial values
-
-Slices
-
-- “A slice is a pointer and a length. The difference between an array and a slice is that the array's length is part of the type and known at compile-time, whereas the slice's length is known at runtime.”
-- like arrays, slices have a `len` field
-- to get a slice from an array, var mySlice = myArray[startIndex..endIndex]; // inclusive?
-- access and modify slice elements just like with array elements
-- do both perform bounds checking and generate a well-known error when outside?
 
 Vectors
 
