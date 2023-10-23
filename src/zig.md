@@ -3906,10 +3906,19 @@ It differs in the following was described in the docs:
   when mixing insertions and deletions with iteration.
 - The `values` method "returns the backing array of values".
 
-<a href="https://ziglang.org/documentation/master/std/#A;std:StringHashMap"
-target="_blank">std.StringHashMap</a>
+<a href="https://ziglang.org/documentation/master/std/#A;std:BufMap"
+target="_blank">std.BufMap</a>
+is used for maps where both keys and values are strings.
+
+<a href="https://ziglang.org/documentation/master/std/#A;std:StringArrayHashMap"
+target="_blank">std.StringArrayHashMap</a>
 provides a good hashing function for string keys.
 The argument is the value type.
+
+<a href="https://ziglang.org/documentation/master/std/#A;std:StringHashMap"
+target="_blank">std.StringHashMap</a>
+is similar to `StringArrayHashMap`.
+TODO: How do they differ?
 
 The following code demonstrates common operations on `HashMap`s.
 
@@ -3921,6 +3930,11 @@ const expect = std.testing.expect;
 const expectEqual = std.testing.expectEqual;
 const expectEqualStrings = std.testing.expectEqualStrings;
 const String = []const u8;
+
+const Dog = struct {
+    name: String,
+    breed: String,
+};
 
 test "AutoArrayHashMap" {
     var map = std.AutoArrayHashMap(u8, String).init(allocator);
@@ -3946,7 +3960,7 @@ test "AutoArrayHashMap" {
 
     const removed = map.orderedRemove(99);
     try expect(removed);
-    try expectEqual(@as(?[]const u8, null), map.get(99));
+    try expectEqual(@as(?String, null), map.get(99));
 }
 
 test "AutoHashMap" {
@@ -3982,8 +3996,18 @@ test "AutoHashMap" {
 
     const removed = map.remove(99);
     try expect(removed);
-    // try expectEqual(map.get(99), null);
-    try expectEqual(@as(?[]const u8, null), map.get(99));
+    try expectEqual(@as(?String, null), map.get(99));
+}
+
+test "BufMap" {
+    var map = std.BufMap.init(allocator);
+    defer map.deinit();
+
+    try map.put("Comet", "whippet");
+    try map.put("Oscar", "german shorthaired pointer");
+    try expectEqual(map.count(), 2);
+    try expectEqualStrings(map.get("Comet").?, "whippet");
+    try expectEqualStrings(map.get("Oscar").?, "german shorthaired pointer");
 }
 
 test "ComptimeStringMap" {
@@ -4011,6 +4035,24 @@ test "ComptimeStringMap" {
     try expectEqual(@as(u8, 99), map.get("Gretzky").?);
     try expectEqual(@as(u8, 4), map.get("Orr").?);
     try expectEqual(@as(u8, 19), map.get("Ratelle").?);
+}
+
+test "StringArrayHashMap" {
+    const dogs = [_]Dog{
+        .{ .name = "Comet", .breed = "whippet" },
+        .{ .name = "Oscar", .breed = "german shorthaired pointer" },
+    };
+
+    // The keys are strings and the values are Dogs.
+    var map = std.StringArrayHashMap(Dog).init(allocator);
+    defer map.deinit();
+
+    for (dogs) |dog| {
+        try map.put(dog.name, dog);
+    }
+
+    try expectEqualStrings(map.get("Comet").?.breed, "whippet");
+    try expectEqualStrings(map.get("Oscar").?.breed, "german shorthaired pointer");
 }
 
 test "StringHashMap" {
@@ -5946,10 +5988,6 @@ blk: {
 }
 ```
 
-Are these the same return types?
-!i32
-anyerror!i32
-
 Learn about anonymous structs which are called "tuples".
 Can they be used like JavaScript objects.
 
@@ -6021,24 +6059,6 @@ Vectors
   - const v2 = @Vector(\_, f32){ 9.8, 8.7, 7.6 };
   - const v3 = v1 + v2;
 - vectors are compatible with fixed-length arrays with the same length or slices of arrays with the same length; can be assigned to each other
-
-Standard Library Data Structures
-
-- ArrayList - “a contiguous, growable list of items in memory”
-- AutoArrayHashMap
-- AutoArrayHashMapUnmanaged
-- StringArrayHashMap
-- StringArrayHashMapUnmanaged
-- ArrayHashMap
-- BufMap
-- BufSet - a set of strings
-- AutoHashMap
-- AutoHashMapUnmanaged
-- StringHashMap
-- StringHashMapUnmanaged
--
-- more?
-- Set?
 
 Type Coercion and Casting
 
