@@ -1091,7 +1091,8 @@ For example, `@intFromEnum(Color.yellow)` returns `1`.
 
 Enums are typically defined at the global scope rather than inside a function.
 
-Enum values can override their default ordinal value.
+Enum values can override their default ordinal value if an integer type
+is specified in parentheses after the `enum` keyword.
 Subsequent enum values that do not also override their default value
 increment from the ordinal value of the previous enum value.
 
@@ -1108,7 +1109,7 @@ const expectEqual = std.testing.expectEqual;
 
 // Enums must be defined with const or comptime, not var.
 // A type must be specified for an enum
-// in order to override its default ordinal values.
+// in order to access and override its default ordinal values.
 const Color = enum(u8) {
     red, // defaults to 0
     yellow, // assigned 1
@@ -6020,14 +6021,6 @@ Vectors
   - const v2 = @Vector(\_, f32){ 9.8, 8.7, 7.6 };
   - const v3 = v1 + v2;
 - vectors are compatible with fixed-length arrays with the same length or slices of arrays with the same length; can be assigned to each other
-
-Enumerations
-
-- to define, const Color = enum { red, green, blue, };
-- to use, var color = Color.red;
-- to make tag values available, specify the tag type
-  - for example: const Color = enum(u8) { red, green, blue, }; // assigns 0, 1, and 2
-- to define with specific values, const Color = enum(u8) { red = 10, green = 20, blue = 30, };
 
 Standard Library Data Structures
 
