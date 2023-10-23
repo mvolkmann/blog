@@ -249,7 +249,7 @@ and enter `zig init-exe`.
 This creates the file `build.zig` and
 a `src` directory containing the file `main.zig`.
 
-### Zig build
+### Zig Build
 
 The file `build.zig` is a build script implemented in Zig
 that uses the compiler API.
@@ -323,7 +323,7 @@ that have not changed since the last build.
 The executable file produced by a build
 is stored in `zig-out/bin/{project-name}`.
 
-### Custom Steps
+### Custom Build Steps
 
 The `build.zig` file in a project can define additional steps.
 To do this, define what each step should do in functions like the following:
@@ -1562,7 +1562,9 @@ test "strings" {
 ## Structs
 
 A `struct` is a custom type that holds a collection of
-optional fields and optional methods.
+fields, methods, namespaced constants, and namespaced functions.
+If a `struct` does not contain any fields, it just acts as a namespace.
+
 Struct fields and methods cannot be made private.
 They are always visible outside the `struct` definition.
 
@@ -1579,9 +1581,14 @@ fn square(n: f32) f32 {
 
 // Structs must be defined with const or comptime, not var.
 const Point = struct {
+    // This is a constant because it is "pub const".
+    pub const dimensions = 2;
+
     x: f32 = 1, // default value
     y: f32 = 2, // default value
 
+    // This is a method because it is "pub" and
+    // takes an instance of the struct as its first argument.
     pub fn distanceToOrigin(self: Point) f32 {
         return sqrt(square(self.x) + square(self.y));
     }
@@ -1671,10 +1678,12 @@ The syntax for a literal struct is the same as the syntax for a literal array.
 array items or struct field assignments.
 This syntax can be used to assign a struct instance to a variable
 or pass one to a function.
-A struct definition specified with the `struct` keyword is not required.
-In this sense it is similar to creating objects in JavaScript.
 
-The following example creates a `struct` instance with four properties.
+A literal struct is not required to be associated with a specific `struct` type.
+In this case it is an anonymous struct and
+is similar to creating objects in JavaScript.
+
+The following example creates an anonymous `struct` instance with four properties.
 
 ```zig
     const instance = .{
@@ -1684,17 +1693,17 @@ The following example creates a `struct` instance with four properties.
         .key4 = "text", // type is *const [4:0]u8; 0 is the alignment
     };
 
-    try expectEqual(bool, @TypeOf(instance.key1));
-    try expectEqual(true, instance.key1);
+    try expectEqual(@TypeOf(instance.key1), bool);
+    try expectEqual(instance.key1, true);
 
-    try expectEqual(comptime_int, @TypeOf(instance.key2));
-    try expectEqual(19, instance.key2);
+    try expectEqual(@TypeOf(instance.key2), comptime_int);
+    try expectEqual(instance.key2, 19);
 
-    try expectEqual(comptime_int, @TypeOf(instance.key3));
-    try expectEqual('x', instance.key3);
+    try expectEqual(@TypeOf(instance.key3), comptime_int);
+    try expectEqual(instance.key3, 'x');
 
-    try expectEqual(*const [4:0]u8, @TypeOf(instance.key4));
-    try expectEqual("text", instance.key4);
+    try expectEqual(@TypeOf(instance.key4), *const [4:0]u8);
+    try expectEqual(instance.key4, "text");
 ```
 
 To get information about all the fields in a struct, use `std.meta.fields`.
@@ -1708,7 +1717,6 @@ For each field it prints the name, the type, and its value in the `p1` instance.
         print("value in p1 is {}\n", .{@as(field.type, @field(p1, field.name))});
     }
 }
-
 ```
 
 When a struct instance in one variable is assigned to another,
@@ -1762,7 +1770,8 @@ pub fn main() !void {
 }
 ```
 
-TODO: Add an example of a generic struct using `comptime`.
+A generic type can be defined by a function that returns a `struct`.
+See the "comptime" section for an example.
 
 ## Tuples
 
@@ -2949,6 +2958,8 @@ const print = std.debug.print;
 const stdout = std.io.getStdOut();
 const sow = stdout.writer();
 
+// This is an example of defining a generic type with a function that
+// has "type" parameters and returns a struct that uses the provided types.
 fn makeNode(comptime T: type) type {
     return struct {
         const Self = @This();
@@ -5993,35 +6004,6 @@ Variables
 - non-conforming names can be used with `@“some name”`
 - variables declared outside any function are referred to as “container-level variables”
   - includes variables declared inside struct, union, enum, and opaque (similar to a struct; used for interacting with C code that doesn’t expose field details) definitions (only top-level ones?)
-
-Structs
-
-- struct types are defined with `const SomeName = struct { f1: type1, f2: type2 ,};`
-- struct instances are created with `var someInstance = SomeName { .f1 = v1, .f2 = v2, };`
-- anonymous struct syntax alternative: `var someInstance: SomeName = .{ .f1 = v1, .f2 = v2 };`
-- can any field value be `undefined`?
-- to define a method in a struct, add a `pub` function inside its definition
-- to define a constant in a struct, add `pub const NAME = value;`
-- structs can be used to implement generic functions
-  - “A generic data structure is simply a function that returns a type.”
-  - this example from official docs returns an instance of a dynamically defined struct type for a linked list whose nodes hold values of a given type
-  - Node is a nested type that is available through the returned type
-  - fn LinkedList(comptime T: type) type {
-  - return struct {
-  -     // This just declares a type used for the struct fields below.
-  -     pub const Node = struct {
-  -       prev: ?*Node, // optional value
-  -       next: ?*Node, // optional value
-  -       value: T
-  -     };
-  -     first: ?*Node,
-  -     last: ?*Node,
-  -     length: usize,
-  - }
-  - var numberList = LinkedList(i32) { .first = null, .last = null, .length = 0 };
-  - const NumberList = LinkedList(i32);
-  - var node = NumberList.Node { .prev = null, .next = null, .value = 19 };
-  - var numberList = LinkedList(i32) { .first = @node, .last = &node, .length = 1 };
 
 Type Coercion and Casting
 
