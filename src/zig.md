@@ -219,6 +219,10 @@ by adding a line that uses them.
 For example, if the variable `foo` is unused,
 the line `_ = foo;` will be added immediately after its declaration.
 
+If running a Zig program results in a stack trace
+that doesn't contain any lines in the code that you wrote,
+try running it again with the `freference-trace` command-line option.
+
 ## Style
 
 Zig has an official {% aTargetBlank
