@@ -818,7 +818,6 @@ test "optional" {
     // Only optional variables can be set to "null".
     var b: ?i8 = null;
 
-    //TODO: Why does Zig require casting the 0 and null values here?
     try expectEqual(a, 0);
     try expectEqual(b, null);
 
@@ -885,7 +884,6 @@ test "struct with optional fields" {
     try expectEqual(dog4.name, null);
     try expectEqual(dog4.breed, null);
 
-    //TODO: Why is the cast to String necessary here?
     try expectEqual(present(dog1), "Comet");
     try expectEqual(present(dog2), "Oscar");
     try expectEqual(present(dog3), "Beagle");
@@ -1626,7 +1624,15 @@ test "Point struct" {
     // This iterates over all the fields of the Point struct,
     // prints the name, the type, and the value in the p1 instance.
     print("\n", .{});
-    // TODO: Why does this only work with "inline"?
+
+    // "for" loops require each captured value to
+    // have the same type that is known at compile-time.
+    // That is not guaranteed for tuples.
+    // The std.meta.fields function returns a tuple.
+    // Making it inline removes the "for" loop
+    // by repeating the body for each item in the tuple.
+    // Typically this does not result in a large increase in generated code
+    // because tuples usually do not contain a large number of items.
     inline for (std.meta.fields(@TypeOf(p1))) |field| {
         print("found field {s} with type {s}\n", .{ field.name, @typeName(field.type) });
         print("value in p1 is {}\n", .{@as(field.type, @field(p1, field.name))});
@@ -1690,11 +1696,9 @@ The following example creates a `struct` instance with four properties.
 To get information about all the fields in a struct, use `std.meta.fields`.
 For example, the following code can be added to the test above.
 For each field it prints the name, the type, and its value in the `p1` instance.
-TODO: Maybe add a section just on Zig reflection.
 
 ```zig
     print("\n", .{});
-    // TODO: Why does this only work with "inline"?
     inline for (std.meta.fields(@TypeOf(p1))) |field| {
         print("found field {s} with type {s}\n", .{ field.name, @typeName(field.type) });
         print("value in p1 is {}\n", .{@as(field.type, @field(p1, field.name))});
@@ -2274,7 +2278,6 @@ Here is an example:
 const std = @import("std");
 const print = std.debug.print;
 
-// TODO: Can errors contain associated data?
 const FetchError = error{TooBig};
 var count: u8 = 0;
 fn fetchCount() FetchError!u8 {
@@ -3186,7 +3189,6 @@ pub fn main() void {
     const d = Dog{ .name = "Comet", .breed = "whippet", .age = 3 };
 
     // Struct reflection
-    // This for loop must be inline.
     inline for (std.meta.fields(Dog)) |field| {
         const T = field.type;
         print(
@@ -3205,7 +3207,6 @@ pub fn main() void {
     print("nextInteger type is {}\n", .{T}); // fn(i32, bool) i32
     const info = @typeInfo(T);
     if (info == .Fn) { // if T is a function type ...
-        // This for loop must be inline.
         inline for (1.., info.Fn.params) |number, param| {
             // Can't get parameter name, only type.
             print("parameter {d} type is {any}\n", .{ number, param.type });
