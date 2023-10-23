@@ -2624,9 +2624,6 @@ which terminates the application and outputs a stack trace.
 
 ## Functions
 
-- to define a type that is a pointer to a function and can be used as a argument type, const myFnType = \*const fn (p1: type1, p2: type2) return type;
-- can use reflection to get details about the parameters and return type of a given function with `@typeInfo(@TypeOf(someFunction)).Fn` which gives an object with the fields `params` (an array of objects with `type` and `name`? fields?) and `return_type` (a type)
-
 The syntax for defining a function is:
 
 ```zig
@@ -2740,8 +2737,9 @@ Inside the function, use the builtin function `@TypeOf(variableName)`
 to obtain the actual type.
 Use the builtin function `@typeInfo(variableName)`
 to get information about the actual type.
-This returns a `std.builtin.Type` object.
-TODO: What are the fields in a Type object?
+This returns a `std.builtin.Type` which is a typed union.
+
+TODO: Add an example of using this.
 
 ### Anonymous Functions
 
@@ -2879,6 +2877,32 @@ test "anytype" {
     // the first argument is not a struct with a "top_speed" field.
     // _ = try travelTime("wrong", distance);
 }
+```
+
+### Pointers to Functions
+
+To define a type that is a pointer to a function
+and can be used as a argument type,
+do something like the following:
+
+```zig
+const myFnType = \*const fn (p1: type1, p2: type2) return type;
+```
+
+TODO: Add more detail and a full example.
+
+### Function Reflection
+
+The builtin function `@typeInfo` can be used to obtain an object
+that describes the parameters and return type of a function.
+The `params` field of this object is an array of objects
+with `type` and `name` fields.
+The `return_type` field of this object gives type returned.
+
+The following code demonstrates this:
+
+```zig
+TODO: Provide example code including @typeInfo(@TypeOf(someFunction)).Fn.
 ```
 
 ## comptime Keyword
