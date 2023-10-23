@@ -729,8 +729,12 @@ The syntax for declaring a variable is:
 {const|var} {name}[: type] = {value};
 ```
 
-The parts inside curly braces are required and
-the parts inside square brackets are optional.
+Variables can be declared at file scope (referred to as "container-level"),
+function scopes, and block scopes within functions.
+Variables declared inside a `struct`, `union`, `enum`, or `opaque`
+are also consider container-level.
+(An `opaque` is similar to a `struct` and is used for
+interacting with C code that doesn't expose field details.)
 
 Variable declared with `const` are immutable and
 variable declared with `var` are mutable.
@@ -738,10 +742,25 @@ Using `const` is preferred when the value will not be modified.
 
 Variable names must begin with a letter
 and are composed of letters, numbers, and underscores.
-Variable names cannot match a keyword (listed in the next section).
+Variable names cannot match a keyword (listed in the "Keywords" section).
 The convention for variable names is to use snake_case.
+The name should begin lowercase unless the value is a type.
+
+Non-conforming names can be used with the syntax `@"some name"`.
+Use of this seems like a bad idea.
 
 The type can be omitted if it can be inferred from the value.
+However, the inferred type for numeric values is `comptime_int`
+or `comptime_float` and is almost never the desired type.
+It is better to supply explicit types for numeric variables.
+
+All variables must be initialized, but they can be set to `undefined`
+which is a way of stating that a real value will be assigned later.
+Using a variable whose value is `undefined` does not trigger an error
+and results in unexpected results.
+
+The parts inside curly braces are required and
+the parts inside square brackets are optional.
 
 An initial value is required, but can be set to `undefined`
 as way of stating that a value will be assigned later.
@@ -5997,18 +6016,6 @@ Standard Library Data Structures
 -
 - more?
 - Set?
-
-Variables
-
-- can declare at file scope or in function scopes
-- variables must be initialized, but an initialize to `undefined`; ex. `var score: u32 = 0; const maxScore = 10;`
-- declare immutable variables with const or mutable variables with var; prefer const when possible
-- does it support type inference?
-- variable names cannot shadow those in outer scopes
-- names must start with a letter and contain letters, numbers, and underscores
-- non-conforming names can be used with `@“some name”`
-- variables declared outside any function are referred to as “container-level variables”
-  - includes variables declared inside struct, union, enum, and opaque (similar to a struct; used for interacting with C code that doesn’t expose field details) definitions (only top-level ones?)
 
 Type Coercion and Casting
 
