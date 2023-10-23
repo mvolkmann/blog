@@ -12,10 +12,21 @@ layout: topic-layout.njk
 
 ## Overview
 
-<figure style="width: 50%">
-  <img alt="Ziggy, the Zig mascot"
-    src="/blog/assets/ziggy.svg?v={{pkg.version}}">
-  <figcaption>Ziggy, the lizard Zig mascot</figcaption>
+<figure style="width: 33%">
+  <img alt="Ziggy, the Zig mascot" style="border: 0"
+    src="/blog/assets/zig-logo.svg?v={{pkg.version}}">
+</figure>
+
+<figure style="width: 33%">
+  <img alt="Ziggy, the Zig mascot" style="border: 0"
+    src="/blog/assets/zig-mascot-ziggy.svg?v={{pkg.version}}">
+  <figcaption>Ziggy, Zig mascot</figcaption>
+</figure>
+
+<figure style="width: 33%">
+  <img alt="Zero, the Zig mascot" style="border: 0"
+    src="/blog/assets/zig-mascot-zero.svg?v={{pkg.version}}">
+  <figcaption>Zero, Zig mascot</figcaption>
 </figure>
 
 {% aTargetBlank "https://ziglang.org", "Zig" %}
