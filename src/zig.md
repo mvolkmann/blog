@@ -2624,6 +2624,9 @@ which terminates the application and outputs a stack trace.
 
 ## Functions
 
+- to define a type that is a pointer to a function and can be used as a argument type, const myFnType = \*const fn (p1: type1, p2: type2) return type;
+- can use reflection to get details about the parameters and return type of a given function with `@typeInfo(@TypeOf(someFunction)).Fn` which gives an object with the fields `params` (an array of objects with `type` and `name`? fields?) and `return_type` (a type)
+
 The syntax for defining a function is:
 
 ```zig
@@ -2632,52 +2635,54 @@ The syntax for defining a function is:
 }
 ```
 
-Anonymous functions (lambdas) are not supported.
-For the rationale, see {% aTargetBlank
-"https://github.com/ziglang/zig/issues/1717", "issue 1717" %}.
+To make a function available outside from current its source file,
+precede it with the `pub` keyword.
 
-Marking a function as `pub` makes it available
-to be imported from outside its source file.
+To also make it callable from C,
+precede it with the `export` keyword instead of `pub`.
 
 The convention for function names is to use camelCase.
 If the function returns a type, the name should begin with an uppercase letter.
 
+### Parameters
+
 The parameter list is a comma-separated list of parameter declarations.
 The syntax for each parameter declaration is `{name}: {type}`.
 
-Zig does not support "vararg" functions,
-so functions that would have a variable number of arguments
-in other languages take a literal array (`.{}`) instead.
+Function parameters are immutable,
+meaning that function bodies cannot modify them.
 
-Function parameters cannot be modified.
+Primitive values are passed by value.
+The compiler will decide whether to pass non-primitive types
+(structs, unions, and arrays) by value or reference
+based on which it determines is faster.
+To force a non-primitive type to be passed by reference,
+pass a pointer by preceding with `&`.
+To accept a parameter as a pointer, precede its type with \*.
+
+Functions cannot take a variable number of arguments,
+so functions that would have a variable number of arguments
+in other languages take a tuple instead.
+
+### Return Types
 
 The return type syntax is `[error-type][!][return-type]`.
-For example:
 
-- `i32` means an integer is returned and no errors can be returned
-- `!i32` means an integer or one of the errors inferred from the function body is returned
-- `anyerror!i32` means an integer or any kind of error is returned
-- `MyErrorSet!i32` means an integer or one of the errors in `MyErrorSet` is returned
+If a function does not return a value,
+the return type must be specified as `void`.
+
+If a function can return an error,
+its return type must be preceded by `!`.
+
+The following are examples of function return types:
+
+- `i32`: an integer is returned and no errors can be returned
+- `!i32`: an integer or one of the errors inferred from the function body is returned
+- `anyerror!i32`: an integer or any kind of error is returned
+- `MyErrorSet!i32`: an integer or one of the errors in `MyErrorSet` is returned
 
 When an error occurs in a function, an error `enum` value is returned.
 Zig does not support throwing exceptions.
-
-To call a function that returns a value and not use it, assign it to `_`.
-For example, `_ = someFn();`
-
-When a function returns, all stack memory allocations
-made in the function are freed.
-A common way to allow a function to modify data
-that is not freed when the function returns is to
-pass a pointer to data owned by the caller and modify that inside the function.
-
-Literal strings are known and compile-time and
-stored in memory that is not part of the stack or the heap.
-A function can create a literal string and return it
-since it will not be freed when the function exits.
-
-Async functions are not currently supported,
-but there are plans to support them in the future.
 
 The return type of a function can be inferred
 from the type of one of its arguments.
@@ -2709,18 +2714,51 @@ For examples of this, see this {% aTargetBlank
 "https://sourcegraph.com/search?q=context:global+lang:Zig+fn.*%5C)%5C+switch&patternType=regexp&sm=1&groupBy=repo",
 "Sourcegraph search" %}.
 
+### Calling Functions
+
+To call a function that returns a value and not use it, assign it to `_`.
+For example, `_ = someFn();`
+
+When a function returns, all stack memory allocations
+made in the function are freed.
+A common way to allow a function to modify data
+that is not freed when the function returns is to
+pass a pointer to data owned by the caller and modify that inside the function.
+
+### Literal Strings
+
+Literal strings are known at compile-time and
+stored in memory that is not part of the stack or the heap.
+A function can create a literal string and return it
+since it will not be freed when the function exits.
+
+### Variable Parameter Types
+
+To allow any type of value to be passed as an argument,
+use `anytype` for the parameter type.
+Inside the function, use the builtin function `@TypeOf(variableName)`
+to obtain the actual type.
+Use the builtin function `@typeInfo(variableName)`
+to get information about the actual type.
+This returns a `std.builtin.Type` object.
+TODO: What are the fields in a Type object?
+
 ### Anonymous Functions
 
-Anonymous functions in Zig is somewhat tedious to use
-because they must be wrapped in a `struct` and then extracted from it.
+Anonymous functions (lambdas) are not supported.
+For the rationale, see {% aTargetBlank
+"https://github.com/ziglang/zig/issues/1717", "issue 1717" %}.
+
+A work-around for this is to wrap a function in a `struct`
+and then extract it.  This makes them tedious to use.
 It's probably best to make it a named function outside the struct
 and just use that.
 
 A struct containing only functions and no fields
 is just a namespace and doesn't consume any extra memory.
 
-The following code demonstrates using an anonymous function.
-It is passed to the `map` function.
+The following code demonstrates this approach.
+The function is passed to the `map` function.
 
 ```zig
 const std = @import("std");
@@ -2757,7 +2795,7 @@ test "anonymous function" {
 }
 ```
 
-## Duck Typing with anytype
+### Duck Typing with anytype
 
 Functions can have parameters with the type `anytype`.
 As the name implies, this allows any kind of value to be passed.
@@ -5955,28 +5993,6 @@ Structs
   - const NumberList = LinkedList(i32);
   - var node = NumberList.Node { .prev = null, .next = null, .value = 19 };
   - var numberList = LinkedList(i32) { .first = @node, .last = &node, .length = 1 };
-
-Functions
-
-- parameters are immutable; function bodies cannot modify them
-- primitive types are passed by value (copy)
-- Zig will decide whether to pass non-primitive types (structs, unions, and arrays) by value or reference based on which it determines is faster
-- to force pass by reference, pass a pointer
-  - to pass an argument by reference (a pointer), precede with &
-  - to accept a parameter as a pointer, precede type with \*
-- if there is no return value, the return type is void
-- if an error can be returned, precede the return type with !
-- to declare, fn someName(p1: type1, p2: type2) returnType { … }
-- to make available outside current source file and callable from C, precede with `export`; is this only for creating libraries?
-- to allow other source files to import the function, precede it with `pub`
-- to define a type that is a pointer to a function and can be used as a argument type, const myFnType = \*const fn (p1: type1, p2: type2) return type;
-- variable parameter types and reflection
-  - to allow any type of value to be passed as an argument, use `anytype` for the parameter type
-  - inside the function, use the builtin function `@TypeOf(variableName)` to refer to the actual type
-  - inside the function, use the builtin function `@typeInfo(variableName)` to get information about the actual type
-    - @typeInfo(@TypeOf) returns a std.builtin.Type object
-    - what are the properties and methods on a Type object?
-- can use reflection to get details about the parameters and return type of a given function with `@typeInfo(@TypeOf(someFunction)).Fn` which gives an object with the fields `params` (an array of objects with `type` and `name`? fields?) and `return_type` (a type)
 
 Type Coercion and Casting
 
