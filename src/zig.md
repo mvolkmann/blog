@@ -3287,6 +3287,99 @@ when changed to be `inline`.
   src="/blog/assets/zig-inline-function.png?v={{pkg.version}}"
   title="Zig inline function">
 
+## Polymorphism
+
+Generic functions can be implemented using parameters with the type `anytype`
+or by using unions.  This achieves a form of polymorphism.
+
+The following code demonstrates both approaches.
+
+```zig
+const std = @import("std");
+const print = std.debug.print;
+const trait = std.meta.trait;
+const expectEqual = std.testing.expectEqual;
+
+const Circle = struct {
+    radius: f32 = 0,
+    pub fn area(self: @This()) f32 {
+        return std.math.pi * self.radius * self.radius;
+    }
+};
+
+const Rectangle = struct {
+    width: f32 = 0,
+    height: f32 = 0,
+    pub fn area(self: @This()) f32 {
+        return self.width * self.height;
+    }
+};
+
+const Square = struct {
+    size: f32 = 0,
+    pub fn area(self: @This()) f32 {
+        return self.size * self.size;
+    }
+};
+
+fn anyArea(shape: anytype) f32 {
+    // This comptime block isn't necessary, but it provides documentation
+    // about the expectations of the shape type.
+    comptime {
+        if (!trait.hasFn("area")(@TypeOf(shape.*))) {
+            @compileError("anyArea expects shape to have area function");
+        }
+    }
+    return shape.area();
+}
+
+test "polymorphism with anytype" {
+    const r = Rectangle{ .width = 2, .height = 3 };
+    try expectEqual(r.area(), 6.0);
+    try expectEqual(anyArea(&r), 6.0);
+
+    const shapes = .{
+        Circle{ .radius = 2 },
+        Rectangle{ .width = 2, .height = 3 },
+        Square{ .size = 2 },
+    };
+
+    const expected = [_]f32{ 12.5663706, 6.0, 4.0 };
+
+    inline for (shapes, 0..) |shape, index| {
+        try expectEqual(anyArea(&shape), expected[index]);
+    }
+}
+
+const Shape = union(enum) {
+    circle: Circle,
+    rectangle: Rectangle,
+    square: Square,
+};
+
+fn shapeArea(shape: *const Shape) f32 {
+    return switch (shape.*) {
+        .circle => |c| c.area(),
+        .rectangle => |r| r.area(),
+        .square => |s| s.area(),
+    };
+}
+
+test "polymorphism with union" {
+    const shapes = [_]Shape{
+        .{ .circle = Circle{ .radius = 2 } },
+        .{ .rectangle = Rectangle{ .width = 2, .height = 3 } },
+        .{ .square = Square{ .size = 2 } },
+    };
+
+    const expected = [_]f32{ 12.5663706, 6.0, 4.0 };
+
+    for (shapes, 0..) |shape, index| {
+        try expectEqual(shapeArea(&shape), expected[index]);
+    }
+}
+```
+
 ## Reflection
 
 The following builtin functions support reflection:
@@ -4452,7 +4545,8 @@ TODO: Find the proper category for these!
   const expectEqual = std.testing.expectEqual;
 
   test "vector" {
-      // Cannot infer the length using _.
+      // The benefit is most apparent when the length is large.
+      // The length cannot be inferred using _.
       const v1 = @Vector(3, f32){ 1.2, 2.3, 3.4 };
       const v2 = @Vector(3, f32){ 9.8, 8.7, 7.6 };
       const v3 = v1 + v2;
