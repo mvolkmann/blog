@@ -4435,6 +4435,37 @@ to achieve better error handling.
 TODO: Find the proper category for these!
 
 - `@Vector` -
+
+  This creates an array-like, fixed length collection of elements.
+  The elements must all be of the same primitive type or be pointers.
+  The advantage vectors have over arrays is that certain operations,
+  using standard operators, can be performed on the elements in parallel.
+  If available in the current processor, {% aTargetBlank
+  "https://en.wikipedia.org/wiki/Single_instruction,_multiple_data", "SIMD" %}
+  instructions are used.
+  A new vector containing the results is returned.
+
+  For example:
+
+  ```zig
+  const std = @import("std");
+  const expectEqual = std.testing.expectEqual;
+
+  test "vector" {
+      // Cannot infer the length using _.
+      const v1 = @Vector(3, f32){ 1.2, 2.3, 3.4 };
+      const v2 = @Vector(3, f32){ 9.8, 8.7, 7.6 };
+      const v3 = v1 + v2;
+      try expectEqual(v3[0], 1.2 + 9.8);
+      try expectEqual(v3[1], 2.3 + 8.7);
+      try expectEqual(v3[2], 3.4 + 7.6);
+  }
+  ```
+
+  Vectors are compatible with fixed-length arrays with the same length
+  or slices of arrays with the same length.
+  These can be assigned to each other.
+
 - `@extern` -
 - `@inComptime` -
 - `@offsetOf` -
@@ -6061,15 +6092,6 @@ To declare an array,
 - number of elements comes first, then the type, then the initial values in curly braces
 - ex. const name = [3]i32{10, 20, 30};
 - ex. var name = [_]i32{10, 20, 30}; // length is inferred from initial values
-
-Vectors
-
-- sets of primitive values or pointers
-- can operate on them in parallel using SIMD instructions if available using standard operators that return a new vector
-  - const v1 = @Vector(_, f32){ 1.2, 2.3, 3.4 }; // need to specify length instead of using _?
-  - const v2 = @Vector(\_, f32){ 9.8, 8.7, 7.6 };
-  - const v3 = v1 + v2;
-- vectors are compatible with fixed-length arrays with the same length or slices of arrays with the same length; can be assigned to each other
 
 Type Coercion and Casting
 
