@@ -3324,10 +3324,13 @@ const Square = struct {
 
 fn anyArea(shape: anytype) f32 {
     // This comptime block isn't necessary, but it provides documentation
-    // about the expectations of the shape type.
+    // about the expectations on the shape type.
     comptime {
+        if (!trait.isPtrTo(.Struct)(@TypeOf(shape))) {
+            @compileError("shape must be a pointer to a struct");
+        }
         if (!trait.hasFn("area")(@TypeOf(shape.*))) {
-            @compileError("anyArea expects shape to have area function");
+            @compileError("shape must have an area method");
         }
     }
     return shape.area();
@@ -3349,6 +3352,10 @@ test "polymorphism with anytype" {
     inline for (shapes, 0..) |shape, index| {
         try expectEqual(anyArea(&shape), expected[index]);
     }
+
+    // This demonstrates the error "shape must be a pointer to a struct".
+    // const area = anyArea(Square{ .size = 2 });
+    // try expectEqual(area, 4);
 }
 
 const Shape = union(enum) {
