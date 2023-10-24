@@ -46,6 +46,7 @@ manual memory management that is required
 due to lack of automated garbage collection.
 
 One appeal of Zig is that it is simpler than C++ and Rust.
+However, Zig does not provide the same level of memory safety as Rust.
 
 Zig emphasizes:
 
@@ -5553,7 +5554,8 @@ to achieve better error handling.
 
 ## Tests
 
-Unit tests can be included in source files
+Zig has a builtin testing framework that allows
+unit tests to be included in source files
 in order to test the functions they define.
 
 Each test is described by the `test` keyword followed by
@@ -6097,33 +6099,12 @@ To run the resulting executable, enter `./hello`.
 
 Learn about async/await.
 
-- Precede function return types with ? if null can be returned.
-- Investigate Zig string libraries.
-- does it always catch when memory is not freed?
-- supports low-level memory control using allocators
-  - page_allocator, c_allocator, ArenaAllocator, FixedBufferAllocator, GeneralPurposeAllocator, std.testing.allocator
-- not memory-safe like Rust
-- no operator overloading
-- no exceptions; functions that can fail must return an error value (typically an enum?)
 - comptime blocks run at compile time; takes the place of preprocessor directives and macros
 - comptime variables are initialized at compile time
-- has a builtin testing framework that uses the `test` keyword followed by a description string and a block of code that implements the test; enter `zig test {file-path}` to run the tests in a given file
 - `zig cc` is an alternate C/C++ compiler
   - can build a platform-specific executable for the current platform
   - can build an executable for a specified platform
   - can find bugs that standard C/C++ compilers do not
-
-Learn about anonymous structs which are called "tuples".
-Can they be used like JavaScript objects.
-
-Printing type names:
-
-```zig
-const m1 = try allocator.alloc(u8, 1);
-const m2 = try allocator.alloc(u8, 10);
-const m3 = try allocator.alloc(u8, 100);
-std.log.info("{s}", .{@typeName (@Type0f(m3))});
-```
 
 See zig-arena-allocator.jpg in Downloads.
 
