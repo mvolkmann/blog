@@ -260,6 +260,11 @@ and enter `zig init-exe`.
 This creates the file `build.zig` and
 a `src` directory containing the file `main.zig`.
 
+To create a new Zig library, create a directory for it, cd to the directory,
+and enter `zig init-lib`.
+This creates the same files and directories as `zig init-exe`,
+but the contents of `main.zig` are different.
+
 ### Zig Build
 
 The file `build.zig` is a build script implemented in Zig
@@ -6177,8 +6182,6 @@ No support for interfaces.
 Errors cannot hold associated data. Use out parameters.
 Can transpile Zig to C.
 having a trailing comma after the last field in a struct changes how zig formats the code. It will keep each field on a separate line. If you remove the trailing comma from the last field, and all the fields will fit on a single line, then the formatter will do that.
-
-To create a new library, enter `zip init-lib`.
 
 Data types include u8 (single byte unsigned integer), …
 Strings are delimited with double quotes.
