@@ -224,6 +224,12 @@ typically contain multiple `.zig` source files.
 
 For VS Code, see the extension {% aTargetBlank
 "https://github.com/ziglang/vscode-zig", "Zig Language" %}.
+This provides code formatting and intellisense.
+
+Add a trailing comma after the last field in a struct
+causes each field to placed on a separate line.
+Without the trailing comma, if all the fields fit on a single line
+then they will be placed on a single line.
 
 Editor extensions typically handle unused variables
 by adding a line that uses them.
@@ -321,7 +327,7 @@ For example, to build a Windows executable add `-Dtarget=x86_64-windows`.
 This creates a file with a `.exe` extension in the `zig-out/bin` directory.
 
 To see a list of supported targets, enter `zig targets`.
-This outputs a large amount of JSON.  See the values of
+This outputs a large amount of JSON. See the values of
 the keys "arch" and "os" which are JSON arrays of string values.
 
 To build and run the app, enter `zig build run`.
@@ -461,7 +467,9 @@ Here is a portion of the files in the Zig GitHub repository
 that define the standard library:
 
 - `lib`
+
   - `std`
+
     - `std.zig`
 
       ```zig
@@ -483,6 +491,7 @@ that define the standard library:
 
     - `atomic.zig`: imported by `std.zig`
     - `atomic`
+
       - `Atomic.zig`: imported by `atomic.zig`
       - `queue.zig`: imported by `atomic.zig`
       - `stack.zig`: imported by `atomic.zig`
@@ -708,17 +717,17 @@ For example, `1_234_567`.
 The following is summary of Zig types from the Ziglings exercise #058.
 These will be discussed in more detail in subsequent sections.
 
-| Type          | Meaning                                          |
-|---------------|--------------------------------------------------|
-| `u8`          | single item |
-| `*u8`         | single-item pointer |
-| `[]u8`        | slice (size known at runtime) |
-| `[5]u8`       | array of 5 u8s |
-| `[*]u8`       | many-item pointer (zero or more) |
-| `enum`        | `{a, b}`  set of unique values a and b |
-| `error`       | `{e, f}`  set of unique error values e and f |
-| `struct`      | `{y: u8, z: i32}`  group of values y and z |
-| `union(enum)` | `{a: u8, b: i32}`  single value either u8 or i32 |
+| Type          | Meaning                                         |
+| ------------- | ----------------------------------------------- |
+| `u8`          | single item                                     |
+| `*u8`         | single-item pointer                             |
+| `[]u8`        | slice (size known at runtime)                   |
+| `[5]u8`       | array of 5 u8s                                  |
+| `[*]u8`       | many-item pointer (zero or more)                |
+| `enum`        | `{a, b}` set of unique values a and b           |
+| `error`       | `{e, f}` set of unique error values e and f     |
+| `struct`      | `{y: u8, z: i32}` group of values y and z       |
+| `union(enum)` | `{a: u8, b: i32}` single value either u8 or i32 |
 
 <br>
 <aside>
@@ -1029,15 +1038,15 @@ The following table describes several types that involve pointers.
 The first three are a single-item pointer and
 the rest (ones with square brackets) are many-item pointers.
 
-| Type       | Meaning                                                    |
-|------------|------------------------------------------------------------|
-| `*T`       | pointer to a T value                                       |
-| `?*T`      | optional pointer to a T value                              |
-| `*?T`      | pointer to an optional T value                             |
-| `[*]T`     | pointer to an unknown number of T values                   |
-| `?[*]T`    | optional pointer to an unknown number of T values          |
-| `[*]?T`    | pointer to an unknown number of optional T values          |
-| `?[*]?T`   | optional pointer to an unknown number of optional T values |
+| Type     | Meaning                                                    |
+| -------- | ---------------------------------------------------------- |
+| `*T`     | pointer to a T value                                       |
+| `?*T`    | optional pointer to a T value                              |
+| `*?T`    | pointer to an optional T value                             |
+| `[*]T`   | pointer to an unknown number of T values                   |
+| `?[*]T`  | optional pointer to an unknown number of T values          |
+| `[*]?T`  | pointer to an unknown number of optional T values          |
+| `?[*]?T` | optional pointer to an unknown number of optional T values |
 
 The type `[*]T` is a slice of pointers to values of type T.
 
@@ -1411,12 +1420,12 @@ such as operating on Unicode characters.
 
 The following string operations are supported using byte arrays.
 
-| Operation          | Example                       |
-| ------------------ | ----------------------------- |
-| assign to variable | var name: []u8 = "Mark";      |
-| get a byte         | const letter2 = name[1]; // a |
-| modify a byte      | name[1] = 'o'; // now "Mork"  |
-| iterate over bytes | for (name) |byte| { ... }     |
+| Operation          | Example                         |
+| ------------------ | ------------------------------- |
+| assign to variable | `var name: []u8 = "Mark";`      |
+| get a byte         | `const letter2 = name[1]; // a` |
+| modify a byte      | `name[1] = 'o'; // now "Mork"`  |
+| iterate over bytes | `for (name) \|byte\| { ... }`   |
 
 One way to create an array of strings is to use an array initializer as follows:
 
@@ -1841,7 +1850,7 @@ For each field it prints the name, the type, and its value in the `p1` instance.
 ```
 
 When a struct instance in one variable is assigned to another,
-a copy is created.  To avoid making a copy, get a pointer instead.
+a copy is created. To avoid making a copy, get a pointer instead.
 
 A `struct` can be responsible for managing its own memory.
 
@@ -1958,7 +1967,6 @@ test "tuple" {
 ```
 
 ## Unions
-
 
 A bare `union` defines a set of fields that a value can have
 where only one is active at a time.
@@ -2548,6 +2556,8 @@ The syntax for labeled blocks was borrowed from {% aTargetBlank
 
 The value of a labeled block is specified using a `break` statement
 that includes the block label.
+If no such `break` statement is encountered,
+the value of the block is the value of the type `void`.
 
 By convention, must block labels in Zig are "blk".
 
@@ -2885,7 +2895,7 @@ For the rationale, see {% aTargetBlank
 "https://github.com/ziglang/zig/issues/1717", "issue 1717" %}.
 
 A work-around for this is to wrap a function in a `struct`
-and then extract it.  This makes them tedious to use.
+and then extract it. This makes them tedious to use.
 It's probably best to make it a named function outside the struct
 and just use that.
 
@@ -3295,7 +3305,7 @@ when changed to be `inline`.
 ## Polymorphism
 
 Generic functions can be implemented using parameters with the type `anytype`
-or by using unions.  This achieves a form of polymorphism.
+or by using unions. This achieves a form of polymorphism.
 
 The following code demonstrates both approaches.
 
@@ -3540,7 +3550,7 @@ having to remember to free it after all that code.
 - `std.heap.LoggingAllocator`
 
   This wraps another allocator and logs all the allocations and frees
-  for debugging purposes.  The following code demonstrates this.
+  for debugging purposes. The following code demonstrates this.
 
   ```zig
   const std = @import("std");
@@ -3555,10 +3565,10 @@ having to remember to free it after all that code.
       var gpa = std.heap.GeneralPurposeAllocator(.{}){}; // can't be const
       var la = std.heap.loggingAllocator(gpa.allocator()); // can't be const
       const allocator = la.allocator();
-  
+
       var list = std.ArrayList(String).init(allocator);
       defer list.deinit();
-  
+
       log("appending red");
       try list.append("red"); // allocates 128 bytes
       log("appending orange");
@@ -3579,7 +3589,7 @@ having to remember to free it after all that code.
       try list.append("black"); // allocs 320 bytes & deallocs previous 128 bytes
       log("appending brown");
       try list.append("brown");
-  
+
       for (list.items) |color| {
           log(color);
       }
@@ -3825,18 +3835,18 @@ The top-level namespaces in the standard library include the following:
 
 - `meta` - metaprogramming helpers
 
-   This namespace has a sub-namespace named `traits`.
-   The following code demonstrates how some of its methods can be used.
+  This namespace has a sub-namespace named `traits`.
+  The following code demonstrates how some of its methods can be used.
 
-   ```zig
-   fn isNumber(v: anytype) bool {
-       return std.meta.trait.isNumber(@TypeOf(v));
-   }
+  ```zig
+  fn isNumber(v: anytype) bool {
+      return std.meta.trait.isNumber(@TypeOf(v));
+  }
 
-   fn isString(v: anytype) bool {
-       return std.meta.trait.isZigString(@TypeOf(v));
-   }
-   ```
+  fn isString(v: anytype) bool {
+      return std.meta.trait.isZigString(@TypeOf(v));
+  }
+  ```
 
 - `net` - networking
 - `os` - wrappers around OS-specific APIs
@@ -4452,19 +4462,19 @@ to achieve better error handling.
 - `@compileLog` -
 - `@embedFile`
 
-   This reads a file at compile time and embeds the text
-   in the compiled code as if it were a literal string.
-   The file path can be absolute or relative.
+  This reads a file at compile time and embeds the text
+  in the compiled code as if it were a literal string.
+  The file path can be absolute or relative.
 
-   ```zig
-   const std = @import("std");
-   const expectEqualStrings = std.testing.expectEqualStrings;
+  ```zig
+  const std = @import("std");
+  const expectEqualStrings = std.testing.expectEqualStrings;
 
-   test "embedFile" {
-       const data = @embedFile("./file_io/data.txt");
-       try expectEqualStrings(data, "Hello, World!");
-   }
-   ```
+  test "embedFile" {
+      const data = @embedFile("./file_io/data.txt");
+      try expectEqualStrings(data, "Hello, World!");
+  }
+  ```
 
 - `@export` -
 - `@import` -
@@ -4496,7 +4506,7 @@ to achieve better error handling.
 
 ### Metaprogramming Builtin Functions (10)
 
-- `@This` - returns the type of the containing `enum`, `struct`, or `union` 
+- `@This` - returns the type of the containing `enum`, `struct`, or `union`
 - `@Type` - returns the type that corresponds to an instance of the `std.builtin.Type` struct
 - `@TypeOf` - returns the type of a given value
 
@@ -5789,7 +5799,6 @@ For example, `zig run commmand_line_args_demo.zig -- foo bar`.
 The first argument will be the path to the executable
 and the remaining arguments will be the actual command-line arguments.
 
-
 The following code demonstrates getting command-line arguments
 and copying them into an `ArrayList` to simply using them.
 
@@ -6088,8 +6097,6 @@ To run the resulting executable, enter `./hello`.
 
 Learn about async/await.
 
-- Functions can specify the type of errors they can return by preceding the
-  ! in the return type with an error type or probably an error set.
 - Precede function return types with ? if null can be returned.
 - Investigate Zig string libraries.
 - does it always catch when memory is not freed?
@@ -6106,36 +6113,6 @@ Learn about async/await.
   - can build an executable for a specified platform
   - can find bugs that standard C/C++ compilers do not
 
-From ziglearn.org:
-
-Blocks in Zig are expressions and can be given labels,
-which are used to yield values. Here, we are using a label called blk.
-Blocks yield values, meaning that they can be used in place of a value.
-The value of an empty block + is a value of the type void
-
-```zig
-test "labelled blocks"
-    const count = bik: {
-        var sum: u32 = 0;
-        var i: u32 = 0;
-        while (i < 10) : (i += 1) sum += i;
-        break blk sum;
-    };
-    expect (count == 45);
-    expect (@Type0f (count) == u32);
-}
-```
-
-This can be seen as being equivalent to C's i++.
-
-```zig
-blk: {
-    const tmp = i;
-    i += 1
-    break :blk tmp;
-}
-```
-
 Learn about anonymous structs which are called "tuples".
 Can they be used like JavaScript objects.
 
@@ -6150,26 +6127,6 @@ std.log.info("{s}", .{@typeName (@Type0f(m3))});
 
 See zig-arena-allocator.jpg in Downloads.
 
-Lambdas are not supported, but there aren't often needed in Zig.
-You can do something like this instead with a struct:
-
-```zig
-var map = std.StringArrayHashMap([]const u8).init(allocator);
-defer map.deinit();
-try map.put("c", "c");
-try map.put("b", "b");
-try map.put("a", "a");
-
-const SortContext = struct {
-    keys: [][]const u8,
-    pub fn lessThan(ctx: @This(), a_index: usize, b_index: usize) bool {
-        return std.mem.lessThan(u8, ctx.keys[a_index], ctx.keys[b_index]);
-    }
-};
-
-map.sort(SortContext{ .keys = map.keys () });
-```
-
 See zig-error-with-associated-data.jpg in Downloads.
 
 See zig-struct-with-method.png in Downloads.
@@ -6177,25 +6134,9 @@ See zig-struct-with-method-calling-2-ways.png in Downloads.
 See zig-generics.jpg in Downloads.
 See zip-enum-and-associated-data.jpg in Downloads.
 
-Demonstrate calling your own C and C++. ode from Zig.
+Demonstrate calling your own C and C++ code from Zig.
 No support for interfaces.
-Errors cannot hold associated data. Use out parameters.
 Can transpile Zig to C.
-having a trailing comma after the last field in a struct changes how zig formats the code. It will keep each field on a separate line. If you remove the trailing comma from the last field, and all the fields will fit on a single line, then the formatter will do that.
-
-Data types include u8 (single byte unsigned integer), …
-Strings are delimited with double quotes.
-
-Constant and variable declarations must be initialized to some value.
-When can the type be inferred from the initial value?
-If the initial value is “undefined” (means uninitialized), does the compiler enforce that it is assigned before it is used? I assume this is different from making it nullable with a “?” before the type.
-
-To declare an array,
-
-- can be const or var
-- number of elements comes first, then the type, then the initial values in curly braces
-- ex. const name = [3]i32{10, 20, 30};
-- ex. var name = [_]i32{10, 20, 30}; // length is inferred from initial values
 
 Type Coercion and Casting
 
@@ -6217,5 +6158,3 @@ Memory Management
   - std.testing.FailingAllocator
   - DESCRIBE EACH OF THESE
   - ARE THERE MORE PREDEFINED ALLOCATORS?
-
-A function return type can be a switch expression that determines the actual type returned.
