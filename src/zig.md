@@ -4621,31 +4621,57 @@ TODO: Find the proper category for these!
 - `@Vector` -
 
   This creates an array-like, fixed length collection of elements.
-  The elements must all be of the same primitive type or be pointers.
-  The advantage vectors have over arrays is that certain operations,
-  using standard operators, can be performed on the elements in parallel.
+  The elements must all be of the same type which can be
+  `bool`, any integer type, any float type or any pointer.
+
+  The advantage vectors have over arrays is that certain operations
+  can be performed on the elements in parallel using standard operators.
   If available in the current processor, {% aTargetBlank
   "https://en.wikipedia.org/wiki/Single_instruction,_multiple_data", "SIMD" %}
   instructions are used.
   A new vector containing the results is returned.
 
-  For example:
+  The benefit of using vectors is most apparent when
+  the length is large and SIMD operations are performed on it.
+
+  Vectors are compatible with fixed-length arrays with the same length
+  or slices of arrays with the same length.
+  These can be assigned to each other.
+
+  The following code demonstrates several operations on vectors.
 
   ```zig
   const std = @import("std");
   const expectEqual = std.testing.expectEqual;
-
-  test "vector" {
-      // The benefit is most apparent when the length is large.
-      // The length cannot be inferred using _.
+  
+  test "vectors" {
+      // The length of a new vector cannot be inferred using _.
       const MyVec = @Vector(3, f32);
       const v1 = MyVec{ 1.2, 2.3, 3.4 };
+  
+      // Elements can be accessed just like with arrays and slices.
+      try expectEqual(v1[0], 1.2);
+      try expectEqual(v1[1], 2.3);
+      try expectEqual(v1[2], 3.4);
+
+      // Can create a vector from an array.
+      const arr1 = [_]f32{ 1.2, 2.3, 3.4 };
+      const vFromArr: @Vector(3, f32) = arr1;
+  
+      // Can create array from vector.
+      const arr2: [3]f32 = vFromArr;
+      try expectEqual(arr1, arr2);
+  
+      // To iterate over vector elements,
+      // create an array from it and iterate over the array.
+  
+      // Can add two vectors.
       const v2 = MyVec{ 9.8, 8.7, 7.6 };
       const v3 = v1 + v2;
       try expectEqual(v3[0], 1.2 + 9.8);
       try expectEqual(v3[1], 2.3 + 8.7);
       try expectEqual(v3[2], 3.4 + 7.6);
-
+  
       // The @splat function creates a vector
       // where all elements have the same value.
       // The result must be assigned to a vector type
@@ -4656,7 +4682,7 @@ TODO: Find the proper category for these!
       try expectEqual(doubled[0], 1.2 * n);
       try expectEqual(doubled[1], 2.3 * n);
       try expectEqual(doubled[2], 3.4 * n);
-
+  
       // The @reduce function performs a given operation on
       // all the elements of a vector and returns a single value.
       try expectEqual(@reduce(.Add, v1), 1.2 + 2.3 + 3.4);
@@ -4665,10 +4691,6 @@ TODO: Find the proper category for these!
       try expectEqual(@reduce(.Max, v1), 3.4);
   }
   ```
-
-  Vectors are compatible with fixed-length arrays with the same length
-  or slices of arrays with the same length.
-  These can be assigned to each other.
 
 - `@extern` -
 - `@inComptime` -
