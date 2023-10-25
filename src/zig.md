@@ -2765,6 +2765,68 @@ test "errdefer" {
 }
 ```
 
+While error sets cannot hold additional data,
+functions include an out parameter that can hold data describing an error.
+The following code demonstrates this.
+
+```zig
+const std = @import("std");
+const print = std.debug.print;
+const String = []const u8;
+
+const expectEqual = std.testing.expectEqual;
+const expectEqualStrings = std.testing.expectEqualStrings;
+
+const EvalError = error{ Negative, TooHigh };
+
+const ErrorData = struct {
+    value: i32,
+    message: String,
+};
+
+fn process(number: i32, error_out: *ErrorData) EvalError!i32 {
+    if (number < 0) {
+        error_out.value = number;
+        error_out.message = "negative";
+        return EvalError.Negative;
+    }
+    if (number > 100) {
+        error_out.value = number;
+        error_out.message = "too high";
+        return EvalError.TooHigh;
+    }
+    return number * 2;
+}
+
+test "negative error" {
+    var error_data: ErrorData = undefined;
+    _ = process(-1, &error_data) catch {
+        try expectEqual(error_data.value, -1);
+        try expectEqualStrings(error_data.message, "negative");
+        return;
+    };
+    unreachable;
+}
+
+test "too high error" {
+    var error_data: ErrorData = undefined;
+    _ = process(101, &error_data) catch {
+        try expectEqual(error_data.value, 101);
+        try expectEqualStrings(error_data.message, "too high");
+        return;
+    };
+    unreachable;
+}
+
+test "success" {
+    var error_data: ErrorData = undefined;
+    const result = process(2, &error_data) catch {
+        unreachable;
+    };
+    try expectEqual(result, 4);
+}
+```
+
 ## Unreachable Code Paths
 
 The `unreachable` statement asserts that a code path should never be reached.
@@ -6125,8 +6187,6 @@ To run the resulting executable, enter `./hello`.
 
 ## CONTINUE CLEANUP OF EVERYTHING BELOW HERE!
 
-See zig-arena-allocator.jpg in Downloads.
-See zig-error-with-associated-data.jpg in Downloads.
 See zig-struct-with-method.png in Downloads.
 See zig-struct-with-method-calling-2-ways.png in Downloads.
 See zig-generics.jpg in Downloads.
