@@ -145,6 +145,7 @@ Zig provides the following run-time checks:
 - {% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std",
   "Zig Standard Library" %}
 - {% aTargetBlank "https://github.com/ziglang/zig", "Zig GitHub repository" %}
+- {% aTargetBlank "https://zig.show", "Zig Showtime" %} YouTube videos
 - {% aTargetBlank "https://blog.logrocket.com/getting-started-zig-programming-language/",
   "Getting started with the Zig programming language" %}
 - {% aTargetBlank "https://ziglings.org", "Ziglings" %} -
@@ -516,6 +517,8 @@ These are used to document the current module (source file).
 
 Doc comments begin with `///`.
 These are used to document variables and functions.
+
+TODO: Determine how to generate documentation.
 
 ## Printing
 
@@ -1326,6 +1329,32 @@ test "multi-dimensional array" {
 }
 ```
 
+The following code demonstrates passing an array
+by value (copy) and reference (pointer);
+
+```zig
+const std = @import("std");
+const expectEqual = std.testing.expectEqual;
+
+fn double(slice: []u8) void {
+    for (slice) |*element| {
+        element.* *= 2;
+    }
+}
+
+test "pass by reference" {
+    var arr = [_]u8{ 1, 2, 3 };
+    double(&arr); // must use &
+    const expected = [_]u8{ 2, 4, 6 };
+    try expectEqual(arr, expected);
+}
+
+test "pass by value" {
+    // var arr = [_]u8{ 1, 2, 3 };
+    // double(arr); // doesn't compile
+}
+```
+
 ## Slices
 
 A slice is an array-like collection of values
@@ -1867,6 +1896,42 @@ For each field it prints the name, the type, and its value in the `p1` instance.
 
 When a struct instance in one variable is assigned to another,
 a copy is created. To avoid making a copy, get a pointer instead.
+
+The following code demonstrates passing a struct
+by value (copy) and reference (pointer);
+
+```zig
+const std = @import("std");
+const expectEqual = std.testing.expectEqual;
+const String = []const u8;
+
+const Dog = struct {
+    name: String,
+    age: u8,
+};
+
+fn haveBirthday1(dog: *Dog) void {
+    dog.age += 1;
+}
+
+fn haveBirthday2(dog: Dog) !void {
+    // Cannot modify dog because it is a const copy.
+    // dog.age += 1; // gives error: cannot assign to constant
+    try expectEqual(dog.age, 3);
+}
+
+test "pass by reference" {
+    var dog = Dog{ .name = "Comet", .age = 3 };
+    haveBirthday1(&dog); // passes a pointer
+    try expectEqual(dog.age, 4); // modified
+}
+
+test "pass by value" {
+    var dog = Dog{ .name = "Comet", .age = 3 };
+    try haveBirthday2(dog); // passes a const copy
+    try expectEqual(dog.age, 3); // not modified
+}
+```
 
 A `struct` can be responsible for managing its own memory.
 
