@@ -1891,7 +1891,7 @@ pub const PathManager = struct {
 };
 ```
 
-Using the custom struct above:
+The following code demonstrates using the custom struct defined above.
 
 ```zig
 pub fn main() !void {
@@ -1903,6 +1903,8 @@ pub fn main() !void {
 
 A generic type can be defined by a function that returns a `struct`.
 See the "comptime" section for an example.
+
+Zig does not support defining an interface to which structs must conform.
 
 ## Tuples
 
@@ -3058,10 +3060,12 @@ TODO: Provide example code including @typeInfo(@TypeOf(someFunction)).Fn.
 The `comptime` keyword marks items that must be known at compile-time.
 It can be applied to:
 
-- function parameters
-- variables declared inside functions
-- expressions such as function calls
-- blocks of code
+- function parameters whose values are known at compile-time
+- variables declared inside functions that are initialized at compile-time
+- expressions such as function calls that are evaluated at compile-time
+- blocks of code that will be run at compile-time
+
+This takes the place of preprocessor directives and macros in C and C++.
 
 The initial values of variables declared at the container level
 (outside any function) are automatically evaluated at compile-time.
@@ -4570,12 +4574,31 @@ TODO: Find the proper category for these!
   test "vector" {
       // The benefit is most apparent when the length is large.
       // The length cannot be inferred using _.
-      const v1 = @Vector(3, f32){ 1.2, 2.3, 3.4 };
-      const v2 = @Vector(3, f32){ 9.8, 8.7, 7.6 };
+      const MyVec = @Vector(3, f32);
+      const v1 = MyVec{ 1.2, 2.3, 3.4 };
+      const v2 = MyVec{ 9.8, 8.7, 7.6 };
       const v3 = v1 + v2;
       try expectEqual(v3[0], 1.2 + 9.8);
       try expectEqual(v3[1], 2.3 + 8.7);
       try expectEqual(v3[2], 3.4 + 7.6);
+
+      // The @splat function creates a vector
+      // where all elements have the same value.
+      // The result must be assigned to a vector type
+      // from which its length and element type are inferred.
+      const n = 2;
+      const twos: MyVec = @splat(n);
+      const doubled = v1 * twos;
+      try expectEqual(doubled[0], 1.2 * n);
+      try expectEqual(doubled[1], 2.3 * n);
+      try expectEqual(doubled[2], 3.4 * n);
+
+      // The @reduce function performs a given operation on
+      // all the elements of a vector and returns a single value.
+      try expectEqual(@reduce(.Add, v1), 1.2 + 2.3 + 3.4);
+      try expectEqual(@reduce(.Mul, v1), 1.2 * 2.3 * 3.4);
+      try expectEqual(@reduce(.Min, v1), 1.2);
+      try expectEqual(@reduce(.Max, v1), 3.4);
   }
   ```
 
@@ -6067,6 +6090,11 @@ TODO: See https://github.com/zigzap/zap which may be the only Zig HTTP server no
 
 Zig provides tooling to compile both C and C++ code.
 
+The command `zig cc` provides an alternate C compiler.
+It can find bugs that standard C/C++ compilers do not.
+It can build a platform-specific executable for
+the current platform or a specified platform.
+
 Here is a C hello world program in the file `hello.c`.
 
 ```c
@@ -6097,31 +6125,17 @@ To run the resulting executable, enter `./hello`.
 
 ## CONTINUE CLEANUP OF EVERYTHING BELOW HERE!
 
-Learn about async/await.
-
-- comptime blocks run at compile time; takes the place of preprocessor directives and macros
-- comptime variables are initialized at compile time
-- `zig cc` is an alternate C/C++ compiler
-  - can build a platform-specific executable for the current platform
-  - can build an executable for a specified platform
-  - can find bugs that standard C/C++ compilers do not
-
 See zig-arena-allocator.jpg in Downloads.
-
 See zig-error-with-associated-data.jpg in Downloads.
-
 See zig-struct-with-method.png in Downloads.
 See zig-struct-with-method-calling-2-ways.png in Downloads.
 See zig-generics.jpg in Downloads.
 See zip-enum-and-associated-data.jpg in Downloads.
 
-Demonstrate calling your own C and C++ code from Zig.
-No support for interfaces.
-Can transpile Zig to C.
-
-Type Coercion and Casting
-
-- Add detail on this!
+- demonstrate calling your own C and C++ code from Zig
+- add details on type coercion and casting
+- learn about using multiple threads
+- learn about async/await
 
 Memory Management
 
