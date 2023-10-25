@@ -3658,6 +3658,20 @@ is less error-prone than allocating memory,
 writing a bunch of code that uses it, and
 having to remember to free it after all that code.
 
+Many structs implemented in the Zig standard library, such as `ArrayList`,
+define a `deinit` method that can be called to free its memory.
+For example, `defer my_array_list.deinit();`
+
+When an allocator is used to explicitly allocate memory,
+it can be freed by calling `allocator.free(pointer);`
+For example, the function `std.mem.join` also returns
+a string that can be freed with `defer allocator.free(my_string)`.
+The `ArrayList` method `toOwnedSlice`
+also returns a string that can be freed in the same way
+where `allocator` is the one passed to the `ArrayList` when it is created.
+
+The Zig standard library provides the following allocators:
+
 - `std.heap.ArenaAllocator`
 
   This allocator uses an "arena" to handle the task of freeing the memory
