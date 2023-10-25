@@ -1757,7 +1757,9 @@ test "Point struct" {
     try expectEqual(p2.y, 3);
 
     const p3 = Point{ .x = 3, .y = 4 };
+    // Two ways to call a method.
     try expectEqual(p3.distanceToOrigin(), 5);
+    try expectEqual(Point.distanceToOrigin(p3), 5);
 
     const p4 = Point{ .x = 6, .y = 8 };
     try expectEqual(p3.distanceTo(p4), 5);
@@ -6186,11 +6188,6 @@ To build this, enter `zig c++ hello.cpp -o hello`.
 To run the resulting executable, enter `./hello`.
 
 ## CONTINUE CLEANUP OF EVERYTHING BELOW HERE!
-
-See zig-struct-with-method.png in Downloads.
-See zig-struct-with-method-calling-2-ways.png in Downloads.
-See zig-generics.jpg in Downloads.
-See zip-enum-and-associated-data.jpg in Downloads.
 
 - demonstrate calling your own C and C++ code from Zig
 - add details on type coercion and casting
