@@ -835,11 +835,21 @@ For example, `const maybeNumber: ?i32 = null;`
 
 The `orelse` operator unwraps an optional value.
 If the value is `null`, the value that follows `orelse` is used.
-For example:
+
+The `orelse` operator can be followed by
+a labeled block that computes the value to use.
+It can also be followed by a return statement to exit the current function.
+
+The following code demonstrates several usages of `orelse`.
 
 ```zig
 const std = @import("std");
 const expectEqual = std.testing.expectEqual;
+
+fn double(n: ?i32) i32 {
+    const value = n orelse return 0;
+    return value * 2;
+}
 
 test "orelse" {
     var maybeNumber: ?i32 = null;
@@ -849,6 +859,9 @@ test "orelse" {
     maybeNumber = 42;
     number = maybeNumber orelse 0;
     try expectEqual(number, 42);
+
+    try expectEqual(double(2), 4);
+    try expectEqual(double(null), 0);
 }
 ```
 
