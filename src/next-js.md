@@ -865,6 +865,7 @@ Here is an example of a component the only reads the data:
 It could of course render additional JSX.
 
 ```js
+'use client';
 import {useDogContext} from '@app/context/dog-context';
 
 export default function Dog() {
@@ -884,7 +885,6 @@ It could of course render additional JSX.
 
 ```js
 'use client';
-
 import {useDogContext} from '@app/context/dog-context';
 
 export default async function DogManager() {
