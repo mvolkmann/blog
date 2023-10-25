@@ -104,6 +104,25 @@ Originally the Zig compiler was implemented in C++.
 The 0.10.0 version of Zig changed to a self-hosted compiler
 which means it is implemented in Zig.
 
+## Pros and Cons
+
+Pros of Zig include:
+
+- run-time speed
+- fast compiler compared to C++ and Rust
+- great control over memory utilization
+- integration with C and C++
+
+Cons of Zig include:
+
+- not yet 1.0
+- no package manager yet
+- tedious string handling
+- labeled `break` syntax is odd
+- no checking for use of variables with `undefined` value
+- some stack traces do not include the offending line
+  (use the `-freference-trace` command-line option)
+
 ## Used By
 
 - {% aTargetBlank "https://bun.sh", "Bun" %} - a JavaScript/TypeScript
@@ -240,7 +259,7 @@ the line `_ = foo;` will be added immediately after its declaration.
 
 If running a Zig program results in a stack trace
 that doesn't contain any lines in the code that you wrote,
-try running it again with the `freference-trace` command-line option.
+try running it again with the `-freference-trace` command-line option.
 
 ## Style
 
