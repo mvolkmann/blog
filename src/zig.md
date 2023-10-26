@@ -112,6 +112,7 @@ Pros of Zig include:
 - fast compiler compared to C++ and Rust
 - great control over memory utilization
 - integration with C and C++
+- nice null handling
 
 Cons of Zig include:
 
