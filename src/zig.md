@@ -2187,7 +2187,7 @@ if (cond1) {
 }
 ```
 
-The conditions must evaluate to a `bool` value.
+The conditions must evaluate to a `bool` or optional value.
 Other types of values are not interpreted as truthy or falsely.
 
 Here is an example that includes random number generation and
