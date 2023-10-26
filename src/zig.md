@@ -647,7 +647,7 @@ const Dog = struct {
     breed: []const u8,
     age: u8,
 
-    const Self = @This();
+    const Self = @This(); // reference to containing struct
     pub fn format(
         value: Self,
         comptime _: []const u8,
@@ -3259,7 +3259,7 @@ const sow = stdout.writer();
 // has "type" parameters and returns a struct that uses the provided types.
 fn makeNode(comptime T: type) type {
     return struct {
-        const Self = @This();
+        const Self = @This(); // reference to containing struct
 
         // left and right are optional pointers to
         // another instance of this struct type.
