@@ -164,6 +164,7 @@ Zig provides the following run-time checks:
 - {% aTargetBlank "https://ziglang.org", "Zig home page" %}
 - {% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std",
   "Zig Standard Library" %}
+- {% aTargetBlank "https://github.com/mvolkmann/zig-examples", "Mark Volkmann's Zig examples" %}
 - {% aTargetBlank "https://github.com/ziglang/zig", "Zig GitHub repository" %}
 - {% aTargetBlank "https://zig.show", "Zig Showtime" %} YouTube videos
 - {% aTargetBlank "https://blog.logrocket.com/getting-started-zig-programming-language/",
