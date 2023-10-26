@@ -88,8 +88,9 @@ Andrew Kelly began work on Zig in August, 2015 (first commit).
 The first public release was in February, 2016.
 
 Despite still being in beta, it has been adopted by many projects.
-The current version of Zig is 0.11.0
-and is expected to reach 1.0 in 2025.
+The current version of Zig is 0.11.0.
+Zig is expected to reach 1.0 in 2025, after 10 years of work.
+Rust took nine years to reach 1.0, so the time frames are similar.
 
 Development of Zig is managed by the Zig Software Foundation (ZSF)
 which is a non-profit organization.
@@ -4551,31 +4552,53 @@ Most of the math builtin functions can
 operator on a single float or a `Vector` of floats.
 When passed a `Vector` of floats, they return a new `Vector` of floats.
 
-- `@addWithOverflow` -
-- `@ceil` - returns the ceiling of a float or Vector of floats
-- `@cos` - returns the cosine of a float or Vector of floats
+- `@addWithOverflow` - takes numbers `a` and `b` and returns a tuple
+  containing `a + b` and a bit indicating whether there was an overflow
+
+- `@ceil` - returns the ceiling of number
+- `@cos` - returns the cosine of a number
 - `@divExact` - returns the quotient of two numbers
-- `@divFloor` -
-- `@divTrunc` -
-- `@exp` -
-- `@exp2` -
-- `@fabs` - returns the absolute value of the float or Vector of floats
-- `@floor` - returns the floor of a float or Vector of floats
-- `@log` -
-- `@log10` -
-- `@log2` -
-- `@max` -
-- `@min` -
-- `@mod` -
-- `@mulAdd` -
-- `@mulWithOverflow` -
-- `@rem` -
-- `@round` -
-- `@sin` - returns the sine of a float or Vector of floats
-- `@sqrt` -returns the square root of a float or Vector of floats
-- `@subWithOverflow` -
-- `@tan` - returns the tangent of a float or Vector of floats
-- `@trunc` -
+- `@divFloor` - returns the quotient of two numbers, rounded toward negative infinity
+- `@divTrunc` - returns the quotient of two numbers, rounded toward zero
+- `@exp` - returns the constant e raised to a given number
+- `@exp2` - returns 2 raised to a given number
+- `@fabs` - returns the absolute value of a number
+- `@floor` - returns the floor of a number
+- `@log` - returns the natural log of a number
+- `@log10` - returns the log base 10 of a number
+- `@log2` - returns the log base 2 of a number
+- `@max` - returns the maximum of two numbers
+- `@min` - returns the minimum of two numbers
+
+- `@mod` - returns the modulo of a numerator and denominator
+
+  ```zig
+  @mod(-5, 3) == 1
+  (@divFloor(a, b) * b) + @mod(a, b) == a
+  ```
+
+- `@mulAdd` - takes numbers `a`, `b`, and `c` and returns `(a * b) + c`
+   only rounding once for better accuracy
+
+- `@mulWithOverflow` - takes numbers `a` and `b` and returns a tuple
+  containing `a * b` and a bit indicating whether there was an overflow
+
+- `@rem` - returns the remainder of a numerator and denominator
+
+  ```zig
+  @rem(-5, 3) == -2
+  (@divTrunc(a, b) * b) + @rem(a, b) == a
+  ```
+
+- `@round` - returns a number rounded away from zero (compare to `@trunc`)
+- `@sin` - returns the sine of a number
+- `@sqrt` -returns the square root of a number
+
+- `@subWithOverflow` - takes numbers `a` and `b` and returns a tuple
+  containing `a - b` and a bit indicating whether there was an overflow
+
+- `@tan` - returns the tangent of a number
+- `@trunc` - returns a number truncated towards zero (compare to `@round`)
 
 ### Bitwise Builtin Functions (8)
 
@@ -4585,7 +4608,10 @@ When passed a `Vector` of floats, they return a new `Vector` of floats.
 - `@ctz` -
 - `@popCount` -
 - `@shlExact` -
-- `@shlWithOverflow` -
+
+- `@shlWithOverflow` - takes a number `a` and shift amount `b` and returns a tuple
+  containing `a << b` and a bit indicating whether there was an overflow
+
 - `@shrExact` -
 
 ### Atomic and Memory Builtin Functions (12)
@@ -4739,6 +4765,7 @@ TODO: Find the proper category for these!
 
   The advantage vectors have over arrays is that certain operations
   can be performed on the elements in parallel using standard operators.
+  This includes many builtin functions such as `@exp` and `@sin`.
   If available in the current processor, {% aTargetBlank
   "https://en.wikipedia.org/wiki/Single_instruction,_multiple_data", "SIMD" %}
   instructions are used.
