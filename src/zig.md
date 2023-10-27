@@ -101,6 +101,9 @@ and to provide education and guidance to students,
 teaching the next generation of programmers to be competent, ethical,
 and to hold each other to high standards."
 
+The Zig core team is composed of around a dozen developers,
+many of which are paid by the foundation to work on Zig full-time.
+
 Originally the Zig compiler was implemented in C++.
 The 0.10.0 version of Zig changed to a self-hosted compiler
 which means it is implemented in Zig.
