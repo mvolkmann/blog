@@ -215,6 +215,8 @@ and `print` is a function inside the `debug` namespace.
 Zig programs require a public `main` function.
 Zig libraries do not.
 
+The function return type `void` means no value will be returned.
+
 The following code, in the file `hello.zig` is a basic hello world program.
 
 ```zig
@@ -552,7 +554,8 @@ Top-level comments begin with `//!`.
 These are used to document the current module (source file).
 
 Doc comments begin with `///`.
-These are used to document variables and functions.
+These are used to document variables, functions,
+and types represented by enums, structs, and unions.
 
 TODO: Determine how to generate documentation.
 
@@ -648,6 +651,8 @@ To write to stdout instead of stderr, do the following:
 ```zig
 const stdout = std.io.getStdOut();
 const sow = stdout.writer();
+// The print method of writers can fail,
+// so possible errors must be handled.
 try sow.print("Hello, {s}!\n", .{"world"});
 ```
 
@@ -695,9 +700,15 @@ passed to functions, and returned from functions.
 
 Zig supports a large number of primitive types.
 
-- signed integers: `i8`, `i16`, `i32`, `i64`, `i128`, or `i{any-number}`
+- signed integers: `i{any-number-of-bits}`
 
-- unsigned integers: `u8`, `u16`, `u32`, `u64`, `u128`, or `u{any-number}`
+  Commonly used numbers of bits are 8, 16, 32, 64, and 128,
+  but any number from 1 to 65535 is allowed.
+
+- unsigned integers: `u{any-number-of-bits}`
+
+  Commonly used numbers of bits are 8, 16, 32, 64, and 128,
+  but any number from 1 to 65535 is allowed.
 
   The `u8` type can be used to hold a single character.
   Single character literals are enclosed in single quotes.
@@ -845,6 +856,10 @@ each with a different meaning.
 - `null`: currently has no value, but may have before and may have later
 - `void`: there will never be a value
 - any kind of error: no value because an error occurred
+
+The keyword `undefined` cannot be used to
+test whether a variable value is currently undefined,
+but a variable can be reset to `undefined`.
 
 The builtin function `@as` performs an explicit type coercion.
 This can be used to ensure that the initial value is treated as a specific type.
@@ -1552,9 +1567,15 @@ It is convenient to define an alias for this type with the following:
 const String = []const u8;
 ```
 
-Literal strings are delimited by double quotes
-and represented by null-terminated byte arrays that use UTF-8 encoding.
+Literal strings are delimited by double quotes.
+They are represented by null-terminated byte arrays, like in C,
+that use UTF-8 encoding.
 For example, `var name = "Mark";`
+
+The fact that strings are null-terminated is an implementation detail
+that typically does not factor into writing string-handling code.
+
+Single character literals are enclosed in single quotes.
 
 Multi-line strings precede each line with double backslashes.
 A newline character is added at the end of each line except the last.
@@ -1568,9 +1589,12 @@ const multiline =
 ;
 ```
 
+To embed Unicode characters in a string library, use the syntax `\u{code}`.
+
 Zig only provides the ability to operate on strings as byte arrays.
 There are Zig libraries that provide additional capabilities
 such as operating on Unicode characters.
+A good place to start is the standard library functions in `std.unicode`.
 
 The following string operations are supported using byte arrays.
 
@@ -2824,7 +2848,7 @@ Functions that can return errors must indicate this
 by preceding their return type with `!`.
 They can optionally specify an error set before the `!`
 that describes the possible errors that can be returned.
-If no error set is specified, the compiler determines
+If no error set is specified, the compiler infers
 the possible errors from the function body.
 
 The following code demonstrates defining a function
@@ -5833,9 +5857,16 @@ to achieve better error handling.
 Zig has a builtin testing framework that allows
 unit tests to be included in source files
 in order to test the functions they define.
+Tests can also exercise functions implemented in other source files.
+
+The test code is only used by the `zig test` command
+and is not included in builds.
 
 Each test is described by the `test` keyword followed by
 a test description string (or a function name) and a block of code.
+Tests are similar to functions that have a return type of `anyerror!void`.
+
+Tests can appear before or after the defintions of the functions they test.
 
 The block of code uses functions whose
 names begin with `expect` to make assertions.
