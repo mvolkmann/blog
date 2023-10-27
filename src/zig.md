@@ -205,6 +205,16 @@ For more detail on installation options, see {% aTargetBlank
 
 ## Getting Started
 
+Zig source files use the file extension `.zig`.
+
+The builtin function `@import` returns a `struct` instance
+whose field values are namespaces, types, functions, and constants.
+In the code below, `debug` is a namespace nested in the `std` namespace
+and `print` is a function inside the `debug` namespace.
+
+Zig programs require a public `main` function.
+Zig libraries do not.
+
 The following code, in the file `hello.zig` is a basic hello world program.
 
 ```zig
@@ -2840,7 +2850,7 @@ pub fn main() !void {
 Omitting the error set from a function return type
 is not the same as specifying the error set `anyerror`.
 Using `anyerror` means that absolutely any kind of error can be returned,
-whereas omiting the error set means
+whereas omitting the error set means
 the compiler will determine the possible errors.
 
 When the error set is omitted from the function return type,
@@ -3932,10 +3942,19 @@ Look for doc comments on public (`pub`) declarations
 and `test` blocks that demonstrate usage.
 
 To use the standard library in a source file,
-add the following line near the top of the file:
+add the following line near the top of the file
+which makes the entire library available:
 
 ```zig
 const std = @import("std");
+```
+
+It is common to declare additional constants
+to make it easier to access standard library functions.
+For example:
+
+```zig
+const print = std.debug.print;
 ```
 
 ### Standard Library Namespaces
