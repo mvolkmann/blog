@@ -117,6 +117,7 @@ Pros of Zig include:
 - great control over memory utilization
 - integration with C and C++
 - nice null handling
+- simple, integrated test framework
 - SIMD support with vectors
 
 Cons of Zig include:
@@ -454,6 +455,130 @@ Next, register the functions inside the provided `build` function as follows:
 To run a custom step, enter `zig build {step-name}`.
 To pass command-line arguments to the step,
 append `--` followed by a space-separated list of arguments.
+
+## Tests
+
+Zig has a builtin testing framework that allows
+unit tests to be included in source files
+in order to test the functions they define.
+Tests can also exercise functions implemented in other source files.
+
+The test code is only used by the `zig test` command
+and is not included in builds.
+
+Each test is described by the `test` keyword followed by
+a test description string (or a function name) and a block of code.
+Tests are similar to functions that have a return type of `anyerror!void`.
+
+Tests can appear before or after the defintions of the functions they test.
+
+The block of code uses functions whose
+names begin with `expect` to make assertions.
+Calls to these functions must be preceded by the `try` keyword.
+If the function call after a `try` returns an error, the test fails.
+
+The `expect` function takes a single argument
+that must be an expression that evaluates to a `bool` value.
+
+The `expectEquals` function takes two arguments
+which are expressions representing an expected and actual value.
+Using `expectedEquals` provided better failure messages than `equal`.
+
+Other testing functions include:
+
+- `expectApproxEqAbs` - tests that two numbers are within a given tolerance
+- `expectApproxEqRel` - similar to `expectApproxEqAbs`, but the tolerance is multiplied
+  by the larger of the absolute values of the two numbers being compared
+- `expectEqualDeep` - tests deep equality of arrays, slices, structs, unions, vectors, and more
+- `expectEqualSentinel` - compares sequences that are terminated by a sentinel value
+- `expectEqualSlices` - compares slices
+- `expectEqualStrings` - compares strings
+- `expectError` - compares a value to an expected error
+- `expectFmt` - tests the string produced by inserting arguments into a format string
+- `expectStringEndsWith` - tests whether a ends begins with another
+- `expectStringStartsWith` - tests whether a string begins with another
+
+The functions `expectApproxEqAbs`, `expectApproxEqRel`,
+`expectEqual`, and `expectEqualDeep` all have the parameters
+`expected: anytype, actual: @TypeOf(expected)`.
+This causes the second argument to be cast to the type of the first.
+If the expected value is a literal value,
+it must be cast with "@as" if it is the first argument,
+but not if it is the second.
+So it is typically easier to pass the actual value as the first argument
+and the expected value as the second argument.
+
+For more information about the `expect` functions, see the {% aTargetBlank
+"https://ziglang.org/documentation/master/std/#A;std:testing",
+"std.testing documentation" %}.
+
+All tests in a source file are executed by running `zig test {file-name}.zig`.
+To run specific tests, add the `--test-filter {text}` option
+which causes it to only run tests whose description contains the given text.
+
+To temporarily skip a test, add the line `return error.SkipZigTest`.
+TODO: Will the compiler complain about unreachable code
+TODO: if this is the first line in the test?
+
+Here is a basic example:
+
+```zig
+const std = @import("std");
+const expectEqual = std.testing.expectEqual;
+
+pub fn add(a: i32, b: i32) i32 {
+    return a + b;
+}
+
+test add { // uses a function name
+    try expectEqual(add(1, 2), 3); // passes
+}
+
+test "add works" { // uses a description string
+    try expectEqual(add(1, 2), 3); // passes
+    try expectEqual(add(2, 3), 50); // fails
+}
+```
+
+If an `expect` call fails, its test stops, but other tests are still run.
+
+Messages output by failed tests are written to stderr.
+The output includes the following:
+
+- a message of the form
+  "Test [{m}/{n}] test.{test-description}... FAIL (TestUnexpectedResult)"
+  for each failed test
+- a stack trace is output that shows the failing `expect` (only one of them?)
+- a summary of the form "{n1} passed; {n2} skipped; {n3} failed"
+
+To test for memory leaks, use the `std.testing.allocator`
+for all memory allocation.
+This allocation can only be used in `test` blocks.
+
+To run tests in multiple source files,
+create a new source file that imports all of them
+and pass that source file to `zig test`.
+For example:
+
+```zig
+test {
+  _ = @import("file1.zig");
+  _ = @import("file2.zig");
+  _ = @import("file3.zig");
+}
+```
+
+TODO: Is there another way to do this by modifying a project `build.zig` file?
+
+To determine whether code is running in a test,
+use the `is_test` constant in the `builtin` module (not `std.builtin`).
+For example, `const is_test = @import("builtin").is_test`.
+
+This can be used to avoid running certain code in a test
+or only run certain code in a test.
+It can also be used only use `std.testing.allocator` when running in a test.
+
+Enter `zig test --help` to see options that affect tests.
 
 ## Modules and Packages
 
@@ -824,6 +949,10 @@ Variable names cannot match a keyword (listed in the "Keywords" section).
 The convention for variable names is to use snake_case.
 The name should begin lowercase unless the value is a type.
 
+Variables cannot have the same name as a keyword.
+They also cannot shadow (have the same name as)
+another variable in an outer scope.
+
 Non-conforming names can be used with the syntax `@"some name"`.
 Use of this seems like a bad idea.
 
@@ -869,9 +998,6 @@ For example:
 const limit = @as(i8, 5);
 print("{d} is {s}\n", .{ limit, @typeName(@TypeOf(limit)) }); // 5 is i8
 ```
-
-Variable shadowing is not allowed.
-Variables cannot have the same name as another in an outer scope.
 
 Zig does not allow unused variables.
 Editor extensions/plugins such as vscode-zig
@@ -3939,7 +4065,8 @@ The Zig standard library provides the following allocators:
 - `std.testing.allocator`
 
   This can only be used inside a `test` block.
-  It detects memory leaks.
+  Most tests should use this for all allocations
+  because it detects memory leaks.
 
 - `std.testing.FailingAllocator``
 
@@ -5851,125 +5978,6 @@ to achieve better error handling.
 ### Other Builtin Functions
 
 -
-
-## Tests
-
-Zig has a builtin testing framework that allows
-unit tests to be included in source files
-in order to test the functions they define.
-Tests can also exercise functions implemented in other source files.
-
-The test code is only used by the `zig test` command
-and is not included in builds.
-
-Each test is described by the `test` keyword followed by
-a test description string (or a function name) and a block of code.
-Tests are similar to functions that have a return type of `anyerror!void`.
-
-Tests can appear before or after the defintions of the functions they test.
-
-The block of code uses functions whose
-names begin with `expect` to make assertions.
-Calls to these functions must be preceded by the `try` keyword.
-For information about these functions, see the {% aTargetBlank
-"https://ziglang.org/documentation/master/std/#A;std:testing",
-"std.testing documentation" %}.
-
-The `expect` function takes a single argument
-that must be an expression that evaluates to a `bool` value.
-
-The `expectEquals` function takes two arguments
-which are expressions representing an expected and actual value.
-Using `expectedEquals` provided better failure messages than `equal`.
-
-Other testing functions include:
-
-- `expectApproxEqAbs` - tests that two numbers are within a given tolerance
-- `expectApproxEqRel` - similar to `expectApproxEqAbs`, but the tolerance is multiplied
-  by the larger of the absolute values of the two numbers being compared
-- `expectEqualDeep` - tests deep equality of arrays, slices, structs, unions, vectors, and more
-- `expectEqualSentinel` - compares sequences that are terminated by a sentinel value
-- `expectEqualSlices` - compares slices
-- `expectEqualStrings` - compares strings
-- `expectError` - compares a value to an expected error
-- `expectFmt` - tests the string produced by inserting arguments into a format string
-- `expectStringEndsWith` - tests whether a ends begins with another
-- `expectStringStartsWith` - tests whether a string begins with another
-
-The functions `expectApproxEqAbs`, `expectApproxEqRel`,
-`expectEqual`, and `expectEqualDeep` all have the parameters
-`expected: anytype, actual: @TypeOf(expected)`.
-This causes the second argument to be cast to the type of the first.
-If the expected value is a literal value,
-it must be cast with "@as" if it is the first argument,
-but not if it is the second.
-So it is typically easier to pass the actual value as the first argument
-and the expected value as the second argument.
-
-All tests in a source file are executed by running `zig test {file-name}.zig`.
-To run specific tests, add the `--test-filter {text}` option
-which causes it to only run tests whose description contains the given text.
-
-To temporarily skip a test, add the line `return error.SkipZigTest`.
-TODO: Will the compiler complain about unreachable code
-TODO: if this is the first line in the test?
-
-Here is a basic example:
-
-```zig
-const std = @import("std");
-const expectEqual = std.testing.expectEqual;
-
-pub fn add(a: i32, b: i32) i32 {
-    return a + b;
-}
-
-test add { // uses a function name
-    try expectEqual(add(1, 2), 3); // passes
-}
-
-test "add works" { // uses a description string
-    try expectEqual(add(1, 2), 3); // passes
-    try expectEqual(add(2, 3), 50); // fails
-}
-```
-
-If an `expect` call fails, its test stops, but other tests are still run.
-The output includes the following:
-
-- a message of the form
-  "Test [{m}/{n}] test.{test-description}... FAIL (TestUnexpectedResult)"
-  for each failed test
-- a stack trace is output that shows the failing `expect` (only one of them?)
-- a summary of the form "{n1} passed; {n2} skipped; {n3} failed"
-
-To test for memory leaks, use the `std.testing.allocator`
-for all memory allocation.
-This allocation can only be used in `test` blocks.
-
-To run tests in multiple source files,
-create a new source file that imports all of them
-and pass that source file to `zig test`.
-For example:
-
-```zig
-test {
-  _ = @import("file1.zig");
-  _ = @import("file2.zig");
-  _ = @import("file3.zig");
-}
-```
-
-TODO: Also see std.testing.refAllDecls and std.testing.refAllDeclsRecursive.
-TODO: Is there another way to do this by modifying a project `build.zig` file?
-
-To determine whether code is running in a test, import the variable `is_test`
-with `@import("builtin").is_test`.
-This can be used to avoid running certain code in a test
-or only run certain code in a test.
-It can also be used only use `std.testing.allocator` when running in a test.
-
-Enter `zig test --help` to see options that affect tests.
 
 ## Functional Programming
 
