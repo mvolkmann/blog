@@ -870,6 +870,9 @@ Zig supports a large number of primitive types.
 
   These are the types of compile-time known, literal
   integer and floating point values.
+  Their values are inlined in the generated assembly instructions,
+  so they don't occupy memory.
+  This makes their byte size irrelevant.
 
 - `noreturn`
 
@@ -889,6 +892,9 @@ For example, the identifier `u3` refers to an unsigned 3-bit integer.
 Literal integers and floating point numbers
 can contain underscores for readability.
 For example, `1_234_567` and `1_234.567_89`.
+
+Float literals coerce to any float type and
+integer literals coerce to any integer type.
 
 ### Non-primitive Types
 
@@ -1188,12 +1194,16 @@ the names of variables, function parameters, or struct fields:
 - merge error sets: `||`
 - many {% aTargetBlank "https://en.wikipedia.org/wiki/Integer_overflow",
   "wrapping" %} operators where overflows wrap around
-  These have a `%` suffix.  For example, `*%` multiplies with wrapping.
+  These have a `%` suffix.
+  For example, `*%` multiplies with wrapping
+  and `*%=` is an assignment version.
 - many {% aTargetBlank
   "https://en.wikipedia.org/wiki/Saturation_arithmetic#:~:text=Saturation%20arithmetic%20is%20a%20version,a%20minimum%20and%20maximum%20value.",
   "saturating" %} operators where the result is
   clamped to a fixed range from a minimum to a maximum value.
-  These have a `|` suffix.  For example, `*|` multiplies with saturating.
+  These have a `|` suffix.
+  For example, `*|` multiplies with saturating
+  and `*|=` is an assignment version.
 - does not support the `++` and `-—` operators found in C
 
 ## Pointers
@@ -3685,6 +3695,8 @@ and doesn't need to compute it because that is already done at compile-time.
 The builtin types `comptime_int` and `comptime_float` represent
 integer and floating point values that are known at compile-time
 and whose size is not specified.
+TODO: Is the size of a `comptime_int` always the CPU word size?
+TODO: Is the size of a `comptime_float` always 128 bits?
 Variables of these types must be either `const` or `comptime`.
 For example:
 
