@@ -113,6 +113,7 @@ which means it is implemented in Zig.
 Pros of Zig include:
 
 - run-time speed
+- builtin build system
 - fast compiler compared to C++ and Rust
 - great control over memory utilization
 - integration with C and C++
@@ -480,9 +481,9 @@ If the function call after a `try` returns an error, the test fails.
 The `expect` function takes a single argument
 that must be an expression that evaluates to a `bool` value.
 
-The `expectEquals` function takes two arguments
+The `expectEqual` function takes two arguments
 which are expressions representing an expected and actual value.
-Using `expectedEquals` provided better failure messages than `equal`.
+Using `expectedEqual` provided better failure messages than `equal`.
 
 Other testing functions include:
 
@@ -885,8 +886,9 @@ Arbitrary bit-width integers can be declared by following
 For example, the identifier `u3` refers to an unsigned 3-bit integer.
 "The maximum allowed bit-width of an integer type is 65535."
 
-Literal number can contain underscores for readability.
-For example, `1_234_567`.
+Literal integers and floating point numbers
+can contain underscores for readability.
+For example, `1_234_567` and `1_234.567_89`.
 
 ### Non-primitive Types
 
@@ -942,6 +944,9 @@ interacting with C code that doesn't expose field details.)
 Variable declared with `const` are immutable and
 variable declared with `var` are mutable.
 Using `const` is preferred when the value will not be modified.
+
+`const` variables whose initialization value is known at compile-time
+are implicitly `comptime`.
 
 Variable names must begin with a letter
 and are composed of letters, numbers, and underscores.
@@ -1182,10 +1187,13 @@ the names of variables, function parameters, or struct fields:
 - address of: `&`
 - merge error sets: `||`
 - many {% aTargetBlank "https://en.wikipedia.org/wiki/Integer_overflow",
-  "wrapping" %} operators
+  "wrapping" %} operators where overflows wrap around
+  These have a `%` suffix.  For example, `*%` multiplies with wrapping.
 - many {% aTargetBlank
   "https://en.wikipedia.org/wiki/Saturation_arithmetic#:~:text=Saturation%20arithmetic%20is%20a%20version,a%20minimum%20and%20maximum%20value.",
-  "saturating" %} operators
+  "saturating" %} operators where the result is
+  clamped to a fixed range from a minimum to a maximum value.
+  These have a `|` suffix.  For example, `*|` multiplies with saturating.
 - does not support the `++` and `-—` operators found in C
 
 ## Pointers
@@ -6414,6 +6422,23 @@ int main() {
 
 To build this, enter `zig c++ hello.cpp -o hello`.
 To run the resulting executable, enter `./hello`.
+
+## Threads
+
+TODO: See thread_test.zig in zig-examples.
+TODO: Get that to work and copy to here.
+
+```zig
+const std = @import("std");
+const Thread = std.Thread;
+const thread = Thread.spawn(.{}, someFunction, .{ args });
+thread.detach();
+thread.join()
+thread.yield()
+```
+
+Non-const variables declared with the `threadlocal` keyword
+have a different instance in each thread.
 
 ## CONTINUE CLEANUP OF EVERYTHING BELOW HERE!
 
