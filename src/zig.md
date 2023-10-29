@@ -1709,7 +1709,25 @@ test "vectors" {
 
 For more SIMD operations, see the standard library namespace `std.simd`.
 
-TODO: How can a Zig program detect if the current processor supports SIMD operations?
+It is not easy to test in a platform independent way
+whether the current processor supports SIMD instructions.
+Fortunately code logic typically doesn't depend on CPU-specific features.
+The following example shows how to determine this for
+a specific processor family.
+
+```zig
+const target = try std.zig.system.NativeTargetInfo.detect(.{});
+// This assumes that the target is an ARM processor
+// such as Apple's M processors.
+// Apple calls their SIMD feature Neon.
+const supports_simd = std.Target.arm.featureSetHas(
+    target.target.cpu.features,
+    .neon
+);
+```
+
+For a more robust approach that does not assume a particular processor,
+see the source for the `std.simd.suggestVectorSizeForCpu` function.
 
 ## defer and errdefer
 
