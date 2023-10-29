@@ -198,7 +198,9 @@ expand it, move the directory this creates to a desired location,
 set the environment variable `ZIG_PATH` to point to this directory, and
 add `ZIG_PATH` to the list of directories in the `PATH` environment variable.
 
-Consider downloading a nightly build in order to use the very latest version.
+Stable versions have a version number such as 0.11.0.
+Consider downloading a nightly build labeled "master"
+to use the very latest version.
 
 In macOS and easier option is to install Zig
 with Homebrew by entering `brew install zig`.
@@ -1731,7 +1733,8 @@ See the example in the "Error Handling" section.
 
 ## Strings
 
-Strings are represented by arrays of type
+Zig does not provide a dedicated string type.
+Instead, strings are represented by arrays of type
 `[]u8` (mutable) or `[]const u8` (immutable).
 This treats strings like a collection of bytes rather than Unicode characters.
 
@@ -2148,6 +2151,8 @@ We can then create a `Point` instances without specifying a value for `x`.
 For example, `const my_point = Point{.y = 2}` creates
 an instance where the `x` field has the value `1`.
 
+The fields of a `struct` can be given a default value of `undefined`.
+
 The `std.debug.print` function does a reasonable job
 of printing `struct` instances without any format specifier.
 For example, after setting the `p1` variable in the code above,
@@ -2295,6 +2300,11 @@ See the "comptime" section for an example.
 
 Zig does not support defining an interface to which structs must conform.
 
+Add the `packed` keyword before the `struct` keyword to guarantee that
+the fields are stored in the order defined
+and that there is no padding between them.
+This is useful when the data in instances will be accessed with bit offsets.
+
 ## Tuples
 
 Tuples are anonymous structs without specified field names.
@@ -2439,6 +2449,9 @@ test "inferred enum union" {
     }
 }
 ```
+
+Add the `packed` keyword before the `union` keyword
+when the data in instances will be accessed with bit offsets.
 
 ## Blocks
 
