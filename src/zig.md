@@ -2072,6 +2072,11 @@ const Point = struct {
     x: f32 = 1, // default value
     y: f32 = 2, // default value
 
+    // Defining an init function is optional.
+    pub fn init(x: f32, y: f32) @This() {
+        return Point{ .x = x, .y = y };
+    }
+
     // This is a method because it is "pub" and
     // takes an instance of the struct as its first argument.
     pub fn distanceToOrigin(self: Point) f32 {
@@ -2102,11 +2107,13 @@ fn translate(pt: *Point, dx: f32, dy: f32) void {
 }
 
 test "Point struct" {
-    var p1 = Point{}; // modified later
+    try expectEqual(Point.dimensions, 2); // constant value
+
+    var p1 = Point{}; // uses default values for x and y
     try expectEqual(p1.x, 1);
     try expectEqual(p1.y, 2);
 
-    const p2 = Point{ .y = 3 };
+    const p2 = Point{ .y = 3 }; // uses default value for x
     try expectEqual(p2.x, 1);
     try expectEqual(p2.y, 3);
 
@@ -2115,7 +2122,7 @@ test "Point struct" {
     try expectEqual(p3.distanceToOrigin(), 5);
     try expectEqual(Point.distanceToOrigin(p3), 5);
 
-    const p4 = Point{ .x = 6, .y = 8 };
+    const p4 = Point.init(6, 8);
     try expectEqual(p3.distanceTo(p4), 5);
     try expectEqual(Point.distanceTo(p3, p4), 5);
 
