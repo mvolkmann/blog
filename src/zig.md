@@ -896,6 +896,16 @@ For example, `1_234_567` and `1_234.567_89`.
 Float literals coerce to any float type and
 integer literals coerce to any integer type.
 
+The standard library defines many functions in `std.math`
+that return or test for "not a number" (nan) and
+infinity (positive and negative) values for specific number types.
+
+Floating point operations are performed in strict mode by default.
+This means the generated code checks for overflows and underflows
+and triggers an error if they occur.
+Code can opt into optimized mode to turn off these checks
+with `@setFloatMode(.Optimized);`.
+
 ### Non-primitive Types
 
 The following is summary of Zig types from the Ziglings exercise #058.
@@ -903,7 +913,7 @@ These will be discussed in more detail in subsequent sections.
 
 | Type          | Meaning                                         |
 | ------------- | ----------------------------------------------- |
-| `u8`          | single item                                     |
+| `u8`          | single item (primitive)                         |
 | `*u8`         | single-item pointer                             |
 | `[]u8`        | slice (size known at runtime)                   |
 | `[5]u8`       | array of 5 u8s                                  |
@@ -2953,7 +2963,7 @@ Calls must do one of the following:
    should be returned to the function that called the current function.
    For example, `try number = parseU64(str, 10);`
 1. Follow the call with the `catch` keyword
-   to supply a value to be used instead of the error,
+   to supply a value if the call returns an error,
    regardless of the kind of error that is returned.
    For example, `const number = parseU64(str, 10) catch 0;`
 
@@ -2961,6 +2971,17 @@ Typically either `try` or `catch` is applied to a function call,
 not both.
 
 Note that `try someFn();` is equivalent to `someFn() catch |e| return e;`.
+
+The `catch` keyword can be followed by a capture in vertical bars
+and a block of code that can use the captured variable.
+For example:
+
+```zig
+some_function() catch |err| {
+    // Use err here.
+    // Compute the value to be used or return an error.
+};
+```
 
 The `catch` keyword can be followed by a labeled block
 that computes the value to be used.
@@ -3068,10 +3089,6 @@ fn double(n: i8) EvalError!i8 {
 }
 
 test "error handling" {
-    // The "try" before the call to "double"
-    // causes any error returned by "double" to be returned,
-    // which would cause this test to fail.
-    // "try someFn();" is equivalent to "someFn() catch |err| return err;"
     // try expectEqual(@as(i8, 4), try double(2)); // requires cast
     try expectEqual(try double(2), 4); // does not require cast
 
@@ -3092,7 +3109,8 @@ test "error handling" {
 }
 
 fn safeDouble(n: i8) i8 {
-    // This makes the specific error available in the catch block.
+    // This captures the specific error and
+    // makes it available in the catch block.
     return double(n) catch |err| {
         print("safeDouble caught {}\n", .{err});
         if (err == EvalError.Negative) return 0;
