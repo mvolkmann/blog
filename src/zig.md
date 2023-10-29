@@ -1186,6 +1186,8 @@ the names of variables, function parameters, or struct fields:
 
 ## Operators
 
+Zig supports the following operators:
+
 - arithmetic: `+`, `-`, `*`, `/`, `%`
 - operator assignment: `+=`, `-=`, `\*=`, `/=`, `%/`
 - relational: `==`, `!=`, `>`, `>=`, `<`, `<=`
@@ -1215,6 +1217,9 @@ the names of variables, function parameters, or struct fields:
   For example, `*|` multiplies with saturating
   and `*|=` is an assignment version.
 - does not support the `++` and `-—` operators found in C
+
+The precedence of Zig operators is described in the {% aTargetBlank
+"https://ziglang.org/documentation/0.10.0/#Precedence", "official docs" %}.
 
 ## Pointers
 
@@ -1492,6 +1497,8 @@ test "arrays" {
     const subset = dice_rolls[2..4];
     var expected_subset = [_]u8{ 6, 1 };
     try expectEqualSlices(u8, &expected_subset, subset);
+    // std.mem.eql compares arrays with elements of any given type.
+    assert(std.mem.eql(u8, &expected_subset, subset));
 
     // Modify array items in-place.
     for (&dice_rolls) |*roll| {
@@ -3041,6 +3048,15 @@ is not the same as specifying the error set `anyerror`.
 Using `anyerror` means that absolutely any kind of error can be returned,
 whereas omitting the error set means
 the compiler will determine the possible errors.
+
+Error sets can be combined with the `||` operator.
+For example:
+
+```zig
+const EvalError = error{ Negative, TooHigh };
+const TemperatureError = error { TooCold, TooHot };
+const CombinedError = EvalError || TemperatureError;
+```
 
 When the error set is omitted from the function return type,
 the function can return single error values
