@@ -1231,6 +1231,9 @@ to access a struct field.
 For example, `dogPtr.*.name`.
 But the compiler treats `dogPtr.name` as the same.
 
+A pointer can optionally be `const` to ensure that
+it cannot be changed to point to a different value.
+
 A pointer to a non-`const` value can be used to modify the value
 regardless of whether the pointer itself is `const`.
 A pointer to `const` value cannot be used to modify the value.
@@ -1406,7 +1409,8 @@ an array or other slice using range syntax.
 
 Arrays own their data, whereas slices are pointers to data they do not own.
 
-Both arrays and slices have a `len` field that holds their length.
+Both arrays and slices have a `len` field of type `usize`
+that holds their length.
 The length cannot be changed.
 For a dynamically-sized array, consider using the standard library type
 <a href="https://ziglang.org/documentation/master/std/#A;std:ArrayList"
@@ -1479,6 +1483,7 @@ test "arrays" {
     // Create a mutable array so it can be modified later.
     var dice_rolls = [_]u8{ 4, 2, 6, 1, 2 };
     try expectEqual(dice_rolls.len, 5);
+    try expectEqual(@TypeOf(dice_rolls.len), usize);
 
     // Use a for loop to iterate over the items in an array or slice.
     // A for loop can iterate over multiple arrays at the same time.
@@ -1497,7 +1502,8 @@ test "arrays" {
     const subset = dice_rolls[2..4];
     var expected_subset = [_]u8{ 6, 1 };
     try expectEqualSlices(u8, &expected_subset, subset);
-    // std.mem.eql compares arrays with elements of any given type.
+    // std.mem.eql compares arrays and slices
+    // containing elements of any given type.
     assert(std.mem.eql(u8, &expected_subset, subset));
 
     // Modify array items in-place.
@@ -1658,11 +1664,11 @@ test "vectors" {
     try expectEqual(v1[1], 2.3);
     try expectEqual(v1[2], 3.4);
 
-    // Can create a vector from an array.
+    // Can create a vector from an array or slice with assignment.
     const arr1 = [_]f32{ 1.2, 2.3, 3.4 };
     const vFromArr: @Vector(3, f32) = arr1;
 
-    // Can create array from vector.
+    // Can create an array from a vector with assignment.
     const arr2: [3]f32 = vFromArr;
     try expectEqual(arr1, arr2);
 
@@ -1693,8 +1699,13 @@ test "vectors" {
     try expectEqual(@reduce(.Mul, v1), 1.2 * 2.3 * 3.4);
     try expectEqual(@reduce(.Min, v1), 1.2);
     try expectEqual(@reduce(.Max, v1), 3.4);
+    // .And, .Or, and .Xor operations can be applied to bool vectors.
 }
 ```
+
+For more SIMD operations, see the standard library namespace `std.simd`.
+
+TODO: How can a Zig program detect if the current processor supports SIMD operations?
 
 ## defer and errdefer
 
@@ -4425,7 +4436,7 @@ A {% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std:MultiArra
 in that it to stores a sequence of elements.
 However, the elements must be instances of a `struct` or `union` type.
 
-Each field is stored in a separate array which makes it easy
+Each field is stored in a separate array (not a vector) which makes it easy
 to obtain a slice containing all the values for a given field.
 Such a slice can used to create a `Vector` which supports {% aTargetBlank
 "https://en.wikipedia.org/wiki/Single_instruction,_multiple_data", "SIMD" %}
@@ -4940,7 +4951,12 @@ to achieve better error handling.
 
 - `@alignCast` -
 - `@addrSpaceCast` -
-- `@as` -
+- `@as` - casts a given value to a given type when guaranteed to succeed
+
+  This does not compile if the destination type
+  cannot represent all possible values of the source type.
+  For example, this cannot be used to cast a u32 value to a u8 value.
+
 - `@bitCast` -
 - `@constCast` -
 - `@enumFromInt` -
@@ -4948,7 +4964,10 @@ to achieve better error handling.
 - `@errorFromInt` -
 - `@floatCast` -
 - `@floatFromInt` -
-- `@intCast` -
+- `@intCast` - casts a given integer value to another integer type
+
+  This panics if any bits will be truncated.
+
 - `@intFromBool` -
 - `@intFromEnum` -
 - `@intFromError` -
