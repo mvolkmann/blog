@@ -134,7 +134,7 @@ Cons of Zig include:
 ## Used By
 
 - {% aTargetBlank "https://bun.sh", "Bun" %} - a JavaScript/TypeScript
-  runtime and toolchain, is primarily written in Zig.
+  run-time and toolchain, is primarily written in Zig.
   Bun has many advantages over Node.js and Deno including much better performance.
 
 - {% aTargetBlank "https://tigerbeetle.com", "TigerBeetle" %} is
@@ -160,6 +160,8 @@ Zig provides the following run-time checks:
 
 - bounds checking of array and slice indexing
   at compile-time when index is known at compile-time and at run-time otherwise
+  (unless built with the optimization mode `ReleaseFast` or `ReleaseSmall`
+  which do not include run-time safety checks)
 - pointers cannot be null unless declared to be optional
 - optional pointers must be checked for null before they are dereferenced
 - tagged unions cannot be accessed without verifying the tag
@@ -352,12 +354,12 @@ in the `zig-out/bin` directory.
 To customize the optimizations to be performed, add the `-Doptimize=value`
 where `value` is one of the following:
 
-| `-Doptimize` value | Runtime safety checks | Optimizations |
-| ------------------ | --------------------- | ------------- |
-| `Debug`            | Yes                   | No            |
-| `ReleaseSafe`      | Yes                   | Yes (speed)   |
-| `ReleaseFast`      | No                    | Yes (speed)   |
-| `ReleaseSmall`     | No                    | Yes (size)    |
+| `-Doptimize` value | Run-time safety checks | Optimizations |
+| ------------------ | ---------------------- | ------------- |
+| `Debug`            | Yes                    | No            |
+| `ReleaseSafe`      | Yes                    | Yes (speed)   |
+| `ReleaseFast`      | No                     | Yes (speed)   |
+| `ReleaseSmall`     | No                     | Yes (size)    |
 
 By default, executables are created for the current CPU architecture and OS
 and the `Debug` optimizations are applied.
@@ -915,7 +917,7 @@ These will be discussed in more detail in subsequent sections.
 | ------------- | ----------------------------------------------- |
 | `u8`          | single item (primitive)                         |
 | `*u8`         | single-item pointer                             |
-| `[]u8`        | slice (size known at runtime)                   |
+| `[]u8`        | slice (size known at run-time)                  |
 | `[5]u8`       | array of 5 u8s                                  |
 | `[*]u8`       | many-item pointer (zero or more)                |
 | `enum`        | `{a, b}` set of unique values a and b           |
@@ -996,7 +998,7 @@ The compiler does not currently check that
 the variable is set to another value before it is used.
 Accessing a variable that is still set to `undefined`
 produces unexpected results.
-Runtime checks for this may be added in the future.
+Run-time checks for this may be added in the future.
 
 There are four kinds of values a variable or expression can have
 that indicate that it doesn't have a real value,
@@ -5014,7 +5016,7 @@ to achieve better error handling.
 - `@setFloatMode` -
 - `@setRuntimeSafety` -
 
-### Runtime and Async Builtin Functions (3)
+### Run-time and Async Builtin Functions (3)
 
 - `@breakpoint` -
 - `@frameAddress` -
@@ -5531,7 +5533,7 @@ to achieve better error handling.
 - `@setFloatMode` -
 - `@setRuntimeSafety` -
 
-### Runtime and Async Builtin Functions
+### Run-time and Async Builtin Functions
 
 - `@Frame` -
 - `@asyncCall` -
@@ -6010,7 +6012,7 @@ to achieve better error handling.
 - `@setFloatMode` -
 - `@setRuntimeSafety` -
 
-### Runtime and Async Builtin Functions
+### Run-time and Async Builtin Functions
 
 - `@Frame` -
 - `@asyncCall` -
@@ -6514,7 +6516,7 @@ have a different instance in each thread.
 
 Memory Management
 
-- Zig does not provide any memory management and has no runtime.
+- Zig does not provide any memory management and has no run-time.
 - In C, memory is managed with the functions malloc, free, and realloc. These use a provided memory allocator.
 - Zig allows selection of a memory allocation strategy and does not choose a default strategy.
 - It is also possible to implement a custom allocator.
