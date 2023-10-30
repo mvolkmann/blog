@@ -1018,6 +1018,21 @@ The keyword `undefined` cannot be used to
 test whether a variable value is currently undefined,
 but a variable can be reset to `undefined`.
 
+Zig does not allow unused variables.
+Editor extensions/plugins such as vscode-zig
+can add lines like `_ = my_variable` for each unused variable on save
+so they appear to be used.
+This feature may be enabled by default, can be disabled.
+In vscode-zig, the "Zls: Enable Autofix" option controls this.
+
+## Type Coercions and Casting
+
+Type coercions are performed automatically when
+a value is assigned to a variable or passed to a function
+that expects another compatible type.
+For example, a numeric literal whose type is `comptime_int`
+can be assigned to any integer type that will hold the value.
+
 The builtin function `@as` performs an explicit type coercion.
 This can be used to ensure that the initial value is treated as a specific type.
 For example:
@@ -1027,12 +1042,13 @@ const limit = @as(i8, 5);
 print("{d} is {s}\n", .{ limit, @typeName(@TypeOf(limit)) }); // 5 is i8
 ```
 
-Zig does not allow unused variables.
-Editor extensions/plugins such as vscode-zig
-can add lines like `_ = my_variable` for each unused variable on save
-so they appear to be used.
-This feature may be enabled by default, can be disabled.
-In vscode-zig, the "Zls: Enable Autofix" option controls this.
+Explicit casts may or may not be safe.
+These are performed with the builtin functions listed in the
+"Cast and Conversion" subsection of the "Builtin Functions" section.
+
+For more detail, see the {% aTargetBlank
+"https://ziglang.org/documentation/master/#Casting", "Casting" %} section
+in the official docs.
 
 ## Optionals (aka Nullables)
 
@@ -4901,7 +4917,7 @@ the builtin functions.
 The YouTube video {% aTargetBlank "https://www.youtube.com/watch?v=V0sthxzzN3U",
 "A Look at Zig's Built-ins" %} from Loris Cro uses the categories below:
 
-### Math Builtin Functions (25)
+### Math (25)
 
 The math builtin functions can take advantage of CPU-specific capabilities
 to achieve better performance than
@@ -4960,7 +4976,7 @@ When passed a `Vector` of floats, they return a new `Vector` of floats.
 - `@tan` - returns the tangent of a number
 - `@trunc` - returns a number truncated towards zero (compare to `@round`)
 
-### Bitwise Builtin Functions (8)
+### Bitwise (8)
 
 - `@bitReverse` -
 - `@byteSwap` -
@@ -4974,7 +4990,7 @@ When passed a `Vector` of floats, they return a new `Vector` of floats.
 
 - `@shrExact` -
 
-### Atomic and Memory Builtin Functions (12)
+### Atomic and Memory (12)
 
 - `@atomicLoad` -
 - `@atomicRmw` -
@@ -4989,7 +5005,7 @@ When passed a `Vector` of floats, they return a new `Vector` of floats.
 - `@wasmMemoryGrow` -
 - `@wasmMemorySize` -
 
-### Cast and Conversion Builtin Functions (20)
+### Cast and Conversion (20)
 
 In general, using `@as` is preferred over other casting functions.
 Casts can be combined with introspection functions
@@ -5024,7 +5040,7 @@ to achieve better error handling.
 - `@truncate` -
 - `@volatileCast` -
 
-### Programming Builtin Functions (18)
+### Programming (18)
 
 - `@cDefine` -
 - `@cImport` -
@@ -5060,13 +5076,13 @@ to achieve better error handling.
 - `@setFloatMode` -
 - `@setRuntimeSafety` -
 
-### Run-time and Async Builtin Functions (3)
+### Run-time and Async (3)
 
 - `@breakpoint` -
 - `@frameAddress` -
 - `@panic` - terminates the program and outputs a given message and stack trace
 
-### Introspection Builtin Functions (11)
+### Introspection (11)
 
 - `@alignOf` -
 - `@bitOffsetOf` -
@@ -5080,7 +5096,7 @@ to achieve better error handling.
 - `@src` -
 - `@tagName` -
 
-### Metaprogramming Builtin Functions (10)
+### Metaprogramming (10)
 
 - `@This` - returns the type of the containing `enum`, `struct`, or `union`
 - `@Type` - returns the type that corresponds to an instance of the `std.builtin.Type` struct
@@ -5121,7 +5137,7 @@ to achieve better error handling.
 - `@typeName` - returns the string name of a given type
 - `@unionInit` -
 
-### Other Builtin Functions (11)
+### Other (11)
 
 TODO: Find the proper category for these!
 
@@ -5129,7 +5145,7 @@ TODO: Find the proper category for these!
 
   See the "Vector" section.
 
-- `@extern` -
+- `@extern` - creates a reference to an external symbol in the output object file
 - `@inComptime` -
 - `@offsetOf` -
 - `@prefetch` -
@@ -6210,7 +6226,6 @@ have a different instance in each thread.
 ## CONTINUE CLEANUP OF EVERYTHING BELOW HERE!
 
 - demonstrate calling your own C and C++ code from Zig
-- add details on type coercion and casting
 - learn about using multiple threads
 - learn about async/await
 
