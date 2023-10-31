@@ -4083,13 +4083,41 @@ The Zig standard library provides the following allocators:
 
 - `std.heap.FixedBufferAllocator`
 
-  This takes a buffer and transform it into an allocator.
-  It is useful to reuse previously allocated memory.
+  This allocates memory from a fixed size buffer
+  which avoids allocating memory at run-time.
+  It requires determining the maximum amount of memory needed
+  at compile-time.
+  If more than thant amount is requested, and `OutOfMemory` error occurs.
+
+  The following code demonstrates using this kind of allocator.
+
+  ```zig
+  const std = @import("std");
+
+  pub fn main() !void {
+      // This gives OutOfMemory error when the buffer is less than 130 bytes.
+      var buffer: [130]u8 = undefined;
+      var fba = std.heap.FixedBufferAllocator.init(&buffer);
+      const allocator = fba.allocator();
+
+      var list = std.ArrayList([]const u8).init(allocator);
+      try list.append("one");
+      try list.append("two");
+      try list.append("three");
+  }
+  ```
 
 - `std.heap.GeneralPurposeAllocator`
 
   This is a configurable allocator that can
   detect certain errors while using heap memory.
+
+  The following code demonstrates creating this kind of allocator.
+
+  ```zig
+  var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+  var allocator = gpa.allocator();
+  ```
 
 - `std.heap.LogToWriterAllocator`
 
