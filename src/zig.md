@@ -4243,23 +4243,24 @@ The Zig standard library provides the following allocators:
 
 - `std.heap.ScopedLoggingAllocator`
 
-  Same as the above but it goes directly to the std.log function, this time with our good ol' scope
+  This is the same as `SbrkAllocator`,
+  but it goes directly to the `std.log` function.
 
 - `std.heap.StackFallbackAllocator`
 
-  Some stack, some heap: IF the stack is not enough, go to the heap
+  "Some stack, some heap: IF the stack is not enough, go to the heap"
 
 - `std.heap.ThreadSafeAllocator`
 
-  Covers an allocator in a way that calling it between threads is safe (not exactly fast tho)
+  "Covers an allocator in a way that calling it between threads is safe (not exactly fast tho)"
 
 - `std.heap.WasmAllocator`
 
-  Wasm is your friend, use this to allocate. Generally used as a backing allocator for GeneralPurpose or Arena
+  "Wasm is your friend, use this to allocate. Generally used as a backing allocator for GeneralPurpose or Arena"
 
 - `std.heap.WasmPageAllocator`
 
-  Dumber WasmAllocator, useful for when you actually wanna do your own memory management via "pages"
+  "Dumber WasmAllocator, useful for when you actually wanna do your own memory management via pages"
 
 - `std.testing.allocator`
 
