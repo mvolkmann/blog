@@ -4016,9 +4016,6 @@ For guidelines on selecting an allocator, see {% aTargetBlank
 "https://ziglang.org/documentation/master/#Choosing-an-Allocator",
 "Choosing an Allocator" %}.
 
-TODO: Show an example of creating and using an allocator.
-TODO: You have already done this somewhere in this file.
-
 The `defer` keyword is followed by a statement or block of code
 to be executed when the containing block terminates.
 This is often used to free memory that was allocated by an allocator.
@@ -4157,11 +4154,6 @@ The Zig standard library provides the following allocators:
     with the size and address of every allocation.
     It defaults to `false`.
 
-- `std.heap.LogToWriterAllocator`
-
-  This allocator is similar to `std.heap.LoggingAllocator`, but
-  allows specifying where the log messages should be written (such as a file).
-
 - `std.heap.LoggingAllocator`
 
   This wraps another allocator and logs all the allocations and frees
@@ -4213,15 +4205,29 @@ The Zig standard library provides the following allocators:
   }
   ```
 
+- `std.heap.LogToWriterAllocator`
+
+  This allocator is similar to `std.heap.LoggingAllocator`, but
+  allows specifying where the log messages should be written (such as a file).
+
 - `std.heap.MemoryPool`
 
   This allocator allocates memory for only one type and is very fast.
   Use this in code that needs to allocate
   a large number of instances of one type.
+  For examples of using this, see the tests at {% aTargetBlank
+  "https://ziglang.org/documentation/master/std/src/std/heap/memory_pool.zig.html",
+  "memory_pool.zig" %}.
 
 - `std.heap.page_allocator`
 
   This allocator allocates memory in chunks of the OS page size.
+  An instance of this allocator is available as
+  a value in the `std.heap` namespace.
+
+  ```zig
+  const allocator = std.heap.page_allocator;
+  ```
 
 - `std.heap.raw_c_allocator`
 
