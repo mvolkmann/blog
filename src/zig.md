@@ -4119,6 +4119,44 @@ The Zig standard library provides the following allocators:
   var allocator = gpa.allocator();
   ```
 
+  The tuple passed to `GeneralPurposeAllocator` is for configuration.
+  The following fields are supported:
+
+  - `stack_trace_frames: usize`
+
+    This is the number of stack frames to capture.
+    It defaults to 10 in test mode and 6 otherwise.
+
+  - `enable_memory_limit: bool`
+
+    This defaults to `false`.
+    When `true``, the allocator has the following additional fields:
+
+    - `total_requested_bytes`: tracks the total allocated bytes of memory requested
+    - `requested_memory_limit`: causes allocations to return `error.OutOfMemory`
+       when `total_requested_bytes` exceeds this limit
+
+  - `safety: bool`
+    This determines whether safety checks are enabled.
+    It defaults to the value of `std.debug.runtime_safety`.
+
+  - `thread_safe: bool`
+    
+    This determines whether the allocator may be
+    used simultaneously from multiple threads.
+    It defaults to `!builtin.single_threaded`.
+
+  - `MutexType: ?type = null`
+
+    This determines the type of mutex to use for thread safety.
+    When it is null (the default), it defaults to using
+    `std.Thread.Mutex` when thread_safe is enabled or `DummyMutex` otherwise.
+
+  - `verbose_log: bool`
+    When true, this enables emitting info messages
+    with the size and address of every allocation.
+    It defaults to `false`.
+
 - `std.heap.LogToWriterAllocator`
 
   This allocator is similar to `std.heap.LoggingAllocator`, but
