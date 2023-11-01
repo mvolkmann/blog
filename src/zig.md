@@ -728,8 +728,9 @@ Often placeholders do not need to specify a format
 because the correct formatting is used by default.
 In these cases, placeholders can be written as `{}`.
 
-Errors in format strings are flagged at compile-time.
-This includes having more placeholders than values ("too few arguments"),
+The format string must be known at compile-time.
+This allows errors in format strings to be flagged at compile-time.
+The errors include having more placeholders than values ("too few arguments"),
 having more values than placeholders ("unused argument"), and
 using specifiers that are incompatible with the corresponding value
 ("invalid format string ... for type").
@@ -829,6 +830,10 @@ are first-class values.
 This means they can be assigned to variables, assigned to struct fields,
 passed to functions, and returned from functions.
 
+Types must be known at compile-time.
+This means that function parameters whose type is `type`
+must be preceded by the `comptime` keyword.
+
 ### Primitive Types
 
 Zig supports a large number of primitive types.
@@ -876,7 +881,7 @@ Zig supports a large number of primitive types.
 - `comptime_int` and `comptime_float`
 
   These are the types of compile-time known, literal
-  integer and floating point values.
+  integer and floating point values that can be any size.
   Their values are inlined in the generated assembly instructions,
   so they don't occupy memory.
   This makes their byte size irrelevant.
@@ -3640,6 +3645,8 @@ const sow = stdout.writer();
 
 // This is an example of defining a generic type with a function that
 // has "type" parameters and returns a struct that uses the provided types.
+// The Zig compiler generates a different version of this function
+// for every type actually passed to it.
 fn makeNode(comptime T: type) type {
     return struct {
         const Self = @This(); // reference to containing struct
@@ -3958,7 +3965,7 @@ test "polymorphism with union" {
 The following builtin functions support reflection:
 
 - `@This()` when inside a `struct` definition, returns its type.
-- `@TypeOf` returns the type of a given variable.
+- `@TypeOf` returns the type of a given value or the common type of a list of values.
 - `@typeName` returns the name of a given type as a string.
 - `@typeInfo` returns a tagged union that describes a type.
 - `std.meta.fields` returns information about the fields in a struct.
@@ -5268,7 +5275,7 @@ to achieve better error handling.
 
 - `@This` - returns the type of the containing `enum`, `struct`, or `union`
 - `@Type` - returns the type that corresponds to an instance of the `std.builtin.Type` struct
-- `@TypeOf` - returns the type of a given value
+- `@TypeOf` - returns the type of a given value or the type that is common to multiple values
 
 - `@call` - calls a given function with arguments in a tuple
 
