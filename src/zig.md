@@ -4109,13 +4109,6 @@ The Zig standard library provides the following allocators:
   This is a configurable allocator that can
   detect certain errors while using heap memory.
 
-  The following code demonstrates creating this kind of allocator.
-
-  ```zig
-  var gpa = std.heap.GeneralPurposeAllocator(.{}){};
-  var allocator = gpa.allocator();
-  ```
-
   The tuple passed to `GeneralPurposeAllocator` is for configuration.
   The following fields are supported:
 
@@ -4153,6 +4146,58 @@ The Zig standard library provides the following allocators:
     When true, this enables emitting info messages
     with the size and address of every allocation.
     It defaults to `false`.
+
+  The following code demonstrates creating this kind of allocator.
+
+  ```zig
+  const std = @import("std");
+  const print = std.debug.print;
+  const String = []const u8;
+
+  pub fn main() !void {
+      var config = .{ .safety = true, .verbose_log = true };
+      var gpa = std.heap.GeneralPurposeAllocator(config){};
+      defer {
+          // The defer method must be called on the gpa instance
+          // in order for memory leaks to be detected.
+          // check is a enum with the values "ok" and "leak"
+          const check = gpa.deinit();
+          print("leak? {}\n", .{check == .leak});
+      }
+      // This is a shorter way to call deinit which ignores the return value.
+      // defer _ = gpa.deinit();
+
+      var allocator = gpa.allocator();
+      var list = std.ArrayList(String).init(allocator);
+      // defer list.deinit(); // purposely leaking memory
+      try list.append("red");
+      print("len = {}\n", .{list.items.len});
+  }
+  ```
+
+  Here is another example that demonstrates implementing a memory limit.
+
+  ```zig
+  const std = @import("std");
+  const print = std.debug.print;
+  const String = []const u8;
+
+  pub fn main() !void {
+      var config = .{
+          .enable_memory_limit = true,
+      };
+      var gpa = std.heap.GeneralPurposeAllocator(config){};
+      gpa.requested_memory_limit = 1600; // get error: OutOfMemory with 1500
+      print("requested_memory_limit = {}\n", .{gpa.requested_memory_limit});
+
+      var allocator = gpa.allocator();
+      const result = try std.ChildProcess.run(.{
+          .allocator = allocator,
+          .argv = &[_]String{"date"},
+      });
+      print("{s}\n", .{result.stdout});
+  }
+  ```
 
 - `std.heap.LoggingAllocator`
 
@@ -4215,6 +4260,7 @@ The Zig standard library provides the following allocators:
   This allocator allocates memory for only one type and is very fast.
   Use this in code that needs to allocate
   a large number of instances of one type.
+
   For examples of using this, see the tests at {% aTargetBlank
   "https://ziglang.org/documentation/master/std/src/std/heap/memory_pool.zig.html",
   "memory_pool.zig" %}.
@@ -4222,8 +4268,10 @@ The Zig standard library provides the following allocators:
 - `std.heap.page_allocator`
 
   This allocator allocates memory in chunks of the OS page size.
+
   An instance of this allocator is available as
   a value in the `std.heap` namespace.
+  For example:
 
   ```zig
   const allocator = std.heap.page_allocator;
@@ -4267,6 +4315,15 @@ The Zig standard library provides the following allocators:
   This can only be used inside a `test` block.
   Most tests should use this for all allocations
   because it detects memory leaks.
+  Other allocators must be used in programs and libraries.
+
+  An instance of this allocator is available as
+  a value in the `std.testing` namespace.
+  For example:
+
+  ```zig
+  const allocator = std.testing.allocator;
+  ```
 
 - `std.testing.FailingAllocator``
 
@@ -6181,7 +6238,7 @@ const String = []const u8;
 pub fn main() !void {
     var gpa = std.heap.GeneralPurposeAllocator(.{}){};
     var allocator = gpa.allocator();
-    const result = try std.ChildProcess.exec(.{
+    const result = try std.ChildProcess.run(.{
         .allocator = allocator,
         // .argv = &[_]String{ "echo", "Hello, World!" },
         .argv = &[_]String{"date"},
