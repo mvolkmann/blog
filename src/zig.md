@@ -1285,6 +1285,8 @@ To dereference a pointer, use `variable_name.*`.
 This syntax can be used with chaining when the value is a `struct`
 to access a struct field.
 For example, `dogPtr.*.name`.
+This can be thought of as a request to get
+the whole struct instance and then a specific field from it.
 But the compiler treats `dogPtr.name` as the same.
 
 A pointer can optionally be `const` to ensure that
@@ -1821,6 +1823,11 @@ For example, `var name = "Mark";`
 
 The fact that strings are null-terminated is an implementation detail
 that typically does not factor into writing string-handling code.
+From Ziglings exercise #77,
+"Why do we bother using a zero/null sentinel to terminate
+strings in Zig when we already have a known length? Versatility!
+Zig strings are compatible with C strings (which are null-terminated)
+AND can be coerced to a variety of other Zig types."
 
 Single character literals are enclosed in single quotes.
 
@@ -3630,6 +3637,8 @@ This takes the place of preprocessor directives and macros in C and C++.
 
 The initial values of variables declared at the container level
 (outside any function) are automatically evaluated at compile-time.
+Also, type declarations of any of these are evaluated at compile-time:
+variables, functions (parameter and return types), enums, structs, and unions.
 
 Code executed at compile-time has several limitations.
 
