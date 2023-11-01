@@ -461,6 +461,18 @@ To run a custom step, enter `zig build {step-name}`.
 To pass command-line arguments to the step,
 append `--` followed by a space-separated list of arguments.
 
+### Package Manager
+
+Zig has a builtin package manager.
+To use it in a project:
+
+1. Create the top-level file `build.zig.zon` which uses
+   Zig Object Notation (zon) to describe dependencies.
+1. Modify the top-level file `build.zig` to use the dependencies.
+1. Import dependencies in `.zig` files that need to use them.
+
+TODO: Add an example of all these steps.
+
 ## Tests
 
 Zig has a builtin testing framework that allows
@@ -3922,6 +3934,8 @@ test "polymorphism with anytype" {
 
     const expected = [_]f32{ 12.5663706, 6.0, 4.0 };
 
+    // "inline" is required here because
+    // the elements in shapes do not all have the same type.
     inline for (shapes, 0..) |shape, index| {
         try expectEqual(anyArea(&shape), expected[index]);
     }
@@ -5306,8 +5320,17 @@ to achieve better error handling.
   ```
 
 - `@field` -
-- `@hasDecl` -
-- `@hasField` -
+- `@hasDecl` - returns a `bool` indicating if a given type is
+  a `struct` containing a field or method with a given name
+
+  Here is an example from the Ziglings exercise #70:
+
+  ```zig
+  const MyType = @TypeOf(possible_duck);
+  const walks_like_duck = @hasDecl(MyType, "waddle");
+  ```
+
+- `@hasField` - similar to `@hasDecl`, but only looks for fields, not functions or constants
 - `@typeInfo` - returns an instance of the `std.builtin.Type` struct that describes a given type
 - `@typeName` - returns the string name of a given type
 - `@unionInit` -
