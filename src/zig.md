@@ -712,7 +712,7 @@ Others include `std.log.info`, `std.log.debug`, `std.log.warn`,
 and `std.log.err`, in order from least to most severe.
 
 The `print` function takes a format string
-and a possibly empty literal array of values
+and a possibly empty tuple of values
 to be inserted in place of the format string placeholders.
 The format string can contain placeholders with the syntax `{specifier}`
 that indicate where values in the second argument are to be inserted.
@@ -750,6 +750,10 @@ using specifiers that are incompatible with the corresponding value
 A common error is to pass a single value as the second argument
 instead of a literal array. The compiler will output the error
 "expected tuple or struct argument, found {type-passed}".
+
+Typically the second argument is specified inline
+as a literal tuple with the syntax `.{ value1, value2, ... }`.
+But a variable whose value is a tuple can also be passed.
 
 The `std.log.*` functions take the same arguments as `std.debug.print`,
 but produce output the begins with their level followed by a colon and a space.
@@ -2936,7 +2940,8 @@ The syntax for `for` expressions is very different from C `for` statements.
 They can be used in several ways.
 
 A `for` expression can iterate over the items in an array or slice.
-Here is an example.
+
+Here is an example:
 
 ```zig
 const std = @import("std");
@@ -2963,6 +2968,7 @@ pub fn main() !void {
 ```
 
 A `for` expression can iterate over a range of integers.
+
 Here is an example:
 
 ```zig
@@ -2976,6 +2982,9 @@ Here is an example:
 
 A `for` expression can iterate over any number of arrays and slices
 at the same time. Each must have the same length.
+If they do not, the compiler error message
+"non-matching for loop lengths" is output.
+
 Here is an example:
 
 ```zig
@@ -5219,8 +5228,27 @@ to achieve better error handling.
 ### Programming (18)
 
 - `@cDefine` -
-- `@cImport` -
-- `@cInclude` -
+- `@cImport` - imports C libraries for use in Zig code
+
+  For example:
+
+  ```zig
+  const c = @cImport({
+      @cInclude("stdio.h");
+      @cInclude("some_other.h");
+  });
+
+  c.puts("Hello, World!");
+  ```
+
+  To include the required C when building the Zig program,
+  include the `-lc` option.
+  For example, `zig run -lc main.zig`.
+
+- `@cInclude` - includes a specific C library inside a `@cImport`
+
+  See the example in `@cImport` above.
+
 - `@cUndef` -
 - `@cVaArg`
 - `@cVaCopy`
@@ -5328,7 +5356,12 @@ to achieve better error handling.
   }
   ```
 
-- `@field` -
+- `@field` - returns the value of a given field in a struct instance
+
+  ```zig
+  const value = @field(struct_instance, "field_name");
+  ```
+
 - `@hasDecl` - returns a `bool` indicating if a given type is
   a `struct` containing a field or method with a given name
 
