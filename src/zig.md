@@ -1046,6 +1046,22 @@ Explicit casts may or may not be safe.
 These are performed with the builtin functions listed in the
 "Cast and Conversion" subsection of the "Builtin Functions" section.
 
+From Zigling exercise #61:
+
+1. Types can always be made _more_ restrictive.
+2. Numeric types can coerce to larger types.
+3. Single-item pointers to arrays coerce to slices and many-item pointers.
+4. Single-item mutable pointers can coerce to single-item
+   pointers pointing to an array of length 1.
+5. Payload types and null coerce to optionals.
+6. Payload types and errors coerce to error unions.
+7. 'undefined' coerces to any type.
+8. Compile-time numbers coerce to compatible types.
+9. Tagged unions coerce to the current tagged enum.
+10. Enums coerce to a tagged union when that tagged field is a
+    zero-length type that has only one value (like void).
+11. Zero-bit types (like void) can be coerced into single-item pointers.
+
 For more detail, see the {% aTargetBlank
 "https://ziglang.org/documentation/master/#Casting", "Casting" %} section
 in the official docs.
@@ -5223,7 +5239,29 @@ to achieve better error handling.
 - `@frameAddress` -
 - `@returnAddress` -
 - `@sizeOf` -
-- `@src` -
+
+- `@src` - returns a `std.builtin.SourceLocation` struct
+  containing the fields `file`, `fn_name`, `line`, and `column`.
+
+  ```zig
+  const std = @import("std");
+  const expectEqual = std.testing.expectEqual;
+  const expectEqualStrings = std.testing.expectEqualStrings;
+
+  fn demo() !std.builtin.SourceLocation {
+      // @src must be called inside a function.
+      return @src();
+  }
+
+  test "@src" {
+      const src = try demo();
+      try expectEqualStrings(src.file, "src_test.zig");
+      try expectEqualStrings(src.fn_name, "demo");
+      try expectEqual(@as(u32, 7), src.line);
+      try expectEqual(@as(u32, 12), src.column); // start of @src
+  }
+  ```
+
 - `@tagName` -
 
 ### Metaprogramming (10)
