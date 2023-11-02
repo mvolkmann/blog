@@ -533,9 +533,10 @@ All tests in a source file are executed by running `zig test {file-name}.zig`.
 To run specific tests, add the `--test-filter {text}` option
 which causes it to only run tests whose description contains the given text.
 
-To temporarily skip a test, add the line `return error.SkipZigTest`.
-TODO: Will the compiler complain about unreachable code
-TODO: if this is the first line in the test?
+To temporarily skip a test, comment out all the code inside it
+and add the line `return error.SkipZigTest;`.
+If the code is not commented out, the compiler will
+give an "unreachable code" error.
 
 Here is a basic example:
 
@@ -572,20 +573,17 @@ To test for memory leaks, use the `std.testing.allocator`
 for all memory allocation.
 This allocation can only be used in `test` blocks.
 
-To run tests in multiple source files,
-create a new source file that imports all of them
-and pass that source file to `zig test`.
-For example:
+To run tests found in all source files referenced from `main.zig` in a Zig project,
+add the following in that file:
 
 ```zig
 test {
-  _ = @import("file1.zig");
-  _ = @import("file2.zig");
-  _ = @import("file3.zig");
+    std.testing.refAllDecls(@This());
 }
 ```
 
-TODO: Is there another way to do this by modifying a project `build.zig` file?
+Then enter `zig build test`.
+If there are no test failures then there will be no output.
 
 To determine whether code is running in a test,
 use the `is_test` constant in the `builtin` module (not `std.builtin`).
@@ -1800,6 +1798,11 @@ var allocator = std.heap.page_allocator;
 var myList = std.ArrayList(10).init(allocator);
 defer myList.deinit();
 ```
+
+Many structs define `init` and `deinit` methods.
+Those methods are always called explicitly, never implicitly.
+So they could be given any names, but
+those names are used by convention.
 
 Defer expressions cannot use the "return" keyword.
 
