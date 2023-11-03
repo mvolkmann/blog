@@ -1604,6 +1604,12 @@ test "multi-dimensional array" {
             print("{} ", .{value});
         }
     }
+
+    // Initialize a two-dimensional array to all zeroes.
+    var m2 = std.mem.zeroes([3][3]u8);
+    try expectEqual(m2[0][0], 0);
+    m2[1][2] = 19;
+    try expectEqual(m2[1][2], 19);
 }
 ```
 
@@ -1931,10 +1937,10 @@ test "bufPrint" {
     var buffer: [20]u8 = undefined;
     const result = try std.fmt.bufPrint(
         &buffer,
-        "{d} {s} {d}",
+        "{c} {s} {d}",
         .{ 'A', "Hello", 19 },
     );
-    try expectEqualStrings("65 Hello 19", result);
+    try expectEqualStrings("A Hello 19", result);
 }
 
 test "fixedBufferStream" {
@@ -4834,7 +4840,7 @@ var map = std.AutoHashMap([]const u8, u8).init(allocator);
 
 <a href="https://ziglang.org/documentation/master/std/#A;std:AutoArrayHashMap"
 target="_blank">std.AutoArrayHashMap</a> is similar to `std.AutoHashMap`.
-It differs in the following was described in the docs:
+It differs in the following ways described in the docs:
 
 - "Insertion order is preserved."
 - "Deletions perform a swap removal on the entries list."
