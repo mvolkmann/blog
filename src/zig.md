@@ -4156,6 +4156,20 @@ Many structs implemented in the Zig standard library, such as `ArrayList`,
 define a `deinit` method that can be called to free its memory.
 For example, `defer my_array_list.deinit();`
 
+Some `deinit` methods modify the struct instance in some way.
+An example is `HashMap`, but not `ArrayList`.
+Instances that are modified by its `deinit` method cannot be `const`.
+In cases where it is desirable to have a `const` instance,
+a `defer` block can create a mutable, shallow copy of the struct
+and then call `deinit` on that.  For example:
+
+```zig
+defer {
+    var mutable_instance = immutable_instance;
+    mutable_instance.deinit();
+}
+```
+
 When an allocator is used to explicitly allocate memory,
 it can be freed by calling `allocator.free(pointer);`
 For example, the function `std.mem.join` also returns
