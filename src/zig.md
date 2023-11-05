@@ -115,7 +115,7 @@ Pros of Zig include:
 - run-time speed
 - builtin build system
 - fast compiler compared to C++ and Rust
-- great control over memory utilization
+- manual memory management offers great control over memory utilization
 - integration with C and C++
 - nice null handling
 - simple, integrated test framework
@@ -124,7 +124,7 @@ Pros of Zig include:
 Cons of Zig include:
 
 - not yet 1.0
-- no package manager yet
+- manual memory management is somewhat tedious
 - tedious string handling
 - labeled `break` syntax is odd
 - no checking for use of variables with `undefined` value
