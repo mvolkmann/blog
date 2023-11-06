@@ -123,7 +123,7 @@ Pros of Zig include:
 
 Cons of Zig include:
 
-- not yet 1.0
+- not yet 1.0 (expected in 2025)
 - manual memory management is somewhat tedious
 - tedious string handling
 - labeled `break` syntax is odd
@@ -4139,6 +4139,12 @@ All memory allocation in Zig is done through allocators.
 There are many provided allocators that each
 use a different memory management strategy.
 New allocators can be defined to implement custom memory management strategies.
+
+A program can use any number of different allocators
+for different groups of memory allocations.
+This provides much more flexibility than in languages
+that only have one memory allocation strategy
+or only support selecting one for an entire program.
 
 For guidelines on selecting an allocator, see {% aTargetBlank
 "https://ziglang.org/documentation/master/#Choosing-an-Allocator",
