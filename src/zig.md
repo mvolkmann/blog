@@ -2097,7 +2097,7 @@ test "strings" {
     try santa.repeat(2); // will have 3 occurrences after this
     assert(santa.cmp("HoHoHo"));
 
-    // TODO: Why must this be var and not const?
+    // TODO: Why must this be var and not const?  Probably because deinit modifies it.
     var colors = try String.init_with_contents(allocator, "red,green,blue");
     defer colors.deinit();
     // Splits into []u8 slices.  This works.
@@ -5256,32 +5256,58 @@ When passed a `Vector` of floats, they return a new `Vector` of floats.
 
 ### Bitwise (8)
 
-- `@bitReverse` -
-- `@byteSwap` -
-- `@clz` -
-- `@ctz` -
-- `@popCount` -
-- `@shlExact` -
+- `@bitReverse` - takes any integer type and returns the same type with bits reversed
+- `@byteSwap` - converts between big and little endian
+- `@clz` - "count leading zeros"; takes any integer type and
+  returns the number of most significant zero bits
+- `@ctz` - "count trailing zeros" takes any integer type and
+  returns the number of least significant zero bits
+- `@popCount` - "population count"; takes any integer type and
+  returns the number of one bits
+
+   ```zig
+   const std = @import("std");
+   const expectEqual = std.testing.expectEqual;
+
+   test "clz" {
+       const i: u8 = 16;
+       // bits are 00010000
+       try expectEqual(3, @clz(i));
+   }
+
+   test "ctz" {
+       const i: u8 = 16;
+       try expectEqual(4, @ctz(i));
+   }
+
+   test "popcount" {
+       const i: u8 = 16;
+       try expectEqual(1, @popCount(i));
+   }
+   ```
+
+- `@shlExact` - "shift left"; takes any integer type and
+  returns the value with bits shifted left by a given amount
 
 - `@shlWithOverflow` - takes a number `a` and shift amount `b` and returns a tuple
   containing `a << b` and a bit indicating whether there was an overflow
 
-- `@shrExact` -
+- `@shrExact` - "shift right"; takes any integer type and
+  returns the value with bits shifted right by a given amount
 
 ### Atomic and Memory (12)
 
-- `@atomicLoad` -
-- `@atomicRmw` -
-- `@atomicStore` -
-- `@cmpxchgStrong` -
-- `@cmpxchgWeak` -
-- `@fence` -
-- `@memcpy` -
-- `@memset` -
-- `@shuffle` -
-- `@splat` -
-- `@wasmMemoryGrow` -
-- `@wasmMemorySize` -
+- `@atomicLoad` - atomically dereferences a pointer and returns the value
+- `@atomicRmw` - atomically modifies memory and returns the previous value
+- `@atomicStore` - atomically stores a value
+- `@cmpxchgStrong` - performs a strong atomic compare exchange operation
+- `@cmpxchgWeak` - performs a weak atomic compare exchange operation
+- `@fence` - introduces "happens before edge" between operations
+  TODO: What does this mean?
+- `@memcpy` - copies data from a source to a mutable destination 
+- `@memset` - sets all elements of a mutable destination to the same value
+- `@wasmMemoryGrow` - increases the size of WASM memory at an index
+- `@wasmMemorySize` - returns the size of WASM memory at an index
 
 ### Cast and Conversion (20)
 
@@ -5289,7 +5315,7 @@ In general, using `@as` is preferred over other casting functions.
 Casts can be combined with introspection functions
 to achieve better error handling.
 
-- `@alignCast` -
+- `@alignCast` - changes the alignment of a pointer
 - `@addrSpaceCast` -
 - `@as` - casts a given value to a given type when guaranteed to succeed
 
@@ -5297,9 +5323,10 @@ to achieve better error handling.
   cannot represent all possible values of the source type.
   For example, this cannot be used to cast a u32 value to a u8 value.
 
-- `@bitCast` -
-- `@constCast` -
-- `@enumFromInt` -
+- `@bitCast` - converts a value of one numeric type to another;
+  the sizes of the source and destination values must match
+- `@constCast` - takes a const pointer and returns a non-const pointer
+- `@enumFromInt` - converts an integer to an enum value
 - `@errorCast` -
 - `@errorFromInt` -
 - `@floatCast` -
@@ -5309,7 +5336,7 @@ to achieve better error handling.
   This panics if any bits will be truncated.
 
 - `@intFromBool` -
-- `@intFromEnum` -
+- `@intFromEnum` - converts an enum value to an integer
 - `@intFromError` -
 - `@intFromFloat` -
 - `@intFromPtr` -
@@ -5381,7 +5408,7 @@ to achieve better error handling.
 
 ### Introspection (11)
 
-- `@alignOf` -
+- `@alignOf` - returns the number of bytes to which a given type must be aligned
 - `@bitOffsetOf` -
 - `@bitSizeOf` -
 - `@errorName` -
@@ -5475,6 +5502,8 @@ to achieve better error handling.
 TODO: Find the proper category for these!
 
 - `@Vector` -
+- `@shuffle` - creates a new vector by selecting elements from two vectors based on a bit mask
+- `@splat` -
 
   See the "Vector" section.
 

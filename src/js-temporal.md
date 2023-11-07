@@ -20,8 +20,8 @@ that are all addressed in `Temporal` include:
 - lack of support for non-Gregorian calendars
 - Date objects are mutable
 
-As of September 2020, `Temporal` is a
-[stage 2 ECMAScript proposal](https://tc39.es/proposal-temporal/)
+As of November 7, 2023, `Temporal` is a
+[stage 3 ECMAScript draft](https://tc39.es/proposal-temporal/)
 and it not yet supported by any web browsers.
 However, a [polyfill](https://www.npmjs.com/package/proposal-temporal)
 is available in npm that can be used today to gain experience in using it.
