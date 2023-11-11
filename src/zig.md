@@ -5177,6 +5177,104 @@ test "EnumSet" {
 }
 ```
 
+### SinglyLinkedList
+
+The <a href="https://ziglang.org/documentation/master/std/#A;std:SinglyLinkedList"
+target="_blank">SinglyLinkedList</a> data structure
+has a pointers to the head list.
+List elements have a pointer to the next element in the sequence.
+
+Instances of `SinglyLinkedList` have the field `first`
+which is an optional pointer to a `SinglyLinkedList.Node`.
+Instances have the methods `len()`, `popFirst()`, `prepend(node)`, and `remove(node)`.
+
+Instances of `SinglyLinkedList.Node` have the fields `data` and `next`.
+Instances have the methods `countChildren()`, `findLast(node)`,
+`insertAfter(node)`, `removeNext()`, and `reverse()`.
+
+The following code demonstrates common operations on SinglyLinkedLists.
+
+```zig
+const std = @import("std");
+const print = std.debug.print;
+const expectEqual = std.testing.expectEqual;
+
+const DataType = u32;
+const NumberList = std.SinglyLinkedList(DataType);
+const Node = NumberList.Node;
+
+test "SinglyLinkedList basic" {
+    var list = NumberList{};
+
+    // node1 holds a struct on the stack.
+    var node1 = Node{ .data = 1 };
+    list.prepend(&node1);
+
+    // If we were to reuse node1 here,
+    // it would replace the struct on the stack,
+    // destroying the previous value.
+    var node2 = Node{ .data = 2 };
+    list.prepend(&node2);
+
+    var node = list.first orelse unreachable;
+    try expectEqual(node.data, 2);
+
+    node = node.next orelse unreachable;
+    try expectEqual(node.data, 1);
+
+    try expectEqual(node.next, null);
+}
+
+test "SinglyLinkedList advanced" {
+    var arena = std.heap.ArenaAllocator.init(std.testing.allocator);
+    defer arena.deinit();
+    const allocator = arena.allocator();
+
+    // Create a linked list from values in an array.
+    var list = NumberList{};
+    const numbers = [_]DataType{ 10, 20, 30 };
+    for (numbers) |number| {
+        var node_ptr = try allocator.create(Node);
+        node_ptr.data = number;
+        list.prepend(node_ptr);
+    }
+
+    try expectEqual(list.len(), numbers.len);
+
+    // Verify the linked list contents.
+    var iter = list.first;
+    var i: usize = numbers.len;
+    while (iter) |node_ptr| {
+        i -= 1;
+        try expectEqual(node_ptr.data, numbers[i]);
+        iter = node_ptr.next;
+    }
+}
+```
+
+### DoublyLinkedList
+
+The <a href="https://ziglang.org/documentation/master/std/#A;std:DoublyLinkedList"
+target="_blank">DoublyLinkedList</a> data structure
+"has a pair of pointers to both the head and tail of the list.
+List elements have pointers to both the
+previous and next elements in the sequence."
+
+Instances of `DoublyLinkedList` have the fields `first`, `last`, and `len`.
+The fields `first` and `last` are optional pointers to a `DoublyLinkedList.Node`.
+Instances have the methods `append(node)`, `concatByMoving(other_list)`,
+`insertAfter(node1, node2)`, `insertBefore(node1, node2)`,
+`pop()`, `popFirst()`, `prepend(node)`, and `remove(node)`.
+
+Instances of `DoublyLinkedList.Node` have the fields `data`, `prev`, and `next`.
+Instances have no methods.
+
+The following code demonstrates common operations on DoubllyLinkedLists.
+
+```zig
+
+```
+
 ## Builtin Functions
 
 Zig provides over 100 (118 as of 10/23) {% aTargetBlank
