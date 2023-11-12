@@ -4176,13 +4176,26 @@ defer {
 }
 ```
 
-When an allocator is used to explicitly allocate memory,
-it can be freed by calling `allocator.free(pointer);`
-For example, the function `std.mem.join` also returns
-a string that can be freed with `defer allocator.free(my_string)`.
+To allocate a single struct instance on the heap,
+use `const struct_ptr = try allocator.create(SomeStructType);`.
+To free this, use `allocator.destroy(struct_ptr);`, possibly with `defer`..
+
+To allocate an array of values on the heap,
+use `var array = try allocator.alloc(SomeType);`.
+To free this, use `allocator.free(array);`, possibly with `defer`..
+For example, the function `std.mem.join` returns a string
+that can be freed with `defer allocator.free(my_string)`.
+
 The `ArrayList` method `toOwnedSlice`
 also returns a string that can be freed in the same way
 where `allocator` is the one passed to the `ArrayList` when it is created.
+
+Functions that allocate memory on the heap
+typically take an allocator as their first argument.
+This is preferable over using a globally accessible allocator
+because it allows the function be to used with multiple allocators.
+For example, such functions can be called with `std.testing.allocator`
+in tests and a more efficient allocator when running outside of tests.
 
 The Zig standard library provides the following allocators:
 
