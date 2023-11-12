@@ -4485,6 +4485,74 @@ The Zig standard library provides the following allocators:
   var allocator = testing.FailingAllocator.init(testing.allocator, 5);
   ```
 
+## Stack vs. Heap
+
+Memory allocated on the stack is automatically freed
+when the scope in which it is allocated exits.
+
+Memory allocated on the heap can outlive the scope in which it was allocated.
+It must be freed to avoid leaking memory.
+
+The following code demonstrates allocating objects on both the stack and heap.
+
+```zig
+const std = @import("std");
+const String = []const u8;
+const expectEqual = std.testing.expectEqual;
+const expectEqualStrings = std.testing.expectEqualStrings;
+
+const Dog = struct {
+    const Self = @This();
+
+    name: String,
+    age: u8,
+
+    // This allocates memory for a Dog object in the stack.
+    // Defining this method is optional.
+    pub fn init(name: String, age: u8) Self {
+        return Self{ .name = name, .age = age };
+    }
+
+    // This allocates memory for a Dog object in the heap.
+    // Defining this method is optional.
+    pub fn initHeap(
+        allocator: std.mem.Allocator,
+        name: String,
+        age: u8,
+    ) !*Self {
+        const dog_ptr = try allocator.create(Self);
+        dog_ptr.* = .{ .name = name, .age = age };
+        return dog_ptr;
+    }
+};
+
+test "stack allocation" {
+    const dog1 = Dog{ .name = "Comet", .age = 3 };
+    const dog2 = Dog.init("Comet", 3);
+    try expectEqualStrings(dog1.name, dog2.name);
+    try expectEqual(dog1.age, dog2.age);
+}
+
+test "heap allocation" {
+    const allocator = std.testing.allocator;
+
+    // To allocate an array of objects instead of just one, use alloc method.
+    const dog1 = try allocator.create(Dog);
+    // To free an array of objects instead of just one, use free method.
+    defer allocator.destroy(dog1);
+
+    // dog1.name = "Comet";
+    // dog1.age = 3;
+    dog1.* = .{ .name = "Comet", .age = 3 };
+
+    const dog2 = try Dog.initHeap(allocator, "Comet", 3);
+    defer allocator.destroy(dog2);
+
+    try expectEqualStrings(dog1.name, dog2.name);
+    try expectEqual(dog1.age, dog2.age);
+}
+```
+
 ## Standard Library
 
 The Zig {% aTargetBlank "https://ziglang.org/documentation/master/std/",
