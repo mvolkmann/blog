@@ -68,12 +68,28 @@ To create a new Bun project, create a directory, cd to it, and enter `bun init`.
 This creates the files:
 
 - `README.md`
+
+  This provides basic information about using Bun.
+  The contents should be replaced with project-specific information.
+
 - `bun.lockb`
+
+  This is the Bun equivalent of `package-lock.json`, but it is in a binary format.
+
 - `index.ts`
+
+  This is the entry point source file.
+
 - `package.json`
+
+  This describes dependencies, scripts, and more.
+
 - `tsconfig.json`
 
-It also creates the directory `node_modules`.
+  This configures TypeScript.
+
+It also creates the directory `node_modules` that holds code for dependencies.
+Initially it contains the directories `.bin`, `bun-types`, and `typescript`.
 
 The file `index.ts` only contains the following:
 
