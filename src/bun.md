@@ -49,13 +49,6 @@ This adds the `bun` executable.
 
 To upgrade to the latest version, enter `bun upgrade`.
 
-## Subcommands and Options
-
-To see all the subcommands supported by the `bun` command, enter `bun`.
-The subcommands include `init`, `run`, `test`, `repl`, `upgrade`, and more.
-
-To see all the options supported by the `bun` command, enter `bun --help`.
-
 ## REPL
 
 To start a Read-Evaluate-Print-Loop, enter `bun repl`.
@@ -98,6 +91,17 @@ console.log("Hello via Bun!");
 ```
 
 To run the project, enter `bun run index.ts`.
+Note that TypeScript source files can be executed using `bun run`
+without installing additional packages or configuring anything.
+
+## Help
+
+To see all the subcommands supported by the `bun` command, enter `bun`.
+The subcommands include `init`, `run`, `test`, `repl`, `upgrade`, and more.
+
+To see all the options supported by the `bun` command, enter `bun --help`.
+
+To see a list of all scripts defined in `package.json`, enter `bun.run`.
 
 ## Unit Tests
 
