@@ -4,37 +4,163 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+## Overview
+
+"{% aTargetBlank "https://bun.sh", "Bun" %} is a fast JavaScript all-in-one toolkit."
+It includes a JavaScript runtime, package manager, bundler, and test runner.
+Bun is free and open source.
+
+Development of Bun started in 2022 by Jarred Sumner with VC funding.
+Bun became stable (1.0) in September 2023.
+
+Bun was created by the startup company
+{% aTargetBlank "https://oven.sh/", "Oven.sh" %}
+because that’s what buns come out of.
+Oven will donate Zig to the Zig Software Foundation to keep the project going.
+
+Bun is built on JavaScriptCore from Safari
+which has faster startup times than V8.
+Bun supports TypeScript out of the box.
+
+Bun is implemented in Zig and some C++.
+"Zig is sort of similar to writing C, but with better memory safety features
+in debug mode and modern features like defer (sort of similar to Go's)
+and arbitrary code can be executed at compile-time via comptime.
+It's really good for writing performant low-level software."
+"It has very few keywords so it's a lot easier to learn than,
+for example, C++ or Rust."
+
+Bun works with nearly all major web frameworks including
+Next.js, SvelteKit, Astro, Nuxt, and Fastify.
+
+The Bun package manager works with npm packages.
+
+The name "Bun" came from a friend who suggested it
+because she has a bunny named "Bun".
+The initial reaction was "I'm not going to name it after your bunny.
+And then I thought about it more and it made some sense."
+It also makes sense because
+"it’s a bundling of the JavaScript ecosystem and a bundler".
+
+## Installing
+
+To install locally, enter `curl -fsSL https://bun.sh/install | bash`.
+This adds the `bun` executable.
+
+To upgrade to the latest version, enter `bun upgrade`.
+
+## Subcommands and Options
+
+To see all the subcommands supported by the `bun` command, enter `bun`.
+The subcommands include `init`, `run`, `test`, `repl`, `upgrade`, and more.
+
+To see all the options supported by the `bun` command, enter `bun --help`.
+
+## REPL
+
+To start a Read-Evaluate-Print-Loop, enter `bun repl`.
+This takes a few seconds to install the first time it is run,
+but is much faster in subsequent runs.
+
+## Projects
+
+To create a new Bun project, create a directory, cd to it, and enter `bun init`.
+This creates the files:
+
+- `README.md`
+- `bun.lockb`
+- `index.ts`
+- `package.json`
+- `tsconfig.json`
+
+It also creates the directory `node_modules`.
+
+The file `index.ts` only contains the following:
+
+```js
+console.log("Hello via Bun!");
+```
+
+To run the project, enter `bun run index.ts`.
+
+## Unit Tests
+
+Bun has builtin support for implementing and running unit tests.
+
+Suppose we have the following code in the file `math.ts`:
+
+```ts
+export function add(n1: number, n2: number): number {
+  return n1 + n2;
+}
+```
+
+To implement a unit test for the module defined above,
+add the following code in the file `math.test.ts`:
+
+```ts
+import { expect, test } from "bun:test";
+import { add } from "./math";
+
+test("add", () => {
+  expect(add(2, 2)).toBe(4);
+});
+```
+
+To run all the unit tests in the current project,
+including those found in subdirectories, enter `bun test`.
+
+## HTTP Server
+
+To implement a basic HTTP server,
+replace the contents of `index.ts` with the following:
+
+```js
+const server = Bun.serve({
+  port: 3000,
+  fetch(req) {
+    return new Response('Hi! This is my first Bun server!');
+  },
+});
+
+
+console.log('Server started on port ', server.port);
+```
+
+To run this, enter `bun run index.js` and browse `localhost:3000`.
+
+To simplify starting the server, add the following in `package.json`:
+
+```json
+  "scripts": {
+    "start": "bun run index.ts"
+  }
+```
+
+Now the server can be started by entering `bun start`.
+
+To automatically restart the server when code changes are detected,
+add the following script in `package.json`:
+
+```json
+    "dev": "bun --watch index.ts"
+```
+
+Then start the server with `bun run dev`.
+This will not automatically refresh browsers that browsing the server URL.
+
+## CLEANUP UP REMAINDER OF THIS CONTENT
+
 These notes are currently in a very rough form!
 
 Compare performance of bun, deno, and node on your rush-hour code. Implement your rush-hour program in Zig. Compare performance.
 
-Is the only plan for profit to provide hosting?ar
+Is the only plan for profit to provide hosting?
 “Oven has decided to adopt a strategy twinned with Deno Company. They will launch sales of a cloud architecture based on Bun.”
 
 Create code examples that demonstrate the most important bun-specific APIs.
 
 Does it share module code across projects like pnpm?
-
-See https://bun.sh
-
-What is it?
-
-- a free, open source, “complete” toolkit for JavaScript and TypeScript
-- created by startup company Oven.sh because that’s what buns come out of
-- started in 2022 by Jarred Sumner with VC funding
-- build, run, debug, test
-- built on JavaScriptCore from Safari which has faster startup times than V8
-- implemented in Zig and some C++; “Zig is sort of similar to writing C, but with better memory safety features in debug mode and modern features like defer (sort of similar to Go's) and arbitrary code can be executed at compile-time via comptime. It's really good for writing performant low-level software.”; “It has very few keywords so it's a lot easier to learn than, for example, C++ or Rust.”
-- works with nearly all major web frameworks including Next.js, SvelteKit, Astro, Nuxt, and Fastify
-- a package manager that works with npm packages
-- became stable (1.0) in September 2023
-- Oven will donate to the Zig Software Foundation to keep that project going
-
-The Name
-
-“A friend suggested the name “bun” because she has a bunny named bun. My initial reaction was "I'm not going to name it after your bunny." And then I thought about it more and it made some sense.”
-
-Also “because it’s a bundling of the JavaScript ecosystem and a bundler”.
 
 Why?
 
@@ -66,9 +192,6 @@ Performance
 - “bun run” can be used in place of “npm run” and is 5 times faster
 - “bun install” is 29 times faster than npm and 17 times faster than pnpm; uses package.json files just like npm; uses a binary bun.lockb file instead of package-lock. json; can be used as a replacement for npm even when not using the bun runtime
 - “bunx” is the equivalent of “npx”
-
-To install locally, enter `curl -fsSL https://bun.sh/install | bash`.
-Also describe how to use with Docker, Cloudflare, and others.
 
 Concerns
 
