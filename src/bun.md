@@ -128,18 +128,34 @@ enter `bun add {package-name}`.
 To add a development dependency to a Bun project,
 enter `bun add -d {package-name}`.
 
-To remove a runtime dependency to a Bun project,
+To remove a runtime or development dependency to a Bun project,
 enter `bun remove {package-name}`.
 
-To remove a development dependency to a Bun project,
-enter `bun remove -d {package-name}`.
+## Linting
+
+Bun does not include support for code linting.
+To add this using ESLint:
+
+1. Enter `npm init @eslint/config`.
+   Note that this uses `npm` and not `bun`.
+   This will ask a series of questions, install the required dependencies,
+   and create an ESLint configuration file.
+
+1. Add the following script in `package.json`:
+
+   ```json
+   "lint": "eslint 'src/**/*.{css,html,ts,tsx}'",
+   ```
+
+To lint all the source files in the current project,
+enter `bun run lint`.
 
 ## Code Formatting
 
 Bun does not include support for code formatting.
 To add this using Prettier:
 
-1. Install Prettier with `bun install -d prettier`
+1. Install Prettier with `bun add -d prettier`
 
 1. Create the file `.prettierrc` with content similar to the following:
 
