@@ -111,6 +111,26 @@ To see all the options supported by the `bun` command, enter `bun --help`.
 
 To see a list of all scripts defined in `package.json`, enter `bun.run`.
 
+## Dependencies
+
+Just like in Node.js, Bun tracks dependencies in a `package.json` file
+and installs dependencies in the `node_modules` directory.
+
+Adding dependencies with the `bun` command is
+much faster than adding them with the `npm` command.
+
+To add a runtime dependency to a Bun project,
+enter `bun add {package-name}`.
+
+To add a development dependency to a Bun project,
+enter `bun add -d {package-name}`.
+
+To remove a runtime dependency to a Bun project,
+enter `bun remove {package-name}`.
+
+To remove a development dependency to a Bun project,
+enter `bun remove -d {package-name}`.
+
 ## Unit Tests
 
 Bun has builtin support for implementing and running unit tests
