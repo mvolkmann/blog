@@ -44,10 +44,14 @@ It also makes sense because
 
 ## Installing
 
-To install locally, enter `curl -fsSL https://bun.sh/install | bash`.
+To install Bun for macOS, Linux, or Windows Subsystem for Linux (WSL),
+enter `curl -fsSL https://bun.sh/install | bash`.
 This adds the `bun` executable.
 
 To upgrade to the latest version, enter `bun upgrade`.
+
+"Bun provides a limited, experimental native build for Windows.
+At the moment, only the Bun runtime is supported."
 
 ## REPL
 
@@ -83,6 +87,7 @@ This creates the files:
 
 It also creates the directory `node_modules` that holds code for dependencies.
 Initially it contains the directories `.bin`, `bun-types`, and `typescript`.
+There is no need to run `npm install` to get started.
 
 The file `index.ts` only contains the following:
 
@@ -130,6 +135,17 @@ test("add", () => {
 To run all the unit tests in the current project,
 including those found in subdirectories, enter `bun test`.
 
+To automatically rerun tests when code changes are saved,
+enter `bun --watch test`.
+
+## Bun Global Variable
+
+The `Bun` global variable has many properties, most of which are functions.
+Highlights include:
+
+- `Bun.build`: compiles a collection of source files into a single source file
+- `Bun.serve`: function that starts an HTTP server
+
 ## HTTP Server
 
 To implement a basic HTTP server,
@@ -159,7 +175,9 @@ To simplify starting the server, add the following in `package.json`:
 
 Now the server can be started by entering `bun start`.
 
-To automatically restart the server when code changes are detected,
+## Watch Mode
+
+To automatically restart a server when code changes are detected,
 add the following script in `package.json`:
 
 ```json
@@ -167,7 +185,34 @@ add the following script in `package.json`:
 ```
 
 Then start the server with `bun run dev`.
+
+To patch the code in place when code changes are detected
+and not restart the server, use the `--hot` flag in place of `--watch`.
+Technically this updates the internal module cache with the new code.
+This will not refresh a web browser that is
+displaying content obtained from a Bun server.
+
+For more detail, see {% aTargetBlank "https://bun.sh/docs/runtime/hot",
+"Watch mode" %}.
+
 This will not automatically refresh browsers that browsing the server URL.
+
+## Environment Variables
+
+Bun has builtin support for getting environment variables from the file `.env`.
+For example, suppose this file contains `FOO=bar`.
+The value `bar` can be obtained with `process.env.FOO` or `Bun.env.FOO`.
+
+Changes to the `.env` after a server is started
+are only available if the server is restarted.
+
+## Executable Files
+
+To allow a JS/TS source file to be executed directly:
+
+1. Add the line `#!/usr/bin/env bun` at the beginning of the file.
+1. Compile the file with `bun build ./file-name.ts --outfile file-name --compile`
+1. Enter `file-name`.
 
 ## CLEANUP UP REMAINDER OF THIS CONTENT
 
