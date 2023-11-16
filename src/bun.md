@@ -102,6 +102,9 @@ To run the project, enter `bun run index.ts`.
 Note that TypeScript source files can be executed using `bun run`
 without installing additional packages or configuring anything.
 
+It is somewhat common to create a `src` directory
+and move `index.ts` and other source files into it.
+
 ## Help
 
 To see all the subcommands supported by the `bun` command, enter `bun`.
@@ -130,6 +133,33 @@ enter `bun remove {package-name}`.
 
 To remove a development dependency to a Bun project,
 enter `bun remove -d {package-name}`.
+
+## Code Formatting
+
+Bun does not include support for code formatting.
+To add this using Prettier:
+
+1. Install Prettier with `bun install -d prettier`
+
+1. Create the file `.prettierrc` with content similar to the following:
+
+   ```text
+   {
+     "arrowParens": "avoid",
+     "bracketSpacing": false,
+     "singleQuote": true,
+     "trailingComma": "none"
+   }
+   ```
+
+1. Add the following script in `package.json`:
+
+   ```json
+   "format": "prettier --write 'src/**/*.{css,html,ts,tsx}'",
+   ```
+
+To format all the source files in the current project,
+enter `bun run format`.
 
 ## Unit Tests
 
