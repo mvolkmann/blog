@@ -173,7 +173,7 @@ To simplify starting the server, add the following in `package.json`:
   }
 ```
 
-Now the server can be started by entering `bun start`.
+Now the server can be started by entering `bun start` or `bun run start`.
 
 ## Watch Mode
 
@@ -213,6 +213,16 @@ To allow a JS/TS source file to be executed directly:
 1. Add the line `#!/usr/bin/env bun` at the beginning of the file.
 1. Compile the file with `bun build ./file-name.ts --outfile file-name --compile`
 1. Enter `file-name`.
+
+## Executing Without Installing
+
+The `npx` command can be used to execute a Node package
+that may not already be installed.
+For example, `npx cowsay Hello Cow!` outputs ASCII text
+that depicts a cow with a speech bubble.
+
+The same can be done with Bun using `bun x` or `bunx`.
+The main difference is that the Bun approach is much faster.
 
 ## CLEANUP UP REMAINDER OF THIS CONTENT
 
