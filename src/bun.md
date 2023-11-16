@@ -48,6 +48,9 @@ To install Bun for macOS, Linux, or Windows Subsystem for Linux (WSL),
 enter `curl -fsSL https://bun.sh/install | bash`.
 This adds the `bun` executable.
 
+To verify the installation and see the version that is installed,
+enter `bun --version` or `bun -v`.
+
 To upgrade to the latest version, enter `bun upgrade`.
 
 "Bun provides a limited, experimental native build for Windows.
@@ -110,7 +113,8 @@ To see a list of all scripts defined in `package.json`, enter `bun.run`.
 
 ## Unit Tests
 
-Bun has builtin support for implementing and running unit tests.
+Bun has builtin support for implementing and running unit tests
+that are mostly compatible with Jest.
 
 Suppose we have the following code in the file `math.ts`:
 
@@ -135,8 +139,17 @@ test("add", () => {
 To run all the unit tests in the current project,
 including those found in subdirectories, enter `bun test`.
 
+To only run tests whose name matches a given pattern,
+add the `--test-name-pattern {pattern}` option.
+
 To automatically rerun tests when code changes are saved,
 enter `bun --watch test`.
+
+Other functions that can be imported from `bun:test` include
+`describe`, `beforeAll`, `afterAll`, `beforeEach`, and `afterEach`.
+
+By default tests timeout and are considered failed after five seconds.
+To change this, add the `--timeout {seconds}` option.
 
 ## Bun Global Variable
 
