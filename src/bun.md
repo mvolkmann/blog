@@ -8,39 +8,53 @@ layout: topic-layout.njk
 
 "{% aTargetBlank "https://bun.sh", "Bun" %} is a fast JavaScript all-in-one toolkit."
 It includes a JavaScript runtime, package manager, bundler, and test runner.
+
 Bun is free and open source.
 
-Development of Bun started in 2022 by Jarred Sumner with VC funding.
-Bun became stable (1.0) in September 2023.
+Bun can be used as a drop-in replacement for npm and Node.js.
+The Bun runtime supports nearly all Node.js builtin modules (around 40 of them).
+Rarely used modules such as dgram, http2, inspector, and repl
+are not yet supported.
+The v8 module is specific to Webkit which Bun does not use.
 
-Bun was created by the startup company
-{% aTargetBlank "https://oven.sh/", "Oven.sh" %}
-because that’s what buns come out of.
-Oven will donate Zig to the Zig Software Foundation to keep the project going.
+## Benefits Over npm and Node.js
 
-Bun is built on JavaScriptCore from Safari
-which has faster startup times than V8.
-Bun supports TypeScript out of the box.
+The benefits of using Bun over npm and Node.js include:
 
-Bun is implemented in Zig and some C++.
-"Zig is sort of similar to writing C, but with better memory safety features
-in debug mode and modern features like defer (sort of similar to Go's)
-and arbitrary code can be executed at compile-time via comptime.
-It's really good for writing performant low-level software."
-"It has very few keywords so it's a lot easier to learn than,
-for example, C++ or Rust."
-
-Bun works with nearly all major web frameworks including
-Next.js, SvelteKit, Astro, Nuxt, and Fastify.
-
-The name "Bun" came from a friend who suggested it
-because she has a bunny named "Bun".
-The initial reaction was "I'm not going to name it after your bunny.
-And then I thought about it more and it made some sense."
-It also makes sense because
-"it’s a bundling of the JavaScript ecosystem and a bundler".
-
-## Performance
+- Bun provides significantly better performance.
+- Bun simplifies the current state of JS/TS tooling
+  (transpilers, bundlers, testing tools, and so on).
+  There is less to install and configure and it is easier to use.
+- Bun supports both CommonJS (require) and ESM (import)
+  in the same source files.
+- Bun supports TypeScript out of the box.
+- Bun supports JSX/TSX files for generating HTML using React.
+- Bun has builtin support for SQLite databases using the `bun:sqlite` module.
+  It is two times faster than Deno and four times faster than Node.js
+  in queries per second.
+- Bun has builtin support for Jest-compatible unit tests
+  using the `bun:test` module.
+  It is eight times faster than Vitest and 13 times faster than Jest.
+- Bun provides bun-specific APIs that are alternatives to many npm modules.
+  These are highly optimized and perform much better than their Node.js equivalents.
+  - `Bun.file` returns a `File` object with the same properties as
+    DOM `File` objects.  The contents are lazily loaded.
+    It provides many `async` methods for reading content in different formats
+    including text, json, stream, and ArrayBuffer.
+    These read files up to 10 times faster than Node.js equivalents.
+  - `Bun.write` writes many kinds of values including strings, buffers, files,
+    and responses from HTTP requests.
+    It writes three times faster than Node.js equivalents.
+  - `Bun.serve` starts an HTTP server based on web APIs.
+    It handles four times as many requests per second as the Node.js equivalent.
+  - `Bun.env` provides access to environment variables
+    without installing and using the `dotenv` package.
+  - Builtin Websocket support handles five times as many messages per second
+    as the Node.js equivalent and is easier to use.
+  - Builtin password hashing using Bcrypt and Argon is provided.
+  - Bun provides many more APIs!
+- Bun has a plugin API that is similar to esbuild.
+  Many esbuild plugins work in Bun without modification.
 
 The Bun team makes the following performance claims:
 
@@ -49,6 +63,44 @@ The Bun team makes the following performance claims:
   15 times faster than TSX, and 43 times faster than TSC + Node.
 - `bun run` can be used in place of `npm run` and is 5 times faster.
 - `bun install` is 29 times faster than npm and 17 times faster than pnpm;
+
+## History
+
+Development of Bun started in 2022 by Jarred Sumner with VC funding.
+Bun became stable (1.0) in September 2023.
+
+Bun was created by the startup company
+{% aTargetBlank "https://oven.sh/", "Oven.sh" %}
+because that’s what buns come out of.
+“Oven has decided to adopt a strategy twinned with Deno Company.
+They will launch sales of a cloud architecture based on Bun.”
+
+The name "Bun" came from a friend who suggested it
+because she has a bunny named "Bun".
+The initial reaction was "I'm not going to name it after your bunny.
+And then I thought about it more and it made some sense."
+It also makes sense because
+"it’s a bundling of the JavaScript ecosystem and a bundler".
+
+## Implementation
+
+Bun is built on JavaScriptCore from Safari
+which has faster startup times than V8.
+
+Bun is implemented in Zig and some C++.
+"Zig is sort of similar to writing C, but with better memory safety features
+in debug mode and modern features like defer (sort of similar to Go's)
+and arbitrary code can be executed at compile-time via comptime.
+It's really good for writing performant low-level software."
+Zig "has very few keywords so it's a lot easier to learn than,
+for example, C++ or Rust."
+
+Oven will donate to the Zig Software Foundation to keep the project going.
+
+## Framework Support
+
+Bun works with nearly all major web frameworks including
+Next.js, SvelteKit, Astro, Nuxt, and Fastify.
 
 ## Installing
 
@@ -372,39 +424,11 @@ It will output the following:
 
 ## CLEANUP UP REMAINDER OF THIS CONTENT
 
-These notes are currently in a very rough form!
-
 Compare performance of bun, deno, and node on your rush-hour code. Implement your rush-hour program in Zig. Compare performance.
-
-Is the only plan for profit to provide hosting?
-“Oven has decided to adopt a strategy twinned with Deno Company. They will launch sales of a cloud architecture based on Bun.”
 
 Create code examples that demonstrate the most important bun-specific APIs.
 
-Does it share module code across projects like pnpm?
-
-Why?
-
-- simplifies current state of JS/TS tooling (transpilers, bundlers, testing tools, …); less to install and configure; easier to use
-- provides significantly better performance
-- supports both CommonJS (require) and ESM (import) in the same source files
-
-Features
-
-- The bun runtime replaces Node.js and supports nearly all Node.js builtin modules (around 40 of them; rarely used modules such as dgram, http2, inspector, and repl are not yet supported; v8 module is specific to Webkit which Bun does not use)
-- Supports JSX/TSX files.
-- hot reloading with “bun —hot {file} (watch mode equivalent of nodemon?)
-- has a plugin API that is similar to that of esbuild, so many esbuild plugins work in bun without modification
-- bun:test a Jest-compatible test runner; 8 times faster than Vitest and 13 times faster than Jest
-- SQLite database built into the bun runtime; see bun:sqlite; 2 times faster than Deno and 4 times faster than Node in queries per second
-- bun-specific, highly-optimized APIs that perform better than Node.js equivalents
-  - Bun.file returns a File object with the same properties as DOM File objects; contents are lazily loaded; many async methods for reading content in different formats including text, json, stream, and ArrayBuffer; reads files up to 10 times faster
-  - Bun.write to write many kinds of values including strings, buffers, files, and responses from HTTP requests; writes 3 times faster than Node.js
-  - Bun.serve to start an HTTP server based on web APIs; handles 4 times as many requests per second as Node.js
-  - Bun.env provides access to environment variables without using the dotenv package
-  - Websocket support handles 5 times as many messages per second as Node.js and is easier to use
-  - password hashing (uses Bcrypt and Argon)
-  - many more APIs!
+Does Bun share module code across projects like pnpm?
 
 Concerns
 
