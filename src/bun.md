@@ -4,6 +4,11 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+<figure style="width: 33%">
+  <img alt="Ziggy, the Zig mascot" style="border: 0"
+    src="/blog/assets/bun-logo.svg?v={{pkg.version}}">
+</figure>
+
 ## Overview
 
 "{% aTargetBlank "https://bun.sh", "Bun" %} is a fast JavaScript all-in-one toolkit."
@@ -452,6 +457,11 @@ To create a new Bun project that uses ElysiaJS,
 enter `bun create elysia {destination}`.
 The destination is used as the name of a directory to create
 and can be `.` to create the project in the current directory.
+
+To run the starter project, enter `bun run dev`.
+Browsing localhost:3000 will display "Hello Elysia".
+
+To define new routes in the project ...
 
 See the example at {% aTargetBlank
 "https://github.com/mvolkmann/bun-elysia-demo", "bun-elysia-demo" %}
