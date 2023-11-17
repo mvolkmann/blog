@@ -124,8 +124,9 @@ but is much faster in subsequent runs.
 
 ## Projects
 
-To create a new Bun project, create a directory, cd to it, and enter `bun init`.
-This creates the files:
+To create a new Bun project, create a directory, cd to it.
+For a vanilla Bun project, enter `bun init`.
+This creates the following files:
 
 - `README.md`
 
@@ -165,6 +166,13 @@ without installing additional packages or configuring anything.
 It is somewhat common to create a `src` directory
 and move `index.ts` and other source files into it.
 
+To create a project from a template,
+enter `bun create {template} {destination}`.
+For example, to create a project that uses Svelte,
+enter `bun create svelte@latest my-svelte-app` (or `bun c`).
+Some templates will ask questions about your preferences
+and some will output instructions about what to do next.
+
 ## Help
 
 To see all the subcommands supported by the `bun` command, enter `bun`.
@@ -189,13 +197,16 @@ Adding dependencies with the `bun` command is
 much faster than adding them with the `npm` command.
 
 To add a runtime dependency to a Bun project,
-enter `bun add {package-name}`.
+enter `bun add {package-name}` (or `bun a`).
 
 To add a development dependency to a Bun project,
 enter `bun add -d {package-name}`.
 
 To remove a runtime or development dependency to a Bun project,
-enter `bun remove {package-name}`.
+enter `bun remove {package-name}` (or `bun rm`).
+
+To install all the dependencies listed in `package.json`,
+enter `bun install` (or `bun i`).
 
 ## Linting
 
@@ -366,7 +377,7 @@ that may not already be installed.
 For example, `npx cowsay Hello Cow!` outputs ASCII text
 that depicts a cow with a speech bubble.
 
-The same can be done with Bun using `bun x` or `bunx`.
+The same can be done with Bun using `bun x` (or `bunx`).
 The main difference is that the Bun approach is much faster.
 
 ## SQLite
@@ -421,6 +432,30 @@ It will output the following:
     completed: 1
   }
 ]```
+
+## HTTP Server
+
+Bun has builtin support for implementing HTTP servers
+using the `Bun.serve` function.
+
+See the example at {% aTargetBlank
+"https://github.com/mvolkmann/bun-http-server", "bun-http-server" %}
+GitHub repository.
+
+## ElysiaJS
+
+{% aTargetBlank "https://elysiajs.com", "ElysiaJS" %} is a
+"TypeScript framework supercharged by Bun with End-to-End Type Safety,
+unified type system and outstanding developer experience."
+
+To create a new Bun project that uses ElysiaJS,
+enter `bun create elysia {destination}`.
+The destination is used as the name of a directory to create
+and can be `.` to create the project in the current directory.
+
+See the example at {% aTargetBlank
+"https://github.com/mvolkmann/bun-elysia-demo", "bun-elysia-demo" %}
+GitHub repository.
 
 ## CLEANUP UP REMAINDER OF THIS CONTENT
 
