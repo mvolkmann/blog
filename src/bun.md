@@ -33,14 +33,22 @@ for example, C++ or Rust."
 Bun works with nearly all major web frameworks including
 Next.js, SvelteKit, Astro, Nuxt, and Fastify.
 
-The Bun package manager works with npm packages.
-
 The name "Bun" came from a friend who suggested it
 because she has a bunny named "Bun".
 The initial reaction was "I'm not going to name it after your bunny.
 And then I thought about it more and it made some sense."
 It also makes sense because
 "it’s a bundling of the JavaScript ecosystem and a bundler".
+
+## Performance
+
+The Bun team makes the following performance claims:
+
+- Bun is four times faster than Node.js for a hello world program.
+- The time to build and run TS code in Bun is 4 times faster than esbuild,
+  15 times faster than TSX, and 43 times faster than TSC + Node.
+- `bun run` can be used in place of `npm run` and is 5 times faster.
+- `bun install` is 29 times faster than npm and 17 times faster than pnpm;
 
 ## Installing
 
@@ -114,7 +122,13 @@ To see all the options supported by the `bun` command, enter `bun --help`.
 
 To see a list of all scripts defined in `package.json`, enter `bun.run`.
 
-## Dependencies
+## Package Manager
+
+The Bun package manager works with npm packages.
+It uses `package.json` files just like npm,
+but it uses a binary `bun.lockb` file instead of `package-lock.json`.
+The `bun` command can be used as a replacement for the `npm`
+even when not using the bun runtime.
 
 Just like in Node.js, Bun tracks dependencies in a `package.json` file
 and installs dependencies in the `node_modules` directory.
@@ -303,6 +317,59 @@ that depicts a cow with a speech bubble.
 The same can be done with Bun using `bun x` or `bunx`.
 The main difference is that the Bun approach is much faster.
 
+## SQLite
+
+Bun has builtin support for SQLite databases.
+However, it does not install SQLite.
+For macOS, SQLite can be installed using Homebrew.
+
+After installing SQLite, a database containing a table with records
+can be created with the following steps:
+
+```bash
+sqlite3 todos.db
+sqlite> create table todos(id string primary key, text string, completed numeric);
+sqlite> .schema
+CREATE TABLE todos(id string primary key, text string, completed numeric);
+sqlite> insert into todos values('t1', 'cut grass', 0);
+sqlite> insert into todos values('t2', 'buy milk', 1);
+sqlite> select * from todos;
+t1|cut grass|0
+t2|buy milk|1
+sqlite> .exit
+```
+
+This creates the file `todos.db` that contains all the tables for this database
+(only one in this case).
+
+To access this database from code, write something like the following
+in the file `database.ts`:
+
+```ts
+import {Database} from 'bun:sqlite';
+
+const db = new Database('todos.db', {create: true});
+const query = db.query('select * from todos;');
+const todos = query.all(); // get();
+console.log(todos);
+```
+
+Run this with `bun run database.ts`.
+It will output the following:
+
+```text
+[
+  {
+    id: "t1",
+    text: "cut grass",
+    completed: 0
+  }, {
+    id: "t2",
+    text: "buy milk",
+    completed: 1
+  }
+]```
+
 ## CLEANUP UP REMAINDER OF THIS CONTENT
 
 These notes are currently in a very rough form!
@@ -339,18 +406,9 @@ Features
   - password hashing (uses Bcrypt and Argon)
   - many more APIs!
 
-Performance
-
-- 4 times faster than Node.js for a hello world program
-- time to build and run TS code is 4 times faster than esbuild, 15 times faster than TSX, and 43 times faster than TSC + Node
-- “bun run” can be used in place of “npm run” and is 5 times faster
-- “bun install” is 29 times faster than npm and 17 times faster than pnpm; uses package.json files just like npm; uses a binary bun.lockb file instead of package-lock. json; can be used as a replacement for npm even when not using the bun runtime
-- “bunx” is the equivalent of “npx”
-
 Concerns
 
-- Was it a good idea to build with Zig, a new, not yet popular language?
-- We’re the Node APIs implemented to have identical characteristics with no bugs?
+- Were the Node APIs implemented to have identical characteristics with no bugs?
 
 More
 
