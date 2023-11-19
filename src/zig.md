@@ -40,12 +40,12 @@ There are advantages to building apps with the Zig compiler
 even if they have no Zig code and only use C and/or C++ code.
 
 Zig is suitable for applications that care deeply about
-performance, binary size, and/or memory usage.
+performance, memory usage, and/or binary size.
 Often these concerns justify the tedium of
 manual memory management that is required
 due to lack of automated garbage collection.
 
-A major appeal of Zig is that it is simpler than C++ and Rust.
+A major appeal of Zig is that it is simpler than C++ and Rust and safer than C.
 However, Zig does not provide the same level of memory safety as Rust.
 
 Zig emphasizes:
@@ -58,8 +58,8 @@ Zig emphasizes:
 - No hidden memory allocations
 
   All memory allocation is performed by allocators that the developer selects.
-  Each kind of allocation implements a different allocation strategy.
-  Zig does not support closures, so allocations to not outlive their scope.
+  Each kind of allocator implements a different allocation strategy.
+  Zig does not support closures, so allocations do not outlive their scope.
 
 - No preprocessors or macros
 
