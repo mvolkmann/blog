@@ -113,7 +113,7 @@ which means it is implemented in Zig.
 Pros of Zig include:
 
 - run-time speed
-- builtin build system
+- integrated build system
 - fast compiler compared to C++ and Rust
 - manual memory management offers great control over memory utilization
 - integration with C and C++
@@ -573,17 +573,31 @@ To test for memory leaks, use the `std.testing.allocator`
 for all memory allocation.
 This allocation can only be used in `test` blocks.
 
-To run tests found in all source files referenced from `main.zig` in a Zig project,
-add the following in that file:
+To run tests found in all source files referenced and used,
+create a file with a name like `main.zig`
+containing something like the following:
 
 ```zig
+const std = @import("std");
+const m1 = @import("module1.zig");
+
+pub fn main() !void {
+    m1.first();
+}
+
 test {
     std.testing.refAllDecls(@This());
 }
 ```
 
 Then enter `zig build test`.
+This will run all tests in `main.zig` and tests in any file referenced from it
+which includes `module.zig` and everything it references recursively.
+
 If there are no test failures then there will be no output.
+
+Andrew Kelley said "refAllDecls is a hack that will
+almost certainly be removed from the standard library."
 
 To determine whether code is running in a test,
 use the `is_test` constant in the `builtin` module (not `std.builtin`).
