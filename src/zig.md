@@ -192,9 +192,9 @@ Zig provides the following run-time checks:
 
 ## Installing
 
-To install, download a platform-specific zip or tar file from
-the {% aTargetBlank "https://ziglang.org/download/", "Releases" %} page,
-expand it, move the directory this creates to a desired location,
+To install, download a platform-specific zip or tar file from the
+{% aTargetBlank "https://ziglang.org/getting-started/", "Getting Started" %}
+page, expand it, move the directory this creates to a desired location,
 set the environment variable `ZIG_PATH` to point to this directory, and
 add `ZIG_PATH` to the list of directories in the `PATH` environment variable.
 
@@ -1304,8 +1304,8 @@ The precedence of Zig operators is described in the {% aTargetBlank
 To get a pointer to the data of a variable, use `&variable_name`.
 
 To dereference a pointer, use `variable_name.*`.
-This syntax can be used with chaining when the value is a `struct`
-to access a struct field.
+When the value is a struct instance, this syntax
+can be used with chaining to access a struct field.
 For example, `dog_ptr.*.name`.
 This can be thought of as a request to get
 the whole struct instance and then a specific field from it.
