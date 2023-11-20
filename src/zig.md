@@ -198,6 +198,8 @@ expand it, move the directory this creates to a desired location,
 set the environment variable `ZIG_PATH` to point to this directory, and
 add `ZIG_PATH` to the list of directories in the `PATH` environment variable.
 
+To see the version installed, enter `zig version`.
+
 Stable versions have a version number such as 0.11.0.
 Consider downloading a nightly build labeled "master"
 to use the very latest version.
@@ -1304,10 +1306,10 @@ To get a pointer to the data of a variable, use `&variable_name`.
 To dereference a pointer, use `variable_name.*`.
 This syntax can be used with chaining when the value is a `struct`
 to access a struct field.
-For example, `dogPtr.*.name`.
+For example, `dog_ptr.*.name`.
 This can be thought of as a request to get
 the whole struct instance and then a specific field from it.
-But the compiler treats `dogPtr.name` as the same.
+But the compiler treats `dog_ptr.name` as the same.
 
 A pointer can optionally be `const` to ensure that
 it cannot be changed to point to a different value.
@@ -1323,11 +1325,11 @@ For example:
 const std = @import("std");
 const expectEqual = std.testing.expectEqual;
 
-fn touchdown(scorePtr: *u8, extraPoint: bool) !void {
-    const current = scorePtr.*;
-    scorePtr.* += 6;
-    try expectEqual(scorePtr.*, current + 6);
-    if (extraPoint) scorePtr.* += 1;
+fn touchdown(score_ptr: *u8, extraPoint: bool) !void {
+    const current = score_ptr.*;
+    score_ptr.* += 6;
+    try expectEqual(score_ptr.*, current + 6);
+    if (extraPoint) score_ptr.* += 1;
 }
 
 test "primitive pointers" {
@@ -1368,14 +1370,14 @@ const Dog = struct { name: []const u8, breed: []const u8, age: u8 };
 
 test "struct pointers" {
     var dog = Dog{ .name = "Comet", .breed = "whippet", .age = 3 };
-    const dogPtr = &dog; // single-item pointer
+    const dog_ptr = &dog; // single-item pointer
     try expectEqual(dog.name, "Comet");
-    try expectEqual(dogPtr.*.name, "Comet");
-    try expectEqual(dogPtr.name, "Comet"); // automatic dereferencing
+    try expectEqual(dog_ptr.*.name, "Comet");
+    try expectEqual(dog_ptr.name, "Comet"); // automatic dereferencing
 
     // Pointers can only be used to modify a struct property
     // if the struct instance is not const.
-    dogPtr.*.name = "Oscar";
+    dog_ptr.*.name = "Oscar";
     try expectEqual(dog.name, "Oscar");
 
     // Create an array of Dog instances.
