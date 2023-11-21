@@ -1447,8 +1447,8 @@ const expect = std.testing.expect;
 const expectEqual = std.testing.expectEqual;
 
 // Enums must be defined with const or comptime, not var.
-// A type must be specified for an enum
-// in order to access and override its default ordinal values.
+// A numeric type for ordinal values must be specified
+// in order to access and override ordinal values.
 const Color = enum(u8) {
     red, // defaults to 0
     yellow, // assigned 1
