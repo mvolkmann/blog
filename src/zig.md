@@ -1424,6 +1424,10 @@ To get the ordinal value of an enum instance,
 use the builtin function `@intFromEnum(enumValue)`.
 For example, `@intFromEnum(Color.yellow)` returns `1`.
 
+To get an enum instance from an ordinal value,
+use the builtin function `@enumFromInt(value)`.
+For example, `const color: Color = @enumFromInt(1);` returns `Color.yellow`.
+
 Enums are typically defined at the global scope rather than inside a function.
 
 Enum values can override their default ordinal value if an integer type
