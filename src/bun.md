@@ -40,6 +40,16 @@ The benefits of using Bun over npm and Node.js include:
 - Bun has builtin support for Jest-compatible unit tests
   using the `bun:test` module.
   It is eight times faster than Vitest and 13 times faster than Jest.
+- Bun has better support for Web APIs including
+  `fetch`, `Request`, `Response`, `WebSocket`, and more.
+  Bun's native implementation of these tends to be
+  faster than third-party libraries used with Node.js.
+- Bun provides native hot reloading using the `--hot` flag
+  which updates a running server without restarting it.
+  This allows preserving application state
+  and connections such as HTTP and WebSockets.
+  Hot reloading in Node.js currently requires either using
+  an external tool like nodemon or the experimental `--watch` flag.
 - Bun provides bun-specific APIs that are alternatives to many npm modules.
   These are highly optimized and perform much better than their Node.js equivalents.
   - `Bun.file` returns a `File` object with the same properties as
@@ -89,8 +99,10 @@ It also makes sense because
 
 ## Implementation
 
-Bun is built on JavaScriptCore from Safari
-which has faster startup times than V8.
+Bun is built on JavaScriptCore (JSC) from Safari
+rather than V8 which is used by Chrome.
+JSC has faster startup time and lower memory usage than V8,
+but slightly less overall performance.
 
 Bun is implemented in Zig and some C++.
 "Zig is sort of similar to writing C, but with better memory safety features
