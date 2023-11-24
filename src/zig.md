@@ -2176,7 +2176,7 @@ The following code demonstrates defining and using a `struct`:
 ```zig
 const std = @import("std");
 const sqrt = std.math.sqrt;
-const expect = std.testing.expect;
+const expectEqual = std.testing.expectEqual;
 
 fn square(n: f32) f32 {
     return std.math.pow(f32, n, 2);
