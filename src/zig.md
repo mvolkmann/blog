@@ -2506,8 +2506,7 @@ To get the enum value for a given tagged union instance,
 use the `std.meta.Tag(union_instance)` function.
 
 An "inferred enum" union is a simpler alternative to a tagged `union`
-that is useful when a separate `enum` is not needed for other purposes
-such as `switch` statements.
+that is useful when a separate `enum` is not needed for other purposes.
 
 The following code demonstrates using all three kinds of unions:
 
@@ -2786,8 +2785,7 @@ than in C `switch` statements.
 
 The expression that follows `switch` must
 evaluate to an integer, enum value, or `bool`.
-Zig does not support `switch` expressions that
-evaluate to any other type including strings.
+Other types, including strings, are not supported.
 
 Cases are referred to as "branches".
 Branches can match a single value, a list of values, or a range of values.
@@ -2795,8 +2793,6 @@ These are followed by the `=>` operator which is followed by
 an expression, a statement, or a block of code.
 
 It must be possible to coerce all branch values to a common type.
-Supported branch value types include numbers and enums.
-Switching on strings is not supported.
 
 Here is an example that demonstrates all the branch options:
 
