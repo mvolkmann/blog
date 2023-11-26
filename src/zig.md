@@ -2993,7 +2993,7 @@ Here is an example:
 
 ```zig
     value = 0;
-    // result is "triple" if value starts a 1
+    // result is "triple" if value starts at 1
     // and "not found" if value starts at 0.
     const result = while (value < 10) {
         if (value == 3) break "triple";
@@ -4090,19 +4090,18 @@ test "polymorphism with union" {
 
 The following builtin functions support reflection:
 
-- `@This()` when inside a `struct` definition, returns its type.
+- `@hasDecl` determines if a struct contains a declaration with a given name.
+- `@hasField` determines if a struct contains a field with a given name.
+- `@This` when inside a `struct` definition, returns its type.
 - `@TypeOf` returns the type of a given value or the common type of a list of values.
-- `@typeName` returns the name of a given type as a string.
 - `@typeInfo` returns a tagged union that describes a type.
+- `@typeName` returns the name of a given type as a string.
 - `std.meta.fields` returns information about the fields in a struct.
-- `std.meta.trait.hasField` methods determine if a struct
-  contains a field with a given name.
-- `std.meta.trait.hasFn` methods determine if a struct
-  contains a function with a given name.
-- `std.meta.trait.*` methods determine the kind of a type. These include
-  `isConstPtr`, `isContainer`, `isExtern`, `isFloat`, `isIndexable`, `isIntegral`,
-  `isManyItemPtr`, `isNumber`, `isPacked`, `isPtrTo`, `isSignedInt`, `isSingleItemPtr`,
-  `isSlice`, `isSliceOf`, `isTuple`, `isUnsignedInt`, and `isZigString`.
+- `std.meta.hasFn` determines if a struct contains a function with a given name.
+
+For more, see the library {% aTargetBlank
+"https://github.com/wrongnull/zigtrait", "zigtrait" %}.
+
 
 ```zig
 const std = @import("std");
@@ -4161,15 +4160,15 @@ There are many provided allocators that each
 use a different memory management strategy.
 New allocators can be defined to implement custom memory management strategies.
 
-A program can use any number of different allocators
+A program can use any number of allocators
 for different groups of memory allocations.
 This provides much more flexibility than in languages
 that only have one memory allocation strategy
 or only support selecting one for an entire program.
 
-For guidelines on selecting an allocator, see {% aTargetBlank
-"https://ziglang.org/documentation/master/#Choosing-an-Allocator",
-"Choosing an Allocator" %}.
+For guidelines on selecting an allocator, see
+<a href="https://ziglang.org/documentation/master/#Choosing-an-Allocator"
+target="_blank">Choosing an Allocator</a>.
 
 The `defer` keyword is followed by a statement or block of code
 to be executed when the containing block terminates.
@@ -4266,7 +4265,7 @@ The Zig standard library provides the following allocators:
   which avoids allocating memory at run-time.
   It requires determining the maximum amount of memory needed
   at compile-time.
-  If more than thant amount is requested, and `OutOfMemory` error occurs.
+  If more than that amount is requested, an `OutOfMemory` error occurs.
 
   The following code demonstrates using this kind of allocator.
 
@@ -4507,7 +4506,7 @@ The Zig standard library provides the following allocators:
   const allocator = std.testing.allocator;
   ```
 
-- `std.testing.FailingAllocator``
+- `std.testing.FailingAllocator`
 
   This fails after a given number of allocations.
   It is useful for testing how a program handles out of memory conditions.
