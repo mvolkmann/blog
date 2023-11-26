@@ -2677,7 +2677,7 @@ simplifies output of strings type is typically `[]const u8`.
 const std = @import("std");
 const print = std.debug.print;
 
-// The value of the first argument to print must be known at compile time.
+// The value of the first argument to print must be known at compile-time.
 fn log(comptime text: []const u8) void {
     print(text ++ "\n", .{});
 }
@@ -2792,7 +2792,7 @@ const std = @import("std");
 const print = std.debug.print;
 const String = []const u8;
 
-// The value of the first argument to print must be known at compile time.
+// The value of the first argument to print must be known at compile-time.
 fn log(comptime text: String) void {
     print(text ++ "\n", .{});
 }
@@ -4772,7 +4772,7 @@ target="_blank">ArrayList</a> data structure
 is "a contiguous, growable list of items in memory."
 
 Instances of `ArrayList` have the fields `items`, `capacity`, and `allocator`.
-Instances have the methods `append`, `appendSlice`, `clone`, `deinit`,
+Instances have the methods `append`, `appendSlice`, `clearAndFree`, `clone`, `deinit`,
 `getLast`, `getLastOrNull`, `init`, `insert`, `insertSlice`, `orderedRemove`,
 `pop`, `popOrNull`, `replaceRange`, `writer`, and many more.
 
@@ -4831,8 +4831,8 @@ test "ArrayList" {
 
 ### MultiArrayList type
 
-A {% aTargetBlank "https://ziglang.org/documentation/master/std/#A;std:MultiArrayList",
-"MultiArrayList" %} is similar to an `ArrayList`
+A <a href="https://ziglang.org/documentation/master/std/#A;std:MultiArrayList"
+target="_blank">MultiArrayList</a> is similar to an `ArrayList`
 in that it to stores a sequence of elements.
 However, the elements must be instances of a `struct` or `union` type.
 
@@ -5603,7 +5603,7 @@ to achieve better error handling.
 - `@compileLog` -
 - `@embedFile`
 
-  This reads a file at compile time and embeds the text
+  This reads a file at compile-time and embeds the text
   in the compiled code as if it were a literal string.
   The file path can be absolute or relative.
 
