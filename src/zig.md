@@ -2442,7 +2442,6 @@ The following code demonstrates using a tuple:
 ```zig
 const std = @import("std");
 const print = std.debug.print;
-const trait = std.meta.trait;
 const expectEqual = std.testing.expectEqual;
 
 test "tuple" {
@@ -2450,8 +2449,6 @@ test "tuple" {
     // to specific types is optional.
     // The compiler will know the element types in this tuple
     // and can use them in the "inline for" loop below.
-    // This is important because the types passed to
-    // "trait.isZigString" must be known at compile-time.
     const tuple = .{ true, @as(u8, 19), @as(f32, 3.14), 'A', "hello" };
 
     try expectEqual(tuple.len, 5);
@@ -2472,13 +2469,7 @@ test "tuple" {
     inline for (tuple) |value| {
         const T = @TypeOf(value);
         print("type of {any} is {}\n", .{ value, T });
-        // comptime must be used here because the argument
-        // to isZigString must be comptime-known.
-        if (comptime trait.isZigString(T)) {
-            print("value is {s}\n", .{value});
-        } else {
-            print("value is {any}\n", .{value});
-        }
+        print("value is {any}\n", .{value});
     }
 
     // Destructuring can be used to get the elements of a tuple,
@@ -3649,12 +3640,8 @@ const Wrong = struct {
 // The first argument must be a struct with
 // a top_speed field that is an integer.
 fn travelTime(thing: anytype, distance: u32) !f32 {
-    // We could use @TypeOf(thing) and functions like
-    // std.meta.trait.hasField and std.meta.trait.isIntegral
-    // to verify that "thing" meets our criteria.
-    // However, there is no need to do that because the compiler will
-    // verify that "thing" has a "top_speed" field that is an integer
-    // just because it is used that way here.
+    // The compiler will verify that "thing" has a "top_speed" field
+    // that is an integer because it is used that way here.
     const s: f32 = @floatFromInt(thing.top_speed);
 
     // We can't eliminate the local variable d because
@@ -3994,7 +3981,6 @@ The following code demonstrates both approaches.
 ```zig
 const std = @import("std");
 const print = std.debug.print;
-const trait = std.meta.trait;
 const expectEqual = std.testing.expectEqual;
 
 const Circle = struct {
@@ -4020,16 +4006,6 @@ const Square = struct {
 };
 
 fn anyArea(shape: anytype) f32 {
-    // This comptime block isn't necessary, but it provides documentation
-    // about the expectations on the shape type.
-    comptime {
-        if (!trait.isPtrTo(.Struct)(@TypeOf(shape))) {
-            @compileError("shape must be a pointer to a struct");
-        }
-        if (!trait.hasFn("area")(@TypeOf(shape.*))) {
-            @compileError("shape must have an area method");
-        }
-    }
     return shape.area();
 }
 
@@ -4106,7 +4082,6 @@ For more, see the library {% aTargetBlank
 ```zig
 const std = @import("std");
 const print = std.debug.print;
-const trait = std.meta.trait;
 
 const Dog = struct { name: []const u8, breed: []const u8, age: u8 };
 
@@ -4126,9 +4101,7 @@ pub fn main() void {
         );
 
         const value = @field(d, field.name);
-        // comptime is required here because the compiler needs to know the type.
-        if (comptime trait.isNumber(T)) print("value is {d}\n", .{value});
-        if (comptime trait.isZigString(T)) print("value is {s}\n", .{value});
+        print("value is {any}\n", .{value});
     }
 
     // Function reflection
@@ -4642,8 +4615,8 @@ The top-level namespaces in the standard library include the following:
 - `fifo` - first in, first out data structures
 - `fmt` - string formatting and parsing (e.g. parsing numbers out of strings)
 - `fs` - file system-related functionality
-- `hash_map` - defines several kinds of hash maps that do not preserve insertion order
 - `hash` - fast hashing functions (i.e. not cryptographically secure)
+- `hash_map` - defines several kinds of hash maps that do not preserve insertion order
 - `heap` - allocator implementations
 - `http` - HTTP client and server
 - `io` - I/O streams, reader/writer interfaces and common helpers
@@ -4772,20 +4745,6 @@ The top-level namespaces in the standard library include the following:
   ```
 
 - `meta` - metaprogramming helpers
-
-  This namespace has a sub-namespace named `traits`.
-  The following code demonstrates how some of its methods can be used.
-
-  ```zig
-  fn isNumber(v: anytype) bool {
-      return std.meta.trait.isNumber(@TypeOf(v));
-  }
-
-  fn isString(v: anytype) bool {
-      return std.meta.trait.isZigString(@TypeOf(v));
-  }
-  ```
-
 - `net` - networking
 - `os` - wrappers around OS-specific APIs
 - `packed_int_array` - a set of array and slice types that bit-pack integer elements
