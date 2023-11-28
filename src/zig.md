@@ -4746,6 +4746,7 @@ The top-level namespaces in the standard library include the following:
 
 - `meta` - metaprogramming helpers
 - `net` - networking
+- `options` - standard library options
 - `os` - wrappers around OS-specific APIs
 - `packed_int_array` - a set of array and slice types that bit-pack integer elements
 - `pdb` - Program Database (PDB) file format
@@ -6706,13 +6707,12 @@ pub fn main() !void {
 
 ## JSON
 
-The `std.json` package provides functions for
+The `std.json` namespace provides functions for
 generating and parsing JSON strings.
 The following code demonstrates both.
 
 ```zig
 const std = @import("std");
-const print = std.debug.print;
 const my_allocator = std.testing.allocator;
 const expectEqual = std.testing.expectEqual;
 const String = []const u8;
@@ -6731,7 +6731,7 @@ fn fromJSON(T: anytype, allocator: std.mem.Allocator, json: String) !T {
 }
 
 fn toJSON(allocator: std.mem.Allocator, value: anytype) !String {
-    // The ArrayList that will grow as needed.
+    // The ArrayList will grow as needed.
     var out = std.ArrayList(u8).init(allocator); // cannot be const
     defer out.deinit();
     try std.json.stringify(value, .{}, out.writer());
@@ -6754,7 +6754,8 @@ test "json" {
 
 ## HTTP
 
-TODO: See https://github.com/zigzap/zap which may be the only Zig HTTP server now.
+TODO: See <a href="https://github.com/zigzap/zap" target="_blank">zap</a>
+which may be the only Zig HTTP server now.
 
 ## Compiling C and C++
 
