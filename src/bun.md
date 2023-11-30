@@ -365,6 +365,17 @@ To demonstrate this:
    in bar.ts
    ```
 
+As an alternative to the last step,
+create the file `bundle.ts` containing the following
+and run it by entering `bun run bundle.ts`:
+
+```ts
+Bun.build({
+  entrypoints: ['index.ts'],
+  outdir: 'build'
+});
+```
+
 
 ## Bun Global Variable
 
