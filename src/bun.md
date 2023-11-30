@@ -13,8 +13,7 @@ layout: topic-layout.njk
 
 "{% aTargetBlank "https://bun.sh", "Bun" %} is a fast JavaScript all-in-one toolkit."
 It includes a JavaScript runtime, package manager, bundler, and test runner.
-
-Bun is free and open source.
+All of this is is free and open source.
 
 Bun can be used as a drop-in replacement for npm and Node.js.
 The Bun runtime supports nearly all Node.js builtin modules (around 40 of them).
@@ -30,16 +29,16 @@ The benefits of using Bun over npm and Node.js include:
 - Bun simplifies the current state of JS/TS tooling
   (transpilers, bundlers, testing tools, and so on).
   There is less to install and configure and it is easier to use.
-- Bun supports both CommonJS (require) and ESM (import)
+- Bun supports both CommonJS (`require`) and ESM (`import`)
   in the same source files.
 - Bun supports TypeScript out of the box.
 - Bun supports JSX/TSX files for generating HTML using React.
 - Bun has builtin support for SQLite databases using the `bun:sqlite` module.
-  It is two times faster than Deno and four times faster than Node.js
+  It is 2 times faster than Deno and 4 times faster than Node.js
   in queries per second.
+  Future support for MySQL and Postgres is planned.
 - Bun has builtin support for Jest-compatible unit tests
   using the `bun:test` module.
-  It is eight times faster than Vitest and 13 times faster than Jest.
 - Bun has better support for Web APIs including
   `fetch`, `Request`, `Response`, `ReadableStream`, `WebSocket`, and more.
   There is no need to install dependencies such as `node-fetch` and `ws`.
@@ -60,25 +59,26 @@ The benefits of using Bun over npm and Node.js include:
     These read files up to 10 times faster than Node.js equivalents.
   - `Bun.write` writes many kinds of values including strings, buffers, files,
     and responses from HTTP requests.
-    It writes three times faster than Node.js equivalents.
+    It writes 3 times faster than Node.js equivalents.
   - `Bun.serve` starts an HTTP server based on web APIs.
-    It handles four times as many requests per second as the Node.js equivalent.
+    It handles 4 times as many requests per second as the Node.js equivalent.
   - `Bun.env` provides access to environment variables
     without installing and using the `dotenv` package.
-  - Builtin Websocket support handles five times as many messages per second
+  - Builtin Websocket support handles 5 times as many messages per second
     as the Node.js equivalent and is easier to use.
   - Builtin password hashing using Bcrypt and Argon is provided.
   - Bun provides many more APIs!
 - Bun has a plugin API that is similar to esbuild.
   Many esbuild plugins work in Bun without modification.
 
-The Bun team makes the following performance claims:
+The Bun team makes the following additional performance claims:
 
-- Bun is four times faster than Node.js for a hello world program.
+- Bun is 4 times faster than Node.js for a "hello world" program.
 - The time to build and run TS code in Bun is 4 times faster than esbuild,
   15 times faster than TSX, and 43 times faster than TSC + Node.
-- `bun run` can be used in place of `npm run` and is 5 times faster.
 - `bun install` is 29 times faster than npm and 17 times faster than pnpm;
+- `bun run` can be used in place of `npm run` and is 5 times faster.
+- `bun test` is 8 times faster than Vitest and 13 times faster than Jest.
 
 ## History
 
