@@ -13,7 +13,7 @@ layout: topic-layout.njk
 
 "{% aTargetBlank "https://bun.sh", "Bun" %} is a fast JavaScript all-in-one toolkit."
 It includes a JavaScript runtime, package manager, bundler, and test runner.
-All of this is is free and open source.
+All of this is free and open source.
 
 Bun can be used as a drop-in replacement for npm and Node.js.
 The Bun runtime supports nearly all Node.js builtin modules (around 40 of them).
@@ -76,7 +76,7 @@ The Bun team makes the following additional performance claims:
 - Bun is 4 times faster than Node.js for a "hello world" program.
 - The time to build and run TS code in Bun is 4 times faster than esbuild,
   15 times faster than TSX, and 43 times faster than TSC + Node.
-- `bun install` is 29 times faster than npm and 17 times faster than pnpm;
+- `bun install` is 29 times faster than npm and 17 times faster than pnpm.
 - `bun run` can be used in place of `npm run` and is 5 times faster.
 - `bun test` is 8 times faster than Vitest and 13 times faster than Jest.
 

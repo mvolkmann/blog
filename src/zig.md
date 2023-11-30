@@ -1830,6 +1830,11 @@ var myList = std.ArrayList(10).init(allocator);
 defer myList.deinit();
 ```
 
+Keeping code that allocates and frees memory together is less error-prone than
+allocating memory, writing a bunch of code that uses it,
+and having to remember to free it after all that code.
+It is also useful in functions that have multiple ways they can exit.
+
 Many structs define `init` and `deinit` methods.
 Those methods are always called explicitly, never implicitly.
 So they could be given any names, but
