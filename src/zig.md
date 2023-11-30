@@ -4155,6 +4155,13 @@ Keeping code that allocates and frees memory together
 is less error-prone than allocating memory,
 writing a bunch of code that uses it, and
 having to remember to free it after all that code.
+This is also better for functions that can exit in multiple ways.
+
+Allocators typically do not free the memory they have allocated
+when an application is terminating because doing so is a waste of time.
+This gives Zig an advantage over C++ in time required to terminate
+because C++ destructors (which play a similar role)
+do run on application termination.
 
 Many structs implemented in the Zig standard library, such as `ArrayList`,
 define a `deinit` method that can be called to free its memory.
@@ -4194,6 +4201,11 @@ This is preferable over using a globally accessible allocator
 because it allows the function be to used with multiple allocators.
 For example, such functions can be called with `std.testing.allocator`
 in tests and a more efficient allocator when running outside of tests.
+
+Generic data structures such as `ArrayList` hold a reference to an allocator.
+Functions that take an argument that is such a data structure
+can forego requiring another argument to specify an allocator if
+it is acceptable to use the allocator associated with the data structure.
 
 The Zig standard library provides the following allocators:
 
