@@ -231,6 +231,16 @@ enter `bun remove {package-name}` (or `bun rm`).
 To install all the dependencies listed in `package.json`,
 enter `bun install` (or `bun i`).
 
+All downloaded packages are stored in the global cache directory
+`~/.bin/install/cache`.
+When a project adds a dependency to a package version
+that is already in the global cache directory,
+it is "copied" from there instead of downloading it again.
+In Linux this uses hardlinks.
+In MacOS, this uses "clonefile" which implements "copy on write".
+In both cases, the operation is extremely fast
+because the files are not actually copied.
+
 ## Linting
 
 Bun does not include support for code linting.
