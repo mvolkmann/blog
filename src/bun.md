@@ -41,7 +41,8 @@ The benefits of using Bun over npm and Node.js include:
   using the `bun:test` module.
   It is eight times faster than Vitest and 13 times faster than Jest.
 - Bun has better support for Web APIs including
-  `fetch`, `Request`, `Response`, `WebSocket`, and more.
+  `fetch`, `Request`, `Response`, `ReadableStream`, `WebSocket`, and more.
+  There is no need to install dependencies such as `node-fetch` and `ws`.
   Bun's native implementation of these tends to be
   faster than third-party libraries used with Node.js.
 - Bun provides native hot reloading using the `--hot` flag
@@ -204,8 +205,10 @@ To see a list of all scripts defined in `package.json`, enter `bun.run`.
 The Bun package manager works with npm packages.
 It uses `package.json` files just like npm,
 but it uses a binary `bun.lockb` file instead of `package-lock.json`.
+
 The `bun` command can be used as a replacement for the `npm`
 even when not using the bun runtime.
+A motivation for doing this is that `bun` is significantly faster than `npm`.
 
 Just like in Node.js, Bun tracks dependencies in a `package.json` file
 and installs dependencies in the `node_modules` directory.
@@ -218,6 +221,9 @@ enter `bun add {package-name}` (or `bun a`).
 
 To add a development dependency to a Bun project,
 enter `bun add -d {package-name}`.
+
+To update a runtime or development dependency in a Bun project,
+enter `bun update {package-name}`.
 
 To remove a runtime or development dependency to a Bun project,
 enter `bun remove {package-name}` (or `bun rm`).
@@ -396,6 +402,102 @@ that depicts a cow with a speech bubble.
 
 The same can be done with Bun using `bun x` (or `bunx`).
 The main difference is that the Bun approach is much faster.
+
+## Writing and Reading Files
+
+The following code demonstrates how to write and read text files
+using the Bun APIs.
+
+```ts
+import {expect, test} from 'bun:test';
+
+test('write/read file', async () => {
+  const filePath = './data.txt';
+  const content = 'Hello, World!';
+  await Bun.write(filePath, content);
+
+  const file = Bun.file(filePath);
+  const actual = await file.text(); // also see .json() method
+  expect(actual).toBe(content);
+});
+```
+
+## WebSockets
+
+Bun has builtin support for WebSockets.
+
+The following code in the file `ws-server.ts`
+demonstrates writing a WebSocket server.
+It replies to all text messages with the same text converted to uppercase.
+To run this, enter
+
+```ts
+const server = Bun.serve({
+  port: 1919,
+  fetch(req, server) {
+    if (server.upgrade(req)) return;
+    return new Response('WebSocket upgrade failed', {status: 500});
+  },
+  websocket: {
+    open(ws) {
+      console.log('WebSocket opened');
+    },
+    message(ws, data) {
+      console.log('received:', data);
+      console.log('type:', typeof data);
+      if (typeof data === 'string') {
+        console.log('sending response');
+        ws.send(data.toUpperCase());
+      }
+    },
+    close(ws, code, reason) {
+      console.log(`WebSocket closed with code ${code} and reason "${reason}"`);
+    }
+  }
+});
+
+console.log('WebSocket server is listening on port', server.port);
+```
+
+The following code in the file `ws-client.html`
+demonstrates writing a WebSocket client.
+After starting the server above, open this in a web browser.
+Enter any text in the input and click the "Send" button.
+
+```ts
+<html lang="en">
+  <head>
+    <script>
+      let input, message, output;
+      window.onload = () => {
+        message = document.getElementById('message');
+        input = document.getElementById('input');
+        output = document.getElementById('output');
+      };
+
+      const ws = new WebSocket('ws://localhost:1919');
+      ws.addEventListener('open', event => {
+        send('opened connection');
+      });
+      ws.addEventListener('message', event => {
+        output.innerHTML = event.data;
+      });
+
+      function send(text) {
+        input.innerHTML = text;
+        ws.send(text);
+      }
+    </script>
+  </head>
+  <body>
+    <h1>WebSocket Client</h1>
+    <input id="message" />
+    <button onclick="send(message.value)">Send</button>
+    <div>Input: <span id="input" /></div>
+    <div>Output: <span id="output" /></div>
+  </body>
+</html>
+```
 
 ## SQLite
 
