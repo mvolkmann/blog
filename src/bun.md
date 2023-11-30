@@ -317,6 +317,55 @@ Other functions that can be imported from `bun:test` include
 By default tests timeout and are considered failed after five seconds.
 To change this, add the `--timeout {seconds}` option.
 
+## Bundling
+
+Bun can bundle all the files for an application into a single JavaScript file.
+
+To demonstrate this:
+
+1. Create a new project by entering `bun init`.
+
+1. Create the file `bar.ts` containing the following:
+
+   ```ts
+   export function bar() {
+     console.log('in bar.ts');
+   }
+   ```
+
+1. Create the file `foo.ts` containing the following:
+
+   ```ts
+   import {bar} from './bar';
+
+   export function foo() {
+     console.log('in foo.ts');
+     bar();
+   }
+   ```
+
+1. Modify the file `index.ts` to contain the following:
+
+   ```ts
+   import {foo} from './foo';
+
+   console.log('in index.ts');
+   foo();
+   ```
+
+1. Bundle these three `.ts` files by entering
+   `bun build index.ts --outdir build`.
+
+1. Run the bundled file by entering `bun run build/index.js`.
+   This should produce the following output:
+
+   ```text
+   in index.ts
+   in foo.ts
+   in bar.ts
+   ```
+
+
 ## Bun Global Variable
 
 The `Bun` global variable has many properties, most of which are functions.
@@ -414,10 +463,13 @@ import {expect, test} from 'bun:test';
 test('write/read file', async () => {
   const filePath = './data.txt';
   const content = 'Hello, World!';
+  // The second argument to the write function can be a string,
+  // Buffer, file, or the awaited result of a fetch call.
   await Bun.write(filePath, content);
 
   const file = Bun.file(filePath);
-  const actual = await file.text(); // also see .json() method
+  const actual = await file.text();
+  // Other methods on File objects include arrayBuffer, blob, and json.
   expect(actual).toBe(content);
 });
 ```
