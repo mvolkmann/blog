@@ -304,46 +304,6 @@ To add this using Prettier:
 To format all the source files in the current project,
 enter `bun run format`.
 
-## Unit Tests
-
-Bun has builtin support for implementing and running unit tests
-that are mostly compatible with Jest.
-
-Suppose we have the following code in the file `math.ts`:
-
-```ts
-export function add(n1: number, n2: number): number {
-  return n1 + n2;
-}
-```
-
-To implement a unit test for the module defined above,
-add the following code in the file `math.test.ts`:
-
-```ts
-import { expect, test } from "bun:test";
-import { add } from "./math";
-
-test("add", () => {
-  expect(add(2, 2)).toBe(4);
-});
-```
-
-To run all the unit tests in the current project,
-including those found in subdirectories, enter `bun test`.
-
-To only run tests whose name matches a given pattern,
-add the `--test-name-pattern {pattern}` option.
-
-To automatically rerun tests when code changes are saved,
-enter `bun --watch test`.
-
-Other functions that can be imported from `bun:test` include
-`describe`, `beforeAll`, `afterAll`, `beforeEach`, and `afterEach`.
-
-By default tests timeout and are considered failed after five seconds.
-To change this, add the `--timeout {seconds}` option.
-
 ## Bundling
 
 Bun can bundle all the files for an application into a single JavaScript file.
@@ -402,6 +362,124 @@ Bun.build({
   outdir: 'build'
 });
 ```
+
+## Unit Tests
+
+Bun has builtin support for implementing and running unit tests
+that are mostly compatible with Jest.
+
+Suppose we have the following code in the file `math.ts`:
+
+```ts
+export function add(n1: number, n2: number): number {
+  return n1 + n2;
+}
+```
+
+To implement a unit test for the module defined above,
+add the following code in the file `math.test.ts`:
+
+```ts
+import { expect, test } from "bun:test";
+import { add } from "./math";
+
+test("add", () => {
+  expect(add(2, 2)).toBe(4);
+});
+```
+
+To run all the unit tests in the current project,
+including those found in subdirectories, enter `bun test`.
+
+To only run tests whose name matches a given pattern,
+add the `--test-name-pattern {pattern}` option.
+
+To automatically rerun tests when code changes are saved,
+enter `bun --watch test`.
+
+Other functions that can be imported from `bun:test` include
+`describe`, `beforeAll`, `afterAll`, `beforeEach`, and `afterEach`.
+
+By default tests timeout and are considered failed after five seconds.
+To change this, add the `--timeout {seconds}` option.
+
+## Global Variables
+
+Bun provides the following global variables.
+For details, see {% aTargetBlank "https://bun.sh/docs/api/globals", "Globals" %}.
+
+- Bun-specific
+  - BuildMessage
+  - Bun
+  - ResolveMessage
+
+- Cloudflare
+  - HTMLRewriter
+
+- Cross-platform
+  - globalThis
+
+- Node.js
+  - __dirname
+  - __filename
+  - Buffer
+  - exports
+  - global
+  - module
+  - process
+  - require()
+
+- Web
+  - AbortController
+  - AbortSignal
+  - alert
+  - Blob
+  - ByteLengthQueuingStrategy
+  - confirm
+  - atob()
+  - btoa()
+  - clearImmediate()
+  - clearInterval()
+  - clearTimeout()
+  - console
+  - CountQueuingStrategy
+  - Crypto
+  - crypto
+  - CryptoKey
+  - CustomEvent
+  - Event
+  - EventTarget
+  - fetch
+  - FormData
+  - Headers
+  - JSON
+  - MessageEvent
+  - performance
+  - prompt
+  - queueMicrotask()
+  - ReadableByteStreamController
+  - ReadableStream
+  - ReadableStreamDefaultController
+  - ReadableStreamDefaultReader
+  - reportError
+  - Response
+  - Request
+  - setImmediate()
+  - setInterval()
+  - setTimeout()
+  - ShadowRealm
+  - SubtleCrypto
+  - DOMException
+  - TextDecoder
+  - TextEncoder
+  - TransformStream
+  - TransformStreamDefaultController
+  - URL
+  - URLSearchParams
+  - WebAssembly
+  - WritableStream
+  - WritableStreamDefaultController
+  - WritableStreamDefaultWriter	Web
 
 ## Importing Files
 
