@@ -861,6 +861,56 @@ It will output the following:
 ]
 ```
 
+## Foreign Function Interface (FFI)
+
+The `bun:ffi` module supports calling functions implemented in
+languages other than JavaScript that support the C ABI.
+These include C, C++, Kotlin, Rust, Zig, and more.
+
+The following Zig code defines a function that
+computes the average of numbers in an array.
+The array must be passed as a pointer to the first element and a length.
+
+```zig
+pub export fn average(numbers_ptr: [*]const f32, len: usize) f32 {
+    var sum: f32 = 0.0;
+    const numbers = numbers_ptr[0..len];
+    for (numbers) |number| {
+        sum += number;
+    }
+    const float_len: f32 = @floatFromInt(len);
+    return sum / float_len;
+}
+```
+
+To build this as a library, enter
+`zig build-lib average.zig -dynamic -OReleaseFast`.
+
+The following JavaScript code uses `bun:ffi` to call the Zig function.
+
+```ts
+import {dlopen, FFIType, ptr, suffix} from 'bun:ffi';
+
+const path = `libaverage.${suffix}`;
+
+const lib = dlopen(path, {
+  average: {
+    args: [FFIType.ptr, FFIType.i32],
+    returns: FFIType.f32
+  }
+});
+
+const numbers = new Float32Array([1, 2, 3, 4]);
+const avg = lib.symbols.average(ptr(numbers), numbers.length);
+console.log('average is', avg);
+```
+
+To run this, enter `bun run index.ts`.
+The expected output is "average is 2.5".
+
+For more detail, see {% aTargetBlank "https://bun.sh/docs/api/ffi", "FFI" %}.
+That page includes a list of all the supported FFI types.
+
 ## ElysiaJS
 
 {% aTargetBlank "https://elysiajs.com", "ElysiaJS" %} is a
