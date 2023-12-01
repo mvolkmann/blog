@@ -188,6 +188,7 @@ To create a project from a template,
 enter `bun create {template} {destination}`.
 For example, to create a project that uses Svelte,
 enter `bun create svelte@latest my-svelte-app` (or `bun c`).
+The destination defaults to the current directory.
 Some templates will ask questions about your preferences
 and some will output instructions about what to do next.
 
@@ -386,6 +387,36 @@ Bun.build({
 });
 ```
 
+## Importing Text Files
+
+A text file can be imported as a string.
+
+The following text file `haiku.txt` contains three lines.
+
+```text
+Out of memory.
+We wish to hold the whole sky,
+But we never will.
+```
+
+The following code demonstrates importing and using the text file above.
+
+```ts
+import haiku from './haiku.txt';
+const lines = haiku.split('\n');
+for (const line of lines) {
+  const words = line.split(' ');
+  console.log(`${words.length} words: ${line}`);
+}
+```
+
+The output of this code is:
+
+```text
+3 words: Out of memory.
+7 words: We wish to hold the whole sky,
+4 words: But we never will.
+```
 
 ## Bun Global Variable
 
