@@ -549,7 +549,10 @@ Highlights include:
 
 ## HTTP Server
 
-To implement a basic HTTP server,
+Bun has builtin support for implementing HTTP servers
+using the `Bun.serve` function.
+
+To implement a basic HTTP server, create a Bun project and
 replace the contents of `index.ts` with the following:
 
 ```js
@@ -858,15 +861,6 @@ It will output the following:
 ]
 ```
 
-## HTTP Server
-
-Bun has builtin support for implementing HTTP servers
-using the `Bun.serve` function.
-
-See the example at {% aTargetBlank
-"https://github.com/mvolkmann/bun-http-server", "bun-http-server" %}
-GitHub repository.
-
 ## ElysiaJS
 
 {% aTargetBlank "https://elysiajs.com", "ElysiaJS" %} is a
@@ -889,7 +883,8 @@ GitHub repository.
 
 ## CLEANUP UP REMAINDER OF THIS CONTENT
 
-Compare performance of bun, deno, and node on your rush-hour code. Implement your rush-hour program in Zig. Compare performance.
+Compare performance of bun, deno, and node on your rush-hour code.
+Implement your rush-hour program in Zig. Compare performance.
 
 Create code examples that demonstrate the most important bun-specific APIs.
 
