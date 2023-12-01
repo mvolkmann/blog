@@ -506,9 +506,31 @@ This will not automatically refresh browsers that browsing the server URL.
 
 ## Environment Variables
 
-Bun has builtin support for getting environment variables from the file `.env`.
-For example, suppose this file contains `FOO=bar`.
-The value `bar` can be obtained with `process.env.FOO` or `Bun.env.FOO`.
+Bun has builtin support for getting environment variable values
+from the file `.env`.
+For example, suppose this file contains `NAME=Mark`.
+The value `Mark` can be obtained with `process.env.NAME` or `Bun.env.NAME`.
+
+Environment variable values can reference
+previously defined environment variables.
+
+For example, suppose the `.env` file contains the following:
+
+```text
+NAME=Mark
+GREETING="Hello, ${NAME}!"
+```
+
+The following test will pass:
+
+```ts
+import {expect, test} from 'bun:test';
+
+test('environment variables', async () => {
+  expect(process.env.NAME).toBe('Mark');
+  expect(Bun.env.GREETING).toBe('Hello, Mark!');
+});
+```
 
 Changes to the `.env` after a server is started
 are only available if the server is restarted.
