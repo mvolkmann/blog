@@ -750,7 +750,8 @@ It will output the following:
     text: "buy milk",
     completed: 1
   }
-]```
+]
+```
 
 ## HTTP Server
 
