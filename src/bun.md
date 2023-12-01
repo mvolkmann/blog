@@ -52,22 +52,6 @@ The benefits of using Bun over npm and Node.js include:
   an external tool like nodemon or the experimental `--watch` flag.
 - Bun provides bun-specific APIs that are alternatives to many npm modules.
   These are highly optimized and perform much better than their Node.js equivalents.
-  - `Bun.file` returns a `File` object with the same properties as
-    DOM `File` objects.  The contents are lazily loaded.
-    It provides many `async` methods for reading content in different formats
-    including text, json, stream, and ArrayBuffer.
-    These read files up to 10 times faster than Node.js equivalents.
-  - `Bun.write` writes many kinds of values including strings, buffers, files,
-    and responses from HTTP requests.
-    It writes 3 times faster than Node.js equivalents.
-  - `Bun.serve` starts an HTTP server based on web APIs.
-    It handles 4 times as many requests per second as the Node.js equivalent.
-  - `Bun.env` provides access to environment variables
-    without installing and using the `dotenv` package.
-  - Builtin Websocket support handles 5 times as many messages per second
-    as the Node.js equivalent and is easier to use.
-  - Builtin password hashing using Bcrypt and Argon is provided.
-  - Bun provides many more APIs!
 - Bun has a plugin API that is similar to esbuild.
   Many esbuild plugins work in Bun without modification.
 
@@ -119,6 +103,38 @@ Oven will donate to the Zig Software Foundation to keep the project going.
 
 Bun works with nearly all major web frameworks including
 Next.js, SvelteKit, Astro, Nuxt, and Fastify.
+
+## Bun APIs
+
+Bun provides bun-specific APIs that are alternatives to many npm modules.
+These are highly optimized and perform much better than their Node.js equivalents.
+
+`Bun.file` returns a `File` object with the same properties as
+DOM `File` objects.  The contents are lazily loaded.
+It provides many `async` methods for reading content in different formats
+including text, json, stream, and ArrayBuffer.
+These read files up to 10 times faster than Node.js equivalents.
+
+`Bun.write` writes many kinds of values including strings, buffers, files,
+and responses from HTTP requests.
+It writes 3 times faster than Node.js equivalents.
+
+`Bun.serve` starts an HTTP server based on web APIs.
+It handles 4 times as many requests per second as the Node.js equivalent.
+
+`Bun.env` provides access to environment variables
+without installing and using the `dotenv` package.
+
+`Bun.spawn` and `Bun.spawnSync` enable spawning child processes.
+
+`Bun.listen` and `Bun.connect` enable sending and receiving TCP requests.
+
+Builtin Websocket support handles 5 times as many messages per second
+as the Node.js equivalent and is easier to use.
+
+Builtin password hashing using Bcrypt and Argon is provided.
+
+Bun provides many more APIs!
 
 ## Installing
 
@@ -552,6 +568,37 @@ that depicts a cow with a speech bubble.
 
 The same can be done with Bun using `bun x` (or `bunx`).
 The main difference is that the Bun approach is much faster.
+
+## import.meta
+
+The global variable `import` has a `meta` property whose value is an object.
+This object contains several properties and one method,
+each of which are demonstrated in the following code.
+
+```ts
+import {expect, test} from 'bun:test';
+
+test('import.meta', async () => {
+  // import.meta.env is just an alias for process.env.
+  expect(import.meta.env).toBe(process.env);
+
+  // These get the directory and file name of the current file.
+  const dir = import.meta.dir;
+  const file = import.meta.file;
+  expect(dir).toBe('/Users/volkmannm/Documents/dev/bun/bun-examples');
+  expect(file).toBe('import-meta.test.ts');
+  expect(import.meta.path).toBe(`${dir}/${file}`);
+
+  // This indicates whether the current file is the one
+  // that was directly executed by "bun run" or "bun test".
+  expect(import.meta.main).toBe(true);
+
+  // This finds the path of a file relative to the current file.
+  const importName = 'dogs.json';
+  const resolved = await import.meta.resolve('./' + importName);
+  expect(resolved).toBe(`${dir}/${importName}`);
+});
+```
 
 ## Writing and Reading Files
 
