@@ -387,7 +387,7 @@ Bun.build({
 });
 ```
 
-## Importing Text Files
+## Importing Files
 
 A text file can be imported as a string.
 
@@ -416,6 +416,33 @@ The output of this code is:
 3 words: Out of memory.
 7 words: We wish to hold the whole sky,
 4 words: But we never will.
+```
+
+A JSON or TOML file can be imported as JavaScript object.
+
+The following text file `dogs.json` describes two dogs.
+
+```json
+[
+  {"breed": "Whippet", "name": "Comet"},
+  {"breed": "German Shorthaired Pointer", "name": "Oscar"}
+]
+```
+
+The following code demonstrates importing and using the JSON file above.
+
+```ts
+import dogs from './dogs.json';
+for (const dog of dogs) {
+  console.log(`${dog.name} is a ${dog.breed}.`);
+}
+```
+
+The output of this code is:
+
+```text
+Comet is a Whippet.
+Oscar is a German Shorthaired Pointer.
 ```
 
 ## Bun Global Variable
