@@ -678,6 +678,33 @@ test('import.meta', async () => {
 });
 ```
 
+## Console
+
+The global `console` object in Bun supports
+all the same methods as in browsers and Node.js.
+
+It can also be used as an `AsyncIterable` to read from stdin.
+The following code demonstrates this.
+It repeatedly prompts for text to be entered and
+reports the number of words and characters.
+Pressing return without entering any text ends the program.
+
+```ts
+// Using console.write avoids outputting a newline characters at the end.
+const prompt = () => console.write('Enter text: ');
+
+prompt();
+for await (const line of console) {
+  const trimmed = line.trim();
+  if (trimmed.length === 0) {
+    process.exit(0); // break does not exit a "for await" loop
+  }
+  const words = trimmed.split(' ');
+  console.log(`words: ${words.length}, characters: ${line.length}`);
+  prompt();
+}
+```
+
 ## Writing and Reading Files
 
 The following code demonstrates how to write and read text files
