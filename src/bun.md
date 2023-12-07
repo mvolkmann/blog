@@ -786,6 +786,28 @@ test('write/read file', async () => {
 });
 ```
 
+## Globbing
+
+Bun provides a way to iterate over files that match a given glob pattern.
+
+The following code lists all TypeScript source files
+in and below the current directory,
+excluding any found in `node_modules` directories.
+
+```ts
+import {Glob} from 'bun';
+
+const glob = new Glob('**/*.ts');
+for await (const file of glob.scan('.')) {
+  // also see glob.scanSync
+  if (file.startsWith('node_modules/')) continue;
+  if (file.includes('/node_modules/')) continue;
+  console.log(file);
+}
+```
+
+For more detail see {% aTargetBlank "https://bun.sh/docs/api/glob", "Glob" %}.
+
 ## WebSockets
 
 Bun has builtin support for WebSockets.
