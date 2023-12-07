@@ -110,7 +110,7 @@ Bun provides bun-specific APIs that are alternatives to many npm modules.
 These are highly optimized and perform much better than their Node.js equivalents.
 
 `Bun.file` returns a `File` object with the same properties as
-DOM `File` objects.  The contents are lazily loaded.
+DOM `File` objects. The contents are lazily loaded.
 It provides many `async` methods for reading content in different formats
 including text, json, stream, and ArrayBuffer.
 These read files up to 10 times faster than Node.js equivalents.
@@ -190,7 +190,7 @@ There is no need to run `npm install` to get started.
 The file `index.ts` only contains the following:
 
 ```js
-console.log("Hello via Bun!");
+console.log('Hello via Bun!');
 ```
 
 To run the project, enter `bun run index.ts`.
@@ -380,10 +380,11 @@ To implement a unit test for the module defined above,
 add the following code in the file `math.test.ts`:
 
 ```ts
-import { expect, test } from "bun:test";
-import { add } from "./math";
+import {expect, test} from 'bun:test';
+// Can also import describe, beforeAll, beforeEach, afterAll, and afterEach.
+import {add} from './math';
 
-test("add", () => {
+test('add', () => {
   expect(add(2, 2)).toBe(4);
 });
 ```
@@ -409,19 +410,23 @@ Bun provides the following global variables.
 For details, see {% aTargetBlank "https://bun.sh/docs/api/globals", "Globals" %}.
 
 - Bun-specific
+
   - BuildMessage
   - Bun
   - ResolveMessage
 
 - Cloudflare
+
   - HTMLRewriter
 
 - Cross-platform
+
   - globalThis
 
 - Node.js
-  - __dirname
-  - __filename
+
+  - \_\_dirname
+  - \_\_filename
   - Buffer
   - exports
   - global
@@ -479,7 +484,7 @@ For details, see {% aTargetBlank "https://bun.sh/docs/api/globals", "Globals" %}
   - WebAssembly
   - WritableStream
   - WritableStreamDefaultController
-  - WritableStreamDefaultWriter	Web
+  - WritableStreamDefaultWriter Web
 
 ## Importing Files
 
@@ -560,9 +565,8 @@ const server = Bun.serve({
   port: 3000,
   fetch(req) {
     return new Response('Hi! This is my first Bun server!');
-  },
+  }
 });
-
 
 console.log('Server started on port ', server.port);
 ```
@@ -706,6 +710,58 @@ for await (const line of console) {
   console.log(`words: ${words.length}, characters: ${line.length}`);
   prompt();
 }
+```
+
+## Utilities
+
+The `Bun` global variable refers to an object with many properties and methods
+including:
+
+| Name                             | Description                                                           |
+| -------------------------------- | --------------------------------------------------------------------- |
+| `version`                        | string containing bun version                                         |
+| `revision`                       | string containing git commit id of bun version                        |
+| `env`                            | alias for `process.env`                                               |
+| `main`                           | absolute path to entry point source file                              |
+| `sleep(ms)`                      | returns Promise that resolves after `ms` milliseconds                 |
+| `sleepSync(ms)`                  | blocks for `ms` milliseconds                                          |
+| `which(executableName)`          | returns absolute path to an executable                                |
+| `peek(promise)`                  | gets a promise result without `await` or `.then` when already settled |
+| `openInEditor(file)`             | opens a file in the default editor                                    |
+| `deepEquals(obj1, obj2, strict)` | recursively compares two objects                                      |
+| `escapeHTML(value)`              |                                                                       |
+| `fileURLToPath(url)`             |                                                                       |
+| `pathToFileURL(path)`            |                                                                       |
+| `gzipSync(buffer)`               |                                                                       |
+| `gunzipSync(buffer)`             |                                                                       |
+| `deflateSync(buffer)`            |                                                                       |
+| `inflateSync(buffer)`            |                                                                       |
+| `inspect(obj)`                   |                                                                       |
+| `inspect.custom`                 |                                                                       |
+| `nanoseconds()`                  |                                                                       |
+| `readableStreamTo*(stream)`      |                                                                       |
+| `resolveSync(path, root)`        |                                                                       |
+
+For more detail see {% aTargetBlank "https://bun.sh/docs/api/utils", "Utils" %}.
+
+## Serializing Objects
+
+The `bun:jsc` module supports serializing and deserializing JavaScript values.
+For example:
+
+```ts
+import {serialize, deserialize} from 'bun:jsc';
+import {expect, test} from 'bun:test';
+
+test('serialize', async () => {
+  const dogs = [
+    {name: 'Comet', breed: 'Whippet'},
+    {name: 'Oscar', breed: 'German Shorthaired Pointer'}
+  ];
+  const buffer = serialize(dogs);
+  const newDogs = deserialize(buffer);
+  expect(newDogs).toEqual(dogs);
+});
 ```
 
 ## Writing and Reading Files
