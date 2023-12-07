@@ -13,7 +13,7 @@ layout: topic-layout.njk
 
 "{% aTargetBlank "https://bun.sh", "Bun" %} is a fast JavaScript all-in-one toolkit."
 It includes a JavaScript runtime, package manager, bundler, and test runner.
-All of this is free and open source.
+All of this is free and open source under the MIT license.
 
 Bun can be used as a drop-in replacement for npm and Node.js.
 The Bun runtime supports nearly all Node.js builtin modules (around 40 of them).

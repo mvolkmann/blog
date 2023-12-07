@@ -30,7 +30,8 @@ layout: topic-layout.njk
 </figure>
 
 {% aTargetBlank "https://ziglang.org", "Zig" %}
-is a free, open source, high performance, systems programming language.
+is a free, open source (under the MIT license),
+high performance, systems programming language.
 It is a modern alternative to C with similar syntax
 such as statements terminated with semicolons and conditions in parentheses.
 
@@ -4087,7 +4088,6 @@ The following builtin functions support reflection:
 For more, see the library {% aTargetBlank
 "https://github.com/wrongnull/zigtrait", "zigtrait" %}.
 
-
 ```zig
 const std = @import("std");
 const print = std.debug.print;
@@ -4176,7 +4176,7 @@ An example is `HashMap`, but not `ArrayList`.
 Instances that are modified by its `deinit` method cannot be `const`.
 In cases where it is desirable to have a `const` instance,
 a `defer` block can create a mutable, shallow copy of the struct
-and then call `deinit` on that.  For example:
+and then call `deinit` on that. For example:
 
 ```zig
 defer {
@@ -4299,14 +4299,14 @@ The Zig standard library provides the following allocators:
 
     - `total_requested_bytes`: tracks the total allocated bytes of memory requested
     - `requested_memory_limit`: causes allocations to return `error.OutOfMemory`
-       when `total_requested_bytes` exceeds this limit
+      when `total_requested_bytes` exceeds this limit
 
   - `safety: bool`
     This determines whether safety checks are enabled.
     It defaults to the value of `std.debug.runtime_safety`.
 
   - `thread_safe: bool`
-    
+
     This determines whether the allocator may be
     used simultaneously from multiple threads.
     It defaults to `!builtin.single_threaded`.
@@ -5479,7 +5479,7 @@ When passed a `Vector` of floats, they return a new `Vector` of floats.
   ```
 
 - `@mulAdd` - takes numbers `a`, `b`, and `c` and returns `(a * b) + c`
-   only rounding once for better accuracy
+  only rounding once for better accuracy
 
 - `@mulWithOverflow` - takes numbers `a` and `b` and returns a tuple
   containing `a * b` and a bit indicating whether there was an overflow
@@ -5512,26 +5512,26 @@ When passed a `Vector` of floats, they return a new `Vector` of floats.
 - `@popCount` - "population count"; takes any integer type and
   returns the number of one bits
 
-   ```zig
-   const std = @import("std");
-   const expectEqual = std.testing.expectEqual;
+  ```zig
+  const std = @import("std");
+  const expectEqual = std.testing.expectEqual;
 
-   test "clz" {
-       const i: u8 = 16;
-       // bits are 00010000
-       try expectEqual(3, @clz(i));
-   }
+  test "clz" {
+      const i: u8 = 16;
+      // bits are 00010000
+      try expectEqual(3, @clz(i));
+  }
 
-   test "ctz" {
-       const i: u8 = 16;
-       try expectEqual(4, @ctz(i));
-   }
+  test "ctz" {
+      const i: u8 = 16;
+      try expectEqual(4, @ctz(i));
+  }
 
-   test "popcount" {
-       const i: u8 = 16;
-       try expectEqual(1, @popCount(i));
-   }
-   ```
+  test "popcount" {
+      const i: u8 = 16;
+      try expectEqual(1, @popCount(i));
+  }
+  ```
 
 - `@shlExact` - "shift left"; takes any integer type and
   returns the value with bits shifted left by a given amount
@@ -5551,7 +5551,7 @@ When passed a `Vector` of floats, they return a new `Vector` of floats.
 - `@cmpxchgWeak` - performs a weak atomic compare exchange operation
 - `@fence` - introduces "happens before edge" between operations
   TODO: What does this mean?
-- `@memcpy` - copies data from a source to a mutable destination 
+- `@memcpy` - copies data from a source to a mutable destination
 - `@memset` - sets all elements of a mutable destination to the same value
 - `@wasmMemoryGrow` - increases the size of WASM memory at an index
 - `@wasmMemorySize` - returns the size of WASM memory at an index
