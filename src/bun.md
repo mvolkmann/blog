@@ -717,30 +717,30 @@ for await (const line of console) {
 The `Bun` global variable refers to an object with many properties and methods
 including:
 
-| Name                             | Description                                                           |
-| -------------------------------- | --------------------------------------------------------------------- |
-| `version`                        | string containing bun version                                         |
-| `revision`                       | string containing git commit id of bun version                        |
-| `env`                            | alias for `process.env`                                               |
-| `main`                           | absolute path to entry point source file                              |
-| `sleep(ms)`                      | returns Promise that resolves after `ms` milliseconds                 |
-| `sleepSync(ms)`                  | blocks for `ms` milliseconds                                          |
-| `which(executableName)`          | returns absolute path to an executable                                |
-| `peek(promise)`                  | gets a promise result without `await` or `.then` when already settled |
-| `openInEditor(file)`             | opens a file in the default editor                                    |
-| `deepEquals(obj1, obj2, strict)` | recursively compares two objects                                      |
-| `escapeHTML(value)`              |                                                                       |
-| `fileURLToPath(url)`             |                                                                       |
-| `pathToFileURL(path)`            |                                                                       |
-| `gzipSync(buffer)`               |                                                                       |
-| `gunzipSync(buffer)`             |                                                                       |
-| `deflateSync(buffer)`            |                                                                       |
-| `inflateSync(buffer)`            |                                                                       |
-| `inspect(obj)`                   |                                                                       |
-| `inspect.custom`                 |                                                                       |
-| `nanoseconds()`                  |                                                                       |
-| `readableStreamTo*(stream)`      |                                                                       |
-| `resolveSync(path, root)`        |                                                                       |
+| Name                                | Description                                                                |
+| ----------------------------------- | -------------------------------------------------------------------------- |
+| `deepEquals(obj1, obj2 [, strict])` | recursively compares two objects                                           |
+| `deflateSync(buffer)`               | compresses using DEFLATE                                                   |
+| `env`                               | alias for `process.env`                                                    |
+| `escapeHTML(value)`                 | escapes built-in entities in HTML                                          |
+| `fileURLToPath(url)`                | converts a `file://` URL string to an absolute path                        |
+| `gunzipSync(buffer)`                | decompresses using GUNZIP                                                  |
+| `gzipSync(buffer)`                  | compresses using GZIP                                                      |
+| `inflateSync(buffer)`               | decompresses using INFLATE                                                 |
+| `inspect.custom`                    | symbol that can be defined as a method to customize what `inspect` returns |
+| `inspect(obj)`                      | serializes an object to a string like `console.log`                        |
+| `main`                              | absolute path to entry point source file                                   |
+| `nanoseconds()`                     | returns nanoseconds since this `bun` process started                       |
+| `openInEditor(file)`                | opens a file in the default editor                                         |
+| `pathToFileURL(path)`               | converts an absolute path to a `file://` URL string                        |
+| `peek(promise)`                     | gets a promise result without `await` or `.then` when already settled      |
+| `readableStreamTo*(stream)`         | set of functions that asynchronously consume a readable stream             |
+| `resolveSync(path, root)`           | resolves a file path or module specifier                                   |
+| `revision`                          | string containing git commit id of bun version                             |
+| `sleep(ms)`                         | returns Promise that resolves after `ms` milliseconds                      |
+| `sleepSync(ms)`                     | blocks for `ms` milliseconds                                               |
+| `version`                           | string containing bun version                                              |
+| `which(executableName)`             | returns absolute path to an executable                                     |
 
 For more detail see {% aTargetBlank "https://bun.sh/docs/api/utils", "Utils" %}.
 
@@ -760,7 +760,7 @@ test('serialize', async () => {
   ];
   const buffer = serialize(dogs);
   const newDogs = deserialize(buffer);
-  expect(newDogs).toEqual(dogs);
+  expect(newDogs).toStrictEqual(dogs);
 });
 ```
 
