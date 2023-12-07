@@ -1421,12 +1421,16 @@ These values start from zero by default and increment by one.
 Enum instances cannot have associated data.
 
 To get the ordinal value of an enum instance,
-use the builtin function `@intFromEnum(enumValue)`.
+use the builtin function `@intFromEnum(enum_instance)`.
 For example, `@intFromEnum(Color.yellow)` returns `1`.
 
 To get an enum instance from an ordinal value,
-use the builtin function `@enumFromInt(value)`.
+use the builtin function `@enumFromInt(enum_value)`.
 For example, `const color: Color = @enumFromInt(1);` returns `Color.yellow`.
+
+To get the string name of an enum instance,
+use the builtin function `@tagName(enum_instance)`.
+For example, `const name: []const u8 = @tagName(Color.yellow);` returns `"yellow"`.
 
 Enums are typically defined at the global scope rather than inside a function.
 
@@ -5683,7 +5687,7 @@ to achieve better error handling.
   }
   ```
 
-- `@tagName` -
+- `@tagName` - gets the string name of an enum instance
 
 ### Metaprogramming (10)
 
