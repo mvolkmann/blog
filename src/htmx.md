@@ -22,22 +22,16 @@ The response from these HTTP must contain HTML.
 This HTML can replace an existing DOM element or
 be inserted relative to an existing DOM element.
 
-The server that responds to the HTTP requests can be implemented using
+The server can be implemented using
 any programming language and server framework.
+The server typically plays two roles.
+First, it serves static files such as HTML, CSS, JavaScript, and images.
+Second, it responds to HTTP requests by returning dynamically generated HTML.
 
 HTMX was created by {% aTargetBlank "https://bigsky.software/cv/", "Carson Gross" %}.
 He is a principal software engineer at
 {% aTargetBlank "https://bigsky.software/", "Big Sky Software" %}
 and a part-time CS instructor at Montana State University.
-
-The first version of HTMX was released in May, 2020.
-The 1.0 version was released in November, 2020.
-
-The predecessor of HTMX, also created by Carson Gross,
-is {% aTargetBlank "https://intercoolerjs.org", "intercooler.js" %}.
-The first version of intercooler.js was released in April, 2014,
-so Carson was been working on the approach of simplifying web development
-by adding attributes to HTML for a long time.
 
 The HTMX approach is based on "Hypermedia As The Engine Of Application State"
 ({% aTargetBlank "https://htmx.org/essays/hateoas/", "HATEOAS" %})
@@ -46,19 +40,42 @@ REST is described in chapter 5 of the famous PhD dissertation by Roy Fielding
 "{% aTargetBlank "https://ics.uci.edu/~fielding/pubs/dissertation/fielding_dissertation.pdf",
 "Architectural Styles and the Design of Network-based Software Architectures" %}".
 
+HTMX simplifies state management because all the state is in one place,
+on the server.
+
 HTMX is not appropriate for all features of web apps.
 Using HTMX to update the UI on every mouse move or drag
 would be too slow since each movement would trigger a new HTTP request.
 Examples of apps that require this kind of functionality include
 Google Maps and many games.
 However, HTMX can be used in conjunction with other approaches,
-so it can be used for the parts of apps that do not require constant reaction to mouse movements.
+so it can be used for the parts of apps that
+do not require constant reaction to mouse movements.
 
 A good option to pair with HTMX is
 {% aTargetBlank "https://alpinejs.dev", "Alpine.js" %}.
 Like HTMLx, Alpine is a client-side JavaScript library
 that adds support for new HTML attributes.
 It differs from HTMX in that it focuses on client-side interactions.
+
+## History and Future
+
+Carson Gross been working on the approach of simplifying web development
+by adding attributes to HTML for a long time.
+
+The predecessor of HTMX, also created by Carson Gross,
+is {% aTargetBlank "https://intercoolerjs.org", "intercooler.js" %}.
+The first version of intercooler.js was released in April, 2014.
+
+The first version of HTMX was released in May, 2020.
+The 1.0 version was released in November, 2020.
+
+HTMX 2.0 is expected in late 2023 or early 2024.
+It will remove legacy support for things like IE,
+old style websockets, and old style server sent events.
+There will also be some changes to default behavior
+such as not enabling CORS by default.
+Other changes are not expected to be dramatic.
 
 ## Installing
 
@@ -190,11 +207,15 @@ Desirable characteristics include:
 - editor tooling that can validate proper HTML elements, attributes, and nesting
 
 One option is to use
-{% aTargetBlank "https://bun.sh", "Ban" %} (Node.js alternative) and
+{% aTargetBlank "https://bun.sh", "Bun" %} (Node.js alternative) and
 {% aTargetBlank "https://elysiajs.com", "ElysiaJS" %} (Express alternative).
 ElysiaJS supports constructing HTML using JSX syntax.
 JSX is only used to create strings of HTML.
 A virtual DOM is not used.
+
+When combined with {% aTargetBlank "https://turso.tech", "Turso" %}
+(SQLite deployed at the edge), this is referred to as the BETH stack
+(Bun, Elysia, Turso, and HTMX).
 
 Another popular option is to use Python with either
 {% aTargetBlank "https://www.djangoproject.com", "Django" %} or
@@ -222,10 +243,8 @@ which builds on React Native.
 
 ## Unorganized Content
 
-see the VS code, sqlite extension.
-learn how to automatically refresh browser on code save.
-create a blog page on HTMX and document all the supported hx– attributes.
-HTMX simplifies state management, because all the state is in one place, on the server.
+- learn how to automatically refresh browser on code save.
+
 should you use auto focus for the new to do input?
 HTMX is great for SEO.
 when hx-target is not specified, it default to the current element.
@@ -257,13 +276,9 @@ you can still use REST APIs that return JSON. You just need to add another layer
 hx-push-url=“true” gives history support, so the back button can go to a previous state of the UI. Try this! it does this by snapshoting the entire DOM and saving it in localstorage. this uses the standard history API. writing to localstorage can be disabled if desired.
 use the hx-request HTTP header to determine how to render a page when the browser is refreshed. this enables support for deep links. this is useful when HTMX has replaced portions of a page.
 
-HTMX 2.0 (expected late 2023 or early 2024) will remove legacy support for things like IE, old style websockets, and old style server sent events. this may result in a smaller library size. there will also be some changes to default behavior such as not enabling CORS by default. other changes are not expected to be dramatic.
-
 HOWL = HowEver you Would Like. It relates to being able to write the server-side code using any language/stack that you prefer.
 unfortunately, this means there are no canonical examples of implementing the backend services for an HTMX application.
 The main thing to avoid on the backend, is producing HTML, with string and concatenation, and not having any editor support for validating the HTML.
-
-Carson Gross mentioned the BETH stack in the JavaScript Jabber podcast.
 
 see the htmxLogAll method to enable debug logging. Is this on the server side?
 One way of debugging is to use an unminified version of the HMTX library, and set breakpoints in its functions.
