@@ -15,13 +15,29 @@ layout: topic-layout.njk
 that adds support for new HTML attributes.
 These attributes enable many things including:
 
-- Specific interactions (ex. click) with any HTML element can trigger
-  an HTTP request using any verb (GET, POST, PUT, PATCH, or DELETE).
-- The response from an HTTP request should contain HTML.
-- The returned HTML can replace an existing DOM element
-  or be inserted relative to an existing DOM element.
-- The server that responds to the HTTP requests can be implemented using
-  any programming language and any server framework.
+These HTML attributes enable responding to
+specific interactions (ex. click) with any HTML element
+by sending HTTP request using any verb (GET, POST, PUT, PATCH, or DELETE).
+The response from these HTTP must contain HTML.
+This HTML can replace an existing DOM element or
+be inserted relative to an existing DOM element.
+
+The server that responds to the HTTP requests can be implemented using
+any programming language and server framework.
+
+HTMX was created by {% aTargetBlank "https://bigsky.software/cv/", "Carson Gross" %}.
+He is a principal software engineer at
+{% aTargetBlank "https://bigsky.software/", "Big Sky Software" %}
+and a part-time CS instructor at Montana State University.
+
+The first version of HTMX was released in May, 2020.
+The 1.0 version was released in November, 2020.
+
+The predecessor of HTMX, also created by Carson Gross,
+is {% aTargetBlank "https://intercoolerjs.org", "intercooler.js" %}.
+The first version of intercooler.js was released in April, 2014,
+so Carson was been working on the approach of simplifying web development
+by adding attributes to HTML for a long time.
 
 The HTMX approach is based on "Hypermedia As The Engine Of Application State"
 ({% aTargetBlank "https://htmx.org/essays/hateoas/", "HATEOAS" %})
@@ -203,3 +219,59 @@ which builds on React Native.
 - {% aTargetBlank "https://hypermedia.systems", "Hypermedia Systems" %} book
 - {% aTargetBlank "https://bigsky.software", "Big Sky Software" %}
 - {% aTargetBlank "https://twitter.com/htmx_org", "Carson Gross on Twitter" %}
+
+## Unorganized Content
+
+see the VS code, sqlite extension.
+learn how to automatically refresh browser on code save.
+create a blog page on HTMX and document all the supported hx– attributes.
+HTMX simplifies state management, because all the state is in one place, on the server.
+should you use auto focus for the new to do input?
+HTMX is great for SEO.
+when hx-target is not specified, it default to the current element.
+document all the valid values for the hx-swap attribute.
+can you use JavaScript code in place of hyper script code?
+use hx-patch for toggling the completed state of a to do.
+investigate how HTMX supports server sent events.
+
+try the hx-confirm attribute on delete buttons.
+try the hx-indicator attribute to show a loading spinner. it changes the opacity from zero to one and then back to zero.
+Study how HTMX supports animations.
+Study how HTMX supports dialogue boxes.
+study Alpine JS and consider using it with HTMX
+
+Intercooler is the predecessor to HTMX.
+it had a dependency on jQuery, but HTMX does not.
+Carson Gross is the creator of intercooler.
+use patch instead of post to update a to do.
+Big emphasis of HTMX is to enable sending HTTPrequest triggered by an interaction on any HTML element, return HTML from HTTP requests, and to be able to update only parts of a page.
+HTMX extends the expressiveness of HTML.
+HTMX is implemented in JavaScript, not TypeScript, in a single source file. he plans to add JSDoc to describe TypeScript types in the future.
+HATEOS was described in Roy Fielding’s PhD dissertation.
+read essays by Carson Gross on the HTMX website. there is one essay where he discusses how HTMX is not a solution for every web app. He also said HTMX is not a replacement for every use of React.
+options for Client side scripting include vanilla, JS, Alpine, JS, and Hyperscript, which Carson worked on.
+HTMX 2.0 will drop support for IE.
+HTMX has an extensive set of integration tests implemented in mocha.
+interest in HTMX exploded in 2023 due to videos by the Primeagen and Fireship.
+you can still use REST APIs that return JSON. You just need to add another layer of HTTP services that call those and translate JSON into HTML. This could be useful for also implementing mobile apps that use the JSON-based API’s.
+hx-push-url=“true” gives history support, so the back button can go to a previous state of the UI. Try this! it does this by snapshoting the entire DOM and saving it in localstorage. this uses the standard history API. writing to localstorage can be disabled if desired.
+use the hx-request HTTP header to determine how to render a page when the browser is refreshed. this enables support for deep links. this is useful when HTMX has replaced portions of a page.
+
+HTMX 2.0 (expected late 2023 or early 2024) will remove legacy support for things like IE, old style websockets, and old style server sent events. this may result in a smaller library size. there will also be some changes to default behavior such as not enabling CORS by default. other changes are not expected to be dramatic.
+
+HOWL = HowEver you Would Like. It relates to being able to write the server-side code using any language/stack that you prefer.
+unfortunately, this means there are no canonical examples of implementing the backend services for an HTMX application.
+The main thing to avoid on the backend, is producing HTML, with string and concatenation, and not having any editor support for validating the HTML.
+
+Carson Gross mentioned the BETH stack in the JavaScript Jabber podcast.
+
+see the htmxLogAll method to enable debug logging. Is this on the server side?
+One way of debugging is to use an unminified version of the HMTX library, and set breakpoints in its functions.
+HTMX can work with JavaScript disabled … progressive enhancement and hx-boost=“true”. How is that possible?
+
+Carson Gross wishes that the functionality of HTMX would just be folded into HTML.
+swapping a chunk of HTML with a new chunk is called transclusion.
+
+Is it really only 14K?
+see unpoly.com which is a competitor to HTMX. supposedly it is better at progressive enhancement.
+Carson Gross picked Alpine JS to call out in the podcast. It works well in combination with HTMX. it is much lighter weight than react and is great for implementing client side interactivity.
