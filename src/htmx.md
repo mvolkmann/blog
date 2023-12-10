@@ -11,16 +11,17 @@ layout: topic-layout.njk
 
 ## Overview
 
-{% aTargetBlank "https://htmx.org", "HTMX" %} is a client-side JavaScript library
-that adds support for new HTML attributes.
-These attributes enable many things including:
+{% aTargetBlank "https://htmx.org", "HTMX" %} is
+a client-side JavaScript library that adds support for
+new HTML attributes that make HTML more expressive.
 
-These HTML attributes enable responding to
+The new HTML attributes enable responding to
 specific interactions (ex. click) with any HTML element
 by sending HTTP request using any verb (GET, POST, PUT, PATCH, or DELETE).
 The response from these HTTP must contain HTML.
-This HTML can replace an existing DOM element or
-be inserted relative to an existing DOM element.
+Rather than performing a complete page refresh,
+the returned HTML replaces an existing DOM element or
+is inserted relative to an existing DOM element.
 
 The fact that all HTML rendered by HTMX applications
 is either static or server rendered makes it great for SEO.
@@ -69,6 +70,7 @@ by adding attributes to HTML for a long time.
 The predecessor of HTMX, also created by Carson Gross,
 is {% aTargetBlank "https://intercoolerjs.org", "intercooler.js" %}.
 The first version of intercooler.js was released in April, 2014.
+Intercooler had a dependency on jQuery, but HTMX does not.
 
 The first version of HTMX was released in May, 2020.
 The 1.0 version was released in November, 2020.
@@ -116,7 +118,16 @@ Content returned from HTTP endpoints can be placed at
 a specific target location in the DOM.
 
 The `hx-target` attribute specifies a target DOM element.
-When not specified, it default to the current element.
+Supported values include:
+
+- `this` targets current element (default)
+- `{css-selector}` targets first element that matches
+- `closest {css-selector}` targets closest ancestor element or itself that matches
+- `find {css-selector}` targets first descendant element that matches
+- `next` targets next sibling element
+- `next {css-selector}` targets next matching element
+- `previous` targets previous sibling element
+- `previous {css-selector}` targets previous matching sibling
 
 The new content can replace existing content
 or be inserted relative to existing content.
@@ -124,7 +135,7 @@ This is specified with the `hx-swap` attribute.
 Supported values include:
 
 - `outerHTML`: replace target element
-- `innerHTML`: replace content of target element
+- `innerHTML`: replace content of target element (default)
 - `beforebegin`: insert before target element
 - `afterbegin`: insert before first child of target element
 - `beforeend`: insert after last child of target element
@@ -132,25 +143,39 @@ Supported values include:
 - `delete`: delete target element; new content is not used
 - `none`: do not change the DOM; new content is not used
 
+The `hx-swap` attribute also supports the following space-separated modifiers:
+
+- `focus-scroll`: enables scrolling to a focused input
+- `ignoreTitle`: disables default behavior of updating the page title when the content contains a `title` element
+- `scroll`: smoothly scrolls the page to the `top` or `bottom` of the target element or a specified element
+- `settle`: specifies the time between the swap and settle (?) logic
+- `show`: abruptly scrolls the page to the `top` or `bottom` of the target element or a specified element
+- `swap`: specifies time to wait after receiving new content before swapping/inserting it
+- `transition`: uses the View Transitions API
+
 hx-select
 hx-preserve
 
 ## Indicators
 
+TODO: Try this.
 hx-indicator
 hx-disabled-elt
 
 ## Out-of-band Updates
 
+TODO: Try this.
 hx-swap-oob
 hx-select-oob
 
 ## Events
 
+TODO: Try this.
 hx-on
 
 ## Validation
 
+TODO: Try this.
 hx-validate
 
 ## Other
@@ -163,16 +188,24 @@ hx-vars
 
 ## Debugging
 
+TODO: Try this.
+
 ## Animation
+
+TODO: Try this.
 
 ## Boosting
 
+TODO: Try this.
+
 ## WebSockets
 
+TODO: Try this.
 hx-ws
 
 ## Server Sent Events
 
+TODO: Try this.
 hx-sse
 
 ## History
@@ -254,26 +287,17 @@ which builds on React Native.
 
 ## Unorganized Content
 
-- learn how to automatically refresh browser on code save.
-- should you use auto focus for the new to do input?
-
-document all the valid values for the hx-swap attribute.
-can you use JavaScript code in place of hyper script code?
-use hx-patch for toggling the completed state of a to do.
-investigate how HTMX supports server sent events.
+- Learn how to automatically refresh browser on code save.
+- Should you use auto focus for the new to do input?
+- Can you use JavaScript code in place of hyper script code?
+- Study how HTMX supports dialogue boxes.
+- Study Alpine JS and consider using it with HTMX
 
 try the hx-confirm attribute on delete buttons.
 try the hx-indicator attribute to show a loading spinner. it changes the opacity from zero to one and then back to zero.
-Study how HTMX supports animations.
-Study how HTMX supports dialogue boxes.
-study Alpine JS and consider using it with HTMX
 
-Intercooler is the predecessor to HTMX.
-it had a dependency on jQuery, but HTMX does not.
-Carson Gross is the creator of intercooler.
-use patch instead of post to update a to do.
 Big emphasis of HTMX is to enable sending HTTPrequest triggered by an interaction on any HTML element, return HTML from HTTP requests, and to be able to update only parts of a page.
-HTMX extends the expressiveness of HTML.
+
 HTMX is implemented in JavaScript, not TypeScript, in a single source file. he plans to add JSDoc to describe TypeScript types in the future.
 HATEOS was described in Roy Fielding’s PhD dissertation.
 read essays by Carson Gross on the HTMX website. there is one essay where he discusses how HTMX is not a solution for every web app. He also said HTMX is not a replacement for every use of React.
