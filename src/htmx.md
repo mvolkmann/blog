@@ -11,7 +11,36 @@ layout: topic-layout.njk
 
 ## Overview
 
-{% aTargetBlank "https://htmx.org", "HTMX" %} is ...
+{% aTargetBlank "https://htmx.org", "HTMX" %} is a client-side JavaScript library
+that adds support for new HTML attributes.
+These attributes enable many things including:
+
+- Specific interactions (ex. click) with any HTML element can trigger
+  an HTTP request using any verb (GET, POST, PUT, PATCH, or DELETE).
+- The response from an HTTP request should contain HTML.
+- The returned HTML can replace an existing DOM element
+  or be inserted relative to an existing DOM element.
+
+The HTMX approach is based on "Hypermedia As The Engine Of Application State"
+({% aTargetBlank "https://htmx.org/essays/hateoas/", "HATEOAS" %})
+which is a specific use of the REST architecture.
+REST is described in chapter 5 of the famous PhD dissertation by Roy Fielding
+"{% aTargetBlank "https://ics.uci.edu/~fielding/pubs/dissertation/fielding_dissertation.pdf",
+"Architectural Styles and the Design of Network-based Software Architectures" %}".
+
+HTMX is not appropriate for all features of web apps.
+Using HTMX to update the UI on every mouse move or drag
+would be too slow since each movement would trigger a new HTTP request.
+Examples of apps that require this kind of functionality include
+Google Maps and many games.
+However, HTMX can be used in conjunction with other approaches,
+so it can be used for the parts of apps that do not require constant reaction to mouse movements.
+
+A good option to pair with HTMX is
+{% aTargetBlank "https://alpinejs.dev", "Alpine.js" %}.
+Like HTMLx, Alpine is a client-side JavaScript library
+that adds support for new HTML attributes.
+It differs from HTMX in that it focuses on client-side interactions.
 
 ## Installing
 

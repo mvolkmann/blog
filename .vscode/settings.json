@@ -328,6 +328,7 @@
     "hasattr",
     "hashable",
     "hasher",
+    "HATEOAS",
     "heatmap",
     "Hegarty",
     "HEIC",
