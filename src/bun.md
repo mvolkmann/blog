@@ -911,33 +911,54 @@ This creates the file `todos.db` that contains all the tables for this database
 (only one in this case).
 
 To access this database from code, write something like the following
-in the file `database.ts`:
+in the file `sqlite.test.ts`:
 
 ```ts
 import {Database} from 'bun:sqlite';
+import {expect, test} from 'bun:test';
+
+type Todo = {
+  id: number;
+  description: string;
+  completed: number; // 0 or 1 for SQLite compatibility
+};
 
 const db = new Database('todos.db', {create: true});
-const query = db.query('select * from todos;');
-const todos = query.all(); // get();
-console.log(todos);
+const deleteAllTodosPS = db.prepare('delete from todos');
+const deleteTodoPS = db.prepare('delete from todos where id = ?');
+const getTodoQuery = db.query('select * from todos where id = ?');
+const getAllTodosQuery = db.query('select * from todos;');
+const insertTodoQuery = db.query(
+  'insert into todos (description, completed) values (?, 0) returning id'
+);
+const updateTodoPS = db.prepare('update todos set completed=? where id = ?');
+
+test('sqlite', async () => {
+  deleteAllTodosPS.run();
+
+  const description = 'buy milk';
+  const {id} = insertTodoQuery.get(description) as {id: number};
+  // console.log('id =', id);
+  expect(id).toBeGreaterThan(0);
+
+  let todos = getAllTodosQuery.all() as Todo[];
+  expect(todos.length).toBe(1);
+  let [todo] = todos;
+  expect(todo.description).toBe(description);
+
+  updateTodoPS.run(1, todo.id);
+
+  todo = getTodoQuery.get(todo.id) as Todo;
+  expect(todo.completed).toBe(1);
+
+  deleteTodoPS.run(todo.id);
+
+  todos = getAllTodosQuery.all() as Todo[];
+  expect(todos.length).toBe(0);
+});
 ```
 
-Run this with `bun run database.ts`.
-It will output the following:
-
-```text
-[
-  {
-    id: "t1",
-    text: "cut grass",
-    completed: 0
-  }, {
-    id: "t2",
-    text: "buy milk",
-    completed: 1
-  }
-]
-```
+Run this with `bun test sqlite.test.ts`.
 
 ## Foreign Function Interface (FFI)
 
