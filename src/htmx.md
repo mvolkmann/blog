@@ -22,6 +22,9 @@ The response from these HTTP must contain HTML.
 This HTML can replace an existing DOM element or
 be inserted relative to an existing DOM element.
 
+The fact that all HTML rendered by HTMX applications
+is either static or server rendered makes it great for SEO.
+
 The server can be implemented using
 any programming language and server framework.
 The server typically plays two roles.
@@ -111,6 +114,10 @@ hx-trigger
 
 Content returned from HTTP endpoints can be placed at
 a specific target location in the DOM.
+
+The `hx-target` attribute specifies a target DOM element.
+When not specified, it default to the current element.
+
 The new content can replace existing content
 or be inserted relative to existing content.
 This is specified with the `hx-swap` attribute.
@@ -125,7 +132,6 @@ Supported values include:
 - `delete`: delete target element; new content is not used
 - `none`: do not change the DOM; new content is not used
 
-hx-swap
 hx-select
 hx-preserve
 
@@ -249,10 +255,8 @@ which builds on React Native.
 ## Unorganized Content
 
 - learn how to automatically refresh browser on code save.
+- should you use auto focus for the new to do input?
 
-should you use auto focus for the new to do input?
-HTMX is great for SEO.
-when hx-target is not specified, it default to the current element.
 document all the valid values for the hx-swap attribute.
 can you use JavaScript code in place of hyper script code?
 use hx-patch for toggling the completed state of a to do.
