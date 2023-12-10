@@ -69,6 +69,8 @@ The first version of intercooler.js was released in April, 2014.
 
 The first version of HTMX was released in May, 2020.
 The 1.0 version was released in November, 2020.
+The latest version as of December 2023 is 1.9.9.
+It is 15K gzipped and 47K unzipped.
 
 HTMX 2.0 is expected in late 2023 or early 2024.
 It will remove legacy support for things like IE,
@@ -198,6 +200,9 @@ _="on submit target.reset()"
 The server that responds to the HTTP requests triggered by
 interactions with HTML elements can be implemented using
 any programming language and any server framework.
+This is referred to as HowEver you Would Like (HOWL).
+A downside is that there are no canonical examples of
+implementing the backend services for an HTMX application.
 
 Desirable characteristics include:
 
@@ -276,10 +281,6 @@ you can still use REST APIs that return JSON. You just need to add another layer
 hx-push-url=“true” gives history support, so the back button can go to a previous state of the UI. Try this! it does this by snapshoting the entire DOM and saving it in localstorage. this uses the standard history API. writing to localstorage can be disabled if desired.
 use the hx-request HTTP header to determine how to render a page when the browser is refreshed. this enables support for deep links. this is useful when HTMX has replaced portions of a page.
 
-HOWL = HowEver you Would Like. It relates to being able to write the server-side code using any language/stack that you prefer.
-unfortunately, this means there are no canonical examples of implementing the backend services for an HTMX application.
-The main thing to avoid on the backend, is producing HTML, with string and concatenation, and not having any editor support for validating the HTML.
-
 see the htmxLogAll method to enable debug logging. Is this on the server side?
 One way of debugging is to use an unminified version of the HMTX library, and set breakpoints in its functions.
 HTMX can work with JavaScript disabled … progressive enhancement and hx-boost=“true”. How is that possible?
@@ -287,6 +288,5 @@ HTMX can work with JavaScript disabled … progressive enhancement and hx-boost=
 Carson Gross wishes that the functionality of HTMX would just be folded into HTML.
 swapping a chunk of HTML with a new chunk is called transclusion.
 
-Is it really only 14K?
 see unpoly.com which is a competitor to HTMX. supposedly it is better at progressive enhancement.
 Carson Gross picked Alpine JS to call out in the podcast. It works well in combination with HTMX. it is much lighter weight than react and is great for implementing client side interactivity.
