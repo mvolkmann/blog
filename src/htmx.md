@@ -20,6 +20,8 @@ These attributes enable many things including:
 - The response from an HTTP request should contain HTML.
 - The returned HTML can replace an existing DOM element
   or be inserted relative to an existing DOM element.
+- The server that responds to the HTTP requests can be implemented using
+  any programming language and any server framework.
 
 The HTMX approach is based on "Hypermedia As The Engine Of Application State"
 ({% aTargetBlank "https://htmx.org/essays/hateoas/", "HATEOAS" %})
@@ -57,6 +59,14 @@ hx-delete
 hx-sync
 hx-params
 hx-confirm
+
+## URLs
+
+HTMX endpoints return HTML, not JSON.
+Their URLs are based on user interface functionality, not resource paths.
+For example, `/todos/:id/toggle` is a reasonable URL path
+for an endpoint that toggles the completed status of todo
+and returns HTML for the updated todo item.
 
 ## Triggers
 
@@ -128,6 +138,58 @@ hx-sse
 
 hx-history-elt
 hx-push-url
+
+## Hyperscript
+
+{% aTargetBlank "https://hyperscript.org", "Hyperscript" %} is
+"an easy & approachable language for modern web front-ends".
+It can be used in conjunction with HTMX.
+
+To enable use of hyperscript, add a script tag like the following:
+
+```html
+<script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
+```
+
+One use of hyperscript is to clear form inputs after a form is submitted.
+Specify the code to run as the value of the underscore attribute
+on the `form` element.
+For example:
+
+```html
+_="on submit target.reset()"
+```
+
+## Server-Side Options
+
+The server that responds to the HTTP requests triggered by
+interactions with HTML elements can be implemented using
+any programming language and any server framework.
+
+Desirable characteristics include:
+
+- good performance
+- ability to construct HTML responses using some kind of templating
+  rather than string concatenation
+- editor tooling that can validate proper HTML elements, attributes, and nesting
+
+One option is to use
+{% aTargetBlank "https://bun.sh", "Ban" %} (Node.js alternative) and
+{% aTargetBlank "https://elysiajs.com", "ElysiaJS" %} (Express alternative).
+ElysiaJS supports constructing HTML using JSX syntax.
+JSX is only used to create strings of HTML.
+A virtual DOM is not used.
+
+Another popular option is to use Python with either
+{% aTargetBlank "https://www.djangoproject.com", "Django" %} or
+{% aTargetBlank "https://flask.palletsprojects.com/", "Flask" %}.
+
+## Mobile Apps
+
+The hypermedia approach used by HTMX to build web applications
+can also be used to build mobile apps.
+See {% aTargetBlank "https://hyperview.org", "Hyperview" %}
+which builds on React Native.
 
 ## Resources
 
