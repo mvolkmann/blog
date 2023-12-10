@@ -19,15 +19,52 @@ layout: topic-layout.njk
 
 Interacting with any HTML element can trigger an HTTP request.
 
+hx-get
+hx-post
+hx-put
+hx-patch
+hx-delete
+
+hx-sync
+hx-params
+hx-confirm
+
 ## Triggers
+
+hx-trigger
 
 ## Targets
 
+hx-swap
+hx-select
+hx-preserve
+
 ## Indicators
+
+hx-indicator
+hx-disabled-elt
 
 ## Out-of-band Updates
 
+hx-swap-oob
+hx-select-oob
+
 ## Events
+
+hx-on
+
+## Validation
+
+hx-validate
+
+## Other
+
+hx-boost
+hx-disinherit
+hx-encoding
+hx-ext
+hx-vals
+hx-vars
 
 ## Debugging
 
@@ -37,9 +74,16 @@ Interacting with any HTML element can trigger an HTTP request.
 
 ## WebSockets
 
+hx-ws
+
 ## Server Sent Events
 
+hx-sse
+
 ## History
+
+hx-history-elt
+hx-push-url
 
 ## Resources
 
