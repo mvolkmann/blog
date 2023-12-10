@@ -297,3 +297,21 @@ deletePersonPS.run(person.id);
 
 Python has built-in support for SQLite.
 For details, see [here](/blog/python/sqlite-in-python/).
+
+## VS Code Support
+
+See the VS Code extension {% aTargetBlank
+"https://marketplace.visualstudio.com/items?itemName=alexcvzz.vscode-sqlite", "SQLite" %}.
+To use this:
+
+- Open the Command Palette and enter "SQLite: Open Database".
+- Select a database from the drop-down list.
+- In the Explorer view, expand the "SQLite Explorer" section.
+- Select a database to see a list of tables inside it.
+- Select a table to see its column names and types.
+- Click the triangle to the right a table name to see the rows inside it.
+- Click one of the buttons in the upper-right to export the table data as
+  CSV, HTML, or JSON.
+- Click the new document icon in the "SQLite Explorer" section
+  to enter a query.
+- Open the Command Palette and enter "SQLite: Run Query" to run the query.
