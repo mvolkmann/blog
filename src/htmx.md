@@ -1,12 +1,12 @@
 ---
 eleventyNavigation:
-  key: Bun
+  key: HTMX
 layout: topic-layout.njk
 ---
 
-<figure style="width: 33%">
-  <img alt="Ziggy, the Zig mascot" style="border: 0"
-    src="/blog/assets/bun-logo.svg?v={{pkg.version}}">
+<figure style="width: 60%">
+  <img alt="HTMX logo" style="border: 0"
+    src="/blog/assets/htmx-logo.png?v={{pkg.version}}">
 </figure>
 
 ## Overview
@@ -35,6 +35,22 @@ hx-trigger
 
 ## Targets
 
+Content returned from HTTP endpoints can be placed at
+a specific target location in the DOM.
+The new content can replace existing content
+or be inserted relative to existing content.
+This is specified with the `hx-swap` attribute.
+Supported values include:
+
+- `outerHTML`: replace target element
+- `innerHTML`: replace content of target element
+- `beforebegin`: insert before target element
+- `afterbegin`: insert before first child of target element
+- `beforeend`: insert after last child of target element
+- `afterend`: insert after target element
+- `delete`: delete target element; new content is not used
+- `none`: do not change the DOM; new content is not used
+
 hx-swap
 hx-select
 hx-preserve
@@ -62,7 +78,6 @@ hx-validate
 hx-boost
 hx-disinherit
 hx-encoding
-hx-ext
 hx-vals
 hx-vars
 
