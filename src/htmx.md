@@ -102,7 +102,13 @@ hx-push-url
 
 ## Resources
 
-- {% aTargetBlank "https://htmx.org", "Home Page" %}
+- {% aTargetBlank "https://htmx.org", "HTMX Home Page" %}
+- {% aTargetBlank "https://htmx.org/docs/", "HTMX Documentation" %}
+- {% aTargetBlank "https://htmx.org/reference/", "HTMX Reference" %}
+- {% aTargetBlank "https://htmx.org/examples/", "HTMX Examples" %}
+- {% aTargetBlank "https://htmx.org/essays/", "HTMX-related Essays" %}
+
+- {% aTargetBlank "https://htmx.org/discord", "HTMX Discord Channel" %}
 - {% aTargetBlank "https://hypermedia.systems", "Hypermedia Systems" %} book
 - {% aTargetBlank "https://bigsky.software", "Big Sky Software" %}
 - {% aTargetBlank "https://twitter.com/htmx_org", "Carson Gross on Twitter" %}
