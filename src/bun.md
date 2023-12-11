@@ -1020,13 +1020,19 @@ That page includes a list of all the supported FFI types.
 "TypeScript framework supercharged by Bun with End-to-End Type Safety,
 unified type system and outstanding developer experience."
 
-To create a new Bun project that uses ElysiaJS,
-enter `bun create elysia {destination}`.
-The destination is used as the name of a directory to create
-and can be `.` to create the project in the current directory.
+Elysia is a bun-specific server framework that is 18 times faster than Express.
+{% aTargetBlank "https://hono.dev", "Hono" %} is a close competitor to Elysia.
 
-To run the starter project, enter `bun run dev`.
-Browsing localhost:3000 will display "Hello Elysia".
+To create a new Bun project that uses ElysiaJS:
+
+- `bun create elysia {destination}`
+
+  The destination is used as the name of a directory to create
+  and can be `.` to create the project in the current directory.
+
+- `cd project-name`
+- `bun run dev` provides hot reloading
+- browse localhost:3000
 
 To define new routes in the project ...
 
@@ -1034,25 +1040,7 @@ See the example at {% aTargetBlank
 "https://github.com/mvolkmann/bun-elysia-demo", "bun-elysia-demo" %}
 GitHub repository.
 
-## CLEANUP UP REMAINDER OF THIS CONTENT
+## TODOs
 
-Compare performance of bun, deno, and node on your rush-hour code.
-Implement your rush-hour program in Zig. Compare performance.
-
-Create code examples that demonstrate the most important bun-specific APIs.
-
-Does Bun share module code across projects like pnpm?
-
-Concerns
-
-- Were the Node APIs implemented to have identical characteristics with no bugs?
-
-More
-
-- Elysia is a bun-specific server framework which is 18 times faster than Express
-  - `bun create elysia project-name` generates a scaffolded app
-  - `cd project-name`
-  - `bun run dev` provides hot reloading
-  - browse localhost:3000
-  - bunx prisma init —datasource-provider mysql
-- Hono is a close competitor to Elysia
+- Compare performance of bun, deno, and node on your rush-hour code.
+- Implement your rush-hour program in Zig and compare performance.
