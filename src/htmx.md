@@ -180,6 +180,8 @@ The steps to do this are as follows:
    @tailwind utilities;
    ```
 
+   This file can also define custom CSS classes.
+
 1. Generate a CSS file containing only the Tailwind classes uses in your app
    by entering `bunx tailwindcss -i ./global.css -o output.css --watch`
    Note that this continues watching for changes to `.tsx` files
