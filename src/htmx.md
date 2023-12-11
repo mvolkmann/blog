@@ -26,6 +26,11 @@ is inserted relative to an existing DOM element.
 The fact that all HTML rendered by HTMX applications
 is either static or server rendered makes it great for SEO.
 
+The HTMX library is implemented in JavaScript,
+not TypeScript, in a single source file.
+There are plans to add JSDoc TypeScript type definitions
+for better code editor support.
+
 The server can be implemented using
 any programming language and server framework.
 The server typically plays two roles.
@@ -38,8 +43,8 @@ He is a principal software engineer at
 and a part-time CS instructor at Montana State University.
 
 The HTMX approach is based on "Hypermedia As The Engine Of Application State"
-({% aTargetBlank "https://htmx.org/essays/hateoas/", "HATEOAS" %})
-which is a specific use of the REST architecture.
+({% aTargetBlank "https://htmx.org/essays/hateoas/", "HATEOAS" %}) which is
+a specific use of the REST architecture where services return hypermedia.
 REST is described in chapter 5 of the famous PhD dissertation by Roy Fielding
 "{% aTargetBlank "https://ics.uci.edu/~fielding/pubs/dissertation/fielding_dissertation.pdf",
 "Architectural Styles and the Design of Network-based Software Architectures" %}".
@@ -47,20 +52,27 @@ REST is described in chapter 5 of the famous PhD dissertation by Roy Fielding
 HTMX simplifies state management because all the state is in one place,
 on the server.
 
+## Client-side Processing
+
 HTMX is not appropriate for all features of web apps.
 Using HTMX to update the UI on every mouse move or drag
 would be too slow since each movement would trigger a new HTTP request.
 Examples of apps that require this kind of functionality include
 Google Maps and many games.
-However, HTMX can be used in conjunction with other approaches,
+
+HTMX can be used in conjunction with other approaches,
 so it can be used for the parts of apps that
 do not require constant reaction to mouse movements.
 
-A good option to pair with HTMX is
-{% aTargetBlank "https://alpinejs.dev", "Alpine.js" %}.
-Like HTMLx, Alpine is a client-side JavaScript library
-that adds support for new HTML attributes.
-It differs from HTMX in that it focuses on client-side interactions.
+Options for implementing client-side processing include vanilla JavaScript,
+{% aTargetBlank "https://alpinejs.dev", "Alpine" %}, and
+{% aTargetBlank "https://hyperscript.org", "_hyperscript" %}.
+
+Like HTMLx, Alpine and _hyperscript are client-side JavaScript libraries.
+Alpine adds support for many new HTML attributes.
+\_hyperscript adds support for one new HTML attribute
+whose name is a single underscore (`_`) and whose value is \_hyperscript code.
+Both differ from HTMX in that they focus on client-side interactions.
 
 ## History and Future
 
@@ -98,7 +110,10 @@ hx-delete
 
 hx-sync
 hx-params
-hx-confirm
+
+The `hx-confirm` attribute specifies a message
+to display in a confirmation dialog.
+An HTTP request is only sent and processed if the user clicks the OK button.
 
 ## URLs
 
@@ -158,9 +173,39 @@ hx-preserve
 
 ## Indicators
 
-TODO: Try this.
-hx-indicator
-hx-disabled-elt
+The `hx-indicator` attribute specifies a CSS selector
+that matches one or more elements.
+Those elements will have their opacity changed from 0 to 1
+while an associated HTTP request is being processed.
+
+The `hx-disabled-elt` attribute specifies a CSS selector
+that matches one or more elements.
+Those elements will have the `:disabled` CSS pseudo-class applied
+while an associated HTTP request is being processed.
+
+The following HTML demonstrates
+showing an indicator and disabling the "Add" button
+while waiting for a new todo to be added.
+Note how the spinner image has the CSS class `htmx-indicator`.
+
+```html
+<form
+  hx-post="/todos"
+  hx-swap="afterend"
+  hx-disabled-elt="#add-btn"
+  hx-indicator="#spinner"
+  _="on submit target.reset()" // resets form using _hyperscript
+>
+  <input name="description" />
+  <button id="add-btn" type="submit">Add</button>
+  <img
+    alt="loading..."
+    class="htmx-indicator h-6 w-6"
+    id="spinner"
+    src="/public/spinner.gif"
+  />
+</form>
+```
 
 ## Out-of-band Updates
 
@@ -213,19 +258,19 @@ hx-sse
 hx-history-elt
 hx-push-url
 
-## Hyperscript
+## \_hyperscript
 
-{% aTargetBlank "https://hyperscript.org", "Hyperscript" %} is
+{% aTargetBlank "https://hyperscript.org", "_hyperscript" %} is
 "an easy & approachable language for modern web front-ends".
 It can be used in conjunction with HTMX.
 
-To enable use of hyperscript, add a script tag like the following:
+To enable use of \_hyperscript, add a script tag like the following:
 
 ```html
 <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
 ```
 
-One use of hyperscript is to clear form inputs after a form is submitted.
+One use of \_hyperscript is to clear form inputs after a form is submitted.
 Specify the code to run as the value of the underscore attribute
 on the `form` element.
 For example:
@@ -292,16 +337,8 @@ which builds on React Native.
 - Can you use JavaScript code in place of hyper script code?
 - Study how HTMX supports dialogue boxes.
 - Study Alpine JS and consider using it with HTMX
+- Read essays by Carson Gross on the HTMX website.
 
-try the hx-confirm attribute on delete buttons.
-try the hx-indicator attribute to show a loading spinner. it changes the opacity from zero to one and then back to zero.
-
-Big emphasis of HTMX is to enable sending HTTPrequest triggered by an interaction on any HTML element, return HTML from HTTP requests, and to be able to update only parts of a page.
-
-HTMX is implemented in JavaScript, not TypeScript, in a single source file. he plans to add JSDoc to describe TypeScript types in the future.
-HATEOS was described in Roy Fielding’s PhD dissertation.
-read essays by Carson Gross on the HTMX website. there is one essay where he discusses how HTMX is not a solution for every web app. He also said HTMX is not a replacement for every use of React.
-options for Client side scripting include vanilla, JS, Alpine, JS, and Hyperscript, which Carson worked on.
 HTMX 2.0 will drop support for IE.
 HTMX has an extensive set of integration tests implemented in mocha.
 interest in HTMX exploded in 2023 due to videos by the Primeagen and Fireship.
