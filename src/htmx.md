@@ -187,8 +187,13 @@ The steps to do this are as follows:
 1. Include the following `link` element in the base HTML of the app.
 
    ```html
-   <link href="output.css" rel="stylesheet" />
+   <link href="/output.css" rel="stylesheet" />
    ```
+
+This also requires enabling serving static files with the following steps:
+
+1. Install a plugin by entering `bun add @elysiajs/static`
+1. In the server code, add a call to `app.use(staticPlugin());`
 
 ## Requests
 
