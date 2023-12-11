@@ -141,6 +141,41 @@ your application server and include a `script` tag like the following:
 <script src="htmx.min.js"></script>
 ```
 
+## Tailwind
+
+To use Tailwind for CSS styling in an HTMX app:
+
+1. TODO: Is it enough to just include this `script` tag?
+
+   ```html
+   <script src="tailwind.min.js"></script>
+   ```
+
+1. Enter `npx tailwindcss init` or `bunx tailwindcss init`
+   to create the file `tailwind.config.js`.
+   TODO: Is that all this does? If so, the file can just be created manually.
+
+1. Edit `tailwind.config.js` to match the following:
+
+   ```js
+   module.exports = {
+     content: ['./src/**/*.{html,js}'],
+     theme: {
+       extend: {}
+     },
+     plugins: []
+   };
+   ```
+
+1. Create CSS file with a name like `global.css`
+   and add the following lines at the beginning:
+
+   ```css
+   @tailwind base;
+   @tailwind components;
+   @tailwind utilities;
+   ```
+
 ## Requests
 
 Interacting with any HTML element can trigger an HTTP request.
