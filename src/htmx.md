@@ -79,6 +79,18 @@ Alpine adds support for many new HTML attributes.
 whose name is a single underscore (`_`) and whose value is \_hyperscript code.
 Both differ from HTMX in that they focus on client-side interactions.
 
+## JSON
+
+While HTMX applications do not require implementing and using
+REST APIs that returns JSON data, it may still be desirable to implement them.
+For example, Android and iOS mobile apps may wish to use such APIs.
+To use these in HTMX apps, call them from HTTP endpoints
+that use the data to generate HTML responses.
+
+Alternatively, write functions that return the desired data
+and call them from both the endpoints that return JSON
+and the endpoints that return HTML.
+
 ## History and Future
 
 Carson Gross been working on the approach of simplifying web development
@@ -346,7 +358,6 @@ which builds on React Native.
 - Study Alpine JS and consider using it with HTMX
 - Read essays by Carson Gross on the HTMX website.
 
-you can still use REST APIs that return JSON. You just need to add another layer of HTTP services that call those and translate JSON into HTML. This could be useful for also implementing mobile apps that use the JSON-based API’s.
 hx-push-url=“true” gives history support, so the back button can go to a previous state of the UI. Try this! it does this by snapshoting the entire DOM and saving it in localstorage. this uses the standard history API. writing to localstorage can be disabled if desired.
 use the hx-request HTTP header to determine how to render a page when the browser is refreshed. this enables support for deep links. this is useful when HTMX has replaced portions of a page.
 
