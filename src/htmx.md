@@ -22,6 +22,7 @@ The response from these HTTP must contain HTML.
 Rather than performing a complete page refresh,
 the returned HTML replaces an existing DOM element or
 is inserted relative to an existing DOM element.
+(Replacing an HTML element with a new element is called transclusion.)
 
 Interest in HTMX exploded in 2023 after YouTube videos
 from ThePrimeagen and Fireship were released.
@@ -73,11 +74,14 @@ Options for implementing client-side processing include vanilla JavaScript,
 {% aTargetBlank "https://alpinejs.dev", "Alpine" %}, and
 {% aTargetBlank "https://hyperscript.org", "_hyperscript" %}.
 
-Like HTMLx, Alpine and _hyperscript are client-side JavaScript libraries.
+Like HTMLx, Alpine and \_hyperscript are client-side JavaScript libraries.
+These are much lighter that libraries and frameworks like React.
+
 Alpine adds support for many new HTML attributes.
 \_hyperscript adds support for one new HTML attribute
 whose name is a single underscore (`_`) and whose value is \_hyperscript code.
-Both differ from HTMX in that they focus on client-side interactions.
+Both differ from HTMX in that they focus on client-side interactions
+rather that processing HTTP requests.
 
 ## JSON
 
@@ -115,7 +119,27 @@ Other changes are not expected to be dramatic.
 
 HTMX has an extensive set of integration tests implemented in Mocha.
 
+Carson Gross wishes that the functionality of HTMX would be folded into HTML,
+making HTMX unnecessary.
+
 ## Installing
+
+There is no need to install HTMX using a package manager like npm or bun.
+It can be used from a CDN by including the following `script` tag:
+
+```html
+<script src="https://unpkg.com/htmx.org@1.9.9"></script>
+```
+
+Alternatively, it can be downloaded as a single, minified JavaScript file
+by clicking the "~14k min.gz’d" link near the top of the
+{% aTargetBlank "https://htmx.org", "HTMX home page" %}.
+Place the downloaded file in a directory whose files are served by
+your application server and include a `script` tag like the following:
+
+```html
+<script src="htmx.min.js"></script>
+```
 
 ## Requests
 
@@ -358,15 +382,27 @@ which builds on React Native.
 - Study Alpine JS and consider using it with HTMX
 - Read essays by Carson Gross on the HTMX website.
 
-hx-push-url=“true” gives history support, so the back button can go to a previous state of the UI. Try this! it does this by snapshoting the entire DOM and saving it in localstorage. this uses the standard history API. writing to localstorage can be disabled if desired.
-use the hx-request HTTP header to determine how to render a page when the browser is refreshed. this enables support for deep links. this is useful when HTMX has replaced portions of a page.
+- `hx-push-url="true"` provides history support so the back button
+  can go to a previous state of the UI. Try this!
+  It does this by creating a snapshot of the entire DOM
+  and saving it in `localStorage`.
+  This uses the standard Web {% aTargetBlank
+  "https://developer.mozilla.org/en-US/docs/Web/API/History_API", "History API" %}.
+  Writing to `localstorage` can be disabled if desired.
 
-see the htmxLogAll method to enable debug logging. Is this on the server side?
-One way of debugging is to use an unminified version of the HMTX library, and set breakpoints in its functions.
-HTMX can work with JavaScript disabled … progressive enhancement and hx-boost=“true”. How is that possible?
+- The `hx-request` HTTP header can be used to determine
+  how to render a page when the browser is refreshed.
+  This enables support for deep links.
+  This is useful when HTMX has replaced portions of a page.
 
-Carson Gross wishes that the functionality of HTMX would just be folded into HTML.
-swapping a chunk of HTML with a new chunk is called transclusion.
+- The `htmxLogAll` method enables debug logging. Is this on the server side?
 
-see unpoly.com which is a competitor to HTMX. supposedly it is better at progressive enhancement.
-Carson Gross picked Alpine JS to call out in the podcast. It works well in combination with HTMX. it is much lighter weight than react and is great for implementing client side interactivity.
+- One debugging approach is to use an unminified version of the HTMX library
+  and set breakpoints in its functions.
+
+- HTMX can work with JavaScript disabled
+  by setting the `hx-boost="true"` attribute.
+  Does this need to be on the `body` element? How does this work?
+
+- See unpoly.com which is a competitor to HTMX.
+  Supposedly it is better at progressive enhancement.
