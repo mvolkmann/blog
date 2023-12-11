@@ -597,13 +597,36 @@ Then start the server with `bun run dev`.
 To patch the code in place when code changes are detected
 and not restart the server, use the `--hot` flag in place of `--watch`.
 Technically this updates the internal module cache with the new code.
-This will not refresh a web browser that is
-displaying content obtained from a Bun server.
 
 For more detail, see {% aTargetBlank "https://bun.sh/docs/runtime/hot",
 "Watch mode" %}.
 
-This will not automatically refresh browsers that browsing the server URL.
+This will not refresh a web browser that is
+displaying content obtained from a Bun server.
+One way to do that is to use a WebSocket connection.
+
+Add the following in the server code:
+
+```js
+import WebSocket from 'ws';
+new WebSocket.Server({port: 1920});
+```
+
+Add the following in the client-side code:
+
+```js
+const ws = new WebSocket('ws://localhost:1920');
+ws.addEventListener('close', event => {
+  setTimeout(() => {
+    window.location.reload();
+  }, 500); // gives the server time to restart
+});
+```
+
+The client will lose the WebSocket connect when the server restarts.
+It will wait 500ms and then reload the browser.
+By that time the server should be back up again.
+Even if it isn't, the browser will wait for it.
 
 ## Environment Variables
 
