@@ -24,6 +24,14 @@ the returned HTML replaces an existing DOM element or
 is inserted relative to an existing DOM element.
 (Replacing an HTML element with a new element is called transclusion.)
 
+This approach removes the need to serialize data to JSON on the server,
+parse the JSON on the client, and convert it to HTML.
+
+Many web app features typically thought to require custom JavaScript code
+can instead be implemented with only HTMX.
+Examples include lazy loading of data, infinite scrolling,
+and searching while the user types.
+
 Interest in HTMX exploded in 2023 after YouTube videos
 from ThePrimeagen and Fireship were released.
 See {% aTargetBlank "https://www.youtube.com/watch?v=zjHHIqI9lUY", "HTMX" %} and
@@ -55,6 +63,8 @@ REST is described in chapter 5 of the famous PhD dissertation by Roy Fielding
 "{% aTargetBlank "https://ics.uci.edu/~fielding/pubs/dissertation/fielding_dissertation.pdf",
 "Architectural Styles and the Design of Network-based Software Architectures" %}".
 
+HTML is a kind of hypermedia and web browsers are hypermedia clients.
+
 HTMX simplifies state management because all the state is in one place,
 on the server.
 
@@ -72,7 +82,8 @@ do not require constant reaction to mouse movements.
 
 Options for implementing client-side processing include vanilla JavaScript,
 {% aTargetBlank "https://alpinejs.dev", "Alpine" %}, and
-{% aTargetBlank "https://hyperscript.org", "_hyperscript" %}.
+{% aTargetBlank "https://hyperscript.org", "_hyperscript" %}
+(created by Big Sky Software).
 
 Like HTMLx, Alpine and \_hyperscript are client-side JavaScript libraries.
 These are much lighter that libraries and frameworks like React.
@@ -143,37 +154,40 @@ your application server and include a `script` tag like the following:
 
 ## Tailwind
 
-To use Tailwind for CSS styling in an HTMX app:
+There are two approaches for using Tailwind in an HTMX app.
 
-1. TODO: Is it enough to just include this `script` tag?
+The easiest approach is to include it from a CDN with this `link` tag:
 
-   ```html
-   <script src="tailwind.min.js"></script>
-   ```
+```html
+<script src="https://cdn.tailwindcss.com"></script>
+```
 
-1. Enter `npx tailwindcss init` or `bunx tailwindcss init`
-   to create the file `tailwind.config.js`.
-   TODO: Is that all this does? If so, the file can just be created manually.
+This has the downside that it includes every Tailwind CSS class,
+not just the ones actually used in the app.
 
-1. Edit `tailwind.config.js` to match the following:
+A more involved approach is to generate a CSS file that
+only contains the Tailwind CSS classes that are actually used.
+The steps to do this are as follows:
 
-   ```js
-   module.exports = {
-     content: ['./src/**/*.{html,js}'],
-     theme: {
-       extend: {}
-     },
-     plugins: []
-   };
-   ```
-
-1. Create CSS file with a name like `global.css`
-   and add the following lines at the beginning:
+1. Install Tailwind by entering `bun install -d tailwindcss`
+1. Create the file `tailwind.config.js` by entering `bunx tailwindcss init`
+1. Edit the value of `content` in `tailwind.config.js` to be `content: ['**/*.tsx'],`
+1. Create the file `global.css` containing the following:
 
    ```css
    @tailwind base;
    @tailwind components;
    @tailwind utilities;
+   ```
+
+1. Generate a CSS file containing only the Tailwind classes uses in your app
+   by entering `bunx tailwindcss -i ./global.css -o output.css --watch`
+   Note that this continues watching for changes to `.tsx` files
+   and produces a new version of `output.css` when changes are detected.
+1. Include the following `link` element in the base HTML of the app.
+
+   ```html
+   <link href="output.css" rel="stylesheet" />
    ```
 
 ## Requests
