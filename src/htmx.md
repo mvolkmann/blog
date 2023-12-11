@@ -30,12 +30,16 @@ parse the JSON on the client, and convert it to HTML.
 Many web app features typically thought to require custom JavaScript code
 can instead be implemented with only HTMX.
 Examples include lazy loading of data, infinite scrolling,
-and searching while the user types.
+and searching while the user types in an `input`.
 
 Interest in HTMX exploded in 2023 after YouTube videos
 from ThePrimeagen and Fireship were released.
 See {% aTargetBlank "https://www.youtube.com/watch?v=zjHHIqI9lUY", "HTMX" %} and
 {% aTargetBlank "https://www.youtube.com/watch?v=r-GSGH2RxJs", "HTMX in 100 seconds" %}.
+
+Companies that sponsor the development of HTMX are listed on the
+{% aTargetBlank "https://htmx.org", "home page" %}.
+They include GitHub and JetBrains.
 
 The fact that all HTML rendered by HTMX applications
 is either static or server rendered makes it great for SEO.
@@ -82,8 +86,13 @@ do not require constant reaction to mouse movements.
 
 Options for implementing client-side processing include vanilla JavaScript,
 {% aTargetBlank "https://alpinejs.dev", "Alpine" %}, and
-{% aTargetBlank "https://hyperscript.org", "_hyperscript" %}
-(created by Big Sky Software).
+{% aTargetBlank "https://hyperscript.org", "_hyperscript" %}.
+
+\_hyperscript was created by Big Sky Software.
+It is inspired by the HyperTalk and AppleScript languages
+that were used in the HyperCard application for Apple computers.
+From Wikipedia, HyperCard "is among the first successful hypermedia systems
+predating the World Wide Web."
 
 Like HTMLx, Alpine and \_hyperscript are client-side JavaScript libraries.
 These are much lighter that libraries and frameworks like React.
