@@ -23,6 +23,11 @@ Rather than performing a complete page refresh,
 the returned HTML replaces an existing DOM element or
 is inserted relative to an existing DOM element.
 
+Interest in HTMX exploded in 2023 after YouTube videos
+from ThePrimeagen and Fireship were released.
+See {% aTargetBlank "https://www.youtube.com/watch?v=zjHHIqI9lUY", "HTMX" %} and
+{% aTargetBlank "https://www.youtube.com/watch?v=r-GSGH2RxJs", "HTMX in 100 seconds" %}.
+
 The fact that all HTML rendered by HTMX applications
 is either static or server rendered makes it great for SEO.
 
@@ -91,10 +96,12 @@ It is 15K gzipped and 47K unzipped.
 
 HTMX 2.0 is expected in late 2023 or early 2024.
 It will remove legacy support for things like IE,
-old style websockets, and old style server sent events.
+old style WebSockets, and old style server sent events.
 There will also be some changes to default behavior
 such as not enabling CORS by default.
 Other changes are not expected to be dramatic.
+
+HTMX has an extensive set of integration tests implemented in Mocha.
 
 ## Installing
 
@@ -339,9 +346,6 @@ which builds on React Native.
 - Study Alpine JS and consider using it with HTMX
 - Read essays by Carson Gross on the HTMX website.
 
-HTMX 2.0 will drop support for IE.
-HTMX has an extensive set of integration tests implemented in mocha.
-interest in HTMX exploded in 2023 due to videos by the Primeagen and Fireship.
 you can still use REST APIs that return JSON. You just need to add another layer of HTTP services that call those and translate JSON into HTML. This could be useful for also implementing mobile apps that use the JSON-based API’s.
 hx-push-url=“true” gives history support, so the back button can go to a previous state of the UI. Try this! it does this by snapshoting the entire DOM and saving it in localstorage. this uses the standard history API. writing to localstorage can be disabled if desired.
 use the hx-request HTTP header to determine how to render a page when the browser is refreshed. this enables support for deep links. this is useful when HTMX has replaced portions of a page.
