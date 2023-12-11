@@ -88,7 +88,8 @@ Options for implementing client-side processing include vanilla JavaScript,
 {% aTargetBlank "https://alpinejs.dev", "Alpine" %}, and
 {% aTargetBlank "https://hyperscript.org", "_hyperscript" %}.
 
-\_hyperscript was created by Big Sky Software.
+\_hyperscript was created by Big Sky Software
+and has not yet reached version 1.0.
 It is inspired by the HyperTalk and AppleScript languages
 that were used in the HyperCard application for Apple computers.
 From Wikipedia, HyperCard "is among the first successful hypermedia systems
