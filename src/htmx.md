@@ -183,13 +183,13 @@ The steps to do this are as follows:
    This file can also define custom CSS classes.
 
 1. Generate a CSS file containing only the Tailwind classes uses in your app
-   by entering `bunx tailwindcss -i ./global.css -o tailwind.css --watch`
+   by entering `bunx tailwindcss -i ./global.css -o public/tailwind.css --watch`
    Note that this continues watching for changes to `.tsx` files
    and produces a new version of `tailwind.css` when changes are detected.
 1. Include the following `link` element in the base HTML of the app.
 
    ```html
-   <link href="/tailwind.css" rel="stylesheet" />
+   <link href="/public/tailwind.css" rel="stylesheet" />
    ```
 
 This also requires enabling serving static files with the following steps:
@@ -269,6 +269,87 @@ The `hx-swap` attribute also supports the following space-separated modifiers:
 
 hx-select
 hx-preserve
+
+## Active Search
+
+HTMX can be used to implement an active search where a list of matching data
+is retrieved as the user enters search text.
+The following code demonstrates this.
+The full project can be found in {% aTargetBlank
+"https://github.com/mvolkmann/bun-examples/tree/main/active-search", "GitHub" %}.
+
+In particular, see the `hx-` attributes on the `input` element below.
+
+```js
+import {Elysia} from 'elysia';
+import {html} from '@elysiajs/html'; // enables use of JSX
+import {staticPlugin} from '@elysiajs/static'; // enables static file serving
+
+const app = new Elysia();
+app.use(html());
+app.use(staticPlugin());
+
+const names: string[] = [
+  'Amanda',
+  'Gerri',
+  'Jeremy',
+  'Mark',
+  'Meghan',
+  'Pat',
+  'RC',
+  'Richard',
+  'Tami'
+];
+
+// TODO: What type should be used for children?
+const BaseHtml = ({children}: {children: any}) => (
+  <html>
+    <head>
+      <title>HTMX Active Search</title>
+      <link href="/public/tailwind.css" rel="stylesheet" />
+      <script src="https://unpkg.com/htmx.org@1.9.9"></script>
+    </head>
+    <body class="p-8">{children}</body>
+  </html>
+);
+
+app.get('/', () => {
+  return (
+    <BaseHtml>
+      <label class="font-bold mr-4" for="name">
+        Name
+      </label>
+      <input
+        autofocus="true"
+        class="border border-gray-500 p-1 rounded-lg"
+        hx-post="/search"
+        hx-trigger="keyup changed delay:200ms"
+        hx-target="#matches"
+        name="name"
+        size="10"
+      />
+      <ul id="matches" />
+    </BaseHtml>
+  );
+});
+
+type Body = {name: string};
+app.post('/search', ({body}) => {
+  const lowerName = (body as Body).name.toLowerCase();
+  if (lowerName == '') return '';
+  const matches = names.filter(n => n.toLowerCase().includes(lowerName));
+  return (
+    <ul>
+      {matches.map(name => (
+        <li>{name}</li>
+      ))}
+    </ul>
+  );
+});
+
+app.listen(1919);
+console.log('listening on port', app.server?.port);
+```
 
 ## Indicators
 
