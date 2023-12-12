@@ -39,6 +39,34 @@ window.Alpine = Alpine; // optional for DevTools access
 Alpine.start();
 ```
 
+## Basic Example
+
+The following code renders a button that toggles whether a `div` is visible.
+The `x-data` attribute defines state that is
+available on that element and its descendants.
+The `x-show` attribute determines whether that element should be shown
+based on the value of the `open` state property.
+When `open` is false, the attribute `style="display: none;"`
+is added to the `div`.
+That attribute is removed when `open` is true.
+
+```html
+<html>
+  <head>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+  </head>
+  <body>
+    <div x-data="{open: false}">
+      <button @click="open = !open">Toggle</button>
+      <div x-show="open">Hello, World!</div>
+    </div>
+  </body>
+</html>
+```
+
 ## Attributes
 
 ### x-bind
