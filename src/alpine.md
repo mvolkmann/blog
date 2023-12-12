@@ -361,6 +361,21 @@ $store.profile.role = 'admin';
 
 ### Persist
 
+## Miscellaneous Details
+
+To specify Alpine attributes that are not tied to a rendered element,
+add them to a `template` element.
+These are somewhat like fragments in React.
+For example:
+
+```html
+<div x-data="{colors: ['red', 'green', 'blue']}">
+  <template x-for="color in colors">
+    <div x-text="color"></div>
+  </template>
+</div>
+```
+
 ## Advanced Topics
 
 ### Async
