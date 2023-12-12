@@ -201,12 +201,17 @@ For example:
 
 ### x-if
 
-The `x-if` attribute conditionally includes this element.
+The `x-if` attribute conditionally includes the contents of a `template` element.
+It can only be used in `template` elements.
 For example:
 
 ```html
-<div x-if="score >= 21">...</div>
+<template x-if="score >= 21">
+  <div>Winner!</div>
+</template>
 ```
+
+The `x-show` directive is similar.
 
 ### x-ignore
 
@@ -275,12 +280,17 @@ For example:
 
 ### x-show
 
-The `x-show` attribute determines whether this element is visible.
+The `x-show` attribute determines whether this element should be visible.
+
+When the condition is false, the attribute `style="display: none;"` is added.
+That attribute is removed when the condition is true.
 For example:
 
 ```html
 <h2 x-show="score == 21">Blackjack!</h2>
 ```
+
+The `x-if` directive is similar.
 
 ### x-teleport
 
@@ -453,6 +463,14 @@ $store.profile.role = 'admin';
 ### Intersect
 
 ### Mask
+
+The {% aTargetBlank "https://alpinejs.dev/plugins/mask", "Mask" %} plugin
+formats text inputs in specific ways.
+For example:
+
+```html
+
+```
 
 ### Morph
 
