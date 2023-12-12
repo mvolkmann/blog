@@ -173,12 +173,15 @@ For example:
 
 ### x-for
 
-The `x-for` attribute repeats this element and all its contents
+The `x-for` attribute repeats the contents of a `template` element
 once for each item in an array.
+It can only be used in `template` elements.
 For example:
 
 ```html
-<div x-for="todo in todos">...</div>
+<template x-for="todo in todos">
+  <div x-text="todo.text"></div>
+</template>
 ```
 
 ### x-html
