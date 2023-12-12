@@ -321,11 +321,36 @@ instead of `<span x-text="var"></span>`.
 
 The `x-transition` directive causes this element to transition in and out
 which it is shown and hidden.
-TODO: Can the transition be customized?
+By default it changes the opacity between 0 and 1
+and changes the scale between 0% and 100%.
+
 For example:
 
 ```html
 <h2 x-show="score == 21" x-transition>Blackjack!</h2>
+```
+
+To change the transition duration, add the `duration` modifier.
+The duration must be specified in milliseconds, not seconds.
+For example:
+
+```html
+<h2 x-show="score == 21" x-transition.duration.1000ms>Blackjack!</h2>
+```
+
+To only apply only the opacity transition, add the `opacity` modifier.
+Note that multiple modifiers can be applied.
+For example:
+
+```html
+<h2 x-show="score == 21" x-transition.opacity.duration.1000ms>Blackjack!</h2>
+```
+
+To only apply only the scale transition, add the `scale` modifier.
+For example:
+
+```html
+<h2 x-show="score == 21" x-transition.scale.duration.1000ms>Blackjack!</h2>
 ```
 
 ## Properties
