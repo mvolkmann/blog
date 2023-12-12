@@ -109,8 +109,10 @@ For example:
 ### x-data
 
 The `x-data` attribute declares an HTML element to be an Alpine component
-and optional declares associated state that Alpine watches for changes.
-The data is scoped to this element and its descendant elements.
+and optionally declares associated state that Alpine watches for changes.
+The state is scoped to this element and its descendant elements.
+It can include properties and functions.
+
 For example:
 
 ```html
@@ -310,6 +312,9 @@ For example:
 <div x-text="temperature >= 80 ? 'hot' : 'cold'"></div>
 ```
 
+It's a shame we can't use a more terse syntax like `{var}`
+instead of `<span x-text="var"></span>`.
+
 ### x-transition
 
 The `x-transition` attribute causes this element to transition in and out
@@ -371,6 +376,7 @@ For example:
 
 This magic property holds data associated with an event
 that was dispatched using the `$dispatch` function.
+It is used to access the event inside an event handling function.
 See the example under `$dispatch`.
 
 ### $id
@@ -468,12 +474,53 @@ Each plugin used requires a new script tag.
 ### Mask
 
 The {% aTargetBlank "https://alpinejs.dev/plugins/mask", "Mask" %} plugin
-formats text inputs in specific ways.
+formats text inputs in specific ways using a mask whose characters
+indicate the set of characters that can be entered.
+The supported mask characters are `*` for any character,
+`a` for alphabetic characters (a-z and A-Z),
+and `9` for numeric characters (0-9).
+
 For example:
 
 ```html
-
+<html>
+  <head>
+    <!-- The plugin must be loaded before Alpine.js. -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.x.x/dist/cdn.min.js"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+  </head>
+  <script>
+    // This returns a string like "April 16, 1961".
+    const formatDate = date =>
+      new Date(date).toLocaleDateString('default', {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric'
+      });
+  </script>
+  <body x-data="{date: '', placeholder: 'MM/DD/YYYY'}">
+    <input
+      :placeholder="placeholder"
+      size="12"
+      x-mask="99/99/9999"
+      x-model="date"
+    />
+    <div x-show="date.length == placeholder.length">
+      You entered <span x-text="formatDate(date)"></span>.
+    </div>
+  </body>
+</html>
 ```
+
+The `x-mask:dynamic` directive takes a JavaScript function name
+that is called to determine the mask based what has been entered so far.
+For entering currency amounts, use the value `$money($input)`.
 
 ### Morph
 
@@ -504,12 +551,6 @@ For example:
 
 ### Reactivity
 
-## Unorganized Content
+## TO DOs
 
-see the mask plug-in for formatting text as a user types such as phone numbers.
-in Alpine blog page, say what the current version is. It is three point something.
-The x-data Object can contain both properties and functions.
-implement your svelte todo app using only Alpine, and add that to the blog page.
-it’s too bad that an Alpine, rendering the value of a variable requires
-<span x-text=“var”></span> instead of just something like {var}
-in event handling code, you can access the current event with $event.
+- Implement your Svelte todo app using only Alpine and add that to the blog page.
