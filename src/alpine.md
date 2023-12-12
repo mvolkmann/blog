@@ -454,6 +454,9 @@ $store.profile.role = 'admin';
 
 ## Plugins
 
+Alpine plugins add functionality.
+Each plugin used requires a new script tag.
+
 ### Anchor
 
 ### Collapse
@@ -500,3 +503,13 @@ For example:
 ### Extending
 
 ### Reactivity
+
+## Unorganized Content
+
+see the mask plug-in for formatting text as a user types such as phone numbers.
+in Alpine blog page, say what the current version is. It is three point something.
+The x-data Object can contain both properties and functions.
+implement your svelte todo app using only Alpine, and add that to the blog page.
+it’s too bad that an Alpine, rendering the value of a variable requires
+<span x-text=“var”></span> instead of just something like {var}
+in event handling code, you can access the current event with $event.
