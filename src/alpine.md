@@ -271,7 +271,30 @@ This magic property ...
 
 ### $dispatch
 
-This magic property ...
+This magic property is a function that can be called
+to dispatch a standard or custom DOM event.
+It must be passed an event name.
+It can optionally be passed data that can be accessed with `$event.detail`.
+
+If elements that listen for the event are not
+ancestors of the elements that dispatch the event,
+add the `.window` modifier when listening.
+For example, `x-on="my-event.window="{code}"`.
+
+The following code demonstrates dispatching and listening for a custom event.
+
+```html
+<div x-data="{eventData: {}}" x-on:my-event="eventData = $event.detail">
+  <button x-on:click="$dispatch('my-event', {foo: 'bar'})">Send Event</button>
+
+  <!-- After the button is clicked, this will render {"foo":"bar"}. -->
+  <div x-text="JSON.stringify(eventData)"></div>
+
+  <!-- This element is not an ancestor of the button that dispatches the event,
+       so the "window" modifier is needed. -->
+  <div x-on:my-event.window="console.log($event)"></div>
+</div>
+```
 
 ### $el
 
@@ -281,6 +304,12 @@ For example:
 ```html
 <button @click="$el.innerHTML = 'Clicked'">Press</button>
 ```
+
+### $event
+
+This magic property holds data associated with an event
+that was dispatched using the `$dispatch` function.
+See the example under `$dispatch`.
 
 ### $id
 
