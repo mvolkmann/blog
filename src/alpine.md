@@ -62,6 +62,12 @@ The `x-cloak` attribute hides an element until Alpine finishes processing it.
 For example:
 
 ```html
+<style>
+  [x-cloak] {
+    display: none;
+  }
+</style>
+
 <div x-cloak ...>...</div>
 ```
 

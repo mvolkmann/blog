@@ -181,7 +181,8 @@ The steps to do this are as follows:
 
 1. Install Tailwind by entering `bun install -d tailwindcss`
 1. Create the file `tailwind.config.js` by entering `bunx tailwindcss init`
-1. Edit the value of `content` in `tailwind.config.js` to be `content: ['**/*.tsx'],`
+1. Edit the value of `content` in `tailwind.config.js`
+   to be `content: ['**/*.tsx'],`
 1. Create the file `global.css` containing the following:
 
    ```css
@@ -196,7 +197,7 @@ The steps to do this are as follows:
 
    Enter `bunx tailwindcss -i ./global.css -o public/tailwind.css --watch`
    to generate `public/tailwind.css` now and
-   again every time any `.tsx` file in the project is modified.
+   again every time any of thew "content" files are modified.
 
    Consider adding a `package.json` script for this such as:
 

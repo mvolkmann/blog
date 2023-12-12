@@ -105,6 +105,66 @@ The base styles in Tailwind provide a CSS reset known as "Preflight".
   for element layout and not for properties more likely
   to be overridden such as fonts and colors.
 
+## No Build Process
+
+There are two approaches for using Tailwind without a build process.
+
+The easiest approach is to include it from a CDN with this `link` tag:
+
+```html
+<script src="https://cdn.tailwindcss.com"></script>
+```
+
+This has the downside that it includes every Tailwind CSS class,
+not just the ones actually used in the app.
+
+A more involved approach is to generate a CSS file that
+only contains the Tailwind CSS classes that are actually used.
+The steps to do this are as follows:
+
+1. Install Tailwind by entering `npm install -D tailwindcss`
+1. Create the file `tailwind.config.js` by entering `npx tailwindcss init`
+1. Edit the value of `content` in `tailwind.config.js`
+   to specify the files that might used Tailwind classes.
+   For example:
+
+   ```json
+   content: ["**/*.{html,tsx}"],
+   ```
+
+1. Create the file `global.css` containing the following:
+
+   ```css
+   @tailwind base;
+   @tailwind components;
+   @tailwind utilities;
+   ```
+
+   This file can also define custom CSS classes.
+
+1. Generate a CSS file containing only the Tailwind classes used in your app.
+
+   Enter `npx tailwindcss -i ./global.css -o public/tailwind.css --watch`
+   to generate `public/tailwind.css` now and
+   again every time any of the "content" files are modified.
+
+   Consider adding a `package.json` script for this such as:
+
+   ```json
+   "tw": "npx tailwindcss -i ./global.css -o public/tailwind.css --watch"
+   ```
+
+1. Include the following `link` element in the base HTML of the app.
+
+   ```html
+   <link href="/public/tailwind.css" rel="stylesheet" />
+   ```
+
+This also requires enabling serving static files with the following steps:
+
+1. Install a plugin by entering `bun add @elysiajs/static`
+1. In the server code, add a call to `app.use(staticPlugin());`
+
 ## Basic Build Process
 
 To install Tailwind in a project that has a `package.json` file,
