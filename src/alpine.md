@@ -342,8 +342,24 @@ This magic property ...
 
 ### $store
 
-This magic property provides access to the named global stores.
+To create a named, global store, use JavaScript code like the following:
+
+```js
+document.addEventListener('alpine:init', () => {
+  Alpine.store('profile', {
+    username: '',
+    role: '',
+    someFunction(args) { ... }
+  });
+});
+```
+
+To access a store in the value of an Alpine directive,
+use the `$store` magic property.
 For example, `$store.profile.role`.
+
+To access a store in a JavaScript function,
+use code like `Alpine.store('profile')`.
 
 ### $watch
 
