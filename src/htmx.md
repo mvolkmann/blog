@@ -221,7 +221,9 @@ hx-sync
 hx-params
 
 The `hx-confirm` attribute specifies a message
-to display in a confirmation dialog.
+to display in a confirmation dialog using the `Window` method `confirm`.
+The dialog is very plain and cannot be styled.
+It may be preferable to use a dialog that can be styled.
 An HTTP request is only sent and processed if the user clicks the OK button.
 
 ## URLs
