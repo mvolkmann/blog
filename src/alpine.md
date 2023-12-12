@@ -125,6 +125,40 @@ For example: `<div x-data>`.
 
 Another way to declare state is with the `Alpine.store` function.
 
+The following code prompts for an image query
+and displays an image from unsplash.
+
+```html
+<html>
+  <head>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+  </head>
+  <body>
+    <div
+      x-data="{
+        imgUrl: '',
+        query: '',
+        getImage() {
+            this.imgUrl = `https://source.unsplash.com/featured/?${this.query}`;
+            this.query = '';
+        }
+    }"
+    >
+      <form @submit.prevent="getImage">
+        <input type="text" x-model="query" />
+        <button>Search</button>
+      </form>
+      <div x-show="imgUrl">
+        <img :src="imgUrl" style="width: 300px" />
+      </div>
+    </div>
+  </body>
+</html>
+```
+
 ### x-effect
 
 The `x-effect` attribute executes JavaScript code
