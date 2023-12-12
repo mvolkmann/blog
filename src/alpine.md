@@ -17,6 +17,8 @@ uses custom HTML attributes to add dynamic behavior.
 It adds support for 18 attributes (aka directives),
 6 properties, and 2 methods.
 
+The minified Alpine library is only 43K.
+
 To use this, add the following `script` tag:
 
 ```html
@@ -231,21 +233,52 @@ For example:
 
 ### $data
 
+This magic property ...
+
 ### $dispatch
+
+This magic property ...
 
 ### $el
 
+This magic property provides access to the DOM node of the current element.
+For example:
+
+```html
+<button @click="$el.innerHTML = 'Clicked'">Press</button>
+```
+
 ### $id
+
+This magic property ...
 
 ### $nextTick
 
+This magic property ...
+
 ### $refs
+
+This magic property provides access to DOM nodes
+whose elements have the `x-ref` attribute.
+For example:
+
+```html
+<p x-ref="status">Pending</span>
+<button @click="$refs.status.innerHTML = 'Processing'">Process</button>
+```
 
 ### $root
 
+This magic property ...
+
 ### $store
 
+This magic property provides access to the named global stores.
+For example, `$store.profile.role`.
+
 ### $watch
+
+This magic property ...
 
 ## Global Methods
 
@@ -254,6 +287,29 @@ For example:
 ### Alpine.data
 
 ### Alpine.store
+
+The `Alpine.store` function defines a named, global store.
+It takes a name string and an object with properties and optional methods.
+This function can be called any number of times
+to define multiple global stores.
+For example:
+
+```js
+import Alpine from 'alpinejs';
+Alpine.store('profile', {
+  id: 0,
+  username: '',
+  role: ''
+});
+Alpine.store('todos', []);
+```
+
+Stores are accessed with the magic property `$store`.
+For example:
+
+```js
+$store.profile.role = 'admin';
+```
 
 ## Plugins
 
