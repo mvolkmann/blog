@@ -84,6 +84,8 @@ For example:
 </button>
 ```
 
+A shorthand for `x-bind:` is just `:`.
+
 ### x-cloak
 
 The `x-cloak` attribute hides an element until Alpine finishes processing it.
@@ -192,6 +194,8 @@ For example:
 </div>
 ```
 
+TODO: See all the modifiers that can be applied to x-model like debounce.
+
 ### x-modelable
 
 The `x-modelable` attribute ...?
@@ -209,6 +213,8 @@ For example:
 ```html
 <button x-on:click="like = !like">Toggle</button>
 ```
+
+A shorthand for `x-on:` is just `@`.
 
 ### x-ref
 
