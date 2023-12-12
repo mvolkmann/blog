@@ -28,11 +28,12 @@ To use this, add the following `script` tag:
 
 Alternatively, install Alpine with
 `npm install alpine.js` or `bun add alpine.js`.
-Then import, register, and start Alpine with the following:
+Then import, register, and start Alpine with the following
+once in each distinct web page:
 
 ```js
 import Alpine from 'alpinejs';
-window.Alpine = Alpine;
+window.Alpine = Alpine; // optional for DevTools access
 Alpine.start();
 ```
 
@@ -65,7 +66,9 @@ For example:
 ### x-data
 
 The `x-data` attribute declares an HTML element to be an Alpine component
-and declares its associated data.
+and declares its associated state that Alpine watched for changes.
+The data is scoped to this element and its descendant elements.
+Another way to declare state is with the `Alpine.store` function.
 For example:
 
 ```html
