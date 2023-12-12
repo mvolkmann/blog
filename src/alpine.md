@@ -419,6 +419,9 @@ document.addEventListener('alpine:init', () => {
 });
 ```
 
+The value passed as the second argument to the `Alpine.store` function
+can be a boolean, number, string, array, or object.
+
 To access a store in the value of an Alpine directive,
 use the `$store` magic property.
 For example, `$store.profile.role`.
