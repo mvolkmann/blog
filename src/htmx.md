@@ -211,6 +211,13 @@ The steps to do this are as follows:
    <link href="/public/tailwind.css" rel="stylesheet" />
    ```
 
+   The documentation for the `@elysiajs/static` plugin says
+   it defaults to looking in the `public` directory,
+   but it actual defaults to looking in the root directory
+   and I haven't found a way to change that.
+   See this {% aTargetBlank "https://github.com/elysiajs/elysia/issues/352",
+   "issue" %}.
+
 This also requires enabling serving static files with the following steps:
 
 1. Install a plugin by entering `bun add @elysiajs/static`
