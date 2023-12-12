@@ -76,8 +76,7 @@ The JavaScript code can call builtin and custom JavaScript functions.
 
 ### x-bind
 
-The `x-bind` attribute dynamically sets another attribute,
-typically using the ternary operator.
+The `x-bind` directive dynamically sets another attribute.
 For example:
 
 ```html
@@ -93,7 +92,7 @@ A shorthand for `x-bind:` is just `:`.
 
 ### x-cloak
 
-The `x-cloak` attribute hides an element until Alpine finishes processing it.
+The `x-cloak` directive hides an element until Alpine finishes processing it.
 For example:
 
 ```html
@@ -108,7 +107,7 @@ For example:
 
 ### x-data
 
-The `x-data` attribute declares an HTML element to be an Alpine component
+The `x-data` directive declares an HTML element to be an Alpine component
 and optionally declares associated state that Alpine watches for changes.
 The state is scoped to this element and its descendant elements.
 It can include properties and functions.
@@ -163,7 +162,7 @@ and displays an image from unsplash.
 
 ### x-effect
 
-The `x-effect` attribute executes JavaScript code
+The `x-effect` directive executes JavaScript code
 every time a variable it uses changes.
 For example:
 
@@ -173,7 +172,7 @@ For example:
 
 ### x-for
 
-The `x-for` attribute repeats the contents of a `template` element
+The `x-for` directive repeats the contents of a `template` element
 once for each item in an array.
 It can only be used in `template` elements.
 For example:
@@ -186,7 +185,7 @@ For example:
 
 ### x-html
 
-The `x-html` attribute sets the inner HTML of this element
+The `x-html` directive sets the inner HTML of this element
 to the result of a given JavaScript expression which is typically HTML text.
 For example:
 
@@ -197,7 +196,7 @@ For example:
 
 ### x-id
 
-The `x-id` attribute ...?
+The `x-id` directive ...?
 For example:
 
 ```html
@@ -206,7 +205,7 @@ For example:
 
 ### x-if
 
-The `x-if` attribute conditionally includes the contents of a `template` element.
+The `x-if` directive conditionally includes the contents of a `template` element.
 It can only be used in `template` elements.
 For example:
 
@@ -220,7 +219,7 @@ The `x-show` directive is similar.
 
 ### x-ignore
 
-The `x-ignore` attribute prevents this element and its descendants
+The `x-ignore` directive prevents this element and its descendants
 from being initialized by Alpine.
 For example:
 
@@ -230,7 +229,7 @@ For example:
 
 ### x-init
 
-The `x-init` attribute executes given JavaScript code
+The `x-init` directive executes given JavaScript code
 when this element is initialized.
 For example:
 
@@ -240,7 +239,7 @@ For example:
 
 ### x-model
 
-The `x-model` attribute binds an input value to an `x-data` variable.
+The `x-model` directive binds an input value to an `x-data` variable.
 For example:
 
 ```html
@@ -254,7 +253,7 @@ TODO: See all the modifiers that can be applied to x-model like debounce.
 
 ### x-modelable
 
-The `x-modelable` attribute ...?
+The `x-modelable` directive ...?
 For example:
 
 ```html
@@ -263,7 +262,7 @@ For example:
 
 ### x-on
 
-The `x-on` attribute executes given JavaScript code when a given event occurs.
+The `x-on` directive executes given JavaScript code when a given event occurs.
 For example:
 
 ```html
@@ -274,7 +273,7 @@ A shorthand for `x-on:` is just `@`.
 
 ### x-ref
 
-The `x-ref` attribute adds a reference name to this element
+The `x-ref` directive adds a reference name to this element
 so other elements can access its value with `$refs.{name}`.
 For example:
 
@@ -285,7 +284,7 @@ For example:
 
 ### x-show
 
-The `x-show` attribute determines whether this element should be visible.
+The `x-show` directive determines whether this element should be visible.
 
 When the condition is false, the attribute `style="display: none;"` is added.
 That attribute is removed when the condition is true.
@@ -299,7 +298,7 @@ The `x-if` directive is similar.
 
 ### x-teleport
 
-The `x-teleport` attribute ...?
+The `x-teleport` directive ...?
 For example:
 
 ```html
@@ -308,7 +307,7 @@ For example:
 
 ### x-text
 
-The `x-text` attribute specifies the text content of this element.
+The `x-text` directive specifies the text content of this element.
 For example:
 
 ```html
@@ -320,7 +319,7 @@ instead of `<span x-text="var"></span>`.
 
 ### x-transition
 
-The `x-transition` attribute causes this element to transition in and out
+The `x-transition` directive causes this element to transition in and out
 which it is shown and hidden.
 TODO: Can the transition be customized?
 For example:
@@ -393,7 +392,7 @@ This magic property ...
 ### $refs
 
 This magic property provides access to DOM nodes
-whose elements have the `x-ref` attribute.
+whose elements have the `x-ref` directive.
 For example:
 
 ```html
@@ -534,7 +533,7 @@ For entering currency amounts, use the value `$money($input)`.
 
 ## Miscellaneous Details
 
-To specify Alpine attributes that are not tied to a rendered element,
+To specify Alpine directives that are not tied to a rendered element,
 add them to a `template` element.
 These are somewhat like fragments in React.
 For example:
