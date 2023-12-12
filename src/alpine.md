@@ -557,6 +557,14 @@ For example:
 
 ### Reactivity
 
+## Common Mistakes
+
+Did you forget to add the `x-data` directive on an ancestor element
+of elements that use other Alpine directives?
+
+Did you apply the `x-if` or `x-for` directives
+to an element other than `template`?
+
 ## TO DOs
 
 - Implement your Svelte todo app using only Alpine and add that to the blog page.
