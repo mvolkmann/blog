@@ -320,7 +320,7 @@ instead of `<span x-text="var"></span>`.
 ### x-transition
 
 The `x-transition` directive causes this element to transition in and out
-which it is shown and hidden.
+when it is shown and hidden using the `x-show` directive.
 By default it changes the opacity between 0 and 1
 and changes the scale between 0% and 100%.
 
@@ -352,6 +352,9 @@ For example:
 ```html
 <h2 x-show="score == 21" x-transition.scale.duration.1000ms>Blackjack!</h2>
 ```
+
+For more detail, see {% aTargetBlank
+"https://alpinejs.dev/directives/transition", "x-transition" %}.
 
 ## Properties
 
