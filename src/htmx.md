@@ -192,10 +192,18 @@ The steps to do this are as follows:
 
    This file can also define custom CSS classes.
 
-1. Generate a CSS file containing only the Tailwind classes uses in your app
-   by entering `bunx tailwindcss -i ./global.css -o public/tailwind.css --watch`
-   Note that this continues watching for changes to `.tsx` files
-   and produces a new version of `tailwind.css` when changes are detected.
+1. Generate a CSS file containing only the Tailwind classes used in your app.
+
+   Enter `bunx tailwindcss -i ./global.css -o public/tailwind.css --watch`
+   to generate `public/tailwind.css` now and
+   again every time any `.tsx` file in the project is modified.
+
+   Consider adding a `package.json` script for this such as:
+
+   ```json
+   "tw": "bunx tailwindcss -i ./global.css -o public/tailwind.css --watch"
+   ```
+
 1. Include the following `link` element in the base HTML of the app.
 
    ```html
