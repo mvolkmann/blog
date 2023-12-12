@@ -110,8 +110,13 @@ Another way to declare state is with the `Alpine.store` function.
 For example:
 
 ```html
-<div x-data={ fruit: 'apple', count: 0 }>...</div>
+<div x-data="{ fruit: 'apple', count: 0 }">...</div>
 ```
+
+From {% aTargetBlank "https://alpinejs.dev/essentials/state#data-less-alpine",
+"Data-less Alpine" %}, "Sometimes you may want to use Alpine functionality,
+but don't need any reactive data.
+In these cases, you can opt out of passing an expression to x-data."
 
 ### x-effect
 
