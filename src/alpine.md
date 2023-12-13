@@ -446,6 +446,14 @@ The event name can be followed by the following modifiers:
   This causes the event listener to be registered on the `window` object
   instead of on the current element.
 
+When listening for key events, modifiers can specify a key
+that must be pressed or held down in order to trigger event handling.
+These include `.alt`, `.caps-lock`, `.cmd`, `.ctrl`, `.down` (arrow key),
+`.enter`, `.equal`, `.escape`, `.left` (arrow key),
+`.meta` (command key in macOS, Windows key in Windows),
+`.period`, `.right` (arrow key), `.shift`, `.slash`, `.space`,
+`.tab`, and `.up` (arrow key).
+
 ### x-ref
 
 The `x-ref` directive adds a reference name to this element
