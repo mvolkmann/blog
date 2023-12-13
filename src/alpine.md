@@ -463,11 +463,14 @@ For more detail, see {% aTargetBlank
 
 ## Methods
 
-## Magics
+## Magic Properties and Functions
 
 ### $data
 
-This magic property ...
+This magic property provides access to the
+`x-data` object on the nearest ancestor element.
+It can be used to pass the entire object to a JavaScript function
+instead of passing individual properties.
 
 ### $dispatch
 
