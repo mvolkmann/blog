@@ -270,6 +270,40 @@ For example:
 </div>
 ```
 
+If array items will be added, deleted, or reordered,
+the `template` element should include the `key` attribute
+with a unique value for each array item.
+This enables Alpine to better managing updating the DOM.
+For example:
+
+```html
+<div
+  x-data="{
+    addDog() {
+      this.dogs.push({
+        id: this.dogs.length + 1,
+        name: 'Goofy',
+        breed: 'Bloodhound',
+      })
+    },
+    dogs: [
+      {id: 1, name: 'Maisey', breed: 'Treeing Walker Coonhound'},
+      {id: 2, name: 'Ramsay', breed: 'Native American Indian Dog'},
+      {id: 3, name: 'Oscar', breed: 'German Shorthaired Pointer'},
+      {id: 4, name: 'Comet', breed: 'Whippet'},
+    ],
+    getSortedDogs() {
+      return this.dogs.sort((a, b) => a.name.localeCompare(b.name))
+    }
+  }"
+>
+  <template x-for="dog in getSortedDogs()" :key="dog.id">
+    <div x-text="`${dog.name} is a ${dog.breed}.`"></div>
+  </template>
+  <button @click="addDog">Add Dog</button>
+</div>
+```
+
 ### x-html
 
 The `x-html` directive sets the inner HTML of this element
@@ -290,6 +324,8 @@ See the section below describing `$id`.
 
 The `x-if` directive conditionally includes the contents of a `template` element.
 It can only be used in `template` elements.
+When the condition is false, the element will not be included in the DOM.
+
 For example:
 
 ```html
@@ -538,7 +574,7 @@ The event name can be followed by the following modifiers:
 When listening for key events, modifiers can specify a key
 that must be pressed or held down in order to trigger event handling.
 These include `.alt`, `.caps-lock`, `.cmd`, `.ctrl`, `.down` (arrow key),
-`.enter`, `.equal`, `.escape`, `.left` (arrow key),
+`.enter` (return key), `.equal`, `.escape`, `.left` (arrow key),
 `.meta` (command key in macOS, Windows key in Windows),
 `.period`, `.right` (arrow key), `.shift`, `.slash`, `.space`,
 `.tab`, and `.up` (arrow key).
@@ -557,9 +593,10 @@ For example:
 ### x-show
 
 The `x-show` directive determines whether this element should be visible.
-
+The element will be present in the DOM regardless.
 When the condition is false, the attribute `style="display: none;"` is added.
 That attribute is removed when the condition is true.
+
 For example:
 
 ```html
@@ -567,6 +604,10 @@ For example:
 ```
 
 The `x-if` directive is similar.
+If constructing the element is expensive
+(for example, sending an API request to fetch data),
+it is preferred to use `x-if` in order to avoid
+taking the time to construct an element that will not be visible.
 
 ### x-teleport
 
