@@ -316,6 +316,12 @@ For example:
 // TODO: Can you chain a call to "json" like this?
 ```
 
+The official documentation provides this warning:
+
+"Only use on trusted content and never on user-provided content.
+Dynamically rendering HTML from third parties
+can easily lead to XSS vulnerabilities."
+
 ### x-id
 
 The `x-id` directive is used in conjunction with the `$id` function.
@@ -543,7 +549,7 @@ The event name can be followed by the following modifiers:
   This is used on `click` events to listen for
   clicks outside the current element.
   An example where this is useful is closing a modal dialog
-  when a user clicks outside it.
+  when a user clicks outside it or presses the escape key.
 
   For example:
 
@@ -567,7 +573,12 @@ The event name can be followed by the following modifiers:
     <body>
       <div x-data="{show: false}">
         <button @click="show = true">Show</button>
-        <p class="modal" x-show="show" @click.outside="show = false">
+        <p
+          class="modal"
+          x-show="show"
+          @click.outside="show = false"
+          @keyup.escape.window="show = false"
+        >
           Click outside to hide.
         </p>
       </div>
@@ -623,6 +634,9 @@ For example:
 
 The following example demonstrates using `x-ref` and `$refs`
 to manage a modal dialog created with the HTML `dialog` element.
+It can be closed by clicking the "OK" button,
+clicking outside the dialog, or pressing the escape key.
+The `dialog` element provides checking for the escape key.
 
 ```html
 <div
