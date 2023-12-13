@@ -4,6 +4,12 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+<style>
+    img {
+        border: 1px solid gray;
+    }
+</style>
+
 <figure style="width: 50%">
   <img alt="Alpine logo" style="border: 0"
     src="/blog/assets/alpine-logo.png?v={{pkg.version}}">
@@ -614,6 +620,61 @@ For example:
 
 For more detail, see {% aTargetBlank
 "https://alpinejs.dev/directives/transition", "x-transition" %}.
+
+## Progress Bar Example
+
+The following example combines some of the features we have seen so far.
+
+<img alt="Alpine progress bar" style="width: 50%"
+  src="/blog/assets/alpine-progress-bar.png?v={{pkg.version}}">
+
+```html
+<html>
+  <head>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <style>
+      .progress-bg {
+        background-color: gray;
+        height: 2rem;
+        position: relative;
+        width: 20rem;
+      }
+      .progress-bar {
+        height: 100%;
+        background-color: green;
+      }
+      .progress-value {
+        color: white;
+        font-family: sans-serif;
+        /* centers text in .progress-bg */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      x-data="{
+        percent: 0,
+        increment() {
+          this.percent = Math.min(100, this.percent + 5);
+        }
+    }"
+    >
+      <div class="progress-bg">
+        <div class="progress-bar" :style="`width: ${percent}%`"></div>
+        <div class="progress-value" x-text="`${percent}%`"></div>
+      </div>
+      <button @click="increment" style="margin-top: 1rem">Increment</button>
+    </div>
+  </body>
+</html>
+```
 
 ## Properties
 
