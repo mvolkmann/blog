@@ -813,7 +813,8 @@ instead of passing individual properties.
 This magic property is a function that can be called
 to dispatch a standard or custom DOM event.
 It must be passed an event name.
-It can optionally be passed data that can be accessed with `$event.detail`.
+It can optionally be passed any kind of data
+that can be accessed with `$event.detail`.
 
 If elements that listen for the event are not
 ancestors of the elements that dispatch the event,
