@@ -1028,6 +1028,67 @@ after the first click they do not change a value.
 </html>
 ```
 
+The following is another example of using `$watch`.
+It is based on the YouTube video {% aTargetBlank
+"https://youtu.be/uc6D2yocRsI?si=ZecBbjHha7r0ugus",
+"Learn Alpine.js: Project - Hackernews search" %}
+by {% aTargetBlank "https://www.youtube.com/@codecourse", "Codecourse" %}.
+This allows users to enter a query which is used to search for matching
+articles on {% aTargetBlank "https://news.ycombinator.com", "HackerNews" %}.
+
+```html
+<html>
+  <head>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <script>
+      async function search(query, data) {
+        if (query === '') {
+          data.results = [];
+          return;
+        }
+
+        try {
+          // This endpoint limits the number of hits returned to 20.
+          const url = 'https://hn.algolia.com/api/v1/search?query=' + query;
+          const response = await fetch(url);
+          const json = await response.json();
+          data.results = json.hits;
+        } catch (e) {
+          data.error = e.message;
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div
+      x-data="{error: undefined, query: '', results: []}"
+      x-init="$watch('query', query => search(query, $data))"
+    >
+      <label>
+        Query
+        <input autofocus size="20" type="text" x-model.debounce.500="query" />
+      </label>
+      <div style="color: red" x-show="error">
+        Error: <span x-text="error"></span>
+      </div>
+      <div x-show="results.length">
+        The search for "<span x-text="query"></span>" returned
+        <span x-text="results.length"></span> results.
+      </div>
+      <template x-for="result of results" :key="result.objectID">
+        <div>
+          <h4 style="margin-bottom: 0" x-text="result.title"></h4>
+          <a :href="result.url" target="_blank" x-text="result.url"></a>
+        </div>
+      </template>
+    </div>
+  </body>
+</html>
+```
+
 ## Global Methods
 
 ### Alpine.bind
