@@ -40,6 +40,12 @@ window.Alpine = Alpine; // optional for DevTools access
 Alpine.start();
 ```
 
+The design of Alpine is somewhat based on Vue.
+Vue uses `v-` for its attribute prefixes.
+During the initial implementation of Alpine, it did not yet have a name,
+so `x-` was chosen for its prefixes.
+That is why the prefix is not something like `a-` or `alp-`.
+
 ## Using TypeScript
 
 To use TypeScript in an Alpine project, see {% aTargetBlank
@@ -352,7 +358,7 @@ The following modifiers can be applied to the `x-model` directive:
   This converts the string value of the input to a number
   when setting the model variable.
 
-- `.throttle
+- `.throttle`
 
   This updates the model variable on the first value change
   and then repeatedly after some period of time (defaults to 250ms)
@@ -373,6 +379,72 @@ For example:
 ```
 
 A shorthand for `x-on:` is just `@`.
+
+The event name can be followed by the following modifiers:
+
+- `.camel`
+
+  HTML attributes do not support camelCasing.
+  This modifier enables listening for events whose name is camelCased.
+  For example, `@some-name.camel="..."` listens for `someName` events.
+
+- `.capture`
+
+  This executes event handling during the capture phase
+  instead of the bubbling phase.
+
+- `.debounce`
+
+  This delays processing the event until activity stops
+  for some period of time (defaults to 250ms).
+
+- `.document`
+
+  This causes the event listener to be registered on the `document` object
+  instead of on the current element.
+
+- `.dot`
+
+  This modifier enables listening for events that have dots in their name.
+  For example, `@some-name.camel="..."` listens for `some.name` events.
+
+- `.once`
+
+  This causes only the first matching event that is dispatched to be handled.
+
+- `.outside`
+
+  This is used on `click` events to listen for
+  clicks outside the current element.
+  An example where this is useful is closing a modal dialog
+  when a user clicks outside it.
+
+- `.passive`
+
+  This can improve scrolling performance when touch events are supported.
+
+- `.prevent`
+
+  This calls `$event.preventDefault()` when an event is handled.
+
+- `.self`
+
+  This restricts the event handling to only events that were
+  dispatched from the current element, not from descendant elements.
+
+- `.stop`
+
+  This calls `$event.stopPropagation()` when an event is handled.
+
+- `.throttle`
+
+  This processes the event immediately and then again after some period of time
+  (defaults to 250ms) even if activity has not stopped.
+
+- `.window`
+
+  This causes the event listener to be registered on the `window` object
+  instead of on the current element.
 
 ### x-ref
 
