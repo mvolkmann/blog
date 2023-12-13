@@ -360,13 +360,8 @@ The following modifiers can be applied to the `x-model` directive:
 
 ### x-modelable
 
-The `x-modelable` directive ...?
-
-For example:
-
-```html
-
-```
+The `x-modelable` directive exposes state "to the outside".
+It is useful when using certain templating frameworks such as Laravel Blade.
 
 ### x-on
 
