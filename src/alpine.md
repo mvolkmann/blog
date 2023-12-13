@@ -173,7 +173,9 @@ every time a variable it uses changes.
 For example:
 
 ```html
-<div x-effect="console.error('Problem:', problem)">...</div>
+<body x-data x-effect="updateStatus($store.data.todos)">
+  <div x-effect="console.error('Problem:', problem)">...</div>
+</body>
 ```
 
 ### x-for
@@ -202,12 +204,8 @@ For example:
 
 ### x-id
 
-The `x-id` directive ...?
-For example:
-
-```html
-
-```
+The `x-id` directive is used in conjunction with the `$id` function.
+See the section below describing `$id`.
 
 ### x-if
 
@@ -240,12 +238,17 @@ when this element is initialized.
 For example:
 
 ```html
-<div x-init="now = Date.now()">...</div>
+<div x-data="{ dogs: [] }" x-init="dogs = await (await fetch('/dogs')).json()">
+  <template x-for="dog of dogs"> ... </template>
+</div>
 ```
 
 ### x-model
 
-The `x-model` directive binds an input value to an `x-data` variable.
+The `x-model` directive creates a two-way binding between
+an input value to an `x-data` variable.
+Supported inputs include the HTML elements
+`input`, `textarea`, and `select`.
 For example:
 
 ```html
@@ -255,15 +258,87 @@ For example:
 </div>
 ```
 
-TODO: See all the modifiers that can be applied to x-model like debounce.
+The `x-model` directive can be applied to a set of related checkboxes
+to populate an array with the values of the selected checkboxes.
+For example:
+
+```html
+<div x-data="{colors: ['red', 'green', 'blue'], selectedColors: []}">
+  <template x-for="color in colors">
+    <div style="display: flex; align-items: center;">
+      <input type="checkbox" :value="color" x-model="selectedColors" />
+      <span x-text="color"></span>
+    </div>
+  </template>
+  <div x-show="selectedColors.length">
+    You selected <span x-text="selectedColors"></span>.
+  </div>
+</div>
+```
+
+The `x-model` directive can be applied to a set of related radio buttons
+to populate a variable with the value of the selected radio button.
+For example:
+
+````html
+<div x-data="{colors: ['red', 'green', 'blue'], selectedColor: ''}">
+  <template x-for="color in colors">
+    <div style="display: flex; align-items: center">
+      <input type="radio" :value="color" x-model="selectedColor" />
+      <span x-text="color"></span>
+    </div>
+  </template>
+  <div x-show="selectedColor">
+    You selected <span x-text="selectedColor"></span>.
+  </div>
+</div>
+```
+
+The `x-model` directive can be applied to a `select` element
+that allows either one or multiple selections.
+For example:
+
+```html
+```
+
+The following modifiers can be applied to the `x-model` directive:
+
+- `.boolean`
+
+  This converts the string value of the input to a boolean
+  when setting the model variable.
+
+- `.debounce`
+
+  This delays updating the model variable until typing stops
+  for some period of time (defaults to 250ms).
+
+- `.fill`
+
+  This uses `value` attribute to set initial value of model variable.
+
+- `.lazy`
+
+  This waits to update the model variable until focus leaves the input.
+
+- `.number`:
+
+  This converts the string value of the input to a number
+  when setting the model variable.
+
+- `.throttle
+
+  This updates the model variable on the first value change
+  and then repeatedly after some period of time (defaults to 250ms)
+  if the value has changed.
 
 ### x-modelable
 
 The `x-modelable` directive ...?
+
 For example:
 
 ```html
-
 ```
 
 ### x-on
@@ -417,7 +492,25 @@ See the example under `$dispatch`.
 
 ### $id
 
-This magic property ...
+This magic property is a function that generates an element id
+that will not conflict with other generated ids.
+It is useful for defining reusable components.
+
+The `$id` function takes a string argument
+that is used as the prefix for the generated ids.
+Each id generated with the same prefix uses a suffix of
+a dash followed by an incrementing integer starting from 1.
+
+For example, the following buttons will be given
+the ids "abc-btn-1" and "abc-btn-2":
+
+```html
+<button :id="$id('abc-btn')">First</button>
+<button :id="$id('abc-btn')">Second</button>
+```
+
+For more detail, including use of the `x-id` directive for grouping ids,
+see {% aTargetBlank "https://alpinejs.dev/magics/id", "$id" %}.
 
 ### $nextTick
 
@@ -601,3 +694,4 @@ to an element other than `template`?
 ## TO DOs
 
 - Implement your Svelte todo app using only Alpine and add that to the blog page.
+````
