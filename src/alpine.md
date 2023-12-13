@@ -189,10 +189,12 @@ but don't need any reactive data.
 In these cases, you can opt out of passing an expression to x-data."
 For example: `<div x-data>`.
 
-A likely reason this is required is so Alpine can avoid wasting time
-looking for other Alpine directives on elements that are
-not descendants of an element that uses the `x-data` directive.
-that element and descendants.
+Alpine uses a mutation observer to watch for changes in element trees
+whose root element contains the `x-data` directive.
+This avoids wasting time watching for changes to all elements,
+some of which are not affected by Alpine directives.
+It does however mean that if you forget to use the `x-data` directive,
+but use other Alpine directives, they will be ignored.
 
 Another way to declare state is with the `Alpine.store` function.
 
