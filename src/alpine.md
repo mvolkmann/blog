@@ -545,6 +545,36 @@ The event name can be followed by the following modifiers:
   An example where this is useful is closing a modal dialog
   when a user clicks outside it.
 
+  For example:
+
+  ```html
+  <html lang="en">
+    <head>
+      <script
+        defer
+        src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+      ></script>
+      <style>
+        .modal {
+          border: 1px solid red;
+          padding: 1rem;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+      </style>
+    </head>
+    <body>
+      <div x-data="{show: false}">
+        <button @click="show = true">Show</button>
+        <p class="modal" x-show="show" @click.outside="show = false">
+          Click outside to hide.
+        </p>
+      </div>
+    </body>
+  </html>
+  ```
+
 - `.passive`
 
   This can improve scrolling performance when touch events are supported.
