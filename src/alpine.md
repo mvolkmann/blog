@@ -591,6 +591,32 @@ For example:
 <div>Hello, <span x-text="$refs.name.value"></span>!</div>
 ```
 
+The following example demonstrates using `x-ref` and `$refs`
+to manage a modal dialog created with the HTML `dialog` element.
+
+```html
+<div
+  x-data
+  // This handles all dialogs.
+  @click="if ($event.target.nodeName === 'DIALOG') $event.target.close()"
+  // This only handles a specific dialog.
+  // @click="if ($event.target === $refs.myDialog) $event.target.close()"
+>
+  <button @click="$refs.myDialog.showModal()">Open Dialog</button>
+  <!-- We are adjusting margins and padding so the
+        form entirely fills the dialog, making all clicks
+        inside the dialog be seen as clicks on the form. -->
+  <dialog style="padding: 0" x-ref="myDialog">
+    <!-- When a form with method="dialog" is inside a
+          dialog element, submitting the form closes the dialog. -->
+    <form method="dialog" style="margin: 0; padding: 1rem">
+      <p style="margin-top: 0">This is the dialog content.</p>
+      <button>OK</button>
+    </form>
+  </dialog>
+</div>
+```
+
 ### x-show
 
 The `x-show` directive determines whether this element should be visible.
