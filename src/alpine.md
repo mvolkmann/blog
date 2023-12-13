@@ -89,18 +89,62 @@ The JavaScript code can call builtin and custom JavaScript functions.
 ### x-bind
 
 The `x-bind` directive dynamically sets another attribute.
+In some cases such as the `class` attribute it is possible to specify
+a value both without and with `x-bind` and both values will be used.
+
+A shorthand for `x-bind:` is just `:`.
+
 For example:
 
 ```html
-<button
-  x-bind:class="canSave ? bg-green-500 : bg-red-500"
-  x-bind:disabled="canSave"
->
-  Save
-</button>
+<html>
+  <head>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <style>
+      .primary {
+        border: none;
+        background-color: cornflowerblue;
+        color: white;
+        padding: 0.5rem;
+      }
+      .shout {
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+      .whisper {
+        color: lightgray;
+        text-transform: lowercase;
+      }
+    </style>
+  </head>
+  <body>
+    <div x-data="{important: false}">
+      <button
+        class="primary"
+        :class="important ? 'shout' : 'whisper'"
+        @click="important = !important"
+      >
+        Toggle
+      </button>
+    </div>
+  </body>
+</html>
 ```
 
-A shorthand for `x-bind:` is just `:`.
+The value of `:class` can be a JavaScript object
+whose keys are class names and whose values are boolean expressions.
+Each of the class names whose corresponding boolean expression
+evaluates to true will be applied.
+
+In the following example, if the value of `score` is greater than 15,
+both the "shout" and "large" CSS classes will be applied.
+
+```html
+<p :class="{shout: score > 10, large: score > 15}">Hello, World!</p>
+```
 
 ### x-cloak
 
@@ -310,7 +354,9 @@ For example:
     <select x-model="selectedColor">
       <option value="">Select a color</option>
       <template x-for="color in colors">
-        <option :value="color" x-text="color"></option>
+        <!-- <option :value="color" x-text="color"></option> -->
+        <!-- The value of each option defaults to its text. -->
+        <option x-text="color"></option>
       </template>
     </select>
     <span x-show="selectedColor">
@@ -323,7 +369,7 @@ For example:
         cmd or shift before clicking another. -->
     <select multiple x-model="selectedColors">
       <template x-for="color in colors">
-        <option :value="color" x-text="color"></option>
+        <option x-text="color"></option>
       </template>
     </select>
     <span x-show="selectedColors.length">
