@@ -661,6 +661,55 @@ The `dialog` element provides checking for the escape key.
 </div>
 ```
 
+The following example demonstrates using `x-ref` and `$refs`
+to allow users to copy the value of an `input` element to the system clipboard.
+This is done by clicking a button to the right of the `input`.
+After the button is clicked, a green checkmark is displayed for one second.
+Note how `$data` is passed to the `copy` function
+so it can modify the value of the `copied` property
+which is used to determine whether the green checkmark should be displayed.
+
+```html
+<html>
+  <head>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <style>
+      button.plain {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        padding: none;
+      }
+      .copied {
+        color: green;
+      }
+      .row {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+    </style>
+    <script>
+      function copy(input, data) {
+        navigator.clipboard.writeText(input.value);
+        data.copied = true;
+        setTimeout(() => (data.copied = false), 1000);
+      }
+    </script>
+  </head>
+  <body>
+    <div class="row" x-data="{copied: false}">
+      <input size="20" type="text" x-ref="input" />
+      <button class="plain" @click="copy($refs.input, $data)">📋</button>
+      <div class="copied" x-show="copied">✓</div>
+    </div>
+  </body>
+</html>
+```
+
 ### x-show
 
 The `x-show` directive determines whether this element should be visible.
