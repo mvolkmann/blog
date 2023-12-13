@@ -47,10 +47,11 @@ Alpine.start();
 ```
 
 The design of Alpine is somewhat based on Vue.
-Vue uses `v-` for its attribute prefixes.
+Vue uses `v-` for its directive prefixes.
 During the initial implementation of Alpine, it did not yet have a name,
 so `x-` was chosen for its prefixes.
 That is why the prefix is not something like `a-` or `alp-`.
+Many Alpine directives have the same name suffix as a Vue directives.
 
 ## Using TypeScript
 
@@ -962,6 +963,11 @@ For example:
   </template>
 </div>
 ```
+
+## Using TypeScript
+
+TODO: Describe how to use TypeScript with Alpine.
+TODO: I assume this will require a build step.
 
 ## Advanced Topics
 

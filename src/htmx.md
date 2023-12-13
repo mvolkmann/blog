@@ -584,6 +584,8 @@ which builds on React Native.
 - {% aTargetBlank "https://htmx.org/reference/", "HTMX Reference" %}
 - {% aTargetBlank "https://htmx.org/examples/", "HTMX Examples" %}
 - {% aTargetBlank "https://htmx.org/essays/", "HTMX-related Essays" %}
+- {% aTargetBlank "https://htmx.org/essays/how-did-rest-come-to-mean-the-opposite-of-rest/",
+  "How Did REST Come To Mean The Opposite of REST?" %}
 
 - {% aTargetBlank "https://htmx.org/discord", "HTMX Discord Channel" %}
 - {% aTargetBlank "https://hypermedia.systems", "Hypermedia Systems" %} book
