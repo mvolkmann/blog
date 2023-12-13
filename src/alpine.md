@@ -40,6 +40,12 @@ window.Alpine = Alpine; // optional for DevTools access
 Alpine.start();
 ```
 
+## Using TypeScript
+
+To use TypeScript in an Alpine project, see {% aTargetBlank
+"https://dev.to/wtho/get-started-with-alpinejs-and-typescript-4dgf",
+"Getting started with Alpine.js and TypeScript" %}.
+
 ## Basic Example
 
 The following code renders a button that toggles whether a `div` is visible.
