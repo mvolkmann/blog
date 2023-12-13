@@ -258,9 +258,16 @@ It can only be used in `template` elements.
 For example:
 
 ```html
-<template x-for="todo in todos">
-  <div x-text="todo.text"></div>
-</template>
+<div x-data="{colors: ['red', 'green', 'blue']}">
+  <template x-for="color in colors">
+    <div x-text="color"></div>
+  </template>
+
+  <!-- This iterates over the colors AND their indexes. -->
+  <template x-for="color, index in colors">
+    <div x-text="`${index + 1}) ${color}`"></div>
+  </template>
+</div>
 ```
 
 ### x-html
