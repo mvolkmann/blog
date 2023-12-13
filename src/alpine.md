@@ -968,7 +968,61 @@ use code like `Alpine.store('profile')`.
 
 ### $watch
 
-This magic property ...
+This magic property is a function that can be
+called to watch any component property.
+It is passed a property name and a function
+that is called when the property value changes.
+The function is passed the current value.
+
+The following example demonstrates using `$watch`
+to watch primitive, object, and array properties.
+The "Change Dog" and "Change Scores" buttons
+only trigger displaying an alert dialog once because
+after the first click they do not change a value.
+
+```html
+<html>
+  <head>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <script>
+      const data = {
+        dog: {name: 'Comet', breed: 'Whippet'},
+        password: '',
+        scores: [7, 10]
+      };
+
+      function configureWatches(watch) {
+        watch('dog', value => {
+          alert('dog is now ' + JSON.stringify(value));
+        });
+
+        watch('password', value => {
+          if (value.startsWith('pass')) {
+            alert('Bad password!');
+          }
+        });
+
+        watch('scores', value => {
+          alert('scores are now ' + JSON.stringify(value));
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <div x-data="data" x-init="configureWatches($watch)">
+      <label>
+        Password
+        <input autofocus size="20" type="password" x-model="password" />
+      </label>
+      <button @click="dog.breed = 'Greyhound'">Change Dog</button>
+      <button @click="scores[0] = 19">Change Score</button>
+    </div>
+  </body>
+</html>
+```
 
 ## Global Methods
 
