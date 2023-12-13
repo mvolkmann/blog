@@ -931,6 +931,10 @@ This magic property ...
 
 This magic property provides access to DOM nodes
 whose elements have the `x-ref` directive.
+Its value is an object.
+The keys are the string values specified by all the `x-ref` directives.
+The values are the corresponding DOM element objects.
+
 For example:
 
 ```html
