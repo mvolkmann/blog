@@ -146,6 +146,15 @@ both the "shout" and "large" CSS classes will be applied.
 <p :class="{shout: score > 10, large: score > 15}">Hello, World!</p>
 ```
 
+Another common use of `x-bind` is conditionally disabling a button.
+For example:
+
+```html
+<button :disabled="username === '' || password === ''" @click="login">
+  Login
+</button>
+```
+
 ### x-cloak
 
 The `x-cloak` directive hides an element until Alpine finishes processing it.
@@ -424,7 +433,21 @@ For example:
 <button x-on:click="like = !like">Toggle</button>
 ```
 
+If the value of event handler is a function name
+instead of a call to a function or other JavaScript code,
+the function will be called with no arguments.
+So these are equivalent:
+
+```html
+<button x-on:click="someFunction()">Do Something</button>
+<button x-on:click="someFunction">Do Something</button>
+```
+
 A shorthand for `x-on:` is just `@`.
+
+The event name must be composed of lowercase letters and dashes.
+To handle events with names that contain uppercase letters or periods,
+see the modifiers `camel` and `dot` described below.
 
 The event name can be followed by the following modifiers:
 
