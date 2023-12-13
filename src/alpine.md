@@ -299,6 +299,32 @@ that allows either one or multiple selections.
 For example:
 
 ```html
+<div x-data="{colors: ['red', 'green', 'blue']}">
+  <div x-data="{selectedColor: ''}">
+    <select x-model="selectedColor">
+      <option value="">Select a color</option>
+      <template x-for="color in colors">
+        <option :value="color" x-text="color"></option>
+      </template>
+    </select>
+    <span x-show="selectedColor">
+      You selected <span x-text="selectedColor"></span>.
+    </span>
+  </div>
+  <br />
+  <div x-data="{selectedColors: []}">
+    <!-- After selecting the first color, hold down
+        cmd or shift before clicking another. -->
+    <select multiple x-model="selectedColors">
+      <template x-for="color in colors">
+        <option :value="color" x-text="color"></option>
+      </template>
+    </select>
+    <span x-show="selectedColors.length">
+      You selected <span x-text="selectedColors"></span>.
+    </span>
+  </div>
+</div>
 ```
 
 The following modifiers can be applied to the `x-model` directive:
