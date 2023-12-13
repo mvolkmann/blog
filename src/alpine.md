@@ -280,7 +280,7 @@ The `x-model` directive can be applied to a set of related radio buttons
 to populate a variable with the value of the selected radio button.
 For example:
 
-````html
+```html
 <div x-data="{colors: ['red', 'green', 'blue'], selectedColor: ''}">
   <template x-for="color in colors">
     <div style="display: flex; align-items: center">
@@ -365,6 +365,7 @@ The `x-modelable` directive ...?
 For example:
 
 ```html
+
 ```
 
 ### x-on
@@ -720,4 +721,7 @@ to an element other than `template`?
 ## TO DOs
 
 - Implement your Svelte todo app using only Alpine and add that to the blog page.
-````
+
+```
+
+```
