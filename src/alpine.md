@@ -189,6 +189,11 @@ but don't need any reactive data.
 In these cases, you can opt out of passing an expression to x-data."
 For example: `<div x-data>`.
 
+A likely reason this is required is so Alpine can avoid wasting time
+looking for other Alpine directives on elements that are
+not descendants of an element that uses the `x-data` directive.
+that element and descendants.
+
 Another way to declare state is with the `Alpine.store` function.
 
 The following code prompts for an image query
