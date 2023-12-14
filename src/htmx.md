@@ -25,10 +25,27 @@ replaces an existing DOM element (transclusion) or is inserted relative to one.
 This approach removes the need to serialize data to JSON on the server,
 parse the JSON on the client, and convert it to HTML.
 
+The server can be implemented using
+any programming language and server framework.
+The server typically plays two roles.
+First, it serves static files such as HTML, CSS, JavaScript, and images.
+Second, it responds to HTTP requests by returning dynamically generated HTML.
+
+HTMX simplifies state management because all the state is in one place,
+on the server.
+
 Many web app features typically thought to require custom JavaScript code
 can instead be implemented with only HTMX.
 Examples include lazy loading of data, infinite scrolling,
 and searching while the user types in an `input`.
+
+The fact that all HTML rendered by HTMX applications
+is either static or server rendered makes it great for SEO.
+
+HTMX was created by {% aTargetBlank "https://bigsky.software/cv/", "Carson Gross" %}.
+He is a principal software engineer at
+{% aTargetBlank "https://bigsky.software/", "Big Sky Software" %}
+and a part-time CS instructor at Montana State University.
 
 Interest in HTMX exploded in 2023 after YouTube videos
 from ThePrimeagen and Fireship were released.
@@ -39,24 +56,26 @@ Companies that sponsor the development of HTMX are listed on the
 {% aTargetBlank "https://htmx.org", "home page" %}.
 They include GitHub and JetBrains.
 
-The fact that all HTML rendered by HTMX applications
-is either static or server rendered makes it great for SEO.
-
 The HTMX library is implemented in JavaScript,
 not TypeScript, in a single source file.
 There are plans to add JSDoc TypeScript type definitions
 for better code editor support.
 
-The server can be implemented using
-any programming language and server framework.
-The server typically plays two roles.
-First, it serves static files such as HTML, CSS, JavaScript, and images.
-Second, it responds to HTTP requests by returning dynamically generated HTML.
+## REST?
 
-HTMX was created by {% aTargetBlank "https://bigsky.software/cv/", "Carson Gross" %}.
-He is a principal software engineer at
-{% aTargetBlank "https://bigsky.software/", "Big Sky Software" %}
-and a part-time CS instructor at Montana State University.
+Web app frameworks such as React, Svelte, Angular, and Vue
+have popularized the creation of single-page applications (SPAs).
+Currently, SPA web apps typically use client-side JavaScript code
+to send HTTP requests to server-side endpoints that
+query/update databases and return JSON data.
+The client code then transforms JSON into an HTML presentation.
+Many developers refer to this architecture as "REST".
+
+This is not what Roy Fielding had in mind when he wrote his famous dissertation
+"Architectural Styles and the Design of Network-based Software Architectures"
+that gave birth to REST.
+But who decides what is REST and what isn’t?
+Is it Roy Fielding or popular opinion?
 
 The HTMX approach is based on "Hypermedia As The Engine Of Application State"
 ({% aTargetBlank "https://htmx.org/essays/hateoas/", "HATEOAS" %}) which is
@@ -85,9 +104,6 @@ about how to render or modify resources.
 Carson Gross describes HATEOAS systems as follows:
 "Given an entry point into the system, the rest of the system
 can be accessed simply by inspecting the hypermedia."
-
-HTMX simplifies state management because all the state is in one place,
-on the server.
 
 ## Client-side Processing
 
