@@ -349,8 +349,7 @@ to the result of a given JavaScript expression which is typically HTML text.
 For example:
 
 ```html
-<div x-html="await fetch('https://foo.com/bar').json()">...</div>
-// TODO: Can you chain a call to "json" like this?
+<div x-html="await (await fetch('https://foo.com/bar')).json()">...</div>
 ```
 
 The official documentation provides this warning:
@@ -884,6 +883,10 @@ a custom directive named `x-weather-feel`.
 </html>
 ```
 
+For more detail, see {% aTargetBlank
+"https://alpinejs.dev/advanced/extending#custom-directives",
+"Custom Directives" %}.
+
 ## Progress Bar Example
 
 The following example combines some of the features we have seen so far.
@@ -1019,8 +1022,8 @@ The following example combines some of the features we have seen so far.
 
 ### $data
 
-This magic property provides access to the
-`x-data` object on the nearest ancestor element.
+This magic property provides access to the `x-data` object
+on the nearest ancestor element that uses that directive.
 It can be used to pass the entire object to a JavaScript function
 instead of passing individual properties.
 
@@ -1054,7 +1057,7 @@ The following code demonstrates dispatching and listening for a custom event.
 
 ### $el
 
-This magic property provides access to the DOM node of the current element.
+This magic property provides access to the current DOM element.
 For example:
 
 ```html
@@ -1092,13 +1095,17 @@ see {% aTargetBlank "https://alpinejs.dev/magics/id", "$id" %}.
 
 ### $nextTick
 
-This magic property ...
-TODO
+This magic property is a function that takes a function to be executed
+after Alpine finishes updating the DOM.
+It is useful for inspecting the DOM or making additional changes to it.
+
+This function returns a `Promise`, so the `await` keyword
+can be used to wait for it to settle.
 
 ### $refs
 
-This magic property provides access to DOM nodes
-whose elements have the `x-ref` directive.
+This magic property provides access to DOM elements
+to which the `x-ref` directive is applied.
 Its value is an object.
 The keys are the string values specified by all the `x-ref` directives.
 The values are the corresponding DOM element objects.
@@ -1112,8 +1119,9 @@ For example:
 
 ### $root
 
-This magic property ...
-TODO
+This magic property holds a reference to
+the root DOM element of the current component which is
+the nearest ancestor element on which the `x-data` directive is applied.
 
 ### $store
 
@@ -1257,6 +1265,11 @@ articles on {% aTargetBlank "https://news.ycombinator.com", "HackerNews" %}.
   </body>
 </html>
 ```
+
+In addition to the provided magic properties,
+custom magic properties can be implemented.
+See {% aTargetBlank "https://alpinejs.dev/advanced/extending#custom-magics",
+"Custom Magics" %}.
 
 ## Global Methods
 
