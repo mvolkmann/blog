@@ -775,12 +775,9 @@ taking the time to construct an element that will not be visible.
 
 ### x-teleport
 
-The `x-teleport` directive ...?
-For example:
-
-```html
-TODO
-```
+The `x-teleport` directive transports a `template` element
+to another part of the DOM.
+One use is to attach a modal dialog to the `body` element.
 
 ### x-text
 
@@ -1271,9 +1268,7 @@ custom magic properties can be implemented.
 See {% aTargetBlank "https://alpinejs.dev/advanced/extending#custom-magics",
 "Custom Magics" %}.
 
-## Global Methods
-
-TODO
+## Global Functions
 
 ### Alpine.bind
 
@@ -1281,7 +1276,49 @@ TODO
 
 ### Alpine.data
 
-TODO
+The `Alpine.data` function provides an alternate way
+to specify the value of an `x-data` property.
+It is useful for long lists of properties
+and properties that are function definitions.
+While these can be defined using the `x-data` property,
+long definitions can feel out of place in HTML.
+Defining them in a `script` tag is sometimes preferable.
+
+For example:
+
+```html
+<html>
+  <head>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <script defer>
+      document.addEventListener('alpine:init', () => {
+        Alpine.data('counter', () => ({
+          count: 5,
+          decrement() {
+            if (this.count > 0) this.count--;
+          },
+          increment() {
+            if (this.count < 10) this.count++;
+          }
+        }));
+      });
+    </script>
+  </head>
+  <body>
+    <div style="display: flex; gap: 1rem" x-data="counter">
+      <button @click="decrement" :disabled="count === 0">-</button>
+      <div x-text="count"></div>
+      <button @click="increment" :disabled="count === 10">+</button>
+    </div>
+  </body>
+</html>
+```
+
+For more detail, see {% aTargetBlank
+"https://alpinejs.dev/globals/alpine-data", "Alpine.data" %}.
 
 ### Alpine.store
 
