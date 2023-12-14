@@ -59,21 +59,24 @@ To use TypeScript in an Alpine project, see {% aTargetBlank
 "https://dev.to/wtho/get-started-with-alpinejs-and-typescript-4dgf",
 "Getting started with Alpine.js and TypeScript" %}.
 
-TODO: Try these steps and verify that they work.
+The following steps create a new project that uses Alpine, TypeScript, and Vite.
+Vite provides a local HTTP server with hot reload.
 
 - Enter `npm init vite@latest`
+
   - Enter a project name.
   - For the framework, select "Vanilla".
   - For the variant, select "TypeScript".
+
 - cd to the newly created project directory
 - Enter `npm install alpinejs`
 - Enter `npm install -D @types/alpinejs`
 - Replace the contents of `src/main.ts` with the following:
 
   ```ts
-  import Alpine from 'alpinejs'`
-  window.Alpine = Alpine
-  Alpine.start()
+  import Alpine from 'alpinejs';
+  window.Alpine = Alpine;
+  Alpine.start();
   ```
 
 - Create the file `src/global.d.ts` containing the following:
@@ -86,9 +89,12 @@ TODO: Try these steps and verify that they work.
   }
   ```
 
-- TODO: Where does the HTML go?
+- Edit `index.html` which already contains a `script` tag for `/src/main.ts`.
+  Add HTML that uses Alpine directives here.
 
 - Enter `npm run dev`
+
+- Browse localhost:5173.
 
 ## Basic Example
 
