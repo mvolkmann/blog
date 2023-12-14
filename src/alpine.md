@@ -1329,9 +1329,10 @@ TODO
 ### Persist
 
 The {% aTargetBlank "https://alpinejs.dev/plugins/persist", "Persist Plugin" %}
-saves state across page loads by storing it in `localStorage`.
+saves state across page loads, including browser refreshes.
+By default the data is saved in `localStorage`.
 
-To use this, add the following `script` tag before the one for Alpine:
+To use this plugin, add the following `script` tag before the one for Alpine:
 
 ```html
 <script
@@ -1346,7 +1347,6 @@ To cause any `x-data` property to be persisted,
 wrap the value in a call to the `$persist` function.
 
 The following code demonstrates persisting the `name` data property.
-Inside `localStorage`, persisted property names are prepended with `_x_`.
 
 ```html
 <html>
@@ -1365,6 +1365,37 @@ Inside `localStorage`, persisted property names are prepended with `_x_`.
     <div>Hello, <span x-text="name"></span>!</div>
   </body>
 </html>
+```
+
+If the type of a persisted property is changed,
+clear `localStorage` before running the code again.
+
+Inside `localStorage`, persisted property names are prepended with `_x_`.
+
+If there are multiple pages at the same domain that persist
+properties with the same name, they will share the `localStorage` value.
+If this is not desired, specify a different name with the `as` modifier.
+For example, `x-data="{ $persist(name).as('company-name') }"`
+When this modifier is used, the name will not be prepended with `_x_`.
+
+Data saved in `localStorage` remains across sessions of the app.
+To avoid this, the data can instead be saved in `sessionStorage`
+by applying the `using modifier`.
+For example, `x-data="{ $persist(name).using(sessionStorage) }"`
+
+It is also possible to define a custom storage location. For details, see
+<a href="https://alpinejs.dev/plugins/persist#custom-storage"
+target="_blank">Using a custom storage</a>.
+
+To persist data in a store, use the `Alpine.$persist` function.
+This seems to require removing `defer` from the plugin script tag.
+For example:
+
+```js
+Alpine.store('data', {
+  status: '',
+  todos: Alpine.$persist([]).as('todos')
+});
 ```
 
 ## Components

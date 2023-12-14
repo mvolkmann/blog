@@ -665,6 +665,8 @@ which builds on React Native.
 - {% aTargetBlank "https://twitter.com/htmx_org", "Carson Gross on Twitter" %}
 - {% aTargetBlank "https://thevalleyofcode.com/htmx", "The Valley of CODE - htmx" %}
 
+TODO: Read "The Valley of CODE" page above!
+
 ## Unorganized Content
 
 - Learn how to automatically refresh browser on code save.
