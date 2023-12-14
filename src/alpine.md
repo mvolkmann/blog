@@ -1359,19 +1359,51 @@ Each plugin used requires a new script tag.
 
 ### Anchor
 
-TODO
+The {% aTargetBlank "https://alpinejs.dev/plugins/anchor", "Anchor" %} plugin
+anchors the position of an element to another using CSS absolute positioning.
+
+In most cases this functionality can be achieved with HTML nesting and CSS.
 
 ### Collapse
 
-TODO
+The {% aTargetBlank "https://alpinejs.dev/plugins/collapse", "Collapse" %}
+plugin enables expanding and collapsing elements with smooth animations.
+
+For example:
+
+```html
+<html>
+  <head>
+    <!-- The plugin must be loaded before Alpine.js. -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+  </head>
+  <body x-data="{show: true}">
+    <button @click="show = !show">Toggle</button>
+    <p x-show="show" x-collapse>
+      Out of memory.<br />
+      We wish to hold the whole sky,<br />
+      But we never will.
+    </p>
+  </body>
+</html>
+```
 
 ### Focus
 
-TODO
+The {% aTargetBlank "https://alpinejs.dev/plugins/focus", "Focus" %}
+plugin manages focus within a page containing form elements.
 
 ### Intersect
 
-TODO
+The {% aTargetBlank "https://alpinejs.dev/plugins/intersect", "Intersect" %}
+plugin enables reacting to an element entering the browser viewport.
 
 ### Mask
 
@@ -1426,12 +1458,15 @@ For entering currency amounts, use the value `$money($input)`.
 
 ### Morph
 
-TODO
+The {% aTargetBlank "https://alpinejs.dev/plugins/morph", "Morph" %} plugin
+enables moving an element into a provided HTML template.
+It is useful for updating the DOM from HTML received from an API request
+without losing page state.
 
 ### Persist
 
-The {% aTargetBlank "https://alpinejs.dev/plugins/persist", "Persist Plugin" %}
-saves state across page loads, including browser refreshes.
+The {% aTargetBlank "https://alpinejs.dev/plugins/persist", "Persist" %}
+plugin saves state across page loads, including browser refreshes.
 By default the data is saved in `localStorage`.
 
 To use this plugin, add the following `script` tag before the one for Alpine:
@@ -1626,19 +1661,22 @@ Alpine AJAX was not created by the team that created Alpine.
 
 ### Async
 
-TODO
+The `await` keyword can be used in directives that take a function
+to wait for the result of an `async` function.
+For example, `<span x-text="await getHighScore()"></span>`.
 
 ### CSP
 
-TODO
-
-### Extending
-
-TODO
+For applications that must adhere to the Content Security Policy (CSP),
+see {% aTargetBlank "https://alpinejs.dev/advanced/csp", "CSP" %}.
 
 ### Reactivity
 
-TODO
+Alpine monitors state defined in `x-data` directives and stores and
+automatically updates parts of the UI that use the data when the values change.
+This is implemented by the functions `Alpine.reactive` and `Alpine.effect`.
+For more detail, see {% aTargetBlank
+"https://alpinejs.dev/advanced/reactivity", "Reactivity" %}.
 
 ## Common Mistakes
 
@@ -1647,7 +1685,3 @@ of elements that use other Alpine directives?
 
 Did you apply the `x-if` or `x-for` directives
 to an element other than `template`?
-
-## TO DOs
-
-- Implement your Svelte todo app using only Alpine and add that to the blog page.
