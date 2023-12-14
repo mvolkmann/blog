@@ -839,6 +839,51 @@ For example:
 For more detail, see {% aTargetBlank
 "https://alpinejs.dev/directives/transition", "x-transition" %}.
 
+### Custom Directives
+
+In addition to the provided directives, custom directives can be implemented.
+The following code demonstrates defining
+a custom directive named `x-weather-feel`.
+
+```html
+<html>
+  <head>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <script>
+      document.addEventListener('alpine:init', () => {
+        Alpine.directive(
+          'weather-feel', // Alpine prepends "x-" to the name.
+          (el, {expression}, {effect, evaluate}) => {
+            // "el" is a reference to the DOM element
+            // where the directive is applied.
+            // "expression" is JavaScript expression assigned to the directive.
+            // "effect" is passed a function to run every time
+            // the value of the expression changes.
+            // "evaluate" is a function that evaluates a JavaScript expression
+            // and returns the result.
+            effect(() => {
+              const value = evaluate(expression);
+              el.textContent =
+                value > 80 ? 'hot' : value < 50 ? 'cold' : 'warm';
+            });
+          }
+        );
+      });
+    </script>
+  </head>
+  <body x-data="{ temperature: 50 }">
+    <input type="range" min="0" max="100" x-model="temperature" />
+    <div>
+      The temperature is <span x-text="temperature"></span> and I feel
+      <span x-weather-feel="temperature"></span>.
+    </div>
+  </body>
+</html>
+```
+
 ## Progress Bar Example
 
 The following example combines some of the features we have seen so far.
