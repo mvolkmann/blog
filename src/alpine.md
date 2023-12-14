@@ -1328,7 +1328,44 @@ TODO
 
 ### Persist
 
-TODO
+The {% aTargetBlank "https://alpinejs.dev/plugins/persist", "Persist Plugin" %}
+saves state across page loads by storing it in `localStorage`.
+
+To use this, add the following `script` tag before the one for Alpine:
+
+```html
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"
+></script>
+```
+
+Alternatively, install the plugin from NPM and initialize it in code.
+
+To cause any `x-data` property to be persisted,
+wrap the value in a call to the `$persist` function.
+
+The following code demonstrates persisting the `name` data property.
+Inside `localStorage`, persisted property names are prepended with `_x_`.
+
+```html
+<html>
+  <head>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+  </head>
+  <body x-data="{ name: $persist('World') }">
+    <input autofocus size="20" type="text" x-model="name" />
+    <div>Hello, <span x-text="name"></span>!</div>
+  </body>
+</html>
+```
 
 ## Components
 
