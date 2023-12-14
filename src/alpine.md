@@ -784,8 +784,11 @@ For example:
 <div x-text="temperature >= 80 ? 'hot' : 'cold'"></div>
 ```
 
-It's a shame we can't use a more terse syntax like `{var}`
+It's a shame we can't use a more terse syntax like `{{expression}}`
 instead of `<span x-text="var"></span>`.
+In the Alpine Discord channel, kwoka said
+"A plugin to make {{}} work within a part of a tree would be possible."
+TODO: Try to write this plugin!
 
 ### x-transition
 
