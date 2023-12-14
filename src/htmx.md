@@ -626,6 +626,7 @@ which builds on React Native.
 - {% aTargetBlank "https://hypermedia.systems", "Hypermedia Systems" %} book
 - {% aTargetBlank "https://bigsky.software", "Big Sky Software" %}
 - {% aTargetBlank "https://twitter.com/htmx_org", "Carson Gross on Twitter" %}
+- {% aTargetBlank "https://thevalleyofcode.com/htmx", "The Valley of CODE - htmx" %}
 
 ## Unorganized Content
 

@@ -499,6 +499,8 @@ The following modifiers can be applied to the `x-model` directive:
 
   This delays updating the model variable until typing stops
   for some period of time (defaults to 250ms).
+  To change the time period, add a period and a number of milliseconds,
+  optionally followed by "ms". For example, `.debounce.500`.
 
 - `.fill`
 
@@ -518,6 +520,8 @@ The following modifiers can be applied to the `x-model` directive:
   This updates the model variable on the first value change
   and then repeatedly after some period of time (defaults to 250ms)
   if the value has changed.
+  To change the time period, add a period and a number of milliseconds,
+  optionally followed by "ms". For example, `.throttle.500`.
 
 ### x-modelable
 
@@ -566,6 +570,8 @@ The event name can be followed by the following modifiers:
 
   This delays processing the event until activity stops
   for some period of time (defaults to 250ms).
+  To change the time period, add a period and a number of milliseconds,
+  optionally followed by "ms". For example, `.debounce.500`.
 
 - `.document`
 
@@ -644,6 +650,8 @@ The event name can be followed by the following modifiers:
 
   This processes the event immediately and then again after some period of time
   (defaults to 250ms) even if activity has not stopped.
+  To change the time period, add a period and a number of milliseconds,
+  optionally followed by "ms". For example, `.throttle.500`.
 
 - `.window`
 
