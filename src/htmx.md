@@ -64,8 +64,23 @@ a specific use of the REST architecture where services return hypermedia.
 REST is described in chapter 5 of the famous PhD dissertation by Roy Fielding
 "{% aTargetBlank "https://ics.uci.edu/~fielding/pubs/dissertation/fielding_dissertation.pdf",
 "Architectural Styles and the Design of Network-based Software Architectures" %}".
+The acronym HATEOAS does not appear in the dissertation,
+but its concepts are discussed.
+
+A software architecture is RESTful if it uses a client/server model,
+is stateless, caches responses, and supports a uniform interface.
+A uniform interface is one where requests identify a resource,
+resources are manipulated through representations,
+messages are self-descriptive, and use HATEOAS.
 
 HTML is a kind of hypermedia and web browsers are hypermedia clients.
+Responses to requests can contain HTML that browsers render
+to enable users to view and operate on resources.
+This makes the responses similar to object-oriented programming
+where objects contain data and methods for operating on their data.
+Clients simply render the HTML returned.
+They do not require any resource-specific knowledge
+about how to render or modify resources.
 
 HTMX simplifies state management because all the state is in one place,
 on the server.
@@ -121,10 +136,11 @@ by adding attributes to HTML for a long time.
 
 The predecessor of HTMX, also created by Carson Gross,
 is {% aTargetBlank "https://intercoolerjs.org", "intercooler.js" %}.
-The first version of intercooler.js was released in April, 2014.
+Work on intercooler.js began in 2013
+and the first version was released in April 2014.
 Intercooler had a dependency on jQuery, but HTMX does not.
 
-The first version of HTMX was released in May, 2020.
+The first version of HTMX was released in May 2020.
 The 1.0 version was released in November, 2020.
 The latest version as of December 2023 is 1.9.9.
 It is 15K gzipped and 47K unzipped.
