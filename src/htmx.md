@@ -82,6 +82,10 @@ Clients simply render the HTML returned.
 They do not require any resource-specific knowledge
 about how to render or modify resources.
 
+Carson Gross describes HATEOAS systems as follows:
+"Given an entry point into the system, the rest of the system
+can be accessed simply by inspecting the hypermedia."
+
 HTMX simplifies state management because all the state is in one place,
 on the server.
 
