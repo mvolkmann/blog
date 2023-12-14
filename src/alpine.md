@@ -1245,6 +1245,103 @@ TODO
 
 TODO
 
+## Components
+
+One issue with Alpine is that it doesn't support defining components
+in the sense that SPA frameworks like React do.
+For example, we can't define a "ProgressBar" component and then
+render it with HTML like `<ProgressBar value={value} max={100} />`.
+
+We can approximate this though with a bit of JavaScript code
+that searches the DOM for elements that have an attribute
+that specifies a file to load that defines a component.
+We can make data available to an instance of a component
+using the standard `x-data` Alpine attribute.
+
+Here is the JavaScript code from a file named "x-include.js":
+
+```js
+const {href} = location;
+const lastSlashIndex = href.lastIndexOf('/');
+const urlPrefix = href.substring(0, lastSlashIndex + 1);
+
+function includeHTML() {
+  const attribute = 'x-include';
+  // Find the first element that contains the include attribute.
+  const element = document.querySelector(`[${attribute}]`);
+  if (!element) return; // no more found
+
+  const xhr = new XMLHttpRequest();
+  xhr.onload = () => {
+    element.innerHTML = xhr.responseText;
+    element.removeAttribute(attribute);
+    // Make a recursive call to process remaining elements
+    // with the w3-include-html attribute.
+    includeHTML();
+  };
+
+  const file = element.getAttribute(attribute);
+  xhr.open('GET', urlPrefix + file, true);
+  xhr.send();
+}
+
+window.onload = includeHTML;
+```
+
+Here is an example of using "x-include.js" in a file named "demo.html":
+
+```html
+<html lang="en">
+  <head>
+    <title>Include Demo</title>
+    <!-- All included "components" can also use Alpine. -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <script src="x-include.js"></script>
+  </head>
+  <body x-data="{show: true}">
+    <h1>Include Demo</h1>
+    <div style="display: flex; gap: 1rem">
+      <button @click="show = !show">Toggle</button>
+      <span x-show="show">
+        <!-- The file greeting.html defines a component.
+             We can pass scoped data to it using x-data. -->
+        <span x-include="greeting.html" x-data="{name: 'World'}"></span>
+      </span>
+    </div>
+
+    <!-- The file colors.html defines a component.
+         We can pass scoped data to it using x-data.
+         The file will only be loaded once even though
+         we "include" it multiple times. -->
+    <div x-include="colors.html"></div>
+    <div x-include="colors.html" x-data="{upper: true}"></div>
+  </body>
+</html>
+```
+
+Here is the contents of "greeting.html":
+
+```html
+<p style="margin: 0">Hello, <span x-text="name"></span>!</p>
+```
+
+Here is the contents of "colors.html":
+
+```html
+<div x-data="{colors: ['red', 'green', 'blue']}">
+  <ol>
+    <template x-for="color in colors">
+      <!-- Using $data.upper instead of just upper
+           works when upper is not defined. -->
+      <li x-text="$data.upper ? color.toUpperCase() : color"></li>
+    </template>
+  </ol>
+</div>
+```
+
 ## Miscellaneous Details
 
 To specify Alpine directives that are not tied to a rendered element,
