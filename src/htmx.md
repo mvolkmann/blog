@@ -17,12 +17,10 @@ new HTML attributes that make HTML more expressive.
 
 The new HTML attributes enable responding to
 specific interactions (ex. click) with any HTML element
-by sending HTTP request using any verb (GET, POST, PUT, PATCH, or DELETE).
-The response from these HTTP must contain HTML.
-Rather than performing a complete page refresh,
-the returned HTML replaces an existing DOM element or
-is inserted relative to an existing DOM element.
-(Replacing an HTML element with a new element is called transclusion.)
+by sending HTTP requests using any verb (GET, POST, PUT, PATCH, or DELETE).
+The response from these must contain HTML.
+Rather than performing a complete page refresh, the returned HTML
+replaces an existing DOM element (transclusion) or is inserted relative to one.
 
 This approach removes the need to serialize data to JSON on the server,
 parse the JSON on the client, and convert it to HTML.

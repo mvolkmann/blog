@@ -59,6 +59,37 @@ To use TypeScript in an Alpine project, see {% aTargetBlank
 "https://dev.to/wtho/get-started-with-alpinejs-and-typescript-4dgf",
 "Getting started with Alpine.js and TypeScript" %}.
 
+TODO: Try these steps and verify that they work.
+
+- Enter `npm init vite@latest`
+  - Enter a project name.
+  - For the framework, select "Vanilla".
+  - For the variant, select "TypeScript".
+- cd to the newly created project directory
+- Enter `npm install alpinejs`
+- Enter `npm install -D @types/alpinejs`
+- Replace the contents of `src/main.ts` with the following:
+
+  ```ts
+  import Alpine from 'alpinejs'`
+  window.Alpine = Alpine
+  Alpine.start()
+  ```
+
+- Create the file `src/global.d.ts` containing the following:
+
+  ```ts
+  import {Alpine as AlpineType} from 'alpinejs';
+
+  declare global {
+    var Alpine: AlpineType;
+  }
+  ```
+
+- TODO: Where does the HTML go?
+
+- Enter `npm run dev`
+
 ## Basic Example
 
 The following code renders a button that toggles whether a `div` is visible.
@@ -735,7 +766,7 @@ The `x-teleport` directive ...?
 For example:
 
 ```html
-
+TODO
 ```
 
 ### x-text
@@ -926,6 +957,7 @@ see {% aTargetBlank "https://alpinejs.dev/magics/id", "$id" %}.
 ### $nextTick
 
 This magic property ...
+TODO
 
 ### $refs
 
@@ -945,6 +977,7 @@ For example:
 ### $root
 
 This magic property ...
+TODO
 
 ### $store
 
@@ -1091,9 +1124,15 @@ articles on {% aTargetBlank "https://news.ycombinator.com", "HackerNews" %}.
 
 ## Global Methods
 
+TODO
+
 ### Alpine.bind
 
+TODO
+
 ### Alpine.data
+
+TODO
 
 ### Alpine.store
 
@@ -1127,11 +1166,19 @@ Each plugin used requires a new script tag.
 
 ### Anchor
 
+TODO
+
 ### Collapse
+
+TODO
 
 ### Focus
 
+TODO
+
 ### Intersect
+
+TODO
 
 ### Mask
 
@@ -1186,7 +1233,11 @@ For entering currency amounts, use the value `$money($input)`.
 
 ### Morph
 
+TODO
+
 ### Persist
+
+TODO
 
 ## Miscellaneous Details
 
@@ -1203,20 +1254,23 @@ For example:
 </div>
 ```
 
-## Using TypeScript
-
-TODO: Describe how to use TypeScript with Alpine.
-TODO: I assume this will require a build step.
-
 ## Advanced Topics
 
 ### Async
 
+TODO
+
 ### CSP
+
+TODO
 
 ### Extending
 
+TODO
+
 ### Reactivity
+
+TODO
 
 ## Common Mistakes
 
@@ -1229,7 +1283,3 @@ to an element other than `template`?
 ## TO DOs
 
 - Implement your Svelte todo app using only Alpine and add that to the blog page.
-
-```
-
-```
