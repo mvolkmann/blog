@@ -421,6 +421,16 @@ TODO: Try this.
 hx-swap-oob
 hx-select-oob
 
+## Components
+
+One issue with HTMX is that it doesn't support defining components
+in the sense that SPA frameworks like React do.
+For example, we can't define a "ProgressBar" component and then
+render it with HTML like `<ProgressBar value={value} max={100} />`.
+
+For a potential solution, see
+<a href="/blog/alpine#components" target="_blank">Components</a>.
+
 ## Events
 
 TODO: Try this.
