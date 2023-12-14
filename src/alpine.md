@@ -1272,7 +1272,14 @@ See {% aTargetBlank "https://alpinejs.dev/advanced/extending#custom-magics",
 
 ### Alpine.bind
 
-TODO
+The `Alpine.bind` function provides a way to define a named set of
+attributes and directives that can be applied to multiple elements
+to avoid repetition and allow changes to be made in one place.
+
+This is likely rarely needed.
+
+For a contrived example, see {% aTargetBlank
+"https://alpinejs.dev/globals/alpine-bind", "Alpine.bind" %}.
 
 ### Alpine.data
 
