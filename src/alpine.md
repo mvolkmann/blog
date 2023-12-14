@@ -886,6 +886,78 @@ The following example combines some of the features we have seen so far.
 </html>
 ```
 
+## Todo List Example
+
+<img alt="Alpine todo list" style="width: 50%"
+  src="/blog/assets/alpine-todo-list.png?v={{pkg.version}}">
+
+```html
+<html>
+  <head>
+    <link rel="stylesheet" href="todo-list.css" />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <script>
+      let data;
+      let lastId = 0;
+
+      document.addEventListener('alpine:init', () => {
+        Alpine.store('data', {status: '', todos: []});
+        data = Alpine.store('data');
+        addTodo('buy milk');
+        addTodo('cut grass');
+      });
+
+      function addTodo(text) {
+        data.todos.push({id: ++lastId, text, done: false});
+      }
+
+      // This keeps only the todos that are not done.
+      function archiveCompleted() {
+        data.todos = data.todos.filter(t => !t.done);
+      }
+
+      function deleteTodo(todoId) {
+        data.todos = data.todos.filter(t => t.id !== todoId);
+      }
+
+      function updateStatus(todos) {
+        const uncompletedCount = todos.filter(t => !t.done).length;
+        data.status = `${uncompletedCount} of ${todos.length} remaining`;
+      }
+    </script>
+  </head>
+  <body x-data x-effect="updateStatus(data.todos)">
+    <h1>To Do List</h1>
+    <div>
+      <span x-text="data.status"></span>
+      <button @click="archiveCompleted()">Archive Completed</button>
+    </div>
+    <form x-data="{text: ''}" @submit.prevent="addTodo(text); text = ''">
+      <input
+        autofocus
+        placeholder="enter new todo here"
+        size="30"
+        type="text"
+        x-model="text"
+      />
+      <button :disabled="!text">Add</button>
+    </form>
+    <ul>
+      <template x-for="todo in data.todos">
+        <li class="todo-row">
+          <input type="checkbox" x-model="todo.done" />
+          <span :class="{done: todo.done}" x-text="todo.text"></span>
+          <button @click="deleteTodo(todo.id)">Delete</button>
+        </li>
+      </template>
+    </ul>
+  </body>
+</html>
+```
+
 ## Properties
 
 ## Methods
@@ -1363,6 +1435,16 @@ For example:
 ```
 
 ## Advanced Topics
+
+### AJAX
+
+{% aTargetBlank "https://alpine-ajax.js.org", "Alpine AJAX" %}
+is an Alpine plugin that
+"enables your HTML elements to request remote content from your server."
+It provides functionality that is similar to {% aTargetBlank
+"https://htmx.org", "HTMX" %}, but is simpler and provides fewer features.
+
+Alpine AJAX was not created by the team that created Alpine.
 
 ### Async
 
