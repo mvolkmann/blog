@@ -74,6 +74,11 @@ Many developers refer to this architecture as "REST".
 This is not what Roy Fielding had in mind when he wrote his famous dissertation
 "Architectural Styles and the Design of Network-based Software Architectures"
 that gave birth to REST.
+Roy has been quoted saying "I am getting frustrated by
+the number of people calling any HTTP-based interface a REST API.
+Today's example is the SocialSite REST API.
+That is RPC. It screams RPC."
+
 But who decides what is REST and what isn’t?
 Is it Roy Fielding or popular opinion?
 
@@ -104,6 +109,15 @@ about how to render or modify resources.
 Carson Gross describes HATEOAS systems as follows:
 "Given an entry point into the system, the rest of the system
 can be accessed simply by inspecting the hypermedia."
+
+## Questions to Consider
+
+Why should we take data from a database and
+convert it to JSON just to send raw data to the client?
+
+Why should we decide how to render data on the client instead of on the server?
+
+Why should we restrict ourselves to only using JavaScript for web applications?
 
 ## Client-side Processing
 
