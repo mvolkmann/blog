@@ -911,7 +911,7 @@ The following example combines some of the features we have seen so far.
       });
 
       function addTodo(text) {
-        data.todos.push({id: ++lastId, text, done: false});
+        data.todos.push({id: ++lastId, text: text.trim(), done: false});
       }
 
       // This keeps only the todos that are not done.
@@ -943,7 +943,7 @@ The following example combines some of the features we have seen so far.
         type="text"
         x-model="text"
       />
-      <button :disabled="!text">Add</button>
+      <button :disabled="text.trim().length === 0">Add</button>
     </form>
     <ul>
       <template x-for="todo in data.todos">
