@@ -305,6 +305,14 @@ For example, `/todos/:id/toggle` is a reasonable URL path
 for an endpoint that toggles the completed status of todo
 and returns HTML for the updated todo item.
 
+## Cross-Site Scripting Attacks
+
+Cross-Site Scripting (XSS) attacks can occur if
+user-entered content is included in HTML responses.
+To prevent this, sanitize the HTML before returning it.
+A good library for doing this is {% aTargetBlank
+"https://github.com/apostrophecms/sanitize-html", "sanitize-html" %}.
+
 ## Triggers
 
 hx-trigger
