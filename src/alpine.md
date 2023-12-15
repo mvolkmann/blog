@@ -99,9 +99,9 @@ Vite provides a local HTTP server with hot reload.
 ## Basic Example
 
 The following code renders a button that toggles whether a `div` is visible.
-The `x-data` attribute defines state that is
+The `x-data` directive defines state that is
 available on that element and its descendants.
-The `x-show` attribute determines whether that element should be shown
+The `x-show` directive determines whether that element should be shown
 based on the value of the `open` state property.
 When `open` is false, the attribute `style="display: none;"`
 is added to the `div`.
@@ -226,6 +226,10 @@ For example:
 ```html
 <div x-data="{ fruit: 'apple', count: 0 }">...</div>
 ```
+
+Elements can access state properties on any of their ancestor elements.
+When the same property name is used at multiple nesting levels,
+the value of the nearest one is used.
 
 From {% aTargetBlank "https://alpinejs.dev/essentials/state#data-less-alpine",
 "Data-less Alpine" %}, "Sometimes you may want to use Alpine functionality,
