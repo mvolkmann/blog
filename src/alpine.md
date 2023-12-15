@@ -1219,6 +1219,10 @@ articles on {% aTargetBlank "https://news.ycombinator.com", "HackerNews" %}.
   <head>
     <script
       defer
+      src="https://cdn.jsdelivr.net/gh/mvolkmann/alpine-plugins@main/interpolate.js"
+    ></script>
+    <script
+      defer
       src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
     ></script>
     <script>
@@ -1244,17 +1248,15 @@ articles on {% aTargetBlank "https://news.ycombinator.com", "HackerNews" %}.
     <div
       x-data="{error: undefined, query: '', results: []}"
       x-init="$watch('query', query => search(query, $data))"
+      x-interp
     >
       <label>
         Query
-        <input autofocus size="20" type="text" x-model.debounce.500="query" />
+        <input autofocus size="20" type="text" x-model.debounce.300="query" />
       </label>
-      <div style="color: red" x-show="error">
-        Error: <span x-text="error"></span>
-      </div>
+      <div style="color: red" x-show="error">Error: {error}</div>
       <div x-show="results.length">
-        The search for "<span x-text="query"></span>" returned
-        <span x-text="results.length"></span> results.
+        The search for "{query}" returned {results.length} results.
       </div>
       <template x-for="result of results" :key="result.objectID">
         <div>
