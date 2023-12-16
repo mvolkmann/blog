@@ -20,8 +20,13 @@ layout: topic-layout.njk
 "{% aTargetBlank "https://alpinejs.dev", "Alpine" %}
 is a lightweight JavaScript framework that
 uses custom HTML attributes to add dynamic behavior.
-It adds support for 18 attributes (aka directives),
-6 properties, and 2 methods.
+
+Alpine was created by Caleb Porzio.
+He also created {% aTargetBlank "https://laravel-livewire.com", "Livewire" %}
+which is a full stack framework for Laravel which uses PHP.
+Quoting Caleb, "Alpine.js offers you the reactive and declarative nature
+of big frameworks like Vue or React at a much lower cost.
+You get to keep your DOM, and sprinkle in behavior as you see fit."
 
 The minified Alpine library for version 3.13.3,
 which is the latest as of December 2023, is only 17K.
@@ -1691,3 +1696,10 @@ of elements that use other Alpine directives?
 
 Did you apply the `x-if` or `x-for` directives
 to an element other than `template`?
+
+## Resources
+
+- {% aTargetBlank "https://alpinejs.dev", "Alpine home page" %}
+- {% aTargetBlank "https://www.youtube.com/watch?v=4c8dpZN0rqM&t=1s", "Say No To Complexity With AlpineJS" %} YouTube video by Caleb Porzio
+- {% aTargetBlank "https://mvolkmann.github.io/blog/topics/#/blog/alpine/?v=1.0.22", "Mark Volkmann's Alpine blog page" %}
+- {% aTargetBlank "https://www.alpinetoolbox.com", "Alpine Toolbox" %}
