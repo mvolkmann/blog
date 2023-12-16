@@ -24,7 +24,7 @@ It adds support for 18 attributes (aka directives),
 6 properties, and 2 methods.
 
 The minified Alpine library for version 3.13.3,
-which is the latest as of December 2023, is only 43K.
+which is the latest as of December 2023, is only 17K.
 
 To use this, add the following `script` tag:
 

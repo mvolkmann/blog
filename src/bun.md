@@ -565,6 +565,16 @@ const server = Bun.serve({
   port: 3000,
   fetch(req) {
     return new Response('Hi! This is my first Bun server!');
+  },
+  error(err) {
+    // Handle the error.
+    console.error(err);
+    return new Response(err);
+  },
+  // optional to support HTTPS
+  tls: {
+    cert: Bun.file('./cert.pem'),
+    key: Bun.file('./key.pem')
   }
 });
 
