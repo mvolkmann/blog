@@ -1554,53 +1554,29 @@ For example, we can't define a "ProgressBar" component and then
 render it with HTML like `<ProgressBar value={value} max={100} />`.
 
 We can approximate this though with a bit of JavaScript code
-that searches the DOM for elements that have an attribute
+that searches the DOM for elements that have an attribute like `x-include`
 that specifies a file to load that defines a component.
 We can make data available to an instance of a component
 using the standard `x-data` Alpine attribute.
 
-Here is the JavaScript code from a file named "x-include.js":
+This approach is implemented by an Alpine plugin at {% aTargetBlank
+"https://github.com/mvolkmann/alpine-plugins", "alpine-plugins" %}.
+See the file `include.js`.
 
-```js
-const {href} = location;
-const lastSlashIndex = href.lastIndexOf('/');
-const urlPrefix = href.substring(0, lastSlashIndex + 1);
-
-function includeHTML() {
-  const attribute = 'x-include';
-  // Find the first element that contains the include attribute.
-  const element = document.querySelector(`[${attribute}]`);
-  if (!element) return; // no more found
-
-  const xhr = new XMLHttpRequest();
-  xhr.onload = () => {
-    element.innerHTML = xhr.responseText;
-    element.removeAttribute(attribute);
-    // Make a recursive call to process remaining elements
-    // with the w3-include-html attribute.
-    includeHTML();
-  };
-
-  const file = element.getAttribute(attribute);
-  xhr.open('GET', urlPrefix + file, true);
-  xhr.send();
-}
-
-window.onload = includeHTML;
-```
-
-Here is an example of using "x-include.js" in a file named "demo.html":
+Here is an example of using the plugin in a file named "index.html":
 
 ```html
 <html lang="en">
   <head>
     <title>Include Demo</title>
-    <!-- All included "components" can also use Alpine. -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/gh/mvolkmann/alpine-plugins@v0.0.5/include.js"
+    ></script>
     <script
       defer
       src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
     ></script>
-    <script src="x-include.js"></script>
   </head>
   <body x-data="{show: true}">
     <h1>Include Demo</h1>
