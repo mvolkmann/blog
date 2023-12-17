@@ -1563,7 +1563,9 @@ This approach is implemented by an Alpine plugin at {% aTargetBlank
 "https://github.com/mvolkmann/alpine-plugins", "alpine-plugins" %}.
 See the file `include.js`.
 
-Here is an example of using the plugin in a file named "index.html":
+Here is an example of using the plugin in a file named "index.html".
+This must be served by an HTTP server rather than opening it as a file
+in order to avoid CORS issues.
 
 ```html
 <html lang="en">
