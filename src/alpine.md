@@ -22,8 +22,8 @@ is a lightweight JavaScript framework that
 uses custom HTML attributes to add dynamic behavior.
 
 Alpine was created by Caleb Porzio.
-He also created {% aTargetBlank "https://laravel-livewire.com", "Livewire" %}
-which is a full stack framework for Laravel which uses PHP.
+He also created {% aTargetBlank "https://laravel-livewire.com", "Livewire" %},
+a full stack framework for Laravel which uses PHP.
 Quoting Caleb, "Alpine.js offers you the reactive and declarative nature
 of big frameworks like Vue or React at a much lower cost.
 You get to keep your DOM, and sprinkle in behavior as you see fit."
@@ -844,7 +844,7 @@ For example:
 For more detail, see {% aTargetBlank
 "https://alpinejs.dev/directives/transition", "x-transition" %}.
 
-### Custom Directives
+## Custom Directives
 
 In addition to the provided directives, custom directives can be implemented.
 The following code demonstrates defining
@@ -1224,7 +1224,7 @@ articles on {% aTargetBlank "https://news.ycombinator.com", "HackerNews" %}.
   <head>
     <script
       defer
-      src="https://cdn.jsdelivr.net/gh/mvolkmann/alpine-plugins@main/interpolate.js"
+      src="https://cdn.jsdelivr.net/gh/mvolkmann/alpine-plugins@v0.0.5/interpolate.js"
     ></script>
     <script
       defer
@@ -1253,7 +1253,7 @@ articles on {% aTargetBlank "https://news.ycombinator.com", "HackerNews" %}.
     <div
       x-data="{error: undefined, query: '', results: []}"
       x-init="$watch('query', query => search(query, $data))"
-      x-interp
+      x-interpolate
     >
       <label>
         Query
@@ -1265,8 +1265,8 @@ articles on {% aTargetBlank "https://news.ycombinator.com", "HackerNews" %}.
       </div>
       <template x-for="result of results" :key="result.objectID">
         <div>
-          <h4 style="margin-bottom: 0" x-text="result.title"></h4>
-          <a :href="result.url" target="_blank" x-text="result.url"></a>
+          <h4 style="margin-bottom: 0">{result.title}</h4>
+          <a :href="result.url" target="_blank">{result.url}</a>
         </div>
       </template>
     </div>
