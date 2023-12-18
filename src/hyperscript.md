@@ -4,9 +4,9 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-<figure style="width: 60%">
-  <img alt="HTMX logo" style="border: 0"
-    src="/blog/assets/htmx-logo.png?v={{pkg.version}}">
+<figure style="width: 80%">
+  <img alt="_hyperscript logo" style="border: 0"
+    src="/blog/assets/hyperscript-logo.png?v={{pkg.version}}">
 </figure>
 
 ## Overview
