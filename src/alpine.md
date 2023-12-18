@@ -62,7 +62,7 @@ Many Alpine directives have the same name suffix as a Vue directives.
 
 The {% aTargetBlank
 "https://marketplace.visualstudio.com/items?itemName=adrianwilczynski.alpine-js-intellisense",
-"Alpine.js IntelliSense" %} extension for VS Code provides
+"Alpine.js IntelliSense" %} extension from Adrian Wilczyński provides
 intellisense and snippets for Alpine directives and magic properties.
 
 The intellisense provides great documentation of
@@ -72,6 +72,11 @@ Useful snippets include `x-for`, `x-for-index`, `x-for-key`, and `x-if`.
 
 Unfortunately this extension has not been updated since November 2020
 and some of it is specific to version 2 of Alpine.
+
+A more recent option that supports version 3 of Alpine is {% aTargetBlank
+"https://marketplace.visualstudio.com/items?itemName=pcbowers.alpine-intellisense",
+"Alpine.js IntelliSense" %} from P. Christopher Bowers.
+It was last updated in June 2022.
 
 ## Using TypeScript
 
