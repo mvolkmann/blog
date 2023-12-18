@@ -51,7 +51,7 @@ window.Alpine = Alpine; // optional for DevTools access
 Alpine.start();
 ```
 
-The design of Alpine is somewhat based on Vue.
+The design of Alpine is heavily based on Vue.
 Vue uses `v-` for its directive prefixes.
 During the initial implementation of Alpine, it did not yet have a name,
 so `x-` was chosen for its prefixes.
@@ -193,8 +193,25 @@ That attribute is removed when `open` is true.
 
 Alpine 3.13.3 supports 18 directives that are each described below.
 These are used as attributes on HTML elements.
-Some accept a string of JavaScript code as their value.
+
+Some directives accept a string of JavaScript code as their value.
 The JavaScript code can call builtin and custom JavaScript functions.
+
+If embedding JavaScript code as the value of an Alpine directive
+seems to make the HTML too cluttered, there is the option to
+move the code to a JavaScript function inside a `script` tag
+and change the directive value to be a call to that function.
+
+When there is an error in the JavaScript code (such as a syntax error),
+a message is displayed in the DevTools console of the web browser.
+Developers must remember to check the console.
+No error is flagged for referring to an undefined variable.
+
+On initial page load Alpine crawls the DOM looking for directive attributes and
+configures everything that is needed to update the DOM when data changes.
+It uses {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver",
+"MutationObservers" %} for this.
 
 ### x-bind
 
@@ -203,6 +220,7 @@ In some cases such as the `class` attribute it is possible to specify
 a value both without and with `x-bind` and both values will be used.
 
 A shorthand for `x-bind:` is just `:`.
+This was copied from Vue.
 
 For example:
 
@@ -620,6 +638,7 @@ So these are equivalent:
 ```
 
 A shorthand for `x-on:` is just `@`.
+This was copied from Vue.
 
 The event name must be composed of lowercase letters and dashes.
 To handle events with names that contain uppercase letters or periods,
@@ -1739,7 +1758,8 @@ see {% aTargetBlank "https://alpinejs.dev/advanced/csp", "CSP" %}.
 
 Alpine monitors state defined in `x-data` directives and stores and
 automatically updates parts of the UI that use the data when the values change.
-This is implemented by the functions `Alpine.reactive` and `Alpine.effect`.
+Reactivity is implemented by the functions `Alpine.reactive` and `Alpine.effect`.
+Alpine does not use a virtual DOM like React.
 For more detail, see {% aTargetBlank
 "https://alpinejs.dev/advanced/reactivity", "Reactivity" %}.
 
@@ -1757,3 +1777,9 @@ to an element other than `template`?
 - {% aTargetBlank "https://www.youtube.com/watch?v=4c8dpZN0rqM&t=1s", "Say No To Complexity With AlpineJS" %} YouTube video by Caleb Porzio
 - {% aTargetBlank "https://mvolkmann.github.io/blog/topics/#/blog/alpine/?v=1.0.22", "Mark Volkmann's Alpine blog page" %}
 - {% aTargetBlank "https://www.alpinetoolbox.com", "Alpine Toolbox" %}
+
+## TODO
+
+- Can you use Alpine.data to update and access data properties?
+- Learn more about JavaScript/DOM mutation observers.
+- Add filtering on All, Uncompleted, and Completed to your Alpine todo app.
