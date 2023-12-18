@@ -132,6 +132,7 @@ That attribute is removed when `open` is true.
 ## Directives
 
 Alpine 3.13.3 supports 18 directives that are each described below.
+These are used as attributes on HTML elements.
 Some accept a string of JavaScript code as their value.
 The JavaScript code can call builtin and custom JavaScript functions.
 
@@ -223,8 +224,9 @@ For example:
 
 The `x-data` directive declares an HTML element to be an Alpine component
 and optionally declares associated state that Alpine watches for changes.
-The state is scoped to this element and its descendant elements.
-It can include properties and functions.
+The state is specified as a literal JavaScript object
+which can include properties and functions.
+These are scoped to this element and its descendant elements.
 
 For example:
 
@@ -287,7 +289,7 @@ and displays an image from unsplash.
 
 ### x-effect
 
-The `x-effect` directive executes JavaScript code
+The `x-effect` directive executes specified JavaScript code
 every time a variable it uses changes.
 For example:
 
@@ -301,7 +303,9 @@ For example:
 
 The `x-for` directive repeats the contents of a `template` element
 once for each item in an array.
-It can only be used in `template` elements.
+Its value is a string that contains a variable name followed by " of "
+and a data property whose value is an array.
+This directive can only be applied to `template` elements.
 For example:
 
 ```html
@@ -375,8 +379,9 @@ See the section below describing `$id`.
 ### x-if
 
 The `x-if` directive conditionally includes the contents of a `template` element.
-It can only be used in `template` elements.
+Its value is a JavaScript expression that is interpreted as a Boolean condition.
 When the condition is false, the element will not be included in the DOM.
+This directive can only be applied to `template` elements.
 
 For example:
 
@@ -413,9 +418,8 @@ For example:
 ### x-model
 
 The `x-model` directive creates a two-way binding between
-an input value to an `x-data` variable.
-Supported inputs include the HTML elements
-`input`, `textarea`, and `select`.
+an input value to an `x-data` property.
+Supported inputs include the HTML elements `input`, `textarea`, and `select`.
 For example:
 
 ```html
@@ -538,7 +542,7 @@ It is useful when using certain templating frameworks such as Laravel Blade.
 
 ### x-on
 
-The `x-on` directive executes given JavaScript code when a given event occurs.
+The `x-on` directive executes given JavaScript code when a specified event occurs.
 For example:
 
 ```html
@@ -676,7 +680,7 @@ These include `.alt`, `.caps-lock`, `.cmd`, `.ctrl`, `.down` (arrow key),
 
 ### x-ref
 
-The `x-ref` directive adds a reference name to this element
+The `x-ref` directive adds a reference name to an element
 so other elements can access its value with `$refs.{name}`.
 For example:
 
@@ -765,10 +769,12 @@ which is used to determine whether the green checkmark should be displayed.
 
 ### x-show
 
-The `x-show` directive determines whether this element should be visible.
-The element will be present in the DOM regardless.
+The `x-show` directive determines whether
+the element to which it is applied should be visible.
+Its value is a JavaScript expression that is interpreted as a Boolean condition.
 When the condition is false, the attribute `style="display: none;"` is added.
 That attribute is removed when the condition is true.
+The element will be present in the DOM regardless.
 
 For example:
 
@@ -790,7 +796,8 @@ One use is to attach a modal dialog to the `body` element.
 
 ### x-text
 
-The `x-text` directive specifies the text content of this element.
+The `x-text` directive specifies the text content of
+the element to which it is applied by evaluating a JavaScript expression.
 For example:
 
 ```html
@@ -807,8 +814,8 @@ TODO: Try to write this plugin!
 
 ### x-transition
 
-The `x-transition` directive causes this element to transition in and out
-when it is shown and hidden using the `x-show` directive.
+The `x-transition` directive causes the element to which it is applied to
+transition in and out when it is shown and hidden using the `x-show` directive.
 By default it changes the opacity between 0 and 1
 and changes the scale between 0% and 100%.
 
@@ -1362,6 +1369,15 @@ For example:
 ```js
 $store.profile.role = 'admin';
 ```
+
+Do something with this comment from kwoka:
+"Alpine watches the whole tree under x-data which can be performance critical. maybe.
+and stores can be accessed outside of the Alpine context much easier, which is good.
+and it's automatically name-spaced as well.
+It can more just be about separating out what is "global" vs "local" while just a body data is more like a local-global..."
+
+About accessing and modifying data with Alpine.data(), kwoka said
+"You cannot, or at least, the ways you can are not very good at doing that in reality, and a lot less clear."
 
 ## Plugins
 
