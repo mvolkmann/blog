@@ -207,6 +207,11 @@ a message is displayed in the DevTools console of the web browser.
 Developers must remember to check the console.
 No error is flagged for referring to an undefined variable.
 
+Moving some of the JavaScript code into functions defined in a `script` tag
+and calling those functions from Alpine directive values
+enables seeing more errors in a code editor
+before opening a page in a web browser.
+
 On initial page load Alpine crawls the DOM looking for directive attributes and
 configures everything that is needed to update the DOM when data changes.
 It uses {% aTargetBlank
