@@ -58,6 +58,21 @@ so `x-` was chosen for its prefixes.
 That is why the prefix is not something like `a-` or `alp-`.
 Many Alpine directives have the same name suffix as a Vue directives.
 
+## Using VS Code
+
+The {% aTargetBlank
+"https://marketplace.visualstudio.com/items?itemName=adrianwilczynski.alpine-js-intellisense",
+"Alpine.js IntelliSense" %} extension for VS Code provides
+intellisense and snippets for Alpine directives and magic properties.
+
+The intellisense provides great documentation of
+Alpine directives as they are being entered.
+
+Useful snippets include `x-for`, `x-for-index`, `x-for-key`, and `x-if`.
+
+Unfortunately this extension has not been updated since November 2020
+and some of it is specific to version 2 of Alpine.
+
 ## Using TypeScript
 
 To use TypeScript in an Alpine project, see {% aTargetBlank
