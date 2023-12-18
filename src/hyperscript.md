@@ -23,6 +23,11 @@ language which was used in Apple's
 {% aTargetBlank "https://en.wikipedia.org/wiki/HyperCard", "HyperCard" %}.
 Like HyperTalk, \_hypertalk uses an English-like syntax.
 
+\_hyperscript is similar to {% aTargetBlank "https://alpinejs.dev", "Alpine" %}
+and {% aTargetBlank "https://htmx.org", "HTMX" %}
+in that they add attributes to HTML.
+But hyperscript only adds one attribute, the underscore.
+
 \_hyperscript was created by Carson Gross who also created
 {% aTargetBlank "https://htmx.org", "HTMX" %}.
 
@@ -42,15 +47,20 @@ whose name is an underscore.
 For example:
 
 ```html
-<div _="on click alert('got click')">Click Me</div>
+<html lang="en">
+  <head>
+    <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
+  </head>
+  <body>
+    <button _="on click alert('got click')">Click Me</button>
+  </body>
+</html>
 ```
 
 ## TODO
 
 Organize this content:
 
-scripts are specified using the underscore attribute.
-\_hyprescript is similar to Alpine and HTMX in that they add attributes to HTML. But hyperscript only adds one attribute, the underscore.
 can combine with tailwind in order to use provided classes like hidden.
 how good are the error messages if there is something wrong in the syntax?
 Do error messages appear in the Dev tools console?
