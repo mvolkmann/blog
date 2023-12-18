@@ -101,6 +101,66 @@ Vite provides a local HTTP server with hot reload.
 
 - Browse localhost:5173.
 
+## Using Tailwind
+
+There are two approaches for using Tailwind for CSS styling in an Alpine app.
+
+The easiest approach is to include it from a CDN with this `link` tag:
+
+```html
+<script src="https://cdn.tailwindcss.com"></script>
+```
+
+This has the downside that it includes every Tailwind CSS class,
+not just the ones actually used in the app.
+
+A more involved approach is to generate a CSS file that
+only contains the Tailwind CSS classes that are actually used.
+The steps to do this are as follows:
+
+1. Install Tailwind by entering `bun install -d tailwindcss`
+1. Enter `bunx tailwindcss init` to create the file `tailwind.config.js`.
+1. Edit the value of `content` in `tailwind.config.js`
+   to be `content: ['**/*.html'],`
+1. Create the file `global.css` containing the following:
+
+   ```css
+   @tailwind base;
+   @tailwind components;
+   @tailwind utilities;
+   ```
+
+   This file can also define custom CSS classes.
+
+1. Generate a CSS file containing only the Tailwind classes used in your app.
+
+   Enter `bunx tailwindcss -i ./global.css -o public/tailwind.css --watch`
+   to generate `public/tailwind.css` now and
+   again every time any of thew "content" files are modified.
+
+   Consider adding a `package.json` script for this such as:
+
+   ```json
+   "tw": "bunx tailwindcss -i ./global.css -o public/tailwind.css --watch"
+   ```
+
+   To run this, enter `bun run tw`.
+
+1. Include the following `link` element in the base HTML of the app.
+
+   ```html
+   <link href="/public/tailwind.css" rel="stylesheet" />
+   ```
+
+   The documentation for the `@elysiajs/static` plugin says
+   it defaults to looking in the `public` directory,
+   but it actual defaults to looking in the root directory
+   and I haven't found a way to change that.
+   See this {% aTargetBlank "https://github.com/elysiajs/elysia/issues/352",
+   "issue" %}.
+
+1. Serve the app from any HTTP server.
+
 ## Basic Example
 
 The following code renders a button that toggles whether a `div` is visible.

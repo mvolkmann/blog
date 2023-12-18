@@ -217,7 +217,11 @@ your application server and include a `script` tag like the following:
 <script src="htmx.min.js"></script>
 ```
 
-## Tailwind
+## Using TypeScript
+
+TODO: Copy content from the Alpine page.
+
+## Using Tailwind
 
 There are two approaches for using Tailwind for CSS styling in an HTMX app.
 
@@ -235,7 +239,7 @@ only contains the Tailwind CSS classes that are actually used.
 The steps to do this are as follows:
 
 1. Install Tailwind by entering `bun install -d tailwindcss`
-1. Create the file `tailwind.config.js` by entering `bunx tailwindcss init`
+1. Enter `bunx tailwindcss init` to create the file `tailwind.config.js`.
 1. Edit the value of `content` in `tailwind.config.js`
    to be `content: ['**/*.tsx'],`
 1. Create the file `global.css` containing the following:
@@ -259,6 +263,8 @@ The steps to do this are as follows:
    ```json
    "tw": "bunx tailwindcss -i ./global.css -o public/tailwind.css --watch"
    ```
+
+   To run this, enter `bun run tw`.
 
 1. Include the following `link` element in the base HTML of the app.
 
