@@ -1778,6 +1778,11 @@ Data can be provided to the components in several ways including
 the directive properties `value`, `modifiers`, and `expression`.
 The components can also access data defined with `x-data` or stores.
 
+Using a custom directive to define a component
+doesn't make it easy specify the HTML of the component.
+Directives are defined in JavaScript code and
+modifying the DOM using JavaScript is tedious compared to writing HTML.
+
 Another approach is to search the DOM for elements that
 have an attribute like `x-include` that
 specifies an HTML file to load that defines a component.
