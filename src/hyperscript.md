@@ -115,8 +115,11 @@ This issue was reported in April 2022, so it seems it will not be fixed.
   - `element`: scoped to the element associated with the script
   - `global`: available to all scripts
 
-  To specify the scope of a variable, precede its name with one of these keywords.
-  If no scope is specified, it defaults to `local`.
+  To specify the scope of a variable,
+  precede its name with one of these keywords and space.
+  Alternative, precede the name with
+  a `$` for global scope or a `:` for element scope.
+  If no scope is specified, the variable defaults to `local` scope.
 
 ## Errors
 
