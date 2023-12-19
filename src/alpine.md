@@ -954,7 +954,41 @@ For more detail, see {% aTargetBlank
 
 ## Custom Directives
 
-In addition to the provided directives, custom directives can be implemented.
+In addition to the provided directives, custom directives can be implemented
+by calling the `Alpine.directive` function.
+This is passed the name of the directive and a callback function.
+
+The directive name must not include the `x-` prefix
+that is required to use it.
+
+The callback function has three parameters.
+
+The first parameter is a reference to the element
+on which the directive is applied and is typically named `el`.
+
+The second parameter is an object with the properties
+`value`, `modifiers`, and `expression`.
+The `value` property holds the optional part of the directive
+that follows the name and a colon.
+The `modifiers` property is an optional array of modifier names
+that follow the name and are each preceded by a period.
+The `expression` property is the optional value specified with `="{value}"`.
+
+For example, in the directive application `x-alpha:beta.gamma.delta="epsilon"`
+the name is `x-alpha`,
+`value` is `beta`,
+`modifiers` is `['gamma', 'delta']`,
+and `expression` is `'epsilon'`.
+
+The third parameter is and object with the properties
+`Alpine`, `effect`, and `cleanup`.
+The `Alpine` property is the global Alpine object that
+provides the functions `bind`, `data`, and `store`.
+The `effect` property is a function that is used to create reactive directives
+that respond to changes in stores and `x-data` values.
+The `cleanup` property is a function that can be passed a function that
+should be called when the directive is removed from the DOM.
+
 The following code demonstrates defining
 a custom directive named `x-weather-feel`.
 
@@ -1712,16 +1746,23 @@ Alpine.store('data', {
 
 ## Components
 
-One issue with Alpine is that it doesn't support defining components
-in the sense that SPA frameworks like React do.
+One issue with Alpine is that it doesn't describe a standard way
+to define components in the sense that SPA frameworks like React do.
 For example, we can't define a "ProgressBar" component and then
 render it with HTML like `<ProgressBar value={value} max={100} />`.
 
-We can approximate this though with a bit of JavaScript code
-that searches the DOM for elements that have an attribute like `x-include`
-that specifies a file to load that defines a component.
-We can make data available to an instance of a component
-using the standard `x-data` Alpine attribute.
+The Alpine team provides a commercial set of predefined components at
+{% aTargetBlank "https://alpinejs.dev/components", "Components" %}.
+Each component is implemented as a custom directive
+that can be applied to an HTML element such as a `div`.
+A `script` tag is required to load the code for each component.
+Data can be provided to the components using `x-data` or stores.
+
+Another approach is to search the DOM for elements that
+have an attribute like `x-include` that
+specifies a file to load that defines a component.
+Data can be made available to an instance of a component
+using the `x-data` directive.
 
 This approach is implemented by an Alpine plugin at {% aTargetBlank
 "https://github.com/mvolkmann/alpine-plugins", "alpine-plugins" %}.

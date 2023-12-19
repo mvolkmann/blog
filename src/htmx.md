@@ -47,22 +47,6 @@ not TypeScript, in a single source file.
 There are plans to add JSDoc TypeScript type definitions
 for better code editor support.
 
-## Origin and History
-
-HTMX was created by {% aTargetBlank "https://bigsky.software/cv/",
-"Carson Gross" %}. He is a principal software engineer at
-{% aTargetBlank "https://bigsky.software/", "Big Sky Software" %}
-and a part-time Computer Science instructor at Montana State University.
-
-Interest in HTMX exploded in 2023 after YouTube videos
-from ThePrimeagen and Fireship were released.
-See {% aTargetBlank "https://www.youtube.com/watch?v=zjHHIqI9lUY", "HTMX" %} and
-{% aTargetBlank "https://www.youtube.com/watch?v=r-GSGH2RxJs", "HTMX in 100 seconds" %}.
-
-Companies that sponsor the development of HTMX are listed on the
-{% aTargetBlank "https://htmx.org", "home page" %}.
-They include GitHub and JetBrains.
-
 ## REST?
 
 Web app frameworks such as React, Svelte, Angular, and Vue
@@ -128,6 +112,48 @@ Why should we decide how to render data on the client instead of on the server?
 Why should we restrict ourselves to only using JavaScript
 to implement web applications?
 
+## History and Future
+
+HTMX was created by {% aTargetBlank "https://bigsky.software/cv/",
+"Carson Gross" %}. He is a principal software engineer at
+{% aTargetBlank "https://bigsky.software/", "Big Sky Software" %}
+and a part-time Computer Science instructor at Montana State University.
+
+Carson been working on the approach of simplifying web development
+by adding attributes to HTML for a long time.
+
+The predecessor of HTMX, also created by Carson Gross,
+is {% aTargetBlank "https://intercoolerjs.org", "intercooler.js" %}.
+Work on intercooler.js began in 2013
+and the first version was released in April 2014.
+Intercooler had a dependency on jQuery, but HTMX does not.
+
+The first version of HTMX was released in May 2020.
+The 1.0 version was released in November, 2020.
+The latest version as of December 2023 is 1.9.9.
+It is 15K gzipped and 47K unzipped.
+
+HTMX 2.0 is expected in late 2023 or early 2024.
+It will remove legacy support for things like IE,
+old style WebSockets, and old style server sent events.
+There will also be some changes to default behavior
+such as not enabling CORS by default.
+Other changes are not expected to be dramatic.
+
+HTMX has an extensive set of integration tests implemented in Mocha.
+
+Carson Gross wishes that the functionality of HTMX would be folded into HTML,
+making HTMX unnecessary.
+
+Interest in HTMX exploded in 2023 after YouTube videos
+from ThePrimeagen and Fireship were released.
+See {% aTargetBlank "https://www.youtube.com/watch?v=zjHHIqI9lUY", "HTMX" %} and
+{% aTargetBlank "https://www.youtube.com/watch?v=r-GSGH2RxJs", "HTMX in 100 seconds" %}.
+
+Companies that sponsor the development of HTMX are listed on the
+{% aTargetBlank "https://htmx.org", "HTMX home page" %}.
+They include GitHub and JetBrains.
+
 ## Client-side Processing
 
 HTMX is not appropriate for all features of web apps.
@@ -164,34 +190,6 @@ that use the data to generate HTML responses.
 Alternatively, write functions that return the desired data
 and call them from both the endpoints that return JSON
 and the endpoints that return HTML.
-
-## History and Future
-
-Carson Gross been working on the approach of simplifying web development
-by adding attributes to HTML for a long time.
-
-The predecessor of HTMX, also created by Carson Gross,
-is {% aTargetBlank "https://intercoolerjs.org", "intercooler.js" %}.
-Work on intercooler.js began in 2013
-and the first version was released in April 2014.
-Intercooler had a dependency on jQuery, but HTMX does not.
-
-The first version of HTMX was released in May 2020.
-The 1.0 version was released in November, 2020.
-The latest version as of December 2023 is 1.9.9.
-It is 15K gzipped and 47K unzipped.
-
-HTMX 2.0 is expected in late 2023 or early 2024.
-It will remove legacy support for things like IE,
-old style WebSockets, and old style server sent events.
-There will also be some changes to default behavior
-such as not enabling CORS by default.
-Other changes are not expected to be dramatic.
-
-HTMX has an extensive set of integration tests implemented in Mocha.
-
-Carson Gross wishes that the functionality of HTMX would be folded into HTML,
-making HTMX unnecessary.
 
 ## Installing
 
