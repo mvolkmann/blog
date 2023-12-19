@@ -212,7 +212,45 @@ your application server and include a `script` tag like the following:
 
 ## Using TypeScript
 
-TODO: Copy content from the Alpine page.
+The following steps provide one way to use TypeScript with an HTMX project.
+They create a new project that uses HTMX, TypeScript, and Vite.
+Vite provides a local HTTP server with hot reload.
+
+TODO: Try and correct these steps!
+
+- Enter `npm init vite@latest`
+
+  - Enter a project name.
+  - For the framework, select "Vanilla".
+  - For the variant, select "TypeScript".
+
+- cd to the newly created project directory
+- Enter `npm install alpinejs`
+- Enter `npm install -D @types/alpinejs`
+- Replace the contents of `src/main.ts` with the following:
+
+  ```ts
+  import Alpine from 'alpinejs';
+  window.Alpine = Alpine;
+  Alpine.start();
+  ```
+
+- Create the file `src/global.d.ts` containing the following:
+
+  ```ts
+  import {Alpine as AlpineType} from 'alpinejs';
+
+  declare global {
+    var Alpine: AlpineType;
+  }
+  ```
+
+- Edit `index.html` which already contains a `script` tag for `/src/main.ts`.
+  Add HTML that uses Alpine directives here.
+
+- Enter `npm run dev`
+
+- Browse localhost:5173.
 
 ## Using Tailwind
 
@@ -277,6 +315,36 @@ This also requires enabling serving static files with the following steps:
 1. Install a plugin by entering `bun add @elysiajs/static`
 1. In the server code, add a call to `app.use(staticPlugin());`
 
+## Triggers
+
+With HTMX, any element can trigger an HTTP request.
+The first thing to consider is what will trigger a request to be sent.
+
+HTML elements such as `input`, `textarea`, and `select`
+automatically trigger when the emit a "change" event.
+HTML `form` elements automatically trigger when they emit a `submit` event.
+
+To trigger on a different event, add the `hx-trigger` attribute.
+The value of this attribute can be
+a single event name, a comma-separated list of event names,
+or `every {timing}` to trigger repeatedly at a given time interval.
+
+Event names include `click`, `mouseenter`, and custom event names.
+
+Events can be filtered so they only trigger in specific circumstances.
+This is specified in square brackets after an event name.
+For example, `click[shiftKey]` only triggers when
+an element is clicked while the shift key is held down.
+Multiple filters can be specify by and'ing them.
+For example, `click[shiftKey&&ctrlKey]`.
+The square brackets can also contain
+a call to a JavaScript function that returns a Boolean value
+where triggering doesn't occur if the function returns `false`.
+
+A space-separated list of event modifiers can follow an event name.
+For example, `click ...`
+TODO: FINISH THIS!
+
 ## Requests
 
 Interacting with any HTML element can trigger an HTTP request.
@@ -311,10 +379,6 @@ user-entered content is included in HTML responses.
 To prevent this, sanitize the HTML before returning it.
 A good library for doing this is {% aTargetBlank
 "https://github.com/apostrophecms/sanitize-html", "sanitize-html" %}.
-
-## Triggers
-
-hx-trigger
 
 ## Targets
 
