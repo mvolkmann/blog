@@ -9,6 +9,16 @@ layout: topic-layout.njk
     src="/blog/assets/hyperscript-logo.png?v={{pkg.version}}">
 </figure>
 
+## Foreword
+
+This page is incomplete.
+
+I'm giving up on \_hyperscript for now.
+The language feels a bit too hard to write because it is
+significantly different from most programming languages, including JavaScript.
+I had difficulty getting some basic examples to work.
+My questions on the htmx Discord channel went unanswered.
+
 ## Overview
 
 {% aTargetBlank "https://hyperscript.org", "_hyperscript" %} is
@@ -97,7 +107,7 @@ This issue was reported in April 2022, so it seems it will not be fixed.
 - expressions: can include three kinds of values
 
   - numbers
-  - strings in double quotes
+  - strings in single or double quotes
   - array literals with the syntax `[value1, value2, ...]`
   - element id references: `#some-id`
   - CSS class references: `.some-class`
@@ -138,6 +148,147 @@ followed by at least one whitespace character.
 
 For now, `//` for single-line comments and `/* ... */` for multi-line comments
 are also supported, but those may not be supported in the future.
+
+## Attributes
+
+To get the value of an attribute on the current element,
+use `@attr-name`. The value will always be a string.
+
+To set the value of an attribute on the current element,
+use `set @attr-name to {value}`.
+If the value is not a string, it will be converted to a string.
+
+## Strings
+
+Literal strings are delimited with single or double quotes.
+Strings can be concatenated with the `+` operator.
+Interpolation is performed in the same way as in JavaScript.
+For example:
+
+```hyperscript
+set fullName to `${firstName} ${lastName}`
+```
+
+## Arrays
+
+The following code demonstrates operating on arrays.
+
+```hyperscript
+set scores to [7, 19, 12]
+log the first of scores -- 7
+log the last of scores -- 12
+log random in scores -- one of the values
+```
+
+## Objects
+
+Objects are created with the same literal syntax as in JavaScript.
+For example:
+
+```hyperscript
+set dog to {name: "Comet", breed: "Whippet"}
+log `${dog.name} is a ${dog.breed}`
+```
+
+There are multiple ways to access a property of an object.
+
+- `dog.name`
+- `dog['name']`
+- `dog's name`
+- `the name of dog`
+
+## DOM Access
+
+Possessive expressions can be used to get and set DOM content.
+For example:
+
+```hyperscript
+get the first <li/> then
+set my innerHTML to its innerHTML
+```
+
+## Operators
+
+### Comparison Operators
+
+\_hyperscript supports all the comparison operators in JavaScript.
+It also supports many comparison keywords.
+
+- `x is y` is the same as `x == y`
+- `x is not y` is the same as `x != y`
+- `no x` and `x exists` are the same as
+  `x == null`, `x == undefined`, and `[[x.length]] == 0`?
+- `x is less then y` is the same as `x < y`
+- `x is greater then y` is the same as `x > y`
+
+Other operators with no direct comparison to JavaScript include the following:
+
+- `{collection} is empty`
+- `{element} matches {selector}`
+
+### Math Operators
+
+\_hyperscript supports most JavaScript math operators.
+It does not support the `%` operator for modulo,
+but the `mod` keyword can be used instead.
+
+\_hyperscript evaluates all operators from left to right
+and doesn't apply operator precedence.
+Parentheses must be used when an expression uses multiple operators.
+
+The `increment` and `decrement` keywords modify the value of a number
+as their name implies.
+
+## Conversions
+
+To convert a string to a number, follow it with `as an Int`.
+
+## Conditional Logic
+
+```hyperscript
+if {condition}
+  ...
+end
+```
+
+## Iteration
+
+\_hyperscript supports many kinds of loops.
+The `break` and `continue` keywords can be used in all of them.
+
+```hyperscript
+for {var} in {collection}
+  ...
+end
+
+for {var} in {collection} index {i}
+  ...
+end
+
+repeat forever
+  ...
+end
+
+repeat in {collection} -- sets the "it" variable
+  ...
+end
+
+repeat while {condition}
+  ...
+end
+
+repeat until {condition}
+  ...
+end
+
+repeat {n} times
+  ...
+end
+```
+
+Some commands automatically operate on all items in a collection.
+For example, `add .some-class to <li/>`
+adds the CSS class `some-class` to all `li` elements.
 
 ## Resources
 
