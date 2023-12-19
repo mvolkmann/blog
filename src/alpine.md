@@ -1774,11 +1774,13 @@ The Alpine team provides a commercial set of predefined components at
 Each component is implemented as a custom directive
 that can be applied to an HTML element such as a `div`.
 A `script` tag is required to load the code for each component.
-Data can be provided to the components using `x-data` or stores.
+Data can be provided to the components in several ways including
+the directive properties `value`, `modifiers`, and `expression`.
+The components can also access data defined with `x-data` or stores.
 
 Another approach is to search the DOM for elements that
 have an attribute like `x-include` that
-specifies a file to load that defines a component.
+specifies an HTML file to load that defines a component.
 Data can be made available to an instance of a component
 using the `x-data` directive.
 
