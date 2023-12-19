@@ -986,10 +986,13 @@ that follow the name and are each preceded by a period.
 
 The `expression` property is the optional value specified with `="{value}"`.
 
-For example, in the directive application `x-alpha:beta.gamma.delta="epsilon"`
-the name is `x-alpha`,
-`value` is `beta`,
-`modifiers` is `['gamma', 'delta']`,
+Consider the following directive application:
+
+```html
+<div x-alpha:beta.gamma.delta="epsilon">...</div>
+```
+
+The name is `alpha`, `value` is `beta`, `modifiers` is `['gamma', 'delta']`,
 and `expression` is `'epsilon'`.
 
 The third parameter is and object with the properties
