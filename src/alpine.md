@@ -1173,11 +1173,11 @@ It persists the data using `localStorage`.
 </html>
 ```
 
-## Properties
-
-## Methods
-
 ## Magic Properties and Functions
+
+Alpine provides many properties and functions whose names begin with `$`.
+These are referred to as "magics".
+Each of them are described below.
 
 ### $data
 
@@ -1455,6 +1455,9 @@ While these can be defined using the `x-data` property,
 long definitions can feel out of place in HTML.
 Defining them in a `script` tag is sometimes preferable.
 
+The `Alpine.data` function is only used to define data,
+not to query or modify data.
+
 For example:
 
 <img alt="Alpine counter" style="width: 20%"
@@ -1500,7 +1503,12 @@ The `Alpine.store` function defines a named, global store.
 It takes a name string and an object with properties and optional methods.
 This function can be called any number of times
 to define multiple global stores.
-For example:
+
+Stores can be accessed outside of the Alpine context.
+This differs from data defined by `Alpine.data`
+which can only be accessed in the context of Alpine.
+
+The following code demonstrates defining a store.
 
 ```js
 import Alpine from 'alpinejs';
@@ -1518,15 +1526,6 @@ For example:
 ```js
 $store.profile.role = 'admin';
 ```
-
-Do something with this comment from kwoka:
-"Alpine watches the whole tree under x-data which can be performance critical. maybe.
-and stores can be accessed outside of the Alpine context much easier, which is good.
-and it's automatically name-spaced as well.
-It can more just be about separating out what is "global" vs "local" while just a body data is more like a local-global..."
-
-About accessing and modifying data with Alpine.data(), kwoka said
-"You cannot, or at least, the ways you can are not very good at doing that in reality, and a lot less clear."
 
 ## Plugins
 
@@ -1726,10 +1725,10 @@ using the standard `x-data` Alpine attribute.
 
 This approach is implemented by an Alpine plugin at {% aTargetBlank
 "https://github.com/mvolkmann/alpine-plugins", "alpine-plugins" %}.
-See the file `include.js`.
+See the description of the `x-include` directive.
 
-Here is an example of using the plugin in a file named "index.html".
-This must be served by an HTTP server rather than opening it as a file
+The following HTML provides an example of using the `x-include` directive.
+This file must be served by an HTTP server rather than opening it as a file
 in order to avoid CORS issues.
 
 ```html
@@ -1752,16 +1751,15 @@ in order to avoid CORS issues.
       <span x-show="show">
         <!-- The file greeting.html defines a component.
              We can pass scoped data to it using x-data. -->
-        <span x-include="greeting.html" x-data="{name: 'World'}"></span>
+        <span x-include="greeting" x-data="{name: 'World'}"></span>
       </span>
     </div>
 
     <!-- The file colors.html defines a component.
-         We can pass scoped data to it using x-data.
          The file will only be loaded once even though
          we "include" it multiple times. -->
-    <div x-include="colors.html"></div>
-    <div x-include="colors.html" x-data="{upper: true}"></div>
+    <div x-include="colors"></div>
+    <div x-include="colors" x-data="{upper: true}"></div>
   </body>
 </html>
 ```
