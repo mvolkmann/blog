@@ -21,12 +21,18 @@ fetching data from a server by sending an HTTP request.
 {% aTargetBlank "https://en.wikipedia.org/wiki/HyperTalk", "HyperTalk" %}
 language which was used in Apple's
 {% aTargetBlank "https://en.wikipedia.org/wiki/HyperCard", "HyperCard" %}.
-Like HyperTalk, \_hypertalk uses an English-like syntax.
+Like HyperTalk, \_hyperscript uses an English-like syntax.
+It emphasizes readability, but may feel more difficult write at first
+because the syntax is quite different from typical programming languages.
 
 \_hyperscript is similar to {% aTargetBlank "https://alpinejs.dev", "Alpine" %}
 and {% aTargetBlank "https://htmx.org", "HTMX" %}
 in that they add attributes to HTML.
 But hyperscript only adds one attribute, the underscore.
+
+Placing code on HTML elements favors locality of behavior
+over separation of concerns much like
+{% aTargetBlank "https://tailwindcss.com", "Tailwind" %}, Alpine, and HTMX.
 
 \_hyperscript was created by Carson Gross who also created
 {% aTargetBlank "https://htmx.org", "HTMX" %}.
@@ -40,10 +46,13 @@ in each HTML page that needs it.
 <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
 ```
 
+Version 0.9.12 was released in October 2023.
+
 ## Using
 
 To use \_hyperscript, add an attribute to HTML elements
 whose name is an underscore.
+The names `script` and `data-script` can also be used.
 For example:
 
 ```html
@@ -56,6 +65,84 @@ For example:
   </body>
 </html>
 ```
+
+## Using VS Code
+
+The {% aTargetBlank
+"https://marketplace.visualstudio.com/items?itemName=dz4k.vscode-hyperscript-org",
+"_hyperscript" %} extension from dz4k provides
+syntax highlighting of \_hyperscript code embedded in HTML files
+and in standalone files.
+Unfortunately, it often messes up the syntax highlighting of HTML that follows.
+This issue was reported in April 2022, so it seems it will not be fixed.
+
+## Terminology
+
+- script: composed of features
+
+- feature: a series of commands
+
+  One kind of feature is an event handler.
+
+- command: a series of expressions
+
+  Multiple commands can be separated by
+  the `then` keyword or a newline character.
+
+  Commands with bodies, such as `if` and `on`
+  are terminated by the `end` keyword,
+  but that is not required if the script ends or another feature starts.
+  In practice the `end` keyword is rarely used.
+
+- expressions: can include three kinds of values
+
+  - numbers
+  - strings in double quotes
+  - array literals with the syntax `[value1, value2, ...]`
+  - element id references: `#some-id`
+  - CSS class references: `.some-class`
+  - attribute references: `@some-attribute`
+  - query references: `<somename />`
+
+- variables
+
+  To set a variable, use `set {name} to {value}`.
+  The `put` keyword can be used in place of `set`, but `set` is preferred.
+
+  There are three variable scopes:
+
+  - `local`: scoped to a feature within a script
+  - `element`: scoped to the element associated with the script
+  - `global`: available to all scripts
+
+  To specify the scope of a variable, precede its name with one of these keywords.
+  If no scope is specified, it defaults to `local`.
+
+## Errors
+
+When syntax errors are encountered,
+error messages are written to the DevTools Console.
+They are quite descriptive.
+
+## Logging
+
+To write to the DevTools Console, use `log {value}`
+
+## Comments
+
+Single-line comments begin with `--`
+followed by at least one whitespace character.
+
+For now, `//` for single-line comments and `/* ... */` for multi-line comments
+are also supported, but those may not be supported in the future.
+
+## Resources
+
+- {% aTargetBlank "https://hyperscript.org", "_hyperscript home page" %}
+- {% aTargetBlank "https://hyperscript.org/docs/", "_hyperscript Documentation" %}
+- {% aTargetBlank "https://hyperscript.org/cookbook/", "_hyperscript Cookbook" %}
+- {% aTargetBlank "https://hyperscript.org/reference/", "_hyperscript Reference" %}
+- {% aTargetBlank "", "" %}
 
 ## TODO
 
