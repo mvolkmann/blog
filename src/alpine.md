@@ -958,20 +958,32 @@ In addition to the provided directives, custom directives can be implemented
 by calling the `Alpine.directive` function.
 This is passed the name of the directive and a callback function.
 
-The directive name must not include the `x-` prefix
-that is required to use it.
+```js
+Alpine.directive(
+  'some-name',
+  (el, { value, modifiers, expression }, { Alpine, effect, cleanup }) => {
+    ...
+  }
+);
+```
 
-The callback function has three parameters.
+The directive name must not include the `x-` prefix,
+but that prefix is required to use the directive.
+
+The callback function takes three parameters.
 
 The first parameter is a reference to the element
 on which the directive is applied and is typically named `el`.
 
 The second parameter is an object with the properties
 `value`, `modifiers`, and `expression`.
+
 The `value` property holds the optional part of the directive
 that follows the name and a colon.
+
 The `modifiers` property is an optional array of modifier names
 that follow the name and are each preceded by a period.
+
 The `expression` property is the optional value specified with `="{value}"`.
 
 For example, in the directive application `x-alpha:beta.gamma.delta="epsilon"`
@@ -982,10 +994,13 @@ and `expression` is `'epsilon'`.
 
 The third parameter is and object with the properties
 `Alpine`, `effect`, and `cleanup`.
+
 The `Alpine` property is the global Alpine object that
 provides the functions `bind`, `data`, and `store`.
+
 The `effect` property is a function that is used to create reactive directives
 that respond to changes in stores and `x-data` values.
+
 The `cleanup` property is a function that can be passed a function that
 should be called when the directive is removed from the DOM.
 
@@ -1876,9 +1891,11 @@ For more detail, see {% aTargetBlank
 
 Did you forget to add the `x-data` directive on an ancestor element
 of elements that use other Alpine directives?
+The directives will not be processed without this.
 
 Did you apply the `x-if` or `x-for` directives
 to an element other than `template`?
+Those directives can only be applied to `template` elements.
 
 ## Resources
 
