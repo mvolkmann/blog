@@ -4,7 +4,7 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-<figure style="width: 80%">
+<figure style="width: 60%">
   <img alt="_hyperscript logo" style="border: 0"
     src="/blog/assets/hyperscript-logo.png?v={{pkg.version}}">
 </figure>
@@ -165,7 +165,7 @@ Strings can be concatenated with the `+` operator.
 Interpolation is performed in the same way as in JavaScript.
 For example:
 
-```hyperscript
+```text
 set fullName to `${firstName} ${lastName}`
 ```
 
@@ -173,7 +173,7 @@ set fullName to `${firstName} ${lastName}`
 
 The following code demonstrates operating on arrays.
 
-```hyperscript
+```text
 set scores to [7, 19, 12]
 log the first of scores -- 7
 log the last of scores -- 12
@@ -185,7 +185,7 @@ log random in scores -- one of the values
 Objects are created with the same literal syntax as in JavaScript.
 For example:
 
-```hyperscript
+```text
 set dog to {name: "Comet", breed: "Whippet"}
 log `${dog.name} is a ${dog.breed}`
 ```
@@ -202,7 +202,7 @@ There are multiple ways to access a property of an object.
 Possessive expressions can be used to get and set DOM content.
 For example:
 
-```hyperscript
+```text
 get the first <li/> then
 set my innerHTML to its innerHTML
 ```
@@ -245,7 +245,7 @@ To convert a string to a number, follow it with `as an Int`.
 
 ## Conditional Logic
 
-```hyperscript
+```text
 if {condition}
   ...
 end
@@ -256,7 +256,7 @@ end
 \_hyperscript supports many kinds of loops.
 The `break` and `continue` keywords can be used in all of them.
 
-```hyperscript
+```text
 for {var} in {collection}
   ...
 end

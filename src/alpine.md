@@ -908,13 +908,10 @@ For example:
 <div x-text="temperature >= 80 ? 'hot' : 'cold'"></div>
 ```
 
-{% raw %}
-It's a shame we can't use a more terse syntax like `{{expression}}`
-instead of `<span x-text="var"></span>`.
-In the Alpine Discord channel, kwoka said
-"A plugin to make {{}} work within a part of a tree would be possible."
-TODO: Try to write this plugin!
-{% endraw %}
+It's a shame that a more terse syntax like {% raw %}`{{expression}}`{% endraw %}
+instead of `<span x-text="var"></span>` isn't supported.
+See the `x-interpolate` directive described at {% aTargetBlank
+"https://github.com/mvolkmann/alpine-plugins", "alpine-plugins" %}.
 
 ### x-transition
 
@@ -1059,7 +1056,10 @@ The following example combines some of the features we have seen so far.
 </html>
 ```
 
-## Todo List Example
+## To Do App
+
+The following example implements a To Do app using only Alpine.
+It persists the data using `localStorage`.
 
 <img alt="Alpine todo list" style="width: 50%"
   src="/blog/assets/alpine-todo-list.png?v={{pkg.version}}">
@@ -1070,42 +1070,65 @@ The following example combines some of the features we have seen so far.
     <link rel="stylesheet" href="todo-list.css" />
     <script
       defer
+      src="https://cdn.jsdelivr.net/gh/mvolkmann/alpine-plugins@v0.0.4/interpolate.js"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
+    <script
+      defer
       src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
     ></script>
     <script>
-      let data;
       let lastId = 0;
 
       document.addEventListener('alpine:init', () => {
-        Alpine.store('data', {status: '', todos: []});
-        data = Alpine.store('data');
-        addTodo('buy milk');
-        addTodo('cut grass');
+        Alpine.store('data', {
+          status: '',
+          todos: Alpine.$persist([]).as('todos')
+        });
       });
 
       function addTodo(text) {
+        const data = Alpine.store('data');
         data.todos.push({id: ++lastId, text: text.trim(), done: false});
       }
 
       // This keeps only the todos that are not done.
       function archiveCompleted() {
+        const data = Alpine.store('data');
         data.todos = data.todos.filter(t => !t.done);
       }
 
       function deleteTodo(todoId) {
+        const data = Alpine.store('data');
         data.todos = data.todos.filter(t => t.id !== todoId);
       }
 
+      function filterTodos(todos, filter) {
+        switch (filter) {
+          case 'completed':
+            return todos.filter(t => t.done);
+          case 'uncompleted':
+            return todos.filter(t => !t.done);
+          default:
+            return todos;
+        }
+      }
+
       function updateStatus(todos) {
+        const data = Alpine.store('data');
         const uncompletedCount = todos.filter(t => !t.done).length;
         data.status = `${uncompletedCount} of ${todos.length} remaining`;
       }
     </script>
   </head>
-  <body x-data x-effect="updateStatus(data.todos)">
+  <body
+    x-data="{filter: 'all'}"
+    x-effect="updateStatus($store.data.todos)"
+    x-interpolate
+  >
     <h1>To Do List</h1>
     <div>
-      <span x-text="data.status"></span>
+      {$store.data.status}
       <button @click="archiveCompleted()">Archive Completed</button>
     </div>
     <form x-data="{text: ''}" @submit.prevent="addTodo(text); text = ''">
@@ -1118,11 +1141,30 @@ The following example combines some of the features we have seen so far.
       />
       <button :disabled="text.trim().length === 0">Add</button>
     </form>
+    <div>
+      <label>
+        <input type="radio" name="filter" value="all" x-model="filter" />
+        All
+      </label>
+      <label>
+        <input type="radio" name="filter" value="completed" x-model="filter" />
+        Completed
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="filter"
+          value="uncompleted"
+          x-model="filter"
+        />
+        Uncompleted
+      </label>
+    </div>
     <ul>
-      <template x-for="todo in data.todos">
+      <template x-for="todo in filterTodos($store.data.todos, filter)">
         <li class="todo-row">
           <input type="checkbox" x-model="todo.done" />
-          <span :class="{done: todo.done}" x-text="todo.text"></span>
+          <span :class="{done: todo.done}">{todo.text}</span>
           <button @click="deleteTodo(todo.id)">Delete</button>
         </li>
       </template>
@@ -1414,6 +1456,9 @@ long definitions can feel out of place in HTML.
 Defining them in a `script` tag is sometimes preferable.
 
 For example:
+
+<img alt="Alpine counter" style="width: 20%"
+  src="/blog/assets/alpine-counter.png?v={{pkg.version}}">
 
 ```html
 <html>
@@ -1802,9 +1847,3 @@ to an element other than `template`?
 - {% aTargetBlank "https://www.youtube.com/watch?v=4c8dpZN0rqM&t=1s", "Say No To Complexity With AlpineJS" %} YouTube video by Caleb Porzio
 - {% aTargetBlank "https://mvolkmann.github.io/blog/topics/#/blog/alpine/?v=1.0.22", "Mark Volkmann's Alpine blog page" %}
 - {% aTargetBlank "https://www.alpinetoolbox.com", "Alpine Toolbox" %}
-
-## TODO
-
-- Can you use Alpine.data to update and access data properties?
-- Learn more about JavaScript/DOM mutation observers.
-- Add filtering on All, Uncompleted, and Completed to your Alpine todo app.
