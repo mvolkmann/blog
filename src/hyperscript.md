@@ -31,6 +31,9 @@ fetching data from a server by sending an HTTP request.
 {% aTargetBlank "https://en.wikipedia.org/wiki/HyperTalk", "HyperTalk" %}
 language which was used in Apple's
 {% aTargetBlank "https://en.wikipedia.org/wiki/HyperCard", "HyperCard" %}.
+From Wikipedia, HyperCard "is among the first successful hypermedia systems
+predating the World Wide Web."
+
 Like HyperTalk, \_hyperscript uses an English-like syntax.
 It emphasizes readability, but may feel more difficult write at first
 because the syntax is quite different from typical programming languages.
@@ -46,6 +49,7 @@ over separation of concerns much like
 
 \_hyperscript was created by Carson Gross who also created
 {% aTargetBlank "https://htmx.org", "HTMX" %}.
+As of December 2023 it had not yet reached version 1.0.
 
 ## Installing
 

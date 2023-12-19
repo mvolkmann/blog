@@ -17,19 +17,19 @@ new HTML attributes that make HTML more expressive.
 
 The new HTML attributes enable responding to
 specific interactions (ex. click) with any HTML element
-by sending HTTP requests using any verb (GET, POST, PUT, PATCH, or DELETE).
-The response from these must contain HTML.
+by sending an HTTP request using any verb (GET, POST, PUT, PATCH, or DELETE).
+The response must contain HTML.
 Rather than performing a complete page refresh, the returned HTML
 replaces an existing DOM element (transclusion) or is inserted relative to one.
 
-This approach removes the need to serialize data to JSON on the server,
+The HTMX approach removes the need to serialize data to JSON on the server,
 parse the JSON on the client, and convert it to HTML.
 
 The server can be implemented using
 any programming language and server framework.
 The server typically plays two roles.
 First, it serves static files such as HTML, CSS, JavaScript, and images.
-Second, it responds to HTTP requests by returning dynamically generated HTML.
+Second, it responds to HTTP requests by returning HTML.
 
 HTMX simplifies state management because all the state is in one place,
 on the server.
@@ -42,10 +42,17 @@ and searching while the user types in an `input`.
 The fact that all HTML rendered by HTMX applications
 is either static or server rendered makes it great for SEO.
 
-HTMX was created by {% aTargetBlank "https://bigsky.software/cv/", "Carson Gross" %}.
-He is a principal software engineer at
+The HTMX library is implemented in JavaScript,
+not TypeScript, in a single source file.
+There are plans to add JSDoc TypeScript type definitions
+for better code editor support.
+
+## Origin and History
+
+HTMX was created by {% aTargetBlank "https://bigsky.software/cv/",
+"Carson Gross" %}. He is a principal software engineer at
 {% aTargetBlank "https://bigsky.software/", "Big Sky Software" %}
-and a part-time CS instructor at Montana State University.
+and a part-time Computer Science instructor at Montana State University.
 
 Interest in HTMX exploded in 2023 after YouTube videos
 from ThePrimeagen and Fireship were released.
@@ -55,11 +62,6 @@ See {% aTargetBlank "https://www.youtube.com/watch?v=zjHHIqI9lUY", "HTMX" %} and
 Companies that sponsor the development of HTMX are listed on the
 {% aTargetBlank "https://htmx.org", "home page" %}.
 They include GitHub and JetBrains.
-
-The HTMX library is implemented in JavaScript,
-not TypeScript, in a single source file.
-There are plans to add JSDoc TypeScript type definitions
-for better code editor support.
 
 ## REST?
 
@@ -72,7 +74,9 @@ The client code then transforms JSON into an HTML presentation.
 Many developers refer to this architecture as "REST".
 
 This is not what Roy Fielding had in mind when he wrote his famous dissertation
-"Architectural Styles and the Design of Network-based Software Architectures"
+"{% aTargetBlank
+"https://ics.uci.edu/~fielding/pubs/dissertation/fielding_dissertation.pdf",
+"Architectural Styles and the Design of Network-based Software Architectures" %}"
 that gave birth to REST.
 Roy has been quoted saying "I am getting frustrated by
 the number of people calling any HTTP-based interface a REST API.
@@ -85,11 +89,12 @@ Is it Roy Fielding or popular opinion?
 The HTMX approach is based on "Hypermedia As The Engine Of Application State"
 ({% aTargetBlank "https://htmx.org/essays/hateoas/", "HATEOAS" %}) which is
 a specific use of the REST architecture where services return hypermedia.
-REST is described in chapter 5 of the famous PhD dissertation by Roy Fielding
-"{% aTargetBlank "https://ics.uci.edu/~fielding/pubs/dissertation/fielding_dissertation.pdf",
-"Architectural Styles and the Design of Network-based Software Architectures" %}".
 The acronym HATEOAS does not appear in the dissertation,
 but its concepts are discussed.
+
+Carson Gross describes HATEOAS systems as follows:
+"Given an entry point into the system, the rest of the system
+can be accessed simply by inspecting the hypermedia."
 
 A software architecture is RESTful if it uses a client/server model,
 is stateless, caches responses, and supports a uniform interface.
@@ -107,15 +112,11 @@ They do not require any resource-specific knowledge
 about how to render or modify resources.
 
 JSON responses that do not describe valid operations
-on the resource they describe are not using HATEOAS.
-While it is possible to encode this information in JSON,
+on the resource they describe and do not support HATEOAS.
+While it is possible to describe valid operations in JSON,
 doing so places the burden of interpreting and implementing
-those operations on client-side code rather than the browser.
+the operations on client-side code rather than the browser.
 JSON is not hypermedia.
-
-Carson Gross describes HATEOAS systems as follows:
-"Given an entry point into the system, the rest of the system
-can be accessed simply by inspecting the hypermedia."
 
 ## Questions to Consider
 
@@ -124,7 +125,8 @@ convert it to JSON just to send raw data to the client?
 
 Why should we decide how to render data on the client instead of on the server?
 
-Why should we restrict ourselves to only using JavaScript for web applications?
+Why should we restrict ourselves to only using JavaScript
+to implement web applications?
 
 ## Client-side Processing
 
@@ -136,27 +138,20 @@ Google Maps and many games.
 
 HTMX can be used in conjunction with other approaches,
 so it can be used for the parts of apps that
-do not require constant reaction to mouse movements.
+do not require high frequency updates.
 
 Options for implementing client-side processing include vanilla JavaScript,
 {% aTargetBlank "https://alpinejs.dev", "Alpine" %}, and
 {% aTargetBlank "https://hyperscript.org", "_hyperscript" %}.
-
-\_hyperscript was created by Big Sky Software
-and has not yet reached version 1.0.
-It is inspired by the HyperTalk and AppleScript languages
-that were used in the HyperCard application for Apple computers.
-From Wikipedia, HyperCard "is among the first successful hypermedia systems
-predating the World Wide Web."
-
-Like HTMLx, Alpine and \_hyperscript are client-side JavaScript libraries.
-These are much lighter that libraries and frameworks like React.
 
 Alpine adds support for many new HTML attributes.
 \_hyperscript adds support for one new HTML attribute
 whose name is a single underscore (`_`) and whose value is \_hyperscript code.
 Both differ from HTMX in that they focus on client-side interactions
 rather that processing HTTP requests.
+
+Like HTMLx, Alpine and \_hyperscript are client-side JavaScript libraries.
+These are much lighter than libraries and frameworks like React.
 
 ## JSON
 
