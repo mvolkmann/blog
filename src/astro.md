@@ -53,9 +53,9 @@ The functionality of Snowpack was superseded by
 {% aTargetBlank "https://vitejs.dev", "Vite" %}
 which is used as the build tool in Astro.
 
-## Creating a Project
+## Projects
 
-Enter `npm create astro@latest`.
+To create an Astro project, enter `npm create astro@latest`.
 This will prompt for the following:
 
 - permission to install create-astro
@@ -96,6 +96,9 @@ The `src/layouts` directory contains source files
 that define the boilerplate HTML used by pages.
 
 The `public` directory holds assets such as audio, images, and video.
+
+To check for issues in the project code, enter `npx astro check`.
+This will output errors, warnings, and hints.
 
 To build the site for production, enter `npm run build`.
 
@@ -141,6 +144,16 @@ from a `.astro` file in the `src/pages` directory:
 ```ts
 import dogs from '../data/dogs.json';
 console.log('dogs =', dogs);
+```
+
+Import paths can be relative to the current file
+or be absolute from the root directory of the project.
+For example, when inside the file `src/components/shopping/PetShop.astro`,
+the file `src/images/animals/dog.png` can be imported in these ways:
+
+```ts
+import dogImage from '../../images/animals/dog.png';
+import dogImage from '/src/images/animals/dog.png';
 ```
 
 ## Astro Components
@@ -489,7 +502,6 @@ For more detail, see {% aTargetBlank
 
 ## Unorganized Content
 
-is it the case that page components cannot use the slot element and only layout components can do that?
 is there a syntax to import files starting from the src directory to avoid using ../ ?
 can create the file src/constants.ts that export site-wide constants.
 import and use these where needed.
