@@ -236,13 +236,19 @@ import '../styles/global.css';
 
 ## Layouts
 
-The `src/layouts` directory can contain `.astro` files
-that describe common content that should appear in many pages.
+By convention, the `src/layouts` directory contains `.astro` files
+that describe common content that should wrap around the content of pages.
+Any number of layout components can be defined.
+Each page can choose the layout component it wishes to wrap its content inside.
+
+Layout components can do all the things other components can do including
+taking props, importing files, and using other components.
 
 For example, the file `src/layouts/Layout.astro` could contain the following.
 Note the use of `<slot />` to specify where
 content will be inserted into the layout.
-TODO: Are named slots supported?
+Only one `slot` element can be used
+and named slots are not supported.
 
 ```js
 ---
@@ -288,6 +294,9 @@ import Layout from "../layouts/Layout.astro";
   </main>
 </Layout>
 ```
+
+Layouts can be nested. For example, a page component `MyPage`
+can wrap itself in `LayoutInner` which wraps itself in `LayoutOuter`.
 
 ## Images
 
@@ -480,7 +489,6 @@ For more detail, see {% aTargetBlank
 
 ## Unorganized Content
 
-can define multiple layout files to use different ones and specific pages.
 is it the case that page components cannot use the slot element and only layout components can do that?
 is there a syntax to import files starting from the src directory to avoid using ../ ?
 can create the file src/constants.ts that export site-wide constants.
