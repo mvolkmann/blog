@@ -275,6 +275,27 @@ from Markdown files.
 The following steps can be taken to define and render a collection of dogs:
 
 - Create the directory `src/content/dogs`.
+- Create the file `config.ts` in `src/content`.
+  This defines each of the collections.
+  It uses {% aTargetBlank "https://zod.dev", "Zod" %}
+  to describe the schema of each collection.
+  This determines which front matter properties are valid.
+  For example, the following describes a single collection named "dogs".
+
+  ```ts
+  import {defineCollection, z} from 'astro:content';
+
+  const dogs = defineCollection({
+    type: 'content',
+    schema: z.object({
+      name: z.string(),
+      breed: z.string()
+    })
+  });
+
+  export const collections = {dogs};
+  ```
+
 - Create one Markdown file for each dog inside this directory.
   For example:
 
@@ -289,6 +310,48 @@ The following steps can be taken to define and render a collection of dogs:
   ```
 
   Note the use of front matter to describe properties of this instance.
+
+- Access the collection in a component.
+  For example:
+
+  ```html
+  ---
+  import Layout from "../../layouts/Layout.astro";
+  import Dog from "../../components/Dog.astro";
+  import { getCollection, type CollectionEntry } from "astro:content";
+  
+  const dogs: CollectionEntry<"dogs">[] = await getCollection("dogs");
+  ---
+
+  <Layout title="Welcome to Astro">
+    <main class="m-4">
+      { dogs.map((dog) => ( // slug is a special property that is directly on
+      the collection entry.
+      <Dog name="{dog.data.name}" breed="{dog.data.breed}" slug="{dog.slug}" />
+      )) }
+    </main>
+  </Layout>
+  ```
+
+- Here is the `Dog` component:
+
+  ```ts
+  ---
+  interface Props {
+    breed: string;
+    name: string;
+    slug: string;
+  }
+
+  const { breed, name, slug } = Astro.props;
+  ---
+
+  <hr />
+  <div class="my-4">
+    <p>{name} is a {breed}.</p>
+    <a href={slug}>American Kennel Club</a>
+  </div>
+  ```
 
 ## API Endpoints
 
