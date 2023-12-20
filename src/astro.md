@@ -41,6 +41,8 @@ and a few other packages.
 
 Astro provides file-based routing that is specified by
 the files and directories under the `src/pages` directory.
+For example, the path `/foo/bar` refers to
+the page defined in the file `src/pages/foo/bar.astro`.
 
 Astro was created by
 {% aTargetBlank "http://fredkschott.com/about/", "Fred K. Schott" %}.
@@ -115,6 +117,32 @@ To configure code formatting, open any `.astro` file,
 open the Command Palette, and enter "Format Document".
 It will prompt for configuring this and automatically do so.
 
+## Imports
+
+Astro supports importing many kinds of file in JavaScript code.
+The supported file types include:
+
+- Astro components (.astro)
+- CSS (.css)
+- CSS Modules (.module.css)
+- Images (.svg, .jpg, .png, etc.)
+- JavaScript (.js, .mjs)
+- JSON (.json)
+- JSX (.jsx, .tsx)
+- Markdown (.md, .markdown, etc.)
+- NPM Packages
+- TypeScript (.ts)
+- Other kinds of assets (TODO: audio and video?)
+
+For example, the following line imports
+a JSON file with the path `src/data/dogs.json`
+from a `.astro` file in the `src/pages` directory:
+
+```ts
+import dogs from '../data/dogs.json';
+console.log('dogs =', dogs);
+```
+
 ## Astro Components
 
 Astro components are defined in source files with a `.astro` extension.
@@ -126,9 +154,18 @@ This can contain three sections:
   This section begins and ends with lines that only contain three dashes,
   referred to as "code fences".
   This is is the same syntax that is used in Markdown files for "front matter".
+
   Write JavaScript code inside the code fences.
   If TypeScript was enabled for the project, it can be used here.
-  This code can:
+
+  Everything in component scripts stays on the server.
+  The variables and functions defined in them are not sent to the browser.
+  Output from `console.log` calls appear where the server is running,
+  not in the browser.
+  Place code that should run in the browser inside a `script` tag
+  that appears after the component script.
+
+  Code in a component script can:
 
   - import other files with ESM syntax
 
@@ -174,7 +211,7 @@ This can contain three sections:
   For example, `{collection.map(element => HTML)}`.
 
   Expressions in curly braces are not reactive.
-  The `.astro` files are rendered on the server only one time.
+  `.astro` files are rendered on the server only one time.
 
 - optional `style` tag
 
@@ -442,17 +479,6 @@ For more detail, see {% aTargetBlank
   "Astro Quick Start Course" %} by Traversy Media
 
 ## Unorganized Content
-
-File-based routing works as you would expect.
-/foo/bar refers to src/pages/foo/bar.astro.
-
-The code fence at the top of a .astro file is also called the component script.
-it is like Markdown front matter.
-can import data from a JSON file here.
-Everything in the components script stays on the server.
-None of the variables are functions defined their are sent to the browser.
-output from console.log calls appear where the server is running, not in the browser
-place code that should run in the browser inside a script tag that appears after the component script.
 
 can define multiple layout files to use different ones and specific pages.
 is it the case that page components cannot use the slot element and only layout components can do that?
