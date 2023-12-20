@@ -543,6 +543,12 @@ Note how the spinner image has the CSS class `htmx-indicator`.
 </form>
 ```
 
+## Infinite Scroll
+
+See the example at {% aTargetBlank
+"https://github.com/mvolkmann/htmx-examples/tree/main/infinite-scroll",
+"infinite-scroll" %}.
+
 ## Out-of-band Updates
 
 TODO: Try this.
