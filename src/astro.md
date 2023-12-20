@@ -121,11 +121,12 @@ Astro components are defined in source files with a `.astro` extension.
 These describe HTML that will be rendered on the server.
 This can contain three sections:
 
-- optional front matter
+- optional component script
 
-  This section begins and ends with a line containing only three dashes,
+  This section begins and ends with lines that only contain three dashes,
   referred to as "code fences".
-  Between these, write JavaScript code.
+  This is is the same syntax that is used in Markdown files for "front matter".
+  Write JavaScript code inside the code fences.
   If TypeScript was enabled for the project, it can be used here.
   This code can:
 
@@ -251,6 +252,39 @@ import Layout from "../layouts/Layout.astro";
 </Layout>
 ```
 
+## Images
+
+Images can be placed under the `public` directory, typically in `public/images`.
+These can be referenced using a path string
+that is relative to the `public` directory.
+For example, `<img alt="logo" src="/images/logo.png" />`
+searches from the public directory.
+Astro will not provide image optimization for images in this location.
+
+In order to take advantage of image optimizations,
+place images under the `src/images` directory,
+import them into JavaScript code,
+and render them using the provided `Image` component.
+
+For example:
+
+```ts
+---
+import { Image } from "astro:assets";
+import logo from ‘../images/logo.png’;
+---
+
+<Image alt="logo" src={logo} width={300} />
+```
+
+From the documentation at {% aTargetBlank
+"https://docs.astro.build/en/guides/images/", "Images" %},
+The `Image` component
+"can transform a local or authorized remote image’s dimensions, file type,
+and quality for control over your displayed image.
+The resulting `<img>` tag includes `alt`, `loading`, and `decoding` attributes
+and infers image dimensions to avoid Cumulative Layout Shift (CLS)."
+
 ## Event Handling
 
 Code in the component script section is only run on the server-side.
@@ -370,10 +404,34 @@ The following steps can be taken to define and render a collection of dogs.
 
 ## API Endpoints
 
-Endpoints are defined by `.js` and `.ts` files.
-These can return data in any format including JSON and HTML (for HTMX).
+Endpoints are defined by `.js` and `.ts` files under the `src/pages` directory.
+Their URLs are defined by file-based routing, just like UI pages.
 
-For details, see {% aTargetBlank
+Endpoints can return data in any format including JSON and HTML (for HTMX).
+
+The following code in the file `src/pages/pets/dog.json.ts`
+demonstrates creating an endpoint that returns JSON created from
+data found in the collection defined in the previous section.
+
+```ts
+import {getCollection, type CollectionEntry} from 'astro:content';
+
+export async function GET() {
+  const dogs: CollectionEntry<'dogs'>[] = await getCollection('dogs');
+  const data = dogs.map(dog => dog.data);
+  return new Response(JSON.stringify(data));
+}
+```
+
+Endpoints can use path and query parameters.
+The following code in the file `src/pages/pets/[id].json.ts`
+demonstrates creating an endpoint that returns JSON for a specific dog.
+
+```ts
+
+```
+
+For more detail, see {% aTargetBlank
 "https://docs.astro.build/en/core-concepts/endpoints/#static-file-endpoints",
 "Static File Endpoints" %}.
 
@@ -384,22 +442,6 @@ For details, see {% aTargetBlank
   "Astro Quick Start Course" %} by Traversy Media
 
 ## Unorganized Content
-
-Put image files in src/images.
-They can also be placed in the public directory, typically in an images subdirectory, but those will be served with no special processing. These can be referenced using a path relative to the public directory and do not need to be imported.
-<img alt=“logo” src=“/images/logo.png” />
-This searches from the public directory.
-For special image processing, use the provided Image component.
-import Image from ‘astro:assets’;
-For images under src, import them with
-import logo from ‘../images/logo.png’;
-Use them with
-<img alt=“logo” src={logo} />
-or
-<Image alt=“logo” src={logo} width={100} height={50} />
-Setting width and/or height is optional.
-Typically only one is set to avoid skewing the image.
-What special processing does the Image component provide?
 
 File-based routing works as you would expect.
 /foo/bar refers to src/pages/foo/bar.astro.
