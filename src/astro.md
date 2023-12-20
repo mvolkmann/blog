@@ -4,9 +4,9 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-<figure style="width: 60%">
+<figure style="width: 40%">
   <img alt="Astro logo" style="border: 0"
-    src="/blog/assets/astro-logo.png?v={{pkg.version}}">
+    src="/blog/assets/astro-logo.svg?v={{pkg.version}}">
 </figure>
 
 ## Overview
@@ -42,7 +42,8 @@ Fred previously worked on WebComponents at Google and was on the Polymer team.
 He also created {% aTargetBlank "https://www.snowpack.dev", "Snowpack" %},
 "a lightning-fast frontend build tool", that is no longer maintained.
 The functionality of Snowpack was superseded by
-{% aTargetBlank "https://vitejs.dev", "Vite" %}.
+{% aTargetBlank "https://vitejs.dev", "Vite" %}
+which is used as the build tool in Astro.
 
 ## Creating a Project
 
@@ -63,6 +64,7 @@ This will prompt for the following:
 Once the project is created, follow the instructions that are output.
 
 - `cd` to the newly created directory.
+- Setup Typescript types by entering `npx astro sync`.
 - Optionally enter `npx astro add tailwind` to add support for Tailwind CSS styling.
 - Enter `npm run dev` or `npm run start` to start a local server.
   Both do the same thing.
@@ -152,7 +154,11 @@ This can contain three sections:
 
   This section uses a JSX-like syntax.
 
+  A root element is not required,
+  but the fragment syntax from React is supported (`<>...</>`).
+
   To insert the value of a JavaScript expression, use `{expression}`.
+  This can appear in element attribute values and content.
 
   Conditional logic uses the same syntax as in React.
   For example, `{condition && HTML}` or `{condition ? HTML1 : HTML2}`.
@@ -184,25 +190,110 @@ in all the page components that wish to use it as follows.
 import '../styles/global.css';
 ```
 
-## Event Handling
+## Layouts
 
-Components defined in `.astro` files must configure event handling
-in JavaScript code. This is gross! For example:
+The `src/layouts` directory can contain `.astro` files
+that describe common content that should appear in many pages.
+
+For example, the file `src/layouts/Layout.astro` could contain the following.
+Note the use of `<slot />` to specify where
+content will be inserted into the layout.
+TODO: Are named slots supported?
 
 ```js
 ---
-function handleClick() {
-  alert('got click');
+interface Props {
+  title: string;
 }
-const myBtn = document.getElementById('my-btn');
-myBtn.addEventListener('click', handleClick);
+const { title } = Astro.props;
 ---
-<button id="my-btn">Press Me</button>
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+<style is:global>
+  html {
+    font-family: system-ui, sans-serif;
+  }
+</style>
 ```
+
+This layout can be used in a page `.astro` file as follows.
+Attribute syntax is used to pass props to components.
+Note how the `title` prop value is passed to the `Layout` component.
+
+```js
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="My Page">
+  <main>
+    <h1>My Page</h1>
+  </main>
+</Layout>
+```
+
+## Event Handling
+
+Code in the component script section is only run on the server-side.
+This means functions defined there
+cannot be used for client-side event handling.
+
+One way specify client-side JavaScript code is to
+place it in a script tag within the HTML section.
+For example:
+
+```js
+<button id="my-btn">Press Me</button>
+
+<script>
+  function handleClick() {
+    alert('got click');
+  }
+  const myBtn = document.getElementById('my-btn');
+  myBtn.addEventListener('click', handleClick);
+</script>
+```
+
+## Collections
+
+Astro supports describing and retrieving collections of data
+from Markdown files.
+
+The following steps can be taken to define and render a collection of dogs:
+
+- Create the directory `src/content/dogs`.
+- Create one Markdown file for each dog inside this directory.
+  For example:
+
+  ```md
+  ---
+  name: 'Comet'
+  breed: 'Whippet'
+  slug: https://www.akc.org/dog-breeds/whippet/
+  ---
+
+  Comet loves pool balls and basketballs.
+  ```
+
+  Note the use of front matter to describe properties of this instance.
 
 ## API Endpoints
 
 Endpoints are defined by `.js` and `.ts` files.
+These can return data in any format including JSON and HTML (for HTMX).
 
 For details, see {% aTargetBlank
 "https://docs.astro.build/en/core-concepts/endpoints/#static-file-endpoints",
@@ -215,3 +306,48 @@ For details, see {% aTargetBlank
   "Astro Quick Start Course" %} by Traversy Media
 
 ## Unorganized Content
+
+Put image files in src/images.
+They can also be placed in the public directory, typically in an images subdirectory, but those will be served with no special processing. These can be referenced using a path relative to the public directory and do not need to be imported.
+<img alt=“logo” src=“/images/logo.png” />
+This searches from the public directory.
+For special image processing, use the provided Image component.
+import Image from ‘astro:assets’;
+For images under src, import them with
+import logo from ‘../images/logo.png’;
+Use them with
+<img alt=“logo” src={logo} />
+or
+<Image alt=“logo” src={logo} width={100} height={50} />
+Setting width and/or height is optional.
+Typically only one is set to avoid skewing the image.
+What special processing does the Image component provide?
+
+File-based routing works as you would expect.
+/foo/bar refers to src/pages/foo/bar.astro.
+
+The code fence at the top of a .astro file is also called the component script.
+it is like Markdown front matter.
+can import data from a JSON file here.
+Everything in the components script stays on the server.
+None of the variables are functions defined their are sent to the browser.
+output from console.log calls appear where the server is running, not in the browser
+place code that should run in the browser inside a script tag that appears after the component script.
+
+can define multiple layout files to use different ones and specific pages.
+is it the case that page components cannot use the slot element and only layout components can do that?
+is there a syntax to import files starting from the src directory to avoid using ../ ?
+can create the file src/constants.ts that export site-wide constants.
+import and use these where needed.
+don’t need to export the definition of the Props type in a component.
+can you define the Props type using either the interface or type keyword?
+to create a custom 404 page, add the file src/pages/404.astro.
+This page can also import and use layouts and other components.
+
+you can define collections of data as Markdown files under the src/content directory.
+create the file config.ts under the src/content directory.
+This file … see email on defining collections.
+The schema for collections uses zod.
+
+when do you need to run npx astro sync ?
+this sets up typescript types. Does it do anything else?

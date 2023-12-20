@@ -766,3 +766,9 @@ TODO: Read "The Valley of CODE" page above!
 
 - See unpoly.com which is a competitor to HTMX.
   Supposedly it is better at progressive enhancement.
+
+- Does hx-select from HTMX allow extracting specific content
+  from an HTML response? For example, this could be used to
+  get the body from a response that is a full HTML document.
+
+- Learn about hx-boost.
