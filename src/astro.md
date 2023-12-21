@@ -29,10 +29,18 @@ and doing more work on the server side.
 Astro supports using many kinds of UI components including
 Astro, Alpine, Lit, Preact, React, SolidJS, Svelte, Vue, WebComponents, and more.
 
-Astro uses the Island architecture which enables combining
-the use of multiple web UI frameworks in a single application.
-HTML is rendered on the server and with placeholders for dynamic regions.
-These placeholders are hydrated on the client-side.
+Astro uses the {% aTargetBlank "https://docs.astro.build/en/concepts/islands/",
+"Islands architecture" %}.
+Jason Miller describes this approach as a way to
+"render HTML pages on the server, and inject placeholders or slots
+around highly dynamic regions that can then be
+hydrated on the client into small self-contained widgets,
+reusing their server-rendered initial HTML."
+Each island is a bit of JavaScript-enabled interactivity
+and the water around them is static HTML.
+
+Astro allows each "island" to use a different web UI frameworks,
+combining them into in a single web application.
 
 Astro supports SSR adapters for Cloudflare, Netlify, Node, and Vercel.
 
@@ -41,7 +49,7 @@ and a few other packages.
 
 Astro provides file-based routing that is specified by
 the files and directories under the `src/pages` directory.
-For example, the path `/foo/bar` refers to
+For example, the URL path `/foo/bar` refers to
 the page defined in the file `src/pages/foo/bar.astro`.
 
 Astro was created by
@@ -78,6 +86,10 @@ Once the project is created, follow the instructions that are output.
   Both do the same thing.
 - Browse localhost:4321 (the default port).
 
+The Astro logo is a rocket.
+Astro uses 4321 for the default port because
+it is like a countdown sequence for a rocket launch.
+
 Hot reloading is automatically configured so
 saved changes are automatically reflected in the browser.
 
@@ -85,8 +97,8 @@ The file `astro.config.mjs` defines all the Astro configuration options
 including adapters and extensions (like Tailwind).
 
 The `src/pages` directory contains component source files
-that represent complete pages of the app.
-Initially this will only contain the file `index.astro.`
+that represent complete pages of the app or API endpoints.
+Initially this directory will only contain the file `index.astro.`
 
 The `src/components` directory contains component source files
 that can be used in page components.
@@ -231,6 +243,14 @@ This can contain three sections:
 - optional `style` tag
 
   This defines CSS rules that are scoped to this component.
+
+## Naming Conventions
+
+Files under the `src/pages` directory have lowercase names
+because their names are used in URL paths.
+
+Files under the `src/components` directory have PascalCase names
+because their names become UI component names.
 
 ## Styling
 
@@ -396,6 +416,8 @@ The following steps can be taken to define and render a collection of dogs.
   const dogs = defineCollection({
     type: 'content',
     schema: z.object({
+      // The return value from z.string() can be saved in a variable
+      // and used on multiple properties to avoid calling it repeatedly.
       name: z.string(),
       breed: z.string()
     })
@@ -503,6 +525,45 @@ For more detail, see {% aTargetBlank
 "https://docs.astro.build/en/core-concepts/endpoints/#static-file-endpoints",
 "Static File Endpoints" %}.
 
+## MDX
+
+The MDX extension enables using components inside Markdown files.
+To install this in an Astro project, enter `npx astro add mdx`.
+
+If VS Code is being used, install the {% aTargetBlank
+"https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx",
+"MDX" %} extension from unified.
+
+Markdown files that wish to render components
+must have the file extension `.mdx`.
+
+For example, here is a component definition in `src/components/Greet.astro`:
+
+```html
+---
+const { name } = Astro.props;
+---
+
+<p class="text-bold text-red-500">Hello, {name}!</p>
+```
+
+And here is a content file in `src/content/dogs/comet.mdx`.
+Note how it imports and uses the `Greet` component:
+
+```html
+---
+name: 'Comet'
+breed: 'Whippet'
+website: https://www.akc.org/dog-breeds/whippet/
+---
+
+import Greet from "../../components/Greet.astro"; He loves the following: - pool
+balls - basketballs - frisbees
+![Whippet](https://www.akc.org/wp-content/uploads/2017/11/Whippet-On-White-01.jpg)
+
+<Greet name="Comet" />
+```
+
 ## Resources
 
 - {% aTargetBlank "https://astro.build", "Astro Home Page" %}
@@ -526,3 +587,18 @@ The schema for collections uses zod.
 
 when do you need to run npx astro sync ?
 this sets up typescript types. Does it do anything else?
+
+to create dynamic routes, create files that have square brackets containing a name in the file name. these can be .astro files for components or .ts files for endpoints.
+
+what are the benefits of using the tailwind typography plug-in?
+
+what does this enable? using JavaScript components inside Markdown?
+npx astro add mdx
+need to change file extensions to .mdx
+
+astro add svelte
+enables use of Svelte in .astro files?
+
+learn about enabling SSR so pages are not generated at build time and are instead generated on demand. Is that how it works?
+
+learn about Astro support for pagination.
