@@ -497,7 +497,8 @@ The following steps can be taken to define and render a collection of dogs.
 Endpoints are defined by `.js` and `.ts` files under the `src/pages` directory.
 Their URLs are defined by file-based routing, just like UI pages.
 
-Endpoints can return data in any format including JSON and HTML (for HTMX).
+Endpoints can return data in any format including
+JSON and HTML (perhaps for use with HTMX).
 
 The following code in the file `src/pages/pets/dog.json.ts`
 demonstrates creating an endpoint that returns JSON created from
@@ -513,17 +514,154 @@ export async function GET() {
 }
 ```
 
-Endpoints can use path and query parameters.
-The following code in the file `src/pages/pets/[id].json.ts`
-demonstrates creating an endpoint that returns JSON for a specific dog.
+To demonstrate defining endpoints that support CRUD operations
+we will see code that performs these on a collection of todo objects.
+Each object has the properties `id`, `text`, and `completed`.
+
+API endpoints are defined by the functions
+`GET`, `POST`, `PUT`, `PATCH`, and `DELETE`.
+Each of this take an `APIContext` object
+that contains the following properties:
+
+- `params`: an object containing properties
+  that match the dynamic segments of the route.
+- `props`: an object containing properties
+  supplied by the getStaticPaths function
+  (only available in server-side rendering)
+- `request`: a Request object that contains
+  the method, url, headers, and body
+- `clientAddress`
+- `cookies`
+- `generator`
+- `locals`
+- `redirect`
+- `site`
+- `url`
+
+The endpoints defined in `src/pages/todos.ts` do two things:
+
+- retrieve all the todos as a JSON array
+- create a new todo, returning its JSON
 
 ```ts
+import type {APIContext} from 'astro';
 
+let lastId = 0; // used by the POST function
+
+type Todo = {
+  id: number;
+  text: string;
+  completed: boolean;
+};
+declare global {
+  var todoMap: Map<number, Todo>;
+}
+if (!globalThis.todoMap) {
+  globalThis.todoMap = new Map<number, Todo>();
+}
+
+export async function GET() {
+  const todos = [...globalThis.todoMap.values()];
+  return new Response(JSON.stringify(todos), {
+    headers: {'Content-Type': 'application/json'}
+  });
+}
+
+export async function POST({request}: APIContext) {
+  const todo = await request.json();
+  if (todo.completed === undefined) todo.completed = false;
+  const id = ++lastId;
+  todo.id = id;
+  globalThis.todoMap.set(id, todo);
+  return new Response(JSON.stringify(todo), {status: 201});
+}
+```
+
+The endpoints defined in `src/pages/todos/[id].ts` do four things:
+
+- retrieve a todo as JSON
+- update a todo with JSON
+- patch a todo with JSON
+- delete a todo
+
+Files will square brackets in the name
+define dynamic routes where path parameters are used.
+In this case the path parameter is the id of a todo.
+Dynamic routes require enabling SSR.
+To do this, enter `npx astro add node`.
+
+```ts
+import type {APIContext} from 'astro';
+
+type Todo = {
+  id: number;
+  text: string;
+  completed: boolean;
+};
+
+declare global {
+  var todoMap: Map<number, Todo>;
+}
+if (!globalThis.todoMap) {
+  globalThis.todoMap = new Map<number, Todo>();
+}
+
+export async function GET({params}: APIContext) {
+  const {id} = params;
+  const idNumber = Number(id);
+  const todo = globalThis.todoMap.get(idNumber);
+  return new Response(JSON.stringify(todo), {
+    headers: {'Content-Type': 'application/json'}
+  });
+}
+export async function PUT({params, request}: APIContext) {
+  const {id} = params;
+  const idNumber = Number(id);
+  const todo = await request.json();
+  todo.id = idNumber; // ensures the id matches the path parameter
+  const exists = globalThis.todoMap.has(idNumber);
+  if (exists) globalThis.todoMap.set(idNumber, todo);
+  const status = exists ? 200 : 404;
+  return new Response(JSON.stringify(todo), {status});
+}
+
+export async function PATCH({params, request}: APIContext) {
+  const {id} = params;
+  const idNumber = Number(id);
+  const updates = await request.json();
+  updates.id = idNumber; // ensures the id matches the path parameter
+  let todo = globalThis.todoMap.get(idNumber);
+  if (todo) {
+    todo = {...todo, ...updates};
+    globalThis.todoMap.set(idNumber, todo);
+  }
+  const status = todo ? 200 : 404;
+  return new Response(JSON.stringify(todo), {status});
+}
+
+export async function DELETE({params, request}: APIContext) {
+  const {id} = params;
+  if (!id) return new Response('missing "id" parameter', {status: 400});
+
+  const idNumber = Number(id);
+  const status = globalThis.todoMap.delete(idNumber) ? 200 : 404;
+  return new Response('', {status});
+}
+```
+
+When starting the server, include the `--host` option
+to enable using `localhost` in URLs that hit the endpoints.
+For example, the `dev` and `start` scripts in `package.json`
+should match the following:
+
+```json
+    "dev": "astro dev --host",
+    "start": "astro dev --host",
 ```
 
 For more detail, see {% aTargetBlank
-"https://docs.astro.build/en/core-concepts/endpoints/#static-file-endpoints",
-"Static File Endpoints" %}.
+"https://docs.astro.build/en/core-concepts/endpoints/#server-endpoints-api-routes",
+"Server Endpoints (API Routes)" %}.
 
 ## MDX
 
