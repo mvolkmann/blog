@@ -42,6 +42,17 @@ and searching while the user types in an `input`.
 The fact that all HTML rendered by HTMX applications
 is either static or server rendered makes it great for SEO.
 
+Users perceive apps built with HTMX to be fast because
+the initial page load only requires
+the HTMX library and the initial HTML to render.
+Subsequent interactions only require fetching snippets of HTML.
+No client-side hydration of JavaScript code is needed.
+Browsers are very efficient at updating the DOM from strings of HTML.
+
+Developers perceive development of apps to be easier because
+all the logic is in one place ... on the server.
+Only minimal thought needs to be given to client-side logic.
+
 The HTMX library is implemented in JavaScript,
 not TypeScript, in a single source file.
 There are plans to add JSDoc TypeScript type definitions
@@ -154,17 +165,26 @@ Companies that sponsor the development of HTMX are listed on the
 {% aTargetBlank "https://htmx.org", "HTMX home page" %}.
 They include GitHub and JetBrains.
 
-## Client-side Processing
+## Use Cases
 
-HTMX is not appropriate for all features of web apps.
+HTMX is great for CRUD-based apps and dashboards.
+
+HTMX is not appropriate for all web app features.
+
 Using HTMX to update the UI on every mouse move or drag
 would be too slow since each movement would trigger a new HTTP request.
 Examples of apps that require this kind of functionality include
 Google Maps and many games.
 
+HTMX cannot be used in apps that require offline support
+because they rely on sending HTTP requests to
+get new HTML that updates the UI.
+
 HTMX can be used in conjunction with other approaches,
 so it can be used for the parts of apps that
 do not require high frequency updates.
+
+## Client-side Processing
 
 Options for implementing client-side processing include vanilla JavaScript,
 {% aTargetBlank "https://alpinejs.dev", "Alpine" %}, and

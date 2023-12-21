@@ -101,6 +101,8 @@ To check for issues in the project code, enter `npx astro check`.
 This will output errors, warnings, and hints.
 
 To build the site for production, enter `npm run build`.
+This creates a `dist` directory containing
+all the files needed to deploy the site.
 
 To preview the built site, enter `npm run preview` and browse localhost:4321.
 
@@ -235,17 +237,24 @@ This can contain three sections:
 As described above, components defined in `.astro` files can include
 a `style` tag that defines CSS rules that are scoped to the component.
 
-Global styles can be defined in two ways.
-One way is to include a style tag in a layout source file
-that is used by many pages.
-TODO: Does this need to use `<style is:global>`?
-Another way is to define a file like `global.css`
+Global styles can be defined in three ways.
+
+The first option is to add a `link` tag to the `head` section of the HTML
+that refers to a CSS file.
+
+The second option is to include a `<style is:global>` tag
+in a layout source file that is used by many pages.
+
+The third option is to define a file like `global.css`
 in the `src` or `src/styles` directory and include it
 in all the page components that wish to use it as follows.
 
 ```ts
 import '../styles/global.css';
 ```
+
+TODO: Is the third option the only one that supports hot reload of the browser
+when styles are modified?
 
 ## Layouts
 
