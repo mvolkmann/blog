@@ -110,7 +110,6 @@ This will prompt for the following:
 Once the project is created, follow the instructions that are output.
 
 - `cd` to the newly created directory.
-- Setup Typescript types by entering `npx astro sync`.
 - Optionally enter `npx astro add tailwind` to add support for Tailwind CSS styling.
 - Enter `npm start` or `npm run dev` to start a local server.
   Both do the same thing.
@@ -503,6 +502,7 @@ For example:
 
 Astro supports describing and retrieving collections of data
 from Markdown files that are typically placed under the `src/content` directory.
+Each subdirectory represents a different collection.
 
 The following steps can be taken to define and render a collection of dogs.
 
@@ -709,9 +709,12 @@ The endpoints defined in `src/pages/todos/[id].ts` do four things:
 - patch a todo with JSON
 - delete a todo
 
-Files will square brackets in the name
+Files with square brackets in the name
 define dynamic routes where path parameters are used.
 In this case the path parameter is the id of a todo.
+
+Dynamic routes can be used for both pages and API endpoints.
+
 Dynamic routes require enabling SSR.
 To do this, enter `npx astro add node`.
 
@@ -1035,25 +1038,18 @@ TODO: Describe how to use this.
 
 ## Unorganized Content
 
-you can define collections of data as Markdown files under the src/content directory.
-create the file config.ts under the src/content directory.
-This file … see email on defining collections.
-The schema for collections uses zod.
+What are the benefits of using the tailwind typography plug-in?
 
-when do you need to run npx astro sync ?
-this sets up typescript types. Does it do anything else?
+Try `astro add svelte`.
+Does this enables use of Svelte in .astro files?
 
-to create dynamic routes, create files that have square brackets containing a name in the file name. these can be .astro files for components or .ts files for endpoints.
+Learn about enabling SSR so pages are not generated at build time
+and are instead generated on demand. Is that how it works?
 
-what are the benefits of using the tailwind typography plug-in?
+Learn about Astro support for pagination.
 
-astro add svelte
-enables use of Svelte in .astro files?
+What is the reasonable number of markdown documents to have in a collection
+where if you need more then you should use a database?
 
-learn about enabling SSR so pages are not generated at build time and are instead generated on demand. Is that how it works?
-
-learn about Astro support for pagination.
-
-what is the reasonable number of markdown documents to have in a collection weir if you need more than you should use a database?
-
-learn about and document using the Astro Dev toolbar that appears at the bottom of the page in the browser when running in dev mode.
+Learn about and document using the Astro Dev toolbar
+that appears at the bottom of the page in the browser when running in dev mode.
