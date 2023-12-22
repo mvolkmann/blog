@@ -844,6 +844,27 @@ const spin = {
 };
 ```
 
+When identical `audio` and `video` elements are on both
+the current page and the next page and they are playing,
+they will continue playing without interruption through the view transition
+if they have the `transition:persist` attribute.
+
+For example:
+
+```html
+<audio
+  controls
+  src="/sample.mp3"
+  transition:name="my-audio"
+  transition:persist
+></audio>
+<video controls width="200" transition-name="my-video" transition:persist>
+  <source src="/bunny-video.mp4" type="video/mp4" />
+</video>
+```
+
+This works for `audio` elements, but it seems to be broken for `video` elements.
+
 ## Internationalization
 
 Astro supports {% aTargetBlank
@@ -901,3 +922,23 @@ enables use of Svelte in .astro files?
 learn about enabling SSR so pages are not generated at build time and are instead generated on demand. Is that how it works?
 
 learn about Astro support for pagination.
+
+To start server, enter “npm start” (no run) or “npm run dev”.
+The public directory is where assets go, that are not affected by the build, such as image optimization.
+The only special subdirectories of the src directory are pages and content. There is a naming convention for others, but it is not enforced.
+using the content directory with markdown files, provides a type safe, markdown API.
+it uses Zod for schema of validation.
+what is the reasonable number of markdown documents to have in a collection weir if you need more than you should use a database?
+One way in which the content of .astro files is JSX-like and not pure JSX is that it is not XML. For example, you can have un closed elements like dock type and self closing elements like the br and hr tags.
+if you add the ViewTransitions component to a layout that all the pages use, then you will get view transitions when switching to any of them.
+By default the view transition is just fade and fade out.
+do view transition's still only work in Chrome?
+see “built-in animation directives”
+how do you specify the duration of a transition animation?
+what does the acronym slug stand for?
+transitions are disabled if the user selected “prefers reduced motion” in there browser (or is this an OS setting?).
+The Image component does more optimization in a production build than it does when running in Dev mode. What are the differences?
+which browsers do not support webp images? I assume Astro is smart enough to not optimize to those for browsers that don’t support them.
+learn about and document using the Astro Dev toolbar that appears at the bottom of the page in the browser when running in dev mode.
+does the image optimization provided by Astro completely remove the need to use an app like Squosh.
+see the NPM package canvas–confetti.
