@@ -83,14 +83,28 @@ To create an Astro project, enter `npm create astro@latest`.
 This will prompt for the following:
 
 - permission to install create-astro
+
 - "Where should we created your new project?"
+
   Enter a directory path that can begin with "./".
-  Enter just "." to create the project in the current directory.
+  Enter only "." to create the project in the current directory.
+
 - "How would you like to start your new project?"
-  with the options "Include sample files", "Use blog template", and "Empty".
+
+  The options are "Include sample files", "Use blog template", and "Empty".
+
 - "Install dependencies?" Yes or No
+
+  Press return to accept the default of "Yes".
+
 - "Do you plan to write TypeScript?" Yes or No
+
+  Press return to accept the default of "Yes".
+
 - "How strict should TypeScript be? Strict, Strictest, or Relaxed
+
+  The default is "Strict", but its best to select "Strictest".
+
 - "Initialize a new git repository? Yes or No
 
 Once the project is created, follow the instructions that are output.
@@ -128,7 +142,38 @@ There are common names used for the others, but they are not enforced.
 | `src/pages`      | This contains component source files that represent complete pages of the app or API endpoints. Initially only `index.astro` is present. |
 | `src/styles`     | This contains CSS files that define global styling.                                                                                      |
 
-To check for issues in the project code, enter `npx astro check`.
+It is useful to define path aliases in `tsconfig.json`
+to simplify importing files from commonly used directories.
+For example:
+
+```json
+{
+  "extends": "astro/tsconfigs/strictest",
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@images/*": ["images/*"],
+      "@layouts/*": ["layouts/*"]
+    }
+  }
+}
+```
+
+This enables replacing an import like
+
+```js
+import Layout from '../../../layouts/Layout.astro';
+```
+
+with this:
+
+```js
+import Layout from '@layouts/Layout.astro';
+```
+
+To check for issues in the project code,
+enter `npx astro check` or `npm run astro check`.
 This will output errors, warnings, and hints.
 
 To build the site for production, enter `npm run build`.
@@ -220,7 +265,7 @@ This can contain three sections:
     For example:
 
     ```ts
-    export type Props { // TODO: Does this need to use "interface" instead?
+    type Props { // TODO: Does this need to use "interface" instead?
       prop1?: string; // optional prop
       prop2: number; // required prop
     }
@@ -919,10 +964,9 @@ TODO: Describe how to use this.
 
 ## Unorganized Content
 
-is there a syntax to import files starting from the src directory to avoid using ../ ?
 can create the file src/constants.ts that export site-wide constants.
 import and use these where needed.
-don’t need to export the definition of the Props type in a component.
+
 can you define the Props type using either the interface or type keyword?
 to create a custom 404 page, add the file src/pages/404.astro.
 This page can also import and use layouts and other components.
@@ -938,10 +982,6 @@ this sets up typescript types. Does it do anything else?
 to create dynamic routes, create files that have square brackets containing a name in the file name. these can be .astro files for components or .ts files for endpoints.
 
 what are the benefits of using the tailwind typography plug-in?
-
-what does this enable? using JavaScript components inside Markdown?
-npx astro add mdx
-need to change file extensions to .mdx
 
 astro add svelte
 enables use of Svelte in .astro files?
