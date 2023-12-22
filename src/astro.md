@@ -657,10 +657,15 @@ Let's walk through the steps to use a Svelte component.
 
    ```svelte
    <script>
+     export let label = '';
+
      let count = 0;
    </script>
 
    <div class="row">
+     {#if label}
+       <div>{label}</div>
+     {/if}
      <button disabled={count <= 0} on:click={() => count--}>-</button>
      <h1>{count}</h1>
      <button on:click={() => count++}>+</button>
@@ -684,7 +689,7 @@ Let's walk through the steps to use a Svelte component.
    ```js
    import Counter from "@components/Counter.svelte";
    ...
-   <Counter client:load />
+   <Counter label="Tally" client:load />
    ```
 
    The `client:load` attribute tells Astro that
