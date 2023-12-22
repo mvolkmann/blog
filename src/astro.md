@@ -5,15 +5,31 @@ layout: topic-layout.njk
 ---
 
 <style>
+    figcaption {
+      margin-top: 0.5rem;
+      text-align: center;
+    }
     img {
         border: 1px solid gray;
     }
+    .row {
+      display: flex;
+      align-items: center;
+    }
 </style>
 
-<figure style="width: 40%">
-  <img alt="Astro logo" style="border: 0"
-    src="/blog/assets/astro-logo.svg?v={{pkg.version}}">
-</figure>
+<div class="row">
+  <figure style="width: 40%">
+    <img alt="Astro logo" style="border: 0"
+      src="/blog/assets/astro-logo.svg?v={{pkg.version}}">
+    <figcaption>Astro logo</figcaption>
+  </figure>
+  <figure style="width: 20%">
+    <img alt="Houston" style="border: 0"
+      src="/blog/assets/astro-houston.png?v={{pkg.version}}">
+    <figcaption>Houston</figcaption>
+  </figure>
+</div>
 
 ## Overview
 
