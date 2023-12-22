@@ -140,6 +140,33 @@ enter `npm run astro docs`.
 The file `astro.config.mjs` defines all the Astro configuration options
 including adapters and extensions (like Tailwind).
 
+## Dev Toolbar
+
+When running in dev mode, Astro provides a Dev Toolbar in
+a dark gray oval that is centered at the bottom of the browser window.
+It is partially hidden from view until the mouse hovers over it.
+
+<img alt="Astro Dev Toolbar" style="border: none; width: 30%"
+  src="/blog/assets/astro-dev-toolbar.png?v={{pkg.version}}" />
+
+The toolbar contains the following four buttons:
+
+- Menu
+
+  This uses the Astro icon.
+
+- Inspect
+
+  This uses an arrow cursor icon.
+
+- Audit
+
+  This uses a document icon.
+
+- Settings
+
+  This uses a gear icon.
+
 ## Directory Structure
 
 The `public` directory holds assets such as audio, images, and video
@@ -655,7 +682,9 @@ Let's walk through the steps to use a Svelte component.
 
    For example, here is the file `Counter.svelte`:
 
-   ```svelte
+   {% raw %}
+
+   ```html
    <script>
      export let label = '';
 
@@ -683,6 +712,8 @@ Let's walk through the steps to use a Svelte component.
      }
    </style>
    ```
+
+   {% endraw %}
 
 1. Use the new component in another component or page.
 
