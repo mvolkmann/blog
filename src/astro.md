@@ -603,182 +603,6 @@ The following steps can be taken to define and render a collection of dogs.
   </div>
   ```
 
-## API Endpoints
-
-Endpoints are defined by `.js` and `.ts` files under the `src/pages` directory.
-Their URLs are defined by file-based routing, just like UI pages.
-
-Endpoints can return data in any format including
-JSON and HTML (perhaps for use with HTMX).
-
-The following code in the file `src/pages/pets/dog.json.ts`
-demonstrates creating an endpoint that returns JSON created from
-data found in the collection defined in the previous section.
-
-```ts
-import {getCollection, type CollectionEntry} from 'astro:content';
-
-export async function GET() {
-  const dogs: CollectionEntry<'dogs'>[] = await getCollection('dogs');
-  const data = dogs.map(dog => dog.data);
-  return new Response(JSON.stringify(data));
-}
-```
-
-To demonstrate defining endpoints that support CRUD operations
-we will see code that performs these on a collection of todo objects.
-Each object has the properties `id`, `text`, and `completed`.
-
-API endpoints are defined by the functions
-`GET`, `POST`, `PUT`, `PATCH`, and `DELETE`.
-Each of this take an `APIContext` object
-that contains the following properties:
-
-- `params`: an object containing properties
-  that match the dynamic segments of the route.
-- `props`: an object containing properties
-  supplied by the getStaticPaths function
-  (only available in server-side rendering)
-- `request`: a Request object that contains
-  the method, url, headers, and body
-- `clientAddress`
-- `cookies`
-- `generator`
-- `locals`
-- `redirect`
-- `site`
-- `url`
-
-We need to share the collection of todos between two source files.
-One way to accomplish this is to create a source file
-that creates and exports the collection.
-This file can be imported by other source files
-that need to access the collection.
-The following file in `src/pages/todo-state.ts` does this.
-
-```ts
-type Todo = {
-  id: number;
-  text: string;
-  completed: boolean;
-};
-
-export const todoMap = new Map<number, Todo>();
-```
-
-The endpoints defined in `src/pages/todos.ts` do two things:
-
-- retrieve all the todos as a JSON array
-- create a new todo, returning its JSON
-
-```ts
-import type {APIContext} from 'astro';
-import {todoMap} from './todos-state.ts';
-
-let lastId = 0; // used by addTodo and POST functions
-
-// Add some initial todos.
-function addTodo(text: string) {
-  const todo = {id: ++lastId, text, completed: false};
-  todoMap.set(todo.id, todo);
-}
-addTodo('buy milk');
-addTodo('cut grass');
-
-export async function GET() {
-  const todos = [...todoMap.values()];
-  return new Response(JSON.stringify(todos), {
-    headers: {'Content-Type': 'application/json'}
-  });
-}
-
-export async function POST({request}: APIContext) {
-  const todo = await request.json();
-  if (todo.completed === undefined) todo.completed = false;
-  const id = ++lastId;
-  todo.id = id;
-  todoMap.set(id, todo);
-  return new Response(JSON.stringify(todo), {status: 201});
-}
-```
-
-The endpoints defined in `src/pages/todos/[id].ts` do four things:
-
-- retrieve a todo as JSON
-- update a todo with JSON
-- patch a todo with JSON
-- delete a todo
-
-Files with square brackets in the name
-define dynamic routes where path parameters are used.
-In this case the path parameter is the id of a todo.
-
-Dynamic routes can be used for both pages and API endpoints.
-
-Dynamic routes require enabling SSR.
-To do this, enter `npx astro add node`.
-
-```ts
-import type {APIContext} from 'astro';
-import {todoMap} from '../todos-state.ts';
-
-export async function GET({params}: APIContext) {
-  const {id} = params;
-  const idNumber = Number(id);
-  const todo = todoMap.get(idNumber);
-  return new Response(JSON.stringify(todo), {
-    headers: {'Content-Type': 'application/json'}
-  });
-}
-export async function PUT({params, request}: APIContext) {
-  const {id} = params;
-  const idNumber = Number(id);
-  const todo = await request.json();
-  todo.id = idNumber; // ensures the id matches the path parameter
-  const exists = todoMap.has(idNumber);
-  if (exists) todoMap.set(idNumber, todo);
-  const status = exists ? 200 : 404;
-  return new Response(JSON.stringify(todo), {status});
-}
-
-export async function PATCH({params, request}: APIContext) {
-  const {id} = params;
-  const idNumber = Number(id);
-  const updates = await request.json();
-  updates.id = idNumber; // ensures the id matches the path parameter
-  let todo = todoMap.get(idNumber);
-  if (todo) {
-    todo = {...todo, ...updates};
-    todoMap.set(idNumber, todo);
-  }
-  const status = todo ? 200 : 404;
-  return new Response(JSON.stringify(todo), {status});
-}
-
-export async function DELETE({params, request}: APIContext) {
-  const {id} = params;
-  if (!id) return new Response('missing "id" parameter', {status: 400});
-
-  const idNumber = Number(id);
-  const status = todoMap.delete(idNumber) ? 200 : 404;
-  return new Response('', {status});
-}
-```
-
-When starting the server, include the `--host` option
-to enable using `localhost` in URLs that hit the endpoints.
-For example, the `dev` and `start` scripts in `package.json`
-should match the following:
-
-```json
-    "dev": "astro dev --host",
-    "start": "astro dev --host",
-```
-
-For more detail, see {% aTargetBlank
-"https://docs.astro.build/en/core-concepts/endpoints/#server-endpoints-api-routes",
-"Server Endpoints (API Routes)" %}.
-
 ## MDX
 
 The MDX extension enables using components inside Markdown files.
@@ -817,6 +641,54 @@ balls - basketballs - frisbees
 
 <Greet name="Comet" />
 ```
+
+## Other Frameworks
+
+Astro supports using components from many other frameworks including
+Alpine, Lit, Preact, React, SolidJS, Svelte, Vue, WebComponents, and more.
+
+Let's walk through the steps to use a Svelte component.
+
+1. Install the Svelte integration by entering `npx astro add svelte`.
+
+1. Define a Svelte component in the `src/components` directory.
+
+   For example, here is the file `Counter.svelte`:
+
+   ```svelte
+   <script>
+     let count = 0;
+   </script>
+
+   <div class="row">
+     <button disabled={count <= 0} on:click={() => count--}>-</button>
+     <h1>{count}</h1>
+     <button on:click={() => count++}>+</button>
+   </div>
+
+   <style>
+     button, h1 {
+       margin: 0;
+     }
+
+     .row {
+       display: flex;
+       align-items: center;
+       gap: 1rem;
+     }
+   </style>
+   ```
+
+1. Use the new component in another component or page.
+
+   ```js
+   import Counter from "@components/Counter.svelte";
+   ...
+   <Counter client:load />
+   ```
+
+   The `client:load` attribute tells Astro that
+   this component requires client-side JavaScript code.
 
 ## Custom 404 Page
 
@@ -1011,6 +883,182 @@ For example:
 
 This works for `audio` elements, but it seems to be broken for `video` elements.
 
+## API Endpoints
+
+Endpoints are defined by `.js` and `.ts` files under the `src/pages` directory.
+Their URLs are defined by file-based routing, just like UI pages.
+
+Endpoints can return data in any format including
+JSON and HTML (perhaps for use with HTMX).
+
+The following code in the file `src/pages/pets/dog.json.ts`
+demonstrates creating an endpoint that returns JSON created from
+data found in the collection defined in the previous section.
+
+```ts
+import {getCollection, type CollectionEntry} from 'astro:content';
+
+export async function GET() {
+  const dogs: CollectionEntry<'dogs'>[] = await getCollection('dogs');
+  const data = dogs.map(dog => dog.data);
+  return new Response(JSON.stringify(data));
+}
+```
+
+To demonstrate defining endpoints that support CRUD operations
+we will see code that performs these on a collection of todo objects.
+Each object has the properties `id`, `text`, and `completed`.
+
+API endpoints are defined by the functions
+`GET`, `POST`, `PUT`, `PATCH`, and `DELETE`.
+Each of this take an `APIContext` object
+that contains the following properties:
+
+- `params`: an object containing properties
+  that match the dynamic segments of the route.
+- `props`: an object containing properties
+  supplied by the getStaticPaths function
+  (only available in server-side rendering)
+- `request`: a Request object that contains
+  the method, url, headers, and body
+- `clientAddress`
+- `cookies`
+- `generator`
+- `locals`
+- `redirect`
+- `site`
+- `url`
+
+We need to share the collection of todos between two source files.
+One way to accomplish this is to create a source file
+that creates and exports the collection.
+This file can be imported by other source files
+that need to access the collection.
+The following file in `src/pages/todo-state.ts` does this.
+
+```ts
+type Todo = {
+  id: number;
+  text: string;
+  completed: boolean;
+};
+
+export const todoMap = new Map<number, Todo>();
+```
+
+The endpoints defined in `src/pages/todos.ts` do two things:
+
+- retrieve all the todos as a JSON array
+- create a new todo, returning its JSON
+
+```ts
+import type {APIContext} from 'astro';
+import {todoMap} from './todos-state.ts';
+
+let lastId = 0; // used by addTodo and POST functions
+
+// Add some initial todos.
+function addTodo(text: string) {
+  const todo = {id: ++lastId, text, completed: false};
+  todoMap.set(todo.id, todo);
+}
+addTodo('buy milk');
+addTodo('cut grass');
+
+export async function GET() {
+  const todos = [...todoMap.values()];
+  return new Response(JSON.stringify(todos), {
+    headers: {'Content-Type': 'application/json'}
+  });
+}
+
+export async function POST({request}: APIContext) {
+  const todo = await request.json();
+  if (todo.completed === undefined) todo.completed = false;
+  const id = ++lastId;
+  todo.id = id;
+  todoMap.set(id, todo);
+  return new Response(JSON.stringify(todo), {status: 201});
+}
+```
+
+The endpoints defined in `src/pages/todos/[id].ts` do four things:
+
+- retrieve a todo as JSON
+- update a todo with JSON
+- patch a todo with JSON
+- delete a todo
+
+Files with square brackets in the name
+define dynamic routes where path parameters are used.
+In this case the path parameter is the id of a todo.
+
+Dynamic routes can be used for both pages and API endpoints.
+
+Dynamic routes require enabling SSR.
+To do this, enter `npx astro add node`.
+
+```ts
+import type {APIContext} from 'astro';
+import {todoMap} from '../todos-state.ts';
+
+export async function GET({params}: APIContext) {
+  const {id} = params;
+  const idNumber = Number(id);
+  const todo = todoMap.get(idNumber);
+  return new Response(JSON.stringify(todo), {
+    headers: {'Content-Type': 'application/json'}
+  });
+}
+export async function PUT({params, request}: APIContext) {
+  const {id} = params;
+  const idNumber = Number(id);
+  const todo = await request.json();
+  todo.id = idNumber; // ensures the id matches the path parameter
+  const exists = todoMap.has(idNumber);
+  if (exists) todoMap.set(idNumber, todo);
+  const status = exists ? 200 : 404;
+  return new Response(JSON.stringify(todo), {status});
+}
+
+export async function PATCH({params, request}: APIContext) {
+  const {id} = params;
+  const idNumber = Number(id);
+  const updates = await request.json();
+  updates.id = idNumber; // ensures the id matches the path parameter
+  let todo = todoMap.get(idNumber);
+  if (todo) {
+    todo = {...todo, ...updates};
+    todoMap.set(idNumber, todo);
+  }
+  const status = todo ? 200 : 404;
+  return new Response(JSON.stringify(todo), {status});
+}
+
+export async function DELETE({params, request}: APIContext) {
+  const {id} = params;
+  if (!id) return new Response('missing "id" parameter', {status: 400});
+
+  const idNumber = Number(id);
+  const status = todoMap.delete(idNumber) ? 200 : 404;
+  return new Response('', {status});
+}
+```
+
+When starting the server, include the `--host` option
+to enable using `localhost` in URLs that hit the endpoints.
+For example, the `dev` and `start` scripts in `package.json`
+should match the following:
+
+```json
+    "dev": "astro dev --host",
+    "start": "astro dev --host",
+```
+
+For more detail, see {% aTargetBlank
+"https://docs.astro.build/en/core-concepts/endpoints/#server-endpoints-api-routes",
+"Server Endpoints (API Routes)" %}.
+
 ## Internationalization
 
 Astro supports {% aTargetBlank
@@ -1039,9 +1087,6 @@ TODO: Describe how to use this.
 ## Unorganized Content
 
 What are the benefits of using the tailwind typography plug-in?
-
-Try `astro add svelte`.
-Does this enables use of Svelte in .astro files?
 
 Learn about enabling SSR so pages are not generated at build time
 and are instead generated on demand. Is that how it works?
