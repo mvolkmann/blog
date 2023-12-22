@@ -414,7 +414,13 @@ Astro image optimization includes:
 
 - adding `img` element attributes like `decoding="async"` and `loading="lazy"`.
 - generating WEBP versions of images to reduce file sizes
+  (All major web browsers support the WEBP format.)
 - adding attributes required to take advantage of services like Cloudinary
+
+More image optimization is performed in production builds
+than when running in dev mode.
+
+This mostly removes the need to use tools like Squoosh to optimize images.
 
 Image optimization is performed by the {% aTargetBlank
 "https://github.com/lovell/sharp", "sharp" %} package.
@@ -527,7 +533,6 @@ The following steps can be taken to define and render a collection of dogs.
 
   const { dog } = Astro.props;
   const { breed, image, name } = dog.data;
-
   const { Content } = await dog.render();
   ---
 
@@ -769,9 +774,8 @@ As of December 2023, the only major web browsers that support this
 are Chrome and Edge.
 
 Astro disables all view transitions when
-the "prefer-reduce-motion" setting is enabled.
-This is a CSS media feature that detects
-an operating system specific setting.
+the CSS media feature "prefer-reduce-motion" is enabled.
+This is based on an operating system specific setting.
 For example, in macOS this is configured in the Settings app under
 Accessibility ... Display ... Reduce motion.
 
@@ -943,9 +947,4 @@ using the content directory with markdown files, provides a type safe, markdown 
 it uses Zod for schema of validation.
 what is the reasonable number of markdown documents to have in a collection weir if you need more than you should use a database?
 
-what does the acronym slug stand for?
-transitions are disabled if the user selected “prefers reduced motion” in there browser (or is this an OS setting?).
-The Image component does more optimization in a production build than it does when running in Dev mode. What are the differences?
-which browsers do not support webp images? I assume Astro is smart enough to not optimize to those for browsers that don’t support them.
 learn about and document using the Astro Dev toolbar that appears at the bottom of the page in the browser when running in dev mode.
-does the image optimization provided by Astro completely remove the need to use an app like Squosh.
