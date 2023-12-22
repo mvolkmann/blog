@@ -123,8 +123,25 @@ it is like a countdown sequence for a rocket launch.
 Hot reloading is automatically configured so
 saved changes are automatically reflected in the browser.
 
+To check for issues in the project code,
+enter `npx astro check` or `npm run astro check`.
+This will output errors, warnings, and hints.
+
+To build the site for production, enter `npm run build`.
+This creates a `dist` directory containing
+all the files needed to deploy the site.
+
+To preview the built site, enter `npm run preview` and browse localhost:4321.
+
+To see a list of the available "astro" commands, enter `npm run astro`.
+
+To open the Astro documentation in the default web browser,
+enter `npm run astro docs`.
+
 The file `astro.config.mjs` defines all the Astro configuration options
 including adapters and extensions (like Tailwind).
+
+## Directory Structure
 
 The `public` directory holds assets such as audio, images, and video
 that will be served as-is and not affected by any optimizations.
@@ -172,20 +189,9 @@ with this:
 import Layout from '@layouts/Layout.astro';
 ```
 
-To check for issues in the project code,
-enter `npx astro check` or `npm run astro check`.
-This will output errors, warnings, and hints.
-
-To build the site for production, enter `npm run build`.
-This creates a `dist` directory containing
-all the files needed to deploy the site.
-
-To preview the built site, enter `npm run preview` and browse localhost:4321.
-
-To see a list of the available "astro" commands, enter `npm run astro`.
-
-To open the Astro documentation in the default web browser,
-enter `npm run astro docs`.
+For site-wide constants, consider creating the file `src/constants.ts`
+that export the constants.
+In files that need the constants, import them from this file.
 
 ## Using VSCode
 
@@ -1028,9 +1034,6 @@ TODO: Describe how to use this.
   "Astro Quick Start Course" %} by Traversy Media
 
 ## Unorganized Content
-
-can create the file src/constants.ts that export site-wide constants.
-import and use these where needed.
 
 you can define collections of data as Markdown files under the src/content directory.
 create the file config.ts under the src/content directory.
