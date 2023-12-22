@@ -450,16 +450,20 @@ For example:
 ## Collections
 
 Astro supports describing and retrieving collections of data
-from Markdown files.
+from Markdown files that are typically placed under the `src/content` directory.
 
 The following steps can be taken to define and render a collection of dogs.
 
 - Create the directory `src/content`.
+
 - Create the file `config.ts` in this directory.
+
   This file defines each of the collections.
   It uses {% aTargetBlank "https://zod.dev", "Zod" %}
-  to describe the schema of each collection.
-  The schema defines which front matter properties are valid.
+  to describe and validate the schema of each collection.
+  The schema defines which front matter properties are valid
+  and provides a type-safe way to use the data.
+
   For example, the following describes a single collection named "dogs".
 
   ```ts
@@ -479,7 +483,9 @@ The following steps can be taken to define and render a collection of dogs.
   ```
 
 - Create the directory `src/content/dogs`.
+
 - Create one Markdown file for each dog inside this directory.
+
   For example:
 
   ```md
@@ -495,6 +501,7 @@ The following steps can be taken to define and render a collection of dogs.
   Note the use of front matter to describe properties of this instance.
 
 - Access the collection in a component.
+
   For example:
 
   <img alt="Astro Dogs" style="width: 50%"
@@ -943,8 +950,6 @@ learn about enabling SSR so pages are not generated at build time and are instea
 
 learn about Astro support for pagination.
 
-using the content directory with markdown files, provides a type safe, markdown API.
-it uses Zod for schema of validation.
 what is the reasonable number of markdown documents to have in a collection weir if you need more than you should use a database?
 
 learn about and document using the Astro Dev toolbar that appears at the bottom of the page in the browser when running in dev mode.
