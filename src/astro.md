@@ -243,6 +243,9 @@ This can contain three sections:
 - HTML to be rendered
 
   This section uses a JSX-like syntax.
+  Unlike JSX, this content is not pure XML.
+  For example, it an contain unclosed elements like `!doctype`
+  and self closing elements like `br` and `hr`.
 
   A root element is not required,
   but the fragment syntax from React is supported (`<>...</>`).
@@ -477,7 +480,7 @@ The following steps can be taken to define and render a collection of dogs.
   ---
   name: 'Comet'
   breed: 'Whippet'
-  slug: https://www.akc.org/dog-breeds/whippet/
+  website: https://www.akc.org/dog-breeds/whippet/
   ---
 
   Comet loves pool balls and basketballs.
@@ -506,7 +509,7 @@ The following steps can be taken to define and render a collection of dogs.
       <Dog
         name="{dog.data.name}"
         breed="{dog.data.breed}"
-        slug="{dog.slug}"
+        website="{dog.website}"
         content="{dog.body.trim()}"
       />
       )) }
@@ -519,19 +522,20 @@ The following steps can be taken to define and render a collection of dogs.
   ```ts
   ---
   interface Props {
-  breed: string;
-  content: string;
-  name: string;
-  slug: string;
+    dog: CollectionEntry<"dogs">;
+  }
 
-  const { breed, content, name, slug } = Astro.props;
+  const { dog } = Astro.props;
+  const { breed, image, name } = dog.data;
+
+  const { Content } = await dog.render();
   ---
 
   <hr />
   <div class="my-4">
     <p class="font-bold">{name} is a {breed}.</p>
-    <p>{content}</p>
-    <a href={slug}>American Kennel Club</a>
+    <Content />
+    <a href={website}>American Kennel Club</a>
   </div>
   ```
 
@@ -791,6 +795,9 @@ import { ViewTransitions } from "astro:transitions";
 </html>
 ```
 
+The `ViewTransitions` component must appear as a child of the `head` element
+for _any_ transitions to occur, including custom transitions.
+
 The built-in transitions include:
 
 - `fade`
@@ -805,6 +812,12 @@ The built-in transitions include:
 
   The current page slides out to the left and new page slides in from the right.
   The opposite occurs when navigating back to the previous page.
+
+- `none`
+
+  This disables transition animations.
+  It is typically applied to the `html` element
+  to disable all transition animations for the entire page.
 
 To specify a transition on a specific element
 (which can be the root element of a page),
@@ -929,12 +942,7 @@ learn about Astro support for pagination.
 using the content directory with markdown files, provides a type safe, markdown API.
 it uses Zod for schema of validation.
 what is the reasonable number of markdown documents to have in a collection weir if you need more than you should use a database?
-One way in which the content of .astro files is JSX-like and not pure JSX is that it is not XML. For example, you can have un closed elements like dock type and self closing elements like the br and hr tags.
-if you add the ViewTransitions component to a layout that all the pages use, then you will get view transitions when switching to any of them.
-By default the view transition is just fade and fade out.
-do view transition's still only work in Chrome?
-see “built-in animation directives”
-how do you specify the duration of a transition animation?
+
 what does the acronym slug stand for?
 transitions are disabled if the user selected “prefers reduced motion” in there browser (or is this an OS setting?).
 The Image component does more optimization in a production build than it does when running in Dev mode. What are the differences?
