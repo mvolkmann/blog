@@ -151,21 +151,32 @@ It is partially hidden from view until the mouse hovers over it.
 
 The toolbar contains the following four buttons:
 
-- Menu
+- Menu (Astro icon)
 
-  This uses the Astro icon.
+  This provides options to "Report a Bug", provide "Feedback",
+  view "Documentation", and join the "Community" (on Discord).
+  It also features some optional integrations.
+  The "View all" link opens a browser tab
+  for viewing all available integrations.
 
-- Inspect
+  The "Copy debug info" button in the upper-right
+  copies information to the clipboard that is useful when reporting a bug.
+  This includes the version of Astro, version of Node, operating system,
+  package manager (ex. npm), the adapter in use (ex. @astrojs/node),
+  and a list of the installed integrations.
+  The copied text can be pasted into a bug report.
 
-  This uses an arrow cursor icon.
+- Inspect (arrow cursor icon)
 
-- Audit
+  TODO: Finish this description.
 
-  This uses a document icon.
+- Audit (document icon)
 
-- Settings
+  TODO: Finish this description.
 
-  This uses a gear icon.
+- Settings (gear icon)
+
+  TODO: Finish this description.
 
 ## Directory Structure
 
