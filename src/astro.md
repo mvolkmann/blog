@@ -758,6 +758,8 @@ For more control over when transitions occur, see {% aTargetBlank
 This feature is built on the Web {% aTargetBlank
 "https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API",
 "View Transitions API" %}.
+As of December 2023, the only major web browsers that support this
+are Chrome and Edge.
 
 Astro disables all view transitions when
 the "prefer-reduce-motion" setting is enabled.
