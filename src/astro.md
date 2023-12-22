@@ -265,7 +265,8 @@ This can contain three sections:
     For example:
 
     ```ts
-    type Props { // TODO: Does this need to use "interface" instead?
+    // This can be defined with either "type" or "interface".
+    type Props {
       prop1?: string; // optional prop
       prop2: number; // required prop
     }
@@ -808,6 +809,70 @@ balls - basketballs - frisbees
 <Greet name="Comet" />
 ```
 
+## Custom 404 Page
+
+To create a custom 404 page, add the file `src/pages/404.astro`.
+This page can import and use layouts and other components
+just like any other page.
+
+The following is an example.
+
+<img alt="Astro 404 page" style="width: 30%"
+  src="/blog/assets/astro-404-page.png?v={{pkg.version}}">
+
+```html
+<main>
+  <p>
+    The Web site you seek
+    <br />
+    cannot be located, but
+    <br />
+    countless more exist.
+  </p>
+  <p>
+    No content was found at
+    <br />
+    <span id="path"></span>
+  </p>
+</main>
+
+<script>
+  const span = document.getElementById('path');
+  if (span) span.textContent = window.location.pathname;
+</script>
+
+<style>
+  main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+
+    height: 100vh;
+    width: 100vw;
+
+    background-color: linen;
+    color: cornflowerblue;
+    font-weight: bold;
+  }
+
+  hr {
+    width: 50%;
+  }
+
+  p {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+    text-align: center;
+  }
+
+  #path {
+    color: red;
+  }
+</style>
+```
+
 ## View Transitions
 
 Astro supports adding {% aTargetBlank
@@ -966,10 +1031,6 @@ TODO: Describe how to use this.
 
 can create the file src/constants.ts that export site-wide constants.
 import and use these where needed.
-
-can you define the Props type using either the interface or type keyword?
-to create a custom 404 page, add the file src/pages/404.astro.
-This page can also import and use layouts and other components.
 
 you can define collections of data as Markdown files under the src/content directory.
 create the file config.ts under the src/content directory.
