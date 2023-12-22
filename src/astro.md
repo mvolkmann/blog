@@ -112,18 +112,21 @@ saved changes are automatically reflected in the browser.
 The file `astro.config.mjs` defines all the Astro configuration options
 including adapters and extensions (like Tailwind).
 
-The `src/pages` directory contains component source files
-that represent complete pages of the app or API endpoints.
-Initially this directory will only contain the file `index.astro.`
+The `public` directory holds assets such as audio, images, and video
+that will be served as-is and not affected by any optimizations.
 
-The `src/components` directory contains component source files
-that can be used in page components.
-Initially this will only contain the file `index.astro.`
+Common subdirectories of the `src` directory are described in the table below.
+The only special names are `pages` and `content`.
+There are common names used for the others, but they are not enforced.
 
-The `src/layouts` directory contains source files
-that define the boilerplate HTML used by pages.
-
-The `public` directory holds assets such as audio, images, and video.
+| Directory Name   | Purpose                                                                                                                                  |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/components` | This contains component source files that can be used in page components.                                                                |
+| `src/content`    | This holds collections of Markdown files.                                                                                                |
+| `src/images`     | This holds images that will be used with the provided `Image` component in order to optimized them.                                      |
+| `src/layouts`    | This holds component source files that typically provide boilerplate HTML used by pages.                                                 |
+| `src/pages`      | This contains component source files that represent complete pages of the app or API endpoints. Initially only `index.astro` is present. |
+| `src/styles`     | This contains CSS files that define global styling.                                                                                      |
 
 To check for issues in the project code, enter `npx astro check`.
 This will output errors, warnings, and hints.
@@ -923,9 +926,6 @@ learn about enabling SSR so pages are not generated at build time and are instea
 
 learn about Astro support for pagination.
 
-To start server, enter “npm start” (no run) or “npm run dev”.
-The public directory is where assets go, that are not affected by the build, such as image optimization.
-The only special subdirectories of the src directory are pages and content. There is a naming convention for others, but it is not enforced.
 using the content directory with markdown files, provides a type safe, markdown API.
 it uses Zod for schema of validation.
 what is the reasonable number of markdown documents to have in a collection weir if you need more than you should use a database?
@@ -941,4 +941,3 @@ The Image component does more optimization in a production build than it does wh
 which browsers do not support webp images? I assume Astro is smart enough to not optimize to those for browsers that don’t support them.
 learn about and document using the Astro Dev toolbar that appears at the bottom of the page in the browser when running in dev mode.
 does the image optimization provided by Astro completely remove the need to use an app like Squosh.
-see the NPM package canvas–confetti.
