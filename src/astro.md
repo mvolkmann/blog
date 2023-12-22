@@ -98,7 +98,7 @@ Once the project is created, follow the instructions that are output.
 - `cd` to the newly created directory.
 - Setup Typescript types by entering `npx astro sync`.
 - Optionally enter `npx astro add tailwind` to add support for Tailwind CSS styling.
-- Enter `npm run dev` or `npm run start` to start a local server.
+- Enter `npm start` or `npm run dev` to start a local server.
   Both do the same thing.
 - Browse localhost:4321 (the default port).
 
@@ -362,8 +362,9 @@ Images can be placed under the `public` directory, typically in `public/images`.
 These can be referenced using a path string
 that is relative to the `public` directory.
 For example, `<img alt="logo" src="/images/logo.png" />`
-searches from the public directory.
-Astro will not provide image optimization for images in this location.
+searches from the `public` directory.
+Astro will server images files placed under the `public` directory as-is
+and will not provide image optimization.
 
 In order to take advantage of image optimizations,
 place images under the `src/images` directory,
@@ -378,16 +379,39 @@ import { Image } from "astro:assets";
 import logo from ‘../images/logo.png’;
 ---
 
-<Image alt="logo" src={logo} width={300} />
+<Image alt="logo" src={logo} height={200} width={300} />
 ```
+
+The `Image` component requires specifying both `height` and `width`
+to avoid content layout shift (CLS).
 
 From the documentation at {% aTargetBlank
 "https://docs.astro.build/en/guides/images/", "Images" %},
 The `Image` component
-"can transform a local or authorized remote image’s dimensions, file type,
+"can transform a local or authorized remote image's dimensions, file type,
 and quality for control over your displayed image.
 The resulting `<img>` tag includes `alt`, `loading`, and `decoding` attributes
 and infers image dimensions to avoid Cumulative Layout Shift (CLS)."
+
+Astro will also optimize remote images if the following
+appears in the `astro.config.mjs` file:
+
+```js
+export default defineConfig({
+  image: {
+    domains: ['astro.build']
+  }
+});
+```
+
+Astro image optimization includes:
+
+- adding `img` element attributes like `decoding="async"` and `loading="lazy"`.
+- generating WEBP versions of images to reduce file sizes
+- adding attributes required to take advantage of services like Cloudinary
+
+Image optimization is performed by the {% aTargetBlank
+"https://github.com/lovell/sharp", "sharp" %} package.
 
 ## Event Handling
 
@@ -554,6 +578,23 @@ that contains the following properties:
 - `site`
 - `url`
 
+We need to share the collection of todos between two source files.
+One way to accomplish this is to create a source file
+that creates and exports the collection.
+This file can be imported by other source files
+that need to access the collection.
+The following file in `src/pages/todo-state.ts` does this.
+
+```ts
+type Todo = {
+  id: number;
+  text: string;
+  completed: boolean;
+};
+
+export const todoMap = new Map<number, Todo>();
+```
+
 The endpoints defined in `src/pages/todos.ts` do two things:
 
 - retrieve all the todos as a JSON array
@@ -561,23 +602,20 @@ The endpoints defined in `src/pages/todos.ts` do two things:
 
 ```ts
 import type {APIContext} from 'astro';
+import {todoMap} from './todos-state.ts';
 
-let lastId = 0; // used by the POST function
+let lastId = 0; // used by addTodo and POST functions
 
-type Todo = {
-  id: number;
-  text: string;
-  completed: boolean;
-};
-declare global {
-  var todoMap: Map<number, Todo>;
+// Add some initial todos.
+function addTodo(text: string) {
+  const todo = {id: ++lastId, text, completed: false};
+  todoMap.set(todo.id, todo);
 }
-if (!globalThis.todoMap) {
-  globalThis.todoMap = new Map<number, Todo>();
-}
+addTodo('buy milk');
+addTodo('cut grass');
 
 export async function GET() {
-  const todos = [...globalThis.todoMap.values()];
+  const todos = [...todoMap.values()];
   return new Response(JSON.stringify(todos), {
     headers: {'Content-Type': 'application/json'}
   });
@@ -588,7 +626,7 @@ export async function POST({request}: APIContext) {
   if (todo.completed === undefined) todo.completed = false;
   const id = ++lastId;
   todo.id = id;
-  globalThis.todoMap.set(id, todo);
+  todoMap.set(id, todo);
   return new Response(JSON.stringify(todo), {status: 201});
 }
 ```
@@ -608,24 +646,12 @@ To do this, enter `npx astro add node`.
 
 ```ts
 import type {APIContext} from 'astro';
-
-type Todo = {
-  id: number;
-  text: string;
-  completed: boolean;
-};
-
-declare global {
-  var todoMap: Map<number, Todo>;
-}
-if (!globalThis.todoMap) {
-  globalThis.todoMap = new Map<number, Todo>();
-}
+import {todoMap} from '../todos-state.ts';
 
 export async function GET({params}: APIContext) {
   const {id} = params;
   const idNumber = Number(id);
-  const todo = globalThis.todoMap.get(idNumber);
+  const todo = todoMap.get(idNumber);
   return new Response(JSON.stringify(todo), {
     headers: {'Content-Type': 'application/json'}
   });
@@ -635,8 +661,8 @@ export async function PUT({params, request}: APIContext) {
   const idNumber = Number(id);
   const todo = await request.json();
   todo.id = idNumber; // ensures the id matches the path parameter
-  const exists = globalThis.todoMap.has(idNumber);
-  if (exists) globalThis.todoMap.set(idNumber, todo);
+  const exists = todoMap.has(idNumber);
+  if (exists) todoMap.set(idNumber, todo);
   const status = exists ? 200 : 404;
   return new Response(JSON.stringify(todo), {status});
 }
@@ -646,10 +672,10 @@ export async function PATCH({params, request}: APIContext) {
   const idNumber = Number(id);
   const updates = await request.json();
   updates.id = idNumber; // ensures the id matches the path parameter
-  let todo = globalThis.todoMap.get(idNumber);
+  let todo = todoMap.get(idNumber);
   if (todo) {
     todo = {...todo, ...updates};
-    globalThis.todoMap.set(idNumber, todo);
+    todoMap.set(idNumber, todo);
   }
   const status = todo ? 200 : 404;
   return new Response(JSON.stringify(todo), {status});
@@ -660,7 +686,7 @@ export async function DELETE({params, request}: APIContext) {
   if (!id) return new Response('missing "id" parameter', {status: 400});
 
   const idNumber = Number(id);
-  const status = globalThis.todoMap.delete(idNumber) ? 200 : 404;
+  const status = todoMap.delete(idNumber) ? 200 : 404;
   return new Response('', {status});
 }
 ```
@@ -717,6 +743,123 @@ balls - basketballs - frisbees
 
 <Greet name="Comet" />
 ```
+
+## View Transitions
+
+Astro supports adding {% aTargetBlank
+"https://docs.astro.build/en/guides/view-transitions/", "view transitions" %}
+that are applied when navigating from one page to another.
+This includes clicking links implemented with `<a>` elements
+and triggering the browser forward and back buttons.
+For more control over when transitions occur, see {% aTargetBlank
+"https://docs.astro.build/en/guides/view-transitions/#router-control",
+"router control" %}.
+
+This feature is built on the Web {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API",
+"View Transitions API" %}.
+
+Astro disables all view transitions when
+the "prefer-reduce-motion" setting is enabled.
+This is a CSS media feature that detects
+an operating system specific setting.
+For example, in macOS this is configured in the Settings app under
+Accessibility ... Display ... Reduce motion.
+
+For basic fade out, fade in transitions between all pages,
+modify the layout files used by all the pages as follows.
+This specifies the transition that should occur when leaving a page.
+
+```html
+---
+import { ViewTransitions } from "astro:transitions";
+...
+
+---
+
+<html>
+  <head>
+    ...
+    <ViewTransitions />
+  </head>
+  ...
+</html>
+```
+
+The built-in transitions include:
+
+- `fade`
+
+  The current page fades out and new page fades in.
+
+- `initial`
+
+  This uses the browser default transition.
+
+- `slide`
+
+  The current page slides out to the left and new page slides in from the right.
+  The opposite occurs when navigating back to the previous page.
+
+To specify a transition on a specific element
+(which can be the root element of a page),
+add the attribute `transition:animate="{transition-type}"`.
+For example, `<main transition:animate="slide">`.
+
+To customize the transition,
+pass a configuration object to the transition function.
+For example, `<main transition:animate={slide({ duration: '2s' })}>`.
+
+To define a custom transition, create an object that
+conforms to the `TransitionDirectionalAnimations` interface
+which requires `forwards` and `backwards` properties.
+Those properties must be objects that
+conform to the `TransitionAnimation` interface
+which requires `old` and `new` properties.
+
+For example:
+TODO: GET THIS TO WORK!
+
+```ts
+const spinAnim = {
+  old: {
+    name: 'spinOut',
+    duration: '1s',
+    easing: 'linear',
+    fillMode: 'forwards'
+  },
+  new: {
+    name: 'spinIn',
+    duration: '1s',
+    easing: 'linear',
+    fillMode: 'backwards'
+  }
+};
+
+const spin = {
+  forwards: spinAnim,
+  backwards: spinAnim
+};
+```
+
+## Internationalization
+
+Astro supports {% aTargetBlank
+"https://docs.astro.build/en/guides/internationalization/",
+"internationalization" %}.
+
+The Astro approach is it to duplicate each component for each supported language
+and store them in directories whose names are language codes.
+This is a bad approach because any changes require modifying multiple files.
+
+TODO: Describe how to use this.
+
+## Starlight
+
+{% aTargetBlank "https://starlight.astro.build", "Starlight" %}
+is a documentation theme built on Astro.
+
+TODO: Describe how to use this.
 
 ## Resources
 
