@@ -197,6 +197,8 @@ The toolbar contains the following four buttons:
 
 - Inspect (arrow cursor icon)
 
+  This enables inspecting interactive components that are
+  marked with the `client:load` attribute.
   TODO: Finish this description.
 
 - Audit (document icon)
