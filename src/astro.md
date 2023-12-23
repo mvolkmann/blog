@@ -198,23 +198,34 @@ The toolbar contains the following four buttons:
 - Inspect (arrow cursor icon)
 
   This enables inspecting interactive components that are
-  marked with the `client:load` attribute.
+  marked with a `client:*` directive.
 
   Click this button to display an outline around
   all the interactive components on the page.
-  Hover over one to get a popup that shows the props that were passed to it
-  and link that be clicked to open the source code for the component
-  in VS Code.
+  Hover over one to get a dialog that shows:
 
-  TODO: Finish this description.
+  - the specific `client:*` directive that was applied
+  - the props that were passed to the component
+  - a link that be clicked to open the source file for the component in VS Code
 
 - Audit (document icon)
 
-  TODO: Finish this description.
+  This scans the page for accessibility issues.
+  Elements that have issues are given a purple outline.
+  Hover over them to see a dialog that describes the issues.
 
 - Settings (gear icon)
 
-  TODO: Finish this description.
+  This displays a dialog for modifying settings.
+  There are currently only two settings,
+  "Verbose logging" and "Disable notifications",
+  both of which are off by default.
+
+To close any dialog displayed by the Dev Toolbar, press the escape key.
+
+If having access to the Dev Toolbar is not desired,
+it can be disabled by entering `npx astro preferences disable devToolbar`.
+It can be enabled again by entering `npx astro preferences enable devToolbar`.
 
 ## Directory Structure
 
