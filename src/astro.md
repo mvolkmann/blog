@@ -966,6 +966,9 @@ Their URLs are defined by file-based routing, just like UI pages.
 
 Endpoints can return data in any format including
 JSON and HTML (perhaps for use with HTMX).
+However, currently endpoints cannot use Astro components to generate HTML.
+That capability is planned for the future.
+For now, see the HTMX section below which uses Astro pages as endpoints.
 
 The following code in the file `src/pages/pets/dog.json.ts`
 demonstrates creating an endpoint that returns JSON created from
@@ -1134,6 +1137,16 @@ should match the following:
 For more detail, see {% aTargetBlank
 "https://docs.astro.build/en/core-concepts/endpoints/#server-endpoints-api-routes",
 "Server Endpoints (API Routes)" %}.
+
+## HTMX
+
+Astro added support for "partials" which make it more natural to use HTMX.
+For an example app that combines Astro and HTMX, see {% aTargetBlank
+"https://github.com/mvolkmann/astro-htmx-todo-app", "astro-htmx-todo-app" %}.
+This uses Astro page as endpoints.
+
+HTTP requests with any verb can target an Astro page.
+The component script can determine which verb was used and respond accordingly.
 
 ## Internationalization
 
