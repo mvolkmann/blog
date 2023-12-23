@@ -199,6 +199,13 @@ The toolbar contains the following four buttons:
 
   This enables inspecting interactive components that are
   marked with the `client:load` attribute.
+
+  Click this button to display an outline around
+  all the interactive components on the page.
+  Hover over one to get a popup that shows the props that were passed to it
+  and link that be clicked to open the source code for the component
+  in VS Code.
+
   TODO: Finish this description.
 
 - Audit (document icon)
