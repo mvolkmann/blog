@@ -384,6 +384,11 @@ This can contain three sections:
 
   This defines CSS rules that are scoped to this component.
 
+## Shorthand Attributes
+
+Astro supports shorthand syntax for attributes like Svelte.
+For example, `<Layout title={title}>` can be written as `<Layout {title}>`.
+
 ## Naming Conventions
 
 Files under the `src/pages` directory have lowercase names
