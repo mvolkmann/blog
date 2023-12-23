@@ -777,8 +777,50 @@ Let's walk through the steps to use a Svelte component.
    <Counter label="Tally" client:load />
    ```
 
-   The `client:load` attribute tells Astro that
-   this component requires client-side JavaScript code.
+   There are five provided `client` directives that tell Astro that
+   a component requires client-side JavaScript code to be loaded.
+   They differ in when the JavaScript will be loaded.
+
+   | Directive        | When JS is loaded                       |
+   | ---------------- | --------------------------------------- |
+   | `client:idle`    | when browser is idle                    |
+   | `client:load`    | immediately                             |
+   | `client:media`   | when a CSS media query condition is met |
+   | `client:only`    | after page load with no SSR             |
+   | `client:visible` | when component becomes visible          |
+
+   Integrations can add support for custom `client` directives.
+
+## Directives
+
+In addition to the `client:` directives described in the previous section,
+Astro supports these directives:
+
+| Directive            | Action                                                                                             |
+| -------------------- | -------------------------------------------------------------------------------------------------- |
+| `class:list={[...]}` | converts an array of CSS class names into a string of class names                                  |
+| `define:vars`        | applied to `style` or `script` elements to provide access to the values of front matter variables  |
+| `is:inline`          | disables Astro processing of `style` and `script` elements leaving them as-is                      |
+| `is:global`          | applied to a `style` element to make the styles global rather than scoped to the current component |
+| `is:raw`             | treats descendant elements and interpolations as text                                              |
+| `set:html={string}`  | injects a string of HTML into the element                                                          |
+| `set:text`           | injects a string of text into the element                                                          |
+
+If a value in the `class:list` array is an object,
+the keys must be class names and the values must be Boolean expressions
+that determine whether the class name should be included.
+If a value is array, it is flattened into the surrounding array.
+If a value is `false`, `undefined`, or `null`, it is skipped.
+
+If the string value of `set:html` comes from an untrusted source, use a
+sanitizer such as sanitize-html to avoid cross site scripting attacks (XSS).
+This directive can be applied to a `Fragment` component
+when a wrapping element is not needed.
+If the value is a `Promise`, Astro will wait for it to resolve
+and use the result as the HTML to insert.
+
+The string value of `set:text` is automatically escaped, replacing
+certain characters such as `"` with a character entity such as `&quot;`.
 
 ## Custom 404 Page
 
