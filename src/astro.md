@@ -140,6 +140,35 @@ enter `npm run astro docs`.
 The file `astro.config.mjs` defines all the Astro configuration options
 including adapters and extensions (like Tailwind).
 
+## Prettier
+
+The steps to configure an Astro project to use Prettier are:
+
+- Enter `npm install -D prettier-plugin-astro`
+- Create the file `.prettierrc` at the root of the project.
+
+  Some suggested options are shown here.
+  The only one that is required is `plugins`.
+
+  ```json
+  {
+    "arrowParens": "avoid",
+    "astroAllowShorthand": true,
+    "bracketSpacing": false,
+    "singleQuote": true,
+    "trailingComma": "none",
+    "plugins": ["prettier-plugin-astro"]
+  }
+  ```
+
+- Add the following script in `package.json`.
+
+  ```json
+  "format": "prettier --write '{public,src}/**/*.{astro,css,html,js,ts}'",
+  ```
+
+To format all the files in the project, enter `npm run format`.
+
 ## Dev Toolbar
 
 When running in dev mode, Astro provides a Dev Toolbar in
