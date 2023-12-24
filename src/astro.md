@@ -560,8 +560,9 @@ const colors = ["red", "green", "blue"];
 </Layout>
 ```
 
-Rather than create a `.astro` file for each color, we can define
-the file `[color].astro` that is used to render all those pages as follows:
+Rather than create a `.astro` file for each color,
+we can create the file `[color].astro` shown below.
+This file is used to render each of the color pages.
 
 ```js
 ---
@@ -589,7 +590,20 @@ The reason is that the `getStaticPaths` function gets hoisted into its own scope
 That prevents it from accessing most things outside the function.
 This is a limitation that the Astro team hopes remove in the future.
 
-TODO: Does configuring SSR remove the need for the `getStaticPaths` function?
+Running `npm run build` generates the `dist` directory which will contain
+the following files and more:
+
+- `dist/blue/index.html`
+- `dist/green/index.html`
+- `dist/red/index.html`
+
+The `getStaticPaths` function is only required if SSR is not enabled.
+To enable SSR, enter `npx astro add node`.
+
+When SSR is enabled, running `npm run build`
+will not generate HTML files for dynamic routes.
+Instead, the HTML for dynamic routes
+will be generated when requested by a client.
 
 ## Imports
 
