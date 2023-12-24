@@ -698,7 +698,10 @@ The following steps can be taken to define and render a collection of dogs.
 ## MDX
 
 The MDX extension enables using components inside Markdown files.
-To install this in an Astro project, enter `npx astro add mdx`.
+The components can be implemented in any of the supported frameworks.
+These can add interactivity to what would otherwise be static content.
+
+To install the MDX extension in an Astro project, enter `npx astro add mdx`.
 
 If VS Code is being used, install the {% aTargetBlank
 "https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx",
