@@ -77,6 +77,23 @@ The functionality of Snowpack was superseded by
 {% aTargetBlank "https://vitejs.dev", "Vite" %}
 which is used as the build tool in Astro.
 
+## Top Benefits
+
+The top benefits of using Astro include:
+
+- sends less JavaScript code to browsers resulting in faster startup
+- file-based routing simplifies mapping pages and endpoints to URLs
+- provides image optimization
+- makes it easy to generate static sites
+- interactive functionality is contained in "dynamic islands"
+  to optimize static content
+- supports TypeScript for detecting errors while writing code
+- can use components implemented in all the popular web frameworks
+- can use content collections to easily
+  generate static pages from data at build time
+- supports implementing API endpoints in JavaScript or TypeScript
+- supports many integrations such as Alpine, MDX, React, Svelte, Tailwind, and more.
+
 ## Projects
 
 To create an Astro project, enter `npm create astro@latest`.
@@ -569,6 +586,26 @@ This mostly removes the need to use tools like Squoosh to optimize images.
 
 Image optimization is performed by the {% aTargetBlank
 "https://github.com/lovell/sharp", "sharp" %} package.
+
+## Icons
+
+{% aTargetBlank "https://www.astroicon.dev", "Astro Icon" %}
+provides access to many icon sets.
+
+To install "Astro Icon", enter `npx astro add astro-icon`.
+TODO: This is not currently working! See https://github.com/natemoo-re/astro-icon/issues/167.
+
+To see the available icons, browse {% aTargetBlank
+"https://icon-sets.iconify.design", "icon sets" %}.
+This includes "Font Awesome Solid" and many more.
+
+To use an icon, import the `Icon` component in the component script with
+
+```js
+import {Icon} from 'astro-icon/components';
+```
+
+Then render an icon with `<Icon name="{some-icon-name}" />`.
 
 ## Event Handling
 
