@@ -833,6 +833,8 @@ He loves the following:
 Astro supports using components from many other frameworks including
 Alpine, Lit, Preact, React, SolidJS, Svelte, Vue, WebComponents, and more.
 
+### Svelte
+
 Let's walk through the steps to use a
 {% aTargetBlank "https://svelte.dev", "Svelte" %} component.
 
@@ -901,6 +903,8 @@ Let's walk through the steps to use a
 For more detail on using Svelte components in Astro, see {% aTargetBlank
 "https://docs.astro.build/en/guides/integrations-guide/svelte/",
 "Svelte integration" %}.
+
+### Alpine
 
 Now let's walk through the steps to use
 {% aTargetBlank "https://alpinejs.dev", "Alpine" %} in Astro.

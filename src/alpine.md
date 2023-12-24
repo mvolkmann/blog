@@ -669,6 +669,13 @@ The event name must be composed of lowercase letters and dashes.
 To handle events with names that contain uppercase letters or periods,
 see the modifiers `camel` and `dot` described below.
 
+When using HTML `form` submission, all the inputs inside the form
+can be reset to their default values with the following:
+
+```html
+@submit="$nextTick(() => $el.reset())"
+```
+
 The event name can be followed by the following modifiers:
 
 - `.camel`
