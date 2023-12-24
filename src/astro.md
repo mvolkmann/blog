@@ -856,8 +856,12 @@ Alpine is a much smaller framework than Svelte, but is still quite capable.
    ```js
    import Counter from "@components/Counter.astro";
    ...
-   <Counter label="Tally" client:load />
+   <Counter label="Tally" />
    ```
+
+   Unlike with Svelte and other components,
+   Astro components that use Alpine do not need a `client:*` directive
+   in order to have client-side interactivity.
 
 ## Directives
 
