@@ -313,8 +313,12 @@ It will prompt for configuring this and automatically do so.
 Pages are defined my files in the `src/pages` directory.
 They can be described by Markdown (`.md`) or Astro (`.astro`) files.
 Their URL path is determined by their subdirectory path and file name.
+
 For example, the file `src/pages/demo/colors.md`
 defines the page at the URL path `/demo/colors/`.
+
+<img alt="Astro colors page" style="width: 25%"
+    src="/blog/assets/astro-colors-page.png?v={{pkg.version}}">
 
 ```md
 ---
@@ -332,7 +336,7 @@ The front matter property `layout` specifies the path to a layout component
 that provides the HTML boilerplate for the page.
 This can include `link` tags that refer to CSS files used to style the page.
 
-This same page can be implementing as an Astro component
+This same page can be implemented as an Astro component
 in the file `src/pages/demo/colors.astro` as follows:
 
 ```js
