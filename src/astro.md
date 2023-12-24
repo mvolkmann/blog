@@ -807,7 +807,9 @@ Let's walk through the steps to use a {% aTargetBlank
 Now let's walk through the steps to use an {% aTargetBlank
 "https://docs.astro.build/en/guides/integrations-guide/alpinejs/",
 "Alpine" %} component.
-Alpine is a much smaller framework than Svelte, but is still quite capable.
+Alpine is a much lighter weight framework than
+frameworks like React, Svelte and Vue.
+But Alpine is still quite capable.
 
 1. Install the Alpine integration by entering `npx astro add alpinejs`.
 
