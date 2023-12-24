@@ -92,7 +92,8 @@ The top benefits of using Astro include:
 - can use content collections to easily
   generate static pages from data at build time
 - supports implementing API endpoints in JavaScript or TypeScript
-- supports many integrations such as Alpine, MDX, React, Svelte, Tailwind, and more.
+- supports many integrations such as
+  Alpine, MDX, React, Svelte, Tailwind, and more.
 
 ## Projects
 
@@ -597,7 +598,7 @@ TODO: This is not currently working! See https://github.com/natemoo-re/astro-ico
 
 To see the available icons, browse {% aTargetBlank
 "https://icon-sets.iconify.design", "icon sets" %}.
-This includes "Font Awesome Solid" and many more.
+This includes "Font Awesome Solid", "SVG Spinner", and many more.
 
 To use an icon, import the `Icon` component in the component script with
 
@@ -786,9 +787,8 @@ He loves the following:
 Astro supports using components from many other frameworks including
 Alpine, Lit, Preact, React, SolidJS, Svelte, Vue, WebComponents, and more.
 
-Let's walk through the steps to use a {% aTargetBlank
-"https://docs.astro.build/en/guides/integrations-guide/svelte/",
-"Svelte" %} component.
+Let's walk through the steps to use a
+{% aTargetBlank "https://svelte.dev", "Svelte" %} component.
 
 1. Install the Svelte integration by entering `npx astro add svelte`.
 
@@ -852,9 +852,12 @@ Let's walk through the steps to use a {% aTargetBlank
 
    Integrations can add support for custom `client` directives.
 
-Now let's walk through the steps to use an {% aTargetBlank
-"https://docs.astro.build/en/guides/integrations-guide/alpinejs/",
-"Alpine" %} component.
+For more detail on using Svelte components in Astro, see {% aTargetBlank
+"https://docs.astro.build/en/guides/integrations-guide/svelte/",
+"Svelte integration" %}.
+
+Now let's walk through the steps to use
+{% aTargetBlank "https://alpinejs.dev", "Alpine" %} in Astro.
 Alpine is a much lighter weight framework than
 frameworks like React, Svelte and Vue.
 But Alpine is still quite capable.
@@ -913,6 +916,10 @@ But Alpine is still quite capable.
    Unlike with Svelte and other components,
    Astro components that use Alpine do not need a `client:*` directive
    in order to have client-side interactivity.
+
+For more detail on using Alpine in Astro, see {% aTargetBlank
+"https://docs.astro.build/en/guides/integrations-guide/alpinejs/",
+"Alpine integration" %}.
 
 ## Directives
 
