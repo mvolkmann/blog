@@ -673,7 +673,15 @@ When using HTML `form` submission, all the inputs inside the form
 can be reset to their default values with the following:
 
 ```html
-@submit="$nextTick(() => $el.reset())"
+<form
+  hx-post="..."
+  hx-target="..."
+  hx-swap="..."
+  x-data
+  @submit="$nextTick(() => $el.reset())"
+>
+  ...
+</form>
 ```
 
 The event name can be followed by the following modifiers:
