@@ -1353,10 +1353,10 @@ const todos = query.all() as Todo[];
 <Layout>
   <h1>Astro with Bun</h1>
   { todos.map((todo) => (
-  <div>
-    <input type="checkbox" checked={todo.completed === 1} />
-    <span>{todo.text}</span>
-  </div>
+    <div>
+      <input type="checkbox" checked={todo.completed === 1} />
+      <span>{todo.text}</span>
+    </div>
   )) }
 </Layout>
 ```
