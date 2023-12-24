@@ -1309,6 +1309,23 @@ to execute `astro` commands and run the Astro server:
 "Using Bun with Astro may reveal rough edges.
 Some integrations may not work as expected."
 
+To create an Astro project using Bun:
+
+- Enter `bunx create-astro@latest {project-name}`.
+- `cd` to the new project directory.
+- Add Bun type definitions by entering `bun add -d bun-types`.
+- Edit `tsconfig.json` and add the following:
+
+  ```json
+   "compilerOptions": {
+    "types": ["bun-types"]
+  }
+  ```
+
+- Start the development server with `bunx --bun astro dev`.
+- Build the site with `bunx --bun astro build`.
+- Preview the built site with `bunx --bun astro preview`.
+
 For more details, see {% aTargetBlank
 "https://docs.astro.build/en/recipes/bun/", "Using Bun with Astro" %}.
 
