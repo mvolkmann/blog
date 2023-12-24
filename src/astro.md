@@ -651,12 +651,12 @@ The following steps can be taken to define and render a collection of dogs.
   <img alt="Astro Dogs" style="width: 50%"
     src="/blog/assets/astro-dogs.png?v={{pkg.version}}">
 
-  ```html
+  ```js
   ---
   import Layout from "../../layouts/Layout.astro";
   import Dog from "../../components/Dog.astro";
   import { getCollection, type CollectionEntry } from "astro:content";
-  
+
   const dogs: CollectionEntry<"dogs">[] = await getCollection("dogs");
   ---
 
@@ -712,7 +712,7 @@ must have the file extension `.mdx`.
 
 For example, here is a component definition in `src/components/Greet.astro`:
 
-```html
+```js
 ---
 const { name } = Astro.props;
 ---
@@ -723,15 +723,20 @@ const { name } = Astro.props;
 And here is a content file in `src/content/dogs/comet.mdx`.
 Note how it imports and uses the `Greet` component:
 
-```html
+```js
 ---
 name: 'Comet'
 breed: 'Whippet'
 website: https://www.akc.org/dog-breeds/whippet/
 ---
 
-import Greet from "../../components/Greet.astro"; He loves the following: - pool
-balls - basketballs - frisbees
+import Greet from "../../components/Greet.astro";
+He loves the following:
+
+- pool balls
+- basketballs
+- frisbees
+
 ![Whippet](https://www.akc.org/wp-content/uploads/2017/11/Whippet-On-White-01.jpg)
 
 <Greet name="Comet" />
@@ -756,7 +761,6 @@ Let's walk through the steps to use a {% aTargetBlank
 
    ```html
    <script>
-
      export let label = '';
      export let start = 0;
 
@@ -824,7 +828,7 @@ But Alpine is still quite capable.
 
    {% raw %}
 
-   ```html
+   ```js
    ---
    interface Props {
      label?: string;
@@ -1325,6 +1329,37 @@ To create an Astro project using Bun:
 - Start the development server with `bunx --bun astro dev`.
 - Build the site with `bunx --bun astro build`.
 - Preview the built site with `bunx --bun astro preview`.
+
+Using Bun instead of Node provides better performance.
+It also enables using all the features of Bun such as SQLite support.
+The following Astro page demonstrates this.
+
+```js
+---
+import { Database } from "bun:sqlite";
+import Layout from "../layouts/Layout.astro";
+
+type Todo = {
+  id: number;
+  text: string;
+  completed: number; // 0 or 1 for SQLite compatibility
+};
+
+const db = new Database("todos.db", { create: true });
+const query = db.query("select * from todos;");
+const todos = query.all() as Todo[];
+---
+
+<Layout>
+  <h1>Astro with Bun</h1>
+  { todos.map((todo) => (
+  <div>
+    <input type="checkbox" checked={todo.completed === 1} />
+    <span>{todo.text}</span>
+  </div>
+  )) }
+</Layout>
+```
 
 For more details, see {% aTargetBlank
 "https://docs.astro.build/en/recipes/bun/", "Using Bun with Astro" %}.
