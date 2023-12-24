@@ -308,40 +308,46 @@ To configure code formatting, open any `.astro` file,
 open the Command Palette, and enter "Format Document".
 It will prompt for configuring this and automatically do so.
 
-## Imports
+## Pages
 
-Astro supports importing many kinds of file in JavaScript code.
-The supported file types include:
+Pages are defined my files in the `src/pages` directory.
+They can be described by Markdown (`.md`) or Astro (`.astro`) files.
+Their URL path is determined by their subdirectory path and file name.
+For example, the file `src/pages/demo/colors.md`
+defines the page at the URL path `/demo/colors/`.
 
-- Astro components (.astro)
-- CSS (.css)
-- CSS Modules (.module.css)
-- Images (.svg, .jpg, .png, etc.)
-- JavaScript (.js, .mjs)
-- JSON (.json)
-- JSX (.jsx, .tsx)
-- Markdown (.md, .markdown, etc.)
-- NPM Packages
-- TypeScript (.ts)
-- Other kinds of assets (TODO: audio and video?)
+```md
+---
+layout: ../layouts/Layout.astro
+---
 
-For example, the following line imports
-a JSON file with the path `src/data/dogs.json`
-from a `.astro` file in the `src/pages` directory:
+# Colors
 
-```ts
-import dogs from '../data/dogs.json';
-console.log('dogs =', dogs);
+- red
+- green
+- blue
 ```
 
-Import paths can be relative to the current file
-or be absolute from the root directory of the project.
-For example, when inside the file `src/components/shopping/PetShop.astro`,
-the file `src/images/animals/dog.png` can be imported in these ways:
+The front matter property `layout` specifies the path to a layout component
+that provides the HTML boilerplate for the page.
+This can include `link` tags that refer to CSS files used to style the page.
 
-```ts
-import dogImage from '../../images/animals/dog.png';
-import dogImage from '/src/images/animals/dog.png';
+This same page can be implementing as an Astro component
+in the file `src/pages/demo/colors.astro` as follows:
+
+```js
+---
+import Layout from "../../layouts/Layout.astro";
+
+const colors = ["red", "green", "blue"];
+---
+
+<Layout>
+  <h1>Colors</h1>
+  <ul>
+    {colors.map((color) => <li>{color}</li>)}
+  </ul>
+</Layout>
 ```
 
 ## Astro Components
@@ -522,6 +528,42 @@ import Layout from "../layouts/Layout.astro";
 
 Layouts can be nested. For example, a page component `MyPage`
 can wrap itself in `LayoutInner` which wraps itself in `LayoutOuter`.
+
+## Imports
+
+Astro supports importing many kinds of file in JavaScript code.
+The supported file types include:
+
+- Astro components (.astro)
+- CSS (.css)
+- CSS Modules (.module.css)
+- Images (.svg, .jpg, .png, etc.)
+- JavaScript (.js, .mjs)
+- JSON (.json)
+- JSX (.jsx, .tsx)
+- Markdown (.md, .markdown, etc.)
+- NPM Packages
+- TypeScript (.ts)
+- Other kinds of assets (TODO: audio and video?)
+
+For example, the following line imports
+a JSON file with the path `src/data/dogs.json`
+from a `.astro` file in the `src/pages` directory:
+
+```ts
+import dogs from '../data/dogs.json';
+console.log('dogs =', dogs);
+```
+
+Import paths can be relative to the current file
+or be absolute from the root directory of the project.
+For example, when inside the file `src/components/shopping/PetShop.astro`,
+the file `src/images/animals/dog.png` can be imported in these ways:
+
+```ts
+import dogImage from '../../images/animals/dog.png';
+import dogImage from '/src/images/animals/dog.png';
+```
 
 ## Images
 
@@ -964,20 +1006,26 @@ The following is an example.
   src="/blog/assets/astro-404-page.png?v={{pkg.version}}">
 
 ```html
-<main>
-  <p>
-    The Web site you seek
-    <br />
-    cannot be located, but
-    <br />
-    countless more exist.
-  </p>
-  <p>
-    No content was found at
-    <br />
-    <span id="path"></span>
-  </p>
-</main>
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+  <main>
+    <p>
+      The Web site you seek
+      <br />
+      cannot be located, but
+      <br />
+      countless more exist.
+    </p>
+    <p>
+      No content was found at
+      <br />
+      <span id="path"></span>
+    </p>
+  </main>
+</Layout>
 
 <script>
   const span = document.getElementById('path');
@@ -998,10 +1046,6 @@ The following is an example.
     background-color: linen;
     color: cornflowerblue;
     font-weight: bold;
-  }
-
-  hr {
-    width: 50%;
   }
 
   p {
