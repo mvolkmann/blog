@@ -589,6 +589,8 @@ The reason is that the `getStaticPaths` function gets hoisted into its own scope
 That prevents it from accessing most things outside the function.
 This is a limitation that the Astro team hopes remove in the future.
 
+TODO: Does configuring SSR remove the need for the `getStaticPaths` function?
+
 ## Imports
 
 Astro supports importing many kinds of file in JavaScript code.
