@@ -534,6 +534,8 @@ import logo from ‘../images/logo.png’;
 The `Image` component requires specifying both `height` and `width`
 to avoid content layout shift (CLS).
 
+For static sites, optimized images are generated concurrently at build time.
+
 From the documentation at {% aTargetBlank
 "https://docs.astro.build/en/guides/images/", "Images" %},
 The `Image` component
@@ -1280,7 +1282,18 @@ For more detail, see {% aTargetBlank
 
 ## HTMX
 
-Astro added support for "partials" which make it more natural to use HTMX.
+Astro added support for "page partials" which make it more natural to use HTMX.
+These render HTML with only `body` element content.
+The `<!doctype html>`, `html`, `head` (and its contents), and `body` elements
+are not output.
+
+To indicate that an Astro component should be rendered as a partial,
+add the following to its component script:
+
+```js
+export const partial = true;
+```
+
 For an example app that combines Astro and HTMX, see {% aTargetBlank
 "https://github.com/mvolkmann/astro-htmx-todo-app", "astro-htmx-todo-app" %}.
 This uses Astro page as endpoints.
