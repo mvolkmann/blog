@@ -739,7 +739,9 @@ balls - basketballs - frisbees
 Astro supports using components from many other frameworks including
 Alpine, Lit, Preact, React, SolidJS, Svelte, Vue, WebComponents, and more.
 
-Let's walk through the steps to use a Svelte component.
+Let's walk through the steps to use a {% aTargetBlank
+"https://docs.astro.build/en/guides/integrations-guide/svelte/",
+"Svelte" %} component.
 
 1. Install the Svelte integration by entering `npx astro add svelte`.
 
@@ -801,6 +803,61 @@ Let's walk through the steps to use a Svelte component.
    | `client:visible` | when component becomes visible          |
 
    Integrations can add support for custom `client` directives.
+
+Now let's walk through the steps to use an {% aTargetBlank
+"https://docs.astro.build/en/guides/integrations-guide/alpinejs/",
+"Alpine" %} component.
+Alpine is a much smaller framework than Svelte, but is still quite capable.
+
+1. Install the Alpine integration by entering `npx astro add alpinejs`.
+
+1. Define an Astro component that uses Alpine in the `src/components` directory.
+
+   For example, here is the file `Counter.astro`:
+
+   {% raw %}
+
+   ```html
+   ---
+   interface Props {
+     label?: string;
+   }
+   
+   const { label = "" } = Astro.props;
+   ---
+
+   <div class="row" x-data="{ count: 0 }">
+     {label &&
+     <div>{label}</div>
+     }
+     <button :disabled="count <= 0" @click="count--">-</button>
+     <h1 x-text="count"></h1>
+     <button @click="count++">+</button>
+   </div>
+
+   <style>
+     button,
+     h1 {
+       margin: 0;
+     }
+
+     .row {
+       display: flex;
+       align-items: center;
+       gap: 1rem;
+     }
+   </style>
+   ```
+
+   {% endraw %}
+
+1. Use the new component in another component or page.
+
+   ```js
+   import Counter from "@components/Counter.astro";
+   ...
+   <Counter label="Tally" client:load />
+   ```
 
 ## Directives
 
