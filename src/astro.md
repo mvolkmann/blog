@@ -533,6 +533,62 @@ import Layout from "../layouts/Layout.astro";
 Layouts can be nested. For example, a page component `MyPage`
 can wrap itself in `LayoutInner` which wraps itself in `LayoutOuter`.
 
+## Dynamic Routes
+
+Dynamic routes are routes defined under the `pages` directory with
+directory or file names that contain a variable name inside square brackets.
+These can be used for both pages and API endpoints.
+
+For example, the following page defined in `src/pages/index.astro`
+contains links to pages that are provided by a dynamic route.
+
+```js
+---
+import Layout from '../layouts/Layout.astro';
+
+const colors = ["red", "green", "blue"];
+---
+
+<Layout>
+  {
+    colors.map((color) => (
+      <div>
+        <a href={`/${color}`}>{color}</a>
+      </div>
+    ))
+  }
+</Layout>
+```
+
+Rather than create a `.astro` file for each color, we can define
+the file `[color].astro` that is used to render all those pages as follows:
+
+```js
+---
+export function getStaticPaths() {
+  const colors = ["red", "green", "blue"];
+  return colors.map((color) => ({ params: { color } }));
+}
+
+const { color } = Astro.params;
+---
+
+<Layout>
+  <h1>
+    You selected <span style={`color: ${color}`}>{color}</span>.
+  </h1>
+</Layout>
+```
+
+The `getStaticPaths` function is required so Astro
+knows the pages it should generate at build time.
+
+Note how the `colors` array is defined inside the `getStaticPaths` function.
+If defined outside that function, it will not be visible.
+The reason is that the `getStaticPaths` function gets hoisted into its own scope.
+That prevents it from accessing most things outside the function.
+This is a limitation that the Astro team hopes remove in the future.
+
 ## Imports
 
 Astro supports importing many kinds of file in JavaScript code.
@@ -640,7 +696,14 @@ Image optimization is performed by the {% aTargetBlank
 provides access to many icon sets.
 
 To install "Astro Icon", enter `npx astro add astro-icon`.
-TODO: This is not currently working! See https://github.com/natemoo-re/astro-icon/issues/167.
+
+TODO: This is not currently working!
+See https://github.com/natemoo-re/astro-icon/issues/167.
+For now, install it with
+
+- Enter `npm install astro-icon@next`.
+- Edit `astro.config.mjs`, add `import icon from "astro-icon";`,
+  and add `icon()` to the `integrations` array.
 
 To see the available icons, browse {% aTargetBlank
 "https://icon-sets.iconify.design", "icon sets" %}.
