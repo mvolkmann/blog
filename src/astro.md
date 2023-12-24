@@ -1281,8 +1281,14 @@ For an example app that combines Astro and HTMX, see {% aTargetBlank
 "https://github.com/mvolkmann/astro-htmx-todo-app", "astro-htmx-todo-app" %}.
 This uses Astro page as endpoints.
 
-HTTP requests with any verb can target an Astro page.
-The component script can determine which verb was used and respond accordingly.
+<img alt="Astro HTMX Todo app" style="width: 70%"
+  src="/blog/assets/astro-htmx-todo-app.png?v={{pkg.version}}" />
+
+HTTP requests can be triggered by interacting with
+any HTML element and use any HTTP verb.
+These requests can target an Astro page.
+The component script in the page can determine
+which verb was used and respond accordingly.
 
 ## Internationalization
 
