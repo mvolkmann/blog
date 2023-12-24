@@ -756,9 +756,11 @@ Let's walk through the steps to use a {% aTargetBlank
 
    ```html
    <script>
-     export let label = '';
 
-     let count = 0;
+     export let label = '';
+     export let start = 0;
+
+     let count = start;
    </script>
 
    <div class="row">
@@ -790,7 +792,7 @@ Let's walk through the steps to use a {% aTargetBlank
    ```js
    import Counter from "@components/Counter.svelte";
    ...
-   <Counter label="Tally" client:load />
+   <Counter label="Tally" start={3} client:load />
    ```
 
    There are five provided `client` directives that tell Astro that
@@ -826,12 +828,13 @@ But Alpine is still quite capable.
    ---
    interface Props {
      label?: string;
+     start?: number;
    }
-   
-   const { label = "" } = Astro.props;
+
+   const { label = "", start = 0 } = Astro.props;
    ---
 
-   <div class="row" x-data="{ count: 0 }">
+   <div class="row" x-data={`{ count: ${start} }`}>
      {label &&
      <div>{label}</div>
      }
@@ -861,7 +864,7 @@ But Alpine is still quite capable.
    ```js
    import Counter from "@components/Counter.astro";
    ...
-   <Counter label="Tally" />
+   <Counter label="Tally" start={3} />
    ```
 
    Unlike with Svelte and other components,
