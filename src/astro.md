@@ -1293,6 +1293,16 @@ This is a bad approach because any changes require modifying multiple files.
 
 TODO: Describe how to use this.
 
+## Bun instead of Node
+
+Astro provides the following caution about using Bun instead of Node
+to execute `astro` commands and run the Astro server:
+"Using Bun with Astro may reveal rough edges.
+Some integrations may not work as expected."
+
+For more details, see {% aTargetBlank
+"https://docs.astro.build/en/recipes/bun/", "Using Bun with Astro" %}.
+
 ## Starlight
 
 {% aTargetBlank "https://starlight.astro.build", "Starlight" %}
