@@ -165,6 +165,7 @@ If you use VS Code as your editor, consider installing these extensions:
 - {% aTargetBlank "https://marketplace.visualstudio.com/items?itemName=astro-build.astro-vscode", "Astro" %} from astro.build
 - {% aTargetBlank "https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx", "MDX" %} from unified
 - {% aTargetBlank "https://marketplace.visualstudio.com/items?itemName=astro-build.houston", "Houston" %} from astro.build
+- {% aTargetBlank "https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss", "Tailwind CSS Intellisense" %} from tailwindcss.com
 
 TODO: Describe each of these extensions.
 
