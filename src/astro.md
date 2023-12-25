@@ -158,6 +158,16 @@ enter `npm run astro docs`.
 The file `astro.config.mjs` defines all the Astro configuration options
 including adapters and extensions (like Tailwind).
 
+## VS Code
+
+If you use VS Code as your editor, consider installing these extensions:
+
+- {% aTargetBlank "https://marketplace.visualstudio.com/items?itemName=astro-build.astro-vscode", "Astro" %} from astro.build
+- {% aTargetBlank "https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx", "MDX" %} from unified
+- {% aTargetBlank "https://marketplace.visualstudio.com/items?itemName=astro-build.houston", "Houston" %} from astro.build
+
+TODO: Describe each of these extensions.
+
 ## Prettier
 
 The steps to configure an Astro project to use Prettier are:
