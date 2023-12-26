@@ -77,6 +77,9 @@ The functionality of Snowpack was superseded by
 {% aTargetBlank "https://vitejs.dev", "Vite" %}
 which is used as the build tool in Astro.
 
+Development of Astro is managed by "The Astro Technology Company"
+which was founded in January 2022 with $7M in seed funding.
+
 ## Top Benefits
 
 The top benefits of using Astro include:
@@ -104,8 +107,9 @@ This will prompt for the following:
 
 - "Where should we created your new project?"
 
-  Enter a directory path that can begin with "./".
-  Enter only "." to create the project in the current directory.
+  Enter the name of a new subdirectory to be created.
+  To create the project in the current directory, enter only ".".
+  To enter a relative path, begin with "./".
 
 - "How would you like to start your new project?"
 
