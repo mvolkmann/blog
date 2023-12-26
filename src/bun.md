@@ -1073,6 +1073,12 @@ See the example at {% aTargetBlank
 "https://github.com/mvolkmann/bun-elysia-demo", "bun-elysia-demo" %}
 GitHub repository.
 
+When a URL path for hitting an Elysia server does not end in a file name,
+it does not default to rendering the file "index.html".
+To do that, end the URL with "/index.html".
+See this {% aTargetBlank "https://github.com/elysiajs/elysia/issues/327",
+"issue" %}.
+
 ## TODOs
 
 - Compare performance of bun, deno, and node on your rush-hour code.
