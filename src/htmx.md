@@ -141,10 +141,9 @@ Intercooler had a dependency on jQuery, but HTMX does not.
 
 The first version of HTMX was released in May 2020.
 The 1.0 version was released in November, 2020.
-The latest version as of December 2023 is 1.9.9.
-It is 15K gzipped and 47K unzipped.
+The latest version as of December 2023 is 1.9.10 which is only 16.2K.
 
-HTMX 2.0 is expected in late 2023 or early 2024.
+HTMX 2.0 is expected in early 2024.
 It will remove legacy support for things like IE,
 old style WebSockets, and old style server sent events.
 There will also be some changes to default behavior
