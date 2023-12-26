@@ -885,7 +885,7 @@ For example:
 </script>
 ```
 
-## Collections
+## Content Collections
 
 Astro supports describing and retrieving collections of data
 from Markdown files that are typically placed under the `src/content` directory.
@@ -973,6 +973,8 @@ The following steps can be taken to define and render a collection of dogs.
 
   ```ts
   ---
+  import { type CollectionEntry } from "astro:content";
+
   interface Props {
     dog: CollectionEntry<"dogs">;
   }
@@ -1438,6 +1440,11 @@ const spin = {
   backwards: spinAnim
 };
 ```
+
+For more detail, see {% aTargetBlank
+"https://docs.astro.build/en/guides/view-transitions/", "View Transitions" %}.
+Also, check out {% aTargetBlank
+"https://github.com/martrapp/astro-vt-bot#readme", "astro-vt-bot" %}.
 
 ## API Endpoints
 
