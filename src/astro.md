@@ -1225,9 +1225,21 @@ The built-in transitions include:
   It is typically applied to the `html` element
   to disable all transition animations for the entire page.
 
+To specify a page-level transition other than the default,
+add the `transition:animate` directive to the `body` element of each page.
+If all pages use a common layout, this can be applied in that layout component.
+For example, the following will configure a slide transition where
+going forward causes the current page to slide out to the left
+and the new page to slide in from the right.
+Going back triggers the opposite transitions.:
+
+```html
+<body class="p-4" transition:animate={slide({ duration: '1s' })}>
+```
+
 To specify a transition on a specific element
 (which can be the root element of a page),
-add the attribute `transition:animate="{transition-type}"`.
+add the `transition:animate="{transition-type}"` directive.
 For example, `<main transition:animate="slide">`.
 
 To customize the transition,
@@ -1266,10 +1278,23 @@ const spin = {
 };
 ```
 
+When identical `Image` components are on both the current page
+and the next page and they have the `transition:name` directive,
+one will morph into the other through the view transition.
+This is especially useful when the image size of each of the pages differs.
+
+For example:
+
+```html
+import whippet from "../images/whippet.webp"; ... --- ...
+<image alt="whippet" src="{whippet}" transition:name="whippet" />
+...
+```
+
 When identical `audio` and `video` elements are on both
-the current page and the next page and they are playing,
-they will continue playing without interruption through the view transition
-if they have the `transition:persist` attribute.
+the current page and the next page and they are playing
+and they have the `transition:name` and `transition:persist` directives,
+they will continue playing without interruption through the view transition.
 
 For example:
 
@@ -1280,7 +1305,7 @@ For example:
   transition:name="my-audio"
   transition:persist
 ></audio>
-<video controls width="200" transition-name="my-video" transition:persist>
+<video controls width="200" transition:name="my-video" transition:persist>
   <source src="/bunny-video.mp4" type="video/mp4" />
 </video>
 ```
