@@ -27,7 +27,7 @@ layout: topic-layout.njk
   <figure style="width: 20%">
     <img alt="Houston" style="border: 0"
       src="/blog/assets/astro-houston.png?v={{pkg.version}}">
-    <figcaption>Houston</figcaption>
+    <figcaption>Houston, the Astro mascot</figcaption>
   </figure>
 </div>
 
@@ -128,7 +128,8 @@ This will prompt for the following:
 Once the project is created, follow the instructions that are output.
 
 - `cd` to the newly created directory.
-- Optionally enter `npx astro add tailwind` to add support for Tailwind CSS styling.
+- Optionally add the Taiwind integration for Tailwind CSS styling
+  by entering `npx astro add tailwind`.
 - Enter `npm start` or `npm run dev` to start a local server.
   Both do the same thing.
 - Browse localhost:4321 (the default port).
@@ -156,7 +157,11 @@ To open the Astro documentation in the default web browser,
 enter `npm run astro docs`.
 
 The file `astro.config.mjs` defines all the Astro configuration options
-including adapters and extensions (like Tailwind).
+including adapters (like node) and integrations (like Tailwind).
+While this file can be manually modified,
+it is easier and less error prone to add adapters and integrations
+using the `npx astro add {integration-name}` command which
+installs the integration package and updates the `astro.config.mjs` file.
 
 ## VS Code
 
@@ -640,7 +645,7 @@ the following files and more:
 - `dist/red/index.html`
 
 The `getStaticPaths` function is only required if SSR is not enabled.
-To enable SSR, enter `npx astro add node`.
+To enable SSR, install the node adapter by entering `npx astro add node`.
 
 When SSR is enabled, running `npm run build`
 will not generate HTML files for dynamic routes.
@@ -753,7 +758,7 @@ Image optimization is performed by the {% aTargetBlank
 {% aTargetBlank "https://www.astroicon.dev", "Astro Icon" %}
 provides access to many icon sets.
 
-To install "Astro Icon", enter `npx astro add astro-icon`.
+To install "Astro Icon" integration, enter `npx astro add astro-icon`.
 
 TODO: This is not currently working!
 See https://github.com/natemoo-re/astro-icon/issues/167.
@@ -908,7 +913,7 @@ The MDX extension enables using components inside Markdown files.
 The components can be implemented in any of the supported frameworks.
 These can add interactivity to what would otherwise be static content.
 
-To install the MDX extension in an Astro project, enter `npx astro add mdx`.
+To install the MDX integration in an Astro project, enter `npx astro add mdx`.
 
 Markdown files that wish to render components
 must have the file extension `.mdx`.
@@ -1455,7 +1460,7 @@ In this case the path parameter is the id of a todo.
 Dynamic routes can be used for both pages and API endpoints.
 
 Dynamic routes require enabling SSR.
-To do this, enter `npx astro add node`.
+To do this, add the node adapter by entering `npx astro add node`.
 
 ```ts
 import type {APIContext} from 'astro';
