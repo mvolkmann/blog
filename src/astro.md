@@ -1137,7 +1137,19 @@ But Alpine is still quite capable.
      <button :disabled="count <= 0" @click="count--">-</button>
      <h1 x-text="count"></h1>
      <button @click="count++">+</button>
+
+     <!-- This demonstrates calling client-side JS code
+          in Alpine event handling. -->
+     <button @click="demo">Click Me</button>
    </div>
+
+   <!-- The is:inline directive opts out of Astro processing
+        and includes the script tag as-is. -->
+   <script is:inline>
+     function demo() {
+       alert("Demo time!");
+     }
+   </script>
 
    <style>
      button,
