@@ -385,8 +385,12 @@ It will prompt for configuring this and automatically do so.
 ## Pages
 
 Pages are defined my files in the `src/pages` directory.
-They can be described by Markdown (`.md`) or Astro (`.astro`) files.
-Their URL path is determined by their subdirectory path and file name.
+They can be described by Astro (`.astro`), Markdown (`.md`),
+or MDX (`.mdx`) files.
+They cannot be described by components from frameworks like React and Svelte,
+but pages can render those kinds of components.
+
+The URL path of a page is determined by its subdirectory path and file name.
 
 For example, the file `src/pages/demo/colors.md`
 defines the page at the URL path `/demo/colors/`.
