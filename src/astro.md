@@ -27,7 +27,7 @@ layout: topic-layout.njk
   <figure style="width: 20%">
     <img alt="Houston" style="border: 0"
       src="/blog/assets/astro-houston.png?v={{pkg.version}}">
-    <figcaption>Houston, the Astro mascot</figcaption>
+    <figcaption>Houston,<br />the Astro mascot</figcaption>
   </figure>
 </div>
 
@@ -969,7 +969,7 @@ The following steps can be taken to define and render a collection of dogs.
   </Layout>
   ```
 
-- Here is the `Dog` component:
+- Create the `Dog` component:
 
   ```ts
   ---
@@ -991,6 +991,57 @@ The following steps can be taken to define and render a collection of dogs.
     <a href={website}>American Kennel Club</a>
   </div>
   ```
+
+For a more complete example of using content collections,
+see the project {% aTargetBlank
+"https://github.com/mvolkmann/astro-examples/tree/main/content-collections",
+"content-collections" %}.
+This displays a component for each NFL team on the initial page.
+Clicking the component for any team navigates to a detail page
+using view transitions.
+
+<img alt="Astro content collections NFL home" style="width: 49%"
+  src="/blog/assets/astro-content-collections-nfl-home.png?v={{pkg.version}}">
+<img alt="Astro content collections NFL detail" style="width: 49%"
+  src="/blog/assets/astro-content-collections-nfl-detail.png?v={{pkg.version}}">
+
+The file `src/content/config.ts` which defines the schema
+for the for collection documents contains the following:
+
+```ts
+import {defineCollection, z} from 'astro:content';
+
+const nfl = defineCollection({
+  type: 'content',
+  schema: z.object({
+    city: z.string(),
+    name: z.string(),
+    conference: z.string(),
+    logoUrl: z.string(),
+    headCoach: z.string(),
+    established: z.number()
+  })
+});
+
+export const collections = {nfl};
+```
+
+The file `src/content/nfl/kansas-city-chiefs.md` is one example
+of the content files described by the schema above.
+It contains the following:
+
+```md
+---
+city: Kansas City
+name: Chiefs
+conference: AFC West
+logoUrl: https://res.cloudinary.com/nflleague/image/private/f_auto/league/ujshjqvmnxce8m4obmvs
+headCoach: Andy Reid
+established: 1960
+---
+
+After losing to the Raiders on Christmas Day, the Chiefs ...
+```
 
 ## MDX
 
