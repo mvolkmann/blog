@@ -1658,6 +1658,118 @@ This is a bad approach because any changes require modifying multiple files.
 
 TODO: Describe how to use this.
 
+## Tailwind Typography Plugin
+
+The Tailwind {% aTargetBlank "https://tailwindcss.com/docs/typography-plugin",
+"@tailwindcss/typography" %} plugin "provides a set of prose classes
+you can use to add beautiful typographic defaults to any vanilla HTML
+you don't control, like HTML rendered from Markdown, or pulled from a CMS."
+
+To install and configure this plugin:
+
+- Enter `npx astro add tailwind`
+- Enter `npm install -D @tailwindcss/typography`
+- Edit `tailwind.config.mjs` and add the following to the `plugins` array:
+
+  ```text
+  require('@tailwindcss/typography')
+  ```
+
+To use this plugin, add `prose` CSS classes to specific HTML elements
+that contain the elements to be styled.
+
+The large screenshot below demonstrates how
+many features of Markdown are styled by this plugin.
+
+<img alt="Astro Tailwind Typography" style="width: 70%"
+  src="/blog/assets/astro-tailwind-typography.png?v={{pkg.version}}" />
+
+The following files from an Astro project produce the screenshot above.
+
+<i>src/layouts/Layout.astro</i>
+
+Note the use of the CSS class `prose` and
+the `slot` element that marks where content will be inserted.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      body {
+        padding: 1rem;
+      }
+    </style>
+  </head>
+  <body class="prose">
+    <slot />
+  </body>
+</html>
+```
+
+<i>src/pages/index.md</i>
+
+Note the reference to the layout above using a front matter property.
+
+{% raw %}
+
+````md
+---
+layout: ../layouts/Layout.astro
+---
+
+# Tailwind Typography Demo
+
+This demonstrates use of the Tailwind plugin
+[@tailwindcss/typography](https://tailwindcss.com/docs/typography-plugin).
+
+> The official Tailwind CSS Typography plugin provides
+> a set of prose classes you can use to add beautiful
+> typographic defaults to any vanilla HTML you don’t control,
+> like HTML rendered from Markdown, or pulled from a CMS.
+
+## Colors
+
+These are some _basic_ colors.
+
+- red
+- green
+- blue
+
+## Seasons
+
+These are the **seasons** in a year.
+
+1. Winter
+1. Spring
+1. Summer
+1. Fall
+
+## Dogs
+
+These are some dogs I know.
+
+| Name  | Breed                      |
+| ----- | -------------------------- |
+| Comet | Whippet                    |
+| Oscar | German Shorthaired Pointer |
+
+## Tasks
+
+- [x] buy milk
+- [ ] cut grass
+
+## Code
+
+```js
+function add(n1, n2) {
+  return n1 + n2;
+}
+```
+````
+
+{% endraw %}
+
 ## Bun instead of Node
 
 Astro provides the following caution about using Bun instead of Node
@@ -1743,3 +1855,6 @@ where if you need more then you should use a database?
 
 Learn about and document using the Astro Dev toolbar
 that appears at the bottom of the page in the browser when running in dev mode.
+
+Can pages be defined with .html, .md, .mdx, and .svelte files
+in addition to .astro files?
