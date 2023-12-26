@@ -162,12 +162,41 @@ including adapters and extensions (like Tailwind).
 
 If you use VS Code as your editor, consider installing these extensions:
 
-- {% aTargetBlank "https://marketplace.visualstudio.com/items?itemName=astro-build.astro-vscode", "Astro" %} from astro.build
-- {% aTargetBlank "https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx", "MDX" %} from unified
-- {% aTargetBlank "https://marketplace.visualstudio.com/items?itemName=astro-build.houston", "Houston" %} from astro.build
-- {% aTargetBlank "https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss", "Tailwind CSS Intellisense" %} from tailwindcss.com
+- {% aTargetBlank "https://marketplace.visualstudio.com/items?itemName=astro-build.astro-vscode",
+  "Astro" %} from astro.build
 
-TODO: Describe each of these extensions.
+  This provides language support for `.astro` files
+  using the Astro language server.
+  It includes syntax highlighting, intellisense code completions,
+  Emmet completions in HTML and CSS
+  code actions for quick fixes,
+  code formatting (using Prettier),
+  code folding,
+  and more.
+
+- {% aTargetBlank "https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx",
+  "MDX" %} from unified
+
+  This provides language support for `.mdx` files.
+
+- {% aTargetBlank "https://marketplace.visualstudio.com/items?itemName=astro-build.houston",
+  "Houston" %} from astro.build
+
+  Houston is the Astro mascot.
+  This provides a color theme using Astro colors which include
+  "cool blues, minty greens, and soft purples".
+  It also adds a "HOUSTON" section to the Explorer pane
+  which becomes visible after restarting VS Code.
+  This just displays the mascot.
+  Perhaps in the future it will change based on the state of the project.
+
+- {% aTargetBlank "https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss",
+  "Tailwind CSS Intellisense" %} from tailwindcss.com
+
+  This provides autocomplete, syntax highlighting, and linting
+  for Tailwind CSS classes.
+  When entering Tailwind class names for colors,
+  it provides color preview swatches.
 
 ## Prettier
 
@@ -878,10 +907,6 @@ The components can be implemented in any of the supported frameworks.
 These can add interactivity to what would otherwise be static content.
 
 To install the MDX extension in an Astro project, enter `npx astro add mdx`.
-
-If VS Code is being used, install the {% aTargetBlank
-"https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx",
-"MDX" %} extension from unified.
 
 Markdown files that wish to render components
 must have the file extension `.mdx`.
