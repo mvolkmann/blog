@@ -706,8 +706,9 @@ const { color } = Astro.params;
 </Layout>
 ```
 
-The `getStaticPaths` function is required so Astro
-knows the pages it should generate at build time.
+The `getStaticPaths` function is required when not using SSR
+so Astro knows the pages it should generate at build time.
+This function is not used when SSR is enabled.
 
 Note how the `colors` array is defined inside the `getStaticPaths` function.
 If defined outside that function, it will not be visible.
@@ -1438,6 +1439,11 @@ const spin = {
 
 Endpoints are defined by `.js` and `.ts` files under the `src/pages` directory.
 Their URLs are defined by file-based routing, just like UI pages.
+
+Endpoints are not UI pages.
+It seems odd that they are defined in the `pages` directory
+rather than in a dedicated directory like `apis` or `endpoints`.
+Perhaps a future version of Astro will make this change.
 
 Endpoints can return data in any format including
 JSON and HTML (perhaps for use with HTMX).
