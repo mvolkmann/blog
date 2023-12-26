@@ -188,7 +188,9 @@ If you use VS Code as your editor, consider installing these extensions:
   It also adds a "HOUSTON" section to the Explorer pane
   which becomes visible after restarting VS Code.
   This just displays the mascot.
-  Perhaps in the future it will change based on the state of the project.
+  If will have a smiley face if the project has no errors,
+  a frown if there are minor errors,
+  and a sad face if there are more serious errors.
 
 - {% aTargetBlank "https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss",
   "Tailwind CSS Intellisense" %} from tailwindcss.com
@@ -1272,38 +1274,6 @@ To customize the transition,
 pass a configuration object to the transition function.
 For example, `<main transition:animate={slide({ duration: '2s' })}>`.
 
-To define a custom transition, create an object that
-conforms to the `TransitionDirectionalAnimations` interface
-which requires `forwards` and `backwards` properties.
-Those properties must be objects that
-conform to the `TransitionAnimation` interface
-which requires `old` and `new` properties.
-
-For example:
-TODO: GET THIS TO WORK!
-
-```ts
-const spinAnim = {
-  old: {
-    name: 'spinOut',
-    duration: '1s',
-    easing: 'linear',
-    fillMode: 'forwards'
-  },
-  new: {
-    name: 'spinIn',
-    duration: '1s',
-    easing: 'linear',
-    fillMode: 'backwards'
-  }
-};
-
-const spin = {
-  forwards: spinAnim,
-  backwards: spinAnim
-};
-```
-
 When identical `Image` components are on both the current page
 and the next page and they have the `transition:name` directive,
 one will morph into the other through the view transition.
@@ -1336,7 +1306,38 @@ For example:
 </video>
 ```
 
-This works for `audio` elements, but it seems to be broken for `video` elements.
+To define a custom transition, create an object that
+conforms to the `TransitionDirectionalAnimations` interface
+which requires `forwards` and `backwards` properties.
+Those properties must be objects that
+conform to the `TransitionAnimation` interface
+which requires `old` and `new` properties.
+
+For example:
+TODO: This is not quite working yet.
+See astro-examples/view-transitions/src/layouts/SpinLayout.astro.
+
+```ts
+const spinAnim = {
+  old: {
+    name: 'spinOut',
+    duration: '1s',
+    easing: 'linear',
+    fillMode: 'forwards'
+  },
+  new: {
+    name: 'spinIn',
+    duration: '1s',
+    easing: 'linear',
+    fillMode: 'backwards'
+  }
+};
+
+const spin = {
+  forwards: spinAnim,
+  backwards: spinAnim
+};
+```
 
 ## API Endpoints
 
