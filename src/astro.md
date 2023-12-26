@@ -1173,7 +1173,8 @@ This feature is built on the Web {% aTargetBlank
 "https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API",
 "View Transitions API" %}.
 As of December 2023, the only major web browsers that support this
-are Chrome and Edge.
+are Chrome and Edge. Polyfills are provided to support view transitions
+in browsers that do not yet support the View Transitions API.
 
 Astro disables all view transitions when
 the CSS media feature "prefer-reduce-motion" is enabled.
