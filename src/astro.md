@@ -158,7 +158,9 @@ To preview the built site, enter `npm run preview` and browse localhost:4321.
 To see a list of the available "astro" commands, enter `npm run astro`.
 
 To open the Astro documentation in the default web browser,
-enter `npm run astro docs`.
+enter `npm run astro docs`. For help on a specific topic,
+click in the search input or press the slash key to move focus there.
+Then enter a topic.
 
 The file `astro.config.mjs` defines all the Astro configuration options
 including adapters (like node) and integrations (like Tailwind).
