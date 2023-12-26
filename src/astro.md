@@ -162,12 +162,33 @@ enter `npm run astro docs`. For help on a specific topic,
 click in the search input or press the slash key to move focus there.
 Then enter a topic.
 
-The file `astro.config.mjs` defines all the Astro configuration options
+### Configuration
+
+The file `astro.config.mjs` defines Astro configuration options
 including adapters (like node) and integrations (like Tailwind).
+
 While this file can be manually modified,
 it is easier and less error prone to add adapters and integrations
 using the `npx astro add {integration-name}` command which
 installs the integration package and updates the `astro.config.mjs` file.
+
+The following example configuration file adds the use of
+the node adapter and the mdx and tailwind integrations.
+
+```ts
+import {defineConfig} from 'astro/config';
+import mdx from '@astrojs/mdx';
+import node from '@astrojs/node';
+import tailwind from '@astrojs/tailwind';
+
+export default defineConfig({
+  integrations: [mdx(), tailwind()],
+  output: 'server',
+  adapter: node({
+    mode: 'standalone'
+  })
+});
+```
 
 ## VS Code
 
@@ -485,6 +506,8 @@ This can contain three sections:
 
   This defines CSS rules that are scoped to this component.
 
+### Slots
+
 The HTML of a component can contain a `slot` element
 which marks where content will be inserted.
 For example, the following component in `src/components/Border.astro`
@@ -518,7 +541,8 @@ const style = {
 </style>
 ```
 
-This `Border` component can be used as follows:
+This `Border` component can be used as follows.
+Note how content is included.
 
 <img alt="Astro component with slot" style="border: none; width: 30%"
   src="/blog/assets/astro-component-with-slot.png?v={{pkg.version}}" />
