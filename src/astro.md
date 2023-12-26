@@ -485,6 +485,54 @@ This can contain three sections:
 
   This defines CSS rules that are scoped to this component.
 
+The HTML of a component can contain a `slot` element
+which marks where content will be inserted.
+For example, the following component in `src/components/Border.astro`
+contains a `slot` element.
+
+```js
+---
+interface Props {
+  color?: string;
+}
+
+const { color = "black" } = Astro.props;
+
+const style = {
+  borderColor: color,
+  boxShadow: `5px 5px 5px ${color}`,
+};
+---
+
+<div class="border" {style}>
+  <slot />
+</div>
+
+<style>
+  .border {
+    border-width: 3px;
+    border-radius: 1rem;
+    display: inline-block;
+    padding: 1rem;
+  }
+</style>
+```
+
+This `Border` component can be used as follows:
+
+<img alt="Astro component with slot" style="border: none; width: 30%"
+  src="/blog/assets/astro-component-with-slot.png?v={{pkg.version}}" />
+
+```html
+<Border color="red">
+  What is with this code?
+  <br />
+  Oh my, looks like I wrote it.
+  <br />
+  What was I thinking?
+</Border>
+```
+
 ## Shorthand Attributes
 
 Astro supports shorthand syntax for attributes like Svelte.
