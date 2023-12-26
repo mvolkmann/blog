@@ -40,6 +40,21 @@ Cons of SQLite include:
 - no support for stored procedures
 - no built-in data encryption
 
+See {% aTargetBlank "https://www.sqlite.org/whentouse.html",
+"Appropriate Uses For SQLite" %}.
+This contains the following advice and much more:
+
+- "Avoid using SQLite in situations where the same database
+  will be accessed directly (without an intervening application server)
+  and simultaneously from many computers over a network."
+- "SQLite supports an unlimited number of simultaneous readers,
+  but it will only allow one writer at any instant in time.
+  For many situations, this is not a problem. Writers queue up.
+  Each application does its database work quickly and moves on,
+  and no lock lasts for more than a few dozen milliseconds.
+  But there are some applications that require more concurrency,
+  and those applications may need to seek a different solution."
+
 ## Installing
 
 SQLite can be downloaded from
