@@ -662,79 +662,6 @@ import Layout from "../layouts/Layout.astro";
 Layouts can be nested. For example, a page component `MyPage`
 can wrap itself in `LayoutInner` which wraps itself in `LayoutOuter`.
 
-## Dynamic Routes
-
-Dynamic routes are routes defined under the `pages` directory with
-directory or file names that contain a variable name inside square brackets.
-These can be used for both pages and API endpoints.
-
-For example, the following page defined in `src/pages/index.astro`
-contains links to pages that are provided by a dynamic route.
-
-```js
----
-import Layout from '../layouts/Layout.astro';
-
-const colors = ["red", "green", "blue"];
----
-
-<Layout>
-  {
-    colors.map((color) => (
-      <div>
-        <a href={`/${color}`}>{color}</a>
-      </div>
-    ))
-  }
-</Layout>
-```
-
-Rather than create a `.astro` file for each color,
-we can create the file `[color].astro` shown below.
-This file is used to render each of the color pages.
-
-```js
----
-export function getStaticPaths() {
-  const colors = ["red", "green", "blue"];
-  return colors.map((color) => ({ params: { color } }));
-}
-
-const { color } = Astro.params;
----
-
-<Layout>
-  <h1>
-    You selected <span style={`color: ${color}`}>{color}</span>.
-  </h1>
-</Layout>
-```
-
-The `getStaticPaths` function is required when not using SSR
-so Astro knows the pages it should generate at build time.
-This function is not used when SSR is enabled.
-
-Note how the `colors` array is defined inside the `getStaticPaths` function.
-If defined outside that function, it will not be visible.
-The reason is that the `getStaticPaths` function gets hoisted into its own scope.
-That prevents it from accessing most things outside the function.
-This is a limitation that the Astro team hopes remove in the future.
-
-Running `npm run build` generates the `dist` directory which will contain
-the following files and more:
-
-- `dist/blue/index.html`
-- `dist/green/index.html`
-- `dist/red/index.html`
-
-The `getStaticPaths` function is only required if SSR is not enabled.
-To enable SSR, install the node adapter by entering `npx astro add node`.
-
-When SSR is enabled, running `npm run build`
-will not generate HTML files for dynamic routes.
-Instead, the HTML for dynamic routes
-will be generated when requested by a client.
-
 ## Imports
 
 Astro supports importing many kinds of file in JavaScript code.
@@ -862,6 +789,79 @@ import {Icon} from 'astro-icon/components';
 ```
 
 Then render an icon with `<Icon name="{some-icon-name}" />`.
+
+## Dynamic Routes
+
+Dynamic routes are routes defined under the `pages` directory with
+directory or file names that contain a variable name inside square brackets.
+These can be used for both pages and API endpoints.
+
+For example, the following page defined in `src/pages/index.astro`
+contains links to pages that are provided by a dynamic route.
+
+```js
+---
+import Layout from '../layouts/Layout.astro';
+
+const colors = ["red", "green", "blue"];
+---
+
+<Layout>
+  {
+    colors.map((color) => (
+      <div>
+        <a href={`/${color}`}>{color}</a>
+      </div>
+    ))
+  }
+</Layout>
+```
+
+Rather than create a `.astro` file for each color,
+we can create the file `[color].astro` shown below.
+This file is used to render each of the color pages.
+
+```js
+---
+export function getStaticPaths() {
+  const colors = ["red", "green", "blue"];
+  return colors.map((color) => ({ params: { color } }));
+}
+
+const { color } = Astro.params;
+---
+
+<Layout>
+  <h1>
+    You selected <span style={`color: ${color}`}>{color}</span>.
+  </h1>
+</Layout>
+```
+
+The `getStaticPaths` function is required when not using SSR
+so Astro knows the pages it should generate at build time.
+This function is not used when SSR is enabled.
+
+Note how the `colors` array is defined inside the `getStaticPaths` function.
+If defined outside that function, it will not be visible.
+The reason is that the `getStaticPaths` function gets hoisted into its own scope.
+That prevents it from accessing most things outside the function.
+This is a limitation that the Astro team hopes remove in the future.
+
+Running `npm run build` generates the `dist` directory which will contain
+the following files and more:
+
+- `dist/blue/index.html`
+- `dist/green/index.html`
+- `dist/red/index.html`
+
+The `getStaticPaths` function is only required if SSR is not enabled.
+To enable SSR, install the node adapter by entering `npx astro add node`.
+
+When SSR is enabled, running `npm run build`
+will not generate HTML files for dynamic routes.
+Instead, the HTML for dynamic routes
+will be generated when requested by a client.
 
 ## Event Handling
 
@@ -1043,6 +1043,27 @@ established: 1960
 After losing to the Raiders on Christmas Day, the Chiefs ...
 ```
 
+## Sharing States
+
+The recommended way to share state (data) between components is to use the
+{% aTargetBlank "https://github.com/nanostores/nanostores", "nanostores" %}
+library.
+This library is not specific to Astro and can be used with many web frameworks.
+It is very lightweight, adding less that 1KB to the project.
+nanostores are somewhat similar to Svelte stores.
+
+To install the nanostores library in an Astro project,
+enter `npm install nanostores`.
+
+Use an "atom store" to store a single data value which can be of any type
+including boolean, number, string, or array.
+
+Use a "map store" to store multiple named properties.
+
+The names of stores must begin with a dollar sign
+and be unique across all components that use nanostores.
+This is the key to sharing access across components.
+
 ## MDX
 
 The MDX extension enables using components inside Markdown files.
@@ -1203,6 +1224,8 @@ But Alpine is still quite capable.
 
    <!-- The is:inline directive opts out of Astro processing
         and includes the script tag as-is. -->
+   <!-- TODO: Does the Astro processing include tree shaking to remove
+        the definitions of functions it thinks are not used? -->
    <script is:inline>
      function demo() {
        alert("Demo time!");
@@ -1261,6 +1284,18 @@ the keys must be class names and the values must be Boolean expressions
 that determine whether the class name should be included.
 If a value is array, it is flattened into the surrounding array.
 If a value is `false`, `undefined`, or `null`, it is skipped.
+
+Applying the `is:inline` directive to a `style` or `script` element
+has the following effects:
+
+- will be rendered exactly where it is authored
+- styles will be global and not scoped to the component
+- will not be bundled into an external file
+- will appear as many times as it is rendered, rather than just once
+- will not have its `import`, `@import`, and `url()` references
+  resolved relative to the `.astro` file
+- tree shaking will not remove functions that Astro thinks are not called
+  (important when functions are called from Alpine event handling attributes)
 
 If the string value of `set:html` comes from an untrusted source, use a
 sanitizer such as sanitize-html to avoid cross site scripting attacks (XSS).
