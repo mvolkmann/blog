@@ -934,7 +934,7 @@ For example:
 Astro supports describing and retrieving collections of data
 from files that are in a subdirectory the `src/content` directory.
 Each subdirectory represents a different collection.
-The files can use the Markdown, YAML, or JSON format.
+The files can use the Markdown, MDX, YAML, or JSON format.
 All files in a collection must use the same format.
 
 The following steps can be taken to define and render a collection of dogs.
@@ -985,7 +985,8 @@ The following steps can be taken to define and render a collection of dogs.
 
   Note the use of front matter to describe properties of this instance.
 
-  When no content is needed, the YAML or JSON format can be used.
+  When only the front matters is needed and no content,
+  the YAML and JSON formats can be used instead.
 
   Here is an example YAML file:
 
