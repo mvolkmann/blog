@@ -374,36 +374,6 @@ There are common names used for the others, but they are not enforced.
 | `src/pages`      | This contains component source files that represent complete pages of the app or API endpoints. Initially only `index.astro` is present. |
 | `src/styles`     | This contains CSS files that define global styling.                                                                                      |
 
-It is useful to define path aliases in `tsconfig.json`
-to simplify importing files from commonly used directories.
-For example:
-
-```json
-{
-  "extends": "astro/tsconfigs/strictest",
-  "compilerOptions": {
-    "baseUrl": "./src",
-    "paths": {
-      "@components/*": ["components/*"],
-      "@images/*": ["images/*"],
-      "@layouts/*": ["layouts/*"]
-    }
-  }
-}
-```
-
-This enables replacing an import like
-
-```js
-import Layout from '../../../layouts/Layout.astro';
-```
-
-with this:
-
-```js
-import Layout from '@layouts/Layout.astro';
-```
-
 For site-wide constants, consider creating the file `src/constants.ts`
 that export the constants.
 In files that need the constants, import them from this file.
@@ -737,14 +707,46 @@ import dogs from '../data/dogs.json';
 console.log('dogs =', dogs);
 ```
 
-Import paths can be relative to the current file
-or be absolute from the root directory of the project.
+Import paths can be relative to the current file,
+be absolute from the root directory of the project,
+or using a path alias defined in `tsconfig.json`.
+
 For example, when inside the file `src/components/shopping/PetShop.astro`,
 the file `src/images/animals/dog.png` can be imported in these ways:
 
 ```ts
 import dogImage from '../../images/animals/dog.png';
 import dogImage from '/src/images/animals/dog.png';
+```
+
+Path aliases can be defined in `tsconfig.json`
+to simplify importing files from commonly used directories.
+For example:
+
+```json
+{
+  "extends": "astro/tsconfigs/strictest",
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@images/*": ["images/*"],
+      "@layouts/*": ["layouts/*"]
+    }
+  }
+}
+```
+
+This enables replacing an import like
+
+```js
+import Layout from '../../../layouts/Layout.astro';
+```
+
+with this:
+
+```js
+import Layout from '@layouts/Layout.astro';
 ```
 
 ## Images
