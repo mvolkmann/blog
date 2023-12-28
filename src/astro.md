@@ -803,7 +803,7 @@ Image optimization is performed by the {% aTargetBlank
 {% aTargetBlank "https://www.astroicon.dev", "Astro Icon" %}
 provides access to many icon sets.
 
-To install "Astro Icon" integration, enter `npx astro add astro-icon`.
+To install the "Astro Icon" integration, enter `npx astro add astro-icon`.
 
 To see the available icon sets, browse {% aTargetBlank
 "https://icon-sets.iconify.design", "icon sets" %}.
@@ -820,8 +820,8 @@ import {Icon} from 'astro-icon/components';
 
 Then render an icon with with something like the following:
 
-```html
-<Icon name="fa6-solid:hat-wizard" size="{60}" title="wizard hat" />
+```text
+<Icon name="fa6-solid:hat-wizard" size={60} title="wizard hat" />
 ```
 
 ## Dynamic Routes
