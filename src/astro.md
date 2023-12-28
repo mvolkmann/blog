@@ -90,8 +90,7 @@ The top benefits of using Astro include:
 - provides image optimization
 - makes static site generation (SSG) easy
 - supports server-side rendering (SSR) of pages
-- interactive functionality is contained in "dynamic islands"
-  to optimize static content
+- optimizes static content by confining dynamic behavior to "islands"
 - supports TypeScript for providing intellisense
   and detecting errors while writing code
 - can describe pages, components, and content with Markdown
@@ -259,7 +258,9 @@ If you use VS Code as your editor, consider installing these extensions:
   When entering Tailwind class names for colors,
   it provides color preview swatches.
 
-## Prettier
+To configure code formatting, open any `.astro` file,
+open the Command Palette, and enter "Format Document".
+It will prompt for configuring this and automatically do so.
 
 The steps to configure an Astro project to use Prettier are:
 
@@ -398,17 +399,6 @@ For site-wide constants, consider creating the file `src/constants.ts`
 that export the constants.
 In files that need the constants, import them from this file.
 
-## Using VSCode
-
-The {% aTargetBlank
-"https://marketplace.visualstudio.com/items?itemName=astro-build.astro-vscode",
-"Astro" %} extension from astro.build provides
-syntax highlighting, intellisense, and more.
-
-To configure code formatting, open any `.astro` file,
-open the Command Palette, and enter "Format Document".
-It will prompt for configuring this and automatically do so.
-
 ## Pages
 
 Pages are defined my files in the `src/pages` directory.
@@ -467,7 +457,7 @@ based on changes to collections.
 
 ## Astro Components
 
-Astro components are defined in source files with a `.astro` extension.
+Astro components are defined in source files with a `.astro` file extension.
 These describe HTML that will be rendered on the server.
 This can contain three sections:
 
@@ -1341,16 +1331,49 @@ import Counter3 from '../components/Counter.astro';
 
 ## MDX
 
-The MDX extension enables using components inside Markdown files.
-The components can be implemented in any of the supported frameworks.
-These can add interactivity to what would otherwise be static content.
+The MDX integration adds the following features to Markdown:
+
+- ability to define JavaScript variables
+  whose values some from JavaScript expressions
+
+- ability to insert the values of front matter properties
+  and JavaScript variables into the content
+
+- ability to render components implemented in any of the supported frameworks
+
+Rendered components can add interactivity
+to what would otherwise be static content.
+
+MDX files have the `.mdx` file extension.
+
+MDX syntax differs from Markdown syntax in a few ways
+that are described at {% aTargetBlank
+"https://github.com/micromark/mdx-state-machine#72-deviations-from-markdown",
+"Deviations from Markdown" %}.
 
 To install the MDX integration in an Astro project, enter `npx astro add mdx`.
 
-Markdown files that wish to render components
-must have the file extension `.mdx`.
+Here is an example of a page described by a `.mdx` file
+that demonstrates inserting front matter properties and JavaScript variables.
 
-For example, here is a component definition in `src/components/Greet.astro`:
+```md
+---
+layout: ../layouts/Layout.astro
+title: MDX Demo
+player: Mark
+score: 19
+---
+
+This page is described by **MDX**.
+
+The score for {frontmatter.player} is {frontmatter.score}.
+
+export const twoPi = (Math.PI \* 2).toFixed(4);
+
+2π is approximately {twoPi}.
+```
+
+Here is a component definition in the file `src/components/Greet.astro`:
 
 ```js
 ---
@@ -1360,8 +1383,8 @@ const { name } = Astro.props;
 <p class="text-bold text-red-500">Hello, {name}!</p>
 ```
 
-And here is a content file in `src/content/dogs/comet.mdx`.
-Note how it imports and uses the `Greet` component:
+Here is MDX in the file `src/content/dogs/comet.mdx`
+that imports and renders the `Greet` component.
 
 ```js
 ---
@@ -1371,6 +1394,8 @@ website: https://www.akc.org/dog-breeds/whippet/
 ---
 
 import Greet from "../../components/Greet.astro";
+<Greet name="Comet" />
+
 He loves the following:
 
 - pool balls
@@ -1378,8 +1403,6 @@ He loves the following:
 - frisbees
 
 ![Whippet](https://www.akc.org/wp-content/uploads/2017/11/Whippet-On-White-01.jpg)
-
-<Greet name="Comet" />
 ```
 
 ## Other Frameworks
