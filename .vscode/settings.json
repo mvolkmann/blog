@@ -537,6 +537,7 @@
     "MYPYPATH",
     "mysqli",
     "namedtuple",
+    "nanostore",
     "nanostores",
     "nbconvert",
     "nbytes",
