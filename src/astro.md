@@ -775,9 +775,6 @@ import logo from ‘../images/logo.png’;
 <Image alt="logo" src={logo} height={200} width={300} />
 ```
 
-The `Image` component requires specifying both `height` and `width`
-to avoid content layout shift (CLS).
-
 Content collection files can also use optimized images.
 This is described the "Content Collections" section.
 
@@ -1012,6 +1009,9 @@ The following steps can be taken to define and render a collection of dogs.
       photo: image()
     });
   ```
+
+  This enables the `photo` property to be used in an `Image` component
+  as the value if the `src` attribute.
 
 - Create the directory `src/content/dogs`.
 
