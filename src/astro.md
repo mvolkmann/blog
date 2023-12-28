@@ -1153,6 +1153,73 @@ He loves the following:
 Astro supports using components from many other frameworks including
 Alpine, Lit, Preact, React, SolidJS, Svelte, Vue, WebComponents, and more.
 
+### React
+
+Let's walk through the steps to use a
+{% aTargetBlank "https://react.dev", "React" %} component.
+
+1. Install the React integration by entering `npx astro add react`.
+
+1. Define a React component in the `src/components` directory.
+
+   For example, here is the file `Counter.tsx`:
+
+   {% raw %}
+
+   ```html
+   import { type FC, useState } from "react";
+
+   interface Props {
+     label: string | null;
+     start: number;
+   }
+
+   const Counter: FC<Props> = ({ label, start }) => {
+     const [count, setCount] = useState(start);
+
+     return (
+       <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+         {label && <div>{label}</div>}
+         <button disabled={count <= 0} onClick={() => setCount((c) => c - 1)}>
+           -
+         </button>
+         <div>{count}</div>
+         <button onClick={() => setCount((c) => c + 1)}>+</button>
+       </div>
+     );
+   };
+
+   export default Counter;
+   ```
+
+   {% endraw %}
+
+1. Use the new component in another component or page.
+
+   ```js
+   import Counter from "@components/Counter.tsx";
+   ...
+   <Counter label="Tally" start={3} client:load />
+   ```
+
+   There are five provided `client` directives that tell Astro that
+   a component requires client-side JavaScript code to be loaded.
+   They differ in when the JavaScript will be loaded.
+
+   | Directive        | When JS is loaded                       |
+   | ---------------- | --------------------------------------- |
+   | `client:idle`    | when browser is idle                    |
+   | `client:load`    | immediately                             |
+   | `client:media`   | when a CSS media query condition is met |
+   | `client:only`    | after page load with no SSR             |
+   | `client:visible` | when component becomes visible          |
+
+   Integrations can add support for custom `client` directives.
+
+For more detail on using React components in Astro, see {% aTargetBlank
+"https://docs.astro.build/en/guides/integrations-guide/react/",
+"React integration" %}.
+
 ### Svelte
 
 Let's walk through the steps to use a
@@ -1179,15 +1246,11 @@ Let's walk through the steps to use a
        <div>{label}</div>
      {/if}
      <button disabled={count <= 0} on:click={() => count--}>-</button>
-     <h1>{count}</h1>
+     <div>{count}</div>
      <button on:click={() => count++}>+</button>
    </div>
 
    <style>
-     button, h1 {
-       margin: 0;
-     }
-
      .row {
        display: flex;
        align-items: center;
@@ -1205,20 +1268,6 @@ Let's walk through the steps to use a
    ...
    <Counter label="Tally" start={3} client:load />
    ```
-
-   There are five provided `client` directives that tell Astro that
-   a component requires client-side JavaScript code to be loaded.
-   They differ in when the JavaScript will be loaded.
-
-   | Directive        | When JS is loaded                       |
-   | ---------------- | --------------------------------------- |
-   | `client:idle`    | when browser is idle                    |
-   | `client:load`    | immediately                             |
-   | `client:media`   | when a CSS media query condition is met |
-   | `client:only`    | after page load with no SSR             |
-   | `client:visible` | when component becomes visible          |
-
-   Integrations can add support for custom `client` directives.
 
 For more detail on using Svelte components in Astro, see {% aTargetBlank
 "https://docs.astro.build/en/guides/integrations-guide/svelte/",
@@ -1255,7 +1304,7 @@ But Alpine is still quite capable.
      <div>{label}</div>
      }
      <button :disabled="count <= 0" @click="count--">-</button>
-     <h1 x-text="count"></h1>
+     <div x-text="count"></div>
      <button @click="count++">+</button>
 
      <!-- This demonstrates calling client-side JS code
@@ -1273,11 +1322,6 @@ But Alpine is still quite capable.
    </script>
 
    <style>
-     button,
-     h1 {
-       margin: 0;
-     }
-
      .row {
        display: flex;
        align-items: center;
