@@ -1111,6 +1111,12 @@ established: 1960
 After losing to the Raiders on Christmas Day, the Chiefs ...
 ```
 
+When using a service like Netlify or Vercel to host an Astro app,
+pushing changes to the GitHub repository of the app
+will trigger a new build and deployment of the app.
+If content collection documents were added, modified, or deleted,
+this will result in changes to the deployed static pages.
+
 ## Sharing State (nanostores)
 
 The recommended way to share state (data) between components is to use the
@@ -1835,7 +1841,12 @@ Also, check out {% aTargetBlank
 ## API Endpoints
 
 Endpoints are defined by `.js` and `.ts` files under the `src/pages` directory.
-Their URLs are defined by file-based routing, just like UI pages.
+Consider placing these files in a subdirectory named "api".
+
+For endpoints that return JSON, consider including `.json`
+at the end of the file name. For example, `dogs.json.ts`.
+
+Endpoint URLs are defined by file-based routing, just like UI pages.
 
 Endpoints are not UI pages.
 It seems odd that they are defined in the `pages` directory
