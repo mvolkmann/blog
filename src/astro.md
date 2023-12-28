@@ -211,6 +211,12 @@ and "hybrid" for a mixture of SSG and SSR.
 The values for `output` and `adapter` shown above
 result from entering `npx astro add node`.
 
+When `output` is set to `server`, and adapter must be installed.
+Otherwise running `npm run build` will output the error
+"[NoAdapterInstalled] Cannot use `output: 'server'` or `output: 'hybrid'`
+without an adapter. Please install and configure the appropriate server adapter
+for your final deployment."
+
 TODO: Learn how to use hybrid output so some pages are SSG and others are SSR.
 
 ## VS Code
