@@ -1112,8 +1112,12 @@ displayed in all of them since they all use the same nanostore.
   src="/blog/assets/astro-nanostores-counters.png?v={{pkg.version}}">
 
 To install the nanostores library, enter `npm install nanostores`.
+
 To use nanostores in React components,
 also enter `npm install nanostores @nanostores/react`.
+
+To add support for the Alpine library which is used in the Astro component,
+enter `npx astro add alpinejs`.
 
 Here is the code the creates the nanostore defined in the file `src/stores.ts`.
 It also defines some helper functions that are needed by the Astro component.
@@ -1140,7 +1144,7 @@ globalThis.ns = {
 
 {% endraw %}
 
-Here is a React component that uses the `count` nanostore
+Here is a **React component** that uses the `count` nanostore
 defined in the file `src/components/Counter.tsx`.
 
 {% raw %}
@@ -1173,7 +1177,7 @@ export default Counter;
 
 {% endraw %}
 
-Here is a Svelte component that uses the `count` nanostore
+Here is a **Svelte component** that uses the `count` nanostore
 defined in the file `src/components/Counter.svelte`.
 
 {% raw %}
@@ -1206,7 +1210,7 @@ defined in the file `src/components/Counter.svelte`.
 
 {% endraw %}
 
-Here is an Astro component that uses the `count` nanostore
+Here is an **Astro component** that uses the `count` nanostore
 defined in the file `src/components/Counter.astro`.
 
 ```html
