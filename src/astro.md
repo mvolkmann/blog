@@ -778,6 +778,9 @@ import logo from ‘../images/logo.png’;
 The `Image` component requires specifying both `height` and `width`
 to avoid content layout shift (CLS).
 
+Content collection files can also use optimized images.
+This is described the "Content Collections" section.
+
 For static sites, optimized images are generated concurrently at build time.
 
 From the documentation at {% aTargetBlank
@@ -813,6 +816,10 @@ This mostly removes the need to use tools like Squoosh to optimize images.
 
 Image optimization is performed by the {% aTargetBlank
 "https://github.com/lovell/sharp", "sharp" %} package.
+
+The {% aTargetBlank "https://docs.astro.build/en/guides/images/#picture-",
+"Picture" %} component can be used in place of the `Image` component
+to render an appropriate image from a selection of multiple formats and sizes.
 
 ## Icons
 
@@ -992,6 +999,18 @@ The following steps can be taken to define and render a collection of dogs.
   });
 
   export const collections = {dogs};
+  ```
+
+  To include references to optimized images,
+  change the schema property as follows:
+
+  ```ts
+  schema: ({image}) =>
+    z.object({
+      name: z.string(),
+      breed: z.string(),
+      photo: image()
+    });
   ```
 
 - Create the directory `src/content/dogs`.
