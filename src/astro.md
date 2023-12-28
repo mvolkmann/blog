@@ -402,10 +402,16 @@ In files that need the constants, import them from this file.
 ## Pages
 
 Pages are defined my files in the `src/pages` directory.
-They can be described by Astro (`.astro`), Markdown (`.md`),
-or MDX (`.mdx`) files.
-They cannot be described by components from frameworks like React and Svelte,
-but pages can render those kinds of components.
+
+Think of pages like oceans and components like islands
+in the islands architecture.
+Islands are where interactivity can reside.
+
+Pages can be described by
+Astro (`.astro`), Markdown (`.md`), and MDX (`.mdx`) files.
+Pages cannot be described by components from frameworks like React and Svelte
+because those are potential sources of interactivity.
+But pages can render those kinds of components.
 
 The URL path of a page is determined by its subdirectory path and file name.
 
