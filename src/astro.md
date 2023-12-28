@@ -198,12 +198,21 @@ import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
   integrations: [mdx(), tailwind()],
-  output: 'server',
+  output: 'server', // defaults to 'static'
   adapter: node({
     mode: 'standalone'
   })
 });
 ```
+
+The `output` property defaults to "static" when not present.
+The other supported values are "server" for SSR
+and "hybrid" for a mixture of SSG and SSR.
+
+The values for `output` and `adapter` shown above
+result from entering `npx astro add node`.
+
+TODO: Learn how to use hybrid output so some pages are SSG and others are SSR.
 
 ## VS Code
 
@@ -900,7 +909,9 @@ the following files and more:
 - `dist/red/index.html`
 
 The `getStaticPaths` function is only required if SSR is not enabled.
-To enable SSR, install the node adapter by entering `npx astro add node`.
+One way to enable SSR is to install the node adapter
+by entering `npx astro add node`.
+This changes the `astro.config.mjs` file to use `output: "server"`.
 
 When SSR is enabled, running `npm run build`
 will not generate HTML files for dynamic routes.
@@ -1247,7 +1258,8 @@ defined in the file `src/components/Counter.svelte`.
   {#if label}
     <div>{label}</div>
   {/if}
-  <!-- Add $ prefix to get the value of a nanostore. -->
+  <!-- Use the $ prefix to subscribe to a nanostore
+       just like subscribing to a Svelte store. -->
   <button disabled={$count <= 0} on:click={() => count.set($count - 1)}>-</button>
   <div>{$count}</div>
   <button on:click={() => count.set($count + 1)}>+</button>
@@ -1964,7 +1976,7 @@ In this case the path parameter is the id of a todo.
 Dynamic routes can be used for both pages and API endpoints.
 
 Dynamic routes require enabling SSR.
-To do this, add the node adapter by entering `npx astro add node`.
+One way to do this is to add the node adapter by entering `npx astro add node`.
 
 ```ts
 import type {APIContext} from 'astro';
@@ -2252,9 +2264,6 @@ TODO: Describe how to use this.
 ## Unorganized Content
 
 What are the benefits of using the tailwind typography plug-in?
-
-Learn about enabling SSR so pages are not generated at build time
-and are instead generated on demand. Is that how it works?
 
 Learn about Astro support for pagination.
 
