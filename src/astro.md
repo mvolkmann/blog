@@ -908,6 +908,15 @@ will not generate HTML files for dynamic routes.
 Instead, the HTML for dynamic routes
 will be generated when requested by a client.
 
+When a dynamic route such as `[name].astro` is used to
+render a content collection document and no matching document is found,
+it can use code like the following in the component script
+to treat this like a "404 Not Found" error:
+
+```js
+if (!document) return new Response('', {status: 404});
+```
+
 ## Event Handling
 
 Code in the component script section is only run on the server-side.
@@ -1002,7 +1011,7 @@ The following steps can be taken to define and render a collection of dogs.
 
   ```json
   {
-    "name": "Slugs",
+    "name": "Comet",
     "breed": "Whippet",
     "website": "https://www.akc.org/dog-breeds/whippet/"
   }
@@ -1877,6 +1886,9 @@ Also, check out {% aTargetBlank
 
 Endpoints are defined by `.js` and `.ts` files under the `src/pages` directory.
 Consider placing these files in a subdirectory named "api".
+
+All `.js` and `.ts` files in an Astro project
+are only used on the server side, never in browsers.
 
 For endpoints that return JSON, consider including `.json`
 at the end of the file name. For example, `dogs.json.ts`.
