@@ -234,10 +234,13 @@ If you use VS Code as your editor, consider installing these extensions:
   "cool blues, minty greens, and soft purples".
   It also adds a "HOUSTON" section to the Explorer pane
   which becomes visible after restarting VS Code.
-  This just displays the mascot.
-  If will have a smiley face if the project has no errors,
+  This displays the mascot with a smiley face if the project has no errors,
   a frown if there are minor errors,
-  and a sad face if there are more serious errors.
+  or a sad face if there are more serious errors.
+  Error messages are displayed in the "Problems" panel.
+  When this panel is not visible, it can be displayed by
+  selecting "Problems: Focus on Problems View" from the command palette.
+  It can also be toggled by pressing ctrl-shift-m (cmd-shift-m on macOS).
 
 - {% aTargetBlank "https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss",
   "Tailwind CSS Intellisense" %} from tailwindcss.com
