@@ -535,6 +535,8 @@ For a good example of defining a
 reusable, customizable `Button` component, see {% aTargetBlank
 "https://github.com/coding-in-public/astro-component-example-btn/blob/main/src/components/Button.astro",
 "astro-component-example-btn" %}.
+This uses TypeScript to describe all the supported props
+which provides intellisense and error checking.
 
 ### Slots
 
@@ -570,6 +572,10 @@ const style = {
   }
 </style>
 ```
+
+The `slot` element can include content to be used when none is provided.
+For example, the `<slot />` element above
+can be replaced by `<slot>Press Me</slot>`.
 
 This `Border` component can be used as follows.
 Note how content is included.
