@@ -84,19 +84,34 @@ which was founded in January 2022 with $7M in seed funding.
 
 The top benefits of using Astro include:
 
-- sends less JavaScript code to browsers resulting in faster startup
+- sends less JavaScript code (zero by default)
+  to browsers resulting in faster startup
 - file-based routing simplifies mapping pages and endpoints to URLs
 - provides image optimization
-- makes it easy to generate static sites
+- makes static site generation (SSG) easy
+- supports server-side rendering (SSR) of pages
 - interactive functionality is contained in "dynamic islands"
   to optimize static content
-- supports TypeScript for detecting errors while writing code
+- supports TypeScript for providing intellisense
+  and detecting errors while writing code
+- can describe pages, components, and content with Markdown
+- provides a simple syntax for defining Astro components
+  that leans into web fundamentals (HTML, CSS, and JavaScript)
 - can use components implemented in all the popular web frameworks
 - can use content collections to easily
   generate static pages from data at build time
+- provides integration with many popular content management systems (CMS)
 - supports implementing API endpoints in JavaScript or TypeScript
 - supports many integrations such as
-  Alpine, MDX, React, Svelte, Tailwind, and more.
+  Alpine, MDX, React, Svelte, Tailwind, and more
+- simplifies installing and configuring integrations
+- has a Discord channel that is very active and helpful
+
+The top issues with using Astro include:
+
+- primitive support for client-side interactivity
+  (but combining the use of Alpine provides excellent support)
+- fewer available component libraries than with other frameworks
 
 ## Projects
 
@@ -432,6 +447,12 @@ const colors = ["red", "green", "blue"];
 </Layout>
 ```
 
+Unlike with many other web frameworks, Astro does not require
+specifying a key for repeated elements like the `li` elements above.
+This is because Astro generates the elements at build-time and
+doesn't use client-side JavaScript to add, modify, and delete them
+based on changes to collections.
+
 ## Astro Components
 
 Astro components are defined in source files with a `.astro` extension.
@@ -509,6 +530,11 @@ This can contain three sections:
 - optional `style` tag
 
   This defines CSS rules that are scoped to this component.
+
+For a good example of defining a
+reusable, customizable `Button` component, see {% aTargetBlank
+"https://github.com/coding-in-public/astro-component-example-btn/blob/main/src/components/Button.astro",
+"astro-component-example-btn" %}.
 
 ### Slots
 
@@ -1060,9 +1086,18 @@ including boolean, number, string, or array.
 
 Use a "map store" to store multiple named properties.
 
-The names of stores must begin with a dollar sign
-and be unique across all components that use nanostores.
-This is the key to sharing access across components.
+There are several limitations on using nanostores in Astro components.
+Astro components are primarily server-side components.
+IT SEEMS THESE ARE NOT ALL TRUE!
+
+- Writing to a store from a .astro file or non-hydrated component will not affect the value received by client-side components.
+- Nanostores cannot be passed as props to components.
+- You cannot subscribe to store changes from a .astro file, since Astro components do not re-render.
+
+See the `computed` function in nanostores.
+
+For sharing state across page transitions, see {% aTargetBlank
+"https://github.com/nanostores/persistent", "@nanostores/persistent" %}.
 
 ## MDX
 
@@ -1223,9 +1258,8 @@ But Alpine is still quite capable.
    </div>
 
    <!-- The is:inline directive opts out of Astro processing
-        and includes the script tag as-is. -->
-   <!-- TODO: Does the Astro processing include tree shaking to remove
-        the definitions of functions it thinks are not used? -->
+        and includes the script tag as-is.  See detail below.
+        A workaround is to attach the function to the window object.  -->
    <script is:inline>
      function demo() {
        alert("Demo time!");
