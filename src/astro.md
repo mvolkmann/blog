@@ -824,6 +824,16 @@ Then render an icon with with something like the following:
 <Icon name="fa6-solid:hat-wizard" size={60} title="wizard hat" />
 ```
 
+The `Icon` component can als render SVG files
+found in the `src/icons` directory.
+For example, if the file `src/icons/heart.svg` exists,
+it can be rendered with the following.
+Note that there is no icon set name prefix on the icon name.
+
+```text
+<Icon name="heart" size={60} title="heart" />
+```
+
 ## Dynamic Routes
 
 Dynamic routes are routes defined under the `pages` directory with
@@ -2221,3 +2231,12 @@ that appears at the bottom of the page in the browser when running in dev mode.
 
 Can pages be defined with .html, .md, .mdx, and .svelte files
 in addition to .astro files?
+
+Images used by the Astro image component can go anywhere under the src directory.
+Are references to them required to begin with ./ ?
+
+summarize all the benefits of using MDX, which include defining variables in the front matter, and referencing them in the content.
+
+summarize the steps to deploy an Astro project to Netlify and Vercel.
+
+describe the differences between SSR (generated on request ) and SSG (generated at build time) and configure them in Astro.
