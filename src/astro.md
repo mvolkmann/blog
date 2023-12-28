@@ -217,6 +217,9 @@ Otherwise running `npm run build` will output the error
 without an adapter. Please install and configure the appropriate server adapter
 for your final deployment."
 
+Astro maintains SSR adapters for Cloudflare, Netlify, Node, and Vercel.
+There are also community-maintained SSR adapters for AWS, Deno, and more.
+
 TODO: Learn how to use hybrid output so some pages are SSG and others are SSR.
 
 ## VS Code
