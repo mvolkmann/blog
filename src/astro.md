@@ -805,25 +805,24 @@ provides access to many icon sets.
 
 To install "Astro Icon" integration, enter `npx astro add astro-icon`.
 
-TODO: This is not currently working!
-See https://github.com/natemoo-re/astro-icon/issues/167.
-For now, install it with
-
-- Enter `npm install astro-icon@next`.
-- Edit `astro.config.mjs`, add `import icon from "astro-icon";`,
-  and add `icon()` to the `integrations` array.
-
-To see the available icons, browse {% aTargetBlank
+To see the available icon sets, browse {% aTargetBlank
 "https://icon-sets.iconify.design", "icon sets" %}.
-This includes "Font Awesome Solid", "SVG Spinner", and many more.
 
-To use an icon, import the `Icon` component in the component script with
+To install an icon set, enter `npm i -D @iconify-json/{set-name}`.
+Some valid icon set names include "fa6-solid" (Fontawesome),
+"material-symbols", "mdi", "solar", "tdesign", and many more.
+
+To use an icon, import the `Icon` component in the component script as follows:
 
 ```js
 import {Icon} from 'astro-icon/components';
 ```
 
-Then render an icon with `<Icon name="{some-icon-name}" />`.
+Then render an icon with with something like the following:
+
+```html
+<Icon name="fa6-solid:hat-wizard" size="{60}" title="wizard hat" />
+```
 
 ## Dynamic Routes
 
