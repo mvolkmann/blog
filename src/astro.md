@@ -349,7 +349,7 @@ There are common names used for the others, but they are not enforced.
 | Directory Name   | Purpose                                                                                                                                  |
 | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | `src/components` | This contains component source files that can be used in page components.                                                                |
-| `src/content`    | This holds collections of Markdown files.                                                                                                |
+| `src/content`    | This holds collections of content files.                                                                                                 |
 | `src/images`     | This holds images that will be used with the provided `Image` component in order to optimized them.                                      |
 | `src/layouts`    | This holds component source files that typically provide boilerplate HTML used by pages.                                                 |
 | `src/pages`      | This contains component source files that represent complete pages of the app or API endpoints. Initially only `index.astro` is present. |
@@ -932,8 +932,10 @@ For example:
 ## Content Collections
 
 Astro supports describing and retrieving collections of data
-from Markdown files that are typically placed under the `src/content` directory.
+from files that are in a subdirectory the `src/content` directory.
 Each subdirectory represents a different collection.
+The files can use the Markdown, YAML, or JSON format.
+All files in a collection must use the same format.
 
 The following steps can be taken to define and render a collection of dogs.
 
@@ -967,9 +969,9 @@ The following steps can be taken to define and render a collection of dogs.
 
 - Create the directory `src/content/dogs`.
 
-- Create one Markdown file for each dog inside this directory.
+- Create one content file for each dog inside this directory.
 
-  For example:
+  Here is an example Markdown file:
 
   ```md
   ---
@@ -982,6 +984,27 @@ The following steps can be taken to define and render a collection of dogs.
   ```
 
   Note the use of front matter to describe properties of this instance.
+
+  When no content is needed, the YAML or JSON format can be used.
+
+  Here is an example YAML file:
+
+  ```yaml
+  ---
+  name: 'Comet'
+  breed: 'Whippet'
+  website: https://www.akc.org/dog-breeds/whippet/
+  ```
+
+  Here is an example JSON file:
+
+  ```json
+  {
+    "name": "Slugs",
+    "breed": "Whippet",
+    "website": "https://www.akc.org/dog-breeds/whippet/"
+  }
+  ```
 
 - Access the collection in a component.
 
