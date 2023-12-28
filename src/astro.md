@@ -1080,7 +1080,7 @@ for the for collection documents contains the following:
 import {defineCollection, z} from 'astro:content';
 
 const nfl = defineCollection({
-  type: 'content',
+  type: 'content', // 'content' for Markdown; 'data' for YAML and JSON
   schema: z.object({
     city: z.string(),
     name: z.string(),
