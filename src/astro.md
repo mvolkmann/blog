@@ -414,7 +414,7 @@ In files that need the constants, import them from this file.
 
 ## Pages
 
-Pages are defined my files in the `src/pages` directory.
+Pages are defined by files in the `src/pages` directory.
 
 Think of pages like oceans and components like islands
 in the islands architecture.
@@ -425,6 +425,9 @@ Astro (`.astro`), Markdown (`.md`), and MDX (`.mdx`) files.
 Pages cannot be described by components from frameworks like React and Svelte
 because those are potential sources of interactivity.
 But pages can render those kinds of components.
+
+In a sense, Astro can be thought of as a compiler
+that compiles page files into HTML files.
 
 The URL path of a page is determined by its subdirectory path and file name.
 
@@ -489,10 +492,11 @@ This can contain three sections:
   Write JavaScript code inside the code fences.
   If TypeScript was enabled for the project, it can be used here.
 
-  Everything in component scripts stays on the server.
-  The variables and functions defined in them are not sent to the browser.
-  Output from `console.log` calls appear where the server is running,
-  not in the browser.
+  The code in component scripts only runs at build time or during SSR.
+  It is not sent to browsers.
+  Output from `console.log` calls in component scripts
+  appears where the server is running, not in the browser.
+
   Place code that should run in the browser inside a `script` tag
   that appears after the component script.
 
