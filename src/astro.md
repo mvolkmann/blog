@@ -146,7 +146,7 @@ This will prompt for the following:
 Once the project is created, follow the instructions that are output.
 
 - `cd` to the newly created directory.
-- Optionally add the Taiwind integration for Tailwind CSS styling
+- Optionally add the Tailwind integration for Tailwind CSS styling
   by entering `npx astro add tailwind`.
 - Enter `npm start` or `npm run dev` to start a local server.
   Both do the same thing.
@@ -164,8 +164,10 @@ enter `npx astro check` or `npm run astro check`.
 This will output errors, warnings, and hints.
 
 To build the site for production, enter `npm run build`.
-This creates a `dist` directory containing
-all the files needed to deploy the site.
+This runs `astro check` and stops if there are any errors.
+Then it runs `astro build` which creates a `dist` directory
+containing all the files needed to deploy the site.
+The output lists all the generated files.
 
 To preview the built site, enter `npm run preview` and browse localhost:4321.
 
