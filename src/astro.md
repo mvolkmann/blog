@@ -204,23 +204,54 @@ export default defineConfig({
 });
 ```
 
-The `output` property defaults to "static" when not present.
-The other supported values are "server" for SSR
-and "hybrid" for a mixture of SSG and SSR.
+The values for `output` and `adapter` shown above result from
+adding an adapter with the command `npx astro add {adapter-name}`.
+In this case the adapter name was "node".
 
-The values for `output` and `adapter` shown above
-result from entering `npx astro add node`.
+The `output` property can be set to the following values:
 
-When `output` is set to `server`, and adapter must be installed.
-Otherwise running `npm run build` will output the error
+| `output` value | Meaning                                                |
+| -------------- | ------------------------------------------------------ |
+| `'static'`     | All pages are generated at build time. (default)       |
+| `'server'`     | Most pages are generated on the server when requested. |
+| `'hybrid'`     | Most pages are generated at build time.                |
+
+In "server" mode, to cause a specific page to be generated at build time,
+add the following line in the component script:
+
+```js
+export const prerender = true;
+```
+
+In "hybrid" mode, to cause a specific page to NOT be generated at build time,
+add the following line in the component script:
+
+```js
+export const prerender = false;
+```
+
+If a page for a dynamic route
+that is to be generated at build time
+does not export a `getStaticPaths` function,
+the following error message will be output by `npm run build`:
+"[GetStaticPathsRequired] `getStaticPaths()` function
+is required for dynamic routes."
+
+If a page for a dynamic route
+that is to be generated on the server when requested
+does define a `getStaticPaths` function, it will be ignored
+and the following warning message will be output by `npm run build`:
+"[WARN] [router] getStaticPaths() ignored
+in dynamic page /src/pages/{path}/[{param}].astro."
+
+When `output` is set to "server" or "hybrid", an adapter must be installed.
+Otherwise running `npm run build` will output the error message
 "[NoAdapterInstalled] Cannot use `output: 'server'` or `output: 'hybrid'`
 without an adapter. Please install and configure the appropriate server adapter
 for your final deployment."
 
 Astro maintains SSR adapters for Cloudflare, Netlify, Node, and Vercel.
 There are also community-maintained SSR adapters for AWS, Deno, and more.
-
-TODO: Learn how to use hybrid output so some pages are SSG and others are SSR.
 
 ## VS Code
 
