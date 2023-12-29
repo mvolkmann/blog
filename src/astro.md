@@ -1912,8 +1912,8 @@ import Layout from "../layouts/Layout.astro";
 Astro supports adding {% aTargetBlank
 "https://docs.astro.build/en/guides/view-transitions/", "view transitions" %}
 that are applied when navigating from one page to another.
-This includes clicking links implemented with `<a>` elements
-and triggering the browser forward and back buttons.
+This includes clicking links implemented with `<a>` elements,
+triggering the browser forward and back buttons, and submitting forms.
 For more control over when transitions occur, see {% aTargetBlank
 "https://docs.astro.build/en/guides/view-transitions/#router-control",
 "router control" %}.
