@@ -359,6 +359,7 @@ The toolbar contains the following four buttons:
 
   This enables inspecting interactive components that are
   marked with a `client:*` directive.
+  These directives can only be applied to non-Astro components.
 
   Click this button to display an outline around
   all the interactive components on the page.
@@ -1532,9 +1533,13 @@ Let's walk through the steps to use a
    <Counter label="Tally" start={3} client:load />
    ```
 
-   There are five provided `client` directives that tell Astro that
-   a component requires client-side JavaScript code to be loaded.
+   There are five provided `client` directives that tell Astro that a
+   non-Astro component requires client-side JavaScript code to be loaded.
    They differ in when the JavaScript will be loaded.
+   When not applied, JavaScript for non-Astro components is not loaded.
+
+   `client` directives cannot be applied to Astro components.
+   However, `script` tags in Astro components are always included in clients.
 
    | Directive        | When JS is loaded                       |
    | ---------------- | --------------------------------------- |
