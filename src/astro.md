@@ -2364,9 +2364,14 @@ TODO: Describe how to use this.
 ## Tailwind Typography Plugin
 
 The Tailwind {% aTargetBlank "https://tailwindcss.com/docs/typography-plugin",
-"@tailwindcss/typography" %} plugin "provides a set of prose classes
+"@tailwindcss/typography" %} plugin "provides a set of "prose" classes
 you can use to add beautiful typographic defaults to any vanilla HTML
 you don't control, like HTML rendered from Markdown, or pulled from a CMS."
+
+There are a large number of provided CSS classes
+whose names all begin with "prose".
+These control the font size, text color, and more.
+See the documentation linked above for details.
 
 To install and configure this plugin:
 
