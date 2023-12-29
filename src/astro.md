@@ -1035,10 +1035,11 @@ The following steps can be taken to define and render a collection of dogs.
 - Create the file `config.ts` in this directory.
 
   This file defines each of the collections.
-  It uses {% aTargetBlank "https://zod.dev", "Zod" %}
+  It uses {% aTargetBlank "https://zod.dev", "Zod" %}G
   to describe and validate the schema of each collection.
   The schema defines which front matter properties are valid
   and provides a type-safe way to use the data.
+  Editors like VS Code use the types to provide intellisense.
 
   For example, the following describes a single collection named "dogs".
 
@@ -1081,8 +1082,8 @@ The following steps can be taken to define and render a collection of dogs.
 
   ```md
   ---
-  name: 'Comet'
-  breed: 'Whippet'
+  name: Comet
+  breed: Whippet
   website: https://www.akc.org/dog-breeds/whippet/
   ---
 
@@ -1090,6 +1091,8 @@ The following steps can be taken to define and render a collection of dogs.
   ```
 
   Note the use of front matter to describe properties of this instance.
+  String values of front matter properties
+  do not need to be delimited with quotes.
 
   When only the front matters is needed and no content,
   the YAML and JSON formats can be used instead.
@@ -2416,3 +2419,10 @@ summarize all the benefits of using MDX, which include defining variables in the
 summarize the steps to deploy an Astro project to Netlify and Vercel.
 
 describe the differences between SSR (generated on request ) and SSG (generated at build time) and configure them in Astro.
+
+See Couldcannon which uses Astro content collection documents.
+
+Document a bit more about Zod data types and the constraints you can put on them.
+All properties are required, unless you specify that they are optional.
+
+Describe the getEntries function which is an alternative to the getEntry function.
