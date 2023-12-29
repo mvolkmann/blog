@@ -2204,6 +2204,10 @@ export const onRequest = defineMiddleware(async (context, next) => {
 });
 ```
 
+## Cookies
+
+TODO: Discuss your cookies-demo project.
+
 ## API Endpoints
 
 Endpoints are defined by `.js` and `.ts` files under the `src/pages` directory.
