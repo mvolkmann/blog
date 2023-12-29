@@ -1262,6 +1262,23 @@ From a comment in the Discord channel,
 "It's still quite early and very experimental, so I wouldn't be
 surprised if there's a lot of edge cases where it doesn't work."
 
+## Content Management Systems (CMS)
+
+Astro can fetch content from many kinds of CMSes.
+These typically provide a better content authoring experience
+for non-technical users than editing Markdown files.
+
+Astro has integrations for the following CMSes including
+CloudCannon, Contentful, Netlify, Sanity, Storyblok, Strapi, Wordpress,
+and many more.
+
+For more detail, see {% aTargetBlank "https://docs.astro.build/en/guides/cms/",
+"Use a CMS with Astro" %}.
+
+For details on using the Strapi CMS, see {% aTargetBlank
+"https://www.youtube.com/watch?v=pVJCROlsIp4",
+"Getting Started with Astro and Strapi" %}.
+
 ## Sharing State (nanostores)
 
 The recommended way to share state (data) between components is to use the
@@ -2522,6 +2539,3 @@ Document a bit more about Zod data types and the constraints you can put on them
 All properties are required, unless you specify that they are optional.
 
 Describe the getEntries function which is an alternative to the getEntry function.
-
-Why do I sometimes see file names of dynamic routes written like
-`[...slug].json` instead of `[slug].json`? Is there a difference?
