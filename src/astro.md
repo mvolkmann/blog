@@ -997,6 +997,12 @@ to treat this like a "404 Not Found" error:
 if (!document) return new Response('', {status: 404});
 ```
 
+Dynamic route file names can contain an ellipsis to use {% aTargetBlank
+"https://docs.astro.build/en/core-concepts/routing/#rest-parameters",
+"rest parameters" %}.
+For example, the file `src/pages/zoo/[...path].astro` can match the paths
+`/zoo`, `/zoo/cats`, and `/zoo/cats/panther`.
+
 ## Event Handling
 
 Code in the component script section is only run on the server-side.
