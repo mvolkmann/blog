@@ -280,13 +280,16 @@ If you use VS Code as your editor, consider installing these extensions:
   "Houston" %} from astro.build
 
   Houston is the Astro mascot.
-  This provides a color theme using Astro colors which include
+
+  This extension provides a color theme using Astro colors which include
   "cool blues, minty greens, and soft purples".
-  It also adds a "HOUSTON" section to the Explorer pane
+
+  This extension also adds a "HOUSTON" section to the Explorer pane
   which becomes visible after restarting VS Code.
-  This displays the mascot with a smiley face if the project has no errors,
-  a frown if there are minor errors,
-  or a sad face if there are more serious errors.
+  This displays the mascot with a smiley face if the project has no errors.
+  If there are errors, it displays a frowning face, sad face, or crying face
+  depending on the number of errors.
+
   Error messages are displayed in the "Problems" panel.
   When this panel is not visible, it can be displayed by
   selecting "Problems: Focus on Problems View" from the command palette.
