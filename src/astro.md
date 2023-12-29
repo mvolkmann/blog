@@ -307,8 +307,6 @@ If you use VS Code as your editor, consider installing these extensions:
   "prettier-plugin-astro" %} from withastro
 
   This adds support for formatting .astro files.
-  As of December 2023 it seems to have some serious issues,
-  so consider waiting a while before using this.
 
 To configure code formatting, open any `.astro` file,
 open the Command Palette, and enter "Format Document".
