@@ -73,7 +73,9 @@ This is not what Roy Fielding had in mind when he wrote his famous dissertation
 "https://ics.uci.edu/~fielding/pubs/dissertation/fielding_dissertation.pdf",
 "Architectural Styles and the Design of Network-based Software Architectures" %}"
 that gave birth to REST.
-Roy has been quoted saying "I am getting frustrated by
+Roy has been {% aTargetBlank
+"https://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven",
+"quoted" %} saying "I am getting frustrated by
 the number of people calling any HTTP-based interface a REST API.
 Today's example is the SocialSite REST API.
 That is RPC. It screams RPC."
