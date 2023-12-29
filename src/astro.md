@@ -1101,8 +1101,8 @@ The following steps can be taken to define and render a collection of dogs.
 
   ```yaml
   ---
-  name: 'Comet'
-  breed: 'Whippet'
+  name: Comet
+  breed: Whippet
   website: https://www.akc.org/dog-breeds/whippet/
   ```
 
@@ -1491,10 +1491,10 @@ const { name } = Astro.props;
 Here is MDX in the file `src/content/dogs/comet.mdx`
 that imports and renders the `Greet` component.
 
-```js
+```md
 ---
-name: 'Comet'
-breed: 'Whippet'
+name: Comet
+breed: Whippet
 website: https://www.akc.org/dog-breeds/whippet/
 ---
 
