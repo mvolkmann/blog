@@ -1020,6 +1020,14 @@ Each subdirectory represents a different collection.
 The files can use the Markdown, MDX, YAML, or JSON format.
 All files in a collection must use the same format.
 
+An analogy can be made between
+content collections and relational database tables.
+Each `src/content` subdirectory is like a database table.
+Each file in these subdirectories is like a row in a database table.
+Content collections are like databases without SQL
+where the only supported queries are
+retrieving a single document or all documents in a collection.
+
 The following steps can be taken to define and render a collection of dogs.
 
 - Create the directory `src/content`.
