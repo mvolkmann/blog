@@ -1159,6 +1159,12 @@ The following steps can be taken to define and render a collection of dogs.
   </Layout>
   ```
 
+  The `getCollection` function accepts a second argument
+  that is a function used to filter the entries.
+  It is passed `data` objects one at a time and
+  should return a boolean value indicating whether the corresponding
+  `CollectionEntry` object should be included in the result array.
+
 - Create the `Dog` component:
 
   ```ts
@@ -1238,6 +1244,31 @@ pushing changes to the GitHub repository of the app
 will trigger a new build and deployment of the app.
 If content collection documents were added, modified, or deleted,
 this will result in changes to the deployed static pages.
+
+### Sanitizing Content
+
+The content below the front matter in collection documents is not sanitized.
+If there is a possibility that the content might contain something that
+causes a Cross Site Scripting (XSS) attack (such as `script` tags),
+then a different approach should be taken to render the content.
+
+One approach is the install the npm packages
+sanitize-html, @types/sanitize-html, and marked.
+In the component script of the Astro component that renders the content,
+add the following:
+
+```js
+import { marked } from 'marked';
+import sanitizeHtml from 'sanitize-html';
+...
+const content = sanitizeHtml(collectionEntry.body);
+const html = marked.parse(content);
+```
+
+Then instead of rendering `<Content />`, render `<div set:html={html} />`.
+
+If the styling is less that desirable, consider applying the `prose` CSS class
+from the @tailwindcss/typography plugin.
 
 ### Incremental Content Caching
 
