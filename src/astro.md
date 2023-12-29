@@ -2570,9 +2570,12 @@ Are references to them required to begin with ./ ?
 
 Summarize the steps to deploy an Astro project to Netlify and Vercel.
 
-See Couldcannon which uses Astro content collection documents.
+See CloudCannon which uses Astro content collection documents.
 
 Document a bit more about Zod data types and the constraints you can put on them.
 All properties are required, unless you specify that they are optional.
 
 Describe the getEntries function which is an alternative to the getEntry function.
+
+Study and document the built-in components described at
+https://docs.astro.build/en/reference/api-reference/#built-in-components.
