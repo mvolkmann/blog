@@ -1262,7 +1262,7 @@ type CountData = {
 
 // @ts-ignore
 globalThis.ns = {
-  setupCount(data: CountData) {
+  syncCount(data: CountData) {
     count.subscribe(value => (data.count = value));
     data.setCount = count.set;
   }
@@ -1358,12 +1358,7 @@ const {label = ''} = Astro.props;
 
 <!-- The x-data attribute is not needed here
      if it is present on an ancestor element. -->
-<div
-  class="row"
-  x-data
-  x-init="ns.setupCount($data)"
-  x-effect="setCount(count)"
->
+<div class="row" x-data x-init="ns.syncCount($data)" x-effect="setCount(count)">
   {label &&
   <div>{label}</div>
   }
@@ -1372,8 +1367,9 @@ const {label = ''} = Astro.props;
   <button @click="count++">+</button>
 </div>
 
+<!-- This script tag is only needed if no other file imported stores.ts. -->
 <script>
-  import '../stores.ts'; // make ns.setupCount function available
+  import '../stores.ts'; // make ns.syncCount function available
 </script>
 
 <style>
@@ -1401,6 +1397,7 @@ import Counter3 from '../components/Counter.astro';
 <Layout>
   <Counter1 label="React" client:load />
   <Counter2 label="Svelte" client:load />
+  <!-- client:* directives cannot be applied to Astro components. -->
   <Counter3 label="Astro" />
 </Layout>
 ```
