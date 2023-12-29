@@ -2291,6 +2291,10 @@ These requests can target an Astro page.
 The component script in the page can determine
 which verb was used and respond accordingly.
 
+Another option to consider is implementing Astro endpoints
+that are invoked using HTMX and having those use `hx-redirect`
+to redirect to a specific Astro page that generates the HTML to be returned.
+
 ## Internationalization
 
 Astro supports {% aTargetBlank
