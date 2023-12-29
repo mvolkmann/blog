@@ -2127,6 +2127,83 @@ For more detail, see {% aTargetBlank
 "https://docs.astro.build/en/guides/prefetch/#enable-prefetching",
 "Prefetch" %}.
 
+## Middleware
+
+Astro supports defining a middleware function named `onRequest`
+in the file `src/middleware.ts` that is called before each page transition.
+This function can:
+
+- set properties on the `local` object
+  that every page can access with `Astro.locals`
+- verify whether the user is authorized to visit the target URL
+- modify the HTML to be rendered
+
+The following example demonstrates each of the actions described above.
+
+```ts
+import {defineMiddleware} from 'astro:middleware';
+
+// This is state that lives across page transitions.
+let score = 0;
+
+const securePaths = ['/secret'];
+
+export const onRequest = defineMiddleware(async (context, next) => {
+  score++;
+
+  const {locals, url} = context;
+  locals.score = score;
+  locals.title = 'My Title';
+
+  const response = await next();
+  const {headers} = response;
+
+  // Consider checking the requested content type to
+  // determine the kind of response that should be returned.
+  const contentType = headers.get('content-type');
+  console.log('contentType =', contentType);
+
+  if (securePaths.includes(url.pathname)) {
+    // Check for authentication.
+    const authorization = headers.get('Authorization');
+    if (!authorization) {
+      /*
+      // This response triggers prompting for credentials
+      // using HTTP basic authentication.
+      return new Response('Unauthorized', {
+        status: 401,
+        headers: {
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'WWW-Authenticate': 'Basic realm="Secure Area"'
+        }
+      });
+      */
+
+      return new Response('Unauthorized', {
+        // status: 401, // "Forbidden"; will not redirect to Location
+        status: 302, // "See Other"; will redirect to Location
+        headers: {
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          Location: url.origin + '/unauthorized' // a defined page
+        }
+      });
+    }
+  }
+
+  /*
+  // Optionally modify the HTML being returned.
+  const html = await response.text();
+  const modifiedHtml = html; // make some change
+  return new Response(modifiedHtml, {
+    headers: response.headers,
+    status: 200
+  });
+  */
+
+  return response; // unaltered
+});
+```
+
 ## API Endpoints
 
 Endpoints are defined by `.js` and `.ts` files under the `src/pages` directory.
