@@ -1226,6 +1226,29 @@ will trigger a new build and deployment of the app.
 If content collection documents were added, modified, or deleted,
 this will result in changes to the deployed static pages.
 
+### Incremental Content Caching
+
+Build times for projects that generate pages from large content collection
+can be significantly reduced by enabling an experimental feature that
+avoids doing work for documents that have not changed since the last build.
+To enable it, add the following to the object
+passed to the `defineConfig` function in `astro.config.mjs`:
+
+```js
+  experimental: {
+    contentCollectionCache: true
+  },
+```
+
+Currently this only caches specific modules related to content collections
+and adds files in the `node_modules/.astro` directory.
+In the future this may also cache the generated `.html` files.
+
+Unfortunately, I could not get this feature to work.
+From a comment in the Discord channel,
+"It's still quite early and very experimental, so I wouldn't be
+surprised if there's a lot of edge cases where it doesn't work."
+
 ## Sharing State (nanostores)
 
 The recommended way to share state (data) between components is to use the
@@ -2422,3 +2445,6 @@ Document a bit more about Zod data types and the constraints you can put on them
 All properties are required, unless you specify that they are optional.
 
 Describe the getEntries function which is an alternative to the getEntry function.
+
+Why do I sometimes see file names of dynamic routes written like
+`[...slug].json` instead of `[slug].json`? Is there a difference?

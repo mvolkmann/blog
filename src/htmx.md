@@ -799,3 +799,5 @@ TODO: Read "The Valley of CODE" page above!
   get the body from a response that is a full HTML document.
 
 - Learn about hx-boost.
+
+- See https://www.npmjs.com/package/@jop-software/hx-chart.
