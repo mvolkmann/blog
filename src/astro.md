@@ -843,6 +843,9 @@ Astro image optimization includes:
 More image optimization is performed in production builds
 than when running in dev mode.
 
+For pages that are generated at build time (SSG) and use the `Image` component,
+optimized `.webp` files are created in the `dist` directory.
+
 This mostly removes the need to use tools like Squoosh to optimize images.
 
 Image optimization is performed by the {% aTargetBlank
