@@ -2207,6 +2207,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
 ## Cookies
 
 TODO: Discuss your cookies-demo project.
+This is a way to share data across pages of an Astro project.
 
 ## API Endpoints
 
