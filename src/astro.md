@@ -300,6 +300,13 @@ If you use VS Code as your editor, consider installing these extensions:
   When entering Tailwind class names for colors,
   it provides color preview swatches.
 
+- {% aTargetBlank "https://github.com/withastro/prettier-plugin-astro",
+  "prettier-plugin-astro" %} from withastro
+
+  This adds support for formatting .astro files.
+  As of December 2023 it seems to have some serious issues,
+  so consider waiting a while before using this.
+
 To configure code formatting, open any `.astro` file,
 open the Command Palette, and enter "Format Document".
 It will prompt for configuring this and automatically do so.
@@ -2004,6 +2011,66 @@ For more detail, see {% aTargetBlank
 "https://docs.astro.build/en/guides/view-transitions/", "View Transitions" %}.
 Also, check out {% aTargetBlank
 "https://github.com/martrapp/astro-vt-bot#readme", "astro-vt-bot" %}.
+
+## Prefetching
+
+Prefetching is the act of loading resources that will be needed
+to render a page before navigating to that page.
+In Astro, this can be triggered by hovering over link, clicking a link,
+or merely scrolling a link into view.
+
+Prefetching is automatically enabled when view transitions are enabled.
+That is done by including the `<ViewTransitions />` component
+in the `head` section of the HTML.
+
+When not using view transitions, prefetching can be enabled
+by adding the following in `astro.config.mjs`:
+
+```js
+prefetch: true;
+```
+
+Then add the `data-astro-prefetch` to each `a` element
+where prefetching should be performed.
+
+The default prefetching strategy is "hover".
+To use the "tap" or "viewport" strategy, set the value of the
+`data-astro-prefetch` attribute to one of those values.
+
+To change the default prefetch strategy,
+change the `prefetch` value in `astro.config.mjs` to the following:
+
+```js
+prefetch: {
+  defaultStrategy: 'some-strategy';
+}
+```
+
+To make all anchor tags use prefetching my default,
+removing the need to add the `data-astro-prefetch` attribute to them,
+change the `prefetch` value in `astro.config.mjs` to the following:
+
+```js
+prefetch: {
+  prefetchAll: true;
+}
+```
+
+Prefetching the page at a specified URL path
+can be triggered manually in client scripts.
+For example, this might be done in response to a button click,
+rather than relying on interaction with an anchor tag.
+For example:
+
+```ts
+import { prefetch } from 'astro:prefetch';
+...
+prefetch('/some/path');
+```
+
+For more detail, see {% aTargetBlank
+"https://docs.astro.build/en/guides/prefetch/#enable-prefetching",
+"Prefetch" %}.
 
 ## API Endpoints
 
