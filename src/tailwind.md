@@ -360,6 +360,17 @@ is an object with boolean properties that are commented out.
 Uncomment these to get warnings about usage of features
 that will break in future releases.
 
+## Using With Frameworks
+
+From the website for {% aTargetBlank
+"https://github.com/dcastil/tailwind-merge", "tailwind-merge" %},
+"If you use Tailwind CSS with a component-based UI renderer like React or Vue,
+you're probably familiar with the situation that you want to
+change some styles of a component, but only in a one-off case."
+tailwind-merge provides the function `twMerge` that takes any number of
+strings containing space-separated lists of CSS and Tailwind classes.
+It resolves any conflicts and returns a single string of class names.
+
 ## Purging Unused CSS Classes
 
 The `purge` configuration property can be modified to purge unused CSS classes.
