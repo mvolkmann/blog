@@ -946,6 +946,17 @@ The reason is that the `getStaticPaths` function gets hoisted into its own scope
 That prevents it from accessing most things outside the function.
 This is a limitation that the Astro team hopes remove in the future.
 
+Often the `getStaticPaths` function needs to
+iterate over documents in a content collection.
+In this case it can be written similar to the following:
+
+```ts
+export async function getStaticPaths() {
+  const dogs: CollectionEntry<'dogs'>[] = await getCollection('dogs');
+  return dogs.map(dog => ({params: {name: dog.data.name}}));
+}
+```
+
 Running `npm run build` generates the `dist` directory which will contain
 the following files and more:
 
