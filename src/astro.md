@@ -1439,10 +1439,10 @@ import Counter3 from '../components/Counter.astro';
 The MDX integration adds the following features to Markdown:
 
 - ability to define JavaScript variables
-  whose values some from JavaScript expressions
+  whose values come from JavaScript expressions
 
 - ability to insert the values of front matter properties
-  and JavaScript variables into the content
+  and JavaScript variables into the content using curly braces
 
 - ability to render components implemented in any of the supported frameworks
 
@@ -2414,11 +2414,7 @@ in addition to .astro files?
 Images used by the Astro image component can go anywhere under the src directory.
 Are references to them required to begin with ./ ?
 
-summarize all the benefits of using MDX, which include defining variables in the front matter, and referencing them in the content.
-
-summarize the steps to deploy an Astro project to Netlify and Vercel.
-
-describe the differences between SSR (generated on request ) and SSG (generated at build time) and configure them in Astro.
+Summarize the steps to deploy an Astro project to Netlify and Vercel.
 
 See Couldcannon which uses Astro content collection documents.
 
