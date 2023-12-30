@@ -339,65 +339,6 @@ The steps to configure an Astro project to use Prettier are:
 
 To format all the files in the project, enter `npm run format`.
 
-## Dev Toolbar
-
-When running in dev mode, Astro provides a Dev Toolbar in
-a dark gray oval that is centered at the bottom of the browser window.
-It is partially hidden from view until the mouse hovers over it.
-
-<img alt="Astro Dev Toolbar" style="border: none; width: 30%"
-  src="/blog/assets/astro-dev-toolbar.png?v={{pkg.version}}" />
-
-The toolbar contains the following four buttons:
-
-- Menu (Astro icon)
-
-  This provides options to "Report a Bug", provide "Feedback",
-  view "Documentation", and join the "Community" (on Discord).
-  It also features some optional integrations.
-  The "View all" link opens a browser tab
-  for viewing all available integrations.
-
-  The "Copy debug info" button in the upper-right
-  copies information to the clipboard that is useful when reporting a bug.
-  This includes the version of Astro, version of Node, operating system,
-  package manager (ex. npm), the adapter in use (ex. @astrojs/node),
-  and a list of the installed integrations.
-  The copied text can be pasted into a bug report.
-
-- Inspect (arrow cursor icon)
-
-  This enables inspecting interactive components that are
-  marked with a `client:*` directive.
-  These directives can only be applied to non-Astro components.
-
-  Click this button to display an outline around
-  all the interactive components on the page.
-  Hover over one to get a dialog that shows:
-
-  - the specific `client:*` directive that was applied
-  - the props that were passed to the component
-  - a link that be clicked to open the source file for the component in VS Code
-
-- Audit (document icon)
-
-  This scans the page for accessibility issues.
-  Elements that have issues are given a purple outline.
-  Hover over them to see a dialog that describes the issues.
-
-- Settings (gear icon)
-
-  This displays a dialog for modifying settings.
-  There are currently only two settings,
-  "Verbose logging" and "Disable notifications",
-  both of which are off by default.
-
-To close any dialog displayed by the Dev Toolbar, press the escape key.
-
-If having access to the Dev Toolbar is not desired,
-it can be disabled by entering `npx astro preferences disable devToolbar`.
-It can be enabled again by entering `npx astro preferences enable devToolbar`.
-
 ## Directory Structure
 
 The `public` directory holds assets such as audio, images, and video
@@ -1602,9 +1543,10 @@ import Counter3 from '../components/Counter.astro';
 ---
 
 <Layout>
+  <!-- client:* directives are described later.
+       They cannot be applied to Astro components. -->
   <Counter1 label="React" client:load />
   <Counter2 label="Svelte" client:load />
-  <!-- client:* directives cannot be applied to Astro components. -->
   <Counter3 label="Astro" />
 </Layout>
 ```
@@ -1741,7 +1683,7 @@ Let's walk through the steps to use a
 
    There are five provided `client` directives that tell Astro that a
    non-Astro component requires client-side JavaScript code to be loaded.
-   They differ in when the JavaScript will be loaded.
+   The `client` directives differ in when the JavaScript will be loaded.
    When not applied, JavaScript for non-Astro components is not loaded.
 
    `client` directives cannot be applied to Astro components.
@@ -1931,6 +1873,65 @@ and use the result as the HTML to insert.
 
 The string value of `set:text` is automatically escaped, replacing
 certain characters such as `"` with a character entity such as `&quot;`.
+
+## Dev Toolbar
+
+When running in dev mode, Astro provides a Dev Toolbar in
+a dark gray oval that is centered at the bottom of the browser window.
+It is partially hidden from view until the mouse hovers over it.
+
+<img alt="Astro Dev Toolbar" style="border: none; width: 30%"
+  src="/blog/assets/astro-dev-toolbar.png?v={{pkg.version}}" />
+
+The toolbar contains the following four buttons:
+
+- Menu (Astro icon)
+
+  This provides options to "Report a Bug", provide "Feedback",
+  view "Documentation", and join the "Community" (on Discord).
+  It also features some optional integrations.
+  The "View all" link opens a browser tab
+  for viewing all available integrations.
+
+  The "Copy debug info" button in the upper-right
+  copies information to the clipboard that is useful when reporting a bug.
+  This includes the version of Astro, version of Node, operating system,
+  package manager (ex. npm), the adapter in use (ex. @astrojs/node),
+  and a list of the installed integrations.
+  The copied text can be pasted into a bug report.
+
+- Inspect (arrow cursor icon)
+
+  This enables inspecting interactive components that are
+  marked with a `client:*` directive.
+  These directives can only be applied to non-Astro components.
+
+  Click this button to display an outline around
+  all the interactive components on the page.
+  Hover over one to get a dialog that shows:
+
+  - the specific `client:*` directive that was applied
+  - the props that were passed to the component
+  - a link that be clicked to open the source file for the component in VS Code
+
+- Audit (document icon)
+
+  This scans the page for accessibility issues.
+  Elements that have issues are given a purple outline.
+  Hover over them to see a dialog that describes the issues.
+
+- Settings (gear icon)
+
+  This displays a dialog for modifying settings.
+  There are currently only two settings,
+  "Verbose logging" and "Disable notifications",
+  both of which are off by default.
+
+To close any dialog displayed by the Dev Toolbar, press the escape key.
+
+If having access to the Dev Toolbar is not desired,
+it can be disabled by entering `npx astro preferences disable devToolbar`.
+It can be enabled again by entering `npx astro preferences enable devToolbar`.
 
 ## Custom 404 Page
 
