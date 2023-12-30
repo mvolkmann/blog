@@ -212,24 +212,24 @@ In this case the adapter name was "node".
 
 The `output` property can be set to the following values:
 
-| `output` value | Meaning                                                |
-| -------------- | ------------------------------------------------------ |
-| `'static'`     | All pages are generated at build time. (default)       |
-| `'server'`     | Most pages are generated on the server when requested. |
-| `'hybrid'`     | Most pages are generated at build time.                |
-
-In "server" mode, to cause a specific page to be generated at build time,
-add the following line in the component script:
-
-```js
-export const prerender = true;
-```
+| `output` value | Meaning                                                            |
+| -------------- | ------------------------------------------------------------------ |
+| `'static'`     | All pages are generated at build time. (default)                   |
+| `'hybrid'`     | All pages default to being generated at build time.                |
+| `'server'`     | All pages default to being generated on the server when requested. |
 
 In "hybrid" mode, to cause a specific page to NOT be generated at build time,
 add the following line in the component script:
 
 ```js
 export const prerender = false;
+```
+
+In "server" mode, to cause a specific page to be generated at build time,
+add the following line in the component script:
+
+```js
+export const prerender = true;
 ```
 
 If a page for a dynamic route
