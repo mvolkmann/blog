@@ -2720,16 +2720,12 @@ TODO: Describe how to use this.
 ## Unorganized Content
 
 Learn about Astro support for pagination.
-
-What is the reasonable number of markdown documents to have in a collection
-where if you need more then you should use a database?
-
-Images used by the Astro image component can go anywhere under the src directory.
-Are references to them required to begin with ./ ?
+See https://docs.astro.build/en/core-concepts/routing/#pagination.
 
 Summarize the steps to deploy an Astro project to Netlify and Vercel.
 
-See CloudCannon which uses Astro content collection documents.
+See the commercial CloudCannon CMS (https://cloudcannon.com)
+which uses Astro content collection documents.
 
 Describe the getEntries function which is an alternative to the getEntry function.
 
