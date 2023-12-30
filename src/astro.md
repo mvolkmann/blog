@@ -2296,8 +2296,71 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
 ## Cookies
 
-TODO: Discuss your cookies-demo project.
-This is a way to share data across pages of an Astro project.
+Cookies provide one way for an Astro page
+to share data with other pages in the same app.
+
+Here is a page defined in `src/pages/index.astro`
+that sets a cookie based on user input using Alpine.
+
+<img alt="Astro cookies home" style="width: 70%"
+  src="/blog/assets/astro-cookies-home.png?v={{pkg.version}}" />
+
+```js
+---
+import Layout from '../layouts/Layout.astro';
+
+const cookie = Astro.cookies.get('score');
+let score = cookie?.number() ?? 0;
+---
+
+<Layout>
+  <div x-data={`{score: ${score}}`} x-effect="ns.setScore(Number(score))">
+    <input type="range" min="0" max="10" x-model="score" />
+    <span x-text="score"></span>
+  </div>
+  <a href="/report">Report</a>
+</Layout>
+
+<script>
+  // @ts-ignore
+  globalThis.ns = {
+	  setScore(score: number) {
+	    const ms = 5 * 60 * 1000; // 5 minutes
+	    const expires = new Date(Date.now() + ms).toUTCString();
+	    document.cookie = `score=${score}; expires=${expires}`;
+    }
+  };
+</script>
+
+<style>
+  input[type='range'] {
+    width: 20rem;
+  }
+</style>
+```
+
+Here is a page defined in `src/pages/report.astro`
+that gets the cookie and displays its value.
+
+<img alt="Astro cookies report" style="width: 15%"
+  src="/blog/assets/astro-cookies-report.png?v={{pkg.version}}" />
+
+```js
+---
+import Layout from '../layouts/Layout.astro';
+
+// If the output mode is "static", this will output the following warning:
+// [WARN] `Astro.request.headers` is not available in "static" output mode.
+// To enable header access, enable SSR.
+const cookie = Astro.cookies.get('score');
+const score = cookie?.number() ?? 0;
+---
+
+<Layout>
+  <div>score = {score}</div>
+  <a href="/">Home</a>
+</Layout>
+```
 
 ## API Endpoints
 
