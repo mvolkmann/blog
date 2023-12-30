@@ -46,8 +46,8 @@ Astro supports using many kinds of UI components including
 Astro, Alpine, Lit, Preact, React, SolidJS, Svelte, Vue, WebComponents, and more.
 
 Astro uses the {% aTargetBlank "https://docs.astro.build/en/concepts/islands/",
-"Islands architecture" %}.
-Jason Miller describes this approach as a way to
+"Islands architecture" %}. Jason Miller (creator of the Preact framework)
+describes this approach as a way to
 "render HTML pages on the server, and inject placeholders or slots
 around highly dynamic regions that can then be
 hydrated on the client into small self-contained widgets,
