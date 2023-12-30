@@ -2719,18 +2719,10 @@ TODO: Describe how to use this.
 
 ## Unorganized Content
 
-What are the benefits of using the tailwind typography plug-in?
-
 Learn about Astro support for pagination.
 
 What is the reasonable number of markdown documents to have in a collection
 where if you need more then you should use a database?
-
-Learn about and document using the Astro Dev toolbar
-that appears at the bottom of the page in the browser when running in dev mode.
-
-Can pages be defined with .html, .md, .mdx, and .svelte files
-in addition to .astro files?
 
 Images used by the Astro image component can go anywhere under the src directory.
 Are references to them required to begin with ./ ?
@@ -2738,9 +2730,6 @@ Are references to them required to begin with ./ ?
 Summarize the steps to deploy an Astro project to Netlify and Vercel.
 
 See CloudCannon which uses Astro content collection documents.
-
-Document a bit more about Zod data types and the constraints you can put on them.
-All properties are required, unless you specify that they are optional.
 
 Describe the getEntries function which is an alternative to the getEntry function.
 
