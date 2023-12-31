@@ -1821,8 +1821,28 @@ also enter `npm install nanostores @nanostores/react`.
 To add support for the Alpine library which is used in the Astro component,
 enter `npx astro add alpinejs`.
 
+### Persistence
+
 For sharing state across page transitions, see {% aTargetBlank
 "https://github.com/nanostores/persistent", "@nanostores/persistent" %}.
+
+To install this, enter `npm install nanostores @nanostores/persistent`.
+
+To use this to define stores, import it as follows:
+
+```js
+import {persistentAtom} from '@nanostores/persistent';
+```
+
+To make an atom store persistent, change `const myStore = atom(value);`
+to the following:
+
+```js
+const myStore = persistentAtom('someName', value, {
+  encode: JSON.stringify,
+  decode: JSON.parse
+});
+```
 
 ### Store Creation
 
