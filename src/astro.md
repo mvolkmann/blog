@@ -368,6 +368,8 @@ Pages are defined by files in the `src/pages` directory.
 Think of pages like oceans and components like islands
 in the islands architecture.
 Islands are where interactivity can reside.
+Examining the source of a page containing islands
+reveals that Astro uses custom elements named "`astro-island`".
 
 Pages can be described by
 Astro (`.astro`), Markdown (`.md`), and MDX (`.mdx`) files.
@@ -1758,6 +1760,157 @@ For more detail on using Svelte components in Astro, see {% aTargetBlank
 
 ### Alpine
 
+The {% aTargetBlank "https://alpinejs.dev", "Alpine" %} JavaScript library
+can be used in Astro components to add interactivity.
+This is an alternative to implementing interactive components
+using another framework such as React, Svelte, or Vue.
+
+#### Defining Functions
+
+Often Astro components that use Alpine need to call custom JavaScript functions.
+But where should the functions be defined?
+There are several options that work and several that do not.
+
+Alpine CANNOT call functions defined in these ways:
+
+- component script section
+
+  Code that appears here is only available at build time or on the server.
+
+  For example, this WILL NOT make the `demo` function available.
+
+  ```js
+  ---
+  function demo() {
+    console.log('in demo');
+  }
+  ---
+  ```
+
+- `<script>` with no attributes
+
+  Vite performs tree shaking and
+  will not recognize function calls made in Alpine directives.
+  This will result in the removal of function definitions
+  that appear in plain `script` tags.
+
+  For example, this WILL NOT make the `demo` function available.
+
+  ```html
+  <script>
+    function demo() {
+      console.log('in demo');
+    }
+  </script>
+  ```
+
+- `<script type="module">`
+
+  Module scripts create their own scope,
+  so functions defined in these are not visible outside
+  unless they are exported and then imported into another `script`.
+  But `import` statements can only appear in other module scripts.
+
+  For example, this WILL NOT make the `demo` function available.
+
+  ```html
+  <script type="module">
+    function demo() {
+      console.log('in demo');
+    }
+  </script>
+  ```
+
+Alpine CAN call functions defined in these ways:
+
+- `<script defer>`
+
+  From MDN, the `defer` attribute "is set to indicate to a browser that
+  the script is meant to be executed after the document has been parsed,
+  but before firing DOMContentLoaded."
+
+  Vite does not perform tree shaking of
+  functions defined in this kind of `script` tag.
+
+  For example, this WILL make the `demo` function available.
+
+  ```html
+  <script defer>
+    function demo() {
+      console.log('in demo');
+    }
+  </script>
+  ```
+
+- `<script is:inline>`
+
+  The `is:inline` directive tells Astro include this `script` as-is in the DOM.
+  Astro will not bundle this JavaScript or remove duplicates.
+
+  Vite does not perform tree shaking of
+  functions defined in this kind of `script` tag.
+
+  For example, this WILL make the `demo` function available.
+
+  ```html
+  <script is:inline>
+    function demo() {
+      console.log('in demo');
+    }
+  </script>
+  ```
+
+- `globalThis`
+
+  Functions attached to the global object are available everywhere.
+  To avoid polluting the global namespace with a large number of function names,
+  consider attaching one object to the global object
+  that holds all the functions.
+
+  For example, this WILL make the `demo` function available.
+
+  ```html
+  <script is:inline>
+    globalThis.demo = () => {
+      console.log('in demo');
+    };
+  </script>
+  ```
+
+- dynamic imports
+
+  Dynamic imports can be used to import functions defined in other source files.
+  For example, here is the file `src/my-module.js`:
+
+  ```js
+  export function demo() {
+    console.log('in demo');
+  }
+  ```
+
+  Here is how the `demo` function CAN be made available in an Astro component:
+
+  ```html
+  <script defer>
+    let fn3;
+    import('/src/my-module.js').then(module => {
+      fn3 = module.fn3;
+    });
+  </script>
+  ```
+
+From the Astro docs at {% aTargetBlank
+"https://docs.astro.build/en/reference/directives-reference/#isinline",
+"is:inline" %}, "The is:inline directive is implied whenever
+any attribute other than `src` is used on a `<script>` or `<style>` tag."
+
+An issue with adding ANY attributes to a `script` tag is that
+no deduplication will be performed on them.
+This means that if an Astro component includes such `script` tags,
+they will appear in the DOM once for every usage of the component.
+
+#### Alpine Example
+
 Now let's walk through the steps to use
 {% aTargetBlank "https://alpinejs.dev", "Alpine" %} in Astro.
 Alpine is a much lighter weight framework than
@@ -2299,6 +2452,9 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
 Cookies provide one way for an Astro page
 to share data with other pages in the same app.
+
+One downside of using cookies is the legal requirement
+to prompt users for permission to store them.
 
 Here is a page defined in `src/pages/index.astro`
 that sets a cookie based on user input using Alpine.
