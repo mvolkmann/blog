@@ -1769,15 +1769,15 @@ using another framework such as React, Svelte, or Vue.
 
 Often Astro components that use Alpine need to call custom JavaScript functions.
 But where should the functions be defined?
-There are several options that work and several that do not.
 
 Alpine CANNOT call functions defined in these ways:
 
 - component script section
 
-  Code that appears here is only available at build time or on the server.
+  Code that appears here is only available at build time
+  or on the server during SSR.
 
-  For example, this WILL NOT make the `demo` function available.
+  For example, this WILL NOT make the `demo` function available to Alpine.
 
   ```js
   ---
@@ -1794,7 +1794,7 @@ Alpine CANNOT call functions defined in these ways:
   This will result in the removal of function definitions
   that appear in plain `script` tags.
 
-  For example, this WILL NOT make the `demo` function available.
+  For example, this WILL NOT make the `demo` function available to Alpine.
 
   ```html
   <script>
@@ -1811,7 +1811,7 @@ Alpine CANNOT call functions defined in these ways:
   unless they are exported and then imported into another `script`.
   But `import` statements can only appear in other module scripts.
 
-  For example, this WILL NOT make the `demo` function available.
+  For example, this WILL NOT make the `demo` function available to Alpine.
 
   ```html
   <script type="module">
@@ -1832,7 +1832,7 @@ Alpine CAN call functions defined in these ways:
   Vite does not perform tree shaking of
   functions defined in this kind of `script` tag.
 
-  For example, this WILL make the `demo` function available.
+  For example, this WILL make the `demo` function available to Alpine.
 
   ```html
   <script defer>
@@ -1850,7 +1850,7 @@ Alpine CAN call functions defined in these ways:
   Vite does not perform tree shaking of
   functions defined in this kind of `script` tag.
 
-  For example, this WILL make the `demo` function available.
+  For example, this WILL make the `demo` function available to Alpine.
 
   ```html
   <script is:inline>
@@ -1867,7 +1867,7 @@ Alpine CAN call functions defined in these ways:
   consider attaching one object to the global object
   that holds all the functions.
 
-  For example, this WILL make the `demo` function available.
+  For example, this WILL make the `demo` function available to Alpine.
 
   ```html
   <script is:inline>
@@ -1880,7 +1880,8 @@ Alpine CAN call functions defined in these ways:
 - dynamic imports
 
   Dynamic imports can be used to import functions defined in other source files.
-  For example, here is the file `src/my-module.js`:
+
+  For example, here is the file `src/my-module.js`.
 
   ```js
   export function demo() {
@@ -1888,25 +1889,24 @@ Alpine CAN call functions defined in these ways:
   }
   ```
 
-  Here is how the `demo` function CAN be made available in an Astro component:
+  This WILL make the `demo` function available to Alpine.
 
   ```html
   <script defer>
-    let fn3;
+    let demo;
     import('/src/my-module.js').then(module => {
-      fn3 = module.fn3;
+      demo = module.demo;
     });
   </script>
   ```
 
 From the Astro docs at {% aTargetBlank
 "https://docs.astro.build/en/reference/directives-reference/#isinline",
-"is:inline" %}, "The is:inline directive is implied whenever
+"is:inline" %}, "The `is:inline` directive is implied whenever
 any attribute other than `src` is used on a `<script>` or `<style>` tag."
 
-An issue with adding ANY attributes to a `script` tag is that
-no deduplication will be performed on them.
-This means that if an Astro component includes such `script` tags,
+An issue with "inline" scripts is that no deduplication is performed on them.
+If an Astro component includes inline scripts,
 they will appear in the DOM once for every usage of the component.
 
 #### Alpine Example
