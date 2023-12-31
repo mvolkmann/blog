@@ -1942,9 +1942,15 @@ const {label = ''} = Astro.props;
 </div>
 
 <script is:inline>
+  // This updates an Alpine x-data property
+  // every time a related store value changes.
+  function sync(store, data, property) {
+    store.subscribe(value => data[property] = value);
+  }
+
   function counterSetup(data) {
     const {count} = stores;
-    count.subscribe(value => (data.count = value));
+    sync(count, data, 'count');
     data.setCount = count.set;
   }
 </script>
