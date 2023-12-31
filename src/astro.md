@@ -1985,8 +1985,10 @@ import Counter3 from '../components/Counter.astro';
   <h1>nanostores Demo</h1>
 
   <main x-data x-init="topSetup($data)">
-    <Counter1 label="React" client:load />
-    <Counter2 label="Svelte" client:load />
+    <!-- Using client:only instead of client:load addresses
+         a timing issue with setting globalThis.stores. -->
+    <Counter1 label="React" client:only="react" />
+    <Counter2 label="Svelte" client:only="svelte" />
     <!-- client:* directives cannot be applied to Astro components. -->
     <Counter3 label="Astro" />
   </main>
