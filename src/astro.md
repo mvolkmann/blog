@@ -1339,220 +1339,6 @@ For details on using the Strapi CMS, see {% aTargetBlank
 "https://www.youtube.com/watch?v=pVJCROlsIp4",
 "Getting Started with Astro and Strapi" %}.
 
-## Sharing State (nanostores)
-
-The recommended way to share state (data) between components is to use the
-{% aTargetBlank "https://github.com/nanostores/nanostores", "nanostores" %}
-library.
-This library is not specific to Astro and can be used with many web frameworks.
-It is very lightweight, adding less that 1KB to the project.
-nanostores are somewhat similar to Svelte stores.
-
-To install the nanostores library in an Astro project,
-enter `npm install nanostores`.
-
-There are three kinds of stores:
-
-- "atom" stores hold a single data value which can be of any type
-  including boolean, number, string, array, or object.
-  When the value is an object, the entire value can be modified,
-  but not individual properties.
-- "map" stores hold multiple named properties.
-  This is typically used for objects rather than using an atom store.
-- "computed" stores compute their value based on the values of other stores.
-
-One limitation is that nanostores cannot be passed as props to components.
-
-### Store Setup
-
-Let's walk through an example of using an atom nanostore
-to share a number value between three components
-that are implemented in React, Svelte, and Astro.
-The three components have identical functionality.
-Each component renders a count whose value comes from an atom store.
-Minus and plus buttons enable changing the count value.
-Changing the value from any component affects the value
-displayed in all of them since they all use the same nanostore.
-
-<img alt="Astro nanostores Counters" style="width: 50%"
-  src="/blog/assets/astro-nanostores-counters.png?v={{pkg.version}}">
-
-To install the nanostores library, enter `npm install nanostores`.
-
-To use nanostores in React components,
-also enter `npm install nanostores @nanostores/react`.
-
-To add support for the Alpine library which is used in the Astro component,
-enter `npx astro add alpinejs`.
-
-For sharing state across page transitions, see {% aTargetBlank
-"https://github.com/nanostores/persistent", "@nanostores/persistent" %}.
-
-### Store Creation
-
-Here is the code the creates the nanostore defined in the file `src/stores.ts`.
-It also defines a helper function that is needed by the Astro component.
-
-{% raw %}
-
-```ts
-import {atom} from 'nanostores';
-
-export const count = atom<number>(1);
-
-type CountData = {
-  count: number;
-  setCount: (value: number) => void;
-};
-
-// @ts-ignore
-globalThis.stores = {
-  syncCount(data: CountData) {
-    count.subscribe(value => (data.count = value));
-    data.setCount = count.set;
-  }
-};
-```
-
-{% endraw %}
-
-### React Component
-
-Here is a React component that uses the `count` nanostore
-defined in the file `src/components/Counter.tsx`.
-
-{% raw %}
-
-```tsx
-import {type FC} from 'react';
-import {useStore} from '@nanostores/react';
-import {count} from '../stores.ts';
-
-interface Props {
-  label?: string;
-}
-
-const Counter: FC<Props> = ({label = ''}) => {
-  const value = useStore(count);
-  return (
-    <div style={{display: 'flex', alignItems: 'center', gap: '1rem'}}>
-      {label && <div>{label}</div>}
-      <button disabled={value <= 0} onClick={() => count.set(value - 1)}>
-        -
-      </button>
-      <div>{value}</div>
-      <button onClick={() => count.set(value + 1)}>+</button>
-    </div>
-  );
-};
-
-export default Counter;
-```
-
-{% endraw %}
-
-### Svelte Component
-
-Here is a Svelte component that uses the `count` nanostore
-defined in the file `src/components/Counter.svelte`.
-
-{% raw %}
-
-```html
-<script>
-  import {count} from '../stores.ts';
-
-  export let label = '';
-</script>
-
-<div class="row">
-  {#if label}
-    <div>{label}</div>
-  {/if}
-  <!-- Use the $ prefix to subscribe to a nanostore
-       just like subscribing to a Svelte store. -->
-  <button disabled={$count <= 0} on:click={() => count.set($count - 1)}>-</button>
-  <div>{$count}</div>
-  <button on:click={() => count.set($count + 1)}>+</button>
-</div>
-
-<style>
-  .row {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-</style>
-```
-
-{% endraw %}
-
-### Astro Component
-
-Here is an Astro component that uses the `count` nanostore
-defined in the file `src/components/Counter.astro`.
-
-```html
----
-interface Props {
-  label?: string;
-}
-
-const {label = ''} = Astro.props;
----
-
-<!-- The x-data attribute is not needed here
-     if it is present on an ancestor element. -->
-<div
-  class="row"
-  x-data
-  x-init="stores.syncCount($data)"
-  x-effect="setCount(count)"
->
-  {label &&
-  <div>{label}</div>
-  }
-  <button :disabled="count <= 0" @click="count--">-</button>
-  <div x-text="count"></div>
-  <button @click="count++">+</button>
-</div>
-
-<!-- This script tag is only needed if no other file imported stores.ts. -->
-<script>
-  import '../stores.ts'; // make stores.syncCount function available
-</script>
-
-<style>
-  .row {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-</style>
-```
-
-### Page Component
-
-Here is an Astro page that uses all three of the components defined above.
-This is defined in the file `src/pages/index.astro`.
-
-```html
----
-import Layout from '../layouts/Layout.astro';
-import Counter1 from '../components/Counter.tsx';
-import Counter2 from '../components/Counter.svelte';
-import Counter3 from '../components/Counter.astro';
----
-
-<Layout>
-  <!-- client:* directives are described later.
-       They cannot be applied to Astro components. -->
-  <Counter1 label="React" client:load />
-  <Counter2 label="Svelte" client:load />
-  <Counter3 label="Astro" />
-</Layout>
-```
-
 ## MDX
 
 The MDX integration adds the following features to Markdown:
@@ -1983,6 +1769,220 @@ But Alpine is still quite capable.
 For more detail on using Alpine in Astro, see {% aTargetBlank
 "https://docs.astro.build/en/guides/integrations-guide/alpinejs/",
 "Alpine integration" %}.
+
+## Sharing State (nanostores)
+
+The recommended way to share state (data) between components is to use the
+{% aTargetBlank "https://github.com/nanostores/nanostores", "nanostores" %}
+library.
+This library is not specific to Astro and can be used with many web frameworks.
+It is very lightweight, adding less that 1KB to the project.
+nanostores are somewhat similar to Svelte stores.
+
+To install the nanostores library in an Astro project,
+enter `npm install nanostores`.
+
+There are three kinds of stores:
+
+- "atom" stores hold a single data value which can be of any type
+  including boolean, number, string, array, or object.
+  When the value is an object, the entire value can be modified,
+  but not individual properties.
+- "map" stores hold multiple named properties.
+  This is typically used for objects rather than using an atom store.
+- "computed" stores compute their value based on the values of other stores.
+
+One limitation is that nanostores cannot be passed as props to components.
+
+### Store Setup
+
+Let's walk through an example of using an atom nanostore
+to share a number value between three components
+that are implemented in React, Svelte, and Astro.
+The three components have identical functionality.
+Each component renders a count whose value comes from an atom store.
+Minus and plus buttons enable changing the count value.
+Changing the value from any component affects the value
+displayed in all of them since they all use the same nanostore.
+
+<img alt="Astro nanostores Counters" style="width: 50%"
+  src="/blog/assets/astro-nanostores-counters.png?v={{pkg.version}}">
+
+To install the nanostores library, enter `npm install nanostores`.
+
+To use nanostores in React components,
+also enter `npm install nanostores @nanostores/react`.
+
+To add support for the Alpine library which is used in the Astro component,
+enter `npx astro add alpinejs`.
+
+For sharing state across page transitions, see {% aTargetBlank
+"https://github.com/nanostores/persistent", "@nanostores/persistent" %}.
+
+### Store Creation
+
+Here is the code the creates the nanostore defined in the file `src/stores.ts`.
+It also defines a helper function that is needed by the Astro component.
+
+{% raw %}
+
+```ts
+import {atom, computed, map} from 'nanostores';
+
+const score = atom(0);
+
+// @ts-ignore
+globalThis.stores = {
+  count: atom(1)
+};
+```
+
+{% endraw %}
+
+### React Component
+
+Here is a React component that uses the `count` nanostore
+defined in the file `src/components/Counter.tsx`.
+
+{% raw %}
+
+```tsx
+import {type FC} from 'react';
+import {useStore} from '@nanostores/react';
+
+interface Props {
+  label?: string;
+}
+
+const Counter: FC<Props> = ({label = ''}) => {
+  // @ts-ignore
+  const {count} = globalThis.stores;
+  const value = useStore(count);
+  return (
+    <div style={{display: 'flex', alignItems: 'center', gap: '1rem'}}>
+      {label && <div>{label}</div>}
+      <button disabled={value <= 0} onClick={() => count.set(value - 1)}>
+        -
+      </button>
+      <div>{value}</div>
+      <button onClick={() => count.set(value + 1)}>+</button>
+    </div>
+  );
+};
+
+export default Counter;
+```
+
+{% endraw %}
+
+### Svelte Component
+
+Here is a Svelte component that uses the `count` nanostore
+defined in the file `src/components/Counter.svelte`.
+
+{% raw %}
+
+```html
+<script>
+  const {count} = globalThis.stores;
+
+  export let label = '';
+</script>
+
+<div class="row">
+  {#if label}
+    <div>{label}</div>
+  {/if}
+  <!-- In Svelte, add $ prefix to get the value of a nanostore. -->
+  <button disabled={$count <= 0} on:click={() => count.set($count - 1)}>-</button>
+  <div>{$count}</div>
+  <button on:click={() => count.set($count + 1)}>+</button>
+</div>
+
+<style>
+  .row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+</style>
+```
+
+{% endraw %}
+
+### Astro Component
+
+Here is an Astro component that uses the `count` nanostore
+defined in the file `src/components/Counter.astro`.
+
+```html
+---
+interface Props {
+  label?: string;
+}
+
+const {label = ''} = Astro.props;
+---
+
+<div
+  class="row"
+  x-data
+  x-init="counterSetup($data)"
+  x-effect="setCount(Number(count))"
+>
+  {label &&
+  <div>{label}</div>
+  }
+  <button :disabled="count <= 0" @click="count--">-</button>
+  <div x-text="count"></div>
+  <button @click="count++">+</button>
+</div>
+
+<script defer>
+  function counterSetup(data) {
+    const {count} = stores;
+    count.subscribe(value => (data.count = value));
+    data.setCount = count.set;
+  }
+</script>
+
+<style>
+  .row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+</style>
+```
+
+### Page Component
+
+Here is an Astro page that uses all three of the components defined above.
+This is defined in the file `src/pages/index.astro`.
+
+```html
+---
+import Layout from '../layouts/Layout.astro';
+import Counter1 from '../components/Counter.tsx';
+import Counter2 from '../components/Counter.svelte';
+import Counter3 from '../components/Counter.astro';
+---
+
+<script type="module">
+  import '/src/stores.js'; // sets a global variable
+</script>
+
+<Layout>
+  <h1>nanostores Demo</h1>
+
+  <main x-data x-init="topSetup($data)">
+    <Counter1 label="React" client:load />
+    <Counter2 label="Svelte" client:load />
+    <!-- client:* directives cannot be applied to Astro components. -->
+    <Counter3 label="Astro" />
+  </main>
+</Layout>
+```
 
 ## Directives
 
