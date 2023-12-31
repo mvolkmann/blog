@@ -1920,7 +1920,7 @@ defined in the file `src/components/Counter.svelte`.
 Here is an Astro component that uses the `count` nanostore
 defined in the file `src/components/Counter.astro`.
 
-```html
+```js
 ---
 interface Props {
   label?: string;
@@ -1935,15 +1935,13 @@ const {label = ''} = Astro.props;
   x-init="counterSetup($data)"
   x-effect="setCount(Number(count))"
 >
-  {label &&
-  <div>{label}</div>
-  }
+  {label && <div>{label}</div> }
   <button :disabled="count <= 0" @click="count--">-</button>
   <div x-text="count"></div>
   <button @click="count++">+</button>
 </div>
 
-<script defer>
+<script is:inline>
   function counterSetup(data) {
     const {count} = stores;
     count.subscribe(value => (data.count = value));
