@@ -1679,10 +1679,15 @@ Alpine CAN call functions defined in these ways:
 
   ```html
   <script defer>
-    let demo;
-    import('/src/my-module.js').then(module => {
-      demo = module.demo;
-    });
+    if (typeof demo === 'undefined') {
+      import('/src/my-module.js')
+        .then(module => {
+          demo = module.demo;
+        })
+        .catch(err => {
+          console.log('error importing my-module.js:', err);
+        });
+    }
   </script>
   ```
 
