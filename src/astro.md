@@ -1334,7 +1334,7 @@ export const getStaticPaths = (async ({paginate}) => {
     const pages = teams.map((team) => (
         { params: { slug: team.slug } }
     ));
-    return paginate(pages, { pageSize: 4 });
+    return paginate(pages, { pageSize: 8 });
 }) satisfies GetStaticPaths;
 
 const { page } = Astro.props as Props;
@@ -1790,6 +1790,8 @@ Alpine CAN call functions defined in these ways:
 
   This WILL make the `ns.demo` function available to Alpine
   and can be called with `ns.demo()`.
+  It will also eliminate warnings about duplicate function definitions
+  when the component that include the `script` tag is used multiple times.
 
   ```html
   <script src="./my-script.js"></script>
