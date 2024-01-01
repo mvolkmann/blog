@@ -1617,6 +1617,15 @@ can be used in Astro components to add interactivity.
 This is an alternative to implementing interactive components
 using another framework such as React, Svelte, or Vue.
 
+However, Astro components are always
+rendered at build time or on the server (SSR).
+It is not possible for runtime changes to their props
+to trigger them to re-render.
+We can register event listeners that either directly update the DOM
+or update Alpine `x-data` objects.
+Directly updating the DOM is considerably more tedious and error prone
+than implementing components in a framework like Svelte.
+
 #### Defining Functions
 
 Often Astro components that use Alpine need to call custom JavaScript functions.
