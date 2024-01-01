@@ -1734,12 +1734,15 @@ Alpine CAN call functions defined in these ways:
   consider attaching one object to the global object
   that holds all the functions.
 
-  For example, this WILL make the `demo` function available to Alpine.
+  For example, this WILL make the `ns.demo` function available to Alpine
+  and can be called with `ns.demo()`.
 
   ```html
   <script is:inline>
-    globalThis.demo = () => {
-      console.log('in demo');
+    globalThis.ns = {
+      demo() {
+        console.log('in demo');
+      }
     };
   </script>
   ```
@@ -1759,7 +1762,7 @@ Alpine CAN call functions defined in these ways:
   This WILL make the `demo` function available to Alpine.
 
   ```html
-  <script defer>
+  <script is:inline>
     if (typeof demo === 'undefined') {
       import('/src/my-module.js')
         .then(module => {
@@ -1770,6 +1773,26 @@ Alpine CAN call functions defined in these ways:
         });
     }
   </script>
+  ```
+
+- `<script src="{path}">`
+
+  With this approach, functions are defined in a separate source file.
+  For example, here is the file `src/components/my-script.js`.
+
+  ```js
+  globalThis.ns = {
+    demo() {
+      console.log('in demo');
+    }
+  };
+  ```
+
+  This WILL make the `ns.demo` function available to Alpine
+  and can be called with `ns.demo()`.
+
+  ```html
+  <script src="./my-script.js"></script>
   ```
 
 From the Astro docs at {% aTargetBlank
