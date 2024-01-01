@@ -1622,7 +1622,7 @@ rendered at build time or on the server (SSR).
 It is not possible for runtime changes to their props
 to trigger them to re-render.
 We can register event listeners that either directly update the DOM
-or update Alpine `x-data` objects.
+or update Alpine `x-data` objects (preferred).
 Directly updating the DOM is considerably more tedious and error prone
 than implementing components in a framework like Svelte.
 
