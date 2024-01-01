@@ -1192,66 +1192,6 @@ will trigger a new build and deployment of the app.
 If content collection documents were added, modified, or deleted,
 this will result in changes to the deployed static pages.
 
-### Pagination
-
-Astro provides help for implementing pagination of content collections.
-For details, see {% aTargetBlank
-"https://docs.astro.build/en/core-concepts/routing/#pagination",
-"Routing - Pagination" %}.
-
-The project {% aTargetBlank
-"https://github.com/mvolkmann/astro-examples/tree/main/content-collections",
-"content-collections" %} provides a good example.
-The file `src/pages/[...page].astro`, shown below, defines the pages for
-the URLs "/" (first page) and "/{page-number}" (all pages after the first).
-The URL "/all" navigates to the page that shows all the teams.
-
-```js
----
-import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
-import {getCollection, getEntry, type CollectionEntry} from 'astro:content';
-import TeamSmall from '../components/TeamSmall.astro';
-import Layout from '../layouts/Layout.astro';
-import '../styles/global.css';
-
-type Props = InferGetStaticPropsType<typeof getStaticPaths>;
-
-export const getStaticPaths = (async ({paginate}) => {
-    const teams: CollectionEntry<'nfl'>[] = await getCollection('nfl');
-    const pages = teams.map((team) => (
-        { params: { slug: team.slug } }
-    ));
-    return paginate(pages, { pageSize: 4 });
-}) satisfies GetStaticPaths;
-
-const { page } = Astro.props as Props;
-const { currentPage, data, lastPage, url } = page;
-const nextUrl = url.next;
-const prevUrl = url.prev;
-
-// Get entries to render on the current page.
-const promises = data.map(async (obj) => getEntry('nfl', obj.params.slug));
-const entries = await Promise.all(promises);
----
-
-<Layout>
-  <main class="bg-black h-full min-h-screen p-8">
-    <h1>Page {currentPage} of {lastPage}</h1>
-    <p>The teams appear alphabetically by their city.</p>
-    <nav>
-      <a href="/">First</a>
-      <a class={prevUrl ? '' : 'disabled'} href={prevUrl}>Previous</a>
-      <a class={nextUrl ? '' : 'disabled'} href={nextUrl}>Next</a>
-      <a href={`/${lastPage}`}>Last</a>
-      <a href="/all">All</a>
-    </nav>
-    <section class="gap-4 grid grid-cols-4">
-      {entries.map(entry => <TeamSmall team={entry} />)}
-    </section>
-  </main>
-</Layout>
-```
-
 ### Zod
 
 Earlier we saw how the {% aTargetBlank "https://zod.dev", "Zod" %} library
@@ -1260,24 +1200,24 @@ Highlights of the Zod library are presented here.
 
 Zod supports the following primitive types that are used with `z.{type}()`:
 
-- bigint, boolean, date, number, string, symbol
-- null, undefined, void, never
-- any, unknown
+- `bigint`, `boolean`, `date`, `number`, `string`, `symbol`
+- `null`, `undefined`, `void`, `never`
+- `any`, `unknown`
 
 Many validation methods can be applied to the `string` type.
 Highlights include the following:
 
-.datetime()
-.email()
-.emoji()
-.endsWith(string)
-.includes(string)
-.length(number)
-.max(number)
-.min(number)
-.regex(regex)
-.startsWith(string)
-.url()
+- `.datetime()`
+- `.email()`
+- `.emoji()`
+- `.endsWith(string)`
+- `.includes(string)`
+- `.length(number)`
+- `.max(number)`
+- `.min(number)`
+- `.regex(regex)`
+- `.startsWith(string)`
+- `.url()`
 
 For example, the type `z.string().min(3).max(10).endsWith("X")`
 matches string values with a length of at least 3, not more than 10,
@@ -1286,15 +1226,15 @@ and ending with "X".
 Many validation methods can be applied to the `number` type.
 Highlights include the following:
 
-.int() // not floating point
-.gt(number)
-.gte(number) // alias .min(number)
-.lt(number)
-.lte(number); // alias .max(number)
-.positive() // > 0
-.nonnegative() // >= 0
-.negative() // < 0
-.nonpositive() // <= 0
+- `.int()` - not floating point
+- `.gt(number)`
+- `.gte(number)` - alias .min(number)
+- `.lt(number)`
+- `.lte(number);` - alias .max(number)
+- `.positive()` - greater than 0
+- `.nonnegative()` - greater than or equal to 0
+- `.negative()` - less than 0
+- `.nonpositive()` - less than or equal to 0
 
 All validation methods take an optional final argument that
 specifies the error message to display when the validation fails.
@@ -1361,6 +1301,69 @@ Then instead of rendering `<Content />`, render `<div set:html={html} />`.
 
 If the styling is less that desirable, consider applying the `prose` CSS class
 from the @tailwindcss/typography plugin.
+
+### Pagination
+
+Astro provides help for implementing pagination of content collections.
+For details, see {% aTargetBlank
+"https://docs.astro.build/en/core-concepts/routing/#pagination",
+"Routing - Pagination" %}.
+
+The project {% aTargetBlank
+"https://github.com/mvolkmann/astro-examples/tree/main/content-collections",
+"content-collections" %} provides a good example.
+The file `src/pages/[...page].astro`, shown below, defines the pages for
+the URLs "/" (first page) and "/{page-number}" (all pages after the first).
+The URL "/all" navigates to the page that shows all the teams.
+
+<img alt="Astro Pagination" style="width: 100%"
+  src="/blog/assets/astro-pagination.png?v={{pkg.version}}">
+
+```js
+---
+import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
+import {getCollection, getEntry, type CollectionEntry} from 'astro:content';
+import TeamSmall from '../components/TeamSmall.astro';
+import Layout from '../layouts/Layout.astro';
+import '../styles/global.css';
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+export const getStaticPaths = (async ({paginate}) => {
+    const teams: CollectionEntry<'nfl'>[] = await getCollection('nfl');
+    const pages = teams.map((team) => (
+        { params: { slug: team.slug } }
+    ));
+    return paginate(pages, { pageSize: 4 });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props as Props;
+const { currentPage, data, lastPage, url } = page;
+const nextUrl = url.next;
+const prevUrl = url.prev;
+
+// Get entries to render on the current page.
+const promises = data.map(async (obj) => getEntry('nfl', obj.params.slug));
+const entries = await Promise.all(promises);
+---
+
+<Layout>
+  <main class="bg-black h-full min-h-screen p-8">
+    <h1>Page {currentPage} of {lastPage}</h1>
+    <p>The teams appear alphabetically by their city.</p>
+    <nav>
+      <a href="/">First</a>
+      <a class={prevUrl ? '' : 'disabled'} href={prevUrl}>Previous</a>
+      <a class={nextUrl ? '' : 'disabled'} href={nextUrl}>Next</a>
+      <a href={`/${lastPage}`}>Last</a>
+      <a href="/all">All</a>
+    </nav>
+    <section class="gap-4 grid grid-cols-4">
+      {entries.map(entry => <TeamSmall team={entry} />)}
+    </section>
+  </main>
+</Layout>
+```
 
 ### Incremental Content Caching
 
