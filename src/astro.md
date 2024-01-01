@@ -303,18 +303,21 @@ If you use VS Code as your editor, consider installing these extensions:
   When entering Tailwind class names for colors,
   it provides color preview swatches.
 
-- {% aTargetBlank "https://github.com/withastro/prettier-plugin-astro",
-  "prettier-plugin-astro" %} from withastro
+- {% aTargetBlank "https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode",
+  "Prettier - Code Formatter" %} from prettier.io
 
-  This adds support for formatting .astro files.
+  This formats code using {% aTargetBlank "https://prettier.io", "Prettier" %}.
 
 To configure code formatting, open any `.astro` file,
 open the Command Palette, and enter "Format Document".
 It will prompt for configuring this and automatically do so.
 
+## Prettier
+
 The steps to configure an Astro project to use Prettier are:
 
 - Enter `npm install -D prettier-plugin-astro`
+
 - Create the file `.prettierrc` at the root of the project.
 
   Some suggested options are shown here.
