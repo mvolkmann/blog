@@ -1619,12 +1619,18 @@ using another framework such as React, Svelte, or Vue.
 
 However, Astro components are always
 rendered at build time or on the server (SSR).
-It is not possible for runtime changes to their props
-to trigger them to re-render.
-We can register event listeners that either directly update the DOM
-or update Alpine `x-data` objects (preferred).
-Directly updating the DOM is considerably more tedious and error prone
+Unlike with frameworks like React and Svelte, it is not possible
+for runtime changes to their props to trigger them to re-render.
+
+One alternative is to register event listeners that directly update the DOM.
+This is considerably more tedious and error prone
 than implementing components in a framework like Svelte.
+
+A better alternative is to update the Alpine `x-data` objects
+that supply data to the components that need to update.
+For an example of this approach, see {% aTargetBlank
+"https://github.com/mvolkmann/astro-examples/tree/main/alpine-demo",
+"alpine-demo" %}
 
 #### Defining Functions
 
