@@ -355,6 +355,10 @@ It does however mean that if you forget to use the `x-data` directive,
 but use other Alpine directives, they will be ignored.
 
 Another way to declare state is with the `Alpine.store` function.
+Alpine stores support sharing data across components that
+are in separate branches of the DOM hierarchy.
+This differs from using `x-data` where the data is
+only available in Alpine directives on descendant elements.
 
 The following code prompts for an image query
 and displays an image from unsplash.
@@ -1350,6 +1354,11 @@ the root DOM element of the current component which is
 the nearest ancestor element on which the `x-data` directive is applied.
 
 ### $store
+
+Alpine stores support sharing data across components that
+are in separate branches of the DOM hierarchy.
+This differs from using `x-data` where the data is
+only available in Alpine directives on descendant elements.
 
 To create a named, global store, use JavaScript code like the following:
 
