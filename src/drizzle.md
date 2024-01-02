@@ -55,10 +55,13 @@ The key features of Drizzle include:
   - {% aTargetBlank "https://supabase.com/docs/guides/functions", "Supabase functions" %}
   - {% aTargetBlank "https://vercel.com/docs/functions/serverless-functions", "Vercel functions" %}
 
-## Postgres Example
-
 Drizzle database table schemas are defined entirely in TypeScript.
 These are used to create/migrate tables AND provided type checking in code.
+
+## Postgres Example
+
+Here are the steps to create a Postgres database
+and use Drizzle to interact with it.
 
 - Install PostgreSQL.
 
@@ -69,9 +72,6 @@ These are used to create/migrate tables AND provided type checking in code.
 
 - Start the database server by entering `pg_ctl -D /usr/local/pgsql/data start`
 
-- Create a database by entering `createdb {db-name}`.
-  For this example, the database name is "drizzle-demo".
-
 - Install Node or Bun.
 
 - Create a Node or Bun project.
@@ -79,24 +79,28 @@ These are used to create/migrate tables AND provided type checking in code.
   - Create a directory for the project and cd to it.
   - Enter `npm init` or `bun init`
 
+- Create a database by entering `createdb {db-name}`.
+  For this example, the database name is "drizzle-demo".
+
+- Create a `src` directory.
+
+- Rename the `index.*` file to `index.mjs` and move it to the `src` directory.
+
 - Enter `npm install drizzle-orm`  
   or `bun add drizzle-orm`
 - Enter `npm install pg`  
   or `bun add pg`
-- If on macOS and using Bun, enter `bun add @esbuild/darwin-x64`
 - Enter `npm install -D drizzle-kit`  
   or `bun add -d drizzle-kit`
 - Add the following scripts in `package.json`:
 
   ```json
-  "build": "drizzle-kit build",
   "demo": "node src/index.mjs",
   "migrations:generate": "drizzle-kit generate:pg",
+  "migrations:pull": "drizzle-kit introspect:pg",
   "migrations:push": "drizzle-kit push:pg",
   "migrations:drop": "drizzle-kit drop --config=drizzle.config.ts",
-  "start": "drizzle-kit start",
-  "studio": "drizzle-kit studio",
-  "test": "drizzle-kit test"
+  "studio": "drizzle-kit studio"
   ```
 
   When using Bun instead of Node, change the `demo` script to:
@@ -292,3 +296,11 @@ To view it:
 
 As of January 2024 this was still in beta.
 It was fine for browsing data, but had issues with updating and adding data.
+
+## SQLite Example
+
+Here are the steps to create a SQLite database
+and use Drizzle to interact with it.
+
+TODO: This appears to not work yet.
+See https://github.com/drizzle-team/drizzle-orm/issues/1293.
