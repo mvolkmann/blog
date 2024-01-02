@@ -270,8 +270,16 @@ in the `src/migrations` directory to delete and then deletes it.
 This is preferable to manually deleting the file
 because doing so can break subsequent `drizzle-kit` commands.
 
-This does not undo changes made by the migration.
-TODO: How can you do that?
+WARNING: This does not undo changes made by the migration!
+
+Drizzle does not provide a mechanism for rolling back applied migrations.
+To do that, create a new migration that reverses the changes and apply it.
+
+To iterate on schema changes in a development environment
+without creating a new migration `.sql` file for the changes,
+skip the use of `npm run migrations:generate`
+and just use `npm run migrations:push`.
+This syncs your schema with the database schema directly.
 
 ## Drizzle Studio
 
