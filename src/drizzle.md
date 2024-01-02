@@ -58,6 +58,17 @@ The key features of Drizzle include:
 The schema is entirely defined in TypeScript.
 It is used to create/migrate tables AND provided type checking in code.
 
+- Install PostgreSQL.
+
+  In macOS this can be done using
+  the Homebrew command `brew install postgresql`.
+  If it has already been installed, it can be upgraded to the latest version
+  by entering `brew upgrade postgresql`.
+
+- Start the database server by entering `pg_ctl -D /usr/local/pgsql/data start`
+
+- Create a database by entering `createdb drizzle-demo`
+
 - Create a Node.js or Bun project.
 
   - Install Node or Bun.
@@ -65,6 +76,7 @@ It is used to create/migrate tables AND provided type checking in code.
   - Enter `npm init` or `bun init`
 
 - Enter `npm install drizzle-orm` or `bun add drizzle-orm`
+- Enter `npm install pg` or `bun add pg`
 - Enter `npm install postgres` or `bun add postgres`
 - If on macOS and using Bun, enter `bun add @esbuild/darwin-x64`
 - Enter `npm install -D drizzle-kit` or `bun add -d drizzle-kit`
@@ -106,6 +118,37 @@ It is used to create/migrate tables AND provided type checking in code.
   }));
   ```
 
+- Create the file `drizzle.config.ts` containing the following:
+
+  ```ts
+  import type {Config} from 'drizzle-kit';
+  import 'dotenv/config';
+
+  export default {
+    schema: "./src/lib/schema.ts",
+    out: "./src/migrations",
+    driver: "pg",
+    dbCredentials: {
+      connectionString: process.env.DATABASE_URL,
+      host: "localhost",
+      database: "drizzle-demo",
+    },
+  } satisfies Config;
+
+  ```
+
+- Generate the first migration by entering `npm run migrations:generate`.
+  This will create a `.sql` file in the `src/migrations` directory.
+
+- Create the tables described in the schema by entering
+  `npm run migrations:push`.
+  This will create the tables "dogs", "dogs_id_seq",
+  "owners", and "owners_id_seq".
+
 ## Drizzle Studio
 
 TODO: Document this.
+
+```
+
+```
