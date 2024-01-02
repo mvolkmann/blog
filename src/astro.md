@@ -1763,17 +1763,18 @@ Alpine CAN call functions defined in these ways:
 
   ```html
   <script is:inline>
-    if (typeof demo === 'undefined') {
-      import('/src/my-module.js')
-        .then(module => {
-          demo = module.demo;
-        })
-        .catch(err => {
-          console.log('error importing my-module.js:', err);
-        });
-    }
+    import('/src/my-module.js')
+      .then(module => {
+        demo = module.demo;
+      })
+      .catch(err => {
+        console.log('error importing my-module.js:', err);
+      });
   </script>
   ```
+
+  Regardless of the number of times a component containing this `script` tag
+  is used, the browser will only load the file `my-module.js` one time.
 
 - `<script src="{path}">`
 
@@ -1790,8 +1791,8 @@ Alpine CAN call functions defined in these ways:
 
   This WILL make the `ns.demo` function available to Alpine
   and can be called with `ns.demo()`.
-  It will also eliminate warnings about duplicate function definitions
-  when the component that include the `script` tag is used multiple times.
+  Regardless of the number of times a component containing this `script` tag
+  is used, the browser will only load the file `my-script.js` one time.
 
   ```html
   <script src="./my-script.js"></script>
@@ -1802,8 +1803,9 @@ From the Astro docs at {% aTargetBlank
 "is:inline" %}, "The `is:inline` directive is implied whenever
 any attribute other than `src` is used on a `<script>` or `<style>` tag."
 
-An issue with "inline" scripts is that no deduplication is performed on them.
-If an Astro component includes inline scripts,
+An issue with scripts that are "inline"
+is that no deduplication is performed on them.
+If an Astro component contains inline scripts,
 they will appear in the DOM once for every usage of the component.
 
 #### Alpine Example
