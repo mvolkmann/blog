@@ -95,6 +95,7 @@ These are used to create/migrate tables AND provided type checking in code.
   "migrations:push": "drizzle-kit push:pg",
   "migrations:drop": "drizzle-kit drop --config=drizzle.config.ts",
   "start": "drizzle-kit start",
+  "studio": "drizzle-kit studio",
   "test": "drizzle-kit test"
   ```
 
@@ -274,4 +275,12 @@ TODO: How can you do that?
 
 ## Drizzle Studio
 
-TODO: Document this.
+Drizzle Studio is a web-based database browser.
+To view it:
+
+1. Enter `npm run studio`  
+   or `bun run studio`
+1. Browse https://local.drizzle.studio
+
+As of January 2024 this was still in beta.
+It was fine for browsing data, but had issues with updating and adding data.
