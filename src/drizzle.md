@@ -145,6 +145,49 @@ It is used to create/migrate tables AND provided type checking in code.
   This will create the tables "dogs", "dogs_id_seq",
   "owners", and "owners_id_seq".
 
+- Perform CRUD operations on the database.
+
+  ```js
+  import {eq} from 'drizzle-orm';
+  import {drizzle} from 'drizzle-orm/postgres-js';
+  import postgres from 'postgres';
+  import * as schema from './lib/schema.mjs';
+
+  // Get a connection to the database.
+  const dbName = 'drizzle-demo';
+  const dbPrefix = 'postgres://postgres:adminadmin@0.0.0.0:5432';
+  const connectionString = dbPrefix + '/' + dbName;
+  const poolSize = 1;
+  const client = postgres(connectionString, {max: poolSize});
+  const db = drizzle(client, {schema});
+
+  // Get a reference to the dogs table.
+  const {dogs} = schema;
+
+  // Delete all records from the dogs table.
+  await db.delete(dogs);
+
+  // Insert new rows in the dogs table.
+  await db.insert(dogs).values({name: 'Comet', breed: 'Greyhound'});
+  await db.insert(dogs).values([
+    {name: 'Maisey', breed: 'Treeing Walker Coonhound'},
+    {name: 'Ramsay', breed: 'Native American Indian Dog'},
+    {name: 'Oscar', breed: 'German Shorthaired Pointer'}
+  ]);
+
+  // Modify a row in the dogs table.
+  await db.update(dogs).set({breed: 'Whippet'}).where(eq(dogs.name, 'Comet'));
+
+  // Delete a row from the dogs table.
+  await db.delete(dogs).where(eq(dogs.name, 'Maisey'));
+
+  // Query the dogs table.
+  const results = await db.select().from(dogs);
+  console.log(results);
+
+  process.exit(); // why needed?
+  ```
+
 ## Drizzle Studio
 
 TODO: Document this.
