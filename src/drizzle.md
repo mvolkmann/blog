@@ -10,6 +10,8 @@ layout: topic-layout.njk
   }
 </style>
 
+## Overview
+
 <img alt="Drizzle logo" style="border: 0; width: 20%"
   src="/blog/assets/drizzle-logo.png?v={{pkg.version}}">
 
@@ -29,13 +31,13 @@ This helps with performance and minimizes round trips to the server.
 
 The key features of Drizzle include:
 
-- lightweight
-- simplicity
-- performance
-- migrations
-- no code generation
+- lightweight (32K minified)
+- simple to use
+- good performance
+- support for schema migrations
+- no code generation required
 - zero dependencies
-- database support
+- supports many databases
 
   Supported databases include LiteFS, MySQL, Neon, PlanetScale, PostgreSQL,
   SQLite, Supabase, Turso, Vercel Postgres, Web SQLite, and Xata.
@@ -55,8 +57,8 @@ The key features of Drizzle include:
 
 ## Postgres Example
 
-The schema is entirely defined in TypeScript.
-It is used to create/migrate tables AND provided type checking in code.
+Drizzle database table schemas are defined entirely in TypeScript.
+These are used to create/migrate tables AND provided type checking in code.
 
 - Install PostgreSQL.
 
@@ -67,39 +69,39 @@ It is used to create/migrate tables AND provided type checking in code.
 
 - Start the database server by entering `pg_ctl -D /usr/local/pgsql/data start`
 
-- Create a database by entering `createdb drizzle-demo`
+- Create a database by entering `createdb {db-name}`.
+  For this example, the database name is "drizzle-demo".
 
-- Create a Node.js or Bun project.
+- Install Node or Bun.
 
-  - Install Node or Bun.
+- Create a Node or Bun project.
+
   - Create a directory for the project and cd to it.
   - Enter `npm init` or `bun init`
 
-- Enter `npm install drizzle-orm` or `bun add drizzle-orm`
-- Enter `npm install pg` or `bun add pg`
-- Enter `npm install postgres` or `bun add postgres`
+- Enter `npm install drizzle-orm`  
+  or `bun add drizzle-orm`
+- Enter `npm install pg`  
+  or `bun add pg`
 - If on macOS and using Bun, enter `bun add @esbuild/darwin-x64`
-- Enter `npm install -D drizzle-kit` or `bun add -d drizzle-kit`
-- Enter `npm install dotenv`.
+- Enter `npm install -D drizzle-kit`  
+  or `bun add -d drizzle-kit`
 - Add the following scripts in `package.json`:
 
   ```json
-    "build": "drizzle-kit build",
-    "migrations:generate": "drizzle-kit generate:pg",
-    "migrations:push": "drizzle-kit push:pg",
-    "migrations:drop": "drizzle-kit drop --config=drizzle.config.ts",
-    "start": "drizzle-kit start",
-    "test": "drizzle-kit test"
+  "build": "drizzle-kit build",
+  "migrations:generate": "drizzle-kit generate:pg",
+  "migrations:push": "drizzle-kit push:pg",
+  "migrations:drop": "drizzle-kit drop --config=drizzle.config.ts",
+  "start": "drizzle-kit start",
+  "test": "drizzle-kit test"
   ```
 
-- Create the file `src/lib/schema.ts` containing the following:
+- Create the file `src/lib/schema.mjs` containing the following:
 
   ```ts
   import {relations} from 'drizzle-orm';
   import {integer, pgTable, serial, text} from 'drizzle-orm/pg-core';
-
-  // To generate migrations for these, enter `bun run migrations:generate`.
-  // To push a migration into the database, enter `bun run migrations:push`.
 
   export const dogs = pgTable('dogs', {
     id: serial('id').primaryKey(),
@@ -113,28 +115,26 @@ It is used to create/migrate tables AND provided type checking in code.
     name: text('name').notNull()
   });
 
-  export const dogsConfig = relations(owners, ({many}) => ({
-    dogs: many(dogs)
+  export const dogsConfig = relations(owners, ({one}) => ({
+    dogs: one(dogs)
   }));
   ```
 
 - Create the file `drizzle.config.ts` containing the following:
 
   ```ts
-  import type {Config} from 'drizzle-kit';
-  import 'dotenv/config';
+  import type { Config } from "drizzle-kit";
+  import "dotenv/config";
 
   export default {
-    schema: "./src/lib/schema.ts",
+    schema: "./src/lib/schema.mjs",
     out: "./src/migrations",
     driver: "pg",
     dbCredentials: {
-      connectionString: process.env.DATABASE_URL,
       host: "localhost",
       database: "drizzle-demo",
     },
   } satisfies Config;
-
   ```
 
 - Generate the first migration by entering `npm run migrations:generate`.
@@ -145,7 +145,10 @@ It is used to create/migrate tables AND provided type checking in code.
   This will create the tables "dogs", "dogs_id_seq",
   "owners", and "owners_id_seq".
 
-- Perform CRUD operations on the database.
+- Perform CRUD operations on the database  
+  by creating the file `index.mjs` and  
+  entering `node src/index.mjs`  
+  or `bun run src/index.mjs`.
 
   ```js
   import {eq} from 'drizzle-orm';
@@ -161,7 +164,7 @@ It is used to create/migrate tables AND provided type checking in code.
   const client = postgres(connectionString, {max: poolSize});
   const db = drizzle(client, {schema});
 
-  // Get a reference to the dogs table.
+  // Get a reference to the tables.
   const {dogs, owners} = schema;
 
   // Delete all records from the tables.
@@ -221,7 +224,3 @@ It is used to create/migrate tables AND provided type checking in code.
 ## Drizzle Studio
 
 TODO: Document this.
-
-```
-
-```
