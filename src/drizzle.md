@@ -122,8 +122,17 @@ These are used to create/migrate tables AND provided type checking in code.
     name: text('name').notNull()
   });
 
-  export const dogsConfig = relations(owners, ({one}) => ({
-    dogs: one(dogs)
+  // Drizzle Studio requires relations to be specified in both directions.
+  // In this case that is owners to dogs and dogs to owners.
+  export const ownersRelations = relations(owners, ({many}) => ({
+    dogs: many(dogs)
+  }));
+
+  export const dogsRelations = relations(dogs, ({one}) => ({
+    owner: one(owners, {
+      fields: [dogs.ownerId],
+      references: [owners.id]
+    })
   }));
   ```
 
@@ -131,7 +140,6 @@ These are used to create/migrate tables AND provided type checking in code.
 
   ```ts
   import type { Config } from "drizzle-kit";
-  import "dotenv/config";
 
   export default {
     schema: "./src/lib/schema.mjs",
@@ -262,6 +270,7 @@ This is preferable to manually deleting the file
 because doing so can break subsequent `drizzle-kit` commands.
 
 This does not undo changes made by the migration.
+TODO: How can you do that?
 
 ## Drizzle Studio
 
