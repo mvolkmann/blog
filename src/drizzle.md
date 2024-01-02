@@ -90,11 +90,18 @@ These are used to create/migrate tables AND provided type checking in code.
 
   ```json
   "build": "drizzle-kit build",
+  "demo": "node src/index.mjs",
   "migrations:generate": "drizzle-kit generate:pg",
   "migrations:push": "drizzle-kit push:pg",
   "migrations:drop": "drizzle-kit drop --config=drizzle.config.ts",
   "start": "drizzle-kit start",
   "test": "drizzle-kit test"
+  ```
+
+  When using Bun instead of Node, change the `demo` script to:
+
+  ```json
+  "demo": "bun run src/index.mjs",
   ```
 
 - Create the file `src/lib/schema.mjs` containing the following:
@@ -224,6 +231,20 @@ These are used to create/migrate tables AND provided type checking in code.
   process.exit(); // Why needed?
   ```
 
+## Introspecting Schema
+
+A TypeScript source file describing the schema of
+all the tables in an existing database can be generated
+by adding the following script in `package.json`.
+
+```json
+"introspect": "drizzle-kit introspect:pg",
+```
+
+To execute this script, enter `node run introspect`  
+or `bun run introspect`.
+This will create the file `src/migrations/schema.ts`.
+
 ## Schema Changes
 
 To modify the schema for any of the tables:
@@ -232,6 +253,15 @@ To modify the schema for any of the tables:
 1. Enter `npm run migrations:generate` to generate a new `.sql` file
    in `src/migrations` directory.
 1. Enter `npm run migrations:push` to apply the schema changes to the database.
+
+## Dropping Migrations
+
+The `drizzle-kit drop` command prompts for a `.sql` file
+in the `src/migrations` directory to delete and then deletes it.
+This is preferable to manually deleting the file
+because doing so can break subsequent `drizzle-kit` commands.
+
+This does not undo changes made by the migration.
 
 ## Drizzle Studio
 
