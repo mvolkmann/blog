@@ -137,11 +137,14 @@ These are used to create/migrate tables AND provided type checking in code.
   } satisfies Config;
   ```
 
-- Generate the first migration by entering `npm run migrations:generate`.
+- Generate the first migration by  
+  entering `npm run migrations:generate`  
+  or `bun run migrations:generate`.  
   This will create a `.sql` file in the `src/migrations` directory.
 
-- Create the tables described in the schema by entering
-  `npm run migrations:push`.
+- Create the tables described in the schema by  
+  entering `npm run migrations:push`  
+  or `bun run migrations:push`.  
   This will create the tables "dogs", "dogs_id_seq",
   "owners", and "owners_id_seq".
 
@@ -220,6 +223,15 @@ These are used to create/migrate tables AND provided type checking in code.
 
   process.exit(); // Why needed?
   ```
+
+## Schema Changes
+
+To modify the schema for any of the tables:
+
+1. Modify schemas defined in `src/lib/schemas.mjs`.
+1. Enter `npm run migrations:generate` to generate a new `.sql` file
+   in `src/migrations` directory.
+1. Enter `npm run migrations:push` to apply the schema changes to the database.
 
 ## Drizzle Studio
 
