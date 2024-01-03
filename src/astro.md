@@ -584,8 +584,11 @@ Astro provides the following components:
 
 - `<Code code={codeString} lang="{lang}" />`
 
-  This renders source code with syntax highlighting.
-  It takes the optional props `theme`, `inline`, and `wrap`.
+  This renders source code with syntax highlighting provided by
+  {% aTargetBlank "https://github.com/shikijs/shiki#", "Shiki " %}.
+  Shiki "generates HTML that looks exactly like your code in VS Code".
+
+  This component takes the optional props `theme`, `inline`, and `wrap`.
 
   Import this component with:
 
@@ -614,7 +617,12 @@ Astro provides the following components:
   This renders the content of a content collection entry.
   See the [Content Collections](#content-collections) section.
 
-- `<Debug />`
+- `<Debug name={value} />`
+
+  This renders a red bar with white text that
+  displays "DEBUG" followed by the given name,
+  followed by a black bar with white text that displays the given value.
+  It is alternative to `console.log` that seems worse.
 
 - `<Fragment set:html={htmlString} />`
 
@@ -630,7 +638,8 @@ Astro provides the following components:
 
 - `<Prism />`
 
-  This is similar to the `Code` component, but uses the PrismJS library.
+  This is an alternative to the `Code` component that the uses the
+  {% aTargetBlank "https://prismjs.com", "Prism" %} library.
   It must be installed with `npm install @astrojs/prism`.
 
   Download a theme CSS file from {% aTargetBlank
