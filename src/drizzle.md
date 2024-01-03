@@ -109,8 +109,8 @@ To install pg, enter `npm install pg`.
 - Create a directory for the project and cd to it.
 - Enter `npm init` or `bun init`
 - Create a `src` directory.
-- Rename the `index.*` file to `index.mjs`
-- Move `index.mjs` to the `src` directory.
+- If using Node, rename the `index.js` file to `index.mjs`
+- Move `index.mjs` (Node) or `index.ts` (Bun) to the `src` directory.
 
 ### Install Drizzle and a Database Client
 
@@ -139,12 +139,13 @@ Add the following in `package.json`:
 When using Bun instead of Node, change the `demo` script to:
 
 ```json
-"demo": "bun run src/index.mjs",
+"demo": "bun run src/index.ts",
 ```
 
 ### Describe Tables
 
-Create the file `src/schema.mjs` containing the following:
+Create the file `src/schema.mjs` (Node) or `src/schema.ts` (Bun)
+containing the following:
 
 ```ts
 import {relations} from 'drizzle-orm';
@@ -194,6 +195,8 @@ Create the file `drizzle.config.ts` containing the following:
   } satisfies Config;
 ```
 
+When using Bun instead of Node, change the `schema` value to `./src/schema.ts`.
+
 ### Generate Initial Migration
 
 Enter `npm run migrations:generate`  
@@ -207,10 +210,33 @@ or `bun run migrations:push`.
 This will create the tables
 "dogs", "dogs_id_seq", "owners", and "owners_id_seq".
 
+### Database Connection
+
+Create the file `src/db.mjs` (Node) or `src/db.ts` (Bun)
+containing the following.
+This creates a database connection and can be imported into
+any source file that needs to access the database.
+
+```ts
+import {drizzle} from 'drizzle-orm/postgres-js';
+import postgres from 'postgres';
+import * as schema from './schema.mjs';
+
+const dbName = 'drizzle-demo';
+const dbPrefix = 'postgres://postgres:adminadmin@0.0.0.0:5432';
+const connectionString = dbPrefix + '/' + dbName;
+const poolSize = 1;
+const client = postgres(connectionString, {max: poolSize});
+
+export const db = drizzle(client, {schema});
+```
+
+When using Bun instead of Node, change the schema import path to `./schema.ts`.
+
 ### Perform CRUD Operations
 
-Change the contents of `src/index.mjs` to the following
-and run it by entering `npm run demo`.
+Change the contents of `src/index.mjs` (Node) or `src/index.ts` (Bun)
+to the following and run it by entering `npm run demo`.
 
 ```js
 import {eq} from 'drizzle-orm';
