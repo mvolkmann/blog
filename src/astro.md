@@ -2895,9 +2895,16 @@ export async function GET() {
 }
 ```
 
-To demonstrate defining endpoints that support CRUD operations
-we will see code that performs these on a collection of todo objects.
-Each object has the properties `id`, `text`, and `completed`.
+For better type checking and intellisense in editors like VS Code,
+define endpoint functions as follows:
+
+```ts
+import type {APIRoute} from 'astro';
+
+export const GET: APIRoute = () => {
+  ...
+};
+```
 
 API endpoints are defined by the functions
 `GET`, `POST`, `PUT`, `PATCH`, and `DELETE`.
@@ -2918,6 +2925,10 @@ that contains the following properties:
 - `redirect`
 - `site`
 - `url`
+
+To demonstrate defining endpoints that support CRUD operations
+we will see code that performs these on a collection of todo objects.
+Each object has the properties `id`, `text`, and `completed`.
 
 We need to share the collection of todos between two source files.
 One way to accomplish this is to create a source file
