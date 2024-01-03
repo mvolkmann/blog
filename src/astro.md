@@ -2353,7 +2353,9 @@ If a value is `false`, `undefined`, or `null`, it is skipped.
 The `define:vars` directive turns front matter variables into CSS variables.
 For example, here is an Astro component defined in `src/components/Text.astro`:
 
-```text
+{% raw %}
+
+```md
 ---
 const { bg, fg } = Astro.props;
 ---
@@ -2372,7 +2374,12 @@ const { bg, fg } = Astro.props;
 </style>
 ```
 
+{% endraw %}
+
 This component can be used as follows:
+
+<img alt="Astro define:vars" style="border: none; width: 20%"
+  src="/blog/assets/astro-define-vars.png?v={{pkg.version}}" />
 
 ```html
 ---
