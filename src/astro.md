@@ -2279,7 +2279,7 @@ If a value is `false`, `undefined`, or `null`, it is skipped.
 The `define:vars` directive turns front matter variables into CSS variables.
 For example, here is an Astro component defined in `src/components/Text.astro`:
 
-```js
+```text
 ---
 const { bg, fg } = Astro.props;
 ---
