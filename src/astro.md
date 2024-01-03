@@ -1337,7 +1337,7 @@ will trigger a new build and deployment of the app.
 If content collection documents were added, modified, or deleted,
 this will result in changes to the deployed static pages.
 
-### References to Other Documents
+### References
 
 A content collection document can contain properties that refer to
 one or more other documents in the same or a different collection.
@@ -1388,7 +1388,7 @@ const relatedEntries = await getEntries(relatedTeams || []);
 </ul>
 ```
 
-### Zod
+### Zod Validation
 
 Earlier we saw how the {% aTargetBlank "https://zod.dev", "Zod" %} library
 is used to define the schema for a collection.
