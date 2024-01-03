@@ -582,13 +582,68 @@ Note how content is included.
 
 Astro provides the following components:
 
-- `<Code />`
+- `<Code code={codeString} lang="{lang}" />`
+
+  This renders source code with syntax highlighting.
+  It takes the optional props `theme`, `inline`, and `wrap`.
+
+  Import this component with:
+
+  ```ts
+  import {Code} from 'astro:components';
+  ```
+
+  Render this component with:
+
+  ```html
+  <code code="{codeString.trim()}" lang="js" />
+  ```
+
+  Add styling with:
+
+  ```html
+  <style is:global>
+    .astro-code {
+      padding: 1rem;
+    }
+  </style>
+  ```
+
 - `<Content />`
 - `<Debug />`
-- `<Fragment />`
+- `<Fragment set:html={htmlString} />`
+
+  This renders multiple HTML elements without a wrapping element.
+  This component does not need to be imported.
+
 - `<Image />`
 - `<Picture />`
 - `<Prism />`
+
+  This is similar to the `Code` component, but uses the PrismJS library.
+  It must be installed with `npm install @astrojs/prism`.
+
+  Download a theme CSS file from {% aTargetBlank
+  "https://github.com/PrismJS/prism-themes/tree/master/themes",
+  "PrismJS/prism-themes" %} and import it.
+  For example:
+
+  ```html
+  import "../styles/prism-gruvbox-dark.css";
+  ```
+
+  Import this component with:
+
+  ```ts
+  import {Prism} from '@astrojs/prism';
+  ```
+
+  Render this component with:
+
+  ```html
+  <Prism code="{codeString.trim()}" lang="js" />
+  ```
+
 - `<ViewTransitions />`
 
   This enables the use of view transitions.
