@@ -14,6 +14,8 @@ layout: topic-layout.njk
 
 <img alt="Drizzle logo" style="border: 0; width: 20%"
   src="/blog/assets/drizzle-logo.png?v={{pkg.version}}">
+<img alt="Drizzle mascot" style="border: 0; width: 20%"
+  src="/blog/assets/drizzle-mascot.png?v={{pkg.version}}">
 
 {% aTargetBlank "https://orm.drizzle.team", "Drizzle" %} is a TypeScript-based
 Object Relational Mapper (ORM) library that is free and open-source.
