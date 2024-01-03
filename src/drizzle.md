@@ -91,7 +91,18 @@ Two npm packages that can be used to connect to the database are
 {% aTargetBlank "https://github.com/brianc/node-postgres", "pg" %}
 (aka node-postgres) and {% aTargetBlank
 "https://github.com/porsager/postgres#connection", "postgres" %}.
-I could not get "pg" to work, so this project uses "postgres".
+
+When I tried to call Drizzle methods with a database connection
+that was created with "pg", I got the error {% aTargetBlank
+"https://github.com/brianc/node-postgres/issues/3120",
+"TypeError: client.unsafe is not a function" %}.
+But they work with the "postgres" package.
+
+When I tried to run drizzle-kit commands using the dialog "postgres",
+I got "error: unknown command '\*:postgres'".
+But they work with the "pg" package.
+
+What a mess! It seems I need to install and use both packages.
 
 ### Create Database
 
@@ -304,6 +315,9 @@ process.exit(); // Why needed?
 When there is an existing database, a Drizzle schema file that describes
 all the tables in it can be generated with the command `drizzle-kit introspect`.
 The path to the generated file is `src/migrations/schema.ts`.
+
+The generated code does not include definitions of relations between tables.
+Unfortunately those need to be added manually.
 
 This command is often run from a script in `package.json` that is defined as:
 
