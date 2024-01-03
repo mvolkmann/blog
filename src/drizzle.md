@@ -71,6 +71,14 @@ The current documentation is better for some databases than others.
 It can be difficult to determine how to correctly configure Drizzle
 to work with some databases that it claims to support.
 
+Drizzle would benefit greatly from having a GitHub repo of example projects,
+one for each supported database/driver combination, that all show the
+same basic example of configuring access to a one-to-many relationship.
+This would help developers get started with using Drizzle.
+
+It would be great if there was a good that could modify an existing project
+to switch from one database/driver combination to another.
+
 ## Postgres Example
 
 Here are the steps to create a Postgres database
