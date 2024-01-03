@@ -85,11 +85,12 @@ to switch from one database/driver combination to another.
 
 ## Example Project
 
-All the example code in this page assumes the use of a PostgreSQL database
-using the npm package "pg" which can be found in the {% aTargetBlank
-"node-postgres", "https://github.com/brianc/node-postgres" %} GitHub repository.
+All the example code in this page assumes the use of a PostgreSQL database.
 
-To install pg, enter `npm install pg`.
+Two npm packages that can be used to connect to the database are
+{% aTargetRef "pg", "https://github.com/brianc/node-postgres" %} and
+{% aTargetBlank "https://github.com/porsager/postgres#connection", "postgres" %}.
+I could not get "pg" to work, so this uses "postgres".
 
 ### Create Database
 
@@ -118,10 +119,10 @@ To install pg, enter `npm install pg`.
 
 - Enter `npm install drizzle-orm`  
   or `bun add drizzle-orm`
-- Enter `npm install -D drizzle-kit @types/pg`  
-  or `bun add -d drizzle-kit @types/pg`
-- Enter `npm install pg`  
-  or `bun add pg`
+- Enter `npm install -D drizzle-kit`  
+  or `bun add -d drizzle-kit`
+- Enter `npm install postgres`  
+  or `bun add postgres`
 
 ### Add NPM Scripts
 
@@ -189,7 +190,6 @@ import type { Config } from "drizzle-kit";
 export default {
   schema: "./src/schema.mjs",
   out: "./src/migrations",
-  driver: "pg",
   dbCredentials: {
     host: "localhost",
     database: "drizzle-demo",
@@ -221,14 +221,13 @@ any source file that needs to access the database.
 
 ```ts
 import {drizzle} from 'drizzle-orm/postgres-js';
-import pg from 'pg';
+import postgres from 'postgres';
 import * as schema from './schema.mjs';
 
 const dbName = 'drizzle-demo';
 const dbPrefix = 'postgres://postgres:adminadmin@0.0.0.0:5432';
 const connectionString = dbPrefix + '/' + dbName;
-const client = new pg.Client({connectionString});
-await client.connect();
+const client = postgres(connectionString);
 
 export const db = drizzle(client, {schema});
 ```
