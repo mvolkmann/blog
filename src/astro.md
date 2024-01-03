@@ -2615,6 +2615,10 @@ To specify a transition on a specific element
 add the `transition:animate="{transition-type}"` directive.
 For example, `<main transition:animate="slide">`.
 
+To transition certain elements on a page but not the whole page,
+add `transition:animate="none"` to the `html` element
+and `transition:animate="{transition-name}"` to specific elements.
+
 To customize the transition,
 pass a configuration object to the transition function.
 For example, `<main transition:animate={slide({ duration: '2s' })}>`.
