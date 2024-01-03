@@ -1337,6 +1337,57 @@ will trigger a new build and deployment of the app.
 If content collection documents were added, modified, or deleted,
 this will result in changes to the deployed static pages.
 
+### References to Other Documents
+
+A content collection document can contain properties that refer to
+one or more other documents in the same or a different collection.
+For example, a document describing one football team
+in a collection named "nfl" can refer to other teams
+with the following property defined in `src/content/config.ts`:
+
+```ts
+relatedTeams: z.array(reference('nfl')).optional();
+```
+
+Here is a document that includes this optional property:
+
+```md
+---
+city: Arizona
+name: Cardinals
+conference: NFC West
+logoUrl: https://static.www.nfl.com/image/private/f_auto/league/u9fltoslqdsyao8cpm0k
+headCoach: Jonathan Gannon
+established: 1920
+relatedIds: ['atlanta-falcons', 'baltimore-ravens', 'buffalo-bills']
+---
+```
+
+A component can access related documents with the {% aTargetBlank
+"https://docs.astro.build/en/reference/api-reference/#getentries",
+"getEntries" %} function.
+For example:
+
+```ts
+---
+import {getEntries, type CollectionEntry} from 'astro:content';
+
+interface Props {
+  team: CollectionEntry<'nfl'>;
+}
+
+const {team} = Astro.props;
+const {relatedTeams} = team.data;
+const relatedEntries = await getEntries(relatedTeams || []);
+---
+
+<ul>
+  {relatedEntries.map((entry) => (
+    <li>{entry.data.name}</li>
+  ))}
+</ul>
+```
+
 ### Zod
 
 Earlier we saw how the {% aTargetBlank "https://zod.dev", "Zod" %} library
