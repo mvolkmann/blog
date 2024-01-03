@@ -578,6 +578,22 @@ Note how content is included.
 </Border>
 ```
 
+## Builtin Components
+
+Astro provides the following components:
+
+- `<Code />`
+- `<Content />`
+- `<Debug />`
+- `<Fragment />`
+- `<Image />`
+- `<Picture />`
+- `<Prism />`
+- `<ViewTransitions />`
+
+  This enables the use of view transitions.
+  See the [View Transitions](#view-transitions) section.
+
 ## Shorthand Attributes
 
 Astro supports shorthand syntax for attributes like Svelte.
