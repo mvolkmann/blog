@@ -646,7 +646,7 @@ Astro provides the following components:
 - `<Picture />`
 
   This is an alternative to the `Image` component that displays
-  a responsive image selected from a list of formats and sizes.
+  a responsive image selected from possible formats and sizes.
 
   For example:
 
@@ -2275,6 +2275,39 @@ the keys must be class names and the values must be Boolean expressions
 that determine whether the class name should be included.
 If a value is array, it is flattened into the surrounding array.
 If a value is `false`, `undefined`, or `null`, it is skipped.
+
+The `define:vars` directive turns front matter variables into CSS variables.
+For example, here is an Astro component defined in `src/components/Text.astro`:
+
+```js
+---
+const { bg, fg } = Astro.props;
+---
+
+<div class="text">
+  <slot />
+</div>
+
+<style define:vars={{ bg, fg }}>
+  .text {
+    background: var(--bg, yellow);
+    color: var(--fg, black);
+    display: inline-block;
+    padding: 0.5rem;
+  }
+</style>
+```
+
+This component can be used as follows:
+
+```html
+---
+import Text from "../components/Text.astro";
+---
+
+<Text>First</Text>
+<Text fg="white" bg="blue">Second</Text>
+```
 
 Applying the `is:inline` directive to a `style` or `script` element
 has the following effects:
