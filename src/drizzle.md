@@ -88,9 +88,10 @@ to switch from one database/driver combination to another.
 All the example code in this page assumes the use of a PostgreSQL database.
 
 Two npm packages that can be used to connect to the database are
-{% aTargetRef "pg", "https://github.com/brianc/node-postgres" %} and
-{% aTargetBlank "https://github.com/porsager/postgres#connection", "postgres" %}.
-I could not get "pg" to work, so this uses "postgres".
+{% aTargetBlank "https://github.com/brianc/node-postgres", "pg" %}
+(aka node-postgres) and {% aTargetBlank
+"https://github.com/porsager/postgres#connection", "postgres" %}.
+I could not get "pg" to work, so this project uses "postgres".
 
 ### Create Database
 
