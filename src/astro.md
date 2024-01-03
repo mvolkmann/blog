@@ -1510,6 +1510,16 @@ const entries = await Promise.all(promises);
 </Layout>
 ```
 
+The code above uses the {% aTargetBlank
+"https://docs.astro.build/en/reference/api-reference/#getentry", "getEntry" %}
+function to retrieve a specific content collection entry.
+
+An entry can have a property whose value is
+an array of ids for related entries within the same collection.
+To retrieve those, pass the array to the {% aTargetBlank
+"https://docs.astro.build/en/reference/api-reference/#getentries",
+"getEntries" %} function.
+
 ### Incremental Content Caching
 
 Build times for projects that generate pages from large content collection
@@ -3297,8 +3307,6 @@ Summarize the steps to deploy an Astro project to Netlify and Vercel.
 
 See the commercial CloudCannon CMS (https://cloudcannon.com)
 which uses Astro content collection documents.
-
-Describe the getEntries function which is an alternative to the getEntry function.
 
 Study and document the built-in components described at
 https://docs.astro.build/en/reference/api-reference/#built-in-components.
