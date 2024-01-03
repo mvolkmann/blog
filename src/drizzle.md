@@ -20,52 +20,54 @@ Object Relational Mapper (ORM) library that is free and open-source.
 It competes with other popular ORMs such as
 {% aTargetBlank "https://www.prisma.io", "Prisma" %}.
 
-Drizzle was designed "to be a thin layer on top of SQL
+Drizzle is designed "to be a thin layer on top of SQL
 and introduce minimal runtime overhead".
 
-The methods supported by Drizzle are SQL-like
+Database table schemas are defined entirely in TypeScript.
+These are used to create/migrate tables AND provide type checking in code.
+
+## Pros
+
+The Drizzle methods for interacting with databases are SQL-like,
 so it doesn't feel like learning a new syntax.
 
 Queries created with the Drizzle Query API always result in one SQL query.
 This helps with performance and minimizes round trips to the server.
 
-The key features of Drizzle include:
+The Drizzle library is lightweight (32K minified).
 
-- lightweight (32K minified)
-- simple to use
-- good performance
-- support for schema migrations
-- no code generation required
-- zero dependencies
-- supports many databases
-- can generate TypeScript schema definitions from existing database tables
+Drizzle is easy to use.
 
-  Supported databases include LiteFS, MySQL, Neon, PlanetScale, PostgreSQL,
-  SQLite, Supabase, Turso, Vercel Postgres, Web SQLite, and Xata.
-  Notable exceptions include Microsoft SQL Server and MongoDB.
+Drizzle does not require any code generation.
 
-- edge support
+Drizzle has no dependencies.
 
-  This includes support for:
+Drizzle supports many databases. These include
+LiteFS, MySQL, Neon, PlanetScale, PostgreSQL,
+SQLite, Supabase, Turso, Vercel Postgres, Web SQLite, and Xata.
+Notable exceptions include Microsoft SQL Server and MongoDB.
 
-  - {% aTargetBlank "https://bun.sh", "Bun" %}
-  - {% aTargetBlank "https://developers.cloudflare.com/workers/", "Cloudflare Workers" %}
-  - {% aTargetBlank "https://deno.com/deploy", "Deno Deploy" %}
-  - {% aTargetBlank "https://www.electronjs.org", "Electron" %}
-  - {% aTargetBlank "https://fly.io", "Fly.io" %}
-  - {% aTargetBlank "https://supabase.com/docs/guides/functions", "Supabase functions" %}
-  - {% aTargetBlank "https://vercel.com/docs/functions/serverless-functions", "Vercel functions" %}
+Drizzle can generate TypeScript schema definitions
+from existing database tables.
 
-Drizzle database table schemas are defined entirely in TypeScript.
-These are used to create/migrate tables AND provided type checking in code.
+Drizzle support for schema migrations.
+
+Drizzle supports many edge platforms. These include:
+
+- {% aTargetBlank "https://bun.sh", "Bun" %}
+- {% aTargetBlank "https://developers.cloudflare.com/workers/", "Cloudflare Workers" %}
+- {% aTargetBlank "https://deno.com/deploy", "Deno Deploy" %}
+- {% aTargetBlank "https://www.electronjs.org", "Electron" %}
+- {% aTargetBlank "https://fly.io", "Fly.io" %}
+- {% aTargetBlank "https://supabase.com/docs/guides/functions", "Supabase functions" %}
+- {% aTargetBlank "https://vercel.com/docs/functions/serverless-functions", "Vercel functions" %}
 
 ## Cons
 
 While Drizzle supports many kinds of databases,
 switching the configuration and code that works with one type
 to work with another is fairly tedious.
-Unfortunately, there are significant differences in the
-configuration and code required for each.
+There are differences in the configuration and code required for each.
 
 The current documentation is better for some databases than others.
 It can be difficult to determine how to correctly configure Drizzle
@@ -79,10 +81,15 @@ This would help developers get started with using Drizzle.
 It would be great if there was a good that could modify an existing project
 to switch from one database/driver combination to another.
 
-## Postgres Example
+## Example Project
 
-Here are the steps to create a Postgres database
-and use Drizzle to interact with it.
+All the example code in this page assumes the use of a PostgreSQL database
+using the npm package "pg" which can be found in the {% aTargetBlank
+"node-postgres", "https://github.com/brianc/node-postgres" %} GitHub repository.
+
+To install pg, enter `npm install pg`.
+
+### Create Database
 
 - Install PostgreSQL.
 
@@ -93,82 +100,91 @@ and use Drizzle to interact with it.
 
 - Start the database server by entering `pg_ctl -D /usr/local/pgsql/data start`
 
-- Install Node or Bun.
-
-- Create a Node or Bun project.
-
-  - Create a directory for the project and cd to it.
-  - Enter `npm init` or `bun init`
-
 - Create a database by entering `createdb {db-name}`.
   For this example, the database name is "drizzle-demo".
 
-- Create a `src` directory.
+### Create Project
 
-- Rename the `index.*` file to `index.mjs` and move it to the `src` directory.
+- Install Node or Bun.
+- Create a directory for the project and cd to it.
+- Enter `npm init` or `bun init`
+- Create a `src` directory.
+- Rename the `index.*` file to `index.mjs`
+- Move `index.mjs` to the `src` directory.
+
+### Install Drizzle and a Database Client
 
 - Enter `npm install drizzle-orm`  
   or `bun add drizzle-orm`
-- Enter `npm install pg`  
-  or `bun add pg`
 - Enter `npm install -D drizzle-kit @types/pg`  
   or `bun add -d drizzle-kit @types/pg`
-- Add the following scripts in `package.json`:
+- Enter `npm install pg`  
+  or `bun add pg`
 
-  ```json
-  "demo": "node src/index.mjs",
-  "migrations:generate": "drizzle-kit generate:pg",
-  "migrations:pull": "drizzle-kit introspect:pg",
-  "migrations:push": "drizzle-kit push:pg",
-  "migrations:drop": "drizzle-kit drop --config=drizzle.config.ts",
-  "studio": "drizzle-kit studio"
-  ```
+### Add NPM Scripts
 
-  When using Bun instead of Node, change the `demo` script to:
+Add the following in `package.json`:
 
-  ```json
-  "demo": "bun run src/index.mjs",
-  ```
+```json
+  "scripts": {
+    "demo": "node src/index.mjs",
+    "migrations:generate": "drizzle-kit generate:pg",
+    "migrations:pull": "drizzle-kit introspect:pg",
+    "migrations:push": "drizzle-kit push:pg",
+    "migrations:drop": "drizzle-kit drop --config=drizzle.config.ts",
+    "studio": "drizzle-kit studio"
+  },
+```
 
-- Create the file `src/lib/schema.mjs` containing the following:
+When using Bun instead of Node, change the `demo` script to:
 
-  ```ts
-  import {relations} from 'drizzle-orm';
-  import {integer, pgTable, serial, text} from 'drizzle-orm/pg-core';
+```json
+"demo": "bun run src/index.mjs",
+```
 
-  export const dogs = pgTable('dogs', {
-    id: serial('id').primaryKey(),
-    name: text('name').notNull(),
-    breed: text('breed'),
-    ownerId: integer('owner_id')
-  });
+### Describe Tables
 
-  export const owners = pgTable('owners', {
-    id: serial('id').primaryKey(),
-    name: text('name').notNull()
-  });
+Create the file `src/schema.mjs` containing the following:
 
-  // Drizzle Studio requires relations to be specified in both directions.
-  // In this case that is owners to dogs and dogs to owners.
-  export const ownersRelations = relations(owners, ({many}) => ({
-    dogs: many(dogs)
-  }));
+```ts
+import {relations} from 'drizzle-orm';
+import {integer, pgTable, serial, text} from 'drizzle-orm/pg-core';
 
-  export const dogsRelations = relations(dogs, ({one}) => ({
-    owner: one(owners, {
-      fields: [dogs.ownerId],
-      references: [owners.id]
-    })
-  }));
-  ```
+export const dogs = pgTable('dogs', {
+  id: serial('id').primaryKey(),
+  name: text('name').notNull(),
+  breed: text('breed'),
+  ownerId: integer('owner_id')
+});
 
-- Create the file `drizzle.config.ts` containing the following:
+export const owners = pgTable('owners', {
+  id: serial('id').primaryKey(),
+  name: text('name').notNull()
+});
 
-  ```ts
+// Drizzle Studio requires relations to be specified in both directions.
+// In this case that is owners to dogs and dogs to owners.
+export const ownersRelations = relations(owners, ({many}) => ({
+  dogs: many(dogs)
+}));
+
+export const dogsRelations = relations(dogs, ({one}) => ({
+  owner: one(owners, {
+    fields: [dogs.ownerId],
+    references: [owners.id]
+  })
+}));
+```
+
+### Configure Drizzle
+
+Create the file `drizzle.config.ts` containing the following:
+
+```ts
   import type { Config } from "drizzle-kit";
 
   export default {
-    schema: "./src/lib/schema.mjs",
+    schema: "./src/schema.mjs",
     out: "./src/migrations",
     driver: "pg",
     dbCredentials: {
@@ -176,114 +192,104 @@ and use Drizzle to interact with it.
       database: "drizzle-demo",
     },
   } satisfies Config;
-  ```
-
-- Generate the first migration by  
-  entering `npm run migrations:generate`  
-  or `bun run migrations:generate`.  
-  This will create a `.sql` file in the `src/migrations` directory.
-
-- Create the tables described in the schema by  
-  entering `npm run migrations:push`  
-  or `bun run migrations:push`.  
-  This will create the tables "dogs", "dogs_id_seq",
-  "owners", and "owners_id_seq".
-
-- Perform CRUD operations on the database  
-  by creating the file `index.mjs` and  
-  entering `node src/index.mjs`  
-  or `bun run src/index.mjs`.
-
-  ```js
-  import {eq} from 'drizzle-orm';
-  import {drizzle} from 'drizzle-orm/postgres-js';
-  import postgres from 'postgres';
-  import * as schema from './lib/schema.mjs';
-
-  // Get a connection to the database.
-  const dbName = 'drizzle-demo';
-  const dbPrefix = 'postgres://postgres:adminadmin@0.0.0.0:5432';
-  const connectionString = dbPrefix + '/' + dbName;
-  const poolSize = 1;
-  const client = postgres(connectionString, {max: poolSize});
-  const db = drizzle(client, {schema});
-
-  // Get a reference to the tables.
-  const {dogs, owners} = schema;
-
-  // Delete all records from the tables.
-  await db.delete(dogs);
-  await db.delete(owners);
-
-  // Insert new rows in the owners table.
-  let results = await db
-    .insert(owners)
-    .values({name: 'Tami'})
-    .returning({id: owners.id});
-  const tamiId = results[0].id;
-
-  results = await db
-    .insert(owners)
-    .values({name: 'Amanda'})
-    .returning({id: owners.id});
-  const amandaId = results[0].id;
-
-  // Insert new rows in the dogs table.
-  await db
-    .insert(dogs)
-    .values({name: 'Comet', breed: 'Greyhound', ownerId: tamiId});
-  await db.insert(dogs).values([
-    {name: 'Maisey', breed: 'Treeing Walker Coonhound', ownerId: amandaId},
-    {name: 'Ramsay', breed: 'Native American Indian Dog'},
-    {name: 'Oscar', breed: 'German Shorthaired Pointer', ownerId: amandaId}
-  ]);
-
-  // Modify a row in the dogs table.
-  await db.update(dogs).set({breed: 'Whippet'}).where(eq(dogs.name, 'Comet'));
-
-  // Delete a row from the dogs table.
-  await db.delete(dogs).where(eq(dogs.name, 'Ramsay'));
-
-  // Get all dogs.
-  results = await db.select().from(dogs);
-  console.log('All Dogs');
-  for (const result of results) {
-    console.log('-', result.name);
-  }
-
-  // Get dogs owned by Amanda.
-  results = await db
-    .select()
-    .from(dogs)
-    .innerJoin(owners, eq(owners.id, dogs.ownerId))
-    .where(eq(owners.name, 'Amanda'));
-  console.log("\nAmanda's Dogs");
-  for (const result of results) {
-    console.log('-', result.dogs.name);
-  }
-
-  process.exit(); // Why needed?
-  ```
-
-## Introspecting Schema
-
-A TypeScript source file describing the schema of
-all the tables in an existing database can be generated
-by adding the following script in `package.json`.
-
-```json
-"introspect": "drizzle-kit introspect:pg",
 ```
 
-To execute this script, enter `node run introspect`  
-or `bun run introspect`.
-This will create the file `src/migrations/schema.ts`.
+### Generate Initial Migration
+
+Enter `npm run migrations:generate`  
+or `bun run migrations:generate`.  
+This will create a `.sql` file in the `src/migrations` directory.
+
+### Create Tables
+
+Enter `npm run migrations:push`  
+or `bun run migrations:push`.  
+This will create the tables
+"dogs", "dogs_id_seq", "owners", and "owners_id_seq".
+
+### Perform CRUD Operations
+
+Change the contents of `src/index.mjs` to the following
+and run it by entering `npm run demo`.
+
+```js
+import {eq} from 'drizzle-orm';
+import {dogs, owners} from './schema.mjs';
+import {db} from './db.mjs';
+
+// Delete all records from the tables.
+await db.delete(dogs);
+await db.delete(owners);
+
+// Insert new rows in the owners table.
+let results = await db
+  .insert(owners)
+  .values({name: 'Tami'})
+  .returning({id: owners.id});
+const tamiId = results[0].id;
+
+results = await db
+  .insert(owners)
+  .values({name: 'Amanda'})
+  .returning({id: owners.id});
+const amandaId = results[0].id;
+
+// Insert new rows in the dogs table.
+await db
+  .insert(dogs)
+  .values({name: 'Comet', breed: 'Greyhound', ownerId: tamiId});
+await db.insert(dogs).values([
+  {name: 'Maisey', breed: 'Treeing Walker Coonhound', ownerId: amandaId},
+  {name: 'Ramsay', breed: 'Native American Indian Dog'},
+  {name: 'Oscar', breed: 'German Shorthaired Pointer', ownerId: amandaId}
+]);
+
+// Modify a row in the dogs table.
+await db.update(dogs).set({breed: 'Whippet'}).where(eq(dogs.name, 'Comet'));
+
+// Delete a row from the dogs table.
+await db.delete(dogs).where(eq(dogs.name, 'Ramsay'));
+
+// Get all dogs.
+results = await db.select().from(dogs);
+console.log('All Dogs');
+for (const result of results) {
+  console.log('-', result.name);
+}
+
+// Get dogs owned by Amanda.
+results = await db
+  .select()
+  .from(dogs)
+  .innerJoin(owners, eq(owners.id, dogs.ownerId))
+  .where(eq(owners.name, 'Amanda'));
+console.log("\nAmanda's Dogs");
+for (const result of results) {
+  console.log('-', result.dogs.name);
+}
+
+process.exit(); // Why needed?
+```
+
+## Generating Drizzle Schema
+
+When there is an existing database, a Drizzle schema file that describes
+all the tables in it can be generated with the command `drizzle-kit introspect`.
+The path to the generated file is `src/migrations/schema.ts`.
+
+This command is often run from a script in `package.json` that is defined as:
+
+```json
+"migrations:pull": "drizzle-kit introspect:pg",
+```
+
+Enter `npm run migrations:pull` to run this.
 
 ## Schema Changes
 
 To modify the schema for any of the tables:
 
-1. Modify schemas defined in `src/lib/schemas.mjs`.
+1. Modify `src/lib/schemas.mjs`.
 1. Enter `npm run migrations:generate` to generate a new `.sql` file
    in `src/migrations` directory.
 1. Enter `npm run migrations:push` to apply the schema changes to the database.
@@ -317,11 +323,3 @@ To view it:
 
 As of January 2024 this was still in beta.
 It was fine for browsing data, but had issues with updating and adding data.
-
-## SQLite Example
-
-Here are the steps to create a SQLite database
-and use Drizzle to interact with it.
-
-TODO: This appears to not work yet.
-See https://github.com/drizzle-team/drizzle-orm/issues/1293.
