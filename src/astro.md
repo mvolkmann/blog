@@ -246,7 +246,8 @@ and the following warning message will be output by `npm run build`:
 "[WARN] [router] getStaticPaths() ignored
 in dynamic page /src/pages/{path}/[{param}].astro."
 
-When `output` is set to "server" or "hybrid", an adapter must be installed.
+When `output` is set to "server" or "hybrid",
+a server adapter must be installed.
 Otherwise running `npm run build` will output the error message
 "[NoAdapterInstalled] Cannot use `output: 'server'` or `output: 'hybrid'`
 without an adapter. Please install and configure the appropriate server adapter
@@ -882,6 +883,8 @@ In order to take advantage of image optimizations,
 place images under the `src/images` directory,
 import them into JavaScript code,
 and render them using the provided `Image` component.
+The `Image` component does not wait until it scrolls into view
+before loading the image.
 
 For example:
 
@@ -1037,8 +1040,8 @@ The reason is that the `getStaticPaths` function gets hoisted into its own scope
 That prevents it from accessing most things outside the function.
 This is a limitation that the Astro team hopes remove in the future.
 
-Often the `getStaticPaths` function needs to
-iterate over documents in a content collection.
+Often the `getStaticPaths` function needs to iterate over documents
+in a content collection represented by `CollectionEntry` objects.
 In this case it can be written similar to the following:
 
 ```ts
@@ -1047,6 +1050,16 @@ export async function getStaticPaths() {
   return dogs.map(dog => ({params: {name: dog.data.name}}));
 }
 ```
+
+`ContentCollection` objects have the following properties:
+
+- `body` - body text of the document
+- `collection` - name of the collection to which the document belongs
+- `data` - object whose properties are the front matter variables in the document
+- `id` - file name of the document with the file extension
+- `render` - an async function that returns a component
+  that renders the body content, converting Markdown to HTML
+- `slug` - file name of the document without the file extension
 
 Running `npm run build` generates the `dist` directory which will contain
 the following files and more:
