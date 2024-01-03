@@ -610,14 +610,24 @@ Astro provides the following components:
   ```
 
 - `<Content />`
+
+  This renders the content of a content collection entry.
+  See the [Content Collections](#content-collections) section.
+
 - `<Debug />`
+
 - `<Fragment set:html={htmlString} />`
 
   This renders multiple HTML elements without a wrapping element.
   This component does not need to be imported.
 
 - `<Image />`
+
+  This renders an optimized images.
+  See the [Images](#images) section.
+
 - `<Picture />`
+
 - `<Prism />`
 
   This is similar to the `Code` component, but uses the PrismJS library.
@@ -1204,6 +1214,8 @@ The following steps can be taken to define and render a collection of dogs.
 
   const { dog } = Astro.props;
   const { breed, image, name } = dog.data;
+  // This gets a component that will render
+  // the content of the dog CollectionEntry.
   const { Content } = await dog.render();
   ---
 
