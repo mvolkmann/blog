@@ -431,6 +431,9 @@ This is because Astro generates the elements at build-time and
 doesn't use client-side JavaScript to add, modify, and delete them
 based on changes to collections.
 
+A page can return the result of calling `Astro.redirect({url})`
+to redirect to another page.
+
 ## Astro Components
 
 Astro components are defined in source files with a `.astro` file extension.
@@ -516,6 +519,9 @@ reusable, customizable `Button` component, see {% aTargetBlank
 "astro-component-example-btn" %}.
 This uses TypeScript to describe all the supported props
 which provides intellisense and error checking.
+
+An Astro component can render another instances of itself recursively
+using `<Astro.self {props} />`.
 
 ### Slots
 
@@ -887,6 +893,9 @@ export function getStaticPaths() {
   return colors.map((color) => ({ params: { color } }));
 }
 
+// Astro.params contains matched segments of a dynamic route
+// where directory names under the "pages" directory
+// are surrounded by square brackets.
 const { color } = Astro.params;
 ---
 
@@ -2681,6 +2690,27 @@ JSON and HTML (perhaps for use with HTMX).
 However, currently endpoints cannot use Astro components to generate HTML.
 That capability is planned for the future.
 For now, see the HTMX section below which uses Astro pages as endpoints.
+
+Endpoints can be defined by dynamic routes
+where directory names under the "pages" directory
+are surrounded by square brackets.
+`Astro.params` contains the matched segments of a dynamic route
+and can be used in endpoint functions to access those matches.
+
+`Astro.request` holds a standard `Request` object.
+Endpoint functions can use it to get the request method, URL, headers, and body.
+
+`Astro.url` is a standard `URL` object
+created from the value of `Astro.request.url`.
+It contains properties that holds parts of the URL
+including `origin` and `pathname`.
+
+`Astro.response` holds a standard `RequestInit` object.
+Endpoint functions can use it to set the
+response `status`, `statusText`, and `headers`.
+
+`Astro.cookies` is an object with methods that endpoint functions
+can use to test for (`has`), `get`, `set`, and `delete` cookies.
 
 The following code in the file `src/pages/pets/dog.json.ts`
 demonstrates creating an endpoint that returns JSON created from
