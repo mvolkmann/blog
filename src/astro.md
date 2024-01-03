@@ -612,6 +612,10 @@ Astro provides the following components:
   </style>
   ```
 
+  For more detail see <a
+  href="https://docs.astro.build/en/reference/api-reference/#code-"
+  target="_blank">Code</a>.
+
 - `<Content />`
 
   This renders the content of a content collection entry.
@@ -624,6 +628,10 @@ Astro provides the following components:
   followed by a black bar with white text that displays the given value.
   It is alternative to `console.log` that seems worse.
 
+  For more detail see <a
+  href="https://docs.astro.build/en/reference/api-reference/#debug-"
+  target="_blank">Debug</a>.
+
 - `<Fragment set:html={htmlString} />`
 
   This renders multiple HTML elements without a wrapping element.
@@ -632,9 +640,28 @@ Astro provides the following components:
 - `<Image />`
 
   This renders an optimized images.
+  This component does not need to be imported.
   See the [Images](#images) section.
 
 - `<Picture />`
+
+  This is an alternative to the `Image` component that displays
+  a responsive image selected from a list of formats and sizes.
+
+  For example:
+
+  ```html
+  ---
+  import { Picture } from 'astro:assets';
+  import myDog from "../images/dog.png";
+  ---
+
+  <Picture alt="my dog" src={myDog} formats={["webp", "avif"]} width={400} />
+  ```
+
+  For more detail see <a
+  href="https://docs.astro.build/en/guides/images/#picture-"
+  target="_blank">Picture</a>.
 
 - `<Prism />`
 
@@ -662,6 +689,10 @@ Astro provides the following components:
   ```html
   <Prism code="{codeString.trim()}" lang="js" />
   ```
+
+  For more detail see <a
+  href="https://docs.astro.build/en/reference/api-reference/#prism-"
+  target="_blank">Prism</a>.
 
 - `<ViewTransitions />`
 
