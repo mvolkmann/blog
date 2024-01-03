@@ -38,6 +38,7 @@ The key features of Drizzle include:
 - no code generation required
 - zero dependencies
 - supports many databases
+- can generate TypeScript schema definitions from existing database tables
 
   Supported databases include LiteFS, MySQL, Neon, PlanetScale, PostgreSQL,
   SQLite, Supabase, Turso, Vercel Postgres, Web SQLite, and Xata.
@@ -57,6 +58,18 @@ The key features of Drizzle include:
 
 Drizzle database table schemas are defined entirely in TypeScript.
 These are used to create/migrate tables AND provided type checking in code.
+
+## Cons
+
+While Drizzle supports many kinds of databases,
+switching the configuration and code that works with one type
+to work with another is fairly tedious.
+Unfortunately, there are significant differences in the
+configuration and code required for each.
+
+The current documentation is better for some databases than others.
+It can be difficult to determine how to correctly configure Drizzle
+to work with some databases that it claims to support.
 
 ## Postgres Example
 
@@ -90,8 +103,8 @@ and use Drizzle to interact with it.
   or `bun add drizzle-orm`
 - Enter `npm install pg`  
   or `bun add pg`
-- Enter `npm install -D drizzle-kit`  
-  or `bun add -d drizzle-kit`
+- Enter `npm install -D drizzle-kit @types/pg`  
+  or `bun add -d drizzle-kit @types/pg`
 - Add the following scripts in `package.json`:
 
   ```json
