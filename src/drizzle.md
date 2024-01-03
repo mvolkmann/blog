@@ -310,6 +310,14 @@ for (const result of results) {
 process.exit(); // Why needed?
 ```
 
+## Queries
+
+Drizzle provides three methods for querying tables.
+
+- `db.select([options]).from({table}).where({filter})`
+- `db.query.{table}.findFirst([options])`
+- `db.query.{table}.findMany([options])`
+
 ## Query Filtering
 
 The `drizzle-orm` module provides the following methods
