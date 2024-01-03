@@ -109,8 +109,8 @@ To install pg, enter `npm install pg`.
 - Create a directory for the project and cd to it.
 - Enter `npm init` or `bun init`
 - Create a `src` directory.
-- If using Node, rename the `index.js` file to `index.mjs`
-- Move `index.mjs` (Node) or `index.ts` (Bun) to the `src` directory.
+- If using Node, create the file `src/index.mjs`
+- If using Bun, move `index.ts` to the `src` directory.
 
 ### Install Drizzle and a Database Client
 
@@ -182,17 +182,17 @@ export const dogsRelations = relations(dogs, ({one}) => ({
 Create the file `drizzle.config.ts` containing the following:
 
 ```ts
-  import type { Config } from "drizzle-kit";
+import type { Config } from "drizzle-kit";
 
-  export default {
-    schema: "./src/schema.mjs",
-    out: "./src/migrations",
-    driver: "pg",
-    dbCredentials: {
-      host: "localhost",
-      database: "drizzle-demo",
-    },
-  } satisfies Config;
+export default {
+  schema: "./src/schema.mjs",
+  out: "./src/migrations",
+  driver: "pg",
+  dbCredentials: {
+    host: "localhost",
+    database: "drizzle-demo",
+  },
+} satisfies Config;
 ```
 
 When using Bun instead of Node, change the `schema` value to `./src/schema.ts`.
@@ -219,14 +219,14 @@ any source file that needs to access the database.
 
 ```ts
 import {drizzle} from 'drizzle-orm/postgres-js';
-import postgres from 'postgres';
+import pg from 'pg';
 import * as schema from './schema.mjs';
 
 const dbName = 'drizzle-demo';
 const dbPrefix = 'postgres://postgres:adminadmin@0.0.0.0:5432';
 const connectionString = dbPrefix + '/' + dbName;
-const poolSize = 1;
-const client = postgres(connectionString, {max: poolSize});
+const client = new pg.Client({connectionString});
+await client.connect();
 
 export const db = drizzle(client, {schema});
 ```
