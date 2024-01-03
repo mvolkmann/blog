@@ -310,6 +310,41 @@ for (const result of results) {
 process.exit(); // Why needed?
 ```
 
+## Query Filtering
+
+The `drizzle-orm` module provides the following methods
+that can be used to filter query results:
+
+- `and`
+- `between` - numeric range
+- `eq`
+- `gt`
+- `gte`
+- `inArray`
+- `isNotNull`
+- `isNull`
+- `like` - pattern match
+- `lt`
+- `lte`
+- `ne`
+- `not`
+- `notBetween` - numeric range
+- `notInArray`
+- `notLike` - pattern match
+- `or`
+- `references` - for foreign keys
+
+For example, the following query gets all users whose
+full name includes "olk" and are at least 50 years old.
+
+```js
+const result = await
+  .db
+  .select()
+  .from(users)
+  .where(and(like(users.fullName, "%olk%"), gte(users.age, 50)));
+```
+
 ## Generating Drizzle Schema
 
 When there is an existing database, a Drizzle schema file that describes
