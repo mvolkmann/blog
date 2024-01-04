@@ -1594,22 +1594,73 @@ From a comment in the Discord channel,
 "It's still quite early and very experimental, so I wouldn't be
 surprised if there's a lot of edge cases where it doesn't work."
 
+## Astro.glob
+
+The {% aTargetBlank "https://docs.astro.build/en/guides/imports/#astroglob",
+"Astro.glob" %} function provides another way to
+access the content of a collection of Markdown files.
+
+For example, the Markdown files from the NFL content collection example above
+can be moved to the `src/data/nfl` directory.
+
+The following is an example of one of these Markdown files:
+
+```md
+---
+city: Kansas City
+name: Chiefs
+conference: AFC West
+logoUrl: https://res.cloudinary.com/nflleague/image/private/f_auto/league/ujshjqvmnxce8m4obmvs
+headCoach: Andy Reid
+established: 1960
+---
+
+After losing to the Raiders on Christmas Day, the Chiefs ...
+```
+
+The following Astro component reads and renders
+the data in these Markdown files:
+
+<img alt="Astro.glob demo" style="width: 100%"
+  src="/blog/assets/astro-glob-demo.png?v={{pkg.version}}">
+
+```js
+---
+const teams = await Astro.glob("../data/nfl/*.md");
+---
+
+teams.map(({ Content, frontmatter }) => (
+  <div>
+    <h2>{frontmatter.name} {frontmatter.city}</h2>
+    <Content />
+  </div>
+))
+```
+
 ## Content Management Systems (CMS)
 
 Astro can fetch content from many kinds of CMSes.
 These typically provide a better content authoring experience
 for non-technical users than editing Markdown files.
 
+The content from CMSes is not treated the same as
+content collection Markdown files.
+Different code that is specific to the CMS
+must be written to access and render the content.
+
 Astro has integrations for the following CMSes including
 CloudCannon, Contentful, Netlify, Sanity, Storyblok, Strapi, Wordpress,
 and many more.
 
-For more detail, see {% aTargetBlank "https://docs.astro.build/en/guides/cms/",
+For general details, see {% aTargetBlank "https://docs.astro.build/en/guides/cms/",
 "Use a CMS with Astro" %}.
 
-For details on using the Strapi CMS, see {% aTargetBlank
+For details on using the Strapi CMS, see the YouTube video {% aTargetBlank
 "https://www.youtube.com/watch?v=pVJCROlsIp4",
-"Getting Started with Astro and Strapi" %}.
+"Getting Started with Astro and Strapi" %}
+and the associated article {% aTargetBlank
+"https://strapi.io/blog/how-to-build-a-blog-with-astro-strapi-and-tailwind-css",
+"How to Build a Blog with Astro, Strapi, and Tailwind CSS" %}.
 
 ## MDX
 
