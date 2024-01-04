@@ -1917,6 +1917,8 @@ can be used in Astro components to add interactivity.
 This is an alternative to implementing interactive components
 using another framework such as React, Svelte, or Vue.
 
+To install the Alpine integration, enter `npx astro add alpinejs`.
+
 However, Astro components are always
 rendered at build time or on the server (SSR).
 Unlike with frameworks like React and Svelte, it is not possible

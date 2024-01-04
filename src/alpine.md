@@ -245,7 +245,7 @@ In some cases such as the `class` attribute it is possible to specify
 a value both without and with `x-bind` and both values will be used.
 
 A shorthand for `x-bind:` is just `:`.
-This was copied from Vue.
+This syntax was copied from Vue.
 
 For example:
 
@@ -667,7 +667,7 @@ So these are equivalent:
 ```
 
 A shorthand for `x-on:` is just `@`.
-This was copied from Vue.
+This syntax was copied from Vue.
 
 The event name must be composed of lowercase letters and dashes.
 To handle events with names that contain uppercase letters or periods,
