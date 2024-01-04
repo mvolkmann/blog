@@ -2249,7 +2249,7 @@ A downside of this approach is that because the data is not passed using props,
 it is not clear what data the `Demo` component might be using.
 It has access to all the data in the `x-data` objects of all ancestor elements.
 
-Also, if the nesting of components that use `x-data` become somewhat deep,
+Also, if the nesting of components that use `x-data` becomes somewhat deep,
 the danger of unintentional name clashes in `x-data` property names increases.
 
 ## Sharing State (nanostores)
