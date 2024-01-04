@@ -2209,10 +2209,48 @@ from returning data to the SSG component.
 When this kind of inter-component communication is needed,
 all the components involved must be SSR components.
 
-A workaround for this limitation is to use Alpine `x-data`.
-Here is an example:
+A workaround for this limitation is to use the Alpine `x-data` directive.
 
-TODO: Provide this!
+In the following example, the file `src/pages/index.astro`
+defines a value for `score` using `x-data`.
+The file `src/components/Demo.astro` is rendered by the previous file.
+It has access to `x-data` defined on any element
+to which it is a descendant in the DOM tree.
+It can also define it's own `x-data` properties.
+In this case is defines a `double` function
+which doubles the value of the `score` property.
+This change will be visible back in `index.astro`.
+
+`src/pages/index.astro`
+
+```js
+---
+import Demo from "../components/Demo.astro";
+---
+
+<html>
+  <body x-data="{score: 19}">
+    <p>index score = <span x-text="score"></span></p>
+    <Demo />
+  </body>
+</html>
+```
+
+`src/components/Demo.astro`
+
+```js
+<div x-data="{ double() { score *= 2; } }">
+  <p>Demo score = <span x-text="score"></span></p>
+  <button @click="double">Double it!</button>
+</div>
+```
+
+A downside of this approach is that because the data is not passed using props,
+it is not clear what data the `Demo` component might be using.
+It has access to all the data in the `x-data` objects of all ancestor elements.
+
+Also, if the nesting of components that use `x-data` become somewhat deep,
+the danger of unintentional name clashes in `x-data` property names increases.
 
 ## Sharing State (nanostores)
 
