@@ -1135,6 +1135,14 @@ Content collections are like databases without SQL
 where the only supported queries are
 retrieving a single document or all documents in a collection.
 
+Modifying data in a database through API calls made from a web app
+can result in different data being subsequently rendered.
+However, modifying content collection documents during runtime
+will not result in different data being rendered.
+Think of content collection documents as being static rather than dynamic.
+So databases or CMSes should be used instead of content collections
+when dynamic updates are required.
+
 The following steps can be taken to define and render a collection of dogs.
 
 - Create the directory `src/content`.
