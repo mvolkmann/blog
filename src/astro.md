@@ -3232,6 +3232,134 @@ For more detail, see {% aTargetBlank
 "https://docs.astro.build/en/core-concepts/endpoints/#server-endpoints-api-routes",
 "Server Endpoints (API Routes)" %}.
 
+### Form Submits
+
+Form submits can be handled by an Astro page or an API endpoint.
+Using an Astro page is ideal when no server-side processing is needed.
+Using an API endpoint enables server-side processing
+and redirecting to another Astro page.
+Let's examine both cases.
+
+Here is an Astro page defined in `src/pages/index.astro` that renders a `form`.
+
+<img alt="Astro form submission" style="width: 40%"
+  src="/blog/assets/astro-form-submission.png?v={{pkg.version}}" />
+
+```js
+---
+import Layout from "../layouts/Layout.astro";
+
+// Choose one of the following lines.
+// const action = "/api/form-handler"; // uses API endpoint
+const action = "/form-handler"; // uses another page
+---
+
+<Layout>
+  <form action={action} method="POST">
+    <div>
+      <label for="name">Name:</label>
+      <input type="text" name="name" required size="20" />
+    </div>
+    <div>
+      <label for="age">Age:</label>
+      <input type="number" name="age" required />
+    </div>
+    <div>
+      <button>Submit</button>
+    </div>
+  </form>
+</Layout>
+
+<style>
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  input[type="number"] {
+    width: 3rem;
+  }
+</style>
+```
+
+Here is a page defined in `src/pages/form-handler.astro`
+that can handle a form submission using POST
+or a redirect from an API endpoint using GET.
+
+<img alt="Astro form submission result" style="width: 40%"
+  src="/blog/assets/astro-form-submission-result.png?v={{pkg.version}}" />
+
+```js
+---
+import Layout from "../layouts/Layout.astro";
+import { categorizeByAge } from "../categorize.ts";
+
+let message = "";
+const { request } = Astro;
+const { method } = request;
+
+if (method === "GET") {
+  // This is used by the redirect in src/pages/api/form-handler.ts.
+  const url = new URL(request.url);
+  message = url.searchParams.get("message") || "missing message";
+} else if (method === "POST") {
+  // This is used when the form action is "/form-handler".
+  try {
+    const data = await request.formData();
+    const name = data.get("name");
+    const age = Number(data.get("age"));
+    const category = categorizeByAge(age);
+    message = `${name} is ${category}.`;
+  } catch (error) {
+    message = error instanceof Error ? error.message : "unknown error";
+  }
+}
+---
+
+<Layout>
+  <h1>Age Assessment</h1>
+  <p>{message}</p>
+</Layout>
+```
+
+Here is an API endpoint defined in the file `src/pages/api/form-handler.ts`.
+
+```js
+import type {APIContext, APIRoute} from 'astro';
+import {categorizeByAge} from '../../categorize.ts';
+
+// This is used when the form action is "/api/form-handler".
+// This requires SSR configuration.
+export const POST: APIRoute = async ({
+  request
+}: APIContext): Promise<Response> => {
+  const data = await request.formData();
+  const name = data.get('name');
+  const age = Number(data.get('age'));
+  const category = categorizeByAge(age);
+  const message = `${name} is ${category}.`;
+
+  return new Response('', {
+    status: 302, // redirect
+    headers: {
+      Location: `/form-handler?message=${message}`
+    }
+  });
+};
+```
+
+Here is the `categorizeByAge` function defined in `src/categorize.ts`.
+
+```ts
+export function categorizeByAge(age: number): string {
+  if (age <= 12) return 'a child';
+  if (age <= 19) return 'a teenager';
+  if (age <= 65) return 'an adult';
+  return 'a senior';
+}
+```
+
 ## HTMX
 
 Astro added support for "page partials" which make it more natural to use HTMX.
