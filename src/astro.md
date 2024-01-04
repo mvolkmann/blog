@@ -34,6 +34,7 @@ layout: topic-layout.njk
 ## Overview
 
 {% aTargetBlank "https://astro.build", "Astro" %} is
+a free, open-source (MIT license) framework that is
 "the web framework for content-driven websites".
 It can be used to generate static sites,
 build server-side rendered (SSR) sites,
@@ -99,10 +100,9 @@ The top benefits of using Astro include:
 - can use components implemented in all the popular web frameworks
 - can use content collections to easily
   generate static pages from data at build time
-- provides integration with many popular content management systems (CMS)
+- integrates with many popular content management systems (CMS)
 - supports implementing API endpoints in JavaScript or TypeScript
-- supports many integrations such as
-  Alpine, MDX, React, Svelte, Tailwind, and more
+- integrates with Alpine, MDX, React, Svelte, Tailwind, and more
 - simplifies installing and configuring integrations
 - has a Discord channel that is very active and helpful
 
