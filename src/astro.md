@@ -3301,8 +3301,7 @@ const { method } = request;
 
 if (method === "GET") {
   // This is used by the redirect in src/pages/api/form-handler.ts.
-  const url = new URL(request.url);
-  message = url.searchParams.get("message") || "missing message";
+  message = Astro.url.searchParams.get("message") || "missing message";
 } else if (method === "POST") {
   // This is used when the form action is "/form-handler".
   try {
