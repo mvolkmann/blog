@@ -801,3 +801,6 @@ TODO: Read "The Valley of CODE" page above!
 - Learn about hx-boost.
 
 - See https://www.npmjs.com/package/@jop-software/hx-chart.
+
+- See HoTMiXer for starting new HTMX projects at
+  https://www.npmjs.com/package/hotmixer
