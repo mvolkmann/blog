@@ -1637,6 +1637,43 @@ teams.map(({ Content, frontmatter }) => (
 ))
 ```
 
+Using `Astro.glob` is a bit easier than using content collections.
+But content collections have many advantages including
+handling references between documents, property validation with Zod,
+pagination support, and incremental content caching.
+
+The `Astro.glob` function can also read JSON files.
+For example, suppose each of the NFL `.md` files
+were instead `.json` files like the following:
+
+```json
+{
+  "city": "Kansas City",
+  "name": "Chiefs",
+  "conference": "AFC West",
+  "logoUrl": "https://res.cloudinary.com/nflleague/image/private/f_auto/league/ujshjqvmnxce8m4obmvs",
+  "headCoach": "Andy Reid",
+  "established": 1960,
+  "content": "After losing to the Raiders on Christmas Day, the Chiefs ..."
+}
+```
+
+The following Astro component reads and renders the data in these JSON files:
+
+```js
+---
+const teams = await Astro.glob("../data/nfl/*.json");
+---
+
+teams.map(({ city, content, logoUrl, name }) => (
+  <div>
+    <h2>{name} {city}</h2>
+    <img alt="team logo" src={logoUrl} width={50} />
+    <p>{content}</p>
+  </div>
+))
+```
+
 ## Content Management Systems (CMS)
 
 Astro can fetch content from many kinds of CMSes.
