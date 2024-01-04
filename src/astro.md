@@ -256,6 +256,10 @@ for your final deployment."
 Astro maintains SSR adapters for Cloudflare, Netlify, Node, and Vercel.
 There are also community-maintained SSR adapters for AWS, Deno, and more.
 
+For an excellent video on Astro rendering options, see {% aTargetBlank
+"https://www.youtube.com/watch?v=aIHRjloFASU",
+"Choosing between SSR, SSG, and dynamic rendering in Astro" %}.
+
 ## VS Code
 
 If you use VS Code as your editor, consider installing these extensions:
