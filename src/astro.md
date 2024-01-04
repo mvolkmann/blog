@@ -1400,6 +1400,12 @@ Zod supports the following primitive types that are used with `z.{type}()`:
 - `null`, `undefined`, `void`, `never`
 - `any`, `unknown`
 
+These types are all functions that are typically called with no arguments.
+Some of them take an optional configuration argument.
+Rather that calling these functions repeatedly,
+they can be called once to store the return value in a variable
+and the variable can be used multiple times.
+
 Many validation methods can be applied to the `string` type.
 Highlights include the following:
 
