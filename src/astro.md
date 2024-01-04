@@ -2197,6 +2197,23 @@ For more detail on using Alpine in Astro, see {% aTargetBlank
 "https://docs.astro.build/en/guides/integrations-guide/alpinejs/",
 "Alpine integration" %}.
 
+### Component Communication
+
+Server-side generated (SSG) components which include all `.astro` files
+cannot pass functions to other components.
+This prevents server-side rendered (SSR) components
+(implemented with frameworks like React, Svelte, and Vue)
+that are rendered from an SSG component
+from returning data to the SSG component.
+
+When this kind of inter-component communication is needed,
+all the components involved must be SSR components.
+
+A workaround for this limitation is to use Alpine `x-data`.
+Here is an example:
+
+TODO: Provide this!
+
 ## Sharing State (nanostores)
 
 The recommended way to share state (data) between components is to use the
