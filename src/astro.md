@@ -218,8 +218,8 @@ The `output` property can be set to the following values:
 | `'hybrid'`     | All pages default to being generated at build time.                |
 | `'server'`     | All pages default to being generated on the server when requested. |
 
-Perhaps a better name for "hybrid" would have been "client"
-since it is the opposite of the "server" option.
+Perhaps a better name for "hybrid" would have been "ssg" (at build time)
+and a better name for "server" would have been "ssr" (on request).
 
 In "hybrid" mode, to cause a specific page to NOT be generated at build time,
 add the following line in the component script:
