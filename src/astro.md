@@ -478,7 +478,7 @@ This can contain three sections:
     type Props {
       prop1?: string; // optional prop
       prop2: number; // required prop
-    }
+    };
     ```
 
   - use destructuring to get the values of props
@@ -831,7 +831,6 @@ from a `.astro` file in the `src/pages` directory:
 
 ```ts
 import dogs from '../data/dogs.json';
-console.log('dogs =', dogs);
 ```
 
 Import paths can be relative to the current file,
@@ -898,10 +897,10 @@ For example:
 ```ts
 ---
 import { Image } from "astro:assets";
-import logo from ‘../images/logo.png’;
+import logo from "../images/logo.png";
 ---
 
-<Image alt="logo" src={logo} height={200} width={300} />
+<Image alt="logo" src={logo} height={200} />
 ```
 
 Content collection files can also use optimized images.
@@ -3779,6 +3778,3 @@ Summarize the steps to deploy an Astro project to Netlify and Vercel.
 
 See the commercial CloudCannon CMS (https://cloudcannon.com)
 which uses Astro content collection documents.
-
-Study and document the built-in components described at
-https://docs.astro.build/en/reference/api-reference/#built-in-components.
