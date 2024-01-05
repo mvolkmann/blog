@@ -3106,13 +3106,13 @@ To do so, change the `remarkPlugins` configuration value
 to something like the following:
 
 ```ts
-    remarkPlugins: [
-      [remarkToc, {
-        maxDepth: 3,
-        ordered: true,
-        tight: false
-      }]
-    ],
+      remarkPlugins: [
+        [remarkToc, {
+          maxDepth: 3,
+          ordered: true,
+          tight: false
+        }]
+      ],
 ```
 
 The supported options include:
@@ -3156,6 +3156,40 @@ The supported options include:
   between lines in the TOC.
   Set this to `false` to add space.
   This defaults to `true`.
+
+Here is the beginning of a Markdown file
+for which a table of contents will be generated.
+
+```md
+## Table of Contents
+
+The National Football League (NFL) ...
+
+## AFC East
+
+### Miami Dolphins
+
+### Buffalo Bills
+
+### New York Jets
+
+### New England Patriots
+
+## AFC North
+
+### Baltimore Ravens
+
+### Cleveland Browns
+
+### Pittsburgh Steelers
+
+### Cincinnati Bengals
+```
+
+Here is the table of contents that is rendered.
+
+<img alt="Astro remark-toc plugin" style="width: 40%"
+  src="/blog/assets/astro-remark-toc.png?v={{pkg.version}}" />
 
 ## API Endpoints
 
