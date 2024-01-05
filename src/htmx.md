@@ -58,6 +58,10 @@ not TypeScript, in a single source file.
 There are plans to add JSDoc TypeScript type definitions
 for better code editor support.
 
+HTMX had a strong showing in the 2023 JavaScript Rising Stars results.
+See {% aTargetBlank "https://risingstars.js.org/2023/en#section-framework",
+"Front-end Frameworks" %}.
+
 ## REST?
 
 Web app frameworks such as React, Svelte, Angular, and Vue
