@@ -218,6 +218,9 @@ The `output` property can be set to the following values:
 | `'hybrid'`     | All pages default to being generated at build time.                |
 | `'server'`     | All pages default to being generated on the server when requested. |
 
+Perhaps a better name for "hybrid" would have been "client"
+since it is the opposite of the "server" option.
+
 In "hybrid" mode, to cause a specific page to NOT be generated at build time,
 add the following line in the component script:
 
@@ -276,11 +279,6 @@ If you use VS Code as your editor, consider installing these extensions:
   code folding,
   and more.
 
-- {% aTargetBlank "https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx",
-  "MDX" %} from unified
-
-  This provides language support for `.mdx` files.
-
 - {% aTargetBlank "https://marketplace.visualstudio.com/items?itemName=astro-build.houston",
   "Houston" %} from astro.build
 
@@ -300,6 +298,20 @@ If you use VS Code as your editor, consider installing these extensions:
   selecting "Problems: Focus on Problems View" from the command palette.
   It can also be toggled by pressing ctrl-shift-m (cmd-shift-m on macOS).
 
+- {% aTargetBlank "https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx",
+  "MDX" %} from unified
+
+  This provides language support for `.mdx` files.
+
+- {% aTargetBlank "https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode",
+  "Prettier - Code Formatter" %} from prettier.io
+
+  This formats code using {% aTargetBlank "https://prettier.io", "Prettier" %}.
+
+  To configure code formatting, open any `.astro` file,
+  open the Command Palette, and enter "Format Document".
+  It will prompt for configuring this and automatically do so.
+
 - {% aTargetBlank "https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss",
   "Tailwind CSS Intellisense" %} from tailwindcss.com
 
@@ -307,15 +319,6 @@ If you use VS Code as your editor, consider installing these extensions:
   for Tailwind CSS classes.
   When entering Tailwind class names for colors,
   it provides color preview swatches.
-
-- {% aTargetBlank "https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode",
-  "Prettier - Code Formatter" %} from prettier.io
-
-  This formats code using {% aTargetBlank "https://prettier.io", "Prettier" %}.
-
-To configure code formatting, open any `.astro` file,
-open the Command Palette, and enter "Format Document".
-It will prompt for configuring this and automatically do so.
 
 ## Prettier
 
