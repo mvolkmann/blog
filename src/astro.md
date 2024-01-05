@@ -833,6 +833,8 @@ from a `.astro` file in the `src/pages` directory:
 import dogs from '../data/dogs.json';
 ```
 
+### Path Aliases
+
 Import paths can be relative to the current file,
 be absolute from the root directory of the project,
 or using a path alias defined in `tsconfig.json`.
@@ -2777,7 +2779,7 @@ If all pages use a common layout, this can be applied in that layout component.
 For example, the following will configure a slide transition where
 going forward causes the current page to slide out to the left
 and the new page to slide in from the right.
-Going back triggers the opposite transitions.:
+Going back triggers the opposite transitions.
 
 ```html
 <body class="p-4" transition:animate={slide({ duration: '1s' })}>
@@ -2805,7 +2807,7 @@ For example:
 
 ```html
 import whippet from "../images/whippet.webp"; ... --- ...
-<image alt="whippet" src="{whippet}" transition:name="whippet" />
+<img alt="whippet" src="{whippet}" transition:name="whippet" />
 ...
 ```
 
@@ -3196,7 +3198,7 @@ Here is the table of contents that is rendered.
 
 ## API Endpoints
 
-Endpoints are defined by `.js` and `.ts` files under the `src/pages` directory.
+Endpoints are defined in `.js` and `.ts` files under the `src/pages` directory.
 Consider placing these files in a subdirectory named "api".
 
 All `.js` and `.ts` files in an Astro project
@@ -3232,7 +3234,7 @@ created from the value of `Astro.request.url`.
 It contains properties that holds parts of the URL
 including `origin` and `pathname`.
 
-`Astro.response` holds a standard `RequestInit` object.
+`Astro.response` holds a standard `ResponseInit` object.
 Endpoint functions can use it to set the
 response `status`, `statusText`, and `headers`.
 
