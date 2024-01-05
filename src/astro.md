@@ -1749,7 +1749,6 @@ that demonstrates inserting front matter properties and JavaScript variables.
 ```md
 ---
 layout: ../layouts/Layout.astro
-title: MDX Demo
 player: Mark
 score: 19
 ---
@@ -1778,13 +1777,15 @@ that imports and renders the `Greet` component.
 
 ```md
 ---
+layout: ../layouts/Layout.astro
 name: Comet
 breed: Whippet
 website: https://www.akc.org/dog-breeds/whippet/
 ---
 
 import Greet from "../../components/Greet.astro";
-<Greet name="Comet" />
+
+<Greet name={frontmatter.name} />
 
 He loves the following:
 
@@ -1792,7 +1793,7 @@ He loves the following:
 - basketballs
 - frisbees
 
-![Whippet](https://www.akc.org/wp-content/uploads/2017/11/Whippet-On-White-01.jpg)
+Learn about the <a href={frontmatter.website}>{frontmatter.breed}</a>.
 ```
 
 ## Other Frameworks
@@ -2603,7 +2604,7 @@ The toolbar contains the following four buttons:
   and a list of the installed integrations.
   The copied text can be pasted into a bug report.
 
-- Inspect (arrow cursor icon)
+- Inspect (arrow icon)
 
   This enables inspecting interactive components that are
   marked with a `client:*` directive.
