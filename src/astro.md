@@ -185,8 +185,8 @@ including adapters (like node) and integrations (like Tailwind).
 
 While this file can be manually modified,
 it is easier and less error prone to add adapters and integrations
-using the `npx astro add {integration-name}` command which
-installs the integration package and updates the `astro.config.mjs` file.
+using the `npx astro add {name}` command which
+installs an adapter or integration and updates the `astro.config.mjs` file.
 
 The following example configuration file adds the use of
 the node adapter and the mdx and tailwind integrations.
