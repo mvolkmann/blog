@@ -3106,13 +3106,16 @@ To do so, change the `remarkPlugins` configuration value
 to something like the following:
 
 ```ts
-      remarkPlugins: [
-        [remarkToc, {
-          maxDepth: 3,
-          ordered: true,
-          tight: false
-        }]
-      ],
+remarkPlugins: [
+  [
+    remarkToc,
+    {
+      maxDepth: 3,
+      ordered: true,
+      tight: false
+    }
+  ]
+];
 ```
 
 The supported options include:
@@ -3514,6 +3517,7 @@ import {categorizeByAge} from '../../categorize.ts';
 // This is used when the form action is "/api/form-handler".
 // This requires SSR configuration.
 export const POST: APIRoute = async ({
+  redirect,
   request
 }: APIContext): Promise<Response> => {
   const data = await request.formData();
@@ -3521,13 +3525,7 @@ export const POST: APIRoute = async ({
   const age = Number(data.get('age'));
   const category = categorizeByAge(age);
   const message = `${name} is ${category}.`;
-
-  return new Response('', {
-    status: 302, // redirect
-    headers: {
-      Location: `/form-handler?message=${message}`
-    }
-  });
+  return redirect(`/form-handler?message=${message}`, 302);
 };
 ```
 
