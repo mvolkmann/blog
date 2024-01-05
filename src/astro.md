@@ -383,7 +383,7 @@ Examining the source of a page containing islands
 reveals that Astro uses custom elements named "`astro-island`".
 
 Pages can be described by
-Astro (`.astro`), Markdown (`.md`), and MDX (`.mdx`) files.
+Astro (`.astro`), HTML (`.html`), Markdown (`.md`), and MDX (`.mdx`) files.
 Pages cannot be described by components from frameworks like React and Svelte
 because those are potential sources of interactivity.
 But pages can render those kinds of components.
@@ -3073,6 +3073,89 @@ const score = cookie?.number() ?? 0;
   <a href="/">Home</a>
 </Layout>
 ```
+
+## Table of Contents
+
+The markdown plugin {% aTargetBlank "https://github.com/remarkjs/remark-toc",
+"remark-toc" %} can automatically generate a table of contents
+for Markdown files based on headings.
+It will render a hyperlink for each heading that can be clicked to jump to it.
+
+To use this plugin:
+
+1. Enter `npm install remark-toc`
+
+1. Add the following in `astro.config.mjs`:
+
+   ```ts
+   import {defineConfig} from 'astro/config';
+   import remarkToc from 'remark-toc';
+
+   export default defineConfig({
+     markdown: {
+       remarkPlugins: [remarkToc]
+     }
+   });
+   ```
+
+1. Add `# Table of Contents` to each Markdown file that should
+   include a table of contents to indicate where it should inserted.
+
+Options can be provided to this plugin.
+To do so, change the `remarkPlugins` configuration value
+to something like the following:
+
+```ts
+    remarkPlugins: [
+      [remarkToc, {
+        maxDepth: 3,
+        ordered: true,
+        tight: false
+      }]
+    ],
+```
+
+The supported options include:
+
+- `heading`
+
+  This is a case-insensitive regular expression that matches headings
+  that specify where the TOC should be inserted.
+  It defaults to `"(table[ -]of[ -])?contents?|toc"`.
+  This matches "table of contents", "table-of-contents", "contents", and "toc".
+
+- `maxDepth`
+
+  This is the maximum heading level to be included in the TOC.
+  It defaults to `6`.
+  For example, a value of 2 will only include headings with `#` and `##`.
+
+- `ordered`
+
+  This is a Boolean value that indicates whether the TOC should be
+  wrapped in an `ol` element (`true`) or a `ul` element (`false`).
+  It defaults to `false`.
+
+- `parents`
+
+  This does not seem useful.
+
+- `prefix`
+
+  This does not seem useful.
+
+- `skip`
+
+  This is a regular expression that matches
+  all headings that should not appear in the TOC.
+  By default no headings are skipped.
+
+- `tight`
+
+  When set to `true` this reduces the vertical space
+  between lines in the TOC.
+  Set this to `false` to add space.
+  This defaults to `true`.
 
 ## API Endpoints
 
