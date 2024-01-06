@@ -1251,16 +1251,9 @@ The following steps can be taken to define and render a collection of dogs.
   const dogs: CollectionEntry<"dogs">[] = await getCollection("dogs");
   ---
 
-  <Layout title="Welcome to Astro">
+  <Layout title="Dogs I Know">
     <main class="m-4">
-      { dogs.map((dog) => (
-      <Dog
-        name="{dog.data.name}"
-        breed="{dog.data.breed}"
-        website="{dog.website}"
-        content="{dog.body.trim()}"
-      />
-      )) }
+      { dogs.map(dog => <Dog {dog} />) }
     </main>
   </Layout>
   ```
