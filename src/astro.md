@@ -1206,7 +1206,11 @@ The following steps can be taken to define and render a collection of dogs.
   website: https://www.akc.org/dog-breeds/whippet/
   ---
 
-  Comet loves pool balls and basketballs.
+  He loves the following:
+
+  - pool balls
+  - basketballs
+  - frisbees
   ```
 
   Note the use of front matter to describe properties of this instance.
@@ -1265,6 +1269,9 @@ The following steps can be taken to define and render a collection of dogs.
   `CollectionEntry` object should be included in the result array.
 
 - Create the `Dog` component:
+
+  <img alt="Astro Dog component" style="width: 30%"
+    src="/blog/assets/astro-content-collections-comet.png?v={{pkg.version}}">
 
   ```ts
   ---
