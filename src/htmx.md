@@ -374,14 +374,37 @@ TODO: FINISH THIS!
 
 Interacting with any HTML element can trigger an HTTP request.
 
-hx-get
-hx-post
-hx-put
-hx-patch
-hx-delete
+The following attributes all specify the URL
+to which a specific kind of HTTP request should be sent
+when the user triggers the element:
+{% aTargetBlank "https://htmx.org/attributes/hx-get/", "hx-get" %},
+{% aTargetBlank "https://htmx.org/attributes/hx-post/", "hx-post" %},
+{% aTargetBlank "https://htmx.org/attributes/hx-put/", "hx-put" %},
+{% aTargetBlank "https://htmx.org/attributes/hx-patch/", "hx-patch" %}, and
+{% aTargetBlank "https://htmx.org/attributes/hx-delete/", "hx-delete" %}.
 
-hx-sync
-hx-params
+The {% aTargetBlank "https://htmx.org/attributes/hx-sync/", "hx-sync" %}
+attribute coordinates concurrent requests.
+For example, entering data in an `input` that is inside a `form`
+could trigger two requests, one to validate the `input` value
+and one to submit the `form`.
+By default, these requests will run in parallel.
+If `hx-swap="closest form:abort` is applied to the `input`,
+the validation request will be sent first.
+If the validation succeeds then the submit request will be sent.
+Otherwise it will be aborted.
+
+When a `form` is submitted,
+the request includes the values of all its `form` elements by default.
+
+To include the values of additional form elements
+that are outside the form, add the {% aTargetBlank
+"https://htmx.org/attributes/hx-include/", "hx-include" %}.
+
+To omit the values of some of the form elements
+that are inside the form, add the `hx-params` attribute.
+For more detail, see {% aTargetBlank
+"https://htmx.org/attributes/hx-params/", "hx-params" %}.
 
 The `hx-confirm` attribute specifies a message
 to display in a confirmation dialog using the `Window` method `confirm`.
@@ -446,8 +469,17 @@ The `hx-swap` attribute also supports the following space-separated modifiers:
 - `swap`: specifies time to wait after receiving new content before swapping/inserting it
 - `transition`: uses the View Transitions API
 
-hx-select
-hx-preserve
+The `hx-select` attribute specifies a CSS selector that
+indicates which element from the returned HTML to use.
+When this is not specified, all the returned HTML is used.
+TODO: Can this be used to get the `body` content
+from a response that is a full HTML document?
+
+The `hx-preserve` attribute can be applied to
+elements that should be preserved through a swap.
+For example, if there is an `audio` or `video` element that is playing
+and a request for new content returns the same element,
+it can continue playing without restarting at the beginning.
 
 ## Active Search
 
@@ -609,11 +641,17 @@ hx-validate
 
 ## Other
 
-hx-boost
-hx-disinherit
-hx-encoding
-hx-vals
-hx-vars
+- {% aTargetBlank "https://htmx.org/attributes/hx-boost/", "hx-boost" %}
+
+- {% aTargetBlank "https://htmx.org/attributes/hx-disinherit/", "hx-disinherit" %}
+
+- {% aTargetBlank "https://htmx.org/attributes/hx-encoding/", "hx-encoding" %}
+
+- {% aTargetBlank "https://htmx.org/attributes/hx-vals/", "hx-vals" %}
+
+This specifies additional data to be passed in HTTP requests.
+
+- {% aTargetBlank "https://htmx.org/attributes/hx-vars/", "hx-vars" %}
 
 ## Debugging
 
@@ -685,7 +723,7 @@ hx-ws
 ## Server Sent Events
 
 TODO: Try this.
-hx-sse
+{% aTargetBlank "https://htmx.org/extensions/server-sent-events/", "hx-sse" %}
 
 ## History
 
@@ -797,10 +835,6 @@ TODO: Read "The Valley of CODE" page above!
 
 - See unpoly.com which is a competitor to HTMX.
   Supposedly it is better at progressive enhancement.
-
-- Does hx-select from HTMX allow extracting specific content
-  from an HTML response? For example, this could be used to
-  get the body from a response that is a full HTML document.
 
 - Learn about hx-boost.
 
