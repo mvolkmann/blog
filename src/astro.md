@@ -143,6 +143,9 @@ This will prompt for the following:
 
 - "Initialize a new git repository? Yes or No
 
+<img alt="Astro create project" style="width: 70%"
+  src="/blog/assets/astro-create-project.png?v={{pkg.version}}">
+
 Once the project is created, follow the instructions that are output.
 
 - `cd` to the newly created directory.
@@ -397,7 +400,7 @@ For example, the file `src/pages/demo/colors.md`
 defines the page at the URL path `/demo/colors/`.
 
 <img alt="Astro colors page" style="width: 25%"
-    src="/blog/assets/astro-colors-page.png?v={{pkg.version}}">
+  src="/blog/assets/astro-colors-page.png?v={{pkg.version}}">
 
 ```md
 ---
@@ -1537,6 +1540,8 @@ The URL "/all" navigates to the page that shows all the teams.
 <img alt="Astro Pagination" style="width: 100%"
   src="/blog/assets/astro-pagination.png?v={{pkg.version}}">
 
+{% raw %}
+
 ```js
 ---
 import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
@@ -1570,10 +1575,11 @@ const entries = await Promise.all(promises);
     <h1>Page {currentPage} of {lastPage}</h1>
     <p>The teams appear alphabetically by their city.</p>
     <nav>
-      <a href="/">First</a>
-      <a class={prevUrl ? '' : 'disabled'} href={prevUrl}>Previous</a>
-      <a class={nextUrl ? '' : 'disabled'} href={nextUrl}>Next</a>
-      <a href={`/${lastPage}`}>Last</a>
+      <a class:list={{disabled: currentPage === 1}} href="/">First</a>
+      <a class:list={{disabled: !prevUrl}} href={prevUrl}>Previous</a>
+      <a class:list={{disabled: !nextUrl}} href={nextUrl}>Next</a>
+      <a class:list={{disabled: currentPage === lastPage}}
+        href={`/${lastPage}`}>Last</a>
       <a href="/all">All</a>
     </nav>
     <section class="gap-4 grid grid-cols-4">
@@ -1582,6 +1588,8 @@ const entries = await Promise.all(promises);
   </main>
 </Layout>
 ```
+
+{% endraw %}
 
 The code above uses the {% aTargetBlank
 "https://docs.astro.build/en/reference/api-reference/#getentry", "getEntry" %}
