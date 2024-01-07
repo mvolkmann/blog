@@ -1166,7 +1166,7 @@ The following steps can be taken to define and render a collection of dogs.
   import {defineCollection, z} from 'astro:content';
 
   const dogs = defineCollection({
-    type: 'content',
+    type: 'content', // or 'data' when not using Markdown or MDX
     schema: z.object({
       // The return value from z.string() can be saved in a variable
       // and used on multiple properties to avoid calling it repeatedly.
