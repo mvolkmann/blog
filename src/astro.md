@@ -2518,6 +2518,22 @@ that determine whether the class name should be included.
 If a value is array, it is flattened into the surrounding array.
 If a value is `false`, `undefined`, or `null`, it is skipped.
 
+For example:
+
+{% raw %}
+
+```html
+<nav>
+  <a class:list={{disabled: currentPage === 1}} href="/">First</a>
+  <a class:list={{disabled: !prevUrl}} href={prevUrl}>Previous</a>
+  <a class:list={{disabled: !nextUrl}} href={nextUrl}>Next</a>
+  <a class:list={{disabled: currentPage === lastPage}}
+    href={`/${lastPage}`}>Last</a>
+</nav>
+```
+
+{% endraw %}
+
 The `define:vars` directive turns front matter variables into CSS variables.
 For example, here is an Astro component defined in `src/components/Text.astro`:
 
