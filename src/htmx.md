@@ -643,6 +643,20 @@ hx-validate
 
 - {% aTargetBlank "https://htmx.org/attributes/hx-boost/", "hx-boost" %}
 
+  This attribute changes anchor (`<a>`) and `form` elements to use AJAX
+  which allows HTTP requests to be sent when JavaScript is disabled.
+  It applies to all anchor and `form` elements on which is applied
+  and also those that are descendants of any element on which it is applied.
+  Apply this attribute to the `body` element
+  to "boost" all anchor and `form` elements.
+
+  By default, anchor elements will
+  send a GET request to the specified URL when clicked.
+  and `form` elements will send a GET or POST request
+  (depending on the value of the `method` attribute) when submitted.
+  Both will replace the `innerHTML` of the `body` element with the response.
+  These behaviors can be customized with additional HTMX attributes.
+
 - {% aTargetBlank "https://htmx.org/attributes/hx-disinherit/", "hx-disinherit" %}
 
 - {% aTargetBlank "https://htmx.org/attributes/hx-encoding/", "hx-encoding" %}
