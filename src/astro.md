@@ -3222,7 +3222,7 @@ Here is the table of contents that is rendered.
 
 ## API Endpoints
 
-Endpoint functions can be invoked at build time or runtime.
+Endpoint functions can be invoked at build time or run time.
 They are defined in `.js` and `.ts` files under the `src/pages` directory.
 Consider placing these files in a subdirectory named "api".
 
@@ -3575,7 +3575,7 @@ The `<!doctype html>`, `html`, `head` (and its contents), and `body` elements
 are not output.
 
 To indicate that an Astro component should be rendered as a partial,
-add the following to its component script:
+add the following in its component script:
 
 ```js
 export const partial = true;
