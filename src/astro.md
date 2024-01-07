@@ -3222,7 +3222,8 @@ Here is the table of contents that is rendered.
 
 ## API Endpoints
 
-Endpoints are defined in `.js` and `.ts` files under the `src/pages` directory.
+Endpoint functions can be invoked at build time or runtime.
+They are defined in `.js` and `.ts` files under the `src/pages` directory.
 Consider placing these files in a subdirectory named "api".
 
 All `.js` and `.ts` files in an Astro project
