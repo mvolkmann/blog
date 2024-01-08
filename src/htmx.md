@@ -191,7 +191,10 @@ do not require high frequency updates.
 
 ## Client-side Processing
 
-Options for implementing client-side processing include vanilla JavaScript,
+HTMX apps to not require sending an HTTP request for every user interaction.
+They can use HTML elements such as `details` and `dialog`
+and client-side scripting.
+Scripting options include vanilla JavaScript,
 {% aTargetBlank "https://alpinejs.dev", "Alpine" %}, and
 {% aTargetBlank "https://hyperscript.org", "_hyperscript" %}.
 
@@ -650,6 +653,10 @@ hx-validate
   Apply this attribute to the `body` element
   to "boost" all anchor and `form` elements.
 
+  TODO: Doesn't AJAX itself require JavaScript?
+  TODO: HTMX is a JavaScript library, so how can it
+  TODO: process `hx-boost` attributes if JavaScript is disabled?
+
   By default, anchor elements will
   send a GET request to the specified URL when clicked.
   and `form` elements will send a GET or POST request
@@ -796,6 +803,16 @@ Another popular option is to use Python with either
 {% aTargetBlank "https://www.djangoproject.com", "Django" %} or
 {% aTargetBlank "https://flask.palletsprojects.com/", "Flask" %}.
 
+## Optimistic Updates
+
+If an endpoint might be slow to return a response,
+using `hx-indicator` to display a spinner is a good idea.
+Alternatively, the front end can assume success and update the UI optimistically.
+For example, clicking a "like" button can immediately change its color
+to a muted version of the color that will be used when the response is received.
+If the response indicates success, the color can be changed to the full color.
+If the response indicates failure, the color can be reset.
+
 ## Mobile Apps
 
 The hypermedia approach used by HTMX to build web applications
@@ -818,6 +835,7 @@ which builds on React Native.
 - {% aTargetBlank "https://bigsky.software", "Big Sky Software" %}
 - {% aTargetBlank "https://twitter.com/htmx_org", "Carson Gross on Twitter" %}
 - {% aTargetBlank "https://thevalleyofcode.com/htmx", "The Valley of CODE - htmx" %}
+- {% aTargetBlank "https://ahastack.dev", "The AHA Stack" %}
 
 TODO: Read "The Valley of CODE" page above!
 
