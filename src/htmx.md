@@ -349,15 +349,36 @@ With HTMX, any element can trigger an HTTP request.
 The first thing to consider is what will trigger a request to be sent.
 
 HTML elements such as `input`, `textarea`, and `select`
-automatically trigger when the emit a "change" event.
+automatically trigger when they emit a "change" event.
 HTML `form` elements automatically trigger when they emit a `submit` event.
+The default trigger for all other elements is "click".
 
-To trigger on a different event, add the `hx-trigger` attribute.
+To trigger on different events, add the `hx-trigger` attribute.
 The value of this attribute can be
-a single event name, a comma-separated list of event names,
+a single event, a comma-separated list of events,
 or `every {timing}` to trigger repeatedly at a given time interval.
 
-Event names include `click`, `mouseenter`, and custom event names.
+DOM event names include `blur`, `change`, `click`, `contextmenu`,
+`dblclick`, `focus`, `hashchange`, `input`, `keydown`, `keypress`,
+`keyup`, `load`, `mousedown`, `mouseenter`, `mouseleave`, `mousemove`,
+`mouseout`, `mouseover`, `mouseup`, `resize`, `scroll`, `submit`,
+`touchcancel`, `touchend`, `touchmove`, `touchstart`, `unload`, and more.
+Custom event names can also be used.
+
+A space-separated list of event modifiers can follow an event name.
+Supported event modifiers include:
+
+- `changed` - only send request if the element value has changed
+- `delay:{time}` - wait at least this long before each request is sent
+- `from:{css-selector}` - listen for the event on a different element
+- `throttle:{time}` - only send the last event received in the specified time
+  and then wait again
+
+For example, the following trigger is useful for implementing active search:
+
+```html
+hx-trigger="keyup changed delay:500ms"
+```
 
 Events can be filtered so they only trigger in specific circumstances.
 This is specified in square brackets after an event name.
@@ -368,10 +389,6 @@ For example, `click[shiftKey&&ctrlKey]`.
 The square brackets can also contain
 a call to a JavaScript function that returns a Boolean value
 where triggering doesn't occur if the function returns `false`.
-
-A space-separated list of event modifiers can follow an event name.
-For example, `click ...`
-TODO: FINISH THIS!
 
 ## Requests
 
