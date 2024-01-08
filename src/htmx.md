@@ -644,9 +644,24 @@ See the example at {% aTargetBlank
 
 ## Out-of-band Updates
 
-TODO: Try this.
-hx-swap-oob
-hx-select-oob
+The {% aTargetBlank "https://htmx.org/attributes/hx-swap-oob/",
+"hx-swap-oob" %} attribute specifies that an element
+should be placed relative to an existing element with the same `id` value.
+When the value of the attribute is `true`,
+this element replaces the one with the same `id` value.
+
+For example, in a todo app, adding a new todo needs to
+insert a new element in the list of todos AND
+update the count of todos that may appear somewhere above the list.
+
+The {% aTargetBlank "https://htmx.org/attributes/hx-select-oob/",
+"hx-select-oob" %} attribute provides a list of CSS selectors
+that specify elements in the response to be included out-of-band.
+It provides a way to only use a subset of the elements in the response
+that have the `hx-swap-oob` attributes.
+The `hx-select-oob` attribute is typically used together with
+the `hx-select` attribute which also provides a list of CSS selectors,
+but those specify a subset the elements to be included at the target location.
 
 ## Components
 
