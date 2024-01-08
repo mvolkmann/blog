@@ -531,6 +531,7 @@ In particular, see the `hx-` attributes on the `input` element below.
 import {Elysia} from 'elysia';
 import {html} from '@elysiajs/html'; // enables use of JSX
 import {staticPlugin} from '@elysiajs/static'; // enables static file serving
+import {Html} from '@kitajs/html';
 
 const app = new Elysia();
 app.use(html());
@@ -548,8 +549,7 @@ const names: string[] = [
   'Tami'
 ];
 
-// TODO: What type should be used for children?
-const BaseHtml = ({children}: {children: any}) => (
+const BaseHtml = ({children}: {children: Html.Children}) => (
   <html>
     <head>
       <title>HTMX Active Search</title>
