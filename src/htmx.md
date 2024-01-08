@@ -682,13 +682,22 @@ For a potential solution, see
 
 ## Events
 
-TODO: Try this.
-hx-on
+The {% aTargetBlank "https://htmx.org/docs/#hx-on", "hx-on" %} attribute
+supports handling of more types of events
+than the HTML `on*` attributes such as `onclick`.
+It provides a small subset of the capabilities in
+{% aTargetBlank "https://alpinejs.dev", "Alpine" %} and
+{% aTargetBlank "https://hyperscript.org", "_hyperscript" %}
+which can be used in place of this attribute.
 
 ## Validation
 
 TODO: Try this.
-hx-validate
+The {% aTargetBlank "https://htmx.org/attributes/hx-validate/",
+"hx-validate" %} attribute cause an element to validate itself
+using the HTML5 Validation API before a request is send.
+This occurs by default for form elements, but not for other kinds of elements.
+TODO: What other kinds of elements have a value to be validated?
 
 ## Other
 
