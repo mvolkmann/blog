@@ -504,11 +504,12 @@ The `hx-swap` attribute also supports the following space-separated modifiers:
 - `swap`: specifies time to wait after receiving new content before swapping/inserting it
 - `transition`: uses the View Transitions API
 
-The `hx-select` attribute specifies a CSS selector that
-indicates which element from the returned HTML to use.
+The `hx-select` attribute specifies
+a CSS selector or a comma-separated list of them
+that indicates which elements from the returned HTML to include.
 When this is not specified, all the returned HTML is used.
-TODO: Can this be used to get the `body` content
-from a response that is a full HTML document?
+When a response contains a full HTML document,
+HTMX automatically only includes the content of the `body` element.
 
 The `hx-preserve` attribute can be applied to
 elements that should be preserved through a swap.
