@@ -244,8 +244,6 @@ The following steps provide one way to use TypeScript with an HTMX project.
 They create a new project that uses HTMX, TypeScript, and Vite.
 Vite provides a local HTTP server with hot reload.
 
-TODO: Try and correct these steps!
-
 - Enter `npm init vite@latest`
 
   - Enter a project name.
@@ -253,15 +251,12 @@ TODO: Try and correct these steps!
   - For the variant, select "TypeScript".
 
 - cd to the newly created project directory
-- Enter `npm install alpinejs`
-- Enter `npm install -D @types/alpinejs`
-- Replace the contents of `src/main.ts` with the following:
 
-  ```ts
-  import Alpine from 'alpinejs';
-  window.Alpine = Alpine;
-  Alpine.start();
-  ```
+- Enter `npm install`
+
+- Enter `npm install alpinejs`
+
+- Enter `npm install -D @types/alpinejs`
 
 - Create the file `src/global.d.ts` containing the following:
 
@@ -273,8 +268,24 @@ TODO: Try and correct these steps!
   }
   ```
 
+- Replace the contents of `src/main.ts` with the following:
+
+  ```ts
+  import Alpine from 'alpinejs';
+  globalThis.Alpine = Alpine;
+  Alpine.start();
+  ```
+
 - Edit `index.html` which already contains a `script` tag for `/src/main.ts`.
   Add HTML that uses Alpine directives here.
+  For example, change the `body` content to the following:
+
+  ```html
+  <div id="app" x-data>
+    <button @click="alert('got click')">Press Me</button>
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+  ```
 
 - Enter `npm run dev`
 
