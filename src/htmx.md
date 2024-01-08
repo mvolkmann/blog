@@ -240,9 +240,13 @@ your application server and include a `script` tag like the following:
 
 ## Using TypeScript
 
-The following steps provide one way to use TypeScript with an HTMX project.
+The steps below provide one way to use TypeScript
+for developing the front end of an HTMX project.
 They create a new project that uses HTMX, TypeScript, and Vite.
 Vite provides a local HTTP server with hot reload.
+
+A back end can be created using any programming language and framework
+that support implementing an HTTP server.
 
 - Enter `npm init vite@latest`
 
