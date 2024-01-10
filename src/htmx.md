@@ -1,19 +1,20 @@
 ---
 eleventyNavigation:
-  key: HTMX
+  key: htmx
 layout: topic-layout.njk
 ---
 
 <figure style="width: 60%">
-  <img alt="HTMX logo" style="border: 0"
+  <img alt="htmx logo" style="border: 0"
     src="/blog/assets/htmx-logo.png?v={{pkg.version}}">
 </figure>
 
 ## Overview
 
-{% aTargetBlank "https://htmx.org", "HTMX" %} is
+{% aTargetBlank "https://htmx.org", "Htmx" %} is
 a client-side JavaScript library that adds support for
 new HTML attributes that make HTML more expressive.
+These attributes enable implementing "Hypermedia-Driven Applications" (HDAs).
 
 The new HTML attributes enable responding to
 specific interactions (ex. click) with any HTML element
@@ -22,7 +23,7 @@ The response must contain HTML.
 Rather than performing a complete page refresh, the returned HTML
 replaces an existing DOM element (transclusion) or is inserted relative to one.
 
-The HTMX approach removes the need to serialize data to JSON on the server,
+The htmx approach removes the need to serialize data to JSON on the server,
 parse the JSON on the client, and convert it to HTML.
 
 The server can be implemented using
@@ -31,20 +32,20 @@ The server typically plays two roles.
 First, it serves static files such as HTML, CSS, JavaScript, and images.
 Second, it responds to HTTP requests by returning HTML.
 
-HTMX simplifies state management because all the state is in one place,
+Htmx simplifies state management because all the state is in one place,
 on the server.
 
 Many web app features typically thought to require custom JavaScript code
-can instead be implemented with only HTMX.
+can instead be implemented with only htmx.
 Examples include lazy loading of data, infinite scrolling,
 and searching while the user types in an `input`.
 
-The fact that all HTML rendered by HTMX applications
+The fact that all HTML rendered by htmx applications
 is either static or server rendered makes it great for SEO.
 
-Users perceive apps built with HTMX to be fast because
+Users perceive apps built with htmx to be fast because
 the initial page load only requires
-the HTMX library and the initial HTML to render.
+the htmx library and the initial HTML to render.
 Subsequent interactions only require fetching snippets of HTML.
 No client-side hydration of JavaScript code is needed.
 Browsers are very efficient at updating the DOM from strings of HTML.
@@ -53,12 +54,12 @@ Developers perceive development of apps to be easier because
 all the logic is in one place ... on the server.
 Only minimal thought needs to be given to client-side logic.
 
-The HTMX library is implemented in JavaScript,
+The htmx library is implemented in JavaScript,
 not TypeScript, in a single source file.
 There are plans to add JSDoc TypeScript type definitions
 for better code editor support.
 
-HTMX had a strong showing in the 2023 JavaScript Rising Stars results.
+Htmx had a strong showing in the 2023 JavaScript Rising Stars results.
 See {% aTargetBlank "https://risingstars.js.org/2023/en#section-framework",
 "Front-end Frameworks" %}.
 
@@ -87,7 +88,7 @@ That is RPC. It screams RPC."
 But who decides what is REST and what isn’t?
 Is it Roy Fielding or popular opinion?
 
-The HTMX approach is based on "Hypermedia As The Engine Of Application State"
+The htmx approach is based on "Hypermedia As The Engine Of Application State"
 ({% aTargetBlank "https://htmx.org/essays/hateoas/", "HATEOAS" %}) which is
 a specific use of the REST architecture where services return hypermedia.
 The acronym HATEOAS does not appear in the dissertation,
@@ -119,6 +120,43 @@ doing so places the burden of interpreting and implementing
 the operations on client-side code rather than the browser.
 JSON is not hypermedia.
 
+## HTML Issues
+
+htmx addresses four important shortcomings of HTML.
+
+1. Which elements can trigger sending an HTTP request?
+
+   The only HTML elements that send an HTTP request are `a` (anchor) and `form`
+   When an anchor is clicked, it sends a GET requests to a specified URL.
+   When a `form` is submitted, it sends a GET or POST request to a specified URL.
+   Form data is attached to the URL in query parameters for GET requests
+   and is included in the request body for POST requests.
+
+   htmx enables any element to send an HTTP request.
+
+1. What events trigger sending an HTTP request?
+
+   In HTML, clicking an anchor or submitting a `form`
+   are the only events that trigger sending an HTTP request.
+
+   htmx enables any DOM event, and custom events,
+   to trigger sending an HTTP request.
+
+1. What kinds of HTTP requests can be sent?
+
+   HTML only sends GET and POST requests.
+
+   htmx enables sending any kind of HTTP request
+   which includes PUT, PATCH, and DELETE requests.
+
+1. How is the response rendered?
+
+   When HTML sends an HTTP request, the entire page is replaced by the response.
+
+   htmx enables replacing specific elements with the response
+   or inserting the response relative to an existing element,
+   while leaving the rest of the page intact.
+
 ## Questions to Consider
 
 Why should we take data from a database and
@@ -131,7 +169,7 @@ to implement web applications?
 
 ## History and Future
 
-HTMX was created by {% aTargetBlank "https://bigsky.software/cv/",
+Htmx was created by {% aTargetBlank "https://bigsky.software/cv/",
 "Carson Gross" %}. He is a principal software engineer at
 {% aTargetBlank "https://bigsky.software/", "Big Sky Software" %}
 and a part-time Computer Science instructor at Montana State University.
@@ -139,59 +177,59 @@ and a part-time Computer Science instructor at Montana State University.
 Carson been working on the approach of simplifying web development
 by adding attributes to HTML for a long time.
 
-The predecessor of HTMX, also created by Carson Gross,
+The predecessor of htmx, also created by Carson Gross,
 is {% aTargetBlank "https://intercoolerjs.org", "intercooler.js" %}.
 Work on intercooler.js began in 2013
 and the first version was released in April 2014.
-Intercooler had a dependency on jQuery, but HTMX does not.
+Intercooler had a dependency on jQuery, but htmx does not.
 
-The first version of HTMX was released in May 2020.
+The first version of htmx was released in May 2020.
 The 1.0 version was released in November, 2020.
 The latest version as of December 2023 is 1.9.10 which is only 16.2K.
 
-HTMX 2.0 is expected in early 2024.
+Htmx 2.0 is expected in early 2024.
 It will remove legacy support for things like IE,
 old style WebSockets, and old style server sent events.
 There will also be some changes to default behavior
 such as not enabling CORS by default.
 Other changes are not expected to be dramatic.
 
-HTMX has an extensive set of integration tests implemented in Mocha.
+Htmx has an extensive set of integration tests implemented in Mocha.
 
-Carson Gross wishes that the functionality of HTMX would be folded into HTML,
-making HTMX unnecessary.
+Carson Gross wishes that the functionality of htmx would be folded into HTML,
+making htmx unnecessary.
 
-Interest in HTMX exploded in 2023 after YouTube videos
+Interest in htmx exploded in 2023 after YouTube videos
 from ThePrimeagen and Fireship were released.
-See {% aTargetBlank "https://www.youtube.com/watch?v=zjHHIqI9lUY", "HTMX" %} and
-{% aTargetBlank "https://www.youtube.com/watch?v=r-GSGH2RxJs", "HTMX in 100 seconds" %}.
+See {% aTargetBlank "https://www.youtube.com/watch?v=zjHHIqI9lUY", "htmx" %} and
+{% aTargetBlank "https://www.youtube.com/watch?v=r-GSGH2RxJs", "htmx in 100 seconds" %}.
 
-Companies that sponsor the development of HTMX are listed on the
-{% aTargetBlank "https://htmx.org", "HTMX home page" %}.
+Companies that sponsor the development of htmx are listed on the
+{% aTargetBlank "https://htmx.org", "htmx home page" %}.
 They include GitHub and JetBrains.
 
 ## Use Cases
 
-HTMX is great for CRUD-based apps and dashboards.
+Htmx is great for CRUD-based apps and dashboards.
 
-HTMX is not appropriate for all web app features.
+Htmx is not appropriate for all web app features.
 
-Using HTMX to update the UI on every mouse move or drag
+Using htmx to update the UI on every mouse move or drag
 would be too slow since each movement would trigger a new HTTP request.
 Examples of apps that require this kind of functionality include
 Google Maps and many games.
 
-HTMX cannot be used in apps that require offline support
+Htmx cannot be used in apps that require offline support
 because they rely on sending HTTP requests to
 get new HTML that updates the UI.
 
-HTMX can be used in conjunction with other approaches,
+Htmx can be used in conjunction with other approaches,
 so it can be used for the parts of apps that
 do not require high frequency updates.
 
 ## Client-side Processing
 
-HTMX apps to not require sending an HTTP request for every user interaction.
+Htmx apps to not require sending an HTTP request for every user interaction.
 They can use HTML elements such as `details` and `dialog`
 and client-side scripting.
 Scripting options include vanilla JavaScript,
@@ -201,7 +239,7 @@ Scripting options include vanilla JavaScript,
 Alpine adds support for many new HTML attributes.
 \_hyperscript adds support for one new HTML attribute
 whose name is a single underscore (`_`) and whose value is \_hyperscript code.
-Both differ from HTMX in that they focus on client-side interactions
+Both differ from htmx in that they focus on client-side interactions
 rather that processing HTTP requests.
 
 Like HTMLx, Alpine and \_hyperscript are client-side JavaScript libraries.
@@ -209,10 +247,10 @@ These are much lighter than libraries and frameworks like React.
 
 ## JSON
 
-While HTMX applications do not require implementing and using
+While htmx applications do not require implementing and using
 REST APIs that returns JSON data, it may still be desirable to implement them.
 For example, Android and iOS mobile apps may wish to use such APIs.
-To use these in HTMX apps, call them from HTTP endpoints
+To use these in htmx apps, call them from HTTP endpoints
 that use the data to generate HTML responses.
 
 Alternatively, write functions that return the desired data
@@ -221,7 +259,7 @@ and the endpoints that return HTML.
 
 ## Installing
 
-There is no need to install HTMX using a package manager like npm or bun.
+There is no need to install htmx using a package manager like npm or bun.
 It can be used from a CDN by including the following `script` tag:
 
 ```html
@@ -230,7 +268,7 @@ It can be used from a CDN by including the following `script` tag:
 
 Alternatively, it can be downloaded as a single, minified JavaScript file
 by clicking the "~14k min.gz’d" link near the top of the
-{% aTargetBlank "https://htmx.org", "HTMX home page" %}.
+{% aTargetBlank "https://htmx.org", "htmx home page" %}.
 Place the downloaded file in a directory whose files are served by
 your application server and include a `script` tag like the following:
 
@@ -241,8 +279,8 @@ your application server and include a `script` tag like the following:
 ## Using TypeScript
 
 The steps below provide one way to use TypeScript
-for developing the front end of an HTMX project.
-They create a new project that uses HTMX, TypeScript, and Vite.
+for developing the front end of an htmx project.
+They create a new project that uses htmx, TypeScript, and Vite.
 Vite provides a local HTTP server with hot reload.
 
 A back end can be created using any programming language and framework
@@ -297,7 +335,7 @@ that support implementing an HTTP server.
 
 ## Using Tailwind
 
-There are two approaches for using Tailwind for CSS styling in an HTMX app.
+There are two approaches for using Tailwind for CSS styling in an htmx app.
 
 The easiest approach is to include it from a CDN with this `link` tag:
 
@@ -360,7 +398,7 @@ This also requires enabling serving static files with the following steps:
 
 ## Triggers
 
-With HTMX, any element can trigger an HTTP request.
+With htmx, any element can trigger an HTTP request.
 The first thing to consider is what will trigger a request to be sent.
 
 HTML elements such as `input`, `textarea`, and `select`
@@ -449,7 +487,7 @@ An HTTP request is only sent and processed if the user clicks the OK button.
 
 ## URLs
 
-HTMX endpoints return HTML, not JSON.
+Htmx endpoints return HTML, not JSON.
 Their URLs are based on user interface functionality, not resource paths.
 For example, `/todos/:id/toggle` is a reasonable URL path
 for an endpoint that toggles the completed status of todo
@@ -509,7 +547,7 @@ a CSS selector or a comma-separated list of them
 that indicates which elements from the returned HTML to include.
 When this is not specified, all the returned HTML is used.
 When a response contains a full HTML document,
-HTMX automatically only includes the content of the `body` element.
+Htmx automatically only includes the content of the `body` element.
 
 The `hx-preserve` attribute can be applied to
 elements that should be preserved through a swap.
@@ -519,7 +557,7 @@ it can continue playing without restarting at the beginning.
 
 ## Active Search
 
-HTMX can be used to implement an active search where a list of matching data
+Htmx can be used to implement an active search where a list of matching data
 is retrieved as the user enters search text.
 The following code demonstrates this.
 The full project can be found in {% aTargetBlank
@@ -552,7 +590,7 @@ const names: string[] = [
 const BaseHtml = ({children}: {children: Html.Children}) => (
   <html>
     <head>
-      <title>HTMX Active Search</title>
+      <title>htmx Active Search</title>
       <link href="/public/tailwind.css" rel="stylesheet" />
       <script src="https://unpkg.com/htmx.org@1.9.9"></script>
     </head>
@@ -665,7 +703,7 @@ but those specify a subset the elements to be included at the target location.
 
 ## Components
 
-One issue with HTMX is that it doesn't support defining components
+One issue with htmx is that it doesn't support defining components
 in the sense that SPA frameworks like React do.
 For example, we can't define a "ProgressBar" component and then
 render it with HTML like `<ProgressBar value={value} max={100} />`.
@@ -711,7 +749,7 @@ TODO: What other kinds of elements have a value to be validated?
   to "boost" all anchor and `form` elements.
 
   TODO: Doesn't AJAX itself require JavaScript?
-  TODO: HTMX is a JavaScript library, so how can it
+  TODO: Htmx is a JavaScript library, so how can it
   TODO: process `hx-boost` attributes if JavaScript is disabled?
 
   By default, anchor elements will
@@ -719,7 +757,7 @@ TODO: What other kinds of elements have a value to be validated?
   and `form` elements will send a GET or POST request
   (depending on the value of the `method` attribute) when submitted.
   Both will replace the `innerHTML` of the `body` element with the response.
-  These behaviors can be customized with additional HTMX attributes.
+  These behaviors can be customized with additional htmx attributes.
 
 - {% aTargetBlank "https://htmx.org/attributes/hx-disinherit/", "hx-disinherit" %}
 
@@ -735,7 +773,7 @@ This specifies additional data to be passed in HTTP requests.
 
 TODO: Try this.
 
-To cause HTMX to log all the actions it performs
+To cause htmx to log all the actions it performs
 to the browser DevTools console, create a JavaScript file
 with a name like `setup.js` containing the following:
 
@@ -782,7 +820,7 @@ htmx.min.js:1 htmx:load ...
 htmx.min.js:1 htmx:afterSettle ...
 ```
 
-Another debugging approach is to use an unminified version of the HTMX library
+Another debugging approach is to use an unminified version of the htmx library
 and set breakpoints in its functions.
 
 ## Animation
@@ -812,7 +850,7 @@ hx-push-url
 
 {% aTargetBlank "https://hyperscript.org", "_hyperscript" %} is
 "an easy & approachable language for modern web front-ends".
-It can be used in conjunction with HTMX.
+It can be used in conjunction with htmx.
 
 To enable use of \_hyperscript, add a script tag like the following:
 
@@ -836,7 +874,7 @@ interactions with HTML elements can be implemented using
 any programming language and any server framework.
 This is referred to as HowEver you Would Like (HOWL).
 A downside is that there are no canonical examples of
-implementing the backend services for an HTMX application.
+implementing the backend services for an htmx application.
 
 Desirable characteristics include:
 
@@ -854,7 +892,7 @@ A virtual DOM is not used.
 
 When combined with {% aTargetBlank "https://turso.tech", "Turso" %}
 (SQLite deployed at the edge), this is referred to as the BETH stack
-(Bun, Elysia, Turso, and HTMX).
+(Bun, Elysia, Turso, and htmx).
 
 Another popular option is to use Python with either
 {% aTargetBlank "https://www.djangoproject.com", "Django" %} or
@@ -872,22 +910,22 @@ If the response indicates failure, the color can be reset.
 
 ## Mobile Apps
 
-The hypermedia approach used by HTMX to build web applications
+The hypermedia approach used by htmx to build web applications
 can also be used to build mobile apps.
 See {% aTargetBlank "https://hyperview.org", "Hyperview" %}
 which builds on React Native.
 
 ## Resources
 
-- {% aTargetBlank "https://htmx.org", "HTMX Home Page" %}
-- {% aTargetBlank "https://htmx.org/docs/", "HTMX Documentation" %}
-- {% aTargetBlank "https://htmx.org/reference/", "HTMX Reference" %}
-- {% aTargetBlank "https://htmx.org/examples/", "HTMX Examples" %}
-- {% aTargetBlank "https://htmx.org/essays/", "HTMX-related Essays" %}
+- {% aTargetBlank "https://htmx.org", "htmx Home Page" %}
+- {% aTargetBlank "https://htmx.org/docs/", "htmx Documentation" %}
+- {% aTargetBlank "https://htmx.org/reference/", "htmx Reference" %}
+- {% aTargetBlank "https://htmx.org/examples/", "htmx Examples" %}
+- {% aTargetBlank "https://htmx.org/essays/", "htmx-related Essays" %}
 - {% aTargetBlank "https://htmx.org/essays/how-did-rest-come-to-mean-the-opposite-of-rest/",
   "How Did REST Come To Mean The Opposite of REST?" %}
 
-- {% aTargetBlank "https://htmx.org/discord", "HTMX Discord Channel" %}
+- {% aTargetBlank "https://htmx.org/discord", "htmx Discord Channel" %}
 - {% aTargetBlank "https://hypermedia.systems", "Hypermedia Systems" %} book
 - {% aTargetBlank "https://bigsky.software", "Big Sky Software" %}
 - {% aTargetBlank "https://twitter.com/htmx_org", "Carson Gross on Twitter" %}
@@ -901,9 +939,9 @@ TODO: Read "The Valley of CODE" page above!
 - Learn how to automatically refresh browser on code save.
 - Should you use auto focus for the new to do input?
 - Can you use JavaScript code in place of hyper script code?
-- Study how HTMX supports dialogue boxes.
-- Study Alpine JS and consider using it with HTMX
-- Read essays by Carson Gross on the HTMX website.
+- Study how htmx supports dialogue boxes.
+- Study Alpine JS and consider using it with htmx.
+- Read essays by Carson Gross on the htmx website.
 
 - `hx-push-url="true"` provides history support so the back button
   can go to a previous state of the UI. Try this!
@@ -916,18 +954,18 @@ TODO: Read "The Valley of CODE" page above!
 - The `hx-request` HTTP header can be used to determine
   how to render a page when the browser is refreshed.
   This enables support for deep links.
-  This is useful when HTMX has replaced portions of a page.
+  This is useful when htmx has replaced portions of a page.
 
-- HTMX can work with JavaScript disabled
+- Htmx can work with JavaScript disabled
   by setting the `hx-boost="true"` attribute.
   Does this need to be on the `body` element? How does this work?
 
-- See unpoly.com which is a competitor to HTMX.
+- See unpoly.com which is a competitor to htmx.
   Supposedly it is better at progressive enhancement.
 
 - Learn about hx-boost.
 
 - See https://www.npmjs.com/package/@jop-software/hx-chart.
 
-- See HoTMiXer for starting new HTMX projects at
+- See HoTMiXer for starting new htmx projects at
   https://www.npmjs.com/package/hotmixer
