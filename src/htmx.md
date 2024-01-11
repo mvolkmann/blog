@@ -55,20 +55,36 @@ Subsequent interactions only require fetching snippets of HTML.
 No client-side hydration of JavaScript code is needed.
 Browsers are very efficient at updating the DOM from strings of HTML.
 
-Developers perceive app development to be easier because
-all the logic is in one place ... on the server.
-Only minimal thought needs to be given to client-side logic.
-
-Unlike endpoints that return JSON data,
-endpoints that return HTML do not require versioning.
-This is because the browser does not need to
-interpret the meaning of the HTML being returned.
-It just needs to render it.
-
 The htmx library is implemented in JavaScript,
 not TypeScript, in a single source file.
 There are plans to add JSDoc TypeScript type definitions
 for better code editor support.
+
+## Simplified Client-side
+
+Using endpoints that return HTML instead of JSON
+removes the need for many things including:
+
+- versioning
+
+  This is unnecessary because the browser does not need to
+  interpret the meaning of the HTML being returned.
+  It just needs to render it.
+
+- client-side routing
+
+  This is unnecessary because page updates and transitions
+  are handled by HTTP requests triggered on elements
+  described in the HTML returned by the server.
+
+- managing client-side data models
+
+  This is unnecessary because all the data remains only on the server.
+
+- nearly all client-side logic
+
+  This is mostly unnecessary because the logic is embedded in
+  the HTML elements returned by the server.
 
 ## History and Future
 
