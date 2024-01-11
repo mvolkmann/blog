@@ -46,6 +46,7 @@ parse the JSON on the client, and build an HTML representation from the data.
 
 The server can be implemented using
 any programming language and server framework.
+This is referred to as "Hypermedia On Whatever you'd Like" (HOWL).
 The server typically plays two roles.
 First, it serves static files such as HTML, CSS, JavaScript, and images.
 Second, it responds to HTTP requests by returning HTML.
@@ -95,6 +96,11 @@ removes the need for many things including:
 
   This is mostly unnecessary because the logic is embedded in
   the HTML elements returned by the server.
+
+The HTML returned by endpoints is typically
+larger than a corresponding JSON response would be.
+This is a non-issue because htmx trades "representational efficiency"
+for achieving other goals such as the ones described above.
 
 ## History and Future
 
@@ -254,7 +260,7 @@ What is the benefit of serializing data to JSON on the server,
 returning JSON to the browser, parsing JSON in the browser,
 and using client-side code to convert the data into HTML?
 With htmx the steps of serializing data to JSON on the server
-and parsing JSON in the browser are elimated.
+and parsing JSON in the browser are eliminated.
 
 What are the advantages of generating HTML in the browser
 instead of doing the same work on the server?
