@@ -4,6 +4,16 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+<style>
+  figcaption {
+    margin-top: 0.5rem;
+    text-align: center;
+  }
+  img {
+    border: 1px solid gray;
+  }
+</style>
+
 <figure style="width: 60%">
   <img alt="htmx logo" style="border: 0"
     src="/blog/assets/htmx-logo.png?v={{pkg.version}}">
@@ -31,14 +41,14 @@ replaces an existing DOM element (transclusion) or is inserted relative to one.
 Htmx removes the need to serialize data to JSON on the server,
 parse the JSON on the client, and build an HTML representation from the data.
 
+<img alt="hypermedia driven applications" style="border: none; width: 70%"
+  src="/blog/assets/hypermedia-driven-applications.png?v={{pkg.version}}">
+
 The server can be implemented using
 any programming language and server framework.
 The server typically plays two roles.
 First, it serves static files such as HTML, CSS, JavaScript, and images.
 Second, it responds to HTTP requests by returning HTML.
-
-Htmx simplifies state management because
-all the state is in one place, on the server.
 
 Many web app features typically thought to require custom JavaScript code
 can instead be implemented with only htmx.

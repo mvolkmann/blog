@@ -5,17 +5,17 @@ layout: topic-layout.njk
 ---
 
 <style>
-    figcaption {
-      margin-top: 0.5rem;
-      text-align: center;
-    }
-    img {
-        border: 1px solid gray;
-    }
-    .row {
-      display: flex;
-      align-items: center;
-    }
+  figcaption {
+    margin-top: 0.5rem;
+    text-align: center;
+  }
+  img {
+    border: 1px solid gray;
+  }
+  .row {
+    display: flex;
+    align-items: center;
+  }
 </style>
 
 <div class="row">
