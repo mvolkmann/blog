@@ -263,6 +263,11 @@ Why should we restrict ourselves to only using JavaScript
 to implement web applications?
 With htmx the server code can be implemented in any programming language
 that supports implementing HTTP servers.
+The most suitable languages are ones that
+provide good support for HTML templating.
+It is also desirable to have editor tooling that
+provides syntax highlighting of HTML and
+checking for proper HTML including attribute usage and element nesting.
 
 ## Use Cases
 
