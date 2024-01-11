@@ -338,7 +338,7 @@ There are three ways to use htmx.
 1. Used htmx from a CDN by including the following `script` tag:
 
    ```html
-   <script src="https://unpkg.com/htmx.org@1.9.9"></script>
+   <script src="https://unpkg.com/htmx.org@1.9.10"></script>
    ```
 
 1. Install htmx using a package manager like npm or bun.
@@ -687,7 +687,7 @@ const BaseHtml = ({children}: {children: Html.Children}) => (
     <head>
       <title>htmx Active Search</title>
       <link href="/public/tailwind.css" rel="stylesheet" />
-      <script src="https://unpkg.com/htmx.org@1.9.9"></script>
+      <script src="https://unpkg.com/htmx.org@1.9.10"></script>
     </head>
     <body class="p-8">{children}</body>
   </html>
