@@ -483,7 +483,8 @@ The default trigger for all other elements is "click".
 To trigger on different events, add the `hx-trigger` attribute.
 The value of this attribute can be
 a single event, a comma-separated list of events,
-or `every {timing}` to trigger repeatedly at a given time interval.
+or `every {timing}` to trigger repeatedly at a given time interval
+(for polling).
 
 DOM event names include `blur`, `change`, `click`, `contextmenu`,
 `dblclick`, `focus`, `hashchange`, `input`, `keydown`, `keypress`,
@@ -1005,6 +1006,9 @@ which builds on React Native.
 - {% aTargetBlank "https://twitter.com/htmx_org", "Carson Gross on Twitter" %}
 - {% aTargetBlank "https://thevalleyofcode.com/htmx", "The Valley of CODE - htmx" %}
 - {% aTargetBlank "https://ahastack.dev", "The AHA Stack" %}
+
+- {% aTargetBlank "https://hotwired.dev", "Hotwire" %} competitor to htmx
+- {% aTargetBlank "https://unpoly.com", "Unpoly" %} competitor to htmx
 
 TODO: Read "The Valley of CODE" page above!
 
