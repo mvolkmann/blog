@@ -832,27 +832,38 @@ using the HTML5 Validation API before a request is send.
 This occurs by default for form elements, but not for other kinds of elements.
 TODO: What other kinds of elements have a value to be validated?
 
+## Boosting
+
+Anchor (`<a>`) and `form` elements that
+do not have attributes like `hx-get` or `hx-post`
+send HTTP requests to a given URL even when JavaScript is disabled.
+When an anchor is clicked, a GET request is sent.
+When a `form` is submitted, a GET or POST request
+(depending on the `method` attribute value) is sent.
+
+The {% aTargetBlank "https://htmx.org/attributes/hx-boost/", "hx-boost" %}
+attribute can be added to any element.
+This changes descendant anchor and `form` elements
+that do not have attributes like `hx-get` or `hx-post`
+to use AJAX for sending the HTTP request, but only if JavaScript is enabled.
+For example, `hx-boost="true"` can be added to the `body` element
+to "boost" all anchor and `form` elements.
+
+The advantage boosting is that less processing will be done.
+Rather than a full page refresh, the body content in the response
+will replace the body content of the current page
+and the `title` in the `head` tag will replace that in the current `head`.
+This avoids processing `link` and `script` tags in the `head` tag
+of the response which provides a significant performance advantage.
+Of course this assumes that the current page has already
+loaded all the CSS and JavaScript that is needed by the new content.
+The result is faster navigation and a better user experience.
+
+To disable boosting of specific anchors and forms
+that are descendants of an element with `hx-boost="true"`,
+add `hx-boost="false"` to them.
+
 ## Other
-
-- {% aTargetBlank "https://htmx.org/attributes/hx-boost/", "hx-boost" %}
-
-  This attribute changes anchor (`<a>`) and `form` elements to use AJAX
-  which allows HTTP requests to be sent when JavaScript is disabled.
-  It applies to all anchor and `form` elements on which is applied
-  and also those that are descendants of any element on which it is applied.
-  Apply this attribute to the `body` element
-  to "boost" all anchor and `form` elements.
-
-  TODO: Doesn't AJAX itself require JavaScript?
-  TODO: Htmx is a JavaScript library, so how can it
-  TODO: process `hx-boost` attributes if JavaScript is disabled?
-
-  By default, anchor elements will
-  send a GET request to the specified URL when clicked.
-  and `form` elements will send a GET or POST request
-  (depending on the value of the `method` attribute) when submitted.
-  Both will replace the `innerHTML` of the `body` element with the response.
-  These behaviors can be customized with additional htmx attributes.
 
 - {% aTargetBlank "https://htmx.org/attributes/hx-disinherit/", "hx-disinherit" %}
 
