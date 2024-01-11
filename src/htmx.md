@@ -544,7 +544,8 @@ To include the values of additional form elements
 that are outside the `form` (or when no `form` is used),
 add the {% aTargetBlank "https://htmx.org/attributes/hx-include/",
 "hx-include" %} attribute.
-Its value is a comma-separated list of CSS selectors.
+Its value is a comma-separated list of CSS selectors,
+include the relative values described in the "Targets" section.
 
 To omit the values of some of the form elements
 that are inside the form, add the `hx-params` attribute.
@@ -592,14 +593,16 @@ a specific target location in the DOM.
 The `hx-target` attribute specifies a target DOM element.
 Supported values include:
 
-- `this` targets current element (default)
 - `{css-selector}` targets first element that matches
+- `this` targets current element (default)
 - `closest {css-selector}` targets closest ancestor element or itself that matches
 - `find {css-selector}` targets first descendant element that matches
 - `next` targets next sibling element
 - `next {css-selector}` targets next matching element
 - `previous` targets previous sibling element
 - `previous {css-selector}` targets previous matching sibling
+
+These enable identifying elements that do not have `id` attributes.
 
 The new content can replace existing content
 or be inserted relative to existing content.
@@ -848,7 +851,13 @@ TODO: What other kinds of elements have a value to be validated?
 
 - {% aTargetBlank "https://htmx.org/attributes/hx-vals/", "hx-vals" %}
 
-This specifies additional data to be passed in HTTP requests.
+  This specifies additional, static data to be passed in HTTP requests.
+  The value is string representing a JSON object.
+  For example: `hx-vals='{"planet": "Earth", year: 2024}'`
+
+  To evaluate JavaScript expressions in the JSON values,
+  add the "js:" prefix to the JSON string.
+  For example: `hx-vals='js:{"planet": "Earth", year: new Date().getFullYear()}'`
 
 - {% aTargetBlank "https://htmx.org/attributes/hx-vars/", "hx-vars" %}
 
