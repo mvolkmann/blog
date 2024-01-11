@@ -80,7 +80,11 @@ removes the need for many things including:
 
   This is unnecessary because the browser does not need to
   interpret the meaning of the HTML being returned.
-  It just needs to render it.
+  All that is needed is a URL for rendering a starting page for an application.
+  All other interactions are derived through URLs in that page
+  and pages reached from it.
+  Endpoints are free to modify the HTML they return.
+  This is the crux of HATEOAS (described later)
 
 - client-side routing
 
