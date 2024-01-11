@@ -561,11 +561,15 @@ that are inside the form, add the `hx-params` attribute.
 For more detail, see {% aTargetBlank
 "https://htmx.org/attributes/hx-params/", "hx-params" %}.
 
-The `hx-confirm` attribute specifies a message
-to display in a confirmation dialog using the `Window` method `confirm`.
-The dialog is very plain and cannot be styled.
-It may be preferable to use a dialog that can be styled.
-An HTTP request is only sent and processed if the user clicks the OK button.
+The `hx-confirm` attribute specifies a message to display in a
+browser-supplied confirmation dialog (using the `Window` method `confirm`)
+before an HTTP request is sent.
+The dialog will have "OK" and "Cancel" buttons.
+The request will only be sent if the user clicks the "OK" button.
+
+The confirmation dialog is very plain and cannot be styled.
+It may be preferable to use a dialog that can be styled,
+perhaps using the HTML `dialog` element.
 
 The {% aTargetBlank "https://htmx.org/attributes/hx-sync/", "hx-sync" %}
 attribute coordinates concurrent requests.
@@ -862,6 +866,8 @@ The result is faster navigation and a better user experience.
 To disable boosting of specific anchors and forms
 that are descendants of an element with `hx-boost="true"`,
 add `hx-boost="false"` to them.
+
+Note that many features of htmx will not work if JavaScript is disable.
 
 ## Other
 
