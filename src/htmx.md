@@ -11,20 +11,25 @@ layout: topic-layout.njk
 
 ## Overview
 
-{% aTargetBlank "https://htmx.org", "Htmx" %} is
-a client-side JavaScript library that adds support for
-new HTML attributes that make HTML more expressive.
+{% aTargetBlank "https://htmx.org", "Htmx" %}
+is a hypermedia-oriented, client-side JavaScript library.
+Hypermedia is any data format that can describe
+branching from one "media" (ex. a document) to another.
+A hypermedia control is an element that describes a server interaction
+such as anchor (`a`) and `form` elements in HTML.
+
+Htmx adds support for new HTML attributes that make HTML more expressive.
 These attributes enable implementing "Hypermedia-Driven Applications" (HDAs).
 
 The new HTML attributes enable responding to
-specific interactions (ex. click) with any HTML element
-by sending an HTTP request using any verb (GET, POST, PUT, PATCH, or DELETE).
+any kind of interaction (ex. click) with any HTML element
+by sending an HTTP request using any method (GET, POST, PUT, PATCH, or DELETE).
 The response must contain HTML.
 Rather than performing a complete page refresh, the returned HTML
 replaces an existing DOM element (transclusion) or is inserted relative to one.
 
-The htmx approach removes the need to serialize data to JSON on the server,
-parse the JSON on the client, and convert it to HTML.
+Htmx removes the need to serialize data to JSON on the server,
+parse the JSON on the client, and build an HTML representation from the data.
 
 The server can be implemented using
 any programming language and server framework.
@@ -32,8 +37,8 @@ The server typically plays two roles.
 First, it serves static files such as HTML, CSS, JavaScript, and images.
 Second, it responds to HTTP requests by returning HTML.
 
-Htmx simplifies state management because all the state is in one place,
-on the server.
+Htmx simplifies state management because
+all the state is in one place, on the server.
 
 Many web app features typically thought to require custom JavaScript code
 can instead be implemented with only htmx.
@@ -41,131 +46,29 @@ Examples include lazy loading of data, infinite scrolling,
 and searching while the user types in an `input`.
 
 The fact that all HTML rendered by htmx applications
-is either static or server rendered makes it great for SEO.
+is either static or server-rendered makes it great for SEO.
 
 Users perceive apps built with htmx to be fast because
 the initial page load only requires
-the htmx library and the initial HTML to render.
+the htmx library (< 17K) and the initial HTML to render.
 Subsequent interactions only require fetching snippets of HTML.
 No client-side hydration of JavaScript code is needed.
 Browsers are very efficient at updating the DOM from strings of HTML.
 
-Developers perceive development of apps to be easier because
+Developers perceive app development to be easier because
 all the logic is in one place ... on the server.
 Only minimal thought needs to be given to client-side logic.
+
+Unlike endpoints that return JSON data,
+endpoints that return HTML do not require versioning.
+This is because the browser does not need to
+interpret the meaning of the HTML being returned.
+It just needs to render it.
 
 The htmx library is implemented in JavaScript,
 not TypeScript, in a single source file.
 There are plans to add JSDoc TypeScript type definitions
 for better code editor support.
-
-Htmx had a strong showing in the 2023 JavaScript Rising Stars results.
-See {% aTargetBlank "https://risingstars.js.org/2023/en#section-framework",
-"Front-end Frameworks" %}.
-
-## REST?
-
-Web app frameworks such as React, Svelte, Angular, and Vue
-have popularized the creation of single-page applications (SPAs).
-Currently, SPA web apps typically use client-side JavaScript code
-to send HTTP requests to server-side endpoints that
-query/update databases and return JSON data.
-The client code then transforms JSON into an HTML presentation.
-Many developers refer to this architecture as "REST".
-
-This is not what Roy Fielding had in mind when he wrote his famous dissertation
-"{% aTargetBlank
-"https://ics.uci.edu/~fielding/pubs/dissertation/fielding_dissertation.pdf",
-"Architectural Styles and the Design of Network-based Software Architectures" %}"
-that gave birth to REST.
-Roy has been {% aTargetBlank
-"https://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven",
-"quoted" %} saying "I am getting frustrated by
-the number of people calling any HTTP-based interface a REST API.
-Today's example is the SocialSite REST API.
-That is RPC. It screams RPC."
-
-But who decides what is REST and what isn’t?
-Is it Roy Fielding or popular opinion?
-
-The htmx approach is based on "Hypermedia As The Engine Of Application State"
-({% aTargetBlank "https://htmx.org/essays/hateoas/", "HATEOAS" %}) which is
-a specific use of the REST architecture where services return hypermedia.
-The acronym HATEOAS does not appear in the dissertation,
-but its concepts are discussed.
-
-Carson Gross describes HATEOAS systems as follows:
-"Given an entry point into the system, the rest of the system
-can be accessed simply by inspecting the hypermedia."
-
-A software architecture is RESTful if it uses a client/server model,
-is stateless, caches responses, and supports a uniform interface.
-A uniform interface is one where requests identify a resource,
-resources are manipulated through representations,
-messages are self-descriptive, and use HATEOAS.
-
-HTML is a kind of hypermedia and web browsers are hypermedia clients.
-Responses to requests can contain HTML that browsers render
-to enable users to view and operate on resources.
-This makes the responses similar to object-oriented programming
-where objects contain data and methods for operating on their data.
-Clients simply render the HTML returned.
-They do not require any resource-specific knowledge
-about how to render or modify resources.
-
-JSON responses that do not describe valid operations
-on the resource they describe and do not support HATEOAS.
-While it is possible to describe valid operations in JSON,
-doing so places the burden of interpreting and implementing
-the operations on client-side code rather than the browser.
-JSON is not hypermedia.
-
-## HTML Issues
-
-htmx addresses four important shortcomings of HTML.
-
-1. Which elements can trigger sending an HTTP request?
-
-   The only HTML elements that send an HTTP request are `a` (anchor) and `form`
-   When an anchor is clicked, it sends a GET requests to a specified URL.
-   When a `form` is submitted, it sends a GET or POST request to a specified URL.
-   Form data is attached to the URL in query parameters for GET requests
-   and is included in the request body for POST requests.
-
-   htmx enables any element to send an HTTP request.
-
-1. What events trigger sending an HTTP request?
-
-   In HTML, clicking an anchor or submitting a `form`
-   are the only events that trigger sending an HTTP request.
-
-   htmx enables any DOM event, and custom events,
-   to trigger sending an HTTP request.
-
-1. What kinds of HTTP requests can be sent?
-
-   HTML only sends GET and POST requests.
-
-   htmx enables sending any kind of HTTP request
-   which includes PUT, PATCH, and DELETE requests.
-
-1. How is the response rendered?
-
-   When HTML sends an HTTP request, the entire page is replaced by the response.
-
-   htmx enables replacing specific elements with the response
-   or inserting the response relative to an existing element,
-   while leaving the rest of the page intact.
-
-## Questions to Consider
-
-Why should we take data from a database and
-convert it to JSON just to send raw data to the client?
-
-Why should we decide how to render data on the client instead of on the server?
-
-Why should we restrict ourselves to only using JavaScript
-to implement web applications?
 
 ## History and Future
 
@@ -185,7 +88,18 @@ Intercooler had a dependency on jQuery, but htmx does not.
 
 The first version of htmx was released in May 2020.
 The 1.0 version was released in November, 2020.
-The latest version as of December 2023 is 1.9.10 which is only 16.2K.
+The latest version as of December 2023 is 1.9.10 which is less than 17K.
+
+Htmx has an extensive set of integration tests implemented in Mocha.
+
+Interest in htmx exploded in 2023 after YouTube videos
+from ThePrimeagen and Fireship were released.
+See {% aTargetBlank "https://www.youtube.com/watch?v=zjHHIqI9lUY", "htmx" %} and
+{% aTargetBlank "https://www.youtube.com/watch?v=r-GSGH2RxJs", "htmx in 100 seconds" %}.
+
+Htmx had a strong showing in the 2023 JavaScript Rising Stars results.
+See {% aTargetBlank "https://risingstars.js.org/2023/en#section-framework",
+"Front-end Frameworks" %}.
 
 Htmx 2.0 is expected in early 2024.
 It will remove legacy support for things like IE,
@@ -194,42 +108,161 @@ There will also be some changes to default behavior
 such as not enabling CORS by default.
 Other changes are not expected to be dramatic.
 
-Htmx has an extensive set of integration tests implemented in Mocha.
-
 Carson Gross wishes that the functionality of htmx would be folded into HTML,
 making htmx unnecessary.
-
-Interest in htmx exploded in 2023 after YouTube videos
-from ThePrimeagen and Fireship were released.
-See {% aTargetBlank "https://www.youtube.com/watch?v=zjHHIqI9lUY", "htmx" %} and
-{% aTargetBlank "https://www.youtube.com/watch?v=r-GSGH2RxJs", "htmx in 100 seconds" %}.
 
 Companies that sponsor the development of htmx are listed on the
 {% aTargetBlank "https://htmx.org", "htmx home page" %}.
 They include GitHub and JetBrains.
 
+## REST
+
+Web app frameworks such as React, Svelte, Angular, and Vue
+have popularized the creation of single-page applications (SPAs).
+SPA web apps typically use client-side JavaScript code
+to send HTTP requests to server-side endpoints that
+query/update databases, serialize the data into JSON, and return it.
+The browser parses the JSON into a JavaScript object
+and client code updates the page with HTML that is generated from that object.
+Client-side code is responsible for understanding the meaning of JSON data
+and breaks if the endpoints change to return different data.
+Many developers refer to this architecture as "REST".
+
+This is not what Roy Fielding had in mind when he wrote his famous dissertation
+"{% aTargetBlank
+"https://ics.uci.edu/~fielding/pubs/dissertation/fielding_dissertation.pdf",
+"Architectural Styles and the Design of Network-based Software Architectures" %}"
+that gave birth to REST.
+Roy has been {% aTargetBlank
+"https://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven",
+"quoted" %} saying "I am getting frustrated by
+the number of people calling any HTTP-based interface a REST API.
+... That is RPC."
+
+This does not mean that architectures commonly referred to as REST are bad.
+They just do not fit the Fielding definition of REST.
+
+A software architecture is RESTful if it:
+
+- uses a client/server model
+- is stateless
+- caches responses
+- supports a uniform interface
+
+A uniform interface is one where:
+
+- requests identify a resource
+- resources are manipulated through representations
+- messages are self-descriptive
+- HATEOAS is used (described next)
+
+## HATEOAS
+
+"Hypermedia As The Engine Of Application State"
+({% aTargetBlank "https://htmx.org/essays/hateoas/", "HATEOAS" %}) is
+a specific use of the REST architecture where services return hypermedia.
+The acronym HATEOAS does not appear in the dissertation,
+but its concepts are discussed.
+
+Carson Gross describes HATEOAS systems as follows:
+"Given an entry point into the system, the rest of the system
+can be accessed simply by inspecting the hypermedia."
+
+HTML is a kind of hypermedia and web browsers are hypermedia clients.
+Responses to requests can contain HTML.
+Browsers render the HTML which enables users to view and operate on resources.
+
+Such responses are similar to object-oriented programming
+where objects contain data and methods for operating on their data.
+Browsers simply render the HTML returned.
+They do not require any resource-specific knowledge
+about how to render or interact with resources.
+
+JSON is not hypermedia.
+JSON responses do not support HATEOAS because they typically
+only contain raw data with no information on how to interact with it.
+In addition, browsers do not know how to render JSON data.
+Client code is required to understand the meaning of the data
+in order to render it in a human-readable way.
+
+## HTML Issues
+
+Htmx addresses four important shortcomings of HTML.
+
+1. Which elements can trigger sending an HTTP request?
+
+   The only HTML elements that send an HTTP request are `a` (anchor) and `form`
+   When an anchor is clicked, it sends a GET requests to a specified URL.
+   When a `form` is submitted, it sends a GET or POST request to a specified URL.
+   For GET requests, form data is attached to the URL in query parameters.
+   For POST requests, form data is included in the request body.
+
+   Htmx enables any element to send an HTTP request.
+
+1. What events trigger sending an HTTP request?
+
+   In HTML, clicking an anchor or submitting a `form`
+   are the only events that trigger sending an HTTP request.
+
+   Htmx enables any DOM event, and custom events,
+   to trigger sending an HTTP request.
+
+1. What kinds of HTTP requests can be sent?
+
+   HTML only sends GET and POST requests.
+
+   Htmx enables sending any kind of HTTP request
+   which includes PUT, PATCH, and DELETE.
+
+1. How is the response rendered?
+
+   When HTML sends an HTTP request, the entire page is replaced by the response.
+
+   Htmx enables replacing specific elements with the response (transclusion)
+   or inserting the response relative to an existing element,
+   while leaving the rest of the page intact.
+
+## Questions to Consider
+
+What is the benefit of serializing data to JSON on the server,
+returning JSON to the browser, parsing JSON in the browser,
+and using client-side code to convert the data into HTML?
+With htmx the steps of serializing data to JSON on the server
+and parsing JSON in the browser are elimated.
+
+What are the advantages of generating HTML in the browser
+instead of doing the same work on the server?
+
+Why should we restrict ourselves to only using JavaScript
+to implement web applications?
+With htmx the server code can be implemented in any programming language
+that supports implementing HTTP servers.
+
 ## Use Cases
 
-Htmx is great for CRUD-based apps and dashboards.
-
-Htmx is not appropriate for all web app features.
+Htmx is great for CRUD-based applications and dashboards.
+But htmx is not appropriate for all web app features.
 
 Using htmx to update the UI on every mouse move or drag
 would be too slow since each movement would trigger a new HTTP request.
 Examples of apps that require this kind of functionality include
 Google Maps and many games.
 
+Htmx is not appropriate for spreadsheet-like UIs
+where a change in one part of the UI triggers
+changes in many other parts that need to be reflected quickly.
+
 Htmx cannot be used in apps that require offline support
 because they rely on sending HTTP requests to
 get new HTML that updates the UI.
 
-Htmx can be used in conjunction with other approaches,
-so it can be used for the parts of apps that
-do not require high frequency updates.
+Htmx can be used in conjunction with other approaches.
+Consider using it for all the parts of apps
+that do not require high frequency updates.
 
 ## Client-side Processing
 
-Htmx apps to not require sending an HTTP request for every user interaction.
+Htmx applications to not require sending an HTTP request for every user interaction.
 They can use HTML elements such as `details` and `dialog`
 and client-side scripting.
 Scripting options include vanilla JavaScript,
