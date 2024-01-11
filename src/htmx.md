@@ -333,22 +333,31 @@ and the endpoints that return HTML.
 
 ## Installing
 
-There is no need to install htmx using a package manager like npm or bun.
-It can be used from a CDN by including the following `script` tag:
+There are three ways to use htmx.
 
-```html
-<script src="https://unpkg.com/htmx.org@1.9.9"></script>
-```
+1. Used htmx from a CDN by including the following `script` tag:
 
-Alternatively, it can be downloaded as a single, minified JavaScript file
-by clicking the "~14k min.gz’d" link near the top of the
-{% aTargetBlank "https://htmx.org", "htmx home page" %}.
-Place the downloaded file in a directory whose files are served by
-your application server and include a `script` tag like the following:
+   ```html
+   <script src="https://unpkg.com/htmx.org@1.9.9"></script>
+   ```
 
-```html
-<script src="htmx.min.js"></script>
-```
+1. Install htmx using a package manager like npm or bun.
+
+   Enter `npm install htmx.org` or `bun add htmx.org`.
+   Then bundle the file `node_modules/htmx.org/dist/htmx.min.js`
+   with other JavaScript files being used by the application
+   OR copy that file to a directory whose files are served by
+   your application server and include a `script` tag to include it.
+
+1. Download htmx as a single, minified JavaScript file
+   by clicking the "~14k min.gz’d" link near the top of the
+   {% aTargetBlank "https://htmx.org", "htmx home page" %}.
+   Place the downloaded file in a directory whose files are served by
+   your application server and include a `script` tag like the following:
+
+   ```html
+   <script src="htmx.min.js"></script>
+   ```
 
 ## Using TypeScript
 
