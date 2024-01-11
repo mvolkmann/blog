@@ -853,11 +853,14 @@ TODO: What other kinds of elements have a value to be validated?
 
   This specifies additional, static data to be passed in HTTP requests.
   The value is string representing a JSON object.
-  For example: `hx-vals='{"planet": "Earth", year: 2024}'`
+  For example: `hx-vals='{"planet": "Earth", "year": 2024}'`
 
   To evaluate JavaScript expressions in the JSON values,
   add the "js:" prefix to the JSON string.
-  For example: `hx-vals='js:{"planet": "Earth", year: new Date().getFullYear()}'`
+  For example: `hx-vals='js:{"planet": "Earth", "year": new Date().getFullYear()}'`
+
+  The values will be passed a query parameters for GET requests
+  and in the request body for all other kinds of requests.
 
 - {% aTargetBlank "https://htmx.org/attributes/hx-vars/", "hx-vars" %}
 
@@ -935,8 +938,18 @@ TODO: Try this.
 
 ## History
 
-hx-history-elt
-hx-push-url
+TODO: Describe hx-history-elt.
+
+The `hx-push-url` attribute pushes a browser history entry for a page update.
+The value of this attribute can be:
+
+- `"true"` to create an entry without changing
+  what appears in the browser navigation bar
+- `"{some-relative-url}"` to create an entry AND
+  change what appears in the browser navigation bar
+  (ex. `hx-push-url="/todo/detail"`)
+- `"false"` to avoid creating an entry when
+  the value `"true"` would be inherited from an ancestor element
 
 ## \_hyperscript
 
