@@ -513,7 +513,7 @@ This is specified in square brackets after an event name.
 For example, `click[shiftKey]` only triggers when
 an element is clicked while the shift key is held down.
 Multiple filters can be specify by and'ing them.
-For example, `click[shiftKey&&ctrlKey]`.
+For example, `click[shiftKey && ctrlKey]`.
 The square brackets can also contain
 a call to a JavaScript function that returns a Boolean value
 where triggering doesn't occur if the function returns `false`.
@@ -531,23 +531,20 @@ when the user triggers the element:
 {% aTargetBlank "https://htmx.org/attributes/hx-patch/", "hx-patch" %}, and
 {% aTargetBlank "https://htmx.org/attributes/hx-delete/", "hx-delete" %}.
 
-The {% aTargetBlank "https://htmx.org/attributes/hx-sync/", "hx-sync" %}
-attribute coordinates concurrent requests.
-For example, entering data in an `input` that is inside a `form`
-could trigger two requests, one to validate the `input` value
-and one to submit the `form`.
-By default, these requests will run in parallel.
-If `hx-swap="closest form:abort` is applied to the `input`,
-the validation request will be sent first.
-If the validation succeeds then the submit request will be sent.
-Otherwise it will be aborted.
-
-When a `form` is submitted,
-the request includes the values of all its `form` elements by default.
+When an HTTP request is triggered on a `form` element,
+the values of all inputs inside the form will be included in the request.
+When a non-GET HTTP request is triggered on a non-form element,
+htmx will search upward in the DOM hierarchy for a `form` element.
+If one is found, htmx will include the values
+of all inputs inside the form in the request.
+If a form is not found, only the value of
+the element that triggered the request is included.
 
 To include the values of additional form elements
-that are outside the form, add the {% aTargetBlank
-"https://htmx.org/attributes/hx-include/", "hx-include" %}.
+that are outside the `form` (or when no `form` is used),
+add the {% aTargetBlank "https://htmx.org/attributes/hx-include/",
+"hx-include" %} attribute.
+Its value is a comma-separated list of CSS selectors.
 
 To omit the values of some of the form elements
 that are inside the form, add the `hx-params` attribute.
@@ -559,6 +556,17 @@ to display in a confirmation dialog using the `Window` method `confirm`.
 The dialog is very plain and cannot be styled.
 It may be preferable to use a dialog that can be styled.
 An HTTP request is only sent and processed if the user clicks the OK button.
+
+The {% aTargetBlank "https://htmx.org/attributes/hx-sync/", "hx-sync" %}
+attribute coordinates concurrent requests.
+For example, entering data in an `input` that is inside a `form`
+could trigger two requests, one to validate the `input` value
+and one to submit the `form`.
+By default, these requests will run in parallel.
+If `hx-swap="closest form:abort` is applied to the `input`,
+the validation request will be sent first.
+If the validation succeeds then the submit request will be sent.
+Otherwise it will be aborted.
 
 ## URLs
 
