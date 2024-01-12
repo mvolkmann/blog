@@ -152,6 +152,7 @@ removes the need for many things including:
 
   This is mostly unnecessary because the logic is embedded in
   the HTML elements returned by the server.
+  This implements Hypermedia As The Engine Of Application State (HATEOAS).
 
 - managing client-side data models
 
