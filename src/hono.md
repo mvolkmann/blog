@@ -4,6 +4,12 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+<style>
+  img {
+    border: 1px solid gray;
+  }
+</style>
+
 <img alt="Hono logo" style="width: 20%"
   src="/blog/assets/hono-logo.png?v={{pkg.version}}"
   title="Hono logo">
@@ -27,20 +33,20 @@ This will prompt for:
 - Target directory
 - Which template do you want to use?
 
-It will then run for almost a minute.
-Which it finishes, the target directory will be created
+It will then run for almost a minute. Why so long?
+When it finishes, the target directory will be created
 and will contain the following files:
 
-- README.md
-- package.json
-- src/index.ts
-- tsconfig.json
+- `README.md`
+- `package.json`
+- `src/index.ts`
+- `tsconfig.json`
 
 Install the dependencies by entering `npm install` or `bun install`.
 
-To run the project, enter `npm run dev` or `bun run dev`.
+Run the project by entering `npm run dev` or `bun run dev`.
 
-The server will listen on port 3000 and provide hot reloading by default.
+By default, the server listens on port 3000 and provide hot reloading.
 
 ## JSX
 
@@ -64,7 +70,10 @@ They are by default in new Hono projects.
 This example demonstrates implementing endpoints for
 CRUD operations on a collection of dogs.
 
-### src/index.tsx
+<img alt="Hono dog app" style="width: 50%"
+  src="/blog/assets/hono-dog-app.png?v={{pkg.version}}">
+
+### src/index.ts
 
 ```ts
 import {Hono} from 'hono';
@@ -78,12 +87,19 @@ const app = new Hono();
 app.use('/*', logger());
 
 // This serves static files from the public directory.
-// Try browsing http://localhost:3000/demo.html
 app.use('/*', serveStatic({root: './public'}));
 
 app.route('/dog', dogRouter);
 
 export default app;
+```
+
+### public/styles.css
+
+```css
+body {
+  font-family: sans-serif;
+}
 ```
 
 ### src/dog-router.tsx
