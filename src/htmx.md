@@ -71,10 +71,97 @@ not TypeScript, in a single source file.
 There are plans to add JSDoc TypeScript type definitions
 for better code editor support.
 
+## Why Use htmx?
+
+The following is a brief summary of the main benefits
+of using htmx compared to SPA frameworks.
+Many of these are discussed in more detail in subsequent sections.
+
+- Fixes HTML shortcomings
+
+  Htmx enables many kinds of user interactions with any kind of HTML element
+  to trigger any kind of HTTP request and insert HTML in the response
+  into a specific location in the DOM without a full page refresh.
+  This dramatically reduces the need for custom client-side JavaScript code.
+
+- Improves startup time
+
+  With htmx browsers download considerably less JavaScript code which improves
+  metrics such as "First Contentful Paint" and "Time to Interactive".
+  This results in a better user experience.
+
+- Favors LoB over SoC
+
+  The Locality of Behavior (LoB) pattern places related code together
+  which makes the code easier to understand and modify
+  than following a Separation of Concerns (SoC) pattern.
+  From Richard Gabriel, LoB "enables a programmer to
+  understand source by looking at only a small portion of it."
+
+- Eliminates JSON as an intermediate format
+
+  Typically SPA application endpoints fetch data,
+  serialize it to JSON, and return the JSON.
+  Then code running in the browser parses the JSON
+  and generates HTML from it.
+
+  Htmx endpoints fetch data, generate HTML from it, and return the HTML.
+  The browser only has to render the returned HTML.
+  Removing JSON as an intermediate format provides efficiency gains.
+
+- Enables Hypermedia ON Whatever you'd Like (HOWL)
+
+  Htmx enables implementing web applications using any programming language
+  that can implement an HTTP server whose endpoints return HTML responses.
+  This includes most programming languages.
+
+- Encourages full-stack development
+
+  Often in SPA development one team of developers implements
+  endpoints that return JSON data and another team of developers
+  implements web user interfaces that use those endpoints.
+
+  With htmx each developer develops complete features by
+  implementing endpoints that return HTML that includes htmx attributes.
+  This requires developers to know the selected programming language,
+  HTML, and CSS, but not necessarily JavaScript.
+
+- Reduces learning curve
+
+  Learning how to use htmx attributes in HTML
+  is significantly easier than learning a SPA framework.
+
+- Simplifies state management
+
+  Typical SPA applications manage state on both the server and client.
+  Keeping the state in sync in two places introduces challenges.
+
+  With htmx all the state is only on the server,
+  so no state synchronization is needed.
+
+- Simplifies client-side code
+
+  See the next section for details.
+
 ## Simplified Client-side
 
 Using endpoints that return HTML instead of JSON
 removes the need for many things including:
+
+- nearly all client-side logic
+
+  This is mostly unnecessary because the logic is embedded in
+  the HTML elements returned by the server.
+
+- managing client-side data models
+
+  This is unnecessary because all the data remains only on the server.
+
+- client-side routing
+
+  This is unnecessary because page updates and transitions
+  are handled by HTTP requests triggered on elements
+  described in the HTML returned by the server.
 
 - versioning
 
@@ -85,21 +172,6 @@ removes the need for many things including:
   and pages reached from it.
   Endpoints are free to modify the HTML they return.
   This is the crux of HATEOAS (described later)
-
-- client-side routing
-
-  This is unnecessary because page updates and transitions
-  are handled by HTTP requests triggered on elements
-  described in the HTML returned by the server.
-
-- managing client-side data models
-
-  This is unnecessary because all the data remains only on the server.
-
-- nearly all client-side logic
-
-  This is mostly unnecessary because the logic is embedded in
-  the HTML elements returned by the server.
 
 The HTML returned by endpoints is typically
 larger than a corresponding JSON response would be.
