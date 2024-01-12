@@ -855,10 +855,8 @@ See the example at {% aTargetBlank
 ## Out-of-band Updates
 
 The {% aTargetBlank "https://htmx.org/attributes/hx-swap-oob/",
-"hx-swap-oob" %} attribute specifies that an element
-should be placed relative to an existing element with the same `id` value.
-When the value of the attribute is `true`,
-this element replaces the one with the same `id` value.
+"hx-swap-oob" %} attribute with a value of `"true"` specifies that
+an element with the same id should be replaced by this element.
 
 For example, in a todo app, adding a new todo needs to
 insert a new element in the list of todos AND
@@ -904,10 +902,13 @@ which can be used in place of this attribute.
 
 TODO: Try this.
 The {% aTargetBlank "https://htmx.org/attributes/hx-validate/",
-"hx-validate" %} attribute cause an element to validate itself
-using the HTML5 Validation API before a request is send.
-This occurs by default for form elements, but not for other kinds of elements.
-TODO: What other kinds of elements have a value to be validated?
+"hx-validate" %} attribute causes an element to validate itself
+using the HTML5 Validation API before a request is sent.
+This occurs by default for `form` elements,
+but not for `input`, `textarea`, and `select`elements.
+When those elements have `hx-\*` attributes that send an HTTP request,
+adding `hx-validate="true"` causes them to be validated
+before the request is sent.
 
 ## Boosting
 
@@ -1176,3 +1177,9 @@ TODO: Read "The Valley of CODE" page above!
 
 - See HoTMiXer for starting new htmx projects at
   https://www.npmjs.com/package/hotmixer
+
+- patterns to document:
+  - redirecting to another endpoint
+  - input validation using an HTTP request (see email-validation app)
+  - infinite scroll
+  - type-ahead
