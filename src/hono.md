@@ -596,10 +596,27 @@ async function demo() {
     }
   );
   const dogs = await res.json();
-  console.log('client.ts demo: dogs =', dogs);
+  console.log('dogs =', dogs);
 }
 
 demo();
+```
+
+The output from the code above is:
+
+```text
+dogs = {
+  "1": {
+    id: 1,
+    name: "Fireball",
+    breed: "Greyhound",
+  },
+  "3": {
+    id: 3,
+    name: "Ramsay",
+    breed: "Native American Indian Dog",
+  },
+}
 ```
 
 For more detail, see {% aTargetBlank
