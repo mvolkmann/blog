@@ -389,6 +389,10 @@ The following code adds Zod validation to the dog endpoints
 that were defined earlier.
 Look for lines that contain "Schema" or "Validator".
 
+This code also captures the route objects and exports their types
+so they can be used in client code to call the endpoints
+using the RPC approach described in the next section.
+
 ### src/dog-router.tsx Improved
 
 ```ts
@@ -455,7 +459,7 @@ const DogPage: FC = ({dogs}) => {
 };
 
 // This gets all the dogs as either JSON or HTML.
-router.get('/', (c: Context) => {
+const getAllRoute = router.get('/', (c: Context) => {
   const accept = c.req.header('Accept');
   if (accept && accept.includes('application/json')) {
     return c.json(dogMap);
@@ -469,10 +473,10 @@ router.get('/', (c: Context) => {
 
 // This gets one dog by its id as JSON.
 const idSchema = z.object({
-  id: z.coerce.number()
+  id: z.coerce.number().positive()
 });
 const idValidator = zValidator('param', idSchema);
-router.get('/:id', idValidator, (c: Context) => {
+const getOneRoute = router.get('/:id', idValidator, (c: Context) => {
   const id = Number(c.req.param('id'));
   const dog = dogMap[id];
   c.status(dog ? 200 : 404);
@@ -482,32 +486,39 @@ router.get('/:id', idValidator, (c: Context) => {
 // This creates a new dog.
 const dogSchema = z
   .object({
+    id: z.number().positive().optional(),
     name: z.string().min(1),
     breed: z.string().min(2)
   })
   .strict(); // no extra properties allowed
 const dogValidator = zValidator('json', dogSchema);
-router.post('/', dogValidator, async (c: Context) => {
+const createRoute = router.post('/', dogValidator, async (c: Context) => {
   const data = (await c.req.json()) as unknown as NewDog;
   const dog = addDog(data.name, data.breed);
+  c.status(201);
   return c.json(dog);
 });
 
 // This updates the dog with a given id.
-router.put('/:id', idValidator, dogValidator, async (c: Context) => {
-  const id = Number(c.req.param('id'));
-  const data = (await c.req.json()) as unknown as NewDog;
-  const dog = dogMap[id];
-  if (dog) {
-    dog.name = data.name;
-    dog.breed = data.breed;
+const updateRoute = router.put(
+  '/:id',
+  idValidator,
+  dogValidator,
+  async (c: Context) => {
+    const id = Number(c.req.param('id'));
+    const data = (await c.req.json()) as unknown as NewDog;
+    const dog = dogMap[id];
+    if (dog) {
+      dog.name = data.name;
+      dog.breed = data.breed;
+    }
+    c.status(dog ? 200 : 404);
+    return c.json(dog);
   }
-  c.status(dog ? 200 : 404);
-  return c.json(dog);
-});
+);
 
 // This deletes the dog with a given id.
-router.delete('/:id', idValidator, async (c: Context) => {
+const deleteRoute = router.delete('/:id', idValidator, async (c: Context) => {
   const id = Number(c.req.param('id'));
   const dog = dogMap[id];
   if (dog) delete dogMap[id];
@@ -516,25 +527,79 @@ router.delete('/:id', idValidator, async (c: Context) => {
 });
 
 export default router;
+export type CreateType = typeof createRoute;
+export type DeleteType = typeof deleteRoute;
+export type GetAllType = typeof getAllRoute;
+export type GetOneType = typeof getOneRoute;
+export type UpdateType = typeof updateRoute;
 ```
 
 ## RPC
 
-Hono can export the type definitions for endpoints
+Hono can export the type definitions for routes
 that are based on the specified validators.
 These definitions can be used in client code
 to add type checking to endpoint calls
 that are made using the Hono client.
 
+Route types were exported in the code in the previous section.
+
 The following is an example of client code that uses the Hono client.
 
 ```ts
-import {UpdateType} from './dog-router';
+import {CreateType, DeleteType, GetAllType, UpdateType} from './dog-router';
 import {hc} from 'hono/client';
 
-const URL_PREFIX = 'http://localhost:3000/dog';
+const URL_PREFIX = 'http://localhost:3000/';
 
-const client = hc<UpdateType>(URL_PREFIX);
+const createClient = hc<CreateType>(URL_PREFIX);
+const deleteClient = hc<DeleteType>(URL_PREFIX);
+const getAllClient = hc<GetAllType>(URL_PREFIX);
+const updateClient = hc<UpdateType>(URL_PREFIX);
+
+async function demo() {
+  // Create a dog.
+  let res = await createClient.dog.$post(
+    {
+      json: {
+        name: 'Ramsay',
+        breed: 'Native American Indian Dog'
+      }
+    },
+    {
+      headers: {
+        Accept: 'application/json'
+      }
+    }
+  );
+
+  // Update a dog.
+  res = await updateClient.dog[':id'].$put({
+    param: {id: 1},
+    json: {
+      // id: 1,
+      name: 'Fireball',
+      breed: 'Greyhound'
+    }
+  });
+
+  // Delete a dog.
+  res = await deleteClient.dog[':id'].$delete({param: {id: 2}});
+
+  // Get all the dogs.
+  res = await getAllClient.dog.$get(
+    {},
+    {
+      headers: {
+        Accept: 'application/json'
+      }
+    }
+  );
+  const dogs = await res.json();
+  console.log('client.ts demo: dogs =', dogs);
+}
+
+demo();
 ```
 
 For more detail, see {% aTargetBlank
