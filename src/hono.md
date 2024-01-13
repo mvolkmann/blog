@@ -267,7 +267,10 @@ describe('dog endpoints', () => {
     };
     const req = new Request(URL_PREFIX, {
       method: 'POST',
-      body: JSON.stringify(dog)
+      body: JSON.stringify(dog),
+      headers: {
+        'Content-Type': 'application/json'
+      }
     });
     const res = await app.fetch(req);
 
@@ -288,7 +291,10 @@ describe('dog endpoints', () => {
     };
     const req = new Request(URL_PREFIX + '/1', {
       method: 'PUT',
-      body: JSON.stringify(dog)
+      body: JSON.stringify(dog),
+      headers: {
+        'Content-Type': 'application/json'
+      }
     });
     const res = await app.fetch(req);
 
@@ -507,3 +513,25 @@ router.delete('/:id', idValidator, async (c: Context) => {
 
 export default router;
 ```
+
+## RPC
+
+Hono can export the type definitions for endpoints
+that are based on the specified validators.
+These definitions can be used in client code
+to add type checking to endpoint calls
+that are made using the Hono client.
+
+The following is an example of client code that uses the Hono client.
+
+```ts
+import {UpdateType} from './dog-router';
+import {hc} from 'hono/client';
+
+const URL_PREFIX = 'http://localhost:3000/dog';
+
+const client = hc<UpdateType>(URL_PREFIX);
+```
+
+For more detail, see {% aTargetBlank
+"https://hono.dev/guides/rpc#rpc-client", "RPC/Client" %}.
