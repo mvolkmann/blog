@@ -107,16 +107,20 @@ TODO: Is direct use of this command deprecated?
 This section walks through creating a Cloudflare Worker project that
 uses {% aTargetBlank "https://hono.dev/", "Hono" %} for request routing.
 
-- Create a new project as described above.
-
-  Is it important to include `\@2`
-  as in `npm create cloudflare\@2 -- hono-dogs`?
+- Create a new project named "hono-dogs" as described above.
 
 - Install Hono dependencies by entering the following commands:
 
   ```bash
   npm install hono`
   npm install @hono/zod-validator
+  ```
+
+- Make the following modifications in `tsconfig.json`:
+
+  ```json
+  "jsx": "react-jsx",
+  "jsxImportSource": "hono/jsx",
   ```
 
 - Create the two files described below:
@@ -138,9 +142,7 @@ import dogRouter from './dog-router';
 
 const app = new Hono();
 
-app.get('/', c => {
-  return c.text('Hello from Hono');
-});
+app.get('/', c => c.redirect('/dog'));
 
 app.route('/dog', dogRouter);
 
@@ -247,3 +249,22 @@ export type GetAllType = typeof getAllRoute;
 export type GetOneType = typeof getOneRoute;
 export type UpdateType = typeof updateRoute;
 ```
+
+## Viewing Workers
+
+To view your workers, browse https://cloudflare.com.
+
+Login to see the dashboard page.
+
+Click "Workers & Pages" in the left nav
+to display a list of the deployed workers.
+
+For each worker, the number of requests sent to it
+and the number of errors logged will be displayed.
+
+Click a worker to see detail about it, including its deployed URL.
+
+## KV Stores
+
+TODO: Document how to use these.
+TODO: Can you store the map of dogs for your demo in a KV store?
