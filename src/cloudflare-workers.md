@@ -270,3 +270,8 @@ TODO: Document how to use these.
 TODO: Can you store the map of dogs for your demo in a KV store?
 
 See https://developers.cloudflare.com/workers/wrangler/migration/v1-to-v2/wrangler-legacy/commands/#kv.
+
+## htmx
+
+A complete web app developed with htmx could be deployed to a Cloudflare Worker!
+TODO: Try this!
