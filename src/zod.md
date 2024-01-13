@@ -16,9 +16,16 @@ layout: topic-layout.njk
 
 ## Overview
 
-{% aTargetBlank "https://zod.dev", "Zod" %} is a JavaScript library
+{% aTargetBlank "https://zod.dev", "Zod" %} is a TypeScript library
 for validating values.
-It has great TypeScript support.
+
+The rationale for the name "Zod" is not given in its documentation,
+but some definitions include:
+
+- one of Superman's greatest archenemies (General Zod)
+- someone who is very foolish, awkward, or socially inept
+- any repellent thing or person
+- a studious person
 
 The following sections provide an overview
 of specifying validation constraints using Zod.
