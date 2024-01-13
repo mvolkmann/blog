@@ -603,6 +603,8 @@ Route types were exported in the code in the previous section.
 
 The following is an example of client code that uses the Hono client.
 
+TODO: Why don't I get any type information in VS Code when using these routes?
+
 ```ts
 import {CreateType, DeleteType, GetAllType, UpdateType} from './dog-router';
 import {hc} from 'hono/client';
