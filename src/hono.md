@@ -681,9 +681,6 @@ For more detail, see {% aTargetBlank
 
 ## Performance
 
-TODO: Describe the performance of Hono compare to alternatives like
-TODO: Express, ElysiaJS, and Fastify.
-
 The following sites provide relevant benchmarks:
 
 - {% aTargetBlank
