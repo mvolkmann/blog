@@ -1157,7 +1157,7 @@ The following steps can be taken to define and render a collection of dogs.
 - Create the file `config.ts` in this directory.
 
   This file defines each of the collections.
-  It uses {% aTargetBlank "https://zod.dev", "Zod" %}
+  It uses <a href="/blog/topics/#/blog/zod" target="_blank">Zod</a>
   to describe and validate the schema of each collection.
   The schema defines which front matter properties are valid
   and provides a type-safe way to use the data.
@@ -1407,97 +1407,6 @@ const relatedEntries = await getEntries(relatedTeams || []);
 </ul>
 ```
 
-### Zod Validation
-
-Earlier we saw how the {% aTargetBlank "https://zod.dev", "Zod" %} library
-is used to define the schema for a collection.
-Highlights of the Zod library are presented here.
-
-Zod supports the following primitive types that are used with `z.{type}()`:
-
-- `bigint`, `boolean`, `date`, `number`, `string`, `symbol`
-- `null`, `undefined`, `void`, `never`
-- `any`, `unknown`
-
-These types are all functions that are typically called with no arguments.
-Some of them take an optional configuration argument.
-Rather that calling these functions repeatedly,
-they can be called once to store the return value in a variable
-and the variable can be used multiple times.
-
-Many validation methods can be applied to the `string` type.
-Highlights include the following:
-
-- `.datetime()`
-- `.email()`
-- `.emoji()`
-- `.endsWith(string)`
-- `.includes(string)`
-- `.length(number)`
-- `.max(number)`
-- `.min(number)`
-- `.regex(regex)`
-- `.startsWith(string)`
-- `.url()`
-
-For example, the type `z.string().min(3).max(10).endsWith("X")`
-matches string values with a length of at least 3, not more than 10,
-and ending with "X".
-
-Many validation methods can be applied to the `number` type.
-Highlights include the following:
-
-- `.int()` - not floating point
-- `.gt(number)`
-- `.gte(number)` - alias .min(number)
-- `.lt(number)`
-- `.lte(number);` - alias .max(number)
-- `.positive()` - greater than 0
-- `.nonnegative()` - greater than or equal to 0
-- `.negative()` - less than 0
-- `.nonpositive()` - less than or equal to 0
-
-All validation methods take an optional final argument that
-specifies the error message to display when the validation fails.
-For example, `z.number().max(10, { message: "cannot exceed 10" })`
-
-The `enum` type specifies a set of allowed string values.
-For example, `z.enum(["red", "green", "blue"])`
-
-To validate against the values in a TypeScript `enum`,
-use the `nativeEnum` type. For example:
-
-```ts
-enum Color { red, green, blue }
-...
-z.nativeEnum(Color)
-```
-
-All types specify a required value unless the `optional` method is used.
-For example: `z.optional(z.string())` or `z.string().optional()`.
-
-Object types are specified with the `object` method.
-For example:
-
-```ts
-const Dog = z.object({
-  name: z.string(),
-  breed: z.string(),
-  age: z.number().optional()
-});
-```
-
-Array types are specified with the `array` function.
-For example, the following both specify an array of integers:
-
-```ts
-z.array(z.number().int());
-z.number().int().array();
-```
-
-Zod can specify much more than is covered here.
-See {% aTargetBlank "https://zod.dev", "Zod" %} for more detail.
-
 ### Sanitizing Content
 
 The content below the front matter in collection documents is not sanitized.
@@ -1669,7 +1578,8 @@ teams.map(({ Content, frontmatter }) => (
 
 Using `Astro.glob` is a bit easier than using content collections.
 But content collections have many advantages including
-handling references between documents, property validation with Zod,
+handling references between documents, property validation with
+<a href="/blog/topics/#/blog/zod" target="_blank">Zod</a>,
 pagination support, and incremental content caching.
 
 The `Astro.glob` function can also read JSON files.

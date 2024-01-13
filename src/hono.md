@@ -21,6 +21,8 @@ is a JavaScript HTTP server library that runs in any JavaScript runtime.
 This includes AWS Lambda, Bun, Cloudflare Pages, Cloudflare Workers,
 Deno, Fastly, Lagon, Netlify, NextJS, Node.js, and Vercel.
 
+"Honō" is the Japanese word for "flame" or "blaze" which explains its logo.
+
 {% aTargetBlank "https://hono.dev/", "ElysiaJS" %} is a competitor to Hono.
 It has slightly better performance than Hono, but only runs in Bun.
 
@@ -363,7 +365,8 @@ that describes the validation error:
 ```
 
 The support for specifying validation criteria is quite basic.
-However, integration with {% aTargetBlank "https://zod.dev", "Zod" %}
+However, integration with
+<a href="/blog/topics/#/blog/zod" target="_blank">Zod</a>,
 can be installed for much better support.
 
 To install a library that integrates Zod validation with Hono,
