@@ -626,3 +626,22 @@ For more detail, see {% aTargetBlank
 
 TODO: Describe the performance of Hono compare to alternatives like
 TODO: Express, ElysiaJS, and Fastify.
+
+The following sites provide relevant benchmarks:
+
+- {% aTargetBlank
+  "https://medium.com/deno-the-complete-reference/deno-express-vs-fastify-vs-oak-vs-hono-whos-runs-fastest-0657d791c17a",
+  "Deno — Express vs Fastify vs Oak vs Hono: Who’s runs fastest?" %}
+
+  This shows Hono to be significantly faster than Fastify, Oak, and Express.
+
+- {% aTargetBlank
+  "https://medium.com/deno-the-complete-reference/bun-elysia-js-vs-hono-hello-world-b655a20f1f2b",
+  "Bun: Elysia.js vs Hono" %}
+
+  This concludes that "Elysia is marginally faster than Hono,
+  but the winning margin is negligible."
+
+- {% aTargetBlank "https://github.com/delvedor/find-my-way", "find-my-way" %}
+  is another HTTP library to consider. Some benchmarks
+  show this to be considerably faster than ElysiaJS and Hono.
