@@ -321,3 +321,189 @@ describe('dog endpoints', () => {
   });
 });
 ```
+
+## Validation
+
+Hono supports validating the following kinds of request data
+passed to endpoints:
+
+- `cookie` to validate cookies
+- `form` to validate form submissions
+- `header` to validate request headers
+- `json` to validate JSON in request bodies
+- `param` to validate path parameters
+- `query` to validate query parameter
+
+When validation fails,
+the response status code will be 400, indicating a bad request,
+and the response body will be a JSON object similar to the following
+that describes the validation error:
+
+```json
+{
+  "success": false,
+  "error": {
+    "issues": [
+      {
+        "message": "{description-of-error}",
+        "path": ["{name-of-invalid-property}"]
+        ... more properties describing the error ...
+      }
+    ],
+    "name": "ZodError"
+  }
+}
+```
+
+The support for specifying validation criteria is quite basic.
+However, integration with {% aTargetBlank "https://zod.dev", "Zod" %}
+can be installed for much better support.
+
+To install a library that integrates Zod validation with Hono,
+enter `npm install @hono/zod-validator` or `bun add @hono/zod-validator`.
+
+To make this library available in code, add the following imports:
+
+```ts
+import {z} from 'zod';
+import {zValidator} from '@hono/zod-validator';
+```
+
+To add validation to a route, add any number of calls to `zValidator`
+as additional arguments after the route path and before the handler function.
+Each call can validate a different kind of request data.
+For example, one can be for validating path parameters
+and another can be for validating the JSON request body.
+
+The following code adds Zod validation to the dog endpoints
+that were defined earlier.
+Look for lines that contain "Schema" or "Validator".
+
+### src/dog-router.tsx Improved
+
+```ts
+import {Hono, type Context} from 'hono';
+import type {FC} from 'hono/jsx';
+import {z} from 'zod';
+import {zValidator} from '@hono/zod-validator';
+
+const router = new Hono();
+
+interface NewDog {
+  name: string;
+  breed: string;
+}
+
+interface Dog extends NewDog {
+  id: number;
+}
+
+let lastId = 0;
+
+// The dogs are maintained in memory.
+const dogMap: {[id: number]: Dog} = {};
+
+function addDog(name: string, breed: string): Dog {
+  const id = ++lastId;
+  const dog = {id, name, breed};
+  dogMap[id] = dog;
+  return dog;
+}
+
+addDog('Comet', 'Whippet');
+addDog('Oscar', 'German Shorthaired Pointer');
+
+// This provides HTML boilerplate for any page.
+const Layout: FC = props => {
+  return (
+    <html>
+      <head>
+        <link rel="stylesheet" href="/styles.css" />
+        <title>{props.title}</title>
+      </head>
+      <body>{props.children}</body>
+    </html>
+  );
+};
+
+// This returns JSX for a page that
+// list the dogs passed in a prop.
+const DogPage: FC = ({dogs}) => {
+  const title = 'Dogs I Know';
+  return (
+    <Layout title={title}>
+      <h1>{title}</h1>
+      <ul>
+        {dogs.map((dog: Dog) => (
+          <li>
+            {dog.name} is a {dog.breed}.
+          </li>
+        ))}
+      </ul>
+    </Layout>
+  );
+};
+
+// This gets all the dogs as either JSON or HTML.
+router.get('/', (c: Context) => {
+  const accept = c.req.header('Accept');
+  if (accept && accept.includes('application/json')) {
+    return c.json(dogMap);
+  }
+
+  const dogs = Object.values(dogMap).sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
+  return c.html(<DogPage dogs={dogs} />);
+});
+
+// This gets one dog by its id as JSON.
+const idSchema = z.object({
+  id: z.coerce.number()
+});
+const idValidator = zValidator('param', idSchema);
+router.get('/:id', idValidator, (c: Context) => {
+  const id = Number(c.req.param('id'));
+  const dog = dogMap[id];
+  c.status(dog ? 200 : 404);
+  return c.json(dog);
+});
+
+// This creates a new dog.
+const dogSchema = z
+  .object({
+    name: z.string().min(1),
+    breed: z.string().min(2)
+  })
+  .strict(); // no extra properties allowed
+const dogValidator = zValidator('json', dogSchema);
+router.post('/', dogValidator, async (c: Context) => {
+  const data = (await c.req.json()) as unknown as NewDog;
+  const dog = addDog(data.name, data.breed);
+  return c.json(dog);
+});
+
+// This updates the dog with a given id.
+router.put('/:id', idValidator, dogValidator, async (c: Context) => {
+  const id = Number(c.req.param('id'));
+  const data = (await c.req.json()) as unknown as NewDog;
+  const dog = dogMap[id];
+  if (dog) {
+    dog.name = data.name;
+    dog.breed = data.breed;
+  }
+  c.status(dog ? 200 : 404);
+  return c.json(dog);
+});
+
+// This deletes the dog with a given id.
+router.delete('/:id', idValidator, async (c: Context) => {
+  const id = Number(c.req.param('id'));
+  const dog = dogMap[id];
+  if (dog) delete dogMap[id];
+  c.status(dog ? 200 : 404);
+  return c.text('');
+});
+
+export default router;
+```
