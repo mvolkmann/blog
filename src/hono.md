@@ -67,6 +67,49 @@ They are by default in new Hono projects.
 "jsxImportSource": "hono/jsx"
 ```
 
+## Routers
+
+Hono includes {% aTargetBlank "https://hono.dev/concepts/routers",
+"five routers" %}.
+
+- `RegExpRouter`
+
+  This performs regular expression matching for all routes.
+  It is typically the fastest of the routers, but
+  performance will be degrade if there are a large number defined routes.
+
+- `TrieRouter`
+
+  This router is much faster than Express,
+  but not quite as fast as `RegExpRouter`.
+  It supports some route path patterns that `RegExpRouter` does not support.
+
+- `SmartRouter`
+
+  This router selects between `RegExpRouter` and `TrieRouter` at startup
+  based on what it thinks will be the fastest for the configured routes.
+
+- `LinearRouter`
+
+  This router is best for environments such as edge functions
+  where the application is initialized for every request
+  because it performs route registration faster than `RegExpRouter`.
+
+- `PatternRouter`
+
+  This router is best for memory constrained environments.
+
+The default router is `SmartRouter`.
+
+Hono provides presets for selecting the router to use
+based on how `Hono` is imported.
+
+| Import Hono From | Router Used                                                    |
+| ---------------- | -------------------------------------------------------------- |
+| `'hono'`         | `SmartRouter` choosing between `RegExpRouter` and `TrieRouter` |
+| `'hono/quick'`   | `SmartRouter` choosing between `LinearRouter` and `TrieRouter` |
+| `'hono/tiny'`    | `PatternRouter`                                                |
+
 ## Example
 
 This example demonstrates implementing endpoints for
