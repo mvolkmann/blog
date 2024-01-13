@@ -268,3 +268,5 @@ Click a worker to see detail about it, including its deployed URL.
 
 TODO: Document how to use these.
 TODO: Can you store the map of dogs for your demo in a KV store?
+
+See https://developers.cloudflare.com/workers/wrangler/migration/v1-to-v2/wrangler-legacy/commands/#kv.
