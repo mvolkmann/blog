@@ -539,3 +539,8 @@ const client = hc<UpdateType>(URL_PREFIX);
 
 For more detail, see {% aTargetBlank
 "https://hono.dev/guides/rpc#rpc-client", "RPC/Client" %}.
+
+## Performance
+
+TODO: Describe the performance of Hono compare to alternatives like
+TODO: Express, ElysiaJS, and Fastify.
