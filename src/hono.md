@@ -101,6 +101,15 @@ Hono includes {% aTargetBlank "https://hono.dev/concepts/routers",
 
 The default router is `SmartRouter`.
 
+To use a different router, pass one to the `Hono` constructor.
+For example:
+
+```ts
+const app = new Hono({router: new LinearRouter()});
+```
+
+TODO: How can a router like LinearRouter be imported?
+
 Hono provides presets for selecting the router to use
 based on how `Hono` is imported.
 
