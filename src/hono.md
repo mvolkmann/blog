@@ -71,6 +71,9 @@ They are by default in new Hono projects.
 
 Hono includes {% aTargetBlank "https://hono.dev/concepts/routers",
 "five routers" %}.
+Typically the default router is fine and this information can be ignored.
+
+The provided routers are:
 
 - `RegExpRouter`
 
@@ -86,7 +89,7 @@ Hono includes {% aTargetBlank "https://hono.dev/concepts/routers",
 
 - `SmartRouter`
 
-  This router selects between `RegExpRouter` and `TrieRouter` at startup
+  This router selects between other routers at startup
   based on what it thinks will be the fastest for the configured routes.
 
 - `LinearRouter`
@@ -99,27 +102,29 @@ Hono includes {% aTargetBlank "https://hono.dev/concepts/routers",
 
   This router is best for memory constrained environments.
 
-The default router is `SmartRouter`.
+The default router is `SmartRouter` configured to
+select between `RegExpRouter` and `TrieRouter`.
 
 To use a different router, pass one to the `Hono` constructor.
 For example:
 
 ```ts
+import {Hono} from 'hono';
+import {LinearRouter} from 'hono/router/linear-router';
+
 const app = new Hono({router: new LinearRouter()});
 ```
 
-TODO: How can a router like LinearRouter be imported?
+Hono provides presets for selecting a router based on how `Hono` is imported.
+For example, `import {Hono} from '{somewhere}';`
 
-Hono provides presets for selecting the router to use
-based on how `Hono` is imported.
+| Import Hono From | Router Used                                            |
+| ---------------- | ------------------------------------------------------ |
+| `'hono'`         | `SmartRouter` selecting `RegExpRouter` or `TrieRouter` |
+| `'hono/quick'`   | `SmartRouter` selecting `LinearRouter` or `TrieRouter` |
+| `'hono/tiny'`    | `PatternRouter`                                        |
 
-| Import Hono From | Router Used                                                    |
-| ---------------- | -------------------------------------------------------------- |
-| `'hono'`         | `SmartRouter` choosing between `RegExpRouter` and `TrieRouter` |
-| `'hono/quick'`   | `SmartRouter` choosing between `LinearRouter` and `TrieRouter` |
-| `'hono/tiny'`    | `PatternRouter`                                                |
-
-## Example
+## CRUD Example
 
 This example demonstrates implementing endpoints for
 CRUD operations on a collection of dogs.
