@@ -191,6 +191,7 @@ router.get('/:id', (c: Context) => {
 router.post('/', async (c: Context) => {
   const data = (await c.req.json()) as unknown as NewDog;
   const dog = addDog(data.name, data.breed);
+  c.status(201);
   return c.json(dog);
 });
 
@@ -260,7 +261,7 @@ describe('dog endpoints', () => {
     expect(res.status).toBe(200);
   });
 
-  it('should add a dog', async () => {
+  it('should create a dog', async () => {
     const dog = {
       name: 'Ramsay',
       breed: 'Native American Indian Dog'
@@ -274,7 +275,7 @@ describe('dog endpoints', () => {
     });
     const res = await app.fetch(req);
 
-    expect(res.status).toBe(200);
+    expect(res.status).toBe(201);
     const newDog = await res.json();
 
     // Verify that the dog was added.
