@@ -112,7 +112,7 @@ uses {% aTargetBlank "https://hono.dev/", "Hono" %} for request routing.
 - Install Hono dependencies by entering the following commands:
 
   ```bash
-  npm install hono`
+  npm install hono
   npm install @hono/zod-validator
   ```
 
@@ -123,12 +123,24 @@ uses {% aTargetBlank "https://hono.dev/", "Hono" %} for request routing.
   "jsxImportSource": "hono/jsx",
   ```
 
-- Create the two files described below:
+- Add the following in `wrangler.toml` to support
+  serving static files from the `public` directory:
+
+  ```toml
+  [site]
+  bucket = "./public"
+  ```
+
+- Create the three files described below.
 
 - Test the site locally.
 
   Start a local server by entering `npm run dev`.
-  Browse localhost:8787/dog to see a JSON object describing dogs.
+  Browse localhost:8787/dog to see the following:
+
+  <img alt="Cloudflare Workers Hono dogs" style="width: 60%"
+    src="/blog/assets/cloudflare-workers-hono-dogs.png?v={{pkg.version}}"
+    title="Cloudflare Workers Hono dogs">
 
 - Deploy the app by entering `npm run deploy`.
 
@@ -138,9 +150,14 @@ uses {% aTargetBlank "https://hono.dev/", "Hono" %} for request routing.
 
 ```ts
 import {Hono} from 'hono';
+import {serveStatic} from 'hono/cloudflare-workers';
 import dogRouter from './dog-router';
 
 const app = new Hono();
+
+// This serves static files from the
+// [site] bucket directory specified in wrangler.toml.
+app.get('/*', serveStatic({root: './'}));
 
 app.get('/', c => c.redirect('/dog'));
 
@@ -248,6 +265,18 @@ export type DeleteType = typeof deleteRoute;
 export type GetAllType = typeof getAllRoute;
 export type GetOneType = typeof getOneRoute;
 export type UpdateType = typeof updateRoute;
+```
+
+### static/styles.css
+
+```css
+body {
+  font-family: sans-serif;
+}
+
+li {
+  color: purple;
+}
 ```
 
 ## Viewing Workers
