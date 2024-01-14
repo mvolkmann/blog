@@ -47,9 +47,71 @@ Features provided include:
 - can generate assets at runtime,
   including images, SVGs, PDFs, and more
 
-## Projects
+## Projects on Web
 
-To create a new project that uses Hono,
+A Cloudflare Worker can be created, edited, tested, and deployed
+directly from the website without downloading any code.
+
+- Browse {% aTargetBlank "https://www.cloudflare.com", "cloudflare.com" %}.
+- If you do not yet have an account, click the "Sign up" button.
+- If you do have an account, click the "Log in" button.
+- Click "Workers & Pages" in the left nav.
+- Click the "Create application" button.
+- Click the "Create Worker" button.
+- Change the name of the worker.
+- Click the "Deploy" button. This must be done before the code can be edited.
+- Click the "Edit code" button. For example:
+
+  ```js
+  export default {
+    async fetch(request, env, ctx) {
+      return new Response('<h1>Hello, Mark!</h1>', {
+        headers: {
+          'Content-Type': 'text/html'
+        }
+      });
+    }
+  };
+  ```
+
+- Edit the contents of the file "worker.js" directly in the browser.
+- Click the "HTTP" tab.
+- Click the "Send" button to see the response in the right pane.
+- To save changes, click the "Save and deploy" button.
+
+  A confirmation dialog will appear.
+  Click the "Save and deploy" button inside the dialog.
+
+- To view deployed app in a new browser tab, click the "workers.dev" link.
+
+## Wrangler
+
+The Wrangler command-line interface (CLI) supports creating, testing,
+and deploying Cloudflare Worker apps locally.
+
+To install it globally, enter `npm install -g wrangler`.
+
+To authenticate Wrangler with your Cloudflare account,
+enter `wrangler login`.
+This opens a browser window that prompts
+"Allow Wrangler to make changes to your Cloudflare account?"
+Click the "Allow" button.
+When the message "You have granted authorization to Wrangler!" appears,
+close the browser window.
+
+To continue development of a worker created in the Web UI, enter
+`npm create cloudflare@2 {worker-name} -- --type pre-existing --existing-script {worker-name}`
+This will ask "Do you want to use git for version control?"
+It will then download the project and install the dependencies.
+
+To start a local server for the app,
+cd to the new project directory and enter `npm run dev`.
+
+To test the app, browse localhost:8787.
+
+## Local Projects
+
+To create a new Cloudflare Worker project from the command-line,
 enter `npm create cloudflare -- {app-name}`.
 This will prompt for:
 
@@ -87,20 +149,14 @@ and will contain the following files:
 - `tsconfig.json`
 - `wrangler.toml`
 
-To start a local server, enter `npm run dev`.
+To start a local server for the app,
+cd to the new project directory and enter `npm run dev`.
 
-To see the app, browse localhost:8787.
-The server provides hot reloading of only itself, not the web browser.
+To test the app, browse localhost:8787.
+
+The local server provides hot reloading of only itself, not the web browser.
 
 To deploy app again after making local changes, enter `npm run deploy`.
-
-## Wrangler
-
-The `wrangler` command supports creating, testing,
-and deploying Cloudflare Worker apps.
-To install it globally, enter `npm install -g wrangler`.
-
-TODO: Is direct use of this command deprecated?
 
 ## Using Hono
 
@@ -302,5 +358,5 @@ See https://developers.cloudflare.com/workers/wrangler/migration/v1-to-v2/wrangl
 
 ## htmx
 
-A complete web app developed with htmx could be deployed to a Cloudflare Worker!
+A complete web app developed with htmx can be deployed to a Cloudflare Worker!
 TODO: Try this!
