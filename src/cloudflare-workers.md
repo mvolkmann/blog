@@ -351,12 +351,42 @@ Click a worker to see detail about it, including its deployed URL.
 
 ## KV Stores
 
-TODO: Document how to use these.
-TODO: Can you store the map of dogs for your demo in a KV store?
+"{% aTargetBlank "https://developers.cloudflare.com/kv/get-started/",
+"Workers KV" %} provides low-latency, high-throughput global storage
+to your Cloudflare Workers applications.
+Workers KV is ideal for storing user configuration data, routing data,
+A/B testing configurations, authentication tokens,
+and is well suited for read-heavy workloads."
 
-See https://developers.cloudflare.com/workers/wrangler/migration/v1-to-v2/wrangler-legacy/commands/#kv.
+To enable use of KV in a worker:
+
+- Browse the {% aTargetBlank "https://dash.cloudflare.com/",
+  "Cloudflare Dashboard" %} and log in if not already logged in.
+- Click "Workers & Pages" in the left nav.
+- Click the subcategory "Plans" in the left nav.
+
+  The free plan offers up to 100,000 read operations per day
+  and up to 1,000 write, delete, list operations per day.
+  For more, click the "Purchase Workers Paid" button.
+
+- Create a KV namespace.
+
+  Enter `wrangler kv:namespace create {namespace}`.
+  This will output lines to be added to `wrangler.toml`.
+
+- Add the lines output by previous command in `wrangler.toml`.
+
+TODO: Document the remaining instructions.
+
+TODO: Can you store the map of dogs for your demo in a KV store?
 
 ## htmx
 
 A complete web app developed with htmx can be deployed to a Cloudflare Worker!
 TODO: Try this!
+
+## Astro
+
+To deploy an Astro app to Cloudflare, see {% aTargetBlank
+"https://docs.astro.build/en/guides/integrations-guide/cloudflare/",
+"@astrojs/cloudflare" %}.
