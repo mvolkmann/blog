@@ -384,7 +384,7 @@ Htmx applications to not require sending an HTTP request for every user interact
 They can use HTML elements such as `details` and `dialog`
 and client-side scripting.
 Scripting options include vanilla JavaScript,
-{% aTargetBlank "https://alpinejs.dev", "Alpine" %}, and
+{% aTargetBlank "https://mvolkmann.github.io/blog/topics/#/blog/alpine/", "Alpine" %}, and
 {% aTargetBlank "https://hyperscript.org", "_hyperscript" %}.
 
 Alpine adds support for many new HTML attributes.
