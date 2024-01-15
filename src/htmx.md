@@ -777,6 +777,36 @@ Note how the spinner image has the CSS class `htmx-indicator`.
 </form>
 ```
 
+## Out-of-band Updates
+
+The {% aTargetBlank "https://htmx.org/attributes/hx-swap-oob/",
+"hx-swap-oob" %} attribute with a value of `"true"` specifies that
+an element with the same id should be replaced by this element.
+The element being replaced does not need to have the `hx-swap-oob` attribute,
+just a matching `id` value.
+
+For example, a todo app can display
+the number of uncompleted todos and the total number of todos.
+Adding a new todo, deleting a todo, and toggling the completed state of a todo
+all change what is displayed.
+One way to accomplish this is for all those endpoints to return
+the following in addition to any other HTML they need to return.
+
+```ts
+<p id="todo-status" hx-swap-oob="true">
+  {uncompletedCount} of {totalCount} remaining
+</p>
+```
+
+The {% aTargetBlank "https://htmx.org/attributes/hx-select-oob/",
+"hx-select-oob" %} attribute provides a list of CSS selectors
+that specify elements in the response to be included out-of-band.
+It provides a way to only use a subset of the elements in the response
+that have the `hx-swap-oob` attributes.
+The `hx-select-oob` attribute is typically used together with
+the `hx-select` attribute which also provides a list of CSS selectors,
+but those specify a subset the elements to be included at the target location.
+
 ## Common Patterns
 
 ### Client-side Validation with API calls
@@ -905,6 +935,8 @@ For example, clicking a "like" button can immediately change its color
 to a muted version of the color that will be used when the response is received.
 If the response indicates success, the color can be changed to the full color.
 If the response indicates failure, the color can be reset.
+
+TODO: Add an example of this.
 
 ### Pagination
 
@@ -1050,36 +1082,6 @@ function TableRow(page: number, pokemon: Pokemon, isLast: boolean) {
 
 <img alt="htmx Infinite Scroll" style="width: 30%"
   src="/blog/assets/htmx-infinite-scroll.png?v={{pkg.version}}">
-
-## Out-of-band Updates
-
-The {% aTargetBlank "https://htmx.org/attributes/hx-swap-oob/",
-"hx-swap-oob" %} attribute with a value of `"true"` specifies that
-an element with the same id should be replaced by this element.
-The element being replaced does not need to have the `hx-swap-oob` attribute,
-just a matching `id` value.
-
-For example, a todo app can display
-the number of uncompleted todos and the total number of todos.
-Adding a new todo, deleting a todo, and toggling the completed state of a todo
-all change what is displayed.
-One way to accomplish this is for all those endpoints to return
-the following in addition to any other HTML they need to return.
-
-```ts
-<p id="todo-status" hx-swap-oob="true">
-  {uncompletedCount} of {totalCount} remaining
-</p>
-```
-
-The {% aTargetBlank "https://htmx.org/attributes/hx-select-oob/",
-"hx-select-oob" %} attribute provides a list of CSS selectors
-that specify elements in the response to be included out-of-band.
-It provides a way to only use a subset of the elements in the response
-that have the `hx-swap-oob` attributes.
-The `hx-select-oob` attribute is typically used together with
-the `hx-select` attribute which also provides a list of CSS selectors,
-but those specify a subset the elements to be included at the target location.
 
 ## Custom Events
 
