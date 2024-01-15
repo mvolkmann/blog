@@ -583,12 +583,12 @@ A space-separated list of event modifiers can follow an event name.
 Supported event modifiers include:
 
 - `changed` - only send request if the element value has changed
-- `delay:{time}` - wait at least this long before each request is sent
+- `delay:{time}` - wait at least this long before each request is sent (debouncing)
 - `from:{css-selector}` - listen for the event on a different element
 - `throttle:{time}` - only send the last event received in the specified time
   and then wait again
 
-For example, the following trigger is useful for implementing active search:
+For example, the following trigger is useful for implementing active search.
 
 ```html
 hx-trigger="keyup changed delay:500ms"
@@ -802,6 +802,13 @@ that follows the `input` element.
 />
 <span class="error" id="email-error" />
 ```
+
+The "changed" modifier causes the HTTP request to
+only be sent if the value of the input has changed.
+For example, using the arrow keys to move the cursor does not change the value.
+
+The "delay" modifier adds debouncing so an HTTP request is
+only sent when the user briefly stops typing, not for every change.
 
 For a working example, see the GitHub project {% aTargetBlank
 "https://github.com/mvolkmann/htmx-examples/tree/main/email-validation",
