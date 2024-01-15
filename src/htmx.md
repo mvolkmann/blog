@@ -649,11 +649,19 @@ that are inside the form, add the `hx-params` attribute.
 For more detail, see {% aTargetBlank
 "https://htmx.org/attributes/hx-params/", "hx-params" %}.
 
-The `hx-confirm` attribute specifies a message to display in a
+The `hx-confirm` attribute specifies a question to display in a
 browser-supplied confirmation dialog (using the `Window` method `confirm`)
 before an HTTP request is sent.
-The dialog will have "OK" and "Cancel" buttons.
+The dialog contain have "OK" and "Cancel" buttons.
 The request will only be sent if the user clicks the "OK" button.
+
+The `hx-prompt` attribute specifies a prompt to display in a
+browser-supplied prompt dialog (using the `Window` method `prompt`)
+before an HTTP request is sent.
+The dialog contain a text input and "OK" and "Cancel" buttons.
+The request will only be sent if the user clicks the "OK" button.
+The request header `hx-prompt` will hold
+the value the user entered in the text input.
 
 The confirmation dialog is very plain and cannot be styled.
 It may be preferable to use a dialog that can be styled,
@@ -1082,6 +1090,24 @@ function TableRow(page: number, pokemon: Pokemon, isLast: boolean) {
 
 <img alt="htmx Infinite Scroll" style="width: 30%"
   src="/blog/assets/htmx-infinite-scroll.png?v={{pkg.version}}">
+
+## HTTP Request Headers
+
+Htmx automatically adds the following request headers
+to all HTTP requests it sends.
+Code that handles are request can use the values of these headers
+to determine the appropriate response.
+
+| Header                       | Description                                                                 |
+| ---------------------------- | --------------------------------------------------------------------------- |
+| `hx-boosted`                 | "true" if element making request has `hx-boost` (see [Boosting](#boosting)) |
+| `hx-current-url`             | current URL in the browser location bar                                     |
+| `hx-history-restore-request` |                                                                             |
+| `hx-prompt`                  | value user entered in prompt dialog rendered by hx-prompt attribute         |
+| `hx-request`                 |                                                                             |
+| `hx-target`                  |                                                                             |
+| `hx-trigger`                 |                                                                             |
+| `hx-trigger-name`            |                                                                             |
 
 ## Custom Events
 
