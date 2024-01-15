@@ -978,19 +978,19 @@ See the example at {% aTargetBlank
 "https://github.com/mvolkmann/htmx-examples/tree/main/infinite-scroll",
 "infinite-scroll" %}.
 
-This example renders the following HTML which includes the `table`
+This example renders the following HTML which includes a `table`
 and a loading spinner that is only displayed when waiting on an HTTP response.
 It includes `hx-trigger="load"` in order to immediately
-send a GET request to get the first "page" of rows.
+send a request to get the first "page" of rows.
 
 ```html
-<table>
-  <tr
-    hx-trigger="load"
-    hx-get="/pokemon-rows?page=1"
-    hx-indicator=".htmx-indicator"
-    hx-swap="afterend"
-  >
+<table
+  hx-trigger="load"
+  hx-get="/pokemon-rows?page=1"
+  hx-indicator=".htmx-indicator"
+  hx-swap="beforeend"
+>
+  <tr>
     <td>ID</td>
     <td>Name</td>
     <td>Description</td>
@@ -1000,7 +1000,7 @@ send a GET request to get the first "page" of rows.
 ```
 
 The "pokemon-rows" endpoint returns the following JSX
-in order to append rows to the `table` with the next set of rows.
+in order to append the next set of rows to the `table`.
 
 ```js
 return (
@@ -1015,10 +1015,12 @@ return (
 
 The following code is definition of the `TableRow` function
 which returns a single table row.
-It uses the `isLast` parameter to determine whether the `hx-*` attributes
+This follows the convention where functions that return JSX
+should be treated as components and have names begin uppercase.
+The `isLast` parameter is used to determine whether `hx-*` attributes
 will be included in the `tr` element.
-The `hx-trigger` attribute causes a GET request for the next page of rows
-to be sent whenever the `tr` becomes visible.
+The `hx-trigger` attribute causes a request for the next "page" of rows
+to be sent whenever the `tr` becomes visible (`revealed`).
 
 ```js
 function TableRow(page: number, pokemon: Pokemon, isLast: boolean) {
@@ -1031,7 +1033,7 @@ function TableRow(page: number, pokemon: Pokemon, isLast: boolean) {
       }
     : {};
   const {name, url} = pokemon;
-  const id = url.split('/')[6];
+  const id = url.split('/')[6]; // 7th part of the URL
   const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
 
   return (
