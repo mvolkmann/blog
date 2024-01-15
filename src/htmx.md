@@ -1056,6 +1056,8 @@ function TableRow(page: number, pokemon: Pokemon, isLast: boolean) {
 The {% aTargetBlank "https://htmx.org/attributes/hx-swap-oob/",
 "hx-swap-oob" %} attribute with a value of `"true"` specifies that
 an element with the same id should be replaced by this element.
+The element being replaced does not need to have the `hx-swap-oob` attribute,
+just a matching `id` value.
 
 For example, a todo app can display
 the number of uncompleted todos and the total number of todos.
