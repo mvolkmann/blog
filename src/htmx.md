@@ -817,6 +817,19 @@ but those specify a subset the elements to be included at the target location.
 
 ## Common Patterns
 
+### Lazy Loading
+
+When displaying data that is expensive to acquire,
+it is useful to only request it when the part of the page
+that will display it scrolls into view.
+That can be doe using `hx-trigger="revealed"`.
+
+For example:
+
+```js
+<table hx-get="/weather/forecast" hx-trigger="revealed"></table>
+```
+
 ### Client-side Validation with API calls
 
 Some input validation must be performed on the server.
