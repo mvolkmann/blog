@@ -137,7 +137,8 @@ Many of these are discussed in more detail in subsequent sections.
   Keeping the state in sync in two places introduces challenges.
 
   With htmx all the state is only on the server,
-  so no state synchronization is needed.
+  so no state synchronization is needed
+  and browser memory usage is reduced.
 
 - Simplifies client-side code
 
@@ -153,6 +154,9 @@ removes the need for many things including:
   This is mostly unnecessary because the logic is embedded in
   the HTML elements returned by the server.
   This implements Hypermedia As The Engine Of Application State (HATEOAS).
+
+  Fewer client-side dependencies are needed
+  and client-side build time is reduced.
 
 - managing client-side data models
 
@@ -727,7 +731,47 @@ For example, if there is an `audio` or `video` element that is playing
 and a request for new content returns the same element,
 it can continue playing without restarting at the beginning.
 
-## Active Search
+## Busy Indicators
+
+The `hx-indicator` attribute specifies a CSS selector
+that matches one or more elements.
+Those elements will have their opacity changed from 0 to 1
+while an associated HTTP request is being processed.
+
+The `hx-disabled-elt` attribute specifies a CSS selector
+that matches one or more elements.
+Those elements will have the `:disabled` CSS pseudo-class applied
+while an associated HTTP request is being processed.
+
+The following HTML demonstrates
+showing an indicator and disabling the "Add" button
+while waiting for a new todo to be added.
+Note how the spinner image has the CSS class `htmx-indicator`.
+
+```html
+<form
+  hx-post="/todos"
+  hx-swap="afterend"
+  hx-disabled-elt="#add-btn"
+  hx-indicator="#spinner"
+  _="on submit target.reset()" // resets form using _hyperscript
+>
+  <input name="description" />
+  <button id="add-btn" type="submit">Add</button>
+  <img
+    alt="loading..."
+    class="htmx-indicator h-6 w-6"
+    id="spinner"
+    src="/public/spinner.gif"
+  />
+</form>
+```
+
+## Common Patterns
+
+### Client-side Validation with API calls
+
+### Active Search
 
 Htmx can be used to implement an active search where a list of matching data
 is retrieved as the user enters search text.
@@ -810,43 +854,17 @@ app.listen(1919);
 console.log('listening on port', app.server?.port);
 ```
 
-## Indicators
+### Optimistic Updates
 
-The `hx-indicator` attribute specifies a CSS selector
-that matches one or more elements.
-Those elements will have their opacity changed from 0 to 1
-while an associated HTTP request is being processed.
+If an endpoint might be slow to return a response,
+using `hx-indicator` to display a spinner is a good idea.
+Alternatively, the front end can assume success and update the UI optimistically.
+For example, clicking a "like" button can immediately change its color
+to a muted version of the color that will be used when the response is received.
+If the response indicates success, the color can be changed to the full color.
+If the response indicates failure, the color can be reset.
 
-The `hx-disabled-elt` attribute specifies a CSS selector
-that matches one or more elements.
-Those elements will have the `:disabled` CSS pseudo-class applied
-while an associated HTTP request is being processed.
-
-The following HTML demonstrates
-showing an indicator and disabling the "Add" button
-while waiting for a new todo to be added.
-Note how the spinner image has the CSS class `htmx-indicator`.
-
-```html
-<form
-  hx-post="/todos"
-  hx-swap="afterend"
-  hx-disabled-elt="#add-btn"
-  hx-indicator="#spinner"
-  _="on submit target.reset()" // resets form using _hyperscript
->
-  <input name="description" />
-  <button id="add-btn" type="submit">Add</button>
-  <img
-    alt="loading..."
-    class="htmx-indicator h-6 w-6"
-    id="spinner"
-    src="/public/spinner.gif"
-  />
-</form>
-```
-
-## Infinite Scroll
+### Infinite Scroll
 
 See the example at {% aTargetBlank
 "https://github.com/mvolkmann/htmx-examples/tree/main/infinite-scroll",
@@ -1102,16 +1120,6 @@ When combined with {% aTargetBlank "https://turso.tech", "Turso" %}
 Another popular option is to use Python with either
 {% aTargetBlank "https://www.djangoproject.com", "Django" %} or
 {% aTargetBlank "https://flask.palletsprojects.com/", "Flask" %}.
-
-## Optimistic Updates
-
-If an endpoint might be slow to return a response,
-using `hx-indicator` to display a spinner is a good idea.
-Alternatively, the front end can assume success and update the UI optimistically.
-For example, clicking a "like" button can immediately change its color
-to a muted version of the color that will be used when the response is received.
-If the response indicates success, the color can be changed to the full color.
-If the response indicates failure, the color can be reset.
 
 ## Mobile Apps
 
