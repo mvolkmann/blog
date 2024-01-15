@@ -757,15 +757,14 @@ Note how the spinner image has the CSS class `htmx-indicator`.
   hx-post="/todos"
   hx-swap="afterend"
   hx-disabled-elt="#add-btn"
-  hx-indicator="#spinner"
+  hx-indicator=".htmx-indicator"
   _="on submit target.reset()" // resets form using _hyperscript
 >
   <input name="description" />
   <button id="add-btn" type="submit">Add</button>
   <img
     alt="loading..."
-    class="htmx-indicator h-6 w-6"
-    id="spinner"
+    class="htmx-indicator"
     src="/public/spinner.gif"
   />
 </form>
@@ -920,18 +919,13 @@ a loading spinner that is only displayed when waiting on an HTTP response.
 
 ```html
 <table
-  hx-indicator="#spinner"
+  hx-indicator=".htmx-indicator"
   hx-trigger="load"
   hx-get="/pokemon-rows?page=1"
 ></table>
 <div id="pagination-row">
   <span id="pagination-buttons"></span>
-  <img
-    alt="loading..."
-    class="htmx-indicator"
-    id="spinner"
-    src="/spinner.gif"
-  />
+  <img alt="loading..." class="htmx-indicator" src="/spinner.gif" />
 </div>
 ```
 
@@ -960,7 +954,7 @@ return (
     <span
       id="pagination-buttons"
       hx-swap-oob="true"
-      hx-indicator="#spinner"
+      hx-indicator=".htmx-indicator"
       hx-target="#pokemon-table"
     >
       <button
@@ -984,15 +978,17 @@ See the example at {% aTargetBlank
 "https://github.com/mvolkmann/htmx-examples/tree/main/infinite-scroll",
 "infinite-scroll" %}.
 
-This example initially renders the following HTML which includes the `table`
+This example renders the following HTML which includes the `table`
 and a loading spinner that is only displayed when waiting on an HTTP response.
+It includes `hx-trigger="load"` in order to immediately
+send a GET request to get the first "page" of rows.
 
 ```html
 <table>
   <tr
-    hx-trigger="revealed"
+    hx-trigger="load"
     hx-get="/pokemon-rows?page=1"
-    hx-indicator="#spinner"
+    hx-indicator=".htmx-indicator"
     hx-swap="afterend"
   >
     <td>ID</td>
@@ -1000,12 +996,7 @@ and a loading spinner that is only displayed when waiting on an HTTP response.
     <td>Description</td>
   </tr>
 </table>
-<img
-  alt="loading..."
-  class="htmx-indicator h-8 w-8"
-  id="spinner"
-  src="/spinner.gif"
-/>
+<img alt="loading..." class="htmx-indicator" src="/spinner.gif" />
 ```
 
 The "pokemon-rows" endpoint returns the following JSX
@@ -1035,7 +1026,7 @@ function TableRow(page: number, pokemon: Pokemon, isLast: boolean) {
     ? {
         'hx-trigger': 'revealed',
         'hx-get': '/pokemon-rows?page=' + (page + 1),
-        'hx-indicator': '#spinner',
+        'hx-indicator': '.htmx-indicator',
         'hx-swap': 'afterend'
       }
     : {};
