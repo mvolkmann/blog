@@ -984,6 +984,77 @@ See the example at {% aTargetBlank
 "https://github.com/mvolkmann/htmx-examples/tree/main/infinite-scroll",
 "infinite-scroll" %}.
 
+This example initially renders the following HTML which includes the `table`
+and a loading spinner that is only displayed when waiting on an HTTP response.
+
+```html
+<table>
+  <tr
+    hx-trigger="revealed"
+    hx-get="/pokemon-rows?page=1"
+    hx-indicator="#spinner"
+    hx-swap="afterend"
+  >
+    <td>ID</td>
+    <td>Name</td>
+    <td>Description</td>
+  </tr>
+</table>
+<img
+  alt="loading..."
+  class="htmx-indicator h-8 w-8"
+  id="spinner"
+  src="/spinner.gif"
+/>
+```
+
+The "pokemon-rows" endpoint returns the following JSX
+in order to append rows to the `table` with the next set of rows.
+
+```js
+return (
+  <>
+    {pokemonList.map((pokemon, index) => {
+      const isLast = index === ROWS_PER_PAGE - 1;
+      return TableRow(pageNumber, pokemon, isLast);
+    })}
+  </>
+);
+```
+
+The following code is definition of the `TableRow` function
+which returns a single table row.
+It uses the `isLast` parameter to determine whether the `hx-*` attributes
+will be included in the `tr` element.
+The `hx-trigger` attribute causes a GET request for the next page of rows
+to be sent whenever the `tr` becomes visible.
+
+```js
+function TableRow(page: number, pokemon: Pokemon, isLast: boolean) {
+  const attributes = isLast
+    ? {
+        'hx-trigger': 'revealed',
+        'hx-get': '/pokemon-rows?page=' + (page + 1),
+        'hx-indicator': '#spinner',
+        'hx-swap': 'afterend'
+      }
+    : {};
+  const {name, url} = pokemon;
+  const id = url.split('/')[6];
+  const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+
+  return (
+    <tr {...attributes}>
+      <td>{id}</td>
+      <td>{name}</td>
+      <td>
+        <img alt={name} src={imageUrl} />
+      </td>
+    </tr>
+  );
+}
+```
+
 <img alt="htmx Infinite Scroll" style="width: 30%"
   src="/blog/assets/htmx-infinite-scroll.png?v={{pkg.version}}">
 
