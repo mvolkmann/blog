@@ -780,9 +780,30 @@ For example, when validating setup of a new user
 that is identified by their email address,
 it is common to verify that the provided email address
 is not already in use by an existing user.
+This can be done as the user types
+instead of waiting for the `form` to be submitted.
 
-For an example of performing this kind of validation as the user types,
-see the GitHub project {% aTargetBlank
+The following HTML validates an email address as it is typed.
+The "/email-validate" endpoint returns
+an empty string when the email address is not in use
+or the message "email in use".
+The returned string is used at the content of the `span` element
+that follows the `input` element.
+
+```html
+<label for="email">Email</label>
+<input
+  id="email"
+  hx-get="/email-validate"
+  hx-target="#email-error"
+  hx-trigger="keyup changed delay:200ms"
+  name="email"
+  type="email"
+/>
+<span class="error" id="email-error" />
+```
+
+For a working example, see the GitHub project {% aTargetBlank
 "https://github.com/mvolkmann/htmx-examples/tree/main/email-validation",
 "email-validation" %}.
 
@@ -891,9 +912,18 @@ The {% aTargetBlank "https://htmx.org/attributes/hx-swap-oob/",
 "hx-swap-oob" %} attribute with a value of `"true"` specifies that
 an element with the same id should be replaced by this element.
 
-For example, in a todo app, adding a new todo needs to
-insert a new element in the list of todos AND
-update the count of todos that may appear somewhere above the list.
+For example, a todo app can display
+the number of uncompleted todos and the total number of todos.
+Adding a new todo, deleting a todo, and toggling the completed state of a todo
+all change what is displayed.
+One way to accomplish this is for all those endpoints to return
+the following in addition to any other HTML they need to return.
+
+```ts
+<p id="todo-status" hx-swap-oob="true">
+  {uncompletedCount} of {totalCount} remaining
+</p>
+```
 
 The {% aTargetBlank "https://htmx.org/attributes/hx-select-oob/",
 "hx-select-oob" %} attribute provides a list of CSS selectors
@@ -903,6 +933,40 @@ that have the `hx-swap-oob` attributes.
 The `hx-select-oob` attribute is typically used together with
 the `hx-select` attribute which also provides a list of CSS selectors,
 but those specify a subset the elements to be included at the target location.
+
+## Custom Events
+
+Any endpoint can trigger a custom event
+by setting the HTTP response header `HX-Trigger` to the event name.
+When an HTML element receives the event,
+it can trigger another HTTP request.
+
+For example, a todo app can display
+the number of uncompleted todos and the total number of todos.
+Adding a new todo, deleting a todo, and toggling the completed state of a todo
+all change what is displayed.
+One way to accomplish this is for all those endpoints
+to trigger the same custom event.
+
+HTML elements that trigger sending HTTP requests to those endpoints
+will receive the event.
+By default, the event will bubble up the DOM hierarchy.
+
+Any element can listen for the event on the `body` element.
+For example, the following element listens for
+the custom event "status-change" on the `body` element.
+That triggers the element to send a GET request to `/todos/status`
+which returns the text to include in the paragraph tag.
+This also occurs when the element is initially loaded
+because `load` is also one of the triggers.
+
+```js
+<p hx-get="/todos/status" hx-trigger="load, status-change from:body" />
+```
+
+For a working example of this approach, see {% aTargetBlank
+"https://github.com/mvolkmann/htmx-examples/tree/main/todo-list",
+"todo-list" %}.
 
 ## Components
 
