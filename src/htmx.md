@@ -1114,7 +1114,7 @@ can all be used in an endpoint to determine
 the appropriate HTML to send in the response.
 
 From the htmx documentation on
-{% aTargetBlank "https://htmx.org/docs/#caching", "caching" %},
+<a href="https://htmx.org/docs/#caching" target="_blank">caching</a>,
 "If your server can render different content for the same URL depending on
 some other headers, you need to use the `Vary` response HTTP header.
 For example, if your server renders the full HTML
