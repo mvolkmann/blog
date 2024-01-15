@@ -1093,21 +1093,37 @@ function TableRow(page: number, pokemon: Pokemon, isLast: boolean) {
 
 ## HTTP Request Headers
 
-Htmx automatically adds the following request headers
-to all HTTP requests it sends.
-Code that handles are request can use the values of these headers
+Htmx automatically adds following request headers
+to all HTTP requests it sends if they are applicable.
+Code that handles requests can use the values of these headers
 to determine the appropriate response.
 
-| Header                       | Description                                                                 |
-| ---------------------------- | --------------------------------------------------------------------------- |
-| `hx-boosted`                 | "true" if element making request has `hx-boost` (see [Boosting](#boosting)) |
-| `hx-current-url`             | current URL in the browser location bar                                     |
-| `hx-history-restore-request` |                                                                             |
-| `hx-prompt`                  | value user entered in prompt dialog rendered by hx-prompt attribute         |
-| `hx-request`                 |                                                                             |
-| `hx-target`                  |                                                                             |
-| `hx-trigger`                 |                                                                             |
-| `hx-trigger-name`            |                                                                             |
+| Header                       | Description                                                                     |
+| ---------------------------- | ------------------------------------------------------------------------------- |
+| `hx-boosted`                 | "true" if the element making request has `hx-boost` (see [Boosting](#boosting)) |
+| `hx-current-url`             | current URL in the browser location bar                                         |
+| `hx-history-restore-request` | "true" if the request is for history restoration after a cache miss             |
+| `hx-prompt`                  | value user entered in prompt dialog rendered by the `hx-prompt` attribute       |
+| `hx-request`                 | always "true"; identifies requests that come from htmx                          |
+| `hx-target`                  | value of the "id" attribute of the target element, if an id selector was used   |
+| `hx-trigger`                 | value of the "id" attribute of the triggered element, if specified              |
+| `hx-trigger-name`            | value of the "name" attribute of the triggered event, if specified              |
+
+The `hx-current-url`, `hx-target`, `hx-trigger`, and `hx-trigger-name` headers
+can all be used in an endpoint to determine
+the appropriate HTML to send in the response.
+
+From the htmx documentation on
+{% aTargetBlank "https://htmx.org/docs/#caching", "caching" %},
+"If your server can render different content for the same URL depending on
+some other headers, you need to use the `Vary` response HTTP header.
+For example, if your server renders the full HTML
+when the `hx-request` header is missing or `false`,
+and it renders a fragment of that HTML when `hx-request: true`,
+you need to add `Vary: HX-Request`.
+That causes the cache to be keyed based on a composite of
+the response URL and the `hx-request` request header —
+rather than being based just on the response URL."
 
 ## Custom Events
 
