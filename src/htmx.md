@@ -913,6 +913,68 @@ See the example at {% aTargetBlank
 "https://github.com/mvolkmann/htmx-examples/tree/main/pagination",
 "pagination" %}.
 
+This example initially renders the following HTML which includes
+the initial `table`, loaded with the first "page" of rows.
+It also includes a row containing the pagination buttons and
+a loading spinner that is only displayed when waiting on an HTTP response.
+
+```html
+<table
+  hx-indicator="#spinner"
+  hx-trigger="load"
+  hx-get="/pokemon-rows?page=1"
+></table>
+<div id="pagination-row">
+  <span id="pagination-buttons"></span>
+  <img
+    alt="loading..."
+    class="htmx-indicator"
+    id="spinner"
+    src="/spinner.gif"
+  />
+</div>
+```
+
+The "pokemon-rows" endpoint returns the following JSX
+in order to replace the `table` with one containing a new set of rows.
+It also returns new pagination buttons that replace the current ones
+using the `hx-swap-oob` attribute.
+
+```js
+return (
+  <>
+    <table id="pokemon-table">
+      <tr>
+        <td>ID</td>
+        <td>Name</td>
+        <td>Description</td>
+      </tr>
+      {pokemonList.map((pokemon, index) => {
+        const isLast = index === ROWS_PER_PAGE - 1;
+        return TableRow(pageNumber, pokemon, isLast);
+      })}
+    </table>
+
+    {/* The hx-indicator and hx-target attributes are
+        inherited by the buttons inside this span. */}
+    <span
+      id="pagination-buttons"
+      hx-swap-oob="true"
+      hx-indicator="#spinner"
+      hx-target="#pokemon-table"
+    >
+      <button
+        disabled={pageNumber === 1}
+        hx-get={`/pokemon-rows?page=${pageNumber - 1}`}
+      >
+        Previous
+      </button>
+      <button hx-get={`/pokemon-rows?page=${pageNumber + 1}`}>Next</button>
+    </span>
+  </>
+);
+```
+
 <img alt="htmx Pagination" style="width: 30%"
   src="/blog/assets/htmx-pagination.png?v={{pkg.version}}">
 
