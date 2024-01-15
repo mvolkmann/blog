@@ -677,15 +677,7 @@ When using HTML `form` submission, all the inputs inside the form
 can be reset to their default values with the following:
 
 ```html
-<form
-  hx-post="..."
-  hx-target="..."
-  hx-swap="..."
-  x-data
-  @submit="$nextTick(() => $el.reset())"
->
-  ...
-</form>
+<form x-data @submit="$nextTick(() => $el.reset())">...</form>
 ```
 
 The event name can be followed by the following modifiers:
@@ -1897,7 +1889,7 @@ For example:
 is an Alpine plugin that
 "enables your HTML elements to request remote content from your server."
 It provides functionality that is similar to {% aTargetBlank
-"https://htmx.org", "HTMX" %}, but is simpler and provides fewer features.
+"https://htmx.org", "htmx" %}, but is simpler and provides fewer features.
 
 Alpine AJAX was not created by the team that created Alpine.
 

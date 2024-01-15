@@ -907,11 +907,23 @@ to a muted version of the color that will be used when the response is received.
 If the response indicates success, the color can be changed to the full color.
 If the response indicates failure, the color can be reset.
 
+### Pagination
+
+See the example at {% aTargetBlank
+"https://github.com/mvolkmann/htmx-examples/tree/main/pagination",
+"pagination" %}.
+
+<img alt="htmx Pagination" style="width: 30%"
+  src="/blog/assets/htmx-pagination.png?v={{pkg.version}}">
+
 ### Infinite Scroll
 
 See the example at {% aTargetBlank
 "https://github.com/mvolkmann/htmx-examples/tree/main/infinite-scroll",
 "infinite-scroll" %}.
+
+<img alt="htmx Infinite Scroll" style="width: 30%"
+  src="/blog/assets/htmx-infinite-scroll.png?v={{pkg.version}}">
 
 ## Out-of-band Updates
 
