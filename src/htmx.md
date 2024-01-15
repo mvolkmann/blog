@@ -594,6 +594,13 @@ For example, the following trigger is useful for implementing active search.
 hx-trigger="keyup changed delay:500ms"
 ```
 
+The "changed" modifier causes the HTTP request to
+only be sent if the value of the input has changed.
+For example, using the arrow keys to move the cursor does not change the value.
+
+The "delay" modifier adds debouncing so an HTTP request is
+only sent when the user briefly stops typing, not for every change.
+
 Events can be filtered so they only trigger in specific circumstances.
 This is specified in square brackets after an event name.
 For example, `click[shiftKey]` only triggers when
@@ -801,13 +808,6 @@ that follows the `input` element.
 />
 <span class="error" id="email-error" />
 ```
-
-The "changed" modifier causes the HTTP request to
-only be sent if the value of the input has changed.
-For example, using the arrow keys to move the cursor does not change the value.
-
-The "delay" modifier adds debouncing so an HTTP request is
-only sent when the user briefly stops typing, not for every change.
 
 For a working example, see the GitHub project {% aTargetBlank
 "https://github.com/mvolkmann/htmx-examples/tree/main/email-validation",
