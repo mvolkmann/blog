@@ -640,7 +640,7 @@ add the {% aTargetBlank "https://htmx.org/attributes/hx-include/",
 Its value is a comma-separated list of CSS selectors,
 include the relative values described in the "Targets" section.
 
-For an example of using `hx-include`, see the GitHub project {% aTargetBlank
+See the working example project that uses `hx-include` at {% aTargetBlank
 "https://github.com/mvolkmann/htmx-examples/tree/main/non-form-submit",
 "non-form-submit" %}.
 
@@ -847,7 +847,7 @@ that follows the `input` element.
 <span class="error" id="email-error" />
 ```
 
-For a working example, see the GitHub project {% aTargetBlank
+See the working example project at {% aTargetBlank
 "https://github.com/mvolkmann/htmx-examples/tree/main/email-validation",
 "email-validation" %}.
 
@@ -948,7 +948,7 @@ TODO: Add an example of this.
 
 ### Pagination
 
-See the example at {% aTargetBlank
+See the working example project at {% aTargetBlank
 "https://github.com/mvolkmann/htmx-examples/tree/main/pagination",
 "pagination" %}.
 
@@ -1014,7 +1014,7 @@ return (
 
 ### Infinite Scroll
 
-See the example at {% aTargetBlank
+See the working example project at {% aTargetBlank
 "https://github.com/mvolkmann/htmx-examples/tree/main/infinite-scroll",
 "infinite-scroll" %}.
 
@@ -1155,7 +1155,7 @@ because `load` is also one of the triggers.
 <p hx-get="/todos/status" hx-trigger="load, status-change from:body" />
 ```
 
-For a working example of this approach, see {% aTargetBlank
+See the working example project at {% aTargetBlank
 "https://github.com/mvolkmann/htmx-examples/tree/main/todo-list",
 "todo-list" %}.
 
@@ -1250,7 +1250,7 @@ Note that many features of htmx will not work if JavaScript is disable.
   The values will be passed a query parameters for GET requests
   and in the request body for all other kinds of requests.
 
-  For an example of using `hx-vals`, see the GitHub project {% aTargetBlank
+  See the working example project that uses `hx-vals` at {% aTargetBlank
   "https://github.com/mvolkmann/htmx-examples/tree/main/non-form-submit",
   "non-form-submit" %}.
 
@@ -1343,7 +1343,7 @@ The value of this attribute can be:
 - `"false"` to avoid creating an entry when
   the value `"true"` would be inherited from an ancestor element
 
-For an example of using `hx-push-url`, see the GitHub project {% aTargetBlank
+See the working example project that uses `hx-push-url` at {% aTargetBlank
 "https://github.com/mvolkmann/htmx-examples/tree/main/non-form-submit",
 "non-form-submit" %}.
 
