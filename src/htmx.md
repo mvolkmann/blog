@@ -633,6 +633,10 @@ add the {% aTargetBlank "https://htmx.org/attributes/hx-include/",
 Its value is a comma-separated list of CSS selectors,
 include the relative values described in the "Targets" section.
 
+For an example of using `hx-include`, see the GitHub project {% aTargetBlank
+"https://github.com/mvolkmann/htmx-examples/tree/main/non-form-submit",
+"non-form-submit" %}.
+
 To omit the values of some of the form elements
 that are inside the form, add the `hx-params` attribute.
 For more detail, see {% aTargetBlank
@@ -770,6 +774,17 @@ Note how the spinner image has the CSS class `htmx-indicator`.
 ## Common Patterns
 
 ### Client-side Validation with API calls
+
+Some input validation must be performed on the server.
+For example, when validating setup of a new user
+that is identified by their email address,
+it is common to verify that the provided email address
+is not already in use by an existing user.
+
+For an example of performing this kind of validation as the user types,
+see the GitHub project {% aTargetBlank
+"https://github.com/mvolkmann/htmx-examples/tree/main/email-validation",
+"email-validation" %}.
 
 ### Active Search
 
@@ -980,6 +995,10 @@ Note that many features of htmx will not work if JavaScript is disable.
   The values will be passed a query parameters for GET requests
   and in the request body for all other kinds of requests.
 
+  For an example of using `hx-vals`, see the GitHub project {% aTargetBlank
+  "https://github.com/mvolkmann/htmx-examples/tree/main/non-form-submit",
+  "non-form-submit" %}.
+
 - {% aTargetBlank "https://htmx.org/attributes/hx-vars/", "hx-vars" %}
 
 ## Debugging
@@ -1068,6 +1087,10 @@ The value of this attribute can be:
   (ex. `hx-push-url="/todo/detail"`)
 - `"false"` to avoid creating an entry when
   the value `"true"` would be inherited from an ancestor element
+
+For an example of using `hx-push-url`, see the GitHub project {% aTargetBlank
+"https://github.com/mvolkmann/htmx-examples/tree/main/non-form-submit",
+"non-form-submit" %}.
 
 ## \_hyperscript
 
