@@ -923,7 +923,52 @@ See the working example project at {% aTargetBlank
 "https://github.com/mvolkmann/htmx-examples/tree/main/email-validation",
 "email-validation" %}.
 
-### Resetting Form
+### Deleting an Element
+
+Sometimes the result of sending a request to an endpoint
+should be deleting the element that triggered the request.
+For example, in a todo app clicking a button to delete a todo
+needs to send an HTTP request so the todo can be deleted on the server.
+Then the row describing the todo should be removed from the DOM.
+
+The following HTML can be used to describe each todo.
+Note the use of `hx-swap="outerHTML"` and `hx-target="closest div"`
+on the `button` element.
+With those in place, the HTML returned by the `/todo/${id}` endpoint
+will replace the `div` that contains the `button`.
+That endpoint deletes the todo from the collection of todos on the server
+and returns nothing, effectively deleting that `div`.
+
+```js
+<div class="todo-item">
+  <input
+    type="checkbox"
+    checked={isCompleted}
+    hx-patch={`/todos/${id}/toggle`}
+    hx-target="closest div"
+    hx-swap="outerHTML"
+  />
+  <div class={isCompleted ? 'completed' : ''}>{description}</div>
+  <button
+    class="plain"
+    hx-confirm="Are you sure?"
+    hx-delete={`/todos/${id}`}
+    hx-swap="outerHTML"
+    hx-target="closest div"
+  >
+    🗑
+  </button>
+</div>
+```
+
+See the working example project at {% aTargetBlank
+"https://github.com/mvolkmann/htmx-examples/tree/main/todo-list",
+"todo-list" %}.
+
+<img alt="htmx Todo List" style="width: 60%"
+  src="/blog/assets/htmx-todo-list.png?v={{pkg.version}}">
+
+### Resetting a Form
 
 Often it is desirable to reset a `form` after a successful submit.
 This can be done by calling `this.reset()` where `this` refers to the `form`.
@@ -935,6 +980,8 @@ To specify code to run after a request has been sent and
 a response has been received, use the `hx-on:htmx:after-request` attribute.
 When using JSX, we can avoid cluttering the `form` element
 by using attribute spreading.
+Another reason to use this is because VS Code does not recognize
+`hx-on:htmx:after-request` as a valid attribute name.
 
 ```js
 const reset = {
