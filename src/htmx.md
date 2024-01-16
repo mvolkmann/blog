@@ -831,6 +831,61 @@ For example:
 <table hx-get="/weather/forecast" hx-trigger="revealed"></table>
 ```
 
+See the working example project at {% aTargetBlank
+"https://github.com/mvolkmann/htmx-examples/tree/main/lazy-load",
+"lazy-load" %}.
+
+<img alt="htmx Lazy Loading" style="width: 70%"
+  src="/blog/assets/htmx-lazy-loading.png?v={{pkg.version}}">
+
+The following HTML appears near the bottom of the page
+so it is out of view when the page is first loaded.
+
+```js
+<h2>Users</h2>
+<div
+  hx-get="/users"
+  hx-indicator=".htmx-indicator"
+  hx-trigger="revealed"
+/>
+<img alt="loading..." class="htmx-indicator" src="/spinner.gif" />
+```
+
+The following code defines the `/users` endpoint
+which returns an HTML `table` containing user data.
+
+```js
+const URL = 'https://jsonplaceholder.typicode.com/users';
+
+app.get('/users', async () => {
+  Bun.sleepSync(1000); // simulates long-running query
+  const res = await fetch(URL);
+  const users = await res.json();
+  return (
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Company</th>
+        </tr>
+      </thead>
+      <tbody>
+        {users.map(user => (
+          <tr>
+            <td>{user.id}</td>
+            <td>{user.name}</td>
+            <td>{user.email}</td>
+            <td>{user.company.name}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+});
+```
+
 ### Input Validation with API calls
 
 Some input validation must be performed on the server.
