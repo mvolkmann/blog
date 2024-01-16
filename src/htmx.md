@@ -761,6 +761,14 @@ that matches one or more elements.
 Those elements will have their opacity changed from 0 to 1
 while an associated HTTP request is being processed.
 
+In addition, when an HTTP request is triggered,
+the CSS class `htmx-request` is added to
+the element(s) identified by the `hx-indicator` attribute OR
+the element that triggered the request
+if the `hx-indicator` attribute is not present.
+In the latter case, a CSS rule matching `htmx-request`
+can be used to style the triggering element.
+
 The `hx-disabled-elt` attribute specifies a CSS selector
 that matches one or more elements.
 Those elements will have the `:disabled` CSS pseudo-class applied
@@ -965,8 +973,77 @@ See the working example project at {% aTargetBlank
 "https://github.com/mvolkmann/htmx-examples/tree/main/todo-list",
 "todo-list" %}.
 
-<img alt="htmx Todo List" style="width: 60%"
+<img alt="htmx Todo List" style="width: 50%"
   src="/blog/assets/htmx-todo-list.png?v={{pkg.version}}">
+
+### CSS Transitions
+
+When htmx swaps HTML into the DOM it does the following:
+
+- Add the `htmx-swapping` CSS class to the target element.
+- Delay for a short time.
+- Remove the `htmx-swapping` CSS class to the target element.
+- Add the `htmx-settling` CSS class to the target element.
+- Create a DOM element representing the new HTML and
+  add the CSS class `htmx-added` to it.
+- Swap the new DOM element into the DOM,
+  either replacing the target or placing it relative to the target,
+- Delay for a short time.
+- Remove the `htmx-added` CSS class from the new DOM element.
+- Remove the `htmx-settling` CSS class from the target element.
+
+The delays enable adding CSS transitions.
+
+For example, the todo list app described in the previous section
+fades the row of a todo out before deleting it.
+
+The following CSS is added to describe the desired transition.
+
+```css
+.todo-item.htmx-swapping {
+  opacity: 0;
+  transition: opacity 1s ease-out;
+}
+```
+
+The `hx-swap` attribute on the delete button
+is modified to increase the delay between
+adding the `htmx-swapping` CSS class to the target and removing it.
+The target in this case is the element that
+represents the todo row and contains the delete button.
+This delays actually removing the target
+until the CSS transition has time to complete.
+
+```js
+<button
+  class="plain"
+  hx-confirm="Are you sure?"
+  hx-delete={`/todos/${id}`}
+  hx-swap="outerHTML swap:1s"
+  hx-target="closest div"
+>
+  🗑
+</button>
+```
+
+In a similar way, the delay between
+adding the `htmx-settling` CSS class to the target and removing it
+can be modified by adding the modifier `settle:{time}`.
+
+To fade content into view, no `settle` delay is need.
+Suppose the new content has the CSS class `new-content`.
+The following CSS are rules are all that is required to fade it into view.
+
+```css
+.new-content.htmx-added {
+  opacity: 0;
+}
+
+.new-content {
+  opacity: 1;
+  transition: opacity 1s ease-in;
+}
+```
 
 ### Resetting a Form
 
