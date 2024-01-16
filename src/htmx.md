@@ -83,6 +83,7 @@ Many of these are discussed in more detail in subsequent sections.
   to trigger any kind of HTTP request and insert HTML in the response
   into a specific location in the DOM without a full page refresh.
   This dramatically reduces the need for custom client-side JavaScript code.
+  It also preserves scroll state.
 
 - Improves startup time
 
@@ -830,7 +831,7 @@ For example:
 <table hx-get="/weather/forecast" hx-trigger="revealed"></table>
 ```
 
-### Client-side Validation with API calls
+### Input Validation with API calls
 
 Some input validation must be performed on the server.
 For example, when validating setup of a new user
@@ -863,6 +864,42 @@ that follows the `input` element.
 See the working example project at {% aTargetBlank
 "https://github.com/mvolkmann/htmx-examples/tree/main/email-validation",
 "email-validation" %}.
+
+### Resetting Form
+
+Often it is desirable to reset a `form` after a successful submit.
+This can be done by calling `this.reset()` where `this` refers to the `form`.
+
+Checking the request path is needed if any of the inputs
+can also send requests, perhaps for validation.
+
+To specify code to run after a request has been sent and
+a response has been received, use the `hx-on:htmx:after-request` attribute.
+When using JSX, we can avoid cluttering the `form` element
+by using attribute spreading.
+
+```js
+const reset = {
+  'hx-on:htmx:after-request': `
+    if (event.detail.pathInfo.requestPath === '/account' &&
+      event.detail.successful) this.reset()`
+};
+
+return (
+  <>
+    ...
+    <form hx-post="/account" hx-target="#result" {...reset}>
+      {/* Add form inputs here.
+          HTML form validation will not work
+          if the hx-post attribute is moved
+          from the form to this button. */}
+      <button>Submit</button>
+    </form>
+    <div id="result" />
+    ...
+  </>
+);
+```
 
 ### Active Search
 
