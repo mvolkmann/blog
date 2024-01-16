@@ -777,7 +777,11 @@ while an associated HTTP request is being processed.
 The following HTML demonstrates
 showing an indicator and disabling the "Add" button
 while waiting for a new todo to be added.
-Note how the spinner image has the CSS class `htmx-indicator`.
+
+The spinner image must be given the CSS class `htmx-indicator`,
+which hides the spinner by setting `opacity` to `0`.
+When the CSS class `htmx-request` is also applied,
+the spinner is shown by setting `opacity` to `1`.
 
 ```html
 <form
