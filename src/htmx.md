@@ -961,6 +961,7 @@ return (
 Htmx can be used to implement an active search where a list of matching data
 is retrieved as the user enters search text.
 The following code demonstrates this.
+It uses Tailwind CSS classes.
 The full project can be found in {% aTargetBlank
 "https://github.com/mvolkmann/bun-examples/tree/main/active-search", "GitHub" %}.
 
@@ -1195,6 +1196,57 @@ function TableRow(page: number, pokemon: Pokemon, isLast: boolean) {
 
 <img alt="htmx Infinite Scroll" style="width: 30%"
   src="/blog/assets/htmx-infinite-scroll.png?v={{pkg.version}}">
+
+### Polling
+
+Htmx can send a request at regular intervals in order to implement "polling".
+
+See the working example project at {% aTargetBlank
+"https://github.com/mvolkmann/htmx-examples/tree/main/polling",
+"polling" %}.
+
+This example renders the following HTML
+which reports the current score of an NFL game.
+Score updates are randomly generated every five seconds.
+Since this never stops, the scores will eventually get quite high.
+
+<img alt="htmx Polling" style="width: 30%"
+  src="/blog/assets/htmx-polling.png?v={{pkg.version}}">
+
+```js
+app.get('/', () => {
+  return (
+    <BaseHtml>
+      <h1>Polling</h1>
+      {/* Send a request to the /score endpoint
+          immediately and every five seconds thereafter. */}
+      <h2 hx-get="/score" hx-trigger="load, every 5s" />
+    </BaseHtml>
+  );
+});
+
+let chiefsHaveBall = true;
+let bills = 0;
+let chiefs = 0;
+
+// Randomly get points for a touchdown, field goal, or nothing.
+function getPoints() {
+  const number = Math.floor(Math.random() * 10);
+  const touchdown = 7;
+  const fieldGoal = 3;
+  return number >= 8 ? touchdown : number >= 5 ? fieldGoal : 0;
+}
+
+app.get('/score', async () => {
+  if (chiefsHaveBall) {
+    chiefs += getPoints();
+  } else {
+    bills += getPoints();
+  }
+  chiefsHaveBall = !chiefsHaveBall;
+  return `Chiefs: ${chiefs}, Bills: ${bills}`;
+});
+```
 
 ## HTTP Request Headers
 
