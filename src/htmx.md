@@ -996,10 +996,18 @@ When htmx swaps HTML into the DOM it does the following:
 - Remove the `htmx-added` CSS class from the new DOM element.
 - Remove the `htmx-settling` CSS class from the target element.
 
-The delays enable adding CSS transitions.
+The delays described above enable adding CSS transitions.
 
-For example, the todo list app described in the previous section
-fades the row of a todo out before deleting it.
+Two things are required to implement a CSS transition.
+First, the existing element and the new element
+must have the same `id` attribute value.
+This is referred to as having a "stable id".
+Second, the `swap` delay should be set to
+the same duration as the CSS transition.
+For example, `hx-swap="outerHTML swap:1s"`.
+
+The todo list app described in the previous section
+fades out the row of a todo before deleting it.
 
 The following CSS is added to describe the desired transition.
 
