@@ -1334,7 +1334,7 @@ Polling is a way to repeatedly update the UI using server data.
 One approach is to send requests at regular intervals,
 referred to as "fixed rate polling".
 Another approach is to send a single request and then
-send another after the HTML response from this request is "loaded",
+send another after the HTML response from this request is loaded,
 referred to as "load polling".
 
 See the working example of fixed rate polling at {% aTargetBlank
@@ -1346,8 +1346,8 @@ which reports the current score of an NFL game.
 Score updates are randomly generated every five seconds.
 Since this never stops, the scores will eventually get quite high.
 
-<img alt="htmx Polling" style="width: 30%"
-  src="/blog/assets/htmx-polling.png?v={{pkg.version}}">
+<img alt="htmx Fixed Rate Polling" style="width: 30%"
+  src="/blog/assets/htmx-fixed-rate-polling.png?v={{pkg.version}}">
 
 ```js
 app.get('/', () => {
@@ -1389,6 +1389,9 @@ See the working example of load polling at {% aTargetBlank
 "progress-bar" %}.
 This also demonstrates repeatedly rendering an element with a fixed `id` value
 and achieving smooth animation using a CSS transition.
+
+<img alt="htmx Load Polling" style="width: 100%"
+  src="/blog/assets/htmx-load-polling.png?v={{pkg.version}}">
 
 The following HTML renders a progress bar.
 
@@ -1458,7 +1461,8 @@ app.get('/progress', ({headers}) => {
 ```
 
 The following CSS styles the parts of the progress bar and
-defines a `linear` `transition` for the `width` of the progress bar.
+defines a `linear` `transition` for the
+`width` of the filled portion of the progress bar.
 
 ```css
 #progress-container {
