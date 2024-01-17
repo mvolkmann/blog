@@ -699,8 +699,36 @@ and returns HTML for the updated todo item.
 Cross-Site Scripting (XSS) attacks can occur if
 user-entered content is included in HTML responses.
 To prevent this, sanitize the HTML before returning it.
-A good library for doing this is {% aTargetBlank
+
+A good library for sanitizing HTML is {% aTargetBlank
 "https://github.com/apostrophecms/sanitize-html", "sanitize-html" %}.
+
+See the working example project at {% aTargetBlank
+"https://github.com/mvolkmann/htmx-examples/tree/main/sanitizing-html",
+"sanitizing-html" %}.
+
+The following are the relevant lines of code from that project.
+
+Requests sent to the `/render` endpoint contain the form data property `markup`.
+Users can enter any HTML, including `script` tags that may do malicious things.
+The `sanitizeHtml` function strips out all elements that are
+not in an approved list, which does not include the `script` element.
+
+```ts
+import type {Context} from 'hono';
+import sanitizeHtml from 'sanitize-html';
+
+app.post('/render', async (c: Context) => {
+  const data = await c.req.formData();
+  const markup = data.get('markup');
+  console.log('index.tsx /render: markup =', markup);
+  return c.html(sanitizeHtml(markup));
+});
+```
+
+If the user enters text like
+`<p>Hello</p><script>alert('pwned')</script><p>Goodbye</p>`,
+all that will be rendered are the paragraphs containing "Hello" and "Goodbye".
 
 ## Targets
 
