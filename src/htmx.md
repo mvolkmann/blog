@@ -440,6 +440,21 @@ There are three ways to use htmx.
    <script src="htmx.min.js"></script>
    ```
 
+## Configuring
+
+Htmx supports a large number of configuration options. For details, see
+<a href="https://htmx.org/docs/#config" target="_blank">Configuring htmx</a>.
+
+The options can be configured in a `meta` tag
+that is a child of the `head` tag of each page.
+
+For example, the configuration option `htmx.config.allowScriptTags`
+is `true` by default. The following `meta` tag changes this.
+
+```html
+<meta name="htmx-config" content='{"allowScriptTags": false}' />
+```
+
 ## Using TypeScript
 
 The steps below provide one way to use TypeScript
@@ -696,11 +711,40 @@ and returns HTML for the updated todo item.
 
 ## Security
 
-Two ways to increase the security of an htmx application are:
+Three ways to increase the security of an htmx application are:
 
+- Use a Content Security Policy (CSP) which limits the sources of assets.
+- Configure htmx to ignore script tags in HTML returned by endpoints.
+  This is described in the [Configuring](#configuring) section.
 - Prevent Cross-Site Scripting (XSS) attacks by sanitizing the HTML
   returned from endpoints if it includes user-entered content.
-- Use a Content Security Policy (CSP) which limits the sources of assets.
+
+All three of these options can prevent executing `script` tags
+found in user-entered text.
+
+### Content Security Policy (CSP)
+
+A CSP is specified by adding a `meta` tag as a child of the `head` tag
+in each HTML page. For example:
+
+```html
+<meta
+  http-equiv="Content-Security-Policy"
+  content="default-src 'self'; img-src https://*"
+/>
+```
+
+This CSP says:
+
+- By default all content must come from the domain of this web app.
+- An exception is made for images which can come from any `https` URL.
+
+Will this CSP in place, all JavaScript libraries including htmx
+will need to be downloaded and served from the web app domain.
+
+For more detail on what can be specified in a CSP, see the MDN {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy",
+"Content-Security-Policy" %} page.
 
 ### Sanitizing HTML
 
@@ -735,27 +779,6 @@ app.post('/render', async (c: Context) => {
 If the user enters text like
 `<p>Hello</p><script>alert('pwned')</script><p>Goodbye</p>`,
 all that will be rendered are the paragraphs containing "Hello" and "Goodbye".
-
-### Content Security Policy (CSP)
-
-A CSP is specified by adding a `meta` tag as a child of the `head` tag
-in each HTML page. For example:
-
-```html
-<meta
-  http-equiv="Content-Security-Policy"
-  content="default-src 'self'; img-src https://*"
-/>
-```
-
-This CSP says:
-
-- By default all content must come from the domain of this web app.
-- An exception is made for images which can come from any `https` URL.
-
-For more detail on what can be specified in a CSP, see the MDN {% aTargetBlank
-"https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy",
-"Content-Security-Policy" %} page.
 
 ## Targets
 
@@ -1100,14 +1123,14 @@ See the working example project at {% aTargetBlank
 When htmx swaps HTML into the DOM it does the following:
 
 - Add the `htmx-swapping` CSS class to the target element.
-- Delay for a short time.
+- Delay for a short time (`htmx.config.defaultSwapDelay` defaults to 0).
 - Remove the `htmx-swapping` CSS class to the target element.
 - Add the `htmx-settling` CSS class to the target element.
 - Create a DOM element representing the new HTML and
   add the CSS class `htmx-added` to it.
 - Swap the new DOM element into the DOM,
   either replacing the target or placing it relative to the target,
-- Delay for a short time.
+- Delay for a short time (`htmx.config.defaultSettleDelay` defaults to 20ms).
 - Remove the `htmx-added` CSS class from the new DOM element.
 - Remove the `htmx-settling` CSS class from the target element.
 
