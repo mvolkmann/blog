@@ -449,7 +449,9 @@ The options can be configured in a `meta` tag
 that is a child of the `head` tag of each page.
 
 For example, the configuration option `htmx.config.allowScriptTags`
-is `true` by default. The following `meta` tag changes this.
+is `true` by default. The following `meta` tag changes this
+`script` tags in content returned from endpoints are ignored.
+
 The value of the `content` attribute must be a JSON string.
 
 ```html
@@ -467,10 +469,13 @@ add the following `meta` tag in the `head` tag of all pages.
 <meta name="htmx-config" content='{"timeout": 2000}' />
 ```
 
-To set a timeout to be used for a specific request (ex. 2 seconds), add the
-{% aTargetBlank "https://htmx.org/attributes/hx-request/", "hx-request" %}
-attribute to the element that triggers the request.
-For example:
+To set a timeout to be used for a specific request, add the {% aTargetBlank
+"https://htmx.org/attributes/hx-request/", "hx-request" %} attribute.
+This attribute is inherited by all descendant elements, so it can be placed
+on the element that triggers the request OR on any of its ancestor elements.
+
+The following example configures the timeout for
+HTTP requests triggered by a `form` to two seconds.
 
 ```html
 <form hx-post="/render" hx-target="#result" hx-request='"timeout":2000'></form>
@@ -771,7 +776,7 @@ This CSP says:
 - By default all content must come from the domain of this web app.
 - An exception is made for images which can come from any `https` URL.
 
-Will this CSP in place, all JavaScript libraries including htmx
+With this CSP in place, all JavaScript libraries including htmx
 will need to be downloaded and served from the web app domain.
 
 For more detail on what can be specified in a CSP, see the MDN {% aTargetBlank
