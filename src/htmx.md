@@ -1387,6 +1387,108 @@ app.get('/score', async () => {
 See the working example of load polling at {% aTargetBlank
 "https://github.com/mvolkmann/htmx-examples/tree/main/progress-bar",
 "progress-bar" %}.
+This also demonstrates repeatedly rendering an element with a fixed `id` value
+and achieving smooth animation using a CSS transition.
+
+The following HTML renders a progress bar.
+
+```js
+function ProgressBar() {
+  // The HTML progress element cannot be animated.
+  return (
+    <div
+      id="progress-container"
+      hx-get="/progress"
+      hx-swap="outerHTML"
+      hx-trigger={percentComplete < 100 ? 'load delay:1s' : ''}
+      role="progressbar"
+      aria-valuenow={percentComplete}
+    >
+      <div id="progress-text">{percentComplete.toFixed(1)}%</div>
+      {/* This div MUST have an id in order for the transition to work! */}
+      <div id="progress-bar" style={`width: ${percentComplete}%`} />
+    </div>
+  );
+}
+```
+
+The following endpoint renders the initial progress bar
+and button to reset it.
+
+The `/progress` endpoint can be triggered in two ways,
+from the `div` with `id="progress-container"` above
+or from the `button` with `id="reset-btn"` below.
+The `div` above only triggers the endpoint
+if `percentComplete` has not yet reached 100.
+If that is the case, it waits one second before triggering it.
+
+```js
+app.get('/', () => {
+  return (
+    <BaseHtml>
+      <h1>Progress Bar</h1>
+      <ProgressBar />
+      <button
+        id="reset-btn"
+        hx-get="/progress"
+        hx-swap="outerHTML"
+        hx-target="#progress-container"
+      >
+        Reset
+      </button>
+    </BaseHtml>
+  );
+});
+```
+
+The following endpoint updates the progress bar.
+It checks the value of the `hx-trigger` request header
+to determine if the endpoint was triggered by the Reset button.
+
+```js
+app.get('/progress', ({headers}) => {
+  if (headers['hx-trigger'] === 'reset-btn') {
+    percentComplete = 0;
+  } else {
+    const delta = Math.random() * 30;
+    percentComplete = Math.min(100, percentComplete + delta);
+  }
+  return <ProgressBar />;
+});
+```
+
+The following CSS styles the parts of the progress bar and
+defines a `linear` `transition` for the `width` of the progress bar.
+
+```css
+#progress-container {
+  background-color: lightgray;
+  border: 2px solid black;
+  height: 2rem;
+  width: 50rem;
+  position: relative;
+}
+
+/* This centers the value text on the progress bar. */
+#progress-text {
+  color: black;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#progress-bar {
+  background-color: green;
+  height: 100%;
+  width: 0%;
+  transition: width 1s linear;
+}
+
+#reset-btn {
+  margin-top: 1rem;
+}
+```
 
 ## HTTP Request Headers
 
