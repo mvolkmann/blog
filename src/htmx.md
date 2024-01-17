@@ -1796,35 +1796,16 @@ A single interaction with an element that triggers an HTTP request
 will cause a lot of debugging output, perhaps too much to be useful.
 For example:
 
-{% raw %}
-
 ```text
-htmx:xhr:progress <p hx-get=​"/​todos/​status" hx-trigger=​"load, status-change from:​body" class=​"htmx-settling">​0 of 2 remaining​</p>
-{lengthComputable: true, loaded: 16, total: 16, elt: p.htmx-request}
-
-htmx:beforeOnLoad <p hx-get=​"/​todos/​status" hx-trigger=​"load, status-change from:​body" class=​"htmx-settling">​0 of 2 remaining​</p>
-{xhr: XMLHttpRequest, target: p.htmx-request, requestConfig: {…}, etc: {…}, boosted: undefined, …}
-
-htmx:beforeSwap <p hx-get=​"/​todos/​status" hx-trigger=​"load, status-change from:​body" class>​0 of 2 remaining​</p>
-{shouldSwap: true, serverResponse: '0 of 2 remaining', isError: false, ignoreTitle: false, xhr: XMLHttpRequest, …}
-
-htmx:afterSwap <p hx-get=​"/​todos/​status" hx-trigger=​"load, status-change from:​body" class>​0 of 2 remaining​</p>
-{xhr: XMLHttpRequest, target: p.htmx-request.htmx-settling, requestConfig: {…}, etc: {…}, boosted: undefined, …}
-
-htmx:afterRequest <p hx-get=​"/​todos/​status" hx-trigger=​"load, status-change from:​body" class>​0 of 2 remaining​</p>
-{xhr: XMLHttpRequest, target: p.htmx-settling, requestConfig: {…}, etc: {…}, boosted: undefined, …}
-
-htmx:afterOnLoad <p hx-get=​"/​todos/​status" hx-trigger=​"load, status-change from:​body" class>​0 of 2 remaining​</p>
-{xhr: XMLHttpRequest, target: p.htmx-settling, requestConfig: {…}, etc: {…}, boosted: undefined, …}
-
-htmx:xhr:loadend <p hx-get=​"/​todos/​status" hx-trigger=​"load, status-change from:​body" class>​0 of 2 remaining​</p>​
-{lengthComputable: true, loaded: 16, total: 16, elt: p.htmx-settling}
-
-htmx:afterSettle <p hx-get=​"/​todos/​status" hx-trigger=​"load, status-change from:​body" class>​0 of 2 remaining​</p>
-{xhr: XMLHttpRequest, target: p, requestConfig: {…}, etc: {…}, boosted: undefined, …}
+htmx:xhr:progress ...
+htmx:beforeOnLoad ...
+htmx:beforeSwap ...
+htmx:afterSwap ...
+htmx:afterRequest ...
+htmx:afterOnLoad ...
+htmx:xhr:loadend ...
+htmx:afterSettle ...
 ```
-
-{% endraw %}
 
 Another debugging approach is to use an unminified version of the htmx library
 and set breakpoints in its functions.
