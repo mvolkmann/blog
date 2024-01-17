@@ -467,16 +467,13 @@ add the following `meta` tag in the `head` tag of all pages.
 <meta name="htmx-config" content='{"timeout": 2000}' />
 ```
 
-To set a timeout to be used for a specific request (ex. 2 seconds),
-add the `hx-request` attribute to the element that triggers the request.
+To set a timeout to be used for a specific request (ex. 2 seconds), add the
+{% aTargetBlank "https://htmx.org/attributes/hx-request/", "hx-request" %}
+attribute to the element that triggers the request.
 For example:
 
 ```html
-<form
-  hx-post="/render"
-  hx-target="#result"
-  hx-request='\"timeout\":2000'
-></form>
+<form hx-post="/render" hx-target="#result" hx-request='"timeout":2000'></form>
 ```
 
 When a request timeout occurs, htmx dispatches a `htmx:timeout` event.
