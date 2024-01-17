@@ -450,10 +450,45 @@ that is a child of the `head` tag of each page.
 
 For example, the configuration option `htmx.config.allowScriptTags`
 is `true` by default. The following `meta` tag changes this.
+The value of the `content` attribute must be a JSON string.
 
 ```html
 <meta name="htmx-config" content='{"allowScriptTags": false}' />
 ```
+
+### Request Timeouts
+
+By default no HTTP requests send by htmx have a timeout.
+
+To set a timeout to be used for all requests (ex. 2 seconds),
+add the following `meta` tag in the `head` tag of all pages.
+
+```html
+<meta name="htmx-config" content='{"timeout": 2000}' />
+```
+
+To set a timeout to be used for a specific request (ex. 2 seconds),
+add the `hx-request` attribute to the element that triggers the request.
+For example:
+
+```html
+<form
+  hx-post="/render"
+  hx-target="#result"
+  hx-request='\"timeout\":2000'
+></form>
+```
+
+When a request timeout occurs, htmx dispatches a `htmx:timeout` event.
+The following code demonstrates listening for this event on a given element
+and triggering a request to get text to render.
+
+```js
+<div id="result" hx-get="/timeout" hx-trigger="htmx:timeout from:form" />
+```
+
+The `/timeout` endpoint could return text such as "The request timed out."
+which is then rendered in the `div` above.
 
 ## Using TypeScript
 
