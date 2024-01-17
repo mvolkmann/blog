@@ -694,14 +694,22 @@ For example, `/todos/:id/toggle` is a reasonable URL path
 for an endpoint that toggles the completed status of todo
 and returns HTML for the updated todo item.
 
-## Cross-Site Scripting Attacks
+## Security
 
-Cross-Site Scripting (XSS) attacks can occur if
-user-entered content is included in HTML responses.
-To prevent this, sanitize the HTML before returning it.
+Two ways to increase the security of an htmx application are:
+
+- Prevent Cross-Site Scripting (XSS) attacks by sanitizing the HTML
+  returned from endpoints if it includes user-entered content.
+- Use a Content Security Policy (CSP) which limits the sources of assets.
+
+### Sanitizing HTML
 
 A good library for sanitizing HTML is {% aTargetBlank
 "https://github.com/apostrophecms/sanitize-html", "sanitize-html" %}.
+This provides the function `sanitizeHtml` which
+strips out all elements that are not in an approved list.
+The `script` element is not in this list
+because they may do malicious things.
 
 See the working example project at {% aTargetBlank
 "https://github.com/mvolkmann/htmx-examples/tree/main/sanitizing-html",
@@ -710,9 +718,7 @@ See the working example project at {% aTargetBlank
 The following are the relevant lines of code from that project.
 
 Requests sent to the `/render` endpoint contain the form data property `markup`.
-Users can enter any HTML, including `script` tags that may do malicious things.
-The `sanitizeHtml` function strips out all elements that are
-not in an approved list, which does not include the `script` element.
+Users can enter any HTML, including `script` tags.
 
 ```ts
 import type {Context} from 'hono';
@@ -729,6 +735,26 @@ app.post('/render', async (c: Context) => {
 If the user enters text like
 `<p>Hello</p><script>alert('pwned')</script><p>Goodbye</p>`,
 all that will be rendered are the paragraphs containing "Hello" and "Goodbye".
+
+### Content Security Policy (CSP)
+
+A CSP is specified by adding a `meta` tag as a child of the `head` tag
+in each HTML page. For example:
+
+```html
+<meta
+  http-equiv="Content-Security-Policy"
+  content="default-src 'self'; img-src https://*; child-src 'none';"
+/>
+```
+
+This CSP says:
+
+- By default all content must come from the domain of this web app.
+- An exception is made for images which can come from any `https` URL.
+- The `child-src` directive defines the valid sources for web workers and
+  nested browsing contexts loaded using elements such as `frame` and `iframe`.
+  No sources are valid for these.
 
 ## Targets
 
