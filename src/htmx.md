@@ -1351,20 +1351,24 @@ function TableRow(page: number, pokemon: Pokemon, isLast: boolean) {
 ### Polling
 
 Polling is a way to repeatedly update the UI using server data.
-One approach is to send requests at regular intervals,
-referred to as "fixed rate polling".
-Another approach is to send a single request and then
-send another after the HTML response from this request is loaded,
-referred to as "load polling".
+Two polling approaches supported by htmx are
+"fixed rate polling" and "load polling".
+
+#### Fixed Rate Polling
+
+Fixed rate polling sends requests at regular intervals.
 
 See the working example of fixed rate polling at {% aTargetBlank
-"https://github.com/mvolkmann/htmx-examples/tree/main/polling",
-"polling" %}.
+"https://github.com/mvolkmann/htmx-examples/tree/main/fixed-rate-polling",
+"fixed-rate-polling" %}.
 
 This example renders the following HTML
 which reports the current score of an NFL game.
 Score updates are randomly generated every five seconds.
 Since this never stops, the scores will eventually get quite high.
+
+An endpoint can terminate fixed rate polling by
+returning a status code of 286 which is not a standard code.
 
 <img alt="htmx Fixed Rate Polling" style="width: 30%"
   src="/blog/assets/htmx-fixed-rate-polling.png?v={{pkg.version}}">
@@ -1403,6 +1407,11 @@ app.get('/score', async () => {
   return `Chiefs: ${chiefs}, Bills: ${bills}`;
 });
 ```
+
+#### Load Polling
+
+Load polling sends a single request and then sends another
+after the HTML response from the previous request is loaded.
 
 See the working example of load polling at {% aTargetBlank
 "https://github.com/mvolkmann/htmx-examples/tree/main/progress-bar",
