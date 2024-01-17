@@ -389,6 +389,15 @@ describe('dog endpoints', () => {
 });
 ```
 
+## Form Data
+
+To get form data in an endpoint:
+
+```js
+const data = await c.req.formData();
+const value = data.get('some-name');
+```
+
 ## Validation
 
 Hono supports validating the following kinds of request data
