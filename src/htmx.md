@@ -745,6 +745,9 @@ The `hx-swap` attribute also supports the following space-separated modifiers:
 - `swap`: specifies time to wait after receiving new content before swapping/inserting it
 - `transition`: uses the View Transitions API
 
+An endpoint can prevent a swap from occurring
+by returning a status code of 204 (No Content).
+
 The `hx-select` attribute specifies
 a CSS selector or a comma-separated list of them
 that indicates which elements from the returned HTML to include.
@@ -806,7 +809,25 @@ the spinner is shown by setting `opacity` to `1`.
 </form>
 ```
 
-## Out-of-band Updates
+## Multiple Updates
+
+There are three ways to update multiple parts of the current page.
+
+1. Expanding the target
+1. Out-of-band swaps
+1. Triggering events
+
+### Expanding the target
+
+Rather than updating multiple elements,
+this approach uses a single target that encompasses
+all the elements that require updating.
+
+This can be non-optimal because it requires the endpoint
+to build and return more HTML that is technically necessary.
+Much of it will likely be identical to what is already rendered.
+
+### Out-of-band Updates
 
 The {% aTargetBlank "https://htmx.org/attributes/hx-swap-oob/",
 "hx-swap-oob" %} attribute with a value of `"true"` specifies that
@@ -835,6 +856,40 @@ that have the `hx-swap-oob` attributes.
 The `hx-select-oob` attribute is typically used together with
 the `hx-select` attribute which also provides a list of CSS selectors,
 but those specify a subset the elements to be included at the target location.
+
+### Custom Events
+
+Any endpoint can trigger a custom event
+by setting the HTTP response header `hx-trigger` to the event name.
+When an HTML element receives the event,
+it can trigger another HTTP request to swap in new content.
+
+For example, a todo app can display
+the number of uncompleted todos and the total number of todos.
+Adding a new todo, deleting a todo, and toggling the completed state of a todo
+all change what is displayed.
+One way to accomplish this is for all those endpoints
+to trigger the same custom event.
+
+HTML elements that trigger sending HTTP requests to those endpoints
+will receive the event.
+By default, the event will bubble up the DOM hierarchy.
+
+Any element can listen for the event on the `body` element.
+For example, the following element listens for
+the custom event "status-change" on the `body` element.
+That triggers the element to send a GET request to `/todos/status`
+which returns the text to include in the paragraph tag.
+This also occurs when the element is initially loaded
+because `load` is also one of the triggers.
+
+```js
+<p hx-get="/todos/status" hx-trigger="load, status-change from:body" />
+```
+
+See the working example project at {% aTargetBlank
+"https://github.com/mvolkmann/htmx-examples/tree/main/todo-list",
+"todo-list" %}.
 
 ## Common Patterns
 
@@ -1620,40 +1675,6 @@ by including the HTTP response header `hx-refresh`.
 
 An endpoint can change the target element of its response
 by including the HTTP response header `hx-retarget`.
-
-## Custom Events
-
-Any endpoint can trigger a custom event
-by setting the HTTP response header `HX-Trigger` to the event name.
-When an HTML element receives the event,
-it can trigger another HTTP request.
-
-For example, a todo app can display
-the number of uncompleted todos and the total number of todos.
-Adding a new todo, deleting a todo, and toggling the completed state of a todo
-all change what is displayed.
-One way to accomplish this is for all those endpoints
-to trigger the same custom event.
-
-HTML elements that trigger sending HTTP requests to those endpoints
-will receive the event.
-By default, the event will bubble up the DOM hierarchy.
-
-Any element can listen for the event on the `body` element.
-For example, the following element listens for
-the custom event "status-change" on the `body` element.
-That triggers the element to send a GET request to `/todos/status`
-which returns the text to include in the paragraph tag.
-This also occurs when the element is initially loaded
-because `load` is also one of the triggers.
-
-```js
-<p hx-get="/todos/status" hx-trigger="load, status-change from:body" />
-```
-
-See the working example project at {% aTargetBlank
-"https://github.com/mvolkmann/htmx-examples/tree/main/todo-list",
-"todo-list" %}.
 
 ## Components
 
