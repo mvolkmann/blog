@@ -1330,9 +1330,14 @@ function TableRow(page: number, pokemon: Pokemon, isLast: boolean) {
 
 ### Polling
 
-Htmx can send a request at regular intervals in order to implement "polling".
+Polling is a way to repeatedly update the UI using server data.
+One approach is to send requests at regular intervals,
+referred to as "fixed rate polling".
+Another approach is to send a single request and then
+send another after the HTML response from this request is "loaded",
+referred to as "load polling".
 
-See the working example project at {% aTargetBlank
+See the working example of fixed rate polling at {% aTargetBlank
 "https://github.com/mvolkmann/htmx-examples/tree/main/polling",
 "polling" %}.
 
@@ -1378,6 +1383,10 @@ app.get('/score', async () => {
   return `Chiefs: ${chiefs}, Bills: ${bills}`;
 });
 ```
+
+See the working example of load polling at {% aTargetBlank
+"https://github.com/mvolkmann/htmx-examples/tree/main/progress-bar",
+"progress-bar" %}.
 
 ## HTTP Request Headers
 
