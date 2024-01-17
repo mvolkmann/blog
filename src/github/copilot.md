@@ -174,3 +174,9 @@ click the "Source Control" button in the left nav and
 click the "two starts" icon in the text input for the commit message.
 Copilot will suggest a commit message
 that can be edited before committing the changes.
+
+## Alternatives
+
+See {% aTargetBlank
+"https://bito.ai/blog/free-github-copilot-alternatives-for-vs-code/",
+"10 Free GitHub Copilot Alternatives for VS Code 2023" %}.
