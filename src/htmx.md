@@ -1049,6 +1049,13 @@ The following CSS are rules are all that is required to fade it into view.
 }
 ```
 
+For another example of using a CSS transition, see the working project
+{% aTargetBlank
+"https://github.com/mvolkmann/htmx-examples/tree/main/progress-bar",
+"progress-bar" %}.
+This repeatedly renders an element with a fixed `id` value
+and achieves smooth animation using a CSS transition.
+
 ### Resetting a Form
 
 Often it is desirable to reset a `form` after a successful submit.
