@@ -54,7 +54,7 @@ In a source file, enter a comment requesting a function that
 performs some operation. Copilot will respond with comments that
 describe what the function must do, followed by a suggested implementation.
 Press the tab key after each line is output to accept it
-and proceed to the next line.
+and press the return key to proceed to the next line.
 
 For example, in JavaScript we could enter the following:
 
@@ -80,3 +80,97 @@ function median(values: number[]) {
   return values[half];
 }
 ```
+
+Sometimes there is more than one code suggestion.
+Hover over the code to display a toolbar where alternative code suggestions
+can be displayed by clicking the "<" and ">" buttons.
+
+Press ctrl-return to see all the code suggestions in a new split pane.
+Click one of the "Accept Solution" links above each code suggestion
+to add that code to the source file.
+
+## Explain It
+
+To get an explanation of an entire source file,
+right-click and select "Copilot > Explain This".
+
+To get an explanation of a specific function implementation,
+select all of its lines, right-click, and select "Copilot > Explain This".
+
+## Fix It
+
+To get suggestions for fixing syntax errors,
+select the lines to be examined, right-click, and select "Copilot > Fix This".
+
+## Generating Documentation
+
+To generate documentation for a function or section of code,
+select the lines to be examined, right-click,
+and select "Copilot > Generate Docs".
+
+For example, the following documentation is generated for an "average" function.
+
+```js
+/**
+ * Calculates the average of an array of numbers.
+ * @param values - The array of numbers.
+ * @returns The average of the numbers.
+ */
+function average(values: number[]) {
+  return values.reduce((sum, value) => sum + value, 0) / values.length;
+}
+```
+
+## Generating Tests
+
+To generate tests for a function,
+move the cursor to the first line of a function implementation, right-click,
+and select "Copilot > Generate Tests".
+
+For example, the following function is in the file `math.js`.
+
+```js
+export function avg(numbers) {
+  const sum = numbers.reduce((a, b) => a + b, 0);
+  return sum / numbers.length;
+}
+```
+
+Copilot will create the file `math.test.js` containing the following.
+Note that it is missing imports for `test` and `expect`.
+
+```js
+import {avg} from './math';
+
+test('calculates the average of an array of numbers', () => {
+  expect(avg([1, 2, 3, 4, 5])).toBe(3);
+});
+
+test('calculates the average of an array with negative numbers', () => {
+  expect(avg([-1, -2, -3, -4, -5])).toBe(-3);
+});
+
+test('calculates the average of an array with decimal numbers', () => {
+  expect(avg([1.5, 2.5, 3.5, 4.5, 5.5])).toBe(3.5);
+});
+
+test('calculates the average of an empty array', () => {
+  expect(avg([])).toBe(NaN);
+});
+```
+
+## Explain in Terminal
+
+When code that is run in a terminal produces error messages,
+clicking the "two stars" icon on the left and selecting "Explain using Copilot"
+describes the cause of the errors and sometimes suggested code fixes.
+Press ctrl-return to insert the code suggestions where the cursor is located.
+Manually delete the incorrect lines.
+
+## Automatic Commit Messages
+
+After making changes to files in a Git repository,
+click the "Source Control" button in the left nav and
+click the "two starts" icon in the text input for the commit message.
+Copilot will suggest a commit message
+that can be edited before committing the changes.
