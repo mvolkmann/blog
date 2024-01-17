@@ -1365,10 +1365,10 @@ See the working example of fixed rate polling at {% aTargetBlank
 This example renders the following HTML
 which reports the current score of an NFL game.
 Score updates are randomly generated every five seconds.
-Since this never stops, the scores will eventually get quite high.
 
 An endpoint can terminate fixed rate polling by
 returning a status code of 286 which is not a standard code.
+This is done when the score of either team exceeds 30.
 
 <img alt="htmx Fixed Rate Polling" style="width: 30%"
   src="/blog/assets/htmx-fixed-rate-polling.png?v={{pkg.version}}">
@@ -1404,6 +1404,8 @@ app.get('/score', async () => {
     bills += getPoints();
   }
   chiefsHaveBall = !chiefsHaveBall;
+  // Returning a status of 286 terminates fixed rate polling.
+  c.status(chiefs > 30 || bills > 30 ? 286 : 200);
   return `Chiefs: ${chiefs}, Bills: ${bills}`;
 });
 ```
