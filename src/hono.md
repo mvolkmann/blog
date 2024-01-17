@@ -165,7 +165,8 @@ body {
 ### src/dog-router.tsx
 
 ```ts
-import {Hono, type Context} from 'hono';
+import {Hono} from 'hono';
+import type {Context} from 'hono';
 import type {FC} from 'hono/jsx';
 
 const router = new Hono();
@@ -453,7 +454,8 @@ using the RPC approach described in the next section.
 ### src/dog-router.tsx Improved
 
 ```ts
-import {Hono, type Context} from 'hono';
+import {Hono} from 'hono';
+import type {Context} from 'hono';
 import type {FC} from 'hono/jsx';
 import {z} from 'zod';
 import {zValidator} from '@hono/zod-validator';
