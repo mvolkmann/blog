@@ -587,8 +587,12 @@ A space-separated list of event modifiers can follow an event name.
 Supported event modifiers include:
 
 - `changed` - only send request if the element value has changed
+- `consume` - stops the event from bubbling up to ancestor elements
 - `delay:{time}` - wait at least this long before each request is sent (debouncing)
 - `from:{css-selector}` - listen for the event on a different element
+- `once` - only trigger the request one time
+- `queue` - affects how concurrent events are processed
+- `target` - only trigger if event occurred on an element matching a CSS selector
 - `throttle:{time}` - only send the last event received in the specified time
   and then wait again
 
@@ -677,7 +681,7 @@ For example, entering data in an `input` that is inside a `form`
 could trigger two requests, one to validate the `input` value
 and one to submit the `form`.
 By default, these requests will run in parallel.
-If `hx-swap="closest form:abort` is applied to the `input`,
+If `hx-sync="closest form:abort` is applied to the `input`,
 the validation request will be sent first.
 If the validation succeeds then the submit request will be sent.
 Otherwise it will be aborted.
@@ -753,6 +757,7 @@ elements that should be preserved through a swap.
 For example, if there is an `audio` or `video` element that is playing
 and a request for new content returns the same element,
 it can continue playing without restarting at the beginning.
+Nothing about preserved elements is modified.
 
 ## Busy Indicators
 
@@ -1508,6 +1513,24 @@ defines a `linear` `transition` for the
   margin-top: 1rem;
 }
 ```
+
+### Adding Header to All Requests
+
+In some cases it is desirable to add a specific HTTP header
+to all requests send by htmx.
+For example, an authentication token can be passed in a header named "x-token".
+This can be done by adding an event listener
+for the `htmx:configRequest` event as follows.
+
+```js
+document.body.addEventListener('htmx:configRequest', event => {
+  event.detail.headers['x-token'] = 'some-token';
+});
+```
+
+See the working example at {% aTargetBlank
+"https://github.com/mvolkmann/htmx-examples/tree/main/token-header",
+"token-header" %}.
 
 ## HTTP Request Headers
 
