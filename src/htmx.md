@@ -1540,6 +1540,29 @@ See the working example at {% aTargetBlank
 "https://github.com/mvolkmann/htmx-examples/tree/main/token-header",
 "token-header" %}.
 
+### Client-side Redirection
+
+An endpoint can trigger a client-side redirection
+by including the `hx-location` response header.
+
+See the working example at {% aTargetBlank
+"https://github.com/mvolkmann/htmx-examples/tree/main/redirection",
+"redirection" %}.
+
+The following endpoint receives a number in the `value` body property.
+It doubles the value and returns it.
+But if the result is more than 10, it includes the `hx-location` header
+set to `/page2` which causes the browser to redirect to that page.
+
+```js
+app.post('/process', ({body, set}) => {
+  const {value} = body;
+  const doubled = value * 2;
+  if (doubled > 10) set.headers['hx-location'] = '/page2';
+  return doubled;
+});
+```
+
 ## HTTP Request Headers
 
 Htmx automatically adds following request headers
