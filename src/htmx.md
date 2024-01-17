@@ -1540,30 +1540,9 @@ See the working example at {% aTargetBlank
 "https://github.com/mvolkmann/htmx-examples/tree/main/token-header",
 "token-header" %}.
 
-### Client-side Redirection
-
-An endpoint can trigger a client-side redirection
-by including the `hx-location` response header.
-
-See the working example at {% aTargetBlank
-"https://github.com/mvolkmann/htmx-examples/tree/main/redirection",
-"redirection" %}.
-
-The following endpoint receives a number in the `value` body property.
-It doubles the value and returns it.
-But if the result is more than 10, it includes the `hx-location` header
-set to `/page2` which causes the browser to redirect to that page.
-
-```js
-app.post('/process', ({body, set}) => {
-  const {value} = body;
-  const doubled = value * 2;
-  if (doubled > 10) set.headers['hx-location'] = '/page2';
-  return doubled;
-});
-```
-
 ## HTTP Request Headers
+
+HTTP header names are case-insensitive.
 
 Htmx automatically adds following request headers
 to all HTTP requests it sends if they are applicable.
@@ -1596,6 +1575,40 @@ you need to add `Vary: HX-Request`.
 That causes the cache to be keyed based on a composite of
 the response URL and the `hx-request` request header —
 rather than being based just on the response URL."
+
+## HTTP Response Headers
+
+HTTP header names are case-insensitive.
+
+An endpoint can cause a client-side redirection
+by including the `hx-location` response header.
+
+See the working example at {% aTargetBlank
+"https://github.com/mvolkmann/htmx-examples/tree/main/redirection",
+"redirection" %}.
+
+The following endpoint receives a number in the `value` body property.
+It doubles the value and returns it.
+But if the result is more than 10, it includes the `hx-location` header
+set to `/page2` which causes the browser to redirect to that page.
+
+```js
+app.post('/process', ({body, set}) => {
+  const {value} = body;
+  const doubled = value * 2;
+  if (doubled > 10) set.headers['hx-location'] = '/page2';
+  return doubled;
+});
+```
+
+An endpoint can cause the URL in the browser location bar to change
+by including the HTTP response header `hx-push-url`.
+
+An endpoint can cause the browser to refresh the current page
+by including the HTTP response header `hx-refresh`.
+
+An endpoint can change the target element of its response
+by including the HTTP response header `hx-retarget`.
 
 ## Custom Events
 
