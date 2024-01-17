@@ -744,7 +744,7 @@ in each HTML page. For example:
 ```html
 <meta
   http-equiv="Content-Security-Policy"
-  content="default-src 'self'; img-src https://*; child-src 'none';"
+  content="default-src 'self'; img-src https://*"
 />
 ```
 
@@ -752,9 +752,10 @@ This CSP says:
 
 - By default all content must come from the domain of this web app.
 - An exception is made for images which can come from any `https` URL.
-- The `child-src` directive defines the valid sources for web workers and
-  nested browsing contexts loaded using elements such as `frame` and `iframe`.
-  No sources are valid for these.
+
+For more detail on what can be specified in a CSP, see the MDN {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy",
+"Content-Security-Policy" %} page.
 
 ## Targets
 
