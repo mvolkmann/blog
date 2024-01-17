@@ -1464,9 +1464,11 @@ app.get('/', () => {
 });
 ```
 
+The value of the `hx-trigger` HTTP request header is the value of
+the `id` attribute of the element that triggered the request.
 The following endpoint updates the progress bar.
-It checks the value of the `hx-trigger` request header
-to determine if the endpoint was triggered by the Reset button.
+It checks the `hx-trigger` request header to
+determine if the endpoint was triggered by the Reset button.
 
 ```js
 app.get('/progress', ({headers}) => {
@@ -1527,6 +1529,12 @@ document.body.addEventListener('htmx:configRequest', event => {
   event.detail.headers['x-token'] = 'some-token';
 });
 ```
+
+In addition, request parameters can be added
+by adding properties to the `event.detail.parameters` object.
+Parameters can also be removed or modified, but that seems less useful.
+The values of `event.detail.target` and `event.detail.verb`
+can also be modified, but both seem like odd things to do.
 
 See the working example at {% aTargetBlank
 "https://github.com/mvolkmann/htmx-examples/tree/main/token-header",
