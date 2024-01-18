@@ -50,6 +50,48 @@ Run the project by entering `npm run dev` or `bun run dev`.
 
 By default, the server listens on port 3000 and provide hot reloading.
 
+## Routes
+
+To define routes, create a `Hono` object and call the methods
+`get`, `post`, `put`, `patch`, `delete`, and `all` on it.
+TODO: Is `patch` really supported?
+Each of these methods take a URL path and
+a function that is passed a `Context` object.
+
+For example:
+
+```js
+const app = new Hono();
+
+app.get('/some/path', (c: Context) => {
+  ...
+});
+```
+
+Path parameters are described in URL path strings as a name preceded by a colon.
+Optional parameters are followed by `?`.
+For example: `'/population/:state/:year?'`.
+
+Path parameter names can also include a regular expression.
+For example: `'/population/:state{[0-9]*}'`
+TODO: When is this useful?
+
+To get the value of a path parameter, use `c.req.param('some-name')`.
+
+To get the value of a query parameter, use `c.req.query('some-name')`.
+
+To get the value of a text body, use ``.
+
+To get the value of a form body, use ``.
+
+To get the value of a JSON body, use ``.
+
+To return a text response, use ``.
+
+To return a JSON response, use ``.
+
+To return an HTML response, use ``.
+
 ## JSX
 
 Hono supports using JSX to generate HTML responses.
