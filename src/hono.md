@@ -76,21 +76,35 @@ Path parameter names can also include a regular expression.
 For example: `'/population/:state{[0-9]*}'`
 TODO: When is this useful?
 
+To get the value of a request header, use `c.req.header('Some-Name')`.
+
 To get the value of a path parameter, use `c.req.param('some-name')`.
 
 To get the value of a query parameter, use `c.req.query('some-name')`.
 
-To get the value of a text body, use ``.
+To get the value of a text body, use `const text = await c.req.text();`.
 
 To get the value of a form body, use ``.
 
-To get the value of a JSON body, use ``.
+To get the value of a JSON body, use `const object = await c.req.json();`.
 
-To return a text response, use ``.
+To set the value of a response header,
+use `c.res.headers.append('Some-Name', 'some value');`.
 
-To return a JSON response, use ``.
+To return a text response, use `return c.text('some text');`.
 
-To return an HTML response, use ``.
+To return a JSON response, use `return c.json(someObject);`.
+
+To return an HTML response, use `return c.html(someHTML);`
+where `someHTML` is a string of HTML or JSX.
+
+To return a "Not Found" error, use `return c.notFound();`.
+
+To redirect to another URL, use `return c.redirect('someURL');`.
+
+To share values between routes,
+set them in one route with `c.set('someName', 'some value');`
+and get them other routes with `c.get('someName')`.
 
 ## JSX
 
