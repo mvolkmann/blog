@@ -732,7 +732,7 @@ browser-supplied prompt dialog (using the `Window` method `prompt`)
 before an HTTP request is sent.
 The dialog contain a text input and "OK" and "Cancel" buttons.
 The request will only be sent if the user clicks the "OK" button.
-The request header `hx-prompt` will hold
+The request header `HX-Prompt` will hold
 the value the user entered in the text input.
 
 The confirmation dialog is very plain and cannot be styled.
@@ -987,7 +987,7 @@ but those specify a subset the elements to be included at the target location.
 ### Custom Events
 
 Any endpoint can trigger a custom event
-by setting the HTTP response header `hx-trigger` to the event name.
+by setting the HTTP response header `HX-Trigger` to the event name.
 When an HTML element receives the event,
 it can trigger another HTTP request to swap in new content.
 
@@ -1657,14 +1657,15 @@ app.get('/', () => {
 });
 ```
 
-The value of the `hx-trigger` HTTP request header is the value of
+The value of the `HX-Trigger` HTTP request header is the value of
 the `id` attribute of the element that triggered the request.
 The following endpoint updates the progress bar.
-It checks the `hx-trigger` request header to
+It checks the `HX-Trigger` request header to
 determine if the endpoint was triggered by the Reset button.
 
 ```js
 app.get('/progress', ({headers}) => {
+  // Header names are converted to lowercase.
   if (headers['hx-trigger'] === 'reset-btn') {
     percentComplete = 0;
   } else {
@@ -1713,13 +1714,13 @@ defines a `linear` `transition` for the
 
 In some cases it is desirable to add a specific HTTP header
 to all requests send by htmx.
-For example, an authentication token can be passed in a header named "x-token".
+For example, an authentication token can be passed in a header named "X-Token".
 This can be done by adding an event listener
 for the `htmx:configRequest` event as follows.
 
 ```js
 document.body.addEventListener('htmx:configRequest', event => {
-  event.detail.headers['x-token'] = 'some-token';
+  event.detail.headers['X-Token'] = 'some-token';
 });
 ```
 
@@ -1744,16 +1745,16 @@ to determine the appropriate response.
 
 | Header                       | Description                                                                     |
 | ---------------------------- | ------------------------------------------------------------------------------- |
-| `hx-boosted`                 | "true" if the element making request has `hx-boost` (see [Boosting](#boosting)) |
-| `hx-current-url`             | current URL in the browser location bar                                         |
-| `hx-history-restore-request` | "true" if the request is for history restoration after a cache miss             |
-| `hx-prompt`                  | value user entered in prompt dialog rendered by the `hx-prompt` attribute       |
-| `hx-request`                 | always "true"; identifies requests that come from htmx                          |
-| `hx-target`                  | value of the "id" attribute of the target element, if an id selector was used   |
-| `hx-trigger`                 | value of the "id" attribute of the triggered element, if specified              |
-| `hx-trigger-name`            | value of the "name" attribute of the triggered event, if specified              |
+| `HX-Boosted`                 | "true" if the element making request has `hx-boost` (see [Boosting](#boosting)) |
+| `HX-Current-Url`             | current URL in the browser location bar                                         |
+| `HX-History-Restore-Request` | "true" if the request is for history restoration after a cache miss             |
+| `HX-Prompt`                  | value user entered in prompt dialog rendered by the `hx-prompt` attribute       |
+| `HX-Request`                 | always "true"; identifies requests that come from htmx                          |
+| `HX-Target`                  | value of the "id" attribute of the target element, if an id selector was used   |
+| `HX-Trigger`                 | value of the "id" attribute of the triggered element, if specified              |
+| `HX-Trigger-Name`            | value of the "name" attribute of the triggered event, if specified              |
 
-The `hx-current-url`, `hx-target`, `hx-trigger`, and `hx-trigger-name` headers
+The `HX-Current-Url`, `HX-Target`, `HX-Trigger`, and `HX-Trigger-Name` headers
 can all be used in an endpoint to determine
 the appropriate HTML to send in the response.
 
@@ -1762,11 +1763,11 @@ From the htmx documentation on
 "If your server can render different content for the same URL depending on
 some other headers, you need to use the `Vary` response HTTP header.
 For example, if your server renders the full HTML
-when the `hx-request` header is missing or `false`,
-and it renders a fragment of that HTML when `hx-request: true`,
+when the `HX-Request` header is missing or `false`,
+and it renders a fragment of that HTML when `HX-Request: true`,
 you need to add `Vary: HX-Request`.
 That causes the cache to be keyed based on a composite of
-the response URL and the `hx-request` request header —
+the response URL and the `HX-Request` request header —
 rather than being based just on the response URL."
 
 ## HTTP Response Headers
@@ -1774,7 +1775,7 @@ rather than being based just on the response URL."
 HTTP header names are case-insensitive.
 
 An endpoint can cause a client-side redirection
-by including the `hx-location` response header.
+by including the `HX-Location` response header.
 
 See the working example at {% aTargetBlank
 "https://github.com/mvolkmann/htmx-examples/tree/main/redirection",
@@ -1782,26 +1783,26 @@ See the working example at {% aTargetBlank
 
 The following endpoint receives a number in the `value` body property.
 It doubles the value and returns it.
-But if the result is more than 10, it includes the `hx-location` header
+But if the result is more than 10, it includes the `HX-Location` header
 set to `/page2` which causes the browser to redirect to that page.
 
 ```js
 app.post('/process', ({body, set}) => {
   const {value} = body;
   const doubled = value * 2;
-  if (doubled > 10) set.headers['hx-location'] = '/page2';
+  if (doubled > 10) set.headers['HX-Location'] = '/page2';
   return doubled;
 });
 ```
 
 An endpoint can cause the URL in the browser location bar to change
-by including the HTTP response header `hx-push-url`.
+by including the HTTP response header `HX-Push-Url`.
 
 An endpoint can cause the browser to refresh the current page
-by including the HTTP response header `hx-refresh`.
+by including the HTTP response header `HX-Refresh`.
 
 An endpoint can change the target element of its response
-by including the HTTP response header `hx-retarget`.
+by including the HTTP response header `HX-Retarget`.
 
 ## Components
 
@@ -2072,7 +2073,7 @@ TODO: Read "The Valley of CODE" page above!
   "https://developer.mozilla.org/en-US/docs/Web/API/History_API", "History API" %}.
   Writing to `localstorage` can be disabled if desired.
 
-- The `hx-request` HTTP header can be used to determine
+- The `HX-Request` HTTP header can be used to determine
   how to render a page when the browser is refreshed.
   This enables support for deep links.
   This is useful when htmx has replaced portions of a page.
