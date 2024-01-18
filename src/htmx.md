@@ -584,19 +584,33 @@ The following example configures the timeout for
 HTTP requests triggered by a `form` to two seconds.
 
 ```html
-<form hx-post="/render" hx-target="#result" hx-request='"timeout":2000'></form>
+<form
+  hx-post="/render"
+  hx-target="#result"
+  hx-request='"timeout":2000'
+  id="my-form"
+>
+  <textarea name="markup" rows="{3}" cols="{40}" />
+  <br />
+  <button>Submit</button>
+</form>
+<div id="result" />
 ```
 
 When a request timeout occurs, htmx dispatches a `htmx:timeout` event.
-The following code demonstrates listening for this event on a given element
-and triggering a request to get text to render.
+This event will bubble up all the way to the `body` element.
+The following code listens for this event and
+displays a message informing the user that a request timeout occurred.
 
 ```js
-<div id="result" hx-get="/timeout" hx-trigger="htmx:timeout from:form" />
+const form = document.getElementById('my-form');
+const result = document.getElementById('result');
+if (form && result) {
+  form.addEventListener('htmx:timeout', () => {
+    result.textContent = 'The request timed out.';
+  });
+}
 ```
-
-The `/timeout` endpoint could return text such as "The request timed out."
-which is then rendered in the `div` above.
 
 ## Using TypeScript
 
