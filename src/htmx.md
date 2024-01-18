@@ -1638,6 +1638,101 @@ function TableRow(page: number, pokemon: Pokemon, isLast: boolean) {
 <img alt="htmx Infinite Scroll" style="width: 30%"
   src="/blog/assets/htmx-infinite-scroll.png?v={{pkg.version}}">
 
+### Toggling Selection
+
+When there is a collection of items where only one can be selected at a time,
+the pattern below can be used. See the comments in the code.
+
+This code uses TypeScript and the Hono library,
+but the same pattern can be applied with other languages and libraries.
+
+<img alt="htmx Toggling Selection" style="width: 60%"
+  src="/blog/assets/htmx-toggling-selection.png?v={{pkg.version}}">
+
+```js
+import {Hono} from 'hono';
+import type {Context} from 'hono';
+import {serveStatic} from 'hono/bun';
+import type {FC} from 'hono/jsx';
+
+const app = new Hono();
+
+// This serves static files from the public directory.
+app.use('/*', serveStatic({root: './public'}));
+
+const dogs = ['Comet', 'Maisey', 'Oscar', 'Ramsay'];
+
+const Layout: FC = ({children}) => (
+  <html lang="en">
+    <head>
+      <title>Toggle Selection</title>
+      <link rel="stylesheet" href="/styles.css" />
+      <script
+        src="https://unpkg.com/htmx.org@1.9.10"
+        integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
+        crossorigin="anonymous"
+      ></script>
+    </head>
+    <body>{children}</body>
+  </html>
+);
+
+app.get('/', (c: Context) =>
+  c.html(
+    <Layout>
+      {dogs.map(dog => (
+        // The Dog component is defined below.
+        <Dog name={dog} />
+      ))}
+    </Layout>
+  )
+);
+
+// This holds the name of the one selected dog.
+let selectedName = '';
+
+type DogProps = {name: string};
+function Dog({name}: DogProps) {
+  // The CSS class "selected" is only added for the selected dog.
+  // It changes the background color to cornflowerblue.
+  const classes = 'dog' + (name === selectedName ? ' selected' : '');
+
+  // All swaps for these divs are performed out-of-band.
+  // This is why hx-swap is set to none.
+  return (
+    <div
+      class={classes}
+      hx-get={`/toggle/${name}`}
+      hx-swap="none"
+      hx-swap-oob="true"
+      hx-trigger="click"
+      id={name}
+    >
+      {name}
+    </div>
+  );
+}
+
+app.get('/toggle/:name', (c: Context) => {
+  const name = c.req.param('name');
+  const previousDog = selectedName ? <Dog name={selectedName} /> : null;
+  const thisDog = <Dog name={name} />;
+  selectedName = name === selectedName ? '' : name;
+
+  // If a dog was previously selected, two Dog components are returned.
+  // Otherwise only one is returned.
+  // Both will have hx-swap-oob set to true.
+  return c.html(
+    <>
+      {previousDog}
+      {thisDog}
+    </>
+  );
+});
+
+export default app;
+```
+
 ### Polling
 
 Polling is a way to repeatedly update the UI using server data.
