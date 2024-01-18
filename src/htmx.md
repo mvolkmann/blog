@@ -1116,10 +1116,10 @@ See the working example project at {% aTargetBlank
 
 ### Lazy Loading
 
-When displaying data that is expensive to acquire,
-it is useful to only request it when the part of the page
-that will display it scrolls into view.
-That can be doe using `hx-trigger="revealed"`.
+When displaying content that is expensive to acquire, it is useful to
+wait to request it until the rest of the page has loaded
+or until the part of the page that will display it scrolls into view.
+That can be done using `hx-trigger="load"` or `hx-trigger="revealed"`.
 
 For example:
 
