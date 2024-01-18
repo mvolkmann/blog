@@ -405,8 +405,9 @@ Good choices make it easy to do the following:
   It's best when an endpoint can be described in a single source file,
   rather than requiring editing multiple files.
 
-- Specify type checking or request data including values of
-  request headers, path parameters, query parameters,
+- Specify validation and type checking of request data
+  and receive helpful error messages.
+  Request data includes request headers, path parameters, query parameters,
   and request bodies that can contain text, form data, JSON.
 
 - Get request data in the form of request headers, path parameters,
