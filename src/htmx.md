@@ -388,13 +388,6 @@ The server side of htmx web apps can be implemented
 with any programming language and HTTP server library.
 Of course some options are better than others.
 
-Good choices have tooling that supports the following:
-
-- Fast, automatic server restarts after source code changes.
-- Syntax highlighting in code editors.
-- Good HTML templating support such as JSX,
-  rather than relying on string concatenation.
-
 Good choices make it easy to do the following:
 
 - Create new endpoints for any HTTP verb.
@@ -419,7 +412,25 @@ Good choices make it easy to do the following:
 - Send HTTP responses that can include headers
   and bodies that contain text or HTML.
 
-One tech stack that meets all these criteria is Typescript with Bun and Hono.
+Good choices have tooling that supports the following:
+
+- Fast server startup with no complex build process
+  to support iterative development.
+- Automatic server restarts after source code changes are detected.
+- Good HTML templating support such as JSX,
+  rather than relying on string concatenation.
+- Syntax highlighting of HTML in code editors.
+
+One tech stack that meets all these criteria is
+<a href="/blog/topics/#/blog/typescript/" target="_blank">TypeScript</a> with
+<a href="/blog/topics/#/blog/bun/" target="_blank">Bun</a> and
+<a href="/blog/topics/#/blog/hono/" target="_blank">Hono</a>.
+
+Other popular tech stacks for htmx include:
+
+- Go with {% aTargetBlank "https://templ.guide", "templ" %}
+- Python with Flask (see the `render_template` function) or
+  Django (see the `loader.get_template` and `template.render` methods)
 
 ## Browser Reload in Development
 
