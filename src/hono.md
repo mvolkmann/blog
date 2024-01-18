@@ -84,7 +84,7 @@ To get the value of a query parameter, use `c.req.query('some-name')`.
 
 To get the value of a text body, use `const text = await c.req.text();`.
 
-To get the value of a form body, use ``.
+To get the value of a form body, use `const object = await c.req.formData();`.
 
 To get the value of a JSON body, use `const object = await c.req.json();`.
 
