@@ -382,6 +382,73 @@ Htmx can be used in conjunction with other approaches.
 Consider using it for all the parts of apps
 that do not require high frequency updates.
 
+## Choosing a Stack
+
+The server side of htmx web apps can be implemented
+with any programming language and HTTP server library.
+Of course some options are better than others.
+
+Good choices have tooling that supports the following:
+
+- Fast, automatic hot reloading after source code changes.
+- Syntax highlighting in code editors.
+- Good HTML templating support such as JSX,
+  not relying on string concatenation.
+- Knowledge of HTML rules in code editors
+  so errors are flagged while writing code.
+
+Good choices make it easy to do the following:
+
+- Create new endpoints for any HTTP verb.
+
+  One of the primary activities when using htmx is defining endpoints.
+  It's best when an endpoint can be described in a single source file,
+  rather than requiring editing multiple files.
+
+- Specify type checking or request data including values of
+  request headers, path parameters, query parameters,
+  and request bodies that can contain text, form data, JSON.
+
+- Get request data in the form of request headers, path parameters,
+  query parameters, and request bodies that can contain text, form data, JSON.
+
+- Send responses in the form of response headers and
+  response bodies that can contain text and HTML.
+
+## Browser Reload in Development
+
+Many tech stacks support automatically restarting servers
+when code changes are saved, but they often do not
+reload browser windows that render the HTML that they serve.
+The following steps add this behavior.
+
+- Add the following in the main JavaScript file that implements the server:
+
+  ```js
+  // Browser code will connect to this so it
+  // can detect when the server is restarted.
+  // On restart, the browser will reload the page.
+  new WebSocket.Server({port: 3001}); // choose any unused port
+  ```
+
+- Create the file `public/setup.js` containing the following:
+
+  ```js
+  const ws = new WebSocket('ws://localhost:3001'); // match port above
+  ws.addEventListener('close', event => {
+    // This assumes the server will restart and create a new WebSocket server.
+    setTimeout(() => {
+      window.location.reload();
+    }, 500); // gives the server time to restart
+  });
+  ```
+
+- Add the following to the `head` tag of each page:
+
+  ```html
+  <script defer src="setup.js"></script>
+  ```
+
 ## Client-side Processing
 
 Htmx applications to not require sending an HTTP request for every user interaction.
