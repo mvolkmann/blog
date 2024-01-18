@@ -76,6 +76,15 @@ Path parameter names can also include a regular expression.
 For example: `'/population/:state{[0-9]*}'`
 TODO: When is this useful?
 
+## Context
+
+The `Context` object that is passed to routes has many properties and methods.
+The most useful properties are `req` (a `HonoRequest` object)
+and `res` (a `Response` object defined by the Fetch API).
+
+The most useful methods on the `c.req` object
+are described in the following table.
+
 | Action                       | Code                                     |
 | ---------------------------- | ---------------------------------------- |
 | get value of request header  | `c.req.header('Some-Name')`              |
@@ -84,13 +93,19 @@ TODO: When is this useful?
 | get value of text body       | `const text = await c.req.text();`       |
 | get value of form body       | `const object = await c.req.formData();` |
 | get value of JSON body       | `const object = await c.req.json();`     |
-| set value of response header | `c.header('Some-Name', 'some value');`   |
-| set status code              | `c.status(someCode);`                    |
-| return text response         | `return c.text('some text');`            |
-| return JSON response         | `return c.json(someObject);`             |
-| return HTML response         | `return c.html(someHTML);`               |
-| return "Not Found" error     | `return c.notFound();`                   |
-| redirect to another URL      | `return c.redirect('someURL');`          |
+
+The most useful methods on the `Context` object
+are described in the following table.
+
+| Action                       | Code                                   |
+| ---------------------------- | -------------------------------------- |
+| set value of response header | `c.header('Some-Name', 'some value');` |
+| set status code              | `c.status(someCode);`                  |
+| return text response         | `return c.text('some text');`          |
+| return JSON response         | `return c.json(someObject);`           |
+| return HTML response         | `return c.html(someHTML);`             |
+| return "Not Found" error     | `return c.notFound();`                 |
+| redirect to another URL      | `return c.redirect('someURL');`        |
 
 In the `c.html` method, `someHTML` is a string of HTML or JSX.
 
