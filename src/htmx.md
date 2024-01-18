@@ -390,12 +390,10 @@ Of course some options are better than others.
 
 Good choices have tooling that supports the following:
 
-- Fast, automatic hot reloading after source code changes.
+- Fast, automatic server restarts after source code changes.
 - Syntax highlighting in code editors.
 - Good HTML templating support such as JSX,
-  not relying on string concatenation.
-- Knowledge of HTML rules in code editors
-  so errors are flagged while writing code.
+  rather than relying on string concatenation.
 
 Good choices make it easy to do the following:
 
@@ -404,17 +402,24 @@ Good choices make it easy to do the following:
   One of the primary activities when using htmx is defining endpoints.
   It's best when an endpoint can be described in a single source file,
   rather than requiring editing multiple files.
+  It's also convenient when multiple, related endpoints
+  can be defined in the same source file.
 
 - Specify validation and type checking of request data
-  and receive helpful error messages.
+  and receive helpful error messages in responses.
+
   Request data includes request headers, path parameters, query parameters,
   and request bodies that can contain text, form data, JSON.
+  An example is the TypeScript library
+  {% aTargetBlank "https://zod.dev", "Zod" %}.
 
 - Get request data in the form of request headers, path parameters,
   query parameters, and request bodies that can contain text, form data, JSON.
 
-- Send responses in the form of response headers and
-  response bodies that can contain text and HTML.
+- Send HTTP responses that can include headers
+  and bodies that contain text or HTML.
+
+One tech stack that meets all these criteria is Typescript with Bun and Hono.
 
 ## Browser Reload in Development
 
