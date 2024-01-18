@@ -76,31 +76,23 @@ Path parameter names can also include a regular expression.
 For example: `'/population/:state{[0-9]*}'`
 TODO: When is this useful?
 
-To get the value of a request header, use `c.req.header('Some-Name')`.
+| Action                       | Code                                     |
+| ---------------------------- | ---------------------------------------- |
+| get value of request header  | `c.req.header('Some-Name')`              |
+| get value of path parameter  | `c.req.param('some-name')`               |
+| get value of query parameter | `c.req.query('some-name')`               |
+| get value of text body       | `const text = await c.req.text();`       |
+| get value of form body       | `const object = await c.req.formData();` |
+| get value of JSON body       | `const object = await c.req.json();`     |
+| set value of response header | `c.header('Some-Name', 'some value');`   |
+| set status code              | `c.status(someCode);`                    |
+| return text response         | `return c.text('some text');`            |
+| return JSON response         | `return c.json(someObject);`             |
+| return HTML response         | `return c.html(someHTML);`               |
+| return "Not Found" error     | `return c.notFound();`                   |
+| redirect to another URL      | `return c.redirect('someURL');`          |
 
-To get the value of a path parameter, use `c.req.param('some-name')`.
-
-To get the value of a query parameter, use `c.req.query('some-name')`.
-
-To get the value of a text body, use `const text = await c.req.text();`.
-
-To get the value of a form body, use `const object = await c.req.formData();`.
-
-To get the value of a JSON body, use `const object = await c.req.json();`.
-
-To set the value of a response header,
-use `c.res.headers.append('Some-Name', 'some value');`.
-
-To return a text response, use `return c.text('some text');`.
-
-To return a JSON response, use `return c.json(someObject);`.
-
-To return an HTML response, use `return c.html(someHTML);`
-where `someHTML` is a string of HTML or JSX.
-
-To return a "Not Found" error, use `return c.notFound();`.
-
-To redirect to another URL, use `return c.redirect('someURL');`.
+In the `c.html` method, `someHTML` is a string of HTML or JSX.
 
 To share values between routes,
 set them in one route with `c.set('someName', 'some value');`
