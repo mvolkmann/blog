@@ -419,8 +419,20 @@ There are three ways to use htmx.
 1. Used htmx from a CDN by including the following `script` tag:
 
    ```html
-   <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+   <script
+     src="https://unpkg.com/htmx.org@1.9.10"
+     integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
+     crossorigin="anonymous"
+   ></script>
    ```
+
+   The `integrity` and `crossorigin` attributes can be omitted,
+   but including them allows the browser to
+   verify that the script has not been manipulated.
+
+   The `crossorigin` attribute enables CORS checking.
+   It is required if the `integrity` attribute is present.
+   When the value is "anonymous", no credentials are sent.
 
 1. Install htmx using a package manager like npm or bun.
 
