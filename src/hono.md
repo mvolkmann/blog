@@ -54,7 +54,6 @@ By default, the server listens on port 3000 and provide hot reloading.
 
 To define routes, create a `Hono` object and call the methods
 `get`, `post`, `put`, `patch`, `delete`, and `all` on it.
-TODO: Is `patch` really supported?
 Each of these methods take a URL path and
 a function that is passed a `Context` object.
 
@@ -129,6 +128,8 @@ They are by default in new Hono projects.
 "jsx": "react-jsx",
 "jsxImportSource": "hono/jsx"
 ```
+
+Remove the `jsxFragmentFactory` property if it is present.
 
 ## Routers
 
