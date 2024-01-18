@@ -449,6 +449,16 @@ The following steps add this behavior.
   <script defer src="setup.js"></script>
   ```
 
+When using Bun, this approach assumes that the server
+was started with a script like the following:
+
+```json
+"dev": "bun run --watch src/index.tsx",
+```
+
+Note that this uses `--watch`.
+The WebSocket server will not be restarted if `--hot` is used.
+
 ## Client-side Processing
 
 Htmx applications to not require sending an HTTP request for every user interaction.
