@@ -1946,29 +1946,42 @@ See the working example at {% aTargetBlank
 
 ## Click to Edit
 
-In an app like a Todo List, it may be desirable to allow users to
-edit text associated with each item, such as a todo description,
-by clicking the text.
-This can replace the static text with an HTML `input` element.
-When the user presses the enter key or moves focus out of the `input`,
-the change can be sent to an endpoint.
+In apps that display a list of items (such as Todo List),
+it may be desirable to allow users to
+initiate editing text associated with one of the items
+(such as a todo description) by clicking the text.
+The following are the processing steps to be supported.
+
+- Replace the static text with an HTML `input` element.
+- Allow the user to modify the text.
+- When the enter key is pressed or focus is moved out of the `input`,
+  send the change to an endpoint that saves the change.
+- The endpoint returns updated HTML for the item that contains the new text.
+- Replace the previous item HTML with the new item HTML.
+- Return to displaying the text for the item instead of the an `input` element.
 
 While this pattern can be implementing using only htmx, it is better
 to add some client-side interactivity using a library like AlpineJS.
 
-In the the Todo List scenario, the UI for each todo item can be comprised of
-a checkbox, the text description, an text input for modifying the description,
-and a button for deleting the todo item.
-At any point in time we only want to render the text description
-or the text input of each todo item.
-We want to keep track of the currently selected todo item
-and only render one text input at a time.
+Typically it is desirable for only one item to be edited at a time.
+If text of a different item is clicked,
+the `input` for the previously selected item
+should revert to displaying the text.
+This can be implemented by keeping track of the id of the item currently
+being edited in client-side state using the Alpine `x-data` directive.
 
-TODO: Add more detail.
+In the the Todo List scenario, the UI for each todo item can be comprised of
+a checkbox, the text description, an text `input` for modifying the description,
+and a button for deleting the todo item.
+While both a text description AND a text `input` are present in the DOM,
+at any point in time we only want to render one of them.
+The other will have the CSS property `display: none` applied to it.
 
 See the working example at {% aTargetBlank
 "https://github.com/mvolkmann/htmx-examples/tree/main/todo-hono",
 "todo-hono" %}.
+Look for references to `editingId` which is a great example
+of state that only belongs in the client.
 
 ## HTTP Request Headers
 
