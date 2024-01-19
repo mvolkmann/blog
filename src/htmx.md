@@ -798,6 +798,24 @@ The square brackets can also contain
 a call to a JavaScript function that returns a Boolean value
 where triggering doesn't occur if the function returns `false`.
 
+Typically the `hx-trigger` attribute is applied to elements that
+also specify an HTTP request to be sent using an attribute like `hx-get`.
+But `hx-trigger` can also be applied to
+elements that do not trigger an HTTP request.
+These are referred to as "naked triggers".
+
+For example, the following button dispatches a ":triggered" event
+when it is clicked. It uses the `hx-on` attribute to listen for that event
+and execute JavaScript code, in this case to display an alert.
+
+```js
+const attrs = {'hx-on::trigger': "alert('Got click!')"};
+...
+<button hx-trigger="click consume" {...attrs}>
+  Naked Trigger
+</button>
+```
+
 ## Requests
 
 Interacting with any HTML element can trigger an HTTP request.
