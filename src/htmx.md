@@ -812,8 +812,14 @@ and execute JavaScript code, in this case to display an alert.
 const attrs = {'hx-on::trigger': "alert('Got click!')"};
 ...
 <button hx-trigger="click consume" {...attrs}>
-  Naked Trigger
+  Click Me
 </button>
+```
+
+In this case, the following is a easier way to do the same thing.
+
+```js
+<button hx-on:click="alert('Got click!')">Click Me</button>
 ```
 
 ## Requests
@@ -1119,17 +1125,19 @@ but those specify a subset the elements to be included at the target location.
 
 ### Custom Events
 
-Any endpoint can trigger a custom event
-by setting the HTTP response header `HX-Trigger` to the event name.
-When an HTML element receives the event,
-it can trigger another HTTP request to swap in new content.
+Any endpoint can trigger a custom event by setting
+the HTTP response header `HX-Trigger` to an event name.
+The event will be dispatched in the browser with no associated data.
+Any HTML element can listen for the event.
+One option is for the event handling to trigger another HTTP request
+whose response is used to swap in new content.
 
 For example, a todo app can display
 the number of uncompleted todos and the total number of todos.
 Adding a new todo, deleting a todo, and toggling the completed state of a todo
 all change what is displayed.
 One way to accomplish this is for all those endpoints
-to trigger the same custom event.
+to trigger the same custom event (ex. "status-change").
 
 HTML elements that trigger sending HTTP requests to those endpoints
 will receive the event.
@@ -1148,8 +1156,8 @@ because `load` is also one of the triggers.
 ```
 
 See the working example project at {% aTargetBlank
-"https://github.com/mvolkmann/htmx-examples/tree/main/todo-list",
-"todo-list" %}.
+"https://github.com/mvolkmann/htmx-examples/tree/main/todo-hono",
+"todo-hono" %}.
 
 ## Common Patterns
 
@@ -1276,14 +1284,14 @@ and returns nothing, effectively deleting that `div`.
   <input
     type="checkbox"
     checked={isCompleted}
-    hx-patch={`/todos/${id}/toggle`}
-    hx-target="closest div"
+    hx-patch={`/todos/${id}/toggle-complete`}
     hx-swap="outerHTML"
+    hx-target="closest div"
   />
   <div class={isCompleted ? 'completed' : ''}>{description}</div>
   <button
     class="plain"
-    hx-confirm="Are you sure?"
+    hx-confirm={`Really delete "${description}"?`}
     hx-delete={`/todos/${id}`}
     hx-swap="outerHTML"
     hx-target="closest div"
@@ -1294,11 +1302,11 @@ and returns nothing, effectively deleting that `div`.
 ```
 
 See the working example project at {% aTargetBlank
-"https://github.com/mvolkmann/htmx-examples/tree/main/todo-list",
-"todo-list" %}.
+"https://github.com/mvolkmann/htmx-examples/tree/main/todo-hono",
+"todo-hono" %}.
 
-<img alt="htmx Todo List" style="width: 50%"
-  src="/blog/assets/htmx-todo-list.png?v={{pkg.version}}">
+<img alt="htmx Todo App" style="width: 50%"
+  src="/blog/assets/htmx-todo-app.png?v={{pkg.version}}">
 
 ### CSS Transitions
 
