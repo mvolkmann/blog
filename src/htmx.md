@@ -428,6 +428,10 @@ One tech stack that meets all these criteria is
 
 Other popular tech stacks for htmx include:
 
+- {% aTargetBlank "https://ahastack.dev", "AHA stack" %}
+  which uses Astro, htmx, and AlpineJS
+- {% aTargetBlank "https://github.com/ethanniser/the-beth-stack",
+  "BETH stack" %} which uses Bun, Elysia, Turso, and htmx.
 - Go with {% aTargetBlank "https://templ.guide", "templ" %}
 - Python with Flask (see the `render_template` function) or
   Django (see the `loader.get_template` and `template.render` methods)
