@@ -108,6 +108,9 @@ are described in the following table.
 
 In the `c.html` method, `someHTML` is a string of HTML or JSX.
 
+See the {% aTargetBlank "https://github.com/honojs/hono/issues/2037",
+"endpoints returning raw values" %} proposal.
+
 To share values between routes,
 set them in one route with `c.set('someName', 'some value');`
 and get them other routes with `c.get('someName')`.
