@@ -89,7 +89,10 @@ Many of these are discussed in more detail in subsequent sections.
 
   With htmx browsers download considerably less JavaScript code which improves
   metrics such as "First Contentful Paint" and "Time to Interactive".
-  This results in a better user experience.
+  For users with modern computers/phones and fast internet connections,
+  the improvement may not seem significant.
+  But for users with old computers/phones and slow internet connections,
+  a much better user experience will be provided.
 
 - Favors LoB over SoC
 
