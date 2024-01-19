@@ -1941,6 +1941,32 @@ See the working example at {% aTargetBlank
 "https://github.com/mvolkmann/htmx-examples/tree/main/token-header",
 "token-header" %}.
 
+## Click to Edit
+
+In an app like a Todo List, it may be desirable to allow users to
+edit text associated with each item, such as a todo description,
+by clicking the text.
+This can replace the static text with an HTML `input` element.
+When the user presses the enter key or moves focus out of the `input`,
+the change can be sent to an endpoint.
+
+While this pattern can be implementing using only htmx, it is better
+to add some client-side interactivity using a library like AlpineJS.
+
+In the the Todo List scenario, the UI for each todo item can be comprised of
+a checkbox, the text description, an text input for modifying the description,
+and a button for deleting the todo item.
+At any point in time we only want to render the text description
+or the text input of each todo item.
+We want to keep track of the currently selected todo item
+and only render one text input at a time.
+
+TODO: Add more detail.
+
+See the working example at {% aTargetBlank
+"https://github.com/mvolkmann/htmx-examples/tree/main/todo-hono",
+"todo-hono" %}.
+
 ## HTTP Request Headers
 
 HTTP header names are case-insensitive.
