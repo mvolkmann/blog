@@ -2210,6 +2210,7 @@ For example:
 ```text
 htmx:xhr:progress ...
 htmx:beforeOnLoad ...
+htmx:beforeRequest ...
 htmx:beforeSwap ...
 htmx:afterSwap ...
 htmx:afterRequest ...
@@ -2218,14 +2219,29 @@ htmx:xhr:loadend ...
 htmx:afterSettle ...
 ```
 
+We can listen for these events and execute JavaScript code when they occur.
+
+From the `hx-on` documentation, "DOM attributes do not preserve case.
+This means an attribute like `hx-on:htmx:beforeRequest` will not work,
+because the DOM lowercases the attribute names.
+Fortunately, htmx supports both camel case event names and also
+kebab-case event names, so you can use `hx-on:htmx:before-request` instead."
+
+For example:
+
+```js
+const attrs = {
+  'hx-on:htmx:before-request': 'alert("Sending request")',
+  'hx-on:htmx:after-request': 'alert("Got response")'
+};
+...
+<div {...attrs}>...</div>
+```
+
 Another debugging approach is to use an unminified version of the htmx library
 and set breakpoints in its functions.
 
 ## Animation
-
-TODO: Try this.
-
-## Boosting
 
 TODO: Try this.
 
