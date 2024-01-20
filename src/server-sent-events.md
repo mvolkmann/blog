@@ -26,6 +26,14 @@ For a great video on SSE, see {% aTargetBlank
 "https://www.youtube.com/watch?v=4HlNv1qpZFY",
 "Server-Sent Events Crash Course" %}.
 
+## Use Cases
+
+Common uses of SSE include:
+
+- live data feeds such as weather and sports updates
+- gathering and displaying information about server-side progress
+- client-side logging of server-side activity
+
 ## Demo Client
 
 The following code is an example client HTML file that
@@ -56,6 +64,12 @@ Note the use of the class `EventSource`.
 </html>
 ```
 
+The individual messages sent from the server
+do not include HTTP headers, so they are very small.
+
+If the client does not close the connection,
+the server can be restarted and the client will continue receiving events.
+
 ## Demo Server
 
 Responses sent from an SSE endpoint must set
@@ -63,13 +77,15 @@ the "Content-Type" header to "text/event–stream" and
 the "Transfer-Encoding" header to "chunked".
 
 When using the Node.js Express library,
-the "Transfer-Encoding" response header is set to "chunked"
-automatically when the request header "Accept" is set to "text/event-stream".
+the "Transfer-Encoding" response header is set to "chunked" automatically
+when the request header "Accept" is set to "text/event-stream".
 
 The following code is an example Node.js server that uses the Express library.
 
 ```js
-const express = require('express');
+import express from 'express';
+import {v4 as uuidv4} from 'uuid';
+
 const app = express();
 app.use(express.static('public'));
 
@@ -78,8 +94,12 @@ app.get('/sse', (req, res) => {
   let count = 0;
   while (count < 10) {
     count++;
+    // Using res.write instead of res.send avoids closing the connection.
+    // The text sent must begin with "data:" and end with two newlines.
     // Any spaces after "data:" are automatically removed.
-    res.write(`data:demo${count}\n\n`);
+    res.write(`event: count\n`); // optional
+    res.write(`id: ${uuidv4()}\n`); // optional
+    res.write(`data: ${count}\n\n`);
   }
 
   // This is invoked when the client calls close on the EventSource.
@@ -100,11 +120,14 @@ The following `package.json` file can be used to start the server.
 {
   "name": "node-sse",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
-    "dev": "nodemon src/server.js"
+    "dev": "nodemon src/server.js",
+    "format": "prettier --write '**/*.{css,html,js,ts,tsx}'"
   },
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "nodemon": "^3.0.3"
@@ -112,18 +135,21 @@ The following `package.json` file can be used to start the server.
 }
 ```
 
+## Running Demo
+
 To run this demo, enter `npm run dev`, browse localhost:3000,
 open the browser DevTools, and view the Console output.
 
-The server is responsible for deciding whether to keep the connection alive.
+The following screenshot shows the request and response HTTP headers
+for the SSE connection.
 
-## Use Cases
+<img alt="SSE DevTools Network tab Headers" style="width: 100%"
+  src="/blog/assets/sse-devtools-network-headers.png?v={{pkg.version}}">
 
-Common uses of SSE include:
+The following screenshot shows the event stream for the SSE connection.
 
-- live data feeds such as weather and sports updates
-- gathering and displaying information about server-side progress
-- client-side logging of server-side activity
+<img alt="SSE DevTools Network tab EventStream" style="width: 70%"
+  src="/blog/assets/sse-devtools-network-eventstream.png?v={{pkg.version}}">
 
 ## Alternatives
 
@@ -145,10 +171,3 @@ For a great video on WebSockets, see {% aTargetBlank
 "https://www.youtube.com/watch?v=2Nt-ZrNP22A", "WebSockets Crash Course" %}.
 
 TODO: Show how to use Web sockets with HTMX.
-
-when sending data from the server, write to the stream, but do not close it until the server is finished. Sending data on that connection.
-must prefix data with “data:” and end with two newlines.
-The data will be in the data property of the MessageEvent Object that is created in Node.js.
-you can restart the server without restarting the client and the client will continue getting messages.
-look at all the properties in EventMessage objects besides the data property.
-individual messages do not include HTTP headers, so they are very small.
