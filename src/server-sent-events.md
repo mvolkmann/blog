@@ -40,7 +40,12 @@ Note the use of the class `EventSource`.
     <script>
       const eventSource = new EventSource('http://localhost:3000/sse');
       eventSource.onmessage = event => {
-        console.log(event.data);
+        const {data, origin, timestamp} = event;
+        console.log(data);
+        if (data.endsWith('5')) eventSource.close();
+      };
+      eventSource.onerror = error => {
+        console.error("error =", error);
       };
     </script>
   </head>
@@ -68,13 +73,20 @@ const express = require('express');
 const app = express();
 app.use(express.static('public'));
 
-let count = 0;
 app.get('/sse', (req, res) => {
   res.setHeader('Content-Type', 'text/event-stream');
+  let count = 0;
   while (count < 10) {
     count++;
+    // Any spaces after "data:" are automatically removed.
     res.write(`data:demo${count}\n\n`);
   }
+
+  // This is invoked when the client calls close on the EventSource.
+  res.socket.on('close', () => {
+    console.log('server.js: got close event');
+    res.end();
+  });
 });
 
 app.listen(3000, function () {
