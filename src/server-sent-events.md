@@ -171,3 +171,5 @@ For a great video on WebSockets, see {% aTargetBlank
 "https://www.youtube.com/watch?v=2Nt-ZrNP22A", "WebSockets Crash Course" %}.
 
 TODO: Show how to use Web sockets with HTMX.
+
+TODO: Implement this same demo using vanilla Bun and Bun with Hono.
