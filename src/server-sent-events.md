@@ -26,6 +26,10 @@ For a great video on SSE, see {% aTargetBlank
 "https://www.youtube.com/watch?v=4HlNv1qpZFY",
 "Server-Sent Events Crash Course" %}.
 
+All the example code below can be found in the GitHub repository
+{% aTargetBlank "https://github.com/mvolkmann/server-sent-events-examples",
+"server-sent-events-examples" %}.
+
 ## Use Cases
 
 Common uses of SSE include:
