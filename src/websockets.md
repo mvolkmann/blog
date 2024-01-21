@@ -33,7 +33,6 @@ which is useful during iterative development and debugging.
 ```json
 {
   "name": "server",
-  "version": "1.0.0",
   "description": "WebSockets demo server",
   "author": "R. Mark Volkmann",
   "license": "MIT",
@@ -271,4 +270,26 @@ const wsServer = Bun.serve({
 console.log('WebSocket server is listening on port', wsServer.port);
 
 export default app;
+```
+
+The following `package.json` file can be used to start the server.
+
+```json
+{
+  "name": "bun-websockets",
+  "type": "module",
+  "scripts": {
+    "dev": "bun run --watch src/server.ts",
+    "format": "prettier --write '**/*.{css,html,js,ts,tsx}'"
+  },
+  "dependencies": {
+    "hono": "^3.12.6"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
 ```
