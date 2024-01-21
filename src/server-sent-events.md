@@ -38,6 +38,18 @@ Common uses of SSE include:
 - gathering and displaying information about server-side progress
 - client-side logging of server-side activity
 
+## Issues
+
+From the MDN {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/API/EventSource",
+"EventSource" %} documentation,
+"When not used over HTTP/2, SSE suffers from a limitation to the
+maximum number of open connections, ...
+the limit is per browser and set to a very low number (6).
+This limit is per browser + domain ...
+When using HTTP/2, the maximum number of simultaneous HTTP streams
+is negotiated between the server and the client (defaults to 100)."
+
 ## Demo Client
 
 The following code is an example client HTML file that
@@ -51,13 +63,22 @@ Note the use of the class `EventSource`.
     <title>SSE Demo</title>
     <script>
       const eventSource = new EventSource('http://localhost:3000/sse');
+
+      // This listens for events that do not have a custom event name.
       eventSource.onmessage = event => {
         const {data, origin, timestamp} = event;
         console.log(data);
-        if (data.endsWith('5')) eventSource.close();
       };
+
+      // This listens for events with the custom name "count".
+      eventSource.addEventListener('count', event => {
+        const {data, origin, timestamp} = event;
+        console.log(data);
+        if (data.endsWith('5')) eventSource.close();
+      });
+
       eventSource.onerror = error => {
-        console.error("error =", error);
+        console.error('error =', error);
       };
     </script>
   </head>
@@ -95,14 +116,24 @@ app.use(express.static('public'));
 
 app.get('/sse', (req, res) => {
   res.setHeader('Content-Type', 'text/event-stream');
+
+  // The event name defaults to "message".
+  res.write(`data: starting\n\n`); // double newline triggers sending
+
   let count = 0;
   while (count < 10) {
     count++;
-    // Using res.write instead of res.send avoids closing the connection.
-    // The text sent must begin with "data:" and end with two newlines.
-    // Any spaces after "data:" are automatically removed.
-    res.write(`event: count\n`); // optional
-    res.write(`id: ${uuidv4()}\n`); // optional
+
+    // Use res.write instead of res.send
+    // so the connection will remain open.
+    // Specifying an event name and message id are optional.
+    // We are overriding the default event name of "message"
+    // and specifying the custom event name "count".
+    // It doesn't matter what order the following calls are made,
+    // but each must end in a newline and
+    // the last one must have an extra newline.
+    res.write('event: count\n');
+    res.write(`id: ${uuidv4()}\n`);
     res.write(`data: ${count}\n\n`);
   }
 
@@ -159,39 +190,44 @@ The following screenshot shows the event stream for the SSE connection.
 
 The server code is a bit simpler when using Bun and Hono
 instead of Node and Express.
-The client code can remain the same.
+The client code remains the same.
 
 ```ts
-import {Context, Hono} from 'hono';
+import {Hono} from 'hono';
+import type {Context} from 'hono';
 import {serveStatic} from 'hono/bun';
 import {streamSSE} from 'hono/streaming';
 
 const app = new Hono();
 app.use('/*', serveStatic({root: './public'}));
 
+app.get('/greet', (c: Context) => {
+  return c.text('Hello Bun!');
+});
+
 app.get('/sse', (c: Context) => {
   return streamSSE(c, async stream => {
+    // This should be invoked when the client calls close on the EventSource,
+    // but it is not!
+    // TODO: See https://github.com/honojs/hono/issues/1770.
+    c.req.raw.signal.addEventListener('abort', () => {
+      console.log('got abort event');
+      // TODO: How can the connection be closed?
+    });
+
+    await stream.writeSSE({data: 'starting'});
+
     let count = 0;
     while (count < 10) {
       count++;
 
       await stream.writeSSE({
-        id: String(crypto.randomUUID()), // optional
-        event: 'count', // optional
+        event: 'count',
+        id: String(crypto.randomUUID()),
         data: String(count) // TODO: Is this required to be a string?
       });
     }
   });
-
-  /*
-  // This is invoked when the client calls close on the EventSource.
-  // TODO: FIX THIS!  Do you need to capture the streamSSE return value?
-  const { res } = c;
-  res.socket.on("close", () => {
-    console.log("server.js: got close event");
-    res.end();
-  });
-  */
 });
 
 export default app;
