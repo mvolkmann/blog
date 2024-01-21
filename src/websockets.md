@@ -16,6 +16,11 @@ For one-way communication from servers to clients, consider using
 <a href="/blog/topics/#/blog/server-sent-events/"
 target="_blank">Server-Sent Events</a> (SSE).
 
+WebSockets require upgrading an existing HTTP connection.
+For details, see the MDN page {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/HTTP/Protocol_upgrade_mechanism",
+"Protocal upgrade mechanism" %}.
+
 Many WebSocket libraries for server-side
 programming languages/environments exist.
 The example below demonstrates using the highly popular Node.js library
@@ -113,7 +118,6 @@ wsServer.on('connection', ws => {
   };
 
   // Listen for messages from the client.
-  // ws.on('message', message => {
   ws.onmessage = event => {
     const message = event.data;
     // console.log('server.js onmessage: event =', event);
