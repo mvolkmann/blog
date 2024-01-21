@@ -17,7 +17,58 @@ The example below demonstrates using the highly popular Node.js library
 This of course requires installing
 {% aTargetBlank "https://nodejs.org/", "Node.js" %}.
 
-## Server
+All the example code below can be found in the GitHub repository
+{% aTargetBlank "https://github.com/mvolkmann/websocket-examples",
+"websocket-examples" %}.
+
+## Use Cases
+
+TODO: Add this section.
+
+## Issues
+
+TODO: Add this section.
+
+## Demo Client
+
+The following code is an example client HTML file
+that connects to the WebSocket server and receives messages.
+Note the use of the class `WebSocket`.
+
+```js
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WebSocket Demo</title>
+    <script>
+      const ws = new WebSocket('ws://localhost:3001');
+      ws.onopen = () => {
+        console.log('ws open');
+        ws.send('Hello from client!');
+      };
+      ws.onmessage = event => {
+        console.log(`received "${event.data}"`);
+
+        // Either the client or the server can close the connection.
+        // ws.send('stop'); // ask server to close the WebSocket
+        ws.close(); // close WebSocket from client
+      };
+      ws.onerror = error => {
+        console.log('ws error:', error);
+      };
+      ws.onclose = () => {
+        console.log('ws closed');
+      };
+    </script>
+  </head>
+  <body>
+    <h1>WebSockets Demo</h1>
+    <p>See output in DevTools Console.</p>
+  </body>
+</html>
+```
+
+## Demo Server
 
 To run the server:
 
@@ -30,40 +81,44 @@ which is useful during iterative development and debugging.
 
 ### Server package.json
 
-```json
-{
-  "name": "server",
-  "description": "WebSockets demo server",
-  "author": "R. Mark Volkmann",
-  "license": "MIT",
-  "type": "module",
-  "scripts": {
-    "start": "nodemon server.js"
-  },
-  "dependencies": {
-    "ws": "^7.4.5"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.7"
-  }
-}
-```
-
-### server.js
+The following code is an example Node.js server that uses the Express library.
 
 ```js
+import express from 'express';
 import WebSocket from 'ws';
 
+const app = express();
+app.use(express.static('public'));
+
+app.get('/greet', (req, res) => {
+  res.send('Hello World!');
+});
+
 // Create a WebSocket server.
-const wss = new WebSocket.Server({port: 1919});
+const wsServer = new WebSocket.Server({port: 3001});
 
 // When a client connects ...
-wss.on('connection', ws => {
+wsServer.on('connection', ws => {
+  ws.onopen = () => {
+    console.log('WebSocket is open.');
+  };
+
   // Listen for messages from the client.
-  ws.on('message', message => {
+  // ws.on('message', message => {
+  ws.onmessage = event => {
+    const message = event.data;
+    // console.log('server.js onmessage: event =', event);
+    console.log(`received "${message}"`);
+    if (message === 'stop') {
+      ws.close();
+    } else {
+      ws.send('Hello from server!');
+    }
+
+    /*
     // Broadcast the message to all the clients.
-    // wss.clients is not an Array, so you cannot use a for-of loop.
-    wss.clients.forEach(client => {
+    // wsServer.clients is not an Array, so you cannot use a for-of loop.
+    wsServer.clients.forEach(client => {
       const isOpen = client.readyState === WebSocket.OPEN;
 
       // To send to all open clients,
@@ -75,143 +130,58 @@ wss.on('connection', ws => {
       //const isSelf = client === ws;
       //if (isOpen && !isSelf) client.send(message);
     });
-  });
+    */
+  };
 
-  // Send an initial message to the newly connected client.
-  ws.send('connected to WebSocket server');
+  ws.onerror = error => {
+    console.error('WebSocket error:', error);
+  };
+
+  ws.onclose = () => {
+    console.log('WebSocket is closed.');
+  };
+});
+
+app.listen(3000, function () {
+  console.log('listening on port', this.address().port);
 });
 ```
 
-## Client
-
-To run the client:
-
-- Enter `npm install`
-- Enter `npm run start`
-- Browse `localhost:1920` in multiple browser windows.
-- Enter a message in the "Send" input and
-  press the Enter key or click the "Send" button to send it.
-- The message will appear in all connected browser windows.
-- Try sending multiple messages from each connected browser window.
-
-### Client package.json
+The following `package.json` file can be used to start the server.
 
 ```json
 {
-  "name": "client",
-  "version": "1.0.0",
-  "description": "WebSockets demo client",
-  "author": "R. Mark Volkmann",
-  "license": "MIT",
+  "name": "node-websockets",
+  "type": "module",
   "scripts": {
-    "start": "http-server --port 1920"
+    "dev": "nodemon src/server.js",
+    "format": "prettier --write '**/*.{css,html,js,ts,tsx}'"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "ws": "^7.4.5"
   },
   "devDependencies": {
-    "http-server": "^0.12.3"
+    "nodemon": "^2.0.7"
   }
 }
 ```
 
-### index.html
+## Running Demo
 
-```html
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+To run this demo, enter `npm run dev`, browse localhost:3000,
+open the browser DevTools, and view the Console output.
 
-    <script>
-      window.onload = () => {
-        // Find various DOM elements.
-        const errorMessage = document.getElementById('error-message');
-        const form = document.getElementById('form');
-        const receivedArea = document.getElementById('received-area');
-        const sendInput = document.getElementById('send-input');
-        const status = document.getElementById('status');
+The following screenshot shows the request and response HTTP headers
+for the WebSocket connection.
 
-        // Open a connection to the WebSocket server.
-        let wsOpen = false;
-        const WS_URL = 'ws://localhost:1919';
-        const ws = new WebSocket(WS_URL);
+<img alt="WebSockets DevTools Network tab Headers" style="width: 100%"
+  src="/blog/assets/websockets-node-devtools-network-headers.png?v={{pkg.version}}">
 
-        // When the WebSocket connection is opened ...
-        ws.addEventListener('open', event => {
-          wsOpen = true;
-          status.textContent = 'The WebSocket is open.';
-        });
+The following screenshot shows the messages for the WebSocket connection.
 
-        // When the WebSocket connection is closed ...
-        ws.addEventListener('close', event => {
-          wsOpen = false;
-          status.textContent =
-            'The WebSocket is closed. ' + 'Refresh when the server is ready.';
-        });
-
-        // When a WebSocket message is received ...
-        ws.addEventListener('message', event => {
-          // Display the message in the received area of the UI.
-          const div = document.createElement('div');
-          div.textContent = event.data;
-          receivedArea.append(div);
-        });
-
-        // When a WebSocket error occurs ...
-        ws.addEventListener('error', event => {
-          // For security reasons, there is no
-          // useful information in this event object.
-          errorMessage.textContent = `Failed to connect to ${WS_URL}.`;
-        });
-
-        // When the form containing a message to send is submitted ...
-        form.addEventListener('submit', event => {
-          event.preventDefault();
-          if (wsOpen) {
-            // Send the message to the WebSocket server.
-            ws.send(sendInput.value);
-            sendInput.value = '';
-          } else {
-            errorMessage.textContent =
-              'Cannot send because the WebSocket is closed.';
-          }
-        });
-      };
-    </script>
-
-    <style>
-      #error-message {
-        color: red;
-      }
-
-      #form {
-        display: flex;
-      }
-
-      input,
-      label {
-        margin-right: 0.5rem;
-      }
-
-      label {
-        font-weight: bold;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="status"></div>
-    <div id="error-message"></div>
-    <form id="form">
-      <label>Send</label>
-      <input id="send-input" autofocus />
-      <button>Send</button>
-    </form>
-    <div>
-      <label>Received</label>
-      <div id="received-area"></div>
-    </div>
-  </body>
-</html>
-```
+<img alt="WebSockets DevTools Network tab Messages" style="width: 70%"
+  src="/blog/assets/websockets-node-devtools-network-messages.png?v={{pkg.version}}">
 
 ## Bun and Hono
 
@@ -272,7 +242,7 @@ console.log('WebSocket server is listening on port', wsServer.port);
 export default app;
 ```
 
-The following `package.json` file can be used to start the server.
+The following `package.json` file can be used to start the Bun server.
 
 ```json
 {

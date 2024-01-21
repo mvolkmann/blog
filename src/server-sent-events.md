@@ -149,7 +149,7 @@ app.listen(3000, function () {
 });
 ```
 
-The following `package.json` file can be used to start the server.
+The following `package.json` file can be used to start the Node server.
 
 ```json
 {
@@ -231,6 +231,28 @@ app.get('/sse', (c: Context) => {
 });
 
 export default app;
+```
+
+The following `package.json` file can be used to start the Bun server.
+
+```json
+{
+  "name": "bun-sse",
+  "type": "module",
+  "scripts": {
+    "dev": "bun run --watch src/server.ts",
+    "format": "prettier --write '**/*.{css,html,js,ts,tsx}'"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "hono": "^3.12.6"
+  }
+}
 ```
 
 ## Alternatives
