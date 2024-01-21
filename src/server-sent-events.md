@@ -17,6 +17,9 @@ layout: topic-layout.njk
 "Server-Sent Events" %} (SSE) are used to send data from a server to a client,
 but not in the other direction.
 
+For two-way communication, consider using
+<a href="/blog/topics/#/blog/websockets/" target="_blank">WebSockets</a>.
+
 SSE is built on HTTP.
 
 Messages are sent over TCP, not UDP, so there is

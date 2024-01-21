@@ -12,6 +12,10 @@ layout: topic-layout.njk
 two-way communication between clients and servers using TCP.
 They are widely supported by web browsers.
 
+For one-way communication from servers to clients, consider using
+<a href="/blog/topics/#/blog/server-sent-events/"
+target="_blank">Server-Sent Events</a> (SSE).
+
 Many WebSocket libraries for server-side
 programming languages/environments exist.
 The example below demonstrates using the highly popular Node.js library
@@ -23,11 +27,11 @@ All the example code below can be found in the GitHub repository
 
 ## Use Cases
 
-TODO: Add this section.
+Common uses of WebSockets include:
 
-## Issues
-
-TODO: Add this section.
+- live data feeds such as weather and sports updates
+- gathering and displaying information about server-side progress
+- client-side logging of server-side activity
 
 ## Demo Client
 
