@@ -101,6 +101,9 @@ Responses sent from an SSE endpoint must set
 the "Content-Type" header to "text/event–stream" and
 the "Transfer-Encoding" header to "chunked".
 
+The following server code uses Node.js and the
+{% aTargetBlank "https://expressjs.com", "Express" %} library.
+
 When using the Node.js Express library,
 the "Transfer-Encoding" response header is set to "chunked" automatically
 when the request header "Accept" is set to "text/event-stream".

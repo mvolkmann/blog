@@ -6,16 +6,16 @@ layout: topic-layout.njk
 
 ## Overview
 
-WebSockets are a standardized protocol for two-way communication
-between clients and servers using TCP.
+{% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocket_client_applications",
+"WebSockets" %} are a standardized protocol for
+two-way communication between clients and servers using TCP.
 They are widely supported by web browsers.
 
 Many WebSocket libraries for server-side
 programming languages/environments exist.
 The example below demonstrates using the highly popular Node.js library
 {% aTargetBlank "https://github.com/websockets/ws", "ws" %}.
-This of course requires installing
-{% aTargetBlank "https://nodejs.org/", "Node.js" %}.
 
 All the example code below can be found in the GitHub repository
 {% aTargetBlank "https://github.com/mvolkmann/websocket-examples",
@@ -70,18 +70,12 @@ Note the use of the class `WebSocket`.
 
 ## Demo Server
 
-To run the server:
-
-- Enter `npm install`
-- Enter `npm run start`
-
-This uses {% aTargetBlank "https://nodemon.io", "nodemon" %}
+The following server code uses Node.js,
+the {% aTargetBlank "https://expressjs.com", "Express" %} framework, and the
+{% aTargetBlank "https://www.npmjs.com/package/ws", "ws" %} WebSocket library.
+It also uses {% aTargetBlank "https://nodemon.io", "nodemon" %}
 to automatically restart the server when its code is modified,
 which is useful during iterative development and debugging.
-
-### Server package.json
-
-The following code is an example Node.js server that uses the Express library.
 
 ```js
 import express from 'express';
@@ -169,8 +163,8 @@ The following `package.json` file can be used to start the server.
 
 ## Running Demo
 
-To run this demo, enter `npm run dev`, browse localhost:3000,
-open the browser DevTools, and view the Console output.
+To run this demo, enter `npm install`, enter `npm run dev`,
+browse localhost:3000, open the browser DevTools, and view the Console output.
 
 The following screenshot shows the request and response HTTP headers
 for the WebSocket connection.
