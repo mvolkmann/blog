@@ -25,6 +25,10 @@ SSE is built on HTTP.
 Messages are sent over TCP, not UDP, so there is
 some overhead for error checking and message coordination.
 
+SSE provides automatic reconnection.
+If a SSE connection is closed, perhaps due to a network issue,
+clients will automatically attempt to reconnect to the server.
+
 For a great video on SSE, see {% aTargetBlank
 "https://www.youtube.com/watch?v=4HlNv1qpZFY",
 "Server-Sent Events Crash Course" %}.
@@ -43,15 +47,13 @@ Common uses of SSE include:
 
 ## Issues
 
-From the MDN {% aTargetBlank
+When using HTTP/1, SSE supports a maximum of
+six concurrent connections per browser/domain.
+When using HTTP/2, the client and server can negotiate the limit
+and the default is 100.
+See the MDN {% aTargetBlank
 "https://developer.mozilla.org/en-US/docs/Web/API/EventSource",
-"EventSource" %} documentation,
-"When not used over HTTP/2, SSE suffers from a limitation to the
-maximum number of open connections, ...
-the limit is per browser and set to a very low number (6).
-This limit is per browser + domain ...
-When using HTTP/2, the maximum number of simultaneous HTTP streams
-is negotiated between the server and the client (defaults to 100)."
+"EventSource" %} documentation.
 
 ## Demo Client
 
