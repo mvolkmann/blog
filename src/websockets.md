@@ -179,7 +179,8 @@ The following screenshot shows the messages for the WebSocket connection.
 
 ## Bun and Hono
 
-The server code is a bit simpler when using Bun and Hono instead of Node.
+The following server code uses Bun and
+the {% aTargetBlank "https://hono.dev", "Hono" %} framework.
 The client code remains the same.
 
 ```ts
@@ -199,9 +200,7 @@ const wsServer = Bun.serve({
   port: 3001,
   fetch(req, server) {
     // Upgrade the request to support WebSockets.
-    if (server.upgrade(req)) {
-      return; // do not return a Response
-    }
+    if (server.upgrade(req)) return; // no Response
     return new Response('WebSockets upgrade failed', {status: 500});
   },
   websocket: {
@@ -219,6 +218,9 @@ const wsServer = Bun.serve({
       } else {
         ws.send('Hello from server!');
       }
+    },
+    error(ws, error) {
+      console.error('WebSocket error:', error);
     },
     // See WebSocket protocol status codes at
     // https://datatracker.ietf.org/doc/html/rfc6455#section-7.4

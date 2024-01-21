@@ -175,8 +175,8 @@ The following `package.json` file can be used to start the Node server.
 
 ## Running Demo
 
-To run this demo, enter `npm run dev`, browse localhost:3000,
-open the browser DevTools, and view the Console output.
+To run this demo, enter `npm install`, enter `npm run dev`,
+browse localhost:3000, open the browser DevTools, and view the Console output.
 
 The following screenshot shows the request and response HTTP headers
 for the SSE connection.
