@@ -33,6 +33,17 @@ Common uses of WebSockets include:
 - gathering and displaying information about server-side progress
 - client-side logging of server-side activity
 
+## Issues
+
+WebSockets do not provide automatic reconnection.
+If a WebSocket connection is closed, perhaps due to a network issue,
+clients will not automatically attempt to reconnect to the server.
+Additional code must be written to poll the server and reconnect.
+
+Some WebSocket libraries such as {% aTargetBlank "https://socket.io",
+"Socket.IO" %} provide reconnection support.
+This is also a built-in feature of Server-Sent Events (SSE).
+
 ## Demo Client
 
 The following code is an example client HTML file
