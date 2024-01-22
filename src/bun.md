@@ -957,6 +957,9 @@ type Todo = {
 };
 
 const db = new Database('todos.db', {create: true});
+// Alternative way to access database in src directory:
+// import {Statement} from 'bun:sqlite';
+// import db from "./todos.db" with {"type": "sqlite"};
 const deleteAllTodosPS = db.prepare('delete from todos');
 const deleteTodoPS = db.prepare('delete from todos where id = ?');
 const getTodoQuery = db.query('select * from todos where id = ?');
