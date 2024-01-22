@@ -1489,3 +1489,43 @@ For example, `text-red` is not a valid Tailwind CSS class name.
 | ----------- | ------------------------------------------------------ |
 | `z-{n}`     | `z-index: {n};`<br>where n is 0, 10, 20, 30, 40, or 50 |
 | `z-auto`    | `z-index: auto;`                                       |
+
+## HyperUI
+
+{% aTargetBlank "https://www.hyperui.dev", "HyperUI" %}
+is a collection of free UI components defined with
+Tailwind CSS classes and optionally AlpineJS directives.
+
+There is no need to install anything.
+Just find a component to use from the website,
+copy its code, and paste in into your project.
+
+Components are defined in a large number of categories including
+Auth Forms, Alerts, Badges, Breadcrumbs, Button Groups, Details Lists,
+Dividers, Dropdowns, Error Pages, Grids, Header, Inputs, Media, Pagination,
+Progress, Radio Groups, Selects, Side Menu, Stats, Steps, Tables, Tabs,
+Textareas, Toggles, and Vertical Menu.
+
+There are also components that are specialized for eCommerce and Marketing.
+
+Here is an example of a Toggle that only uses Tailwind classes:
+
+```html
+<label
+  for="AcceptConditions"
+  class="relative h-8 w-14 cursor-pointer [-webkit-tap-highlight-color:_transparent]"
+>
+  <input type="checkbox" id="AcceptConditions" class="peer sr-only" />
+
+  <span
+    class="absolute inset-0 rounded-full bg-gray-300 transition peer-checked:bg-green-500"
+  ></span>
+
+  <span
+    class="absolute inset-y-0 start-0 m-1 h-6 w-6 rounded-full bg-white transition-all peer-checked:start-6"
+  ></span>
+</label>
+```
+
+This code can be placed in a component for the specific framework being used
+(such as Astro or Svelte) to avoid pasting the same code in multiple places.
