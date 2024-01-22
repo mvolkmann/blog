@@ -2247,8 +2247,129 @@ TODO: Try this.
 
 ## WebSockets
 
-TODO: Try this.
-hx-ws
+The htmx {% aTargetBlank "https://htmx.org/extensions/web-sockets/",
+"websockets" %} extension adds the ability to connect to a
+<a href="/blog/topics/#/blog/websockets/" target="_blank">WebSockets</a>
+server, send messages to it, and insert responses into HTML.
+It is defined by a separate JavaScript file
+that must be included with a `script` tag.
+
+The extension adds support for the following attributes:
+
+- `ws-connect` specifies the URL of a WebSocket endpoint
+- `ws-send` can be applied to a `form` element
+  to send its data to a WebSocket endpoint
+
+WebSocket endpoints specify where the result should be inserted in the DOM
+by using an out-of-band swap.
+
+The following code in the file `index.tsx` creates a WebSocket endpoint
+using Bun and the Hono framework.
+The file extension is `.tsx` because it uses JSX for generating strings of HTML.
+
+```ts
+import {Hono} from 'hono';
+import {serveStatic} from 'hono/bun';
+
+const app = new Hono();
+
+// This serves static files from the public directory.
+app.use('/*', serveStatic({root: './public'}));
+
+const wsServer = Bun.serve({
+  // The WebSocket port defaults to 3000 which conflicts with the HTTP server.
+  port: 3001,
+  fetch(req, server) {
+    // Upgrade the request to support WebSockets.
+    if (server.upgrade(req)) return; // no Response
+    return new Response('WebSockets upgrade failed', {status: 500});
+  },
+  websocket: {
+    open(ws) {
+      console.log('WebSocket opened');
+    },
+    message(ws, json: string) {
+      const data = JSON.parse(json);
+      // "start" is a form input name.
+      countdown(ws, parseInt(data.start));
+    },
+    close(ws, code) {
+      // For code values, see
+      // https://datatracker.ietf.org/doc/html/rfc6455#section-7.4.1
+      // 1000 = Normal Closure
+      // 1001 = Going Away (browser navigated away or server shut down)
+      console.log('WebSocket closed with code', code);
+    }
+  }
+});
+
+// This sends WebSocket messages that are numbers
+// starting at a specified number and counting down to zero.
+async function countdown(ws, start: number) {
+  let n = start;
+  while (n >= 0) {
+    const swap = n === start ? 'innerHTML' : 'beforeend';
+    const html = (
+      <div id="countdown" hx-swap-oob={swap}>
+        <div>{n}</div>
+      </div>
+    );
+    ws.send(html.toString());
+    await Bun.sleep(1000);
+    n--;
+  }
+}
+
+console.log('WebSocket server is listening on port', wsServer.port);
+
+export default app;
+```
+
+Htmx dispatches the following events related to WebSockets:
+
+- `htmx:wsConnecting`
+- `htmx:wsOpen`
+- `htmx:wsClose`
+- `htmx:wsError`
+- `htmx:wsBeforeMessage`
+- `htmx:wsAfterMessage`
+- `htmx:wsConfigSend`
+- `htmx:wsBeforeSend`
+- `htmx:wsAfterSend`
+
+To listen for these events with the `hx-on` attribute,
+change the names from camelCase to kebab-case.
+
+The code below listens for the `htmx:wsAfterSend` event
+in order to reset the `form` which clears the `input`.
+
+```js
+<html>
+  <head>
+    <title>WebSockets</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/ws.js"></script>
+  </head>
+  <body>
+    <h1>WebSockets</h1>
+    <div
+      hx-ext="ws"
+      ws-connect="ws://localhost:3001"
+      hx-on:htmx:ws-after-send="document.querySelector('form').reset()"
+    >
+      <form ws-send>
+        <label>
+          Start:
+          <input name="start" type="number" />
+        </label>
+        <button>Submit</button>
+      </form>
+      <div id="countdown"></div>
+    </div>
+  </body>
+</html>
+```
 
 ## Server-Sent Events
 
