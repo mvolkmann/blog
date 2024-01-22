@@ -266,8 +266,10 @@ and browse localhost:3000.
 
 ## Alternatives
 
-If data must be sent in both directions, consider using WebSockets.
+Another alternative is
+<a href="/blog/topics/#/blog/long-polling/" target="_blank">Long Polling</a>.
 
-TODO: Show how to use Web sockets with HTMX.
+If data must be sent in both directions, consider using
+<a href="/blog/topics/#/blog/websockets" target="_blank">WebSockets</a>.
 
-TODO: Implement this same demo using vanilla Bun and Bun with Hono.
+TODO: Show how to use SSE with HTMX.

@@ -251,4 +251,8 @@ and browse localhost:3000.
 
 ## Alternatives
 
-If data must be sent in both directions, consider using WebSockets.
+Another alternative is
+<a href="/blog/topics/#/blog/server-sent-events/" target="_blank">Server-Sent Events</a>.
+
+If data must be sent in both directions, consider using
+<a href="/blog/topics/#/blog/websockets" target="_blank">WebSockets</a>.

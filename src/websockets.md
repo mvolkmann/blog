@@ -278,3 +278,14 @@ The following `package.json` file can be used to start the Bun server.
   }
 }
 ```
+
+## Alternatives
+
+In scenarios where data only needs to be sent from servers to clients,
+consider using
+<a href="/blog/topics/#/blog/long-polling/" target="_blank">Long Polling</a>.
+or
+<a href="/blog/topics/#/blog/server-sent-events"
+target="_blank">Server-Sent Events</a>.
+
+TODO: Show how to use WebSockets with HTMX.
