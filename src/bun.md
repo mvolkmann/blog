@@ -797,6 +797,10 @@ For example, the following settings enable using JSX with the Hono framework:
 }
 ```
 
+Depending on the JSX library used, calling `toString`
+on a variable set to a JSX value returns an HTML string.
+This works with the Hono framework.
+
 Bun supports "prop punning" which is a shorthand syntax
 for props that have the same name as an in-scope variable.
 For example, the following are equivalent
