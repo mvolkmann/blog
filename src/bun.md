@@ -415,6 +415,21 @@ For details, see {% aTargetBlank "https://bun.sh/docs/api/globals", "Globals" %}
   - Bun
   - ResolveMessage
 
+  Add the following in `tsconfig.json` so VS Code
+  doesn't complain about the `Bun` global variable.
+
+  ```json
+  {
+    "compilerOptions": {
+      ...
+      "types": [
+        "bun-types" // add Bun global
+      ]
+      ...
+    }
+  }
+  ```
+
 - Cloudflare
 
   - HTMLRewriter
