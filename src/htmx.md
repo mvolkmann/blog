@@ -2343,6 +2343,9 @@ change the names from camelCase to kebab-case.
 The code below listens for the `htmx:wsAfterSend` event
 in order to reset the `form` which clears the `input`.
 
+<img alt="htmx WebSockets" style="width: 50%"
+  src="/blog/assets/htmx-websockets.png?v={{pkg.version}}">
+
 ```js
 <html>
   <head>
