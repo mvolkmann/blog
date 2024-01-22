@@ -113,8 +113,6 @@ When using the Node.js Express library,
 the "Transfer-Encoding" response header is set to "chunked" automatically
 when the request header "Accept" is set to "text/event-stream".
 
-The following code is an example Node.js server that uses the Express library.
-
 ```js
 import express from 'express';
 import {v4 as uuidv4} from 'uuid';
@@ -263,24 +261,12 @@ The following `package.json` file can be used to start the Bun server.
 }
 ```
 
+To run this demo, enter `bun install`, enter `bun run dev`,
+and browse localhost:3000.
+
 ## Alternatives
 
-If data must be sent in both directions,
-consider using long polling or WebSockets.
-
-With long polling, the server can delay sending a response.
-
-### Long Polling
-
-### WebSockets
-
-{% aTargetBlank
-"https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API",
-"WebSockets" %} can send data in both directions.
-This is a major reason to choose WebSockets over SSE.
-
-For a great video on WebSockets, see {% aTargetBlank
-"https://www.youtube.com/watch?v=2Nt-ZrNP22A", "WebSockets Crash Course" %}.
+If data must be sent in both directions, consider using WebSockets.
 
 TODO: Show how to use Web sockets with HTMX.
 
