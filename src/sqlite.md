@@ -179,6 +179,26 @@ Use the text type for ISO date strings.
 Use the integer type for storing seconds or milliseconds
 since the epoch (1970-01-01 00:00:00 UTC).
 
+## Write-Ahead Logging (WAL)
+
+By default SQLite performs atomic commits
+and rollbacks using a "rollback journal".
+At any point in time there is either one writer or none.
+In WAL mode, readers block the single writer and the writer block readers.
+
+WAL is a new option that is significantly faster.
+Readers and the writer no longer block each other.
+
+Some of the disadvantages of WAL include:
+
+- The virtual file system must support shared-memory primitives,
+  so WAL is not an option on every computer.
+- All processes that access the database must
+  run on the same computer as the database.
+
+For more detail, see {% aTargetBlank "https://www.sqlite.org/wal.html",
+"Write-Ahead Logging" %}.
+
 ## JavaScript Support
 
 There are many client libraries in npm for working with SQLite databases.
