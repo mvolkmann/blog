@@ -287,5 +287,3 @@ consider using
 or
 <a href="/blog/topics/#/blog/server-sent-events"
 target="_blank">Server-Sent Events</a>.
-
-TODO: Show how to use WebSockets with HTMX.

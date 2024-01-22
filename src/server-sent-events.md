@@ -271,5 +271,3 @@ Another alternative is
 
 If data must be sent in both directions, consider using
 <a href="/blog/topics/#/blog/websockets" target="_blank">WebSockets</a>.
-
-TODO: Show how to use SSE with HTMX.

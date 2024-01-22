@@ -2250,10 +2250,105 @@ TODO: Try this.
 TODO: Try this.
 hx-ws
 
-## Server Sent Events
+## Server-Sent Events
 
-TODO: Try this.
-{% aTargetBlank "https://htmx.org/extensions/server-sent-events/", "hx-sse" %}
+The htmx {% aTargetBlank "https://htmx.org/extensions/server-sent-events/",
+"server-sent-events" %} extension adds the ability to listen for
+<a href="/blog/topics/#/blog/server-sent-events/"
+target="_blank">Server-Sent Events</a> (SSE).
+It is defined by a separate JavaScript file
+that must be included with a `script` tag.
+
+The extension adds support for the following attributes:
+
+- `sss-connect` specifies the URL of an SSE endpoint
+- `sse-swap` specifies the name of the events,
+  defaulting to "message" when not specified
+
+In addition, the extension enables the `hx-trigger` attribute
+to listen for SSE events by prefixing their name with ":sse".
+This can only be applied to descendant elements
+of an element that has the `sse-connect` attribute.
+However, the events won't be triggered
+if that element uses the `sse-swap` attribute,
+because that element will swallow the events.
+
+The following code demonstrates the new capabilities.
+
+```js
+import {Context, Hono} from 'hono';
+import {serveStatic} from 'hono/bun';
+import type {FC} from 'hono/jsx';
+import {streamSSE} from 'hono/streaming';
+
+const app = new Hono();
+
+// This serves static files from the public directory.
+app.use('/*', serveStatic({root: './public'}));
+
+const BaseHtml: FC = ({children}) => (
+  <html>
+    <head>
+      <title>Server-Sent Events</title>
+      <link rel="stylesheet" href="/styles.css" />
+      <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+      <script src="https://unpkg.com/htmx.org/dist/ext/sse.js"></script>
+    </head>
+    <body>{children}</body>
+  </html>
+);
+
+app.get('/', (c: Context) => {
+  return c.html(
+    <BaseHtml>
+      <h1>Server-Sent Events</h1>
+
+      {/* This listens for SSE "count" events and
+          replaces the contents of a target element with their data.
+          If hx-target is omitted, the results will
+          replace the contents of the current element. */}
+      <div
+        hx-ext="sse"
+        hx-target="#count"
+        sse-connect="/sse"
+        sse-swap="count"
+      />
+      <div>
+        count = <span id="count" />
+      </div>
+
+      {/* This listens for SSE "count" events and
+          sends an HTTP request to get other data when they occur. */}
+      <div hx-ext="sse" sse-connect="/sse">
+        <div hx-get="/related-data" hx-trigger="sse:count" />
+      </div>
+    </BaseHtml>
+  );
+});
+
+let count = 0;
+
+// This streams count values using server-sent events.
+app.get('/sse', (c: Context) => {
+  count = 0;
+  return streamSSE(c, async stream => {
+    await stream.writeSSE({data: 'starting'});
+
+    while (count < 10) {
+      count++;
+      await stream.writeSSE({
+        event: 'count',
+        id: String(crypto.randomUUID()),
+        data: String(count)
+      });
+      await stream.sleep(1000);
+    }
+    stream.close();
+  });
+});
+
+export default app;
+```
 
 ## History
 
