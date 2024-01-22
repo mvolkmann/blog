@@ -1050,6 +1050,24 @@ The expected output is "average is 2.5".
 For more detail, see {% aTargetBlank "https://bun.sh/docs/api/ffi", "FFI" %}.
 That page includes a list of all the supported FFI types.
 
+## Bun Shell
+
+"The {% aTargetBlank "https://bun.sh/blog/the-bun-shell", "Bun Shell" %}
+is a new experimental embedded language and interpreter in Bun
+that allows you to run cross-platform shell scripts in JavaScript & TypeScript."
+
+The following code uses Bun Shell to
+output the names of all the files in the current directory.
+
+```ts
+import {$} from 'bun';
+
+const lines = $`ls .`.lines();
+for await (const line of lines) {
+  console.log(line);
+}
+```
+
 ## ElysiaJS
 
 {% aTargetBlank "https://elysiajs.com", "ElysiaJS" %} is a
@@ -1081,6 +1099,9 @@ it does not default to rendering the file "index.html".
 To do that, end the URL with "/index.html".
 See this {% aTargetBlank "https://github.com/elysiajs/elysia/issues/327",
 "issue" %}.
+
+For an alternative that runs in Bun and other JavaScript runtimes, see
+<a href="/blog/topics/#/blog/hono/" target="_blank">Hono</a>.
 
 ## TODOs
 
