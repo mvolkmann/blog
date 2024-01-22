@@ -29,6 +29,7 @@ so there is some overhead for error checking and message coordination.
 SSE provides automatic reconnection.
 If a SSE connection is closed, perhaps due to a network issue,
 clients will automatically attempt to reconnect to the server.
+WebSockets do not provide this.
 
 For a great video on SSE, see {% aTargetBlank
 "https://www.youtube.com/watch?v=4HlNv1qpZFY",

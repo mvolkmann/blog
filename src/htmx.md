@@ -417,7 +417,7 @@ Good choices make it easy to do the following:
 
 Good choices have tooling that supports the following:
 
-- Fast server startup with no complex build process
+- Fast server startup with no build process (or a simple one)
   to support iterative development.
 - Automatic server restarts after source code changes are detected.
 - Good HTML templating support such as JSX,
