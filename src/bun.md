@@ -784,7 +784,7 @@ in source files with `.jsx` or `.tsx` file extensions.
 
 The `compilerOptions` property in `tsconfig.json`
 determines how JSX is processed.
-For example, it might contain the following:
+For example, the following settings enable using JSX with the Hono framework:
 
 ```json
 {
