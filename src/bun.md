@@ -777,6 +777,39 @@ including:
 
 For more detail see {% aTargetBlank "https://bun.sh/docs/api/utils", "Utils" %}.
 
+## JSX
+
+Bun supports embedding JSX for HTML templating
+in source files with `.jsx` or `.tsx` file extensions.
+
+The `compilerOptions` property in `tsconfig.json`
+determines how JSX is processed.
+For example, it might contain the following:
+
+```json
+{
+  "compilerOptions": {
+    ...
+    "jsx": "react-jsx",
+    "jsxImportSource": "hono/jsx"
+    ...
+  }
+}
+```
+
+Bun supports "prop punning" which is a shorthand syntax
+for props that have the same name as an in-scope variable.
+For example, the following are equivalent
+when the variables `class` and `value` are in scope:
+
+```xml
+<input class={class} type="text" value={value} />
+<input {class} type="text" {value} />
+```
+
+For more detail, see the Bun documentation on
+{% aTargetBlank "https://bun.sh/docs/runtime/jsx", "JSX" %}.
+
 ## Serializing Objects
 
 The `bun:jsc` module supports serializing and deserializing JavaScript values.
