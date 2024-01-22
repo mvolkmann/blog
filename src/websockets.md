@@ -15,6 +15,9 @@ They are widely supported by web browsers.
 For one-way communication from servers to clients, consider using
 <a href="/blog/topics/#/blog/server-sent-events/"
 target="_blank">Server-Sent Events</a> (SSE).
+WebSockets support text and binary data, whereas SSE only supports UTF-8 text.
+When only text is needed, SSE is a good option because
+the required code is a bit easier to write than the code for WebSockets.
 
 WebSockets require upgrading an existing HTTP connection.
 For details, see the MDN page {% aTargetBlank

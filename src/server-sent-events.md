@@ -19,11 +19,12 @@ but not in the other direction.
 
 For two-way communication, consider using
 <a href="/blog/topics/#/blog/websockets/" target="_blank">WebSockets</a>.
+WebSockets support text and binary data, whereas SSE only supports UTF-8 text.
+When only text is needed, SSE is a good option because
+the required code is a bit easier to write than the code for WebSockets.
 
-SSE is built on HTTP.
-
-Messages are sent over TCP, not UDP, so there is
-some overhead for error checking and message coordination.
+SSE is built on HTTP. Messages are sent over TCP, not UDP,
+so there is some overhead for error checking and message coordination.
 
 SSE provides automatic reconnection.
 If a SSE connection is closed, perhaps due to a network issue,
