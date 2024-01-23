@@ -8,6 +8,19 @@ layout: topic-layout.njk
 
 This post summarizes ways to interact with GitHub Copilot in VS Code.
 
+## Status
+
+To see the status of GitHub Copilot, click the button in the lower-right.
+
+<img alt="GitHub Copilot status button" style="width: 10%"
+  src="/blog/assets/github-copilot-status-button.png?v={{pkg.version}}">
+
+Clicking this button displays a menu of options
+that begins with the current status.
+
+<img alt="GitHub Copilot status menu" style="width: 70%"
+  src="/blog/assets/github-copilot-status-menu.png?v={{pkg.version}}">
+
 ## Q&A Blocks
 
 In any source file, enter the syntax for a comment
@@ -34,6 +47,9 @@ Press ctrl-shift-i in Windows or cmd-shift-i in macOS
 to open a text input at the top where a question can be entered.
 This option is better for questions that have long answers.
 
+<img alt="GitHub Copilot chat window" style="width: 80%"
+  src="/blog/assets/github-copilot-chat-window.png?v={{pkg.version}}">
+
 You can rate the answer by clicking the thumbs up or thumbs down icons.
 
 To close the answer dialog, press the escape key
@@ -47,6 +63,9 @@ in a text input at the bottom.
 
 This panel maintains a list of all previously asked questions
 and the answer provided, so you can scroll back and review them.
+
+<img alt="GitHub Copilot side window" style="width: 40%"
+  src="/blog/assets/github-copilot-side-window.png?v={{pkg.version}}">
 
 ## Code Suggestions
 
@@ -96,6 +115,9 @@ right-click and select "Copilot > Explain This".
 
 To get an explanation of a specific function implementation,
 select all of its lines, right-click, and select "Copilot > Explain This".
+
+The GitHub Copilot side window will open, if not already open,
+and the explanation will appear there.
 
 ## Fix It
 
@@ -174,6 +196,9 @@ click the "Source Control" button in the left nav and
 click the "two starts" icon in the text input for the commit message.
 Copilot will suggest a commit message
 that can be edited before committing the changes.
+
+<img alt="GitHub Copilot automatic commit message" style="width: 100%"
+  src="/blog/assets/github-copilot-automatic-commit-message.png?v={{pkg.version}}">
 
 ## Alternatives
 
