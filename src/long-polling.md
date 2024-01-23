@@ -31,6 +31,10 @@ The client sends an initial request for data.
 The server does not respond until there is a change in the data to be reported.
 When the client receives the data, it immediately requests another update.
 
+All the example code below can be found in the GitHub repository
+{% aTargetBlank "https://github.com/mvolkmann/long-polling-examples",
+"long-polling-examples" %}.
+
 ## Demo Client
 
 The following code is an example client HTML file that

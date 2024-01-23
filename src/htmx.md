@@ -2425,6 +2425,10 @@ in order to reset the `form` which clears the `input`.
 </html>
 ```
 
+See the working example project that includes the code above at {% aTargetBlank
+"https://github.com/mvolkmann/websocket-examples",
+"websocket-examples" %}.
+
 ## Server-Sent Events
 
 The htmx {% aTargetBlank "https://htmx.org/extensions/server-sent-events/",
@@ -2524,6 +2528,10 @@ app.get('/sse', (c: Context) => {
 
 export default app;
 ```
+
+See the working example project that includes the code above at {% aTargetBlank
+"https://github.com/mvolkmann/server-sent-events-examples",
+"server-sent-events-examples" %}.
 
 ## History
 
