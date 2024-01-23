@@ -123,10 +123,9 @@ Many of these are discussed in more detail in subsequent sections.
   must be versioned and
   each version must remain stable to avoid breaking clients.
 
-  HTML APIs on the other hand are
-  intended for use by a single client application.
-  Typically only browsers need to
-  understand the HTML returned by these endpoints.
+  HTML APIs on the other hand are intended for
+  use by a single client application and can be specific to it.
+  Only browsers need to understand the HTML returned by these endpoints.
   Client-side code does not parse the HTML and extract data from it,
   as is done with JSON APIs.
 
