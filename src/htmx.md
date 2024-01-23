@@ -114,7 +114,30 @@ Many of these are discussed in more detail in subsequent sections.
 
   Htmx endpoints fetch data, generate HTML from it, and return the HTML.
   The browser only has to render the returned HTML.
+
   Removing JSON as an intermediate format provides efficiency gains.
+
+- Eliminates need for API versioning
+
+  JSON APIs that are intended to be used by multiple clients
+  must be versioned and
+  each version must remain stable to avoid breaking clients.
+
+  HTML APIs on the other hand are
+  intended for use by a single client application.
+  Typically only browsers need to
+  understand the HTML returned by these endpoints.
+  Client-side code does not parse the HTML and extract data from it,
+  as is done with JSON APIs.
+
+  This removes the need to version HTML APIs.
+  They can be freely modified as long as the desire is for all users
+  to use the latest version the next time they visit the site.
+
+  All that is needed is a URL for rendering a starting page for an application.
+  All other interactions are derived through URLs in that page
+  and pages reached from it.
+  This is the crux of HATEOAS (described later)
 
 - Enables Hypermedia ON Whatever you'd Like (HOWL)
 
@@ -174,16 +197,6 @@ removes the need for many things including:
   This is unnecessary because page updates and transitions
   are handled by HTTP requests triggered on elements
   described in the HTML returned by the server.
-
-- versioning
-
-  This is unnecessary because the browser does not need to
-  interpret the meaning of the HTML being returned.
-  All that is needed is a URL for rendering a starting page for an application.
-  All other interactions are derived through URLs in that page
-  and pages reached from it.
-  Endpoints are free to modify the HTML they return.
-  This is the crux of HATEOAS (described later)
 
 The HTML returned by endpoints is typically
 larger than a corresponding JSON response would be.
