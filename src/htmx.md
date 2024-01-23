@@ -26,7 +26,7 @@ is a hypermedia-oriented, client-side JavaScript library.
 Hypermedia is any data format that can describe
 branching from one "media" (ex. a document) to another.
 A hypermedia control is an element that describes a server interaction
-such as anchor (`a`) and `form` elements in HTML.
+such as HTML anchor (`a`) and `form` elements.
 
 Htmx adds support for new HTML attributes that make HTML more expressive.
 These attributes enable implementing "Hypermedia-Driven Applications" (HDAs).
@@ -133,7 +133,7 @@ Many of these are discussed in more detail in subsequent sections.
   They can be freely modified as long as the desire is for all users
   to use the latest version the next time they visit the site.
 
-  All that is needed is a URL for rendering a starting page for an application.
+  All that is needed is a URL for rendering the initial page of an application.
   All other interactions are derived through URLs in that page
   and pages reached from it.
   This is the crux of HATEOAS (described later)
@@ -150,8 +150,8 @@ Many of these are discussed in more detail in subsequent sections.
   endpoints that return JSON data and another team of developers
   implements web user interfaces that use those endpoints.
 
-  With htmx each developer develops complete features by
-  implementing endpoints that return HTML that includes htmx attributes.
+  With htmx, developers implement complete features by
+  defining endpoints that return HTML including htmx attributes.
   This requires developers to know the selected programming language,
   HTML, and CSS, but not necessarily JavaScript.
 
@@ -184,8 +184,7 @@ removes the need for many things including:
   the HTML elements returned by the server.
   This implements Hypermedia As The Engine Of Application State (HATEOAS).
 
-  Fewer client-side dependencies are needed
-  and client-side build time is reduced.
+  Fewer client-side dependencies are needed.
 
 - managing client-side data models
 
@@ -260,8 +259,8 @@ Client-side code is responsible for understanding the meaning of JSON data
 and breaks if the endpoints change to return different data.
 Many developers refer to this architecture as "REST".
 
-This is not what Roy Fielding had in mind when he wrote his famous dissertation
-"{% aTargetBlank
+This is not what Roy Fielding had in mind
+when he wrote his famous PhD dissertation "{% aTargetBlank
 "https://ics.uci.edu/~fielding/pubs/dissertation/fielding_dissertation.pdf",
 "Architectural Styles and the Design of Network-based Software Architectures" %}"
 that gave birth to REST.
@@ -416,7 +415,7 @@ Good choices make it easy to do the following:
   It's also convenient when multiple, related endpoints
   can be defined in the same source file.
 
-- Specify validation and type checking of request data
+- Specify type checking and validation of request data
   and receive helpful error messages in responses.
 
   Request data includes request headers, path parameters, query parameters,
@@ -640,13 +639,12 @@ if (form && result) {
 
 ## Using TypeScript
 
-The steps below provide one way to use TypeScript
-for developing the front end of an htmx project.
-They create a new project that uses htmx, TypeScript, and Vite.
-Vite provides a local HTTP server with hot reload.
+There are several ways to create an htmx project that uses TypeScript.
+One way it to use Bun which provides TypeScript support out of the box.
 
-A back end can be created using any programming language and framework
-that support implementing an HTTP server.
+Another way is to use Vite as described below.
+Vite provides a local HTTP server with hot reload.
+Alpine can be used to manage any client-side state and interactivity.
 
 - Enter `npm init vite@latest`
 
