@@ -496,7 +496,7 @@ For user interactions that do not require server-side updates,
 consider using HTML elements such as `details` and `dialog`.
 Also consider client-side scripting options include vanilla JavaScript,
 {% aTargetBlank "/blog/topics/#/blog/alpine/", "AlpineJS" %}, and
-{% aTargetBlank "https://hyperscript.org", "_hyperscript" %}.
+{% aTargetBlank "/blog/topics/#/blog/hyperscript/", "_hyperscript" %}.
 All of these support updating the UI by performing DOM manipulation.
 
 Alpine adds support for many new HTML attributes.
