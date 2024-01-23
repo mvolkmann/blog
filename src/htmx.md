@@ -99,8 +99,11 @@ Many of these are discussed in more detail in subsequent sections.
   The Locality of Behavior (LoB) pattern places related code together
   which makes the code easier to understand and modify
   than following a Separation of Concerns (SoC) pattern.
-  From Richard Gabriel, LoB "enables a programmer to
-  understand source by looking at only a small portion of it."
+  From Richard Gabriel (famous for his work at the MIT AI lab and with Lisp),
+  LoB "enables a programmer to understand source
+  by looking at only a small portion of it."
+  LoB doesn't require all the code for a feature to be
+  implemented where it is used, just invoked from a common place.
 
 - Eliminates JSON as an intermediate format
 
@@ -432,7 +435,8 @@ One tech stack that meets all these criteria is
 Other popular tech stacks for htmx include:
 
 - {% aTargetBlank "https://ahastack.dev", "AHA stack" %}
-  which uses Astro, htmx, and AlpineJS
+  which uses Astro, htmx, and {% aTargetBlank
+  "/blog/topics/#/blog/alpine/", "AlpineJS" %}
 - {% aTargetBlank "https://github.com/ethanniser/the-beth-stack",
   "BETH stack" %} which uses Bun, Elysia, Turso, and htmx.
 - Go with {% aTargetBlank "https://templ.guide", "templ" %}
@@ -485,12 +489,15 @@ The WebSocket server will not be restarted if `--hot` is used.
 
 ## Client-side Processing
 
-Htmx applications to not require sending an HTTP request for every user interaction.
-They can use HTML elements such as `details` and `dialog`
-and client-side scripting.
-Scripting options include vanilla JavaScript,
-{% aTargetBlank "https://mvolkmann.github.io/blog/topics/#/blog/alpine/", "Alpine" %}, and
+Htmx applications to not require sending an HTTP request
+for every user interaction.
+
+For user interactions that do not require server-side updates,
+consider using HTML elements such as `details` and `dialog`.
+Also consider client-side scripting options include vanilla JavaScript,
+{% aTargetBlank "/blog/topics/#/blog/alpine/", "AlpineJS" %}, and
 {% aTargetBlank "https://hyperscript.org", "_hyperscript" %}.
+All of these support updating the UI by performing DOM manipulation.
 
 Alpine adds support for many new HTML attributes.
 \_hyperscript adds support for one new HTML attribute
@@ -888,6 +895,14 @@ If `hx-sync="closest form:abort` is applied to the `input`,
 the validation request will be sent first.
 If the validation succeeds then the submit request will be sent.
 Otherwise it will be aborted.
+
+One way to send an HTTP request that is not triggered by a user action
+is to call `htmx.ajax` in JavaScript code.
+The following code demonstrates doing this based on a condition.
+
+```js
+TODO: Add an example here. See programmatic-ajax example project.
+```
 
 ## URLs
 
@@ -2159,7 +2174,7 @@ add `hx-boost="false"` to them.
 
 Note that many features of htmx will not work if JavaScript is disable.
 
-## Other
+## Other Attributes
 
 - {% aTargetBlank "https://htmx.org/attributes/hx-disinherit/", "hx-disinherit" %}
 
@@ -2183,6 +2198,42 @@ Note that many features of htmx will not work if JavaScript is disable.
   "non-form-submit" %}.
 
 - {% aTargetBlank "https://htmx.org/attributes/hx-vars/", "hx-vars" %}
+
+## JavaScript API
+
+In addition to supporting many new HTML attributes,
+htmx also provides a small JavaScript API.
+This is a set of JavaScript functions that are defined as
+properties on the global `htmx` object.
+
+TODO: Finish describing these!
+
+| Method                   | Description |
+| ------------------------ | ----------- |
+| `htmx.addClass`          |             |
+| `htmx.ajax`              |             |
+| `htmx.closest`           |             |
+| `htmx.config`            |             |
+| `htmx.createEventSource` |             |
+| `htmx.createWebSocket`   |             |
+| `htmx.defineExtension`   |             |
+| `htmx.find`              |             |
+| `htmx.findAll`           |             |
+| `htmx.logAll`            |             |
+| `htmx.logNone`           |             |
+| `htmx.logger`            |             |
+| `htmx.off`               |             |
+| `htmx.on`                |             |
+| `htmx.onLoad`            |             |
+| `htmx.parseInterval`     |             |
+| `htmx.process`           |             |
+| `htmx.remove`            |             |
+| `htmx.removeClass`       |             |
+| `htmx.removeExtension`   |             |
+| `htmx.takeClass`         |             |
+| `htmx.toggleClass`       |             |
+| `htmx.trigger`           |             |
+| `htmx.values`            |             |
 
 ## Debugging
 
