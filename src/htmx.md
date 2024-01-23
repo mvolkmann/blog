@@ -2206,34 +2206,108 @@ htmx also provides a small JavaScript API.
 This is a set of JavaScript functions that are defined as
 properties on the global `htmx` object.
 
-TODO: Finish describing these!
+| Method                   | Description                                                           |
+| ------------------------ | --------------------------------------------------------------------- |
+| `htmx.addClass`          | adds a CSS class to a given HTML element                              |
+| `htmx.ajax`              | sends an HTTP request and inserts the HTML response                   |
+| `htmx.closest`           | finds the closest ancestor element that matches a CSS selector        |
+| `htmx.config`            | object that holds htmx configuration options                          |
+| `htmx.createEventSource` | creates a Server-Sent Event (SSE) source                              |
+| `htmx.createWebSocket`   | creates a new WebSocket                                               |
+| `htmx.defineExtension`   | defines a new htmx extension                                          |
+| `htmx.find`              | finds one element that matches a CSS selector                         |
+| `htmx.findAll`           | finds all elements that match a CSS selector                          |
+| `htmx.logAll`            | logs all htmx events for debugging                                    |
+| `htmx.logNone`           | disables logging of htmx events                                       |
+| `htmx.logger`            | holds the function used to log htmx events; can change                |
+| `htmx.off`               | removes an event listener from an element                             |
+| `htmx.on`                | adds an event listener to an element                                  |
+| `htmx.onLoad`            | specifies a function to call when the `htmx:load` event is dispatched |
+| `htmx.parseInterval`     | returns the milliseconds represented by a time string (ex. 2s)        |
+| `htmx.process`           | processes the htmx attributes in a newly added element                |
+| `htmx.remove`            | removes an element from the DOM                                       |
+| `htmx.removeClass`       | removes a CSS class from an element                                   |
+| `htmx.removeExtension`   | removes an extension from htmx                                        |
+| `htmx.takeClass`         | modifies all sibling elements so only one has a given CSS class       |
+| `htmx.toggleClass`       | toggles the presence of a CSS class on an element                     |
+| `htmx.trigger`           | triggers an event on an element                                       |
+| `htmx.values`            | returns the input values present on a given element such as a `form`  |
 
-| Method                   | Description |
-| ------------------------ | ----------- |
-| `htmx.addClass`          |             |
-| `htmx.ajax`              |             |
-| `htmx.closest`           |             |
-| `htmx.config`            |             |
-| `htmx.createEventSource` |             |
-| `htmx.createWebSocket`   |             |
-| `htmx.defineExtension`   |             |
-| `htmx.find`              |             |
-| `htmx.findAll`           |             |
-| `htmx.logAll`            |             |
-| `htmx.logNone`           |             |
-| `htmx.logger`            |             |
-| `htmx.off`               |             |
-| `htmx.on`                |             |
-| `htmx.onLoad`            |             |
-| `htmx.parseInterval`     |             |
-| `htmx.process`           |             |
-| `htmx.remove`            |             |
-| `htmx.removeClass`       |             |
-| `htmx.removeExtension`   |             |
-| `htmx.takeClass`         |             |
-| `htmx.toggleClass`       |             |
-| `htmx.trigger`           |             |
-| `htmx.values`            |             |
+The `hx-get`, `hx-post`, `hx-put`, `hx-patch`, and `hx-delete` attribute
+send an HTTP request when the element they are on is "triggered".
+The `htmx.ajax` function is similar, but enables conditionally sending
+an HTTP request based on something other than user triggering.
+
+The following code from the file `public/index.html` renders a UI with
+a `button` that can be clicked to conditionally send an HTTP request
+and a `div` to display the result of the HTTP request.
+
+```js
+<html>
+  <head>
+    <title>Programmatic AJAX</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <script src="utils.js"></script>
+  </head>
+  <body>
+    <h1>Programmatic AJAX</h1>
+    <button onclick="maybeSend()">Send</button>
+    <div id="result"></div>
+  </body>
+</html>
+```
+
+The following code from the file `public/utils.js`
+defines a function that imposes a quota on the number of times
+an HTTP request can be sent to a specified endpoint.
+
+```js
+let quota = 3;
+
+function maybeSend() {
+  if (quota > 0) {
+    quota--;
+    htmx.ajax('GET', '/result', '#result');
+  } else {
+    const result = document.getElementById('result');
+    result.innerText = 'The call quota has been reached.';
+  }
+}
+```
+
+The following code from the file `src/index.js`
+defines a function that imposes a quota on the number of times
+an HTTP request can be sent to a specified endpoint.
+
+```js
+import {Hono} from 'hono';
+import type {Context} from 'hono';
+import {serveStatic} from 'hono/bun';
+
+const app = new Hono();
+
+// This serves static files from the public directory.
+app.use('/*', serveStatic({root: './public'}));
+
+let count = 0;
+app.get('/result', async (c: Context) => {
+  count++;
+  return c.text(`result #${count}`);
+});
+
+export default app;
+```
+
+The following screenshot shows the UI after the first button click.
+
+<img alt="htmx ajax function" style="width: 50%"
+  src="/blog/assets/htmx-ajax-function-1.png?v={{pkg.version}}">
+
+The following screenshot shows the UI after the fourth button click.
+
+<img alt="htmx ajax function" style="width: 50%"
+  src="/blog/assets/htmx-ajax-function-4.png?v={{pkg.version}}">
 
 ## Debugging
 
