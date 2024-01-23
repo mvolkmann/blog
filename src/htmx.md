@@ -2055,6 +2055,7 @@ This uses <a href="/blog/topics/#/blog/bun/" target="_blank">Bun</a> and
 the <a href="/blog/topics/#/blog/hono/" target="_blank">Hono</a> framework.
 
 The following code from the file `src/index.tsx` demonstrates this.
+Note how the data fetching logic is shared by the HTML and JSON endpoints.
 
 ```js
 // This is used by the endpoints that return JSON and HTML.
