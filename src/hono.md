@@ -48,7 +48,8 @@ Install the dependencies by entering `npm install` or `bun install`.
 
 Run the project by entering `npm run dev` or `bun run dev`.
 
-By default, the server listens on port 3000 and provide hot reloading.
+By default, the server listens on port 3000.
+It also provides hot reloading.
 
 ## Routes
 
@@ -219,6 +220,13 @@ app.use('/*', serveStatic({root: './public'}));
 app.route('/dog', dogRouter);
 
 export default app;
+```
+
+The port on which the server listens defaults to 3000.
+To listen on a different port, say 1234, change the last line to the following.
+
+```ts
+export default {port: 1234, fetch: app.fetch};
 ```
 
 ### public/styles.css
