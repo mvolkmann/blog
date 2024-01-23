@@ -896,14 +896,6 @@ the validation request will be sent first.
 If the validation succeeds then the submit request will be sent.
 Otherwise it will be aborted.
 
-One way to send an HTTP request that is not triggered by a user action
-is to call `htmx.ajax` in JavaScript code.
-The following code demonstrates doing this based on a condition.
-
-```js
-TODO: Add an example here. See programmatic-ajax example project.
-```
-
 ## URLs
 
 Htmx endpoints return HTML, not JSON.
@@ -2308,6 +2300,9 @@ The following screenshot shows the UI after the fourth button click.
 
 <img alt="htmx ajax function" style="width: 50%"
   src="/blog/assets/htmx-ajax-function-4.png?v={{pkg.version}}">
+
+See <a href="https://htmx.org/api/#ajax" target="_blank">htmx-ajax</a>
+for details on the arguments that can be passed to this function.
 
 ## Debugging
 
