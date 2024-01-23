@@ -1165,6 +1165,8 @@ because `load` is also one of the triggers.
 See the working example project at {% aTargetBlank
 "https://github.com/mvolkmann/htmx-examples/tree/main/todo-hono",
 "todo-hono" %}.
+This uses <a href="/blog/topics/#/blog/bun/" target="_blank">Bun</a> and
+the <a href="/blog/topics/#/blog/hono/" target="_blank">Hono</a> framework.
 
 ## Common Patterns
 
@@ -1311,6 +1313,8 @@ and returns nothing, effectively deleting that `div`.
 See the working example project at {% aTargetBlank
 "https://github.com/mvolkmann/htmx-examples/tree/main/todo-hono",
 "todo-hono" %}.
+This uses <a href="/blog/topics/#/blog/bun/" target="_blank">Bun</a> and
+the <a href="/blog/topics/#/blog/hono/" target="_blank">Hono</a> framework.
 
 <img alt="htmx Todo App" style="width: 50%"
   src="/blog/assets/htmx-todo-app.png?v={{pkg.version}}">
@@ -1683,7 +1687,8 @@ function TableRow(page: number, pokemon: Pokemon, isLast: boolean) {
 When there is a collection of items where only one can be selected at a time,
 the pattern below can be used. See the comments in the code.
 
-This code uses TypeScript and the Hono library,
+This code uses TypeScript and the
+<a href="/blog/topics/#/blog/hono/" target="_blank">Hono</a> framework,
 but the same pattern can be applied with other languages and libraries.
 
 <img alt="htmx Toggling Selection" style="width: 60%"
@@ -2015,6 +2020,8 @@ The other will have the CSS property `display: none` applied to it.
 See the working example at {% aTargetBlank
 "https://github.com/mvolkmann/htmx-examples/tree/main/todo-hono",
 "todo-hono" %}.
+This uses <a href="/blog/topics/#/blog/bun/" target="_blank">Bun</a> and
+the <a href="/blog/topics/#/blog/hono/" target="_blank">Hono</a> framework.
 
 <img alt="htmx Todo App" style="width: 50%"
   src="/blog/assets/htmx-todo-app.png?v={{pkg.version}}">
@@ -2023,6 +2030,54 @@ The Alpine directives `x-bind`, `x-data`, `x-on`, and `x-show`
 are used in `src/components.tsx`.
 Look for references to `editingId` in that file.
 This is an example of state that only belongs in the client.
+
+### HTML and JSON Endpoints
+
+In some cases it is useful to have endpoints that return the same data,
+but different formats ... such as HTML versus JSON.
+
+The {% aTargetBlank
+"https://github.com/mvolkmann/htmx-examples/tree/main/todo-hono",
+"todo-hono" %} app does this for retrieving all the current todos.
+This uses <a href="/blog/topics/#/blog/bun/" target="_blank">Bun</a> and
+the <a href="/blog/topics/#/blog/hono/" target="_blank">Hono</a> framework.
+
+The following code from the file `src/index.tsx` demonstrates this.
+
+```js
+// This is used by the endpoints that return JSON and HTML.
+function getAllTodos(): Todo[] {
+  return getAllTodosQuery.all() as Todo[];
+}
+
+// This endpoint returns all the todos as HTML.
+app.get('/todos', (c: Context) => {
+  const todos = getAllTodos();
+
+  // We could choose between returning JSON and HTML
+  // based on the value of the Accept header.
+  const accept = c.req.header('accept');
+  if (accept?.includes('application/json')) {
+    return c.json(todos);
+  }
+
+  return c.html(
+    <Layout>
+      <h1>To Do List</h1>
+      <p hx-get="/todos/status" hx-trigger="load, status-change from:body" />
+      <Err />
+      <TodoForm />
+      <TodoList todos={todos} />
+    </Layout>
+  );
+});
+
+// This endpoint returns all the todos as JSON.
+app.get('/todos/json', (c: Context) => {
+  const todos = getAllTodos();
+  return c.json(todos);
+});
+```
 
 ## HTTP Request Headers
 
