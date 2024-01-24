@@ -440,8 +440,9 @@ Good choices have tooling that supports the following:
 
 One tech stack that meets all these criteria is
 <a href="/blog/topics/#/blog/typescript/" target="_blank">TypeScript</a> with
-<a href="/blog/topics/#/blog/bun/" target="_blank">Bun</a> and
-<a href="/blog/topics/#/blog/hono/" target="_blank">Hono</a>.
+<a href="/blog/topics/#/blog/bun/" target="_blank">Bun</a>
+(Node.js alternative that supports generating HTML with JSX) and
+<a href="/blog/topics/#/blog/hono/" target="_blank">Hono</a> (HTTP library).
 
 Other popular tech stacks for htmx include:
 
@@ -453,6 +454,9 @@ Other popular tech stacks for htmx include:
 - Go with {% aTargetBlank "https://templ.guide", "templ" %}
 - Python with Flask (see the `render_template` function) or
   Django (see the `loader.get_template` and `template.render` methods)
+
+One downside of having many options is that there are no canonical examples
+of implementing endpoints for an htmx application.
 
 ## Browser Reload in Development
 
@@ -2201,6 +2205,7 @@ which can be used in place of this attribute.
 ## Validation
 
 TODO: Try this.
+
 The {% aTargetBlank "https://htmx.org/attributes/hx-validate/",
 "hx-validate" %} attribute causes an element to validate itself
 using the HTML5 Validation API before a request is sent.
@@ -2718,37 +2723,6 @@ For example:
 ```html
 _="on submit target.reset()"
 ```
-
-## Server-Side Options
-
-The server that responds to the HTTP requests triggered by
-interactions with HTML elements can be implemented using
-any programming language and any server framework.
-This is referred to as HowEver you Would Like (HOWL).
-A downside is that there are no canonical examples of
-implementing the backend services for an htmx application.
-
-Desirable characteristics include:
-
-- good performance
-- ability to construct HTML responses using some kind of templating
-  rather than string concatenation
-- editor tooling that can validate proper HTML elements, attributes, and nesting
-
-One option is to use
-{% aTargetBlank "https://bun.sh", "Bun" %} (Node.js alternative) and
-{% aTargetBlank "https://elysiajs.com", "ElysiaJS" %} (Express alternative).
-ElysiaJS supports constructing HTML using JSX syntax.
-JSX is only used to create strings of HTML.
-A virtual DOM is not used.
-
-When combined with {% aTargetBlank "https://turso.tech", "Turso" %}
-(SQLite deployed at the edge), this is referred to as the BETH stack
-(Bun, Elysia, Turso, and htmx).
-
-Another popular option is to use Python with either
-{% aTargetBlank "https://www.djangoproject.com", "Django" %} or
-{% aTargetBlank "https://flask.palletsprojects.com/", "Flask" %}.
 
 ## Mobile Apps
 
