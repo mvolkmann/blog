@@ -2755,11 +2755,7 @@ TODO: Read "The Valley of CODE" page above!
 
 ## Unorganized Content
 
-- Learn how to automatically refresh browser on code save.
-- Should you use auto focus for the new to do input?
-- Can you use JavaScript code in place of hyper script code?
-- Study how htmx supports dialogue boxes.
-- Study Alpine JS and consider using it with htmx.
+- Study how htmx supports dialog boxes.
 - Read essays by Carson Gross on the htmx website.
 
 - `hx-push-url="true"` provides history support so the back button
@@ -2775,22 +2771,10 @@ TODO: Read "The Valley of CODE" page above!
   This enables support for deep links.
   This is useful when htmx has replaced portions of a page.
 
-- Htmx can work with JavaScript disabled
-  by setting the `hx-boost="true"` attribute.
-  Does this need to be on the `body` element? How does this work?
-
 - See unpoly.com which is a competitor to htmx.
   Supposedly it is better at progressive enhancement.
-
-- Learn about hx-boost.
 
 - See https://www.npmjs.com/package/@jop-software/hx-chart.
 
 - See HoTMiXer for starting new htmx projects at
   https://www.npmjs.com/package/hotmixer
-
-- patterns to document:
-  - redirecting to another endpoint
-  - input validation using an HTTP request (see email-validation app)
-  - infinite scroll
-  - type-ahead
