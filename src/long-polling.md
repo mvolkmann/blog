@@ -250,7 +250,7 @@ The following `package.json` file can be used to start the Bun server.
 }
 ```
 
-To run this demo, enter `bun install`, enter `bun run dev`,
+To run this demo, enter `bun install`, enter `bun dev`,
 and browse localhost:3000.
 
 ## Alternatives

@@ -46,7 +46,7 @@ and will contain the following files:
 
 Install the dependencies by entering `npm install` or `bun install`.
 
-Run the project by entering `npm run dev` or `bun run dev`.
+Run the project by entering `npm run dev` or `bun dev`.
 
 By default, the server listens on port 3000.
 It also provides hot reloading.

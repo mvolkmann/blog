@@ -617,7 +617,7 @@ add the following script in `package.json`:
     "dev": "bun --watch index.ts"
 ```
 
-Then start the server with `bun run dev`.
+Then start the server with `bun dev`.
 
 To patch the code in place when code changes are detected
 and not restart the server, use the `--hot` flag in place of `--watch`.
@@ -1137,7 +1137,7 @@ To create a new Bun project that uses ElysiaJS:
   and can be `.` to create the project in the current directory.
 
 - `cd project-name`
-- `bun run dev` provides hot reloading
+- `bun dev` provides hot reloading
 - browse localhost:3000
 
 To define new routes in the project ...
