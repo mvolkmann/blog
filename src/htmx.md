@@ -1268,6 +1268,9 @@ or the message "email in use".
 The returned string is used at the content of the `span` element
 that follows the `input` element.
 
+<img alt="htmx Input Validation" style="width: 50%"
+  src="/blog/assets/htmx-input-validation.png?v={{pkg.version}}">
+
 ```html
 <label for="email">Email</label>
 <input
@@ -1465,15 +1468,18 @@ The full project can be found in {% aTargetBlank
 
 In particular, see the `hx-` attributes on the `input` element below.
 
-```js
-import {Elysia} from 'elysia';
-import {html} from '@elysiajs/html'; // enables use of JSX
-import {staticPlugin} from '@elysiajs/static'; // enables static file serving
-import {Html} from '@kitajs/html';
+<img alt="htmx Active Search" style="width: 30%"
+  src="/blog/assets/htmx-active-search.png?v={{pkg.version}}">
 
-const app = new Elysia();
-app.use(html());
-app.use(staticPlugin());
+```js
+import {Context, Hono} from 'hono';
+import {serveStatic} from 'hono/bun';
+import type {FC} from 'hono/jsx';
+
+const app = new Hono();
+
+// Serve static files from the public directory.
+app.use('/*', serveStatic({root: './public'}));
 
 const names: string[] = [
   'Amanda',
@@ -1487,55 +1493,57 @@ const names: string[] = [
   'Tami'
 ];
 
-const BaseHtml = ({children}: {children: Html.Children}) => (
+const Layout: FC = ({children}) => (
   <html>
     <head>
-      <title>htmx Active Search</title>
-      <link href="/public/tailwind.css" rel="stylesheet" />
-      <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+      <title>HTMX Active Search</title>
+      <link href="/tailwind.css" rel="stylesheet" />
+      <script src="https://unpkg.com/htmx.org@1.9.9"></script>
     </head>
     <body class="p-8">{children}</body>
   </html>
 );
 
-app.get('/', () => {
-  return (
-    <BaseHtml>
+app.get('/', (c: Context) => {
+  return c.html(
+    <Layout>
       <main>
         <label class="font-bold mr-4" for="name">
           Name
         </label>
         <input
-          autofocus="true"
+          autofocus
           class="border border-gray-500 p-1 rounded-lg"
-          hx-post="/search"
           hx-trigger="keyup changed delay:200ms"
+          hx-post="/search"
           hx-target="#matches"
+          hx-swap="innerHTML"
           name="name"
-          size="10"
+          size={10}
         />
         <ul id="matches" />
       </main>
-    </BaseHtml>
+    </Layout>
   );
 });
 
-type Body = {name: string};
-app.post('/search', ({body}) => {
-  const lowerName = (body as Body).name.toLowerCase();
-  if (lowerName == '') return '';
+app.post('/search', async (c: Context) => {
+  const data = await c.req.formData();
+  const name = (data.get('name') as string) || '';
+  if (name == '') return c.html('');
+
+  const lowerName = name.toLowerCase();
   const matches = names.filter(n => n.toLowerCase().includes(lowerName));
-  return (
-    <ul>
+  return c.html(
+    <>
       {matches.map(name => (
         <li>{name}</li>
       ))}
-    </ul>
+    </>
   );
 });
 
-app.listen(1919);
-console.log('listening on port', app.server?.port);
+export default app;
 ```
 
 ### Optimistic Updates
