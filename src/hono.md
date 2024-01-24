@@ -85,14 +85,15 @@ and `res` (a `Response` object defined by the Fetch API).
 The most useful methods on the `c.req` object
 are described in the following table.
 
-| Action                       | Code                                     |
-| ---------------------------- | ---------------------------------------- |
-| get value of request header  | `c.req.header('Some-Name')`              |
-| get value of path parameter  | `c.req.param('some-name')`               |
-| get value of query parameter | `c.req.query('some-name')`               |
-| get value of text body       | `const text = await c.req.text();`       |
-| get value of form body       | `const object = await c.req.formData();` |
-| get value of JSON body       | `const object = await c.req.json();`     |
+| Action                       | Code                                                          |
+| ---------------------------- | ------------------------------------------------------------- |
+| get value of request header  | `c.req.header('Some-Name')`                                   |
+| get value of path parameter  | `c.req.param('some-name')`                                    |
+| get value of query parameter | `c.req.query('some-name')`                                    |
+| get value of text body       | `const text = await c.req.text();`                            |
+| get `FormData` from body     | `const formData = await c.req.formData();`                    |
+| get property from `formData` | `const value = (formData.get('property') as string) \|\| '';` |
+| get value of JSON body       | `const object = await c.req.json();`                          |
 
 The most useful methods on the `Context` object
 are described in the following table.

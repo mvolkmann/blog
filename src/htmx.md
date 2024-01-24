@@ -1118,6 +1118,9 @@ an element with the same id should be replaced by this element.
 The element being replaced does not need to have the `hx-swap-oob` attribute,
 just a matching `id` value.
 
+In this context, "out-of-band" means
+outside the target specified with `hx-target`.
+
 For example, a todo app can display
 the number of uncompleted todos and the total number of todos.
 Adding a new todo, deleting a todo, and toggling the completed state of a todo
