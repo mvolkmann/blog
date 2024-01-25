@@ -15,7 +15,7 @@ layout: topic-layout.njk
 Polling is a technique that web clients can use
 to get changing data from a server.
 The easiest way to implementing polling is to
-sends requests to a server at fixed time intervals,
+send requests to a server at fixed time intervals,
 such as once every 30 seconds.
 
 Polling is useful in many scenarios such as getting updates to
@@ -29,7 +29,7 @@ because many consecutive requests can result in the same response.
 Long polling addresses the issues with fixed interval polling.
 The client sends an initial request for data.
 The server does not respond until there is a change in the data to be reported.
-When the client receives the data, it immediately requests another update.
+When the client receives the data, it immediately requests the next update.
 
 All the example code below can be found in the GitHub repository
 {% aTargetBlank "https://github.com/mvolkmann/long-polling-examples",
