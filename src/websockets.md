@@ -4,6 +4,9 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+<img alt="WebSocket logo" style="width: 30%"
+  src="/blog/assets/websocket-logo.svg?v={{pkg.version}}">
+
 ## Overview
 
 {% aTargetBlank

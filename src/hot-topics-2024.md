@@ -379,6 +379,9 @@ target="_blank">Server-Sent Events</a> blog page.
 
 ## WebSockets
 
+<img alt="WebSocket logo" style="border: 0; width: 20%"
+  src="/blog/assets/websocket-logo.svg?v={{pkg.version}}">
+
 <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocket_client_applications"
 target="_blank">WebSockets</a> are a standardized protocol for
 two-way communication between clients and servers using TCP.
