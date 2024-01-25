@@ -3,7 +3,7 @@ It includes a JavaScript runtime, package manager, bundler, and test runner.
 All of this is free and open source.
 
 Bun can be used as a drop-in replacement for npm and Node.js.
-The Bun runtime supports nearly all Node.js builtin modules.
+The Bun runtime supports nearly all Node.js built-in modules.
 
 Bun works with nearly all major web frameworks including
 Next.js, SvelteKit, Astro, Nuxt, and Fastify.
@@ -30,9 +30,9 @@ The benefits of using Bun over npm and Node.js include:
   in the same source files.
 - Bun supports TypeScript out of the box.
 - Bun supports JSX/TSX files for generating HTML using React.
-- Bun has builtin support for SQLite databases using the `bun:sqlite` module.
+- Bun has built-in support for SQLite databases using the `bun:sqlite` module.
   Future support for MySQL and Postgres is planned.
-- Bun has builtin support for Jest-compatible unit tests.
+- Bun has built-in support for Jest-compatible unit tests.
 - Bun has better support for Web APIs including
   `fetch`, `Request`, `Response`, `ReadableStream`, `WebSocket`, and more.
   There is no need to install dependencies such as `node-fetch` and `ws`.

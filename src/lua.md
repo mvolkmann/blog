@@ -437,7 +437,7 @@ are never specified and are always inferred.
 
 Primitive type conversions are supported by
 the `tonumber` and `tostring` functions.
-There are no builtin functions for converting
+There are no built-in functions for converting
 a boolean to a number, a number to a boolean, or a string to a boolean.
 
 The only values treated as `false` in conditions are `false` and `nil`.
@@ -2317,7 +2317,7 @@ The `oo` module can be defined as follows:
 ```lua
 local M = {}
 
--- This adds a function to the builtin `string` module.
+-- This adds a function to the built-in `string` module.
 function string.startsWith(source, target)
   -- 1 is the index at which to start the search.
   -- true turns off use of patterns which improves performance.

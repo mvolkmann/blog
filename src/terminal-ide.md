@@ -62,7 +62,7 @@ If you are new to Vim, checkout {% aTargetBlank
 
 ### Spell Checking
 
-Spell checking is a builtin feature of Vim, but it is not enabled by default
+Spell checking is a built-in feature of Vim, but it is not enabled by default
 in Vim, Neovim, or AstroNvim.
 
 To enable spell checking in Vim, add the following in your `.vimrc` file:
@@ -1383,7 +1383,7 @@ return {
 | `gcO` | inserts line comment below                    |
 | `gcA` | inserts line comment at end of line           |
 
-Entering `gcc` as the same effect as the builtin mapping `<leader>/`.
+Entering `gcc` as the same effect as the built-in mapping `<leader>/`.
 
 #### Emmet
 
@@ -1680,7 +1680,7 @@ return {
 }
 ```
 
-I prefer to always use `Bwipeout` in places of the builtin `bdelete` command.
+I prefer to always use `Bwipeout` in places of the built-in `bdelete` command.
 To do this, enter `:Bw` in place of `:bd`.
 
 ### AstroNvim Community

@@ -5955,7 +5955,7 @@ much longer than the actual processing time.
 
 ### Downloading a File
 
-There is no builtin function for downloading a file
+There is no built-in function for downloading a file
 containing generated text.
 This is useful in situations like generating CSV.
 

@@ -332,7 +332,7 @@ error messages that are output by Scryer Prolog.
   a rule body whose last goal is terminated by a comma instead of a period or
   a rule body goal that is not the last one and is not followed by a comma.
 
-  This error can also occur when a goal uses a non-builtin operator
+  This error can also occur when a goal uses a non-built-in operator
   that has not been loaded.
   For example, using the `#=` requires loading the `clpz` library.
 
@@ -1047,7 +1047,7 @@ For details on the `double_quotes` flag, see the [Strings](#strings) section.
 Scryer prolog supports the following flags: `bounded`, `double_quotes`,
 `integer_rounding_function`, `max_arity`, `max_integer`, `min_integer`,
 `occurs_check`, and `unknown`.
-These are documented in the source file `src/lib/builtins.pl`.
+These are documented in the source file `src/lib/built-ins.pl`.
 before the clauses for `current_prolog_flag`.`
 
 SWI-Prolog supports many more flags. These are documented at
@@ -1180,7 +1180,7 @@ For example, `a(b, c(d, e), f)` can be represented as the following tree:
 
 ### Booleans
 
-Prolog represents Boolean values with the builtin predicates
+Prolog represents Boolean values with the built-in predicates
 `true` (always succeeds) and `false` (same as `fail` and always fails).
 
 Rather than writing a rule that sets an argument to `true` or `false`,
@@ -3649,7 +3649,7 @@ call(Term). % evaluates term
 
 Prolog provides `throw` and `catch` predicates for error handling.
 
-The following builtin error types are provided
+The following built-in error types are provided
 (copied from {% aTargetBlank
 "https://sicstus.sics.se/sicstus/docs/3.12.11/html/sicstus/Exception.html",
 "SICStus Error and Exception Handling" %}):

@@ -21,7 +21,7 @@ selectors that only target specific HTML elements.
 Web frameworks that have built-in support for CSS scoping such as
 Svelte and Vue have no need for CSS Modules.
 CSS Modules are mostly commonly used in React
-and web frameworks builtin on React such as Next.js.
+and web frameworks built-in on React such as Next.js.
 
 ## Installing
 

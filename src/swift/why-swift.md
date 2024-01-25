@@ -286,7 +286,7 @@ because they can be inferred based on the types the caller passes.
 
 ## Collections
 
-The most commonly used builtin collection types are
+The most commonly used built-in collection types are
 `Array`, `Dictionary`, `Set`, and tuples.
 Each of these specifies the types of the items it can contain,
 and each has a literal syntax.
@@ -583,7 +583,7 @@ a shallow copy is created. Technically a copy is not made until
 there is an attempt to modify it using a "copy on write" strategy.
 
 Structs are used far more frequently than classes in typical Swift code.
-Nearly all builtin types are structs, including `Bool`, `Int`, `Double`,
+Nearly all built-in types are structs, including `Bool`, `Int`, `Double`,
 `Character`, `String`, `Array`, `Set`, `Dictionary`, `Range`, and `Date`.
 
 Here is an example of defining a struct, creating an instance, and using it.
@@ -778,7 +778,7 @@ which makes them "closures".
 Typically closures are passed as arguments to other functions.
 
 Here are examples of passing a closure to the `reduce` method
-of the builtin `Array` struct.
+of the built-in `Array` struct.
 
 ```swift
 let numbers = [1, 2, 3, 4]
@@ -848,7 +848,7 @@ print(countOccurrences(in: dogNames, of: "a")) // 3
 ## Extensions
 
 Extensions add methods and computed properties to existing types,
-even builtin types.
+even built-in types.
 
 Here is an example of an extension that adds computed properties
 to the `Date` type and accesses them on a `Date` instance.

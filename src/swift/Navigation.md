@@ -158,7 +158,7 @@ and displays information about that author.
 Unlike in the Fruits tab, a `path` is passed to `NavigationStack`.
 This can be an instance of `NavigationPath` or any array of any type
 whose values conform to the `Codable` and `Hashable` protocols.
-Many builtin types such as `String` already conform to both of these protocols.
+Many built-in types such as `String` already conform to both of these protocols.
 
 It seems the `NavigationStack` is only populated when
 the `NavigationLink` instances supply the `value` argument.

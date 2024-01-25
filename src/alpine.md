@@ -215,7 +215,7 @@ Alpine 3.13.3 supports 18 directives that are each described below.
 These are used as attributes on HTML elements.
 
 Some directives accept a string of JavaScript code as their value.
-The JavaScript code can call builtin and custom JavaScript functions.
+The JavaScript code can call built-in and custom JavaScript functions.
 
 If embedding JavaScript code as the value of an Alpine directive
 seems to make the HTML too cluttered, there is the option to

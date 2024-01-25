@@ -7958,7 +7958,7 @@ For details, see {% aTargetBlank
 However, the stable version of Rust can be used with the master branch of Rocket
 if that is specified in the `rocket` dependency.
 
-Rocket includes builtin support for accessing the following databases:
+Rocket includes built-in support for accessing the following databases:
 Memcache, MongoDB, MySQL, Neo4J, PostgreSQL, Redis, and SQLite.
 
 The {% aTargetBlank "https://rocket.rs/v0.4/guide/configuration/",

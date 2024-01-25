@@ -59,7 +59,7 @@ You can then decide whether you app should be reading that file
 before running it again with permission granted.
 The permission flags are covered in more detail later.
 
-Deno has builtin support for TypeScript.
+Deno has built-in support for TypeScript.
 It automatically compiles TypeScript code to JavaScript before running it,
 making it unnecessary to define a build process to do this.
 
@@ -585,11 +585,11 @@ enter `deno info {module-url}`.
 
 ## Generating Documentation
 
-The `deno doc` command writes documentation for builtin types
+The `deno doc` command writes documentation for built-in types
 and local source files to stdout.
 
 For example, to see documentation on the `Deno.read` function,
-enter `deno doc --builtin Deno.read`.
+enter `deno doc --built-in Deno.read`.
 To see documentation for the local source file `demo.ts`,
 enter `deno doc demo.ts`.
 
@@ -859,7 +859,7 @@ has links to documentation for all three categories at the top of the page.
 ## Built-ins
 
 For documentation on the built-in functions, see the
-{% aTargetBlank "https://doc.deno.land/builtin/stable", "Runtime API" %}.
+{% aTargetBlank "https://doc.deno.land/built-in/stable", "Runtime API" %}.
 
 These include the following from the Web API:
 
@@ -1400,7 +1400,7 @@ To run this, enter `deno run --allow-env --allow-read --unstable use_node.js`.
 
 Deno provides polyfills for some Node packages.
 See the list at {% aTargetBlank
-"https://deno.land/std@0.79.0/node#supported-builtins", "Supported Builtins" %}.
+"https://deno.land/std@0.79.0/node#supported-built-ins", "Supported Builtins" %}.
 Use the `require` function to load these.
 For example, to load the `path` polyfill:
 

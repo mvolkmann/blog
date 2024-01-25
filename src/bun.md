@@ -16,7 +16,7 @@ It includes a JavaScript runtime, package manager, bundler, and test runner.
 All of this is free and open source under the MIT license.
 
 Bun can be used as a drop-in replacement for npm and Node.js.
-The Bun runtime supports nearly all Node.js builtin modules (around 40 of them).
+The Bun runtime supports nearly all Node.js built-in modules (around 40 of them).
 Rarely used modules such as dgram, http2, inspector, and repl
 are not yet supported.
 The v8 module is specific to Webkit which Bun does not use.
@@ -33,11 +33,11 @@ The benefits of using Bun over npm and Node.js include:
   in the same source files.
 - Bun supports TypeScript out of the box.
 - Bun supports JSX/TSX files for generating HTML.
-- Bun has builtin support for SQLite databases using the `bun:sqlite` module.
+- Bun has built-in support for SQLite databases using the `bun:sqlite` module.
   It is 2 times faster than Deno and 4 times faster than Node.js
   in queries per second.
   Future support for MySQL and Postgres is planned.
-- Bun has builtin support for Jest-compatible unit tests
+- Bun has built-in support for Jest-compatible unit tests
   using the `bun:test` module.
 - Bun has better support for Web APIs including
   `fetch`, `Request`, `Response`, `ReadableStream`, `WebSocket`, and more.
@@ -365,7 +365,7 @@ Bun.build({
 
 ## Unit Tests
 
-Bun has builtin support for implementing and running unit tests
+Bun has built-in support for implementing and running unit tests
 that are mostly compatible with Jest.
 
 Suppose we have the following code in the file `math.ts`:
@@ -569,7 +569,7 @@ Highlights include:
 
 ## HTTP Server
 
-Bun has builtin support for implementing HTTP servers
+Bun has built-in support for implementing HTTP servers
 using the `Bun.serve` function.
 
 To implement a basic HTTP server, create a Bun project and
@@ -655,7 +655,7 @@ Even if it isn't, the browser will wait for it.
 
 ## Environment Variables
 
-Bun has builtin support for getting environment variable values
+Bun has built-in support for getting environment variable values
 from the file `.env`.
 For example, suppose this file contains `NAME=Mark`.
 The value `Mark` can be obtained with `process.env.NAME` or `Bun.env.NAME`.
@@ -895,7 +895,7 @@ For more detail see {% aTargetBlank "https://bun.sh/docs/api/glob", "Glob" %}.
 
 ## WebSockets
 
-Bun has builtin support for WebSockets.
+Bun has built-in support for WebSockets.
 
 The following code in the file `ws-server.ts`
 demonstrates writing a WebSocket server.
@@ -972,7 +972,7 @@ Enter any text in the input and click the "Send" button.
 
 ## SQLite
 
-Bun has builtin support for SQLite databases.
+Bun has built-in support for SQLite databases.
 However, it does not install SQLite.
 For macOS, SQLite can be installed using Homebrew.
 

@@ -2233,7 +2233,7 @@ For example, we can't define a "ProgressBar" component and then
 render it with HTML like `<ProgressBar value={value} max={100} />`.
 
 One solution is to use <a href="/blog/bun" target="_blank">Components</a>
-which has builtin support for JSX.
+which has built-in support for JSX.
 This enables writing JavaScript functions that act like React components
 (minus support for hooks and DOM diffing), taking props and returning JSX.
 Bun can be combined with a server framework like

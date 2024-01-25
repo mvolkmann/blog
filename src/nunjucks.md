@@ -97,7 +97,7 @@ For example:
 Nunjucks can render the result of passing a value through a filter.
 There are many provided filters and custom filters can be implemented.
 The provided filters are documented at
-[Builtin Filters](https://mozilla.github.io/nunjucks/templating.html#builtin-filters).
+[Builtin Filters](https://mozilla.github.io/nunjucks/templating.html#built-in-filters).
 They include `abs`, `batch`, `capitalize`, `center`, `default`,
 `dictsort`, `dump`, `escape`, `first`, `float`, `forceescape`,
 `groupby`, `indent`, `int`, `join`, `last`, `length`, `list`,

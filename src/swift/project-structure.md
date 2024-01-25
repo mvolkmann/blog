@@ -22,7 +22,7 @@ Recommended group names include:
 
 - Extensions
 
-  This group contains files that define extensions to builtin structs
+  This group contains files that define extensions to built-in structs
   like `Date`, `String`, and `View`.
   These tend to be copied from project to project as they evolve.
   The names of files in this group should end with "Extension".

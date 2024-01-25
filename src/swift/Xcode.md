@@ -890,7 +890,7 @@ This will insert `Image(systemName: "{symbol-name}")`.
 
 ## Source Control (Git)
 
-Xcode has excellent builtin support for
+Xcode has excellent built-in support for
 source control (aka version control) using Git.
 There are two main places where Git operations are initiated,
 the "Source Control" menu and the "Source Control Navigator".

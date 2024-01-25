@@ -30,8 +30,8 @@ are coming in version 0.11.0.
 
 Nunjucks provides the following filters documented at
 {% aTargetBlank
-  'https://mozilla.github.io/nunjucks/templating.html#builtin-filters',
-  'builtin-filters'
+  'https://mozilla.github.io/nunjucks/templating.html#built-in-filters',
+  'built-in-filters'
 %}:
 `abs`, `batch`, `capitalize`, `center`, `default`, `dictsort`,
 `dump`, `escape`, `first`, `float`, `forceescape`, `groupby`,

@@ -123,7 +123,7 @@ See {% aTargetBlank
 
 ## Linting
 
-PHP has a builtin code linter.
+PHP has a built-in code linter.
 To run it, enter `php -l {filename}.php` or `php -l *.php`.
 
 ## Code Formatting
@@ -192,13 +192,13 @@ Variable names are case-sensitive, but class and function names are not.
 
 Names of constants are typically all uppercase.
 
-The builtin function `isset` function returns a boolean
+The built-in function `isset` function returns a boolean
 that indicates whether a variable has be set.
 For example, `isset($someName)`.
 
 ## Builtin Data Types
 
-The PHP builtin data types are
+The PHP built-in data types are
 Boolean, Integer, Float, String,
 Array, Object, `NULL`, and Resource.
 
@@ -617,7 +617,7 @@ To get the value of a query parameter, use `$_GET['name']`.
 To get the value of a form parameter, use `$_POST['name']`.
 To get the value of a session variable, use `$_SESSION['name']`.
 To determine if any of these have been set,
-pass the syntax above to the builtin `isset` function.
+pass the syntax above to the built-in `isset` function.
 
 To set a cookie, call `setcookie('name', value)`.
 To set a cookie with a time to live (TTL), add a third argument
@@ -643,7 +643,7 @@ and each name and value are separated by an `=` character.
 For example, `?make=MINI&model=Cooper&year=2015`.
 
 To get the value of a query parameter, use `$_GET['someName']`.
-The builtin function `isset` can be used to
+The built-in function `isset` can be used to
 determine if a query parameter is set.
 For example, `isset($_GET['someName'])`.
 
