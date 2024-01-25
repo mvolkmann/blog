@@ -35,8 +35,8 @@ Alpine provides reactivity similar to larger frameworks
 like React, Svelte, and Vue.
 Changes to data (aka state) maintained by Alpine trigger DOM updates.
 
-The minified Alpine library for version 3.13.3,
-which is the latest as of December 2023, is only 17K.
+The minified Alpine library for version 3.13.5,
+which is the latest as of January 2024, is only 17K.
 
 Here's a quick example of implementing a counter.
 The `x-data` attribute declares state with a JavaScript object.

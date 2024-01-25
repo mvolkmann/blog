@@ -30,8 +30,8 @@ Quoting Caleb, "Alpine.js offers you the reactive and declarative nature
 of big frameworks like Vue or React at a much lower cost.
 You get to keep your DOM, and sprinkle in behavior as you see fit."
 
-The minified Alpine library for version 3.13.3,
-which is the latest as of December 2023, is only 17K.
+The minified Alpine library for version 3.13.5,
+which is the latest as of January 2024, is only 17K.
 
 To use this, add the following `script` tag:
 
