@@ -80,6 +80,19 @@ Path parameter names can also include a regular expression.
 For example: `'/population/:state{[0-9]*}'`
 TODO: When is this useful?
 
+The callback functions passed to routes must return a `Response` object.
+This is typically done by returning the result of a call to
+`c.text`, `c.json`, or `c.html`.
+
+It is also possible to override the route methods to simplify the code.
+For example instead of having the callback functions return a `Response` object,
+they could return a string (which could automatically use `c.text`),
+JSX (which could automatically use `c.html`), or
+any other kind of value (which could automatically use `c.json`).
+This idea is implemented in code found in the issue {% aTargetBlank
+"https://github.com/honojs/hono/issues/2037#issuecomment-1910957072",
+"endpoints returning raw values" %}.
+
 ## Context
 
 The `Context` object that is passed to routes has many properties and methods.
