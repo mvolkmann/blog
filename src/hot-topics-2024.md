@@ -379,10 +379,105 @@ target="_blank">WebSockets</a> blog page.
 
 ## Zig
 
+<a href="https://ziglang.org" target="_blank">Zig</a>
+is a free, open source (MIT license),
+high performance, systems programming language.
+It is a modern alternative to C with similar syntax
+such as statements terminated with semicolons and conditions in parentheses.
+
+Interest in Zig increased due to its use in the implementation of
+<a href="https://bun.sh" target="_blank">Bun</a>, a JavaScript/TypeScript
+run-time and toolchain.
+Bun has many advantages over Node.js and Deno including much better performance.
+
+Zig provides a complete, LLVM-based toolchain for creating, developing,
+building, and testing apps written in Zig, C, and C++.
+There are advantages to building apps with the Zig compiler
+even if they have no Zig code and only use C and/or C++ code.
+
+Zig is suitable for applications that care deeply about
+performance, memory usage, and/or binary size.
+Often these concerns justify the tedium of
+manual memory management that is required
+due to lack of automated garbage collection.
+
+A major appeal of Zig is that it is simpler than C++ and Rust and safer than C.
+However, Zig does not provide the same level of memory safety as Rust.
+
+Zig emphasizes:
+
+- No hidden control flow
+
+  Examples of hidden control flow in other languages include
+  exception handling, operator overloading, destructors, and decorators.
+
+- No hidden memory allocations
+
+  All memory allocation is performed by allocators that the developer selects.
+  Each kind of allocator implements a different allocation strategy.
+  Zig does not support closures, so allocations do not outlive their scope.
+
+- No preprocessors or macros
+
+  In place of these, Zig uses code that runs at compile-time,
+  indicated by the `comptime` keyword.
+
+- Having only one way to accomplish each task.
+
+Zig includes:
+
+- a package manager
+- a build system that is simpler that the
+  combinations of build tools typically used with C and C++
+- a build system API (used in `build.zig` files)
+- cross-compilation support
+- a test runner
+- ability to target all platforms supported by LLVM, including WebAssembly
+
+Zig is not an object-oriented (OO) programming language.
+There is no support for defining classes, using inheritance,
+or using polymorphism.
+However, Zig does support defining structs with methods
+and for many applications that is close enough to OO.
+
+Andrew Kelly began work on Zig in August, 2015 (first commit).
+The first public release was in February, 2016.
+
+Despite still being in beta, it has been adopted by many projects.
+The current version of Zig is 0.11.0.
+Zig is expected to reach 1.0 in 2025, after 10 years of work.
+Rust took nine years to reach 1.0, so the time frames are similar.
+
 For more detail, see my
 <a href="/blog/topics/#/blog/zig/" target="_blank">Zig</a> blog page.
 
 ## Zod
+
+<a href="https://zod.dev" target="_blank">Zod</a>
+is a TypeScript library for validating values.
+It is commonly used to validate HTTP requests, including
+request headers, path parameters, query parameters, and request bodies.
+
+For example:
+
+```ts
+// Validate that a path parameter value is a positive number.
+const idSchema = z.object({
+  id: z.coerce.number().positive()
+});
+const idValidator = zValidator('param', idSchema);
+app.delete('/todos/:id', idValidator, (c: Context) => { ...});
+
+// Validate that a request body holds a form property
+// named "description" whose value is a non-empty string.
+const todoSchema = z
+  .object({
+    description: z.string().min(1)
+  })
+  .strict(); // no extra properties allowed
+const todoValidator = zValidator('form', todoSchema);
+app.post('/todos', todoValidator, async (c: Context) => { ... });
+```
 
 For more detail, see my
 <a href="/blog/topics/#/blog/zod/" target="_blank">Zod</a> blog page.
