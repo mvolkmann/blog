@@ -262,6 +262,46 @@ For more detail, see my
 
 Of all the topics in my list, this one excites me the most!
 
+<a href="https://htmx.org" target="_blank">Htmx</a>
+is a hypermedia-oriented, client-side JavaScript library.
+Hypermedia is any data format that can describe
+branching from one "media" (ex. a document) to another.
+A hypermedia control is an element that describes a server interaction
+such as HTML anchor (`a`) and `form` elements.
+
+Htmx adds support for new HTML attributes that make HTML more expressive.
+These attributes enable implementing "Hypermedia-Driven Applications" (HDAs).
+
+The new HTML attributes support responding to
+any kind of interaction (ex. click) with any HTML element
+by sending an HTTP request using any method (GET, POST, PUT, PATCH, or DELETE).
+The response must contain HTML or plain text, not JSON.
+Rather than performing a complete page refresh, the returned HTML
+replaces an existing DOM element or is inserted relative to one.
+
+Htmx removes the need to serialize data to JSON on the server,
+parse the JSON on the client, and build an HTML representation from the data.
+
+The server endpoints can be implemented using
+any programming language and server framework.
+This is referred to as "Hypermedia On Whatever you'd Like" (HOWL).
+
+The server typically plays two roles.
+First, it serves static files such as HTML, CSS, JavaScript, and images.
+Second, it responds to HTTP requests by returning HTML or text.
+
+Many web app features typically thought to require custom JavaScript code
+can instead be implemented with only htmx.
+Examples include lazy loading of data, infinite scrolling,
+and searching while the user types in an `input`.
+
+Users perceive apps built with htmx to be fast because
+the initial page load only requires
+the htmx library (< 17K) and the initial HTML/CSS to render.
+Subsequent interactions only require fetching snippets of HTML or text.
+No client-side hydration of JavaScript code is needed.
+Browsers are very efficient at updating the DOM from strings of HTML.
+
 For more detail, see my
 <a href="/blog/topics/#/blog/htmx/" target="_blank">htmx</a> blog page.
 

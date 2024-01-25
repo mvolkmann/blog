@@ -31,10 +31,10 @@ such as HTML anchor (`a`) and `form` elements.
 Htmx adds support for new HTML attributes that make HTML more expressive.
 These attributes enable implementing "Hypermedia-Driven Applications" (HDAs).
 
-The new HTML attributes enable responding to
+The new HTML attributes support responding to
 any kind of interaction (ex. click) with any HTML element
 by sending an HTTP request using any method (GET, POST, PUT, PATCH, or DELETE).
-The response must contain HTML.
+The response must contain HTML or plain text, not JSON.
 Rather than performing a complete page refresh, the returned HTML
 replaces an existing DOM element (transclusion) or is inserted relative to one.
 
@@ -44,12 +44,13 @@ parse the JSON on the client, and build an HTML representation from the data.
 <img alt="hypermedia driven applications" style="border: none; width: 70%"
   src="/blog/assets/hypermedia-driven-applications.png?v={{pkg.version}}">
 
-The server can be implemented using
+The server endpoints can be implemented using
 any programming language and server framework.
 This is referred to as "Hypermedia On Whatever you'd Like" (HOWL).
+
 The server typically plays two roles.
 First, it serves static files such as HTML, CSS, JavaScript, and images.
-Second, it responds to HTTP requests by returning HTML.
+Second, it responds to HTTP requests by returning HTML or text.
 
 Many web app features typically thought to require custom JavaScript code
 can instead be implemented with only htmx.
@@ -61,8 +62,8 @@ is either static or server-rendered makes it great for SEO.
 
 Users perceive apps built with htmx to be fast because
 the initial page load only requires
-the htmx library (< 17K) and the initial HTML to render.
-Subsequent interactions only require fetching snippets of HTML.
+the htmx library (< 17K) and the initial HTML/CSS to render.
+Subsequent interactions only require fetching snippets of HTML or text.
 No client-side hydration of JavaScript code is needed.
 Browsers are very efficient at updating the DOM from strings of HTML.
 
