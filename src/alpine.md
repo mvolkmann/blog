@@ -20,6 +20,8 @@ layout: topic-layout.njk
 "{% aTargetBlank "https://alpinejs.dev", "Alpine" %}
 is a lightweight JavaScript framework that
 uses custom HTML attributes to add dynamic behavior.
+Alpine is notable for how easy it is to use and
+how small it is compared to other web frameworks.
 
 Alpine was created by Caleb Porzio.
 He also created {% aTargetBlank "https://laravel-livewire.com", "Livewire" %},

@@ -25,6 +25,8 @@ Here are my top picks, presented in alphabetical order.
 
 Alpine is a JavaScript framework that provides custom attributes that are
 applied to HTML elements in order to add dynamic behavior to web pages.
+Alpine is notable for how easy it is to use and
+how small it is compared to other web frameworks.
 
 Alpine was created by Caleb Porzio, who also created the Laravel PHP framework
 <a href="https://laravel-livewire.com" target="_blank">Livewire</a>.
