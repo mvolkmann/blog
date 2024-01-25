@@ -23,7 +23,11 @@ Deno, Fastly, Lagon, Netlify, NextJS, Node.js, and Vercel.
 
 "Honō" is the Japanese word for "flame" or "blaze" which explains its logo.
 
-{% aTargetBlank "https://hono.dev/", "ElysiaJS" %} is a competitor to Hono.
+Hono is significantly faster than
+{% aTargetBlank "https://expressjs.com", "Express" %}
+which is the most popular HTTP library for Node.js.
+
+{% aTargetBlank "https://elysiajs.com", "Elysia" %} is a competitor to Hono.
 It has slightly better performance than Hono, but only runs in Bun.
 
 ## Projects
@@ -895,4 +899,4 @@ The following sites provide relevant benchmarks:
 
 - {% aTargetBlank "https://github.com/delvedor/find-my-way", "find-my-way" %}
   is another HTTP library to consider. Some benchmarks
-  show this to be considerably faster than ElysiaJS and Hono.
+  show this to be considerably faster than Elysia and Hono.

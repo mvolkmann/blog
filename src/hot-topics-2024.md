@@ -156,20 +156,104 @@ For more detail, see my
 
 ## Cloudflare Workers
 
+<a href="https://workers.cloudflare.com" target="_blank">Cloudflare Workers</a>
+host edge functions.
+
+Features provided include:
+
+- automatic scaling
+
+  There is no need to configure auto-scaling or load balancers.
+
+- high performance global network
+
+  Cloudflare workers run in a network of data centers that use V8 isolates
+  that have very low latency (approximately 25ms in my testing).
+
+- write in a variety of programming languages,
+  including JavaScript, TypeScript, Rust, C, and C++.
+
+- run instantly without cold starts
+
+- affordable
+
+  The first 100,000 requests each day are free.
+  After that the cost is $5 USD per 10 million requests.
+
+- no servers to maintain
+
+- provides edge storage of static assets using "Workers KV"
+
+- can generate assets at runtime,
+  including images, SVGs, PDFs, and more
+
 For more detail, see my
 <a href="/blog/topics/#/blog/cloudflare-workers/" target="_blank">Cloudflare Workers</a> blog page.
 
 ## Drizzle
 
+<a href="https://orm.drizzle.team" target="_blank">Drizzle</a> is a
+TypeScript-based Object Relational Mapper (ORM) library
+that is free and open-source.
+It competes with other popular ORMs such as
+<a href="https://www.prisma.io" target="_blank">Prisma</a>.
+
+Drizzle is designed "to be a thin layer on top of SQL
+and introduce minimal runtime overhead".
+
+Database table schemas are defined entirely in TypeScript.
+These are used to create/migrate tables AND provide type checking in code.
+
+The pros of Drizzle include:
+
+- The Drizzle methods for interacting with databases are SQL-like,
+  so it doesn't feel like learning a new syntax.
+- Queries created with the Drizzle Query API always result in one SQL query.
+  This helps with performance and minimizes round trips to the server.
+- The Drizzle library is lightweight (32K minified).
+- Drizzle is easy to use.
+- Drizzle does not require any code generation.
+- Drizzle has no dependencies.
+- Drizzle supports many databases. These include
+  LiteFS, MySQL, Neon, PlanetScale, PostgreSQL,
+  SQLite, Supabase, Turso, Vercel Postgres, Web SQLite, and Xata.
+  Notable exceptions include Microsoft SQL Server and MongoDB.
+- Drizzle can generate TypeScript schema definitions
+  from existing database tables.
+- Drizzle support for schema migrations.
+- Drizzle supports many edge platforms. These include:
+
+  - {% aTargetBlank "https://bun.sh", "Bun" %}
+  - {% aTargetBlank "https://developers.cloudflare.com/workers/", "Cloudflare Workers" %}
+  - {% aTargetBlank "https://deno.com/deploy", "Deno Deploy" %}
+  - {% aTargetBlank "https://www.electronjs.org", "Electron" %}
+  - {% aTargetBlank "https://fly.io", "Fly.io" %}
+  - {% aTargetBlank "https://supabase.com/docs/guides/functions", "Supabase functions" %}
+  - {% aTargetBlank "https://vercel.com/docs/functions/serverless-functions", "Vercel functions" %}
+
+While Drizzle supports many kinds of databases,
+switching the configuration and code that works with one type
+to work with another is fairly tedious.
+There are differences in the configuration and code required for each.
+
 For more detail, see my
 <a href="/blog/topics/#/blog/drizzle/" target="_blank">Drizzle</a> blog page.
 
-## GitHub Copilot
-
-For more detail, see my
-<a href="/blog/topics/#/blog/github/copilot/" target="_blank">GitHub Copilot</a> blog page.
-
 ## Hono
+
+<a href="https://hono.dev/" target="_blank">Hono</a>
+is a JavaScript HTTP server library that runs in any JavaScript runtime.
+This includes AWS Lambda, Bun, Cloudflare Pages, Cloudflare Workers,
+Deno, Fastly, Lagon, Netlify, NextJS, Node.js, and Vercel.
+
+"Honō" is the Japanese word for "flame" or "blaze" which explains its logo.
+
+Hono is significantly faster than
+<a href="https://expressjs.com" target="_blank">Express</a>
+which is the most popular HTTP library for Node.js.
+
+<a href="https://elysiajs.com/" target="_blank">Elysia</a> is a competitor
+to Hono. It has slightly better performance than Hono, but only runs in Bun.
 
 For more detail, see my
 <a href="/blog/topics/#/blog/hono/" target="_blank">Hono</a> blog page.

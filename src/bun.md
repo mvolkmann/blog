@@ -1120,16 +1120,16 @@ for await (const line of lines) {
 }
 ```
 
-## ElysiaJS
+## Elysia
 
-{% aTargetBlank "https://elysiajs.com", "ElysiaJS" %} is a
+{% aTargetBlank "https://elysiajs.com", "Elysia" %} is a
 "TypeScript framework supercharged by Bun with End-to-End Type Safety,
 unified type system and outstanding developer experience."
 
 Elysia is a bun-specific server framework that is 18 times faster than Express.
 {% aTargetBlank "https://hono.dev", "Hono" %} is a close competitor to Elysia.
 
-To create a new Bun project that uses ElysiaJS:
+To create a new Bun project that uses Elysia:
 
 - `bun create elysia {destination}`
 

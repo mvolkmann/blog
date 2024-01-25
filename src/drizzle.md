@@ -80,7 +80,7 @@ one for each supported database/driver combination, that all show the
 same basic example of configuring access to a one-to-many relationship.
 This would help developers get started with using Drizzle.
 
-It would be great if there was a good that could modify an existing project
+It would be great if there was a tool that could modify an existing project
 to switch from one database/driver combination to another.
 
 ## Example Project
