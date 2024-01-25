@@ -881,10 +881,23 @@ that are inside the form, add the `hx-params` attribute.
 For more detail, see {% aTargetBlank
 "https://htmx.org/attributes/hx-params/", "hx-params" %}.
 
+The {% aTargetBlank "https://htmx.org/attributes/hx-sync/", "hx-sync" %}
+attribute coordinates concurrent requests.
+For example, entering data in an `input` that is inside a `form`
+could trigger two requests, one to validate the `input` value
+and one to submit the `form`.
+By default, these requests will run in parallel.
+If `hx-sync="closest form:abort` is applied to the `input`,
+the validation request will be sent first.
+If the validation succeeds then the submit request will be sent.
+Otherwise it will be aborted.
+
+## Dialogs
+
 The `hx-confirm` attribute specifies a question to display in a
 browser-supplied confirmation dialog (using the `Window` method `confirm`)
 before an HTTP request is sent.
-The dialog contain have "OK" and "Cancel" buttons.
+The dialog contains "OK" and "Cancel" buttons.
 The request will only be sent if the user clicks the "OK" button.
 
 The `hx-prompt` attribute specifies a prompt to display in a
@@ -898,17 +911,54 @@ the value the user entered in the text input.
 The confirmation dialog is very plain and cannot be styled.
 It may be preferable to use a dialog that can be styled,
 perhaps using the HTML `dialog` element.
+Another option is to use a dialog library like
+{% aTargetBlank "https://sweetalert2.github.io", "sweetalert2" %}.
 
-The {% aTargetBlank "https://htmx.org/attributes/hx-sync/", "hx-sync" %}
-attribute coordinates concurrent requests.
-For example, entering data in an `input` that is inside a `form`
-could trigger two requests, one to validate the `input` value
-and one to submit the `form`.
-By default, these requests will run in parallel.
-If `hx-sync="closest form:abort` is applied to the `input`,
-the validation request will be sent first.
-If the validation succeeds then the submit request will be sent.
-Otherwise it will be aborted.
+The following code demonstrates using using `hx-confirm`
+with a sweetalert2 confirmation dialog.
+
+<img alt="htmx hx-confirm with sweetalert2" style="width: 60%"
+  src="/blog/assets/htmx-hx-confirm-sweetalert2.png?v={{pkg.version}}">
+
+```js
+<html lang="en">
+  <head>
+    <title>Custom Confirm Dialog</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+      document.addEventListener('htmx:confirm', event => {
+        event.preventDefault(); // prevents use of browser confirm dialog
+        Swal.fire({
+          icon: 'question',
+          title: 'Confirm Action',
+          text: 'Are you sure you want to do this?',
+          showCancelButton: true,
+          cancelButtonText: 'No way!',
+          confirmButtonText: 'Yes, do it!'
+        }).then(result => {
+          if (result.isConfirmed) {
+            event.detail.issueRequest(true);
+          }
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <button
+      hx-confirm="Are you sure you want to do this?"
+      hx-get="/pokemon"
+      hx-indicator=".htmx-indicator"
+      hx-target="#pokemon-list"
+    >
+      Load Pokemon
+    </button>
+    <div id="pokemon-list"></div>
+    <img alt="loading..." class="htmx-indicator" src="/spinner.gif" />
+  </body>
+</html>
+```
 
 ## URLs
 
