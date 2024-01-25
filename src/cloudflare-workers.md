@@ -30,7 +30,7 @@ Features provided include:
   Cloudflare workers run in a network of data centers that use V8 isolates
   that have very low latency (approximately 25ms in my testing).
 
-- write in a variety of programming languages,
+- ability write in a variety of programming languages,
   including JavaScript, TypeScript, Rust, C, and C++.
 
 - run instantly without cold starts

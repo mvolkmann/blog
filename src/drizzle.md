@@ -52,7 +52,7 @@ Notable exceptions include Microsoft SQL Server and MongoDB.
 Drizzle can generate TypeScript schema definitions
 from existing database tables.
 
-Drizzle support for schema migrations.
+Drizzle supports schema migrations.
 
 Drizzle supports many edge platforms. These include:
 

@@ -187,7 +187,7 @@ Features provided include:
   Cloudflare workers run in a network of data centers that use V8 isolates
   that have very low latency (approximately 25ms in my testing).
 
-- write in a variety of programming languages,
+- ability to write in a variety of programming languages,
   including JavaScript, TypeScript, Rust, C, and C++.
 
 - run instantly without cold starts
@@ -240,16 +240,16 @@ The pros of Drizzle include:
   Notable exceptions include Microsoft SQL Server and MongoDB.
 - Drizzle can generate TypeScript schema definitions
   from existing database tables.
-- Drizzle support for schema migrations.
+- Drizzle supports schema migrations.
 - Drizzle supports many edge platforms. These include:
 
-  - {% aTargetBlank "https://bun.sh", "Bun" %}
-  - {% aTargetBlank "https://developers.cloudflare.com/workers/", "Cloudflare Workers" %}
-  - {% aTargetBlank "https://deno.com/deploy", "Deno Deploy" %}
-  - {% aTargetBlank "https://www.electronjs.org", "Electron" %}
-  - {% aTargetBlank "https://fly.io", "Fly.io" %}
-  - {% aTargetBlank "https://supabase.com/docs/guides/functions", "Supabase functions" %}
-  - {% aTargetBlank "https://vercel.com/docs/functions/serverless-functions", "Vercel functions" %}
+  - <a href="https://bun.sh" target="_blank">Bun</a>
+  - <a href="https://developers.cloudflare.com/workers/" target="_blank">Cloudflare Workers</a>
+  - <a href="https://deno.com/deploy" target="_blank">Deno Deploy</a>
+  - <a href="https://www.electronjs.org" target="_blank">Electron</a>
+  - <a href="https://fly.io" target="_blank">Fly.io</a>
+  - <a href="https://supabase.com/docs/guides/functions" target="_blank">Supabase functions</a>
+  - <a href="https://vercel.com/docs/functions/serverless-functions" target="_blank">Vercel functions</a>
 
 While Drizzle supports many kinds of databases,
 switching the configuration and code that works with one type
@@ -272,8 +272,8 @@ Deno, Fastly, Lagon, Netlify, NextJS, Node.js, and Vercel.
 "Honō" is the Japanese word for "flame" or "blaze" which explains its logo.
 
 Hono is significantly faster than
-<a href="https://expressjs.com" target="_blank">Express</a>
-which is the most popular HTTP library for Node.js.
+<a href="https://expressjs.com" target="_blank">Express</a>,
+which is currently the most popular HTTP library for Node.js.
 
 <a href="https://elysiajs.com/" target="_blank">Elysia</a> is a competitor
 to Hono. It has slightly better performance than Hono, but only runs in Bun.
@@ -486,7 +486,7 @@ For more detail, see my
   src="/blog/assets/zod-logo.svg?v={{pkg.version}}">
 
 <a href="https://zod.dev" target="_blank">Zod</a>
-is a TypeScript library for validating values.
+is a TypeScript library for validating JavaScript values.
 It is commonly used to validate HTTP requests, including
 request headers, path parameters, query parameters, and request bodies.
 

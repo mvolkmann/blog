@@ -17,7 +17,7 @@ layout: topic-layout.njk
 ## Overview
 
 {% aTargetBlank "https://zod.dev", "Zod" %} is a TypeScript library
-for validating values.
+for validating JavaScript values.
 
 The rationale for the name "Zod" is not given in its documentation,
 but some definitions include:
