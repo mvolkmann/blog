@@ -120,12 +120,12 @@ This will prompt for:
 - What type of application do you want to execute?
 
   - "Hello World" Worker
-      - Website or web app
-       - Example router & proxy Worker
-       - Scheduled Worker (Cron Trigger)
-       - Queue consumer & producer Worker
-       - ChatGPT plugin
-       - OpenAPI 3.1
+  - Website or web app
+  - Example router & proxy Worker
+  - Scheduled Worker (Cron Trigger)
+  - Queue consumer & producer Worker
+  - ChatGPT plugin
+  - OpenAPI 3.1
 
 - Do you want to use TypeScript?
 - Do you want to use git for version control?
