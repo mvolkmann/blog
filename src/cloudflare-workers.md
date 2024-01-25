@@ -10,7 +10,7 @@ layout: topic-layout.njk
   }
 </style>
 
-<img alt="Hono logo" style="border: none; width: 30%"
+<img alt="Cloudflare Workers logo" style="border: none; width: 30%"
   src="/blog/assets/cloudflare-workers-logo.svg?v={{pkg.version}}"
   title="Hono logo">
 

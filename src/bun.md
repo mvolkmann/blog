@@ -5,7 +5,7 @@ layout: topic-layout.njk
 ---
 
 <figure style="width: 33%">
-  <img alt="Ziggy, the Zig mascot" style="border: 0"
+  <img alt="Bun logo" style="border: 0"
     src="/blog/assets/bun-logo.svg?v={{pkg.version}}">
 </figure>
 

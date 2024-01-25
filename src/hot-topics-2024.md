@@ -23,6 +23,9 @@ Here are my top picks, presented in alphabetical order.
 
 ## Alpine
 
+<img alt="Alpine logo" style="border: 0; width: 20%"
+  src="/blog/assets/alpine-logo.png?v={{pkg.version}}">
+
 Alpine is a JavaScript framework that provides custom attributes that are
 applied to HTML elements in order to add dynamic behavior to web pages.
 Alpine is notable for how easy it is to use and
@@ -75,6 +78,9 @@ For more detail, see my
 
 ## Astro
 
+<img alt="Astro logo" style="border: 0; width: 20%"
+  src="/blog/assets/astro-logo.svg?v={{pkg.version}}">
+
 <a href="https://astro.build" target="_blank">Astro</a>
 is a free, open-source (MIT license) framework that is
 "the web framework for content-driven websites".
@@ -104,6 +110,9 @@ For more detail, see my
 <a href="/blog/topics/#/blog/astro/" target="_blank">Astro</a> blog page.
 
 ## Bun
+
+<img alt="Bun logo" style="border: 0; width: 20%"
+  src="/blog/assets/bun-logo.svg?v={{pkg.version}}">
 
 "<a href="https://bun.sh" target="_blank">Bun</a>
 is a fast JavaScript all-in-one toolkit."
@@ -161,6 +170,9 @@ For more detail, see my
 
 ## Cloudflare Workers
 
+<img alt="Cloudflare Workers logo" style="border: 0; width: 20%"
+  src="/blog/assets/cloudflare-workers-logo.svg?v={{pkg.version}}">
+
 <a href="https://workers.cloudflare.com" target="_blank">Cloudflare Workers</a>
 host edge functions.
 
@@ -196,6 +208,9 @@ For more detail, see my <a href="/blog/topics/#/blog/cloudflare-workers/"
 target="_blank">Cloudflare Workers</a> blog page.
 
 ## Drizzle
+
+<img alt="Drizzle logo" style="border: 0; width: 20%"
+  src="/blog/assets/drizzle-logo.png?v={{pkg.version}}">
 
 <a href="https://orm.drizzle.team" target="_blank">Drizzle</a> is a
 TypeScript-based Object Relational Mapper (ORM) library
@@ -246,6 +261,9 @@ For more detail, see my
 
 ## Hono
 
+<img alt="Hono logo" style="border: 0; width: 20%"
+  src="/blog/assets/hono-logo.png?v={{pkg.version}}">
+
 <a href="https://hono.dev/" target="_blank">Hono</a>
 is a JavaScript HTTP server library that runs in any JavaScript runtime.
 This includes AWS Lambda, Bun, Cloudflare Pages, Cloudflare Workers,
@@ -264,6 +282,9 @@ For more detail, see my
 <a href="/blog/topics/#/blog/hono/" target="_blank">Hono</a> blog page.
 
 ## htmx
+
+<img alt="htmx logo" style="border: 0; width: 20%"
+  src="/blog/assets/htmx-logo.png?v={{pkg.version}}">
 
 Of all the topics in my list, this one excites me the most!
 
@@ -381,6 +402,9 @@ target="_blank">WebSockets</a> blog page.
 
 ## Zig
 
+<img alt="Zig logo" style="border: 0; width: 20%"
+  src="/blog/assets/zig-logo.svg?v={{pkg.version}}">
+
 <a href="https://ziglang.org" target="_blank">Zig</a>
 is a free, open source (MIT license),
 high performance, systems programming language.
@@ -454,6 +478,9 @@ For more detail, see my
 <a href="/blog/topics/#/blog/zig/" target="_blank">Zig</a> blog page.
 
 ## Zod
+
+<img alt="Zod logo" style="border: 0; width: 20%"
+  src="/blog/assets/zod-logo.svg?v={{pkg.version}}">
 
 <a href="https://zod.dev" target="_blank">Zod</a>
 is a TypeScript library for validating values.

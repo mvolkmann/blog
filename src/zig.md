@@ -13,7 +13,7 @@ layout: topic-layout.njk
 ## Overview
 
 <figure style="width: 33%">
-  <img alt="Ziggy, the Zig mascot" style="border: 0"
+  <img alt="Zig logo" style="border: 0"
     src="/blog/assets/zig-logo.svg?v={{pkg.version}}">
 </figure>
 

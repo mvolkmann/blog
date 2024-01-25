@@ -10,8 +10,8 @@ layout: topic-layout.njk
   }
 </style>
 
-<img alt="Hono logo" style="border: none; width: 20%"
-  src="/blog/assets/hono-logo.png?v={{pkg.version}}"
+<img alt="Zod logo" style="border: none; width: 20%"
+  src="/blog/assets/zod-logo.svg?v={{pkg.version}}"
   title="Hono logo">
 
 ## Overview
