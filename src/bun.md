@@ -32,7 +32,7 @@ The benefits of using Bun over npm and Node.js include:
 - Bun supports both CommonJS (`require`) and ESM (`import`)
   in the same source files.
 - Bun supports TypeScript out of the box.
-- Bun supports JSX/TSX files for generating HTML using React.
+- Bun supports JSX/TSX files for generating HTML.
 - Bun has builtin support for SQLite databases using the `bun:sqlite` module.
   It is 2 times faster than Deno and 4 times faster than Node.js
   in queries per second.
