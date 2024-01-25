@@ -84,7 +84,8 @@ A major focus of Astro is shipping less JavaScript code to browsers
 and doing more work on the server side.
 
 Astro supports using many kinds of UI components including
-Astro, Alpine, Lit, Preact, React, SolidJS, Svelte, Vue, WebComponents, and more.
+Astro, Alpine, Lit, Preact, React, SolidJS, Svelte, Vue, WebComponents,
+and more.
 
 Astro uses the "<a href="https://docs.astro.build/en/concepts/islands/"
 target="_blank">Islands architecture</a>".
@@ -108,7 +109,8 @@ It includes a JavaScript runtime, package manager, bundler, and test runner.
 All of this is free and open source under the MIT license.
 
 Bun can be used as a drop-in replacement for npm and Node.js.
-The Bun runtime supports nearly all Node.js built-in modules (around 40 of them).
+The Bun runtime supports nearly all Node.js built-in modules
+(around 40 of them).
 
 The benefits of using Bun over npm and Node.js include:
 
@@ -138,7 +140,8 @@ The benefits of using Bun over npm and Node.js include:
   Hot reloading in Node.js currently requires either using
   an external tool like nodemon or the experimental `--watch` flag.
 - Bun provides bun-specific APIs that are alternatives to many npm modules.
-  These are highly optimized and perform much better than their Node.js equivalents.
+  These are highly optimized and perform much better
+  than their Node.js equivalents.
 - Bun has a plugin API that is similar to esbuild.
   Many esbuild plugins work in Bun without modification.
 
@@ -187,8 +190,8 @@ Features provided include:
 - can generate assets at runtime,
   including images, SVGs, PDFs, and more
 
-For more detail, see my
-<a href="/blog/topics/#/blog/cloudflare-workers/" target="_blank">Cloudflare Workers</a> blog page.
+For more detail, see my <a href="/blog/topics/#/blog/cloudflare-workers/"
+target="_blank">Cloudflare Workers</a> blog page.
 
 ## Drizzle
 
@@ -326,18 +329,53 @@ The client sends an initial request for data.
 The server does not respond until there is a change in the data to be reported.
 When the client receives the data, it immediately requests the next update.
 
-For more detail, see my
-<a href="/blog/topics/#/blog/long-polling/" target="_blank">Long Polling</a> blog page.
+For more detail, see my <a href="/blog/topics/#/blog/long-polling/"
+target="_blank">Long Polling</a> blog page.
 
 ## Server-Sent Events (SSE)
 
-For more detail, see my
-<a href="/blog/topics/#/blog/server-sent-events/" target="_blank">Server-Sent Events</a> blog page.
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events"
+target="_blank">Server-Sent Events</a> (SSE) are used to send data using TCP
+from a server to a client, but not in the other direction.
+
+For two-way communication, consider using
+<a href="/blog/topics/#/blog/websockets/" target="_blank">WebSockets</a>.
+WebSockets support text and binary data, whereas SSE only supports UTF-8 text.
+When only text is needed, SSE is a good option because
+the required code is a bit easier to write than the code for WebSockets.
+
+SSE provides automatic reconnection.
+If a SSE connection is closed, perhaps due to a network issue,
+clients will automatically attempt to reconnect to the server.
+WebSockets do not provide this, so code must be written
+to listen for disconnects and reconnect later.
+This feature alone may be a good reason to choose SSE over WebSockets.
+
+For more detail, see my <a href="/blog/topics/#/blog/server-sent-events/"
+target="_blank">Server-Sent Events</a> blog page.
 
 ## WebSockets
 
-For more detail, see my
-<a href="/blog/topics/#/blog/websockets/" target="_blank">WebSockets</a> blog page.
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocket_client_applications"
+target="_blank">WebSockets</a> are a standardized protocol for
+two-way communication between clients and servers using TCP.
+They are widely supported by web browsers.
+
+For one-way communication from servers to clients, consider using
+<a href="/blog/topics/#/blog/server-sent-events/"
+target="_blank">Server-Sent Events</a> (SSE).
+WebSockets support text and binary data, whereas SSE only supports UTF-8 text.
+
+WebSockets require upgrading an existing HTTP connection.
+For details, see the MDN page {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/HTTP/Protocol_upgrade_mechanism",
+"Protocal upgrade mechanism" %}.
+
+Many WebSocket libraries for server-side programming languages
+and environments exist.
+
+For more detail, see my <a href="/blog/topics/#/blog/websockets/"
+target="_blank">WebSockets</a> blog page.
 
 ## Zig
 
