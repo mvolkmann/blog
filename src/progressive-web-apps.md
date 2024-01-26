@@ -216,6 +216,12 @@ Possible caching strategies include:
   supplement to the previously described strategies
   to provide an alternative to returning a "Not Found" (404) status.
 
+## Offline Support
+
+Web applications can determine whether they currently have network connectivity
+by checking the value of `navigator.onLine`.
+It's odd that the "L" is uppercase since "online" is a word!
+
 For some web applications it is possible to define
 a subset of functionality that can be supported
 for offline use and then only cache resources related to that.
@@ -242,6 +248,51 @@ after network connectivity was lost for the user that entered the hours?
 Perhaps the new hours should just be ignored, or
 perhaps the project should be recreated and the hours should be applied to it.
 There can be many such cases to consider.
+
+## Service Worker Events
+
+Service workers listen for events and act on them.
+
+The first event received is `install`.
+This is a one-time event.
+One way to handle this event is to do the following:
+
+- Open a cache whose name is `cache`
+  concatenated with the value of the `timestamp` variable.
+  If this cache does not exist, it is created.
+- Add some files to the cache that will always be served from the cache.
+  They will be available without a network connection
+  after the app is initially loaded from the network.
+
+The second event received is `activate`.
+This is also a one-time event.
+One way to handle this event is to delete any old caches for this app
+that were created when previous builds of the app were run.
+This can be determined by checking whether their names
+contain the current value of the `timestamp` variable.
+
+The third event type received is `fetch`.
+This can be received many times.
+The caching strategy is implemented here.
+One way to handle this event is to evaluates each request
+using the following steps in this sequence:
+
+- Only process `GET` requests.
+- Don’t process requests asking for just part of a document,
+  using an HTTP "Range" header (not commonly used).
+- Only process URLs with a protocol beginning with "http".
+  For example, URLs with the "data" protocol are ignored.
+- Serve all static files from the cache.
+- If the file is not found in the cache and
+  the request has a `cache` property of `only-if-cached`,
+  don't attempt to find the file using the network.
+- Otherwise, attempt to satisfy the request using the network.
+- If found, add the file to the cache and return its contents.
+- If not found and a match for the URL is in the cache, return that content.
+
+This caching strategy means that the results of API service calls are cached.
+Later, if the same request is made again and the service is offline,
+the cached value will be returned.
 
 ## Manifest File
 
