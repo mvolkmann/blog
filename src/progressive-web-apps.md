@@ -294,6 +294,121 @@ This caching strategy means that the results of API service calls are cached.
 Later, if the same request is made again and the service is offline,
 the cached value will be returned.
 
+## Managing Service Workers in Chrome
+
+The Chrome DevTools provide a way to interact with service workers
+and the caches they create.
+
+To view service workers for the current site,
+click the DevTools Application tab.
+Then click Service Workers in the left nav.
+The main area will display information about each of the
+service workers for the site.
+
+<img alt="Service Workers in Chrome DevTools" style="width: 100%"
+  src="/blog/assets/devtools-service-workers.png?v={{pkg.version}}"
+  title="Service Workers in Chrome DevTools">
+
+The status of a service worker is displayed after the Status label.
+For example, it may say “activated and is running.”
+To stop the service worker, click the Stop link after the status.
+The Stop link will change to Start, and this can be clicked to restart it.
+
+Unregistering a service worker allows it to run through its lifecycle again
+one time, when the page is refreshed.
+This includes processing the `install` and `activate` events again.
+This is useful for debugging the code that handles those events.
+To do this, click the Unregister link to the
+right of a service worker description.
+
+To cause service workers to install and activate again
+every time the page is reloaded, and without creating a new build,
+check the Update on Reload check box at the top of the main area,
+and refresh the page.
+
+To view the source code for a service worker,
+click the link after the Source label.
+This switches to the Sources tab and displays the code.
+Typically the code will have been minified.
+
+<img alt="Minimized service worker code in Chrome DevTools" style="width: 100%"
+  src="/blog/assets/devtools-service-worker-code-minimized.png?v={{pkg.version}}"
+  title="Minimized service worker code in Chrome DevTools">
+
+To see a pretty-printed version of this,
+click the “{}” at the bottom.
+
+<img alt="Pretty-printed service worker code in Chrome DevTools" style="width: 100%"
+  src="/blog/assets/devtools-service-worker-code-pretty-printed.png?v={{pkg.version}}"
+  title="Pretty-printed service worker code in Chrome DevTools">
+
+To see the files that have been cached,
+click the DevTools Application tab.
+Then click the disclosure triangle before Cache Storage in the left nav.
+This will display a list of all the current caches for the site.
+The caches that Sapper apps create by default have names that
+begin with “cache” and “offline” and end with a build timestamp.
+
+Click one of these to see a list of the files that it has cached.
+Click a file to see its contents at the bottom of the main area.
+
+<img alt="Cached files in Chrome DevTools" style="width: 100%"
+  src="/blog/assets/devtools-cache.png?v={{pkg.version}}"
+  title="Cached files in Chrome DevTools">
+
+To remove an individual file from a cache,
+select the file in the main area and
+press the Delete key or click the “X” above the list of files.
+To delete an entire cache, right-click a cache name and select Delete.
+
+To simulate being offline, click Service Workers in the left nav
+and check the Offline check box at the top of the main area.
+This is an alternative to going to the Network tab
+and changing the Online drop-down to Offline.
+A warning icon will appear in the Network tab
+to remind you that you are offline.
+This is useful for testing the ability of service workers
+to use cached files.
+
+<img alt="Simulating being offline in Chrome DevTools" style="width: 100%"
+  src="/blog/assets/devtools-offline.png?v={{pkg.version}}"
+  title="Simulating being offline in Chrome DevTools">
+
+To bypass the use of service workers,
+causing all requests to go to the network,
+check the Bypass for Network check box at the top of the main area.
+This, of course, requires being online.
+
+The list of requested files in the Network tab
+has a gear icon before each file that was loaded from a cache (see figure 19.8).
+This is useful for determining whether specific files
+were served from the network or from a cache.
+
+<img alt="Files loaded from cache in Chrome DevTools" style="width: 100%"
+  src="/blog/assets/devtools-network-files-from-cache.png?v={{pkg.version}}"
+  title="Files loaded from cache in Chrome DevTools">
+
+To clear many things at once,
+click the Application tab and
+click Clear Storage (preceded by a trashcan icon) in the left nav.
+This displays a series of check boxes in the main area
+for categories of things that can be cleared.
+By default, all the check boxes are checked.
+This includes Unregister Service Workers and Cache Storage.
+Click the Clear Site Data button to clear
+the data associated with every checked category.
+
+<img alt="Clearing storage in Chrome DevTools" style="width: 100%"
+  src="/blog/assets/devtools-clear-storage.png?v={{pkg.version}}"
+  title="Clearing storage in Chrome DevTools">
+
+A great video covering most of the topics in this section,
+created by the Chrome team, can be found at {% aTargetBlank
+"http://mng.bz/oPwp", "Debugging Service Workers in Chrome" %}.
+
+A similar video for Firefox from the same team can be found at {% aTargetBlank
+"http://mng.bz/nPw2", "Debugging Service Workers in Firefox" %}.
+
 ## Manifest File
 
 ## Evaluating Readiness
