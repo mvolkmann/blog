@@ -82,8 +82,50 @@ The advantages that PWAs have over native mobile apps include the ability to:
 - implement using widely known web technologies
 - run on web, Android, and iOS with a single code base
 
+## Manifest File
+
+Service workers require a `manifest.json` file.
+These are typically located at the top of the `public` directory
+along with `index.html`.
+
+There are many properties that can be set in the manifest file.
+SEE PAGE 176-181 FOR DETAILS!
+The following properties are required:
+
+- `name` and/or `short_name`
+- `start_url`
+- `icons`
+- `display`
+
+Other properties that can be set include:
+
+- `description`
+- `orientation`
+- `theme_color`
+- `background_color`
+- `scope`
+- `dir`
+- `lang`
+- `prefer_related_applications`
+- `related_applications`
+
+Once a service worker has been registered,
+its manifest can be examined in Chrome devtools
+by clicking the "Application" tab and clicking "Manifest" in the left nav.
+
+## Evaluating Readiness
+
+To determine if a web app can be used as a PWA:
+
+- Use a desktop computer or laptop to open the app in the Chrome web browser.
+- Open the DevTools.
+- Click on the "Lighthouse" tab.
+- Click the "Analyze page load" button.
+- Look for the "Progressive Web App" score.
+
 ## Service Workers
 
+Service workers are the key to many PWA features.
 A service worker is a kind of web worker.
 This means that its functionality is defined in a JavaScript source file
 and it runs in a background thread.
@@ -98,6 +140,9 @@ Service workers have many use cases:
 - listen for external events
 - periodically fetch data
 - send notifications to associated web apps using push notifications
+
+A PWA can register any number of service workers,
+but typically only one is used.
 
 Service workers can allow parts of a web application
 to continue functioning after network connectivity is lost.
@@ -208,6 +253,45 @@ Possible caching strategies include:
   In the diagram above, this is represented by the path A-B-C-(D-E)-F
   where steps D and E are optional.
 
+  The following service worker code implements this strategy.
+
+  ```js
+  const cacheName = 'pwa-demo';
+
+  // No fetch events are generated in the initial load of the web app.
+  // A second visit (or refresh) is required to cache all the resources.
+  self.addEventListener('fetch', event => {
+    const {request} = event;
+
+    const getResource = async () => {
+      const {url} = request;
+      let resource;
+
+      try {
+        // Get from network.
+        // Note that resources coming from a local HTTP server
+        // can be fetched even when offline.
+        // To use cached versions of those, stop the local HTTP server.
+        resource = await fetch(request);
+        console.log('service worker got', url, 'from network');
+
+        // Save in cache for when we are offline later.
+        const cache = await caches.open(cacheName);
+        await cache.add(url);
+        console.log('service worker cached', url);
+      } catch (e) {
+        // Get from cache.
+        resource = await caches.match(request);
+        console.log('service worker got', url, 'from cache');
+      }
+
+      return resource;
+    };
+
+    event.respondWith(getResource());
+  });
+  ```
+
 - Cache and Update
 
   This strategy is applicable when fast responses are prioritized
@@ -222,6 +306,57 @@ Possible caching strategies include:
   This is great for performance but
   has the downside of potentially using stale data.
   In the diagram above, this is represented by the path A-D-E-F-B-C-D.
+
+  The following service worker code implements this strategy.
+
+  ```js
+  const cacheName = 'pwa-demo-v1';
+
+  self.addEventListener('activate', event => {
+    const deleteOldCaches = async () => {
+      const keyList = await caches.keys();
+      return Promise.all(
+        keyList.map(key => (key !== cacheName ? caches.delete(key) : null))
+      );
+    };
+    event.waitUntil(deleteOldCaches());
+  });
+
+  // No fetch events are generated in the initial load of the web app.
+  // A second visit is required to cache all the resources.
+  self.addEventListener('fetch', event => {
+    const {request} = event;
+
+    const getResource = async () => {
+      const {url} = request;
+      let resource;
+
+      // Get from cache.
+      resource = await caches.match(request);
+      if (resource) {
+        console.log('service worker got', url, 'from cache');
+      } else {
+        try {
+          // Get from network.
+          resource = await fetch(request);
+          console.log('service worker got', url, 'from network');
+
+          // Save in cache for when we are offline later.
+          const cache = await caches.open(cacheName);
+          await cache.add(url);
+          console.log('service worker cached', url);
+        } catch (e) {
+          console.error('service worker failed to get', url);
+          resource = new Response('', {status: 404});
+        }
+      }
+
+      return resource;
+    };
+
+    event.respondWith(getResource());
+  });
+  ```
 
 - Cache, Update, and Refresh
 
@@ -246,6 +381,81 @@ Possible caching strategies include:
   This strategy can be employed as a
   supplement to the previously described strategies
   to provide an alternative to returning a "Not Found" (404) status.
+
+  The following service worker code implements this strategy.
+
+  ```js
+  const cacheName = 'pwa-demo-v1';
+
+  const filesToCache = [
+    '/', // need in order to hit web app with domain only
+    '/demo.css',
+    '/demo.js',
+    '/images/avatar.jpg',
+    '/images/birthday-192.jpg'
+  ];
+
+  self.addEventListener('activate', event => {
+    const deleteOldCaches = async () => {
+      const keyList = await caches.keys();
+      return Promise.all(
+        keyList.map(key => (key !== cacheName ? caches.delete(key) : null))
+      );
+    };
+    event.waitUntil(deleteOldCaches());
+  });
+
+  self.addEventListener('install', event => {
+    const cacheAll = async () => {
+      const cache = await caches.open(cacheName);
+      await cache.addAll(filesToCache);
+    };
+    event.waitUntil(cacheAll());
+  });
+
+  // No fetch events are generated in the initial load of the web app.
+  // A second visit is required to cache all the resources.
+  self.addEventListener('fetch', event => {
+    const {request} = event;
+
+    const getResource = async () => {
+      const {url} = request;
+      const isAvatar = url.includes('githubusercontent.com');
+      let resource;
+
+      // Get from cache.
+      resource = await caches.match(request);
+      if (resource) {
+        console.log('service worker got', url, 'from cache');
+      } else {
+        try {
+          // Get from network.
+          resource = await fetch(request);
+          console.log('service worker got', url, 'from network');
+
+          if (!isAvatar) {
+            // Save in cache for when we are offline later.
+            const cache = await caches.open(cacheName);
+            await cache.add(url);
+            console.log('service worker cached', url);
+          }
+        } catch (e) {
+          if (isAvatar) {
+            console.log('service worker using generic avatar');
+            resource = Response.redirect('/images/avatar.jpg');
+          } else {
+            console.error('service worker failed to get', url);
+            resource = new Response('', {status: 404});
+          }
+        }
+      }
+
+      return resource;
+    };
+
+    event.respondWith(getResource());
+  });
+  ```
 
 ## Offline Support
 
@@ -440,17 +650,18 @@ created by the Chrome team, can be found at {% aTargetBlank
 A similar video for Firefox from the same team can be found at {% aTargetBlank
 "http://mng.bz/nPw2", "Debugging Service Workers in Firefox" %}.
 
-## Manifest File
+## Development Tips
 
-## Evaluating Readiness
+During development it is often necessary to force certain files to be reloaded.
+Files cached by a service worker are not cleared by clearing the browser cache.
 
-To determine if a web app can be used as a PWA:
+In Chrome, one approach to force files to be reloaded
+on the next browser refresh is to open the devtools,
+click the "Application" tab, and check the "Update on reload" checkbox.
 
-- Use a desktop computer or laptop to open the app in the Chrome web browser.
-- Open the DevTools.
-- Click on the "Lighthouse" tab.
-- Click the "Analyze page load" button.
-- Look for the "Progressive Web App" score.
+To force reloading for a specific service worker,
+select the "Application" tab, select "Service Workers",
+and click the "Unregister" link for the service worker.
 
 ## Resources
 
