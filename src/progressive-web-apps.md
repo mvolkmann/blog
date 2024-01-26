@@ -667,3 +667,5 @@ and click the "Unregister" link for the service worker.
 ## Resources
 
 - {% aTargetBlank "https://web.dev/explore/progressive-web-apps", "web.dev" %} on PWAs
+
+TODO: For more content, see https://github.com/mvolkmann/pwa-demo/blob/master/pwa.md.
