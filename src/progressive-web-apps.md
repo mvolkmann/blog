@@ -669,3 +669,13 @@ and click the "Unregister" link for the service worker.
 - {% aTargetBlank "https://web.dev/explore/progressive-web-apps", "web.dev" %} on PWAs
 
 TODO: For more content, see https://github.com/mvolkmann/pwa-demo/blob/master/pwa.md.
+
+See demo app at https://github.com/mvolkmann/pwa-cloudflare-demo.
+
+## Outstanding Questions
+
+Demonstrate sending messages between the app and a service worker.
+
+How can mobile clients get app updates without restarting the app?
+
+Do push notifications work in iOS now?
