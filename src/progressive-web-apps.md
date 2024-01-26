@@ -89,7 +89,8 @@ These are typically located at the top of the `public` directory
 along with `index.html`.
 
 There are many properties that can be set in the manifest file.
-SEE PAGE 176-181 FOR DETAILS!
+TODO: See the O'Reilly book "Building Progressive Web Apps", pages 176-181 for details.
+
 The following properties are required:
 
 - `name` and/or `short_name`
