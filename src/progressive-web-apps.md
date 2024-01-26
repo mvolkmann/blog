@@ -664,6 +664,51 @@ To force reloading for a specific service worker,
 select the "Application" tab, select "Service Workers",
 and click the "Unregister" link for the service worker.
 
+## Workbox
+
+{% aTargetBlank "https://web.dev/learn/pwa/workbox", "Workbox" %} is a set of
+open-source libraries that help with implementing PWA caching strategies
+in service workers.
+
+The easiest way to use Workbox is to open a terminal, cd to the project root,
+and enter `bunx workbox-cli wizard`.
+This will ask a series of questions about the PWA.
+
+This will create the file `workbox-config.js` with content like the following:
+
+```js
+module.exports = {
+  globDirectory: 'public/',
+  globPatterns: ['**/*.{js,png,jpg,gif,html,json,css}'],
+  swDest: 'public/sw.js',
+  ignoreURLParametersMatching: [/^utm_/, /^fbclid$/]
+};
+```
+
+Create the file `public/sw.js` with content like the following:
+
+```js
+import {registerRoute} from 'workbox-routing';
+import {CacheFirst} from 'workbox-strategies';
+import {CacheableResponsePlugin} from 'workbox-cacheable-response';
+
+const pageStrategy = new CacheFirst({
+  // Put all cached files in a cache named 'pages'
+  cacheName: 'pages',
+  plugins: [
+    // Only requests that return with a 200 status are cached
+    new CacheableResponsePlugin({
+      statuses: [200]
+    })
+  ]
+});
+
+// Cache page navigations (HTML) with a Cache First strategy
+registerRoute(({request}) => request.mode === 'navigate', pageStrategy);
+```
+
+TODO: Describe how to load this service worker from a script!
+
 ## Resources
 
 - {% aTargetBlank "https://web.dev/explore/progressive-web-apps", "web.dev" %} on PWAs
@@ -679,3 +724,15 @@ Demonstrate sending messages between the app and a service worker.
 How can mobile clients get app updates without restarting the app?
 
 Do push notifications work in iOS now?
+
+Should you use the workbox and workbox-cli libraries
+to simplify service worker code?
+
+Document generating icons using https://github.com/elegantapp/pwa-asset-generator.
+
+- Create the file `public/images/logo.png`.
+- Enter `bunx pwa-asset-generator public/images/logo.png public/icons`.
+- This will generate many images files in the `public/icons` directory.
+- Copy the JSON array this outputs and paste it into `manifest.json`
+  as the value of the `icons` property.
+- Remove "public/" from the beginning of each icon `src` value.
