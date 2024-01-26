@@ -19,25 +19,56 @@ layout: topic-layout.njk
 Progressive Web Apps (PWAs) enable using web technologies
 to implement mobile apps.
 
+PWAs can provide many of the features
+typically associated with native applications.
+These include the ability to:
+
+- continue working while offline,
+  possibly with reduced functionality
+  and delayed transactions
+- install a home screen icon that can
+  be used to launch the application
+- launch quickly without requiring download
+  of files from the internet
+- communicate with users via dialog boxes, even after
+  they have left the application, to reengage them
+  (using the Push API and the Notifications API)
+- look like native apps by running
+  without browser "chrome" or in full-screen mode
+- support multiple operating systems with a single code base,
+  reducing development costs
+
 Supported features include background sync, bluetooth, camera access,
 contact access, device motion, file access, geolocation, offline mode,
 push notifications, and touch gestures.
 
-When a PWA attempts to access device features, such as contacts or the camera,
-the user will be prompted to grant permission.
+## Running and Installing a PWA
 
-To open a PWA in a phone, browse its URL from the a mobile web browser.
-Users can optionally choose to install the PWA.
-Doing so downloads all the files required by the app.
-It also adds an app icon to the home screen so in the future
-the user can double-click that icon to relaunch the app.
-The app will still run in the mobile web browser,
-but the app can choose to hide the browser "chrome"
-so it appears more like a native app.
+The steps to run a new PWA for the first time are:
+
+1. Open a web browser.
+1. Search for the application or enter its URL.
+1. Click its link.
+1. Optionally install the PWA which downloads all the require files.
+   This also adds an app icon to the home screen so in the future
+   the app can be launched by double-clicking its icon.
+   The app will still run in the mobile web browser,
+   but the app can choose to hide the browser chrome
+   so it appears more like a native app.
+
+Often the first three steps are replaced by clicking
+a link that is found in another way such as
+in an email message or a social media site.
+In this case a new PWA can be launched with a single click.
 
 Production PWAs must be downloaded using HTTPS in order to use service workers.
 In development it is possible to configure the browser to
 allow using service workers with localhost URLs that use HTTP.
+
+## Security
+
+When a PWA attempts to access device features, such as contacts or the camera,
+the user will be prompted to grant permission.
 
 ## Advantages Over Native Apps
 
