@@ -627,3 +627,4 @@ const included = range.includes(key);
 ## CRUD Example
 
 TODO: Add this detail.
+TODO: See Documents/dev/pwas/pwa-cloudflare-demo/public/setup.js
