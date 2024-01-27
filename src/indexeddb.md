@@ -97,20 +97,45 @@ To see the contents of IndexedDB databases in Chrome:
 
 ## Common Operations
 
-To create a database
+### Create a database
 
-To delete a database
+```js
+const dbName = 'myDB';
+const version = 1;
+const request = indexedDB.open(dbName, version);
 
-To create an index
+request.onerror = event => {
+  console.error('IndexedDB error: ', event);
+};
 
-To delete an index
+// This is called the first time a database is used
+// and again each time the version number changes.
+request.onupgradeneeded = event => {
+  const db = request.result;
+};
 
-To create an object
+request.onsuccess = () => {
+  const db = request.result;
+  const txn = db.transaction('dogs', 'readwrite');
 
-To query for a single object
+  txn.oncomplete = () => {
+    db.close();
+  };
+};
+```
 
-To query for multiple objects
+## Delete a database
 
-To modify an object
+## Create an index
 
-To delete an object
+## Delete an index
+
+## Create an object
+
+## Query for a single object
+
+## Query for multiple objects
+
+## Modify an object
+
+## Delete an object
