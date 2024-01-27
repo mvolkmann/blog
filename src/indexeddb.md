@@ -95,38 +95,139 @@ To see the contents of IndexedDB databases in Chrome:
 - click a specific store
 - all the keys and their object values will be displayed
 
-## Common Operations
+## IndexedDB Interfaces
 
-### Create a database
+### IDBFactory
+
+The `IDBFactory` interface provides access to databases.
+Instances support the following operations.
+
+- open database
+
+  ```js
+  const version = 1;
+  const request = indexedDB.open('db-name', version);
+
+  request.onerror = event => {
+    console.error('failed to open database:', event);
+  };
+
+  request.onsuccess = () => {
+    const db = request.result;
+    // Use the database.
+  };
+
+  // This is called the first time a database is used
+  // and again each time the version number changes.
+  request.onupgradeneeded = event => {
+    const db = request.result;
+  };
+  ```
+
+- delete database
+
+  ```js
+  const request = indexedDB.deleteDatabase('db-name');
+
+  request.onerror = event => {
+    console.error('failed to delete database:', event);
+  };
+
+  request.onsuccess = event => {
+    console.log('deleted database');
+    // event.result should be undefined
+  };
+  ```
+
+### IDBDatabase
+
+The `IDBDatabase` interface provides a connection to a database.
+Instances support the following operations.
+
+- create store
 
 ```js
-const dbName = 'myDB';
-const version = 1;
-const request = indexedDB.open(dbName, version);
-
-request.onerror = event => {
-  console.error('IndexedDB error: ', event);
-};
-
-// This is called the first time a database is used
-// and again each time the version number changes.
-request.onupgradeneeded = event => {
-  const db = request.result;
-};
-
-request.onsuccess = () => {
-  const db = request.result;
-  const txn = db.transaction('dogs', 'readwrite');
-
-  txn.oncomplete = () => {
-    db.close();
-  };
-};
+// Options are optional.  autoIncrement defaults to false.
+const options = {autoIncrement: true, keyPath: 'property-name'};
+const store = db.createObjectStore('store-name', options);
 ```
 
-## Delete a database
+- delete store
+
+  ```js
+  db.deleteObjectStore('store-name');
+  ```
+
+- create transaction
+
+  ```js
+  const mode = 'readwrite'; // or 'readonly' (default)
+  const stores = ['db-name']; // can be one string or an array of them
+  const txn = db.transaction(stores, mode);
+  ```
+
+- close database connection
+
+  ```js
+  db.close();
+  ```
+
+### IDBTransaction
+
+- delete a store
+
+  ```js
+  const store = txn.objectStore('store-name');
+  ```
+
+- abort transaction (rolls back)
+
+  ```js
+  txn.abort();
+  ```
+
+- commit transaction
+
+  This is not normally needed because transactions
+  automatically commit when all requests are satisfied.
+
+  ```js
+  txn.commit();
+  ```
+
+- listen for events
+
+  ```js
+  txn.onabort = () => {
+    console.log('transaction aborted');
+  };
+
+  txn.oncomplete = () => {
+    console.log('transaction completed');
+  };
+
+  txn.onerror = event => {
+    console.error('transaction error:', event);
+  };
+  ```
+
+### IDBObjectStore
+
+### IDBRequest
+
+### IDBCursor
+
+## Common Operations
 
 ## Create an index
+
+```js
+const db = request.result;
+const store = db.createObjectStore('dogs', {keyPath: 'id'});
+// Include multiple property names in the
+// 2nd parameter array for a compound index.
+store.createIndex('breed', ['breed'], {unique: false});
+```
 
 ## Delete an index
 
