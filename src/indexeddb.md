@@ -615,3 +615,7 @@ The properties of instances are `lower`, `upper`,
 ```js
 const included = range.includes(key);
 ```
+
+## CRUD Example
+
+TODO: Add this detail.
