@@ -375,6 +375,7 @@ The `getAll` method can:
   (instance of {% aTargetBlank
   "https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange",
   "IDBKeyRange" %} passed)
+  This is useful for pagination.
 
 ```js
 const query = ...;
@@ -392,18 +393,126 @@ request.onerror = event => {
 };
 ```
 
-#### get all keys
+#### get keys
+
+The `getAllKeys` method gets an array of all the keys of existing records
+that fall in a specified {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange",
+"IDBKeyRange" %}.
+
+#### open index to iterate over all records
+
+```js
+const index = store.index('index-name');
+index.openCursor().onsuccess = event => {
+  const cursor = event.target.result;
+  if (cursor) {
+    const record = cursor.value;
+    // Use record properties.
+    cursor.continue();
+  } else {
+    console.log('processed all records');
+  }
+};
+```
+
+#### open cursor to iterate over records in a key range
+
+```js
+const request = store.openCursor();
+request.onsuccess = event => {
+  const cursor = event.target.result;
+  if (cursor) {
+    const record = cursor.value;
+    // Use record properties.
+    cursor.continue();
+  } else {
+    console.log('processed all matches');
+  }
+};
+```
+
+#### open cursor to iterate over keys in a key range
+
+The `openKeyCursor` method is similar to the `openCursor` method,
+but iterates over keys instead of records.
+
+#### upsert a record
+
+If you have a cursor that refers to an existing record,
+it is preferable to use the cursor method `update` instead of this.
+
+```js
+const request = store.put(newRecord);
+
+request.onsuccess = event => {
+  const key = request.result;
+  console.log('upserted record with key', key);
+};
+
+request.onerror = event => {
+  console.error('failed to upsert record:', event);
+};
+```
 
 ### IDBRequest
 
 ### IDBCursor
 
-## Common Operations
+#### get associated store or index
 
-## Query for a single object
+```js
+const source = cursor.source;
+```
 
-## Query for multiple objects
+#### get key of current record
 
-## Modify an object
+```js
+const key = cursor.key;
+```
 
-## Delete an object
+#### get request that created cursor
+
+```js
+const request = cursor.request;
+```
+
+#### advance to next record
+
+```js
+cursor.continue();
+```
+
+#### advance to record with given key
+
+```js
+cursor.continue(key);
+```
+
+#### delete referenced record
+
+```js
+const request = cursor.delete();
+
+request.onsuccess = event => {
+  console.log('deleted record');
+};
+
+request.onerror = event => {
+  console.error('failed to delete record:', event);
+};
+```
+
+#### update referenced record
+
+```js
+const request = cursor.update(newRecord);
+
+request.onsuccess = event => {
+  console.log('updated record');
+};
+
+request.onerror = event => {
+  console.error('failed to update record:', event);
+};
+```
