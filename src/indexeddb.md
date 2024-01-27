@@ -22,7 +22,7 @@ that is supported by modern web browsers.
 
 Unlike relational databases that are composed of
 tables with records that are composed of columns,
-IndexedDB databases are composed of stores that hold objects with properties.
+IndexedDB databases are composed of stores that hold records with properties.
 
 Objects within stores can be retrieved by their key, and by optional indexes.
 
@@ -83,8 +83,8 @@ To see the contents of IndexedDB databases in Chrome:
 - click the "Application" tab
 - in the left nav under the "Storage" section, expand "indexedDB"
 - click the name of a store
-- all the keys and their object values will be displayed
-- objects can be deleted, but not modified
+- all the record keys and values will be displayed
+- records can be deleted, but not modified
 
 To see the contents of IndexedDB databases in Chrome:
 
@@ -93,7 +93,7 @@ To see the contents of IndexedDB databases in Chrome:
 - in the left nav, expand "Indexed Databases"
 - expand a specific database
 - click a specific store
-- all the keys and their object values will be displayed
+- all the record keys and values will be displayed
 
 ## IndexedDB Interfaces
 
@@ -102,49 +102,49 @@ To see the contents of IndexedDB databases in Chrome:
 The `IDBFactory` interface provides access to databases.
 Instances support the following operations.
 
-- open database
+#### open database
 
-  ```js
-  const version = 1;
-  const request = indexedDB.open('db-name', version);
+```js
+const version = 1;
+const request = indexedDB.open('db-name', version);
 
-  request.onerror = event => {
-    console.error('failed to open database:', event);
-  };
+request.onerror = event => {
+  console.error('failed to open database:', event);
+};
 
-  request.onsuccess = () => {
-    const db = request.result;
-    // Use the database.
-  };
+request.onsuccess = () => {
+  const db = request.result;
+  // Use the database.
+};
 
-  // This is called the first time a database is used
-  // and again each time the version number changes.
-  request.onupgradeneeded = event => {
-    const db = request.result;
-  };
-  ```
+// This is called the first time a database is used
+// and again each time the version number changes.
+request.onupgradeneeded = event => {
+  const db = request.result;
+};
+```
 
-- delete database
+#### delete database
 
-  ```js
-  const request = indexedDB.deleteDatabase('db-name');
+```js
+const request = indexedDB.deleteDatabase('db-name');
 
-  request.onerror = event => {
-    console.error('failed to delete database:', event);
-  };
+request.onsuccess = event => {
+  console.log('deleted database');
+  // event.result should be undefined
+};
 
-  request.onsuccess = event => {
-    console.log('deleted database');
-    // event.result should be undefined
-  };
-  ```
+request.onerror = event => {
+  console.error('failed to delete database:', event);
+};
+```
 
 ### IDBDatabase
 
 The `IDBDatabase` interface provides a connection to a database.
 Instances support the following operations.
 
-- create store
+#### create store
 
 ```js
 // Options are optional.  autoIncrement defaults to false.
@@ -152,86 +152,253 @@ const options = {autoIncrement: true, keyPath: 'property-name'};
 const store = db.createObjectStore('store-name', options);
 ```
 
-- delete store
+#### delete store
 
-  ```js
-  db.deleteObjectStore('store-name');
-  ```
+```js
+db.deleteObjectStore('store-name');
+```
 
-- create transaction
+#### create transaction
 
-  ```js
-  const mode = 'readwrite'; // or 'readonly' (default)
-  const stores = ['db-name']; // can be one string or an array of them
-  const txn = db.transaction(stores, mode);
-  ```
+```js
+const mode = 'readwrite'; // or 'readonly' (default)
+const stores = ['db-name']; // can be one string or an array of them
+const txn = db.transaction(stores, mode);
+```
 
-- close database connection
+#### close database connection
 
-  ```js
-  db.close();
-  ```
+```js
+db.close();
+```
 
 ### IDBTransaction
 
-- delete a store
+The `IDBTransaction` interface provides an asynchronous transaction
+over a set of stores in a common database.
+Instances support the following properties and methods.
 
-  ```js
-  const store = txn.objectStore('store-name');
-  ```
+#### get associated database
 
-- abort transaction (rolls back)
+```js
+const db = txn.db;
+```
 
-  ```js
-  txn.abort();
-  ```
+#### get associated store names
 
-- commit transaction
+```js
+const storeNames = txn.objectStoreNames;
+```
 
-  This is not normally needed because transactions
-  automatically commit when all requests are satisfied.
+#### get existing store
 
-  ```js
-  txn.commit();
-  ```
+```js
+const store = txn.objectStore('store-name');
+```
 
-- listen for events
+#### delete existing store
 
-  ```js
-  txn.onabort = () => {
-    console.log('transaction aborted');
-  };
+```js
+const store = txn.objectStore('store-name');
+```
 
-  txn.oncomplete = () => {
-    console.log('transaction completed');
-  };
+#### commit transaction
 
-  txn.onerror = event => {
-    console.error('transaction error:', event);
-  };
-  ```
+This is not normally needed because transactions
+automatically commit when all requests are satisfied.
+
+```js
+txn.commit();
+```
+
+#### abort transaction (rolls back)
+
+```js
+txn.abort();
+```
+
+#### listen for events
+
+```js
+txn.onabort = () => {
+  console.log('transaction aborted');
+};
+
+txn.oncomplete = () => {
+  console.log('transaction completed');
+};
+
+txn.onerror = event => {
+  console.error('transaction error:', event);
+};
+```
 
 ### IDBObjectStore
+
+The `IDBObjectStore` interface represents a database store
+which is similar to a table in a relational database.
+Instances support the following operations.
+
+#### get store name
+
+```js
+const name = store.name;
+```
+
+#### get key path
+
+```js
+const keyPath = store.keyPath;
+```
+
+#### get index names
+
+```js
+const indexNames = store.indexNames;
+```
+
+#### get associated transaction
+
+```js
+const txn = store.transaction;
+```
+
+#### add record to store
+
+```js
+const request = store.add(value, key);
+
+request.onsuccess = event => {
+  console.log('added record');
+};
+
+request.onerror = event => {
+  console.error('failed to add record:', event);
+};
+```
+
+#### delete all records from store
+
+```js
+const request = store.clear();
+
+request.onsuccess = event => {
+  console.log('cleared store');
+};
+
+request.onerror = event => {
+  console.error('failed to clear store:', event);
+};
+```
+
+#### get number of records in store
+
+The `count` method can:
+
+- get the number records in the store (no argument passed)
+- determine if a record with a given key exists, returning 0 or 1
+  (string key passed)
+- get the number of records whose keys fall in a given range
+  (instance of {% aTargetBlank
+  "https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange",
+  "IDBKeyRange" %} passed)
+
+```js
+const query = ...;
+const request = store.count(query); // query is optional
+
+request.onsuccess = event => {
+  const count = request.result;
+  console.log('count =', count);
+};
+
+request.onerror = event => {
+  console.error('failed to count records:', event);
+};
+```
+
+#### create index for store
+
+```js
+const breedIndex = store.createIndex('breed-index', ['breed'], {unique: false});
+
+// This creates a "compound index".
+const nameBreedIndex = store.createIndex(
+  'name-breed-index',
+  ['name', 'breed'],
+  {unique: false}
+);
+```
+
+#### delete records
+
+```js
+const request = store.delete('some-key'); // or IDBKeyRange
+
+request.onsuccess = event => {
+  console.log('records were deleted');
+};
+
+request.onerror = event => {
+  console.error('failed to delete records:', event);
+};
+```
+
+#### delete index
+
+```js
+store.deleteIndex('index-name');
+```
+
+#### get record with key
+
+```js
+const request = store.get('some-key');
+
+request.onsuccess = event => {
+  const record = request.result;
+  console.log('record =', record);
+};
+
+request.onerror = event => {
+  console.error('failed to get record:', event);
+};
+```
+
+#### get records
+
+The `getAll` method can:
+
+- get all the records in a store (no argument passed)
+- get the record with a given key (string key passed)
+- get all the records whose keys fall in a given range
+  (instance of {% aTargetBlank
+  "https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange",
+  "IDBKeyRange" %} passed)
+
+```js
+const query = ...;
+const request = store.getAll(query); // query is optional
+// Optionally pass a count as the second argument
+// to limit the number of records returned.
+
+request.onsuccess = event => {
+  const records = request.result; // an array
+  console.log('records =', records);
+};
+
+request.onerror = event => {
+  console.error('failed to get record:', event);
+};
+```
+
+#### get all keys
 
 ### IDBRequest
 
 ### IDBCursor
 
 ## Common Operations
-
-## Create an index
-
-```js
-const db = request.result;
-const store = db.createObjectStore('dogs', {keyPath: 'id'});
-// Include multiple property names in the
-// 2nd parameter array for a compound index.
-store.createIndex('breed', ['breed'], {unique: false});
-```
-
-## Delete an index
-
-## Create an object
 
 ## Query for a single object
 
