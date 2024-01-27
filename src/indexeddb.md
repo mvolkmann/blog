@@ -84,6 +84,7 @@ To see the contents of IndexedDB databases in Chrome:
 - in the left nav under the "Storage" section, expand "indexedDB"
 - click the name of a store
 - all the keys and their object values will be displayed
+- objects can be deleted, but not modified
 
 To see the contents of IndexedDB databases in Chrome:
 
@@ -93,3 +94,23 @@ To see the contents of IndexedDB databases in Chrome:
 - expand a specific database
 - click a specific store
 - all the keys and their object values will be displayed
+
+## Common Operations
+
+To create a database
+
+To delete a database
+
+To create an index
+
+To delete an index
+
+To create an object
+
+To query for a single object
+
+To query for multiple objects
+
+To modify an object
+
+To delete an object
