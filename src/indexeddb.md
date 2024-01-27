@@ -457,6 +457,34 @@ request.onerror = event => {
 
 ### IDBRequest
 
+The `IDBRequest` interface represents the result of an asynchronous operation.
+It is common to set the `onsuccess` and `onerror` properties
+to a callback function that is passed an event object.
+
+#### get result
+
+```js
+const result = request.result;
+```
+
+#### get associated error, if any
+
+```js
+const error = request.error;
+```
+
+#### get associated store or index
+
+```js
+const source = request.source;
+```
+
+#### get associated transaction
+
+```js
+const txn = request.transaction;
+```
+
 ### IDBCursor
 
 #### get associated store or index
@@ -516,3 +544,9 @@ request.onerror = event => {
   console.error('failed to update record:', event);
 };
 ```
+
+#### IDBIndex
+
+#### IDBKeyRange
+
+#### IDBIndex
