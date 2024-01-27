@@ -98,6 +98,8 @@ To see the contents of IndexedDB databases in Chrome:
 ## IndexedDB Interfaces
 
 The IndexedDB API defines many interfaces that implementations implement.
+The following subsections summarized the most important
+properties and methods of these interfaces.
 
 ### IDBFactory
 
@@ -110,6 +112,7 @@ Instances support the following operations.
 
 ```js
 const version = 1;
+// indexedDB is a global property on the window object.
 const request = indexedDB.open('db-name', version);
 
 request.onerror = event => {
