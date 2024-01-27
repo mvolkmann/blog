@@ -101,6 +101,9 @@ The IndexedDB API defines many interfaces that implementations implement.
 The following subsections summarized the most important
 properties and methods of these interfaces.
 
+Also see the Promise-based library {% aTargetBlank
+"https://github.com/jakearchibald/idb#opendb", "idb" %} from Jake Archibald.
+
 ### IDBFactory
 
 The {% aTargetBlank
@@ -115,13 +118,13 @@ const version = 1;
 // indexedDB is a global property on the window object.
 const request = indexedDB.open('db-name', version);
 
-request.onerror = event => {
-  console.error('failed to open database:', event);
-};
-
 request.onsuccess = () => {
   const db = request.result;
   // Use the database.
+};
+
+request.onerror = event => {
+  console.error('failed to open database:', event);
 };
 
 // This is called the first time a database is used
@@ -134,6 +137,11 @@ request.onupgradeneeded = event => {
 ```
 
 #### delete database
+
+A database can be deleted from the DevTools console
+by entering `indexedDB.deleteDatabase('db-name')`.
+
+In code, a database can be deleted as follows:
 
 ```js
 const request = indexedDB.deleteDatabase('db-name');
@@ -281,7 +289,7 @@ const txn = store.transaction;
 #### add record to store
 
 ```js
-const request = store.add(value, key);
+const request = store.add(value);
 
 request.onsuccess = event => {
   console.log('added record');
