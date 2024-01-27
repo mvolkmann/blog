@@ -178,13 +178,13 @@ The `IDBTransaction` interface provides an asynchronous transaction
 over a set of stores in a common database.
 Instances support the following properties and methods.
 
-#### get associated database
+#### get database associated with transaction
 
 ```js
 const db = txn.db;
 ```
 
-#### get associated store names
+#### get store names associated with transaction
 
 ```js
 const storeNames = txn.objectStoreNames;
@@ -257,7 +257,7 @@ const keyPath = store.keyPath;
 const indexNames = store.indexNames;
 ```
 
-#### get associated transaction
+#### get transaction associated with store
 
 ```js
 const txn = store.transaction;
@@ -400,35 +400,23 @@ that fall in a specified {% aTargetBlank
 "https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange",
 "IDBKeyRange" %}.
 
-#### open index to iterate over all records
+#### open index over all records
 
 ```js
 const index = store.index('index-name');
 index.openCursor().onsuccess = event => {
   const cursor = event.target.result;
-  if (cursor) {
-    const record = cursor.value;
-    // Use record properties.
-    cursor.continue();
-  } else {
-    console.log('processed all records');
-  }
+  // See IDBCursor methods.
 };
 ```
 
-#### open cursor to iterate over records in a key range
+#### open cursor over records in a key range
 
 ```js
 const request = store.openCursor();
 request.onsuccess = event => {
   const cursor = event.target.result;
-  if (cursor) {
-    const record = cursor.value;
-    // Use record properties.
-    cursor.continue();
-  } else {
-    console.log('processed all matches');
-  }
+  // See IDBCursor methods.
 };
 ```
 
@@ -467,19 +455,19 @@ to a callback function that is passed an event object.
 const result = request.result;
 ```
 
-#### get associated error, if any
+#### get error associated with request, if any
 
 ```js
 const error = request.error;
 ```
 
-#### get associated store or index
+#### get store or index associated with request
 
 ```js
 const source = request.source;
 ```
 
-#### get associated transaction
+#### get transaction associated with request
 
 ```js
 const txn = request.transaction;
@@ -487,7 +475,19 @@ const txn = request.transaction;
 
 ### IDBCursor
 
-#### get associated store or index
+#### iterate over all records
+
+```js
+if (cursor) {
+  const record = cursor.value;
+  // Use record properties.
+  cursor.continue();
+} else {
+  console.log('processed all records');
+}
+```
+
+#### get store or index associated with cursor
 
 ```js
 const source = cursor.source;
@@ -545,8 +545,30 @@ request.onerror = event => {
 };
 ```
 
-#### IDBIndex
+### IDBIndex
 
-#### IDBKeyRange
+#### get name of index
 
-#### IDBIndex
+```js
+const name = index.name;
+```
+
+#### get key path of index
+
+```js
+const keyPath = index.keyPath;
+```
+
+#### determine if index is unique
+
+```js
+const unique = index.unique;
+```
+
+#### get store associated with index
+
+```js
+const store = index.objectStore;
+```
+
+### IDBKeyRange
