@@ -97,6 +97,8 @@ To see the contents of IndexedDB databases in Chrome:
 
 ## IndexedDB Interfaces
 
+The IndexedDB API defines many interfaces that implementations implement.
+
 ### IDBFactory
 
 The {% aTargetBlank
@@ -122,6 +124,8 @@ request.onsuccess = () => {
 // This is called the first time a database is used
 // and again each time the version number changes.
 request.onupgradeneeded = event => {
+  // The event may be an instance of the IDBVersionChangeEvent interface
+  // and have the properties "oldVersion" and "newVersion".
   const db = request.result;
 };
 ```
