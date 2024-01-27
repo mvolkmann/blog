@@ -99,7 +99,9 @@ To see the contents of IndexedDB databases in Chrome:
 
 ### IDBFactory
 
-The `IDBFactory` interface provides access to databases.
+The {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/API/IDBFactory",
+"IDBFactory" %} interface provides access to databases.
 Instances support the following operations.
 
 #### open database
@@ -141,7 +143,9 @@ request.onerror = event => {
 
 ### IDBDatabase
 
-The `IDBDatabase` interface provides a connection to a database.
+The {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase",
+"IDBDatabase" %} interface provides a connection to a database.
 Instances support the following operations.
 
 #### create store
@@ -174,7 +178,9 @@ db.close();
 
 ### IDBTransaction
 
-The `IDBTransaction` interface provides an asynchronous transaction
+The {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/API/IDBTransaction",
+"IDBTransaction" %} interface provides an asynchronous transaction
 over a set of stores in a common database.
 Instances support the following properties and methods.
 
@@ -235,7 +241,9 @@ txn.onerror = event => {
 
 ### IDBObjectStore
 
-The `IDBObjectStore` interface represents a database store
+The {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/API/IDBObjectStore",
+"IDBObjectStore" %} interface represents a database store
 which is similar to a table in a relational database.
 Instances support the following operations.
 
@@ -445,7 +453,9 @@ request.onerror = event => {
 
 ### IDBRequest
 
-The `IDBRequest` interface represents the result of an asynchronous operation.
+The {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/API/IDBRequest",
+"IDBRequest" %} interface represents the result of an asynchronous operation.
 It is common to set the `onsuccess` and `onerror` properties
 to a callback function that is passed an event object.
 
@@ -547,6 +557,11 @@ request.onerror = event => {
 
 ### IDBIndex
 
+The {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/API/IDBIndex",
+"IDBIndex" %} interface provides efficient retrieval of records in a store
+based on one or more properties of the records.
+
 #### get name of index
 
 ```js
@@ -572,3 +587,24 @@ const store = index.objectStore;
 ```
 
 ### IDBKeyRange
+
+The {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange",
+"IDBKeyRange" %} interface describes a range of keys.
+It is used to retrieve matching keys or records from a store.
+
+To create a range, call one of the following static methods:
+
+- `lowerBound`: lower bound can be inclusive or exclusive; no upper bound
+- `upperBound`: upper bound can be inclusive or exclusive; no lower bound
+- `bound`: lower and upper bound can both be inclusive or exclusive
+- `only`: single key
+
+The properties of instances are `lower`, `upper`,
+`lowerOpen` (`boolean`), and `upperOpen` (`boolean`)
+
+#### test if a key is in range
+
+```js
+const included = range.includes(key);
+```
