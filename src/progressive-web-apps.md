@@ -196,7 +196,10 @@ For example, the following sequence of events can occur:
   to send it some of the fetched data
 - web app updates the DOM using the received data
 
-By default, changes to service worker code are not loaded by refreshing the browser.
+### Updates
+
+By default, changes to service worker code
+are not loaded by refreshing the browser.
 To force this in Chrome during development:
 
 - open the DevTools
@@ -207,6 +210,26 @@ To force this in Chrome during development:
 <img alt="Service Workers Update on reload" style="width: 100%"
   src="/blog/assets/service-workers-update-on-reload.png?v={{pkg.version}}"
   title="Service Workers Update on reload">
+
+By default, changes to deployed service workers
+will not take effect for users until they
+close all browser tabs that are using the previous service workers
+and open new tabs.
+
+To force existing tabs that are browsing the site
+to activate service worker updates,
+add the following code in the service worker.
+Users need to close the existing tabs for the site
+and open a new one for this change to take effect.
+
+```js
+self.addEventListener('install', event => {
+  // This causes a newly installed service worker to
+  // progress to the activating state, regardless of
+  // whether there is already an active service worker.
+  self.skipWaiting();
+});
+```
 
 ## Caching Strategies
 
