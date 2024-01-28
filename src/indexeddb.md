@@ -458,31 +458,24 @@ The {% aTargetBlank
 It is common to set the `onsuccess` and `onerror` properties
 to a callback function that is passed an event object.
 
-#### get result
+Instances have the following properties.
 
-```js
-const result = request.result;
-```
+| Property      | Description               |
+| ------------- | ------------------------- |
+| `error`       | associated error, if any  |
+| `result`      | associated result         |
+| `source`      | associated store or index |
+| `transaction` | associated transaction    |
 
-#### get error associated with request, if any
-
-```js
-const error = request.error;
-```
-
-#### get store or index associated with request
-
-```js
-const source = request.source;
-```
-
-#### get transaction associated with request
-
-```js
-const txn = request.transaction;
-```
+Instances do not support any operations.
 
 ### IDBCursor
+
+The {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/API/IDBCursor",
+"IDBCursor" %} interface is used to iterate over records in a store.
+
+Instances support the following operations.
 
 #### iterate over all records
 
@@ -561,29 +554,16 @@ The {% aTargetBlank
 "IDBIndex" %} interface provides efficient retrieval of records in a store
 based on one or more properties of the records.
 
-#### get name of index
+Instances have the following properties.
 
-```js
-const name = index.name;
-```
+| Property  | Description                                               |
+| --------- | --------------------------------------------------------- |
+| `keyPath` | associated key path                                       |
+| `name`    | index name                                                |
+| `store`   | associated store                                          |
+| `unique`  | boolean indicating whether only unique values are allowed |
 
-#### get key path of index
-
-```js
-const keyPath = index.keyPath;
-```
-
-#### determine if index is unique
-
-```js
-const unique = index.unique;
-```
-
-#### get store associated with index
-
-```js
-const store = index.objectStore;
-```
+Instances do not support any operations.
 
 ### IDBKeyRange
 
@@ -599,8 +579,14 @@ To create a range, call one of the following static methods:
 - `bound`: lower and upper bound can both be inclusive or exclusive
 - `only`: single key
 
-The properties of instances are `lower`, `upper`,
-`lowerOpen` (`boolean`), and `upperOpen` (`boolean`)
+Instances have the following properties.
+
+| Property    | Description                                             |
+| ----------- | ------------------------------------------------------- |
+| `lower`     | lower bound                                             |
+| `lowerOpen` | boolean indicating whether the lower bound is exclusive |
+| `upper`     | upper bound                                             |
+| `upperOpen` | boolean indicating whether the upper bound is exclusive |
 
 #### test if a key is in range
 
