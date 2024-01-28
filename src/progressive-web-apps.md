@@ -211,6 +211,9 @@ To force this in Chrome during development:
   src="/blog/assets/service-workers-update-on-reload.png?v={{pkg.version}}"
   title="Service Workers Update on reload">
 
+Another less convenient option is to click the "Unregister" link
+for the service worker and refresh the browser twice.
+
 By default, changes to deployed service workers
 will not take effect for users until they
 close all browser tabs that are using the previous service workers
