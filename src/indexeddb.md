@@ -87,7 +87,9 @@ To see the contents of IndexedDB databases in Chrome:
 - all the record keys and values will be displayed
 - records can be deleted, but not modified
 
-To see the contents of IndexedDB databases in Chrome:
+To delete a record in Chrome, right-click the record and select "Delete".
+
+To see the contents of IndexedDB databases in Safari:
 
 - open the "Web Inspector"
 - click the "Storage" tab
