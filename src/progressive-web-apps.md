@@ -196,6 +196,18 @@ For example, the following sequence of events can occur:
   to send it some of the fetched data
 - web app updates the DOM using the received data
 
+By default, changes to service worker code are not loaded by refreshing the browser.
+To force this in Chrome during development:
+
+- open the DevTools
+- click the "Applications" tab
+- in the left nav, click "Service workers"
+- check the "Update on reload" checkbox
+
+<img alt="Service Workers Update on reload" style="width: 100%"
+  src="/blog/assets/service-workers-update-on-reload.png?v={{pkg.version}}"
+  title="Service Workers Update on reload">
+
 ## Caching Strategies
 
 Services workers can implement many caching strategies,
