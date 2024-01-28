@@ -109,6 +109,7 @@ Also see the Promise-based library {% aTargetBlank
 The {% aTargetBlank
 "https://developer.mozilla.org/en-US/docs/Web/API/IDBFactory",
 "IDBFactory" %} interface provides access to databases.
+
 Instances support the following operations.
 
 #### open database
@@ -161,6 +162,7 @@ request.onerror = event => {
 The {% aTargetBlank
 "https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase",
 "IDBDatabase" %} interface provides a connection to a database.
+
 Instances support the following operations.
 
 #### create store
@@ -185,7 +187,7 @@ const stores = ['db-name']; // can be one string or an array of them
 const txn = db.transaction(stores, mode);
 ```
 
-#### close database connection
+#### close connection
 
 ```js
 db.close();
@@ -197,19 +199,15 @@ The {% aTargetBlank
 "https://developer.mozilla.org/en-US/docs/Web/API/IDBTransaction",
 "IDBTransaction" %} interface provides an asynchronous transaction
 over a set of stores in a common database.
-Instances support the following properties and methods.
 
-#### get database associated with transaction
+Instances have the following properties.
 
-```js
-const db = txn.db;
-```
+| Property           | Description            |
+| ------------------ | ---------------------- |
+| `db`               | associated database    |
+| `objectStoreNames` | associated store names |
 
-#### get store names associated with transaction
-
-```js
-const storeNames = txn.objectStoreNames;
-```
+Instances support the following operations.
 
 #### get existing store
 
@@ -260,31 +258,17 @@ The {% aTargetBlank
 "https://developer.mozilla.org/en-US/docs/Web/API/IDBObjectStore",
 "IDBObjectStore" %} interface represents a database store
 which is similar to a table in a relational database.
+
+Instances have the following properties.
+
+| Property      | Description            |
+| ------------- | ---------------------- |
+| `indexNames`  | associated index names |
+| `keyPath`     | associated key path    |
+| `name`        | store name             |
+| `transaction` | associated transaction |
+
 Instances support the following operations.
-
-#### get store name
-
-```js
-const name = store.name;
-```
-
-#### get key path
-
-```js
-const keyPath = store.keyPath;
-```
-
-#### get index names
-
-```js
-const indexNames = store.indexNames;
-```
-
-#### get transaction associated with store
-
-```js
-const txn = store.transaction;
-```
 
 #### add record to store
 
