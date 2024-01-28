@@ -74,6 +74,7 @@ data for any origin that hasn't had an user interactions in the last week
 will be evicted.
 This is clearly bad web apps that intended to
 store data for long periods of time.
+TODO: Does Safari keep the data permanently if the user adds the app to their home screen?
 
 ## DevTools
 
@@ -139,8 +140,11 @@ request.onupgradeneeded = event => {
 
 #### delete database
 
-A database can be deleted from the DevTools console
-by entering `indexedDB.deleteDatabase('db-name')`.
+A database can be deleted from the DevTools in two ways.
+
+1. From the Application tab, select the database in the left nav
+   under Storage ... IndexedDB and click the "Delete Database" button.
+1. From the Console tab, enter `indexedDB.deleteDatabase('db-name')`.
 
 In code, a database can be deleted as follows:
 
@@ -326,8 +330,13 @@ request.onerror = event => {
 
 #### create index for store
 
+Creating an index creates a new list of records
+that are sorted on a given property.
+Selecting an index in the Chrome DevTools Application tab
+displays the new list.
+
 ```js
-const breedIndex = store.createIndex('breed-index', ['breed'], {unique: false});
+const breedIndex = store.createIndex('breed-index', 'breed', {unique: false});
 
 // This creates a "compound index".
 const nameBreedIndex = store.createIndex(
