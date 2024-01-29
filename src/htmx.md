@@ -2735,7 +2735,7 @@ See the working example project that includes the code above at {% aTargetBlank
 "https://github.com/mvolkmann/server-sent-events-examples",
 "server-sent-events-examples" %}.
 
-## History
+## Browser History
 
 TODO: Describe hx-history-elt.
 
@@ -2781,6 +2781,18 @@ The hypermedia approach used by htmx to build web applications
 can also be used to build mobile apps.
 See {% aTargetBlank "https://hyperview.org", "Hyperview" %}
 which builds on React Native.
+
+Another option is to build a {% aTargetBlank
+"/blog/topics/#/blog/progressive-web-apps", "Progressive Web App" %} (PWA).
+
+For PWAs that hold all their data on the device using localStorage or
+{% aTargetBlank "/blog/topics/#/blog/indexeddb", "IndexedDB" %},
+there is no need for user authentication.
+The endpoints used by htmx to get HTML snippets
+can be managed by a service worker which intercepts fetch requests
+and runs local JavaScript code to build responses.
+For an example of this approach, see {% aTargetBlank
+"https://github.com/mvolkmann/pwa-cloudflare-demo", "pwa-cloudflare-demo" %}.
 
 ## Resources
 
