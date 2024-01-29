@@ -67,8 +67,10 @@ A service worker is a kind of {% aTargetBlank
 "Web Worker" %}.
 This means that its functionality is defined in a JavaScript source file
 and it runs in a background thread.
-The window or tab in which the associated web app is running
-can be closed and associated service workers can continue executing.
+Each of the windows and tabs associated with the web app
+share access to the service workers of the app.
+Even if the window and tabs are closed,
+the service workers of the app can continue executing.
 
 Service workers have many use cases:
 
@@ -98,10 +100,13 @@ The following code does this for a service worker
 defined in the file `service-worker.js`.
 
 ```js
+// This can be used to post messages to the service worker.
+let serviceWorker;
+
 if ('serviceWorker' in navigator) {
   try {
     const reg = await navigator.serviceWorker.register('service-worker.js');
-    console.log('service worker registered with scope', reg.scope);
+    serviceWorker = reg.installing || reg.waiting || reg.active;
   } catch (error) {
     console.error('service worker registered failed:', error);
   }
