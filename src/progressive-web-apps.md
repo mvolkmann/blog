@@ -542,6 +542,8 @@ There can be many such cases to consider.
 
 Service workers listen for events and act on them.
 
+### install Event
+
 The first event received is `install`.
 This is a one-time event.
 One way to handle this event is to do the following:
@@ -553,12 +555,24 @@ One way to handle this event is to do the following:
   They will be available without a network connection
   after the app is initially loaded from the network.
 
+### activate Event
+
 The second event received is `activate`.
 This is also a one-time event.
 One way to handle this event is to delete any old caches for this app
 that were created when previous builds of the app were run.
 This can be determined by checking whether their names
 contain the current value of the `timestamp` variable.
+
+### message Event
+
+A `message` event occurs when a controlled page
+calls `ServiceWorker.postMessage(message)`
+to send a message to a specific service worker.
+The service worker can optionally send a response back
+by calling `Client.postMessage(message)`.
+
+### fetch Event
 
 The third event type received is `fetch`.
 This can be received many times.
@@ -582,6 +596,18 @@ using the following steps in this sequence:
 This caching strategy means that the results of API service calls are cached.
 Later, if the same request is made again and the service is offline,
 the cached value will be returned.
+
+### sync Event
+
+This event is used to determine when data can be synchronized
+between a web page and service worker.
+It relies on a `SyncManager` which is experimental.
+It is supported by Chrome and Edge, but not by Safari or Firefox.
+
+### push Event
+
+A `push` event occurs when a push notification is received.
+TODO: Try implementing push notifications.
 
 ## Managing Service Workers in Chrome
 
