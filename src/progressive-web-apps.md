@@ -17,7 +17,7 @@ layout: topic-layout.njk
 ## Overview
 
 Progressive Web Apps (PWAs) enable using web technologies
-to implement mobile apps.
+to implement mobile applications.
 
 PWAs can provide many of the features
 typically associated with native applications.
@@ -44,26 +44,25 @@ push notifications, and touch gestures.
 
 ## Running and Installing a PWA
 
-The steps to run a new PWA for the first time are:
+To run a PWA, browse its URL.
+This can be done by clicking a link received in an email or chat message.
+It can also be done by searching for the app in web browser
+or manually entering the URL in the browser location bar.
 
-1. Open a web browser.
-1. Search for the application or enter its URL.
-1. Click its link.
-1. Optionally install the PWA which downloads all the require files.
-   This also adds an app icon to the home screen so in the future
-   the app can be launched by double-clicking its icon.
-   The app will still run in the mobile web browser,
-   but the app can choose to hide the browser chrome
-   so it appears more like a native app.
+Installing a PWA is optional.
+The steps to do so vary based on operating system.
+In iOS, tap the share button and select "Add to Home Screen".
 
-Often the first three steps are replaced by clicking
-a link that is found in another way such as
-in an email message or a social media site.
-In this case a new PWA can be launched with a single click.
+Installing a PWA downloads all the required files.
+It also adds an app icon to the home screen so in the future
+the app can be launched by tapping its icon.
+The app will still run in the mobile web browser,
+but the app can choose to hide the browser chrome
+so it appears more like a native app.
 
-Production PWAs must be downloaded using HTTPS in order to use service workers.
-In development it is possible to configure the browser to
-allow using service workers with localhost URLs that use HTTP.
+In development, PWA can be run from URLs that being with `http://localhost`.
+But in production, PWAs must be run from URLS that use HTTPS
+in order to utilize service workers.
 
 ## Security
 
