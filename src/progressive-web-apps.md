@@ -749,14 +749,15 @@ To delete an entire cache, right-click a cache name and select Delete.
 
 ### Simulating Offline
 
-To simulate being offline, click Service Workers in the left nav
-and check the Offline check box at the top of the main area.
+In order to test the ability of service workers to use cached files,
+it is useful to simulate being offline.
+To do this, open Chrome Devtools, click the "Application" tab,
+click Service Workers in the left nav, and
+check the "Offline" check box at the top of the main area.
 This is an alternative to going to the Network tab
-and changing the Online drop-down to Offline.
+and changing the "No throttling" drop-down to "Offline".
 A warning icon will appear in the Network tab
 to remind you that you are offline.
-This is useful for testing the ability of service workers
-to use cached files.
 
 <img alt="Simulating being offline in Chrome DevTools" style="width: 100%"
   src="/blog/assets/devtools-offline.png?v={{pkg.version}}"
