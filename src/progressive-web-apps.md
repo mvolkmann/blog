@@ -126,8 +126,13 @@ To determine if a web app can be used as a PWA:
 
 ## Service Workers
 
-Service workers are the key to many PWA features.
-A service worker is a kind of web worker.
+{% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API",
+"Service Workers" %} are the key to many PWA features.
+
+A service worker is a kind of {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API",
+"Web Worker" %}.
 This means that its functionality is defined in a JavaScript source file
 and it runs in a background thread.
 The window or tab in which the associated web app is running
@@ -135,26 +140,25 @@ can be closed and associated service workers can continue executing.
 
 Service workers have many use cases:
 
-- enable offline functionality by acting as
-  a proxy between a web app and the network,
-  deciding how to handle each resource request
+- enable offline functionality
 - listen for external events
 - periodically fetch data
-- send notifications to associated web apps using push notifications
+- send push notifications to the associated web app
 
 A PWA can register any number of service workers,
 but typically only one is used.
 
 Service workers can allow parts of a web application
 to continue functioning after network connectivity is lost.
-They do this by returning cached responses for requests
-when requests for inaccessible resources are received.
 
 Common tasks performed by service workers include:
 
 - creating caches
 - storing resources in caches
-- intercepting network requests and deciding how to respond
+- intercepting network requests and deciding how to respond,
+  including responding with cached values
+
+### Storage Limits
 
 There is a limit to the amount of data each application domain can cache
 and a limit to the amount of data that can be cached across all domains.
@@ -181,6 +185,8 @@ limit of 500 MB per application domain in Safari.
 When the total limit is reached, some browsers (Chrome and Firefox)
 remove the least recently used caches to make room for new caches.
 
+### Message Passing
+
 Service Workers do not have access to the DOM of their associated web app,
 so they cannot directly change what is rendered in the browser.
 However, they can communicate with the web app via message passing.
@@ -200,12 +206,13 @@ For example, the following sequence of events can occur:
 
 By default, changes to service worker code
 are not loaded by refreshing the browser.
-To force this in Chrome during development:
+The following steps in Chrom enable refreshing to
+reload service workers during development.
 
-- open the DevTools
-- click the "Applications" tab
-- in the left nav, click "Service workers"
-- check the "Update on reload" checkbox
+- Open the DevTools.
+- Click the "Applications" tab.
+- In the left nav, click "Service workers".
+- Check the "Update on reload" checkbox.
 
 <img alt="Service Workers Update on reload" style="width: 100%"
   src="/blog/assets/service-workers-update-on-reload.png?v={{pkg.version}}"
@@ -219,11 +226,9 @@ will not take effect for users until they
 close all browser tabs that are using the previous service workers
 and open new tabs.
 
-To force existing tabs that are browsing the site
+To force existing tabs that are browsing a site
 to activate service worker updates,
 add the following code in the service worker.
-Users need to close the existing tabs for the site
-and open a new one for this change to take effect.
 
 ```js
 self.addEventListener('install', event => {
@@ -233,6 +238,10 @@ self.addEventListener('install', event => {
   self.skipWaiting();
 });
 ```
+
+In order for this change to take effect,
+users must close existing tabs for the site and open a new one.
+TODO: After this is done, do users have to refresh the page to load service worker updates?
 
 ## Caching Strategies
 
