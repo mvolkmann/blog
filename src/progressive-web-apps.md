@@ -713,7 +713,7 @@ This displays the amount of space currently occupied by
 cache storage, service workers, and IndexedDB.
 It also displays a series of check boxes for categories of things
 hat can be cleared including "Unregistered service workers",
-"Local and session storage", "IndexedDB", "Web SQL",
+"Local and session storage", "IndexedDB", "Web SQL" (deprecated),
 "Cookies", and "Cache storage".
 
 By default, all the check boxes are checked.
