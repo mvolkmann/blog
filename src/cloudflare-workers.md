@@ -35,6 +35,8 @@ Features provided include:
 
 - run instantly without cold starts
 
+  This may not be true when using the free tier.
+
 - affordable
 
   The first 100,000 requests each day are free.
@@ -157,6 +159,10 @@ To test the app, browse localhost:8787.
 The local server provides hot reloading of only itself, not the web browser.
 
 To deploy app again after making local changes, enter `npm run deploy`.
+
+An alternative to creating a project with `npm create cloudflare -- {app-name}`
+is to use `npm create hono@latest` and select the "cloudflare-workers" template.
+TODO: How does this approach differ?
 
 ## Using Hono
 
