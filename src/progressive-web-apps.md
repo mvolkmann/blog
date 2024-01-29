@@ -707,14 +707,18 @@ were served from the network or from a cache.
   src="/blog/assets/devtools-network-files-from-cache.png?v={{pkg.version}}"
   title="Files loaded from cache in Chrome DevTools">
 
-To clear many things at once, click the Application tab
-and click "Storage" in the left nav.
-This displays a series of check boxes in the main area
-for categories of things that can be cleared.
+To see the space being used by the current application domain,
+click the Application tab and click "Storage" in the left nav.
+This displays the amount of space currently occupied by
+cache storage, service workers, and IndexedDB.
+It also displays a series of check boxes for categories of things
+hat can be cleared including "Unregistered service workers",
+"Local and session storage", "IndexedDB", "Web SQL",
+"Cookies", and "Cache storage".
+
 By default, all the check boxes are checked.
-This includes "Unregister Service Workers" and "Cache storage".
-Click the "Clear Site Data" button to clear
-the data associated with every checked category.
+Click the "Clear Site Data" button above the checkboxes
+to clear the data associated with every checked category.
 
 <img alt="Clearing storage in Chrome DevTools" style="width: 100%"
   src="/blog/assets/devtools-clear-storage.png?v={{pkg.version}}"
