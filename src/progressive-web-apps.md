@@ -42,6 +42,20 @@ Supported features include background sync, bluetooth, camera access,
 contact access, device motion, file access, geolocation, offline mode,
 push notifications, and touch gestures.
 
+## Advantages Over Native Apps
+
+The advantages that PWAs have over native mobile apps include the ability to:
+
+- implement using widely known web technologies
+- bypass app store review
+- allow users to access apps by URL
+  rather than downloading them from an app store
+- avoid app store cut of purchase prices (such as Apple's 30% cut)
+- run on the web, Android, and iOS with a single code base
+- provide automatic app updates
+
+TODO: Fix the order of the remaining sections.
+
 ## Running and Installing a PWA
 
 To run a PWA, browse its URL.
@@ -68,18 +82,6 @@ in order to utilize service workers.
 
 When a PWA attempts to access device features, such as contacts or the camera,
 the user will be prompted to grant permission.
-
-## Advantages Over Native Apps
-
-The advantages that PWAs have over native mobile apps include the ability to:
-
-- allow users to access apps by URL
-  instead of needing to download from an app store
-- bypass app store review
-- avoid app store cut of purchase prices (such as Apple's 30% cut)
-- provide automatic app updates
-- implement using widely known web technologies
-- run on web, Android, and iOS with a single code base
 
 ## Manifest File
 
@@ -113,6 +115,20 @@ Once a service worker has been registered,
 its manifest can be examined in Chrome devtools
 by clicking the "Application" tab and clicking "Manifest" in the left nav.
 
+## Generating Icons
+
+The Node package {% aTargetBlank
+"https://github.com/elegantapp/pwa-asset-generator", "pwa-asset-generator" %}
+generates all the icons required by a PWA from a single image file.
+To use this:
+
+- Create the file `public/images/logo.png`.
+- Enter `bunx pwa-asset-generator public/images/logo.png public/icons`.
+- This will generate many images files in the `public/icons` directory.
+- Copy the JSON array this outputs and paste it into `manifest.json`
+  as the value of the `icons` property.
+- Remove "public/" from the beginning of each icon `src` value.
+
 ## Evaluating Readiness
 
 To determine if a web app can be used as a PWA:
@@ -121,7 +137,7 @@ To determine if a web app can be used as a PWA:
 - Open the DevTools.
 - Click on the "Lighthouse" tab.
 - Click the "Analyze page load" button.
-- Look for the "Progressive Web App" score.
+- Click the "Progressive Web App" circle and address any issues identified.
 
 ## Service Workers
 
@@ -200,6 +216,9 @@ For example, the following sequence of events can occur:
 - service worker posts a message to the web app
   to send it some of the fetched data
 - web app updates the DOM using the received data
+
+TODO: Implement message passing between a page and a service worker
+and in the other direction. Then document the required code here.
 
 ## Caching Strategies
 
@@ -631,6 +650,8 @@ In order for this change to take effect,
 users must close existing tabs for the site and open a new one.
 TODO: After this is done, do users have to refresh the page to load service worker updates?
 
+## Viewing Source Code
+
 To view the source code for a service worker,
 click the link after the Source label.
 This switches to the Sources tab and displays the code.
@@ -646,6 +667,8 @@ click the “{}” at the bottom.
 <img alt="Pretty-printed service worker code in Chrome DevTools" style="width: 100%"
   src="/blog/assets/devtools-service-worker-code-pretty-printed.png?v={{pkg.version}}"
   title="Pretty-printed service worker code in Chrome DevTools">
+
+## Viewing Cached Files
 
 To see the files that have been cached,
 click the DevTools Application tab.
@@ -666,6 +689,8 @@ select the file in the main area and
 press the Delete key or click the “X” above the list of files.
 To delete an entire cache, right-click a cache name and select Delete.
 
+## Simulating Offline
+
 To simulate being offline, click Service Workers in the left nav
 and check the Offline check box at the top of the main area.
 This is an alternative to going to the Network tab
@@ -679,10 +704,14 @@ to use cached files.
   src="/blog/assets/devtools-offline.png?v={{pkg.version}}"
   title="Simulating being offline in Chrome DevTools">
 
+## Bypassing Service Workers
+
 To bypass the use of service workers,
 causing all requests to go to the network,
 check the Bypass for Network check box at the top of the main area.
 This, of course, requires being online.
+
+## Cached Files
 
 The list of requested files in the Network tab
 has a gear icon before each file that was loaded from a cache (see figure 19.8).
@@ -777,12 +806,3 @@ Do push notifications work in iOS now?
 
 Should you use the workbox and workbox-cli libraries
 to simplify service worker code?
-
-Document generating icons using https://github.com/elegantapp/pwa-asset-generator.
-
-- Create the file `public/images/logo.png`.
-- Enter `bunx pwa-asset-generator public/images/logo.png public/icons`.
-- This will generate many images files in the `public/icons` directory.
-- Copy the JSON array this outputs and paste it into `manifest.json`
-  as the value of the `icons` property.
-- Remove "public/" from the beginning of each icon `src` value.
