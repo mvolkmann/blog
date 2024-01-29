@@ -774,6 +774,26 @@ causing all requests to go to the network,
 check the Bypass for Network check box at the top of the main area.
 This, of course, requires being online.
 
+### Service Workers in Safari
+
+To see service workers in Safari, click the "Develop" menu,
+hover over "Service Workers" to reveal a menu that lists them,
+and click one of the service workers.
+This opens a window with three tabs at the top ...
+"Console", "Sources", and "Network".
+
+Safari does not provide an easy way to unregister service workers.
+To unregister all of them for a given site, browse the site,
+open the "Web Inspector", click the "Console" tab, and enter the following code.
+
+```js
+navigator.serviceWorker.getRegistrations().then(registrations => {
+  for (const registration of registrations) {
+    registration.unregister();
+  }
+});
+```
+
 ## Workbox
 
 {% aTargetBlank "https://web.dev/learn/pwa/workbox", "Workbox" %} is a set of
