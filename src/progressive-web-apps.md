@@ -202,47 +202,6 @@ For example, the following sequence of events can occur:
   to send it some of the fetched data
 - web app updates the DOM using the received data
 
-### Updates
-
-By default, changes to service worker code
-are not loaded by refreshing the browser.
-The following steps in Chrom enable refreshing to
-reload service workers during development.
-
-- Open the DevTools.
-- Click the "Applications" tab.
-- In the left nav, click "Service workers".
-- Check the "Update on reload" checkbox.
-
-<img alt="Service Workers Update on reload" style="width: 100%"
-  src="/blog/assets/service-workers-update-on-reload.png?v={{pkg.version}}"
-  title="Service Workers Update on reload">
-
-Another less convenient option is to click the "Unregister" link
-for the service worker and refresh the browser twice.
-
-By default, changes to deployed service workers
-will not take effect for users until they
-close all browser tabs that are using the previous service workers
-and open new tabs.
-
-To force existing tabs that are browsing a site
-to activate service worker updates,
-add the following code in the service worker.
-
-```js
-self.addEventListener('install', event => {
-  // This causes a newly installed service worker to
-  // progress to the activating state, regardless of
-  // whether there is already an active service worker.
-  self.skipWaiting();
-});
-```
-
-In order for this change to take effect,
-users must close existing tabs for the site and open a new one.
-TODO: After this is done, do users have to refresh the page to load service worker updates?
-
 ## Caching Strategies
 
 Services workers can implement many caching strategies,
@@ -609,7 +568,7 @@ It is supported by Chrome and Edge, but not by Safari or Firefox.
 A `push` event occurs when a push notification is received.
 TODO: Try implementing push notifications.
 
-## Managing Service Workers in Chrome
+## Managing Service Workers
 
 The Chrome DevTools provide a way to interact with service workers
 and the caches they create.
@@ -629,17 +588,49 @@ For example, it may say “activated and is running.”
 To stop the service worker, click the Stop link after the status.
 The Stop link will change to Start, and this can be clicked to restart it.
 
-Unregistering a service worker allows it to run through its lifecycle again
-one time, when the page is refreshed.
+### Updating a Service Worker
+
+By default, changes to service worker code
+are not loaded by refreshing the browser.
+
+Unregistering a service worker allows it to
+run through its lifecycle again when the page is refreshed.
 This includes processing the `install` and `activate` events again.
 This is useful for debugging the code that handles those events.
-To do this, click the Unregister link to the
-right of a service worker description.
 
-To cause service workers to install and activate again
-every time the page is reloaded, and without creating a new build,
-check the Update on Reload check box at the top of the main area,
-and refresh the page.
+To unregister a service worker in Chrome, click the "Unregister" link
+to the right of a service worker description
+and refresh the page (twice?).
+
+In Chrome, to enable page refreshes
+to reload service workers during development,
+check the "Update on reload" checkbox and refresh the page.
+
+<img alt="Service Workers Update on reload" style="width: 100%"
+  src="/blog/assets/service-workers-update-on-reload.png?v={{pkg.version}}"
+  title="Service Workers Update on reload">
+
+By default, changes to deployed service workers
+will not take effect for users until they
+close all browser tabs that are using the previous service workers
+and open new tabs.
+
+To force existing tabs that are browsing a site
+to activate service worker updates,
+add the following code in the service worker.
+
+```js
+self.addEventListener('install', event => {
+  // This causes a newly installed service worker to
+  // progress to the activating state, regardless of
+  // whether there is already an active service worker.
+  self.skipWaiting();
+});
+```
+
+In order for this change to take effect,
+users must close existing tabs for the site and open a new one.
+TODO: After this is done, do users have to refresh the page to load service worker updates?
 
 To view the source code for a service worker,
 click the link after the Source label.
@@ -723,19 +714,6 @@ created by the Chrome team, can be found at {% aTargetBlank
 
 A similar video for Firefox from the same team can be found at {% aTargetBlank
 "http://mng.bz/nPw2", "Debugging Service Workers in Firefox" %}.
-
-## Development Tips
-
-During development it is often necessary to force certain files to be reloaded.
-Files cached by a service worker are not cleared by clearing the browser cache.
-
-In Chrome, one approach to force files to be reloaded
-on the next browser refresh is to open the devtools,
-click the "Application" tab, and check the "Update on reload" checkbox.
-
-To force reloading for a specific service worker,
-select the "Application" tab, select "Service Workers",
-and click the "Unregister" link for the service worker.
 
 ## Workbox
 
