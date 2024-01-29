@@ -56,32 +56,59 @@ The advantages that PWAs have over native mobile apps include the ability to:
 
 TODO: Fix the order of the remaining sections.
 
-## Running and Installing a PWA
+## Service Workers
 
-To run a PWA, browse its URL.
-This can be done by clicking a link received in an email or chat message.
-It can also be done by searching for the app in web browser
-or manually entering the URL in the browser location bar.
+{% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API",
+"Service Workers" %} are the key to many PWA features.
 
-Installing a PWA is optional.
-The steps to do so vary based on operating system.
-In iOS, tap the share button and select "Add to Home Screen".
+A service worker is a kind of {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API",
+"Web Worker" %}.
+This means that its functionality is defined in a JavaScript source file
+and it runs in a background thread.
+The window or tab in which the associated web app is running
+can be closed and associated service workers can continue executing.
 
-Installing a PWA downloads all the required files.
-It also adds an app icon to the home screen so in the future
-the app can be launched by tapping its icon.
-The app will still run in the mobile web browser,
-but the app can choose to hide the browser chrome
-so it appears more like a native app.
+Service workers have many use cases:
 
-In development, PWA can be run from URLs that being with `http://localhost`.
-But in production, PWAs must be run from URLS that use HTTPS
-in order to utilize service workers.
+- enable offline functionality
+- listen for external events
+- periodically fetch data
+- send push notifications to the associated web app
 
-## Security
+A PWA can register any number of service workers,
+but typically only one is used.
 
-When a PWA attempts to access device features, such as contacts or the camera,
-the user will be prompted to grant permission.
+Service workers can allow parts of a web application
+to continue functioning after network connectivity is lost.
+
+Common tasks performed by service workers include:
+
+- creating caches
+- storing resources in caches
+- intercepting network requests and deciding how to respond,
+  including responding with cached values
+
+## Registering a Service Worker
+
+Each page of a web app that wished to utilize a service worker
+must register the service worker.
+The following code does this for a service worker
+defined in the file `service-worker.js`.
+
+```js
+if ('serviceWorker' in navigator) {
+  try {
+    const reg = await navigator.serviceWorker.register('service-worker.js');
+    console.log('service worker registered with scope', reg.scope);
+  } catch (error) {
+    console.error('service worker registered failed:', error);
+  }
+} else {
+  console.error('Your browser does not support service workers');
+}
+```
 
 ## Manifest File
 
@@ -129,50 +156,6 @@ To use this:
   as the value of the `icons` property.
 - Remove "public/" from the beginning of each icon `src` value.
 
-## Evaluating Readiness
-
-To determine if a web app can be used as a PWA:
-
-- Use a desktop computer or laptop to open the app in the Chrome web browser.
-- Open the DevTools.
-- Click on the "Lighthouse" tab.
-- Click the "Analyze page load" button.
-- Click the "Progressive Web App" circle and address any issues identified.
-
-## Service Workers
-
-{% aTargetBlank
-"https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API",
-"Service Workers" %} are the key to many PWA features.
-
-A service worker is a kind of {% aTargetBlank
-"https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API",
-"Web Worker" %}.
-This means that its functionality is defined in a JavaScript source file
-and it runs in a background thread.
-The window or tab in which the associated web app is running
-can be closed and associated service workers can continue executing.
-
-Service workers have many use cases:
-
-- enable offline functionality
-- listen for external events
-- periodically fetch data
-- send push notifications to the associated web app
-
-A PWA can register any number of service workers,
-but typically only one is used.
-
-Service workers can allow parts of a web application
-to continue functioning after network connectivity is lost.
-
-Common tasks performed by service workers include:
-
-- creating caches
-- storing resources in caches
-- intercepting network requests and deciding how to respond,
-  including responding with cached values
-
 ### Storage Limits
 
 There is a limit to the amount of data each application domain can cache
@@ -199,6 +182,16 @@ limit of 500 MB per application domain in Safari.
 
 When the total limit is reached, some browsers (Chrome and Firefox)
 remove the least recently used caches to make room for new caches.
+
+## Evaluating Readiness
+
+To determine if a web app can be used as a PWA:
+
+- Use a desktop computer or laptop to open the app in the Chrome web browser.
+- Open the DevTools.
+- Click on the "Lighthouse" tab.
+- Click the "Analyze page load" button.
+- Click the "Progressive Web App" circle and address any issues identified.
 
 ### Message Passing
 
@@ -585,6 +578,33 @@ It is supported by Chrome and Edge, but not by Safari or Firefox.
 
 A `push` event occurs when a push notification is received.
 TODO: Try implementing push notifications.
+
+## Running and Installing a PWA
+
+To run a PWA, browse its URL.
+This can be done by clicking a link received in an email or chat message.
+It can also be done by searching for the app in web browser
+or manually entering the URL in the browser location bar.
+
+Installing a PWA is optional.
+The steps to do so vary based on operating system.
+In iOS, tap the share button and select "Add to Home Screen".
+
+Installing a PWA downloads all the required files.
+It also adds an app icon to the home screen so in the future
+the app can be launched by tapping its icon.
+The app will still run in the mobile web browser,
+but the app can choose to hide the browser chrome
+so it appears more like a native app.
+
+In development, PWA can be run from URLs that being with `http://localhost`.
+But in production, PWAs must be run from URLS that use HTTPS
+in order to utilize service workers.
+
+## Security
+
+When a PWA attempts to access device features, such as contacts or the camera,
+the user will be prompted to grant permission.
 
 ## Managing Service Workers
 
