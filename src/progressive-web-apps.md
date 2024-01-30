@@ -782,6 +782,10 @@ and click one of the service workers.
 This opens a window with three tabs at the top ...
 "Console", "Sources", and "Network".
 
+Output from `console` methods like `console.log`
+do not appear in the Web Inspector Console.
+Instead they appear in the Console tab of the service worker window.
+
 Safari does not provide an easy way to unregister service workers.
 To unregister all of them for a given site, browse the site,
 open the "Web Inspector", click the "Console" tab, and enter the following code.
