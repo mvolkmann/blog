@@ -142,11 +142,14 @@ request.onupgradeneeded = event => {
 
 #### delete database
 
-A database can be deleted from the DevTools in two ways.
+A database can be deleted from the Chrome DevTools in two ways.
 
 1. From the Application tab, select the database in the left nav
    under Storage ... IndexedDB and click the "Delete Database" button.
 1. From the Console tab, enter `indexedDB.deleteDatabase('db-name')`.
+
+A database can be deleted from the Safari Web Inspector by
+clicking the "Console" tab and entering `indexedDB.deleteDatabase('db-name')`.
 
 In code, a database can be deleted as follows:
 
