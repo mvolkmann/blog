@@ -19,7 +19,16 @@ that have captured my attention recently.
 Perhaps some of these will be of use to you and your organization today,
 while others may be things to watch and consider adopting in the future.
 
-Here are my top picks, presented in alphabetical order.
+My top picks are presented in alphabetical order below.
+
+All of the picks that are software libraries or tools
+have experienced significant increases in their number of GitHub stars,
+as shown in the following chart.
+GitHub stars are a measure of the number of software developers
+that find a repository interesting, and perhaps already use or plan to use it.
+
+<img alt="GitHub stars" style="border: 0; width: 100%"
+  src="/blog/assets/github-stars-history.png?v={{pkg.version}}">
 
 ## Alpine
 
@@ -30,6 +39,9 @@ Alpine is a JavaScript framework that provides custom attributes that are
 applied to HTML elements in order to add dynamic behavior to web pages.
 Alpine is notable for how easy it is to use and
 how small it is compared to other web frameworks.
+
+Alpine is in my 2024 list because it is popular to use in conjunction with htmx,
+which is also in the list.
 
 Alpine was created by Caleb Porzio, who also created the Laravel PHP framework
 <a href="https://laravel-livewire.com" target="_blank">Livewire</a>.
@@ -88,6 +100,9 @@ It can be used to generate static sites,
 build server-side rendered (SSR) sites,
 and define API endpoints.
 
+Astro is in my 2024 list due to significant improvements in version 4.0
+which was released on December 5, 2023.
+
 A major focus of Astro is shipping less JavaScript code to browsers
 and doing more work on the server side.
 
@@ -118,6 +133,9 @@ For more detail, see my
 is a fast JavaScript all-in-one toolkit."
 It includes a JavaScript runtime, package manager, bundler, and test runner.
 All of this is free and open source under the MIT license.
+
+Bun is in my 2024 list because version 1.0 was released on September 8, 2023,
+marking a major milestone in its stability.
 
 Bun can be used as a drop-in replacement for npm and Node.js.
 The Bun runtime supports nearly all Node.js built-in modules
@@ -176,6 +194,10 @@ For more detail, see my
 <a href="https://workers.cloudflare.com" target="_blank">Cloudflare Workers</a>
 host edge functions.
 
+Cloudflare workers are in my 2024 list
+because I just learned about them recently.
+I waited far too long to investigate them.
+
 Features provided include:
 
 - automatic scaling
@@ -217,6 +239,9 @@ TypeScript-based Object Relational Mapper (ORM) library
 that is free and open-source.
 It competes with other popular ORMs such as
 <a href="https://www.prisma.io" target="_blank">Prisma</a>.
+
+Drizzle is in my 2024 list because it is the first database ORM
+I have seen that has a syntax resembling SQL, making it easy to learn.
 
 Drizzle is designed "to be a thin layer on top of SQL
 and introduce minimal runtime overhead".
@@ -269,6 +294,10 @@ is a JavaScript HTTP server library that runs in any JavaScript runtime.
 This includes AWS Lambda, Bun, Cloudflare Pages, Cloudflare Workers,
 Deno, Fastly, Lagon, Netlify, NextJS, Node.js, and Vercel.
 
+Hono is in my 2024 list because it makes it
+very easy to define endpoints that return HTML.
+Htmx, which is also in my list, requires defining many of those.
+
 "Honō" is the Japanese word for "flame" or "blaze" which explains its logo.
 
 Hono is significantly faster than
@@ -286,6 +315,9 @@ For more detail, see my
 <img alt="htmx logo" style="border: 0; width: 20%"
   src="/blog/assets/htmx-logo.png?v={{pkg.version}}">
 
+Htmx is in my 2024 list because it
+provides a fresh take on building web applications
+that has many benefits over currently popular approaches.
 Of all the topics in my list, this one excites me the most!
 
 <a href="https://htmx.org" target="_blank">Htmx</a>
@@ -333,6 +365,9 @@ For more detail, see my
 
 ## Long Polling
 
+Long polling is in my 2024 list only because I recently learned about it.
+I should have learned about this sooner!
+
 Polling is a technique that web clients can use
 to get changing data from a server.
 The easiest way to implementing polling is to
@@ -361,6 +396,9 @@ target="_blank">Long Polling</a> blog page.
 target="_blank">Server-Sent Events</a> (SSE) are used to send data using TCP
 from a server to a client, but not in the other direction.
 
+Server-Sent Events is in my 2024 list only because I recently learned about them.
+I should have learned about them sooner!
+
 For two-way communication, consider using
 <a href="/blog/topics/#/blog/websockets/" target="_blank">WebSockets</a>.
 WebSockets support text and binary data, whereas SSE only supports UTF-8 text.
@@ -386,6 +424,10 @@ target="_blank">Server-Sent Events</a> blog page.
 target="_blank">WebSockets</a> are a standardized protocol for
 two-way communication between clients and servers using TCP.
 They are widely supported by web browsers.
+
+WebSockets are in my 2024 list because it is important to know
+how they differ from long polling and Server-Sent Events.
+There are situations where any of these three options is the best choice.
 
 For one-way communication from servers to clients, consider using
 <a href="/blog/topics/#/blog/server-sent-events/"
@@ -413,6 +455,12 @@ is a free, open source (MIT license),
 high performance, systems programming language.
 It is a modern alternative to C with similar syntax
 such as statements terminated with semicolons and conditions in parentheses.
+
+Zig is my 2024 list for two reasons.
+First, it is the primary primary programming language
+used to implement Bun, which is also in my list.
+Second, it is great alternative to
+systems programming languages like C++ and Rust.
 
 Interest in Zig increased due to its use in the implementation of
 <a href="https://bun.sh" target="_blank">Bun</a>, a JavaScript/TypeScript
@@ -489,6 +537,10 @@ For more detail, see my
 is a TypeScript library for validating JavaScript values.
 It is commonly used to validate HTTP requests, including
 request headers, path parameters, query parameters, and request bodies.
+
+Zod is in my 2024 list because it provides
+a great way to validate HTTP requests in endpoints implementing using Hono,
+which is a great library to use in conjunction with htmx.
 
 For example:
 
