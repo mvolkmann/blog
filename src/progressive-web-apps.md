@@ -616,7 +616,7 @@ the user will be prompted to grant permission.
 
 ## Managing Service Workers
 
-The Chrome DevTools provide a way to interact with service workers
+The Chrome DevTools provide ways to interact with service workers
 and the caches they create.
 
 To view service workers for the current site,
@@ -656,9 +656,8 @@ check the "Update on reload" checkbox and refresh the page.
   src="/blog/assets/service-workers-update-on-reload.png?v={{pkg.version}}"
   title="Service Workers Update on reload">
 
-By default, changes to deployed service workers
-will not take effect for users until they
-close all browser tabs that are using the previous service workers
+By default, changes to deployed service workers will not take effect for users
+until they close all browser tabs that are using the previous service workers
 and open new tabs.
 
 To force existing tabs that are browsing a site
@@ -751,6 +750,21 @@ There are several ways to remove an individual file from a cache.
 
 To delete an entire cache, right-click a cache name and select Delete.
 
+### Clearing Everything
+
+The Chrome Devtools provide a way to clear many things
+associated with the current application domain with a single click.
+This includes service worker registrations, local and session storage,
+IndexedDB databases, cookies, and cached files.
+To do this, open the DevTools, click the "Application Tab",
+click "Storage" near the top of the left nav,
+verify that all the checkboxes at the bottom are checked,
+and click the "Clear site data" button.
+
+<img alt="Chrome Clear site data button" style="width: 100%"
+  src="/blog/assets/chrome-clear-site-data.png?v={{pkg.version}}"
+  title="Cached files in Chrome DevTools">
+
 ### Simulating Offline
 
 In order to test the ability of service workers to use cached files,
@@ -796,6 +810,12 @@ navigator.serviceWorker.getRegistrations().then(registrations => {
     registration.unregister();
   }
 });
+```
+
+To also delete a specific IndexedDB database, enter the following.
+
+```js
+indexedDB.deleteDatabase('db-name');
 ```
 
 ## Workbox
