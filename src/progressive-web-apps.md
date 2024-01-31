@@ -788,7 +788,7 @@ causing all requests to go to the network,
 check the Bypass for Network check box at the top of the main area.
 This, of course, requires being online.
 
-### Service Workers in Safari
+### Service Workers in macOS Safari
 
 To see service workers in Safari, click the "Develop" menu,
 hover over "Service Workers" to reveal a menu that lists them,
@@ -817,6 +817,36 @@ To also delete a specific IndexedDB database, enter the following.
 ```js
 indexedDB.deleteDatabase('db-name');
 ```
+
+### Service Workers in iOS Safari
+
+The following steps enable debugging PWAs running in iOS Safari.
+
+1. Attach the device (iPhone or iPad) to a Mac using a USB cable.
+1. A "Trust This Computer?" dialog will appear on the device.
+1. Tap "Trust".
+1. Enter the device passcode.
+1. Launch Safari on the device.
+1. Browse the URL of a PWA.
+1. Launch Safari on the Mac.
+1. Click the "Develop" menu.
+1. Hover over the device name that appears.
+1. Click "Use for Development..."
+1. A "Trust This Computer?" dialog will appear again on the device.
+1. Tap "Trust" again.
+1. Enter the device passcode again.
+1. Click the "Develop" menu again.
+1. Hover over the device name that appears again.
+1. If it says "Pairing Denied, Reconnect Device to Continue",
+   disconnect the USB cable and connect it again.
+1. Click the "Develop" menu again.
+1. Hover over the device name that appears again.
+1. Select the URL of the PWA to open a "Web Inspector" window
+   that can be used to interact with the device
+   and see its output in the Console tab.
+1. Select ? to open a "Service Worker" window
+   that can be used to interact with the Service Worker running on the device
+   and see its output in this separate Console tab.
 
 ## Workbox
 
