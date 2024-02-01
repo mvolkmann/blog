@@ -494,6 +494,14 @@ The following steps add this behavior.
   <script defer src="setup.js"></script>
   ```
 
+- Add the following properties in `tsconfig.json`
+  inside the `compilerOptions` object:
+
+  ```json
+  "esModuleInterop": true,
+  "types": ["bun-types"]
+  ```
+
 When using Bun, this approach assumes that the server
 was started with a script like the following:
 
