@@ -465,7 +465,8 @@ of implementing endpoints for an htmx application.
 Many tech stacks support automatically restarting servers
 when code changes are saved, but they often do not
 reload browser windows that render the HTML that they serve.
-The following steps add this behavior.
+The following steps add this behavior
+when files used by the server are modified.
 
 - Add the following in the main JavaScript file that implements the server:
 
