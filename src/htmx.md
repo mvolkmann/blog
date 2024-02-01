@@ -455,6 +455,7 @@ Other popular tech stacks for htmx include:
 - Go with {% aTargetBlank "https://templ.guide", "templ" %}
 - Python with Flask (see the `render_template` function) or
   Django (see the `loader.get_template` and `template.render` methods)
+- {% aTargetBlank "https://github.com/stolinski/hype", "Hype" %}
 
 One downside of having many options is that there are no canonical examples
 of implementing endpoints for an htmx application.
