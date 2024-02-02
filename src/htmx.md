@@ -1083,6 +1083,9 @@ Supported values include:
 - `delete`: delete target element; new content is not used
 - `none`: do not change the DOM; new content is not used
 
+<img alt="hx-swap" style="width: 80%"
+  src="/blog/assets/htmx-hx-swap.png?v={{pkg.version}}">
+
 The `hx-swap` attribute also supports the following space-separated modifiers:
 
 - `focus-scroll`: enables scrolling to a focused input
