@@ -2119,11 +2119,11 @@ This is an example of state that only belongs in the client.
 
 ### Dynamic Endpoints
 
-Listening for the `htmx:configRequest` event provides a way to
-modify the endpoint URL used by the attributes
+Listening for the `htmx:configRequest` event provides a way to modify
+the endpoint URL used by the following attributes before a request is sent:
 `hx-get`, `hx-post`, `hx-put`, `hx-patch`, and `hx-delete`.
 
-The following example demonstrates using the text content of an element
+The example below demonstrates using the text content of an element
 that is set by Alpine to determine the URL to use for a GET request.
 Note how the `hx-get` attribute has no value.
 It is supplied by setting `event.detail.path` in the `setPath` function
@@ -2153,7 +2153,6 @@ which must be `htmx-config-request` rather than `htmx:configRequest`.
   </head>
   <body x-data="{count: 0}">
     <button
-      id="time-btn"
       hx-get=""
       hx-on:htmx-config-request="setPath(event)"
       hx-target="#time"
@@ -2222,7 +2221,6 @@ that is accessible to the `setPath` function.
   </head>
   <body x-data="myData">
     <button
-      id="time-btn"
       hx-get=""
       hx-on:htmx-config-request="setPath(event)"
       hx-target="#time"
