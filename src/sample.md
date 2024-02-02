@@ -32,6 +32,19 @@ This results in faster app startup due to downloading less.
 It also results in faster interactions because time spent
 generating and parsing JSON is eliminated.
 
+The fact that htmx endpoints generate HTML,
+means that htmx moves a large portion of web development
+from the client to the server.
+The server endpoints can be implemented in any programming language
+that supports HTML templating and has an HTTP library.
+Popular choices include JavaScript, Python, and Go.
+
+If you are not already a full-stack developer,
+using htmx will provide motivation to move in that direction.
+Front-end web developers need to get comfortable
+with implementing server endpoints.
+Back-end developers need to get comfortable with HTML and CSS.
+
 Htmx provides a new set of HTML attributes that enable doing all of this
 without writing any custom client-side JavaScript code.
 
