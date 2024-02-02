@@ -17,11 +17,10 @@ layout: topic-layout.njk
 ## Reviewer Notes
 
 - My plan for the first chapter is quickly motivate the need for htmx
-  and show a couple of examples.
+  and show an example.
   The first chapter will purposely avoid
   getting bogged down in terminology and theory.
-- My plan for the second chapter is to cover terminology
-  and the history of htmx in more detail.
+- My plan for the second chapter is to cover terminology and the history of htmx.
   This will include describing the meaning of hypermedia, REST, and HATEOAS.
 
 ## Introduction
@@ -283,8 +282,8 @@ What code would be required to implement the endpoint?
 ## List of Lists Project
 
 Throughout the book we will implement an app called "List of Lists" (LOL).
-The app allows users to create any number of lists,
-add any number of items to each list.
+The app allows users to create any number of lists
+and add any number of items to each list.
 Example lists include todos, desired vacation destinations,
 favorite books, and shopping lists.
 The items in each list can be
@@ -293,7 +292,3 @@ updated, reordered, marked as selected, and deleted.
 ## Wrapping Up
 
 TODO: Add this section.
-
-```
-
-```

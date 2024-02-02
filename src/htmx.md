@@ -479,24 +479,40 @@ reload browser windows that render the HTML that they serve.
 The following steps add this behavior
 when files used by the server are modified.
 
-- Add the following in the main JavaScript file that implements the server:
+- Add the following in the main source file that implements the server:
 
   ```js
+  import WebSocket from 'ws';
+
   // Browser code will connect to this so it
   // can detect when the server is restarted.
   // On restart, the browser will reload the page.
-  new WebSocket.Server({port: 3001}); // choose any unused port
+  let wss = new WebSocket.Server({port: 3001}); // choose any unused port
+
+  // If any files in or below the public directory change,
+  // send the client a message to tell it to reload.
+  watch('./public', {recursive: true}, (event, filename) => {
+    console.log(`detected ${event} in ${filename}`);
+    for (const client of wss.clients) {
+      client.send('reload');
+    }
+  });
   ```
 
 - Create the file `public/setup.js` containing the following:
 
   ```js
-  const ws = new WebSocket('ws://localhost:3001'); // match port above
+  ws = new WebSocket('ws://localhost:3001');
+
   ws.addEventListener('close', event => {
     // This assumes the server will restart and create a new WebSocket server.
     setTimeout(() => {
       window.location.reload();
     }, 500); // gives the server time to restart
+  });
+
+  ws.addEventListener('message', event => {
+    if (event.data === 'reload') location.reload();
   });
   ```
 
@@ -511,6 +527,9 @@ when files used by the server are modified.
 
   ```json
   "esModuleInterop": true,
+  "module": "nodeNext",
+  "moduleResolution": "nodeNext",
+  "target": "esnext",
   "types": ["bun-types"]
   ```
 
