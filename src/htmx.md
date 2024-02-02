@@ -2117,6 +2117,128 @@ are used in `src/components.tsx`.
 Look for references to `editingId` in that file.
 This is an example of state that only belongs in the client.
 
+### Dynamic Endpoints
+
+Listening for the `htmx:configRequest` event provides a way to
+modify the endpoint URL used by the attributes
+`hx-get`, `hx-post`, `hx-put`, `hx-patch`, and `hx-delete`.
+
+The following example demonstrates using the text content of an element
+that is set by Alpine to determine the URL to use for a GET request.
+Note how the `hx-get` attribute has no value.
+It is supplied by setting `event.detail.path` in the `setPath` function
+which is invoked just before the request is sent.
+Also note the event name used with `hx-on`
+which must be `htmx-config-request` rather than `htmx:configRequest`.
+
+<img alt="htmx dynamic endpoint" style="width: 50%"
+  src="/blog/assets/htmx-dynamic-endpoint.png?v={{pkg.version}}">
+
+```js
+<html>
+  <head>
+    <title>htmx Demo</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <script>
+      function setPath(event) {
+        const count = this.count.textContent;
+        event.detail.path = "/time/" + count;
+      }
+    </script>
+  </head>
+  <body x-data="{count: 0}">
+    <button
+      id="time-btn"
+      hx-get=""
+      hx-on:htmx-config-request="setPath(event)"
+      hx-target="#time"
+    >
+      Get Time
+    </button>
+    <div id="time"></div>
+    <div class="counter">
+      <button x-bind:disabled="count <= 0" x-on:click="count--">Less</button>
+      <div id="count" x-text="count"></div>
+      <button x-on:click="count++">More</button>
+    </div>
+  </body>
+</html>
+```
+
+The following code implements the server and the endpoint invoked by `hx-get`.
+It uses Bun and the Hono framework.
+
+```js
+import {type Context, Hono} from 'hono';
+import {serveStatic} from 'hono/bun';
+
+const app = new Hono();
+
+// Serve static files from the public directory.
+app.use('/*', serveStatic({root: './public'}));
+
+app.get('/time/:count', async (c: Context) => {
+  const count = Number(c.req.param('count'));
+  const time = new Date().toLocaleTimeString();
+  return c.text(`The count at ${time} was ${count}.`);
+});
+
+export default app;
+```
+
+The client approach above relies on extracting a text value from the DOM
+in order to get the current "count" value.
+
+We can use the following approach to avoid relying on the DOM,
+but it requires a bit more JavaScript code.
+It maintains the value of `count` in a JavaScript object
+that is accessible to the `setPath` function.
+
+```js
+<html>
+  <head>
+    <title>htmx Demo</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <script>
+      let data = { count: 0 };
+      document.addEventListener("alpine:init", () => {
+        Alpine.data("myData", () => data);
+      });
+
+      function setPath(event) {
+        event.detail.path = `/time/${data.count}`;
+      }
+    </script>
+  </head>
+  <body x-data="myData">
+    <button
+      id="time-btn"
+      hx-get=""
+      hx-on:htmx-config-request="setPath(event)"
+      hx-target="#time"
+    >
+      Get Time
+    </button>
+    <div id="time"></div>
+    <div class="counter">
+      <button x-bind:disabled="count <= 0" x-on:click="count--">Less</button>
+      <div id="count" x-text="count"></div>
+      <button x-on:click="count++">More</button>
+    </div>
+  </body>
+</html>
+```
+
 ### HTML and JSON Endpoints
 
 In some cases it is useful to have endpoints that return the same data,
