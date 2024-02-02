@@ -439,11 +439,19 @@ Good choices have tooling that supports the following:
   rather than relying on string concatenation.
 - Syntax highlighting of HTML in code editors.
 
-One tech stack that meets all these criteria is
-<a href="/blog/topics/#/blog/typescript/" target="_blank">TypeScript</a> with
-<a href="/blog/topics/#/blog/bun/" target="_blank">Bun</a>
-(Node.js alternative that supports generating HTML with JSX) and
-<a href="/blog/topics/#/blog/hono/" target="_blank">Hono</a> (HTTP library).
+One tech stack that meets all these criteria includes the following:
+
+- <a href="/blog/topics/#/blog/typescript/" target="_blank">TypeScript</a>
+  as the programming language which adds types to JavaScript.
+- <a href="/blog/topics/#/blog/bun/" target="_blank">Bun</a>
+  as a JavaScript runtime and package manager.
+- <a href="/blog/topics/#/blog/hono/" target="_blank">Hono</a>
+  as the HTTP library.
+
+This is the tech stack we will use for all the examples in this book.
+It was chosen due to familiarity with JavaScript,
+performance of Bun/Hono, and the simplicity of Hono
+which supports defining endpoints with very little code.
 
 Other popular tech stacks for htmx include:
 
@@ -456,6 +464,7 @@ Other popular tech stacks for htmx include:
 - Python with Flask (see the `render_template` function) or
   Django (see the `loader.get_template` and `template.render` methods)
 - {% aTargetBlank "https://github.com/stolinski/hype", "Hype" %}
+  which uses TypeScript, Bun, Elysia, SQLite, and Drizzle.
 
 One downside of having many options is that there are no canonical examples
 of implementing endpoints for an htmx application.
