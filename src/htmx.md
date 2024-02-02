@@ -437,6 +437,8 @@ Good choices have tooling that supports the following:
 - Automatic server restarts after source code changes are detected.
 - Good HTML templating support such as JSX,
   rather than relying on string concatenation.
+  JSX is an XML-based syntax popularized by the React framework
+  for embedding HTML-like syntax directly in JavaScript code.
 - Syntax highlighting of HTML in code editors.
 
 One tech stack that meets all these criteria includes the following:

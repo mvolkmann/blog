@@ -37,12 +37,12 @@ the following set of steps:
 - Data from the database is converted to JSON.
 - The endpoint returns a JSON response.
 - JavaScript running in the browser parses the JSON into a JavaScript object.
-- HTML is generates from the JavaScript object and inserted into the DOM.
+- HTML is generated from the JavaScript object and inserted into the DOM.
 
 Htmx is a client-side JavaScript library that simplifies this process.
 The name is short for "HyperText Markup Extensions".
 
-In the htmx approach, endpoints convert data to HTML
+In the htmx approach, endpoints convert data to HTML (or plain text)
 rather than JSON, and that is returned.
 JavaScript in the browser no longer needs to
 parse JSON and generate HTML from it.
@@ -152,6 +152,8 @@ Good choices have tooling that supports the following:
 - Automatic server restarts after source code changes are detected.
 - Good HTML templating support such as JSX,
   rather than relying on string concatenation.
+  JSX is an XML-based syntax popularized by the React framework
+  for embedding HTML-like syntax directly in JavaScript code.
 - Syntax highlighting of HTML in code editors.
 
 One tech stack that meets all these criteria includes:
@@ -178,9 +180,7 @@ Other popular tech stacks for htmx include:
 
 ## First Project
 
-Let's implement a basic htmx to get a feel for it.
-
-The following steps create a new project.
+Let's create a basic htmx project get a feel for it.
 
 1. Open a terminal window.
 1. Install Bun by entering the following command.
@@ -189,21 +189,96 @@ The following steps create a new project.
    curl -fsSL https://bun.sh/install | bash
    ```
 
-1. cd to the directory where the project should be created.
-1. Create a project that uses the Hono library
-   by entering `bunx create-hono`.
+1. cd to the directory where the project will be created.
+1. Enter `bunx create-hono` to create the project.
 1. After the "Target directory" prompt, enter a project name like "htmx-demo".
 1. After the "Which template do you want to use?" prompt, select "bun".
 1. cd to the new project directory.
 1. Enter `bun install`.
-1. Start a local server by entering `bun run dev`.
+1. Enter `bun run dev` to start a local server.
 1. In a web browser, browse localhost:3000.
 1. Verify that it renders "Hello Hono!".
+1. Rename the file `src/index.ts` to `src/server.tsx`.
 
-The following steps create the files necessary for a basic htmx app.
+   The `.tsx` file extension allows using JSX to generate HTML.
 
-1. Renamed the file `src/index.ts` to `src/server.tsx`.
-   The `.tsx` file extension allows using JSX for generating HTML.
+1. Modify the "dev" script in `package.json` to match the following:
+
+   ```json
+   "dev": "bun run --watch src/server.tsx"
+   ```
+
+   The `--watch` flag causes the Bun server to be restarted
+   if any of the source files it is uses are modified.
+   This does not include client-side files in the `public` directory.
+
+1. Create the `public` directory.
+1. Create the file `index.html` in the `public` directory
+   with the following content.
+
+   ```html
+   <html>
+     <head>
+       <title>htmx Demo</title>
+       <link rel="stylesheet" href="styles.css" />
+       <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+     </head>
+     <body>
+       <!-- When this button is clicked,
+            an HTTP GET request is sent to /version.
+            The text it returns replaces the innerHTML
+            of the element with id "version". -->
+       <button hx-get="/version" hx-target="#version">Get Bun Version</button>
+       <div id="version"></div>
+     </body>
+   </html>
+   ```
+
+1. Create the file `styles.css` in the `public` directory
+   with the following content.
+
+   ```css
+   body {
+     font-family: sans-serif;
+   }
+
+   button {
+     border-radius: 0.5rem;
+     margin-bottom: 1rem;
+     padding: 0.5rem;
+   }
+   ```
+
+1. Replace the contents of `src/server.tsx` with the following:
+
+   ```ts
+   import {type Context, Hono} from 'hono';
+   import {serveStatic} from 'hono/bun';
+
+   const app = new Hono();
+
+   // Serve static files from the public directory.
+   app.use('/*', serveStatic({root: './public'}));
+
+   app.get('/version', async (c: Context) => {
+     // Return a Response whose body contains
+     // the version of Bun running on the server.
+     return c.text(Bun.version);
+   });
+
+   export default app;
+   ```
+
+1. Browse localhost:3000 again.
+1. Click the "Get Bun Version" button.
+1. Verify that a version number is displayed below the button.
+
+There you have it ... first project done!
+Take a moment to consider how the same project could be implemented
+in other web frameworks you have used recently.
+What code would be required to send an HTTP request when a button is clicked
+and insert the response into the current page?
+What code would be required to implement the endpoint?
 
 ## List of Lists Project
 
@@ -218,3 +293,7 @@ updated, reordered, marked as selected, and deleted.
 ## Wrapping Up
 
 TODO: Add this section.
+
+```
+
+```
