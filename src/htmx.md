@@ -2182,7 +2182,7 @@ const app = new Hono();
 app.use('/*', serveStatic({root: './public'}));
 
 app.get('/time/:count', async (c: Context) => {
-  const count = Number(c.req.param('count'));
+  const count = c.req.param('count');
   const time = new Date().toLocaleTimeString();
   return c.text(`The count at ${time} was ${count}.`);
 });
@@ -2192,7 +2192,6 @@ export default app;
 
 The client approach above relies on extracting a text value from the DOM
 in order to get the current "count" value.
-
 We can use the following approach to avoid relying on the DOM,
 but it requires a bit more JavaScript code.
 It maintains the value of `count` in a JavaScript object
