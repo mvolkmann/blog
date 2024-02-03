@@ -68,8 +68,13 @@ Back-end developers need to get comfortable with HTML and CSS.
 
 ## htmx Attributes
 
-Htmx provides a new set of HTML attributes that enable doing all of this
-without writing any custom client-side JavaScript code.
+Htmx provides a new set of HTML attributes that make HTML more expressive.
+These attributes enable sending HTTP requests to endpoints
+and inserting the resulting HTML into the DOM.
+Any event on any HTML element can trigger any kind of HTTP request
+(GET, POST, PUT, PATCH, or DELETE) and
+the response does not result in a full page refresh.
+All this is done without writing any custom client-side JavaScript code.
 
 Currently htmx defines 36 attributes,
 but a small subset of them are commonly used.
@@ -118,9 +123,10 @@ they are implemented as new HTML attributes.
 
 The server side of htmx web apps can be implemented
 with any programming language and HTTP server library.
-Of course some options are better than others.
+This is referred to as "Hypermedia On Whatever you'd Like" (HOWL).
 
-Good choices make it easy to do the following:
+Some options are better than others.
+Good choices make it easy to do the following.
 
 - Create new endpoints for any HTTP verb.
 
@@ -164,6 +170,8 @@ One tech stack that meets all these criteria includes:
 - <a href="/blog/topics/#/blog/hono/" target="_blank">Hono</a>
   as the HTTP library.
 
+A notable feature of this tech stack is that no build step is required.
+
 Other popular tech stacks for htmx include:
 
 - {% aTargetBlank "https://ahastack.dev", "AHA stack" %}
@@ -181,6 +189,8 @@ Other popular tech stacks for htmx include:
 
 Let's create a basic htmx project get a feel for it.
 
+First let's create a default project that uses Bun and Hono.
+
 1. Open a terminal window.
 1. Install Bun by entering the following command.
 
@@ -197,6 +207,9 @@ Let's create a basic htmx project get a feel for it.
 1. Enter `bun run dev` to start a local server.
 1. In a web browser, browse localhost:3000.
 1. Verify that it renders "Hello Hono!".
+
+Now that we have a default project, let's modify it to use htmx.
+
 1. Rename the file `src/index.ts` to `src/server.tsx`.
 
    The `.tsx` file extension allows using JSX to generate HTML.
@@ -279,6 +292,31 @@ What code would be required to send an HTTP request when a button is clicked
 and insert the response into the current page?
 What code would be required to implement the endpoint?
 
+In the future when you want to create a new project
+that uses Bun, Hono, and htmx, you can create a copy of this project
+rather than repeating all the steps above.
+
+Note that servers for htmx applications plays two roles.
+First, they serves static files such as HTML, CSS, JavaScript, and images.
+Second, they respond to certain HTTP requests by returning HTML or text.
+
+## Simple CRUD App
+
+Let's step it up a bit and create a project that performs the
+basic CRUD operations Create, Retrieve (or Read), Update, and Delete.
+Actually, we will hold off on the Update part for now
+and address that later because there are a couple of ways
+that functionality can be implemented.
+
+This app can maintain a collection of any sort of data.
+Let's maintain a list of dogs.
+For each dog we will store their name and breed.
+To keep things simple, the data will just be held in memory on the server.
+Later we will see that Bun makes it very easy to interact with SQLite databases.
+This can be used to persist the data so it is not lost when the server restarts.
+
+Begin by copying the previous project.
+
 ## List of Lists Project
 
 Throughout the book we will implement an app called "List of Lists" (LOL).
@@ -288,6 +326,16 @@ Example lists include todos, desired vacation destinations,
 favorite books, and shopping lists.
 The items in each list can be
 updated, reordered, marked as selected, and deleted.
+
+## Your Turn
+
+Before moving on, try the following things to make sure you
+understand how to implement and use HTTP endpoints with htmx.
+
+1. Change the `/version` endpoint to return HTML instead of text.
+   For example, `return c.html(<img alt="some description" src="some-image-url" />);`
+1. TODO: Add another exercise.
+1. TODO: Add another exercise.
 
 ## Wrapping Up
 

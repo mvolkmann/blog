@@ -48,9 +48,9 @@ The server endpoints can be implemented using
 any programming language and server framework.
 This is referred to as "Hypermedia On Whatever you'd Like" (HOWL).
 
-The server typically plays two roles.
-First, it serves static files such as HTML, CSS, JavaScript, and images.
-Second, it responds to HTTP requests by returning HTML or text.
+Servers for htmx applications plays two roles.
+First, they serves static files such as HTML, CSS, JavaScript, and images.
+Second, they respond to certain HTTP requests by returning HTML or text.
 
 Many web app features typically thought to require custom JavaScript code
 can instead be implemented with only htmx.
@@ -83,8 +83,10 @@ Many of these are discussed in more detail in subsequent sections.
   Htmx enables many kinds of user interactions with any kind of HTML element
   to trigger any kind of HTTP request and insert HTML in the response
   into a specific location in the DOM without a full page refresh.
-  This dramatically reduces the need for custom client-side JavaScript code.
-  It also preserves scroll state.
+  Avoiding full page refreshes preserves scroll state.
+
+  Htmx dramatically reduces the need for custom client-side JavaScript code.
+  Some refer to this as "Low JS".
 
 - Improves startup time
 
