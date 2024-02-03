@@ -17,7 +17,7 @@ layout: topic-layout.njk
 ## Reviewer Notes
 
 - My plan for the first chapter is quickly motivate the need for htmx
-  and show an example.
+  and show a couple of examples.
   The first chapter will purposely avoid
   getting bogged down in terminology and theory.
 - My plan for the second chapter is to cover terminology and the history of htmx.
