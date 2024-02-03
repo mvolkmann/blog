@@ -2269,7 +2269,13 @@ that is accessible to the `setPath` function.
     </div>
   </body>
 </html>
+
+
 ```
+
+For yet another approach, see this
+<a href="https://stackoverflow.com/questions/77539849/" target="_blank">StackOverflow post</a>
+which uses `x-effect` and `htmx.process`.
 
 ### HTML and JSON Endpoints
 
