@@ -68,8 +68,8 @@ A full page refresh is not necessary.
 The htmx library is quite small ... less than 17K.
 App metrics such as "First Contentful Paint" and "Time to Interactive"
 see improvements due to downloading less.
-Htmx applications also provide faster interactions because
-time spent generating and parsing JSON is eliminated.
+Htmx applications also provide faster interactions,
+because time spent generating and parsing JSON is eliminated.
 
 The fact that htmx endpoints generate HTML,
 means that htmx moves a large portion of web development
@@ -372,11 +372,11 @@ and insert the response into the current page?
 What code would be required to implement the endpoint?
 
 In the future when you want to create a new project
-that uses Bun, Hono, and htmx, rather than repeating all the steps above
+that uses Bun, Hono, and htmx, rather than repeating all the steps above,
 you can create a copy of this project and modify the code.
 
 Note that servers for htmx applications play two roles.
-First, they serves static files such as HTML, CSS, JavaScript, and images.
+First, they serve static files such as HTML, CSS, JavaScript, and images.
 Second, they respond to certain HTTP requests by returning HTML or text.
 
 ## Creating a CRUD Application
@@ -465,8 +465,8 @@ should be sent to `/dog` when the form is submitted.
 The request body will contain form data for the name and breed.
 As we will see soon, the response will contain a new table row.
 
-The `hx-target` attribute specifies that the returned HTML
-should be placed relative to the `tbody` element inside the `table` element.
+The `hx-target` attribute specifies that the returned HTML should be
+placed relative to the `tbody` element that is inside the `table` element.
 
 The `hx-swap` attribute specifies that the returned table row
 should be inserted after the beginning of the target.
@@ -481,7 +481,7 @@ What is the purpose of all those `hx-` attributes on the `table` element?
 
 The `hx-trigger` attribute specifies the event that triggers an HTTP request.
 In this case it is triggered when the table comes into view.
-For this app that happens immediately
+For this app, that happens immediately
 since there isn't much content above the `table`.
 But if there was more content above the table and
 the user needed to scroll down to see it,
@@ -584,7 +584,7 @@ The `hx-delete` attribute specifies that a DELETE request should be
 sent to `/dog/{some-dog-id}` when the button is clicked.
 
 The `hx-confirm` attribute specifies a prompt that will appear
-in a confirmation dialog that user will see before the request is sent.
+in a confirmation dialog that the user will see before the request is sent.
 The dialog will contain "Cancel" and "OK" buttons.
 The request will only be sent if the user clicks the OK button.
 Later we will see how to replace this dialog with one that can be styled.
@@ -599,7 +599,7 @@ The response will have an empty body, so the table row will be removed.
 The remaining code creates a Hono server and defines several endpoints.
 
 The endpoint for "GET /dog" returns a bunch of table rows,
-one for each dog, sorted on their names.
+one for each dog, sorted by their names.
 
 The endpoint for "POST /dog" adds a new dog and
 returns a table row describing the new dog.
@@ -658,5 +658,5 @@ updated, reordered, marked as selected, and deleted.
 In the next chapter we will uncover more about the motivations behind htmx.
 We will discuss the meaning of "hypermedia" and "HATEOAS".
 Then we will explore why web application architectures
-commonly referred to as "REST" and not really
+that are commonly referred to as "REST" are not really
 what Roy Fielding meant when he coined the term.
