@@ -299,9 +299,12 @@ Now that we have a default project, let's modify it to use htmx.
    </html>
    ```
 
-   When the "Get Bun Vesion" button is clicked,
-   an HTTP GET request is sent to `/version`.
-   The text it returns replaces the innerHTML of the element with id "version".
+   The `hx-get` attribute specifies that
+   when the `button` element is triggered (clicked)
+   an HTTP GET request should be sent to the endpoint at `/version`.
+
+   The `hx-target` attribute specifies that the text the endpoint returns
+   should replace the `innerHTML` of the element with id "version".
 
    We are getting the htmx library from a CDN,
    but it can also be downloaded and accessed as part of the app.
@@ -590,6 +593,9 @@ This will result in the table row for the dog being deleted.
 
 We won't examine the CSS for this project, but it can be found
 <a href="https://github.com/mvolkmann/htmx-examples/blob/main/htmx-crud/public/styles.css" target="_blank">here</a>.
+
+You have now seen some of the most commonly used htmx attributes in action.
+But there are many more that will be introduced in later chapters.
 
 ## Your Turn
 
