@@ -23,7 +23,7 @@ layout: topic-layout.njk
 - My plan for the second chapter is to cover terminology and the history of htmx.
   This will include describing the meaning of hypermedia, REST, and HATEOAS.
 
-## Introduction
+## Introducing htmx
 
 Modern web development has become overly complicated.
 Popular frameworks have somewhat steep learning curves and
@@ -75,10 +75,17 @@ The server endpoints can be implemented in any programming language
 that supports HTML templating and has an HTTP library.
 Popular choices include JavaScript, Python, and Go.
 
+Htmx keeps most of the application state on the server.
+State that is only of concern to the user interface,
+such as hiding and showing content, can remain on the client.
+But client-only state is typically a small portion of the overall state.
+
 ## Required Knowledge
 
-To create projects that use htmx,
-it is useful to have some knowledge of the following topics:
+Now that you understand some of the benefits of using htmx,
+lets's discuss what you need to know to use it.
+
+It is useful to have some knowledge of the following topics:
 
 - a code editor such as VS Code or Vim
 - HTML for specifying what will be rendered in the browser
@@ -132,14 +139,10 @@ These attributes answer the following questions:
   <img alt="hx-swap" style="width: 80%"
     src="/blog/assets/htmx-hx-swap.png?v={{pkg.version}}">
 
-## Managing Application State
-
-Htmx keeps most of the application state on the server.
-State that is only of concern to the user interface,
-such as hiding and showing content, can remain on the client.
-But client-only state is typically a small portion of the overall state.
-
 ## Choosing a Tech Stack
+
+Before you can implement a web app using htmx,
+you need to choose a tech stack.
 
 The server side of htmx web apps can be implemented
 with any programming language and HTTP server library.
@@ -223,7 +226,9 @@ they are implemented as new HTML attributes.
 
 ## Creating Your First Project
 
-Let's create a basic htmx project get a feel for it.
+Now that we have selected a tech stack (TypeScript, Bun, and Hono)
+you are ready to create your first project.
+We will start simple to get a feel for using htmx.
 
 First let's create a default project that uses Bun and Hono.
 
@@ -363,8 +368,11 @@ Second, they respond to certain HTTP requests by returning HTML or text.
 
 ## Creating a CRUD Application
 
-Let's step it up a bit and create a project that performs the
-basic CRUD operations Create, Retrieve (or Read), Update, and Delete.
+Now that you understand the basics of creating an htmx-based web application,
+you are ready to step it up a bit.
+
+Let's create a project that performs the basic CRUD operations
+Create, Retrieve (or Read), Update, and Delete.
 Actually, we will hold off on the Update part for now
 and address that later because there are a couple of ways
 that functionality can be implemented.
@@ -583,16 +591,6 @@ This will result in the table row for the dog being deleted.
 We won't examine the CSS for this project, but it can be found
 <a href="https://github.com/mvolkmann/htmx-examples/blob/main/htmx-crud/public/styles.css" target="_blank">here</a>.
 
-## What's Ahead
-
-Throughout the book we will implement an app called "List of Lists" (LOL).
-The app allows users to create any number of lists
-and add any number of items to each list.
-Example lists include todos, desired vacation destinations,
-favorite books, and shopping lists.
-The items in each list can be
-updated, reordered, marked as selected, and deleted.
-
 ## Your Turn
 
 Before moving on, try the following things to make sure you
@@ -618,7 +616,16 @@ The first was very basic, just to get your feet wet.
 The second was more involved, supporting basic CRUD functionality
 through the use of many htmx attributes.
 
+Throughout the book we will implement an app called "List of Lists" (LOL).
+The app allows users to create any number of lists
+and add any number of items to each list.
+Example lists include todos, desired vacation destinations,
+favorite books, and shopping lists.
+The items in each list can be
+updated, reordered, marked as selected, and deleted.
+
 In the next chapter we will uncover more about the motivations behind htmx.
 We will discuss the meaning of "hypermedia" and "HATEOAS".
-Then we will explore why web app architectures commonly referred to as "REST"
-and not really what Roy Fielding meant when he coined the term.
+Then we will explore why web application architectures
+commonly referred to as "REST" and not really
+what Roy Fielding meant when he coined the term.
