@@ -225,8 +225,21 @@ First let's create a default project that uses Bun and Hono.
 1. Enter `bunx create-hono` to create the project.
 1. After the "Target directory" prompt, enter a project name like "htmx-demo".
 1. After the "Which template do you want to use?" prompt, select "bun".
-1. cd to the new project directory.
+1. cd to the new project directory which will contain the following:
+
+   - `README.md` - contains instructions on running the project
+   - `package.json` - describes project dependencies and
+     defines a script for running the project
+   - `tsconfig.json` - configures the use of TypeScript
+   - `.gitignore` - prevents the node_modules directory from being committed
+   - `src/index.ts` - implements a Hono HTTP server and
+     defines the "GET /" endpoint
+
 1. Enter `bun install`.
+
+   This creates teh `node_modules` directory and
+   installs all the required dependencies there.
+
 1. Enter `bun run dev` to start a local server.
 1. In a web browser, browse localhost:3000.
 1. Verify that it renders "Hello Hono!".
