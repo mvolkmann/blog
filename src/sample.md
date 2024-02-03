@@ -94,7 +94,7 @@ Front-end web developers will become comfortable
 with implementing server endpoints.
 Back-end developers will become comfortable with HTML and CSS.
 
-## htmx Attributes
+## Using htmx Attributes
 
 Htmx provides a new set of HTML attributes that make HTML more expressive.
 These attributes enable sending HTTP requests to endpoints
@@ -132,14 +132,14 @@ These attributes answer the following questions:
   <img alt="hx-swap" style="width: 80%"
     src="/blog/assets/htmx-hx-swap.png?v={{pkg.version}}">
 
-## Application State
+## Managing Application State
 
 Htmx keeps most of the application state on the server.
 State that is only of concern to the user interface,
 such as hiding and showing content, can remain on the client.
 But client-only state is typically a small portion of the overall state.
 
-## Tech Stack Options
+## Choosing a Tech Stack
 
 The server side of htmx web apps can be implemented
 with any programming language and HTTP server library.
@@ -221,7 +221,7 @@ or libraries like Alpine and \_hyperscript.
 Those libraries have something in common with htmx ...
 they are implemented as new HTML attributes.
 
-## First Project
+## Creating Your First Project
 
 Let's create a basic htmx project get a feel for it.
 
@@ -361,7 +361,7 @@ Note that servers for htmx applications plays two roles.
 First, they serves static files such as HTML, CSS, JavaScript, and images.
 Second, they respond to certain HTTP requests by returning HTML or text.
 
-## Basic CRUD App
+## Creating a CRUD Application
 
 Let's step it up a bit and create a project that performs the
 basic CRUD operations Create, Retrieve (or Read), Update, and Delete.
@@ -583,7 +583,7 @@ This will result in the table row for the dog being deleted.
 We won't examine the CSS for this project, but it can be found
 <a href="https://github.com/mvolkmann/htmx-examples/blob/main/htmx-crud/public/styles.css" target="_blank">here</a>.
 
-## List of Lists Project
+## What's Ahead
 
 Throughout the book we will implement an app called "List of Lists" (LOL).
 The app allows users to create any number of lists
