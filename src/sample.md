@@ -350,6 +350,12 @@ Now that we have a default project, let's modify it to use htmx.
    export default app;
    ```
 
+   `Context` is a class defined by the Hono framework.
+   An instance of this class is passed to all the methods
+   that define endpoints such as `app.get`.
+   The `Context` parameter provides access to request headers,
+   path parameters, query parameters, and the request body.
+
 1. Browse localhost:3000 again.
 1. Click the "Get Bun Version" button.
 1. Verify that a version number is displayed below the button.
