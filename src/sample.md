@@ -258,7 +258,7 @@ First let's create a default project that uses Bun and Hono.
 
 1. Enter `bun install`.
 
-   This creates teh `node_modules` directory and
+   This creates the `node_modules` directory and
    installs all the required dependencies there.
 
 1. Enter `bun run dev` to start a local server.
