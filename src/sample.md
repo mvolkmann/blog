@@ -600,4 +600,12 @@ understand how to implement and use HTTP endpoints with htmx.
 
 ## Wrapping Up
 
-TODO: Add this section.
+You have now built two web applications that use htmx.
+The first was very basic, just to get your feet wet.
+The second was more involved, supporting basic CRUD functionality
+through the use of many htmx attributes.
+
+In the next chapter we will uncover more about the motivations behind htmx.
+We will discuss the meaning of "hypermedia" and "HATEOAS".
+Then we will explore why web app architectures commonly referred to as "REST"
+and not really what Roy Fielding meant when he coined the term.
