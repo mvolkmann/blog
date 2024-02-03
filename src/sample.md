@@ -311,11 +311,213 @@ that functionality can be implemented.
 This app can maintain a collection of any sort of data.
 Let's maintain a list of dogs.
 For each dog we will store their name and breed.
+
 To keep things simple, the data will just be held in memory on the server.
-Later we will see that Bun makes it very easy to interact with SQLite databases.
+Later we will see how Bun makes it very easy to interact with SQLite databases.
 This can be used to persist the data so it is not lost when the server restarts.
 
+The following screenshot shows what we want to build.
+
+<img alt="htmx CRUD" style="width: 50%"
+  src="/blog/assets/htmx-crud.png?v={{pkg.version}}">
+
+To add a dog, enter their name and breed, then click the "Add" button.
+To delete a dog, hover over its table row,
+then click the white "X" that appears after the row.
+
 Begin by copying the previous project.
+
+Replace `public/index.html` with the following.
+
+```js
+<html>
+  <head>
+    <title>htmx Demo</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  </head>
+  <body>
+    <h1>Dogs</h1>
+
+    <form
+      hx-disabled-elt="#add-btn"
+      hx-post="/dog"
+      hx-target="table tbody"
+      hx-swap="afterbegin"
+      hx-on:htmx:after-request="this.reset()"
+    >
+      <div>
+        <label for="name">Name</label>
+        <input name="name" required size="30" type="text" />
+      </div>
+      <div>
+        <label for="breed">Breed</label>
+        <input name="breed" required size="30" type="text" />
+      </div>
+      <button id="add-btn">Add</button>
+    </form>
+
+    <table hx-get="/dog" hx-target="tbody" hx-trigger="revealed">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Breed</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </body>
+</html>
+```
+
+What is the purpose of all those `hx-` attributes on the `form` element?
+
+The `hx-disabled-elt` attribute disables the "Add button
+while any request associated with the `form` is being processed.
+In this case it applies to POST requests
+that are sent when the `form` is submitted.
+This prevents duplicate form submissions.
+
+The `hx-post` attribute specifies that a POST request
+should be sent to `/dog` when the form is submitted.
+The request body will contain form data for the name and breed.
+As we will see soon, the response will contain a new table row.
+
+The `hx-target` attribute specifies that the returned HTML
+should be placed relative to the `tbody` element inside the `table` element.
+
+The `hx-swap` attribute specifies that the returned table row
+should be inserted after the beginning of the target.
+Since the target is the `tbody` element,
+the new table row will be inserted before all the existing rows.
+
+The `hx-on` attribute specifies that after the POST request is processed,
+the `form` should be reset.
+This clears the values of the name and breed inputs.
+
+What is the purpose of all those `hx-` attributes on the `table` element?
+
+The `hx-trigger` attribute specifies the event that triggers an HTTP request.
+In this case it is triggered when the table comes into view.
+For this app that happens immediately
+since there isn't much content above the `table`.
+But if there was more content above the table and
+the user needed to scroll down to see it,
+htmx would wait until the table is "revealed" to send the request.
+
+The `hx-get` attribute specifies that a GET request should be sent to `/dog`.
+As we will see soon, the response will contain
+one table row for each dog that was previously added.
+
+The `hx-target` attribute specifies that the returned table rows
+should replace the contents of the `tbody` element.
+
+Wow, we have defined a lot of client-side functionality
+without writing ANY custom JavaScript code!
+
+Now let's look at the server-side code that supports the HTTP requests.
+
+Replace `src/server.tsx` with the following.
+
+```ts
+import {type Context, Hono} from 'hono';
+import {serveStatic} from 'hono/bun';
+
+type Dog = {id: string; name: string; breed: string};
+
+const dogs = new Map<string, Dog>();
+
+function addDog(name: string, breed: string): Dog {
+  const id = crypto.randomUUID();
+  const dog = {id, name, breed};
+  dogs.set(id, dog);
+  return dog;
+}
+
+// Some sample data so we don't start out empty.
+addDog('Comet', 'Whippet');
+addDog('Oscar', 'German Shorthaired Pointer');
+
+const app = new Hono();
+
+// Serve static files from the public directory.
+app.use('/*', serveStatic({root: './public'}));
+
+function DogRow(dog: Dog) {
+  return (
+    <tr class="on-hover">
+      <td>{dog.name}</td>
+      <td>{dog.breed}</td>
+      <td class="plain">
+        <button
+          class="show-on-hover"
+          hx-delete={`/dog/${dog.id}`}
+          hx-confirm="Are you sure?"
+          hx-target="closest tr"
+          hx-swap="outerHTML"
+        >
+          ✕
+        </button>
+      </td>
+    </tr>
+  );
+}
+
+app.get('/dog', async (c: Context) => {
+  const sortedDogs = Array.from(dogs.values()).sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
+  return c.html(<>{sortedDogs.map(DogRow)}</>);
+});
+
+app.post('/dog', async (c: Context) => {
+  Bun.sleepSync(1000);
+  const formData = await c.req.formData();
+  const name = (formData.get('name') as string) || '';
+  const breed = (formData.get('breed') as string) || '';
+  const dog = addDog(name, breed);
+  return c.html(DogRow(dog), 201);
+});
+
+app.delete('/dog/:id', async (c: Context) => {
+  const id = c.req.param('id');
+  dogs.delete(id);
+  return c.html('');
+});
+
+export default app;
+```
+
+The function `DogRow` returns a table row for a given dog using JSX.
+
+What is the purpose of all those `hx-` attributes on the `button` element
+inside each table row?
+
+The `hx-delete` attribute specifies that a DELETE request should be
+sent to `/dog/{some-dog-id}` when the button is clicked.
+
+The `hx-confirm` attribute specifies a prompt that will appear
+in a confirmation dialog that user will see before the request is sent.
+The dialog will contain "Cancel" and "OK" buttons.
+The request will only be sent if the user clicks the OK button.
+Later we will see how to replace this dialog with one that can be styled.
+
+The `hx-target` attribute specifies that we want to target
+the table row that contains this button with response (`closest tr').
+
+The `hx-swap` attribute specifies that
+we want to replace the target (`outerHTML`) with the response.
+The response will have an empty body, so the table row will be removed.
+
+The endpoint for "GET /dog" returns a bunch of table rows,
+one for each dog, sorted on their names.
+
+The endpoint for "POST /dog" adds a new dog and
+a table row for the new dog.
+
+The endpoint for "DELETE /dog" deletes the dog with a given id
+and returns nothing.
+This will result in the table row for the dog being deleted.
 
 ## List of Lists Project
 
