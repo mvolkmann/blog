@@ -62,11 +62,24 @@ The server endpoints can be implemented in any programming language
 that supports HTML templating and has an HTTP library.
 Popular choices include JavaScript, Python, and Go.
 
+## Required Knowledge
+
+To create projects that use htmx,
+it is useful to have some knowledge of the following topics:
+
+- a code editor such as VS Code or Vim
+- HTML for specifying what will be rendered in the browser
+- CSS for styling what is rendered
+- some programming language for implementing HTTP endpoints
+- HTTP basics such as verbs, requests, and responses
+- command-line basics such as changing the working directory
+  and starting a local server
+
 If you are not already a full-stack developer,
 using htmx will provide motivation to move in that direction.
-Front-end web developers will get comfortable
+Front-end web developers will become comfortable
 with implementing server endpoints.
-Back-end developers will get comfortable with HTML and CSS.
+Back-end developers will become comfortable with HTML and CSS.
 
 ## htmx Attributes
 
