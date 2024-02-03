@@ -27,8 +27,8 @@ layout: topic-layout.njk
 
 Modern web development has become overly complicated and
 often performs more work than necessary to achieve a desired result.
-For example, modern web frameworks frequently encourage
-the following set of steps:
+For example, modern web frameworks for implementing single-page apps (SPAs)
+frequently encourage the following steps:
 
 - The browser downloads somewhat large amounts of JavaScript code.
 - User interaction triggers sending an HTTP request to a server endpoint.
@@ -36,12 +36,13 @@ the following set of steps:
 - Data from the database is converted to JSON.
 - The endpoint returns a JSON response.
 - JavaScript running in the browser parses the JSON into a JavaScript object.
-- HTML is generated from the JavaScript object and inserted into the DOM.
+- The framework generates HTML from the JavaScript object
+  and inserts it into the DOM.
 
 Htmx is a client-side JavaScript library that simplifies this process.
 The name is short for "HyperText Markup Extensions".
 
-In the htmx approach, endpoints convert data to HTML (or plain text)
+With htmx, endpoints convert data to HTML (or plain text)
 rather than JSON, and that is returned.
 JavaScript in the browser no longer needs to
 parse JSON and generate HTML from it.
@@ -49,9 +50,10 @@ It merely needs to insert the HTML into the DOM.
 A full page refresh is not necessary.
 
 The htmx library is quite small ... less than 17K.
-This results in faster app startup due to downloading less.
-It also results in faster interactions because time spent
-generating and parsing JSON is eliminated.
+App metrics such as "First Contentful Paint" and "Time to Interactive"
+see improvements due to downloading less.
+Htmx apps also provide faster interactions because
+time spent generating and parsing JSON is eliminated.
 
 The fact that htmx endpoints generate HTML,
 means that htmx moves a large portion of web development
@@ -62,9 +64,9 @@ Popular choices include JavaScript, Python, and Go.
 
 If you are not already a full-stack developer,
 using htmx will provide motivation to move in that direction.
-Front-end web developers need to get comfortable
+Front-end web developers will get comfortable
 with implementing server endpoints.
-Back-end developers need to get comfortable with HTML and CSS.
+Back-end developers will get comfortable with HTML and CSS.
 
 ## htmx Attributes
 
@@ -537,10 +539,18 @@ updated, reordered, marked as selected, and deleted.
 Before moving on, try the following things to make sure you
 understand how to implement and use HTTP endpoints with htmx.
 
-1. Change the `/version` endpoint to return HTML instead of text.
+1. In the first project, change the `/version` endpoint
+   to return HTML instead of text.
    For example, `return c.html(<img alt="some description" src="some-image-url" />);`
-1. TODO: Add another exercise.
-1. TODO: Add another exercise.
+1. Modify the CRUD application to manage a different kind of data.
+   Perhaps instead of dogs it can maintain a list of favorite books.
+1. Modify the CRUD application to persist the data to a file.
+   On server startup, read the file into a string and
+   use the `JSON.parse` function to
+   convert the string to a collection of data.
+   Every time the collection of data is modified,
+   use the `JSON.stringify` function to turn the collection of data
+   into a string and write that to the file.
 
 ## Wrapping Up
 
