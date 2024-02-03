@@ -1,4 +1,5 @@
---- eleventyNavigation:
+---
+eleventyNavigation:
   key: ZZ
 layout: topic-layout.njk
 ---
@@ -266,6 +267,15 @@ Now that we have a default project, let's modify it to use htmx.
        <div id="version"></div>
      </body>
    </html>
+   ```
+
+   We are getting the htmx library from a CDN,
+   but it can also be downloaded and accessed as part of the app.
+   If the file `htmx.min.js` is placed in the `public` directory
+   then the `script` tag above can be replaced by the following.
+
+   ```html
+   <script src="htmx.min.js"></script>
    ```
 
 1. Create the file `styles.css` in the `public` directory
