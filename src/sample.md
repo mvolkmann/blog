@@ -509,7 +509,7 @@ type Dog = {id: string; name: string; breed: string};
 const dogs = new Map<string, Dog>();
 
 function addDog(name: string, breed: string): Dog {
-  const id = crypto.randomUUID();
+  const id = crypto.randomUUID(); // standard web API
   const dog = {id, name, breed};
   dogs.set(id, dog);
   return dog;
@@ -518,9 +518,6 @@ function addDog(name: string, breed: string): Dog {
 // Some sample data so we don't start out empty.
 addDog('Comet', 'Whippet');
 addDog('Oscar', 'German Shorthaired Pointer');
-
-const app = new Hono();
-app.use('/*', serveStatic({root: './public'}));
 
 function DogRow(dog: Dog) {
   return (
@@ -541,6 +538,9 @@ function DogRow(dog: Dog) {
     </tr>
   );
 }
+
+const app = new Hono();
+app.use('/*', serveStatic({root: './public'}));
 
 app.get('/dog', async (c: Context) => {
   const sortedDogs = Array.from(dogs.values()).sort((a, b) =>
@@ -567,10 +567,18 @@ app.delete('/dog/:id', async (c: Context) => {
 export default app;
 ```
 
-The function `DogRow` returns a table row for a given dog using JSX.
+This code begins by define the `Dog` type.
+It then declares a `Map` to hold dogs where
+the keys are unique ids and the values are `Dog` objects.
 
-What is the purpose of all those `hx-` attributes on the `button` element
-inside each table row?
+The `addDog` function creates a `Dog` object for given `name` and `breed` values.
+It then adds the object to the `dogs` `Map`.
+This function is called a couple of times to add sample data.
+
+The function `DogRow` returns an HTML table row for a given dog using JSX.
+Each row contains a `button` element
+that is used to delete the corresponding dog.
+This element uses several `hx-` attributes.
 
 The `hx-delete` attribute specifies that a DELETE request should be
 sent to `/dog/{some-dog-id}` when the button is clicked.
@@ -588,15 +596,17 @@ The `hx-swap` attribute specifies that
 we want to replace the target (`outerHTML`) with the response.
 The response will have an empty body, so the table row will be removed.
 
+The remaining code creates a Hono server and defines several endpoints.
+
 The endpoint for "GET /dog" returns a bunch of table rows,
 one for each dog, sorted on their names.
 
 The endpoint for "POST /dog" adds a new dog and
-a table row for the new dog.
+returns a table row describing the new dog.
 
 The endpoint for "DELETE /dog" deletes the dog with a given id
 and returns nothing.
-This will result in the table row for the dog being deleted.
+This results in the table row for the dog being deleted.
 
 We won't examine the CSS for this project, but it can be found
 <a href="https://github.com/mvolkmann/htmx-examples/blob/main/htmx-crud/public/styles.css" target="_blank">here</a>.
