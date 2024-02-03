@@ -1,5 +1,4 @@
----
-eleventyNavigation:
+--- eleventyNavigation:
   key: ZZ
 layout: topic-layout.njk
 ---
@@ -126,14 +125,6 @@ State that is only of concern to the user interface,
 such as hiding and showing content, can remain on the client.
 But client-only state is typically a small portion of the overall state.
 
-## Client-side Interactivity
-
-User interactions that do not require server interactions
-can be handled in the client using plain JavaScript
-or libraries like Alpine and \_hyperscript.
-Those libraries have something in common with htmx ...
-they are implemented as new HTML attributes.
-
 ## Tech Stack Options
 
 The server side of htmx web apps can be implemented
@@ -190,8 +181,7 @@ A notable feature of this tech stack is that no build step is required.
 Other popular tech stacks for htmx include:
 
 - {% aTargetBlank "https://ahastack.dev", "AHA stack" %}
-  which uses Astro, htmx, and {% aTargetBlank
-  "/blog/topics/#/blog/alpine/", "AlpineJS" %}
+  which uses Astro, htmx, and Alpine
 - {% aTargetBlank "https://github.com/ethanniser/the-beth-stack",
   "BETH stack" %} which uses Bun, Elysia, Turso, and htmx.
 - Go with {% aTargetBlank "https://templ.guide", "templ" %}
@@ -199,6 +189,12 @@ Other popular tech stacks for htmx include:
   Django (see the `loader.get_template` and `template.render` methods)
 - {% aTargetBlank "https://github.com/stolinski/hype", "Hype" %}
   which uses TypeScript, Bun, Elysia, SQLite, and Drizzle.
+
+User interactions that do not require sending a request to a server
+can be handled in the browser using plain JavaScript
+or libraries like Alpine and \_hyperscript.
+Those libraries have something in common with htmx ...
+they are implemented as new HTML attributes.
 
 ## First Project
 
