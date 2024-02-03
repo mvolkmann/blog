@@ -290,15 +290,15 @@ Now that we have a default project, let's modify it to use htmx.
        <script src="https://unpkg.com/htmx.org@1.9.10"></script>
      </head>
      <body>
-       <!-- When this button is clicked,
-            an HTTP GET request is sent to /version.
-            The text it returns replaces the innerHTML
-            of the element with id "version". -->
        <button hx-get="/version" hx-target="#version">Get Bun Version</button>
        <div id="version"></div>
      </body>
    </html>
    ```
+
+   When the "Get Bun Vesion" button is clicked,
+   an HTTP GET request is sent to `/version`.
+   The text it returns replaces the innerHTML of the element with id "version".
 
    We are getting the htmx library from a CDN,
    but it can also be downloaded and accessed as part of the app.
