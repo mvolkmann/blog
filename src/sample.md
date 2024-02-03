@@ -358,17 +358,18 @@ Now that we have a default project, let's modify it to use htmx.
   src="/blog/assets/htmx-demo-project.png?v={{pkg.version}}">
 
 There you have it ... first project done!
-Take a moment to consider how the same project could be implemented
-in other web frameworks you have used recently.
+
+Take a moment to consider how the same project
+could be implemented in other web frameworks you have used.
 What code would be required to send an HTTP request when a button is clicked
 and insert the response into the current page?
 What code would be required to implement the endpoint?
 
 In the future when you want to create a new project
-that uses Bun, Hono, and htmx, you can create a copy of this project
-rather than repeating all the steps above.
+that uses Bun, Hono, and htmx, rather than repeating all the steps above
+you can create a copy of this project and modify the code.
 
-Note that servers for htmx applications plays two roles.
+Note that servers for htmx applications play two roles.
 First, they serves static files such as HTML, CSS, JavaScript, and images.
 Second, they respond to certain HTTP requests by returning HTML or text.
 
