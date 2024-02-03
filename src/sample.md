@@ -25,9 +25,22 @@ layout: topic-layout.njk
 
 ## Introduction
 
-Modern web development has become overly complicated and
-often performs more work than necessary to achieve a desired result.
-For example, modern web frameworks for implementing single-page apps (SPAs)
+Modern web development has become overly complicated.
+Popular frameworks have somewhat steep learning curves and
+they often perform more work than necessary to achieve a desired result.
+
+I have first hand experience with many web development approaches including
+vanilla JavaScript, jQuery, AngularJS, Angular, React, Vue, and Svelte.
+For me, each of these provided improvements over what came before.
+But these were incremental improvements.
+I find htmx to be very different from these frameworks.
+It is a breath of fresh air that I'm excited to share with you!
+
+In this chapter, you will learn how htmx simplifies web development.
+Htmx enables implementing apps that are easier to understand
+and require less code.
+
+Modern web frameworks for implementing single-page apps (SPAs)
 frequently encourage the following steps:
 
 - The browser downloads somewhat large amounts of JavaScript code.
