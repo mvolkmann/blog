@@ -287,6 +287,9 @@ Now that we have a default project, let's modify it to use htmx.
 1. Click the "Get Bun Version" button.
 1. Verify that a version number is displayed below the button.
 
+<img alt="htmx Demo Project" style="width: 30%"
+  src="/blog/assets/htmx-demo-project.png?v={{pkg.version}}">
+
 There you have it ... first project done!
 Take a moment to consider how the same project could be implemented
 in other web frameworks you have used recently.
