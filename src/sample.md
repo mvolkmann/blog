@@ -300,7 +300,7 @@ Note that servers for htmx applications plays two roles.
 First, they serves static files such as HTML, CSS, JavaScript, and images.
 Second, they respond to certain HTTP requests by returning HTML or text.
 
-## Simple CRUD App
+## Basic CRUD App
 
 Let's step it up a bit and create a project that performs the
 basic CRUD operations Create, Retrieve (or Read), Update, and Delete.
@@ -518,6 +518,9 @@ a table row for the new dog.
 The endpoint for "DELETE /dog" deletes the dog with a given id
 and returns nothing.
 This will result in the table row for the dog being deleted.
+
+We won't examine the CSS for this project, but it can be found
+<a href="https://github.com/mvolkmann/htmx-examples/blob/main/htmx-crud/public/styles.css" target="_blank">here</a>.
 
 ## List of Lists Project
 
