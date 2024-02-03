@@ -176,7 +176,18 @@ One tech stack that meets all these criteria includes:
 - <a href="/blog/topics/#/blog/hono/" target="_blank">Hono</a>
   as the HTTP library.
 
-A notable feature of this tech stack is that no build step is required.
+This is the stack we will use for the examples in this book.
+It has the following appealing characteristics.
+
+- Most readers will be familiar with JavaScript syntax, and
+  possibly also with TypeScript which adds types to JavaScript.
+- Bun is an alternative to Node.js which provides better performance
+  and adds features such as SQLite integration.
+- Hono is a simple HTTP library with great performance
+  that can be used with many JavaScript run-times including
+  AWS Lambda, Bun, Cloudflare Workers, Deno, Netlify, Node.js, and Vercel.
+  Elysia is another option to consider, but it only runs on Bun.
+- No build step is required.
 
 Other popular tech stacks for htmx include:
 
