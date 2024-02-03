@@ -359,7 +359,7 @@ Now that we have a default project, let's modify it to use htmx.
 
 There you have it ... first project done!
 
-Take a moment to consider how the same project
+Take a moment to consider how the same application
 could be implemented in other web frameworks you have used.
 What code would be required to send an HTTP request when a button is clicked
 and insert the response into the current page?
@@ -594,6 +594,14 @@ This will result in the table row for the dog being deleted.
 
 We won't examine the CSS for this project, but it can be found
 <a href="https://github.com/mvolkmann/htmx-examples/blob/main/htmx-crud/public/styles.css" target="_blank">here</a>.
+
+This application provides a surprising amount of functionality
+given the small amount of code that was written to implement it.
+
+Like before, take a moment to consider how the same application
+could be implemented in other web frameworks you have used.
+How much more verbose would the code be
+for both the client-side and server-side?
 
 You have now seen some of the most commonly used htmx attributes in action.
 But there are many more that will be introduced in later chapters.
