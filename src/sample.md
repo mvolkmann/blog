@@ -36,11 +36,14 @@ But these were incremental improvements.
 I find htmx to be very different from these frameworks.
 It is a breath of fresh air that I'm excited to share with you!
 
-In this chapter, you will learn how htmx simplifies web development.
-Htmx enables implementing apps that are easier to understand
-and require less code.
+The goal of this chapter is to introduce you
+to how htmx simplifies web development.
+You will learn how htmx enables implementing web applications
+that are easier to understand and require less code.
+Development web applications using htmx
+will increase your enjoyment and productivity.
 
-Modern web frameworks for implementing single-page apps (SPAs)
+Modern web frameworks for implementing single-page applications (SPAs)
 frequently encourage the following steps:
 
 - The browser downloads somewhat large amounts of JavaScript code.
@@ -65,7 +68,7 @@ A full page refresh is not necessary.
 The htmx library is quite small ... less than 17K.
 App metrics such as "First Contentful Paint" and "Time to Interactive"
 see improvements due to downloading less.
-Htmx apps also provide faster interactions because
+Htmx applications also provide faster interactions because
 time spent generating and parsing JSON is eliminated.
 
 The fact that htmx endpoints generate HTML,
@@ -106,7 +109,7 @@ Back-end developers will become comfortable with HTML and CSS.
 Before you can implement a web app using htmx,
 you need to choose a tech stack.
 
-The server side of htmx web apps can be implemented
+The server side of htmx web applications can be implemented
 with any programming language and HTTP server library.
 This is referred to as "Hypermedia On Whatever you'd Like" (HOWL).
 
