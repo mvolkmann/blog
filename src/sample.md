@@ -101,44 +101,6 @@ Front-end web developers will become comfortable
 with implementing server endpoints.
 Back-end developers will become comfortable with HTML and CSS.
 
-## Using htmx Attributes
-
-Htmx provides a new set of HTML attributes that make HTML more expressive.
-These attributes enable sending HTTP requests to endpoints
-and inserting the resulting HTML into the DOM.
-Any event on any HTML element can trigger any kind of HTTP request
-(GET, POST, PUT, PATCH, or DELETE) and
-the response does not result in a full page refresh.
-All this is done without writing any custom client-side JavaScript code.
-
-Currently htmx defines 36 attributes,
-but a small subset of them are commonly used.
-By the end of this book we will have explored each of the new attributes,
-but let's discuss the primary ones now.
-
-These attributes answer the following questions:
-
-- What events trigger a request? A mouse click, a form submission, other events?
-
-  The `hx-trigger` attribute answers this question.
-
-- What kind of request should be sent: GET, POST, PUT, PATCH or DELETE?
-  And where should the request be sent?
-
-  The `hx-get`, `hx-post`, `hx-put`, `hx-patch`, and `hx-delete` attributes
-  answer both of these questions.
-
-- When the endpoint returns HTML, what element should receive it?
-
-  The `hx-target` attribute answers this question.
-
-- How should the new HTML be placed relative to the target element?
-
-  The `hx-swap` attribute answers this question.
-
-  <img alt="hx-swap" style="width: 80%"
-    src="/blog/assets/htmx-hx-swap.png?v={{pkg.version}}">
-
 ## Choosing a Tech Stack
 
 Before you can implement a web app using htmx,
@@ -223,6 +185,44 @@ can be handled in the browser using plain JavaScript
 or libraries like Alpine and \_hyperscript.
 Those libraries have something in common with htmx ...
 they are implemented as new HTML attributes.
+
+## Using htmx Attributes
+
+Htmx provides a new set of HTML attributes that make HTML more expressive.
+These attributes enable sending HTTP requests to endpoints
+and inserting the resulting HTML into the DOM.
+Any event on any HTML element can trigger any kind of HTTP request
+(GET, POST, PUT, PATCH, or DELETE) and
+the response does not result in a full page refresh.
+All this is done without writing any custom client-side JavaScript code.
+
+Currently htmx defines 36 attributes,
+but a small subset of them are commonly used.
+By the end of this book we will have explored each of the new attributes,
+but let's discuss the primary ones now.
+
+These attributes answer the following questions:
+
+- What events trigger a request? A mouse click, a form submission, other events?
+
+  The `hx-trigger` attribute answers this question.
+
+- What kind of request should be sent: GET, POST, PUT, PATCH or DELETE?
+  And where should the request be sent?
+
+  The `hx-get`, `hx-post`, `hx-put`, `hx-patch`, and `hx-delete` attributes
+  answer both of these questions.
+
+- When the endpoint returns HTML, what element should receive it?
+
+  The `hx-target` attribute answers this question.
+
+- How should the new HTML be placed relative to the target element?
+
+  The `hx-swap` attribute answers this question.
+
+  <img alt="hx-swap" style="width: 80%"
+    src="/blog/assets/htmx-hx-swap.png?v={{pkg.version}}">
 
 ## Creating Your First Project
 
