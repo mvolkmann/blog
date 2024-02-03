@@ -519,7 +519,7 @@ function addDog(name: string, breed: string): Dog {
 addDog('Comet', 'Whippet');
 addDog('Oscar', 'German Shorthaired Pointer');
 
-function DogRow(dog: Dog) {
+function dogRow(dog: Dog) {
   return (
     <tr class="on-hover">
       <td>{dog.name}</td>
@@ -546,7 +546,7 @@ app.get('/dog', async (c: Context) => {
   const sortedDogs = Array.from(dogs.values()).sort((a, b) =>
     a.name.localeCompare(b.name)
   );
-  return c.html(<>{sortedDogs.map(DogRow)}</>);
+  return c.html(<>{sortedDogs.map(dogRow)}</>);
 });
 
 app.post('/dog', async (c: Context) => {
@@ -554,7 +554,7 @@ app.post('/dog', async (c: Context) => {
   const name = (formData.get('name') as string) || '';
   const breed = (formData.get('breed') as string) || '';
   const dog = addDog(name, breed);
-  return c.html(DogRow(dog), 201);
+  return c.html(dogRow(dog), 201);
 });
 
 app.delete('/dog/:id', async (c: Context) => {
@@ -574,7 +574,7 @@ The `addDog` function creates a `Dog` object for given `name` and `breed` values
 It then adds the object to the `dogs` `Map`.
 This function is called a couple of times to add sample data.
 
-The function `DogRow` returns an HTML table row for a given dog using JSX.
+The function `dogRow` returns an HTML table row for a given dog using JSX.
 Each row contains a `button` element
 that is used to delete the corresponding dog.
 This element uses several `hx-` attributes.
