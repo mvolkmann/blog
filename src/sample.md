@@ -496,7 +496,6 @@ import {type Context, Hono} from 'hono';
 import {serveStatic} from 'hono/bun';
 
 type Dog = {id: string; name: string; breed: string};
-
 const dogs = new Map<string, Dog>();
 
 function addDog(name: string, breed: string): Dog {
@@ -511,8 +510,6 @@ addDog('Comet', 'Whippet');
 addDog('Oscar', 'German Shorthaired Pointer');
 
 const app = new Hono();
-
-// Serve static files from the public directory.
 app.use('/*', serveStatic({root: './public'}));
 
 function DogRow(dog: Dog) {
