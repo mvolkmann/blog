@@ -550,7 +550,6 @@ app.get('/dog', async (c: Context) => {
 });
 
 app.post('/dog', async (c: Context) => {
-  Bun.sleepSync(1000);
   const formData = await c.req.formData();
   const name = (formData.get('name') as string) || '';
   const breed = (formData.get('breed') as string) || '';
