@@ -2154,58 +2154,19 @@ This is an example of state that only belongs in the client.
 
 ### Dynamic Endpoints
 
-Listening for the `htmx:configRequest` event provides a way to modify
-the endpoint URL used by the following attributes before a request is sent:
-`hx-get`, `hx-post`, `hx-put`, `hx-patch`, and `hx-delete`.
+There are several ways for the URL that is associated with
+an htmx attribute like `hx-get` to be dynamic.
+It can, for example, change whenever the value of an Alpine variable changes.
 
-The example below demonstrates using the text content of an element
-that is set by Alpine to determine the URL to use for a GET request.
-Note how the `hx-get` attribute has no value.
-It is supplied by setting `event.detail.path` in the `setPath` function
-which is invoked just before the request is sent.
-Also note the event name used with `hx-on`
-which must be `htmx-config-request` rather than `htmx:configRequest`.
+The three approaches shown below all uses the UI shown below.
 
 <img alt="htmx dynamic endpoint" style="width: 50%"
   src="/blog/assets/htmx-dynamic-endpoint.png?v={{pkg.version}}">
 
-```js
-<html>
-  <head>
-    <title>htmx Demo</title>
-    <link rel="stylesheet" href="styles.css" />
-    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
-    <script
-      defer
-      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
-    ></script>
-    <script>
-      function setPath(event) {
-        const count = this.count.textContent;
-        event.detail.path = "/time/" + count;
-      }
-    </script>
-  </head>
-  <body x-data="{count: 0}">
-    <button
-      hx-get=""
-      hx-on:htmx-config-request="setPath(event)"
-      hx-target="#time"
-    >
-      Get Time
-    </button>
-    <div id="time"></div>
-    <div class="counter">
-      <button x-bind:disabled="count <= 0" x-on:click="count--">Less</button>
-      <div id="count" x-text="count"></div>
-      <button x-on:click="count++">More</button>
-    </div>
-  </body>
-</html>
-```
-
-The following code implements the server and the endpoint invoked by `hx-get`.
+The following code implements the server and
+the endpoint that will be invoked by `hx-get`.
 It uses Bun and the Hono framework.
+The same server code is used for all three client approaches that will be shown.
 
 ```js
 import {type Context, Hono} from 'hono';
@@ -2225,12 +2186,15 @@ app.get('/time/:count', async (c: Context) => {
 export default app;
 ```
 
-The client approach above relies on extracting a text value from the DOM
-in order to get the current "count" value.
-We can use the following approach to avoid relying on the DOM,
-but it requires a bit more JavaScript code.
-It maintains the value of `count` in a JavaScript object
-that is accessible to the `setPath` function.
+In the first client approach, the Alpine directives
+`x-effect` and `x-bind` (with shorthand syntax `:`) are used.
+The JavaScript code that is the value of the `x-effect` directive
+is reevaluated every time an Alpine variable it uses changes.
+In this case it references the `count` variable.
+When the value of `count` changes, the `hx-process` function is called
+to re-process the current element.
+The syntax `:hx-get` means that the value will be recomputed
+every time the element is processed.
 
 ```js
 <html>
@@ -2242,12 +2206,83 @@ that is accessible to the `setPath` function.
       defer
       src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
     ></script>
+  </head>
+  <body x-data="{count: 0}">
+    <button
+      :hx-get="`/time/${count}`"
+      x-effect="count; htmx.process($el)"
+      hx-target="#time"
+    >
+      Get Time
+    </button>
+    <div id="time"></div>
+    <div class="counter">
+      <button x-bind:disabled="count <= 0" x-on:click="count--">Less</button>
+      <div id="count" x-text="count"></div>
+      <button x-on:click="count++">More</button>
+    </div>
+  </body>
+</html>
+```
+
+Two more client approaches are shown below,
+but the approach above is the simplest.
+
+Another client approach is to listen for the `htmx:configRequest` event.
+This provides a way to modify the URL used by `hx-get`
+before a request is sent:
+
+The following code demonstrates using the text content of an element
+that is set by Alpine to determine the URL to use for a GET request.
+Note how the `hx-get` attribute has no value.
+It is supplied by setting `event.detail.path` in the `setPath` function
+which is invoked just before the request is sent.
+Also note the event name used with `hx-on`
+which must be `htmx-config-request` rather than `htmx:configRequest`.
+
+The parts of the code that are identical
+to the previous client example are omitted.
+
+```js
+<html>
+  <head>
+    ...
+    <script>
+      function setPath(event) {
+        const count = this.count.textContent;
+        event.detail.path = "/time/" + count;
+      }
+    </script>
+  </head>
+  <body x-data="{count: 0}">
+    <button
+      hx-get=""
+      hx-on:htmx-config-request="setPath(event)"
+      hx-target="#time"
+    >
+      Get Time
+    </button>
+    ...
+  </body>
+</html>
+```
+
+The client approach above relies on extracting a text value from the DOM
+in order to get the current "count" value.
+We can use the following approach to avoid relying on the DOM,
+but it requires a bit more JavaScript code.
+It maintains the value of `count` in a JavaScript object
+that is accessible to the `setPath` function.
+
+```js
+<html>
+  <head>
+    ...
     <script>
       let data = { count: 0 };
       document.addEventListener("alpine:init", () => {
         Alpine.data("myData", () => data);
       });
-
       function setPath(event) {
         event.detail.path = `/time/${data.count}`;
       }
@@ -2261,21 +2296,10 @@ that is accessible to the `setPath` function.
     >
       Get Time
     </button>
-    <div id="time"></div>
-    <div class="counter">
-      <button x-bind:disabled="count <= 0" x-on:click="count--">Less</button>
-      <div id="count" x-text="count"></div>
-      <button x-on:click="count++">More</button>
-    </div>
+    ...
   </body>
 </html>
-
-
 ```
-
-For yet another approach, see this
-<a href="https://stackoverflow.com/questions/77539849/" target="_blank">StackOverflow post</a>
-which uses `x-effect` and `htmx.process`.
 
 ### HTML and JSON Endpoints
 
