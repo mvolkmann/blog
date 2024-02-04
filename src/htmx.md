@@ -2158,7 +2158,7 @@ There are several ways for the URL that is associated with
 an htmx attribute like `hx-get` to be dynamic.
 It can, for example, change whenever the value of an Alpine variable changes.
 
-The three approaches shown below all uses the UI shown below.
+The three approaches shown below all uses the following UI.
 
 <img alt="htmx dynamic endpoint" style="width: 50%"
   src="/blog/assets/htmx-dynamic-endpoint.png?v={{pkg.version}}">
@@ -2189,10 +2189,9 @@ export default app;
 In the first client approach, the Alpine directives
 `x-effect` and `x-bind` (with shorthand syntax `:`) are used.
 The JavaScript code that is the value of the `x-effect` directive
-is reevaluated every time an Alpine variable it uses changes.
-In this case it references the `count` variable.
-When the value of `count` changes, the `hx-process` function is called
-to re-process the current element.
+is reevaluated every time any Alpine variable it uses changes.
+When the value of the Alpine variable `count` changes,
+the `hx-process` function is called to re-process the current element.
 The syntax `:hx-get` means that the value will be recomputed
 every time the element is processed.
 
