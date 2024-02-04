@@ -341,7 +341,7 @@ Now that we have a default project, let's modify it to use htmx.
    // Serve static files from the public directory.
    app.use('/*', serveStatic({root: './public'}));
 
-   app.get('/version', async (c: Context) => {
+   app.get('/version', (c: Context) => {
      // Return a Response whose body contains
      // the version of Bun running on the server.
      return c.text(Bun.version);
@@ -542,7 +542,7 @@ function dogRow(dog: Dog) {
 const app = new Hono();
 app.use('/*', serveStatic({root: './public'}));
 
-app.get('/dog', async (c: Context) => {
+app.get('/dog', (c: Context) => {
   const sortedDogs = Array.from(dogs.values()).sort((a, b) =>
     a.name.localeCompare(b.name)
   );
@@ -557,7 +557,7 @@ app.post('/dog', async (c: Context) => {
   return c.html(dogRow(dog), 201);
 });
 
-app.delete('/dog/:id', async (c: Context) => {
+app.delete('/dog/:id', (c: Context) => {
   const id = c.req.param('id');
   dogs.delete(id);
   return c.html('');
