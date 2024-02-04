@@ -1243,6 +1243,10 @@ The `hx-select-oob` attribute is typically used together with
 the `hx-select` attribute which also provides a list of CSS selectors,
 but those specify a subset the elements to be included at the target location.
 
+Only one element in a response can use the `hx-swap-oob` attribute.
+To include more, see the {% aTargetBlank
+"https://htmx.org/extensions/multi-swap/", "multi-swap" %} extension.
+
 ### Custom Events
 
 Any endpoint can trigger a custom event by setting
