@@ -1215,7 +1215,7 @@ Much of it will likely be identical to what is already rendered.
 The {% aTargetBlank "https://htmx.org/attributes/hx-swap-oob/",
 "hx-swap-oob" %} attribute with a value of `"true"` specifies that
 an element with the same id should be replaced by this element.
-The element being replaced does not need to have the `hx-swap-oob` attribute,
+The elements being replaced do not need to have the `hx-swap-oob` attribute,
 just a matching `id` value.
 
 In this context, "out-of-band" means
@@ -1243,9 +1243,9 @@ The `hx-select-oob` attribute is typically used together with
 the `hx-select` attribute which also provides a list of CSS selectors,
 but those specify a subset the elements to be included at the target location.
 
-Only one element in a response can use the `hx-swap-oob` attribute.
-To include more, see the {% aTargetBlank
+For some use cases it may be useful to use the {% aTargetBlank
 "https://htmx.org/extensions/multi-swap/", "multi-swap" %} extension.
+TODO: It's not clear to me yet what that adds.
 
 ### Custom Events
 
