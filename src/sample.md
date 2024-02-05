@@ -65,7 +65,7 @@ parse JSON and generate HTML from it.
 It merely needs to insert the HTML into the DOM.
 A full page refresh is not necessary.
 
-The htmx library is quite small ... less than 17K minified.
+The htmx library is quite small ... less than 17K minified and compressed.
 App metrics such as "First Contentful Paint" and "Time to Interactive"
 see improvements due to downloading less.
 Htmx applications also provide faster interactions,
