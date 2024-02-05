@@ -56,7 +56,7 @@ frequently encourage the following steps:
   and inserts it into the DOM.
 
 Htmx is a client-side JavaScript library that simplifies this process.
-The name is short for "HyperText Markup Extensions".
+The name is short for "HyperText Markup eXtensions".
 
 With htmx, endpoints convert data to HTML (or plain text)
 rather than JSON, and that is returned.
@@ -65,7 +65,7 @@ parse JSON and generate HTML from it.
 It merely needs to insert the HTML into the DOM.
 A full page refresh is not necessary.
 
-The htmx library is quite small ... less than 17K.
+The htmx library is quite small ... less than 17K minified.
 App metrics such as "First Contentful Paint" and "Time to Interactive"
 see improvements due to downloading less.
 Htmx applications also provide faster interactions,
@@ -281,7 +281,7 @@ Now that we have a default project, let's modify it to use htmx.
    if any of the source files it is uses are modified.
    This does not include client-side files in the `public` directory.
 
-1. Create the `public` directory.
+1. Create the `public` directory at the root of the project.
 1. Create the file `index.html` in the `public` directory
    with the following content.
 
@@ -356,6 +356,8 @@ Now that we have a default project, let's modify it to use htmx.
    The `Context` parameter provides access to request headers,
    path parameters, query parameters, and the request body.
 
+1. If the local server is still running, stop it by pressing ctrl-c.
+1. Enter `bun run dev` to restart the local server.
 1. Browse localhost:3000 again.
 1. Click the "Get Bun Version" button.
 1. Verify that a version number is displayed below the button.
@@ -456,6 +458,7 @@ What is the purpose of all those `hx-` attributes on the `form` element?
 
 The `hx-disabled-elt` attribute disables the "Add button
 while any request associated with the `form` is being processed.
+"elt" is short for "element".
 In this case it applies to POST requests
 that are sent when the `form` is submitted.
 This prevents duplicate form submissions.
@@ -566,7 +569,7 @@ app.delete('/dog/:id', (c: Context) => {
 export default app;
 ```
 
-This code begins by define the `Dog` type.
+This code begins by defining the `Dog` type.
 It then declares a `Map` to hold dogs where
 the keys are unique ids and the values are `Dog` objects.
 
@@ -607,7 +610,7 @@ The endpoint for "DELETE /dog" deletes the dog with a given id
 and returns nothing.
 This results in the table row for the dog being deleted.
 
-We won't examine the CSS for this project, but it can be found
+The CSS for this project can be downloaded from
 <a href="https://github.com/mvolkmann/htmx-examples/blob/main/htmx-crud/public/styles.css" target="_blank">here</a>.
 
 This application provides a surprising amount of functionality
