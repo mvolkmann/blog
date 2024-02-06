@@ -656,7 +656,7 @@ Even if it isn't, the browser will wait for it.
 ## Environment Variables
 
 Bun has built-in support for getting environment variable values
-from the file `.env`.
+from the file `.env` in the project root directory.
 For example, suppose this file contains `NAME=Mark`.
 The value `Mark` can be obtained with `process.env.NAME` or `Bun.env.NAME`.
 
