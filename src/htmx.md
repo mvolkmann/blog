@@ -478,18 +478,19 @@ of implementing endpoints for an htmx application.
 Many tech stacks support automatically restarting servers
 when code changes are saved, but they often do not
 reload browser windows that render the HTML that they serve.
-The following steps add this behavior
-when files used by the server are modified.
+The following steps add this behavior.
 
-- Add the following in the main source file that implements the server:
+- Create the file `src/reload-server.js` containing the following:
 
-  ```js
+  ```ts
+  import {watch} from 'fs';
   import WebSocket from 'ws';
 
   // Browser code will connect to this so it
   // can detect when the server is restarted.
   // On restart, the browser will reload the page.
-  let wss = new WebSocket.Server({port: 3001}); // choose any unused port
+  // Any unused port can be used here.
+  const wss = new WebSocket.Server({port: 3001});
 
   // If any files in or below the public directory change,
   // send the client a message to tell it to reload.
@@ -501,10 +502,11 @@ when files used by the server are modified.
   });
   ```
 
-- Create the file `public/setup.js` containing the following:
+- Create the file `public/reload-client.js` containing the following:
 
   ```js
-  ws = new WebSocket('ws://localhost:3001');
+  // The port here must match the port used in src/reload-server.js.
+  const ws = new WebSocket('ws://localhost:3001');
 
   ws.addEventListener('close', event => {
     // This assumes the server will restart and create a new WebSocket server.
@@ -518,10 +520,18 @@ when files used by the server are modified.
   });
   ```
 
-- Add the following to the `head` tag of each page:
+- Add the following near the beginning the main server source file,
+  perhaps named `src/server.tsx`:
+
+  ```ts
+  import './reload-server.js';
+  ```
+
+- Add the following to the `head` tag of each page,
+  such as `public/index.html`:
 
   ```html
-  <script defer src="setup.js"></script>
+  <script src="reload-client.js" type="module"></script>
   ```
 
 - Add the following properties in `tsconfig.json`
@@ -539,7 +549,7 @@ When using Bun, this approach assumes that the server
 was started with a script like the following:
 
 ```json
-"dev": "bun run --watch src/index.tsx",
+"dev": "bun run --watch src/server.tsx",
 ```
 
 Note that this uses `--watch`.
