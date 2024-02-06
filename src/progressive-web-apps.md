@@ -118,6 +118,17 @@ if ('serviceWorker' in navigator) {
 }
 ```
 
+Services workers for each site are only loaded and registered once.
+However, if their source file is modified
+then they will automatically load and register again.
+
+To see this, add a `console.log` call in the service worker JavaScript file.
+Refresh the site in a browser and note the output in the DevTools Console.
+Refresh the page again and the output will not appear.
+Modify the service worker JavaScript file
+to change what the `console.log` call outputs.
+Refresh the page again and this time the output will appear.
+
 ## Manifest File
 
 Service workers require a `manifest.json` file.
