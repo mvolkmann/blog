@@ -1533,7 +1533,7 @@ For example:
 <img alt="Alpine counter" style="width: 20%"
   src="/blog/assets/alpine-counter.png?v={{pkg.version}}">
 
-```html
+```js
 <html>
   <head>
     <script
@@ -1559,6 +1559,48 @@ For example:
       <button @click="decrement" :disabled="count === 0">-</button>
       <div x-text="count"></div>
       <button @click="increment" :disabled="count === 10">+</button>
+    </div>
+  </body>
+</html>
+```
+
+The following code demonstrates sharing Alpine data with JavaScript code.
+
+```js
+<html>
+  <head>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <script defer>
+      const shared = {
+        v1: 8,
+        v2: 14,
+        reset() {
+          this.v1 = 0;
+          this.v2 = 0;
+        },
+      };
+      document.addEventListener("alpine:init", () => {
+        Alpine.data("shared", () => shared);
+      });
+      function alertSum() {
+        alert(shared.v1 + shared.v2);
+      }
+    </script>
+  </head>
+  <body>
+    <!-- x-data here uses a named set of variables defined with Alpine.data.
+         This allows JavaScript code to share access to them. -->
+    <div x-data="shared">
+      <div>v1 = <span x-text="v1"></span></div>
+      <div>v2 = <span x-text="v2"></span></div>
+      <div>sum = <span x-text="v1 + v2"></span></div>
+      <button @click="v1++">Increment v1</button>
+      <button @click="v2++">Increment v2</button>
+      <button @click="reset()">Reset</button>
+      <button @click="alertSum()">Alert Sum</button>
     </div>
   </body>
 </html>
