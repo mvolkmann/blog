@@ -861,34 +861,64 @@ The following steps enable debugging PWAs running in iOS Safari.
 
 ## Push Notifications
 
-Obtain public and private keys required to send push notifications
-by entering `npx web-push generate-vapid-keys`
-or `bunx web-push generate-vapid-keys`.
-"vapid" stands for "Voluntary APplication server IDentification".
-and is used for Web Push.
+Web app client-side code can create subscriptions to push notifications
+and send them to a server via an HTTP request.
+The server can save these subscriptions in a database so
+they are not lost when the server is restarted.
+Servers can continue sending push notifications to clients even after
+the browser windows that created the subscriptions have been closed.
 
-Create the file `.env` in the project root directory
-and copy the keys into it. For example:
+Chrome has excellent support for push notifications.
+Safari uses a non-standard push notifications API,
+so supporting both browsers is difficult.
 
-```text
-WEB_PUSH_PRIVATE_KEY = 'V4kcH_A4Pdv_DmxvxjBU2YIhFcAYBA3_Wp8zLds9ALE'
-WEB_PUSH_PUBLIC_KEY = 'BMx8QagkN_EidkH7D8jdZaz5BM2Hh-d3RQ5W1iWOfh32KRdbxu7fATv5ozLPUfQasRIZo7JQ6ULGVKgfUX3HO7A'
-```
+The app at {% aTargetBlank "https://github.com/mvolkmann/pwa-cloudflare-demo",
+"pwa-cloudflare-demo" %}? whose demonstrates all the steps required
+to handle push notifications in Chrome.
+While the name includes "cloudflare", it does not currently support
+running in a Cloudflare Worker. The reason is that the app uses the
+{% aTargetBlank "https://github.com/web-push-libs/web-push", "web-push" %}
+library which does not work in Cloudflare Workers.
 
-Install the "web-push" package by entering
-`npm install web-push` or `bun add web-push`.
+The steps to support push notifications are described below.
+Each step indicates where the corresponding code is found in the demo app.
 
-In the main source file that implements the server,
-perhaps `src/server.tsx`, add the following:
+1. Obtain public and private keys
 
-```ts
-const webPush = require('web-push');
-webPush.setVapidDetails(
-  'mailto:r.mark.volkmann@gmail.com',
-  process.env.WEB_PUSH_PUBLIC_KEY,
-  process.env.WEB_PUSH_PRIVATE_KEY
-);
-```
+   These are required to send push notifications.
+   One way to obtain them by entering `npx web-push generate-vapid-keys`
+   or `bunx web-push generate-vapid-keys`.
+   "vapid" stands for "Voluntary APplication server IDentification".
+   and is used for Web Push.
+
+1. Create the file `.env` in the project root directory
+   and copy the keys into it. For example:
+
+   ```text
+   WEB_PUSH_PRIVATE_KEY = 'V4kcH_A4Pdv_DmxvxjBU2YIhFcAYBA3_Wp8zLds9ALE'
+   WEB_PUSH_PUBLIC_KEY = 'BMx8QagkN_EidkH7D8jdZaz5BM2Hh-d3RQ5W1iWOfh32KRdbxu7fATv5ozLPUfQasRIZo7JQ6ULGVKgfUX3HO7A'
+   ```
+
+1. Install the "web-push" package.
+
+   Enter `npm install web-push` or `bun add web-push`.
+
+1. Setup use of the "web-push" package.
+
+   In the main source file that implements the server
+   (`src/server.tsx`), add the following:
+
+   ```ts
+   const webPush = require('web-push');
+   webPush.setVapidDetails(
+     'mailto:r.mark.volkmann@gmail.com',
+     process.env.WEB_PUSH_PUBLIC_KEY,
+     process.env.WEB_PUSH_PRIVATE_KEY
+   );
+   ```
+
+TODO: Finish documenting all the code related to push notifications in
+TODO: src/server.tsx, public/index.html, public/setup.js, and public/service-worker.js.
 
 To send a push notification ...
 
