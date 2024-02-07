@@ -861,6 +861,35 @@ The following steps enable debugging PWAs running in iOS Safari.
 
 ## Push Notifications
 
+Obtain public and private keys required to send push notifications
+by entering `npx web-push generate-vapid-keys`
+or `bunx web-push generate-vapid-keys`.
+"vapid" stands for "Voluntary APplication server IDentification".
+and is used for Web Push.
+
+Create the file `.env` in the project root directory
+and copy the keys into it. For example:
+
+```text
+WEB_PUSH_PRIVATE_KEY = 'V4kcH_A4Pdv_DmxvxjBU2YIhFcAYBA3_Wp8zLds9ALE'
+WEB_PUSH_PUBLIC_KEY = 'BMx8QagkN_EidkH7D8jdZaz5BM2Hh-d3RQ5W1iWOfh32KRdbxu7fATv5ozLPUfQasRIZo7JQ6ULGVKgfUX3HO7A'
+```
+
+Install the "web-push" package by entering
+`npm install web-push` or `bun add web-push`.
+
+In the main source file that implements the server,
+perhaps `src/server.tsx`, add the following:
+
+```rs
+const webPush = require('web-push');
+webPush.setVapidDetails(
+  'mailto:r.mark.volkmann@gmail.com',
+  process.env.WEB_PUSH_PUBLIC_KEY,
+  process.env.WEB_PUSH_PRIVATE_KEY
+);
+```
+
 To send a push notification ...
 
 The icon specified in a push notification appears in Chrome, but not in Safari.
