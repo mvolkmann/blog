@@ -881,7 +881,7 @@ Install the "web-push" package by entering
 In the main source file that implements the server,
 perhaps `src/server.tsx`, add the following:
 
-```rs
+```ts
 const webPush = require('web-push');
 webPush.setVapidDetails(
   'mailto:r.mark.volkmann@gmail.com',
