@@ -859,6 +859,61 @@ The following steps enable debugging PWAs running in iOS Safari.
    that can be used to interact with the Service Worker running on the device
    and see its output in this separate Console tab.
 
+## Push Notifications
+
+To send a push notification ...
+
+The icon specified in a push notification appears in Chrome, but not in Safari.
+
+Push notifications can only be sent if users grant permission.
+It is recommended to wait to ask for permission until the user has
+entered the site is made aware of why they would receive notifications.
+Consider providing an "Enable Notifications" button
+that calls the following function when it is clicked.
+
+/\*\*
+
+- This asks the user for permission to send push notifications
+- if they have not already granted or denied this.
+- The choice is remembered by the browser.
+- The value will be "granted", "denied", or "default" (no choice made).
+  \*/
+  async function requestNotificationPermission() {
+  const permission = await Notification.requestPermission();
+  if (permission === 'granted') {
+  // service-worker.js listens for this message.
+  navigator.serviceWorker.controller.postMessage('subscribe');
+  } else {
+  alert('Notifications are disabled.');
+  }
+  // Update the UI to reflect the new permission.
+  location.reload();
+  }
+
+Each web browser provides a different wayx
+for users to enable push notifications.
+
+To reset back to "default" in Chrome:
+
+- Click the circled "i" on the left end of the address bar.
+- Click the "Reset Permissions" button.
+
+<img alt="Chrome Notification Permissions" style="; width: 40%"
+  src="/blog/assets/chrome-notification-permissions.png?v={{pkg.version}}"
+  title="Chrome Notification Permissions">
+
+To reset back to "default" in Safari:
+
+- Click "Safari" in the menu bar.
+- Click "Settings..." in the menu.
+- Click "Notifications" in the left nav of the dialog that appears.
+- Scroll to the website domain in the main area of the dialog.
+- Select it and click the "Remove" button.
+
+<img alt="Safari Notification Permissions" style="; width: 60%"
+  src="/blog/assets/safari-notification-permissions.png?v={{pkg.version}}"
+  title="Safari Notification Permissions">
+
 ## Workbox
 
 {% aTargetBlank "https://web.dev/learn/pwa/workbox", "Workbox" %} is a set of
