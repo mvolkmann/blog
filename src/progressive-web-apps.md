@@ -1104,12 +1104,7 @@ Each step indicates where the corresponding code is found in the demo app.
    ```js
    /// <reference lib="webworker" />
 
-   import DogController from './dog-controller.js';
-   import {getRouter} from './dog-router.js';
-   import IDBEasy from './idb-easy.js';
-
    const cacheName = 'pwa-demo-v1';
-   const dbName = 'myDB';
    const version = 1;
 
    // This value was copied from the .env file.
@@ -1119,23 +1114,6 @@ Each step indicates where the corresponding code is found in the demo app.
    // We aren't currently caching .css files and certain .js files
    // because we want changes to be reflected without clearing the cache.
    const fileExtensionsToCache = ['jpg', 'js', 'json', 'png', 'webp'];
-
-   /**
-    * @typedef {object} RouterMatch
-    * @property {string} method;
-    * @property {string} path;
-    * @property {() => Response} handler;
-    */
-
-   /**
-    * This is a Router for dog API endpoints.
-    * @type {{match: (method: string, pathname: string) => RouterMatch }}
-    */
-   let dogRouter;
-
-   setDogRouter();
-
-   //-----------------------------------------------------------------------------
 
    /**
     * This converts a base64 string to a Uint8Array.
@@ -1176,26 +1154,6 @@ Each step indicates where the corresponding code is found in the demo app.
      await Promise.all(
        keys.map(key => (key === cacheName ? null : caches.delete(key)))
      );
-   }
-
-   /**
-    * This gets the body of a request as text.
-    * It is not currently used.
-    * @param {Request} request
-    * @returns {Promise<string>} the body text
-    */
-   async function getBodyText(request) {
-     const {body} = request;
-     if (!body) return '';
-     const reader = body.getReader();
-     let result = '';
-     while (true) {
-       const {done, value} = await reader.read();
-       const text = new TextDecoder().decode(value);
-       result += text;
-       if (done) break;
-     }
-     return result;
    }
 
    /**
@@ -1252,38 +1210,14 @@ Each step indicates where the corresponding code is found in the demo app.
     */
    async function saveSubscription(subscription) {
      try {
-       console.log(
-         'service-worker.js saveSubscription: subscription =',
-         subscription
-       );
        await fetch('/save-subscription', {
          method: 'POST',
          headers: {'Content-Type': 'application/json'},
          body: JSON.stringify(subscription)
        });
-       console.log('service-worker.js saveSubscription: sent POST');
      } catch (error) {
        console.error('service-worker.js saveSubscription:', error);
      }
-   }
-
-   /**
-    * This sets the dogRouter variable to a Router
-    * that is used to handle API requests for dogs.
-    * I tried for a couple of hours to simplify this code
-    * and couldn't arrive at an alternative that works.
-    */
-   function setDogRouter() {
-     const promise = IDBEasy.openDB(dbName, version, (db, event) => {
-       const dogController = new DogController(new IDBEasy(db));
-       dogController.upgrade(event);
-     });
-
-     // Top-level await is not allowed in service workers.
-     promise.then(upgradedDB => {
-       const dogController = new DogController(new IDBEasy(upgradedDB));
-       dogRouter = getRouter(dogController);
-     });
    }
 
    /**
