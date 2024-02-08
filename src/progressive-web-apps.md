@@ -1160,7 +1160,7 @@ Each step indicates where the corresponding code is found in the demo app.
     * If it is not found in the cache, it is retrieved from the network.
     * If it is a kind of resource we want to cache, it is added to the cache.
     * @param {Request} request
-    * @returns {Promise<Response>} that contains the resource
+    * @returns {Promise<Response | undefined>} that contains the resource
     */
    async function getResource(request) {
      const log = false; // set to true for debugging
