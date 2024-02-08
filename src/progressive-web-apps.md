@@ -1196,27 +1196,14 @@ Each step indicates where the corresponding code is found in the demo app.
      return resource;
    }
 
+   /**
+    * This determines if the current browser is Safari.
+    * @returns {boolean} true if Safari; false otherwise
+    */
    function inSafari() {
      const {userAgent} = navigator;
      if (!userAgent.includes('Safari')) return false;
      return !userAgent.includes('Chrome');
-   }
-
-   /**
-    * This saves a push notification subscription on the server
-    * so the server can send push notifications to this client.
-    * @param {Subscription} subscription
-    */
-   async function saveSubscription(subscription) {
-     try {
-       await fetch('/save-subscription', {
-         method: 'POST',
-         headers: {'Content-Type': 'application/json'},
-         body: JSON.stringify(subscription)
-       });
-     } catch (error) {
-       console.error('service-worker.js saveSubscription:', error);
-     }
    }
 
    /**
@@ -1233,6 +1220,9 @@ Each step indicates where the corresponding code is found in the demo app.
      return fileExtensionsToCache.includes(extension);
    }
 
+   /**
+    * This is called when a "subscribe" message is received from setup.js.
+    */
    async function subscribeToPushNotifications() {
      if (inSafari()) {
        console.log(
@@ -1251,8 +1241,14 @@ Each step indicates where the corresponding code is found in the demo app.
          applicationServerKey: base64StringToUint8Array(publicKey),
          userVisibleOnly: true // false allows silent push notifications
        });
-       // Save the subscription on the server.
-       await saveSubscription(subscription);
+
+       // Save the subscription on the server so it can
+       // send push notifications to this service worker.
+       await fetch('/save-subscription', {
+         method: 'POST',
+         headers: {'Content-Type': 'application/json'},
+         body: JSON.stringify(subscription)
+       });
      } catch (error) {
        console.error('service-worker.js subscribeToPushNotifications:', error);
      }
@@ -1265,23 +1261,10 @@ Each step indicates where the corresponding code is found in the demo app.
     */
    addEventListener('install', event => {
      console.log('service-worker.js: installing');
-     // It allows existing browser tabs to use an
+     // This allows existing browser tabs to use an
      // updated version of this service worker.
      skipWaiting();
    });
-
-   /**
-    * @typedef {object} SubscriptionKeys
-    * @property auth {string}
-    * @property p256dh {string}
-    */
-
-   /**
-    * @typedef {object} Subscription
-    * @property endpoint {string}
-    * @property expirationTime {number | null}
-    * @property keys {SubscriptionKeys}
-    */
 
    /**
     * This registers a listener for the "activate" event of this service worker.
@@ -1327,8 +1310,12 @@ Each step indicates where the corresponding code is found in the demo app.
      event.respondWith(promise);
    });
 
+   /**
+    * This registers a listener for the "message" event of this service worker.
+    */
    addEventListener('message', event => {
      const message = event.data;
+     // This message is sent by the "postMessage" call in setup.js.
      if (message === 'subscribe') {
        subscribeToPushNotifications();
      } else {
