@@ -867,6 +867,8 @@ The server can save these subscriptions in a database so
 they are not lost when the server is restarted.
 Servers can continue sending push notifications to clients even after
 the browser windows that created the subscriptions have been closed.
+The messages are queued so if the browser is closed,
+they can be sent later when the browser is reopened.
 
 Chrome has excellent support for push notifications.
 Safari uses a non-standard push notifications API,
@@ -905,6 +907,9 @@ Each step indicates where the corresponding code is found in the demo app.
 
 1. Setup use of the "web-push" package.
 
+   For details, see {% aTargetBlank
+   "https://github.com/web-push-libs/web-push", "web-push" %}.
+
    In the main source file that implements the server
    (`src/server.tsx`), add the following:
 
@@ -917,8 +922,190 @@ Each step indicates where the corresponding code is found in the demo app.
    );
    ```
 
-TODO: Finish documenting all the code related to push notifications in
-TODO: src/server.tsx, public/index.html, public/setup.js, and public/service-worker.js.
+1. Install the SQLite database.
+
+   This will be used to store subscriptions to push notifications.
+   It enables the server to be restarted without losing subscriptions.
+
+1. Create a SQLite database for storing subscriptions.
+
+   ```sh
+   sqlite3 pwa.db
+   sqlite> create table subscriptions(id integer primary key autoincrement, json string);
+   sqlite> .exit
+   ```
+
+1. Create the file `src/server.tsx` containing the following.
+   This file uses TypeScript types.
+   The file extension "tsx" enables using JSX to generate HTML,
+   but that is not utilized in the code shown here.
+
+   ```ts
+   import {Database} from 'bun:sqlite';
+   import {Context, Hono} from 'hono';
+   import {serveStatic} from 'hono/bun';
+
+   // We cannot use the following import because the web-push package
+   // does not currently work with Cloudflare Workers!
+   // See https://github.com/web-push-libs/web-push/issues/718
+   // and https://github.com/aynh/cf-webpush.
+   // import {serveStatic} from 'hono/cloudflare-workers';
+
+   // Prepare to use a SQLite database.
+   type DBSubscription = {id: number; json: string};
+   const db = new Database('pwa.db', {create: true});
+   const getAllSubscriptions = db.query('select * from subscriptions;');
+   const insertSubscription = db.query(
+     'insert into subscriptions (json) values (?)'
+   );
+
+   // Restore previous subscriptions from database.
+   const dbSubscriptions = getAllSubscriptions.all() as DBSubscription[];
+   const subscriptions = dbSubscriptions.map(s => JSON.parse(s.json));
+
+   const webPush = require('web-push');
+   webPush.setVapidDetails(
+     'mailto:r.mark.volkmann@gmail.com',
+     process.env.WEB_PUSH_PUBLIC_KEY,
+     process.env.WEB_PUSH_PRIVATE_KEY
+   );
+
+   // This demonstrates triggering push notifications from a server.
+   // It sends a new push notification every 5 seconds.
+   let count = 0;
+   setInterval(() => {
+     if (subscriptions.length) {
+       count++;
+       const payload = JSON.stringify({
+         title: 'From server.tsx',
+         body: `count = ${count}`,
+         icon: 'subscribe.png'
+       });
+       pushNotification(payload);
+     }
+   }, 5000);
+
+   /**
+    * This sends a push notifications to all subscribers.
+    */
+   function pushNotification(payload: string | object) {
+     if (subscriptions.length) {
+       const options = {
+         TTL: 60 // max time in seconds for push service to retry delivery
+       };
+       for (const subscription of subscriptions) {
+         webPush.sendNotification(subscription, payload, options);
+       }
+     }
+   }
+
+   const app = new Hono();
+
+   // Serve static files from the public directory.
+   app.use('/*', serveStatic({root: './public'}));
+
+   // Additional app-specific endpoints can be defined here.
+
+   /**
+    * This endpoint saves a push notification subscription.
+    */
+   app.post('/save-subscription', async (c: Context) => {
+     const subscription = await c.req.json();
+     subscriptions.push(subscription);
+
+     // Save subscriptions in the SQLite database so
+     // they are not lost when the server restarts.
+     const json = JSON.stringify(subscription);
+     insertSubscription.get(json);
+
+     return c.text('');
+   });
+
+   export default app;
+   ```
+
+1. Create the file `public/setup.js` containing the following.
+   This file uses JSDoc comments to specify TypeScript types.
+
+   ```js
+   async function registerServiceWorker() {
+     // All modern browsers support service workers.
+     if (!('serviceWorker' in navigator)) {
+       console.error('Your browser does not support service workers');
+       return;
+     }
+
+     try {
+       // Register a service worker for this web app.
+       await navigator.serviceWorker.register('service-worker.js', {
+         type: 'module'
+       });
+     } catch (error) {
+       console.error('setup.js registerServiceWorker:', error);
+     }
+   }
+
+   registerServiceWorker();
+
+   /**
+    * This asks the user for permission to send push notifications
+    * if they have not already granted or denied this.
+    *
+    * It is recommended to wait to ask for permission until the user has
+    * entered the site is made aware of why they would receive notifications.
+    * Perhaps provide a "Enable Notifications" button that calls this function.
+    */
+   async function requestNotificationPermission() {
+     const permission = await Notification.requestPermission();
+     if (permission === 'granted') {
+       // service-worker.js listens for this message.
+       navigator.serviceWorker.controller.postMessage('subscribe');
+     } else {
+       alert('Notifications are disabled.');
+     }
+     // Update the UI to reflect the new permission.
+     location.reload();
+   }
+
+   /**
+    * This can be called by client-side code to send a push notification.
+    * It's debatable whether triggering these from the client-side is useful.
+    * @param {string} title
+    * @param {string} body
+    * @param {string} icon
+    */
+   function sendNotification(title, body, icon) {
+     new Notification(title, {body, icon});
+   }
+
+   // Register to receive messages from the service worker.
+   // These are sent with "client.postMessage" in the service worker.
+   // They are not push notifications.
+   navigator.serviceWorker.onmessage = event => {
+     const message = event.data;
+     if (message === 'ready') {
+       // Determine if a service worker is already controlling this page.
+       const haveServiceWorker = Boolean(navigator.serviceWorker.controller);
+       // If not then we must have just installed a new service worker.
+       if (!haveServiceWorker) {
+         // Give the new service worker time to really be ready.
+         // In some apps it is useful to reload the page so
+         // data only available from the service worker can be loaded.
+         setTimeout(() => {
+           location.reload();
+         }, 100);
+       }
+     }
+   };
+   ```
+
+1. Create the file `public/service-worker.js` containing the following:
+
+   ```js
+
+   ```
+
+TODO: Clean up the remaining content in this section.
 
 To send a push notification ...
 
