@@ -1105,7 +1105,6 @@ Each step indicates where the corresponding code is found in the demo app.
    /// <reference lib="webworker" />
 
    const cacheName = 'pwa-demo-v1';
-   const version = 1;
 
    // This value was copied from the .env file.
    const publicKey =
