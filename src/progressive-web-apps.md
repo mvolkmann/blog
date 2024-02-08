@@ -954,6 +954,7 @@ Each step indicates where the corresponding code is found in the demo app.
    // Prepare to use a SQLite database.
    type DBSubscription = {id: number; json: string};
    const db = new Database('pwa.db', {create: true});
+   const deleteTodoPS = db.prepare('delete from subscriptions where id = ?');
    const getAllSubscriptions = db.query('select * from subscriptions;');
    const insertSubscription = db.query(
      'insert into subscriptions (json) values (?)'
@@ -961,7 +962,11 @@ Each step indicates where the corresponding code is found in the demo app.
 
    // Restore previous subscriptions from database.
    const dbSubscriptions = getAllSubscriptions.all() as DBSubscription[];
-   const subscriptions = dbSubscriptions.map(s => JSON.parse(s.json));
+   let subscriptions = dbSubscriptions.map(dbSub => {
+     const subscription = JSON.parse(dbSub.json);
+     subscription.id = dbSub.id;
+     return subscription;
+   });
 
    const webPush = require('web-push');
    webPush.setVapidDetails(
@@ -989,13 +994,29 @@ Each step indicates where the corresponding code is found in the demo app.
     * This sends a push notifications to all subscribers.
     */
    function pushNotification(payload: string | object) {
-     if (subscriptions.length) {
-       const options = {
-         TTL: 60 // max time in seconds for push service to retry delivery
-       };
-       for (const subscription of subscriptions) {
-         webPush.sendNotification(subscription, payload, options);
+     if (subscriptions.length === 0) return;
+
+     const badSubscriptions = [];
+     const options = {
+       TTL: 60 // max time in seconds for push service to retry delivery
+     };
+
+     for (const subscription of subscriptions) {
+       try {
+         // This will fail if the subscription is no longer valid.
+         await webPush.sendNotification(subscription, payload, options);
+       } catch (error) {
+         const message = error.body || error;
+         console.error('server.tsx pushNotification:', message);
+         badSubscriptions.push(subscription);
        }
+     }
+
+     for (const subscription of badSubscriptions) {
+       // Remove the subscription from the database.
+       deleteTodoPS.run(subscription.id);
+
+       subscriptions = subscriptions.filter(s => s.id !== subscription.id);
      }
    }
 
