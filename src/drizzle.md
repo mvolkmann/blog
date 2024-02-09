@@ -137,19 +137,72 @@ for information on installing it and creating a database.
 - Enter `npm install drizzle-orm` or `bun add drizzle-orm`
 - Enter `npm install -D drizzle-kit` or `bun add -d drizzle-kit`
 - If using PostgreSQL, enter `npm install postgres` or `bun add postgres`
+- If using SQLite
+  - enter `npm install better-sqlite3` or `bun add better-sqlite3`
+  - enter `npm install @types/better-sqlite3` or `bun add @types/better-sqlite3`
+
+### Configure Drizzle
+
+Create the file `drizzle.config.ts` containing the following.
+The following example uses PostgreSQL.
+
+```ts
+import type { Config } from "drizzle-kit";
+
+export default {
+  schema: "./schema.mjs",
+  out: "./src/migrations",
+  dbCredentials: {
+    host: "localhost",
+    database: "drizzle-demo",
+  },
+} satisfies Config;
+```
+
+When using Bun instead of Node, change the `schema` value to `./src/schema.ts`.
+
+The following example uses SQLite.
+
+```ts
+import type {Config} from 'drizzle-kit';
+
+export default {
+  schema: './schema.ts',
+  out: './migrations',
+  driver: 'better-sqlite',
+  dbCredentials: {
+    url: './todo.db' // name of SQLite database file
+  },
+  verbose: true,
+  strict: true
+} satisfies Config;
+```
 
 ### Add NPM Scripts
 
-Add the following in `package.json`:
+Add the following in `package.json` when using PostgreSQL:
 
 ```json
   "scripts": {
     "demo": "node src/index.mjs",
-    "migrations:generate": "drizzle-kit generate:pg",
-    "migrations:pull": "drizzle-kit introspect:pg",
-    "migrations:push": "drizzle-kit push:pg",
-    "migrations:drop": "drizzle-kit drop --config=drizzle.config.ts",
+    "migrate:gen": "drizzle-kit generate:pg",
+    "migrate:push": "drizzle-kit push:pg",
+    "migrate:pull": "drizzle-kit introspect:postgres",
+    "migrate:drop": "drizzle-kit drop --config=drizzle.config.ts",
     "studio": "drizzle-kit studio"
+  },
+```
+
+Add the following in `package.json` when using SQLite:
+
+```json
+  "scripts": {
+    "migrate:gen": "drizzle-kit generate:sqlite --config drizzle.config.ts",
+    "migrate:push": "drizzle-kit push:sqlite",
+    "migrate:pull": "drizzle-kit introspect:sqlite",
+    "migrate:drop": "drizzle-kit drop --config drizzle.config.ts",
+    "studio": "drizzle-kit studio --config drizzle.config.ts",
+    "test": "bun test"
   },
 ```
 
@@ -161,10 +214,11 @@ When using Bun instead of Node, change the `demo` script to:
 
 ### Describe Tables
 
-Create the file `src/schema.mjs` (Node) or `src/schema.ts` (Bun)
-containing the following:
+Create the file `schema.mjs` (Node) or `schema.ts` (Bun).
 
-```ts
+The following example using PostgreSQL.
+
+```js
 import {relations} from 'drizzle-orm';
 import {integer, pgTable, serial, text} from 'drizzle-orm/pg-core';
 
@@ -194,41 +248,90 @@ export const dogsRelations = relations(dogs, ({one}) => ({
 }));
 ```
 
-### Configure Drizzle
-
-Create the file `drizzle.config.ts` containing the following:
+The following example uses SQLite.
 
 ```ts
-import type { Config } from "drizzle-kit";
+import {InferInsertModel, InferSelectModel, relations} from 'drizzle-orm';
+import {
+  index,
+  integer,
+  sqliteTable,
+  text,
+  unique
+} from 'drizzle-orm/sqlite-core';
 
-export default {
-  schema: "./src/schema.mjs",
-  out: "./src/migrations",
-  dbCredentials: {
-    host: "localhost",
-    database: "drizzle-demo",
+export const personTable = sqliteTable(
+  'person',
+  {
+    // The strings passed to the functions below are the column names.
+    id: integer('id').primaryKey({autoIncrement: true}),
+    name: text('name').notNull()
   },
-} satisfies Config;
-```
+  table => ({
+    name: index('name').on(table.name)
+  })
+);
 
-When using Bun instead of Node, change the `schema` value to `./src/schema.ts`.
+export const todoTable = sqliteTable(
+  'todo',
+  {
+    id: integer('id').primaryKey({autoIncrement: true}),
+    description: text('description').notNull(),
+    completed: integer('completed', {mode: 'boolean'}).default(false),
+    personId: integer('personId')
+      .notNull()
+      .references(() => personTable.id, {
+        onDelete: 'cascade'
+      })
+  },
+  table => ({
+    descriptionConstraint: unique('description_constraint').on(
+      table.description
+    )
+  })
+);
+
+export type Person = InferSelectModel<typeof personTable>;
+export type InsertPerson = InferInsertModel<typeof personTable>;
+
+export type Todo = InferSelectModel<typeof todoTable>;
+export type InsertTodo = InferInsertModel<typeof todoTable>;
+
+// Relationships must be specified in both directions
+// in order to use Drizzle Studio.  If not, the error
+// "There is not enough information to infer relation" will be thrown.
+export const personRelations = relations(personTable, ({many}) => ({
+  todos: many(todoTable)
+}));
+export const todoRelations = relations(todoTable, ({one}) => ({
+  person: one(personTable, {
+    fields: [todoTable.personId],
+    references: [personTable.id]
+  })
+}));
+```
 
 ### Generate Initial Migration
 
-Enter `npm run migrations:generate`  
-or `bun run migrations:generate`.  
-This will create a `.sql` file in the `src/migrations` directory.
+Enter `npm run migrate:gen`  
+or `bun migrate:gen`.  
+This will create the `migrations` directory containing
+a uniquely named file with a `.sql` extension.
+It contains SQL statements to create the tables and indexes
+described in the schema file created in the previous step.
 
 ### Create Tables
 
-Enter `npm run migrations:push`  
-or `bun run migrations:push`.  
-This will create the tables
-"dogs", "dogs_id_seq", "owners", and "owners_id_seq".
+Enter `npm run migrate:push`  
+or `bun run migrate:push`.  
+The SQL that will be used to create the tables
+described by the latest migration will be output.
+Select "Yes" to approve and create the tables.
+In the case of SQLite, it will begin by creating the database file.
 
-### Database Connection
+### Database Connection (PostgreSQL)
 
-Create the file `src/db.mjs` (Node) or `src/db.ts` (Bun)
+When using PostgreSQL, create the file `src/db.mjs` (Node) or `src/db.ts` (Bun)
 containing the following.
 This creates a database connection and can be imported into
 any source file that needs to access the database.
@@ -250,6 +353,7 @@ When using Bun instead of Node, change the schema import path to `./schema.ts`.
 
 ### Perform CRUD Operations
 
+The following example uses PostgreSQL.
 Change the contents of `src/index.mjs` (Node) or `src/index.ts` (Bun)
 to the following and run it by entering `npm run demo`.
 
@@ -312,6 +416,115 @@ for (const result of results) {
 process.exit(); // Why needed?
 ```
 
+The following example uses SQLite and Bun.
+Change the contents of `src/index.ts` to the following
+and run it by entering `bun test`.
+
+```ts
+// To create the database for this, enter:
+// - bun migrate:gen
+// - bun migrate:push (and select "Yes")
+// To run this, enter `bun test`.
+import {Database, SQLiteError} from 'bun:sqlite';
+import {expect, test} from 'bun:test';
+import {eq} from 'drizzle-orm';
+import {drizzle} from 'drizzle-orm/bun-sqlite';
+import {personTable, todoTable} from './schema';
+
+const bunDB = new Database('todo.db', {create: true});
+const db = drizzle(bunDB);
+
+/**
+ * This creates a row in the person table
+ * and returns the id of the new row.
+ * @param name {string}
+ * @returns {number} id of new row
+ */
+async function createPerson(name: string): Promise<number> {
+  const results = await db
+    .insert(personTable)
+    .values({name})
+    .returning({id: personTable.id});
+  return results[0].id;
+}
+
+/**
+ * This creates a row in the todo table
+ * and returns the id of the new row.
+ * @param description {string}
+ * @param personId {number} id of a person record
+ * @returns {number} id of new row
+ */
+async function createTodo(
+  description: string,
+  personId: number
+): Promise<number> {
+  const results = await db
+    .insert(todoTable)
+    .values({description, personId})
+    .returning({id: todoTable.id});
+  return results[0].id;
+}
+
+test('sqlite', async () => {
+  // Delete all the existing records.
+  await db.delete(todoTable);
+  await db.delete(personTable);
+
+  // Create new records.
+  const markId = await createPerson('Mark');
+  const tamiId = await createPerson('Tami');
+  await createTodo('buy milk', tamiId);
+  await createTodo('ride bike', tamiId);
+  await createTodo('cut grass', markId);
+  await createTodo('walk dog', markId);
+
+  // Attempt to add a duplicate todo that violates
+  // the unique constraint specified in db/schema.ts.
+  // This throws
+  // "SQLiteError: UNIQUE constraint failed: todo.description".
+  expect(() => createTodo('walk dog', tamiId)).toThrow(SQLiteError);
+
+  // Get all the todo records.
+  // The select method returns all columns when no columns are specified.
+  let todos = db.select().from(todoTable).all();
+  expect(todos.length).toBe(4);
+
+  // Get all the todo records for Tami.
+  const joins = await db
+    .select()
+    .from(personTable)
+    .where(eq(personTable.name, 'Tami'))
+    .innerJoin(todoTable, eq(personTable.id, todoTable.personId));
+  expect(joins.length).toBe(2);
+  const [join1, join2] = joins;
+  expect(join1.person.name).toBe('Tami');
+  expect(join1.todo.description).toBe('buy milk');
+  expect(join1.todo.completed).toBe(false);
+  expect(join2.todo.description).toBe('ride bike');
+
+  // Update the completed status of the first todo.
+  const {id} = join1.todo;
+  await db.update(todoTable).set({completed: true}).where(eq(todoTable.id, id));
+
+  // Verify that the update worked.
+  // TODO: Is there a better way to get just the first matching record?
+  const completedValues = await db
+    .select({completed: todoTable.completed})
+    .from(todoTable)
+    .where(eq(todoTable.id, id))
+    .all();
+  expect(completedValues[0].completed).toBe(true);
+
+  // Delete the new record.
+  await db.delete(todoTable).where(eq(todoTable.id, id));
+
+  // Verify that the delete worked.
+  const results = await db.select().from(todoTable).where(eq(todoTable.id, id));
+  expect(results.length).toBe(0);
+});
+```
+
 ## Queries
 
 Drizzle provides three methods for querying tables.
@@ -357,20 +570,15 @@ const result = await
 
 ## Generating Drizzle Schema
 
-When there is an existing database, a Drizzle schema file that describes
-all the tables in it can be generated with the command `drizzle-kit introspect`.
-The path to the generated file is `src/migrations/schema.ts`.
+When there is an existing database, a Drizzle schema file
+that describes all the tables in it can be generated
+by entering `npm run migrate:pull` or `bun migrate:pull`.
+The path to the generated file is `./migrations/schema.ts`.
+TODO: Why did this stop working?
 
 The generated code does not include definitions of relations between tables.
 Unfortunately those need to be added manually.
-
-This command is often run from a script in `package.json` that is defined as:
-
-```json
-"migrations:pull": "drizzle-kit introspect:pg",
-```
-
-Enter `npm run migrations:pull` to run this.
+TODO: Verify this.
 
 ## Schema Changes
 
