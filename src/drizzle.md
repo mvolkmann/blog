@@ -106,6 +106,8 @@ What a mess! It seems I need to install and use both packages.
 
 ### Create Database
 
+For PostgreSQL:
+
 - Install PostgreSQL.
 
   In macOS this can be done using
@@ -118,6 +120,9 @@ What a mess! It seems I need to install and use both packages.
 - Create a database by entering `createdb {db-name}`.
   For this example, the database name is "drizzle-demo".
 
+For SQLite, see <a href="/blog/topics/#/blog/sqlite" target="_blank">SQLite</a>
+for information on installing it and creating a database.
+
 ### Create Project
 
 - Install Node or Bun.
@@ -129,12 +134,9 @@ What a mess! It seems I need to install and use both packages.
 
 ### Install Drizzle and a Database Client
 
-- Enter `npm install drizzle-orm`  
-  or `bun add drizzle-orm`
-- Enter `npm install -D drizzle-kit`  
-  or `bun add -d drizzle-kit`
-- Enter `npm install postgres`  
-  or `bun add postgres`
+- Enter `npm install drizzle-orm` or `bun add drizzle-orm`
+- Enter `npm install -D drizzle-kit` or `bun add -d drizzle-kit`
+- If using PostgreSQL, enter `npm install postgres` or `bun add postgres`
 
 ### Add NPM Scripts
 
