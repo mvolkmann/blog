@@ -591,9 +591,10 @@ To modify the schema for any of the tables:
 
 ## Dropping Migrations
 
-The `drizzle-kit drop` command prompts for a `.sql` file
-in the `src/migrations` directory to delete and then deletes it.
-This is preferable to manually deleting the file
+To delete a `.sql` file describing a specific migration from the
+`migrations` directory, enter `npm run migrate:drop` or `bun migrate:drop`.
+This will prompt for the `.sql` file to delete and then deletes it.
+Doing this is preferable to manually deleting the file
 because doing so can break subsequent `drizzle-kit` commands.
 
 WARNING: This does not undo changes made by the migration!
@@ -603,8 +604,8 @@ To do that, create a new migration that reverses the changes and apply it.
 
 To iterate on schema changes in a development environment
 without creating a new migration `.sql` file for the changes,
-skip the use of `npm run migrations:generate`
-and just use `npm run migrations:push`.
+skip the use of `npm run migrate:generate`
+and just use `npm run migrate:push`.
 This syncs your schema with the database schema directly.
 
 ## Drizzle Studio
@@ -612,9 +613,8 @@ This syncs your schema with the database schema directly.
 Drizzle Studio is a web-based database browser.
 To view it:
 
-1. Enter `npm run studio`  
-   or `bun run studio`
+1. Enter `npm run studio` or `bun studio`
 1. Browse https://local.drizzle.studio
 
-As of January 2024 this was still in beta.
+As of February 2024 this was still in beta.
 It was fine for browsing data, but had issues with updating and adding data.
