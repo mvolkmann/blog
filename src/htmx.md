@@ -457,6 +457,9 @@ It was chosen due to familiarity with JavaScript,
 performance of Bun/Hono, and the simplicity of Hono
 which supports defining endpoints with very little code.
 
+<img alt="htmx plus Bun" style="width: 40%"
+  src="/blog/assets/htmx-plus-bun.jpg?v={{pkg.version}}">
+
 Other popular tech stacks for htmx include:
 
 - {% aTargetBlank "https://ahastack.dev", "AHA stack" %}
