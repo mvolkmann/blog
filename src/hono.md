@@ -481,14 +481,114 @@ describe('dog endpoints', () => {
 });
 ```
 
-## Form Data
+## File-based Routing
 
-To get form data in an endpoint:
+Hono does not support file-based routing, but the addon package
+{% aTargetBlank "https://github.com/honojs/honox", "honox" %} does.
 
-```js
-const data = await c.req.formData();
-const value = data.get('some-name');
-```
+The following steps demonstrate using file-based routing with honox.
+
+1. Create a new project by entering `bun create hono@latest`.
+
+   For the template type, choose "bun".
+
+1. cd to the new project directory.
+1. Enter `bun install`.
+1. Enter `bun add honox`.
+1. Enter `bun add -d vite`.
+1. Create the file `vite.config.ts` containing the following:
+
+   ```ts
+   import honox from 'honox/vite';
+   import {defineConfig} from 'vite';
+
+   export default defineConfig({
+     plugins: [honox()]
+   });
+   ```
+
+1. Rename the `src` directory to `app`.
+1. Renamed `app/index.ts` to `app/server.ts`.
+1. Replace the contents of `app/server.ts` with the following:
+
+   ```ts
+   import {showRoutes} from 'hono/dev';
+   import {createApp} from 'honox/server';
+
+   const app = createApp();
+   showRoutes(app);
+   export default app;
+   ```
+
+1. Edit `package.json`.
+
+   Change `src/index.ts` to `app/server.ts` in the "dev" script.
+
+   TODO: Maybe this needs to use the `vite` command.
+
+1. Create the directory `src/routes`.
+1. Inside the new directory, create the files
+   `_404.tsx`, `_error.tsx`, `_renderer.tsx`, and `index.tsx`.
+
+1. Add the following in `src/routes/_404.tsx`:
+
+   ```ts
+   import {NotFoundHandler} from 'hono';
+
+   const handler: NotFoundHandler = c => {
+     return c.render(<h1>Sorry, Not Found...</h1>);
+   };
+
+   export default handler;
+   ```
+
+1. Add the following in `src/routes/_error.tsx`:
+
+   ```ts
+   import {ErrorHandler} from 'hono';
+
+   const handler: ErrorHandler = (e, c) => {
+     return c.render(<h1>Error! {e.message}</h1>);
+   };
+
+   export default handler;
+   ```
+
+1. Add the following in `src/routes/_renderer.tsx`:
+
+   ```ts
+   import {jsxRenderer} from 'hono/jsx-renderer';
+
+   export default jsxRenderer(({children}) => {
+     return (
+       <html lang="en">
+         <head>
+           <meta charset="UTF-8" />
+           <meta
+             name="viewport"
+             content="width=device-width, initial-scale=1.0"
+           />
+         </head>
+         <body>{children}</body>
+       </html>
+     );
+   });
+   ```
+
+1. Add the following in `src/routes/index.tsx`:
+
+   ```ts
+   export default function Home() {
+     return <h1>Welcome!</h1>;
+   }
+   ```
+
+1. Start the server by entering `bun dev`.
+
+   This gives me the error described in this {% aTargetBlank
+   "https://github.com/honojs/honox/issues/38", "issue" %}.
+
+1. Browse localhost:3000.
 
 ## Validation
 
