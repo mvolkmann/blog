@@ -582,11 +582,9 @@ When there is an existing database, a Drizzle schema file
 that describes all the tables in it can be generated
 by entering `npm run migrate:pull` or `bun migrate:pull`.
 The path to the generated file is `./migrations/schema.ts`.
-TODO: Why did this stop working?
 
 The generated code does not include definitions of relations between tables.
 Unfortunately those need to be added manually.
-TODO: Verify this.
 
 ## Schema Changes
 
