@@ -231,7 +231,7 @@ export default app;
 ### src/dog-router.ts
 
 ```ts
-import {Hono, type Context} from 'hono';
+import {Context, Hono} from 'hono';
 import {z} from 'zod';
 import {zValidator} from '@hono/zod-validator';
 
