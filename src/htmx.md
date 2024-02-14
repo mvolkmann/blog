@@ -391,11 +391,15 @@ Htmx is not appropriate for spreadsheet-like UIs
 where a change in one part of the UI triggers
 changes in many other parts that need to be reflected quickly.
 
-Htmx cannot currently be used in apps that require offline support
-because they rely on sending HTTP requests to
-get new HTML that updates the UI.
-However, there is a effort to address this.
-See {% aTargetBlank "https://github.com/spirodonfl/htmx-offline-mode",
+Using htmx in apps that require offline support is tricky
+because htmx relies on sending HTTP requests to
+get new HTML updates to the UI.
+One way to achieve this is to use a service worker
+to intercept and process HTTP requests.
+For an example of this approach, see {% aTargetBlank
+"https://github.com/mvolkmann/htmx-offline", "htmx-offline" %}.
+An effort is underway to address offline usage of htmx at
+{% aTargetBlank "https://github.com/spirodonfl/htmx-offline-mode",
 "htmx-offline-mode" %}.
 
 Htmx can be used in conjunction with other approaches.
