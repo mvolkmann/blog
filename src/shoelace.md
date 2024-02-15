@@ -214,6 +214,35 @@ to implement this.
 </html>
 ```
 
+## Slots
+
+Many components have slots where content can be inserted.
+The `slot` attribute specifies a named slot where content should be placed.
+
+For example, the Card component has a default slot (for body content)
+and three optional slots named "image", "header", and "footer".
+The content of these slots is rendered in a single column
+where the image is at the top, followed by the header,
+the default content (no slot name provided), and the footer.
+The order in which the content of the slots is rendered
+is not affected by the order in which they appear in the HTML.
+
+For example, the following Card component uses all four slots.
+
+<img alt="Shoelace Card component" style="border: 0; width: 40%"
+  src="/blog/assets/shoelace-card-component.png?v={{pkg.version}}">
+
+```html
+<sl-card class="my-card">
+  <img slot="image" alt="Boston 2013" src="boston2013.png" />
+  <div slot="header">This will appear in the header.</div>
+  This will appear in the default slot.
+  <div slot="footer">This will appear in the footer.</div>
+</sl-card>
+```
+
+Styling of this component is described in the next section.
+
 ## Parts
 
 Many components are composed of parts.
@@ -221,16 +250,29 @@ Each part can be styled separately using
 the standard CSS `::part` pseudo-element.
 
 For example, the Card component has the parts,
-"base", "image", "header", "body", and "footer".
-Suppose there are Card components with the CSS class "my-card".
-To customize all these Cards so the images have rounded corners and
-footers have an orange background, add CSS like the following.
+"base" (represents the entire component),
+"image", "header", "body", and "footer".
+
+The following CSS styles the card component shown in the previous section.
 
 ```css
+.my-card img {
+  aspect-ratio: auto;
+  max-width: 285px;
+  height: auto;
+  width: auto;
+}
+
+.my-card::part(base) {
+  background-color: cornflowerblue;
+  border-radius: 2rem;
+}
+
 .my-card::part(image) {
   border-radius: 2rem;
 }
-.my-card::part(footer) {
+
+.my-card::part(body) {
   background-color: orange;
 }
 ```
