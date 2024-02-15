@@ -84,6 +84,14 @@ This approach is described in the "Light/Dark" mode section below.
 The `script` tag above loads JavaScript for all the components.
 It is also possible to include only specific components
 by using a separate `script` tag for each.
+For example, the following only loads the JavaScript for the Switch component.
+
+```html
+<script
+  src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.13.1/cdn/components/switch/switch.js"
+  type="module"
+></script>
+```
 
 The Shoelace source files can be installed locally to avoid relying on a CDN.
 To install npm, enter one of the following commands.
