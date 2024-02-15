@@ -213,3 +213,24 @@ to implement this.
   </body>
 </html>
 ```
+
+## Parts
+
+Many components are composed of parts.
+Each part can be styled separately using
+the standard CSS `::part` pseudo-element.
+
+For example, the Card component has the parts,
+"base", "image", "header", "body", and "footer".
+Suppose there are Card components with the CSS class "my-card".
+To customize all these Cards so the images have rounded corners and
+footers have an orange background, add CSS like the following.
+
+```css
+.my-card::part(image) {
+  border-radius: 2rem;
+}
+.my-card::part(footer) {
+  background-color: orange;
+}
+```
