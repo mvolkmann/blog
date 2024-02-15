@@ -30,13 +30,24 @@ Modify the version number in each URL to use the latest version.
 ```html
 <link
   rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.13.1/cdn/themes/light.css"
+  href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.14.0/cdn/themes/light.css"
 />
 <script
   type="module"
-  src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.13.1/cdn/shoelace-autoloader.js"
+  src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.14.0/cdn/shoelace-autoloader.js"
 ></script>
 ```
 
 This loads the light theme.
 To instead load the dark theme, change "light" to "dark" in the CSS URL.
+
+The Shoelace source files can be installed locally to avoid relying on a CDN.
+To install npm, enter one of the following commands.
+
+```sh
+npm install @shoelace-style/shoelace
+bun add @shoelace-style/shoelace
+```
+
+There are several options for making the files under `node_modules`
+available to the app.
