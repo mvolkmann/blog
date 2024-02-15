@@ -276,3 +276,15 @@ The following CSS styles the card component shown in the previous section.
   background-color: orange;
 }
 ```
+
+## Events
+
+Some components dispatch events.
+These can be standard DOM events and custom events.
+
+For example, the Menu component dispatches `sl-select` events
+and the Switch component dispatches `s-change` events.
+
+To listen for events, register event listeners on the components.
+This can be done with vanilla JavaScript
+or with {% aTargetBlank "/blog/topics/#/blog/alpine/", "Alpine" %}.
