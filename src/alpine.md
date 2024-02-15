@@ -658,6 +658,10 @@ For example:
 <button x-on:click="like = !like">Toggle</button>
 ```
 
+The JavaScript code in the `x-on` value can access
+the event object using the magic property `$event` and
+the target element using the magic property `$el`.
+
 If the value of event handler is a function name
 instead of a call to a function or other JavaScript code,
 the function will be called with no arguments.

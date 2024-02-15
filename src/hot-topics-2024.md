@@ -35,7 +35,8 @@ that find a repository interesting, and perhaps already use or plan to use it.
 <img alt="Alpine logo" style="border: 0; width: 20%"
   src="/blog/assets/alpine-logo.png?v={{pkg.version}}">
 
-Alpine is a JavaScript framework that provides custom attributes that are
+<a href="https://alpinejs.dev" target="_blank">Alpine</a>
+is a JavaScript framework that provides custom attributes that are
 applied to HTML elements in order to add dynamic behavior to web pages.
 Alpine is notable for how easy it is to use and
 how small it is compared to other web frameworks.
