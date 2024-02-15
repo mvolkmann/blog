@@ -76,8 +76,14 @@ Modify the version number in each URL to use the latest version.
 ></script>
 ```
 
-This loads the light theme.
+The `link` tag above loads the light theme.
 To instead load the dark theme, change "light" to "dark" in the CSS URL.
+Alternative, load both the light and dark themes and allow the user to choose.
+This approach is described in the "Light/Dark" mode section below.
+
+The `script` tag above loads JavaScript for all the components.
+It is also possible to include only specific components
+by using a separate `script` tag for each.
 
 The Shoelace source files can be installed locally to avoid relying on a CDN.
 To install npm, enter one of the following commands.
