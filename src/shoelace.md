@@ -142,7 +142,7 @@ The user should also be allowed to change the mode,
 perhaps using a Switch component.
 
 The following code uses {% aTargetBlank
-"https://mvolkmann.github.io/blog/topics/#/blog/alpine/", "Alpine" %}
+"/blog/topics/#/blog/alpine/", "Alpine" %}
 to implement this.
 
 ```js
