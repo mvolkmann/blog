@@ -48,3 +48,49 @@ The following steps create a new project that uses Vite and Lit.
 1. Run the project by entering `npm run dev` or `bun dev`.
 1. Type "h" and press the return key for help.
 1. Type "o" and press the return key to open a browser tab for localhost:5173.
+
+## Properties
+
+Lit uses the `@property` decorator to declare the attributes
+that can be specified in instances of custom elements.
+
+The `@property` decorator takes a `PropertyDeclaration` object.
+
+One of the supported options is `type`, which can have the value
+`String`, `Number`, `Boolean`, `Array`, or `Object`.
+These are Lit type hints, not TypeScript types.
+The default `type` is `String`.
+
+When the type is `Number`, the value is passed to the `Number` constructor
+which results in `NaN` for non-numeric strings.
+
+When the type is `Boolean`, all values except `null` and `undefined`
+are treated as `true`.
+
+When the type is `Array` or `Object`, the value is passed to `JSON.parse`
+to get the property value.
+
+Only string values can be specified in HTML.
+JavaScript must be used to set attributes to other types of values.
+
+## State
+
+## Lifecycle Methods
+
+## Event Handling
+
+Lit supports registering event handling functions with attributes
+whose names begin with `@`, followed by an event name.
+For example:
+
+```html
+<button @click="alert('Got click')">Click Me</button>
+```
+
+## Errors Detected
+
+Lit error detection includes the following:
+
+- defining multiple custom elements with the same name
+
+TODO: Can you declare an @property to be required?
