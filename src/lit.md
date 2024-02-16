@@ -494,6 +494,47 @@ Then open the HTML file in any modern web browser.
 </html>
 ```
 
+## Markdown
+
+Web components can be used in Markdown files.
+
+When using Vite with the Lit template:
+
+1. Enter `npm run build`.
+1. Copy the generated `.js` file.
+
+   Copy `dist/assets/index_*.js` to a directory that is accessible
+   to the server that servers the Markdown file.
+   For my 11ty-based blog, this is the `src/assets` directory.
+
+1. Rename the copied file to something more meaningful.
+
+   For example, the name could be `lit-components.js`.
+
+1. Add a script tag in the Markdown file.
+
+   This should point to the renamed `.js` file.
+   For example:
+
+   ```html
+   <script type="module" src="/blog/assets/lit-components.js"></script>
+   ```
+
+1. Use the custom element. For example:
+
+   ```html
+   <greet-message name="World"></greet-message>
+   ```
+
+The following is an example of using a web component
+in the blog page you are currently reading.
+Try inspecting the page and changing the value of the `name` attribute.
+The update will be seen on the page.
+
+<script type="module" src="/blog/assets/lit-components.js"></script>
+
+<greet-message name="Markdown"></greet-message>
+
 ## Type Inference
 
 When an instance of a custom element is created
