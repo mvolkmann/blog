@@ -185,6 +185,97 @@ from elements outside this custom element.
 Typically anything done in the `connectedCallback` method
 is undone in this method.
 
+The following code demonstrates each of the lifecycle methods
+except the rarely used `adoptedCallback` method.
+
+```js
+import {LitElement, html} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
+
+@customElement('lifecycle-demo')
+export class LifecycleDemo extends LitElement {
+  @property() text = '';
+
+  changeText() {
+    this.text = 'changed';
+  }
+
+  constructor() {
+    super();
+    console.log('constructor entered');
+  }
+
+  attributeChangedCallback(
+    name: string,
+    oldValue: string | null,
+    newValue: string | null
+  ): void {
+    console.log(`${name} changed from ${oldValue} to ${newValue}`);
+    super.attributeChangedCallback(name, oldValue, newValue);
+  }
+
+  connectedCallback(): void {
+    super.connectedCallback();
+    console.log('connectedCallback entered');
+  }
+
+  disconnectedCallback(): void {
+    super.disconnectedCallback();
+    console.log('disconnectedCallback entered');
+  }
+
+  render() {
+    return html`
+      <div>
+        text: ${this.text}
+        <button @click=${this.changeText}>Change</button>
+      </div>
+    `;
+  }
+}
+```
+
+The following HTML demonstrates using the `lifecycle-demo` custom element.
+It uses {% aTargetBlank "/blog/topics/#/blog/alpine", "Alpine" %} to
+manage state and determine whether the custom element should be in the DOM.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Lifecycle Demo</title>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <script type="module" src="/src/lifecycle-demo.ts"></script>
+  </head>
+  <body x-data="{text: 'initial', show: false}">
+    <button @click="show = !show">Toggle Show</button>
+    <label>Text: <input type="text" x-model="text" /></label>
+    <template x-if="show">
+      <lifecycle-demo :text="text"></lifecycle-demo>
+    </template>
+  </body>
+</html>
+```
+
+Every time `show` changes from `false` to `true`,
+the `constructor` and `connectedCallback` methods are called.
+
+Every time `show` changes from `true` to `false`,
+the `disconnectedCallback` method is called.
+
+When the "Change" button is clicked,
+the value of the `text` property changes,
+but this does NOT trigger a call to the `attributeChangedCallback` method.
+
+Every time the value of the `input` element is changed by the user,
+the value of the Alpine `text` variable changes.
+That causes a new value to be passed to the `lifecycle-demo` element
+through its `text` attribute.
+This DOES trigger a call to the `attributeChangedCallback` method.
+
 ## Event Handling
 
 Lit supports registering event handling functions with attributes
@@ -270,6 +361,12 @@ With this in place, the type of `el` will be inferred to be `AlertOnClick`.
 Lit error detection includes the following:
 
 - defining multiple custom elements with the same name
+
+The following kinds of errors are not detected.
+
+- Mistyping the name of a custom element in HTML.
+
+  The element will be treated as if it were a `div` element.
 
 ## Unorganized Content
 
