@@ -295,14 +295,16 @@ Other supported decorators include:
 
   For example:
 
-  ```js
+  ```ts
   // This sets `pBtn` to a reference to the `button`
   // inside the element with id "p".
   @query('#p button') pBtn!: HTMLDivElement;
 
+  // This is an event handling method that is
+  // called when a specific button is clicked.
   changeP() {
     this.p = this.p === 'go' ? 'stop' : 'go';
-    // This uses the `pBtn` property to change the color of button.
+    // This changes the color of button.
     this.pBtn.style.color = this.p === 'go' ? 'green' : 'red';
   }
 
@@ -316,7 +318,55 @@ Other supported decorators include:
   }
   ```
 
+- `@queryAll`
+
+  This specifies a CSS selector that will be used to
+  query the DOM tree of the component to find all matching element.
+  It is a applied to a property declaration
+  and the property is set to a `NodeList` containing the matching elements.
+
+  For example:
+
+  ```ts
+  // This sets `buttons` to a `NodeList` containing references
+  // to all the `button` elements inside this component.
+  @queryAll('button') buttons!: NodeList;
+
+  // This is an event handling method that is
+  // called when a specific button is clicked.
+  changeP() {
+    this.p = this.p === 'go' ? 'stop' : 'go';
+    // This changes the color of each `button`.
+    for (const node of this.buttons) {
+      const button = node as HTMLButtonElement;
+      button.style.color = this.p === 'go' ? 'green' : 'red';
+    }
+  }
+  ```
+
 - `@queryAsync`
+
+  This is similar to to `@query`, but sets a property to a `Promise`.
+
+  For example:
+
+  ```ts
+  // This sets `pBtn` to a `Promise` that will resolve to
+  // a reference to the `button` inside the element with id "p".
+  @queryAsync('#p button') pBtn!: Promise<HTMLButtonElement>;
+
+  // This is an event handling method that is
+  // called when a specific button is clicked.
+  async changeP() {
+    this.p = this.p === 'go' ? 'stop' : 'go';
+    const pBtn = await this.pBtn;
+    if (pBtn) {
+      // This changes the color of the button.
+      pBtn.style.color = this.p === 'go' ? 'green' : 'red';
+    }
+  }
+  ```
+
 - `@queryAssignedElements`
 - `@queryAssignedNodes`
 
