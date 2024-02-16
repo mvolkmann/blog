@@ -54,6 +54,9 @@ The following steps create a new project that uses Vite and Lit.
 Lit uses the `@property` decorator to declare the attributes
 that can be specified in instances of custom elements.
 
+These values are reactive, meaning that changing the value
+causes the `render` method to be called.
+
 The `@property` decorator takes a `PropertyDeclaration` object.
 
 One of the supported options is `type`, which can have the value
@@ -73,7 +76,32 @@ to get the property value.
 Only string values can be specified in HTML.
 JavaScript must be used to set attributes to other types of values.
 
+Lit does not provide a way to specify that an attribute is required.
+All `@property` declarations must be initialized,
+but they can be initialized to an empty string.
+The render method or any lifecycle method can check for
+required attributes and throw an error if not found.
+The following code demonstrates this.
+
+```ts
+  @property({type: String}) name = '';
+
+  render() {
+    if (!this.name) throw new Error('name is a required attribute');
+    return html`<div>Hello, ${this.name}!</div>`;
+  }
+```
+
 ## State
+
+Lit uses the `@state` decorator to declare instance properties
+that are set via attributes.
+
+These values are reactive, meaning that changing the value
+causes the `render` method to be called.
+
+Instance properties that are declared without the
+`@property` or `@state` decorator are not reactive.
 
 ## Lifecycle Methods
 
