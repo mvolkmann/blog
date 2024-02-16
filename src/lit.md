@@ -449,6 +449,38 @@ export class AlertOnClick extends LitElement {
 }
 ```
 
+## Chess Board Example
+
+{% aTargetBlank "https://mganjoo.github.io/gchessboard/", "gchessboard" %}
+is a web component (not using Lit) that renders a chess board.
+The pieces can be dragged to any squares, not just valid ones.
+This enables quickly setting up a position to study.
+
+<img alt="web component chess board" style="width: 50%"
+  src="/blog/assets/web-component-chess-board.png?v={{pkg.version}}">
+
+To try this, add the following to a new file, perhaps named `chess.html`.
+Then open the HTML file in any modern web browser.
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chess Board</title>
+    <style>
+      g-chess-board {
+        margin: auto;
+        width: 50%;
+      }
+    </style>
+    <script type="module" src="https://unpkg.com/gchessboard"></script>
+  </head>
+  <body>
+    <g-chess-board fen="start" interactive></g-chess-board>
+  </body>
+</html>
+```
+
 ## Type Inference
 
 When an instance of a custom element is created
