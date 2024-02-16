@@ -88,7 +88,7 @@ For example, the following only loads the JavaScript for the Switch component.
 
 ```html
 <script
-  src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.13.1/cdn/components/switch/switch.js"
+  src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.14.0/cdn/components/switch/switch.js"
   type="module"
 ></script>
 ```
