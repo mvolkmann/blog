@@ -266,6 +266,90 @@ An instance of this custom element can be created as follows.
 <state-changes p="initial"></state-changes>
 ```
 
+## Slots
+
+Web components can have one default slot and any number of named slots.
+These are defined using the HTML `slot` element.
+Instances of the component can specify content to be placed in the slots.
+
+The following example demonstrates using slots.
+
+```ts
+import {html, LitElement} from 'lit';
+import {customElement, queryAssignedElements} from 'lit/decorators.js';
+
+@customElement('slots-demo')
+export class SlotsDemo extends LitElement {
+  // We can find elements inserted into slots by slot name or a CSS selector.
+  @queryAssignedElements({
+    // selector: 'li'
+    slot: 'breakfast'
+  })
+  breakfastElements!: HTMLElement[];
+
+  // This finds elements inserted into the default slot,
+  // which is the one with no name.
+  @queryAssignedElements()
+  defaultElements!: HTMLElement[];
+
+  override connectedCallback(): void {
+    super.connectedCallback();
+    // TODO: Why is a `setTimeout` necessary
+    // TODO: to wait for the properties to be set?
+    setTimeout(() => {
+      // TODO: Why don't the default slot elements get captured?
+      console.log('this.defaultElements =', this.defaultElements);
+      for (const el of this.breakfastElements) {
+        el.style.color = 'red';
+      }
+    }, 0);
+  }
+
+  render() {
+    return html`
+      <div>
+        <h2><slot></slot></h2>
+        <h3>Breakfast</h3>
+        <slot name="breakfast">No breakfast options</slot>
+        <h3>Lunch</h3>
+        <slot name="lunch">No lunch options</slot>
+        <h3>Dinner</h3>
+        <slot name="dinner">No dinner options</slot>
+      </div>
+    `;
+  }
+}
+```
+
+The following HTML renders the custom element defined above.
+
+TODO: Add a screenshot.
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Slots Demo</title>
+    <script type="module" src="/src/slots-demo.ts"></script>
+  </head>
+  <body>
+    <slots-demo>
+      <!-- The next line goes in the default slot. -->
+      Menu
+      <ul slot="breakfast">
+        <li>Eggs</li>
+        <li>Bacon</li>
+      </ul>
+      <ul slot="dinner">
+        <li>spaghetti</li>
+        <li>tacos</li>
+        <li>fried rice</li>
+      </ul>
+    </slots-demo>
+  </body>
+</html>
+```
+
 ## Decorators
 
 Lit supports many decorators.
