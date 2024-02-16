@@ -205,7 +205,7 @@ export class LifecycleDemo extends LitElement {
     console.log('constructor entered');
   }
 
-  attributeChangedCallback(
+  override attributeChangedCallback(
     name: string,
     oldValue: string | null,
     newValue: string | null
@@ -214,12 +214,12 @@ export class LifecycleDemo extends LitElement {
     super.attributeChangedCallback(name, oldValue, newValue);
   }
 
-  connectedCallback(): void {
+  override connectedCallback(): void {
     super.connectedCallback();
     console.log('connectedCallback entered');
   }
 
-  disconnectedCallback(): void {
+  override disconnectedCallback(): void {
     super.disconnectedCallback();
     console.log('disconnectedCallback entered');
   }
