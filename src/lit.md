@@ -82,6 +82,10 @@ The `@customElement` decorator assigns a name to the custom element.
 The `@property` decorator can declare attributes
 that can be applied to the custom element.
 
+Lit components must extend the `LitElement` class.
+The `LitElement` class extends the `ReactiveElement` class (from Lit),
+which extends the `HTMLElement` class (from the HTML standard).
+
 ```ts
 import {css, html, LitElement} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
