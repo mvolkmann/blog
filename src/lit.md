@@ -67,7 +67,12 @@ The following steps create a new project that uses Vite and Lit.
 1. cd to the new project directory.
 1. Install dependencies by entering `npm install` or `bun install`.
 1. Run the project by entering `npm run dev` or `bun dev`.
-   TODO: Why does `bun dev` give an error message?
+
+   Currently running `bun dev` in macOS gives the error
+   "Cannot find module @rollup/rollup-darwin-x64".
+   It should be looking for the ARM version, not the x64 version.
+   A workaround is to use `npm run dev` for now.
+
 1. Type "h" and press the return key for help.
 1. Type "o" and press the return key to open a browser tab for localhost:5173.
 
