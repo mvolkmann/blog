@@ -67,6 +67,7 @@ The following steps create a new project that uses Vite and Lit.
 1. cd to the new project directory.
 1. Install dependencies by entering `npm install` or `bun install`.
 1. Run the project by entering `npm run dev` or `bun dev`.
+   TODO: Why does `bun dev` give an error message?
 1. Type "h" and press the return key for help.
 1. Type "o" and press the return key to open a browser tab for localhost:5173.
 
@@ -218,6 +219,7 @@ import {customElement, property, state} from 'lit/decorators.js';
 export class StateChanges extends LitElement {
   @property() p = '';
   @state() s = 'initial';
+  v = 'non-reactive';
 
   changeP() {
     this.p = 'changed';
@@ -225,6 +227,13 @@ export class StateChanges extends LitElement {
 
   changeS() {
     this.s = 'changed';
+  }
+
+  changeV() {
+    this.v = 'changed';
+    // v is not a reactive property,
+    // so the change won't trigger a call to render.
+    this.requestUpdate(); // triggers call to render
   }
 
   render() {
@@ -236,6 +245,10 @@ export class StateChanges extends LitElement {
       <div>
         s: ${this.s}
         <button @click=${this.changeS}>Change</button>
+      </div>
+      <div>
+        v: ${this.v}
+        <button @click=${this.changeV}>Change</button>
       </div>
     `;
   }
