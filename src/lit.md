@@ -23,13 +23,24 @@ is library that simplifies developing
 
 Lit components are native web components.
 
+Web components define custom elements that
+can be used just like standard HTML elements.
+
+Custom element names must include at least one hyphen.
+This avoids conflicting with the names of standard HTML elements.
+
+Tags for custom elements cannot be self-closing,
+even when they have no content.
+For example, `<my-element></my-element>` is valid, but `<my-element />` is not.
+
 Web components can be used in any web page,
 with any web framework, and in Markdown files.
 This gives them much broader applicability than components
 implemented using a specific frameworks such as React.
 
-Web components are more future-proof that other kinds of components because
-they are likely to be usable in applications built with future web frameworks.
+Web components are more future-proof than other kinds of components
+because they are likely to be usable
+in applications built with future web frameworks.
 
 ## Installing
 
