@@ -396,6 +396,33 @@ and displays an image from unsplash.
 </html>
 ```
 
+The magic property `$data` can be passed to a JavaScript function.
+This can be used to reactively modify any `x-data` properties.
+The following code demonstrates this.
+
+```js
+<html>
+  <head>
+    ...
+    <script>
+      function incrementBoth(data) {
+        data.inner++;
+        data.outer++;
+      }
+    </script>
+  </head>
+  <body>
+    <div x-data="{outer: 1}">
+      <div>outer = <span x-text="outer"></span></div>
+      <div x-data="{inner: 1}">
+        <div>inner = <span x-text="inner"></span></div>
+        <button @click="incrementBoth($data)">Increment Both</button>
+      </div>
+    </div>
+  </body>
+</html>
+```
+
 ### x-effect
 
 The `x-effect` directive executes specified JavaScript code
