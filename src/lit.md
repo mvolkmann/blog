@@ -276,6 +276,11 @@ That causes a new value to be passed to the `lifecycle-demo` element
 through its `text` attribute.
 This DOES trigger a call to the `attributeChangedCallback` method.
 
+The `render` method is called every time
+an `@property` or `@state` value changes.
+It's not necessary to implement the `attributeChangedCallback` method
+to make this happen.
+
 ## Event Handling
 
 Lit supports registering event handling functions with attributes
