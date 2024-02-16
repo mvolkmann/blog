@@ -103,7 +103,87 @@ causes the `render` method to be called.
 Instance properties that are declared without the
 `@property` or `@state` decorator are not reactive.
 
+The following custom Lit element demonstrates the reactivity
+of `@property` and `@state` variables.
+
+<img alt="Lit reactivity" style="width: 30%"
+  src="/blog/assets/lit-reactivity.png?v={{pkg.version}}">
+
+```ts
+import {LitElement, html} from 'lit';
+import {customElement, property, state} from 'lit/decorators.js';
+
+@customElement('state-changes')
+export class StateChanges extends LitElement {
+  @property() p = '';
+  @state() s = 'initial';
+
+  changeP() {
+    this.p = 'changed';
+  }
+
+  changeS() {
+    this.s = 'changed';
+  }
+
+  render() {
+    return html`
+      <div>
+        p: ${this.p}
+        <button @click=${this.changeP}>Change</button>
+      </div>
+      <div>
+        s: ${this.s}
+        <button @click=${this.changeS}>Change</button>
+      </div>
+    `;
+  }
+}
+```
+
+An instance of this custom element can be created as follows.
+
+```html
+<state-changes p="initial"></state-changes>
+```
+
 ## Lifecycle Methods
+
+Lit supports five lifecycle methods that are automatically called
+at specific points in the lifecycle of a custom element.
+
+### adoptedCallback
+
+This lifecycle method is called when the instance is moved to a new document.
+
+This method is rarely used.
+
+### attributeChangedCallback
+
+This lifecycle method is called when the value of an observed attribute changes.
+
+### connectedCallback
+
+This lifecycle method is called after an instance is added to the DOM.
+It can be used to add event listeners
+to elements outside this custom element.
+Typically anything done in this method
+is undone in the `disconnectedCallback` method.
+
+### constructor
+
+This lifecycle method is called when an instance is initially created
+and again if the custom element definition is modified.
+It is commonly used for one time initializations
+such as computing property values.
+
+### disconnectedCallback
+
+This lifecycle method is called after an instance is removed from the DOM.
+It can be used to remove event listeners
+from elements outside this custom element.
+Typically anything done in the `connectedCallback` method
+is undone in this method.
 
 ## Event Handling
 
@@ -190,3 +270,7 @@ With this in place, the type of `el` will be inferred to be `AlertOnClick`.
 Lit error detection includes the following:
 
 - defining multiple custom elements with the same name
+
+## Unorganized Content
+
+To force a custom element instance to update, call its `requestUpdate` method.
