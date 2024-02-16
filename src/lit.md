@@ -296,13 +296,14 @@ Other supported decorators include:
   For example:
 
   ```js
-  // This sets `pDiv` to a reference to the element with id "p".
-  @query('#p') pDiv!: HTMLDivElement;
+  // This sets `pBtn` to a reference to the `button`
+  // inside the element with id "p".
+  @query('#p button') pBtn!: HTMLDivElement;
 
   changeP() {
     this.p = this.p === 'go' ? 'stop' : 'go';
-    // This uses the `pDiv` property to change the color of the element.
-    this.pDiv.style.color = this.p === 'go' ? 'green' : 'red';
+    // This uses the `pBtn` property to change the color of button.
+    this.pBtn.style.color = this.p === 'go' ? 'green' : 'red';
   }
 
   render() {
