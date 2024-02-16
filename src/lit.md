@@ -274,7 +274,47 @@ We have already seen `@customElement`, `@property`, and `@state`.
 Other supported decorators include:
 
 - `@eventOptions`
+
+  This specifies an options object to be passed to calls that Lit makes
+  to `addEventListener` and `removeEventListener`.
+  The supported options are documented in {% aTargetBlank
+  "https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#options",
+  "MDN" %}.
+  They include `capture`, `once`, `passive`, and `signal`.
+
+  For example, adding `@eventOptions({once: true})`
+  before the definition of a callback function
+  prevents it from being called more than once.
+
 - `@query`
+
+  This specifies a CSS selector that will be used to
+  query the DOM tree of the component to find a matching element.
+  It is a applied to a property declaration
+  and the property is set to a reference to the matching element.
+
+  For example:
+
+  ```js
+  // This sets `pDiv` to a reference to the element with id "p".
+  @query('#p') pDiv!: HTMLDivElement;
+
+  changeP() {
+    this.p = this.p === 'go' ? 'stop' : 'go';
+    // This uses the `pDiv` property to change the color of the element.
+    this.pDiv.style.color = this.p === 'go' ? 'green' : 'red';
+  }
+
+  render() {
+    return html`
+      <div id="p">
+        p: ${this.p}
+        <button @click=${this.changeP}>Change</button>
+      </div>
+    `;
+  }
+  ```
+
 - `@queryAsync`
 - `@queryAssignedElements`
 - `@queryAssignedNodes`
