@@ -63,14 +63,18 @@ The following steps create a new project that uses Vite and Lit.
 
 The following code from the file `src/greet-message.ts`
 implements a basic custom element using Lit and TypeScript.
-This uses the decorators `@customElement` and `@property`
-which are described later.
+Using TypeScript provides type checking in code editors like VS Code.
+
+Using TypeScript also allows the use of
+decorators like `@customElement` and `@property`.
+The `@customElement` decorator assigns a name to the custom element.
+The `@property` decorator can declare attributes
+that can be applied to the custom element.
 
 ```ts
 import {css, html, LitElement} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
 
-// This defines the name of the custom element.
 @customElement('greet-message')
 export class GreetMessage extends LitElement {
   // This value will come from an HTML attribute.
