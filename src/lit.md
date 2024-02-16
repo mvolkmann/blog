@@ -97,6 +97,8 @@ export class GreetMessage extends LitElement {
     return html`<div>Hello, ${this.name}!</div>`;
   }
 
+  // The `styles` property can be defined anywhere in
+  // the class definition, not just at the bottom.
   // :host refers to outermost element rendered by this custom element.
   static styles = css`
     :host {
