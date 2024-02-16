@@ -49,6 +49,54 @@ The following steps create a new project that uses Vite and Lit.
 1. Type "h" and press the return key for help.
 1. Type "o" and press the return key to open a browser tab for localhost:5173.
 
+## Basic Example
+
+The following code from the file `src/greet-message.ts`
+implements a basic custom element using Lit and TypeScript.
+
+```js
+import {LitElement, css, html} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
+
+// This defines the name of the custom element.
+@customElement('greet-message')
+export class GreetMessage extends LitElement {
+  // This value will come from an HTML attribute.
+  @property() name = '';
+
+  render() {
+    // Checking for required attributes is optional.
+    if (!this.name) throw new Error('name is a required attribute');
+    return html`<div>Hello, ${this.name}!</div>`;
+  }
+
+  // :host refers to outermost element rendered by this custom element.
+  static styles = css`
+    :host {
+      color: purple;
+    }
+  `;
+}
+```
+
+The following HTML renders the custom element defined above.
+
+<img alt="Lit greet-message" style="width: 20%"
+  src="/blog/assets/lit-greet-message.png?v={{pkg.version}}">
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lit Demo</title>
+    <script type="module" src="/src/greet-message.ts"></script>
+  </head>
+  <body>
+    <greet-message name="World"></greet-message>
+  </body>
+</html>
+```
+
 ## Properties
 
 Lit uses the `@property` decorator to declare the attributes
@@ -81,16 +129,7 @@ All `@property` declarations must be initialized,
 but they can be initialized to an empty string.
 The render method or any lifecycle method can check for
 required attributes and throw an error if not found.
-The following code demonstrates this.
-
-```ts
-  @property({type: String}) name = '';
-
-  render() {
-    if (!this.name) throw new Error('name is a required attribute');
-    return html`<div>Hello, ${this.name}!</div>`;
-  }
-```
+See the example in the "Basic Example" section above.
 
 ## State
 
@@ -146,6 +185,11 @@ An instance of this custom element can be created as follows.
 ```html
 <state-changes p="initial"></state-changes>
 ```
+
+## Decorators
+
+Lit supports many decorators.
+We have already seen `@customElement`, `@property`, and `@state`.
 
 ## Lifecycle Methods
 
