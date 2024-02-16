@@ -109,6 +109,11 @@ Instance properties that are declared without the
 
 Lit supports registering event handling functions with attributes
 whose names begin with `@`, followed by an event name.
+The value must be a function object,
+not a call to a function or JavaScript code.
+String interpolation (`${fn}`) is used to insert the function
+into the `html` tagged template literal.
+
 For example:
 
 ```ts
