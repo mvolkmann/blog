@@ -21,6 +21,16 @@ layout: topic-layout.njk
 is library that simplifies developing
 {% aTargetBlank "https://www.webcomponents.org/", "web components" %}.
 
+Lit components are native web components.
+
+Web components can be used in any web page,
+with any web framework, and in Markdown files.
+This gives them much broader applicability than components
+implemented using a specific frameworks such as React.
+
+Web components are more future-proof that other kinds of components because
+they are likely to be usable in applications built with future web frameworks.
+
 ## Installing
 
 The easiest way to get started using Lit is to
@@ -53,9 +63,11 @@ The following steps create a new project that uses Vite and Lit.
 
 The following code from the file `src/greet-message.ts`
 implements a basic custom element using Lit and TypeScript.
+This uses the decorators `@customElement` and `@property`
+which are described later.
 
-```js
-import {LitElement, css, html} from 'lit';
+```ts
+import {css, html, LitElement} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
 
 // This defines the name of the custom element.
@@ -79,6 +91,34 @@ export class GreetMessage extends LitElement {
 }
 ```
 
+The following code from the file `src/greet-message.js` implements
+the same custom element using JavaScript instead of TypeScript.
+JavaScript-based custom elements cannot use decorators,
+so they use a different approach to
+declare the custom element name and properties (attributes).
+
+```js
+import {css, html, LitElement} from 'lit';
+
+export class GreetMessage extends LitElement {
+  static properties = {
+    name: {type: String}
+  };
+
+  render() {
+    if (!this.name) throw new Error('name is a required attribute');
+    return html`<div>Hello, ${this.name}!</div>`;
+  }
+
+  static styles = css`
+    :host {
+      color: purple;
+    }
+  `;
+}
+customElements.define('greet-message', GreetMessage);
+```
+
 The following HTML renders the custom element defined above.
 
 <img alt="Lit greet-message" style="width: 20%"
@@ -89,6 +129,7 @@ The following HTML renders the custom element defined above.
 <html>
   <head>
     <title>Lit Demo</title>
+    <!-- Change .ts to .js to use the JavaScript version. -->
     <script type="module" src="/src/greet-message.ts"></script>
   </head>
   <body>
@@ -149,7 +190,7 @@ of `@property` and `@state` variables.
   src="/blog/assets/lit-reactivity.png?v={{pkg.version}}">
 
 ```ts
-import {LitElement, html} from 'lit';
+import {html, LitElement} from 'lit';
 import {customElement, property, state} from 'lit/decorators.js';
 
 @customElement('state-changes')
@@ -190,6 +231,16 @@ An instance of this custom element can be created as follows.
 
 Lit supports many decorators.
 We have already seen `@customElement`, `@property`, and `@state`.
+
+Other supported decorators include:
+
+- `@eventOptions`
+- `@query`
+- `@queryAsync`
+- `@queryAssignedElements`
+- `@queryAssignedNodes`
+
+TODO: Add descriptions to the decorators listed above.
 
 ## Lifecycle Methods
 
@@ -233,7 +284,7 @@ The following code demonstrates each of the lifecycle methods
 except the rarely used `adoptedCallback` method.
 
 ```js
-import {LitElement, html} from 'lit';
+import {html, LitElement} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
 
 @customElement('lifecycle-demo')
@@ -337,7 +388,7 @@ into the `html` tagged template literal.
 For example:
 
 ```ts
-import {LitElement, css, html} from 'lit';
+import {css, html, LitElement} from 'lit';
 import {customElement} from 'lit/decorators.js';
 
 function handleClick() {
