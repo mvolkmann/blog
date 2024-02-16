@@ -111,14 +111,77 @@ Lit supports registering event handling functions with attributes
 whose names begin with `@`, followed by an event name.
 For example:
 
-```html
-<button @click="alert('Got click')">Click Me</button>
+```ts
+import {LitElement, css, html} from 'lit';
+import {customElement} from 'lit/decorators.js';
+
+function handleClick() {
+  alert('in handleClick function');
+}
+
+@customElement('alert-on-click')
+export class AlertOnClick extends LitElement {
+  handleClick() {
+    alert('in handleClick method');
+  }
+
+  render() {
+    return html`
+      <button @click=${this.handleClick}>Click Me</button>
+      <button @click=${handleClick}>Click Me</button>
+    `;
+  }
+
+  static styles = css`
+    :host {
+      border: 1px dashed red;
+      padding: 1rem;
+    }
+
+    button {
+      border-radius: 0.5rem;
+      border: 3px solid cornflowerblue;
+      padding: 0.5rem;
+      background-color: lemonchiffon;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: orange;
+    }
+  `;
+}
 ```
+
+## Type Inference
+
+When an instance of a custom element is created
+using the DOM `createElement` method, TypeScript cannot infer
+the specific type and assumes it is `HTMLElement`.
+
+For example, in the following code TypeScript will
+infer the type of `el` to be `HTMLElement`.
+
+```ts
+const el = document.createElement('alert-on-click');
+```
+
+For many custom elements, this is not a concern
+because element instances will be created in this way.
+When this is a concern, enable inferring a more specific type
+by adding an entry to the `HTMLElementTagNameMap` as follows.
+
+```ts
+declare global {
+  interface HTMLElementTagNameMap {
+    'alert-on-click': AlertOnClick;
+  }
+}
+```
+
+With this in place, the type of `el` will be inferred to be `AlertOnClick`.
 
 ## Errors Detected
 
 Lit error detection includes the following:
 
 - defining multiple custom elements with the same name
-
-TODO: Can you declare an @property to be required?
