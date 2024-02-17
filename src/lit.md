@@ -754,9 +754,13 @@ When using Vite with the Lit template:
    This should point to the renamed `.js` file.
    For example:
 
+   {% raw %}
+
    ```html
    <script type="module" src="/blog/assets/lit-components.js"></script>
    ```
+
+   {% endraw %}
 
 1. Use the custom element. For example:
 
