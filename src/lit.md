@@ -266,90 +266,6 @@ An instance of this custom element can be created as follows.
 <state-changes p="initial"></state-changes>
 ```
 
-## Slots
-
-Web components can have one default slot and any number of named slots.
-These are defined using the HTML `slot` element.
-Instances of the component can specify content to be placed in the slots.
-
-The following example demonstrates using slots.
-
-```ts
-import {html, LitElement} from 'lit';
-import {customElement, queryAssignedElements} from 'lit/decorators.js';
-
-@customElement('slots-demo')
-export class SlotsDemo extends LitElement {
-  // We can find elements inserted into slots by slot name or a CSS selector.
-  @queryAssignedElements({
-    // selector: 'li'
-    slot: 'breakfast'
-  })
-  breakfastElements!: HTMLElement[];
-
-  // This finds elements inserted into the default slot,
-  // which is the one with no name.
-  @queryAssignedElements()
-  defaultElements!: HTMLElement[];
-
-  override connectedCallback(): void {
-    super.connectedCallback();
-    // TODO: Why is a `setTimeout` necessary
-    // TODO: to wait for the properties to be set?
-    setTimeout(() => {
-      // TODO: Why don't the default slot elements get captured?
-      console.log('this.defaultElements =', this.defaultElements);
-      for (const el of this.breakfastElements) {
-        el.style.color = 'red';
-      }
-    }, 0);
-  }
-
-  render() {
-    return html`
-      <div>
-        <h2><slot></slot></h2>
-        <h3>Breakfast</h3>
-        <slot name="breakfast">No breakfast options</slot>
-        <h3>Lunch</h3>
-        <slot name="lunch">No lunch options</slot>
-        <h3>Dinner</h3>
-        <slot name="dinner">No dinner options</slot>
-      </div>
-    `;
-  }
-}
-```
-
-The following HTML renders the custom element defined above.
-
-TODO: Add a screenshot.
-
-```html
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Slots Demo</title>
-    <script type="module" src="/src/slots-demo.ts"></script>
-  </head>
-  <body>
-    <slots-demo>
-      <!-- The next line goes in the default slot. -->
-      Menu
-      <ul slot="breakfast">
-        <li>Eggs</li>
-        <li>Bacon</li>
-      </ul>
-      <ul slot="dinner">
-        <li>spaghetti</li>
-        <li>tacos</li>
-        <li>fried rice</li>
-      </ul>
-    </slots-demo>
-  </body>
-</html>
-```
-
 ## Decorators
 
 Lit supports many decorators.
@@ -452,9 +368,125 @@ Other supported decorators include:
   ```
 
 - `@queryAssignedElements`
+
+  This specifies a slot name or CSS selector.
+  It sets a property to an array of `HTMLElement` objects
+  representing the elements that were assigned to the slot or selected element.
+
+  ```ts
+  @queryAssignedElements({
+    // selector: 'li'
+    slot: 'breakfast'
+  })
+  breakfastElements!: HTMLElement[];
+  ```
+
+  To get the elements assigned to the default slot,
+  omit the argument to `@queryAssignedElements`.
+
+  See examples in the "Slots" section below.
+
 - `@queryAssignedNodes`
 
-TODO: Add descriptions to the decorators listed above.
+  This specifies a slot name or CSS selector.
+  It sets a property to an array of `Node` objects
+  representing the nodes (including `Text` nodes)
+  that were assigned to the slot or selected element.
+
+  For example:
+
+  ```ts
+  @queryAssignedNodes({
+    slot: 'lunch'
+  })
+  lunchNodes!: Node[];
+  ```
+
+  To get the nodes assigned to the default slot,
+  omit the argument to `@queryAssignedNodes`.
+
+## Slots
+
+Web components can have one default slot and any number of named slots.
+These are defined using the HTML `slot` element.
+Instances of the component can specify content to be placed in the slots.
+
+The following example demonstrates using slots.
+
+```ts
+import {html, LitElement} from 'lit';
+import type {PropertyValueMap} from 'lit';
+import {customElement, queryAssignedElements} from 'lit/decorators.js';
+
+@customElement('slots-demo')
+export class SlotsDemo extends LitElement {
+  // To get an array of HTMLElement objects rather than Node objects,
+  // use @queryAssignedElements.
+  // Use @queryAssignedNodes when you also
+  // want to capture Node objects like Text.
+  @queryAssignedElements({
+    // selector: 'li'
+    slot: 'breakfast'
+  })
+  breakfastElements!: HTMLElement[];
+
+  @queryAssignedElements()
+  defaultElements!: HTMLElement[];
+
+  override firstUpdated(changedProperties: PropertyValueMap<any>): void {
+    super.firstUpdated(changedProperties);
+    for (const el of this.defaultElements) {
+      el.style.color = 'red';
+    }
+    for (const el of this.breakfastElements) {
+      el.style.color = 'green';
+    }
+  }
+
+  render() {
+    return html`
+      <div>
+        <h2><slot></slot></h2>
+        <h3>Breakfast</h3>
+        <slot name="breakfast">No breakfast options</slot>
+        <h3>Lunch</h3>
+        <slot name="lunch">No lunch options</slot>
+        <h3>Dinner</h3>
+        <slot name="dinner">No dinner options</slot>
+      </div>
+    `;
+  }
+}
+```
+
+The following HTML renders the custom element defined above.
+
+<img alt="Lit slots demo" style="width: 25%"
+  src="/blog/assets/lit-slots-demo.png?v={{pkg.version}}">
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Slots Demo</title>
+    <script type="module" src="/src/slots-demo.ts"></script>
+  </head>
+  <body>
+    <slots-demo>
+      <p>Menu</p>
+      <ul slot="breakfast">
+        <li>Eggs</li>
+        <li>Bacon</li>
+      </ul>
+      <ul slot="dinner">
+        <li>spaghetti</li>
+        <li>tacos</li>
+        <li>fried rice</li>
+      </ul>
+    </slots-demo>
+  </body>
+</html>
+```
 
 ## Lifecycle Methods
 
@@ -493,6 +525,32 @@ It can be used to remove event listeners
 from elements outside this custom element.
 Typically anything done in the `connectedCallback` method
 is undone in this method.
+
+### firstUpdated
+
+TODO: Describe this.
+
+### performUpdate
+
+TODO: Describe this.
+
+### requestUpdate
+
+TODO: Describe this.
+
+### shouldUpdate
+
+TODO: Describe this.
+
+### updated
+
+TODO: Describe this.
+
+### updateComplete
+
+TODO: Describe this.
+
+---
 
 The following code demonstrates each of the lifecycle methods
 except the rarely used `adoptedCallback` method.
