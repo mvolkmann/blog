@@ -120,3 +120,76 @@ that can be cloned and inserted multiple times into a DOM tree.
 
 Templates can contain slots that are used to insert content.
 Each template can contain one unnamed slot and any number of named slots.
+
+The following code demonstrates
+using the `template` element inside a web component.
+This approach has the advantage that the content of a web component
+can be described with HTML instead of using
+DOM methods like `createElement` and `appendChild`.
+However, it has the disadvantage that the web component definition
+must assume that a `template` with a given `id` has been defined outside it.
+
+<img alt="Web Components and templates" style="width: 40%"
+  src="/blog/assets/web-component-templates.png?v={{pkg.version}}">
+
+```js
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Template Demo</title>
+    <script>
+      window.onload = () => {
+        class Card extends HTMLElement {
+          constructor() {
+            super();
+            const shadowRoot = this.attachShadow({mode: 'open'});
+            const template = document.getElementById('card');
+            // Passing true creates a deep clone.
+            shadowRoot.appendChild(template.content.cloneNode(true));
+          }
+        }
+        customElements.define('my-card', Card);
+      };
+    </script>
+  </head>
+  <body>
+    <h1>Template Demo</h1>
+
+    <template id="card">
+      <!-- This styling is only scoped when the
+           template is used in a web component. -->
+      <style>
+        .card {
+          display: inline-block;
+          background-color: cornflowerblue;
+          border: 3px solid blue;
+          border-radius: 0.5rem;
+          padding: 0.5rem;
+        }
+        h2 {
+          color: orange;
+          margin-top: 0;
+        }
+      </style>
+      <section class="card">
+        <h2><slot name="title">Untitled</slot></h2>
+        <h3><slot name="header" /></h3>
+        <p><slot name="body" /></p>
+        <h3><slot name="footer" /></h3>
+      </section>
+    </template>
+
+    <my-card>
+      <span slot="title">Title #1</span>
+      <span slot="header">header #1</span>
+      <span slot="body">body #1</span>
+      <span slot="footer">footer #1</span>
+    </my-card>
+
+    <my-card>
+      <span slot="title">Title #2</span>
+      <span slot="body">body #2</span>
+    </my-card>
+  </body>
+</html>
+```
