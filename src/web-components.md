@@ -76,6 +76,12 @@ export class GreetMessage extends HTMLElement {
 customElements.define('greet-message', GreetMessage);
 ```
 
+The value of `this.shadowRoot`, when set, is a {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot",
+"ShadowRoot" %} object.
+This can be accessed in other lifecycle methods such as `connectedCallback`.
+One use is to register listeners for `slotchange` events.
+
 The following HTML renders an instance of the web component defined above.
 
 ```html
