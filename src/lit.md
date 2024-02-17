@@ -183,8 +183,8 @@ The default `type` is `String`.
 When the type is `Number`, the value is passed to the `Number` constructor
 which results in `NaN` for non-numeric strings.
 
-When the type is `Boolean`, all values except `null` and `undefined`
-are treated as `true`.
+When the type is `Boolean`, the value is set
+based on whether the attribute is present.
 
 When the type is `Array` or `Object`, the value is passed to `JSON.parse`
 to get the property value.
@@ -433,6 +433,8 @@ export class SlotsDemo extends LitElement {
   @queryAssignedElements()
   defaultElements!: HTMLElement[];
 
+  // The override keyword ensures that the method being overridden
+  // is spelled correction and takes the correct parameters.
   override firstUpdated(changedProperties: PropertyValueMap<any>): void {
     super.firstUpdated(changedProperties);
     for (const el of this.defaultElements) {
