@@ -34,7 +34,7 @@ While you could implement every UI component of a web app as a web component,
 that is a bit harder than using other web framework like Svelte.
 Consider only implementing web components for general purpose UI components
 that will be used in multiple apps.
-The {% aTargetBlank "/blog/topics/#/blog/shoelace, "Shoelace" %}
+The {% aTargetBlank "/blog/topics/#/blog/shoelace", "Shoelace" %}
 web components are great examples.
 
 ## Basic Example
