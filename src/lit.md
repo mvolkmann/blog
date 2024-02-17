@@ -28,7 +28,7 @@ that implementing them using only browser standards.
 Web components define custom elements that
 can be used just like standard HTML elements.
 
-Custom element names must include at least one hyphen.
+Custom element names must be all lowercase and include at least one hyphen.
 This avoids conflicting with the names of standard HTML elements.
 
 Tags for custom elements cannot be self-closing,

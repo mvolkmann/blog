@@ -92,6 +92,10 @@ The following HTML renders an instance of the web component defined above.
 {% aTargetBlank "https://html.spec.whatwg.org/multipage/custom-elements.html",
 "Custom Elements" %} provide a way to define and use custom HTML elements.
 
+The names of custom elements must be all lowercase
+and contain at least one hyphen.
+This avoids name conflicts with standard HTML elements.
+
 ## Shadow DOM
 
 The {% aTargetBlank "https://dom.spec.whatwg.org/#interface-shadowroot",
@@ -118,8 +122,12 @@ The HTML {% aTargetBlank
 "template element" %} provides a way to define an HTML fragment
 that can be cloned and inserted multiple times into a DOM tree.
 
+`template` elements have their CSS `display` property set to `none`
+so their content is not rendered.
+
 Templates can contain slots that are used to insert content.
 Each template can contain one unnamed slot and any number of named slots.
+This is primarily useful when `template` elements are cloned by web components.
 
 The following code demonstrates
 using the `template` element inside a web component.
