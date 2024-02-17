@@ -441,6 +441,7 @@ Other supported decorators include:
 Lit implements the `html` and `css` tagged template literals.
 
 TODO: Describe what these provide beyond string concatenation.
+TODO: See https://lit.dev/docs/templates/overview/.
 
 ## Slots
 

@@ -98,6 +98,13 @@ The {% aTargetBlank "https://dom.spec.whatwg.org/#interface-shadowroot",
 "Shadow DOM" %} provides a way to encapsulate the content and styling
 of a custom element.
 
+Many standard HTML elements utilize a shadow DOM.
+Examples include `input`, `audio`, `video`, and `detail`.
+This can be seen by examining such elements
+in the "Elements" tab of the Chrome DevTools.
+Click the settings gear icon, scroll to the "Elements" section,
+and check "Show user agent shadow DOM".
+
 ## ES Modules
 
 {% aTargetBlank "https://html.spec.whatwg.org/multipage/webappapis.html#integration-with-the-javascript-module-system",
@@ -110,3 +117,6 @@ The HTML {% aTargetBlank
 "https://html.spec.whatwg.org/multipage/scripting.html#the-template-element",
 "template element" %} provides a way to define an HTML fragment
 that can be cloned and inserted multiple times into a DOM tree.
+
+Templates can contain slots that are used to insert content.
+Each template can contain one unnamed slot and any number of named slots.
