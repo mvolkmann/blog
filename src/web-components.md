@@ -33,12 +33,18 @@ that may change in the future.
 The investment in creating high quality, reusable web components
 will pay off in the long run.
 
+Implementing a reusable library of UI components that can only be used
+in web applications that are implemented with a specific framework
+is not a good time investment.
+It is much better to implement them as web components so they can be
+used in all web applications, regardless of the web framework they use.
+The {% aTargetBlank "/blog/topics/#/blog/shoelace", "Shoelace" %}
+library of web components is a great example.
+
 While you could implement every UI component of a web app as a web component,
 that is a bit harder than using other web framework like Svelte.
 Consider only implementing web components for general purpose UI components
 that will be used in multiple apps.
-The {% aTargetBlank "/blog/topics/#/blog/shoelace", "Shoelace" %}
-web components are great examples.
 
 ## Basic Example
 
