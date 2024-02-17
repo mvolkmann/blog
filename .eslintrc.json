@@ -1,13 +1,14 @@
 {
   "env": {
     "browser": true,
-    "es6": true,
+    "es2020": true,
     "jest": true,
     "node": true
   },
   "extends": ["eslint:recommended", "plugin:import/recommended"],
+  "ignorePatterns": ["lit-components.js"],
   "parserOptions": {
-    "ecmaVersion": 2019,
+    "ecmaVersion": "latest",
     "sourceType": "module"
   },
   "plugins": ["import"]

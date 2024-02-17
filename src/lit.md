@@ -773,11 +773,6 @@ in the blog page you are currently reading.
 Try inspecting the page and changing the value of the `name` attribute.
 The update will be seen on the page.
 
-<!-- Including the next line gives the error "Unexpected token ?" on line 9.
-     It doesn't like usage of the null coalescing operator ??.
-     This prevents the greet-message custom element from rendering.
-     The fix is to edit tsconfig.json and
-     change the compilerOptions target value to "ES2019". -->
 <script type="module" src="/blog/assets/lit-components.js"></script>
 
 <greet-message name="Markdown"></greet-message>
