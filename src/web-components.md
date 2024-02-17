@@ -129,6 +129,9 @@ DOM methods like `createElement` and `appendChild`.
 However, it has the disadvantage that the web component definition
 must assume that a `template` with a given `id` has been defined outside it.
 
+HTML does not define a mechanism for including one HTML file into another.
+So we can't define templates in a separate file that is included.
+
 <img alt="Web Components and templates" style="width: 40%"
   src="/blog/assets/web-component-templates.png?v={{pkg.version}}">
 
