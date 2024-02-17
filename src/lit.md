@@ -171,8 +171,8 @@ export class GreetMessage extends HTMLElement {
     // The "mode" option is required and the recommended value is "open".
     // When set to "open", `this.shadowRoot` is set.
     // When set to "closed", it is not.
-    const shadow = this.attachShadow({mode: 'open'});
-    shadow.appendChild(div);
+    this.attachShadow({mode: 'open'});
+    this.shadowRoot.appendChild(div);
     // Using shadow DOM is not required.  We can replace
     // the previous two lines with the following.
     // this.appendChild(div);
