@@ -62,7 +62,7 @@ export class GreetMessage extends HTMLElement {
     div.textContent = `Hello, ${name}!`;
     div.style.color = 'purple';
 
-    // The "mode" option is required.
+    // The "mode" option is required and the recommended value is "open".
     // When set to "open", `this.shadowRoot` is set.
     // When set to "closed", it is not.
     const shadow = this.attachShadow({mode: 'open'});
@@ -71,6 +71,14 @@ export class GreetMessage extends HTMLElement {
     // Using shadow DOM is not required.  We can replace
     // the previous two lines with the following.
     // this.appendChild(div);
+
+    // Yet another way this could be implemented ...
+    /*
+    this.attachShadow({mode: 'open'});
+    this.shadowRoot.innerHTML = `
+      <div style="color: purple;">Hello, ${name}!</div>
+    `;
+    */
   }
 }
 customElements.define('greet-message', GreetMessage);
