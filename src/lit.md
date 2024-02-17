@@ -149,6 +149,30 @@ export class GreetMessage extends LitElement {
 customElements.define('greet-message', GreetMessage);
 ```
 
+The following code from the file `src/greet-message-native.js` implements
+the same custom element using JavaScript.
+It uses the native web component approach rather than using Lit.
+Note how it relies on using DOM APIs like
+the `createElement` and `appendChild` methods.
+
+```js
+export class GreetMessage extends HTMLElement {
+  constructor() {
+    super();
+
+    const name = this.getAttribute('name');
+    if (!name) throw new Error('name is a required attribute');
+
+    const shadow = this.attachShadow({mode: 'open'});
+    const div = document.createElement('div');
+    div.textContent = `Hello, ${name}!`;
+    div.style.color = 'purple';
+    shadow.appendChild(div);
+  }
+}
+customElements.define('greet-message', GreetMessage);
+```
+
 The following HTML renders the custom element defined above.
 
 <img alt="Lit greet-message" style="width: 20%"
@@ -159,7 +183,7 @@ The following HTML renders the custom element defined above.
 <html>
   <head>
     <title>Lit Demo</title>
-    <!-- Change .ts to .js to use the JavaScript version. -->
+    <!-- Change src value to use a different web component version. -->
     <script type="module" src="/src/greet-message.ts"></script>
   </head>
   <body>
