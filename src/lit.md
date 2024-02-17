@@ -168,6 +168,9 @@ export class GreetMessage extends HTMLElement {
     div.textContent = `Hello, ${name}!`;
     div.style.color = 'purple';
 
+    // The "mode" option is required.
+    // When set to "open", `this.shadowRoot` is set.
+    // When set to "closed", it is not.
     const shadow = this.attachShadow({mode: 'open'});
     shadow.appendChild(div);
     // Using shadow DOM is not required.  We can replace
