@@ -21,6 +21,59 @@ layout: topic-layout.njk
 "are a set of web platform APIs that allow you to create
 new custom, reusable, encapsulated HTML tags to use in web pages and web apps."
 
+Implementing a web component requires a bit more effort
+than implementing components using a framework like Svelte.
+The extra effort is worthwhile for components that will
+be used in multiple apps written using multiple frameworks.
+Even if you are only using one web framework today,
+that may change in the future.
+The investment in creating high quality, reusable web components
+will pay off in the long run.
+
+While you could implement every UI component of a web app as a web component,
+that is a bit harder than using other web framework like Svelte.
+Consider only implementing web components for general purpose UI components
+that will be used in multiple apps.
+The {% aTargetBlank "/blog/topics/#/blog/shoelace, "Shoelace" %}
+web components are great examples.
+
+## Basic Example
+
+The following file `src/greet-message.js` defines a web component.
+
+```js
+export class GreetMessage extends HTMLElement {
+  constructor() {
+    super();
+
+    const name = this.getAttribute('name');
+    if (!name) throw new Error('name is a required attribute');
+
+    const shadow = this.attachShadow({mode: 'open'});
+    const div = document.createElement('div');
+    div.textContent = `Hello, ${name}!`;
+    div.style.color = 'purple';
+    shadow.appendChild(div);
+  }
+}
+customElements.define('greet-message', GreetMessage);
+```
+
+The following HTML renders an instance of the web component defined above.
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Web Components Demo</title>
+    <script type="module" src="/src/greet-message.js"></script>
+  </head>
+  <body>
+    <greet-message name="World"></greet-message3>
+  </body>
+</html>
+```
+
 ## Custom Elements
 
 {% aTargetBlank "https://html.spec.whatwg.org/multipage/custom-elements.html",

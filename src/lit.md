@@ -22,6 +22,8 @@ is library that simplifies developing
 {% aTargetBlank "https://www.webcomponents.org/", "web components" %}.
 
 Lit components are native web components.
+Implementing web components using Lit is easier
+that implementing them using only browser standards.
 
 Web components define custom elements that
 can be used just like standard HTML elements.
@@ -48,7 +50,7 @@ The easiest way to get started using Lit is to
 get the library from this {% aTargetBlank
 "https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js", "CDN" %}.
 This single file can be saved locally to avoid depending on the CDN.
-The file is 17 KB.
+The minimized, compressed file is only 6.7 KB.
 
 Another approach is to use {% aTargetBlank "https://vitejs.dev/", "Vite" %}.
 This has many advantages including:
@@ -109,6 +111,7 @@ export class GreetMessage extends LitElement {
 
   // The `styles` property can be defined anywhere in
   // the class definition, not just at the bottom.
+  // Making it "static" shares the value across all instances.
   // :host refers to outermost element rendered by this custom element.
   static styles = css`
     :host {
