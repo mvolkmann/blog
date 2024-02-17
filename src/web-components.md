@@ -21,6 +21,9 @@ layout: topic-layout.njk
 "are a set of web platform APIs that allow you to create
 new custom, reusable, encapsulated HTML tags to use in web pages and web apps."
 
+Web components encapsulate their markup, styles, and functionality
+by using a "shadow DOM".
+
 Implementing a web component requires a bit more effort
 than implementing components using a framework like Svelte.
 The extra effort is worthwhile for components that will

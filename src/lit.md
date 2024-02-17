@@ -432,6 +432,12 @@ Other supported decorators include:
   To get the nodes assigned to the default slot,
   omit the argument to `@queryAssignedNodes`.
 
+## Tagged Template Literals
+
+Lit implements the `html` and `css` tagged template literals.
+
+TODO: Describe what these provide beyond string concatenation.
+
 ## Slots
 
 Web components can have one default slot and any number of named slots.
