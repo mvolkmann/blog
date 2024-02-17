@@ -773,7 +773,8 @@ in the blog page you are currently reading.
 Try inspecting the page and changing the value of the `name` attribute.
 The update will be seen on the page.
 
-<script type="module" src="/blog/assets/lit-components.js"></script>
+TODO: Why doesn't the custom element below render?
+TODO: lit-components.js is being loaded in top-layout.njk.
 
 <greet-message name="Markdown"></greet-message>
 
