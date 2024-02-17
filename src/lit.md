@@ -98,6 +98,7 @@ which extends the `HTMLElement` class (from the HTML standard).
 import {css, html, LitElement} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
 
+// The class name is not required to match the custom element name.
 @customElement('greet-message')
 export class GreetMessage extends LitElement {
   // This value will come from an HTML attribute.

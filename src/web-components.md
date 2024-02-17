@@ -150,6 +150,7 @@ So we can't define templates in a separate file that is included.
     <title>Template Demo</title>
     <script>
       window.onload = () => {
+        // The class name is not required to match the custom element name.
         class Card extends HTMLElement {
           constructor() {
             super();
