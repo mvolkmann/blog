@@ -58,6 +58,17 @@ export class GreetMessage extends HTMLElement {
     const name = this.getAttribute('name');
     if (!name) throw new Error('name is a required attribute');
 
+    // Approach #1
+    // Using shadow DOM is not required.
+    /*
+    const div = document.createElement('div');
+    div.textContent = `Hello, ${name}!`;
+    div.style.color = 'purple';
+    this.appendChild(div);
+    */
+
+    // Approach #2
+    /*
     const div = document.createElement('div');
     div.textContent = `Hello, ${name}!`;
     div.style.color = 'purple';
@@ -67,18 +78,26 @@ export class GreetMessage extends HTMLElement {
     // When set to "closed", it is not.
     this.attachShadow({mode: 'open'});
     this.shadowRoot.appendChild(div);
+    */
 
-    // Using shadow DOM is not required.  We can replace
-    // the previous two lines with the following.
-    // this.appendChild(div);
-
-    // Yet another way this could be implemented ...
-    /*
+    // Approach #3
     this.attachShadow({mode: 'open'});
+    this.render();
+  }
+
+  static get observedAttributes() {
+    return ['name'];
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name === 'name') this.render();
+  }
+
+  render() {
+    const name = this.getAttribute('name');
     this.shadowRoot.innerHTML = `
       <div style="color: purple;">Hello, ${name}!</div>
     `;
-    */
   }
 }
 customElements.define('greet-message', GreetMessage);
@@ -91,6 +110,8 @@ This can be accessed in other lifecycle methods such as `connectedCallback`.
 One use is to register listeners for `slotchange` events.
 
 The following HTML renders an instance of the web component defined above.
+It uses {% aTargetBlank "https://alpinejs.dev/", "Alpine" %}
+to add a bit of interactivity.
 
 ```html
 <!DOCTYPE html>
@@ -98,9 +119,15 @@ The following HTML renders an instance of the web component defined above.
   <head>
     <title>Web Components Demo</title>
     <script type="module" src="/src/greet-message.js"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
   </head>
   <body>
-    <greet-message name="World"></greet-message3>
+  <body x-data="{name: 'World'">
+    <greet-message :name="name"></greet-message3>
+    <button @click="name = 'Earth'">Change Name</button>
   </body>
 </html>
 ```

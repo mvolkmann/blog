@@ -560,9 +560,20 @@ This lifecycle method is called when the instance is moved to a new document.
 
 This method is rarely used.
 
-### attributeChangedCallback
+### attributeChangedCallback(name, oldValue, newValue)
 
 This lifecycle method is called when the value of an observed attribute changes.
+To define the attributes that are observed, implement the following:
+
+```js
+static get observedAttributes() {
+  return ['name1', 'name2', ...];
+}
+
+attributeChangedCallback(name, oldValue, newValue) {
+  this.render(); // assumes this method exists and updates the shadow DOM
+}
+```
 
 ### connectedCallback
 
