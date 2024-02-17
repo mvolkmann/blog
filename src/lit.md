@@ -449,6 +449,9 @@ Web components can have one default slot and any number of named slots.
 These are defined using the HTML `slot` element.
 Instances of the component can specify content to be placed in the slots.
 
+The `slot` element can be self closing and can have a `name` attribute.
+For example, `<slot name="footer" />`.
+
 The following example demonstrates using slots.
 
 ```ts
@@ -486,7 +489,7 @@ export class SlotsDemo extends LitElement {
   render() {
     return html`
       <div>
-        <h2><slot></slot></h2>
+        <h2><slot /></h2>
         <h3>Breakfast</h3>
         <slot name="breakfast">No breakfast options</slot>
         <h3>Lunch</h3>
