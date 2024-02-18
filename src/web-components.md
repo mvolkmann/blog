@@ -161,9 +161,46 @@ For more, see {% aTargetBlank
 {% aTargetBlank "https://html.spec.whatwg.org/multipage/custom-elements.html",
 "Custom Elements" %} provide a way to define and use custom HTML elements.
 
+A custom element is defined by a JavaScript class that extends `HTMLElement`.
+The following code in the file `hello-world.js`
+demonstrates a very basic web component.
+
+```js
+class HelloWorld extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({mode: 'open'});
+    this.shadowRoot.textContent = 'Hello, World!';
+  }
+}
+```
+
+A tag name can be associated with this class as follows:
+
+```js
+customElements.define('hello-world', HelloWorld);
+```
+
+The name of the class is not required to correspond to the tag name in any way.
+
 The names of custom elements must be all lowercase
 and contain at least one hyphen.
 This avoids name conflicts with standard HTML elements.
+
+The following HTML demonstrates using this custom element.
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Custom Element Demo</title>
+    <script type="module" src="/hello-world.js"></script>
+  </head>
+  <body>
+    <hello-world></hello-world>
+  </body>
+</html>
+```
 
 ## Shadow DOM
 
