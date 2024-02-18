@@ -364,6 +364,61 @@ So we can't define templates in a separate file that is included.
 </html>
 ```
 
+## Lifecycle Methods
+
+Custom elements have lifecycle methods that are automatically called
+at specific points during their lifetime or when specific things occur.
+These include the following.
+
+### adoptedCallback
+
+This lifecycle method is called automatically
+when the instance is moved to a new document.
+
+This method is rarely used.
+
+### attributeChangedCallback(name, oldValue, newValue)
+
+This lifecycle method is called automatically
+when the value of an observed attribute changes.
+To define the attributes that are observed, implement the following:
+
+```js
+static get observedAttributes() {
+  return ['name1', 'name2', ...];
+}
+
+attributeChangedCallback(name, oldValue, newValue) {
+  this.render(); // assumes this method exists and updates the shadow DOM
+}
+```
+
+### connectedCallback
+
+This lifecycle method is called automatically
+after an instance is added to the DOM.
+It can be used to add event listeners
+to elements outside this custom element.
+Typically anything done in this method
+is undone in the `disconnectedCallback` method.
+
+### constructor
+
+This lifecycle method is called automatically
+when an instance is initially created and
+jagain if the custom element definition is modified.
+It is commonly used for one time initializations
+such as computing property values.
+
+### disconnectedCallback
+
+This lifecycle method is called automatically
+after an instance is removed from the DOM.
+It can be used to remove event listeners
+from elements outside this custom element.
+Typically anything done in the `connectedCallback` method
+is undone in this method.
+
 ## Attributes
 
 Attributes can be passed to custom elements

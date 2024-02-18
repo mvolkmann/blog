@@ -556,76 +556,78 @@ The following HTML renders the custom element defined above.
 
 ## Lifecycle Methods
 
-Lit supports five lifecycle methods that are automatically called
-at specific points in the lifecycle of a custom element.
+Lit supports all the web component {% aTargetBlank
+"/blog/topics/#/blog/web-components/#lifecycle-methods",
+"standard lifecycle methods" %}.
 
-### adoptedCallback
-
-This lifecycle method is called when the instance is moved to a new document.
-
-This method is rarely used.
-
-### attributeChangedCallback(name, oldValue, newValue)
-
-This lifecycle method is called when the value of an observed attribute changes.
-To define the attributes that are observed, implement the following:
-
-```js
-static get observedAttributes() {
-  return ['name1', 'name2', ...];
-}
-
-attributeChangedCallback(name, oldValue, newValue) {
-  this.render(); // assumes this method exists and updates the shadow DOM
-}
-```
-
-### connectedCallback
-
-This lifecycle method is called after an instance is added to the DOM.
-It can be used to add event listeners
-to elements outside this custom element.
-Typically anything done in this method
-is undone in the `disconnectedCallback` method.
-
-### constructor
-
-This lifecycle method is called when an instance is initially created
-and again if the custom element definition is modified.
-It is commonly used for one time initializations
-such as computing property values.
-
-### disconnectedCallback
-
-This lifecycle method is called after an instance is removed from the DOM.
-It can be used to remove event listeners
-from elements outside this custom element.
-Typically anything done in the `connectedCallback` method
-is undone in this method.
-
-### firstUpdated
-
-TODO: Describe this.
-
-### performUpdate
-
-TODO: Describe this.
-
-### requestUpdate
-
-TODO: Describe this.
+Lit also supports additional methods that are
+part of its "reactive update cycle".
+These include the following.
 
 ### shouldUpdate
 
-TODO: Describe this.
+This method is called automatically before an update is performed.
+It should return `true` to allow the update and `false` to reject it.
+
+Property changes made in this method WILL NOT trigger another update.
+
+### willUpdate
+
+This method is called automatically before each update is performed.
+
+Property changes made in this method WILL NOT trigger another update.
+
+### update
+
+This method is called automatically to perform each update.
+
+Property changes made in this method WILL NOT trigger another update.
+
+Overriding this method is rare.
+
+### firstUpdated
+
+This method is called automatically the first time an update completes.
+
+Property changes made in this method WILL trigger another update.
 
 ### updated
 
-TODO: Describe this.
+This method is called automatically after each update completes.
+
+## adoptedCallback
+
+This method is called automatically when a custom element instance
+is moved to a new document.
+
+Overriding this method is rare.
+
+### hasChanged
+
+This method is defined in the options object
+passed to the `@property` or `@state` decorator.
+It is called automatically every time the associated property value changes.
+It should return `true` to allow the change and `false` to reject it.
 
 ### updateComplete
 
-TODO: Describe this.
+This is a property whose value is a `Promise`
+that resolves when the latest update completes.
+It can be useful to `await` this before dispatching a custom event.
+
+### performUpdate
+
+This method can be called to perform a synchronous update,
+resulting in a call to the `render` method.
+Calling this can be useful when a non-reactive property
+that affects what is rendered is modified.
+
+### requestUpdate
+
+This method can be called to request an asynchronous update,
+resulting in a call to the `render` method.
+Calling this can be useful when a non-reactive property
+that affects what is rendered is modified.
 
 ---
 
@@ -633,29 +635,44 @@ The following code demonstrates each of the lifecycle methods
 except the rarely used `adoptedCallback` method.
 
 ```js
-import {html, LitElement} from 'lit';
-import {customElement, property} from 'lit/decorators.js';
+import {css, html, LitElement, type PropertyValueMap} from 'lit';
+import {customElement, property, query, state} from 'lit/decorators.js';
 
-@customElement('lifecycle-demo')
-export class LifecycleDemo extends LitElement {
-  @property() text = '';
+@customElement('greet-message')
+export class GreetMessage extends LitElement {
+  @state() newName = '';
 
-  changeText() {
-    this.text = 'changed';
-  }
+  @property({
+    // This can validate proposed property value changes.
+    hasChanged(newVal: string, oldVal: string) {
+      console.log('hasChanged for name: changing from', oldVal, 'to', newVal);
+      // Only allow the change if the length is more than 1.
+      const valid = newVal.length > 1;
+      return valid;
+    }
+  })
+  name = '';
 
-  constructor() {
-    super();
-    console.log('constructor entered');
-  }
+  // This is set based on the presence of the "shout" attribute.
+  @property({type: Boolean}) shout = false;
+
+  // This gets a reference to the DOM element with id "nameInput".
+  @query('#nameInput') nameInput!: HTMLInputElement;
 
   override attributeChangedCallback(
     name: string,
-    oldValue: string | null,
-    newValue: string | null
+    old: string,
+    value: string
   ): void {
-    console.log(`${name} changed from ${oldValue} to ${newValue}`);
-    super.attributeChangedCallback(name, oldValue, newValue);
+    super.attributeChangedCallback(name, old, value);
+    console.log(
+      'attributeChangedCallback:',
+      name,
+      'changing from',
+      old,
+      'to',
+      value
+    );
   }
 
   override connectedCallback(): void {
@@ -668,14 +685,72 @@ export class LifecycleDemo extends LitElement {
     console.log('disconnectedCallback entered');
   }
 
-  render() {
+  override render() {
+    if (!this.name) throw new Error('name is a required attribute');
+
+    let message = `Hello, ${this.name}!`;
+    if (this.shout) message = message.toUpperCase();
+
     return html`
-      <div>
-        text: ${this.text}
-        <button @click=${this.changeText}>Change</button>
-      </div>
+      <div>${message}</div>
+      <form
+        @submit=${(e: SubmitEvent) => {
+          e.preventDefault();
+          this.name = this.newName;
+          this.newName = ''; // clears the input
+        }}
+      >
+        <input
+          id="nameInput"
+          type="text"
+          size="20"
+          required
+          .value=${this.newName}
+          @input=${() => (this.newName = this.nameInput.value)}
+        />
+        <button .disabled=${this.newName.length <= 1}>Update</button>
+      </form>
     `;
   }
+
+  // This is called before `willUpdate`.
+  override shouldUpdate(changedProperties: PropertyValueMap<any>) {
+    // no need to call super
+    console.log('shouldUpdate: changedProperties =', changedProperties);
+    return true;
+  }
+
+  // This is called before `update`.
+  override willUpdate(changedProperties: PropertyValueMap<any>) {
+    // no need to call super
+    console.log('willUpdate : changedProperties =', changedProperties);
+  }
+
+  // This is rarely implemented.  The super method calls `render`.
+  override update(changedProperties: PropertyValueMap<any>) {
+    super.update(changedProperties); // must call this
+    console.log('update: changedProperties =', changedProperties);
+  }
+
+  // This is called after the first call to `update`.
+  override firstUpdated(changedProperties: PropertyValueMap<any>) {
+    // no need to call super
+    console.log('firstUpdated: changedProperties =', changedProperties);
+  }
+
+  // This is called after every call to `update`.
+  override updated(changedProperties: PropertyValueMap<any>) {
+    // no need to call super
+    console.log('updated: changedProperties =', changedProperties);
+  }
+
+  static styles = css`
+    :host {
+      color: purple;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+  `;
 }
 ```
 
