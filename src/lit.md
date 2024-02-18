@@ -624,6 +624,31 @@ Property changes made in this method WILL NOT trigger another update.
 
 Overriding this method is rare.
 
+## render
+
+This method is called automatically by
+the `update` method defined in `LitElement`.
+It is unique to Lit and not part of the web components standard.
+
+This method can return:
+
+- the result of invoking `html` tagged template literal
+- a primitive value (string, number, or boolean)
+- DOM nodes
+- arrays/iterables of the above types
+
+The `html` tagged template literal can be used multiple times
+to construct parts of a return value
+that is composed of multiple HTML strings.
+
+This method should not:
+
+- use data other than component property to determine what it returns
+- modify any component properties
+- have any side effects
+
+It should return the same result for the same set of component property values.
+
 ### firstUpdated
 
 This method is called automatically the first call to `update`.
