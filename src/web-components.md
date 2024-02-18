@@ -85,9 +85,6 @@ export class GreetMessage extends HTMLElement {
     div.textContent = `Hello, ${name}!`;
     div.style.color = 'purple';
 
-    // The "mode" option is required and the recommended value is "open".
-    // When set to "open", `this.shadowRoot` is set.
-    // When set to "closed", it is not.
     this.attachShadow({mode: 'open'});
     this.shadowRoot.appendChild(div);
     */
@@ -115,9 +112,16 @@ export class GreetMessage extends HTMLElement {
 customElements.define('greet-message', GreetMessage);
 ```
 
-Calling `this.attachShadow` sets `this.shadowRoot` which is a {% aTargetBlank
+The `attachShadow` method must be passed an options object
+with a "mode" property that is set to "open" or "closed".
+The recommended value is "open", which causes `this.shadowRoot`
+to be set to a {% aTargetBlank
 "https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot",
 "ShadowRoot" %} object.
+When the "mode" is "closed", `this.shadowRoot` is not set.
+That prevents setting its innerHTML or textContent,
+and prevents appending nodes to it.
+
 This can be accessed in other lifecycle methods such as `connectedCallback`.
 Reasons include:
 
