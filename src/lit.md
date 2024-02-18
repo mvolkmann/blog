@@ -77,6 +77,17 @@ The following steps create a new project that uses Vite and Lit.
 1. Type "h" and press the return key for help.
 1. Type "o" and press the return key to open a browser tab for localhost:5173.
 
+## Tooling
+
+ESLint has a plugin for Lit at {% aTargetBlank
+"https://github.com/43081j/eslint-plugin-lit#readme", "eslint-plugin-lit" %}.
+
+VS Code has an extension for Lit that provides syntax highlighting,
+type checking, and code completion.
+See {% aTargetBlank
+"https://marketplace.visualstudio.com/items?itemName=runem.lit-plugin",
+"lit-plugin" %}.
+
 ## Basic Example
 
 The following code from the file `src/greet-message.ts`
@@ -472,8 +483,7 @@ For example, `<slot name="footer" />`.
 The following example demonstrates using slots.
 
 ```ts
-import {html, LitElement} from 'lit';
-import type {PropertyValueMap} from 'lit';
+import {html, LitElement, type PropertyValues} from 'lit';
 import {customElement, queryAssignedElements} from 'lit/decorators.js';
 
 @customElement('slots-demo')
@@ -493,7 +503,7 @@ export class SlotsDemo extends LitElement {
 
   // The override keyword ensures that the method being overridden
   // is spelled correction and takes the correct parameters.
-  override firstUpdated(changedProperties: PropertyValueMap<any>): void {
+  override firstUpdated(changedProperties: PropertyValues): void {
     super.firstUpdated(changedProperties);
     for (const el of this.defaultElements) {
       el.style.color = 'red';
@@ -629,7 +639,7 @@ The following code demonstrates each of the lifecycle methods,
 except the rarely used `adoptedCallback` method.
 
 ```js
-import {css, html, LitElement, type PropertyValueMap} from 'lit';
+import {css, html, LitElement, type PropertyValues} from 'lit';
 import {customElement, property, query, state} from 'lit/decorators.js';
 
 @customElement('greet-message')
@@ -712,32 +722,32 @@ export class GreetMessage extends LitElement {
   }
 
   // This is called before `willUpdate`.
-  override shouldUpdate(changedProperties: PropertyValueMap<any>) {
+  override shouldUpdate(changedProperties: PropertyValues): boolean {
     // no need to call super
     console.log('shouldUpdate: changedProperties =', changedProperties);
     return true;
   }
 
   // This is called before `update`.
-  override willUpdate(changedProperties: PropertyValueMap<any>) {
+  override willUpdate(changedProperties: PropertyValues) {
     // no need to call super
     console.log('willUpdate : changedProperties =', changedProperties);
   }
 
   // This is rarely implemented.  The super method calls `render`.
-  override update(changedProperties: PropertyValueMap<any>) {
+  override update(changedProperties: PropertyValues) {
     super.update(changedProperties); // must call this
     console.log('update: changedProperties =', changedProperties);
   }
 
   // This is called after the first call to `update`.
-  override firstUpdated(changedProperties: PropertyValueMap<any>) {
+  override firstUpdated(changedProperties: PropertyValues) {
     // no need to call super
     console.log('firstUpdated: changedProperties =', changedProperties);
   }
 
   // This is called after every call to `update`.
-  override updated(changedProperties: PropertyValueMap<any>) {
+  override updated(changedProperties: PropertyValues) {
     // no need to call super
     console.log('updated: changedProperties =', changedProperties);
   }
