@@ -21,8 +21,10 @@ layout: topic-layout.njk
 is library that simplifies developing
 {% aTargetBlank "https://www.webcomponents.org/", "web components" %}.
 
-Another popular option with the same goal is
-{% aTargetBlank "https://stenciljs.com", "Stencil" %}.
+Other popular options include
+{% aTargetBlank "https://stenciljs.com", "Stencil" %},
+{% aTargetBlank "https://enhance.dev", "Enhance" %}, and
+{% aTargetBlank "https://github.com/11ty/webc", "WebC" %}.
 
 Lit components are native web components.
 Implementing web components using Lit is easier
