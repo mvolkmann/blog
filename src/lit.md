@@ -37,6 +37,12 @@ JavaScript does not yet support decorator syntax.
 TypeScript must be used to take advantage of Lit decorators,
 which simplify the code.
 
+## Used By
+
+Companies reportedly using Lit include
+Adobe, Cisco, Ford, GitHub, IBM, IKEA, Lego, Microsoft,
+Netflix, Red Hat, Reddit, SAP, VMware, and many more.
+
 ## Installing
 
 The easiest way to get started using Lit is to
