@@ -18,11 +18,16 @@ layout: topic-layout.njk
 ## Overview
 
 {% aTargetBlank "https://www.webcomponents.org/introduction", "Web components" %}
-"are a set of web platform APIs that allow you to create
-new custom, reusable, encapsulated HTML tags to use in web pages and web apps."
+define custom HTML elements that can be used just like standard HTML elements.
 
-Web components encapsulate their markup, styles, and functionality
-by using a "shadow DOM".
+Web components can be used in any web page,
+with any web framework, and in Markdown files.
+This gives them much broader applicability than components
+implemented using a specific frameworks such as React.
+
+Web components are more future-proof than other kinds of components
+because they are likely to be usable
+in applications built with future web frameworks.
 
 Implementing a web component requires a bit more effort
 than implementing components using a framework like Svelte.
@@ -45,6 +50,13 @@ While you could implement every UI component of a web app as a web component,
 that is a bit harder than using other web framework like Svelte.
 Consider only implementing web components for general purpose UI components
 that will be used in multiple apps.
+
+Web components encapsulate their markup, styles, and functionality
+by using a "shadow DOM".
+
+Tags for custom elements cannot be self-closing,
+even when they have no content.
+For example, `<my-element></my-element>` is valid, but `<my-element />` is not.
 
 ## Basic Example
 
@@ -186,6 +198,10 @@ The name of the class is not required to correspond to the tag name in any way.
 The names of custom elements must be all lowercase
 and contain at least one hyphen.
 This avoids name conflicts with standard HTML elements.
+
+Often the part before the first hyphen serves as a namespace.
+For example, all the custom elements provided by
+{% aTargetBlank "https://shoelace.style", "Shoelace" %} begin with "sl-".
 
 The following HTML demonstrates using this custom element.
 

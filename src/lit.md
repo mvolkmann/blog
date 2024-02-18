@@ -18,36 +18,24 @@ layout: topic-layout.njk
 ## Overview
 
 {% aTargetBlank "https://lit.dev", "Lit" %}
-is library that simplifies developing
-{% aTargetBlank "https://www.webcomponents.org/", "web components" %}.
+is library that simplifies developing {% aTargetBlank
+"/blog/topics/#/blog/web-components/", "web components" %}
+compared to using only standard browser APIs.
 
 Other popular options include
 {% aTargetBlank "https://stenciljs.com", "Stencil" %},
 {% aTargetBlank "https://enhance.dev", "Enhance" %}, and
 {% aTargetBlank "https://github.com/11ty/webc", "WebC" %}.
 
-Lit components are native web components.
-Implementing web components using Lit is easier
-that implementing them using only browser standards.
+Lit components are native web components,
+so they can be used everywhere web components can be used.
 
-Web components define custom elements that
-can be used just like standard HTML elements.
+Lit components can be implemented in JavaScript or TypeScript.
+When using JavaScript, no build step is required.
 
-Custom element names must be all lowercase and include at least one hyphen.
-This avoids conflicting with the names of standard HTML elements.
-
-Tags for custom elements cannot be self-closing,
-even when they have no content.
-For example, `<my-element></my-element>` is valid, but `<my-element />` is not.
-
-Web components can be used in any web page,
-with any web framework, and in Markdown files.
-This gives them much broader applicability than components
-implemented using a specific frameworks such as React.
-
-Web components are more future-proof than other kinds of components
-because they are likely to be usable
-in applications built with future web frameworks.
+JavaScript does not yet support decorator syntax.
+TypeScript must be used to take advantage of Lit decorators,
+which simplify the code.
 
 ## Installing
 
