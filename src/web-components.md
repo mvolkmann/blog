@@ -386,17 +386,30 @@ Custom elements have lifecycle methods that are automatically called
 at specific points during their lifetime or when specific things occur.
 These include the following.
 
-### adoptedCallback
+### constructor
 
 This lifecycle method is called automatically
-when the instance is moved to a new document.
+when an instance is initially created and
+again if the custom element definition is modified.
+It is commonly used for one time initializations
+such as computing property values.
 
-This method is rarely used.
+This method can be omitted if no initializations are required.
+
+### connectedCallback
+
+This lifecycle method is called automatically
+after an instance is added to the DOM.
+It can be used to add event listeners
+to elements outside this custom element.
+Typically anything done in this method
+is undone in the `disconnectedCallback` method.
 
 ### attributeChangedCallback(name, oldValue, newValue)
 
 This lifecycle method is called automatically
 when the value of an observed attribute changes.
+
 To define the attributes that are observed, implement the following:
 
 ```js
@@ -409,22 +422,9 @@ attributeChangedCallback(name, oldValue, newValue) {
 }
 ```
 
-### connectedCallback
-
-This lifecycle method is called automatically
-after an instance is added to the DOM.
-It can be used to add event listeners
-to elements outside this custom element.
-Typically anything done in this method
-is undone in the `disconnectedCallback` method.
-
-### constructor
-
-This lifecycle method is called automatically
-when an instance is initially created and
-again if the custom element definition is modified.
-It is commonly used for one time initializations
-such as computing property values.
+In Lit, all properties with the `@property` and `@state` decorators
+are automatically treated as observed properties.
+Lit refers to them as "reactive properties".
 
 ### disconnectedCallback
 
@@ -434,6 +434,13 @@ It can be used to remove event listeners
 from elements outside this custom element.
 Typically anything done in the `connectedCallback` method
 is undone in this method.
+
+### adoptedCallback
+
+This lifecycle method is called automatically
+when the instance is moved to a new document.
+
+This method is rarely used.
 
 ## Attributes
 
