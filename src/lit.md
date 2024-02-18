@@ -111,6 +111,8 @@ Add the following script in `package.json`:
 "lint": "eslint --cache --ext=.js,.ts --fix src",
 ```
 
+Add the line `.eslintcache` in `.gitignore`.
+
 VS Code has an extension for Lit that provides syntax highlighting,
 type checking, and code completion.
 See {% aTargetBlank
