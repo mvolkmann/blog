@@ -117,6 +117,10 @@ See {% aTargetBlank
 "https://marketplace.visualstudio.com/items?itemName=runem.lit-plugin",
 "lit-plugin" %}.
 
+Neither the ESLint plugin nor the VS Code extension
+detect errors in `html` and `css` tagged template literals.
+For example, `<foo>bar</baz>` is not flagged.
+
 ## Basic Example
 
 The following code from the file `src/greet-message.ts`
