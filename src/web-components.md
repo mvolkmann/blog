@@ -178,6 +178,44 @@ in the "Elements" tab of the Chrome DevTools.
 Click the settings gear icon, scroll to the "Elements" section,
 and check "Show user agent shadow DOM".
 
+### Piercing the Shadow DOM
+
+By default, styling used by web components
+cannot be modified by users of the web components.
+A web component can allow specific overrides
+by exposing the use of CSS variables.
+
+For example, suppose we want to allow users of the `greet-message`
+custom element to select the color which defaults to "purple".
+To achieve this we can change the `render` method to the following.
+
+```js
+  render() {
+    const name = this.getAttribute('name');
+    this.shadowRoot.innerHTML = `
+      <style>
+        div { color: var(--greet-message-color, purple); }
+      </style>
+      <div>Hello, ${name}!</div>
+    `;
+  }
+```
+
+The CSS used by web components that create a shadow DOM is scoped to them.
+So the CSS rule above only affects the `div` element that it renders.
+The `var` above specifies that the `color` should be the value of the
+`--greet-message-color` CSS variable if it is set, and "purple" otherwise.
+
+Now users of this custom element can override the color with the following.
+
+```html
+<style>
+  :root {
+    --greet-message-color: green;
+  }
+</style>
+```
+
 ## ES Modules
 
 {% aTargetBlank "https://html.spec.whatwg.org/multipage/webappapis.html#integration-with-the-javascript-module-system",
