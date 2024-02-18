@@ -81,6 +81,35 @@ The following steps create a new project that uses Vite and Lit.
 
 ESLint has a plugin for Lit at {% aTargetBlank
 "https://github.com/43081j/eslint-plugin-lit#readme", "eslint-plugin-lit" %}.
+To use this, enter `npm install -D *` where \* each of the following:
+
+- `eslint`
+- `@typescript-eslint/parser`
+- `@typescript-eslint/eslint-plugin`
+- `eslint-plugin-lit`
+
+Create the file `.eslintrc.json` containing the following:
+
+```json
+{
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "plugin:lit/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "rules": {}
+}
+```
+
+Add the following script in `package.json`:
+
+```json
+"lint": "eslint --cache --ext=.js,.ts --fix src",
+```
 
 VS Code has an extension for Lit that provides syntax highlighting,
 type checking, and code completion.
