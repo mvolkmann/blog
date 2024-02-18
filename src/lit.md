@@ -760,8 +760,8 @@ export class GreetMessage extends LitElement {
 
 ## Event Handling
 
-Lit supports registering event handling functions with attributes
-whose names begin with `@`, followed by an event name.
+Lit supports registering event handling functions with event bindings.
+An event binding is an attribute whose name is `@` followed by an event name.
 The value must be a function object,
 not a call to a function or JavaScript code.
 String interpolation (`${fn}`) is used to insert the function
