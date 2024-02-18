@@ -694,7 +694,7 @@ export class GreetMessage extends LitElement {
     // The `?` before `disabled` below creates
     // a one-way boolean attribute binding.
     // A `.` is used to create a one-way property binding
-    // for string and number values.
+    // for attributes with string or number values.
     return html`
       <div>${message}</div>
       <form
