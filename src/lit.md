@@ -631,7 +631,7 @@ that affects what is rendered is modified.
 
 ---
 
-The following code demonstrates each of the lifecycle methods
+The following code demonstrates each of the lifecycle methods,
 except the rarely used `adoptedCallback` method.
 
 ```js
@@ -691,6 +691,7 @@ export class GreetMessage extends LitElement {
     let message = `Hello, ${this.name}!`;
     if (this.shout) message = message.toUpperCase();
 
+    // The dot before `disabled` below creates a one-way property binding.
     return html`
       <div>${message}</div>
       <form
@@ -753,52 +754,6 @@ export class GreetMessage extends LitElement {
   `;
 }
 ```
-
-The following HTML demonstrates using the `lifecycle-demo` custom element.
-It uses {% aTargetBlank "/blog/topics/#/blog/alpine", "Alpine" %} to
-manage state and determine whether the custom element should be in the DOM.
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Lifecycle Demo</title>
-    <script
-      defer
-      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
-    ></script>
-    <script type="module" src="/src/lifecycle-demo.ts"></script>
-  </head>
-  <body x-data="{text: 'initial', show: false}">
-    <button @click="show = !show">Toggle Show</button>
-    <label>Text: <input type="text" x-model="text" /></label>
-    <template x-if="show">
-      <lifecycle-demo :text="text"></lifecycle-demo>
-    </template>
-  </body>
-</html>
-```
-
-Every time `show` changes from `false` to `true`,
-the `constructor` and `connectedCallback` methods are called.
-
-Every time `show` changes from `true` to `false`,
-the `disconnectedCallback` method is called.
-
-When the "Change" button is clicked,
-the value of the `text` property changes,
-but this does NOT trigger a call to the `attributeChangedCallback` method.
-
-Every time the value of the `input` element is changed by the user,
-the value of the Alpine `text` variable changes.
-That causes a new value to be passed to the `lifecycle-demo` element
-through its `text` attribute.
-This DOES trigger a call to the `attributeChangedCallback` method.
-
-The `render` method is called every time
-an `@property` or `@state` value changes.
-It's not necessary to implement the `attributeChangedCallback` method
-to make this happen.
 
 ## Event Handling
 

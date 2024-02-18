@@ -406,7 +406,7 @@ is undone in the `disconnectedCallback` method.
 
 This lifecycle method is called automatically
 when an instance is initially created and
-jagain if the custom element definition is modified.
+again if the custom element definition is modified.
 It is commonly used for one time initializations
 such as computing property values.
 
