@@ -49,7 +49,7 @@ The easiest way to get started using Lit is to
 get the library from this {% aTargetBlank
 "https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js", "CDN" %}.
 This single file can be saved locally to avoid depending on the CDN.
-The minimized, compressed file is only 6.7 KB.
+The minimized, compressed file is only 5.8 KB.
 
 Another approach is to use {% aTargetBlank "https://vitejs.dev/", "Vite" %}.
 This has many advantages including:

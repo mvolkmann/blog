@@ -62,7 +62,7 @@ is either static or server-rendered makes it great for SEO.
 
 Users perceive apps built with htmx to be fast because
 the initial page load only requires the htmx library
-(< 17K minified and compressed) and the initial HTML/CSS to render.
+(< 15.1 KB minified and compressed) and the initial HTML/CSS to render.
 Subsequent interactions only require fetching snippets of HTML or text.
 No client-side hydration of JavaScript code is needed.
 Browsers are very efficient at updating the DOM from strings of HTML.
