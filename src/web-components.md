@@ -103,11 +103,15 @@ export class GreetMessage extends HTMLElement {
 customElements.define('greet-message', GreetMessage);
 ```
 
-The value of `this.shadowRoot`, when set, is a {% aTargetBlank
+Calling `this.attachShadow` sets `this.shadowRoot` which is a {% aTargetBlank
 "https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot",
 "ShadowRoot" %} object.
 This can be accessed in other lifecycle methods such as `connectedCallback`.
-One use is to register listeners for `slotchange` events.
+Reasons include:
+
+- setting its `innerHTML`
+- modifying its descendant elements
+- registering listeners for `slotchange` events
 
 The following HTML renders an instance of the web component defined above.
 It uses {% aTargetBlank "https://alpinejs.dev/", "Alpine" %}
@@ -131,6 +135,26 @@ to add a bit of interactivity.
   </body>
 </html>
 ```
+
+## Libraries That Simplify
+
+- {% aTargetBlank "/blog/topics/#/blog/lit/", "Lit" %}
+- {% aTargetBlank "https://stenciljs.com", "Stencil" %}
+
+## Available Web Components
+
+- {% aTargetBlank "https://shoelace.style", "Shoelace" %}
+
+  "A forward-thinking library of web components."
+
+- {% aTargetBlank "https://github.com/davatron5000/awesome-standalones", "Awesome Standalones" %}
+  from Dave Rupert
+
+  "A curated list of awesome framework-agnostic standalone web components."
+
+For more, see {% aTargetBlank
+"https://open-wc.org/guides/community/component-libraries/",
+"Community: Component Libraries" %}.
 
 ## Custom Elements
 
