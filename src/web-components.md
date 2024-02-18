@@ -178,6 +178,20 @@ in the "Elements" tab of the Chrome DevTools.
 Click the settings gear icon, scroll to the "Elements" section,
 and check "Show user agent shadow DOM".
 
+The CSS `display` property for the root element of custom elements
+defaults to "inline".
+Often it is desirable to change this to "block" or "inline-block".
+To do this, use the `:host` CSS pseudo-class.
+For example:
+
+```html
+<style>
+  :host {
+    display: inline-block;
+  }
+</style>
+```
+
 ### Piercing the Shadow DOM
 
 By default, styling used by web components
