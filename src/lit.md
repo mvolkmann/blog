@@ -746,6 +746,13 @@ export class GreetMessage extends LitElement {
 }
 ```
 
+To conditionally hide an element, use a boolean attribute binding
+for the standard DOM `hidden` attribute. For example:
+
+```js
+<div ?hidden=${some-condition}>some content</div>
+```
+
 ## Event Handling
 
 Lit supports registering event handling functions with event bindings.
