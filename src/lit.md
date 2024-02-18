@@ -149,7 +149,7 @@ export class GreetMessage extends LitElement {
   // This value will come from an HTML attribute.
   @property() name = '';
 
-  render() {
+  override render() {
     // Checking for required attributes is optional.
     if (!this.name) throw new Error('name is a required attribute');
     return html`<div>Hello, ${this.name}!</div>`;
@@ -167,6 +167,9 @@ export class GreetMessage extends LitElement {
 }
 ```
 
+Note how the `HTMLElement` `attachShadow` method is not called.
+The `LitElement` superclass takes care of that for you.
+
 The following code from the file `src/greet-message.js` implements
 the same custom element using JavaScript instead of TypeScript.
 JavaScript-based custom elements cannot use decorators,
@@ -181,7 +184,7 @@ export class GreetMessage extends LitElement {
     name: {type: String}
   };
 
-  render() {
+  override render() {
     if (!this.name) throw new Error('name is a required attribute');
     return html`<div>Hello, ${this.name}!</div>`;
   }
@@ -335,7 +338,7 @@ export class StateChanges extends LitElement {
     this.requestUpdate(); // triggers call to render
   }
 
-  render() {
+  override render() {
     return html`
       <div>
         p: ${this.p}
@@ -402,7 +405,7 @@ Other supported decorators include:
     this.pBtn.style.color = this.p === 'go' ? 'green' : 'red';
   }
 
-  render() {
+  override render() {
     return html`
       <div id="p">
         p: ${this.p}
@@ -548,7 +551,7 @@ export class SlotsDemo extends LitElement {
     }
   }
 
-  render() {
+  override render() {
     return html`
       <div>
         <h2><slot /></h2>
@@ -854,7 +857,7 @@ export class AlertOnClick extends LitElement {
     alert('in handleClick method');
   }
 
-  render() {
+  override render() {
     return html`
       <button @click=${this.handleClick}>Click Me</button>
       <button @click=${handleClick}>Click Me</button>
