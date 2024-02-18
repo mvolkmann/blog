@@ -691,7 +691,10 @@ export class GreetMessage extends LitElement {
     let message = `Hello, ${this.name}!`;
     if (this.shout) message = message.toUpperCase();
 
-    // The dot before `disabled` below creates a one-way property binding.
+    // The `?` before `disabled` below creates
+    // a one-way boolean attribute binding.
+    // A `.` is used to create a one-way property binding
+    // for string and number values.
     return html`
       <div>${message}</div>
       <form
@@ -709,7 +712,7 @@ export class GreetMessage extends LitElement {
           .value=${this.newName}
           @input=${() => (this.newName = this.nameInput.value)}
         />
-        <button .disabled=${this.newName.length <= 1}>Update</button>
+        <button ?disabled=${this.newName.length <= 1}>Update</button>
       </form>
     `;
   }
