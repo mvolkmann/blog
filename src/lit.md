@@ -554,14 +554,14 @@ The following HTML renders the custom element defined above.
 </html>
 ```
 
-## Lifecycle Methods
+## Lifecycle
 
-Lit supports all the web component {% aTargetBlank
+Lit supports all the standard web component {% aTargetBlank
 "/blog/topics/#/blog/web-components/#lifecycle-methods",
-"standard lifecycle methods" %}.
+"lifecycle methods" %}.
 
-Lit also supports additional methods that are
-part of its "reactive update cycle".
+Lit also supports additional methods and properties
+that are part of its "reactive update cycle".
 These include the following.
 
 ### shouldUpdate
@@ -573,13 +573,13 @@ Property changes made in this method WILL NOT trigger another update.
 
 ### willUpdate
 
-This method is called automatically before each update is performed.
+This method is called automatically after `shouldUpdate`.
 
 Property changes made in this method WILL NOT trigger another update.
 
 ### update
 
-This method is called automatically to perform each update.
+This method is called automatically after `willUpdate`.
 
 Property changes made in this method WILL NOT trigger another update.
 
@@ -587,15 +587,15 @@ Overriding this method is rare.
 
 ### firstUpdated
 
-This method is called automatically the first time an update completes.
+This method is called automatically the first call to `update`.
 
 Property changes made in this method WILL trigger another update.
 
 ### updated
 
-This method is called automatically after each update completes.
+This method is called automatically after every call to `update`.
 
-## adoptedCallback
+### adoptedCallback
 
 This method is called automatically when a custom element instance
 is moved to a new document.
