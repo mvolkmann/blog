@@ -269,8 +269,8 @@ Now users of this custom element can override the color with the following.
 
 ## ES Modules
 
-{% aTargetBlank "https://html.spec.whatwg.org/multipage/webappapis.html#integration-with-the-javascript-module-system",
-"ES Modules" %} define the mechanisms for
+The {% aTargetBlank "https://html.spec.whatwg.org/multipage/webappapis.html#integration-with-the-javascript-module-system",
+"ES Modules" %} specification define the mechanisms for
 exporting and importing JavaScript modules.
 
 ## HTML Template
@@ -363,3 +363,57 @@ So we can't define templates in a separate file that is included.
   </body>
 </html>
 ```
+
+## Attributes
+
+Attributes can be passed to custom elements
+in the same way that attributes are passed to standard HTML elements.
+
+The class of a custom element can:
+
+- get the value of an attribute
+
+  ```js
+  const value = this.getAttribute('some-name');
+  ```
+
+- set the value of an attribute
+
+  ```js
+  this.setAttribute('some-name', someValue);
+  ```
+
+## Elements
+
+The class of a custom element can:
+
+- create new elements
+
+  ```js
+  const el = document.createElement('element-name');
+  ```
+
+- find elements within its shadow DOM
+
+  ```js
+  const el = this.querySelector('element-name');
+  const els = this.querySelectorAll('element-name');
+  ```
+
+- attach new elements to its shadow DOM
+
+  ```js
+  el.appendChild(otherEl);
+  ```
+
+- set text content
+
+  ```js
+  el.textContent = 'some text';
+  ```
+
+- set inner HTML
+
+  ```js
+  el.innerHTML = 'some HTML';
+  ```
