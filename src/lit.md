@@ -1266,10 +1266,20 @@ that requires language translations.
 Surrounded each piece of text to be translated
 with a call to the `msg` function.
 
+The follow examples show all the supported scenarios.
+Note that the `str` must also be used when
+the text does not contain HTML AND includes an interpolation.
+
+- plain strings: `msg('Hello World')`
+- string with expressions: `` msg(str`Hello ${name}`) ``
+- HTML templates: `` msg(html`Hello <b>World</b>`) ``
+- HTML templates with expressions: `` msg(html`Hello <b>${name}</b>`) ``
+- nested inside HTML templates: `` html`<button>${msg('Hello World')}</button>` ``
+
 For example:
 
 ```ts
-import {msg} from '@lit/localize';
+import {msg, str} from '@lit/localize';
 ...
   override render() {
     return msg(html`<div>My favorite color is ${this.color}.</div>`);
@@ -1547,6 +1557,9 @@ These packages are under development as of February 2024.
 
 - {% aTargetBlank "https://github.com/lit/lit/tree/main/packages/labs/preact-signals",
   "preact-signal" %} for making it easier to share observable state
+
+- {% aTargetBlank "https://github.com/lit/lit/tree/main/packages/labs/router",
+  "router" %} for associating URL paths with components to be rendered
 
 - {% aTargetBlank "https://github.com/lit/lit/tree/main/packages/labs/ssr",
   "ssr" %} for server-side rendering
