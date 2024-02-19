@@ -1123,6 +1123,132 @@ The following HTML renders an instance of the `my-top` custom element.
 </html>
 ```
 
+## Async Tasks
+
+The {% aTargetBlank "https://lit.dev/docs/data/task/", "@lit/task" %} package
+simplifies fetching data asynchronously.
+
+To install this package, enter `npm install @lit/task`.
+
+The following code in the file `src/task-demo.js` demonstrates this.
+
+```ts
+import {css, html, LitElement} from 'lit';
+import {customElement, state} from 'lit/decorators.js';
+import {Task} from '@lit/task';
+
+type Todo = {
+  userId: number;
+  id: number;
+  title: string;
+  completed: boolean;
+};
+
+const URL_PREFIX = 'https://jsonplaceholder.typicode.com/todos/';
+
+async function getTodo(id: number): Promise<Todo> {
+  // Simulate a long-running query.
+  return new Promise((resolve, reject) => {
+    setTimeout(async () => {
+      try {
+        const res = await fetch(URL_PREFIX + id);
+        if (res.ok) {
+          resolve(await res.json());
+        } else {
+          reject(`bad status ${res.status}`);
+        }
+      } catch (error) {
+        reject(error);
+      }
+    }, 1000);
+  });
+}
+
+@customElement('task-demo')
+export class TaskDemo extends LitElement {
+  @state() todoId = 1;
+
+  // The task runs when the component is created,
+  // and again any time one of its arguments changes.
+  task = new Task(this, {
+    task: getTodo,
+    args: () => [this.todoId]
+  });
+
+  changeTodoId(e: Event) {
+    const input = e.target as HTMLInputElement;
+    this.todoId = Number(input.value);
+  }
+
+  override render() {
+    const taskDisplay = this.task.render({
+      pending: () => html`<img alt="spinner" src="/spinner.gif" />`,
+      complete: todo => html`
+        <h2>${todo.title}</h2>
+        <div>status: ${todo.completed ? 'complete' : 'pending'}</div>
+      `,
+      error: error => html`<div class="error">${error}</div>`
+    });
+
+    return html`
+      <label>
+        Todo ID
+        <input
+          type="number"
+          @input=${this.changeTodoId}
+          .value=${this.todoId}
+        />
+      </label>
+      ${taskDisplay}
+    `;
+  }
+
+  static styles = css`
+    :host {
+      border: 1px solid gray;
+      padding: 1rem;
+      width: 20rem;
+    }
+
+    .error {
+      color: red;
+    }
+
+    h2 {
+      margin: 0;
+    }
+
+    img[alt='spinner'] {
+      display: block;
+      height: 2rem;
+    }
+
+    input {
+      width: 2rem;
+    }
+  `;
+}
+```
+
+The following HTML renders an instance of the `task-demo` custom element.
+
+<img alt="Lit context demo" style="width: 60%"
+  src="/blog/assets/lit-task-demo.png?v={{pkg.version}}">
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Task Demo</title>
+    <link rel="stylesheet" href="./src/index.css" />
+    <script type="module" src="/src/context-demo.ts"></script>
+  </head>
+  <body>
+    <task-demo></task-demo>
+  </body>
+</html>
+```
+
 ## Chess Board Example
 
 {% aTargetBlank "https://mganjoo.github.io/gchessboard/", "gchessboard" %}
@@ -1267,6 +1393,9 @@ These packages are under development as of February 2024.
 - {% aTargetBlank "https://github.com/lit/lit/tree/main/packages/labs/observers",
   "observers" %} for detecting specific kinds of changes
   including mutation, resize, intersection, and performance
+
+- {% aTargetBlank "https://github.com/lit/lit/tree/main/packages/labs/preact-signals",
+  "preact-signal" %} for making it easier to share observable state
 
 - {% aTargetBlank "https://github.com/lit/lit/tree/main/packages/labs/ssr",
   "ssr" %} for server-side rendering
