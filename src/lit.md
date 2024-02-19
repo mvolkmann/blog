@@ -43,6 +43,10 @@ Companies reportedly using Lit include
 Adobe, Cisco, Ford, GitHub, IBM, IKEA, Lego, Microsoft,
 Netflix, Red Hat, Reddit, SAP, VMware, and many more.
 
+Abobe uses Lit in Photoshop for the Web.
+
+Google uses Lit for Chrome DevTools.
+
 ## Installing
 
 The easiest way to get started using Lit is to
