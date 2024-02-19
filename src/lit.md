@@ -422,6 +422,8 @@ Other supported decorators include:
   }
   ```
 
+  See the "Refs" section for an alternative.
+
 - `@queryAll`
 
   This specifies a CSS selector that will be used to
@@ -508,6 +510,43 @@ Other supported decorators include:
 
   To get the nodes assigned to the default slot,
   omit the argument to `@queryAssignedNodes`.
+
+## Refs
+
+Refs provide an alternative to the `@query` decorator
+for getting a reference to a DOM element.
+
+For example:
+
+```ts
+import {html, LitElement} from 'lit';
+import {customElement} from 'lit/decorators.js';
+import {createRef, ref, type Ref} from 'lit/directives/ref.js';
+
+@customElement('greet-message')
+export class GreetMessage extends LitElement {
+  inputRef: Ref<HTMLInputElement> = createRef();
+
+  override render() {
+    ...
+    return html`
+      ...
+        <input
+          type="text"
+          size="20"
+          ${ref(this.inputRef)}
+          @input=${() => (this.newName = this.inputRef.value.value)}
+        />
+      ...
+    `;
+  }
+}
+```
+
+The expression `this.inputRef.value` gives the DOM `input` element.
+Adding `.value` to this gets the value of the `input`.
+
+Using the `@query` decorator, as shown earlier, is a bit easier.
 
 ## Tagged Template Literals
 

@@ -415,6 +415,20 @@ In the example from the previous section,
 - `<span slot="title">Title #1</span>` is in the light DOM
 - `<section class="card">` is in the shadow DOM
 
+## Light DOM Styling
+
+A web component can specify styling for light DOM elements
+that are inserted into its slots using the `::slotted` pseudo element.
+
+The following example styles all light DOM `span` elements
+that are associated with a slot.
+
+```css
+::slotted(span) {
+  color: red;
+}
+```
+
 ## Lifecycle Methods
 
 Custom elements have lifecycle methods that are automatically called
