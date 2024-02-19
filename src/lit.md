@@ -38,6 +38,19 @@ JavaScript does not yet support decorator syntax.
 TypeScript must be used to take advantage of Lit decorators,
 which simplify the code.
 
+## Resources
+
+- {% aTargetBlank "https://lit.dev", "Lit home page" %}
+
+- {% aTargetBlank "https://www.youtube.com/@buildWithLit", "Build With Lit" %} YouTube channel
+
+  See the playlists "Build it with Lit", "Lit University", and "Talks"
+
+- {% aTargetBlank "https://htmlwithsuperpowers.netlify.app",
+  "HTML with Superpowers" %} introduction to web components from Dave Rupert
+
+  See examples on the "Using" page that include "details-utils" and "two-up".
+
 ## Used By
 
 Companies reportedly using Lit include
@@ -267,6 +280,56 @@ The following HTML renders the custom element defined above.
     <greet-message name="World"></greet-message>
   </body>
 </html>
+```
+
+## Counter
+
+A common web component example is to implement a counter component.
+The following code shows one way to implement this using Lit.
+
+<img alt="Lit counter" style="width: 30%"
+  src="/blog/assets/lit-counter.png?v={{pkg.version}}">
+
+```ts
+import {css, html, LitElement} from 'lit';
+import {customElement, state} from 'lit/decorators.js';
+
+@customElement('my-counter')
+export class Counter extends LitElement {
+  @state() count = 0;
+
+  override render() {
+    return html`
+      <button ?disabled=${this.count === 0} @click=${() => this.count--}>
+        -
+      </button>
+      <div>${this.count}</div>
+      <button @click=${() => this.count++}>+</button>
+    `;
+  }
+
+  static styles = css`
+    :host {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+
+      font-family: monospace;
+      font-size: 2rem;
+    }
+
+    button {
+      --size: 3rem;
+      width: var(--size);
+      height: var(--size);
+
+      background-color: orange;
+      border: none;
+      border-radius: 50%;
+      font-size: 2rem;
+    }
+  `;
+}
 ```
 
 ## Properties
@@ -1073,12 +1136,29 @@ The following subsections describe popular Lit Lab packages.
 Some have already graduated.
 These packages are under development as of February 2024.
 
-- eleventy-plugin-lit
-- motion
-- observers
-- ssr
-- testing
-- virtualizer
+- {% aTargetBlank "https://github.com/lit/lit/tree/main/packages/labs/cli",
+  "CLI" %} for generating framework wrappers for Angular, React, and Vue
+
+- {% aTargetBlank "https://github.com/lit/lit/tree/main/packages/labs/eleventy-plugin-lit#lit-labseleventy-plugin-lit",
+  "eleventy-plugin-lit" %} for pre-rendering Lit web components at build time
+
+- {% aTargetBlank "https://github.com/lit/lit/tree/main/packages/labs/motion",
+  "motion" %} for adding animations
+
+- {% aTargetBlank "https://github.com/lit/lit/tree/main/packages/labs/observers",
+  "observers" %} for detecting specific kinds of changes
+  including mutation, resize, intersection, and performance
+
+- {% aTargetBlank "https://github.com/lit/lit/tree/main/packages/labs/ssr",
+  "ssr" %} for server-side rendering
+
+- {% aTargetBlank "https://github.com/lit/lit/tree/main/packages/labs/testing",
+  "testing" %} for implementing unit tests for Lit components
+
+- {% aTargetBlank "https://github.com/lit/lit/tree/main/packages/labs/virtualizer",
+  "virtualizer" %} to avoid spending time rendering elements
+  that are not currently in view.
+  A common example is rendering a scrolling list of items.
 
 These packages are near graduation as of February 2024.
 
@@ -1086,11 +1166,19 @@ These packages are near graduation as of February 2024.
 
 These packages have graduated.
 
-- `@lit/context`
-- `@lit/localize`
-- `@lit/react`
+- {% aTargetBlank "https://lit.dev/docs/data/context/", "@lit/context" %}
+  for making data available throughout a component subtree
+
+- {% aTargetBlank "https://lit.dev/docs/localization/overview/", "@lit/localize" %}
+  for supporting multiple languages
+
+- {% aTargetBlank "https://lit.dev/docs/frameworks/react/", "@lit/react" %}
+  to create React wrappers for web components
+
 - `@lit/reactive-element`
-- `@lit/task`
+
+- {% aTargetBlank "https://lit.dev/docs/data/task/", "@lit/task" %}
+  for asynchronous tasks like fetching data
 
 ## Unorganized Content
 
