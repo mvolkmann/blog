@@ -1016,17 +1016,38 @@ The following kinds of errors are not detected.
 
 ## Lit Labs
 
-Lit Labs is a collection of experimental libraries
+Lit Labs is a collection of experimental packages
 that add functionality to Lit.
 The Lit team provides these in order to gather feedback.
-Successful libraries graduate to become officially supported.
+Successful packages graduate to become officially supported.
 
-Keep these libraries separate from the Lit core
+Keep these packages separate from the Lit core
 enables keeping the core as small as possible.
-Each project can choose the additional libraries it wishes to use.
+Each project can choose the additional packages it wishes to use.
 
-The following subsections describe popular Lit Lab libraries.
+The following subsections describe popular Lit Lab packages.
 Some have already graduated.
+
+These packages are under development as of February 2024.
+
+- eleventy-plugin-lit
+- motion
+- observers
+- ssr
+- testing
+- virtualizer
+
+These packages are near graduation as of February 2024.
+
+- scoped-registry-mixin
+
+These packages have graduated.
+
+- `@lit/context`
+- `@lit/localize`
+- `@lit/react`
+- `@lit/reactive-element`
+- `@lit/task`
 
 ## Unorganized Content
 
