@@ -71,6 +71,12 @@ Some of the cons of using web components include:
 - more tedious to implement than components in frameworks like Svelte
 - need to use another library like Lit to simplify
 
+## Migrating to Web Components
+
+A recommended way to begin using web components in existing web applications
+is to identify their UI components that would be useful in other applications
+and one-by-one rewrite them as web components.
+
 ## Basic Example
 
 The following file `src/greet-message.js` defines a web component.
