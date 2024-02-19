@@ -30,6 +30,7 @@ Other popular options include
 Lit components are native web components,
 so they can be used everywhere web components can be used.
 
+The Lit library is implemented in TypeScript.
 Lit components can be implemented in JavaScript or TypeScript.
 When using JavaScript, no build step is required.
 
@@ -1031,7 +1032,6 @@ Each project can choose the additional packages it wishes to use.
 
 The following subsections describe popular Lit Lab packages.
 Some have already graduated.
-
 These packages are under development as of February 2024.
 
 - eleventy-plugin-lit
@@ -1056,3 +1056,5 @@ These packages have graduated.
 ## Unorganized Content
 
 To force a custom element instance to update, call its `requestUpdate` method.
+
+Consider using your small js2html library to generate HTML in web components.
