@@ -1106,7 +1106,7 @@ export class MyBottom extends LitElement {
 
 The following HTML renders an instance of the `my-top` custom element.
 
-<img alt="Lit context demo" style="width: 30%"
+<img alt="Lit context demo" style="width: 25%"
   src="/blog/assets/lit-context-demo.png?v={{pkg.version}}">
 
 ```html
