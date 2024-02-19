@@ -506,6 +506,17 @@ Other supported decorators include:
 
 Lit implements the `html` and `css` tagged template literals.
 
+These using the browser's built-in parsers to parse the text
+before any `${...}` interpolations are processed.
+The text must be well-formed HTML before the interpolations are inserted.
+
+From the Lit documentation,
+"Because the browser's built-in parser is very lenient,
+most cases of malformed templates are not detectable at runtime,
+so you won't see warnings — just templates that don't behave as you expect.
+We recommend using linting tools and IDE plugins
+to find issues in your templates during development."
+
 TODO: Describe what these provide beyond string concatenation.
 TODO: See https://lit.dev/docs/templates/overview/.
 

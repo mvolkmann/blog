@@ -384,6 +384,24 @@ So we can't define templates in a separate file that is included.
 </html>
 ```
 
+## DOM Terminology
+
+The term "shadow DOM" refers to DOM nodes that
+have an ancestor that is a shadow root.
+A shadow root is created by calling the `HTMLElement` `attachShadow` method.
+
+The term "light DOM" refers to DOM nodes that
+are supplied as slot content to a web component.
+
+The term "regular DOM" refers to all DOM nodes
+that are not in a shadow DOM or light DOM.
+
+In the example from the previous section,
+
+- `<h1>Template Demo</h1>` is in the regular DOM
+- `<span slot="title">Title #1</span>` is in the light DOM
+- `<section class="card">` is in the shadow DOM
+
 ## Lifecycle Methods
 
 Custom elements have lifecycle methods that are automatically called
