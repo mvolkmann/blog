@@ -138,7 +138,7 @@ Add the following script in `package.json`:
 Add the line `.eslintcache` in `.gitignore`.
 
 VS Code has an extension for Lit that provides syntax highlighting,
-type checking, and code completion.
+type checking, code completion, and checks for improperly closed tags.
 See {% aTargetBlank
 "https://marketplace.visualstudio.com/items?itemName=runem.lit-plugin",
 "lit-plugin" %}.
@@ -753,7 +753,7 @@ Property changes made in this method WILL NOT trigger another update.
 
 Overriding this method is rare.
 
-## render
+### render
 
 This method is called automatically by
 the `update` method defined in `LitElement`.
@@ -1008,6 +1008,119 @@ export class AlertOnClick extends LitElement {
     }
   `;
 }
+```
+
+## Context
+
+The `@lit/context` package provides a way to
+make data available throughout a component subtree.
+It avoids "prop drilling" where data is passed
+through every layer of a component hierarchy.
+
+To install this package, enter `npm install @lit/context`.
+
+The following code in the file `src/dog-context.ts` defines
+a data type and a context for holding an object of that type.
+
+```ts
+import {createContext} from '@lit/context';
+
+export type Dog = {
+  name: string;
+  breed: string;
+};
+
+// <Dog> specifies the kind of data that can be provided to the context.
+// 'dog' is a key associated with the context.
+export const dogContext = createContext<Dog>('dog');
+```
+
+The following code in the file `src/context-demo.ts`
+defines three custom elements.
+The `my-top` element provides a value for the context,
+renders a button that modifies the context value,
+and renders a `my-middle` element.
+The `my-middle` element renders a `my-bottom` element.
+The `my-bottom` element consumes the value in the context
+and renders data from it.
+
+```ts
+import {html, LitElement} from 'lit';
+import {consume, provide} from '@lit/context';
+import {customElement} from 'lit/decorators.js';
+import {dogContext, type Dog} from './dog-context.js';
+
+@customElement('my-top')
+export class MyTop extends LitElement {
+  // This places a Dog object into the dogContext.
+  @provide({context: dogContext})
+  dog: Dog = {name: 'Comet', breed: 'Whippet'};
+
+  changeDog() {
+    this.dog = {name: 'Snoopy', breed: 'Beagle'};
+  }
+
+  override render() {
+    return html`
+      <div>
+        <h1>Top</h1>
+        <button @click=${this.changeDog}>Change Dog</button>
+        <my-middle></my-middle>
+      </div>
+    `;
+  }
+}
+
+@customElement('my-middle')
+export class MyMiddle extends LitElement {
+  override render() {
+    return html`
+      <div>
+        <h2>Middle</h2>
+        <my-bottom></my-bottom>
+      </div>
+    `;
+  }
+}
+
+@customElement('my-bottom')
+export class MyBottom extends LitElement {
+  // This gets a Dog object from the dogContext.
+  // Without the subscribe option, the dog property won't be updated
+  // when the dog object held by the context changes.
+  @consume({context: dogContext, subscribe: true}) dog?: Dog;
+
+  override render() {
+    const text = this.dog
+      ? `${this.dog.name} is a ${this.dog.breed}.`
+      : 'No dog found';
+    return html`
+      <div>
+        <h3>Bottom</h3>
+        <div>${text}</div>
+      </div>
+    `;
+  }
+}
+```
+
+The following HTML renders an instance of the `my-top` custom element.
+
+<img alt="Lit context demo" style="width: 30%"
+  src="/blog/assets/lit-context-demo.png?v={{pkg.version}}">
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Context Demo</title>
+    <link rel="stylesheet" href="./src/index.css" />
+    <script type="module" src="/src/context-demo.ts"></script>
+  </head>
+  <body>
+    <my-top></my-top>
+  </body>
+</html>
 ```
 
 ## Chess Board Example
