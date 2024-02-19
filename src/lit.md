@@ -1012,8 +1012,8 @@ export class AlertOnClick extends LitElement {
 
 ## Context
 
-The `@lit/context` package provides a way to
-make data available throughout a component subtree.
+The {% aTargetBlank "https://lit.dev/docs/data/context/", "@lit/context" %}
+package provides a way to make data available throughout a component subtree.
 It avoids "prop drilling" where data is passed
 through every layer of a component hierarchy.
 
