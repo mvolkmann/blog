@@ -1014,6 +1014,20 @@ The following kinds of errors are not detected.
 
   The element will be treated as if it were a `div` element.
 
+## Lit Labs
+
+Lit Labs is a collection of experimental libraries
+that add functionality to Lit.
+The Lit team provides these in order to gather feedback.
+Successful libraries graduate to become officially supported.
+
+Keep these libraries separate from the Lit core
+enables keeping the core as small as possible.
+Each project can choose the additional libraries it wishes to use.
+
+The following subsections describe popular Lit Lab libraries.
+Some have already graduated.
+
 ## Unorganized Content
 
 To force a custom element instance to update, call its `requestUpdate` method.
