@@ -262,6 +262,17 @@ For example:
 </style>
 ```
 
+### Forms
+
+Instances of web components that are nested in a `form` element
+cannot by default contributed to the set of name/value pairs
+that are submitted by the form.
+They are prevented from doing so by the shadow DOM.
+{% aTargetBlank "https://dev.to/steveblue/form-associated-custom-elements-ftw-16bi",
+"Form-associated custom elements" %} provide a solution.
+
+TODO: Try this and add an example here.
+
 ### Piercing the Shadow DOM
 
 By default, styling used by web components
