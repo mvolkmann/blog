@@ -38,6 +38,12 @@ JavaScript does not yet support decorator syntax.
 TypeScript must be used to take advantage of Lit decorators,
 which simplify the code.
 
+Lit provides a large amount of functionality that goes well beyond
+just implementing web components for their reusability across web frameworks.
+Lit can be used as a replacement for SPA frameworks
+like React, Svelte, Vue, and Angular.
+Whether using Lit in this way is a good idea is debatable.
+
 ## Resources
 
 - {% aTargetBlank "https://lit.dev", "Lit home page" %}
