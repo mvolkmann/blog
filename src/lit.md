@@ -1162,7 +1162,11 @@ These packages are under development as of February 2024.
 
 These packages are near graduation as of February 2024.
 
-- scoped-registry-mixin
+- {% aTargetBlank "https://www.npmjs.com/package/@lit-labs/scoped-registry-mixin",
+  "scoped-registry-mixin" %} provides a way to
+  "scope custom element definitions to shadow roots,
+  such that the mapping of tag names to custom element class
+  doesn't rely on a single global registry".
 
 These packages have graduated.
 
@@ -1174,8 +1178,6 @@ These packages have graduated.
 
 - {% aTargetBlank "https://lit.dev/docs/frameworks/react/", "@lit/react" %}
   to create React wrappers for web components
-
-- `@lit/reactive-element`
 
 - {% aTargetBlank "https://lit.dev/docs/data/task/", "@lit/task" %}
   for asynchronous tasks like fetching data
