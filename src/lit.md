@@ -1126,7 +1126,8 @@ The following HTML renders an instance of the `my-top` custom element.
 ## Async Tasks
 
 The {% aTargetBlank "https://lit.dev/docs/data/task/", "@lit/task" %} package
-simplifies fetching data asynchronously.
+simplifies obtaining data to render asynchronously.
+This includes fetching data from network endpoints.
 
 To install this package, enter `npm install @lit/task`.
 
@@ -1181,6 +1182,8 @@ export class TaskDemo extends LitElement {
   }
 
   override render() {
+    // What this renders is based on the whether the task
+    // is pending, complete, or has experienced an error.
     const taskDisplay = this.task.render({
       pending: () => html`<img alt="spinner" src="/spinner.gif" />`,
       complete: todo => html`
@@ -1231,8 +1234,9 @@ export class TaskDemo extends LitElement {
 ```
 
 The following HTML renders an instance of the `task-demo` custom element.
+Changing the todo ID in the input triggers running the task again.
 
-<img alt="Lit context demo" style="width: 60%"
+<img alt="Lit context demo" style="border: 0; width: 60%"
   src="/blog/assets/lit-task-demo.png?v={{pkg.version}}">
 
 ```html
@@ -1241,10 +1245,157 @@ The following HTML renders an instance of the `task-demo` custom element.
   <head>
     <title>Task Demo</title>
     <link rel="stylesheet" href="./src/index.css" />
-    <script type="module" src="/src/context-demo.ts"></script>
+    <script type="module" src="/src/task-demo.ts"></script>
   </head>
   <body>
     <task-demo></task-demo>
+  </body>
+</html>
+```
+
+## Localization
+
+The {% aTargetBlank "https://lit.dev/docs/localization/overview/",
+"@lit/localize" %} package supports language translations.
+
+To install this package, enter `npm install @lit/localize`
+and `npm install @lit/localize-tools`.
+
+Modify the source files for each web component
+that requires language translations.
+Surrounded each piece of text to be translated
+with a call to the `msg` function.
+
+For example:
+
+```ts
+import {msg} from '@lit/localize';
+...
+  override render() {
+    return msg(html`<div>My favorite color is ${this.color}.</div>`);
+  }
+```
+
+Optionally include a second argument in each call to `msg`
+that is an option with the `desc` property whose value is
+a string that describes the text to be translated.
+These descriptions will appear as `note` elements in
+the generated XLIFF files to assist human translators.
+
+Create the file `lit-localize.json` in the root directory of the project
+containing the following.
+The `targetLocales` property specifies the languages and regions
+for which translations are desired.
+
+```json
+{
+  "$schema": "https://raw.githubusercontent.com/lit/lit/main/packages/localize-tools/config.schema.json",
+  "sourceLocale": "en",
+  "targetLocales": ["es-419", "zh-Hans"],
+  "tsConfig": "./tsconfig.json",
+  "output": {
+    "mode": "runtime",
+    "outputDir": "./src/generated/locales",
+    "localeCodesModule": "./src/generated/locale-codes.ts"
+  },
+  "interchange": {
+    "format": "xliff",
+    "xliffDir": "./xliff/"
+  }
+}
+```
+
+Add the following npm scripts in `package.json`.
+
+```json
+    "localize:extract": "lit-localize extract",
+    "localize:build": "lit-localize build",
+```
+
+Enter `npm localize:extract`.
+This creates an `xliff` directory containing
+one `.xliff` file for each language/region.
+Edit these files and add a `target` element after each `source` element
+that specifies the desired translation.
+
+Enter `npm localize:build`.
+This creates the `src/generated` directory containing
+the file `locale-codes.ts` and a `locales` subdirectory
+containing one `.ts` file for each language/region.
+
+The following code in the file `src/localize-demo.js` demonstrates this.
+
+```ts
+import {html, LitElement} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
+import {
+  configureLocalization,
+  localized,
+  msg,
+  str,
+  updateWhenLocaleChanges
+} from '@lit/localize';
+
+import {sourceLocale, targetLocales} from './generated/locale-codes.js';
+
+export const {getLocale, setLocale} = configureLocalization({
+  sourceLocale,
+  targetLocales,
+  loadLocale: locale => import(`./generated/locales/${locale}.ts`)
+});
+
+@customElement('localize-demo')
+@localized()
+export class LocalizeDemo extends LitElement {
+  @property() color = 'red';
+  options: string[] = [];
+
+  constructor() {
+    super();
+
+    // The following line can be used in place of `@localized()` above.
+    //updateWhenLocaleChanges(this);
+
+    this.options.push(html`<option>en</option>`);
+    for (const locale of targetLocales) {
+      this.options.push(html`<option>${locale}</option>`);
+    }
+  }
+
+  changeLocale(e: Event) {
+    const select = e.target as HTMLSelectElement;
+    setLocale(select.value);
+  }
+
+  override render() {
+    const locale = getLocale();
+    const text = msg(str`My favorite color is ${this.color}.`);
+    return html`
+      <select @change=${this.changeLocale}>
+        ${this.options}
+      </select>
+      <div>${text}</div>
+    `;
+  }
+}
+```
+
+The following HTML renders an instance of the `localize-demo` custom element.
+Selected a different locale from the `select` updates the message.
+
+<img alt="Lit localize demo" style="border: 0; width: 60%"
+  src="/blog/assets/lit-task-demo.png?v={{pkg.version}}">
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Localize Demo</title>
+    <link rel="stylesheet" href="./src/index.css" />
+    <script type="module" src="/src/localize-demo.ts"></script>
+  </head>
+  <body>
+    <localize-demo></localize-demo>
   </body>
 </html>
 ```
