@@ -122,6 +122,8 @@ See {% aTargetBlank
 Neither the ESLint plugin nor the VS Code extension
 detect errors in `html` and `css` tagged template literals.
 For example, `<foo>bar</baz>` is not flagged.
+In addition, Emmet expansions cannot be used
+inside these tagged template literals.
 
 ## Basic Example
 

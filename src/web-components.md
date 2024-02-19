@@ -58,6 +58,19 @@ Tags for custom elements cannot be self-closing,
 even when they have no content.
 For example, `<my-element></my-element>` is valid, but `<my-element />` is not.
 
+## Pros and Cons
+
+Some of the pros of using web components include:
+
+- only uses web standards
+- very portable ... can be used in all web frameworks
+- no build tools are required unless using TypeScript
+
+Some of the cons of using web components include:
+
+- more tedious to implement than components in frameworks like Svelte
+- need to use another library like Lit to simplify
+
 ## Basic Example
 
 The following file `src/greet-message.js` defines a web component.
