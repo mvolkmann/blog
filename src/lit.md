@@ -22,10 +22,17 @@ is library that simplifies developing {% aTargetBlank
 "/blog/topics/#/blog/web-components/", "web components" %}
 compared to using only standard browser APIs.
 
-Other popular options include
-{% aTargetBlank "https://stenciljs.com", "Stencil" %},
-{% aTargetBlank "https://enhance.dev", "Enhance" %}, and
-{% aTargetBlank "https://github.com/11ty/webc", "WebC" %}.
+Other popular options include:
+
+- {% aTargetBlank "https://stenciljs.com", "Stencil" %},
+
+- {% aTargetBlank "https://enhance.dev", "Enhance" %}, and
+
+- {% aTargetBlank "https://github.com/11ty/webc", "WebC" %}.
+
+- {% aTargetBlank "https://hybrids.js.org/", "hybrids" %}
+
+  "It's based on plain objects and pure functions."
 
 Lit components are native web components,
 so they can be used everywhere web components can be used.

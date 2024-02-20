@@ -470,19 +470,116 @@ In the example from the previous section,
 - `<span slot="title">Title #1</span>` is in the light DOM
 - `<section class="card">` is in the shadow DOM
 
-## Light DOM Styling
+## Slots and Parts
 
-A web component can specify styling for light DOM elements
-that are inserted into its slots using the `::slotted` pseudo element.
+A web component can render HTML that includes slots and parts.
+Slots are locations where content can be inserted.
+Each web component can have one default slot (unnamed)
+and any number of named slots.
 
-The following example styles all light DOM `span` elements
-that are associated with a slot.
+A web component can identify some of the elements it renders as "parts".
+This enables the parts to be styled from outside of the shadow DOM.
 
-```css
-::slotted(span) {
-  color: red;
+The following example demonstrates a web component
+that uses both slots and parts.
+
+```js
+class VanillaWC extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({mode: 'open'});
+    const root = this.shadowRoot;
+
+    root.innerHTML = `
+      <div>
+        <h2>Vanilla Web Component</h2>
+        <nav><slot name="nav"></slot></nav>
+        <div part="header">header</div>
+        <p><slot></slot></p>
+      </div>
+    `;
+
+    const sheet = new CSSStyleSheet();
+    // This replaces the contents of the currently empty stylesheet.
+    sheet.replaceSync(`
+      /* This targets the shadow host. */
+      :host {
+        display: inline-block;
+
+        border: 1px solid blue;
+        padding: 1rem;
+        width: 30%;
+      }
+
+      /* This targets any top-level child placed in the slot named "nav". */
+      slot[name="nav"]::slotted(*) {
+        border-bottom: 1px solid blue;
+      }
+
+      /* This could be used in place of the previous rule.
+      nav {
+        border-bottom: 1px solid blue;
+      } */
+
+      /* This targets any top-level p elements placed in any slot. */
+      ::slotted(p) {
+        color: green;
+        font-style: italic;
+      }
+    `);
+    root.adoptedStyleSheets = [sheet];
+  }
 }
+customElements.define('vanilla-wc', VanillaWC);
 ```
+
+The following HTML demonstrates using the web component defined above.
+
+<img alt="Web Component slots and parts" style="border: 0; width: 60%"
+  src="/blog/assets/web-component-slots-parts.png?v={{pkg.version}}">
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Web Component Demo</title>
+    <style>
+      /* This targets the part named "header" in the web component. */
+      vanilla-wc::part(header) {
+        color: purple;
+        font-size: 2rem;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
+      /* This targets all a elements in light DOM
+         which includes the elements inserted into slots. */
+      vanilla-wc a {
+        color: red;
+      }
+    </style>
+    <script type="module" src="/src/vanilla-wc.js"></script>
+  </head>
+  <body>
+    <vanilla-wc>
+      <div slot="nav">
+        <a href="/home">Home</a>
+        <a href="/about">About</a>
+      </div>
+      <p>
+        Come and listen to a story about a man named Jed,<br />
+        a poor mountaineer, barely kept his family fed.<br />
+        Then one day he was shootin at some food<br />
+        and up through the ground came a bubblin crude.
+      </p>
+    </vanilla-wc>
+  </body>
+</html>
+```
+
+The `::slotted` pseudo-element styles light DOM elements.
+It only works in CSS specified inside a shadow DOM.
+It applies to actual elements in slots, not text nodes.
 
 ## Lifecycle Methods
 
