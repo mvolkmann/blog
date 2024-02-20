@@ -201,6 +201,28 @@ to add a bit of interactivity.
 
   "A curated list of awesome framework-agnostic standalone web components."
 
+- {% aTargetBlank "https://lottiefiles.github.io/lottie-player/", "Lottie Player" %}
+
+  This web component enables playing Lottie animations.
+  It can be included from a CDN with the following:
+
+  ```html
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@0.2.0/dist/lottie-player.js"></script>
+  ```
+
+  To render an animation, add the `lottie-player` custom element in HTML
+  as follows:
+
+  ```html
+  <lottie-player
+    autoplay
+    loop
+    src="https://assets3.lottiefiles.com/packages/lf20_UJNc2t.json"
+    style="width: 250px"
+  >
+  </lottie-player>
+  ```
+
 For more, see {% aTargetBlank
 "https://open-wc.org/guides/community/component-libraries/",
 "Community: Component Libraries" %}.
