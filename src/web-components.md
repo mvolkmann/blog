@@ -71,6 +71,20 @@ Some of the cons of using web components include:
 - more tedious to implement than components in frameworks like Svelte
 - need to use another library like Lit to simplify
 
+## Open UI
+
+{% aTargetBlank "https://open-ui.org", "Open UI" %}
+is a W3C Community Group whose goal is "to allow web developers to
+style and extend built-in web UI components and controls,
+such as <select> dropdowns, checkboxes, radio buttons, and date/color pickers."
+
+The components proposed by this group could eventually
+work their way into the HTML specification.
+This would provide native alternatives to
+some of the web components we might build and use today.
+
+See the list of components being explorer at the Open UI link above.
+
 ## Migrating to Web Components
 
 A recommended way to begin using web components in existing web applications
