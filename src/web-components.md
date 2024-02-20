@@ -329,6 +329,8 @@ The HTML {% aTargetBlank
 "https://html.spec.whatwg.org/multipage/scripting.html#the-template-element",
 "template element" %} provides a way to define an HTML fragment
 that can be cloned and inserted multiple times into a DOM tree.
+This is fast because `template` elements
+are parsed even though they are not rendered.
 
 `template` elements have their CSS `display` property set to `none`
 so their content is not rendered.
