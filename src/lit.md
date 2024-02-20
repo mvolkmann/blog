@@ -1130,6 +1130,67 @@ The following HTML renders an instance of the `my-top` custom element.
 </html>
 ```
 
+Web components that consume context data cannot modify it.
+But they can dispatch custom events that
+bubble up to the provider of the context data.
+Event handlers in the provider can modify the context data
+and consumers will be notified.
+
+The following example demonstrates this.
+Clicking any of the buttons increments the `count` value.
+
+<img alt="Lit context events" style="border: 0; width: 30%"
+  src="/blog/assets/lit-context-events.png?v={{pkg.version}}">
+
+```ts
+import {html, LitElement} from 'lit';
+import {consume, createContext, provide} from '@lit/context';
+import {customElement} from 'lit/decorators.js';
+
+// A context can hold an object or a primitive value like a number.
+type Data = {count: number};
+export const dataContext = createContext<Data>('data');
+
+@customElement('my-parent')
+export class MyParent extends LitElement {
+  @provide({context: dataContext}) data: Data = {count: 0};
+
+  increment() {
+    // this.data.count++; // doesn't work; must replace context object
+    this.data = {count: this.data.count + 1};
+  }
+
+  override render() {
+    return html`
+      <div @increment=${this.increment}>
+        <button @click=${this.increment}>Parent Increment</button>
+        <my-child></my-child>
+        <my-child></my-child>
+      </div>
+    `;
+  }
+}
+
+@customElement('my-child')
+export class MyChild extends LitElement {
+  @consume({context: dataContext, subscribe: true}) data?: Data;
+
+  increment() {
+    const {host} = this.shadowRoot;
+    host.dispatchEvent(new CustomEvent('increment', {bubbles: true}));
+  }
+
+  override render() {
+    return html`
+      <div>
+        <div>count = ${this.data.count}</div>
+        <button @click=${this.increment}>Child Increment</button>
+      </div>
+    `;
+  }
+}
+```
+
 ## Async Tasks
 
 The {% aTargetBlank "https://lit.dev/docs/data/task/", "@lit/task" %} package
