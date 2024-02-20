@@ -1266,7 +1266,13 @@ that requires language translations.
 Surrounded each piece of text to be translated
 with a call to the `msg` function.
 
-The follow examples show all the supported scenarios.
+The argument to `msg` must be literal text, not a variable.
+The reason is that the `lit-localize extract` command
+only extracts text found in `msg` calls.
+It doesn't execute the code, so it wouldn't be able to
+determine all the possible values of a variable.
+
+The following examples show all the supported scenarios.
 Note that the `str` must also be used when
 the text does not contain HTML AND includes an interpolation.
 
@@ -1279,10 +1285,25 @@ the text does not contain HTML AND includes an interpolation.
 For example:
 
 ```ts
-import {msg, str} from '@lit/localize';
+import {LitElement, msg} from '@lit/localize';
+import {configureLocalization, localized, msg} from '@lit/localize';
 ...
   override render() {
-    return msg(html`<div>My favorite color is ${this.color}.</div>`);
+    const text = msg('My favorite color is');
+
+    const colors = {
+      red: msg('red'),
+      blue: msg('blue'),
+      green: msg('green')
+    };
+    const color = colors[this.color] ?? this.color;
+
+    return html`
+      <select @change=${this.changeLocale}>
+        ${this.options}
+      </select>
+      <div>${text} ${color}.</div>
+    `;
   }
 ```
 
@@ -1318,8 +1339,8 @@ for which translations are desired.
 Add the following npm scripts in `package.json`.
 
 ```json
-    "localize:extract": "lit-localize extract",
-    "localize:build": "lit-localize build",
+"localize:extract": "lit-localize extract",
+"localize:build": "lit-localize build",
 ```
 
 Enter `npm localize:extract`.
@@ -1327,6 +1348,10 @@ This creates an `xliff` directory containing
 one `.xliff` file for each language/region.
 Edit these files and add a `target` element after each `source` element
 that specifies the desired translation.
+
+Running the extract command again after adding new calls to `msg`
+in the JavaScript code does not overwrite existing `.xliff` files.
+It just adds `trans-unit` elements for the new strings to be translated.
 
 Enter `npm localize:build`.
 This creates the `src/generated` directory containing
@@ -1342,7 +1367,6 @@ import {
   configureLocalization,
   localized,
   msg,
-  str,
   updateWhenLocaleChanges
 } from '@lit/localize';
 
@@ -1378,13 +1402,20 @@ export class LocalizeDemo extends LitElement {
   }
 
   override render() {
-    const locale = getLocale();
-    const text = msg(str`My favorite color is ${this.color}.`);
+    const text = msg('My favorite color is');
+
+    const colors = {
+      red: msg('red'),
+      blue: msg('blue'),
+      green: msg('green')
+    };
+    const color = colors[this.color] ?? this.color;
+
     return html`
       <select @change=${this.changeLocale}>
         ${this.options}
       </select>
-      <div>${text}</div>
+      <div>${text} ${color}.</div>
     `;
   }
 }
