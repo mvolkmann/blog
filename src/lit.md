@@ -1641,6 +1641,15 @@ If the Lit library is not included in the bundle,
 users of your components will need `script` tags
 to include both your component library and the Lit library.
 
+Consider releasing two versions of each Lit component library,
+one that includes the Lit library and one that doesn't.
+The former will be easier to use. But the latter is better in cases
+where multiple Lit component libraries are being used.
+
+If more than one copy of the Lit library is included in a page,
+more JavaScript code that necessary will be downloaded
+and there can be conflicts between different versions of the library.
+
 For more detail, see {% aTargetBlank
 "https://lit.dev/docs/tools/publishing/#publishing-best-practices",
 "Publishing" %}.
