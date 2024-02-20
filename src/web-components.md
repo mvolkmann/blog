@@ -76,7 +76,7 @@ Some of the cons of using web components include:
 {% aTargetBlank "https://open-ui.org", "Open UI" %}
 is a W3C Community Group whose goal is "to allow web developers to
 style and extend built-in web UI components and controls,
-such as <select> dropdowns, checkboxes, radio buttons, and date/color pickers."
+such as select dropdowns, checkboxes, radio buttons, and date/color pickers."
 
 The components proposed by this group could eventually
 work their way into the HTML specification.
