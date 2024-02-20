@@ -479,6 +479,8 @@ and any number of named slots.
 
 A web component can identify some of the elements it renders as "parts".
 This enables the parts to be styled from outside of the shadow DOM.
+It is an alternative to using CSS variables to "pierce" the shadow DOM,
+which was described earlier.
 
 The following example demonstrates a web component
 that uses both slots and parts.
