@@ -1448,6 +1448,10 @@ Selected a different locale from the `select` updates the message.
 </html>
 ```
 
+The `.xliff` files created by the `lit-localize extract` command
+use the XLIFF 1.2 format from 2008.
+It's unclear when it doesn't use the XLIFF 2.0 format from 2014.
+
 ## Chess Board Example
 
 {% aTargetBlank "https://mganjoo.github.io/gchessboard/", "gchessboard" %}
