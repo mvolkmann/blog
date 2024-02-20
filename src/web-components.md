@@ -470,6 +470,15 @@ In the example from the previous section,
 - `<span slot="title">Title #1</span>` is in the light DOM
 - `<section class="card">` is in the shadow DOM
 
+## Inheritable Styles
+
+CSS defines many styles that are inherited by descendant elements.
+Examples include `color`, `font`, `font-family`, and `font-weight`.
+
+When these styles are applied to ancestor elements of web components,
+they will be applied to elements in the shadow DOM of the web components
+unless the web components override them.
+
 ## Slots and Parts
 
 A web component can render HTML that includes slots and parts.
@@ -546,6 +555,13 @@ The following HTML demonstrates using the web component defined above.
   <head>
     <title>Web Component Demo</title>
     <style>
+      /* This specifies inheritable styles that will be
+         used by web components unless overridden. */
+      body {
+        color: blue;
+        font-family: sans-serif;
+      }
+
       /* This targets the part named "header" in the web component. */
       vanilla-wc::part(header) {
         color: purple;
