@@ -1641,6 +1641,10 @@ If the Lit library is not included in the bundle,
 users of your components will need `script` tags
 to include both your component library and the Lit library.
 
+For more detail, see {% aTargetBlank
+"https://lit.dev/docs/tools/publishing/#publishing-best-practices",
+"Publishing" %}.
+
 ## Unorganized Content
 
 To force a custom element instance to update, call its `requestUpdate` method.
