@@ -486,7 +486,7 @@ The following example demonstrates a web component
 that uses both slots and parts.
 
 ```js
-class VanillaWC extends HTMLElement {
+export class VanillaWC extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({mode: 'open'});

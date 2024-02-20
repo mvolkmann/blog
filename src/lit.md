@@ -1632,6 +1632,15 @@ These packages have graduated.
 - {% aTargetBlank "https://lit.dev/docs/data/task/", "@lit/task" %}
   for asynchronous tasks like fetching data
 
+## Publishing Components
+
+When publishing a library of Lit components, you can choose to
+include the Lit library in the bundle or omit it.
+In either case, the shared file should be an ES module.
+If the Lit library is not included in the bundle,
+users of your components will need `script` tags
+to include both your component library and the Lit library.
+
 ## Unorganized Content
 
 To force a custom element instance to update, call its `requestUpdate` method.
