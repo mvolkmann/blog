@@ -543,6 +543,10 @@ export class VanillaWC extends HTMLElement {
 customElements.define('vanilla-wc', VanillaWC);
 ```
 
+The `::slotted` pseudo-element styles light DOM elements.
+It only works in CSS specified inside a shadow DOM.
+It applies to actual elements in slots, not text nodes.
+
 The following HTML demonstrates using the web component defined above.
 
 <img alt="Web Component slots and parts" style="border: 0; width: 60%"
@@ -593,10 +597,6 @@ The following HTML demonstrates using the web component defined above.
   </body>
 </html>
 ```
-
-The `::slotted` pseudo-element styles light DOM elements.
-It only works in CSS specified inside a shadow DOM.
-It applies to actual elements in slots, not text nodes.
 
 ## Lifecycle Methods
 
