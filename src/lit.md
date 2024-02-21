@@ -1017,6 +1017,89 @@ export class AlertOnClick extends LitElement {
 }
 ```
 
+When events bubble out of the shadow DOM of web components,
+they are "retargeted" which means they lose some of their information.
+The target of the event becomes the web component itself
+and not the actual HTML element (such as an `input`) that triggered the event.
+
+Only "composed" events escape the shadow DOM,
+but most DOM events are.
+
+There are two ways that an event can be handled in a web component
+and captured in a page that uses the web component.
+
+1. Don't handle in the web component and used `composedPath` in the page.
+
+   In the web component:
+
+   ```js
+   render() {
+     return html`<input type="checkbox" ?checked="${this.checked}" />`;
+   }
+   ```
+
+   In the page that uses the web component:
+
+   ```js
+   <head>
+     ...
+     <script>
+       function handleInput(event) {
+         const input = event.composedPath()[0];
+         const {checked} = input;
+         console.log('handleInput: checked =', checked);
+       }
+     </script>
+   </head>
+   <body>
+     <toggle-switch
+       label="Bluetooth"
+       @input="handleInput($event)"
+     ></toggle-switch>
+   </body>
+   ```
+
+1. Capture in the web component and dispatch a custom event.
+
+   ```js
+   handleChange(event) {
+     const {checked} = event.target;
+     const newEvent = new CustomEvent('toggle', { detail: {checked} });
+     this.dispatchEvent(newEvent);
+   }
+
+   render() {
+     return html`
+       <input
+         type="checkbox"
+         ?checked=${this.checked}
+         @change=${this.handleChange}
+       />
+     `;
+   }
+   ```
+
+   In the page that uses the web component:
+
+   ```js
+   <head>
+     ...
+     <script>
+       function handleToggle(event) {
+         console.log('handleToggle: event =', event);
+         const {checked} = event.detail;
+         console.log('handleToggle: checked =', checked);
+       }
+     </script>
+   </head>
+   <body>
+     <toggle-switch
+       label="Bluetooth"
+       @toggle="handleToggle($event)"
+     ></toggle-switch>
+   </body>
+   ```
+
 ## Context
 
 The {% aTargetBlank "https://lit.dev/docs/data/context/", "@lit/context" %}

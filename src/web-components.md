@@ -201,6 +201,8 @@ to add a bit of interactivity.
 
   "A curated list of awesome framework-agnostic standalone web components."
 
+- {% aTargetBlank "https://genericcomponents.netlify.app", "generic-components" %}
+
 - {% aTargetBlank "https://lottiefiles.github.io/lottie-player/", "Lottie Player" %}
 
   This web component enables playing Lottie animations.
