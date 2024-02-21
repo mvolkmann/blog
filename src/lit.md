@@ -1017,20 +1017,22 @@ export class AlertOnClick extends LitElement {
 }
 ```
 
-When events bubble out of the shadow DOM of web components,
-they are "retargeted" which means they lose some of their information.
-The target of the event becomes the web component itself
-and not the actual HTML element (such as an `input`) that triggered the event.
+"Composed events" that are set to bubble
+can bubble out of the shadow DOM of web components.
+Most standard UI events fit this criteria.
 
-Only "composed" events escape the shadow DOM,
-but most DOM events are.
+When this happens, the event is "retargeted". This means the event
+appear to come from the host element of the web component rather than
+from the actual element that triggered the event (such as an `input`).
+The event also loses the values of some of its properties.
 
-There are two ways that an event can be handled in a web component
+There are two ways that such an event can be handled in a web component
 and captured in a page that uses the web component.
 
 1. Don't handle in the web component and used `composedPath` in the page.
 
-   In the web component:
+   For example, a web component whose custom element name
+   is `toggle-switch` could contain the following:
 
    ```js
    render() {
@@ -1038,13 +1040,19 @@ and captured in a page that uses the web component.
    }
    ```
 
-   In the page that uses the web component:
+   A page that uses `toggle-switch` could contain the following
+   to handle the standard DOM `input` event.
+   This example uses Alpine syntax to register an event listener.
 
    ```js
    <head>
      ...
      <script>
        function handleInput(event) {
+         // event.composedPath() returns an array of all the
+         // nodes the event will pass through, starting from the
+         // element that triggered the event (`input` in this case)
+         // and ending at the `document`.
          const input = event.composedPath()[0];
          const {checked} = input;
          console.log('handleInput: checked =', checked);
@@ -1060,6 +1068,9 @@ and captured in a page that uses the web component.
    ```
 
 1. Capture in the web component and dispatch a custom event.
+
+   For example, a web component whose custom element name
+   is `toggle-switch` could contain the following:
 
    ```js
    handleChange(event) {
@@ -1079,14 +1090,15 @@ and captured in a page that uses the web component.
    }
    ```
 
-   In the page that uses the web component:
+   A page that uses `toggle-switch` could contain the following
+   to handle the custom `toggle` event.
+   This example uses Alpine syntax to register an event listener.
 
    ```js
    <head>
      ...
      <script>
        function handleToggle(event) {
-         console.log('handleToggle: event =', event);
          const {checked} = event.detail;
          console.log('handleToggle: checked =', checked);
        }
