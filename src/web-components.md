@@ -196,6 +196,10 @@ to add a bit of interactivity.
 
   "A forward-thinking library of web components."
 
+- {% aTargetBlank "https://lion-web.netlify.app", "Lion" %}
+
+  "Fundamental white label web components for building your design system."
+
 - {% aTargetBlank "https://github.com/davatron5000/awesome-standalones", "Awesome Standalones" %}
   from Dave Rupert
 
