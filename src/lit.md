@@ -150,11 +150,15 @@ See {% aTargetBlank
 "https://marketplace.visualstudio.com/items?itemName=runem.lit-plugin",
 "lit-plugin" %}.
 
-Neither the ESLint plugin nor the VS Code extension
-detect errors in `html` and `css` tagged template literals.
-For example, `<foo>bar</baz>` is not flagged.
-In addition, Emmet expansions cannot be used
-inside these tagged template literals.
+To use Emmet expansions in Lit `html` tagged template literals inside VS Code,
+add the following in `settings.json`.
+
+```json
+  "emmet.includeLanguages": {
+    "javascript": "html",
+    "typescript": "html"
+  }
+```
 
 ## Basic Example
 
