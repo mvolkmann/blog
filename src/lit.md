@@ -1028,44 +1028,8 @@ The event also loses the values of some of its properties.
 
 There are two ways that such an event can be handled in a web component
 and captured in a page that uses the web component.
-
-1. Don't handle in the web component and used `composedPath` in the page.
-
-   For example, a web component whose custom element name
-   is `toggle-switch` could contain the following:
-
-   ```js
-   render() {
-     return html`<input type="checkbox" ?checked="${this.checked}" />`;
-   }
-   ```
-
-   A page that uses `toggle-switch` could contain the following
-   to handle the standard DOM `input` event.
-   This example uses Alpine syntax to register an event listener.
-
-   ```js
-   <head>
-     ...
-     <script>
-       function handleInput(event) {
-         // event.composedPath() returns an array of all the
-         // nodes the event will pass through, starting from the
-         // element that triggered the event (`input` in this case)
-         // and ending at the `document`.
-         const input = event.composedPath()[0];
-         const {checked} = input;
-         console.log('handleInput: checked =', checked);
-       }
-     </script>
-   </head>
-   <body>
-     <toggle-switch
-       label="Bluetooth"
-       @input="handleInput($event)"
-     ></toggle-switch>
-   </body>
-   ```
+I prefer the first approach because it
+requires less work from users of the web component.
 
 1. Capture in the web component and dispatch a custom event.
 
@@ -1108,6 +1072,44 @@ and captured in a page that uses the web component.
      <toggle-switch
        label="Bluetooth"
        @toggle="handleToggle($event)"
+     ></toggle-switch>
+   </body>
+   ```
+
+1. Don't handle in the web component and used `composedPath` in the page.
+
+   For example, a web component whose custom element name
+   is `toggle-switch` could contain the following:
+
+   ```js
+   render() {
+     return html`<input type="checkbox" ?checked="${this.checked}" />`;
+   }
+   ```
+
+   A page that uses `toggle-switch` could contain the following
+   to handle the standard DOM `input` event.
+   This example uses Alpine syntax to register an event listener.
+
+   ```js
+   <head>
+     ...
+     <script>
+       function handleInput(event) {
+         // event.composedPath() returns an array of all the
+         // nodes the event will pass through, starting from the
+         // element that triggered the event (`input` in this case)
+         // and ending at the `document`.
+         const input = event.composedPath()[0];
+         const {checked} = input;
+         console.log('handleInput: checked =', checked);
+       }
+     </script>
+   </head>
+   <body>
+     <toggle-switch
+       label="Bluetooth"
+       @input="handleInput($event)"
      ></toggle-switch>
    </body>
    ```
