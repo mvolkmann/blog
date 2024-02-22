@@ -449,6 +449,8 @@ Good choices have tooling that supports the following:
   rather than relying on string concatenation.
   JSX is an XML-based syntax popularized by the React framework
   for embedding HTML-like syntax directly in JavaScript code.
+  Another option to consider is my library {% aTargetBlank
+  "https://www.npmjs.com/package/js2htmlstr", "js2htmlstr" %}.
 - Syntax highlighting of HTML in code editors.
 
 One tech stack that meets all these criteria includes the following:
@@ -2456,7 +2458,9 @@ One solution is to use <a href="/blog/bun" target="_blank">Components</a>
 which has built-in support for JSX.
 This enables writing JavaScript functions that act like React components
 (minus support for hooks and DOM diffing), taking props and returning JSX.
+
 Bun can be combined with a server framework like
+{% aTargetBlank "https://hono.dev", "Hono" %} and
 {% aTargetBlank "https://elysiajs.com", "Elysia" %}.
 
 For a potential solution, see
