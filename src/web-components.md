@@ -713,3 +713,22 @@ The class of a custom element can:
   ```js
   el.innerHTML = 'some HTML';
   ```
+
+## Avoiding Flash Of Undefined Custom Elements (FOUCE)
+
+When a page containing web components is initially rendered,
+the CSS and JavaScript for the components may not be loaded yet.
+This can cause FOUCE and layout shift.
+To avoid this, include the following CSS
+which prevents rendering components that are not yet "defined".
+
+```css
+:not(:defined) {
+  visibility: hidden;
+}
+```
+
+A more involved approach using `customElements.whenDefined`
+is described in {% aTargetBlank
+"https://shoelace.style/getting-started/usage#waiting-for-components-to-load",
+"Waiting for Components to Load" %}.

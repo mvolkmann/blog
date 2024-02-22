@@ -127,7 +127,7 @@ in HTML files.
 
 When a page containing Shoelace components is initially rendered,
 the CSS and JavaScript for the components may not be loaded yet.
-This can cause FOUCE.
+This can cause FOUCE and layout shift.
 To avoid this, include the following CSS
 which prevents rendering components that are not yet "defined".
 
