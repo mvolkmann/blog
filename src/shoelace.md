@@ -104,6 +104,14 @@ bun add @shoelace-style/shoelace
 There are several options for making the files under `node_modules`
 available to the app.
 
+When Shoelace is obtained from a CDN, it will include the Lit library.
+This may conflict with your own usage of Lit.
+
+When using a bundler like Vite or Bun,
+import Shoelace from the `node_modules` `dist` directory.
+This will not include the Lit library,
+so you must add a script that that includes Lit.
+
 ## VS Code Completions
 
 The following steps enable code completions for Shoelace components
