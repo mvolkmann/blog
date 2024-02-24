@@ -23,7 +23,7 @@ The web components are defined using
 {% aTargetBlank "https://lit.dev", "Lit" %}.
 
 Shoelace provides a large collection of UI components that can be
-used with all web framework or vanilla JavaScript with no framework.
+used with all web frameworks or vanilla JavaScript with no framework.
 The current set of components includes
 Alert, Animated Image, Animation, Avatar, Badge, Breadcrumb, Breadcrumb Item,
 Button, Button Group, Card, Carousel, Carousel Item, Checkbox, Color Picker,
