@@ -969,6 +969,166 @@ for the standard DOM `hidden` attribute. For example:
 <div ?hidden=${some-condition}>some content</div>
 ```
 
+## Directives
+
+Lit provides a number of "directive" functions
+that can be useful in `html` tagged template literals.
+Most of their functionality can be implementing in
+plain JavaScript code instead, so their value is debatable.
+
+The `ifDefined` directive only adds an attribute to an element
+if a given value is defined.
+If it is defined, the value is used as a part of the attribute value.
+
+The `join` directive takes an iterable (typically an `Array`)
+of content strings and a "joiner".
+The joiner can be a static string of content or
+a function that is passed an index and returns a string of content.
+The directive renders each content string in the iterable
+with the joiner between each pair.
+
+The `range` directive creates an iterable over a range of integers
+starting from zero and stopping one short of a given "end" value.
+It can also be passed arguments for the start, end, and step values.
+
+The `when` directive is useful when content must be computed
+based on a condition. It takes a condition and two functions,
+one to compute the true content and one to compute the false content.
+
+The `choose` function is similar to the `when` function,
+but bases content on a non-Boolean value.
+It is similar to a switch statement in JavaScript.
+Each case computes the content to use with a function.
+
+The `map` directive iterates over an iterable (typically an `Array`)
+and renders content returned by a function for each element.
+
+The `repeat` directive is similar to the `map` function,
+but it takes an iterable (typically an Array),
+a function to compute a "key" value,
+and a function to compute content.
+The key value is used to optimize DOM updates.
+It is not passed to the content function.
+If only one function is passed, this behaves the same as `map`.
+
+There are additional directives not described here.
+See {% aTargetBlank "https://lit.dev/docs/templates/directives/",
+"Built-in directives" %} for more detail.
+
+The following code demonstrates the usage of many of the directives.
+
+```js
+import {html, LitElement} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
+import {choose} from 'lit/directives/choose.js';
+import {classMap} from 'lit/directives/class-map.js';
+import {ifDefined} from 'lit/directives/if-defined.js';
+import {join} from 'lit/directives/join.js';
+import {map} from 'lit/directives/map.js';
+import {range} from 'lit/directives/range.js';
+import {repeat} from 'lit/directives/repeat.js';
+import {styleMap} from 'lit/directives/style-map.js';
+import {when} from 'lit/directives/when.js';
+
+@customElement('directives-demo')
+export class DirectivesDemo extends LitElement {
+  @property() color?: string;
+  @property() fruit!: string;
+  @property({type: Boolean}) timeOnly = false;
+
+  static fruits = [
+    {id: 7, name: 'apple', color: 'red'},
+    {id: 3, name: 'banana', color: 'yellow'},
+    {id: 2, name: 'blueberry', color: 'blue'},
+    {id: 9, name: 'orange', color: 'orange'}
+  ];
+
+  static fruitMap = {
+    apple: 'red',
+    banana: 'yellow',
+    blueberry: 'blue',
+    orange: 'orange'
+  };
+
+  getDate() {
+    return new Date().toLocaleString();
+  }
+
+  getTime() {
+    return new Date().toLocaleTimeString();
+  }
+
+  override render() {
+    const to = this.timeOnly;
+    const classes = {c1: to, c2: to, c3: to};
+    const styles = {
+      color: to ? 'purple' : 'blue',
+      fontSize: to ? '2rem' : '1rem',
+      fontWeight: to ? 'bold' : 'normal'
+    };
+
+    return html`
+      <section>
+        <div class=${classMap(classes)} style=${styleMap(styles)}>
+          My favorite fruit color is
+          ${choose(
+            this.fruit,
+            [
+              // These functions can return an `html` tagged template literal.
+              ['apple', () => 'red'],
+              ['banana', () => 'yellow'],
+              ['blueberry', () => 'blue'],
+              ['orange', () => 'orange']
+            ],
+            () => `invalid fruit ${this.fruit}`
+          )}.
+        </div>
+
+        <ul>
+          ${map(
+            DirectivesDemo.fruits,
+            (fruit, index) => html`
+              <li style="color: ${fruit.color}">${index + 1}: ${fruit.name}</li>
+            `
+          )}
+        </ul>
+
+        <ul>
+          ${repeat(
+            DirectivesDemo.fruits,
+            fruit => fruit.id,
+            (fruit, index) => html`
+              <li style="color: ${fruit.color}">${index + 1}: ${fruit.name}</li>
+            `
+          )}
+        </ul>
+
+        <!-- This renders 10, 20, 30. -->
+        ${repeat(range(3), number => html`<div>${(number + 1) * 10}</div>`)}
+
+        <!-- The style attribute is only set if
+             a value for this.color was supplied. -->
+        <div style="color: ${ifDefined(this.color)}">
+          ${when(this.timeOnly, this.getTime, this.getDate)}
+        </div>
+
+        <div
+          style="border: 1px solid gray; display: inline-block; padding: 1rem"
+        >
+          ${join(
+            map(
+              DirectivesDemo.fruits,
+              fruit => html`<div>${fruit.name}</span>`
+            ),
+            html`<hr />`
+          )}
+        </div>
+      </section>
+    `;
+  }
+}
+```
+
 ## Event Handling
 
 Lit supports registering event handling functions with event bindings.
