@@ -10,7 +10,12 @@ article aside {
 
 body {
   --accent-color: #3265dc;
+  --bg-color: white;
+  --fg-color: black;
+  --nav-bg-color: linen;
 
+  background-color: var(--bg-color);
+  color: var(--fg-color);
   font-family: sans-serif;
   margin: 0 auto;
   padding: 1rem;
@@ -84,7 +89,11 @@ pre {
 }
 
 table {
+  --td-bg-color: #fff9f2;
+  --th-bg-color: #f6d078;
+
   border-collapse: collapse;
+  color: var(--fg-color);
 }
 
 /*
@@ -95,15 +104,29 @@ table {
 */
 
 td {
-  background-color: #fff9f2;
+  background-color: var(--td-bg-color);
 }
 
 th {
-  background-color: #f6d078;
+  background-color: var(--th-bg-color);
 }
 
 td,
 th {
   border: solid gray 1px;
   padding: 0.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    --accent-color: darkblue;
+    --bg-color: black;
+    --fg-color: white;
+    --nav-bg-color: #0047ab;
+  }
+
+  table {
+    --td-bg-color: var(--nav-bg-color);
+    --th-bg-color: var(--accent-color);
+  }
 }

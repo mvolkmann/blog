@@ -891,6 +891,8 @@ The following examples demonstrate many uses of shadows.
 
 {# pragma warning disable format #}
 
+{% raw %}
+
 ```html
 <html lang="en">
   <head>
@@ -1048,6 +1050,8 @@ The following examples demonstrate many uses of shadows.
   </body>
 </html>
 ```
+
+{% endraw %}
 
 {# pragma warning enable format #}
 
@@ -1385,6 +1389,8 @@ For example:
   src="/blog/assets/css-gradient-border.png?v={{pkg.version}}"
   title="CSS gradient border">
 
+{% raw %}
+
 ```html
 <html>
   <head>
@@ -1413,6 +1419,8 @@ For example:
 </html>
 ```
 
+{% endraw %}
+
 Unfortunately, this approach doesn't work if a `border-radius` is needed.
 But the somewhat more complicated approach below does work.
 See {% aTargetBlank "https://dev.to/afif/border-with-gradient-and-radius-387f",
@@ -1421,6 +1429,8 @@ See {% aTargetBlank "https://dev.to/afif/border-with-gradient-and-radius-387f",
 <img alt="CSS gradient border rounded" style="width: 30%"
   src="/blog/assets/css-gradient-border-rounded.png?v={{pkg.version}}"
   title="CSS gradient border rounded">
+
+{% raw %}
 
 ```html
 <html>
@@ -1462,6 +1472,8 @@ See {% aTargetBlank "https://dev.to/afif/border-with-gradient-and-radius-387f",
 </html>
 ```
 
+{% endraw %}
+
 ### Centering
 
 There are many ways to center content using CSS.
@@ -1502,6 +1514,8 @@ Common ways include:
 Each of these approaches is demonstrated in the code below.
 
 {% include "_centering.html" %}
+
+{% raw %}
 
 ```html
 <!DOCTYPE html>
@@ -1610,6 +1624,8 @@ Each of these approaches is demonstrated in the code below.
   </body>
 </html>
 ```
+
+{% endraw %}
 
 ### Flex layout
 
@@ -1779,6 +1795,8 @@ a header, footer, left nav and main area of a page.
 
 {% include "_grid-layout.html" %}
 
+{% raw %}
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -1833,6 +1851,8 @@ a header, footer, left nav and main area of a page.
   </body>
 </html>
 ```
+
+{% endraw %}
 
 ### `display` `inline-block` property
 
@@ -1972,6 +1992,8 @@ The other buttons change from blue to green when hovering over them.
 
 {% include "_pseudo-classes.html" %}
 
+{% raw %}
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -2029,6 +2051,8 @@ The other buttons change from blue to green when hovering over them.
   </body>
 </html>
 ```
+
+{% endraw %}
 
 ### Pseudo selectors
 
@@ -2407,6 +2431,8 @@ using `position` `sticky` causes the "Fruit" line to remain in view.
 
 {% include "_css-position-fixed-sticky.html" %}
 
+{% raw %}
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -2481,6 +2507,8 @@ using `position` `sticky` causes the "Fruit" line to remain in view.
   </body>
 </html>
 ```
+
+{% endraw %}
 
 ### `calc` function
 
@@ -2732,6 +2760,8 @@ so any change to that property takes place gradually over that duration.
 
 {% include "_css-transition.html" %}
 
+{% raw %}
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -2794,6 +2824,8 @@ so any change to that property takes place gradually over that duration.
 </html>
 ```
 
+{% endraw %}
+
 Here is another example that transitions the CSS `outline-offset` property
 to focus the attention of the user when focus moves to a new form control.
 Click in the the username `input`, enter a value,
@@ -2809,6 +2841,8 @@ Keyboard ... Shortcuts and checking the checkbox for
 "Use keyboard navigation to move focus between controls".
 
 {% include "_css-transition-outline.html" %}
+
+{% raw %}
 
 ```html
 <!DOCTYPE html>
@@ -2908,6 +2942,8 @@ Keyboard ... Shortcuts and checking the checkbox for
 </html>
 ```
 
+{% endraw %}
+
 ### Transforms
 
 The CSS {% aTargetBlank
@@ -2920,6 +2956,8 @@ to rotate the emoji 180 degrees.
 When pressed again, the original rotation of zero degrees is restored.
 
 {% include "_css-transform.html" %}
+
+{% raw %}
 
 ```html
 <html lang="en">
@@ -2959,6 +2997,8 @@ When pressed again, the original rotation of zero degrees is restored.
   </body>
 </html>
 ```
+
+{% endraw %}
 
 The next example renders a Pokemon card that starts face-down.
 Clicking the card flips it over.
@@ -3272,6 +3312,8 @@ and changes the first button back to "Start".
 
 {% include "_css-animation.html" %}
 
+{% raw %}
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -3385,6 +3427,8 @@ and changes the first button back to "Start".
   </body>
 </html>
 ```
+
+{% endraw %}
 
 The following example demonstrates using the `animation` shorthand property
 and chaining animations.
@@ -3574,6 +3618,8 @@ and the card heights are controlled by an aspect ratio.
   src="/blog/assets/css-container-query-units.gif?v={{pkg.version}}"
   title="CSS container query units">
 
+{% raw %}
+
 ```html
 <html>
   <head>
@@ -3642,6 +3688,8 @@ and the card heights are controlled by an aspect ratio.
 </html>
 ```
 
+{% endraw %}
+
 ### Container Queries
 
 Media queries style elements based the window size.
@@ -3693,6 +3741,8 @@ The following example uses a container query to change the
 <img alt="CSS container query" style="width: 80%"
   src="/blog/assets/css-container-query.gif?v={{pkg.version}}"
   title="CSS container query">
+
+{% raw %}
 
 ```html
 <html>
@@ -3787,6 +3837,8 @@ The following example uses a container query to change the
 </html>
 ```
 
+{% endraw %}
+
 ### Light and dark modes
 
 The CSS Object Model (CSSOM) {% aTargetBlank
@@ -3811,6 +3863,8 @@ The following example demonstrates this.
 
 {% include "_prefers-color-scheme.html" %}
 
+{% raw %}
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -3820,7 +3874,7 @@ The following example demonstrates this.
     <style>
       body {
         --bg-color: white;
-        --fg-color: purple;
+        --fg-color: black;
 
         background-color: var(--bg-color);
         color: var(--fg-color);
@@ -3828,7 +3882,7 @@ The following example demonstrates this.
       }
 
       body.dark-mode {
-        --bg-color: purple;
+        --bg-color: black;
         --fg-color: white;
       }
     </style>
@@ -3864,6 +3918,8 @@ The following example demonstrates this.
 </html>
 ```
 
+{% endraw %}
+
 ### Font size preference
 
 Using the CSS size unit `rem` for most sizes
@@ -3878,6 +3934,8 @@ An enhancement idea is to save the users preferred font size
 in `localStorage` and restore it each time they revisit the site.
 
 {% include "_font-size-change.html" %}
+
+{% raw %}
 
 ```html
 <!DOCTYPE html>
@@ -3950,6 +4008,8 @@ in `localStorage` and restore it each time they revisit the site.
 </html>
 ```
 
+{% endraw %}
+
 ### Custom fonts with `@font-face`
 
 To use a custom font in a web app:
@@ -4000,6 +4060,8 @@ so changes are animated.
 For example, the `clip-path` can become larger or smaller on hover.
 
 {% include "_css-clip-paths.html" %}
+
+{% raw %}
 
 ```html
 <!DOCTYPE html>
@@ -4074,6 +4136,8 @@ For example, the `clip-path` can become larger or smaller on hover.
   </body>
 </html>
 ```
+
+{% endraw %}
 
 ### filter property
 
@@ -5560,6 +5624,8 @@ in a read-only `textarea`.
 
 {% include "_getBoundingClientRect.html" %}
 
+{% raw %}
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -5600,6 +5666,8 @@ in a read-only `textarea`.
   </body>
 </html>
 ```
+
+{% endraw %}
 
 ### Promises
 
@@ -6066,6 +6134,8 @@ and the text color temporarily changes to red.
 
 {% include "_intersection-observer.html" %}
 
+{% raw %}
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -6125,6 +6195,8 @@ and the text color temporarily changes to red.
 </html>
 ```
 
+{% endraw %}
+
 ### Carousels
 
 Implementing a carousel component is not a difficult as it might seem.
@@ -6133,6 +6205,8 @@ Here is a simple implementation inspired by
 "Kevin Powell's YouTube videos" %}.
 
 {% include "_carousel.html" %}
+
+{% raw %}
 
 ```html
 <!DOCTYPE html>
@@ -6320,6 +6394,8 @@ Here is a simple implementation inspired by
   </body>
 </html>
 ```
+
+{% endraw %}
 
 ## Drawing
 

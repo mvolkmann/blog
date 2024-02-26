@@ -1,24 +1,40 @@
 body {
-  /*--accent-color: cornflowerblue;*/
   --accent-color: #3265dc;
+  --bg-color: white;
+  --fg-color: black;
+  --header-bg-color: var(--accent-color);
+  --header-fg-color: var(--bg-color);
+  --nav-fg-color: var(--accent-color);
+  --nav-bg-color: linen;
+  --nav-fg-color: var(--accent-color);
+  --sidebar-bg-color: lightblue;
 
+  background-color: var(--bg-color);
+  color: var(--fg-color);
   display: flex;
   flex-direction: column;
   font-family: sans-serif;
   height: 100vh;
   margin: 0;
 
+  & a {
+    --anchor-color: var(--accent-color);
+    color: var(--anchor-color);
+  }
+
   & > footer {
     display: flex;
     justify-content: space-between;
 
-    background-color: var(--accent-color);
-    color: white;
+    background-color: var(--header-bg-color);
+    color: var(--header-fg-color);
     padding: 0.5rem;
 
     & > a {
-      color: white;
-      text-transform: uppercase;
+      /* color: var(--fg-color); */
+      /* text-transform: uppercase; */
+      /* TinyLetter is no longer supported. I need to find an alternative. */
+      visibility: hidden;
     }
   }
 
@@ -26,8 +42,8 @@ body {
     display: flex;
     align-items: center;
 
-    background-color: var(--accent-color);
-    color: white;
+    background-color: var(--header-bg-color);
+    color: var(--header-fg-color);
     margin: 0;
     padding: 0.5rem;
     text-align: center;
@@ -41,7 +57,7 @@ body {
     & > .hamburger {
       background-color: transparent;
       border: none;
-      color: white;
+      color: var(--header-fg-color);
       font-size: 1.7rem;
       outline: none;
     }
@@ -65,7 +81,8 @@ body {
     }
 
     & > nav {
-      background-color: linen;
+      background-color: var(--nav-bg-color);
+      color: var(--nav-fg-color);
       display: inline-block;
       height: 100%;
       overflow: auto;
@@ -76,7 +93,7 @@ body {
       z-index: 1;
 
       a {
-        color: var(--accent-color);
+        color: var(--nav-fg-color);
         cursor: pointer;
         text-decoration: none;
 
@@ -122,10 +139,12 @@ body {
     }
 
     & > .topic-background {
+      --topic-bg-color: var(--sidebar-bg-color);
+
       display: flex;
       justify-content: center;
 
-      background-color: lightblue;
+      background-color: var(--topic-bg-color);
       width: 100%;
 
       & > .topic-content {
@@ -136,7 +155,7 @@ body {
         position: relative;
         left: 0;
 
-        background-color: white;
+        background-color: var(--bg-color);
         overflow-y: scroll;
         max-width: 50rem;
         width: 100%;
@@ -144,7 +163,6 @@ body {
         & > iframe {
           border: none;
           box-sizing: border-box;
-          padding: 0 0.5rem;
           transition-duration: 500ms; // matches setTimeout in topics.js
           transition-property: opacity;
           width: 100%;
@@ -159,7 +177,7 @@ body {
 }
 
 .crumb {
-  color: white;
+  color: var(--bg-color);
   text-decoration: none;
 }
 
@@ -187,14 +205,37 @@ table {
   border-collapse: collapse;
   margin-bottom: 1rem;
 
+  td {
+    background-color: var(--fg-color);
+    color: var(--bg-color);
+  }
+
+  th {
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+  }
+
   td,
   th {
     border: solid lightgray 1px;
     padding: 5px;
   }
+}
 
-  th {
-    background-color: var(--accent-color);
-    color: white;
+@media (prefers-color-scheme: dark) {
+  body {
+    --accent-color: #002d62;
+    --bg-color: black;
+    --fg-color: white;
+    --header-fg-color: var(--fg-color);
+    --nav-bg-color: #0047ab;
+    --nav-fg-color: linen;
+    --sidebar-bg-color: #013a86;
+
+    & > main {
+      & > .topic-background {
+        --topic-bg-color: var(--sidebar-bg-color);
+      }
+    }
   }
 }
