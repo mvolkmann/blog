@@ -896,7 +896,7 @@ when it is clicked. It uses the `hx-on` attribute to listen for that event
 and execute JavaScript code, in this case to display an alert.
 
 ```js
-const attrs = {'hx-on::trigger': "alert('Got click!')"};
+const attrs = {'hx-on:trigger': "alert('Got click!')"};
 ...
 <button hx-trigger="click consume" {...attrs}>
   Click Me
