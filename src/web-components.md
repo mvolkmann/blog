@@ -19,6 +19,15 @@ layout: topic-layout.njk
 
 {% aTargetBlank "https://www.webcomponents.org/introduction", "Web components" %}
 define custom HTML elements that can be used just like standard HTML elements.
+They are defined by a set of standards that include the
+<a href="https://html.spec.whatwg.org/multipage/custom-elements.html"
+target="_blank">Custom Elements API</a>,
+<a href="https://dom.spec.whatwg.org/#shadow-trees"
+target="_blank">Shadow DOM API</a>,
+<a href="https://html.spec.whatwg.org/multipage/webappapis.html#integration-with-the-javascript-module-system"
+target="_blank">ES Modules</a>, and
+<a href="https://html.spec.whatwg.org/multipage/scripting.html#the-template-element"
+target="_blank">HTML Templates</a>.
 
 Web components can be used in any web page,
 with any web framework, and in Markdown files.
@@ -137,6 +146,8 @@ export class GreetMessage extends HTMLElement {
 
   render() {
     const name = this.getAttribute('name');
+    // Setting innerHTML removes the need to use low-level
+    // DOM methods like `createElement` and `appendChild`.
     this.shadowRoot.innerHTML = `
       <div style="color: purple;">Hello, ${name}!</div>
     `;
