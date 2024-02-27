@@ -1122,6 +1122,11 @@ Supported values include:
 - `previous` targets previous sibling element
 - `previous {css-selector}` targets previous matching sibling
 
+Note that `hx-target` is an inheritable attribute. Any element with
+an ancestor that uses an `hx-*` attribute to send HTTP requests will
+use that ancestor element as the default for `hx-target` rather than `self`.
+To avoid this, specify `hx-target="self"`.
+
 These enable identifying elements that do not have `id` attributes.
 
 The new content can replace existing content
