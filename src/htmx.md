@@ -1125,7 +1125,7 @@ Supported values include:
 Note that `hx-target` is an inheritable attribute. Any element with
 an ancestor that uses an `hx-*` attribute to send HTTP requests will
 use that ancestor element as the default for `hx-target` rather than `self`.
-To avoid this, specify `hx-target="self"`.
+To avoid this, specify `hx-target="this"`.
 
 These enable identifying elements that do not have `id` attributes.
 
