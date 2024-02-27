@@ -461,8 +461,11 @@ So we can't define templates in a separate file that is included.
 ## DOM Terminology
 
 The term "shadow DOM" refers to DOM nodes that
-have an ancestor that is a shadow root.
+have an ancestor that is a "shadow root".
 A shadow root is created by calling the `HTMLElement` `attachShadow` method.
+
+The term "shadow host" refers to the regular DOM node
+to which the shadow root is attached.
 
 The term "light DOM" refers to DOM nodes that
 are supplied as slot content to a web component.
