@@ -675,7 +675,7 @@ The following test will pass:
 ```ts
 import {expect, test} from 'bun:test';
 
-test('environment variables', async () => {
+test('environment variables', () => {
   expect(process.env.NAME).toBe('Mark');
   expect(Bun.env.GREETING).toBe('Hello, Mark!');
 });
