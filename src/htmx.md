@@ -48,9 +48,9 @@ The server endpoints can be implemented using
 any programming language and server framework.
 This is referred to as "Hypermedia On Whatever you'd Like" (HOWL).
 
-Servers for htmx applications plays two roles.
-First, they serves static files such as HTML, CSS, JavaScript, and images.
-Second, they respond to certain HTTP requests by returning HTML or text.
+Servers for htmx applications play two roles.
+First, they serve static files such as HTML, CSS, JavaScript, and images.
+Second, they respond to specific HTTP requests by returning HTML or text.
 
 Many web app features typically thought to require custom JavaScript code
 can instead be implemented with only htmx.

@@ -838,12 +838,12 @@ For example:
 import {serialize, deserialize} from 'bun:jsc';
 import {expect, test} from 'bun:test';
 
-test('serialize', async () => {
+test('serialize', () => {
   const dogs = [
     {name: 'Comet', breed: 'Whippet'},
     {name: 'Oscar', breed: 'German Shorthaired Pointer'}
   ];
-  const buffer = serialize(dogs);
+  const buffer = serialize(dogs); // a SharedArrayBuffer
   const newDogs = deserialize(buffer);
   expect(newDogs).toStrictEqual(dogs);
 });
@@ -915,7 +915,6 @@ const server = Bun.serve({
     },
     message(ws, data) {
       console.log('received:', data);
-      console.log('type:', typeof data);
       if (typeof data === 'string') {
         console.log('sending response');
         ws.send(data.toUpperCase());
