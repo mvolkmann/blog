@@ -1007,7 +1007,7 @@ type Todo = {
   completed: number; // 0 or 1 for SQLite compatibility
 };
 
-const db = new Database('todos.db', {create: true});
+const db = new Database('todos.db');
 // Alternative way to access database in src directory:
 // import {Statement} from 'bun:sqlite';
 // import db from "./todos.db" with {"type": "sqlite"};
@@ -1020,12 +1020,11 @@ const insertTodoQuery = db.query(
 );
 const updateTodoPS = db.prepare('update todos set completed=? where id = ?');
 
-test('sqlite', async () => {
+test('sqlite', () => {
   deleteAllTodosPS.run();
 
   const text = 'buy milk';
   const {id} = insertTodoQuery.get(text) as {id: number};
-  // console.log('id =', id);
   expect(id).toBeGreaterThan(0);
 
   let todos = getAllTodosQuery.all() as Todo[];
