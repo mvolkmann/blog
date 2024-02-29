@@ -100,6 +100,7 @@ The most useful properties are `req` (a `HonoRequest` object)
 and `res` (a `Response` object defined by the Fetch API).
 
 The most useful methods on the `c.req` object
+related to extracting data from a request
 are described in the following table.
 
 | Action                       | Code                                                          |
@@ -113,6 +114,7 @@ are described in the following table.
 | get value of JSON body       | `const object = await c.req.json();`                          |
 
 The most useful methods on the `Context` object
+related to creating a response
 are described in the following table.
 
 | Action                       | Code                                   |
