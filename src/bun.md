@@ -249,7 +249,7 @@ To install all the dependencies listed in `package.json`,
 enter `bun install` (or `bun i`).
 
 All downloaded packages are stored in the global cache directory
-`~/.bin/install/cache`.
+`~/.bun/install/cache`.
 When a project adds a dependency to a package version
 that is already in the global cache directory,
 it is "copied" from there instead of downloading it again.
