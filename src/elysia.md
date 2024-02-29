@@ -19,12 +19,11 @@ layout: topic-layout.njk
 {% aTargetBlank "https://elysiajs.com", "Elysia" %}
 is a JavaScript HTTP server library that targets the Bun JavaScript runtime.
 
-{% aTargetBlank "https://elysiajs.com", "Elysia" %} is a competitor to
-<a href="/blog/topics/#/hono" target="_blank">Hono</a>.
+Elysia is a competitor to <a href="/blog/topics/#/hono" target="_blank">Hono</a>.
 It has slightly better performance than Hono, but only runs in Bun.
 Both Elysia and Hono are significantly faster that Express.
 
-This notes are currently minimal.
+These notes are currently quite minimal.
 
 See the example Elysia project at
 <a href="https://github.com/mvolkmann/elysia-demos"
@@ -33,10 +32,9 @@ target="_blank">elysia-demos</a>.
 ## Context
 
 The <a href="https://elysiajs.com/essential/context.html"
-target="_blank">Context</a> object that is passed to routes
-has many properties and methods.
+target="_blank">Context</a> object that is passed to routes has many properties.
 
-The most useful methods on the `Context` object
+The most useful properties on the `Context` object
 related to extracting data from a request
 are described in the following table.
 This assumes that the variable `c` holds a `Context` object
@@ -55,22 +53,22 @@ Typically this is destructured in the argument list.
 
 Elysia determines how to parse request bodies based on
 the value of the `Content-Type` request header.
-See <a src="https://elysiajs.com/life-cycle/parse#explicit-body"
+See <a href="https://elysiajs.com/life-cycle/parse#explicit-body"
 target="_blank">Explicit Body</a>.
 
-The most useful methods on the `Context` object
+The most useful properties on the `Context` object
 related to creating a response
 are described in the following table.
 
-| Action                       | Code                                    |
-| ---------------------------- | --------------------------------------- |
-| set value of response header | `c.header('Some-Name', 'some value');`  |
-| set status code              | `c.status(someCode);`                   |
-| return text response         | `return 'some text';`                   |
-| return JSON response         | `return someObject;`                    |
-| return HTML response         | `return someJSX;`                       |
-| return "Not Found" error     | `set.status = 404; return 'Not Found';` |
-| redirect to another URL      | `set.redirect = 'someURL'`              |
+| Action                         | Code                                    |
+| ------------------------------ | --------------------------------------- |
+| set value of a response header | `c.header('Some-Name', 'some value');`  |
+| set status code                | `c.status(someCode);`                   |
+| return text response           | `return 'some text';`                   |
+| return JSON response           | `return someObject;`                    |
+| return HTML response           | `return someJSX;`                       |
+| return "Not Found" error       | `set.status = 404; return 'Not Found';` |
+| redirect to another URL        | `set.redirect = 'someURL'`              |
 
 Returning JSX that is converted to HTML requires the following setup:
 

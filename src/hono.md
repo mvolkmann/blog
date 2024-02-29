@@ -117,15 +117,15 @@ The most useful methods on the `Context` object
 related to creating a response
 are described in the following table.
 
-| Action                       | Code                                   |
-| ---------------------------- | -------------------------------------- |
-| set value of response header | `c.header('Some-Name', 'some value');` |
-| set status code              | `c.status(someCode);`                  |
-| return text response         | `return c.text('some text');`          |
-| return JSON response         | `return c.json(someObject);`           |
-| return HTML response         | `return c.html(someHTML);`             |
-| return "Not Found" error     | `return c.notFound();`                 |
-| redirect to another URL      | `return c.redirect('someURL');`        |
+| Action                         | Code                                   |
+| ------------------------------ | -------------------------------------- |
+| set value of a response header | `c.header('Some-Name', 'some value');` |
+| set status code                | `c.status(someCode);`                  |
+| return text response           | `return c.text('some text');`          |
+| return JSON response           | `return c.json(someObject);`           |
+| return HTML response           | `return c.html(someHTML);`             |
+| return "Not Found" error       | `return c.notFound();`                 |
+| redirect to another URL        | `return c.redirect('someURL');`        |
 
 In the `c.html` method, `someHTML` is a string of HTML or JSX.
 
