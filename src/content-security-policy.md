@@ -12,24 +12,27 @@ layout: topic-layout.njk
 
 ## Overview
 
-<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP"
+A <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP"
 target="_blank">Content Security Policy</a> provides
 the ability to detect and prevent some types of attacks,
-including Cross-Site Scripting (XSS) and data injection.
-It can also report attack attempts.
+including Cross-Site Scripting (XSS).
+It can also report attempted attacks.
 
-There are two ways to enable CSP.
-
-1. "Content-Security-Policy" HTTP response header
-1. HTML `meta` tag
-
+A CSP can be enabled with an HTTP response header or with an HTML `meta` tag.
 It both cases, the policy is specified by a list of
 directives separated by semicolons.
+
 Each directive is specified with a name and one or more values,
 all separated by a space.
-The values are allowed URL patterns or the keyword "self".
+The values are CSP-specific keywords (such as `self`)
+and/or allowed URL patterns.
 
-The following `meta` tag is an example.
+The following `meta` tag provides an example.
+It specifies that by default all resource types
+can only be downloaded from the current origin.
+An exception is made for images which can
+come from any origin as long as HTTPS is used.
+No scripts are allowed to be loaded, even those from the current origin.
 
 ```html
 <meta
@@ -38,9 +41,8 @@ The following `meta` tag is an example.
 />
 ```
 
-Some features can only be enabled in an HTTP header. Which?
-
-can only execute scripts downloaded from approved domains using approved protocols (ex. HTTPS)
+Using a CSP reduces, but does not eliminate
+the need to sanitize user-entered HTML.
 
 ## Directives
 
@@ -53,23 +55,84 @@ Commonly used directives include:
 - `img-src`: restricts `<img>` elements
 - `media-src`: restricts `<audio>` and `<video>` elements
 - `object-src`: restricts `<object>` and `<embed>` elements
-- `report-to`: specifies the URL where violation reports are sent
+- `report-uri`: specifies the URL where violation reports are sent
 - `script-src-attr`: restricts sources for JavaScript inline event handlers like `onclick`
 - `script-src-elem`: restricts `<script>` elements
 - `script-src`: combines the previous two in one directive
 - `worker-src`: restricts Worker, SharedWorker, and ServiceWorker scripts
 
-It is recommended to make `default-src` very restrictive (maybe just "self")
-and used more specific directives to open access for specific kinds of resources.
+It is recommended to make `default-src` very restrictive (often just `'self'`)
+and used more specific directives to
+open access for specific kinds of resources.
+
+A small set of directives that are not commonly used
+can only be specified in HTTP headers and not in `meta` tags.
 
 See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP"
 target="_blank">Content Security Policy</a>
 for a table of CSP directives that are supported by each browser.
 
-Using CSP reduces, but does not eliminate
-the need to sanitize user-entered HTML.
+## Keywords
 
-## Example Header Values
+CSP Keywords are surrounded by single quotes
+to distinguish them from URL patterns.
+
+The keywords that can be used in directive values include:
+
+- `inline-speculation-rules`
+
+  This allows inclusion of "speculation rules" which are experimental.
+
+- `nonce-*`
+
+  This is a whitelist of inline scripts, indentified by
+  a cryptographic nonce value, that are allowed.
+
+- `none`
+
+  This prevents loading any resources.
+
+- `report-sample`
+
+  This causes a sample of the violating code
+  to be included in violation reports.
+  It is used in `script-src` and `script-src-elem` directives.
+
+- `self`
+
+  This only allows loading resources from the current origin.
+  It is the most commonly used keyword.
+
+- `sha{algorithm}-{value}`
+
+  This is used in `script-src` and `styles-src` directives
+  to allow resources with a matching hash value.
+
+- `strict-dynamic`
+
+  This keyword defies human understanding.
+
+- `unsafe-eval`
+
+  This enables use of the JavaScript `eval` function,
+  the `Function` constructor, and passing strings of JavaScript code
+  to the `setTimeout` and `setInterval` functions.
+
+- `unsafe-inline`
+
+  This enables evaluating inline `script` elements,
+  `javascript:` URLs, inline event handlers, and inline `style` elements.
+
+- `unsafe-hashes`
+
+  This enables evaluating inline event handling functions,
+  which is a subset of what `unsafe-inline` enables.
+
+- `wasm-unsafe-eval`
+
+  This enables loading and executing WebAssembly modules.
+
+## Example CSP Headers
 
 - `Content-Security-Policy: default-src 'self' demo.com *.demo.com`
 
@@ -90,24 +153,46 @@ the need to sanitize user-entered HTML.
 
 To report attempts to violate the CSP but not prevent them,
 use the `Content-Security-Policy-Report-Only` header.
-It seems odd to want only report these attempts.
+This may be useful during development to determine the
+CSP directives that are desired before going to production.
 
-Specify the `Content-Security-Policy` AND `Content-Security-Policy-Report`
-headers to both prevent violations and report attempted violations.
-The policies specified in each can be the same or they can differ.
+Violation attempts are reported by
+sending a JSON object in an HTTP POST request.
+To specify where reports will be sent
+add the `report-uri` directive with a value that
+is the URL where POST requests will be sent.
+This can be added to the value of the
+`Content-Security-Policy` or `Content-Security-Policy-Report` header.
+There is no need to supply both headers.
 
-Include the `report-to: {url}` directive in the
-`Content-Security-Policy-Report` header to indicate
-where POST requests including violation details should be sent.
-This must be specified in an HTTP response header, not in a `meta` tag.
+The `report-uri` directive must be specified in an HTTP response header,
+not in a `meta` tag.
 
-The report is a JSON object with many properties including:
+The `report-uri` directive will be replaced by `report-to` in the future.
 
-- `blocked-uri` gives the URI that violated a policy.
-- `disposition` will be "enforce" or "report".
-- `document-uri` gives the URI of the document that requested the resource.
-- `effective-directive` gives the directive that was violated.
-- `script-sample` gives the first 40 characters of violating script or CSS.
+A report JSON object contains many properties including:
+
+- `blocked-uri`
+
+  This gives the URI that violated a policy.
+
+- `disposition`
+
+  This will be
+  "enforce" if triggered by a `Content-Security-Policy` header or
+  "report" if triggered by a `Content-Security-Report-Policy` header.
+
+- `document-uri`
+
+  This gives the URI of the document that requested the resource.
+
+- `effective-directive`
+
+  This gives the directive that was violated.
+
+- `script-sample`
+
+  This gives the first 40 characters of the violating script or CSS.
 
 The following is an example report that describes
 an issue with getting an image from Unsplash.
@@ -131,10 +216,11 @@ Note the properties "effective-directive" and "blocked-uri".
 }
 ```
 
-## Example
+## Example Web App
 
 The following code implements an HTTP server using the JavaScript-based
-<a href="https://hono.dev" target="_blank">Hono</a> library.
+server <a href="https://hono.dev" target="_blank">Hono</a> library.
+It also uses <a href="/blog/topics/#/blog/htmx/" target="_blank">htmx</a>.
 
 ```typescript
 import {type Context, Hono, type Next} from 'hono';
@@ -163,8 +249,12 @@ const policies = [
   // This allows getting videos from googleapis.
   "media-src 'self' http://commondatastorage.googleapis.com",
 
+  // This specifies where POST requests for violation reports will be sent.
+  // In the future, "report-uri" will be replaced by "report-to".
+  'report-uri /csp-report',
+
   // This allows downloading the htmx library from a CDN.
-  "script-src-elem 'self' https://unpkg.com",
+  "script-src-elem 'self' 'report-sample' https://unpkg.com",
 
   // This allows htmx.min.js to insert style elements.
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com"
@@ -178,12 +268,16 @@ const app = new Hono();
 // app.use('/*', serveStatic({root: './public'}));
 app.use('/*', (c: Context, next: Next) => {
   c.header('Content-Security-Policy', csp);
-  c.header(
-    'Content-Security-Policy-Report-Only',
-    csp + '; report-uri /csp-report'
-  );
   const fn = serveStatic({root: './public'});
   return fn(c, next);
+});
+
+app.get('/dom-xss', (c: Context) => {
+  return c.text("alert('A DOM XSS occurred!')");
+});
+
+app.get('/reflective-xss', (c: Context) => {
+  return c.html("<script>alert('A reflective XSS occurred!');</script>");
 });
 
 app.get('/version', (c: Context) => {
@@ -203,7 +297,7 @@ app.post('/csp-report', async (c: Context) => {
 export default app;
 ```
 
-The following HTML file in `public/index.html` relies on
+The following HTML in `public/index.html` relies on
 the CSP defined in the server to access several resources.
 
 ```html
@@ -230,6 +324,15 @@ the CSP defined in the server to access several resources.
     <!-- <script src="htmx.min.js"></script> -->
 
     <script src="reload-client.js" type="module"></script>
+
+    <!-- <script>
+      async function domXSS() {
+        const res = await fetch('/dom-xss');
+        const text = await res.text();
+        eval(text);
+      }
+      window.onload = domXSS;
+    </script> -->
   </head>
   <body>
     <h2>This demonstrates the Google font "Kode Mono".</h2>
@@ -267,6 +370,11 @@ the CSP defined in the server to access several resources.
       <button>Submit</button>
     </form>
     <div id="todo"></div>
+
+    <button hx-get="/reflective-xss" hx-target="#reflective-xss">
+      Reflective XSS
+    </button>
+    <div id="reflective-xss"></div>
   </body>
 </html>
 ```
@@ -283,7 +391,8 @@ SRI is not typically enforced for scripts loaded from the same origin.
 
 The `integrity` value must begin with a string that identifies
 the hash algorithm, followed by a dash and the hash.
-For an example, see the `script` tag for htmx in the previous section.
+For an example, see the `script` tag for htmx in the HTML shown
+in the previous section.
 
 One way to generate a hash for a trusted, online resource is to use the site
 <a href="https://www.srihash.org" target="_blank">SRI Hash Generator</a>.
@@ -302,31 +411,28 @@ There are three types of XSS attacks.
 ### Reflected XSS
 
 In this form of XSS, an HTTP endpoint returns
-a string containing one or more `script` tags and
-client-side JavaScript uses it as the `innerHTML` of some element.
-This causes the `script` tags to be executed.
+a string containing one or more `script` tags.
+Client-side JavaScript then sets the `innerHTML` of some element
+to the string.
+That causes the `script` tags to be executed.
 
 A CSP can prevent such scripts from being executed.
-To intentionally allow them, include `'unsafe-inline'`
-in the value of the `script-src-elem` directive.
+The easiest way is to include the directive `default-src 'self'`.
+To intentionally allow executing such scripts, include `'unsafe-inline'`
+in the value of the `script-src` or `script-src-elem` directive.
 
-The following Hono endpoint returns a script tag.
-
-```typescript
-app.get('/reflective-xss', (c: Context) => {
-  return c.html("<script>alert('A reflective XSS occurred!');</script>");
-});
-```
+For an example of an endpoint that returns a `script` tag,
+see the GET endpoint for `/reflective-xss` above.
 
 ### Stored XSS
 
 In this form of XSS, user-entered content is stored, perhaps in a database.
 The content is later used in generated web pages.
 
-This can be dangerous if users enter `script` tags and
-the content is added as `innerHTML` because the scripts will be executed.
-Adding the content as `textContent` will display `script` tags,
-but not execute them.
+This can be dangerous if users enter `script` tags and the content
+is later added as `innerHTML` because the scripts will be executed.
+On the other hand, adding the content as `textContent`
+will display `script` tags, but not execute them.
 
 ### DOM XSS
 
@@ -334,19 +440,22 @@ In this form of XSS, JavaScript running in a browser gets a string
 from a source such as the page URL or a fetch request, and executes it.
 One way to execute the string as JavaScript code
 is to pass it to the `eval` function.
-Another way is to set the innerHTML of a DOM element to the string.
+Another way is to set the `innerHTML` of a DOM element to the string.
 
 With a strict default CSP in place, calling the `fetch` function
 from an inline script (such as a `script` tag that contains JavaScript code)
-is only allowed if the `script-src-elem` directive includes `'unsafe-inline'`.
+is only allowed if the `script-src` or `script-src-elem` directive
+includes `'unsafe-inline'`.
 In addition, calling the `eval` function is only allowed
 if the `script-src` directive includes `'unsafe-eval'`.
 
-```typescript
-app.get('/dom-xss', (c: Context) => {
-  return c.text("alert('A DOM XSS occurred!')");
-});
-```
+For an example of an endpoint that returns a string of JavaScript code,
+see the GET endpoint for `/dom-xss` above.
+
+The following HTML uses the `fetch` function
+to send a GET request to that endpoint.
+It then passes the string of JavaScript that is returned
+oto the `eval` function.
 
 ```html
 <script>
