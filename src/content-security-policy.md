@@ -358,7 +358,3 @@ app.get('/dom-xss', (c: Context) => {
   window.onload = domXSS;
 </script>
 ```
-
-## Sanitizing HTML
-
-TODO: Describe this.
