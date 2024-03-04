@@ -66,6 +66,9 @@ See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP"
 target="_blank">Content Security Policy</a>
 for a table of CSP directives that are supported by each browser.
 
+Using CSP reduces, but does not eliminate
+the need to sanitize user-entered HTML.
+
 ## Example Header Values
 
 - `Content-Security-Policy: default-src 'self' demo.com *.demo.com`
@@ -268,13 +271,31 @@ the CSP defined in the server to access several resources.
 </html>
 ```
 
-## Questions
+## integrity Attribute in script tags
 
-Does using a CSP remove the need to sanitize HTML?
+TODO: Describe this!
 
-In "stored cross-site scripting", script tags entered in text input
-get stored in databases and later displayed on pages.
-They are not executed if they are used as `textContent`,
-but are if they are used as `innerHTML`.
+## Cross-Site Scripting Attacks (XSS)
 
-There are other types of cross-site scripting attacks. What are they?
+There are three types of XSS attacks.
+
+### Reflected XSS
+
+TODO: Describe these
+
+### Stored XSS
+
+In this form of XSS, user-entered content is stored, perhaps in a database.
+The content is later used in generated web pages.
+This can be dangerous if users enter `script` tags
+and the content is added as `innerHTML` because the scripts will be executed.
+Adding the content as `textContent` will display `script` tags,
+but not execute them.
+
+### DOM XSS
+
+TODO: Describe these
+
+## Sanitizing HTML
+
+TODO: Describe this.
