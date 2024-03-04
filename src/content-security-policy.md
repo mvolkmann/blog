@@ -273,7 +273,27 @@ the CSP defined in the server to access several resources.
 
 ## integrity Attribute in script tags
 
-TODO: Describe this!
+To prevent executing a script whose contents have been altered,
+perhaps maliciously, include an `integrity` attribute in the `script` tag.
+The value is a hash that is computed based on the contents of the script.
+This is referred to as "SubResource Integrity" (SRI).
+
+Using SRI is especially important when scripts are obtained from a CDN.
+SRI is not typically enforced for scripts loaded from the same origin.
+
+The `integrity` value must begin with a string that identifies
+the hash algorithm, followed by a dash and the hash.
+For an example, see the `script` tag for htmx in the previous section.
+
+One way to generate a hash for a trusted, online resource is to use the site
+<a href="https://www.srihash.org" target="_blank">SRI Hash Generator</a>.
+
+One way to generate a hash for a trusted, local file
+is the use the `openssl` command. For example:
+
+```bash
+cat public/my-script.js | openssl dgst -sha384 -binary | openssl base64 -A
+```
 
 ## Cross-Site Scripting Attacks (XSS)
 
@@ -281,20 +301,63 @@ There are three types of XSS attacks.
 
 ### Reflected XSS
 
-TODO: Describe these
+In this form of XSS, an HTTP endpoint returns
+a string containing one or more `script` tags and
+client-side JavaScript uses it as the `innerHTML` of some element.
+This causes the `script` tags to be executed.
+
+A CSP can prevent such scripts from being executed.
+To intentionally allow them, include `'unsafe-inline'`
+in the value of the `script-src-elem` directive.
+
+The following Hono endpoint returns a script tag.
+
+```typescript
+app.get('/reflective-xss', (c: Context) => {
+  return c.html("<script>alert('A reflective XSS occurred!');</script>");
+});
+```
 
 ### Stored XSS
 
 In this form of XSS, user-entered content is stored, perhaps in a database.
 The content is later used in generated web pages.
-This can be dangerous if users enter `script` tags
-and the content is added as `innerHTML` because the scripts will be executed.
+
+This can be dangerous if users enter `script` tags and
+the content is added as `innerHTML` because the scripts will be executed.
 Adding the content as `textContent` will display `script` tags,
 but not execute them.
 
 ### DOM XSS
 
-TODO: Describe these
+In this form of XSS, JavaScript running in a browser gets a string
+from a source such as the page URL or a fetch request, and executes it.
+One way to execute the string as JavaScript code
+is to pass it to the `eval` function.
+Another way is to set the innerHTML of a DOM element to the string.
+
+With a strict default CSP in place, calling the `fetch` function
+from an inline script (such as a `script` tag that contains JavaScript code)
+is only allowed if the `script-src-elem` directive includes `'unsafe-inline'`.
+In addition, calling the `eval` function is only allowed
+if the `script-src` directive includes `'unsafe-eval'`.
+
+```typescript
+app.get('/dom-xss', (c: Context) => {
+  return c.text("alert('A DOM XSS occurred!')");
+});
+```
+
+```html
+<script>
+  async function domXSS() {
+    const res = await fetch('/dom-xss');
+    const text = await res.text();
+    eval(text);
+  }
+  window.onload = domXSS;
+</script>
+```
 
 ## Sanitizing HTML
 
