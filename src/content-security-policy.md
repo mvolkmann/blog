@@ -49,7 +49,7 @@ Commonly used directives include:
 - `default-src`: restricts access to all kinds of resources
 - `connect-src`: restricts use of <a>, fetch, XMLHttpRequest, WebSocket, and more
 - `font-src`: restricts @font-face CSS at-rule
-- `form-action`: restricts form submissions
+- `form-action`: restricts URLs used in `form` element `action` attributes
 - `img-src`: restricts `<img>` elements
 - `media-src`: restricts `<audio>` and `<video>` elements
 - `object-src`: restricts `<object>` and `<embed>` elements
@@ -87,6 +87,8 @@ It seems odd to want only report these attempts.
 
 Include the `report-to: {url}` directive to specify
 where violation reports should be sent.
+This must be specified in an HTTP response header, not in a `meta` tag.
+
 The report is a JSON object with many properties including:
 
 - `blocked-uri` gives the URI that violated a policy.

@@ -125,6 +125,7 @@ are described in the following table.
 | return JSON response           | `return c.json(someObject);`           |
 | return HTML response           | `return c.html(someHTML);`             |
 | return "Not Found" error       | `return c.notFound();`                 |
+| return empty response          | `return c.body();`                     |
 | redirect to another URL        | `return c.redirect('someURL');`        |
 
 In the `c.html` method, `someHTML` is a string of HTML or JSX.
