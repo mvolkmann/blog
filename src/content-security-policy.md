@@ -187,7 +187,7 @@ const policies = [
 const csp = policies.join('; ');
 ```
 
-It the server code that configures serving static files
+In the server code that configures serving static files
 from a directory like "public", add the
 "Content-Security-Policy" header with the value in the `csp` variable.
 
@@ -229,6 +229,9 @@ Output in the terminal where the server is running will describe
 all the CSP violations.
 One-by-one add the desired CSP directives in the `policies` array
 until all the desired policies are in place.
+
+Once the app is in production, logging attempted CSP violations
+will allow you to know if and how the site is being attacked.
 
 ## Example Web App
 
