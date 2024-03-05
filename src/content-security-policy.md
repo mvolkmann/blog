@@ -64,6 +64,9 @@ Commonly used directives are described in the following table.
 | `script-src`      | combines the previous two directives into one                            |
 | `worker-src`      | restricts `Worker`, `SharedWorker`, and `ServiceWorker` scripts          |
 
+The `default-src` directive specifies the policy for all resource types
+unless policies for specific resource types are also provided.
+
 It is recommended to make `default-src` very restrictive (often just `'self'`)
 and use more specific directives to
 open access for specific kinds of resources.
@@ -79,7 +82,7 @@ for a table of CSP directives that are supported by each browser.
 
 ## Keywords
 
-CSP Keywords are surrounded by single quotes
+CSP keywords are surrounded by single quotes
 to distinguish them from URL patterns.
 
 The keywords that can be used in directive values
@@ -103,11 +106,15 @@ are described in the following table.
 
 - `Content-Security-Policy: default-src 'self' demo.com *.demo.com`
 
-  This specifies that by default all resources must come from the same domain ss this request OR from `demo.com` or any domain that ends in `demo.com`.
+  This specifies that by default all resources must come from the same domain
+  as this request, or `demo.com`, or any domain that ends in `demo.com`.
 
 - `Content-Security-Policy: default-src 'self'; img-src *; media-src my-media.org; script-src https://coder.io`
 
-  This specifies that images can come from anywhere, audio and video can come from `my-media.org`, scripts can come from `coder.io` only using HTTPS, and all other resources must come from the same domain as this request. `default-src` specifies the policy for all resource types unless policies for specific resource types are also provided.
+  This specifies that images can come from anywhere,
+  audio and video can come from `my-media.org`,
+  scripts can come from `coder.io` only using HTTPS, and
+  all other resources must come from the same domain as this request.
 
 ## Reporting
 
@@ -118,7 +125,7 @@ CSP directives that are desired before going to production.
 
 Violation attempts are reported by
 sending a JSON object in an HTTP POST request.
-To specify where reports will be sent
+To specify where reports will be sent,
 add the `report-uri` directive with a value that
 is the URL where POST requests will be sent.
 This can be added to the value of the
@@ -128,33 +135,19 @@ There is no need to supply both headers.
 The `report-uri` directive must be specified in an HTTP response header,
 not in a `meta` tag.
 
-A report JSON object contains many properties including:
+A report JSON object contains many properties including the following.
 
-- `blocked-uri`
-
-  This gives the URI that violated a policy.
-
-- `disposition`
-
-  This will be
-  "enforce" if triggered by a `Content-Security-Policy` header or
-  "report" if triggered by a `Content-Security-Report-Policy` header.
-
-- `document-uri`
-
-  This gives the URI of the document that requested the resource.
-
-- `effective-directive`
-
-  This gives the directive that was violated.
-
-- `script-sample`
-
-  This gives the first 40 characters of the violating script or CSS.
+| Property              | Description                                                                                                                                      |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `blocked-uri`         | This gives the URI that violated a policy.                                                                                                       |
+| `disposition`         | This will be "enforce" if triggered by a `Content-Security-Policy` header or "report" if triggered by a `Content-Security-Report-Policy` header. |
+| `document-uri`        | This gives the URI of the document that requested the resource.                                                                                  |
+| `effective-directive` | This gives the directive that was violated.                                                                                                      |
+| `script-sample`       | This gives the first 40 characters of the violating script or CSS.                                                                               |
 
 The following is an example report that describes
 an issue with getting an image from Unsplash.
-Note the properties "effective-directive" and "blocked-uri".
+Note the properties `effective-directive` and `blocked-uri`.
 
 ```json
 {
@@ -177,14 +170,7 @@ Note the properties "effective-directive" and "blocked-uri".
 A great way to arrive at the desired CSP to start with only the following:
 
 ```ts
-const policies = [
-  // This specifies where POST requests for violation reports will be sent.
-  'report-uri /csp-report',
-
-  // Only resources from the current domain are allowed
-  // unless overridden by a more specific directive.
-  "default-src 'self'"
-];
+const policies = ['report-uri /csp-report', "default-src 'self'"];
 const csp = policies.join('; ');
 ```
 
@@ -207,7 +193,7 @@ app.use('/*', (c: Context, next: Next) => {
 });
 ```
 
-Now define an endpoint to receive the violation reports.
+Now define an endpoint to receive violation reports.
 With Hono this can be done as follows:
 
 ```typescript
@@ -228,11 +214,11 @@ app.post('/csp-report', async (c: Context) => {
 Start the server, browse the app, and exercise all of its functionality.
 Output in the terminal where the server is running will describe
 all the CSP violations.
-One-by-one add the desired CSP directives in the `policies` array
+One-by-one add CSP directives in the `policies` array
 until all the desired policies are in place.
 
 Once the app is in production, logging attempted CSP violations
-will allow you to know if and how the site is being attacked.
+keep you informed about whether and how the site is being attacked.
 
 ## Example Web App
 
