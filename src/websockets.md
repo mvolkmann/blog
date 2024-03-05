@@ -4,7 +4,13 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-<img alt="WebSocket logo" style="width: 30%"
+<style>
+  img {
+    border: 1px solid gray;
+  }
+</style>
+
+<img alt="WebSocket logo" style="border: none; width: 30%"
   src="/blog/assets/websocket-logo.svg?v={{pkg.version}}">
 
 ## Overview
@@ -204,6 +210,88 @@ The following screenshot shows the messages for the WebSocket connection.
 
 ## Bun and Hono
 
+The following code is an example client HTML file
+that connects to the WebSocket server and receives messages.
+It differs from the previous example in that it automatically attempts
+to reconnect to the WebSocket server if the connection is closed.
+
+<img alt="WebSocket reconnecting" style="width: 50%"
+  src="/blog/assets/websocket-reconnecting.png?v={{pkg.version}}">
+
+```js
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>WebSocket Demo</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+      integrity="sha384-U7nmwYozlJwxnpCeC+X+JOS3WWNqSfJKSgSs/VAaek8V0QOo5txs7K1MYuKpjzkI"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      let ws;
+
+      function connect() {
+        console.log('attempting WebSocket connection');
+        ws = new WebSocket('ws://localhost:3001');
+
+        ws.onopen = () => {
+          console.log('WebSocket connection was opened');
+          ws.send('Hello from client!');
+        };
+
+        ws.onmessage = event => {
+          const received = document.getElementById('received');
+          received.textContent = event.data;
+        };
+
+        ws.onerror = error => {
+          console.log('ws error:', error);
+        };
+
+        ws.onclose = () => {
+          console.log('WebSocket connection was closed');
+          // Attempt to reconnect after two seconds.
+          setTimeout(connect, 2000);
+        };
+      }
+
+      connect();
+
+      function close() {
+        // Either the client or the server can close the connection.
+        // ws.send('stop'); // ask server to close the WebSocket
+        ws?.close(); // close WebSocket from client
+      }
+
+      function send(event, message) {
+        const form = event.target;
+        ws?.send(message);
+        form.reset();
+      }
+    </script>
+  </head>
+  <body x-data="{message: ''}">
+    <h1>WebSockets Demo</h1>
+    <form @submit.prevent="send(event, message)">
+      <label>
+        Message
+        <input type="text" x-model="message" />
+      </label>
+      <button>Send</button>
+    </form>
+    <div>
+      <button @click="close()">Close WebSocket Connection</button>
+    </div>
+    <fieldset>
+      <legend>Last Message Received</legend>
+      <div id="received"></div>
+    </fieldset>
+  </body>
+</html>
+```
+
 The following server code uses Bun and
 the {% aTargetBlank "https://hono.dev", "Hono" %} framework.
 The client code remains the same.
@@ -232,7 +320,7 @@ const wsServer = Bun.serve({
     open(ws) {
       console.log('WebSocket is open.');
     },
-    // TODO: Wby is this never called?
+    // TODO: Why is this never called?
     drain(ws) {
       console.log('WebSocket is ready to receive more data.');
     },
@@ -241,11 +329,8 @@ const wsServer = Bun.serve({
       if (message === 'stop') {
         ws.close();
       } else {
-        ws.send('Hello from server!');
+        ws.send(`Thank you for sending "${message}".`);
       }
-    },
-    error(ws, error) {
-      console.error('WebSocket error:', error);
     },
     // See WebSocket protocol status codes at
     // https://datatracker.ietf.org/doc/html/rfc6455#section-7.4
