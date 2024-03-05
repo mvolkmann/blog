@@ -33,6 +33,10 @@ For details, see the MDN page {% aTargetBlank
 "https://developer.mozilla.org/en-US/docs/Web/HTTP/Protocol_upgrade_mechanism",
 "Protocal upgrade mechanism" %}.
 
+Unlike Server-Sent Events (SSE), WebSockets do not provide
+automatic reconnection after the connection is closed.
+However, this can be implemented as show in the "Bun and Hono" section below.
+
 Many WebSocket libraries for server-side
 programming languages/environments exist.
 The example below demonstrates using the highly popular Node.js library
