@@ -42,7 +42,8 @@ No scripts are allowed to be loaded, even those from the current origin.
 ```
 
 Using a CSP reduces, but does not eliminate
-the need to sanitize user-entered HTML.
+the need to escape or sanitize user-entered content
+that is inserted into HTML.
 
 ## Directives
 
@@ -64,7 +65,7 @@ Commonly used directives are described in the following table.
 | `worker-src`      | restricts `Worker`, `SharedWorker`, and `ServiceWorker` scripts          |
 
 It is recommended to make `default-src` very restrictive (often just `'self'`)
-and used more specific directives to
+and use more specific directives to
 open access for specific kinds of resources.
 
 The `report-uri` directive will be replaced by `report-to` in the future.
