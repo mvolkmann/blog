@@ -46,24 +46,28 @@ the need to sanitize user-entered HTML.
 
 ## Directives
 
-Commonly used directives include:
+Commonly used directives are described in the following table.
 
-- `default-src`: restricts access to all kinds of resources
-- `connect-src`: restricts use of <a>, fetch, XMLHttpRequest, WebSocket, and more
-- `font-src`: restricts @font-face CSS at-rule
-- `form-action`: restricts URLs used in `form` element `action` attributes
-- `img-src`: restricts `<img>` elements
-- `media-src`: restricts `<audio>` and `<video>` elements
-- `object-src`: restricts `<object>` and `<embed>` elements
-- `report-uri`: specifies the URL where violation reports are sent
-- `script-src-attr`: restricts sources for JavaScript inline event handlers like `onclick`
-- `script-src-elem`: restricts `<script>` elements
-- `script-src`: combines the previous two in one directive
-- `worker-src`: restricts Worker, SharedWorker, and ServiceWorker scripts
+| Directive         | Description                                                              |
+| ----------------- | ------------------------------------------------------------------------ |
+| `default-src`     | restricts access to all kinds of resources                               |
+| `connect-src`     | restricts use of `<a>`, `fetch`, `XMLHttpRequest`, `WebSocket`, and more |
+| `font-src`        | restricts use of the `@font-face` CSS at-rule                            |
+| `form-action`     | restricts `<form>` element `action` attributes                           |
+| `img-src`         | restricts `<img>` elements                                               |
+| `media-src`       | restricts `<audio>` and `<video>` elements                               |
+| `object-src`      | restricts `<object>` and `<embed>` elements                              |
+| `report-uri`      | specifies the URL where violation reports are sent                       |
+| `script-src-attr` | restricts sources for JavaScript inline event handlers like `onclick`    |
+| `script-src-elem` | restricts `<script>` elements                                            |
+| `script-src`      | combines the previous two directives into one                            |
+| `worker-src`      | restricts `Worker`, `SharedWorker`, and `ServiceWorker` scripts          |
 
 It is recommended to make `default-src` very restrictive (often just `'self'`)
 and used more specific directives to
 open access for specific kinds of resources.
+
+The `report-uri` directive will be replaced by `report-to` in the future.
 
 A small set of directives that are not commonly used
 can only be specified in HTTP headers and not in `meta` tags.
@@ -169,8 +173,6 @@ There is no need to supply both headers.
 
 The `report-uri` directive must be specified in an HTTP response header,
 not in a `meta` tag.
-
-The `report-uri` directive will be replaced by `report-to` in the future.
 
 A report JSON object contains many properties including:
 
