@@ -218,6 +218,63 @@ Note the properties "effective-directive" and "blocked-uri".
 }
 ```
 
+A great way to arrive at the desired CSP to start with only the following:
+
+```ts
+const policies = [
+  // This specifies where POST requests for violation reports will be sent.
+  'report-uri /csp-report',
+
+  // Only resources from the current domain are allowed
+  // unless overridden by a more specific directive.
+  "default-src 'self'"
+];
+const csp = policies.join('; ');
+```
+
+It the server code that configures serving static files
+from a directory like "public", add the
+"Content-Security-Policy" header with the value in the `csp` variable.
+
+With Hono this can be done as follows:
+
+```typescript
+app.use('/*', (c: Context, next: Next) => {
+  c.header('Content-Security-Policy', csp);
+  const yearSeconds = 31536000;
+  c.header(
+    'Strict-Transport-Security',
+    `max-age=${yearSeconds}; includeSubDomains`
+  );
+  const fn = serveStatic({root: './public'});
+  return fn(c, next);
+});
+```
+
+Now define an endpoint to receive the violation reports.
+With Hono this can be done as follows:
+
+```typescript
+app.post('/csp-report', async (c: Context) => {
+  const json = await c.req.json();
+  const report = json['csp-report'];
+  let file = report['document-uri'];
+  if (file.endsWith('/')) file = 'index.html';
+  console.log(
+    `${file} attempted to access ${report['blocked-uri']} which ` +
+      `violates the ${report['effective-directive']} CSP directive.`
+  );
+  c.status(403);
+  return c.text('CSP violation');
+});
+```
+
+Start the server, browse the app, and exercise all of its functionality.
+Output in the terminal where the server is running will describe
+all the CSP violations.
+One-by-one add the desired CSP directives in the `policies` array
+until all the desired policies are in place.
+
 ## Example Web App
 
 The following code implements an HTTP server using the JavaScript-based
@@ -230,6 +287,10 @@ import {serveStatic} from 'hono/bun';
 import './reload-server.js';
 
 const policies = [
+  // This specifies where POST requests for violation reports will be sent.
+  // In the future, "report-uri" will be replaced by "report-to".
+  'report-uri /csp-report',
+
   // Only resources from the current domain are allowed
   // unless overridden by a more specific directive.
   "default-src 'self'",
@@ -243,26 +304,22 @@ const policies = [
   // that begins with https://fonts.googleapis.com.
   // The linked font file contains @font-face CSS rules
   // with a src URL beginning with https://fonts.gstatic.com.
-  "font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com",
+  'font-src https://fonts.googleapis.com https://fonts.gstatic.com',
 
   // This allows getting images from Unsplash.
-  "img-src 'self' https://images.unsplash.com",
+  'img-src https://images.unsplash.com',
 
   // This allows getting videos from googleapis.
-  "media-src 'self' http://commondatastorage.googleapis.com",
-
-  // This specifies where POST requests for violation reports will be sent.
-  // In the future, "report-uri" will be replaced by "report-to".
-  'report-uri /csp-report',
+  'media-src http://commondatastorage.googleapis.com',
 
   // This allows downloading the htmx library from a CDN.
   "script-src-elem 'self' 'report-sample' https://unpkg.com",
 
   // This allows htmx.min.js to insert style elements.
-  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com"
+  "style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com"
 ];
 const csp = policies.join('; ');
-console.log('server.tsx: csp =', csp);
+// console.log('server.tsx: csp =', csp);
 
 const app = new Hono();
 
@@ -300,8 +357,15 @@ app.get('/version', (c: Context) => {
 
 // This receives reports of CSP violations in a JSON object.
 app.post('/csp-report', async (c: Context) => {
-  const report = await c.req.json();
-  console.log(report);
+  const json = await c.req.json();
+  const report = json['csp-report'];
+  // console.log(report);
+  let file = report['document-uri'];
+  if (file.endsWith('/')) file = 'index.html';
+  console.log(
+    `${file} attempted to access ${report['blocked-uri']} which ` +
+      `violates the ${report['effective-directive']} CSP directive.`
+  );
   c.status(403);
   return c.text('CSP violation');
 });
