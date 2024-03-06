@@ -42,12 +42,12 @@ No scripts are allowed to be loaded, even those from the current origin.
 ```
 
 Using a CSP reduces, but does not eliminate
-the need to escape or sanitize user-entered content
+the need to sanitize and/or escape user-supplied content
 that is inserted into HTML.
 
 ## Directives
 
-Commonly used directives are described in the following table.
+The following table describes commonly used CSP directives.
 
 | Directive         | Description                                                              |
 | ----------------- | ------------------------------------------------------------------------ |
@@ -67,14 +67,15 @@ Commonly used directives are described in the following table.
 The `default-src` directive specifies the policy for all resource types
 unless policies for specific resource types are also provided.
 
-It is recommended to make `default-src` very restrictive (often just `'self'`)
-and use more specific directives to
+It is recommended to make `default-src` very restrictive
+(typically just `'self'`) and supply more targeted directives to
 open access for specific kinds of resources.
 
 The `report-uri` directive will be replaced by `report-to` in the future.
 
 A small set of directives that are not commonly used
 can only be specified in HTTP headers and not in `meta` tags.
+One example is the `report-uri` directive.
 
 See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP"
 target="_blank">Content Security Policy</a>
@@ -85,8 +86,7 @@ for a table of CSP directives that are supported by each browser.
 CSP keywords are surrounded by single quotes
 to distinguish them from URL patterns.
 
-The keywords that can be used in directive values
-are described in the following table.
+The following table describes the keywords that can be used in directive values.
 
 | Keyword                    | Description                                                                                                                                                             |
 | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -106,14 +106,15 @@ are described in the following table.
 
 - `Content-Security-Policy: default-src 'self' demo.com *.demo.com`
 
-  This specifies that by default all resources must come from the same domain
-  as this request, or `demo.com`, or any domain that ends in `demo.com`.
+  This header specifies that by default all resources must come from
+  the same domain as this request, `demo.com`,
+  or any domain that ends in `demo.com`.
 
 - `Content-Security-Policy: default-src 'self'; img-src *; media-src my-media.org; script-src https://coder.io`
 
-  This specifies that images can come from anywhere,
+  This header specifies that images can come from anywhere,
   audio and video can come from `my-media.org`,
-  scripts can come from `coder.io` only using HTTPS, and
+  scripts can come from `coder.io` only if HTTPS is used, and
   all other resources must come from the same domain as this request.
 
 ## Reporting
@@ -128,8 +129,8 @@ sending a JSON object in an HTTP POST request.
 To specify where reports will be sent,
 add the `report-uri` directive with a value that
 is the URL where POST requests will be sent.
-This can be added to the value of the
-`Content-Security-Policy` or `Content-Security-Policy-Report` header.
+This can be added in the `Content-Security-Policy` or
+`Content-Security-Policy-Report` header.
 There is no need to supply both headers.
 
 The `report-uri` directive must be specified in an HTTP response header,
@@ -137,13 +138,13 @@ not in a `meta` tag.
 
 A report JSON object contains many properties including the following.
 
-| Property              | Description                                                                                                                                      |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `blocked-uri`         | This gives the URI that violated a policy.                                                                                                       |
-| `disposition`         | This will be "enforce" if triggered by a `Content-Security-Policy` header or "report" if triggered by a `Content-Security-Report-Policy` header. |
-| `document-uri`        | This gives the URI of the document that requested the resource.                                                                                  |
-| `effective-directive` | This gives the directive that was violated.                                                                                                      |
-| `script-sample`       | This gives the first 40 characters of the violating script or CSS.                                                                               |
+| Property              | Description                                                                                                                        |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `blocked-uri`         | URI that violated a policy                                                                                                         |
+| `disposition`         | "enforce" if triggered by a `Content-Security-Policy` header or "report" if triggered by a `Content-Security-Report-Policy` header |
+| `document-uri`        | URI of the document that requested the resource                                                                                    |
+| `effective-directive` | directive that was violated                                                                                                        |
+| `script-sample`       | first 40 characters of the violating script or CSS                                                                                 |
 
 The following is an example report that describes
 an issue with getting an image from Unsplash.
@@ -167,6 +168,8 @@ Note the properties `effective-directive` and `blocked-uri`.
 }
 ```
 
+## Building a CSP
+
 A great way to arrive at the desired CSP to start with only the following:
 
 ```ts
@@ -178,7 +181,7 @@ In the server code that configures serving static files
 from a directory like "public", add the
 "Content-Security-Policy" header with the value in the `csp` variable.
 
-With Hono this can be done as follows:
+With the Hono library this can be done as follows:
 
 ```typescript
 app.use('/*', (c: Context, next: Next) => {
@@ -194,7 +197,7 @@ app.use('/*', (c: Context, next: Next) => {
 ```
 
 Now define an endpoint to receive violation reports.
-With Hono this can be done as follows:
+With the Hono library this can be done as follows:
 
 ```typescript
 app.post('/csp-report', async (c: Context) => {
@@ -202,7 +205,7 @@ app.post('/csp-report', async (c: Context) => {
   const report = json['csp-report'];
   let file = report['document-uri'];
   if (file.endsWith('/')) file = 'index.html';
-  console.log(
+  console.error(
     `${file} attempted to access ${report['blocked-uri']} which ` +
       `violates the ${report['effective-directive']} CSP directive.`
   );
@@ -217,7 +220,7 @@ all the CSP violations.
 One-by-one add CSP directives in the `policies` array
 until all the desired policies are in place.
 
-Once the app is in production, logging attempted CSP violations
+Once the app is in production, logging attempted CSP violations will
 keep you informed about whether and how the site is being attacked.
 
 ## Example Web App
@@ -427,64 +430,54 @@ cat public/my-script.js | openssl dgst -sha384 -binary | openssl base64 -A
 
 ## Cross-Site Scripting Attacks (XSS)
 
+A XSS attack can occur when JavaScript running in a browser obtains text
+that may contain JavaScript code and uses it in one of the following ways
+which result in executing the JavaScript.
+
+- set the `innerHTML` property of a DOM element to text
+  which includes `script` tags that contain JavaScript code
+- pass text containing JavaScript code to the `eval` function
+- pass text containing JavaScript code as the first argument
+  to the `setTimeout` or `setInterval` function
+
+This is particularly concerning when
+the text includes calls to the `fetch` function.
+With a strict default CSP in place,
+calling the `fetch` function from an inline script is only allowed
+if the `script-src` or `script-src-elem` directive
+includes the `unsafe-inline` keyword.
+
+Similarly, calling the `eval` function is only allowed if the
+`script-src` or `script-src-elem` directive includes `'unsafe-eval'`.
+
+A CSP can prevent scripts found in text from being executed.
+The easiest way is to include the directive `default-src 'self'`.
+To intentionally allow executing such scripts,
+include the `'unsafe-inline'` keyword in the value of the
+`script-src` or `script-src-elem` directive.
+
 There are three types of XSS attacks.
 
 ### Reflected XSS
 
 In this form of XSS, an HTTP endpoint returns
-a string containing one or more `script` tags.
-Client-side JavaScript then sets the `innerHTML` of some element
-to the string.
-That causes the `script` tags to be executed.
-
-A CSP can prevent such scripts from being executed.
-The easiest way is to include the directive `default-src 'self'`.
-To intentionally allow executing such scripts, include `'unsafe-inline'`
-in the value of the `script-src` or `script-src-elem` directive.
+text containing one or more `script` tags.
+Client-side JavaScript then uses it in one of the ways described above.
 
 For an example of an endpoint that returns a `script` tag,
 see the GET endpoint for `/reflective-xss` above.
 
 ### Stored XSS
 
-In this form of XSS, user-entered content is stored, perhaps in a database.
-The content is later used in generated web pages.
-
-This can be dangerous if users enter `script` tags and the content
-is later added as `innerHTML` because the scripts will be executed.
-On the other hand, adding the content as `textContent`
-will display `script` tags, but not execute them.
+In this form of XSS, user-supplied content is stored, perhaps in a database.
+The content is later used in generated HTML
+in one of the ways described above.
 
 ### DOM XSS
 
-In this form of XSS, JavaScript running in a browser gets a string
-from a source such as the page URL or a fetch request, and executes it.
-One way to execute the string as JavaScript code
-is to pass it to the `eval` function.
-Another way is to set the `innerHTML` of a DOM element to the string.
-
-With a strict default CSP in place, calling the `fetch` function
-from an inline script (such as a `script` tag that contains JavaScript code)
-is only allowed if the `script-src` or `script-src-elem` directive
-includes `'unsafe-inline'`.
-In addition, calling the `eval` function is only allowed
-if the `script-src` directive includes `'unsafe-eval'`.
+In this form of XSS, client-side JavaScript gets text
+from a source such as the page URL or a fetch request,
+and uses it in one of the ways described above.
 
 For an example of an endpoint that returns a string of JavaScript code,
 see the GET endpoint for `/dom-xss` above.
-
-The following HTML uses the `fetch` function
-to send a GET request to that endpoint.
-It then passes the string of JavaScript that is returned
-oto the `eval` function.
-
-```html
-<script>
-  async function domXSS() {
-    const res = await fetch('/dom-xss');
-    const text = await res.text();
-    eval(text);
-  }
-  window.onload = domXSS;
-</script>
-```
