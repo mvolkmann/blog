@@ -250,9 +250,11 @@ To use a quicklink:
 
 Mozilla Developer Network (MDN) does not perform searches
 using a URL query parameters, so you cannot create a quicklink for it.
-However, there is an extension you can install from the "store"
+However, there is an extension that can be installed from the "store"
 that searches MDN called "Search MDN".
 The command name this adds is "Search Web Docs".
+It displays documentation in the Raycast window
+and provides a "Open in Browser" button.
 
 ## Search Emojis & Symbols
 
