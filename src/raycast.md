@@ -200,6 +200,10 @@ To disable saving clipboard entries from specific apps (such as 1Password):
 - Click the "Select More Apps" button under "Disabled Application".
 - Select an application.
 
+To delete entries from the clipboard history, press cmd-k and
+select "Delete Entry", "Delete Entries..." (last 5, 15, or 30 minutes),
+or "Delete All Entries".
+
 ## File Search
 
 To search for files, open Raycast, type "sf",
