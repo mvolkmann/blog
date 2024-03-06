@@ -78,6 +78,43 @@ The steps for first-time configuration of Raycast are:
 See the official
 <a href="https://manual.raycast.com" target="_blank">Raycast Manual</a>.
 
+## Raycast Window
+
+The search input at the top of the Raycast window
+supports fuzzy searches.
+For example, typing "vc" will match "Visual Studio Code".
+
+Regardless of which "page" you have navigated to within the Raycast window,
+you can press cmd-k to see a popup that
+lists context-sensitive actions that are available.
+
+Press esc to go back to the previous page.
+
+When on the main page, pressing esc will close the Raycast window.
+
+Press cmd-esc to go back to the main page.
+
+Press cmd-w from any page to close the Raycast window.
+
+## Settings
+
+To open the Raycast settings dialog, open Raycast and press cmd-comma.
+
+Click the "Extensions" tab in the settings dialog
+to enable and disable extensions.
+
+## Command Aliases and Hotkeys
+
+To assign aliases and hotkeys to commands,
+open Raycast, open the settings dialog, click the "Extension" tab,
+select a command, and enter an alias and/or a hotkey for the command.
+
+## Contacts
+
+To search contacts, open Raycast, enter "con", select "Contacts",
+and enter part of a name.
+The first time you do this you will need to grant permission.
+
 ## Launching Apps
 
 To quickly launch an app, press the hotkey for Raycast,
@@ -88,13 +125,6 @@ Raycast will provide suggestions for recently or frequently used apps.
 The app you want is in the list of suggestions, navigate to it
 with the up and down arrow keys and press return to launch it.
 
-## Settings
-
-To open the Raycast settings dialog, open Raycast and press cmd-comma.
-
-Click the "Extensions" tab in the settings dialog
-to enable and disable extensions.
-
 ## Calculator
 
 To perform a calculation, open Raycast, type "calc",
@@ -102,6 +132,10 @@ select "Calculator History", and enter an expression.
 The result is automatically copied to the clipboard.
 
 For example, "sin(19)^2 + cos(19)^2" gives 1.
+
+This can also perform unit conversions.
+For example, entering 10 km gives 6.2137119224 mi
+and entering 70 F gives 21.1111111111 °C.
 
 A history of previous calculations is maintained
 so you can copy their result to the clipboard again.
@@ -142,6 +176,13 @@ by selecting "Authorize to search user folders".
 To enable search both file names and contents, open the Raycast settings,
 click the "Extension" tab, select "Search Files", and
 change the "Search By" option to "Name and Contents".
+
+Move the cursor to one of the listed files, then press:
+
+- return to open it in its default application
+- cmd-o to open it in a given application (select the application)
+- cmd-return to show it in the Finder
+- cmd-shift-c to copy to file to another directory
 
 So far this doesn't seem to be able to find all files by their name.
 For example, it cannot file Documents/BeverlyHillbillies.txt.
