@@ -182,6 +182,7 @@ and select "My Schedule".
 
 To view clipboard history, open Raycast, enter "clip",
 and select "Clipboard History".
+By default only entries from the last 7 days are saved.
 
 Filter the list by entering search text.
 
@@ -190,6 +191,14 @@ when it was created, and more.
 
 Double-click an entry to copy it to the clipboard
 AND paste it at the current cursor location.
+
+To disable saving clipboard entries from specific apps (such as 1Password):
+
+- Open the Raycast settings.
+- Click the "Extensions" tab.
+- Select "Clipboard History".
+- Click the "Select More Apps" button under "Disabled Application".
+- Select an application.
 
 ## File Search
 
@@ -278,6 +287,11 @@ For example, enter "kiss" to see only the related emojis and symbols.
 Raycast snippets are text identified by keywords.
 When the keywords are entered in _any_ application,
 they are replaced by the associated text.
+
+To see the existing snippets:
+
+- Open Raycast.
+- Enter "sni" and select "Search Snippets".
 
 To define a snippet:
 
