@@ -137,9 +137,13 @@ without first selecting "Calculator History"!
 For example, "sin(19)^2 + cos(19)^2" gives 1.
 
 This can also perform unit conversions.
-For example, entering 10 km gives 6.2137119224 mi,
-entering 70 F gives 21.1111111111 °C, and
-entering 8 in in mm gives 203.2 mm.
+For example:
+
+- 10 km gives 6.2137119224 mi
+- 70 F gives 21.1111111111 °C
+- 8 in in mm gives 203.2 mm
+- days until april 16 gives 41 (today)
+- time in boston gives 12:30 PM
 
 A history of previous calculations is maintained
 so you can copy their result to the clipboard again.
@@ -190,3 +194,49 @@ Move the cursor to one of the listed files, then press:
 
 So far this doesn't seem to be able to find all files by their name.
 For example, it cannot file Documents/BeverlyHillbillies.txt.
+
+## Store
+
+The Raycast Store is the place to download more extentions.
+To open it, open Raycast and enter "store".
+
+## System Commands
+
+Raycast provides many system commands including:
+
+- Empty Trash
+- Restart
+- Show Desktop
+- Shut Down
+- Sleep
+- Toggle System Appearance (between light and dark mode)
+
+## Window Managment
+
+Raycast provides many commands to change the size and location of windows.
+The most useful are the following:
+
+- enter "max" for Maximize and Maximize Height|Width
+- enter "hal" for Left|Right|Bottom|Top|Center Half
+- enter "thi" for First|First Two|Last|Last Two|Center Third
+- enter "fou" for First|Second|Third|Last Fourth
+- enter "qua" for Top Left|Top Right|Bottom Left|Bottom Right Quarter
+- enter "mov" for Move Left|Right|Up|Down
+- enter "dis" for Previous|Next Display
+- enter "cen" for Center
+- enter "tog" for Toggle Fullscreen
+
+I created these keyboard shortcuts:
+
+| Command          | Shortcut              |
+| ---------------- | --------------------- |
+| left half        | cmd-left arrow        |
+| right half       | cmd-right arrow       |
+| bottom half      | cmd-down arrow        |
+| top half         | cmd-up arrow          |
+| center half      | cmd-shift-c           |
+| left quarter     | cmd-shift-left arrow  |
+| right quarter    | cmd-shift-right arrow |
+| maximize         | cmd-shift-m           |
+| next display     | cmd-shift-n           |
+| previous display | cmd-shift-p           |
