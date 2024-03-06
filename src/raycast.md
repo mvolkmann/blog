@@ -227,7 +227,8 @@ For example, it cannot file Documents/BeverlyHillbillies.txt.
 
 ## Quicklinks
 
-Quicklinks simplify searching specific web sites.
+Quicklinks simplify opening URLs and
+supplying a query parameter for sites the perform searching.
 The only quicklinks that are provided are
 "Search DuckDuckGo" and "Search Google".
 
@@ -255,7 +256,8 @@ performs a search using a URL query parameter:
   For example, "Search YouTube".
 - Paste the URL in the "Link" input.
   For example, "https://www.youtube.com/results?search_query=giraffe"
-- Replace the search term with "{Query}".
+- Optionally replace the search term with "{Query}"
+  for URLs that include a search query parameter.
   For example, "https://www.youtube.com/results?search_query={Query}"
 - Select the web browser to be used.
 - Click the "Create Quicklink" button.
@@ -266,6 +268,10 @@ To use a quicklink:
 - Enter part of the quicklink name.
 - Highlight the quicklink using the up and down arrow keys.
 - Enter a search term and press the return key.
+
+I created a quicklink for the website [removebg](https://www.remove.bg)
+which removes the background from images.
+I gave it the alias "bg".
 
 Mozilla Developer Network (MDN) does not perform searches
 using a URL query parameters, so you cannot create a quicklink for it.
@@ -366,3 +372,10 @@ I created these keyboard shortcuts:
 | maximize         | cmd-shift-m           |
 | next display     | cmd-shift-n           |
 | previous display | cmd-shift-p           |
+
+## Popular Extensions
+
+- GitHub
+- Kill Process
+- Music
+- System Monitor
