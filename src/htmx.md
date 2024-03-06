@@ -1077,7 +1077,7 @@ A good library for sanitizing HTML is {% aTargetBlank
 "https://github.com/apostrophecms/sanitize-html", "sanitize-html" %}.
 This provides the function `sanitizeHtml` which
 strips out all elements that are not in an approved list.
-The `script` element is in this list
+The `script` element is not in the approved list
 because they may do malicious things.
 
 See the working example project at {% aTargetBlank
