@@ -87,6 +87,12 @@ For example, typing "vc" will match "Visual Studio Code".
 Press the up and down arrow keys to highlight an item
 in the list of suggestions or matches.
 
+Press cmd-k to see a list of actions
+that can be performed on the highlighted item.
+One action that can be performed on a command is "Add to Favorites"
+which adds it to the list of favorite commands
+that are always visible on the starting Raycast page.
+
 Regardless of which Raycast "page" you have navigated to within the window
 and which item is highlighted, you can press cmd-k to see a popup
 that lists context-sensitive actions that are available.
