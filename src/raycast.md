@@ -84,17 +84,25 @@ The search input at the top of the Raycast window
 supports fuzzy searches.
 For example, typing "vc" will match "Visual Studio Code".
 
-Regardless of which "page" you have navigated to within the Raycast window,
-you can press cmd-k to see a popup that
-lists context-sensitive actions that are available.
+Press the up and down arrow keys to highlight an item
+in the list of suggestions or matches.
+
+Regardless of which Raycast "page" you have navigated to within the window
+and which item is highlighted, you can press cmd-k to see a popup
+that lists context-sensitive actions that are available.
+
+For example, on the "Search Files" page when a file is highlighted
+the available actions include "Open", "Show in Finder", "Quick Look",
+"Open With...", "Show Info in Finder", "Enclosing Folder",
+"Toggle Details", "Share...", "Move to...", "Copy to...", "Duplicate",
+"Copy File", "Copy Name", "Copy Path", and "Move to Trash".
 
 Press esc to go back to the previous page.
-
-When on the main page, pressing esc will close the Raycast window.
+When on the starting page, pressing esc will close the Raycast window.
 
 Press cmd-esc to go back to the main page.
 
-Press cmd-w from any page to close the Raycast window.
+Press cmd-w on any page to close the Raycast window.
 
 ## Settings
 
