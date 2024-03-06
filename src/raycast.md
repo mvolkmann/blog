@@ -10,6 +10,11 @@ layout: topic-layout.njk
   }
 </style>
 
+<figure style="width: 30%">
+  <img alt="Raycast logo" style="border: 0"
+    src="/blog/assets/raycast-logo.png?v={{pkg.version}}">
+</figure>
+
 ## Overview
 
 <a href="https://www.raycast.com" target="_blank">Raycast</a> is a macOS
@@ -64,5 +69,25 @@ The steps for first-time configuration of Raycast are:
    to receive periodic information about Raycast.
 1. Click the "Continue" button.
 1. Click the "Launch Raycast" button.
-1. Click "Start supercharging your productivity"
+1. Double-click "Start supercharging your productivity"
    for a walkthrough of Raycast features.
+1. Double-click each topic to learn more.
+
+## Launching Apps
+
+To quickly launch an app, press the hotkey for Raycast,
+enter part of the app name, and press the return key.
+For example, 1Password can be launched by just typing "1p".
+
+Raycast will provide suggestions for recently or frequently used apps.
+The app you want is in the list of suggestions, navigate to it
+with the up and down arrow keys and press return to launch it.
+
+## Settings
+
+To open the Raycast settings dialog, open Raycast and press cmd-comma.
+
+Click the "Extensions" tab in the settings dialog
+to enable and disable extensions.
+
+## File Search
