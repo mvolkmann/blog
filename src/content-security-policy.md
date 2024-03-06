@@ -228,15 +228,15 @@ keep you informed about whether and how the site is being attacked.
 The following code implements an HTTP server using the JavaScript-based
 server <a href="https://hono.dev" target="_blank">Hono</a> library.
 It also uses <a href="/blog/topics/#/blog/htmx/" target="_blank">htmx</a>.
+Comments in the code explain everything related to
+the CSP that it constructs and uses.
 
 ```typescript
 import {type Context, Hono, type Next} from 'hono';
 import {serveStatic} from 'hono/bun';
-import './reload-server.js';
 
 const policies = [
   // This specifies where POST requests for violation reports will be sent.
-  // In the future, "report-uri" will be replaced by "report-to".
   'report-uri /csp-report',
 
   // Only resources from the current domain are allowed
@@ -244,7 +244,7 @@ const policies = [
   "default-src 'self'",
 
   // This allows sending HTTP requests to the JSONPlaceholder API.
-  // It also allows reload-client.js to create a WebSocket.
+  // It also allows client-side JavaScript code to create a WebSocket.
   "connect-src 'self' https://jsonplaceholder.typicode.com ws:",
 
   // This allows getting Google fonts.
@@ -261,19 +261,19 @@ const policies = [
   'media-src http://commondatastorage.googleapis.com',
 
   // This allows downloading the htmx library from a CDN.
-  "script-src-elem 'self' 'report-sample' https://unpkg.com",
+  "script-src-elem 'self' https://unpkg.com",
 
-  // This allows htmx.min.js to insert style elements.
+  // This allows the htmx library to insert style elements.
   "style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com"
 ];
+
 const csp = policies.join('; ');
-// console.log('server.tsx: csp =', csp);
 
 const app = new Hono();
 
 // Serve static files from the public directory.
-// app.use('/*', serveStatic({root: './public'}));
 app.use('/*', (c: Context, next: Next) => {
+  // Add a header to enforce the CSP.
   c.header('Content-Security-Policy', csp);
 
   // Tell the browser that the site can only be accessed using HTTPS,
@@ -289,28 +289,32 @@ app.use('/*', (c: Context, next: Next) => {
   return fn(c, next);
 });
 
+// This can be used to test blocking a DOM XSS attack.
 app.get('/dom-xss', (c: Context) => {
   return c.text("alert('A DOM XSS occurred!')");
 });
 
+// This can be used to test blocking a reflective XSS attack.
 app.get('/reflective-xss', (c: Context) => {
   return c.html("<script>alert('A reflective XSS occurred!');</script>");
 });
 
+// This can be used to test blocking a stored XSS attack.
 app.get('/version', (c: Context) => {
-  // Return a Response whose body contains
-  // the version of Bun running on the server.
-  return c.text('v' + Bun.version);
+  // The html tagged template literal escapes
+  // HTML elements in strings, but not in JSX!
+  const storedContent = '<script>alert("XSS!");</script>';
+  const escaped = html`v${Bun.version} ${storedContent}`;
+  return c.html(escaped);
 });
 
 // This receives reports of CSP violations in a JSON object.
 app.post('/csp-report', async (c: Context) => {
   const json = await c.req.json();
   const report = json['csp-report'];
-  // console.log(report);
   let file = report['document-uri'];
   if (file.endsWith('/')) file = 'index.html';
-  console.log(
+  console.error(
     `${file} attempted to access ${report['blocked-uri']} which ` +
       `violates the ${report['effective-directive']} CSP directive.`
   );
@@ -321,8 +325,8 @@ app.post('/csp-report', async (c: Context) => {
 export default app;
 ```
 
-The following HTML in `public/index.html` relies on
-the CSP defined in the server to access several resources.
+The following HTML in `public/index.html` relies on the
+CSP defined in the server above to access several resources.
 
 ```html
 <html>
@@ -343,20 +347,16 @@ the CSP defined in the server to access several resources.
       integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
       crossorigin="anonymous"
     ></script>
-    <!-- We could get the htmx library from
-         a local copy instead of from a CDN. -->
-    <!-- <script src="htmx.min.js"></script> -->
 
-    <script src="reload-client.js" type="module"></script>
-
-    <!-- <script>
+    <!-- This is used to verify that DOM XSS attacks are blocked. -->
+    <script>
       async function domXSS() {
         const res = await fetch('/dom-xss');
         const text = await res.text();
         eval(text);
       }
       window.onload = domXSS;
-    </script> -->
+    </script>
   </head>
   <body>
     <h2>This demonstrates the Google font "Kode Mono".</h2>
@@ -382,9 +382,10 @@ the CSP defined in the server to access several resources.
       <span id="version"></span>
     </div>
 
-    <!-- This should require the form-action CSP directive, but it doesn't. -->
-    <!-- <form method="post" action="https://jsonplaceholder.typicode.com/todos"> -->
-
+    <!-- When this form is submitted,
+         an HTTP POST request is sent to the specified URL
+         and the HTML it returns becomes the innerHTML of
+         the div element below with the id "todo". -->
     <form
       hx-post="https://jsonplaceholder.typicode.com/todos"
       hx-target="#todo"
