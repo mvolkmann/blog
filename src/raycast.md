@@ -131,11 +131,15 @@ To perform a calculation, open Raycast, type "calc",
 select "Calculator History", and enter an expression.
 The result is automatically copied to the clipboard.
 
+Actually calculator expressions can be entered in the initial search input
+without first selecting "Calculator History"!
+
 For example, "sin(19)^2 + cos(19)^2" gives 1.
 
 This can also perform unit conversions.
-For example, entering 10 km gives 6.2137119224 mi
-and entering 70 F gives 21.1111111111 °C.
+For example, entering 10 km gives 6.2137119224 mi,
+entering 70 F gives 21.1111111111 °C, and
+entering 8 in in mm gives 203.2 mm.
 
 A history of previous calculations is maintained
 so you can copy their result to the clipboard again.
