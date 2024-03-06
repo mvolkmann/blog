@@ -148,8 +148,9 @@ This can also perform unit conversions.
 For example:
 
 - 10 km gives 6.2137119224 mi
-- 70 F gives 21.1111111111 °C
 - 8 in in mm gives 203.2 mm
+- 70 F gives 21.1111111111 °C
+- 1 euro in usd gives $1.09
 - days until april 16 gives 41 (today)
 - time in boston gives 12:30 PM
 
@@ -168,13 +169,15 @@ select "Calendar", and click the "Permission Required" button.
 A dialog will appear. Click the "Grant Access" button.
 Another dialog will appear. Click the "Allow Full Access" button.
 
-To see your schedule for today, open Raycast, enter "my sch",
+To see your schedule for today, open Raycast, enter "sche",
 and select "My Schedule".
 
 ## Clipboard History
 
 To view clipboard history, open Raycast, enter "clip",
 and select "Clipboard History".
+
+Filter the list by entering search text.
 
 Click an entry to see which application created it,
 when it was created, and more.
@@ -203,10 +206,71 @@ Move the cursor to one of the listed files, then press:
 So far this doesn't seem to be able to find all files by their name.
 For example, it cannot file Documents/BeverlyHillbillies.txt.
 
+## Quicklinks
+
+Quicklinks simplify searching specific web sites.
+The only quicklinks that are provided are
+"Search DuckDuckGo" and "Search Google".
+
+To add a predefined quicklink:
+
+- Open Raycast.
+- Press cmd-comma to open the settings.
+- Click the "Extensions" tab.
+- Select "Quicklinks".
+- Click the "Find in Library" button on the right.
+- Select a quicklink.
+  Examples include "Search Wikipedia" and "Search YouTube".
+- In the dialog that appears, click the "Create Quicklink" button.
+
+To create a new quicklink for a website that
+performs a search using a URL query parameter:
+
+- Go to the desired site in a web browser.
+- Perform a search.
+- Copy the URL of the result page.
+- Open Raycast.
+- Type "quick".
+- Double-click "Create Quicklink".
+- Enter a name for the new Quicklink.
+  For example, "Search YouTube".
+- Paste the URL in the "Link" input.
+  For example, "https://www.youtube.com/results?search_query=giraffe"
+- Replace the search term with "{Query}".
+  For example, "https://www.youtube.com/results?search_query={Query}"
+- Select the web browser to be used.
+- Click the "Create Quicklink" button.
+
+To use a quicklink:
+
+- Open Raycast.
+- Enter part of the quicklink name.
+- Highlight the quicklink using the up and down arrow keys.
+- Enter a search term and press the return key.
+
+Mozilla Developer Network (MDN) does not perform searches
+using a URL query parameters, so you cannot create a quicklink for it.
+However, there is an extension you can install from the "store"
+that searches MDN called "Search MDN".
+The command name this adds is "Search Web Docs".
+
+## Search Emojis & Symbols
+
+This command displays a list of all emojis and symbols.
+To quickly find this command, enter "emo".
+
+Enter a search term to filter the list.
+
+Double-click an emoji or symbol to insert it at the current cursor position.
+
+For example, enter "kiss" to see only the related emojis and symbols.
+
 ## Store
 
 The Raycast Store is the place to download more extentions.
 To open it, open Raycast and enter "store".
+
+I installed the "Search MDN" extension.
 
 ## System Commands
 
