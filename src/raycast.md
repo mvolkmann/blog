@@ -273,6 +273,34 @@ Double-click an emoji or symbol to insert it at the current cursor position.
 
 For example, enter "kiss" to see only the related emojis and symbols.
 
+## Snippets
+
+Raycast snippets are text identified by keywords.
+When the keywords are entered in _any_ application,
+they are replaced by the associated text.
+
+To define a snippet:
+
+- Open Raycast.
+- Enter "sni" and select "Create Snippet".
+- Enter a descriptive name.
+- Enter the text of the snippet.
+- Enter the keyword that will be used to activate the snippet.
+
+The snippet text can contain placeholders.
+For details, see <a href="https://manual.raycast.com/dynamic-placeholders"
+target="_blank">Dynamic Placeholders</a>.
+
+For example, the following snippet adds an HTML anchor tag.
+
+```html
+<a href="{argument name="url"" target="_blank">{argument name="title"}</a>
+```
+
+If this is given the keyword "atb" and that keyword is entered in any application,
+a dialog will appear to prompt for values for "url" and "title".
+After entering the values, click the "Expand" button or press cmd-return.
+
 ## Store
 
 The Raycast Store is the place to download more extentions.
