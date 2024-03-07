@@ -492,3 +492,15 @@ React (using a custom renderer like React Native), Node, and Markdown.
 The custom renderer uses Raycast-specific components
 rather than HTML and CSS.
 AppleScript is used communication with macOS apps.
+
+To create a new extension:
+
+1. Open Raycast
+1. Open the "Create Extension" command.
+1. Select a template.
+1. Enter an extension name.
+1. Enter a description.
+1. Select a category.
+1. Select the location where the project will be stored.
+1. Enter the name of the command that will be defined.
+   TODO: How does an extension define more than one?
