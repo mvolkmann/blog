@@ -460,6 +460,14 @@ for each of the four "Move" commands.
 - iTranslate - language translations and speech
 - Kill Process
 - Music
+- Port Manager
+
+  Enter "port" and select the "Open Ports" command.
+  Filter the list by entering a port number.
+  To kill the process that is listening on the port,
+  press cmd-k and select "Kill".
+  Confirm the method to use by selecting "With SIGTERM" or "With SIGKILL".
+
 - System Monitor
 
 ## Creating Custom Extensions
