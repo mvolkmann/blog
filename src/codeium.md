@@ -36,3 +36,22 @@ Python, Ruby, Rust, shell, SQL, Swift, Svelte, TypeScript, Vue, Yaml, Zig,
 and more.
 
 ## Use in VS Code
+
+The Codeium VS Code extension adds
+many commands to the command palette including:
+
+- Codeium: Command
+- Codeium: Copy Status to Clipboard
+- Codeium: Explain Problem
+- Codeium: Explain Selected Code Block
+- Codeium: Focus on Chat View
+- Codeium: Focus on Search View
+- Codeium: Open Chat (cmd-shift-a)
+- Codeium: Open Chat in Editor
+- Codeium: Open Profile
+- Codeium: Open Search
+- Codeium: Open University
+- Codeium: Provide Authentication Token
+- Codeium: Refactor Selected Code Block
+- Codeium: Submit ++
+- Codeium: Toggle Autocomplete Enabled for Current Language
