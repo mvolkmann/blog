@@ -375,7 +375,9 @@ I created these keyboard shortcuts:
 
 ## Popular Extensions
 
+- Color Picker
 - GitHub
+- iTranslate - language translations and speech
 - Kill Process
 - Music
 - System Monitor
