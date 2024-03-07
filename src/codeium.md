@@ -55,3 +55,7 @@ many commands to the command palette including:
 - Codeium: Refactor Selected Code Block
 - Codeium: Submit ++
 - Codeium: Toggle Autocomplete Enabled for Current Language
+
+One way to get a code suggestion is to
+enter a comment describing what you want to do.
+Codeium will suggest the code to do it.
