@@ -428,16 +428,19 @@ I created these keyboard shortcuts:
 
 | Command          | Shortcut              |
 | ---------------- | --------------------- |
-| left half        | cmd-left arrow        |
-| right half       | cmd-right arrow       |
-| bottom half      | cmd-down arrow        |
-| top half         | cmd-up arrow          |
-| center half      | cmd-shift-c           |
-| left quarter     | cmd-shift-left arrow  |
-| right quarter    | cmd-shift-right arrow |
-| maximize         | cmd-shift-m           |
-| next display     | cmd-shift-n           |
-| previous display | cmd-shift-p           |
+| Left Half        | cmd-left arrow        |
+| Right Half       | cmd-right arrow       |
+| Bottom Half      | cmd-down arrow        |
+| Top Half         | cmd-up arrow          |
+| Center Half      | cmd-shift-c           |
+| Left Quarter     | cmd-shift-left arrow  |
+| Right Quarter    | cmd-shift-right arrow |
+| Maximize         | cmd-shift-m           |
+| Next Display     | cmd-shift-n           |
+| Previous Display | none                  |
+
+I didn't assign the shortcut cmd-shift-p to "previous display"
+because that shortcut is used in VS Code to open the command palette.
 
 For the "Move" commands, you can turn off the "Center Window" option
 so the window retains its current position in the opposite of the
