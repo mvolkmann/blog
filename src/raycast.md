@@ -189,6 +189,12 @@ Another dialog will appear. Click the "Allow Full Access" button.
 To see your schedule for today, open Raycast, enter "sche",
 and select "My Schedule".
 
+To show upcoming meetings in the macOS menu bar,
+open the Raycast settings, select the "My Schedule" command,
+scroll to the bottom of its settings,
+and change the value of "Show Events in Menu Bar".
+It's unclear whether this works with Bartender.
+
 ## Clipboard History
 
 To view clipboard history, open Raycast, enter "clip",
@@ -302,9 +308,9 @@ The command name this adds is "Search Web Docs".
 It displays documentation in the Raycast window
 and provides a "Open in Browser" button.
 
-## Search Emojis & Symbols
+## Emojis & Symbols
 
-This command displays a list of all emojis and symbols.
+The "Search Emoji & Symbols" command displays a list of them.
 To quickly find this command, enter "emo".
 
 Enter a search term to filter the list.
@@ -312,6 +318,10 @@ Enter a search term to filter the list.
 Double-click an emoji or symbol to insert it at the current cursor position.
 
 For example, enter "kiss" to see only the related emojis and symbols.
+
+To enter an emoji in any Raycast input, type a colon.
+This opens an emoji picker containing recently used emojis.
+Type part of the name of an emoji to see others.
 
 ## Snippets
 
