@@ -73,10 +73,12 @@ The steps for first-time configuration of Raycast are:
    for a walkthrough of Raycast features.
 1. Double-click each topic to learn more.
 
-## Manual
+## Help
 
 See the official
 <a href="https://manual.raycast.com" target="_blank">Raycast Manual</a>.
+
+There are many YouTube videos about using Raycast.
 
 ## Raycast Window
 
@@ -128,6 +130,15 @@ select a command, and enter an alias and/or a hotkey for the command.
 To search contacts, open Raycast, enter "con", select "Contacts",
 and enter part of a name.
 The first time you do this you will need to grant permission.
+
+## Dictionay
+
+To lookup a word in the dictionary, enter "def"
+and select the "Define Word" command.
+
+## Fun
+
+See the "Confetti" command.
 
 ## Launching Apps
 
@@ -304,7 +315,7 @@ For example, enter "kiss" to see only the related emojis and symbols.
 
 ## Snippets
 
-Raycast snippets are text identified by keywords.
+Raycast snippets are text or emojis identified by keywords.
 When the keywords are entered in _any_ application,
 they are replaced by the associated text.
 
@@ -334,6 +345,10 @@ For example, the following snippet adds an HTML anchor tag.
 If this is given the keyword "atb" and that keyword is entered in any application,
 a dialog will appear to prompt for values for "url" and "title".
 After entering the values, click the "Expand" button or press cmd-return.
+
+To create a snippet for an emoji, use the "Search Emojis" command
+to find the desired emoji, press cmd-k, select "Save as Snippet",
+optionally modify the name, and optionally modify the keyword.
 
 ## Store
 
@@ -382,6 +397,12 @@ I created these keyboard shortcuts:
 | maximize         | cmd-shift-m           |
 | next display     | cmd-shift-n           |
 | previous display | cmd-shift-p           |
+
+For the "Move" commands, you can turn off the "Center Window" option
+so the window retains its current position in the opposite of the
+move dimension rather then being centered on the target edge.
+"Center Window" is a toggle in the settings
+for each of the four "Move" commands.
 
 ## Popular Extensions
 
