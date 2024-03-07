@@ -502,5 +502,8 @@ To create a new extension:
 1. Enter a description.
 1. Select a category.
 1. Select the location where the project will be stored.
-1. Enter the name of the command that will be defined.
-   TODO: How does an extension define more than one?
+1. Enter a name and description of a command that will be defined.
+1. Optionally describe more commands.
+1. Click the "Create Extension" button.
+1. From a terminal window, cd to the directory of the extension.
+1. Enter `npm install` and `npm run dev`.
