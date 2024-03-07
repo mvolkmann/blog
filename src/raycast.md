@@ -193,7 +193,7 @@ To show upcoming meetings in the macOS menu bar,
 open the Raycast settings, select the "My Schedule" command,
 scroll to the bottom of its settings,
 and change the value of "Show Events in Menu Bar".
-It's unclear whether this works with Bartender.
+It's unclear whether this works with the Bartender utility.
 
 ## Clipboard History
 
@@ -328,9 +328,15 @@ Type part of the name of an emoji to see others.
 Install the "Apple Reminders" extension from the store
 to add the following commands:
 
-- Create Reminder: This does what the name says.
+- Create Reminder
 
-- Menu Bar Reminders: ?
+  This does what the name says.
+
+- Menu Bar Reminders
+
+  This is supposed to display reminders in the menu bar.
+  Maybe it only displays them when their due date/time arrives.
+  Or maybe this feature doesn't work with the Bartender utility.
 
 - My Reminders
 
@@ -344,7 +350,9 @@ to add the following commands:
   Press cmd-k to "Mark as Complete", "Open Reminder", "Edit Reminder",
   "Set Priority...", "Set Due Date", "Delete Reminder", and more.
 
-- Quick Add Reminder: This adds an unscheduled reminder to the Inbox.
+- Quick Add Reminder
+
+  This adds an unscheduled reminder to the Inbox.
 
 ## Snippets
 
