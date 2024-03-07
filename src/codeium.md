@@ -56,6 +56,25 @@ many commands to the command palette including:
 - Codeium: Submit ++
 - Codeium: Toggle Autocomplete Enabled for Current Language
 
+## Code Suggestions
+
 One way to get a code suggestion is to
 enter a comment describing what you want to do.
 Codeium will suggest the code to do it.
+
+## Function Operations
+
+Codeium displays a line above functions that contains
+"Codeium: Refactor | Explain | Generate JSDoc | X".
+
+"Refactor" opens a text area where you can describe
+the desired change such as "make this shorter".
+The suggest change will appear above the current code
+with "Accept" and "Reject" buttons. Click one of them.
+
+"Explain" generates an explanation of what the code does
+in the Codeium Chat left sidebar.
+
+"Generate JSDoc" places it in the Codeium chat left sidebar.
+Click the "Apply Diff" button to copy it into the code above the function.
+Click "Accept" above the inserted code to accept it.

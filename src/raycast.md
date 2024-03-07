@@ -21,6 +21,8 @@ layout: topic-layout.njk
 "blazingly fast, totally extendable launcher.
 It lets you complete tasks, calculate, share common links, and much more."
 
+Raycast is a native macOS app implemented in Swift.
+
 ## Installing
 
 The steps to install Raycast are:
@@ -399,7 +401,9 @@ optionally modify the name, and optionally modify the keyword.
 The Raycast Store is the place to download more extentions.
 To open it, open Raycast and enter "store".
 
-I installed the "Search MDN" extension.
+It displays three features extensions, a list of trending extensions,
+and an infinite scrolling list of all extensions.
+Filter the list by entering part of a name.
 
 ## System Commands
 
@@ -453,13 +457,22 @@ for each of the four "Move" commands.
 
 ## Popular Extensions
 
-- Apple Reminders
+- Apple Reminders - see the "Reminders" section above
+- Brew - search, install, and update Homebrew formulae
+
+  This adds the commands "Search", "Clean Up", "Upgrade",
+  "Show Installed", and "Show Outdated".
+
 - Color Picker
 - GIF Search
 - GitHub
 - iTranslate - language translations and speech
 - Kill Process
-- Music
+- Music - controls the Apple Music app
+
+  This adds the commands "Next Track", "Previous Track",
+  "Toggle Play/Pause", and "Add to Library".
+
 - Port Manager
 
   Enter "port" and select the "Open Ports" command.
@@ -468,11 +481,14 @@ for each of the four "Move" commands.
   press cmd-k and select "Kill".
   Confirm the method to use by selecting "With SIGTERM" or "With SIGKILL".
 
+- Search MDN
 - System Monitor
+- tldr - searches tldr documentation pages
 
 ## Creating Custom Extensions
 
 Raycast extensions are implemented in TypeScript with
-React (using a custom renderer), Node, and Markdown.
+React (using a custom renderer like React Native), Node, and Markdown.
 The custom renderer uses Raycast-specific components
 rather than HTML and CSS.
+AppleScript is used communication with macOS apps.
