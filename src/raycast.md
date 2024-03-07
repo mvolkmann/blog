@@ -269,6 +269,14 @@ To use a quicklink:
 - Highlight the quicklink using the up and down arrow keys.
 - Enter a search term and press the return key.
 
+To create a quicklink that opens a frequently used local file,
+use the "Search Files" command to find the file in Raycast,
+press cmd-k, and select "Create Quicklink".
+Enter a name for the quicklink, select the application that should open it,
+and click the "Create Quicklink" button.
+Now to open the file you can just enter part of the assigned name
+in the input on the main Raycast page.
+
 I created a quicklink for the website [removebg](https://www.remove.bg)
 which removes the background from images.
 I gave it the alias "bg".
