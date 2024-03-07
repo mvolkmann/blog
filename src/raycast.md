@@ -323,6 +323,29 @@ To enter an emoji in any Raycast input, type a colon.
 This opens an emoji picker containing recently used emojis.
 Type part of the name of an emoji to see others.
 
+## Reminders
+
+Install the "Apple Reminders" extension from the store
+to add the following commands:
+
+- Create Reminder: This does what the name says.
+
+- Menu Bar Reminders: ?
+
+- My Reminders
+
+  This displays your reminders.
+  By default only reminders for today and those overdue are show.
+  To display other reminders, change the dropdown in the upper-right
+  to "Scheduled" or "All".
+  You can also select a specific list to see on the reminders in that list.
+
+  Select a reminder and press the return key to mark it as completed.
+  Press cmd-k to "Mark as Complete", "Open Reminder", "Edit Reminder",
+  "Set Priority...", "Set Due Date", "Delete Reminder", and more.
+
+- Quick Add Reminder: This adds an unscheduled reminder to the Inbox.
+
 ## Snippets
 
 Raycast snippets are text or emojis identified by keywords.
@@ -416,9 +439,18 @@ for each of the four "Move" commands.
 
 ## Popular Extensions
 
+- Apple Reminders
 - Color Picker
+- GIF Search
 - GitHub
 - iTranslate - language translations and speech
 - Kill Process
 - Music
 - System Monitor
+
+## Creating Custom Extensions
+
+Raycast extensions are implemented in TypeScript with
+React (using a custom renderer), Node, and Markdown.
+The custom renderer uses Raycast-specific components
+rather than HTML and CSS.
