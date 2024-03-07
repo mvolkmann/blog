@@ -281,6 +281,8 @@ I created a quicklink for the website [removebg](https://www.remove.bg)
 which removes the background from images.
 I gave it the alias "bg".
 
+I also created a quicklink for ChatGPT.
+
 Mozilla Developer Network (MDN) does not perform searches
 using a URL query parameters, so you cannot create a quicklink for it.
 However, there is an extension that can be installed from the "store"
