@@ -539,6 +539,39 @@ To create a new extension:
 See the VS Code extension "Raycast" by tonka3000.
 It provides commands for common tasks, debugging, auto-completion, and snippets.
 
+### Manifest
+
+The `package.json` file of an extension serves as its manifest
+where many aspects of an extension are specified.
+This includes the extension name, title, description,
+icon, author, categories, keywords, preferences, license, commands, and more.
+
+For each command, a JSON object specifies its
+name, title, subtitle, description, icon, mode,
+interval, keywords, arguments, and preferences.
+The `mode` of a command must be set to "view", "no-view", or "menu-bar".
+
+If the extension exports a default function, it will be called automatically.
+If the function returns a React component,
+it will rendered as the root component.
+The default function for commands that do not require a user interface,
+such as those with `mode` set to "no-view", can by `async`.
+
+The supplied `package.json` file for a new extension will contain the following scripts:
+
+```json
+"scripts": {
+  "build": "ray build -e dist",
+  "dev": "ray develop",
+  "fix-lint": "ray lint --fix",
+  "lint": "ray lint",
+  "publish": "npx @raycast/api@latest publish"
+}
+```
+
+The "fix-lint" and "lint" scripts perform some Raycast-specific validations,
+and also run both ESLint and Prettier.
+
 ### Arguments
 
 Each extension command can take up to three arguments.
@@ -732,7 +765,7 @@ To display a toast message:
    });
    ```
 
-## LocalStorage
+### LocalStorage
 
 The `LocalStorage` object manages data for the current extension.
 Extensions can only access their own data.
@@ -744,9 +777,34 @@ The object has the following methods:
 - `removeItem` removes an item with a given key.
 - `setItem` sets an item with a given key.
 
-## Preferences
+### Preferences
 
 The Preferences API is used to make an extension configurable.
+They can be specific to a command defined by the extension
+or be shared by all commands defined by the extension.
+
+All preferences marked as "required" must be supplied by the user
+before they can use the commands.
+
+Preferences are defined in the `package.json` file of an extension.
+Each command object in the "commands" array can specify
+a `preferences` property whose value is an array of objects.
+
+For example:
+
+```json
+"preferences": [
+  {
+    "name": "defaultPort",
+    "description": "specifies the default port to use if none is provided",
+    "type": "textfield",
+    "required": true,
+    "placeholder": "Default Port"
+  }
+]
+```
+
+For more detail, see <a href="https://developers.raycast.com/information/manifest#preference-properties" target="_blank">Preference properties</a>.
 
 ## Utilities
 
