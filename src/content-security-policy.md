@@ -75,9 +75,10 @@ The `report-uri` directive will be replaced by `report-to` in the future.
 
 A small set of directives that are not commonly used
 can only be specified in HTTP headers and not in `meta` tags.
-One example is the `report-uri` directive.
+The only commonly used directive that must be
+specified in an HTTP header is the `report-uri` directive.
 
-See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP"
+See <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP#browser_compatibility"
 target="_blank">Content Security Policy</a>
 for a table of CSP directives that are supported by each browser.
 
@@ -92,7 +93,7 @@ The following table describes the keywords that can be used in directive values.
 | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `inline-speculation-rules` | This allows inclusion of "speculation rules" which are experimental.                                                                                                    |
 | `nonce-*`                  | This is a whitelist of inline scripts, indentified by a cryptographic nonce value, that are allowed.                                                                    |
-| `none`                     | This prevents loading any resources.                                                                                                                                    |
+| `none`                     | This prevents loading any resources of a given type.                                                                                                                    |
 | `report-sample`            | This causes a sample of the violating code to be included in violation reports. It is used in `script-src` and `script-src-elem` directives.                            |
 | `self`                     | This only allows loading resources from the current origin. It is the most commonly used keyword.                                                                       |
 | `sha{algorithm}-{value}`   | This is used in `script-src` and `styles-src` directives to allow resources with a matching hash value.                                                                 |
@@ -181,7 +182,7 @@ In the server code that configures serving static files
 from a directory like "public", add the
 "Content-Security-Policy" header with the value in the `csp` variable.
 
-With the Hono library this can be done as follows:
+With the Hono TypeScript library this can be done as follows:
 
 ```typescript
 app.use('/*', (c: Context, next: Next) => {
@@ -197,7 +198,7 @@ app.use('/*', (c: Context, next: Next) => {
 ```
 
 Now define an endpoint to receive violation reports.
-With the Hono library this can be done as follows:
+With Hono this can be done as follows:
 
 ```typescript
 app.post('/csp-report', async (c: Context) => {
@@ -225,8 +226,8 @@ keep you informed about whether and how the site is being attacked.
 
 ## Example Web App
 
-The following code implements an HTTP server using the JavaScript-based
-server <a href="https://hono.dev" target="_blank">Hono</a> library.
+The following code implements an HTTP server using
+<a href="https://hono.dev" target="_blank">Hono</a>.
 It also uses <a href="/blog/topics/#/blog/htmx/" target="_blank">htmx</a>.
 Comments in the code explain everything related to
 the CSP that it constructs and uses.
