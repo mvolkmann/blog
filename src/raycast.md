@@ -21,14 +21,14 @@ layout: topic-layout.njk
 "blazingly fast, totally extendable launcher.
 It lets you complete tasks, calculate, share common links, and much more."
 
-Raycast is a native macOS app implemented in Swift.
+Raycast ...
 
-Raycast is a replacement for Spotlight and competes with utilities like Alfred.
-
-Raycast is notable in that makes it easy to create new extensions
-and submit them to its store so other users can install and use them.
-
-Raycast places an emphasis on supporting keyboard navigation for all actions.
+- is a native macOS app implemented in Swift.
+- is a replacement for Spotlight that competes with utilities like Alfred.
+- places an emphasis on supporting keyboard navigation for all actions.
+- uses a "stack of pages" metaphor
+- is notable in that makes it easy to create new extensions and
+  submit them to its store so other users can install and use them.
 
 ## Installing
 
@@ -614,9 +614,73 @@ The supported UI components include:
   HSL (ex. `hsla(100, 30%, 25%, 0.4)`).
 
 - Detail
+
+  This component renders a string of Markdown.
+  It can display a panel of metadata on the right side.
+  It can also have an associated `ActionPanel`.
+
 - Form
+
+  This component renders a form containing
+  any number of inputs and a submit button.
+  Each input can specify its type, validation constraints, and error display.
+  The form only be submitted if there are no errors.
+
+  The supported field types include:
+
+  - `Form.Checkbox`
+
+  - `Form.DatePicker`
+
+    This component can be used to select a date or a date/time.
+    It can limit the range of allowed dates.
+
+  - `Form.Description`
+
+    This component only displays text.
+
+  - `Form.FilePicker`
+
+    This component can be used to select one or multiple files or directories.
+    It can be configured to allow or disallow seletion of files or directories.
+
+  - `Form.LinkAccessory`
+
+    This compoennt is a hyperlink.
+
+  - `Form.TextArea`
+
+  - `Form.TextField`
+
+  - `Form.PasswordField`
+
+  - `Form.Separator`
+
+    This component just renders a horizontal line.
+
+  - `Form.TagPicker`
+
+    This component allows selected any number of items from a predefined list.
+    Each item has a title, value, and optional icon.
+
 - Grid
+
+  This component is a alternative to a `List` which
+  allows any number of items to appear on the same row.
+  It is ideal for display a collection of images.
+
 - Icons & Images
+
+  The `Icon` component renders an icon from a large set of provide icons.
+
+  `Image.Mask` changes the shape of an image
+  from a rectangle to a circle or rounded rectangle.
+
+  Some components such as `List.Item` accept an `icon` attribute whose value
+  is an `Icon` instances or a generic object with specfic properties.
+  To render an image, use an object with a `source` property.
+  Other supported properties include `fallback`, `mask`, and `tintColor`.
+
 - List
 
   This component display a vertical list of item.
@@ -629,12 +693,15 @@ The supported UI components include:
   TODO: What other features are available on list items?
 
 - Navigation
-- Toast
+
+  The `useNavigation` hook provides `push` and `pop` functions
+  for navigating in the stack of pages for an extension.
 
 ### Toast Messages
 
-Raycast supports toast messages with three styles,
-`Success`, `Failure`, and `Animated`.
+Toast messages appear at the bottom of the Raycast window.
+Three styles are supported: `Success`, `Failure`, and `Animated`.
+
 Animated toasts can have their `style`, `title`, and `message` properties
 modified after they are created.
 
