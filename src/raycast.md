@@ -30,6 +30,10 @@ Raycast ...
 - is notable in that makes it easy to create new extensions and
   submit them to its store so other users can install and use them.
 
+Raycast extensions can add items to the macOS menu bar.
+Clicking a menu bar item can reveal a list of items.
+Clicking a list item can trigger an action such as opening a URL in Safari.
+
 ## Installing
 
 The steps to install Raycast are:
