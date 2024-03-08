@@ -732,16 +732,35 @@ To display a toast message:
    });
    ```
 
+## LocalStorage
+
+The `LocalStorage` object manages data for the current extension.
+Extensions can only access their own data.
+The object has the following methods:
+
+- `allItems` retreives all stored items.
+- `clear` removes all stored items.
+- `getItem` gets the item with a given key.
+- `removeItem` removes an item with a given key.
+- `setItem` sets an item with a given key.
+
+## Preferences
+
+The Preferences API is used to make an extension configurable.
+
 ## Utilities
 
-The following utility functions are provided by the Raycast:
+The following utility functions are provided in "@raycast/api".
 
+- `clearSearchBar` clears text in the search bar.
+- `closeMainWindow` closes the main Raycast window.
 - `getApplications` returns an array of all applications that can open a given file.
 - `getDefaultApplication` returns the default application for opening a given file.
 - `getFrontmostApplication` returns the active application.
 - `open` opens a given file, directory, or URL with a given application.
-- `trash` moves a given file or directory to the trash.
+- `popToRoot` pops the navigation stack back to the root search.
 - `showInFinder` opens the Finder app at a given directory path.
+- `trash` moves a given file or directory to the trash.
 
 The addon package `@raycast/utils` provides
 more utility functions and React hooks.
