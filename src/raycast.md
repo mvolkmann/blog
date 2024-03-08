@@ -412,9 +412,45 @@ optionally modify the name, and optionally modify the keyword.
 The Raycast Store is the place to download more extentions.
 To open it, open Raycast and enter "store".
 
-It displays three features extensions, a list of trending extensions,
-and an infinite scrolling list of all extensions.
+It displays three features extensions (updated every 15 days),
+a list of trending extensions, and
+an infinite scrolling list of all extensions.
 Filter the list by entering part of a name.
+
+Popular extensions include:
+
+- Apple Reminders - see the "Reminders" section above
+- Brew - search, install, and update Homebrew formulae
+
+  This adds the commands "Search", "Clean Up", "Upgrade",
+  "Show Installed", and "Show Outdated".
+
+- Color Picker
+- GIF Search
+- GitHub
+- iTranslate - language translations and speech
+- Kill Process
+- Music - controls the Apple Music app
+
+  This adds the commands "Next Track", "Previous Track",
+  "Toggle Play/Pause", and "Add to Library".
+
+- Node.js Evaluate
+
+  This provides the "Evaluate Code" command
+  for evaluating a JavaScript expression.
+
+- Port Manager
+
+  Enter "port" and select the "Open Ports" command.
+  Filter the list by entering a port number.
+  To kill the process that is listening on the port,
+  press cmd-k and select "Kill".
+  Confirm the method to use by selecting "With SIGTERM" or "With SIGKILL".
+
+- Search MDN
+- System Monitor
+- tldr - searches tldr documentation pages
 
 ## System Commands
 
@@ -465,36 +501,6 @@ so the window retains its current position in the opposite of the
 move dimension rather then being centered on the target edge.
 "Center Window" is a toggle in the settings
 for each of the four "Move" commands.
-
-## Popular Extensions
-
-- Apple Reminders - see the "Reminders" section above
-- Brew - search, install, and update Homebrew formulae
-
-  This adds the commands "Search", "Clean Up", "Upgrade",
-  "Show Installed", and "Show Outdated".
-
-- Color Picker
-- GIF Search
-- GitHub
-- iTranslate - language translations and speech
-- Kill Process
-- Music - controls the Apple Music app
-
-  This adds the commands "Next Track", "Previous Track",
-  "Toggle Play/Pause", and "Add to Library".
-
-- Port Manager
-
-  Enter "port" and select the "Open Ports" command.
-  Filter the list by entering a port number.
-  To kill the process that is listening on the port,
-  press cmd-k and select "Kill".
-  Confirm the method to use by selecting "With SIGTERM" or "With SIGKILL".
-
-- Search MDN
-- System Monitor
-- tldr - searches tldr documentation pages
 
 ## Creating Custom Extensions
 
@@ -846,3 +852,38 @@ The provided React hooks include:
 - `useSQL` - queries a local database
 
 TODO: Are any databases other than SQLite supported?
+
+### Publishing an Extension
+
+Here's a checklist of things to do in order to
+submit an extension for review so it can be published in the store.
+
+- Verify that all the properties and dependencies
+  in `package.json` are what you want.
+
+- Verify that `npm lint` doesn't find any issues.
+
+- Verify that `npm build` runs successfully.
+
+- Update the README.md file.
+
+  It should clearly state the purpose of each command
+  and the steps to use them.
+
+- Create an icon and screenshots.
+
+  Place these in the `assets` directory.
+
+  See <a href="https://developers.raycast.com/basics/prepare-an-extension-for-store" target="_blank">Prepare an Extension for Store</a>
+  for more detail.
+
+- Update `CHANGELOG.md`.
+
+- Run `npm run publish`.
+
+  You will receive an email from raycastbot
+  confirming that it is being reviewed.
+
+- Wait for review.
+
+  This is usually completed within five days.
