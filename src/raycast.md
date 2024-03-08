@@ -528,6 +528,11 @@ npm packages like `node-fetch` and `got`.
 
 ## Toast Messages
 
+Raycast supports toast messages with three styles,
+`Success`, `Failure`, and `Animated`.
+Animated toasts can have their `style`, `title`, and `message` properties
+modified after they are created.
+
 To display a toast message:
 
 1. Import these:
