@@ -35,7 +35,7 @@ For details, see the MDN page {% aTargetBlank
 
 Unlike Server-Sent Events (SSE), WebSockets do not provide
 automatic reconnection after the connection is closed.
-However, this can be implemented as show in the "Bun and Hono" section below.
+However, this can be implemented as shown in the "Bun and Hono" section below.
 
 Many WebSocket libraries for server-side
 programming languages/environments exist.
