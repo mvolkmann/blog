@@ -507,3 +507,5 @@ To create a new extension:
 1. Click the "Create Extension" button.
 1. From a terminal window, cd to the directory of the extension.
 1. Enter `npm install` and `npm run dev`.
+1. Open Raycast.
+1. Select your command from the "Development" category and run it.

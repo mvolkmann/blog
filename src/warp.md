@@ -133,7 +133,7 @@ Each pane can hold any number of blocks.
 To create a new pane, right-click and select one of the "Split pane" options
 to open a new pane on the right, left, down (bottom), or up (top).
 
-I defined the following keyboard shortcuts of the form cmd-shift-{arrow-key}
+I defined the following keyboard shortcuts of the form opt-shift-{arrow-key}
 to simplify creating new panes:
 
 - right arrow - Split pane right
