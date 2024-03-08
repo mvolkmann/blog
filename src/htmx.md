@@ -2971,8 +2971,8 @@ export default app;
 ```
 
 See the working example project that includes the code above at {% aTargetBlank
-"https://github.com/mvolkmann/server-sent-events-examples",
-"server-sent-events-examples" %}.
+"https://github.com/mvolkmann/websocket-examples",
+"websocket-examples" %}.
 
 ## Browser History
 
