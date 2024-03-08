@@ -187,11 +187,16 @@ With the Hono TypeScript library this can be done as follows:
 ```typescript
 app.use('/*', (c: Context, next: Next) => {
   c.header('Content-Security-Policy', csp);
+
+  // Tell the browser that the site can only be accessed using HTTPS,
+  // and that future attempts to access it using HTTP
+  // should be automatically converted to HTTPS.
   const yearSeconds = 31536000;
   c.header(
     'Strict-Transport-Security',
     `max-age=${yearSeconds}; includeSubDomains`
   );
+
   const fn = serveStatic({root: './public'});
   return fn(c, next);
 });
@@ -277,9 +282,6 @@ app.use('/*', (c: Context, next: Next) => {
   // Add a header to enforce the CSP.
   c.header('Content-Security-Policy', csp);
 
-  // Tell the browser that the site can only be accessed using HTTPS,
-  // and that future attempts to access it using HTTP
-  // should be automatically converted to HTTPS.
   const yearSeconds = 31536000;
   c.header(
     'Strict-Transport-Security',
