@@ -726,3 +726,41 @@ To display a toast message:
      message: 'My message.'
    });
    ```
+
+## Utilities
+
+The following utility functions are provided by the Raycast:
+
+- `getApplications` returns an array of all applications that can open a given file.
+- `getDefaultApplication` returns the default application for opening a given file.
+- `getFrontmostApplication` returns the active application.
+- `open` opens a given file, directory, or URL with a given application.
+- `trash` moves a given file or directory to the trash.
+- `showInFinder` opens the Finder app at a given directory path.
+
+The addon package `@raycast/utils` provides
+more utility functions and React hooks.
+
+The provided functions include:
+
+- `getAccessToken` (OAuth)
+- `getAvatarIcon`
+- `getFavIcon`
+- `getProgressIcon`
+- `runAppleScript`
+- `showFailureToast`
+- `withAccessToken` (OAuth)
+
+The provided React hooks include:
+
+- `useAI`
+- `useCachedPromise`
+- `useCachedState`
+- `useExec`
+- `useFetch`
+- `useForm`
+- `useFrecencySorting`
+- `usePromise`
+- `useSQL` - queries a local database
+
+TODO: Are any databases other than SQLite supported?
