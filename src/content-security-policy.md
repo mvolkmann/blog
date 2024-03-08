@@ -409,12 +409,12 @@ CSP defined in the server above to access several resources.
 </html>
 ```
 
-## integrity Attribute in script tags
+## SubResource Integrity (SRI)
 
 To prevent executing a script whose contents have been altered,
 perhaps maliciously, include an `integrity` attribute in the `script` tag.
 The value is a hash that is computed based on the contents of the script.
-This is referred to as "SubResource Integrity" (SRI).
+This is referred to as "SubResource Integrity".
 
 Using SRI is especially important when scripts are obtained from a CDN.
 SRI is not typically enforced for scripts loaded from the same origin.
