@@ -509,3 +509,39 @@ To create a new extension:
 1. Enter `npm install` and `npm run dev`.
 1. Open Raycast.
 1. Select your command from the "Development" category and run it.
+
+### Arguments
+
+Each extension command can take up to three arguments.
+The only supported types are "text", "password", and "dropdown".
+The arguments for a command are described in the JSON description
+of the command found in the `package.json` file for the extension.
+The order in which argument inputs will appear
+matches their order in the `package.json` file.
+
+## HTTP Requests
+
+Extension commands can fetch data by sending an HTTP request.
+There are several ways to do this including
+the `useFetch` hook from "@raycast/utils" and
+npm packages like `node-fetch` and `got`.
+
+## Toast Messages
+
+To display a toast message:
+
+1. Import these:
+
+   ```js
+   import {showToast, Toast} from '@raycast/api';
+   ```
+
+1. Call the `showToast` function.
+
+   ```js
+   showToast({
+     style: Toast.Style.Failure, // or Success or Animated
+     title: 'My Title',
+     message: 'My message.'
+   });
+   ```
