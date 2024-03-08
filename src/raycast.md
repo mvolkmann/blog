@@ -534,6 +534,11 @@ To create a new extension:
 1. Open Raycast.
 1. Select your command from the "Development" category and run it.
 
+### VS Code
+
+See the VS Code extension "Raycast" by tonka3000.
+It provides commands for common tasks, debugging, auto-completion, and snippets.
+
 ### Arguments
 
 Each extension command can take up to three arguments.
