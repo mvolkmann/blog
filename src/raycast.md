@@ -23,6 +23,13 @@ It lets you complete tasks, calculate, share common links, and much more."
 
 Raycast is a native macOS app implemented in Swift.
 
+Raycast is a replacement for Spotlight and competes with utilities like Alfred.
+
+Raycast is notable in that makes it easy to create new extensions
+and submit them to its store so other users can install and use them.
+
+Raycast places an emphasis on supporting keyboard navigation for all actions.
+
 ## Installing
 
 The steps to install Raycast are:
@@ -498,6 +505,19 @@ To create a new extension:
 1. Open Raycast
 1. Open the "Create Extension" command.
 1. Select a template.
+
+   The supported template types include:
+
+   - None
+   - Detail
+   - Form
+   - Grid
+   - List and Detail
+   - Menu Bar Extras
+   - Script
+   - Static List
+   - Typeahead Search
+
 1. Enter an extension name.
 1. Enter a description.
 1. Select a category.
@@ -519,14 +539,43 @@ of the command found in the `package.json` file for the extension.
 The order in which argument inputs will appear
 matches their order in the `package.json` file.
 
-## HTTP Requests
+There is no support for validating argument values.
+For example, it is not possible to require an argument value to be an integer.
+An extension perform its own validation and display and error message
+if an argument has an invalid value. For example:
+
+```ts
+function isInteger(str: string): boolean {
+  return Number.isInteger(parseInt(str, 10));
+}
+
+...
+
+  const {port} = props.arguments;
+  if (!isInteger(port)) {
+    showToast({
+      style: Toast.Style.Failure,
+      title: 'Bad Port',
+      message: 'The port must be an integer.'
+    });
+    return;
+  }
+```
+
+### Forms
+
+Extensions can display forms that allow users to enter several values.
+Each field has a label and an input area.
+Each field can have custom validation logic.
+
+### HTTP Requests
 
 Extension commands can fetch data by sending an HTTP request.
 There are several ways to do this including
 the `useFetch` hook from "@raycast/utils" and
 npm packages like `node-fetch` and `got`.
 
-## Toast Messages
+### Toast Messages
 
 Raycast supports toast messages with three styles,
 `Success`, `Failure`, and `Animated`.
