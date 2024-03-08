@@ -575,6 +575,62 @@ There are several ways to do this including
 the `useFetch` hook from "@raycast/utils" and
 npm packages like `node-fetch` and `got`.
 
+### UI Components
+
+Raycast supports a limited set of UI components.
+This makes it easy for users to use extensions
+because there is a low learning curve for interaction patterns.
+
+The supported UI components include:
+
+- Action Panel
+
+  This component displays a list of actions that can be performed.
+  The list can be context-sensitive, based on the selected item.
+  For example, each `List.Item` in a `List` can have its own `ActionPanel`,
+  specified in its `actions` attribute.
+
+- Actions
+
+  These components appear as children of an `ActionPanel` component.
+  There are built-in actions that perform specific actions when selected,
+  including `CopyToClipboard`, `CreateSnippet`, `CreateQuicklink`,
+  `Open`, `OpenInBrowser`, `OpenWith`, `Paste`, `PickDate`, `Push`,
+  `ShowInFinder`, `SubmitForm`, `ToggleQuickLook`, and `Trash`.
+
+- Colors
+
+  This is not a component, but is a way to specify standard colors,
+  dynamic colors (based on the current theme), and raw colors.
+
+  Standard colors include `Red`, `Orange`, `Yellow`, `Green`,
+  `Blue`, `Magenta`, `Purple`, `PrimaryText`, and `SecondaryText`.
+
+  Currently only two themes are supported, light and dark.
+
+  Raw colors can be specified with
+  hex (ex `#FF0000`), short hex (ex. `#F00`),
+  RGBA (ex. `rgb(255, 0, 0, 1.0)`), or
+  HSL (ex. `hsla(100, 30%, 25%, 0.4)`).
+
+- Detail
+- Form
+- Grid
+- Icons & Images
+- List
+
+  This component display a vertical list of item.
+  The list can be filtered by entering text in a search input
+  that filters the list as the user types (typeahead).
+  List items can be made selectable.
+  Related items can be grouped into sections
+  that have titles and optional subtitles.
+
+  TODO: What other features are available on list items?
+
+- Navigation
+- Toast
+
 ### Toast Messages
 
 Raycast supports toast messages with three styles,
