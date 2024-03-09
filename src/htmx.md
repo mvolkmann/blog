@@ -2728,18 +2728,18 @@ TODO: Try this.
 
 ## WebSockets
 
-The htmx {% aTargetBlank "https://htmx.org/extensions/web-sockets/",
-"websockets" %} extension adds the ability to connect to a
-<a href="/blog/topics/#/blog/websockets/" target="_blank">WebSockets</a>
-server, send messages to it, and insert responses into HTML.
+The {% aTargetBlank "https://htmx.org/extensions/web-sockets/",
+"htmx web-sockets" %} extension adds the ability to connect to a
+WebSocket server, send messages to it,
+and insert responses into the current page.
 It is defined by a separate JavaScript file
 that must be included with a `script` tag.
 
 The extension adds support for the following attributes:
 
-- `ws-connect` specifies the URL of a WebSocket endpoint
+- `ws-connect` specifies the URL of a WebSocket endpoint.
 - `ws-send` can be applied to a `form` element
-  to send its data to a WebSocket endpoint
+  to send its data to a WebSocket endpoint.
 
 WebSocket endpoints specify where the result should be inserted in the DOM
 by using an out-of-band swap.
@@ -2875,7 +2875,7 @@ The extension adds support for the following attributes:
   defaulting to "message" when not specified
 
 In addition, the extension enables the `hx-trigger` attribute
-to listen for SSE events by prefixing their name with ":sse".
+to listen for SSE events by prefixing their name with "sse:".
 This can only be applied to descendant elements
 of an element that has the `sse-connect` attribute.
 However, the events won't be triggered
