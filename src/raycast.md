@@ -147,7 +147,7 @@ To search contacts, open Raycast, enter "con", select "Contacts",
 and enter part of a name.
 The first time you do this you will need to grant permission.
 
-## Dictionay
+## Dictionary
 
 To lookup a word in the dictionary, enter "def"
 and select the "Define Word" command.
@@ -156,15 +156,20 @@ and select the "Define Word" command.
 
 See the "Confetti" command.
 
-## Launching Apps
+## Launching Apps and Settings
 
 To quickly launch an app, press the hotkey for Raycast,
-enter part of the app name, and press the return key.
+enter part of the app name and press the return key.
 For example, 1Password can be launched by just typing "1p".
 
 Raycast will provide suggestions for recently or frequently used apps.
 The app you want is in the list of suggestions, navigate to it
 with the up and down arrow keys and press return to launch it.
+
+To quickly open the "System Settings" app on a specific panel,
+enter part of the panel name and press the return key.
+For example, to open to the "Printers & Scanners" panel,
+enter "pri" and press return.
 
 ## Calculator
 
