@@ -575,10 +575,10 @@ for every user interaction.
 
 For user interactions that do not require server-side updates,
 consider using HTML elements such as `details` and `dialog`.
-Also consider client-side scripting options include vanilla JavaScript,
+Also consider client-side scripting options including vanilla JavaScript,
 {% aTargetBlank "/blog/topics/#/blog/alpine/", "AlpineJS" %}, and
 {% aTargetBlank "/blog/topics/#/blog/hyperscript/", "_hyperscript" %}.
-All of these support updating the UI by performing DOM manipulation.
+All of these support updating the UI by performing DOM manipulations.
 
 Alpine adds support for many new HTML attributes.
 \_hyperscript adds support for one new HTML attribute
@@ -586,7 +586,8 @@ whose name is a single underscore (`_`) and whose value is \_hyperscript code.
 Both differ from htmx in that they focus on client-side interactions
 rather that processing HTTP requests.
 
-Like HTMLx, Alpine and \_hyperscript are client-side JavaScript libraries.
+Like htmx, Alpine and \_hyperscript are client-side JavaScript libraries
+that do not require a build process.
 These are much lighter than libraries and frameworks like React.
 
 ## JSON

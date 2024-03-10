@@ -33,7 +33,8 @@ You get to keep your DOM, and sprinkle in behavior as you see fit."
 The minified Alpine library for version 3.13.5,
 which is the latest as of January 2024, is only 14.9 KB.
 
-To use this, add the following `script` tag:
+To use this, add the following `script` tag.
+The `defer` attribute is required.
 
 ```html
 <script
@@ -185,7 +186,7 @@ The steps to do this are as follows:
 
 ## Basic Example
 
-The following code renders a button that toggles whether a `div` is visible.
+The following code renders a `button` that toggles whether a `div` is visible.
 The `x-data` directive defines state that is
 available on that element and its descendants.
 The `x-show` directive determines whether that element should be shown
@@ -1164,6 +1165,10 @@ It persists the data using `localStorage`.
 <html>
   <head>
     <link rel="stylesheet" href="todo-list.css" />
+    <!-- This Alpline plugin adds support for the
+         x-interpolate directive which enables interpolation
+         of JavaScript expressions inside text content.
+         It provides an alternative to using the x-text directive. -->
     <script
       defer
       src="https://cdn.jsdelivr.net/gh/mvolkmann/alpine-plugins@v0.0.4/interpolate.js"
