@@ -62,7 +62,9 @@ in each HTML page that needs it.
 
 Version 0.9.12 was released in October 2023.
 
-## Using
+\_hyperscript cannot be installed from npm.
+
+## Using \_hyperscript
 
 To use \_hyperscript, add an attribute to HTML elements
 whose name is an underscore.
@@ -89,6 +91,111 @@ syntax highlighting of \_hyperscript code embedded in HTML files
 and in standalone files.
 Unfortunately, it often messes up the syntax highlighting of HTML that follows.
 This issue was reported in April 2022, so it seems it will not be fixed.
+
+## Commands
+
+\_hyperscript is a programming language
+with its own set of commands and keywords.
+
+Each \_hyperscript command is described in the following table.
+
+| Command      | Description                                                                                            |
+| ------------ | ------------------------------------------------------------------------------------------------------ |
+| `add`        | adds an attribute, CSS class, or CSS property to an element                                            |
+| `append`     | appends a string to another string, a value to an array, or element to another element                 |
+| `async`      | executes a command or block of commmands asynchronously                                                |
+| `beep!`      | prints the source, result, and type of an expression to the console                                    |
+| `break`      | exits a `repeat` loop                                                                                  |
+| `call`       | evaluates an expression and places the result in the `it` variable                                     |
+| `continue`   | continues to the next iteration of a `repeat` loop                                                     |
+| `decrement`  | decrements a variable, property, or attribute (see `by` keyword)                                       |
+| `default`    | sets the default value of a variable or property                                                       |
+| `exit`       | exits a function or event handler without returning a value                                            |
+| `fetch`      | fetches text, JSON, HTML, or raw data from an HTTP endpoint and places the result in the `it` variable |
+| `for`        | iterates over items in an expression; specifies target of `take`                                       |
+| `from`       | specifies source of `take`                                                                             |
+| `get`        | an alias for `call`, used when it reads better                                                         |
+| `go`         | navigates to a URL, back to the previous page, or scrolls an element into view                         |
+| `halt`       | prevents an event from bubbling                                                                        |
+| `hide`       | hides an element by changing its CSS `display`, `visibility`, or `opacity` property                    |
+| `if`         | provides conditional control flow                                                                      |
+| `increment`  | increments a variable, property, or attribute (see `by` keyword)                                       |
+| `js`         | embeds JavaScript code; terminated by `end`                                                            |
+| `log`        | writes using `console.log` unless another variant is specified after `with` keyword                    |
+| `make`       | creates an instance of a DOM class (an element)                                                        |
+| `measure`    | gets measurements from an element                                                                      |
+| `pick`       | gets array elements using the `slice` method                                                           |
+| `put`        | inserts content into a variable, property, or the DOM                                                  |
+| `remove`     | removes an element from the DOM or a class/property from an element                                    |
+| `render`     | clones a `template` element and populates it; result goes in `result` and `it`                         |
+| `repeat`     | iterates over items in an expression, a number of times, or `forever`                                  |
+| `return`     | returns a value from a function or exits from an event handler                                         |
+| `send`       | sends an event to a target element                                                                     |
+| `set`        | sets a variable or element properties                                                                  |
+| `settle`     | synchronizes on a CSS transition of an element                                                         |
+| `show`       | shows an element by changing its CSS `display`, `visibility`, or `opacity` property                    |
+| `take`       | removes a class or attribute from elements and adds it to another element                              |
+| `tell`       | temporarily changes the default target for a command                                                   |
+| `throw`      | throws an exception                                                                                    |
+| `toggle`     | toggles CSS classes, an attribute, or the visibility of an element                                     |
+| `transition` | transitions properties on an element from one value to another                                         |
+| `trigger`    | alias for `send`                                                                                       |
+| `wait`       | blocks until an event occurs or for a given amount of time                                             |
+
+## Keywords
+
+Each \_hyperscript keyword is described in the following table.
+Many of the keywords are used in "pseudo-commands"
+that treat an object method as a top-level command.
+
+| Keyword      | Description                                                                        |
+| ------------ | ---------------------------------------------------------------------------------- |
+| `and`        | used in logical expressions                                                        |
+| `at`         | used in pseudo-commands                                                            |
+| `back`       | modifier for the `go` command                                                      |
+| `bottom`     | indicates a relative position                                                      |
+| `by`         | modifier for the `decrement` and `increment` commands which default to `1`         |
+| `center`     | indicates a relative position                                                      |
+| `character`  | specifies getting a single character with the `pick` command                       |
+| `characters` | specifies getting multiple characters with the `pick` command                      |
+| `do`         | begins a block of commmands                                                        |
+| `else`       | optionally used with `if`                                                          |
+| `empty`      | comparison value                                                                   |
+| `end`        | ends a block of commmands                                                          |
+| `for`        | used in `repeat` commands                                                          |
+| `forever`    | used in `repeat` commands                                                          |
+| `from`       | used in pseudo-commands                                                            |
+| `in`         | used in `repeat` commands                                                          |
+| `into`       | used in pseudo-commands                                                            |
+| `is`         | comparison operator                                                                |
+| `item`       | specifies the kind of result to get with the `pick` command                        |
+| `items`      | specifies the kind of result to get with the `pick` command                        |
+| `its`        | possessive that refers to another element                                          |
+| `left`       | indicates a relative position                                                      |
+| `match`      | specifies getting a regular expression match with the `pick` command               |
+| `matches`    | specifies getting a regular expression matches with the `pick` command             |
+| `me`         | possessive that refers to the current element                                      |
+| `middle`     | indicates a relative position                                                      |
+| `my`         | alias for `me`                                                                     |
+| `not`        | used in logical expressions                                                        |
+| `of`         | makes commands more readable                                                       |
+| `on`         | used in pseudo-commands                                                            |
+| `or`         | used in logical expressions                                                        |
+| `otherwise`  | alias for `else`; used with `if`                                                   |
+| `right`      | indicates a relative position                                                      |
+| `the`        | makes commands more readable                                                       |
+| `then`       | separates multiple commands; optionally used with `if`                             |
+| `times`      | indicates the number of times a `repeat` block will execute                        |
+| `to`         | used with `append`, `go`, and pseudo-commands                                      |
+| `top`        | indicates a relative position                                                      |
+| `until`      | used in `repeat` commands                                                          |
+| `while`      | used in `repeat` commands                                                          |
+| `with`       | specifies the `console` method that `log` should use; also used in pseudo-commands |
+
+## Syntax
+
+Single-line comments begin with `--` (preferred) or `//`.
+Multi-line comments are delimited by `/*` and `*/`.
 
 ## Terminology
 
