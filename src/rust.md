@@ -2483,7 +2483,7 @@ and the standard library defines the `String` type.
 A `&str` value is a reference (or pointer) to data that includes
 the length of the string and a pointer to where the character data is stored,
 which can be on the stack or the heap.
-A `String` value is a <% aTargetBlank "#smart-pointers", "smart pointer" %>
+A `String` value is a {% aTargetBlank "#smart-pointers", "smart pointer" %}
 that holds a pointer to the character data on the heap,
 a length, and a capacity.
 The capacity is the length to which the character data can grow
@@ -6217,9 +6217,9 @@ but the values it defines are not automatically imported.
 Users of the library can include all the items defined in a `prelude` module
 using `use library_name::prelude::\*;`.
 This is most useful for bringing traits into scope.
-(See this comment in the <% aTargetBlank
+(See this comment in the {% aTargetBlank
 "https://users.rust-lang.org/t/defining-a-prelude-module-for-a-library-crate/54018/2",
-"Rust Forum" %}>).
+"Rust Forum" %}).
 
 The `use` statement binds a module path to a new name for easier access.
 For example, `use A::B::C` enables using `C` with just that name
