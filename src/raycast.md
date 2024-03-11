@@ -158,13 +158,18 @@ See the "Confetti" command.
 
 ## Launching Apps and Settings
 
-To quickly launch an app, press the hotkey for Raycast,
-enter part of the app name and press the return key.
-For example, 1Password can be launched by just typing "1p".
+To quickly launch an app:
 
-Raycast will provide suggestions for recently or frequently used apps.
-The app you want is in the list of suggestions, navigate to it
-with the up and down arrow keys and press return to launch it.
+- Open Raycast.
+- Enter part of the app name (for example, "1p" for 1Password).
+  Raycast will provide suggestions for recently or frequently used apps.
+- Select the app to launch by clicking it or using the up and down arrow keys.
+- Press the return key.
+
+To uninstall the selected app, press cmd-k,
+scroll to "Uninstall Application...", and select it.
+This is preferable to deleting the app from the Finder
+because it will also delete supporting files.
 
 To quickly open the "System Settings" app on a specific panel,
 enter part of the panel name and press the return key.
