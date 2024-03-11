@@ -217,6 +217,63 @@ All other variables are local and can only be used in their current feature.
 </html>
 ```
 
+## DOM Literals
+
+\_hyperscript supports syntax for referring to parts of the DOM.
+The following table describes this syntax.
+
+| DOM Target               | Syntax               |
+| ------------------------ | -------------------- |
+| element by id            | `#someID`            |
+| elements by CSS class    | `.someClassName`     |
+| elements by CSS selector | `<someCSSSelector/>` |
+| attribute value          | `@someAttributeName` |
+| CSS property value       | `*someCSSProperty`   |
+
+The following code demonstrates using each kind of DOM literal.
+
+```html
+<html>
+  <head>
+    <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
+    <style>
+      .styled {
+        border: 1px solid gray;
+        border-radius: 0.5rem;
+        padding: 0.5rem;
+      }
+    </style>
+  </head>
+  <body
+    _="init
+     set el to #my-id -- finds an element by its id
+     log el
+
+     set id to @id of el -- gets an element attribute value
+     log '@id =', id
+
+     for el in .my-class -- finds elements by a CSS class
+       log el
+     end
+
+     for btn in <button/> -- finds elements by tag name
+       remove @disabled from btn -- removes an attribute
+       add .styled to btn -- adds a CSS class to the element
+     end
+
+     -- 's is required here.
+     set #d4's *color to 'blue' -- sets a CSS property
+    "
+  >
+    <div id="my-id">One</div>
+    <div class="my-class">Two</div>
+    <div class="my-class">Three</div>
+    <button disabled _="on click remove me">Click Me</button>
+    <div id="d4" style="color: red">Four</div>
+  </body>
+</html>
+```
+
 ## Commands
 
 \_hyperscript is a programming language
