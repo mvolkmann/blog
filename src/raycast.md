@@ -430,12 +430,50 @@ Filter the list by entering part of a name.
 Popular extensions include:
 
 - Apple Reminders - see the "Reminders" section above
+
 - Brew - search, install, and update Homebrew formulae
 
   This adds the commands "Search", "Clean Up", "Upgrade",
   "Show Installed", and "Show Outdated".
 
 - Color Picker
+
+  This adds the following commands:
+
+  - "Menu Bar Color Picker"
+
+    This adds an eye dropper icon in the Mac menu bar.
+    Clicking it opens a menu with options to run the "Pick Color" command,
+    select a previously picked color,
+    or configure the settings for this command.
+    To remove the menu item, select "Configure Command"
+    and click the "Deactivate" button.
+
+  - "Organize Colors"
+
+    This opens a page that displays all the previously picked colors.
+    They can assigned names (with "Edit Title"),
+    copied to the clipboard in many formats,
+    or be deleted.
+    The color swatches cannot be reordered.
+
+  - "Pick Color".
+
+    This allows selecting any pixel on the screen.
+    The pixel color is copied to the clipboard
+    and added to the history of picked colors.
+
+- cURL - basic version of Postman
+
+  This adds the commands "Make HTTP Request" and "Requests History".
+  After making a request, it will be added to the history.
+  To rerun a request from the history, select it, and press cmd-return.
+
+  By default the title of each request in the history is just its URL.
+  To change it to a more descriptive title,
+  select the request, press cmd-k, select "Add Metadata",
+  and enter values for "Title" and "Short Description".
+
 - GIF Search
 - GitHub
 - iTranslate - language translations and speech
