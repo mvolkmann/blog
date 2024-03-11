@@ -261,8 +261,9 @@ The following code demonstrates using each kind of DOM literal.
        add .styled to btn -- adds a CSS class to the element
      end
 
-     -- 's is required here.
-     set #d4's *color to 'blue' -- sets a CSS property
+     set the *color of #d4 to 'blue' -- sets a CSS property
+     -- Alternative using 's.
+     -- set #d4's *color to 'blue'
     "
   >
     <div id="my-id">One</div>
