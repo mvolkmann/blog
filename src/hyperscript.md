@@ -9,20 +9,10 @@ layout: topic-layout.njk
     src="/blog/assets/hyperscript-logo.png?v={{pkg.version}}">
 </figure>
 
-## Foreword
-
-This page is incomplete.
-
-I'm giving up on \_hyperscript for now.
-The language feels a bit too hard to write because it is
-significantly different from most programming languages, including JavaScript.
-I had difficulty getting some basic examples to work.
-My questions on the htmx Discord channel went unanswered.
-
 ## Overview
 
 {% aTargetBlank "https://hyperscript.org", "_hyperscript" %} is
-small programming language that can be used in HTML files
+programming language that can be used in HTML files
 to implement interactive features such as event handling.
 It also supports asynchronous operations such as
 fetching data from a server by sending an HTTP request.
@@ -53,7 +43,7 @@ As of March 2024 it had not yet reached version 1.0.
 
 ## Installing
 
-To use \_hyperscript, just including the following `script` tag
+To use \_hyperscript, just include the following `script` tag
 in each HTML page that needs it.
 
 ```html
