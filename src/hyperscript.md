@@ -94,11 +94,128 @@ This issue was reported in April 2022, so it seems it will not be fixed.
 
 ## Underscore Attribute
 
-The value of the `_` attribute is a string of \_hyperscript commands.
-It must begin with stating when it should run.
-Typically this is the `on` keyword followed by an event name.
-It can also be `init` to state that it should run
-when the associated element is initialized.
+The value of the `_` attribute is a string of \_hyperscript code.
+The name `script` or `data-script` can be used in place of `_`.
+
+The code must begin with a feature command.
+These are described in the next section.
+
+## Features
+
+Each HTML element can only have one underscore attribute.
+
+Each underscore attribute can describe one or more features.
+
+The `init` feature is executed when the associated element is initialized.
+
+The `on` feature lists the events that will cause
+the commands that follow to be executed.
+Multiple event names are separated by the `or` keyword.
+
+The following code demonstrates using the `init` and `on` features.
+
+```html
+<html>
+  <head>
+    <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
+  </head>
+  <body>
+    See output in the DevTools console.
+
+    <!-- This demonstrates defining multiple features in one _ value. -->
+    <div
+      _="
+      init log 'initialized'
+      on click log 'got click'
+      on mouseover log 'got mouseover'
+    "
+    >
+      mouseover and click to execute features
+    </div>
+
+    <!-- This demonstrates using the "js" feature. -->
+    <div _="js console.log('ran JS code')">ran JS code</div>
+  </body>
+</html>
+```
+
+The most commonly used features are `init` and `on`.
+Other supported features include:
+
+- `behavior`/`install` to define and use named sets of commands
+- `def` to define functions that execute commands
+- `eventsource` for working with Server-Sent Events (SSE)
+- `js` for embedding JavaScript code
+- `set` for setting an element-scoped variable
+- `socket` for working with WebSockets
+- `worker` for working with Web Workers
+
+## Variables
+
+Hyperscript can access JavaScript variables that are declared with
+the `var` keyword, but not those declared with the `const` or `let` keywords.
+
+Hyperscript can declare and use its own variables.
+These have three scopes.
+
+Global variables can be used in any \_hyperscript command.
+There are two ways to create a global variable.
+
+- `set ${name} to {value}`
+- `set global {name} to {value}`
+
+Element variables are scoped to an element,
+but can be accessed in any of its features.
+Their names must start with `:`.
+
+All other variables are local and can only be used in their current feature.
+
+```html
+<html>
+  <head>
+    <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
+    <script>
+      // _hyperscript cannot access variables declared with const or let.
+      var j = 1;
+    </script>
+  </head>
+  <body>
+    See output in the DevTools console.
+
+    <!-- This demonstates accessing a JavaScript variable. -->
+    <div _="init log 'j =', j">logged JS variable</div>
+
+    <!-- These demonstrate defining a global-scoped variable
+         and accessing it in multiple elements. -->
+    <div _="init set global g to 3">set g</div>
+    <div _="init log '$g =', $g">logged g</div>
+    <div _="init set my.textContent to g"></div>
+
+    <!-- This demonstrates setting an element-scoped variable
+         and accessing it in other features. -->
+    <div
+      _="
+      init set :e to 4 then log 'init :e =', :e
+      on click log 'click :e =', :e -- can access because it's element-scoped
+      on mouseover log 'mouseover :e =', :e
+    "
+    >
+      mouseover and click for element-scoped variable
+    </div>
+
+    <!-- This demonstrates setting a local-scoped variable
+         and not being able to access it in other features. -->
+    <div
+      _="
+      init set l to 5 then log 'init l =', l
+      on click log 'click l =', l -- undefined because it's local-scoped
+    "
+    >
+      click for local-scoped variable
+    </div>
+  </body>
+</html>
+```
 
 ## Commands
 
@@ -140,7 +257,7 @@ Each \_hyperscript command is described in the following table.
 | `repeat`     | iterates over items in an expression, a number of times, or `forever`                                  |
 | `return`     | returns a value from a function or exits from an event handler                                         |
 | `send`       | sends an event to a target element                                                                     |
-| `set`        | sets a variable or element properties                                                                  |
+| `set`        | sets a variable or element property                                                                    |
 | `settle`     | synchronizes on a CSS transition of an element                                                         |
 | `show`       | shows an element by changing its CSS `display`, `visibility`, or `opacity` property                    |
 | `take`       | removes a class or attribute from elements and adds it to another element                              |
