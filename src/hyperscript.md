@@ -92,6 +92,14 @@ and in standalone files.
 Unfortunately, it often messes up the syntax highlighting of HTML that follows.
 This issue was reported in April 2022, so it seems it will not be fixed.
 
+## Underscore Attribute
+
+The value of the `_` attribute is a string of \_hyperscript commands.
+It must begin with stating when it should run.
+Typically this is the `on` keyword followed by an event name.
+It can also be `init` to state that it should run
+when the associated element is initialized.
+
 ## Commands
 
 \_hyperscript is a programming language
@@ -124,6 +132,7 @@ Each \_hyperscript command is described in the following table.
 | `log`        | writes using `console.log` unless another variant is specified after `with` keyword                    |
 | `make`       | creates an instance of a DOM class (an element)                                                        |
 | `measure`    | gets measurements from an element                                                                      |
+| `on`         | specifies events (separated by `or`) that trigger the commands that follow                             |
 | `pick`       | gets array elements using the `slice` method                                                           |
 | `put`        | inserts content into a variable, property, or the DOM                                                  |
 | `remove`     | removes an element from the DOM or a class/property from an element                                    |
@@ -177,11 +186,13 @@ that treat an object method as a top-level command.
 | `me`         | possessive that refers to the current element                                      |
 | `middle`     | indicates a relative position                                                      |
 | `my`         | alias for `me`                                                                     |
+| `next`       | finds the next element of a given type                                             |
 | `not`        | used in logical expressions                                                        |
 | `of`         | makes commands more readable                                                       |
 | `on`         | used in pseudo-commands                                                            |
 | `or`         | used in logical expressions                                                        |
 | `otherwise`  | alias for `else`; used with `if`                                                   |
+| `previous`   | finds the previous element of a given type                                         |
 | `right`      | indicates a relative position                                                      |
 | `the`        | makes commands more readable                                                       |
 | `then`       | separates multiple commands; optionally used with `if`                             |
