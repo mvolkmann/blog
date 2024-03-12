@@ -290,8 +290,8 @@ For example, it cannot file Documents/BeverlyHillbillies.txt.
 
 ## Quicklinks
 
-Quicklinks simplify opening URLs and
-supplying a query parameter for sites the perform searching.
+Quicklinks simplify opening URLs and optionally
+supplying a query parameter for sites that perform searching.
 The only quicklinks that are provided are
 "Search DuckDuckGo" and "Search Google".
 
@@ -306,7 +306,16 @@ To add a predefined quicklink:
   Examples include "Search Wikipedia" and "Search YouTube".
 - In the dialog that appears, click the "Create Quicklink" button.
 
-To create a new quicklink for a website that
+To create a basic quicklink:
+
+- Open Raycast.
+- Enter "qu" and select "Create Quicklink".
+- Enter a name.
+- Enter a URL.
+- Select the browser to use for opening it.
+- Click "Create Quicklink".
+
+To create a quicklink for a website that
 performs a search using a URL query parameter:
 
 - Go to the desired site in a web browser.
@@ -368,6 +377,36 @@ For example, enter "kiss" to see only the related emojis and symbols.
 To enter an emoji in any Raycast input, type a colon.
 This opens an emoji picker containing recently used emojis.
 Type part of the name of an emoji to see others.
+
+## Floating Notes
+
+The "Floating Notes" built-in feature opens a single window
+for entering text that always remains on top of other windows.
+
+To toggle the display of this window, open Raycast, enter "fl",
+and select the "Toggle Floating Notes Window" command.
+I assigned the hot key hyper-n to this command.
+The window can also be closed by clicking the "X" in the upper-right corner
+or by pressing cmd-w when it has focus.
+
+To move focus to this window, click in it.
+Alternatively, open Raycast, enter "fl",
+and select the "Toggle Floating Notes Focus" command.
+If the window is not already open, this will also open it.
+
+The window begins with a height that only accomodates a single line.
+The height increases automatically as more lines are entered.
+If the number of lines exceeds its maximum height, a scrollbar is provided.
+
+The window can be repositioned and dragged to any monitor,
+but it cannot be resized.
+
+To change the background color of the window,
+click the paint brush icon in the lower-left
+and select from a predefined set of five colors.
+
+The number of words and characters entered
+are displayed at the bottom of the window.
 
 ## Reminders
 
