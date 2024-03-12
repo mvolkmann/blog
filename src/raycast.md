@@ -136,6 +136,23 @@ To open the Raycast settings dialog, open Raycast and press cmd-comma.
 Click the "Extensions" tab in the settings dialog
 to enable and disable extensions.
 
+All your Raycast settings can be exported and imported
+from the "Advanced" settings tab.
+
+## Window State
+
+The Raycast window maintains its state across uses
+for a configurable amount of time (defaults to 90 seconds).
+When it is reopened within this amount of time,
+it will be in on the same page with the same input values
+as when it was last used.
+
+To return to the root page, press cmd-esc or repeatedly press esc.
+
+To configure the amount of time that Raycast maintains its window state,
+open the Raycast settings, click the "Advanced" tab,
+and select a different value in the "Pop to Root Search" dropdown.
+
 ## Command Aliases and Hotkeys
 
 To assign aliases and hotkeys to commands,
@@ -227,6 +244,8 @@ It's unclear whether this works with the Bartender utility.
 To view clipboard history, open Raycast, enter "clip",
 and select "Clipboard History".
 By default only entries from the last 7 days are saved.
+
+The clipboard history is stored in a local encrypted database for security.
 
 Filter the list by entering search text.
 
