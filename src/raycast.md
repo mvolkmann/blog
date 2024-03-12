@@ -558,6 +558,15 @@ The custom renderer uses Raycast-specific components
 rather than HTML and CSS.
 AppleScript is used communication with macOS apps.
 
+An alternative to creating an extension is to write a script command.
+Script commands are "a simple way to execute a shell script
+and show some limited output in Raycast".
+They can be written in any scripting language, so they
+rely on users having the selecting scripting language installed.
+
+Extensions can be shared with others through the Raycast store,
+but script commands cannot.
+
 To create a new extension:
 
 1. Open Raycast
