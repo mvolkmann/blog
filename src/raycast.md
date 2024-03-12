@@ -386,6 +386,7 @@ for entering text that always remains on top of other windows.
 To toggle the display of this window, open Raycast, enter "fl",
 and select the "Toggle Floating Notes Window" command.
 I assigned the hot key hyper-n to this command.
+(I configured the hyper key using the free app Karabiner-Elements.)
 The window can also be closed by clicking the "X" in the upper-right corner
 or by pressing cmd-w when it has focus.
 
