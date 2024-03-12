@@ -297,7 +297,8 @@ to add interactivity in web applications.
 The following code renders a `button` that toggles whether a `div` is visible.
 Note the readability of the \_hyperscript code on the `button` element.
 
-![_hyperscript visibility toggle](images/alpine-visibility-toggle.png)
+<img alt="_hyperscript visibility toggle" style="width: 40%"
+  src="/blog/assets/alpine-visibility-toggle.png?v={{pkg.version}}" />
 
 ```html
 <html>
@@ -328,7 +329,8 @@ The following code implements a basic counter component.
 Note that the `if` command doesn't require the `end` keyword
 if it is the last command.
 
-![_hyperscript counter](images/alpine-counter.png)
+<img alt="_hyperscript counter" style="width: 20%"
+  src="/blog/assets/alpine-counter.png?v={{pkg.version}}" />
 
 ```html
 <html>
@@ -368,7 +370,8 @@ The following example demonstrates using the `for` and `if` commands.
 It also demonstrates using the `make`, `set`, and `put` commands
 to make a DOM element, set its properties, and put it into the DOM.
 
-![_hyperscript for and if](images/alpine-for-and-if.png)
+<img alt="_hyperscript for and if" style="width: 20%"
+  src="/blog/assets/alpine-for-and-if.png?v={{pkg.version}}" />
 
 ```html
 <html>
@@ -417,7 +420,8 @@ This example demonstrates several more \_hyperscript features.
 
 The CSS is the same as in the Alpine version.
 
-![_hyperscript Score Keeper](images/alpine-score-keeper.png)
+<img alt="_hyperscript Score Keeper" style="width: 50%"
+  src="/blog/assets/alpine-score-keeper.png?v={{pkg.version}}" />
 
 Here is the HTML.
 
