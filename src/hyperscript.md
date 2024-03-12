@@ -31,14 +31,14 @@ because the syntax is quite different from typical programming languages.
 \_hyperscript is similar to {% aTargetBlank "https://alpinejs.dev", "Alpine" %}
 and {% aTargetBlank "https://htmx.org", "HTMX" %}
 in that they add attributes to HTML.
-But hyperscript only adds one attribute, the underscore.
+But hyperscript only adds one attribute whose name is a single underscore.
 
 Placing code on HTML elements favors locality of behavior
 over separation of concerns much like
 {% aTargetBlank "https://tailwindcss.com", "Tailwind" %}, Alpine, and HTMX.
 
 \_hyperscript was created by Carson Gross who also created
-{% aTargetBlank "https://htmx.org", "HTMX" %}.
+{% aTargetBlank "https://htmx.org", "htmx" %}.
 As of March 2024 it had not yet reached version 1.0.
 
 ## Installing
@@ -50,45 +50,16 @@ in each HTML page that needs it.
 <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
 ```
 
+Check the \_hyperscript website to see if a newer version is available.
 Version 0.9.12 was released in October 2023.
 
 \_hyperscript cannot be installed from npm.
 
-## Using \_hyperscript
-
-To use \_hyperscript, add an attribute to HTML elements
-whose name is an underscore.
-The names `script` and `data-script` can also be used.
-For example:
-
-```html
-<html lang="en">
-  <head>
-    <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
-  </head>
-  <body>
-    <button _="on click alert('got click')">Click Me</button>
-  </body>
-</html>
-```
-
-## Using VS Code
-
-The {% aTargetBlank
-"https://marketplace.visualstudio.com/items?itemName=dz4k.vscode-hyperscript-org",
-"_hyperscript" %} extension from dz4k provides
-syntax highlighting of \_hyperscript code embedded in HTML files
-and in standalone files.
-Unfortunately, it often messes up the syntax highlighting of HTML that follows.
-This issue was reported in April 2022, so it seems it will not be fixed.
-
 ## Underscore Attribute
 
 The value of the `_` attribute is a string of \_hyperscript code.
-The name `script` or `data-script` can be used in place of `_`.
-
-The code must begin with a feature command.
-These are described in the next section.
+The name `script` or `data-script` can be used in place of `_`,
+but those names are not commonly used.
 
 ## Features
 
@@ -96,13 +67,18 @@ Each HTML element can only have one underscore attribute.
 
 Each underscore attribute can describe one or more features.
 
-The `init` feature is executed when the associated element is initialized.
+The following example demonstrates using the `init` and `on` features,
+which are the most commonly used features.
+
+The `init` feature specifies commands to be executed
+when the associated element is initialized.
 
 The `on` feature lists the events that will cause
 the commands that follow to be executed.
-Multiple event names are separated by the `or` keyword.
+When there are multiple event names, they are separated by the `or` keyword.
 
-The following code demonstrates using the `init` and `on` features.
+The `log` command, by default, uses the `console.log` function
+to write the DevTools Console.
 
 ```html
 <html>
@@ -120,16 +96,12 @@ The following code demonstrates using the `init` and `on` features.
       on mouseover log 'got mouseover'
     "
     >
-      mouseover and click to execute features
+      Move the mouse over me and click me to execute the features.
     </div>
-
-    <!-- This demonstrates using the "js" feature. -->
-    <div _="js console.log('ran JS code')">ran JS code</div>
   </body>
 </html>
 ```
 
-The most commonly used features are `init` and `on`.
 Other supported features include:
 
 - `behavior`/`install` to define and use named sets of commands
@@ -150,15 +122,21 @@ These have three scopes.
 
 Global variables can be used in any \_hyperscript command.
 There are two ways to create a global variable.
+Either there names must begin with a dollar sign
+or they must be set with the `global` keyword.
 
 - `set ${name} to {value}`
 - `set global {name} to {value}`
 
 Element variables are scoped to an element,
 but can be accessed in any of its features.
-Their names must start with `:`.
+Their names must start with a colon.
 
-All other variables are local and can only be used in their current feature.
+All other variables are local and can only be used
+in the feature in which they are set.
+
+The following example demonstrates defining and using
+all three variable scopes.
 
 ```html
 <html>
@@ -207,68 +185,9 @@ All other variables are local and can only be used in their current feature.
 </html>
 ```
 
-## DOM Literals
-
-\_hyperscript supports syntax for referring to parts of the DOM.
-The following table describes this syntax.
-
-| DOM Target               | Syntax               |
-| ------------------------ | -------------------- |
-| element by id            | `#someID`            |
-| elements by CSS class    | `.someClassName`     |
-| elements by CSS selector | `<someCSSSelector/>` |
-| attribute value          | `@someAttributeName` |
-| CSS property value       | `*someCSSProperty`   |
-
-The following code demonstrates using each kind of DOM literal.
-
-```html
-<html>
-  <head>
-    <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
-    <style>
-      .styled {
-        border: 1px solid gray;
-        border-radius: 0.5rem;
-        padding: 0.5rem;
-      }
-    </style>
-  </head>
-  <body
-    _="init
-     set el to #my-id -- finds an element by its id
-     log el
-
-     set id to @id of el -- gets an element attribute value
-     log '@id =', id
-
-     for el in .my-class -- finds elements by a CSS class
-       log el
-     end
-
-     for btn in <button/> -- finds elements by tag name
-       remove @disabled from btn -- removes an attribute
-       add .styled to btn -- adds a CSS class to the element
-     end
-
-     set the *color of #d4 to 'blue' -- sets a CSS property
-     -- Alternative using 's.
-     -- set #d4's *color to 'blue'
-    "
-  >
-    <div id="my-id">One</div>
-    <div class="my-class">Two</div>
-    <div class="my-class">Three</div>
-    <button disabled _="on click remove me">Click Me</button>
-    <div id="d4" style="color: red">Four</div>
-  </body>
-</html>
-```
-
 ## Commands
 
-\_hyperscript is a programming language
-with its own set of commands and keywords.
+\_hyperscript supports a large number of commands and keywords.
 
 Each \_hyperscript command is described in the following table.
 
@@ -368,65 +287,309 @@ that treat an object method as a top-level command.
 | `while`      | used in `repeat` commands                                                          |
 | `with`       | specifies the `console` method that `log` should use; also used in pseudo-commands |
 
-## Syntax
+## Examples
 
-Single-line comments begin with `--` (preferred) or `//`.
-Multi-line comments are delimited by `/*` and `*/`.
+Let's walk through some examples of using \_hyperscript
+to add interactivity in web applications.
 
-## Terminology
+### Conditional Visibility
 
-- script: composed of features
+The following code renders a `button` that toggles whether a `div` is visible.
+Note the readability of the \_hyperscript code on the `button` element.
 
-- feature: a series of commands
+![_hyperscript visibility toggle](images/alpine-visibility-toggle.png)
 
-  One kind of feature is an event handler.
+```html
+<html>
+  <head>
+    <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
+    <style>
+      .message {
+        font-size: 3rem;
+        opacity: 0;
+        transition: opacity 1s;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <button _="on click toggle the *opacity of the next <div/>">
+        Toggle
+      </button>
+      <div class="message">Hello, World!</div>
+    </div>
+  </body>
+</html>
+```
 
-- command: a series of expressions
+### Counter
 
-  Multiple commands can be separated by
-  the `then` keyword or a newline character.
+The following code implements a basic counter component.
+Note that the `if` command doesn't require the `end` keyword
+if it is the last command.
 
-  Commands with bodies, such as `if` and `on`
-  are terminated by the `end` keyword,
-  but that is not required if the script ends or another feature starts.
-  In practice the `end` keyword is rarely used.
+![_hyperscript counter](images/alpine-counter.png)
 
-- expressions: can include three kinds of values
+```html
+<html>
+  <head>
+    <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
+  </head>
+  <body>
+    <div style="display: flex; gap: 1rem">
+      <button
+        disabled
+        _="on click
+          remove @disabled from the next <button/>
+          decrement the textContent of #count
+          if it is 0 then add @disabled to me
+        "
+      >
+        -
+      </button>
+      <span id="count">0</span>
+      <button
+        _="on click
+          remove @disabled from the previous <button/>
+          increment the textContent of #count
+          if it is 10 then add @disabled to me
+        "
+      >
+        +
+      </button>
+    </div>
+  </body>
+</html>
+```
 
-  - numbers
-  - strings in single or double quotes
-  - array literals with the syntax `[value1, value2, ...]`
-  - element id references: `#some-id`
-  - CSS class references: `.some-class`
-  - attribute references: `@some-attribute`
-  - query references: `<somename />`
+### Using x-for and x-if Directives
 
-- variables
+The following example demonstrates using the `for` and `if` commands.
+It also demonstrates using the `make`, `set`, and `put` commands
+to make a DOM element, set its properties, and put it into the DOM.
 
-  To set a variable, use `set {name} to {value}`.
-  The `put` keyword can be used in place of `set`, but `set` is preferred.
+![_hyperscript for and if](images/alpine-for-and-if.png)
 
-  There are three variable scopes:
+```html
+<html>
+  <head>
+    <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
+    <script>
+      // _hyperscript cannot access variables declared with const or let.
+      var colors = [
+        {name: 'blue', primary: true},
+        {name: 'green', primary: false},
+        {name: 'orange', primary: false},
+        {name: 'purple', primary: false},
+        {name: 'red', primary: true},
+        {name: 'yellow', primary: true}
+      ];
+    </script>
+  </head>
+  <body style="background-color: gray">
+    <h1>Primary Colors</h1>
+    <div
+      _="init
+      for color in colors
+        if color.primary
+          make a <div/>
+          -- The * indicates that we are setting a CSS property.
+          set its *color to color.name
+          set its *fontSize to 2rem
+          set its textContent to color.name
+          put it at the end of me
+        end
+      end
+    "
+    ></div>
+  </body>
+</html>
+```
 
-  - `local`: scoped to a feature within a script
-  - `element`: scoped to the element associated with the script
-  - `global`: available to all scripts
+### Score Keeper
 
-  To specify the scope of a variable,
-  precede its name with one of these keywords and space.
-  Alternative, precede the name with
-  a `$` for global scope or a `:` for element scope.
-  If no scope is specified, the variable defaults to `local` scope.
+This example demonstrates several more \_hyperscript features.
+
+- defining functions in a `<script type="text/hyperscript">` element
+- calling \_hyperscript functions
+- setting variables to a literal object
+- updating variables based on `input` change events
+
+The CSS is the same as in the Alpine version.
+
+![_hyperscript Score Keeper](images/alpine-score-keeper.png)
+
+Here is the HTML.
+
+```html
+<html>
+  <head>
+    <title>_hyperscript Score Keeper</title>
+    <link rel="stylesheet" href="score-keeper.css" />
+    <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
+    <script type="text/hyperscript">
+      def color(team)
+        if team.like return 'red' end
+        return 'white'
+      end
+
+      def heart(team)
+        if team.like return '{red-heart}️' end
+        return '{white-heart}'
+        -- Replace `{red-heart}` and `{white-heart}` above
+        -- with the corresponding emojis.
+      end
+
+      def report()
+        if the score of $team1 is greater than the score of $team2
+          set text to `The ${$team1.name} are winning.`
+        else if the score of $team2 is greater than the score of $team1
+          set text to `The ${$team2.name} are winning.`
+        else
+          set text to 'The score is tied.'
+        end
+        set the textContent of #report to text
+      end
+    </script>
+  </head>
+  <body
+    _="init
+      set $team1 to {name: 'Chiefs', like: false, score: 25}
+      set $team2 to {name: '49ers', like: false, score: 22}
+    "
+  >
+    <main class="column">
+      <div id="report" _="init report()"></div>
+      <section class="column team">
+        <label>
+          Team
+          <input
+            type="text"
+            _="
+              init set my value to $team1.name
+              on change set $team1.name to my value then report()
+            "
+          />
+        </label>
+        <label>
+          Score
+          <input
+            type="number"
+            _="
+              init set my value to $team1.score
+              on change set $team1.score to my value then report()
+            "
+          />
+        </label>
+        <button
+          _="
+            init set my textContent to heart($team1)
+            on click
+              set $team1.like to not $team1.like
+              set *border-color of closest <section/> to color($team1)
+              set my textContent to heart($team1)
+          "
+        ></button>
+      </section>
+      <section class="column team">
+        <label>
+          Team
+          <input
+            type="text"
+            _="
+              init set my value to $team2.name
+              on change set $team2.name to my value then report()
+            "
+          />
+        </label>
+        <label>
+          Score
+          <input
+            type="number"
+            _="
+              init set my value to $team2.score
+              on change set $team2.score to my value then report()
+            "
+          />
+        </label>
+        <button
+          _="
+            init set my textContent to heart($team2)
+            on click
+              set $team2.like to not $team2.like
+              set *border-color of closest <section/> to color($team2)
+              set my textContent to heart($team2)
+          "
+        ></button>
+      </section>
+    </main>
+  </body>
+</html>
+```
+
+## DOM Literals
+
+\_hyperscript supports syntax for referring to parts of the DOM.
+The following table describes this syntax.
+
+| DOM Target               | Syntax               |
+| ------------------------ | -------------------- |
+| element by id            | `#someID`            |
+| elements by CSS class    | `.someClassName`     |
+| elements by CSS selector | `<someCSSSelector/>` |
+| attribute value          | `@someAttributeName` |
+| CSS property value       | `*someCSSProperty`   |
+
+The following code demonstrates using each kind of DOM literal.
+
+```html
+<html>
+  <head>
+    <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
+    <style>
+      .styled {
+        border: 1px solid gray;
+        border-radius: 0.5rem;
+        padding: 0.5rem;
+      }
+    </style>
+  </head>
+  <body
+    _="init
+     set el to #my-id -- finds an element by its id
+     log el
+
+     set id to @id of el -- gets an element attribute value
+     log '@id =', id
+
+     for el in .my-class -- finds elements by a CSS class
+       log el
+     end
+
+     for btn in <button/> -- finds elements by tag name
+       remove @disabled from btn -- removes an attribute
+       add .styled to btn -- adds a CSS class to the element
+     end
+
+     set the *color of #d4 to 'blue' -- sets a CSS property
+     -- Alternative using 's.
+     -- set #d4's *color to 'blue'
+    "
+  >
+    <div id="my-id">One</div>
+    <div class="my-class">Two</div>
+    <div class="my-class">Three</div>
+    <button disabled _="on click remove me">Click Me</button>
+    <div id="d4" style="color: red">Four</div>
+  </body>
+</html>
+```
 
 ## Errors
 
 When syntax errors are encountered,
 error messages are written to the DevTools Console.
 They are quite descriptive.
-
-## Logging
-
-To write to the DevTools Console, use `log {value}`
 
 ## Comments
 
