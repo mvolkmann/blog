@@ -399,15 +399,27 @@ To define a snippet:
 - Enter a descriptive name.
 - Enter the text of the snippet.
 - Enter the keyword that will be used to activate the snippet.
+  WARNING: You must scroll down to see this!
+  If no keyword is entered, the snippet will not work.
 
 The snippet text can contain placeholders.
 For details, see <a href="https://manual.raycast.com/dynamic-placeholders"
 target="_blank">Dynamic Placeholders</a>.
+They can also contain `{cursor}` to indicate where
+the cursor should be positioned after the snippet is inserted.
 
 For example, the following snippet adds an HTML anchor tag.
 
 ```html
-<a href="{argument name="url"" target="_blank">{argument name="title"}</a>
+<a href="{argument name="url"}" target="_blank">{argument name="title"}</a>
+```
+
+Argument names must be lowercase.
+They can be repeated to substitute the same value in multiple occurrences.
+For example:
+
+```js
+console.log('{argument name="expression"} =', {argument name="expression"});
 ```
 
 If this is given the keyword "atb" and that keyword is entered in any application,
