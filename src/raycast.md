@@ -26,8 +26,9 @@ Raycast ...
 - is a native macOS app implemented in Swift.
 - is a replacement for Spotlight that competes with utilities like Alfred.
 - places an emphasis on supporting keyboard navigation for all actions.
-- uses a "stack of pages" metaphor
-- is notable in that makes it easy to create new extensions and
+- uses a "stack of pages" metaphor.
+- provides many extensions it its store that are all free and open-source.
+- makes it easy to create new extensions and
   submit them to its store so other users can install and use them.
 
 Raycast extensions can add items to the macOS menu bar.
