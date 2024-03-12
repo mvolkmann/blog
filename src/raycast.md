@@ -476,6 +476,22 @@ Popular extensions include:
 
 - GIF Search
 - GitHub
+
+  This adds a large number of commands. The most useful are:
+
+  - Create Issue
+  - Created Issues
+  - Open Issues
+  - Search Issues
+
+  - Create Pull Request
+  - My Pull Requests
+
+  - My Latest Repositories
+  - Search Repositories (limit to "My Repositories")
+
+  - Workflow Runs
+
 - iTranslate - language translations and speech
 - Kill Process
 - Music - controls the Apple Music app
