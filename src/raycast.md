@@ -34,6 +34,8 @@ Raycast ...
 Raycast extensions can add items to the macOS menu bar.
 Clicking a menu bar item can reveal a list of items.
 Clicking a list item can trigger an action such as opening a URL in Safari.
+Menu bar extensions can specify a refresh interval
+for automatically updating their contents.
 
 ## Installing
 

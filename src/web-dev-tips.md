@@ -1961,6 +1961,9 @@ Categorized lists of commonly used pseudo classes are described below.
 
 - `:first-of-type` matches the first sibling with the same element name.
 
+- `:has` matches an element that has specific descendant elements
+  (see `:has` section below)
+
 - `:last-child` matches the last sibling.
 
 - `:last-of-type` matches the last sibling with the same element name.
@@ -2053,6 +2056,179 @@ The other buttons change from blue to green when hovering over them.
 ```
 
 {% endraw %}
+
+### :has Pseudo Class
+
+This matches an element that has specific descendant elements.
+
+The following example demonstates many uses of `:has`.
+A lot is achieved without writing any JavaScript code!
+
+<img alt="CSS :has pseudo class" style="width: 70%"
+  src="/blog/assets/css-has-pseudo-class.png?v={{pkg.version}}"
+  title="CSS :has pseudo class">
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CSS :has Pseudo Class</title>
+    <style>
+      body {
+        --border-width: 5px;
+        font-family: sans-serif;
+      }
+
+      /* The background color of section elements
+         is based on their descendant elements. */
+      section {
+        background-color: lightyellow;
+        border: var(--border-width) solid transparent;
+        margin-bottom: 1rem;
+        padding: 1rem;
+      }
+      section:has(img) {
+        background-color: lightblue;
+      }
+      section:has(img):not(:has(p)) {
+        background-color: pink;
+      }
+
+      /* If the "like" checkbox is checked then
+         all section elements get a red border. */
+      body:has(#like-checkbox:checked) section {
+        border: var(--border-width) solid red;
+      }
+
+      /* Add text after the "like" checkbox
+         based on whether it is checked. */
+      body:has(#like-checkbox:checked) #like-text::before {
+        content: 'Unlike';
+      }
+      body:not(:has(#like-checkbox:checked)) #like-text::before {
+        content: 'Like';
+      }
+
+      /* If the next sibling of a p is an img, change the p styling. */
+      p:has(+ img) {
+        background-color: white;
+        padding: 0.5rem;
+      }
+
+      .error-msg {
+        color: red;
+        font-weight: bold;
+        visibility: hidden;
+      }
+
+      input[type='number'] {
+        border: 2px solid gray;
+        border-radius: 0.5rem;
+        padding: 0.5rem;
+      }
+
+      /* If a label contains an input with an invalid value,
+         make the error message that follows the label visible.
+         ~ selects all subsequent siblings if
+         they match the selector after it. */
+      label:has(input:user-invalid) ~ .error-msg {
+        visibility: visible;
+      }
+
+      /* Set the border color of the number input
+         based on whether its value is valid.
+         Focus must be moved out of the input (blur)
+         to apply the change. */
+      #rating-input:user-valid {
+        border-color: green;
+      }
+      #rating-input:user-invalid {
+        border-color: red;
+      }
+
+      button {
+        background-color: lightgray;
+        border: none;
+        border-radius: 0.5rem;
+        padding: 0.5rem;
+      }
+
+      button:hover {
+        background-color: lightgreen;
+      }
+
+      .buttons {
+        margin-top: 1rem;
+      }
+
+      /* If one of the buttons is hovered, dim all the other buttons. */
+      .buttons:has(button:hover) button:not(:hover) {
+        opacity: 0.3;
+      }
+
+      .post {
+        border: 2px solid gray;
+        margin-top: 1rem;
+        padding: 1rem;
+      }
+
+      /* Change the border around posts that contain any empty elements. */
+      .post:has(> *:empty) {
+        border: 2px dashed red;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <p>This is a paragraph.</p>
+    </section>
+    <section>
+      <p>This is the CSS logo.</p>
+      <img
+        alt="CSS Logo"
+        src="https://1000logos.net/wp-content/uploads/2020/09/CSS-Logo.png"
+        width="100"
+      />
+    </section>
+    <section>
+      <img
+        alt="CSS Logo"
+        src="https://1000logos.net/wp-content/uploads/2020/09/CSS-Logo.png"
+        width="100"
+      />
+    </section>
+
+    <div>
+      <input type="checkbox" id="like-checkbox" />
+      <span id="like-text"></span>
+    </div>
+
+    <div>
+      <label
+        >Rating
+        <input id="rating-input" type="number" min="0" max="10" />
+      </label>
+      <span class="error-msg">invalid rating</span>
+    </div>
+
+    <div class="buttons">
+      <button>First</button>
+      <button>Second</button>
+      <button>Third</button>
+    </div>
+
+    <section class="post">
+      <p>This is the first paragraph.</p>
+      <p>This is the second paragraph.</p>
+    </section>
+    <section class="post">
+      <p>This is the first paragraph.</p>
+      <!-- The next element is empty. -->
+      <p></p>
+    </section>
+  </body>
+</html>
+```
 
 ### Pseudo selectors
 

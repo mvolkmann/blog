@@ -2220,14 +2220,16 @@ app.get('/time/:count', async (c: Context) => {
 export default app;
 ```
 
-In the first client approach, the Alpine directives
-`x-effect` and `x-bind` (with shorthand syntax `:`) are used.
-The JavaScript code that is the value of the `x-effect` directive
-is reevaluated every time any Alpine variable it uses changes.
-When the value of the Alpine variable `count` changes,
-the `hx-process` function is called to re-process the current element.
-The syntax `:hx-get` means that the value will be recomputed
-every time the element is processed.
+In the first client approach, Alpine is used to hold the value of `count`.
+Every time `count` changes, the `hx-get` attribute is updated
+because it uses `x-bind` (with the shorthand syntax `:`).
+However, htmx won't recognize the change
+until the `button` element is processed again.
+The `x-effect` directive specifies JavaScript code
+that is executed every time any Alpine variable it uses changes.
+So when `count` changes, the `htmx.process` function is called
+to re-process the current element which is the `button`.
+When the button is clicked, a GET request is sent using the updated URL path.
 
 ```js
 <html>
@@ -2241,7 +2243,17 @@ every time the element is processed.
     ></script>
   </head>
   <body x-data="{count: 0}">
+    <div class="counter">
+      <button :disabled="count <= 0" x-on:click="count--">Less</button>
+      <div id="count" x-text="count"></div>
+      <button x-on:click="count++">More</button>
+    </div>
+    <!-- Using Alpine x-bind on the hx-get attribute causes its
+         value to be updated every time the value of count changes.
+         But htmx doesn't recognized the change unless it processes the
+         button element again.  Calling htmx.process($el) does just that. -->
     <button
+      id="time-btn"
       :hx-get="`/time/${count}`"
       x-effect="count; htmx.process($el)"
       hx-target="#time"
@@ -2249,11 +2261,6 @@ every time the element is processed.
       Get Time
     </button>
     <div id="time"></div>
-    <div class="counter">
-      <button x-bind:disabled="count <= 0" x-on:click="count--">Less</button>
-      <div id="count" x-text="count"></div>
-      <button x-on:click="count++">More</button>
-    </div>
   </body>
 </html>
 ```
@@ -2263,7 +2270,7 @@ but the approach above is the simplest.
 
 Another client approach is to listen for the `htmx:configRequest` event.
 This provides a way to modify the URL used by `hx-get`
-before a request is sent:
+before a request is sent.
 
 The following code demonstrates using the text content of an element
 that is set by Alpine to determine the URL to use for a GET request.
@@ -2563,17 +2570,17 @@ properties on the global `htmx` object.
 | Method                   | Description                                                           |
 | ------------------------ | --------------------------------------------------------------------- |
 | `htmx.addClass`          | adds a CSS class to a given HTML element                              |
-| `htmx.ajax`              | sends an HTTP request and inserts the HTML response                   |
+| `htmx.ajax`              | sends an HTTP request and inserts the HTML response into the DOM      |
 | `htmx.closest`           | finds the closest ancestor element that matches a CSS selector        |
-| `htmx.config`            | object that holds htmx configuration options                          |
+| `htmx.config`            | an object that holds htmx configuration options                       |
 | `htmx.createEventSource` | creates a Server-Sent Event (SSE) source                              |
 | `htmx.createWebSocket`   | creates a new WebSocket                                               |
 | `htmx.defineExtension`   | defines a new htmx extension                                          |
 | `htmx.find`              | finds one element that matches a CSS selector                         |
 | `htmx.findAll`           | finds all elements that match a CSS selector                          |
 | `htmx.logAll`            | logs all htmx events for debugging                                    |
-| `htmx.logNone`           | disables logging of htmx events                                       |
-| `htmx.logger`            | holds the function used to log htmx events; can change                |
+| `htmx.logNone`           | disables the logging of htmx events                                   |
+| `htmx.logger`            | holds the function used to log htmx events; can be changed            |
 | `htmx.off`               | removes an event listener from an element                             |
 | `htmx.on`                | adds an event listener to an element                                  |
 | `htmx.onLoad`            | specifies a function to call when the `htmx:load` event is dispatched |
@@ -2614,7 +2621,7 @@ and a `div` to display the result of the HTTP request.
 
 The following code from the file `public/utils.js`
 defines a function that imposes a quota on the number of times
-an HTTP request can be sent to a specified endpoint.
+an HTTP request can be sent to a specific endpoint.
 
 ```js
 let quota = 3;
