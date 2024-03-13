@@ -2061,6 +2061,50 @@ The other buttons change from blue to green when hovering over them.
 
 This matches an element that has specific descendant elements.
 
+The following example uses a hidden checkbox to
+toggle the opacity of another element between 0 and 1.
+When the `label` wrapped around the checkbox is clicked,
+the state of the checkbox is toggled.
+Note the use of `:has` to change `opacity` to 1.
+
+```html
+<html>
+  <head>
+    <style>
+      #greeting {
+        font-size: 3rem;
+        margin-top: 4px;
+        opacity: 0; /* initially not visible */
+        transition: opacity 1s;
+      }
+
+      #show-checkbox {
+        display: none;
+      }
+
+      /* This styles the label to look like a button. */
+      #toggle-btn {
+        background-color: lightgray;
+        border: 1px solid black;
+        cursor: pointer;
+        padding: 2px 8px;
+      }
+
+      body:has(#toggle-btn > :checked) #greeting {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <label id="toggle-btn">
+      <input id="show-checkbox" type="checkbox" />
+      Toggle
+    </label>
+    <div id="greeting">Hello, World!</div>
+  </body>
+</html>
+```
+
 The following example demonstates many uses of `:has`.
 A lot is achieved without writing any JavaScript code!
 
