@@ -2567,32 +2567,36 @@ htmx also provides a small JavaScript API.
 This is a set of JavaScript functions that are defined as
 properties on the global `htmx` object.
 
-| Method                   | Description                                                           |
-| ------------------------ | --------------------------------------------------------------------- |
-| `htmx.addClass`          | adds a CSS class to a given HTML element                              |
-| `htmx.ajax`              | sends an HTTP request and inserts the HTML response into the DOM      |
-| `htmx.closest`           | finds the closest ancestor element that matches a CSS selector        |
-| `htmx.config`            | an object that holds htmx configuration options                       |
-| `htmx.createEventSource` | creates a Server-Sent Event (SSE) source                              |
-| `htmx.createWebSocket`   | creates a new WebSocket                                               |
-| `htmx.defineExtension`   | defines a new htmx extension                                          |
-| `htmx.find`              | finds one element that matches a CSS selector                         |
-| `htmx.findAll`           | finds all elements that match a CSS selector                          |
-| `htmx.logAll`            | logs all htmx events for debugging                                    |
-| `htmx.logNone`           | disables the logging of htmx events                                   |
-| `htmx.logger`            | holds the function used to log htmx events; can be changed            |
-| `htmx.off`               | removes an event listener from an element                             |
-| `htmx.on`                | adds an event listener to an element                                  |
-| `htmx.onLoad`            | specifies a function to call when the `htmx:load` event is dispatched |
-| `htmx.parseInterval`     | returns the milliseconds represented by a time string (ex. 2s)        |
-| `htmx.process`           | processes the htmx attributes in a newly added element                |
-| `htmx.remove`            | removes an element from the DOM                                       |
-| `htmx.removeClass`       | removes a CSS class from an element                                   |
-| `htmx.removeExtension`   | removes an extension from htmx                                        |
-| `htmx.takeClass`         | modifies all sibling elements so only one has a given CSS class       |
-| `htmx.toggleClass`       | toggles the presence of a CSS class on an element                     |
-| `htmx.trigger`           | triggers an event on an element                                       |
-| `htmx.values`            | returns the input values present on a given element such as a `form`  |
+| Method                   | Description                                                                 |
+| ------------------------ | --------------------------------------------------------------------------- |
+| `htmx.addClass`          | adds a CSS class to a given HTML element                                    |
+| `htmx.ajax`              | sends an HTTP request and inserts the HTML response into the DOM            |
+| `htmx.closest`           | finds the closest ancestor element that matches a CSS selector              |
+| `htmx.config`            | an object that holds htmx configuration options                             |
+| `htmx.createEventSource` | creates a Server-Sent Event (SSE) source                                    |
+| `htmx.createWebSocket`   | creates a new WebSocket                                                     |
+| `htmx.defineExtension`   | defines a new htmx extension                                                |
+| `htmx.find`              | finds one element that matches a CSS selector                               |
+| `htmx.findAll`           | finds all elements that match a CSS selector                                |
+| `htmx.logAll`            | logs all htmx events for debugging                                          |
+| `htmx.logNone`           | disables the logging of htmx events                                         |
+| `htmx.logger`            | holds the function used to log htmx events; can be changed                  |
+| `htmx.off`               | removes an event listener from an element                                   |
+| `htmx.on`                | adds an event listener to an element                                        |
+| `htmx.onLoad`            | specifies a function to call every time the `htmx:load` event is dispatched |
+| `htmx.parseInterval`     | returns the milliseconds represented by a time string (ex. 2s)              |
+| `htmx.process`           | processes the htmx attributes in a newly added element                      |
+| `htmx.remove`            | removes an element from the DOM                                             |
+| `htmx.removeClass`       | removes a CSS class from an element                                         |
+| `htmx.removeExtension`   | removes an extension from htmx                                              |
+| `htmx.takeClass`         | modifies all sibling elements so only one has a given CSS class             |
+| `htmx.toggleClass`       | toggles the presence of a CSS class on an element                           |
+| `htmx.trigger`           | triggers an event on an element                                             |
+| `htmx.values`            | returns the input values present on a given element such as a `form`        |
+
+The `htmx:load` event is dispatched every time
+a new node is loaded into the DOM by htmx,
+not just when the page is initially loaded.
 
 The `htmx.parseInterval` function only works on time strings
 like `2s` for seconds or `2ms` for milliseconds.
