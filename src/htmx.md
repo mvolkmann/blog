@@ -2594,6 +2594,12 @@ properties on the global `htmx` object.
 | `htmx.trigger`           | triggers an event on an element                                       |
 | `htmx.values`            | returns the input values present on a given element such as a `form`  |
 
+The `htmx.parseInterval` function only works on time strings
+like `2s` for seconds or `2ms` for milliseconds.
+
+For details on `htmx.defineExtension` and `htmx.removeExtension`,
+see <a href="https://htmx.org/extensions/" target="_blank">Extensions</a>.
+
 The `hx-get`, `hx-post`, `hx-put`, `hx-patch`, and `hx-delete` attribute
 send an HTTP request when the element they are on is "triggered".
 The `htmx.ajax` function is similar, but enables conditionally sending
