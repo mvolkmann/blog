@@ -586,6 +586,10 @@ Popular extensions include:
   press cmd-k and select "Kill".
   Confirm the method to use by selecting "With SIGTERM" or "With SIGKILL".
 
+  Better yet, enter "klp" and select the "Kill Listening Port" command.
+  Then enter a port number.
+  I contributed this command the Port Manager extension.
+
 - Search MDN
 - System Monitor
 - tldr - searches tldr documentation pages
