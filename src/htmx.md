@@ -2564,8 +2564,10 @@ Note that many features of htmx will not work if JavaScript is disable.
 
 In addition to supporting many new HTML attributes,
 htmx also provides a small JavaScript API.
-This is a set of JavaScript functions that are defined as
-properties on the global `htmx` object.
+This is a set of JavaScript functions that are
+defined as properties on the global `htmx` object.
+The one exception is `htmx.config` which holds an
+object that describes htmx configuration options.
 
 | Method                   | Description                                                                         |
 | ------------------------ | ----------------------------------------------------------------------------------- |
@@ -2593,11 +2595,6 @@ properties on the global `htmx` object.
 | `htmx.toggleClass`       | toggles the presence of a CSS class on an element                                   |
 | `htmx.trigger`           | triggers an event on an element                                                     |
 | `htmx.values`            | returns the input values present on a given element such as a `form`                |
-
-Many of these functions have DOM equivalents
-that are only slightly more verbose.
-
-TODO: Which of these are actually useful?
 
 The `htmx:load` event is dispatched every time
 a new node is loaded into the DOM by htmx,
