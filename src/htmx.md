@@ -2594,6 +2594,11 @@ properties on the global `htmx` object.
 | `htmx.trigger`           | triggers an event on an element                                                     |
 | `htmx.values`            | returns the input values present on a given element such as a `form`                |
 
+Many of these functions have DOM equivalents
+that are only slightly more verbose.
+
+TODO: Which of these are actually useful?
+
 The `htmx:load` event is dispatched every time
 a new node is loaded into the DOM by htmx,
 not just when the page is initially loaded.
