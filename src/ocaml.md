@@ -192,12 +192,12 @@ The logical operators include:
 
 The remaining operators include:
 
-| Operator | Description                  |
-| -------- | ---------------------------- |
-| `!`      | gets ref value               |
-| `:=`     | sets ref value               |
-| `@`      | list concatenation           |
-| `\|>`    | reverse function application |
+| Operator | Description                   |
+| -------- | ----------------------------- |
+| `!`      | gets ref value (dereferences) |
+| `:=`     | sets ref value (assigns)      |
+| `@`      | list concatenation            |
+| `\|>`    | reverse function application  |
 
 Most OCaml operators are implemented as binary functions.
 To use them as functions, wrap them in parentheses.
@@ -211,8 +211,8 @@ Custom binary operators can be defined using an allowed set of characters.
 
 ## Variables
 
-Variables are immutable, but they can refer to a "ref" which is mutable.
-(An exception is that variables in a REPL can be reassigned.)
+Variables are immutable.
+An exception is that variables in a REPL can be reassigned.
 
 Identifier names must start with a lowercase letter unless they refer to
 a module, constructor, or "polymorphic variant tag".
@@ -273,9 +273,15 @@ print_newline ()
 
 ## References
 
-References are used to create mutable values.
+While variables are immutable, they can be bound to a reference that is mutable.
+References are created with the `ref` function
+which must be given an initial value.
+The initial value determines its type.
 
-To define a mutable variable, use a `let` expression with the `ref` keyword.
+The `!` prefix operator dereferences a `ref` to obtain its value.
+
+The `:=` operator assigns a new value to a `ref`.
+
 For example, the following code sets the variable `score` to a reference to `0`.
 The `while` loop increments the value until it reaches 10.
 
@@ -288,13 +294,7 @@ while !score < 10 do
 done
 ```
 
-mutable variables must be initialized
-to assign a new value, name := new_value
-to get the value of a mutable variable (dereference), !name
-the assignment (:=) and dereference (!) operators are actually functions
-references are actually single field records with a mutable field named “contents”
-For more detail, see
-https://ocaml.org/docs/tour-of-ocaml#working-with-mutable-state
+Refs are actually single field records with a mutable field named `contents`.
 
 ## Functions
 
