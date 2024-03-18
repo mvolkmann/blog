@@ -14,6 +14,8 @@ layout: topic-layout.njk
 {% aTargetBlank "https://turso.tech", "Turso" %} is a cloud database
 that uses SQLite.
 
+The logo depicts Iku-Turso which is a mythological Finnish sea creature.
+
 Compute services can be moved to "the edge"
 so they are closer to users and perform better.
 But this provides limited benefits if the services
@@ -41,6 +43,8 @@ Databases can be created and modified in the web UI or using their CLI.
 
 Turso uses Drizzle ORM.
 
+Astro uses Turso for "Astro DB".
+
 ## Pricing
 
 As of March 2024, Turso offers three plans described in the following table.
@@ -53,6 +57,12 @@ As of March 2024, Turso offers three plans described in the following table.
 | Locations        | 3          | 6           | unlimited          |
 | Row reads/month  | 1 billion  | 100 billion | unlimited          |
 | Row writes/month | 25 million | 100 million | unlimited          |
+
+The primary limitation of the STARTER and SCALER plans
+is having a maximum of 3 or 6 locations (primary and replicas).
+This prevents having fast access all over the world.
+Depending on the location of users,
+this may be acceptable for many web applications.
 
 ## Available Locations
 
@@ -164,6 +174,14 @@ Replication tends to be very fast, so this is not typically an issue.
 
   Unlike in SQLite, `.exit` does not work.
 
+## Importing Exising Databases
+
+Existing SQLite databases can be imported into Turso using the
+`turso db create {db-name} --from-file {file-path}` command.
+
+See other options at <a href="https://docs.turso.tech/cli/db/create"
+target="_blank">db create</a>.
+
 ## Web-based Dashboard
 
 Browse <a href="https://turso.tech/" target="_blank">Turso web site</a>
@@ -261,3 +279,7 @@ function getTodos() {
   return db.select().from(todos);
 }
 ```
+
+## TODOs
+
+Create a demo app that uses Bun, Hono, Turso, and Cloudflare.
