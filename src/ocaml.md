@@ -212,6 +212,7 @@ Custom binary operators can be defined using an allowed set of characters.
 ## Variables
 
 Variables are immutable, but they can refer to a "ref" which is mutable.
+(An exception is that variables in a REPL can be reassigned.)
 
 Identifier names must start with a lowercase letter unless they refer to
 a module, constructor, or "polymorphic variant tag".
