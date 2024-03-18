@@ -213,7 +213,12 @@ TypeScript, Go, and Rust.
 
 - Create an auth token by entering `turso db tokens create {db-name}`
 
-- Edit `.env` and add `TURSO_AUTH={auth-token}`.
+- Edit `.env` and add the following lines:
+
+  ```text
+  TURSO_AUTH={auth-token}
+  TURSO_URL={db-url}
+  ```
 
 - Get the database URL by entering `turso db show {db-name} --url`
 
@@ -223,7 +228,7 @@ TypeScript, Go, and Rust.
   import {createClient} from '@libsql/client';
 
   const client = createClient({
-    url: '{db-url}',
+    url: Bun.env.TURSO_URL as string,
     authToken: Bun.env.TURSO_TOKEN
   });
 
