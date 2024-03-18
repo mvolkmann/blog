@@ -145,6 +145,70 @@ OCaml reserves the use of the following identifiers:
 `true`, `try`, `type`, `val`, `virtual`, `when`,
 `while`, and `with`.
 
+## Operators
+
+OCaml operators only operate on specific types.
+This enables type inference of function return types.
+Operators for `float` values are the same as those for `int` values,
+but with a `.` added to the end.
+
+The arithmetic operators include:
+
+| Operator | Description          |
+| -------- | -------------------- |
+| `~-`     | int negation         |
+| `+`      | int addition         |
+| `-`      | int subtraction      |
+| `*`      | int multiplication   |
+| `/`      | int division         |
+| `~-.`    | float negation       |
+| `+.`     | float addition       |
+| `-.`     | float subtraction    |
+| `*.`     | float multiplication |
+| `/.`     | float division       |
+| `**`     | float exponentiation |
+
+The string operators include:
+
+| Operator | Description                 |
+| -------- | --------------------------- |
+| `^`      | string concatenation        |
+| `^^`     | format string concatenation |
+
+The logical operators include:
+
+| Operator | Description           |
+| -------- | --------------------- |
+| `==`     | same object           |
+| `!=`     | not same object       |
+| `=`      | structural equality   |
+| `<>`     | structural inequality |
+| `<`      | less than             |
+| `>`      | greater than          |
+| `<=`     | less than or equal    |
+| `>=`     | greater than equal    |
+| `&&`     | boolean and           |
+| `\|\|`   | boolean or            |
+
+The remaining operators include:
+
+| Operator | Description                  |
+| -------- | ---------------------------- |
+| `!`      | gets ref value               |
+| `:=`     | sets ref value               |
+| `@`      | list concatenation           |
+| `\|>`    | reverse function application |
+
+Most OCaml operators are implemented as binary functions.
+To use them as functions, wrap them in parentheses.
+For example, `a + b` is the same as `(+) a b`.
+Adding spaces inside the parentheses is optional,
+but is required for the `*` operator because
+`(*` is interpreted as the beginning of a comment.
+Operator functions can be passed to functions like `List.filter`.
+
+Custom binary operators can be defined using an allowed set of characters.
+
 ## Converting OCaml to JavaScript
 
 See http://ocsigen.org/js_of_ocaml/latest/manual/overview.
