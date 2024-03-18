@@ -103,6 +103,20 @@ Examples include:
 - `float_of_string` - raises `Failure` if conversion fails
 - `float_of_string_opt` - returns `None` if conversion fails
 
+## Keywords
+
+OCaml reserves the use of the following identifiers:
+`and`, `as`, `assert`, `asr`, `begin`, `class`,
+`constraint`, `do`, `done`, `downto`, `else`, `end`,
+`exception`, `external`, `false`, `for`, `fun`, `function`,
+`functor`, `if`, `in`, `include`, `inherit`, `initializer`,
+`land`, `lazy`, `let`, `lor`, `lsl`, `lsr`,
+`lxor`, `match`, `method`, `mod`, `module`, `mutable`,
+`new`, `nonrec`, `object`, `of`, `open`, `or`,
+`private`, `rec`, `sig`, `struct`, `then`, `to`,
+`true`, `try`, `type`, `val`, `virtual`, `when`,
+`while`, and `with`.
+
 ## Converting OCaml to JavaScript
 
 See http://ocsigen.org/js_of_ocaml/latest/manual/overview.
@@ -162,6 +176,16 @@ let () =
   let product = num1 *. num2 in
     Printf.printf "The product of %.2f and %.2f is %.2f\n" num1 num2 product;
 ```
+
+# HTTP Servers
+
+There are several OCaml libraries for implementing HTTP servers
+that provide API endpoints. Popular options include:
+
+- <a href="https://aantron.github.io/dream/" target="_blank">Dream</a> - 1.5K GitHub stars
+- Opium - 747 GitHub stars
+- CoHTTP - 676 GitHub stars
+- Ocsigen - not in GitHub
 
 ## Unorganized Content
 
@@ -312,6 +336,3 @@ When utop outputs the value of a function it will look like this:
   optional parameters must be preceded by either ~ (for labelled) or ? (for positional); for example, ?(answer=42)
   ?(init = 0) is shorthand for ?init:(init = 0).
   The first “init” is the argument label and the second is the parameter name. They can differ just like in Swift.
-
-Web Servers
-see Dream at https://aantron.github.io/dream/
