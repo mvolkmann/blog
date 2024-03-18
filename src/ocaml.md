@@ -209,9 +209,52 @@ Operator functions can be passed to functions like `List.filter`.
 
 Custom binary operators can be defined using an allowed set of characters.
 
-## Converting OCaml to JavaScript
+## Variables
 
-See http://ocsigen.org/js_of_ocaml/latest/manual/overview.
+Identifier names must start with a lowercase letter unless they refer to
+a module, constructor, or "polymorphic variant tag".
+They can contain letters, digits, and the underscore character.
+
+Variables are immutable, but they can refer to a "ref" which is mutable.
+
+The `let` keyword binds a name to the value of an expression
+whose scope is the expression that follows.
+For example:
+
+```ocaml
+let score = 19 in
+
+```
+
+let identifier = expr
+This is a “let definition”.
+It binds the value of expr to an identifier
+identifiers must begin with a lowercase letter
+can optional specify the type of the variable
+let (score : int) = 19 OR
+let score : int = 19
+are the spaces around the colon required?
+are the spaces around the = required?
+a let definition is NOT an expression, so it does not have a value
+To make a name be scoped to an expression, use a “let expression”.
+These DO have value!
+let name = value in expr (note the “in” keyword)
+ex. let n = 3 in n \* 2 has the value 6
+the variable n is NOT defined outside the let expression
+These can be stacked to define multiple names that are scoped to an expression. For example,
+
+let a = 1 in
+let b = 2 in
+a + b;;
+
+The “let” keyword binds a value to a name.
+“References” are used to create mutable values. See https://ocaml.org/docs/tour-of-ocaml#working-with-mutable-state
+to define a mutable variable, let name = ref value
+mutable variables must be initialized
+to assign a new value, name := new_value
+to get the value of a mutable variable (dereference), !name
+the assignment (:=) and dereference (!) operators are actually functions
+references are actually single field records with a mutable field named “contents”
 
 ## Input/Output
 
@@ -254,6 +297,9 @@ TODO: How can you write to files and streams?
 The following program prompts for two numbers and outputs their product.
 
 ```ocaml
+(* Make the printf function available. *)
+open Printf;;
+
 print_string "Enter the first number: ";
 let num1 = read_float () in
 
@@ -261,7 +307,7 @@ print_string "Enter the second number: ";
 let num2 = read_float () in
 
 let product = num1 *. num2 in
-Printf.printf "The product of %.2f and %.2f is %.2f\n" num1 num2 product;
+printf "The product of %.2f and %.2f is %.2f\n" num1 num2 product;
 ```
 
 # HTTP Servers
@@ -274,45 +320,16 @@ that provide API endpoints. Popular options include:
 - CoHTTP - 676 GitHub stars
 - Ocsigen - not in GitHub
 
+## Converting OCaml to JavaScript
+
+See http://ocsigen.org/js_of_ocaml/latest/manual/overview.
+
 ## Unorganized Content
 
 Type Inference
 OCaml infers most types
 almost never need to specify the types of variables or function parameters
 can declare with a type annotation with the syntax (name : type)
-
-Variables
-variable names can include underscores, but not dashes
-variables are immutable
-let identifier = expr
-This is a “let definition”.
-It binds the value of expr to an identifier
-identifiers must begin with a lowercase letter
-can optional specify the type of the variable
-let (score : int) = 19 OR
-let score : int = 19
-are the spaces around the colon required?
-are the spaces around the = required?
-a let definition is NOT an expression, so it does not have a value
-To make a name be scoped to an expression, use a “let expression”.
-These DO have value!
-let name = value in expr (note the “in” keyword)
-ex. let n = 3 in n \* 2 has the value 6
-the variable n is NOT defined outside the let expression
-These can be stacked to define multiple names that are scoped to an expression. For example,
-
-let a = 1 in
-let b = 2 in
-a + b;;
-
-The “let” keyword binds a value to a name.
-“References” are used to create mutable values. See https://ocaml.org/docs/tour-of-ocaml#working-with-mutable-state
-to define a mutable variable, let name = ref value
-mutable variables must be initialized
-to assign a new value, name := new_value
-to get the value of a mutable variable (dereference), !name
-the assignment (:=) and dereference (!) operators are actually functions
-references are actually single field records with a mutable field named “contents”
 
 Numeric Operators
 +, -, _, and / for int values
