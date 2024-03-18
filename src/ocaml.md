@@ -70,6 +70,19 @@ To exit the REPL, press ctrl-d or enter #quit.
 
 There is also an iOS app called "OCaml" for evaluating OCaml expressions.
 
+## Comments
+
+Comments in OCaml code begin with `(*` and end with `*)`.
+They can span any number of lines.
+
+Comments can be nested.
+
+Doc comments provided documentation that can be extracted from source files.
+They begin with `(**` and end with `*)`.
+Their content is similar to JSDoc comments,
+including the use of `@param` and `@return` annotations.
+There are three variations of doc comments, floating, item, and label.
+
 ## Primitive Types
 
 OCaml supports the following primitive types.
@@ -189,18 +202,10 @@ that provide API endpoints. Popular options include:
 
 ## Unorganized Content
 
-Keywords
-find a list of all the keywords
-is it the case that variable and function names cannot conflict with these?
-
 Type Inference
 OCaml infers most types
 almost never need to specify the types of variables or function parameters
 can declare with a type annotation with the syntax (name : type)
-
-Comments
-Is it (_ … _) for multiline comments?
-Are there single line comments?
 
 Variables
 variable names can include underscores, but not dashes
