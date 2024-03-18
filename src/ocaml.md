@@ -19,6 +19,11 @@ The Caml programming language is the predecessor of OCaml.
 The name is short for "Categorical Abstract Machine Language".
 OCaml is short for "Objective Caml".
 
+OCaml is a member of the ML family of programming languages.
+
+Supposedly the OCaml compiler is much faster than the Haskell compiler.
+TODO: Verify this.
+
 OCaml source files have the extension `.ml` which stands for "meta language".
 
 ## Installing
@@ -45,6 +50,103 @@ opam install ocaml-lsp-server odoc ocamlformat utop
 
 For VS Code, install the "OCaml Platform" extension from OCaml Labs.
 
+## REPL
+
+OCaml has two REPLs. A basic one can be started by entering `ocaml`.
+A better one is `utop` which is short for "Universal Toplevel".
+The `utop` command provides a more interactive, user-friendly interface that
+includes line editing, syntax highlighting, command history, and tab completion.
+In either REPL the expressions you enter are only evaluated
+when they are terminated by a double semicolon (`;;`).
+This allows expressions to span multiple lines.
+
+Use the left and right arrow keys to move the cursor within the expression
+and make edits.
+
+Use the up and down arrow keys to recall previously entered expressions.
+They can be edited and executed again.
+
+To exit the REPL, press ctrl-d or enter #quit.
+
+There is also an iOS app called "OCaml" for evaluating OCaml expressions.
+
+## Primitive Types
+
+OCaml supports the following primitive types.
+Their sizes depend on the CPU.
+
+- `bool` - 1 byte with the literal values `true` and `false`
+- `int` - 8 or 4 bytes
+- `float` - 8 bytes
+- `string` - sequence of bytes, not Unicode characters
+
+For Unicode support, see the libraries
+`Uutf`, `Uutf_string`, and `ocaml-unicode`.
+
+## Type Conversions
+
+The OCaml standard library provides many functions
+for converting a value from one type to another.
+Examples include:
+
+- `float_of_int`
+- `int_of_float` - `truncate` is an alias
+- `int_of_char`
+- `char_of_int`
+- `string_of_bool`
+- `bool_of_string` - raises `Failure` if conversion fails
+- `bool_of_string_opt` - returns `None` if conversion fails
+- `string_of_int`
+- `int_of_string` - raises `Failure` if conversion fails
+- `int_of_string_opt` - returns `None` if conversion fails
+- `string_of_float`
+- `float_of_string` - raises `Failure` if conversion fails
+- `float_of_string_opt` - returns `None` if conversion fails
+
+## Converting OCaml to JavaScript
+
+See http://ocsigen.org/js_of_ocaml/latest/manual/overview.
+
+## Input
+
+The OCaml standard library provides many functions that read input.
+
+The following functions read from `stdin`:
+
+- `read_line` - raises `End_of_file` if there is no more to read
+- `read_int_opt` - returns `None` if conversion fails
+- `read_int` - raises `Failure "int_of_string"` if conversion fails
+- `read_float_opt` - returns `None` if conversion fails
+- `read_float` - raises `Failure "float_of_string"` if conversion fails
+
+TODO: How can you read from files and streams?
+
+## Output
+
+The OCaml standard library provides many functions that produce output.
+
+The following functions write to `stdout`:
+
+- `print_bytes`
+- `print_char`
+- `print_endline` - prints a string followed by a newline
+- `print_float`
+- `print_int`
+- `print_newline`
+- `print_string`
+
+The following functions write to `stderr`:
+
+- `prerr_bytes`
+- `prerr_char`
+- `prerr_endline` - prints a string followed by a newline
+- `prerr_float`
+- `prerr_int`
+- `prerr_newline`
+- `prerr_string`
+
+TODO: How can you write to files and streams?
+
 ## Example
 
 The following program prompts for two numbers and outputs their product.
@@ -60,3 +162,156 @@ let () =
   let product = num1 *. num2 in
     Printf.printf "The product of %.2f and %.2f is %.2f\n" num1 num2 product;
 ```
+
+## Unorganized Content
+
+Keywords
+find a list of all the keywords
+is it the case that variable and function names cannot conflict with these?
+
+Type Inference
+OCaml infers most types
+almost never need to specify the types of variables or function parameters
+can declare with a type annotation with the syntax (name : type)
+
+Comments
+Is it (_ … _) for multiline comments?
+Are there single line comments?
+
+Variables
+variable names can include underscores, but not dashes
+variables are immutable
+let identifier = expr
+This is a “let definition”.
+It binds the value of expr to an identifier
+identifiers must begin with a lowercase letter
+can optional specify the type of the variable
+let (score : int) = 19 OR
+let score : int = 19
+are the spaces around the colon required?
+are the spaces around the = required?
+a let definition is NOT an expression, so it does not have a value
+To make a name be scoped to an expression, use a “let expression”.
+These DO have value!
+let name = value in expr (note the “in” keyword)
+ex. let n = 3 in n \* 2 has the value 6
+the variable n is NOT defined outside the let expression
+These can be stacked to define multiple names that are scoped to an expression. For example,
+
+let a = 1 in
+let b = 2 in
+a + b;;
+
+The “let” keyword binds a value to a name.
+“References” are used to create mutable values. See https://ocaml.org/docs/tour-of-ocaml#working-with-mutable-state
+to define a mutable variable, let name = ref value
+mutable variables must be initialized
+to assign a new value, name := new_value
+to get the value of a mutable variable (dereference), !name
+the assignment (:=) and dereference (!) operators are actually functions
+references are actually single field records with a mutable field named “contents”
+
+Primitive Types
+bool (with literal values true and false), int, float
+primitive values are expressions that do not require additional evaluation
+
+Numeric Operators
++, -, _, and / for int values
++., -., _., and /. for float values
+This distinction is made to avoid having operators that are overloaded for multiple types.
+
+Strings
+delimited by double quotes
+concatenate with ^ operator
+
+Type Conversions
+to convert from one primitive type to another, use “of” functions
+int_of_string
+float_of_int
+others?
+
+Lists
+ordered collection of immutable elements that all have the same type
+syntax [ v1; v2; v3 ] creates a linked list
+Why did they choose semicolons instead of commas?
+a non-empty list is represented by a head that holds an element value and a tail that holds the remainder which is another list or empty
+list elements can themselves be lists, but all elements must then also be lists with the same type of elements
+to create a new list by adding an element to the beginning of an existing list, let new_list = element :: old_list
+to create a new list by concatenating two lists, let new_list = list1 @ list2
+match can be used to recursive process a list; for example
+let rec sum list =
+match list with
+| [] -> empty_value
+| head :: tail -> head + sum tail
+standard library List functions
+List.map maps over one list
+List.map2 maps over two lists
+List.iter imperatively iterates over a list when the function has a side effect and a result list is not needed
+
+Arrays
+ordered, fixed length collection of mutable elements that all elements that all have the same type
+syntax [| v1; v2; v3 |] creates an array
+Why did they choose semicolons instead of commas?
+indexed by integers starting from zero
+
+Records
+like structs in other languages
+to define a record type,
+type book = {
+series : string;
+volume : int;
+title : string;
+author : string;
+mutable stock : int;
+}
+note how fields can be marked as “mutable”
+
+Conditional Logic
+if-then-else is an expression
+if expr1 then expr2 else expr3
+expr1 must evaluate to a bool
+int and other values are not automatically interpreted as a bool
+expr3 must evaluate to the same type as expr2 so the “if” expression always evaluates to the same type
+normally an else branch is required (maybe can omit if the then branch can evaluate to the “unit value” ()
+The = operator is used for assignment AND for comparison.
+can be used where other languages use a ternary operator
+ex. let sign = if result > 0 then “positive” else if result < 0 then “negative” else “zero”
+pattern matching
+let sign = match …
+
+Functions
+functions are first-class; can take a arguments and return
+let square x = x _ x
+this is short for let square = fun x -> x _ x (see anonymous functions below)
+could also write as let square (x : int) = x _ x
+note that parameters are not enclosed in parens, just separated by spaces
+in e1 e2 e3, e1 must evaluate to a function and it is passed the values of e2 and e3
+if e2 or e3 are not primitive values or variables, add parens around those expressions so they are evaluated before the function call to e1 is evaluated
+to call this, square 5
+note that arguments are not enclosed in parens, just separated by spaces (love this syntax!)
+This assigns a function value to the name “square”.
+Anonymous functions (aka lambdas) are written like fun x -> x _ x
+When utop outputs the value of a function it will look like this:
+
+- : t1 -> t2 = <fun>
+  <fun> represents the unprintable function definition
+  t1 is the type of the first parameter
+  t2 is the return type
+  the dash on the left means the function is anonymous
+  fun x y -> (x +. y) /. 2.0 is an anonymous function that computes the average of two float values
+  utop describes it as - : float -> float -> float = <fun>
+  the first two float types are the parameters and the last is the return type
+  the use of two -> tokens is a reminder that OCaml supports partial application
+  the types of the parameters are inferred from how they are used in the function expression
+  Unnamed parameters are positional.
+  functions can have labelled parameters and they can have default values
+  to declare a labelled parameter or pass an labelled argument, use ~{name}:{value}
+  labelled arguments can appear in any order and be mixed with positional arguments
+  when a function is called with fewer arguments than it has parameters, a new function is returned that is the result of partial application
+  recursive functions must be defined with “let rec”
+  optional parameters must be preceded by either ~ (for labelled) or ? (for positional); for example, ?(answer=42)
+  ?(init = 0) is shorthand for ?init:(init = 0).
+  The first “init” is the argument label and the second is the parameter name. They can differ just like in Swift.
+
+Web Servers
+see Dream at https://aantron.github.io/dream/
