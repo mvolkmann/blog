@@ -254,6 +254,39 @@ TypeScript, Go, and Rust.
 
 - Run the app by entering `bun dev`
 
+## ResultSet JSON
+
+The JSON returned by queries will be similar to the following:
+
+```json
+{
+  "columns": ["id", "text", "done"],
+  "columnTypes": ["INTEGER", "string", "INTEGER"],
+  "rows": [
+    {
+      "0": 1,
+      "1": "cut grass",
+      "2": 1,
+      "length": 3,
+      "id": 1,
+      "text": "cut grass",
+      "done": 1
+    },
+    {
+      "0": 2,
+      "1": "buy milk",
+      "2": 0,
+      "length": 3,
+      "id": 2,
+      "text": "buy milk",
+      "done": 0
+    }
+  ],
+  "rowsAffected": 0,
+  "lastInsertRowid": undefined
+}
+```
+
 ## ORMs
 
 Using an ORM can simplify the code for interacting with Turso databases.
