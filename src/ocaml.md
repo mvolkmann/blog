@@ -211,44 +211,67 @@ Custom binary operators can be defined using an allowed set of characters.
 
 ## Variables
 
+Variables are immutable, but they can refer to a "ref" which is mutable.
+
 Identifier names must start with a lowercase letter unless they refer to
 a module, constructor, or "polymorphic variant tag".
 They can contain letters, digits, and the underscore character.
 
-Variables are immutable, but they can refer to a "ref" which is mutable.
-
-The `let` keyword binds a name to the value of an expression
+A `let` expression binds an identifier to the value of an expression
 whose scope is the expression that follows.
-For example:
+The value of a `let` expression is the value of its expression
+with all occurrences of the identifier replaced with its value.
+For example, the value of this `let` expression is `3`:
 
 ```ocaml
-let score = 19 in
-
-```
-
-let identifier = expr
-This is a “let definition”.
-It binds the value of expr to an identifier
-identifiers must begin with a lowercase letter
-can optional specify the type of the variable
-let (score : int) = 19 OR
-let score : int = 19
-are the spaces around the colon required?
-are the spaces around the = required?
-a let definition is NOT an expression, so it does not have a value
-To make a name be scoped to an expression, use a “let expression”.
-These DO have value!
-let name = value in expr (note the “in” keyword)
-ex. let n = 3 in n \* 2 has the value 6
-the variable n is NOT defined outside the let expression
-These can be stacked to define multiple names that are scoped to an expression. For example,
-
 let a = 1 in
 let b = 2 in
-a + b;;
+a + b
+```
 
-The “let” keyword binds a value to a name.
-“References” are used to create mutable values. See https://ocaml.org/docs/tour-of-ocaml#working-with-mutable-state
+Note how the expression that follows a `let` expression
+can be another `let` expression in order to place
+multiple identifiers in the scope of the final expression.
+
+Identifers bound by `let` expressions go out-of-scope
+after they are evaluated.
+
+The type of a variable can be specified, but typically
+this is omitted because the type can be inferred.
+
+```ocaml
+let a : int = 1 in
+let b : int = 2 in
+a + b
+```
+
+While it is not required to include a space on both sides of the colon
+when specifying a type, it is customary
+and the ocamlformat code formatter will add them.
+
+Let definitions omit the `in` keyword.
+They create global definitions that
+do not go out of scope after they are evaluated.
+They are not expressions, so they do not have a value.
+
+The following example binds three global identifiers.
+Note how double colons must be used to terminate several of the lines.
+
+```ocaml
+let a = 1
+let b = 2
+let c = 3;;
+
+print_int (a + b);;
+print_newline ();;
+print_int (b + c);;
+print_newline ()
+```
+
+## References
+
+References are used to create mutable values.
+See https://ocaml.org/docs/tour-of-ocaml#working-with-mutable-state
 to define a mutable variable, let name = ref value
 mutable variables must be initialized
 to assign a new value, name := new_value
@@ -268,8 +291,6 @@ The following functions read from `stdin`:
 - `read_float_opt` - returns `None` if conversion fails
 - `read_float` - raises `Failure "float_of_string"` if conversion fails
 
-TODO: How can you read from files and streams?
-
 The OCaml standard library provides many functions that produce output.
 
 The following functions write to `stdout`:
@@ -279,7 +300,7 @@ The following functions write to `stdout`:
 - `print_endline` - prints a string followed by a newline
 - `print_float`
 - `print_int`
-- `print_newline`
+- `print_newline` - prints only a newline
 - `print_string`
 
 The following functions write to `stderr`:
@@ -289,10 +310,8 @@ The following functions write to `stderr`:
 - `prerr_endline` - prints a string followed by a newline
 - `prerr_float`
 - `prerr_int`
-- `prerr_newline`
+- `prerr_newline` - prints only a newline
 - `prerr_string`
-
-TODO: How can you write to files and streams?
 
 The following program prompts for two numbers and outputs their product.
 
@@ -308,6 +327,49 @@ let num2 = read_float () in
 
 let product = num1 *. num2 in
 printf "The product of %.2f and %.2f is %.2f\n" num1 num2 product;
+```
+
+The following program reads and prints all the lines in a text file
+using a `while` loop.
+
+```ocaml
+let channel = open_in "BeverlyHillbillies.txt" in
+try
+  while true do
+    (* input_line reads from a given channel
+       until a newline or the end is reached. *)
+    let line = input_line channel in
+    print_endline line
+  done
+with End_of_file -> close_in channel
+```
+
+The following program reads and prints all the lines in a text file
+using recursion.
+
+```ocaml
+let channel = open_in "BeverlyHillbillies.txt" in
+let rec loop () =
+  try
+    let line = input_line channel in
+    print_endline line;
+    loop ()
+  with End_of_file -> close_in channel
+in
+loop ()
+```
+
+The following program creates a text file and writes lines to it.
+
+```ocaml
+let channel = open_out "output.txt" in
+try
+  (* output_string writes to a given channel. *)
+  output_string channel "line 1\n";
+  output_string channel "line 2\n";
+  output_string channel "line 3\n";
+  close_out channel
+with ex -> close_out channel
 ```
 
 # HTTP Servers
