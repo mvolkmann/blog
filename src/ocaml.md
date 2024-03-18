@@ -19,7 +19,13 @@ The Caml programming language is the predecessor of OCaml.
 The name is short for "Categorical Abstract Machine Language".
 OCaml is short for "Objective Caml".
 
-OCaml is a member of the ML family of programming languages.
+OCaml is a member of the
+<a href="https://en.wikipedia.org/wiki/ML_(programming_language)"
+target="_blank">ML</a> (short for Meta Language)
+family of programming languages.
+Other dialects of ML include Standard ML and F#.
+ML influenced the design of many other languages including
+Clojure, Elm, Haskell, Erlang, Rust, and Scala.
 
 Supposedly the OCaml compiler is much faster than the Haskell compiler.
 TODO: Verify this.
@@ -298,17 +304,62 @@ Refs are actually single field records with a mutable field named `contents`.
 
 ## Functions
 
-functions are first-class; can take a arguments and return
+OCaml functions are first-class.
+They can take other functions as arguments and can return new functions.
+
+Anonymous functions (aka lambdas) are defined using the `fun` function.
+For example the following function
+takes two `int` arguments and returns an `int`.
+Note how no parentheses are required and
+the parameters are just separated by a space.
+
+```ocaml
+fun a b -> a + b
+```
+
+It is not necessary to specify these types.
+They are inferred from the function expression `a + b`
+based on the fact that the `+` operator only
+operates on `int` values and returns an `int` value.
+
+If this is entered in a REPL, followed by `;;`,
+the output will be `- : int -> int -> int = <fun>`.
+The dash at the beginning indicates that the value does not have a name.
+The first and second occurrences of `int` are the types of the two parameters.
+The last `int` is the return type of the function.
+The `<fun>` after the `=` represents the bytecode for the function
+which cannot be printed.
+
+Functions support partial application.
+That is why one arrow (`->`) for each parameter appears in the output.
+
+Despite not having a name, this function
+can be invoked by surrounding it in parentheses.
+For example, the following evaluates to `5`:
+
+```ocaml
+(fun a b -> a + b) 2 3
+```
+
+Let's give a name to this function and invoke it in a couple of ways.
+
+```ocaml
+(* Make the printf function available. *)
+open Printf;;
+
+let (fun a b -> a + b) in
+printf
+```
+
 let square x = x _ x
 this is short for let square = fun x -> x _ x (see anonymous functions below)
-could also write as let square (x : int) = x _ x
+could also write as let square (x : int) = x \_ x
 note that parameters are not enclosed in parens, just separated by spaces
 in e1 e2 e3, e1 must evaluate to a function and it is passed the values of e2 and e3
 if e2 or e3 are not primitive values or variables, add parens around those expressions so they are evaluated before the function call to e1 is evaluated
 to call this, square 5
 note that arguments are not enclosed in parens, just separated by spaces (love this syntax!)
 This assigns a function value to the name “square”.
-Anonymous functions (aka lambdas) are written like fun x -> x _ x
 When utop outputs the value of a function it will look like this:
 
 - : t1 -> t2 = <fun>
