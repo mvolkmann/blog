@@ -14,6 +14,23 @@ layout: topic-layout.njk
 {% aTargetBlank "https://turso.tech", "Turso" %} is a cloud database
 that uses SQLite.
 
+Compute services can be moved to "the edge"
+so they are closer to users and perform better.
+But this provides limited benefits if the services
+need to access databases that are hosted in
+one location rather than also being on the edge.
+
+Turso addresses this problem by moving databases to the edge.
+Each Turso database has one primary and any number of replicas.
+
+A Turso logical database is a collection of
+<a href="https://turso.tech/libsql" target="_blank">libSQL</a> databases.
+libSQL is an open-source fork of SQLite
+that adds native replication and an HTTP mode.
+This allows it to replicate and scale with low resource usage.
+libSQL can support having one logical database per tenant
+or even one logical database per user.
+
 Databases can be created and modified in the web UI or using their CLI.
 
 Turso uses Drizzle ORM.
