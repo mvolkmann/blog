@@ -48,7 +48,17 @@ which takes about four minutes to complete:
 opam install ocaml-lsp-server odoc ocamlformat utop
 ```
 
-For VS Code, install the "OCaml Platform" extension from OCaml Labs.
+## VS Code
+
+Install the "OCaml Platform" extension from OCaml Labs.
+
+Create the file `.ocamlformat` in each project root directory containing
+at least the following in order for VS Code to format OCaml code on save.
+
+```text
+profile = default
+version = 0.26.1
+```
 
 ## REPL
 
@@ -134,7 +144,7 @@ OCaml reserves the use of the following identifiers:
 
 See http://ocsigen.org/js_of_ocaml/latest/manual/overview.
 
-## Input
+## Input/Output
 
 The OCaml standard library provides many functions that read input.
 
@@ -147,8 +157,6 @@ The following functions read from `stdin`:
 - `read_float` - raises `Failure "float_of_string"` if conversion fails
 
 TODO: How can you read from files and streams?
-
-## Output
 
 The OCaml standard library provides many functions that produce output.
 
@@ -174,20 +182,17 @@ The following functions write to `stderr`:
 
 TODO: How can you write to files and streams?
 
-## Example
-
 The following program prompts for two numbers and outputs their product.
 
 ```ocaml
-let () =
-  print_string "Enter the first number: ";
-  let num1 = read_float () in
+print_string "Enter the first number: ";
+let num1 = read_float () in
 
-  print_string "Enter the second number: ";
-  let num2 = read_float () in
+print_string "Enter the second number: ";
+let num2 = read_float () in
 
-  let product = num1 *. num2 in
-    Printf.printf "The product of %.2f and %.2f is %.2f\n" num1 num2 product;
+let product = num1 *. num2 in
+Printf.printf "The product of %.2f and %.2f is %.2f\n" num1 num2 product;
 ```
 
 # HTTP Servers
