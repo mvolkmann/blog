@@ -257,28 +257,79 @@ They are not expressions, so they do not have a value.
 
 The following example binds three global identifiers.
 Note how double colons must be used to terminate several of the lines.
+Also, functions that take no arguments, like `print_newline`,
+must be passed the "unit" value `()`.
 
 ```ocaml
 let a = 1
 let b = 2
 let c = 3;;
 
-print_int (a + b);;
-print_newline ();;
-print_int (b + c);;
+print_int (a + b);
+print_newline ();
+print_int (b + c);
 print_newline ()
 ```
 
 ## References
 
 References are used to create mutable values.
-See https://ocaml.org/docs/tour-of-ocaml#working-with-mutable-state
-to define a mutable variable, let name = ref value
+
+To define a mutable variable, use a `let` expression with the `ref` keyword.
+For example, the following code sets the variable `score` to a reference to `0`.
+The `while` loop increments the value until it reaches 10.
+
+```ocaml
+let score = ref 0 in
+while !score < 10 do
+  score := !score + 1;
+  print_int !score;
+  print_newline ()
+done
+```
+
 mutable variables must be initialized
 to assign a new value, name := new_value
 to get the value of a mutable variable (dereference), !name
 the assignment (:=) and dereference (!) operators are actually functions
 references are actually single field records with a mutable field named “contents”
+For more detail, see
+https://ocaml.org/docs/tour-of-ocaml#working-with-mutable-state
+
+## Functions
+
+functions are first-class; can take a arguments and return
+let square x = x _ x
+this is short for let square = fun x -> x _ x (see anonymous functions below)
+could also write as let square (x : int) = x _ x
+note that parameters are not enclosed in parens, just separated by spaces
+in e1 e2 e3, e1 must evaluate to a function and it is passed the values of e2 and e3
+if e2 or e3 are not primitive values or variables, add parens around those expressions so they are evaluated before the function call to e1 is evaluated
+to call this, square 5
+note that arguments are not enclosed in parens, just separated by spaces (love this syntax!)
+This assigns a function value to the name “square”.
+Anonymous functions (aka lambdas) are written like fun x -> x _ x
+When utop outputs the value of a function it will look like this:
+
+- : t1 -> t2 = <fun>
+  <fun> represents the unprintable function definition
+  t1 is the type of the first parameter
+  t2 is the return type
+  the dash on the left means the function is anonymous
+  fun x y -> (x +. y) /. 2.0 is an anonymous function that computes the average of two float values
+  utop describes it as - : float -> float -> float = <fun>
+  the first two float types are the parameters and the last is the return type
+  the use of two -> tokens is a reminder that OCaml supports partial application
+  the types of the parameters are inferred from how they are used in the function expression
+  Unnamed parameters are positional.
+  functions can have labelled parameters and they can have default values
+  to declare a labelled parameter or pass an labelled argument, use ~{name}:{value}
+  labelled arguments can appear in any order and be mixed with positional arguments
+  when a function is called with fewer arguments than it has parameters, a new function is returned that is the result of partial application
+  recursive functions must be defined with “let rec”
+  optional parameters must be preceded by either ~ (for labelled) or ? (for positional); for example, ?(answer=42)
+  ?(init = 0) is shorthand for ?init:(init = 0).
+  The first “init” is the argument label and the second is the parameter name. They can differ just like in Swift.
 
 ## Input/Output
 
@@ -447,37 +498,3 @@ can be used where other languages use a ternary operator
 ex. let sign = if result > 0 then “positive” else if result < 0 then “negative” else “zero”
 pattern matching
 let sign = match …
-
-Functions
-functions are first-class; can take a arguments and return
-let square x = x _ x
-this is short for let square = fun x -> x _ x (see anonymous functions below)
-could also write as let square (x : int) = x _ x
-note that parameters are not enclosed in parens, just separated by spaces
-in e1 e2 e3, e1 must evaluate to a function and it is passed the values of e2 and e3
-if e2 or e3 are not primitive values or variables, add parens around those expressions so they are evaluated before the function call to e1 is evaluated
-to call this, square 5
-note that arguments are not enclosed in parens, just separated by spaces (love this syntax!)
-This assigns a function value to the name “square”.
-Anonymous functions (aka lambdas) are written like fun x -> x _ x
-When utop outputs the value of a function it will look like this:
-
-- : t1 -> t2 = <fun>
-  <fun> represents the unprintable function definition
-  t1 is the type of the first parameter
-  t2 is the return type
-  the dash on the left means the function is anonymous
-  fun x y -> (x +. y) /. 2.0 is an anonymous function that computes the average of two float values
-  utop describes it as - : float -> float -> float = <fun>
-  the first two float types are the parameters and the last is the return type
-  the use of two -> tokens is a reminder that OCaml supports partial application
-  the types of the parameters are inferred from how they are used in the function expression
-  Unnamed parameters are positional.
-  functions can have labelled parameters and they can have default values
-  to declare a labelled parameter or pass an labelled argument, use ~{name}:{value}
-  labelled arguments can appear in any order and be mixed with positional arguments
-  when a function is called with fewer arguments than it has parameters, a new function is returned that is the result of partial application
-  recursive functions must be defined with “let rec”
-  optional parameters must be preceded by either ~ (for labelled) or ? (for positional); for example, ?(answer=42)
-  ?(init = 0) is shorthand for ?init:(init = 0).
-  The first “init” is the argument label and the second is the parameter name. They can differ just like in Swift.
