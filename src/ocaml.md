@@ -103,8 +103,13 @@ Their sizes depend on the CPU.
 - `float` - 8 bytes
 - `string` - sequence of bytes, not Unicode characters
 
+Literal strings are delimited by double quotes.
+The `^` operator is used to concatenate strings.
+
 For Unicode support, see the libraries
 `Uutf`, `Uutf_string`, and `ocaml-unicode`.
+
+Primitive values are expressions that do not require additional evaluation.
 
 ## Type Conversions
 
@@ -245,24 +250,10 @@ to get the value of a mutable variable (dereference), !name
 the assignment (:=) and dereference (!) operators are actually functions
 references are actually single field records with a mutable field named “contents”
 
-Primitive Types
-bool (with literal values true and false), int, float
-primitive values are expressions that do not require additional evaluation
-
 Numeric Operators
 +, -, _, and / for int values
 +., -., _., and /. for float values
 This distinction is made to avoid having operators that are overloaded for multiple types.
-
-Strings
-delimited by double quotes
-concatenate with ^ operator
-
-Type Conversions
-to convert from one primitive type to another, use “of” functions
-int_of_string
-float_of_int
-others?
 
 Lists
 ordered collection of immutable elements that all have the same type
