@@ -101,16 +101,18 @@ yyz  Toronto, Canada
 
 ## Write Details
 
-When a record is written, the `last_replication_index`
-is immediately returned from the primary.
+When a record is written from a replica,
+the `last_replication_index` is immediately returned from the primary.
 At this point the current replica has not yet been updated.
-When a record is read, the `last_replication_index` value
-is added to the read request.
-If the primary has a lower `last_replication_index`
+
+When a record is read from a replica,
+the `last_replication_index` value is added to the read request.
+If the replica has a lower `last_replication_index`
 then the request is forwarded to the primary.
 This can result in increased latency for reads until the replica catches up.
 But it guarantees that reads from a replica will always
 get the data that was most recently written from the same replica.
+
 Replication tends to be very fast, so this is not typically an issue.
 
 ## Setup
