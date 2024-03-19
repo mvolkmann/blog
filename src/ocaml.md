@@ -65,6 +65,7 @@ For help on OCaml, see:
 
 - <a href="https://tinyurl.com/discord-ocaml" target="_blank">OCaml Discord</a>
 - <a href="https://discuss.ocaml.org/" target="_blank">OCaml Discourse</a>
+- <a href="https://github.com/lindig/ocaml-style" target="_blank">OCaml style guide</a>
 
 ## VS Code
 
@@ -299,6 +300,21 @@ print_newline ();
 print_int (b + c);
 print_newline ()
 ```
+
+### Type Variables
+
+OCaml supports type variables which are similar to generics in other languages.
+Type variables serve as a placeholder for an unknown type.
+They are written with a single quote followed by a lowercase name.
+
+Often the name is just `'a` and is pronounced "alpha".
+If additional type variables are needed,
+it is common to use `'b` (beta) and `'c` (gamma).
+
+For example, entering `[];;` in `utop` outputs type type `'a list`
+because it is a list where the type of the elements is unknown.
+
+TODO: Add an example function that has a parameter whose type uses a type variable.
 
 ## References
 
@@ -604,6 +620,8 @@ Let's walk through creating a small OCaml project with Dune.
 
 Dune supports several kinds of tests, including inline tests.
 The following steps add inline tests to the `demo` project above and run them.
+Inline tests can only be used in libraries defined in the `lib` directory,
+not in the `bin` directory.
 
 1. Enter `opam install ppx_inline_test`
 
