@@ -571,11 +571,10 @@ with ex -> close_out channel
 
 ## Dune
 
-An OCaml project can consist of multiple source files.
-
 <a href="https://dune.build" target="_blank">Dune</a>
-is a popular OCaml build system.
+is a popular OCaml and Reason build system.
 It is used create, build, test, and run OCaml projects.
+It can also compile to JavaScript.
 
 To install the `dune` command, enter `oam install dune`.
 
@@ -662,12 +661,17 @@ Let's walk through creating a small OCaml project with Dune.
 
 ### Unit Tests
 
-Dune supports several kinds of tests, including inline tests.
-The following steps add inline tests to the `demo` project above and run them.
-Inline tests can only be used in libraries defined in the `lib` directory,
-not in the `bin` directory.
+Dune supports several kinds of tests,
+including inline, expectation, and "cram" tests.
+Expection tests are similar to Jest snapshot tests.
+Jest is a JavaScript test framework.
 
-1. Enter `opam install ppx_inline_test`
+The following steps add tests to the `demo` project above and run them.
+It seems that tests can only be used in libraries defined
+in the `lib` directory, not in the `bin` directory.
+
+1. Enter `opam install ppx_inline_test` to enable only inline tests or
+   enter `opam install ppx_expect` to enable both inline and expectation tests.
 
 1. Change `lib/dune` to the following:
 
@@ -675,19 +679,25 @@ not in the `bin` directory.
    (library
      (name demo)
      (inline_tests)
-     (preprocess (pps ppx_inline_test)))
+     ; This only enables inline tests, not expectation tests.
+     ; (preprocess (pps ppx_inline_test)))
+     ; This enables both inline tests and expectation tests.
+     (preprocess (pps ppx_expect)))
    ```
+
+   Single line comments in `dune` files begin with `;`.
 
 1. Add the following lines in `lib/math_lib.ml`:
 
    ```ocaml
+   (* This is an inline test for the add function. *)
    let%test _ = add 1 2 = 3
-   let%test _ = average 2 3 = 2.5
-   ```
 
-   Also see "Inline Expectation Tests" and "Cram Tests".
-   Expection tests are similar to Jest snapshot tests.
-   Jest is a JavaScript test framework.
+   (* This is an expectation test for the average function. *)
+   let%expect_test _ =
+     print_float (average 2 3);
+     [%expect "2.5"]
+   ```
 
 1. Enter `dune test` or `dune test -w` to run in watch mode.
 
@@ -697,6 +707,44 @@ not in the `bin` directory.
 1. Verify that there are no failed tests.
 
    When all the tests pass, there is no output.
+   If any expecation tests fail, but the actual values are correct,
+   enter `dune promote` to update all the expected values.
+
+Tests can also be placed in the `test` directory.
+The following steps implement the same tests above in this way.
+
+1. Replace the contents of the `test/dune` file with the following:
+
+   ```text
+   (tests
+     (libraries demo)
+     (names add average)
+   )
+   ```
+
+   If there is only one test,
+   `(tests` can be changed to `(test` and
+   `(names` can be changed to `(name`.
+
+1. Create the file `test/add.ml` containing the following:
+
+   ```ocaml
+   open Demo
+
+   let () = assert ((Math_lib.add 2 2) = 4)
+   ```
+
+1. Create the file `test/average.ml` containing the following:
+
+   ```ocaml
+   open Demo
+
+   let () = print_float (Math_lib.average 2 3)
+   ```
+
+1. Create the file `test/average.expected` containing `2.5`.
+
+1. Enter `dune test` and verify that all the tests pass.
 
 # HTTP Servers
 
