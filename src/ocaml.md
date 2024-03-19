@@ -172,7 +172,9 @@ OCaml reserves the use of the following identifiers:
 ## Operators
 
 OCaml operators only operate on specific types.
-This enables type inference of function return types.
+This enables type inference of function return types
+because the compiler can determine the types required by its code.
+
 Operators for `float` values are the same as those for `int` values,
 but with a `.` added to the end.
 
@@ -199,7 +201,7 @@ The string operators include:
 | `^`      | string concatenation        |
 | `^^`     | format string concatenation |
 
-The logical operators include:
+The relational and logical operators include:
 
 | Operator | Description           |
 | -------- | --------------------- |
@@ -229,7 +231,39 @@ For example, `a + b` is the same as `(+) a b`.
 Adding spaces inside the parentheses is optional,
 but is required for the `*` operator because
 `(*` is interpreted as the beginning of a comment.
+
 Operator functions can be passed to functions like `List.filter`.
+
+The following code demonstrates writing a function that
+takes a comparison function which can be a logical operator.
+The `choose` function takes two lists and a comparison function.
+It returns a new list where each element
+is the element from the first or second list at the same index
+where comparing them using the comparison function evaluates to true.
+
+```ocaml
+let rec choose list1 list2 cmp_fun =
+  match (list1, list2) with
+  | [], [] -> [] (* both lists are empty; return empty list *)
+  | [], _ -> list2 (* first list is empty; return second list *)
+  | _, [] -> list1 (* second list is empty; return first list *)
+  | h1 :: t1, h2 :: t2 ->
+      if cmp_fun h1 h2 then
+        h1 :: choose t1 t2 cmp_fun (* add h1 to result list *)
+      else h2 :: choose t1 t2 cmp_fun (* add h2 to result list *)
+
+let l1 = [ 1; 3; 4; 6; 9; 10 ]
+let l2 = [ 7; 1; 0; 8; 6; 4 ]
+
+let () =
+  List.iter
+    (fun x ->
+      print_int x;
+      print_string " ")
+    (choose l1 l2 ( > )) (* relational operator passed here *)
+```
+
+The result is `[7; 3; 4; 8; 9; 10]`.
 
 Custom binary operators can be defined using an allowed set of characters.
 
