@@ -395,6 +395,16 @@ They are inferred from the function expression `a + b`
 based on the fact that the `+` operator only
 operates on `int` values and returns an `int` value.
 
+The types can be specified if desired.
+The main reason to do so is to add documentation so readers of the code
+don't have to examine the function body to determine the types.
+To specify the parameter types and the return type,
+the function above can be written as the following.
+
+```ocaml
+fun (a : int) (b : int) : int -> a + b
+```
+
 If this function definition is entered in a REPL, followed by `;;`,
 the output will be `- : int -> int -> int = <fun>`.
 The dash at the beginning indicates that the value does not have a name.
