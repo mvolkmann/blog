@@ -32,6 +32,10 @@ TODO: Verify this.
 
 OCaml source files have the extension `.ml` which stands for "meta language".
 
+The financial company <a href="https://www.janestreet.com"
+target="_blank">Jane Street</a> is one of the
+largest users and supporters of OCaml.
+
 ## Installing
 
 To install the OCaml package manager "opam" for Linux and macOS,
@@ -46,6 +50,7 @@ target="_blank">Install OCaml on Windows</a>.
 
 After installing `opam`, enter `opam init`
 which takes over five minutes to complete.
+TODO: Does this install dune which is a build tool?
 
 To install tools for development, enter the following shell command
 which takes about four minutes to complete:
@@ -53,6 +58,13 @@ which takes about four minutes to complete:
 ```bash
 opam install ocaml-lsp-server odoc ocamlformat utop
 ```
+
+## Help
+
+For help on OCaml, see:
+
+- <a href="https://tinyurl.com/discord-ocaml" target="_blank">OCaml Discord</a>
+- <a href="https://discuss.ocaml.org/" target="_blank">OCaml Discourse</a>
 
 ## VS Code
 
@@ -65,6 +77,9 @@ at least the following in order for VS Code to format OCaml code on save.
 profile = default
 version = 0.26.1
 ```
+
+Sometimes after code changes VS Code flags errors that aren't real.
+Running "Developer: Reload Window" from the command palette clears them.
 
 ## REPL
 
@@ -236,6 +251,12 @@ let b = 2 in
 a + b
 ```
 
+The code above can also use the `and` keyword as follows:
+
+```ocaml
+let a = 1 and b = 2 in a + b
+```
+
 Note how the expression that follows a `let` expression
 can be another `let` expression in order to place
 multiple identifiers in the scope of the final expression.
@@ -311,7 +332,7 @@ Anonymous functions (aka lambdas) are defined using the `fun` function.
 For example the following function
 takes two `int` arguments and returns an `int`.
 Note how no parentheses are required and
-the parameters are just separated by a space.
+the parameters are just separated by spaces.
 
 ```ocaml
 fun a b -> a + b
@@ -322,7 +343,7 @@ They are inferred from the function expression `a + b`
 based on the fact that the `+` operator only
 operates on `int` values and returns an `int` value.
 
-If this is entered in a REPL, followed by `;;`,
+If this function definition is entered in a REPL, followed by `;;`,
 the output will be `- : int -> int -> int = <fun>`.
 The dash at the beginning indicates that the value does not have a name.
 The first and second occurrences of `int` are the types of the two parameters.
@@ -333,9 +354,18 @@ which cannot be printed.
 Functions support partial application.
 That is why one arrow (`->`) for each parameter appears in the output.
 
+In fact, the function definition above is just syntactic sugar
+for the following which only defines single-parameter function.
+
+```ocaml
+fun a -> (fun b -> a + b))
+```
+
 Despite not having a name, this function
 can be invoked by surrounding it in parentheses.
-For example, the following evaluates to `5`:
+For example, the following evaluates to `5`.
+Note how no parentheses are required around the arguments
+which are just separated by a space.
 
 ```ocaml
 (fun a b -> a + b) 2 3
@@ -344,43 +374,45 @@ For example, the following evaluates to `5`:
 Let's give a name to this function and invoke it in a couple of ways.
 
 ```ocaml
-(* Make the printf function available. *)
-open Printf;;
+let add = (fun a b -> a + b) in
+print_int (add 1 2); (* 3 *)
 
-let (fun a b -> a + b) in
-printf
+(* Shorthand for previous way of defining this function *)
+let add a b = a + b in
+print_int (add 1 2); (* 3 *)
 ```
 
-let square x = x _ x
-this is short for let square = fun x -> x _ x (see anonymous functions below)
-could also write as let square (x : int) = x \_ x
-note that parameters are not enclosed in parens, just separated by spaces
-in e1 e2 e3, e1 must evaluate to a function and it is passed the values of e2 and e3
-if e2 or e3 are not primitive values or variables, add parens around those expressions so they are evaluated before the function call to e1 is evaluated
-to call this, square 5
-note that arguments are not enclosed in parens, just separated by spaces (love this syntax!)
-This assigns a function value to the name “square”.
-When utop outputs the value of a function it will look like this:
+Let's use partial application to create a new function
+that only takes a single number and adds 5 to it.
 
-- : t1 -> t2 = <fun>
-  <fun> represents the unprintable function definition
-  t1 is the type of the first parameter
-  t2 is the return type
-  the dash on the left means the function is anonymous
-  fun x y -> (x +. y) /. 2.0 is an anonymous function that computes the average of two float values
-  utop describes it as - : float -> float -> float = <fun>
-  the first two float types are the parameters and the last is the return type
-  the use of two -> tokens is a reminder that OCaml supports partial application
-  the types of the parameters are inferred from how they are used in the function expression
-  Unnamed parameters are positional.
-  functions can have labelled parameters and they can have default values
-  to declare a labelled parameter or pass an labelled argument, use ~{name}:{value}
-  labelled arguments can appear in any order and be mixed with positional arguments
-  when a function is called with fewer arguments than it has parameters, a new function is returned that is the result of partial application
-  recursive functions must be defined with “let rec”
-  optional parameters must be preceded by either ~ (for labelled) or ? (for positional); for example, ?(answer=42)
-  ?(init = 0) is shorthand for ?init:(init = 0).
-  The first “init” is the argument label and the second is the parameter name. They can differ just like in Swift.
+```ocaml
+let add5 = (add 5) in
+print_int (add5 2); (* 7 *)
+```
+
+In the expression `e1 e2 e3`, `e1` must evaluate to a function
+and it is passed the values of `e2` and `e3`.
+If `e2` or `e3` are not primitive values or variables,
+add parentheses around those expressions so they are
+evaluated before the function call to `e1` is evaluated.
+For example, our `add` function above can be called as follows:
+
+```ocaml
+add (2 * 3) (4 + 5) (* 6 * 9 = 54 *)
+```
+
+Labelling parameters allows them to be specified by the labels in calls.
+Label names are not required to match their coresponding parmeter names.
+TODO: Finish cleaning this up.
+Unlabelled parameters are positional.
+functions can have labelled parameters and they can have default values
+to declare a labelled parameter or pass an labelled argument, use ~{name}:{value}
+labelled arguments can appear in any order and be mixed with positional arguments
+when a function is called with fewer arguments than it has parameters, a new function is returned that is the result of partial application
+recursive functions must be defined with “let rec”
+optional parameters must be preceded by either ~ (for labelled) or ? (for positional); for example, ?(answer=42)
+?(init = 0) is shorthand for ?init:(init = 0).
+The first “init” is the argument label and the second is the parameter name. They can differ just like in Swift.
 
 ## Input/Output
 
@@ -475,6 +507,34 @@ try
 with ex -> close_out channel
 ```
 
+## Dune
+
+An OCaml project can be composed of multiple modules
+that are each defined by a source file.
+
+The <a href="https://dune.build" target="_blank">Dune</a> build tool
+is a popular way to create, build, test, and run OCaml projects.
+
+For help, enter `dune --help`.
+
+To create a project that uses `dune`,
+cd to where the project should be created
+and enter `dune init project {project_name}`.
+This generates many files including:
+
+- dune configuration file `dune-project`
+- opan configuration file `{project_name}.opam`
+- `_build`, `bin`, `lib`, and `test` directories
+- main source file `bin/main.ml`
+- unit test file `test/test_{project_name}.ml`.
+
+To build the project, enter `dune build`.
+This creates `_build/default/bin/main.exe`.
+To automatically rebuild the project
+when code changes are detected, add the `--watch` flag.
+
+To run the project, enter `dune exec {project_name}`.
+
 # HTTP Servers
 
 There are several OCaml libraries for implementing HTTP servers
@@ -501,7 +561,10 @@ Numeric Operators
 +., -., _., and /. for float values
 This distinction is made to avoid having operators that are overloaded for multiple types.
 
-Lists
+## Tuples
+
+## Lists
+
 ordered collection of immutable elements that all have the same type
 syntax [ v1; v2; v3 ] creates a linked list
 Why did they choose semicolons instead of commas?
@@ -518,6 +581,18 @@ standard library List functions
 List.map maps over one list
 List.map2 maps over two lists
 List.iter imperatively iterates over a list when the function has a side effect and a result list is not needed
+
+Since tuple elements are separated by commas and list elements are separated by semicolons, a list of tuples can be written as follows:
+
+```ocaml
+["alpha", 1; "beta", 2; "gamma", 3]
+```
+
+This evaluates to the following list of tuples:
+
+```ocaml
+[("alpha", 1); ("beta", 2); ("gamma", 3)]
+```
 
 Arrays
 ordered, fixed length collection of mutable elements that all elements that all have the same type
