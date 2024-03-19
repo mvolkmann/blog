@@ -100,6 +100,11 @@ and make edits.
 Use the up and down arrow keys to recall previously entered expressions.
 They can be edited and executed again.
 
+To load definitions in an OCaml source file into the REPL,
+enter `#use "{file-path}";;`.
+This enables using all the types and functions defined in the source file
+inside the REPL.
+
 To exit the REPL, press ctrl-d or enter #quit.
 
 There is also an iOS app called "OCaml" for evaluating OCaml expressions.
@@ -275,6 +280,11 @@ An exception is that variables in a REPL can be reassigned.
 Identifier names must start with a lowercase letter unless they refer to
 a module, constructor, or "polymorphic variant tag".
 They can contain letters, digits, and the underscore character.
+They can also end with a single quote to create pairs of names
+like `x` and `x'` (for x prime).
+Technically an indentfier can contain any number of single quotes
+and they can appear anywhere except at the beginning,
+but doing this is odd!
 
 A `let` expression binds an identifier to the value of an expression
 whose scope is the expression that follows.
@@ -349,6 +359,31 @@ For example, entering `[];;` in `utop` outputs type type `'a list`
 because it is a list where the type of the elements is unknown.
 
 TODO: Add an example function that has a parameter whose type uses a type variable.
+
+## References
+
+While variables are immutable, they can be bound to a reference that is mutable.
+References are created with the `ref` function
+which must be given an initial value.
+The initial value determines its type.
+
+The `!` prefix operator dereferences a `ref` to obtain its value.
+
+The `:=` operator assigns a new value to a `ref`.
+
+For example, the following code sets the variable `score` to a reference to `0`.
+The `while` loop increments the value until it reaches 10.
+
+```ocaml
+let score = ref 0 in
+while !score < 10 do
+  score := !score + 1;
+  print_int !score;
+  print_newline ()
+done
+```
+
+Refs are actually single field records with a mutable field named `contents`.
 
 ## Tuples
 
@@ -483,30 +518,33 @@ This evaluates to the following list of tuples:
 [("alpha", 1); ("beta", 2); ("gamma", 3)]
 ```
 
-## References
+## Arrays
 
-While variables are immutable, they can be bound to a reference that is mutable.
-References are created with the `ref` function
-which must be given an initial value.
-The initial value determines its type.
+TODO: Clean up this section.
 
-The `!` prefix operator dereferences a `ref` to obtain its value.
+ordered, fixed length collection of mutable elements that all elements that all have the same type
+syntax [| v1; v2; v3 |] creates an array
+Why did they choose semicolons instead of commas?
+indexed by integers starting from zero
 
-The `:=` operator assigns a new value to a `ref`.
+Records
+like structs in other languages
+to define a record type,
+type book = {
+series : string;
+volume : int;
+title : string;
+author : string;
+mutable stock : int;
+}
+note how fields can be marked as “mutable”
 
-For example, the following code sets the variable `score` to a reference to `0`.
-The `while` loop increments the value until it reaches 10.
+## Maps
 
-```ocaml
-let score = ref 0 in
-while !score < 10 do
-  score := !score + 1;
-  print_int !score;
-  print_newline ()
-done
-```
+A Map is an immutable collection of key/value pairs.
+See https://ocaml.org/docs/maps.
 
-Refs are actually single field records with a mutable field named `contents`.
+TODO: Add more to this section.
 
 ## Functions
 
@@ -597,8 +635,10 @@ add (2 * 3) (4 + 5) (* 6 * 9 = 54 *)
 ```
 
 Labelling parameters allows them to be specified by the labels in calls.
-Label names are not required to match their coresponding parmeter names.
-TODO: Finish cleaning this up.
+Label names are not required to match their coresponding parameter names.
+
+TODO: Finish cleaning up this section.
+
 Unlabelled parameters are positional.
 functions can have labelled parameters and they can have default values
 to declare a labelled parameter or pass an labelled argument, use ~{name}:{value}
@@ -905,29 +945,6 @@ Numeric Operators
 +, -, _, and / for int values
 +., -., _., and /. for float values
 This distinction is made to avoid having operators that are overloaded for multiple types.
-
-Arrays
-ordered, fixed length collection of mutable elements that all elements that all have the same type
-syntax [| v1; v2; v3 |] creates an array
-Why did they choose semicolons instead of commas?
-indexed by integers starting from zero
-
-Records
-like structs in other languages
-to define a record type,
-type book = {
-series : string;
-volume : int;
-title : string;
-author : string;
-mutable stock : int;
-}
-note how fields can be marked as “mutable”
-
-## Maps
-
-A Map is an immutable collection of key/value pairs.
-See https://ocaml.org/docs/maps.
 
 Conditional Logic
 if-then-else is an expression
