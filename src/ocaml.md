@@ -80,6 +80,8 @@ version = 0.26.1
 
 Sometimes after code changes VS Code flags errors that aren't real.
 Running "Developer: Reload Window" from the command palette clears them.
+This issue may go away if you run `dune build -w` (for watch mode)
+in a terminal window.
 
 ## REPL
 
@@ -537,6 +539,8 @@ when code changes are detected, add the `--watch` flag.
 
 To run the project, enter `dune exec {project_name}`.
 
+### Example Project
+
 Let's walk through creating a small OCaml project with Dune.
 
 1. `cd` to the directory where the project should be created.
@@ -588,6 +592,35 @@ Let's walk through creating a small OCaml project with Dune.
 
 1. Enter `dune exec demo`.
 1. Verify that the output is the same.
+
+### Unit Tests
+
+Dune supports several kinds of tests, including inline tests.
+The following steps add inline tests to the `demo` project above and run them.
+
+1. Enter `opam install ppx_inline_test`
+
+1. Change `lib/dune` to the following:
+
+   ```text
+   (library
+     (name demo)
+     (inline_tests)
+     (preprocess (pps ppx_inline_test)))
+   ```
+
+1. Add the following lines in `lib/math_lib.ml`:
+
+   ```ocaml
+   let%test _ = add 1 2 = 3
+   let%test _ = average 2 3 = 2.5
+   ```
+
+1. Enter `dune runtest` or `dune runtest -w` to run in watch mode.
+
+1. Verify that there are no failed tests.
+
+   When all the tests pass, there is no output.
 
 # HTTP Servers
 
