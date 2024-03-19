@@ -532,6 +532,13 @@ This generates many files including:
 - main source file `bin/main.ml`
 - unit test file `test/test_{project_name}.ml`.
 
+When using git for version control,
+the `_build` directory should be added in the `.gitignore` file.
+
+The `bin`, `lib`, and `test` directories all contain a `dune` file
+that holds configurations options for that directory.
+These files using Lisp-like syntax.
+
 To build the project, enter `dune build`.
 This creates `_build/default/bin/main.exe`.
 To automatically rebuild the project
@@ -616,7 +623,14 @@ The following steps add inline tests to the `demo` project above and run them.
    let%test _ = average 2 3 = 2.5
    ```
 
-1. Enter `dune runtest` or `dune runtest -w` to run in watch mode.
+   Also see "Inline Expectation Tests" and "Cram Tests".
+   Expection tests are similar to Jest snapshot tests.
+   Jest is a JavaScript test framework.
+
+1. Enter `dune test` or `dune test -w` to run in watch mode.
+
+   You'll see `dune runtest` in documentation,
+   but `dune test` is shorter and is an alias.
 
 1. Verify that there are no failed tests.
 
