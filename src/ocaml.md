@@ -350,6 +350,139 @@ because it is a list where the type of the elements is unknown.
 
 TODO: Add an example function that has a parameter whose type uses a type variable.
 
+## Tuples
+
+A tuple is an immutable, ordered collection of values whose types can differ.
+
+To create a tuple, surround the elements in parentheses
+and separate them with commas.
+For example:
+
+```ocaml
+let t = (true, 3, "blue")
+```
+
+This has the type `bool * int * string`
+which is referred to as a "product type".
+
+For tuples that only have two elements,
+the `fst` function returns the first element
+and the `snd` function returns the second.
+
+To get a specific element from a tuple
+of a certain length, use pattern matching.
+For example, the following function gets
+the third element from any 4-element tuple.
+
+```ocaml
+let third_of_4 tuple = match tuple with a, b, c, d -> c;;
+
+let t = ("alpha", "beta", "gamma", "delta") in
+print_endline (third_of_4 t) (* gamma *)
+```
+
+## Lists
+
+A list is an immutable, ordered collection of values
+that all have the same type.
+Lists are implemented as singly linked lists.
+
+To create an empty list, use a pair of square brackets
+that is pronounced "nil". For example:
+
+```ocaml
+let issues = []
+```
+
+To create a non-empty list, surround the elements in square brackets
+and separate them with semicolons. For example:
+
+```ocaml
+let colors = ["red"; "green"; "blue"]
+```
+
+A non-empty list is represented by a head that holds an element value
+and a tail that holds the remainder which is another list that may be empty.
+
+To create a new list by adding an element to the beginning of an existing list,
+use the `::` operator which is pronounced "cons" (short for "construct").
+The right side of this operator must be a list
+and the left side must be an expression that evaluates to
+the same type as elements in the list on the right. For example:
+
+```ocaml
+let new_list = element :: old_list
+```
+
+The `color` list above was written with syntactic sugar for the following
+which is evaluated from right to left to construct the final list:
+
+```ocaml
+let colors = "red" :: "green" :: "blue" :: []
+```
+
+To create a new list by concatenating two lists, use the `@` operator.
+For example:
+
+```ocaml
+let new_list = list1 @ list2
+```
+
+The type of a list is written as `T list` where `T` is the type of the elements.
+For example, the type of a list of `float` values is `float list`.
+The type of an empty list `[]` is `'a list`
+where `'a` is a type variable that represents an unknown type.
+
+List elements can themselves be lists, but all the elements
+must then also be lists with the same element type.
+The sublists are not required to have the same length.
+For example:
+
+```ocaml
+let seasons = [
+  ["spring"; "rain"];
+  ["summer"; "heat"];
+  ["fall"; "nice"];
+  ["winter"; "cold"]
+]
+```
+
+The type of `seasons` is `string list list`.
+
+The `match` can be used to recursively process a list.
+For example, the following code computes the sum of a list of integers.
+
+```ocaml
+let rec sum list =
+  match list with
+  | [] -> empty_value
+  | head :: tail -> head + sum tail
+```
+
+The standard library provides a large number of functions that operate on lists.
+See <a href="https://v2.ocaml.org/api/List.html" target="_blank">Module List</a>.
+
+The `List.map` function maps over one list.
+
+The `List.map2` function maps over two lists.
+
+The `List.iter` function iterates over a list
+in a way that is useful when the function passed to it
+has a side effect and a result list is not needed.
+
+Since tuple elements are separated by commas and list elements are
+separated by semicolons, a list of tuples can be written as follows:
+
+```ocaml
+["alpha", 1; "beta", 2; "gamma", 3]
+```
+
+This evaluates to the following list of tuples:
+
+```ocaml
+[("alpha", 1); ("beta", 2); ("gamma", 3)]
+```
+
 ## References
 
 While variables are immutable, they can be bound to a reference that is mutable.
@@ -773,67 +906,6 @@ Numeric Operators
 +., -., _., and /. for float values
 This distinction is made to avoid having operators that are overloaded for multiple types.
 
-## Tuples
-
-A tuple is an ordered collection of values whose types can differ.
-To create a tuple, surround the elements in parentheses
-and separate them with commas.
-For example:
-
-```ocaml
-let t = (true, 3, "blue")
-```
-
-This has the type `bool * int * string`
-which is referred to as a "product type".
-
-For tuples that only have two elements,
-the `fst` function returns the first element
-and the `snd` function returns the second.
-
-To get a specific element from a tuple
-of a certain length, use pattern matching.
-For example, the following function gets
-the third element from any 4-element tuple.
-
-```ocaml
-let third_of_4 tuple = match tuple with a, b, c, d -> c;;
-
-let t = ("alpha", "beta", "gamma", "delta") in
-print_endline (third_of_4 t) (* gamma *)
-```
-
-## Lists
-
-ordered collection of immutable elements that all have the same type
-syntax [ v1; v2; v3 ] creates a linked list
-Why did they choose semicolons instead of commas?
-a non-empty list is represented by a head that holds an element value and a tail that holds the remainder which is another list or empty
-list elements can themselves be lists, but all elements must then also be lists with the same type of elements
-to create a new list by adding an element to the beginning of an existing list, let new_list = element :: old_list
-to create a new list by concatenating two lists, let new_list = list1 @ list2
-match can be used to recursive process a list; for example
-let rec sum list =
-match list with
-| [] -> empty_value
-| head :: tail -> head + sum tail
-standard library List functions
-List.map maps over one list
-List.map2 maps over two lists
-List.iter imperatively iterates over a list when the function has a side effect and a result list is not needed
-
-Since tuple elements are separated by commas and list elements are separated by semicolons, a list of tuples can be written as follows:
-
-```ocaml
-["alpha", 1; "beta", 2; "gamma", 3]
-```
-
-This evaluates to the following list of tuples:
-
-```ocaml
-[("alpha", 1); ("beta", 2); ("gamma", 3)]
-```
-
 Arrays
 ordered, fixed length collection of mutable elements that all elements that all have the same type
 syntax [| v1; v2; v3 |] creates an array
@@ -851,6 +923,11 @@ author : string;
 mutable stock : int;
 }
 note how fields can be marked as “mutable”
+
+## Maps
+
+A Map is an immutable collection of key/value pairs.
+See https://ocaml.org/docs/maps.
 
 Conditional Logic
 if-then-else is an expression
