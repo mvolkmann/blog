@@ -509,11 +509,13 @@ with ex -> close_out channel
 
 ## Dune
 
-An OCaml project can be composed of multiple modules
-that are each defined by a source file.
+An OCaml project can consist of multiple source files.
 
-The <a href="https://dune.build" target="_blank">Dune</a> build tool
-is a popular way to create, build, test, and run OCaml projects.
+<a href="https://dune.build" target="_blank">Dune</a>
+is a popular OCaml build system.
+It is used create, build, test, and run OCaml projects.
+
+To install the `dune` command, enter `oam install dune`.
 
 For help, enter `dune --help`.
 
@@ -534,6 +536,58 @@ To automatically rebuild the project
 when code changes are detected, add the `--watch` flag.
 
 To run the project, enter `dune exec {project_name}`.
+
+Let's walk through creating a small OCaml project with Dune.
+
+1. `cd` to the directory where the project should be created.
+1. Enter `dune init project demo`
+1. `cd demo`
+1. Enter `dune exec demo`.
+1. Verify that the output is "Hello, World!".
+1. Create the file `bin/math_local.ml` containing the following:
+
+   ```ocaml
+   let add a b = a + b
+   let average a b = float_of_int (add a b) /. 2.0
+   ```
+
+1. Modify the file `bin/main.ml` to contain the following:
+
+   ```ocaml
+   open Printf
+
+   let () =
+     let a = 1 and b = 2 and c = 3 in
+     printf "sum = %d\n" (Math_local.add a b);
+     printf "average = %f\n" (Math_local.average b c)
+   ```
+
+   The `let () =` is required because at the module level,
+   everthing needs to be in a binding.
+   You could use `let _ =` instead which allows
+   the expression to have any kind of value.
+   But using `let () =` is preferred because it states
+   that the expression does not return a value.
+
+1. Enter `dune exec demo`.
+1. Verify that the output is
+
+   ```text
+   sum = 3
+   average = 2.500000
+   ```
+
+1. Now let's try defining the math functions in a library.
+   Copy `lib/math_local.ml` to the `lib` directory
+   and rename it to `math_lib.ml`.
+
+1. Edit `bin/main.ml`.
+
+   Add the line `open Demo` at the beginning.  
+   Change the two references to `Math_local` to `Math_lib`.
+
+1. Enter `dune exec demo`.
+1. Verify that the output is the same.
 
 # HTTP Servers
 
