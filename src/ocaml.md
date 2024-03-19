@@ -664,6 +664,7 @@ Let's walk through creating a small OCaml project with Dune.
 Dune supports several kinds of tests,
 including inline, expectation, and "cram" tests.
 Expection tests are similar to Jest snapshot tests.
+Cram tests describe the output of a shell session.
 Jest is a JavaScript test framework.
 
 The following steps add tests to the `demo` project above and run them.
@@ -773,6 +774,34 @@ Numeric Operators
 This distinction is made to avoid having operators that are overloaded for multiple types.
 
 ## Tuples
+
+A tuple is an ordered collection of values whose types can differ.
+To create a tuple, surround the elements in parentheses
+and separate them with commas.
+For example:
+
+```ocaml
+let t = (true, 3, "blue")
+```
+
+This has the type `bool * int * string`
+which is referred to as a "product type".
+
+For tuples that only have two elements,
+the `fst` function returns the first element
+and the `snd` function returns the second.
+
+To get a specific element from a tuple
+of a certain length, use pattern matching.
+For example, the following function gets
+the third element from any 4-element tuple.
+
+```ocaml
+let third_of_4 tuple = match tuple with a, b, c, d -> c;;
+
+let t = ("alpha", "beta", "gamma", "delta") in
+print_endline (third_of_4 t) (* gamma *)
+```
 
 ## Lists
 
