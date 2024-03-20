@@ -515,12 +515,14 @@ The type of `seasons` is `string list list`.
 
 The `match` can be used to recursively process a list.
 For example, the following code computes the sum of a list of integers.
+By convention, the name `hd` is used for the head of a list
+and `tl` is used for the tail.
 
 ```ocaml
 let rec sum list =
   match list with
   | [] -> empty_value
-  | head :: tail -> head + sum tail
+  | hd :: tl -> hd + sum tl
 ```
 
 The standard library provides a large number of functions that operate on lists.
@@ -580,6 +582,22 @@ TODO: Add more to this section.
 OCaml functions are first-class.
 They can take other functions as arguments and can return new functions.
 
+The syntax `a b c` means calling function `a` with the arguments `b` and `c`.
+
+Another way to write this is to use the "reverse function application" operator
+`|>` which is intended to look like a right pointing triangle.
+Using this, the equivalent of `a b c` is c |> b |> a.
+This operator is typically used with functions that take a single argument.
+The following code demonstrates two ways to compute
+the squared value of the sine of an angle.
+
+````ocaml
+let square x = x *. x
+let angle = 0.78 (* radians *)
+let result1 = square (sin angle)
+let result2 = angle |> sin |> square
+```
+
 Anonymous functions (aka lambdas) are defined using the `fun` function.
 For example the following function
 takes two `int` arguments and returns an `int`.
@@ -588,7 +606,7 @@ the parameters are just separated by spaces.
 
 ```ocaml
 fun a b -> a + b
-```
+````
 
 It is not necessary to specify these types.
 They are inferred from the function expression `a + b`
