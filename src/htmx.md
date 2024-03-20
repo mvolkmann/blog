@@ -1426,17 +1426,24 @@ See the working example project at {% aTargetBlank
 
 Sometimes the result of sending a request to an endpoint
 should be deleting the element that triggered the request.
+For example, in a todo app like the one shown in the following screenshot,
+clicking a button to delete a todo needs to send an HTTP request
+so the todo can be deleted on the server.
+Then the row describing the todo should be removed from the DOM.
+
+<img alt="htmx Todo App" style="width: 50%"
+  src="/blog/assets/htmx-todo-app.png?v={{pkg.version}}">
+
+The following HTML is used to describe each todo.
+Note the use of `hx-swap="delete"` and `hx-target="closest div"`
+on the `button` element.
+With those in place, the HTML returned by the `/todo/${id}` endpoint
+will be ignored and the `div` that contains the `button` will be deleted.
+Sometimes the result of sending a request to an endpoint
+should be deleting the element that triggered the request.
 For example, in a todo app clicking a button to delete a todo
 needs to send an HTTP request so the todo can be deleted on the server.
 Then the row describing the todo should be removed from the DOM.
-
-The following HTML can be used to describe each todo.
-Note the use of `hx-swap="outerHTML"` and `hx-target="closest div"`
-on the `button` element.
-With those in place, the HTML returned by the `/todo/${id}` endpoint
-will replace the `div` that contains the `button`.
-That endpoint deletes the todo from the collection of todos on the server
-and returns nothing, effectively deleting that `div`.
 
 ```js
 <div class="todo-item">
@@ -1452,7 +1459,7 @@ and returns nothing, effectively deleting that `div`.
     class="plain"
     hx-confirm={`Really delete "${description}"?`}
     hx-delete={`/todos/${id}`}
-    hx-swap="outerHTML"
+    hx-swap="delete"
     hx-target="closest div"
   >
     🗑
@@ -1465,9 +1472,6 @@ See the working example project at {% aTargetBlank
 "todo-hono" %}.
 This uses <a href="/blog/topics/#/blog/bun/" target="_blank">Bun</a> and
 the <a href="/blog/topics/#/blog/hono/" target="_blank">Hono</a> framework.
-
-<img alt="htmx Todo App" style="width: 50%"
-  src="/blog/assets/htmx-todo-app.png?v={{pkg.version}}">
 
 ### CSS Transitions
 
