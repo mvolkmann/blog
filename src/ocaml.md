@@ -395,12 +395,16 @@ use this type to represent their return value.
 For example, the `List.find_opt` function does this.
 
 ```ocaml
-let colors = ["red"; "green"; "blue"]
+open Printf
+
+let colors = [ "red"; "green"; "blue" ]
 let color = "green"
 let result = List.find_opt (fun x -> x = color) colors
-match result with
-| Some match -> printf "found %s\n" match
-| None -> printf "failed to find %s\n" match
+
+let () =
+  match result with
+  | Some c -> printf "found %s\n" c
+  | None -> print_endline "failed to find green\n"
 ```
 
 ## Tuples
