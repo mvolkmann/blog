@@ -90,9 +90,15 @@ OCaml has two REPLs. A basic one can be started by entering `ocaml`.
 A better one is `utop` which is short for "Universal Toplevel".
 The `utop` command provides a more interactive, user-friendly interface that
 includes line editing, syntax highlighting, command history, and tab completion.
+
 In either REPL the expressions you enter are only evaluated
 when they are terminated by a double semicolon (`;;`).
-This allows expressions to span multiple lines.
+This allows entering multiple expressions that are separated by a single colon
+and allows them to span multiple lines. For example:
+
+```ocaml
+print_int (2 + 3); print_int (2 * 3);; (* 56 *)
+```
 
 Use the left and right arrow keys to move the cursor within the expression
 and make edits.
@@ -686,10 +692,10 @@ The field values are immutable by default, but can be made mutable
 by adding the `mutable` keywored before their field name.
 
 To create a record, just supply values for each of the fields
-inside curly braces. For example:
+inside curly braces in any order. For example:
 
 ```ocaml
-let milk : item = { description = "milk"; price = 350; weight = 1.0 }
+let my_item : item = { description = "milk"; price = 350; weight = 1.0 }
 ```
 
 It is not necessary to specify the type of the record variable.
@@ -699,11 +705,35 @@ and no extra fields can be present.
 To access a field value in a record, use dot syntax. For example:
 
 ```ocaml
-let p = milk.price
+let p = my_item.price
+```
+
+Fields can also be destructured using a `match`. For example:
+
+```ocaml
+match my_item with
+| {description=d; price=p; weight=w} ->
+    (* can use d, p, and w here *)
+```
+
+Alternatively there is a shorthand for
+setting variables whose names match the field names.
+
+```ocaml
+match my_item with
+| {description; price; weight} ->
+    (* can use description, price, and weight here *)
+```
+
+To modify a mutable field in a record, use the `<-` operator.
+For example:
+
+```ocaml
+milk.price <- 400
 ```
 
 To create a new record from an existing one
-using a different value for some of its mutable fields,
+using a different values for some of its fields,
 use the `with` keyword. For example:
 
 ```ocaml
@@ -730,16 +760,11 @@ let print_item item =
   printf "%s: $%d (%f lbs)\n" item.description item.price item.weight
 
 let () =
+  milk.price <- 400;
   List.iter print_item items;
   let total = List.fold_left (fun acc item -> acc + item.price) 0 items in
   printf "Total: $%d\n" total
 ```
-
-TODO: The use of `with` above doesn't require only specifying mutable fields.
-So what's the point of declaring some fields mutable?
-Can you modify them in existing records?
-
-TODO: Do you need to say more about records?
 
 ## Maps
 
