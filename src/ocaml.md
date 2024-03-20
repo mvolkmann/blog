@@ -671,6 +671,24 @@ optional parameters must be preceded by either ~ (for labelled) or ? (for positi
 ?(init = 0) is shorthand for ?init:(init = 0).
 The first “init” is the argument label and the second is the parameter name. They can differ just like in Swift.
 
+The following code demonstrates two ways to write functions
+that extract an element from a tuple.
+
+```ocaml
+(* Get the second element of a 4-element tuple using destructuring. *)
+let second (_, e, _, _) = e
+
+(* Get the third element of a 4-element tuple using match. *)
+let third tuple = match tuple with a, b, c, d -> c
+let greek = ("alpha", "beta", "gamma", "delta")
+
+let () =
+  print_endline (second greek);
+  (* beta *)
+  print_endline (third greek)
+(* gamma *)
+```
+
 ## Input/Output
 
 The OCaml standard library provides many functions that read input.
