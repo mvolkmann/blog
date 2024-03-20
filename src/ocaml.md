@@ -27,8 +27,8 @@ Other dialects of ML include Standard ML and F#.
 ML influenced the design of many other languages including
 Clojure, Elm, Haskell, Erlang, Rust, and Scala.
 
-Supposedly the OCaml compiler is much faster than the Haskell compiler.
-TODO: Verify this.
+The OCaml compiler is implemented in OCaml.
+It is typically faster than the Haskell compiler.
 
 OCaml source files have the extension `.ml` which stands for "meta language".
 
@@ -427,7 +427,8 @@ let t = (true, 3, "blue")
 ```
 
 This has the type `bool * int * string`
-which is referred to as a "product type".
+which is referred to as a "product type"
+(based on tuples being similar to cartesian products).
 
 For tuples that only have two elements,
 the `fst` function returns the first element
@@ -721,6 +722,78 @@ requires all the values to have the same type.
 Another approach is to use a generalized algebraic data type (GADT),
 but that introduces complexity.
 
+## Source Files
+
+OCaml source files contain the following kinds of statements:
+
+- `open` statements to add definitions from other source files to the scope
+- constants defined with `let` definitions
+- functions defined with `let` definitions
+- an optional "main" expression that typically begins with `let () =`
+
+Here's an example of a file named `math.ml`
+that defines a type, a constant, and some functions
+that can be used by other source files.
+
+```ocaml
+type point2d = float * float
+
+let pi = Float.pi
+
+let add a b = a + b
+
+let average numbers =
+  let sum = List.fold_left (+) 0 numbers in
+  let length = List.length numbers in
+  float_of_int sum /. float_of_int length
+
+(* This demonstrates adding types to parameters and
+   specifying the return type, all of which can be inferred. *)
+let distance ((x1, y1) : point2d) ((x2, y2) : point2d) : float =
+  let dx = x2 -. x1 in
+  let dy = y2 -. y1 in
+  sqrt ((dx *. dx) +. (dy *. dy))
+```
+
+Here is a "main" source file that uses things defined in `math.ml`.
+It defines a constant, a function, and a expression that is executed
+when this file is passed to the `ocaml` command.
+
+```ocaml
+open Math
+open Printf
+
+let my_constant = 7
+
+let square x = x * x (* a function *)
+
+(* This is similar to the "main" function in other languages.
+   Note the use of semicolons to separate the
+   statements and expressions. *)
+let () =
+  (* This is a verbose way to print a value. *)
+  print_string "my_constant = ";
+  print_int my_constant;
+  print_newline ();
+
+  (* This is a more concise way to print a value. *)
+  printf "pi = %f\n" pi; (* defined in math.ml *)
+
+  (* This calls a function defined in this file. *)
+  printf "square of %d = %d\n" my_constant (square my_constant);
+
+  (* The remaining examples call functions defined in math.ml. *)
+  let a = 1 and b = 2 and c = 3 in
+  printf "sum of a and b = %d\n" (add a b);
+
+  let numbers = [a; b; c] in
+  let avg = average numbers in
+  printf "average of a, b, and c = %f\n" avg;
+
+  let p1 = (0.0, 0.0) and p2 = (1.0, 1.0) in
+  let d = distance p1 p2 in print_float d
+```
+
 ## Input/Output
 
 The OCaml standard library provides many functions that read input.
@@ -849,6 +922,11 @@ To automatically rebuild the project
 when code changes are detected, add the `--watch` flag.
 
 To run the project, enter `dune exec {project_name}`.
+
+To run `utop` with project libraries automatically available, enter `dune utop`.
+For example, in a project with a library named "demo",
+a module named "math_lib", and a function in that module named "add",
+the following works: `Demo.Math_lib.add 1 2`.
 
 ### Example Project
 
