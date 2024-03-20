@@ -36,6 +36,18 @@ The financial company <a href="https://www.janestreet.com"
 target="_blank">Jane Street</a> is one of the
 largest users and supporters of OCaml.
 
+## Variants
+
+<a href="https://reasonml.github.io" target="_blank">Reason</a>
+is a syntax extension and toolchain for OCaml developed by Facebook.
+It provides a more JavaScript-like syntax while
+retaining full compatibility with the OCaml language.
+The syntax of Reason is more familiar to JavaScript developers than OCaml.
+Reason can use OCaml libraries.
+
+<a href="https://coq.inria.fr" target="_blank">Coq</a>
+is a formal proof system that is primarily implemented in OCaml.
+
 ## Installing
 
 To install the OCaml package manager "opam" for Linux and macOS,
