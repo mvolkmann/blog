@@ -1437,13 +1437,8 @@ Then the row describing the todo should be removed from the DOM.
 The following HTML is used to describe each todo.
 Note the use of `hx-swap="delete"` and `hx-target="closest div"`
 on the `button` element.
-With those in place, the HTML returned by the `/todo/${id}` endpoint
-will be ignored and the `div` that contains the `button` will be deleted.
-Sometimes the result of sending a request to an endpoint
-should be deleting the element that triggered the request.
-For example, in a todo app clicking a button to delete a todo
-needs to send an HTTP request so the todo can be deleted on the server.
-Then the row describing the todo should be removed from the DOM.
+With those in place, the DELETE `/todo/${id}` endpoint does not need to
+return any HTML and the `div` that contains the `button` will be deleted.
 
 ```js
 <div class="todo-item">
