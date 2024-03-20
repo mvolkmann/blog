@@ -769,7 +769,8 @@ let square x = x * x (* a function *)
 
 (* This is similar to the "main" function in other languages.
    Note the use of semicolons to separate the
-   statements and expressions. *)
+   statements and expressions.
+   This is where most side effects should occur. *)
 let () =
   (* This is a verbose way to print a value. *)
   print_string "my_constant = ";
@@ -908,6 +909,9 @@ This generates many files including:
 - `_build`, `bin`, `lib`, and `test` directories
 - main source file `bin/main.ml`
 - unit test file `test/test_{project_name}.ml`.
+
+It's a bit odd that the `bin` directory is used to hold source files
+rather than executables created by a build process.
 
 When using git for version control,
 the `_build` directory should be added in the `.gitignore` file.
