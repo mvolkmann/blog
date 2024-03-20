@@ -395,6 +395,8 @@ use this type to represent their return value.
 For example, the `List.find_opt` function does this.
 
 ```ocaml
+(* makes the printf function available
+   without writing Printf.printf *)
 open Printf
 
 let colors = [ "red"; "green"; "blue" ]
