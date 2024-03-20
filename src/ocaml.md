@@ -199,6 +199,8 @@ The arithmetic operators include:
 | `/.`     | float division       |
 | `**`     | float exponentiation |
 
+There is no exponentiation operator for `int` values.
+
 The string operators include:
 
 | Operator | Description                 |
