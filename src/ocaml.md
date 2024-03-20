@@ -28,7 +28,7 @@ ML influenced the design of many other languages including
 Clojure, Elm, Haskell, Erlang, Rust, and Scala.
 
 The OCaml compiler is implemented in OCaml.
-It is typically faster than the Haskell compiler.
+It is faster than the Haskell and Rust compilers.
 
 OCaml source files have the extension `.ml` which stands for "meta language".
 
