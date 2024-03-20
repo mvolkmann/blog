@@ -1322,7 +1322,7 @@ the <a href="/blog/topics/#/blog/hono/" target="_blank">Hono</a> framework.
 When displaying content that is expensive to acquire, it is useful to
 wait to request it until the rest of the page has loaded
 or until the part of the page that will display it scrolls into view.
-That can be done using `hx-trigger="load"` or `hx-trigger="revealed"`.
+This can be done using `hx-trigger="load"` or `hx-trigger="revealed"`.
 
 For example:
 

@@ -385,6 +385,24 @@ done
 
 Refs are actually single field records with a mutable field named `contents`.
 
+## Options
+
+The type `option` represents an optional value.
+The only valid values of this type are `None` and `Some`.
+
+Functions that sometimes do not have a value to return
+use this type to represent their return value.
+For example, the `List.find_opt` function does this.
+
+```ocaml
+let colors = ["red"; "green"; "blue"]
+let color = "green"
+let result = List.find_opt (fun x -> x = color) colors
+match result with
+| Some match -> printf "found %s\n" match
+| None -> printf "failed to find %s\n" match
+```
+
 ## Tuples
 
 A tuple is an immutable, ordered collection of values whose types can differ.
