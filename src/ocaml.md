@@ -696,6 +696,12 @@ It is not necessary to specify the type of the record variable.
 But the field names and values must match some existing record type
 and no extra fields can be present.
 
+To access a field value in a record, use dot syntax. For example:
+
+```ocaml
+let p = milk.price
+```
+
 To create a new record from an existing one
 using a different value for some of its mutable fields,
 use the `with` keyword. For example:
@@ -703,6 +709,33 @@ use the `with` keyword. For example:
 ```ocaml
 let new_milk = { milk with price = 325; weight = 1.5 }
 ```
+
+The following code demonstrates creating and using a list of records.
+
+```ocaml
+open Printf
+
+type item = {
+  description : string;
+  mutable weight : float;
+  mutable price : int;
+}
+
+let eggs = { description = "eggs"; weight = 0.4; price = 275 }
+let milk : item = { description = "milk"; weight = 1.0; price = 350 }
+let new_milk = { milk with price = 325; weight = 1.5 }
+let items = [ eggs; new_milk ]
+
+let print_item item =
+  printf "%s: $%d (%f lbs)\n" item.description item.price item.weight
+
+let () =
+  List.iter print_item items;
+  let total = List.fold_left (fun acc item -> acc + item.price) 0 items in
+  printf "Total: $%d\n" total
+```
+
+TODO: Do you need to say more about records?
 
 ## Maps
 
