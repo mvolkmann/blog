@@ -199,6 +199,9 @@ The arithmetic operators include:
 | `/.`     | float division       |
 | `**`     | float exponentiation |
 
+There are no operators like `++` and `--` to increment or decrement a number.
+Instead use the functions `succ` and `pred` to get the successor or predecessor.
+
 There is no exponentiation operator for `int` values.
 
 The string operators include:
