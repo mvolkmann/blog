@@ -785,9 +785,36 @@ A Map is an immutable collection of key/value pairs.
 The standard library `Map` module provides
 many functions that operate on maps.
 See <a href="https://v2.ocaml.org/api/Map.html" target="_blank">Module Map</a>.
-Some highlights include the following:
 
-TODO: Add more to this section.
+To create a map type that uses keys of a given type, call `Map.Make`.
+For example, the following creates a map type where the keys are strings.
+
+```ocaml
+module StringMap = Map.Make (String)
+```
+
+Module names, like `StringMap` above, must start with an uppercase letter.
+
+To create an instance of this map type that starts empty,
+call the `empty` function on the new type. For example:
+
+```ocaml
+let dog_map = StringMap.empty
+```
+
+To create a new map from an existing one adding one key/value pair,
+call the `add` function on the new type
+passing it a key, a value, and an existing map. For example:
+
+```ocaml
+StringMap.add uuid dog map
+```
+
+To create an instance of this map that that starts with some key/value pairs,
+...
+
+To create a new map from an existing one where one key/value pair is removed,
+...
 
 The following code demonstrates using a `Map`
 to store a collection of dog descriptions.
@@ -802,8 +829,6 @@ open Printf
 
 let generate_uuid () = Uuidm.(v `V4 |> to_string)
 
-(* String is the key type for this map type. *)
-(* Module names must start with an uppercase letter. *)
 module StringMap = Map.Make (String)
 
 type dog = { id : string; name : string; breed : string }
