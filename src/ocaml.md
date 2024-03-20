@@ -784,6 +784,8 @@ A Map is an immutable collection of key/value pairs.
 
 The standard library `Map` module provides
 many functions that operate on maps.
+Each of them return a new map that uses structual sharing
+to avoid making a copy of the whole map.
 See <a href="https://v2.ocaml.org/api/Map.html" target="_blank">Module Map</a>.
 
 To create a map type that uses keys of a given type, call `Map.Make`.
@@ -796,33 +798,84 @@ module StringMap = Map.Make (String)
 Module names, like `StringMap` above, must start with an uppercase letter.
 
 To create an instance of this map type that starts empty,
-call the `empty` function on the new type. For example:
+call the `empty` function on the map type. For example:
 
 ```ocaml
 let dog_map = StringMap.empty
 ```
 
 To create a new map from an existing one adding one key/value pair,
-call the `add` function on the new type
+call the `add` function on the map type
 passing it a key, a value, and an existing map. For example:
 
+This code uses the
+<a href="https://erratique.ch/software/uuidm/doc/Uuidm/index.html"
+target="_blank">Uuidm</a> module to generate uuids
+that are used as keys in the map.
+It must be installed with `opam install uuidm`.
+
 ```ocaml
-StringMap.add uuid dog map
+let generate_uuid () = Uuidm.(v `V4 |> to_string)
+let uuid = generate_uuid () in
+let new_dog_map = StringMap.add uuid dog dog_map
 ```
 
 To create an instance of this map that that starts with some key/value pairs,
-...
+use the `of_seq` function on the map type as shown in the code below.
+
+```ocaml
+let make_dog name breed =
+  let uuid = generate_uuid () in
+  { id = uuid; name; breed }
+let comet = make_dog "Comet" "whippet"
+let oscar = make_dog "Oscar" "GSP"
+let dog_map = StringMap.of_seq @@ List.to_seq [
+  (comet.id, comet);
+  (oscar.id, oscar);
+]
+```
+
+To find a value in a map by its key,
+use the `find_first_opt` function on the map type.
+This returns an `Option` because it's possible the key will not be found.
+For example:
+
+```ocaml
+let dog_option = StringMap.find_first_opt (fun key -> key = "some-key") dog_map
+```
+
+To change the value for a given key, use the `update` function on the map type.
+
+```ocaml
+let new_dog_map = dog_map |> StringMap.update "some-key" new_value
+```
 
 To create a new map from an existing one where one key/value pair is removed,
-...
+use the `remove` function on the map type. For example:
 
-The following code demonstrates using a `Map`
-to store a collection of dog descriptions.
+```ocaml
+let new_dog_map = dog_map |> StringMap.remove "some-key"
+```
 
-It uses the <a href="https://erratique.ch/software/uuidm/doc/Uuidm/index.html"
-target="_blank">Uuidm</a> module to generate uuids
-that are used as keys in the map.
-This must be installed with `opam install uuidm`.
+The following code demonstates all the operations described above.
+
+```ocaml
+module StringMap = Map.Make (String)
+
+let () =
+  let map =
+    StringMap.empty |> StringMap.add "a" "apple" |> StringMap.add "b" "banana"
+    |> StringMap.update "a" (Option.map (fun _ -> "apricot"))
+    |> StringMap.remove "b"
+  in
+  let a_fruit = StringMap.find_opt "a" map in
+  match a_fruit with
+  | None -> print_endline "No such fruit"
+  | Some fruit -> print_endline fruit
+```
+
+The following code demonstrates using a `Map` to store a collection
+of dog descriptions and prints information about each dog.
 
 ```ocaml
 open Printf
