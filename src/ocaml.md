@@ -529,9 +529,14 @@ let rec sum list =
 The standard library provides a large number of functions that operate on lists.
 See <a href="https://v2.ocaml.org/api/List.html" target="_blank">Module List</a>.
 
-The `List.map` function maps over one list.
+The `List.filter` function creates a new list from the elements
+in an existing list that satisfy a predicate function.
 
-The `List.map2` function maps over two lists.
+The `List.map` function creates a new list containing elements that are
+computed by passing each element in an existing list to a given function.
+
+The `List.map2` function is similar to `List.map`, but it operates on two lists,
+passing corresponding elements from each to a given function.
 
 The `List.iter` function iterates over a list
 in a way that is useful when the function passed to it
