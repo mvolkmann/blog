@@ -559,21 +559,28 @@ let rec sum list =
   | hd :: tl -> hd + sum tl
 ```
 
-The standard library provides a large number of functions that operate on lists.
+The standard library provides many functions that operate on lists.
 See <a href="https://v2.ocaml.org/api/List.html" target="_blank">Module List</a>.
+Some highlights include the following:
+
+The `List.exists` function determines if a list contains
+at least one element that matches a given predicate function.
 
 The `List.filter` function creates a new list from the elements
 in an existing list that satisfy a predicate function.
+
+The `List.fold_left` function reduces a list to a single value
+using an accumulator function.
+
+The `List.iter` function iterates over a list
+in a way that is useful when the function passed to it
+has a side effect and a result list is not needed.
 
 The `List.map` function creates a new list containing elements that are
 computed by passing each element in an existing list to a given function.
 
 The `List.map2` function is similar to `List.map`, but it operates on two lists,
 passing corresponding elements from each to a given function.
-
-The `List.iter` function iterates over a list
-in a way that is useful when the function passed to it
-has a side effect and a result list is not needed.
 
 Since tuple elements are separated by commas and list elements are
 separated by semicolons, a list of tuples can be written as follows:
@@ -590,24 +597,89 @@ This evaluates to the following list of tuples:
 
 ## Arrays
 
-TODO: Clean up this section.
+An array is a mutable, ordered collection of values
+that all have the same type.
+Its length is fixed.
 
-ordered, fixed length collection of mutable elements that all elements that all have the same type
-syntax [| v1; v2; v3 |] creates an array
-Why did they choose semicolons instead of commas?
-indexed by integers starting from zero
+To create an array, surround the elements in square brackets
+that have vertical bars inside them and separate them with semicolons.
+For example:
 
-Records
-like structs in other languages
-to define a record type,
-type book = {
-series : string;
-volume : int;
-title : string;
-author : string;
-mutable stock : int;
+```ocaml
+let colors = [| "red"; "green"; "blue" |]
+```
+
+To get an element from an array, follow it with
+a dot and a zero-based index in parentheses. For example:
+
+```ocaml
+let color = colors.(1) (* "green" *)
+OR
+let color = Array.get colors 1
+```
+
+To modify an array element, use the `<-` operator. For example:
+
+```ocaml
+colors.(1) <- "yellow"
+OR
+Array.set colors 1 "yellow"
+```
+
+The type of an array is written as `T array`
+where `T` is the type of the elements.
+For example, the type of an array of `float` values is `float array`.
+
+An empty array is written as `[||]` and as the type `'a array`
+to indicate that the type of its elements is unknown.
+
+The standard library `Array` module provides
+many functions that operate on arrays.
+See <a href="https://v2.ocaml.org/api/Array.html" target="_blank">Module Array</a>.
+Some highlights include the following:
+
+The `Array.append` function creates a new array by concatenating two arrays.
+
+The `Array.concat` function creates a new array
+by concatenating all the arrays in a list.
+
+The `Array.exists` function determines if an array contains
+at least one element that matches a given predicate function.
+
+The `Array.length` function returns the length of a given array.
+
+The `Array.fold_left` function reduces an array to a single value
+using an accumulator function.
+
+The `Array.sub` function creates a new array
+that is a subset of an existing array.
+
+The `Array.to_list` function creates a new list
+that contains the same elements as a given array.
+
+The `Array.of_list` function creates a new array
+that contains the same elements as a given list.
+
+The `Array.map` function creates a new array containing elements that are
+computed by passing each element in an existing array to a given function.
+
+## Records
+
+A record is similar to structs in other languages.
+
+The following code defines a record type
+that describes an item available for purchase:
+
+```ocaml
+type item = {
+  description : string;
+  weight : float;
+  mutable price : int;
 }
-note how fields can be marked as “mutable”
+```
+
+The fields are immutable by default, but can be made mutable
+by adding the `mutable` keywored before their name.
 
 ## Maps
 
@@ -625,6 +697,7 @@ The syntax `a b c` means calling function `a` with the arguments `b` and `c`.
 
 Another way to write this is to use the "reverse function application" operator
 `|>` which is intended to look like a right pointing triangle.
+In fact, in fonts that support ligatures, it is displays as exactly that.
 Using this, the equivalent of `a b c` is c |> b |> a.
 This operator is typically used with functions that take a single argument.
 The following code demonstrates two ways to compute
