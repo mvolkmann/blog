@@ -336,8 +336,10 @@ They are not expressions, so they do not have a value.
 
 The following example binds three global identifiers.
 Note how double colons must be used to terminate several of the lines.
-Also, functions that take no arguments, like `print_newline`,
-must be passed the "unit" value `()`.
+
+In order to call a function that takes no arguments, such as `print_newline`,
+it must be "passed" the "unit" value `()`.
+Without this it is just a reference to the function and not a call to it.
 
 ```ocaml
 let a = 1
@@ -363,7 +365,38 @@ it is common to use `'b` (beta) and `'c` (gamma).
 For example, entering `[];;` in `utop` outputs type type `'a list`
 because it is a list where the type of the elements is unknown.
 
-TODO: Add an example function that has a parameter whose type uses a type variable.
+The following code demonstrates writing a function that uses
+parametric polymorphism to find the largest value in a list of values.
+
+```ocaml
+let rec max_element (ls : 'a list) : 'a option =
+  match ls with
+  | [] -> None (* for an empty list *)
+  | [ x ] ->
+      Some x (* for a list with only one element *)
+  | hd :: tl -> (
+      match max_element tl with
+      | None ->
+          Some hd (* head is maximum if tail is empty *)
+      | Some max_tl -> Some (if hd > max_tl then hd else max_tl))
+
+let () =
+  let numbers = [ 1; 13; 4; 9 ] in
+  let max = max_element numbers in
+  match max with
+  | None -> print_endline "empty list"
+  | Some max -> print_int max
+```
+
+The `function` keyword is useful in functions
+that immediate `match` on the last parameter.
+It simplfies the code by removing the need to list the last parameter
+and replacing `match {last-parameter} with` with just `function`.
+For example, the first two lines of the `max_element` function above
+can be replaced by `let rec max_element = function`.
+The type of `max_element` can be specified as `'a list -> 'a option`
+which states that it takes a list of `a'` elements
+and returns an `option` of type `'a`.
 
 ## References
 
@@ -603,6 +636,14 @@ let angle = 0.78 (* radians *)
 let result1 = square (sin angle)
 let result2 = angle |> sin |> square
 ```
+
+In order to call a function that takes no arguments, such as `print_newline`,
+it must be "passed" the "unit" value `()`.
+Without this it is just a reference to the function and not a call to it.
+
+Calls to functions that don't return a value
+are expressions with "unit type".
+These are like "statements" in other languages.
 
 Anonymous functions (aka lambdas) are defined using the `fun` function.
 For example the following function
