@@ -714,6 +714,13 @@ let () =
 (* gamma *)
 ```
 
+OCaml does not make it easy to write variadic functions,
+which are functions that take a variable number of arguments.
+One approach is to take a list, but that
+requires all the values to have the same type.
+Another approach is to use a generalized algebraic data type (GADT),
+but that introduces complexity.
+
 ## Input/Output
 
 The OCaml standard library provides many functions that read input.
