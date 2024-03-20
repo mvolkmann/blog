@@ -665,7 +665,9 @@ computed by passing each element in an existing array to a given function.
 
 ## Records
 
-A record is similar to structs in other languages.
+A record an immutable collections of fields.
+The fields can have differents types, including other record types.
+Records are similar to structs in other languages.
 
 The following code defines a record type
 that describes an item available for purchase:
@@ -673,13 +675,34 @@ that describes an item available for purchase:
 ```ocaml
 type item = {
   description : string;
-  weight : float;
   mutable price : int;
+  mutable weight : float;
 }
 ```
 
-The fields are immutable by default, but can be made mutable
-by adding the `mutable` keywored before their name.
+The field names must begin with a lowercase letter.
+
+The field values are immutable by default, but can be made mutable
+by adding the `mutable` keywored before their field name.
+
+To create a record, just supply values for each of the fields
+inside curly braces. For example:
+
+```ocaml
+let milk : item = { description = "milk"; price = 350; weight = 1.0 }
+```
+
+It is not necessary to specify the type of the record variable.
+But the field names and values must match some existing record type
+and no extra fields can be present.
+
+To create a new record from an existing one
+using a different value for some of its mutable fields,
+use the `with` keyword. For example:
+
+```ocaml
+let new_milk = { milk with price = 325; weight = 1.5 }
+```
 
 ## Maps
 
