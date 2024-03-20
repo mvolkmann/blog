@@ -781,7 +781,11 @@ let () =
 ## Maps
 
 A Map is an immutable collection of key/value pairs.
-See https://ocaml.org/docs/maps.
+
+The standard library `Map` module provides
+many functions that operate on maps.
+See <a href="https://v2.ocaml.org/api/Map.html" target="_blank">Module Map</a>.
+Some highlights include the following:
 
 TODO: Add more to this section.
 
@@ -1299,6 +1303,8 @@ that provide API endpoints. Popular options include:
 - Opium - 747 GitHub stars
 - CoHTTP - 676 GitHub stars
 - Ocsigen - not in GitHub
+
+TODO: Implement your Dog CRUD htmx app using Dream.
 
 ## Converting OCaml to JavaScript
 
