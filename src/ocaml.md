@@ -789,6 +789,39 @@ Some highlights include the following:
 
 TODO: Add more to this section.
 
+The following code demonstrates using a `Map`
+to store a collection of dog descriptions.
+
+It uses the <a href="https://erratique.ch/software/uuidm/doc/Uuidm/index.html"
+target="_blank">Uuidm</a> module to generate uuids
+that are used as keys in the map.
+This must be installed with `opam install uuidm`.
+
+```ocaml
+open Printf
+
+let generate_uuid () = Uuidm.(v `V4 |> to_string)
+
+(* String is the key type for this map type. *)
+(* Module names must start with an uppercase letter. *)
+module StringMap = Map.Make (String)
+
+type dog = { id : string; name : string; breed : string }
+
+let add_dog map name breed =
+  let uuid = generate_uuid () in
+  let dog = { id = uuid; name; breed } in
+  StringMap.add uuid dog map
+
+let print_dog _ dog = printf "%s) %s is a %s.\n" dog.id dog.name dog.breed
+
+let () =
+  let dog_map = StringMap.empty in
+  let dog_map = add_dog dog_map "Comet" "whippet" in
+  let dog_map = add_dog dog_map "Oscar" "GSP" in
+  StringMap.iter print_dog dog_map
+```
+
 ## Functions
 
 OCaml functions are first-class.
@@ -818,6 +851,7 @@ Without this it is just a reference to the function and not a call to it.
 Calls to functions that don't return a value
 are expressions with "unit type".
 These are like "statements" in other languages.
+Some call them "effectful expressions".
 
 Anonymous functions (aka lambdas) are defined using the `fun` function.
 For example the following function
