@@ -735,6 +735,10 @@ let () =
   printf "Total: $%d\n" total
 ```
 
+TODO: The use of `with` above doesn't require only specifying mutable fields.
+So what's the point of declaring some fields mutable?
+Can you modify them in existing records?
+
 TODO: Do you need to say more about records?
 
 ## Maps
