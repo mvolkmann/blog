@@ -351,6 +351,7 @@ where comparing them using the comparison function evaluates to true.
 
 ```ocaml
 let rec choose list1 list2 cmp_fun =
+  (* match is described in the "Conditional Logic" section. *)
   match (list1, list2) with
   | [], [] -> [] (* both lists are empty; return empty list *)
   | [], _ -> list2 (* first list is empty; return second list *)
@@ -667,7 +668,28 @@ Unless the `then` branch produces a unit result, an `else` branch is required.
 
 An `if` expression can be used where other languages use a ternary operator.
 
-TODO: Describe using `match`.
+The `match` keyword performs pattern matching.
+It takes an expression whose value is to be matched
+and a set of patterns.
+The patterns must be exhaustive, meaning that
+there must be a pattern that matches every possible value.
+For example:
+
+```ocaml
+open Random
+
+let () =
+  Random.self_init ();
+  let n = Random.int 10 in
+  print_int n;
+  print_newline ();
+  match n with
+  | n when n < 3 -> print_string "small"
+  | n when 4 <= n && n <= 7 -> print_string "medium"
+  | _ -> print_string "large"
+```
+
+TODO: Describe more about `match`.
 
 ## Iteration
 
