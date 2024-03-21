@@ -1288,6 +1288,40 @@ the program can be run by entering `dune exec {project-name}`.
 To run this outside of a Dune project, create an executable by entering
 `ocamlopt math.ml main.ml -o demo` and run it by entering `./demo`.
 
+The `module` keyword can be used to define a submodule.
+For example, the file `math.ml` defines the module `Geometry`.
+If it contains `module Geometry = struct ... end`
+then the things it defines are in the module `Math.Geometry`.
+
+For example, suppose in a Dune project
+the file `lib/math.ml` contains the following:
+
+```ocaml
+let average numbers =
+  let sum = List.fold_left (+.) 0.0 numbers in
+  let length = List.length numbers in
+  sum /. float_of_int length
+
+module Geometry = struct
+  let rectangle_area width height = width *. height
+  let rectangle_perimeter width height = width *. 2.0 +. height *. 2.0
+end
+```
+
+In the file `bin/main.ml` this can be used as follows:
+
+```ocaml
+open Demo.Math
+(* Can also add this: open Demo.Math.Geometry *)
+open Printf
+
+let () =
+  let avg = average [5.2; 3.5] in
+  printf "average = %f\n" avg;
+  let area = Geometry.rectangle_area 5.2 3.5 in
+  printf "area = %f\n" area
+```
+
 ## Input/Output
 
 The OCaml standard library provides many functions that read input.
