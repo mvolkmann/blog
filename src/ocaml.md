@@ -545,6 +545,51 @@ let () =
   | None -> print_endline "failed to find green\n"
 ```
 
+## Sum Types
+
+Sum types (aka union types and variant types)
+are used for enumerated values, error handling, and for
+representing data structures whose shape can vary.
+
+The following code provides some examples:
+
+````ocaml
+type season = Spring | Summer | Fall | Winter
+
+let forecast = function
+  | Spring -> "rain"
+  | Summer -> "sun"
+  | Fall -> "nice"
+  | Winter -> "snow"
+
+type result = Ok of float | Error of string
+
+let divide x y = if y = 0.0 then Error "Division by zero" else Ok (x /. y)
+
+type my_union = BoolVal of bool | IntVal of int | StringVal of string
+
+let get_string = function
+  | IntVal i -> string_of_int i
+  | StringVal s -> s
+  | BoolVal b -> string_of_bool b
+
+let () =
+  print_endline (forecast Winter);
+
+  let numerator = 5.0 and denomiator = 0.0 in
+  match divide numerator denomiator with
+  | Ok v -> print_endline (string_of_float v)
+  | Error e ->
+      print_endline e;
+
+  let b = BoolVal true in
+  let i = IntVal 10 in
+  let s = StringVal "hello" in
+  print_endline (get_string i);
+  print_endline (get_string s);
+  print_endline (get_string b)
+``
+
 ## Tuples
 
 A tuple is an immutable, ordered collection of values whose types can differ.
@@ -555,7 +600,7 @@ For example:
 
 ```ocaml
 let t = (true, 3, "blue")
-```
+````
 
 This has the type `bool * int * string`
 which is referred to as a "product type"
