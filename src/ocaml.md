@@ -998,9 +998,11 @@ This operator is typically used with functions that take a single argument.
 The following code demonstrates two ways to compute
 the squared value of the sine of an angle.
 
-The "value" in a function definition
-is a semicolon-separated set of expressions.
-Typically there is only one expression.
+The body of a function definition, the part after the `=`, is an expression.
+An expression can be a semicolon-separated set of expressions,
+but typically there is only one.
+When there are more than one, all but the final expression
+serves to cause side effects.
 The result of a function call is the value of the final expression.
 
 ````ocaml
