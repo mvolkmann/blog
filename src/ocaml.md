@@ -93,7 +93,7 @@ write, compile, test, debug, and profile OCaml programs and libraries.
   into an optimized, platform-specific executable.
 - The `opam` package Manager installs libraries and tools,
   manages dependency versions, and upgrades them.
-- The `ocamlbuild` (basic) and `dune` (modern) build systems
+- The `ocamlbuild` (predecessor to `dune`) and `dune` (modern) build systems
   simplify building complex and managing dependencies.
 - The `ocamldoc` tool generates documentation from OCaml source code annotations.
 - The `ocamldebug` debugger is used to debug OCaml programs.
@@ -547,15 +547,16 @@ let () =
   | None -> print_endline "failed to find green\n"
 ```
 
-## Sum Types
+## Algebraic Data Types
 
-Sum types (aka union types and variant types)
-are used for enumerated values, error handling, and for
-representing data structures whose shape can vary.
+Algebraic Data Types in OCaml go by many names including
+sum types, union types and variant types.
+They have many uses including enumerated values, error handling,
+and for representing data structures whose shape can vary.
 
 The following code provides some examples:
 
-````ocaml
+```ocaml
 type season = Spring | Summer | Fall | Winter
 
 let forecast = function
@@ -590,7 +591,7 @@ let () =
   print_endline (get_string i);
   print_endline (get_string s);
   print_endline (get_string b)
-``
+```
 
 ## Tuples
 
@@ -601,10 +602,13 @@ and separate them with commas.
 For example:
 
 ```ocaml
-let t = (true, 3, "blue")
-````
+let t = (true, 3, "blue") in
+(* Can use destructuring to extract the values. *)
+let b, n, c = t in
+printf "b = %b, n = %d, c = %s\n" b n c
+```
 
-This has the type `bool * int * string`
+The variable `t` above has the type `bool * int * string`
 which is referred to as a "product type"
 (based on tuples being similar to cartesian products).
 
@@ -1090,7 +1094,7 @@ serve to cause side effects and must have the unit type (no value).
 Often this use used for debug printing.
 The result of a function call is the value of the final expression.
 
-````ocaml
+```ocaml
 let square x = x *. x
 let angle = 0.78 (* radians *)
 let result1 = square (sin angle)
@@ -1114,7 +1118,7 @@ the parameters are just separated by spaces.
 
 ```ocaml
 fun a b -> a + b
-````
+```
 
 It is not necessary to specify these types.
 They are inferred from the function expression `a + b`
@@ -1229,6 +1233,7 @@ Recursive functions must be defined with `let rec`. For example:
 ```ocaml
 let rec factorial n =
   if n < 0 then
+    (* raises an exception *)
     failwith "factorial is not defined for negative numbers"
   else if n = 0 then 1
   else n * factorial (n - 1);;
@@ -1562,7 +1567,7 @@ that holds configurations options for that directory.
 These files use Lisp-like syntax.
 Each option is specified in by a name and value inside parentheses
 that is referred to as a
-"<a href="https://dune.readthedocs.io/en/stable/dune-files.html" 
+"<a href="https://dune.readthedocs.io/en/stable/dune-files.html"
 target="_blank">stanza</a>".
 
 To build the project, enter `dune build`.
@@ -1772,7 +1777,8 @@ The following steps implement the same tests above in this way.
 There are several OCaml libraries for implementing HTTP servers
 that provide API endpoints. Popular options include:
 
-- <a href="https://aantron.github.io/dream/" target="_blank">Dream</a> - 1.5K GitHub stars
+- <a href="https://aantron.github.io/dream/" target="_blank">Dream</a> -
+  1.5K GitHub stars
 - Opium - 747 GitHub stars
 - CoHTTP - 676 GitHub stars
 - Ocsigen - not in GitHub
