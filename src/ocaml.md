@@ -1402,6 +1402,12 @@ These often use modules defines in the `lib` directory.
 It's a bit odd that it hold source files
 rather than executables created by a build process.
 
+It is common to have a file in the `bin` directory named `main.ml`,
+but that name is not required.
+It is also common to end files in the `bin` directory
+with an expression that begins with `let () =`.
+This is similar to the main function in other programming languages.
+
 The `lib` directory is the preferred location for source files
 that define reusable functions.
 One reason is that Dune supports implementing unit tests
