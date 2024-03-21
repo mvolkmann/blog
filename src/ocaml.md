@@ -1048,6 +1048,7 @@ An expression can be a semicolon-separated set of expressions,
 but typically there is only one.
 When there are more than one, all but the final expression
 serve to cause side effects and must have the unit type (no value).
+Often this use used for debug printing.
 The result of a function call is the value of the final expression.
 
 ````ocaml
