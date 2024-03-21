@@ -1398,7 +1398,9 @@ the `_build` directory should be added in the `.gitignore` file.
 
 The `bin`, `lib`, and `test` directories all contain a `dune` file
 that holds configurations options for that directory.
-These files using Lisp-like syntax.
+These files use Lisp-like syntax.
+Each option is specified in by a name and value inside parentheses
+that is referred to as a "stanza".
 
 To build the project, enter `dune build`.
 This creates `_build/default/bin/main.exe`.
