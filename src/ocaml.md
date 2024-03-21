@@ -71,6 +71,27 @@ which takes about four minutes to complete:
 opam install ocaml-lsp-server odoc ocamlformat utop
 ```
 
+## Toolchain
+
+The OCaml toolchain consists of the following components
+that provide everything needed to
+write, compile, test, debug, and profile OCaml programs and libraries.
+
+- The `ocaml` interpreter interactive toplevel executes code interactively
+  for testing small code snippets and exploring language features.
+- The `ocamlc` compiler compiles source code into bytecode or native code,
+  depending on the target platform and options used.
+- The `opam` package Manager installs libraries and tools,
+  manages dependency versions, and upgrades them.
+- The `ocamlbuild` (basic) and `dune` (modern) build systems
+  simplify building complex and managing dependencies.
+- The `ocamldoc` tool generates documentation from OCaml source code annotations.
+- The `ocamldebug` debugger is used to debug OCaml programs.
+- The `ocamlprof` tool profiles OCaml programs
+  to analyze their performance and identify bottlenecks.
+- The standard library provides commonly needed functions and data structures.
+  It includes modules for strings, lists, arrays, I/O operations, and more.
+
 ## Help
 
 For help on OCaml, see:
