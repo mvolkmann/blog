@@ -102,6 +102,11 @@ write, compile, test, debug, and profile OCaml programs and libraries.
 - The standard library provides commonly needed functions and data structures.
   It includes modules for strings, lists, arrays, I/O operations, and more.
 
+A module is a collection of named values
+that can be constants, functions, and types.
+An `open` expresion brings the names defined in a module into the current scope.
+Circular dependencies between modules are not allowed.
+
 Suppose we have the file `my_module.ml` containing `let add a b = a + b`
 and we have the file `main.ml` containing the following:
 
@@ -992,6 +997,11 @@ Using this, the equivalent of `a b c` is c |> b |> a.
 This operator is typically used with functions that take a single argument.
 The following code demonstrates two ways to compute
 the squared value of the sine of an angle.
+
+The "value" in a function definition
+is a semicolon-separated set of expressions.
+Typically there is only one expression.
+The result of a function call is the value of the final expression.
 
 ````ocaml
 let square x = x *. x
