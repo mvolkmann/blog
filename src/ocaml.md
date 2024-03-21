@@ -988,7 +988,8 @@ The last `int` is the return type of the function.
 The `<fun>` after the `=` represents the bytecode for the function
 which cannot be printed.
 
-Functions support partial application.
+When a function is called with fewer arguments than it has parameters,
+a new function is returned that is the result of partial application.
 That is why one arrow (`->`) for each parameter appears in the output.
 
 In fact, the function definition above is just syntactic sugar
@@ -1039,24 +1040,54 @@ add (2 * 3) (4 + 5) (* 6 * 9 = 54 *)
 ```
 
 Labeling parameters allows them to be specified by the labels in calls.
+A function can have a mixture of labeled and unlabeled parameters.
+Unlabeled parameters are positional and must be
+passed in the order they are specified.
+Labeled parameters can be specified in any order
+and can be mixed into the unlabeled parameters.
+
 Label names are not required to match their coresponding parameter names.
-For example:
+
+To declare a labelled parameter or pass an labelled argument,
+use the syntax `~{name}:{value}`. For example:
 
 ```ocaml
+open Printf
 
+(* This doesn't use labeled parmeters. *)
+let rectangle_area1 length width = length *. width
+
+(* This does use labeled parmeters.
+   The name between ~ and : is what will be used in calls.
+   The name after the : is what will be used in the function body. *)
+let rectangle_area2 ~length:l ~width:w = l *. w
+
+let () =
+  printf "area1 = %f\n" (rectangle_area1 8.5 11.0);
+  printf "area2 = %f\n" (rectangle_area2 ~length:8.5 ~width:11.0)
 ```
 
 TODO: Finish cleaning up this section.
 
-Unlabelled parameters are positional.
-functions can have labelled parameters and they can have default values
-to declare a labelled parameter or pass an labelled argument, use ~{name}:{value}
-labelled arguments can appear in any order and be mixed with positional arguments
-when a function is called with fewer arguments than it has parameters, a new function is returned that is the result of partial application
-recursive functions must be defined with “let rec”
+Parameters can specify default values by making them optional
+with the syntax `?({name}={default-value})`.
 optional parameters must be preceded by either ~ (for labelled) or ? (for positional); for example, ?(answer=42)
 ?(init = 0) is shorthand for ?init:(init = 0).
 The first “init” is the argument label and the second is the parameter name. They can differ just like in Swift.
+
+Recursive functions must be defined with `let rec`. For example:
+
+```ocaml
+let rec factorial n =
+  if n < 0 then
+    failwith "factorial is not defined for negative numbers"
+  else if n = 0 then 1
+  else n * factorial (n - 1);;
+```
+
+Function parameters can use destructuring to extract elements
+from tuples, lists, and arrays.
+TODO: Are all three really supported?
 
 The following code demonstrates two ways to write functions
 that extract an element from a tuple.
@@ -1067,6 +1098,7 @@ let second (_, e, _, _) = e
 
 (* Get the third element of a 4-element tuple using match. *)
 let third tuple = match tuple with a, b, c, d -> c
+
 let greek = ("alpha", "beta", "gamma", "delta")
 
 let () =
