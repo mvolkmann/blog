@@ -111,6 +111,14 @@ let () =
   print_int sum
 ```
 
+It is recommended to create a Dune project,
+move these files in the project `bin` directory,
+and run it with `dune exec {project-name}`.
+See the Dune section below for more detail.
+
+However, there are several options for
+building and running a project without using Dune.
+
 To compile this to an executable and run it,
 enter `ocamlopt my_module.ml main.ml -o main` and `./main`.
 
@@ -555,6 +563,9 @@ let third_of_4 tuple = match tuple with a, b, c, d -> c;;
 let t = ("alpha", "beta", "gamma", "delta") in
 print_endline (third_of_4 t) (* gamma *)
 ```
+
+You can think of tuples like records (described later)
+where the fields are accessed by position rather than name.
 
 ## Lists
 
@@ -1118,27 +1129,47 @@ let rec factorial n =
   else n * factorial (n - 1);;
 ```
 
-Function parameters can use destructuring to extract elements
-from tuples, lists, and arrays.
-TODO: Are all three really supported?
+Function parameters can use destructuring to extract elements from tuples.
+This can also be done for lists and arrays, but those
+require special handling due to non-exhastive matching.
+The reason is that by definition tuple types have a known size,
+but list and array types do not.
+Recall that:
 
-The following code demonstrates two ways to write functions
-that extract an element from a tuple.
+- The type of the tuple `(1, 2, 3)` is `int * int * int` which has a length of 3.
+- The type of the list `[1; 2; 3]` is `int list` which does not specify a length.
+- The type of the array `[|1; 2; 3|]` is `int array` which does not specify a length.
+
+The following code demonstrates ways to use
+destructuring of tuples, lists, and arrays.
 
 ```ocaml
-(* Get the second element of a 4-element tuple using destructuring. *)
-let second (_, e, _, _) = e
+open Printf
 
-(* Get the third element of a 4-element tuple using match. *)
-let third tuple = match tuple with a, b, c, d -> c
+(* This only handles tuples of length 4. *)
+let tuple2of4 (_, e, _, _) = e
+(* alternate implementation *)
+(* let tuple2of4 tuple = match tuple with a, b, c, d -> b *)
 
-let greek = ("alpha", "beta", "gamma", "delta")
+(* This only handles lists of length 4. *)
+let list2of4 = function
+  | [ _; e; _; _ ] -> e
+  | _ -> failwith "list must have length 4"
+
+(* This only handles arrays of length 4. *)
+let array2of4 = function
+  | [| _; e; _; _ |] -> e
+  | _ -> failwith "array must have length 4"
 
 let () =
-  print_endline (second greek);
-  (* beta *)
-  print_endline (third greek)
-(* gamma *)
+  let t = ("a", "b", "c", "d") in
+  printf "second in tuple is %s\n" (tuple2of4 t);
+
+  let l = [ "a"; "b"; "c"; "d" ] in
+  printf "second in list is %s\n" (list2of4 l);
+
+  let a = [| "a"; "b"; "c"; "d" |] in
+  printf "second in array is %s\n" (array2of4 a)
 ```
 
 OCaml does not make it easy to write variadic functions,
@@ -1374,7 +1405,9 @@ This creates `_build/default/bin/main.exe`.
 To automatically rebuild the project
 when code changes are detected, add the `--watch` flag.
 
-To run the project, enter `dune exec {project_name}`.
+To run the project, enter `dune exec {executable_name}`.
+The executable name is specified in the `public_name` stanza
+found in the `bin/dune` file and defaults to the project name.
 
 To run `utop` with project libraries automatically available, enter `dune utop`.
 For example, in a project with a library named "demo",
