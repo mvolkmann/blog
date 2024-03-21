@@ -82,9 +82,10 @@ write, compile, test, debug, and profile OCaml programs and libraries.
 - The `ocamlc` compiler compiles source code
   into bytecode that can run on any platform.
   It creates files with the extensions `.cmo` and `.cmi` (for interfaces).
-  The `-o` typical typically specifies an output file with a `.byte` extension
-  that is passed to the `ocamlrun` coommand.
-  The `.cmo` and `.cmi` files are not needed to run the `.byte` file.
+  The `-o` flag typical typically specifies an output file
+  with a `.byte` extension that is passed to the `ocamlrun` coommand.
+  The `.cmo` and `.cmi` files are not needed to run the `.byte` file,
+  but incremental recompilation relies on them.
 - The `ocamlrun` command executes a bytecode file.
 - The `ocamlopt` compiler compiles source code
   into an optimized, platform-specific executable.
@@ -119,6 +120,8 @@ enter `ocamlc my_module.ml main.ml -o main.byte` and `ocamlrun main.byte`.
 To compile this to an executable and run it
 by specifying only the main source file,
 enter `ocamlbuild main.native` and `./main.native`.
+The `ocamlbuild` command creates a `_build` directory containing
+many intermediate files that are not needed to run the program.
 
 To compile this to bytecode and run it
 by specifying only the main source file,
