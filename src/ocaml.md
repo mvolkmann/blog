@@ -176,6 +176,9 @@ and allows them to span multiple lines. For example:
 print_int (2 + 3); print_int (2 * 3);; (* 56 *)
 ```
 
+Double semicolons are only used in REPL sessions, not in source files
+(except when assigning global identifiers).
+
 Use the left and right arrow keys to move the cursor within the expression
 and make edits.
 
@@ -419,7 +422,8 @@ do not go out of scope after they are evaluated.
 They are not expressions, so they do not have a value.
 
 The following example binds three global identifiers.
-Note how double colons must be used to terminate several of the lines.
+Note how a double semicolon is used to
+terminate the assignments of global identifiers.
 
 In order to call a function that takes no arguments, such as `print_newline`,
 it must be "passed" the "unit" value `()`.
@@ -1181,6 +1185,9 @@ but that introduces complexity.
 
 ## Source Files
 
+The code in a source file is executed just as it would be in a REPL
+if it were terminated by a double semicolon.
+
 Every source file defines a module.
 The identifiers it defines, including types, constants, and functions,
 can be used in other source files.
@@ -1390,8 +1397,19 @@ This generates many files including:
 - main source file `bin/main.ml`
 - unit test file `test/test_{project_name}.ml`.
 
-It's a bit odd that the `bin` directory is used to hold source files
+The `bin` directory holds source files that will be compiled to executables.
+These often use modules defines in the `lib` directory.
+It's a bit odd that it hold source files
 rather than executables created by a build process.
+
+The `lib` directory is the preferred location for source files
+that define reusable functions.
+One reason is that Dune supports implementing unit tests
+for files in the `lib` directory, but not for files in the `bin` directory.
+
+The `test` directory holds test files for tests that
+are not included inline with the functions they test.
+Inline tests are typically preferred.
 
 When using git for version control,
 the `_build` directory should be added in the `.gitignore` file.
