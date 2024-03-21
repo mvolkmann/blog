@@ -1518,9 +1518,9 @@ The following CSS is added to describe the desired transition.
 }
 ```
 
-The `hx-swap` attribute on the delete button
-is modified to increase the delay between
-adding the `htmx-swapping` CSS class to the target and removing it.
+The `hx-swap` attribute on the delete button is modified to
+increase the delay between adding the `htmx-swapping` CSS class to the target
+and removing it.
 The target in this case is the element that
 represents the todo row and contains the delete button.
 This delays actually removing the target
