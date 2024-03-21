@@ -554,11 +554,17 @@ sum types, union types and variant types.
 They have many uses including enumerated values, error handling,
 and for representing data structures whose shape can vary.
 
+Each variant name is called a "constructor".
+Each construtor can have an associated value of a specified type.
+The value types of the variants can differ.
+
 The following code provides some examples:
 
 ```ocaml
 type season = Spring | Summer | Fall | Winter
 
+(* When pattern matching a sum type, if all variants aren't matched,
+   the warning "this pattern-matching is not exhaustive" will appear. *)
 let forecast = function
   | Spring -> "rain"
   | Summer -> "sun"
@@ -603,8 +609,9 @@ For example:
 
 ```ocaml
 let t = (true, 3, "blue") in
-(* Can use destructuring to extract the values. *)
-let b, n, c = t in
+(* Can use destructuring to extract the values.
+   The parentheses are optional. *)
+let (b, n, c) = t in
 printf "b = %b, n = %d, c = %s\n" b n c
 ```
 
