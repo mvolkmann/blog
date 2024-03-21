@@ -1167,6 +1167,10 @@ let array2of4 = function
 
 let () =
   let t = ("a", "b", "c", "d") in
+  (* This destructures a tuple in a variable declaration. *)
+  let _, second, third, _ = t in
+  printf "second in tuple is %s\n" second;
+  printf "third in tuple is %s\n" third;
   printf "second in tuple is %s\n" (tuple2of4 t);
 
   let l = [ "a"; "b"; "c"; "d" ] in
@@ -1451,22 +1455,72 @@ Let's walk through creating a small OCaml project with Dune.
 1. `cd demo`
 1. Enter `dune exec demo`.
 1. Verify that the output is "Hello, World!".
-1. Create the file `bin/math_local.ml` containing the following:
+1. Create the file `lib/math.ml` containing the following:
 
    ```ocaml
-   let add a b = a + b
-   let average a b = float_of_int (add a b) /. 2.0
+   let pi = Float.pi
+
+   let add a b = a +. b
+
+   let average numbers =
+     let sum = List.fold_left (+.) 0.0 numbers in
+     let length = List.length numbers in
+     sum /. float_of_int length
+   ```
+
+1. Create the file `lib/points.ml` containing the following:
+
+   ```ocaml
+   type point2d = float * float
+
+   (* This demonstrates adding types to parameters and
+      specifying the return type, all of which can be inferred. *)
+   let distance ((x1, y1) : point2d) ((x2, y2) : point2d) : float =
+     let dx = x2 -. x1 in
+     let dy = y2 -. y1 in
+     sqrt ((dx *. dx) +. (dy *. dy))
+
+   let%test _ = distance (1., 1.) (4., 5.) = 5.0
    ```
 
 1. Modify the file `bin/main.ml` to contain the following:
 
    ```ocaml
+   (* Note how open requires the library name AND the module name. *)
+   open Demo.Math
+   open Demo.Points
    open Printf
 
+   let my_constant = 7
+
+   let square x = x * x (* a function *)
+
+   (* This is similar to the "main" function in other languages.
+      Note the use of semicolons to separate the
+      statements and expressions.
+      This is where most side effects should occur. *)
    let () =
-     let a = 1 and b = 2 and c = 3 in
-     printf "sum = %d\n" (Math_local.add a b);
-     printf "average = %f\n" (Math_local.average b c)
+     (* This is a verbose way to print a value. *)
+     print_string "my_constant = ";
+     print_int my_constant;
+     print_newline ();
+
+     (* This is a more concise way to print a value. *)
+     printf "pi = %f\n" pi; (* defined in math.ml *)
+
+     (* This calls a function defined in this file. *)
+     printf "square of %d = %d\n" my_constant (square my_constant);
+
+     (* The remaining examples call functions defined in math.ml. *)
+     let a = 2.0 and b = 3.0 and c = 2.5 in
+     printf "sum of a and b = %f\n" (add a b);
+
+     let numbers = [a; b; c] in
+     let avg = average numbers in
+     printf "average of a, b, and c = %f\n" avg;
+
+     let p1 = (0.0, 0.0) and p2 = (1.0, 1.0) in
+     let d = distance p1 p2 in print_float d
    ```
 
    The `let () =` is required because at the module level,
@@ -1480,21 +1534,13 @@ Let's walk through creating a small OCaml project with Dune.
 1. Verify that the output is
 
    ```text
-   sum = 3
-   average = 2.500000
+   my_constant = 7
+   pi = 3.141593
+   square of 7 = 49
+   sum of a and b = 5.000000
+   average of a, b, and c = 2.500000
+   1.41421356237
    ```
-
-1. Now let's try defining the math functions in a library.
-   Copy `lib/math_local.ml` to the `lib` directory
-   and rename it to `math_lib.ml`.
-
-1. Edit `bin/main.ml`.
-
-   Add the line `open Demo` at the beginning.  
-   Change the two references to `Math_local` to `Math_lib`.
-
-1. Enter `dune exec demo`.
-1. Verify that the output is the same.
 
 ### Unit Tests
 
@@ -1525,16 +1571,22 @@ in the `lib` directory, not in the `bin` directory.
 
    Single line comments in `dune` files begin with `;`.
 
-1. Add the following lines in `lib/math_lib.ml`:
+1. Add the following lines in `lib/math.ml`:
 
    ```ocaml
    (* This is an inline test for the add function. *)
-   let%test _ = add 1 2 = 3
+   let%test _ = add 1.2 2.3 = 3.5
 
    (* This is an expectation test for the average function. *)
    let%expect_test _ =
-     print_float (average 2 3);
+     print_float (average [2.0; 3.0; 2.5]);
      [%expect "2.5"]
+   ```
+
+1. Add the following lines in `lib/points.ml`:
+
+   ```ocaml
+   let%test _ = distance (1., 1.) (4., 5.) = 5.0
    ```
 
 1. Enter `dune test` or `dune test -w` to run in watch mode.
@@ -1569,7 +1621,7 @@ The following steps implement the same tests above in this way.
    ```ocaml
    open Demo
 
-   let () = assert ((Math_lib.add 2 2) = 4)
+   let () = assert ((Math.add 1.2 2.3) = 3.5)
    ```
 
 1. Create the file `test/average.ml` containing the following:
@@ -1577,7 +1629,7 @@ The following steps implement the same tests above in this way.
    ```ocaml
    open Demo
 
-   let () = print_float (Math_lib.average 2 3)
+   let () = print_float (Math.average [2.0; 3.0; 2.5]); (* 2.5 *)
    ```
 
 1. Create the file `test/average.expected` containing `2.5`.
