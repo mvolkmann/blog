@@ -1567,7 +1567,10 @@ and achieves smooth animation using a CSS transition.
 ### Resetting a Form
 
 Often it is desirable to reset a `form` after a successful submit.
-This can be done by calling `this.reset()` where `this` refers to the `form`.
+This clears all the form controls contained in the `form`
+to prepare it for new user input.
+A `form` can be reset by calling `this.reset()`
+where `this` refers to the `form`.
 
 Checking the request path is needed if any of the inputs
 can also send requests, perhaps for validation.
@@ -1604,22 +1607,48 @@ return (
 
 ### Active Search
 
-Htmx can be used to implement an active search where a list of matching data
-is retrieved as the user enters search text.
-The following code demonstrates this.
-It uses Tailwind CSS classes.
-The full project can be found in {% aTargetBlank
-"https://github.com/mvolkmann/bun-examples/tree/main/active-search", "GitHub" %}.
+Htmx can be used to implement an active search, also referred to as "typeahead",
+where a list of matching data is retrieved as the user enters search text.
 
-In particular, see the `hx-` attributes on the `input` element below.
+The following HTML renders an `input` element that supports active search.
+When the user stops typing for 200 milliseconds and the value of the input
+has changed, a POST request is sent to the `/search` endpoint.
+That endpoint returns list items (`li` elements) describing matching names.
+Those replace the current content (`innerHTML`) of the
+unordered list (`ul`) element with an id of "matches".
 
 <img alt="htmx Active Search" style="width: 30%"
   src="/blog/assets/htmx-active-search.png?v={{pkg.version}}">
 
-```js
+```html
+<html>
+  <head>
+    <title>htmx Active Search</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  </head>
+  <body class="p-8">
+    <label class="font-bold mr-4" for="name">Name</label>
+    <input
+      autofocus
+      hx-trigger="keyup changed delay:200ms"
+      hx-post="/search"
+      hx-target="#matches"
+      name="name"
+      size="{10}"
+    />
+    <ul id="matches" />
+  </body>
+</html>
+```
+
+The following code implements the POST `/search` endpoint.
+It also serves static files in the `public` directory
+which includes `index.html` and `styles.css`.
+
+```ts
 import {Context, Hono} from 'hono';
 import {serveStatic} from 'hono/bun';
-import type {FC} from 'hono/jsx';
 
 const app = new Hono();
 
@@ -1637,40 +1666,6 @@ const names: string[] = [
   'Richard',
   'Tami'
 ];
-
-const Layout: FC = ({children}) => (
-  <html>
-    <head>
-      <title>HTMX Active Search</title>
-      <link href="/tailwind.css" rel="stylesheet" />
-      <script src="https://unpkg.com/htmx.org@1.9.9"></script>
-    </head>
-    <body class="p-8">{children}</body>
-  </html>
-);
-
-app.get('/', (c: Context) => {
-  return c.html(
-    <Layout>
-      <main>
-        <label class="font-bold mr-4" for="name">
-          Name
-        </label>
-        <input
-          autofocus
-          class="border border-gray-500 p-1 rounded-lg"
-          hx-trigger="keyup changed delay:200ms"
-          hx-post="/search"
-          hx-target="#matches"
-          hx-swap="innerHTML"
-          name="name"
-          size={10}
-        />
-        <ul id="matches" />
-      </main>
-    </Layout>
-  );
-});
 
 app.post('/search', async (c: Context) => {
   const data = await c.req.formData();
@@ -1690,6 +1685,9 @@ app.post('/search', async (c: Context) => {
 
 export default app;
 ```
+
+The full project can be found in {% aTargetBlank
+"https://github.com/mvolkmann/bun-examples/tree/main/active-search", "GitHub" %}.
 
 ### Optimistic Updates
 
