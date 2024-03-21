@@ -1470,7 +1470,18 @@ the <a href="/blog/topics/#/blog/hono/" target="_blank">Hono</a> framework.
 
 ### CSS Transitions
 
-When htmx swaps HTML into the DOM it does the following:
+Adding CSS transitions can add polish to a web app.
+For example, when a todo is deleted from our todo app,
+its row in the list can just instantaneously disappear.
+But it is more visually pleasing if the row gradually fades out
+before disappearing completely.
+
+When htmx swaps HTML into the DOM it goes through a series of steps
+that usually do not need to be considered.
+But knowing about them is key to understaning how CSS transitions
+can be added and how their timing can be tuned.
+
+The steps are as follows:
 
 - Add the `htmx-swapping` CSS class to the target element.
 - Delay for a short time (`htmx.config.defaultSwapDelay` defaults to 0).
@@ -1479,12 +1490,13 @@ When htmx swaps HTML into the DOM it does the following:
 - Create a DOM element representing the new HTML and
   add the CSS class `htmx-added` to it.
 - Swap the new DOM element into the DOM,
-  either replacing the target or placing it relative to the target,
+  either replacing the target or placing it relative to the target.
 - Delay for a short time (`htmx.config.defaultSettleDelay` defaults to 20ms).
 - Remove the `htmx-added` CSS class from the new DOM element.
 - Remove the `htmx-settling` CSS class from the target element.
 
 The delays described above enable adding CSS transitions.
+The default values are fine in most cases, but can be modified as needed.
 
 Two things are required to implement a CSS transition.
 First, the existing element and the new element
