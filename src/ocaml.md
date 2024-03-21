@@ -79,8 +79,15 @@ write, compile, test, debug, and profile OCaml programs and libraries.
 
 - The `ocaml` interpreter interactive toplevel executes code interactively
   for testing small code snippets and exploring language features.
-- The `ocamlc` compiler compiles source code into bytecode or native code,
-  depending on the target platform and options used.
+- The `ocamlc` compiler compiles source code
+  into bytecode that can run on any platform.
+  It creates files with the extensions `.cmo` and `.cmi` (for interfaces).
+  The `-o` typical typically specifies an output file with a `.byte` extension
+  that is passed to the `ocamlrun` coommand.
+  The `.cmo` and `.cmi` files are not needed to run the `.byte` file.
+- The `ocamlrun` command executes a bytecode file.
+- The `ocamlopt` compiler compiles source code
+  into an optimized, platform-specific executable.
 - The `opam` package Manager installs libraries and tools,
   manages dependency versions, and upgrades them.
 - The `ocamlbuild` (basic) and `dune` (modern) build systems
@@ -91,6 +98,31 @@ write, compile, test, debug, and profile OCaml programs and libraries.
   to analyze their performance and identify bottlenecks.
 - The standard library provides commonly needed functions and data structures.
   It includes modules for strings, lists, arrays, I/O operations, and more.
+
+Suppose we have the file `my_module.ml` containing `let add a b = a + b`
+and we have the file `main.ml` containing the following:
+
+```ocaml
+open My_module
+
+let () =
+  let sum = add 1 2 in
+  print_int sum
+```
+
+To compile this to an executable and run it,
+enter `ocamlopt my_module.ml main.ml -o main` and `./main`.
+
+To compile this to bytecode and run it,
+enter `ocamlc my_module.ml main.ml -o main.byte` and `ocamlrun main.byte`.
+
+To compile this to an executable and run it
+by specifying only the main source file,
+enter `ocamlbuild main.native` and `./main.native`.
+
+To compile this to bytecode and run it
+by specifying only the main source file,
+enter `ocamlbuild -cflags -g main.byte` and `ocamlrun main.byte`.
 
 ## Help
 
@@ -1067,13 +1099,11 @@ let () =
   printf "area2 = %f\n" (rectangle_area2 ~length:8.5 ~width:11.0)
 ```
 
-TODO: Finish cleaning up this section.
-
-Parameters can specify default values by making them optional
-with the syntax `?({name}={default-value})`.
-optional parameters must be preceded by either ~ (for labelled) or ? (for positional); for example, ?(answer=42)
-?(init = 0) is shorthand for ?init:(init = 0).
-The first “init” is the argument label and the second is the parameter name. They can differ just like in Swift.
+Labeled parameters can specify default values (which makes them optional)
+with the syntax `?{label}:({name}={default-value})`.
+A shorthand for this when the label and name match
+is `?({name}={default-value})`.
+These must appear before the required parameters.
 
 Recursive functions must be defined with `let rec`. For example:
 
@@ -1164,7 +1194,8 @@ let distance ((x1, y1) : point2d) ((x2, y2) : point2d) : float =
   sqrt ((dx *. dx) +. (dy *. dy))
 ```
 
-Here is a "main" source file that uses things defined in `math.ml`.
+Here is a "main" source file, typically named `main.ml`,
+that uses things defined in `math.ml`.
 It defines a constant, a function, and a expression that is executed
 when this file is passed to the `ocaml` command.
 
@@ -1203,6 +1234,12 @@ let () =
   let p1 = (0.0, 0.0) and p2 = (1.0, 1.0) in
   let d = distance p1 p2 in print_float d
 ```
+
+When these files appear in the `bin` directory of a Dune project,
+the program can be run by entering `dune exec {project-name}`.
+
+To run this outside of a Dune project, create an executable by entering
+`ocamlopt math.ml main.ml -o demo` and run it by entering `./demo`.
 
 ## Input/Output
 
