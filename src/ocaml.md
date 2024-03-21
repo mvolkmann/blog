@@ -1424,7 +1424,9 @@ The `bin`, `lib`, and `test` directories all contain a `dune` file
 that holds configurations options for that directory.
 These files use Lisp-like syntax.
 Each option is specified in by a name and value inside parentheses
-that is referred to as a "stanza".
+that is referred to as a
+"<a href="https://dune.readthedocs.io/en/stable/dune-files.html" 
+target="_blank">stanza</a>".
 
 To build the project, enter `dune build`.
 This creates `_build/default/bin/main.exe`.
