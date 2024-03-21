@@ -32,6 +32,8 @@ It is faster than the Haskell and Rust compilers.
 
 OCaml source files have the extension `.ml` which stands for "meta language".
 
+OCaml supports Foreign Function Interface (FFI) mechanisms to call C functions.
+
 The financial company <a href="https://www.janestreet.com"
 target="_blank">Jane Street</a> is one of the
 largest users and supporters of OCaml.
@@ -106,6 +108,8 @@ and we have the file `main.ml` containing the following:
 ```ocaml
 open My_module
 
+(* This is similar to the main function in other languages.
+   It is where most side effects should occur. *)
 let () =
   let sum = add 1 2 in
   print_int sum
@@ -1252,10 +1256,8 @@ let my_constant = 7
 
 let square x = x * x (* a function *)
 
-(* This is similar to the "main" function in other languages.
-   Note the use of semicolons to separate the
-   statements and expressions.
-   This is where most side effects should occur. *)
+(* Note the use of semicolons to separate
+   the statements and expressions. *)
 let () =
   (* This is a verbose way to print a value. *)
   print_string "my_constant = ";
@@ -1410,7 +1412,7 @@ It is common to have a file in the `bin` directory named `main.ml`,
 but that name is not required.
 It is also common to end files in the `bin` directory
 with an expression that begins with `let () =`.
-This is similar to the main function in other programming languages.
+This is similar to the main function in other languages.
 
 The `lib` directory is the preferred location for source files
 that define reusable functions.
@@ -1495,10 +1497,8 @@ Let's walk through creating a small OCaml project with Dune.
 
    let square x = x * x (* a function *)
 
-   (* This is similar to the "main" function in other languages.
-      Note the use of semicolons to separate the
-      statements and expressions.
-      This is where most side effects should occur. *)
+   (* Note the use of semicolons to separate the
+      statements and expressions. *)
    let () =
      (* This is a verbose way to print a value. *)
      print_string "my_constant = ";
