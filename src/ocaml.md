@@ -322,6 +322,8 @@ The relational and logical operators include:
 | `&&`     | boolean and           |
 | `\|\|`   | boolean or            |
 
+The `=` operator is also used for assignment.
+
 The remaining operators include:
 
 | Operator | Description                   |
@@ -625,6 +627,41 @@ print_endline (third_of_4 t) (* gamma *)
 You can think of tuples like records (described later)
 where the fields are accessed by position rather than name.
 
+## Conditonal Logic
+
+Conditional logic is implemented with the `if` expression.
+
+The syntax is `if expr1 then expr2 else expr3`.
+
+`expr1` must evaluate to a `bool`.
+Non-`bool` values are not automatically interpreted as a `bool`.
+For example, `0` is not treated as `false`.
+
+`expr3` must evaluate to the same type as `expr2`
+so the `if` expression always evaluates to the same type.
+
+For example:
+
+```ocaml
+let sign = if result > 0 then "positive"
+  else if result < 0 then "negative"
+  else "zero"
+```
+
+To include multiple expressions after `then` or `else`,
+surround them with parentheses and separate them with semicolons.
+The value will be the value of the final expression.
+
+Unless the `then` branch produces a unit result, an `else` branch is required.
+
+An `if` expression can be used where other languages use a ternary operator.
+
+TODO: Describe using `match`.
+
+## Iteration
+
+TODO: Add this content.
+
 ## Lists
 
 A list is an immutable, ordered collection of values
@@ -721,6 +758,8 @@ using an accumulator function.
 The `List.iter` function iterates over a list
 in a way that is useful when the function passed to it
 has a side effect and a result list is not needed.
+
+The `List.length` function returns the length of a given list.
 
 The `List.map` function creates a new list containing elements that are
 computed by passing each element in an existing list to a given function.
@@ -1743,28 +1782,3 @@ TODO: Implement your Dog CRUD htmx app using Dream.
 ## Converting OCaml to JavaScript
 
 See http://ocsigen.org/js_of_ocaml/latest/manual/overview.
-
-## Unorganized Content
-
-Type Inference
-OCaml infers most types
-almost never need to specify the types of variables or function parameters
-can declare with a type annotation with the syntax (name : type)
-
-Numeric Operators
-+, -, _, and / for int values
-+., -., _., and /. for float values
-This distinction is made to avoid having operators that are overloaded for multiple types.
-
-Conditional Logic
-if-then-else is an expression
-if expr1 then expr2 else expr3
-expr1 must evaluate to a bool
-int and other values are not automatically interpreted as a bool
-expr3 must evaluate to the same type as expr2 so the “if” expression always evaluates to the same type
-normally an else branch is required (maybe can omit if the then branch can evaluate to the “unit value” ()
-The = operator is used for assignment AND for comparison.
-can be used where other languages use a ternary operator
-ex. let sign = if result > 0 then “positive” else if result < 0 then “negative” else “zero”
-pattern matching
-let sign = match …
