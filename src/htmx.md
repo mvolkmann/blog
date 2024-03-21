@@ -1691,15 +1691,138 @@ The full project can be found in {% aTargetBlank
 
 ### Optimistic Updates
 
-If an endpoint might be slow to return a response,
+If an endpoint may be slow to return a response,
 using `hx-indicator` to display a spinner is a good idea.
-Alternatively, the front end can assume success and update the UI optimistically.
+Additionally the UI can assume success and update itself optimistically.
 For example, clicking a "like" button can immediately change its color
 to a muted version of the color that will be used when the response is received.
 If the response indicates success, the color can be changed to the full color.
 If the response indicates failure, the color can be reset.
 
-TODO: Add an example of this.
+Doing this gives the user confidence that their input was received,
+and also that the change has not yet been finalized.
+
+The following HTML renders a table of dog breeds.
+The table rows are inserted by sending a GET request to the `/dogs` endpoint
+as soon as the table becomes visible.
+
+The "Like?" column displays a colored heart that is
+red the user likes the dog breed and white if they do not.
+All the breeds begin not being liked.
+
+When the heart for a specific dog breed is clicked, two things happen.
+First, the `optimisticLike` function is called and
+it immediately replaces the current heart with a pink one.
+Second, a PUT request is sent to the `/dog/:breed` endpoint
+to toggle whether breed is liked on the server.
+That endpoint returns a new heart that will be either red or white
+and that replaces the pink heart that was temporarily displayed.
+
+<img alt="htmx Optimistic Updates" style="width: 30%"
+  src="/blog/assets/htmx-optimistic-updates.png?v={{pkg.version}}">
+
+```js
+<html>
+  <head>
+    <title>htmx Optimistic Updates</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <script>
+      function optimisticLike(event) {
+        const td = event.target;
+        td.textContent = '🩷';
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Dogs</h1>
+    <table hx-get="/dogs" hx-target="tbody" hx-trigger="revealed">
+      <thead>
+        <tr>
+          <th>Breed</th>
+          <th>Like?</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <img alt="waiting" class="htmx-indicator" src="/spinner.gif" />
+  </body>
+</html>
+```
+
+The following server code implements the PUT `/dog/:breed` endpoint
+that toggles whether the user likes the dog breed.
+It returns a red or white heart that replaces the current heart for that breed.
+It sleeps for one second before returning the new heart
+just to simulate a long-running request.
+
+This server code serves static files in the `public` directory
+which includes `index.html`, `styles.css`, and `spinner.gif`.
+
+```ts
+import {type Context, Hono} from 'hono';
+import {serveStatic} from 'hono/bun';
+
+const breeds = [
+  'Beagle',
+  'Bulldog',
+  'Dachshund',
+  'French Bulldog',
+  'German Shepard',
+  'German Shorthaired Pointer',
+  'Golden Retriever',
+  'Labrador',
+  'Poodle',
+  'Rottweiler',
+  'Whippet'
+];
+const dogs = new Map<string, boolean>();
+for (const breed of breeds) {
+  dogs.set(breed, false);
+}
+
+function dogRow(breed: string) {
+  return (
+    <tr>
+      <td>{breed}</td>
+      <td
+        class="center"
+        hx-put={`/dog/${breed}`}
+        hx-target="this"
+        hx-indicator=".htmx-indicator"
+        hx-on:click="optimisticLike(event)"
+      >
+        {getHeart(dogs.get(breed) ?? false)}
+      </td>
+    </tr>
+  );
+}
+
+const getHeart = (like: boolean) => (like ? '❤️' : '🤍');
+
+const app = new Hono();
+
+// Serve static files from the public directory.
+app.use('/*', serveStatic({root: './public'}));
+
+app.get('/dogs', (c: Context) => {
+  return c.html(<>{breeds.map(breed => dogRow(breed))}</>);
+});
+
+app.put('/dog/:breed', async (c: Context) => {
+  Bun.sleepSync(1000);
+  const breed = c.req.param('breed');
+  const like = !(dogs.get(breed) ?? false);
+  dogs.set(breed, like);
+  return c.text(getHeart(like));
+});
+
+export default app;
+```
+
+See the working example project at {% aTargetBlank
+"https://github.com/mvolkmann/bun-examples/tree/main/optimistic-updates",
+"optimistic-updates" %}.
 
 ### Pagination
 
