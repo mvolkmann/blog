@@ -218,6 +218,8 @@ OCaml reserves the use of the following identifiers:
 OCaml operators only operate on specific types.
 This enables type inference of function return types
 because the compiler can determine the types required by its code.
+It is a very important way in which OCaml
+differs from most other programming languages.
 
 Operators for `float` values are the same as those for `int` values,
 but with a `.` added to the end.
@@ -472,8 +474,9 @@ use this type to represent their return value.
 For example, the `List.find_opt` function does this.
 
 ```ocaml
-(* makes the printf function available
-   without writing Printf.printf *)
+(* The `open` keyword allows all the identifiers in a given module
+   (`printf` in this case) to be used in this source file
+   without prefixing them with their module name. *)
 open Printf
 
 let colors = [ "red"; "green"; "blue" ]
@@ -1035,8 +1038,13 @@ For example, our `add` function above can be called as follows:
 add (2 * 3) (4 + 5) (* 6 * 9 = 54 *)
 ```
 
-Labelling parameters allows them to be specified by the labels in calls.
+Labeling parameters allows them to be specified by the labels in calls.
 Label names are not required to match their coresponding parameter names.
+For example:
+
+```ocaml
+
+```
 
 TODO: Finish cleaning up this section.
 
@@ -1077,9 +1085,25 @@ but that introduces complexity.
 
 ## Source Files
 
+Every source file defines a module.
+The identifiers it defines, including types, constants, and functions,
+can be used in other source files.
+The name of a module is inferred from its source file name
+by uppercasing its first letter.
+For example, the file `foo_bar.ml` defines the module `Foo_bar`.
+
+Suppose this file defines the function `baz`.
+To call this function in another source file, use `Foo_bar.baz`.
+Alternatively, include an `open` statement to
+allow all the identifiers in a given module
+to be used in the current source file
+without prefixing them with their module name.
+If we have `open Foo_bar` then the `baz` function
+can be used without the `Foo_bar.` prefix.
+
 OCaml source files contain the following kinds of statements:
 
-- `open` statements to add definitions from other source files to the scope
+- `open` statements
 - constants defined with `let` definitions
 - functions defined with `let` definitions
 - an optional "main" expression that typically begins with `let () =`
