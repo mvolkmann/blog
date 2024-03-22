@@ -579,6 +579,14 @@ sum types, union types and variant types.
 They have many uses including enumerated values, error handling,
 and for representing data structures whose shape can vary.
 
+Sum types describe alternatives.
+Primitive types like `int` can be considered a sum type.
+
+Product types are types that hold multiple pieces of data.
+OCaml examples include tuples, lists, and records.
+Lists are also sum types because they can be either an empty list
+or a head and tail (where the tail can be an empty list).
+
 Each variant name is called a "constructor".
 Each construtor can have an associated value of a specified type.
 The value types of the variants can differ.
@@ -1158,8 +1166,8 @@ In order to call a function that takes no arguments, such as `print_newline`,
 it must be "passed" the "unit" value `()`.
 Without this it is just a reference to the function and not a call to it.
 
-Calls to functions that don't return a value
-are expressions with "unit type".
+Functions that only produce side effects do not return anything.
+Calls to them are expressions with "unit type", represented by `()`.
 These are like "statements" in other languages.
 Some call them "effectful expressions".
 
@@ -1227,6 +1235,9 @@ print_int (add 1 2); (* 3 *)
 let add a b = a + b in
 print_int (add 1 2); (* 3 *)
 ```
+
+In the call to `print_int` above, parentheses are needed around `add 1 2`
+so that is evaluated before the `print_int` function is called.
 
 Let's use partial application to create a new function
 that only takes a single number and adds 5 to it.
