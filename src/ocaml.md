@@ -651,36 +651,33 @@ The following code provides some examples:
 
 ```ocaml
 type season = Spring | Summer | Fall | Winter
+type tense = Spring | Sprung | Sprang
 
 (* The first vertical bar here is optional.
    When pattern matching a sum type, if all variants aren't matched,
-   the warning "this pattern-matching is not exhaustive" will appear. *)
-let forecast = function
+   the warning "this pattern-matching is not exhaustive" will appear.
+   Since both the season and tense types define a Spring constructor,
+   we need to specify which variant type to use. *)
+let forecast : season -> string = function
   | Spring -> "rain"
   | Summer -> "sun"
   | Fall -> "nice"
   | Winter -> "snow"
 
-(* The tense type is wrapped in a struct to avoid conflict
-   between the Spring constructor that is also in the season type. *)
+let get_tense : tense -> int = function
+  | Spring -> 1
+  | Sprang -> 2
+  | Sprung -> 3
+type season = Spring | Summer | Fall | Winter
+
+(* Another option is to wrap the conflicting variant type in a struct.
 module Tense = struct
   (* It is idiomatic for the main type in a module to be named "t". *)
   type t = Spring | Sprung | Sprang
 end
 
 let tense = function Tense.Spring -> 1 | Tense.Sprang -> 2 | Tense.Sprung -> 3
-
-(* Wrapping the Tense type in a struct isn't necessary to
-avoid conflict if the forecast function is changed to
-specify that it uses the `search` variant type.
-For example:
-let forecast : season -> string = function *)
-
-let forecast = function
-  | Spring -> "rain"
-  | Summer -> "sun"
-  | Fall -> "nice"
-  | Winter -> "snow"
+*)
 
 type result = Ok of float | Error of string
 
