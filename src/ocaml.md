@@ -762,7 +762,7 @@ An `if` expression can be used where other languages use a ternary operator.
 
 ### match expression
 
-The `match` keyword performs pattern matching.
+A `match` expression performs pattern matching.
 It takes an expression whose value is to be matched
 and a set of patterns.
 
@@ -807,7 +807,8 @@ let () =
 
 ## Iteration
 
-The `for` and `while` keywords support iteration.
+The `for` and `while` keywords support imperative iteration.
+It is more typical in OCaml to use recursion for iteration.
 
 A `for` loop specifies start and stop values,
 but it cannot specify a step size.
@@ -1905,6 +1906,31 @@ Let's walk through creating a small OCaml project with Dune.
    average of a, b, and c = 2.500000
    1.41421356237
    ```
+
+Signatures can be used to make some definitions in a module "private".
+For example, the file `lib/geometry.ml` below makes the `distance` function
+accessible outside this file (by describing it with `sig`),
+but does not expose the `square` function.
+
+```ocaml
+type point = float * float
+
+module type Signatures = sig
+  val distance : point -> point -> float
+end
+
+module Mod : Signatures = struct
+  let square x = x *. x
+  let distance (x1, y1) (x2, y2) = sqrt (square (x1 -. x2) +. square (y1 -. y2))
+end
+```
+
+Assuming the `public_name` of the executable is "demo",
+the `distance` function can be called from `bin/main.ml` with the following:
+
+```ocaml
+printf "distance = %f\n" (Demo.Geometry.Mod.distance (0.0, 0.0) (1.0, 1.0));
+```
 
 ### Unit Tests
 
