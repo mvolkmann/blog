@@ -1783,6 +1783,30 @@ To run the project, enter `dune exec {executable_name}`.
 The executable name is specified in the `public_name` stanza
 found in the `bin/dune` file and defaults to the project name.
 
+The `lib` directory can have subdirectories that contain `.ml` files
+and those can define additional types, constants, and functions.
+To make those accessible, add the following
+at the bottom of the `lib/dune` file:
+
+```text
+(include_subdirs qualified)
+```
+
+For example, if the project name is "demo" and
+`lib/sub/mod.ml` defines the function `greet`
+then `bin/main.ml` can refer to it with `Demo.Sub.Mod.greet`.
+
+An alternative to adding subdirectories in the `lib` directory is to create
+additional top-level directories that each define a different library.
+
+For example:
+
+- Create the top-level directory `lib2`.
+- Create the file `lib2/dune` containing `(library (name demo2))`
+- Create the file `lib2/mod.ml` containing `let greet () = print_endline "Hello from lib2!"`
+- Update the `libraries` stanza in the `bin/dune` file to `(libraries demo demo2)`
+- Add the call `Demo2.Mod.greet ()` in `bin/main.ml`
+
 To run `utop` with project libraries automatically available, enter `dune utop`.
 For example, in a project with a library named "demo",
 a module named "math_lib", and a function in that module named "add",
