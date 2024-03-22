@@ -15,8 +15,14 @@ layout: topic-layout.njk
 "an industrial-strength functional programming language
 with an emphasis on expressiveness and safety."
 
-OCaml answers the question "Can you implement a type system
-so strong that it is nearly never necessary to specify types."
+OCaml answers the question "Can a programming language implement a
+type system so strong that it is nearly never necessary to specify types?"
+OCaml uses a variant of the Hindley–Milner type system,
+which is a type inference algorithm for
+statically typed functional programming languages.
+The Hindley–Milner type system has the ability to
+infer the most general types of expressions
+without requiring explicit type annotations in many cases.
 
 The Caml programming language is the predecessor of OCaml.
 The name is short for "Categorical Abstract Machine Language".
@@ -420,8 +426,8 @@ type point = { x : float; y : float }
 let ( +! ) (p1 : point) (p2 : point) : point =
   { x = p1.x +. p2.x; y = p1.y +. p2.y }
 
-(* This overrides the built-in + operator to perform subtraction instead.
-   Why is this allowed? *)
+(* This shadows the built-in + operator to perform subtraction instead,
+   but only in the current scope. *)
 let ( + ) (n1 : int) (n2 : int) : int = n1 - n2
 
 let () =
