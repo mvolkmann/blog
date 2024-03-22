@@ -246,12 +246,18 @@ OCaml supports the following primitive types.
 Their sizes depend on the CPU.
 
 - `bool` - 1 byte with the literal values `true` and `false`
+- `char` - 1 byte ASCII, not Unicode
 - `int` - 8 or 4 bytes
 - `float` - 8 bytes
 - `string` - sequence of bytes, not Unicode characters
 
+Literal chars are delimited by single quotes.
+
 Literal strings are delimited by double quotes.
 The `^` operator is used to concatenate strings.
+
+The `Char` and `String` modules provide many functions
+for operating on values of these types.
 
 For Unicode support, see the libraries
 `Uutf`, `Uutf_string`, and `ocaml-unicode`.
@@ -319,6 +325,7 @@ The arithmetic operators include:
 | `/.`     | float division       |
 | `**`     | float exponentiation |
 
+The `-` and `-.` operators can also be used for unary negation.
 There are no operators like `++` and `--` to increment or decrement a number.
 Instead use the functions `succ` and `pred` to get the successor or predecessor.
 
@@ -572,20 +579,23 @@ let () =
   | None -> print_endline "failed to find green\n"
 ```
 
-## Algebraic Data Types
+## Variant Types
 
-Algebraic Data Types in OCaml go by many names including
-sum types, union types and variant types.
-They have many uses including enumerated values, error handling,
+Variant types have many uses including enumerated values, error handling,
 and for representing data structures whose shape can vary.
 
-Sum types describe alternatives.
-Primitive types like `int` can be considered a sum type.
+"Sum types" describe alternatives.
+Primitive types like `int` and variant types describe below
+are examples of sum types.
 
-Product types are types that hold multiple pieces of data.
-OCaml examples include tuples, lists, and records.
-Lists are also sum types because they can be either an empty list
+"Product types" are types that can hold
+multiple pieces of data with differing types.
+Tuples and records are examples of product types.
+
+Lists are sum types because they can be either an empty list
 or a head and tail (where the tail can be an empty list).
+Lists are also product types because they hold
+a head and a tail which have different types.
 
 Each variant name is called a "constructor".
 Each construtor can have an associated value of a specified type.
@@ -596,7 +606,8 @@ The following code provides some examples:
 ```ocaml
 type season = Spring | Summer | Fall | Winter
 
-(* When pattern matching a sum type, if all variants aren't matched,
+(* The first vertical bar here is optional.
+   When pattern matching a sum type, if all variants aren't matched,
    the warning "this pattern-matching is not exhaustive" will appear. *)
 let forecast = function
   | Spring -> "rain"
@@ -642,11 +653,12 @@ For example:
 
 ```ocaml
 let t = (true, 3, "blue") in
-(* Can use destructuring to extract the values.
-   The parentheses are optional. *)
+(* Can use destructuring to extract the values. *)
 let (b, n, c) = t in
 printf "b = %b, n = %d, c = %s\n" b n c
 ```
+
+The parentheses shown above for creating and destructuring a tuple are optional.
 
 The variable `t` above has the type `bool * int * string`
 which is referred to as a "product type"
@@ -832,6 +844,9 @@ computed by passing each element in an existing list to a given function.
 The `List.map2` function is similar to `List.map`, but it operates on two lists,
 passing corresponding elements from each to a given function.
 
+The `List.nth` function takes a list and an index.
+It returns the list element at the index.
+
 Since tuple elements are separated by commas and list elements are
 separated by semicolons, a list of tuples can be written as follows:
 
@@ -859,8 +874,8 @@ For example:
 let colors = [| "red"; "green"; "blue" |]
 ```
 
-To get an element from an array, follow it with
-a dot and a zero-based index in parentheses. For example:
+To get an element from an array, follow it with a dot and
+a zero-based index in parentheses (odd syntax). For example:
 
 ```ocaml
 let color = colors.(1) (* "green" *)
