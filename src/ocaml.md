@@ -731,7 +731,9 @@ where the fields are accessed by position rather than name.
 
 ## Conditonal Logic
 
-Conditional logic is implemented with the `if` expression.
+Conditional logic is implemented with the `if` and `match` expressions.
+
+### if expression
 
 The syntax is `if expr1 then expr2 else expr3`.
 
@@ -758,11 +760,26 @@ Unless the `then` branch produces a unit result, an `else` branch is required.
 
 An `if` expression can be used where other languages use a ternary operator.
 
+### match expression
+
 The `match` keyword performs pattern matching.
 It takes an expression whose value is to be matched
 and a set of patterns.
+
 The patterns must be exhaustive, meaning that
 there must be a pattern that matches every possible value.
+Using the catch-all `_` for the final pattern satisfies this.
+
+The patterns can match:
+
+- a specific value (ex. 7 or "summer")
+- a range of characters (ex. 'a' .. 'f')
+- a guard (ex. `n when n < 3`)
+- a variant type constructor (ex. `None` or `Some x`)
+- the catch-all `_`
+
+The value of a `match` expression is the value of the matched pattern.
+
 For example:
 
 ```ocaml
