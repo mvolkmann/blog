@@ -682,7 +682,7 @@ let () =
   print_endline (get_string b)
 ```
 
-## Option Variant Type
+### Option Variant Type
 
 The <a href="https://v2.ocaml.org/api/Option.html" target="_blank">Option</a>
 module defines a variant type represents an optional value.
@@ -693,8 +693,8 @@ use this type to represent their return value.
 For example, the `List.find_opt` function does this.
 
 ```ocaml
-(* The `open` keyword allows all the identifiers in a given module
-   (`printf` in this case) to be used in this source file
+(* The `open` keyword allows all the identifiers in a given module,
+   `printf` in this case, to be used in this source file
    without prefixing them with their module name. *)
 open Printf
 
@@ -708,7 +708,7 @@ let () =
   | None -> print_endline "failed to find green\n"
 ```
 
-## Result Variant Type
+### Result Variant Type
 
 The <a href="https://v2.ocaml.org/api/Result.html" target="_blank">Result</a>
 module defines a variant type represents
