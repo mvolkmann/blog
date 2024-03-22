@@ -804,7 +804,62 @@ let () =
 
 ## Iteration
 
-TODO: Add this content.
+The `for` and `while` keywords support iteration.
+
+A `for` loop specifies start and stop values,
+but it cannot specify a step size.
+
+The expression inside a `for` loop must have a unit value,
+which means that the loop itself doesn't return a value.
+
+There are no `break` or `continue` statements like in other languages.
+
+The following code demonstates `for` loops.
+
+```ocaml
+open Printf
+
+let () =
+  for i = 1 to 5 do
+    printf "%d\n" i
+  done;
+
+  for i = 5 downto 1 do
+    printf "%d\n" i
+  done;
+```
+
+A `while` loop specifies a boolean condition.
+This might be an expression involving a `ref` whose value changes
+or a function that returns a value to be tested.
+The loop terminates when the condition evaluates to `false`.
+
+The following code demonstates `while` loops.
+
+```ocaml
+open Printf
+
+let () =
+  let i = ref 1 in
+  while !i <= 5 do
+    printf "%d\n" !i;
+    i := !i + 1
+  done;
+```
+
+To iterate over collections like lists and arrays it's best to
+use `iter` functions instead of `for` or `while` loops.
+
+```ocaml
+open Printf
+
+let () =
+  let numbers = [ 1; 2; 3; 4; 5 ] in
+  List.iter (fun x -> printf "%d\n" x) numbers;
+
+  let numbers = [| 1; 2; 3; 4; 5 |] in
+  Array.iter (fun x -> printf "%d\n" x) numbers
+```
 
 ## Lists
 
