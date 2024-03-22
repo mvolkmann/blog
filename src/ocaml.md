@@ -41,6 +41,16 @@ The financial company <a href="https://www.janestreet.com"
 target="_blank">Jane Street</a> is one of the
 largest users and supporters of OCaml.
 
+## Resources
+
+- <a href="https://ocaml.org" target="_blank">OCaml home page</a>
+- <a href="https://learnxinyminutes.com/docs/ocaml/" target="_blank">Learn X in Y minutes</a>
+- <a href="https://cs3110.github.io/textbook/cover.html"
+  target="_blank">OCaml Programming: Correct + Efficient + Beautiful</a>
+  book used in Cornell CS 3110 course
+- <a href="https://dev.realworldocaml.org" target="_blank">Real World OCaml</a> book
+- <a href="https://ocaml-book.com" target="_blank">OCaml from the Very Beginning</a> book
+
 ## Variants
 
 <a href="https://reasonml.github.io" target="_blank">Reason</a>
