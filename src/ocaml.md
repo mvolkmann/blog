@@ -27,8 +27,11 @@ Other dialects of ML include Standard ML and F#.
 ML influenced the design of many other languages including
 Clojure, Elm, Haskell, Erlang, Rust, and Scala.
 
-The OCaml compiler is implemented in OCaml.
-It is faster than the Haskell and Rust compilers.
+OCaml has an interpreter, a compiler that compiles to bytecode,
+and a compiler that creates native executables.
+
+The OCaml compilers are implemented in OCaml.
+They are fast compared to the compilers for Haskell and Rust.
 
 OCaml source files have the extension `.ml` which stands for "meta language".
 
@@ -187,6 +190,17 @@ print_int (2 + 3); print_int (2 * 3);; (* 56 *)
 
 Double semicolons are only used in REPL sessions, not in source files
 (except when assigning global identifiers).
+
+When an expression is entered, `utop` will
+output its name, inferred type, and value.
+For example, entering `let x = 7;;` will output `val x : int = 7;`.
+
+If the expression does not have a name,
+the part to the left of the colon will be a dash.
+For example, entering a raw value like `7;;` or
+an anonymous function like `fun x -> x * x;;` will do this.
+But entering a named function like `let square x = x * x;;`
+will output the name.
 
 Use the left and right arrow keys to move the cursor within the expression
 and make edits.
