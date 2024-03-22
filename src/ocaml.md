@@ -768,14 +768,20 @@ and a set of patterns.
 
 The patterns must be exhaustive, meaning that
 there must be a pattern that matches every possible value.
-Using the catch-all `_` for the final pattern satisfies this.
+Using the catch-all `_` as the final pattern satisfies this.
 
 The patterns can match:
 
-- a specific value (ex. 7 or "summer")
-- a range of characters (ex. 'a' .. 'f')
-- a guard (ex. `n when n < 3`)
-- a variant type constructor (ex. `None` or `Some x`)
+- a specific value (ex. `| 7` or `| "summer"`)
+- several values (ex. `| 7 | 8 | 9`)
+- a range of characters (ex. `| 'a' .. 'f'`)
+- a guard (ex. `| n when 7 <= n && n <= 9`)
+- a variant type constructor (ex. `| None` or `| Some x`)
+- a tuple (ex. `| (_, "summer", temperature)` which means
+  we don't care about the first element, the second element must be `"summer"`,
+  and want to capture the third element)
+- a list (ex. `| []` or `| ["summer"; other]` or `| first :: second :: rest`)
+- an array (ex. `| [||]` or `| [|"summer"; other|]`)
 - the catch-all `_`
 
 The value of a `match` expression is the value of the matched pattern.
@@ -791,12 +797,10 @@ let () =
   print_int n;
   print_newline ();
   match n with
-  | n when n < 3 -> print_string "small"
+  | 0 | 1 | 2 | 3 -> print_string "small"
   | n when 4 <= n && n <= 7 -> print_string "medium"
   | _ -> print_string "large"
 ```
-
-TODO: Describe more about `match`.
 
 ## Iteration
 
