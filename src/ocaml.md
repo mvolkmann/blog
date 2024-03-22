@@ -684,7 +684,8 @@ let () =
 
 ## Option Variant Type
 
-The `option` variant type represents an optional value.
+The <a href="https://v2.ocaml.org/api/Option.html" target="_blank">Option</a>
+module defines a variant type represents an optional value.
 It has the constructors `None` and `Some`.
 
 Functions that sometimes do not have a value to return
@@ -709,7 +710,8 @@ let () =
 
 ## Result Variant Type
 
-The `result` variant type respresents the
+The <a href="https://v2.ocaml.org/api/Result.html" target="_blank">Result</a>
+module defines a variant type represents
 result of a function that can succeed or fail.
 It has the constructors `OK` and `Error`.
 
