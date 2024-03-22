@@ -1908,29 +1908,41 @@ Let's walk through creating a small OCaml project with Dune.
    ```
 
 Signatures can be used to make some definitions in a module "private".
-For example, the file `lib/geometry.ml` below makes the `distance` function
-accessible outside this file (by describing it with `sig`),
-but does not expose the `square` function.
+For example:
 
-```ocaml
-type point = float * float
+1. Create the file `lib/geometry.ml` to define
+   the implementation of the `Geometry` module.
 
-module type Signatures = sig
-  val distance : point -> point -> float
-end
+   ```ocaml
+   type point = float * float
 
-module Mod : Signatures = struct
-  let square x = x *. x
-  let distance (x1, y1) (x2, y2) = sqrt (square (x1 -. x2) +. square (y1 -. y2))
-end
-```
+   module type Signatures = sig
+     val distance : point -> point -> float
+   end
 
-Assuming the `public_name` of the executable is "demo",
-the `distance` function can be called from `bin/main.ml` with the following:
+   module Mod : Signatures = struct
+     let square x = x *. x
+     let distance (x1, y1) (x2, y2) = sqrt (square (x1 -. x2) +. square (y1 -. y2))
+   end
+   ```
 
-```ocaml
-printf "distance = %f\n" (Demo.Geometry.Mod.distance (0.0, 0.0) (1.0, 1.0));
-```
+1. Create the file `lib/geometry.mli` to define
+   the public interface of the `Geometry` module.
+
+   ```ocaml
+   type point = float * float
+   val distance : point -> point -> float
+   ```
+
+   This does not expose the `square` function.
+
+1. Call the distance function in `bin/main.ml`.
+
+   ```ocaml
+   printf "distance = %f\n" (Demo.Geometry.distance (0.0, 0.0) (1.0, 1.0));
+   ```
+
+   This assumes the `public_name` of the executable is "demo",
 
 ### Unit Tests
 
