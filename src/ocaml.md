@@ -1104,6 +1104,10 @@ by concatenating all the arrays in a list.
 The `Array.exists` function determines if an array contains
 at least one element that matches a given predicate function.
 
+The `Array.iter` function takes a function and an array.
+It iterates over the array, passing each element the function.
+It doesn't return a value, so this is used for side effects.
+
 The `Array.length` function returns the length of a given array.
 
 The `Array.fold_left` function reduces an array to a single value
