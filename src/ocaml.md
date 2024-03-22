@@ -784,6 +784,9 @@ The patterns can match:
 - an array (ex. `| [||]` or `| [|"summer"; other|]`)
 - the catch-all `_`
 
+The patterns are check in the order they are specified and
+the first matching pattern is used, so their order matters.
+
 The value of a `match` expression is the value of the matched pattern.
 
 For example:
