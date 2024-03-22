@@ -2115,7 +2115,7 @@ The following steps implement the same tests above in this way.
 
 1. Enter `dune test` and verify that all the tests pass.
 
-# HTTP Servers
+## HTTP Servers
 
 There are several OCaml libraries for implementing HTTP servers
 that provide API endpoints. Popular options include:
@@ -2125,6 +2125,47 @@ that provide API endpoints. Popular options include:
 - Opium - 747 GitHub stars
 - CoHTTP - 676 GitHub stars
 - Ocsigen - not in GitHub
+
+### Dream
+
+The steps to use the Dream web framework are:
+
+- Install Dream by entering `opam install dream`
+- cd to the directory where a new Dune project will be created.
+- Enter `dune init project dream_demo`
+- Edit `bin/dune` and modify the `libraries` stanza to include `dream`.
+- Enter `opam install --deps-only --yes .`
+- Enter `dune exec --root . ./template.exe`
+- Edit `bin/dune` and add the following at the end to enable use of HTML templates:
+
+  ```text
+  (rule
+    (targets template.ml)
+    (deps template.eml.ml)
+    (action (run dream_eml %{deps} --workspace %{workspace_root})))
+  ```
+
+- Replace the contents of `bin/main.ml` with the following:
+
+  ```ocaml
+  let hello who =
+    <html>
+    <body>
+      <h1>Hello, <%s who %>!</h1>
+    </body>
+    </html>
+
+  let () =
+    Dream.run
+    @@ Dream.logger
+    @@ Dream.router [
+      Dream.get "/" (fun _ ->
+        Dream.html (hello "world"));
+    ]
+  ```
+
+- Enter `dune exec dream_demo`
+- Browse localhost:8080
 
 TODO: Implement your Dog CRUD htmx app using Dream.
 
