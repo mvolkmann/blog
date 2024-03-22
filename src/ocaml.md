@@ -51,7 +51,7 @@ largest users and supporters of OCaml.
 - <a href="https://dev.realworldocaml.org" target="_blank">Real World OCaml</a> book
 - <a href="https://ocaml-book.com" target="_blank">OCaml from the Very Beginning</a> book
 
-## Variants
+## OCaml Variants
 
 <a href="https://reasonml.github.io" target="_blank">Reason</a>
 is a syntax extension and toolchain for OCaml developed by Facebook.
@@ -554,31 +554,6 @@ done
 
 Refs are actually single field records with a mutable field named `contents`.
 
-## Options
-
-The type `option` represents an optional value.
-The only valid values of this type are `None` and `Some`.
-
-Functions that sometimes do not have a value to return
-use this type to represent their return value.
-For example, the `List.find_opt` function does this.
-
-```ocaml
-(* The `open` keyword allows all the identifiers in a given module
-   (`printf` in this case) to be used in this source file
-   without prefixing them with their module name. *)
-open Printf
-
-let colors = [ "red"; "green"; "blue" ]
-let color = "green"
-let result = List.find_opt (fun x -> x = color) colors
-
-let () =
-  match result with
-  | Some c -> printf "found %s\n" c
-  | None -> print_endline "failed to find green\n"
-```
-
 ## Custom Types
 
 The `type` keyword defines a custom type.
@@ -705,6 +680,51 @@ let () =
   print_endline (get_string i);
   print_endline (get_string s);
   print_endline (get_string b)
+```
+
+## Option Variant Type
+
+The `option` variant type represents an optional value.
+It has the constructors `None` and `Some`.
+
+Functions that sometimes do not have a value to return
+use this type to represent their return value.
+For example, the `List.find_opt` function does this.
+
+```ocaml
+(* The `open` keyword allows all the identifiers in a given module
+   (`printf` in this case) to be used in this source file
+   without prefixing them with their module name. *)
+open Printf
+
+let colors = [ "red"; "green"; "blue" ]
+let color = "green"
+let result = List.find_opt (fun x -> x = color) colors
+
+let () =
+  match result with
+  | Some c -> printf "found %s\n" c
+  | None -> print_endline "failed to find green\n"
+```
+
+## Result Variant Type
+
+The `result` variant type respresents the
+result of a function that can succeed or fail.
+It has the constructors `OK` and `Error`.
+
+For example:
+
+```ocaml
+let divide numerator denomiator =
+  if denomiator = 0.0 then Error "cannot divide by zero"
+  else Ok (numerator /. denomiator)
+
+let () =
+  let n = 5.0 and d = 0.0 in
+  match divide n d with
+  | Ok v -> print_endline (string_of_float v)
+  | Error e -> print_endline e
 ```
 
 ## Tuples
