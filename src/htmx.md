@@ -988,7 +988,7 @@ with a sweetalert2 confirmation dialog.
   src="/blog/assets/htmx-hx-confirm-sweetalert2.png?v={{pkg.version}}">
 
 ```js
-<html lang="en">
+<html>
   <head>
     <title>Custom Confirm Dialog</title>
     <link rel="stylesheet" href="/styles.css" />
@@ -1995,7 +1995,7 @@ app.use('/*', serveStatic({root: './public'}));
 const dogs = ['Comet', 'Maisey', 'Oscar', 'Ramsay'];
 
 const Layout: FC = ({children}) => (
-  <html lang="en">
+  <html>
     <head>
       <title>Toggle Selection</title>
       <link rel="stylesheet" href="/styles.css" />

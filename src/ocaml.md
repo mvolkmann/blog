@@ -2133,38 +2133,37 @@ The steps to use the Dream web framework are:
 - Install Dream by entering `opam install dream`
 - cd to the directory where a new Dune project will be created.
 - Enter `dune init project dream_demo`
+- `cd dream_demo`
 - Edit `bin/dune` and modify the `libraries` stanza to include `dream`.
-- Enter `opam install --deps-only --yes .`
-- Enter `dune exec --root . ./template.exe`
 - Edit `bin/dune` and add the following at the end to enable use of HTML templates:
 
   ```text
   (rule
-    (targets template.ml)
-    (deps template.eml.ml)
+    (targets main.ml)
+    (deps main.eml.ml)
     (action (run dream_eml %{deps} --workspace %{workspace_root})))
   ```
 
-- Replace the contents of `bin/main.ml` with the following:
+- Delete `bin/main.ml`.
+- Create `bin/main.eml.ml` with the following:
 
   ```ocaml
   let hello who =
     <html>
-    <body>
-      <h1>Hello, <%s who %>!</h1>
-    </body>
+      <body>
+        <h1>Hello, <%s who %>!</h1>
+      </body>
     </html>
 
   let () =
     Dream.run
     @@ Dream.logger
     @@ Dream.router [
-      Dream.get "/" (fun _ ->
-        Dream.html (hello "world"));
+      Dream.get "/" (fun _ -> Dream.html (hello "World"));
     ]
   ```
 
-- Enter `dune exec dream_demo`
+- Enter `dune exec dream_demo --watch`
 - Browse localhost:8080
 
 TODO: Implement your Dog CRUD htmx app using Dream.
