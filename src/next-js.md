@@ -800,12 +800,15 @@ interface DogData {
   setName: (name: string) => void;
 }
 
-const DogContext = createContext<DogData>({
-  breed: '',
-  name: '',
-  setBreed: string => '',
-  setName: string => ''
-});
+const DogContext =
+  createContext <
+  DogData >
+  {
+    breed: '',
+    name: '',
+    setBreed: string => '',
+    setName: string => ''
+  };
 
 interface Props {
   children: ReactNode;
@@ -1367,3 +1370,246 @@ To generate a sitemap for a Next.js application:
 
 1. Enter `npm run build`.
    This generates the files `public/robots.txt` and `public/sitemap.xml`.
+
+## Example App
+
+The following steps can be followed to create a web app with Next.js
+that manages a collection of dogs.
+
+<img alt="Dog CRUD app" style="width: 50%"
+  src="/blog/assets/htmx-dog-crud.png?v={{pkg.version}}">
+
+1. `npx create-next-app@latest`
+
+   I chose the name "dogs-crud" and
+   accepted all the defaults except using Tailwind.
+
+1. `cd dogs-crud`
+1. `npm run dev`
+1. `npm install uuid`
+
+   This will be used to generate unique ids for dogs.
+
+1. Delete the following files that will not be used:
+
+   - `public/next.svg`
+   - `public/vercel.svg`
+   - `src/app/page.module.css`
+
+1. Replace the contents of `src/app/global.css` with the following:
+
+   ```css
+   body {
+     background-color: cornflowerblue;
+     font-family: sans-serif;
+   }
+
+   button {
+     background-color: lightgreen;
+     border: none;
+     border-radius: 0.5rem;
+     margin-bottom: 1rem;
+     padding: 0.5rem;
+
+     &:disabled {
+       background-color: gray;
+     }
+   }
+
+   .buttons {
+     display: flex;
+     gap: 1rem;
+
+     background-color: transparent;
+   }
+
+   h1 {
+     color: orange;
+   }
+
+   input {
+     background-color: white;
+     border: none;
+     border-radius: 0.5rem;
+     margin-bottom: 1rem;
+     padding: 0.5rem;
+   }
+
+   label {
+     display: inline-block;
+     font-weight: bold;
+     margin-right: 0.5rem;
+     text-align: right;
+     width: 3rem;
+   }
+
+   .show-on-hover {
+     transform: scale(2.5) translate(0.2rem, 0.2rem);
+     visibility: hidden;
+   }
+
+   .on-hover:hover .show-on-hover {
+     visibility: visible;
+   }
+
+   table {
+     border-collapse: collapse;
+     margin-bottom: 0.5rem;
+   }
+
+   td,
+   th {
+     border: 1px solid cornflowerblue;
+     padding: 0.5rem;
+   }
+
+   td {
+     background-color: white;
+
+     & button {
+       background-color: transparent;
+       color: white;
+     }
+   }
+
+   th {
+     background-color: orange;
+   }
+   ```
+
+1. Edit `src/app/layout.tsx`.
+
+   - Delete the two lines that refer to the "Inter" font.
+   - Change the title from "Create Next App" to "Dogs CRUD".
+   - Remove the `className` attribute from the `body` element.
+
+1. Create the file `src/app/api/dogs/dogs.ts` containing the following code
+   that manages a collection of dogs in memory:
+
+   ```ts
+   import {v4 as uuidv4} from 'uuid';
+
+   export type Dog = {
+     id: string;
+     name: string;
+     breed: string;
+   };
+
+   const dogMap = new Map<string, Dog>();
+
+   // Create an initial set of dogs.
+   addDog('Comet', 'Whippet');
+   addDog('Maisey', 'Treeing Walker Coonhound');
+   addDog('Oscar', 'German Shorthaired Pointer');
+   addDog('Ramsay', 'Native American Indian Dog');
+
+   export function addDog(name: string, breed: string) {
+     const id = uuidv4();
+     const dog = {id, name, breed};
+     dogMap.set(id, dog);
+     return dog;
+   }
+
+   export function deleteDog(id: string): boolean {
+     return dogMap.delete(id);
+   }
+
+   export const getDogs = () => {
+     const dogs = Array.from(dogMap.values());
+     return dogs.sort((a: Dog, b: Dog) => a.name.localeCompare(b.name));
+   };
+
+   export function updateDog(
+     id: string,
+     name: string,
+     breed: string
+   ): Dog | undefined {
+     const dog = dogMap.get(id);
+     if (dog) {
+       dog.name = name;
+       dog.breed = breed;
+     }
+     return dog;
+   }
+   ```
+
+1. Create the file `src/app/api/dogs/dogs.ts` containing the following code
+   that manages a collection of dogs in memory:
+
+1. Create the file `src/app/api/dogs/route.ts` containing the following code
+   that handles GET and POST requests:
+
+   ```ts
+   import {NextResponse} from 'next/server';
+   import {addDog, getDogs, type Dog} from './dogs';
+
+   export function GET(_: Request) {
+     return NextResponse.json(getDogs());
+   }
+
+   export async function POST(req: Request) {
+     try {
+       const formData = await req.formData();
+       const name = formData.get('name') as string;
+       const breed = formData.get('breed') as string;
+       if (!name || !breed) {
+         return NextResponse.json(
+           {error: 'name and breed are required'},
+           {status: 400}
+         );
+       }
+       const newDog = addDog(name, breed);
+       return NextResponse.json(newDog);
+     } catch (error) {
+       return NextResponse.json({error}, {status: 500});
+     }
+   }
+   ```
+
+1. Create the file `src/app/api/dogs/[id]/route.ts` containing the following code
+   that handles PUT and DELETE requests:
+
+   ```ts
+   import {NextResponse} from 'next/server';
+   import {deleteDog, updateDog, type Dog} from '../dogs';
+
+   type Props = {
+     params: {id: string};
+   };
+
+   export async function DELETE(req: Request, {params: {id}}: Props) {
+     const existed = deleteDog(id);
+     return NextResponse.json(
+       {error: 'dog not found'},
+       {status: existed ? 200 : 404}
+     );
+   }
+
+   export async function PUT(req: Request, {params: {id}}: Props) {
+     const formData = await req.formData();
+     const name = formData.get('name') as string;
+     const breed = formData.get('breed') as string;
+     const dog = updateDog(id, name, breed);
+     return dog
+       ? NextResponse.json(dog)
+       : NextResponse.json({error: 'dog not found'}, {status: 404});
+   }
+   ```
+
+1. Browse localhost:3000.
+
+1. Add a dog.
+
+   Enter a name and breed in the form at the top.
+   Click the "Add" button to add a new dog.
+
+1. Edit a dog.
+
+   Hover over one of the dog rows and click the pencil icon that appears.
+   Modify the name and/or breed in the form at the top.
+   Click the "Update" button to submit the changes.
+
+1. Delete a dog.
+
+   Hover over one of the dog rows and click the "X" icon that appears.
+   Click the "OK" button in the confirmation dialog.
