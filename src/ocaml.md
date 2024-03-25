@@ -932,15 +932,22 @@ let (b, n, c) = t in
 printf "b = %b, n = %d, c = %s\n" b n c
 ```
 
+In practice it is rare for a tuple to contain more than three values.
+Tuples with two elements are referred to as a "pair"
+and those with three elements are referred to as a "triple".
+
 The parentheses shown above for creating and destructuring a tuple are optional.
 
 The variable `t` above has the type `bool * int * string`
 which is referred to as a "product type"
 (based on tuples being similar to cartesian products).
 
-For tuples that only have two elements,
-the `fst` function returns the first element
+Fun fact: The Greek word "aster" means "star",
+so it makes sense to refer to the asterisk character as "star".
+
+For pairs, the `fst` function returns the first element
 and the `snd` function returns the second.
+There are no built-in functions for operating on longer tuples.
 
 To get a specific element from a tuple
 of a certain length, use pattern matching.
@@ -1218,8 +1225,8 @@ For example:
 milk.price <- 400
 ```
 
-To create a new record from an existing one
-using a different values for some of its fields,
+To create a new record by copying fields from an existing one
+and using different values for some of its fields,
 use the `with` keyword. For example:
 
 ```ocaml
@@ -2197,3 +2204,14 @@ TODO: Implement your Dog CRUD htmx app using Dream.
 ## Converting OCaml to JavaScript
 
 See http://ocsigen.org/js_of_ocaml/latest/manual/overview.
+
+## Preprocessors
+
+Preprocessors are programs that are called at compile time
+to alter or add source code.
+
+For example, the syntax `[%get_env "USER"]`
+can be replaces by the value of the `USER` environment variable.
+
+See <a href="https://ocaml.org/docs/metaprogramming"
+target="_blank">Preprocessors and PPXs</a>
