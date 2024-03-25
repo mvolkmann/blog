@@ -1552,14 +1552,8 @@ The following steps create this app from scratch.
    export async function POST(req: Request) {
      try {
        const formData = await req.formData();
-       const name = formData.get('name') as string;
-       const breed = formData.get('breed') as string;
-       if (!name || !breed) {
-         return NextResponse.json(
-           {error: 'name and breed are required'},
-           {status: 400}
-         );
-       }
+       const name = (formData.get('name') as string) || '';
+       const breed = (formData.get('breed') as string) || '';
        const newDog = addDog(name, breed);
        return NextResponse.json(newDog);
      } catch (error) {
