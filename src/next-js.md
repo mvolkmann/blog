@@ -1497,13 +1497,12 @@ that manages a collection of dogs.
 
    const dogMap = new Map<string, Dog>();
 
-   // Create an initial set of dogs.
    addDog('Comet', 'Whippet');
    addDog('Maisey', 'Treeing Walker Coonhound');
    addDog('Oscar', 'German Shorthaired Pointer');
    addDog('Ramsay', 'Native American Indian Dog');
 
-   export function addDog(name: string, breed: string) {
+   export function addDog(name: string, breed: string): Dog {
      const id = uuidv4();
      const dog = {id, name, breed};
      dogMap.set(id, dog);
@@ -1514,10 +1513,10 @@ that manages a collection of dogs.
      return dogMap.delete(id);
    }
 
-   export const getDogs = () => {
+   export function getDogs(): Dog[] {
      const dogs = Array.from(dogMap.values());
      return dogs.sort((a: Dog, b: Dog) => a.name.localeCompare(b.name));
-   };
+   }
 
    export function updateDog(
      id: string,
