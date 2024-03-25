@@ -1386,9 +1386,9 @@ that manages a collection of dogs.
 
 1. `cd dogs-crud`
 1. `npm run dev`
-1. `npm install uuid`
+1. `npm install uuid` and `npm i --save-dev @types/uuid`
 
-   This will be used to generate unique ids for dogs.
+   This package will be used to generate unique ids for dogs.
 
 1. Delete the following files that will not be used:
 
@@ -1541,7 +1541,7 @@ that manages a collection of dogs.
 
    ```ts
    import {NextResponse} from 'next/server';
-   import {addDog, getDogs, type Dog} from './dogs';
+   import {addDog, getDogs} from './dogs';
 
    export function GET(_: Request) {
      return NextResponse.json(getDogs());
@@ -1571,7 +1571,7 @@ that manages a collection of dogs.
 
    ```ts
    import {NextResponse} from 'next/server';
-   import {deleteDog, updateDog, type Dog} from '../dogs';
+   import {deleteDog, updateDog} from '../dogs';
 
    type Props = {
      params: {id: string};
