@@ -168,12 +168,6 @@ Follow these steps to create the app from scratch.
    }
    ```
 
-1. Edit `src/app/layout.tsx`.
-
-   - Delete the two lines that refer to the "Inter" font.
-   - Change the title from "Create Next App" to "Dogs CRUD".
-   - Remove the `className` attribute from the `body` element.
-
 1. Create the file `src/app/api/dogs/dogs.ts` containing the following code
    that manages a collection of dogs in memory:
 
@@ -221,8 +215,8 @@ Follow these steps to create the app from scratch.
    }
    ```
 
-1. Create the file `src/app/api/dogs/route.ts` containing the following code
-   that handles GET and POST requests:
+1. Create the file `src/app/api/dogs/route.ts` containing the
+   following code that handles GET and POST requests:
 
    ```ts
    import {NextResponse} from 'next/server';
@@ -245,8 +239,8 @@ Follow these steps to create the app from scratch.
    }
    ```
 
-1. Create the file `src/app/api/dogs/[id]/route.ts` containing the following code
-   that handles PUT and DELETE requests.
+1. Create the file `src/app/api/dogs/[id]/route.ts` containing the
+   following code that handles PUT and DELETE requests.
    The directory name `[id]` includes the square brackets. This indicates that
    requests to routes described inside must include an `id` path parameter.
 
@@ -276,6 +270,15 @@ Follow these steps to create the app from scratch.
    }
    ```
 
+1. Edit `src/app/layout.tsx`.
+
+   This file provides the HTML boilerplate that
+   wraps what is rendered by `src/app/page.tsx` below.
+
+   - Delete the two lines that refer to the "Inter" font.
+   - Change the title from "Create Next App" to "Dogs CRUD".
+   - Remove the `className` attribute from the `body` element.
+
 1. Replace the contents of `src/app/page.tsx` with the following:
 
    ```tsx
@@ -293,12 +296,16 @@ Follow these steps to create the app from scratch.
      }, []);
 
      function addDog(dog: Dog) {
+       // In order for React to update the UI when `dogMap` changes,
+       // we must create a new instance of the Map
+       // which can be expensive if the Map is large.
        const newDogMap = new Map(dogMap);
        newDogMap.set(dog.id, dog);
        setDogMap(newDogMap);
      }
 
      function deleteDog(id: string) {
+       // Once again creating a new instance of the Map.
        const newDogMap = new Map(dogMap);
        newDogMap.delete(id);
        setDogMap(newDogMap);
@@ -308,6 +315,7 @@ Follow these steps to create the app from scratch.
        if (!confirm('Are you sure?')) return;
 
        const tr = event.currentTarget.closest('tr');
+       // It should never fail to find a `tr` that wraps the clicked button.
        if (!tr) throw new Error('tr not found');
 
        try {
@@ -317,13 +325,17 @@ Follow these steps to create the app from scratch.
          if (!res.ok) throw new Error('DELETE failed');
          deleteDog(tr.id);
        } catch (error) {
-         console.error('Error deleting dog:', error);
+         console.error('DELETE failed:', error);
        }
      }
 
      function handleEdit(event: React.MouseEvent<HTMLButtonElement>) {
        const tr = event.currentTarget.closest('tr');
+       // It should never fail to find a `tr` that wraps the clicked button.
        if (!tr) throw new Error('tr not found');
+
+       // This causes the name and breed of the selected dog
+       // to appear in the form at the top.
        setSelectedDog(dogMap.get(tr.id));
      }
 
@@ -338,15 +350,16 @@ Follow these steps to create the app from scratch.
            body: new FormData(form)
          });
          if (!res.ok) throw new Error('POST failed');
-         form.reset();
+         form.reset(); // clears the form inputs
          const newDog = await res.json();
          addDog(newDog);
          setSelectedDog(undefined);
        } catch (error) {
-         console.error('Error submitting dog:', error);
+         console.error('POST failed:', error);
        }
      }
 
+     // Called when the page is loaded.
      async function loadDogs() {
        const res = await fetch('/api/dogs');
        const dogArray = await res.json();
@@ -383,7 +396,6 @@ Follow these steps to create the app from scratch.
                defaultValue={selectedDog ? selectedDog.breed : ''}
              />
            </div>
-
            <div className="buttons">
              <button id="submit-btn">{selectedDog ? 'Update' : 'Add'}</button>
              {selectedDog && (
@@ -413,8 +425,9 @@ Follow these steps to create the app from scratch.
                    >
                      ✕
                    </button>
-                   {/* This selects the dog which triggers a selection-change event
-                which causes the form to update. */}
+                   {/* This selects the dog
+                       which triggers a selection-change event,
+                       which causes the form to update. */}
                    <button
                      className="show-on-hover"
                      onClick={handleEdit}
