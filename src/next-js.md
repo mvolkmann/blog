@@ -1503,9 +1503,7 @@ The following steps create this app from scratch.
    const dogMap = new Map<string, Dog>();
 
    addDog('Comet', 'Whippet');
-   addDog('Maisey', 'Treeing Walker Coonhound');
    addDog('Oscar', 'German Shorthaired Pointer');
-   addDog('Ramsay', 'Native American Indian Dog');
 
    export function addDog(name: string, breed: string): Dog {
      const id = uuidv4();
