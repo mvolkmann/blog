@@ -51,15 +51,14 @@ Let's implement a web app using Next.js and then
 implement the same app using htmx to see how they differ.
 
 The app manages a collection of dogs.
+Users can add new dogs.
+They can also hover over of the table row of an existing dog
+to reveal buttons for deleting or editing it.
 
 <img alt="Dog CRUD app" style="width: 50%"
   src="/blog/assets/htmx-dog-crud.png?v={{pkg.version}}">
 
-Users can add new dogs.
-They can also hover over of table row for an existing dog
-to reveal buttons for deleting or editing it.
-
-## Next.js
+## Next.js Version
 
 All the code for the Next.js version can be found in the GitHub repository at
 <a href="https://github.com/mvolkmann/nextjs-dogs-crud"
@@ -67,14 +66,16 @@ target="_blank">nextjs-dogs-crud</a>.
 
 Follow these steps to create the app from scratch.
 
+1. `cd` to the directory where the app will be created.
+
 1. `npx create-next-app@latest`
 
    I chose the name "dogs-crud" and
    accepted all the defaults except using Tailwind.
 
 1. `cd dogs-crud`
-1. `npm run dev`
-1. `npm install uuid` and `npm i --save-dev @types/uuid`
+
+1. `npm install uuid` and `npm install --D @types/uuid`
 
    This package will be used to generate unique ids for dogs.
 
@@ -131,13 +132,15 @@ Follow these steps to create the app from scratch.
      width: 3rem;
    }
 
+   /* This is used for the table row delete and edit buttons. */
+   .on-hover:hover .show-on-hover {
+     visibility: visible;
+   }
+
+   /* This is used for the table row delete and edit buttons. */
    .show-on-hover {
      transform: scale(2.5) translate(0.2rem, 0.2rem);
      visibility: hidden;
-   }
-
-   .on-hover:hover .show-on-hover {
-     visibility: visible;
    }
 
    table {
@@ -209,7 +212,7 @@ Follow these steps to create the app from scratch.
      name: string,
      breed: string
    ): Dog | undefined {
-     const dog = dogMap.get(id);
+     const dog = dogMap.get(id); // returns undefined if not found
      if (dog) {
        dog.name = name;
        dog.breed = breed;
@@ -217,9 +220,6 @@ Follow these steps to create the app from scratch.
      return dog;
    }
    ```
-
-1. Create the file `src/app/api/dogs/dogs.ts` containing the following code
-   that manages a collection of dogs in memory:
 
 1. Create the file `src/app/api/dogs/route.ts` containing the following code
    that handles GET and POST requests:
@@ -238,7 +238,7 @@ Follow these steps to create the app from scratch.
        const name = (formData.get('name') as string) || '';
        const breed = (formData.get('breed') as string) || '';
        const newDog = addDog(name, breed);
-       return NextResponse.json(newDog);
+       return NextResponse.json(newDog, {status: 201});
      } catch (error) {
        return NextResponse.json({error}, {status: 500});
      }
@@ -246,7 +246,9 @@ Follow these steps to create the app from scratch.
    ```
 
 1. Create the file `src/app/api/dogs/[id]/route.ts` containing the following code
-   that handles PUT and DELETE requests:
+   that handles PUT and DELETE requests.
+   The directory name `[id]` includes the square brackets. This indicates that
+   requests to routes described inside must include an `id` path parameter.
 
    ```ts
    import {NextResponse} from 'next/server';
@@ -258,10 +260,9 @@ Follow these steps to create the app from scratch.
 
    export async function DELETE(req: Request, {params: {id}}: Props) {
      const existed = deleteDog(id);
-     return NextResponse.json(
-       {error: 'dog not found'},
-       {status: existed ? 200 : 404}
-     );
+     return NextResponse.json(existed ? null : {error: 'dog not found'}, {
+       status: existed ? 200 : 404
+     });
    }
 
    export async function PUT(req: Request, {params: {id}}: Props) {
@@ -433,7 +434,9 @@ Follow these steps to create the app from scratch.
    export default Home;
    ```
 
-1. Browse localhost:3000.
+1. `npm run dev`
+
+1. Browse localhost:3000
 
 1. Add a dog.
 
@@ -451,7 +454,7 @@ Follow these steps to create the app from scratch.
    Hover over one of the dog rows and click the "X" icon that appears.
    Click the "OK" button in the confirmation dialog.
 
-## htmx
+## htmx Version
 
 Unlike Next.js, the htmx library does not
 provide a framework for implementing API endpoints.
@@ -723,7 +726,8 @@ Follow these steps to create the app from scratch.
 
 1. Add a dog.
 
-   Enter a name and breed in the form at the top. Click the "Add" button to add a new dog.
+   Enter a name and breed in the form at the top.
+   Click the "Add" button to add a new dog.
 
 1. Edit a dog.
 
@@ -736,7 +740,7 @@ Follow these steps to create the app from scratch.
    Hover over one of the dog rows and click the "X" icon that appears.
    Click the "OK" button in the confirmation dialog.
 
-## Comparing
+## Comparing the Versions
 
 What conclusions can be drawn from comparing this version of the app
 to the one implemented with Next.js?
