@@ -762,46 +762,6 @@ let () =
   | Error e -> print_endline e
 ```
 
-## Tuples
-
-A tuple is an immutable, ordered collection of values whose types can differ.
-
-To create a tuple, surround the elements in parentheses
-and separate them with commas.
-For example:
-
-```ocaml
-let t = (true, 3, "blue") in
-(* Can use destructuring to extract the values. *)
-let (b, n, c) = t in
-printf "b = %b, n = %d, c = %s\n" b n c
-```
-
-The parentheses shown above for creating and destructuring a tuple are optional.
-
-The variable `t` above has the type `bool * int * string`
-which is referred to as a "product type"
-(based on tuples being similar to cartesian products).
-
-For tuples that only have two elements,
-the `fst` function returns the first element
-and the `snd` function returns the second.
-
-To get a specific element from a tuple
-of a certain length, use pattern matching.
-For example, the following function gets
-the third element from any 4-element tuple.
-
-```ocaml
-let third_of_4 tuple = match tuple with a, b, c, d -> c;;
-
-let t = ("alpha", "beta", "gamma", "delta") in
-print_endline (third_of_4 t) (* gamma *)
-```
-
-You can think of tuples like records (described later)
-where the fields are accessed by position rather than name.
-
 ## Conditonal Logic
 
 Conditional logic is implemented with the `if` and `match` expressions.
@@ -938,7 +898,60 @@ let () =
   Array.iter (fun x -> printf "%d\n" x) numbers
 ```
 
-## Lists
+## Collections
+
+OCaml has built-in support for many kinds of collections.
+The most commonly used are tuples, lists, arrays, and maps.
+
+| Collection | Primary Use Case                                                    |
+| ---------- | ------------------------------------------------------------------- |
+| `list`     | unbounded length; access elements by walking from head              |
+| `tuple`    | bounded length (typically only 2 or 3); access elements by position |
+| `array`    | bounded length; access elements by index                            |
+| `record`   | fixed set of fields accessed by name                                |
+| `Map`      | key/value pairs; access values by key                               |
+
+### Tuples
+
+A tuple is an immutable, ordered collection of values whose types can differ.
+
+To create a tuple, surround the elements in parentheses
+and separate them with commas.
+For example:
+
+```ocaml
+let t = (true, 3, "blue") in
+(* Can use destructuring to extract the values. *)
+let (b, n, c) = t in
+printf "b = %b, n = %d, c = %s\n" b n c
+```
+
+The parentheses shown above for creating and destructuring a tuple are optional.
+
+The variable `t` above has the type `bool * int * string`
+which is referred to as a "product type"
+(based on tuples being similar to cartesian products).
+
+For tuples that only have two elements,
+the `fst` function returns the first element
+and the `snd` function returns the second.
+
+To get a specific element from a tuple
+of a certain length, use pattern matching.
+For example, the following function gets
+the third element from any 4-element tuple.
+
+```ocaml
+let third_of_4 tuple = match tuple with a, b, c, d -> c;;
+
+let t = ("alpha", "beta", "gamma", "delta") in
+print_endline (third_of_4 t) (* gamma *)
+```
+
+You can think of tuples like records (described later)
+where the fields are accessed by position rather than name.
+
+### Lists
 
 A list is an immutable, ordered collection of values
 that all have the same type.
@@ -1059,7 +1072,7 @@ This evaluates to the following list of tuples:
 [("alpha", 1); ("beta", 2); ("gamma", 3)]
 ```
 
-## Arrays
+### Arrays
 
 An array is a mutable, ordered collection of values
 that all have the same type.
@@ -1131,7 +1144,7 @@ that contains the same elements as a given list.
 The `Array.map` function creates a new array containing elements that are
 computed by passing each element in an existing array to a given function.
 
-## Records
+### Records
 
 A record an immutable collections of fields.
 The fields can have differents types, including other record types.
@@ -1164,11 +1177,16 @@ It is not necessary to specify the type of the record variable.
 But the field names and values must match some existing record type
 and no extra fields can be present.
 
-To access a field value in a record, use dot syntax. For example:
+To access a field value in a record, use dot syntax.
+For example:
 
 ```ocaml
 let p = my_item.price
 ```
+
+A field name must follow the dot,
+not an expression that evaluates to a field name.
+To lookup values based on an expression, use the `Map` module.
 
 Fields can also be destructured using a `match`. For example:
 
@@ -1228,7 +1246,7 @@ let () =
   printf "Total: $%d\n" total
 ```
 
-## Maps
+### Maps
 
 A Map is an immutable collection of key/value pairs.
 
@@ -2128,7 +2146,9 @@ that provide API endpoints. Popular options include:
 
 ### Dream
 
-The steps to use the Dream web framework are:
+The steps to use the
+<a href="https://aantron.github.io/dream/" target="_blank">Dream</a>
+web framework are:
 
 - Install Dream by entering `opam install dream`
 - cd to the directory where a new Dune project will be created.
