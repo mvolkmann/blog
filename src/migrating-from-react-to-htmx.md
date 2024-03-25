@@ -60,7 +60,8 @@ to reveal buttons for deleting or editing it.
 
 ## Next.js Version
 
-All the code for the Next.js version can be found in the GitHub repository at
+All the code for the Next.js version of this app
+can be found in the GitHub repository at
 <a href="https://github.com/mvolkmann/nextjs-dogs-crud"
 target="_blank">nextjs-dogs-crud</a>.
 
@@ -482,12 +483,12 @@ so we will use that for our example app.
 Specifically, we will use the Bun JavaScript engine
 and the Hono server library.
 
-"{% aTargetBlank "https://bun.sh", "Bun" %} is a fast JavaScript all-in-one toolkit."
+"{% aTargetBlank "https://bun.sh", "Bun" %}
+is a fast JavaScript all-in-one toolkit."
 It includes a JavaScript runtime, package manager, bundler, and test runner.
-All of this is free and open source under the MIT license.
 
 Bun can be used as a drop-in replacement for npm and Node.js.
-The Bun runtime supports nearly all Node.js built-in modules (around 40 of them).
+The Bun runtime supports nearly all Node.js built-in modules.
 It also supports JSX which we will utilize
 in our API endpoints to generate HTML.
 
@@ -501,7 +502,8 @@ For more detail on Hono, see my
 <a href="https://mvolkmann.github.io/blog/topics/#/blog/hono/"
 target="_blank">Hono blog page</a>.
 
-All the code for this app can be found in the GitHub repository at
+All the code for the htmx version of this app
+can be found in the GitHub repository at
 <a href="https://github.com/mvolkmann/htmx-examples/tree/main/htmx-dogs-crud"
 target="_blank">htmx-dogs-crud</a>.
 
