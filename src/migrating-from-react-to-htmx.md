@@ -21,17 +21,32 @@ that takes a very different approach.
 It still sends HTTP requests to a server,
 but the server returns snippets of HTML instead of JSON.
 
-htmx adds support for new HTML attributes
+htmx adds support for many new HTML attributes
 that make it more expressive and powerful.
+The most used of these new attributes include the following:
 
-- `hx-trigger` specifies what triggers a request, ex. click, submit, hover, ...
+- `hx-trigger` specifies the events that triggers a request
+  such as `click`, `submit`, and `hover`.
 - `hx-get`, `hx-post`, `hx-put`, `hx-patch`, and `hx-delete` specify
-  the HTTP verb to use and the URL path where the request will be sent.
+  the HTTP verb to use for the request and the URL path where it will be sent.
 - `hx-target` specifies where the resulting HTML should go.
-- `hx-swap` specifies exactly how the result HTML should be inserted.
+- `hx-swap` specifies exactly how the resulting HTML should be inserted.
+
+The following image describes commonly used values for the `hx-swap` attribute.
+
+<img alt="hx-swap" style="width: 70%"
+  src="/blog/assets/htmx-hx-swap.png?v={{pkg.version}}">
+
+For more detail on htmx, see my
+<a href="https://mvolkmann.github.io/blog/topics/#/blog/htmx/"
+target="_blank">htmx blog page</a>.
 
 There are many frameworks that leverage React.
 Next.js is one of the most popular.
+For detail on Next.js, see my
+<a href="https://mvolkmann.github.io/blog/topics/#/blog/next-js/"
+target="_blank">Next.js blog page</a>.
+
 Let's implement a web app using Next.js and then
 implement the same app using htmx to see how they differ.
 
@@ -40,13 +55,17 @@ The app manages a collection of dogs.
 <img alt="Dog CRUD app" style="width: 50%"
   src="/blog/assets/htmx-dog-crud.png?v={{pkg.version}}">
 
+Users can add new dogs.
+They can also hover over of table row for an existing dog
+to reveal buttons for deleting or editing it.
+
 ## Next.js
 
-All the code can be found in the GitHub repository at
+All the code for the Next.js version can be found in the GitHub repository at
 <a href="https://github.com/mvolkmann/nextjs-dogs-crud"
 target="_blank">nextjs-dogs-crud</a>.
 
-The following steps create this app from scratch.
+Follow these steps to create the app from scratch.
 
 1. `npx create-next-app@latest`
 
@@ -437,7 +456,7 @@ The following steps create this app from scratch.
 Unlike Next.js, the htmx library does not
 provide a framework for implementing API endpoints.
 This is both good and bad.
-The good side is that we can choose andy
+The good side is that we can choose any
 programming language and server framework.
 For example, we could use Go and the "Go Fiber" library.
 Or we could use Python and the Fast API, Flask, or Django libraries.
@@ -456,14 +475,21 @@ The Bun runtime supports nearly all Node.js built-in modules (around 40 of them)
 It also supports JSX which we will utilize
 in our API endpoints to generate HTML.
 
+For more detail on Bun, see my
+<a href="https://mvolkmann.github.io/blog/topics/#/blog/bun/"
+target="_blank">bun blog page</a>.
+
 {% aTargetBlank "https://hono.dev/", "Hono" %}
 is a JavaScript HTTP server library that runs in any JavaScript runtime.
+For more detail on Hono, see my
+<a href="https://mvolkmann.github.io/blog/topics/#/blog/hono/"
+target="_blank">Hono blog page</a>.
 
 All the code for this app can be found in the GitHub repository at
 <a href="https://github.com/mvolkmann/htmx-examples/tree/main/htmx-dogs-crud"
 target="_blank">htmx-dogs-crud</a>.
 
-The following steps create this app from scratch.
+Follow these steps to create the app from scratch.
 
 1. Install Bun.
 
@@ -663,87 +689,8 @@ The following steps create this app from scratch.
    export default app;
    ```
 
-1. Create the file `public/styles.css` containing the following
-   which is identical to the styles for the Next.js version of the app:
-
-   ```css
-   body {
-     background-color: cornflowerblue;
-     font-family: sans-serif;
-   }
-
-   button {
-     background-color: lightgreen;
-     border: none;
-     border-radius: 0.5rem;
-     margin-bottom: 1rem;
-     padding: 0.5rem;
-
-     &:disabled {
-       background-color: gray;
-     }
-   }
-
-   .buttons {
-     display: flex;
-     gap: 1rem;
-
-     background-color: transparent;
-   }
-
-   h1 {
-     color: orange;
-   }
-
-   input {
-     background-color: white;
-     border: none;
-     border-radius: 0.5rem;
-     margin-bottom: 1rem;
-     padding: 0.5rem;
-   }
-
-   label {
-     display: inline-block;
-     font-weight: bold;
-     margin-right: 0.5rem;
-     text-align: right;
-     width: 3rem;
-   }
-
-   .show-on-hover {
-     transform: scale(2.5) translate(0.2rem, 0.2rem);
-     visibility: hidden;
-   }
-
-   .on-hover:hover .show-on-hover {
-     visibility: visible;
-   }
-
-   table {
-     border-collapse: collapse;
-     margin-bottom: 0.5rem;
-   }
-
-   td,
-   th {
-     border: 1px solid cornflowerblue;
-     padding: 0.5rem;
-   }
-
-   td {
-     background-color: white;
-
-     & button {
-       background-color: transparent;
-       color: white;
-     }
-   }
-
-   th {
-     background-color: orange;
-   }
-   ```
+1. Create the file `public/styles.css` containing the same CSS rules
+   as found in the Next.js `src/app/global.css` file.
 
 1. Create the file `public/index.html` containing the following:
 
@@ -810,9 +757,9 @@ to the one implemented with Next.js?
 
   For the htmx app, the Chrome DevTools Network tab
   shows `htmx.min.js` at 22.3 kB.
-  That's 1.3% of the total JavaScript size for the Next.js version!
+  That's a mere .3% of the total JavaScript size for the Next.js version!
 
-- All the state is only on the server in the htmx version.
+- All the state is only maintained on the server in the htmx version.
   In the Next.js version, `dogMap` is maintained on the server and the client.
 
 - The learning curve for htmx is smaller than for Next.js and React.
@@ -823,4 +770,4 @@ to the one implemented with Next.js?
   if you did not already have that background.
 
 - The startup time for the Next.js server (almost 2 seconds) is
-  noticeably slower than that of the htmx server (instantaneous).
+  noticeably slower than that of the htmx server which is instantaneous.
