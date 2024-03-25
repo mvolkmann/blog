@@ -135,12 +135,18 @@ and we have the file `main.ml` containing the following:
 ```ocaml
 open My_module
 
-(* This is similar to the main function in other languages.
-   It is where most side effects should occur. *)
 let () =
   let sum = add 1 2 in
   print_int sum
 ```
+
+Ending a source file that is the starting point of a program
+with `let () =` followed by an expression is:
+
+- not required, but ...
+- ensures that the result of the expression will be the unit value
+- makes it clear that the purpose of the expression
+  is the side effects it produces
 
 It is recommended to create a Dune project,
 move these files in the project `bin` directory,
@@ -1619,7 +1625,7 @@ OCaml source files contain the following kinds of statements:
 - `open` statements
 - constants defined with `let` definitions
 - functions defined with `let` definitions
-- an optional "main" expression that typically begins with `let () =`
+- an optional "main" expression that begins with `let () =`
 
 Here's an example of a file named `math.ml`
 that defines a type, a constant, and some functions
