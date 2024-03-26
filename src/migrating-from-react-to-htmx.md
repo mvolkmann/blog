@@ -905,3 +905,12 @@ to the one implemented with Next.js?
   We could modify them to persist it to a database.
   But the code would be the same for both versions,
   so it would not be a differentiator.
+
+- Server-side flexibility
+
+  Next.js apps typically implement API endpoints using the framework
+  and writing the code in JavaScript or TypeScript.
+  It's also possible to implement the API endpoints using
+  any programming language and server library just like with htmx.
+  However, that doesn't remove the need for writing a lot of
+  client-side JavaScript code and incurring large JavaScript downloads.
