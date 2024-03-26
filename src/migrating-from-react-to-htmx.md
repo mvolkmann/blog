@@ -543,6 +543,7 @@ Follow these steps to create the app from scratch.
 1. Create the file `server.tsx` with the following contents:
 
    ```ts
+   //TODO: Add more comments in this code!
    import {type Context, Hono} from 'hono';
    import {serveStatic} from 'hono/bun';
 
@@ -585,7 +586,7 @@ Follow these steps to create the app from scratch.
              ✕
            </button>
            {/* This selects the dog which triggers a selection-change event,
-                    which causes the form to update. */}
+               which causes the form to update. */}
            <button
              class="show-on-hover"
              hx-get={'/select/' + dog.id}
@@ -772,12 +773,9 @@ Follow these steps to create the app from scratch.
 What conclusions can be drawn from comparing this version of the app
 to the one implemented with Next.js?
 
-- There is no custom client-side JavaScript code in the htmx version,
-  but there is a lot of it in the Next.js version.
-  Compare the Next.js file `src/app/page.tsx`
-  to the `htmx` file `public/index.html`.
+- Download size
 
-- The htmx library is far smaller than the client-side parts of Next.js.
+  The htmx library is far smaller than the client-side parts of Next.js.
 
   For the Next.js app, the Chrome DevTools Network tab shows:
 
@@ -790,7 +788,16 @@ to the one implemented with Next.js?
   shows `htmx.min.js` at 22.3 kB.
   That's a mere .3% of the total JavaScript size for the Next.js version!
 
-- The code we had to write for the htmx version
+- Client-side code
+
+  There is no custom client-side JavaScript code in the htmx version,
+  but there is a lot of it in the Next.js version.
+  Compare the Next.js file `src/app/page.tsx`
+  to the `htmx` file `public/index.html`.
+
+- Code Length
+
+  The code we had to write for the htmx version
   is shorter than that for the Next.js version.
 
   The htmx version consists of the files `public/index.html` (21)
@@ -803,15 +810,69 @@ to the one implemented with Next.js?
 
   So the Next.js version is 31% longer than the htmx version.
 
-- All the state is only maintained on the server in the htmx version.
-  In the Next.js version, `dogMap` is maintained on the server and the client.
+- Number of source files
 
-- The learning curve for htmx is smaller than for Next.js and React.
+  The Next.js version of the app uses
+  more source files than the htmx version.
+  This can be good for separating concerns,
+  but it can be bad when the separarations are somewhat arbitrary.
+
+  For example, the Next.js server code separates the endpoint implementations
+  based on whether they use a path parameter.
+  The GET and POST requests do not, whereas the PUT and DELETE requests do.
+  The htmx server code colocates these in the same source file,
+  which feels natural since they are related endpoints.
+  That said, depending on the server library you choose,
+  you can decide how to divide the functionality into source files.
+
+- State
+
+  All the state is only maintained on the server in the htmx version.
+  In the Next.js version, `dogMap` is maintained in both the server and client.
+
+- Reactivity
+
+  The React `useState` hook automatically triggers
+  updates to the parts of a page that use its state.
+  However, this only happens when the state value changes and
+  modifying key/value pairs in a `Map` is not recognized as a change.
+  This requires making a copy of a `Map` for each change that
+  must trigger a page update, which is inefficient.
+
+  In the htmx approach, the server returns new snippets of HTML
+  that are inserted into the page. For cases where there is
+  state that never needs to be shared with the server, libraries like
+  <a href="https://mvolkmann.github.io/blog/topics/#/blog/alpine/"
+  target="_blank">Alpine</a> and
+  <a href="https://mvolkmann.github.io/blog/topics/#/blog/hyperscript/"
+  target="_blank">\_hyperscript</a> can be used.
+  Both are small, client-side JavaScript libraries
+  that make it easy to add reactivity to web pages.
+
+- Learning curve
+
+  The learning curve for htmx is smaller than for Next.js and React.
 
   It's difficult to compare the required learning curves
   if you are already familiar with React.
   But try to imagine what the difference would be
   if you did not already have that background.
 
-- The startup time for the Next.js server (almost 2 seconds) is
+- Build process
+
+  The Next.js approach requires a build process.
+  The htmx approach may or may not, depending on the
+  selected server-side programming language.
+  Our choice of using Bun removes the need for a build process.
+
+- Startup time
+
+  The startup time for the Next.js server (almost 2 seconds) is
   noticeably slower than that of the htmx server which is instantaneous.
+
+- Persistence
+
+  The server for both versions of the app hold the dog data in memory.
+  We could modify them to persist it to a database.
+  But the code would be the same for both versions,
+  so it would not be a differentiator.
