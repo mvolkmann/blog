@@ -56,6 +56,9 @@ The `git rebase` command can be used to:
 - incorporate changes made in one branch into the current one
   so the changes appear to have been made on the current branch (scary)
 
+Rebasing is not recommended for feature branches
+that are being modified by multiple developers.
+
 Let's walk through the entire flow from creating a feature branch,
 to working on it over a period of time,
 to merging the changes back to the main branch.
@@ -82,21 +85,33 @@ merged other feature branches back to main.
   - `git checkout my-feat`
   - `git rebase -i main`
 
-  The `-i` flag for "interacive" causes git to open a text editor (like Vim)
-  where you can make changes to commits.
+  The `-i` flag for "interacive" causes git to open a text editor
+  where you can make changes to commits. It uses Vim by default.
+  To configure git to use a different editor, such as nano,
+  enter `git config --global core.editor "nano"`.
 
-  - To modify the comment on a commit, changing "pick" to "reword" (or "r")
-    and editing the comment.
-  - To squash (combine) a set of commits into a single commit,
-    pick the earlies one to retain and change "pick" to "squash" (or "s")
-    for any number of consecutive commits that follow it.
-  - To delete a commit as if it never happened,
-    change "pick" to "drop" (or just "d").
+  If there are an conflicts, resolve them,
+  enter `git add {file}` for each file that had conflicts,
+  and run `git rebase --continue`.
+  It may only report conflicts one file at a time,
+  requiring you to repeat this step multiple times.
+
+  To modify the comment on a commit, changing "pick" to "reword" (or "r")
+  and editing the comment.
+
+  To squash (combine) a set of commits into a single commit,
+  pick the earlies one to retain and change "pick" to "squash" (or "s")
+  for any number of consecutive commits that follow it.
+
+  To delete a commit as if it never happened,
+  change "pick" to "drop" (or just "d").
 
   Save the changes and quit the editor to start the rebase process.
 
   This updates my-feat by setting it to the current state of main and
   then replaying all the changes made on my-feat onto this copy of main.
+
+- Test the code on my-feat to verify that everything is still working correctly.
 
 - Merge the feature branch to main with the following:
 
