@@ -32,7 +32,8 @@ The most used of these new attributes include the following:
 - `hx-target` specifies where the resulting HTML should go.
 - `hx-swap` specifies exactly how the resulting HTML should be inserted.
 
-The following image describes commonly used values for the `hx-swap` attribute.
+The following diagram describes commonly used values
+for the `hx-swap` attribute.
 
 <img alt="hx-swap" style="width: 70%"
   src="/blog/assets/htmx-hx-swap.png?v={{pkg.version}}">
@@ -47,8 +48,10 @@ For detail on Next.js, see my
 <a href="https://mvolkmann.github.io/blog/topics/#/blog/next-js/"
 target="_blank">Next.js blog page</a>.
 
-Let's implement a web app using Next.js and then
-implement the same app using htmx to see how they differ.
+## Sample App
+
+Let's implement a web app using Next.js and then implement
+the same app using SvelteKit and htmx to see how they differ.
 
 The app manages a collection of dogs.
 Users can add new dogs.
@@ -426,9 +429,6 @@ Follow these steps to create the app from scratch.
                    >
                      ✕
                    </button>
-                   {/* This selects the dog
-                       which triggers a selection-change event,
-                       which causes the form to update. */}
                    <button
                      className="show-on-hover"
                      onClick={handleEdit}
@@ -466,7 +466,7 @@ Follow these steps to create the app from scratch.
 1. Delete a dog.
 
    Hover over one of the dog rows and click the "X" icon that appears.
-   Click the "OK" button in the confirmation dialog.
+   Click the "OK" button in the confirmation dialog to approve the delete.
 
 ## htmx Version
 
@@ -781,46 +781,71 @@ Follow these steps to create the app from scratch.
 
 1. Browse localhost:3000.
 
-1. Add a dog.
+1. Just like in the Next.js app, add a dog, edit a dog, and delete a dog.
 
-   Enter a name and breed in the form at the top.
-   Click the "Add" button to add a new dog.
+## SvelteKit Version
 
-1. Edit a dog.
+I also implemented the same app using SvelteKit.
 
-   Hover over one of the dog rows and click the pencil icon that appears.
-   Modify the name and/or breed in the form at the top.
-   Click the "Update" button to submit the changes.
+All the code for the SvelteKit version of this app
+can be found in the GitHub repository at
+<a href="https://github.com/mvolkmann/htmx-examples/tree/main/svelte-dogs-crud"
+target="_blank">svelte-dogs-crud</a>.
 
-1. Delete a dog.
-
-   Hover over one of the dog rows and click the "X" icon that appears.
-   Click the "OK" button in the confirmation dialog.
+I was only able to get the SvelteKit app to run with Node 18.19.1.
 
 ## Comparing the Versions
 
-What conclusions can be drawn from comparing this version of the app
-to the one implemented with Next.js?
+What conclusions can be drawn from comparing these versions of the app?
 
 - Download size
 
-  The htmx library is far smaller than the client-side parts of Next.js.
+  The htmx library is far smaller than the
+  client-side parts of Next.js and SvelteKit.
 
-  For the Next.js app, the Chrome DevTools Network tab shows:
+  For both Next.js and SvelteKit,
+  the sizes of the downloaded files differ considerably based on
+  whether they are built and run in development or production mode.
 
-  - `webpack.js` at 10.9 kB
-  - `main-app.js` at 1.6 MB
-  - `app-pages-internals.js` at 41.7 kB
-  - `page.js` at 46.2 kB
+  When the Next.js app is run in development mode,
+  the Chrome DevTools Network tab shows the following:
 
-  For the htmx app, the Chrome DevTools Network tab
-  shows `htmx.min.js` at 22.3 kB.
-  That's a mere .3% of the total JavaScript size for the Next.js version!
+  - `webpack.js` - 10.9 kB
+  - `main-app.js` - 1.6 MB
+  - `app-pages-internals.js` - 41.7 kB
+  - `page.js` - 46.2 kB
+
+  for a somewhat shocking total of 1.7 MB.
+
+  When the Next.js app is run in production mode,
+  the Chrome DevTools Network tab shows the following:
+
+  - `webpack-{hash}.js` - 2.0 kB
+  - `{some-hash-1}.js` - 53.9 kb
+  - `{some-hash-2}.js` - 29.5 kb
+  - `main-app-{hash}.js` - 809 B
+  - `page-{hash}.js` - 1.4 kB
+
+  for a more reasonable total of only 87 kB.
+
+  When the SvelteKit app is run in development mode,
+  the Chrome DevTools Network tab reports downloading a whopping 44 files
+  that have a total size of 576 kB.
+
+  When the SvelteKit app is run in production mode,
+  the Chrome DevTools Network tab reports downloading 16 files
+  that have a more reasonable total size of only 41 kB.
+
+  For htmx there is no distinction between development and production modes.
+  When the htmx app is run, the Chrome DevTools Network tab
+  reports only `htmx.min.js` at 22.3 kB.
+  That is about half the size of the SvelteKit app in production
+  and a quarter of the size of the Next.js app in production.
 
 - Client-side code
 
   There is no custom client-side JavaScript code in the htmx version,
-  but there is a lot of it in the Next.js version.
+  but there is a lot of it in the SvelteKit and Next.js versions.
   Compare the Next.js file `src/app/page.tsx`
   to the `htmx` file `public/index.html`.
 
@@ -829,24 +854,30 @@ to the one implemented with Next.js?
   The code we had to write for the htmx version
   is shorter than that for the Next.js version.
 
-  The htmx version consists of the files `public/index.html` (21)
-  and `src/server.tsx` (163) for a total of 184 lines.
-
   The Next.js version consists of the files `src/app/layout.tsx` (19),
   `src/app/page.tsx` (159), `src/api/dogs/dogs.ts` (41),
   `src/api/dogs/route.ts` (18), and `src/api/dogs/[id]/route.ts` (23)
-  for a totla of 241 lines.
+  for a total of 241 lines.
 
-  So the Next.js version is 31% longer than the htmx version.
+  The SvelteKit version consists of the file `src/route/+page.svelte` (148)
+  `src/route/dogs/dogs.ts` (41), `src/route/dogs/+server.ts` (19), and
+  `src/route/dogs/[id]+server.ts` (20)
+  for a total of 228 lines.
+
+  The htmx version consists of the files `public/index.html` (21)
+  and `src/server.tsx` (163) for a total of 184 lines.
+
+  So compared to the htmx version, the Next.js version is 48% longer
+  and the SvelteKit version is 40% longer.
 
 - Number of source files
 
-  The Next.js version of the app uses
+  The Next.js and SvelteKit versions of the app use
   more source files than the htmx version.
   This can be good for separating concerns,
   but it can be bad when the separarations are somewhat arbitrary.
 
-  For example, the Next.js server code separates the endpoint implementations
+  The Next.js and SvelteKit server code separates the endpoint implementations
   based on whether they use a path parameter.
   The GET and POST requests do not, whereas the PUT and DELETE requests do.
   The htmx server code colocates these in the same source file,
@@ -857,7 +888,8 @@ to the one implemented with Next.js?
 - State
 
   All the state is only maintained on the server in the htmx version.
-  In the Next.js version, `dogMap` is maintained in both the server and client.
+  In the Next.js and SvelteKit versions,
+  `dogMap` is maintained in both the server and client.
 
 - Reactivity
 
@@ -868,9 +900,12 @@ to the one implemented with Next.js?
   This requires making a copy of a `Map` for each change that
   must trigger a page update, which is inefficient.
 
+  Reactivity is SvelteKit does not require making copies of the `Map`.
+
   In the htmx approach, the server returns new snippets of HTML
-  that are inserted into the page. For cases where there is
-  state that never needs to be shared with the server, libraries like
+  that are inserted into the page, so it doesn't need reactivity.
+  For cases where there is state that never needs to be shared with the server,
+  libraries like
   <a href="https://mvolkmann.github.io/blog/topics/#/blog/alpine/"
   target="_blank">Alpine</a> and
   <a href="https://mvolkmann.github.io/blog/topics/#/blog/hyperscript/"
@@ -880,37 +915,40 @@ to the one implemented with Next.js?
 
 - Learning curve
 
-  The learning curve for htmx is smaller than for Next.js and React.
+  The learning curve for htmx is smaller than for Next.js/React and SvelteKit.
 
   It's difficult to compare the required learning curves
-  if you are already familiar with React.
+  if you are already familiar with React or Svelte.
   But try to imagine what the difference would be
   if you did not already have that background.
 
 - Build process
 
-  The Next.js approach requires a build process.
+  The Next.js and SvelteKit approaches requires a build process.
   The htmx approach may or may not, depending on the
   selected server-side programming language.
   Our choice of using Bun removes the need for a build process.
 
 - Startup time
 
-  The startup time for the Next.js server (almost 2 seconds) is
-  noticeably slower than that of the htmx server which is instantaneous.
+  The startup time for the Next.js server and the SvelteKit server is
+  noticeably slower than that of the Bun server we chose to use with htmx.
+  In development mode, the Next.js server takes almost 2 seconds to start
+  and the SvelteKit server takes around 1 second.
+  The Bun server startup is practically instantaneous.
 
 - Persistence
 
-  The server for both versions of the app hold the dog data in memory.
+  The server for all three versions of the app holds the dog data in memory.
   We could modify them to persist it to a database.
-  But the code would be the same for both versions,
-  so it would not be a differentiator.
+  But the code would be the same for each version,
+  so this would not be a differentiator.
 
 - Server-side flexibility
 
-  Next.js apps typically implement API endpoints using the framework
-  and writing the code in JavaScript or TypeScript.
+  Next.js and SvelteKit apps typically implement their API endpoints
+  using the framework and writing the code in TypeScript.
   It's also possible to implement the API endpoints using
   any programming language and server library just like with htmx.
   However, that doesn't remove the need for writing a lot of
-  client-side JavaScript code and incurring large JavaScript downloads.
+  client-side JavaScript code and incurring larger JavaScript downloads.
