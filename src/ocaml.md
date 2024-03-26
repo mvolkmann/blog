@@ -299,6 +299,9 @@ Examples include:
 - `float_of_string` - raises `Failure` if conversion fails
 - `float_of_string_opt` - returns `None` if conversion fails
 
+It is idiomatic in OCaml for the name of a function that
+transforms a value of type x to a value of type y to be `y_of_x`.
+
 ## Keywords
 
 OCaml reserves the use of the following identifiers:
