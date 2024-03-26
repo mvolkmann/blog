@@ -543,7 +543,6 @@ Follow these steps to create the app from scratch.
 1. Create the file `server.tsx` with the following contents:
 
    ```ts
-   //TODO: Add more comments in this code!
    import {type Context, Hono} from 'hono';
    import {serveStatic} from 'hono/bun';
 
@@ -565,16 +564,27 @@ Follow these steps to create the app from scratch.
 
    function dogRow(dog: Dog, updating = false) {
      const attrs: {[key: string]: string} = {};
+     // If we are updating an existing dog, we want to replace
+     // the table row that describes it with a new table row.
+     // Using an out-of-band swap achieves this.
      if (updating) attrs['hx-swap-oob'] = 'true';
+
+     // The "on-hover" CSS class causes the delete and edit buttons
+     // for this row to appear when the user hovers over the row.
      return (
-       <!-- The "on-hover" CSS class causes the delete and edit buttons
-            for this row to appear when the user hovers over the row. -->
        <tr class="on-hover" id={`row-${dog.id}`} {...attrs}>
          <td>{dog.name}</td>
          <td>{dog.breed}</td>
-         <!-- The hx-confirm attribute causes a confirmation dialog to appear
-              before a DELETE request is sent to the "/dog/{id}" endpoint. -->
          <td class="buttons">
+           {/* The `hx-confirm` attribute causes a confirmation dialog to appear
+               before a DELETE request is sent to the "/dog/{id}" endpoint.
+               The `hx-delete` attribute specifies the URL
+               where a DELETE request will be sent.
+               The `hx-target` attribute specifies that the target of the
+               request is the closest ancestor `tr` element to this button,
+               which represents the row that contains this button.
+               The `hx-swap` attribute specifies that the target element
+               should be deleted, which removes the table row. */}
            <button
              class="show-on-hover"
              hx-confirm="Are you sure?"
@@ -586,7 +596,11 @@ Follow these steps to create the app from scratch.
              ✕
            </button>
            {/* This selects the dog which triggers a selection-change event,
-               which causes the form to update. */}
+               which causes the form to update.
+               The `hx-get` attribute specifies the URL
+               where a GET request will be sent.
+               The `hx-swap` attribute specifies that
+               nothing on the page will be modified. */}
            <button
              class="show-on-hover"
              hx-get={'/select/' + dog.id}
@@ -615,6 +629,11 @@ Follow these steps to create the app from scratch.
    // Deselects the currently selected dog.
    app.get('/deselect', (c: Context) => {
      selectedId = '';
+     // Setting the "HX-Trigger" response header causes
+     // the specified event to be triggered in the browser.
+     // We listen for this event in `index.html` below
+     // and send a GET request to the `/form` endpoint
+     // to update the form at the top of the page.
      c.header('HX-Trigger', 'selection-change');
      return c.body(null);
    });
@@ -623,20 +642,27 @@ Follow these steps to create the app from scratch.
    app.get('/form', (c: Context) => {
      const selectedDog = dogMap.get(selectedId);
 
+     // This attribute causes the `form` to be reset (cleared)
+     // after any successful request triggered by the `form`.
      const attrs: {[key: string]: string} = {
        'hx-on:htmx:after-request': 'this.reset()'
      };
      if (selectedId) {
-       // Update an existing row.
+       // Update an existing row using a PUT request.
        attrs['hx-put'] = '/dog/' + selectedId;
      } else {
-       // Add a new row.
+       // Add a new row using a POST request.
+       // A new table row will be added after the beginning of the
+       // `tbody` element, making it the new, first child element.
        attrs['hx-post'] = '/dog';
        attrs['hx-target'] = 'tbody';
        attrs['hx-swap'] = 'afterbegin';
      }
 
      return c.html(
+       // The `hx-disabled-elt` element lists the elements that
+       // should be disabled while a request is being processed.
+       // Submitting the form triggers a request.
        <form hx-disabled-elt="#submit-btn" {...attrs}>
          <div>
            <label for="name">Name</label>
@@ -675,6 +701,8 @@ Follow these steps to create the app from scratch.
    // Selects a dog.
    app.get('/select/:id', (c: Context) => {
      selectedId = c.req.param('id');
+     // As described above, setting the "HX-Trigger" response header
+     // causes the specified event to be triggered in the browser.
      c.header('HX-Trigger', 'selection-change');
      return c.body(null);
    });
@@ -686,7 +714,7 @@ Follow these steps to create the app from scratch.
      return c.html(<>{dogs.map(dog => dogRow(dog))}</>);
    });
 
-   // Creates a dog.
+   // Creates a dog and returns a table row describing it.
    app.post('/dog', async (c: Context) => {
      const formData = await c.req.formData();
      const name = (formData.get('name') as string) || '';
@@ -695,7 +723,8 @@ Follow these steps to create the app from scratch.
      return c.html(dogRow(dog), 201);
    });
 
-   // Updates a dog
+   // Updates a dog and returns a new table row describing it.
+   // The new row will replace the existing row for this dog.
    app.put('/dog/:id', async (c: Context) => {
      const id = c.req.param('id');
      const formData = await c.req.formData();
