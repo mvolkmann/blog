@@ -558,16 +558,6 @@ let () =
   | Some max -> print_int max
 ```
 
-The `function` keyword is useful in functions
-that immediate `match` on the last parameter.
-It simplfies the code by removing the need to list the last parameter
-and replacing `match {last-parameter} with` with just `function`.
-For example, the first two lines of the `max_element` function above
-can be replaced by `let rec max_element = function`.
-The type of `max_element` can be specified as `'a list -> 'a option`
-which states that it takes a list of `a'` elements
-and returns an `option` of type `'a`.
-
 ## References
 
 While variables are immutable, they can be bound to a reference that is mutable.
@@ -658,7 +648,8 @@ Lists are also product types because they hold
 a head and a tail which have different types.
 
 Each variant name is called a "constructor".
-Each construtor can have an associated value of a specified type.
+Each construtor can have an associated value
+of a type that is specified after the `of` keyword.
 The value types of the variants can differ.
 
 The following code provides some examples:
@@ -697,6 +688,7 @@ type result = Ok of float | Error of string
 
 let divide x y = if y = 0.0 then Error "Division by zero" else Ok (x /. y)
 
+(* This can be used similarly to TypeScript type unions. *)
 type my_union = BoolVal of bool | IntVal of int | StringVal of string
 
 let get_string = function
@@ -843,6 +835,18 @@ let () =
   | n when 4 <= n && n <= 7 -> print_string "medium"
   | _ -> print_string "large"
 ```
+
+The `function` keyword is useful in functions
+that immediately `match` on the last parameter.
+It simplfies the code by removing the need to list the last parameter
+and replacing `match {last-parameter} with` with just `function`.
+For example, the first two lines of the `max_element` function above
+can be replaced by `let rec max_element = function`.
+The type of `max_element` can be specified as `'a list -> 'a option`
+which states that it takes a list of `a'` elements
+and returns an `option` of type `'a`.
+
+TODO: Show examples of not using and using the `function` keyword.
 
 ## Iteration
 
@@ -1551,6 +1555,10 @@ let rec factorial n =
   else if n = 0 then 1
   else n * factorial (n - 1);;
 ```
+
+The `failwith` keyword is sometimes used in place of
+code that is not ready to be written.
+For example, `failwith "TODO"`.
 
 Function parameters can use destructuring to extract elements from tuples.
 This can also be done for lists and arrays, but those
