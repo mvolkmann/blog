@@ -512,7 +512,7 @@ Follow these steps to create the app from scratch.
 1. Install Bun.
 
    Bun does not currently support Windows outside of WSL,
-   but will release a new version that supports windows very soon.
+   but there will be a new version that supports windows very soon.
 
    Enter `curl -fsSL https://bun.sh/install | bash`
 
@@ -520,7 +520,7 @@ Follow these steps to create the app from scratch.
 
    - Create a directory to hold the new project.
    - `cd` to the new directory.
-   - Enter `bun init` accept all the defaults for the prompts.
+   - Enter `bun init` and accept all the defaults for the prompts.
 
 1. `npm install hono`
 
@@ -566,9 +566,13 @@ Follow these steps to create the app from scratch.
      const attrs: {[key: string]: string} = {};
      if (updating) attrs['hx-swap-oob'] = 'true';
      return (
+       <!-- The "on-hover" CSS class causes the delete and edit buttons
+            for this row to appear when the user hovers over the row. -->
        <tr class="on-hover" id={`row-${dog.id}`} {...attrs}>
          <td>{dog.name}</td>
          <td>{dog.breed}</td>
+         <!-- The hx-confirm attribute causes a confirmation dialog to appear
+              before a DELETE request is sent to the "/dog/{id}" endpoint. -->
          <td class="buttons">
            <button
              class="show-on-hover"
@@ -708,7 +712,7 @@ Follow these steps to create the app from scratch.
    ```
 
 1. Create the file `public/styles.css` containing the same CSS rules
-   as found in the Next.js `src/app/global.css` file.
+   we saw in the Next.js `src/app/global.css` file.
 
 1. Create the file `public/index.html` containing the following:
 
@@ -721,7 +725,15 @@ Follow these steps to create the app from scratch.
      </head>
      <body>
        <h1>Dogs</h1>
+       <!-- This causes an HTML form to be inserted in this div
+            when the page is initially loaded, and again
+            every time a "selection-change" event is dispatched
+            and bubbles up to the body element.  -->
        <div hx-trigger="load, selection-change from:body" hx-get="/form"></div>
+       <!-- This causes table rows (tr elements) to be inserted in
+            the tbody element when the page is initially loaded.
+            Subsequent changes to the table rows are
+            handled by elements returned by the the server. -->
        <table hx-get="/table-rows" hx-target="tbody" hx-trigger="load">
          <thead>
            <tr>
@@ -777,6 +789,19 @@ to the one implemented with Next.js?
   For the htmx app, the Chrome DevTools Network tab
   shows `htmx.min.js` at 22.3 kB.
   That's a mere .3% of the total JavaScript size for the Next.js version!
+
+- The code we had to write for the htmx version
+  is shorter than that for the Next.js version.
+
+  The htmx version consists of the files `public/index.html` (21)
+  and `src/server.tsx` (163) for a total of 184 lines.
+
+  The Next.js version consists of the files `src/app/layout.tsx` (19),
+  `src/app/page.tsx` (159), `src/api/dogs/dogs.ts` (41),
+  `src/api/dogs/route.ts` (18), and `src/api/dogs/[id]/route.ts` (23)
+  for a totla of 241 lines.
+
+  So the Next.js version is 31% longer than the htmx version.
 
 - All the state is only maintained on the server in the htmx version.
   In the Next.js version, `dogMap` is maintained on the server and the client.
