@@ -845,30 +845,31 @@ What conclusions can be drawn from comparing these versions of the app?
 - Client-side code
 
   There is no custom client-side JavaScript code in the htmx version,
-  but there is a lot of it in the SvelteKit and Next.js versions.
-  Compare the Next.js file `src/app/page.tsx`
+  but there is a lot of it in the Next.js and SvelteKit versions.
+  Compare the Next.js file `src/app/page.tsx` and
+  the SvelteKit file `src/route/+page.svelte`
   to the `htmx` file `public/index.html`.
 
 - Code Length
 
-  The code we had to write for the htmx version
-  is shorter than that for the Next.js version.
+  The code we had to write for the htmx app
+  is shorter than that for the Next.js and SvelteKit apps.
 
-  The Next.js version consists of the files `src/app/layout.tsx` (19),
+  The Next.js app consists of the files `src/app/layout.tsx` (19),
   `src/app/page.tsx` (159), `src/api/dogs/dogs.ts` (41),
   `src/api/dogs/route.ts` (18), and `src/api/dogs/[id]/route.ts` (23)
   for a total of 241 lines.
 
-  The SvelteKit version consists of the file `src/route/+page.svelte` (148)
+  The SvelteKit app consists of the file `src/route/+page.svelte` (148)
   `src/route/dogs/dogs.ts` (41), `src/route/dogs/+server.ts` (19), and
   `src/route/dogs/[id]+server.ts` (20)
   for a total of 228 lines.
 
-  The htmx version consists of the files `public/index.html` (21)
+  The htmx app consists of the files `public/index.html` (21)
   and `src/server.tsx` (163) for a total of 184 lines.
 
-  So compared to the htmx version, the Next.js version is 48% longer
-  and the SvelteKit version is 40% longer.
+  So compared to the htmx app, code for the Next.js app is 48% longer
+  and code for the SvelteKit app is 40% longer.
 
 - Number of source files
 
@@ -887,8 +888,9 @@ What conclusions can be drawn from comparing these versions of the app?
 
 - State
 
-  All the state is only maintained on the server in the htmx version.
-  In the Next.js and SvelteKit versions,
+  All the state is only maintained on the server in the htmx app.
+  This greatly simplifies state management.
+  In the Next.js and SvelteKit apps,
   `dogMap` is maintained in both the server and client.
 
 - Reactivity
@@ -904,7 +906,7 @@ What conclusions can be drawn from comparing these versions of the app?
 
   In the htmx approach, the server returns new snippets of HTML
   that are inserted into the page, so it doesn't need reactivity.
-  For cases where there is state that never needs to be shared with the server,
+  For apps where there is state that never needs to be shared with the server,
   libraries like
   <a href="https://mvolkmann.github.io/blog/topics/#/blog/alpine/"
   target="_blank">Alpine</a> and
@@ -952,3 +954,15 @@ What conclusions can be drawn from comparing these versions of the app?
   any programming language and server library just like with htmx.
   However, that doesn't remove the need for writing a lot of
   client-side JavaScript code and incurring larger JavaScript downloads.
+
+## Conclusion
+
+Htmx has a number of benefits over single page app (SPA) frameworks
+like React, Svelte, Vue, and Angular.
+In my opinion, the largest benefits are simplicity and
+a return to focusing on the web fundamentals of HTML and CSS.
+I feel more productive when using htmx.
+
+I encourage you to give htmx a try in the next web app you create
+and judge for yourself whether it simplifies development
+and makes you more productive.
