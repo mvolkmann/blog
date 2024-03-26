@@ -634,11 +634,11 @@ which are described in the next section.
 Variant types have many uses including enumerated values, error handling,
 and for representing data structures whose shape can vary.
 
-"Sum types" describe alternatives.
+"Sum types" (aka "one-of types") describe alternatives.
 Primitive types like `int` and variant types describe below
 are examples of sum types.
 
-"Product types" are types that can hold
+"Product types" (aka "each-of types") are types that can hold
 multiple pieces of data with differing types.
 Tuples and records are examples of product types.
 
@@ -647,10 +647,15 @@ or a head and tail (where the tail can be an empty list).
 Lists are also product types because they hold
 a head and a tail which have different types.
 
-Each variant name is called a "constructor".
+Each variant name is called a "constructor" (aka "tag")
+and must begin with an uppercase letter.
 Each construtor can have an associated value
 of a type that is specified after the `of` keyword.
 The value types of the variants can differ.
+
+Constructor expressions that do not use a value
+are referred to as "constant variant expressions".
+Those that do use a value are referred to as "non-constant variant expressions".
 
 The following code provides some examples:
 
