@@ -9,6 +9,15 @@ layout: topic-layout.njk
 This page documents tips on using Git for version control.
 At the moment it is very incomplete.
 
+## Viewing Commits
+
+To see all the commits that have been made on the current branch:
+
+- `git log` to output the full commit hash, author,
+  timestamp, and comment for each commit
+- `git log --oneline` to see only the first 8 characters of the hash
+  and the comment for each commit
+
 ## Ignoring files
 
 Each repository can have a `.gitignore` file that lists the
@@ -73,8 +82,18 @@ merged other feature branches back to main.
   - `git checkout my-feat`
   - `git rebase -i main`
 
-  The `-i` flag makes it interactive which allows you
-  to squash (combine) commits into a single commit.
+  The `-i` flag for "interacive" causes git to open a text editor (like Vim)
+  where you can make changes to commits.
+
+  - To modify the comment on a commit, changing "pick" to "reword" (or "r")
+    and editing the comment.
+  - To squash (combine) a set of commits into a single commit,
+    pick the earlies one to retain and change "pick" to "squash" (or "s")
+    for any number of consecutive commits that follow it.
+  - To delete a commit as if it never happened,
+    change "pick" to "drop" (or just "d").
+
+  Save the changes and quit the editor to start the rebase process.
 
   This updates my-feat by setting it to the current state of main and
   then replaying all the changes made on my-feat onto this copy of main.
