@@ -650,6 +650,8 @@ Follow these steps to create the app from scratch.
      };
      if (selectedId) {
        // Update an existing row using a PUT request.
+       // A new table row will replace the current one
+       // using an out-of-band swap.
        attrs['hx-put'] = '/dog/' + selectedId;
      } else {
        // Add a new row using a POST request.
