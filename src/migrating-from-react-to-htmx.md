@@ -44,7 +44,7 @@ target="_blank">htmx blog page</a>.
 
 There are many frameworks that leverage React.
 Next.js is one of the most popular.
-For detail on Next.js, see my
+For details on Next.js, see my
 <a href="https://mvolkmann.github.io/blog/topics/#/blog/next-js/"
 target="_blank">Next.js blog page</a>.
 
@@ -622,7 +622,8 @@ Follow these steps to create the app from scratch.
    // Deletes the dog with a given id.
    app.delete('/dog/:id', (c: Context) => {
      const id = c.req.param('id');
-     dogMap.delete(id);
+     const existed = dogMap.delete(id);
+     if (!existed) c.status(404);
      return c.body(null);
    });
 
