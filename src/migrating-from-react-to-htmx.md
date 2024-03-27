@@ -774,7 +774,7 @@ Follow these steps to create the app from scratch.
             the tbody element when the page is initially loaded.
             Subsequent changes to the table rows are
             handled by elements returned by the the server. -->
-       <table hx-get="/table-rows" hx-target="tbody" hx-trigger="load">
+       <table hx-trigger="load" hx-get="/table-rows" hx-target="tbody">
          <thead>
            <tr>
              <th>Name</th>
