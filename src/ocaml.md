@@ -845,7 +845,8 @@ An `if` expression can be used where other languages use a ternary operator.
 
 A `match` expression performs pattern matching.
 It takes an expression whose value is to be matched
-and a set of patterns.
+and a set of branches that contain a pattern and
+code to execute when the pattern is matched.
 
 The patterns must be exhaustive, meaning that
 there must be a pattern that matches every possible value.
@@ -1102,29 +1103,18 @@ The standard library provides many functions that operate on lists.
 See <a href="https://v2.ocaml.org/api/List.html" target="_blank">Module List</a>.
 Some highlights include the following:
 
-The `List.exists` function determines if a list contains
-at least one element that matches a given predicate function.
-
-The `List.filter` function creates a new list from the elements
-in an existing list that satisfy a predicate function.
-
-The `List.fold_left` function reduces a list to a single value
-using an accumulator function.
-
-The `List.iter` function iterates over a list
-in a way that is useful when the function passed to it
-has a side effect and a result list is not needed.
-
-The `List.length` function returns the length of a given list.
-
-The `List.map` function creates a new list containing elements that are
-computed by passing each element in an existing list to a given function.
-
-The `List.map2` function is similar to `List.map`, but it operates on two lists,
-passing corresponding elements from each to a given function.
-
-The `List.nth` function takes a list and an index.
-It returns the list element at the index.
+| Function         | Description                                                                                                                   |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `List.exists`    | determines if a list contains at least one element that matches a given predicate function                                    |
+| `List.filter`    | creates a new list from the elements in an existing list that satisfy a predicate function                                    |
+| `List.fold_left` | reduces a list to a single value using an accumulator function                                                                |
+| `List.hd`        | returns the head of a list                                                                                                    |
+| `List.iter`      | iterates over a list in a way that is useful when the function passed to it has a side effect and a result list is not needed |
+| `List.length`    | returns the length of a given list                                                                                            |
+| `List.map`       | creates a new list containing elements that are computed by passing each element in an existing list to a given function      |
+| `List.map2`      | similar to `List.map`, but it operates on two lists, passing corresponding elements from each to a given function             |
+| `List.nth`       | takes a list and an index; returns the list element at the index                                                              |
+| `List.tl`        | returns the head of a list                                                                                                    |
 
 Since tuple elements are separated by commas and list elements are
 separated by semicolons, a list of tuples can be written as follows:
@@ -1182,34 +1172,18 @@ many functions that operate on arrays.
 See <a href="https://v2.ocaml.org/api/Array.html" target="_blank">Module Array</a>.
 Some highlights include the following:
 
-The `Array.append` function creates a new array by concatenating two arrays.
-
-The `Array.concat` function creates a new array
-by concatenating all the arrays in a list.
-
-The `Array.exists` function determines if an array contains
-at least one element that matches a given predicate function.
-
-The `Array.iter` function takes a function and an array.
-It iterates over the array, passing each element the function.
-It doesn't return a value, so this is used for side effects.
-
-The `Array.length` function returns the length of a given array.
-
-The `Array.fold_left` function reduces an array to a single value
-using an accumulator function.
-
-The `Array.sub` function creates a new array
-that is a subset of an existing array.
-
-The `Array.to_list` function creates a new list
-that contains the same elements as a given array.
-
-The `Array.of_list` function creates a new array
-that contains the same elements as a given list.
-
-The `Array.map` function creates a new array containing elements that are
-computed by passing each element in an existing array to a given function.
+| Function          | Description                                                                                                                                         |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Array.append`    | creates a new array by concatenating two arrays                                                                                                     |
+| `Array.concat`    | creates a new array by concatenating all the arrays in a list                                                                                       |
+| `Array.exists`    | determines if an array contains at least one element that matches a given predicate function                                                        |
+| `Array.iter`      | takes a function and an array; iterates over the array, passing each element the function; doesn't return a value, so this is used for side effects |
+| `Array.length`    | returns the length of a given array                                                                                                                 |
+| `Array.fold_left` | reduces an array to a single value using an accumulator function                                                                                    |
+| `Array.sub`       | creates a new array that is a subset of an existing array                                                                                           |
+| `Array.to_list`   | creates a new list that contains the same elements as a given array                                                                                 |
+| `Array.of_list`   | creates a new array that contains the same elements as a given list                                                                                 |
+| `Array.map`       | creates a new array containing elements that are computed by passing each element in an existing array to a given function                          |
 
 ### Records
 
