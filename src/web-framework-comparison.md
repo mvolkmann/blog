@@ -967,92 +967,28 @@ What conclusions can be drawn from comparing these versions of the app?
 
 ## Lighthouse Scores
 
-  <table>
-    <thead>
-      <tr>
-        <td></td>
-        <td>Next.js dev</td>
-        <td>Next.js prod</td>
-        <td>SvelteKit dev</td>
-        <td>SvelteKit prod</td>
-        <td>htmx</td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Performance</td>
-        <td>56</td>
-        <td>99</td>
-        <td>75</td>
-        <td>98</td>
-        <td>99</td>
-      </tr>
-      <tr>
-        <td>Accessibility</td>
-        <td>100</td>
-        <td>100</td>
-        <td>100</td>
-        <td>100</td>
-        <td>100</td>
-      </tr>
-      <tr>
-        <td>Best Practices</td>
-        <td>100</td>
-        <td>100</td>
-        <td>100</td>
-        <td>100</td>
-        <td>100</td>
-      </tr>
-      <tr>
-        <td>SEO</td>
-        <td>100</td>
-        <td>100</td>
-        <td>100</td>
-        <td>100</td>
-        <td>100</td>
-      </tr>
-      <tr>
-        <td>First Contentful Paint</td>
-        <td>0.9 s</td>
-        <td>1.0 s</td>
-        <td>1.1 s</td>
-        <td>1.8 s</td>
-        <td>1.6 s</td>
-      </tr>
-      <tr>
-        <td>Largest Contentful Paint</td>
-        <td>9.8 s</td>
-        <td>2.1 s</td>
-        <td>9.9 s</td>
-        <td>2.1 s</td>
-        <td>1.7 s</td>
-      </tr>
-      <tr>
-        <td>Total Blocking Time</td>
-        <td>780 ms</td>
-        <td>0 ms</td>
-        <td>0 ms</td>
-        <td>0 ms</td>
-        <td>0 ms</td>
-      </tr>
-      <tr>
-        <td>Cummulative Layout Shift</td>
-        <td>0.002</td>
-        <td>0.002</td>
-        <td>0.002</td>
-        <td>0.002</td>
-        <td>0.002</td>
-      </tr>
-      <tr>
-        <td>Speed Index</td>
-        <td>0.9s</td>
-        <td>1.1s</td>
-        <td>1.1s</td>
-        <td>1.8s</td>
-        <td>1.6s</td>
-      </tr>
-    </tbody>
-  </table>
+The following table shows Chrome Lighthouse scores
+for all three versions of the app running locally.
+For Next.js and SvelteKit, separate scores are shown
+for running in development mode versus production.
+
+|                          | Next.js dev | Next.js prod | SvelteKit dev | SvelteKit prod |  htmx |
+| ------------------------ | ----------: | -----------: | ------------: | -------------: | ----: |
+| Performance              |          56 |           99 |            75 |             98 |    99 |
+| Accessibility            |         100 |          100 |           100 |            100 |   100 |
+| Best Practices           |         100 |          100 |           100 |            100 |   100 |
+| SEO                      |         100 |          100 |           100 |            100 |   100 |
+| First Contentful Paint   |       0.9 s |        1.0 s |         1.1 s |          1.8 s | 1.6 s |
+| Largest Contentful Paint |       9.8 s |        2.1 s |         9.9 s |          2.1 s | 1.7 s |
+| Total Blocking Time      |      780 ms |         0 ms |          0 ms |           0 ms |  0 ms |
+| Cummulative Layout Shift |       0.002 |        0.002 |         0.002 |          0.002 | 0.002 |
+| Speed Index              |        0.9s |         1.1s |          1.1s |           1.8s |  1.6s |
+
+These scores show that both Next.js and SvelteKit have dubious scores
+for "Largest Contentful Paint" when running in development mode.
+Perhaps that doesn't really matter.
+
+When running in production mode, all of them have reasonably good scores.
 
 ## Conclusion
 
