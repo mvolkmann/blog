@@ -27,6 +27,8 @@ without requiring explicit type annotations in many cases.
 The Caml programming language is the predecessor of OCaml.
 The name is short for "Categorical Abstract Machine Language".
 OCaml is short for "Objective Caml".
+It adds support for object-oriented programming
+and a more expressive type system.
 
 OCaml is a member of the
 <a href="https://en.wikipedia.org/wiki/ML_(programming_language)"
@@ -59,6 +61,8 @@ largest users and supporters of OCaml.
   book used in Cornell CS 3110 course
 - <a href="https://dev.realworldocaml.org" target="_blank">Real World OCaml</a> book
 - <a href="https://ocaml-book.com" target="_blank">OCaml from the Very Beginning</a> book
+- <a href="https://caml.inria.fr/pub/old_caml_site/humps/" target="_blank">The Caml Humps</a>
+  collection of links to Caml-related tools, libraries, code samples, and tips
 
 ## OCaml Variants
 
@@ -1844,6 +1848,135 @@ try
   output_string channel "line 3\n";
   close_out channel
 with ex -> close_out channel
+```
+
+## Object-oriented Features
+
+Classes offer an alternative to records.
+Both can define fields, but classes add the ability to define methods.
+
+The following code demonstrates defining and using a class.
+
+A class definition serves as its single constructor,
+but additional named constructors (like `origin` below) can be defined.
+
+```ocaml
+open Printf
+
+class point (x_init : float) (y_init : float) =
+  (* Can omit "(self)" if there are no references to it. *)
+  object (self)
+    (* Instance variables are immutable by default,
+       but can be made mutable. *)
+    val mutable x = x_init
+    val mutable y = y_init
+
+    (* Getter methods can have the same name as the field they return. *)
+    method x = x
+    method y = y
+    method set_x new_x = x <- new_x
+    method set_y new_y = y <- new_y
+
+    (* This is a named constructor. *)
+    method origin = new point 0.0 0.0
+    method print = printf "(%f, %f)\n" x y
+
+    method translate dx dy =
+      x <- x +. dx;
+      y <- y +. dy
+  end
+
+let () =
+  (* Use the new keyword to create an instance of the class. *)
+  let p = new point 0.0 0.0 in
+
+  (* Methods are called with # instead of dot. *)
+  p#set_x 1.0;
+  p#set_y 2.0;
+  p#translate 3.0 4.0;
+  printf "(%f, %f)\n" p#x p#y;
+  (* There is no need to pass the unit value `()`
+     to call methods that have no parameters. *)
+  p#print;
+  (* The Oo.copy function makes a shallow copy of an object. *)
+  let p2 = Oo.copy p in
+  p2#set_x 5.0;
+  p2#print;
+  (* Each object is assigned a unique id
+     that can be accessed with Oo.id function. *)
+  printf "p id = %d\n" (Oo.id p);
+  printf "p2 id = %d\n" (Oo.id p2)
+```
+
+Abstract classes are defined with "class virtual".
+Methods can be defined with "method virtual"
+to require subclasses to implement them.
+
+To inherit from an abstract class, add "inherit {class_name} {args}"
+inside "object (self)" to call its constructor.
+
+Arguments passed to a constructor do not require a matching field
+and can be used in methods.
+
+To enable calling superclass methods,
+add "inherit {class_name} {args} as super"
+and then use "super#{method_name}" to call them.
+
+To coerce a subclass value to a superclass type, `obj :> {superclass}`.
+
+The following code demonstrated defining an abstract class
+and classes that inherit from it.
+
+```ocaml
+open Printf
+
+class point (x_init : float) (y_init : float) =
+  object (self)
+    val mutable x = x_init
+    val mutable y = y_init
+    method get_x = x
+    method get_y = y
+    method set_x new_x = x <- new_x
+    method set_y new_y = y <- new_y
+    method origin = new point 0.0 0.0
+    method print = printf "(%f, %f)\n" x y
+
+    method translate dx dy =
+      x <- x +. dx;
+      y <- y +. dy
+  end
+
+class virtual shape (name_init : string) =
+  object
+    val name = name_init
+    method name = name
+    method virtual area : float
+  end
+
+class circle (center_init : point) (radius_init : float) =
+  object
+    inherit shape "circle"
+    val center = center_init
+    val radius = radius_init
+    method area = 3.14159 *. radius *. radius
+  end
+
+class rectangle (lower_left_init : point) (width_init : float)
+  (height_init : float) =
+  object
+    inherit shape "rectangle"
+    val lower_left = lower_left_init
+    val width = width_init
+    val height = height_init
+    method area = width *. height
+  end
+
+let () =
+  let p = new point 0.0 0.0 in
+  let c = new circle p 5.0 in
+  printf "%s area = %f\n" c#name c#area;
+  let r = new rectangle p 10.0 5.0 in
+  printf "%s area = %f\n" r#name r#area
 ```
 
 ## Dune
