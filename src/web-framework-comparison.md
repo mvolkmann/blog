@@ -1,6 +1,6 @@
 ---
 eleventyNavigation:
-  key: Migrating From React to htmx
+  key: Web Framework Comparison
 layout: topic-layout.njk
 ---
 
@@ -964,6 +964,95 @@ What conclusions can be drawn from comparing these versions of the app?
   any programming language and server library just like with htmx.
   However, that doesn't remove the need for writing a lot of
   client-side JavaScript code and incurring larger JavaScript downloads.
+
+## Lighthouse Scores
+
+  <table>
+    <thead>
+      <tr>
+        <td></td>
+        <td>Next.js dev</td>
+        <td>Next.js prod</td>
+        <td>SvelteKit dev</td>
+        <td>SvelteKit prod</td>
+        <td>htmx</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Performance</td>
+        <td>56</td>
+        <td>99</td>
+        <td>75</td>
+        <td>98</td>
+        <td>99</td>
+      </tr>
+      <tr>
+        <td>Accessibility</td>
+        <td>100</td>
+        <td>100</td>
+        <td>100</td>
+        <td>100</td>
+        <td>100</td>
+      </tr>
+      <tr>
+        <td>Best Practices</td>
+        <td>100</td>
+        <td>100</td>
+        <td>100</td>
+        <td>100</td>
+        <td>100</td>
+      </tr>
+      <tr>
+        <td>SEO</td>
+        <td>100</td>
+        <td>100</td>
+        <td>100</td>
+        <td>100</td>
+        <td>100</td>
+      </tr>
+      <tr>
+        <td>First Contentful Paint</td>
+        <td>0.9 s</td>
+        <td>1.0 s</td>
+        <td>1.1 s</td>
+        <td>1.8 s</td>
+        <td>1.6 s</td>
+      </tr>
+      <tr>
+        <td>Largest Contentful Paint</td>
+        <td>9.8 s</td>
+        <td>2.1 s</td>
+        <td>9.9 s</td>
+        <td>2.1 s</td>
+        <td>1.7 s</td>
+      </tr>
+      <tr>
+        <td>Total Blocking Time</td>
+        <td>780 ms</td>
+        <td>0 ms</td>
+        <td>0 ms</td>
+        <td>0 ms</td>
+        <td>0 ms</td>
+      </tr>
+      <tr>
+        <td>Cummulative Layout Shift</td>
+        <td>0.002</td>
+        <td>0.002</td>
+        <td>0.002</td>
+        <td>0.002</td>
+        <td>0.002</td>
+      </tr>
+      <tr>
+        <td>Speed Index</td>
+        <td>0.9s</td>
+        <td>1.1s</td>
+        <td>1.1s</td>
+        <td>1.8s</td>
+        <td>1.6s</td>
+      </tr>
+    </tbody>
+  </table>
 
 ## Conclusion
 
