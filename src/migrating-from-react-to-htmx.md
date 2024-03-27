@@ -865,7 +865,7 @@ What conclusions can be drawn from comparing these versions of the app?
 
   The SvelteKit app consists of the file `src/route/+page.svelte` (148)
   `src/route/dogs/dogs.ts` (41), `src/route/dogs/+server.ts` (19), and
-  `src/route/dogs/[id]+server.ts` (20)
+  `src/route/dogs/[id]/+server.ts` (20)
   for a total of 228 lines.
 
   The htmx app consists of the files `public/index.html` (21)
@@ -945,14 +945,14 @@ What conclusions can be drawn from comparing these versions of the app?
 - Persistence
 
   The server for all three versions of the app holds the dog data in memory.
-  We could modify them to persist it to a database.
+  We could modify them to persist the data in a database.
   But the code would be the same for each version,
   so this would not be a differentiator.
 
 - Server-side flexibility
 
   Next.js and SvelteKit apps typically implement their API endpoints
-  using the framework and writing the code in TypeScript.
+  using the framework and write the code in TypeScript.
   It's also possible to implement the API endpoints using
   any programming language and server library just like with htmx.
   However, that doesn't remove the need for writing a lot of
@@ -967,5 +967,5 @@ a return to focusing on the web fundamentals of HTML and CSS.
 I feel more productive when using htmx.
 
 I encourage you to give htmx a try in the next web app you create
-and judge for yourself whether it simplifies development
+and judge for yourself whether it simplifies web development
 and makes you more productive.
