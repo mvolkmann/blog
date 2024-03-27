@@ -16,6 +16,10 @@ it is parsed into a JavaScript object.
 Then the web framework uses that data to update the DOM,
 resulting in page updates without a full page refresh.
 
+The SPA frameworks have some support for server-side rendering
+which moves the generation of HTML from the browser to the server,
+but the code required to generate the HTML is still the same.
+
 htmx is a relatively new JavaScript library
 that takes a very different approach.
 It still sends HTTP requests to a server,
@@ -750,9 +754,12 @@ Follow these steps to create the app from scratch.
 1. Create the file `public/index.html` containing the following:
 
    ```html
+   <!DOCTYPE html>
    <html>
      <head>
        <title>htmx CRUD</title>
+       <meta name="description" content="Dogs CRUD" />
+       <meta name="viewport" content="width=device-width" />
        <link rel="stylesheet" href="styles.css" />
        <script src="https://unpkg.com/htmx.org@1.9.10"></script>
      </head>
