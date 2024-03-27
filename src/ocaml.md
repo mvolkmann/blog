@@ -730,6 +730,38 @@ let () =
   print_endline (get_string b)
 ```
 
+The following code uses a variant type to describe shapes.
+
+```ocaml
+type point = float * float
+
+type shape =
+  | Circle of { center : point; radius : float }
+  | Rectangle of { lower_left : point; width : float; height : float }
+
+let area = function
+  | Circle { radius = r } -> Float.pi *. r *. r
+  | Rectangle { width = w; height = h } -> w *. h
+
+let center shape =
+  match shape with
+  | Circle { center = c } -> c
+  | Rectangle { lower_left = x, y; width = w; height = h } ->
+      (x +. (w /. 2.0), y +. (h /. 2.0))
+
+let () =
+  let c = Circle { center = (0.0, 0.0); radius = 10.0 } in
+  let r =
+    Rectangle { lower_left = (0.0, 0.0); width = 10.0; height = 5.0 }
+  in
+  printf "c area = %f\n" (area c); (* 314.159265 *)
+  printf "r area = %f\n" (area r); (* 50.0 *)
+  let x, y = center c in
+  printf "c center = (%f, %f)\n" x y; (* (0.0, 0.0) *)
+  let x, y = center r in
+  printf "r center = (%f, %f)\n" x y; (* (5.0, 2.5) *)
+```
+
 ### Option Variant Type
 
 The <a href="https://v2.ocaml.org/api/Option.html" target="_blank">Option</a>
