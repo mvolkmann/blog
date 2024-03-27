@@ -1855,16 +1855,24 @@ with ex -> close_out channel
 Classes offer an alternative to records.
 Both can define fields, but classes add the ability to define methods.
 
-The following code demonstrates defining and using a class.
+The following code demonstrates defining and using a class (`point`).
+Classes, like types, have lowercase names by convention.
 
 A class definition serves as its single constructor.
 A class cannot define additional constructors,
 but functions can be written to create instances in additional ways.
 
+The `point` class and the `origin` function are wrapped in a module
+to make it clear that they are related.
+Modules have names that start uppercase by convention.
+
 ```ocaml
 open Printf
 
 module Geometry = struct
+
+  (* Arguments passed to a constructor do not require a matching field
+     and can be used in methods. *)
   class point (x_init : float) (y_init : float) =
     (* Can omit "(self)" if there are no references to it. *)
     object (self)
@@ -1873,9 +1881,10 @@ module Geometry = struct
       val mutable x = x_init
       val mutable y = y_init
 
-      (* Getter methods can have the same name as the field they return. *)
-      method x = x
-      method y = y
+      (* Getter methods can have the same name as the field they return,
+         but often they start with "get_". *)
+      method get_x = x
+      method get_y = y
       method set_x new_x = x <- new_x
       method set_y new_y = y <- new_y
 
@@ -1888,26 +1897,31 @@ module Geometry = struct
         y <- y +. dy
     end
 
+  (* This is the OCaml version of a named constructor. *)
   let origin = new point 0.0 0.0
 end
 
 let () =
   (* Use the new keyword to create an instance of the class. *)
   (* let p = new point 0.0 0.0 in *)
+  (* This uses a named constructor function instead. *)
   let p = Geometry.origin in
 
   (* Methods are called with # instead of dot. *)
   p#set_x 1.0;
   p#set_y 2.0;
   p#translate 3.0 4.0;
-  printf "(%f, %f)\n" p#x p#y;
+
   (* There is no need to pass the unit value `()`
      to call methods that have no parameters. *)
+  printf "(%f, %f)\n" p#get_x p#get_y;
   p#print;
+
   (* The Oo.copy function makes a shallow copy of an object. *)
   let p2 = Oo.copy p in
   p2#set_x 5.0;
   p2#print;
+
   (* Each object is assigned a unique id
      that can be accessed with Oo.id function. *)
   printf "p id = %d\n" (Oo.id p);
@@ -1918,20 +1932,18 @@ Abstract classes are defined with "class virtual".
 Methods can be defined with "method virtual"
 to require subclasses to implement them.
 
-To inherit from an abstract class, add "inherit {class_name} {args}"
+To inherit from another class, add "inherit {class_name} {args}"
 inside "object (self)" to call its constructor.
-
-Arguments passed to a constructor do not require a matching field
-and can be used in methods.
 
 To enable calling superclass methods,
 add "inherit {class_name} {args} as super"
 and then use "super#{method_name}" to call them.
 
-To coerce a subclass value to a superclass type, `obj :> {superclass}`.
+To coerce a subclass value to a superclass type, use `obj :> {superclass}`.
 
-The following code demonstrated defining an abstract class
-and classes that inherit from it.
+The following code demonstrates defining an abstract class (`shape`)
+and classes that inherit from it (`circle` and `rectangle`).
+It also uses the `point` class defined above.
 
 ```ocaml
 open Printf
@@ -1981,7 +1993,6 @@ module Geometry = struct
 end
 
 let () =
-  (* TODO: How can I call a named constructor? *)
   let p = Geometry.origin in
   let c = new Geometry.circle p 5.0 in
   printf "%s area = %f\n" c#name c#area;
