@@ -662,8 +662,6 @@ The value types of the variants can differ.
 
 Constructor expressions that do not use a value
 are referred to as "constant variant expressions".
-Those that do use a value are referred to as "non-constant variant expressions".
-
 The following code provides some examples:
 
 ```ocaml
@@ -685,38 +683,45 @@ let get_tense : tense -> int = function
   | Spring -> 1
   | Sprang -> 2
   | Sprung -> 3
-type season = Spring | Summer | Fall | Winter
 
-(* Another option is to wrap the conflicting variant type in a struct.
+let () =
+  print_endline (forecast Winter);
+```
+
+Another option to avoid constructor name conflicts
+is to wrap the conflicting variant type in a struct.
+
+```ocaml
 module Tense = struct
   (* It is idiomatic for the main type in a module to be named "t". *)
   type t = Spring | Sprung | Sprang
 end
 
 let tense = function Tense.Spring -> 1 | Tense.Sprang -> 2 | Tense.Sprung -> 3
-*)
+```
 
-type result = Ok of float | Error of string
+One more option is to a prefix to the constructor names
+so they don't collide.
 
-let divide x y = if y = 0.0 then Error "Division by zero" else Ok (x /. y)
+```ocaml
+type season = SSpring | SSummer | SFall | SWinter
+type tense = TSpring | TSprung | TSprang
+```
 
+Variants that do use a value are referred to as
+"non-constant variant expressions".
+The following code provides some examples:
+
+```ocaml
 (* This can be used similarly to TypeScript type unions. *)
 type my_union = BoolVal of bool | IntVal of int | StringVal of string
 
 let get_string = function
-  | IntVal i -> string_of_int i
-  | StringVal s -> s
-  | BoolVal b -> string_of_bool b
+| BoolVal b -> string_of_bool b
+| IntVal i -> string_of_int i
+| StringVal s -> s
 
 let () =
-  print_endline (forecast Winter);
-
-  let numerator = 5.0 and denomiator = 0.0 in
-  match divide numerator denomiator with
-  | Ok v -> print_endline (string_of_float v)
-  | Error e ->
-      print_endline e;
-
   let b = BoolVal true in
   let i = IntVal 10 in
   let s = StringVal "hello" in
@@ -729,7 +734,8 @@ let () =
 
 The <a href="https://v2.ocaml.org/api/Option.html" target="_blank">Option</a>
 module defines a variant type represents an optional value.
-It has the constructors `None` and `Some`.
+It has the constructors `None` and `Some` define by
+`type 'a option = None | Some of 'a`.
 
 Functions that sometimes do not have a value to return
 use this type to represent their return value.
