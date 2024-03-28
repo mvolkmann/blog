@@ -781,6 +781,9 @@ let () =
   printf "r center = (%f, %f)\n" x y; (* (5.0, 2.5) *)
 ```
 
+To see all the constructors of a variant type in `utop`,
+enter `#show {variant-type}`.
+
 ### Option Variant Type
 
 The <a href="https://v2.ocaml.org/api/Option.html" target="_blank">Option</a>
@@ -1664,6 +1667,79 @@ One approach is to take a list, but that
 requires all the values to have the same type.
 Another approach is to use a generalized algebraic data type (GADT),
 but that introduces complexity.
+
+## Exception Handling
+
+The built-in type `exn` is an
+<a href="https://v2.ocaml.org/manual/extensiblevariants.html"
+target="_blank">extensible variant type</a>
+that has constructors for all the built-in exceptions.
+Examples include `Division_by_zero`, `Failure`,
+`Invalid_argument`, and `Not_found`.
+For a full list, see <a href="https://v2.ocaml.org/api/index_exceptions.html"
+target="_blank">Index of exceptions</a>.
+
+The `exception` keyword creates a custom exception
+that is added as a constructor of the `exn` type.
+Exceptions can optionally have an associated value of any type.
+For example:
+
+```ocaml
+exception BadThingHappened
+exception TemperatureTooHigh of float
+```
+
+The `raise` keyword raises a given exception.
+For example:
+
+```ocaml
+raise BadThingHappened
+raise (TemperatureTooHigh 99.9)
+```
+
+There are predefined functions that simplify raising common exceptions.  
+`failwith "data not found"` is short for `raise (Failure "data not found")`.  
+`invalid_arg "bad 1st arg"` is short for `raise (Invalid_argument "bad 1st arg")`.
+
+The `try` keyword enables catching exceptions raised by an expression.
+It is similar to the `match` keyword, but the branches match on exceptions.
+For example:
+
+```ocaml
+open Printf
+
+exception TemperatureCrazy
+exception TemperatureHigh of float
+
+let evaluate_temperature temp =
+  if temp >= 120.0 then raise TemperatureCrazy;
+  if temp >= 100.0 then raise (TemperatureHigh temp);
+  if temp < 32.0 then "cold" else if temp < 75.0 then "hot" else "nice"
+
+let report_temperature t =
+  try printf "%.1f is %s\n" t (evaluate_temperature t) with
+  | TemperatureCrazy -> printf "%.1f is a crazy temperature!\n" t
+  | TemperatureHigh t -> printf "%.1f is too hot!\n" t
+
+(* Alternative that does the same thing.
+   let report_temperature t =
+     match evaluate_temperature t with
+     | exception TemperatureCrazy -> printf "%.1f is a crazy temperature!\n" t
+     | exception TemperatureHigh t -> printf "%.1f is too hot!\n" t
+     | s -> printf "%.1f is %s\n" t s
+*)
+
+let () =
+  report_temperature 80.0;
+  (* "80.0 is nice" *)
+  report_temperature 50.0;
+  (* "50.0 is nice" *)
+  report_temperature 20.0;
+  (* "20.0 is cold" *)
+  report_temperature 100.0;
+  (* "100.0 is too hot!" *)
+  report_temperature 120.0 (* "120.0 is a crazy temperature!" *)
+```
 
 ## Source Files
 
