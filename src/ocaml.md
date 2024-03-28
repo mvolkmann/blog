@@ -1004,10 +1004,11 @@ The most commonly used are tuples, lists, arrays, and maps.
 | `tuple`    | bounded length (typically only 2 or 3); access elements by position |
 | `array`    | bounded length; access elements by index                            |
 | `record`   | fixed set of fields accessed by name                                |
-| `Map`      | key/value pairs; access values by key                               |
+| `Map`      | immutable collection of key/value pairs; access values by key       |
+| `Hashtbl`  | mutable collection of key/value pairs; access values by key         |
 
 Each of these collection types are described in more detail below.
-All but `Map` have a literal syntax.
+All but `Map` and `Hashtbl` have a literal syntax.
 
 - `tuple` - `(expr1, expr2, ...)`
 - `list` - `[ expr1; expr2; ... ]`
