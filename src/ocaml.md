@@ -52,6 +52,25 @@ The financial company <a href="https://www.janestreet.com"
 target="_blank">Jane Street</a> is one of the
 largest users and supporters of OCaml.
 
+## Notable Features
+
+OCaml has a number of notable features including:
+
+- strong static type checking
+- strong type inference (almost never need to specify types)
+- fast compared to other non-systems programming languages
+- provides automatic garbage collection
+- most terse syntax possible for defining and calling functions
+- comes with an interpreter and two compilers
+  (one to produce bytecode and one to produce native executables)
+- supports functional and object-oriented programming
+- supports pattern matching
+- supports polymorphic types (OCaml's version of generics)
+- pragmmatic approach to mutability (some allowed)
+- package management with OPAM
+- Dune build system
+- great REPL (utop)
+
 ## Resources
 
 - <a href="https://ocaml.org" target="_blank">OCaml home page</a>
@@ -971,6 +990,14 @@ The most commonly used are tuples, lists, arrays, and maps.
 | `array`    | bounded length; access elements by index                            |
 | `record`   | fixed set of fields accessed by name                                |
 | `Map`      | key/value pairs; access values by key                               |
+
+Each of these collection types are described in more detail below.
+All but `Map` have a literal syntax.
+
+- `tuple` - `(expr1, expr2, ...)`
+- `list` - `[ expr1; expr2; ... ]`
+- `array` - `[| expr1; expr2; ... |]`
+- `record` - `{ k1 = expr1; k2 = expr2; ... }`
 
 ### Tuples
 
