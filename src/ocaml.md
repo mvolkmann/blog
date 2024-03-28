@@ -1487,16 +1487,23 @@ is similar to a `Map`, but it is mutable.
 
 The `Hashtbl` module supports the following functions:
 
-| Function           | Description                                             |
-| ------------------ | ------------------------------------------------------- |
-| `Hashtbl.create`   | creates a `Hashtbl` instance                            |
-| `Hashtbl.add`      | adds a key/value pair                                   |
-| `Hashtbl.find`     | returns the first value for a given key                 |
-| `Hashtbl.find_all` | returns a list of all values for a given key            |
-| `Hashtbl.iter`     | iterates over all the key/value pairs                   |
-| `Hashtbl.mem`      | returns a boolean indicating whether a given key exists |
-| `Hashtbl.remove`   | removes one key/value pair for a given key              |
-| `Hashtbl.replace`  | replaces the value for a given key                      |
+| Function                     | Description                                                       |
+| ---------------------------- | ----------------------------------------------------------------- |
+| `Hashtbl.clear`              | removes all the key/value pairs and retains the bucket size       |
+| `Hashtbl.copy`               | returns a copy of a `Hashtbl`                                     |
+| `Hashtbl.create`             | creates a `Hashtbl` instance                                      |
+| `Hashtbl.add`                | adds a key/value pair                                             |
+| `Hashtbl.filter_map_inplace` | can modify the value for each key or remove it                    |
+| `Hashtbl.find`               | returns the first value for a given key                           |
+| `Hashtbl.find_all`           | returns a list of all values for a given key                      |
+| `Hashtbl.find_opt`           | returns an `Option` that contains the first value for a given key |
+| `Hashtbl.fold`               | computes a single value from all the key/value pairs              |
+| `Hashtbl.iter`               | iterates over all the key/value pairs                             |
+| `Hashtbl.length`             | returns the number of key/value pairs                             |
+| `Hashtbl.mem`                | returns a boolean indicating whether a given key exists           |
+| `Hashtbl.remove`             | removes one key/value pair for a given key                        |
+| `Hashtbl.replace`            | replaces the value for a given key                                |
+| `Hashtbl.reset`              | removes all the key/value pairs and shrinks the bucket size       |
 
 Like with any module, if you call `open Hashtbl`
 then these function can be called without the `Hashtbl.` prefix.
