@@ -1491,10 +1491,10 @@ The `Hashtbl` module supports the following functions:
 | ------------------ | ------------------------------------------------------- |
 | `Hashtbl.create`   | creates a `Hashtbl` instance                            |
 | `Hashtbl.add`      | adds a key/value pair                                   |
-| `Hashtbl.remove`   | removes one key/value pair for a given key              |
 | `Hashtbl.find`     | gets the first value for a given key                    |
 | `Hashtbl.find_all` | gets a list of all values for a given key               |
 | `Hashtbl.mem`      | returns a boolean indicating whether a given key exists |
+| `Hashtbl.remove`   | removes one key/value pair for a given key              |
 | `Hashtbl.replace`  | replaces the value for a given key                      |
 
 The first argument to each of these functions is a `Hashtbl` instance.
@@ -1506,6 +1506,13 @@ To create a `Hashtbl` instance, call the `Hashtable.create` function
 passing it an estimate for the number of key/value pairs that will added.
 It can expand to hold more, but providing a good estimate
 can make add entries more efficient.
+
+The `find` function raises a `Not_found` exception if the key is not found.
+The `find_all` function returns an empty list in that case.
+
+The `remove` function doesn't complain if the key being removed doesn't exist.
+
+The `replace` function can be used to add a new key or replace an existing one.
 
 ```ocaml
 let my_hash = Hashtbl.create 10
