@@ -2169,7 +2169,7 @@ To install the `dune` command, enter `oam install dune`.
 
 For help, enter `dune --help`.
 
-To create a project that uses `dune`,
+**To create a project** that uses `dune`,
 cd to where the project should be created
 and enter `dune init project {project_name}`.
 This generates many files including:
@@ -2211,12 +2211,12 @@ that is referred to as a
 "<a href="https://dune.readthedocs.io/en/stable/dune-files.html"
 target="_blank">stanza</a>".
 
-To build the project, enter `dune build`.
+**To build the project**, enter `dune build`.
 This creates `_build/default/bin/main.exe`.
 To automatically rebuild the project
 when code changes are detected, add the `--watch` flag.
 
-To run the project, enter `dune exec {executable_name}`.
+**To run the project**, enter `dune exec {executable_name}`.
 The executable name is specified in the `public_name` stanza
 found in the `bin/dune` file and defaults to the project name.
 
@@ -2240,11 +2240,13 @@ For example:
 
 - Create the top-level directory `lib2`.
 - Create the file `lib2/dune` containing `(library (name demo2))`
-- Create the file `lib2/mod.ml` containing `let greet () = print_endline "Hello from lib2!"`
+- Create the file `lib2/mod.ml` containing
+  `let greet () = print_endline "Hello from lib2!"`
 - Update the `libraries` stanza in the `bin/dune` file to `(libraries demo demo2)`
 - Add the call `Demo2.Mod.greet ()` in `bin/main.ml`
 
-To run `utop` with project libraries automatically available, enter `dune utop`.
+**To run `utop` with project libraries automatically available**,
+enter `dune utop`.
 For example, in a project with a library named "demo",
 a module named "math_lib", and a function in that module named "add",
 the following works: `Demo.Math_lib.add 1 2`.
@@ -2473,6 +2475,49 @@ The following steps implement the same tests above in this way.
 1. Create the file `test/average.expected` containing `2.5`.
 
 1. Enter `dune test` and verify that all the tests pass.
+
+### Multiple Executables
+
+A Dune project can host the code for multiple executables.
+This is ideal for a collection of sample programs
+that demonstrate various features of OCaml.
+
+To create a project like this:
+
+1. `cd` to the directory where the project will be created.
+
+1. Enter `dune init project samples` where "samples" is the project name.
+
+1. `cd samples`
+
+1. Delete all the directories and files that will not be needed.
+   These includes the directories `bin`, `lib`, and `test`
+   and the file `samples.opam`.
+
+1. Edit the `dune-project` file to only contain the following:
+
+   ```text
+   (lang dune 3.14)
+   (package
+     (name samples)
+     (depends ocaml dune))
+   ```
+
+1. Create the file `dune` in the root directory of the project
+   containing the following:
+
+   ```text
+   (executables
+     (names program1 program2)
+     (libraries lib1 lib2))
+   ```
+
+   Replace `program1` and `program2` with the names of your sample `.ml` files.
+   Replace `lib1` and `lib2` with the names of any libraries you
+   install using `opam` that are used by your sample programs.
+
+1. To run one of your sample programs such as `foo.ml`,
+   enter `dune exec ./foo.exe`
 
 ## HTTP Servers
 
