@@ -1479,6 +1479,71 @@ let () =
   StringMap.iter print_dog dog_map
 ```
 
+### Hashtbl
+
+A <a href="https://ocaml.org/docs/hash-tables" target="_blank">Hashtbl</a>
+is similar to a `Map`, but it is mutable.
+
+The `Hashtbl` module supports the following functions:
+
+| Function           | Description                                             |
+| ------------------ | ------------------------------------------------------- |
+| `Hashtbl.create`   | creates a `Hashtbl` instance                            |
+| `Hashtbl.add`      | adds a key/value pair                                   |
+| `Hashtbl.remove`   | removes one key/value pair for a given key              |
+| `Hashtbl.find`     | gets the first value for a given key                    |
+| `Hashtbl.find_all` | gets a list of all values for a given key               |
+| `Hashtbl.mem`      | returns a boolean indicating whether a given key exists |
+| `Hashtbl.replace`  | replaces the value for a given key                      |
+
+The first argument to each of these functions is a `Hashtbl` instance.
+
+Like with any module, if you call `open Hashtbl`
+then these function can be called without the `Hashtbl.` prefix.
+
+To create a `Hashtbl` instance, call the `Hashtable.create` function
+passing it an estimate for the number of key/value pairs that will added.
+It can expand to hold more, but providing a good estimate
+can make add entries more efficient.
+
+```ocaml
+let my_hash = Hashtbl.create 10
+```
+
+Initially the hashtable does not know the type of the keys and values.
+Once the first entry is added, those types will be fixed
+and all subsequent entries must use the same types for their keys and values.
+
+The same key can be added multiple times with different values.
+The previous values are not overwritten.
+
+The following code demonstrates creating a `Hashtbl`
+that holds a collection of dogs.
+The keys are `dog` ids and the values are `dog` records.
+
+```ocaml
+open Printf
+
+type dog = { id : string; name : string; breed : string }
+
+(* 10 is an estimate for the number of entries that will be added. *)
+let dog_map = Hashtbl.create 10
+
+let generate_uuid () = Uuidm.(v `V4 |> to_string)
+
+let add_dog name breed =
+  let id = generate_uuid () in
+  Hashtbl.add dog_map id { id; name; breed }
+
+let print_dog dog = printf "%s is a %s (id=%s).\n" dog.name dog.breed dog.id
+
+let () =
+  add_dog "Comet" "Whippet";
+  add_dog "Oscar" "GSP";
+  (* The function passed to `iter` takes a key and value from the Hashtbl. *)
+  Hashtbl.iter (fun _ dog -> print_dog dog) dog_map
+```
+
 ## Functions
 
 OCaml functions are first-class.
