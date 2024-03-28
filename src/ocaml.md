@@ -261,6 +261,11 @@ enter `#use "{file-path}";;`.
 This enables using all the types and functions defined in the source file
 inside the REPL.
 
+To trace the follow of function execution, enter `#trace {fn-name};;`.
+Then enter a call to the function.
+This is especially useful for recursive functions.
+To stop tracing the function, enter `#untrace {fn-name};;`.
+
 To exit the REPL, press ctrl-d or enter #quit.
 
 There is also an iOS app called "OCaml" for evaluating OCaml expressions.
@@ -869,6 +874,8 @@ A `match` expression performs pattern matching.
 It takes an expression whose value is to be matched
 and a set of branches that contain a pattern and
 code to execute when the pattern is matched.
+The type of the `match` expression is the type of the branch expressions,
+which must all evaluate to the same type.
 
 The patterns must be exhaustive, meaning that
 there must be a pattern that matches every possible value.
@@ -892,6 +899,9 @@ The patterns are check in the order they are specified and
 the first matching pattern is used, so their order matters.
 
 The value of a `match` expression is the value of the matched pattern.
+
+There is a warning if the branches are not exhaustive.
+At runtime if no branch matches, a `Match_failure` exception is raised.
 
 For example:
 
@@ -1157,6 +1167,23 @@ This evaluates to the following list of tuples:
 
 ```ocaml
 [("alpha", 1); ("beta", 2); ("gamma", 3)]
+```
+
+The following code finds the maximum value in a list of numbers.
+
+```ocaml
+let rec list_max (lst : 'a list) : 'a option =
+  match lst with
+  | [] -> None
+  | h :: t -> (
+      match list_max t with None -> Some h | Some m -> Some (max h m))
+
+let () =
+  let numbers = [ 1; 13; 4; 9 ] in
+  let max = list_max numbers in
+  match max with
+  | None -> print_endline "empty list"
+  | Some max -> print_int max
 ```
 
 ### Arrays
