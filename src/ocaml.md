@@ -1491,13 +1491,12 @@ The `Hashtbl` module supports the following functions:
 | ------------------ | ------------------------------------------------------- |
 | `Hashtbl.create`   | creates a `Hashtbl` instance                            |
 | `Hashtbl.add`      | adds a key/value pair                                   |
-| `Hashtbl.find`     | gets the first value for a given key                    |
-| `Hashtbl.find_all` | gets a list of all values for a given key               |
+| `Hashtbl.find`     | returns the first value for a given key                 |
+| `Hashtbl.find_all` | returns a list of all values for a given key            |
+| `Hashtbl.iter`     | iterates over all the key/value pairs                   |
 | `Hashtbl.mem`      | returns a boolean indicating whether a given key exists |
 | `Hashtbl.remove`   | removes one key/value pair for a given key              |
 | `Hashtbl.replace`  | replaces the value for a given key                      |
-
-The first argument to each of these functions is a `Hashtbl` instance.
 
 Like with any module, if you call `open Hashtbl`
 then these function can be called without the `Hashtbl.` prefix.
@@ -1507,13 +1506,6 @@ passing it an estimate for the number of key/value pairs that will added.
 It can expand to hold more, but providing a good estimate
 can make add entries more efficient.
 
-The `find` function raises a `Not_found` exception if the key is not found.
-The `find_all` function returns an empty list in that case.
-
-The `remove` function doesn't complain if the key being removed doesn't exist.
-
-The `replace` function can be used to add a new key or replace an existing one.
-
 ```ocaml
 let my_hash = Hashtbl.create 10
 ```
@@ -1522,8 +1514,43 @@ Initially the hashtable does not know the type of the keys and values.
 Once the first entry is added, those types will be fixed
 and all subsequent entries must use the same types for their keys and values.
 
-The same key can be added multiple times with different values.
+The first argument to all the remaining functions is a `Hashtbl` instance,
+with the exception of the `iter` function where it is the last argument.
+
+The `add` function can add multiple values for the same key,
+and can even add the same value multiple times.
 The previous values are not overwritten.
+
+```ocaml
+Hashtbl.add my_hash "whippet" "Rudy"
+Hashtbl.add my_hash "whippet" "Dasher"
+Hashtbl.add my_hash "whippet" "Comet"
+```
+
+To have only one value for each key, use the `replace` function instead.
+The `replace` function adds a new key or replaces an existing one.
+
+```ocaml
+Hashtbl.replace my_hash "whippet" "Comet"
+```
+
+The `find` function raises a `Not_found` exception if the key is not found.
+
+```ocaml
+let name = Hashtbl.find my_hash "whippet"
+```
+
+The `find_all` function returns an empty list if the key is not found.
+
+```ocaml
+let names = Hashtbl.find_all my_hash "whippet"
+```
+
+The `remove` function doesn't complain if the key being removed doesn't exist.
+
+```ocaml
+Hashtbl.remove my_hash "whippet"
+```
 
 The following code demonstrates creating a `Hashtbl`
 that holds a collection of dogs.
