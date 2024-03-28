@@ -883,8 +883,8 @@ Using the catch-all `_` as the final pattern satisfies this.
 
 The patterns can match:
 
-- a specific value (ex. `| 7` or `| "summer"`)
-- several values (ex. `| 7 | 8 | 9`)
+- a constant (ex. `| 7` or `| "summer"`)
+- several constants (ex. `| 7 | 8 | 9`)
 - a range of characters (ex. `| 'a' .. 'f'`)
 - a guard (ex. `| n when 7 <= n && n <= 9`)
 - a variant type constructor (ex. `| None` or `| Some x`)
@@ -893,7 +893,9 @@ The patterns can match:
   and want to capture the third element)
 - a list (ex. `| []` or `| ["summer"; other]` or `| first :: second :: rest`)
 - an array (ex. `| [||]` or `| [|"summer"; other|]`)
-- the catch-all `_`
+- a record (ex. `| {name = n; age = a}`)
+- a variable to match anything and bind the value to it
+- the catch-all `_` which doesn't bind the value
 
 The patterns are check in the order they are specified and
 the first matching pattern is used, so their order matters.
