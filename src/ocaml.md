@@ -1247,6 +1247,7 @@ Some highlights include the following:
 ### Records
 
 A record an immutable collections of fields.
+Record type names must begin with a lowercase letter.
 The fields can have differents types, including other record types.
 Records are similar to structs in other languages.
 
@@ -1276,6 +1277,16 @@ let my_item : item = { description = "milk"; price = 350; weight = 1.0 }
 It is not necessary to specify the type of the record variable.
 But the field names and values must match some existing record type
 and no extra fields can be present.
+
+Field values can be omitted if there is a
+variable in scope with the same name as the field.
+For example:
+
+```ocaml
+let description = "milk" and price = 350 and weight = 1.0 in
+let my_item = { description; price; weight } in
+...
+```
 
 To access a field value in a record, use dot syntax.
 For example:
