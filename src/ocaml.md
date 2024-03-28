@@ -620,38 +620,6 @@ For example:
 type weight = float
 ```
 
-Here is an example of defining and using a type for tree nodes.
-
-```ocaml
-open Printf
-
-(* A tree can be empty or it can have a node
-   that holds a left tree, a value, and a right tree. *)
-type 'a tree = Empty | Node of 'a tree * 'a * 'a tree
-
-let rec depth_first_in_order tree =
-  match tree with
-  | Empty -> () (* do nothing *)
-  | Node (left, value, right) ->
-      depth_first_in_order left;
-      print_endline value;
-      depth_first_in_order right
-
-(* This holds names in a tree so that when
-   printed with depth_first_in_order
-   they will appear in sorted order. *)
-let family_tree : string tree =
-  Node
-    ( Node (Empty, "Amanda", Empty),
-      "Jeremy",
-      Node
-        ( Node (Empty, "Mark", Empty),
-          "Meghan",
-          Node (Empty, "RC", Node (Empty, "Tami", Empty)) ) )
-
-let () = depth_first_in_order family_tree
-```
-
 The `type` keyword can also be used to define variant types
 which are described in the next section.
 
@@ -678,6 +646,9 @@ and must begin with an uppercase letter.
 Each construtor can have an associated value
 of a type that is specified after the `of` keyword.
 The value types of the variants can differ.
+
+To see all the constructors of a variant type in `utop`,
+enter `#show {variant-type}`.
 
 Constructor expressions that do not use a value
 are referred to as "constant variant expressions".
@@ -781,8 +752,37 @@ let () =
   printf "r center = (%f, %f)\n" x y; (* (5.0, 2.5) *)
 ```
 
-To see all the constructors of a variant type in `utop`,
-enter `#show {variant-type}`.
+Variant types can be parameterized. For example:
+
+```ocaml
+open Printf
+
+(* A tree can be empty or it can have a node
+   that holds a left tree, a value, and a right tree. *)
+type 'a tree = Empty | Node of 'a * 'a tree * 'a tree
+
+let rec depth_first_in_order tree =
+  match tree with
+  | Empty -> () (* do nothing *)
+  | Node (value, left, right) ->
+      depth_first_in_order left;
+      print_endline value;
+      depth_first_in_order right
+
+(* This holds names in a tree so that when
+   printed with depth_first_in_order
+   they will appear in sorted order. *)
+let family_tree : string tree =
+  Node
+    ( "Jeremy",
+      Node ("Amanda", Empty, Empty),
+      Node
+        ( "Meghan",
+          Node ("Mark", Empty, Empty),
+          Node ("RC", Empty, Node ("Tami", Empty, Empty)) ) )
+
+let () = depth_first_in_order family_tree
+```
 
 ### Option Variant Type
 
@@ -1702,7 +1702,9 @@ There are predefined functions that simplify raising common exceptions.
 `invalid_arg "bad 1st arg"` is short for `raise (Invalid_argument "bad 1st arg")`.
 
 The `try` keyword enables catching exceptions raised by an expression.
-It is similar to the `match` keyword, but the branches match on exceptions.
+It is similar to the `match` keyword, but the branches must match on exceptions.
+The value of each branch must have the same type.
+If no branch matches a raised exception, the exception is re-raised.
 For example:
 
 ```ocaml
@@ -1721,7 +1723,8 @@ let report_temperature t =
   | TemperatureCrazy -> printf "%.1f is a crazy temperature!\n" t
   | TemperatureHigh t -> printf "%.1f is too hot!\n" t
 
-(* Alternative that does the same thing.
+(* Alternative that does the same thing and
+   is good for matching both exceptions and other values.
    let report_temperature t =
      match evaluate_temperature t with
      | exception TemperatureCrazy -> printf "%.1f is a crazy temperature!\n" t
