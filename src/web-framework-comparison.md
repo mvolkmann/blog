@@ -972,17 +972,17 @@ for all three versions of the app running locally.
 For Next.js and SvelteKit, separate scores are shown
 for running in development mode versus production.
 
-|                          | Next.js dev | Next.js prod | SvelteKit dev | SvelteKit prod |  htmx |
-| ------------------------ | ----------: | -----------: | ------------: | -------------: | ----: |
-| Performance              |          56 |           99 |            75 |             98 |    99 |
-| Accessibility            |         100 |          100 |           100 |            100 |   100 |
-| Best Practices           |         100 |          100 |           100 |            100 |   100 |
-| SEO                      |         100 |          100 |           100 |            100 |   100 |
-| First Contentful Paint   |       0.9 s |        1.0 s |         1.1 s |          1.8 s | 1.6 s |
-| Largest Contentful Paint |       9.8 s |        2.1 s |         9.9 s |          2.1 s | 1.7 s |
-| Total Blocking Time      |      780 ms |         0 ms |          0 ms |           0 ms |  0 ms |
-| Cummulative Layout Shift |       0.002 |        0.002 |         0.002 |          0.002 | 0.002 |
-| Speed Index              |        0.9s |         1.1s |          1.1s |           1.8s |  1.6s |
+|                              | Next.js dev | Next.js prod | SvelteKit dev | SvelteKit prod |  htmx |
+| ---------------------------- | ----------: | -----------: | ------------: | -------------: | ----: |
+| **Performance**              |          56 |           99 |            75 |             98 |    99 |
+| **Accessibility**            |         100 |          100 |           100 |            100 |   100 |
+| **Best Practices**           |         100 |          100 |           100 |            100 |   100 |
+| **SEO**                      |         100 |          100 |           100 |            100 |   100 |
+| **First Contentful Paint**   |       0.9 s |        1.0 s |         1.1 s |          1.8 s | 1.6 s |
+| **Largest Contentful Paint** |       9.8 s |        2.1 s |         9.9 s |          2.1 s | 1.7 s |
+| **Total Blocking Time**      |      780 ms |         0 ms |          0 ms |           0 ms |  0 ms |
+| **Cummulative Layout Shift** |       0.002 |        0.002 |         0.002 |          0.002 | 0.002 |
+| **Speed Index**              |        0.9s |         1.1s |          1.1s |           1.8s |  1.6s |
 
 These scores show that both Next.js and SvelteKit have dubious scores
 for "Largest Contentful Paint" when running in development mode.
