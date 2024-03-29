@@ -1959,6 +1959,95 @@ Modules also serve to hide complexity.
 
 A module is defined with the syntax `module ModuleName = struct ... end`.
 
+The following code defines a module that contains functions for
+converting temperature values and demonstrates using it.
+
+```ocaml
+module Temperature = struct
+  let c_of_f fahrenheit = (fahrenheit -. 32.0) *. (5.0 /. 9.0)
+  let f_of_c celsius = (9.0 /. 5.0 *. celsius) +. 32.0
+end
+
+let () =
+  print_float (Temperature.c_of_f 100.0);
+  (* 37.8. *)
+  print_newline ();
+  print_float (Temperature.f_of_c 0.0);
+  (* 32.0 *)
+  print_newline ()
+```
+
+Modules cannot be used like values. They cannot be assigned to a variable,
+passed to a function, or returned from a function.
+
+Consider the following code which uses
+values from the `Hashtbl` module multiple times.
+
+```ocaml
+let dog_table = Hashtbl.create 10
+let () =
+  Hashtbl.add dog_table "Comet" "Whippet";
+  Hashtbl.add dog_table "Oscar" "GSP";
+  Hashtbl.iter
+    (fun name breed -> Printf.printf "%s is a %s.\n" name breed)
+    dog_table
+```
+
+There are multiple ways to avoid repeating a module name
+every time the values it defines are referenced.
+The options include:
+
+- global `open`
+
+  Adding `open Hashtbl` at the top of a source file
+  allows unprefixed names to be used anywhere in the source file.
+  This works fine as long is the names don't collide with
+  names defined in other modules that also use a global open.
+
+  ```ocaml
+  open Hashtbl
+  let dog_table = create 10
+  let () =
+    add dog_table "Comet" "Whippet";
+    add dog_table "Oscar" "GSP";
+    iter
+      (fun name breed -> Printf.printf "%s is a %s.\n" name breed)
+      dog_table
+  ```
+
+- local `option`
+
+  For example, `let open Hashtbl in` narrows the scope in which
+  unprefixed names can be used to the expression that follows.
+
+  ```ocaml
+  let dog_table = Hashtbl.create 10
+  let () =
+    let open Hashtbl in
+    add dog_table "Comet" "Whippet";
+    add dog_table "Oscar" "GSP";
+    iter
+      (fun name breed -> Printf.printf "%s is a %s.\n" name breed)
+      dog_table
+  ```
+
+- dot and parentheses
+
+  For example, `Hashtbl.(...)` narrows the scope in which
+  unprefixed names can be used to the expression inside the parentheses.
+
+  ```ocaml
+  let dog_table = Hashtbl.create 10
+  let () =
+    Hashtbl.(
+      add dog_table "Comet" "Whippet";
+      add dog_table "Oscar" "GSP";
+      iter
+        (fun name breed -> Printf.printf "%s is a %s.\n" name breed)
+        dog_table
+    )
+  ```
+
 Modules can be nested to create a hierachy of namespaces,
 but it seems this is rarely used.
 
