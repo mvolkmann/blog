@@ -974,7 +974,7 @@ let () =
 
   for i = 5 downto 1 do
     printf "%d\n" i
-  done;
+  done
 ```
 
 A `while` loop specifies a boolean condition.
@@ -992,7 +992,7 @@ let () =
   while !i <= 5 do
     printf "%d\n" !i;
     i := !i + 1
-  done;
+  done
 ```
 
 To iterate over collections like lists and arrays it's best to
@@ -1030,6 +1030,17 @@ All but `Map` and `Hashtbl` have a literal syntax.
 - `list` - `[ expr1; expr2; ... ]`
 - `array` - `[| expr1; expr2; ... |]`
 - `record` - `{ k1 = expr1; k2 = expr2; ... }`
+
+Also see:
+
+- <a href="https://v2.ocaml.org/api/Array.html" target="_blank">Module Array</a>
+- <a href="https://v2.ocaml.org/api/Hashtbl.html" target="_blank">Module Hashtbl</a>
+- <a href="https://v2.ocaml.org/api/List.html" target="_blank">Module List</a>
+- <a href="https://v2.ocaml.org/api/Map.html" target="_blank">Module Map</a>
+- <a href="https://v2.ocaml.org/api/Queue.html" target="_blank">Module Queue</a>
+- <a href="https://v2.ocaml.org/api/Seq.html" target="_blank">Module Seq</a>
+- <a href="https://v2.ocaml.org/api/Set.html" target="_blank">Module Set</a>
+- <a href="https://v2.ocaml.org/api/Stack.html" target="_blank">Module Stack</a>
 
 ### Tuples
 
@@ -1867,21 +1878,32 @@ but that introduces complexity.
 
 ## Modules
 
-A module provides a namespace for a collection of named values
+A module provides a namespace for a collection of related named values
 that can be types, constants, and functions.
-It provides a way to identify multiple of these
+Modules provides a way to identify multiple of these
 that happen to have the same name.
 For example, the `List` and `Array` modules both define the `map` function.
 
-An `open` expresion brings the names defined in a module into the current scope.
-Circular dependencies between modules are not allowed.
+Modules also serve to hide complexity.
 
 A module is defined with the syntax `module ModuleName = struct ... end`.
+
+An `open` expresion brings the names defined in a module into the current scope.
+Circular dependencies between modules are not allowed.
 
 A module type is define with the syntax
 `module type ModuleTypeName = sig ... end`.
 It can contain the following kinds of specifications:
 `type`, `exception`, `val`, and `module type`.
+
+## Signatures
+
+The concept of "interfaces" in other programming languages
+is supported in OCaml with "signatures".
+
+## Functors
+
+TODO: Describe these.
 
 ## Exception Handling
 
