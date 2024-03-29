@@ -1843,6 +1843,24 @@ requires all the values to have the same type.
 Another approach is to use a generalized algebraic data type (GADT),
 but that introduces complexity.
 
+## Modules
+
+A module provides a namespace for a collection of named values
+that can be types, constants, and functions.
+It provides a way to identify multiple of these
+that happen to have the same name.
+For example, the `List` and `Array` modules both define the `map` function.
+
+An `open` expresion brings the names defined in a module into the current scope.
+Circular dependencies between modules are not allowed.
+
+A module is defined with the syntax `module ModuleName = struct ... end`.
+
+A module type is define with the syntax
+`module type ModuleTypeName = sig ... end`.
+It can contain the following kinds of specifications:
+`type`, `exception`, `val`, and `module type`.
+
 ## Exception Handling
 
 The built-in type `exn` is an
