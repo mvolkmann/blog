@@ -2779,4 +2779,7 @@ There are a couple of ways to do this.
 One way is to add `[@warning "-unused-field"]` immediately after
 the `type` keyword that defines the record type.
 Another way when using Dune is to add the
-stanza `(flags (-w -26)) to the `dune` file.
+stanza `(flags (:standard -w -69))` to the `dune` file
+where 69 is the code for "unused-field" errors.
+
+To see all the supported error codes, enter `ocaml -warn-help`.
