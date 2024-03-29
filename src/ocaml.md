@@ -2065,18 +2065,59 @@ The options include:
 Modules can be nested to create a hierachy of namespaces,
 but it seems this is rarely used.
 
-An `open` expresion brings the names defined in a module into the current scope.
 Circular dependencies between modules are not allowed.
-
-A module type is define with the syntax
-`module type ModuleTypeName = sig ... end`.
-It can contain the following kinds of specifications:
-`type`, `exception`, `val`, and `module type`.
 
 ## Signatures
 
 The concept of "interfaces" in other programming languages
 is supported in OCaml with "signatures".
+These can be used to specify that multiple modules
+support the same set of functions.
+
+A signature is defined with the syntax
+`module type ModuleTypeName = sig ... end`.
+It can contain the following kinds of specifications:
+`type`, `exception`, `val`, and `module type`.
+
+The following code demonstrates defining a signature
+and two modules that conform to it.
+
+```ocaml
+open Printf
+
+module type Shape = sig
+  type t
+
+  val area : t -> float
+end
+
+(* float represents radius *)
+module Circle : Shape with type t := float = struct
+  let area radius = Float.pi *. radius *. radius
+  (* Any extra values, including functions, define here
+     that are not described in the `Shape` signature
+     will be private to this module (not exposed outside).
+     We say the module is "sealed". *)
+end
+
+(* float * float represents length and width *)
+module Rectangle : Shape with type t := float * float = struct
+  let area (length, width) = length *. width
+end
+
+let () =
+  let radius = 5.0 in
+  let circle_area = Circle.area radius in
+  printf "Circle area: %.2f\n" circle_area;
+
+  let length = 4.0 and width = 6.0 in
+  let rectangle_area = Rectangle.area (length, width) in
+  printf "Rectangle area: %.2f\n" rectangle_area
+```
+
+TODO: Learn how to use a `.mli` file instead of defining a signature in a `.ml` file.
+
+TODO: Can an OCaml class implement a signature?
 
 ## Functors
 
@@ -2904,13 +2945,16 @@ including `enum`, `eq`, `fold`, `iter`, `make`, `map`, `ord`,
 
 To use this in a Dune project:
 
-1. Install it by entering `opam install ppx_deriving`
+1. Install it by entering `opam install ppx_deriving`.
+
+1. If using the `yojson` plugin, also enter `opam install ppx_deriving_yojson`.
+
 1. Add the following stanza to the project `dune` file.
    Here we only use the `show` plugin which generates functions
    whose names begin with `show_` that return pretty-printed strings.
 
    ```text
-   (preprocess (pps ppx_deriving.show))
+   (preprocess (pps ppx_deriving.show ppx_deriving.yojson))
    ```
 
 1. Annotate types to be pretty-printed. For example:
@@ -3040,4 +3084,8 @@ To see all the supported error codes, enter `ocaml -warn-help`.
 
 ## Concurrency
 
-TODO: Document support for this and using multiple threads.
+There are multiple OCaml libraries that support concurrency.
+The one that seems most popular is
+<a href="https://github.com/ocaml-multicore/eio" target="_blank">eio</a>.
+
+To install eio, enter `opam install eio_main`.
