@@ -1172,6 +1172,12 @@ This evaluates to the following list of tuples:
 [("alpha", 1); ("beta", 2); ("gamma", 3)]
 ```
 
+To find the sum of numbers in a list,
+
+```ocaml
+let sum = List.fold_left (+) 0 numbers
+```
+
 The following code finds the maximum value in a list of numbers.
 
 ```ocaml
@@ -1187,6 +1193,16 @@ let () =
   match max with
   | None -> print_endline "empty list"
   | Some max -> print_int max
+```
+
+Here is an easier way to find the maximum value in a list of numbers
+if we can assume the list is not empty.
+
+```ocaml
+let max_int x y = if x > y then x else y
+let maximum =
+  first = List.hd numbers in
+  List.fold_left max_int first numbers
 ```
 
 ### Arrays
