@@ -951,8 +951,6 @@ At runtime if no branch matches, a `Match_failure` exception is raised.
 For example:
 
 ```ocaml
-open Random
-
 let () =
   Random.self_init ();
   let n = Random.int 10 in
@@ -968,13 +966,29 @@ The `function` keyword is useful in functions
 that immediately `match` on the last parameter.
 It simplfies the code by removing the need to list the last parameter
 and replacing `match {last-parameter} with` with just `function`.
-For example, the first two lines of the `max_element` function above
-can be replaced by `let rec max_element = function`.
-The type of `max_element` can be specified as `'a list -> 'a option`
-which states that it takes a list of `a'` elements
-and returns an `option` of type `'a`.
+For example:
 
-TODO: Show examples of not using and using the `function` keyword.
+```ocaml
+type season = Winter | Spring | Summer | Fall
+
+let weather s =
+  match s with
+  | Winter -> "cold"
+  | Spring -> "cool"
+  | Summer -> "hot"
+  | Fall -> "perfect"
+
+(* same as previous function *)
+let weather2 = function
+  | Winter -> "cold"
+  | Spring -> "cool"
+  | Summer -> "hot"
+  | Fall -> "perfect"
+
+let () =
+  print_endline (weather Fall); (* perfect *)
+  print_endline (weather2 Fall); (* perfect *)
+```
 
 ## Iteration
 
