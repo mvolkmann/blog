@@ -2729,7 +2729,34 @@ TODO: Implement your Dog CRUD htmx app using Dream.
 
 ## Converting OCaml to JavaScript
 
-See http://ocsigen.org/js_of_ocaml/latest/manual/overview.
+Here are the steps to compile an OCaml program to JavaScript using Dune.
+
+1. Install the "js_of_ocaml" compiler.
+
+   Enter `opam install js_of_ocaml-compiler`.
+
+1. Modify the `dune` file.
+
+   It should contain the following where
+   the main OCaml source file is `hello.ml`:
+
+   ```text
+   (executables
+     (names hello)
+     (modes js))
+   ```
+
+1. Compile to JavaScript.
+
+   Enter `dune build ./hello.bc.js`
+
+   This generates a ridiculous amount of JavaScript code ...
+   over 9000 lines for a Hello World program.
+   So this is not a serious option!
+
+1. Run the code.
+
+   Enter `node _build/default/hello.bc.js`
 
 ## Preprocessors
 
@@ -2741,3 +2768,15 @@ can be replaces by the value of the `USER` environment variable.
 
 See <a href="https://ocaml.org/docs/metaprogramming"
 target="_blank">Preprocessors and PPXs</a>
+
+## Suppressing Errors
+
+Sometimes it is desirable to suppress certain errors.
+For example, you have have a record type that contains a
+field that is not yet being used, but will be used in the future.
+
+There are a couple of ways to do this.
+One way is to add `[@warning "-unused-field"]` immediately after
+the `type` keyword that defines the record type.
+Another way when using Dune is to add the
+stanza `(flags (-w -26)) to the `dune` file.
