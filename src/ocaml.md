@@ -75,7 +75,11 @@ OCaml has a number of notable features including:
 ## Resources
 
 - <a href="https://ocaml.org" target="_blank">OCaml home page</a>
+
+  Click the "Playground" link to experiment with writing OCaml code online.
+
 - <a href="https://learnxinyminutes.com/docs/ocaml/" target="_blank">Learn X in Y minutes</a>
+  Where X=OCaml
 - <a href="https://cs3110.github.io/textbook/cover.html"
   target="_blank">OCaml Programming: Correct + Efficient + Beautiful</a>
   book used in Cornell CS 3110 course
@@ -1184,10 +1188,28 @@ This evaluates to the following list of tuples:
 [("alpha", 1); ("beta", 2); ("gamma", 3)]
 ```
 
-To find the sum of numbers in a list,
+The following code demonstrates using the
+`List` module functions `map`, `filter`, and `fold_left`.
+See the section "Pretty Printing" for details on `[@@deriving show]`.
 
 ```ocaml
+open Printf
+
+type int_list = int list
+[@@deriving show]
+
+let numbers = [4; 1; 9; 7; 2]
+
+let doubled = List.map (fun x -> x * 2) numbers
+
+let even_numbers = List.filter (fun x -> x mod 2 = 0) numbers
+
 let sum = List.fold_left (+) 0 numbers
+
+let () =
+  print_endline (show_int_list doubled); (* [8; 2; 18; 14; 4] *)
+  printf "sum = %d\n" sum; (* sum = 23 *)
+  print_endline (show_int_list even_numbers) (* [4; 2] *)
 ```
 
 The following code finds the maximum value in a list of numbers.
