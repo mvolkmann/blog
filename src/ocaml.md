@@ -1014,17 +1014,18 @@ let () =
 OCaml has built-in support for many kinds of collections.
 The most commonly used are tuples, lists, arrays, and maps.
 
-| Collection | Primary Use Case                                                    |
-| ---------- | ------------------------------------------------------------------- |
-| `list`     | unbounded length; access elements by walking from head              |
-| `tuple`    | bounded length (typically only 2 or 3); access elements by position |
-| `array`    | bounded length; access elements by index                            |
-| `record`   | fixed set of fields accessed by name                                |
-| `Map`      | immutable collection of key/value pairs; access values by key       |
-| `Hashtbl`  | mutable collection of key/value pairs; access values by key         |
+| Collection | Primary Use Case                                                                    |
+| ---------- | ----------------------------------------------------------------------------------- |
+| `list`     | unbounded length; access elements by walking from head                              |
+| `tuple`    | bounded length (typically only 2 or 3); access elements by position                 |
+| `array`    | bounded length; access elements by index                                            |
+| `Set`      | immutable collection of values with no duplicates according to a `compare` function |
+| `Map`      | immutable collection of key/value pairs; access values by key                       |
+| `Hashtbl`  | mutable collection of key/value pairs; access values by key                         |
+| `record`   | fixed set of fields accessed by name                                                |
 
 Each of these collection types are described in more detail below.
-All but `Map` and `Hashtbl` have a literal syntax.
+All but `Set`, `Map` and `Hashtbl` have a literal syntax.
 
 - `tuple` - `(expr1, expr2, ...)`
 - `list` - `[ expr1; expr2; ... ]`
@@ -1305,6 +1306,46 @@ Some highlights include the following:
 | `Array.to_list`   | creates a new list that contains the same elements as a given array                                                                                 |
 | `Array.of_list`   | creates a new array that contains the same elements as a given list                                                                                 |
 | `Array.map`       | creates a new array containing elements that are computed by passing each element in an existing array to a given function                          |
+
+### Sets
+
+The following code demonstrates creating and using two set types,
+one for `int` values and one for `dog` record values.
+
+```ocaml
+open Printf
+
+module IntSet = Set.Make (struct
+  type t = int
+
+  let compare = compare
+end)
+
+type dog = { name : string; breed : string }
+
+module DogSet = Set.Make (struct
+  type t = dog
+
+  let compare a b = compare a.name b.name
+end)
+
+let () =
+  let intSet = IntSet.of_list [ 3; 5; 3 ] in
+  IntSet.iter
+    (fun n ->
+      print_int n;
+      print_newline ())
+    intSet;
+
+  let dogSet =
+    DogSet.(
+      empty
+      |> add { name = "Comet"; breed = "Whippet" }
+      |> add { name = "Oscar"; breed = "GSP" }
+      |> add { name = "Comet"; breed = "Greyhound" })
+  in
+  DogSet.iter (fun dog -> printf "%s is a %s.\n" dog.name dog.breed) dogSet
+```
 
 ### Records
 
