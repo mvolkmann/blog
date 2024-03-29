@@ -841,12 +841,14 @@ and return a new `Option`.
 If it is `Some v` then the result of passing `v` to the function
 is returned in a `Some` variant.
 If it is `None` then `None` is returned.
+The operator `>>|` is equivalent to this.
 
 `Option.bind` is used in reverse function application chains
 so a function that returns an `Option` can have
 the value inside it passed to the next function in the chain.
 If any function returns `None`, the remaining functions are not called
 and the value of the entire chain is `None`.
+The operator `>>=` is equivalent to this.
 
 ### Result Variant Type
 
