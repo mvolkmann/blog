@@ -88,7 +88,7 @@ OCaml has a number of notable features including:
 - <a href="https://caml.inria.fr/pub/old_caml_site/humps/" target="_blank">The Caml Humps</a>
   collection of links to Caml-related tools, libraries, code samples, and tips
 
-## OCaml Variants
+## Derived Languages
 
 <a href="https://reasonml.github.io" target="_blank">Reason</a>
 is a syntax extension and toolchain for OCaml developed by Facebook.
@@ -629,6 +629,12 @@ done
 ```
 
 Refs are actually single field records with a mutable field named `contents`.
+
+Other kinds of values in OCaml that support mutation include
+arrays, record fields (when marked as `mutable`),
+Values created with the following standard library modules
+also support mutation:
+`Atomic`, `Bytes`, `Hashtbl`, `Mutex`, `Queue`, `Semaphore`, and `Stack`.
 
 ## Custom Types
 
@@ -1972,6 +1978,7 @@ is supported in OCaml with "signatures".
 ## Functors
 
 TODO: Describe these.
+See <a href="https://ocaml.org/docs/functors" target="_blank">Functors</a>.
 
 ## Exception Handling
 
