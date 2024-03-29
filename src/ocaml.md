@@ -832,6 +832,22 @@ let () =
   | None -> print_endline "failed to find green\n"
 ```
 
+<a href="https://v2.ocaml.org/api/Option.html" target="_blank">Module Option</a>
+defines many functions that operate on an `Option` value.
+Many of these have operator equivalents.
+
+`Option.map` is used to apply a function to the value inside an `Option`
+and return a new `Option`.
+If it is `Some v` then the result of passing `v` to the function
+is returned in a `Some` variant.
+If it is `None` then `None` is returned.
+
+`Option.bind` is used in reverse function application chains
+so a function that returns an `Option` can have
+the value inside it passed to the next function in the chain.
+If any function returns `None`, the remaining functions are not called
+and the value of the entire chain is `None`.
+
 ### Result Variant Type
 
 The <a href="https://v2.ocaml.org/api/Result.html" target="_blank">Result</a>
@@ -879,6 +895,9 @@ let sign = if result > 0 then "positive"
 To include multiple expressions after `then` or `else`,
 surround them with parentheses and separate them with semicolons.
 The value will be the value of the final expression.
+
+As an alternative to parentheses, the `begin` and `end` keywords can be used.
+But OCaml editor extensions may automatically replaces those with parentheses.
 
 Unless the `then` branch produces a unit result, an `else` branch is required.
 
@@ -1921,6 +1940,9 @@ but that introduces complexity.
 
 A module provides a namespace for a collection of related named values
 that can be types, constants, and functions.
+Their names must begin with an uppercase letter
+and they use CamelCase by convention.
+
 Modules provides a way to identify multiple of these
 that happen to have the same name.
 For example, the `List` and `Array` modules both define the `map` function.
@@ -1928,6 +1950,9 @@ For example, the `List` and `Array` modules both define the `map` function.
 Modules also serve to hide complexity.
 
 A module is defined with the syntax `module ModuleName = struct ... end`.
+
+Modules can be nested to create a hierachy of namespaces,
+but it seems this is rarely used.
 
 An `open` expresion brings the names defined in a module into the current scope.
 Circular dependencies between modules are not allowed.
