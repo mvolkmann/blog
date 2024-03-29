@@ -2672,6 +2672,38 @@ To create a project like this:
 1. To run one of your sample programs such as `foo.ml`,
    enter `dune exec ./foo.exe`
 
+## Pretty Printing
+
+See the library <a href="https://github.com/ocaml-ppx/ppx_deriving"
+target="_blank">ppx_deriving</a>.
+This supports a number plugins for deriving functions from types,
+including `enum`, `eq`, `fold`, `iter`, `make`, `map`, `ord`,
+`protobuf` `show`, and `yojson`.
+
+To use this in a Dune project:
+
+1. Install it by entering `opam install ppx_deriving`
+1. Add the following stanza to the project `dune` file.
+   Here we only use the `show` plugin which generates functions
+   whose names begin with `show_` that return pretty-printed strings.
+
+   ```text
+   (preprocess (pps ppx_deriving.show))
+   ```
+
+1. Annotate types to be pretty-printed. For example:
+
+   ```ocaml
+   type int_list = int list
+   [@@deriving show]
+   ```
+
+1. Print instances of that type with the following:
+
+   ```ocaml
+   print_endline (show_int_list numbers);
+   ```
+
 ## HTTP Servers
 
 There are several OCaml libraries for implementing HTTP servers
