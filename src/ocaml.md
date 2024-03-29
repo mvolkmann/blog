@@ -35,6 +35,7 @@ OCaml is a member of the
 target="_blank">ML</a> (short for Meta Language)
 family of programming languages.
 Other dialects of ML include Standard ML and F#.
+(F# is basically a port of OCaml to the .NET platform.)
 ML influenced the design of many other languages including
 Clojure, Elm, Haskell, Erlang, Rust, and Scala.
 
@@ -226,6 +227,17 @@ OCaml has two REPLs. A basic one can be started by entering `ocaml`.
 A better one is `utop` which is short for "Universal Toplevel".
 The `utop` command provides a more interactive, user-friendly interface that
 includes line editing, syntax highlighting, command history, and tab completion.
+
+An expression in OCaml can be:
+
+- a literal (ex. `true`, `3`, `3.14`, or "hello")
+- a variable (ex. `x`)
+- a variable declaration (ex. `let x = 3`),
+- a keyword expression (ex. `if ...` or `for ...`)
+- a function declaration
+- a function call
+- a series of any of the above separated by semicolons where
+  only the last one is allowed to have a value other than the unit value
 
 In either REPL the expressions you enter are only evaluated
 when they are terminated by a double semicolon (`;;`).
