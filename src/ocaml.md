@@ -3023,3 +3023,7 @@ stanza `(flags (:standard -w -69))` to the `dune` file
 where 69 is the code for "unused-field" errors.
 
 To see all the supported error codes, enter `ocaml -warn-help`.
+
+## Concurrency
+
+TODO: Document support for this and using multiple threads.
