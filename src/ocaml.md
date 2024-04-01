@@ -895,14 +895,14 @@ and return a new `Option`.
 If it is `Some v` then the result of passing `v` to the function
 is returned in a `Some` variant.
 If it is `None` then `None` is returned.
-The operator `>>|` is equivalent to this.
+The operator `>>|` is often defined to use this.
 
 `Option.bind` is used in reverse function application chains
 so a function that returns an `Option` can have
 the value inside it passed to the next function in the chain.
 If any function returns `None`, the remaining functions are not called
 and the value of the entire chain is `None`.
-The operator `>>=` is equivalent to this.
+The operator `>>=` is often defined to use this.
 
 ### Result Variant Type
 
@@ -2252,6 +2252,9 @@ let is_empty = function
   | [] -> true
   | _ :: _ -> false
 ```
+
+Files with the `.cmi` extension are compiled versions of `.mli` files and
+files with the `.cmo` extension are compiled versions of `.ml` files.
 
 TODO: Can an OCaml class implement a signature?
 

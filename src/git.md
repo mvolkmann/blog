@@ -83,13 +83,12 @@ merged other feature branches back to main.
   in the editor where you will compose a commit message,
   which helps you write a good one.
 
-- When work on the feature branch is finished, or periodically,
-  rebase the main branch only the feature branch with the following:
+- When work on the feature branch is finished,
+  rebase the feature branch onto the `main` branch with the following:
 
   - `git checkout main`
   - `git pull`
-  - `git checkout my-feat`
-  - `git rebase -i main`
+  - `git rebase -i my-feat`
 
   The `-i` flag (for "interacive") causes git to open a text editor
   where you can make changes to commits. It uses Vim by default.
@@ -114,17 +113,14 @@ merged other feature branches back to main.
 
   Save the changes and quit the editor to start the rebase process.
 
-  This updates my-feat by setting it to a copy of main and then
-  replaying all the changes made in my-feat onto this copy of main.
+  This updates the local `main` branch with the changes made on `my-feat`
+  by replaying them onto the local `main` branch.
 
 - Test the code on my-feat to verify that
   everything is still working correctly.
 
-- Merge the feature branch to main with the following:
-
-  - `git checkout main`
-  - `git pull`
-  - `git merge my-feat`
+- On projects that are using pull requests, create one.
+  Otherwise, push your local `main` branch to the remote with `git push`.
 
 - Delete the local feature branch with `git branch -d my-feat`
 
