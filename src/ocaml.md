@@ -14,6 +14,8 @@ layout: topic-layout.njk
 {% aTargetBlank "https://ocaml.org", "OCaml" %} is
 "an industrial-strength functional programming language
 with an emphasis on expressiveness and safety."
+It was released in 1996
+which is the same year that Java was released.
 
 OCaml answers the question "Can a programming language implement a
 type system so strong that it is nearly never necessary to specify types?"
@@ -24,7 +26,7 @@ The Hindley–Milner type system has the ability to
 infer the most general types of expressions
 without requiring explicit type annotations in many cases.
 
-The Caml programming language is the predecessor of OCaml.
+The Caml programming language, released in 1985, is the predecessor of OCaml.
 The name is short for "Categorical Abstract Machine Language".
 OCaml is short for "Objective Caml".
 It adds support for object-oriented programming
@@ -37,7 +39,7 @@ family of programming languages.
 Other dialects of ML include Standard ML and F#.
 (F# is basically a port of OCaml to the .NET platform.)
 ML influenced the design of many other languages including
-Clojure, Elm, Haskell, Erlang, Rust, and Scala.
+Clojure, Elm, Erlang, Haskell, Rust, and Scala.
 
 OCaml has an interpreter, a compiler that compiles to bytecode,
 and a compiler that creates native executables.
@@ -47,11 +49,9 @@ They are fast compared to the compilers for Haskell and Rust.
 
 OCaml source files have the extension `.ml` which stands for "meta language".
 
-OCaml supports Foreign Function Interface (FFI) mechanisms to call C functions.
+The performance of OCaml is generally about 50% that of C.
 
-The financial company <a href="https://www.janestreet.com"
-target="_blank">Jane Street</a> is one of the
-largest users and supporters of OCaml.
+OCaml supports Foreign Function Interface (FFI) mechanisms to call C functions.
 
 ## Notable Features
 
@@ -91,6 +91,9 @@ OCaml has a number of notable features including:
 
 ## Usage
 
+Ahrefs uses OCaml in its backend systems and data processing pipelines
+for Search Engine Optimization (SEO) tools and data analysis.
+
 Bloomberg created BuckleScript which compiles OCaml code to JavaScript.
 
 Citrix uses OCaml in the Hypervisor software.
@@ -112,7 +115,13 @@ Its compiler is implemented in OCaml.
 
 Jane Street uses OCaml for all their financial software,
 including algorithmic trading.
-They are a major contributor to the OCaml ecosystem.
+They are one of the largest users and supporters of OCaml.
+
+LexiFi uses OCaml in their financial software
+for derivatives pricing and risk management.
+
+T3 uses OCaml for algorithmic trading, quantitative analysis, risk management,
+and other financial software.
 
 ## Derived Languages
 
@@ -122,6 +131,9 @@ It provides a more JavaScript-like syntax while
 retaining full compatibility with the OCaml language.
 The syntax of Reason is more familiar to JavaScript developers than OCaml.
 Reason can use OCaml libraries.
+
+<a href="https://melange.re/v3.0.0/" target="_blank">Melange</a>
+is a set of tools that generate and interoperate with JavaScript.
 
 <a href="https://coq.inria.fr" target="_blank">Coq</a>
 is a formal proof system that is primarily implemented in OCaml.
@@ -348,6 +360,8 @@ For Unicode support, see the libraries
 `Uutf`, `Uutf_string`, and `ocaml-unicode`.
 
 Primitive values are expressions that do not require additional evaluation.
+
+OCaml does not support null values.
 
 ## Type Conversions
 
@@ -1760,6 +1774,9 @@ let () =
 OCaml functions are first-class.
 They can take other functions as arguments and can return new functions.
 
+OCaml functions cannot be overridden based on
+their number of parameters or parameter types.
+
 The syntax `a b c` means calling function `a` with the arguments `b` and `c`.
 
 Another way to write this is to use the "reverse function application" operator
@@ -1991,7 +2008,9 @@ that can be types, constants, and functions.
 Their names must begin with an uppercase letter
 and they use CamelCase by convention.
 
-Modules provides a way to identify multiple of these
+A package is a collection of related modules.
+
+Modules provides a way to identify multiple values
 that happen to have the same name.
 For example, the `List` and `Array` modules both define the `map` function.
 
