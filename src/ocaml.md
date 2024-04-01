@@ -327,6 +327,9 @@ To stop tracing the function, enter `#untrace {fn-name};;`.
 
 To exit the REPL, press ctrl-d or enter #quit.
 
+To specify OCaml code to run every time `utop` is started,
+place it in the file `.ocamllint` in the current directory.
+
 There is also an iOS app called "OCaml" for evaluating OCaml expressions.
 
 ## Comments
@@ -2069,6 +2072,9 @@ that can be types, constants, and functions.
 Their names must begin with an uppercase letter
 and they use CamelCase by convention.
 
+Every `.ml` source file defines a module.
+For example, the file `demo.ml` defines the module `Demo`.
+
 A package is a collection of related modules.
 
 Modules provides a way to identify multiple values
@@ -2221,7 +2227,31 @@ let () =
   printf "Rectangle area: %.2f\n" rectangle_area
 ```
 
-TODO: Learn how to use a `.mli` file instead of defining a signature in a `.ml` file.
+Files with the `.mli` extension contain signatures
+of functions defined in the corresponding `.ml` file.
+This pair of files is called a "compilation unit".
+Code that uses this unit can only access what the `.mli` file describes.
+
+For example, see the definitions of the standard library modules
+in the GitHub repository for OCaml at
+<a href="https://github.com/ocaml/ocaml/tree/trunk/stdlib"
+target="_blank">ocaml/stdlib</a>.
+The file `list.mli` defines the signatures for the `List` module
+and the file `list.ml` defines the implementations.
+
+The `is_empty` function has the signature
+
+```ocaml
+val is_empty : 'a list -> bool
+```
+
+and the implementation
+
+```ocaml
+let is_empty = function
+  | [] -> true
+  | _ :: _ -> false
+```
 
 TODO: Can an OCaml class implement a signature?
 
