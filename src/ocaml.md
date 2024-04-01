@@ -934,8 +934,7 @@ type expr =
   | Mul of expr * expr
   | Div of expr * expr
 
-let rec eval expr =
-  match expr with
+let rec eval = function
   | Int n -> n
   | Add (e1, e2) -> eval e1 + eval e2
   | Sub (e1, e2) -> eval e1 - eval e2
