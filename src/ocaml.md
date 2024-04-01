@@ -1999,7 +1999,8 @@ let () =
 A common OCaml idiom to hide the use of an accumulator parameter
 is to nest a function inside another.
 For example, see the `visit` function that is
-nested inside the `reverse_int_list` function here:
+nested inside the `reverse_int_list` function here.
+This uses tail recursion so recursion does not cause the call stack to grow.
 
 ```ocaml
 let reverse_int_list l =
