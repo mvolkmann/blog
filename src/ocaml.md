@@ -41,6 +41,10 @@ Other dialects of ML include Standard ML and F#.
 ML influenced the design of many other languages including
 Clojure, Elm, Erlang, Haskell, Rust, and Scala.
 
+F# is to C# as Scala and Clojure are to Java.
+They are ML-inspired languages that
+interoperate with an underlying non-ML language.
+
 OCaml has an interpreter, a compiler that compiles to bytecode,
 and a compiler that creates native executables.
 
@@ -95,6 +99,7 @@ Ahrefs uses OCaml in its backend systems and data processing pipelines
 for Search Engine Optimization (SEO) tools and data analysis.
 
 Bloomberg created BuckleScript which compiles OCaml code to JavaScript.
+In 2022, BuckleScript was renamed to ReScript.
 
 Citrix uses OCaml in the Hypervisor software.
 
@@ -2888,6 +2893,8 @@ in the `lib` directory, not in the `bin` directory.
 1. Enter `opam install ppx_inline_test` to enable only inline tests or
    enter `opam install ppx_expect` to enable both inline and expectation tests.
 
+   PPX is short for "PreProcessor eXtension".
+
 1. Change `lib/dune` to the following:
 
    ```text
@@ -3017,6 +3024,9 @@ target="_blank">ppx_deriving</a>.
 This supports a number plugins for deriving functions from types,
 including `enum`, `eq`, `fold`, `iter`, `make`, `map`, `ord`,
 `protobuf` `show`, and `yojson`.
+
+PPX is short for "PreProcessor eXtension".
+These can add support for new syntax and generate/transform code.
 
 To use this in a Dune project:
 
