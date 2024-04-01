@@ -1774,6 +1774,8 @@ let () =
 OCaml functions are first-class.
 They can take other functions as arguments and can return new functions.
 
+Function definitions must appear before any calls to them.
+
 OCaml functions cannot be overridden based on
 their number of parameters or parameter types.
 
@@ -1940,7 +1942,7 @@ let rec factorial n =
     (* raises an exception *)
     failwith "factorial is not defined for negative numbers"
   else if n = 0 then 1
-  else n * factorial (n - 1);;
+  else n * factorial (n - 1)
 ```
 
 The `failwith` keyword is sometimes used in place of
@@ -1992,6 +1994,33 @@ let () =
 
   let a = [| "a"; "b"; "c"; "d" |] in
   printf "second in array is %s\n" (array2of4 a)
+```
+
+A common OCaml idiom to hide the use of an accumulator parameter
+is to nest a function inside another.
+For example, see the `visit` function that is
+nested inside the `reverse_int_list` function here:
+
+```ocaml
+let reverse_int_list l =
+  let rec visit acc l =
+    match l with [] -> acc | hd :: tl -> visit (hd :: acc) tl
+  in
+  visit [] l
+
+let rec print_int_list l =
+  match l with
+  | [] -> ()
+  | hd :: tl ->
+      print_int hd;
+      print_char ' ';
+      print_int_list tl
+
+let () =
+  let numbers = [ 1; 2; 3; 4; 5 ] in
+  let rev = reverse_int_list numbers in
+  print_int_list rev;
+  print_newline ()
 ```
 
 OCaml does not make it easy to write variadic functions,
