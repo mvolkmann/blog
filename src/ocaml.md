@@ -87,6 +87,32 @@ OCaml has a number of notable features including:
 - <a href="https://ocaml-book.com" target="_blank">OCaml from the Very Beginning</a> book
 - <a href="https://caml.inria.fr/pub/old_caml_site/humps/" target="_blank">The Caml Humps</a>
   collection of links to Caml-related tools, libraries, code samples, and tips
+- <a href="https://en.wikipedia.org/wiki/OCaml" target="_blank">OCaml Wikipedia page</a>
+
+## Usage
+
+Bloomberg created BuckleScript which compiles OCaml code to JavaScript.
+
+Citrix uses OCaml in the Hypervisor software.
+
+Coq is an interactive theorem prover implemented in OCaml.
+
+Docker uses OCaml in their desktop software for Windows and macOS.
+
+Facebook uses OCaml for many things including:
+
+- Hack programming language (extends PHP with static types)
+- Facebook Messager (the web version)
+- Flow static type system for JavaScript
+- Infer static analyzer for Java, C, C++, and Objective-C
+
+Haxe is a high-level cross-platform programming language
+that can be compiled to run on many platforms.
+Its compiler is implemented in OCaml.
+
+Jane Street uses OCaml for all their financial software,
+including algorithmic trading.
+They are a major contributor to the OCaml ecosystem.
 
 ## Derived Languages
 
