@@ -915,8 +915,8 @@ An `if` expression can be used where other languages use a ternary operator.
 
 A `match` expression performs pattern matching.
 It takes an expression whose value is to be matched
-and a set of branches that contain a pattern and
-code to execute when the pattern is matched.
+and a set of branches that contain a pattern followed by `->`
+and code to execute when the pattern is matched.
 The type of the `match` expression is the type of the branch expressions,
 which must all evaluate to the same type.
 
@@ -927,9 +927,8 @@ Using the catch-all `_` as the final pattern satisfies this.
 The patterns can match:
 
 - a constant (ex. `| 7` or `| "summer"`)
-- several constants (ex. `| 7 | 8 | 9`)
 - a range of characters (ex. `| 'a' .. 'f'`)
-- a guard (ex. `| n when 7 <= n && n <= 9`)
+- a guard using the `when` keyword (ex. `| n when 7 <= n && n <= 9`)
 - a variant type constructor (ex. `| None` or `| Some x`)
 - a tuple (ex. `| (_, "summer", temperature)` which means
   we don't care about the first element, the second element must be `"summer"`,
@@ -939,6 +938,7 @@ The patterns can match:
 - a record (ex. `| {name = n; age = a}`)
 - a variable to match anything and bind the value to it
 - the catch-all `_` which doesn't bind the value
+- multiple match expressions (ex. `| 7 | 8 | 9`)
 
 The patterns are check in the order they are specified and
 the first matching pattern is used, so their order matters.
