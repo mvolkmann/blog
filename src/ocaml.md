@@ -904,6 +904,15 @@ If any function returns `None`, the remaining functions are not called
 and the value of the entire chain is `None`.
 The operator `>>=` is often defined to use this.
 
+`Option.fold` is used to extract the value from an `Option`
+and provide a default value when it is `None`.
+For example, the following defines a function that gets the breed
+from a `dog option` value.
+
+```ocaml
+let dog_breed = Option.fold ~some:(fun dog -> dog.breed) ~none:""
+```
+
 ### Result Variant Type
 
 The <a href="https://v2.ocaml.org/api/Result.html" target="_blank">Result</a>
