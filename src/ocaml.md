@@ -1352,6 +1352,8 @@ Some highlights include the following:
 | `List.map2`      | similar to `List.map`, but it operates on two lists, passing corresponding elements from each to a given function             |
 | `List.mem`       | returns a `bool` that indicates whether a given value is a member                                                             |
 | `List.nth`       | takes a list and an index; returns the list element at the index                                                              |
+| `List.sort`      | returns a sorted list                                                                                                         |
+| `List.sort_uniq` | returns a sorted list with no duplicates                                                                                      |
 | `List.tl`        | returns the head of a list                                                                                                    |
 
 Since tuple elements are separated by commas and list elements are
@@ -1416,6 +1418,12 @@ let max_int x y = if x > y then x else y
 let maximum =
   first = List.hd numbers in
   List.fold_left max_int first numbers
+```
+
+The following code sorts a list of strings:
+
+```ocaml
+["red"; "green"; "blue"] |> List.sort compare
 ```
 
 ### Arrays
@@ -2236,6 +2244,29 @@ The options include:
         dog_table
     )
   ```
+
+There is an implicit `open` for the module `Stdlib`,
+so all of its members can be accessed without the module name prefix.
+
+Commonly used members include:
+
+- many operators
+- many math functions
+- many type conversion functions
+- input/output functions
+- `ref` and operators on them
+- `result` variant type
+- `exit` and `at_exit`
+- a large number of standard library modules
+- tuple functions for pairs, `fst` and `snd`
+- `ceil` and `floor`
+- `failwith`, `invalid_arg`, and `raise`
+- many exceptions
+- `compare`
+- `max` and `min`
+- `nan`
+- `not`
+- debugging dunderbars (ex. `__FILE__`, `__FUNCTION__`, and `__LINE__`)
 
 Modules can be nested to create a hierachy of namespaces,
 but it seems this is rarely used.
