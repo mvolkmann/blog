@@ -139,12 +139,14 @@ and other financial software.
 <a href="https://reasonml.github.io" target="_blank">Reason</a>
 is a syntax extension and toolchain for OCaml developed by Facebook.
 It provides a more JavaScript-like syntax while
-retaining full compatibility with the OCaml language.
+retaining full compatibility with the OCaml language and its libraries.
 The syntax of Reason is more familiar to JavaScript developers than OCaml.
-Reason can use OCaml libraries.
+It also supports JSX.
 
 <a href="https://melange.re/v3.0.0/" target="_blank">Melange</a>
-is a set of tools that generate and interoperate with JavaScript.
+is a set of tools that work with OCaml and Reason code
+to generate and interoperate with JavaScript.
+It can generate React components.
 
 <a href="https://coq.inria.fr" target="_blank">Coq</a>
 is a formal proof system that is primarily implemented in OCaml.
@@ -562,7 +564,7 @@ and they can appear anywhere except at the beginning,
 but doing this is odd!
 
 A `let` expression binds an identifier to the value of an expression
-whose scope is the expression that follows.
+whose scope is the expression that follows the `in` keyword.
 The value of a `let` expression is the value of its expression
 with all occurrences of the identifier replaced with its value.
 For example, the value of this `let` expression is `3`:
@@ -572,6 +574,13 @@ let a = 1 in
 let b = 2 in
 a + b
 ```
+
+It is a common error to write `let variable = expression;`
+instead of `let variable = expression in`.
+When this is done, your editor should flag it with the message
+"Warning 10: this expression should have type unit".
+If you compile the code, the message "Error: Syntax error" will be output
+and will refer to the last line in the file, which is unhelpful.
 
 The code above can also use the `and` keyword as follows:
 
@@ -1003,10 +1012,17 @@ An `if` expression can be used where other languages use a ternary operator.
 ### match expression
 
 A `match` expression performs pattern matching.
-It takes an expression whose value is to be matched
-and a set of branches that contain a pattern followed by `->`
-and code to execute when the pattern is matched.
-The type of the `match` expression is the type of the branch expressions,
+It takes an expression whose value is to be matched and a set of branches.
+Each branch begins with a vertical bar (`|`) followed by a pattern,
+the characters `->`, and code to execute when the pattern is matched.
+The vertical bar before the first branch is optional.
+
+A `match` expression is somewhat like a
+`switch` statement in other programming languages.
+You can think of the vertical bar at the beginning of each branch
+as being like the `case` keyword in those languages.
+
+The type of a `match` expression is the type of its branch expressions,
 which must all evaluate to the same type.
 
 The patterns must be exhaustive, meaning that
