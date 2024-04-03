@@ -205,7 +205,8 @@ write, compile, test, debug, and profile OCaml programs and libraries.
 
 A module is a collection of named values
 that can be constants, functions, and types.
-An `open` expresion brings the names defined in a module into the current scope.
+An `open` expression brings the names defined in a module into the current scope.
+An `include` expression inserts the code as if it was part of the file.
 Circular dependencies between modules are not allowed.
 
 Suppose we have the file `my_module.ml` containing `let add a b = a + b`
@@ -886,8 +887,8 @@ use this type to represent their return value.
 For example, the `List.find_opt` function does this.
 
 ```ocaml
-(* The `open` keyword allows all the identifiers in a given module,
-   `printf` in this case, to be used in this source file
+(* The `open` keyword brings all the identifiers in a given module,
+   `printf` in this case, into scope so they can be used
    without prefixing them with their module name. *)
 open Printf
 
@@ -905,20 +906,6 @@ let () =
 defines many functions that operate on an `Option` value.
 Many of these have operator equivalents.
 
-`Option.map` is used to apply a function to the value inside an `Option`
-and return a new `Option`.
-If it is `Some v` then the result of passing `v` to the function
-is returned in a `Some` variant.
-If it is `None` then `None` is returned.
-The operator `>>|` is often defined to use this.
-
-`Option.bind` is used in reverse function application chains
-so a function that returns an `Option` can have
-the value inside it passed to the next function in the chain.
-If any function returns `None`, the remaining functions are not called
-and the value of the entire chain is `None`.
-The operator `>>=` is often defined to use this.
-
 `Option.fold` is used to extract the value from an `Option`
 and provide a default value when it is `None`.
 For example, the following defines a function that gets the breed
@@ -927,6 +914,34 @@ from a `dog option` value.
 ```ocaml
 let dog_breed = Option.fold ~some:(fun dog -> dog.breed) ~none:""
 ```
+
+`Option.map` is used to apply a function to the value inside an `Option`
+and return a new `Option`.
+If it is `Some v` then the result of passing `v` to the function
+is returned in a `Some` variant.
+If it is `None` then `None` is returned.
+The operator `>>|` is often defined to use this.
+
+For example:
+
+````ocaml
+let double x = x * 2
+let is_even x = x mod 2 == 0
+
+let () =
+  let numbers = [ 1; 4; 7 ] in
+  List.find_opt is_even numbers
+  |> Option.map double |> Option.map string_of_int
+  |> Option.value ~default:"no even found"
+  |> print_endline
+```
+
+`Option.bind` is used in reverse function application chains
+so a function that returns an `Option` can have
+the value inside it passed to the next function in the chain.
+If any function returns `None`, the remaining functions are not called
+and the value of the entire chain is `None`.
+The operator `>>=` is often defined to use this.
 
 ### Result Variant Type
 
@@ -947,7 +962,7 @@ let () =
   match divide n d with
   | Ok v -> print_endline (string_of_float v)
   | Error e -> print_endline e
-```
+````
 
 ### Interpreter
 
@@ -1256,6 +1271,9 @@ and separate them with semicolons. For example:
 let colors = ["red"; "green"; "blue"]
 ```
 
+Using commas instead of semicolons is a common error.
+When that is done, a list containing a single tuple is created.
+
 A non-empty list is represented by a head that holds an element value
 and a tail that holds the remainder which is another list that may be empty.
 
@@ -1322,8 +1340,10 @@ Some highlights include the following:
 
 | Function         | Description                                                                                                                   |
 | ---------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| `List.exists`    | determines if a list contains at least one element that matches a given predicate function                                    |
+| `List.exists`    | determines if a list contains at least one element that satisfies a predicate function                                        |
 | `List.filter`    | creates a new list from the elements in an existing list that satisfy a predicate function                                    |
+| `List.find`      | returns the first element that satisfies a predicate or raises `Not-found`                                                    |
+| `List.find_opt`  | returns an `Option` that contains the first element that satisfies a predicate function                                       |
 | `List.fold_left` | reduces a list to a single value using an accumulator function                                                                |
 | `List.hd`        | returns the head of a list                                                                                                    |
 | `List.iter`      | iterates over a list in a way that is useful when the function passed to it has a side effect and a result list is not needed |
@@ -1742,7 +1762,7 @@ The `Hashtbl` module supports the following functions:
 | `Hashtbl.create`             | creates a `Hashtbl` instance                                      |
 | `Hashtbl.add`                | adds a key/value pair                                             |
 | `Hashtbl.filter_map_inplace` | can modify the value for each key or remove it                    |
-| `Hashtbl.find`               | returns the first value for a given key                           |
+| `Hashtbl.find`               | returns the first value for a given key or raises `Not-found`     |
 | `Hashtbl.find_all`           | returns a list of all values for a given key                      |
 | `Hashtbl.find_opt`           | returns an `Option` that contains the first value for a given key |
 | `Hashtbl.fold`               | computes a single value from all the key/value pairs              |
@@ -1877,6 +1897,10 @@ Functions that only produce side effects do not return anything.
 Calls to them are expressions with "unit type", represented by `()`.
 These are like "statements" in other languages.
 Some call them "effectful expressions".
+
+There are two ways to return early from a function ...
+using the `exit` (not typically used)
+or `raise` keywords (raises an exception).
 
 Anonymous functions (aka lambdas) are defined using the `fun` function.
 For example the following function
