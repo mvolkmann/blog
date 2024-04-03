@@ -2035,6 +2035,29 @@ A shorthand for this when the label and name match
 is `?({name}={default-value})`.
 These must appear before the required parameters.
 
+For example:
+
+```ocaml
+open Printf
+
+let product ?(a = 1.0) b = a *. b
+
+(* When using optional parameters, there must be at least one
+   that is not optional.  Adding `()` satisifies this. *)
+let greet ?(name = "World") ?(suffix = "!") () =
+  printf "Hello, %s%s\n" name suffix
+
+let () =
+  printf "product = %f\n" (product ~a:8.5 2.0); (* 17 *)
+  printf "product = %f\n" (product 8.5); (* 8.5 *)
+
+  (* In calls to functions with no required parameters, include `()`.
+     It doesn't matter where it appears in the argument list. *)
+  greet ~name:"Mark" ~suffix:"." (); (* Hello, Mark. *)
+  greet () ~name:"Mark"; (* Hello, Mark! *)
+  greet () (* Hello, World! *)
+```
+
 Recursive functions must be defined with `let rec`. For example:
 
 ```ocaml
