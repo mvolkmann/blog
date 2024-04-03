@@ -63,16 +63,22 @@ OCaml has a number of notable features including:
 
 - strong static type checking
 - strong type inference (almost never need to specify types)
-- fast compared to other non-systems programming languages
-- provides automatic garbage collection
 - most terse syntax possible for defining and calling functions
+- pattern matching with many ways to match
+- automatic function currying
+- functional programming (not as pure as Haskell, but more pragmatic)
+- object-oriented programming (though not often used)
+- variant types (like enums with associated values)
+- polymorphic types (OCaml's version of generics)
+- interesting implementing of modules
+- pragmatic approach to mutability
+  (immutable by default, but can opt-in to some mutability)
+- automatic garbage collection
+- fast compared to other non-systems programming languages
+- interoperable with C
+- package management with OPAM
 - comes with an interpreter and two compilers
   (one to produce bytecode and one to produce native executables)
-- supports functional and object-oriented programming
-- supports pattern matching
-- supports polymorphic types (OCaml's version of generics)
-- pragmmatic approach to mutability (some allowed)
-- package management with OPAM
 - Dune build system
 - great REPL (utop)
 
