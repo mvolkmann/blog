@@ -2268,6 +2268,20 @@ Commonly used members include:
 - `not`
 - debugging dunderbars (ex. `__FILE__`, `__FUNCTION__`, and `__LINE__`)
 
+The following code demonstrates using the debugging dunderbar values.
+
+```ocaml
+let log file fn line =
+  Printf.printf "file: %s; function: %s; line: %d\n" file fn line
+
+let demo () =
+  print_endline "entered demo";
+  log __FILE__ __FUNCTION__ __LINE__;
+  print_endline "exiting demo"
+
+let () = demo ()
+```
+
 Modules can be nested to create a hierachy of namespaces,
 but it seems this is rarely used.
 
