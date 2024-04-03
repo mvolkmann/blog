@@ -3298,7 +3298,10 @@ web framework are:
 - Enter `dune exec dream_demo --watch`
 - Browse localhost:8080
 
-TODO: Implement your Dog CRUD htmx app using Dream.
+For a more advanced Dream app that
+places the HTML templates in separate source files, see
+<a href="https://github.com/mvolkmann/ocaml-examples/tree/main/dream_demo"
+target="_blank">dream_demo</a>.
 
 ## Converting OCaml to JavaScript
 
