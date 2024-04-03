@@ -1350,6 +1350,7 @@ Some highlights include the following:
 | `List.length`    | returns the length of a given list                                                                                            |
 | `List.map`       | creates a new list containing elements that are computed by passing each element in an existing list to a given function      |
 | `List.map2`      | similar to `List.map`, but it operates on two lists, passing corresponding elements from each to a given function             |
+| `List.mem`       | returns a `bool` that indicates whether a given value is a member                                                             |
 | `List.nth`       | takes a list and an index; returns the list element at the index                                                              |
 | `List.tl`        | returns the head of a list                                                                                                    |
 
@@ -1768,7 +1769,7 @@ The `Hashtbl` module supports the following functions:
 | `Hashtbl.fold`               | computes a single value from all the key/value pairs              |
 | `Hashtbl.iter`               | iterates over all the key/value pairs                             |
 | `Hashtbl.length`             | returns the number of key/value pairs                             |
-| `Hashtbl.mem`                | returns a boolean indicating whether a given key exists           |
+| `Hashtbl.mem`                | returns a boolean indicating whether a given key is a member      |
 | `Hashtbl.remove`             | removes one key/value pair for a given key                        |
 | `Hashtbl.replace`            | replaces the value for a given key                                |
 | `Hashtbl.reset`              | removes all the key/value pairs and shrinks the bucket size       |
@@ -1888,6 +1889,9 @@ let angle = 0.78 (* radians *)
 let result1 = square (sin angle)
 let result2 = angle |> sin |> square
 ```
+
+The OCaml syntax for defining and calling functions
+is inspired by lambda calculus.
 
 In order to call a function that takes no arguments, such as `print_newline`,
 it must be "passed" the "unit" value `()`.
@@ -2138,7 +2142,9 @@ For example, the `List` and `Array` modules both define the `map` function.
 
 Modules also serve to hide complexity.
 
-A module is defined with the syntax `module ModuleName = struct ... end`.
+A submodule can be defined with the syntax `module ModuleName = struct ... end`.
+This can be used to avoid placing module code in a separate file
+when it will only be used in one file.
 
 The following code defines a module that contains functions for
 converting temperature values and demonstrates using it.
@@ -2163,6 +2169,8 @@ passed to a function, or returned from a function.
 
 Consider the following code which uses
 values from the `Hashtbl` module multiple times.
+There is no need to "import" the module
+as is done in many other programming languages.
 
 ```ocaml
 let dog_table = Hashtbl.create 10
