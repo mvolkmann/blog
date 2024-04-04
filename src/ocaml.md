@@ -3303,6 +3303,15 @@ places the HTML templates in separate source files, see
 <a href="https://github.com/mvolkmann/ocaml-examples/tree/main/dream_demo"
 target="_blank">dream_demo</a>.
 
+Dream Templates are not well-supported in editors like VS Code.
+Many errors flagged in them are not real errors.
+If the templates are moved to separate files with the `.eml.html` file extension
+as recommended, hovering over OCaml values will not display their types.
+
+For an alternative to Dream templates
+which doesn't having tooling support issues, see
+<a href="https://github.com/yawaramin/dream-html" target="_blank">dream-html</a>.
+
 ## Converting OCaml to JavaScript
 
 Here are the steps to compile an OCaml program to JavaScript using Dune.
