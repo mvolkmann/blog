@@ -272,10 +272,15 @@ profile = default
 version = 0.26.1
 ```
 
+It may be necessary to copy the `.ocamlformat` into every subdirectory
+that contains its own `dune-project` file.
+
 Sometimes after code changes VS Code flags errors that aren't real.
 Running "Developer: Reload Window" from the command palette clears them.
 This issue may go away if you run `dune build -w` (for watch mode)
 in a terminal window.
+Doing this is useful anyway because there may be errors that
+`dune build` will flag, but the LSP used in VS Code will not.
 
 ## REPL
 
@@ -476,12 +481,12 @@ The `=` operator is also used for assignment.
 
 The remaining operators include:
 
-| Operator | Description                   |
-| -------- | ----------------------------- |
-| `!`      | gets ref value (dereferences) |
-| `:=`     | sets ref value (assigns)      |
-| `@`      | list concatenation            |
-| `\|>`    | reverse function application  |
+| Operator | Description                                     |
+| -------- | ----------------------------------------------- |
+| `!`      | gets ref value (dereferences)                   |
+| `:=`     | sets ref value (assigns)                        |
+| `@`      | list concatenation                              |
+| `\|>`    | reverse function application (aka pipe forward) |
 
 Most OCaml operators are implemented as binary functions.
 To use them as functions, wrap them in parentheses.

@@ -12,7 +12,8 @@ layout: topic-layout.njk
 ## Overview
 
 {% aTargetBlank "https://turso.tech", "Turso" %} is a cloud database
-that uses SQLite.
+that uses a fork of SQLite called
+<a href="https://github.com/tursodatabase/libsql" target="_blank">libSQL</a>.
 
 The logo depicts Iku-Turso which is a mythological Finnish sea creature.
 
@@ -63,6 +64,20 @@ is having a maximum of 3 or 6 locations (primary and replicas).
 This prevents having fast access all over the world.
 Depending on the location of users,
 this may be acceptable for many web applications.
+
+## Alternatives
+
+<a href="https://pocketbase.io/" target="_blank">PocketBase</a>
+is a simple database solution that uses SQLite.
+It provides SDKs for JavaScript and Dart.
+No cloud hosting is provided.
+It must be self-hosted and run on a single server.
+
+<a href="https://supabase.com" target="_blank">Supabase</a>
+is an alternative to Google's <a href="https://firebase.google.com"
+target="_blank">Firebase</a> that uses Postgres.
+
+TODO: Add more detail to this section.
 
 ## Available Locations
 
