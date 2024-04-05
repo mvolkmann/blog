@@ -2856,7 +2856,7 @@ is a popular OCaml and Reason build system.
 It is used create, build, test, and run OCaml projects.
 It can also compile to JavaScript.
 
-To install the `dune` command, enter `oam install dune`.
+To install the `dune` command, enter `opam install dune`.
 
 For help, enter `dune --help`.
 
@@ -2866,7 +2866,7 @@ and enter `dune init project {project_name}`.
 This generates many files including:
 
 - dune configuration file `dune-project`
-- opan configuration file `{project_name}.opam`
+- opam configuration file `{project_name}.opam`
 - `_build`, `bin`, `lib`, and `test` directories
 - main source file `bin/main.ml`
 - unit test file `test/test_{project_name}.ml`.
