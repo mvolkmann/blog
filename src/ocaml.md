@@ -3313,6 +3313,9 @@ Many errors flagged in them are not real errors.
 If the templates are moved to separate files with the `.eml.html` file extension
 as recommended, hovering over OCaml values will not display their types.
 
+<img alt="OCaml Dream info" style="border: 0"
+  src="/blog/assets/ocaml-dune-dream-dialect.png?v={{pkg.version}}">
+
 For an alternative to Dream templates
 which doesn't having tooling support issues, see
 <a href="https://github.com/yawaramin/dream-html" target="_blank">dream-html</a>.
