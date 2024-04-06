@@ -493,7 +493,7 @@ when code changes are saved, but they often do not
 reload browser windows that render the HTML that they serve.
 The following steps add this behavior.
 
-- Create the file `src/reload-server.js` containing the following:
+- Create the file `src/reload-server.ts` containing the following:
 
   ```ts
   import {watch} from 'fs';
@@ -518,7 +518,7 @@ The following steps add this behavior.
 - Create the file `public/reload-client.js` containing the following:
 
   ```js
-  // The port here must match the port used in src/reload-server.js.
+  // The port here must match the port used in src/reload-server.ts.
   const ws = new WebSocket('ws://localhost:3001');
 
   ws.addEventListener('close', event => {
@@ -537,7 +537,7 @@ The following steps add this behavior.
   perhaps named `src/server.tsx`:
 
   ```ts
-  import './reload-server.js';
+  import './reload-server';
   ```
 
 - Add the following to the `head` tag of each page,
