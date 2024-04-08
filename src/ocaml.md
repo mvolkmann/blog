@@ -88,6 +88,7 @@ OCaml has a number of notable features including:
 
   Click the "Playground" link to experiment with writing OCaml code online.
 
+- <a href="http://ocamlverse.net/content/ecosystem.html" target="_blank">OCamlverse Ecosystem</a>
 - <a href="https://learnxinyminutes.com/docs/ocaml/" target="_blank">Learn X in Y minutes</a>
   Where X=OCaml
 - <a href="https://cs3110.github.io/textbook/cover.html"
@@ -3246,6 +3247,38 @@ is a package manager for OCaml, similar to npm for JavaScript.
    ```
 
 1. `dune exec date_formatting`
+
+### Switches
+
+To use specific versions of packages in projects, create and activate switches.
+A switch is a collection of packages that are tied to an OCaml version
+and can specify versions of packages.
+
+There are two kinds of switches,
+global switches that can be used by multiple projects and
+local switches that are tied to a specific project directory.
+
+To create a global switch,
+enter `opam switch create {switch-name} {ocaml-version}`.
+For example, `opam switch my_project 5.1.1`
+The OCaml version cannot be omitted.
+Creating a new switch takes around four minutes to complete.
+
+To change the current global switch, enter `opam switch {switch-name}`
+and `eval $(opam env)` to activate it.
+
+To see the name of the currently activated global switch, enter `opam switch`.
+
+To install packages in the currently activated global switch,
+enter `opam install {package-name}.{version}`
+
+To return to the default global switch, use the same commands to
+change to any switch, but specify the name "default".
+
+To list all the currently defined global switches, enter `opam switch list`
+
+Local switches are automatically selected and activated
+when you `cd` to a project directory that has one.
 
 ## Pretty Printing
 
