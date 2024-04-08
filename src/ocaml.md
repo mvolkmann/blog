@@ -330,6 +330,8 @@ and make edits.
 Use the up and down arrow keys to recall previously entered expressions.
 They can be edited and executed again.
 
+To show the type of an expression `e`, enter `#show e;;`
+
 To load definitions in an OCaml source file into the REPL,
 enter `#use "{file-path}";;`.
 This enables using all the types and functions defined in the source file
@@ -406,8 +408,16 @@ Examples include:
 - `float_of_string` - raises `Failure` if conversion fails
 - `float_of_string_opt` - returns `None` if conversion fails
 
-It is idiomatic in OCaml for the name of a function that
-transforms a value of type x to a value of type y to be `y_of_x`.
+To convert a `char` expression `c` to a `string` value, use `String.make 1 c`.
+There is no `string_of_char` function.
+
+## Idiomatic Names
+
+It is idiomatic in OCaml for the name of a function that:
+
+- transforms a value of type x to a value of type y to be `y_of_x`
+- returns a `Option` value to end in `_opt`
+- raises an exception to end in `_exc`
 
 ## Keywords
 
@@ -1704,7 +1714,7 @@ This returns an `Option` because it's possible the key will not be found.
 For example:
 
 ```ocaml
-let dog_option = StringMap.find_first_opt (fun key -> key = "some-key") dog_map
+let dog_opt = StringMap.find_first_opt (fun key -> key = "some-key") dog_map
 ```
 
 To change the value for a given key, use the `update` function on the map type.
@@ -2007,17 +2017,21 @@ For example, our `add` function above can be called as follows:
 add (2 * 3) (4 + 5) (* 6 * 9 = 54 *)
 ```
 
-Labeling parameters allows them to be specified by the labels in calls.
+Labeled parameters allow them to be specified by name in calls.
 A function can have a mixture of labeled and unlabeled parameters.
 Unlabeled parameters are positional and must be
 passed in the order they are specified.
 Labeled parameters can be specified in any order
 and can be mixed into the unlabeled parameters.
 
-Label names are not required to match their coresponding parameter names.
+To declare a labelled parameter, use the syntax `~arg_name:param_name`
+where `arg_name` is the name used in callsx
+and `param_name` is the name used in the function implementation.
+If `arg_name` is the same as `param_name`,
+this can be shortened to just `~arg_name`.
 
-To declare a labelled parameter or pass an labelled argument,
-use the syntax `~{name}:{value}`. For example:
+To pass an labeled argument, use the syntax `~arg_name:value`.
+For example, `~maximum:100`.
 
 ```ocaml
 open Printf
@@ -2036,10 +2050,12 @@ let () =
 ```
 
 Labeled parameters can specify default values (which makes them optional)
-with the syntax `?{label}:({name}={default-value})`.
-A shorthand for this when the label and name match
-is `?({name}={default-value})`.
-These must appear before the required parameters.
+with the syntax `?arg-name:(param-name=default_value)`.
+If `arg_name` is the same as `param_name`,
+this can be shortened to just `?arg_name:default_value`.
+Optional labeled parameters must appear before the non-optional parameters.
+
+TODO: Can all the parameters be optional or does at least one have to be required?
 
 For example:
 
@@ -2475,6 +2491,11 @@ let () =
   (* "100.0 is too hot!" *)
   report_temperature 120.0 (* "120.0 is a crazy temperature!" *)
 ```
+
+The built-in function `assert` takes a Boolean expression
+and raises an `Assert_failure` if if evaluates to false.
+This is good for verify conditions that must hold
+in order for the program to run correctly.
 
 ## Source Files
 
@@ -2912,6 +2933,9 @@ when code changes are detected, add the `--watch` flag.
 The executable name is specified in the `public_name` stanza
 found in the `bin/dune` file and defaults to the project name.
 
+**To clean a project**, enter `dune clean`.
+This deletes the `_build` directory that contains generated files.
+
 The `lib` directory can have subdirectories that contain `.ml` files
 and those can define additional types, constants, and functions.
 To make those accessible, add the following
@@ -3279,6 +3303,9 @@ To list all the currently defined global switches, enter `opam switch list`
 
 Local switches are automatically selected and activated
 when you `cd` to a project directory that has one.
+To create one, cd to a project directory and enter `opm switch create .`
+Switches consume a lot of disk space,
+so creating a local switch for each project is not recommended.
 
 ## Pretty Printing
 
