@@ -430,7 +430,12 @@ There is no `string_of_char` function.
 
 ## Idiomatic Names
 
-It is idiomatic in OCaml for the name of a function that:
+It is idiomatic in OCaml for
+
+- variable and class names to use snake_case with all lowercase letters
+- module names to use CamelCase, starting with an uppercase letter
+
+It is idiomatic in OCaml for the name of a function that
 
 - transforms a value of type x to a value of type y to be `y_of_x`
 - returns a `Option` value to end in `_opt`
@@ -2321,6 +2326,13 @@ The options include:
     )
   ```
 
+Modules can be nested to create a hierachy of namespaces,
+but it seems this is rarely used.
+
+Circular dependencies between modules are not allowed.
+
+### Stdlib Module
+
 There is an implicit `open` for the module `Stdlib`,
 so all of its members can be accessed without the module name prefix.
 
@@ -2358,10 +2370,23 @@ let demo () =
 let () = demo ()
 ```
 
-Modules can be nested to create a hierachy of namespaces,
-but it seems this is rarely used.
+### Printf Module
 
-Circular dependencies between modules are not allowed.
+The Printf module defines many functions that
+produce string output using a format string.
+
+Perhaps the most commonly used function of these is `printf`.
+It takes a format string and a number of additional arguments
+equal to the number of placeholders in the format string.
+Commonly used placeholders include
+
+- `%s` for `string` values
+- `%d` for `int` values
+- `%f` for `float` values
+- `%.2f` for `float` values with two decimal places
+- `%B` for `bool` values (outputs "true" or "false")
+
+Ending the format string with `%!` causes it to flush the output buffer.
 
 ## Signatures
 
