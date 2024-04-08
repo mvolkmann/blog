@@ -2049,35 +2049,49 @@ let () =
   printf "area2 = %f\n" (rectangle_area2 ~length:8.5 ~width:11.0)
 ```
 
-Labeled parameters can specify default values (which makes them optional)
-with the syntax `?arg-name:(param-name=default_value)`.
+Labeled parameters can specify default values which makes them optional.
+Use the syntax `?arg-name:(param-name = default_value)`.
 If `arg_name` is the same as `param_name`,
-this can be shortened to just `?arg_name:default_value`.
+this can be shortened to just `?(arg_name = default_value)`.
 Optional labeled parameters must appear before the non-optional parameters.
 
-TODO: Can all the parameters be optional or does at least one have to be required?
+Functions that have any optional parameters
+must have at least one positional parameter.
+This is required because OCaml does not surround arguments with parentheses
+and so needs a way to know when the last argument has been reached.
+When no positional parameters are needed, specify `()` as the last one.
+In this case calls to the function must also end with `()`.
 
 For example:
 
 ```ocaml
 open Printf
 
-let product ?(a = 1.0) b = a *. b
-
 (* When using optional parameters, there must be at least one
    that is not optional.  Adding `()` satisifies this. *)
 let greet ?(name = "World") ?(suffix = "!") () =
   printf "Hello, %s%s\n" name suffix
 
-let () =
-  printf "product = %f\n" (product ~a:8.5 2.0); (* 17 *)
-  printf "product = %f\n" (product 8.5); (* 8.5 *)
+let product ?(a = 1.0) b = a *. b
 
+let sum2 ?alpha:(first = 1) ?(beta = 2) () = first + beta
+
+let sum3 ?alpha:(first = 1) ?(beta = 2) ~gamma () = first + beta + gamma
+
+let () =
   (* In calls to functions with no required parameters, include `()`.
      It doesn't matter where it appears in the argument list. *)
   greet ~name:"Mark" ~suffix:"." (); (* Hello, Mark. *)
   greet () ~name:"Mark"; (* Hello, Mark! *)
   greet () (* Hello, World! *)
+
+  printf "%f\n" (product ~a:8.5 2.0); (* 17 *)
+  printf "%f\n" (product 8.5); (* 8.5 *)
+
+  printf "%d\n" (sum2 ~alpha:3 ~beta:4 ()); (* 7 *)
+  printf "%d\n" (sum2 ~alpha:3 ()); (* 5 *)
+  printf "%d\n" (sum2 ~beta:4 ()); (* 5 *)
+  printf "%d\n" (sum3 ~gamma:5 ()) (* 8 *)
 ```
 
 Recursive functions must be defined with `let rec`. For example:
@@ -3307,6 +3321,10 @@ To create one, cd to a project directory and enter `opm switch create .`
 Switches consume a lot of disk space,
 so creating a local switch for each project is not recommended.
 
+An alternative to a local switch is to link a global switch to a project directory.
+To do this, `cd` to the project directory
+and enter `opam switch link {switch-name}`
+
 ## Pretty Printing
 
 See the library <a href="https://github.com/ocaml-ppx/ppx_deriving"
@@ -3344,6 +3362,17 @@ To use this in a Dune project:
    ```ocaml
    print_endline (show_int_list numbers);
    ```
+
+## ocamldoc
+
+The ocamldoc tool generates HTML-based documentation
+from `(** ... *)` commands in `.ml` source files.
+Those commands can contain directives like `@param` and `@result`.
+For example:
+
+```ocaml
+
+```
 
 ## HTTP Servers
 
