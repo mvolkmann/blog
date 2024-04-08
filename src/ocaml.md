@@ -198,6 +198,7 @@ write, compile, test, debug, and profile OCaml programs and libraries.
 - The `ocamlbuild` (predecessor to `dune`) and `dune` (modern) build systems
   simplify building complex and managing dependencies.
 - The `ocamldoc` tool generates documentation from OCaml source code annotations.
+  This is in maintenance mode. Using `odoc` through Dune is preferred.
 - The `ocamldebug` debugger is used to debug OCaml programs.
 - The `ocamlprof` tool profiles OCaml programs
   to analyze their performance and identify bottlenecks.
@@ -482,6 +483,10 @@ The arithmetic operators include:
 | `/.`     | float division       |
 | `**`     | float exponentiation |
 
+When using the Jane Street Base module,
+the `**` operator performs integer exponentiation and
+the `**.` operator performs float exponentiation.
+
 The `-` and `-.` operators can also be used for unary negation.
 There are no operators like `++` and `--` to increment or decrement a number.
 Instead use the functions `succ` and `pred` to get the successor or predecessor.
@@ -514,12 +519,32 @@ The `=` operator is also used for assignment.
 
 The remaining operators include:
 
-| Operator | Description                                     |
-| -------- | ----------------------------------------------- |
-| `!`      | gets ref value (dereferences)                   |
-| `:=`     | sets ref value (assigns)                        |
-| `@`      | list concatenation                              |
-| `\|>`    | reverse function application (aka pipe forward) |
+| Operator | Description                                                             |
+| -------- | ----------------------------------------------------------------------- |
+| `!`      | gets ref value (dereferences)                                           |
+| `:=`     | sets ref value (assigns)                                                |
+| `@`      | list concatenation                                                      |
+| `\|>`    | reverse function application (aka pipe forward)                         |
+| `@@`     | evalutes function call on right, then uses result in expression on left |
+
+The function application operator `@@` provides an
+alternative to surrounding a function call with parentheses.
+It has lower precedence than function application.
+For example, the two expressions passed to `printf` below are equivalent.
+In both cases, `sum 3 4` is evaluated first,
+`double` that result is evaluateed next,
+and `printf` is evaluated last.
+
+```ocaml
+open Printf
+
+let sum a b = a + b
+let double a = a * 2
+
+let () =
+  printf "result = %d\n" (double (sum 3 4));
+  printf "result = %d\n" @@ double @@ sum 3 4
+```
 
 Most OCaml operators are implemented as binary functions.
 To use them as functions, wrap them in parentheses.
@@ -2388,6 +2413,19 @@ Commonly used placeholders include
 
 Ending the format string with `%!` causes it to flush the output buffer.
 
+### Base Module
+
+The Base module provides an alternative to TODO.
+It was developed by Jane Street.
+To use this:
+
+1. `opam install base`
+1. `open Base`
+1. Add `base` as a dependency in `dune` files.
+
+TODO: Test this and try the `**` and `**.` operators.
+TODO: What are the pros and cons of using this module?
+
 ## Signatures
 
 The concept of "interfaces" in other programming languages
@@ -3405,16 +3443,23 @@ To use this in a Dune project:
    print_endline (show_int_list numbers);
    ```
 
-## ocamldoc
+## Generating Documentation
 
-The ocamldoc tool generates HTML-based documentation
+The odoc tool generates HTML-based documentation
 from `(** ... *)` commands in `.ml` source files.
 Those commands can contain directives like `@param` and `@result`.
+
+This must be installed by entering `opam install odoc`.
+
+Dune only generates documentation for public packages.
+
 For example:
 
 ```ocaml
-
+dune build @doc
 ```
+
+TODO: Test this!
 
 ## HTTP Servers
 
