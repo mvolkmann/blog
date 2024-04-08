@@ -283,12 +283,7 @@ in a terminal window.
 Doing this is useful anyway because there may be errors that
 `dune build` will flag, but the LSP used in VS Code will not.
 
-## REPL
-
-OCaml has two REPLs. A basic one can be started by entering `ocaml`.
-A better one is `utop` which is short for "Universal Toplevel".
-The `utop` command provides a more interactive, user-friendly interface that
-includes line editing, syntax highlighting, command history, and tab completion.
+## Expressions
 
 An expression in OCaml can be:
 
@@ -301,9 +296,31 @@ An expression in OCaml can be:
 - a series of any of the above separated by semicolons where
   only the last one is allowed to have a value other than the unit value
 
+When using a series of expressions, the expressions before the last
+can be calls to functions that return a value (not unit)
+if the `ignore` function is used.
+That function takes any value and returns the unit value `()`.
+
+The following code shows two ways to ignore the return value of a function.
+Assume the `add_dog` function returns a `dog` record.
+
+```ocaml
+ignore (add_dog "Comet" "Whippet");
+add_dog "Oscar" "German Shorthaired Pointer" |> ignore;
+print_endline "finished adding dogs"
+```
+
+## REPL
+
+OCaml has two REPLs. A basic one can be started by entering `ocaml`.
+A better one is `utop` which is short for "Universal Toplevel".
+The `utop` command provides a more interactive, user-friendly interface that
+includes line editing, syntax highlighting, command history, and tab completion.
+
 In either REPL the expressions you enter are only evaluated
 when they are terminated by a double semicolon (`;;`).
-This allows entering multiple expressions that are separated by a single colon
+This allows entering a series of expressions
+that are separated from each other by a single colon
 and allows them to span multiple lines. For example:
 
 ```ocaml
