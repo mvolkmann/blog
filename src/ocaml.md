@@ -3212,6 +3212,41 @@ To create a project like this:
 1. To run one of your sample programs such as `foo.ml`,
    enter `dune exec ./foo.exe`
 
+## opam Libraries
+
+<a href="https://opam.ocaml.org" target="_blank">opam</a>
+is a package manager for OCaml, similar to npm for JavaScript.
+
+1. `dune init project date_formatting`
+1. `cd date_formatting`
+1. `opam install odate`
+1. Edit `bin/dune` and change the `libraries` stanza to
+   `(libraries date_formatting odate)`.
+1. Edit `bin/main.ml` and replace its contents with the following:
+
+   ```ocaml
+   module Date = ODate.Unix
+
+   (* For documentation for date/time format strings, see
+      https://github.com/MLstate/opalang/blob/master/lib/stdlib/core/date/duration.opa#L472
+      A is day of week, B is month, d is day of month, Y is year.
+      a and b give abbreviations.
+   *)
+   let date_format = "%A, %B %d %Y"
+
+   let date_printer =
+     match Date.To.generate_printer date_format with
+     | Some p -> p
+     | None -> failwith "could not generate printer"
+
+   let () =
+     let now = Date.now() in
+     let s = Date.To.string date_printer now in
+     print_endline s
+   ```
+
+1. `dune exec date_formatting`
+
 ## Pretty Printing
 
 See the library <a href="https://github.com/ocaml-ppx/ppx_deriving"
