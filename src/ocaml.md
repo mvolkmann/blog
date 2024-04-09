@@ -3138,6 +3138,11 @@ let () = print_endline "Hello, World!"
 ```
 
 To run this project, enter `dune exec my_dune_project`
+This may take 5 to 10 seconds the first time it is run.
+It will be much faster for subsequent runs.
+
+If you prefer to name the main source file `main.ml`,
+add the `(name main)` stanza in the `dune` file.
 
 ### Building
 
