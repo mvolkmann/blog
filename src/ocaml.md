@@ -2980,6 +2980,8 @@ To install the `dune` command, enter `opam install dune`.
 
 For help, enter `dune --help`.
 
+### Creating
+
 **To create a project** that uses `dune`,
 cd to where the project should be created
 and enter `dune init project {project_name}`.
@@ -3022,18 +3024,6 @@ that is referred to as a
 "<a href="https://dune.readthedocs.io/en/stable/dune-files.html"
 target="_blank">stanza</a>".
 
-**To build the project**, enter `dune build`.
-This creates `_build/default/bin/main.exe`.
-To automatically rebuild the project
-when code changes are detected, add the `--watch` flag.
-
-**To run the project**, enter `dune exec {executable_name}`.
-The executable name is specified in the `public_name` stanza
-found in the `bin/dune` file and defaults to the project name.
-
-**To clean a project**, enter `dune clean`.
-This deletes the `_build` directory that contains generated files.
-
 The `lib` directory can have subdirectories that contain `.ml` files
 and those can define additional types, constants, and functions.
 To make those accessible, add the following
@@ -3058,6 +3048,59 @@ For example:
   `let greet () = print_endline "Hello from lib2!"`
 - Update the `libraries` stanza in the `bin/dune` file to `(libraries demo demo2)`
 - Add the call `Demo2.Mod.greet ()` in `bin/main.ml`
+
+### Manually Creating
+
+A Dune project can be created by manually creating
+a directory containing the three files
+`dune-project`, `dune`, and `{project-name}.ml`.
+
+Suppose the project name is "my_dune_project".
+Here is a minimal `dune-project` file.
+The first line specifies that Dune version 3.14 is being used.
+
+```text
+(lang dune 3.14)
+(package
+  (name my_dune_project)
+  (depends ocaml dune))
+```
+
+Here is a minimal `dune` file.
+
+```text
+(executable
+  (public_name my_dune_project))
+```
+
+Here is a minimal OCaml source file with the same name as the project,
+`my_dune_project.ml`.
+
+```ocaml
+let () = print_endline "Hello, World!"
+```
+
+To run this project, enter `dune exec my_dune_project`
+
+### Building
+
+**To build the project**, enter `dune build`.
+This creates `_build/default/bin/main.exe`.
+To automatically rebuild the project
+when code changes are detected, add the `--watch` flag.
+
+### Running
+
+**To run the project**, enter `dune exec {executable_name}`.
+The executable name is specified in the `public_name` stanza
+found in the `bin/dune` file and defaults to the project name.
+
+### Cleaning
+
+**To clean a project**, enter `dune clean`.
+This deletes the `_build` directory that contains generated files.
+
+### utop
 
 **To run `utop` with project libraries automatically available**,
 enter `dune utop`.
