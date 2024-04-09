@@ -536,6 +536,8 @@ The remaining operators include:
 The function application operator `@@` provides an
 alternative to surrounding a function call with parentheses.
 It has lower precedence than function application.
+The `@@` operator cannot follow `assert` because that is not a normal function.
+
 For example, the two expressions passed to `printf` below are equivalent.
 In both cases, `sum 3 4` is evaluated first,
 `double` that result is evaluateed next,
