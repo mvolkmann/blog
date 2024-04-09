@@ -2475,19 +2475,6 @@ Commonly used placeholders include
 
 Ending the format string with `%!` causes it to flush the output buffer.
 
-### Base Module
-
-The Base module provides an alternative to TODO.
-It was developed by Jane Street.
-To use this:
-
-1. `opam install base`
-1. `open Base`
-1. Add `base` as a dependency in `dune` files.
-
-TODO: Test this and try the `**` and `**.` operators.
-TODO: What are the pros and cons of using this module?
-
 ## Signatures
 
 The concept of "interfaces" in other programming languages
@@ -3653,6 +3640,12 @@ The `Core` module extends `Core_kernel` and adds UNIX APIs.
 To use the `Base` module, install it with `opam install base`.
 In source files that use it, add `open Base`.
 This causes all values from the standard library to be marked as deprecated.
+
+To use the `Base` module:
+
+1. `opam install base`
+1. Add `base` as a dependency in `dune` files.
+1. Add `open Base` in source files.
 
 ## Converting OCaml to JavaScript
 
