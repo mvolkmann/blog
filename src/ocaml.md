@@ -170,7 +170,6 @@ target="_blank">Install OCaml on Windows</a>.
 
 After installing `opam`, enter `opam init`
 which takes over five minutes to complete.
-TODO: Does this install dune which is a build tool?
 
 To install tools for development, enter the following shell command
 which takes about four minutes to complete:
@@ -178,6 +177,10 @@ which takes about four minutes to complete:
 ```bash
 opam install ocaml-lsp-server odoc ocamlformat utop
 ```
+
+Each of these tools have a dependency on `dune`, so that is also installed.
+
+To begin using the tools in your current shell, enter `eval $(opam env)`.
 
 ## Toolchain
 
@@ -486,10 +489,6 @@ The arithmetic operators include:
 | `*.`     | float multiplication |
 | `/.`     | float division       |
 | `**`     | float exponentiation |
-
-When using the Jane Street Base module,
-the `**` operator performs integer exponentiation and
-the `**.` operator performs float exponentiation.
 
 The `-` and `-.` operators can also be used for unary negation,
 but in some cases the meaning is ambiguous.
@@ -3641,6 +3640,17 @@ as recommended, hovering over OCaml values will not display their types.
 For an alternative to Dream templates
 which doesn't having tooling support issues, see
 <a href="https://github.com/yawaramin/dream-html" target="_blank">dream-html</a>.
+
+## Jane Street Modules
+
+Jane Street created the modules `Base`, `Core_kernel`, and `Core`.
+The `Base` module is a minimal replacement for the OCaml standard library.
+The `Core_kernal` module extends `Base` and adds features.
+The `Core` module extends `Core_kernel` and adds UNIX APIs.
+
+To use the `Base` module, install it with `opam install base`.
+In source files that use it, add `open Base`.
+This causes all values from the standard library to be marked as deprecated.
 
 ## Converting OCaml to JavaScript
 
