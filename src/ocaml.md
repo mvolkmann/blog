@@ -779,6 +779,7 @@ For example:
 
 ```ocaml
 type weight = float
+type point = float * float (* a tuple *)
 ```
 
 The `type` keyword can also be used to define variant types
@@ -1312,7 +1313,11 @@ For example, the following function gets
 the third element from any 4-element tuple.
 
 ```ocaml
-let third_of_4 tuple = match tuple with a, b, c, d -> c;;
+(* This shows three ways to write a function that
+   returns the third elemet of a 4-element tuple `t`. *)
+let third_of_4 t = match t with a, b, c, d -> c
+let third_of_4 t = let _, _, c, _ = t in c
+let third_of_4 (_, _, v, _) = v
 
 let t = ("alpha", "beta", "gamma", "delta") in
 print_endline (third_of_4 t) (* gamma *)
