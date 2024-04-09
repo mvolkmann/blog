@@ -3389,6 +3389,11 @@ The following steps implement the same tests above in this way.
 
 1. Enter `dune test` and verify that all the tests pass.
 
+Also see the example project at
+<a href="https://github.com/mvolkmann/ocaml-examples/tree/main/odoc_demo"
+target="_blank">odoc_demo</a> which implements unit tests for the
+`my_math` module that it defines.
+
 ### Multiple Executables
 
 A Dune project can host the code for multiple executables.
