@@ -94,11 +94,15 @@ OCaml has a number of notable features including:
 - <a href="https://cs3110.github.io/textbook/cover.html"
   target="_blank">OCaml Programming: Correct + Efficient + Beautiful</a>
   book used in Cornell CS 3110 course
+- <a href="https://www.youtube.com/watch?v=MUcka_SvhLw&list=PLre5AT9JnKShBOPeuiD9b-I4XROIJhkIU" target="_blank">OCaml Programming</a>
+  course from Dr. Michael Ryan Clarkson at Cornell University
 - <a href="https://dev.realworldocaml.org" target="_blank">Real World OCaml</a> book
 - <a href="https://ocaml-book.com" target="_blank">OCaml from the Very Beginning</a> book
 - <a href="https://caml.inria.fr/pub/old_caml_site/humps/" target="_blank">The Caml Humps</a>
   collection of links to Caml-related tools, libraries, code samples, and tips
 - <a href="https://en.wikipedia.org/wiki/OCaml" target="_blank">OCaml Wikipedia page</a>
+- <a href="https://ilyasergey.net/YSC2229/" target="_blank">Introductory Data Structures and Algorithms</a>
+  course from Yale-NUS College
 
 ## Usage
 
