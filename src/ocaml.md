@@ -491,7 +491,10 @@ When using the Jane Street Base module,
 the `**` operator performs integer exponentiation and
 the `**.` operator performs float exponentiation.
 
-The `-` and `-.` operators can also be used for unary negation.
+The `-` and `-.` operators can also be used for unary negation,
+but in some cases the meaning is ambiguous.
+That is why the `~-` and `~-.` operators are provided.
+
 There are no operators like `++` and `--` to increment or decrement a number.
 Instead use the functions `succ` and `pred` to get the successor or predecessor.
 
