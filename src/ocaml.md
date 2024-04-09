@@ -1609,6 +1609,10 @@ Some highlights include the following:
 
 ### Sets
 
+A `Set` is an immutable, ordered collection of values
+that all have the same type with no duplicates.
+It it implemented with a balanced binary tree.
+
 The following code demonstrates creating and using two set types,
 one for `int` values and one for `dog` record values.
 
@@ -1649,7 +1653,7 @@ let () =
 
 ### Records
 
-A record an immutable collections of fields.
+A record an immutable collections of named fields.
 Record type names must begin with a lowercase letter.
 The fields can have differents types, including other record types.
 Records are similar to structs in other languages.
@@ -3550,15 +3554,19 @@ Those commands can contain directives like `@param` and `@result`.
 
 This must be installed by entering `opam install odoc`.
 
-Dune only generates documentation for public packages.
+Dune only generates documentation for public libraries.
 
-For example:
+See the example project at
+<a href="https://github.com/mvolkmann/ocaml-examples/tree/main/odoc_demo"
+target="_blank">odoc_demo</a>.
 
-```ocaml
-dune build @doc
-```
+To generate HTML documentation, enter `dune build @doc`.
+The generated `index.html` file will be in the
+`_build/default/_doc/_html` directory.
 
-TODO: Test this!
+For more detail, see
+<a href="https://ocaml.github.io/odoc/odoc_for_authors.html"
+target="_blank">odoc for authors</a>
 
 ## HTTP Servers
 
