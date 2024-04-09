@@ -1496,6 +1496,55 @@ The following code sorts a list of strings:
 ["red"; "green"; "blue"] |> List.sort compare
 ```
 
+### Association Lists
+
+An association list is list of tuple pairs
+where the first value in each tuple is treated as a key
+and the second is treated as an associated value.
+Association lists are used in place of `Map` and `Hashtbl` collections
+when there are a small number of key/value pairs.
+This is because lookup in an association list can be slow
+where there are a large number of key/value pairs.
+
+The `List` module provides the following functions
+for operating on association lists.
+
+| Function       | Description                                                                            |
+| -------------- | -------------------------------------------------------------------------------------- |
+| `assoc`        | returns the value associated with a given key or raises `Not_found`                    |
+| `assoc_opt`    | returns the value associated with a given key in a `Some` or returns `None`            |
+| `mem_assoc`    | returns a `bool` indicating if a given key is present                                  |
+| `remove_assoc` | returns a new association list where the pair with a given key is removed              |
+| `assq`         | same as `assoc` but compares keys with physical rather than structural equality        |
+| `assq_opt`     | same as `assoc_opt` but compares keys with physical rather than structural equality    |
+| `mem_assq`     | same as `mem_assoc` but compares keys with physical rather than structural equality    |
+| `remove_assq`  | same as `remove_assoc` but compares keys with physical rather than structural equality |
+
+For example:
+
+```ocaml
+(* Create an association list. *)
+let al1 = [ ("red", "FF0000"); ("green", "00FF00"); ("blue", "0000FF") ]
+
+(* Create a new association list from al1
+   where the "green" key/value pair is removed. *)
+let al2 = List.remove_assoc "green" al1
+
+(* Create a new association list from al1
+   where the "yellow" key/value pair is added. *)
+let al3 = ("yellow", "FFFF00") :: al2
+
+let () =
+  (* Get the value for the "red" key in al1. *)
+  assert (List.assoc "red" al1 = "FF0000");
+  (* Determine if the key "red" is present in al1. *)
+  assert (List.mem_assoc "red" al1);
+  (* Determine if the key "purple" is present in al1. *)
+  assert (not (List.mem_assoc "purple" al1));
+  (* Determine if the key "yellow" is present in al3. *)
+  assert (List.mem_assoc "yellow" al3)
+```
+
 ### Arrays
 
 An array is a mutable, ordered collection of values
