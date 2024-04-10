@@ -720,6 +720,47 @@ print_int (b + c);
 print_newline ()
 ```
 
+A `let` expression can use pattern matching to bind any number of variables
+to elements in various collection types.
+This is similar to JavaScript destructuring.
+
+The syntax `let pattern = expression in ...` is the same as
+writing `match expression with pattern -> ...`,
+but `match` supports multiple patterns.
+Types like lists and arrays always need more than one path
+to avoid getting a warning for partial match.
+For example:
+
+```ocaml
+open Printf
+
+let my_tuple = (1, 2, 3)
+let my_list = [ 1; 2; 3 ]
+let my_array = [| 1; 2; 3 |]
+
+type my_record_type = { first : int; second : int; third : int }
+
+let my_record = { first = 1; second = 2; third = 3 }
+
+let () =
+  let a, b, c = my_tuple in
+  printf "tuple: a = %d, b = %d, c = %d\n" a b c;
+
+  let { first; second; third } = my_record in
+  printf "record: first = %d, second = %d, third = %d\n" first second third;
+
+  (* We can match on a list that contains at least some number of elements. *)
+  (match my_list with
+  | a :: b :: c :: _ -> printf "list: a = %d, b = %d, c = %d\n" a b c
+  | _ -> print_endline "list doesn't contain at least 3 elements");
+
+  (* We cannot do this for an array.
+     Instead we must match on a specific number of elements. *)
+  match my_array with
+  | [| a; b; c |] -> printf "array: a = %d, b = %d, c = %d\n" a b c
+  | _ -> printf "array doesn't contain exactly 3 elements\n"
+```
+
 ### Type Variables
 
 OCaml supports type variables which are similar to generics in other languages.
