@@ -1562,6 +1562,12 @@ The following code sorts a list of strings:
 ["red"; "green"; "blue"] |> List.sort compare
 ```
 
+The standard library doesn't provide functions to
+take and drop elements from a list, but the `Base` module does.
+See the `take` and `drop` functions described at
+<a href="https://ocaml.org/p/base/latest/doc/Base/List/"
+target="_blank">List</a>.
+
 ### Association Lists
 
 An association list is list of tuple pairs
@@ -2363,6 +2369,39 @@ One approach is to take a list, but that
 requires all the values to have the same type.
 Another approach is to use a generalized algebraic data type (GADT),
 but that introduces complexity.
+
+### Function Composition
+
+OCaml does not define an operator for function composition,
+but you can define one.
+The following code demonstrates four ways to
+define a new function that composes existing functions.
+
+```ocaml
+let add1 x = x + 1
+let square x = x * x
+let add1square x = x |> add1 |> square
+let add1square' x = square @@ add1 x
+let ( << ) f g x = f (g x)
+let add1square'' = square << add1
+let ( >> ) f g x = g (f x)
+let add1square''' = add1 >> square
+
+let () =
+  assert (add1square 2 = 9);
+  assert (add1square' 2 = 9);
+  assert (add1square'' 2 = 9);
+  assert (add1square''' 2 = 9)
+```
+
+The `Base` module defines the `Fn.compose` function
+which composes a pair of functions from right to left.
+It can be used as follows:
+
+```ocaml
+open Base
+let add1square = Fn.compose square add1
+```
 
 ## Modules
 
