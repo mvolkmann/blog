@@ -362,6 +362,19 @@ enter `#use "{file-path}";;`.
 This enables using all the types and functions defined in the source file
 inside the REPL.
 
+To configure `utop` options that should be used every time it is started,
+create the file `~/.config/utop/init.ml`.
+For example, the following automatically requires and opens the `Base` module
+and makes the output less noisy.
+
+```ocaml
+#require "base";;
+open Base;;
+#utop_prompt_dummy;;
+```
+
+To remove the typeahead hint boxes, add `UTop.set_show_box false`.
+
 To trace the follow of function execution, enter `#trace {fn-name};;`.
 Then enter a call to the function.
 This is especially useful for recursive functions.
@@ -1298,7 +1311,8 @@ In practice it is rare for a tuple to contain more than three values.
 Tuples with two elements are referred to as a "pair"
 and those with three elements are referred to as a "triple".
 
-The parentheses shown above for creating and destructuring a tuple are optional.
+The parentheses shown above for creating and destructuring a tuple are optional,
+but are recommended for clarity.
 
 The variable `t` above has the type `bool * int * string`
 which is referred to as a "product type"
@@ -1360,7 +1374,9 @@ To create a new list by adding an element to the beginning of an existing list,
 use the `::` operator which is pronounced "cons" (short for "construct").
 The right side of this operator must be a list
 and the left side must be an expression that evaluates to
-the same type as elements in the list on the right. For example:
+the same type as elements in the list on the right.
+This operator is right-associative.
+For example:
 
 ```ocaml
 let new_list = element :: old_list
