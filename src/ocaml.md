@@ -364,12 +364,12 @@ inside the REPL.
 
 To configure `utop` options that should be used every time it is started,
 create the file `~/.config/utop/init.ml`.
-For example, the following automatically requires and opens the `Base` module
+For example, the following automatically requires and opens the `Core` module
 and makes the output less noisy.
 
 ```ocaml
-#require "base";;
-open Base;;
+#require "Core";;
+open Core;;
 #utop_prompt_dummy;;
 ```
 
