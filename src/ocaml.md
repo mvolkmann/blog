@@ -743,12 +743,17 @@ type my_record_type = { first : int; second : int; third : int }
 let my_record = { first = 1; second = 2; third = 3 }
 
 let () =
+  (* Only one pattern is needed because tuples have a fixed structure.
+     The single pattern is "irrefutable". *)
   let a, b, c = my_tuple in
   printf "tuple: a = %d, b = %d, c = %d\n" a b c;
 
+  (* Same for records. *)
   let { first; second; third } = my_record in
   printf "record: first = %d, second = %d, third = %d\n" first second third;
 
+  (* Multiple patterns are needed for types with a variable structure
+     like lists, arrays, and variants. *)
   (* We can match on a list that contains at least some number of elements. *)
   (match my_list with
   | a :: b :: c :: _ -> printf "list: a = %d, b = %d, c = %d\n" a b c
