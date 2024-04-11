@@ -502,13 +502,17 @@ The arithmetic operators include:
 | `*.`     | float multiplication |
 | `/.`     | float division       |
 | `**`     | float exponentiation |
+| `mod`    | modulo               |
 
 The `-` and `-.` operators can also be used for unary negation,
 but in some cases the meaning is ambiguous.
 That is why the `~-` and `~-.` operators are provided.
 
-When using the `Base` module, the `**` operator performs `int` exponentiation
-and the `**.` operator performs `float` exponentiation.
+When using the `Base` module:
+
+- the `**` operator performs `int` exponentiation
+- the `**.` operator performs `float` exponentiation
+- the `%` operator performs modulo
 
 There are no operators like `++` and `--` to increment or decrement a number.
 Instead use the functions `succ` and `pred` to get the successor or predecessor.
