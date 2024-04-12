@@ -1577,6 +1577,23 @@ let maximum =
   List.fold_left max_int first numbers
 ```
 
+The `fold_left` and `fold_right` functions both take three arguments.
+But the order of the last two arguments differs.
+The first argument in both is a function that takes a value and an accumulator,
+but the order of those arguments differs.
+For example:
+
+```ocaml
+let numbers = [ 1; 2; 3 ]
+
+let () =
+  let sum = List.fold_left (fun acc n -> acc + n) 0 numbers in
+  Printf.printf "fold_left result is %d\n" sum;
+
+  let sum = List.fold_right (fun n acc -> acc + n) numbers 0 in
+  Printf.printf "fold_right result is %d\n" sum
+```
+
 The following code sorts a list of strings:
 
 ```ocaml
