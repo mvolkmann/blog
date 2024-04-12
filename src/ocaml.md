@@ -1248,6 +1248,18 @@ let () =
   print_endline (weather2 Fall); (* perfect *)
 ```
 
+The `function` keyword defines a function, like the `fun` keyword,
+but it's specialized to performs pattern matching on its first argument.
+For example, the following code transforms a list of `Option` values
+to a list of unwrapped values where a default value is used for `None` cases.
+
+```ocaml
+let options = [ Some 1; None; Some 2 ]
+let values = List.map (function Some x -> x | None -> 0) options
+let () = List.iter (Printf.printf "%d\n") values
+(* outputs 1, 0, and 2 *)
+```
+
 ## Iteration
 
 The `for` and `while` keywords support imperative iteration.
