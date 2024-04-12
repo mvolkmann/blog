@@ -281,6 +281,20 @@ profile = default
 version = 0.26.1
 ```
 
+For documenation on `ocamlformat` options, see
+<a href="https://ocaml.org/p/ocamlformat/latest/doc/manpage_ocamlformat.html"
+target="_blank">Manpage: ocamlformat</a>.
+
+To try the options online, see <a href="https://ahrefs.github.io/ocamlformat/"
+target="_blank">OCamlFormat configurator</a>.
+
+You may want to add these:
+
+```text
+break-infix = fit-or-vertical
+if-then-else = fit-or-vertical
+```
+
 It may be necessary to copy the `.ocamlformat` into every subdirectory
 that contains its own `dune-project` file.
 
