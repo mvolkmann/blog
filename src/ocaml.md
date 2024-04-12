@@ -427,7 +427,10 @@ Their sizes depend on the CPU.
 - `float` - 8 bytes
 - `string` - sequence of bytes, not Unicode characters
 
-Literal chars are delimited by single quotes.
+The functions `succ` and `pred` operate on `int` and `float` values
+and return the value one higher or one lower.
+
+Single literal characters are delimited by single quotes.
 
 Literal strings are delimited by double quotes.
 The `^` operator is used to concatenate strings.
@@ -844,6 +847,9 @@ while !score < 10 do
   print_newline ()
 done
 ```
+
+For `int` refs, the `incr` and `decr` functions
+can be used to increment and decrement their value.
 
 Refs are actually single field records with a mutable field named `contents`.
 
