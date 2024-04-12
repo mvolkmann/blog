@@ -2428,7 +2428,8 @@ let add1square = Fn.compose square add1
 
 A module provides a namespace for a collection of related named values
 that can be types, constants, and functions.
-Their names must begin with an uppercase letter
+Constants and functions are defined with `let` definitions.
+Module names must begin with an uppercase letter
 and they use CamelCase by convention.
 
 Every `.ml` source file defines a module.
