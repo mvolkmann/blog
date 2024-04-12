@@ -2099,18 +2099,22 @@ This operator is typically used with functions that take a single argument.
 The following code demonstrates two ways to compute
 the squared value of the sine of an angle.
 
-The body of a function definition, the part after the `=`, is an expression.
+The body of a function definition, the part after the `=`,
+is a single expression.
 An expression can be a semicolon-separated set of expressions,
 but typically there is only one.
 When there are more than one, all but the final expression
 serve to cause side effects and must have the unit type (no value).
-Often this use used for debug printing.
+Typically these serve to assign the results of intermediate computations
+to variables or perform debug printing.
 The result of a function call is the value of the final expression.
 
 ```ocaml
 let square x = x *. x
 let angle = 0.78 (* radians *)
 let result1 = square (sin angle)
+(* The following is equivalent expression that uses
+   the reverse function application operator. *)
 let result2 = angle |> sin |> square
 ```
 
