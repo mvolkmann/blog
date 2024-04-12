@@ -651,11 +651,11 @@ a module, constructor, or "polymorphic variant tag".
 They can contain letters, digits, and the underscore character.
 They can also end with a single quote to create pairs of names
 like `x` and `x'` (for x prime).
-Technically an indentfier can contain any number of single quotes
+Technically an indentifier can contain any number of single quotes
 and they can appear anywhere except at the beginning,
 but doing this is odd!
 
-A `let` expression binds an identifier to the value of an expression
+A `let` **expression** binds an identifier to the value of an expression
 whose scope is the expression that follows the `in` keyword.
 The value of a `let` expression is the value of its expression
 with all occurrences of the identifier replaced with its value.
@@ -700,12 +700,12 @@ While it is not required to include a space on both sides of the colon
 when specifying a type, it is customary
 and the ocamlformat code formatter will add them.
 
-Let definitions omit the `in` keyword.
-They create global definitions that
-do not go out of scope after they are evaluated.
+A `let` **definition** omits the `in` keyword.
+These are used inside modules to create global definitions
+that do not go out of scope after they are evaluated.
 They are not expressions, so they do not have a value.
 
-The following example binds three global identifiers.
+The following example from a REPL session binds three global identifiers.
 Note how a double semicolon is used to
 terminate the assignments of global identifiers.
 
