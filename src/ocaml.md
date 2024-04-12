@@ -1495,23 +1495,24 @@ The standard library provides many functions that operate on lists.
 See <a href="https://v2.ocaml.org/api/List.html" target="_blank">Module List</a>.
 Some highlights include the following:
 
-| Function         | Description                                                                                                                   |
-| ---------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| `List.exists`    | determines if a list contains at least one element that satisfies a predicate function                                        |
-| `List.filter`    | creates a new list from the elements in an existing list that satisfy a predicate function                                    |
-| `List.find`      | returns the first element that satisfies a predicate or raises `Not-found`                                                    |
-| `List.find_opt`  | returns an `Option` that contains the first element that satisfies a predicate function                                       |
-| `List.fold_left` | reduces a list to a single value using an accumulator function                                                                |
-| `List.hd`        | returns the head of a list                                                                                                    |
-| `List.iter`      | iterates over a list in a way that is useful when the function passed to it has a side effect and a result list is not needed |
-| `List.length`    | returns the length of a given list                                                                                            |
-| `List.map`       | creates a new list containing elements that are computed by passing each element in an existing list to a given function      |
-| `List.map2`      | similar to `List.map`, but it operates on two lists, passing corresponding elements from each to a given function             |
-| `List.mem`       | returns a `bool` that indicates whether a given value is a member                                                             |
-| `List.nth`       | takes a list and an index; returns the list element at the index                                                              |
-| `List.sort`      | returns a sorted list                                                                                                         |
-| `List.sort_uniq` | returns a sorted list with no duplicates                                                                                      |
-| `List.tl`        | returns the head of a list                                                                                                    |
+| Function          | Description                                                                                                                   |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `List.exists`     | determines if a list contains at least one element that satisfies a predicate function                                        |
+| `List.filter`     | creates a new list from the elements in an existing list that satisfy a predicate function                                    |
+| `List.find`       | returns the first element that satisfies a predicate or raises `Not-found`                                                    |
+| `List.find_opt`   | returns an `Option` that contains the first element that satisfies a predicate function                                       |
+| `List.fold_left`  | reduces a list to a single value by applying an accumulator function from left to right                                       |
+| `List.fold_right` | reduces a list to a single value by applying an accumulator function from right to left                                       |
+| `List.hd`         | returns the head of a list                                                                                                    |
+| `List.iter`       | iterates over a list in a way that is useful when the function passed to it has a side effect and a result list is not needed |
+| `List.length`     | returns the length of a given list                                                                                            |
+| `List.map`        | creates a new list containing elements that are computed by passing each element in an existing list to a given function      |
+| `List.map2`       | similar to `List.map`, but it operates on two lists, passing corresponding elements from each to a given function             |
+| `List.mem`        | returns a `bool` that indicates whether a given value is a member                                                             |
+| `List.nth`        | takes a list and an index; returns the list element at the index                                                              |
+| `List.sort`       | returns a sorted list                                                                                                         |
+| `List.sort_uniq`  | returns a sorted list with no duplicates                                                                                      |
+| `List.tl`         | returns the head of a list                                                                                                    |
 
 Since tuple elements are separated by commas and list elements are
 separated by semicolons, a list of tuples can be written as follows:
