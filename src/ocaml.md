@@ -293,6 +293,8 @@ You may want to add these:
 ```text
 break-infix = fit-or-vertical
 if-then-else = fit-or-vertical
+parse-docstrings = true
+wrap-comments = true
 ```
 
 It may be necessary to copy the `.ocamlformat` into every subdirectory
