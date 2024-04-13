@@ -2750,6 +2750,11 @@ let distance (x1, y1) (x2, y2) =
   sqrt ((square dx) +. (square dy))
 ```
 
+Note how the `point` type is define in both the `.mli` and `.ml` files.
+This is typical. A way to avoid this duplication is described in
+<a href="https://www.craigfe.io/posts/the-intf-trick"
+target="_blank">The \_intf trick</a>.
+
 Here is the file `main.ml` that uses the `Math` module defined above:
 
 ```ocaml
