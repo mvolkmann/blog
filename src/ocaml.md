@@ -3726,9 +3726,10 @@ To list all the currently defined global switches, enter `opam switch list`
 
 To delete a global switch, enter `opam switch remove {switch-name}`
 
+To create a local switch, cd to a project directory
+and enter `opam switch create .`.
 Local switches are automatically selected and activated
 when you `cd` to a project directory that has one.
-To create one, cd to a project directory and enter `opm switch create .`
 Switches consume a lot of disk space,
 so creating a local switch for each project is not recommended.
 
