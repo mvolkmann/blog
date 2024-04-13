@@ -2482,9 +2482,9 @@ For example, the file `demo.ml` defines the module `Demo`.
 These can contain the following:
 
 - `open` statements that make the names in another module
-  available with a module name prefix
+  available without a module name prefix
 - `include` statements that include source code from another file
-- `type` defintiions
+- `type` definitiions
 - `exception` definitions
 - `let` definitions that define constants and functions
 - `module` definitions that define submodules
