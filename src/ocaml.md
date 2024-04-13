@@ -2470,18 +2470,26 @@ let add1square = Fn.compose square add1
 
 ## Modules
 
-A library is a collection of modules.
-
-A module provides a namespace for a collection of related named values
-that can be types, constants, and functions.
-Constants and functions are defined with `let` definitions.
-Module names must begin with an uppercase letter
+A module provides a namespace for a set of related values.
+Module names always begin with an uppercase letter
 and they use CamelCase by convention.
+
+that can be types, exceptions, constants, and functions.
+Constants and functions are defined with `let` definitions.
 
 Every `.ml` source file defines a module.
 For example, the file `demo.ml` defines the module `Demo`.
+These can contain the following:
 
-A package is a collection of related modules.
+- `open` statements that make the names in another module
+  available with a module name prefix
+- `include` statements that include source code from another file
+- `type` defintiions
+- `exception` definitions
+- `let` definitions that define constants and functions
+- `module` definitions that define submodules
+
+A library is a collection of related modules.
 
 Modules provides a way to identify multiple values
 that happen to have the same name.
@@ -2490,8 +2498,6 @@ For example, the `List` and `Array` modules both define the `map` function.
 Modules also serve to hide complexity.
 
 A submodule can be defined with the syntax `module ModuleName = struct ... end`.
-This can be used to avoid placing module code in a separate file
-when it will only be used in one file.
 
 The following code defines a module that contains functions for
 converting temperature values and demonstrates using it.
@@ -2515,8 +2521,6 @@ Another way to define a module is to describe its interface in a `.mli` file
 and it's implementation in a `.ml` file with the same name.
 This approach is describe in the "Signatures" section below.
 
-````
-
 Modules cannot be used like values. They cannot be assigned to a variable,
 passed to a function, or returned from a function.
 
@@ -2533,7 +2537,7 @@ let () =
   Hashtbl.iter
     (fun name breed -> Printf.printf "%s is a %s.\n" name breed)
     dog_table
-````
+```
 
 There are multiple ways to avoid repeating a module name
 every time the values it defines are referenced.
