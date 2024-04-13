@@ -3198,7 +3198,14 @@ For help, enter `dune --help`.
 
 **To create a project** that uses `dune`,
 cd to where the project should be created
-and enter `dune init project {project_name}`.
+and enter the following.
+
+```text
+dune init project {project_name}
+```
+
+The project name can contain underscores, but not hyphens.
+
 This generates many files including:
 
 - dune configuration file `dune-project`
