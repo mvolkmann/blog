@@ -2735,6 +2735,12 @@ As another example, here is the file `math.mli`:
 ```ocaml
 type point = float * float
 
+(**
+Computes the distance from one point to another.
+@param p1 the first point
+@param p2 the second point
+@return the distance between them
+*)
 val distance : point -> point -> float
 ```
 
@@ -2768,6 +2774,11 @@ let () =
   let d = MyLibrary.Math.distance p1 p2 in
   assert (d = 5.)
 ```
+
+The Language Server Processor (LSP) will display
+the help text for the `distance` function
+when hovering over the call to the function above
+in an editor that is configured to use the LSP such as VS Code.
 
 Files with the `.cmi` extension are compiled versions of `.mli` files and
 files with the `.cmo` extension are compiled versions of `.ml` files.
