@@ -2489,7 +2489,8 @@ These can contain the following:
 - `let` definitions that define constants and functions
 - `module` definitions that define submodules
 
-A library is a collection of related modules.
+A package is a collection of related libraries and
+a library is a collection of related modules.
 
 Modules provides a way to identify multiple values
 that happen to have the same name.
