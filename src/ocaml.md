@@ -3341,7 +3341,8 @@ a directory containing the three files
 
 Suppose the project name is "my_dune_project".
 Here is a minimal `dune-project` file.
-The first line specifies that Dune version 3.14 is being used.
+The first line specifies the version of the syntax used in this file
+and in the `dune` files, not the version of Dune being used.
 
 ```text
 (lang dune 3.14)
