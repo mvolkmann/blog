@@ -2470,6 +2470,8 @@ let add1square = Fn.compose square add1
 
 ## Modules
 
+A library is a collection of modules.
+
 A module provides a namespace for a collection of related named values
 that can be types, constants, and functions.
 Constants and functions are defined with `let` definitions.
@@ -2509,6 +2511,12 @@ let () =
   print_newline ()
 ```
 
+Another way to define a module is to describe its interface in a `.mli` file
+and it's implementation in a `.ml` file with the same name.
+This approach is describe in the "Signatures" section below.
+
+````
+
 Modules cannot be used like values. They cannot be assigned to a variable,
 passed to a function, or returned from a function.
 
@@ -2525,7 +2533,7 @@ let () =
   Hashtbl.iter
     (fun name breed -> Printf.printf "%s is a %s.\n" name breed)
     dog_table
-```
+````
 
 There are multiple ways to avoid repeating a module name
 every time the values it defines are referenced.
@@ -2716,6 +2724,40 @@ and the implementation
 let is_empty = function
   | [] -> true
   | _ :: _ -> false
+```
+
+As another example, here is the file `math.mli`:
+
+```ocaml
+type point = float * float
+
+val distance : point -> point -> float
+```
+
+And here is the file `math.ml`:
+
+```ocaml
+(* This defines the "Math" module which is in the "Module_demo2" library. *)
+type point = float * float
+
+(* private function *)
+let square x = x *. x
+
+(* public function *)
+let distance (x1, y1) (x2, y2) =
+  let dx = x2 -. x1 in
+  let dy = y2 -. y1 in
+  sqrt ((square dx) +. (square dy))
+```
+
+Here is the file `main.ml` that uses the `Math` module defined above:
+
+```ocaml
+let () =
+  let p1 = (0., 0.) in
+  let p2 = (3., 4.) in
+  let d = MyLibrary.Math.distance p1 p2 in
+  assert (d = 5.)
 ```
 
 Files with the `.cmi` extension are compiled versions of `.mli` files and
