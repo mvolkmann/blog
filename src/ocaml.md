@@ -57,6 +57,11 @@ The performance of OCaml is generally about 50% that of C.
 
 OCaml supports Foreign Function Interface (FFI) mechanisms to call C functions.
 
+The biggest impediment to OCaml adoption is likely the
+poor state of library documentation and lack of example code.
+There is an attempt being made to address this by adding
+cookbook-like material to the "Learn" section of the main web site.
+
 ## Notable Features
 
 OCaml has a number of notable features including:
@@ -2513,7 +2518,7 @@ Examples of such modules defined in the standard library include
 Standard library modules that do not describe a data type include
 `Printf`, `Random`, `Sys`, and `Unix`.
 
-Data types defined by a module do not
+Modules that define a data type do not
 define methods that are called on instances.
 Instead they define functions to which
 an instance and other arguments are passed.
