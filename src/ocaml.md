@@ -568,6 +568,7 @@ The relational and logical operators include:
 | `>=`     | greater than equal    |
 | `&&`     | boolean and           |
 | `\|\|`   | boolean or            |
+| `not`    | boolean not           |
 
 The `=` operator is also used for assignment.
 
@@ -842,6 +843,7 @@ which must be given an initial value.
 The initial value determines its type.
 
 The `!` prefix operator dereferences a `ref` to obtain its value.
+The `not` function negates a `bool` value, not the `!` operator.
 
 The `:=` operator assigns a new value to a `ref`.
 
