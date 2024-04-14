@@ -861,12 +861,30 @@ For `int` refs, the `incr` and `decr` functions
 can be used to increment and decrement their value.
 
 Refs are actually single field records with a mutable field named `contents`.
+The `ref` operators are just shorthand for accessing this records.
+If `r` is a variable bound to a `ref`
+then `!r` is short for `r.contents`
+and `r := expr` is short for `r.contents <- expr`.
 
 Other kinds of values in OCaml that support mutation include
 arrays, record fields (when marked as `mutable`),
 Values created with the following standard library modules
 also support mutation:
 `Atomic`, `Bytes`, `Hashtbl`, `Mutex`, `Queue`, `Semaphore`, and `Stack`.
+
+A function can hold a `ref` in its scope using a closure.
+For example, the following function returns
+the next `int` value every time it is called.
+
+```ocaml
+let next =
+  let last = ref 0 in
+  fun () ->
+    incr last;
+    !last
+```
+
+Call this with `next ()`.
 
 ## Custom Types
 
