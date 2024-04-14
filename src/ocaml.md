@@ -269,6 +269,15 @@ For help on OCaml, see:
 - <a href="https://discuss.ocaml.org/" target="_blank">OCaml Discourse</a>
 - <a href="https://github.com/lindig/ocaml-style" target="_blank">OCaml style guide</a>
 
+Also use the odig tool.
+To install it, enter `oapm install ocaml-manual odig`.
+To use it, enter `odig doc`.
+The first time this is run it will take
+five minutes or so to update the documentation.
+After that, running it will open a browser tab.
+This likes to external documentation pages
+that are typically brief and lacking in examples.
+
 ## VS Code
 
 Install the "OCaml Platform" extension from OCaml Labs.
