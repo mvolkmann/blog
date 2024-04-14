@@ -2499,12 +2499,31 @@ let add1square = Fn.compose square add1
 
 ## Modules
 
-A module provides a namespace for a set of related values.
+A module provides a namespace for a set of related values
+that can be types, exceptions, constants, and functions.
+Constants and functions are defined with `let` definitions.
 Module names always begin with an uppercase letter
 and they use CamelCase by convention.
 
-that can be types, exceptions, constants, and functions.
-Constants and functions are defined with `let` definitions.
+Modules often describe a data type, ways to create instances,
+and operations on instances.
+Examples of such modules defined in the standard library include
+`Array`, `Char`, `Hashtbl`, `List`, `Map`, `Option`,
+`Queue`, `Result`, `Set`, `Stack`, and `String`.
+Standard library modules that do not describe a data type include
+`Printf`, `Random`, `Sys`, and `Unix`.
+
+Data types defined by a module do not
+define methods that are called on instances.
+Instead they define functions to which
+an instance and other arguments are passed.
+For example, the `List` module defines the `map` function
+that is used as follows:
+
+```ocaml
+let numbers = [4; 1; 9; 7; 2]
+let doubled = List.map (fun x -> x * 2) numbers
+```
 
 Every `.ml` source file defines a module.
 For example, the file `demo.ml` defines the module `Demo`.
