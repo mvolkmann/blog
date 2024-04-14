@@ -579,33 +579,27 @@ The `=` operator is also used for assignment.
 
 The remaining operators include:
 
-| Operator | Description                                                             |
-| -------- | ----------------------------------------------------------------------- |
-| `!`      | gets ref value (dereferences)                                           |
-| `:=`     | sets ref value (assigns)                                                |
-| `@`      | list concatenation                                                      |
-| `\|>`    | reverse function application (aka pipe forward)                         |
-| `@@`     | evalutes function call on right, then uses result in expression on left |
+| Operator | Description                                     |
+| -------- | ----------------------------------------------- |
+| `!`      | gets ref value (dereferences)                   |
+| `:=`     | sets ref value (assigns)                        |
+| `@`      | list concatenation                              |
+| `@@`     | function application                            |
+| `\|>`    | reverse function application (aka pipe forward) |
 
-The function application operator `@@` provides an
-alternative to surrounding a function call with parentheses.
-It has lower precedence than function application.
+The function application and reverse function application operators
+provide an alternative to surrounding nested function calls with parentheses.
 The `@@` operator cannot follow `assert` because that is not a normal function.
 
-For example, the two expressions passed to `printf` below are equivalent.
-In both cases, `sum 3 4` is evaluated first,
-`double` that result is evaluateed next,
-and `printf` is evaluated last.
+For example:
 
 ```ocaml
-open Printf
-
-let sum a b = a + b
-let double a = a * 2
-
-let () =
-  printf "result = %d\n" (double (sum 3 4));
-  printf "result = %d\n" @@ double @@ sum 3 4
+let double x = x * 2
+let square x = x * x
+(* All the remaining lines print 16. *)
+print_int (square (double 2))
+print_int @@ square @@ double @@ 2
+2 |> double |> square |> print_int
 ```
 
 Most OCaml operators are implemented as binary functions.
@@ -3950,6 +3944,8 @@ To use the `Base` module:
 1. `opam install base`
 1. Add `base` as a dependency in `dune` files.
 1. Add `open Base` in source files.
+
+The use of Jane Street modules somewhat splits the community in two.
 
 ## Converting OCaml to JavaScript
 
