@@ -87,6 +87,14 @@ OCaml has a number of notable features including:
 - Dune build system
 - great REPL (utop)
 
+## OCaml 5
+
+OCaml version 5 was releasd in December 2022.
+It added domains which map to operating system threads.
+
+It also added "effect handlers" which used to be called "algebraic effects".
+These are like a try/catch that can resume execution where the effect occurred.
+
 ## Resources
 
 - <a href="https://ocaml.org" target="_blank">OCaml home page</a>
@@ -154,8 +162,8 @@ The syntax of Reason is more familiar to JavaScript developers than OCaml.
 It also supports JSX.
 
 <a href="https://melange.re/v3.0.0/" target="_blank">Melange</a>
-is a set of tools that work with OCaml and Reason code
-to generate and interoperate with JavaScript.
+(previously called BuckleScript) is a set of tools that work with
+OCaml and Reason code to generate and interoperate with JavaScript.
 It can generate React components.
 
 <a href="https://coq.inria.fr" target="_blank">Coq</a>
@@ -3988,6 +3996,13 @@ can be replaces by the value of the `USER` environment variable.
 
 See <a href="https://ocaml.org/docs/metaprogramming"
 target="_blank">Preprocessors and PPXs</a>
+
+## Serializing Data
+
+OCaml provides good support for serializing data to
+s-expressions and JSON.
+
+TODO: Add detail on this.
 
 ## Suppressing Errors
 
