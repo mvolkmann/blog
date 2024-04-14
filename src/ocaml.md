@@ -326,12 +326,12 @@ An expression in OCaml can be:
 - a keyword expression (ex. `if ...` or `for ...`)
 - a function declaration
 - a function call
-- a series of any of the above separated by semicolons where
+- a sequence of any of the above separated by semicolons where
   only the last one is allowed to have a value other than the unit value
 
-When using a series of expressions, the expressions before the last
+When using a sequence of expressions, the ones before the last
 can be calls to functions that return a value (not unit)
-if the `ignore` function is used.
+if the `ignore` function applied to their result.
 That function takes any value and returns the unit value `()`.
 
 The following code shows two ways to ignore the return value of a function.
@@ -556,19 +556,19 @@ The string operators include:
 
 The relational and logical operators include:
 
-| Operator | Description           |
-| -------- | --------------------- |
-| `==`     | same object           |
-| `!=`     | not same object       |
-| `=`      | structural equality   |
-| `<>`     | structural inequality |
-| `<`      | less than             |
-| `>`      | greater than          |
-| `<=`     | less than or equal    |
-| `>=`     | greater than equal    |
-| `&&`     | boolean and           |
-| `\|\|`   | boolean or            |
-| `not`    | boolean not           |
+| Operator | Description                              |
+| -------- | ---------------------------------------- |
+| `==`     | physical equality; same address          |
+| `!=`     | physical (inequality); different address |
+| `=`      | structural equality; same content        |
+| `<>`     | structural inequality; different content |
+| `<`      | less than                                |
+| `>`      | greater than                             |
+| `<=`     | less than or equal                       |
+| `>=`     | greater than equal                       |
+| `&&`     | boolean and                              |
+| `\|\|`   | boolean or                               |
+| `not`    | boolean not                              |
 
 The `=` operator is also used for assignment.
 
