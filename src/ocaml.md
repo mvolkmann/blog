@@ -3311,7 +3311,8 @@ the `_build` directory should be added in the `.gitignore` file.
 
 The `bin`, `lib`, and `test` directories all contain a `dune` file
 that holds configurations options for that directory.
-These files use Lisp-like syntax.
+These files use s-expressions (also used in Lisp)
+that is an alternative to other data formats such as JSON.
 Each option is specified in by a name and value inside parentheses
 that is referred to as a
 "<a href="https://dune.readthedocs.io/en/stable/dune-files.html"
