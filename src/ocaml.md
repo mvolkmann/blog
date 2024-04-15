@@ -2741,7 +2741,8 @@ Commonly used placeholders include
 
 - `%s` for `string` values
 - `%d` for `int` values
-- `%f` for `float` values
+- `%f` for `float` values including trailing zero decimal places
+- `%F` for `float` values excluding training zero decimal places
 - `%.2f` for `float` values with two decimal places
 - `%B` for `bool` values (outputs "true" or "false")
 
