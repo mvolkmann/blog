@@ -895,7 +895,7 @@ let next =
 
 Call this with `next ()`.
 
-## Algebraic Data Types
+## Algebraic Data Types (ADTs)
 
 OCaml supports algebraic data types which include product types and sum types.
 
@@ -916,6 +916,18 @@ the empty list (`[]`) or a cons cell created with the `::` operator that
 represents a value and a list tail.
 A tree can be represented as a variant whose value can be `Empty`, `Leaf`, or
 `Node` where nodes have a value and nodes representing left and right subtrees.
+
+## Generalized Algebraic Data Types (GADTs)
+
+GADTs are an extension to ADTs that support more precise type specifications
+(more constraints) and enable better type inference in certain situations.
+
+GADTs are a step toward supporting dependent types.
+Dependent types enable defining types whose mean depends on values.
+For example a list type can specify a fixed length
+and/or that its values must be in ascending order.
+
+TODO: Add more detail on GADTs.
 
 ## Type Aliases
 
