@@ -695,13 +695,24 @@ A `let` **expression** binds an identifier to the value of an expression
 whose scope is the expression that follows the `in` keyword.
 The value of a `let` expression is the value of its expression
 with all occurrences of the identifier replaced with its value.
-For example, the value of this `let` expression is `3`:
+For example, here are three ways to write a `let` expression
+that evaluates to `3`:
 
 ```ocaml
 let a = 1 in
 let b = 2 in
 a + b
+
+let a = 1 and b = 2 in
+a + b
+
+let a, b = 1, 2 in
+a + b
 ```
+
+Note how the expression that follows a `let` expression
+can be another `let` expression in order to place
+multiple identifiers in the scope of the final expression.
 
 It is a common error to write `let variable = expression;`
 instead of `let variable = expression in`.
@@ -709,16 +720,6 @@ When this is done, your editor should flag it with the message
 "Warning 10: this expression should have type unit".
 If you compile the code, the message "Error: Syntax error" will be output
 and will refer to the last line in the file, which is unhelpful.
-
-The code above can also use the `and` keyword as follows:
-
-```ocaml
-let a = 1 and b = 2 in a + b
-```
-
-Note how the expression that follows a `let` expression
-can be another `let` expression in order to place
-multiple identifiers in the scope of the final expression.
 
 Identifers bound by `let` expressions go out-of-scope
 after they are evaluated.
