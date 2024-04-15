@@ -164,7 +164,7 @@ It also supports JSX.
 <a href="https://melange.re/v3.0.0/" target="_blank">Melange</a>
 (previously called BuckleScript) is a set of tools that work with
 OCaml and Reason code to generate and interoperate with JavaScript.
-It can generate React components.
+It supports JSX and can be used to generate React components.
 
 <a href="https://coq.inria.fr" target="_blank">Coq</a>
 is a formal proof system that is primarily implemented in OCaml.
@@ -467,7 +467,7 @@ Primitive values are expressions that do not require additional evaluation.
 
 OCaml does not support null values.
 
-## Type Conversions
+## Primitive Type Conversions
 
 The OCaml standard library provides many functions
 for converting a value from one type to another.
@@ -895,11 +895,34 @@ let next =
 
 Call this with `next ()`.
 
-## Custom Types
+## Algebraic Data Types
 
-The `type` keyword defines a custom type.
+OCaml supports algebraic data types which include product types and sum types.
 
-It can be used to simply create an alias for an existing type.
+Product types describe a conjunction which can be thought of as
+"this and this and this".
+Examples of product types in OCaml include tuples and records.
+
+Tuples describe a cartesian product of values.
+For example, the tuple type `float * float` describes the combination of
+every possible float value (say an x coordinate) with
+every possible float value (say a y coordinate).
+
+Sum types describe a disjunction which can be thought of as
+"this or this or this".
+Examples of sum types in OCaml include variant types, lists, and trees.
+The elements in a list are represented as a variant whose value can be
+the empty list (`[]`) or a cons cell created with the `::` operator that
+represents a value and a list tail.
+A tree can be represented as a variant whose value can be `Empty`, `Leaf`, or
+`Node` where nodes have a value and nodes representing left and right subtrees.
+
+## Type Aliases
+
+The `type` keyword defines a type alias.
+It is used to define shorthand name for a type definition
+or to define an alias for an existing type.
+
 For example:
 
 ```ocaml
@@ -907,8 +930,8 @@ type weight = float
 type point = float * float (* a tuple *)
 ```
 
-The `type` keyword can also be used to define variant types
-which are described in the next section.
+The `type` keyword can also be used give a name to a variant type,
+described in the next section.
 
 ## Variant Types
 
