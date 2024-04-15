@@ -4079,3 +4079,24 @@ The one that seems most popular is
 <a href="https://github.com/ocaml-multicore/eio" target="_blank">eio</a>.
 
 To install eio, enter `opam install eio_main`.
+
+## Debugging
+
+To use `ocamldebug`:
+
+1. Add the following stanzas in the `dune` file of the executable:
+
+   ```text
+   (flags (:standard -g))
+   (modes byte)
+   ```
+
+1. Build the executable with `dune build`.
+   This creates a `.bc` bytecode file in the `_build/default` directory.
+
+1. Enter `ocamldbug _build/default/{name}.bd`
+
+1. Enter `ocamldebug` commands like `step`, `next`,
+   `print`, `break`, `continue`, and `quit`.
+
+I wasn't able to set a breakpoint or print any expressions.
