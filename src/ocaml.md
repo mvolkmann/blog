@@ -3869,8 +3869,7 @@ To use this in a Dune project:
 1. Annotate types to be pretty-printed. For example:
 
    ```ocaml
-   type int_list = int list
-   [@@deriving show]
+   type int_list = int list [@@deriving show]
    ```
 
 1. Print instances of that type with the following:
@@ -3878,6 +3877,23 @@ To use this in a Dune project:
    ```ocaml
    print_endline (show_int_list numbers);
    ```
+
+   This outputs something like `[1; 2; 3]`.
+
+We can write a function to print the elements in a list
+as an alternative to using a ppx.
+
+```ocaml
+let print_int_list l =
+  List.iter (Printf.printf "%d ") l;
+  print_newline ()
+
+let () =
+  let numbers = [ 1; 2; 3 ] in
+  print_int_list numbers
+```
+
+This outputs like `1 2 3`.
 
 ## Generating Documentation
 
