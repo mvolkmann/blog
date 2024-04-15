@@ -3190,8 +3190,10 @@ with ex -> close_out channel
 
 ## Object-oriented Features
 
-Classes offer an alternative to records.
-Both can define fields, but classes add the ability to define methods.
+Objects and classes offer an alternative to records.
+Objects and records have fields, but objects can also have methods.
+
+Most OCaml code uses modules instead of objects and classes.
 
 The following code demonstrates defining and using a class (`point`).
 Classes, like types, have lowercase names by convention.
