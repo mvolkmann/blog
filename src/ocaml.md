@@ -1222,7 +1222,7 @@ let () =
   print_newline ()
 ```
 
-## Conditonal Logic
+## Conditional Logic
 
 Conditional logic is implemented with the `if` and `match` expressions.
 
@@ -4041,10 +4041,11 @@ Here are the steps to compile an OCaml program to JavaScript using Dune.
 
    Enter `node _build/default/hello.bc.js`
 
-## Preprocessors
+## Preprocessor Extensions (ppx)
 
-Preprocessors are programs that are called at compile time
+Preprocessor extensions are programs that are called at compile time
 to alter or add source code.
+They operate on the abstract syntax tree (AST) of the program.
 
 For example, the syntax `[%get_env "USER"]`
 can be replaces by the value of the `USER` environment variable.
