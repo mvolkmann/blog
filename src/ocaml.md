@@ -1284,13 +1284,13 @@ The patterns can match:
 - a variant type constructor (ex. `| None` or `| Some x`)
 - a tuple (ex. `| (_, "summer", temperature)` which means
   we don't care about the first element, the second element must be `"summer"`,
-  and want to capture the third element)
+  and we want to capture the third element)
 - a list (ex. `| []` or `| ["summer"; other]` or `| first :: second :: rest`)
 - an array (ex. `| [||]` or `| [|"summer"; other|]`)
-- a record (ex. `| {name = n; age = a}`)
+- a record (ex. `| {name; age = a}`)
+- multiple match expressions (ex. `| 7 | 8 | 9`)
 - a variable to match anything and bind the value to it
 - the catch-all `_` which doesn't bind the value
-- multiple match expressions (ex. `| 7 | 8 | 9`)
 
 The patterns are check in the order they are specified and
 the first matching pattern is used, so their order matters.
