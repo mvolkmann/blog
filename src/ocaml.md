@@ -449,6 +449,9 @@ Their sizes depend on the CPU.
 - `float` - 8 bytes
 - `string` - sequence of bytes, not Unicode characters
 
+Unit represents having no value and is
+the return type of functions that don't return anything.
+
 The functions `succ` and `pred` operate on `int` and `float` values
 and return the value one higher or one lower.
 
