@@ -331,20 +331,19 @@ Doing this is useful anyway because there may be errors that
 
 ## Expressions
 
-An expression in OCaml can be:
+An expression in OCaml can be a:
 
-- a literal (ex. `true`, `3`, `3.14`, or "hello")
-- a variable (ex. `x`)
-- a variable declaration (ex. `let x = 3`),
-- a keyword expression (ex. `if ...` or `for ...`)
-- a function declaration
-- a function call
-- a sequence of any of the above separated by semicolons where
-  only the last one is allowed to have a value other than the unit value
+- literal - ex. `true`, `3`, `3.14`, or "hello"
+- variable - ex. `x`
+- `let` variable declaration - ex. `let x = 3`
+- `let` function declaration
+- keyword expression - ex. `if ...` or `for ...`
+- function call
+- sequence of any of the above separated by semicolons
 
-When using a sequence of expressions, the ones before the last
-can be calls to functions that return a value (not unit)
-if the `ignore` function applied to their result.
+When using a sequence of expressions,
+all but the last must evaluate to the unit value.
+The `ignore` function can be applied to any expression to ignore its result.
 That function takes any value and returns the unit value `()`.
 
 The following code shows two ways to ignore the return value of a function.
@@ -443,6 +442,7 @@ There are three variations of doc comments, floating, item, and label.
 OCaml supports the following primitive types.
 Their sizes depend on the CPU.
 
+- unit - one literal value `()`
 - `bool` - 1 byte with the literal values `true` and `false`
 - `char` - 1 byte ASCII, not Unicode
 - `int` - 8 or 4 bytes
