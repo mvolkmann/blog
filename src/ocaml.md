@@ -4069,7 +4069,17 @@ target="_blank">Preprocessors and PPXs</a>
 ## Serializing Data
 
 OCaml provides good support for serializing data to
-s-expressions and JSON.
+s-expressions, JSON, and binary (sequences of bytes).
+
+For s-expressions, see the
+<a href="https://ocaml.janestreet.com/ocaml-core/v0.13/doc/sexplib/Sexplib/Sexp/index.html"
+target="_blank">Sexplib.Sexp</a> module.
+
+For JSON, see the <a href="https://github.com/ocaml-community/yojson"
+target="_blank">yojson</a> library.
+
+For binary, see the <a href="https://ocaml.org/manual/5.1/api/Marshal.html"
+target="_blank">Marshal</a> module.
 
 TODO: Add detail on this.
 
