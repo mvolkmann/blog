@@ -2312,6 +2312,9 @@ print_int (add 1 2); (* 3 *)
 (* Shorthand for previous way of defining this function *)
 let add a b = a + b in
 print_int (add 1 2); (* 3 *)
+
+(* Even shorter with point-free style! *)
+let add = (+)
 ```
 
 In the call to `print_int` above, parentheses are needed around `add 1 2`
