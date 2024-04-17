@@ -37,7 +37,7 @@ OCaml is a member of the
 target="_blank">ML</a> (short for Meta Language)
 family of programming languages.
 Other dialects of ML include Standard ML and F#.
-(F# is basically a port of OCaml to the .NET platform.)
+(F# is heavily inspired by OCaml and runs on the .NET platform.)
 ML influenced the design of many other languages including
 Clojure, Elm, Erlang, Haskell, Rust, and Scala.
 
@@ -3951,12 +3951,12 @@ web framework are:
   ```text
   (rule
     (targets main.ml)
-    (deps main.eml.ml)
+    (deps main.eml)
     (action (run dream_eml %{deps} --workspace %{workspace_root})))
   ```
 
 - Delete `bin/main.ml`.
-- Create `bin/main.eml.ml` with the following:
+- Create `bin/main.eml` with the following:
 
   ```ocaml
   let hello who =
@@ -3976,6 +3976,13 @@ web framework are:
 
 - Enter `dune exec dream_demo --watch`
 - Browse localhost:8080
+
+VS Code isn't able to provide LSP support for files with a `.eml` extension.
+Using an extension of `.eml.ml` or `.eml.html` enables LSP support.
+But both extensions cause issues because the files
+contain a combination of OCaml code and HTML.
+Treating them as one or the other will cause VS Code
+to flag errors that are not actually errors.
 
 For a more advanced Dream app that
 places the HTML templates in separate source files, see
