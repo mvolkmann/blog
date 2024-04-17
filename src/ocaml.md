@@ -1507,10 +1507,16 @@ where the fields are accessed by position rather than name.
 
 A list is an immutable, ordered collection of values
 that all have the same type.
-Lists are implemented as singly linked lists.
+Lists are implemented as a variant type with two constructors
+whose values from a singly linked list.
+The first constructor is `[]` (pronounced "nil"),
+which represents an empty list.
+The second constructor is `::` (pronounced "cons", short for "construct")
+which creates a new list by adding an element
+to the beginning of an existing list.
 
-To create an empty list, use a pair of square brackets
-that is pronounced "nil". For example:
+To create an empty list, use the nil constructor.
+For example:
 
 ```ocaml
 let issues = []
@@ -1530,11 +1536,11 @@ A non-empty list is represented by a head that holds an element value
 and a tail that holds the remainder which is another list that may be empty.
 
 To create a new list by adding an element to the beginning of an existing list,
-use the `::` operator which is pronounced "cons" (short for "construct").
-The right side of this operator must be a list
-and the left side must be an expression that evaluates to
+use the cons constructor.
+The right side must be a list and
+the left side must be an expression that evaluates to
 the same type as elements in the list on the right.
-This operator is right-associative.
+As an operator, this is right-associative.
 For example:
 
 ```ocaml
