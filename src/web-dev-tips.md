@@ -345,6 +345,9 @@ See <a href="/blog/html-dialog-element/" target="_blank">HTML dialog Element</a>
 ### Popovers
 
 An HTML `button` element can trigger showing another element in a popup.
+The popup is dismissed by clicking outside it or by pressing the escape key.
+As shown here, you can also add a close button.
+
 For example:
 
 <img alt="HTML popover" style="width: 70%"
