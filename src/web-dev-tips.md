@@ -338,6 +338,82 @@ to see the list filtered to only colors that match.
 
 {% endraw %}
 
+### Dialogs
+
+See <a href="/blog/html-dialog-element/" target="_blank">HTML dialog Element</a>
+
+### Popovers
+
+An HTML `button` element can trigger showing another element in a popup.
+For example:
+
+<img alt="HTML popover" style="width: 70%"
+  src="/blog/assets/html-popover.png?v={{pkg.version}}"
+  title="HTML popover">
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML Popover Demo</title>
+    <style>
+      button {
+        background-color: cornflowerblue;
+        border: 1px solid gray;
+        border-radius: 0.5rem;
+        padding: 0.5rem;
+      }
+
+      .popover {
+        border: none;
+        font-family: sans-serif;
+        position: relative;
+        padding: 1rem;
+        padding-top: 2.5rem;
+
+        & .close {
+          position: absolute;
+          top: 0px;
+          right: 0px;
+
+          background: none;
+          border: none;
+          font-size: 2rem;
+          line-height: 2rem;
+          margin-right: 0.5rem;
+          padding: 0;
+          z-index: 1;
+        }
+
+        & .close:hover {
+          cursor: pointer;
+        }
+
+        &::backdrop {
+          background: rgb(0 0 0 / 50%);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <button popovertarget="my-popover">Toggle Popover</button>
+    <div class="popover" id="my-popover" popover>
+      <!-- Values for popovertargetaction are "hide", "show", and "toggle". -->
+      <button
+        class="close"
+        popovertarget="my-popover"
+        popovertargetaction="hide"
+      >
+        ×
+      </button>
+      Popover content goes here.
+    </div>
+  </body>
+</html>
+```
+
 ### figure element
 
 The {% aTargetBlank

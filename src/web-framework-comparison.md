@@ -936,7 +936,7 @@ What conclusions can be drawn from comparing these versions of the app?
 
 - Build process
 
-  The Next.js and SvelteKit approaches requires a build process.
+  The Next.js and SvelteKit approaches require a build process.
   The htmx approach may or may not, depending on the
   selected server-side programming language.
   Our choice of using Bun removes the need for a build process.
