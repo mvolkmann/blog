@@ -1918,18 +1918,19 @@ let () =
 ### Records
 
 A record an immutable collections of named fields.
-Record type names must begin with a lowercase letter.
-The fields can have differents types, including other record types.
+The names of record types, like all type names,
+must begin with a lowercase letter.
+The fields can have different types, including other record types.
 Records are similar to structs in other languages.
 
 The following code defines a record type
-that describes an item available for purchase:
+that describes an item available for purchase.
 
 ```ocaml
 type item = {
   description : string;
   mutable price : int;
-  mutable weight : float;
+  weight : float;
 }
 ```
 
@@ -1938,7 +1939,7 @@ The field names must begin with a lowercase letter.
 The field values are immutable by default, but can be made mutable
 by adding the `mutable` keywored before their field name.
 
-To create a record, just supply values for each of the fields
+To create a record, supply values for each of the fields
 inside curly braces in any order. For example:
 
 ```ocaml
@@ -1951,6 +1952,7 @@ and no extra fields can be present.
 
 Field values can be omitted if there is a
 variable in scope with the same name as the field.
+This is called "field punning".
 For example:
 
 ```ocaml
@@ -1968,9 +1970,9 @@ let p = my_item.price
 
 A field name must follow the dot,
 not an expression that evaluates to a field name.
-To lookup values based on an expression, use the `Map` module.
+To lookup values based on an expression, use a `Map` instead of a record.
 
-Fields can also be pattern matched using a `match`. For example:
+Fields can also be pattern matched. For example:
 
 ```ocaml
 match my_item with
@@ -2009,8 +2011,8 @@ open Printf
 
 type item = {
   description : string;
-  mutable weight : float;
   mutable price : int;
+  weight : float;
 }
 
 let eggs = { description = "eggs"; weight = 0.4; price = 275 }
