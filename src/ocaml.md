@@ -1888,7 +1888,8 @@ open Printf
 module IntSet = Set.Make (struct
   type t = int
 
-  let compare = compare
+  (* Int. below can be inferred. *)
+  let compare = Int.compare
 end)
 
 type dog = { name : string; breed : string }
@@ -1896,20 +1897,17 @@ type dog = { name : string; breed : string }
 module DogSet = Set.Make (struct
   type t = dog
 
-  let compare a b = compare a.name b.name
+  (* String. below can be inferred. *)
+  let compare a b = String.compare a.name b.name
 end)
 
 let () =
   let intSet = IntSet.of_list [ 3; 5; 3 ] in
-  IntSet.iter
-    (fun n ->
-      print_int n;
-      print_newline ())
-    intSet;
+  IntSet.iter (fun n -> print_endline (string_of_int n)) intSet;
 
   let dogSet =
     DogSet.(
-      empty
+      empty (* returns an empty Set *)
       |> add { name = "Comet"; breed = "Whippet" }
       |> add { name = "Oscar"; breed = "GSP" }
       |> add { name = "Comet"; breed = "Greyhound" })
