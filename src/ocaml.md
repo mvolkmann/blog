@@ -1266,9 +1266,8 @@ let rec eval = function
 
 let () =
   let result = eval (Add (Int 5, Mul (Int 3, Int 2))) in
-  print_int result;
+  print_endline (string_of_int result)
   (* 5 + (3 * 2) = 11 *)
-  print_newline ()
 ```
 
 ## Conditional Logic
@@ -1280,7 +1279,7 @@ Conditional logic is implemented with the `if` and `match` expressions.
 The syntax is `if expr1 then expr2 else expr3`.
 
 `expr1` must evaluate to a `bool`.
-Non-`bool` values are not automatically interpreted as a `bool`.
+Non-`bool` values are not automatically coerced to a `bool` value.
 For example, `0` is not treated as `false`.
 
 `expr3` must evaluate to the same type as `expr2`
@@ -1299,7 +1298,8 @@ surround them with parentheses and separate them with semicolons.
 The value will be the value of the final expression.
 
 As an alternative to parentheses, the `begin` and `end` keywords can be used.
-But OCaml editor extensions may automatically replaces those with parentheses.
+However, OCaml editor extensions may
+automatically replace those with parentheses.
 
 Unless the `then` branch produces a unit result, an `else` branch is required.
 
@@ -1329,22 +1329,22 @@ The patterns can match:
 
 - a constant (ex. `| 7` or `| "summer"`)
 - a range of characters (ex. `| 'a' .. 'f'`)
-- a guard using the `when` keyword (ex. `| n when 7 <= n && n <= 9`)
 - a variant type constructor (ex. `| None` or `| Some x`)
 - a tuple (ex. `| (_, "summer", temperature)` which means
   we don't care about the first element, the second element must be `"summer"`,
-  and we want to capture the third element)
+  and we want to capture the value of the third element)
 - a list (ex. `| []` or `| ["summer"; other]` or `| first :: second :: rest`)
 - an array (ex. `| [||]` or `| [|"summer"; other|]`)
 - a record (ex. `| {name; age = a}`)
 - multiple match expressions (ex. `| 7 | 8 | 9`)
 - a variable to match anything and bind the value to it
+- a guard using the `when` keyword (ex. `| n when 7 <= n && n <= 9`)
 - the catch-all `_` which doesn't bind the value
 
-The patterns are check in the order they are specified and
+The patterns are checked in the order they are specified and
 the first matching pattern is used, so their order matters.
 
-The value of a `match` expression is the value of the matched pattern.
+The value of a `match` expression is the value after the matched pattern.
 
 There is a warning if the branches are not exhaustive.
 At runtime if no branch matches, a `Match_failure` exception is raised.
@@ -1355,18 +1355,18 @@ For example:
 let () =
   Random.self_init ();
   let n = Random.int 10 in
-  print_int n;
-  print_newline ();
+  print_endline (string_of_int n);
   match n with
   | 0 | 1 | 2 | 3 -> print_string "small"
   | n when 4 <= n && n <= 7 -> print_string "medium"
   | _ -> print_string "large"
 ```
 
-The `function` keyword is useful in functions
-that immediately `match` on the last parameter.
+The `function` keyword defines a function, like the `fun` keyword,
+but it's specialized to perform pattern matching on its first argument.
+It is useful in functions that immediately `match` on the last parameter.
 It simplfies the code by removing the need to list the last parameter
-and replacing `match {last-parameter} with` with just `function`.
+and replaces `match {last-parameter} with` with just `function`.
 For example:
 
 ```ocaml
@@ -1391,10 +1391,9 @@ let () =
   print_endline (weather2 Fall); (* perfect *)
 ```
 
-The `function` keyword defines a function, like the `fun` keyword,
-but it's specialized to performs pattern matching on its first argument.
-For example, the following code transforms a list of `Option` values
-to a list of unwrapped values where a default value is used for `None` cases.
+The following code uses the `function` keyword to
+transform a list of `Option` values to a list of unwrapped values
+where a default value is used for `None` cases.
 
 ```ocaml
 let options = [ Some 1; None; Some 2 ]
