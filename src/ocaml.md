@@ -1828,7 +1828,8 @@ let colors = [| "red"; "green"; "blue" |]
 ```
 
 To get an element from an array, follow it with a dot and
-a zero-based index in parentheses (odd syntax). For example:
+a zero-based index in parentheses (odd syntax)
+or use the `Array.get` function. For example:
 
 ```ocaml
 let color = colors.(1) (* "green" *)
@@ -1836,7 +1837,8 @@ OR
 let color = Array.get colors 1
 ```
 
-To modify an array element, use the `<-` operator. For example:
+To modify an array element, use the `<-` operator or the `Array.set` function.
+For example:
 
 ```ocaml
 colors.(1) <- "yellow"
@@ -1844,11 +1846,11 @@ OR
 Array.set colors 1 "yellow"
 ```
 
-The type of an array is written as `T array`
-where `T` is the type of the elements.
+The type of an array is written as `t array`
+where `t` is the type of the elements.
 For example, the type of an array of `float` values is `float array`.
 
-An empty array is written as `[||]` and as the type `'a array`
+An empty array is written as `[||]` and has the type `'a array`
 to indicate that the type of its elements is unknown.
 
 The standard library `Array` module provides
@@ -1856,18 +1858,20 @@ many functions that operate on arrays. See the
 <a href="https://v2.ocaml.org/api/Array.html" target="_blank">Array</a> module.
 Some highlights include the following:
 
-| Function          | Description                                                                                                                                         |
-| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Array.append`    | creates a new array by concatenating two arrays                                                                                                     |
-| `Array.concat`    | creates a new array by concatenating all the arrays in a list                                                                                       |
-| `Array.exists`    | determines if an array contains at least one element that matches a given predicate function                                                        |
-| `Array.iter`      | takes a function and an array; iterates over the array, passing each element the function; doesn't return a value, so this is used for side effects |
-| `Array.length`    | returns the length of a given array                                                                                                                 |
-| `Array.fold_left` | reduces an array to a single value using an accumulator function                                                                                    |
-| `Array.sub`       | creates a new array that is a subset of an existing array                                                                                           |
-| `Array.to_list`   | creates a new list that contains the same elements as a given array                                                                                 |
-| `Array.of_list`   | creates a new array that contains the same elements as a given list                                                                                 |
-| `Array.map`       | creates a new array containing elements that are computed by passing each element in an existing array to a given function                          |
+| Function           | Description                                                                                                                                         |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Array.append`     | creates a new array by concatenating two arrays                                                                                                     |
+| `Array.concat`     | creates a new array by concatenating all the arrays in a list                                                                                       |
+| `Array.exists`     | determines if an array contains at least one element that matches a given predicate function                                                        |
+| `Array.for_all`    | determines if every element in an array matches a given predicate function                                                                          |
+| `Array.iter`       | takes a function and an array; iterates over the array, passing each element the function; doesn't return a value, so this is used for side effects |
+| `Array.length`     | returns the length of a given array                                                                                                                 |
+| `Array.fold_left`  | reduces an array to a single value by applying an accumulator function from left to right                                                           |
+| `Array.fold_right` | reduces an array to a single value by applying an accumulator function from right to left                                                           |
+| `Array.sub`        | creates a new array that is a subset of an existing array                                                                                           |
+| `Array.to_list`    | creates a new list that contains the same elements as a given array                                                                                 |
+| `Array.of_list`    | creates a new array that contains the same elements as a given list                                                                                 |
+| `Array.map`        | creates a new array containing elements that are computed by passing each element in an existing array to a given function                          |
 
 ### Sets
 
