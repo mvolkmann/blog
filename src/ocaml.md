@@ -675,6 +675,11 @@ let () =
 The result is `[7; 3; 4; 8; 9; 10]`.
 
 Custom binary operators can be defined using an allowed set of characters.
+
+The `open` keyword brings all the identifiers in a given module,
+`printf` in this case, into scope so they can be used
+without prefixing them with their module name.
+
 For example:
 
 ```ocaml
@@ -1143,7 +1148,7 @@ let () = depth_first_in_order family_tree
 
 The <a href="https://v2.ocaml.org/api/Option.html" target="_blank">Option</a>
 module defines a variant type represents an optional value.
-It has the constructors `None` and `Some` define by
+It has the constructors `None` and `Some` defined by
 `type 'a option = None | Some of 'a`.
 
 Functions that sometimes do not have a value to return
@@ -1151,9 +1156,6 @@ use this type to represent their return value.
 For example, the `List.find_opt` function does this.
 
 ```ocaml
-(* The `open` keyword brings all the identifiers in a given module,
-   `printf` in this case, into scope so they can be used
-   without prefixing them with their module name. *)
 open Printf
 
 let colors = [ "red"; "green"; "blue" ]
@@ -1170,16 +1172,31 @@ let () =
 defines many functions that operate on an `Option` value.
 Many of these have operator equivalents.
 
-`Option.fold` is used to extract the value from an `Option`
-and provide a default value when it is `None`.
-For example, the following defines a function that gets the breed
-from a `dog option` value.
+`Option.value` extracts the value from an `Option`
+and provides a default value to use when it is `None`.
+`Option.fold` is similar, but it takes a function
+that is called to produce the return value when it is a `Some`.
+The following code demonstrates using both of these.
 
 ```ocaml
-let dog_breed = Option.fold ~some:(fun dog -> dog.breed) ~none:""
+type dogt = { name : string; breed : string }
+
+let dog1_opt = None
+let dog2_opt = Some { name = "Comet"; breed = "whippet" }
+
+let () =
+  let dog = Option.value ~default:{ name = "?"; breed = "?" } dog1_opt in
+  print_endline dog.breed;
+
+  let breed =
+    Option.fold ~none:"unknown"
+      ~some:(fun dog -> String.uppercase_ascii dog.breed)
+      dog2_opt
+  in
+  print_endline breed
 ```
 
-`Option.map` is used to apply a function to the value inside an `Option`
+`Option.map` applies a function to the value inside an `Option`
 and return a new `Option`.
 If it is `Some v` then the result of passing `v` to the function
 is returned in a `Some` variant.
@@ -1188,7 +1205,7 @@ The operator `>>|` is often defined to use this.
 
 For example:
 
-````ocaml
+```ocaml
 let double x = x * 2
 let is_even x = x mod 2 == 0
 
@@ -1226,7 +1243,7 @@ let () =
   match divide n d with
   | Ok v -> print_endline (string_of_float v)
   | Error e -> print_endline e
-````
+```
 
 ### Interpreter
 
