@@ -1479,22 +1479,23 @@ The most commonly used are tuples, lists, arrays, and maps.
 
 Each of these collection types are described in more detail below.
 All but `Set`, `Map` and `Hashtbl` have a literal syntax.
+Tuples separate elements with commas and all the others use semicolons.
 
 - `tuple` - `(expr1, expr2, ...)`
 - `list` - `[ expr1; expr2; ... ]`
 - `array` - `[| expr1; expr2; ... |]`
 - `record` - `{ k1 = expr1; k2 = expr2; ... }`
 
-Also see:
+Also see these modules:
 
-- <a href="https://v2.ocaml.org/api/Array.html" target="_blank">Module Array</a>
-- <a href="https://v2.ocaml.org/api/Hashtbl.html" target="_blank">Module Hashtbl</a>
-- <a href="https://v2.ocaml.org/api/List.html" target="_blank">Module List</a>
-- <a href="https://v2.ocaml.org/api/Map.html" target="_blank">Module Map</a>
-- <a href="https://v2.ocaml.org/api/Queue.html" target="_blank">Module Queue</a>
-- <a href="https://v2.ocaml.org/api/Seq.html" target="_blank">Module Seq</a>
-- <a href="https://v2.ocaml.org/api/Set.html" target="_blank">Module Set</a>
-- <a href="https://v2.ocaml.org/api/Stack.html" target="_blank">Module Stack</a>
+- <a href="https://v2.ocaml.org/api/Array.html" target="_blank">Array</a>
+- <a href="https://v2.ocaml.org/api/Hashtbl.html" target="_blank">Hashtbl</a>
+- <a href="https://v2.ocaml.org/api/List.html" target="_blank">List</a>
+- <a href="https://v2.ocaml.org/api/Map.html" target="_blank">Map</a>
+- <a href="https://v2.ocaml.org/api/Queue.html" target="_blank">Queue</a>
+- <a href="https://v2.ocaml.org/api/Seq.html" target="_blank">Seq</a>
+- <a href="https://v2.ocaml.org/api/Set.html" target="_blank">Set</a>
+- <a href="https://v2.ocaml.org/api/Stack.html" target="_blank">Stack</a>
 
 ### Tuples
 
@@ -1506,7 +1507,7 @@ For example:
 
 ```ocaml
 let t = (true, 3, "blue") in
-(* Can use destructuring to extract the values. *)
+(* Can use pattern matching to extract the values. *)
 let (b, n, c) = t in
 printf "b = %b, n = %d, c = %s\n" b n c
 ```
@@ -1515,8 +1516,8 @@ In practice it is rare for a tuple to contain more than three values.
 Tuples with two elements are referred to as a "pair"
 and those with three elements are referred to as a "triple".
 
-The parentheses shown above for creating and destructuring a tuple are optional,
-but are recommended for clarity.
+The parentheses shown above for creating and pattern matching on a tuple
+are optional, but are recommended for clarity.
 
 The variable `t` above has the type `bool * int * string`
 which is referred to as a "product type"
@@ -1959,7 +1960,7 @@ A field name must follow the dot,
 not an expression that evaluates to a field name.
 To lookup values based on an expression, use the `Map` module.
 
-Fields can also be destructured using a `match`. For example:
+Fields can also be pattern matched using a `match`. For example:
 
 ```ocaml
 match my_item with
@@ -2482,7 +2483,7 @@ The `failwith` keyword is sometimes used in place of
 code that is not ready to be written.
 For example, `failwith "TODO"`.
 
-Function parameters can use destructuring to extract elements from tuples.
+Function parameters can use pattern matching to extract elements from tuples.
 This can also be done for lists and arrays, but those
 require special handling due to non-exhastive matching.
 The reason is that by definition tuple types have a known size,
@@ -2494,7 +2495,7 @@ Recall that:
 - The type of the array `[|1; 2; 3|]` is `int array` which does not specify a length.
 
 The following code demonstrates ways to use
-destructuring of tuples, lists, and arrays.
+pattern matching on tuples, lists, and arrays.
 
 ```ocaml
 open Printf
@@ -2516,7 +2517,7 @@ let array2of4 = function
 
 let () =
   let t = ("a", "b", "c", "d") in
-  (* This destructures a tuple in a variable declaration. *)
+  (* This pattern matches a tuple in a variable declaration. *)
   let _, second, third, _ = t in
   printf "second in tuple is %s\n" second;
   printf "third in tuple is %s\n" third;
