@@ -710,13 +710,13 @@ Variables are immutable.
 An exception is that variables in a REPL can be reassigned.
 
 Identifier names must start with a lowercase letter unless they refer to
-a module, constructor, or "polymorphic variant tag".
+a module, variant constructor, or "polymorphic variant tag".
 They can contain letters, digits, and the underscore character.
-They can also end with a single quote to create pairs of names
-like `x` and `x'` (for x prime).
-Technically an indentifier can contain any number of single quotes
+They can also end with single quotes to create names like
+like `x'` (for x prime) and `x''` (for x double-prime).
+Technically an identifier can contain any number of single quotes
 and they can appear anywhere except at the beginning,
-but doing this is odd!
+but doing this is odd.
 
 A `let` **expression** binds an identifier to the value of an expression
 whose scope is the expression that follows the `in` keyword.
@@ -739,7 +739,7 @@ a + b
 
 Note how the expression that follows a `let` expression
 can be another `let` expression in order to place
-multiple identifiers in the scope of the final expression.
+multiple identifiers into the scope of the final expression.
 
 It is a common error to write `let variable = expression;`
 instead of `let variable = expression in`.
@@ -762,7 +762,7 @@ a + b
 
 While it is not required to include a space on both sides of the colon
 when specifying a type, it is customary
-and the ocamlformat code formatter will add them.
+and the `ocamlformat` code formatter will add them.
 
 A `let` **definition** omits the `in` keyword.
 These are used inside modules to create global definitions
@@ -774,7 +774,7 @@ Note how a double semicolon is used to
 terminate the assignments of global identifiers.
 
 In order to call a function that takes no arguments, such as `print_newline`,
-it must be "passed" the "unit" value `()`.
+it must be passed the unit value `()`.
 Without this it is just a reference to the function and not a call to it.
 
 ```ocaml
@@ -796,7 +796,7 @@ The syntax `let pattern = expression in ...` is the same as
 writing `match expression with pattern -> ...`,
 but `match` supports multiple patterns.
 Types like lists and arrays always need more than one path
-to avoid getting a warning for partial match.
+to avoid getting a warning for a non-exhaustive match.
 For example:
 
 ```ocaml
@@ -843,6 +843,8 @@ They are written with a single quote followed by a lowercase name.
 Often the name is just `'a` and is pronounced "alpha".
 If additional type variables are needed,
 it is common to use `'b` (beta) and `'c` (gamma).
+Other common type variable names are `'k` for a key type
+and `'v` for a value type.
 
 For example, entering `[];;` in `utop` outputs type type `'a list`
 because it is a list where the type of the elements is unknown.
@@ -872,13 +874,14 @@ let () =
 
 ## References
 
-While variables are immutable, they can be bound to a reference that is mutable.
+While variables are immutable, they can be
+bound to a reference holds a mutable value.
 References are created with the `ref` function
 which must be given an initial value.
 The initial value determines its type.
 
 The `!` prefix operator dereferences a `ref` to obtain its value.
-The `not` function negates a `bool` value, not the `!` operator.
+It does not negate a `bool` value. The `not` function is used for that.
 
 The `:=` operator assigns a new value to a `ref`.
 
@@ -898,13 +901,13 @@ For `int` refs, the `incr` and `decr` functions
 can be used to increment and decrement their value.
 
 Refs are actually single field records with a mutable field named `contents`.
-The `ref` operators are just shorthand for accessing this records.
+The `ref` operators are just shorthand for accessing that field.
 If `r` is a variable bound to a `ref`
 then `!r` is short for `r.contents`
 and `r := expr` is short for `r.contents <- expr`.
 
 Other kinds of values in OCaml that support mutation include
-arrays, record fields (when marked as `mutable`),
+arrays and record fields (when marked as `mutable`).
 Values created with the following standard library modules
 also support mutation:
 `Atomic`, `Bytes`, `Hashtbl`, `Mutex`, `Queue`, `Semaphore`, and `Stack`.
@@ -921,29 +924,31 @@ let next =
     !last
 ```
 
-Call this with `next ()`.
+Call this repeatedly with `next ()`.
 
 ## Algebraic Data Types (ADTs)
 
 OCaml supports algebraic data types which include product types and sum types.
 
 Product types describe a conjunction which can be thought of as
-"this and this and this".
+"this AND this AND this".
 Examples of product types in OCaml include tuples and records.
 
 Tuples describe a cartesian product of values.
 For example, the tuple type `float * float` describes the combination of
-every possible float value (say an x coordinate) with
-every possible float value (say a y coordinate).
+every possible float value (say an x-coordinate) with
+every possible float value (say a y-coordinate).
 
 Sum types describe a disjunction which can be thought of as
-"this or this or this".
-Examples of sum types in OCaml include variant types, lists, and trees.
+"this OR this OR this".
+Examples of sum types in OCaml include variant types.
+Lists and trees are implemented as variant types.
 The elements in a list are represented as a variant whose value can be
 the empty list (`[]`) or a cons cell created with the `::` operator that
 represents a value and a list tail.
-A tree can be represented as a variant whose value can be `Empty`, `Leaf`, or
-`Node` where nodes have a value and nodes representing left and right subtrees.
+A tree can be represented as a variant whose value can be `Empty` or `Node`
+where nodes have a value and
+references to nodes representing left and right subtrees.
 
 ## Generalized Algebraic Data Types (GADTs)
 
