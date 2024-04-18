@@ -1552,7 +1552,7 @@ where the fields are accessed by position rather than name.
 A list is an immutable, ordered collection of values
 that all have the same type.
 Lists are implemented as a variant type with two constructors
-whose values from a singly linked list.
+whose values form a singly linked list.
 The first constructor is `[]` (pronounced "nil"),
 which represents an empty list.
 The second constructor is `::` (pronounced "cons", short for "construct")
@@ -1605,7 +1605,7 @@ For example:
 let new_list = list1 @ list2
 ```
 
-The type of a list is written as `T list` where `T` is the type of the elements.
+The type of a list is written as `t list` where `t` is the type of the elements.
 For example, the type of a list of `float` values is `float list`.
 The type of an empty list `[]` is `'a list`
 where `'a` is a type variable that represents an unknown type.
@@ -1626,16 +1626,25 @@ let seasons = [
 
 The type of `seasons` is `string list list`.
 
-The `match` can be used to recursively process a list.
+A `match` expression can be used to recursively process a list.
 For example, the following code computes the sum of a list of integers.
 By convention, the name `hd` is used for the head of a list
-and `tl` is used for the tail.
+and the name `tl` is used for the tail.
+
+Here are three ways to write a function that takes an `int list`
+and returns the sum of the elements.
 
 ```ocaml
 let rec sum list =
   match list with
-  | [] -> empty_value
+  | [] -> 0
   | hd :: tl -> hd + sum tl
+
+let rec sum = function
+  | [] -> 0
+  | hd :: tl -> hd + sum tl
+
+let rec sum = List.fold_left (+) 0
 ```
 
 The standard library provides many functions that operate on lists. See the
@@ -1650,16 +1659,17 @@ Some highlights include the following:
 | `List.find_opt`   | returns an `Option` that contains the first element that satisfies a predicate function                                       |
 | `List.fold_left`  | reduces a list to a single value by applying an accumulator function from left to right                                       |
 | `List.fold_right` | reduces a list to a single value by applying an accumulator function from right to left                                       |
+| `List.for_all`    | determines if every element in a list satisfies a predicate function                                                          |
 | `List.hd`         | returns the head of a list                                                                                                    |
 | `List.iter`       | iterates over a list in a way that is useful when the function passed to it has a side effect and a result list is not needed |
-| `List.length`     | returns the length of a given list                                                                                            |
+| `List.length`     | returns the length of a list                                                                                                  |
 | `List.map`        | creates a new list containing elements that are computed by passing each element in an existing list to a given function      |
 | `List.map2`       | similar to `List.map`, but it operates on two lists, passing corresponding elements from each to a given function             |
 | `List.mem`        | returns a `bool` that indicates whether a given value is a member                                                             |
-| `List.nth`        | takes a list and an index; returns the list element at the index                                                              |
+| `List.nth`        | takes a list and an index and returns the list element at the index                                                           |
 | `List.sort`       | returns a sorted list                                                                                                         |
 | `List.sort_uniq`  | returns a sorted list with no duplicates                                                                                      |
-| `List.tl`         | returns the head of a list                                                                                                    |
+| `List.tl`         | returns the tail of a list                                                                                                    |
 
 Since tuple elements are separated by commas and list elements are
 separated by semicolons, a list of tuples can be written as follows:
@@ -1694,8 +1704,8 @@ let sum = List.fold_left (+) 0 numbers
 
 let () =
   print_endline (show_int_list doubled); (* [8; 2; 18; 14; 4] *)
-  printf "sum = %d\n" sum; (* sum = 23 *)
-  print_endline (show_int_list even_numbers) (* [4; 2] *)
+  print_endline (show_int_list even_numbers); (* [4; 2] *)
+  printf "sum = %d\n" sum (* sum = 23 *)
 ```
 
 The following code finds the maximum value in a list of numbers.
@@ -1748,8 +1758,8 @@ The following code sorts a list of strings:
 ["red"; "green"; "blue"] |> List.sort compare
 ```
 
-The standard library doesn't provide functions to
-take and drop elements from a list, but the `Base` module does.
+The standard library doesn't provide functions to take and drop
+a number of elements from a list, but the `Base` module does.
 See the `take` and `drop` functions described at
 <a href="https://ocaml.org/p/base/latest/doc/Base/List/"
 target="_blank">List</a>.
