@@ -1530,15 +1530,13 @@ For pairs, the `fst` function returns the first element
 and the `snd` function returns the second.
 There are no built-in functions for operating on longer tuples.
 
-To get a specific element from a tuple
-of a certain length, use pattern matching.
-For example, the following function gets
-the third element from any 4-element tuple.
+Pattern matching can be used to get a specific element from a tuple.
+The following code shows four ways to write a function that
+returns the third elemet of a 4-element tuple.
 
 ```ocaml
-(* This shows three ways to write a function that
-   returns the third elemet of a 4-element tuple `t`. *)
-let third_of_4 t = match t with a, b, c, d -> c
+let third_of_4 t = match t with _, _, c, _ -> c
+let third_of_4 = function _, _, c, _ -> c
 let third_of_4 t = let _, _, c, _ = t in c
 let third_of_4 (_, _, v, _) = v
 
