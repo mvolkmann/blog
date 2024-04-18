@@ -214,7 +214,7 @@ write, compile, test, debug, and profile OCaml programs and libraries.
   into bytecode that can run on any platform.
   It creates files with the extensions `.cmo` and `.cmi` (for interfaces).
   The `-o` flag typical typically specifies an output file
-  with a `.byte` extension that is passed to the `ocamlrun` coommand.
+  with a `.byte` extension that is passed to the `ocamlrun` command.
   The `.cmo` and `.cmi` files are not needed to run the `.byte` file,
   but incremental recompilation relies on them.
 - The `ocamlrun` command executes a bytecode file.
@@ -232,14 +232,17 @@ write, compile, test, debug, and profile OCaml programs and libraries.
 - The standard library provides commonly needed functions and data structures.
   It includes modules for strings, lists, arrays, I/O operations, and more.
 
-A module is a collection of named values
+Every source file defines a module, which is a collection of named values
 that can be constants, functions, and types.
 An `open` expression brings the names defined in a module into the current scope.
-An `include` expression inserts the code as if it was part of the file.
 Circular dependencies between modules are not allowed.
 
-Suppose we have the file `my_module.ml` containing `let add a b = a + b`
-and we have the file `main.ml` containing the following:
+Suppose we have the file `my_module.ml` containing
+the function definition `let add a b = a + b`.
+The name of this module is the name of the file
+with the first letter uppercased.
+
+Suppose the file `main.ml` contains the following:
 
 ```ocaml
 open My_module
@@ -249,16 +252,16 @@ let () =
   print_int sum
 ```
 
-Ending a source file that is the starting point of a program
-with `let () =` followed by an expression is:
+The syntax `()` represents the "unit value" and represents not having a value.
 
-- not required, but ...
-- ensures that the result of the expression will be the unit value
-- makes it clear that the purpose of the expression
-  is the side effects it produces
+Ending a source file that is the starting point of a program
+with `let () =` followed by an expression is not required, but
+it ensures that the result of the expression will be the unit value.
+It also makes it clear that the purpose of the expression
+is the side effects it produces.
 
 It is recommended to create a Dune project,
-move these files in the project `bin` directory,
+move these files into the project `bin` directory,
 and run it with `dune exec {project-name}`.
 See the Dune section below for more detail.
 
@@ -295,7 +298,7 @@ To use it, enter `odig doc`.
 The first time this is run it will take
 five minutes or so to update the documentation.
 After that, running it will open a browser tab.
-This likes to external documentation pages
+This links to external documentation pages
 that are typically brief and lacking in examples.
 
 ## VS Code
@@ -326,26 +329,27 @@ parse-docstrings = true
 wrap-comments = true
 ```
 
-It may be necessary to copy the `.ocamlformat` into every subdirectory
+Copy the `.ocamlformat` into every subdirectory
 that contains its own `dune-project` file.
 
 Sometimes after code changes VS Code flags errors that aren't real.
 Running "Developer: Reload Window" from the command palette clears them.
 This issue may go away if you run `dune build -w` (for watch mode)
 in a terminal window.
-Doing this is useful anyway because there may be errors that
-`dune build` will flag, but the LSP used in VS Code will not.
+Doing this is useful anyway because
+there may be errors that `dune build` will flag,
+but the Language Server Processor (LSP) used in VS Code will not.
 
 ## Expressions
 
 An expression in OCaml can be a:
 
-- literal - ex. `true`, `3`, `3.14`, or "hello"
+- literal value - ex. `true`, `3`, `3.14`, or "hello"
 - variable - ex. `x`
 - `let` variable declaration - ex. `let x = 3`
-- `let` function declaration
+- `let` function declaration - ex `let double x = x * 2`
 - keyword expression - ex. `if ...` or `for ...`
-- function call
+- function call - ex. `double 3`
 - sequence of any of the above separated by semicolons
 
 When using a sequence of expressions,
@@ -365,7 +369,7 @@ print_endline "finished adding dogs"
 ## REPL
 
 OCaml has two REPLs. A basic one can be started by entering `ocaml`.
-A better one is `utop` which is short for "Universal Toplevel".
+A better REPL is `utop` which is short for "Universal TOPlevel".
 The `utop` command provides a more interactive, user-friendly interface that
 includes line editing, syntax highlighting, command history, and tab completion.
 
@@ -376,7 +380,8 @@ that are separated from each other by a single colon
 and allows them to span multiple lines. For example:
 
 ```ocaml
-print_int (2 + 3); print_int (2 * 3);; (* 56 *)
+print_int (2 + 3);
+print_int (2 * 3);; (* 56 *)
 ```
 
 Double semicolons are only used in REPL sessions, not in source files
@@ -397,11 +402,11 @@ Use the left and right arrow keys to move the cursor within the expression
 and make edits.
 
 Use the up and down arrow keys to recall previously entered expressions.
-They can be edited and executed again.
+These can be edited and executed again.
 
 To show the type of an expression `e`, enter `#show e;;`
 
-To load definitions in an OCaml source file into the REPL,
+To load definitions from an OCaml source file into the REPL,
 enter `#use "{file-path}";;`.
 This enables using all the types and functions defined in the source file
 inside the REPL.
@@ -419,26 +424,22 @@ open Core;;
 
 To remove the typeahead hint boxes, add `UTop.set_show_box false`.
 
-To trace the follow of function execution, enter `#trace {fn-name};;`.
+To trace the flow of function execution, enter `#trace {fn-name};;`.
 Then enter a call to the function.
 This is especially useful for recursive functions.
 To stop tracing the function, enter `#untrace {fn-name};;`.
 
 To exit the REPL, press ctrl-d or enter #quit.
 
-To specify OCaml code to run every time `utop` is started,
-place it in the file `.ocamllint` in the current directory.
-
 There is also an iOS app called "OCaml" for evaluating OCaml expressions.
 
 ## Comments
 
 Comments in OCaml code begin with `(*` and end with `*)`.
-They can span any number of lines.
+They can span any number of lines and can be nested.
+There is no syntax for single-line comments.
 
-Comments can be nested.
-
-Doc comments provided documentation that can be extracted from source files.
+Doc comments provide documentation that can be extracted from source files.
 They begin with `(**` and end with `*)`.
 Their content is similar to JSDoc comments,
 including the use of `@param` and `@return` annotations.
@@ -470,8 +471,9 @@ The `^` operator is used to concatenate strings.
 The `Char` and `String` modules provide many functions
 for operating on values of these types.
 
-For Unicode support, see the libraries
-`Uutf`, `Uutf_string`, and `ocaml-unicode`.
+Some libraries assume that sequences of bytes in a `string`
+represent Unicode characters.
+See the libraries `Uutf`, `Uutf_string`, and `ocaml-unicode`.
 
 Primitive values are expressions that do not require additional evaluation.
 
@@ -483,29 +485,31 @@ The OCaml standard library provides many functions
 for converting a value from one type to another.
 Examples include:
 
-- `float_of_int`
-- `int_of_float` - `truncate` is an alias
-- `int_of_char`
-- `char_of_int`
-- `string_of_bool`
 - `bool_of_string` - raises `Failure` if conversion fails
 - `bool_of_string_opt` - returns `None` if conversion fails
-- `string_of_int`
-- `int_of_string` - raises `Failure` if conversion fails
-- `int_of_string_opt` - returns `None` if conversion fails
-- `string_of_float`
+- `char_of_int`
+- `float_of_int`
 - `float_of_string` - raises `Failure` if conversion fails
 - `float_of_string_opt` - returns `None` if conversion fails
+- `int_of_char`
+- `int_of_float` - `truncate` is an alias
+- `int_of_string` - raises `Failure` if conversion fails
+- `int_of_string_opt` - returns `None` if conversion fails
+- `string_of_bool`
+- `string_of_float`
+- `string_of_int`
 
-To convert a `char` expression `c` to a `string` value, use `String.make 1 c`.
 There is no `string_of_char` function.
+To convert a `char` expression `c` to a `string` value, use `String.make 1 c`.
 
-## Idiomatic Names
+## Naming Conventions
 
 It is idiomatic in OCaml for
 
-- variable and class names to use snake_case with all lowercase letters
-- module names to use CamelCase, starting with an uppercase letter
+- variable, function, and class names to use
+  snake_case with all lowercase letters
+- module names and variant constructors to use CamelCase,
+  starting with an uppercase letter
 
 It is idiomatic in OCaml for the name of a function that
 
@@ -556,8 +560,10 @@ The arithmetic operators include:
 | `mod`    | modulo               |
 
 The `-` and `-.` operators can also be used for unary negation,
-but in some cases the meaning is ambiguous.
+but in some cases their meaning is ambiguous.
 That is why the `~-` and `~-.` operators are provided.
+
+There is no exponentiation operator for `int` values in the standard library.
 
 When using the `Base` module:
 
@@ -567,8 +573,7 @@ When using the `Base` module:
 
 There are no operators like `++` and `--` to increment or decrement a number.
 Instead use the functions `succ` and `pred` to get the successor or predecessor.
-
-There is no exponentiation operator for `int` values.
+For refs that hold an `int` value, use the functions `incr` and `decr`.
 
 The string operators include:
 
@@ -593,7 +598,7 @@ The relational and logical operators include:
 | `\|\|`   | boolean or                               |
 | `not`    | boolean not                              |
 
-The `=` operator is also used for assignment.
+The `=` operator is also used with the `let` keyword for assignment.
 
 The remaining operators include:
 
@@ -614,10 +619,18 @@ For example:
 ```ocaml
 let double x = x * 2
 let square x = x * x
-(* All the remaining lines print 16. *)
-print_int (square (double 2))
-print_int @@ square @@ double @@ 2
-2 |> double |> square |> print_int
+let () =
+  (* All the remaining expression print 16. *)
+
+  let d = double 2 in
+  let s = square d in
+  print_int s;
+
+  print_int (square (double 2))
+
+  print_int @@ square @@ double @@ 2
+
+  2 |> double |> square |> print_int
 ```
 
 Most OCaml operators are implemented as binary functions.
@@ -2593,7 +2606,8 @@ These can contain the following:
 
 - `open` statements that make the names in another module
   available without a module name prefix
-- `include` statements that include source code from another file
+- `include` statements that include values defined in another module
+  as if they were defined in the current file.
 - `type` definitiions
 - `exception` definitions
 - `let` definitions that define constants and functions
