@@ -1035,10 +1035,10 @@ let () =
 
 Another option to avoid constructor name conflicts
 is to wrap the conflicting variant type in a struct.
+It is idiomatic for the main type in a module to be named "t".
 
 ```ocaml
 module Tense = struct
-  (* It is idiomatic for the main type in a module to be named "t". *)
   type t = Spring | Sprung | Sprang
 end
 
@@ -1055,10 +1055,10 @@ type tense = TSpring | TSprung | TSprang
 
 Variants that do use a value are referred to as
 "non-constant variant expressions".
+These are similar to TypeScript type unions.
 The following code provides some examples:
 
 ```ocaml
-(* This can be used similarly to TypeScript type unions. *)
 type my_union = BoolVal of bool | IntVal of int | StringVal of string
 
 let get_string = function
@@ -1092,12 +1092,12 @@ let center shape =
   match shape with
   | Circle { center = c } -> c
   | Rectangle { lower_left = x, y; width = w; height = h } ->
-      (x +. (w /. 2.0), y +. (h /. 2.0))
+      (x +. (w /. 2.), y +. (h /. 2.))
 
 let () =
-  let c = Circle { center = (0.0, 0.0); radius = 10.0 } in
+  let c = Circle { center = (0., 0.); radius = 10. } in
   let r =
-    Rectangle { lower_left = (0.0, 0.0); width = 10.0; height = 5.0 }
+    Rectangle { lower_left = (0., 0.); width = 10.; height = 5. }
   in
   printf "c area = %f\n" (area c); (* 314.159265 *)
   printf "r area = %f\n" (area r); (* 50.0 *)
@@ -1218,11 +1218,11 @@ For example:
 
 ```ocaml
 let divide numerator denomiator =
-  if denomiator = 0.0 then Error "cannot divide by zero"
+  if denomiator = 0. then Error "cannot divide by zero"
   else Ok (numerator /. denomiator)
 
 let () =
-  let n = 5.0 and d = 0.0 in
+  let n = 5. and d = 0. in
   match divide n d with
   | Ok v -> print_endline (string_of_float v)
   | Error e -> print_endline e
@@ -1915,7 +1915,7 @@ To create a record, just supply values for each of the fields
 inside curly braces in any order. For example:
 
 ```ocaml
-let my_item : item = { description = "milk"; price = 350; weight = 1.0 }
+let my_item : item = { description = "milk"; price = 350; weight = 1. }
 ```
 
 It is not necessary to specify the type of the record variable.
@@ -1927,7 +1927,7 @@ variable in scope with the same name as the field.
 For example:
 
 ```ocaml
-let description = "milk" and price = 350 and weight = 1.0 in
+let description = "milk" and price = 350 and weight = 1. in
 let my_item = { description; price; weight } in
 ...
 ```
@@ -1987,7 +1987,7 @@ type item = {
 }
 
 let eggs = { description = "eggs"; weight = 0.4; price = 275 }
-let milk : item = { description = "milk"; weight = 1.0; price = 350 }
+let milk : item = { description = "milk"; weight = 1.; price = 350 }
 let new_milk = { milk with price = 325; weight = 1.5 }
 let items = [ eggs; new_milk ]
 
@@ -2402,8 +2402,8 @@ let rectangle_area1 length width = length *. width
 let rectangle_area2 ~length:l ~width:w = l *. w
 
 let () =
-  printf "area1 = %f\n" (rectangle_area1 8.5 11.0);
-  printf "area2 = %f\n" (rectangle_area2 ~length:8.5 ~width:11.0)
+  printf "area1 = %f\n" (rectangle_area1 8.5 11.);
+  printf "area2 = %f\n" (rectangle_area2 ~length:8.5 ~width:11.)
 ```
 
 Labeled parameters can specify default values which makes them optional.
@@ -2429,7 +2429,7 @@ open Printf
 let greet ?(name = "World") ?(suffix = "!") () =
   printf "Hello, %s%s\n" name suffix
 
-let product ?(a = 1.0) b = a *. b
+let product ?(a = 1.) b = a *. b
 
 let sum2 ?alpha:(first = 1) ?(beta = 2) () = first + beta
 
@@ -2442,7 +2442,7 @@ let () =
   greet () ~name:"Mark"; (* Hello, Mark! *)
   greet () (* Hello, World! *)
 
-  printf "%f\n" (product ~a:8.5 2.0); (* 17 *)
+  printf "%f\n" (product ~a:8.5 2.); (* 17 *)
   printf "%f\n" (product 8.5); (* 8.5 *)
 
   printf "%d\n" (sum2 ~alpha:3 ~beta:4 ()); (* 7 *)
@@ -2638,15 +2638,15 @@ converting temperature values and demonstrates using it.
 
 ```ocaml
 module Temperature = struct
-  let c_of_f fahrenheit = (fahrenheit -. 32.0) *. (5.0 /. 9.0)
-  let f_of_c celsius = (9.0 /. 5.0 *. celsius) +. 32.0
+  let c_of_f fahrenheit = (fahrenheit -. 32.) *. (5. /. 9.)
+  let f_of_c celsius = (9. /. 5. *. celsius) +. 32.
 end
 
 let () =
-  print_float (Temperature.c_of_f 100.0);
+  print_float (Temperature.c_of_f 100.);
   (* 37.8. *)
   print_newline ();
-  print_float (Temperature.f_of_c 0.0);
+  print_float (Temperature.f_of_c 0.);
   (* 32.0 *)
   print_newline ()
 ```
@@ -2830,11 +2830,11 @@ module Rectangle : Shape with type t := float * float = struct
 end
 
 let () =
-  let radius = 5.0 in
+  let radius = 5. in
   let circle_area = Circle.area radius in
   printf "Circle area: %.2f\n" circle_area;
 
-  let length = 4.0 and width = 6.0 in
+  let length = 4. and width = 6. in
   let rectangle_area = Rectangle.area (length, width) in
   printf "Rectangle area: %.2f\n" rectangle_area
 ```
@@ -2971,9 +2971,9 @@ exception TemperatureCrazy
 exception TemperatureHigh of float
 
 let evaluate_temperature temp =
-  if temp >= 120.0 then raise TemperatureCrazy;
-  if temp >= 100.0 then raise (TemperatureHigh temp);
-  if temp < 32.0 then "cold" else if temp < 75.0 then "hot" else "nice"
+  if temp >= 120. then raise TemperatureCrazy;
+  if temp >= 100. then raise (TemperatureHigh temp);
+  if temp < 32. then "cold" else if temp < 75. then "hot" else "nice"
 
 let report_temperature t =
   try printf "%.1f is %s\n" t (evaluate_temperature t) with
@@ -2990,15 +2990,15 @@ let report_temperature t =
 *)
 
 let () =
-  report_temperature 80.0;
+  report_temperature 80.;
   (* "80.0 is nice" *)
-  report_temperature 50.0;
+  report_temperature 50.;
   (* "50.0 is nice" *)
-  report_temperature 20.0;
+  report_temperature 20.;
   (* "20.0 is cold" *)
-  report_temperature 100.0;
+  report_temperature 100.;
   (* "100.0 is too hot!" *)
-  report_temperature 120.0 (* "120.0 is a crazy temperature!" *)
+  report_temperature 120. (* "120.0 is a crazy temperature!" *)
 ```
 
 The built-in function `assert` takes a Boolean expression
@@ -3093,7 +3093,7 @@ let () =
   let avg = average numbers in
   printf "average of a, b, and c = %f\n" avg;
 
-  let p1 = (0.0, 0.0) and p2 = (1.0, 1.0) in
+  let p1 = (0., 0.) and p2 = (1., 1.) in
   let d = distance p1 p2 in print_float d
 ```
 
@@ -3113,13 +3113,13 @@ the file `lib/math.ml` contains the following:
 
 ```ocaml
 let average numbers =
-  let sum = List.fold_left (+.) 0.0 numbers in
+  let sum = List.fold_left (+.) 0. numbers in
   let length = List.length numbers in
   sum /. float_of_int length
 
 module Geometry = struct
   let rectangle_area width height = width *. height
-  let rectangle_perimeter width height = width *. 2.0 +. height *. 2.0
+  let rectangle_perimeter width height = width *. 2. +. height *. 2.
 end
 ```
 
@@ -3271,7 +3271,7 @@ module Geometry = struct
       method set_y new_y = y <- new_y
 
       (* This is a named constructor. *)
-      method origin = new point 0.0 0.0
+      method origin = new point 0. 0.
       method print = printf "(%f, %f)\n" x y
 
       method translate dx dy =
@@ -3280,19 +3280,19 @@ module Geometry = struct
     end
 
   (* This is the OCaml version of a named constructor. *)
-  let origin = new point 0.0 0.0
+  let origin = new point 0. 0.
 end
 
 let () =
   (* Use the new keyword to create an instance of the class. *)
-  (* let p = new point 0.0 0.0 in *)
+  (* let p = new point 0. 0. in *)
   (* This uses a named constructor function instead. *)
   let p = Geometry.origin in
 
   (* Methods are called with # instead of dot. *)
-  p#set_x 1.0;
-  p#set_y 2.0;
-  p#translate 3.0 4.0;
+  p#set_x 1.;
+  p#set_y 2.;
+  p#translate 3. 4.;
 
   (* There is no need to pass the unit value `()`
      to call methods that have no parameters. *)
@@ -3301,7 +3301,7 @@ let () =
 
   (* The Oo.copy function makes a shallow copy of an object. *)
   let p2 = Oo.copy p in
-  p2#set_x 5.0;
+  p2#set_x 5.;
   p2#print;
 
   (* Each object is assigned a unique id
@@ -3346,7 +3346,7 @@ module Geometry = struct
         y <- y +. dy
     end
 
-  let origin = new point 0.0 0.0
+  let origin = new point 0. 0.
 
   class virtual shape (name_init : string) =
     object
@@ -3376,9 +3376,9 @@ end
 
 let () =
   let p = Geometry.origin in
-  let c = new Geometry.circle p 5.0 in
+  let c = new Geometry.circle p 5. in
   printf "%s area = %f\n" c#name c#area;
-  let r = new Geometry.rectangle p 10.0 5.0 in
+  let r = new Geometry.rectangle p 10. 5. in
   printf "%s area = %f\n" r#name r#area
 ```
 
@@ -3552,7 +3552,7 @@ Let's walk through creating a small OCaml project with Dune.
    let add a b = a +. b
 
    let average numbers =
-     let sum = List.fold_left (+.) 0.0 numbers in
+     let sum = List.fold_left (+.) 0. numbers in
      let length = List.length numbers in
      sum /. float_of_int length
    ```
@@ -3569,7 +3569,7 @@ Let's walk through creating a small OCaml project with Dune.
      let dy = y2 -. y1 in
      sqrt ((dx *. dx) +. (dy *. dy))
 
-   let%test _ = distance (1., 1.) (4., 5.) = 5.0
+   let%test _ = distance (1., 1.) (4., 5.) = 5.
    ```
 
 1. Modify the file `bin/main.ml` to contain the following:
@@ -3599,14 +3599,14 @@ Let's walk through creating a small OCaml project with Dune.
      printf "square of %d = %d\n" my_constant (square my_constant);
 
      (* The remaining examples call functions defined in math.ml. *)
-     let a = 2.0 and b = 3.0 and c = 2.5 in
+     let a = 2. and b = 3. and c = 2.5 in
      printf "sum of a and b = %f\n" (add a b);
 
      let numbers = [a; b; c] in
      let avg = average numbers in
      printf "average of a, b, and c = %f\n" avg;
 
-     let p1 = (0.0, 0.0) and p2 = (1.0, 1.0) in
+     let p1 = (0., 0.) and p2 = (1., 1.) in
      let d = distance p1 p2 in print_float d
    ```
 
@@ -3661,7 +3661,7 @@ For example:
 1. Call the distance function in `bin/main.ml`.
 
    ```ocaml
-   printf "distance = %f\n" (Demo.Geometry.distance (0.0, 0.0) (1.0, 1.0));
+   printf "distance = %f\n" (Demo.Geometry.distance (0., 0.) (1., 1.));
    ```
 
    This assumes the `public_name` of the executable is "demo",
@@ -3705,14 +3705,14 @@ in the `lib` directory, not in the `bin` directory.
 
    (* This is an expectation test for the average function. *)
    let%expect_test _ =
-     print_float (average [2.0; 3.0; 2.5]);
+     print_float (average [2.; 3.; 2.5]);
      [%expect "2.5"]
    ```
 
 1. Add the following lines in `lib/points.ml`:
 
    ```ocaml
-   let%test _ = distance (1., 1.) (4., 5.) = 5.0
+   let%test _ = distance (1., 1.) (4., 5.) = 5.
    ```
 
 1. Enter `dune test` or `dune test -w` to run in watch mode.
@@ -3755,7 +3755,7 @@ The following steps implement the same tests above in this way.
    ```ocaml
    open Demo
 
-   let () = print_float (Math.average [2.0; 3.0; 2.5]); (* 2.5 *)
+   let () = print_float (Math.average [2.; 3.; 2.5]); (* 2.5 *)
    ```
 
 1. Create the file `test/average.expected` containing `2.5`.
