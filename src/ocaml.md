@@ -1228,15 +1228,15 @@ The operator `>>=` is often defined to use this.
 
 The <a href="https://v2.ocaml.org/api/Result.html" target="_blank">Result</a>
 module defines a variant type represents
-result of a function that can succeed or fail.
+the result of a function that can succeed or fail.
 It has the constructors `OK` and `Error`.
 
 For example:
 
 ```ocaml
-let divide numerator denomiator =
-  if denomiator = 0. then Error "cannot divide by zero"
-  else Ok (numerator /. denomiator)
+let divide numerator denominator =
+  if denominator = 0. then Error "cannot divide by zero"
+  else Ok (numerator /. denominator)
 
 let () =
   let n = 5. and d = 0. in
