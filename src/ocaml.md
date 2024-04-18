@@ -1444,7 +1444,7 @@ let () =
   let i = ref 1 in
   while !i <= 5 do
     printf "%d\n" !i;
-    i := !i + 1
+    incr i
   done
 ```
 
