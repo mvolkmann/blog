@@ -853,6 +853,9 @@ The following code demonstrates writing a function that uses
 parametric polymorphism to find the largest value in a list of values.
 
 ```ocaml
+(* The next 2 lines below can be replaced by
+   the following which omits the type specifications:
+   let rec max_element = function *)
 let rec max_element (ls : 'a list) : 'a option =
   match ls with
   | [] -> None (* for an empty list *)
@@ -863,6 +866,11 @@ let rec max_element (ls : 'a list) : 'a option =
       | None ->
           Some hd (* head is maximum if tail is empty *)
       | Some max_tl -> Some (if hd > max_tl then hd else max_tl))
+
+(* This is a more compact way to write the function above. *)
+let max_element = function
+  | [] -> None
+  | hd :: tl -> Some (List.fold_left max hd tl)
 
 let () =
   let numbers = [ 1; 13; 4; 9 ] in
