@@ -853,8 +853,8 @@ The following code demonstrates writing a function that uses
 parametric polymorphism to find the largest value in a list of values.
 
 ```ocaml
-(* The next 2 lines below can be replaced by
-   the following which omits the type specifications:
+(* The next 2 lines can be replaced by the following
+   omits the type specifications:
    let rec max_element = function *)
 let rec max_element (ls : 'a list) : 'a option =
   match ls with
@@ -877,7 +877,7 @@ let () =
   let max = max_element numbers in
   match max with
   | None -> print_endline "empty list"
-  | Some max -> print_int max
+  | Some max -> print_int max (* 13 *)
 ```
 
 ## References
@@ -964,7 +964,7 @@ GADTs are an extension to ADTs that support more precise type specifications
 (more constraints) and enable better type inference in certain situations.
 
 GADTs are a step toward supporting dependent types.
-Dependent types enable defining types whose mean depends on values.
+Dependent types enable defining types whose meaning depends on values.
 For example a list type can specify a fixed length
 and/or that its values must be in ascending order.
 
