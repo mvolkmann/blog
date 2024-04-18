@@ -1168,8 +1168,8 @@ let () =
   | None -> print_endline "failed to find green\n"
 ```
 
-<a href="https://v2.ocaml.org/api/Option.html" target="_blank">Module Option</a>
-defines many functions that operate on an `Option` value.
+The <a href="https://v2.ocaml.org/api/Option.html" target="_blank">Option</a>
+module defines many functions that operate on an `Option` value.
 Many of these have operator equivalents.
 
 `Option.value` extracts the value from an `Option`
@@ -1640,8 +1640,8 @@ let rec sum list =
   | hd :: tl -> hd + sum tl
 ```
 
-The standard library provides many functions that operate on lists.
-See <a href="https://v2.ocaml.org/api/List.html" target="_blank">Module List</a>.
+The standard library provides many functions that operate on lists. See the
+<a href="https://v2.ocaml.org/api/List.html" target="_blank">List</a> module.
 Some highlights include the following:
 
 | Function          | Description                                                                                                                   |
@@ -1844,8 +1844,8 @@ An empty array is written as `[||]` and as the type `'a array`
 to indicate that the type of its elements is unknown.
 
 The standard library `Array` module provides
-many functions that operate on arrays.
-See <a href="https://v2.ocaml.org/api/Array.html" target="_blank">Module Array</a>.
+many functions that operate on arrays. See the
+<a href="https://v2.ocaml.org/api/Array.html" target="_blank">Array</a> module.
 Some highlights include the following:
 
 | Function          | Description                                                                                                                                         |
@@ -2025,8 +2025,8 @@ A Map is an immutable collection of key/value pairs.
 The standard library `Map` module provides
 many functions that operate on maps.
 Each of them return a new map that uses structual sharing
-to avoid making a copy of the whole map.
-See <a href="https://v2.ocaml.org/api/Map.html" target="_blank">Module Map</a>.
+to avoid making a copy of the whole map. See the
+<a href="https://v2.ocaml.org/api/Map.html" target="_blank">Map</a> module.
 
 To create a map type that uses keys of a given type, call `Map.Make`.
 For example, the following creates a map type where the keys are strings.
