@@ -17,14 +17,12 @@ with an emphasis on expressiveness and safety."
 It was released in 1996
 which is the same year that Java was released.
 
-OCaml answers the question "Can a programming language implement a
-type system so strong that it is nearly never necessary to specify types?"
 OCaml uses a variant of the Hindley–Milner type system,
 which is a type inference algorithm for
 statically typed functional programming languages.
 The Hindley–Milner type system has the ability to
 infer the most general types of expressions
-without requiring explicit type annotations in many cases.
+without requiring explicit type annotations in nearly all cases.
 
 The Caml programming language, released in 1985, is the predecessor of OCaml.
 The name is short for "Categorical Abstract Machine Language".
@@ -36,10 +34,9 @@ OCaml is a member of the
 <a href="https://en.wikipedia.org/wiki/ML_(programming_language)"
 target="_blank">ML</a> (short for Meta Language)
 family of programming languages.
-Other dialects of ML include Standard ML and F#.
-(F# is heavily inspired by OCaml and runs on the .NET platform.)
-ML influenced the design of many other languages including
-Clojure, Elm, Erlang, Haskell, Rust, and Scala.
+Other languages that were influenced by ML include Standard ML,
+Clojure, Elm, Erlang, F#, Haskell, Rust, and Scala.
+F# was heavily inspired by OCaml and runs on the .NET platform.
 
 F# is to C# as Scala and Clojure are to Java.
 They are ML-inspired languages that
@@ -47,6 +44,7 @@ interoperate with an underlying non-ML language.
 
 OCaml has an interpreter, a compiler that compiles to bytecode,
 and a compiler that creates native executables.
+OCaml can also be compiled to assembly, C, JavaScript, and WebAssembly.
 
 The OCaml compilers are implemented in OCaml.
 They are fast compared to the compilers for Haskell and Rust.
@@ -67,15 +65,15 @@ cookbook-like material to the "Learn" section of the main web site.
 OCaml has a number of notable features including:
 
 - strong static type checking
-- strong type inference (almost never need to specify types)
-- most terse syntax possible for defining and calling functions
+- incredible type inference (almost never need to specify types)
+- very terse syntax for defining and calling functions
 - pattern matching with many ways to match
 - automatic function currying
 - functional programming (not as pure as Haskell, but more pragmatic)
 - object-oriented programming (though not often used)
 - variant types (like enums with associated values)
 - polymorphic types (OCaml's version of generics)
-- interesting implementing of modules
+- interesting implementation of modules
 - pragmatic approach to mutability
   (immutable by default, but can opt-in to some mutability)
 - automatic garbage collection
@@ -85,7 +83,7 @@ OCaml has a number of notable features including:
 - comes with an interpreter and two compilers
   (one to produce bytecode and one to produce native executables)
 - Dune build system
-- great REPL (utop)
+- `utop` REPL
 
 ## OCaml 5
 
@@ -108,7 +106,7 @@ These are like a try/catch that can resume execution where the effect occurred.
   target="_blank">OCaml Programming: Correct + Efficient + Beautiful</a>
   book used in Cornell CS 3110 course
 - <a href="https://www.youtube.com/watch?v=MUcka_SvhLw&list=PLre5AT9JnKShBOPeuiD9b-I4XROIJhkIU" target="_blank">OCaml Programming</a>
-  course from Dr. Michael Ryan Clarkson at Cornell University
+  course YouTube videos from Dr. Michael Ryan Clarkson at Cornell University
 - <a href="https://dev.realworldocaml.org" target="_blank">Real World OCaml</a> book
 - <a href="https://ocaml-book.com" target="_blank">OCaml from the Very Beginning</a> book
 - <a href="https://caml.inria.fr/pub/old_caml_site/humps/" target="_blank">The Caml Humps</a>
@@ -152,18 +150,27 @@ for derivatives pricing and risk management.
 T3 uses OCaml for algorithmic trading, quantitative analysis, risk management,
 and other financial software.
 
+Tarides uses OCaml and contributes to the
+OCaml compiler, platform, and ecosystem.
+
 ## Derived Languages
 
 <a href="https://reasonml.github.io" target="_blank">Reason</a>
+(previously called ReasonML)
 is a syntax extension and toolchain for OCaml developed by Facebook.
 It provides a more JavaScript-like syntax while
 retaining full compatibility with the OCaml language and its libraries.
 The syntax of Reason is more familiar to JavaScript developers than OCaml.
 It also supports JSX.
 
+<a href="https://rescript-lang.org" target="_blank">ReScript</a>
+(previously called BuckleScript) is "a robustly typed language
+that compiles to efficient and human-readable JavaScript".
+It was forked from Reason and is not compatible with OCaml.
+
 <a href="https://melange.re/v3.0.0/" target="_blank">Melange</a>
-(previously called BuckleScript) is a set of tools that work with
-OCaml and Reason code to generate and interoperate with JavaScript.
+is a set of tools that work with OCaml and Reason code
+to generate and interoperate with JavaScript.
 It supports JSX and can be used to generate React components.
 
 <a href="https://coq.inria.fr" target="_blank">Coq</a>
@@ -184,7 +191,7 @@ target="_blank">Install OCaml on Windows</a>.
 After installing `opam`, enter `opam init`
 which takes over five minutes to complete.
 
-To install tools for development, enter the following shell command
+To install tools for development, enter the following command
 which takes about four minutes to complete:
 
 ```bash
