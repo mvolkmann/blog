@@ -938,8 +938,9 @@ Call this repeatedly with `next ()`.
 
 OCaml supports algebraic data types which include product types and sum types.
 
-Product types describe a conjunction which can be thought of as
-"this AND this AND this".
+Product types (aka "each-of types") describe a conjunction
+which can be thought of as "this AND this AND this".
+They can hold multiple pieces of data with differing types.
 Examples of product types in OCaml include tuples and records.
 
 Tuples describe a cartesian product of values.
@@ -947,9 +948,10 @@ For example, the tuple type `float * float` describes the combination of
 every possible float value (say an x-coordinate) with
 every possible float value (say a y-coordinate).
 
-Sum types describe a disjunction which can be thought of as
-"this OR this OR this".
-Examples of sum types in OCaml include variant types.
+Sum types (aka "one-of types") describe alternatives with a disjunction
+which can be thought of as "this OR this OR this".
+Examples of sum types in OCaml include
+the primitive type `int` and variant types (described later).
 Lists and trees are implemented as variant types.
 The elements in a list are represented as a variant whose value can be
 the empty list (`[]`) or a cons cell created with the `::` operator that
@@ -957,6 +959,11 @@ represents a value and a list tail.
 A tree can be represented as a variant whose value can be `Empty` or `Node`
 where nodes have a value and
 references to nodes representing left and right subtrees.
+
+Lists are sum types because they can be either an empty list
+or a head and tail (where the tail can be an empty list).
+Lists are also product types because they hold
+a head and a tail which have different types.
 
 ## Generalized Algebraic Data Types (GADTs)
 
@@ -973,7 +980,8 @@ TODO: Add more detail on GADTs.
 ## Type Aliases
 
 The `type` keyword defines a type alias.
-It is used to define shorthand name for a type definition
+It is used to define shorthand name for
+a type definition (such as a variant type)
 or to define an alias for an existing type.
 
 For example:
@@ -983,26 +991,10 @@ type weight = float
 type point = float * float (* a tuple *)
 ```
 
-The `type` keyword can also be used give a name to a variant type,
-described in the next section.
-
 ## Variant Types
 
 Variant types have many uses including enumerated values, error handling,
-and for representing data structures whose shape can vary.
-
-"Sum types" (aka "one-of types") describe alternatives.
-Primitive types like `int` and variant types describe below
-are examples of sum types.
-
-"Product types" (aka "each-of types") are types that can hold
-multiple pieces of data with differing types.
-Tuples and records are examples of product types.
-
-Lists are sum types because they can be either an empty list
-or a head and tail (where the tail can be an empty list).
-Lists are also product types because they hold
-a head and a tail which have different types.
+and representing data structures whose shape can vary.
 
 Each variant name is called a "constructor" (aka "tag")
 and must begin with an uppercase letter.
