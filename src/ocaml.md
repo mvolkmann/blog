@@ -55,6 +55,11 @@ The performance of OCaml is generally about 50% that of C.
 
 OCaml supports Foreign Function Interface (FFI) mechanisms to call C functions.
 
+Functional programming languages like OCaml are
+well-suited for implementing interpreters and compilers.
+The initial version of the Rust compiler was implemented in OCaml
+until Rust was mature enough to host itself.
+
 The biggest impediment to OCaml adoption is likely the
 poor state of library documentation and lack of example code.
 There is an attempt being made to address this by adding
@@ -3540,7 +3545,7 @@ add the `(name main)` stanza in the `dune` file.
 
 ### Building
 
-**To build the project**, enter `dune build`.
+**To build the project**, enter `dune build` or just `dune b`.
 This creates `_build/default/bin/main.exe`.
 To automatically rebuild the project
 when code changes are detected, add the `--watch` flag.
