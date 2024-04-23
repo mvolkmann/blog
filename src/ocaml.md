@@ -1370,6 +1370,18 @@ let () =
   | _ -> print_string "large"
 ```
 
+The `as` keyword is used to bind a name to the entire matched expression.
+For example:
+
+```ocaml
+let my_tuple = (true, 3)
+
+let () =
+  match my_tuple with
+    | (b, n) as t -> Printf.printf "%b, %d, %b, %d\n" b n (fst t) (snd t)
+    | _ -> print_endline "will never happen"
+```
+
 The `function` keyword defines a function, like the `fun` keyword,
 but it's specialized to perform pattern matching on its first argument.
 It is useful in functions that immediately `match` on the last parameter.
