@@ -484,6 +484,9 @@ Primitive values are expressions that do not require additional evaluation.
 
 OCaml does not support null values.
 
+There is a corresponding standard library module for each of these whose name
+begins uppercase. These provide functions for operating onvalues of the type.
+
 ## Primitive Type Conversions
 
 The OCaml standard library provides many functions
