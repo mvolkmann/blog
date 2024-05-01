@@ -20,20 +20,21 @@ This is useful in both user interface and server-side code.
 The design is the result of collaboration between the teams from
 Angular, Ember, MobX, Preact, Qwik, RxJS, Solid, Svelte, Vue, and more.
 Noticable absent from this list is the React team.
-The goal is the signals to be useful in multiple frameworks.
+The goal is for signals to be usable in multiple frameworks.
 
 The proposal defines a new JavaScript namespace named "Signal".
-The Signal namespace defines methods to:
+The Signal namespace:
 
-- define state with initial values
-- define state that is computed from other state
-- lazy evaluation of state so it is not computed until needed
-- memoize the last computation of state to avoid
+- provides a method to define state with initial values
+- provides a method to define state that is computed from other state
+- performs lazy evaluation of state so it is not computed until needed
+- memoizes the last computation of each piece of state to avoid
   repeating computations that will result in the same value
 
 A polyfill is available for use now.
 
-...
+There is a potential for browsers to implement new DevTools
+that track and display the state of signals.
 
 ## Define State
 
@@ -74,6 +75,11 @@ counter.set(10);
 The following code executes a function when any state it uses changes:
 
 ```js
+// This prints the value of the parity state in the DevTools console
+// initially, and again every time it changes.
+effect(() => console.log(parity.get()));
+
+// This waits for the DOM to load before trying to find elements.
 window.onload = () => {
   const count = document.getElementById('count');
   const target = document.getElementById('target');
