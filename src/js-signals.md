@@ -4,8 +4,14 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+<style>
+  img {
+    border: 1px solid gray;
+  }
+</style>
+
 <figure style="width: 30%">
-  <img alt="OCaml logo" style="border: 0"
+  <img alt="JavaScript Signals logo" style="border: 0"
     src="/blog/assets/signals-logo.png?v={{pkg.version}}">
 </figure>
 
@@ -173,3 +179,6 @@ export function setInnerText(selector: string, value: string | number) {
 For a more full-featured demo app, see
 <a href="https://github.com/mvolkmann/js-signals-demo"
 target="_blank">js-signals-demo</a>.
+
+<img alt="OCaml logo" style="width: 60%"
+  src="/blog/assets/js-signals-demo.png?v={{pkg.version}}">
