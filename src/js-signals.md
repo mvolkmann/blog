@@ -167,3 +167,9 @@ export function setInnerText(selector: string, value: string | number) {
   element.innerText = String(value);
 }
 ```
+
+## Demo App
+
+For a more full-featured demo app, see
+<a href="https://github.com/mvolkmann/js-signals-demo"
+target="_blank">js-signals-demo</a>.
