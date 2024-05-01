@@ -68,3 +68,22 @@ The following code modifies a piece of state:
 ```js
 counter.set(10);
 ```
+
+## Execute Code When State Changes
+
+The following code executes a function when any state it uses changes:
+
+```js
+window.onload = () => {
+  const count = document.getElementById('count');
+  const target = document.getElementById('target');
+  effect(() => {
+    if (count) count.innerText = String(counter.get());
+    if (target) target.innerText = parity.get();
+    // Optionally return a cleanup function.
+    // return () => {
+    //   console.log("index.ts: performing cleanup");
+    // };
+  });
+};
+```
