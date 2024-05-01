@@ -93,3 +93,86 @@ window.onload = () => {
   });
 };
 ```
+
+## effect Function
+
+The polyfill does not provide the `effect` function.
+However, a suggested implementation is provided at
+<a href="https://github.com/tc39/proposal-signals/tree/main/packages/signal-polyfill#creating-a-simple-effect"
+target="_blank">Creating a simple effect</a>
+which is similar to the following that I placed in `effect.ts`:
+
+```js
+import {Signal} from 'signal-polyfill';
+
+let needsEnqueue = true;
+
+function processPending() {
+  needsEnqueue = true;
+  for (const s of watcher.getPending()) {
+    s.get();
+  }
+  watcher.watch();
+}
+
+const watcher = new Signal.subtle.Watcher(() => {
+  if (needsEnqueue) {
+    needsEnqueue = false;
+    queueMicrotask(processPending);
+  }
+});
+
+type Cleanup = () => void;
+type Callback = () => Cleanup | void;
+export function effect(callback: Callback) {
+  // The callback function passed to the effect function
+  // can optionally return a "cleanup" function.
+  // If it does then the cleanup function is called every time
+  // a piece of state used in the callback function changes,
+  // and again if the function returned by this one is called.
+  let cleanup: Cleanup | undefined;
+
+  const computed = new Signal.Computed(() => {
+    typeof cleanup === 'function' && cleanup();
+    cleanup = callback() || undefined;
+  });
+
+  watcher.watch(computed);
+  computed.get();
+
+  // The caller of "effect" can call this returned function
+  // to stop watching for state changes.
+  return () => {
+    watcher.unwatch(computed);
+    typeof cleanup === 'function' && cleanup();
+  };
+}
+```
+
+## Utility Functions
+
+The following are examples of utility functions
+which make working with signals easier that I placed in `utilities.ts`:
+
+```js
+import {effect} from './effect';
+import {Signal} from 'signal-polyfill';
+
+/** Creates a two-way binding between an input element and a state. */
+export function bindNumberInput(selector: string, state: Signal.State<any>) {
+  const element = getElement(selector) as HTMLInputElement;
+  element.onchange = () => state.set(Number(element.value));
+  effect(() => (element.value = state.get()));
+}
+
+export function getElement(selector: string): HTMLElement {
+  const element = document.querySelector(selector) as HTMLElement;
+  if (!element) throw new Error(`No element found for selector: ${selector}`);
+  return element;
+}
+
+export function setInnerText(selector: string, value: string | number) {
+  const element = getElement(selector) as HTMLInputElement;
+  element.innerText = String(value);
+}
+```
