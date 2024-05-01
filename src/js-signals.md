@@ -79,19 +79,10 @@ The following code executes a function when any state it uses changes:
 // initially, and again every time it changes.
 effect(() => console.log(parity.get()));
 
-// This waits for the DOM to load before trying to find elements.
-window.onload = () => {
-  const count = document.getElementById('count');
-  const target = document.getElementById('target');
-  effect(() => {
-    if (count) count.innerText = String(counter.get());
-    if (target) target.innerText = parity.get();
-    // Optionally return a cleanup function.
-    // return () => {
-    //   console.log("index.ts: performing cleanup");
-    // };
-  });
-};
+effect(() => {
+  // The setInnerText function is defined below.
+  setInnerText('#sum', n1State.get() + n2State.get());
+});
 ```
 
 ## effect Function
