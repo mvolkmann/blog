@@ -37,6 +37,14 @@ The Signal namespace:
 - memoizes the last computated value of each piece of state
   to avoid repeating computations that will result in the same value
 
+From the "How Signals work" section of the proposal:
+
+> A Signal represents a cell of data which may change over time. Signals may be either "state" (just a value which is set manually) or "computed" (a formula based on other Signals).
+>
+> Computed Signals work by automatically tracking which other Signals are read during their evaluation. When a computed is read, it checks whether any of its previously recorded dependencies have changed, and re-evaluates itself if so. When multiple computed Signals are nested, all of the attribution of the tracking goes to the innermost one.
+>
+> Computed Signals are lazy, i.e., pull-based: they are only re-evaluated when they are accessed, even if one of their dependencies changed earlier.
+
 A <a href="https://github.com/tc39/proposal-signals/tree/main/packages/signal-polyfill"
 target="_blank">Signal Polyfill</a> is available for use now.
 
