@@ -19,8 +19,8 @@ layout: topic-layout.njk
 
 The <a href="https://github.com/tc39/proposal-signals"
 target="_blank">JavaScript Signals standard proposal</a>
-aims to provide a standard way to manage state in JavaScript applications
-that is reactive.
+(at stage 1 as of May 2024) aims to provide a standard way
+to manage state in JavaScript applications that is reactive.
 This is useful in both user interface and server-side code.
 
 The design is the result of collaboration between the teams from
