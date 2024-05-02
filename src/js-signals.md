@@ -44,6 +44,8 @@ From the "How Signals work" section of the proposal:
 > Computed Signals work by automatically tracking which other Signals are read during their evaluation. When a computed is read, it checks whether any of its previously recorded dependencies have changed, and re-evaluates itself if so. When multiple computed Signals are nested, all of the attribution of the tracking goes to the innermost one.
 >
 > Computed Signals are lazy, i.e., pull-based: they are only re-evaluated when they are accessed, even if one of their dependencies changed earlier.
+>
+> Computed Signals track their dependencies dynamically--each time they are run, they may end up depending on different things, and that precise dependency set is kept fresh in the Signal graph. This means that if you have a dependency needed on only one branch, and the previous calculation took the other branch, then a change to that temporarily unused value will not cause the computed Signal to be recalculated, even when pulled.
 
 A <a href="https://github.com/tc39/proposal-signals/tree/main/packages/signal-polyfill"
 target="_blank">Signal Polyfill</a> is available for use now.
@@ -88,11 +90,22 @@ counter.set(10);
 
 ## effect Function
 
-The provided polyfill does not provide the `effect` function.
+From the "Understanding the Signal class" section of the proposal:
+
+> The Signal API does not include any built-in function like `effect`.
+> This is because effect scheduling is subtle and often ties into
+> framework rendering cycles and other high-level framework-specific
+> state or strategies which JS does not have access to.
+
 However, a suggested implementation is provided at
 <a href="https://github.com/tc39/proposal-signals/tree/main/packages/signal-polyfill#creating-a-simple-effect"
 target="_blank">Creating a simple effect</a> which is
-similar to the following code that I placed in the file `effect.ts`:
+similar to the following code that I placed in the file `effect.ts`.
+
+The `Signal.subtle` namespace defines "APIs which are necessary for
+more advanced usage like implementing a framework or
+building dev tools versus more everyday application development usage
+like instantiating signals for use with a framework."
 
 ```js
 import {Signal} from 'signal-polyfill';
@@ -202,3 +215,23 @@ target="_blank">js-signals-demo</a>.
 
 <img alt="JavaScript Signals demo app" style="width: 60%"
   src="/blog/assets/js-signals-demo.png?v={{pkg.version}}">
+
+## FAQ
+
+The proposal contains an extensive
+<a href="https://github.com/tc39/proposal-signals?tab=readme-ov-file#faq"
+target="_blank">FAQ</a> section.
+
+One particularly interesting question asks "Is the Signal API meant to be
+used directly by application developers, or wrapped by frameworks?"
+The answer given is:
+
+"While this API could be used directly by application developers,
+it is not designed to be especially ergonomic.
+Instead, the needs of library/framework authors are priorities.
+Most frameworks are expected to wrap even the basic Signal.State and
+Signal.Computed APIs with something expressing their ergonomic slant.
+In practice, it's typically best to use Signals via a framework,
+which manages trickier features, as well as managing ownership and disposal,
+and scheduling rendering to DOM--this proposal
+doesn't attempt to solve those problems."
