@@ -20,27 +20,29 @@ layout: topic-layout.njk
 The <a href="https://github.com/tc39/proposal-signals"
 target="_blank">JavaScript Signals standard proposal</a>
 aims to provide a standard way to manage state in JavaScript applications
-that is "reactive".
+that is reactive.
 This is useful in both user interface and server-side code.
 
 The design is the result of collaboration between the teams from
 Angular, Ember, MobX, Preact, Qwik, RxJS, Solid, Svelte, Vue, and more.
-Noticable absent from this list is the React team.
+Noticably absent from this list is the React team.
 The goal is for signals to be usable in multiple frameworks.
 
 The proposal defines a new JavaScript namespace named "Signal".
 The Signal namespace:
 
-- provides a method to define state with initial values
+- provides a method to define state with an initial value
 - provides a method to define state that is computed from other state
 - performs lazy evaluation of state so it is not computed until needed
-- memoizes the last computation of each piece of state to avoid
-  repeating computations that will result in the same value
+- memoizes the last computated value of each piece of state
+  to avoid repeating computations that will result in the same value
 
-A polyfill is available for use now.
+A <a href="https://github.com/tc39/proposal-signals/tree/main/packages/signal-polyfill"
+target="_blank">Signal Polyfill</a> is available for use now.
 
-There is a potential for browsers to implement new DevTools
-that track and display the state of signals.
+Perhaps when this proposal is approved and becomes part of JavaScript,
+browser vendors will implement new DevTools
+that track and display the state maintained by signals.
 
 ## Define State
 
@@ -76,28 +78,13 @@ The following code modifies a piece of state:
 counter.set(10);
 ```
 
-## Execute Code When State Changes
-
-The following code executes a function when any state it uses changes:
-
-```js
-// This prints the value of the parity state in the DevTools console
-// initially, and again every time it changes.
-effect(() => console.log(parity.get()));
-
-effect(() => {
-  // The setInnerText function is defined below.
-  setInnerText('#sum', n1State.get() + n2State.get());
-});
-```
-
 ## effect Function
 
-The polyfill does not provide the `effect` function.
+The provided polyfill does not provide the `effect` function.
 However, a suggested implementation is provided at
 <a href="https://github.com/tc39/proposal-signals/tree/main/packages/signal-polyfill#creating-a-simple-effect"
-target="_blank">Creating a simple effect</a>
-which is similar to the following that I placed in `effect.ts`:
+target="_blank">Creating a simple effect</a> which is
+similar to the following code that I placed in the file `effect.ts`:
 
 ```js
 import {Signal} from 'signal-polyfill';
@@ -130,7 +117,7 @@ export function effect(callback: Callback) {
   let cleanup: Cleanup | undefined;
 
   const computed = new Signal.Computed(() => {
-    typeof cleanup === 'function' && cleanup();
+    if (typeof cleanup === 'function') cleanup();
     cleanup = callback() || undefined;
   });
 
@@ -141,15 +128,35 @@ export function effect(callback: Callback) {
   // to stop watching for state changes.
   return () => {
     watcher.unwatch(computed);
-    typeof cleanup === 'function' && cleanup();
+    if (typeof cleanup === 'function') cleanup();
   };
 }
+```
+
+## Execute Code When State Changes
+
+The following code executes a function
+every time the value of any state it uses changes:
+
+```js
+// This prints the value of the parity state in the DevTools console
+// initially, and again every time it changes.
+effect(() => console.log(parity.get()));
+
+effect(() => {
+  // The setInnerText function is defined below.
+  // n1 and n2 are Signal.State objects that hold numbers.
+  // Assume that there is a span element with an id of "sum".
+  // The first argument to setInnerText is a CSS selector.
+  setInnerText('#sum', n1.get() + n2.get());
+});
 ```
 
 ## Utility Functions
 
 The following are examples of utility functions
-which make working with signals easier that I placed in `utilities.ts`:
+that make working with signals easier.
+I placed this code in the file `utilities.ts`:
 
 ```js
 import {effect} from './effect';
@@ -176,9 +183,14 @@ export function setInnerText(selector: string, value: string | number) {
 
 ## Demo App
 
-For a more full-featured demo app, see
+For a web app that uses the Signals API, see
 <a href="https://github.com/mvolkmann/js-signals-demo"
 target="_blank">js-signals-demo</a>.
 
-<img alt="OCaml logo" style="width: 60%"
+- The root directory contains the file `index.html`.
+- The `public` directory contains the file `styles.css`.
+- The `src` directory contains the files
+  `index.ts`, `effect.ts`, and `utilities.ts`.
+
+<img alt="JavaScript Signals demo app" style="width: 60%"
   src="/blog/assets/js-signals-demo.png?v={{pkg.version}}">
