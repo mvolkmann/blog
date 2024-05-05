@@ -65,17 +65,35 @@ Recall that λ-calculus does not define numbers or operators.
 But for demonstration purposes, assume that it does define the `+` operator
 which adds two numbers held in variables.
 
-| λ-calculus  | JavaScript      |
-| ----------- | --------------- |
-| λx.λy.x + y | (x, y) => x + y |
+| λ-calculus     | JavaScript      |
+| -------------- | --------------- |
+| λx. (λy.x + y) | (x, y) => x + y |
 
-A shorthand way of writing the λ-calculus function above is `λxy.x + y`.
+Shorthand ways of writing the λ-calculus function above are
+`λx.λy.x + y` (parentheses not necessary) and `λxy.x + y`.
 
 This is referred to as "currying" which is a nod to the mathematician
 <a href="https://en.wikipedia.org/wiki/Haskell_Curry"
-target="_blank">Haskell Curry</a> (1900-1982) whose used the concept extensively.
+target="_blank">Haskell Curry</a> (1900-1982)
+who used the concept extensively in his research.
 However, the concept was initially defined by Gottlob Frege in 1893
 before Haskell Curry was born.
+
+The JavaScript function above could be defined and called
+as follows to support currying.
+This uses a function that returns another function.
+
+```js
+function add(x) {
+  return y => x + y;
+}
+const sum = add(2)(3); /* 5 */
+```
+
+In many functional programming languages including Haskell and OCaml,
+all functions automatically support currying.
+Passing fewer arguments to a function than it has parameters
+results in a new function that expects the remaining parameters.
 
 ## Some Rules
 
@@ -85,3 +103,78 @@ For example, the function `λx.x` is equivalent to the function `λy.y`.
 The result of a function application is determined by substituting
 the argument value for all occurrences of the function parmameter.
 For example, `(λx.x + 3) 2` evaluates to `2 + 3` which evaluates to `5`.
+
+## Church Encoding of Numbers
+
+While λ-calculus does not define numbers,
+we can select λ terms to represent each natural number.
+We can define functions that take another function `f` and a number `x`
+whose result is that of `f` being applied `x` times.
+Is is not the result of these functions that represent numbers,
+but rather the functions themselves.
+
+In the table below, note the number of times the function `f` is applied
+on the right side of the period.
+
+| Number | λ term         |
+| ------ | -------------- |
+| 0      | `λfx.x`        |
+| 1      | `λfx.fx`       |
+| 2      | `λfx.f(fx)`    |
+| 3      | `λfx.f(f(fx))` |
+
+## Addition
+
+Let's see how we can add 2 and 3 to get 5.
+See the representations for 2 and 3 in the table above.
+
+Pass the arguments `f` and `x` into the λ term for 3
+and perform substitution to get the result of the function application.
+
+```text
+λfx.f(f(fx)) f x
+f(f(fx))
+```
+
+Now pass `f` and the previous result into the λ term for 3
+and perform substitution to get the result of the function application.
+The λ term for 3 is substituted for every occurrence of `x` in the λ term for 2.
+
+```text
+λfx.f(fx) f f(f(fx))
+f(f(f(f(fx))))
+```
+
+The full definiton of the add function
+can be written as `λfxmn. (m f) (n f x)`
+where `m` and `n` are the two numbers to be added.
+
+```text
+λfxmn. (m f) (n f x) f x 2 3
+(2 f) (3 f x)
+TODO: What do I do next?
+```
+
+## Multiplication
+
+Let's see how we can multiply 2 and 3 to get 6.
+See the representations for 2 and 3 in the table above.
+
+The λ term for 3 is a function that has two parameters.
+Pass only `f` into this to get the single parameter function `λx.f(f(f(x)))`.
+Pass this result and `x` into the λ term for 2 which results in
+`λx.(λx.f(f(f(x)))) (λx.f(f(f(x))) x)`.
+Simplify the expression on the right to get
+`λx.f(f(f(x))) f(f(f(x)))`.
+Substitute the expression on the right as the
+value for `x` in the function on the left to get
+`f(f(f(f(f(f(x))))))`.
+This is the λ term for 6 which is the expected result.
+
+The full definiton of the multiply function
+can be written as `λfxmn. (m (n f) x`
+where `m` and `n` are the two numbers to be multiplied.
+
+## Exponentiation
+
+## Boolean Logic
