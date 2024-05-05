@@ -168,21 +168,29 @@ For example, here are the steps to use this function to add 2 and 3.
 Let's see how we can multiply 2 and 3 to get 6.
 See the representations for 2 and 3 in the table above.
 
-The λ term for 3 is a function that has two parameters.
-Pass only `f` into this to get the single parameter function
+The λ term for 3, `λfx.f (f (f x))`, is a function that has two parameters.
+Apply `f` to this to get the single parameter function
 `λx.f (f (f x))`.
 
-Pass this result and `x` into the λ term for 2 which results in
-`λx.(λx.f (f (f x))) (λx.f (f (f x)) x)`.
+The λ term for 2, `λfx.f (f x)`, is also a function that has two parameters.
+Apply the previous result as the value of the `f` parameter in this.
+Two substitutions are required, resulting in:
 
-Simplify the expression on the right to get
-`λx.f(f(f(x))) f(f(f(x)))`.
+```text
+λx.(λx.f (f (f x))) (λx.f (f (f x)) x)
+```
 
-Substitute the expression on the right as the
-value for `x` in the function on the left to get
-`f(f(f(f(f(f(x))))))`.
+Simplify the expression on the right to get:
 
-This is the λ term for 6 which is the expected result.
+```text
+λx.f (f (f x)) (f (f (f x)))
+```
+
+Substitute the term on the right as value for `x` in the term on the left to get
+
+```text
+λx.f (f (f (f (f (f x))))) -- term for 6
+```
 
 A multiply function can be written as `λfxmn. m (n f) x`
 where `m` and `n` are the two numbers to be multiplied.
