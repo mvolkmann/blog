@@ -136,31 +136,29 @@ to get the result of the function application.
 f (f (f x))
 ```
 
-Apply the term above as the value of the `x` argument in the λ term for 2
-to get a single argument function that takes `f`.
+Substitute the term above for `x` on the right side of the λ term for 2.
 
 ```text
-(λfx.f (f x)) (f (f (f x)))
-(λfx.f (f (f (f (f x)))))
+(λfx.f (f x            )) -- term for 2
+(λfx.f (f (f (f (f x))))) -- term for 5
 ```
 
-This is the term value that represents 5.
-
-The full definiton of the add function
-can be written as `λfxmn. (m f) (n f x)`
+An add function can be written as `λfxmn. (m f) (n f x)`
 where `m` and `n` are the two numbers to be added.
 
 For example, here are the steps to use this function to add 2 and 3.
 
 ```text
-λfxmn. (m f) (n f x) 2 3
+(λfxmn. (m f) (n f x)) 2 3
 -- Substitute 2 for m and 3 for n.
-λfx. (2 f) (3 f x)
+λfx. (2           f) (3               f x)
 -- Substiture the λ terms for 2 and 3.
 λfx. (λfx.f (f x) f) (λfx.f (f (f x)) f x)
 -- Apply the arguments f and x in the last term.
-λfx. (λfx.f (f x) f) f (f (f x))
--- Substitute the last term for the argument x in the first term function.
+λfx. (λfx.f (f x) f) (f (f (f x)))
+-- Apply the argument f in the last term.
+λfx. (λx.f (f x)) (f (f (f x)))
+-- Apply the argument `(f (f (f x))` to the function on its left.
 λfx. f (f (f (f (f x))))
 -- This is the definition of the number 5.
 ```
