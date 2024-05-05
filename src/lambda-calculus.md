@@ -149,7 +149,7 @@ The full definiton of the add function
 can be written as `λfxmn. (m f) (n f x)`
 where `m` and `n` are the two numbers to be added.
 
-| 2 | ` | | 3 |` |
+For example, here are the steps to use this function to add 2 and 3.
 
 ```text
 λfxmn. (m f) (n f x) 2 3
