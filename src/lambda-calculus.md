@@ -156,11 +156,10 @@ For example, here are the steps to use this function to add 2 and 3.
 λfx. (λfx.f (f x) f) (λfx.f (f (f x)) f x)
 -- Apply the arguments f and x in the last term.
 λfx. (λfx.f (f x) f) (f (f (f x)))
--- Apply the argument f in the last term.
-λfx. (λx.f (f x)) (f (f (f x)))
+-- Simplify the first term by applying its argument f.
+λfx. (λx.f (f x))    (f (f (f x)))
 -- Apply the argument `(f (f (f x)))` to the function on its left.
-λfx. f (f (f (f (f x))))
--- This is the definition of the number 5.
+λfx. f (f (f (f (f x)))) -- term for 5
 ```
 
 ## Multiplication
