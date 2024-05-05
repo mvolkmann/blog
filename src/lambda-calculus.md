@@ -157,12 +157,9 @@ For example, here are the steps to use this function to add 2 and 3.
 λfx. (2 f) (3 f x)
 -- Substiture the λ terms for 2 and 3.
 λfx. (λfx.f(fx) f) (λfx.f(f(fx)) f x)
--- Apply the argument f in the first term
--- to get a new function that only takes x.
-λfx. λx.f(fx) (λfx.f(f(fx)) f x)
 -- Apply the arguments f and x in the last term.
-λfx. λx.f(fx) f(f(fx))
--- Substitute the last term for the argument in the first term function.
+λfx. (λfx.f(fx) f) f(f(fx))
+-- Substitute the last term for the argument x in the first term function.
 λfx. f(f(f(f(fx))))
 -- This is the definition of the number 5.
 ```
@@ -184,8 +181,26 @@ value for `x` in the function on the left to get
 This is the λ term for 6 which is the expected result.
 
 The full definiton of the multiply function
-can be written as `λfxmn. (m (n f) x`
+can be written as `λfxmn. m (n f) x`
 where `m` and `n` are the two numbers to be multiplied.
+
+For example, here are the steps to use this function to multiply 2 and 3.
+
+```text
+(λfxmn. m (n f) x) 2 3
+-- Substitute 2 for m and 3 for n.
+λfx. 2 (3 f) x
+-- Apply the argument x.
+λf. 2 (3 f)
+-- Substiture the λ terms for 2 and 3.
+λf. λfx.f(fx) (λfx.f(f(fx)) f)
+-- Apply the last term as the argument x in the first term.
+λf. λf.f(f(λfx.f(f(fx)) f))
+
+λf. f(f(λfx.f(f(fx))))
+
+-- This is the definition of the number 6.
+```
 
 ## Exponentiation
 
