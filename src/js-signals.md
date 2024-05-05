@@ -15,7 +15,7 @@ layout: topic-layout.njk
     src="/blog/assets/signals-logo.png?v={{pkg.version}}">
 </figure>
 
-### Overview
+## Overview
 
 The <a href="https://github.com/tc39/proposal-signals"
 target="_blank">JavaScript Signals standard proposal</a>
