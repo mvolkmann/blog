@@ -116,34 +116,35 @@ but rather the functions themselves.
 In the table below, note the number of times the function `f` is applied
 on the right side of the period.
 
-| Number | λ term         |
-| ------ | -------------- |
-| 0      | `λfx.x`        |
-| 1      | `λfx.fx`       |
-| 2      | `λfx.f(fx)`    |
-| 3      | `λfx.f(f(fx))` |
+| Number | λ term            |
+| ------ | ----------------- |
+| 0      | `λfx.x`           |
+| 1      | `λfx.f x`         |
+| 2      | `λfx.f (f x)`     |
+| 3      | `λfx.f (f (f x))` |
 
 ## Addition
 
 Let's see how we can add 2 and 3 to get 5.
 See the representations for 2 and 3 in the table above.
 
-Pass the arguments `f` and `x` into the λ term for 3
-and perform substitution to get the result of the function application.
+Apply the arguments `f` and `x` to the λ term for 3,
+to get the result of the function application.
 
 ```text
-λfx.f(f(fx)) f x
-f(f(fx))
+(λfx.f (f (f x))) f x
+f (f (f x))
 ```
 
-Now pass `f` and the previous result into the λ term for 3
-and perform substitution to get the result of the function application.
-The λ term for 3 is substituted for every occurrence of `x` in the λ term for 2.
+Apply the term above as the value of the `x` argument in the λ term for 2
+to get a single argument function that takes `f`.
 
 ```text
-λfx.f(fx) f f(f(fx))
-f(f(f(f(fx))))
+(λfx.f (f x)) (f (f (f x)))
+(λfx.f (f (f (f (f x)))))
 ```
+
+This is the term value that represents 5.
 
 The full definiton of the add function
 can be written as `λfxmn. (m f) (n f x)`
@@ -156,11 +157,11 @@ For example, here are the steps to use this function to add 2 and 3.
 -- Substitute 2 for m and 3 for n.
 λfx. (2 f) (3 f x)
 -- Substiture the λ terms for 2 and 3.
-λfx. (λfx.f(fx) f) (λfx.f(f(fx)) f x)
+λfx. (λfx.f (f x) f) (λfx.f (f (f x)) f x)
 -- Apply the arguments f and x in the last term.
-λfx. (λfx.f(fx) f) f(f(fx))
+λfx. (λfx.f (f x) f) f (f (f x))
 -- Substitute the last term for the argument x in the first term function.
-λfx. f(f(f(f(fx))))
+λfx. f (f (f (f (f x))))
 -- This is the definition of the number 5.
 ```
 
@@ -170,9 +171,10 @@ Let's see how we can multiply 2 and 3 to get 6.
 See the representations for 2 and 3 in the table above.
 
 The λ term for 3 is a function that has two parameters.
-Pass only `f` into this to get the single parameter function `λx.f(f(f(x)))`.
+Pass only `f` into this to get the single parameter function
+`λx.f (f (f x))`.
 Pass this result and `x` into the λ term for 2 which results in
-`λx.(λx.f(f(f(x)))) (λx.f(f(f(x))) x)`.
+`λx.(λx.f (f (f x))) (λx.f (f (f x)) x)`.
 Simplify the expression on the right to get
 `λx.f(f(f(x))) f(f(f(x)))`.
 Substitute the expression on the right as the
@@ -193,11 +195,19 @@ For example, here are the steps to use this function to multiply 2 and 3.
 -- Apply the argument x.
 λf. 2 (3 f)
 -- Substiture the λ terms for 2 and 3.
-λf. λfx.f(fx) (λfx.f(f(fx)) f)
+λf. λfx.f (fx) (λfx.f (f (f x)) f)
+- Apply the argument f in the last term to get a function that only takes x.
+- It seems either argument can be supplied, not just the last.
+λf. λfx.f(f x) (λx.f (f (f x)))
+- Apply the new last term as the value of the parameter f in the first term
+- to get a function that only takes x.
+λf. λx.(λx.f (f (f x))) ((λx.f (f (f x))) x)
+
+
 -- Apply the last term as the argument x in the first term.
 λf. λf.f(f(λfx.f(f(fx)) f))
-
-λf. f(f(λfx.f(f(fx))))
+-- HOW DO I GET TO THIS?
+λf. f(f(f(f(f(fx)))))
 
 -- This is the definition of the number 6.
 ```
