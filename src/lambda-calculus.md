@@ -4,21 +4,12 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-<style>
-  img {
-    border: 1px solid gray;
-  }
-</style>
-
-<figure style="width: 30%">
-  <img alt="JavaScript Signals logo" style="border: 0"
-    src="/blog/assets/signals-logo.png?v={{pkg.version}}">
-</figure>
-
 ## Overview
 
-Lambda calculus (sometimes written as λ-calculus)
-was defined by Alonzo Church in the 1930s.
+<a href="https://en.wikipedia.org/wiki/Lambda_calculus"
+target="_blank">Lambda calculus</a> (sometimes written as λ-calculus) was
+defined by <a href="https://en.wikipedia.org/wiki/Alonzo_Church"
+target="_blank">Alonzo Church</a> in the 1930s.
 It describes concepts that are fundamental to functional programming.
 It's purpose is to study how functions can interact with each other
 not to calculate results in a useful way.
