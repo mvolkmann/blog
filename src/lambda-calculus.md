@@ -18,9 +18,9 @@ Despite lacking many features found in programming languages,
 λ-calculus is Turing complete.
 It only defines three concepts, referred to as lambda terms:
 
-- variable: gives a name to a value
+- variable: gives a single-letter name to a value
 - lambda extraction: defines an anonymous function
-- application: calls a function
+- application: calls a function with arguments
 
 It does not define values such as booleans, numbers, or strings.
 It also does not define operators on these types or any built-in functions.
@@ -149,10 +149,22 @@ The full definiton of the add function
 can be written as `λfxmn. (m f) (n f x)`
 where `m` and `n` are the two numbers to be added.
 
+| 2 | ` | | 3 |` |
+
 ```text
-λfxmn. (m f) (n f x) f x 2 3
-(2 f) (3 f x)
-TODO: What do I do next?
+λfxmn. (m f) (n f x) 2 3
+-- Substitute 2 for m and 3 for n.
+λfx. (2 f) (3 f x)
+-- Substiture the λ terms for 2 and 3.
+λfx. (λfx.f(fx) f) (λfx.f(f(fx)) f x)
+-- Apply the argument f in the first term
+-- to get a new function that only takes x.
+λfx. λx.f(fx) (λfx.f(f(fx)) f x)
+-- Apply the arguments f and x in the last term.
+λfx. λx.f(fx) f(f(fx))
+-- Substitute the last term for the argument in the first term function.
+λfx. f(f(f(f(fx))))
+-- This is the definition of the number 5.
 ```
 
 ## Multiplication
