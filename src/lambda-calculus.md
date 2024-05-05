@@ -9,7 +9,7 @@ layout: topic-layout.njk
 <a href="https://en.wikipedia.org/wiki/Lambda_calculus"
 target="_blank">Lambda calculus</a> (sometimes written as λ-calculus) was
 defined by <a href="https://en.wikipedia.org/wiki/Alonzo_Church"
-target="_blank">Alonzo Church</a> in the 1930s.
+target="_blank">Alonzo Church</a> (1903-1985) in the 1930s.
 It describes concepts that are fundamental to functional programming.
 It's purpose is to study how functions can interact with each other
 not to calculate results in a useful way.
@@ -61,12 +61,27 @@ a function can be passed to another function.
 This is commonly used in programming languages for callback functions.
 
 To demonstrate this we will write a function that adds two numbers.
-Recall that we said λ-calculus does not define numbers or operators.
+Recall that λ-calculus does not define numbers or operators.
 But for demonstration purposes, assume that it does define the `+` operator
-which adds two numbers.
+which adds two numbers held in variables.
 
 | λ-calculus  | JavaScript      |
 | ----------- | --------------- |
 | λx.λy.x + y | (x, y) => x + y |
 
 A shorthand way of writing the λ-calculus function above is `λxy.x + y`.
+
+This is referred to as "currying" which is a nod to the mathematician
+<a href="https://en.wikipedia.org/wiki/Haskell_Curry"
+target="_blank">Haskell Curry</a> (1900-1982) whose used the concept extensively.
+However, the concept was initially defined by Gottlob Frege in 1893
+before Haskell Curry was born.
+
+## Some Rules
+
+The names of function parameters are irrelevant.
+For example, the function `λx.x` is equivalent to the function `λy.y`.
+
+The result of a function application is determined by substituting
+the argument value for all occurrences of the function parmameter.
+For example, `(λx.x + 3) 2` evaluates to `2 + 3` which evaluates to `5`.
