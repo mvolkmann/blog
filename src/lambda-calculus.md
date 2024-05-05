@@ -203,22 +203,20 @@ For example, here are the steps to use this function to multiply 2 and 3.
 λfx. 2 (3 f) x
 -- Apply the argument x.
 λf. 2 (3 f)
--- Substiture the λ terms for 2 and 3.
-λf. λfx.f (fx) (λfx.f (f (f x)) f)
+-- Substitute the λ terms for 2 and 3.
+λf. (λfx.f (f x)) ((λfx.f (f (f x))) f)
 - Apply the argument f in the last term to get a function that only takes x.
-- It seems either argument can be supplied, not just the last.
-λf. λfx.f(f x) (λx.f (f (f x)))
-- Apply the new last term as the value of the parameter f in the first term
-- to get a function that only takes x.
+  It seems either argument can be supplied, not just the last.
+λf. (λfx.f (f x)) (λx.f (f (f x)))
+- Apply the last term as the value of the parameter f in the first term
+  to get a function that only takes x.
 λf. λx.(λx.f (f (f x))) ((λx.f (f (f x))) x)
-
-
--- Apply the last term as the argument x in the first term.
-λf. λf.f(f(λfx.f(f(fx)) f))
--- HOW DO I GET TO THIS?
-λf. f(f(f(f(f(fx)))))
-
--- This is the definition of the number 6.
+-- Simplify the last term by applying the argument x.
+λf. λx.(λx.f (f (f x))) (f (f (f x)))
+-- Apply the last term as the value of the parameter x in the first term.
+λf. (λx.f (f (f (f (f (f x))))))
+-- Combine these single argument functions into a two-argument function.
+λfx.f (f (f (f (f (f x))))) -- term for 6
 ```
 
 ## Exponentiation
