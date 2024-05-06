@@ -141,7 +141,18 @@ TODO: Cover all of these topics:
   One more use of the δ-rule, gives `8`.
 
 - 𝛼-conversion (alpha)
+
+  This changes the names of a function parameters,
+  resulting in equivalent functions.
+  For example, `(λfx.f (+ x 1))` is equivalent to `(λgy.g (+ y 1))`.
+
 - η-conversion (eta)
+
+  This replaces a function that has an explicit parameter
+  with one that takes an implicit parameter.
+  For example, `λx.(+ x 1)` is equivalent to `(+ x)`
+  because `+` is a a function that takes two arguments,
+  but only one is supplied.
 
 ## Church Encoding of Numbers
 
