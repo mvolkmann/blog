@@ -71,8 +71,9 @@ This is commonly used in programming languages for callback functions.
 
 To demonstrate this we will write a function that adds two numbers.
 Recall that λ-calculus does not define numbers or operators.
-But for demonstration purposes, assume that it does define the `+` operator
-which adds two numbers held in variables.
+But for demonstration purposes, we can pretend that it does define
+numbers, basic math operators such as `+`,
+and the Boolean values `true` and `false`.
 
 | λ-calculus     | JavaScript      |
 | -------------- | --------------- |
@@ -113,6 +114,14 @@ For example, the function `λx.x` is equivalent to the function `λy.y`.
 The result of a function application is determined by substituting
 the argument value for all occurrences of the function parmameter.
 For example, `(λx.x + 3) 2` evaluates to `2 + 3` which evaluates to `5`.
+
+TODO: Cover all of these topics:
+
+- Bound vs. Free Variables
+- δ-rules (delta)
+- β-reduction (beta)
+- 𝛼-conversion (alpha)
+- η-conversion (eta)
 
 ## Church Encoding of Numbers
 
