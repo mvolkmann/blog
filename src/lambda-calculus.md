@@ -118,8 +118,28 @@ For example, `(λx.x + 3) 2` evaluates to `2 + 3` which evaluates to `5`.
 TODO: Cover all of these topics:
 
 - Bound vs. Free Variables
-- δ-rules (delta)
+
+  Variables that appear as a function parameter are "bound variables"
+  because they are bound to a specific value
+  when the function is applied to an argument.
+  Variables in function expressions that are not parameters are free variables.
+
+- δ-rule (delta)
+
+  This is used to evaluate functions that are assumed to be built-in.
+  For example, `(+ 1 2)` can be evaluated to `3`.
+
 - β-reduction (beta)
+
+  This is used to apply arguments to a function.
+  For example, consider the function `(λfx.f (+ x 1))`
+  which takes two arguments, a function and a number.
+  We can apply two arguments with `(λfx.f (+ x 1)) (λx.(* x 2)) 3`.
+  The result is `(λx.(* x 2)) (+ 3 1)`.
+  The second term becomes just `4` using the δ-rule.
+  We can apply a β-reduction again to obtain `(* 4 2)`.
+  One more use of the δ-rule, gives `8`.
+
 - 𝛼-conversion (alpha)
 - η-conversion (eta)
 
