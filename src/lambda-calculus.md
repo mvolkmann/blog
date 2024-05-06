@@ -152,7 +152,7 @@ For example, here are the steps to use this function to add 2 and 3.
 (λfxmn. (m f) (n f x)) 2 3
 -- Substitute 2 for m and 3 for n.
 λfx. (2           f) (3               f x)
--- Substiture the λ terms for 2 and 3.
+-- Substitute the λ terms for 2 and 3.
 λfx. (λfx.f (f x) f) (λfx.f (f (f x)) f x)
 -- Apply the arguments f and x in the last term.
 λfx. (λfx.f (f x) f) (f (f (f x)))
@@ -220,4 +220,45 @@ For example, here are the steps to use this function to multiply 2 and 3.
 
 ## Exponentiation
 
+Let's see how we can compute 2 to the power 3.
+See the representations for 2 and 3 in the table above.
+
+Pass the term for 2 into the function represented by the term for 3.
+
+```text
+λfx.f (f x) -- term for 2
+λfx.f (f (f x)) -- term for 3
+λfx.f         (f         (f x)) -- whitespace added
+-- Substitute the term for 2 in place of
+-- all occurrences of f in the term for 3.
+λfx.(f (f x)) ((f (f x)) ((f (f x)) x))
+-- Apply ?
+-- Need to get 8!
+```
+
+An exponentiation function can be written as `λmn. n m`
+where `m` is the base and `n` is the exponent.
+
+For example, here are the steps to raise 2 to the 3rd power.
+
+```text
+λmn. n m
+-- Substitute 2 for m and 3 for n.
+2 3
+-- Substitute the λ terms for 2 and 3.
+(λfx.f (f x)) (λfx.f (f (f x)))
+-- Simplify the right term by applying the arguments f and x.
+(λfx.f (f x)) (f (f (f x)))
+-- Add whitespace.
+(λfx.f            (f             x)) (f (f (f x)))
+-- Apply the right term as the parameter x in the first term function.
+(λf.(f (f (f x))) ((f (f (f x))) x))
+
+-- TODO: How can this ever evaluate to 8?
+```
+
 ## Boolean Logic
+
+## Recursion
+
+TODO: Cover the y-combinator function.
