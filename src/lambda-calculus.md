@@ -19,10 +19,19 @@ Despite lacking many features found in programming languages,
 It only defines three concepts, referred to as lambda terms:
 
 - variable: gives a single-letter name to a value
+
 - lambda extraction: defines an anonymous function
+
+  This uses the syntax `λ<parameter>.<expression>`
+  where `<parameter>` is a single variable.
+
 - application: calls a function with arguments
 
-It does not define values such as booleans, numbers, or strings.
+  This uses the syntax `(λ<parameter>.<expression>) <arguments>`
+  where `<arguments>` is a whitespace-separated list of expressions.
+
+λ-calculus does not define a syntax for values
+such as booleans, numbers, and strings.
 It also does not define operators on these types or any built-in functions.
 However, these can be defined using only the concepts listed above.
 
@@ -71,6 +80,7 @@ which adds two numbers held in variables.
 
 Shorthand ways of writing the λ-calculus function above are
 `λx.λy.x + y` (parentheses not necessary) and `λxy.x + y`.
+This is also sometimes written with a prefix operator as `λxy.(+ x y)`.
 
 This is referred to as "currying" which is a nod to the mathematician
 <a href="https://en.wikipedia.org/wiki/Haskell_Curry"
