@@ -14,6 +14,10 @@ It describes concepts that are fundamental to functional programming.
 It's purpose is to study how functions can interact with each other
 not to calculate results in a useful way.
 
+Alonzo Church was the PhD advisor of
+<a href="https://en.wikipedia.org/wiki/Alan_Turing"
+target="_blank">Alan Turing</a> (1912-1954).
+
 Despite lacking many features found in programming languages,
 λ-calculus is Turing complete.
 It only defines three concepts, referred to as lambda terms:
@@ -108,15 +112,6 @@ results in a new function that expects the remaining parameters.
 
 ## Some Rules
 
-The names of function parameters are irrelevant.
-For example, the function `λx.x` is equivalent to the function `λy.y`.
-
-The result of a function application is determined by substituting
-the argument value for all occurrences of the function parmameter.
-For example, `(λx.x + 3) 2` evaluates to `2 + 3` which evaluates to `5`.
-
-TODO: Cover all of these topics:
-
 - Bound vs. Free Variables
 
   Variables that appear as a function parameter are "bound variables"
@@ -132,8 +127,11 @@ TODO: Cover all of these topics:
 - β-reduction (beta)
 
   This is used to apply arguments to a function.
-  For example, consider the function `(λfx.f (+ x 1))`
-  which takes two arguments, a function and a number.
+  The result of a function application is determined by substituting
+  the argument value for all occurrences of the function parmameter.
+  For example, `(λx.x + 3) 2` evaluates to `2 + 3` which evaluates to `5`.
+  Consider the function `(λfx.f (+ x 1))` which takes two arguments,
+  a function and a number.
   We can apply two arguments with `(λfx.f (+ x 1)) (λx.(* x 2)) 3`.
   The result is `(λx.(* x 2)) (+ 3 1)`.
   The second term becomes just `4` using the δ-rule.
@@ -144,7 +142,8 @@ TODO: Cover all of these topics:
 
   This changes the names of a function parameters,
   resulting in equivalent functions.
-  For example, `(λfx.f (+ x 1))` is equivalent to `(λgy.g (+ y 1))`.
+  For example, the function `λx.x` is equivalent to the function `λy.y`
+  and `(λfx.f (+ x 1))` is equivalent to `(λgy.g (+ y 1))`.
 
 - η-conversion (eta)
 
