@@ -14,7 +14,31 @@ not to calculate results in a useful way.
 
 Despite lacking many features found in programming languages,
 λ-calculus is Turing complete.
-It only defines three concepts, referred to as lambda terms:
+
+Throughout this post examples are shown in both
+λ-calculus and the closest equivalent in JavaScript.
+
+## History
+
+<a href="https://en.wikipedia.org/wiki/Gottlob_Frege"
+target="_blank">Gottlob Frege</a> (1848-1925)
+studied the use of functions in logic in 1893.
+
+<a href="https://en.wikipedia.org/wiki/Moses_Schönfinkel"
+target="_blank">Moses Schönfinkel</a> (1888-1942)
+studied how combinators can be applied to formal logic in the 1920s.
+Combinations are functions that are defined by
+combining multiple other functions.
+
+<a href="https://en.wikipedia.org/wiki/Alonzo_Church"
+target="_blank">Alonzo Church</a> (1903-1985)
+invented Lambda Calculus in the 1930s.
+He was the PhD advisor of <a href="https://en.wikipedia.org/wiki/Alan_Turing"
+target="_blank">Alan Turing</a> (1912-1954).
+
+## Concepts
+
+λ-calculus only defines three concepts, referred to as lambda terms:
 
 - variable: gives a single-letter name to a value
 
@@ -43,27 +67,6 @@ However, these can be defined using only the concepts listed above.
 There are two kinds of variables, bound and free.
 Bound variables appear as function parameters and represent in input value.
 Free variables appear in function definitions and can represent any value.
-
-Throughout this post examples are shown in both
-λ-calculus and the closest equivalent in JavaScript.
-
-## History
-
-<a href="https://en.wikipedia.org/wiki/Gottlob_Frege"
-target="_blank">Gottlob Frege</a> (1848-1925)
-studied the use of functions in logic in 1893.
-
-<a href="https://en.wikipedia.org/wiki/Moses_Schönfinkel"
-target="_blank">Moses Schönfinkel</a> (1888-1942)
-studied how combinators can be applied to formal logic in the 1920s.
-Combinations are functions that are defined by
-combining multiple other functions.
-
-<a href="https://en.wikipedia.org/wiki/Alonzo_Church"
-target="_blank">Alonzo Church</a> (1903-1985)
-invented Lambda Calculus in the 1930s.
-He was the PhD advisor of <a href="https://en.wikipedia.org/wiki/Alan_Turing"
-target="_blank">Alan Turing</a> (1912-1954).
 
 ## Function Syntax
 
