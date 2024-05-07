@@ -20,13 +20,20 @@ It only defines three concepts, referred to as lambda terms:
 
 - lambda abstraction: defines an anonymous function
 
-  This uses the syntax `λ<parameter>.<expression>`
+  This uses the syntax `λ<parameter>.<body>`
   where `<parameter>` is a single variable.
+
+  The body of a function extends as far right as possible.
+  So `λx.a b c x` is evaluated as `λx.(((a b) c) x)`
+  which is different from `((λx.a b) c) x`.
+  The expression `λx.λy.λz.a b c` is evaluated as `λx.(λy.(λz.a b c))`.
 
 - application: calls a function with arguments
 
   This uses the syntax `(λ<parameter>.<expression>) <arguments>`
   where `<arguments>` is a whitespace-separated list of expressions.
+  Function application is left associative.
+  So `a b c d` is evaluated as `((a b) c) d`.
 
 λ-calculus does not define a syntax for values
 such as booleans, numbers, and strings.
