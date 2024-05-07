@@ -27,8 +27,10 @@ studied the use of functions in logic in 1893.
 <a href="https://en.wikipedia.org/wiki/Moses_Schönfinkel"
 target="_blank">Moses Schönfinkel</a> (1888-1942)
 studied how combinators can be applied to formal logic in the 1920s.
-Combinations are functions that are defined by
-combining multiple other functions.
+The term "combinator" has two meanings, both which describe a kind of function.
+The first describes functions that have no free variables.
+The second describes functions that take other functions
+and combine them to create new functions.
 
 <a href="https://en.wikipedia.org/wiki/Alonzo_Church"
 target="_blank">Alonzo Church</a> (1903-1985)
