@@ -67,8 +67,17 @@ It also does not define operators on these types or any built-in functions.
 However, these can be defined using only the concepts listed above.
 
 There are two kinds of variables, bound and free.
-Bound variables appear as function parameters and represent in input value.
+Bound variables are bound by a specific abstraction (function).
+They appear as function parameters and represent an input value.
 Free variables appear in function definitions and can represent any value.
+The following tables contains examples.
+
+| Expression        | Bound Variables               | Free Variables |
+| ----------------- | ----------------------------- | -------------- |
+| `λx.(+ x 1)`      | `x`                           | none           |
+| `λx.(+ y 1)`      | none                          | `y`            |
+| `λx.x λx.(+ x 1)` | rename 2nd `x` as shown below |                |
+| `λx.x λy.(+ y 1)` | `x` and `y`                   | none           |
 
 ## Function Syntax
 
