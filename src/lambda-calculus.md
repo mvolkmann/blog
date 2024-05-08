@@ -54,6 +54,10 @@ target="_blank">Alan Turing</a> (1912-1954).
   which is different from `((λx.a b) c) x`.
   The expression `λx.λy.λz.a b c` is evaluated as `λx.(λy.(λz.a b c))`.
 
+  Expressions like `λx.λy.λz.a b c` are sometimes
+  written in the shorter form `λxyz.a b c`
+  despite the fact that λ-calculus functions only have a single parameter.
+
 - application: calls a function with arguments
 
   This uses the syntax `(λ<parameter>.<expression>) <arguments>`
@@ -204,6 +208,19 @@ on the right side of the period.
 | 1      | `λfx.f x`         |
 | 2      | `λfx.f (f x)`     |
 | 3      | `λfx.f (f (f x))` |
+
+The successor function `λn (λf. λx. f (n f x))`
+returns the number that follows a given number.
+For example, the successo of 1 is 2.
+
+```text
+(λn (λf. λx. f (n f x))) 1
+(λn (λf. λx. f (n f x))) (λfx.f x)
+λf. λx. f ((λfx.f x) f x)
+λf. λx. f (f x)
+λfx.f (f x)
+2
+```
 
 ## Addition
 
