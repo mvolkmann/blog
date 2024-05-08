@@ -73,7 +73,8 @@ However, these can be defined using only the concepts listed above.
 There are two kinds of variables, bound and free.
 Bound variables are bound by a specific abstraction (function).
 They appear as function parameters and represent an input value.
-Free variables appear in function definitions and can represent any value.
+Free variables appear in function definitions, are not parameters,
+and can represent any value.
 The following tables contains examples.
 
 | Expression        | Bound Variables               | Free Variables |
@@ -147,14 +148,7 @@ all functions automatically support currying.
 Passing fewer arguments to a function than it has parameters
 results in a new function that expects the remaining parameters.
 
-## Rules
-
-- Bound vs. Free Variables
-
-  Variables that appear as a function parameter are "bound variables"
-  because they are bound to a specific value
-  when the function is applied to an argument.
-  Variables in function expressions that are not parameters are free variables.
+## Evaluation Rules
 
 - δ-rule (delta)
 
@@ -185,7 +179,8 @@ results in a new function that expects the remaining parameters.
 - η-conversion (eta)
 
   This replaces a function that has an explicit parameter
-  with one that takes an implicit parameter.
+  with one that takes an implicit parameter,
+  creating a point-free version of the function.
   For example, `λx.(+ x 1)` is equivalent to `(+ x)`
   because `+` is a a function that takes two arguments,
   but only one is supplied.
