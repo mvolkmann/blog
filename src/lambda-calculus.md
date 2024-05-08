@@ -44,7 +44,7 @@ target="_blank">Alan Turing</a> (1912-1954).
 
 - variable: gives a single-letter name to a value
 
-- lambda abstraction: defines an anonymous function
+- lambda abstraction: defines an anonymous function that has exactly one parameter
 
   This uses the syntax `λ<parameter>.<body>`
   where `<parameter>` is a single variable.
@@ -340,6 +340,44 @@ For example, here are the steps to raise 2 to the 3rd power.
 ```
 
 ## Boolean Logic
+
+The Boolean value true is represented by the function `(λt. λf. t)`.
+This takes two arguments and returns the first.
+
+The Boolean value false is represented by the function `(λt. λf. f)`.
+This takes two arguments and returns the second.
+
+A function to return "not" of a Boolean value is `λb. b false true`.
+where `b` is either the true or false function.
+For example,
+`(λb. b false true) (λt. λf. t)` evaluates to false.
+`(λb. b false true) (λt. λf. f)` evaluates to true.
+
+A function to return the result of and'ing two Boolean values is
+`λx. (λy. x y false)`.
+For example, true and true will evaluate to true.
+
+```text
+(λx. (λy. x y false)) true true
+true true false
+(λt. λf. t) true false
+true
+
+(λx. (λy. x y false)) true false
+true false false
+(λt. λf. t) false false
+false
+
+(λx. (λy. x y false)) false true
+false true false
+(λt. λf. f) true false
+false
+
+(λx. (λy. x y false)) false false
+false false false
+(λt. λf. f) false false
+false
+```
 
 ## Recursion
 
