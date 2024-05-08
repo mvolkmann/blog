@@ -355,7 +355,6 @@ For example,
 
 A function to return the result of and'ing two Boolean values is
 `λx. (λy. x y false)`.
-For example, true and true will evaluate to true.
 
 ```text
 (λx. (λy. x y false)) true true
@@ -376,6 +375,31 @@ false
 (λx. (λy. x y false)) false false
 false false false
 (λt. λf. f) false false
+false
+```
+
+A function to return the result of or'ing two Boolean values is
+`λx. (λy. x true y)`.
+
+```text
+(λx. (λy. x true y)) true true
+true true true
+(λt. λf. t) true true
+true
+
+(λx. (λy. x true y)) true false
+true true false
+(λt. λf. t) true false
+true
+
+(λx. (λy. x true y)) false true
+false true true
+(λt. λf. f) true true
+true
+
+(λx. (λy. x true y)) false false
+false true false
+(λt. λf. f) true false
 false
 ```
 
