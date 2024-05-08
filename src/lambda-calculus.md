@@ -255,7 +255,7 @@ See the representations for 2 and 3 in the table above.
 (λfx.f (f x)) (add 3) 0
 (add 3) ((add 3) 0)
 add 3 3
--- We assume the add function works and skip to the result 6.
+-- We can assume the add function works and skip to the result of 6.
 (λmn. (m successor) n) 3 3
 (3 successor) 3
 (λfx.f (f (f x))) successor 3
@@ -277,6 +277,7 @@ See the representations for 2 and 3 in the table above.
 (λmn. n (mul m) 1) 2 3
 3 (mul 2) 1
 (λfx.f (f (f x))) (mul 2) 1
+-- We can assume the mull function works.
 (mul 2) ((mul 2) ((mul 2) 1))
 (mul 2) ((mul 2) 2)
 (mul 2) 4
