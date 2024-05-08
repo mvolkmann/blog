@@ -224,14 +224,14 @@ For example, the successo of 1 is 2.
 
 ## Addition
 
-An add function can be written as `λmn. m (successor n)`.
+An add function can be written as `λmn. (m successor) n`.
 For example, here are the steps to use this function to add 2 and 3.
 See the representations for 2 and 3 in the table above.
 
 ```text
-(λmn. m (successor n)) 2 3
-2 successor 3
-(λfx.f (f x)) successor 3
+(λmn. (m successor) n) 2 3
+(2 successor) 3
+((λfx.f (f x)) successor) 3
 (λx.successor (successor x)) 3
 successor (successor 3)
 successor (successor (λfx.f (f (f x))))
@@ -254,8 +254,8 @@ See the representations for 2 and 3 in the table above.
 (add 3) ((add 3) 0)
 add 3 3
 -- We assume the add function works and skip to the result 6.
-(λmn. m (successor n)) 3 3
-3 (successor 3)
+(λmn. (m successor) n) 3 3
+(3 successor) 3
 (λfx.f (f (f x))) successor 3
 successor (successor (successor 3))
 successor (successor 4)
