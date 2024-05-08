@@ -224,26 +224,9 @@ For example, the successo of 1 is 2.
 
 ## Addition
 
-Let's see how we can add 2 and 3 to get 5.
-See the representations for 2 and 3 in the table above.
-
-Apply the arguments `f` and `x` to the λ term for 3,
-to get the result of the function application.
-
-```text
-(λfx.f (f (f x))) f x
-f (f (f x))
-```
-
-Substitute the term above for `x` on the right side of the λ term for 2.
-
-```text
-(λfx.f (f x            )) -- term for 2
-(λfx.f (f (f (f (f x))))) -- term for 5
-```
-
 An add function can be written as `λmn. m (successor n)`.
 For example, here are the steps to use this function to add 2 and 3.
+See the representations for 2 and 3 in the table above.
 
 ```text
 (λmn. m (successor n)) 2 3
@@ -257,78 +240,27 @@ successor (λfx.f (f (f (f x))))
 5
 ```
 
-An add function can also be written as `λfxmn. (m f) (n f x)`
-where `m` and `n` are the two numbers to be added.
-For example, here are the steps to use this function to add 2 and 3.
-
-```text
-(λfxmn. (m f) (n f x)) 2 3
--- Substitute 2 for m and 3 for n.
-λfx. (2           f) (3               f x)
--- Substitute the λ terms for 2 and 3.
-λfx. (λfx.f (f x) f) (λfx.f (f (f x)) f x)
--- Apply the arguments f and x in the last term.
-λfx. (λfx.f (f x) f) (f (f (f x)))
--- Simplify the first term by applying its argument f.
-λfx. (λx.f (f x))    (f (f (f x)))
--- Apply the argument `(f (f (f x)))` to the function on its left.
-λfx. f (f (f (f (f x)))) -- term for 5
-```
-
 ## Multiplication
 
-Let's see how we can multiply 2 and 3 to get 6.
+A multiply function can be written as `λmn. m (add n) 0`
+where `m` and `n` are the two numbers to be multiplied.
+For example, here are the steps to use this function to multiply 2 and 3.
 See the representations for 2 and 3 in the table above.
 
-The λ term for 3, `λfx.f (f (f x))`, is a function that has two parameters.
-Apply `f` to this to get the single parameter function
-`λx.f (f (f x))`.
-
-The λ term for 2, `λfx.f (f x)`, is also a function that has two parameters.
-Apply the previous result as the value of the `f` parameter in this.
-Two substitutions are required, resulting in:
-
 ```text
-λx.(λx.f (f (f x))) (λx.f (f (f x)) x)
-```
-
-Simplify the expression on the right to get:
-
-```text
-λx.f (f (f x)) (f (f (f x)))
-```
-
-Substitute the term on the right as value for `x` in the term on the left to get
-
-```text
-λx.f (f (f (f (f (f x))))) -- term for 6
-```
-
-A multiply function can be written as `λfxmn. m (n f) x`
-where `m` and `n` are the two numbers to be multiplied.
-
-For example, here are the steps to use this function to multiply 2 and 3.
-
-```text
-(λfxmn. m (n f) x) 2 3
--- Substitute 2 for m and 3 for n.
-λfx. 2 (3 f) x
--- Apply the argument x.
-λf. 2 (3 f)
--- Substitute the λ terms for 2 and 3.
-λf. (λfx.f (f x)) ((λfx.f (f (f x))) f)
-- Apply the argument f in the last term to get a function that only takes x.
-  It seems either argument can be supplied, not just the last.
-λf. (λfx.f (f x)) (λx.f (f (f x)))
-- Apply the last term as the value of the parameter f in the first term
-  to get a function that only takes x.
-λf. λx.(λx.f (f (f x))) ((λx.f (f (f x))) x)
--- Simplify the last term by applying the argument x.
-λf. λx.(λx.f (f (f x))) (f (f (f x)))
--- Apply the last term as the value of the parameter x in the first term.
-λf. (λx.f (f (f (f (f (f x))))))
--- Combine these single argument functions into a two-argument function.
-λfx.f (f (f (f (f (f x))))) -- term for 6
+(λmn. m (add n) 0) 2 3
+2 (add 3) 0
+(λfx.f (f x)) (add 3) 0
+(add 3) ((add 3) 0)
+add 3 3
+-- We assume the add function works and skip to the result 6.
+(λmn. m (successor n)) 3 3
+3 (successor 3)
+(λfx.f (f (f x))) successor 3
+successor (successor (successor 3))
+successor (successor 4)
+successor 5
+6 which is represented by λfx.f (f (f (f (f (f x)))))
 ```
 
 ## Exponentiation
