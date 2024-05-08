@@ -267,7 +267,7 @@ successor 5
 
 ## Exponentiation
 
-Multiplication can be seen as interated multiplicaation.
+Exponentiation can be seen as interated multiplicaation.
 An exponentiation function (exp) can be written as `λmn. n (mul m) 1`
 where `m` is the base and `n` is the exponent.
 For example, here are the steps to raise 2 to the 3rd power.
@@ -286,12 +286,10 @@ See the representations for 2 and 3 in the table above.
 Does this defintion also work? `λmn. m n`
 
 ```text
-(λmn. m n) 2 3
-2 3
-(λfx.f (f x)) 3
-(mul 2) ((mul 2) ((mul 2) 1))
-(mul 2) ((mul 2) 2)
-(mul 2) 4
+(λmn. n m) 2 3
+3 2
+(λfx.f (f (f x))) 2
+...
 8
 ```
 
