@@ -289,7 +289,9 @@ Does this defintion also work? `λmn. n m`
 ```text
 (λmn. n m) 2 3
 3 2
-(λfx.f (f (f x))) 2
+(λfx.f (f (f x))) (λfx.f (f x))
+-- Apply the right term as the value of the "x" parameter in the left term.
+(λf.f (f (f (λfx.f (f x)))))
 TODO: What can be done from here to arrive at 8?
 ```
 
