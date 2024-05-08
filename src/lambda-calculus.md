@@ -186,7 +186,7 @@ results in a new function that expects the remaining parameters.
   because `+` is a a function that takes two arguments,
   but only one is supplied.
 
-## Church Encoding of Numbers
+## Church Numberals
 
 While λ-calculus does not define numbers,
 we can select λ terms to represent each natural number.
@@ -346,6 +346,7 @@ This takes two arguments and returns the first.
 
 The Boolean value false is represented by the function `(λt. λf. f)`.
 This takes two arguments and returns the second.
+This is the same as the function that represents the number zero.
 
 A function to return "not" of a Boolean value is `λb. b false true`.
 where `b` is either the true or false function.
