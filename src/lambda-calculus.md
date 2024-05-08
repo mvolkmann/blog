@@ -224,6 +224,7 @@ For example, the successo of 1 is 2.
 
 ## Addition
 
+Addition can be seen as interated succession.
 An add function can be written as `λmn. (m successor) n`.
 For example, here are the steps to use this function to add 2 and 3.
 See the representations for 2 and 3 in the table above.
@@ -242,7 +243,8 @@ successor (λfx.f (f (f (f x))))
 
 ## Multiplication
 
-A multiply function can be written as `λmn. m (add n) 0`
+Multiplication can be seen as interated addition.
+A multiply function (mul) can be written as `λmn. m (add n) 0`
 where `m` and `n` are the two numbers to be multiplied.
 For example, here are the steps to use this function to multiply 2 and 3.
 See the representations for 2 and 3 in the table above.
@@ -265,41 +267,32 @@ successor 5
 
 ## Exponentiation
 
-Let's see how we can compute 2 to the power 3.
+Multiplication can be seen as interated multiplicaation.
+An exponentiation function (exp) can be written as `λmn. n (mul m) 1`
+where `m` is the base and `n` is the exponent.
+For example, here are the steps to raise 2 to the 3rd power.
 See the representations for 2 and 3 in the table above.
 
-Pass the term for 2 into the function represented by the term for 3.
-
 ```text
-λfx.f (f x) -- term for 2
-λfx.f (f (f x)) -- term for 3
-λfx.f         (f         (f x)) -- whitespace added
--- Substitute the term for 2 in place of
--- all occurrences of f in the term for 3.
-λfx.(f (f x)) ((f (f x)) ((f (f x)) x))
--- Apply ?
--- Need to get 8!
+(λmn. n (mul m) 1) 2 3
+3 (mul 2) 1
+(λfx.f (f (f x))) (mul 2) 1
+(mul 2) ((mul 2) ((mul 2) 1))
+(mul 2) ((mul 2) 2)
+(mul 2) 4
+8
 ```
 
-An exponentiation function can be written as `λmn. n m`
-where `m` is the base and `n` is the exponent.
-
-For example, here are the steps to raise 2 to the 3rd power.
+Does this defintion also work? `λmn. m n`
 
 ```text
-λmn. n m
--- Substitute 2 for m and 3 for n.
+(λmn. m n) 2 3
 2 3
--- Substitute the λ terms for 2 and 3.
-(λfx.f (f x)) (λfx.f (f (f x)))
--- Simplify the right term by applying the arguments f and x.
-(λfx.f (f x)) (f (f (f x)))
--- Add whitespace.
-(λfx.f            (f             x)) (f (f (f x)))
--- Apply the right term as the parameter x in the first term function.
-(λf.(f (f (f x))) ((f (f (f x))) x))
-
--- TODO: How can this ever evaluate to 8?
+(λfx.f (f x)) 3
+(mul 2) ((mul 2) ((mul 2) 1))
+(mul 2) ((mul 2) 2)
+(mul 2) 4
+8
 ```
 
 ## Boolean Logic
