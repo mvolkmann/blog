@@ -242,9 +242,23 @@ Substitute the term above for `x` on the right side of the λ term for 2.
 (λfx.f (f (f (f (f x))))) -- term for 5
 ```
 
-An add function can be written as `λfxmn. (m f) (n f x)`
-where `m` and `n` are the two numbers to be added.
+An add function can be written as `λmn. m (successor n)`.
+For example, here are the steps to use this function to add 2 and 3.
 
+```text
+(λmn. m (successor n)) 2 3
+2 successor 3
+(λfx.f (f x)) successor 3
+(λx.successor (successor x)) 3
+successor (successor 3)
+successor (successor (λfx.f (f (f x))))
+successor (λfx.f (f (f (f x))))
+λfx.f (f (f (f (f x))))
+5
+```
+
+An add function can also be written as `λfxmn. (m f) (n f x)`
+where `m` and `n` are the two numbers to be added.
 For example, here are the steps to use this function to add 2 and 3.
 
 ```text
