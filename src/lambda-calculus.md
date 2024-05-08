@@ -147,7 +147,7 @@ all functions automatically support currying.
 Passing fewer arguments to a function than it has parameters
 results in a new function that expects the remaining parameters.
 
-## Some Rules
+## Rules
 
 - Bound vs. Free Variables
 
@@ -283,14 +283,13 @@ See the representations for 2 and 3 in the table above.
 8
 ```
 
-Does this defintion also work? `λmn. m n`
+Does this defintion also work? `λmn. n m`
 
 ```text
 (λmn. n m) 2 3
 3 2
 (λfx.f (f (f x))) 2
-...
-8
+TODO: What can be done from here to arrive at 8?
 ```
 
 ## Boolean Logic
