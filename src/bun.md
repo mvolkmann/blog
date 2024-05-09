@@ -690,8 +690,10 @@ There are three ways to execute a JS/TS source file.
 
 The first approach is to enter `bun {file-name}`.
 
-The second way is to add the shebang line `#!/usr/bin/env bun`
-at the beginning of the file and enter `./{file-name}`.
+The second way is to
+add the shebang line `#!/usr/bin/env bun` at the beginning of the file,
+make the file executable with `chmod a+x {file-name}`,
+and enter `./{file-name}`.
 
 The third way is to compile the file with
 `bun build ./{file-name} --outfile {exe-name} --compile`
