@@ -204,9 +204,9 @@ on the right side of the period.
 | 2      | `λfx.f (f x)`     |
 | 3      | `λfx.f (f (f x))` |
 
-The successor function `λn (λf. λx. f (n f x))`
+The successor function (succ) `λn (λf. λx. f (n f x))`
 returns the number that follows a given number.
-For example, the successo of 1 is 2.
+For example, the successor of 1 is 2.
 
 ```text
 (λn (λf. λx. f (n f x))) 1
@@ -217,28 +217,49 @@ For example, the successo of 1 is 2.
 2
 ```
 
+The predecessor function (pred) `λn (λf. λx. n (λg.λh. h (g f)) (λu.x) (λu.u))`
+returns the number that precedes a given number.
+For example, the predecessor of 2 is 1.
+
+TODO: Finish demonstrating that this works.
+
+```text
+(λn (λf. λx. n (λg.λh. h (g f)) (λu.x) (λu.u))) 2
+(λf. λx. 2 (λg.λh. h (g f))) (λu.x) (λu.u)
+(λf. λx. 2 (λg.λh. h (g f))) (λu.x) (λu.u)
+(λx. 2 (λg.λh. h (g (λu.x)))) (λu.x)
+2 (λg.λh. h (g (λu.x)))) (λu.x)
+1
+```
+
 ## Addition
 
-Addition can be seen as interated succession.
-An add function can be written as `λmn. (m successor) n`.
+Addition can be seen as iterated succession.
+An add function can be written as `λmn. (m succ) n`.
 For example, here are the steps to use this function to add 2 and 3.
 See the representations for 2 and 3 in the table above.
 
 ```text
-(λmn. (m successor) n) 2 3
-(2 successor) 3
-((λfx.f (f x)) successor) 3
-(λx.successor (successor x)) 3
-successor (successor 3)
-successor (successor (λfx.f (f (f x))))
-successor (λfx.f (f (f (f x))))
+(λmn. (m succ) n) 2 3
+(2 succ) 3
+((λfx.f (f x)) succ) 3
+(λx.succ (succ x)) 3
+succ (succ 3)
+succ (succ (λfx.f (f (f x))))
+succ (λfx.f (f (f (f x))))
 λfx.f (f (f (f (f x))))
 5
 ```
 
+## Subtraction
+
+Substraction can be seen as iterated predecessors.
+
+TODO: Add more detail here.
+
 ## Multiplication
 
-Multiplication can be seen as interated addition.
+Multiplication can be seen as iterated addition.
 A multiply function (mul) can be written as `λmn. m (add n) 0`
 where `m` and `n` are the two numbers to be multiplied.
 For example, here are the steps to use this function to multiply 2 and 3.
@@ -251,18 +272,18 @@ See the representations for 2 and 3 in the table above.
 (add 3) ((add 3) 0)
 add 3 3
 -- We can assume the add function works and skip to the result of 6.
-(λmn. (m successor) n) 3 3
-(3 successor) 3
-(λfx.f (f (f x))) successor 3
-successor (successor (successor 3))
-successor (successor 4)
-successor 5
+(λmn. (m succ) n) 3 3
+(3 succ) 3
+(λfx.f (f (f x))) succ 3
+succ (succ (succ 3))
+succ (succ 4)
+succ 5
 6 which is represented by λfx.f (f (f (f (f (f x)))))
 ```
 
 ## Exponentiation
 
-Exponentiation can be seen as interated multiplicaation.
+Exponentiation can be seen as iterated multiplicaation.
 An exponentiation function (exp) can be written as `λmn. n (mul m) 1`
 where `m` is the base and `n` is the exponent.
 For example, here are the steps to raise 2 to the 3rd power.
@@ -284,9 +305,9 @@ Does this defintion also work? `λmn. n m`
 ```text
 (λmn. n m) 2 3
 3 2
-(λfx.f (f (f x))) (λfx.f (f x))
--- Apply the right term as the value of the "x" parameter in the left term.
-(λf.f (f (f (λfx.f (f x)))))
+(λfx.f (f (f x))) 2
+λx.2 (2 (2 x))
+2 = λfx.f (f x), so (2 x) = (λfy.f (f y)) x = λy.x (x y)
 TODO: What can be done from here to arrive at 8?
 ```
 
@@ -357,4 +378,14 @@ false
 
 ## Recursion
 
-TODO: Cover the y-combinator function.
+Functions in lambda calculus do not have names.
+This leaves no way for a function to refer to itself
+which makes implementing recursion difficult.
+
+The y-combinator is a function that implements recursion.
+It is defined as `λf.(λx.f (x x)) (λx.f (x x))`
+and was invented by Haskell Curry.
+Note that the body contains two identical terms.
+
+For example, the factorial function can be define as
+TODO: Finish this.
