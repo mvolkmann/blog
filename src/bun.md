@@ -686,11 +686,16 @@ are only available if the server is restarted.
 
 ## Executable Files
 
-To allow a JS/TS source file to be executed directly:
+There are three ways to execute a JS/TS source file.
 
-1. Add the line `#!/usr/bin/env bun` at the beginning of the file.
-1. Compile the file with `bun build ./file-name.ts --outfile file-name --compile`
-1. Enter `file-name`.
+The first approach is to enter `bun {file-name}`.
+
+The second way is to add the shebang line `#!/usr/bin/env bun`
+at the beginning of the file and enter `./{file-name}`.
+
+The third way is to compile the file with
+`bun build ./{file-name} --outfile {exe-name} --compile`
+and enter `./{exe-name}`.
 
 ## Executing Without Installing
 
