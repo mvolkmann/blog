@@ -336,6 +336,28 @@ TODO: Finish demonstrating that this works.
 1
 ```
 
+## Is Zero
+
+The following function tests whether its argument represents zero.
+
+```text
+ISZERO = λn.n (λx.FALSE) TRUE
+```
+
+Let's verify that this works for 0 and 1.
+
+```text
+(λn.n (λx.FALSE) TRUE) λfx.x
+λfx.x (λx.FALSE) TRUE -- f is not used in the body
+(λx.x) TRUE
+TRUE
+
+(λn.n (λx.FALSE) TRUE) (λfx.f x)
+λfx.f x (λx.FALSE) TRUE -- f is used in the body
+(λx.FALSE) TRUE
+FALSE
+```
+
 ## Addition
 
 Addition can be seen as iterated succession.
