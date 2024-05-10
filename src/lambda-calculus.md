@@ -471,3 +471,13 @@ but they do not.
 
 For example, the factorial function can be defined as
 TODO: Finish this.
+
+The Z Combinator is similar to the Y Combinator,
+but it defers calculations until they are needed.
+It is defined as
+
+```text
+λf.M (λx.f (λv.M x v)) -- where M is the Mockingbird function
+```
+
+TODO: Try to implement this in JavaScript.
