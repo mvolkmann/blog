@@ -12,11 +12,23 @@ describes concepts that are fundamental to functional programming.
 It's purpose is to study how functions can interact with each other,
 not to calculate results in a useful way.
 
+The word "calculus" has four meanings, the last of which applies here.
+
+1. In mathematics it is a method of calculation
+   known as differential or integral calculus.
+1. In pathology it is a stone or concretion
+   often formed in the gallbladder or kidneys.
+1. In dentistry it is a hard, yellowish or brownish
+   deposit on teeth, also known as tartar.
+1. A method of calculating, judging, or deciding something
+   in a complicated situation.
+
 Despite lacking many features found in programming languages,
 λ-calculus is Turing complete.
 
 Throughout this post examples are shown in both
 λ-calculus and the closest equivalent in JavaScript.
+TODO: Show more JavaScript examples.
 
 ## History
 
