@@ -325,6 +325,8 @@ TODO: What can be done from here to arrive at 8?
 
 ## Boolean Logic
 
+### True and False
+
 The Boolean value true is represented by the function `(λt. λf. t)`.
 This takes two arguments and returns the first.
 
@@ -332,14 +334,20 @@ The Boolean value false is represented by the function `(λt. λf. f)`.
 This takes two arguments and returns the second.
 This is the same as the function that represents the number zero.
 
+### Not Function
+
 A function to return "not" of a Boolean value is `λb. b false true`.
 where `b` is either the true or false function.
 For example,
 `(λb. b false true) (λt. λf. t)` evaluates to false.
 `(λb. b false true) (λt. λf. f)` evaluates to true.
 
+### And Function
+
 A function to return the result of and'ing two Boolean values is
 `λx. (λy. x y false)`.
+If the first argument is false, that is the result.
+Otherwise the second argument is the result.
 
 ```text
 (λx. (λy. x y false)) true true
@@ -363,8 +371,12 @@ false false false
 false
 ```
 
+### Or Function
+
 A function to return the result of or'ing two Boolean values is
 `λx. (λy. x true y)`.
+If the first argument is true, that is the result.
+Otherwise the second argument is the result.
 
 ```text
 (λx. (λy. x true y)) true true
@@ -388,15 +400,20 @@ false true false
 false
 ```
 
+### If Expressions
+
+TODO: Is it `λcxy.c x y` ?
+TODO: Is it the same as the function for "or"?
+
 ## Recursion
 
 Functions in lambda calculus do not have names.
 This leaves no way for a function to refer to itself
 which makes implementing recursion difficult.
 
-The Y Combinator is a function that implements recursion.
-It is defined as `λf.(λx.f (x x)) (λx.f (x x))`
-and was invented by Haskell Curry.
+The Y Combinator, invented by Haskell Curry, is a function that
+implements recursion and provides a way of implementing loops.
+It is defined as `λf.(λx.f (x x)) (λx.f (x x))`.
 Note that the body contains two identical terms.
 
 Consider the expression `(λx.x x) (λx.x x)`.
