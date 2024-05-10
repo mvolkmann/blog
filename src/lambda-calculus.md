@@ -198,7 +198,98 @@ results in a new function that expects the remaining parameters.
   because `+` is a a function that takes two arguments,
   but only one is supplied.
 
-## Church Numberals
+## Boolean Logic
+
+### True and False
+
+The Boolean value true is represented by the function `(λt. λf. t)`.
+This takes two arguments and returns the first.
+
+The Boolean value false is represented by the function `(λt. λf. f)`.
+This takes two arguments and returns the second.
+This is the same as the function that represents the number zero.
+
+### Not Function
+
+A function to return "not" of a Boolean value is `λb. b false true`.
+where `b` is either the true or false function.
+For example,
+`(λb. b false true) (λt. λf. t)` evaluates to false.
+`(λb. b false true) (λt. λf. f)` evaluates to true.
+
+### And Function
+
+A function to return the result of and'ing two Boolean values is
+`λx. (λy. x y false)`.
+If the first argument is false, that is the result.
+Otherwise the second argument is the result.
+
+```text
+(λx. (λy. x y false)) true true
+true true false
+(λt. λf. t) true false
+true
+
+(λx. (λy. x y false)) true false
+true false false
+(λt. λf. t) false false
+false
+
+(λx. (λy. x y false)) false true
+false true false
+(λt. λf. f) true false
+false
+
+(λx. (λy. x y false)) false false
+false false false
+(λt. λf. f) false false
+false
+```
+
+### Or Function
+
+A function to return the result of or'ing two Boolean values is
+`λx. (λy. x true y)`.
+If the first argument is true, that is the result.
+Otherwise the second argument is the result.
+
+```text
+(λx. (λy. x true y)) true true
+true true true
+(λt. λf. t) true true
+true
+
+(λx. (λy. x true y)) true false
+true true false
+(λt. λf. t) true false
+true
+
+(λx. (λy. x true y)) false true
+false true true
+(λt. λf. f) true true
+true
+
+(λx. (λy. x true y)) false false
+false true false
+(λt. λf. f) true false
+false
+```
+
+### If Expressions
+
+An if expression can be implemented as follows where
+`c` is the condition to be tested,
+`x` is the result if `c` evaluates to true, and
+`y` is the result if `c` evaluates to false.
+
+```text
+λcxy.c x y
+```
+
+This works because the function that represents true returns its first argument
+and the function that represents false returns its second argument.
+
+## Church Numerals
 
 While λ-calculus does not define numbers, we can select
 λ terms to represent each natural number (non-negative integers).
@@ -294,6 +385,10 @@ succ 5
 6 which is represented by λfx.f (f (f (f (f (f x)))))
 ```
 
+## Division
+
+TODO: Can division be implemented as iterated substraction?
+
 ## Exponentiation
 
 Exponentiation can be seen as iterated multiplicaation.
@@ -324,97 +419,6 @@ Does this defintion also work? `λmn. n m`
 TODO: What can be done from here to arrive at 8?
 ```
 
-## Boolean Logic
-
-### True and False
-
-The Boolean value true is represented by the function `(λt. λf. t)`.
-This takes two arguments and returns the first.
-
-The Boolean value false is represented by the function `(λt. λf. f)`.
-This takes two arguments and returns the second.
-This is the same as the function that represents the number zero.
-
-### Not Function
-
-A function to return "not" of a Boolean value is `λb. b false true`.
-where `b` is either the true or false function.
-For example,
-`(λb. b false true) (λt. λf. t)` evaluates to false.
-`(λb. b false true) (λt. λf. f)` evaluates to true.
-
-### And Function
-
-A function to return the result of and'ing two Boolean values is
-`λx. (λy. x y false)`.
-If the first argument is false, that is the result.
-Otherwise the second argument is the result.
-
-```text
-(λx. (λy. x y false)) true true
-true true false
-(λt. λf. t) true false
-true
-
-(λx. (λy. x y false)) true false
-true false false
-(λt. λf. t) false false
-false
-
-(λx. (λy. x y false)) false true
-false true false
-(λt. λf. f) true false
-false
-
-(λx. (λy. x y false)) false false
-false false false
-(λt. λf. f) false false
-false
-```
-
-### Or Function
-
-A function to return the result of or'ing two Boolean values is
-`λx. (λy. x true y)`.
-If the first argument is true, that is the result.
-Otherwise the second argument is the result.
-
-```text
-(λx. (λy. x true y)) true true
-true true true
-(λt. λf. t) true true
-true
-
-(λx. (λy. x true y)) true false
-true true false
-(λt. λf. t) true false
-true
-
-(λx. (λy. x true y)) false true
-false true true
-(λt. λf. f) true true
-true
-
-(λx. (λy. x true y)) false false
-false true false
-(λt. λf. f) true false
-false
-```
-
-### If Expressions
-
-An if expression can be implemented as follows where
-`c` is the condition to be tested,
-`x` is the result if `c` evaluates to true, and
-`y` is the result if `c` evaluates to false.
-
-```text
-λcxy.c x y
-```
-
-This works because the function that represents true returns its first argument
-and the function that represents false returns its second argument.
-
 ## Recursion
 
 Functions in lambda calculus do not have names.
@@ -434,5 +438,14 @@ This repeats forever, creating an infinite loop.
 The Y Combination adds a function parameter `f` to this
 which represents the computation to be performed in each iteration.
 
-For example, the factorial function can be define as
+We can attempt to write the factorial function as
+
+```text
+fact = λn.if (iszero n) 1 (mult n (fact (pred n)))
+```
+
+But this assumes that functions have names that can be used to call themselves,
+but they do not.
+
+For example, the factorial function can be defined as
 TODO: Finish this.
