@@ -382,10 +382,18 @@ Functions in lambda calculus do not have names.
 This leaves no way for a function to refer to itself
 which makes implementing recursion difficult.
 
-The y-combinator is a function that implements recursion.
+The Y Combinator is a function that implements recursion.
 It is defined as `λf.(λx.f (x x)) (λx.f (x x))`
 and was invented by Haskell Curry.
 Note that the body contains two identical terms.
+
+Consider the expression `(λx.x x) (λx.x x)`.
+Substituting the second term for x in the first term
+yields the exact same expression.
+This repeats forever, creating an infinite loop.
+
+The Y Combination adds a function parameter `f` to this
+which represents the computation to be performed in each iteration.
 
 For example, the factorial function can be define as
 TODO: Finish this.
