@@ -39,7 +39,7 @@ studied the use of functions in logic in 1893.
 <a href="https://en.wikipedia.org/wiki/Moses_Schönfinkel"
 target="_blank">Moses Schönfinkel</a> (1888-1942)
 studied how combinators can be applied to formal logic in the 1920s.
-The term "combinator" has two meanings, both which describe a kind of function.
+The term "combinator" has two meanings, both of which describe a kind of function.
 The first describes functions that have no free variables.
 The second describes functions that take other functions
 and combine them to create new functions.
@@ -59,7 +59,8 @@ target="_blank">Alan Turing</a> (1912-1954).
 - lambda abstraction: defines an anonymous function that has exactly one parameter
 
   This uses the syntax `λ<parameter>.<body>`
-  where `<parameter>` is a single variable.
+  where `<parameter>` is a single variable
+  that is also referred to as a meta-variable.
 
   The body of a function extends as far right as possible.
   So `λx.a b c x` is evaluated as `λx.(((a b) c) x)`
@@ -183,7 +184,7 @@ results in a new function that expects the remaining parameters.
 
 - 𝛼-conversion (alpha)
 
-  This changes the names of a function parameters,
+  This changes the names of bound variables (which match function parameters),
   resulting in equivalent functions.
   For example, the function `λx.x` is equivalent to the function `λy.y`
   and `(λfx.f (+ x 1))` is equivalent to `(λgy.g (+ y 1))`.
@@ -199,11 +200,11 @@ results in a new function that expects the remaining parameters.
 
 ## Church Numberals
 
-While λ-calculus does not define numbers,
-we can select λ terms to represent each natural number.
+While λ-calculus does not define numbers, we can select
+λ terms to represent each natural number (non-negative integers).
 We can define functions that take another function `f` and a number `x`
 whose result is that of `f` being applied `x` times.
-Is is not the result of these functions that represent numbers,
+It is not the result of these functions that represent numbers,
 but rather the functions themselves.
 
 In the table below, note the number of times the function `f` is applied
@@ -402,8 +403,17 @@ false
 
 ### If Expressions
 
-TODO: Is it `λcxy.c x y` ?
-TODO: Is it the same as the function for "or"?
+An if expression can be implemented as follows where
+`c` is the condition to be tested,
+`x` is the result if `c` evaluates to true, and
+`y` is the result if `c` evaluates to false.
+
+```text
+λcxy.c x y
+```
+
+This works because the function that represents true returns its first argument
+and the function that represents false returns its second argument.
 
 ## Recursion
 
