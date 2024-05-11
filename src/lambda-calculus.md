@@ -448,6 +448,10 @@ Does this defintion also work? `λmn. n m`
 TODO: What can be done from here to arrive at 8?
 ```
 
+## Function Composition
+
+A function to compose two functions can be written as λfgx.f (g x).
+
 ## Recursion
 
 Functions in lambda calculus do not have names.
