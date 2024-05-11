@@ -290,6 +290,11 @@ An if expression can be implemented as follows where
 This works because the function that represents true returns its first argument
 and the function that represents false returns its second argument.
 
+### Equality
+
+TODO: Can you write a function that takes two functions
+and determines if they are equivalent?
+
 ## Church Numerals
 
 While λ-calculus does not define numbers, we can select
@@ -326,7 +331,7 @@ The predecessor function (pred) `λn (λf. λx. n (λg.λh. h (g f)) (λu.x) (λ
 returns the number that precedes a given number.
 For example, the predecessor of 2 is 1.
 
-TODO: Finish demonstrating that this works.
+TODO: Finish demonstrating that this works. It works in your JS code!
 
 ```text
 (λn (λf. λx. n (λg.λh. h (g f)) (λu.x) (λu.u))) 2
@@ -381,6 +386,7 @@ succ (λfx.f (f (f (f x))))
 ## Subtraction
 
 Substraction can be seen as iterated predecessors.
+A subtraction function can be written as `λmn. (n pred) m`.
 
 TODO: Add more detail here.
 
