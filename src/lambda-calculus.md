@@ -41,8 +41,9 @@ target="_blank">Moses Schönfinkel</a> (1888-1942)
 studied how combinators can be applied to formal logic in the 1920s.
 The term "combinator" has two meanings, both of which describe a kind of function.
 The first describes functions that have no free variables.
+It combines only its arguments to produce a result.
 The second describes functions that take other functions
-and combine them to create new functions.
+and combine them to create a new function.
 
 <a href="https://en.wikipedia.org/wiki/Alonzo_Church"
 target="_blank">Alonzo Church</a> (1903-1985)
