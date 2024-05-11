@@ -416,7 +416,7 @@ succ 5
 
 ## Division
 
-TODO: Can division be implemented as iterated substraction?
+TODO: Add this.
 
 ## Exponentiation
 
