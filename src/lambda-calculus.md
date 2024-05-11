@@ -290,12 +290,9 @@ An if expression can be implemented as follows where
 This works because the function that represents true returns its first argument
 and the function that represents false returns its second argument.
 
-### Equality
+## Arithmetic
 
-TODO: Can you write a function that takes two functions
-and determines if they are equivalent?
-
-## Church Numerals
+### Church Numerals
 
 While λ-calculus does not define numbers, we can select
 λ terms to represent each natural number (non-negative integers).
@@ -342,7 +339,7 @@ TODO: Finish demonstrating that this works. It works in your JS code!
 1
 ```
 
-## Is Zero
+### Is Zero
 
 The following function tests whether its argument represents zero.
 
@@ -364,7 +361,7 @@ TRUE
 FALSE
 ```
 
-## Addition
+### Addition
 
 Addition can be seen as iterated succession.
 An add function can be written as `λmn. (m succ) n`.
@@ -383,14 +380,14 @@ succ (λfx.f (f (f (f x))))
 5
 ```
 
-## Subtraction
+### Subtraction
 
 Substraction can be seen as iterated predecessors.
 A subtraction function can be written as `λmn. (n pred) m`.
+This returns `zero` if `m` is less than `n`
+because we don't have a way to represent negative numbers.
 
-TODO: Add more detail here.
-
-## Multiplication
+### Multiplication
 
 Multiplication can be seen as iterated addition.
 A multiply function (mul) can be written as `λmn. m (add n) 0`
@@ -414,11 +411,11 @@ succ 5
 6 which is represented by λfx.f (f (f (f (f (f x)))))
 ```
 
-## Division
+### Division
 
 TODO: Add this.
 
-## Exponentiation
+### Exponentiation
 
 Exponentiation can be seen as iterated multiplicaation.
 An exponentiation function (exp) can be written as `λmn. n (mul m) 1`
@@ -447,6 +444,23 @@ Does this defintion also work? `λmn. n m`
 2 = λfx.f (f x), so (2 x) = (λfy.f (f y)) x = λy.x (x y)
 TODO: What can be done from here to arrive at 8?
 ```
+
+## Equality
+
+A function to determine if two Boolean values are equal can be writen as
+
+```text
+λab. (or (and a b) (and (not a) (not b)))
+```
+
+A function to determine if two numbers are equal can be writen as
+
+```text
+λmn.and (iszero (sub m n)) (iszero (sub n m))
+```
+
+We have to test both because our `sub` function returns zero
+when the first number is less than the last number.
 
 ## Function Composition
 
