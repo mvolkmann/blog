@@ -537,26 +537,28 @@ TODO: What can be done from here to arrive at 8?
 
 ## Equality
 
-TODO: Continue adding more JavaScript examples from here down.
+A function to determine if two Boolean values are equal can be defined as:
 
-A function to determine if two Boolean values are equal can be writen as
+| λ-calculus                                  | JavaScript                                     |
+| ------------------------------------------- | ---------------------------------------------- |
+| `λab. (or (and a b) (and (not a) (not b)))` | `a => b => or(and(a)(b))(and(not(a))(not(b)))` |
 
-```text
-λab. (or (and a b) (and (not a) (not b)))
-```
+A function to determine if two numbers are equal can be defined as:
 
-A function to determine if two numbers are equal can be writen as
+| λ-calculus                                      | JavaScript                                            |
+| ----------------------------------------------- | ----------------------------------------------------- |
+| `λmn.and (iszero (sub m n)) (iszero (sub n m))` | `m => n => and(iszero(sub(m)(n)))(iszero(sub(n)(m)))` |
 
-```text
-λmn.and (iszero (sub m n)) (iszero (sub n m))
-```
-
-We have to test both because our `sub` function returns zero
+We have to test both argument orders because our `sub` function returns zero
 when the first number is less than the last number.
 
 ## Function Composition
 
-A function to compose two functions can be written as λfgx.f (g x).
+A function to compose two functions can be defined as:
+
+| λ-calculus     | JavaScript               |
+| -------------- | ------------------------ |
+| `λfgx.f (g x)` | `f => g => x => f(g(x))` |
 
 ## Recursion
 
