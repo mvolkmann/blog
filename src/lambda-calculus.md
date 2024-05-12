@@ -349,15 +349,23 @@ but rather the functions themselves.
 In the table below, note the number of times the function `f` is applied
 on the right side of the period.
 
-| Number | λ term            |
-| ------ | ----------------- |
-| 0      | `λfx.x`           |
-| 1      | `λfx.f x`         |
-| 2      | `λfx.f (f x)`     |
-| 3      | `λfx.f (f (f x))` |
+| Number | λ term            | JavaScript             |
+| ------ | ----------------- | ---------------------- |
+| 0      | `λfx.x`           | `f => x => x`          |
+| 1      | `λfx.f x`         | `f => x => f(x)`       |
+| 2      | `λfx.f (f x)`     | `f => x => f(f(x))`    |
+| 3      | `λfx.f (f (f x))` | `f => x => f(f(f(x)))` |
 
-The successor function (succ) `λn (λf. λx. f (n f x))`
+### Successor
+
+The successor function (succ)
 returns the number that follows a given number.
+It can be defined as:
+
+| λ-calculus               | JavaScript              |
+| ------------------------ | ----------------------- |
+| `λn (λf. λx. f (n f x))` | `x => y => x(true_)(y)` |
+
 For example, the successor of 1 is 2.
 
 ```text
@@ -369,8 +377,17 @@ For example, the successor of 1 is 2.
 2
 ```
 
-The predecessor function (pred) `λn (λf. λx. n (λg.λh. h (g f)) (λu.x) (λu.u))`
+### Predecessor
+
+The predecessor function (pred)
 returns the number that precedes a given number.
+It is one of the most compilicated functions in λ-calculus
+and can be defined as:
+
+| λ-calculus                                      | JavaScript                                            |
+| ----------------------------------------------- | ----------------------------------------------------- |
+| `λn (λf. λx. n (λg.λh. h (g f)) (λu.x) (λu.u))` | `n => f => x => n(g => h => h(g(f)))(u => x)(u => u)` |
+
 For example, the predecessor of 2 is 1.
 
 TODO: Finish demonstrating that this works. It works in your JS code!
@@ -386,11 +403,12 @@ TODO: Finish demonstrating that this works. It works in your JS code!
 
 ### Is Zero
 
-The following function tests whether its argument represents zero.
+A function to determine whether its argument is the zero function
+can be defined as:
 
-```text
-ISZERO = λn.n (λx.FALSE) TRUE
-```
+| λ-calculus             | JavaScript                   |
+| ---------------------- | ---------------------------- |
+| `λn.n (λx.FALSE) TRUE` | `n => n(x => false_)(true_)` |
 
 Let's verify that this works for 0 and 1.
 
