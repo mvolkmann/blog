@@ -28,6 +28,10 @@ Despite lacking many features found in programming languages,
 
 Throughout this post examples are shown in both
 λ-calculus and the closest equivalent in JavaScript.
+JavaScript implementations of all the functions described here
+can be found in this
+<a href="https://github.com/mvolkmann/lambda-calculus/blob/main/lambda-calculus.test.ts"
+target="_blank">GitHub repository</a>.
 
 ## History
 
