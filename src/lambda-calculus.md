@@ -59,23 +59,30 @@ target="_blank">Alan Turing</a> (1912-1954).
 
 - lambda abstraction: defines an anonymous function that has exactly one parameter
 
-  This uses the syntax `λ<parameter>.<body>`
-  where `<parameter>` is a single variable
-  that is also referred to as a meta-variable.
+  | λ Calculus            | JavaScript          |
+  | --------------------- | ------------------- |
+  | `λ<parameter>.<body>` | `parameter => body` |
 
-  The body of a function extends as far right as possible.
-  So `λx.a b c x` is evaluated as `λx.(((a b) c) x)`
-  which is different from `((λx.a b) c) x`.
+  `<parameter>` is a single variable that is
+  also referred to as a meta-variable.
+
+  The body of a function extends as far right as possible.  
+  So `λx.a b c x` is evaluated as `λx.(((a b) c) x)`  
+  which is different from `((λx.a b) c) x`.  
   The expression `λx.λy.λz.a b c` is evaluated as `λx.(λy.(λz.a b c))`.
 
   Expressions like `λx.λy.λz.a b c` are sometimes
-  written in the shorter form `λxyz.a b c`
-  despite the fact that λ-calculus functions only have a single parameter.
+  written in the shorthand form `λxyz.a b c` despite the fact that
+  λ-calculus functions only have a single parameter.
 
 - application: calls a function with arguments
 
-  This uses the syntax `(λ<parameter>.<expression>) <arguments>`
-  where `<arguments>` is a whitespace-separated list of expressions.
+  | λ Calculus                         | JavaScript                       |
+  | ---------------------------------- | -------------------------------- |
+  | `(λ<parameter>.<body>) <argument>` | `(parameter => body)(argument)`  |
+  | `(λxyz.<body>) a b c`              | `(x => y => z => body)(a)(b)(c)` |
+
+  `<arguments>` is a whitespace-separated list of expressions.
   Function application is left associative.
   So `a b c d` is evaluated as `((a b) c) d`.
 
@@ -91,12 +98,15 @@ Free variables appear in function definitions, are not parameters,
 and can represent any value.
 The following tables contains examples.
 
-| Expression        | Bound Variables               | Free Variables |
-| ----------------- | ----------------------------- | -------------- |
-| `λx.(+ x 1)`      | `x`                           | none           |
-| `λx.(+ y 1)`      | none                          | `y`            |
-| `λx.x λx.(+ x 1)` | rename 2nd `x` as shown below |                |
-| `λx.x λy.(+ y 1)` | `x` and `y`                   | none           |
+| λ Calculus        | JavaScript             | Bound Variables               | Free Variables |
+| ----------------- | ---------------------- | ----------------------------- | -------------- |
+| `λx.(+ x 1)`      | `x => x + 1`           | `x`                           | none           |
+| `λx.(+ y 1)`      | `x => y + 1`           | none                          | `y`            |
+| `λx.x λx.(+ x 1)` | `x => x((x => x + 1))` | rename 2nd `x` as shown below |                |
+| `λx.x λy.(+ y 1)` | `x => x((y => y + 1))` | `x` and `y`                   | none           |
+
+The last two examples above assume that `x` is a function
+that does not necessarily correspond to a number.
 
 ## Function Syntax
 
@@ -116,7 +126,7 @@ Parentheses are used to surround function defintions
 and enable them to be applied.
 They are also used to define the order of operations.
 
-| λ-calculus | JavaScript  |
+| λ Calculus | JavaScript  |
 | ---------- | ----------- |
 | (λx.x) y   | (x => x)(y) |
 
