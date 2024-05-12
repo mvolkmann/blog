@@ -498,11 +498,14 @@ TODO: Add this.
 
 ### Exponentiation
 
-TODO: Continue adding more JavaScript examples from here down.
-
 Exponentiation can be seen as iterated multiplicaation.
-An exponentiation function (exp) can be written as `λmn. n (mul m) 1`
-where `m` is the base and `n` is the exponent.
+An exponentiation function (exp) can be defined as the following
+where `m` is the base and `n` is the exponent:
+
+| λ-calculus         | JavaScript                 |
+| ------------------ | -------------------------- |
+| `λmn. n (mul m) 1` | `m => n => n(mul(m))(one)` |
+
 For example, here are the steps to raise 2 to the 3rd power.
 See the representations for 2 and 3 in the table above.
 
@@ -517,7 +520,7 @@ See the representations for 2 and 3 in the table above.
 8
 ```
 
-Does this defintion also work? `λmn. n m`
+TODO: Does this defintion also work? `λmn. n m`
 
 ```text
 (λmn. n m) 2 3
@@ -529,6 +532,8 @@ TODO: What can be done from here to arrive at 8?
 ```
 
 ## Equality
+
+TODO: Continue adding more JavaScript examples from here down.
 
 A function to determine if two Boolean values are equal can be writen as
 
