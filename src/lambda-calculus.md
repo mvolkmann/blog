@@ -28,7 +28,6 @@ Despite lacking many features found in programming languages,
 
 Throughout this post examples are shown in both
 λ-calculus and the closest equivalent in JavaScript.
-TODO: Show more JavaScript examples.
 
 ## History
 
@@ -335,6 +334,8 @@ the function that represents `true` returns its first argument and
 the function that represents `false` returns its second argument.
 
 ## Arithmetic
+
+TODO: Continue adding more JavaScript examples from here down.
 
 ### Church Numerals
 
