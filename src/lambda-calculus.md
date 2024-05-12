@@ -335,8 +335,6 @@ the function that represents `false` returns its second argument.
 
 ## Arithmetic
 
-TODO: Continue adding more JavaScript examples from here down.
-
 ### Church Numerals
 
 While λ-calculus does not define numbers, we can select
@@ -426,8 +424,13 @@ FALSE
 
 ### Addition
 
-Addition can be seen as iterated succession.
-An add function can be written as `λmn. (m succ) n`.
+Addition can be seen as iterated successions.
+An add function can be defined as;
+
+| λ-calculus        | JavaScript             |
+| ----------------- | ---------------------- |
+| `λmn. (m succ) n` | `m => n => m(succ)(n)` |
+
 For example, here are the steps to use this function to add 2 and 3.
 See the representations for 2 and 3 in the table above.
 
@@ -446,15 +449,25 @@ succ (λfx.f (f (f (f x))))
 ### Subtraction
 
 Substraction can be seen as iterated predecessors.
-A subtraction function can be written as `λmn. (n pred) m`.
+A subtraction function can be defined as:
+
+| λ-calculus        | JavaScript             |
+| ----------------- | ---------------------- |
+| `λmn. (n pred) m` | `m => n => n(pred)(m)` |
+
 This returns `zero` if `m` is less than `n`
 because we don't have a way to represent negative numbers.
 
 ### Multiplication
 
 Multiplication can be seen as iterated addition.
-A multiply function (mul) can be written as `λmn. m (add n) 0`
-where `m` and `n` are the two numbers to be multiplied.
+A multiply function (mul) can be written as the following
+where `m` and `n` are the two numbers to be multiplied:
+
+| λ-calculus         | JavaScript                  |
+| ------------------ | --------------------------- |
+| `λmn. m (add n) 0` | `m => n => m(add(n))(zero)` |
+
 For example, here are the steps to use this function to multiply 2 and 3.
 See the representations for 2 and 3 in the table above.
 
@@ -476,9 +489,16 @@ succ 5
 
 ### Division
 
+Division of integer numbers usually results in a floating point result
+and there isn't an easy way to represent floating point numbers in λ-calculus.
+We could define division as iterated subtraction
+and make the result be the number of times that one integers goes into another.
+
 TODO: Add this.
 
 ### Exponentiation
+
+TODO: Continue adding more JavaScript examples from here down.
 
 Exponentiation can be seen as iterated multiplicaation.
 An exponentiation function (exp) can be written as `λmn. n (mul m) 1`
