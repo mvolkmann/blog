@@ -58,7 +58,9 @@ target="_blank">Alan Turing</a> (1912-1954).
 
 λ-calculus only defines three concepts, referred to as lambda terms:
 
-- variable: gives a single-letter name to a value
+- variable: placeholder for a term represented by a single-letter name
+
+  There are two kinds of variables, bound and free, that are discussed later.
 
 - lambda abstraction: defines an anonymous function that has exactly one parameter
 
@@ -93,6 +95,8 @@ target="_blank">Alan Turing</a> (1912-1954).
 such as booleans, numbers, and strings.
 It also does not define operators on these types or any built-in functions.
 However, these can be defined using only the concepts listed above.
+
+## Variables
 
 There are two kinds of variables, bound and free.
 Bound variables are bound by a specific abstraction (function).
