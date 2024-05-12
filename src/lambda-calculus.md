@@ -59,7 +59,7 @@ target="_blank">Alan Turing</a> (1912-1954).
 
 - lambda abstraction: defines an anonymous function that has exactly one parameter
 
-  | λ Calculus            | JavaScript          |
+  | λ-calculus            | JavaScript          |
   | --------------------- | ------------------- |
   | `λ<parameter>.<body>` | `parameter => body` |
 
@@ -77,7 +77,7 @@ target="_blank">Alan Turing</a> (1912-1954).
 
 - application: calls a function with arguments
 
-  | λ Calculus                         | JavaScript                       |
+  | λ-calculus                         | JavaScript                       |
   | ---------------------------------- | -------------------------------- |
   | `(λ<parameter>.<body>) <argument>` | `(parameter => body)(argument)`  |
   | `(λxyz.<body>) a b c`              | `(x => y => z => body)(a)(b)(c)` |
@@ -98,7 +98,7 @@ Free variables appear in function definitions, are not parameters,
 and can represent any value.
 The following tables contains examples.
 
-| λ Calculus        | JavaScript             | Bound Variables               | Free Variables |
+| λ-calculus        | JavaScript             | Bound Variables               | Free Variables |
 | ----------------- | ---------------------- | ----------------------------- | -------------- |
 | `λx.(+ x 1)`      | `x => x + 1`           | `x`                           | none           |
 | `λx.(+ y 1)`      | `x => y + 1`           | none                          | `y`            |
@@ -110,11 +110,11 @@ that does not necessarily correspond to a number.
 
 ## Function Syntax
 
-Here is an identity function that just returns the value passed in.
+An identity function that just returns the value passed in can be defined as:
 
 | λ-calculus | JavaScript |
 | ---------- | ---------- |
-| λx.x       | x => x     |
+| `λx.x`     | `x => x`   |
 
 Function defintions begin with the λ character,
 followed by a single parameter name, a period, and
@@ -126,9 +126,9 @@ Parentheses are used to surround function defintions
 and enable them to be applied.
 They are also used to define the order of operations.
 
-| λ Calculus | JavaScript  |
-| ---------- | ----------- |
-| (λx.x) y   | (x => x)(y) |
+| λ-calculus | JavaScript    |
+| ---------- | ------------- |
+| `(λx.x) y` | `(x => x)(y)` |
 
 Functions in λ-calculus can only have a single parameter.
 To support the concept of multi-parameter functions,
@@ -141,29 +141,32 @@ But for demonstration purposes, we can pretend that it does define
 numbers, basic math operators such as `+`,
 and the Boolean values `true` and `false`.
 
-| λ-calculus     | JavaScript      |
-| -------------- | --------------- |
-| λx. (λy.x + y) | (x, y) => x + y |
+| λ-calculus     | JavaScript        |
+| -------------- | ----------------- |
+| `λx. λy.x + y` | `(x, y) => x + y` |
 
-Shorthand ways of writing the λ-calculus function above are
-`λx.λy.x + y` (parentheses not necessary) and `λxy.x + y`.
+A shorthand way of writing the λ-calculus function above is `λxy.x + y`.
 This is also sometimes written with a prefix operator as `λxy.(+ x y)`.
 
-This is referred to as "currying" which is a nod to the mathematician
+Chaining functions that each take a single argument
+is referred to as "currying".
+This is a nod to the mathematician
 <a href="https://en.wikipedia.org/wiki/Haskell_Curry"
 target="_blank">Haskell Curry</a> (1900-1982)
 who used the concept extensively in his research.
 However, the concept was initially defined by Gottlob Frege in 1893
 before Haskell Curry was born.
 
-The JavaScript function above could be defined and called
-as follows to support currying.
+The λ-calculus function above can be defined in JavaScript to support currying.
 This uses a function that returns another function.
 
 ```js
 function add(x) {
   return y => x + y;
 }
+// OR more compactly as:
+const add = x => y => x + y;
+// It can be called as follows:
 const sum = add(2)(3); /* 5 */
 ```
 
@@ -213,45 +216,71 @@ results in a new function that expects the remaining parameters.
 
 ### True and False
 
-The Boolean value true is represented by the function `(λt. λf. t)`.
+The Boolean value true is represented by:
+
+| λ-calculus  | JavaScript    |
+| ----------- | ------------- |
+| `λt. λf. t` | `(t, f) => t` |
+
 This takes two arguments and returns the first.
 
-The Boolean value false is represented by the function `(λt. λf. f)`.
+In the examples that follow, the JavaScript function above is represented
+by `true_` to avoid conflicting with the JavaScript keyword `true`.
+
+The Boolean value false is represented by:
+
+| λ-calculus  | JavaScript    |
+| ----------- | ------------- |
+| `λt. λf. f` | `(t, f) => f` |
+
 This takes two arguments and returns the second.
-This is the same as the function that represents the number zero.
+It is the same as the function that represents the number zero (below).
+
+In the examples that follow, the JavaScript function above is represented
+by `false_` to avoid conflicting with the JavaScript keyword `false`.
 
 ### Not Function
 
-A function to return "not" of a Boolean value is `λb. b false true`.
-where `b` is either the true or false function.
+A function to return "not" of a Boolean value,
+where `b` is either the true or false function,
+can be defined as:
+
+| λ-calculus        | JavaScript              |
+| ----------------- | ----------------------- |
+| `λb.b false true` | `b => b(false_)(true_)` |
+
 For example,
-`(λb. b false true) (λt. λf. t)` evaluates to false.
-`(λb. b false true) (λt. λf. f)` evaluates to true.
+`(λb.b false true) (λt. λf. t)` evaluates to false.
+`(λb.b false true) (λt. λf. f)` evaluates to true.
 
 ### And Function
 
-A function to return the result of and'ing two Boolean values is
-`λx. (λy. x y false)`.
-If the first argument is false, that is the result.
+A function to return the result of and'ing two Boolean values can be defined as:
+
+| λ-calculus          | JavaScript               |
+| ------------------- | ------------------------ |
+| `λx. λy. x y false` | `x => y => x(y)(false_)` |
+
+If the first argument is `false`, that is the result.
 Otherwise the second argument is the result.
 
 ```text
-(λx. (λy. x y false)) true true
+(λx.  λy. x y false) true true
 true true false
 (λt. λf. t) true false
 true
 
-(λx. (λy. x y false)) true false
+(λx. λy. x y false) true false
 true false false
 (λt. λf. t) false false
 false
 
-(λx. (λy. x y false)) false true
+(λx. λy. x y false) false true
 false true false
 (λt. λf. f) true false
 false
 
-(λx. (λy. x y false)) false false
+(λx. λy. x y false) false false
 false false false
 (λt. λf. f) false false
 false
@@ -259,28 +288,32 @@ false
 
 ### Or Function
 
-A function to return the result of or'ing two Boolean values is
-`λx. (λy. x true y)`.
-If the first argument is true, that is the result.
+A function to return the result of or'ing two Boolean values can be defined as:
+
+| λ-calculus         | JavaScript              |
+| ------------------ | ----------------------- |
+| `λx. λy. x true y` | `x => y => x(true_)(y)` |
+
+If the first argument is `true`, that is the result.
 Otherwise the second argument is the result.
 
 ```text
-(λx. (λy. x true y)) true true
+(λx. λy. x true y) true true
 true true true
 (λt. λf. t) true true
 true
 
-(λx. (λy. x true y)) true false
+(λx. λy. x true y) true false
 true true false
 (λt. λf. t) true false
 true
 
-(λx. (λy. x true y)) false true
+(λx. λy. x true y) false true
 false true true
 (λt. λf. f) true true
 true
 
-(λx. (λy. x true y)) false false
+(λx. λy. x true y) false false
 false true false
 (λt. λf. f) true false
 false
@@ -288,17 +321,18 @@ false
 
 ### If Expressions
 
-An if expression can be implemented as follows where
+A function that models an if expression can be defined as follows where
 `c` is the condition to be tested,
 `x` is the result if `c` evaluates to true, and
-`y` is the result if `c` evaluates to false.
+`y` is the result if `c` evaluates to false:
 
-```text
-λcxy.c x y
-```
+| λ-calculus         | JavaScript              |
+| ------------------ | ----------------------- |
+| `λx. λy. x true y` | `x => y => x(true_)(y)` |
 
-This works because the function that represents true returns its first argument
-and the function that represents false returns its second argument.
+This works because
+the function that represents `true` returns its first argument and
+the function that represents `false` returns its second argument.
 
 ## Arithmetic
 
@@ -478,7 +512,7 @@ A function to compose two functions can be written as λfgx.f (g x).
 
 ## Recursion
 
-Functions in lambda calculus do not have names.
+Functions in λ-calculus do not have names.
 This leaves no way for a function to refer to itself
 which makes implementing recursion difficult.
 
