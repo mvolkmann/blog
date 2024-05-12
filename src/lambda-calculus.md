@@ -33,6 +33,19 @@ can be found in this
 <a href="https://github.com/mvolkmann/lambda-calculus/blob/main/lambda-calculus.test.ts"
 target="_blank">GitHub repository</a>.
 
+## Resources
+
+- <a href="https://en.wikipedia.org/wiki/Lambda_calculus"
+    target="_blank">Lambda calculus</a> page on Wikipedia
+- <a href="https://learnxinyminutes.com/docs/lambda-calculus/"
+  target="_blank">Learn X in Y minutes Where X=Lambda Calculus</a>
+- <a href="https://www.lesswrong.com/posts/D4PYwNtYNwsgoixGa/intro-to-hacking-with-the-lambda-calculus"
+  target="_blank">Intro to hacking with the lambda calculus</a>
+  blog post by L Rudolf L
+- <a href="https://www.youtube.com/watch?v=3VQ382QG-y4"
+  target="_blank">Fundamentals of Lambda Calculus & Functional Programming in JavaScript</a>
+  YouTube talk by Gabriel Lebec
+
 ## History
 
 <a href="https://en.wikipedia.org/wiki/Gottlob_Frege"
