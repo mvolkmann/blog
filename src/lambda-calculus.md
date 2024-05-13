@@ -622,34 +622,67 @@ Functions in λ-calculus do not have names.
 This leaves no way for a function to refer to itself
 which makes implementing recursion difficult.
 
+Consider the expression `(λx.x x) (λx.x x)`.
+Substituting the second term for `x` in the first term
+yields the exact same pair of expressions.
+This repeats forever, creating an infinite loop.
+
+### Y Combinator
+
 The Y Combinator, invented by Haskell Curry, is a function that
 implements recursion and provides a way of implementing loops.
+It adds use of the function parameter `f` to the previous definition,
+which represents the computation to be performed in each iteration.
 It is defined as `λf.(λx.f (x x)) (λx.f (x x))`.
 Note that the body contains two identical terms.
 
-Consider the expression `(λx.x x) (λx.x x)`.
-Substituting the second term for x in the first term
-yields the exact same expression.
-This repeats forever, creating an infinite loop.
-
-The Y Combination adds a function parameter `f` to this
-which represents the computation to be performed in each iteration.
-
-We can attempt to write the factorial function as
+We can attempt to define a factorial function as:
 
 ```text
 fact = λn.if (iszero n) 1 (mult n (fact (pred n)))
 ```
 
-But this assumes that functions have names that can be used to call themselves,
+This assumes that functions have names that can be used to call themselves,
 but they do not.
 
-For example, the factorial function can be defined as
-TODO: Finish this.
+Instead we can use the Y Combinator to define a factorial function.
+Note how this differs slightly from the defintion above.
+TODO: Does the previous definition only work
+in lazily evaluated languages like Haskell?
+
+```js
+const Y = f => (x => x(x))(x => f(y => x(x)(y))); // λf.(λx.x x) (λx.f (x x))
+// This definition does not work in JavaScript!
+// const Y = f => (x => f(x(x)))(x => f(x(x)));
+```
+
+Next, we need a function to compute the next result in a factorial sequence.
+
+```js
+const facgen = f => n =>
+  if_(iszero(n))(() => one)(() => mul(n)(f(sub(n)(one))));
+```
+
+Finally, we can define a function that combines
+the Y Combinator and the `facgen` function.
+
+```js
+const factorial = Y(facgen);
+```
+
+This works!
+`factorial(zero)` returns the function for `one`.  
+`factorial(one)` returns the function for `one`.  
+`factorial(two)` returns the function for `two`.  
+`factorial(three)` returns the function for `six`.  
+and so on.
+
+### Z Combinator
 
 The Z Combinator is similar to the Y Combinator,
 but it defers calculations until they are needed.
-It is defined as
+TODO: Would it be better to use this for factorial in JavaScript?
+It can be defined as:
 
 ```text
 λf.M (λx.f (λv.M x v)) -- where M is the Mockingbird function
