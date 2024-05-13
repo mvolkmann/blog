@@ -489,6 +489,10 @@ where `m` and `n` are the two numbers to be multiplied:
 | ------------------ | --------------------------- |
 | `λmn. m (add n) 0` | `m => n => m(add(n))(zero)` |
 
+The functions above are correct, but multiplication
+is also the same as the composition of two numbers.
+See the "Function Composition" section below.
+
 For example, here are the steps to use this function to multiply 2 and 3.
 See the representations for 2 and 3 in the table above.
 
