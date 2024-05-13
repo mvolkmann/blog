@@ -400,25 +400,60 @@ For example, the successor of 1 is 2.
 
 The predecessor function (pred)
 returns the number that precedes a given number.
-It is one of the most compilicated functions in λ-calculus
-and can be defined as:
+It is one of the most compilicated functions in λ-calculus.
+
+Alonzo Church was unable to discover a definition for the predecessor function.
+A student of his, Stephen Kleene (1909-1994), arrived at a solution
+while in a dentist chair for wisdom teeth removal.
+Kleene is most known for his research into recursion theory.
+
+Suppose the goal is to find the predecessor of 3 which is 2.  
+Start with the pair (0, 0).  
+Apply a function to the pair three times whose result is a new pair
+composed of the second number and the successor of the second number.
+This yields (0, 1), (1, 2), and (2, 3).
+Take the first number of the final pair.
+
+A function to represent a pair can be defined as:
+
+| λ-calculus       | JavaScript               |
+| ---------------- | ------------------------ |
+| `λx.λy.λf.f x y` | `x => y => f => f(x)(y)` |
+
+A function to get the first element of a pair `p` can be defined as:
+
+| λ-calculus  | JavaScript      |
+| ----------- | --------------- |
+| `λp.p TRUE` | `p => p(true_)` |
+
+A function to get the second element of a pair `p` can be defined as:
+
+| λ-calculus   | JavaScript       |
+| ------------ | ---------------- |
+| `λp.p FALSE` | `p => p(false_)` |
+
+Let's use the name "phi" to refer to a function that
+takes a pair and returns a new pair composed of
+the second element and the successor of the second element.
+This can be defined as:
+
+| λ-calculus                       | JavaScript                        |
+| -------------------------------- | --------------------------------- |
+| `λp.pair (snd p) (succ (snd p))` | `p => pair(snd(p))(succ(snd(p)))` |
+
+The term "`n phi`" represents n applications of the phi function.
+
+We can now define the predecessor function as:
+
+| λ-calculus                        | JavaScript                           |
+| --------------------------------- | ------------------------------------ |
+| `λn.fst (n phi (pair zero zero))` | `n => fst(n(phi)(pair(zero)(zero)))` |
+
+The Wikipedia page for "Lambda Calculus" defines the predecessor function as:
 
 | λ-calculus                                      | JavaScript                                            |
 | ----------------------------------------------- | ----------------------------------------------------- |
 | `λn (λf. λx. n (λg.λh. h (g f)) (λu.x) (λu.u))` | `n => f => x => n(g => h => h(g(f)))(u => x)(u => u)` |
-
-For example, the predecessor of 2 is 1.
-
-TODO: Finish demonstrating that this works. It works in your JS code!
-
-```text
-(λn (λf. λx. n (λg.λh. h (g f)) (λu.x) (λu.u))) 2
-(λf. λx. 2 (λg.λh. h (g f))) (λu.x) (λu.u)
-(λf. λx. 2 (λg.λh. h (g f))) (λu.x) (λu.u)
-(λx. 2 (λg.λh. h (g (λu.x)))) (λu.x)
-2 (λg.λh. h (g (λu.x)))) (λu.x)
-1
-```
 
 ### Is Zero
 
