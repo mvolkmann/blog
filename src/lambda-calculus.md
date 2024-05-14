@@ -653,7 +653,7 @@ but they do not.
 Instead we can use the Y combinator to define a factorial function.
 Note how this differs slightly from the defintion above
 in order to work in a strictly evaluated language.
-TODO: Does the modified version implement the Z combinator?
+TODO: Is the modified version equivalent to the Z combinator?
 
 ```js
 const Y = f => (x => x(x))(x => f(y => x(x)(y))); // λf.(λx.x x) (λx.f (x x))
