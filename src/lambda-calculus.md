@@ -392,7 +392,7 @@ the function that represents `false` returns its second argument.
 
 In strictly-evaluated languages like JavaScript, this definition assumes
 it is acceptable to evaluate both the `x` and `y` expressions.
-This can be problematic wheni the evaluations are expensive
+This can be problematic when the evaluations are expensive
 or when recursion is involved.
 To solve this, the `if` function can be implemented as follows where
 `b` is a Boolean value,
