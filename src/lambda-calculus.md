@@ -262,7 +262,7 @@ The Boolean value true is represented by:
 
 | λ-calculus  | JavaScript    |
 | ----------- | ------------- |
-| `λt. λf. t` | `(t, f) => t` |
+| `λt. λf. t` | `t => f => t` |
 
 This takes two arguments and returns the first.
 
@@ -273,7 +273,7 @@ The Boolean value false is represented by:
 
 | λ-calculus  | JavaScript    |
 | ----------- | ------------- |
-| `λt. λf. f` | `(t, f) => f` |
+| `λt. λf. f` | `t => f => f` |
 
 This takes two arguments and returns the second.
 It is the same as the function that represents the number zero (below).
@@ -377,7 +377,7 @@ false
 
 ### If Expressions
 
-A function that models an if expression can be defined as follows where
+A function that models an "if expression" can be defined as follows where
 `c` is the condition to be tested,
 `x` is the result if `c` evaluates to true, and
 `y` is the result if `c` evaluates to false:
@@ -389,6 +389,19 @@ A function that models an if expression can be defined as follows where
 This works because
 the function that represents `true` returns its first argument and
 the function that represents `false` returns its second argument.
+
+In strictly-evaluated languages like JavaScript, this definition assumes
+it is acceptable to evaluate both the `x` and `y` expressions.
+This can be problematic wheni the evaluations are expensive
+or when recursion is involved.
+To solve this, the `if` function can be implemented as follows where
+`b` is a Boolean value,
+`t` is a function that can be called to get the true value, and
+`f` is a function that can be called to get the false value.
+
+```js
+const if_ = b => t => f => b(t)(f)(); // λbtf.(b t f)(_)
+```
 
 ## Arithmetic
 
@@ -744,7 +757,7 @@ and so on.
 The Z combinator is similar to the Y combinator,
 but it provides lazy evaluation,
 defering function applications until their results are needed.
-It is an eta-expansion of the Y combinator which can be define as:
+It is an eta-expansion of the Y combinator which can be defined as:
 
 ```text
 Z = λf.(λx.f(λv.x x v))(λx.f (λv.x x v))
