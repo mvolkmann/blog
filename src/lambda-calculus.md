@@ -685,16 +685,24 @@ and so on.
 The Z combinator is similar to the Y combinator,
 but it provides lazy evaluation,
 defering function applications until their results are needed.
-It can be defined as:
+It is an eta-expansion of the Y combinator which can be define as:
 
 ```text
-λf.M (λx.f (λv.M x v)) -- where M is the Mockingbird function
+Z = λf.(λx.f(λv.x x v))(λx.f (λv.x x v))
+```
+
+It can also be defined as the following
+where `M` is the Mockingbird function:
+
+```text
+λf.M (λx.f (λv.M x v))
 ```
 
 A JavaScript implementation can be defined as:
 
 ```js
-const Z = f => (x => f(v => x(x)(v)))(x => f(v => x(x)(v)));
+// Note that the two terms at the end are identical.
+const Z = f => (x => f(y => x(x)(y)))(x => f(y => x(x)(y)));
 ```
 
 This can be used in place of the `Y` function above
