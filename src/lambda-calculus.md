@@ -8,8 +8,15 @@ layout: topic-layout.njk
 
 <a href="https://en.wikipedia.org/wiki/Lambda_calculus"
 target="_blank">Lambda calculus</a> (sometimes written as λ-calculus)
-describes concepts that are fundamental to functional programming.
-It's purpose is to study how functions can interact with each other,
+describes concepts that are fundamental to functional programming
+such as first-class functions and currying.
+A first-class function can take other functions as arguments
+and can return a function.
+Currying represents a function with multiple parameters
+as a sequence of functions that each have a single parameter.
+
+The purpose of λ-calculus is to study
+how functions can interact with each other,
 not to calculate results in a useful way.
 
 The word "calculus" has four meanings, the last of which applies here.
@@ -283,6 +290,13 @@ A function to return the result of and'ing two Boolean values can be defined as:
 
 If the first argument is `false`, that is the result.
 Otherwise the second argument is the result.
+Replacing `false` with `x` results in an equivalent definition
+because the that is only returned when `x` evaluates to `false`.
+
+In a lazily evaluated programmming language like Haskell,
+the second argument is only evaluated if the first argument evaluates to true.
+In a strictly evaluated programming language like JavaScript,
+both arguments are always evaluated.
 
 ```text
 (λx.  λy. x y false) true true
@@ -316,6 +330,13 @@ A function to return the result of or'ing two Boolean values can be defined as:
 
 If the first argument is `true`, that is the result.
 Otherwise the second argument is the result.
+Replacing `true` with `x` results in an equivalent definition
+because the that is only returned when `x` evaluates to `true`.
+
+In a lazily evaluated programmming language like Haskell,
+the second argument is only evaluated if the first argument evaluates to false.
+In a strictly evaluated programming language like JavaScript,
+both arguments are always evaluated.
 
 ```text
 (λx. λy. x true y) true true
