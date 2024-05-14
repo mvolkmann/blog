@@ -414,6 +414,21 @@ on the right side of the period.
 The function that represents zero is the same
 as the function that represents false (above).
 
+These functions that represent numbers take another function and a value.
+They call the given function some number of times,
+initiallly passing it the value and
+subsequently passing it what the function returns.
+For example, the following JavaScript outputs
+the five numbers 3, 6, 12, 24, and 48.
+
+```js
+const demo = x => {
+  console.log(x);
+  return x + x;
+};
+five(demo)(3);
+```
+
 ### Successor
 
 The successor function (succ)
