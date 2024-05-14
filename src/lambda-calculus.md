@@ -681,6 +681,10 @@ const Y = f => (x => x(x))(x => f(y => x(x)(y))); // λf.(λx.x x) (λx.f (x x))
 ```
 
 Next, we need a function to compute a single result in a factorial sequence.
+This function is not recursive because
+λ-calculus doesn't support named functions.
+The function `f` is a parameter of this function
+and is used to simulate recursion.
 
 ```js
 const facgen = f => n =>
