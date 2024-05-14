@@ -629,12 +629,17 @@ This repeats forever, creating an infinite loop.
 
 ### Y Combinator
 
-The Y Combinator, invented by Haskell Curry, is a function that
+The Y combinator, invented by Haskell Curry, is a function that
 implements recursion and provides a way of implementing loops.
 It adds use of the function parameter `f` to the previous definition,
 which represents the computation to be performed in each iteration.
 It is defined as `λf.(λx.f (x x)) (λx.f (x x))`.
 Note that the body contains two identical terms.
+
+The Y combinator is intended to be used in
+lazily evaluated languages like Haskell.
+When used in a strictly evaluated language like JavaScript, it will
+loop endless until the heap space is exhausted and the program crashes.
 
 We can attempt to define a factorial function as:
 
@@ -645,18 +650,16 @@ fact = λn.if (iszero n) 1 (mult n (fact (pred n)))
 This assumes that functions have names that can be used to call themselves,
 but they do not.
 
-Instead we can use the Y Combinator to define a factorial function.
-Note how this differs slightly from the defintion above.
-TODO: Does the previous definition only work
-in lazily evaluated languages like Haskell?
+Instead we can use the Y combinator to define a factorial function.
+Note how this differs slightly from the defintion above
+in order to work in a strictly evaluated language.
+TODO: Does the modified version implement the Z combinator?
 
 ```js
 const Y = f => (x => x(x))(x => f(y => x(x)(y))); // λf.(λx.x x) (λx.f (x x))
-// This definition does not work in JavaScript!
-// const Y = f => (x => f(x(x)))(x => f(x(x)));
 ```
 
-Next, we need a function to compute the next result in a factorial sequence.
+Next, we need a function to compute a single result in a factorial sequence.
 
 ```js
 const facgen = f => n =>
@@ -664,7 +667,7 @@ const facgen = f => n =>
 ```
 
 Finally, we can define a function that combines
-the Y Combinator and the `facgen` function.
+the Y combinator and the `facgen` function.
 
 ```js
 const factorial = Y(facgen);
@@ -679,13 +682,20 @@ and so on.
 
 ### Z Combinator
 
-The Z Combinator is similar to the Y Combinator,
-but it defers calculations until they are needed.
-TODO: Would it be better to use this for factorial in JavaScript?
+The Z combinator is similar to the Y combinator,
+but it provides lazy evaluation,
+defering function applications until their results are needed.
 It can be defined as:
 
 ```text
 λf.M (λx.f (λv.M x v)) -- where M is the Mockingbird function
 ```
 
-TODO: Try to implement this in JavaScript.
+A JavaScript implementation can be defined as:
+
+```js
+const Z = f => (x => f(v => x(x)(v)))(x => f(v => x(x)(v)));
+```
+
+This can be used in place of the `Y` function above
+to define a factorial function.
