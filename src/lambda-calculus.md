@@ -734,9 +734,15 @@ The function `f` is a parameter of this function
 and is used to simulate recursion.
 
 ```js
-const facgen = f => n =>
-  if_(iszero(n))(() => one)(() => mul(n)(f(sub(n)(one))));
+const facgen = f => n => iszero(n)(() => one)(() => mul(n)(f(sub(n)(one))))();
 ```
+
+Breaking this down, `iszero(n)` selects one of the following functions:
+
+- If true then `(() => one)` is selected.
+- if false then `(() => mul(n)(f(sub(n)(one))))` is selected.
+
+The selected function is then invoked with `()`.
 
 Finally, we can define a function that combines
 the Y combinator and the `facgen` function.
@@ -745,7 +751,6 @@ the Y combinator and the `facgen` function.
 const factorial = Y(facgen);
 ```
 
-This works!
 `factorial(zero)` returns the function for `one`.  
 `factorial(one)` returns the function for `one`.  
 `factorial(two)` returns the function for `two`.  
