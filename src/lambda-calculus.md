@@ -239,6 +239,21 @@ results in a new function that expects the remaining parameters.
   because `+` is a a function that takes two arguments,
   but only one is supplied.
 
+## Testing
+
+When implementing λ-calculus functions in programming languages,
+it is useful to be able to convert λ-calculus representations
+to actual boolean values and numbers.
+
+In JavaScript this can be accomplished with the following functions
+where `b` is a λ-calculus function that represents true or false
+and `n` is a λ-calculus function that represents a natural number:
+
+```js
+const jsbool = b => b(true)(false);
+const jsnum = n => n(x => x + 1)(0);
+```
+
 ## Boolean Logic
 
 ### True and False
@@ -395,6 +410,9 @@ on the right side of the period.
 | 1      | `λfx.f x`         | `f => x => f(x)`       |
 | 2      | `λfx.f (f x)`     | `f => x => f(f(x))`    |
 | 3      | `λfx.f (f (f x))` | `f => x => f(f(f(x)))` |
+
+The function that represents zero is the same
+as the function that represents false (above).
 
 ### Successor
 
@@ -643,7 +661,8 @@ Functions in λ-calculus do not have names.
 This leaves no way for a function to refer to itself
 which makes implementing recursion difficult.
 
-Consider the expression `(λx.x x) (λx.x x)`.
+Consider the expression `(λx.x x) (λx.x x)`
+which is called the omega (Ω) combinator.
 Substituting the second term for `x` in the first term
 yields the exact same pair of expressions.
 This repeats forever, creating an infinite loop.
