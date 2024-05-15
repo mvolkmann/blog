@@ -835,6 +835,11 @@ expect(cdr(cdr(cdr(list)))).toBe(nil);
 
 ## Bird Combinators
 
+<a href="https://en.wikipedia.org/wiki/Raymond_Smullyan"
+target="_blank">Raymond Smullyan</a> (1919-2017)
+assigned bird names to many of the combinators used in λ-calculus
+in his book "To Mock a Mockingbird" which contains many logic puzzles.
+
 TODO: Add detail on these.
 
 - Idiot (I)
