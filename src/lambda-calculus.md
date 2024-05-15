@@ -640,22 +640,26 @@ See the representations for 2 and 3 in the table above.
 (λmn. n (mul m) 1) 2 3
 3 (mul 2) 1
 (λfx.f (f (f x))) (mul 2) 1
--- We can assume the mull function works.
+-- We can assume the mul function works.
 (mul 2) ((mul 2) ((mul 2) 1))
 (mul 2) ((mul 2) 2)
 (mul 2) 4
 8
 ```
 
-TODO: Does this defintion also work? `λmn. n m`
+An exponentiation function can be defined even more simply
+as reverse function composition.
+
+| λ-calculus | JavaScript       |
+| ---------- | ---------------- |
+| `λmn. n m` | `m => n => n(m)` |
 
 ```text
 (λmn. n m) 2 3
 3 2
 (λfx.f (f (f x))) 2
 λx.2 (2 (2 x))
-2 = λfx.f (f x), so (2 x) = (λfy.f (f y)) x = λy.x (x y)
-TODO: What can be done from here to arrive at 8?
+which is 2 times 2 times 2 which is 8.
 ```
 
 ## Equality
