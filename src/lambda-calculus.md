@@ -12,12 +12,22 @@ describes concepts that are fundamental to functional programming
 such as first-class functions and currying.
 A first-class function can take other functions as arguments
 and can return a function.
-Currying represents a function with multiple parameters
+Currying implements a function with multiple parameters
 as a sequence of functions that each have a single parameter.
 
 The purpose of λ-calculus is to study
 how functions can interact with each other,
 not to calculate results in a useful way.
+
+Learning λ-calculus can be compared to learning about slide rules.
+Calculators are an excellent replacement for slide rules,
+and it's not necessary to understand how to use a slide rule
+in order to use a calculator.
+But it's fascinating to learn how slide rules work (logarithms).
+Likewise, it's not necessary to understand λ-calculus
+in order to be productive in modern programming languages.
+But it's fascinating to learn how much can be accomplished
+within the constraints of λ-calculus.
 
 The word "calculus" has four meanings, the last of which applies here.
 
