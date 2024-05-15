@@ -703,11 +703,16 @@ Functions in λ-calculus do not have names.
 This leaves no way for a function to refer to itself
 which makes implementing recursion difficult.
 
-Consider the expression `(λx.x x) (λx.x x)`
-which is called the omega (Ω) combinator.
-Substituting the second term for `x` in the first term
-yields the exact same pair of expressions.
-This repeats forever, creating an infinite loop.
+### Omega Combinator
+
+A value `v` is a "fixed point" of a function `f` if `f(v)` is equal to `v`.
+
+The function `λx.x x` has a "fixed point" of `λx.x x`
+which happens to be the same as the definition of the function.
+The expression `(λx.x x) (λx.x x)` is called the omega (Ω) combinator.
+Substituting this fixed point value for each `x` in the function
+yields the exact same expression.
+Evaluating this repeats forever, creating an infinite loop.
 
 ### Y Combinator
 
