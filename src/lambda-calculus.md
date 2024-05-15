@@ -832,3 +832,17 @@ expect(car(cdr(list))).toBe(two);
 expect(car(cdr(cdr(list)))).toBe(three);
 expect(cdr(cdr(cdr(list)))).toBe(nil);
 ```
+
+## Bird Combinators
+
+TODO: Add detail on these.
+
+- Idiot (I)
+- Mockingbird (M)
+- Kestrel (K)
+- Kite (KI)
+- Cardinal (C)
+- Bluebird (B)
+- Thrush (Th)
+- Vireo (V)
+- Blackbird (B1)
