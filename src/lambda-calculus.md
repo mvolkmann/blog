@@ -204,10 +204,12 @@ results in a new function that expects the remaining parameters.
 
 ## Evaluation Rules
 
-- δ-rule (delta)
+- 𝛼-conversion (alpha)
 
-  This is used to evaluate functions that are assumed to be built-in.
-  For example, `(+ 1 2)` can be evaluated to `3`.
+  This changes the names of bound variables (which match function parameters),
+  resulting in equivalent functions.
+  For example, the function `λx.x` is equivalent to the function `λy.y`
+  and `(λfx.f (+ x 1))` is equivalent to `(λgy.g (+ y 1))`.
 
 - β-reduction (beta)
 
@@ -223,12 +225,10 @@ results in a new function that expects the remaining parameters.
   We can apply a β-reduction again to obtain `(* 4 2)`.
   One more use of the δ-rule, gives `8`.
 
-- 𝛼-conversion (alpha)
+- δ-rule (delta)
 
-  This changes the names of bound variables (which match function parameters),
-  resulting in equivalent functions.
-  For example, the function `λx.x` is equivalent to the function `λy.y`
-  and `(λfx.f (+ x 1))` is equivalent to `(λgy.g (+ y 1))`.
+  This is used to evaluate functions that are assumed to be built-in.
+  For example, `(+ 1 2)` can be evaluated to `3`.
 
 - η-conversion (eta)
 
