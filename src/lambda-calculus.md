@@ -803,3 +803,32 @@ const Z = f => (x => f(y => x(x)(y)))(x => f(y => x(x)(y)));
 
 This can be used in place of the `Y` function above
 to define a factorial function.
+
+## Linked Lists
+
+We can similate linked lists with "cons cells".
+The function `cons`, short of "construct",
+creates a cons cell which holds a pair of values.
+The function `car` takes a cons cell and returns its first element.
+The function `cdr` takes a cons cell and returns its last element.
+
+```js
+const cons = a => b => f => f(a)(b);
+const car = p => p(true_);
+const cdr = p => p(false_);
+const nil = f => x => null; // used to mark the end of a linked list
+```
+
+The following code demonstrates using these functions:
+
+```js
+const pair = cons(one)(two);
+expect(car(pair)).toBe(one);
+expect(cdr(pair)).toBe(two);
+
+const list = cons(one)(cons(two)(cons(three)(nil)));
+expect(car(list)).toBe(one);
+expect(car(cdr(list))).toBe(two);
+expect(car(cdr(cdr(list)))).toBe(three);
+expect(cdr(cdr(cdr(list)))).toBe(nil);
+```
