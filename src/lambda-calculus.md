@@ -458,9 +458,9 @@ The successor function (succ)
 returns the number that follows a given number.
 It can be defined as:
 
-| λ-calculus               | JavaScript              |
-| ------------------------ | ----------------------- |
-| `λn (λf. λx. f (n f x))` | `x => y => x(true_)(y)` |
+| λ-calculus               | JavaScript                  |
+| ------------------------ | --------------------------- |
+| `λn (λf. λx. f (n f x))` | `n => f => x => f(n(f)(x))` |
 
 For example, the successor of 1 is 2.
 
