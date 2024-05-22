@@ -26,6 +26,8 @@ It was released in 2024.
 
 Gleam programs can use libraries implemented in Gleam, Elixir, and Erlang.
 
+The Gleam logo is a pink starfish named Lucy that glows underwater.
+
 ## Installing
 
 To install in macOS, enter `brew update`, `brew install erlang`,
