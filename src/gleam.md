@@ -21,7 +21,8 @@ Like OCaml, Gleam has strong type inference,
 making it unnecessary to specify types.
 
 Gleam includes a compiler (implemented in Rust), build tool, package manager,
-code formatter, language server, JavaScript bindings, and a WASM API.
+code formatter, language server, standard library, JavaScript bindings,
+and a WASM API.
 It was released in 2024.
 
 Gleam programs can use libraries implemented in Gleam, Elixir, and Erlang.
@@ -113,7 +114,18 @@ To import a subpackage:
 import {name}/{sub-name}
 ```
 
-For example, `import gleam/io`.
+The line `import gleam/io` makes the module name `io` available
+as a prefix that can be used to access all the functions it defines.
+For example, `io.println("Hello, World!")`.
+
+A module can be given an alternate name with the `as` keyword.
+This can be used to prevent name conflicts.
+For example, `import gleam/string as text`.
+
+Module functions can be imported to enable
+using them without a module name qualifier.
+For example, `import gleam/io.{debug, println}`.
+followed by `println("Hello, World!")`.
 
 ## Web Development
 
