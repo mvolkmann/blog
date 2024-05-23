@@ -57,10 +57,23 @@ Gleam source files have the `.gleam` file extension.
 
 To run the project, enter `gleam run`.
 
-This runs the `main` function in the `.gleam` file within the `src` directory
-identified by the `name` property in the `gleam.toml` file.
+This compiles the project into Erlang files (`.erl` extension) that can
+be found in the `build/dev/erlang/{name}/_gleam_artefacts` directory.
+It then runs the `main` function in the `.gleam` file
+within the `src` directory identified by
+the `name` property in the `gleam.toml` file.
 It will output a log of all the steps it takes,
 and finally "Hello from {name}!".
+
+To compile to JavaScript instead of Erlang,
+add the `--target` (or `-t`) option
+with the value `javascript` (default is `erlang`).
+For example, `gleam run -t javascript`.
+This compiles the project into JavaScript files
+(`.mjs` extension for JavaScript modules) that can
+be found in the `build/dev/javascript/{name}` directory.
+It will output a log of all the steps it takes,
+and finally produce the same output as when using Erlang.
 
 Each source file defines a module.
 To run a different module, specify it with the `--module` or `-m` option.
