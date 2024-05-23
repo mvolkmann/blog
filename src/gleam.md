@@ -41,6 +41,11 @@ target="_blank">Installing Gleam</a>.
 To edit Gleam code using VS Code,
 consider installing the extension Gleam by Gleam.
 
+Code formatting will not be performed on save by default.
+To configure it, open the Command Palette,
+select Format Document, and choose "Gleam".
+After doing this one time, code will be formatted on save.
+
 ## Projects
 
 To create a new Gleam project, enter `gleam new {name}`.
@@ -55,6 +60,10 @@ This creates the following files:
 - `test/{name}_test.gleam`
 
 Gleam source files have the `.gleam` file extension.
+
+To format all the `.gleam` files in the project from the command-line
+rather than in an editor like VS Code, enter `gleam format`.
+The code formatter automatically sorts `import` statements.
 
 To run the project, enter `gleam run`.
 
@@ -110,7 +119,7 @@ import {name}
 Some packages have subpackages.
 To import a subpackage:
 
-```gleam
+```ocaml
 import {name}/{sub-name}
 ```
 
@@ -126,6 +135,16 @@ Module functions can be imported to enable
 using them without a module name qualifier.
 For example, `import gleam/io.{debug, println}`.
 followed by `println("Hello, World!")`.
+
+The `as` keyword can also be used to assign alternate names
+to imported functions. For example:
+
+```ocaml
+import gleam/int.{square_root as sqrt}
+```
+
+The Gleam community discourages the use of function calls
+that are not qualified by their module name.
 
 ## Type Inference
 
@@ -154,6 +173,50 @@ fn subtract(a: Int, b: Int) -> Int {
 
 Just like OCaml, Gleam supports different operators
 for integer and floating point values.
+
+## Error Handling
+
+Many Gleam functions return a Result type
+which holds either an `Ok` or an `Error` value.
+There are several ways to handle this that are demonstrated below.
+Note that the `square_root` function produces
+an error when passed a negative number.
+
+```ocaml
+import gleam/float
+import gleam/int
+import gleam/io.{debug, println}
+import gleam/result
+
+pub fn main() {
+  // All case branches must have the same result type.
+  // Here all case braches have a Float result.
+  case int.square_root(25) {
+    Ok(result) -> result
+    Error(_) -> 0.0
+  }
+  |> debug
+
+  // Here all case braches have a String result.
+  case int.square_root(25) {
+    Ok(r) -> float.to_string(r)
+    Error(_) -> "No real root"
+  }
+  |> debug
+
+  // assert causes a crash the function after = results in an Error.
+  let assert Ok(result) = int.square_root(25)
+  debug(result)
+
+  // result.unwrap takes a value of type Result and
+  // returns its OK value or the supplied value on Error.
+  -25
+  |> int.square_root
+  |> result.unwrap(0.0)
+  // returns supplied value on Error
+  |> debug
+}
+```
 
 ## Web Development
 
