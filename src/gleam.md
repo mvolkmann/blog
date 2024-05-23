@@ -127,6 +127,20 @@ using them without a module name qualifier.
 For example, `import gleam/io.{debug, println}`.
 followed by `println("Hello, World!")`.
 
+## Type Inference
+
+Gleam infers the types of all variables, function parameters,
+and function return types.
+Types can be specified for documentation purposes,
+but they must match the inferred types.
+
+The Gleam language server, used by VS Code Gleam extension,
+enables hovering over a variable, function defintion, or function call
+to display their inferred types in a popup.
+
+Just like OCaml, Gleam supports different operators
+for integer and floating point values.
+
 ## Web Development
 
 Gleam web development is supported by many libraries including
