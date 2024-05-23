@@ -35,6 +35,11 @@ and `brew install gleam`.
 For other platforms, see <a href="https://gleam.run/getting-started/installing/"
 target="_blank">Installing Gleam</a>.
 
+## VS Code
+
+To edit Gleam code using VS Code,
+consider installing the extension Gleam by Gleam.
+
 ## Projects
 
 To create a new Gleam project, enter `gleam new {name}`.
@@ -84,7 +89,7 @@ in the `gleam.toml` file will be re-installed.
 
 To import a package in a Gleam source file:
 
-```gleam
+```ocaml
 import {name}
 ```
 
