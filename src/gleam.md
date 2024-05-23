@@ -16,8 +16,12 @@ layout: topic-layout.njk
 It runs on Beam, the Erlang virtual machine.
 Gleam programs can be compiled to Erlang or JavaScript.
 
+Gleam was created by <a href="https://lpil.uk" target="_blank">Louis Pilford</a>
+who currently resides in London.
+
 Gleam has a syntax that is inspired by Elm, OCaml, and Rust.
 Like OCaml, Gleam has strong type inference,
+using the Hindley Milner type system,
 making it unnecessary to specify types.
 
 Gleam includes a compiler (implemented in Rust), build tool, package manager,
@@ -28,6 +32,12 @@ It was released in 2024.
 Gleam programs can use libraries implemented in Gleam, Elixir, and Erlang.
 
 The Gleam logo is a pink starfish named Lucy that glows underwater.
+
+## Resources
+
+- <a href="https://www.youtube.com/watch?v=yUPMVgvl4vo"
+  target="_blank">A Brief Introduction to Gleam</a>
+- <a href="https://exercism.org/tracks/gleam" target="_blank">Exercism's Gleam Track</a>
 
 ## Installing
 
@@ -224,6 +234,25 @@ Unlike OCaml, Gleam does not provide automatic function currying.
 Calling a function with fewer arguments than it has parameters
 results in an error rather than returning a new function
 that expects the remaining arguments.
+
+A "function capture" creates a new single argument function
+from an existing one by calling it with a single "hole".
+Using an underscore for one of the arguments specifies the hole.
+For example:
+
+```ocaml
+import gleam/function
+import gleam/io
+
+fn add(a, b) {
+  a + b
+}
+
+pub fn main() {
+  let plus5 = add(5, _)
+  debug(plus5(2)) // 7
+}
+```
 
 The `gleam/function` module defines the functions `curry2` through `curry6`
 where the number indicates the number of parameters in a function passed to it.
