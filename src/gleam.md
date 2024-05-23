@@ -138,6 +138,20 @@ The Gleam language server, used by VS Code Gleam extension,
 enables hovering over a variable, function defintion, or function call
 to display their inferred types in a popup.
 
+For example:
+
+```ocaml
+// No types specified.
+fn add(a, b) {
+  a + b
+}
+
+// Types specified.
+fn subtract(a: Int, b: Int) -> Int {
+  a - b
+}
+```
+
 Just like OCaml, Gleam supports different operators
 for integer and floating point values.
 
