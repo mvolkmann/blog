@@ -218,6 +218,43 @@ pub fn main() {
 }
 ```
 
+## Currying
+
+Unlike OCaml, Gleam does not provide automatic function currying.
+Calling a function with fewer arguments than it has parameters
+results in an error rather than returning a new function
+that expects the remaining arguments.
+
+The `gleam/function` module defines the functions `curry2` through `curry6`
+where the number indicates the number of parameters in a function passed to it.
+A new function is returned that is curried, meaning it takes a single argument
+and returns another function that takes a single argument,
+repeatedly until all arguments are supported.
+For example:
+
+```ocaml
+import gleam/function
+import gleam/io
+
+fn add2(a, b) {
+  a + b
+}
+
+fn add3(a, b, c) {
+  a + b + c
+}
+
+pub fn main() {
+  // The type of plus10 is fn(Int) -> Int.
+  let plus10 = function.curry2(add2)(10)
+  debug(plus10(9)) // 19
+
+  // The type of curried_add3 is fn(Int) -> fn(Int) -> fn(Int) -> Int.
+  let curried_add3 = function.curry3(add3)
+  debug(curried_add3(1)(2)(3)) // 6
+}
+```
+
 ## Web Development
 
 Gleam web development is supported by many libraries including
