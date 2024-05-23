@@ -13,7 +13,9 @@ layout: topic-layout.njk
 
 {% aTargetBlank "https://gleam.run", "Gleam" %} is
 "a friendly language for building type-safe systems that scale!"
-It runs on Beam, the Erlang virtual machine.
+It runs on BEAM (Björn’s Erlang Abstract Machine)
+which is the Erlang virtual machine that is also used by
+<a href="https://elixir-lang.org" target="_blank">Elixir</a>.
 Gleam programs can be compiled to Erlang or JavaScript.
 
 Gleam was created by <a href="https://lpil.uk" target="_blank">Louis Pilford</a>
@@ -35,6 +37,8 @@ The Gleam logo is a pink starfish named Lucy that glows underwater.
 
 ## Resources
 
+- <a href="https://gleam.run/frequently-asked-questions/"
+  target="_blank">Gleam FAQs</a>
 - <a href="https://www.youtube.com/watch?v=yUPMVgvl4vo"
   target="_blank">A Brief Introduction to Gleam</a>
 - <a href="https://exercism.org/tracks/gleam" target="_blank">Exercism's Gleam Track</a>
@@ -283,6 +287,12 @@ pub fn main() {
   debug(curried_add3(1)(2)(3)) // 6
 }
 ```
+
+## Packages
+
+<a href="https://packages.gleam.run" target="_blank">Gleam Packages</a>
+is the official Gleam package repository.
+For example, the "mist" web server package can be found here.
 
 ## Web Development
 
