@@ -35,6 +35,68 @@ and `brew install gleam`.
 For other platforms, see <a href="https://gleam.run/getting-started/installing/"
 target="_blank">Installing Gleam</a>.
 
+## Projects
+
+To create a new Gleam project, enter `gleam new {name}`.
+
+This creates the following files:
+
+- `.github/workflows/test.yml`
+- `.gitignore`
+- `README.md`
+- `gleam.toml`
+- `src/{name}.gleam`
+- `test/{name}_test.gleam`
+
+Gleam source files have the `.gleam` file extension.
+
+To run the project, enter `gleam run`.
+
+This runs the `main` function in the `.gleam` file within the `src` directory
+identified by the `name` property in the `gleam.toml` file.
+It will output a log of all the steps it takes,
+and finally "Hello from {name}!".
+
+Each source file defines a module.
+To run a different module, specify it with the `--module` or `-m` option.
+For example, `gleam run -m other` runs
+the `main` function in the file `src/other.gleam`.
+
+To run all the tests, enter `gleam test`.
+
+This will output a log of all the steps it takes,
+and finally "1 tests, 0 failures".
+
+## Dependencies
+
+To add a dependency, enter `gleam add {name1} {name2} ...`
+
+This updates the `gleam.toml` file and
+installs the packages in the `build/packages` directory.
+
+The `build` directory can be deleted.
+It will be recreated automatically when
+`gleam run` or `gleam test` are executed.
+All packages listed as "dependencies" or "dev-dependencies"
+in the `gleam.toml` file will be re-installed.
+
+## Importing Packages
+
+To import a package in a Gleam source file:
+
+```gleam
+import {name}
+```
+
+Some packages have subpackages.
+To import a subpackage:
+
+```gleam
+import {name}/{sub-name}
+```
+
+For example, `import gleam/io`.
+
 ## Web Development
 
 Gleam web development is supported by many libraries including
