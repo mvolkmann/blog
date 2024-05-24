@@ -269,6 +269,13 @@ The `type` keyword is used to define a custom type.
 Variables are declared with the `let` keyword.
 All variables and function parameters are immutable.
 
+## Math
+
+Gleam is currently missing lots of math constants and functions
+found of most other programming languages.
+See this <a href="https://github.com/gleam-lang/gleam/issues/3188"
+target="_blank">issue</a>.
+
 ## Control Flow
 
 The only control flow mechanism in Gleam is the `case` expression.
