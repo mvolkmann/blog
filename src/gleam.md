@@ -21,7 +21,7 @@ Gleam programs can be compiled to Erlang or JavaScript.
 Gleam was created by <a href="https://lpil.uk" target="_blank">Louis Pilford</a>
 who currently resides in London.
 
-Gleam has a syntax that is inspired by Elm, OCaml, and Rust.
+Gleam has a syntax that is inspired by Elm, Go, Lua, OCaml, and Rust.
 Like OCaml, Gleam has strong type inference,
 using the Hindley Milner type system,
 making it unnecessary to specify types.
@@ -39,6 +39,7 @@ The Gleam logo is a pink starfish named Lucy that glows underwater.
 
 - <a href="https://gleam.run/frequently-asked-questions/"
   target="_blank">Gleam FAQs</a>
+- <a href="https://tour.gleam.run" target="_blank">Gleam Language Tour</a>
 - <a href="https://www.youtube.com/watch?v=yUPMVgvl4vo"
   target="_blank">A Brief Introduction to Gleam</a>
 - <a href="https://exercism.org/tracks/gleam" target="_blank">Exercism's Gleam Track</a>
@@ -63,10 +64,15 @@ After doing this one time, code will be formatted on save.
 ## Projects
 
 To create a new Gleam project, enter `gleam new {name}`.
+Project names can only contain lowercase letters, digits, and underscores.
+Names beginning with "gleam\_" are reserved.
 
 This creates the following files:
 
 - `.github/workflows/test.yml`
+
+  This runs all the tests in a GitHub Action every time changes are pushed.
+
 - `.gitignore`
 - `README.md`
 - `gleam.toml`
@@ -99,15 +105,66 @@ be found in the `build/dev/javascript/{name}` directory.
 It will output a log of all the steps it takes,
 and finally produce the same output as when using Erlang.
 
-Each source file defines a module.
-To run a different module, specify it with the `--module` or `-m` option.
-For example, `gleam run -m other` runs
-the `main` function in the file `src/other.gleam`.
-
 To run all the tests, enter `gleam test`.
 
 This will output a log of all the steps it takes,
 and finally "1 tests, 0 failures".
+
+To delete all the generated files, enter `gleam clean`.
+This deletes the `build` directory.
+
+## Watch Mode
+
+It's desirable to have something watch the files in project for changes
+and automatically run the main module again or run all the tests again
+when a change is detected.
+Gleam does not currently support this, but an
+<a href="https://github.com/gleam-lang/gleam/issues/2570"
+target="_blank">issue</a> has been created for it.
+
+## Modules
+
+Each `.gleam` source file defines a module
+that contains definitions for items like functions, types, and so on.
+
+To use the items in a module, import it with the `import` keyword.
+
+To run the `main` function in a module other than the main module of a project,
+specify it with the `--module` or `-m` option.
+For example, `gleam run -m other` runs
+the `main` function in the file `src/other.gleam`.
+
+The Gleam standard library provides the following modules:
+
+- `gleam/bit_array`
+- `gleam/bool`
+- `gleam/bytes_builder`
+- `gleam/dict`
+- `gleam/dynamic`
+- `gleam/float`
+- `gleam/function`
+- `gleam/int`
+- `gleam/io`
+- `gleam/iterator`
+- `gleam/list`
+- `gleam/option`
+- `gleam/order`
+- `gleam/pair`
+- `gleam/queue`
+- `gleam/regex`
+
+  - `check` - returns a `Bool` indicating if a `String` matches a `Regex`
+  - `compile` - creates a `Regex` from a `String` and a set of `Options`
+  - `from_string` - creates a `Regex` from a `String` and no `Options`
+  - `scan` - returns a `List` of all the `Regex` matches found in a `String`
+  - `split` - returns a `List` of substrings created by splitting a `String`
+    on delimiters that match a `Regex`
+
+- `gleam/result`
+- `gleam/set`
+- `gleam/string`
+- `gleam/string_builder`
+- `gleam/uri`
 
 ## Dependencies
 
@@ -160,6 +217,21 @@ import gleam/int.{square_root as sqrt}
 The Gleam community discourages the use of function calls
 that are not qualified by their module name.
 
+## Naming Rules
+
+The names of functions and variables must start with a lowercase letter
+and can only contain lowercase letters, digits, and underscores.
+
+The names of types and type constructors must start with an uppercase letter
+and can only contain letters and digits.
+
+## Functions
+
+Functions are defined with the `fn` keyword.
+They can be named or anonymous.
+
+TODO: Add more detail on functions.
+
 ## Type Inference
 
 Gleam infers the types of all variables, function parameters,
@@ -187,6 +259,45 @@ fn subtract(a: Int, b: Int) -> Int {
 
 Just like OCaml, Gleam supports different operators
 for integer and floating point values.
+
+## Custom Types
+
+The `type` keyword is used to define a custom type.
+
+## Variables
+
+Variables are declared with the `let` keyword.
+All variables and function parameters are immutable.
+
+## Control Flow
+
+The only control flow mechanism in Gleam is the `case` expression.
+For simple cases this can be a bit verbose because the code formatter
+will cause every `case` expression to be at least four lines.
+
+For example, the following JavaScript:
+
+```js
+if (a < b) console.log('yes');
+
+let color = score > 5 ? 'green' : 'red';
+```
+
+could be written as follows in Gleam:
+
+```ocaml
+case a < b {
+  True -> io.println("yes")
+  False -> Nil
+}
+
+let color = case score {
+  score if score > 5 -> "green"
+  _ -> "red"
+}
+```
+
+TODO: Add more examples of case expressions including pattern matching and guards.
 
 ## Error Handling
 
