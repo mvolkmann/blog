@@ -415,4 +415,10 @@ For example, the "mist" web server package can be found here.
 ## Web Development
 
 Gleam web development is supported by many libraries including
-gleam_http, lustre, mist, ...
+gleam_http, lustre, mist, wisp, ...
+
+## Foreign Function Interface (FFI)
+
+See
+<a href="https://www.jonashietala.se/blog/2024/01/11/exploring_the_gleam_ffi/"
+target="_blank">Exploring the Gleam FFI</a>.

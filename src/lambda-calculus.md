@@ -94,9 +94,9 @@ target="_blank">Alan Turing</a> (1912-1954).
 
 - lambda abstraction: defines an anonymous function that has exactly one parameter
 
-  | λ-calculus            | JavaScript          |
-  | --------------------- | ------------------- |
-  | `λ<parameter>.<body>` | `parameter => body` |
+  | λ-calculus            | JavaScript              |
+  | --------------------- | ----------------------- |
+  | `λ<parameter>.<body>` | `<parameter> => <body>` |
 
   `<parameter>` is a single variable that is
   also referred to as a meta-variable.
@@ -112,10 +112,10 @@ target="_blank">Alan Turing</a> (1912-1954).
 
 - application: calls a function with arguments
 
-  | λ-calculus                         | JavaScript                       |
-  | ---------------------------------- | -------------------------------- |
-  | `(λ<parameter>.<body>) <argument>` | `(parameter => body)(argument)`  |
-  | `(λxyz.<body>) a b c`              | `(x => y => z => body)(a)(b)(c)` |
+  | λ-calculus                          | JavaScript                             |
+  | ----------------------------------- | -------------------------------------- |
+  | `(λ<parameter>.<body>) <arguments>` | `(<parameter> => <body>)(<arguments>)` |
+  | `(λxyz.<body>) a b c`               | `(x => y => z => <body>)(a)(b)(c)`     |
 
   `<arguments>` is a whitespace-separated list of expressions.
   Function application is left associative.
@@ -219,13 +219,13 @@ results in a new function that expects the remaining parameters.
   This changes the names of bound variables (which match function parameters),
   resulting in equivalent functions.
   For example, the function `λx.x` is equivalent to the function `λy.y`
-  and `(λfx.f (+ x 1))` is equivalent to `(λgy.g (+ y 1))`.
+  and `λfx.f (+ x 1)` is equivalent to `λgy.g (+ y 1)`.
 
 - β-reduction (beta)
 
   This is used to apply arguments to a function.
   The result of a function application is determined by substituting
-  the argument value for all occurrences of the function parmameter.
+  the argument values for all occurrences of the function parameter.
   For example, `(λx.x + 3) 2` evaluates to `2 + 3` which evaluates to `5`.
   Consider the function `(λfx.f (+ x 1))` which takes two arguments,
   a function and a number.
