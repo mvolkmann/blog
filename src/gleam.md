@@ -217,6 +217,20 @@ import gleam/int.{square_root as sqrt}
 The Gleam community discourages the use of function calls
 that are not qualified by their module name.
 
+## Comments
+
+Gleam supports three kinds line comments.
+
+- `//` is for regular comments
+- `///` is for documenting types and functions
+- `////` is for documenting modules at the top of their source files
+
+End of line comments are not supported.
+When these comments are placed at the end of a source line,
+the code formatter will move them to the next line.
+
+There is no multiline comment syntax.
+
 ## Naming Rules
 
 The names of functions and variables must start with a lowercase letter
