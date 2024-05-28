@@ -46,8 +46,13 @@ The Gleam logo is a pink starfish named Lucy that glows underwater.
 
 ## Installing
 
-To install in macOS, enter `brew update`, `brew install erlang`,
-and `brew install gleam`.
+To install in macOS, enter `brew update` and `brew install gleam`.
+Installing `gleam` also installs `erlang`.
+
+To see the currently installed version, enter `gleam --version`.
+
+To upgrade to the latest version in macOS, enter `brew upgrade gleam`.
+
 For other platforms, see <a href="https://gleam.run/getting-started/installing/"
 target="_blank">Installing Gleam</a>.
 
@@ -62,6 +67,8 @@ select Format Document, and choose "Gleam".
 After doing this one time, code will be formatted on save.
 
 ## Projects
+
+Gleam tooling for working with projects is inspired by the Rust `cargo` tool.
 
 To create a new Gleam project, enter `gleam new {name}`.
 Project names can only contain lowercase letters, digits, and underscores.
@@ -85,7 +92,9 @@ To format all the `.gleam` files in the project from the command-line
 rather than in an editor like VS Code, enter `gleam format`.
 The code formatter automatically sorts `import` statements.
 
-To run the project, enter `gleam run`.
+To build the project, enter `gleam build`.
+
+To build and run the project, enter `gleam run`.
 
 This compiles the project into Erlang files (`.erl` extension) that can
 be found in the `build/dev/erlang/{name}/_gleam_artefacts` directory.
