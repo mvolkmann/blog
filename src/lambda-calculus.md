@@ -753,13 +753,13 @@ The function `f` is a parameter of this function
 and is used to simulate recursion.
 
 ```js
-const facgen = f => n => iszero(n)(() => one)(() => mul(n)(f(sub(n)(one))))();
+const facgen = f => n => iszero(n)(() => one)(() => mul(n)(f(pred(n))))();
 ```
 
 Breaking this down, `iszero(n)` selects one of the following functions:
 
 - If true then `(() => one)` is selected.
-- if false then `(() => mul(n)(f(sub(n)(one))))` is selected.
+- if false then `(() => mul(n)(f(pred(n))))` is selected.
 
 The selected function is then invoked with `()`.
 
