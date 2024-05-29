@@ -451,6 +451,41 @@ The following example adds a caption to an image:
 </html>
 ```
 
+### meter element
+
+The `meter` element represents a measurement within a known range
+using a filled bar.
+It supports the following attributes:
+
+- `min`: defaults to 0
+- `max`: defaults to 1
+- `low`: defaults to `min`
+- `high`: defaults to `max`
+- `optimum`: number between `min` and `max`
+- `value`: number between `min` and `max`
+
+By default, the bar will be orange if the value is
+less than `low` or greater than `high`.
+Otherwise it will be green.
+The `optimum` value seems to have no effect.
+
+For example:
+
+```html
+<label for="temperature">Temperature:</label>
+<meter
+  id="temperature"
+  min="0"
+  max="100"
+  low="20"
+  high="70"
+  optimum="60"
+  value="55"
+>
+  55
+</meter>
+```
+
 ### Lazy Loading
 
 To avoid loading `img` and `iframe` elements that are not scrolled into view,
