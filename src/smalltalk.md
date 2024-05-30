@@ -118,3 +118,14 @@ Run the appropriate start script based on your operating system.
 
      <img alt="Cuis Smalltalk log" class="logo" style="width: 400px"
        src="/blog/assets/cuis-smalltalk-startup.png?v={{pkg.version}}">
+
+## Getting Started
+
+1. Click on the desktop and select Open...Workspace.
+1. Enter `Transcript show: 'Hello World!'`
+1. If no Transcript window is open, one one by
+   clicking on the desktop and selecting Open...Transcript.
+1. Right-click inside the Workspace window and select "Do it" or press cmd-d.
+1. The output will appear in the Transcript window.
+1. To clear the output in the Transcript,
+   right-click in it and select "Clear Transcript".
