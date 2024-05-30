@@ -127,6 +127,14 @@ To change the font size used in all the windows:
 - Select a point size such as 12.
 - Close the dialog by clicking its red circle containing an "x".
 
+To select an item, click it.
+
+To open an context-sensitive menu (a.k.a. World Menu) for an item,
+right-click it.
+After an item is selected from this menu, it will close.
+To keep it open so multiple selections can be made,
+click its push pin in the upper-right corner.
+
 To print "Hello World!":
 
 1. Click on the desktop and select Open...Workspace.
@@ -146,3 +154,65 @@ and display the result after it in the workspace:
 - Press ctrl-p to print it.
 - Remove the output from the Workspace window
   by pressing ctrl-z to undo adding it.
+
+## Morphs
+
+Morphs are graphical items that can be added to the desktop.
+To create one:
+
+- Click the desktop.
+- Select "New morph...".
+- In the dialog that appears,
+  select a category of morphs and then a specific kind.
+
+Examples include:
+
+-
+
+## Halo
+
+To open the halo (set of surrounding buttons) for an item,
+ctrl-shift-click it (or ctrl-right-click it).
+
+The following buttons are provided:
+
+| Button                               | Location    | Purpose                                         |
+| ------------------------------------ | ----------- | ----------------------------------------------- |
+| red circle with white "x"            | upper-left  | removes the item                                |
+| blue circle with white document      | top         | opens menu "A" (1)                              |
+| black circle with house              | top         | drag to move the item within its parent         |
+| brown circle with resize icon        | top         | drag to move the item out of its parent         |
+| green circle with copy icon          | upper-right | duplicates the item on top of itself            |
+| orange circle with wrench            | right side  | opens a menu of debugging options               |
+| blue circle with magnifier glass     | right side  | drag to change scale of item                    |
+| yellow circle with resize icon       | lower-right | drag to resize the item                         |
+| light blue circle with question mark | bottom      | click and hold to display a related tooltip (2) |
+| blue circle with rotate icon         | lower-left  | drag to rotate item                             |
+| dull yellow circle with odd shape    | left side   | click to collapse (hide) the item (3)           |
+| orange circle with wrench            | left side   | opens an "Explore" window (4)                   |
+
+(1) This menu contains the following:
+
+- send to back
+- bring to front
+- embed into >
+- change color...
+- halo actions...
+- checkbox for "resist being picked up"
+- checkbox for "be locked"
+- copy to clipboard
+- export...
+- debug...
+
+(2) It seems most of the help tooltips default to "Help not yet supplied".
+To edit the help text, click the orange circle on the right,
+select "edit balloon help", and modify the help text.
+
+(3) To restore a collapsed item, click it's thumbnail in the bottom bar.
+
+(4) "Explore" windows enable viewing data associated with an item
+such as its location, size (extent), and color.
+
+For more detail, see
+<a href="https://cuis-smalltalk.github.io/TheCuisBook/A-brief-introduction-to-Inspectors.html"
+target="_blank">A brief introduction to Inspectors</a>.
