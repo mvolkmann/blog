@@ -121,11 +121,28 @@ Run the appropriate start script based on your operating system.
 
 ## Getting Started
 
+To change the font size used in all the windows:
+
+- Click on the desktop and select Preferences...Size of GUI elements....
+- Select a point size such as 12.
+- Close the dialog by clicking its red circle containing an "x".
+
+To print "Hello World!":
+
 1. Click on the desktop and select Open...Workspace.
-1. Enter `Transcript show: 'Hello World!'`
-1. If no Transcript window is open, one one by
+1. Enter `Transcript show: 'Hello World!'` in the Workspace window.
+1. If no Transcript window is open, open one by
    clicking on the desktop and selecting Open...Transcript.
 1. Right-click inside the Workspace window and select "Do it" or press cmd-d.
 1. The output will appear in the Transcript window.
 1. To clear the output in the Transcript,
    right-click in it and select "Clear Transcript".
+
+To evaluate an expression in a Workspace
+and display the result after it in the workspace:
+
+- Enter an expression in the Workspace window like `3 factorial`.
+- Select it by pressing ctrl-a or dragging over it with the mouse.
+- Press ctrl-p to print it.
+- Remove the output from the Workspace window
+  by pressing ctrl-z to undo adding it.
