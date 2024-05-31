@@ -23,7 +23,7 @@ When using VS Code for Java development:
 - Install the extension "Extension Pack For Java" from Microsoft.
 - If using Spring Boot, install the "Spring Boot Extension Pack" from VMware.
 
-## Steps
+## Creating a Project
 
 1. Install the latest version of the Java Development Kit (JDK).
    When using <a href="https://sdkman.io" target="_blank">SDKMAN</a>,
@@ -43,7 +43,10 @@ When using VS Code for Java development:
    creates the file `demo.zip` in the `Downloads' directory.
 1. Unzip that file and move the resulting directory to the desired location.
 1. Open a terminal and cd to the directory of the new project.
-1. Enter `./gradlew build`
+1. Verify that the project builds by entering `./gradlew build`
+
+## Implementing CRUD Endpoits
+
 1. Open the project in your editor of choice.
 1. Create the file `src/main/java/com/example/demo/DogController.java`
    containing the following which
@@ -104,6 +107,8 @@ When using VS Code for Java development:
    }
    ```
 
+## Running the Server
+
 1. Specify the port (defaults to 8080) to be used in
    `src/main/resources/application.properties` by adding the following line:
 
@@ -113,4 +118,7 @@ When using VS Code for Java development:
 
 1. Ensure that port to be used is not already in use.
 1. Enter `./gradlew bootRun`
-1. Browse `localhost:8080/api/test` and verify that "test" is displayed.
+1. Browse `localhost:8080/api/dog` and verify that
+   a JSON array of dog descriptions is output.
+
+## Implementing Unit Tests
