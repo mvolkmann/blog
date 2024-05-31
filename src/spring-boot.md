@@ -121,4 +121,17 @@ When using VS Code for Java development:
 1. Browse `localhost:8080/api/dog` and verify that
    a JSON array of dog descriptions is output.
 
+## Automatic Server Restart
+
+The server can be configured to automatically restart
+when any source files are modified.
+To configure this, add the following line
+in `src/main/resources/application.properties`:
+
+```text
+spring.devtools.restart.additional-paths=src/main/**
+```
+
+TODO: Why doesn't this work?
+
 ## Implementing Unit Tests
