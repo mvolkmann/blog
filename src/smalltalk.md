@@ -169,14 +169,14 @@ Run the appropriate start script based on your operating system.
 | Item                                        | Example                                          |
 | ------------------------------------------- | ------------------------------------------------ |
 | comment                                     | `"some text"`                                    |
-| local variable                              | `myLocal` (camelCase)                            |
-| global variable                             | `MyGlobal` (CamelCase)                           |
-| pseudo variable                             | `self`                                           |
+| local variable (private scope)              | `myLocal` (camelCase)                            |
+| global variable (shared scope)              | `MyGlobal` (CamelCase)                           |
+| pseudo variable (cannot assign)             | `self`                                           |
 | integer                                     | `123`                                            |
 | float                                       | `3.14`                                           |
 | exponential notation                        | `1.23e4`                                         |
 | character                                   | `$a`                                             |
-| string                                      | `'text'`                                         |
+| string                                      | `'text'` (double ' to include)                   |
 | symbol                                      | `#name'`                                         |
 | literal array                               | `#(1 4 8)'`                                      |
 | dynamic array (computes elements)           | `{1. 2 * 2. 2 raisedTo: 3}`                      |
@@ -191,87 +191,7 @@ Run the appropriate start script based on your operating system.
 | message chaining                            | `2 * 3 :: squared :: negated` (-36)              |
 | method return value                         | `^ <expression>`                                 |
 | expression separator (period)               | `Transcript show: 'foo'. Transcript show: 'bar'` |
-
-x ← 1, x := 1 [x + y] <primitive: 1>
-3 factorial
-3+4
-2 raisedTo: 6 modulo: 10
-↑ true, ^ true
-Transcript show: 'hello'. Transcript cr
-Transcript show: 'hello'; cr BoxedMorph new :: color: Color blue; openInWorld
-`{ 3@4 . 56 . 'click me'}`
-Local variables.
-What it represents
-a variable name
-a global variable name pseudo-variable
-decimal integer
-binary integer (radix 2) hexadecimal integer (radix 16) floating point number exponential notation
-the character ‘a’
-the string “Hello”
-the symbol #Hello
-a literal array
-a dynamic array
-a comment
-declaration of variables x and y assign 1 to x
-a block that evaluates to x+y virtual machine primitive or annotation
-a unary message
-a binary message
-a keyword message
-return the value true expression separator (.)
-message cascade (;) message cascade (::)
-the compound literal #(3@4 56 'click me')
-startPoint is a variable name, or identifier. By convention, identifiers are composed of words in “camelCase” (i.e., each word except the first starting with an upper case letter). The first
-178
-Appendix B: Summary of Syntax 179
-letter of an instance variable, method or block argument, or temporary variable must be lower case. This indicates to the reader that the variable has a private scope.
-Shared variables
-Identifiers that start with upper case letters are global variables, class variables, pool dictionaries or class names. Smalltalk is a global variable, an instance of the class SystemDictionary.
-The receiver.
-Integers.
-self is a keyword that refers to the object inside which the current method is executing. We call it “the receiver” because this object will normally have received the message that caused the method to execute. self is called a “pseudo-variable” since we cannot assign to it.
-In addition to ordinary decimal integers like 42, Cuis-Smalltalk also provides a radix notation. 2r101 is 101 in radix 2 (i.e., binary), which is equal to decimal 5.
-Float point numbers.
-Characters.
-Strings.
-Symbols.
-Floating point numbers can be specified with their base-ten ex- ponent: 2.4e7 is 2.4 × 107.
-A dollar sign introduces a literal character: $a is the literal for ‘a’. Instances of non-printing characters can be obtained by sending appropriately named messages to the Character class, such as Character space and Character tab.
-Single quotes are used to define a literal string. If you want a string with a quote inside, just double the quote, as in 'G''day'.
-Symbols are like Strings, in that they contain a sequence of characters. However, unlike a string, a literal symbol is guar- anteed to be globally unique. There is only one Symbol object #Hello but there may be multiple String objects with the value 'Hello'.
-Static arrays.
-Static arrays or Compile-time arrays are defined by #( ), sur- rounding space-separated literals. Everything within the paren- theses must be a compile-time constant. For example, #(27 #(true false) abc) is a literal array of three elements: the in- teger 27, the compile-time array containing the two booleans, and the symbol #abc.
-
-Appendix B: Summary of Syntax 180
-Dynamic arrays.
-Comments.
-Dynamic arrays or Run-time arrays. Curly braces { } define a (dynamic) array at run-time. Elements are expressions sep- arated by periods. So { 1. 2. 1+2 } defines an array with ele- ments 1, 2, and the result of evaluating 1+2. (The curly-brace notation is peculiar to the Squeak family dialect of Smalltalk! In other Smalltalks you must build up dynamic arrays explicitly.)
-Comments are enclosed in double quotes. "hello" is a com- ment, not a string, and is ignored by the Cuis-Smalltalk com- piler. Comments may span multiple lines.
-Local variable declarations.
-Vertical bars | | enclose the declaration of one or more local variables in a method (and also in a block).
-Assignment.
-Blocks.
-Primitives.
-:= assigns an object to a variable. In the printed version of the book we wrote ← instead. Since this character is not present in the keyboard, you key in with the underscore character key. So, x := 1 is the same as x ← 1 or x \_ 1.
-Square brackets [ ] define a block, also known as a block closure or a lexical closure, which is a first-class object representing a function. As we shall see, blocks may take arguments and can have local variables.
-<primitive:...> denotes an invocation of a virtual machine primitive. (<primitive: 1> is the VM primitive for SmallInteger>>+.) Any code following the primitive is executed only if the primitive fails. The same syntax is also used for method annotations.
-Unary messages.
-Unary messages consist of a single word (like #factorial) sent to a receiver (like 3).
-Binary messages.
-Binary messages are operators (like +) sent to a receiver and taking a single argument. In 3 + 4, the receiver is 3 and the argument is 4.
-Keyword messages.
-Keyword messages consist of multiple keywords (like #raisedTo:modulo:), each ending with a colon and taking a single argument. In the expression 2 raisedTo: 6 modulo: 10, the message selector raisedTo:modulo: takes the two
-
-arguments 6 and 10, one following each colon. We send the message to the receiver 2.
-Method return.
-↑ is used to return a value from a method. (You must type ^ to obtain the ↑ character.)
-Sequences of statements.
-Cascades.
-A period or full-stop (.) is the statement separator. Putting a period between two expressions turns them into independent statements.
-There are two kinds of message cascades.
-Semicolons can be used to send a cascade of messages to the original receiver. In Transcript show: 'hello'; cr we first send the keyword message #show: 'hello' to the receiver Transcript, and then we send the unary message #cr to the same receiver.
-It is sometimes useful to send messages to the result of a message send. In BoxedMorph new :: color: Color blue; openInWorld. we send suceeding messages to the new BoxedMorph instance, not the BoxedMorph class.
-Compound Literal
-Backticks (`) can be used to create compound literals at compile time. All components of a compound literal must be known when the code is compiled.
+| reference to current object in a method     | `self`                                           |
 
 ## Data Types
 
