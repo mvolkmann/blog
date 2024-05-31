@@ -28,33 +28,39 @@ When using VS Code for Java development:
 1. Install the latest version of the Java Development Kit (JDK).
 1. Install the Gradle build tool.
    In macOS, this can be done with `brew install gradle`.
-1. Open a terminal.
-1. `cd` to the directory where a new project will be created.
-1. Create a directory for a new project and `cd` to it.
-1. `gradle init`.
-1. For the type of build to generate, select "1. Application".
-1. For the implementation language, select "1. Java".
-1. For the target Java version,
-   press enter to accept the default version of Java.
-1. For the project name, press enter to accept the default project name
-   which matches the directory name.
-1. For the application structure, select "1. Single appplication project".
-1. For the build script DSL, select "1. Kotlin".
-1. For the test framework, select "1. JUnit 4".
-1. For "Generate build using new APIs and behavior", enter "yes".
+1. Browse the <a href="https://start.spring.io"
+   target="_blank">spring initializr</a>.
+1. For Project, select "Gradle - Kotlin".
+1. For Language, select "Java".
+1. For "Spring Boot", select "3.3.0".
+1. For "Packaging", select "Jar".
+1. For "Java", select "21".
+1. Click the "ADD DEPENDENCIES..." button.
+1. Unde the "WEB" category, click "Spring Web".
+1. Click the "GENERATE" button which
+   creates the file `demo.zip` in the `Downloads' directory.
+1. Unzip that file and move the resulting directory to the desired location.
+1. Open a terminal and cd to the directory of the new project.
+1. Enter `./gradlew build`
 1. Open the project in your editor of choice.
-1. Open the file `app/src/main/java/org/example/App.java`.
-1. Replace the contents of this file with the following:
+1. Create the file `` containing the following:
 
    ```java
-    package org.example;
+   package com.example.demo;
 
-    import org.springframework.boot.autoconfigure.SpringBootApplication;
+   import org.springframework.web.bind.annotation.GetMapping;
+   import org.springframework.web.bind.annotation.RestController;
 
-    @SpringBootApplication
-    public class App {
-        public static void main(String[] args) {
-            SpringApplication.run(Main.class, args);
-        }
-    }
+   @RestController
+   public class Controller {
+
+       @GetMapping("/api/test")
+       public String test() {
+           return "test";
+       }
+   }
    ```
+
+1. Ensure that port 8080 is not already in use.
+1. Enter `./gradlew bootRun`
+1. Browse `localhost:8080/api/test` and verify that "test" is displayed.
