@@ -220,6 +220,28 @@ For more detail, see
 <a href="https://cuis-smalltalk.github.io/TheCuisBook/A-brief-introduction-to-the-system-Browser.html"
 target="_blank">A brief introduction to the System Browser</a>.
 
+## Workspaces
+
+TODO: Describe these.
+
+## Transcripts
+
+TODO: Describe these.
+
+## Text Editors
+
+TODO: Describe these.
+How do these differ from Workspaces?
+
+## Message Names
+
+These windows enable searching for implementors
+of methods whose name contains a given substring.
+For example, enter "select:" to find all the classes
+that have a method whose names end with that.
+Those include `Bag`, `Collection`, `Dictionary`, `Heap`,
+`OrderedCollection`, `SequenceableCollection`, and `SortedCollection`.
+
 ## Morphs
 
 Morphs are graphical items that can be added to the WorldMorph or a LayoutMorph.
