@@ -73,6 +73,47 @@ layout: topic-layout.njk
   This is important for using Squeak packages and Monticello.
   Squeak has a prefix registry in the wiki.
 
+## History
+
+- Smalltalk-71
+
+  This was a product of research led by
+  Alan Kay at Xerox Palo Alto Research Center (PARC).
+  It was created by Alan Kay in just a few days.
+
+- Smalltalk-72
+
+  This version influenced the actor model
+  that is used by some modern programming languages.
+  From this point on, most of the implementation was provided by Dan Ingalis.
+
+- Smalltalk-72
+
+  This version added most of GUI tools present in current versions of Smalltalk.
+
+- Smalltalk-80
+
+  This version added support for metaclasses
+  of everything, including classes, could be treated as an object.
+  This was the first version of Smalltalk that was shared outside of PARC.
+
+- ANSI Smalltalk
+
+  This became the standard language reference for Smalltalk in 1998.
+
+- Squeak
+- VisualWorks
+- ObjectWorks
+- ParcPlace Systems for Unix and Sun systems
+- Digitalk for Windows and OS/2 systems
+- Enfin
+- Cincom
+- GemTalk
+- Etoys for the One Laptop per Child (OLPC) project
+- GNU Smalltalk
+- Pharo
+- Cuis
+
 ## Implementations
 
 There are many Smalltalk implementations.
