@@ -141,6 +141,18 @@ The most popular include:
       src="/blog/assets/cuis-smalltalk-logo.png?v={{pkg.version}}">
   </div>
 
+  The mascot is southern mountain cavy which is a "tailless rodents with
+  short, speckled, greyish-yellow fur, fading to pale grey on the underparts."
+  They look similar to a mouse, but grow to around eight inches in length.
+  They are found in Argentina.
+  Juan Vuletich began development of Cuis Smalltalk in Buenos Aires, Argentina.
+  The work "cuis" means "squeak" in Rioplatense Spanish.
+
+  The GitHub repository for Cuis Smalltalk is at
+  <a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Dev"
+  target="_blank">Cuis-Smalltalk-Dev</a>.
+  As of May 2024, 96.8% of it was implemented in Smalltalk.
+
 ## Installing Cuis Smalltalk
 
 Download a zip from from the
@@ -166,32 +178,47 @@ Run the appropriate start script based on your operating system.
 
 ## Syntax
 
-| Item                                        | Example                                          |
-| ------------------------------------------- | ------------------------------------------------ |
-| comment                                     | `"some text"`                                    |
-| local variable (private scope)              | `myLocal` (camelCase)                            |
-| global variable (shared scope)              | `MyGlobal` (CamelCase)                           |
-| pseudo variable (cannot assign)             | `self`                                           |
-| integer                                     | `123`                                            |
-| float                                       | `3.14`                                           |
-| exponential notation                        | `1.23e4`                                         |
-| character                                   | `$a`                                             |
-| string                                      | `'text'` (double ' to include)                   |
-| symbol                                      | `#name'`                                         |
-| literal array                               | `#(1 4 8)'`                                      |
-| dynamic array (computes elements)           | `{1. 2 * 2. 2 raisedTo: 3}`                      |
-| assignment                                  | `<variable> := <expression>.`                    |
-| method variable declarations                | `\| foo bar baz \|`                              |
-| block with no arguments                     | `[ <expressions> ]`                              |
-| block with arguments                        | `[:a :b \| a + b]`                               |
-| unary message send                          | `<object> <message>`                             |
-| binary message send                         | `4 * 5`                                          |
-| keyword message send                        | `2 raisedTo: 4 modulo: 3`                        |
-| message cascade - multiple to same receiver | `Transcript show: 'foo'; newLine; show: 'bar'`   |
-| message chaining                            | `2 * 3 :: squared :: negated` (-36)              |
-| method return value                         | `^ <expression>`                                 |
-| expression separator (period)               | `Transcript show: 'foo'. Transcript show: 'bar'` |
-| reference to current object in a method     | `self`                                           |
+| Item                                          | Example                                          |
+| --------------------------------------------- | ------------------------------------------------ |
+| comment                                       | `"some text"`                                    |
+| local variable (private scope)                | `myLocal` (camelCase)                            |
+| global variable (shared scope)                | `MyGlobal` (CamelCase)                           |
+| pseudo variable (cannot assign)               | `self`                                           |
+| integer                                       | `123`                                            |
+| float                                         | `3.14`                                           |
+| exponential notation                          | `1.23e4`                                         |
+| character                                     | `$a`                                             |
+| string                                        | `'text'` (double ' to include)                   |
+| string concatenation (comma)                  | `'foo', 'bar', 'baz'`                            |
+| symbol (globally unique string)               | `#name'`                                         |
+| static array (elements known at compile time) | `#(1 4 8)'`                                      |
+| dynamic array (elements computed at run time) | `{1. 2 * 2. 2 raisedTo: 3}`                      |
+| assignment                                    | `<variable> := <expression>.`                    |
+| method variable declarations                  | `\| foo bar baz \|`                              |
+| block with no arguments                       | `[ <expressions> ]`                              |
+| block with arguments                          | `[:a :b \| a + b]`                               |
+| unary message send                            | `<object> <message>`                             |
+| binary message send (operators)               | `4 * 5`                                          |
+| keyword message send                          | `2 raisedTo: 4 modulo: 3`                        |
+| message cascade - sends to initial receiver   | `Transcript show: 'foo'; newLine; show: 'bar'`   |
+| message chaining - sends to previous result   | `2 * 3 :: squared :: negated` (-36)              |
+| method return value                           | `^ <expression>`                                 |
+| expression separator (period)                 | `Transcript show: 'foo'. Transcript show: 'bar'` |
+| reference to current object in a method       | `self`                                           |
+
+In static arrays the elements are separated by spaces.
+
+In dynamic arrays the expressions are separated by periods.
+
+TODO: What is a "compound literal"?
+
+### Class Definition
+
+TODO: Add this.
+
+### Method Definition
+
+TODO: Add this.
 
 ## Data Types
 
@@ -212,6 +239,13 @@ Collection methods include:
 | `allSatisfy:`   | like `every` in JavaScript   |
 | `anySatisfy:`   | like `some` in JavaScript    |
 | `inject: into:` | like `foldl` in Haskell      |
+
+## Creating Objects
+
+New objects can be created from a class using the class method `new` or `basicNew`.
+By default, both initialize all attributes of the new object to `nil`.
+The difference between them is that `new` could be overridden
+to do something different, whereas `basicNew` cannot be overridden.
 
 ## Getting Started
 
@@ -276,7 +310,11 @@ by clicking on the WorldMorph background,
 selecting Open, and selecting a window name.
 
 - Browser: for examining code
+- File List: file explorer for viewing all local files and editing text files
+- Installed Packages: lists all installed packages and allows more to be installed
 - Message Names: for determining which classes implement a given method
+- Process Browser: displays the state of all Smalltalk processes
+- SUnit Test Runner: for running unit tests
 - Text Editor: for editing code
 - Transcript: displays output
 - Workspace: for experimenting with code
@@ -310,6 +348,9 @@ target="_blank">A brief introduction to the System Browser</a>.
 ## Workspaces
 
 TODO: Describe these.
+
+To inspect a variable, right-click it and select "Inspect it"
+or select it and press cmd-i.
 
 ## Transcripts
 
@@ -411,8 +452,9 @@ This opens an "Installed Packages" window.
 To create a new package:
 
 - Click the "New" button in the center strip of buttons.
-- Enter a package name.
+- Enter a package name. For example, "Volkmann".
 - Select the newly created package.
+- Enter a comment describing the package.
 - Click the "Save" button.
 
 To determine where packages are saved:
@@ -425,6 +467,13 @@ For me this is
 `/Users/volkmannm/Documents/dev/lang/smalltalk/Cuis6-2-main/Cuis6.2.image`.
 Packages I create go in a similar path which is
 `/Users/volkmannm/Documents/dev/lang/smalltalk/Cuis6-2-main-UserFiles/NewPackages/Volkmann.pck.st`
+
+## Adding and Saving Code
+
+Create a new package for your code as described above.
+While still in the "Installed Packages" window,
+select the package and click "browse"
+to open a Browser window for the package.
 
 ## Example Code
 
