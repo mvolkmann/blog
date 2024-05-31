@@ -26,6 +26,8 @@ When using VS Code for Java development:
 ## Steps
 
 1. Install the latest version of the Java Development Kit (JDK).
+   When using <a href="https://sdkman.io" target="_blank">SDKMAN</a>,
+   change the version of Java used with `sdk use java 21.0.3-tem`.
 1. Install the Gradle build tool.
    In macOS, this can be done with `brew install gradle`.
 1. Browse the <a href="https://start.spring.io"
@@ -43,24 +45,72 @@ When using VS Code for Java development:
 1. Open a terminal and cd to the directory of the new project.
 1. Enter `./gradlew build`
 1. Open the project in your editor of choice.
-1. Create the file `` containing the following:
+1. Create the file `src/main/java/com/example/demo/DogController.java`
+   containing the following which
+   implements endpoints for all the CRUD operations:
 
    ```java
    package com.example.demo;
 
-   import org.springframework.web.bind.annotation.GetMapping;
-   import org.springframework.web.bind.annotation.RestController;
+   import java.util.Collection;
+   import java.util.HashMap;
+   import java.util.UUID;
+   import org.springframework.http.HttpStatus;
+   import org.springframework.http.ResponseEntity;
+   import org.springframework.web.bind.annotation.\*;
 
    @RestController
-   public class Controller {
+   public class DogController {
 
-       @GetMapping("/api/test")
-       public String test() {
-           return "test";
+       HashMap<UUID, Dog> dogMap = new HashMap<>();
+
+       public DogController() {
+           addDog("Whippet", "Comet");
+           addDog("German Shorthaired Pointer", "Oscar");
+       }
+
+       private Dog addDog(String breed, String name) {
+           Dog dog = new Dog(breed, name);
+           dogMap.put(dog.id, dog);
+           return dog;
+       }
+
+       @GetMapping("/api/dog")
+       public Dog[] getDogs() {
+           System.out.println("in getDogs");
+           Collection<Dog> dogCollection = dogMap.values();
+           Dog[] dogArray = dogCollection.toArray(new Dog[0]);
+           return dogArray;
+       }
+
+       @PostMapping("/api/dog")
+       public Dog createDog(@RequestBody Dog dog) {
+           return addDog(dog.breed, dog.name);
+       }
+
+       @PutMapping("/api/dog/{dogId}")
+       public Dog updateDog(@PathVariable String dogId, @RequestBody Dog dog) {
+           Dog existingDog = dogMap.get(UUID.fromString(dogId));
+           existingDog.breed = dog.breed;
+           existingDog.name = dog.name;
+           return existingDog;
+       }
+
+       @DeleteMapping("/api/dog/{dogId}")
+       public ResponseEntity<Void> deleteDog(@PathVariable String dogId) {
+           Dog dog = dogMap.remove(UUID.fromString(dogId));
+           return new ResponseEntity<>(null, dog == null ? HttpStatus.NOT_FOUND : HttpStatus.OK);
        }
    }
    ```
 
-1. Ensure that port 8080 is not already in use.
+1. Specify the port (defaults to 8080) to be used in
+   `src/main/resources/application.properties` by adding the following line:
+
+   ```text
+   server.port=1919
+   ```
+
+1. Ensure that port to be used is not already in use.
 1. Enter `./gradlew bootRun`
 1. Browse `localhost:8080/api/test` and verify that "test" is displayed.
