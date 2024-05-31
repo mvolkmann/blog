@@ -290,6 +290,30 @@ To embed a morph into another (such as a LayoutMorph):
 - select "embed into" ... {parent morph name}
   (typically LayoutMorph)
 
+## Packages
+
+To see all the installed packages, click the WorldMorph background
+and select Open...Installed Packages.
+This opens an "Installed Packages" window.
+
+To create a new package:
+
+- Click the "New" button in the center strip of buttons.
+- Enter a package name.
+- Select the newly created package.
+- Click the "Save" button.
+
+To determine where packages are saved:
+
+- Open a Workspace.
+- Enter `Smalltalk imagePath.`
+- Press cmd-p to print the result.
+
+For me this is
+`/Users/volkmannm/Documents/dev/lang/smalltalk/Cuis6-2-main/Cuis6.2.image`.
+Packages I create go in a similar path which is
+`/Users/volkmannm/Documents/dev/lang/smalltalk/Cuis6-2-main-UserFiles/NewPackages/Volkmann.pck.st`
+
 ## Example Code
 
 ```smalltalk
@@ -323,8 +347,9 @@ layout1 beColumn.
 
 array1 := #(True 7 'Tami' (Color red)).
 array1 size. "4"
-"This prints each item in the array on a separate line in the Transcript window."
-array1 do: [:item | Transcript show: item :: newLine].
+"This prints each item in the array on a separate line in the Transcript window.
+The convention is to refer to each item with the parameter name `each`."
+array1 do: [:each | Transcript show: each :: newLine].
 
 "Operations on integers that have a non-integer result are reported as ratios (fractions)."
 #(89 97 94) mean. "result is 280/3"
