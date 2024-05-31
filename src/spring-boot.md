@@ -16,6 +16,13 @@ is a set of Java services that aim to simplify some common tasks.
 Spring Boot "makes it easy to create stand-alone,
 production-grade Spring based Applications".
 
+## VS Code
+
+When using VS Code for Java development:
+
+- Install the extension "Extension Pack For Java" from Microsoft.
+- If using Spring Boot, install the "Spring Boot Extension Pack" from VMware.
+
 ## Steps
 
 1. Install the latest version of the Java Development Kit (JDK).
@@ -37,10 +44,17 @@ production-grade Spring based Applications".
 1. For "Generate build using new APIs and behavior", enter "yes".
 1. Open the project in your editor of choice.
 1. Open the file `app/src/main/java/org/example/App.java`.
-1. Add the following lines before the class definition.
+1. Replace the contents of this file with the following:
 
    ```java
-   import org.springframework.boot.autoconfigure.SpringBootApplication;
+    package org.example;
 
-   @SpringBootApplication
+    import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+    @SpringBootApplication
+    public class App {
+        public static void main(String[] args) {
+            SpringApplication.run(Main.class, args);
+        }
+    }
    ```
