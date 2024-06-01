@@ -388,13 +388,30 @@ Example category names include "accessing", "comparing", "copying",
 The top, default protocol is "-- all --" which contains all the methods.
 The methods in the selected protocol appear in the fourth column.
 
+To delete a method from a class, click the method name to select it,
+right-click the method name, and
+select "Remove it" or "Remove, then browse senders".
+The latter option allows the senders to be modified.
+
 For more detail, see
 <a href="https://cuis-smalltalk.github.io/TheCuisBook/A-brief-introduction-to-the-system-Browser.html"
 target="_blank">A brief introduction to the System Browser</a>.
 
 ## Workspaces
 
-TODO: Describe these.
+Workspace windows enable experimenting with code.
+They are somewhat like REPLs in other programming languages.
+
+Enter any number of expressions separated by periods.
+
+To execute expressions, select them or
+place the cursor at the end of a single expression.
+
+To only execute them, right-click and select "Do it" or press cmd-d.
+To execute them and print the result,
+right-click and select "Print it" or press cmd-p.
+You will do both of these often,
+so remember the cmd-d and cmd-p keyboard shortcuts.
 
 To inspect a variable, right-click it and select "Inspect it"
 or select it and press cmd-i.
@@ -431,6 +448,24 @@ For example, enter "select:" to find all the classes
 that have a method whose names end with that.
 Those include `Bag`, `Collection`, `Dictionary`, `Heap`,
 `OrderedCollection`, `SequenceableCollection`, and `SortedCollection`.
+
+## MessageNotUnderstood Windows
+
+When a message is sent to an object that doesn't have a corresponding method,
+a MessageNotUnderstood window is opened.
+This displays a stack trace showing the origin of the message send
+with the most recent call at the top.
+
+One option is to implement the missing method.
+To do this:
+
+- Click the "Create" button.
+- Select the class in which the method will be added.
+- Select a category for the method.
+- Enter an implementation for the method.
+- Press cmd-s to save it.
+- Optionally click the "Proceed" button to
+  resume execution with calling the new method.
 
 ## Morphs
 
