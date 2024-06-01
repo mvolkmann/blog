@@ -212,6 +212,21 @@ In dynamic arrays the expressions are separated by periods.
 
 TODO: What is a "compound literal"?
 
+### Control Flow
+
+Control flow is provided through message passing.
+
+The `Boolean` class in the `Kernel:Objects` category contains the methods
+`#ifTrue`, `#ifFalse`, `#ifTrue:ifFalse`, and `#ifFalse:ifTrue`.
+For example:
+
+```smalltalk
+result := a < b ifTrue: 'less' ifFalse: 'more'.
+```
+
+The values for `ifTrue` and `ifFalse` can be
+literal values, variables, or blocks with no parameters.
+
 ### Class Definition
 
 TODO: Add this.
