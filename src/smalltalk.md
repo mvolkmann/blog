@@ -284,6 +284,27 @@ Collection methods include:
 | `anySatisfy:`   | like `some` in JavaScript    |
 | `inject: into:` | like `foldl` in Haskell      |
 
+### Array
+
+TODO: Add detail.
+
+### Bag
+
+TODO: Add detail.
+
+### Dictionary
+
+This is a subclass of the `Set` class.
+TODO: Add detail.
+
+### LinkedList
+
+TODO: Add detail.
+
+### Set
+
+TODO: Add detail.
+
 ## Creating Objects
 
 New objects can be created from a class using the class method `new` or `basicNew`.
