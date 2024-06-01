@@ -305,6 +305,9 @@ To print "Hello World!":
 
 1. Click on the WorldMorph background and select Open...Workspace.
 1. Enter `Transcript show: 'Hello World!'` in the Workspace window.
+   Alternatively, enter `'Hello World!' print` which works because
+   the class `CharacterSequence` which is the superclass of `String`
+   has the method `print` which does this: `Transcript show: self; newLine`.
 1. If no Transcript window is open, open one by
    clicking on the WorldMorph background and selecting Open...Transcript.
 1. Right-click inside the Workspace window and select "Do it" or press cmd-d.
@@ -388,9 +391,24 @@ TODO: Describe these.
 To inspect a variable, right-click it and select "Inspect it"
 or select it and press cmd-i.
 
-## Transcripts
+## Transcript
 
-TODO: Describe these.
+This window displays output written to it.
+One way to do this is to do `Transcript show: <some-value>`,
+perhaps in a Workspace window.
+
+Another way is to use the `print` method in the `CharacterSequence` class
+which is the superclasss of the `String` class.
+This executes `Transcript show: self; newLine`.
+For example, `'Hello World!' print`.
+
+The `print` message can be sent to strings, symbols,
+and any object that has a `printString` method.
+
+To clear the contents of the Transscript window,
+right-click in it and select "Clear Transcript".
+
+TODO: Why does this window contain the word "Transcript" in its content?
 
 ## Text Editors
 
