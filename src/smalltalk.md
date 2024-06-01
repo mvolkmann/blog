@@ -387,14 +387,21 @@ selecting Open, and selecting a window name.
 - Transcript: displays output
 - Workspace: for experimenting with code
 
-## System Browser
+## Browser (a.k.a System Browser)
 
-To open a System Browser window, click on the WorldMorph background,
+To open a Browser window, click on the WorldMorph background,
 select Open, and select Browser.
+
+To search for a class by part of its name,
+right-click in the category pane (far left) and select "find class..."
+or click in that pane and press cmd-f.
+Then enter part of a class name and press return.
+A popup list of matching classes will appear.
+Click one of the names to browse that class.
 
 To browse a class, type its name (ex. String) in a Workspace window,
 then right-click and select "Browse it" (or press cmd-b).
-This opens a System Browser window with the class already selected.
+This opens a Browser window with the class already selected.
 
 Class categories appear in the first column.
 For example, the `String` class is in the `Text` category.
@@ -530,6 +537,8 @@ The following buttons are provided:
 | blue circle with rotate icon         | lower-left  | drag to rotate item                             |
 | dull yellow circle with odd shape    | left side   | click to collapse (hide) the item (3)           |
 | orange circle with wrench            | left side   | opens an "Explore" window (4)                   |
+
+TODO: How can you change the point about which a morph rotates?
 
 (1) This menu contains the following:
 
