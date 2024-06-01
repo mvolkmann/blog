@@ -189,7 +189,7 @@ Run the appropriate start script based on your operating system.
 | exponential notation                          | `1.23e4`                                         |
 | character                                     | `$a`                                             |
 | string                                        | `'text'` (double ' to include)                   |
-| string concatenation (comma)                  | `'foo', 'bar', 'baz'`                            |
+| string and array concatenation (comma)        | `'foo', 'bar', 'baz'` or `#(1 2), #(3 4)`        |
 | symbol (globally unique string)               | `#name'`                                         |
 | static array (elements known at compile time) | `#(1 4 8)'`                                      |
 | dynamic array (elements computed at run time) | `{1. 2 * 2. 2 raisedTo: 3}`                      |
@@ -216,9 +216,30 @@ TODO: What is a "compound literal"?
 
 TODO: Add this.
 
+Programming languages use many terms to describe data
+that is encapsulated by objects created from a class.
+Examples include "attribute", "property", and "field".
+Smalltalk calls these "instance variables".
+
+Instance variables can only be directly accessed by methods in the same class.
+To expose them outside the class, add getter methods.
+For example, if `score` is an instance variable
+then the following is a getter method for it.
+By convention, the name of the method is the same as
+the name of the instance variable, but this is not required.
+
+```smalltalk
+score
+    ^score
+```
+
 ### Method Definition
 
 TODO: Add this.
+
+All methods are public.
+By convention, methods that should only be used by
+other methods in the same class are placed in the "private" category.
 
 ## Data Types
 
@@ -372,17 +393,21 @@ Those include `Bag`, `Collection`, `Dictionary`, `Heap`,
 
 ## Morphs
 
-Morphs are graphical items that can be added to the WorldMorph or a LayoutMorph.
-To create one:
+Morphs are what other graphical systems refer to as widgets.
+They are graphical items that can be added to the WorldMorph or a LayoutMorph.
+
+To create a morph:
 
 - Click the WorldMorph background.
 - Select "New morph...".
 - In the dialog that appears,
   select a category of morphs and then a specific kind.
 
-Examples include:
+Examples of morphs include:
 
 -
+
+To create and add morphs with code:
 
 ## Halo
 
@@ -400,7 +425,7 @@ The following buttons are provided:
 | blue circle with white document      | top         | opens menu "A" (1)                              |
 | black circle with house              | top         | drag to move the item within its parent         |
 | brown circle with resize icon        | top         | drag to move the item out of its parent         |
-| green circle with copy icon          | upper-right | duplicates the item on top of itself            |
+| green circle with copy icon          | upper-right | drag to position a duplicate of the item        |
 | orange circle with wrench            | right side  | opens a menu of debugging options               |
 | blue circle with magnifier glass     | right side  | drag to change scale of item                    |
 | yellow circle with resize icon       | lower-right | drag to resize the item                         |
