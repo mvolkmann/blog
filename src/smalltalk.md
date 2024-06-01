@@ -220,6 +220,55 @@ In dynamic arrays the expressions are separated by periods.
 
 TODO: What is a "compound literal"?
 
+### Classes
+
+All classes inherit from one other class,
+except `Object` which is the highest superclass of all classes.
+
+### Messages
+
+The only mechanism for communication between objects
+is for one to send a message to another.
+
+In documentation, message names are preceded by `#`,
+but that does not appear when sending the messages.
+
+Smalltalk supports three types of messages:
+
+- unary
+
+  These message names are alphanumeric and begin lowercase.
+  For example, in `5 factorial`, `#factorial` is a unary message.
+
+- binary
+
+  These message names contain one or more of the following characters:
+  `+ - * / \ ~ < > = @ % | & ? ,`
+
+  For example, in `a * b`, `#*` is a binary message.
+
+- keyword
+
+  Each keywork is alphanumeric, begin lowercase, and ends in a colon.
+  For example, `#at:put` is a keyword message in the
+  `OrderedCollection` class which is the superclass of `Array`.
+  This message is sent as follows:
+
+  ```smalltalk
+  colors := #('red' 'green' 'blue').
+  colors at: 2 put: 'yellow'.
+  ```
+
+When multiple messages of these types are combined in a single expression,
+the order of evaluation is:
+
+- unary messages from left to right
+- binary messages from left to right
+- keyword messages from left to right
+
+For example, in `2 raisedTo: 1 + 3 factorial`,
+the order is `#factorial`, `#+`, and `#raisedTo`.
+
 ### Control Flow
 
 Control flow is provided through message passing.
