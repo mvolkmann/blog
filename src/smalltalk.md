@@ -28,6 +28,14 @@ layout: topic-layout.njk
 
 <a href="https://en.wikipedia.org/wiki/Smalltalk" target="_blank">Smalltalk</a>
 "is a purely object oriented programming language (OOP)."
+Messages are sent to objects which decide whether and how to act on them.
+
+Smalltalk is a dynamically typed language.
+Types of variables, method parameters,
+and method return types are never specified.
+Instead, duck typing is used. Any object can be used as long as it
+is able to respond to all the messages that are sent to it.
+This is determined at run-time.
 
 ## Smalltalk Pros
 
