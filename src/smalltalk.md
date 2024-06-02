@@ -163,7 +163,7 @@ The most popular include:
   short, speckled, greyish-yellow fur, fading to pale grey on the underparts."
   They look similar to a mouse, but grow to around eight inches in length.
   They are found in Argentina.
-  Juan Vuletich began development of Cuis Smalltalk in Buenos Aires, Argentina.
+  Juan Vuletich began development of Cuis Smalltalk in Buenos Aires s, Argentina.
   The work "cuis" means "squeak" in Rioplatense Spanish.
 
   The GitHub repository for Cuis Smalltalk is at
@@ -188,6 +188,12 @@ Run the appropriate start script based on your operating system.
   1. Select "Privacy & Security".
   1. Scroll down to the "Security" section.
   1. Click the "Allow" button for CuisVM.app.
+
+The app CuisVM.app implements the virtual machine used by Cuis Smalltalk.
+It is taken directly from Squeak and does not differ in any way.
+All the differences between Cuis and Squeak are implemented in
+its base image file found in the `CuisImage` subdirectory
+with a name like `Cuis6.2.image` or `Cuis7.1-6367.image`.
 
 ## Getting Started
 
@@ -325,6 +331,32 @@ All methods are public.
 By convention, methods that should only be used by
 other methods in the same class are placed in the "private" message category.
 
+To find a method:
+
+- Click the `WorldMorph` back and select Open ... Message Names.
+  This will open a "Message names" window.
+- Enter part of a message and press the return key.
+  This will display a list of matching message names.
+- Click one of the message names to see the classes that implement it.
+- Click one of the class names and click the "Browse" button
+  to open a System Browser that shows the method implementation.
+
+For example, entering "nj" will find the "inject:into:" message
+that is implemented by the `Collection` class.
+
+Squeak Smalltalk supports finding methods by part of their name
+OR by providing example input and output.
+The steps to use this are:
+
+- From the "Tools" menu, select "Method Finder".
+  This opens a "Selector Browser" window.
+- Enter part of the method name OR
+  an example input, followed by a period, and the expected output.
+- Press the return key.
+- A list of all matching methods will be displayed.
+- Click one of the methods to open a System Browser
+  that shows the method implementation.
+
 To add a method to a class:
 
 - Open a System Browser.
@@ -359,7 +391,8 @@ right-click it and select "remove method"
 or select it and press cmd-x.
 
 The following method can be added to the `Collection` class
-to enable computing the sum of the numbers in any collection:
+to enable computing the sum of the numbers in any collection.
+This method is present by default in Squeak, but not in Cuis.
 
 ```smalltalk
 sum
