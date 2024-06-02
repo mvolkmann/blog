@@ -325,16 +325,13 @@ All methods are public.
 By convention, methods that should only be used by
 other methods in the same class are placed in the "private" message category.
 
-To remove a method in the System Browser,
-right-click it and select "remove method"
-or select it and press cmd-x.
-
 To add a method to a class:
 
 - Open a System Browser.
 - Select the category of the class in the top, first pane.
 - Select the class in the top, second pane.
-- Click "as yet unclassified" in the top, third pane.
+- Click the message category in which the new method will be placed,
+  or select "as yet unclassified" in the top, third pane.
 - A starting template for a new method definition
   will appear in the bottom pane.
 - Change "messageSelectorAndArgumentNames"
@@ -342,19 +339,33 @@ To add a method to a class:
 - Modify the comment describing the method.
 - Update the list of temporary variable names or delete that line.
 - Replace "statements" with the method implementation.
-- If the top, third pane does not contain a suitable message category ...
-  - Right-click in that pane and select "new category",
-    or click in the top, third pane and press cmd-n.
-  - Select a category to add.
-  - If none of the provided categories are suitable, select "new..."
-    and enter the name of a category to be added.
-    For consistency, try to stick with the provided category names.
-- Click "as yet unclassified" in the top, third pane.
-- Drag the name of the new method from the top, fourth pane
-  to its method category to associate it.
+- If the method was not associated with a method category ...
+  - If the top, third pane does not contain a suitable message category ...
+    - Right-click in that pane and select "new category",
+      or click in the top, third pane and press cmd-n.
+    - Select a category to add.
+    - If none of the provided categories are suitable, select "new..."
+      and enter the name of a category to be added.
+      For consistency, try to stick with the provided category names.
+  - Click "as yet unclassified" in the top, third pane.
+  - Drag the name of the new method from the top, fourth pane
+    to its method category to associate it.
 
 To sort the message category names alphabetically,
 right-click in the top, third pane and select "alphabetize".
+
+To remove a method in the System Browser,
+right-click it and select "remove method"
+or select it and press cmd-x.
+
+The following method can be added to the `Collection` class
+to enable computing the sum of the numbers in any collection:
+
+```smalltalk
+sum
+    "answers the sum of the numbers in the collection"
+    ^self inject: 0 into: [:acc :n | acc + n]
+```
 
 Superclasses can define methods that subclasses must implement.
 For example, a class named `VShape` can define the following method:
