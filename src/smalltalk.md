@@ -577,8 +577,8 @@ to do something different, whereas `basicNew` cannot be overridden.
 ## Blocks
 
 A block is closure (anonymous function) that can have parameters
-and contain many statements.
-The value of the block is the value of the last statement.
+and contain many expressions.
+The value of the block is the value of the last expression.
 
 A block of code can be saved in a variable, passed as a parameter, and can be used multiple times.
 
