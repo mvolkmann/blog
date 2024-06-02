@@ -444,7 +444,7 @@ enter its implemenation, press cmd-s to save, and
 press the "Proceed" button to continue running the code
 at the point of the failed message send.
 
-## File Out and In
+## File Out and File In
 
 To save all the code for a package to a text file:
 
@@ -473,6 +473,12 @@ To see all the installed packages, click the WorldMorph background
 and select Open...Installed Packages.
 This opens an "Installed Packages" window.
 
+To browse everything that is defined in a package:
+
+- Select the package.
+- Click the "Browse" button.
+- This opens a "Browser for package" window.
+
 To create a new package:
 
 - Click the "New" button in the center strip of buttons.
@@ -496,22 +502,37 @@ Packages I create go in a similar path which is
 
 This is an alternative to Monticello which is used in Squeak and Pharo.
 
-Steps:
+Create a new package as shown in the previous section.
+For example, my new package name is "Volkmann".
 
-- Create a new package as shown in the previous section.
-- Add a message category to an existing class
-  whose name is an asterisk followed by the new package name.
+To add or override methods in existing classes
+and save the changes in your package:
+
+- Add a message category to an existing class whose name is
+  an asterisk followed by the new package name.
   For example, I used "\*Volkmann".
 - Add new methods to the existing class in the new message category.
 - Open an "Installed Packages" window and select the new package.
 - Click the "Save" button.
+
+To define new classes and save them in your package:
+
+- Add a class category whose name is the same as the new package name.
+- Add classes in the new class category.
+- Add methods to the new classes in any method category.
+- Open an "Installed Packages" window and select the new package.
+- Click the "Save" button.
+
+To verify that all this worked:
+
 - Click the `WorldMorph` background and select "Quit without saving"
   so the changes are not saved in the current image.
 - Restart Cuis Smalltalk with the same image.
 - Verify that the methods added are not present.
 - Open a "Workspace" window.
-- Enter "Feature require: 'Volkmann'" and press cmd-d to "Do it".
-- Verify that the methods added are now present.
+- Enter "Feature require: '{package-name}'" and press cmd-d to "Do it".
+- Verify that the methods and classes that were saved in the package
+  are now present.
 
 ## Adding and Saving Code
 
