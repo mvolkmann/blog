@@ -339,6 +339,27 @@ enter its implemenation, press cmd-s to save, and
 press the "Proceed" button to continue running the code
 at the point of the failed message send.
 
+## File Out and In
+
+To save all the code for a package to a text file:
+
+- Open a System Browser.
+- Select the package in the top, first pane.
+- Right-click and select "fileOut".
+
+The file will be saved in
+`{distribution-name}-UserFiles/FileOuts/{package-name}.st`.
+
+To read all the code for a package from a text file:
+
+- Open a File List.
+- Locate and select a `.st` file created by a "fileOut".
+- Right-click and select "fileIn".
+- Enter your initials and then your name
+  for tracking who performed the "fileIn".
+- All the class categories, classes, and methods defined in the file
+  will now be available in the current image.
+
 ### Messages
 
 The only mechanism for communication between objects
