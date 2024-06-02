@@ -270,6 +270,69 @@ TODO: What is a "compound literal"?
 All classes inherit from one other class,
 except `Object` which is the highest superclass of all classes.
 
+TODO: Are class names required to be unique across all packages?
+
+To create a new class:
+
+- Open a System Browser.
+- Select a category in the top, first pane.
+- Click in the empty area of the top, second pane.
+- A starting template for a new class definition
+  will appear in the bottom pane.
+- Change "NameOfSubclass" to the name of the new class.
+- If the class needs any instance variables,
+  add them to the value of the `instanceVariableNames` string
+  separated by spaces.
+- If the class needs any class variables,
+  add them to the value of the `classVariableNames` string
+  separated by spaces.
+- To save the changes, right-click in the bottom pane
+  and select "Accept" or press cmd-s.
+
+### Methods
+
+To add a method to a class:
+
+- Open a System Browser.
+- Select the category of the class in the top, first pane.
+- Select the class in the top, second pane.
+- Click "as yet unclassified" in the top, third pane.
+- A starting template for a new method definition
+  will appear in the bottom pane.
+- Change "messageSelectorAndArgumentNames"
+  to the name of the new method.
+- Modify the comment describing the method.
+- Update the list of temporary variable names or delete that line.
+- Replace "statements" with the method implementation.
+- If the top, third pane does not contain a suitable message category ...
+  - Right-click in that pane and select "new category",
+    or click in the top, third pane and press cmd-n.
+  - Select a category to add.
+  - If none of the provided categories are suitable, select "new..."
+    and enter the name of a category to be added.
+    For consistency, try to stick with the provided category names.
+- Click "as yet unclassified" in the top, third pane.
+- Drag the name of the new method from the top, fourth pane
+  to its method category to associate it.
+
+To sort the message category names alphabetically,
+right-click in the top, third pane and select "alphabetize".
+
+Superclasses can define methods that subclasses must implement.
+For example, a class named `VShape` can define the following method:
+
+```smalltalk
+area
+    "answers the area of the shape"
+    self subclassResponsibility
+```
+
+A class named `VCircle` can be defined as a subclass of `VShape`.
+If it does not defined the `area` method
+and that message is sent to an instance,
+an Error dialog with the title "My subclass should have overridden #area"
+will appear.
+
 ### Messages
 
 The only mechanism for communication between objects
