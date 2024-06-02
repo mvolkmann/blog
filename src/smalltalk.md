@@ -333,6 +333,12 @@ and that message is sent to an instance,
 an Error dialog with the title "My subclass should have overridden #area"
 will appear.
 
+To add the missing method, click the "Create" button,
+select a message category for the method,
+enter its implemenation, press cmd-s to save, and
+press the "Proceed" button to continue running the code
+at the point of the failed message send.
+
 ### Messages
 
 The only mechanism for communication between objects
