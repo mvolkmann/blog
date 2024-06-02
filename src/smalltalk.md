@@ -475,7 +475,9 @@ Collection methods include:
 | `select:`       | like `filter` in JavaScript  |
 | `allSatisfy:`   | like `every` in JavaScript   |
 | `anySatisfy:`   | like `some` in JavaScript    |
-| `inject: into:` | like `foldl` in Haskell      |
+| `inject: into:` | like `reduce` in JavaScript  |
+
+For example, `#(1 2 3) inject: 0 into: [:acc :n | acc + n]` gives `6`.
 
 ### Array
 
