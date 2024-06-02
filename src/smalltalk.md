@@ -37,6 +37,16 @@ Instead, duck typing is used. Any object can be used as long as it
 is able to respond to all the messages that are sent to it.
 This is determined at run-time.
 
+## Resources
+
+- <a href="https://en.wikipedia.org/wiki/Smalltalk"
+  target="_blank">Smalltalk in Wikipedia</a>
+- <a href="https://cuis.st" target="_blank">Cuis Smalltalk</a>
+- <a href="https://pharo.org" target="_blank">Pharo Smalltalk</a>
+- <a href="https://squeak.org" target="_blank">Squeak Smalltalk</a>
+- <a href="https://www.fast.org.ar"
+  target="_blank">Fundación Argentina de Smalltalk</a> (FAST)
+
 ## Smalltalk Pros
 
 - It has a small, consistently applied syntax.
