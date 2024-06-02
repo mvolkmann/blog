@@ -444,7 +444,7 @@ enter its implemenation, press cmd-s to save, and
 press the "Proceed" button to continue running the code
 at the point of the failed message send.
 
-### File Out and In
+## File Out and In
 
 To save all the code for a package to a text file:
 
@@ -455,6 +455,8 @@ To save all the code for a package to a text file:
 The file will be saved in
 `{distribution-name}-UserFiles/FileOuts/{package-name}.st`.
 
+TODO: Is the content of these files referred to as a change set?
+
 To read all the code for a package from a text file:
 
 - Open a File List.
@@ -464,6 +466,59 @@ To read all the code for a package from a text file:
   for tracking who performed the "fileIn".
 - All the class categories, classes, and methods defined in the file
   will now be available in the current image.
+
+## Packages
+
+To see all the installed packages, click the WorldMorph background
+and select Open...Installed Packages.
+This opens an "Installed Packages" window.
+
+To create a new package:
+
+- Click the "New" button in the center strip of buttons.
+- Enter a package name. For example, "Volkmann".
+- Select the newly created package.
+- Enter a comment describing the package.
+- Click the "Save" button.
+
+To determine where packages are saved:
+
+- Open a Workspace.
+- Enter `Smalltalk imagePath.`
+- Press cmd-p to print the result.
+
+For me this is
+`/Users/volkmannm/Documents/dev/lang/smalltalk/Cuis6-2-main/Cuis6.2.image`.
+Packages I create go in a similar path which is
+`/Users/volkmannm/Documents/dev/lang/smalltalk/Cuis6-2-main-UserFiles/NewPackages/Volkmann.pck.st`
+
+## Cuis Package Management
+
+This is an alternative to Monticello which is used in Squeak and Pharo.
+
+Steps:
+
+- Create a new package as shown in the previous section.
+- Add a message category to an existing class
+  whose name is an asterisk followed by the new package name.
+  For example, I used "\*Volkmann".
+- Add new methods to the existing class in the new message category.
+- Open an "Installed Packages" window and select the new package.
+- Click the "Save" button.
+- Click the `WorldMorph` background and select "Quit without saving"
+  so the changes are not saved in the current image.
+- Restart Cuis Smalltalk with the same image.
+- Verify that the methods added are not present.
+- Open a "Workspace" window.
+- Enter "Feature require: 'Volkmann'" and press cmd-d to "Do it".
+- Verify that the methods added are now present.
+
+## Adding and Saving Code
+
+Create a new package for your code as described above.
+While still in the "Installed Packages" window,
+select the package and click "browse"
+to open a Browser window for the package.
 
 ### Messages
 
@@ -812,38 +867,6 @@ To embed a morph into another (such as a LayoutMorph):
 - click the blue circle on the top
 - select "embed into" ... {parent morph name}
   (typically LayoutMorph)
-
-## Packages
-
-To see all the installed packages, click the WorldMorph background
-and select Open...Installed Packages.
-This opens an "Installed Packages" window.
-
-To create a new package:
-
-- Click the "New" button in the center strip of buttons.
-- Enter a package name. For example, "Volkmann".
-- Select the newly created package.
-- Enter a comment describing the package.
-- Click the "Save" button.
-
-To determine where packages are saved:
-
-- Open a Workspace.
-- Enter `Smalltalk imagePath.`
-- Press cmd-p to print the result.
-
-For me this is
-`/Users/volkmannm/Documents/dev/lang/smalltalk/Cuis6-2-main/Cuis6.2.image`.
-Packages I create go in a similar path which is
-`/Users/volkmannm/Documents/dev/lang/smalltalk/Cuis6-2-main-UserFiles/NewPackages/Volkmann.pck.st`
-
-## Adding and Saving Code
-
-Create a new package for your code as described above.
-While still in the "Installed Packages" window,
-select the package and click "browse"
-to open a Browser window for the package.
 
 ## Example Code
 
