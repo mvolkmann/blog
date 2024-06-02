@@ -178,11 +178,56 @@ Run the appropriate start script based on your operating system.
   1. Select "Privacy & Security".
   1. Scroll down to the "Security" section.
   1. Click the "Allow" button for CuisVM.app.
-  1. Double-click a Smalltalk image file such as `CuisImage/Cuis6.2.image`.
-  1. The following main app window will open.
 
-     <img alt="Cuis Smalltalk log" class="logo" style="width: 400px"
-       src="/blog/assets/cuis-smalltalk-startup.png?v={{pkg.version}}">
+## Getting Started
+
+Double-click a Smalltalk image file such as `CuisImage/Cuis6.2.image`.
+The following main app window will open:
+
+<img alt="Cuis Smalltalk log" class="logo" style="width: 400px"
+  src="/blog/assets/cuis-smalltalk-startup.png?v={{pkg.version}}">
+
+Alternatively you can double-click a VM file such as `CuisVM.app`,
+but that will open a dialog that prompts for an image file.
+
+The main window contains a `WorldMorph`.
+
+To change the font size used in all the windows:
+
+- Click on the `WorldMorph` background and
+  select Preferences...Size of GUI elements...
+- Select a point size such as 14.
+- Close the dialog by clicking its red circle containing an "x".
+
+To select an item, click it.
+
+To open an context-sensitive menu for an item, right-click it.
+After an item is selected from this menu, it will close.
+To keep it open so multiple selections can be made,
+click its push pin in the upper-right corner.
+
+To print "Hello World!":
+
+1. Click on the WorldMorph background and select Open...Workspace.
+1. Enter `Transcript show: 'Hello World!'` in the Workspace window.
+   Alternatively, enter `'Hello World!' print` which works because
+   the class `CharacterSequence` which is the superclass of `String`
+   has the method `print` which does this: `Transcript show: self; newLine`.
+1. If no Transcript window is open, open one by
+   clicking on the WorldMorph background and selecting Open...Transcript.
+1. Right-click inside the Workspace window and select "Do it" or press cmd-d.
+1. The output will appear in the Transcript window.
+1. To clear the output in the Transcript,
+   right-click in it and select "Clear Transcript".
+
+To evaluate an expression in a Workspace
+and display the result after it in the workspace:
+
+- Enter an expression in the Workspace window like `3 factorial`.
+- Select it by pressing ctrl-a or dragging over it with the mouse.
+- Press ctrl-p to print it.
+- Remove the output from the Workspace window
+  by pressing ctrl-z to undo adding it.
 
 ## Syntax
 
@@ -284,7 +329,7 @@ result := a < b ifTrue: 'less' ifFalse: 'more'.
 The values for `ifTrue` and `ifFalse` can be
 literal values, variables, or blocks with no parameters.
 
-### Class Definition
+### Classes
 
 TODO: Add this.
 
@@ -305,13 +350,17 @@ score
     ^score
 ```
 
-### Method Definition
+### Methods
 
 TODO: Add this.
 
 All methods are public.
 By convention, methods that should only be used by
 other methods in the same class are placed in the "private" category.
+
+To remove a method in the System Browser,
+right-click it and select "remove method"
+or select it and press cmd-x.
 
 ## Data Types
 
@@ -360,47 +409,6 @@ New objects can be created from a class using the class method `new` or `basicNe
 By default, both initialize all attributes of the new object to `nil`.
 The difference between them is that `new` could be overridden
 to do something different, whereas `basicNew` cannot be overridden.
-
-## Getting Started
-
-The main window is a WorldMorph.
-
-To change the font size used in all the windows:
-
-- Click on the WorldMorph background and
-  select Preferences...Size of GUI elements...
-- Select a point size such as 12.
-- Close the dialog by clicking its red circle containing an "x".
-
-To select an item, click it.
-
-To open an context-sensitive menu for an item, right-click it.
-After an item is selected from this menu, it will close.
-To keep it open so multiple selections can be made,
-click its push pin in the upper-right corner.
-
-To print "Hello World!":
-
-1. Click on the WorldMorph background and select Open...Workspace.
-1. Enter `Transcript show: 'Hello World!'` in the Workspace window.
-   Alternatively, enter `'Hello World!' print` which works because
-   the class `CharacterSequence` which is the superclass of `String`
-   has the method `print` which does this: `Transcript show: self; newLine`.
-1. If no Transcript window is open, open one by
-   clicking on the WorldMorph background and selecting Open...Transcript.
-1. Right-click inside the Workspace window and select "Do it" or press cmd-d.
-1. The output will appear in the Transcript window.
-1. To clear the output in the Transcript,
-   right-click in it and select "Clear Transcript".
-
-To evaluate an expression in a Workspace
-and display the result after it in the workspace:
-
-- Enter an expression in the Workspace window like `3 factorial`.
-- Select it by pressing ctrl-a or dragging over it with the mouse.
-- Press ctrl-p to print it.
-- Remove the output from the Workspace window
-  by pressing ctrl-z to undo adding it.
 
 ## Blocks
 
