@@ -173,27 +173,50 @@ The most popular include:
 
 ## Installing Cuis Smalltalk
 
-Download a zip from from the
-<a href="https://github.com/Cuis-Smalltalk/Cuis6-2"
-target="_blank">Cuis Smalltalk Git repository</a> and unzip it.
+To install Cuis Smalltalk:
 
-Run the appropriate start script based on your operating system.
+1. Browse <a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Dev"
+   target="_blank">Cuis Smalltalk Git repository</a>.
+1. Click the "Zip file" link near the bottom of the page.
+1. Unzip the downloaded file to obtain the directory "Cuis-Smalltalk-Dev-master".
+1. Move this directory to your desired location.
+
+To start Cuis Smalltalk, run the appropriate start script found
+in the installed directory based on your operating system.
 
 - for Windows, open a Command Prompt and run `RunCuisOnWindows.bat`
 - for Linux, open a Terminal and run `RunCuisOnLinux.sh`
 - for Mac
 
   1. Double-click CuisVM.app which will fail because the app is not verified.
-  1. Open the Settings app.
+  1. Open the System Settings app.
   1. Select "Privacy & Security".
   1. Scroll down to the "Security" section.
-  1. Click the "Allow" button for CuisVM.app.
+  1. Look for the message '"CuisVM.app" was blocked from use
+     because it is not from an identified developer.'
+  1. Click the "Open Anyway" button.
+  1. Click the "Open" button in the next dialog that appears.
+  1. Select the image file `Cuis6.2.image`.
+  1. Click the "Open" button.
+  1. You will see several dialogs that say '"CuisVM.app"
+     would like to access files in your Documents folder'.
+     Click the "Allow" button each time.
 
-The app CuisVM.app implements the virtual machine used by Cuis Smalltalk.
+The file `CuisVM.app` implements the virtual machine used by Cuis Smalltalk.
 It is taken directly from Squeak and does not differ in any way.
 All the differences between Cuis and Squeak are implemented in
 its base image file found in the `CuisImage` subdirectory
 with a name like `Cuis6.2.image` or `Cuis7.1-6367.image`.
+
+The reported name of the `CuisVM.app` app in macOS is "Squeak 5.0".
+To change this:
+
+- Open a terminal window.
+- `cd` to the directory where you placed the file `CuisVM.app`.
+- Enter `cd CuisVM.app/Contents`.
+- Edit the file `Info.plist`.
+- Find the key "CFBundleName".
+- Change its value from "Squeak" to "Cuis".
 
 ## Getting Started
 
