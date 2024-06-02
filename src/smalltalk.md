@@ -267,10 +267,30 @@ TODO: What is a "compound literal"?
 
 ### Classes
 
+Classes define sets of associated class variables, instance variables,
+class methods, and instance methods.
+
 All classes inherit from one other class,
 except `Object` which is the highest superclass of all classes.
 
 TODO: Are class names required to be unique across all packages?
+
+Programming languages use many terms to describe data
+that is encapsulated by objects created from a class.
+Examples include "attribute", "property", and "field".
+Smalltalk calls these "instance variables".
+
+Instance variables can only be directly accessed by methods in the same class.
+To expose them outside the class, add getter methods.
+For example, if `score` is an instance variable
+then the following is a getter method for it.
+By convention, the name of the method is the same as
+the name of the instance variable, but this is not required.
+
+```smalltalk
+score
+    ^score
+```
 
 To create a new class:
 
@@ -290,6 +310,14 @@ To create a new class:
   and select "Accept" or press cmd-s.
 
 ### Methods
+
+All methods are public.
+By convention, methods that should only be used by
+other methods in the same class are placed in the "private" message category.
+
+To remove a method in the System Browser,
+right-click it and select "remove method"
+or select it and press cmd-x.
 
 To add a method to a class:
 
@@ -339,7 +367,7 @@ enter its implemenation, press cmd-s to save, and
 press the "Proceed" button to continue running the code
 at the point of the failed message send.
 
-## File Out and In
+### File Out and In
 
 To save all the code for a package to a text file:
 
@@ -419,39 +447,6 @@ result := a < b ifTrue: 'less' ifFalse: 'more'.
 The values for `ifTrue` and `ifFalse` can be
 literal values, variables, or blocks with no parameters.
 
-### Classes
-
-TODO: Add this.
-
-Programming languages use many terms to describe data
-that is encapsulated by objects created from a class.
-Examples include "attribute", "property", and "field".
-Smalltalk calls these "instance variables".
-
-Instance variables can only be directly accessed by methods in the same class.
-To expose them outside the class, add getter methods.
-For example, if `score` is an instance variable
-then the following is a getter method for it.
-By convention, the name of the method is the same as
-the name of the instance variable, but this is not required.
-
-```smalltalk
-score
-    ^score
-```
-
-### Methods
-
-TODO: Add this.
-
-All methods are public.
-By convention, methods that should only be used by
-other methods in the same class are placed in the "private" category.
-
-To remove a method in the System Browser,
-right-click it and select "remove method"
-or select it and press cmd-x.
-
 ## Data Types
 
 Strings are delimited by single quotes, not double quotes.
@@ -524,7 +519,7 @@ There are four main windows that can be opened
 by clicking on the WorldMorph background,
 selecting Open, and selecting a window name.
 
-- Browser: for examining code
+- Browser: for examining code (a.k.a System Browser)
 - File List: file explorer for viewing all local files and editing text files
 - Installed Packages: lists all installed packages and allows more to be installed
 - Message Names: for determining which classes implement a given method
@@ -534,13 +529,44 @@ selecting Open, and selecting a window name.
 - Transcript: displays output
 - Workspace: for experimenting with code
 
-## Browser (a.k.a System Browser)
+## System Browser
 
-To open a Browser window, click on the WorldMorph background,
+System Browser windows contain four rows.
+
+- The first (top) row contains four panes for displaying and operating on
+  class categories, classes, message categories, and methods.
+
+  - Selecting a class category in the first pane
+    displays the classes in that category in the second pane.
+    For example, the class `String` is in the class category `Text`.
+  - Selecting a class in the second pane
+    displays message categories for the class in the third pane.
+    Example message category names include "accessing", "comparing",
+    "copying", "converting", "enumerating", and "printing".
+  - Selecting a message category in the third pane
+    displays methods in that category in the fourth pane.
+    The top, default messate category is "-- all --",
+    which contains all the methods.
+
+  TODO: Are message categories also referred to as protocols?
+
+- The second row displays a message describing the item selected in the top row.
+- The third row contains a series of buttons that can be clicked to
+  open other windows that show information related to the selected item.
+  One exception is the "show..." button. Clicking this displays a popup
+  containing exclusive checkboxes that can be checked
+  to indicate what should be displayed in the fourth row.
+  The default is "source" which is typically the desired choice.
+- The fourth row displays information about the selected item
+  based on the checkbox that is selected for the "show..." button.
+  By default it displays Smalltalk code for the selected item
+  and can be used to edit the code.
+
+To open a System Browser window, click on the `WorldMorph` background,
 select Open, and select Browser.
 
 To search for a class by part of its name,
-right-click in the category pane (far left) and select "find class..."
+right-click in the class category pane and select "find class..."
 or click in that pane and press cmd-f.
 Then enter part of a class name and press return.
 A popup list of matching classes will appear.
@@ -549,19 +575,6 @@ Click one of the names to browse that class.
 To browse a class, type its name (ex. String) in a Workspace window,
 then right-click and select "Browse it" (or press cmd-b).
 This opens a Browser window with the class already selected.
-
-Class categories appear in the first column.
-For example, the `String` class is in the `Text` category.
-
-Classes in the selected category appear in the second column.
-
-Protocols (or method categories) of the selected class
-appear in the third column.
-Example category names include "accessing", "comparing", "copying",
-"converting", "enumerating", and "printing".
-
-The top, default protocol is "-- all --" which contains all the methods.
-The methods in the selected protocol appear in the fourth column.
 
 To delete a method from a class, click the method name to select it,
 right-click the method name, and
