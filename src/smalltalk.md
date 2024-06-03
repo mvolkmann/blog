@@ -421,14 +421,16 @@ or select it and press cmd-x.
 
 TODO: Discuss the `self` and `super` keywords.
 
-The following method can be added to the `Collection` class
-to enable computing the sum of the numbers in any collection.
-TODO: Choose a different example because this method is already present.
+The following methods can be added to the `Integer` class.
 
 ```smalltalk
-sum
-    "answers the sum of the numbers in the collection"
-    ^self inject: 0 into: [:acc :n | acc + n]
+predecessor
+    "answers the predecessor of this integer"
+    ^ self - 1
+
+successor
+    "answers the successor of this integer"
+    ^ self + 1
 ```
 
 Superclasses can define methods that subclasses must implement.
@@ -451,6 +453,8 @@ select a message category for the method,
 enter its implemenation, press cmd-s to save, and
 press the "Proceed" button to continue running the code
 at the point of the failed message send.
+
+TODO: Discuss recursion in methods and blocks.
 
 ## File Out and File In
 
@@ -694,19 +698,27 @@ to do something different, whereas `basicNew` cannot be overridden.
 
 A block is closure (anonymous function) that can have parameters
 and contain many expressions.
+They are represented by the class `BlockClosure`.
 The value of the block is the value of the last expression.
 
-A block of code can be saved in a variable, passed as a parameter, and can be used multiple times.
+A block of code can be saved in a variable, passed as a parameter,
+and can be used multiple times.
 
 ```smalltalk
 myBlock := [:a :b | a + b].
 myBlock value: 2 value: 3.
 ```
 
+The `value` message evaluates a block
+and can be used to pass zero to four arguments.
 For blocks with more than four parameters,
-you must pass the values in an array using `#valueWithArguments:`.
+pass them in an array using `#valueWithArguments:`.
 
-Blocks can be passed a arguments to methods.
+Blocks can be passed as arguments to methods and other blocks.
+
+To use a block as an interation condition,
+use the methods `whileTrue`, `whileFalse`, `whileNotNil`, and `whileNil`
+that are defined in the `BlockClosure` class.
 
 ## Main Windows
 
