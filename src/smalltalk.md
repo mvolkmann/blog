@@ -298,6 +298,8 @@ and display the result after it in the workspace:
 | expression separator (period)                 | `Transcript show: 'foo'. Transcript show: 'bar'` |
 | reference to current object in a method       | `self`                                           |
 
+In assignments, typing `:=` or `_` will be replaced by a left pointing arrow.
+
 In static arrays the elements are separated by spaces.
 
 In dynamic arrays the expressions are separated by periods.
@@ -442,8 +444,8 @@ area
     self subclassResponsibility
 ```
 
-A class named `VCircle` can be defined as a subclass of `VShape`.
-If it does not defined the `area` method
+The classes `VCircle` and `VRectangle` can be defined as subclasses of `VShape`.
+If they do not define the `area` method
 and that message is sent to an instance,
 an Error dialog with the title "My subclass should have overridden #area"
 will appear.
@@ -453,6 +455,41 @@ select a message category for the method,
 enter its implemenation, press cmd-s to save, and
 press the "Proceed" button to continue running the code
 at the point of the failed message send.
+
+The `VCircle` class can have the following class method for creating instances:
+
+```smalltalk
+radius: aNumber
+    ^self new initializeRadius: aNumber-
+```
+
+The `VCircle` class can have the following instance methods:
+
+```smalltalk
+initializeRadius: aNumber
+    radius := aNumber
+
+area
+    ^ Float pi * radius * radius
+```
+
+The `VRectangle` class can have the following class method for creating instances:
+
+```smalltalk
+height: aHeight width: aWidth
+    ^self new initializeHeight: aHeight width: aWidth
+```
+
+The `VRectangle` class can have the following instance methods:
+
+```smalltalk
+initializeHeight: aHeight width: aWidth
+    height := aHeight.
+    width := aWidth
+
+area
+    ^ height * width
+```
 
 TODO: Discuss recursion in methods and blocks.
 
