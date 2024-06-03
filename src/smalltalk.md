@@ -528,9 +528,18 @@ To verify that all this worked:
 - Click the `WorldMorph` background and select "Quit without saving"
   so the changes are not saved in the current image.
 - Restart Cuis Smalltalk with the same image.
-- Verify that the methods added are not present.
-- Open a "Workspace" window.
-- Enter "Feature require: '{package-name}'" and press cmd-d to "Do it".
+- Verify that the methods and classes that were added are not present.
+- Install the package using one of these approaches:
+
+  - Approach #1:
+    - Open a "Workspace" window.
+    - Enter "Feature require: '{package-name}'" and press cmd-d to "Do it".
+  - Approach #2:
+    - Open a "File List" window.
+    - Navigate to the file `{package-name}.pck.st`.
+    - Click the file to select it.
+    - Click the "install package" button.
+
 - Verify that the methods and classes that were saved in the package
   are now present.
 
