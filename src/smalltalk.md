@@ -309,6 +309,12 @@ TODO: What is a "compound literal"?
 Classes define sets of associated class variables, instance variables,
 class methods, and instance methods.
 
+All classes are global. Their names are added to the
+global variable `Smalltalk` which is a `SystemDictionary`.
+This requires all class names to be unique.
+Typically a common prefix is added to a set of related class names
+in order to make the unique.
+
 All classes inherit from one other class,
 except `Object` which is the highest superclass of all classes.
 
@@ -413,9 +419,11 @@ To remove a method in the System Browser,
 right-click it and select "remove method"
 or select it and press cmd-x.
 
+TODO: Discuss the `self` and `super` keywords.
+
 The following method can be added to the `Collection` class
 to enable computing the sum of the numbers in any collection.
-This method is present by default in Squeak, but not in Cuis.
+TODO: Choose a different example because this method is already present.
 
 ```smalltalk
 sum
@@ -493,10 +501,12 @@ To determine where packages are saved:
 - Enter `Smalltalk imagePath.`
 - Press cmd-p to print the result.
 
+Suppose the name of your Cuis directory is `Cuis-Smalltalk-Dev-master`.
 For me this is
-`/Users/volkmannm/Documents/dev/lang/smalltalk/Cuis6-2-main/Cuis6.2.image`.
+`~/Documents/dev/lang/smalltalk/{cuis-directory}/CuisImage/Cuis7.1-6367.image`.
 Packages I create go in a similar path which is
-`/Users/volkmannm/Documents/dev/lang/smalltalk/Cuis6-2-main-UserFiles/NewPackages/Volkmann.pck.st`
+`~/Documents/dev/lang/smalltalk/{cuis-directory}-UserFiles/NewPackages/Volkmann.pck.st`
+It seems that package files must be stored in the `NewPackages` directory in order to install them.
 
 ## Cuis Package Management
 
@@ -532,9 +542,12 @@ To verify that all this worked:
 - Install the package using one of these approaches:
 
   - Approach #1:
+    - This approach seems to only look for packages in the
+      `Cuis-*-UserFiles/NewPackages` directory.
     - Open a "Workspace" window.
     - Enter "Feature require: '{package-name}'" and press cmd-d to "Do it".
   - Approach #2:
+    - This approach can load package files from any directory.
     - Open a "File List" window.
     - Navigate to the file `{package-name}.pck.st`.
     - Click the file to select it.
@@ -594,6 +607,13 @@ the order of evaluation is:
 For example, in `2 raisedTo: 1 + 3 factorial`,
 the order is `#factorial`, `#+`, and `#raisedTo`.
 
+### Reserved Words
+
+There are only six reserved words in Smalltalk which are
+`true`, `false`, `nil`, `self`, `super`, and `thisContext`.
+
+TODO: Describe `thisContext`.
+
 ### Control Flow
 
 Control flow is provided through message passing.
@@ -611,11 +631,13 @@ literal values, variables, or blocks with no parameters.
 
 ## Data Types
 
+The Boolean literal values are `true` and `false`.
+
 Strings are delimited by single quotes, not double quotes.
 
 Literal arrays between with `#(`, end with `)`,
 and contain space-separated values.
-For example, `#(True 7 'Tami' (Color red))`.
+For example, `#(true 7 'Tami' (Color red))`.
 
 Collection methods include:
 
@@ -929,7 +951,7 @@ label2 delete.
 
 layout1 beColumn.
 
-array1 := #(True 7 'Tami' (Color red)).
+array1 := #(true 7 'Tami' (Color red)).
 array1 size. "4"
 "This prints each item in the array on a separate line in the Transcript window.
 The convention is to refer to each item with the parameter name `each`."
