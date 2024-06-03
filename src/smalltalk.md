@@ -700,6 +700,7 @@ A block is closure (anonymous function) that can have parameters
 and contain many expressions.
 They are represented by the class `BlockClosure`.
 The value of the block is the value of the last expression.
+It cannot explicitly return a value with `^`.
 
 A block of code can be saved in a variable, passed as a parameter,
 and can be used multiple times.
@@ -713,6 +714,15 @@ The `value` message evaluates a block
 and can be used to pass zero to four arguments.
 For blocks with more than four parameters,
 pass them in an array using `#valueWithArguments:`.
+
+Blocks are closures, meaning that they can
+access variables defined outside them. For example:
+
+```smalltalk
+n := 19.
+b := [:a | a + n].
+b value: 2. "result is 21"
+```
 
 Blocks can be passed as arguments to methods and other blocks.
 
