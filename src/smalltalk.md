@@ -584,6 +584,7 @@ Smalltalk supports three types of messages:
   `+ - * / \ ~ < > = @ % | & ? ,`
 
   For example, in `a * b`, `#*` is a binary message.
+  This sends the message `#*` to the object `a`, passing it the argument `b`.
 
 - keyword
 
@@ -633,7 +634,15 @@ literal values, variables, or blocks with no parameters.
 
 The Boolean literal values are `true` and `false`.
 
-Strings are delimited by single quotes, not double quotes.
+Characters are represented by the `Character` class.
+Printable literal characters are preceded by a dollar sign.
+For example, `$a`.
+Non-printable characters can be obtained from
+unary class methods in the `Character` class.
+For example, `Character space`, `Character tab`, and `Character cr`.
+
+Strings are represented by the `String` class.
+Literal strings are delimited by single quotes, not double quotes.
 
 Literal arrays between with `#(`, end with `)`,
 and contain space-separated values.
