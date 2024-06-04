@@ -512,15 +512,17 @@ factorial: n
         ifFalse: [n * (Math factorial: n - 1)])
 ```
 
-Here is an example of an instance method I added to the `Integer1` class
-that calls itself recursively:
+Here is an example of an instance method I added to the `Integer` class
+that calls itself recursively.
+This method already exists in that class
+and is more efficient than the version below.
 
 ```smalltalk
-factorial
+factorial2
     "answers the factorial of this integer"
     ^(self = 1
         ifTrue: 1
-        ifFalse: [self * (self - 1) factorial])
+        ifFalse: [self * (self - 1) factorial2])
 ```
 
 ## File List
