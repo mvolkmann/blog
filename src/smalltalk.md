@@ -294,11 +294,14 @@ and display the result after it in the workspace:
 | keyword message send                          | `2 raisedTo: 4 modulo: 3`                        |
 | message cascade - sends to initial receiver   | `Transcript show: 'foo'; newLine; show: 'bar'`   |
 | message chaining - sends to previous result   | `2 * 3 :: squared :: negated` (-36)              |
-| method return value                           | `^ <expression>`                                 |
+| method return value                           | `^<expression>`                                  |
 | expression separator (period)                 | `Transcript show: 'foo'. Transcript show: 'bar'` |
 | reference to current object in a method       | `self`                                           |
 
 In assignments, typing `:=` or `_` will be replaced by a left pointing arrow.
+
+The caret (^) in a return expression can be followed by a space,
+but a space is not typically included.
 
 In static arrays the elements are separated by spaces.
 
@@ -428,11 +431,11 @@ The following methods can be added to the `Integer` class.
 ```smalltalk
 predecessor
     "answers the predecessor of this integer"
-    ^ self - 1
+    ^self - 1
 
 successor
     "answers the successor of this integer"
-    ^ self + 1
+    ^self + 1
 ```
 
 Superclasses can define methods that subclasses must implement.
@@ -470,7 +473,7 @@ initializeRadius: aNumber
     radius := aNumber
 
 area
-    ^ Float pi * radius * radius
+    ^Float pi * radius * radius
 ```
 
 The `VRectangle` class can have the following class method for creating instances:
@@ -488,7 +491,7 @@ initializeHeight: aHeight width: aWidth
     width := aWidth
 
 area
-    ^ height * width
+    ^height * width
 ```
 
 To delete a method, select it and press cmd-x (remove method).
@@ -744,23 +747,39 @@ They are represented by the class `BlockClosure`.
 The value of the block is the value of the last expression.
 It cannot explicitly return a value with `^`.
 
-A block of code can be saved in a variable, passed as a parameter,
-and can be used multiple times. For example:
+Blocks can be saved in variables, passed as arguments to methods and blocks,
+and used multiple times. For example:
 
 ```smalltalk
 noArgBlock := [2 * 3].
 singleArgBlock := [:a | a * 3].
 multipleArgBlock := [:a :b | a * b].
-
-noArgBlock value: 2 value: 3.
-singleArgBlock value: 2.
-multipleArgBlock value: 2 value: 3.
 ```
 
 The `value` message evaluates a block
 and can be used to pass zero to four arguments.
 For blocks with more than four parameters,
 pass them in an array using `#valueWithArguments:`.
+For example:
+
+```smalltalk
+noArgBlock value: 2 value: 3.
+singleArgBlock value: 2.
+multipleArgBlock value: 2 value: 3.
+```
+
+Blocks can declare and use temporary variables.
+Blocks cannot explicitly return a value with the caret (^).
+Their value is that if their final expression.
+
+For example:
+
+```smalltalk
+average := [:a :b |
+    | sum |
+    sum := a + b.
+    sum / 2.0
+```
 
 Blocks are closures, meaning that they can
 access variables defined outside them. For example:
@@ -770,8 +789,6 @@ n := 19.
 b := [:a | a + n].
 b value: 2. "result is 21"
 ```
-
-Blocks can be passed as arguments to methods and other blocks.
 
 To use a block as an interation condition,
 use the methods `whileTrue`, `whileFalse`, `whileNotNil`, and `whileNil`
