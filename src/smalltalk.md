@@ -257,7 +257,7 @@ To print "Hello World!":
 1. Right-click inside the Workspace window and select "Do it" or press cmd-d.
 1. The output will appear in the Transcript window.
 1. To clear the output in the Transcript,
-   right-click in it and select "Clear Transcript".
+   right-click in it and select "Clear Transcript" (no keyboard shortcut).
 
 To evaluate an expression in a Workspace
 and display the result after it in the workspace:
@@ -311,11 +311,13 @@ TODO: What is a "compound literal"?
 Classes define sets of associated class variables, instance variables,
 class methods, and instance methods.
 
-All classes are global. Their names are added to the
-global variable `Smalltalk` which is a `SystemDictionary`.
+All classes are global and there is no namespacing.
+Class names are added to the global variable `Smalltalk`
+which is a `SystemDictionary`.
 This requires all class names to be unique.
 Typically a common prefix is added to a set of related class names
 in order to make the unique.
+Lack of namespacing is seen by some as a weakness of Smalltalk.
 
 All classes inherit from one other class,
 except `Object` which is the highest superclass of all classes.
@@ -353,8 +355,7 @@ To create a new class:
 - If the class needs any class variables,
   add them to the value of the `classVariableNames` string
   separated by spaces.
-- To save the changes, right-click in the bottom pane
-  and select "Accept" or press cmd-s.
+- To save the changes, press cmd-s (Accept).
 
 ### Methods
 
@@ -418,8 +419,7 @@ To sort the message category names alphabetically,
 right-click in the top, third pane and select "alphabetize".
 
 To remove a method in the System Browser,
-right-click it and select "remove method"
-or select it and press cmd-x.
+select it and press cmd-x (remove method).
 
 TODO: Discuss the `self` and `super` keywords.
 
@@ -490,6 +490,11 @@ initializeHeight: aHeight width: aWidth
 area
     ^ height * width
 ```
+
+To delete a method, select it and press cmd-x (remove method).
+
+To delete a method category and all the methods in it,
+select it and press cmd-x (remove).
 
 TODO: Discuss recursion in methods and blocks.
 
@@ -820,19 +825,17 @@ To open a System Browser window, click on the `WorldMorph` background,
 select Open, and select Browser.
 
 To search for a class by part of its name,
-right-click in the class category pane and select "find class..."
-or click in that pane and press cmd-f.
+click in the class category pane and press cmd-f (find class...).
 Then enter part of a class name and press return.
 A popup list of matching classes will appear.
 Click one of the names to browse that class.
 
-To browse a class, type its name (ex. String) in a Workspace window,
-then right-click and select "Browse it" (or press cmd-b).
+To browse a class, type its name (ex. String) in a Workspace window
+and press cmd-b (Browse it).
 This opens a Browser window with the class already selected.
 
-To delete a method from a class, click the method name to select it,
-right-click the method name, and
-select "Remove it" or "Remove, then browse senders".
+To delete a method from a class, select it and press cmd-x (Remove it).
+Then select "Remove it" or "Remove, then browse senders".
 The latter option allows the senders to be modified.
 
 For more detail, see
@@ -849,14 +852,13 @@ Enter any number of expressions separated by periods.
 To execute expressions, select them or
 place the cursor at the end of a single expression.
 
-To only execute them, right-click and select "Do it" or press cmd-d.
-To execute them and print the result,
-right-click and select "Print it" or press cmd-p.
-You will do both of these often,
-so remember the cmd-d and cmd-p keyboard shortcuts.
+To only execute them, select them and press cmd-d (Do It).
+To execute them and print the result, select them and press cmd-p (Print it).
+You will use both of these often, so memorize the keyboard shortcuts.
 
-To inspect a variable, right-click it and select "Inspect it"
-or select it and press cmd-i.
+To inspect a variable, select it and press cmd-i (Inspect it).
+
+To browse a class, enter its name and press cmd-b (Browse it).
 
 ## Transcript
 
@@ -872,8 +874,8 @@ For example, `'Hello World!' print`.
 The `print` message can be sent to strings, symbols,
 and any object that has a `printString` method.
 
-To clear the contents of the Transscript window,
-right-click in it and select "Clear Transcript".
+To clear the contents of the Transcript window,
+right-click in it and select "Clear Transcript" (no keyboard shortcut).
 
 TODO: Why does this window contain the word "Transcript" in its content?
 
@@ -908,6 +910,57 @@ To do this:
 - Press cmd-s to save it.
 - Optionally click the "Proceed" button to
   resume execution with calling the new method.
+
+## Unit Tests
+
+To create unit tests for an existing class:
+
+- Create a new class in the same class category as the class to be tested
+  that is a subclass of `TestCase`.
+  To test the class "Foo", a suggested class name is "FooTests".
+  For example:
+
+  ```smalltalk
+  TestCase subclass: #VShapeTests
+      instanceVariableNames: ''
+      classVariableNames: ''
+      poolDictionaries: ''
+      category: 'Volkmann'
+  ```
+
+- Add a message category like "test" or "testing".
+  The name doesn't really matter.
+- Add test instance methods whose name begins with "test".
+  Each method can contain any number of assertions.
+  For example:
+
+  ```smalltalk
+  testCircleArea
+      | c |
+      c := VCircle radius: 3.
+      self assert: c area isCloseTo: 28.2743339
+  ```
+
+The supported assertion method defined in the `TestCase` class include:
+
+- `assert:` for Boolean values
+- `assert:changes`
+- `assert:changes:by`
+- `assert:changes:from:to`
+- `assert:description`
+- `assert:description:resumable`
+- `assert:doesNotChange`
+- `assert:equals`
+- `assert:includes`
+- `assert:isCloseTo`
+- `assert:isCloseTo:withinPrecision`
+- `assert:isNotCloseTo`
+- `assert:isNotCloseTo:withinPrecision`
+
+To run tests, select a test class, test method category, or test method,
+and press cmd-t (run tests).
+Alternatively, open a "SUnit Test Runner" from the World menu,
+select one or more test classes, and click the "Run" button.
 
 ## Morphs
 
