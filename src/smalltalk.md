@@ -56,6 +56,7 @@ TODO: Are there any linting tools for Smalltalk?
 - <a href="https://squeak.org" target="_blank">Squeak Smalltalk</a>
 - <a href="https://www.fast.org.ar"
   target="_blank">Fundación Argentina de Smalltalk</a> (FAST)
+- <a href="https://www.gnu.org/software/dr-geo/" target="_blank">Dr. Geo</a>
 
 ## Smalltalk Pros
 
@@ -719,6 +720,17 @@ Smalltalk supports three types of messages:
 
   For example, in `a * b`, `#*` is a binary message.
   This sends the message `#*` to the object `a`, passing it the argument `b`.
+
+  The binary message `==` tests whether
+  two objects are identical (same objects in memory).
+
+  The binary message `=` tests whether two objects are equal,
+  meaning one can be used in place of the other.
+  Each class can define this method to decide
+  how their objects should be compared.
+  If they do not define `=`, an implementation
+  will be found in the inheritance hierarchy.
+  The `Object` class defines `=` to be the same as `==`.
 
 - keyword
 
