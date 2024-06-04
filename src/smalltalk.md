@@ -253,8 +253,10 @@ To select an item, click it.
 
 To open an context-sensitive menu for an item, right-click it.
 After an item is selected from this menu, it will close.
-To keep it open so multiple selections can be made,
-click its push pin in the upper-right corner.
+
+Menus can be made to remain open so multiple selections can be made
+by clicking its push pin in the upper-right corner.
+If the menu is closed and re-opened, the push pin state will be reset.
 
 To print "Hello World!":
 
@@ -641,7 +643,6 @@ For me this is
 `~/Documents/dev/lang/smalltalk/{cuis-directory}/CuisImage/Cuis7.1-6367.image`.
 Packages I create go in a similar path which is
 `~/Documents/dev/lang/smalltalk/{cuis-directory}-UserFiles/NewPackages/Volkmann.pck.st`
-It seems that package files must be stored in the `NewPackages` directory in order to install them.
 
 ## Cuis Package Management
 
@@ -734,7 +735,7 @@ Smalltalk supports three types of messages:
 
 - keyword
 
-  Each keywork is alphanumeric, begin lowercase, and ends in a colon.
+  Each keyword is alphanumeric, begins lowercase, and ends in a colon.
   For example, `#at:put` is a keyword message in the
   `OrderedCollection` class which is the superclass of `Array`.
   This message is sent as follows:
@@ -743,6 +744,11 @@ Smalltalk supports three types of messages:
   colors := #('red' 'green' 'blue').
   colors at: 2 put: 'yellow'.
   ```
+
+  The parts of a keyword message must be specified
+  in the order in which they appear.
+  It's possible define additional methods that support other orders,
+  but that is not typically done.
 
 When multiple messages of these types are combined in a single expression,
 the order of evaluation is:
