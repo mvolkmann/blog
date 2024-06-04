@@ -745,11 +745,16 @@ The value of the block is the value of the last expression.
 It cannot explicitly return a value with `^`.
 
 A block of code can be saved in a variable, passed as a parameter,
-and can be used multiple times.
+and can be used multiple times. For example:
 
 ```smalltalk
-myBlock := [:a :b | a + b].
-myBlock value: 2 value: 3.
+noArgBlock := [2 * 3].
+singleArgBlock := [:a | a * 3].
+multipleArgBlock := [:a :b | a * b].
+
+noArgBlock value: 2 value: 3.
+singleArgBlock value: 2.
+multipleArgBlock value: 2 value: 3.
 ```
 
 The `value` message evaluates a block
@@ -961,6 +966,8 @@ To run tests, select a test class, test method category, or test method,
 and press cmd-t (run tests).
 Alternatively, open a "SUnit Test Runner" from the World menu,
 select one or more test classes, and click the "Run" button.
+After adding new test classes, click the "Refresh" button
+to make the "SUnit Test Runner" window aware of them.
 
 To install some example tests:
 
