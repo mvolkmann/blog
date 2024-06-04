@@ -45,6 +45,8 @@ are looked up for compatible methods at runtime.
 However, Smalltalk editors do check for "unknown selectors"
 when code is entered.
 
+TODO: Are there any linting tools for Smalltalk?
+
 ## Resources
 
 - <a href="https://en.wikipedia.org/wiki/Smalltalk"
@@ -341,16 +343,22 @@ Examples include "attribute", "property", and "field".
 Smalltalk calls these "instance variables".
 
 Instance variables can only be directly accessed by methods in the same class.
-To expose them outside the class, add getter methods.
+To expose them outside the class, add getter and setter (optional) methods.
 For example, if `score` is an instance variable
 then the following is a getter method for it.
-By convention, the name of the method is the same as
-the name of the instance variable, but this is not required.
+By convention, the name of getter and setter methods is the same as
+the name of the associated instance variable, but this is not required.
 
 ```smalltalk
 score
     ^score
+
+score: aNumber
+    score := aNumber
 ```
+
+As shown above, another convention is for variables associated with
+keyword messages to indicate their expected type.
 
 To create a new class:
 
@@ -531,6 +539,35 @@ factorial2
     ^(self = 1
         ifTrue: 1
         ifFalse: [self * (self - 1) factorial2])
+```
+
+## Variables
+
+Smalltalk supports three kinds of variables:
+
+- Class variables are associated with a class.
+
+  These are declard in a space-separated string that is
+  the value of `classVariableNames` in a class definition.
+
+- Instance variables are associated with a specific instance of a class.
+
+  These are declard in a space-separated string that is
+  the value of `instanceVariableNames` in a class definition.
+
+- Temporary (or local) variables are accessible only within a method or block.
+
+  These are declared in a space-separated string between vertical bars
+  inside a method or block definition.
+
+While Smalltalk does not support global variables,
+the `Smalltalk` `SystemDictionary` object can be used for this purpose.
+The following code adds the key "color" with the value "yellow"
+and they retrieves the value for that key:
+
+```smalltalk
+Smalltalk at: 'color' put: 'yellow'.
+color := Smalltalk at: 'color' ifAbsent: 'none'.
 ```
 
 ## File List
