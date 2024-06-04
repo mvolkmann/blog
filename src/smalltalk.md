@@ -790,9 +790,22 @@ b := [:a | a + n].
 b value: 2. "result is 21"
 ```
 
-To use a block as an interation condition,
+To use a block as an iteration condition,
 use the methods `whileTrue`, `whileFalse`, `whileNotNil`, and `whileNil`
 that are defined in the `BlockClosure` class.
+
+A block can call itself if it passes itself in as an argument.
+For example:
+
+```smalltalk
+fact := [:block :n |
+    n = 1
+        ifTrue: [1]
+        ifFalse: [ n * (block value: block value: n - 1) ]
+].
+
+fact value: fact value: 5 "gives 120"
+```
 
 ## Main Windows
 
