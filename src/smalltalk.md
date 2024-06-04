@@ -499,7 +499,29 @@ To delete a method, select it and press cmd-x (remove method).
 To delete a method category and all the methods in it,
 select it and press cmd-x (remove).
 
-TODO: Discuss recursion in methods and blocks.
+Both class and instance methods can call themselves recursively.
+
+Here is an example of a class method from a class I created named `Math`
+that calls itself recursively:
+
+```smalltalk
+factorial: n
+    "answers the factorial of a given integer"
+    ^(n = 1
+        ifTrue: 1
+        ifFalse: [n * (Math factorial: n - 1)])
+```
+
+Here is an example of an instance method I added to the `Integer1` class
+that calls itself recursively:
+
+```smalltalk
+factorial
+    "answers the factorial of this integer"
+    ^(self = 1
+        ifTrue: 1
+        ifFalse: [self * (self - 1) factorial])
+```
 
 ## File Out and File In
 
@@ -800,8 +822,8 @@ For example:
 ```smalltalk
 fact := [:block :n |
     n = 1
-        ifTrue: [1]
-        ifFalse: [ n * (block value: block value: n - 1) ]
+        ifTrue: 1
+        ifFalse: [n * (block value: block value: n - 1)]
 ].
 
 fact value: fact value: 5 "gives 120"
