@@ -523,6 +523,22 @@ factorial
         ifFalse: [self * (self - 1) factorial])
 ```
 
+## File List
+
+To view local files and operate on them,
+select Open ... File List from the World menu.
+
+By default, the top directory will be one from which Cuis was started,
+referred to as "Cuis top".
+To instead start from the root directory of the drive,
+right-click in the upper-left pane and
+select "default initial directories" ... "OS roots".
+This change will not take effect until a new File List window is opened.
+
+A common operation performed in a File List window
+is to locate and select a `.pck.st` file that defines a package
+and click the "install package" button to install it.
+
 ## File Out and File In
 
 To save all the code for a package to a text file:
