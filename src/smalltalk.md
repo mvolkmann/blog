@@ -1119,11 +1119,22 @@ To create a morph:
 - In the dialog that appears,
   select a category of morphs and then a specific kind.
 
-Examples of morphs include:
+Only a small set of morphs is provided by default.
+A good source of additional morphs is the package "UI-Shapes".
+To install this:
 
--
+- Open a terminal.
+- `cd` to the directory that contains the base image being used.
+  For me this is `Cuis-Smalltalk-Dev-master/CuisImage`.
+- Run the command `git clone git@github.com:Cuis-Smalltalk/Cuis-Smalltalk-UI.git`.
+- In Cuis, open a Workspace window.
+- Enter `Feature require: 'UI-Shapes'` and press cmd-d (Do it).
+- The set of "Basic" morphs will now include `BoxedMorph`, `EllipseMorph`,
+  `FrameMorph`, `ImageMorph`, `LabelMorph`, `LineMorph`, `PointerLineMorph`,
+  and `TileResizeMorph`.
 
 To create and add morphs with code:
+TODO: Add this.
 
 ## Halo
 
