@@ -37,6 +37,14 @@ Instead, duck typing is used. Any object can be used as long as it
 is able to respond to all the messages that are sent to it.
 This is determined at run-time.
 
+Alan Kay said "OOP to me means only messaging,
+local retention and protection and hiding of state-process,
+and extreme late-binding of all things."
+Late binding means that messages sent to objects
+are looked up for compatible methods at runtime.
+However, Smalltalk editors do check for "unknown selectors"
+when code is entered.
+
 ## Resources
 
 - <a href="https://en.wikipedia.org/wiki/Smalltalk"
