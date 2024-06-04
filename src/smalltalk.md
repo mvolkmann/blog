@@ -962,6 +962,17 @@ and press cmd-t (run tests).
 Alternatively, open a "SUnit Test Runner" from the World menu,
 select one or more test classes, and click the "Run" button.
 
+To install some example tests:
+
+- Open a "File List" window from the World menu.
+- Navigate to and expand `Cuis-Smalltalk-Dev-master`
+  or the name of your version of Cuis.
+- Navigate to and expand "Packages" and then "Features".
+- Enter "test" in the filter input in the upper-left.
+- Select one of more of the packages whose names begin with "Test-".
+- Click the "install package" button.
+- View the code for those packages in a System Browser window.
+
 ## Morphs
 
 Morphs are what other graphical systems refer to as widgets.
