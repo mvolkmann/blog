@@ -1098,11 +1098,16 @@ TODO: Why does this window contain the word "Transcript" in its content?
 
 ## Text Editors
 
-TODO: Describe these.
-How do these differ from Workspaces?
+"Text Editor" windows enable editing text files.
+They support changing the font size, color, and style of selected text.
 
-In text editors, right-click and select "Help..."
-to see a list of the supported key bindings.
+These are used to edit text other than Smalltalk source code.
+
+The text can be saved in `.txt` files, but
+all the formatting is discarded and only the raw text is saved.
+
+In any text editng pane, including those in Browser windows,
+right-click and select "Help..." to see a list of the supported key bindings.
 
 To comment/uncomment selected lines of code, press cmd-".
 
