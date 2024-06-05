@@ -339,7 +339,13 @@ TODO: Are other options in the Windows menu useful?
 | expression separator (period)                 | `Transcript show: 'foo'. Transcript show: 'bar'` |
 | reference to current object in a method       | `self`                                           |
 
-In assignments, typing `:=` or `_` will be replaced by a left pointing arrow.
+To display a left pointing arrow in place of `:=` for all assigments,
+open the World menu and select Preferences...Show ST-80 Assignments.
+The next time code is modified, all the `:=` messages
+will be replaced by a left pointing arrow.
+And typing `:=` or `_` will be replaced by a left pointing arrow.
+To revert to showing `:=` messages,
+open the World menu and select Preferences...Show ANSI Assignments.
 
 The caret (^) in a return expression can be followed by a space,
 but a space is not typically included.
@@ -1099,6 +1105,8 @@ place the cursor at the end of a single expression.
 To only execute them, select them and press cmd-d (Do It).
 To execute them and print the result, select them and press cmd-p (Print it).
 You will use both of these often, so memorize the keyboard shortcuts.
+
+If the code goes into an infinite loop, break out of it by pressing cmd-period.
 
 To inspect a variable, select it and press cmd-i (Inspect it).
 
