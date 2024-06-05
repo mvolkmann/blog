@@ -470,8 +470,6 @@ right-click in the top, third pane and select "alphabetize".
 To remove a method in the System Browser,
 select it and press cmd-x (remove method).
 
-TODO: Discuss the `self` and `super` keywords.
-
 The following methods can be added to the `Integer` class.
 
 ```smalltalk
@@ -570,6 +568,39 @@ factorial2
         ifTrue: 1
         ifFalse: [self * (self - 1) factorial2])
 ```
+
+## Refactorings
+
+To refactor a method or code, select it, right-click,
+and select an option from the "refactorings" submenu.
+
+For methods the options include:
+
+- rename...
+- change keyword order...
+- add parameter...
+- remove parameter...
+- inline method...
+- move to instance/class method
+- push up
+- add in superclass as subclassResponsibility
+- push down to subclasses
+- push down to one subclass
+
+For selected code the options include:
+
+- Extract as Parameter...
+- Extract Temporary...
+- Extract Method...
+- Inline Temporary...
+- Inline Method...
+- Temporary to Instance Variable
+- Push Up Instance Variable
+- Push Down Instance Variable
+
+## Keywords self and super
+
+TODO: Discuss these.
 
 ## Variables
 
@@ -949,7 +980,7 @@ selecting Open, and selecting a window name.
 - Message Names: for determining which classes implement a given method
 - Process Browser: displays the state of all Smalltalk processes
 - SUnit Test Runner: for running unit tests
-- Text Editor: for editing code
+- Text Editor: for editing code?
 - Transcript: displays output
 - Workspace: for experimenting with code
 
@@ -967,12 +998,10 @@ System Browser windows contain four rows.
     displays message categories for the class in the third pane.
     Example message category names include "accessing", "comparing",
     "copying", "converting", "enumerating", and "printing".
-  - Selecting a message category in the third pane
+  - Selecting a message category (a.k.a protocol) in the third pane
     displays methods in that category in the fourth pane.
     The top, default messate category is "-- all --",
     which contains all the methods.
-
-  TODO: Are message categories also referred to as protocols?
 
 - The second row displays a message describing the item selected in the top row.
 - The third row contains a series of buttons that can be clicked to
