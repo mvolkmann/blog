@@ -281,6 +281,31 @@ and display the result after it in the workspace:
 - Remove the output from the Workspace window
   by pressing ctrl-z to undo adding it.
 
+## Windows
+
+You will be opening and using many windows.
+To open one, click on the `WorldMorph` to open the World menu
+and select a window type from the "Open" submenu.
+Options include:
+
+- Text Editor
+- Workspace Browser
+- Message Names
+- Transcript
+- Installed Packages
+- Change Sorter
+- Process Browser
+- Emergency Evaluator
+- File List
+- SUnit Test Runner
+
+TODO: Summarize the purpose of each kind of window.
+
+To tile all the open windows, open the World menu
+and select Windows...Tile open windows.
+
+TODO: Are other options in the Windows menu useful?
+
 ## Syntax
 
 | Item                                          | Example                                          |
@@ -678,6 +703,25 @@ To read all the code for a package from a text file:
 
 ## Packages
 
+Cuis Smalltalk supports the ability to save code outside an image file
+and load it into running images.
+This is an alternative to Monticello which is used in Squeak and Pharo.
+
+Packages are collections of Smalltalk code
+stored in files with a `.pck.st` file.
+
+There are three ways to install a package.
+
+1. Drag a package file onto the `WorldMorph`
+   and select "install package".
+1. Open a "File List" window, locate a package file,
+   select it, and click the "install package" button.
+1. Open a Workspace window,
+   enter the command `Feature require: '{package-name}'`,
+   and press cmd-d (Do it).
+   This option only works if the package is
+   in the same directory as the image file that is loaded.
+
 To see all the installed packages, click the WorldMorph background
 and select Open...Installed Packages.
 This opens an "Installed Packages" window.
@@ -696,6 +740,12 @@ To create a new package:
 - Enter a comment describing the package.
 - Click the "Save" button.
 
+I created a package whose name is my last name.
+I use this package to save all my experimental code
+so I can easily load it into new images.
+This is useful in case I accidentally modify an image in an unintended way.
+I can then return to using a base image and load my package into it.
+
 To determine where packages are saved:
 
 - Open a Workspace.
@@ -707,13 +757,6 @@ For me this is
 `~/Documents/dev/lang/smalltalk/{cuis-directory}/CuisImage/Cuis7.1-6367.image`.
 Packages I create go in a similar path which is
 `~/Documents/dev/lang/smalltalk/{cuis-directory}-UserFiles/NewPackages/Volkmann.pck.st`
-
-## Cuis Package Management
-
-This is an alternative to Monticello which is used in Squeak and Pharo.
-
-Create a new package as shown in the previous section.
-For example, my new package name is "Volkmann".
 
 To add or override methods in existing classes
 and save the changes in your package:
@@ -739,20 +782,7 @@ To verify that all this worked:
   so the changes are not saved in the current image.
 - Restart Cuis Smalltalk with the same image.
 - Verify that the methods and classes that were added are not present.
-- Install the package using one of these approaches:
-
-  - Approach #1:
-    - This approach seems to only look for packages in the
-      `Cuis-*-UserFiles/NewPackages` directory.
-    - Open a "Workspace" window.
-    - Enter "Feature require: '{package-name}'" and press cmd-d to "Do it".
-  - Approach #2:
-    - This approach can load package files from any directory.
-    - Open a "File List" window.
-    - Navigate to the file `{package-name}.pck.st`.
-    - Click the file to select it.
-    - Click the "install package" button.
-
+- Install the package.
 - Verify that the methods and classes that were saved in the package
   are now present.
 
