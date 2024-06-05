@@ -434,6 +434,15 @@ To create a new class:
   separated by spaces.
 - To save the changes, press cmd-s (Accept).
 
+### Objects
+
+Objects are created by sending a message to a class.
+In addition, some kinds of objects can be created from a literal syntax
+such as numbers, strings, and arrays.
+
+To determine the class of an object, send it the `class` unary message.
+For example, `19 class` returns `SmallInteger`.
+
 ### Methods
 
 All methods are public.
@@ -634,7 +643,11 @@ For selected code the options include:
 
 ## Keywords self and super
 
-TODO: Discuss these.
+The `self` keyword can be used in instance methods
+to refer to the current object.
+It can also be used in class methods to refer to the current class.
+
+TODO: Add more detail.
 
 ## Variables
 
@@ -881,7 +894,9 @@ literal values, variables, or blocks with no parameters.
 
 ## Data Types
 
-The Boolean literal values are `true` and `false`.
+The `Boolean` literal values are `true` and `false`.
+These are instances of the classes `True` and `False`
+which are subclasses of the class `Boolean`.
 
 Characters are represented by the `Character` class.
 Printable literal characters are preceded by a dollar sign.
@@ -913,6 +928,12 @@ For example, `#(1 2 3) inject: 0 into: [:acc :n | acc + n]` gives `6`.
 
 ### Array
 
+`Array` instances are fixed-length, ordered collections.
+TODO: Add detail.
+
+### OrderedCollection
+
+`OrderedCollection` instances are variable-length, ordered collections.
 TODO: Add detail.
 
 ### Bag
@@ -993,6 +1014,12 @@ b value: 2. "result is 21"
 To use a block as an iteration condition,
 use the methods `whileTrue`, `whileFalse`, `whileNotNil`, and `whileNil`
 that are defined in the `BlockClosure` class.
+
+For example:
+
+```smalltalk
+TODO: Add a whileTrue example.
+```
 
 A block can call itself if it passes itself in as an argument.
 For example:
