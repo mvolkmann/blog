@@ -327,6 +327,33 @@ TODO: What is a "compound literal"?
 Classes define sets of associated class variables, instance variables,
 class methods, and instance methods.
 
+Classes are defined by sending the message
+`#subclass:instanceVariableNames:classVariableNames:poolDictionaries:category:`
+to a superclass which can be `Object` or any other class.
+The `subclass` keyword takes a symbol.
+The remaining keywords all take strings.
+All the keywords must be supplied, even if their value is an empty string.
+The following is an example class definition.
+
+```smalltalk
+Object subclass: #Math
+    instanceVariableNames: ''
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'Volkmann'
+```
+
+Instance variable names must begin lowercase.
+Class variable names must begin uppercase.
+If the category is an empty string, it will be changed to 'as yet unclassified'.
+
+It is common to not use class variables or pool dictionaries.
+
+Pool dictionaries enable sharing data between related classes.
+They reside in the `Smalltalk` dictionary.
+To create a pool dictionary: `Smalltalk at: #MyPool put: (Dictionary new)`.
+Then refer to it from any number of classes with `poolDictionaries: 'MyPool'`.
+
 All classes are global and there is no namespacing.
 Class names are added to the global variable `Smalltalk`
 which is a `SystemDictionary`.
@@ -1021,6 +1048,11 @@ TODO: Why does this window contain the word "Transcript" in its content?
 
 TODO: Describe these.
 How do these differ from Workspaces?
+
+In text editors, right-click and select "Help..."
+to see a list of the supported key bindings.
+
+To comment/uncomment selected lines of code, press cmd-".
 
 ## Message Names
 
