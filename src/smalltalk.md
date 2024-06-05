@@ -286,20 +286,23 @@ and display the result after it in the workspace:
 You will be opening and using many windows.
 To open one, click on the `WorldMorph` to open the World menu
 and select a window type from the "Open" submenu.
-Options include:
 
-- Text Editor
-- Workspace Browser
-- Message Names
-- Transcript
-- Installed Packages
-- Change Sorter
-- Process Browser
-- Emergency Evaluator
-- File List
-- SUnit Test Runner
+The available windows include:
 
-TODO: Summarize the purpose of each kind of window.
+- Text Editor: for editing text other than Smalltalk source code
+- Workspace: for experimenting with code
+- Browser: for examining code (a.k.a System Browser)
+- Message Names: for determining which classes implement a given method
+- Transcript: displays output
+- Installed Packages: lists all installed packages and allows more to be installed
+- Change Sorter: TODO: Describe this.
+- Process Browser: displays the state of all Smalltalk processes
+- Emergency Evaluator: TODO: Describe this.
+- File List: file explorer for viewing all local files and editing text files
+- SUnit Test Runner: for running unit tests and viewing the results
+
+Of these, the most frequently used windows tend to be
+Workspace, Transcript, and Browser.
 
 To tile all the open windows, open the World menu
 and select Windows...Tile open windows.
@@ -1003,22 +1006,6 @@ fact := [:block :n |
 
 fact value: fact value: 5 "gives 120"
 ```
-
-## Main Windows
-
-There are four main windows that can be opened
-by clicking on the WorldMorph background,
-selecting Open, and selecting a window name.
-
-- Browser: for examining code (a.k.a System Browser)
-- File List: file explorer for viewing all local files and editing text files
-- Installed Packages: lists all installed packages and allows more to be installed
-- Message Names: for determining which classes implement a given method
-- Process Browser: displays the state of all Smalltalk processes
-- SUnit Test Runner: for running unit tests
-- Text Editor: for editing code?
-- Transcript: displays output
-- Workspace: for experimenting with code
 
 ## System Browser
 
