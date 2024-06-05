@@ -569,6 +569,12 @@ factorial2
         ifFalse: [self * (self - 1) factorial2])
 ```
 
+If you edit the name of a method in code editing pane of a System Browser,
+it will create a copy of the method with the new name.
+A method with the previous name will still exist and can be deleted.
+An alternative is to right-click the method in the 4th pane
+and select "refactorings...rename...".
+
 ## Refactorings
 
 To refactor a method or code, select it, right-click,
