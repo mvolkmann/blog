@@ -1101,10 +1101,11 @@ Enter any number of expressions separated by periods.
 
 To execute expressions, select them or
 place the cursor at the end of a single expression.
-
-To only execute them, select them and press cmd-d (Do It).
-To execute them and print the result, select them and press cmd-p (Print it).
-You will use both of these often, so memorize the keyboard shortcuts.
+To execute them for their side effects, press cmd-d (Do it).
+To execute them and print the result, press cmd-p (Print it).
+Output from "Print it" will be selected,
+so it can be removed by pressing the delete key.
+You will use "Do it" and "Print it" often, so memorize the keyboard shortcuts.
 
 If the code goes into an infinite loop, break out of it by pressing cmd-period.
 
