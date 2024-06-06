@@ -213,11 +213,15 @@ in the installed directory based on your operating system.
      would like to access files in your Documents folder'.
      Click the "Allow" button each time.
 
-The file `CuisVM.app` implements the virtual machine used by Cuis Smalltalk.
+The file `CuisVM.app` (36 MB) implements the virtual machinex
+used by Cuis Smalltalk.
 It is taken directly from Squeak and does not differ in any way.
 All the differences between Cuis and Squeak are implemented in
 its base image file found in the `CuisImage` subdirectory
 with a name like `Cuis6.2.image` or `Cuis7.1-6367.image`.
+The base Cuis image file is around 19 MB.
+
+By contrast, `PharoLauncher.app` is 198MB.
 
 The reported name of the `CuisVM.app` app in macOS is "Squeak 5.0".
 To change this:
@@ -624,6 +628,24 @@ A method with the previous name will still exist and can be deleted.
 An alternative is to right-click the method in the 4th pane
 and select "refactorings...rename...".
 
+While it is not commonly done, a method can check the types of its arguments
+an alter its functionality based on those.
+For example, this class method returns a number
+that is double what is passed to it.
+If it is given a `String` instead of a `Number`,
+it converts it to a `Number` and doubles it.
+If it is given some other kind of object, it just returns `0`.
+TODO: How can you add error handling for strings that do not contain a number?
+
+```smalltalk
+double: obj
+    "demonstrates taking different actions based on the type of an argument"
+
+    (obj isKindOf: Number) ifTrue: [^obj * 2].
+    (obj isKindOf: String) ifTrue: [^obj asNumber * 2].
+    ^0
+```
+
 ## Refactorings
 
 To refactor a method or code, select it, right-click,
@@ -793,7 +815,8 @@ and save the changes in your package:
   an asterisk followed by the new package name.
   For example, I used "\*Volkmann".
 - Add new methods to the existing class in the new message category.
-- Open an "Installed Packages" window and select the new package.
+- Open an "Installed Packages" window and select the package.
+  An asterisk before the name indicates that it has unsaved changes.
 - Click the "Save" button.
 
 To define new classes and save them in your package:
@@ -814,13 +837,11 @@ To verify that all this worked:
 - Verify that the methods and classes that were saved in the package
   are now present.
 
-To uninstall a package from the current image,
-open an "Installed Packages" window, select the package,
-and click the "delete/merge" button.
-This does not delete the file that defines the package.
-TODO: The class category associated with the package and all its contents
-TODO: are still in the image, visible in "System Browser" windows!
-TODO: Why doesn't this work?
+There is no provided way to uninstall a package.
+The only way to remove it from the image is to start with a fresh image
+and only install the desired packages.
+TODO: What does the "delete/merge" button in the "Installed Packages" window do?
+TODO: It does not uninstall the selected package or delete the file that defines it.
 
 ## Adding and Saving Code
 
@@ -1124,6 +1145,12 @@ You will use "Do it" and "Print it" often, so memorize the keyboard shortcuts.
 If the code goes into an infinite loop, break out of it by pressing cmd-period.
 
 To inspect a variable, select it and press cmd-i (Inspect it).
+This opens an inspect window that lists all of its instance variables
+in the top left pane.
+Clicking one displays its current value in its top right pane.
+The bottom pane can be used to send messages to the object.
+For example, when inspecting a morph, entering `self color: Color red`
+and pressing cmd-d (Do it) changes the color.
 
 To browse a class, enter its name and press cmd-b (Browse it).
 
@@ -1301,8 +1328,9 @@ TODO: Add this.
 
 ## Halo
 
-To open the halo (set of surrounding buttons) for an item,
-ctrl-shift-click it (or ctrl-right-click it).
+To open the halo (set of surrounding buttons) for an item, cmd-click it.
+If the item is embedded in other morphs, cmd-click multiple times
+until a halo appears around the desired morph.
 
 <img alt="Smalltalk halo" style="width: 50%"
   src="/blog/assets/smalltalk-halo.png?v={{pkg.version}}">
@@ -1432,3 +1460,15 @@ myBlock value: 2 value: 3.
 - Does Smalltalk have an FFI for calling code written in other languages?
 - How can you work with SQLite and Postgres databases from Smalltalk?
 - Where are method categories stored?
+- Build a Todo app using Morphic and practice stripping the image
+  to create a version that can be distributed to users.
+- Is there an easy way to create a memoized version of a method?
+  Try this with the "collatz" method that you added to the Integer class.
+- A Smalltalk image contains a set of class definitions, existing objects,
+  and code that implements a GUI for the objects that are graphical.
+  Anything else?
+- Code can be saved in an image, a package, or a fileOut.
+  Are those all the options?
+- Are packages unique to Cuis Smalltalk?
+- Is the only way to save changes to a package to open an
+  "Installed Packages" window, select the package, and click the "save" button?
