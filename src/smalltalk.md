@@ -442,6 +442,9 @@ To create a new class:
 
 ### Objects
 
+In Smalltalk, code and data are both represented by objects.
+Code can be described by a method or block, both of which are kinds of objects.
+
 Objects are created by sending a message to a class.
 In addition, some kinds of objects can be created from a literal syntax
 such as numbers, strings, and arrays.
@@ -480,6 +483,9 @@ The steps to use this are:
 - A list of all matching methods will be displayed.
 - Click one of the methods to open a System Browser
   that shows the method implementation.
+
+See <a href="https://www.youtube.com/watch?v=cI_yBWdmoeI&list=PLu8vLCSA-4hklsvT9W6ruintbdx_K0DYW&index=11&t=28s"
+target="_blank">The amazing Squeak Method Finder</a>.
 
 To add a method to a class:
 
@@ -807,6 +813,14 @@ To verify that all this worked:
 - Install the package.
 - Verify that the methods and classes that were saved in the package
   are now present.
+
+To uninstall a package from the current image,
+open an "Installed Packages" window, select the package,
+and click the "delete/merge" button.
+This does not delete the file that defines the package.
+TODO: The class category associated with the package and all its contents
+TODO: are still in the image, visible in "System Browser" windows!
+TODO: Why doesn't this work?
 
 ## Adding and Saving Code
 
@@ -1238,10 +1252,28 @@ To install some example tests:
 - Click the "install package" button.
 - View the code for those packages in a System Browser window.
 
-## Morphs
+## Morphic
 
-Morphs are what other graphical systems refer to as widgets.
-They are graphical items that can be added to the WorldMorph or a LayoutMorph.
+Morphic is a GUI framework that is built into popular Smalltalk images.
+It defines user interfaces with "morphs" which are
+what other graphical systems refer to as widgets.
+They are graphical items that can be added to
+the `WorldMorph` (desktop) or a `LayoutMorph`.
+
+For a great introduction to Morphic, see
+<a href="https://www.youtube.com/watch?v=62baNn3c56Y"
+target="_blank">Holistic computing with Smalltalk and Morphic. Part 1</a>.
+
+To modify an existing morph:
+
+- Open the halo for the morph.
+- Click the blue menu button on the top and select "copy to clipboard".
+- Open a Workspace window.
+- Assign the morph to a variable.
+  For example, enter `morph := ` and press cmd-p to paste the reference.
+- Press cmd-d (Do it).
+- Send messages to the morph to modify it.
+  For example, `morph borderColor: (Color pink)`
 
 To create a morph:
 
@@ -1344,6 +1376,10 @@ described in the FAST 2024 conference video
 <a href="https://www.youtube.com/watch?v=MfAclig5XyI"
 target="_blank">Bootstrap: Creating Minimal Images from Scratch</a>.
 
+Also see
+<a href="https://www.youtube.com/watch?v=b3oGOMCjKU8&list=PLu8vLCSA-4hklsvT9W6ruintbdx_K0DYW&index=2&t=53s"
+target="_blank">Make a standalone click-&-run Smalltalk application for macOS</a>.
+
 ## Example Code
 
 ```smalltalk
@@ -1394,3 +1430,5 @@ myBlock value: 2 value: 3.
 ## Unresolved Questions
 
 - Does Smalltalk have an FFI for calling code written in other languages?
+- How can you work with SQLite and Postgres databases from Smalltalk?
+- Where are method categories stored?
