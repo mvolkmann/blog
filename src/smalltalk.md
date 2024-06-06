@@ -1328,6 +1328,22 @@ To embed a morph into another (such as a LayoutMorph):
 - select "embed into" ... {parent morph name}
   (typically LayoutMorph)
 
+## Deploying Applications
+
+Smalltalk can be used to build command-line, desktop, and web applications.
+After writing and testing the code in a standard Smalltalk image,
+you will want to create a stripped down version of the image
+that only contains what is necessary for running the application.
+
+All developer tools can be removed.
+For command-line and web applications, everything related to
+the Morphic GUI framework can be removed.
+
+Stripping an image is a manual process that is
+described in the FAST 2024 conference video
+<a href="https://www.youtube.com/watch?v=MfAclig5XyI"
+target="_blank">Bootstrap: Creating Minimal Images from Scratch</a>.
+
 ## Example Code
 
 ```smalltalk
@@ -1374,3 +1390,7 @@ array1 do: [:each | Transcript show: each :: newLine].
 myBlock := [:a :b | a + b].
 myBlock value: 2 value: 3.
 ```
+
+## Unresolved Questions
+
+- Does Smalltalk have an FFI for calling code written in other languages?
