@@ -736,6 +736,14 @@ To save all the code for a package to a text file:
 - Select the package in the top, first pane.
 - Right-click and select "fileOut".
 
+"fileOut" can be used to save any of these to a `.st` text file:
+
+- a single method
+- all the methods in a single method category
+- a single class and all its methods
+- a single package, but not methods it adds to
+  classes in other packages (or class categories)
+
 The file will be saved in
 `{distribution-name}-UserFiles/FileOuts/{package-name}.st`.
 
@@ -1157,8 +1165,10 @@ To browse a class, enter its name and press cmd-b (Browse it).
 ## Transcript
 
 This window displays output written to it.
-One way to do this is to do `Transcript show: <some-value>`,
+One way to do this is to send `Transcript show: <object>`,
 perhaps in a Workspace window.
+This can output any kind of object
+because every object has a string representation.
 
 Another way is to use the `print` method in the `CharacterSequence` class
 which is the superclasss of the `String` class.
@@ -1472,3 +1482,4 @@ myBlock value: 2 value: 3.
 - Are packages unique to Cuis Smalltalk?
 - Is the only way to save changes to a package to open an
   "Installed Packages" window, select the package, and click the "save" button?
+- Do any collection classes support structural sharing for immutability support?
