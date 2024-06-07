@@ -37,13 +37,16 @@ Instead, duck typing is used. Any object can be used as long as it
 is able to respond to all the messages that are sent to it.
 This is determined at run-time.
 
-Alan Kay said "OOP to me means only messaging,
+Alan Kay worked at Xerox PARC (Palo Alto Research Center) in the 1970s.
+He was the principal designer of Smalltalk and gave it its name.
+Alan said "OOP to me means only messaging,
 local retention and protection and hiding of state-process,
 and extreme late-binding of all things."
+
 Late binding means that messages sent to objects
 are looked up for compatible methods at runtime.
 However, Smalltalk editors do check for "unknown selectors"
-when code is entered.
+as code is entered.
 
 ## Resources
 
@@ -1423,8 +1426,9 @@ SimpleButtonMorph new
 
 ## Halo
 
-To open the halo (set of surrounding buttons) for an item, cmd-click it.
-If the item is embedded in other morphs, cmd-click multiple times
+To open the halo (set of surrounding buttons) for an item,
+cmd-click it in Cuis or option-click it in Squeak.
+If the item is embedded in other morphs, repeat this multiple times
 until a halo appears around the desired morph.
 
 <img alt="Smalltalk halo" style="width: 50%"
