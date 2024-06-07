@@ -308,6 +308,31 @@ The available windows include:
 Of these, the most frequently used windows tend to be
 Workspace, Transcript, and Browser.
 
+Other windows are only open for a specific object.
+
+- Inspector
+
+  This displays all the instance variables of a specific object.
+  Select an object reference or place the cursor immediately after it
+  and press cmd-i (Inpect it).
+  Click the name of an instance variable in the top left pane
+  to displays its current value in the top right pane.
+  Use the bottom pane to enter and execute Smalltalk expressions
+  where `self` refers to the object being inspected.
+  For example, when the object is a morph,
+  enter `self color: Color red` and press cmd-d (Do it),
+  or enter `self color` and press cmd-p (Print it).
+
+  Inspector windows are live, so changes made to the instance variables
+  are reflected.
+
+- Explorer
+
+  This displays an object tree starting at a specific object.
+  Select an object reference or place the cursor immediately after it
+  and press cmd-shift-i (Explore it).
+  Click the disclosure triangles to drill down into instance variable values.
+
 To tile all the open windows, open the World menu
 and select Windows...Tile open windows.
 
@@ -1158,14 +1183,6 @@ You will use "Do it" and "Print it" often, so memorize the keyboard shortcuts.
 
 If the code goes into an infinite loop, break out of it by pressing cmd-period.
 
-To inspect a variable, select it and press cmd-i (Inspect it).
-This opens an inspect window that lists all of its instance variables
-in the top left pane.
-Clicking one displays its current value in its top right pane.
-The bottom pane can be used to send messages to the object.
-For example, when inspecting a morph, entering `self color: Color red`
-and pressing cmd-d (Do it) changes the color.
-
 To browse a class, enter its name and press cmd-b (Browse it).
 
 ## Transcript
@@ -1484,6 +1501,8 @@ myBlock value: 2 value: 3.
 
 ## Unresolved Questions
 
+- Is it possible and does it make sense to implement
+  command-line utilities and apps in Smalltalk?
 - Does Smalltalk have an FFI for calling code written in other languages?
 - How can you work with SQLite and Postgres databases from Smalltalk?
 - Where are method categories stored?
@@ -1500,3 +1519,4 @@ myBlock value: 2 value: 3.
 - Is the only way to save changes to a package to open an
   "Installed Packages" window, select the package, and click the "save" button?
 - Do any collection classes support structural sharing for immutability support?
+- What package can you install to get a color picker?
