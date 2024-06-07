@@ -45,8 +45,6 @@ are looked up for compatible methods at runtime.
 However, Smalltalk editors do check for "unknown selectors"
 when code is entered.
 
-TODO: Are there any linting tools for Smalltalk?
-
 ## Resources
 
 - <a href="https://en.wikipedia.org/wiki/Smalltalk"
@@ -233,6 +231,25 @@ To change this:
 - Find the key "CFBundleName".
 - Change its value from "Squeak" to "Cuis".
 
+## Installing Squeak Smalltalk
+
+- Browse <a href="https://squeak.org" target="_blank">Squeak home</a> page.
+- Click the "Downloads" link.
+- Click the "Link" button for your operating system.
+- Double-click the downloaded file.
+
+On macOS:
+
+- Drag the application icon to the Finder "Applications" directory.
+- Double-click the `Squeak*.app` file.
+
+To adjust the font size:
+
+- Click the desktop to open a World menu.
+- Click "appearance...".
+- Click "system fonts...".
+- Click "increase font size" or "decrease font size".
+
 ## Getting Started
 
 Double-click a Smalltalk image file such as `CuisImage/Cuis6.2.image`.
@@ -343,7 +360,7 @@ TODO: Are other options in the Windows menu useful?
 | Item                                          | Example                                          |
 | --------------------------------------------- | ------------------------------------------------ |
 | comment                                       | `"some text"`                                    |
-| local variable (private scope)                | `myLocal` (camelCase)                            |
+| temporary (local) variable (private scope)    | `myTemp` (camelCase)                             |
 | global variable (shared scope)                | `MyGlobal` (CamelCase)                           |
 | pseudo variable (cannot assign)               | `self`                                           |
 | integer                                       | `123`                                            |
@@ -528,7 +545,7 @@ To add a method to a class:
 - Change "messageSelectorAndArgumentNames"
   to the name of the new method.
 - Modify the comment describing the method.
-- Update the list of temporary variable names or delete that line.
+- Update the list of temporary (local) variable names or delete that line.
 - Replace "statements" with the method implementation.
 - If the method was not associated with a method category ...
   - If the top, third pane does not contain a suitable message category ...
@@ -1069,7 +1086,7 @@ singleArgBlock value: 2.
 multipleArgBlock value: 2 value: 3.
 ```
 
-Blocks can declare and use temporary variables.
+Blocks can declare and use temporary (local) variables.
 Blocks cannot explicitly return a value with the caret (^).
 Their value is that if their final expression.
 
@@ -1370,6 +1387,16 @@ To install this:
 To create and add morphs with code:
 TODO: Add this.
 
+To change the location of a morph to x=100, y=200:
+
+```smalltalk
+myMorph location: (MorphicTranslation withTranslation: 100@200)
+```
+
+### Buttons
+
+To create a button:
+
 ## Halo
 
 To open the halo (set of surrounding buttons) for an item, cmd-click it.
@@ -1501,8 +1528,6 @@ myBlock value: 2 value: 3.
 
 ## Unresolved Questions
 
-- Is it possible and does it make sense to implement
-  command-line utilities and apps in Smalltalk?
 - Does Smalltalk have an FFI for calling code written in other languages?
 - How can you work with SQLite and Postgres databases from Smalltalk?
 - Where are method categories stored?
@@ -1520,3 +1545,7 @@ myBlock value: 2 value: 3.
   "Installed Packages" window, select the package, and click the "save" button?
 - Do any collection classes support structural sharing for immutability support?
 - What package can you install to get a color picker?
+- Are there any linting tools for Smalltalk?
+- Learn how to write and distribute command-line utilities/apps in Smalltalk.
+- Learn how to write and distribute GUI apps in Smalltalk.
+- Learn how to write and distribute web apps in Smalltalk.
