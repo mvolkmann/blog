@@ -503,6 +503,15 @@ For example, `19 class` returns `SmallInteger`.
 
 ### Methods
 
+Methods are associated with a specific class.
+Instance methods handle messages sent to objects instantiated from the class.
+Class methods handle messages sent to the class.
+
+Parameter names typically begin with "a" or "an".
+For example, `aScore`, `aName`, or `aDog`.
+Sometimes the names indicate the expected object type.
+For example, `aNumber`, `aString`, or `anArray`.
+
 All methods are public.
 By convention, methods that should only be used by
 other methods in the same class are placed in the "private" message category.
@@ -903,7 +912,7 @@ While still in the "Installed Packages" window,
 select the package and click "browse"
 to open a Browser window for the package.
 
-### Messages
+## Messages
 
 The only mechanism for communication between objects
 is for one to send a message to another.
@@ -970,14 +979,39 @@ the order of evaluation is:
 For example, in `2 raisedTo: 1 + 3 factorial`,
 the order is `#factorial`, `#+`, and `#raisedTo`.
 
-### Reserved Words
+If a message is sent to an object from a Workspace window
+and no compatible method is found, the following popup will appear:
+
+<img alt="Unknown Selector popup" style="width: 50%"
+  src="/blog/assets/smalltalk-unknown-selector.png?v={{pkg.version}}">
+
+If the selector was incorrectly typed,
+an implemented selector can be selected from this popup.
+
+If the selector is confirmed or if such a message is sent from runnning code,
+the following window will appear:
+
+<img alt="MessageNotUnderstood window"
+  src="/blog/assets/smalltalk-message-not-understood.png?v={{pkg.version}}">
+
+To implement the missing method, click the "Create" button.
+A popup will appear to prompt for the class within the inheritance hierarchy
+of the object where the new method should be added.
+After selecting a class, a second popup will appear to prompt for
+the method category to which the new method should be associated.
+The method can be implemented inside the "MessageNotUnderstood" window.
+Initially it will just contain `self shouldBeImplemented`.
+Replace that with the real implementation, which in this case is `^self * 3`,
+and press cmd-s to save the change.
+
+## Reserved Words
 
 There are only six reserved words in Smalltalk which are
 `true`, `false`, `nil`, `self`, `super`, and `thisContext`.
 
 TODO: Describe `thisContext`.
 
-### Control Flow
+## Control Flow
 
 Control flow is provided through message passing.
 
