@@ -979,6 +979,14 @@ the order of evaluation is:
 For example, in `2 raisedTo: 1 + 3 factorial`,
 the order is `#factorial`, `#+`, and `#raisedTo`.
 
+When entering code to send a message, completion hints are provided
+if at least the first letter in the message name is typed
+and the tab key is pressed.
+For example, entering `7 s` and pressing the tab key
+shows possible completions of `shallowCopy`, `sqrt`, and more.
+Use the up and down arrow keys to select a completion
+and press the return key to accept it.
+
 If a message is sent to an object from a Workspace window
 and no compatible method is found, the following popup will appear:
 
