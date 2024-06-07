@@ -1397,6 +1397,30 @@ myMorph location: (MorphicTranslation withTranslation: 100@200)
 
 To create a button:
 
+In Squeak, the following code creates a label and two buttons.
+The label displays an integer.
+Clicking the buttons increments or decrements the integer in the label.
+
+```smalltalk
+label := StringMorph new
+    contents: '0';
+    color: Color yellow;
+    position: 120@100;
+    openInWorld.
+SimpleButtonMorph new
+    label: 'Increment';
+    position: 150@100;
+    target: [ label contents: (label contents asInteger + 1) asString ];
+    actionSelector: #value;
+    openInWorld.
+SimpleButtonMorph new
+    label: 'Decrement';
+    position: 0@100;
+    target: [ label contents: (label contents asInteger - 1) asString ];
+    actionSelector: #value;
+    openInWorld.
+```
+
 ## Halo
 
 To open the halo (set of surrounding buttons) for an item, cmd-click it.
