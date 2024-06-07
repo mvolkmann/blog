@@ -171,7 +171,9 @@ The most popular include:
       src="/blog/assets/cuis-smalltalk-logo.png?v={{pkg.version}}">
   </div>
 
-  The mascot is southern mountain cavy which is a "tailless rodents with
+  Cuis supports TrueType fonts, whereas Squeak and Pharo do not.
+
+  The Cuis mascot is southern mountain cavy which is a "tailless rodents with
   short, speckled, greyish-yellow fur, fading to pale grey on the underparts."
   They look similar to a mouse, but grow to around eight inches in length.
   They are found in Argentina.
