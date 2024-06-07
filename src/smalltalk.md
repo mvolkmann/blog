@@ -870,12 +870,16 @@ Smalltalk supports three types of messages:
 
 - unary
 
-  These message names are alphanumeric and begin lowercase.
+  These message do not take any arguments.
+  Their names are alphanumeric and begin lowercase.
   For example, in `5 factorial`, `#factorial` is a unary message.
 
 - binary
 
-  These message names contain one or more of the following characters:
+  These message take a single argument and
+  have names that use a restricted set of characters that
+  make them look like operators in other programming languages.
+  Their names can only contain one or more of the following characters:
   `+ - * / \ ~ < > = @ % | & ? ,`
 
   For example, in `a * b`, `#*` is a binary message.
@@ -894,6 +898,8 @@ Smalltalk supports three types of messages:
 
 - keyword
 
+  These messages take one or more arguments
+  that are each preceded by a keyword.
   Each keyword is alphanumeric, begins lowercase, and ends in a colon.
   For example, `#at:put` is a keyword message in the
   `OrderedCollection` class which is the superclass of `Array`.
