@@ -359,6 +359,29 @@ and display the result after it in the workspace:
 - Remove the output from the Workspace window
   by pressing ctrl-z to undo adding it.
 
+## Themes
+
+Colors and other features of the Cuis Smalltalk UI
+are determined by selecting a theme.
+By default, only two themes are provided, "BrightColorTheme" and "DarkTheme".
+To add more, open the World menu, select Preferences...Themes...,
+and select "\* Load Additional Themes \*".
+This adds the themes "ClassicTheme", "DarkBlueTheme", "DarkColorTheme",
+"HighContractBlackTheme", "HighContrastWhiteTheme", "LightBluetheme",
+"LightGrayTheme", "LightTheme", and "PersonalizedTheme".
+Select one of these to switch to that theme.
+
+To customize the current theme:
+
+- Open a System Browser.
+- Select the "Graphics - Themes" class category.
+- Select the `Theme` class.
+- Select the `colors` message category.
+- Select one of the methods such as `buttonLabel`.
+- Change the color returned from its default value to a new value.
+
+This will affect all morphs that use that theme property.
+
 ## Windows
 
 You will be opening and using many windows.
