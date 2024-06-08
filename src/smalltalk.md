@@ -30,16 +30,22 @@ layout: topic-layout.njk
 "is a purely object oriented programming language (OOP)."
 Messages are sent to objects which decide whether and how to act on them.
 
-Smalltalk is a dynamically typed language.
+Smalltalk was the first programming language to
+popularize object-oriented programming (OOP).
+It is a dynamically typed language.
 Types of variables, method parameters,
 and method return types are never specified.
 Instead, duck typing is used. Any object can be used as long as it
 is able to respond to all the messages that are sent to it.
 This is determined at run-time.
 
-Alan Kay worked at Xerox PARC (Palo Alto Research Center) in the 1970s.
-He was the principal designer of Smalltalk and gave it its name.
-Alan said "OOP to me means only messaging,
+Alan Kay, Dan Ingalls, and Adele Goldberg worked at
+Xerox PARC (Palo Alto Research Center) in the 1970s.
+All of them collaborated to create Smalltalk.
+Alan Kay was the principal designer of Smalltalk and gave it its name.
+The original goal was to use it for teaching programming.
+
+Alan Kay said "OOP to me means only messaging,
 local retention and protection and hiding of state-process,
 and extreme late-binding of all things."
 
@@ -47,6 +53,31 @@ Late binding means that messages sent to objects
 are looked up for compatible methods at runtime.
 However, Smalltalk editors do check for "unknown selectors" when
 code is entered that sends a message to a literal object (not to a variable).
+
+Smalltalk didn't gain much traction outside Xerox Parc
+BYTE magizine published an issue focuses on Smalltalk in August 1981.
+The cover, shown at the beginning of this article,
+featured a colorful hot air balloon.
+
+In the 1990's the popularity of Smalltalk had risen enough
+that it was seen as a possible alternative to C++.
+For a time, IBM promoted replacing COBAL with Smalltalk.
+In 1995, Smalltalk (15%) was the second most popular OO language
+after C++ (71%).
+
+At the OOPSLA 1997 conference, Alan Kay said
+"Actually, I made up the term 'object-oriented'
+and I can tell you I did not have C++ in mind."
+He also said "Languages like C++ and Java are OOP done wrong.
+Smalltalk is OOP done right."
+
+Today Smalltalk is still used by the financial industry,
+manufacturers, utilities, transportation, and academia.
+
+The entire syntax of Smalltalk can be demonstrated on a post card.
+
+<img alt="Smalltalk on a post card"
+  src="/blog/assets/smalltalk-on-postcard.jpg?v={{pkg.version}}">
 
 ## Resources
 
@@ -1469,6 +1500,7 @@ It defines the following class methods that create colors by name:
 - `lightBlue`, `lightBrown`, `lightCyan`, `lightGray`, `lightGreen`, `lightMagenta`,
   `lightOrange`, `lightRed`, `lightYellow`
 - `darkGray`, `veryDarkGray`, `veryLightGray`, `veryVeryDarkGray`, `veryVeryLightGray`
+- `transparent`
 
 ## Morphic
 
@@ -1633,6 +1665,14 @@ target="_blank">Bootstrap: Creating Minimal Images from Scratch</a>.
 Also see
 <a href="https://www.youtube.com/watch?v=b3oGOMCjKU8&list=PLu8vLCSA-4hklsvT9W6ruintbdx_K0DYW&index=2&t=53s"
 target="_blank">Make a standalone click-&-run Smalltalk application for macOS</a>.
+
+## Web Development
+
+See the
+<a href="https://github.com/SeasideSt/Seaside" target="_blank">Seaside</a> and
+<a href="https://github.com/zeroflag/Teapot" target="_blank">Teapot</a> frameworks.
+
+Also see the <a href="https://book.seaside.st/book" target="_blank">Seaside Book</a>.
 
 ## Example Code
 
