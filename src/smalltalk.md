@@ -1593,13 +1593,40 @@ To install this:
   `FrameMorph`, `ImageMorph`, `LabelMorph`, `LineMorph`, `PointerLineMorph`,
   and `TileResizeMorph`.
 
-To create and add morphs with code:
-TODO: Add this.
+### Button Demo
 
-To change the location of a morph to x=100, y=200:
+Add this code in a Workspace, select it all, and "Do it".
 
 ```smalltalk
-myMorph location: (MorphicTranslation withTranslation: 100@200)
+layout delete.
+label := LabelMorph new
+    contents: '0';
+    color: Color white.
+"Can I use ButtonMorph instead?"
+incBtn := PluggableButtonMorph new
+    color: Color yellow;
+    label: 'Increment';
+    model: [ label contents: (label contents asNumber + 1) asString ];
+    action: #value.
+decBtn := PluggableButtonMorph new
+    color: Color yellow;
+    label: 'Decrement';
+    model: [ label contents: (label contents asNumber - 1) asString ];
+    action: #value.
+layout := LayoutMorph new
+    addMorph: decBtn;
+    addMorph: label;
+    addMorph: incBtn;
+    "color: Color transparent ;"
+    separation: 10;
+    location: (MorphicTranslation withTranslation: 70@70);
+     rotateBy: 15 degreesToRadians;
+    scale: 1.5;
+    openInWorld.
+
+"Add horizontal padding in buttons."
+decBtn morphWidth: (incBtn morphWidth + 20).
+incBtn morphWidth: (incBtn morphWidth + 20).
 ```
 
 ### Buttons
