@@ -203,6 +203,26 @@ The most popular include:
       src="/blog/assets/cuis-smalltalk-logo.png?v={{pkg.version}}">
   </div>
 
+  Other Smalltalk implementations include
+
+  - <a href="https://amber-lang.net" target="_blank">Amber</a>
+
+    This is a language that is "deeply inspired by Smalltalk".
+    It compiles to JavaScript.
+
+  - <a href="https://github.com/dolphinsmalltalk" target="_blank">Dolphin Smalltalk</a>
+  - <a href="https://www.gnu.org/software/smalltalk/" target="_blank">GNU Smalltalk</a>
+  - <a href="https://github.com/nikboyd/hoot-smalltalk#hoot-smalltalk" target="_blank">Hoot Smalltalk</a>
+
+    This runs on the Java Virtual Machine and uses some Java features.
+
+  - <a href="https://www.cincomsmalltalk.com/main/" target="_blank">Cincom Smalltalk</a>
+  - <a href="https://www.instantiations.com/vast-platform/" target="_blank">VAST Platform</a>
+
+    VAST stands for "VisualAge SmallTalk" and is provided by Instantiations.
+
+  - <a href="https://gemtalksystems.com/products/gs64/" target="_blank">GemStone/S</a>
+
   Cuis supports TrueType fonts, whereas Squeak and Pharo do not.
 
   The Cuis mascot is southern mountain cavy which is a "tailless rodents with
