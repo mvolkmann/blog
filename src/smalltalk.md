@@ -1133,7 +1133,34 @@ TODO: Add more detail.
 ### OrderedCollection
 
 `OrderedCollection` instances are variable-length, ordered collections.
-TODO: Add detail.
+
+To create an `OrderedCollection` from an array, send the `#newFrom:` message.
+For example, `fruits := OrderedCollection newFrom: #('apple' 'banana' 'cherry')`
+
+To get the number of elements, send the `#size` message.
+For example, `fruits size` returns `3`.
+
+To get an element at a specific position send messages like
+`#first`, `#last`, and `#at:` which takes a 1-based index.
+For example, `fruits first` returns `'apple'`,
+`fruits last` returns `'cherry'`,
+and `fruits at: 2` returns `'banana'`.
+
+To add an element to the end, send the `#add` message.
+For example, `fruits add: 'date'`.
+
+To add an element at a specific index,
+send the `#add:beforeIndex:` or `#add:afterIndex` message.
+For example, `fruits add: 'orange' beforeIndex: 3`.
+
+To remove an element at a given 1-based index send the `#removeAt` message.
+For example, `fruits removeAt: 3` removes `'cherry'`.
+
+To get the index of the first occurence of a given value,
+send the `#indexOf:` message.
+For example, `fruits indexOf: 'banana'` returns 2.
+
+TODO: Add more detail.
 
 ### Bag
 
