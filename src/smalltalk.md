@@ -93,7 +93,8 @@ as code is entered.
   - no dots or parentheses used in method calls
   - conditional and iterating constructs are method calls instead of keywords
   - keyword messages are a departure from positional arguments
-  - method cascading (sending multiple messages to the same object) is a new concept
+  - method cascading (sending multiple messages to the same object)
+    is a new concept
 
 - Performance may be an issue.
 
@@ -499,6 +500,48 @@ Code can be described by a method or block, both of which are kinds of objects.
 Objects are created by sending a message to a class.
 In addition, some kinds of objects can be created from a literal syntax
 such as numbers, strings, and arrays.
+
+Every class supports the `#new` message, which
+creates and returns a new instance of the class.
+If the class defines the instance method `initialize`
+and `#new` is sent to the class, the `initialize` method will be
+called automatically to initialize the instance variables of the object.
+
+Let's look at an example `Rect` class
+with instance variables `height` and `width`.
+
+We can define the class method `height:width:`
+that provides an alternate way to create objects as follows.
+This assumes we can send the message `#initializeHeight:width:` to instances.
+
+```smalltalk
+height: aHeight width: aWidth
+    ^self new initializeHeight: aHeight width: aWidth
+```
+
+We can then define the following instance methods:
+
+```smalltalk
+initialize
+    height := 1.
+    width := 1
+
+initializeHeight: aHeight width: aWidth
+    height := aHeight.
+    width := aWidth
+
+area
+    ^height * width
+```
+
+We can use the `Rectangle` class as follows:
+
+```smalltalk
+r1 := Rect new.
+Transcript show: r1 area. "1"
+r2 := Rect height: 2 width: 3.
+Transcript show: r2 area. "6"
+```
 
 To determine the class of an object, send it the `class` unary message.
 For example, `19 class` returns `SmallInteger`.
