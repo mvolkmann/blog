@@ -45,8 +45,8 @@ and extreme late-binding of all things."
 
 Late binding means that messages sent to objects
 are looked up for compatible methods at runtime.
-However, Smalltalk editors do check for "unknown selectors"
-as code is entered.
+However, Smalltalk editors do check for "unknown selectors" when
+code is entered that sends a message to a literal object (not to a variable).
 
 ## Resources
 
@@ -363,33 +363,33 @@ TODO: Are other options in the Windows menu useful?
 
 ## Syntax
 
-| Item                                          | Example                                          |
-| --------------------------------------------- | ------------------------------------------------ |
-| comment                                       | `"some text"`                                    |
-| temporary (local) variable (private scope)    | `myTemp` (camelCase)                             |
-| global variable (shared scope)                | `MyGlobal` (CamelCase)                           |
-| pseudo variable (cannot assign)               | `self`                                           |
-| integer                                       | `123`                                            |
-| float                                         | `3.14`                                           |
-| exponential notation                          | `1.23e4`                                         |
-| character                                     | `$a`                                             |
-| string                                        | `'text'` (double ' to include)                   |
-| string and array concatenation (comma)        | `'foo', 'bar', 'baz'` or `#(1 2), #(3 4)`        |
-| symbol (globally unique string)               | `#name'`                                         |
-| static array (elements known at compile time) | `#(1 4 8)'`                                      |
-| dynamic array (elements computed at run time) | `{1. 2 * 2. 2 raisedTo: 3}`                      |
-| assignment                                    | `<variable> := <expression>.`                    |
-| method variable declarations                  | `\| foo bar baz \|`                              |
-| block with no arguments                       | `[ <expressions> ]`                              |
-| block with arguments                          | `[:a :b \| a + b]`                               |
-| unary message send                            | `<object> <message>`                             |
-| binary message send (operators)               | `4 * 5`                                          |
-| keyword message send                          | `2 raisedTo: 4 modulo: 3`                        |
-| message cascade - sends to initial receiver   | `Transcript show: 'foo'; newLine; show: 'bar'`   |
-| message chaining - sends to previous result   | `2 * 3 :: squared :: negated` (-36)              |
-| method return value                           | `^<expression>`                                  |
-| expression separator (period)                 | `Transcript show: 'foo'. Transcript show: 'bar'` |
-| reference to current object in a method       | `self`                                           |
+| Item                                              | Example                                          |
+| ------------------------------------------------- | ------------------------------------------------ |
+| comment                                           | `"some text"`                                    |
+| temporary (local) variable (private scope)        | `myTemp` (camelCase)                             |
+| global variable (shared scope)                    | `MyGlobal` (CamelCase)                           |
+| pseudo variable (cannot assign)                   | `self`                                           |
+| integer                                           | `123`                                            |
+| float                                             | `3.14`                                           |
+| exponential notation                              | `1.23e4`                                         |
+| character                                         | `$a`                                             |
+| string                                            | `'text'` (double ' to include)                   |
+| string and array concatenation (comma message)    | `'foo', 'bar', 'baz'` or `#(1 2), #(3 4)`        |
+| symbol (globally unique string)                   | `#name'`                                         |
+| static array (elements are literal values)        | `#(1 4 8)'`                                      |
+| dynamic array (elements are computed at run time) | `{1. 2 * 2. 2 raisedTo: 3}`                      |
+| assignment                                        | `<variable> := <expression>.`                    |
+| method variable declarations                      | `\| foo bar baz \|`                              |
+| block with no arguments                           | `[ <expressions> ]`                              |
+| block with arguments                              | `[:a :b \| a + b]`                               |
+| unary message send                                | `<object> <message>`                             |
+| binary message send (look like operators)         | `4 * 5`                                          |
+| keyword message send                              | `2 raisedTo: 4 modulo: 3`                        |
+| message cascade - sends to initial receiver       | `Transcript show: 'foo'; newLine; show: 'bar'`   |
+| message chaining - sends to previous result       | `2 * 3 :: squared :: negated` (-36)              |
+| method return value                               | `^<expression>`                                  |
+| expression separator (period)                     | `Transcript show: 'foo'. Transcript show: 'bar'` |
+| reference to current object in a method           | `self`                                           |
 
 To display a left pointing arrow in place of `:=` for all assigments,
 open the World menu and select Preferences...Show ST-80 Assignments.
@@ -526,6 +526,7 @@ initialize
     height := 1.
     width := 1
 
+"TODO: Is it a common convention to name this method this way?"
 initializeHeight: aHeight width: aWidth
     height := aHeight.
     width := aWidth
@@ -1116,7 +1117,18 @@ For example, `#(1 2 3) inject: 0 into: [:acc :n | acc + n]` gives `6`.
 ### Array
 
 `Array` instances are fixed-length, ordered collections.
-TODO: Add detail.
+
+Arrays support binary messages that operate on all the elements
+and return a new array containing the results.
+For example, `#(1 2 3) * 2` returns `#(2 4 6)`.
+
+To compute the average from an array of numbers, send it in the `#mean` message.
+For example, `#(1 2 3 4) mean` returns the `Fraction` `5/2`.
+
+To create an array of numbers from a range, send the `#asArray` message to a `Range`.
+For example, `(1 to: 5) asArray` returns `#(1 2 3 4 5)`.
+
+TODO: Add more detail.
 
 ### OrderedCollection
 
@@ -1280,13 +1292,14 @@ They are somewhat like REPLs in other programming languages.
 
 Enter any number of expressions separated by periods.
 
-To execute expressions, select them or
-place the cursor at the end of a single expression.
+To prepare to execute lines of code, select them or
+place the cursor anywhere inside one of the lines.
 To execute them for their side effects, press cmd-d (Do it).
-To execute them and print the result, press cmd-p (Print it).
+To execute them and print the result of the last expression
+inside the Workspace, press cmd-p (Print it).
 Output from "Print it" will be selected,
 so it can be removed by pressing the delete key.
-You will use "Do it" and "Print it" often, so memorize the keyboard shortcuts.
+You will use "Do it" and "Print it" often, so memorize their keyboard shortcuts.
 
 If the code goes into an infinite loop, break out of it by pressing cmd-period.
 
