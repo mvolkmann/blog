@@ -381,6 +381,10 @@ To customize the current theme:
 - Change the color returned from its default value to a new value.
 
 This will affect all morphs that use that theme property.
+For example, the `PluggableButtonMorph` method `drawEmbossedLabelOn`
+uses `Theme current buttonLabel`.
+This method could be modified to enable
+specifying a different label color for specific buttons.
 
 ## Windows
 
