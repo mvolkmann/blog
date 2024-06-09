@@ -414,6 +414,13 @@ and display the result after it in the workspace:
 - Remove the output from the Workspace window
   by pressing ctrl-z to undo adding it.
 
+## File System Access
+
+In macOS, Cuis Smalltalk will prompt repeated for permission to access
+various file system folders.
+See this <a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Dev/issues/282"
+target="_blank">issue</a>.
+
 ## Images
 
 To save any changes, include open windows, their position and size,
@@ -1266,12 +1273,34 @@ Non-printable characters can be obtained from
 unary class methods in the `Character` class.
 For example, `Character space`, `Character tab`, and `Character cr`.
 
+### Strings
+
 Strings are represented by the `String` class.
+
 Literal strings are delimited by single quotes, not double quotes.
 
-Literal arrays between with `#(`, end with `)`,
-and contain space-separated values.
-For example, `#(true 7 'Tami' (Color red))`.
+The `format` method returns a new `String` from a template using interpolation.
+For example:
+
+```smalltalk
+s := 'Player {1} is number {2}.' format: {'Gretzky' . 99}.
+```
+
+This sets `s` to `'Player Gretzky is number 99.'`.
+
+The following works in Squeak, but not in Cuis, to produce the same result
+using a `Dictionary` as input:
+
+```smalltalk
+'Player {p} is number {n}.' format: ({'p'->'Gretzky'. 'n'->99} as: Dictionary).
+```
+
+TODO: Verify that this works in Squeak.
+
+### Collections
+
+Smalltalk supports a large number of collection classes.
+TODO: List the ones most commonly used and add a section on each one.
 
 Collection methods include:
 
@@ -1288,6 +1317,10 @@ Collection methods include:
 For example, `#(1 2 3) inject: 0 into: [:acc :n | acc + n]` gives `6`.
 
 ### Array
+
+Literal arrays between with `#(`, end with `)`,
+and contain space-separated values.
+For example, `#(true 7 'Tami' (Color red))`.
 
 `Array` instances are fixed-length, ordered collections.
 
@@ -2089,3 +2122,4 @@ myBlock value: 2 value: 3.
 - Is there a String method that does interpolation?
   I'm imagining something like this:
   s := 'Player %s is number %d.' interpolate: #('Gretzky' 99).
+- See this! <a href="https://squeak.js.org" target="_blank">SqueakJS</a>
