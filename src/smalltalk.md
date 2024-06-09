@@ -32,7 +32,15 @@ Messages are sent to objects which decide whether and how to act on them.
 
 Smalltalk was the first programming language to
 popularize object-oriented programming (OOP).
-It is a dynamically typed language.
+
+Smalltalk is perhaps most known for its incredible development tools.
+These support:
+
+- finding code in many ways
+- live code editing where changes are immediately reflected in the environment
+- TODO: Add more here!
+
+Smalltalk is a dynamically typed language.
 Types of variables, method parameters,
 and method return types are never specified.
 Instead, duck typing is used. Any object can be used as long as it
