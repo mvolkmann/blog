@@ -1875,6 +1875,8 @@ fileEntry writeStreamDo: [ :fileStream |
 ].
 ```
 
+TODO: Do ReferenceStreams support circular object references?
+
 To read serialized objects from a file:
 
 ```smalltalk
