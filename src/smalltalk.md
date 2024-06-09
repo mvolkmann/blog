@@ -316,12 +316,51 @@ On macOS:
 - Drag the application icon to the Finder "Applications" directory.
 - Double-click the `Squeak*.app` file.
 
+## Font Size
+
 To adjust the font size:
 
 - Click the desktop to open a World menu.
 - Click "appearance...".
 - Click "system fonts...".
 - Click "increase font size" or "decrease font size".
+
+## Optional Packages
+
+The shell script `clonePackageRepos.sh` clones many
+commonly used Git repositories that define optional packages.
+Cloning those enables installing the packages they define.
+To do so, enter `Feature require: {package-name}`
+in a Workspace window and "Do it".
+
+The repositories that this clones include:
+
+- AMQP
+- AnimatedGIF
+- Cairo
+- Calendars
+- CodeExamples
+- Cuis-Smalltalk
+- Cuis-Smalltalk-Historical
+- Cuis-Smalltalk-Regex
+- Cuis-Smalltalk-Tools
+- Cuis-Smalltalk-UI
+- Cuis-Website
+- EnhancedText
+- Erudite
+- firmata
+- Games
+- GeographicInformationSystems
+- Learning-Cuis
+- Machine-Learning
+- Measures
+- Morphic
+- Numerics
+- OSProcess
+- Parsers
+- StyledTextEditor
+- SVG
+- VMMaker
 
 ## Getting Started
 
