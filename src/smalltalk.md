@@ -1612,6 +1612,14 @@ To install this:
   `FrameMorph`, `ImageMorph`, `LabelMorph`, `LineMorph`, `PointerLineMorph`,
   and `TileResizeMorph`.
 
+### Buttons
+
+Button labels are automatically shortened to fit within the button width.
+It begins by removing spaces from right to left.
+It then removes vowels from right to left.
+Finally, it removes consonants from right to left
+and adds an ellipsis at the end.
+
 ### Button Issue
 
 The class `PluggableButtonMorph` uses the value of `Theme current buttonLabel`
