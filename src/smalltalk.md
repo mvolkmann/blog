@@ -288,6 +288,9 @@ To change this:
 - Find the key "CFBundleName".
 - Change its value from "Squeak" to "Cuis".
 
+To update Cuis Smalltalk, launch it, open the World menu,
+and select Changes...Install New Updates.
+
 ## Installing Squeak Smalltalk
 
 - Browse <a href="https://squeak.org" target="_blank">Squeak home</a> page.
@@ -1813,6 +1816,22 @@ target="_blank">Bootstrap: Creating Minimal Images from Scratch</a>.
 Also see
 <a href="https://www.youtube.com/watch?v=b3oGOMCjKU8&list=PLu8vLCSA-4hklsvT9W6ruintbdx_K0DYW&index=2&t=53s"
 target="_blank">Make a standalone click-&-run Smalltalk application for macOS</a>.
+
+## Games
+
+Some games implemented in Cuis Smalltalk can be found in the GitHub repository
+<a href="https://github.com/Cuis-Smalltalk/Games"
+target="_blank">Cuis-Smalltalk/Games</a>.
+
+To play them:
+
+- Clone this repository.
+- Launch Cuis Smalltalk.
+- Open a "File List" window.
+- Locate and select the file `Morphic-Games-Solitaire.pck.st`.
+- Click the "Install Package" button.
+- Open a Workspace window.
+- Enter something like `Freecell newGame` and "Do it".
 
 ## Web Development
 
