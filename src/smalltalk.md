@@ -460,6 +460,12 @@ This adds the themes "ClassicTheme", "DarkBlueTheme", "DarkColorTheme",
 "LightGrayTheme", "LightTheme", and "PersonalizedTheme".
 Select one of these to switch to that theme.
 
+See this <a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Dev/issues/283"
+target="_blank">issue</a> related to PersonalizedTheme.
+
+Open windows will not be correctly updated after selecting a new theme.
+Close them and open new windows to get the intended styling.
+
 To customize the current theme:
 
 - Open a System Browser.
@@ -2072,3 +2078,14 @@ myBlock value: 2 value: 3.
 - Learn how to write and distribute web apps in Smalltalk.
 - Study the code in the "Morphic-Games-Solitaire" package
   to see what you can learn from it.
+- Try overriding the `doesNotUnderstand` method in one of your classes.
+  This is defined in the `Object` class.
+  That implementation opens a `MessageNotUnderstood` window.
+  It is passed the message (including arguments?).
+  Your implementation can use that to provide different functionality
+  similar to Ruby's ActiveRecord.
+  For messages you don't want to handle, you could use
+  `super doesNotUnderstand: message`.
+- Is there a String method that does interpolation?
+  I'm imagining something like this:
+  s := 'Player %s is number %d.' interpolate: #('Gretzky' 99).
