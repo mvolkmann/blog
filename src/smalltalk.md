@@ -126,6 +126,9 @@ The entire syntax of Smalltalk can be demonstrated on a post card.
   so it finds syntax errors before runtime, unlike most scripting languages.
 
 - All the code for a project is stored in one big image file (often over 30 MB).
+  However, it is common to store custom code and modifications to
+  provided classes in a "file out" or package that can be
+  shared with other developers and installed into fresh images.
 
 - The syntax is fairly different from most programming languages.
 
@@ -134,6 +137,8 @@ The entire syntax of Smalltalk can be demonstrated on a post card.
   - keyword messages are a departure from positional arguments
   - method cascading (sending multiple messages to the same object)
     is a new concept
+
+  But I think these are significant pros of Smalltalk!
 
 - Performance may be an issue.
 
@@ -369,6 +374,24 @@ and display the result after it in the workspace:
 - Press ctrl-p to print it.
 - Remove the output from the Workspace window
   by pressing ctrl-z to undo adding it.
+
+## Images
+
+To save any changes, include open windows, their position and size,
+and their content (ex. Workspaces),
+open the World menu and select "Save Image",
+"Save Image as", or "Save Image and Quit".
+
+To quit without saving changes,
+open the World menu and select "Quit without saving".
+
+While the classes and methods provided by a base image can be modified,
+it is not a good idea to do so because
+there won't be a good way to apply those changes to a fresh image.
+
+It is better to create new subclasses of provided classes that
+override methods and save the new subclasses in a new package or "file out".
+Doing this enables installing the new package in a fresh image.
 
 ## Terse Guide
 
