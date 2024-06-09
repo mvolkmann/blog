@@ -1821,6 +1821,65 @@ To embed a morph into another (such as a LayoutMorph):
 - select "embed into" ... {parent morph name}
   (typically LayoutMorph)
 
+## File I/O
+
+To create a file, send the `#asFileEntry` message
+to a string that contains the file name.
+The file is assumed to be in the '\*-UserFiles' directory.
+For example:
+
+```smalltalk
+fileEntry := 'demo.txt' asFileEntry.
+```
+
+To delete a file:
+
+```smalltalk
+fileEntry delete.
+```
+
+To write to a text file, overwriting any previous contents:
+
+```smalltalk
+fileEntry forceWriteStreamDo: [ :fileStream |
+    fileStream nextPutAll: 'line #1'.
+    fileStream newLine.
+    fileStream nextPutAll: 'line #2'
+].
+```
+
+To read the entire contents of a text file into a string:
+
+```smalltalk
+contents := fileEntry fileContents.
+```
+
+To write serialized objects to a file:
+
+```smalltalk
+fileEntry writeStreamDo: [ :fileStream |
+    | refStream |
+    refStream := ReferenceStream on: fileStream.
+    refStream nextPut: true.
+    refStream nextPut: 3.
+    refStream nextPut: 'text'.
+    refStream nextPut: #(1 2 3).
+].
+```
+
+To read serialized objects from a file:
+
+```smalltalk
+fileEntry readStreamDo: [ :fileStream |
+    | object refStream |
+    refStream := ReferenceStream on: fileStream.
+    [ refStream atEnd ] whileFalse: [
+        object := refStream next.
+        object print "writes to Transcript"
+    ]
+]
+```
+
 ## Deploying Applications
 
 Smalltalk can be used to build command-line, desktop, and web applications.
