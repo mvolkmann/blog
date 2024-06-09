@@ -362,6 +362,22 @@ and display the result after it in the workspace:
 - Remove the output from the Workspace window
   by pressing ctrl-z to undo adding it.
 
+## Terse Guide
+
+An excellent source of help is the "Terse Guide".
+To open it, open the World menu and select Help...Terse Guide to Cuis.
+When prompted "The Terse Guide is not loaded.
+Would you like me to load it for you now?", select "Yes".
+The following window will open.
+
+<img alt="Cuis Terse Guide"
+  src="/blog/assets/cuis-terse-guide.jpg?v={{pkg.version}}">
+
+Click a topic to see example code.
+Select code and "Do it" or "Print it" to experiment.
+Modify the code as desired.
+Changes will not be saved, so it is safe to experiment.
+
 ## Themes
 
 Colors and other features of the Cuis Smalltalk UI
@@ -1915,3 +1931,5 @@ myBlock value: 2 value: 3.
 - Learn how to write and distribute command-line utilities/apps in Smalltalk.
 - Learn how to write and distribute GUI apps in Smalltalk.
 - Learn how to write and distribute web apps in Smalltalk.
+- Study the code in the "Morphic-Games-Solitaire" package
+  to see what you can learn from it.
