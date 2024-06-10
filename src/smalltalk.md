@@ -1515,6 +1515,20 @@ fact value: fact value: 5 "gives 120"
 ## Editing Code
 
 Many kinds of windows support entering Smalltalk code.
+Syntax highlighting is provided.
+
+| Token Type        | Styling        |
+| ----------------- | -------------- |
+| class name        | black and bold |
+| comment           | green          |
+| instance variable | purple         |
+| keyword           | red            |
+| message name      | blue           |
+| string            | purple         |
+| symbol            | blue and bold  |
+
+By default, class names are black and bold,
+message names are blue, and symbols are blue and bold.
 
 In any text editng pane, right-click and select "Help..."
 to see a list of the supported key bindings.
@@ -1765,6 +1779,9 @@ To create a morph:
 - In the dialog that appears,
   select a category of morphs and then a specific kind.
 
+To explicitly set the size of a morph, send it the `morphExtent:` message
+with a `Point` value. For example, `myMorph morphExtent: 200@100`.
+
 Only a small set of morphs is provided by default.
 A good source of additional morphs is the package "UI-Tools".
 To install this:
@@ -1799,6 +1816,44 @@ and `TileResizeMorph`.
 
 Supposedly Cuis 7 will remove support for the UI-Tools package
 and the desired subpackages will need to be installed individually.
+
+### LayoutMorph
+
+A `LayoutMorph` arranges submorphs in a row or column.
+Pratically any layout can be achieved by nesting instances of this class.
+
+An instance can be created with:
+
+- `LayoutMorph newColumn`
+- `LayoutMorph newRow`
+- `LayoutMorph new`
+
+  This calls `newRow` and sets the background color to `Color red alpha: 0.2`.
+
+For example, `myLayout := Layout newRow`.
+
+To add a submorph to a `LayoutMorph`, send it the `addMorph:` message.
+For example, `myLayout addMorph: EllipseMorph new`
+and `myLayout addMorph: BoxedMorph new`.
+
+By default, there will be no separation between the submorphs.
+To add separation, send the `separation:` (both x and y),
+`separationX:`, `separationY` messages.
+For example, `myLayout separation: 20`.
+
+By default, all the submorphs will be
+pushed to the left of a row or top of a column.
+To change this, send the `axisEdgeWeight:` message with a number from 0 to 1.
+A value zero pushes to the left/top,
+a value one pushes to the right/bottom,
+and a value of 0.5 centers.
+
+All of this values can be specified interactively by
+opening the halo for a `LayoutMorph`, clicking the blue menu button,
+and selecting "edit me". The following dialog will appear:
+
+<img alt="Cuis Morphic Layout dialog" style="width: 75%"
+  src="/blog/assets/cuis-morphic-layout-dialog.png?v={{pkg.version}}">
 
 ### Buttons
 
