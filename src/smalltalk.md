@@ -310,6 +310,10 @@ To update Cuis Smalltalk:
 - Open the World menu
 - Select Changes...Install New Updates.
 
+Alternatively, start Cuis using a platform-specific shell script
+which always updates to the latest version.
+This scripts have a name that begins with `RunCuisOn`.
+
 ## Installing Squeak Smalltalk
 
 - Browse <a href="https://squeak.org" target="_blank">Squeak home</a> page.
