@@ -1950,6 +1950,18 @@ and selecting "edit me". The following dialog will appear:
 <img alt="Cuis Morphic Layout dialog" style="width: 75%"
   src="/blog/assets/cuis-morphic-layout-dialog.png?v={{pkg.version}}">
 
+To edit the width, height, and off-axis edge weight of a submorph:
+
+- cmd-click multiple times until the halo appears
+  around the morph to be configured.
+- Click the blue menu button.
+- Select "edit my LayoutSpec".
+
+The following dialog will appear:
+
+<img alt="Cuis edit my LayoutSpec" style="width: 75%"
+  src="/blog/assets/cuis-edit-my-layoutspec.png?v={{pkg.version}}">
+
 ### Buttons
 
 Button labels are automatically shortened to fit within the button width.
