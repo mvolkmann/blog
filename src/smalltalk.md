@@ -301,8 +301,14 @@ To change this:
 - Find the key "CFBundleName".
 - Change its value from "Squeak" to "Cuis".
 
-To update Cuis Smalltalk, launch it, open the World menu,
-and select Changes...Install New Updates.
+To update Cuis Smalltalk:
+
+- One time, clone the GitHub repository at
+  <a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Dev"
+  target="_blank">Cuis-Smalltalk-Dev</a>.
+- Each time, do a `git pull` on the repository.
+- Open the World menu
+- Select Changes...Install New Updates.
 
 ## Installing Squeak Smalltalk
 
