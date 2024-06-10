@@ -1406,7 +1406,11 @@ To get the value for a key:
 
 ```smalltalk
 value := dict at: #key
+value := dict at: #key ifAbsent: defaultValue
 ```
+
+If a default value is not provided and the key is not found,
+an Error window will open that says "key not found".
 
 TODO: Add more detail.
 
