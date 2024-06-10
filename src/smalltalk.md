@@ -565,8 +565,8 @@ TODO: Are other options in the Windows menu useful?
 | character                                         | `$a`                                             |
 | string                                            | `'text'` (double ' to include)                   |
 | string and array concatenation (comma message)    | `'foo', 'bar', 'baz'` or `#(1 2), #(3 4)`        |
-| symbol (globally unique string)                   | `#name'`                                         |
-| static array (elements are literal values)        | `#(1 4 8)'`                                      |
+| symbol (globally unique string)                   | `#name`                                          |
+| static array (elements are literal values)        | `#(1 4 8)`                                       |
 | dynamic array (elements are computed at run time) | `{1. 2 * 2. 2 raisedTo: 3}`                      |
 | assignment                                        | `<variable> := <expression>.`                    |
 | method variable declarations                      | `\| foo bar baz \|`                              |
@@ -1289,11 +1289,12 @@ Strings are represented by the `String` class.
 
 Literal strings are delimited by single quotes, not double quotes.
 
-The `format` method returns a new `String` from a template using interpolation.
+The `format` method returns a new `String` from a template using interpolation
+where input comes from an array.
 For example:
 
 ```smalltalk
-s := 'Player {1} is number {2}.' format: {'Gretzky' . 99}.
+s := 'Player {1} is number {2}.' format: #('Gretzky' 99).
 ```
 
 This sets `s` to `'Player Gretzky is number 99.'`.
@@ -1507,6 +1508,18 @@ fact := [:block :n |
 fact value: fact value: 5 "gives 120"
 ```
 
+## Editing Code
+
+Many kinds of windows support entering Smalltalk code.
+
+In any text editng pane, right-click and select "Help..."
+to see a list of the supported key bindings.
+
+To comment/uncomment selected lines of code, press cmd-".
+
+To change the indentation of a block of code, select all the lines and
+press tab to increase indentation or shift-tab to decrease it.
+
 ## System Browser
 
 System Browser windows contain four rows.
@@ -1614,11 +1627,6 @@ These are used to edit text other than Smalltalk source code.
 
 The text can be saved in `.txt` files, but
 all the formatting is discarded and only the raw text is saved.
-
-In any text editng pane, including those in Browser windows,
-right-click and select "Help..." to see a list of the supported key bindings.
-
-To comment/uncomment selected lines of code, press cmd-".
 
 ## Message Names
 
