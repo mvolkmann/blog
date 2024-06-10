@@ -1754,18 +1754,39 @@ To create a morph:
   select a category of morphs and then a specific kind.
 
 Only a small set of morphs is provided by default.
-A good source of additional morphs is the package "UI-Shapes".
+A good source of additional morphs is the package "UI-Tools".
 To install this:
 
-- Open a terminal.
-- `cd` to the directory that contains the base image being used.
-  For me this is `Cuis-Smalltalk-Dev-master/CuisImage`.
-- Run the command `git clone git@github.com:Cuis-Smalltalk/Cuis-Smalltalk-UI.git`.
-- In Cuis, open a Workspace window.
-- Enter `Feature require: 'UI-Shapes'` and press cmd-d (Do it).
-- The set of "Basic" morphs will now include `BoxedMorph`, `EllipseMorph`,
-  `FrameMorph`, `ImageMorph`, `LabelMorph`, `LineMorph`, `PointerLineMorph`,
-  and `TileResizeMorph`.
+- Open a Workspace window.
+- Enter `Feature require: 'UI-Tools'` and press cmd-d (Do it).
+
+This installs many packages including:
+
+- Collections-CompactArrays
+- Compression
+- CSS3
+- Graphics-Files-Additional
+- UI-Click-Select
+- UI-Color-Panel
+- UI-Components
+- UI-Core
+- UI-DragAndDrop
+- UI-Edit-Lens
+- UI-Entry
+- UI-Layout-Panel
+- UI-MetaProperties
+- UI-Palette
+- UI-Panel
+- UI-Shapes
+- UI-Tools
+- UI-Widgets
+
+The set of "Basic" morphs will now include `BoxedMorph`, `EllipseMorph`,
+`FrameMorph`, `ImageMorph`, `LabelMorph`, `LineMorph`, `PointerLineMorph`,
+and `TileResizeMorph`.
+
+Supposedly Cuis 7 will remove support for the UI-Tools package
+and the desired subpackages will need to be installed individually.
 
 ### Buttons
 
