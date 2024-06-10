@@ -1385,7 +1385,29 @@ TODO: Add detail.
 ### Dictionary
 
 This is a subclass of the `Set` class.
-TODO: Add detail.
+
+The keys in a `Dictionary` are often symbols,
+but they can be any kind of object that supports the `=` and `hash` messages.
+
+To create a `Dictionary`:
+
+```smalltalk
+dict := Dictionary new.
+```
+
+To add a key/value pair:
+
+```smalltalk
+dict at: #key put: value.
+```
+
+To get the value for a key:
+
+```smalltalk
+value := dict at: #key
+```
+
+TODO: Add more detail.
 
 ### LinkedList
 
@@ -1560,6 +1582,7 @@ To browse a class, enter its name and press cmd-b (Browse it).
 ## Transcript
 
 This window displays output written to it.
+
 One way to do this is to send `Transcript show: <object>`,
 perhaps in a Workspace window.
 This can output any kind of object
@@ -1573,8 +1596,12 @@ For example, `'Hello World!' print`.
 The `print` message can be sent to strings, symbols,
 and any object that has a `printString` method.
 
+When output is sent to the `Transcript`, it appears in all `Transcript` windows.
+So it doesn't make sense to open more than one.
+
 To clear the contents of the Transcript window,
 right-click in it and select "Clear Transcript" (no keyboard shortcut).
+If there is more than one `Transcript` window, all of them will be cleared.
 
 TODO: Why does this window contain the word "Transcript" in its content?
 
@@ -1830,15 +1857,15 @@ that is defined in the file `ButtonMorph.st` from Mariano Montone.
 
 ```smalltalk
 layout delete.
+label := LabelMorph new
+  contents: '0';
+  color: Color white.
 decBtn := ButtonMorph new
   color: Color yellow;
   label: 'Decrement';
   labelColor: Color red;
   model: [ label contents: (label contents asNumber - 1) asString ];
   action: #value.
-label := LabelMorph new
-  contents: '0';
-  color: Color white.
 incBtn := ButtonMorph new
   color: Color yellow;
   label: 'Increment';
