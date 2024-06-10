@@ -1410,6 +1410,12 @@ They are represented by the class `BlockClosure`.
 The value of the block is the value of the last expression.
 It cannot explicitly return a value with `^`.
 
+Blocks can take zero or more positional arguments,
+which is something methods cannot do.
+Argument names are appear at the beginning of a block
+and each name is preceded by a colon.
+The argument list is separated from the code by a vertical bar.
+
 Blocks can be saved in variables, passed as arguments to methods and blocks,
 and used multiple times. For example:
 
