@@ -1962,6 +1962,28 @@ The following dialog will appear:
 <img alt="Cuis edit my LayoutSpec" style="width: 75%"
   src="/blog/assets/cuis-edit-my-layoutspec.png?v={{pkg.version}}">
 
+To change the border width, size (`morphExtent`), or position (`morphPosition`)
+of a morph:
+
+- cmd-click multiple times until the halo appears
+  around the morph to be configured.
+- Click the blue menu button.
+- Click `borderWidth`, `morphExtent`, or `morphPosition`.
+- Modify the numbers in the dialog that appears.
+- Click the "Accept" or "Cancel" button.
+
+To change the border color or color of a morph:
+
+- cmd-click multiple times until the halo appears
+  around the morph to be configured.
+- Click the blue menu button.
+- Click the push pin so that menu remains open.
+- Click "borderColor" or "color".
+- Select one of the color sets such as ...
+- Drag a color swatch onto the swatch for "borderColor" or "color".
+- Close the color set dialog.
+- Close the dialog of morph options.
+
 ### Buttons
 
 Button labels are automatically shortened to fit within the button width.
