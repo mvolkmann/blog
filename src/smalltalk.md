@@ -1586,6 +1586,12 @@ To delete a method from a class, select it and press cmd-x (Remove it).
 Then select "Remove it" or "Remove, then browse senders".
 The latter option allows the senders to be modified.
 
+There is no provided way to search for code that contains a given string.
+Mariano Montone implemented this and shared a change set via email.
+See the file `SearchSourceMenus-MarianoMontone.cs.st`.
+Location this in a "File List" window and click the "install" button.
+This adds the context menu item "search source...".
+
 For more detail, see
 <a href="https://cuis-smalltalk.github.io/TheCuisBook/A-brief-introduction-to-the-system-Browser.html"
 target="_blank">A brief introduction to the System Browser</a>.
@@ -1848,7 +1854,8 @@ A value zero pushes to the left/top,
 a value one pushes to the right/bottom,
 and a value of 0.5 centers.
 
-All of this values can be specified interactively by
+If the UI-Layout-Panel package is installed,
+all of these values can be specified interactively by
 opening the halo for a `LayoutMorph`, clicking the blue menu button,
 and selecting "edit me". The following dialog will appear:
 
