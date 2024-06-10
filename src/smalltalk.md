@@ -496,7 +496,9 @@ target="_blank">issue</a> related to PersonalizedTheme.
 Open windows will not be correctly updated after selecting a new theme.
 Close them and open new windows to get the intended styling.
 
-To customize the current theme:
+To customize the current theme, open the World menu
+and select Preferences...Theme Customizer...
+Alternatively you can:
 
 - Open a System Browser.
 - Select the "Graphics - Themes" class category.
@@ -1321,6 +1323,14 @@ using a `Dictionary` as input:
 
 TODO: Verify that this works in Squeak.
 
+The `String` `format:` message is useful for print-style debugging.
+For example, the following is the equivalent
+of a `console.log` call in JavaScript.
+
+```smalltalk
+('myVariable = {1}' format: {myVariable}) print
+```
+
 ### Collections
 
 Smalltalk supports a large number of collection classes.
@@ -2087,6 +2097,59 @@ To embed a morph into another (such as a LayoutMorph):
 - select "embed into" ... {parent morph name}
   (typically LayoutMorph)
 
+## Overriding doesNotUnderstand
+
+The `Object` class defines the `doesNotUnderstand` method
+to open a `MessageNotUnderstood` window.
+This can be overridden in specific classes to provide specialized processing
+of messages that do not have corresponding methods.
+
+Let's demonstrate this by defining a `Map` class that enables sending messages
+with arbitrary names to set and retrieve values in a `Dictionary`.
+If it receives a message it does not want to handle,
+it sends the message onto its superclass.
+
+Here is the class definition which just declares a single instance variable:
+
+```smalltalk
+Object subclass: #Map
+    instanceVariableNames: 'dict'
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'Volkmann'
+```
+
+Here is a class method that just demonstrates using the class:
+
+```smalltalk
+demo
+    "demonstrates using the Map class"
+
+    | map |
+    map := Map new.
+    "The key must not match an existing method (like name)."
+    map firstName: 'Mark'.
+    map firstName print
+```
+
+Here are the instance methods:
+
+```smalltalk
+initialize
+    dict := Dictionary new
+
+doesNotUnderstand: aMessage
+    "gets and sets entries based on key and value"
+
+    | argCount key value |
+    argCount := aMessage numArgs.
+    argCount > 1 ifTrue: [ ^super doesNotUnderstand: aMessage ].
+    key := aMessage keywords first.
+    argCount = 0 ifTrue: [ ^dict at: key ifAbsent: 'not found'].
+    value := aMessage arguments first.
+    dict at: (key allButLast) put: value
+```
+
 ## File I/O
 
 To create a file, send the `#asFileEntry` message
@@ -2268,14 +2331,6 @@ myBlock value: 2 value: 3.
 - Learn how to write and distribute web apps in Smalltalk.
 - Study the code in the "Morphic-Games-Solitaire" package
   to see what you can learn from it.
-- Try overriding the `doesNotUnderstand` method in one of your classes.
-  This is defined in the `Object` class.
-  That implementation opens a `MessageNotUnderstood` window.
-  It is passed the message (including arguments?).
-  Your implementation can use that to provide different functionality
-  similar to Ruby's ActiveRecord.
-  For messages you don't want to handle, you could use
-  `super doesNotUnderstand: message`.
 - Is there a String method that does interpolation?
   I'm imagining something like this:
   s := 'Player %s is number %d.' interpolate: #('Gretzky' 99).
