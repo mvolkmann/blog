@@ -326,14 +326,27 @@ On macOS:
 - Drag the application icon to the Finder "Applications" directory.
 - Double-click the `Squeak*.app` file.
 
+## World
+
+The Smalltalk window or desktop is referred to as the "World"
+and is implemented by the `WorldMorph` class.
+Many features are available on the World menu
+which is opened by clicking anywhere on the desktop.
+
 ## Font Size
 
 To adjust the font size:
 
-- Click the desktop to open a World menu.
+- Open the World menu.
 - Click "appearance...".
 - Click "system fonts...".
 - Click "increase font size" or "decrease font size".
+
+## Full Screen
+
+You will likely want to work in full screen mode.
+To enable this, open the World menu and select Preferences ... Full screen on.
+To disable this, select Preferences ... Full screen on.
 
 ## Optional Packages
 
@@ -501,8 +514,8 @@ specifying a different label color for specific buttons.
 ## Windows
 
 You will be opening and using many windows.
-To open one, click on the `WorldMorph` to open the World menu
-and select a window type from the "Open" submenu.
+To open one, open the World menu and
+select a window type from the "Open" submenu.
 
 The available windows include:
 
