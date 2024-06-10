@@ -1416,9 +1416,12 @@ pass them in an array using `#valueWithArguments:`.
 For example:
 
 ```smalltalk
-noArgBlock value: 2 value: 3.
-singleArgBlock value: 2.
-multipleArgBlock value: 2 value: 3.
+noArgBlock value.
+singleArgBlock value: 1.
+multiArgBlock value: 1 value: 2.
+multiArgBlock value: 1 value: 2 value: 3.
+multiArgBlock value: 1 value: 2 value: 3 value: 4.
+multiArgBlock valueWithArguments: #(1 2 3 4 5).
 ```
 
 Blocks can declare and use temporary (local) variables.
