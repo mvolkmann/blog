@@ -1942,6 +1942,31 @@ A value zero pushes to the left/top,
 a value one pushes to the right/bottom,
 and a value of 0.5 centers.
 
+Many chararacteristics of a morph can be edited by
+cmd-clicking it to display its halo and clicking its blue menu button.
+To get a halo for a submorph, cmd-click repeatedly
+until the halo appears around the target morph.
+The following menu will appear:
+
+<img alt="Cuis halo blue menu" style="width: 60%"
+  src="/blog/assets/cuis-halo-blue-menu.png?v={{pkg.version}}">
+
+To change the border width, size (`morphExtent`), or position (`morphPosition`)
+of a morph:
+
+- Click `borderWidth`, `morphExtent`, or `morphPosition`.
+- Modify the numbers in the dialog that appears.
+- Click the "Accept" or "Cancel" button.
+
+To change the border color or color of a morph:
+
+- Click the push pin in the menu window so it remains open.
+- Click "borderColor" or "color".
+- Select one of the color sets such as ...
+- Drag a color swatch onto the swatch for "borderColor" or "color".
+- Close the color set dialog.
+- Close the dialog of morph options.
+
 If the UI-Layout-Panel package is installed,
 all of these values can be specified interactively by
 opening the halo for a `LayoutMorph`, clicking the blue menu button,
@@ -1950,39 +1975,13 @@ and selecting "edit me". The following dialog will appear:
 <img alt="Cuis Morphic Layout dialog" style="width: 75%"
   src="/blog/assets/cuis-morphic-layout-dialog.png?v={{pkg.version}}">
 
-To edit the width, height, and off-axis edge weight of a submorph:
-
-- cmd-click multiple times until the halo appears
-  around the morph to be configured.
-- Click the blue menu button.
-- Select "edit my LayoutSpec".
+To edit the width, height, and off-axis edge weight of a submorph
+select "edit my LayoutSpec".
 
 The following dialog will appear:
 
-<img alt="Cuis edit my LayoutSpec" style="width: 75%"
+<img alt="Cuis edit my LayoutSpec" style="width: 80%"
   src="/blog/assets/cuis-edit-my-layoutspec.png?v={{pkg.version}}">
-
-To change the border width, size (`morphExtent`), or position (`morphPosition`)
-of a morph:
-
-- cmd-click multiple times until the halo appears
-  around the morph to be configured.
-- Click the blue menu button.
-- Click `borderWidth`, `morphExtent`, or `morphPosition`.
-- Modify the numbers in the dialog that appears.
-- Click the "Accept" or "Cancel" button.
-
-To change the border color or color of a morph:
-
-- cmd-click multiple times until the halo appears
-  around the morph to be configured.
-- Click the blue menu button.
-- Click the push pin so that menu remains open.
-- Click "borderColor" or "color".
-- Select one of the color sets such as ...
-- Drag a color swatch onto the swatch for "borderColor" or "color".
-- Close the color set dialog.
-- Close the dialog of morph options.
 
 ### Buttons
 
