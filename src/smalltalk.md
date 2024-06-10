@@ -1803,25 +1803,28 @@ is to create a subclass of `PluggableButtonMorph` that does the following:
    The modified lines are the one that sets `colorForLabel`
    and the one that sets `embossed`.
 
-### Button Demo
+### Button Demo in Cuis
 
 Add this code in a Workspace, select it all, and "Do it".
+It uses the class `ButtonMorph` which is a custom subclass of `PluggableButtonMorph`
+that is defined in the file `ButtonMorph.st` from Mariano Montone.
 
 ```smalltalk
 layout delete.
+decBtn := ButtonMorph new
+  color: Color yellow;
+  label: 'Decrement';
+  labelColor: Color red;
+  model: [ label contents: (label contents asNumber - 1) asString ];
+  action: #value.
 label := LabelMorph new
   contents: '0';
   color: Color white.
-"Can I use ButtonMorph instead?"
-incBtn := PluggableButtonMorph new
+incBtn := ButtonMorph new
   color: Color yellow;
   label: 'Increment';
+  labelColor: Color green;
   model: [ label contents: (label contents asNumber + 1) asString ];
-  action: #value.
-decBtn := PluggableButtonMorph new
-  color: Color yellow;
-  label: 'Decrement';
-  model: [ label contents: (label contents asNumber - 1) asString ];
   action: #value.
 layout := LayoutMorph new
   addMorph: decBtn;
@@ -1839,7 +1842,7 @@ decBtn morphWidth: (incBtn morphWidth + 20).
 incBtn morphWidth: (incBtn morphWidth + 20).
 ```
 
-### Buttons
+### Button Demo in Squeak
 
 To create a button:
 
