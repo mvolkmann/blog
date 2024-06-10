@@ -199,56 +199,62 @@ There are many Smalltalk implementations.
 The most popular include:
 
 - <div class="row">
-    <a href="https://squeak.org" target="_blank">Squeak</a>
+    <a href="https://squeak.org" target="_blank">Squeak (2,832 classes)</a>
     <img alt="Squeak Smalltalk log" class="logo"
       src="/blog/assets/squeak-smalltalk-logo.svg?v={{pkg.version}}">
   </div>
 
 - <div class="row">
-    <a href="https://pharo.org" target="_blank">Pharo</a>
+    <a href="https://pharo.org" target="_blank">Pharo (10,405 classes)</a>
     <img alt="Pharo Smalltalk log" class="logo"
       src="/blog/assets/pharo-smalltalk-logo.png?v={{pkg.version}}">
   </div>
 
 - <div class="row">
-    <a href="https://cuis.st" target="_blank">Cuis</a>
+    <a href="https://cuis.st" target="_blank">Cuis (675 classes)</a>
     <img alt="Cuis Smalltalk log" class="logo"
       src="/blog/assets/cuis-smalltalk-logo.png?v={{pkg.version}}">
   </div>
 
-  Other Smalltalk implementations include
+  The number of predefined classes in each implementation above
+  were obtained by printing the result of `Smalltalk allClasses size`
+  with latest versions as of June 10, 2024.
 
-  - <a href="https://amber-lang.net" target="_blank">Amber</a>
+Squeak, Pharo, and Cuis all use the MIT license.
 
-    This is a language that is "deeply inspired by Smalltalk".
-    It compiles to JavaScript.
+Other Smalltalk implementations include
 
-  - <a href="https://github.com/dolphinsmalltalk" target="_blank">Dolphin Smalltalk</a>
-  - <a href="https://www.gnu.org/software/smalltalk/" target="_blank">GNU Smalltalk</a>
-  - <a href="https://github.com/nikboyd/hoot-smalltalk#hoot-smalltalk" target="_blank">Hoot Smalltalk</a>
+- <a href="https://amber-lang.net" target="_blank">Amber</a>
 
-    This runs on the Java Virtual Machine and uses some Java features.
+  This is a language that is "deeply inspired by Smalltalk".
+  It compiles to JavaScript.
 
-  - <a href="https://www.cincomsmalltalk.com/main/" target="_blank">Cincom Smalltalk</a>
-  - <a href="https://www.instantiations.com/vast-platform/" target="_blank">VAST Platform</a>
+- <a href="https://github.com/dolphinsmalltalk" target="_blank">Dolphin Smalltalk</a>
+- <a href="https://www.gnu.org/software/smalltalk/" target="_blank">GNU Smalltalk</a>
+- <a href="https://github.com/nikboyd/hoot-smalltalk#hoot-smalltalk" target="_blank">Hoot Smalltalk</a>
 
-    VAST stands for "VisualAge SmallTalk" and is provided by Instantiations.
+  This runs on the Java Virtual Machine and uses some Java features.
 
-  - <a href="https://gemtalksystems.com/products/gs64/" target="_blank">GemStone/S</a>
+- <a href="https://www.cincomsmalltalk.com/main/" target="_blank">Cincom Smalltalk</a>
+- <a href="https://www.instantiations.com/vast-platform/" target="_blank">VAST Platform</a>
 
-  Cuis supports TrueType fonts, whereas Squeak and Pharo do not.
+  VAST stands for "VisualAge SmallTalk" and is provided by Instantiations.
 
-  The Cuis mascot is southern mountain cavy which is a "tailless rodents with
-  short, speckled, greyish-yellow fur, fading to pale grey on the underparts."
-  They look similar to a mouse, but grow to around eight inches in length.
-  They are found in Argentina.
-  Juan Vuletich began development of Cuis Smalltalk in Buenos Aires s, Argentina.
-  The work "cuis" means "squeak" in Rioplatense Spanish.
+- <a href="https://gemtalksystems.com/products/gs64/" target="_blank">GemStone/S</a>
 
-  The GitHub repository for Cuis Smalltalk is at
-  <a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Dev"
+Cuis supports TrueType fonts, whereas Squeak and Pharo do not.
+
+The Cuis mascot is southern mountain cavy which is a "tailless rodents with
+short, speckled, greyish-yellow fur, fading to pale grey on the underparts."
+They look similar to a mouse, but grow to around eight inches in length.
+They are found in Argentina.
+Juan Vuletich began development of Cuis Smalltalk in Buenos Aires s, Argentina.
+The work "cuis" means "squeak" in Rioplatense Spanish.
+
+The GitHub repository for Cuis Smalltalk is at
+<a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Dev"
   target="_blank">Cuis-Smalltalk-Dev</a>.
-  As of May 2024, 96.8% of it was implemented in Smalltalk.
+As of May 2024, 96.8% of it was implemented in Smalltalk.
 
 ## Installing Cuis Smalltalk
 
@@ -1017,7 +1023,19 @@ Smalltalk at: 'color' put: 'yellow'.
 color := Smalltalk at: 'color' ifAbsent: 'none'.
 ```
 
-## File List
+## Code Management
+
+Selecting Help ... Code management in Cuis from the World menu
+opens a window titled "Managing your code in Cuis".
+That offers the following advice:
+
+> Code that is not part of the Cuis Core image itself,
+> like applications, frameworks and libraries, should be stored in Packages.
+> New code that are meant as patches, fixes or additions;
+> that could eventually become part of Cuis itself, is not part of any Package,
+> and is therefore automatically stored in ChangeSets.
+
+### File List
 
 To view local files and operate on them,
 select Open ... File List from the World menu.
@@ -1033,7 +1051,7 @@ A common operation performed in a File List window
 is to locate and select a `.pck.st` file that defines a package
 and click the "install package" button to install it.
 
-## File Out and File In
+### File Out and File In
 
 To save all the code for a package to a text file:
 
@@ -1064,11 +1082,13 @@ To read all the code for a package from a text file:
 - All the class categories, classes, and methods defined in the file
   will now be available in the current image.
 
-## Packages
+### Packages
 
 Cuis Smalltalk supports the ability to save code outside an image file
 and load it into running images.
 This is an alternative to Monticello which is used in Squeak and Pharo.
+
+Package names are used as prefixes on class and method categories names.
 
 Packages are collections of Smalltalk code
 stored in files with a `.pck.st` file.
@@ -1102,6 +1122,10 @@ To create a new package:
 - Select the newly created package.
 - Enter a comment describing the package.
 - Click the "Save" button.
+
+If package name matches the name of a class category
+that was created previously, all the classes in that category
+and their methods will automatically be associated with the new package.
 
 I created a package whose name is my last name.
 I use this package to save all my experimental code
@@ -1156,7 +1180,7 @@ and only install the desired packages.
 TODO: What does the "delete/merge" button in the "Installed Packages" window do?
 TODO: It does not uninstall the selected package or delete the file that defines it.
 
-## Adding and Saving Code
+### Adding and Saving Code
 
 Create a new package for your code as described above.
 While still in the "Installed Packages" window,
