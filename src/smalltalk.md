@@ -1846,6 +1846,71 @@ and `TileResizeMorph`.
 Supposedly Cuis 7 will remove support for the UI-Tools package
 and the desired subpackages will need to be installed individually.
 
+### Halo
+
+To open the halo (set of surrounding buttons) for a morph,
+cmd-click it in Cuis or option-click it in Squeak.
+If the item is embedded in other morphs, repeat this multiple times
+until a halo appears around the desired morph.
+
+The class of the morph will be displayed at the bottom of the morph.
+
+<img alt="Smalltalk halo" style="width: 50%"
+  src="/blog/assets/smalltalk-halo.png?v={{pkg.version}}">
+
+The following buttons are provided:
+
+| Button                               | Location    | Purpose                                         |
+| ------------------------------------ | ----------- | ----------------------------------------------- |
+| red circle with white "x"            | upper-left  | removes the item                                |
+| blue circle with white document      | top         | opens menu "A" (1)                              |
+| black circle with house              | top         | drag to move the item within its parent         |
+| brown circle with resize icon        | top         | drag to move the item out of its parent         |
+| green circle with copy icon          | upper-right | drag to position a duplicate of the item        |
+| orange circle with wrench            | right side  | opens a menu of debugging options               |
+| blue circle with magnifier glass     | right side  | drag to change scale of item                    |
+| yellow circle with resize icon       | lower-right | drag to resize the item                         |
+| light blue circle with question mark | bottom      | click and hold to display a related tooltip (2) |
+| blue circle with rotate icon         | lower-left  | drag to rotate item                             |
+| dull yellow circle with odd shape    | left side   | click to collapse (hide) the item (3)           |
+| orange circle with wrench            | left side   | opens an "Explore" window (4)                   |
+
+TODO: How can you change the point about which a morph rotates?
+
+(1) This menu contains the following:
+
+- send to back
+- bring to front
+- embed into >
+- change color...
+- halo actions...
+- checkbox for "resist being picked up"
+- checkbox for "be locked"
+- copy to clipboard
+- export...
+- debug...
+
+(2) It seems most of the help tooltips default to "Help not yet supplied".
+To edit the help text, click the orange circle on the right,
+select "edit balloon help", and modify the help text.
+
+(3) To restore a collapsed item, click it's thumbnail in the bottom bar.
+
+(4) "Explore" windows enable viewing data associated with an item
+such as its location, size (extent), and color.
+
+For more detail, see
+<a href="https://cuis-smalltalk.github.io/TheCuisBook/A-brief-introduction-to-Inspectors.html"
+target="_blank">A brief introduction to Inspectors</a>.
+
+To embed a morph into another (such as a LayoutMorph):
+
+- drag the morph on top of its intended parent morph
+- open the halo of the morph
+- click the blue circle on the top
+- select "embed into" ... {parent morph name}
+  (typically LayoutMorph)
+
 ### LayoutMorph
 
 A `LayoutMorph` arranges submorphs in a row or column.
@@ -2033,69 +2098,6 @@ SimpleButtonMorph new
     actionSelector: #value;
     openInWorld.
 ```
-
-## Halo
-
-To open the halo (set of surrounding buttons) for an item,
-cmd-click it in Cuis or option-click it in Squeak.
-If the item is embedded in other morphs, repeat this multiple times
-until a halo appears around the desired morph.
-
-<img alt="Smalltalk halo" style="width: 50%"
-  src="/blog/assets/smalltalk-halo.png?v={{pkg.version}}">
-
-The following buttons are provided:
-
-| Button                               | Location    | Purpose                                         |
-| ------------------------------------ | ----------- | ----------------------------------------------- |
-| red circle with white "x"            | upper-left  | removes the item                                |
-| blue circle with white document      | top         | opens menu "A" (1)                              |
-| black circle with house              | top         | drag to move the item within its parent         |
-| brown circle with resize icon        | top         | drag to move the item out of its parent         |
-| green circle with copy icon          | upper-right | drag to position a duplicate of the item        |
-| orange circle with wrench            | right side  | opens a menu of debugging options               |
-| blue circle with magnifier glass     | right side  | drag to change scale of item                    |
-| yellow circle with resize icon       | lower-right | drag to resize the item                         |
-| light blue circle with question mark | bottom      | click and hold to display a related tooltip (2) |
-| blue circle with rotate icon         | lower-left  | drag to rotate item                             |
-| dull yellow circle with odd shape    | left side   | click to collapse (hide) the item (3)           |
-| orange circle with wrench            | left side   | opens an "Explore" window (4)                   |
-
-TODO: How can you change the point about which a morph rotates?
-
-(1) This menu contains the following:
-
-- send to back
-- bring to front
-- embed into >
-- change color...
-- halo actions...
-- checkbox for "resist being picked up"
-- checkbox for "be locked"
-- copy to clipboard
-- export...
-- debug...
-
-(2) It seems most of the help tooltips default to "Help not yet supplied".
-To edit the help text, click the orange circle on the right,
-select "edit balloon help", and modify the help text.
-
-(3) To restore a collapsed item, click it's thumbnail in the bottom bar.
-
-(4) "Explore" windows enable viewing data associated with an item
-such as its location, size (extent), and color.
-
-For more detail, see
-<a href="https://cuis-smalltalk.github.io/TheCuisBook/A-brief-introduction-to-Inspectors.html"
-target="_blank">A brief introduction to Inspectors</a>.
-
-To embed a morph into another (such as a LayoutMorph):
-
-- drag the morph on top of its intended parent morph
-- open the halo of the morph
-- click the blue circle on the top
-- select "embed into" ... {parent morph name}
-  (typically LayoutMorph)
 
 ## Overriding doesNotUnderstand
 
