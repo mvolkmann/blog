@@ -98,6 +98,13 @@ The entire syntax of Smalltalk can be demonstrated on a post card.
   target="_blank">Fundación Argentina de Smalltalk</a> (FAST)
 - <a href="https://www.gnu.org/software/dr-geo/" target="_blank">Dr. Geo</a>
 
+There is a <a href="https://lists.cuis.st/mailman/listinfo/cuis-dev"
+target="_blank">Cuis Smalltalk mailing list</a>,
+but no Discord or Slack channel.
+
+There is a <a href="https://discord.gg/43VEWSw2"
+target="_blank">Discord channel channel for Squeak Smalltalk</a>.
+
 ## Smalltalk Pros
 
 - It has a small, consistently applied syntax.
@@ -468,7 +475,42 @@ It is better to create new subclasses of provided classes that
 override methods and save the new subclasses in a new package or "file out".
 Doing this enables installing the new package in a fresh image.
 
-## Terse Guide
+## Help
+
+The World menu contains a Help submenu which contains the following:
+
+- About this System ...
+- Terse Guide to Cuis
+- Class Comment Browser
+- Code management in Cuis
+- Using GitHub to host Cuis packages
+- Editor keyboard shortcuts
+- Useful Expressions
+- VM Statistics
+- Space Left
+
+### Class Comment Browser
+
+Selecting Help ... Class Comment Browser from the World menu the first time
+will display a message explaining that it requires cloning the
+<a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Tools"
+target="_blank">Cuis-Smalltalk-Tools</a> repository.
+After this is done, selecting this menu item again
+will ask for permission to install the tool.
+After this is done, selecting this menu item again
+will open a Class Comment Browser window.
+
+The left pane displays an alphabetical list of class names
+where each name is preceded by a disclosure triangle.
+Clicking a class name displays its first comment in the right pane.
+Clicking a disclosure triangle expands the class to show a
+numbered list of comments found in the source code for the class.
+Clicking any of those displays the comment text in the right pane.
+
+It's probably more useful to open a System Browser window,
+find a class of interest, an view the comments there.
+
+### Terse Guide
 
 An excellent source of help is the "Terse Guide".
 To open it, open the World menu and select Help...Terse Guide to Cuis.
@@ -1122,6 +1164,11 @@ To create a new package:
 - Select the newly created package.
 - Enter a comment describing the package.
 - Click the "Save" button.
+- You will be prompted for the file path and name
+  where the package will be saved.
+  It's a good idea to keep the suggested file name,
+  but feel free to change the directory to one outside
+  the distribution directory.
 
 If package name matches the name of a class category
 that was created previously, all the classes in that category
@@ -1292,7 +1339,12 @@ and press cmd-s to save the change.
 There are only six reserved words in Smalltalk which are
 `true`, `false`, `nil`, `self`, `super`, and `thisContext`.
 
-TODO: Describe `thisContext`.
+From the
+<a href="https://cuis-smalltalk.github.io/TheCuisBook/Pseudo_002dvariables.html"
+target="_blank">Cuis book</a>, "`thisContext` ...
+represents the top frame of the run-time stack. ...
+It is essential for implementing development tools like the Debugger and
+it is also used to implement exception handling and continuations."
 
 ## Control Flow
 
@@ -2394,3 +2446,5 @@ myBlock value: 2 value: 3.
   I'm imagining something like this:
   s := 'Player %s is number %d.' interpolate: #('Gretzky' 99).
 - See this! <a href="https://squeak.js.org" target="_blank">SqueakJS</a>
+- Learn how to add items to existing menus in the Cuis UI that do something
+  when you select them such as repositioning the currrently active window.
