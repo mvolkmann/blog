@@ -1888,6 +1888,10 @@ multiArgBlock value: 1 value: 2 value: 3 value: 4.
 multiArgBlock valueWithArguments: #(1 2 3 4 5).
 ```
 
+A block must be passed the same number of arguments as it has parameters.
+If a block is passed fewer or more arguments than it accepts,
+an Error window will open.
+
 Blocks can declare and use temporary (local) variables.
 Blocks cannot explicitly return a value with the caret (^).
 Their value is that if their final expression.
@@ -2633,3 +2637,15 @@ myBlock value: 2 value: 3.
   - all words lower
   - All Words Upper
   - Mixture of styles
+- Describe the use of "class instance variables" (not shared with subclasses)
+  which are different from "class variables" (shared with subclasses)?
+  To see them in a System Browser, select a class and click the class button.
+  They will look like this:
+
+  ```smalltalk
+  Dog class
+      instanceVariableNames: ''
+  ```
+
+- Does Smalltalk expose its own AST? If so, maybe you can use that to
+  generate code and another programming language from my Smalltalk program.
