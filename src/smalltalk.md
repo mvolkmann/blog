@@ -1127,7 +1127,62 @@ To save all the code for a package to a text file:
 The file will be saved in
 `{distribution-name}-UserFiles/FileOuts/{package-name}.st`.
 
-TODO: Is the content of these files referred to as a change set?
+These files use the bang-separated "chunked format".
+The following is an example for a `Dog` class.
+Note the use of keywords like "classDefinition" and "methodsFor".
+Also note the use of exclamation points to delimit the pieces.
+
+```smalltalk
+'From Cuis7.1 [latest update: #6464] on 12 June 2024 at 10:47:55 am'!
+!classDefinition: #Dog category: #Volkmann!
+Object subclass: #Dog
+	instanceVariableNames: 'breed name'
+	classVariableNames: 'Count'
+	poolDictionaries: ''
+	category: 'Volkmann'!
+
+!Dog methodsFor: 'initialization' stamp: 'RMV 6/12/2024 10:47:34'!
+initialize
+	super initialize.
+	Count := Count + 1! !
+
+!Dog methodsFor: 'initialization' stamp: 'RMV 6/11/2024 20:00:43'!
+initializeName: aName breed: aBreed
+	name := aName.
+	breed := aBreed! !
+
+
+!Dog methodsFor: 'accessing' stamp: 'RMV 6/11/2024 20:03:03'!
+breed
+	^breed! !
+
+!Dog methodsFor: 'accessing' stamp: 'RMV 6/11/2024 20:02:57'!
+name
+	^name! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'Dog class' category: #Volkmann!
+Dog class
+	instanceVariableNames: ''!
+
+!Dog class methodsFor: 'accessing' stamp: 'RMV 6/12/2024 09:45:13'!
+count
+	^Count! !
+
+
+!Dog class methodsFor: 'initialization' stamp: 'RMV 6/12/2024 10:41:45'!
+initialize
+	"This must be explicitly called with Dog initialize."
+	Count := 0! !
+
+!Dog class methodsFor: 'initialization' stamp: 'RMV 6/12/2024 10:43:52'!
+name: aName breed: aBreed
+	^self new initializeName: aName breed: aBreed! !
+
+
+Dog initialize!
+```
 
 To read all the code for a package from a text file:
 
@@ -1253,6 +1308,8 @@ to open a Browser window for the package.
 
 The only mechanism for communication between objects
 is for one to send a message to another.
+Messages are always sent to a explicit receiver,
+which is `self` to send a message to the current object.
 
 In documentation, message names are preceded by `#`,
 but that does not appear when sending the messages.
@@ -1500,6 +1557,19 @@ TODO: Add more detail.
 
 TODO: Add detail.
 
+### Association
+
+An `Association` represents a key/value pair.
+An instance can be created in the following ways:
+
+```smalltalk
+a := Association key: someKey value: someValue.
+a := someKey -> someValue.
+```
+
+The message `->` is defined in the `Object` class
+which make it easy to create an `Association` with any object as the key.
+
 ### Dictionary
 
 This is a subclass of the `Set` class.
@@ -1511,12 +1581,15 @@ To create a `Dictionary`:
 
 ```smalltalk
 dict := Dictionary new.
+dict := Dictionary newFrom: { k1 -> v1. k2 -> v2. ... }.
+dict := { k1 -> v1. k2 -> v2. ... } asDictionary.
 ```
 
 To add a key/value pair:
 
 ```smalltalk
 dict at: #key put: value.
+dict add: key -> value.
 ```
 
 To get the value for a key:
@@ -1524,12 +1597,31 @@ To get the value for a key:
 ```smalltalk
 value := dict at: #key
 value := dict at: #key ifAbsent: defaultValue
+value := dict at: #key ifAbsentPut: defaultValue
 ```
 
 If a default value is not provided and the key is not found,
 an Error window will open that says "key not found".
 
-TODO: Add more detail.
+To iterate over the values:
+
+```smalltalk
+dict do: [ :value | value print ].
+```
+
+To iterate over the keys and values:
+
+```smalltalk
+dict associationsDo: [ :assoc |
+    Transcript
+        show: assoc key;
+        show: ' ';
+        show: assoc value;
+        cr
+].
+```
+
+TODO: Add more detail?
 
 ### LinkedList
 
