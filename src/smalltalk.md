@@ -1603,6 +1603,14 @@ value := dict at: #key ifAbsentPut: defaultValue
 If a default value is not provided and the key is not found,
 an Error window will open that says "key not found".
 
+To get all the keys, values, or associations:
+
+```smalltalk
+ks := dict keys.
+vs = dict values.
+as = dict associations.
+```
+
 To iterate over the values:
 
 ```smalltalk
