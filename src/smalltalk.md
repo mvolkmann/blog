@@ -675,6 +675,9 @@ If the code goes into an infinite loop, break out of it by pressing cmd-period.
 
 To browse a class, enter its name and press cmd-b (Browse it).
 
+<img alt="Cuis Workspace window" style="width: 80%"
+  src="/blog/assets/cuis-workspace-window.png?v={{pkg.version}}">
+
 ### Transcript Windows
 
 This is a read-only window displays output written to it.
@@ -700,6 +703,9 @@ right-click in it and select "Clear Transcript" (no keyboard shortcut).
 If there is more than one `Transcript` window, all of them will be cleared.
 
 TODO: Why does this window contain the word "Transcript" in its content?
+
+<img alt="Cuis Transcript window" style="width: 80%"
+  src="/blog/assets/cuis-transcript-window.png?v={{pkg.version}}">
 
 ### System Browser Windows
 
@@ -740,6 +746,9 @@ click in the class category pane and press cmd-f (find class...).
 Then enter part of a class name and press return.
 A popup list of matching classes will appear.
 Click one of the names to browse that class.
+
+<img alt="Cuis System Browser window" style="width: 100%"
+  src="/blog/assets/cuis-system-browser-window.png?v={{pkg.version}}">
 
 To browse a class, type its name (ex. String) in a Workspace window
 and press cmd-b (Browse it).
@@ -821,7 +830,7 @@ To do this:
 - Optionally click the "Proceed" button to
   resume execution with calling the new method.
 
-<img alt="Cuis MessageNotUnderstood window" style="width: 80%"
+<img alt="Cuis MessageNotUnderstood window" style="width: 90%"
   src="/blog/assets/cuis-messagenotunderstood-window.png?v={{pkg.version}}">
 
 ## Syntax
