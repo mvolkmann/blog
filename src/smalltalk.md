@@ -629,6 +629,194 @@ and select Windows...Tile open windows.
 
 TODO: Are other options in the Windows menu useful?
 
+### Editing Code
+
+Many kinds of windows support entering Smalltalk code.
+Syntax highlighting is provided.
+
+| Token Type        | Styling        |
+| ----------------- | -------------- |
+| class name        | black and bold |
+| comment           | green          |
+| instance variable | purple         |
+| keyword           | red            |
+| message name      | blue           |
+| string            | purple         |
+| symbol            | blue and bold  |
+
+By default, class names are black and bold,
+message names are blue, and symbols are blue and bold.
+
+In any text editng pane, right-click and select "Help..."
+to see a list of the supported key bindings.
+
+To comment/uncomment selected lines of code, press cmd-".
+
+To change the indentation of a block of code, select all the lines and
+press tab to increase indentation or shift-tab to decrease it.
+
+### Workspace Windows
+
+Workspace windows enable experimenting with code.
+They are somewhat like REPLs in other programming languages.
+
+Enter any number of expressions separated by periods.
+
+To prepare to execute lines of code, select them or
+place the cursor anywhere inside one of the lines.
+To execute them for their side effects, press cmd-d (Do it).
+To execute them and print the result of the last expression
+inside the Workspace, press cmd-p (Print it).
+Output from "Print it" will be selected,
+so it can be removed by pressing the delete key.
+You will use "Do it" and "Print it" often, so memorize their keyboard shortcuts.
+
+If the code goes into an infinite loop, break out of it by pressing cmd-period.
+
+To browse a class, enter its name and press cmd-b (Browse it).
+
+### Transcript Windows
+
+This is a read-only window displays output written to it.
+
+One way to do this is to send `Transcript show: <object>`,
+perhaps in a Workspace window.
+This can output any kind of object
+because every object has a string representation.
+
+Another way is to use the `print` method in the `CharacterSequence` class
+which is the superclasss of the `String` class.
+This executes `Transcript show: self; newLine`.
+For example, `'Hello World!' print`.
+
+The `print` message can be sent to strings, symbols,
+and any object that has a `printString` method.
+
+When output is sent to the `Transcript`, it appears in all `Transcript` windows.
+So it doesn't make sense to open more than one.
+
+To clear the contents of the Transcript window,
+right-click in it and select "Clear Transcript" (no keyboard shortcut).
+If there is more than one `Transcript` window, all of them will be cleared.
+
+TODO: Why does this window contain the word "Transcript" in its content?
+
+### System Browser Windows
+
+System Browser windows contain four rows.
+
+- The first (top) row contains four panes for displaying and operating on
+  class categories, classes, message categories, and methods.
+
+  - Selecting a class category in the first pane
+    displays the classes in that category in the second pane.
+    For example, the class `String` is in the class category `Text`.
+  - Selecting a class in the second pane
+    displays message categories for the class in the third pane.
+    Example message category names include "accessing", "comparing",
+    "copying", "converting", "enumerating", and "printing".
+  - Selecting a message category (a.k.a protocol) in the third pane
+    displays methods in that category in the fourth pane.
+    The top, default messate category is "-- all --",
+    which contains all the methods.
+
+- The second row displays a message describing the item selected in the top row.
+- The third row contains a series of buttons that can be clicked to
+  open other windows that show information related to the selected item.
+  One exception is the "show..." button. Clicking this displays a popup
+  containing exclusive checkboxes that can be checked
+  to indicate what should be displayed in the fourth row.
+  The default is "source" which is typically the desired choice.
+- The fourth row displays information about the selected item
+  based on the checkbox that is selected for the "show..." button.
+  By default it displays Smalltalk code for the selected item
+  and can be used to edit the code.
+
+To open a System Browser window, click on the `WorldMorph` background,
+select Open, and select Browser.
+
+To search for a class by part of its name,
+click in the class category pane and press cmd-f (find class...).
+Then enter part of a class name and press return.
+A popup list of matching classes will appear.
+Click one of the names to browse that class.
+
+To browse a class, type its name (ex. String) in a Workspace window
+and press cmd-b (Browse it).
+This opens a Browser window with the class already selected.
+
+To delete a method from a class, select it and press cmd-x (Remove it).
+Then select "Remove it" or "Remove, then browse senders".
+The latter option allows the senders to be modified.
+
+When the mouse cursor is over any of the four lists at the top, typing a letter
+causes the list to scroll to the first item that begins with that letter.
+
+There is no provided way to search for code that contains a given string.
+Mariano Montone implemented this and shared a change set via email.
+See the file `SearchSourceMenus-MarianoMontone.cs.st`.
+Location this in a "File List" window and click the "install" button.
+This adds the context menu item "search source...".
+
+For more detail, see
+<a href="https://cuis-smalltalk.github.io/TheCuisBook/A-brief-introduction-to-the-system-Browser.html"
+target="_blank">A brief introduction to the System Browser</a>.
+
+### Protocol Windows
+
+When a class is selected in a System Browser window,
+only the methods defined directly in that class are displayed.
+To also see methods defined in superclasses,
+open a Protocol window by pressing cmd-p (browse protocol).
+
+This window is similar to a System Browser window,
+but it omits the class categories pane and
+displays all instance methods available on instances of the class.
+Methods defined directly on the class are in bold,
+and methods defined in superclasses are not.
+
+Here's an example of a Protocol window for the `Array` class:
+
+<img alt="Cuis Smalltalk Protocol window" style="width: 70%"
+  src="/blog/assets/cuis-protocol-window.png?v={{pkg.version}}">
+
+### Text Editor Windows
+
+"Text Editor" windows enable editing text files.
+They support changing the font size, color, and style of selected text.
+
+These are used to edit text other than Smalltalk source code.
+
+The text can be saved in `.txt` files, but
+all the formatting is discarded and only the raw text is saved.
+
+### Message Names Windows
+
+These windows enable searching for implementors
+of methods whose name contains a given substring.
+For example, enter "select:" to find all the classes
+that have a method whose names end with that.
+Those include `Bag`, `Collection`, `Dictionary`, `Heap`,
+`OrderedCollection`, `SequenceableCollection`, and `SortedCollection`.
+
+### MessageNotUnderstood Windows
+
+When a message is sent to an object that doesn't have a corresponding method,
+a MessageNotUnderstood window is opened.
+This displays a stack trace showing the origin of the message send
+with the most recent call at the top.
+
+One option is to implement the missing method.
+To do this:
+
+- Click the "Create" button.
+- Select the class in which the method will be added.
+- Select a category for the method.
+- Enter an implementation for the method.
+- Press cmd-s to save it.
+- Optionally click the "Proceed" button to
+  resume execution with calling the new method.
+
 ## Syntax
 
 | Item                                              | Example                                          |
@@ -1728,176 +1916,6 @@ fact := [:block :n |
 
 fact value: fact value: 5 "gives 120"
 ```
-
-## Editing Code
-
-Many kinds of windows support entering Smalltalk code.
-Syntax highlighting is provided.
-
-| Token Type        | Styling        |
-| ----------------- | -------------- |
-| class name        | black and bold |
-| comment           | green          |
-| instance variable | purple         |
-| keyword           | red            |
-| message name      | blue           |
-| string            | purple         |
-| symbol            | blue and bold  |
-
-By default, class names are black and bold,
-message names are blue, and symbols are blue and bold.
-
-In any text editng pane, right-click and select "Help..."
-to see a list of the supported key bindings.
-
-To comment/uncomment selected lines of code, press cmd-".
-
-To change the indentation of a block of code, select all the lines and
-press tab to increase indentation or shift-tab to decrease it.
-
-## System Browser
-
-System Browser windows contain four rows.
-
-- The first (top) row contains four panes for displaying and operating on
-  class categories, classes, message categories, and methods.
-
-  - Selecting a class category in the first pane
-    displays the classes in that category in the second pane.
-    For example, the class `String` is in the class category `Text`.
-  - Selecting a class in the second pane
-    displays message categories for the class in the third pane.
-    Example message category names include "accessing", "comparing",
-    "copying", "converting", "enumerating", and "printing".
-  - Selecting a message category (a.k.a protocol) in the third pane
-    displays methods in that category in the fourth pane.
-    The top, default messate category is "-- all --",
-    which contains all the methods.
-
-- The second row displays a message describing the item selected in the top row.
-- The third row contains a series of buttons that can be clicked to
-  open other windows that show information related to the selected item.
-  One exception is the "show..." button. Clicking this displays a popup
-  containing exclusive checkboxes that can be checked
-  to indicate what should be displayed in the fourth row.
-  The default is "source" which is typically the desired choice.
-- The fourth row displays information about the selected item
-  based on the checkbox that is selected for the "show..." button.
-  By default it displays Smalltalk code for the selected item
-  and can be used to edit the code.
-
-To open a System Browser window, click on the `WorldMorph` background,
-select Open, and select Browser.
-
-To search for a class by part of its name,
-click in the class category pane and press cmd-f (find class...).
-Then enter part of a class name and press return.
-A popup list of matching classes will appear.
-Click one of the names to browse that class.
-
-To browse a class, type its name (ex. String) in a Workspace window
-and press cmd-b (Browse it).
-This opens a Browser window with the class already selected.
-
-To delete a method from a class, select it and press cmd-x (Remove it).
-Then select "Remove it" or "Remove, then browse senders".
-The latter option allows the senders to be modified.
-
-When focus is in any of the four lists at the top, typing a letter
-causes the list to scroll to the first item that begins with that letter.
-
-There is no provided way to search for code that contains a given string.
-Mariano Montone implemented this and shared a change set via email.
-See the file `SearchSourceMenus-MarianoMontone.cs.st`.
-Location this in a "File List" window and click the "install" button.
-This adds the context menu item "search source...".
-
-For more detail, see
-<a href="https://cuis-smalltalk.github.io/TheCuisBook/A-brief-introduction-to-the-system-Browser.html"
-target="_blank">A brief introduction to the System Browser</a>.
-
-## Workspaces
-
-Workspace windows enable experimenting with code.
-They are somewhat like REPLs in other programming languages.
-
-Enter any number of expressions separated by periods.
-
-To prepare to execute lines of code, select them or
-place the cursor anywhere inside one of the lines.
-To execute them for their side effects, press cmd-d (Do it).
-To execute them and print the result of the last expression
-inside the Workspace, press cmd-p (Print it).
-Output from "Print it" will be selected,
-so it can be removed by pressing the delete key.
-You will use "Do it" and "Print it" often, so memorize their keyboard shortcuts.
-
-If the code goes into an infinite loop, break out of it by pressing cmd-period.
-
-To browse a class, enter its name and press cmd-b (Browse it).
-
-## Transcript
-
-This is a read-only window displays output written to it.
-
-One way to do this is to send `Transcript show: <object>`,
-perhaps in a Workspace window.
-This can output any kind of object
-because every object has a string representation.
-
-Another way is to use the `print` method in the `CharacterSequence` class
-which is the superclasss of the `String` class.
-This executes `Transcript show: self; newLine`.
-For example, `'Hello World!' print`.
-
-The `print` message can be sent to strings, symbols,
-and any object that has a `printString` method.
-
-When output is sent to the `Transcript`, it appears in all `Transcript` windows.
-So it doesn't make sense to open more than one.
-
-To clear the contents of the Transcript window,
-right-click in it and select "Clear Transcript" (no keyboard shortcut).
-If there is more than one `Transcript` window, all of them will be cleared.
-
-TODO: Why does this window contain the word "Transcript" in its content?
-
-## Text Editors
-
-"Text Editor" windows enable editing text files.
-They support changing the font size, color, and style of selected text.
-
-These are used to edit text other than Smalltalk source code.
-
-The text can be saved in `.txt` files, but
-all the formatting is discarded and only the raw text is saved.
-
-## Message Names
-
-These windows enable searching for implementors
-of methods whose name contains a given substring.
-For example, enter "select:" to find all the classes
-that have a method whose names end with that.
-Those include `Bag`, `Collection`, `Dictionary`, `Heap`,
-`OrderedCollection`, `SequenceableCollection`, and `SortedCollection`.
-
-## MessageNotUnderstood Windows
-
-When a message is sent to an object that doesn't have a corresponding method,
-a MessageNotUnderstood window is opened.
-This displays a stack trace showing the origin of the message send
-with the most recent call at the top.
-
-One option is to implement the missing method.
-To do this:
-
-- Click the "Create" button.
-- Select the class in which the method will be added.
-- Select a category for the method.
-- Enter an implementation for the method.
-- Press cmd-s to save it.
-- Optionally click the "Proceed" button to
-  resume execution with calling the new method.
 
 ## Unit Tests
 
