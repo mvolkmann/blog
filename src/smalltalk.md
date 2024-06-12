@@ -1685,6 +1685,9 @@ To delete a method from a class, select it and press cmd-x (Remove it).
 Then select "Remove it" or "Remove, then browse senders".
 The latter option allows the senders to be modified.
 
+When focus is in any of the four lists at the top, typing a letter
+causes the list to scroll to the first item that begins with that letter.
+
 There is no provided way to search for code that contains a given string.
 Mariano Montone implemented this and shared a change set via email.
 See the file `SearchSourceMenus-MarianoMontone.cs.st`.
@@ -2215,51 +2218,67 @@ to open a `MessageNotUnderstood` window.
 This can be overridden in specific classes to provide specialized processing
 of messages that do not have corresponding methods.
 
-Let's demonstrate this by defining a `Map` class that enables sending messages
-with arbitrary names to set and retrieve values in a `Dictionary`.
-If it receives a message it does not want to handle,
-it sends the message onto its superclass.
+Let's demonstrate this by defining an `Accessible` class that enables
+sending messages set and get any instance variable
+in classes that inherit from this class.
 
-Here is the class definition which just declares a single instance variable:
+Here is the class definition:
 
 ```smalltalk
-Object subclass: #Map
-    instanceVariableNames: 'dict'
+Object subclass: #Accessible
+    instanceVariableNames: ''
     classVariableNames: ''
     poolDictionaries: ''
     category: 'Volkmann'
 ```
 
-Here is a class method that just demonstrates using the class:
+Here is its one and only instance method:
 
 ```smalltalk
-demo
-    "demonstrates using the Map class"
-
-    | map |
-    map := Map new.
-    "The key must not match an existing method (like name)."
-    map firstName: 'Mark'.
-    map firstName print
-```
-
-Here are the instance methods:
-
-```smalltalk
-initialize
-    dict := Dictionary new
-
 doesNotUnderstand: aMessage
-    "gets and sets entries based on key and value"
+    "gets or sets an instance variable"
 
-    | argCount key value |
+    | argCount getters index key setters |
+
     argCount := aMessage numArgs.
     argCount > 1 ifTrue: [ ^super doesNotUnderstand: aMessage ].
+
     key := aMessage keywords first.
-    argCount = 0 ifTrue: [ ^dict at: key ifAbsent: 'not found'].
-    value := aMessage arguments first.
-    dict at: (key allButLast) put: value
+
+    getters := self class allInstVarNames.
+    index := getters indexOf: key.
+    index ifNotZero: [^self instVarAt: index].
+
+    setters := getters collect: [ :name | name, ':' ].
+    index := setters indexOf: key.
+    index ifNotZero: [^self instVarAt: index put: aMessage arguments first ].
+
+    ^super doesNotUnderstand: aMessage
 ```
+
+Here is a subclass of `Accessible:
+
+```smalltalk
+Accessible subclass: #Person
+    instanceVariableNames: 'birthdate country firstName height lastName'
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'Volkmann'
+```
+
+Here is an example of using this class:
+
+```smalltalk
+p := Person new.
+p firstName: 'Mark'.
+p firstName print.
+```
+
+Getting and setting instance variables in this way is quite inefficient.
+A better approach is to generate accessor methods
+by right-clicking the `Person` class in a System Browser window
+and selecting more ... create inst var accessors
+to generate accessor methods for each instance variable.
 
 ## File I/O
 
@@ -2364,11 +2383,20 @@ enter something like `Freecell newGame`, and "Do it".
 
 ## Web Development
 
-See the
+Enter `Feature require: 'WebClient'` and "Do it".
+This adds many classes in the WebClient - Core category including
+`WebClient`, `WebRequest`, `WebResponse`, `WebServer`, and `WebSocket`.
+
+Also see the
 <a href="https://github.com/SeasideSt/Seaside" target="_blank">Seaside</a> and
 <a href="https://github.com/zeroflag/Teapot" target="_blank">Teapot</a> frameworks.
 
-Also see the <a href="https://book.seaside.st/book" target="_blank">Seaside Book</a>.
+See the <a href="https://book.seaside.st/book" target="_blank">Seaside Book</a>.
+
+Creating a `WebServer` instance and sending it the `listenOn:` message
+starts a Smalltalk process called "WebServers's listener process".
+To kill it, open a "Process Browser", select the process,
+and press cmd-t (Terminate).
 
 ## Example Code
 
@@ -2448,3 +2476,8 @@ myBlock value: 2 value: 3.
 - See this! <a href="https://squeak.js.org" target="_blank">SqueakJS</a>
 - Learn how to add items to existing menus in the Cuis UI that do something
   when you select them such as repositioning the currrently active window.
+- Consider submitting an update to Cuis that standardizes menu item names.
+  Currently there are three styles:
+  - all words lower
+  - All Words Upper
+  - Mixture of styles
