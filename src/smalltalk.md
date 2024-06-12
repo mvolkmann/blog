@@ -777,7 +777,7 @@ and methods defined in superclasses are not.
 
 Here's an example of a Protocol window for the `Array` class:
 
-<img alt="Cuis Smalltalk Protocol window" style="width: 70%"
+<img alt="Cuis Smalltalk Protocol window" style="width: 100%"
   src="/blog/assets/cuis-protocol-window.png?v={{pkg.version}}">
 
 ### Text Editor Windows
@@ -798,6 +798,10 @@ For example, enter "select:" to find all the classes
 that have a method whose names end with that.
 Those include `Bag`, `Collection`, `Dictionary`, `Heap`,
 `OrderedCollection`, `SequenceableCollection`, and `SortedCollection`.
+Click one the class names to see the method implementation.
+
+<img alt="Cuis Smalltalk Protocol window" style="width: 100%"
+  src="/blog/assets/cuis-protocol-window.png?v={{pkg.version}}">
 
 ### MessageNotUnderstood Windows
 
@@ -816,6 +820,9 @@ To do this:
 - Press cmd-s to save it.
 - Optionally click the "Proceed" button to
   resume execution with calling the new method.
+
+<img alt="Cuis MessageNotUnderstood window" style="width: 80%"
+  src="/blog/assets/cuis-messagenotunderstood-window.png?v={{pkg.version}}">
 
 ## Syntax
 
