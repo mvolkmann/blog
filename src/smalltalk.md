@@ -490,6 +490,12 @@ It is better to create new subclasses of provided classes that
 override methods and save the new subclasses in a new package or "file out".
 Doing this enables installing the new package in a fresh image.
 
+To see the file path for the currently running image,
+select Help...About this System... This opens a Text Editor window
+that displays basic information about Cuis Smalltalk.
+It also opens a dialog that displays the current version of Cuis Smalltalk,
+the latest update number, and the file page to the current image.
+
 ## Help
 
 The World menu contains a Help submenu which contains the following:
@@ -581,6 +587,9 @@ specifying a different label color for specific buttons.
 You will be opening and using many windows.
 To open one, open the World menu and
 select a window type from the "Open" submenu.
+
+To close one, click its red circle button in the upper left
+or move the mouse cursor over the window and press cmd-w.
 
 The available windows include:
 
@@ -714,17 +723,22 @@ System Browser windows contain four rows.
 - The first (top) row contains four panes for displaying and operating on
   class categories, classes, message categories, and methods.
 
-  - Selecting a class category in the first pane
-    displays the classes in that category in the second pane.
-    For example, the class `String` is in the class category `Text`.
-  - Selecting a class in the second pane
-    displays message categories for the class in the third pane.
-    Example message category names include "accessing", "comparing",
-    "copying", "converting", "enumerating", and "printing".
-  - Selecting a message category (a.k.a protocol) in the third pane
-    displays methods in that category in the fourth pane.
-    The top, default messate category is "-- all --",
-    which contains all the methods.
+  Selecting a class category in the first pane
+  displays the classes in that category in the second pane.
+  For example, the class `String` is in the class category `Text`.
+
+  Selecting a class in the second pane
+  displays message categories for the class in the third pane.
+  Example message category names include "accessing", "comparing",
+  "copying", "converting", "enumerating", and "printing".
+
+  Selecting a message category (a.k.a protocol) in the third pane
+  displays methods in that category in the fourth pane.
+  The top, default messate category is "-- all --",
+  which contains all the methods.
+
+  The items in these panes are not sorted alphabetically by default.
+  To sort them, hover over a pane and press cmd-shift-a (alphabetize)
 
 - The second row displays a message describing the item selected in the top row.
 - The third row contains a series of buttons that can be clicked to
@@ -770,6 +784,10 @@ This adds the context menu item "search source...".
 For more detail, see
 <a href="https://cuis-smalltalk.github.io/TheCuisBook/A-brief-introduction-to-the-system-Browser.html"
 target="_blank">A brief introduction to the System Browser</a>.
+
+### Hierarchy Browser Windows
+
+TODO: Add a description of this and screenshot.
 
 ### Protocol Windows
 
@@ -832,6 +850,14 @@ To do this:
 
 <img alt="Cuis MessageNotUnderstood window" style="width: 90%"
   src="/blog/assets/cuis-messagenotunderstood-window.png?v={{pkg.version}}">
+
+### Process Browser Windows
+
+Process Browser windows display a list of all the Smalltalk-related processes
+that are running.
+
+To terminate a process, select it and press cmd-t (terminate).
+This is especially useful for terminating "WebServer's listening process".
 
 ## Syntax
 
@@ -1723,6 +1749,12 @@ For example, `#(1 2 3 4) mean` returns the `Fraction` `5/2`.
 To create an array of numbers from a range, send the `#asArray` message to a `Range`.
 For example, `(1 to: 5) asArray` returns `#(1 2 3 4 5)`.
 
+To iterate over the elements, send the `do:` message. For example:
+
+```smalltalk
+#('foo' 'bar' 'baz') do: [ :item | item print ]
+```
+
 TODO: Add more detail.
 
 ### OrderedCollection
@@ -2540,7 +2572,9 @@ enter something like `Freecell newGame`, and "Do it".
 ## Web Development
 
 Enter `Feature require: 'WebClient'` and "Do it".
-This adds many classes in the WebClient - Core category including
+This adds many classes in the
+<a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Dev/blob/master/Packages/Features/WebClient.pck.st"
+target="_blank">WebClient</a> - Core category including
 `WebClient`, `WebRequest`, `WebResponse`, `WebServer`, and `WebSocket`.
 
 Also see the
