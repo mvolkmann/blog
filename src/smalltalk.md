@@ -1666,6 +1666,18 @@ Those messages just send the `value` message to the argument value.
 Typically that is used to evaluate a no-arg block.
 But the `Object` class defines the `value` method to just return `self`.
 
+When blocks are used, the compiler is able to optimized the code by
+inlining the code within the block and
+avoiding the need to send the `value` message.
+So it is more efficient to use blocks.
+The previous example can be written as follows to take advantage of this:
+
+```smalltalk
+result := a < b ifTrue: ['less'] ifFalse: ['more'].
+```
+
+It seems
+
 ## Data Types
 
 The `Boolean` literal values are `true` and `false`.
