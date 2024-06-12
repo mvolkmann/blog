@@ -1375,6 +1375,9 @@ result := a < b ifTrue: 'less' ifFalse: 'more'.
 
 The values for `ifTrue` and `ifFalse` can be
 literal values, variables, or blocks with no parameters.
+Those messages just send the `value` message to the argument value.
+Typically that is used to evaluate a no-arg block.
+But the `Object` class defines the `value` method to just return `self`.
 
 ## Data Types
 
