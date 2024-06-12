@@ -127,33 +127,48 @@ target="_blank">Discord channel channel for Squeak Smalltalk</a>.
   - IT press doesn't talk about it.
   - It's difficult to convince others to use it.
 
-- It doesn't minimize compile-time errors as much as
-  statically typed languages such as C++, C# and Java.
-  However, it does do incremental compiling when methods are saved,
+- Help is limited.
+
+  There are fewer developers using Smalltalk
+  than many other programming languages.
+  This means there are fewer people available
+  to answer questions for new developers.
+
+- Library documentation is lacking.
+
+  Many Smalltalk libraries have little to no documentation and example code.
+  There seems to be a feeling that since the source code is easily accessible,
+  developers can just read that to determine how to use a library.
+  This makes it difficult to get started using new libraries.
+
+- Classes are global and not in namespaces, so all class names must be unique.
+
+  Using class name prefixes is recommended.
+  This is important for using Squeak packages and Monticello.
+  Squeak has a prefix registry in the wiki.
+
+- Immutability is not favored.
+
+  While it is possible to define Smalltalk classes whose objects are immutable,
+  this is not common.
+  This will feel wrong to developers that prefer functional programming.
+
+- Application deployment is tedious.
+
+  Tools to strip a Smalltalk image of developer-only features
+  in order to create an image that is suitable for deployment are lacking.
+  This is a highly manual process.
+
+- Smalltalks use of late binding for resolving message sends
+  means that there are more errors that can only be detected at run-time
+  than in statically typed languages such as C++, C#, and Java.
+  However, Smalltalk does do incremental compiling when methods are saved,
   so it finds syntax errors before runtime, unlike most scripting languages.
 
 - All the code for a project is stored in one big image file (often over 30 MB).
   However, it is common to store custom code and modifications to
   provided classes in a "file out" or package that can be
   shared with other developers and installed into fresh images.
-
-- The syntax is fairly different from most programming languages.
-
-  - no dots or parentheses used in method calls
-  - conditional and iterating constructs are method calls instead of keywords
-  - keyword messages are a departure from positional arguments
-  - method cascading (sending multiple messages to the same object)
-    is a new concept
-
-  But I think these are significant pros of Smalltalk!
-
-- Performance may be an issue.
-
-- Classes are not in a namespace, so all class names must be unique.
-
-  Using class name prefixes is recommended.
-  This is important for using Squeak packages and Monticello.
-  Squeak has a prefix registry in the wiki.
 
 ## History
 
@@ -1720,7 +1735,7 @@ To browse a class, enter its name and press cmd-b (Browse it).
 
 ## Transcript
 
-This window displays output written to it.
+This is a read-only window displays output written to it.
 
 One way to do this is to send `Transcript show: <object>`,
 perhaps in a Workspace window.
