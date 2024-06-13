@@ -946,9 +946,18 @@ that are running.
 To terminate a process, select it and press cmd-t (terminate).
 This is especially useful for terminating "WebServer's listening process".
 
+<img alt="Cuis Process Browser window" style="width: 85%"
+  src="/blog/assets/cuis-process-browser-window.png?v={{pkg.version}}">
+
 ### Emergency Evaluator
 
-TODO: Explain how to use this.
+The Emergency Evaluator can be useful to save work
+when the current session becomes somewhat unusable.
+
+<img alt="Cuis Emergency Evaluator" style="width: 30%"
+  src="/blog/assets/cuis-emergency-evaluator.png?v={{pkg.version}}">
+
+TODO: Explain when this is useful.
 
 ## Syntax
 
