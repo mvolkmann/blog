@@ -854,6 +854,28 @@ To create new class:
 - Add desired instance and class variable names as space-separated strings.
 - Save by pressing cmd-s (Accept).
 
+To create a new method:
+
+- Click the "instance" or "class" button to indicate the scope of the method.
+- Select a method category.
+
+  This can be "-- all --", "as yet unclassified", or any other method category.
+  To create new category, move the mouse cursor over the method category pane
+  and press cmd-n (new category...).
+
+  The bottom pane will now contain the following:
+
+  ```smalltalk
+  messageSelectorAndArgumentNames
+      "comment stating purpose of message"
+
+      | temporary variable names |
+      statements
+  ```
+
+- Modify the code template to define the new method.
+- Save by pressing cmd-s (Accept).
+
 To delete a method from a class, select it and press cmd-x (Remove it).
 Then select "Remove it" or "Remove, then browse senders".
 The latter option allows the senders to be modified.
