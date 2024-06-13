@@ -376,6 +376,47 @@ You will likely want to work in full screen mode.
 To enable this, open the World menu and select Preferences ... Full screen on.
 To disable this, select Preferences ... Full screen on.
 
+The following class defines a class method `buttons` that displays buttons
+which make it easier to toggle between full screen and windowed modes.
+
+<img alt="Cuis full screen buttons" class="logo" style="width: 20%"
+  src="/blog/assets/cuis-full-screen-buttons.png?v={{pkg.version}}">
+
+```smalltalk
+Object subclass: #VDisplay
+    instanceVariableNames: ''
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'Volkmann'
+
+fullScreen: aBoolean
+    Display fullScreenMode: aBoolean.
+    Display newDepth: Display depth
+
+fullScreenOff
+    self fullScreen: false
+
+fullScreenOn
+    self fullScreen: true
+
+buttons
+    "adds buttons for setting full screen on or off"
+
+    LayoutMorph newColumn
+        addMorph: (LabelMorph contents: 'Full Screen');
+        addMorph: (LayoutMorph newRow
+            addMorph: (
+                VButtonMorph label: 'On' block: [ VDisplay fullScreenOn ]
+            );
+            addMorph: (
+                VButtonMorph label: 'Off' block: [ VDisplay fullScreenOff ]
+            );
+            color: Color transparent
+        );
+        location: (MorphicTranslation withTranslation: 10@10);
+        openInWorld
+```
+
 ## Optional Packages
 
 The shell script `clonePackageRepos.sh` clones many
@@ -1676,8 +1717,6 @@ The previous example can be written as follows to take advantage of this:
 result := a < b ifTrue: ['less'] ifFalse: ['more'].
 ```
 
-It seems
-
 ## Data Types
 
 The `Boolean` literal values are `true` and `false`.
@@ -2284,61 +2323,63 @@ is to create a subclass of `PluggableButtonMorph` that does the following:
 1. Define the following new class:
 
    ```smalltalk
-   PluggableButtonMorph subclass: #ButtonMorph
+   PluggableButtonMorph subclass: #VButtonMorph
        instanceVariableNames: 'labelColor'
        classVariableNames: ''
        poolDictionaries: ''
-       category: 'Morphic-Widgets'!
+       category: 'Volkmann'
    ```
 
-1. Define the following instance methods in the `ButtonMorph` class:
+1. Define the following instance methods in the `VButtonMorph` class:
 
    ```smalltalk
    labelColor
-       ^labelColor ifNil: [Theme current buttonLabel]! !
+       ^labelColor ifNil: [Theme current buttonLabel]
 
    labelColor: anObject
-       labelColor := anObject! !
+       labelColor := anObject
    ```
 
-1. Override this instance method in the `ButtonMorph` class
+1. Override this instance method in the `VButtonMorph` class
    by copying the same method from `PluggableButtonMorph`
    and modifying two lines.
 
    ```smalltalk
    drawEmbossedLabelOn: aCanvas
-     | availableW center colorForLabel f l labelMargin targetSize w x y |
-     label ifNotNil: [
-       colorForLabel := self enableLabelColorWith: self labelColor.
-       self isPressed
-         ifFalse: [
-           self mouseIsOver
-             ifFalse: [colorForLabel := colorForLabel adjustSaturation: -0.10 brightness: 0.10 ]]
-             ifTrue: [ colorForLabel := colorForLabel adjustSaturation: 0.0 brightness: -0.07 ].
-       f := self fontToUse.
-       center := extent // 2.
-       labelMargin := 3.
-       w := f widthOfString: label.
-       availableW := extent x - labelMargin - labelMargin.
-       availableW >= w
-         ifTrue: [l := label ]
-         ifFalse: [
-           x := labelMargin.
-           targetSize := label size * availableW // w.
-           l := label squeezedTo: targetSize.
-           (f widthOfString: l) > availableW ifTrue: [
-             targetSize := targetSize - 1.
-             l := label squeezedTo: targetSize ]].
+       | availableW center colorForLabel f l labelMargin targetSize w x y |
+       label ifNotNil: [
+           colorForLabel := self enableLabelColorWith: self labelColor.
+           self isPressed
+               ifFalse: [
+                   self mouseIsOver
+                       ifFalse: [ colorForLabel := colorForLabel adjustSaturation: -0.10 brightness: 0.10 ]]
+               ifTrue: [ colorForLabel := colorForLabel adjustSaturation: 0.0 brightness: -0.07 ].
+           f := self fontToUse.
+           center := extent // 2.
+           labelMargin := 3.
+           w := f widthOfString: label.
+           availableW := extent x - labelMargin - labelMargin.
+           availableW >= w
+               ifTrue: [ l := label ]
+               ifFalse: [
+                   x := labelMargin.
+                   targetSize := label size * availableW // w.
+                   l := label squeezedTo: targetSize.
+                   (f widthOfString: l) > availableW ifTrue: [
+                       targetSize := targetSize - 1.
+                       l := label squeezedTo: targetSize ]
+               ].
 
-       w := f widthOfString: l.
-       x := center x - (w // 2).
-       y := center y - (f lineSpacing // 2).
-       aCanvas
-         drawString: l
-         at: x@y
-         font: f
-         color: colorForLabel
-         embossed: false ]! !
+           w := f widthOfString: l.
+           x := center x - (w // 2).
+           y := center y - (f lineSpacing // 2).
+           aCanvas
+               drawString: l
+               at: x@y
+               font: f
+               color: colorForLabel
+               embossed: false
+       ]
    ```
 
    The modified lines are the one that sets `colorForLabel`
