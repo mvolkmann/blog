@@ -834,6 +834,26 @@ To browse a class, type its name (ex. String) in a Workspace window
 and press cmd-b (Browse it).
 This opens a Browser window with the class already selected.
 
+To create new class:
+
+- Select a class category.
+
+  If the desired class category is already selected
+  and a class in that category is selected,
+  click it so it is deselected.
+  The bottom pane will now contain the following:
+
+  ```smalltalk
+  Object subclass: #NameOfSubclass
+      instanceVariableNames: ''
+      classVariableNames: ''
+      poolDictionaries: ''
+      category: 'SelectedClassCategory'
+  ```
+
+- Add desired instance and class variable names as space-separated strings.
+- Save by pressing cmd-s (Accept).
+
 To delete a method from a class, select it and press cmd-x (Remove it).
 Then select "Remove it" or "Remove, then browse senders".
 The latter option allows the senders to be modified.
