@@ -2159,6 +2159,9 @@ select one or more test classes, and click the "Run" button.
 After adding new test classes, click the "Refresh" button
 to make the "SUnit Test Runner" window aware of them.
 
+<img alt="Cuis SUnit Test Runner" style="width: 90%"
+  src="/blog/assets/cuis-sunit-test-runner.png?v={{pkg.version}}">
+
 To install some example tests:
 
 - Open a "File List" window from the World menu.
