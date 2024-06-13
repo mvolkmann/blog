@@ -927,7 +927,7 @@ To do this:
 - Optionally click the "Proceed" button to
   resume execution with calling the new method.
 
-<img alt="Cuis MessageNotUnderstood window" style="width: 90%"
+<img alt="Cuis MessageNotUnderstood window" style="width: 85%"
   src="/blog/assets/cuis-messagenotunderstood-window.png?v={{pkg.version}}">
 
 ### Debug Windows
