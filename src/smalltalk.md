@@ -754,6 +754,9 @@ This displays all the instance variables of a specific object.
 Select an object reference or place the cursor immediately after it
 and press cmd-i (Inpect it).
 
+<img alt="Cuis Inspect window" style="width: 40%"
+  src="/blog/assets/cuis-inspect-window.png?v={{pkg.version}}">
+
 Click the name of an instance variable in the top left pane
 to displays its current value in the top right pane.
 
@@ -772,6 +775,12 @@ This displays an object tree starting at a specific object.
 Select an object reference or place the cursor immediately after it
 and press cmd-shift-i (Explore it).
 Click the disclosure triangles to drill down into instance variable values.
+
+Use the bottom pane to enter and execute Smalltalk expressions
+where `self` refers to the selected object in the top pane.
+
+<img alt="Cuis Explore window" style="width: 40%"
+  src="/blog/assets/cuis-explore-window.png?v={{pkg.version}}">
 
 ### System Browser Windows
 
@@ -844,7 +853,20 @@ target="_blank">A brief introduction to the System Browser</a>.
 
 ### Hierarchy Browser Windows
 
-TODO: Add a description of this and screenshot.
+When a class is selected in a System Browser window,
+the class pane (second) only displays a list of classes
+defined in the selected class category.
+To also see class hierarchy of a selected class,
+open a Hierarchy Browser window by pressing cmd-h (browse hierarchy).
+
+This window is similar to a System Browser window,
+but it omits the class categories pane and
+displays the complete class hierarchy of the selected class.
+
+Here's an example of a Hierarchy Browser window for the `Array` class:
+
+<img alt="Cuis Hierarchy window" style="width: 40%"
+  src="/blog/assets/cuis-hierarchy-window.png?v={{pkg.version}}">
 
 ### Protocol Windows
 
