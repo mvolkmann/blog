@@ -753,8 +753,10 @@ TODO: Why does this window contain the word "Transcript" in its content?
 This displays all the instance variables of a specific object.
 Select an object reference or place the cursor immediately after it
 and press cmd-i (Inpect it).
+
 Click the name of an instance variable in the top left pane
 to displays its current value in the top right pane.
+
 Use the bottom pane to enter and execute Smalltalk expressions
 where `self` refers to the object being inspected.
 For example, when the object is a morph,
@@ -1077,7 +1079,8 @@ with instance variables `height` and `width`.
 
 We can define the class method `height:width:`
 that provides an alternate way to create objects as follows.
-This assumes we can send the message `#initializeHeight:width:` to instances.
+This assumes we can send the message `#initializeHeight:width:`
+(in the `private` message category) to instances.
 
 ```smalltalk
 height: aHeight width: aWidth
@@ -1091,7 +1094,6 @@ initialize
     height := 1.
     width := 1
 
-"TODO: Is it a common convention to name this method this way?"
 initializeHeight: aHeight width: aWidth
     height := aHeight.
     width := aWidth
@@ -1111,6 +1113,30 @@ Transcript show: r2 area. "6"
 
 To determine the class of an object, send it the `class` unary message.
 For example, `19 class` returns `SmallInteger`.
+
+### Immutability
+
+To enforce immutability of objects:
+
+- Enter `Feature require: 'Immutability' and "Do it".
+
+  This adds the instance method `beImmutable`to the`Object` class.
+
+- Send the `beImmutable` message to any object.
+
+  For example:
+
+  ```smalltalk
+  height: aHeight width: aWidth
+      ^self new initializeHeight: aHeight width: aWidth; beImmutable; yourself
+  ```
+
+  Note the use of `yourself` to return the current object
+  rather than the return value of the `beImmutable` method.
+
+If an attempt is made to modify any property of an immutable object,
+a "ModificationForbidden" window will open
+containing a stack trace that indicates where the attempt was made.
 
 ### Methods
 
