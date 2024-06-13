@@ -1120,7 +1120,10 @@ To enforce immutability of objects:
 
 - Enter `Feature require: 'Immutability' and "Do it".
 
-  This adds the instance method `beImmutable`to the`Object` class.
+  This package can be found at
+  <a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Dev/blob/master/Packages/System/Immutability.pck.st"
+  target="_blank">Immutability.pck.st</a>. Among other things,
+  it adds the instance method `beImmutable` to the`Object` class.
 
 - Send the `beImmutable` message to any object.
 
