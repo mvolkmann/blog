@@ -834,14 +834,14 @@ To browse a class, type its name (ex. String) in a Workspace window
 and press cmd-b (Browse it).
 This opens a Browser window with the class already selected.
 
-To create new class:
+To create a new class:
 
 - Select a class category.
 
   If the desired class category is already selected
   and a class in that category is selected,
   click it so it is deselected.
-  The bottom pane will now contain the following:
+  The bottom pane will now contain the following message send template:
 
   ```smalltalk
   Object subclass: #NameOfSubclass
@@ -851,6 +851,7 @@ To create new class:
       category: 'SelectedClassCategory'
   ```
 
+- Change "NameOfSubclass" to the name of the new class.
 - Add desired instance and class variable names as space-separated strings.
 - Save by pressing cmd-s (Accept).
 
@@ -875,6 +876,10 @@ To create a new method:
 
 - Modify the code template to define the new method.
 - Save by pressing cmd-s (Accept).
+
+To move a method from the class side to the instance side or vice-versa,
+right-click the method name in the fourth panel and
+select refactorings...move to instance/class methods.
 
 To delete a method from a class, select it and press cmd-x (Remove it).
 Then select "Remove it" or "Remove, then browse senders".
@@ -974,7 +979,30 @@ To do this:
 
 ### Debug Windows
 
-TODO: Explain how to use these.
+To debug code, select one or more lines in a Workspace window
+and press cmd-shift-d (Debug it).
+A Debug window will appear.
+
+<img alt="Cuis Debug window" style="width: 100%"
+  src="/blog/assets/cuis-debug-window.png?v={{pkg.version}}">
+
+Click the "Into" button to begin executing the code.
+The "Proceed", "Restart", "Into", "Over" buttons
+function as expected if you have used other debuggers.
+
+To run up to a specific location in the code,
+click to place the cursor where execution should stop
+and click the "Run to Cursor" button.
+
+The in-scope variables are listed in the third panel of the bottom row.
+Click a variable name to see its current value
+in the fourth panel of the bottom row.
+To change the value of a variable, edit it where displayed
+and press cmd-s (Accept).
+
+Click the "Where" button to highlight the next message to be sent in the code.
+
+The Debug window will close when the end of the selected code is reached.
 
 ### Change Sorter Windows
 
@@ -1115,22 +1143,6 @@ score: aNumber
 
 As shown above, another convention is for variables associated with
 keyword messages to indicate their expected type.
-
-To create a new class:
-
-- Open a System Browser.
-- Select a category in the top, first pane.
-- Click in the empty area of the top, second pane.
-- A starting template for a new class definition
-  will appear in the bottom pane.
-- Change "NameOfSubclass" to the name of the new class.
-- If the class needs any instance variables,
-  add them to the value of the `instanceVariableNames` string
-  separated by spaces.
-- If the class needs any class variables,
-  add them to the value of the `classVariableNames` string
-  separated by spaces.
-- To save the changes, press cmd-s (Accept).
 
 ### Objects
 
