@@ -98,6 +98,9 @@ The entire syntax of Smalltalk can be demonstrated on a post card.
   target="_blank">Fundación Argentina de Smalltalk</a> (FAST)
 - <a href="https://www.gnu.org/software/dr-geo/" target="_blank">Dr. Geo</a>
 
+  "A program to design and manipulate interactive geometric sketches.
+  It helps kids to explore geometry."
+
 There is a <a href="https://lists.cuis.st/mailman/listinfo/cuis-dev"
 target="_blank">Cuis Smalltalk mailing list</a>,
 but no Discord or Slack channel.
@@ -237,6 +240,17 @@ The most popular include:
     <img alt="Cuis Smalltalk log" class="logo"
       src="/blog/assets/cuis-smalltalk-logo.png?v={{pkg.version}}">
   </div>
+
+  Juan Vuletich began work on Cuis Smalltalk began in 2005
+  and version 1.0 was released in March 2009.
+  He has been active in the Smalltalk community since 1997.
+
+  The objectives of Cuis Smalltalk are to:
+
+  - strive for the simplicity of Smalltalk-80
+  - include a minimal number of classes required for the kernel,
+    a GUI framework, and development tools
+  - create a system that is good for learning and experimenting
 
   The number of predefined classes in each implementation above
   were obtained by printing the result of `Smalltalk allClasses size`
@@ -651,29 +665,6 @@ Workspace, Transcript, and Browser.
 
 Other windows are only open for a specific object.
 
-- Inspector
-
-  This displays all the instance variables of a specific object.
-  Select an object reference or place the cursor immediately after it
-  and press cmd-i (Inpect it).
-  Click the name of an instance variable in the top left pane
-  to displays its current value in the top right pane.
-  Use the bottom pane to enter and execute Smalltalk expressions
-  where `self` refers to the object being inspected.
-  For example, when the object is a morph,
-  enter `self color: Color red` and press cmd-d (Do it),
-  or enter `self color` and press cmd-p (Print it).
-
-  Inspector windows are live, so changes made to the instance variables
-  are reflected.
-
-- Explorer
-
-  This displays an object tree starting at a specific object.
-  Select an object reference or place the cursor immediately after it
-  and press cmd-shift-i (Explore it).
-  Click the disclosure triangles to drill down into instance variable values.
-
 To tile all the open windows, open the World menu
 and select Windows...Tile open windows.
 
@@ -756,6 +747,29 @@ TODO: Why does this window contain the word "Transcript" in its content?
 
 <img alt="Cuis Transcript window" style="width: 80%"
   src="/blog/assets/cuis-transcript-window.png?v={{pkg.version}}">
+
+### Inspect Windows
+
+This displays all the instance variables of a specific object.
+Select an object reference or place the cursor immediately after it
+and press cmd-i (Inpect it).
+Click the name of an instance variable in the top left pane
+to displays its current value in the top right pane.
+Use the bottom pane to enter and execute Smalltalk expressions
+where `self` refers to the object being inspected.
+For example, when the object is a morph,
+enter `self color: Color red` and press cmd-d (Do it),
+or enter `self color` and press cmd-p (Print it).
+
+Inspector windows are live, so changes made to the instance variables
+are reflected.
+
+### Explore Windows
+
+This displays an object tree starting at a specific object.
+Select an object reference or place the cursor immediately after it
+and press cmd-shift-i (Explore it).
+Click the disclosure triangles to drill down into instance variable values.
 
 ### System Browser Windows
 
@@ -892,6 +906,14 @@ To do this:
 <img alt="Cuis MessageNotUnderstood window" style="width: 90%"
   src="/blog/assets/cuis-messagenotunderstood-window.png?v={{pkg.version}}">
 
+### Debug Windows
+
+TODO: Explain how to use these.
+
+### Change Sorter Windows
+
+TODO: Explain how to use these.
+
 ### Process Browser Windows
 
 Process Browser windows display a list of all the Smalltalk-related processes
@@ -899,6 +921,10 @@ that are running.
 
 To terminate a process, select it and press cmd-t (terminate).
 This is especially useful for terminating "WebServer's listening process".
+
+### Emergency Evaluator
+
+TODO: Explain how to use this.
 
 ## Syntax
 
@@ -1407,49 +1433,49 @@ Also note the use of exclamation points to delimit the pieces.
 'From Cuis7.1 [latest update: #6464] on 12 June 2024 at 10:47:55 am'!
 !classDefinition: #Dog category: #Volkmann!
 Object subclass: #Dog
-	instanceVariableNames: 'breed name'
-	classVariableNames: 'Count'
-	poolDictionaries: ''
-	category: 'Volkmann'!
+    instanceVariableNames: 'breed name'
+    classVariableNames: 'Count'
+    poolDictionaries: ''
+    category: 'Volkmann'!
 
 !Dog methodsFor: 'initialization' stamp: 'RMV 6/12/2024 10:47:34'!
 initialize
-	super initialize.
-	Count := Count + 1! !
+    super initialize.
+    Count := Count + 1! !
 
 !Dog methodsFor: 'initialization' stamp: 'RMV 6/11/2024 20:00:43'!
 initializeName: aName breed: aBreed
-	name := aName.
-	breed := aBreed! !
+    name := aName.
+    breed := aBreed! !
 
 
 !Dog methodsFor: 'accessing' stamp: 'RMV 6/11/2024 20:03:03'!
 breed
-	^breed! !
+    ^breed! !
 
 !Dog methodsFor: 'accessing' stamp: 'RMV 6/11/2024 20:02:57'!
 name
-	^name! !
+    ^name! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
 !classDefinition: 'Dog class' category: #Volkmann!
 Dog class
-	instanceVariableNames: ''!
+    instanceVariableNames: ''!
 
 !Dog class methodsFor: 'accessing' stamp: 'RMV 6/12/2024 09:45:13'!
 count
-	^Count! !
+    ^Count! !
 
 
 !Dog class methodsFor: 'initialization' stamp: 'RMV 6/12/2024 10:41:45'!
 initialize
-	"This must be explicitly called with Dog initialize."
-	Count := 0! !
+    "This must be explicitly called with Dog initialize."
+    Count := 0! !
 
 !Dog class methodsFor: 'initialization' stamp: 'RMV 6/12/2024 10:43:52'!
 name: aName breed: aBreed
-	^self new initializeName: aName breed: aBreed! !
+    ^self new initializeName: aName breed: aBreed! !
 
 
 Dog initialize!
