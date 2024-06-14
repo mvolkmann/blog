@@ -1542,8 +1542,20 @@ The file will be saved in
 
 These files use the bang-separated "chunked format".
 The following is an example for a `Dog` class.
-Note the use of keywords like "classDefinition" and "methodsFor".
-Also note the use of exclamation points to delimit the pieces.
+Each chunk is delimited by exclamation marks.
+A chunk can contain:
+
+- a "From" line the gives the version of Smalltalk that create the file
+  and the date and time at which the file was created
+- a "classDefinition" that associates a class or metaclass with a class category
+- a "subclass: message send that creates a class
+- a "methodsFor" which states that the method definitions
+  that follow are in a given method category
+- a method definition
+- a message send that creates an object that should exist in the environment
+- a message send that executes code for its side effects
+
+The following is an example of a fileOut file.
 
 ```smalltalk
 'From Cuis7.1 [latest update: #6464] on 12 June 2024 at 10:47:55 am'!
