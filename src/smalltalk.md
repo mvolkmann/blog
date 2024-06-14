@@ -397,7 +397,7 @@ which make it easier to toggle between full screen and windowed modes.
   src="/blog/assets/cuis-full-screen-buttons.png?v={{pkg.version}}">
 
 ```smalltalk
-Object subclass: #VDisplay
+Object subclass: #VFullScreenButtons
     instanceVariableNames: ''
     classVariableNames: ''
     poolDictionaries: ''
@@ -413,17 +413,17 @@ fullScreenOff
 fullScreenOn
     self fullScreen: true
 
-buttons
-    "adds buttons for setting full screen on or off"
+initialize
+    "renders buttons for setting full screen on or off"
 
     LayoutMorph newColumn
         addMorph: (LabelMorph contents: 'Full Screen');
         addMorph: (LayoutMorph newRow
             addMorph: (
-                VButtonMorph label: 'On' block: [ VDisplay fullScreenOn ]
+                VButtonMorph label: 'On' block: [ self fullScreenOn ]
             );
             addMorph: (
-                VButtonMorph label: 'Off' block: [ VDisplay fullScreenOff ]
+                VButtonMorph label: 'Off' block: [ self fullScreenOff ]
             );
             color: Color transparent
         );
@@ -546,8 +546,10 @@ override methods and save the new subclasses in a new package or "file out".
 Doing this enables installing the new package in a fresh image.
 
 To see the file path for the currently running image,
-select Help...About this System... This opens a Text Editor window
-that displays basic information about Cuis Smalltalk.
+select Help...About this System... or
+hover over the task bar at the bottom of the World window.
+This opens a Text Editor window that displays
+basic information about Cuis Smalltalk.
 It also opens a dialog that displays the current version of Cuis Smalltalk,
 the latest update number, and the file page to the current image.
 
@@ -2251,6 +2253,11 @@ For a great introduction to Morphic, see
 <a href="https://www.youtube.com/watch?v=62baNn3c56Y"
 target="_blank">Holistic computing with Smalltalk and Morphic. Part 1</a>.
 
+Some of the method names in Morphic classes are inconsistently named.
+For example, the class `TextModelMorph` defines the methods
+`alwaysHideVerticalScrollbar` and `hideScrollBarsIndefinitely`.
+Note how the "b" is sometimes lowercase and sometimes uppercase.
+
 To modify an existing morph:
 
 - Open the halo for the morph.
@@ -2306,6 +2313,9 @@ and `TileResizeMorph`.
 
 Supposedly Cuis 7 will remove support for the UI-Tools package
 and the desired subpackages will need to be installed individually.
+
+See my Morphic demos in package `Volkmann`
+which contains the classes `VButtonDemo` and `VGreet`.
 
 ### Halo
 
@@ -2879,3 +2889,4 @@ myBlock value: 2 value: 3.
 
 - Does Smalltalk expose its own AST? If so, maybe you can use that to
   generate code and another programming language from my Smalltalk program.
+- How can you examine the bytecode for a method?
