@@ -988,12 +988,6 @@ A Debug window will appear.
 <img alt="Cuis Debug window" style="width: 100%"
   src="/blog/assets/cuis-debug-window.png?v={{pkg.version}}">
 
-The first row of buttons starting with "browse"
-have labels that are all lowercase.
-The second row of buttons starting with "Proceed"
-have labels that are capitalized.
-This inconsistency bothers me.
-
 Click the "Into" button to begin executing the code.
 The "Proceed", "Restart", "Into", "Over" buttons
 function as expected if you have used other debuggers.
@@ -1501,6 +1495,29 @@ Smalltalk at: 'color' put: 'yellow'.
 color := Smalltalk at: 'color' ifAbsent: 'none'.
 ```
 
+## Reflection
+
+Smalltalk provides many methods for
+getting information about classes and objects.
+The following table lists some of them.
+
+| Method                                            | Answers                                                                                                      |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `Smalltalk allClasses`                            | an `Array` of all classes defined in the current image                                                       |
+| `Smalltalk allClassesImplementing: #selector`     | an `Array` of all classes that implement a given selector                                                    |
+| `SomeClass allClassVarNames`                      | a `Set` of class variable names defined in this class                                                        |
+| `SomeClass allSelectors`                          | an `IdentitySet` of all message selectors supported by this class, including selectors for inherited methods |
+| `SomeClass allInstances`                          | an `Array` of all existing instances of this class                                                           |
+| `SomeClass allInstVarNames`                       | an `Array` of instance variable names defined in this class                                                  |
+| `SomeClass allInstVarNamesEverywhere`             | an `Array` of instance variable names defined in this class and inherited classes                            |
+| `SomeClass allMethodsInCategory: 'some-category'` | an `Array` of methods in a given category including those defined in this class and inherited                |
+| `SomeClass allSubclasses`                         | an `OrderedCollection` of subclasses                                                                         |
+| `SomeClass allSuperclasses`                       | an `OrderedCollection` of superclasses                                                                       |
+| `CodeListPackages installedPackages`              | an `Array` of `CodePackage` objects (appear in System Browser class category pane)                           |
+
+TODO: Why does `allClassVarNames` return a `Set` when `allInstVarNames` returns an `Array`?
+TODO: Is there a way to get all the message categories used by a class?
+
 ## Code Management
 
 Selecting Help ... Code management in Cuis from the World menu
@@ -1813,6 +1830,17 @@ For example, entering `7 s` and pressing the tab key
 shows possible completions of `shallowCopy`, `sqrt`, and more.
 Use the up and down arrow keys to select a completion
 and press the return key to accept it.
+
+Matching messages found anywhere in the inheritance hierarchy appear in black.
+If there are no matching messages,
+it will show all known selectors that match in any class in blue.
+The reason is that you can send any message to any object.
+Even if the object has no matching method anywhere in its inheritance hierarchy,
+it could still respond by handling it in `doesNotUnderstand`.
+I'll go on record saying that I do not find this helpful.
+I wish it did not show those messages.
+
+start with pac because there is no warranty that you do not want to send that message to that object even though it does not understand it. But, in the case of Smalltalk because we know its type, it shows the selectors in blue, to let you know that is not a message that will respond unless you implement it.
 
 If a message is sent to an object from a Workspace window
 and no compatible method is found, the following popup will appear:
@@ -2860,6 +2888,26 @@ array1 do: [:each | Transcript show: each :: newLine].
 myBlock := [:a :b | a + b].
 myBlock value: 2 value: 3.
 ```
+
+## Annoyances
+
+- inconsistent case in method names
+
+  For example, the `CharacterSequence` class defines
+  the methods `subStrings` and `substringsSeparatedBy:`.
+
+- inconsistent case menu items
+
+  For examples, see the Preferences and Windows submenus of the World menu.
+
+- inconsistent case in button labels
+
+  For example, in Debug windows the first row of buttons starting with "browse"
+  have labels that are all lowercase.
+  But the second row of buttons starting with "Proceed"
+  have labels that are capitalized.
+
+- new windows open in random locations, not near where they were requested
 
 ## Unresolved Questions
 
