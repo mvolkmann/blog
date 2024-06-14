@@ -988,6 +988,12 @@ A Debug window will appear.
 <img alt="Cuis Debug window" style="width: 100%"
   src="/blog/assets/cuis-debug-window.png?v={{pkg.version}}">
 
+The first row of buttons starting with "browse"
+have labels that are all lowercase.
+The second row of buttons starting with "Proceed"
+have labels that are capitalized.
+This inconsistency bothers me.
+
 Click the "Into" button to begin executing the code.
 The "Proceed", "Restart", "Into", "Over" buttons
 function as expected if you have used other debuggers.
@@ -1061,12 +1067,14 @@ TODO: Explain when this is useful.
 | expression separator (period)                     | `Transcript show: 'foo'. Transcript show: 'bar'` |
 | reference to current object in a method           | `self`                                           |
 
-To display a left pointing arrow in place of `:=` for all assigments,
+To render a left pointing arrow in place of `:=` for all assigments,
 open the World menu and select Preferences...Show ST-80 Assignments.
 The next time code is modified, all the `:=` messages
-will be replaced by a left pointing arrow.
-And typing `:=` or `_` will be replaced by a left pointing arrow.
-To revert to showing `:=` messages,
+will be rendered by a left pointing arrow.
+Typing an underscore is a shorthand way to type `:=`.
+Typing either will be rendered as a left pointing arrow.
+This does not change the characters that are actually used.
+To revert to rendering `:=` messages,
 open the World menu and select Preferences...Show ANSI Assignments.
 
 The caret (^) in a return expression can be followed by a space,
