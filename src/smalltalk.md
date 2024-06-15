@@ -92,6 +92,7 @@ The entire syntax of Smalltalk can be demonstrated on a post card.
 - <a href="https://en.wikipedia.org/wiki/Smalltalk"
   target="_blank">Smalltalk in Wikipedia</a>
 - <a href="https://cuis.st" target="_blank">Cuis Smalltalk</a>
+- <a href="https://github.com/Cuis-Smalltalk" target="_blank">Cuis GitHub repositories</a>
 - <a href="https://pharo.org" target="_blank">Pharo Smalltalk</a>
 - <a href="https://squeak.org" target="_blank">Squeak Smalltalk</a>
 - <a href="https://www.fast.org.ar"
@@ -1252,6 +1253,11 @@ For example, `aScore`, `aName`, or `aDog`.
 Sometimes the names indicate the expected object type.
 For example, `aNumber`, `aString`, or `anArray`.
 
+Methods that return an object are said to "answer" a value.
+For example, the instance method `asUppercase` in the `String` class
+contains the comment "Answer a String made up from
+the receiver whose characters are all uppercase."
+
 All methods are public.
 By convention, methods that should only be used by
 other methods in the same class are placed in the "private" message category.
@@ -1439,6 +1445,43 @@ double: obj
     (obj isKindOf: String) ifTrue: [^obj asNumber * 2].
     ^0
 ```
+
+### Primitive Methods
+
+From the Blue Book ...
+
+> All behavior in the system is invoked by messages, however,
+> all messages are not responded to by executing Smalltalk-80 methods.
+> There are about one hundred primitive methods that
+> the Smalltalk-80 virtual machine knows how to perform.
+> Examples of messages that invoke primitives are
+> the `+` message to small integers,
+> the `at:` message to objects with indexed instance variables,
+> and the `new` and `new:` messages to classes.
+> When `3` gets the message `+ 4`, it does not execute a Smalltalk-80 method.
+> A primitive method returns `7` as the value of the message.
+> The complete set of primitive methods is included in the
+> fourth part of this book, which degcribes the virtual machine.
+> Methods that are implemented as primitive methods begin with an
+> expression of the form `<primitive #>` where `#` is an integer
+> indicating which primitive method will be followed.
+> If the primitive fails to perform correctly,
+> execution continues in the Smalltalk-80 method.
+> The expression `<primitive #>` is followed by
+> Smalltalk-80 expressions that handle failure situations.
+
+In Cuis Smalltalk, see the comment at the beginning of
+the class method `whatIsAPrimitive` in the `Object` class.
+It contains the following:
+
+> When the Smalltalk interpreter begins to execute a method which specifies a
+> primitive response, it tries to perform the primitive action and to return a
+> result. If the routine in the interpreter for this primitive is successful,
+> it will return a value and the expressions in the method will not be evaluated.
+> If the primitive routine is not successful, the primitive 'fails', and the
+> Smalltalk expressions in the method are executed instead. These
+> expressions are evaluated as though the primitive routine had not been
+> called.
 
 ## Refactorings
 
@@ -1842,6 +1885,12 @@ shows possible completions of `shallowCopy`, `sqrt`, and more.
 Use the up and down arrow keys to select a completion
 and press the return key to accept it.
 
+To enable completions without typing any characters, enter
+`Preferences at: #spaceTabOpensAutoCompletion put: true`
+in a Workspace window and "Do it".
+For example, with this preference set, you can enter `'test'`
+followed by a space and press the tab key to get completion hints.
+
 Matching messages found anywhere in the inheritance hierarchy appear in black.
 If there are no matching messages,
 it will show all known selectors that match in any class in blue.
@@ -1920,9 +1969,26 @@ result := a < b ifTrue: ['less'] ifFalse: ['more'].
 
 ## Data Types
 
-The `Boolean` literal values are `true` and `false`.
-These are instances of the classes `True` and `False`
+### UndefinedObject
+
+The reserved word `nil` refers to
+an instance of the `UndefinedObject` class.
+No additional instances can be created.
+This is prevented by overriding the class method `new`
+in the `UndefinedObject` class.
+
+### Booleans
+
+The reserved words `true` and `false` refer to
+instances of the classes `True` and `False`
 which are subclasses of the class `Boolean`.
+
+`True` and `False` are singleton classes.
+No additional instances can be created.
+This is prevented by overriding the class method `new`
+in the `Boolean` class.
+
+### Characters
 
 Characters are represented by the `Character` class.
 Printable literal characters are preceded by a dollar sign.
@@ -2664,6 +2730,22 @@ SimpleButtonMorph new
     openInWorld.
 ```
 
+### Canvas Drawing
+
+To demo this, create a subclass of `Morph` and
+define the instance method `drawOn:`.
+For example:
+
+```smalltalk
+drawOn: aCanvas
+
+    aCanvas strokeWidth: 20 color: Color red do: [
+        aCanvas
+            moveTo: -100 @ -100;
+            lineTo: 400 @ 200
+    ]
+```
+
 ## Overriding doesNotUnderstand
 
 The `Object` class defines the `doesNotUnderstand` method
@@ -2969,3 +3051,19 @@ myBlock value: 2 value: 3.
 - Does Smalltalk expose its own AST? If so, maybe you can use that to
   generate code and another programming language from my Smalltalk program.
 - How can you examine the bytecode for a method?
+- Learn how to draw on a canvas in Cuis using "Morphic 3".
+- Is Morphic 3 only supported in Cuis?
+- Does Cuis run on the "OpenSmalltalk Virtual Machine"?
+  Is this the same VM that is used by Squeak and Pharo?
+- In a talk by Juan Vuletich, one of his slides says Cuis is
+  "A practical system, used for teaching, Satellite image processing,
+  research in sign, image, and audio processing,
+  research in programming languages, and many other areas of application."
+  This seems to imply that it is not for "normal" application development.
+- Learn about the Smalltalk "primitive" syntax.
+  For example, the `DisplayScreen` instance method `fullScreenMode:`
+  contains `<primitive: 233>`.
+- Can you configure your image so it never starts in full screen mode
+  even if it was saved that way?
+- What do you click in a morph halo to cause it to
+  display its coordinate system axes?
