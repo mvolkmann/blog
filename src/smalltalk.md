@@ -501,9 +501,7 @@ To print "Hello World!":
 
 1. Click on the WorldMorph background and select Open...Workspace.
 1. Enter `Transcript show: 'Hello World!'` in the Workspace window.
-   Alternatively, enter `'Hello World!' print` which works because
-   the class `CharacterSequence` which is the superclass of `String`
-   has the method `print` which does this: `Transcript show: self; newLine`.
+   For more options, see the "Transcript" section below.
 1. If no Transcript window is open, open one by
    clicking on the WorldMorph background and selecting Open...Transcript.
 1. Right-click inside the Workspace window and select "Do it" or press cmd-d.
@@ -737,6 +735,19 @@ For example, `'Hello World!' print`.
 
 The `print` message can be sent to strings, symbols,
 and any object that has a `printString` method.
+
+An even better approach is to add the following method to the `Object class:
+
+```smalltalk
+logAs: aString
+    ('{1} = {2}' format: {aString. self}) print
+```
+
+For example, this can be used to print a `Dog` object as follows:
+
+```smalltalk
+myDog logAs: 'myDog'
+```
 
 When output is sent to the `Transcript`, it appears in all `Transcript` windows.
 So it doesn't make sense to open more than one.
