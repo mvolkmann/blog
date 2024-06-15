@@ -1572,6 +1572,9 @@ The following table lists some of them.
 TODO: Why does `allClassVarNames` return a `Set` when `allInstVarNames` returns an `Array`?
 TODO: Is there a way to get all the message categories used by a class?
 
+To run code on every instance of a given class,
+send the `allInstancesDo:` message to the class.
+
 ## Code Management
 
 Selecting Help ... Code management in Cuis from the World menu
@@ -2470,6 +2473,13 @@ The following buttons are provided:
 | blue circle with rotate icon         | lower-left  | drag to rotate item                             |
 | dull yellow circle with odd shape    | left side   | click to collapse (hide) the item (3)           |
 | orange circle with wrench            | left side   | opens an "Explore" window (4)                   |
+
+A morph can also be dragged directly without
+opening its halo and using the drag buttons.
+This only works in the area that is dragged
+does not process mouse events.
+For example, you cannot drag a morph that contains a button
+by dragging the button.
 
 TODO: How can you change the point about which a morph rotates?
 
