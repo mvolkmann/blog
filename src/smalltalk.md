@@ -103,6 +103,11 @@ The entire syntax of Smalltalk can be demonstrated on a post card.
 - <a href="https://www.fast.org.ar"
   target="_blank">Fundación Argentina de Smalltalk</a> (FAST)
 - <a href="https://www.gnu.org/software/dr-geo/" target="_blank">Dr. Geo</a>
+- <a href="https://www.goodreads.com/shelf/show/smalltalk"
+  target="_blank">Smalltalk Books</a> list on goodreads.
+- <a href="https://www.youtube.com/playlist?list=PL6601A198DF14788D"
+  target="_blank">Sqeak from the very start</a>
+  YouTube videos by Lawson English
 
   "A program to design and manipulate interactive geometric sketches.
   It helps kids to explore geometry."
@@ -381,6 +386,12 @@ The Smalltalk window or desktop is referred to as the "World"
 and is implemented by the `WorldMorph` class.
 Many features are available on the World menu
 which is opened by clicking anywhere on the desktop.
+
+One way to change the desktop color is to right-click it to open its halo,
+click the blue menu button, select "debug...inspect morph",
+click in the bottom pane, enter `self color: Color {some-color-name}`,
+and press cmd-d (Do it).
+This works with all colors except `transparent` and alpha values are ignored.
 
 ## Font Size
 
@@ -674,6 +685,10 @@ Other windows are only open for a specific object.
 
 To tile all the open windows, open the World menu
 and select Windows...Tile open windows.
+
+To refresh all the windows after code changes that affect them
+(or if the display renders incorrectly for some reason),
+open the World menu and select "Windows...Restore all Windows".
 
 TODO: Are other options in the Windows menu useful?
 
@@ -1242,6 +1257,10 @@ Transcript show: r2 area. "6"
 
 To determine the class of an object, send it the `class` unary message.
 For example, `19 class` returns `SmallInteger`.
+
+Variables defined in Workspace windows hold references to their object values.
+It may be necessary to close a Workspace window
+in order to trigger garbage collection of those objects.
 
 ### Immutability
 
