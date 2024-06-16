@@ -48,7 +48,7 @@ Copy documents to the <code>documents</code> folder.
 
 The Kindle 2 supports the following file formats natively:
 
-- Text: Kindle (.azw), .txt, unprotected .mobi, .prc
+- Text: Kindle (.azw), .txt, unprotected .epub, .prc
 - Audio: Audible (.aax), .mp3
 
 The Kindle 2 conversion service can convert
@@ -107,7 +107,7 @@ allow you to reread the book in the future.
    When you plug the Kindle into your computer
    you'll see that it contains a folder named "Documents".
    That's where the book files are located.
-   They have names that end with `.azw` or `.mobi`.
+   They have names that end with `.azw` or `.epub`.
    There are also .mbp files with the same beginning name.
    Those store the location within the book you were reading last,
    bookmarks and notes you've taken.
