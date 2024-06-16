@@ -2080,6 +2080,13 @@ of a `console.log` call in JavaScript.
 ('myVariable = {1}' format: {myVariable}) print
 ```
 
+### UUIDs
+
+The package "Identities-UUID" generates UUID values.
+To install it, enter `Feature require: 'Identities-UUID'` in a Workspace
+and "Do it".
+To generate a UUID value, use `UUID new`.
+
 ### Collections
 
 Smalltalk supports a large number of collection classes.
