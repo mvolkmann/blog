@@ -783,6 +783,28 @@ or enter `self color` and press cmd-p (Print it).
 Inspector windows are live, so changes made to the instance variables
 are reflected.
 
+Let's walk through an example:
+
+1. Open the World menu and select "New Morph...".
+1. Select "Basic...Boxed Morph".
+   An orange rectangle will appear, attached to the mouse cursor.
+1. Move to where you want to place it and click to drop it.
+1. cmd-click on the morph to open its halo.
+1. Click the blue button on the top row.
+1. Select "debug...inspect morph" to open an Inspect window
+   for the object that represents that morph.
+1. Click the `color` instance variable and
+   note that the value is a `Color` object.
+1. Select the name "Color" and press cmb-b (Browse it)
+   to open a System Browser window focused on the `Color` class.
+1. Click the "class" button to see a list of
+   the class methods in the `Color` class.
+1. Click the method category "named colors"
+   and note that one of the methods is "red".
+1. Back in the Inspect window, click in the bottom pane.
+1. Enter `self color: Color red` and press cmd-d (Do it).
+1. Note that the fill color of the morph changes to red.
+
 ### Explore Windows
 
 This displays an object tree starting at a specific object.
