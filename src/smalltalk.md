@@ -30,8 +30,10 @@ layout: topic-layout.njk
 "is a purely object oriented programming language (OOP)."
 Messages are sent to objects which decide whether and how to act on them.
 
-Smalltalk was the first programming language to
-popularize object-oriented programming (OOP).
+<a href="https://en.wikipedia.org/wiki/Simula" target="_blank">Simula</a>
+is considered to be the first programming language
+to use object-oriented programming (OOP).
+But Smalltalk was the first programming language to make OOP popular.
 
 Smalltalk is perhaps most known for its incredible development tools.
 These support:
@@ -52,6 +54,9 @@ Xerox PARC (Palo Alto Research Center) in the 1970s.
 All of them collaborated to create Smalltalk.
 Alan Kay was the principal designer of Smalltalk and gave it its name.
 The original goal was to use it for teaching programming.
+
+Many other technologies were invented at PARC
+including graphical user interfaces, the mouse, and virtual machines.
 
 Alan Kay said "OOP to me means only messaging,
 local retention and protection and hiding of state-process,
@@ -266,7 +271,8 @@ Other Smalltalk implementations include
   This is a language that is "deeply inspired by Smalltalk".
   It compiles to JavaScript.
 
-- <a href="https://github.com/dolphinsmalltalk" target="_blank">Dolphin Smalltalk</a>
+- <a href="https://github.com/dolphinsmalltalk" target="_blank">Dolphin Smalltalk</a>,
+  only for Microsoft Windows
 - <a href="https://www.gnu.org/software/smalltalk/" target="_blank">GNU Smalltalk</a>
 - <a href="https://github.com/nikboyd/hoot-smalltalk#hoot-smalltalk" target="_blank">Hoot Smalltalk</a>
 
