@@ -2952,6 +2952,20 @@ drawOn: aCanvas
     ]
 ```
 
+### SVG
+
+Starting around 32:30 in the YouTube video
+<a href="https://www.youtube.com/watch?v=_NB2_Q4bYEk"
+target="_blank">FAST Talks - Vector Graphics in Cuis Smalltalk</a>,
+Juan demonstrates the class `SVGElementMorph` from the package "SVG".
+
+To work with SVG images, clone the
+<a href="https://github.com/Cuis-Smalltalk/SVG.git"
+target="_blank">SVG</a> GitHub repository,
+enter `Feature require: 'SVG'` in a Workspace, and "Do it".
+TODO: This gives "Installation failed. Could not find code package file
+for [LinearAlgebra]." Where can I find that package?
+
 ## Overriding doesNotUnderstand
 
 The `Object` class defines the `doesNotUnderstand` method
