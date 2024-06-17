@@ -3143,6 +3143,8 @@ It also adds the method `jsonWriteOn:` to many classes including
 `Array2D`, `Association`, `CharacterSequence`, `Collection`, `Dictionary`,
 `False`, `Integer`, `Number`, `Text`, `True`, and `UndefinedObject`.
 
+To install this, enter `Feature require: 'JSON'` in a Workspace and "Do it".
+
 Custom classes should implement the instance method `jsonWriteOn:`
 to describe which of their instance variables should be included.
 Here's how it could be implemented for a `Dog` class
