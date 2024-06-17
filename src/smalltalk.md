@@ -2286,43 +2286,45 @@ For example, `#(true 7 'Tami' (Color red))`.
 The following table describes some of the instance methods defined in
 `Array`, `ArrayedCollection`, `SequenceableCollection`, and `Collection`.
 
+TODO: Finish added descriptions of these methods.
+
 | Method                  | Description                                                           |
 | ----------------------- | --------------------------------------------------------------------- |
-| `collect:thenSelect:`   |                                                                       |
-| `select:thenCollect:`   |                                                                       |
-| `isEmpty`               |                                                                       |
-| `size`                  | returns number of elements                                            |
-| `sort`                  |                                                                       |
-| `sort:`                 |                                                                       |
-| `allButFirst`           |                                                                       |
 | `allButFirst:`          |                                                                       |
+| `allButFirst`           |                                                                       |
 | `allButFirstDo:`        |                                                                       |
-| `allButLast`            |                                                                       |
 | `allButLast:`           |                                                                       |
+| `allButLast`            |                                                                       |
 | `allButLastDo:`         |                                                                       |
 | `allSatisfy:`           | returns `Boolean` indicating whether all elements satisfy a condition |
 | `at:ifAbsent:`          |                                                                       |
 | `collect:`              |                                                                       |
+| `collect:thenSelect:`   |                                                                       |
 | `do:`                   |                                                                       |
 | `fillWith:`             |                                                                       |
 | `findFirst:`            |                                                                       |
 | `findFirst:startingAt:` |                                                                       |
 | `findLast:`             |                                                                       |
-| `first`                 |                                                                       |
 | `first:`                |                                                                       |
+| `first`                 |                                                                       |
 | `firstAvailable:`       |                                                                       |
 | `from:to:do`            |                                                                       |
 | `head:`                 |                                                                       |
 | `includes:`             |                                                                       |
 | `indexOf:`              |                                                                       |
+| `isEmpty`               |                                                                       |
 | `keysAndValuesDo:`      |                                                                       |
-| `last`                  |                                                                       |
 | `last:`                 |                                                                       |
+| `last`                  |                                                                       |
 | `lastAvailable:`        |                                                                       |
 | `lastIndexOf:`          |                                                                       |
 | `polynomialEval:`       |                                                                       |
 | `select:`               |                                                                       |
+| `select:thenCollect:`   |                                                                       |
 | `shuffled`              |                                                                       |
+| `size`                  | returns number of elements                                            |
+| `sort:`                 |                                                                       |
+| `sort`                  |                                                                       |
 | `sorted:`               |                                                                       |
 | `tail:`                 |                                                                       |
 
