@@ -2188,7 +2188,7 @@ The following list depicts the partial class hierarchy for collections:
   - `Set`
     - `Dictionary`
       - `OrderedDictionary`
-- `Array2D`
+- `Array2D` - a two-dimensional array
 - `SharedQueue`
 
 TODO: Add a section on each commonly used collection class.
@@ -2214,6 +2214,47 @@ and contain space-separated values.
 For example, `#(true 7 'Tami' (Color red))`.
 
 `Array` instances are fixed-length, ordered collections.
+
+The following table describes some of the instance methods.
+
+| Method                  | Description |
+| ----------------------- | ----------- |
+| `collect:thenSelect:`   |             |
+| `select:thenCollect:`   |             |
+| `isEmpty`               |             |
+| `size`                  |             |
+| `sort`                  |             |
+| `sort:`                 |             |
+| `allButFirst`           |             |
+| `allButFirst:`          |             |
+| `allButFirstDo:`        |             |
+| `allButLast`            |             |
+| `allButLast:`           |             |
+| `allButLastDo:`         |             |
+| `at:ifAbsent:`          |             |
+| `collect:`              |             |
+| `do:`                   |             |
+| `fillWith:`             |             |
+| `findFirst:`            |             |
+| `findFirst:startingAt:` |             |
+| `findLast:`             |             |
+| `first`                 |             |
+| `first:`                |             |
+| `firstAvailable:`       |             |
+| `from:to:do`            |             |
+| `head:`                 |             |
+| `includes:`             |             |
+| `indexOf:`              |             |
+| `keysAndValuesDo:`      |             |
+| `last`                  |             |
+| `last:`                 |             |
+| `lastAvailable:`        |             |
+| `lastIndexOf:`          |             |
+| `polynomialEval:`       |             |
+| `select:`               |             |
+| `shuffled`              |             |
+| `sorted:`               |             |
+| `tail:`                 |             |
 
 Arrays support binary messages that operate on all the elements
 and return a new array containing the results.
