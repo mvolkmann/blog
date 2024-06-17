@@ -2038,6 +2038,39 @@ No additional instances can be created.
 This is prevented by overriding the class method `new`
 in the `Boolean` class.
 
+## Numbers
+
+The following list depicts the class hierarchy for numbers:
+
+- `Number`
+  - `Float`
+    - `BoxedFloat64`
+    - `SmallFloat64`
+  - `Fraction`
+    - `Integer`
+      - `LargePositiveInteger`
+        - `LargeNegativeInteger`
+      - `SmallInteger`
+
+Literal numbers without a decimal point automatically become
+objects of one of the `Integer` subclasses.
+
+Literal numbers with a decimal point automatically become
+objects of one of the `Float` subclasses.
+
+When the message `/` is sent to an integer with an integer argument,
+the result is a `Fraction` object.
+Operations of fractions always return a new `Fraction` object
+rather than a `Float` object in order to maintain accuracy.
+For example, the following sets `result` to the `Fraction` `4/3`
+rathern than the `Float` `1.333333...`.
+
+```smalltalk
+result := (1/3) * 4
+```
+
+Fraction objects have the instance variables `numerator` and `denominator`.
+
 ### Characters
 
 Characters are represented by the `Character` class.
@@ -2979,6 +3012,38 @@ To play them, open the World menu, select "New morph...Layouts",
 and then select FreeCell or Klondike.
 Alternatively, open a Workspace window,
 enter something like `Freecell newGame`, and "Do it".
+
+## JSON
+
+The `JSON` package defines the classes `Json`, `JsonObject`, and `JsonError`.
+It also adds the method `jsonWriteOn:` to many classes including
+`Array2D`, `Association`, `CharacterSequence`, `Collection`, `Dictionary`,
+`False`, `Integer`, `Number`, `Text`, `True`, and `UndefinedObject`.
+
+Custom classes should implement the `jsonWriteOn:` method
+to describe which of their instance variables should be included.
+Here's how it could be implemented for a `Dog` class
+with instance varaibles `name` and `breed`.
+
+```smalltalk
+jsonWriteOn: aWriteStream
+    {
+        #name->name.
+        #breed->breed/
+    } asDictionary jsonWriteOn: aWriteStream
+```
+
+Here's how we can get a JSON string for a `Dog` object.
+
+```smalltalk
+json := Json render: dog
+```
+
+Here's how we can parse a JSON string to get a `Dog` object.
+
+```smalltalk
+
+```
 
 ## Web Development
 
