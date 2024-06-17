@@ -726,7 +726,7 @@ They are somewhat like REPLs in other programming languages.
 Enter any number of expressions separated by periods.
 
 To prepare to execute lines of code, select them or
-place the cursor anywhere inside one of the lines.
+place the cursor at the end of a single-line expression.
 To execute them for their side effects, press cmd-d (Do it).
 To execute them and print the result of the last expression
 inside the Workspace, press cmd-p (Print it).
@@ -1202,6 +1202,28 @@ score: aNumber
 
 As shown above, another convention is for variables associated with
 keyword messages to indicate their expected type.
+
+### Accessor Methods
+
+Instance variables are never accessed directly
+from outside of the class that defines them.
+To expose their values, write getter methods.
+To allow them to be modified, write setter methods.
+
+Suppose a class Dog has the instance variable `breed`.
+The following accessor methods can be implemented:
+
+```smalltalk
+breed
+    ^breed
+
+breed: aString
+    breed := aString
+```
+
+Accessor methods for all instance variables in a class can be generated
+by right-clicking the class name in a System Browser window
+and selecting "more...create inst var accessors".
 
 ### Objects
 
@@ -2038,6 +2060,19 @@ No additional instances can be created.
 This is prevented by overriding the class method `new`
 in the `Boolean` class.
 
+Representing the values `true` and `false` by distinct classes
+simplifies the implementation of many of their methods.
+For example, here are the implementations of the
+`&` and `ifTrue:` instance methods in the `True` class.
+
+```smalltalk
+& alternativeObject
+    ^alternativeObject
+
+ifTrue: alternativeBlock
+    ^alternativeBlock value
+```
+
 ## Numbers
 
 The following list depicts the class hierarchy for numbers:
@@ -2082,6 +2117,14 @@ For example, `Character space`, `Character tab`, and `Character cr`.
 
 ### Strings
 
+The following list depicts the class hierarchy for character data:
+
+- `CharacterSequence`
+  - `String`
+    - `Symbol`
+  - `UnicodeString`
+    - `UnicodeSymbol`
+
 Strings are represented by the `String` class.
 
 Literal strings are delimited by single quotes, not double quotes.
@@ -2123,7 +2166,32 @@ To generate a UUID value, use `UUID new`.
 ### Collections
 
 Smalltalk supports a large number of collection classes.
-TODO: List the ones most commonly used and add a section on each one.
+Collection elements can be any kind of object, including other collections.
+
+The following list depicts the partial class hierarchy for collections:
+
+- `Collection`
+  - `SequenceableCollection`
+    - `ArrayedCollection`
+      - `Array`
+      - `ByteArray`
+      - `ColorArray`
+      - `FloatArray`
+      - `IntegerArray`
+        - `PointArray`
+    - `Heap`
+    - `Interval`
+    - `LinkedList`
+    - `OrderedCollection`
+      - `SortedCollection`
+  - `Bag`
+  - `Set`
+    - `Dictionary`
+      - `OrderedDictionary`
+- `Array2D`
+- `SharedQueue`
+
+TODO: Add a section on each commonly used collection class.
 
 Collection methods include:
 
@@ -2909,7 +2977,7 @@ p firstName print.
 Getting and setting instance variables in this way is quite inefficient.
 A better approach is to generate accessor methods
 by right-clicking the `Person` class in a System Browser window
-and selecting more ... create inst var accessors
+and selecting "more...create inst var accessors"
 to generate accessor methods for each instance variable.
 
 ## File I/O
