@@ -3143,16 +3143,17 @@ It also adds the method `jsonWriteOn:` to many classes including
 `Array2D`, `Association`, `CharacterSequence`, `Collection`, `Dictionary`,
 `False`, `Integer`, `Number`, `Text`, `True`, and `UndefinedObject`.
 
-Custom classes should implement the `jsonWriteOn:` method
+Custom classes should implement the instance method `jsonWriteOn:`
 to describe which of their instance variables should be included.
 Here's how it could be implemented for a `Dog` class
-with instance varaibles `name` and `breed`.
+with instance varaibles `id`, `name`, and `breed`.
 
 ```smalltalk
 jsonWriteOn: aWriteStream
     {
+        #id->id.
         #name->name.
-        #breed->breed/
+        #breed->breed
     } asDictionary jsonWriteOn: aWriteStream
 ```
 
@@ -3162,10 +3163,25 @@ Here's how we can get a JSON string for a `Dog` object.
 json := Json render: dog
 ```
 
+Custom classes should also implement a class method like `fromJson:`
+that takes a stream of JSON data and returns a new object created from it.
+Here's an example that uses the `VDog` class method `id:name:breed:`
+to create a new instance.
+
+```smalltalk
+fromJson: aStream
+    | jsonObject |
+    jsonObject := Json readFrom: aStream.
+    ^VDog
+        id: (jsonObject at: #id)
+        name: (jsonObject at: #name)
+        breed: (jsonObject at: #breed)
+```
+
 Here's how we can parse a JSON string to get a `Dog` object.
 
 ```smalltalk
-
+newDog := VDog fromJson: json readStream
 ```
 
 ## Web Development
