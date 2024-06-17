@@ -864,16 +864,22 @@ System Browser windows contain four rows.
   To sort them, hover over a pane and press cmd-shift-a (alphabetize)
 
 - The second row displays a message describing the item selected in the top row.
+
 - The third row contains a series of buttons that can be clicked to
   open other windows that show information related to the selected item.
   One exception is the "show..." button. Clicking this displays a popup
   containing exclusive checkboxes that can be checked
   to indicate what should be displayed in the fourth row.
   The default is "source" which is typically the desired choice.
+
 - The fourth row displays information about the selected item
   based on the checkbox that is selected for the "show..." button.
   By default it displays Smalltalk code for the selected item
   and can be used to edit the code.
+  When there are unsaved code changes in this pane,
+  a thin, red border appears around it.
+  Press cmd-s (Accept) to save the changes
+  and the thin, red border will disappear.
 
 To open a System Browser window, click on the `WorldMorph` background,
 select Open, and select Browser.
@@ -1559,7 +1565,7 @@ and select an option from the "refactorings" submenu.
 
 For methods the options include:
 
-- rename...
+- rename... (cmd-shift-r)
 - change keyword order...
 - add parameter...
 - remove parameter...
@@ -1569,6 +1575,9 @@ For methods the options include:
 - add in superclass as subclassResponsibility
 - push down to subclasses
 - push down to one subclass
+
+To rename a method without opening the refactorings menu,
+select the method and press cmd-shift-r.
 
 For selected code the options include:
 
@@ -2130,7 +2139,7 @@ Strings are represented by the `String` class.
 Literal strings are delimited by single quotes, not double quotes.
 
 The following table describes some of the instance methods
-defined in `String` and `CharacterSequence`.
+defined in the `String` and `CharacterSequence` classes.
 
 | Method                             | Description                                                                                                |
 | ---------------------------------- | ---------------------------------------------------------------------------------------------------------- |
@@ -2160,7 +2169,7 @@ defined in `String` and `CharacterSequence`.
 | `findTokens:`                      | returns `Array` of `Strings` created by splitting receiver on delimiters                                   |
 | `format:`                          | returns `String` created using interpolation                                                               |
 | `includesSubString:`               | returns `Boolean` indicating if receiver contains substring                                                |
-| `includesSubString:caseSensitive:` | returns `Boolean` indicating if receiver contains substring                                                |
+| `includesSubstring:caseSensitive:` | returns `Boolean` indicating if receiver contains substring                                                |
 | `indexOf:`                         | returns index of a character                                                                               |
 | `join:`                            | returns `String` formed by joining `Array` elements of any type with receiver delimiter                    |
 | `match:`                           | returns `Boolean` indicating whether receiver matches a pattern                                            |
@@ -2261,19 +2270,45 @@ The following list depicts the partial class hierarchy for collections:
 
 TODO: Add a section on each commonly used collection class.
 
-Collection methods include:
+`Collection` methods include:
 
-| Method          | Description                  |
-| --------------- | ---------------------------- |
-| `collect:`      | like `map` in JavaScript     |
-| `detect:`       | like `find` in JavaScript    |
-| `do:`           | like `forEach` in JavaScript |
-| `select:`       | like `filter` in JavaScript  |
-| `allSatisfy:`   | like `every` in JavaScript   |
-| `anySatisfy:`   | like `some` in JavaScript    |
-| `inject: into:` | like `reduce` in JavaScript  |
+| Method         | Description                  |
+| -------------- | ---------------------------- |
+| `collect:`     | like `map` in JavaScript     |
+| `detect:`      | like `find` in JavaScript    |
+| `do:`          | like `forEach` in JavaScript |
+| `select:`      | like `filter` in JavaScript  |
+| `allSatisfy:`  | like `every` in JavaScript   |
+| `anySatisfy:`  | like `some` in JavaScript    |
+| `inject:into:` | like `reduce` in JavaScript  |
 
 For example, `#(1 2 3) inject: 0 into: [:acc :n | acc + n]` gives `6`.
+
+### Interval
+
+Instances of the `Interval` class represent a finite arithmetic progress
+which is a sequence of numbers where
+the difference between consecutive terms is constant.
+An example would be the numbers 2, 4, 6, and 8.
+
+To create an `Interval` instance, use one of the following class methods:
+
+- `from:to:` - each value is one more than the previous
+- `from:to:by:` - specifies the increment between values
+- `from:to:count:` - specifies the number values to include,
+  which can be `Fraction` objects
+- `integersFrom:to:count:` - specifies the number values to include,
+  which will be the closest `Integer` match and not `Fraction` objects
+
+The following table describes some of the instance methods
+defined in the `Interval` class.
+
+| Method | Description                                         |
+| ------ | --------------------------------------------------- |
+| `do:`  | iterates over each value and passes them to a block |
+| ``     |                                                     |
+
+TODO: Describe more of these methods.
 
 ### Array
 
@@ -2283,8 +2318,8 @@ For example, `#(true 7 'Tami' (Color red))`.
 
 `Array` instances are fixed-length, ordered collections.
 
-The following table describes some of the instance methods defined in
-`Array`, `ArrayedCollection`, `SequenceableCollection`, and `Collection`.
+The following table describes some of the instance methods defined in the
+`Array`, `ArrayedCollection`, `SequenceableCollection`, and `Collection` classes.
 
 TODO: Finish added descriptions of these methods.
 
@@ -2494,8 +2529,9 @@ singleArgBlock := [:a | a * 3].
 multipleArgBlock := [:a :b | a * b].
 ```
 
-The `value` message evaluates a block
-and can be used to pass zero to four arguments.
+The `value` message evaluates a block and
+returns the value of its final expression.
+It can provide zero to four arguments.
 For blocks with more than four parameters,
 pass them in an array using `#valueWithArguments:`.
 For example:
@@ -2514,8 +2550,9 @@ If a block is passed fewer or more arguments than it accepts,
 an Error window will open.
 
 Blocks can declare and use temporary (local) variables.
-Blocks cannot explicitly return a value with the caret (^).
-Their value is that if their final expression.
+
+If a block uses the caret symbol to return a value,
+the containing method will exit and return that value.
 
 For example:
 
