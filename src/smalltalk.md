@@ -2129,6 +2129,61 @@ Strings are represented by the `String` class.
 
 Literal strings are delimited by single quotes, not double quotes.
 
+The following table describes some of the instance methods.
+
+| Method                             | Description                                                                             |
+| ---------------------------------- | --------------------------------------------------------------------------------------- |
+| `,`                                | returns new string that results from appending argument                                 |
+| `=`                                | compares receiver with argument                                                         |
+| `<`                                | compares receiver with argument                                                         |
+| `<=`                               | compares receiver with argument                                                         |
+| `>`                                | compares receiver with argument                                                         |
+| `>=`                               | compares receiver with argument                                                         |
+| `asLowercase`                      | returns new string that is all lowercase                                                |
+| `asUppercase`                      | returns new string that is all uppercase                                                |
+| `at:`                              | gets character at given index                                                           |
+| `at:put:`                          | replaces character at given index                                                       |
+| `byteSize`                         | returns size in bytes                                                                   |
+| `capitalized`                      | returns new string where first letter is changed to uppercase                           |
+| `findString:startingAt:`           | returns index where a substring begins                                                  |
+| `isEmpty`                          | returns `Boolean` indicating if receiver size is zero                                   |
+| `size`                             | returns largest legal index                                                             |
+| `substrings`                       | returns `Array` of `String` objects created by splitting receiver on whitespace         |
+| `asCamelCase`                      | returns string created by camelCasing white-space separated words (first letter lower)  |
+| `asDate`                           | returns `Date` parsed from receiver `String`                                            |
+| `asNumber`                         | returns number parsed from receiver `String`                                            |
+| `asPlural`                         | returns plural `String` of an English word                                              |
+| `asUnicodeString`                  | returns receiver converted to a `UnicodeString`                                         |
+| `beginsWith:`                      | returns `Boolean` indicating if receiver begins with given substring                    |
+| `endsWith:`                        | returns `Boolean` indicating if receiver ends with given substring                      |
+| `findTokens:`                      | returns `Array` of `Strings` created by splitting receiver on delimiters                |
+| `format:`                          | returns `String` created using interpolation                                            |
+| `includesSubString:`               | returns `Boolean` indicating if receiver contains substring                             |
+| `includesSubString:caseSensitive:` | returns `Boolean` indicating if receiver contains substring                             |
+| `indexOf:`                         | returns index of a character                                                            |
+| `join:`                            | returns `String` formed by joining `Array` elements of any type with receiver delimiter |
+| `match:`                           | returns `Boolean` indicating whether receiver matches a pattern                         |
+| ``                                 |                                                                                         |
+| ``                                 |                                                                                         |
+| ``                                 |                                                                                         |
+| ``                                 |                                                                                         |
+| ``                                 |                                                                                         |
+| ``                                 |                                                                                         |
+| ``                                 |                                                                                         |
+| ``                                 |                                                                                         |
+| ``                                 |                                                                                         |
+| ``                                 |                                                                                         |
+| ``                                 |                                                                                         |
+| ``                                 |                                                                                         |
+| ``                                 |                                                                                         |
+| ``                                 |                                                                                         |
+| ``                                 |                                                                                         |
+| ``                                 |                                                                                         |
+| ``                                 |                                                                                         |
+| ``                                 |                                                                                         |
+| ``                                 |                                                                                         |
+| ``                                 |                                                                                         |
+
 The `format` method returns a new `String` from a template using interpolation
 where input comes from an array.
 For example:
