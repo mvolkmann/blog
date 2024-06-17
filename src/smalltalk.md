@@ -2129,60 +2129,57 @@ Strings are represented by the `String` class.
 
 Literal strings are delimited by single quotes, not double quotes.
 
-The following table describes some of the instance methods.
+The following table describes some of the instance methods
+defined in `String` and `CharacterSequence`.
 
-| Method                             | Description                                                                             |
-| ---------------------------------- | --------------------------------------------------------------------------------------- |
-| `,`                                | returns new string that results from appending argument                                 |
-| `=`                                | compares receiver with argument                                                         |
-| `<`                                | compares receiver with argument                                                         |
-| `<=`                               | compares receiver with argument                                                         |
-| `>`                                | compares receiver with argument                                                         |
-| `>=`                               | compares receiver with argument                                                         |
-| `asLowercase`                      | returns new string that is all lowercase                                                |
-| `asUppercase`                      | returns new string that is all uppercase                                                |
-| `at:`                              | gets character at given index                                                           |
-| `at:put:`                          | replaces character at given index                                                       |
-| `byteSize`                         | returns size in bytes                                                                   |
-| `capitalized`                      | returns new string where first letter is changed to uppercase                           |
-| `findString:startingAt:`           | returns index where a substring begins                                                  |
-| `isEmpty`                          | returns `Boolean` indicating if receiver size is zero                                   |
-| `size`                             | returns largest legal index                                                             |
-| `substrings`                       | returns `Array` of `String` objects created by splitting receiver on whitespace         |
-| `asCamelCase`                      | returns string created by camelCasing white-space separated words (first letter lower)  |
-| `asDate`                           | returns `Date` parsed from receiver `String`                                            |
-| `asNumber`                         | returns number parsed from receiver `String`                                            |
-| `asPlural`                         | returns plural `String` of an English word                                              |
-| `asUnicodeString`                  | returns receiver converted to a `UnicodeString`                                         |
-| `beginsWith:`                      | returns `Boolean` indicating if receiver begins with given substring                    |
-| `endsWith:`                        | returns `Boolean` indicating if receiver ends with given substring                      |
-| `findTokens:`                      | returns `Array` of `Strings` created by splitting receiver on delimiters                |
-| `format:`                          | returns `String` created using interpolation                                            |
-| `includesSubString:`               | returns `Boolean` indicating if receiver contains substring                             |
-| `includesSubString:caseSensitive:` | returns `Boolean` indicating if receiver contains substring                             |
-| `indexOf:`                         | returns index of a character                                                            |
-| `join:`                            | returns `String` formed by joining `Array` elements of any type with receiver delimiter |
-| `match:`                           | returns `Boolean` indicating whether receiver matches a pattern                         |
-| ``                                 |                                                                                         |
-| ``                                 |                                                                                         |
-| ``                                 |                                                                                         |
-| ``                                 |                                                                                         |
-| ``                                 |                                                                                         |
-| ``                                 |                                                                                         |
-| ``                                 |                                                                                         |
-| ``                                 |                                                                                         |
-| ``                                 |                                                                                         |
-| ``                                 |                                                                                         |
-| ``                                 |                                                                                         |
-| ``                                 |                                                                                         |
-| ``                                 |                                                                                         |
-| ``                                 |                                                                                         |
-| ``                                 |                                                                                         |
-| ``                                 |                                                                                         |
-| ``                                 |                                                                                         |
-| ``                                 |                                                                                         |
-| ``                                 |                                                                                         |
-| ``                                 |                                                                                         |
+| Method                             | Description                                                                                                |
+| ---------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `,`                                | returns new string that results from appending argument                                                    |
+| `=`                                | compares receiver with argument                                                                            |
+| `<`                                | compares receiver with argument                                                                            |
+| `<=`                               | compares receiver with argument                                                                            |
+| `>`                                | compares receiver with argument                                                                            |
+| `>=`                               | compares receiver with argument                                                                            |
+| `asLowercase`                      | returns new string that is all lowercase                                                                   |
+| `asUppercase`                      | returns new string that is all uppercase                                                                   |
+| `at:`                              | gets character at given index                                                                              |
+| `at:put:`                          | replaces character at given index                                                                          |
+| `byteSize`                         | returns size in bytes                                                                                      |
+| `capitalized`                      | returns new string where first letter is changed to uppercase                                              |
+| `findString:startingAt:`           | returns index where a substring begins                                                                     |
+| `isEmpty`                          | returns `Boolean` indicating if receiver size is zero                                                      |
+| `size`                             | returns largest legal index                                                                                |
+| `substrings`                       | returns `Array` of `String` objects created by splitting receiver on whitespace                            |
+| `asCamelCase`                      | returns string created by camelCasing white-space separated words (first letter lower)                     |
+| `asDate`                           | returns `Date` parsed from receiver `String`                                                               |
+| `asNumber`                         | returns number parsed from receiver `String`                                                               |
+| `asPlural`                         | returns plural `String` of an English word                                                                 |
+| `asUnicodeString`                  | returns receiver converted to a `UnicodeString`                                                            |
+| `beginsWith:`                      | returns `Boolean` indicating if receiver begins with given substring                                       |
+| `endsWith:`                        | returns `Boolean` indicating if receiver ends with given substring                                         |
+| `findTokens:`                      | returns `Array` of `Strings` created by splitting receiver on delimiters                                   |
+| `format:`                          | returns `String` created using interpolation                                                               |
+| `includesSubString:`               | returns `Boolean` indicating if receiver contains substring                                                |
+| `includesSubString:caseSensitive:` | returns `Boolean` indicating if receiver contains substring                                                |
+| `indexOf:`                         | returns index of a character                                                                               |
+| `join:`                            | returns `String` formed by joining `Array` elements of any type with receiver delimiter                    |
+| `match:`                           | returns `Boolean` indicating whether receiver matches a pattern                                            |
+| `padded:to:width:`                 | returns `String` formed by padding receiver on left or right with a given `Character`                      |
+| `prefixAndSuffix:`                 | returns `Array` of `String` objects formed by splitting receiver on last occurrence of a `Character`       |
+| `squeezedTo:`                      | returns `String` that optimizes readability of receiver in given number of characters                      |
+| `subStrings:`                      | returns `Array` of `String` objects formed by splitting receiver on delimiters                             |
+| `substringsSeparatedBy:`           | returns `Array` of `String` objects formed by splitting receiver on a single delimiter `Character`         |
+| `truncateWithElipsisTo:`           | returns `String` formed by truncating receiver to given length with elipsis in last 3 of length            |
+| `uncapitalized`                    | returns new string where first letter is changed to lowercase                                              |
+| `withBlanksCondensed`              | returns `String` created by removing leading and trailing spaces and replacing consecutive spaces with one |
+| `withBlanksTrimmed`                | returns `String` created by removing leading and trailing spaces                                           |
+| `withoutEnclosing:`                | returns `String` created by removing first and last characters if they match a given `Character`           |
+| `withoutLeadingBlanks`             | returns `String` created by removing leading blanks                                                        |
+| `withoutPrefix`                    | returns `String` created by removing given substring prefix                                                |
+| `withoutSuffix`                    | returns `String` created by removing given substring suffix                                                |
+| `withoutTrailingBlanks`            | returns `String` created by removing trailing blanks                                                       |
+
+#### format:
 
 The `format` method returns a new `String` from a template using interpolation
 where input comes from an array.
@@ -2209,6 +2206,22 @@ of a `console.log` call in JavaScript.
 
 ```smalltalk
 ('myVariable = {1}' format: {myVariable}) print
+```
+
+#### padded:to:with:
+
+The following returns the `String` `' 19'`:
+
+```smalltalk
+19 asString padded: #left to: 5 with: Character space
+```
+
+#### prefixAndSuffix:
+
+The following returns an `Array` containing `'/foo/bar'` and `'baz.txt')`.
+
+```smalltalk
+'/foo/bar/baz.txt' prefixAndSuffix: $/
 ```
 
 ### UUIDs
@@ -2270,46 +2283,48 @@ For example, `#(true 7 'Tami' (Color red))`.
 
 `Array` instances are fixed-length, ordered collections.
 
-The following table describes some of the instance methods.
+The following table describes some of the instance methods defined in
+`Array`, `ArrayedCollection`, `SequenceableCollection`, and `Collection`.
 
-| Method                  | Description |
-| ----------------------- | ----------- |
-| `collect:thenSelect:`   |             |
-| `select:thenCollect:`   |             |
-| `isEmpty`               |             |
-| `size`                  |             |
-| `sort`                  |             |
-| `sort:`                 |             |
-| `allButFirst`           |             |
-| `allButFirst:`          |             |
-| `allButFirstDo:`        |             |
-| `allButLast`            |             |
-| `allButLast:`           |             |
-| `allButLastDo:`         |             |
-| `at:ifAbsent:`          |             |
-| `collect:`              |             |
-| `do:`                   |             |
-| `fillWith:`             |             |
-| `findFirst:`            |             |
-| `findFirst:startingAt:` |             |
-| `findLast:`             |             |
-| `first`                 |             |
-| `first:`                |             |
-| `firstAvailable:`       |             |
-| `from:to:do`            |             |
-| `head:`                 |             |
-| `includes:`             |             |
-| `indexOf:`              |             |
-| `keysAndValuesDo:`      |             |
-| `last`                  |             |
-| `last:`                 |             |
-| `lastAvailable:`        |             |
-| `lastIndexOf:`          |             |
-| `polynomialEval:`       |             |
-| `select:`               |             |
-| `shuffled`              |             |
-| `sorted:`               |             |
-| `tail:`                 |             |
+| Method                  | Description                                                           |
+| ----------------------- | --------------------------------------------------------------------- |
+| `collect:thenSelect:`   |                                                                       |
+| `select:thenCollect:`   |                                                                       |
+| `isEmpty`               |                                                                       |
+| `size`                  | returns number of elements                                            |
+| `sort`                  |                                                                       |
+| `sort:`                 |                                                                       |
+| `allButFirst`           |                                                                       |
+| `allButFirst:`          |                                                                       |
+| `allButFirstDo:`        |                                                                       |
+| `allButLast`            |                                                                       |
+| `allButLast:`           |                                                                       |
+| `allButLastDo:`         |                                                                       |
+| `allSatisfy:`           | returns `Boolean` indicating whether all elements satisfy a condition |
+| `at:ifAbsent:`          |                                                                       |
+| `collect:`              |                                                                       |
+| `do:`                   |                                                                       |
+| `fillWith:`             |                                                                       |
+| `findFirst:`            |                                                                       |
+| `findFirst:startingAt:` |                                                                       |
+| `findLast:`             |                                                                       |
+| `first`                 |                                                                       |
+| `first:`                |                                                                       |
+| `firstAvailable:`       |                                                                       |
+| `from:to:do`            |                                                                       |
+| `head:`                 |                                                                       |
+| `includes:`             |                                                                       |
+| `indexOf:`              |                                                                       |
+| `keysAndValuesDo:`      |                                                                       |
+| `last`                  |                                                                       |
+| `last:`                 |                                                                       |
+| `lastAvailable:`        |                                                                       |
+| `lastIndexOf:`          |                                                                       |
+| `polynomialEval:`       |                                                                       |
+| `select:`               |                                                                       |
+| `shuffled`              |                                                                       |
+| `sorted:`               |                                                                       |
+| `tail:`                 |                                                                       |
 
 Arrays support binary messages that operate on all the elements
 and return a new array containing the results.
@@ -2842,7 +2857,8 @@ The following dialog will appear:
 
 ### Buttons
 
-Button labels are automatically shortened to fit within the button width.
+Button labels are automatically shortened to fit within the button width
+using the `String` instance method `squeezeTo:`.
 It begins by removing spaces from right to left.
 It then removes vowels from right to left.
 Finally, it removes consonants from right to left
