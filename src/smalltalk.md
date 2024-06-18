@@ -2612,12 +2612,14 @@ fact := [:block :n |
 fact value: fact value: 5 "gives 120"
 ```
 
-## Error Handling
+## Exception Handling
 
 Smalltalk methods can throw exceptions.
 Exceptions that are thrown by code in a block can be caught and handled.
 Unhandled exceptions result in a Debug window being opened
 that contains a stack trace.
+
+Smalltalk seems to use the words "exception" and "error" interchangably.
 
 To throw a generic exception:
 
@@ -2625,22 +2627,55 @@ To throw a generic exception:
 Error signal: 'some message'
 ```
 
-To define a custom exception,
-create a class that inherits from the `Exception` class.
+Smalltalk provides my subclasses of the `Exception` class.
+Examples include `ArithmeticError`, `AssertionFailure`, `Error`, `Halt`,
+`MessageNotUnderstood`, `NotYetImplemented`, and `ZeroDivide`.
+
+To define a custom exception, create a class that inherits from
+the `Exception` class or one of its subclasses such as `Error.
 This can include instance variables and methods
 that are specific to that exception.
 For example:
 
 ```smalltalk
-Exception subclass: MyException
-    ...
+Error subclass: #OutOfBoundsException
+    instanceVariableNames: 'lowerBound upperBound'
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'Volkmann'
 ```
 
-To throw a custom exception send it the `#signal:` message.
-For example:
+The following class method is used to create an instance:
 
 ```smalltalk
-MyException signal: 'some message'
+lower: aLower upper: anUpper
+    ^self new initializeLower: aLower upper: anUpper
+```
+
+The following instance method is used by the class method above:
+
+```smalltalk
+initializeLower: aLower upper: anUpper
+    super initialize.
+    lowerBound := aLower.
+    upperBound := anUpper
+```
+
+If the exception subclass defines class methods that create a new instance,
+make sure to call `super initialize` as shown above.
+
+To throw a custom exception send the class, or an instance of it,
+the `#signal:` message.
+For example, the following instance method could be defined
+in a class that has a `score` instance variable:
+
+```smalltalk
+score: aNumber
+    | ex |
+    ex := OutOfBoundsException lower: lowerBound upper: upperBound.
+    aNumber <  lowerBound ifTrue: [ ex signal: 'too low' ].
+    aNumber > upperBound ifTrue: [ ex signal: 'too high' ].
+    score := aNumber
 ```
 
 To catch an exceptions that may be thrown by a method,
@@ -2649,16 +2684,13 @@ and set the `#on:do:` message to the block.
 For example:
 
 ```smalltalk
-[some code goes here] on: MyException do: [ :ex |
-    "code that handles the exception goes here"
+[s := Game new score: 5] on: OutOfBoundsException do: [ :ex |
+    ex messageText print.
 ]
 ```
 
-The `Exception` object passed to the `do:` block
-has the following instance methods:
-
-- `messageText`
-- TODO: Others?
+Sending the message `#messageText` to an exception object
+returns the message text of the exception.
 
 ## Unit Tests
 
@@ -3404,6 +3436,11 @@ To kill it, open a "Process Browser", select the process,
 and press cmd-t (Terminate).
 
 See the class `MyWebServer` in the `Volkmann` package.
+
+## Foreign Function Interface (FFI)
+
+See <a href="https://itchyeyes.net/articles/cuis-smalltalk.html"
+target="_blank">Using the FFI</a>.
 
 ## Example Code
 
