@@ -2612,6 +2612,54 @@ fact := [:block :n |
 fact value: fact value: 5 "gives 120"
 ```
 
+## Error Handling
+
+Smalltalk methods can throw exceptions.
+Exceptions that are thrown by code in a block can be caught and handled.
+Unhandled exceptions result in a Debug window being opened
+that contains a stack trace.
+
+To throw a generic exception:
+
+```smalltalk
+Error signal: 'some message'
+```
+
+To define a custom exception,
+create a class that inherits from the `Exception` class.
+This can include instance variables and methods
+that are specific to that exception.
+For example:
+
+```smalltalk
+Exception subclass: MyException
+    ...
+```
+
+To throw a custom exception send it the `#signal:` message.
+For example:
+
+```smalltalk
+MyException signal: 'some message'
+```
+
+To catch an exceptions that may be thrown by a method,
+send a message that invokes the method inside a block
+and set the `#on:do:` message to the block.
+For example:
+
+```smalltalk
+[some code goes here] on: MyException do: [ :ex |
+    "code that handles the exception goes here"
+]
+```
+
+The `Exception` object passed to the `do:` block
+has the following instance methods:
+
+- `messageText`
+- TODO: Others?
+
 ## Unit Tests
 
 To create unit tests for an existing class:
