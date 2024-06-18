@@ -801,6 +801,10 @@ For example, when the object is a morph,
 enter `self color: Color red` and press cmd-d (Do it),
 or enter `self color` and press cmd-p (Print it).
 
+Instance variables can be directly set in the bottom pane
+using assignment instead of sending a message.
+For example: `color := Color red`.
+
 Inspector windows are live, so changes made to the instance variables
 are reflected.
 
@@ -2033,7 +2037,7 @@ The `Boolean` class in the `Kernel:Objects` category contains the methods
 For example:
 
 ```smalltalk
-result := a < b ifTrue: 'less' ifFalse: 'more'.
+result := a < b ifTrue: ['less'] ifFalse: ['more'].
 ```
 
 The values for `ifTrue` and `ifFalse` can be
@@ -2046,10 +2050,19 @@ When blocks are used, the compiler is able to optimized the code by
 inlining the code within the block and
 avoiding the need to send the `value` message.
 So it is more efficient to use blocks.
-The previous example can be written as follows to take advantage of this:
+
+The `Object` instance method `caseOf` is similar to
+the `switch` statement in other programming languages.
+
+For example:
 
 ```smalltalk
-result := a < b ifTrue: ['less'] ifFalse: ['more'].
+color := 'blue'.
+assessment := color caseOf: {
+    ['red'] -> ['hot'].
+    ['green'] -> ['warm'].
+    ['blue'] -> ['cold']
+}
 ```
 
 ## Data Types
