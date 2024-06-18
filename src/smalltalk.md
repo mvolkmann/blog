@@ -1240,11 +1240,15 @@ Objects are created by sending a message to a class.
 In addition, some kinds of objects can be created from a literal syntax
 such as numbers, strings, and arrays.
 
-Every class supports the `#new` message, which
-creates and returns a new instance of the class.
-If the class defines the instance method `initialize`
-and `#new` is sent to the class, the `initialize` method will be
-called automatically to initialize the instance variables of the object.
+Every class supports the class method `new`,
+which creates and returns a new instance of the class.
+If the class defines the instance method `initialize`,
+the `new` method will call it.
+The `initialize` method typically
+initializes the instance variables of the object.
+
+Every class also supports the class method `basicNew` which is similar to
+the `new` method, but does not call the instance method `initialize`.
 
 Let's look at an example `Rect` class
 with instance variables `height` and `width`.
@@ -3310,10 +3314,35 @@ Also see the
 
 See the <a href="https://book.seaside.st/book" target="_blank">Seaside Book</a>.
 
+### Send HTTP Requests
+
+The `WebClient` class defines class methods that send HTTP requests.
+For example:
+
+```smalltalk
+res := WebClient httpGet: 'https://pokeapi.co/api/v2/pokemon/pikachu'.
+```
+
+The value of the variable `res` above is a `WebResponse` object.
+It has many instance variables including:
+
+- `code` - status code such as 200
+- `content` - response body
+- `headers` - an `OrderedCollection` of `Association` objects
+  that describe the HTTP response headers such as `content-type` with a
+  value like `text/html; charset=utf-8` or `application/json; charset=utf-8`
+- `protocol` - such as the `String` `HTTP/1.1`
+- `status` - such as the `String` `HTTP/1.1 200 OK`
+- `url` - the URL to which the request was sent
+
+### Implementing an HTTP Server
+
 Creating a `WebServer` instance and sending it the `listenOn:` message
 starts a Smalltalk process called "WebServers's listener process".
 To kill it, open a "Process Browser", select the process,
 and press cmd-t (Terminate).
+
+See the class `MyWebServer` in the `Volkmann` package.
 
 ## Example Code
 
