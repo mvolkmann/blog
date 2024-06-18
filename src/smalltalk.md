@@ -545,6 +545,13 @@ target="_blank">issue</a>.
 
 ## Images
 
+A Smalltalk image contains the definitions of system-provided classes,
+your classes, and objects that have been created,
+including those that represent all open windows.
+
+An image can be used to manage collections of data,
+perhaps held in `Dictionary` objects, as an alternative to using a database.
+
 To save any changes, include open windows, their position and size,
 and their content (ex. Workspaces),
 open the World menu and select "Save Image",
