@@ -543,6 +543,10 @@ various file system folders.
 See this <a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Dev/issues/282"
 target="_blank">issue</a>.
 
+TODO: Harvest information about file system operations from this video.
+<a href="https://youtu.be/stMoWMlLVzk?si=_3rmJFPkZ2g4ZIIV"
+target="_blank">squeak smalltalk tutorial: file handling part 1</a>.
+
 ## Images
 
 A Smalltalk image contains the definitions of system-provided classes,
@@ -3581,3 +3585,18 @@ myBlock value: 2 value: 3.
   even if it was saved that way?
 - What do you click in a morph halo to cause it to
   display its coordinate system axes?
+- Some packages are built-in meaning that they are included in the
+  distribution of the Smalltalk implementation.
+  Other packages must be downloaded, sometimes by cloning a GitHub repository.
+- Formalize your code to generate HTML from an Association object.
+- Does “morph removeAll” remove a given morph and all of its sub morphs?
+- Another way to browse a class besides pressing cmd-f in the left pane of a
+  system browser and searching for it by name is to enter the name
+  and it workspace and press cmd-b to browse it.
+- Is it more common to include a space after the return caret or not?
+- The protocol of a class is the set of all its instance methods,
+  including those that are inherited from superclasses.
+- Learn how to use all the buttons in a system browser window.
+- The term "extent" in Morphic means the combination of width and height
+  as a Point object.
+- Is "location" a Point object containing X and Y values?
