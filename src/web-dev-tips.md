@@ -1858,10 +1858,11 @@ are described here.
 
 - `grid-template-areas`
 
-  This gives names to collections of grid cells,
+  This specifies the grid cells that will be occupied by each named area,
   allowing them to span multiple columns and rows.
-  Child elements then assign themselves to the grid names
+  Child elements must assign themselves to the grid names
   using the `grid-area` CSS property.
+
   For example, the following describes the layout of a container
   that has a header across the top, a footer across the bottom,
   and a left nav followed by a main area in the center.
