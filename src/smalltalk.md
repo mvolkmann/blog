@@ -454,8 +454,6 @@ initialize
 The shell script `clonePackageRepos.sh` clones many
 commonly used Git repositories that define optional packages.
 Cloning those enables installing the packages they define.
-To do so, enter `Feature require: {package-name}`
-in a Workspace window and "Do it".
 
 The repositories that this clones include:
 
@@ -555,6 +553,10 @@ including those that represent all open windows.
 
 An image can be used to manage collections of data,
 perhaps held in `Dictionary` objects, as an alternative to using a database.
+
+One way to start an image is to double-click its file.
+Once started, to discover the directory where it is stored,
+enter `DirectoryEntry smalltalkImageDirectory` in a workspace and "Print it".
 
 To save any changes, include open windows, their position and size,
 and their content (ex. Workspaces),
@@ -1808,10 +1810,10 @@ Cuis Smalltalk supports the ability to save code outside an image file
 and load it into running images.
 This is an alternative to Monticello which is used in Squeak and Pharo.
 
-Package names are used as prefixes on class and method categories names.
-
 Packages are collections of Smalltalk code
 stored in files with a `.pck.st` file.
+
+Package names are used as prefixes on class and method categories names.
 
 There are three ways to install a package.
 
@@ -3200,6 +3202,17 @@ There are many more example class methods in the `SVGMainMorph` class.
 To open all the examples,
 enter `SVGMainMorph openAllExamples SVGMainMorph` and "Do it".
 To delete all those morphs, enter `SVGMainMorph allInstancesDo: [ :obj | obj delete ]`.
+
+Another way to open all the examples using reflection is:
+
+```smalltalk
+selectors := SVGMainMorph class allMethodsInCategory: #examples.
+selectors do: [ :selector |
+    (selector beginsWith: 'example') ifTrue: [
+        (SVGMainMorph perform: selector) openInWorld
+    ]
+].
+```
 
 ## Overriding doesNotUnderstand
 
