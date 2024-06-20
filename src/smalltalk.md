@@ -124,13 +124,14 @@ target="_blank">Discord channel channel for Squeak Smalltalk</a>.
 - It has a small, consistently applied syntax.
 - It has a great development environment consisting of tools such as
   System Browser, Workspace, Transcript, Debugger, Hierarchy Browser,
-  Method Finder and more
+  Method Finder and more.
 - Everything is an object.
-- It provides automatic version control.
-- It provides extreme polymorphism.
+- All methods are invoked through message passing
+  which supports extreme polymorphism.
   Any kind of object can be passed to a method as long as it
   responds to the messages that will be sent to it.
 - It has a great web app. framework (Seaside) and a great CMS framework (Pier).
+- It provides automatic version control.
 
 ## Smalltalk Cons
 
@@ -1194,8 +1195,8 @@ All classes are global and there is no namespacing.
 Class names are added to the global variable `Smalltalk`
 which is a `SystemDictionary`.
 This requires all class names to be unique.
-Typically a common prefix is added to a set of related class names
-in order to make the unique.
+Typically a common prefix, perhaps 2 or 3 uppercase letters,
+is added to a set of related class names in order to make the unique.
 Lack of namespacing is seen by some as a weakness of Smalltalk.
 
 All classes inherit from one other class,
@@ -1815,6 +1816,17 @@ stored in files with a `.pck.st` file.
 
 Package names are used as prefixes on class and method categories names.
 
+The GitHub account "Cuis-Smalltalk" provides many package repositories,
+32 as of June 2024.
+Sadly the documentation included in the `README.md` files of these packages
+is quite sparse.
+To install one of these, clone the repository, open a Workspace window,
+enter `Feature require: 'PackageName', and "Do it".
+TODO: Which directories are searched for packages?
+
+For additional packages, search GitHub for
+repositories whose names begin with "Cuis-Smalltalk-".
+
 There are three ways to install a package.
 
 1. Drag a package file onto the `WorldMorph`
@@ -1920,6 +1932,7 @@ The only mechanism for communication between objects
 is for one to send a message to another.
 Messages are always sent to a explicit receiver,
 which is `self` to send a message to the current object.
+Arguments in messages are always passed by reference, not by value.
 
 In documentation, message names are preceded by `#`,
 but that does not appear when sending the messages.
@@ -3630,3 +3643,14 @@ myBlock value: 2 value: 3.
 - The term "extent" in Morphic means the combination of width and height
   as a Point object.
 - Is "location" a Point object containing X and Y values?
+- Is Cuis Smalltalk the only implementation that supports
+  Unicode characters, TrueType fonts, vector graphics?
+- Try the Connectors package.
+  Does it work in Cuis Smalltalk or is there a port of it?
+  https://youtu.be/QBRm_hnl7sE?si=w4FDZLfoyMAehZv6
+- Submit a PR for the SVG repository that modifies `README.md`
+  to explain how to clone the `Numerics` repository
+  which provides the `LinearAlgebra` package, and install that.
+- Submit a PR to this for the typos you found in
+  https://github.com/Cuis-Smalltalk/TheCuisBook.
+- Try https://github.com/Cuis-Smalltalk/DatabaseSupport.
