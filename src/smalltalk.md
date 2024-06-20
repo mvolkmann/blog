@@ -1652,25 +1652,29 @@ Smalltalk provides many methods for
 getting information about classes and objects.
 The following table lists some of them.
 
-| Method                                            | Answers                                                                                                      |
-| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `Smalltalk allClasses`                            | an `Array` of all classes defined in the current image                                                       |
-| `Smalltalk allClassesImplementing: #selector`     | an `Array` of all classes that implement a given selector                                                    |
-| `SomeClass allClassVarNames`                      | a `Set` of class variable names defined in this class                                                        |
-| `SomeClass allSelectors`                          | an `IdentitySet` of all message selectors supported by this class, including selectors for inherited methods |
-| `SomeClass allInstances`                          | an `Array` of all existing instances of this class                                                           |
-| `SomeClass allInstVarNames`                       | an `Array` of instance variable names defined in this class                                                  |
-| `SomeClass allInstVarNamesEverywhere`             | an `Array` of instance variable names defined in this class and inherited classes                            |
-| `SomeClass allMethodsInCategory: 'some-category'` | an `Array` of methods in a given category including those defined in this class and inherited                |
-| `SomeClass allSubclasses`                         | an `OrderedCollection` of subclasses                                                                         |
-| `SomeClass allSuperclasses`                       | an `OrderedCollection` of superclasses                                                                       |
-| `CodeListPackages installedPackages`              | an `Array` of `CodePackage` objects (appear in System Browser class category pane)                           |
+| Method                                                  | Answers                                                                                                      |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `Smalltalk allClasses`                                  | an `Array` of all classes defined in the current image                                                       |
+| `Smalltalk allClassesImplementing: #selector`           | an `Array` of all classes that implement a given selector                                                    |
+| `SomeClass allClassVarNames`                            | a `Set` of class variable names defined in this class                                                        |
+| `SomeClass allSelectors`                                | an `IdentitySet` of all message selectors supported by this class, including selectors for inherited methods |
+| `SomeClass allInstances`                                | an `Array` of all existing instances of this class                                                           |
+| `SomeClass allInstVarNames`                             | an `Array` of instance variable names defined in this class                                                  |
+| `SomeClass allInstVarNamesEverywhere`                   | an `Array` of instance variable names defined in this class and inherited classes                            |
+| `SomeClass allMethodsInCategory: 'some-category'`       | an `Array` of instance methods in a given category, including those defined in this class and inherited      |
+| `SomeClass class allMethodsInCategory: 'some-category'` | an `Array` of class methods in a given category, including those defined in this class and inherited         |
+| `SomeClass allSubclasses`                               | an `OrderedCollection` of subclasses                                                                         |
+| `SomeClass allSuperclasses`                             | an `OrderedCollection` of superclasses                                                                       |
+| `CodeListPackages installedPackages`                    | an `Array` of `CodePackage` objects (appear in System Browser class category pane)                           |
 
 TODO: Why does `allClassVarNames` return a `Set` when `allInstVarNames` returns an `Array`?
 TODO: Is there a way to get all the message categories used by a class?
 
 To run code on every instance of a given class,
 send the `allInstancesDo:` message to the class.
+
+For example, to delete all instances of a given class, run
+`SomeClass allInstancesDo: [ :obj | obj delete ]`.
 
 ## Code Management
 
@@ -3177,12 +3181,25 @@ Starting around 32:30 in the YouTube video
 target="_blank">FAST Talks - Vector Graphics in Cuis Smalltalk</a>,
 Juan demonstrates the class `SVGElementMorph` from the package "SVG".
 
-To work with SVG images, clone the
-<a href="https://github.com/Cuis-Smalltalk/SVG.git"
-target="_blank">SVG</a> GitHub repository,
-enter `Feature require: 'SVG'` in a Workspace, and "Do it".
-TODO: This gives "Installation failed. Could not find code package file
-for [LinearAlgebra]." Where can I find that package?
+To work with SVG images:
+
+- Open a terminal.
+
+- Clone the following Git repositories from Cuis Smalltalk:
+
+  - <a href="https://github.com/Cuis-Smalltalk/Numerics.git" target="_blank">Numerics</a>
+  - <a href="https://github.com/Cuis-Smalltalk/SVG.git" target="_blank">SVG</a>
+
+- Open a Workspace window and install the packages `LinearAlgebra` and `SVG.
+
+  For each package, enter `Feature require: '{package-name}'` and "Do it".
+
+- Enter `SVGMainMorph exampleTiger openInWorld` and "Do it".
+
+There are many more example class methods in the `SVGMainMorph` class.
+To open all the examples,
+enter `SVGMainMorph openAllExamples SVGMainMorph` and "Do it".
+To delete all those morphs, enter `SVGMainMorph allInstancesDo: [ :obj | obj delete ]`.
 
 ## Overriding doesNotUnderstand
 
