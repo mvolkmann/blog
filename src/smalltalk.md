@@ -3771,3 +3771,4 @@ myBlock value: 2 value: 3.
 - Try https://github.com/Cuis-Smalltalk/DatabaseSupport.
 - Is there a library of collection types for Smalltalk
   that support structural sharing for immutability?
+- Is there a way to revert changes to more than one method at a time?
