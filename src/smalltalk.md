@@ -2108,8 +2108,6 @@ it could still respond by handling it in `doesNotUnderstand`.
 I'll go on record saying that I do not find this helpful.
 I wish it did not show those messages.
 
-start with pac because there is no warranty that you do not want to send that message to that object even though it does not understand it. But, in the case of Smalltalk because we know its type, it shows the selectors in blue, to let you know that is not a message that will respond unless you implement it.
-
 If a message is sent to an object from a Workspace window
 and no compatible method is found, the following popup will appear:
 
@@ -2134,6 +2132,30 @@ The method can be implemented inside the "MessageNotUnderstood" window.
 Initially it will just contain `self shouldBeImplemented`.
 Replace that with the real implementation, which in this case is `^self * 3`,
 and press cmd-s to save the change.
+
+### Other Ways To Send Messages
+
+The `#perform:` message and its variations can be sent to any class or object
+to send a message specified by the symbol that follows `perform:`.
+This is useful in sitations where the message to send
+needs to be determined at run-time.
+
+For example, the following pairs of expressions are equivalent:
+
+```smalltalk
+4 sqrt. "2"
+4 perform: #sqrt. "2"
+
+2 * 3. "6"
+2 perform: #* with: 3. "6"
+
+'foobarbaz' findString: 'BAR' startingAt: 1 caseSensitive: false. "4"
+'foobarbaz'
+    perform: #findString:startingAt:caseSensitive:
+    with: 'BAR' with: 1 with: false. "4"
+```
+
+To provide more than three arguments, use `#perform:withArguments`.
 
 ## Reserved Words
 
@@ -3779,3 +3801,4 @@ myBlock value: 2 value: 3.
 - Is there a way to revert changes to more than one method at a time?
 - Where is the `new` method defined? Does that
   explicitly call `initialize` on the newly created object?
+- Perhaps you should refer to most windows as browers.
