@@ -1530,7 +1530,7 @@ The `VCircle` class can have the following class method for creating instances:
 
 ```smalltalk
 radius: aNumber
-    ^self new setRadius: aNumber-
+    ^self new setRadius: aNumber
 ```
 
 The `VCircle` class can have the following instance methods:
