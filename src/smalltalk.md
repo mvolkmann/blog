@@ -1166,12 +1166,27 @@ TODO: Explain how to use these.
 
 Process Browsers display a list of all the Smalltalk-related processes
 that are running.
+By default the list updates automatically and processes come and go.
+To toggle that, press cmd-a (turn off/on auto-update).
 
 To terminate a process, select it and press cmd-t (terminate).
 This is especially useful for terminating "WebServer's listening process".
 
 <img alt="Cuis Process Browser" style="width: 85%"
   src="/blog/assets/cuis-process-browser-window.png?v={{pkg.version}}">
+
+For example, the following code starts a process that
+writes to the Transscript every five seconds.
+
+```smalltalk
+[[true] whileTrue: [
+    'Hello' print.
+    (Delay forSeconds: 5) wait
+]] forkAt: Processor userBackgroundPriority
+```
+
+The name of the process will be "unnamed".
+To stop it, right-click the process, select it and press cmd-t (terminate).
 
 ### Emergency Evaluator
 
