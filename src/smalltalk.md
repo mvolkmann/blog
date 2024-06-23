@@ -738,7 +738,10 @@ message names are blue, and symbols are blue and bold.
 In any text editng pane, right-click and select "Help..."
 to see a list of the supported key bindings.
 
-To comment/uncomment selected lines of code, press cmd-".
+To toggle surrounding selected text with a given delimiter character,
+press cmd and the starting delimiter character
+which can be `'`, `"`, `(`, `[`, or `{`.
+Pressing cmd-" is useful to toggle whether selected code commented/uncommented.
 
 To change the indentation of a block of code, select all the lines and
 press tab to increase indentation or shift-tab to decrease it.
