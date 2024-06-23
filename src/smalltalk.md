@@ -1179,13 +1179,14 @@ For example, the following code starts a process that
 writes to the Transscript every five seconds.
 
 ```smalltalk
-[[true] whileTrue: [
+block := [[true] whileTrue: [
     'Hello' print.
     (Delay forSeconds: 5) wait
-]] forkAt: Processor userBackgroundPriority
+]].
+block forkAt: Processor userBackgroundPriority named: 'hello'.
 ```
 
-The name of the process will be "unnamed".
+The name of the process will be "hello".
 To stop it, right-click the process, select it and press cmd-t (terminate).
 
 ### Emergency Evaluator
