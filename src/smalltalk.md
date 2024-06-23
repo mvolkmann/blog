@@ -100,13 +100,15 @@ The entire syntax of Smalltalk can be demonstrated on a post card.
 - <a href="https://github.com/Cuis-Smalltalk" target="_blank">Cuis GitHub repositories</a>
 - <a href="https://pharo.org" target="_blank">Pharo Smalltalk</a>
 - <a href="https://squeak.org" target="_blank">Squeak Smalltalk</a>
+- <a href="https://github.com/Cuis-Smalltalk/Learning-Cuis/blob/master/Quick-UI-Tour.md"
+  target="_blank">Quick-UI-Tour</a> for Cuis Smalltalk
 - <a href="https://www.fast.org.ar"
   target="_blank">Fundación Argentina de Smalltalk</a> (FAST)
 - <a href="https://www.gnu.org/software/dr-geo/" target="_blank">Dr. Geo</a>
 - <a href="https://www.goodreads.com/shelf/show/smalltalk"
   target="_blank">Smalltalk Books</a> list on goodreads.
 - <a href="https://www.youtube.com/playlist?list=PL6601A198DF14788D"
-  target="_blank">Sqeak from the very start</a>
+  target="_blank">Squeak from the very start</a>
   YouTube videos by Lawson English
 
   "A program to design and manipulate interactive geometric sketches.
@@ -872,11 +874,14 @@ System Browser windows contain four rows.
   displays message categories for the class in the third pane.
   Example message category names include "accessing", "comparing",
   "copying", "converting", "enumerating", and "printing".
+  There is a separate set of method categories
+  for instance methods and class methods.
 
   Selecting a message category (a.k.a protocol) in the third pane
   displays methods in that category in the fourth pane.
-  The top, default messate category is "-- all --",
-  which contains all the methods.
+  The top message category, provided by default, is "-- all --".
+  If no message category is selected, or if "-- all --" is selected,
+  all the methods in all categories are listed.
 
   The items in these panes are not sorted alphabetically by default.
   To sort them, hover over a pane and press cmd-shift-a (alphabetize)
@@ -885,10 +890,84 @@ System Browser windows contain four rows.
 
 - The third row contains a series of buttons that can be clicked to
   open other windows that show information related to the selected item.
-  One exception is the "show..." button. Clicking this displays a popup
-  containing exclusive checkboxes that can be checked
-  to indicate what should be displayed in the fourth row.
-  The default is "source" which is typically the desired choice.
+  One exception is the "show..." button, described below.
+
+  The "browse" button opens a new System Browser focused on
+  the currently selected class, message category, or method.
+  This enables maintaining the view in the current System Browser and
+  navigating somewhere relative to that location in a new System Browser.
+
+  The "senders" button ...
+
+  The "implementors" button ...
+
+  The "versions" button opens a "Recent versions" window (a.k.a Versions Browser)
+  that displays a list of time stamps for recent versions of the method.
+  Clicking a time stamp displays that version of the code in the bottom pane.
+  If one of the buttons lineDiffs, wordDiffs,
+  linePrettyDiffs, or wordPrettyDiffs is pressed, it will show
+  differences between that version and the current version.
+  The two "line diff" options show whole line differences.
+  The two "word diff" options show individual word differences.
+  The two "pretty" options show the code in its formatted form.
+  To stop showing differences, click the selected diff button to toggle it off.
+  Code added by the selected version will be in green.
+  Code removed by the selected version will be in red.
+  Click the "revert" button to restore that version
+  as the current version of the code.
+  The "compare to current" button displays the same information
+  as the lineDiffs button, but in a new window.
+
+  The "inheritance" button ...
+
+  The "hierarchy" button ...
+
+  The "inst vars" button displays a drop-down list containing
+  all the instance variables in the current class.
+  Clicking one of them opens a new "Accesses to" window that
+  lists all the methods that use the instance variable it its top pane.
+  Clicking on a method displays its code in the bottom pane.
+
+  The "class vars" button displays a drop-down list containing
+  all the class variables in the current class.
+  Clicking one of them opens a new "Users of" window that
+  lists all the methods that use the class variable in its top pane.
+  Clicking on a method displays its code in the bottom pane (fourth row).
+
+  The "show..." button displays a drop-down list
+  of ways the selected item can be displayed in the bottom pane.
+  Each option is represented by a checkbox, but only one can be selected.
+
+  The default option is "source" which merely
+  displays the source code of the selected method.
+  This is typically the desired choice.
+
+  Selecting "documentation" only displays
+  the signature and comment for the selected item.
+  When there is no commment, it displays "Has no comment".
+
+  Seleting "prettyPrint" displays the code for a method in a
+  nicely formatted way, but doesn't actually modify the code.
+  I wish it did.
+
+  Selecting "lineDiffs" displays ...
+
+  Selecting "lineDiffs" displays ...
+
+  Selecting "wordDiffs" displays ...
+
+  Selecting "linePrettyDiffs" displays ...
+
+  Selecting "wordPrettyDiffs" displays ...
+
+  Selecting "decompile" displays code that is similar to the source code,
+  but variable names are changed.
+  Parameter variable names are replaced by `arg1`, `arg2`, and so on.
+  Local variable names are replaced by `temp1`, `temp2`, and so on.
+  It's not clear when this would be useful.
+
+  Selecting "byteCodes" displays the byte codes
+  generated by the method source code.
 
 - The fourth row displays information about the selected item
   based on the checkbox that is selected for the "show..." button.
@@ -1839,6 +1918,22 @@ There are three ways to install a package.
    This option only works if the package is
    in the same directory as the image file that is loaded.
 
+Let's learn where the `Feature require:` method searches for packages.
+
+1. Browse the `Feature` class.
+1. Click the `require` method on the class side.
+1. Select the `FeatureRequirement` class and press cmd-b to "Browse it".
+1. Select the `findPackageFileAsReqOf:` method on the instance side.
+1. Note that it sends the message `placesToLookForPackagesDo:`.
+1. Click that method on the instance side.
+1. Note the following comments in this code:
+
+   - "Look inside my own folder"
+   - "Look in codePackageFile folder"
+   - "Packages that come included with Cuis"
+   - "Packages created by user"
+   - "Packages in other folders or repos in the project directory"
+
 To see all the installed packages, click the WorldMorph background
 and select Open...Installed Packages.
 This opens an "Installed Packages" window.
@@ -2149,6 +2244,18 @@ objects of one of the `Integer` subclasses.
 Literal numbers with a decimal point automatically become
 objects of one of the `Float` subclasses.
 
+The assignment operator `:=` can be used to assign a literal number to a variable.
+For example:
+
+```smalltalk
+n := 1.
+n := n + 1
+```
+
+There are no shorthand assignment operators like `+=` for numbers.
+
+### Fractions
+
 When the message `/` is sent to an integer with an integer argument,
 the result is a `Fraction` object.
 Operations of fractions always return a new `Fraction` object
@@ -2173,12 +2280,14 @@ For example, `Character space`, `Character tab`, and `Character cr`.
 
 ### Strings
 
+A `String` is a mutable collection of characters.
+
 The following list depicts the class hierarchy for character data:
 
 - `CharacterSequence`
   - `String`
     - `Symbol`
-  - `UnicodeString`
+  - `UnicodeSmtring`
     - `UnicodeSymbol`
 
 Strings are represented by the `String` class.
@@ -2622,6 +2731,7 @@ b value: 2. "result is 21"
 To use a block as an iteration condition,
 use the methods `whileTrue`, `whileFalse`, `whileNotNil`, and `whileNil`
 that are defined in the `BlockClosure` class.
+Note that these are not methods on the `Boolean` class.
 
 For example:
 
@@ -3654,3 +3764,5 @@ myBlock value: 2 value: 3.
 - Submit a PR to this for the typos you found in
   https://github.com/Cuis-Smalltalk/TheCuisBook.
 - Try https://github.com/Cuis-Smalltalk/DatabaseSupport.
+- Is there a library of collection types for Smalltalk
+  that support structural sharing for immutability?
