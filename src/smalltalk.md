@@ -537,17 +537,6 @@ and display the result after it in the workspace:
 - Remove the output from the Workspace window
   by pressing ctrl-z to undo adding it.
 
-## File System Access
-
-In macOS, Cuis Smalltalk will prompt repeated for permission to access
-various file system folders.
-See this <a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Dev/issues/282"
-target="_blank">issue</a>.
-
-TODO: Harvest information about file system operations from this video.
-<a href="https://youtu.be/stMoWMlLVzk?si=_3rmJFPkZ2g4ZIIV"
-target="_blank">squeak smalltalk tutorial: file handling part 1</a>.
-
 ## Images
 
 A Smalltalk image contains the definitions of system-provided classes,
@@ -1357,12 +1346,12 @@ with instance variables `height` and `width`.
 
 We can define the class method `height:width:`
 that provides an alternate way to create objects as follows.
-This assumes we can send the message `#initializeHeight:width:`
+This assumes we can send the message `#setHeight:width:`
 (in the `private` message category) to instances.
 
 ```smalltalk
 height: aHeight width: aWidth
-    ^self new initializeHeight: aHeight width: aWidth
+    ^self new setHeight: aHeight width: aWidth
 ```
 
 We can then define the following instance methods:
@@ -1372,7 +1361,7 @@ initialize
     height := 1.
     width := 1
 
-initializeHeight: aHeight width: aWidth
+setHeight: aHeight width: aWidth
     height := aHeight.
     width := aWidth
 
@@ -1413,7 +1402,7 @@ To enforce immutability of objects:
 
   ```smalltalk
   height: aHeight width: aWidth
-      ^self new initializeHeight: aHeight width: aWidth; beImmutable; yourself
+      ^self new setHeight: aHeight width: aWidth; beImmutable; yourself
   ```
 
   Note the use of `yourself` to return the current object
@@ -1541,13 +1530,13 @@ The `VCircle` class can have the following class method for creating instances:
 
 ```smalltalk
 radius: aNumber
-    ^self new initializeRadius: aNumber-
+    ^self new setRadius: aNumber-
 ```
 
 The `VCircle` class can have the following instance methods:
 
 ```smalltalk
-initializeRadius: aNumber
+setRadius: aNumber
     radius := aNumber
 
 area
@@ -1558,13 +1547,13 @@ The `VRectangle` class can have the following class method for creating instance
 
 ```smalltalk
 height: aHeight width: aWidth
-    ^self new initializeHeight: aHeight width: aWidth
+    ^self new setHeight: aHeight width: aWidth
 ```
 
 The `VRectangle` class can have the following instance methods:
 
 ```smalltalk
-initializeHeight: aHeight width: aWidth
+setHeight: aHeight width: aWidth
     height := aHeight.
     width := aWidth
 
@@ -1842,7 +1831,7 @@ initialize
     Count := Count + 1! !
 
 !Dog methodsFor: 'initialization' stamp: 'RMV 6/11/2024 20:00:43'!
-initializeName: aName breed: aBreed
+setName: aName breed: aBreed
     name := aName.
     breed := aBreed! !
 
@@ -1873,7 +1862,7 @@ initialize
 
 !Dog class methodsFor: 'initialization' stamp: 'RMV 6/12/2024 10:43:52'!
 name: aName breed: aBreed
-    ^self new initializeName: aName breed: aBreed! !
+    ^self new setName: aName breed: aBreed! !
 
 
 Dog initialize!
@@ -2794,13 +2783,13 @@ The following class method is used to create an instance:
 
 ```smalltalk
 lower: aLower upper: anUpper
-    ^self new initializeLower: aLower upper: anUpper
+    ^self new setLower: aLower upper: anUpper
 ```
 
 The following instance method is used by the class method above:
 
 ```smalltalk
-initializeLower: aLower upper: anUpper
+setLower: aLower upper: anUpper
     super initialize.
     lowerBound := aLower.
     upperBound := anUpper
@@ -3413,6 +3402,11 @@ to generate accessor methods for each instance variable.
 
 ## File I/O
 
+In macOS, Cuis Smalltalk may prompt repeatedly for permission to access
+various file system folders.
+See this <a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Dev/issues/282"
+target="_blank">issue</a>.
+
 To create a file, send the `#asFileEntry` message
 to a string that contains the file name.
 The file is assumed to be in the '\*-UserFiles' directory.
@@ -3436,6 +3430,13 @@ fileEntry forceWriteStreamDo: [ :fileStream |
     fileStream newLine.
     fileStream nextPutAll: 'line #2'
 ].
+```
+
+Another way to obtain a stream for writing and reading a file at a given path
+is the following:
+
+```smalltalk
+stream := FileStream fileNamed: 'some-file-path'
 ```
 
 To read the entire contents of a text file into a string:
@@ -3471,6 +3472,10 @@ fileEntry readStreamDo: [ :fileStream |
     ]
 ]
 ```
+
+TODO: Harvest more information about file system operations from this video.
+<a href="https://youtu.be/stMoWMlLVzk?si=_3rmJFPkZ2g4ZIIV"
+target="_blank">squeak smalltalk tutorial: file handling part 1</a>.
 
 ## Deploying Applications
 
@@ -3576,7 +3581,7 @@ Also see the
 
 See the <a href="https://book.seaside.st/book" target="_blank">Seaside Book</a>.
 
-### Send HTTP Requests
+### Sending HTTP Requests
 
 The `WebClient` class defines class methods that send HTTP requests.
 For example:
@@ -3697,7 +3702,7 @@ myBlock value: 2 value: 3.
   "Installed Packages" window, select the package, and click the "save" button?
 - Do any collection classes support structural sharing for immutability support?
 - What package can you install to get a color picker?
-- Are there any linting tools for Smalltalk?
+- Are there any linting and formatting tools for Smalltalk?
 - Learn how to write and distribute command-line utilities/apps in Smalltalk.
 - Learn how to write and distribute GUI apps in Smalltalk.
 - Learn how to write and distribute web apps in Smalltalk.
