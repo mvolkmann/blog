@@ -608,7 +608,7 @@ target="_blank">Cuis-Smalltalk-Tools</a> repository.
 After this is done, selecting this menu item again
 will ask for permission to install the tool.
 After this is done, selecting this menu item again
-will open a Class Comment Browser window.
+will open a Class Comment Browser.
 
 The left pane displays an alphabetical list of class names
 where each name is preceded by a disclosure triangle.
@@ -617,7 +617,7 @@ Clicking a disclosure triangle expands the class to show a
 numbered list of comments found in the source code for the class.
 Clicking any of those displays the comment text in the right pane.
 
-It's probably more useful to open a System Browser window,
+It's probably more useful to open a System Browser,
 find a class of interest, an view the comments there.
 
 ### Terse Guide
@@ -837,7 +837,7 @@ Let's walk through an example:
 1. Click the `color` instance variable and
    note that the value is a `Color` object.
 1. Select the name "Color" and press cmb-b (Browse it)
-   to open a System Browser window focused on the `Color` class.
+   to open a System Browser focused on the `Color` class.
 1. Click the "class" button to see a list of
    the class methods in the `Color` class.
 1. Click the method category "named colors"
@@ -859,9 +859,9 @@ where `self` refers to the selected object in the top pane.
 <img alt="Cuis Explore window" style="width: 40%"
   src="/blog/assets/cuis-explore-window.png?v={{pkg.version}}">
 
-### System Browser Windows
+### System Browsers
 
-System Browser windows contain four rows.
+System Browsers contain four rows.
 
 - The first (top) row contains four panes for displaying and operating on
   class categories, classes, message categories, and methods.
@@ -923,7 +923,7 @@ System Browser windows contain four rows.
   that are invoked by the selected method,
   all the way up the inheritance hierarchy.
 
-  The "hierarchy" button opens a Hierarchy Browser window
+  The "hierarchy" button opens a Hierarchy Browser
   that shows the inheritance hierarchy of the current class.
   This includes all superclass and subclasses of the current class.
 
@@ -983,7 +983,7 @@ System Browser windows contain four rows.
   Press cmd-s (Accept) to save the changes
   and the thin, red border will disappear.
 
-To open a System Browser window, click on the `WorldMorph` background,
+To open a System Browser, click on the `WorldMorph` background,
 select Open, and select Browser.
 
 To search for a class by part of its name,
@@ -992,12 +992,12 @@ Then enter part of a class name and press return.
 A popup list of matching classes will appear.
 Click one of the names to browse that class.
 
-<img alt="Cuis System Browser window" style="width: 100%"
+<img alt="Cuis System Browser" style="width: 100%"
   src="/blog/assets/cuis-system-browser-window.png?v={{pkg.version}}">
 
 To browse a class, type its name (ex. String) in a Workspace window
 and press cmd-b (Browse it).
-This opens a Browser window with the class already selected.
+This opens a System Browser with the class already selected.
 
 To create a new class:
 
@@ -1063,31 +1063,31 @@ For more detail, see
 <a href="https://cuis-smalltalk.github.io/TheCuisBook/A-brief-introduction-to-the-system-Browser.html"
 target="_blank">A brief introduction to the System Browser</a>.
 
-### Hierarchy Browser Windows
+### Hierarchy Browsers
 
-When a class is selected in a System Browser window,
+When a class is selected in a System Browser,
 the class pane (second) only displays a list of classes
 defined in the selected class category.
 To also see class hierarchy of a selected class,
-open a Hierarchy Browser window by pressing cmd-h (browse hierarchy).
+open a Hierarchy Browser by pressing cmd-h (browse hierarchy).
 
-This window is similar to a System Browser window,
+This window is similar to a System Browser,
 but it omits the class categories pane and
 displays the complete class hierarchy of the selected class.
 
-Here's an example of a Hierarchy Browser window for the `Array` class:
+Here's an example of a Hierarchy Browser for the `Array` class:
 
 <img alt="Cuis Hierarchy window" style="width: 40%"
   src="/blog/assets/cuis-hierarchy-window.png?v={{pkg.version}}">
 
-### Protocol Windows
+### Protocol Browsers
 
-When a class is selected in a System Browser window,
+When a class is selected in a System Browser,
 only the methods defined directly in that class are displayed.
 To also see methods defined in superclasses,
 open a Protocol window by pressing cmd-p (browse protocol).
 
-This window is similar to a System Browser window,
+This window is similar to a System Browser,
 but it omits the class categories pane and
 displays all instance methods available on instances of the class.
 Methods defined directly on the class are in bold,
@@ -1173,15 +1173,15 @@ The Debug window will close when the end of the selected code is reached.
 
 TODO: Explain how to use these.
 
-### Process Browser Windows
+### Process Browsers
 
-Process Browser windows display a list of all the Smalltalk-related processes
+Process Browsers display a list of all the Smalltalk-related processes
 that are running.
 
 To terminate a process, select it and press cmd-t (terminate).
 This is especially useful for terminating "WebServer's listening process".
 
-<img alt="Cuis Process Browser window" style="width: 85%"
+<img alt="Cuis Process Browser" style="width: 85%"
   src="/blog/assets/cuis-process-browser-window.png?v={{pkg.version}}">
 
 ### Emergency Evaluator
@@ -1330,7 +1330,7 @@ breed: aString
 ```
 
 Accessor methods for all instance variables in a class can be generated
-by right-clicking the class name in a System Browser window
+by right-clicking the class name in a System Browser
 and selecting "more...create inst var accessors".
 
 ### Objects
@@ -2024,7 +2024,7 @@ TODO: It does not uninstall the selected package or delete the file that defines
 Create a new package for your code as described above.
 While still in the "Installed Packages" window,
 select the package and click "browse"
-to open a Browser window for the package.
+to open a System Browser for the package.
 
 ## Messages
 
@@ -2902,7 +2902,7 @@ To install some example tests:
 - Enter "test" in the filter input in the upper-left.
 - Select one of more of the packages whose names begin with "Test-".
 - Click the "install package" button.
-- View the code for those packages in a System Browser window.
+- View the code for those packages in a System Browser.
 
 ## Color
 
@@ -3407,7 +3407,7 @@ p firstName print.
 
 Getting and setting instance variables in this way is quite inefficient.
 A better approach is to generate accessor methods
-by right-clicking the `Person` class in a System Browser window
+by right-clicking the `Person` class in a System Browser
 and selecting "more...create inst var accessors"
 to generate accessor methods for each instance variable.
 
@@ -3772,3 +3772,5 @@ myBlock value: 2 value: 3.
 - Is there a library of collection types for Smalltalk
   that support structural sharing for immutability?
 - Is there a way to revert changes to more than one method at a time?
+- Where is the `new` method defined? Does that
+  explicitly call `initialize` on the newly created object?
