@@ -2140,22 +2140,34 @@ to send a message specified by the symbol that follows `perform:`.
 This is useful in sitations where the message to send
 needs to be determined at run-time.
 
-For example, the following pairs of expressions are equivalent:
+Another more verbose alternative it to use the `MessageSend` class.
+
+For example, the following sets of expressions are equivalent:
 
 ```smalltalk
-4 sqrt. "2"
-4 perform: #sqrt. "2"
+"These demostrates sending a unary message. Each gives the result 2."
+4 sqrt.
+4 perform: #sqrt.
+(MessageSend receiver: 4 selector: #sqrt) value.
 
-2 * 3. "6"
-2 perform: #* with: 3. "6"
+"These demonstrate sending a binary message. Each gives the result 6."
+2 * 3.
+2 perform: #* with: 3.
+(MessageSend receiver: 2 selector: #* argument: 3) value.
 
-'foobarbaz' findString: 'BAR' startingAt: 1 caseSensitive: false. "4"
+"These demonstrate sending a keyword message. Each gives the result 4."
+'foobarbaz' findString: 'BAR' startingAt: 1 caseSensitive: false.
 'foobarbaz'
     perform: #findString:startingAt:caseSensitive:
-    with: 'BAR' with: 1 with: false. "4"
+    with: 'BAR' with: 1 with: false.
+(MessageSend
+    receiver: 'foobarbaz'
+    selector: #findString:startingAt:caseSensitive:
+    arguments: #('BAR' 1 false)
+) value.
 ```
 
-To provide more than three arguments, use `#perform:withArguments`.
+To provide more than three keyword arguments, use `#perform:withArguments`.
 
 ## Reserved Words
 
