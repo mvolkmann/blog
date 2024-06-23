@@ -1939,9 +1939,7 @@ The GitHub account "Cuis-Smalltalk" provides many package repositories,
 32 as of June 2024.
 Sadly the documentation included in the `README.md` files of these packages
 is quite sparse.
-To install one of these, clone the repository, open a Workspace window,
-enter `Feature require: 'PackageName', and "Do it".
-TODO: Which directories are searched for packages?
+These repositories must be cloned in order to install them.
 
 For additional packages, search GitHub for
 repositories whose names begin with "Cuis-Smalltalk-".
@@ -1962,10 +1960,18 @@ Let's learn where the `Feature require:` method searches for packages.
 
 1. Browse the `Feature` class.
 1. Click the `require` method on the class side.
-1. Select the `FeatureRequirement` class and press cmd-b to "Browse it".
-1. Select the `findPackageFileAsReqOf:` method on the instance side.
-1. Note that it sends the message `placesToLookForPackagesDo:`.
-1. Click that method on the instance side.
+1. Note that this sends the `#name:` message to the `FeatureRequirement` class
+   to create an instance and then sends it the `#require` message.
+1. Select the `FeatureRequirement` class.
+1. Select the `require` method on the instance side.
+1. Note that this sends the
+   `#requireUnlessIn:main:requiringFeature:allRequiringFeatures:` message
+   to `self`.
+1. Select that method on the instance side.
+1. Note that this sends the `#findPackageFileAsReqOf:` message to `self`.
+1. Select that method on the instance side.
+1. Note that this sends the `#placesToLookForPackagesDo:` message to `self`.
+1. Select that method on the instance side.
 1. Note the following comments in this code:
 
    - "Look inside my own folder"
