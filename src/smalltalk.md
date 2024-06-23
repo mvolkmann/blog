@@ -897,9 +897,9 @@ System Browser windows contain four rows.
   This enables maintaining the view in the current System Browser and
   navigating somewhere relative to that location in a new System Browser.
 
-  The "senders" button ...
+  The "senders" button ... TODO
 
-  The "implementors" button ...
+  The "implementors" button ... TODO
 
   The "versions" button opens a "Recent versions" window (a.k.a Versions Browser)
   that displays a list of time stamps for recent versions of the method.
@@ -918,9 +918,14 @@ System Browser windows contain four rows.
   The "compare to current" button displays the same information
   as the lineDiffs button, but in a new window.
 
-  The "inheritance" button ...
+  The "inheritance" button opens an "Inheritance of" window
+  that shows the superclass methods of the same name
+  that are invoked by the selected method,
+  all the way up the inheritance hierarchy.
 
-  The "hierarchy" button ...
+  The "hierarchy" button opens a Hierarchy Browser window
+  that shows the inheritance hierarchy of the current class.
+  This includes all superclass and subclasses of the current class.
 
   The "inst vars" button displays a drop-down list containing
   all the instance variables in the current class.
