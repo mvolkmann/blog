@@ -1455,10 +1455,16 @@ Methods are associated with a specific class.
 Instance methods handle messages sent to objects instantiated from the class.
 Class methods handle messages sent to the class.
 
-Parameter names typically begin with "a" or "an".
-For example, `aScore`, `aName`, or `aDog`.
-Sometimes the names indicate the expected object type.
+In keyword methods, parameter variable names typically
+indicate the expected object type and begin with "a" or "an".
 For example, `aNumber`, `aString`, or `anArray`.
+This works well because the keyword that
+precedes the parameter variable indicates its meaning.
+For example, `name: aString score: aNumber`.
+
+When multiple parameters have the same data type, a good way to
+name them is to include their meaning and type in the name.
+For example, `latitude: latNumber longitude: lngNumber`.
 
 Methods that return an object are said to "answer" a value.
 For example, the instance method `asUppercase` in the `String` class
