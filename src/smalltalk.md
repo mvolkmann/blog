@@ -537,6 +537,26 @@ and display the result after it in the workspace:
 - Remove the output from the Workspace window
   by pressing ctrl-z to undo adding it.
 
+## Other Preferences
+
+Many supported preferences are not directly on the menu
+accessed by opening a World menu and selecting Preferences.
+To access more preferences, click "All preferences..."
+which opens a Preferences window.
+Click a preference symbol in the left pane
+to display its current value in the right pane.
+
+To change the value of a preference:
+
+- Select it in the left pane.
+- Press cmd-i (inspect) to open an Inspect window.
+- In the bottom pane, enter `value := {new-value}` and "Do it".
+- Close the Inspect window.
+- Close the Preferences window.
+
+NOTE: Changing `#prettyPrintRectangularBlocks` to `true`
+did not cause saving chnages to method code to be formatted.
+
 ## Images
 
 A Smalltalk image contains the definitions of system-provided classes,
@@ -853,7 +873,8 @@ where `self` refers to the selected object in the top pane.
 System Browsers contain four rows.
 
 - The first (top) row contains four panes for displaying and operating on
-  class categories, classes, message categories, and methods.
+  lists of class categories, classes, message categories, and methods.
+  Clicking an item toggles whether it is selected.
 
   Selecting a class category in the first pane
   displays the classes in that category in the second pane.
