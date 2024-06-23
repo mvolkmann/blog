@@ -2140,7 +2140,10 @@ to send a message specified by the symbol that follows `perform:`.
 This is useful in sitations where the message to send
 needs to be determined at run-time.
 
-Another more verbose alternative it to use the `MessageSend` class.
+Another alternative it to use the `MessageSend` class.
+The class methods `:receiver:selector`, `:receiver:selector:argument:`, and
+`:receiver:selector:arguments:` return an object that describes a message send.
+The object can be passed around and the actual send can be triggered later.
 
 For example, the following sets of expressions are equivalent:
 
