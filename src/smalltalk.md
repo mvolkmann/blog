@@ -3622,23 +3622,23 @@ To build a Squeak VM for macOS:
 
 To run a command-line app:
 
-- Obtain or create a Smalltalk image file.
-  For example, Cuis Smalltalk provides the base image file
-  `Cuis-Smalltalk-Dev/CuisImage/Cuis7.1-6452.image`.
+1. Obtain or create a Smalltalk image file.
+   For example, Cuis Smalltalk provides the base image file
+   `Cuis-Smalltalk-Dev/CuisImage/Cuis7.1-6452.image`.
 
-- Create a `.st` file containing Smalltalk code.
-  For example, the file `demo.st` could contain the following:
+2. Create a `.st` file containing Smalltalk code.
+   For example, the file `demo.st` could contain the following:
 
-  ```smalltalk
-  | stdout |
-  stdout := StdIOWriteStream.
-  stdout nextPutAll: 'Hello, World!'
-  Smalltalk os snapshot: false andQuit: true.
-  ```
+   ```smalltalk
+   | stdout |
+   stdout := StdIOWriteStream.
+   stdout nextPutAll: 'Hello, World!'
+   Smalltalk os snapshot: false andQuit: true.
+   ```
 
-- Run the Smalltalk VM in headless mode,
-  giving it an image and a file of Smalltalk code. For example,
-  `./squeak-vm -headless Cuis-Smalltalk-Dev/CuisImage/Cuis7.1-6452.image demo.st`
+3. Run the Smalltalk VM in headless mode,
+   giving it an image and a file of Smalltalk code. For example,
+   `./squeak-vm -headless Cuis-Smalltalk-Dev/CuisImage/Cuis7.1-6452.image demo.st`
 
 ## Games
 
