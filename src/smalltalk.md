@@ -3603,7 +3603,14 @@ Those VMs can be obtained from the
 <a href="https://squeak.org/development/#virtual-machines"
 target="_blank">Squeak Development</a> page in the "Virtual Machines" section.
 
-To build a Squeak VM for macOS:
+Browse <a href="https://github.com/OpenSmalltalk/opensmalltalk-vm"
+target="_blank">OpenSmalltalk</a>.
+Under "Releases" on the right side, click "Latest".
+Click the proper file for your operating system and processor.
+For example, `squeak.cog.spur_macos64ARMv8.dmg`.
+Double-click the downloaded file to install it.
+
+Alternatively, to build a Squeak VM for macOS:
 
 1. Open a Terminal and cd to the directory where the VM will be created.
 1. Enter `git clone https://github.com/OpenSmalltalk/opensmalltalk-vm.git`
