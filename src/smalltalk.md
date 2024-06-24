@@ -3724,9 +3724,17 @@ for editing code in System Browsers.
 Here is what I have tried so far.
 
 - Create a subclass of the `SmalltalkEditor` class called `VimEditor`.
+
 - Add the instance variable `mode`
   that will hold the string "normal" or "insert".
-- Initialize `mode` to `'insert'`.
+
+- Initialize `mode` to `'insert'` by adding the following instance method:
+
+  ```smalltalk
+  initialize
+      mode := 'insert'.
+  ```
+
 - Implement the class method `initializeShortcuts` as follows:
 
   ```smalltalk
@@ -3771,12 +3779,12 @@ Here is what I have tried so far.
       ^ inCommandMode.
   ```
 
-How can I made the System Browser using VimEditor
-instead of SmalltalkEditor in its bottom pane?
+- TODO: Determine how to modify the System Browser to use `VimEditor`
+  instead of `SmalltalkEditor` in its bottom pane.
+
+- TODO: Determine how to modify the `xKey:` method to really delete a character.
 
 Changes will likely have no effect until the image is saved and restarted.
-
-Add the instance variable `mode` to the `Editor` class.
 
 ## Web Development
 
