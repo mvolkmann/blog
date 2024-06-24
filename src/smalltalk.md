@@ -554,9 +554,6 @@ To change the value of a preference:
 - Close the Inspect window.
 - Close the Preferences window.
 
-NOTE: Changing `#prettyPrintRectangularBlocks` to `true`
-did not cause saving chnages to method code to be formatted.
-
 ## Images
 
 A Smalltalk image contains the definitions of system-provided classes,
@@ -996,9 +993,16 @@ System Browsers contain four rows.
   Press cmd-s (Accept) to save the changes
   and the thin, red border will disappear.
 
-To automatically format code on save,
+To automatically display formatted code,
 enter the following in a Workspace and "Do it":
 `Preferences at: #browseWithPrettyPrint put: true`.
+This does not take effect in existing windows such as System Browsers,
+but does in newly opened windows.
+Pretty printing is be applied when code is initially displayed,
+and again every time it is saved.
+However, it does not affect the actual use of whitespace, so
+code written to files in a fileOut or package is not affected.
+I wish it was.
 
 To open a System Browser, click on the `WorldMorph` background,
 select Open, and select Browser.
