@@ -3617,6 +3617,8 @@ To build a Squeak VM for macOS:
 1. Enter `./mvm -A`. This will run for around 10 minutes and
    generate an extreme amount of output.
 1. Enter `chmod a+x Squeak.app`
+1. Create a symbolic link to the virtual machine that is inside this app
+   by entering `ln -s "./Squeak.app/Contents/MacOS/Squeak" squeak-vm`.
 
 To run a command-line app:
 
@@ -3625,7 +3627,7 @@ To run a command-line app:
   `Cuis-Smalltalk-Dev/CuisImage/Cuis7.1-6452.image`.
 
 - Create a `.st` file containing Smalltalk code.
-  For example:
+  For example, the file `demo.st` could contain the following:
 
   ```smalltalk
   | stdout |
@@ -3636,7 +3638,7 @@ To run a command-line app:
 
 - Run the Smalltalk VM in headless mode,
   giving it an image and a file of Smalltalk code. For example,
-  `./Squeak.app -headless Cuis-Smalltalk-Dev/CuisImage/Cuis7.1-6452.image demo.st`
+  `./squeak-vm -headless Cuis-Smalltalk-Dev/CuisImage/Cuis7.1-6452.image demo.st`
 
 ## Games
 
