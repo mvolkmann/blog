@@ -3594,6 +3594,50 @@ Also see
 <a href="https://www.youtube.com/watch?v=b3oGOMCjKU8&list=PLu8vLCSA-4hklsvT9W6ruintbdx_K0DYW&index=2&t=53s"
 target="_blank">Make a standalone click-&-run Smalltalk application for macOS</a>.
 
+### Running Headless
+
+To run Smalltalk programs that are command-line utilities, apps, and servers,
+download a Smalltalk virtual machine that can be invoked from the command-line.
+Squeak virtual machines can be used to run both Squeak and Cuis programs.
+Those VMs can be obtained from the
+<a href="https://squeak.org/development/#virtual-machines"
+target="_blank">Squeak Development</a> page in the "Virtual Machines" section.
+
+To build a Squeak VM for macOS:
+
+1. Open a Terminal and cd to the directory where the VM will be created.
+1. Enter `git clone https://github.com/OpenSmalltalk/opensmalltalk-vm.git`
+1. Enter `cd opensmalltalk-vm`
+1. Enter `./scripts/updateSCCSVersions`
+1. Enter `cd building`
+1. `cd` to the appropriate subdirectory for the target OS and processor.
+   For example, `macos64ARMv8`.
+1. See the instructions in the file "HowToBuild".
+1. Enter `cd squeak.coq.spur`
+1. Enter `./mvm -A`. This will run for around 10 minutes and
+   generate an extreme amount of output.
+1. Enter `chmod a+x Squeak.app`
+
+To run a command-line app:
+
+- Obtain or create a Smalltalk image file.
+  For example, Cuis Smalltalk provides the base image file
+  `Cuis-Smalltalk-Dev/CuisImage/Cuis7.1-6452.image`.
+
+- Create a `.st` file containing Smalltalk code.
+  For example:
+
+  ```smalltalk
+  | stdout |
+  stdout := StdIOWriteStream.
+  stdout nextPutAll: 'Hello, World!'
+  Smalltalk os snapshot: false andQuit: true.
+  ```
+
+- Run the Smalltalk VM in headless mode,
+  giving it an image and a file of Smalltalk code. For example,
+  `./Squeak.app -headless Cuis-Smalltalk-Dev/CuisImage/Cuis7.1-6452.image demo.st`
+
 ## Games
 
 Some games implemented in Cuis Smalltalk can be found in the GitHub repository
