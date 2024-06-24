@@ -996,6 +996,10 @@ System Browsers contain four rows.
   Press cmd-s (Accept) to save the changes
   and the thin, red border will disappear.
 
+To automatically format code on save,
+enter the following in a Workspace and "Do it":
+`Preferences at: #browseWithPrettyPrint put: true`.
+
 To open a System Browser, click on the `WorldMorph` background,
 select Open, and select Browser.
 
@@ -3791,7 +3795,7 @@ myBlock value: 2 value: 3.
   "Installed Packages" window, select the package, and click the "save" button?
 - Do any collection classes support structural sharing for immutability support?
 - What package can you install to get a color picker?
-- Are there any linting and formatting tools for Smalltalk?
+- Are there any linting tools for Smalltalk?
 - Learn how to write and distribute command-line utilities/apps in Smalltalk.
 - Learn how to write and distribute GUI apps in Smalltalk.
 - Learn how to write and distribute web apps in Smalltalk.
