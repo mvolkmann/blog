@@ -98,7 +98,7 @@ that was created with "pg", I got the error {% aTargetBlank
 "TypeError: client.unsafe is not a function" %}.
 But they work with the "postgres" package.
 
-When I tried to run drizzle-kit commands using the dialog "postgres",
+When I tried to run drizzle-kit commands using the package "postgres",
 I got "error: unknown command '\*:postgres'".
 But they work with the "pg" package.
 
