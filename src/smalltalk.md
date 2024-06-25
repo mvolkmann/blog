@@ -3628,34 +3628,43 @@ Alternatively, to build a Squeak VM for macOS:
 1. Create a symbolic link to the virtual machine that is inside this app
    by entering `ln -s "./Squeak.app/Contents/MacOS/Squeak" squeak-vm`.
 
-To run a command-line app using the VM that is bundle with Cuis Smalltalk:
+To simplify running files containing Smalltalk code from the command line,
+create a script named "cuis" in a directory in your PATH
+containing the following:
 
-1. Get help on options by entering the following:
+```bash
+#!/usr/bin/env bash
+# Runs a file containing Smalltalk code in headless mode using Cuis Smalltalk.
 
-   ```bash
-   ./Cuis-Smalltalk-Dev/CuisVM.app/Contents/MacOS/Squeak -help
-   ```
+if [ $# -ne 1 ]; then
+  echo usage: cuis {file-name}
+  exit 1
+fi
 
-1. Create a `.st` file containing Smalltalk code.
-   For example, the file `demo.st` could contain the following:
+CUIS_DIR=$LANG_DIR/smalltalk/Cuis-Smalltalk-Dev
+VM=$CUIS_DIR/CuisVM.app/Contents/MacOS/Squeak
+IMAGE=$CUIS_DIR/CuisImage/Cuis7.1-6452.image
+$VM -headless $IMAGE -s $1
+```
 
-   ```smalltalk
-   | stdout |
-   stdout := StdIOWriteStream.
-   stdout nextPutAll: 'Hello, World!'; newLine.
-   Smalltalk quit
-   ```
+Create `.st` files containing Smalltalk code.
+For example, the file `demo.st` could contain the following:
 
-1. Run the Smalltalk VM in headless mode,
-   giving it an image and a file of Smalltalk code
-   with a command like the following:
+```smalltalk
+| stdout |
+stdout := StdIOWriteStream.
+stdout nextPutAll: 'Hello, World!'; newLine.
+Smalltalk quit
+```
 
-   ```bash
-   ./Cuis-Smalltalk-Dev/CuisVM.app/Contents/MacOS/Squeak \
-     -headless \
-     Cuis-Smalltalk-Dev/CuisImage/Cuis7.1-6452.image \
-     -s command-line.st
-   ```
+To run this, enter `cuis demo.st`.
+
+To get help on options, cd to your `Cuis-Smalltalk-Dev` directory
+and enter the following:
+
+```bash
+./CuisVM.app/Contents/MacOS/Squeak -help
+```
 
 For more detail see the `SystemDictionary` class
 `displayCommandLineUsageOn:` class method.
