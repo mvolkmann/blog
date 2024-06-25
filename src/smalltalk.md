@@ -3596,14 +3596,15 @@ target="_blank">Make a standalone click-&-run Smalltalk application for macOS</a
 
 ### Running Headless
 
-To run Smalltalk programs that are command-line utilities, apps, and servers,
-download a Smalltalk virtual machine that can be invoked from the command-line.
-Squeak virtual machines can be used to run both Squeak and Cuis programs.
-Those VMs can be obtained from the
-<a href="https://squeak.org/development/#virtual-machines"
-target="_blank">Squeak Development</a> page in the "Virtual Machines" section.
+THIS WORKS!
 
-Browse <a href="https://github.com/OpenSmalltalk/opensmalltalk-vm"
+To run Smalltalk programs that are command-line utilities, apps, and servers,
+use the Smalltalk virtual machine that is bundled inside the macOS app
+`CuisVM.app` that is included in the Cuis-Smalltlk-Dev GitHub repository.
+This is actually a Squeak virtual machine.
+
+Squeak VMs can also be obtained from
+<a href="https://github.com/OpenSmalltalk/opensmalltalk-vm"
 target="_blank">OpenSmalltalk</a>.
 Under "Releases" on the right side, click "Latest".
 Click the proper file for your operating system and processor.
@@ -3627,25 +3628,37 @@ Alternatively, to build a Squeak VM for macOS:
 1. Create a symbolic link to the virtual machine that is inside this app
    by entering `ln -s "./Squeak.app/Contents/MacOS/Squeak" squeak-vm`.
 
-To run a command-line app:
+To run a command-line app using the VM that is bundle with Cuis Smalltalk:
 
-1. Obtain or create a Smalltalk image file.
-   For example, Cuis Smalltalk provides the base image file
-   `Cuis-Smalltalk-Dev/CuisImage/Cuis7.1-6452.image`.
-
-2. Create a `.st` file containing Smalltalk code.
+1. Create a `.st` file containing Smalltalk code.
    For example, the file `demo.st` could contain the following:
 
    ```smalltalk
    | stdout |
    stdout := StdIOWriteStream.
    stdout nextPutAll: 'Hello, World!'
-   Smalltalk os snapshot: false andQuit: true.
+   Smalltalk quit
    ```
 
-3. Run the Smalltalk VM in headless mode,
-   giving it an image and a file of Smalltalk code. For example,
-   `./squeak-vm -headless Cuis-Smalltalk-Dev/CuisImage/Cuis7.1-6452.image demo.st`
+1. Get help on options by entering the following:
+
+   ```bash
+   ./Cuis-Smalltalk-Dev/CuisVM.app/Contents/MacOS/Squeak -help
+   ```
+
+1. Run the Smalltalk VM in headless mode,
+   giving it an image and a file of Smalltalk code
+   with a command like the following:
+
+   ```bash
+   ./Cuis-Smalltalk-Dev/CuisVM.app/Contents/MacOS/Squeak \
+     -headless \
+     Cuis-Smalltalk-Dev/CuisImage/Cuis7.1-6452.image \
+     -s command-line.st
+   ```
+
+For more detail see the `SystemDictionary` class
+`displayCommandLineUsageOn:` class method.
 
 ## Games
 
