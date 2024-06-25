@@ -3630,20 +3630,20 @@ Alternatively, to build a Squeak VM for macOS:
 
 To run a command-line app using the VM that is bundle with Cuis Smalltalk:
 
+1. Get help on options by entering the following:
+
+   ```bash
+   ./Cuis-Smalltalk-Dev/CuisVM.app/Contents/MacOS/Squeak -help
+   ```
+
 1. Create a `.st` file containing Smalltalk code.
    For example, the file `demo.st` could contain the following:
 
    ```smalltalk
    | stdout |
    stdout := StdIOWriteStream.
-   stdout nextPutAll: 'Hello, World!'
+   stdout nextPutAll: 'Hello, World!'; newLine.
    Smalltalk quit
-   ```
-
-1. Get help on options by entering the following:
-
-   ```bash
-   ./Cuis-Smalltalk-Dev/CuisVM.app/Contents/MacOS/Squeak -help
    ```
 
 1. Run the Smalltalk VM in headless mode,
