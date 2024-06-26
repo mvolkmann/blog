@@ -143,7 +143,9 @@ The following recent podcast episodes discuss Smalltalk:
 - <a href="https://podcasts.apple.com/us/podcast/software-unscripted/id1602572955"
   target="_blank">Smalltalk's Past, Present, and Future</a> with Juan Vuletich
 
-## Smalltalk Pros
+## Pros and Cons
+
+Smalltalk has the following pros:
 
 - It has a small, consistently applied syntax.
 - It has a great development environment consisting of tools such as
@@ -157,7 +159,7 @@ The following recent podcast episodes discuss Smalltalk:
 - It provides automatic version control.
 - It has a great web app. framework (Seaside) and a great CMS framework (Pier).
 
-## Smalltalk Cons
+Smalltalk has the following cons:
 
 - It isn't as popular as many other programming languages.
 
@@ -363,7 +365,7 @@ The GitHub repository for Cuis Smalltalk is at
   target="_blank">Cuis-Smalltalk-Dev</a>.
 As of May 2024, 96.8% of the code in the repository is written in Smalltalk.
 
-## Installing Cuis Smalltalk
+### Installing
 
 To install Cuis Smalltalk:
 
@@ -415,7 +417,7 @@ If you wish to change this:
 - Find the key "CFBundleName".
 - Change its value from "Squeak" to "Cuis".
 
-## Updating Cuis Smalltalk
+### Updating
 
 If Cuis Smalltak is started using a platform-specific shell script,
 it will automatically update to the latest version.
@@ -429,7 +431,9 @@ the steps to update are:
 - Open the World menu by clicking on the desktop.
 - Select Changes...Install New Updates.
 
-## Installing Squeak Smalltalk
+## Squeak Smalltalk
+
+To install Squeak Smalltalk:
 
 - Browse <a href="https://squeak.org" target="_blank">Squeak home</a> page.
 - Click the "Downloads" link.
@@ -441,7 +445,7 @@ On macOS:
 - Drag the application icon to the Finder "Applications" directory.
 - Double-click the `Squeak*.app` file.
 
-## Installing Pharo Smalltalk
+## Pharo Smalltalk
 
 TODO: Add this detail.
 
@@ -462,6 +466,7 @@ That will open a dialog that prompts for an image file.
 The main window renders an instance of the class `WorldMorph`.
 This is referred to as the "World".
 Clicking anywhere on the "World" opens the World menu.
+The items on this menu are described later.
 
 ### Font Size
 
@@ -474,8 +479,8 @@ will not be ideal for you. To change the font size:
 - Select a point size.
 
 The menu of font sizes will remain open, so it's easy to try various sizes.
-Once you have selecting a good size, close the menu
-by clicking anywhere on the World or the red circle.
+Once you have selected a suitable size, close the menu
+by clicking anywhere on the World or clicking the red circle.
 
 ### Full Screen
 
@@ -488,6 +493,8 @@ floating inside the window of the Smalltalk app.
 To enable full-screen mode, open the World menu
 and select Preferences ... Full screen on.
 To disable this, select Preferences ... Full screen on.
+
+TODO: Move the rest of the content in this section to later.
 
 Jumping ahead, you can add buttons to the World
 that simplify toggling full screen mode.
@@ -534,66 +541,72 @@ initialize
 
 ### Morphs
 
-All the graphical elements visible on the World are "morphs".
+All the graphical elements visible on the World are referred to as "morphs".
 
-To select a morph, click it.
+Morphs can be dragged to different locations and resized.
 
 To open an context-sensitive menu for a morph, right-click it.
 After a menu item is selected from a menu, it will close.
 
 To cause a menu to remain open so multiple selections can be made,
-clickg its push pin in the upper-right corner.
+click its push pin in the upper-right corner.
 If a menu is closed and re-opened, the push pin state will be reset.
-
-### Desktop Color
-
-One way to change the desktop color is to right-click it to open its halo,
-click the blue menu button, select "debug...inspect morph",
-click in the bottom pane, enter `self color: Color {some-color-name}`,
-and press cmd-d (Do it).
-This works with all colors except `transparent` and alpha values are ignored.
 
 ### Workspace Windows
 
 Workspace windows enable experimenting with code.
 They are somewhat like REPLs in other programming languages.
 
+To open a Workspace, open a World menu and select "Open...Browser".
+
 Enter any number of expressions separated by periods.
 
-To prepare to execute lines of code, select them or
+To prepare to execute expressions, select them or
 place the cursor at the end of a single-line expression.
 
 To execute the code for its side effects, press cmd-d (Do it).
+For example, enter the following and press cmd-d to set a variable:
+
+```smalltalk
+message := 'Hello, Smalltalk!'
+```
 
 To execute the code and print the result of the last expression
 inside the Workspace, press cmd-p (Print it).
 The output will be selected,
 so it can be removed by pressing the delete key.
+For example, enter the following and press cmd-p to get the output `6`:
 
-For example, enter `2 * 3` and press cmd-p to get the output `6`.
+```smalltalk
+2 * 3
+```
 
 You will use "Do it" and "Print it" often, so memorize their keyboard shortcuts.
 
-If the code goes into an infinite loop, break out of it by pressing cmd-period.
+If the code goes into an infinite loop, press cmd-period to break out of it.
 
 ### Transcript Windows
 
-This is a read-only window displays output written to it.
+Transcript windows provide a read-only window display of output written to it.
 
-One way to do this is to send `Transcript show: <object>`,
+One way to write to the Transcript is to execute `Transcript show: <object>`,
 perhaps in a Workspace window.
 This can output any kind of object
 because every object has a string representation.
 
-Another way is to use the `print` method in the `CharacterSequence` class
-which is the superclasss of the `String` class.
-This executes `Transcript show: self; newLine`.
+Another way to write to the Transcript is to
+send the `#print` message to an object.
 For example, `'Hello World!' print`.
 
-The `print` message can be sent to strings, symbols,
-and any object that has a `printString` method.
+The `print` method works with any kind of object because it is
+implemented in the `Object` class which is a superclass of all classes.
+This executes `Transcript show: self; newLine`.
+For objects of some classes such as `Boolean`, `Number`, `String`, and `Array`,
+their value will be printed.
+For other objects, only their class name will be printed.
 
-An even better approach is to add the following method to the `Object class:
+For debugging purposes, a better approach is to
+add the following instnace method to the `Object class:
 
 ```smalltalk
 logAs: aString
@@ -615,6 +628,7 @@ If there is more than one `Transcript` window, all of them will be cleared.
 
 TODO: Why does this window contain the word "Transcript" in its content?
 
+TODO: Change this image to one that shows ouptut from the examples given above.
 <img alt="Cuis Transcript window" style="width: 80%"
   src="/blog/assets/cuis-transcript-window.png?v={{pkg.version}}">
 
@@ -3233,6 +3247,14 @@ To embed a morph into another (such as a LayoutMorph):
 - click the blue circle on the top
 - select "embed into" ... {parent morph name}
   (typically LayoutMorph)
+
+### Desktop Color
+
+One way to change the desktop color is to right-click it to open its halo,
+click the blue menu button, select "debug...inspect morph",
+click in the bottom pane, enter `self color: Color {some-color-name}`,
+and press cmd-d (Do it).
+This works with all colors except `transparent` and alpha values are ignored.
 
 ### LayoutMorph
 
