@@ -183,15 +183,18 @@ The following recent podcast episodes discuss Smalltalk:
 - Classes are global and not in namespaces, so all class names must be unique.
 
   Using class name prefixes is sometimes recommended.
-  This is important for using Squeak packages and Monticello.
-  Squeak has a prefix registry in the wiki.
-  TODO: Add a link to this!
+  These use 1, 2, or 3 capital letters.
+  Prefixes are important for packages intended to be reused by others.
+  Squeak has a <a href="http://wiki.squeak.org/squeak/3318"
+  target="_blank">prefix registry</a> in its wiki.
+  Unfortunately it was last updated in 2010.
 
 - Immutability is not favored.
 
   While it is possible to define Smalltalk classes whose objects are immutable,
   this is not common.
-  This will feel wrong to developers that prefer functional programming.
+  The lack of focus on immutability will feel wrong
+  to developers that prefer functional programming.
 
 - Application deployment is tedious.
 
@@ -205,7 +208,9 @@ The following recent podcast episodes discuss Smalltalk:
   However, Smalltalk does do incremental compiling when methods are saved,
   so it finds syntax errors before runtime, unlike most scripting languages.
 
-- All the code for a project is stored in one big image file (often over 30 MB).
+- All the code for a project is stored in one big image file.
+  The base image for Cuis Smalltalk is 19 MB, but installing
+  optional packages can easily increase the size to around 200 MB.
   However, it is common to store custom code and modifications to
   provided classes in a "file out" or package that can be
   shared with other developers and installed into fresh images.
@@ -224,41 +229,79 @@ The following recent podcast episodes discuss Smalltalk:
   that is used by some modern programming languages.
   From this point on, most of the implementation was provided by Dan Ingalis.
 
-- Smalltalk-72
+- Smalltalk-76
 
   This version added most of GUI tools present in current versions of Smalltalk.
 
 - Smalltalk-80
 
-  This version added support for metaclasses
-  of everything, including classes, could be treated as an object.
+  This version added support for metaclasses of everything,
+  including classes, so everything could be treated as an object.
   This was the first version of Smalltalk that was shared outside of PARC.
 
 - ANSI Smalltalk
 
   This became the standard language reference for Smalltalk in 1998.
 
-- Squeak
-- VisualWorks
-- ObjectWorks
-- ParcPlace Systems for Unix and Sun systems
-- Digitalk for Windows and OS/2 systems
-- Enfin
-- Cincom
-- GemTalk
-- Etoys for the One Laptop per Child (OLPC) project
-- GNU Smalltalk
-- Pharo - forked from Squeak with goal to be more comprehensive
-- Cuis - forked from Squeak with goal to remain small and easy to learn
-
-Both Pharo and Cuis began as forks of Squeak
-after maintenance of Squeak was turned over to the community
-and there was a lack of concensus on its future goals.
-
 ## Implementations
 
-There are many Smalltalk implementations.
-The most popular include:
+The following implementations of Smalltalk
+were created after those listed above in the "History" section.
+
+- Squeak
+
+  This was the first popular implementation that was free and open source.
+
+- VisualWorks
+
+- ObjectWorks
+
+- ParcPlace Systems for Unix and Sun systems
+
+- Digitalk for Windows and OS/2 systems
+
+- Enfin
+
+- Cincom
+
+- GemTalk
+
+- Etoys
+
+  This was created for the One Laptop per Child (OLPC) project.
+
+- GNU Smalltalk
+
+  This uses text files for code rather than
+  providing a GUI environment that uses an image file.
+
+- <a href="https://amber-lang.net" target="_blank">Amber</a>
+
+  This is a language that is "deeply inspired by Smalltalk".
+  It compiles to JavaScript.
+
+- <a href="https://github.com/dolphinsmalltalk" target="_blank">Dolphin Smalltalk</a>,
+  only for Microsoft Windows
+
+- <a href="https://www.gnu.org/software/smalltalk/" target="_blank">GNU Smalltalk</a>
+
+- <a href="https://github.com/nikboyd/hoot-smalltalk#hoot-smalltalk" target="_blank">Hoot Smalltalk</a>
+
+  This runs on the Java Virtual Machine and uses some Java features.
+
+- <a href="https://www.cincomsmalltalk.com/main/" target="_blank">Cincom Smalltalk</a>
+
+- <a href="https://www.instantiations.com/vast-platform/" target="_blank">VAST Platform</a>
+
+  VAST stands for "VisualAge SmallTalk" and is provided by Instantiations.
+
+- <a href="https://gemtalksystems.com/products/gs64/" target="_blank">GemStone/S</a>
+
+- Pharo - forked from Squeak with goal to be more comprehensive
+
+- Cuis - forked from Squeak with goal to remain small and easy to learn
+
+The most popular Smalltalk implementations include the following:
 
 - <div class="row">
     <a href="https://squeak.org" target="_blank">Squeak (2,832 classes)</a>
@@ -278,57 +321,47 @@ The most popular include:
       src="/blog/assets/cuis-smalltalk-logo.png?v={{pkg.version}}">
   </div>
 
-  Juan Vuletich began work on Cuis Smalltalk began in 2005
-  and version 1.0 was released in March 2009.
-  He has been active in the Smalltalk community since 1997.
-
-  The objectives of Cuis Smalltalk are to:
-
-  - strive for the simplicity of Smalltalk-80
-  - include a minimal number of classes required for the kernel,
-    a GUI framework, and development tools
-  - create a system that is good for learning and experimenting
-
-  The number of predefined classes in each implementation above
-  were obtained by printing the result of `Smalltalk allClasses size`
-  with latest versions as of June 10, 2024.
-
 Squeak, Pharo, and Cuis all use the MIT license.
+Both Pharo and Cuis began as forks of Squeak
+after maintenance of Squeak was turned over to the community
+and there was a lack of concensus on its future goals.
 
-Other Smalltalk implementations include
+The number of predefined classes in each implementation above
+were obtained by printing the result of `Smalltalk allClasses size`
+with latest versions as of June 10, 2024.
 
-- <a href="https://amber-lang.net" target="_blank">Amber</a>
+## Cuis Smalltalk
 
-  This is a language that is "deeply inspired by Smalltalk".
-  It compiles to JavaScript.
+This article primarily focuses on Cuis Smalltalk and running in macOS.
 
-- <a href="https://github.com/dolphinsmalltalk" target="_blank">Dolphin Smalltalk</a>,
-  only for Microsoft Windows
-- <a href="https://www.gnu.org/software/smalltalk/" target="_blank">GNU Smalltalk</a>
-- <a href="https://github.com/nikboyd/hoot-smalltalk#hoot-smalltalk" target="_blank">Hoot Smalltalk</a>
+Cuis Smalltalk was created by Juan Vuletich who
+has been active in the Smalltalk community since 1997.
+Juan began work on Cuis Smalltalk began in 2005
+and version 1.0 was released in March 2009.
 
-  This runs on the Java Virtual Machine and uses some Java features.
+The objectives of Cuis Smalltalk are to:
 
-- <a href="https://www.cincomsmalltalk.com/main/" target="_blank">Cincom Smalltalk</a>
-- <a href="https://www.instantiations.com/vast-platform/" target="_blank">VAST Platform</a>
+- strive for the simplicity of Smalltalk-80
+- include a minimal number of classes required for the kernel,
+  a GUI framework, and development tools
+- create a system that is good for learning and experimenting
 
-  VAST stands for "VisualAge SmallTalk" and is provided by Instantiations.
+More classes can be added by installing packages.
 
-- <a href="https://gemtalksystems.com/products/gs64/" target="_blank">GemStone/S</a>
+Some advantages that Cuis has over Squeak and Pharo are that
+it supports TrueType fonts and high quality vector graphics.
 
-Cuis supports TrueType fonts, whereas Squeak and Pharo do not.
-
-The Cuis mascot is southern mountain cavy which is a "tailless rodents with
+The Cuis mascot is southern mountain cavy which is a "tailless rodent with
 short, speckled, greyish-yellow fur, fading to pale grey on the underparts."
 They look similar to a mouse, but grow to around eight inches in length.
 They are found in Argentina.
-Juan Vuletich began development of Cuis Smalltalk in Buenos Aires s, Argentina.
-The work "cuis" means "squeak" in Rioplatense Spanish.
+Juan Vuletich began development of Cuis Smalltalk in Buenos Aires, Argentina.
+The word "cuis" means "squeak" in Rioplatense Spanish.
 
 The GitHub repository for Cuis Smalltalk is at
 <a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Dev"
   target="_blank">Cuis-Smalltalk-Dev</a>.
-As of May 2024, 96.8% of it was implemented in Smalltalk.
+As of May 2024, 96.8% of the code in the repository is written in Smalltalk.
 
 ## Installing Cuis Smalltalk
 
@@ -340,14 +373,18 @@ To install Cuis Smalltalk:
 1. Unzip the downloaded file to obtain the directory "Cuis-Smalltalk-Dev-master".
 1. Move this directory to your desired location.
 
+Alternatively, clone the Git repository.
+This makes it possible to obtain updates by simply running "git pull".
+
 To start Cuis Smalltalk, run the appropriate start script found
 in the installed directory based on your operating system.
 
 - for Windows, open a Command Prompt and run `RunCuisOnWindows.bat`
 - for Linux, open a Terminal and run `RunCuisOnLinux.sh`
-- for Mac
+- for macOS ...
 
-  1. Double-click CuisVM.app which will fail because the app is not verified.
+  1. Double-click the file `CuisVM.app`
+     which will fail because the app is not verified.
   1. Open the System Settings app.
   1. Select "Privacy & Security".
   1. Scroll down to the "Security" section.
@@ -355,24 +392,21 @@ in the installed directory based on your operating system.
      because it is not from an identified developer.'
   1. Click the "Open Anyway" button.
   1. Click the "Open" button in the next dialog that appears.
-  1. Select the image file `Cuis6.2.image`.
+  1. Select the file `Cuis*.image` found in the subdirectory as `CuisImage`.
   1. Click the "Open" button.
-  1. You will see several dialogs that say '"CuisVM.app"
+  1. You may see several dialogs that say '"CuisVM.app"
      would like to access files in your Documents folder'.
      Click the "Allow" button each time.
 
-The file `CuisVM.app` (36 MB) implements the virtual machinex
-used by Cuis Smalltalk.
-It is taken directly from Squeak and does not differ in any way.
+The file `CuisVM.app` (36 MB) includes the Squeak virtual machine (VM).
+This does not differ in any way from the VM used by Squeak.
 All the differences between Cuis and Squeak are implemented in
-its base image file found in the `CuisImage` subdirectory
-with a name like `Cuis6.2.image` or `Cuis7.1-6367.image`.
-The base Cuis image file is around 19 MB.
+its base image file (19 MB).
 
-By contrast, `PharoLauncher.app` is 198MB.
+By contrast, Pharo Smalltalk provides `PharoLauncher.app` is 198MB.
 
 The reported name of the `CuisVM.app` app in macOS is "Squeak 5.0".
-To change this:
+If you wish to change this:
 
 - Open a terminal window.
 - `cd` to the directory where you placed the file `CuisVM.app`.
@@ -381,18 +415,19 @@ To change this:
 - Find the key "CFBundleName".
 - Change its value from "Squeak" to "Cuis".
 
-To update Cuis Smalltalk:
+## Updating Cuis Smalltalk
 
-- One time, clone the GitHub repository at
-  <a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Dev"
-  target="_blank">Cuis-Smalltalk-Dev</a>.
-- Each time, do a `git pull` on the repository.
-- Open the World menu
+If Cuis Smalltak is started using a platform-specific shell script,
+it will automatically update to the latest version.
+These scripts have a name that begins with `RunCuisOn`.
+
+If the Cuis Smalltalk GitHub repository was cloned,
+the steps to update are:
+
+- Do a `git pull` on the repository.
+- Start Cuis Smalltalk with an image.
+- Open the World menu by clicking on the desktop.
 - Select Changes...Install New Updates.
-
-Alternatively, start Cuis using a platform-specific shell script
-which always updates to the latest version.
-This scripts have a name that begins with `RunCuisOn`.
 
 ## Installing Squeak Smalltalk
 
@@ -406,34 +441,56 @@ On macOS:
 - Drag the application icon to the Finder "Applications" directory.
 - Double-click the `Squeak*.app` file.
 
-## World
+## Installing Pharo Smalltalk
 
-The Smalltalk window or desktop is referred to as the "World"
-and is implemented by the `WorldMorph` class.
-Many features are available on the World menu
-which is opened by clicking anywhere on the desktop.
+TODO: Add this detail.
 
-One way to change the desktop color is to right-click it to open its halo,
-click the blue menu button, select "debug...inspect morph",
-click in the bottom pane, enter `self color: Color {some-color-name}`,
-and press cmd-d (Do it).
-This works with all colors except `transparent` and alpha values are ignored.
+## Getting Started
 
-## Font Size
+Double-click a Smalltalk image file such as
+the base image found in `CuisImage/Cuis*.image`.
+The following main app window will open:
 
-To adjust the font size:
+<img alt="Cuis Smalltalk log" class="logo" style="width: 400px"
+  src="/blog/assets/cuis-smalltalk-startup.png?v={{pkg.version}}">
+
+Alternatively, double-click a VM file such as `CuisVM.app`.
+That will open a dialog that prompts for an image file.
+
+### The World
+
+The main window renders an instance of the class `WorldMorph`.
+This is referred to as the "World".
+Clicking anywhere on the "World" opens the World menu.
+
+### Font Size
+
+It is likely that the default font size used in all the Smalltalk windows
+will not be ideal for you. To change the font size:
 
 - Open the World menu.
-- Click "appearance...".
-- Click "system fonts...".
-- Click "increase font size" or "decrease font size".
+- Click "Preferences.".
+- Select "Size of GUI elements".
+- Select a point size.
 
-## Full Screen
+The menu of font sizes will remain open, so it's easy to try various sizes.
+Once you have selecting a good size, close the menu
+by clicking anywhere on the World or the red circle.
 
-You will likely want to work in full screen mode.
-To enable this, open the World menu and select Preferences ... Full screen on.
+### Full Screen
+
+When developing in Smalltalk it is typical to
+open many windows inside the World.
+You will likely want to work in full screen mode
+so those windows appear to be top-level instead of
+floating inside the window of the Smalltalk app.
+
+To enable full-screen mode, open the World menu
+and select Preferences ... Full screen on.
 To disable this, select Preferences ... Full screen on.
 
+Jumping ahead, you can add buttons to the World
+that simplify toggling full screen mode.
 The following class defines a class method `buttons` that displays buttons
 which make it easier to toggle between full screen and windowed modes.
 
@@ -475,69 +532,93 @@ initialize
         openInWorld
 ```
 
-## Optional Packages
+### Morphs
 
-The shell script `clonePackageRepos.sh` clones many
-commonly used Git repositories that define optional packages.
-Cloning those enables installing the packages they define.
+All the graphical elements visible on the World are "morphs".
 
-The repositories that this clones include:
+To select a morph, click it.
 
-- AMQP
-- AnimatedGIF
-- Cairo
-- Calendars
-- CodeExamples
-- Cuis-Smalltalk
-- Cuis-Smalltalk-Historical
-- Cuis-Smalltalk-Regex
-- Cuis-Smalltalk-Tools
-- Cuis-Smalltalk-UI
-- Cuis-Website
-- EnhancedText
-- Erudite
-- firmata
-- Games
-- GeographicInformationSystems
-- Learning-Cuis
-- Machine-Learning
-- Measures
-- Morphic
-- Numerics
-- OSProcess
-- Parsers
-- StyledTextEditor
-- SVG
-- VMMaker
+To open an context-sensitive menu for a morph, right-click it.
+After a menu item is selected from a menu, it will close.
 
-## Getting Started
+To cause a menu to remain open so multiple selections can be made,
+clickg its push pin in the upper-right corner.
+If a menu is closed and re-opened, the push pin state will be reset.
 
-Double-click a Smalltalk image file such as `CuisImage/Cuis6.2.image`.
-The following main app window will open:
+### Desktop Color
 
-<img alt="Cuis Smalltalk log" class="logo" style="width: 400px"
-  src="/blog/assets/cuis-smalltalk-startup.png?v={{pkg.version}}">
+One way to change the desktop color is to right-click it to open its halo,
+click the blue menu button, select "debug...inspect morph",
+click in the bottom pane, enter `self color: Color {some-color-name}`,
+and press cmd-d (Do it).
+This works with all colors except `transparent` and alpha values are ignored.
 
-Alternatively you can double-click a VM file such as `CuisVM.app`,
-but that will open a dialog that prompts for an image file.
+### Workspace Windows
 
-The main window contains a `WorldMorph`.
+Workspace windows enable experimenting with code.
+They are somewhat like REPLs in other programming languages.
 
-To change the font size used in all the windows:
+Enter any number of expressions separated by periods.
 
-- Click on the `WorldMorph` background and
-  select Preferences...Size of GUI elements...
-- Select a point size such as 14.
-- Close the dialog by clicking its red circle containing an "x".
+To prepare to execute lines of code, select them or
+place the cursor at the end of a single-line expression.
 
-To select an item, click it.
+To execute the code for its side effects, press cmd-d (Do it).
 
-To open an context-sensitive menu for an item, right-click it.
-After an item is selected from this menu, it will close.
+To execute the code and print the result of the last expression
+inside the Workspace, press cmd-p (Print it).
+The output will be selected,
+so it can be removed by pressing the delete key.
 
-Menus can be made to remain open so multiple selections can be made
-by clicking its push pin in the upper-right corner.
-If the menu is closed and re-opened, the push pin state will be reset.
+For example, enter `2 * 3` and press cmd-p to get the output `6`.
+
+You will use "Do it" and "Print it" often, so memorize their keyboard shortcuts.
+
+If the code goes into an infinite loop, break out of it by pressing cmd-period.
+
+### Transcript Windows
+
+This is a read-only window displays output written to it.
+
+One way to do this is to send `Transcript show: <object>`,
+perhaps in a Workspace window.
+This can output any kind of object
+because every object has a string representation.
+
+Another way is to use the `print` method in the `CharacterSequence` class
+which is the superclasss of the `String` class.
+This executes `Transcript show: self; newLine`.
+For example, `'Hello World!' print`.
+
+The `print` message can be sent to strings, symbols,
+and any object that has a `printString` method.
+
+An even better approach is to add the following method to the `Object class:
+
+```smalltalk
+logAs: aString
+    ('{1} = {2}' format: {aString. self}) print
+```
+
+For example, this can be used to print a `Dog` object as follows:
+
+```smalltalk
+myDog logAs: 'myDog'
+```
+
+When output is sent to the `Transcript`, it appears in all `Transcript` windows.
+So it doesn't make sense to open more than one.
+
+To clear the contents of the Transcript window,
+right-click in it and select "Clear Transcript" (no keyboard shortcut).
+If there is more than one `Transcript` window, all of them will be cleared.
+
+TODO: Why does this window contain the word "Transcript" in its content?
+
+<img alt="Cuis Transcript window" style="width: 80%"
+  src="/blog/assets/cuis-transcript-window.png?v={{pkg.version}}">
+
+## Transcripts
 
 To print "Hello World!":
 
@@ -576,6 +657,13 @@ To change the value of a preference:
 - In the bottom pane, enter `value := {new-value}` and "Do it".
 - Close the Inspect window.
 - Close the Preferences window.
+
+## System Browser Windows
+
+To browse a class, enter its name and press cmd-b (Browse it).
+
+<img alt="Cuis Workspace window" style="width: 80%"
+  src="/blog/assets/cuis-workspace-window.png?v={{pkg.version}}">
 
 ## Images
 
@@ -627,6 +715,41 @@ The World menu contains a Help submenu which contains the following:
 - Useful Expressions
 - VM Statistics
 - Space Left
+
+## Optional Packages
+
+The shell script `clonePackageRepos.sh` clones many
+commonly used Git repositories that define optional packages.
+Cloning those enables installing the packages they define.
+
+The repositories that this clones include:
+
+- AMQP
+- AnimatedGIF
+- Cairo
+- Calendars
+- CodeExamples
+- Cuis-Smalltalk
+- Cuis-Smalltalk-Historical
+- Cuis-Smalltalk-Regex
+- Cuis-Smalltalk-Tools
+- Cuis-Smalltalk-UI
+- Cuis-Website
+- EnhancedText
+- Erudite
+- firmata
+- Games
+- GeographicInformationSystems
+- Learning-Cuis
+- Machine-Learning
+- Measures
+- Morphic
+- Numerics
+- OSProcess
+- Parsers
+- StyledTextEditor
+- SVG
+- VMMaker
 
 ### Class Comment Browser
 
@@ -765,71 +888,6 @@ Pressing cmd-" is useful to toggle whether selected code commented/uncommented.
 
 To change the indentation of a block of code, select all the lines and
 press tab to increase indentation or shift-tab to decrease it.
-
-### Workspace Windows
-
-Workspace windows enable experimenting with code.
-They are somewhat like REPLs in other programming languages.
-
-Enter any number of expressions separated by periods.
-
-To prepare to execute lines of code, select them or
-place the cursor at the end of a single-line expression.
-To execute them for their side effects, press cmd-d (Do it).
-To execute them and print the result of the last expression
-inside the Workspace, press cmd-p (Print it).
-Output from "Print it" will be selected,
-so it can be removed by pressing the delete key.
-You will use "Do it" and "Print it" often, so memorize their keyboard shortcuts.
-
-If the code goes into an infinite loop, break out of it by pressing cmd-period.
-
-To browse a class, enter its name and press cmd-b (Browse it).
-
-<img alt="Cuis Workspace window" style="width: 80%"
-  src="/blog/assets/cuis-workspace-window.png?v={{pkg.version}}">
-
-### Transcript Windows
-
-This is a read-only window displays output written to it.
-
-One way to do this is to send `Transcript show: <object>`,
-perhaps in a Workspace window.
-This can output any kind of object
-because every object has a string representation.
-
-Another way is to use the `print` method in the `CharacterSequence` class
-which is the superclasss of the `String` class.
-This executes `Transcript show: self; newLine`.
-For example, `'Hello World!' print`.
-
-The `print` message can be sent to strings, symbols,
-and any object that has a `printString` method.
-
-An even better approach is to add the following method to the `Object class:
-
-```smalltalk
-logAs: aString
-    ('{1} = {2}' format: {aString. self}) print
-```
-
-For example, this can be used to print a `Dog` object as follows:
-
-```smalltalk
-myDog logAs: 'myDog'
-```
-
-When output is sent to the `Transcript`, it appears in all `Transcript` windows.
-So it doesn't make sense to open more than one.
-
-To clear the contents of the Transcript window,
-right-click in it and select "Clear Transcript" (no keyboard shortcut).
-If there is more than one `Transcript` window, all of them will be cleared.
-
-TODO: Why does this window contain the word "Transcript" in its content?
-
-<img alt="Cuis Transcript window" style="width: 80%"
-  src="/blog/assets/cuis-transcript-window.png?v={{pkg.version}}">
 
 ### Inspect Windows
 
