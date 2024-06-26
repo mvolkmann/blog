@@ -675,16 +675,6 @@ The following table summarizes all the syntax.
 | expression separator (period)                     | `'foo print'. 'bar' print`                                 |
 | reference to current object in a method           | `self`                                                     |
 
-To render a left pointing arrow in place of `:=` for all assigments,
-open the World menu and select Preferences...Show ST-80 Assignments.
-The next time code is modified, all the `:=` messages
-will be rendered by a left pointing arrow.
-Typing an underscore is a shorthand way to type `:=`.
-Typing either will be rendered as a left pointing arrow.
-This does not change the characters that are actually used.
-To revert to rendering `:=` messages,
-open the World menu and select Preferences...Show ANSI Assignments.
-
 The caret (^) in a return expression can be followed by a space,
 but a space is not typically included.
 
@@ -693,6 +683,24 @@ In static arrays the elements are separated by spaces.
 In dynamic arrays the expressions are separated by periods.
 
 TODO: What is a "compound literal"?
+
+### Assignment Operator
+
+Assignment operators (`:=`) can be rendered as a left pointing arrow
+for the purpose looking cool!
+
+To enable this, open the World menu and
+select Preferences...Show ST-80 Assignments.
+The next time code is modified, all the `:=` messages
+will be rendered by a left pointing arrow.
+
+To disable this, open the World menu and
+select Preferences...Show ANSI Assignments.
+
+Typing an underscore is a shorthand way to type `:=`.
+Typing either will be rendered as a left pointing arrow.
+This does not change the characters that appear
+when code is saved in a "file out" or package.
 
 ### Classes
 
@@ -761,6 +769,21 @@ score: aNumber
 
 As shown above, another convention is for variables associated with
 keyword messages to indicate their expected type.
+
+### Class Instance Variables
+
+A "class variable" is defined in a class definition.
+It is shared by all subclasses and has the same value
+regardless of whether it is acccessed on
+the class where it is defined or on a subclass.
+
+A "class instance variable" is defined as an
+instance variable in the metaclass of a given class.
+Like a class variable, it can be accessed
+on the class and each of its subclasses.
+However, it allows subclasses to set the variable to a different value
+than that used by the class where it is defined.
+Class instance variables are not commonly used.
 
 ### Accessor Methods
 
