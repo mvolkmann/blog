@@ -1004,6 +1004,9 @@ However, it does not affect the actual use of whitespace, so
 code written to files in a fileOut or package is not affected.
 I wish it was.
 
+An alternative to setting this preference is to click the "show..." button
+in System Browsers and select "prettyPrint".
+
 To open a System Browser, click on the `WorldMorph` background,
 select Open, and select Browser.
 

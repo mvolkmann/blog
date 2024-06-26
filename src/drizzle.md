@@ -115,6 +115,11 @@ For PostgreSQL:
   If it has already been installed, it can be upgraded to the latest version
   by entering `brew upgrade postgresql`.
 
+- Create a new PostgreSQL database cluster
+  by entering `initdb /usr/local/pgsqldata`
+
+- If an existing process is listening on port 5432, kill it.
+
 - Start the database server by entering `pg_ctl -D /usr/local/pgsql/data start`
 
 - Create a database by entering `createdb {db-name}`.
