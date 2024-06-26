@@ -636,22 +636,486 @@ TODO: Change this image to one that shows ouptut from the examples given above.
 <img alt="Cuis Transcript window" style="width: 80%"
   src="/blog/assets/cuis-transcript-window.png?v={{pkg.version}}">
 
-## Other Preferences
+## Syntax
 
-Many supported preferences are not directly on the menu
-accessed by opening a World menu and selecting Preferences.
-To access more preferences, click "All preferences..."
-which opens a Preferences window.
-Click a preference symbol in the left pane
-to display its current value in the right pane.
+Before diving into the functionality provided by other windows,
+it's important to understand the syntax of the Smalltalk programming language.
+The following table summarizes all the syntax.
 
-To change the value of a preference:
+| Item                                              | Example                                                    |
+| ------------------------------------------------- | ---------------------------------------------------------- |
+| comment                                           | `"some text"`                                              |
+| temporary (local) variable with private scope     | `myTemp` (camelCase)                                       |
+| global variable with shared scope                 | `MyGlobal` (CamelCase)                                     |
+| pseudo variable (cannot assign)                   | `self`, `super`, `nil`, `true`, `false`, and `thisContext` |
+| integer                                           | `123`                                                      |
+| float                                             | `3.14`                                                     |
+| exponential notation                              | `1.23e4`                                                   |
+| character                                         | `$a`                                                       |
+| string                                            | `'text'` (use double ' to include)                         |
+| string concatenation (comma message)              | `'foo', 'bar', 'baz'`                                      |
+| symbol (globally unique string)                   | `#name`                                                    |
+| static array (elements are literal values)        | `#(1 4 8)`                                                 |
+| dynamic array (elements are computed at run time) | `{1. 2 * 2. 2 raisedTo: 3}`                                |
+| array concatenation (comma message)               | `#(1 2), #(3 4)`                                           |
+| assignment                                        | `<variable> := <expression>.`                              |
+| method variable declarations                      | `\| foo bar baz \|`                                        |
+| block with no arguments                           | `[ <expressions> ]`                                        |
+| block with arguments                              | `[:a :b \| a + b]`                                         |
+| unary message send                                | `<object> <message>`                                       |
+| binary message send (look like operators)         | `4 * 5`                                                    |
+| keyword message send                              | `2 raisedTo: 4 modulo: 3`                                  |
+| message cascade - sends to initial receiver       | `Transcript show: 'foo'; newLine; show: 'bar'`             |
+| message chaining - sends to previous result       | `2 * 3 :: squared :: negated` (-36)                        |
+| method return value                               | `^<expression>`                                            |
+| expression separator (period)                     | `Transcript show: 'foo'. Transcript show: 'bar'`           |
+| reference to current object in a method           | `self`                                                     |
 
-- Select it in the left pane.
-- Press cmd-i (inspect) to open an Inspect window.
-- In the bottom pane, enter `value := {new-value}` and "Do it".
-- Close the Inspect window.
-- Close the Preferences window.
+To render a left pointing arrow in place of `:=` for all assigments,
+open the World menu and select Preferences...Show ST-80 Assignments.
+The next time code is modified, all the `:=` messages
+will be rendered by a left pointing arrow.
+Typing an underscore is a shorthand way to type `:=`.
+Typing either will be rendered as a left pointing arrow.
+This does not change the characters that are actually used.
+To revert to rendering `:=` messages,
+open the World menu and select Preferences...Show ANSI Assignments.
+
+The caret (^) in a return expression can be followed by a space,
+but a space is not typically included.
+
+In static arrays the elements are separated by spaces.
+
+In dynamic arrays the expressions are separated by periods.
+
+TODO: What is a "compound literal"?
+
+### Classes
+
+Classes define sets of associated class variables, instance variables,
+class methods, and instance methods.
+
+Classes are defined by sending the message
+`#subclass:instanceVariableNames:classVariableNames:poolDictionaries:category:`
+to a superclass which can be `Object` or any other class.
+The `subclass` keyword takes a symbol.
+The remaining keywords all take strings.
+All the keywords must be supplied, even if their value is an empty string.
+The following is an example class definition.
+
+```smalltalk
+Object subclass: #Math
+    instanceVariableNames: ''
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'Volkmann'
+```
+
+Instance variable names must begin lowercase.
+Class variable names must begin uppercase.
+If the category is an empty string, it will be changed to 'as yet unclassified'.
+
+It is common to not use class variables or pool dictionaries.
+
+Pool dictionaries enable sharing data between related classes.
+They reside in the `Smalltalk` dictionary.
+To create a pool dictionary: `Smalltalk at: #MyPool put: (Dictionary new)`.
+Then refer to it from any number of classes with `poolDictionaries: 'MyPool'`.
+
+All classes are global and there is no namespacing.
+Class names are added to the global variable `Smalltalk`
+which is a `SystemDictionary`.
+This requires all class names to be unique.
+Typically a common prefix, perhaps 2 or 3 uppercase letters,
+is added to a set of related class names in order to make the unique.
+Lack of namespacing is seen by some as a weakness of Smalltalk.
+
+All classes inherit from one other class,
+except `Object` which is the highest superclass of all classes.
+
+TODO: Are class names required to be unique across all packages?
+
+Programming languages use many terms to describe data
+that is encapsulated by objects created from a class.
+Examples include "attribute", "property", and "field".
+Smalltalk calls these "instance variables".
+
+Instance variables can only be directly accessed by methods in the same class.
+To expose them outside the class, add getter and setter (optional) methods.
+For example, if `score` is an instance variable
+then the following is a getter method for it.
+By convention, the name of getter and setter methods is the same as
+the name of the associated instance variable, but this is not required.
+
+```smalltalk
+score
+    ^score
+
+score: aNumber
+    score := aNumber
+```
+
+As shown above, another convention is for variables associated with
+keyword messages to indicate their expected type.
+
+### Accessor Methods
+
+Instance variables are never accessed directly
+from outside of the class that defines them.
+To expose their values, write getter methods.
+To allow them to be modified, write setter methods.
+
+Suppose a class Dog has the instance variable `breed`.
+The following accessor methods can be implemented:
+
+```smalltalk
+breed
+    ^breed
+
+breed: aString
+    breed := aString
+```
+
+Accessor methods for all instance variables in a class can be generated
+by right-clicking the class name in a System Browser
+and selecting "more...create inst var accessors".
+
+### Objects
+
+In Smalltalk, code and data are both represented by objects.
+Code can be described by a method or block, both of which are kinds of objects.
+
+Objects are created by sending a message to a class.
+In addition, some kinds of objects can be created from a literal syntax
+such as numbers, strings, and arrays.
+
+Every class supports the class method `new`,
+which creates and returns a new instance of the class.
+If the class defines the instance method `initialize`,
+the `new` method will call it.
+The `initialize` method typically
+initializes the instance variables of the object.
+
+Every class also supports the class method `basicNew` which is similar to
+the `new` method, but does not call the instance method `initialize`.
+
+Let's look at an example `Rect` class
+with instance variables `height` and `width`.
+
+We can define the class method `height:width:`
+that provides an alternate way to create objects as follows.
+This assumes we can send the message `#setHeight:width:`
+(in the `private` message category) to instances.
+
+```smalltalk
+height: aHeight width: aWidth
+    ^self new setHeight: aHeight width: aWidth
+```
+
+We can then define the following instance methods:
+
+```smalltalk
+initialize
+    height := 1.
+    width := 1
+
+setHeight: aHeight width: aWidth
+    height := aHeight.
+    width := aWidth
+
+area
+    ^height * width
+```
+
+We can use the `Rectangle` class as follows:
+
+```smalltalk
+r1 := Rect new.
+Transcript show: r1 area. "1"
+r2 := Rect height: 2 width: 3.
+Transcript show: r2 area. "6"
+```
+
+To determine the class of an object, send it the `class` unary message.
+For example, `19 class` returns `SmallInteger`.
+
+Variables defined in Workspace windows hold references to their object values.
+It may be necessary to close a Workspace window
+in order to trigger garbage collection of those objects.
+
+### Immutability
+
+To enforce immutability of objects:
+
+- Enter `Feature require: 'Immutability' and "Do it".
+
+  This package can be found at
+  <a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Dev/blob/master/Packages/System/Immutability.pck.st"
+  target="_blank">Immutability.pck.st</a>. Among other things,
+  it adds the instance method `beImmutable` to the`Object` class.
+
+- Send the `beImmutable` message to any object.
+
+  For example:
+
+  ```smalltalk
+  height: aHeight width: aWidth
+      ^self new setHeight: aHeight width: aWidth; beImmutable; yourself
+  ```
+
+  Note the use of `yourself` to return the current object
+  rather than the return value of the `beImmutable` method.
+
+If an attempt is made to modify any property of an immutable object,
+a "ModificationForbidden" window will open
+containing a stack trace that indicates where the attempt was made.
+
+### Methods
+
+Methods are associated with a specific class.
+Instance methods handle messages sent to objects instantiated from the class.
+Class methods handle messages sent to the class.
+
+In keyword methods, parameter variable names typically
+indicate the expected object type and begin with "a" or "an".
+For example, `aNumber`, `aString`, or `anArray`.
+This works well because the keyword that
+precedes the parameter variable indicates its meaning.
+For example, `name: aString score: aNumber`.
+
+When multiple parameters have the same data type, a good way to
+name them is to include their meaning and type in the name.
+For example, `latitude: latNumber longitude: lngNumber`.
+
+Methods that return an object are said to "answer" a value.
+For example, the instance method `asUppercase` in the `String` class
+contains the comment "Answer a String made up from
+the receiver whose characters are all uppercase."
+
+All methods are public.
+By convention, methods that should only be used by
+other methods in the same class are placed in the "private" message category.
+
+To find a method:
+
+- Click the `WorldMorph` back and select Open ... Message Names.
+  This will open a "Message names" window.
+- Enter part of a message and press the return key.
+  This will display a list of matching message names.
+- Click one of the message names to see the classes that implement it.
+- Click one of the class names and click the "Browse" button
+  to open a System Browser that shows the method implementation.
+
+For example, entering "nj" will find the "inject:into:" message
+that is implemented by the `Collection` class.
+
+Squeak Smalltalk supports finding methods by part of their name
+OR by providing example input and output.
+The steps to use this are:
+
+- From the "Tools" menu, select "Method Finder".
+  This opens a "Selector Browser" window.
+- Enter part of the method name OR
+  an example input, followed by a period, and the expected output.
+- Press the return key.
+- A list of all matching methods will be displayed.
+- Click one of the methods to open a System Browser
+  that shows the method implementation.
+
+See <a href="https://www.youtube.com/watch?v=cI_yBWdmoeI&list=PLu8vLCSA-4hklsvT9W6ruintbdx_K0DYW&index=11&t=28s"
+target="_blank">The amazing Squeak Method Finder</a>.
+
+To add a method to a class:
+
+- Open a System Browser.
+- Select the category of the class in the top, first pane.
+- Select the class in the top, second pane.
+- Click the message category in which the new method will be placed,
+  or select "as yet unclassified" in the top, third pane.
+- A starting template for a new method definition
+  will appear in the bottom pane.
+- Change "messageSelectorAndArgumentNames"
+  to the name of the new method.
+- Modify the comment describing the method.
+- Update the list of temporary (local) variable names or delete that line.
+- Replace "statements" with the method implementation.
+- If the method was not associated with a method category ...
+  - If the top, third pane does not contain a suitable message category ...
+    - Right-click in that pane and select "new category",
+      or click in the top, third pane and press cmd-n.
+    - Select a category to add.
+    - If none of the provided categories are suitable, select "new..."
+      and enter the name of a category to be added.
+      For consistency, try to stick with the provided category names.
+  - Click "as yet unclassified" in the top, third pane.
+  - Drag the name of the new method from the top, fourth pane
+    to its method category to associate it.
+
+To sort the message category names alphabetically,
+right-click in the top, third pane and select "alphabetize".
+
+To remove a method in the System Browser,
+select it and press cmd-x (remove method).
+
+The following methods can be added to the `Integer` class.
+
+```smalltalk
+predecessor
+    "answers the predecessor of this integer"
+    ^self - 1
+
+successor
+    "answers the successor of this integer"
+    ^self + 1
+```
+
+Superclasses can define methods that subclasses must implement.
+For example, a class named `VShape` can define the following method:
+
+```smalltalk
+area
+    "answers the area of the shape"
+    self subclassResponsibility
+```
+
+The classes `VCircle` and `VRectangle` can be defined as subclasses of `VShape`.
+If they do not define the `area` method
+and that message is sent to an instance,
+an Error dialog with the title "My subclass should have overridden #area"
+will appear.
+
+To add the missing method, click the "Create" button,
+select a message category for the method,
+enter its implemenation, press cmd-s to save, and
+press the "Proceed" button to continue running the code
+at the point of the failed message send.
+
+The `VCircle` class can have the following class method for creating instances:
+
+```smalltalk
+radius: aNumber
+    ^self new setRadius: aNumber
+```
+
+The `VCircle` class can have the following instance methods:
+
+```smalltalk
+setRadius: aNumber
+    radius := aNumber
+
+area
+    ^Float pi * radius * radius
+```
+
+The `VRectangle` class can have the following class method for creating instances:
+
+```smalltalk
+height: aHeight width: aWidth
+    ^self new setHeight: aHeight width: aWidth
+```
+
+The `VRectangle` class can have the following instance methods:
+
+```smalltalk
+setHeight: aHeight width: aWidth
+    height := aHeight.
+    width := aWidth
+
+area
+    ^height * width
+```
+
+To delete a method, select it and press cmd-x (remove method).
+
+To delete a method category and all the methods in it,
+select it and press cmd-x (remove).
+
+Both class and instance methods can call themselves recursively.
+
+Here is an example of a class method from a class I created named `Math`
+that calls itself recursively:
+
+```smalltalk
+factorial: n
+    "answers the factorial of a given integer"
+    ^(n = 1
+        ifTrue: 1
+        ifFalse: [n * (Math factorial: n - 1)])
+```
+
+Here is an example of an instance method I added to the `Integer` class
+that calls itself recursively.
+This method already exists in that class
+and is more efficient than the version below.
+
+```smalltalk
+factorial2
+    "answers the factorial of this integer"
+    ^(self = 1
+        ifTrue: 1
+        ifFalse: [self * (self - 1) factorial2])
+```
+
+If you edit the name of a method in code editing pane of a System Browser,
+it will create a copy of the method with the new name.
+A method with the previous name will still exist and can be deleted.
+An alternative is to right-click the method in the 4th pane
+and select "refactorings...rename...".
+
+While it is not commonly done, a method can check the types of its arguments
+an alter its functionality based on those.
+For example, this class method returns a number
+that is double what is passed to it.
+If it is given a `String` instead of a `Number`,
+it converts it to a `Number` and doubles it.
+If it is given some other kind of object, it just returns `0`.
+TODO: How can you add error handling for strings that do not contain a number?
+
+```smalltalk
+double: obj
+    "demonstrates taking different actions based on the type of an argument"
+
+    (obj isKindOf: Number) ifTrue: [^obj * 2].
+    (obj isKindOf: String) ifTrue: [^obj asNumber * 2].
+    ^0
+```
+
+### Primitive Methods
+
+From the Blue Book ...
+
+> All behavior in the system is invoked by messages, however,
+> all messages are not responded to by executing Smalltalk-80 methods.
+> There are about one hundred primitive methods that
+> the Smalltalk-80 virtual machine knows how to perform.
+> Examples of messages that invoke primitives are
+> the `+` message to small integers,
+> the `at:` message to objects with indexed instance variables,
+> and the `new` and `new:` messages to classes.
+> When `3` gets the message `+ 4`, it does not execute a Smalltalk-80 method.
+> A primitive method returns `7` as the value of the message.
+> The complete set of primitive methods is included in the
+> fourth part of this book, which degcribes the virtual machine.
+> Methods that are implemented as primitive methods begin with an
+> expression of the form `<primitive #>` where `#` is an integer
+> indicating which primitive method will be followed.
+> If the primitive fails to perform correctly,
+> execution continues in the Smalltalk-80 method.
+> The expression `<primitive #>` is followed by
+> Smalltalk-80 expressions that handle failure situations.
+
+In Cuis Smalltalk, see the comment at the beginning of
+the class method `whatIsAPrimitive` in the `Object` class.
+It contains the following:
+
+> When the Smalltalk interpreter begins to execute a method which specifies a
+> primitive response, it tries to perform the primitive action and to return a
+> result. If the routine in the interpreter for this primitive is successful,
+> it will return a value and the expressions in the method will not be evaluated.
+> If the primitive routine is not successful, the primitive 'fails', and the
+> Smalltalk expressions in the method are executed instead. These
+> expressions are evaluated as though the primitive routine had not been
+> called.
 
 ## System Browser Windows
 
@@ -710,6 +1174,23 @@ The World menu contains a Help submenu which contains the following:
 - Useful Expressions
 - VM Statistics
 - Space Left
+
+## Other Preferences
+
+Many supported preferences are not directly on
+the Preferences submenu of the World menu.
+To access more preferences, click "All preferences..."
+which opens a Preferences window.
+Click a preference symbol in the left pane
+to display its current value in the right pane.
+
+To change the value of a preference:
+
+- Select it in the left pane.
+- Press cmd-i (inspect) to open an Inspect window.
+- In the bottom pane, enter `value := {new-value}` and "Do it".
+- Close the Inspect window.
+- Close the Preferences window.
 
 ## Optional Packages
 
@@ -1309,482 +1790,6 @@ when the current session becomes somewhat unusable.
   src="/blog/assets/cuis-emergency-evaluator.png?v={{pkg.version}}">
 
 TODO: Explain when this is useful.
-
-## Syntax
-
-| Item                                              | Example                                          |
-| ------------------------------------------------- | ------------------------------------------------ |
-| comment                                           | `"some text"`                                    |
-| temporary (local) variable (private scope)        | `myTemp` (camelCase)                             |
-| global variable (shared scope)                    | `MyGlobal` (CamelCase)                           |
-| pseudo variable (cannot assign)                   | `self`                                           |
-| integer                                           | `123`                                            |
-| float                                             | `3.14`                                           |
-| exponential notation                              | `1.23e4`                                         |
-| character                                         | `$a`                                             |
-| string                                            | `'text'` (double ' to include)                   |
-| string and array concatenation (comma message)    | `'foo', 'bar', 'baz'` or `#(1 2), #(3 4)`        |
-| symbol (globally unique string)                   | `#name`                                          |
-| static array (elements are literal values)        | `#(1 4 8)`                                       |
-| dynamic array (elements are computed at run time) | `{1. 2 * 2. 2 raisedTo: 3}`                      |
-| assignment                                        | `<variable> := <expression>.`                    |
-| method variable declarations                      | `\| foo bar baz \|`                              |
-| block with no arguments                           | `[ <expressions> ]`                              |
-| block with arguments                              | `[:a :b \| a + b]`                               |
-| unary message send                                | `<object> <message>`                             |
-| binary message send (look like operators)         | `4 * 5`                                          |
-| keyword message send                              | `2 raisedTo: 4 modulo: 3`                        |
-| message cascade - sends to initial receiver       | `Transcript show: 'foo'; newLine; show: 'bar'`   |
-| message chaining - sends to previous result       | `2 * 3 :: squared :: negated` (-36)              |
-| method return value                               | `^<expression>`                                  |
-| expression separator (period)                     | `Transcript show: 'foo'. Transcript show: 'bar'` |
-| reference to current object in a method           | `self`                                           |
-
-To render a left pointing arrow in place of `:=` for all assigments,
-open the World menu and select Preferences...Show ST-80 Assignments.
-The next time code is modified, all the `:=` messages
-will be rendered by a left pointing arrow.
-Typing an underscore is a shorthand way to type `:=`.
-Typing either will be rendered as a left pointing arrow.
-This does not change the characters that are actually used.
-To revert to rendering `:=` messages,
-open the World menu and select Preferences...Show ANSI Assignments.
-
-The caret (^) in a return expression can be followed by a space,
-but a space is not typically included.
-
-In static arrays the elements are separated by spaces.
-
-In dynamic arrays the expressions are separated by periods.
-
-TODO: What is a "compound literal"?
-
-### Classes
-
-Classes define sets of associated class variables, instance variables,
-class methods, and instance methods.
-
-Classes are defined by sending the message
-`#subclass:instanceVariableNames:classVariableNames:poolDictionaries:category:`
-to a superclass which can be `Object` or any other class.
-The `subclass` keyword takes a symbol.
-The remaining keywords all take strings.
-All the keywords must be supplied, even if their value is an empty string.
-The following is an example class definition.
-
-```smalltalk
-Object subclass: #Math
-    instanceVariableNames: ''
-    classVariableNames: ''
-    poolDictionaries: ''
-    category: 'Volkmann'
-```
-
-Instance variable names must begin lowercase.
-Class variable names must begin uppercase.
-If the category is an empty string, it will be changed to 'as yet unclassified'.
-
-It is common to not use class variables or pool dictionaries.
-
-Pool dictionaries enable sharing data between related classes.
-They reside in the `Smalltalk` dictionary.
-To create a pool dictionary: `Smalltalk at: #MyPool put: (Dictionary new)`.
-Then refer to it from any number of classes with `poolDictionaries: 'MyPool'`.
-
-All classes are global and there is no namespacing.
-Class names are added to the global variable `Smalltalk`
-which is a `SystemDictionary`.
-This requires all class names to be unique.
-Typically a common prefix, perhaps 2 or 3 uppercase letters,
-is added to a set of related class names in order to make the unique.
-Lack of namespacing is seen by some as a weakness of Smalltalk.
-
-All classes inherit from one other class,
-except `Object` which is the highest superclass of all classes.
-
-TODO: Are class names required to be unique across all packages?
-
-Programming languages use many terms to describe data
-that is encapsulated by objects created from a class.
-Examples include "attribute", "property", and "field".
-Smalltalk calls these "instance variables".
-
-Instance variables can only be directly accessed by methods in the same class.
-To expose them outside the class, add getter and setter (optional) methods.
-For example, if `score` is an instance variable
-then the following is a getter method for it.
-By convention, the name of getter and setter methods is the same as
-the name of the associated instance variable, but this is not required.
-
-```smalltalk
-score
-    ^score
-
-score: aNumber
-    score := aNumber
-```
-
-As shown above, another convention is for variables associated with
-keyword messages to indicate their expected type.
-
-### Accessor Methods
-
-Instance variables are never accessed directly
-from outside of the class that defines them.
-To expose their values, write getter methods.
-To allow them to be modified, write setter methods.
-
-Suppose a class Dog has the instance variable `breed`.
-The following accessor methods can be implemented:
-
-```smalltalk
-breed
-    ^breed
-
-breed: aString
-    breed := aString
-```
-
-Accessor methods for all instance variables in a class can be generated
-by right-clicking the class name in a System Browser
-and selecting "more...create inst var accessors".
-
-### Objects
-
-In Smalltalk, code and data are both represented by objects.
-Code can be described by a method or block, both of which are kinds of objects.
-
-Objects are created by sending a message to a class.
-In addition, some kinds of objects can be created from a literal syntax
-such as numbers, strings, and arrays.
-
-Every class supports the class method `new`,
-which creates and returns a new instance of the class.
-If the class defines the instance method `initialize`,
-the `new` method will call it.
-The `initialize` method typically
-initializes the instance variables of the object.
-
-Every class also supports the class method `basicNew` which is similar to
-the `new` method, but does not call the instance method `initialize`.
-
-Let's look at an example `Rect` class
-with instance variables `height` and `width`.
-
-We can define the class method `height:width:`
-that provides an alternate way to create objects as follows.
-This assumes we can send the message `#setHeight:width:`
-(in the `private` message category) to instances.
-
-```smalltalk
-height: aHeight width: aWidth
-    ^self new setHeight: aHeight width: aWidth
-```
-
-We can then define the following instance methods:
-
-```smalltalk
-initialize
-    height := 1.
-    width := 1
-
-setHeight: aHeight width: aWidth
-    height := aHeight.
-    width := aWidth
-
-area
-    ^height * width
-```
-
-We can use the `Rectangle` class as follows:
-
-```smalltalk
-r1 := Rect new.
-Transcript show: r1 area. "1"
-r2 := Rect height: 2 width: 3.
-Transcript show: r2 area. "6"
-```
-
-To determine the class of an object, send it the `class` unary message.
-For example, `19 class` returns `SmallInteger`.
-
-Variables defined in Workspace windows hold references to their object values.
-It may be necessary to close a Workspace window
-in order to trigger garbage collection of those objects.
-
-### Immutability
-
-To enforce immutability of objects:
-
-- Enter `Feature require: 'Immutability' and "Do it".
-
-  This package can be found at
-  <a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Dev/blob/master/Packages/System/Immutability.pck.st"
-  target="_blank">Immutability.pck.st</a>. Among other things,
-  it adds the instance method `beImmutable` to the`Object` class.
-
-- Send the `beImmutable` message to any object.
-
-  For example:
-
-  ```smalltalk
-  height: aHeight width: aWidth
-      ^self new setHeight: aHeight width: aWidth; beImmutable; yourself
-  ```
-
-  Note the use of `yourself` to return the current object
-  rather than the return value of the `beImmutable` method.
-
-If an attempt is made to modify any property of an immutable object,
-a "ModificationForbidden" window will open
-containing a stack trace that indicates where the attempt was made.
-
-### Methods
-
-Methods are associated with a specific class.
-Instance methods handle messages sent to objects instantiated from the class.
-Class methods handle messages sent to the class.
-
-In keyword methods, parameter variable names typically
-indicate the expected object type and begin with "a" or "an".
-For example, `aNumber`, `aString`, or `anArray`.
-This works well because the keyword that
-precedes the parameter variable indicates its meaning.
-For example, `name: aString score: aNumber`.
-
-When multiple parameters have the same data type, a good way to
-name them is to include their meaning and type in the name.
-For example, `latitude: latNumber longitude: lngNumber`.
-
-Methods that return an object are said to "answer" a value.
-For example, the instance method `asUppercase` in the `String` class
-contains the comment "Answer a String made up from
-the receiver whose characters are all uppercase."
-
-All methods are public.
-By convention, methods that should only be used by
-other methods in the same class are placed in the "private" message category.
-
-To find a method:
-
-- Click the `WorldMorph` back and select Open ... Message Names.
-  This will open a "Message names" window.
-- Enter part of a message and press the return key.
-  This will display a list of matching message names.
-- Click one of the message names to see the classes that implement it.
-- Click one of the class names and click the "Browse" button
-  to open a System Browser that shows the method implementation.
-
-For example, entering "nj" will find the "inject:into:" message
-that is implemented by the `Collection` class.
-
-Squeak Smalltalk supports finding methods by part of their name
-OR by providing example input and output.
-The steps to use this are:
-
-- From the "Tools" menu, select "Method Finder".
-  This opens a "Selector Browser" window.
-- Enter part of the method name OR
-  an example input, followed by a period, and the expected output.
-- Press the return key.
-- A list of all matching methods will be displayed.
-- Click one of the methods to open a System Browser
-  that shows the method implementation.
-
-See <a href="https://www.youtube.com/watch?v=cI_yBWdmoeI&list=PLu8vLCSA-4hklsvT9W6ruintbdx_K0DYW&index=11&t=28s"
-target="_blank">The amazing Squeak Method Finder</a>.
-
-To add a method to a class:
-
-- Open a System Browser.
-- Select the category of the class in the top, first pane.
-- Select the class in the top, second pane.
-- Click the message category in which the new method will be placed,
-  or select "as yet unclassified" in the top, third pane.
-- A starting template for a new method definition
-  will appear in the bottom pane.
-- Change "messageSelectorAndArgumentNames"
-  to the name of the new method.
-- Modify the comment describing the method.
-- Update the list of temporary (local) variable names or delete that line.
-- Replace "statements" with the method implementation.
-- If the method was not associated with a method category ...
-  - If the top, third pane does not contain a suitable message category ...
-    - Right-click in that pane and select "new category",
-      or click in the top, third pane and press cmd-n.
-    - Select a category to add.
-    - If none of the provided categories are suitable, select "new..."
-      and enter the name of a category to be added.
-      For consistency, try to stick with the provided category names.
-  - Click "as yet unclassified" in the top, third pane.
-  - Drag the name of the new method from the top, fourth pane
-    to its method category to associate it.
-
-To sort the message category names alphabetically,
-right-click in the top, third pane and select "alphabetize".
-
-To remove a method in the System Browser,
-select it and press cmd-x (remove method).
-
-The following methods can be added to the `Integer` class.
-
-```smalltalk
-predecessor
-    "answers the predecessor of this integer"
-    ^self - 1
-
-successor
-    "answers the successor of this integer"
-    ^self + 1
-```
-
-Superclasses can define methods that subclasses must implement.
-For example, a class named `VShape` can define the following method:
-
-```smalltalk
-area
-    "answers the area of the shape"
-    self subclassResponsibility
-```
-
-The classes `VCircle` and `VRectangle` can be defined as subclasses of `VShape`.
-If they do not define the `area` method
-and that message is sent to an instance,
-an Error dialog with the title "My subclass should have overridden #area"
-will appear.
-
-To add the missing method, click the "Create" button,
-select a message category for the method,
-enter its implemenation, press cmd-s to save, and
-press the "Proceed" button to continue running the code
-at the point of the failed message send.
-
-The `VCircle` class can have the following class method for creating instances:
-
-```smalltalk
-radius: aNumber
-    ^self new setRadius: aNumber
-```
-
-The `VCircle` class can have the following instance methods:
-
-```smalltalk
-setRadius: aNumber
-    radius := aNumber
-
-area
-    ^Float pi * radius * radius
-```
-
-The `VRectangle` class can have the following class method for creating instances:
-
-```smalltalk
-height: aHeight width: aWidth
-    ^self new setHeight: aHeight width: aWidth
-```
-
-The `VRectangle` class can have the following instance methods:
-
-```smalltalk
-setHeight: aHeight width: aWidth
-    height := aHeight.
-    width := aWidth
-
-area
-    ^height * width
-```
-
-To delete a method, select it and press cmd-x (remove method).
-
-To delete a method category and all the methods in it,
-select it and press cmd-x (remove).
-
-Both class and instance methods can call themselves recursively.
-
-Here is an example of a class method from a class I created named `Math`
-that calls itself recursively:
-
-```smalltalk
-factorial: n
-    "answers the factorial of a given integer"
-    ^(n = 1
-        ifTrue: 1
-        ifFalse: [n * (Math factorial: n - 1)])
-```
-
-Here is an example of an instance method I added to the `Integer` class
-that calls itself recursively.
-This method already exists in that class
-and is more efficient than the version below.
-
-```smalltalk
-factorial2
-    "answers the factorial of this integer"
-    ^(self = 1
-        ifTrue: 1
-        ifFalse: [self * (self - 1) factorial2])
-```
-
-If you edit the name of a method in code editing pane of a System Browser,
-it will create a copy of the method with the new name.
-A method with the previous name will still exist and can be deleted.
-An alternative is to right-click the method in the 4th pane
-and select "refactorings...rename...".
-
-While it is not commonly done, a method can check the types of its arguments
-an alter its functionality based on those.
-For example, this class method returns a number
-that is double what is passed to it.
-If it is given a `String` instead of a `Number`,
-it converts it to a `Number` and doubles it.
-If it is given some other kind of object, it just returns `0`.
-TODO: How can you add error handling for strings that do not contain a number?
-
-```smalltalk
-double: obj
-    "demonstrates taking different actions based on the type of an argument"
-
-    (obj isKindOf: Number) ifTrue: [^obj * 2].
-    (obj isKindOf: String) ifTrue: [^obj asNumber * 2].
-    ^0
-```
-
-### Primitive Methods
-
-From the Blue Book ...
-
-> All behavior in the system is invoked by messages, however,
-> all messages are not responded to by executing Smalltalk-80 methods.
-> There are about one hundred primitive methods that
-> the Smalltalk-80 virtual machine knows how to perform.
-> Examples of messages that invoke primitives are
-> the `+` message to small integers,
-> the `at:` message to objects with indexed instance variables,
-> and the `new` and `new:` messages to classes.
-> When `3` gets the message `+ 4`, it does not execute a Smalltalk-80 method.
-> A primitive method returns `7` as the value of the message.
-> The complete set of primitive methods is included in the
-> fourth part of this book, which degcribes the virtual machine.
-> Methods that are implemented as primitive methods begin with an
-> expression of the form `<primitive #>` where `#` is an integer
-> indicating which primitive method will be followed.
-> If the primitive fails to perform correctly,
-> execution continues in the Smalltalk-80 method.
-> The expression `<primitive #>` is followed by
-> Smalltalk-80 expressions that handle failure situations.
-
-In Cuis Smalltalk, see the comment at the beginning of
-the class method `whatIsAPrimitive` in the `Object` class.
-It contains the following:
-
-> When the Smalltalk interpreter begins to execute a method which specifies a
-> primitive response, it tries to perform the primitive action and to return a
-> result. If the routine in the interpreter for this primitive is successful,
-> it will return a value and the expressions in the method will not be evaluated.
-> If the primitive routine is not successful, the primitive 'fails', and the
-> Smalltalk expressions in the method are executed instead. These
-> expressions are evaluated as though the primitive routine had not been
-> called.
 
 ## Refactorings
 
