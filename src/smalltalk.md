@@ -704,35 +704,72 @@ when code is saved in a "file out" or package.
 
 ### Classes
 
-Classes define sets of associated class variables, instance variables,
+A class defines a set of associated class variables, instance variables,
 class methods, and instance methods.
 
-Classes are defined by sending the message
+A class is defined by sending the message
 `#subclass:instanceVariableNames:classVariableNames:poolDictionaries:category:`
 to a superclass which can be `Object` or any other class.
+This message is handled by an instance method of the class `Class`.
+
 The `subclass` keyword takes a symbol.
 The remaining keywords all take strings.
 All the keywords must be supplied, even if their value is an empty string.
 The following is an example class definition.
 
 ```smalltalk
-Object subclass: #Math
-    instanceVariableNames: ''
+Object subclass: #Dog
+    instanceVariableNames: 'breed name'
     classVariableNames: ''
     poolDictionaries: ''
     category: 'Volkmann'
 ```
 
-Instance variable names must begin lowercase.
-Class variable names must begin uppercase.
-If the category is an empty string, it will be changed to 'as yet unclassified'.
+Programming languages use many terms to describe data
+that is encapsulated by objects created from a class.
+Examples include "attribute", "property", and "field".
+Smalltalk calls these "instance variables".
 
-It is common to not use class variables or pool dictionaries.
+Instance variables are described by a single `String`
+where the names are separated by spaces.
+The names must begin lowercase.
+
+Instance variables are always private,
+which means they can only be accessed by instance methods
+in the class that defines them and in subclasses.
+To expose an instance variable value to methods in other classes,
+define an instance method that returns it.
+
+When a new instance of a class is created,
+its instance method `initialize` is called.
+This is, as the name suggests, a perfect place to
+assign an initial value to each instance variable.
+
+Class variables are described in the same way,
+but their names must begin uppercase.
+It is common for a class not have any class variables.
+
+Like instance variables, class variables are always private.
+To expose a class variable value to methods in other classes,
+define a class method that returns it.
+
+To assign initial values to the class variables of a class,
+define the class method `initialize`
+and explicitly send that message to the class.
+
+Each class is a associated with a category.
+Classes provided by the image are in categories such as
+"Collections", "Kernel", "Morphic", "System", "Tools", "UI", and many more.
+If a new class definition is saved with an empty string category,
+it will be changed to 'as yet unclassified'.
 
 Pool dictionaries enable sharing data between related classes.
 They reside in the `Smalltalk` dictionary.
-To create a pool dictionary: `Smalltalk at: #MyPool put: (Dictionary new)`.
+To create a pool dictionary named "MyPool",
+enter the following in a Workspace and "Do it":
+`Smalltalk at: #MyPool put: (Dictionary new)`.
 Then refer to it from any number of classes with `poolDictionaries: 'MyPool'`.
+It is common for a class not have any pool dictionaries.
 
 All classes are global and there is no namespacing.
 Class names are added to the global variable `Smalltalk`
@@ -744,13 +781,6 @@ Lack of namespacing is seen by some as a weakness of Smalltalk.
 
 All classes inherit from one other class,
 except `Object` which is the highest superclass of all classes.
-
-TODO: Are class names required to be unique across all packages?
-
-Programming languages use many terms to describe data
-that is encapsulated by objects created from a class.
-Examples include "attribute", "property", and "field".
-Smalltalk calls these "instance variables".
 
 Instance variables can only be directly accessed by methods in the same class.
 To expose them outside the class, add getter and setter (optional) methods.
