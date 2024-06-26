@@ -602,6 +602,10 @@ Another way to write to the Transcript is to
 send the `#print` message to an object.
 For example, `'Hello World!' print`.
 
+It is common in Smalltalk documentation that describes specific messages
+to precede their name with the `#`,
+which indicates that message names are symbols.
+
 The `print` method works with any kind of object because it is
 implemented in the `Object` class which is a superclass of all classes.
 This executes `Transcript show: self; newLine`.
@@ -658,17 +662,17 @@ The following table summarizes all the syntax.
 | static array (elements are literal values)        | `#(1 4 8)`                                                 |
 | dynamic array (elements are computed at run time) | `{1. 2 * 2. 2 raisedTo: 3}`                                |
 | array concatenation (comma message)               | `#(1 2), #(3 4)`                                           |
-| assignment                                        | `<variable> := <expression>.`                              |
-| method variable declarations                      | `\| foo bar baz \|`                                        |
+| assignment                                        | `<variable> := <expression>`                               |
+| method and block variable declarations            | `\| foo bar baz \|`                                        |
 | block with no arguments                           | `[ <expressions> ]`                                        |
 | block with arguments                              | `[:a :b \| a + b]`                                         |
-| unary message send                                | `<object> <message>`                                       |
-| binary message send (look like operators)         | `4 * 5`                                                    |
+| unary message send                                | `<object> <message>` such as `5 factorial`                 |
+| binary message send (look like operators)         | `<object> <message> <argument>` such as `4 * 5`            |
 | keyword message send                              | `2 raisedTo: 4 modulo: 3`                                  |
 | message cascade - sends to initial receiver       | `Transcript show: 'foo'; newLine; show: 'bar'`             |
 | message chaining - sends to previous result       | `2 * 3 :: squared :: negated` (-36)                        |
-| method return value                               | `^<expression>`                                            |
-| expression separator (period)                     | `Transcript show: 'foo'. Transcript show: 'bar'`           |
+| method return value                               | `^<expression>` such as ^42                                |
+| expression separator (period)                     | `'foo print'. 'bar' print`                                 |
 | reference to current object in a method           | `self`                                                     |
 
 To render a left pointing arrow in place of `:=` for all assigments,
