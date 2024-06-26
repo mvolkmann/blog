@@ -31,16 +31,16 @@ layout: topic-layout.njk
 Messages are sent to objects which decide whether and how to act on them.
 
 <a href="https://en.wikipedia.org/wiki/Simula" target="_blank">Simula</a>
-is considered to be the first programming language
-to use object-oriented programming (OOP).
-But Smalltalk was the first programming language to make OOP popular.
+is considered to be the first object-oriented programming (OOP) language.
+But Smalltalk was the first to make OOP popular.
 
 Smalltalk is perhaps most known for its incredible development tools.
 These support:
 
 - finding code in many ways
 - live code editing where changes are immediately reflected in the environment
-- TODO: Add more here!
+- debugging with ability to modify code and data, then continue or restart
+- TODO: add more?
 
 Smalltalk is a dynamically typed language.
 Types of variables, method parameters,
@@ -52,11 +52,14 @@ This is determined at run-time.
 Alan Kay, Dan Ingalls, and Adele Goldberg worked at
 Xerox PARC (Palo Alto Research Center) in the 1970s.
 All of them collaborated to create Smalltalk.
-Alan Kay was the principal designer of Smalltalk and gave it its name.
-The original goal was to use it for teaching programming.
+Alan Kay was the primary designer of Smalltalk and gave it its name.
+Dan Ingalls was the primary implementor.
+Adele Goldberg primarily focused on documentation
+and promoting Smalltalk outside of PARC.
+The original goal was to use Smalltalk to teach programming.
 
-Many other technologies were invented at PARC
-including graphical user interfaces, the mouse, and virtual machines.
+Many other technologies were invented at PARC including
+graphical user interfaces, the mouse, and virtual machines.
 
 Alan Kay said "OOP to me means only messaging,
 local retention and protection and hiding of state-process,
@@ -67,16 +70,16 @@ are looked up for compatible methods at runtime.
 However, Smalltalk editors do check for "unknown selectors" when
 code is entered that sends a message to a literal object (not to a variable).
 
-Smalltalk didn't gain much traction outside Xerox Parc
-BYTE magizine published an issue focuses on Smalltalk in August 1981.
+Smalltalk did not gain much traction outside Xerox Parc until
+BYTE magizine published an issue focused on Smalltalk in August 1981.
 The cover, shown at the beginning of this article,
 featured a colorful hot air balloon.
 
 In the 1990's the popularity of Smalltalk had risen enough
 that it was seen as a possible alternative to C++.
-For a time, IBM promoted replacing COBAL with Smalltalk.
-In 1995, Smalltalk (15%) was the second most popular OO language
-after C++ (71%).
+For a time, IBM promoted replacing COBOL with Smalltalk.
+In 1995, Smalltalk was the second most popular OO language after C++.
+Smalltalk had a 15% market share compared to 71% for C++.
 
 At the OOPSLA 1997 conference, Alan Kay said
 "Actually, I made up the term 'object-oriented'
@@ -96,23 +99,32 @@ The entire syntax of Smalltalk can be demonstrated on a post card.
 
 - <a href="https://en.wikipedia.org/wiki/Smalltalk"
   target="_blank">Smalltalk in Wikipedia</a>
+
 - <a href="https://cuis.st" target="_blank">Cuis Smalltalk</a>
+
 - <a href="https://github.com/Cuis-Smalltalk" target="_blank">Cuis GitHub repositories</a>
+
 - <a href="https://pharo.org" target="_blank">Pharo Smalltalk</a>
+
 - <a href="https://squeak.org" target="_blank">Squeak Smalltalk</a>
+
 - <a href="https://github.com/Cuis-Smalltalk/Learning-Cuis/blob/master/Quick-UI-Tour.md"
   target="_blank">Quick-UI-Tour</a> for Cuis Smalltalk
+
 - <a href="https://www.fast.org.ar"
   target="_blank">Fundación Argentina de Smalltalk</a> (FAST)
+
 - <a href="https://www.gnu.org/software/dr-geo/" target="_blank">Dr. Geo</a>
-- <a href="https://www.goodreads.com/shelf/show/smalltalk"
-  target="_blank">Smalltalk Books</a> list on goodreads.
-- <a href="https://www.youtube.com/playlist?list=PL6601A198DF14788D"
-  target="_blank">Squeak from the very start</a>
-  YouTube videos by Lawson English
 
   "A program to design and manipulate interactive geometric sketches.
   It helps kids to explore geometry."
+
+- <a href="https://www.goodreads.com/shelf/show/smalltalk"
+  target="_blank">Smalltalk Books</a> list on goodreads.
+
+- <a href="https://www.youtube.com/playlist?list=PL6601A198DF14788D"
+  target="_blank">Squeak from the very start</a>
+  YouTube videos by Lawson English
 
 There is a <a href="https://lists.cuis.st/mailman/listinfo/cuis-dev"
 target="_blank">Cuis Smalltalk mailing list</a>,
@@ -121,19 +133,29 @@ but no Discord or Slack channel.
 There is a <a href="https://discord.gg/43VEWSw2"
 target="_blank">Discord channel channel for Squeak Smalltalk</a>.
 
+The following recent podcast episodes discuss Smalltalk:
+
+- <a href="https://www.youtube.com/watch?v=sokb6zZC-ZE&t=3105s"
+  target="_blank">Cuis Smalltalk and the History of Computing’s Future</a>
+  with Juan Vuletich
+- <a href="https://podcasts.apple.com/us/podcast/software-unscripted/id1602572955?i=1000656742775"
+  target="_blank">A Haskller Tries Smalltalk</a> with Ian Jeffries
+- <a href="https://podcasts.apple.com/us/podcast/software-unscripted/id1602572955"
+  target="_blank">Smalltalk's Past, Present, and Future</a> with Juan Vuletich
+
 ## Smalltalk Pros
 
 - It has a small, consistently applied syntax.
 - It has a great development environment consisting of tools such as
-  System Browser, Workspace, Transcript, Debugger, Hierarchy Browser,
-  Method Finder and more.
+  System Browser, Workspace, Transcript, Method Finder, Debugger,
+  Hierarchy Browser, Protocol Browser, and more.
 - Everything is an object.
 - All methods are invoked through message passing
   which supports extreme polymorphism.
-  Any kind of object can be passed to a method as long as it
-  responds to the messages that will be sent to it.
-- It has a great web app. framework (Seaside) and a great CMS framework (Pier).
+  Any kind of object can be passed as a message argument
+  as long as it responds to the messages that will be sent to it.
 - It provides automatic version control.
+- It has a great web app. framework (Seaside) and a great CMS framework (Pier).
 
 ## Smalltalk Cons
 
@@ -141,7 +163,7 @@ target="_blank">Discord channel channel for Squeak Smalltalk</a>.
 
   - Schools generally don't teach it.
   - Few jobs using it are available.
-  - IT press doesn't talk about it.
+  - IT press rarely talks about it.
   - It's difficult to convince others to use it.
 
 - Help is limited.
@@ -155,14 +177,15 @@ target="_blank">Discord channel channel for Squeak Smalltalk</a>.
 
   Many Smalltalk libraries have little to no documentation and example code.
   There seems to be a feeling that since the source code is easily accessible,
-  developers can just read that to determine how to use a library.
+  developers can just read it to determine how to use a library.
   This makes it difficult to get started using new libraries.
 
 - Classes are global and not in namespaces, so all class names must be unique.
 
-  Using class name prefixes is recommended.
+  Using class name prefixes is sometimes recommended.
   This is important for using Squeak packages and Monticello.
   Squeak has a prefix registry in the wiki.
+  TODO: Add a link to this!
 
 - Immutability is not favored.
 
