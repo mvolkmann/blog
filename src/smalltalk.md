@@ -684,6 +684,18 @@ In dynamic arrays the expressions are separated by periods.
 
 TODO: What is a "compound literal"?
 
+### Reserved Words
+
+There are only six reserved words in Smalltalk which are
+`true`, `false`, `nil`, `self`, `super`, and `thisContext`.
+
+From the
+<a href="https://cuis-smalltalk.github.io/TheCuisBook/Pseudo_002dvariables.html"
+target="_blank">Cuis book</a>, "`thisContext` ...
+represents the top frame of the run-time stack. ...
+It is essential for implementing development tools like the Debugger and
+it is also used to implement exception handling and continuations."
+
 ### Assignment Operator
 
 Assignment operators (`:=`) can be rendered as a left pointing arrow
@@ -790,6 +802,9 @@ x := a + b * c. "20"
 y := a + (b * c). "24"
 ```
 
+Parentheses are never needed around unary messages since
+those are always evaluated before binary and keyword messages.
+
 If a message is sent to an object and no compatible method is found,
 the following popup will appear:
 
@@ -810,7 +825,8 @@ A popup will appear to prompt for the class within the inheritance hierarchy
 of the object where the new method should be added.
 After selecting a class, a second popup will appear to prompt for
 the method category to which the new method should be associated.
-The method can be implemented inside the "MessageNotUnderstood" window.
+
+The new method can be implemented inside the "MessageNotUnderstood" window.
 Initially it will just contain `self shouldBeImplemented`.
 Replace that with the real implementation, which in this case is `^self * 3`,
 and press cmd-s to save the change.
@@ -843,8 +859,8 @@ Personally I do not find this helpful and wish it did not show those messages.
 
 The `#perform:` message and its variations can be sent to any class or object
 to send a message specified by the symbol that follows `perform:`.
-This is useful in sitations where the message to send
-needs to be determined at run-time.
+This is useful in situations where the message to send
+must be determined at run-time.
 
 Another alternative it to use the `MessageSend` class.
 The class methods `:receiver:selector`, `:receiver:selector:argument:`, and
@@ -876,19 +892,8 @@ For example, the following sets of expressions are equivalent:
 ) value.
 ```
 
-To provide more than three keyword arguments, use `#perform:withArguments`.
-
-## Reserved Words
-
-There are only six reserved words in Smalltalk which are
-`true`, `false`, `nil`, `self`, `super`, and `thisContext`.
-
-From the
-<a href="https://cuis-smalltalk.github.io/TheCuisBook/Pseudo_002dvariables.html"
-target="_blank">Cuis book</a>, "`thisContext` ...
-represents the top frame of the run-time stack. ...
-It is essential for implementing development tools like the Debugger and
-it is also used to implement exception handling and continuations."
+To provide more than three keyword arguments with `perform`,
+send the `#perform:withArguments` message.
 
 ### Classes
 
