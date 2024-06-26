@@ -785,6 +785,11 @@ However, it allows subclasses to set the variable to a different value
 than that used by the class where it is defined.
 Class instance variables are not commonly used.
 
+TODO: Describe how to define a class instance variable
+and set different values in the class and subclasses.
+Perhaps an example Could be an Animal class with a legs variable
+that is set to 0 in the Animal class and 4 in the Dog subclass.
+
 ### Accessor Methods
 
 Instance variables are never accessed directly
