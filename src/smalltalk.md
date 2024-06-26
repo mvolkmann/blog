@@ -642,8 +642,12 @@ TODO: Change this image to one that shows ouptut from the examples given above.
 
 ## Syntax
 
-Before diving into the functionality provided by other windows,
+Before diving into the functionality provided
+by the Smalltalk development environment,
 it's important to understand the syntax of the Smalltalk programming language.
+
+### Summary
+
 The following table summarizes all the syntax.
 
 | Item                                              | Example                                                    |
@@ -855,7 +859,7 @@ Even if the object has no matching method anywhere in its inheritance hierarchy,
 it could still respond by handling it in a `doesNotUnderstand` method.
 Personally I do not find this helpful and wish it did not show those messages.
 
-### Other Ways To Send Messages
+### Dynamic Messages
 
 The `#perform:` message and its variations can be sent to any class or object
 to send a message specified by the symbol that follows `perform:`.
@@ -927,29 +931,6 @@ Instance variables are described by a single `String`
 where the names are separated by spaces.
 The names must begin lowercase.
 
-Instance variables are always private,
-which means they can only be accessed by instance methods
-in the class that defines them and in subclasses.
-To expose an instance variable value to methods in other classes,
-define an instance method that returns it.
-
-When a new instance of a class is created,
-its instance method `initialize` is called.
-This is, as the name suggests, a perfect place to
-assign an initial value to each instance variable.
-
-Class variables are described in the same way,
-but their names must begin uppercase.
-It is common for a class not have any class variables.
-
-Like instance variables, class variables are always private.
-To expose a class variable value to methods in other classes,
-define a class method that returns it.
-
-To assign initial values to the class variables of a class,
-define the class method `initialize`
-and explicitly send that message to the class.
-
 Each class is a associated with a category.
 Classes provided by the image are in categories such as
 "Collections", "Kernel", "Morphic", "System", "Tools", "UI", and many more.
@@ -993,6 +974,33 @@ score: aNumber
 As shown above, another convention is for variables associated with
 keyword messages to indicate their expected type.
 
+### Instance Variables
+
+Instance variables are always private,
+which means they can only be accessed by instance methods
+in the class that defines them and in subclasses.
+To expose an instance variable value to methods in other classes,
+define an instance method that returns it.
+
+When a new instance of a class is created,
+its instance method `initialize` is called.
+This is, as the name suggests, a perfect place to
+assign an initial value to each instance variable.
+
+### Class Variables
+
+Class variables are described in the same way,
+but their names must begin uppercase.
+It is common for a class not have any class variables.
+
+Like instance variables, class variables are always private.
+To expose a class variable value to methods in other classes,
+define a class method that returns it.
+
+To assign initial values to the class variables of a class,
+define the class method `initialize`
+and explicitly send that message to the class.
+
 ### Class Instance Variables
 
 A "class variable" is defined in a class definition.
@@ -1015,12 +1023,13 @@ that is set to 0 in the Animal class and 4 in the Dog subclass.
 
 ### Accessor Methods
 
-Instance variables are never accessed directly
-from outside of the class that defines them.
-To expose their values, write getter methods.
-To allow them to be modified, write setter methods.
+"Getter methods" allow instance or class variable values to be
+accessed from outside the class that defines them.
 
-Suppose a class Dog has the instance variable `breed`.
+"Setter methods" allow instance or class variables to be
+modified from outside the class the defines them.
+
+Suppose a class `Dog` has the instance variable `breed`.
 The following accessor methods can be implemented:
 
 ```smalltalk
@@ -1037,30 +1046,38 @@ and selecting "more...create inst var accessors".
 
 ### Objects
 
-In Smalltalk, code and data are both represented by objects.
+Code and data are both represented by objects.
 Code can be described by a method or block, both of which are kinds of objects.
 
 Objects are created by sending a message to a class.
-In addition, some kinds of objects can be created from a literal syntax
-such as numbers, strings, and arrays.
+In addition, some kinds of objects, such as numbers, strings, and arrays,
+can be created from a literal syntax.
 
 Every class supports the class method `new`,
 which creates and returns a new instance of the class.
 If the class defines the instance method `initialize`,
 the `new` method will call it.
-The `initialize` method typically
-initializes the instance variables of the object.
+The `initialize` method typically initializes
+each of the instance variables of the object.
 
-Every class also supports the class method `basicNew` which is similar to
+Every class object inherits from `Class`,
+which inherits from `ClassDescription`,
+which inherits from `Behavior`.
+The `Behavior` class defines the instance method `new`
+which contains the following:
+
+```smalltalk
+    ^ self basicNew initialize.
+```
+
+Every class also supports the method `basicNew` which is similar to
 the `new` method, but does not call the instance method `initialize`.
 
 Let's look at an example `Rect` class
 with instance variables `height` and `width`.
 
 We can define the class method `height:width:`
-that provides an alternate way to create objects as follows.
-This assumes we can send the message `#setHeight:width:`
-(in the `private` message category) to instances.
+that provides an alternate way to create objects as follows:
 
 ```smalltalk
 height: aHeight width: aWidth
@@ -1074,6 +1091,7 @@ initialize
     height := 1.
     width := 1
 
+"This method should be in the private category."
 setHeight: aHeight width: aWidth
     height := aHeight.
     width := aWidth
@@ -1087,16 +1105,24 @@ We can use the `Rectangle` class as follows:
 ```smalltalk
 r1 := Rect new.
 Transcript show: r1 area. "1"
+
 r2 := Rect height: 2 width: 3.
 Transcript show: r2 area. "6"
 ```
 
-To determine the class of an object, send it the `class` unary message.
+To determine the class of an object, send it the `#class` unary message.
 For example, `19 class` returns `SmallInteger`.
 
 Variables defined in Workspace windows hold references to their object values.
 It may be necessary to close a Workspace window
 in order to trigger garbage collection of those objects.
+
+To delete all instances of a given class, say `SomeClass`,
+enter the following in Workspace and "Do it":
+
+```smalltalk
+SomeClass allInstancesDo: [ :obj | obj delete ]
+```
 
 ### Immutability
 
