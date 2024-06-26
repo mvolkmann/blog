@@ -675,8 +675,8 @@ The following table summarizes all the syntax.
 | expression separator (period)                     | `'foo print'. 'bar' print`                                 |
 | reference to current object in a method           | `self`                                                     |
 
-The caret (^) in a return expression can be followed by a space,
-but a space is not typically included.
+The caret (^) in a return expression can be followed by a space.
+The pretty printer includes a space, but some developers prefer to omit it.
 
 In static arrays the elements are separated by spaces.
 
@@ -701,6 +701,194 @@ Typing an underscore is a shorthand way to type `:=`.
 Typing either will be rendered as a left pointing arrow.
 This does not change the characters that appear
 when code is saved in a "file out" or package.
+
+### Messages
+
+The only mechanism for communicating with an object is to send it a message.
+A message is a combination of a selector (or message name) and arguments.
+Messages are always sent to a explicit receiver.
+When inside an instance method, to send a message to the current object,
+use the pseudo-variable `self` as the receiver.
+
+Arguments in messages are always passed by reference, not by value.
+
+In Smalltalk documentation, selectors are preceded by `#`
+to indicate that they are symbols.
+But the `#` is not included when actually sending a message.
+
+A method is code found in a class that responds to a message.
+
+Smalltalk supports three types of messages:
+
+- unary
+
+  These message do not take any arguments.
+  Their names are alphanumeric and begin lowercase.
+  For example, in `5 factorial`, `#factorial` is a unary message.
+
+- binary
+
+  These message take a single argument and
+  have names that use a restricted set of characters that
+  make them look like operators in other programming languages.
+  Binary message names can only contain one or more of the following characters:
+  `+ - * / \ ~ < > = @ % | & ? ,`
+
+  For example, in `a * b`, `#*` is a binary message.
+  This sends the message `#*` to the object `a`, passing it the argument `b`.
+
+  The binary message `=` tests whether two objects are equal,
+  meaning one can be used in place of the other.
+  Each class can define this method to decide
+  how their objects should be compared.
+  If they do not define `=`, an implementation
+  will be found in the inheritance hierarchy.
+  The `Object` class defines `=` to be the same as `==`.
+
+  The binary message `==` tests whether
+  two objects are identical (same objects in memory).
+
+- keyword
+
+  These messages take one or more arguments
+  that are each preceded by a keyword.
+  Each keyword is alphanumeric, begins lowercase, and ends in a colon.
+  For example, `#at:put` is a keyword message in the
+  `OrderedCollection` class which is the superclass of the `Array` class.
+
+  The following code creates an array of colors and then
+  changes the second element from `'green'` to `'yellow'`:
+
+  ```smalltalk
+  colors := #('red' 'green' 'blue').
+  colors at: 2 put: 'yellow'.
+  ```
+
+  The parts of a keyword message must be specified in the order
+  in which they appear in the corresponding method definition.
+  It's possible define additional methods that support other orders,
+  but that is not typically done.
+
+When multiple messages of these types are combined in a single expression,
+the order of evaluation is:
+
+- all unary messages from left to right
+- all binary messages from left to right
+- all keyword messages from left to right
+
+For example, in `2 raisedTo: 1 + 3 factorial`,
+the order is `#factorial`, `#+`, and `#raisedTo`.
+
+The evaluation order can be changed by adding parentheses.
+For example:
+
+```smalltalk
+a := 2.
+b := 3.
+c := 4.
+x := a + b * c. "20"
+y := a + (b * c). "24"
+```
+
+If a message is sent to an object and no compatible method is found,
+the following popup will appear:
+
+<img alt="Unknown Selector popup" style="width: 50%"
+  src="/blog/assets/smalltalk-unknown-selector.png?v={{pkg.version}}">
+
+If the selector was incorrectly typed,
+an implemented selector can be selected from this popup.
+
+If the selector is confirmed or if such a message is sent from runnning code,
+the following window will appear:
+
+<img alt="MessageNotUnderstood window"
+  src="/blog/assets/smalltalk-message-not-understood.png?v={{pkg.version}}">
+
+To implement the missing method, click the "Create" button.
+A popup will appear to prompt for the class within the inheritance hierarchy
+of the object where the new method should be added.
+After selecting a class, a second popup will appear to prompt for
+the method category to which the new method should be associated.
+The method can be implemented inside the "MessageNotUnderstood" window.
+Initially it will just contain `self shouldBeImplemented`.
+Replace that with the real implementation, which in this case is `^self * 3`,
+and press cmd-s to save the change.
+
+### Tab Completions
+
+When entering code to send a message, completion hints are provided
+if at least the first letter in the message name is typed
+and the tab key is pressed.
+For example, entering `7 s` and pressing the tab key
+shows possible completions of `shallowCopy`, `sqrt`, and more.
+Use the up and down arrow keys to select a completion
+and press the return key to accept it.
+
+To enable completions without typing any characters in the name,
+enter `Preferences at: #spaceTabOpensAutoCompletion put: true`
+in a Workspace and "Do it".
+For example, with this preference set, you can enter `'test'`
+followed by a space and press the tab key to get completion hints.
+
+Matching messages found anywhere in the inheritance hierarchy appear in black.
+If there are no matching messages,
+it will show all known selectors that match in any class in blue.
+The reason is that you can send any message to any object.
+Even if the object has no matching method anywhere in its inheritance hierarchy,
+it could still respond by handling it in a `doesNotUnderstand` method.
+Personally I do not find this helpful and wish it did not show those messages.
+
+### Other Ways To Send Messages
+
+The `#perform:` message and its variations can be sent to any class or object
+to send a message specified by the symbol that follows `perform:`.
+This is useful in sitations where the message to send
+needs to be determined at run-time.
+
+Another alternative it to use the `MessageSend` class.
+The class methods `:receiver:selector`, `:receiver:selector:argument:`, and
+`:receiver:selector:arguments:` return an object that describes a message send.
+The object can be passed around and the actual send can be triggered later.
+
+For example, the following sets of expressions are equivalent:
+
+```smalltalk
+"These demostrates sending a unary message. Each gives the result 2."
+4 sqrt.
+4 perform: #sqrt.
+(MessageSend receiver: 4 selector: #sqrt) value.
+
+"These demonstrate sending a binary message. Each gives the result 6."
+2 * 3.
+2 perform: #* with: 3.
+(MessageSend receiver: 2 selector: #* argument: 3) value.
+
+"These demonstrate sending a keyword message. Each gives the result 4."
+'foobarbaz' findString: 'BAR' startingAt: 1 caseSensitive: false.
+'foobarbaz'
+    perform: #findString:startingAt:caseSensitive:
+    with: 'BAR' with: 1 with: false.
+(MessageSend
+    receiver: 'foobarbaz'
+    selector: #findString:startingAt:caseSensitive:
+    arguments: #('BAR' 1 false)
+) value.
+```
+
+To provide more than three keyword arguments, use `#perform:withArguments`.
+
+## Reserved Words
+
+There are only six reserved words in Smalltalk which are
+`true`, `false`, `nil`, `self`, `super`, and `thisContext`.
+
+From the
+<a href="https://cuis-smalltalk.github.io/TheCuisBook/Pseudo_002dvariables.html"
+target="_blank">Cuis book</a>, "`thisContext` ...
+represents the top frame of the run-time stack. ...
+It is essential for implementing development tools like the Debugger and
+it is also used to implement exception handling and continuations."
 
 ### Classes
 
@@ -2220,175 +2408,6 @@ Create a new package for your code as described above.
 While still in the "Installed Packages" window,
 select the package and click "browse"
 to open a System Browser for the package.
-
-## Messages
-
-The only mechanism for communication between objects
-is for one to send a message to another.
-Messages are always sent to a explicit receiver,
-which is `self` to send a message to the current object.
-Arguments in messages are always passed by reference, not by value.
-
-In documentation, message names are preceded by `#`,
-but that does not appear when sending the messages.
-
-Smalltalk supports three types of messages:
-
-- unary
-
-  These message do not take any arguments.
-  Their names are alphanumeric and begin lowercase.
-  For example, in `5 factorial`, `#factorial` is a unary message.
-
-- binary
-
-  These message take a single argument and
-  have names that use a restricted set of characters that
-  make them look like operators in other programming languages.
-  Their names can only contain one or more of the following characters:
-  `+ - * / \ ~ < > = @ % | & ? ,`
-
-  For example, in `a * b`, `#*` is a binary message.
-  This sends the message `#*` to the object `a`, passing it the argument `b`.
-
-  The binary message `==` tests whether
-  two objects are identical (same objects in memory).
-
-  The binary message `=` tests whether two objects are equal,
-  meaning one can be used in place of the other.
-  Each class can define this method to decide
-  how their objects should be compared.
-  If they do not define `=`, an implementation
-  will be found in the inheritance hierarchy.
-  The `Object` class defines `=` to be the same as `==`.
-
-- keyword
-
-  These messages take one or more arguments
-  that are each preceded by a keyword.
-  Each keyword is alphanumeric, begins lowercase, and ends in a colon.
-  For example, `#at:put` is a keyword message in the
-  `OrderedCollection` class which is the superclass of `Array`.
-  This message is sent as follows:
-
-  ```smalltalk
-  colors := #('red' 'green' 'blue').
-  colors at: 2 put: 'yellow'.
-  ```
-
-  The parts of a keyword message must be specified
-  in the order in which they appear.
-  It's possible define additional methods that support other orders,
-  but that is not typically done.
-
-When multiple messages of these types are combined in a single expression,
-the order of evaluation is:
-
-- unary messages from left to right
-- binary messages from left to right
-- keyword messages from left to right
-
-For example, in `2 raisedTo: 1 + 3 factorial`,
-the order is `#factorial`, `#+`, and `#raisedTo`.
-
-When entering code to send a message, completion hints are provided
-if at least the first letter in the message name is typed
-and the tab key is pressed.
-For example, entering `7 s` and pressing the tab key
-shows possible completions of `shallowCopy`, `sqrt`, and more.
-Use the up and down arrow keys to select a completion
-and press the return key to accept it.
-
-To enable completions without typing any characters, enter
-`Preferences at: #spaceTabOpensAutoCompletion put: true`
-in a Workspace window and "Do it".
-For example, with this preference set, you can enter `'test'`
-followed by a space and press the tab key to get completion hints.
-
-Matching messages found anywhere in the inheritance hierarchy appear in black.
-If there are no matching messages,
-it will show all known selectors that match in any class in blue.
-The reason is that you can send any message to any object.
-Even if the object has no matching method anywhere in its inheritance hierarchy,
-it could still respond by handling it in `doesNotUnderstand`.
-I'll go on record saying that I do not find this helpful.
-I wish it did not show those messages.
-
-If a message is sent to an object from a Workspace window
-and no compatible method is found, the following popup will appear:
-
-<img alt="Unknown Selector popup" style="width: 50%"
-  src="/blog/assets/smalltalk-unknown-selector.png?v={{pkg.version}}">
-
-If the selector was incorrectly typed,
-an implemented selector can be selected from this popup.
-
-If the selector is confirmed or if such a message is sent from runnning code,
-the following window will appear:
-
-<img alt="MessageNotUnderstood window"
-  src="/blog/assets/smalltalk-message-not-understood.png?v={{pkg.version}}">
-
-To implement the missing method, click the "Create" button.
-A popup will appear to prompt for the class within the inheritance hierarchy
-of the object where the new method should be added.
-After selecting a class, a second popup will appear to prompt for
-the method category to which the new method should be associated.
-The method can be implemented inside the "MessageNotUnderstood" window.
-Initially it will just contain `self shouldBeImplemented`.
-Replace that with the real implementation, which in this case is `^self * 3`,
-and press cmd-s to save the change.
-
-### Other Ways To Send Messages
-
-The `#perform:` message and its variations can be sent to any class or object
-to send a message specified by the symbol that follows `perform:`.
-This is useful in sitations where the message to send
-needs to be determined at run-time.
-
-Another alternative it to use the `MessageSend` class.
-The class methods `:receiver:selector`, `:receiver:selector:argument:`, and
-`:receiver:selector:arguments:` return an object that describes a message send.
-The object can be passed around and the actual send can be triggered later.
-
-For example, the following sets of expressions are equivalent:
-
-```smalltalk
-"These demostrates sending a unary message. Each gives the result 2."
-4 sqrt.
-4 perform: #sqrt.
-(MessageSend receiver: 4 selector: #sqrt) value.
-
-"These demonstrate sending a binary message. Each gives the result 6."
-2 * 3.
-2 perform: #* with: 3.
-(MessageSend receiver: 2 selector: #* argument: 3) value.
-
-"These demonstrate sending a keyword message. Each gives the result 4."
-'foobarbaz' findString: 'BAR' startingAt: 1 caseSensitive: false.
-'foobarbaz'
-    perform: #findString:startingAt:caseSensitive:
-    with: 'BAR' with: 1 with: false.
-(MessageSend
-    receiver: 'foobarbaz'
-    selector: #findString:startingAt:caseSensitive:
-    arguments: #('BAR' 1 false)
-) value.
-```
-
-To provide more than three keyword arguments, use `#perform:withArguments`.
-
-## Reserved Words
-
-There are only six reserved words in Smalltalk which are
-`true`, `false`, `nil`, `self`, `super`, and `thisContext`.
-
-From the
-<a href="https://cuis-smalltalk.github.io/TheCuisBook/Pseudo_002dvariables.html"
-target="_blank">Cuis book</a>, "`thisContext` ...
-represents the top frame of the run-time stack. ...
-It is essential for implementing development tools like the Debugger and
-it is also used to implement exception handling and continuations."
 
 ## Control Flow
 
