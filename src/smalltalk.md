@@ -583,11 +583,15 @@ For example, enter the following and press cmd-p to get the output `6`:
 
 You will use "Do it" and "Print it" often, so memorize their keyboard shortcuts.
 
+To remove the last expression added in a Workspace, press cmd-z.
+
 If the code goes into an infinite loop, press cmd-period to break out of it.
 
 ### Transcript Windows
 
 Transcript windows provide a read-only window display of output written to it.
+
+To open a Transcript, open the World menu and select "Open...Transcript".
 
 One way to write to the Transcript is to execute `Transcript show: <object>`,
 perhaps in a Workspace window.
@@ -631,29 +635,6 @@ TODO: Why does this window contain the word "Transcript" in its content?
 TODO: Change this image to one that shows ouptut from the examples given above.
 <img alt="Cuis Transcript window" style="width: 80%"
   src="/blog/assets/cuis-transcript-window.png?v={{pkg.version}}">
-
-## Transcripts
-
-To print "Hello World!":
-
-1. Click on the WorldMorph background and select Open...Workspace.
-1. Enter `Transcript show: 'Hello World!'` in the Workspace window.
-   For more options, see the "Transcript" section below.
-1. If no Transcript window is open, open one by
-   clicking on the WorldMorph background and selecting Open...Transcript.
-1. Right-click inside the Workspace window and select "Do it" or press cmd-d.
-1. The output will appear in the Transcript window.
-1. To clear the output in the Transcript,
-   right-click in it and select "Clear Transcript" (no keyboard shortcut).
-
-To evaluate an expression in a Workspace
-and display the result after it in the workspace:
-
-- Enter an expression in the Workspace window like `3 factorial`.
-- Select it by pressing ctrl-a or dragging over it with the mouse.
-- Press ctrl-p to print it.
-- Remove the output from the Workspace window
-  by pressing ctrl-z to undo adding it.
 
 ## Other Preferences
 
