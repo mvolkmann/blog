@@ -154,8 +154,9 @@ Smalltalk has the following pros:
 - Everything is an object.
 - All methods are invoked through message passing
   which supports extreme polymorphism.
-  Any kind of object can be passed as a message argument
-  as long as it responds to the messages that will be sent to it.
+  Any kind of object, referred to as a "receiver",
+  can be passed as a message argument as long as it
+  responds to the messages that will be sent to it.
 - It provides automatic version control.
 - It has a great web app. framework (Seaside) and a great CMS framework (Pier).
 
@@ -1169,7 +1170,7 @@ Methods are associated with a specific class.
 Class methods handle messages sent to the class.
 Instance methods handle messages sent to objects instantiated from the class.
 
-In keyword methods, parameter variable names typically
+In binary and keyword methods, parameter variable names typically
 indicate the expected object type and begin with "a" or "an".
 For example, `aNumber`, `aString`, or `anArray`.
 This works well because the keyword that
@@ -1191,23 +1192,35 @@ other methods in the same class are placed in the "private" message category.
 
 To find a method:
 
-- Click the `WorldMorph` back and select Open ... Message Names.
-  This will open a "Message names" window.
-- Enter part of a message and press the return key.
-  This will display a list of matching message names.
-- Click one of the message names to see the classes that implement it.
-- Click one of the class names and click the "Browse" button
-  to open a System Browser that shows the method implementation.
+- Open the World menu and select Open ... Message Names.
+  This opens a "Message Names" window.
 
-For example, entering "nj" will find the "inject:into:" message
-that is implemented by the `Collection` class.
+- Enter any part of a message name and press the return key.
+  For example, entering "nj" will find several methods including
+  the "inject:into:" message that is implemented by the `Collection` class.
+
+  A list of matching message names will be displayed in the top left pane
+  with the first one selected.
+  A list of classes that implement the selected method will be displayed
+  in the top right pane with the first one selected.
+  The implementation of the selected method
+  will be displayed in the bottom pane.
+
+- Click another message name to see the classes that implement it.
+
+- Click another class name to see its implementation of the method.
+
+- Click the "Browse" button to open a System Browser focused on that method.
+
+The buttons in the "Message Names" window are
+the same as the buttons "System Browser" windows.
 
 Squeak Smalltalk supports finding methods by part of their name
 OR by providing example input and output.
-The steps to use this are:
+To find a method in Squeak Smalltalk:
 
-- From the "Tools" menu, select "Method Finder".
-  This opens a "Selector Browser" window.
+- Click the "Tools" menu and select "Method Finder".
+  This opens a "Selector Browser".
 - Enter part of the method name OR
   an example input, followed by a period, and the expected output.
 - Press the return key.
@@ -1217,6 +1230,8 @@ The steps to use this are:
 
 See <a href="https://www.youtube.com/watch?v=cI_yBWdmoeI&list=PLu8vLCSA-4hklsvT9W6ruintbdx_K0DYW&index=11&t=28s"
 target="_blank">The amazing Squeak Method Finder</a>.
+
+GRONK: Continue review here.
 
 To add a method to a class:
 
