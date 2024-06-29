@@ -1266,10 +1266,14 @@ To add a method to a class:
 Another way to find a class that is useful
 when its class category is not known is to:
 
-- press shift-return OR
-  hover over the top, first column in a System Browser and press cmd-f
-- enter part of the class name
-- select the class from the popup list that appears
+- Press shift-return OR
+  hover over the top, first column in a System Browser and press cmd-f.
+- Enter part of the class name.
+- Select a class name from the popup list that appears.
+- If shift-return was pressed, a new System Browser
+  will open to display the selected class.
+  If cmd-f was pressed in an existing System Browser,
+  the selected class will be displayed there.
 
 To sort the class category or message category names alphabetically,
 hover over their column and press cmd-a (alphabetize).
