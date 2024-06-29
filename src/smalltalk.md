@@ -1449,6 +1449,9 @@ can differ between VM implementations.
 To get a sense of typical mappings, see the ones used by SqueakJS in the file
 <a href="https://github.com/codefrau/SqueakJS/blob/2b9ce0cd94b9ab3cb0aae28052c809b0bd3c14ea/vm.primitives.js#L80"
 target="_blank">vm.primitives.js</a>.
+For the OpenSmalltalk version, see the file
+<a href="https://github.com/OpenSmalltalk/opensmalltalk-vm/blob/Cog/src/spur32.cog/cointerp.c"
+target="_blank">cointerp.c</a>.
 
 TODO: Is there a limit of 256 primitive numbers?
 
