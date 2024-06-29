@@ -1231,49 +1231,52 @@ To find a method in Squeak Smalltalk:
 See <a href="https://www.youtube.com/watch?v=cI_yBWdmoeI&list=PLu8vLCSA-4hklsvT9W6ruintbdx_K0DYW&index=11&t=28s"
 target="_blank">The amazing Squeak Method Finder</a>.
 
-GRONK: Continue review here.
-
 To add a method to a class:
 
 - Open a System Browser.
-- Select the category of the class in the top, first pane.
+- Select the class category of the class to which the method will be added
+  in the top, first pane.
 - Select the class in the top, second pane.
-- Click the message category in which the new method will be placed,
-  or select "as yet unclassified" in the top, third pane.
+- Select the method category in which the method will be added.
+  If no suitable category appears in the list, press cmd-n (new category...)
+  to create a new one.
+  Alternatively, select "-- all --" and assign the method to a category later.
+  In that case the method will be assigned to the "as yet unclassified" category.
 - A starting template for a new method definition
   will appear in the bottom pane.
-- Change "messageSelectorAndArgumentNames"
-  to the name of the new method.
+- Change "messageSelectorAndArgumentNames" to the name of the new method,
+  including any parameter names it uses.
 - Modify the comment describing the method.
 - Update the list of temporary (local) variable names or delete that line.
 - Replace "statements" with the method implementation.
-- If the method was not associated with a method category ...
-  - If the top, third pane does not contain a suitable message category ...
-    - Right-click in that pane and select "new category",
-      or click in the top, third pane and press cmd-n.
-    - Select a category to add.
-    - If none of the provided categories are suitable, select "new..."
-      and enter the name of a category to be added.
-      For consistency, try to stick with the provided category names.
-  - Click "as yet unclassified" in the top, third pane.
-  - Drag the name of the new method from the top, fourth pane
-    to its method category to associate it.
+- To associate the method with a different method category,
+  drag its name from the top, fourth pane to
+  the desired method category in the top, third pane.
 
-To sort the message category names alphabetically,
-right-click in the top, third pane and select "alphabetize".
+Another way to find a class that is useful
+when its class category is not known is to:
+
+- hover over the top, first column,
+- press cmd-f
+- enter part of the class name
+- select the class from the popup list that appears
+
+To sort the class category or message category names alphabetically,
+hover over their column and press cmd-a (alphabetize).
 
 To remove a method in the System Browser,
-select it and press cmd-x (remove method).
+select its name in the top, fourth pane and press cmd-x (remove method).
 
-The following methods can be added to the `Integer` class.
+For example, try adding the following methods to the `Integer` class
+which is in the class category "Kernel...Numbers".
 
 ```smalltalk
 predecessor
-    "answers the predecessor of this integer"
+    "Answer the predecessor of this integer."
     ^self - 1
 
 successor
-    "answers the successor of this integer"
+    "Answer the successor of this integer."
     ^self + 1
 ```
 
@@ -1282,21 +1285,30 @@ For example, a class named `VShape` can define the following method:
 
 ```smalltalk
 area
-    "answers the area of the shape"
+    "Answer the area of the shape."
     self subclassResponsibility
 ```
 
+This does not prevent instances of the class from being created,
+but calling such methods will result in an Error window
+with the title "My subclass should have overridden {method-name}" will appear.
+
 The classes `VCircle` and `VRectangle` can be defined as subclasses of `VShape`.
 If they do not define the `area` method
-and that message is sent to an instance,
-an Error dialog with the title "My subclass should have overridden #area"
-will appear.
+and that message is sent to an instance, an Error window
+with the title "My subclass should have overridden #area" will appear.
 
-To add the missing method, click the "Create" button,
-select a message category for the method,
-enter its implemenation, press cmd-s to save, and
-press the "Proceed" button to continue running the code
-at the point of the failed message send.
+To add the missing method from the Error window:
+
+- Click the "Create" button.
+- Select a message category for the method.
+- Enter its implemenation.
+- Press cmd-s to save.
+- Press the "Proceed" button to continue running the code
+  at the point of the failed message send.
+
+The example classes above adds the prefix "V" (first letter of my last name)
+to their names because the class name `Rectangle is already defined.
 
 The `VCircle` class can have the following class method for creating instances:
 
