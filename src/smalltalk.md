@@ -1266,8 +1266,8 @@ To add a method to a class:
 Another way to find a class that is useful
 when its class category is not known is to:
 
-- hover over the top, first column,
-- press cmd-f
+- press shift-return OR
+  hover over the top, first column in a System Browser and press cmd-f
 - enter part of the class name
 - select the class from the popup list that appears
 
@@ -1567,8 +1567,23 @@ The World menu contains a Help submenu which contains the following:
   > and is therefore automatically stored in ChangeSets.
 
 - Using GitHub to host Cuis packages
+
+  This opens a window containing text that explains
+  the recommended development process for
+  managing external packages in Cuis Smalltalk using GitHub.
+
 - Editor keyboard shortcuts
+
+  This opens a window containing text that describes all the keyboard shortcuts
+  supported by Cuis Smalltalk for editing text, including code.
+
+  For example, to rename a parameter or local variable in a method,
+  select it, press cmd-shift-r, and enter the new name.
+
 - Useful Expressions
+
+GRONK: Continue review here.
+
 - VM Statistics
 - Space Left
 
