@@ -1401,6 +1401,10 @@ double: obj
 
 ### Primitive Methods
 
+Primitive methods are implemented in the virtual machine,
+often in a way that is more efficient than
+what could be achieved in Smalltalk code.
+
 From the Blue Book ...
 
 > All behavior in the system is invoked by messages, however,
@@ -1423,9 +1427,9 @@ From the Blue Book ...
 > The expression `<primitive #>` is followed by
 > Smalltalk-80 expressions that handle failure situations.
 
-In Cuis Smalltalk, see the comment at the beginning of
-the class method `whatIsAPrimitive` in the `Object` class.
-It contains the following:
+In Cuis Smalltalk, the comment at the beginning of
+the class method `whatIsAPrimitive` in the `Object` class
+contains the following:
 
 > When the Smalltalk interpreter begins to execute a method which specifies a
 > primitive response, it tries to perform the primitive action and to return a
@@ -1435,6 +1439,18 @@ It contains the following:
 > Smalltalk expressions in the method are executed instead. These
 > expressions are evaluated as though the primitive routine had not been
 > called.
+
+From Vanessa Freudenberg, "The VM is mostly written in
+a subset of Smalltalk called Slang, transpiled to C, then compiled and linked
+with platform-specific code to create the VM executable."
+
+The functionality of specific numbered primitives
+can differ between VM implementations.
+To get a sense of typical mappings, see the ones used by SqueakJS in the file
+<a href="https://github.com/codefrau/SqueakJS/blob/2b9ce0cd94b9ab3cb0aae28052c809b0bd3c14ea/vm.primitives.js#L80"
+target="_blank">vm.primitives.js</a>.
+
+TODO: Is there a limit of 256 primitive numbers?
 
 ## System Browser Windows
 
