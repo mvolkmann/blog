@@ -1279,7 +1279,7 @@ To sort the class category or message category names alphabetically,
 hover over their column and press cmd-a (alphabetize).
 
 For example, try adding the following methods to the `Integer` class
-which is in the class category "Kernel...Numbers".
+which is in the class category "Kernel-Numbers".
 
 ```smalltalk
 predecessor
@@ -1756,24 +1756,30 @@ press tab to increase indentation or shift-tab to decrease it.
 ### Inspect Windows
 
 Inspect windows display all the instance variables of a specific object.
-Select an object reference or place the cursor immediately after it
+To open one, select an object reference or place the cursor immediately after it
 and press cmd-i (Inpect it).
 
 <img alt="Cuis Inspect window" style="width: 40%"
   src="/blog/assets/cuis-inspect-window.png?v={{pkg.version}}">
 
-Click the name of an instance variable in the top left pane
-to displays its current value in the top right pane.
+Clicking an item in the top left pane,
+displays related information in the top right pane.
 
-Use the bottom pane to enter and execute Smalltalk expressions
+- Click "self" to display the class name of the object.
+- Click "all inst vars" to display a list
+  of all instance variables and their values.
+- Click the name of an instance to display its current value.
+
+The bottom pane can be used to enter and execute Smalltalk expressions.
+Instance variables can be directly accessed and
 where `self` refers to the object being inspected.
-For example, when the object is a morph,
-enter `self color: Color red` and press cmd-d (Do it),
-or enter `self color` and press cmd-p (Print it).
+For example, when the object is a morph:
 
-Instance variables can be directly set in the bottom pane
-using assignment instead of sending a message.
-For example: `color := Color red`.
+- To get the value of the `color` instance variable,
+  enter `color` or `self color` and press cmd-p (Print it).
+- To set the value of the `color` instance variable,
+  enter `color := Color red` or `self color: Color red`
+  and press cmd-d (Do it).
 
 Inspector windows are live, so changes made to the instance variables
 are reflected.
@@ -1798,11 +1804,12 @@ Let's walk through an example:
    and note that one of the methods is "red".
 1. Back in the Inspect window, click in the bottom pane.
 1. Enter `self color: Color red` and press cmd-d (Do it).
+   TODO: Why doesn't the color change if you enter `color := Color red` instead?
 1. Note that the fill color of the morph changes to red.
 
 ### Explore Windows
 
-This displays an object tree starting at a specific object.
+Explore windows display an object tree starting at a specific object.
 Select an object reference or place the cursor immediately after it
 and press cmd-shift-i (Explore it).
 Click the disclosure triangles to drill down into instance variable values.
@@ -1823,7 +1830,7 @@ System Browsers contain four rows.
 
   Selecting a class category in the first pane
   displays the classes in that category in the second pane.
-  For example, the class `String` is in the class category `Text`.
+  For example, the class `String` is in the class category `Kernel-Text`.
 
   Selecting a class in the second pane
   displays message categories for the class in the third pane.
@@ -1839,9 +1846,20 @@ System Browsers contain four rows.
   all the methods in all categories are listed.
 
   The items in these panes are not sorted alphabetically by default.
-  To sort them, hover over a pane and press cmd-shift-a (alphabetize)
+  To sort them, hover over a pane and press cmd-shift-a (alphabetize).
+  TODO: The menu shows the shortcut as just "a". Is that a bug?
+
+  To scroll any list to the first item that begins with a given letter,
+  type the letter.
 
 - The second row displays a message describing the item selected in the top row.
+
+  | Item Type       | Description                                                         |
+  | --------------- | ------------------------------------------------------------------- |
+  | class category  | # of classes in the category, total # of instance and class methods |
+  | class           | # of instance and class methods defined in the class                |
+  | method category | # of methods (TODO: Why labelled as "messages"?)                    |
+  | method          | # of sends, implementors, and senders                               |
 
 - The third row contains a series of buttons that can be clicked to
   open other windows that show information related to the selected item.
