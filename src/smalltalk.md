@@ -1870,12 +1870,19 @@ System Browsers contain four rows.
   This enables maintaining the view in the current System Browser and
   navigating somewhere relative to that location in a new System Browser.
 
-  The "senders" button ... TODO
+  The "senders" button opens a "Senders of" window that lists
+  all the methods that send a message to invoke the selected method.
+  Selecting one displays its implementation in the bottom pane.
+  If no method is selected, a text entry will be displayed
+  to prompt for a method selector.
 
-  The "implementors" button ... TODO
+  The "implementors" button opens an "Implementors of" window
+  that lists all the classes that implement the selected method.
+  Selecting one displays its implementation in the bottom pane.
 
-  The "versions" button opens a "Recent versions" window (a.k.a Versions Browser)
+  The "versions" button opens a "Recent versions" window
   that displays a list of time stamps for recent versions of the method.
+  TODO: Does this only include changes made since the current image was opened?
   Clicking a time stamp displays that version of the code in the bottom pane.
   If one of the buttons lineDiffs, wordDiffs,
   linePrettyDiffs, or wordPrettyDiffs is pressed, it will show
