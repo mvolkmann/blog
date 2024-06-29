@@ -39,7 +39,10 @@ These support:
 
 - finding code in many ways
 - live code editing where changes are immediately reflected in the environment
+  (no need to recompile or restart the environment)
 - debugging with ability to modify code and data, then continue or restart
+- ability to modify the classes and methods that implement the
+  development environment as easily as modifying your own classes and methods
 - TODO: add more?
 
 Smalltalk is a dynamically typed language.
@@ -562,6 +565,10 @@ To open a Workspace, open a World menu and select "Open...Browser".
 
 Enter any number of expressions separated by periods.
 
+TODO: Replace this with a better screenshot.
+<img alt="Cuis Workspace window" style="width: 80%"
+  src="/blog/assets/cuis-workspace-window.png?v={{pkg.version}}">
+
 To prepare to execute expressions, select them or
 place the cursor at the end of a single-line expression.
 
@@ -583,6 +590,9 @@ For example, enter the following and press cmd-p to get the output `6`:
 ```
 
 You will use "Do it" and "Print it" often, so memorize their keyboard shortcuts.
+
+To browse a class, enter its name and press cmd-b (Browse it).
+This will open a System Browser focused on the class.
 
 To remove the last expression added in a Workspace, press cmd-z.
 
@@ -1455,58 +1465,107 @@ target="_blank">cointerp.c</a>.
 
 TODO: Is there a limit of 256 primitive numbers?
 
-## System Browser Windows
-
-To browse a class, enter its name and press cmd-b (Browse it).
-
-<img alt="Cuis Workspace window" style="width: 80%"
-  src="/blog/assets/cuis-workspace-window.png?v={{pkg.version}}">
-
 ## Images
 
-A Smalltalk image contains the definitions of system-provided classes,
-your classes, and objects that have been created,
-including those that represent all open windows.
+A Smalltalk image contains a collection of
+all objects in the development environment.
+Everything in Smalltalk is represented by an object,
+including class definitions (yours and those provided),
+GUI elements in the development environment,
+and objects created from Workspaces.
 
 An image can be used to manage collections of data,
 perhaps held in `Dictionary` objects, as an alternative to using a database.
 
 One way to start an image is to double-click its file.
-Once started, to discover the directory where it is stored,
-enter `DirectoryEntry smalltalkImageDirectory` in a workspace and "Print it".
 
-To save any changes, include open windows, their position and size,
-and their content (ex. Workspaces),
-open the World menu and select "Save Image",
+To save any changes, open the World menu and select "Save Image",
 "Save Image as", or "Save Image and Quit".
+The changes include open windows, their position and size,
+selections made (ex. System Browser top panel selections),
+and their content (ex. Workspaces).
 
 To quit without saving changes,
 open the World menu and select "Quit without saving".
 
 While the classes and methods provided by a base image can be modified,
 it is not a good idea to do so because
-there won't be a good way to apply those changes to a fresh image.
+there won't be an easy way to apply those changes to a fresh image.
 
 It is better to create new subclasses of provided classes that
-override methods and save the new subclasses in a new package or "file out".
-Doing this enables installing the new package in a fresh image.
+override methods and save the subclasses in a new package or "file out".
+Doing this enables installing the new package or file out in a fresh image.
 
-To see the file path for the currently running image,
-select Help...About this System... or
-hover over the task bar at the bottom of the World window.
-This opens a Text Editor window that displays
-basic information about Cuis Smalltalk.
-It also opens a dialog that displays the current version of Cuis Smalltalk,
-the latest update number, and the file page to the current image.
+There are three ways to discover the file path of the current image:
+
+1. Hover over the task bar at the bottom of the World window.
+   This opens a Text Editor window that displays
+   the current version of Cuis Smalltalk, the latest update number,
+   and the file path of the current image.
+1. Open the World menu and select Help...About this System...
+   This opens a Text Editor window that displays a description of Cuis Smalltalk.
+   It also displays a popup containing the same information as described above.
+1. Open a Workspace, enter `DirectoryEntry smalltalkImageDirectory`,
+   and "Print it".
+   This outputs the directory path of the current image without its file name.
 
 ## Help
 
 The World menu contains a Help submenu which contains the following:
 
 - About this System ...
+
+  This was described at the end of the previous section.
+
 - Terse Guide to Cuis
+
+  An excellent source of categoried code snippets for
+  performing a large number of common tasks.
+
+  If the prompt "The Terse Guide is not loaded.
+  Would you like me to load it for you now?" appears, select "Yes".
+  The following window will open.
+
+  <img alt="Cuis Terse Guide"
+    src="/blog/assets/cuis-terse-guide.jpg?v={{pkg.version}}">
+
+  Click a topic to see example code.
+  Select code and "Do it" or "Print it" to experiment.
+  Modify the code as desired.
+  Changes will not be saved, so it is safe to experiment.
+
 - Class Comment Browser
+
+  The first time this is selected, a message will be displayed
+  stating that it requires cloning the
+  <a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Tools"
+  target="_blank">Cuis-Smalltalk-Tools</a> repository.
+  After this is done, selecting this menu item again
+  will ask for permission to install the tool.
+  After this is done, selecting this menu item yet again
+  will open a Class Comment Browser.
+
+  The left pane displays an alphabetical list of class names
+  where each name is preceded by a disclosure triangle.
+  Clicking a class name displays its first comment in the right pane.
+  Clicking a disclosure triangle expands the class to show a
+  numbered list of comments found in the source code for the class.
+  Clicking any of those displays the comment text in the right pane.
+
+  It's probably more useful to open a System Browser,
+  find a class of interest, an view the comments there.
+
 - Code management in Cuis
+
+  Selecting this opens a window titled "Managing your code in Cuis".
+  That offers the following advice:
+
+  > Code that is not part of the Cuis Core image itself,
+  > like applications, frameworks and libraries, should be stored in Packages.
+  > New code that are meant as patches, fixes or additions;
+  > that could eventually become part of Cuis itself, is not part of any Package,
+  > and is therefore automatically stored in ChangeSets.
+
 - Using GitHub to host Cuis packages
 - Editor keyboard shortcuts
 - Useful Expressions
@@ -1564,43 +1623,6 @@ The repositories that this clones include:
 - StyledTextEditor
 - SVG
 - VMMaker
-
-### Class Comment Browser
-
-Selecting Help ... Class Comment Browser from the World menu the first time
-will display a message explaining that it requires cloning the
-<a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Tools"
-target="_blank">Cuis-Smalltalk-Tools</a> repository.
-After this is done, selecting this menu item again
-will ask for permission to install the tool.
-After this is done, selecting this menu item again
-will open a Class Comment Browser.
-
-The left pane displays an alphabetical list of class names
-where each name is preceded by a disclosure triangle.
-Clicking a class name displays its first comment in the right pane.
-Clicking a disclosure triangle expands the class to show a
-numbered list of comments found in the source code for the class.
-Clicking any of those displays the comment text in the right pane.
-
-It's probably more useful to open a System Browser,
-find a class of interest, an view the comments there.
-
-### Terse Guide
-
-An excellent source of help is the "Terse Guide".
-To open it, open the World menu and select Help...Terse Guide to Cuis.
-When prompted "The Terse Guide is not loaded.
-Would you like me to load it for you now?", select "Yes".
-The following window will open.
-
-<img alt="Cuis Terse Guide"
-  src="/blog/assets/cuis-terse-guide.jpg?v={{pkg.version}}">
-
-Click a topic to see example code.
-Select code and "Do it" or "Print it" to experiment.
-Modify the code as desired.
-Changes will not be saved, so it is safe to experiment.
 
 ## Themes
 
@@ -2227,18 +2249,6 @@ send the `allInstancesDo:` message to the class.
 
 For example, to delete all instances of a given class, run
 `SomeClass allInstancesDo: [ :obj | obj delete ]`.
-
-## Code Management
-
-Selecting Help ... Code management in Cuis from the World menu
-opens a window titled "Managing your code in Cuis".
-That offers the following advice:
-
-> Code that is not part of the Cuis Core image itself,
-> like applications, frameworks and libraries, should be stored in Packages.
-> New code that are meant as patches, fixes or additions;
-> that could eventually become part of Cuis itself, is not part of any Package,
-> and is therefore automatically stored in ChangeSets.
 
 ### File List
 
