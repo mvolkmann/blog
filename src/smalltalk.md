@@ -725,6 +725,14 @@ A message is a combination of a selector (or message name) and arguments.
 Messages are always sent to a explicit receiver.
 When inside an instance method, to send a message to the current object,
 use the pseudo-variable `self` as the receiver.
+To send a message to the superclass of the current object,
+use the pseudo-variable `super` as the receiver.
+
+If Smalltalk were to add the ability to
+specify the parameter and return types of methods,
+it would just be specifying the set of messages
+to which compatible objects can respond.
+This is not done, so compatibility is determined at run-time.
 
 Arguments in messages are always passed by reference, not by value.
 
@@ -1060,6 +1068,7 @@ the `new` method will call it.
 The `initialize` method typically initializes
 each of the instance variables of the object.
 
+Classes are also represented by objects.
 Every class object inherits from `Class`,
 which inherits from `ClassDescription`,
 which inherits from `Behavior`.
@@ -1091,7 +1100,6 @@ initialize
     height := 1.
     width := 1
 
-"This method should be in the private category."
 setHeight: aHeight width: aWidth
     height := aHeight.
     width := aWidth
@@ -1099,6 +1107,9 @@ setHeight: aHeight width: aWidth
 area
     ^height * width
 ```
+
+The `setHeight:width:` method should be in the "private" category
+to indicate that it is not meant to invoked from outside this class.
 
 We can use the `Rectangle` class as follows:
 
@@ -1113,9 +1124,9 @@ Transcript show: r2 area. "6"
 To determine the class of an object, send it the `#class` unary message.
 For example, `19 class` returns `SmallInteger`.
 
-Variables defined in Workspace windows hold references to their object values.
-It may be necessary to close a Workspace window
-in order to trigger garbage collection of those objects.
+Variables defined in a Workspace hold references to their object values.
+It may be necessary to close a Workspace in order to
+trigger garbage collection of those objects.
 
 To delete all instances of a given class, say `SomeClass`,
 enter the following in Workspace and "Do it":
@@ -1126,36 +1137,37 @@ SomeClass allInstancesDo: [ :obj | obj delete ]
 
 ### Immutability
 
-To enforce immutability of objects:
+A class can enforce the immutability of its object by
+simply not implementing any methods that change its instance variable.
 
-- Enter `Feature require: 'Immutability' and "Do it".
+Another option is to use the "Immutability" package
+so attempts to change any instance variable of a given object
+wll result in a "ModificationForbidden" window opening that
+contains a stack trace which indicates where the attempt was made.
 
-  This package can be found at
-  <a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Dev/blob/master/Packages/System/Immutability.pck.st"
-  target="_blank">Immutability.pck.st</a>. Among other things,
-  it adds the instance method `beImmutable` to the`Object` class.
+To install the "Immutability" package,
+enter `Feature require: 'Immutability'` and "Do it".
+Among other things, this package adds
+the instance method `beImmutable` to the `Object` class.
 
-- Send the `beImmutable` message to any object.
+To enforce a specific object to be immutable,
+send it the `#beImmutable` message.
+For example the `Rectangle` class described above
+could have the following class method for creating new instances:
 
-  For example:
+```smalltalk
+height: aHeight width: aWidth
+    ^self new setHeight: aHeight width: aWidth; beImmutable; yourself
+```
 
-  ```smalltalk
-  height: aHeight width: aWidth
-      ^self new setHeight: aHeight width: aWidth; beImmutable; yourself
-  ```
-
-  Note the use of `yourself` to return the current object
-  rather than the return value of the `beImmutable` method.
-
-If an attempt is made to modify any property of an immutable object,
-a "ModificationForbidden" window will open
-containing a stack trace that indicates where the attempt was made.
+Note the use of `yourself` to return the current object
+rather than the return value of the `beImmutable` method.
 
 ### Methods
 
 Methods are associated with a specific class.
-Instance methods handle messages sent to objects instantiated from the class.
 Class methods handle messages sent to the class.
+Instance methods handle messages sent to objects instantiated from the class.
 
 In keyword methods, parameter variable names typically
 indicate the expected object type and begin with "a" or "an".
