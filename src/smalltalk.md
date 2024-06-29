@@ -1027,7 +1027,7 @@ Class instance variables are not commonly used.
 
 TODO: Describe how to define a class instance variable
 and set different values in the class and subclasses.
-Perhaps an example Could be an Animal class with a legs variable
+Perhaps an example could be an Animal class with a legs variable
 that is set to 0 in the Animal class and 4 in the Dog subclass.
 
 ### Accessor Methods
@@ -1264,9 +1264,6 @@ when its class category is not known is to:
 To sort the class category or message category names alphabetically,
 hover over their column and press cmd-a (alphabetize).
 
-To remove a method in the System Browser,
-select its name in the top, fourth pane and press cmd-x (remove method).
-
 For example, try adding the following methods to the `Integer` class
 which is in the class category "Kernel...Numbers".
 
@@ -1310,14 +1307,14 @@ To add the missing method from the Error window:
 The example classes above adds the prefix "V" (first letter of my last name)
 to their names because the class name `Rectangle is already defined.
 
-The `VCircle` class can have the following class method for creating instances:
+The `VCircle` class can add the following class method for creating instances:
 
 ```smalltalk
 radius: aNumber
     ^self new setRadius: aNumber
 ```
 
-The `VCircle` class can have the following instance methods:
+The `VCircle` class can add the following instance methods:
 
 ```smalltalk
 setRadius: aNumber
@@ -1327,14 +1324,14 @@ area
     ^Float pi * radius * radius
 ```
 
-The `VRectangle` class can have the following class method for creating instances:
+The `VRectangle` class can add the following class method for creating instances:
 
 ```smalltalk
 height: aHeight width: aWidth
     ^self new setHeight: aHeight width: aWidth
 ```
 
-The `VRectangle` class can have the following instance methods:
+The `VRectangle` class can add the following instance methods:
 
 ```smalltalk
 setHeight: aHeight width: aWidth
@@ -1345,10 +1342,11 @@ area
     ^height * width
 ```
 
-To delete a method, select it and press cmd-x (remove method).
+To delete a method, select its name in the top, fourth pane
+and press cmd-x (remove method).
 
 To delete a method category and all the methods in it,
-select it and press cmd-x (remove).
+select its name in the top, third pane and press cmd-x (remove).
 
 Both class and instance methods can call themselves recursively.
 
@@ -1357,7 +1355,7 @@ that calls itself recursively:
 
 ```smalltalk
 factorial: n
-    "answers the factorial of a given integer"
+    "Answer the factorial of a given integer."
     ^(n = 1
         ifTrue: 1
         ifFalse: [n * (Math factorial: n - 1)])
@@ -1365,12 +1363,12 @@ factorial: n
 
 Here is an example of an instance method I added to the `Integer` class
 that calls itself recursively.
-This method already exists in that class
+The method `factorial` already exists in that class
 and is more efficient than the version below.
 
 ```smalltalk
 factorial2
-    "answers the factorial of this integer"
+    "Answer the factorial of this integer."
     ^(self = 1
         ifTrue: 1
         ifFalse: [self * (self - 1) factorial2])
@@ -1378,26 +1376,27 @@ factorial2
 
 If you edit the name of a method in code editing pane of a System Browser,
 it will create a copy of the method with the new name.
-A method with the previous name will still exist and can be deleted.
+The method with the previous name will still exist and can be deleted.
 An alternative is to right-click the method in the 4th pane
 and select "refactorings...rename...".
 
 While it is not commonly done, a method can check the types of its arguments
-an alter its functionality based on those.
+and alter its functionality based on those.
 For example, this class method returns a number
 that is double what is passed to it.
 If it is given a `String` instead of a `Number`,
 it converts it to a `Number` and doubles it.
-If it is given some other kind of object, it just returns `0`.
-TODO: How can you add error handling for strings that do not contain a number?
+If it is given any other kind of object, it just returns `0`.
 
 ```smalltalk
 double: obj
-    "demonstrates taking different actions based on the type of an argument"
-
-    (obj isKindOf: Number) ifTrue: [^obj * 2].
-    (obj isKindOf: String) ifTrue: [^obj asNumber * 2].
-    ^0
+    "Answer double the value of the argument."
+    (obj isKindOf: Number) ifTrue: [ ^ obj * 2 ].
+    (obj isKindOf: String) ifTrue: [
+        [ ^ obj asNumber * 2 ]
+            on: Error "error converting string to number"
+            do: [ ^ 0 ]].
+    ^ 0.
 ```
 
 ### Primitive Methods
