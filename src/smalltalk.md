@@ -1880,6 +1880,8 @@ System Browsers contain four rows.
   that lists all the classes that implement the selected method.
   Selecting one displays its implementation in the bottom pane.
 
+  GRONK: Resume review here.
+
   The "versions" button opens a "Recent versions" window
   that displays a list of time stamps for recent versions of the method.
   TODO: Does this only include changes made since the current image was opened?
