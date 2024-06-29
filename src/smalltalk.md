@@ -1491,6 +1491,12 @@ and their content (ex. Workspaces).
 
 To quit without saving changes,
 open the World menu and select "Quit without saving".
+If there are any unsaved changes,
+a confirmation popup will appear that says
+"Some ChangeSets for Cuis core have unsaved changes.
+If you continue, they would be lost.
+Do you really want to exit Cuis without saving the image?"
+Click "Yes" or "No".
 
 While the classes and methods provided by a base image can be modified,
 it is not a good idea to do so because
@@ -1586,16 +1592,24 @@ The World menu contains a Help submenu which contains the following:
 
 - Useful Expressions
 
-GRONK: Continue review here.
+  This opens a window that contains useful expressions.
+  To execute one, selecte it and "Do it" or "Print it".
 
 - VM Statistics
+
+  This opens a window that displays VM Statistics including
+  uptime, memory usage, and garbage collection (GC) statistics.
+
 - Space Left
+
+  This opens a popup that displays remaining memory.
+  It may only be useful for debugging issues with running out of memory.
 
 ## Other Preferences
 
 Many supported preferences are not directly on
 the Preferences submenu of the World menu.
-To access more preferences, click "All preferences..."
+To access those, click "All preferences..."
 which opens a Preferences window.
 Click a preference symbol in the left pane
 to display its current value in the right pane.
@@ -1648,7 +1662,7 @@ The repositories that this clones include:
 Colors and other features of the Cuis Smalltalk UI
 are determined by selecting a theme.
 By default, only two themes are provided, "BrightColorTheme" and "DarkTheme".
-To add more, open the World menu, select Preferences...Themes...,
+To add more themes, open the World menu, select Preferences...Themes...,
 and select "\* Load Additional Themes \*".
 This adds the themes "ClassicTheme", "DarkBlueTheme", "DarkColorTheme",
 "HighContractBlackTheme", "HighContrastWhiteTheme", "LightBluetheme",
@@ -1680,23 +1694,24 @@ specifying a different label color for specific buttons.
 
 ## Windows
 
-You will be opening and using many windows.
-To open one, open the World menu and
-select a window type from the "Open" submenu.
+You will be opening and using many windows in the development environment.
+To open a window, open the World menu, hover over "Open"
+to display a submenu of window types, and click one of them.
 
-To close one, click its red circle button in the upper left
-or move the mouse cursor over the window and press cmd-w.
+To close a window, click its red circle button on the left side of its title bar.
+Alternatively, move the mouse cursor over the window and press cmd-w.
 
-The available windows include:
+The available windows, in the order listed, include:
 
 - Text Editor: for editing text other than Smalltalk source code
 - Workspace: for experimenting with code
-- Browser: for examining code (a.k.a System Browser)
-- Message Names: for determining which classes implement a given method
+- Browser (a.k.a System Browser): for examining and editing code
+- Message Names: for finding classes that implement a given method
 - Transcript: displays output
 - Installed Packages: lists all installed packages and allows more to be installed
 - Change Sorter: TODO: Describe this.
 - Process Browser: displays the state of all Smalltalk processes
+  and enables terminating them
 - Emergency Evaluator: TODO: Describe this.
 - File List: file explorer for viewing all local files and editing text files
 - SUnit Test Runner: for running unit tests and viewing the results
@@ -1704,21 +1719,18 @@ The available windows include:
 Of these, the most frequently used windows tend to be
 Workspace, Transcript, and Browser.
 
-Other windows are only open for a specific object.
-
 To tile all the open windows, open the World menu
 and select Windows...Tile open windows.
 
 To refresh all the windows after code changes that affect them
 (or if the display renders incorrectly for some reason),
 open the World menu and select "Windows...Restore all Windows".
-
-TODO: Are other options in the Windows menu useful?
+This does not update windows to use a newly selected theme.
 
 ### Editing Code
 
 Many kinds of windows support entering Smalltalk code.
-Syntax highlighting is provided.
+The syntax highlighting described in the table below is provided.
 
 | Token Type        | Styling        |
 | ----------------- | -------------- |
@@ -1729,9 +1741,6 @@ Syntax highlighting is provided.
 | message name      | blue           |
 | string            | purple         |
 | symbol            | blue and bold  |
-
-By default, class names are black and bold,
-message names are blue, and symbols are blue and bold.
 
 In any text editng pane, right-click and select "Help..."
 to see a list of the supported key bindings.
@@ -1746,7 +1755,7 @@ press tab to increase indentation or shift-tab to decrease it.
 
 ### Inspect Windows
 
-This displays all the instance variables of a specific object.
+Inspect windows display all the instance variables of a specific object.
 Select an object reference or place the cursor immediately after it
 and press cmd-i (Inpect it).
 
@@ -2249,6 +2258,7 @@ The following table lists some of them.
 | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
 | `Smalltalk allClasses`                                  | an `Array` of all classes defined in the current image                                                       |
 | `Smalltalk allClassesImplementing: #selector`           | an `Array` of all classes that implement a given selector                                                    |
+| `SystemOrganization categoryOfElement: #SomeClass`      | name of the class category to which a given class belongs                                                    |
 | `SomeClass allClassVarNames`                            | a `Set` of class variable names defined in this class                                                        |
 | `SomeClass allSelectors`                                | an `IdentitySet` of all message selectors supported by this class, including selectors for inherited methods |
 | `SomeClass allInstances`                                | an `Array` of all existing instances of this class                                                           |
