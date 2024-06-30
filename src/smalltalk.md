@@ -1832,6 +1832,12 @@ To open a System Browser, open the World menu and select Open...Browser.
 Alternatively, type a class name (ex. String) in a Workspace window and
 press cmd-b (Browse it) to open a System Browser with that class already selected.
 
+For more detail, see
+<a href="https://cuis-smalltalk.github.io/TheCuisBook/A-brief-introduction-to-the-system-Browser.html"
+target="_blank">A brief introduction to the System Browser</a>.
+
+#### System Browser UI
+
 System Browsers contain four rows.
 
 - The first (top) row contains four panes for displaying and operating on
@@ -1860,7 +1866,7 @@ System Browsers contain four rows.
   TODO: The menu shows the shortcut as just "a". Is that a bug?
 
   To scroll any list to the first item that begins with a given letter,
-  type the letter.
+  over over the lsit and type the letter.
 
 - The second row displays a message describing the item selected in the top row.
 
@@ -1969,6 +1975,8 @@ System Browsers contain four rows.
   Press cmd-s (Accept) to save the changes
   and the thin, red border will disappear.
 
+#### Code Formatting
+
 To automatically display formatted code,
 enter the following in a Workspace and "Do it":
 `Preferences at: #browseWithPrettyPrint put: true`.
@@ -1986,6 +1994,8 @@ click the "show..." button in System Browsers and select "prettyPrint".
 <img alt="Cuis System Browser" style="width: 100%"
   src="/blog/assets/cuis-system-browser-window.png?v={{pkg.version}}">
 
+#### Working with Classes
+
 To create a new class:
 
 - Select a class category.
@@ -2000,12 +2010,21 @@ To create a new class:
       instanceVariableNames: ''
       classVariableNames: ''
       poolDictionaries: ''
-      category: 'SelectedClassCategory'
+      category: '{SelectedClassCategory}'
   ```
 
+- To inherit from a class other than `Object`,
+  change that to another class name.
 - Change "NameOfSubclass" to the name of the new class.
 - Add desired instance and class variable names as space-separated strings.
 - Save by pressing cmd-s (Accept).
+
+To delete a class, select it and press cmd-x (Remove it).
+A confirmation popup will appear.
+If the class has subclasses, a second popup will appear
+to confirm that you also wish to delete those classes.
+
+#### Working with Methods
 
 To create a new method:
 
@@ -2013,10 +2032,10 @@ To create a new method:
 - Select a method category.
 
   This can be "-- all --", "as yet unclassified", or any other method category.
-  To create new category, move the mouse cursor over the method category pane
-  and press cmd-n (new category...).
+  To create new category, move the mouse cursor over the method category pane,
+  press cmd-n (new category...), and enter the name of the new category.
 
-  The bottom pane will now contain the following:
+  The bottom pane will now contain the following method template:
 
   ```smalltalk
   messageSelectorAndArgumentNames
@@ -2030,32 +2049,59 @@ To create a new method:
 - Save by pressing cmd-s (Accept).
 
 To move a method from the class side to the instance side or vice-versa,
-right-click the method name in the fourth panel and
-select refactorings...move to instance/class methods.
+right-click the method name in the top fourth panel and
+select "refactorings...move to instance/class methods".
 
 To delete a method from a class, select it and press cmd-x (Remove it).
 Then select "Remove it" or "Remove, then browse senders".
 The latter option allows the senders to be modified.
 
-When the mouse cursor is over any of the four lists at the top, typing a letter
-causes the list to scroll to the first item that begins with that letter.
+#### Searching Code
 
 There is no provided way to search for code that contains a given string.
-Mariano Montone implemented this and shared a change set via email.
-See the file `SearchSourceMenus-MarianoMontone.cs.st`.
-Location this in a "File List" window and click the "install" button.
-This adds the context menu item "search source...".
+However, Mariano Montone implemented two solutions.
 
-For more detail, see
-<a href="https://cuis-smalltalk.github.io/TheCuisBook/A-brief-introduction-to-the-system-Browser.html"
-target="_blank">A brief introduction to the System Browser</a>.
+The first solution was shared with me via email of a
+change set file named `SearchSourceMenus-MarianoMontone.cs.st`.
+If you can find a way to obtain this file, open a "File List" window,
+locate the file, and click the "install" button.
+This adds the menu item "search source..." to the context menu
+that appears when you right-click in the top second pane of a System Browser.
+To search all the code in a class, select the class name,
+right-click, and select "search source...".
+Enter search text in the popup that appears.
+A "Matched of" window will open that lists
+all the methods whose code contains the search text.
+Click one to see its implemenation in the bottom pane.
+
+To install the second solution, clone the repository
+<a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Tools"
+target="_blank">Cuis-Smalltalk-Tools</a>,
+open a Workspace, enter `Feature require: 'SearchBrowser'`, and "Do it".
+This adds the World menu item "Open...Search Browser"
+which opens a Search Browser.
+
+Enter search text in the input to the right of
+the "Search" button at the bottom.
+The scope and characteristics of the search
+can be specified with menus and a button at the bottom.
+The "in:" menu has the options "source" (default),
+"message name", and "string literal".
+The "of:" menu has the options "class hierarchy" (default),
+"class protocol", "class", "system category", and "every class".
+The "using:" menu has the options
+"substring matcher" (default) and "wild matcher".
+The "Case sensitive" button toggles whether the search will be case sensitive.
+
+Methods whose code matches the search will appear in the top pane.
+Select a method name to see its implementation in a lower pane.
 
 ### Hierarchy Browsers
 
 When a class is selected in a System Browser,
-the class pane (second) only displays a list of classes
-defined in the selected class category.
-To also see class hierarchy of a selected class,
+the list of classes in the second pane only includes
+those defined in the selected class category.
+To also see the class hierarchy of a selected class,
 open a Hierarchy Browser by pressing cmd-h (browse hierarchy).
 
 This window is similar to a System Browser,
@@ -2086,6 +2132,8 @@ Here's an example of a Protocol window for the `Array` class:
   src="/blog/assets/cuis-protocol-window.png?v={{pkg.version}}">
 
 ### Text Editor Windows
+
+GRONK: Continue review from here.
 
 "Text Editor" windows enable editing text files.
 They support changing the font size, color, and style of selected text.
