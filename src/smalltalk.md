@@ -843,24 +843,26 @@ the following popup will appear:
   src="/blog/assets/smalltalk-unknown-selector.png?v={{pkg.version}}">
 
 If the selector was incorrectly typed,
-an implemented selector can be selected from this popup.
+any implemented selector can be selected from this popup.
 
 If the selector is confirmed or if such a message is sent from runnning code,
-the following window will appear:
+the following Debugger window will appear:
 
-<img alt="MessageNotUnderstood window"
+<img alt="Debugger MessageNotUnderstood"
   src="/blog/assets/smalltalk-message-not-understood.png?v={{pkg.version}}">
 
-To implement the missing method, click the "Create" button.
-A popup will appear to prompt for the class within the inheritance hierarchy
-of the object where the new method should be added.
-After selecting a class, a second popup will appear to prompt for
-the method category to which the new method should be associated.
+One option is to implement the missing method.
+To do this:
 
-The new method can be implemented inside the "MessageNotUnderstood" window.
-Initially it will just contain `self shouldBeImplemented`.
-Replace that with the real implementation, which in this case is `^self * 3`,
-and press cmd-s to save the change.
+- Click the "Create" button.
+- In the popup that appears, select the class within the inheritance hierarchy
+  where the method will be added.
+- In the next popup that appears, select a method category for the new method.
+- Initially the method implementation will only contain `self shouldBeImplemented`.
+- Modify the implementation as desired.
+- Press cmd-s to save it.
+- Optionally click the "Proceed" button to
+  resume execution with calling the new method.
 
 ### Tab Completions
 
@@ -1494,7 +1496,7 @@ One way to start an image is to double-click its file.
 To save any changes, open the World menu and select "Save Image",
 "Save Image as", or "Save Image and Quit".
 The changes include open windows, their position and size,
-selections made (ex. System Browser top panel selections),
+selections made (ex. System Browser top pane selections),
 and their content (ex. Workspaces).
 
 To quit without saving changes,
@@ -2061,7 +2063,7 @@ To create a new method:
 - Save by pressing cmd-s (Accept).
 
 To move a method from the class side to the instance side or vice-versa,
-right-click the method name in the top fourth panel and
+right-click the method name in the top fourth pane and
 select "refactorings...move to instance/class methods".
 
 To delete a method from a class, select it and press cmd-x (Remove it).
@@ -2173,11 +2175,13 @@ Click one the class names to see the method implementation.
 <img alt="Cuis Smalltalk Protocol window" style="width: 100%"
   src="/blog/assets/cuis-protocol-window.png?v={{pkg.version}}">
 
-### MessageNotUnderstood Windows
+### MessageNotUnderstood Errors
+
+A `MessageNotUnderstood` error is signaled when a message is sent to an object
+and no method is found in the class of the object or any of its superclasses
+that answer the message.
 
 Message sends are processed in the following way:
-
-GRONK: Continue here.
 
 - If the receiver class implements a compatible method, that is called.
 - Otherwise the superclasses of the receiver class are searched
@@ -2190,10 +2194,10 @@ GRONK: Continue here.
 - Otherwise the superclasses of the receiver class are searched
   in order from nearest to `Object` for the `doesNotUnderstand:` method.
 - If the search makes it to the `Object` class, that implements the
-  `doesNotUnderstand:` method to signal a `MessageNotUnderstood` exception.
-  open a
-  MessageNotUnderstood window that includes a stack trace
-  which describes that stack at the time the original message was sent.
+  `doesNotUnderstand:` method to signal a `MessageNotUnderstood` error,
+  which results in a Debugger window opening.
+  That window that includes a stack trace which describes
+  the stack at the time the original message was sent.
 
 The `doesNotUnderstand:` method is passed a `Message` object
 which has the accessor methods `selector` (returns a `String`)
@@ -2228,25 +2232,6 @@ repeat: anInteger
     ^stream contents
 ```
 
-GRONK: Continue here.
-
-When a message is sent to an object that doesn't implement a corresponding method,
-doesNotUnderstand
-a MessageNotUnderstood window is opened.
-This displays a stack trace showing the origin of the message send
-with the most recent call at the top.
-
-One option is to implement the missing method.
-To do this:
-
-- Click the "Create" button.
-- Select the class in which the method will be added.
-- Select a category for the method.
-- Enter an implementation for the method.
-- Press cmd-s to save it.
-- Optionally click the "Proceed" button to
-  resume execution with calling the new method.
-
 <img alt="Cuis MessageNotUnderstood window" style="width: 85%"
   src="/blog/assets/cuis-messagenotunderstood-window.png?v={{pkg.version}}">
 
@@ -2267,9 +2252,9 @@ To run up to a specific location in the code,
 click to place the cursor where execution should stop
 and click the "Run to Cursor" button.
 
-The in-scope variables are listed in the third panel of the bottom row.
+The in-scope variables are listed in the third pane of the bottom row.
 Click a variable name to see its current value
-in the fourth panel of the bottom row.
+in the fourth pane of the bottom row.
 To change the value of a variable, edit it where displayed
 and press cmd-s (Accept).
 
@@ -2278,6 +2263,8 @@ Click the "Where" button to highlight the next message to be sent in the code.
 The Debug window will close when the end of the selected code is reached.
 
 ### Change Sorter Windows
+
+GRONK: Continue here.
 
 TODO: Explain how to use these.
 
