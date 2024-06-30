@@ -1803,9 +1803,15 @@ Let's walk through an example:
 1. Click the method category "named colors"
    and note that one of the methods is "red".
 1. Back in the Inspect window, click in the bottom pane.
-1. Enter `self color: Color red` and press cmd-d (Do it).
-   TODO: Why doesn't the color change if you enter `color := Color red` instead?
-1. Note that the fill color of the morph changes to red.
+1. Enter `color := Color red` and "Do it".
+1. Note that the value displayed in the top right pane updates,
+   but the fill color of the morph does not update.
+1. Enter `self color: Color red` and "Do it".
+   This time the value displayed in the top right pane updates
+   AND the fill color of the morph updates.
+   The reason is that the `color:` method in the `BoxedMorph` class
+   sends the `#redrawNeeded` message to `self`
+   which triggers the morph to redraw itself with the updated color.
 
 ### Explore Windows
 
