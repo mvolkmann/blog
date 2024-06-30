@@ -103,6 +103,9 @@ The entire syntax of Smalltalk can be demonstrated on a post card.
 - <a href="https://en.wikipedia.org/wiki/Smalltalk"
   target="_blank">Smalltalk in Wikipedia</a>
 
+- <a href="https://archive.org/details/byte-magazine-1981-08"
+  target="_blank">Byte Magazine issue on Smalltalk</a>
+
 - <a href="https://cuis.st" target="_blank">Cuis Smalltalk</a>
 
 - <a href="https://github.com/Cuis-Smalltalk" target="_blank">Cuis GitHub repositories</a>
@@ -110,6 +113,9 @@ The entire syntax of Smalltalk can be demonstrated on a post card.
 - <a href="https://pharo.org" target="_blank">Pharo Smalltalk</a>
 
 - <a href="https://squeak.org" target="_blank">Squeak Smalltalk</a>
+
+- <a href="https://squeak.js.org" target="_blank">SqueakJS</a> -
+  "A Squeak VM in JavaScript" by Vanessa Freudenberg
 
 - <a href="https://github.com/Cuis-Smalltalk/Learning-Cuis/blob/master/Quick-UI-Tour.md"
   target="_blank">Quick-UI-Tour</a> for Cuis Smalltalk
@@ -471,6 +477,8 @@ The main window renders an instance of the class `WorldMorph`.
 This is referred to as the "World".
 Clicking anywhere on the "World" opens the World menu.
 The items on this menu are described later.
+It is not necessary to hold the mouse button down while selecting a menu item.
+Just move the mouse to a menu item and click it.
 
 ### Font Size
 
@@ -1582,6 +1590,10 @@ The World menu contains a Help submenu which contains the following:
   the recommended development process for
   managing external packages in Cuis Smalltalk using GitHub.
 
+  For more detail see
+  <a href="https://github.com/Cuis-Smalltalk/Learning-Cuis/blob/master/SamplePackage1.md"
+  target="_blank">Making a Simple Package for Cuis</a>.
+
 - Editor keyboard shortcuts
 
   This opens a window containing text that describes all the keyboard shortcuts
@@ -2085,12 +2097,20 @@ Enter search text in the input to the right of
 the "Search" button at the bottom.
 The scope and characteristics of the search
 can be specified with menus and a button at the bottom.
+
 The "in:" menu has the options "source" (default),
 "message name", and "string literal".
+
 The "of:" menu has the options "class hierarchy" (default),
 "class protocol", "class", "system category", and "every class".
+
 The "using:" menu has the options
 "substring matcher" (default) and "wild matcher".
+When using "wild matcher", the `CharacterSequence` `match:` method is used.
+Comments in that method provide many examples.
+The `#` wildcard character matches any single character and
+the `*` character matches any sequence of characters.
+
 The "Case sensitive" button toggles whether the search will be case sensitive.
 
 Methods whose code matches the search will appear in the top pane.
@@ -2133,23 +2153,20 @@ Here's an example of a Protocol window for the `Array` class:
 
 ### Text Editor Windows
 
-GRONK: Continue review from here.
-
 "Text Editor" windows enable editing text files.
 They support changing the font size, color, and style of selected text.
+They are not intended to be used to edit Smalltalk source code.
 
-These are used to edit text other than Smalltalk source code.
-
-The text can be saved in `.txt` files, but
-all the formatting is discarded and only the raw text is saved.
+The text can be saved in external text files,
+but all the formatting is discarded and only the raw text is saved.
 
 ### Message Names Windows
 
-These windows enable searching for implementors
-of methods whose name contains a given substring.
+These windows enable searching for method implementations
+whose name contains a given substring.
 For example, enter "select:" to find all the classes
 that have a method whose names end with that.
-Those include `Bag`, `Collection`, `Dictionary`, `Heap`,
+The results include `Bag`, `Collection`, `Dictionary`, `Heap`,
 `OrderedCollection`, `SequenceableCollection`, and `SortedCollection`.
 Click one the class names to see the method implementation.
 
@@ -2158,7 +2175,63 @@ Click one the class names to see the method implementation.
 
 ### MessageNotUnderstood Windows
 
-When a message is sent to an object that doesn't have a corresponding method,
+Message sends are processed in the following way:
+
+GRONK: Continue here.
+
+- If the receiver class implements a compatible method, that is called.
+- Otherwise the superclasses of the receiver class are searched
+  in order from nearest to `Object` for a compatible method.
+- If the search makes it to the `Object` class and no compatible method is found,
+  the `#doesNotUnderstand:` message with a `Message` argument
+  is sent to the original receiver,.
+- If the receiver class implements the `doesNotUnderstand:` method,
+  that is called.
+- Otherwise the superclasses of the receiver class are searched
+  in order from nearest to `Object` for the `doesNotUnderstand:` method.
+- If the search makes it to the `Object` class, that implements the
+  `doesNotUnderstand:` method to signal a `MessageNotUnderstood` exception.
+  open a
+  MessageNotUnderstood window that includes a stack trace
+  which describes that stack at the time the original message was sent.
+
+The `doesNotUnderstand:` method is passed a `Message` object
+which has the accessor methods `selector` (returns a `String`)
+and `arguments` (returns an `Array`).
+Those can be used to determine whether and how to answer the message.
+If the message will not be handled,
+the `#doesNotUnderstand:` message should be resent to the superclass.
+For example, the following implementation of `doesNotUnderstand:`
+could be implemented in a class that represents a dog.
+This is a contrieved example because it would be better
+to directly implement a `bark:` method.
+
+```smalltalk
+doesNotUnderstand: aMessage
+    (aMessage selector = 'bark:') ifTrue: [
+        | count |
+        count := aMessage arguments first.
+        count isNumber ifTrue: [ ('Woof! ' repeat: count) print. ^ nil ]
+    ].
+    super doesNotUnderstand: aMessage
+```
+
+There is no method in the the `String` class that answers the message `#repeat:`,
+so one must be implemented in order for the example above to work.
+One possible implementation is the following:
+
+```smalltalk
+repeat: anInteger
+    | stream |
+    stream := String writeStream.
+    anInteger timesRepeat: [stream nextPutAll: self].
+    ^stream contents
+```
+
+GRONK: Continue here.
+
+When a message is sent to an object that doesn't implement a corresponding method,
+doesNotUnderstand
 a MessageNotUnderstood window is opened.
 This displays a stack trace showing the origin of the message send
 with the most recent call at the top.
