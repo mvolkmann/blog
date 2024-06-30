@@ -1886,12 +1886,11 @@ System Browsers contain four rows.
   that lists all the classes that implement the selected method.
   Selecting one displays its implementation in the bottom pane.
 
-  GRONK: Resume review here.
-
   The "versions" button opens a "Recent versions" window
   that displays a list of time stamps for recent versions of the method.
   TODO: Does this only include changes made since the current image was opened?
   Clicking a time stamp displays that version of the code in the bottom pane.
+
   If one of the buttons lineDiffs, wordDiffs,
   linePrettyDiffs, or wordPrettyDiffs is pressed, it will show
   differences between that version and the current version.
@@ -1899,6 +1898,7 @@ System Browsers contain four rows.
   The two "word diff" options show individual word differences.
   The two "pretty" options show the code in its formatted form.
   To stop showing differences, click the selected diff button to toggle it off.
+
   Code added by the selected version will be in green.
   Code removed by the selected version will be in red.
   Click the "revert" button to restore that version
@@ -1915,19 +1915,19 @@ System Browsers contain four rows.
   that shows the inheritance hierarchy of the current class.
   This includes all superclass and subclasses of the current class.
 
-  The "inst vars" button displays a drop-down list containing
+  The "inst vars" button displays a popup list containing
   all the instance variables in the current class.
-  Clicking one of them opens a new "Accesses to" window that
+  Clicking one of them opens an "Accesses to" window that
   lists all the methods that use the instance variable it its top pane.
   Clicking on a method displays its code in the bottom pane.
 
-  The "class vars" button displays a drop-down list containing
+  The "class vars" button displays a popup list containing
   all the class variables in the current class.
   Clicking one of them opens a new "Users of" window that
   lists all the methods that use the class variable in its top pane.
   Clicking on a method displays its code in the bottom pane (fourth row).
 
-  The "show..." button displays a drop-down list
+  The "show..." button displays a popup list
   of ways the selected item can be displayed in the bottom pane.
   Each option is represented by a checkbox, but only one can be selected.
 
@@ -1942,6 +1942,8 @@ System Browsers contain four rows.
   Seleting "prettyPrint" displays the code for a method in a
   nicely formatted way, but doesn't actually modify the code.
   I wish it did.
+
+  GRONK: Continue reviewing from here.
 
   Selecting "lineDiffs" displays ...
 
