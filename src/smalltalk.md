@@ -502,6 +502,12 @@ The items on this menu are described later.
 It is not necessary to hold the mouse button down while selecting a menu item.
 Just move the mouse to a menu item and click it.
 
+By default, focus moves to a window by moving the mouse cursor over it.
+To change this so focus only moves when a window is clicked,
+open the World menu and select "Preferences...Focus when click".
+To return to the default behavior,
+open the World menu and select "Preferences...Focus follows Mouse".
+
 ### Font Size
 
 It is likely that the default font size used in all the Smalltalk windows
