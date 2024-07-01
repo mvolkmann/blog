@@ -457,8 +457,7 @@ the steps to update are:
 
 - Do a `git pull` on the repository.
 - Start Cuis Smalltalk with an image.
-- Open the World menu by clicking on the desktop.
-- Select Changes...Install New Updates.
+- Open the World menu and select "Changes...Install New Updates".
 
 ## Squeak Smalltalk
 
@@ -2027,7 +2026,11 @@ System Browsers contain four rows.
 
 To automatically display formatted code,
 enter the following in a Workspace and "Do it":
-`Preferences at: #browseWithPrettyPrint put: true`.
+
+```smalltalk
+Preferences at: #browseWithPrettyPrint put: true
+```
+
 This does not take effect in existing windows such as System Browsers,
 but does in newly opened windows.
 Pretty printing is applied when code is initially displayed,
@@ -2107,27 +2110,18 @@ The latter option allows the senders to be modified.
 #### Searching Code
 
 There is no provided way to search for code that contains a given string.
-However, Mariano Montone implemented two solutions.
+However, Mariano Montone implemented a "Search Browser" that provides this.
 
-The first solution was shared with me via email of a
-change set file named `SearchSourceMenus-MarianoMontone.cs.st`.
-If you can find a way to obtain this file, open a "File List" window,
-locate the file, and click the "install" button.
-This adds the menu item "search source..." to the context menu
-that appears when you right-click in the top second pane of a System Browser.
-To search all the code in a class, select the class name,
-right-click, and select "search source...".
-Enter search text in the popup that appears.
-A "Matched of" window will open that lists
-all the methods whose code contains the search text.
-Click one to see its implemenation in the bottom pane.
-
-To install the second solution, clone the repository
+To install it, clone the repository
 <a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Tools"
 target="_blank">Cuis-Smalltalk-Tools</a>,
 open a Workspace, enter `Feature require: 'SearchBrowser'`, and "Do it".
-This adds the World menu item "Open...Search Browser"
-which opens a Search Browser.
+This adds the World menu item "Open...Search Browser".
+It also adds menu items to the menu that appears in a System Browser
+when you right-click a class name in the top second pane.
+The new menu items are "search in class...",
+"search in class hierarchy...", and "search in class protocol...".
+These all open a Search Browser with a different search scope.
 
 Enter search text in the input to the right of
 the "Search" button at the bottom.
