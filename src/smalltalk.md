@@ -616,7 +616,9 @@ message := 'Hello, Smalltalk!'
 ```
 
 To execute the code and print the result of the last expression
-inside the Workspace, press cmd-p (Print it).
+at the cursor position, press cmd-p (Print it).
+This sends the message `#printString` to the result object
+and outputs the return value.
 The output will be selected,
 so it can be removed by pressing the delete key.
 For example, enter the following and press cmd-p to get the output `6`:
@@ -1784,8 +1786,12 @@ The syntax highlighting described in the table below is provided.
 | string            | purple         |
 | symbol            | blue and bold  |
 
-In any text editng pane, right-click and select "Help..."
+In any text editing pane, right-click and select "Help..."
 to see a list of the supported key bindings.
+
+To select arbitrary text, drag over it.
+To select a word, double-click it.
+To selet an entire line, triple-click it.
 
 To toggle surrounding selected text with a given delimiter character,
 press cmd and the starting delimiter character
