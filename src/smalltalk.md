@@ -34,6 +34,19 @@ Messages are sent to objects which decide whether and how to act on them.
 is considered to be the first object-oriented programming (OOP) language.
 But Smalltalk was the first to make OOP popular.
 
+Running Smalltalk programs requires two parts,
+a virtual machine (VM) and an image.
+The VM is specific to the operating system being used.
+It reads and executes Smalltalk code found in an image file.
+
+Everything in Smalltalk is represented by an object, including
+classes and all GUI elements in the development environment.
+An image file can be thought of as a snapshot
+of the current state of the development environment.
+It describes a collection of all the active objects.
+During development, changes can be saved to the current image
+or to a new image.
+
 Smalltalk is perhaps most known for its incredible development tools.
 These support:
 
@@ -415,6 +428,12 @@ This does not differ in any way from the VM used by Squeak.
 All the differences between Cuis and Squeak are implemented in
 its base image file (19 MB).
 
+The Squeak VM is implemented in Slang and C.
+Slang is a subset of Smalltalk that can be easily translated to C.
+C is used for performance critical parts.
+There is a different version of the Squeak VM executable
+for each operating system.
+
 By contrast, Pharo Smalltalk provides `PharoLauncher.app` is 198MB.
 
 The reported name of the `CuisVM.app` app in macOS is "Squeak 5.0".
@@ -461,15 +480,18 @@ TODO: Add this detail.
 
 ## Getting Started
 
-Double-click a Smalltalk image file such as
-the base image found in `CuisImage/Cuis*.image`.
-The following main app window will open:
+There are at least three ways to start working in Smalltalk.
 
-<img alt="Cuis Smalltalk log" class="logo" style="width: 400px"
+1. Double-click a Smalltalk image file such as
+   the base image found in `CuisImage/Cuis*.image`.
+1. Double-click the Cuis app (named `CuisVM.app` in macOS).
+   That will open a dialog that prompts for an image file.
+1. Drag an image file onto the Cuis app icon.
+
+The initial Cuis Smalltalk window will appear similar to the following:
+
+<img alt="Cuis Smalltalk startup" class="logo" style="width: 400px"
   src="/blog/assets/cuis-smalltalk-startup.png?v={{pkg.version}}">
-
-Alternatively, double-click a VM file such as `CuisVM.app`.
-That will open a dialog that prompts for an image file.
 
 ### The World
 
@@ -1425,7 +1447,7 @@ double: obj
 
 ### Primitive Methods
 
-Primitive methods are implemented in the virtual machine,
+Primitive methods are implemented in the VM,
 often in a way that is more efficient than
 what could be achieved in Smalltalk code.
 
@@ -4025,9 +4047,9 @@ target="_blank">Make a standalone click-&-run Smalltalk application for macOS</a
 THIS WORKS!
 
 To run Smalltalk programs that are command-line utilities, apps, and servers,
-use the Smalltalk virtual machine that is bundled inside the macOS app
+use the Smalltalk VM that is bundled inside the macOS app
 `CuisVM.app` that is included in the Cuis-Smalltlk-Dev GitHub repository.
-This is actually a Squeak virtual machine.
+This is actually a Squeak VM.
 
 Squeak VMs can also be obtained from
 <a href="https://github.com/OpenSmalltalk/opensmalltalk-vm"
@@ -4051,7 +4073,7 @@ Alternatively, to build a Squeak VM for macOS:
 1. Enter `./mvm -A`. This will run for around 10 minutes and
    generate an extreme amount of output.
 1. Enter `chmod a+x Squeak.app`
-1. Create a symbolic link to the virtual machine that is inside this app
+1. Create a symbolic link to the VM that is inside this app
    by entering `ln -s "./Squeak.app/Contents/MacOS/Squeak" squeak-vm`.
 
 To simplify running files containing Smalltalk code from the command line,
