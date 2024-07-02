@@ -90,6 +90,9 @@ This is best when traffic is predictable.
 1. Click "Services" in the upper-left.
 1. Select "Database".
 1. Select "DynamoDB".
+
+## Creating Tables
+
 1. Click the orange "Create table" button.
 1. Tables are region-specific.
    Select a nearby region from the dropdown in the upper-right
@@ -122,3 +125,53 @@ This is best when traffic is predictable.
 1. Scroll to the bottom and click the orange "Create table" button.
 1. A list of tables will be displayed and
    the new table should have a status of "Active".
+1. Click the new table name to see information about it.
+1. Global tables are replicas in other regions that improve access times
+   for users in other parts of the world.
+   Global tables are automatically kept in sync with their original table.
+   To create a global table:
+
+   - Click the "Global tables" tab.
+   - Click the "Create replica" button.
+   - Click the "Choose a Region" dropdown and select a region.
+   - Click the orange "Create replica" button.
+
+1. To create backups of your database, click the "Backups" tab.
+   There are three kinds of supported backups:
+   Point-in-time recovery (PITR), on demand, and scheduled.
+
+## Creating Items
+
+1. Click a table name.
+1. Click the orange "Explore table items" button.
+1. Click the "Create item" button at the bottom.
+1. Enter a value for the partition key.
+1. For each attribute:
+
+   - Click the "Add new attribute" button.
+   - Select a data type such as "String", "Number", or "Boolean.
+   - Enter an attribute name and value.
+
+1. Click the orange "Create item" button.
+1. To create more items with the same set of attributes:
+
+   - Select an item by checking its checkbox.
+   - Click "Actions" and select "Duplicate item".
+   - Modify the values of the attributes, especially the partition key.
+   - Click the orange "Create item" button.
+
+## Filtering Items
+
+To filter the set of items displayed:
+
+1. Click the disclosure triangle to expand the "Filters" section.
+1. Click the "Add Filter" button.
+1. Select an atrribute name, type, and condition (ex. "Contains).
+1. Enter a value.
+1. Optionally add more filters by repeating the steps above.
+1. Click the orange "Run" button.
+
+Only the matching items will be displayed at the bottom of the page.
+
+To remove all the filters, click the "Reset" button
+and click the orange "Run" button again.
