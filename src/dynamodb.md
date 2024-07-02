@@ -107,7 +107,9 @@ This is best when traffic is predictable.
 1. Check both the "Set maximum read request units"
    and "Set maximum write request units" checkboxes.
 1. For both, enter maximum number of requests per second that should be allowed.
-1. In the "Secondary Indexes" section, for each index to be created:
+1. In the "Secondary Indexes" section,
+   create indexes to improve search performance.
+   For each index to be created:
 
    - Click the "Create global index" button.
    - Enter the name of an attribute for the primary index.
