@@ -2107,7 +2107,7 @@ To delete a method from a class, select it and press cmd-x (Remove it).
 Then select "Remove it" or "Remove, then browse senders".
 The latter option allows the senders to be modified.
 
-#### Searching Code
+### Search Browser
 
 There is no provided way to search for code that contains a given string.
 However, Mariano Montone implemented a "Search Browser" that provides this.
@@ -2292,11 +2292,23 @@ The Debug window will close when the end of the selected code is reached.
 
 ### Change Sorter Windows
 
-GRONK: Continue here.
+Change Sorters summarize all the currently unsaved changes.
+The first row left pane displays a list of change set names.
+Selecting one displays a list of modified classes in the first row right pane.
+Selecting a modified class displays a list of modified methods
+in the second row.
+Selecting a modified method displays its implementation
+or a description of the change in the bottom row.
 
-TODO: Explain how to use these.
+Right-click a change set, class, or method name to get
+a context menu of operations that can be performed on it.
+
+<img alt="Cuis Change Sorter" style="width: 100%"
+  src="/blog/assets/cuis-change-sorter.png?v={{pkg.version}}">
 
 ### Process Browsers
+
+GRONK: Continue here.
 
 Process Browsers display a list of all the Smalltalk-related processes
 that are running.
