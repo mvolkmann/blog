@@ -84,4 +84,39 @@ This is best when traffic is predictable.
 
 ## Getting Started
 
-Browse <a href="https://aws.amazon.com" target="_blank">AWS</a>.
+1. Browse <a href="https://aws.amazon.com" target="_blank">AWS</a>.
+1. Create an account if you don't already have one.
+1. Sign in.
+1. Click "Services" in the upper-left.
+1. Select "Database".
+1. Select "DynamoDB".
+1. Click the orange "Create table" button.
+1. Tables are region-specific.
+   Select a nearby region from the dropdown in the upper-right
+   (ex. us-east-2 which is in Ohio).
+1. Enter a name for the table (ex. Dogs).
+1. Enter a name for the "Partition key" (ex. id) and select its type (ex. Number).
+1. If the partition keys will not be unique, enter a name for the "Sort key"
+   which is an additional attribute that when combined with the parition key
+   will uniquely identify each record.
+1. Under "Table settings", select the "Custom settings" radio button.
+1. Under "Read/Write capacity settings", you will likely want to change
+   the "Capacity mode" to "On-demand" instead of "Provisioned" to save money.
+1. Click the disclosure triangle for "Maximum table throughput"
+   to limit costs.
+1. Check both the "Set maximum read request units"
+   and "Set maximum write request units" checkboxes.
+1. For both, enter maximum number of requests per second that should be allowed.
+1. In the "Secondary Indexes" section, for each index to be created:
+
+   - Click the "Create global index" button.
+   - Enter the name of an attribute for the primary index.
+   - Select the data type of the attribute.
+   - Click the orange "Create index" button.
+
+   For example, the "Dogs" table may need indexes
+   for the "name" and "breed" attributes.
+
+1. Scroll to the bottom and click the orange "Create table" button.
+1. A list of tables will be displayed and
+   the new table should have a status of "Active".
