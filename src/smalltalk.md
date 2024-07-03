@@ -801,6 +801,98 @@ represents the top frame of the run-time stack. ...
 It is essential for implementing development tools like the Debugger and
 it is also used to implement exception handling and continuations."
 
+#### Blocks
+
+GRONK: Review this section.
+
+A block is closure (anonymous function) that can have parameters
+and contain many expressions.
+They are represented by the class `BlockClosure`.
+The value of the block is the value of the last expression.
+It cannot explicitly return a value with `^`.
+
+Blocks can take zero or more positional arguments,
+which is something methods cannot do.
+Argument names are appear at the beginning of a block
+and each name is preceded by a colon.
+The argument list is separated from the code by a vertical bar.
+
+Blocks can be saved in variables, passed as arguments to methods and blocks,
+and used multiple times. For example:
+
+```smalltalk
+noArgBlock := [2 * 3].
+singleArgBlock := [:a | a * 3].
+multipleArgBlock := [:a :b | a * b].
+```
+
+The `value` message evaluates a block and
+returns the value of its final expression.
+It can provide zero to four arguments.
+For blocks with more than four parameters,
+pass them in an array using `#valueWithArguments:`.
+For example:
+
+```smalltalk
+noArgBlock value.
+singleArgBlock value: 1.
+multiArgBlock value: 1 value: 2.
+multiArgBlock value: 1 value: 2 value: 3.
+multiArgBlock value: 1 value: 2 value: 3 value: 4.
+multiArgBlock valueWithArguments: #(1 2 3 4 5).
+```
+
+A block must be passed the same number of arguments as it has parameters.
+If a block is passed fewer or more arguments than it accepts,
+an Error window will open.
+
+Blocks can declare and use temporary (local) variables.
+
+If a block uses the caret symbol to return a value,
+the containing method will exit and return that value.
+
+For example:
+
+```smalltalk
+average := [:a :b |
+    | sum |
+    sum := a + b.
+    sum / 2.0
+```
+
+Blocks are closures, meaning that they can
+access variables defined outside them. For example:
+
+```smalltalk
+n := 19.
+b := [:a | a + n].
+b value: 2. "result is 21"
+```
+
+To use a block as an iteration condition,
+use the methods `whileTrue`, `whileFalse`, `whileNotNil`, and `whileNil`
+that are defined in the `BlockClosure` class.
+Note that these are not methods on the `Boolean` class.
+
+For example:
+
+```smalltalk
+TODO: Add a whileTrue example.
+```
+
+A block can call itself if it passes itself in as an argument.
+For example:
+
+```smalltalk
+fact := [:block :n |
+    n = 1
+        ifTrue: 1
+        ifFalse: [n * (block value: block value: n - 1)]
+].
+
+fact value: fact value: 5 "gives 120"
+```
+
 #### Instance Variables
 
 Instance variables are associated with a specific instance of a class.
@@ -1004,7 +1096,7 @@ To do this:
 - Optionally click the "Proceed" button to
   resume execution with calling the new method.
 
-### Tab Completions
+#### Tab Completions
 
 When entering code to send a message, completion hints are provided
 if at least the first letter in the message name is typed
@@ -1571,6 +1663,46 @@ For the OpenSmalltalk version, see the file
 target="_blank">cointerp.c</a>.
 
 TODO: Is there a limit of 256 primitive numbers?
+
+## Control Flow
+
+Control flow is provided through message passing.
+
+The `Boolean` class in the `Kernel-Objects` category contains the methods
+`#ifTrue`, `#ifFalse`, `#ifTrue:ifFalse`, and `#ifFalse:ifTrue`.
+For example:
+
+```smalltalk
+result := a < b ifTrue: ['less'] ifFalse: ['more'].
+```
+
+The values for `ifTrue` and `ifFalse` can be
+literal values, variables, or blocks with no parameters.
+The messages listed above just send the `value` message to the argument value.
+Typically the `value` message is used to evaluate a no-arg block.
+However, the `Object` class defines the `value` method to just return `self`,
+which is what enables any kind of object to be used.
+
+When blocks are used, the compiler is able to optimized the code by
+inlining the code within the block and
+avoiding the need to send the `value` message.
+So it is more efficient to use blocks.
+
+The `Object` instance method `caseOf` is similar to
+the `switch` statement in other programming languages.
+
+For example:
+
+```smalltalk
+color := 'blue'.
+assessment := color caseOf: {
+    ['red'] -> ['hot'].
+    ['green'] -> ['warm'].
+    ['blue'] -> ['cold']
+}
+```
+
+GRONK: Iteration was covered in the Block section. Should it move to here?
 
 ## Images
 
@@ -2729,8 +2861,6 @@ select Help...Using GitHub to host Cuis packages.
 
 ## Reflection
 
-GRONK
-
 Smalltalk provides many methods for
 getting information about classes and objects.
 The following table lists some of them.
@@ -2760,42 +2890,7 @@ send the `allInstancesDo:` message to the class.
 For example, to delete all instances of a given class, run
 `SomeClass allInstancesDo: [ :obj | obj delete ]`.
 
-## Control Flow
-
-Control flow is provided through message passing.
-
-The `Boolean` class in the `Kernel:Objects` category contains the methods
-`#ifTrue`, `#ifFalse`, `#ifTrue:ifFalse`, and `#ifFalse:ifTrue`.
-For example:
-
-```smalltalk
-result := a < b ifTrue: ['less'] ifFalse: ['more'].
-```
-
-The values for `ifTrue` and `ifFalse` can be
-literal values, variables, or blocks with no parameters.
-Those messages just send the `value` message to the argument value.
-Typically that is used to evaluate a no-arg block.
-But the `Object` class defines the `value` method to just return `self`.
-
-When blocks are used, the compiler is able to optimized the code by
-inlining the code within the block and
-avoiding the need to send the `value` message.
-So it is more efficient to use blocks.
-
-The `Object` instance method `caseOf` is similar to
-the `switch` statement in other programming languages.
-
-For example:
-
-```smalltalk
-color := 'blue'.
-assessment := color caseOf: {
-    ['red'] -> ['hot'].
-    ['green'] -> ['warm'].
-    ['blue'] -> ['cold']
-}
-```
+GRONK: Continue review here.
 
 ## Data Types
 
@@ -3268,96 +3363,6 @@ New objects can be created from a class using the class method `new` or `basicNe
 By default, both initialize all attributes of the new object to `nil`.
 The difference between them is that `new` could be overridden
 to do something different, whereas `basicNew` cannot be overridden.
-
-## Blocks
-
-A block is closure (anonymous function) that can have parameters
-and contain many expressions.
-They are represented by the class `BlockClosure`.
-The value of the block is the value of the last expression.
-It cannot explicitly return a value with `^`.
-
-Blocks can take zero or more positional arguments,
-which is something methods cannot do.
-Argument names are appear at the beginning of a block
-and each name is preceded by a colon.
-The argument list is separated from the code by a vertical bar.
-
-Blocks can be saved in variables, passed as arguments to methods and blocks,
-and used multiple times. For example:
-
-```smalltalk
-noArgBlock := [2 * 3].
-singleArgBlock := [:a | a * 3].
-multipleArgBlock := [:a :b | a * b].
-```
-
-The `value` message evaluates a block and
-returns the value of its final expression.
-It can provide zero to four arguments.
-For blocks with more than four parameters,
-pass them in an array using `#valueWithArguments:`.
-For example:
-
-```smalltalk
-noArgBlock value.
-singleArgBlock value: 1.
-multiArgBlock value: 1 value: 2.
-multiArgBlock value: 1 value: 2 value: 3.
-multiArgBlock value: 1 value: 2 value: 3 value: 4.
-multiArgBlock valueWithArguments: #(1 2 3 4 5).
-```
-
-A block must be passed the same number of arguments as it has parameters.
-If a block is passed fewer or more arguments than it accepts,
-an Error window will open.
-
-Blocks can declare and use temporary (local) variables.
-
-If a block uses the caret symbol to return a value,
-the containing method will exit and return that value.
-
-For example:
-
-```smalltalk
-average := [:a :b |
-    | sum |
-    sum := a + b.
-    sum / 2.0
-```
-
-Blocks are closures, meaning that they can
-access variables defined outside them. For example:
-
-```smalltalk
-n := 19.
-b := [:a | a + n].
-b value: 2. "result is 21"
-```
-
-To use a block as an iteration condition,
-use the methods `whileTrue`, `whileFalse`, `whileNotNil`, and `whileNil`
-that are defined in the `BlockClosure` class.
-Note that these are not methods on the `Boolean` class.
-
-For example:
-
-```smalltalk
-TODO: Add a whileTrue example.
-```
-
-A block can call itself if it passes itself in as an argument.
-For example:
-
-```smalltalk
-fact := [:block :n |
-    n = 1
-        ifTrue: 1
-        ifFalse: [n * (block value: block value: n - 1)]
-].
-
-fact value: fact value: 5 "gives 120"
-```
 
 ## Exception Handling
 
