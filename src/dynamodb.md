@@ -175,3 +175,13 @@ Only the matching items will be displayed at the bottom of the page.
 
 To remove all the filters, click the "Reset" button
 and click the orange "Run" button again.
+
+## SQL Queries
+
+To run SQL queries against the tables:
+
+- Click "PartiQL editor" in the left nav.
+- Enter a query like "select \* from Dogs".
+- Click the orange "Run" button.
+
+Query results will appear under "Items returned" at the bottom of the page.

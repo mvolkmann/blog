@@ -736,18 +736,6 @@ In dynamic arrays the expressions are separated by periods.
 
 TODO: What is a "compound literal"?
 
-### Reserved Words
-
-There are only six reserved words in Smalltalk which are
-`true`, `false`, `nil`, `self`, `super`, and `thisContext`.
-
-From the
-<a href="https://cuis-smalltalk.github.io/TheCuisBook/Pseudo_002dvariables.html"
-target="_blank">Cuis book</a>, "`thisContext` ...
-represents the top frame of the run-time stack. ...
-It is essential for implementing development tools like the Debugger and
-it is also used to implement exception handling and continuations."
-
 ### Assignment Operator
 
 Assignment operators (`:=`) can be rendered as a left pointing arrow
@@ -765,6 +753,119 @@ Typing an underscore is a shorthand way to type `:=`.
 Typing either will be rendered as a left pointing arrow.
 This does not change the characters that appear
 when code is saved in a "file out" or package.
+
+### Variables
+
+Smalltalk supports five kinds of variables:
+
+- Pseudo-variables are provided by the system and cannot be modified.
+- Instance variables are associated with a specific instance of a class.
+- Class variables are associated with a class
+  and all subclasses share the same value.
+- Class instance variables are similar to class variables, but
+  they allow subclasses to have different values for the same variable name.
+- Temporary (or local) variables are accessible only within
+  the method or block where they are declared.
+
+#### Pseudo-variables
+
+Pseudo-variables are variables whose value
+is provided automatically and cannot be modified.
+There are six of these with the names
+`true`, `false`, `nil`, `self`, `super`, and `thisContext`.
+These names are reserved words, meaning
+they cannot be used for other kinds of variables.
+
+`true` and `false` represent Boolean values.
+They refer to singleton instances of the `True` and `False` classes.
+
+`nil` represents the lack of a real value.
+
+`self` can be used in instance methods to refer to the current object.
+It can also be used in class methods to refer to the current class.
+
+`super` can be used in instance methods
+to refer to the superclass of the current object.
+For example, the superclass of the `SmallInteger` class is `Integer`
+and the superclass of the `Integer` class is `Number`.
+
+`self` and `super` are often used as the receiver of messages.
+For example, is typical for the instance method `initialize`
+to begin with `super initialize`.
+We will have more to say about the `initialize` method later.
+
+From the
+<a href="https://cuis-smalltalk.github.io/TheCuisBook/Pseudo_002dvariables.html"
+target="_blank">Cuis book</a>, "`thisContext` ...
+represents the top frame of the run-time stack. ...
+It is essential for implementing development tools like the Debugger and
+it is also used to implement exception handling and continuations."
+
+#### Instance Variables
+
+Instance variables are associated with a specific instance of a class.
+They are declared in a space-separated string that is
+the value of the `instanceVariableNames:` keyword in a class definition.
+
+Instance variables are always private, which means they can only be accessed by
+instance methods in the class that defines them, and in subclasses.
+To expose an instance variable value to methods in other classes,
+define an instance method that returns it.
+
+When a new instance of a class is created,
+its instance method `initialize` is called.
+This is, as the name suggests, a perfect place to
+assign an initial value to each instance variable.
+
+#### Class Variables
+
+Class variables are associated with a class
+and the same value is shared with all subclasses.
+They are declared in a space-separated string that is
+the value of the `classVariableNames:` keyword in a class definition.
+
+Class variables are described in the same way as instance variables,
+but their names must begin uppercase.
+It is common for a class to not have any class variables.
+
+Like instance variables, class variables are always private.
+To expose a class variable value to methods in other classes,
+define a class method that returns it.
+
+To assign initial values to the class variables of a class,
+define the class method `initialize`
+and explicitly send that message to the class.
+
+#### Class Instance Variables
+
+Class instance variables are defined as an
+instance variables in the metaclass of a given class.
+Unlike class variables, subclasses can have a different value
+for the variable than that used by the class where it is defined.
+Class instance variables are not commonly used.
+
+TODO: Describe how to define a class instance variable
+and set different values in the class and subclasses.
+Perhaps an example could be an Animal class with a legs variable
+that is set to 0 in the Animal class and 4 in the Dog subclass.
+
+#### Temporary Variables
+
+Temporary variables are declared in a space-separated string
+between vertical bars inside a method or block definition.
+They can only be accessed within the method or block that declares them.
+
+#### Global Variables
+
+While Smalltalk does not support global variables,
+the `Smalltalk` `SystemDictionary` object can be used for this purpose.
+The following code adds the key "color" with the value "yellow"
+to that `Dictionary`, and then retrieves the value for that key:
+
+```smalltalk
+Smalltalk at: 'color' put: 'yellow'.
+color := Smalltalk at: 'color' ifAbsent: 'none'.
+```
 
 ### Messages
 
@@ -1031,53 +1132,6 @@ score: aNumber
 
 As shown above, another convention is for variables associated with
 keyword messages to indicate their expected type.
-
-### Instance Variables
-
-Instance variables are always private,
-which means they can only be accessed by instance methods
-in the class that defines them and in subclasses.
-To expose an instance variable value to methods in other classes,
-define an instance method that returns it.
-
-When a new instance of a class is created,
-its instance method `initialize` is called.
-This is, as the name suggests, a perfect place to
-assign an initial value to each instance variable.
-
-### Class Variables
-
-Class variables are described in the same way,
-but their names must begin uppercase.
-It is common for a class not have any class variables.
-
-Like instance variables, class variables are always private.
-To expose a class variable value to methods in other classes,
-define a class method that returns it.
-
-To assign initial values to the class variables of a class,
-define the class method `initialize`
-and explicitly send that message to the class.
-
-### Class Instance Variables
-
-A "class variable" is defined in a class definition.
-It is shared by all subclasses and has the same value
-regardless of whether it is acccessed on
-the class where it is defined or on a subclass.
-
-A "class instance variable" is defined as an
-instance variable in the metaclass of a given class.
-Like a class variable, it can be accessed
-on the class and each of its subclasses.
-However, it allows subclasses to set the variable to a different value
-than that used by the class where it is defined.
-Class instance variables are not commonly used.
-
-TODO: Describe how to define a class instance variable
-and set different values in the class and subclasses.
-Perhaps an example could be an Animal class with a legs variable
-that is set to 0 in the Animal class and 4 in the Dog subclass.
 
 ### Accessor Methods
 
@@ -2107,6 +2161,38 @@ To delete a method from a class, select it and press cmd-x (Remove it).
 Then select "Remove it" or "Remove, then browse senders".
 The latter option allows the senders to be modified.
 
+#### Refactorings
+
+To refactor a method or code, select it, right-click,
+and select an option from the "refactorings" submenu.
+
+For methods the options include:
+
+- rename... (cmd-shift-r)
+- change keyword order...
+- add parameter...
+- remove parameter...
+- inline method...
+- move to instance/class method
+- push up
+- add in superclass as subclassResponsibility
+- push down to subclasses
+- push down to one subclass
+
+To rename a method without opening the refactorings menu,
+select the method and press cmd-shift-r.
+
+For selected code the options include:
+
+- Extract as Parameter...
+- Extract Temporary...
+- Extract Method...
+- Inline Temporary...
+- Inline Method...
+- Temporary to Instance Variable
+- Push Up Instance Variable
+- Push Down Instance Variable
+
 ### Search Browser
 
 There is no provided way to search for code that contains a given string.
@@ -2306,23 +2392,38 @@ a context menu of operations that can be performed on it.
 <img alt="Cuis Change Sorter" style="width: 100%"
   src="/blog/assets/cuis-change-sorter.png?v={{pkg.version}}">
 
-### Process Browsers
+### File List
 
-GRONK: Continue here.
+To view local files and operate on them,
+select Open ... File List from the World menu.
+
+By default, the top directory will be one from which Cuis was started,
+referred to as "Cuis top".
+To instead start from the root directory of the drive,
+right-click in the upper-left pane and
+select "default initial directories...OS roots".
+This change will not take effect until a new File List is opened.
+
+A common operation performed in a File List window
+is to locate and select a `.pck.st` file that defines a package
+and click the "install package" button to install it.
+
+### Process Browsers
 
 Process Browsers display a list of all the Smalltalk-related processes
 that are running.
-By default the list updates automatically and processes come and go.
+Processes come and go. By default the list updates automatically.
 To toggle that, press cmd-a (turn off/on auto-update).
 
 To terminate a process, select it and press cmd-t (terminate).
-This is especially useful for terminating "WebServer's listening process".
+This is especially useful for terminating
+processes named "WebServer's listening process".
 
 <img alt="Cuis Process Browser" style="width: 85%"
   src="/blog/assets/cuis-process-browser-window.png?v={{pkg.version}}">
 
 For example, the following code starts a process that
-writes to the Transscript every five seconds.
+writes to the Transcript every five seconds.
 
 ```smalltalk
 block := [[true] whileTrue: [
@@ -2338,150 +2439,52 @@ To stop it, right-click the process, select it and press cmd-t (terminate).
 ### Emergency Evaluator
 
 The Emergency Evaluator can be useful to save work
-when the current session becomes somewhat unusable.
+when the current session becomes mostly unusable.
 
 <img alt="Cuis Emergency Evaluator" style="width: 30%"
   src="/blog/assets/cuis-emergency-evaluator.png?v={{pkg.version}}">
 
 TODO: Explain when this is useful.
 
-## Refactorings
+## Saving Code
 
-To refactor a method or code, select it, right-click,
-and select an option from the "refactorings" submenu.
+One way to save code that you develop is to save the image.
+While this works, it is not recommended for two main reasons.
 
-For methods the options include:
+1. Corrupt images
 
-- rename... (cmd-shift-r)
-- change keyword order...
-- add parameter...
-- remove parameter...
-- inline method...
-- move to instance/class method
-- push up
-- add in superclass as subclassResponsibility
-- push down to subclasses
-- push down to one subclass
+   On rare occassions, changes make to an image can render it unusable.
+   If this happens and the code you developed has not be saved elsewhere,
+   it could lost.
 
-To rename a method without opening the refactorings menu,
-select the method and press cmd-shift-r.
+1. Code Sharing
 
-For selected code the options include:
+   The best ways to share Smalltalk code you have written
+   are to create a "fileOut" or a package.
+   Other developers can "fileIn" the fileOuts you create
+   or they can install packages you create.
+   Both are options described below.
 
-- Extract as Parameter...
-- Extract Temporary...
-- Extract Method...
-- Inline Temporary...
-- Inline Method...
-- Temporary to Instance Variable
-- Push Up Instance Variable
-- Push Down Instance Variable
+### fileOut and fileIn
 
-## Keywords self and super
-
-The `self` keyword can be used in instance methods
-to refer to the current object.
-It can also be used in class methods to refer to the current class.
-
-TODO: Add more detail.
-
-## Variables
-
-Smalltalk supports three kinds of variables:
-
-- Class variables are associated with a class.
-
-  These are declard in a space-separated string that is
-  the value of `classVariableNames` in a class definition.
-
-- Instance variables are associated with a specific instance of a class.
-
-  These are declard in a space-separated string that is
-  the value of `instanceVariableNames` in a class definition.
-
-- Temporary (or local) variables are accessible only within a method or block.
-
-  These are declared in a space-separated string between vertical bars
-  inside a method or block definition.
-
-While Smalltalk does not support global variables,
-the `Smalltalk` `SystemDictionary` object can be used for this purpose.
-The following code adds the key "color" with the value "yellow"
-and they retrieves the value for that key:
-
-```smalltalk
-Smalltalk at: 'color' put: 'yellow'.
-color := Smalltalk at: 'color' ifAbsent: 'none'.
-```
-
-## Reflection
-
-Smalltalk provides many methods for
-getting information about classes and objects.
-The following table lists some of them.
-
-| Method                                                  | Answers                                                                                                      |
-| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `Smalltalk allClasses`                                  | an `Array` of all classes defined in the current image                                                       |
-| `Smalltalk allClassesImplementing: #selector`           | an `Array` of all classes that implement a given selector                                                    |
-| `SystemOrganization categoryOfElement: #SomeClass`      | name of the class category to which a given class belongs                                                    |
-| `SomeClass allClassVarNames`                            | a `Set` of class variable names defined in this class                                                        |
-| `SomeClass allSelectors`                                | an `IdentitySet` of all message selectors supported by this class, including selectors for inherited methods |
-| `SomeClass allInstances`                                | an `Array` of all existing instances of this class                                                           |
-| `SomeClass allInstVarNames`                             | an `Array` of instance variable names defined in this class                                                  |
-| `SomeClass allInstVarNamesEverywhere`                   | an `Array` of instance variable names defined in this class and inherited classes                            |
-| `SomeClass allMethodsInCategory: 'some-category'`       | an `Array` of instance methods in a given category, including those defined in this class and inherited      |
-| `SomeClass class allMethodsInCategory: 'some-category'` | an `Array` of class methods in a given category, including those defined in this class and inherited         |
-| `SomeClass allSubclasses`                               | an `OrderedCollection` of subclasses                                                                         |
-| `SomeClass allSuperclasses`                             | an `OrderedCollection` of superclasses                                                                       |
-| `CodeListPackages installedPackages`                    | an `Array` of `CodePackage` objects (appear in System Browser class category pane)                           |
-
-TODO: Why does `allClassVarNames` return a `Set` when `allInstVarNames` returns an `Array`?
-TODO: Is there a way to get all the message categories used by a class?
-
-To run code on every instance of a given class,
-send the `allInstancesDo:` message to the class.
-
-For example, to delete all instances of a given class, run
-`SomeClass allInstancesDo: [ :obj | obj delete ]`.
-
-### File List
-
-To view local files and operate on them,
-select Open ... File List from the World menu.
-
-By default, the top directory will be one from which Cuis was started,
-referred to as "Cuis top".
-To instead start from the root directory of the drive,
-right-click in the upper-left pane and
-select "default initial directories" ... "OS roots".
-This change will not take effect until a new File List window is opened.
-
-A common operation performed in a File List window
-is to locate and select a `.pck.st` file that defines a package
-and click the "install package" button to install it.
-
-### File Out and File In
-
-To save all the code for a package to a text file:
-
-- Open a System Browser.
-- Select the package in the top, first pane.
-- Right-click and select "fileOut".
-
-"fileOut" can be used to save any of these to a `.st` text file:
+"fileOut" can be used to save any of the following in a `.st` text file:
 
 - a single method
 - all the methods in a single method category
 - a single class and all its methods
-- a single package, but not methods it adds to
-  classes in other packages (or class categories)
+- a single class category
+
+To create a fileOut:
+
+- Open a System Browser.
+- Select a class category, class, method category, or method
+  in the top row of panes.
+- Right-click and select "fileOut".
 
 The file will be saved in
-`{distribution-name}-UserFiles/FileOuts/{package-name}.st`.
+`{distribution-name}-UserFiles/FileOuts/{name}.st`.
 
 These files use the bang-separated "chunked format".
-The following is an example for a `Dog` class.
 Each chunk is delimited by exclamation marks.
 A chunk can contain:
 
@@ -2495,7 +2498,7 @@ A chunk can contain:
 - a message send that creates an object that should exist in the environment
 - a message send that executes code for its side effects
 
-The following is an example of a fileOut file.
+The following is an example fileOut for a `Dog` class:
 
 ```smalltalk
 'From Cuis7.1 [latest update: #6464] on 12 June 2024 at 10:47:55 am'!
@@ -2549,17 +2552,21 @@ name: aName breed: aBreed
 Dog initialize!
 ```
 
-To read all the code for a package from a text file:
+To read a fileOut into the current image:
 
-- Open a File List.
-- Locate and select a `.st` file created by a "fileOut".
+- Open the World menu.
+- Select "Open...File List".
+- Locate and select a `.st` file created by a fileOut.
 - Right-click and select "fileIn".
 - Enter your initials and then your name
-  for tracking who performed the "fileIn".
-- All the class categories, classes, and methods defined in the file
-  will now be available in the current image.
+  for tracking who performed the fileIn.
+
+All the class categories, classes, method categories, and methods
+defined in the fileOut will now be available in the current image.
 
 ### Packages
+
+GRONK: Continue review here.
 
 Cuis Smalltalk supports the ability to save code outside an image file
 and load it into running images.
@@ -2695,12 +2702,36 @@ and only install the desired packages.
 TODO: What does the "delete/merge" button in the "Installed Packages" window do?
 TODO: It does not uninstall the selected package or delete the file that defines it.
 
-### Adding and Saving Code
+## Reflection
 
-Create a new package for your code as described above.
-While still in the "Installed Packages" window,
-select the package and click "browse"
-to open a System Browser for the package.
+Smalltalk provides many methods for
+getting information about classes and objects.
+The following table lists some of them.
+
+| Method                                                  | Answers                                                                                                      |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `Smalltalk allClasses`                                  | an `Array` of all classes defined in the current image                                                       |
+| `Smalltalk allClassesImplementing: #selector`           | an `Array` of all classes that implement a given selector                                                    |
+| `SystemOrganization categoryOfElement: #SomeClass`      | name of the class category to which a given class belongs                                                    |
+| `SomeClass allClassVarNames`                            | a `Set` of class variable names defined in this class                                                        |
+| `SomeClass allSelectors`                                | an `IdentitySet` of all message selectors supported by this class, including selectors for inherited methods |
+| `SomeClass allInstances`                                | an `Array` of all existing instances of this class                                                           |
+| `SomeClass allInstVarNames`                             | an `Array` of instance variable names defined in this class                                                  |
+| `SomeClass allInstVarNamesEverywhere`                   | an `Array` of instance variable names defined in this class and inherited classes                            |
+| `SomeClass allMethodsInCategory: 'some-category'`       | an `Array` of instance methods in a given category, including those defined in this class and inherited      |
+| `SomeClass class allMethodsInCategory: 'some-category'` | an `Array` of class methods in a given category, including those defined in this class and inherited         |
+| `SomeClass allSubclasses`                               | an `OrderedCollection` of subclasses                                                                         |
+| `SomeClass allSuperclasses`                             | an `OrderedCollection` of superclasses                                                                       |
+| `CodeListPackages installedPackages`                    | an `Array` of `CodePackage` objects (appear in System Browser class category pane)                           |
+
+TODO: Why does `allClassVarNames` return a `Set` when `allInstVarNames` returns an `Array`?
+TODO: Is there a way to get all the message categories used by a class?
+
+To run code on every instance of a given class,
+send the `allInstancesDo:` message to the class.
+
+For example, to delete all instances of a given class, run
+`SomeClass allInstancesDo: [ :obj | obj delete ]`.
 
 ## Control Flow
 
@@ -2751,7 +2782,7 @@ in the `UndefinedObject` class.
 
 ### Booleans
 
-The reserved words `true` and `false` refer to
+The pseudo-variables `true` and `false` refer to
 instances of the classes `True` and `False`
 which are subclasses of the class `Boolean`.
 
