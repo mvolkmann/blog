@@ -853,7 +853,17 @@ that is set to 0 in the Animal class and 4 in the Dog subclass.
 
 Temporary variables are declared in a space-separated string
 between vertical bars inside a method or block definition.
-They can only be accessed within the method or block that declares them.
+Method parameters are also considered to be temporary variables.
+These can only be accessed within the method or block that declares them.
+
+In the following example, `numbers` and `sum` are temporary variables.
+
+```smalltalk
+average: numbers
+    | sum |
+    sum := numbers inject: 0 into: [ :acc :each | acc + each ].
+    ^ sum / numbers size
+```
 
 #### Global Variables
 
@@ -2408,6 +2418,41 @@ A common operation performed in a File List window
 is to locate and select a `.pck.st` file that defines a package
 and click the "install package" button to install it.
 
+### Installed Packages Window
+
+To see all the installed packages, open the World menu
+and select Open...Installed Packages.
+This opens an "Installed Packages" window.
+
+To browse everything that is defined in a package:
+
+- Select the package.
+- Click the "Browse" button.
+- This opens a System Browser that is focused on the selected package package.
+
+To create a new package:
+
+- Click the "New" button in the center strip of buttons.
+- Enter a package name. For example, "Volkmann".
+- Select the newly created package.
+- Enter a comment describing the package.
+- Click the "Save" button.
+- You will be prompted for the file path and name
+  where the package will be saved.
+  It's a good idea to keep the suggested file name,
+  but feel free to change the directory to one outside
+  the distribution directory.
+
+If package name matches the name of a class category
+that was created previously, all the classes in that category
+and their methods will automatically be associated with the new package.
+
+I created a package whose name is my last name.
+I use this package to save all my experimental code
+so I can easily load it into new images.
+This is useful in case I accidentally modify an image in an unintended way.
+I can then return to using a base image and load my package into it.
+
 ### Process Browsers
 
 Process Browsers display a list of all the Smalltalk-related processes
@@ -2566,16 +2611,16 @@ defined in the fileOut will now be available in the current image.
 
 ### Packages
 
-GRONK: Continue review here.
-
 Cuis Smalltalk supports the ability to save code outside an image file
-and load it into running images.
-This is an alternative to Monticello which is used in Squeak and Pharo.
+as a "package" and load the package into running images.
+This is an alternative to <a href="https://wiki.squeak.org/squeak/1287"
+target="_blank">Monticello</a> which is used in Squeak and Pharo.
 
 Packages are collections of Smalltalk code
 stored in files with a `.pck.st` file.
 
 Package names are used as prefixes on class and method categories names.
+Package name abbreviations are often used as prefixes on class names.
 
 The GitHub account "Cuis-Smalltalk" provides many package repositories,
 32 as of June 2024.
@@ -2588,11 +2633,10 @@ repositories whose names begin with "Cuis-Smalltalk-".
 
 There are three ways to install a package.
 
-1. Drag a package file onto the `WorldMorph`
-   and select "install package".
-1. Open a "File List" window, locate a package file,
+1. Drag a package file onto the World and select "install package".
+1. Open a File List, locate a package file,
    select it, and click the "install package" button.
-1. Open a Workspace window,
+1. Open a Workspace,
    enter the command `Feature require: '{package-name}'`,
    and press cmd-d (Do it).
    This option only works if the package is
@@ -2622,61 +2666,24 @@ Let's learn where the `Feature require:` method searches for packages.
    - "Packages created by user"
    - "Packages in other folders or repos in the project directory"
 
-To see all the installed packages, click the WorldMorph background
-and select Open...Installed Packages.
-This opens an "Installed Packages" window.
+See the earlier section "Installed Packages Window"
+for more details on working with packages.
 
-To browse everything that is defined in a package:
-
-- Select the package.
-- Click the "Browse" button.
-- This opens a "Browser for package" window.
-
-To create a new package:
-
-- Click the "New" button in the center strip of buttons.
-- Enter a package name. For example, "Volkmann".
-- Select the newly created package.
-- Enter a comment describing the package.
-- Click the "Save" button.
-- You will be prompted for the file path and name
-  where the package will be saved.
-  It's a good idea to keep the suggested file name,
-  but feel free to change the directory to one outside
-  the distribution directory.
-
-If package name matches the name of a class category
-that was created previously, all the classes in that category
-and their methods will automatically be associated with the new package.
-
-I created a package whose name is my last name.
-I use this package to save all my experimental code
-so I can easily load it into new images.
-This is useful in case I accidentally modify an image in an unintended way.
-I can then return to using a base image and load my package into it.
-
-To determine where packages are saved:
+By default packages are saved in a directory that is relative to
+the directory that holds the current image file.
+To determine this:
 
 - Open a Workspace.
 - Enter `Smalltalk imagePath.`
-- Press cmd-p to print the result.
+- Press cmd-p to "Print it".
 
-Suppose the name of your Cuis directory is `Cuis-Smalltalk-Dev-master`.
-For me this is
-`~/Documents/dev/lang/smalltalk/{cuis-directory}/CuisImage/Cuis7.1-6367.image`.
-Packages I create go in a similar path which is
-`~/Documents/dev/lang/smalltalk/{cuis-directory}-UserFiles/NewPackages/Volkmann.pck.st`
+Determine the name and location of the directory
+that holds your Cuis Smalltalk installation.
+For me this is `~/Documents/dev/lang/smalltalk/Cuis-Smalltalk-Dev`.
+My base image file is in the subdirectory `CuisImage` in the file `Cuis7.1-6367.image`.
 
-To add or override methods in existing classes
-and save the changes in your package:
-
-- Add a message category to an existing class whose name is
-  an asterisk followed by the new package name.
-  For example, I used "\*Volkmann".
-- Add new methods to the existing class in the new message category.
-- Open an "Installed Packages" window and select the package.
-  An asterisk before the name indicates that it has unsaved changes.
-- Click the "Save" button.
+By default, packages I create go in a similar path which is
+`~/Documents/dev/lang/smalltalk/Cuis-Smalltalk-Dev-UserFiles/NewPackages/{package-name}.pck.st`.
 
 To define new classes and save them in your package:
 
@@ -2686,23 +2693,43 @@ To define new classes and save them in your package:
 - Open an "Installed Packages" window and select the new package.
 - Click the "Save" button.
 
+To add or override methods in existing classes
+and save the changes in your package:
+
+- Add a message category to an existing class whose name is
+  an asterisk followed by the new package name.
+  For example, I used "\*Volkmann".
+  This can optionally be followed by "-" and a meaningful method category name.
+  For example, "\*Volkmann-geometry".
+- Add new methods to the existing class in the new message category.
+- Open an "Installed Packages" window and select the package.
+  An asterisk before the name indicates that it has unsaved changes.
+- Click the "Save" button.
+
 To verify that all this worked:
 
-- Click the `WorldMorph` background and select "Quit without saving"
+- Open the World menu and select "Quit without saving"
   so the changes are not saved in the current image.
 - Restart Cuis Smalltalk with the same image.
-- Verify that the methods and classes that were added are not present.
+- Verify that the classes and methods that were added are not present.
 - Install the package.
-- Verify that the methods and classes that were saved in the package
+- Verify that the classes and methods that were saved in the package
   are now present.
 
 There is no provided way to uninstall a package.
 The only way to remove it from the image is to start with a fresh image
 and only install the desired packages.
+
 TODO: What does the "delete/merge" button in the "Installed Packages" window do?
 TODO: It does not uninstall the selected package or delete the file that defines it.
 
+It is recommended to save packages in GitHub.
+For details on doing this, open the World menu and
+select Help...Using GitHub to host Cuis packages.
+
 ## Reflection
+
+GRONK
 
 Smalltalk provides many methods for
 getting information about classes and objects.
@@ -2867,7 +2894,7 @@ The following list depicts the class hierarchy for character data:
 - `CharacterSequence`
   - `String`
     - `Symbol`
-  - `UnicodeSmtring`
+  - `UnicodeString`
     - `UnicodeSymbol`
 
 Strings are represented by the `String` class.
@@ -4092,8 +4119,6 @@ Also see
 target="_blank">Make a standalone click-&-run Smalltalk application for macOS</a>.
 
 ### Running Headless
-
-THIS WORKS!
 
 To run Smalltalk programs that are command-line utilities, apps, and servers,
 use the Smalltalk VM that is bundled inside the macOS app
