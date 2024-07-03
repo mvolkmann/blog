@@ -19,11 +19,23 @@ The following steps create a simple Java project that can be built using Gradle.
 
 1. Create a directory for the project.
 
-1. Create the file `build.gradle` in the project directory
-   containing the following:
+1. Create the file `build.gradle`, which uses Groovy,
+   in the project directory containing the following:
 
    ```groovy
-   apply plugin: 'java'
+   plugins {
+      id 'application'
+      id 'java'
+   }
+
+   application {
+      // applicationDefaultJvmArgs = ['-Dgreeting.language=en']
+      mainClass = 'HelloWorld'
+   }
+
+   java {
+      sourceCompatibility = JavaVersion.VERSION_18
+   }
 
    repositories {
       mavenCentral()
@@ -49,3 +61,33 @@ The following steps create a simple Java project that can be built using Gradle.
 1. Enter `gradle build`
 
 1. Enter `gradle run`
+
+## Kotlin
+
+The following file `build.gradle.kts` is nearly identical to the `build.gradle` file above, but it uses Kotlin instead of Groovy.
+
+```kotlin
+plugins {
+    // The "java" and "application" plugins are special.
+    // All other plugins must use the syntax `id("plugin.id")`.
+    id 'application'
+    id 'java'
+}
+
+application {
+    applicationDefaultJvmArgs = ['-Dgreeting.language=en']
+    mainClass = 'HelloWorld'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_18
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Add dependencies here if needed
+}
+```
