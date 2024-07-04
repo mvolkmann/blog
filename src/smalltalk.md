@@ -591,6 +591,39 @@ initialize
         openInWorld
 ```
 
+### Themes
+
+Colors and other features of the Cuis Smalltalk UI
+are determined by selecting a theme.
+
+By default, only two themes are provided, "BrightColorTheme" and "DarkTheme".
+To add more themes, open the World menu, select Preferences...Themes...,
+and select "\* Load Additional Themes \*".
+This adds the themes "ClassicTheme", "DarkBlueTheme", "DarkColorTheme",
+"HighContractBlackTheme", "HighContrastWhiteTheme", "LightBluetheme",
+"LightGrayTheme", "LightTheme", and "PersonalizedTheme".
+Select one of these to switch to that theme.
+
+Open windows will not be correctly updated after selecting a new theme.
+Close them and open new windows to get the intended styling.
+
+To customize the current theme, open the World menu
+and select Preferences...Theme Customizer...
+Alternatively you can:
+
+- Open a System Browser.
+- Select the "Graphics - Themes" class category.
+- Select the `Theme` class.
+- Select the `colors` message category.
+- Select one of the methods such as `buttonLabel`.
+- Change the color returned from its default value to a new value.
+
+This will affect all morphs that use that theme property.
+For example, the `PluggableButtonMorph` method `drawEmbossedLabelOn`
+uses `Theme current buttonLabel`.
+This method could be modified to enable
+specifying a different label color for specific buttons.
+
 ### Morphs
 
 All the graphical elements visible on the World are referred to as "morphs".
@@ -768,6 +801,14 @@ Typing an underscore is a shorthand way to type `:=`.
 Typing either will be rendered as a left pointing arrow.
 This does not change the characters that appear
 when code is saved in a "file out" or package.
+
+## Creating Objects
+
+New objects can be created by
+sending the message `#new` or `#basicNew` to a class.
+By default, both initialize all attributes of the new object to `nil`.
+The difference between them is that `new` can be overridden
+to do something different, whereas `basicNew` cannot be overridden.
 
 ### Variables
 
@@ -1948,41 +1989,6 @@ The repositories that this clones include:
 - SVG
 - VMMaker
 
-## Themes
-
-Colors and other features of the Cuis Smalltalk UI
-are determined by selecting a theme.
-By default, only two themes are provided, "BrightColorTheme" and "DarkTheme".
-To add more themes, open the World menu, select Preferences...Themes...,
-and select "\* Load Additional Themes \*".
-This adds the themes "ClassicTheme", "DarkBlueTheme", "DarkColorTheme",
-"HighContractBlackTheme", "HighContrastWhiteTheme", "LightBluetheme",
-"LightGrayTheme", "LightTheme", and "PersonalizedTheme".
-Select one of these to switch to that theme.
-
-See this <a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Dev/issues/283"
-target="_blank">issue</a> related to PersonalizedTheme.
-
-Open windows will not be correctly updated after selecting a new theme.
-Close them and open new windows to get the intended styling.
-
-To customize the current theme, open the World menu
-and select Preferences...Theme Customizer...
-Alternatively you can:
-
-- Open a System Browser.
-- Select the "Graphics - Themes" class category.
-- Select the `Theme` class.
-- Select the `colors` message category.
-- Select one of the methods such as `buttonLabel`.
-- Change the color returned from its default value to a new value.
-
-This will affect all morphs that use that theme property.
-For example, the `PluggableButtonMorph` method `drawEmbossedLabelOn`
-uses `Theme current buttonLabel`.
-This method could be modified to enable
-specifying a different label color for specific buttons.
-
 ## Windows
 
 You will be opening and using many windows in the development environment.
@@ -2945,9 +2951,12 @@ send the `allInstancesDo:` message to the class.
 For example, to delete all instances of a given class, run
 `SomeClass allInstancesDo: [ :obj | obj delete ]`.
 
-GRONK: Continue review here.
-
 ## Data Types
+
+TODO: Move this section up.
+
+The following subsections provide a review of
+commonly used Smalltalk classes that represent data types.
 
 ### UndefinedObject
 
@@ -2982,9 +2991,9 @@ ifTrue: alternativeBlock
     ^alternativeBlock value
 ```
 
-## Numbers
+### Numbers
 
-The following list depicts the class hierarchy for numbers:
+The following list depicts the class hierarchy for various kinds of numbers:
 
 - `Number`
   - `Float`
@@ -2995,6 +3004,8 @@ The following list depicts the class hierarchy for numbers:
       - `LargePositiveInteger`
         - `LargeNegativeInteger`
       - `SmallInteger`
+
+GRONK: Continue review here.
 
 Literal numbers without a decimal point automatically become
 objects of one of the `Integer` subclasses.
@@ -3025,7 +3036,7 @@ n := n + 1
 
 There are no shorthand assignment operators like `+=` for numbers.
 
-### Fractions
+#### Fractions
 
 When the message `/` is sent to an integer with an integer argument,
 the result is a `Fraction` object.
@@ -3167,7 +3178,33 @@ To install it, enter `Feature require: 'Identities-UUID'` in a Workspace
 and "Do it".
 To generate a UUID value, use `UUID new`.
 
-## Collections
+### Interval
+
+Instances of the `Interval` class represent a finite arithmetic progression
+which is a sequence of numbers where
+the difference between consecutive terms is constant.
+An example would be the numbers 2, 4, 6, and 8.
+
+To create an `Interval` instance, use one of the following class methods:
+
+- `from:to:` - each value is one more than the previous
+- `from:to:by:` - specifies the increment between values
+- `from:to:count:` - specifies the number values to include,
+  which can be `Fraction` objects
+- `integersFrom:to:count:` - specifies the number values to include,
+  which will be the closest `Integer` match and not `Fraction` objects
+
+The following table describes some of the instance methods
+defined in the `Interval` class.
+
+| Method | Description                                         |
+| ------ | --------------------------------------------------- |
+| `do:`  | iterates over each value and passes them to a block |
+| ``     |                                                     |
+
+TODO: Describe more of these methods.
+
+### Collections
 
 Smalltalk supports a large number of collection classes.
 Collection elements can be any kind of object, including other collections.
@@ -3211,33 +3248,7 @@ TODO: Add a section on each commonly used collection class.
 
 For example, `#(1 2 3) inject: 0 into: [:acc :n | acc + n]` gives `6`.
 
-### Interval
-
-Instances of the `Interval` class represent a finite arithmetic progress
-which is a sequence of numbers where
-the difference between consecutive terms is constant.
-An example would be the numbers 2, 4, 6, and 8.
-
-To create an `Interval` instance, use one of the following class methods:
-
-- `from:to:` - each value is one more than the previous
-- `from:to:by:` - specifies the increment between values
-- `from:to:count:` - specifies the number values to include,
-  which can be `Fraction` objects
-- `integersFrom:to:count:` - specifies the number values to include,
-  which will be the closest `Integer` match and not `Fraction` objects
-
-The following table describes some of the instance methods
-defined in the `Interval` class.
-
-| Method | Description                                         |
-| ------ | --------------------------------------------------- |
-| `do:`  | iterates over each value and passes them to a block |
-| ``     |                                                     |
-
-TODO: Describe more of these methods.
-
-### Array
+#### Array
 
 Literal arrays between with `#(`, end with `)`,
 and contain space-separated values.
@@ -3308,7 +3319,7 @@ To iterate over the elements, send the `do:` message. For example:
 
 TODO: Add more detail.
 
-### OrderedCollection
+#### OrderedCollection
 
 `OrderedCollection` instances are variable-length, ordered collections.
 
@@ -3340,11 +3351,11 @@ For example, `fruits indexOf: 'banana'` returns 2.
 
 TODO: Add more detail.
 
-### Bag
+#### Bag
 
 TODO: Add detail.
 
-### Association
+#### Association
 
 An `Association` represents a key/value pair.
 An instance can be created in the following ways:
@@ -3357,7 +3368,7 @@ a := someKey -> someValue.
 The message `->` is defined in the `Object` class
 which make it easy to create an `Association` with any object as the key.
 
-### Dictionary
+#### Dictionary
 
 This is a subclass of the `Set` class.
 
@@ -3418,20 +3429,13 @@ dict associationsDo: [ :assoc |
 
 TODO: Add more detail?
 
-### LinkedList
+#### LinkedList
 
 TODO: Add detail.
 
-### Set
+#### Set
 
 TODO: Add detail.
-
-## Creating Objects
-
-New objects can be created from a class using the class method `new` or `basicNew`.
-By default, both initialize all attributes of the new object to `nil`.
-The difference between them is that `new` could be overridden
-to do something different, whereas `basicNew` cannot be overridden.
 
 ## Exception Handling
 
