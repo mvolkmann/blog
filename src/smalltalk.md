@@ -28,16 +28,26 @@ layout: topic-layout.njk
 
 <a href="https://en.wikipedia.org/wiki/Smalltalk" target="_blank">Smalltalk</a>
 "is a purely object oriented programming language (OOP)."
-Messages are sent to objects which decide whether and how to act on them.
+Everything is represented by an object that is an instance of some class.
+This includes classes themselves and
+all the GUI elements in the development environment.
+Everything happens by sending messages to objects.
+The objects decide whether and how to act on the messages.
 
 <a href="https://en.wikipedia.org/wiki/Simula" target="_blank">Simula</a>
 is considered to be the first object-oriented programming (OOP) language.
-But Smalltalk was the first to make OOP popular.
+In Simula, the data that models a simulation are represented by objects,
+but primitive data types like numbers are not.
+While Simula preceded Smalltalk, Smalltalk was
+the first programming language to make OOP popular.
 
 Running Smalltalk programs requires two parts,
 a virtual machine (VM) and an image.
 The VM is specific to the operating system being used.
 It reads and executes Smalltalk code found in an image file.
+
+Smalltalk is not an interpreted language. Smalltalk code is compiled
+to optimized bytecode that is executed by a virtual machine.
 
 Everything in Smalltalk is represented by an object, including
 classes and all GUI elements in the development environment.
@@ -51,7 +61,7 @@ Smalltalk is perhaps most known for its incredible development tools.
 These support:
 
 - finding code in many ways
-- live code editing where changes are immediately reflected in the environment
+- live environment where code changes are immediately reflected
   (no need to recompile or restart the environment)
 - debugging with ability to modify code and data, then continue or restart
 - ability to modify the classes and methods that implement the
@@ -745,6 +755,8 @@ To enable this, open the World menu and
 select Preferences...Show ST-80 Assignments.
 The next time code is modified, all the `:=` messages
 will be rendered by a left pointing arrow.
+
+TODO: Does this also enable returning the `^` return character as an up arrow?
 
 To disable this, open the World menu and
 select Preferences...Show ANSI Assignments.
@@ -1536,6 +1548,10 @@ setRadius: aNumber
 area
     ^Float pi * radius * radius
 ```
+
+A common way to provide constant values is
+to define class methods that return them.
+For example, `pi` is a class method in the `Float` class.
 
 The `VRectangle` class can add the following class method for creating instances:
 
@@ -2516,6 +2532,9 @@ To debug code, select one or more lines in a Workspace window
 and press cmd-shift-d (Debug it).
 A Debug window will appear.
 
+TODO: Describe other ways to open a Debug window.
+TODO: Is adding `self halt` to a method and then running it another way?
+
 <img alt="Cuis Debug window" style="width: 100%"
   src="/blog/assets/cuis-debug-window.png?v={{pkg.version}}">
 
@@ -2962,6 +2981,19 @@ The following list depicts the class hierarchy for numbers:
 
 Literal numbers without a decimal point automatically become
 objects of one of the `Integer` subclasses.
+
+Numbers are automatically converted to objects of the appropriate type.
+For example:
+
+```smalltalk
+| a b c |
+a := 1000000000000000000.
+b := a * 10.
+c := b / 10.
+a class print. "SmallInteger"
+b class print. "LargePositiveInteger"
+c class print. "SmallInteger"
+```
 
 Literal numbers with a decimal point automatically become
 objects of one of the `Float` subclasses.

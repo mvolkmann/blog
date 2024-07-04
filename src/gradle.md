@@ -58,9 +58,20 @@ The following steps create a simple Java project that can be built using Gradle.
    }
    ```
 
-1. Enter `gradle build`
+1. To build the project, enter `gradle build`
 
-1. Enter `gradle run`
+   This creates the `build` subdirectory if it doesn't exist
+   and it writes all generated files inside that directory.
+
+1. To run the project, enter `gradle run`
+
+   This will also build the project before running
+   if it has not been built or
+   if source files have been modified since the last build.
+   So it is never necessary to run `gradle build`.
+
+1. To delete all the generated files (the `build` directory),
+   enter `gradle clean`.
 
 ## Kotlin
 
