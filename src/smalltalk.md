@@ -90,6 +90,9 @@ graphical user interfaces, the mouse, and virtual machines.
 Alan Kay said "OOP to me means only messaging,
 local retention and protection and hiding of state-process,
 and extreme late-binding of all things."
+He also said "I'm sorry that I, long ago,
+coined the term 'Objects' for this topic, because it gets
+many people to focus on the lesser idea. The big idea is messaging!".
 
 Late binding means that messages sent to objects
 are looked up for compatible methods at runtime.
