@@ -1254,6 +1254,17 @@ score: aNumber
 As shown above, another convention is for variables associated with
 keyword messages to indicate their expected type.
 
+To find a class without needing to know its class category:
+
+- Press shift-return OR
+  hover over the top, first column in a System Browser and press cmd-f.
+- Enter part of the class name.
+- Select a class name from the popup list that appears.
+- If shift-return was pressed, a new System Browser
+  will open to display the selected class.
+  If cmd-f was pressed in an existing System Browser,
+  the selected class will be displayed there.
+
 ### Accessor Methods
 
 "Getter methods" allow instance or class variable values to be
@@ -1414,7 +1425,7 @@ All methods are public.
 By convention, methods that should only be used by
 other methods in the same class are placed in the "private" message category.
 
-To find a method:
+To find a method when its class is not known:
 
 - Open the World menu and select Open ... Message Names.
   This opens a "Message Names" window.
@@ -1476,21 +1487,6 @@ To add a method to a class:
 - To associate the method with a different method category,
   drag its name from the top, fourth pane to
   the desired method category in the top, third pane.
-
-Another way to find a class that is useful
-when its class category is not known is to:
-
-- Press shift-return OR
-  hover over the top, first column in a System Browser and press cmd-f.
-- Enter part of the class name.
-- Select a class name from the popup list that appears.
-- If shift-return was pressed, a new System Browser
-  will open to display the selected class.
-  If cmd-f was pressed in an existing System Browser,
-  the selected class will be displayed there.
-
-To sort the class category or message category names alphabetically,
-hover over their column and press cmd-a (alphabetize).
 
 For example, try adding the following methods to the `Integer` class
 which is in the class category "Kernel-Numbers".
@@ -1630,6 +1626,24 @@ double: obj
             do: [ ^ 0 ]].
     ^ 0.
 ```
+
+Instance and class methods can dynamically added to a class
+by sending the message `#compile:` to a class or its metaclass.
+The argument is a string of Smalltalk code.
+For example, the following code adds the class method `legs`
+and the instance method `speak` to the `Dog` class.
+
+```smalltalk
+Dog class compile: 'legs ^4'.
+Dog compile: 'speak ''Woof!'' print'
+```
+
+The expression `Dog class` returns the metaclass of the `Dog` class
+and adding a method there makes it a class method.
+
+The single quotes inside the `speak` method string are doubled to escape them.
+
+The new methods will appear in System Browsers.
 
 ### Primitive Methods
 
