@@ -803,22 +803,20 @@ it is also used to implement exception handling and continuations."
 
 #### Blocks
 
-GRONK: Review this section.
-
 A block is closure (anonymous function) that can have parameters
 and contain many expressions.
 They are represented by the class `BlockClosure`.
-The value of the block is the value of the last expression.
-It cannot explicitly return a value with `^`.
+The value of the block is the value of its last expression.
 
-Blocks can take zero or more positional arguments,
+Blocks take zero or more positional arguments,
 which is something methods cannot do.
-Argument names are appear at the beginning of a block
+Argument names appear at the beginning of a block
 and each name is preceded by a colon.
-The argument list is separated from the code by a vertical bar.
+The argument list is separated from the expressions by a vertical bar.
 
-Blocks can be saved in variables, passed as arguments to methods and blocks,
-and used multiple times. For example:
+Blocks can be saved in variables,
+passed as arguments to methods and other blocks,
+and can be evaluated multiple times. For example:
 
 ```smalltalk
 noArgBlock := [2 * 3].
@@ -826,11 +824,11 @@ singleArgBlock := [:a | a * 3].
 multipleArgBlock := [:a :b | a * b].
 ```
 
-The `value` message evaluates a block and
-returns the value of its final expression.
-It can provide zero to four arguments.
-For blocks with more than four parameters,
-pass them in an array using `#valueWithArguments:`.
+Blocks support several messages that evaluate the block
+whose names begin with `value`.
+These message enable providing zero to four arguments.
+For blocks with more than four parameters, send the message
+`#valueWithArguments:` and an array holding all the arguments.
 For example:
 
 ```smalltalk
@@ -844,12 +842,9 @@ multiArgBlock valueWithArguments: #(1 2 3 4 5).
 
 A block must be passed the same number of arguments as it has parameters.
 If a block is passed fewer or more arguments than it accepts,
-an Error window will open.
+a Debug window will open.
 
-Blocks can declare and use temporary (local) variables.
-
-If a block uses the caret symbol to return a value,
-the containing method will exit and return that value.
+Blocks can declare and use temporary (local) variables just like a method.
 
 For example:
 
@@ -866,7 +861,7 @@ access variables defined outside them. For example:
 ```smalltalk
 n := 19.
 b := [:a | a + n].
-b value: 2. "result is 21"
+b value: 2 "result is 21"
 ```
 
 To use a block as an iteration condition,
@@ -874,10 +869,16 @@ use the methods `whileTrue`, `whileFalse`, `whileNotNil`, and `whileNil`
 that are defined in the `BlockClosure` class.
 Note that these are not methods on the `Boolean` class.
 
-For example:
+For example, the following code prints the integer values 1 through 10
+in the Transcript:
 
 ```smalltalk
-TODO: Add a whileTrue example.
+| counter |
+counter := 1.
+[counter <= 10] whileTrue: [
+    counter print.
+    counter := counter + 1.
+].
 ```
 
 A block can call itself if it passes itself in as an argument.
@@ -892,6 +893,9 @@ fact := [:block :n |
 
 fact value: fact value: 5 "gives 120"
 ```
+
+If a block uses the caret symbol (`^`) to return a value,
+the containing method will exit and return that value.
 
 #### Instance Variables
 
@@ -1668,6 +1672,8 @@ TODO: Is there a limit of 256 primitive numbers?
 
 Control flow is provided through message passing.
 
+### Conditional Logic
+
 The `Boolean` class in the `Kernel-Objects` category contains the methods
 `#ifTrue`, `#ifFalse`, `#ifTrue:ifFalse`, and `#ifFalse:ifTrue`.
 For example:
@@ -1702,7 +1708,20 @@ assessment := color caseOf: {
 }
 ```
 
-GRONK: Iteration was covered in the Block section. Should it move to here?
+### Iteration
+
+The `timesRepeat` method in the `Integer` class can be used
+to evaluate a block a given number of times.
+For example:
+
+```smalltalk
+3 timesRepeat: ['Ho' print]
+```
+
+See the "Collections" section for messages that iterate over a collection.
+
+See the "Blocks" section for messages that
+use a block as an iteration condition.
 
 ## Images
 
@@ -2896,22 +2915,20 @@ GRONK: Continue review here.
 
 ### UndefinedObject
 
-The reserved word `nil` refers to
-an instance of the `UndefinedObject` class.
-No additional instances can be created.
-This is prevented by overriding the class method `new`
-in the `UndefinedObject` class.
+The pseudo-variable `nil` represents not having a value.
+It refers to the singleton instance of the `UndefinedObject` class.
+Creation of additional instances is prevented by
+overriding the class method `new` in the `UndefinedObject` class.
 
 ### Booleans
 
 The pseudo-variables `true` and `false` refer to
-instances of the classes `True` and `False`
+singleton instances of the classes `True` and `False`
 which are subclasses of the class `Boolean`.
 
 `True` and `False` are singleton classes.
-No additional instances can be created.
-This is prevented by overriding the class method `new`
-in the `Boolean` class.
+Creating of additional instances is prevented by
+overriding the class method `new` in the `Boolean` class.
 
 Representing the values `true` and `false` by distinct classes
 simplifies the implementation of many of their methods.
@@ -2919,9 +2936,12 @@ For example, here are the implementations of the
 `&` and `ifTrue:` instance methods in the `True` class.
 
 ```smalltalk
+"This is simplified because it can assume
+ the receiver (left-hand side) is true."
 & alternativeObject
     ^alternativeObject
 
+"This is simplified by not needing to test whether the receiver is true."
 ifTrue: alternativeBlock
     ^alternativeBlock value
 ```
@@ -3098,7 +3118,7 @@ To install it, enter `Feature require: 'Identities-UUID'` in a Workspace
 and "Do it".
 To generate a UUID value, use `UUID new`.
 
-### Collections
+## Collections
 
 Smalltalk supports a large number of collection classes.
 Collection elements can be any kind of object, including other collections.
