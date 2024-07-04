@@ -24,6 +24,9 @@ DynamoDB provides:
 ## APIs
 
 For Java, see
+<a href="https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/dynamodb-enhanced-client.html"
+target="_blank">DynamoDB Enhanced Client API</a>.
+This is the successor to the
 <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBMapper.html"
 target="_blank">DynamoDBMapper</a>.
 

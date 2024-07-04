@@ -34,11 +34,13 @@ When using VS Code for Java development:
    target="_blank">spring initializr</a>.
 1. For Project, select "Gradle - Kotlin".
 1. For Language, select "Java".
-1. For "Spring Boot", select "3.3.0".
+1. For "Spring Boot", select the latest version (for me this was "3.3.0").
 1. For "Packaging", select "Jar".
-1. For "Java", select "21".
+1. For "Java", select the latest version (for me this was "21").
 1. Click the "ADD DEPENDENCIES..." button.
-1. Unde the "WEB" category, click "Spring Web".
+1. Under the "WEB" category, click "Spring Web" and "Spring Boot DevTools".
+   "Spring Boot DevTools" can automatically restart the Spring server
+   when code changes are detected.
 1. Click the "GENERATE" button which
    creates the file `demo.zip` in the `Downloads' directory.
 1. Unzip that file and move the resulting directory to the desired location.
