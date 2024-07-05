@@ -2965,6 +2965,21 @@ It refers to the singleton instance of the `UndefinedObject` class.
 Creation of additional instances is prevented by
 overriding the class method `new` in the `UndefinedObject` class.
 
+The following table describes some of the instance methods
+defined in the `UndefinedObject` class.
+These can be invoked on the pseudo-variable `nil`.
+
+| Method            | Description                                              |
+| ----------------- | -------------------------------------------------------- |
+| `ifNil:`          | always evaluates its argument                            |
+| `ifNil:ifNotNil:` | always evaluates its first argument and never its second |
+| `ifNotNil:`       | never evaluates its argument                             |
+| `ifNotNil:ifNil:` | always evaluates its second argument and never its first |
+| `isEmptyOrNil:`   | always answers `true`                                    |
+| `isLiteral`       | always answers `true`                                    |
+| `isNil`           | always answers `true`                                    |
+| `notNil`          | always answers `false`                                   |
+
 ### Booleans
 
 The pseudo-variables `true` and `false` refer to
@@ -2991,6 +3006,34 @@ ifTrue: alternativeBlock
     ^alternativeBlock value
 ```
 
+The following table describes most of the instance methods
+defined in the `Boolean` class.
+Since `True` and `False` are subclasses, they also have these methods.
+
+| Method             | Description                                                   |
+| ------------------ | ------------------------------------------------------------- |
+| `&`                | "and" without short-circuiting                                |
+| `\|`               | "or" without short-circuiting                                 |
+| `and:`             | "and" with short-circuiting                                   |
+| `and:and:`         | like `and:` but for three values                              |
+| `and:and:and:`     | like `and:` but for four values                               |
+| `and:and:and:and:` | like `and:` but for five values                               |
+| `eqv:`             | answers whether two `Boolean` values are equivalent           |
+| `ifFalse:`         | evaluates argument (typically a block) if receiver is `false` |
+| `ifFalse:ifTrue:`  | conditionally evaluates arguments (typically blocks)          |
+| `ifTrue:`          | evaluates argument (typically a block) if receiver is `true`  |
+| `ifTrue:ifFalse:`  | conditionally evaluates arguments (typically blocks)          |
+| `isLiteral`        | always answers `true`                                         |
+| `not`              | answers opposite Boolean value                                |
+| `or:`              | "or" with short-circuiting                                    |
+| `or:or:`           | like `or:` but for three values                               |
+| `or:or:or:`        | like `or:` but for four values                                |
+| `or:or:or:or:`     | like `or:` but for five values                                |
+| `xor:`             | exclusive "or" of two `Boolean` values                        |
+
+The `True` and `False` classes implement some of the methods described above,
+but they do not add any methods.
+
 ### Numbers
 
 The following list depicts the class hierarchy for various kinds of numbers:
@@ -3005,10 +3048,22 @@ The following list depicts the class hierarchy for various kinds of numbers:
         - `LargeNegativeInteger`
       - `SmallInteger`
 
-GRONK: Continue review here.
-
 Literal numbers without a decimal point automatically become
 objects of one of the `Integer` subclasses.
+
+Literal numbers with a decimal point automatically become
+objects of one of the `Float` subclasses.
+
+The assignment operator `:=` can be used to
+assign a literal number to a variable.
+For example:
+
+```smalltalk
+n := 1.
+n := n + 1
+```
+
+There are no shorthand assignment operators like `+=` for numbers.
 
 Numbers are automatically converted to objects of the appropriate type.
 For example:
@@ -3023,33 +3078,151 @@ b class print. "LargePositiveInteger"
 c class print. "SmallInteger"
 ```
 
-Literal numbers with a decimal point automatically become
-objects of one of the `Float` subclasses.
+The following table describes most of the instance methods
+defined in the `Number` class.
+These can be invoked on instances of all `Number` subclasses.
 
-The assignment operator `:=` can be used to assign a literal number to a variable.
-For example:
+| Method                | Description                                                                     |
+| --------------------- | ------------------------------------------------------------------------------- |
+| `*`                   | answers product of two numbers                                                  |
+| `+`                   | answers sum of two numbers                                                      |
+| `-`                   | answers difference of two numbers                                               |
+| `/`                   | answers quotient of two numbers                                                 |
+| `//`                  | answers integer quotient of two numbers truncating toward negative infinity     |
+| `=`                   | answers if two numbers are equivalent                                           |
+| `@`                   | answers a `Point` object where receiver is x and argument is y                  |
+| `\\`                  | answers same as `mod:`                                                          |
+| `^`                   | answers same as `raisedTo:`                                                     |
+| `abs`                 | answers absolute value of receiver                                              |
+| `arcCos`              | answers arccosine of receiver                                                   |
+| `arcSin`              | answers arcsine of receiver                                                     |
+| `arcTan`              | answers arctangent of receiver                                                  |
+| `asFloat`             | answers equivalent `Float` value                                                |
+| `asInteger`           | answers equivalent `Integer` value                                              |
+| `ceiling`             | answers nearest integer rounding toward infinity                                |
+| `cos`                 | answers cosine of receiver in radians                                           |
+| `degreeCos`           | answers cosine of receiver in degrees                                           |
+| `degreeSin`           | answers sine of receiver in degrees                                             |
+| `degreeTan`           | answers tangent of receiver in degrees                                          |
+| `cubed`               | answers receiver raised to 3rd power                                            |
+| `degreesToRadians`    | answers result of converting receiver in degees to radians                      |
+| `div:`                | answers integer division rounding toward negative infinity                      |
+| `even`                | answers `Boolean` value indicating if receiver is equivalent to an even integer |
+| `floor`               | answers nearest integer rounding toward negative infinity                       |
+| `fractionPart`        | answers fractional part (ex. `3.25 fractionPart` gives 0.25)                    |
+| `ifNotZero:`          | evaluates argument (typically a block) if receiver is not zero                  |
+| `integerPart`         | answers integer part (ex. `3.25 integerPart` gives 3.0)                         |
+| `isDivisibleBy:`      | answers `Boolean` value indicating if receiver is divisible by argument         |
+| `isNaN`               | always answers `false`                                                          |
+| `isNumber`            | always answers `true`                                                           |
+| `isZero`              | answers `Boolean` value indicating if receiver is zero                          |
+| `lg`                  | answers same as `log2`                                                          |
+| `ln`                  | answers natural log of receiver                                                 |
+| `log`                 | answers base 10 log of receiver                                                 |
+| `log2`                | answers base 2 log of receiver                                                  |
+| `log:`                | answers log of receiver where argument is the base                              |
+| `magnitude`           | same as `abs`                                                                   |
+| `mod:`                | answers receiver modulo argument                                                |
+| `moduloTwoPiAsFloat:` | answers receiver modulo 2 \* pi as a `Float`                                    |
+| `negated`             | answers receiver with opposite sign                                             |
+| `negative`            | answers `Boolean` value indicating if receiver is negative                      |
+| `nthRoot:`            | answers argument root of receiver                                               |
+| `odd`                 | answers `Boolean` value indicating if receiver is equivalent to an odd integer  |
+| `positive`            | answers `Boolean` value indicating if receiver is positive or zero              |
+| `radiansToDegrees`    | answers result of converting receiver in radians to degrees                     |
+| `raisedTo:`           | answers receiver raised to argument exponent                                    |
+| `reciprocal`          | answers reciprocoal of receiver (`1 / self`)                                    |
+| `rem:`                | answers remainder of integer division of receiver by argument                   |
+| `roundTo:`            | answers nearest value or receiver rounded to a multiple of argument             |
+| `rounded`             | answers nearest integer to receiver                                             |
+| `sign`                | answers `1`, `0`, or `-1` based on sign of receiver                             |
+| `sin`                 | answers sine of receiver in radians                                             |
+| `sqrt`                | answers square root of receiver                                                 |
+| `squared`             | answers square of receiver                                                      |
+| `strictlyPositive`    | answers `Boolean` value indicating if receiver is positive and not zero         |
+| `tan`                 | answers tangent of receiver in radians                                          |
+| `to:`                 | answers an `Interval` from receiver to argument                                 |
+| `to:by:`              | answers an `Interval` from receiver to `to:` in steps of `by:`                  |
+| `to:by:do:`           | evaluates "do" block with every value from receiver to `to:` in steps of `by:`  |
+| `to:do:`              | evaluates "do" block with every value from receiver to `to:`                    |
+| `toSelfPlus:`         | answers an `Interval` from receiver to receiver plus argument                   |
+| `truncated`           | answers closes integer rounding toward zero                                     |
 
-```smalltalk
-n := 1.
-n := n + 1
-```
+For example, `3.14159 roundTo: 0.0001` gives `3.1416`.
 
-There are no shorthand assignment operators like `+=` for numbers.
+All subclasses of `Number` except `Fraction`
+implement the `isLiteral` method to always return `true`.
+The `Fraction` class implements the `isLiteral` method
+to return `true` if the denominator is a multiple of 2 or 5,
+and `false` otherwise. TODO: Why?
 
-#### Fractions
+The subclasses `Float`, `BoxedFloat64`, and `SmallFloat64`
+do not implement any particularly interesting methods
+that were not already described for the `Number` class.
 
-When the message `/` is sent to an integer with an integer argument,
-the result is a `Fraction` object.
-Operations of fractions always return a new `Fraction` object
-rather than a `Float` object in order to maintain accuracy.
+The following table describes some of the instance methods
+defined in the `BoxedFloat64` and `SmallFloat64` classes
+(both subclasses of `Integer`) that are not defined in the `Number` class.
+
+| Method | Description                                                                         |
+| ------ | ----------------------------------------------------------------------------------- |
+| `<`    | answers `Boolean` value indicating if receiver is less than argument                |
+| `<=`   | answers `Boolean` value indicating if receiver is less than or equal to argument    |
+| `=`    | answers `Boolean` value indicating if receiver is equal to argument                 |
+| `>`    | answers `Boolean` value indicating if receiver is greater than argument             |
+| `>=`   | answers `Boolean` value indicating if receiver is greater than or equal to argument |
+| `~=`   | answers `Boolean` value indicating if receiver is not equal to argument             |
+
+The `Integer` class overrides the `/` method to
+return a `Fraction` object when the argument is an `Integer`.
 For example, the following sets `result` to the `Fraction` `4/3`
-rathern than the `Float` `1.333333...`.
+rather than the `Float` `1.333333...`.
 
 ```smalltalk
 result := (1/3) * 4
 ```
 
 Fraction objects have the instance variables `numerator` and `denominator`.
+
+Operations of fractions always return a new `Fraction` object
+rather than a `Float` object in order to maintain accuracy.
+
+The following table describes some of the instance methods defined
+in the `Fraction` class that are not defined in the `Number` class.
+
+| Method        | Description                                                         |
+| ------------- | ------------------------------------------------------------------- |
+| `denominator` | answers the denominator of the fraction                             |
+| `numerator`   | answers the numerator of the fraction                               |
+| `reduced`     | answers a new fraction that is a reduced equivalent of the receiver |
+
+The following table describes some of the instance methods defined
+in the `Integer` class that are not defined in the `Number` class.
+
+| Method         | Description                                                                         |
+| -------------- | ----------------------------------------------------------------------------------- |
+| `<`            | answers `Boolean` value indicating if receiver is less than argument                |
+| `<=`           | answers `Boolean` value indicating if receiver is less than or equal to argument    |
+| `=`            | answers `Boolean` value indicating if receiver is equal to argument                 |
+| `>`            | answers `Boolean` value indicating if receiver is greater than argument             |
+| `>=`           | answers `Boolean` value indicating if receiver is greater than or equal to argument |
+| `~=`           | answers `Boolean` value indicating if receiver is not equal to the argument         |
+| `<<`           | answers new `Integer` obtained by shifting argument bits left                       |
+| `>>`           | answers new `Integer` obtained by shifting argument bits right                      |
+| `atRandom`     | answers a random integer from 1 to receiver                                         |
+| `atRandom:`    | answers a random integer from 1 to receiver using argument as a generator           |
+| `bitAnd:`      | answers new `Integer` obtained by anding the bits in receiver and argument          |
+| `bitAt:`       | answers the bit (0 or 1) in receiver at argument position                           |
+| `bitAt:put:`   | answers new `Integer` obtained by changing the bit at `bitAt:` to `put:`            |
+| `bitOr:`       | answers new `Integer` obtained by oring the bits in receiver and argument           |
+| `bitXor:`      | answers new `Integer` obtained by exclusive oring the bits in receiver and argument |
+| `gcd`          | answers greatest common divisor of receiver and argument                            |
+| `hex`          | answers equivalent hexadecimal string                                               |
+| `isPrime`      | answers `Boolean` value indicating if receiver is a prime number                    |
+| `lcm`          | answers least common multiple of receiver and argument                              |
+| `timesRepeat:` | evaluate argument block receiver times                                              |
+
+GRONK: Continue review here.
 
 ### Characters
 
