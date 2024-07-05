@@ -21,45 +21,6 @@ DynamoDB provides:
 - streams for serverless, event-driven applications
 - great integration with other AWS services
 
-## APIs
-
-For Java, see
-<a href="https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/dynamodb-enhanced-client.html"
-target="_blank">DynamoDB Enhanced Client API</a>.
-This is the successor to the
-<a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBMapper.html"
-target="_blank">DynamoDBMapper</a>.
-
-For JavaScript, see
-<a href="https://www.npmjs.com/package/@aws-sdk/lib-dynamodb"
-target="_blank">@aws-sdk/lib/dyamodb</a>.
-
-Both of these require an AWS accesss keys.
-To create them:
-
-- Browse https://aws.amazon.com.
-- Click the "Sign In to the Console" button in the upper-right and sign in.
-- Click the drop-down menu in the upper-right and select "Security credentials".
-- Scroll down the "Access keys" section.
-- Click the "Create access key" button.
-- Click the "I understand ..." checkbox.
-- Click the new "Create access key" button.
-- Click the "Show" link under "Secret access key".
-- Click the "Download .csv file" button to get a text file that
-  contains the values for "Access key" and "Secret access key" value.
-- Copy these values in the file `~/.aws/credentials` which should look like the following:
-
-  ```text
-  [default]
-  aws_access_key_id={value}
-  aws_secret_access_key={value}
-  ```
-
-## Authentication
-
-Amazon Identify and Access Management (IAM) is used to
-manage authentication and authorization.
-
 ## Pricing
 
 There are two pricing models,
@@ -209,3 +170,42 @@ To run SQL queries against the tables:
 - Click the orange "Run" button.
 
 Query results will appear under "Items returned" at the bottom of the page.
+
+## APIs
+
+For Java, see
+<a href="https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/dynamodb-enhanced-client.html"
+target="_blank">DynamoDB Enhanced Client API</a>.
+This is the successor to the
+<a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBMapper.html"
+target="_blank">DynamoDBMapper</a>.
+
+For JavaScript, see
+<a href="https://www.npmjs.com/package/@aws-sdk/lib-dynamodb"
+target="_blank">@aws-sdk/lib/dyamodb</a>.
+
+Both of these require AWS accesss keys.
+To create them:
+
+- Browse <a href="https://aws.amazon.com" target="_blank">aws.amazon.com</a>.
+- Click the "Sign In to the Console" button in the upper-right and sign in.
+- Click the drop-down menu in the upper-right and select "Security credentials".
+- Scroll down the "Access keys" section.
+- Click the "Create access key" button.
+- Click the "I understand ..." checkbox.
+- Click the new "Create access key" button.
+- Click the "Show" link under "Secret access key".
+- Click the "Download .csv file" button to get a text file that
+  contains the values for "Access key" and "Secret access key" value.
+- Copy these values in the file `~/.aws/credentials` which should look like the following:
+
+  ```text
+  [default]
+  aws_access_key_id={value}
+  aws_secret_access_key={value}
+  ```
+
+For example code that demonstrates using all the CRUD operations from Java,
+see <a href="https://github.com/mvolkmann/dynamodb-java-demo/tree/main"
+target="_blank">dynamo-java-demo</a>.
+In particular, see `src/main/java/Demo.java`.
