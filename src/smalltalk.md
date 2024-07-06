@@ -3222,6 +3222,42 @@ in the `Integer` class that are not defined in the `Number` class.
 | `lcm`          | answers least common multiple of receiver and argument                              |
 | `timesRepeat:` | evaluate argument block receiver times                                              |
 
+### Interval
+
+Instances of the `Interval` class represent a finite arithmetic progression
+which is a sequence of numbers where
+the difference between consecutive terms is constant.
+An example is the numbers 2, 4, 6, and 8.
+
+The `Interval` class is a subclass of `SequenceableCollection`
+which is a subclaass of `Collection`.
+
+The following table describes some of the class methods
+defined in the `Interval` class.
+
+| Method                   | Description                                                                                                             |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
+| `from:to:`               | answers an instance where the increment between values is 1                                                             |
+| `from:to:by:`            | answers an instance where the increment between values is `by:`                                                         |
+| `from:to:count:`         | answers an instance where the number of values is `count:` and the increment can be a `Fraction`                        |
+| `integersFrom:to:count:` | answers an instance where the number of values is `count:` and the increment is the closest `Integer`, not a `Fraction` |
+
+The following table describes some of the instance methods
+defined in the `Interval` class that are not also defined in superclasses.
+
+| Method       | Description                                                   |
+| ------------ | ------------------------------------------------------------- |
+| `at:`        | answers the value at a given index                            |
+| `do:`        | evaluates a block for each value from first to last           |
+| `extent`     | answers the difference between the last and first values      |
+| `first`      | answers the first value                                       |
+| `includes:`  | answers `Boolean` indicating if argument is one of the values |
+| `increment`  | answers the increment between values                          |
+| `isEmpty`    | answers `Boolean` indicating if the size is 0                 |
+| `last`       | answers the last value                                        |
+| `size`       | answers the number of values                                  |
+| `reverseDo:` | evaluates a block for each value from last to first           |
+
 ### Characters
 
 Characters are represented by the `Character` class.
@@ -3415,44 +3451,20 @@ that are not also defined in its superclass `CharacterSequence`.
 | `substrings`                            | answers `Array` of substrings delimited by whitespace characters                              |
 | `unescapePercents`                      | answers reverse of `percentEscapeUrl`                                                         |
 
-GRONK
-
-The following table describes some of the class methods
-defined in the `Symbol` class that are not also defined in superclasses.
-
-| Method | Description |
-| ------ | ----------- |
-| ``     |             |
-
-The following table describes some of the instance methods
-defined in the `Symbol` class that are not also defined in superclasses.
-
-| Method | Description |
-| ------ | ----------- |
-| ``     |             |
-
-#### format:
-
-The `format` method returns a new `String` from a template using interpolation
-where input comes from an array.
-For example:
+The `format:` method returns a `String` created from a template
+using interpolation where input comes from an `Array`.
+For example, both of the following produce the string
+`'Player Gretzky is number 99.'`:
 
 ```smalltalk
 s := 'Player {1} is number {2}.' format: #('Gretzky' 99).
+
+name := 'Gretzky'.
+number := 99.
+s := 'Player {1} is number {2}.' format: {name. number}.
 ```
 
-This sets `s` to `'Player Gretzky is number 99.'`.
-
-The following works in Squeak, but not in Cuis, to produce the same result
-using a `Dictionary` as input:
-
-```smalltalk
-'Player {p} is number {n}.' format: ({'p'->'Gretzky'. 'n'->99} as: Dictionary).
-```
-
-TODO: Verify that this works in Squeak.
-
-The `String` `format:` message is useful for print-style debugging.
+The `String` `format:` method is useful for print-style debugging.
 For example, the following is the equivalent
 of a `console.log` call in JavaScript.
 
@@ -3460,21 +3472,45 @@ of a `console.log` call in JavaScript.
 ('myVariable = {1}' format: {myVariable}) print
 ```
 
-#### padded:to:with:
+An even better approach is to defined the `logAs:` method in the `Object` class.
+This is described in the earlier "Transcript Windows" section.
 
-The following returns the `String` `' 19'`:
+The `padded:to:with:` method answers a copy formed by
+padding receiver on the left or right with a given `Character`.
+For example, the following code answers a `String`
+containing three spaces followed by `'19'`:
 
 ```smalltalk
 19 asString padded: #left to: 5 with: Character space
 ```
 
-#### prefixAndSuffix:
-
-The following returns an `Array` containing `'/foo/bar'` and `'baz.txt')`.
+The `prefixAndSuffix:` method answers an `Array` of instances
+formed by splitting receiver on last occurrence of a `Character`.
+For exsample, the following code answers
+an `Array` containing `'/foo/bar'` and `'baz.txt')`.
 
 ```smalltalk
 '/foo/bar/baz.txt' prefixAndSuffix: $/
 ```
+
+#### Symbols
+
+There are no particularly interesting class methods in the `Symbol` class.
+
+The following table describes some of the instance methods
+defined in the `Symbol` class that are not also defined in superclasses.
+
+| Method             | Description                                                                  |
+| ------------------ | ---------------------------------------------------------------------------- |
+| `asString`         | answers a `String` containing the same characters as receiver                |
+| `isLiteral`        | always answers `true`                                                        |
+| `numArgs`          | answers number of arguments in a keyword message or 0 if not                 |
+| `precedence`       | answers 0 if not a valid selector, 1 if unary, 2 if binary, and 3 if keyword |
+| `separateKeywords` | answers space-separated `String` containing keywords                         |
+| `value:`           | answers result of sending receiver as a unary message to argument            |
+
+Many of the `Symbol` instance methods are useful for
+run-time evaluation of instances as keyword messages.
 
 ### UUIDs
 
@@ -3482,32 +3518,6 @@ The package "Identities-UUID" generates UUID values.
 To install it, enter `Feature require: 'Identities-UUID'` in a Workspace
 and "Do it".
 To generate a UUID value, use `UUID new`.
-
-### Interval
-
-Instances of the `Interval` class represent a finite arithmetic progression
-which is a sequence of numbers where
-the difference between consecutive terms is constant.
-An example would be the numbers 2, 4, 6, and 8.
-
-To create an `Interval` instance, use one of the following class methods:
-
-- `from:to:` - each value is one more than the previous
-- `from:to:by:` - specifies the increment between values
-- `from:to:count:` - specifies the number values to include,
-  which can be `Fraction` objects
-- `integersFrom:to:count:` - specifies the number values to include,
-  which will be the closest `Integer` match and not `Fraction` objects
-
-The following table describes some of the instance methods
-defined in the `Interval` class.
-
-| Method | Description                                         |
-| ------ | --------------------------------------------------- |
-| `do:`  | iterates over each value and passes them to a block |
-| ``     |                                                     |
-
-TODO: Describe more of these methods.
 
 ### Collections
 
@@ -3537,7 +3547,7 @@ The following list depicts the partial class hierarchy for collections:
 - `Array2D` - a two-dimensional array
 - `SharedQueue`
 
-TODO: Add a section on each commonly used collection class.
+GRONK: Add a section on each commonly used collection class.
 
 `Collection` methods include:
 
