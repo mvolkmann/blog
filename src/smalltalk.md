@@ -3767,6 +3767,8 @@ For example, `(1 to: 5) asArray` returns `#(1 2 3 4 5)`.
 
 #### OrderedCollection
 
+GRONK: Continue review here.
+
 `OrderedCollection` instances are variable-length, ordered collections.
 
 To create an `OrderedCollection` from an array, send the `#newFrom:` message.
