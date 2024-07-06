@@ -679,6 +679,12 @@ This will open a System Browser focused on the class.
 
 To remove the last expression added in a Workspace, press cmd-z.
 
+To save all the code in a Workspace to a text file,
+click the blue circle in the upper-left and select "Save as...".
+A popup will prompt for a file name. Include the `.st` file extension.
+The file will be saved in the `Cuis-Smalltalk-Dev-UserFiles` directory
+which is a sibling to the `Cuis-Smalltalk-Dev` directory.
+
 If the code goes into an infinite loop, press cmd-period to break out of it.
 
 ### Transcript Windows
@@ -3654,8 +3660,6 @@ The following table describes some of the instance methods
 defined in the `SequenceableCollection` class
 that are not defined in the `Collection` superclass.
 
-GRONK
-
 | Method                    | Description                                                                                 |
 | ------------------------- | ------------------------------------------------------------------------------------------- |
 | `+=`                      | modifies receiver number elements by adding argument to each                                |
@@ -3685,6 +3689,8 @@ GRONK
 | `last:`                   | answers copy of last argument elements in receiver                                          |
 | ``                        |                                                                                             |
 | ``                        |                                                                                             |
+
+GRONK: Finish the table above.
 
 The following code demonstrates using the `do:displayingProgress:` method.
 
