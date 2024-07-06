@@ -682,8 +682,13 @@ To remove the last expression added in a Workspace, press cmd-z.
 To save all the code in a Workspace to a text file,
 click the blue circle in the upper-left and select "Save as...".
 A popup will prompt for a file name. Include the `.st` file extension.
-The file will be saved in the `Cuis-Smalltalk-Dev-UserFiles` directory
-which is a sibling to the `Cuis-Smalltalk-Dev` directory.
+The title bar will change from "Workspace"
+to the file path where the code was saved.
+It may be necessary to make the window wider to see all of the path.
+Once the contents have been saved, subsequent changes
+can be saved to the file by pressing cmd-s.
+A warning will be displayed if an attempt is made
+to close a Workspace with unsaved changes.
 
 If the code goes into an infinite loop, press cmd-period to break out of it.
 
