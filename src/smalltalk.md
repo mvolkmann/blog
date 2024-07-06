@@ -3302,91 +3302,130 @@ created by reading text from a stream.
 The following table describes some of the instance methods
 defined in the `CharacterSequence` class.
 
-| Method                   | Description                                                                                                                   |
-| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
-| `append:`                | answers new `CharacterSequence` containing argument characters appended to receiver characters; same as `,` in `String` class |
-| `asLowercase`            | answers copy that is all lowercase                                                                                            |
-| `asUppercase`            | answers copy that is all uppercase                                                                                            |
-| `at:`                    | answers `Character` at given index                                                                                            |
-| `at:put:`                | replaces `Character` at given index                                                                                           |
-| `byteSize`               | answers size in bytes                                                                                                         |
-| `capitalized`            | answers copy where first letter is changed to uppercase                                                                       |
-| `collect:`               | answers result of applying block argument to each character                                                                   |
-| `findString:startingAt:` | answers index where a substring begins                                                                                        |
-| `isEmpty`                | answers `Boolean` indicating if receiver size is zero                                                                         |
-| `isLiteral`              | always answers `true`                                                                                                         |
-| `size`                   | answers largest legal index                                                                                                   |
-| `substrings`             | answers `Array` of `String` objects created by splitting receiver on whitespace                                               |
-| `uncapitalized`          | answers copy where first letter is changed to lowercase                                                                       |
+| Method                                 | Description                                                                                                                   |
+| -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `append:`                              | answers new `CharacterSequence` containing argument characters appended to receiver characters; same as `,` in `String` class |
+| `asCamelCase`                          | answers copy created by camelCasing white-space separated words (first letter lower)                                          |
+| `asDate`                               | answers `Date` parsed from receiver                                                                                           |
+| `asLowercase`                          | answers copy that is all lowercase                                                                                            |
+| `asNumber`                             | answers number parsed from receiver                                                                                           |
+| `asPlural`                             | answers plural of an English word                                                                                             |
+| `asUnicodeString`                      | answers receiver converted to a `UnicodeString`                                                                               |
+| `asUppercase`                          | answers copy that is all uppercase                                                                                            |
+| `beginsWith:`                          | answers `Boolean` indicating if receiver begins with given substring                                                          |
+| `capitalized`                          | answers copy where first letter is changed to uppercase                                                                       |
+| `collect:`                             | answers result of applying block argument to each character                                                                   |
+| `endsWith:`                            | answers `Boolean` indicating if receiver ends with given substring                                                            |
+| `findString:`                          | answers index where argument substring begins                                                                                 |
+| `findString:startingAt:caseSensitive:` | answers index after `startingAt:` where a substring begins, optionally case sensitive                                         |
+| `findTokens:`                          | answers `Array` of instances created by splitting receiver on delimiters in argument                                          |
+| `format:`                              | answers instance created using interpolation                                                                                  |
+| `includesSubString:`                   | answers `Boolean` indicating if receiver contains substring                                                                   |
+| `includesSubstring:caseSensitive:`     | answers `Boolean` indicating if receiver contains substring                                                                   |
+| `indexOf:`                             | answers index of a character                                                                                                  |
+| `isEmpty`                              | answers `Boolean` indicating if receiver size is zero                                                                         |
+| `isLiteral`                            | always answers `true`                                                                                                         |
+| `join:`                                | answers instance formed by joining `Array` elements of any type with receiver delimiter                                       |
+| `match:`                               | answers `Boolean` indicating whether receiver matches a pattern                                                               |
+| `padded:to:width:`                     | answers copy formed by padding receiver on left or right with a given `Character`                                             |
+| `prefixAndSuffix:`                     | answers `Array` of instances formed by splitting receiver on last occurrence of a `Character`                                 |
+| `size`                                 | answers largest legal index                                                                                                   |
+| `squeezedTo:`                          | answers instance that optimizes readability of receiver in given number of characters                                         |
+| `subStrings:`                          | answers `Array` of instances formed by splitting receiver on delimiters                                                       |
+| `substrings`                           | answers `Array` of instances created by splitting receiver on whitespace                                                      |
+| `substringsSeparatedBy:`               | answers `Array` of instances formed by splitting receiver on a single delimiter `Character`                                   |
+| `truncateWithElipsisTo:`               | answers instance formed by truncating receiver to given length with elipsis in last 3 of length                               |
+| `uncapitalized`                        | answers copy where first letter is changed to lowercase                                                                       |
+| `withBlanksCondensed`                  | answers instance created by removing leading and trailing spaces and replacing consecutive spaces with one                    |
+| `withBlanksTrimmed`                    | answers instance created by removing leading and trailing spaces                                                              |
+| `withoutEnclosing:`                    | answers instance created by removing first and last characters if they match a given `Character`                              |
+| `withoutLeadingBlanks`                 | answers instance created by removing leading blanks                                                                           |
+| `withoutPrefix`                        | answers instance created by removing given substring prefix                                                                   |
+| `withoutSuffix`                        | answers instance created by removing given substring suffix                                                                   |
+| `withoutTrailingBlanks`                | answers instance created by removing trailing blanks                                                                          |
 
 The following table describes some of the class methods
 defined in the `String` class.
 
-| Method                                  | Description                                                                    |
-| --------------------------------------- | ------------------------------------------------------------------------------ |
-| `compare:with:`                         | answer 1 if `compare:` is less than `with:`, 2 if equal, and 3 if greater than |
-| `compareIgnoringCase:with:`             | same as `compare:with:`, but case is ignored                                   |
-| `crString`                              | answers instance containing the carriage return character                      |
-| `crlfString`                            | answers instance containing the carriage return and line feed characters       |
-| `findString:in:startingAt:`             | answers index of `findString:` in `in:` starting at index `startingAt:`        |
-| `findStringIgnoringCase:in:startingAt:` | same as `findString:in:startingAt:`, but case is ignored                       |
-| `is:equalTo:`                           | answers `Boolean` indicating if `is:` is equal to `equalTo:`                   |
-| `isAscii:`                              | answers `Boolean` indicating if all the characters are ASCII                   |
-| `lfString`                              | answers instance containing only a line feed character                         |
-| `new:withAll:`                          | answers instance with length `new:` where all characters are `withAll:`        |
-| `newLineString`                         | answers instance containing only a newline character                           |
-| `percentEscapingNonAscii`               | answers URL encoded instance where non-ASCII characters are percent encoded    |
-| ``                                      |                                                                                |
-| ``                                      |                                                                                |
-| ``                                      |                                                                                |
-| ``                                      |                                                                                |
-| ``                                      |                                                                                |
+| Method                                  | Description                                                                                   |
+| --------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `compare:with:`                         | answer 1 if `compare:` is less than `with:`, 2 if equal, and 3 if greater than                |
+| `compareIgnoringCase:with:`             | same as `compare:with:`, but case is ignored                                                  |
+| `crString`                              | answers instance containing the carriage return character                                     |
+| `crlfString`                            | answers instance containing the carriage return and line feed characters                      |
+| `findString:in:startingAt:`             | answers index of `findString:` in `in:` starting at index `startingAt:`                       |
+| `findStringIgnoringCase:in:startingAt:` | same as `findString:in:startingAt:`, but case is ignored                                      |
+| `is:equalTo:`                           | answers `Boolean` indicating if `is:` is equal to `equalTo:`                                  |
+| `isAscii:`                              | answers `Boolean` indicating if all the characters are ASCII                                  |
+| `isEmpy:`                               | answers `Boolean` indicating if size is zero                                                  |
+| `lfString`                              | answers instance containing only a line feed character                                        |
+| `new:withAll:`                          | answers instance with length `new:` where all characters are `withAll:`                       |
+| `newLineString`                         | answers instance containing only a newline character                                          |
+| `percentEscapingNonAscii`               | answers URL encoded instance where non-ASCII characters are percent encoded                   |
+| `string:lineIndicesDo:`                 | evalautes block `lineIndicesDo:` for each substring of `string:` delimited by CR, LF, or CRLF |
+| `substringsIn:`                         | answers an `Array` of substrings delimited by whitespace characters                           |
+| `tab`                                   | answers instance containing the tab character                                                 |
 
-GRONK: Finish adding entries in table above.
+To get a substring of a `String`, use the `copyFrom:to:` method
+defined in `SequenceableCollection`. For example:
+
+```smalltalk
+'foobarbaz' copyFrom: 4 to: 6 "bar"
+```
+
+The following code demonstrates processing lines in a `String`:
+
+```smalltalk
+cr := String crString.
+s := 'foo', cr, 'bar', cr, 'baz'.
+"Alternate way to embed newline characters in a String"
+s := 'foo
+bar
+baz'.
+
+"Print each line."
+String string: s lineIndicesDo: [:start :end :endWith |
+    (s copyFrom: start to: end) print
+].
+"Alternate way to iterate over the lines in a String"
+s substrings do: [:sub | sub print].
+```
 
 The following table describes some of the instance methods
 defined in the `String` class
 that are not also defined in its superclass `CharacterSequence`.
 
-| Method                             | Description                                                                                                |
-| ---------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `,`                                | answers new string that results from appending argument                                                    |
-| `<`                                | answers `Boolean` value indicating if receiver is less than argument                                       |
-| `<=`                               | answers `Boolean` value indicating if receiver is less than or equal to argument                           |
-| `=`                                | answers `Boolean` value indicating if receiver is equal to argument                                        |
-| `>`                                | answers `Boolean` value indicating if receiver is greater than argument                                    |
-| `>=`                               | answers `Boolean` value indicating if receiver is greater than or equal to argument                        |
-| `asCamelCase`                      | answers string created by camelCasing white-space separated words (first letter lower)                     |
-| `asDate`                           | answers `Date` parsed from receiver `String`                                                               |
-| `asNumber`                         | answers number parsed from receiver `String`                                                               |
-| `asPlural`                         | answers plural `String` of an English word                                                                 |
-| `asUnicodeString`                  | answers receiver converted to a `UnicodeString`                                                            |
-| `beginsWith:`                      | answers `Boolean` indicating if receiver begins with given substring                                       |
-| `endsWith:`                        | answers `Boolean` indicating if receiver ends with given substring                                         |
-| `findTokens:`                      | answers `Array` of `Strings` created by splitting receiver on delimiters                                   |
-| `format:`                          | answers `String` created using interpolation                                                               |
-| `includesSubString:`               | answers `Boolean` indicating if receiver contains substring                                                |
-| `includesSubstring:caseSensitive:` | answers `Boolean` indicating if receiver contains substring                                                |
-| `indexOf:`                         | answers index of a character                                                                               |
-| `join:`                            | answers `String` formed by joining `Array` elements of any type with receiver delimiter                    |
-| `match:`                           | answers `Boolean` indicating whether receiver matches a pattern                                            |
-| `padded:to:width:`                 | answers `String` formed by padding receiver on left or right with a given `Character`                      |
-| `prefixAndSuffix:`                 | answers `Array` of `String` objects formed by splitting receiver on last occurrence of a `Character`       |
-| `squeezedTo:`                      | answers `String` that optimizes readability of receiver in given number of characters                      |
-| `subStrings:`                      | answers `Array` of `String` objects formed by splitting receiver on delimiters                             |
-| `substringsSeparatedBy:`           | answers `Array` of `String` objects formed by splitting receiver on a single delimiter `Character`         |
-| `truncateWithElipsisTo:`           | answers `String` formed by truncating receiver to given length with elipsis in last 3 of length            |
-| `withBlanksCondensed`              | answers `String` created by removing leading and trailing spaces and replacing consecutive spaces with one |
-| `withBlanksTrimmed`                | answers `String` created by removing leading and trailing spaces                                           |
-| `withoutEnclosing:`                | answers `String` created by removing first and last characters if they match a given `Character`           |
-| `withoutLeadingBlanks`             | answers `String` created by removing leading blanks                                                        |
-| `withoutPrefix`                    | answers `String` created by removing given substring prefix                                                |
-| `withoutSuffix`                    | answers `String` created by removing given substring suffix                                                |
-| `withoutTrailingBlanks`            | answers `String` created by removing trailing blanks                                                       |
+| Method                                  | Description                                                                                   |
+| --------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `,`                                     | answers new string that results from appending argument                                       |
+| `<`                                     | answers `Boolean` value indicating if receiver is less than argument                          |
+| `<=`                                    | answers `Boolean` value indicating if receiver is less than or equal to argument              |
+| `=`                                     | answers `Boolean` value indicating if receiver is equal to argument                           |
+| `>`                                     | answers `Boolean` value indicating if receiver is greater than argument                       |
+| `>=`                                    | answers `Boolean` value indicating if receiver is greater than or equal to argument           |
+| `at:`                                   | answers `Character` at given index                                                            |
+| `at:put:`                               | replaces `Character` at given index                                                           |
+| `byteSize`                              | answers size in bytes                                                                         |
+| `findString:startingAt:`                | answers index after `startingAt:` where a substring begins, case sensitive                    |
+| `findStringCaseInsenstive:startingAt::` | answers index after `startingAt:` where a substring begins, case insensitive                  |
+| `lineIndicesDo:`                        | evalautes block `lineIndicesDo:` for each substring of `string:` delimited by CR, LF, or CRLF |
+| `percentEscapeUrl`                      | answers URL encoded instance where non-ASCII characters are percent encoded                   |
+| `percentEscapeUrlField`                 | answers URL encoded instance where non-ASCII characters in fields are percent encoded         |
+| `size`                                  | answers largest index                                                                         |
+| `substrings`                            | answers `Array` of substrings delimited by whitespace characters                              |
+| `unescapePercents`                      | answers reverse of `percentEscapeUrl`                                                         |
+
+GRONK
+
+The following table describes some of the class methods
+defined in the `Symbol` class that are not also defined in superclasses.
+
+| Method | Description |
+| ------ | ----------- |
+| ``     |             |
 
 The following table describes some of the instance methods
-defined in the `Symbol` class
-that are not also defined in the `String` class.
+defined in the `Symbol` class that are not also defined in superclasses.
 
 | Method | Description |
 | ------ | ----------- |
