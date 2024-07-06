@@ -3642,6 +3642,10 @@ defined in the `Collection` class.
 | `sum`                 | answers sum of receiver number elements                                                                                                    |
 | `union:`              | answers `Set` instance that includes elements present in receiver or argument collection                                                   |
 
+Collections support binary messages that operate on all the elements
+and return a new array containing the results.
+For example, `#(1 2 3) * 2` returns `#(2 4 6)`.
+
 The `fold:` method uses the first element as the initial value
 and folds in the remaining elements.
 The `inject:into:` method takes an initial value
@@ -3653,6 +3657,8 @@ The following code demonstrates some of the methods described above:
 #('red' 'green' 'blue') asCommaStringAnd "gives 'red, green and blue'
 
 #(1 2 3) inject: 0 into: [:acc :n | acc + n] "gives 6""
+
+#(1 2 3 4) mean` "gives Fraction 5/2"
 ```
 
 I implemented the method `asOxfordCommaAnd` so
@@ -3713,8 +3719,6 @@ that are not defined in the `Collection` superclass.
 | `withIndexDo:`            | like `do:`, but passes element and index values to argument block                                                             |
 | `withNextDo:`             | evaluate argument block with each receiver element and the next element, using nil for next of last element                   |
 
-GRONK: Finish the table above.
-
 In `polynomialEval:`, the first element is the constant,
 the second is the `x` coefficient, the third is the `x^2` coefficient,
 and so on.
@@ -3735,14 +3739,7 @@ c do: [:n |
 
 #### ArrayedCollection
 
-The following table describes some of the instance methods
-defined in the `ArrayedCollection` class that are not defined in superclasses.
-
-| Method | Description |
-| ------ | ----------- |
-| ``     |             |
-| ``     |             |
-| ``     |             |
+There are no particularly interesting methods in this class.
 
 #### Array
 
@@ -3760,58 +3757,13 @@ The following table describes some of the instance methods
 defined in the `Array` class
 that are not defined in its superclasses.
 
-TODO: Finish added descriptions of these methods. Many are already in superclasses, so delete.
+| Method        | Description                                                                                                      |
+| ------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `evalStrings` | answers `Array` whose elements are the results of evaluating receiver `String` elements as Smalltalk expressions |
 
-| Method                  | Description                |
-| ----------------------- | -------------------------- |
-| `at:ifAbsent:`          |                            |
-| `collect:`              |                            |
-| `collect:thenSelect:`   |                            |
-| `do:`                   |                            |
-| `fillWith:`             |                            |
-| `findFirst:`            |                            |
-| `findFirst:startingAt:` |                            |
-| `findLast:`             |                            |
-| `first:`                |                            |
-| `first`                 |                            |
-| `firstAvailable:`       |                            |
-| `from:to:do`            |                            |
-| `head:`                 |                            |
-| `includes:`             |                            |
-| `indexOf:`              |                            |
-| `isEmpty`               |                            |
-| `keysAndValuesDo:`      |                            |
-| `last:`                 |                            |
-| `last`                  |                            |
-| `lastAvailable:`        |                            |
-| `lastIndexOf:`          |                            |
-| `polynomialEval:`       |                            |
-| `select:`               |                            |
-| `select:thenCollect:`   |                            |
-| `shuffled`              |                            |
-| `size`                  | returns number of elements |
-| `sort:`                 |                            |
-| `sort`                  |                            |
-| `sorted:`               |                            |
-| `tail:`                 |                            |
-
-Arrays support binary messages that operate on all the elements
-and return a new array containing the results.
-For example, `#(1 2 3) * 2` returns `#(2 4 6)`.
-
-To compute the average from an array of numbers, send it in the `#mean` message.
-For example, `#(1 2 3 4) mean` returns the `Fraction` `5/2`.
-
-To create an array of numbers from a range, send the `#asArray` message to a `Range`.
+To create an array of numbers from a range,
+send the `#asArray` message to a `Range`.
 For example, `(1 to: 5) asArray` returns `#(1 2 3 4 5)`.
-
-To iterate over the elements, send the `do:` message. For example:
-
-```smalltalk
-#('foo' 'bar' 'baz') do: [ :item | item print ]
-```
-
-TODO: Add more detail.
 
 #### OrderedCollection
 
