@@ -3549,31 +3549,56 @@ The following list depicts the partial class hierarchy for collections:
 
 GRONK: Add a section on each commonly used collection class.
 
-`Collection` methods include:
-
 The following table describes some of the class methods
 defined in the `Collection` class.
+These must be called on a concrete subclass, not on `Collection`.
 
-| Method | Description |
-| ------ | ----------- |
-| ``     |             |
-| ``     |             |
-| ``     |             |
+| Method                      | Description                                                         |
+| --------------------------- | ------------------------------------------------------------------- |
+| `with:`                     | answers an instance containing one value                            |
+| `with:with:`                | answers an instance containing two values                           |
+| `with:with:with:`           | answers an instance containing three values                         |
+| `with:with:with:with:`      | answers an instance containing four values                          |
+| `with:with:with:with:with:` | answers an instance containing five values                          |
+| `withAll:`                  | answers an instance containing all the values in another collection |
 
 The following table describes some of the instance methods
 defined in the `Collection` class.
 
-| Method         | Description                  |
-| -------------- | ---------------------------- |
-| `collect:`     | like `map` in JavaScript     |
-| `detect:`      | like `find` in JavaScript    |
-| `do:`          | like `forEach` in JavaScript |
-| `select:`      | like `filter` in JavaScript  |
-| `allSatisfy:`  | like `every` in JavaScript   |
-| `anySatisfy:`  | like `some` in JavaScript    |
-| `inject:into:` | like `reduce` in JavaScript  |
+| Method             | Description                                                                                       |
+| ------------------ | ------------------------------------------------------------------------------------------------- |
+| `*`                | answers instance whose elements are receiver elements times argument                              |
+| `+`                | answers instance whose elements are receiver elements plus argument                               |
+| `,`                | answers instance whose elements are the concatenation of receiver and argument collections        |
+| `-`                | answers instance whose elements are receiver elements minus argument                              |
+| `/`                | answers instance whose elements are receiver elements divided by argument                         |
+| `//`               | answers instance whose elements are receiver elements integer divided by argument                 |
+| `=`                | answers `Boolean` indicating if receiver and argument are equivalent                              |
+| `\\`               | answers instance whose elements are receiver elements modulo argument                             |
+| `abs`              | answers instance whose elements are absolute value of receiver elements                           |
+| `allSatisfy:`      | answers `Boolean` indicating if ALL elements satisfy a block; like `every` in JavaScript          |
+| `anySatisfy:`      | answers `Boolean` indicating if ANY elements satisfy a block; like `some` in JavaScript           |
+| `asArray`          | answers `Array` instance whose elements are all those in this collection                          |
+| `asBag`            | answers `Bag` instance whose elements are all those in this collection                            |
+| `asCommaStringAnd` | answers comma-separated `String` where last elements are separated by "and"                       |
+| `asIdentitySet`    | answers `IdentifySet` instance whose elements are all those in this collection with no duplicates |
+| `collect:`         | like `map` in JavaScript                                                                          |
+| `detect:`          | like `find` in JavaScript                                                                         |
+| `do:`              | like `forEach` in JavaScript                                                                      |
+| `inject:into:`     | like `reduce` in JavaScript                                                                       |
+| `select:`          | like `filter` in JavaScript                                                                       |
+| ``                 |                                                                                                   |
+| ``                 |                                                                                                   |
 
-For example, `#(1 2 3) inject: 0 into: [:acc :n | acc + n]` gives `6`.
+The following code demonstrates some of the methods described above:
+
+```smalltalk
+#('red' 'green' 'blue') asCommaStringAnd "gives 'red, green and blue'
+#(1 2 3) inject: 0 into: [:acc :n | acc + n] "gives 6""
+```
+
+I implemented the method `asOxfordCommaAnd` so
+the example above gives `'red, green, and blue;`.
 
 The following table describes some of the class methods
 defined in the `SequenceableCollection` class.
