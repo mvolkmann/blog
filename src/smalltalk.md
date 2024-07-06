@@ -685,10 +685,12 @@ A popup will prompt for a file name. Include the `.st` file extension.
 The title bar will change from "Workspace"
 to the file path where the code was saved.
 It may be necessary to make the window wider to see all of the path.
-Once the contents have been saved, subsequent changes
+Once the contents have been saved, subsequent changes in the Workspace
 can be saved to the file by pressing cmd-s.
 A warning will be displayed if an attempt is made
 to close a Workspace with unsaved changes.
+
+TODO: What is the easiest way to load code from a `.st` file into a Workspace?
 
 If the code goes into an infinite loop, press cmd-period to break out of it.
 
@@ -3665,37 +3667,57 @@ The following table describes some of the instance methods
 defined in the `SequenceableCollection` class
 that are not defined in the `Collection` superclass.
 
-| Method                    | Description                                                                                 |
-| ------------------------- | ------------------------------------------------------------------------------------------- |
-| `+=`                      | modifies receiver number elements by adding argument to each                                |
-| `-=`                      | modifies receiver number elements by subtracting argument from each                         |
-| `allButFirst`             | answers copy including all but first element                                                |
-| `allButFirst:`            | answers copy including all but first argument elements                                      |
-| `allButFirstDo:`          | evaluates block argument with all but first element                                         |
-| `allButLast`              | answers copy including all but last element                                                 |
-| `allButLast:`             | answers copy including all but last argument elements                                       |
-| `allButLastDo:`           | evaluates block argument with all but last element                                          |
-| `at:ifAbsent:`            | answers element at `at:` index or `ifAbsent:` if index out of bounds                        |
-| `atLast:`                 | answers element an index that is argument from end (1 for last)                             |
-| `atLast:ifAbsent:`        | like `atLast:` but specifies value to return if not enough elements                         |
-| `combinations:atATimeDo:` | evaluates `atATimeDo` once for every unique combination of `combinations:` elements         |
-| `copyFrom:to:`            | answers instance containing only receiver elements from index `copyFrom:` to index `to:`    |
-| `do:displayingProgress:`  | evaluates a block for each receiver element and displays a progress bar (see example below) |
-| `findFirst:`              | like `detect:`, but answers element index of value instead of element value                 |
-| `findFirst:startingAt`    | like `findFirst:`, but starts search at a given index                                       |
-| `findLast:`               | like `findFirst:`, but answers element index of last element that satisifies block argument |
-| `first`                   | answers first element in receiver                                                           |
-| `first:`                  | answers copy of first argument elements in receiver                                         |
-| `includes:`               | answers `Boolean` indicating if receiver contains argument value                            |
-| `indexOf:`                | answers index of argument value or 0                                                        |
-| `indexOf:startingAt:`     | answers index of argument value starting at a given index or 0                              |
-| `keysAndValuesDo:`        | evaluates block argument with all key/value pairs                                           |
-| `last`                    | answers last element in receiver                                                            |
-| `last:`                   | answers copy of last argument elements in receiver                                          |
-| ``                        |                                                                                             |
-| ``                        |                                                                                             |
+| Method                    | Description                                                                                                                   |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `+=`                      | modifies receiver number elements by adding argument to each                                                                  |
+| `-=`                      | modifies receiver number elements by subtracting argument from each                                                           |
+| `allButFirst`             | answers copy including all but first element                                                                                  |
+| `allButFirst:`            | answers copy including all but first argument elements                                                                        |
+| `allButFirstDo:`          | evaluates block argument with all but first element                                                                           |
+| `allButLast`              | answers copy including all but last element                                                                                   |
+| `allButLast:`             | answers copy including all but last argument elements                                                                         |
+| `allButLastDo:`           | evaluates block argument with all but last element                                                                            |
+| `at:ifAbsent:`            | answers element at `at:` index or `ifAbsent:` if index out of bounds                                                          |
+| `atLast:`                 | answers element an index that is argument from end (1 for last)                                                               |
+| `atLast:ifAbsent:`        | like `atLast:` but specifies value to return if not enough elements                                                           |
+| `combinations:atATimeDo:` | evaluates `atATimeDo` once for every unique combination of `combinations:` elements                                           |
+| `copyFrom:to:`            | answers instance containing only receiver elements from index `copyFrom:` to index `to:`                                      |
+| `do:displayingProgress:`  | evaluates a block for each receiver element and displays a progress bar (see example below)                                   |
+| `findFirst:`              | like `detect:`, but answers element index of value instead of element value                                                   |
+| `findFirst:startingAt`    | like `findFirst:`, but starts search at a given index                                                                         |
+| `findLast:`               | like `findFirst:`, but answers element index of last element that satisifies block argument                                   |
+| `first`                   | answers first element in receiver                                                                                             |
+| `first:`                  | answers copy of first argument elements in receiver                                                                           |
+| `head:`                   | same as `first:`                                                                                                              |
+| `includes:`               | answers `Boolean` indicating if receiver contains argument value                                                              |
+| `indexOf:`                | answers first index of argument value or 0                                                                                    |
+| `indexOf:startingAt:`     | answers index of argument value starting at a given index or 0                                                                |
+| `keysAndValuesDo:`        | evaluates block argument with all key/value pairs                                                                             |
+| `last`                    | answers last element in receiver                                                                                              |
+| `last:`                   | answers copy of last argument elements in receiver                                                                            |
+| `lastIndexOf:`            | answers last index of argument value or 0                                                                                     |
+| `middle`                  | answers the middle element in receiver                                                                                        |
+| `permutationsDo:`         | evaluates block argument with an `OrderedCollection` once for each permutation of all receiver elements                       |
+| `polynomialEval:`         | answers result of using receiver number elements as polynomial coefficients with argument for `x`                             |
+| `printStringWithNewline`  | answers `String` with newline between each element value                                                                      |
+| `replace:`                | replace each element in receiver with result of passing it to argument block                                                  |
+| `reverse`                 | same as `reversed`                                                                                                            |
+| `reversed`                | answers copy with elements in reverse order                                                                                   |
+| `shuffled`                | answers copy with elements in random order                                                                                    |
+| `tail:`                   | same as `last:`                                                                                                               |
+| `with:collect:`           | answers `Array` of results from evaluating `collect:` block with corresponding elements from receiver and `with:` collections |
+| `with:do:`                | evaluates `do:` block with corresponding elements from receiver and `with:` collections                                       |
+| `with:with:collect:`      | like `with:collect:`, but operates on three collections                                                                       |
+| `with:with:do:`           | like `with:do:`, but operates on three collections                                                                            |
+| `withIndexCollect:`       | like `collect:`, but passes element and index values to argument block                                                        |
+| `withIndexDo:`            | like `do:`, but passes element and index values to argument block                                                             |
+| `withNextDo:`             | evaluate argument block with each receiver element and the next element, using nil for next of last element                   |
 
 GRONK: Finish the table above.
+
+In `polynomialEval:`, the first element is the constant,
+the second is the `x` coefficient, the third is the `x^2` coefficient,
+and so on.
 
 The following code demonstrates using the `do:displayingProgress:` method.
 
