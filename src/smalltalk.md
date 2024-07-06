@@ -3222,82 +3222,175 @@ in the `Integer` class that are not defined in the `Number` class.
 | `lcm`          | answers least common multiple of receiver and argument                              |
 | `timesRepeat:` | evaluate argument block receiver times                                              |
 
-GRONK: Continue review here.
-
 ### Characters
 
 Characters are represented by the `Character` class.
 Printable literal characters are preceded by a dollar sign.
 For example, `$a`.
-Non-printable characters can be obtained from
-unary class methods in the `Character` class.
-For example, `Character space`, `Character tab`, and `Character cr`.
+Non-printable characters can be obtained from unary class methods
+in the `Character` class such as `cr`, `space`, and `tab`.
+
+The following table describes some of the class methods defined
+in the `Character` class.
+
+| Method             | Description                                                           |
+| ------------------ | --------------------------------------------------------------------- |
+| `codePoint:`       | answers `Character` instance that corresponds to argument code        |
+| `cr`               | answers carriage return instance                                      |
+| `digitValue:`      | answers `Character` instance that corresponds to argument digit (0-9) |
+| `escape`           | answers `Character` instance that corresponds to escape character     |
+| `lf`               | answers `Character` instance that corresponds to line feed character  |
+| `newLineCharacter` | answers same as `lf`                                                  |
+| `separators`       | answers array of whitespace characters                                |
+| `space`            | answers `Character` instance that corresponds to space character      |
+| `tab`              | answers `Character` instance that corresponds to tab character        |
+
+The following table describes some of the instance methods defined
+in the `Character` class.
+
+| Method                     | Description                                                                                                               |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `<`                        | answers `Boolean` value indicating if receiver is less than argument                                                      |
+| `<=`                       | answers `Boolean` value indicating if receiver is less than or equal to argument                                          |
+| `=`                        | answers `Boolean` value indicating if receiver is equal to argument                                                       |
+| `>`                        | answers `Boolean` value indicating if receiver is greater than argument                                                   |
+| `>=`                       | answers `Boolean` value indicating if receiver is greater than or equal to argument                                       |
+| `asLowercase`              | answers lowercase version of receiver                                                                                     |
+| `asString`                 | answers `String` or `UnicodeString` representation of receiver                                                            |
+| `asSymbol`                 | answers `Symbol` of receiver                                                                                              |
+| `asUppercase`              | answers uppercase version of receiver                                                                                     |
+| `asciiValue`               | answers decimal ASCII value of receiver                                                                                   |
+| `codePoint`                | answers decimal Unicode value of receiver                                                                                 |
+| `digitValue`               | answers `Integer` value of digit `Character`; opposite of class method `digitValue:`                                      |
+| `hex`                      | answers hexadecimal ASCII value of receiver                                                                               |
+| `isAlphaNumeric`           | answers `Boolean` value indicating if receiver is a letter or digit                                                       |
+| `isDigit`                  | answers `Boolean` value indicating if receiver is a digit                                                                 |
+| `isLetter`                 | answers `Boolean` value indicating if receiver is a letter                                                                |
+| `isLiteral`                | always answers `true`                                                                                                     |
+| `isLowercase`              | answers `Boolean` value indicating if receiver is lowercase                                                               |
+| `isSeparator`              | answers `Boolean` value indicating if receiver is whitespace                                                              |
+| `isUppercase`              | answers `Boolean` value indicating if receiver is uppercase                                                               |
+| `isValidInBinarySelectors` | answers `Boolean` value indicating if receiver can appear in a binary selector name                                       |
+| `isValidInFilenames`       | answers `Boolean` value indicating if receiver can appear in a file name                                                  |
+| `isValidInIdentifier`      | answers `Boolean` value indicating if receiver can appear in a variable name or unary/keyword selector                    |
+| `isValidStartOfIdentifier` | answers `Boolean` value indicating if receiver can appear as first character in a variable name or unary/keyword selector |
+| `isVowel`                  | answers `Boolean` value indicating if receiver is a vowel                                                                 |
+| `to:`                      | answers `Array` of `Character` instances from receiver to argument                                                        |
+| `tokenish`                 | answers `Boolean` value indicating if receiver can appear in a token (letter, digit, or colon)                            |
 
 ### Strings
 
-A `String` is a mutable collection of characters.
-
 The following list depicts the class hierarchy for character data:
 
-- `CharacterSequence`
-  - `String`
-    - `Symbol`
-  - `UnicodeString`
-    - `UnicodeSymbol`
+- `Collection`
+  - `SequenceableCollection`
+    - `CharacterSequence`
+      - `String`
+        - `Symbol`
+      - `UnicodeString`
+        - `UnicodeSymbol`
 
-Strings are represented by the `String` class.
+Instances of `String` and `UnicodeString` are mutable collections of characters.
+But instances of `CharacterSequence`, `Symbol`, and `UnicodeSymbol` are immutable.
 
-Literal strings are delimited by single quotes, not double quotes.
+Literal strings are delimited by single quotes,
+not double quotes which are used to delimit comments.
+
+The `CharacterSequence` class method `readFrom:` answers an instance
+created by reading text from a stream.
 
 The following table describes some of the instance methods
-defined in the `String` and `CharacterSequence` classes.
+defined in the `CharacterSequence` class.
+
+| Method                   | Description                                                                                                                   |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| `append:`                | answers new `CharacterSequence` containing argument characters appended to receiver characters; same as `,` in `String` class |
+| `asLowercase`            | answers copy that is all lowercase                                                                                            |
+| `asUppercase`            | answers copy that is all uppercase                                                                                            |
+| `at:`                    | answers `Character` at given index                                                                                            |
+| `at:put:`                | replaces `Character` at given index                                                                                           |
+| `byteSize`               | answers size in bytes                                                                                                         |
+| `capitalized`            | answers copy where first letter is changed to uppercase                                                                       |
+| `collect:`               | answers result of applying block argument to each character                                                                   |
+| `findString:startingAt:` | answers index where a substring begins                                                                                        |
+| `isEmpty`                | answers `Boolean` indicating if receiver size is zero                                                                         |
+| `isLiteral`              | always answers `true`                                                                                                         |
+| `size`                   | answers largest legal index                                                                                                   |
+| `substrings`             | answers `Array` of `String` objects created by splitting receiver on whitespace                                               |
+| `uncapitalized`          | answers copy where first letter is changed to lowercase                                                                       |
+
+The following table describes some of the class methods
+defined in the `String` class.
+
+| Method                                  | Description                                                                    |
+| --------------------------------------- | ------------------------------------------------------------------------------ |
+| `compare:with:`                         | answer 1 if `compare:` is less than `with:`, 2 if equal, and 3 if greater than |
+| `compareIgnoringCase:with:`             | same as `compare:with:`, but case is ignored                                   |
+| `crString`                              | answers instance containing the carriage return character                      |
+| `crlfString`                            | answers instance containing the carriage return and line feed characters       |
+| `findString:in:startingAt:`             | answers index of `findString:` in `in:` starting at index `startingAt:`        |
+| `findStringIgnoringCase:in:startingAt:` | same as `findString:in:startingAt:`, but case is ignored                       |
+| `is:equalTo:`                           | answers `Boolean` indicating if `is:` is equal to `equalTo:`                   |
+| `isAscii:`                              | answers `Boolean` indicating if all the characters are ASCII                   |
+| `lfString`                              | answers instance containing only a line feed character                         |
+| `new:withAll:`                          | answers instance with length `new:` where all characters are `withAll:`        |
+| `newLineString`                         | answers instance containing only a newline character                           |
+| `percentEscapingNonAscii`               | answers URL encoded instance where non-ASCII characters are percent encoded    |
+| ``                                      |                                                                                |
+| ``                                      |                                                                                |
+| ``                                      |                                                                                |
+| ``                                      |                                                                                |
+| ``                                      |                                                                                |
+
+GRONK: Finish adding entries in table above.
+
+The following table describes some of the instance methods
+defined in the `String` class
+that are not also defined in its superclass `CharacterSequence`.
 
 | Method                             | Description                                                                                                |
 | ---------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `,`                                | returns new string that results from appending argument                                                    |
-| `=`                                | compares receiver with argument                                                                            |
-| `<`                                | compares receiver with argument                                                                            |
-| `<=`                               | compares receiver with argument                                                                            |
-| `>`                                | compares receiver with argument                                                                            |
-| `>=`                               | compares receiver with argument                                                                            |
-| `asLowercase`                      | returns new string that is all lowercase                                                                   |
-| `asUppercase`                      | returns new string that is all uppercase                                                                   |
-| `at:`                              | gets character at given index                                                                              |
-| `at:put:`                          | replaces character at given index                                                                          |
-| `byteSize`                         | returns size in bytes                                                                                      |
-| `capitalized`                      | returns new string where first letter is changed to uppercase                                              |
-| `findString:startingAt:`           | returns index where a substring begins                                                                     |
-| `isEmpty`                          | returns `Boolean` indicating if receiver size is zero                                                      |
-| `size`                             | returns largest legal index                                                                                |
-| `substrings`                       | returns `Array` of `String` objects created by splitting receiver on whitespace                            |
-| `asCamelCase`                      | returns string created by camelCasing white-space separated words (first letter lower)                     |
-| `asDate`                           | returns `Date` parsed from receiver `String`                                                               |
-| `asNumber`                         | returns number parsed from receiver `String`                                                               |
-| `asPlural`                         | returns plural `String` of an English word                                                                 |
-| `asUnicodeString`                  | returns receiver converted to a `UnicodeString`                                                            |
-| `beginsWith:`                      | returns `Boolean` indicating if receiver begins with given substring                                       |
-| `endsWith:`                        | returns `Boolean` indicating if receiver ends with given substring                                         |
-| `findTokens:`                      | returns `Array` of `Strings` created by splitting receiver on delimiters                                   |
-| `format:`                          | returns `String` created using interpolation                                                               |
-| `includesSubString:`               | returns `Boolean` indicating if receiver contains substring                                                |
-| `includesSubstring:caseSensitive:` | returns `Boolean` indicating if receiver contains substring                                                |
-| `indexOf:`                         | returns index of a character                                                                               |
-| `join:`                            | returns `String` formed by joining `Array` elements of any type with receiver delimiter                    |
-| `match:`                           | returns `Boolean` indicating whether receiver matches a pattern                                            |
-| `padded:to:width:`                 | returns `String` formed by padding receiver on left or right with a given `Character`                      |
-| `prefixAndSuffix:`                 | returns `Array` of `String` objects formed by splitting receiver on last occurrence of a `Character`       |
-| `squeezedTo:`                      | returns `String` that optimizes readability of receiver in given number of characters                      |
-| `subStrings:`                      | returns `Array` of `String` objects formed by splitting receiver on delimiters                             |
-| `substringsSeparatedBy:`           | returns `Array` of `String` objects formed by splitting receiver on a single delimiter `Character`         |
-| `truncateWithElipsisTo:`           | returns `String` formed by truncating receiver to given length with elipsis in last 3 of length            |
-| `uncapitalized`                    | returns new string where first letter is changed to lowercase                                              |
-| `withBlanksCondensed`              | returns `String` created by removing leading and trailing spaces and replacing consecutive spaces with one |
-| `withBlanksTrimmed`                | returns `String` created by removing leading and trailing spaces                                           |
-| `withoutEnclosing:`                | returns `String` created by removing first and last characters if they match a given `Character`           |
-| `withoutLeadingBlanks`             | returns `String` created by removing leading blanks                                                        |
-| `withoutPrefix`                    | returns `String` created by removing given substring prefix                                                |
-| `withoutSuffix`                    | returns `String` created by removing given substring suffix                                                |
-| `withoutTrailingBlanks`            | returns `String` created by removing trailing blanks                                                       |
+| `,`                                | answers new string that results from appending argument                                                    |
+| `<`                                | answers `Boolean` value indicating if receiver is less than argument                                       |
+| `<=`                               | answers `Boolean` value indicating if receiver is less than or equal to argument                           |
+| `=`                                | answers `Boolean` value indicating if receiver is equal to argument                                        |
+| `>`                                | answers `Boolean` value indicating if receiver is greater than argument                                    |
+| `>=`                               | answers `Boolean` value indicating if receiver is greater than or equal to argument                        |
+| `asCamelCase`                      | answers string created by camelCasing white-space separated words (first letter lower)                     |
+| `asDate`                           | answers `Date` parsed from receiver `String`                                                               |
+| `asNumber`                         | answers number parsed from receiver `String`                                                               |
+| `asPlural`                         | answers plural `String` of an English word                                                                 |
+| `asUnicodeString`                  | answers receiver converted to a `UnicodeString`                                                            |
+| `beginsWith:`                      | answers `Boolean` indicating if receiver begins with given substring                                       |
+| `endsWith:`                        | answers `Boolean` indicating if receiver ends with given substring                                         |
+| `findTokens:`                      | answers `Array` of `Strings` created by splitting receiver on delimiters                                   |
+| `format:`                          | answers `String` created using interpolation                                                               |
+| `includesSubString:`               | answers `Boolean` indicating if receiver contains substring                                                |
+| `includesSubstring:caseSensitive:` | answers `Boolean` indicating if receiver contains substring                                                |
+| `indexOf:`                         | answers index of a character                                                                               |
+| `join:`                            | answers `String` formed by joining `Array` elements of any type with receiver delimiter                    |
+| `match:`                           | answers `Boolean` indicating whether receiver matches a pattern                                            |
+| `padded:to:width:`                 | answers `String` formed by padding receiver on left or right with a given `Character`                      |
+| `prefixAndSuffix:`                 | answers `Array` of `String` objects formed by splitting receiver on last occurrence of a `Character`       |
+| `squeezedTo:`                      | answers `String` that optimizes readability of receiver in given number of characters                      |
+| `subStrings:`                      | answers `Array` of `String` objects formed by splitting receiver on delimiters                             |
+| `substringsSeparatedBy:`           | answers `Array` of `String` objects formed by splitting receiver on a single delimiter `Character`         |
+| `truncateWithElipsisTo:`           | answers `String` formed by truncating receiver to given length with elipsis in last 3 of length            |
+| `withBlanksCondensed`              | answers `String` created by removing leading and trailing spaces and replacing consecutive spaces with one |
+| `withBlanksTrimmed`                | answers `String` created by removing leading and trailing spaces                                           |
+| `withoutEnclosing:`                | answers `String` created by removing first and last characters if they match a given `Character`           |
+| `withoutLeadingBlanks`             | answers `String` created by removing leading blanks                                                        |
+| `withoutPrefix`                    | answers `String` created by removing given substring prefix                                                |
+| `withoutSuffix`                    | answers `String` created by removing given substring suffix                                                |
+| `withoutTrailingBlanks`            | answers `String` created by removing trailing blanks                                                       |
+
+The following table describes some of the instance methods
+defined in the `Symbol` class
+that are not also defined in the `String` class.
+
+| Method | Description |
+| ------ | ----------- |
+| ``     |             |
 
 #### format:
 
@@ -3409,6 +3502,18 @@ TODO: Add a section on each commonly used collection class.
 
 `Collection` methods include:
 
+The following table describes some of the class methods
+defined in the `Collection` class.
+
+| Method | Description |
+| ------ | ----------- |
+| ``     |             |
+| ``     |             |
+| ``     |             |
+
+The following table describes some of the instance methods
+defined in the `Collection` class.
+
 | Method         | Description                  |
 | -------------- | ---------------------------- |
 | `collect:`     | like `map` in JavaScript     |
@@ -3421,11 +3526,33 @@ TODO: Add a section on each commonly used collection class.
 
 For example, `#(1 2 3) inject: 0 into: [:acc :n | acc + n]` gives `6`.
 
+The following table describes some of the class methods
+defined in the `SequenceableCollection` class.
+
+| Method | Description |
+| ------ | ----------- |
+| ``     |             |
+| ``     |             |
+| ``     |             |
+
+The following table describes some of the instance methods
+defined in the `SequenceableCollection` class.
+
+| Method | Description |
+| ------ | ----------- |
+| ``     |             |
+| ``     |             |
+| ``     |             |
+
 #### Array
 
-Literal arrays between with `#(`, end with `)`,
+Compile-time literal arrays begin with `#(`, end with `)`,
 and contain space-separated values.
 For example, `#(true 7 'Tami' (Color red))`.
+
+Run-time literal arrays begin with `{`, end with `}`,
+and contain dot-separated values.
+For example, `{name. breed}`.
 
 `Array` instances are fixed-length, ordered collections.
 
