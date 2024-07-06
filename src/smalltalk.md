@@ -3549,6 +3549,8 @@ The following list depicts the partial class hierarchy for collections:
 
 GRONK: Add a section on each commonly used collection class.
 
+#### Collection
+
 The following table describes some of the class methods
 defined in the `Collection` class.
 These must be called on a concrete subclass, not on `Collection`.
@@ -3643,17 +3645,65 @@ The following code demonstrates some of the methods described above:
 I implemented the method `asOxfordCommaAnd` so
 the example above gives `'red, green, and blue;`.
 
-The following table describes some of the class methods
-defined in the `SequenceableCollection` class.
+#### SequenceableCollection
 
-| Method | Description |
-| ------ | ----------- |
-| ``     |             |
-| ``     |             |
-| ``     |             |
+There are no particularly interesting class methods
+in the `SequenceableCollection` class.
 
 The following table describes some of the instance methods
-defined in the `SequenceableCollection` class.
+defined in the `SequenceableCollection` class
+that are not defined in the `Collection` superclass.
+
+GRONK
+
+| Method                    | Description                                                                                 |
+| ------------------------- | ------------------------------------------------------------------------------------------- |
+| `+=`                      | modifies receiver number elements by adding argument to each                                |
+| `-=`                      | modifies receiver number elements by subtracting argument from each                         |
+| `allButFirst`             | answers copy including all but first element                                                |
+| `allButFirst:`            | answers copy including all but first argument elements                                      |
+| `allButFirstDo:`          | evaluates block argument with all but first element                                         |
+| `allButLast`              | answers copy including all but last element                                                 |
+| `allButLast:`             | answers copy including all but last argument elements                                       |
+| `allButLastDo:`           | evaluates block argument with all but last element                                          |
+| `at:ifAbsent:`            | answers element at `at:` index or `ifAbsent:` if index out of bounds                        |
+| `atLast:`                 | answers element an index that is argument from end (1 for last)                             |
+| `atLast:ifAbsent:`        | like `atLast:` but specifies value to return if not enough elements                         |
+| `combinations:atATimeDo:` | evaluates `atATimeDo` once for every unique combination of `combinations:` elements         |
+| `copyFrom:to:`            | answers instance containing only receiver elements from index `copyFrom:` to index `to:`    |
+| `do:displayingProgress:`  | evaluates a block for each receiver element and displays a progress bar (see example below) |
+| `findFirst:`              | like `detect:`, but answers element index of value instead of element value                 |
+| `findFirst:startingAt`    | like `findFirst:`, but starts search at a given index                                       |
+| `findLast:`               | like `findFirst:`, but answers element index of last element that satisifies block argument |
+| `first`                   | answers first element in receiver                                                           |
+| `first:`                  | answers copy of first argument elements in receiver                                         |
+| `includes:`               | answers `Boolean` indicating if receiver contains argument value                            |
+| `indexOf:`                | answers index of argument value or 0                                                        |
+| `indexOf:startingAt:`     | answers index of argument value starting at a given index or 0                              |
+| `keysAndValuesDo:`        | evaluates block argument with all key/value pairs                                           |
+| `last`                    | answers last element in receiver                                                            |
+| `last:`                   | answers copy of last argument elements in receiver                                          |
+| ``                        |                                                                                             |
+| ``                        |                                                                                             |
+
+The following code demonstrates using the `do:displayingProgress:` method.
+
+<img alt="Cuis SequenceableCollection do:displayingProgress:" style="width: 20%"
+  src="/blog/assets/cuis-SequenceableCollection-do-displayingProgress.png?v={{pkg.version}}">
+
+```smalltalk
+c := #(10 20 30 40 50).
+delay := Delay forSeconds: 1.
+c do: [:n |
+    ('processing {1}' format: {n}) print.
+    delay wait.
+] displayingProgress: 'doing stuff'
+```
+
+#### ArrayedCollection
+
+The following table describes some of the instance methods
+defined in the `ArrayedCollection` class that are not defined in superclasses.
 
 | Method | Description |
 | ------ | ----------- |
@@ -3663,6 +3713,8 @@ defined in the `SequenceableCollection` class.
 
 #### Array
 
+`Array` instances are fixed-length, ordered collections.
+
 Compile-time literal arrays begin with `#(`, end with `)`,
 and contain space-separated values.
 For example, `#(true 7 'Tami' (Color red))`.
@@ -3671,52 +3723,44 @@ Run-time literal arrays begin with `{`, end with `}`,
 and contain dot-separated values.
 For example, `{name. breed}`.
 
-`Array` instances are fixed-length, ordered collections.
+The following table describes some of the instance methods
+defined in the `Array` class
+that are not defined in its superclasses.
 
-The following table describes some of the instance methods defined in the
-`Array`, `ArrayedCollection`, `SequenceableCollection`, and `Collection` classes.
+TODO: Finish added descriptions of these methods. Many are already in superclasses, so delete.
 
-TODO: Finish added descriptions of these methods.
-
-| Method                  | Description                                                           |
-| ----------------------- | --------------------------------------------------------------------- |
-| `allButFirst:`          |                                                                       |
-| `allButFirst`           |                                                                       |
-| `allButFirstDo:`        |                                                                       |
-| `allButLast:`           |                                                                       |
-| `allButLast`            |                                                                       |
-| `allButLastDo:`         |                                                                       |
-| `allSatisfy:`           | returns `Boolean` indicating whether all elements satisfy a condition |
-| `at:ifAbsent:`          |                                                                       |
-| `collect:`              |                                                                       |
-| `collect:thenSelect:`   |                                                                       |
-| `do:`                   |                                                                       |
-| `fillWith:`             |                                                                       |
-| `findFirst:`            |                                                                       |
-| `findFirst:startingAt:` |                                                                       |
-| `findLast:`             |                                                                       |
-| `first:`                |                                                                       |
-| `first`                 |                                                                       |
-| `firstAvailable:`       |                                                                       |
-| `from:to:do`            |                                                                       |
-| `head:`                 |                                                                       |
-| `includes:`             |                                                                       |
-| `indexOf:`              |                                                                       |
-| `isEmpty`               |                                                                       |
-| `keysAndValuesDo:`      |                                                                       |
-| `last:`                 |                                                                       |
-| `last`                  |                                                                       |
-| `lastAvailable:`        |                                                                       |
-| `lastIndexOf:`          |                                                                       |
-| `polynomialEval:`       |                                                                       |
-| `select:`               |                                                                       |
-| `select:thenCollect:`   |                                                                       |
-| `shuffled`              |                                                                       |
-| `size`                  | returns number of elements                                            |
-| `sort:`                 |                                                                       |
-| `sort`                  |                                                                       |
-| `sorted:`               |                                                                       |
-| `tail:`                 |                                                                       |
+| Method                  | Description                |
+| ----------------------- | -------------------------- |
+| `at:ifAbsent:`          |                            |
+| `collect:`              |                            |
+| `collect:thenSelect:`   |                            |
+| `do:`                   |                            |
+| `fillWith:`             |                            |
+| `findFirst:`            |                            |
+| `findFirst:startingAt:` |                            |
+| `findLast:`             |                            |
+| `first:`                |                            |
+| `first`                 |                            |
+| `firstAvailable:`       |                            |
+| `from:to:do`            |                            |
+| `head:`                 |                            |
+| `includes:`             |                            |
+| `indexOf:`              |                            |
+| `isEmpty`               |                            |
+| `keysAndValuesDo:`      |                            |
+| `last:`                 |                            |
+| `last`                  |                            |
+| `lastAvailable:`        |                            |
+| `lastIndexOf:`          |                            |
+| `polynomialEval:`       |                            |
+| `select:`               |                            |
+| `select:thenCollect:`   |                            |
+| `shuffled`              |                            |
+| `size`                  | returns number of elements |
+| `sort:`                 |                            |
+| `sort`                  |                            |
+| `sorted:`               |                            |
+| `tail:`                 |                            |
 
 Arrays support binary messages that operate on all the elements
 and return a new array containing the results.
