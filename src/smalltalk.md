@@ -3591,8 +3591,8 @@ defined in the `Collection` class.
 | `ceiling`             | answers instances whose elements are the ceiling of receiver elements                                                                      |
 | `collect:`            | answers instance whose elements are results of passing receiver elements to a block; like `map` in JavaScript                              |
 | `collect:andFold`     | answers instance whose elements are results of passing receiver elements to a block; like `map` in JavaScript                              |
-| `detect:`             | like `find` in JavaScript                                                                                                                  |
-| `do:`                 | like `forEach` in JavaScript                                                                                                               |
+| `detect:`             | answers first element in receiver that satisfies block argument; like `find` in JavaScript                                                 |
+| `do:`                 | evaluates block argument for each element; like `forEach` in JavaScript                                                                    |
 | `floor`               | answers instances whose elements are the floor of receiver elements                                                                        |
 | `fold:`               | answers value that results from folding receiver elements with a block; like `reduce` in JavaScript                                        |
 | `fold:ifEmpty:`       | like `fold:`, but specifies value to use if collection is empty                                                                            |
@@ -3617,9 +3617,15 @@ defined in the `Collection` class.
 | `range`               | answers difference between max and min values                                                                                              |
 | `reduce:`             | same as fold:                                                                                                                              |
 | `reject:`             | answers instance containing receiver elements that do not satisfy a block                                                                  |
-
-| `select:` | like `filter` in JavaScript |
-| ` | | |` | |
+| `select:`             | answers instance containing receiver elements that satisfy a block; like `filter` in JavaScript                                            |
+| `select:thenCollect`  | combines `select:` and `collect:`                                                                                                          |
+| `select:thenDo:`      | combines `select:` and `do:`                                                                                                               |
+| `sizes`               | answers number of elements in receiver                                                                                                     |
+| `sorted`              | answers instance containing all receiver elements in sorted order                                                                          |
+| `sqrt`                | answers instance whose elements are square root of receiver elements                                                                       |
+| `squared`             | answers instance whose elements are squared values of receiver elements                                                                    |
+| `sum`                 | answers sum of receiver number elements                                                                                                    |
+| `union:`              | answers `Set` instance that includes elements present in receiver or argument collection                                                   |
 
 The `fold:` method uses the first element as the initial value
 and folds in the remaining elements.
@@ -3630,6 +3636,7 @@ The following code demonstrates some of the methods described above:
 
 ```smalltalk
 #('red' 'green' 'blue') asCommaStringAnd "gives 'red, green and blue'
+
 #(1 2 3) inject: 0 into: [:acc :n | acc + n] "gives 6""
 ```
 
