@@ -690,9 +690,11 @@ can be saved to the file by pressing cmd-s.
 A warning will be displayed if an attempt is made
 to close a Workspace with unsaved changes.
 
-TODO: What is the easiest way to load code from a `.st` file into a Workspace?
+To open a new Workspace that contains the contents of a `.st` file,
+open a File List, select the file, right-click it,
+and select "workspace with contents".
 
-If the code goes into an infinite loop, press cmd-period to break out of it.
+If running code goes into an infinite loop, press cmd-period to break out of it.
 
 ### Transcript Windows
 
@@ -1861,6 +1863,13 @@ There are three ways to discover the file path of the current image:
    This outputs the directory path of the current image without its file name.
 
 ## Help
+
+To get basic help on a token or an expression in any window,
+select it, right-click, and select explain.
+This displays a popup containing help text.
+If the selection is a literal value, its type is displayed.
+If the selection is a class name, its category is displayed.
+If the select is a message, a list of classes that implement it are displayed.
 
 The World menu contains a Help submenu which contains the following:
 
