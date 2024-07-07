@@ -3856,7 +3856,6 @@ The following table describes some of the instance methods defined in the
 | `removeFirst:`        | removes first argument elements and answers `Array` of them                       |
 | `removeLast`          | removes first element and answers it                                              |
 | `removeLast:`         | removes last argument elements and answers `Array` of them                        |
-| `setContents:`        | replaces current elements with those in argument `Array`                          |
 | `sort`                | sorts the elements in place                                                       |
 | `sort:`               | sorts the elements in place using argument block to compare them                  |
 
