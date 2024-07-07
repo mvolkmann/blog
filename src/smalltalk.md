@@ -3908,14 +3908,39 @@ apple occurs 3 times.
 banana occurs 1 times.
 ```
 
-# GRONK
+#### Set
+
+`Set` instances are unordered collections of unique values.
+The elements must supports the `=` and `hash` messages and cannot be `nil`.
+
+To create an empty `Set`:
+
+```smalltalk
+set := Set new
+```
+
+To create a `Set` that is populated from an `Array`:
+
+```smalltalk
+set := Set newFrom: #('apple' 'banana' 'cherry' 'apple')
+```
+
+The following code demonstrates adding an element, removing an element,
+and testing for the existence of an element:
+
+```smalltalk
+set add: `orange`.
+set remove: 'banana'.
+set includes 'apple`. "true"
+set includes 'banana`. "false"
+```
 
 #### Dictionary
 
-This is a subclass of the `Set` class.
-
-The keys in a `Dictionary` are often symbols,
-but they can be any kind of object that supports the `=` and `hash` messages.
+`Dictionary` instances are collections of key/value pairs.
+The keys are often symbols, but they can be
+any kind of object that supports the `=` and `hash` messages.
+The values can be any kind of object.
 
 To create a `Dictionary`:
 
@@ -3969,15 +3994,17 @@ dict associationsDo: [ :assoc |
 ].
 ```
 
-TODO: Add more detail?
+The following table describes some of the instance methods
+defined in the `Set` class that are
+not also defined in the superclass `Collection`.
+
+| Method | Description |
+| ------ | ----------- |
+| ``     |             |
 
 #### LinkedList
 
-TODO: Add detail.
-
-#### Set
-
-TODO: Add detail.
+GRONK: Add detail.
 
 ## Exception Handling
 
