@@ -3535,6 +3535,32 @@ The following list depicts the partial class hierarchy for collections:
 
 GRONK: Add a section on each commonly used collection class.
 
+#### Association
+
+An `Association` represents a key/value pair.
+These are used by several other classes including `Dictionary` and `Bag`.
+
+An `Association` instance can be created in the following ways:
+
+```smalltalk
+a := Association key: someKey value: someValue.
+a := someKey -> someValue.
+```
+
+The message `->` is defined in the `Object` class
+which make it easy to create an `Association` with any object as the key.
+
+The following table describes some of the instance methods
+defined in the `Association` class and its superclass `LookupKey`.
+
+| Method       | Description                         |
+| ------------ | ----------------------------------- |
+| `key`        | answers the receiver key            |
+| `key:`       | modifies the receiver key           |
+| `key:value:` | modifies the receiver key and value |
+| `value`      | answers the receiver value          |
+| `value:`     | modifies the receiver alue          |
+
 #### Collection
 
 The following table describes some of the class methods
@@ -3579,6 +3605,7 @@ defined in the `Collection` class.
 | `ceiling`             | answers instances whose elements are the ceiling of receiver elements                                                                      |
 | `collect:`            | answers instance whose elements are results of passing receiver elements to a block; like `map` in JavaScript                              |
 | `collect:andFold`     | answers instance whose elements are results of passing receiver elements to a block; like `map` in JavaScript                              |
+| `count:`              | answers number of receiver elements that satisfy argument block                                                                            |
 | `detect:`             | answers first element in receiver that satisfies block argument; like `find` in JavaScript                                                 |
 | `do:`                 | evaluates block argument for each element; like `forEach` in JavaScript                                                                    |
 | `floor`               | answers instances whose elements are the floor of receiver elements                                                                        |
@@ -3776,7 +3803,8 @@ defined in the `Interval` class that are not also defined in superclasses.
 
 #### OrderedCollection
 
-`OrderedCollection` instances are variable-length, ordered collections.
+`OrderedCollection` instances are variable-length, ordered collections
+that can contain duplicates.
 
 To create an `OrderedCollection` from an array, send the `#newFrom:` message.
 For example, `fruits := OrderedCollection newFrom: #('apple' 'banana' 'cherry')`
@@ -3843,20 +3871,44 @@ oc sort: [:a :b | a size < b size].
 
 #### Bag
 
-TODO: Add detail.
+`Bag` instances are variable-length, unordered collections
+that can contain duplicates.
+Elements are stored in a dictionary where the keys are the objects
+and the values are their number of occurrences.
 
-#### Association
+The following table describes some of the instance methods
+defined in the `OrderedCollection` class that are
+not also defined in the superclass `Collection`.
 
-An `Association` represents a key/value pair.
-An instance can be created in the following ways:
+| Method               | Description                                                                                         |
+| -------------------- | --------------------------------------------------------------------------------------------------- |
+| `sortedCounts`       | answers a `SortedCollection` of `Association` objects where keys are counts and values are elements |
+| `sortedElements`     | answers a `SortedCollection` of `Association` objects where keys are elements and values are counts |
+| `withOccurrencesDo:` | evaluates argument block for each unique element, passing it an element and its count               |
+
+The following code creates a `Bag` instance containing `String` fruit names,
+including many duplicates. It then sends several messages to the `Bag`.
 
 ```smalltalk
-a := Association key: someKey value: someValue.
-a := someKey -> someValue.
+b := Bag newFrom: #('apple' 'banana' 'cherry' 'apple' 'cherry' 'apple').
+b sortedCounts print.
+b sortedElements print.
+b withOccurrencesDo: [:obj :count |
+   ('{1} occurs {2} times.' format: {obj. count}) print
+].
 ```
 
-The message `->` is defined in the `Object` class
-which make it easy to create an `Association` with any object as the key.
+The code above produces the following output in the Transcript:
+
+```text
+a SortedCollection(3 -> 'apple' 2 -> 'cherry' 1 -> 'banana')
+a SortedCollection('apple' -> 3 'banana' -> 1 'cherry' -> 2)
+cherry occurs 2 times.
+apple occurs 3 times.
+banana occurs 1 times.
+```
+
+# GRONK
 
 #### Dictionary
 
