@@ -3801,6 +3801,10 @@ defined in the `Interval` class that are not also defined in superclasses.
 | `size`       | answers the number of values                                  |
 | `reverseDo:` | evaluates a block for each value from last to first           |
 
+#### LinkedList
+
+GRONK: Add detail.
+
 #### OrderedCollection
 
 `OrderedCollection` instances are variable-length, ordered collections
@@ -4026,11 +4030,11 @@ not also defined in the superclasses `Set` or `Collection`.
 | `values`                    | answers `Array` of all values                                                                                      |
 | `valuesDo:`                 | evaluates argument block for each value                                                                            |
 
-#### LinkedList
-
-GRONK: Add detail.
+GRONK: Describe more collection types?
 
 ## Exception Handling
+
+GRONK: Continue review here.
 
 Smalltalk methods can throw exceptions.
 Exceptions that are thrown by code in a block can be caught and handled.
