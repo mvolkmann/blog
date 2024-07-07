@@ -4002,6 +4002,8 @@ not also defined in the superclass `Collection`.
 | ------ | ----------- |
 | ``     |             |
 
+GRONK: Complete the table above.
+
 #### LinkedList
 
 GRONK: Add detail.
