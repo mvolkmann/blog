@@ -3945,6 +3945,7 @@ To create a `Dictionary`:
 
 ```smalltalk
 dict := Dictionary new.
+"Can populate from an Array of Association objects."
 dict := Dictionary newFrom: { k1 -> v1. k2 -> v2. ... }.
 dict := { k1 -> v1. k2 -> v2. ... } asDictionary.
 ```
@@ -3994,12 +3995,35 @@ dict associationsDo: [ :assoc |
 ```
 
 The following table describes some of the instance methods
-defined in the `Set` class that are
-not also defined in the superclass `Collection`.
+defined in the `Dictionary` class that are
+not also defined in the superclasses `Set` or `Collection`.
 
-| Method | Description |
-| ------ | ----------- |
-| ``     |             |
+| Method                      | Description                                                               |
+| --------------------------- | ------------------------------------------------------------------------- |
+| `addAll:`                   | adds key/value pairs described by a `Collection` of `Association` objects |
+| `associationAt:`            |                                                                           |
+| `associationAt:ifAbsent:`   |                                                                           |
+| `associations`              |                                                                           |
+| `associationsDo::`          |                                                                           |
+| `at:`                       |                                                                           |
+| `at:ifAbsent:`              |                                                                           |
+| `at:ifAbsentPut:`           |                                                                           |
+| `at:ifPresent:`             |                                                                           |
+| `at:ifPresent:ifAbsent:`    |                                                                           |
+| `at:put:`                   |                                                                           |
+| `bindingOf:`                |                                                                           |
+| `bindingsDo:`               |                                                                           |
+| `hasBindingThatBeginsWith:` |                                                                           |
+| `includesKey:`              |                                                                           |
+| `keys`                      | answers `Array` of all keys                                               |
+| `keysAndValuesDo:`          |                                                                           |
+| `keysAndValuesRemove:`      |                                                                           |
+| `keysDo:`                   |                                                                           |
+| `removeKey:`                |                                                                           |
+| `removeKey:ifAbsent:`       |                                                                           |
+| `select:`                   |                                                                           |
+| `values`                    |                                                                           |
+| `valuesDo:`                 |                                                                           |
 
 GRONK: Complete the table above.
 
