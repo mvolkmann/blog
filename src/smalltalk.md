@@ -3945,7 +3945,8 @@ To create a `Dictionary`:
 
 ```smalltalk
 dict := Dictionary new.
-"Can populate from an Array of Association objects."
+"Can populate from a run-time Array of Association objects."
+"TODO: Why doesn't it work with a compile-time Array?"
 dict := Dictionary newFrom: { k1 -> v1. k2 -> v2. ... }.
 dict := { k1 -> v1. k2 -> v2. ... } asDictionary.
 ```
@@ -3998,34 +3999,32 @@ The following table describes some of the instance methods
 defined in the `Dictionary` class that are
 not also defined in the superclasses `Set` or `Collection`.
 
-| Method                      | Description                                                               |
-| --------------------------- | ------------------------------------------------------------------------- |
-| `addAll:`                   | adds key/value pairs described by a `Collection` of `Association` objects |
-| `associationAt:`            |                                                                           |
-| `associationAt:ifAbsent:`   |                                                                           |
-| `associations`              |                                                                           |
-| `associationsDo::`          |                                                                           |
-| `at:`                       |                                                                           |
-| `at:ifAbsent:`              |                                                                           |
-| `at:ifAbsentPut:`           |                                                                           |
-| `at:ifPresent:`             |                                                                           |
-| `at:ifPresent:ifAbsent:`    |                                                                           |
-| `at:put:`                   |                                                                           |
-| `bindingOf:`                |                                                                           |
-| `bindingsDo:`               |                                                                           |
-| `hasBindingThatBeginsWith:` |                                                                           |
-| `includesKey:`              |                                                                           |
-| `keys`                      | answers `Array` of all keys                                               |
-| `keysAndValuesDo:`          |                                                                           |
-| `keysAndValuesRemove:`      |                                                                           |
-| `keysDo:`                   |                                                                           |
-| `removeKey:`                |                                                                           |
-| `removeKey:ifAbsent:`       |                                                                           |
-| `select:`                   |                                                                           |
-| `values`                    |                                                                           |
-| `valuesDo:`                 |                                                                           |
-
-GRONK: Complete the table above.
+| Method                      | Description                                                                                                        |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `addAll:`                   | adds key/value pairs described by a `Collection` of `Association` objects                                          |
+| `associationAt:`            | answers `Association` for argument key; error if not found                                                         |
+| `associationAt:ifAbsent:`   | answers `Association` for `associationAt:` key or `ifAbsent:` value if not found                                   |
+| `associations`              | answers `Array` of `Association` objects for all key/value pairs                                                   |
+| `associationsDo:`           | evaluates argument block for each `Association`                                                                    |
+| `at:`                       | answers value for argument key; error if not found                                                                 |
+| `at:ifAbsent:`              | answers value for `at:` key or `ifAbsent:` value if not found                                                      |
+| `at:ifAbsentPut:`           | answers value for `at:` key; if not found, adds and answers `ifAbsentPut:` value                                   |
+| `at:ifPresent:`             | if `at:` key is present, answers value of passing value to `ifAbsent` block; otherwise answers `nil`               |
+| `at:ifPresent:ifAbsent:`    | combines `at:ifPresent` and `at:ifAbsent`                                                                          |
+| `at:put:`                   | adds key `at:` with value `put:`                                                                                   |
+| `bindingOf:`                | answers `Assocication` for argument key                                                                            |
+| `bindingsDo:`               | same as `associationsDo`                                                                                           |
+| `hasBindingThatBeginsWith:` | answers `Boolean` indicating if any `String` key begins with argument; error if non-`String` keys                  |
+| `includesKey:`              | answers `Boolean` indicating if argument key is present                                                            |
+| `keys`                      | answers `Array` of all keys                                                                                        |
+| `keysAndValuesDo:`          | evaluates argument block for each key/value pair passing key and value arguments to block                          |
+| `keysAndValuesRemove:`      | removes all key/value pairs that satisfy argument block, passing key and value arguments to block                  |
+| `keysDo:`                   | evaluates argument block for each key                                                                              |
+| `removeKey:`                | removes key/value pair for argument key                                                                            |
+| `removeKey:ifAbsent:`       | removes key/value pair for `removeKey:` key; answers removed value if present; otherwise answers `ifAbsent:` value |
+| `select:`                   | answers new `Dictionary` containing all key/value pairs whose value satisfies argument block                       |
+| `values`                    | answers `Array` of all values                                                                                      |
+| `valuesDo:`                 | evaluates argument block for each value                                                                            |
 
 #### LinkedList
 
