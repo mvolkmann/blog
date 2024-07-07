@@ -3244,42 +3244,6 @@ in the `Integer` class that are not defined in the `Number` class.
 | `lcm`          | answers least common multiple of receiver and argument                              |
 | `timesRepeat:` | evaluate argument block receiver times                                              |
 
-### Interval
-
-Instances of the `Interval` class represent a finite arithmetic progression
-which is a sequence of numbers where
-the difference between consecutive terms is constant.
-An example is the numbers 2, 4, 6, and 8.
-
-The `Interval` class is a subclass of `SequenceableCollection`
-which is a subclaass of `Collection`.
-
-The following table describes some of the class methods
-defined in the `Interval` class.
-
-| Method                   | Description                                                                                                             |
-| ------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
-| `from:to:`               | answers an instance where the increment between values is 1                                                             |
-| `from:to:by:`            | answers an instance where the increment between values is `by:`                                                         |
-| `from:to:count:`         | answers an instance where the number of values is `count:` and the increment can be a `Fraction`                        |
-| `integersFrom:to:count:` | answers an instance where the number of values is `count:` and the increment is the closest `Integer`, not a `Fraction` |
-
-The following table describes some of the instance methods
-defined in the `Interval` class that are not also defined in superclasses.
-
-| Method       | Description                                                   |
-| ------------ | ------------------------------------------------------------- |
-| `at:`        | answers the value at a given index                            |
-| `do:`        | evaluates a block for each value from first to last           |
-| `extent`     | answers the difference between the last and first values      |
-| `first`      | answers the first value                                       |
-| `includes:`  | answers `Boolean` indicating if argument is one of the values |
-| `increment`  | answers the increment between values                          |
-| `isEmpty`    | answers `Boolean` indicating if the size is 0                 |
-| `last`       | answers the last value                                        |
-| `size`       | answers the number of values                                  |
-| `reverseDo:` | evaluates a block for each value from last to first           |
-
 ### Characters
 
 Characters are represented by the `Character` class.
@@ -3774,9 +3738,43 @@ To create an array of numbers from a range,
 send the `#asArray` message to a `Range`.
 For example, `(1 to: 5) asArray` returns `#(1 2 3 4 5)`.
 
-#### OrderedCollection
+#### Interval
 
-GRONK: Continue review here.
+Instances of the `Interval` class represent a finite arithmetic progression
+which is a sequence of numbers where
+the difference between consecutive terms is constant.
+An example is the numbers 2, 4, 6, and 8.
+
+The `Interval` class is a subclass of `SequenceableCollection`
+which is a subclaass of `Collection`.
+
+The following table describes some of the class methods
+defined in the `Interval` class.
+
+| Method                   | Description                                                                                                             |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
+| `from:to:`               | answers an instance where the increment between values is 1                                                             |
+| `from:to:by:`            | answers an instance where the increment between values is `by:`                                                         |
+| `from:to:count:`         | answers an instance where the number of values is `count:` and the increment can be a `Fraction`                        |
+| `integersFrom:to:count:` | answers an instance where the number of values is `count:` and the increment is the closest `Integer`, not a `Fraction` |
+
+The following table describes some of the instance methods
+defined in the `Interval` class that are not also defined in superclasses.
+
+| Method       | Description                                                   |
+| ------------ | ------------------------------------------------------------- |
+| `at:`        | answers the value at a given index                            |
+| `do:`        | evaluates a block for each value from first to last           |
+| `extent`     | answers the difference between the last and first values      |
+| `first`      | answers the first value                                       |
+| `includes:`  | answers `Boolean` indicating if argument is one of the values |
+| `increment`  | answers the increment between values                          |
+| `isEmpty`    | answers `Boolean` indicating if the size is 0                 |
+| `last`       | answers the last value                                        |
+| `size`       | answers the number of values                                  |
+| `reverseDo:` | evaluates a block for each value from last to first           |
+
+#### OrderedCollection
 
 `OrderedCollection` instances are variable-length, ordered collections.
 
@@ -3806,7 +3804,42 @@ To get the index of the first occurence of a given value,
 send the `#indexOf:` message.
 For example, `fruits indexOf: 'banana'` returns 2.
 
-TODO: Add more detail.
+The following table describes some of the instance methods defined in the
+`OrderedCollection` class that are not also defined in superclasses.
+
+| Method                | Description                                                                       |
+| --------------------- | --------------------------------------------------------------------------------- |
+| `add:`                | adds argument to end                                                              |
+| `add:after:`          | adds `add:` object after `after:` object                                          |
+| `add:afterIndex:`     | adds `add:` object after `afterIndex:` index                                      |
+| `add:before:`         | adds `add:` object before `before:` object                                        |
+| `add:beforeIndex:`    | adds `add:` object before `beforeIndex:` index                                    |
+| `addAllFirst:`        | adds all objects in argument `OrderedColection` at beginning                      |
+| `addAllLast:`         | adds all objects in argument `OrderedColection` at end                            |
+| `at:`                 | answers element at argument index                                                 |
+| `at:ifAbsentPut:`     | answers element at `at:` index; if not present, add value of `ifAbsentPut:` block |
+| `at:put:`             | replaces existing element at `at:` index with `put:` object                       |
+| `collect:thenSelect:` | combines `collect:` and `select:`                                                 |
+| `find:`               | answers index of first occurrence of argument value                               |
+| `removeAll`           | removes all elements                                                              |
+| `removeAllSuchThat:`  | removes all elements that satisfy argument block                                  |
+| `removeAt:`           | removes element at argument index                                                 |
+| `removeFirst`         | removes first element and answers it                                              |
+| `removeFirst:`        | removes first argument elements and answers `Array` of them                       |
+| `removeLast`          | removes first element and answers it                                              |
+| `removeLast:`         | removes last argument elements and answers `Array` of them                        |
+| `setContents:`        | replaces current elements with those in argument `Array`                          |
+| `sort`                | sorts the elements in place                                                       |
+| `sort:`               | sorts the elements in place using argument block to compare them                  |
+
+The following code creates an instance of `OrderedCollection`
+containing `Symbol` objects that are names of fruits.
+It then sorts them on their length.
+
+```smalltalk
+oc := OrderedCollection newFrom: #(#banana #watermelon #cherry #apple #plum).
+oc sort: [:a :b | a size < b size].
+```
 
 #### Bag
 
