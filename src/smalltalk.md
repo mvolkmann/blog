@@ -1469,7 +1469,8 @@ Variables defined in a Workspace hold references to their object values.
 It may be necessary to close a Workspace in order to
 trigger garbage collection of those objects.
 
-To delete all instances of a given class, say `SomeClass`,
+Some classes such as `Morph` implement a `delete` method.
+To delete all instances of such classes,
 enter the following in Workspace and "Do it":
 
 ```smalltalk
@@ -3797,6 +3798,8 @@ There are no particularly interesting methods in this class.
 #### Array
 
 `Array` instances are fixed-length, ordered collections.
+Most of the interesting `Array` methods are defined in
+the superclasses `SequenceableCollection` and `Collection`.
 
 Compile-time literal arrays begin with `#(`, end with `)`,
 and contain space-separated values.
