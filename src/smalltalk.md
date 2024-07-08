@@ -3949,10 +3949,20 @@ To create a `Dictionary`:
 
 ```smalltalk
 dict := Dictionary new.
+
 "Can populate from a run-time Array of Association objects."
-"TODO: Why doesn't it work with a compile-time Array?"
 dict := Dictionary newFrom: { k1 -> v1. k2 -> v2. ... }.
+
 dict := { k1 -> v1. k2 -> v2. ... } asDictionary.
+```
+
+It is not possible to create a `Dictionary` instance
+from a compile-time `Array` of `Association` objects
+because `Association` objects cannot be created at compile-time.
+This means the following cannot be used:
+
+```smalltalk
+#( k1->v1 k2->v2 ... )
 ```
 
 To add a key/value pair:
