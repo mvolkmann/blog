@@ -3533,8 +3533,6 @@ The following list depicts the partial class hierarchy for collections:
 - `Array2D` - a two-dimensional array
 - `SharedQueue`
 
-GRONK: Add a section on each commonly used collection class.
-
 #### Association
 
 An `Association` represents a key/value pair.
@@ -4128,7 +4126,9 @@ not also defined in the superclasses `Set` or `Collection`.
 | `values`                    | answers `Array` of all values                                                                                      |
 | `valuesDo:`                 | evaluates argument block for each value                                                                            |
 
-GRONK: Describe more collection types?
+GRONK: Describe more collection types such as SortedCollection, IdentifyBag,
+OrderedDictionary, IdentityDictionary, IdentitySet,
+and all the collection classes whose names begin with "Weak"?
 
 ## Exception Handling
 
