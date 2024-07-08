@@ -4055,7 +4055,7 @@ and printing their names.
 
 ```smalltalk
 comet := VDog name: 'Comet' breed: 'Whippet'.
-oscar := VDog name: 'Oscar' breed: 'GSP'.
+oscar := VDog name: 'Oscar' breed: 'German Shorthaired Pointer'.
 dogs := SortedCollection newFrom: {oscar. comet}.
 dogs do: [:dog | dog name print]
 ```
@@ -4230,8 +4230,31 @@ not also defined in the superclasses `Set` or `Collection`.
 | `values`                    | answers `Array` of all values                                                                                      |
 | `valuesDo:`                 | evaluates argument block for each value                                                                            |
 
+#### OrderedDictionary
+
+The `OrderedDictionary` class is a subclass of `Dictionary`.
+Instances remember the order in which entries were added.
+Iteration methods like `do:`, `keysDo:` and `associationsDo:` and `valuesDo:`.
+process the entries in that order.
+
+The following code demonstrates creating an `OrderedDictionary`
+whose values are objects from the `Dog` class
+defined the `SortedCollection` section above,
+and printing their names.
+
+```smalltalk
+comet := VDog name: 'Comet' breed: 'Whippet'.
+oscar := VDog name: 'Oscar' breed: 'German Shorthaired Pointer'.
+dict := OrderedDictionary new.
+dict at: comet name put: comet.
+dict at: oscar name put: oscar.
+dogs do: [:dog | dog name print]
+```
+
+The output in the Transcript will be "Comet" followed by "Oscar".
+
 GRONK: Describe more collection types such as
-IdentityBag, IdentityDictionary, IdentitySet, OrderedDictionary,
+IdentityBag, IdentityDictionary, IdentitySet,
 and all the collection classes whose names begin with "Weak"?
 
 ## Exception Handling
