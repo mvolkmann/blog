@@ -3765,6 +3765,13 @@ To create an array of numbers from a range,
 send the `#asArray` message to a `Range`.
 For example, `(1 to: 5) asArray` returns `#(1 2 3 4 5)`.
 
+In addition to the `Array` class that can hold values of any type,
+there are predefined, type-specific array classes including
+`ByteArray`, `ColorArray`,
+`DoubleByteArray`, `DoubleWordArray`, `Int16PointArray`,
+`FloatArray`, `Float32Array`, `Float32PointArray`, `Float64Array`,
+`IntegerArray`, `PointArray`, `RunArray`, `RunNotArray`, and `WordArray`.
+
 #### Interval
 
 Instances of the `Interval` class represent a finite arithmetic progression
