@@ -749,6 +749,45 @@ TODO: Change this image to one that shows ouptut from the examples given above.
 <img alt="Cuis Transcript window" style="width: 80%"
   src="/blog/assets/cuis-transcript-window.png?v={{pkg.version}}">
 
+## Implementing in Debugger
+
+Smalltalk makes it possible to implement missing methods in the debugger.
+Here's an example of a session doing this.
+
+1. Open a Workspace.
+1. Enter `numbers := #(6 2 9 4 3).` and "Do it".
+1. Enter `numbers median.` and "Print it".
+1. In the "Unknown selector" popup that appears,
+   click "median" to confirm that is the message you meant to send.
+1. A Debug window will apppear with the title "MessageNotUnderstood".
+1. Click the "Create" button on the right.
+1. In the "Define" popup that appears, click "SequenceableCollection"
+   as the class where the method should be added.
+1. In the "Select category" popup that appears, select "math functions".
+1. In the code pane, replace `self shouldBeImplemented.` with the following:
+
+   ```smalltalk
+   | mid size sorted value |
+   sorted := self sorted.
+   size := sorted size.
+   mid := size // 2 + 1.
+   value := sorted at: mid.
+   size odd
+       ifTrue: [ ^ value ]
+       ifFalse: [ ^ (value + (sorted at: mid - 1)) / 2 ]
+   ```
+
+1. Press cmd-s to save.
+1. Click the "Proceed" button.
+1. Verify that the result is `4`.
+1. Add `5` to the end of the `numbers` `Array`.
+1. Test the `median` method again and
+   verify that the result is the `Fraction` `9/2`.
+
+An alternate approach to testing from a Workspace
+is to write and run a unit test.  See the "Unit Test" section.
+This will also open a Debug window where the missing code can be created.
+
 ## Syntax
 
 Before diving into the functionality provided
