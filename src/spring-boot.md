@@ -123,6 +123,18 @@ When using VS Code for Java development:
 1. Browse `localhost:8080/api/dog` and verify that
    a JSON array of dog descriptions is output.
 
+## Reducing Terminal Logging
+
+To reduce the amount of logging output
+in the terminal where the server is started,
+add the following in `resources/application.yaml`:
+
+```yaml
+logging.level:
+  root: error
+  com.example.demo: debug
+```
+
 ## Automatic Server Restart
 
 The server can be configured to automatically restart
