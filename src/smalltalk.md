@@ -4275,7 +4275,32 @@ are not prevented from being garbage collected
 if they are only referred to by weak collections.
 
 If an attempt is made to use an element in one of these collections
-that has been gargage collected ... GRONK: finish this.
+that has been gargage collected, its value will be `nil`.
+
+For example, create a class named `WeakSetDemo` with
+the instance variable `set` and the following instance methods:
+
+```smalltalk
+initialize
+    | comet oscar |
+    comet := Dog name: 'Comet' breed: 'Whippet'.
+    oscar := Dog name: 'Oscar' breed: 'GSP'.
+    set := WeakSet newFrom: {comet. oscar}.
+    set do: [:dog | dog name print].
+
+first
+    ^ set asArray first
+```
+
+Enter the following lines in a Workspace, select them, and "Print it":
+
+```smalltalk
+demo := WeakSetDemo new. "invokes initialize"
+demo first
+```
+
+The result will be `nil` because the `comet` and `oscar` objects
+will be garbage collected after the `initialize` method executes.
 
 ## Exception Handling
 
