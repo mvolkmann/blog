@@ -3803,7 +3803,88 @@ defined in the `Interval` class that are not also defined in superclasses.
 
 #### LinkedList
 
-GRONK: Add detail.
+`LinkedList` instances represent a linked list of `Link` subclasses.
+Custom `Link` subclasses must be defined.
+For example, the `StringLink` class defined below
+has a single instance variable named "value".
+
+```smalltalk
+Link subclass: #StringLink
+    instanceVariableNames: 'value'
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'Volkmann'!
+```
+
+The `StringLink` class has the following class method for creating instances.
+
+```smalltalk
+value: aString
+    | link |
+    link := self new.
+    link setValue: aString.
+    ^ link
+```
+
+The `StringLink` class has the following instance methods.
+
+```smalltalk
+setValue: aString
+    value := aString
+
+value
+    ^value
+
+value: aString
+    value := aString
+```
+
+We can now create an instance of `LinkList`
+whose links are `StringLink` instances.
+
+```smalltalk
+list := LinkedList new.
+list addLast: (StringLink value: 'banana').
+list addLast: (StringLink value: 'cherry').
+list addFirst: (StringLink value: 'apple').
+
+"Output all the link values which are apple, banana, and cherry."
+list do: [:link | link value print].
+
+list size print. "3"
+
+('first is {1}' format: {list first value}) print. "apple"
+('last is {1}' format: {list last value}) print. "cherry"
+
+list removeLast. "removes cherry"
+
+"Output all the link values which are apple and banana."
+list do: [:link | link value print].
+```
+
+`Link` instances have the methods `nextLink` and `nextLink:`
+to get and set the link to which they refer.
+In addition to the `LinkedList` methods described below,
+these can be used to insert new `Link` instances into a `LinkedList`.
+
+The following table describes some of the instance methods defined in the
+`LinkedList` class that are not also defined in superclasses.
+
+| Method             | Description                                                                  |
+| ------------------ | ---------------------------------------------------------------------------- |
+| `add:`             | same as `addLast:`                                                           |
+| `add:before:`      | adds `add:` `Link` before `before:` `Link`                                   |
+| `addFirst:`        | adds argument `Link` to beginning                                            |
+| `addLast:`         | adds argument `Link` to end                                                  |
+| `at:`              | answers `Link` at argument index; error if absent                            |
+| `at:ifAbsent:`     | answers `Link` at `at:` index or value of `ifAbsent:` if absent              |
+| `do:`              | evaluates argument block for each `Link`                                     |
+| `first`            | answers first `Link`                                                         |
+| `isEmpty`          | answers `Boolean` indicating if `size` is 0                                  |
+| `last`             | answers last `Link`                                                          |
+| `remove:ifAbsent:` | removes `remove:` `Link` and answers it; answers `ifAbsent:` value if absent |
+| `removeFirst`      | removes and answers first `Link`; treats like a queue                        |
+| `removeLast`       | removes and answers last `Link`; treats like a stack                         |
 
 #### OrderedCollection
 
