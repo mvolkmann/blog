@@ -2125,6 +2125,12 @@ Pressing cmd-" is useful to toggle whether selected code commented/uncommented.
 To change the indentation of a block of code, select all the lines and
 press tab to increase indentation or shift-tab to decrease it.
 
+To get help on a token, select it, right-click it, and select "Explain".
+A popup will appear.
+If the token is a literal value, it give its class name.
+If the token is a class name, it will give its class category.
+If the token is a message name, it will list the classes that implement it.
+
 ### Inspect Windows
 
 Inspect windows display all the instance variables of a specific object.
