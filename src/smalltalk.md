@@ -3857,7 +3857,7 @@ defined in the `Interval` class that are not also defined in superclasses.
 
 #### LinkedList
 
-`LinkedList` instances represent a linked list of `Link` subclasses.
+`LinkedList` instances represent a singly-linked list of `Link` subclasses.
 Custom `Link` subclasses must be defined.
 For example, the `StringLink` class defined below
 has a single instance variable named "value".
