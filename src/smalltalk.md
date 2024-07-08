@@ -4431,6 +4431,10 @@ The following dialog will appear:
 <img alt="Cuis edit my LayoutSpec" style="width: 80%"
   src="/blog/assets/cuis-edit-my-layoutspec.png?v={{pkg.version}}">
 
+For more detail on layouts, see
+<a href="https://github.com/Cuis-Smalltalk/Learning-Cuis/blob/master/LayoutTour.md"
+target="_blank">Exploring morph layouts in Cuis</a>.
+
 ### Buttons
 
 Button labels are automatically shortened to fit within the button width
