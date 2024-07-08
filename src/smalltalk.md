@@ -4013,6 +4013,55 @@ oc := OrderedCollection newFrom: #(#banana #watermelon #cherry #apple #plum).
 oc sort: [:a :b | a size < b size].
 ```
 
+#### SortedCollection
+
+The `SortedCollection` class is a subclass of `OrderedCollection`.
+Instances keep their elements in sorted order.
+The element objects must implement the `<=` instance method.
+
+The following code demonstrates defining a `Dog` class
+whose instances can used as elements in a `SortedCollection`.
+
+```smalltalk
+Object subclass: #Dog
+    instanceVariableNames: 'breed name'
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'Volkmann'
+
+"class methods follow"
+
+name: nameString breed: breedString
+    ^self new setName: nameString breed: breedString
+
+"instance methods follow"
+
+breed
+    ^ breed
+
+name
+    ^ name
+
+<= aDog
+    ^ self name <= aDog name
+
+setName: nameString breed: breedString
+    name := nameString.
+    breed := breedString
+```
+
+The following code demonstrates creating a `SortedCollection` of `Dog` objects
+and printing their names.
+
+```smalltalk
+comet := VDog name: 'Comet' breed: 'Whippet'.
+oscar := VDog name: 'Oscar' breed: 'GSP'.
+dogs := SortedCollection newFrom: {oscar. comet}.
+dogs do: [:dog | dog name print]
+```
+
+The output in the Transcript will be "Comet" followed by "Oscar".
+
 #### Bag
 
 `Bag` instances are variable-length, unordered collections
@@ -4181,8 +4230,8 @@ not also defined in the superclasses `Set` or `Collection`.
 | `values`                    | answers `Array` of all values                                                                                      |
 | `valuesDo:`                 | evaluates argument block for each value                                                                            |
 
-GRONK: Describe more collection types such as SortedCollection, IdentifyBag,
-OrderedDictionary, IdentityDictionary, IdentitySet,
+GRONK: Describe more collection types such as
+IdentityBag, IdentityDictionary, IdentitySet, OrderedDictionary,
 and all the collection classes whose names begin with "Weak"?
 
 ## Exception Handling
