@@ -124,6 +124,16 @@ The entire syntax of Smalltalk can be demonstrated on a post card.
 <img alt="Smalltalk on a post card"
   src="/blog/assets/smalltalk-on-postcard.jpg?v={{pkg.version}}">
 
+## Why Learn Smalltalk
+
+Some reasons to learn Smalltalk include:
+
+- Gaining an understanding of its pros and cons compared to other languages.
+- Getting ideas for features to be added to other languages.
+- Getting ideas for features to be added in the
+  development environments of other languages.
+- Actually using it as an alternative to other languages.
+
 ## Resources
 
 - <a href="https://en.wikipedia.org/wiki/Smalltalk"
@@ -785,7 +795,7 @@ Here's an example of a session doing this.
    verify that the result is the `Fraction` `9/2`.
 
 An alternate approach to testing from a Workspace
-is to write and run a unit test.  See the "Unit Test" section.
+is to write and run a unit test. See the "Unit Test" section.
 This will also open a Debug window where the missing code can be created.
 
 ## Syntax
