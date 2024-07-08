@@ -4253,9 +4253,26 @@ dogs do: [:dog | dog name print]
 
 The output in the Transcript will be "Comet" followed by "Oscar".
 
-GRONK: Describe more collection types such as
-IdentityBag, IdentityDictionary, IdentitySet,
-and all the collection classes whose names begin with "Weak"?
+#### Identity Collections
+
+The collection classes `IdentityBag`, `IdentityDictionary`, and `IdentitySet`
+are similar to their non-identity counterparts,
+but differ in that elements are compared using `==` instead of `=`.
+This means it checks to see if they are the same object in memory
+rather than checking for equal values.
+
+#### Weak Collections
+
+The collection classes `WeakArray`, `WeakKeyDictionary`,
+`WeakIdentityKeyDictionary`, `WeakValueDictionary`,
+`WeakSet`, and `WeakIdentitySet`
+are similar to their non-week counterparts,
+but they differ in that objects to which they refer
+are not prevented from being garbage collected
+if they are only referred to by weak collections.
+
+If an attempt is made to use an element in one of these collections
+that has been gargage collected ... GRONK: finish this.
 
 ## Exception Handling
 
