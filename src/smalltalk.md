@@ -586,6 +586,7 @@ fullScreenOn
 initialize
     "renders buttons for setting full screen on or off"
 
+    super initialize.
     LayoutMorph newColumn
         addMorph: (LabelMorph contents: 'Full Screen');
         addMorph: (LayoutMorph newRow
@@ -1438,6 +1439,7 @@ We can then define the following instance methods:
 
 ```smalltalk
 initialize
+    super initialize.
     height := 1.
     width := 1
 
@@ -4304,28 +4306,26 @@ will be garbage collected after the `initialize` method executes.
 
 ## Exception Handling
 
-GRONK: Continue review here.
-
-Smalltalk methods can throw exceptions.
+Methods can throw exceptions.
 Exceptions that are thrown by code in a block can be caught and handled.
 Unhandled exceptions result in a Debug window being opened
 that contains a stack trace.
 
 Smalltalk seems to use the words "exception" and "error" interchangably.
 
-To throw a generic exception:
+To throw a generic `Exception`:
 
 ```smalltalk
 Error signal: 'some message'
 ```
 
-Smalltalk provides my subclasses of the `Exception` class.
+Smalltalk provides many subclasses of the `Exception` class.
 Examples include `ArithmeticError`, `AssertionFailure`, `Error`, `Halt`,
 `MessageNotUnderstood`, `NotYetImplemented`, and `ZeroDivide`.
 
-To define a custom exception, create a class that inherits from
-the `Exception` class or one of its subclasses such as `Error.
-This can include instance variables and methods
+To define a custom exception, create a class that is a subclass
+of the `Exception` class or one of its subclasses such as `Error`.
+The custom class can include instance variables and methods
 that are specific to that exception.
 For example:
 
@@ -4340,25 +4340,25 @@ Error subclass: #OutOfBoundsException
 The following class method is used to create an instance:
 
 ```smalltalk
-lower: aLower upper: anUpper
-    ^self new setLower: aLower upper: anUpper
+lower: lowerNumber upper: upperNumber
+    ^self new setLower: lowerNumber upper: upperNumber
 ```
 
 The following instance method is used by the class method above:
 
 ```smalltalk
-setLower: aLower upper: anUpper
+setLower: lowerNumber upper: upperNumber
     super initialize.
-    lowerBound := aLower.
-    upperBound := anUpper
+    lowerBound := lowerNumber.
+    upperBound := upperNumber
 ```
 
-If the exception subclass defines class methods that create a new instance,
+If an exception subclass defines class methods that create a new instance,
 make sure to call `super initialize` as shown above.
 
 To throw a custom exception send the class, or an instance of it,
 the `#signal:` message.
-For example, the following instance method could be defined
+For example, the following instance method can be defined
 in a class that has a `score` instance variable:
 
 ```smalltalk
@@ -4372,7 +4372,10 @@ score: aNumber
 
 To catch an exceptions that may be thrown by a method,
 send a message that invokes the method inside a block
-and set the `#on:do:` message to the block.
+and send the `#on:do:` message to the block.
+Sending the message `#messageText` to an exception object
+returns the message text of the exception.
+
 For example:
 
 ```smalltalk
@@ -4380,9 +4383,6 @@ For example:
     ex messageText print.
 ]
 ```
-
-Sending the message `#messageText` to an exception object
-returns the message text of the exception.
 
 ## Unit Tests
 
@@ -4401,9 +4401,8 @@ To create unit tests for an existing class:
       category: 'Volkmann'
   ```
 
-- Add a message category like "test" or "testing".
-  The name doesn't really matter.
-- Add test instance methods whose name begins with "test".
+- Add a message category like "testing".
+- Add test instance methods in that category whose names begin with "test".
   Each method can contain any number of assertions.
   For example:
 
@@ -4416,16 +4415,57 @@ To create unit tests for an existing class:
 
 The supported assertion method defined in the `TestCase` class include:
 
-- `assert:` for Boolean values
-- `assert:changes`
+- `assert:`
+
+  This asserts that the value of the argument is `true`
+  or is a block whose value is `true`.
+
+- `assert:changes:`
+
+  This asserts that value of the `changes:` block
+  changes after evaluating the `assert:` block.
+
 - `assert:changes:by`
+
+  This asserts that value of the `changes:` block
+  changes by `by:` after evaluating the `assert:` block.
+
 - `assert:changes:from:to`
+
+  This asserts that value of the `changes:` block
+  changes from `from:` to `to:` after evaluating the `assert: block`.
+
 - `assert:description`
+
+  This asserts that the value of `assert:` is `true`.
+  If not, the test files with the message `description:`.
+
 - `assert:description:resumable`
+
+  TODO: What is a `resumableFailure`?
+
 - `assert:doesNotChange`
+
+  This is the opposite of `assert:changes:`.
+  It asserts that value of the `doesNotChange:` block
+  does not change after evaluating the `assert:` block.
+
 - `assert:equals`
+
+  This asserts that the value of `assert:` (not a block) is equal to `equals:`.
+
 - `assert:includes`
+
+  This asserts that the collection `assert:`
+  includes an element equal to `includes:`.
+
+GRONK: What happened to the rest of these methods?
+GRONK: See example usage in VShapeTests, but can't find implementations!
+
 - `assert:isCloseTo`
+
+  This asserts that the value of `assert:` is close to `isCloseTo:`.
+
 - `assert:isCloseTo:withinPrecision`
 - `assert:isNotCloseTo`
 - `assert:isNotCloseTo:withinPrecision`
