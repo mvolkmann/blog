@@ -4459,16 +4459,32 @@ The supported assertion method defined in the `TestCase` class include:
   This asserts that the collection `assert:`
   includes an element equal to `includes:`.
 
-GRONK: What happened to the rest of these methods?
-GRONK: See example usage in VShapeTests, but can't find implementations!
+For comparing floating point numbers, consider adding
+the following instance methods to the `TestCase` class.
 
-- `assert:isCloseTo`
+```smalltalk
+assert: aNumber isCloseTo: anotherNumber
+    "This asserts that the value of `assert:` is
+    within the default precision (0.0001) of `isCloseTo:`."
 
-  This asserts that the value of `assert:` is close to `isCloseTo:`.
+    self assert: aNumber isCloseTo: anotherNumber
+        withPrecision: self defaultPrecision
 
-- `assert:isCloseTo:withinPrecision`
-- `assert:isNotCloseTo`
-- `assert:isNotCloseTo:withinPrecision`
+assert: aNumber isCloseTo: anotherNumber withPrecision: aPrecision
+    "This asserts that the value of `assert:`
+    is within `withinPrecision:` of `isCloseTo:`."
+
+    self assert:
+        (self is: aNumber closeTo: anotherNumber withPrecision: aPrecision)
+
+defaultPrecision
+    ^ 0.0001
+
+is: aNumber closeTo: anotherNumber withPrecision: aPrecision
+    aNumber = 0 ifTrue: [ ^ anotherNumber abs < aPrecision ].
+    ^ (aNumber - anotherNumber) abs <
+       (aPrecision * (aNumber abs max: anotherNumber abs))
+```
 
 To run tests, select a test class, test method category, or test method,
 and press cmd-t (run tests).
