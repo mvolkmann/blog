@@ -4551,11 +4551,13 @@ To create unit tests for the `Pets` class:
       self assert: [ demo cats = 0 ] description: 'no cats'.
 
   testCollections
+      "This test isn't related to the Pets class."
       | coll |
       coll := #(2 5 9).
       self assert: coll includes: 5
 
   testNumbers
+      "This test isn't related to the Pets class."
       self assert: Float pi isCloseTo: 3.14159
   ```
 
@@ -4583,50 +4585,71 @@ It defines the following class methods that create colors by name:
 
 ## Morphic
 
-Morphic is a GUI framework that is built into popular Smalltalk images.
+Morphic is a GUI framework that is included into popular Smalltalk images.
 It defines user interfaces with "morphs" which are
-what other graphical systems refer to as widgets.
-They are graphical items that can be added to
+what other graphical systems refer to as widgets or components.
+Morphs are graphical items that can be added to
 the `WorldMorph` (desktop) or a `LayoutMorph`.
+TODO: Technically speaking, can any morph be embedded in any other morph?
 
 For a great introduction to Morphic, see
 <a href="https://www.youtube.com/watch?v=62baNn3c56Y"
 target="_blank">Holistic computing with Smalltalk and Morphic. Part 1</a>.
 
-Some of the method names in Morphic classes are inconsistently named.
+Some of the methods in Morphic classes are inconsistently named.
 For example, the class `TextModelMorph` defines the methods
 `alwaysHideVerticalScrollbar` and `hideScrollBarsIndefinitely`.
 Note how the "b" is sometimes lowercase and sometimes uppercase.
 
+### Creating and Modifying Morphs
+
+To create a morph:
+
+- Open the World menu.
+- Select "New morph...".
+- In the dialog that appears, select a category of morphs
+  and then a specific kind (ex. `BoxedMorph`).
+- The morph will appear attached to the cursor
+  (uses the `Morph` method `openInHand`).
+- Move the cursor to the location where the morph should be placed
+  and click to drop it.
+
 To modify an existing morph:
 
-- Open the halo for the morph.
+- cmd-click a morph to open its halo.
 - Click the blue menu button on the top and select "copy to clipboard".
 - Open a Workspace window.
 - Assign the morph to a variable.
   For example, enter `morph := ` and press cmd-p to paste the reference.
 - Press cmd-d (Do it).
 - Send messages to the morph to modify it.
-  For example, `morph borderColor: (Color pink)`
+  For example, `morph borderColor: Color red`
 
-To create a morph:
+To change the colors used by a morph from its halo:
 
-- Click the WorldMorph background.
-- Select "New morph...".
-- In the dialog that appears,
-  select a category of morphs and then a specific kind.
+- cmd-click a morph to open its halo.
+- Click the blue menu button on the top and select "copy to clipboard".
+- Select "change color..."
+- A window titled "Click-Select a Color" will appear attached to the cursor.
+- Position the window by moving the cursor and click to drop it.
+- Click a color swatch.
+- A menu will appear with the options "Cancel",
+  "adoptWidgetsColor:", "color:", and "borderColor:".
+  Select an option to change that color property of the morph.
+  Some morphs don't support all the options.
+  For example, "color" of a `LabelMorph` can be changed,
+  but it does not have a border.
+  TODO: What does "adoptWidgetsColor:" do?
 
 To explicitly set the size of a morph, send it the `morphExtent:` message
-with a `Point` value. For example, `myMorph morphExtent: 200@100`.
+with a `Point` value that represents the new width and height.
+For example, `morph morphExtent: 200@100`.
 
-Only a small set of morphs is provided by default.
+Only a small set of morphs are provided by default.
 A good source of additional morphs is the package "UI-Tools".
-To install this:
-
-- Open a Workspace window.
-- Enter `Feature require: 'UI-Tools'` and press cmd-d (Do it).
-
-This installs many packages including:
+To install this, open a Workspace, enter `Feature require: 'UI-Tools'`,
+and press cmd-d (Do it).
+This installs many other packages including:
 
 - Collections-CompactArrays
 - Compression
@@ -4649,17 +4672,24 @@ This installs many packages including:
 
 The set of "Basic" morphs will now include `BoxedMorph`, `EllipseMorph`,
 `FrameMorph`, `ImageMorph`, `LabelMorph`, `LineMorph`, `PointerLineMorph`,
-and `TileResizeMorph`.
+`Sonogram`, and `TileResizeMorph`.
+TODO: Why does selecting `Sonogram` lock up the image, requiring a Force Quit?
 
-Supposedly Cuis 7 will remove support for the UI-Tools package
+TODO: Supposedly Cuis 7 will remove support for the UI-Tools package
 and the desired subpackages will need to be installed individually.
+Still true?
 
 See my Morphic demos in package `Volkmann`
-which contains the classes `VButtonDemo` and `VGreet`.
+in the classes `MorphicDemos` and `MorphicGreet`.
+In a Workspace, enter `MorphicDemos incDecButtons.` and "Do it".
+Then enter `MorphicGreet new.` and "Do it".
 
 ### Halo
 
-To open the halo (set of surrounding buttons) for a morph,
+A morph halo is a set of circle buttons that surround a morph
+that each change the morph in some way or reveal information about it.
+
+To open the halo for a morph,
 cmd-click it in Cuis or option-click it in Squeak.
 If the item is embedded in other morphs, repeat this multiple times
 until a halo appears around the desired morph.
@@ -4688,14 +4718,14 @@ The following buttons are provided:
 
 A morph can also be dragged directly without
 opening its halo and using the drag buttons.
-This only works in the area that is dragged
+This only works if the area that is dragged
 does not process mouse events.
 For example, you cannot drag a morph that contains a button
 by dragging the button.
 
 TODO: How can you change the point about which a morph rotates?
 
-(1) This menu contains the following:
+(1) This menu contains the following options:
 
 - send to back
 - bring to front
@@ -4715,27 +4745,35 @@ select "edit balloon help", and modify the help text.
 (3) To restore a collapsed item, click it's thumbnail in the bottom bar.
 
 (4) "Explore" windows enable viewing data associated with an item
-such as its location, size (extent), and color.
+such as its location, extent (size), and color.
 
 For more detail, see
 <a href="https://cuis-smalltalk.github.io/TheCuisBook/A-brief-introduction-to-Inspectors.html"
 target="_blank">A brief introduction to Inspectors</a>.
 
-To embed a morph into another (such as a LayoutMorph):
-
-- drag the morph on top of its intended parent morph
-- open the halo of the morph
-- click the blue circle on the top
-- select "embed into" ... {parent morph name}
-  (typically LayoutMorph)
-
 ### Desktop Color
 
-One way to change the desktop color is to right-click it to open its halo,
-click the blue menu button, select "debug...inspect morph",
-click in the bottom pane, enter `self color: Color {some-color-name}`,
-and press cmd-d (Do it).
+One way to change the desktop color is to:
+
+- Right-click the desktop to open its halo.
+- Click the blue menu button.
+- Select debug...inspect morph to open an Inspect window.
+- Click in the bottom pane of the Inspect window.
+- Enter `self color: Color red` or use some other color name.
+- "Do it".
+
 This works with all colors except `transparent` and alpha values are ignored.
+
+### Embedding
+
+To embed a morph into another (such as a LayoutMorph) so
+they are treated as a single unit and can be positioned together:
+
+- Drag a morph on top of its intended parent morph.
+- Open the halo of the morph.
+- Click the blue circle on the top.
+- Select "embed into" ... {parent morph name}.
+  The parent morph name is typically "LayoutMorph".
 
 ### LayoutMorph
 
@@ -4751,6 +4789,8 @@ An instance can be created with:
   This calls `newRow` and sets the background color to `Color red alpha: 0.2`.
 
 For example, `myLayout := Layout newRow`.
+
+GRONK: Continue review here.
 
 To add a submorph to a `LayoutMorph`, send it the `addMorph:` message.
 For example, `myLayout addMorph: EllipseMorph new`
