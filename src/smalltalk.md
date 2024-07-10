@@ -4386,116 +4386,6 @@ For example:
 
 ## Unit Tests
 
-To create unit tests for an existing class:
-
-- Create a new class in the same class category as the class to be tested
-  that is a subclass of `TestCase`.
-  To test the class "Foo", a suggested class name is "FooTests".
-  For example:
-
-  ```smalltalk
-  TestCase subclass: #VShapeTests
-      instanceVariableNames: ''
-      classVariableNames: ''
-      poolDictionaries: ''
-      category: 'Volkmann'
-  ```
-
-- Add a message category like "testing".
-- Add test instance methods in that category whose names begin with "test".
-  Each method can contain any number of assertions.
-  For example:
-
-  ```smalltalk
-  testCircleArea
-      | c |
-      c := VCircle radius: 3.
-      self assert: c area isCloseTo: 28.2743339
-  ```
-
-The supported assertion method defined in the `TestCase` class include:
-
-- `assert:`
-
-  This asserts that the value of the argument is `true`
-  or is a block whose value is `true`.
-
-- `assert:changes:`
-
-  This asserts that value of the `changes:` block
-  changes after evaluating the `assert:` block.
-
-- `assert:changes:by`
-
-  This asserts that value of the `changes:` block
-  changes by `by:` after evaluating the `assert:` block.
-
-- `assert:changes:from:to`
-
-  This asserts that value of the `changes:` block
-  changes from `from:` to `to:` after evaluating the `assert: block`.
-
-- `assert:description`
-
-  This asserts that the value of `assert:` is `true`.
-  If not, the test files with the message `description:`.
-
-- `assert:description:resumable`
-
-  TODO: What is a `resumableFailure`?
-
-- `assert:doesNotChange`
-
-  This is the opposite of `assert:changes:`.
-  It asserts that value of the `doesNotChange:` block
-  does not change after evaluating the `assert:` block.
-
-- `assert:equals`
-
-  This asserts that the value of `assert:` (not a block) is equal to `equals:`.
-
-- `assert:includes`
-
-  This asserts that the collection `assert:`
-  includes an element equal to `includes:`.
-
-For comparing floating point numbers, consider adding
-the following instance methods to the `TestCase` class.
-
-```smalltalk
-assert: aNumber isCloseTo: anotherNumber
-    "This asserts that the value of `assert:` is
-    within the default precision (0.0001) of `isCloseTo:`."
-
-    self assert: aNumber isCloseTo: anotherNumber
-        withPrecision: self defaultPrecision
-
-assert: aNumber isCloseTo: anotherNumber withPrecision: aPrecision
-    "This asserts that the value of `assert:`
-    is within `withinPrecision:` of `isCloseTo:`."
-
-    self assert:
-        (self is: aNumber closeTo: anotherNumber withPrecision: aPrecision)
-
-defaultPrecision
-    ^ 0.0001
-
-is: aNumber closeTo: anotherNumber withPrecision: aPrecision
-    aNumber = 0 ifTrue: [ ^ anotherNumber abs < aPrecision ].
-    ^ (aNumber - anotherNumber) abs <
-       (aPrecision * (aNumber abs max: anotherNumber abs))
-```
-
-To run tests, select a test class, test method category, or test method,
-and press cmd-t (run tests).
-Alternatively, open a "SUnit Test Runner" from the World menu,
-select one or more test classes, and click the "Run" button.
-After adding new test classes, click the "Refresh" button
-to make the "SUnit Test Runner" window aware of them.
-
-<img alt="Cuis SUnit Test Runner" style="width: 90%"
-  src="/blog/assets/cuis-sunit-test-runner.png?v={{pkg.version}}">
-
 To install some example tests:
 
 - Open a "File List" window from the World menu.
@@ -4506,6 +4396,174 @@ To install some example tests:
 - Select one of more of the packages whose names begin with "Test-".
 - Click the "install package" button.
 - View the code for those packages in a System Browser.
+
+Let's walk through the steps to create and run unit tests for a class.
+
+The class we will test is `Pets` which is defined by the following:
+
+```smalltalk
+Object subclass: #Pets
+    instanceVariableNames: 'dogs cats'
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'Volkmann'
+```
+
+The `Pets` class has the following instance methods:
+
+```smalltalk
+initialize
+    dogs := 0.
+    cats := 0
+
+addCat
+    cats := cats + 1
+
+addDog
+    dogs := dogs + 1
+
+cats
+    ^ cats
+
+dogs
+    ^ dogs
+```
+
+The supported assertion method defined in the `TestCase` class include:
+
+- `assert:`
+
+This asserts that the value of the argument is `true`
+or is a block whose value is `true`.
+
+- `assert:changes:`
+
+This asserts that value of the `changes:` block
+changes after evaluating the `assert:` block.
+
+- `assert:changes:by`
+
+This asserts that value of the `changes:` block
+changes by `by:` after evaluating the `assert:` block.
+
+- `assert:changes:from:to`
+
+This asserts that value of the `changes:` block
+changes from `from:` to `to:` after evaluating the `assert: block`.
+
+- `assert:description`
+
+This asserts that the value of `assert:` is `true`.
+If not, the test files with the message `description:`.
+
+- `assert:description:resumable`
+
+TODO: What is a `resumableFailure`?
+
+- `assert:doesNotChange`
+
+This is the opposite of `assert:changes:`.
+It asserts that value of the `doesNotChange:` block
+does not change after evaluating the `assert:` block.
+
+- `assert:equals`
+
+This asserts that the value of `assert:` (not a block) is equal to `equals:`.
+
+- `assert:includes`
+
+This asserts that the collection `assert:`
+includes an element equal to `includes:`.
+
+For comparing floating point numbers, consider adding
+the following instance methods to the `TestCase` class.
+
+```smalltalk
+assert: aNumber isCloseTo: anotherNumber
+  "This asserts that the value of `assert:` is
+  within the default precision (0.0001) of `isCloseTo:`."
+
+  self assert: aNumber isCloseTo: anotherNumber
+      withPrecision: self defaultPrecision
+
+assert: aNumber isCloseTo: anotherNumber withPrecision: aPrecision
+  "This asserts that the value of `assert:`
+  is within `withinPrecision:` of `isCloseTo:`."
+
+  self assert:
+      (self is: aNumber closeTo: anotherNumber withPrecision: aPrecision)
+
+defaultPrecision
+  ^ 0.0001
+
+is: aNumber closeTo: anotherNumber withPrecision: aPrecision
+  aNumber = 0 ifTrue: [ ^ anotherNumber abs < aPrecision ].
+  ^ (aNumber - anotherNumber) abs <
+     (aPrecision * (aNumber abs max: anotherNumber abs))
+```
+
+To create unit tests for this class:
+
+- Create a new class in the same class category as the class to be tested
+  that is a subclass of `TestCase`.
+  For example:
+
+  ```smalltalk
+  TestCase subclass: #PetsTests
+      instanceVariableNames: ''
+      classVariableNames: ''
+      poolDictionaries: ''
+      category: 'Volkmann'
+  ```
+
+- Add the message category "testing".
+
+- Add test instance methods in that category whose names begin with "test".
+  Each method can contain any number of assertions.
+  For example:
+
+  ```smalltalk
+  testDogs
+      | demo |
+      demo := Pets new.
+
+      "dogs is now 0."
+      self assert: [ demo addDog ] changes: [ demo dogs].
+
+      "dogs is now 1."
+      self assert: [ demo addDog ] changes: [ demo dogs] by: 1.
+
+      "dogs is now 2."
+      self assert: [ demo addDog ] changes: [ demo dogs] from: 2 to: 3.
+
+      "dogs is now 3."
+      self assert: demo dogs equals: 3.
+
+      self assert: [ demo addCat ] doesNotChange: [ demo dogs].
+
+  testCats
+      | demo |
+      demo := Pets new.
+      self assert: [ demo cats = 0 ] description: 'no cats'.
+
+  testCollections
+      | coll |
+      coll := #(2 5 9).
+      self assert: coll includes: 5
+
+  testNumbers
+      self assert: Float pi isCloseTo: 3.14159
+  ```
+
+To run tests, select a test class, test method category, or test method,
+and press cmd-t (run tests).
+Alternatively, open a "SUnit Test Runner" from the World menu,
+select one or more test classes, and click the "Run" button.
+After adding new test classes, click the "Refresh" button
+to make the "SUnit Test Runner" window aware of them.
+
+<img alt="Cuis SUnit Test Runner" style="width: 90%"
+  src="/blog/assets/cuis-sunit-test-runner.png?v={{pkg.version}}">
 
 ## Color
 
