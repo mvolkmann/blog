@@ -847,6 +847,15 @@ In dynamic arrays the expressions are separated by periods.
 
 TODO: What is a "compound literal"?
 
+### Naming Conventions
+
+Names of classes, methods, and variables use camelCase.
+They consist of letters and digits.
+They start with a letter that is uppercase for classes and class variables,
+and lowercase for all other names.
+The only special character allowed is the underscore character,
+but that is rarely used because camelCase is preferred.
+
 ### Assignment Operator
 
 Assignment operators (`:=`) can be rendered as a left pointing arrow
@@ -875,7 +884,7 @@ By default, both initialize all attributes of the new object to `nil`.
 The difference between them is that `new` can be overridden
 to do something different, whereas `basicNew` cannot be overridden.
 
-### Variables
+## Variables
 
 Smalltalk supports five kinds of variables:
 
@@ -888,7 +897,7 @@ Smalltalk supports five kinds of variables:
 - Temporary (or local) variables are accessible only within
   the method or block where they are declared.
 
-#### Pseudo-variables
+### Pseudo-variables
 
 Pseudo-variables are variables whose value
 is provided automatically and cannot be modified.
@@ -922,7 +931,7 @@ represents the top frame of the run-time stack. ...
 It is essential for implementing development tools like the Debugger and
 it is also used to implement exception handling and continuations."
 
-#### Blocks
+### Blocks
 
 A block is closure (anonymous function) that can have parameters
 and contain many expressions.
@@ -1018,7 +1027,7 @@ fact value: fact value: 5 "gives 120"
 If a block uses the caret symbol (`^`) to return a value,
 the containing method will exit and return that value.
 
-#### Instance Variables
+### Instance Variables
 
 Instance variables are associated with a specific instance of a class.
 They are declared in a space-separated string that is
@@ -1034,7 +1043,7 @@ its instance method `initialize` is called.
 This is, as the name suggests, a perfect place to
 assign an initial value to each instance variable.
 
-#### Class Variables
+### Class Variables
 
 Class variables are associated with a class
 and the same value is shared with all subclasses.
@@ -1053,7 +1062,7 @@ To assign initial values to the class variables of a class,
 define the class method `initialize`
 and explicitly send that message to the class.
 
-#### Class Instance Variables
+### Class Instance Variables
 
 Class instance variables are defined as an
 instance variables in the metaclass of a given class.
@@ -1066,7 +1075,7 @@ and set different values in the class and subclasses.
 Perhaps an example could be an Animal class with a legs variable
 that is set to 0 in the Animal class and 4 in the Dog subclass.
 
-#### Temporary Variables
+### Temporary Variables
 
 Temporary variables are declared in a space-separated string
 between vertical bars inside a method or block definition.
@@ -1082,7 +1091,7 @@ average: numbers
     ^ sum / numbers size
 ```
 
-#### Global Variables
+### Global Variables
 
 While Smalltalk does not support global variables,
 the `Smalltalk` `SystemDictionary` object can be used for this purpose.
@@ -1094,7 +1103,7 @@ Smalltalk at: 'color' put: 'yellow'.
 color := Smalltalk at: 'color' ifAbsent: 'none'.
 ```
 
-### Messages
+## Messages
 
 The only mechanism for communicating with an object is to send it a message.
 A message is a combination of a selector (or message name) and arguments.
@@ -1221,7 +1230,7 @@ To do this:
 - Optionally click the "Proceed" button to
   resume execution with calling the new method.
 
-#### Tab Completions
+### Tab Completions
 
 When entering code to send a message, completion hints are provided
 if at least the first letter in the message name is typed
@@ -1285,7 +1294,7 @@ For example, the following sets of expressions are equivalent:
 To provide more than three keyword arguments with `perform`,
 send the `#perform:withArguments` message.
 
-### Classes
+## Classes
 
 A class defines a set of associated class variables, instance variables,
 class methods, and instance methods.
@@ -1394,7 +1403,7 @@ Accessor methods for all instance variables in a class can be generated
 by right-clicking the class name in a System Browser
 and selecting "more...create inst var accessors".
 
-### Objects
+## Objects
 
 Code and data are both represented by objects.
 Code can be described by a method or block, both of which are kinds of objects.
