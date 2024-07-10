@@ -4879,7 +4879,7 @@ For more detail on layouts, see
 <a href="https://github.com/Cuis-Smalltalk/Learning-Cuis/blob/master/LayoutTour.md"
 target="_blank">Exploring morph layouts in Cuis</a>.
 
-### Buttons
+### Button Labels
 
 Button labels are automatically shortened to fit within the button width
 using the `String` instance method `squeezeTo:`.
@@ -4897,7 +4897,7 @@ Depending the background color selected, this can result in poor contrast.
 It also uses an embossed font for the label.
 
 A way to fix this, suggested by Mariano Montone,
-is to create a subclass of `PluggableButtonMorph` that does the following:
+is to create a subclass of `PluggableButtonMorph` as follows:
 
 1. Define the following new class:
 
@@ -4919,14 +4919,16 @@ is to create a subclass of `PluggableButtonMorph` that does the following:
        labelColor := anObject
    ```
 
-1. Override this instance method in the `VButtonMorph` class
+1. Override `VButtonMorph` instance method `drawEmbossedLabelOn:`
    by copying the same method from `PluggableButtonMorph`
-   and modifying two lines.
+   and modifying two lines, the one that sets `colorForLabel`
+   and the one that sets `embossed`.
 
    ```smalltalk
    drawEmbossedLabelOn: aCanvas
        | availableW center colorForLabel f l labelMargin targetSize w x y |
        label ifNotNil: [
+           "The next line was modified."
            colorForLabel := self enableLabelColorWith: self labelColor.
            self isPressed
                ifFalse: [
@@ -4957,12 +4959,10 @@ is to create a subclass of `PluggableButtonMorph` that does the following:
                at: x@y
                font: f
                color: colorForLabel
+               "The next line was modified."
                embossed: false
        ]
    ```
-
-   The modified lines are the one that sets `colorForLabel`
-   and the one that sets `embossed`.
 
 ### Button Demo in Cuis
 
