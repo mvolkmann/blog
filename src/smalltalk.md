@@ -4386,14 +4386,20 @@ For example:
 
 ## Unit Tests
 
-To install some example tests:
+Unit tests verify that the code is working as expected now.
+They can also be run again in the future
+to verify that the code has not regressed.
 
-- Open a "File List" window from the World menu.
-- Navigate to and expand `Cuis-Smalltalk-Dev-master`
+One way to learn how to write Smalltalk unit tests
+is to install some tests provided in the Smalltalk distribution.
+and study them. To do this:
+
+- Open a "File List" from the World menu.
+- Navigate to and expand `Cuis-Smalltalk-Dev`
   or the name of your version of Cuis.
 - Navigate to and expand "Packages" and then "Features".
 - Enter "test" in the filter input in the upper-left.
-- Select one of more of the packages whose names begin with "Test-".
+- Select one of more of the packages whose names begin with "Tests-".
 - Click the "install package" button.
 - View the code for those packages in a System Browser.
 
@@ -4429,84 +4435,82 @@ dogs
     ^ dogs
 ```
 
-The supported assertion method defined in the `TestCase` class include:
+The supported assertion methods defined in the `TestCase` class include:
 
 - `assert:`
 
-This asserts that the value of the argument is `true`
-or is a block whose value is `true`.
+  This asserts that the value of the argument is `true`
+  or is a block whose value is `true`.
 
 - `assert:changes:`
 
-This asserts that value of the `changes:` block
-changes after evaluating the `assert:` block.
+  This asserts that value of the `changes:` block
+  changes after evaluating the `assert:` block.
 
 - `assert:changes:by`
 
-This asserts that value of the `changes:` block
-changes by `by:` after evaluating the `assert:` block.
+  This asserts that value of the `changes:` block
+  changes by `by:` after evaluating the `assert:` block.
 
 - `assert:changes:from:to`
 
-This asserts that value of the `changes:` block
-changes from `from:` to `to:` after evaluating the `assert: block`.
+  This asserts that value of the `changes:` block
+  changes from `from:` to `to:` after evaluating the `assert: block`.
 
 - `assert:description`
 
-This asserts that the value of `assert:` is `true`.
-If not, the test files with the message `description:`.
+  This asserts that the value of `assert:` is `true`.
+  If not, the test files with the message `description:`.
 
 - `assert:description:resumable`
 
-TODO: What is a `resumableFailure`?
+  TODO: What is a `resumableFailure`?
 
 - `assert:doesNotChange`
 
-This is the opposite of `assert:changes:`.
-It asserts that value of the `doesNotChange:` block
-does not change after evaluating the `assert:` block.
+  This is the opposite of `assert:changes:`.
+  It asserts that value of the `doesNotChange:` block
+  does not change after evaluating the `assert:` block.
 
 - `assert:equals`
 
-This asserts that the value of `assert:` (not a block) is equal to `equals:`.
+  This asserts that the value of `assert:` (not a block) is equal to `equals:`.
 
 - `assert:includes`
 
-This asserts that the collection `assert:`
-includes an element equal to `includes:`.
+  This asserts that the collection `assert:`
+  includes an element equal to `includes:`.
 
 For comparing floating point numbers, consider adding
 the following instance methods to the `TestCase` class.
 
 ```smalltalk
 assert: aNumber isCloseTo: anotherNumber
-  "This asserts that the value of `assert:` is
-  within the default precision (0.0001) of `isCloseTo:`."
+    "This asserts that the value of `assert:` is
+    within the default precision (0.0001) of `isCloseTo:`."
 
-  self assert: aNumber isCloseTo: anotherNumber
-      withPrecision: self defaultPrecision
-
+    self assert: aNumber isCloseTo: anotherNumber
+        withPrecision: self defaultPrecision
 assert: aNumber isCloseTo: anotherNumber withPrecision: aPrecision
-  "This asserts that the value of `assert:`
-  is within `withinPrecision:` of `isCloseTo:`."
+    "This asserts that the value of `assert:`
+    is within `withinPrecision:` of `isCloseTo:`."
 
-  self assert:
-      (self is: aNumber closeTo: anotherNumber withPrecision: aPrecision)
+    self assert:
+        (self is: aNumber closeTo: anotherNumber withPrecision: aPrecision)
 
 defaultPrecision
-  ^ 0.0001
+    ^ 0.0001
 
 is: aNumber closeTo: anotherNumber withPrecision: aPrecision
-  aNumber = 0 ifTrue: [ ^ anotherNumber abs < aPrecision ].
-  ^ (aNumber - anotherNumber) abs <
-     (aPrecision * (aNumber abs max: anotherNumber abs))
+    aNumber = 0 ifTrue: [ ^ anotherNumber abs < aPrecision ].
+    ^ (aNumber - anotherNumber) abs <
+      (aPrecision * (aNumber abs max: anotherNumber abs))
 ```
 
-To create unit tests for this class:
+To create unit tests for the `Pets` class:
 
 - Create a new class in the same class category as the class to be tested
-  that is a subclass of `TestCase`.
-  For example:
+  that is a subclass of `TestCase`. For example:
 
   ```smalltalk
   TestCase subclass: #PetsTests
@@ -4518,7 +4522,7 @@ To create unit tests for this class:
 
 - Add the message category "testing".
 
-- Add test instance methods in that category whose names begin with "test".
+- Add instance methods in the "testing" category whose names begin with "test".
   Each method can contain any number of assertions.
   For example:
 
