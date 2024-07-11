@@ -5165,12 +5165,6 @@ For example:
 fileEntry := 'demo.txt' asFileEntry.
 ```
 
-To delete a file:
-
-```smalltalk
-fileEntry delete.
-```
-
 To write to a text file, overwriting any previous contents:
 
 ```smalltalk
@@ -5222,6 +5216,12 @@ fileEntry readStreamDo: [ :fileStream |
 ]
 ```
 
+To delete a file:
+
+```smalltalk
+fileEntry delete.
+```
+
 TODO: Harvest more information about file system operations from this video.
 <a href="https://youtu.be/stMoWMlLVzk?si=_3rmJFPkZ2g4ZIIV"
 target="_blank">squeak smalltalk tutorial: file handling part 1</a>.
@@ -5230,7 +5230,7 @@ target="_blank">squeak smalltalk tutorial: file handling part 1</a>.
 
 Smalltalk can be used to build command-line, desktop, and web applications.
 After writing and testing the code in a standard Smalltalk image,
-you will want to create a stripped down version of the image
+it is recommended to create a stripped down version of the image
 that only contains what is necessary for running the application.
 
 All developer tools can be removed.
@@ -5248,7 +5248,7 @@ target="_blank">Make a standalone click-&-run Smalltalk application for macOS</a
 
 ### Running Headless
 
-To run Smalltalk programs that are command-line utilities, apps, and servers,
+To run Smalltalk programs that are command-line utilities, apps, or servers,
 use the Smalltalk VM that is bundled inside the macOS app
 `CuisVM.app` that is included in the Cuis-Smalltlk-Dev GitHub repository.
 This is actually a Squeak VM.
@@ -5261,7 +5261,7 @@ Click the proper file for your operating system and processor.
 For example, `squeak.cog.spur_macos64ARMv8.dmg`.
 Double-click the downloaded file to install it.
 
-Alternatively, to build a Squeak VM for macOS:
+To manually download and build a Squeak VM for macOS:
 
 1. Open a Terminal and cd to the directory where the VM will be created.
 1. Enter `git clone https://github.com/OpenSmalltalk/opensmalltalk-vm.git`
@@ -5279,7 +5279,7 @@ Alternatively, to build a Squeak VM for macOS:
    by entering `ln -s "./Squeak.app/Contents/MacOS/Squeak" squeak-vm`.
 
 To simplify running files containing Smalltalk code from the command line,
-create a script named "cuis" in a directory in your PATH
+create a script named "cuis" in a directory that is in your PATH
 containing the following:
 
 ```bash
@@ -5291,7 +5291,7 @@ if [ $# -ne 1 ]; then
   exit 1
 fi
 
-CUIS_DIR=$LANG_DIR/smalltalk/Cuis-Smalltalk-Dev
+CUIS_DIR=$SMALLTALK_DIR/Cuis-Smalltalk-Dev
 VM=$CUIS_DIR/CuisVM.app/Contents/MacOS/Squeak
 IMAGE=$CUIS_DIR/CuisImage/Cuis7.1-6452.image
 $VM -headless $IMAGE -s $1
@@ -5308,6 +5308,8 @@ Smalltalk quit
 ```
 
 To run this, enter `cuis demo.st`.
+
+TODO: This was working, but just hangs now. Why?
 
 To get help on options, cd to your `Cuis-Smalltalk-Dev` directory
 and enter the following:
@@ -5327,19 +5329,20 @@ target="_blank">Cuis-Smalltalk/Games</a>.
 
 To install them:
 
-- Clone this repository.
+- Clone the Games repository.
 - Launch Cuis Smalltalk.
-- Open a "File List" window.
+- Open a "File List".
 - Locate and select the file `Morphic-Games-Solitaire.pck.st`.
 - Click the "Install Package" button.
-- Open a Workspace window.
 
-To play them, open the World menu, select "New morph...Layouts",
+To play a game, open the World menu, select "New morph...Layouts",
 and then select FreeCell or Klondike.
-Alternatively, open a Workspace window,
+Alternatively, open a Workspace,
 enter something like `Freecell newGame`, and "Do it".
 
 ## JSON
+
+GRONK: Continue review here.
 
 The `JSON` package defines the classes `Json`, `JsonObject`, and `JsonError`.
 It also adds the method `jsonWriteOn:` to many classes including
