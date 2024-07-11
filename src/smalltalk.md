@@ -5635,4 +5635,3 @@ TODO: Add detail on this.
 - Is there a way to revert changes to more than one method at a time?
 - Where is the `new` method defined? Does that
   explicitly call `initialize` on the newly created object?
-- Perhaps you should refer to most windows as browers.
