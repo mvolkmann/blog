@@ -4068,8 +4068,8 @@ The following code demonstrates creating a `SortedCollection` of `Dog` objects
 and printing their names.
 
 ```smalltalk
-comet := VDog name: 'Comet' breed: 'Whippet'.
-oscar := VDog name: 'Oscar' breed: 'German Shorthaired Pointer'.
+comet := Dog name: 'Comet' breed: 'Whippet'.
+oscar := Dog name: 'Oscar' breed: 'German Shorthaired Pointer'.
 dogs := SortedCollection newFrom: {oscar. comet}.
 dogs do: [:dog | dog name print]
 ```
@@ -4257,8 +4257,8 @@ defined the `SortedCollection` section above,
 and printing their names.
 
 ```smalltalk
-comet := VDog name: 'Comet' breed: 'Whippet'.
-oscar := VDog name: 'Oscar' breed: 'German Shorthaired Pointer'.
+comet := Dog name: 'Comet' breed: 'Whippet'.
+oscar := Dog name: 'Oscar' breed: 'German Shorthaired Pointer'.
 dict := OrderedDictionary new.
 dict at: comet name put: comet.
 dict at: oscar name put: oscar.
@@ -5349,10 +5349,12 @@ It also adds the method `jsonWriteOn:` to many classes including
 `Array2D`, `Association`, `CharacterSequence`, `Collection`, `Dictionary`,
 `False`, `Integer`, `Number`, `Text`, `True`, and `UndefinedObject`.
 
-To install this, enter `Feature require: 'JSON'` in a Workspace and "Do it".
+To install the `JSON` package,
+enter `Feature require: 'JSON'` in a Workspace and "Do it".
 
-Custom classes should implement the instance method `jsonWriteOn:`
-to describe which of their instance variables should be included.
+Custom classes whose instances need to be serialized to JSON
+should implement the instance method `jsonWriteOn:`.
+This method describes the instance variables that should be included.
 Here's how it could be implemented for a `Dog` class
 with instance varaibles `id`, `name`, and `breed`.
 
@@ -5371,16 +5373,17 @@ Here's how we can get a JSON string for a `Dog` object.
 json := Json render: dog
 ```
 
-Custom classes should also implement a class method like `fromJson:`
+Custom classes that need to deserialize JSON to a new instance
+should implement the class method `fromJson:` (suggested name)
 that takes a stream of JSON data and returns a new object created from it.
-Here's an example that uses the `VDog` class method `id:name:breed:`
+Here's an example that uses the `Dog` class method `id:name:breed:`
 to create a new instance.
 
 ```smalltalk
 fromJson: aStream
     | jsonObject |
     jsonObject := Json readFrom: aStream.
-    ^VDog
+    ^Dog
         id: (jsonObject at: #id)
         name: (jsonObject at: #name)
         breed: (jsonObject at: #breed)
@@ -5389,7 +5392,7 @@ fromJson: aStream
 Here's how we can parse a JSON string to get a `Dog` object.
 
 ```smalltalk
-newDog := VDog fromJson: json readStream
+newDog := Dog fromJson: json readStream
 ```
 
 ## Editor Customization
@@ -5463,10 +5466,12 @@ Changes will likely have no effect until the image is saved and restarted.
 
 ## Web Development
 
-Enter `Feature require: 'WebClient'` and "Do it".
-This adds many classes in the
+One package for implementing a web server is
 <a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Dev/blob/master/Packages/Features/WebClient.pck.st"
-target="_blank">WebClient</a> - Core category including
+target="_blank">WebClient</a>.
+To install this, open a Workspace, enter `Feature require: 'WebClient'`,
+and "Do it".
+This adds many classes in the "WebClient - Core" category including
 `WebClient`, `WebRequest`, `WebResponse`, `WebServer`, and `WebSocket`.
 
 Also see the
@@ -5484,8 +5489,8 @@ For example:
 res := WebClient httpGet: 'https://pokeapi.co/api/v2/pokemon/pikachu'.
 ```
 
-The value of the variable `res` above is a `WebResponse` object.
-It has many instance variables including:
+The variable `res` above will refer to a `WebResponse` object.
+This has many instance variables including:
 
 - `code` - status code such as 200
 - `content` - response body
@@ -5498,26 +5503,33 @@ It has many instance variables including:
 
 ### Implementing an HTTP Server
 
-Creating a `WebServer` instance and sending it the `listenOn:` message
-starts a Smalltalk process called "WebServers's listener process".
+To start a web server, create a `WebServer` instance
+and send it the `listenOn:` message.
+this starts a Smalltalk process called "WebServers's listener process".
 To kill it, open a "Process Browser", select the process,
 and press cmd-t (Terminate).
 
 See the class `MyWebServer` in the `Volkmann` package.
+The `handleDog:` method defines CRUD endpoints.
+TODO: Provide more detail about defining endpoints.
 
 ## Foreign Function Interface (FFI)
 
 See <a href="https://itchyeyes.net/articles/cuis-smalltalk.html"
 target="_blank">Using the FFI</a>.
 
+TODO: Add detail on this.
+
 ## Annoyances
+
+- new windows open in random locations, not near where they were requested
 
 - inconsistent case in method names
 
   For example, the `CharacterSequence` class defines
   the methods `subStrings` and `substringsSeparatedBy:`.
 
-- inconsistent case menu items
+- inconsistent case in menu items
 
   For examples, see the Preferences and Windows submenus of the World menu.
 
@@ -5526,13 +5538,10 @@ target="_blank">Using the FFI</a>.
   For example, in Debug windows the first row of buttons starting with "browse"
   have labels that are all lowercase.
   But the second row of buttons starting with "Proceed"
-  have labels that are capitalized.
-
-- new windows open in random locations, not near where they were requested
+  have labels that are all capitalized.
 
 ## Unresolved Questions
 
-- Does Smalltalk have an FFI for calling code written in other languages?
 - How can you work with SQLite and Postgres databases from Smalltalk?
 - Where are method categories stored?
 - Build a Todo app using Morphic and practice stripping the image
