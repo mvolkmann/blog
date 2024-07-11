@@ -4967,21 +4967,19 @@ is to create a subclass of `PluggableButtonMorph` as follows:
 ### Button Demo in Cuis
 
 Add this code in a Workspace, select it all, and "Do it".
-It uses the class `ButtonMorph` which is a custom subclass of `PluggableButtonMorph`
-that is defined in the file `ButtonMorph.st` from Mariano Montone.
+It uses the class `VButtonMorph` defined above.
 
 ```smalltalk
-layout delete.
 label := LabelMorph new
   contents: '0';
   color: Color white.
-decBtn := ButtonMorph new
+decBtn := VButtonMorph new
   color: Color yellow;
   label: 'Decrement';
   labelColor: Color red;
   model: [ label contents: (label contents asNumber - 1) asString ];
   action: #value.
-incBtn := ButtonMorph new
+incBtn := VButtonMorph new
   color: Color yellow;
   label: 'Increment';
   labelColor: Color green;
@@ -5003,43 +5001,21 @@ decBtn morphWidth: (incBtn morphWidth + 20).
 incBtn morphWidth: (incBtn morphWidth + 20).
 ```
 
-### Button Demo in Squeak
-
-To create a button:
-
-In Squeak, the following code creates a label and two buttons.
-The label displays an integer.
-Clicking the buttons increments or decrements the integer in the label.
-
-```smalltalk
-label := StringMorph new
-    contents: '0';
-    color: Color yellow;
-    position: 120@100;
-    openInWorld.
-SimpleButtonMorph new
-    label: 'Increment';
-    position: 150@100;
-    target: [ label contents: (label contents asInteger + 1) asString ];
-    actionSelector: #value;
-    openInWorld.
-SimpleButtonMorph new
-    label: 'Decrement';
-    position: 0@100;
-    target: [ label contents: (label contents asInteger - 1) asString ];
-    actionSelector: #value;
-    openInWorld.
-```
+To delete this from the World,
+enter layoutDelete in the Workspaces and "Do it", or
+open the halo for the `LayoutMorph` and click the red button in the upper-left.
 
 ### Canvas Drawing
 
-To demo this, create a subclass of `Morph` and
+To draw on a canvas, create a subclass of `Morph` and
 define the instance method `drawOn:`.
 For example:
 
+GRONK: See your `CanvasDemo` class.
+Why doesn't `CanvasDemo new openInWorld.` work?
+
 ```smalltalk
 drawOn: aCanvas
-
     aCanvas strokeWidth: 20 color: Color red do: [
         aCanvas
             moveTo: -100 @ -100;
