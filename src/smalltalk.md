@@ -5007,21 +5007,43 @@ open the halo for the `LayoutMorph` and click the red button in the upper-left.
 
 ### Canvas Drawing
 
-To draw on a canvas, create a subclass of `Morph` and
-define the instance method `drawOn:`.
-For example:
+To draw on a canvas, create a subclass of `Morph` as follows:
 
-GRONK: See your `CanvasDemo` class.
-Why doesn't `CanvasDemo new openInWorld.` work?
+```smalltalk
+Morph subclass: #CanvasDemo
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Volkmann'
+```
+
+Then define the instance method `drawOn:`.
+For example, the following draws a red rectangle
+with a line from its upper-left to lower-right.
 
 ```smalltalk
 drawOn: aCanvas
-    aCanvas strokeWidth: 20 color: Color red do: [
-        aCanvas
-            moveTo: -100 @ -100;
-            lineTo: 400 @ 200
+	| height width x1 x2 y1 y2 |
+	height := 200.
+	width := 400.
+	x1 := 50.
+	y1 := 50.
+	x2 := x1 + width.
+	y2 := y1 + height.
+	aCanvas strokeWidth: 20 color: Color red do: [
+	aCanvas
+ 		moveTo: x1 @ y1;
+	 	lineTo: x2 @ y2;
+		lineTo: x2 @ y1;
+		lineTo: x1 @ y1;
+		lineTo: x1 @ y2;
+		lineTo: x2 @ y2
     ]
 ```
+
+TODO: Change this to use the extend of the morph instead of hard-coded height and width values.
+
+Open a Workspace, enter `CanvasDemo new openInWorld` and "Do it".
 
 ### SVG
 
