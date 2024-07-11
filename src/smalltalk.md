@@ -570,51 +570,9 @@ To enable full-screen mode, open the World menu
 and select Preferences ... Full screen on.
 To disable this, select Preferences ... Full screen on.
 
-TODO: Move the rest of the content in this section to later.
-
-Jumping ahead, you can add buttons to the World
-that simplify toggling full screen mode.
-The following class defines a class method `buttons` that displays buttons
-which make it easier to toggle between full screen and windowed modes.
-
-<img alt="Cuis full screen buttons" class="logo" style="width: 20%"
-  src="/blog/assets/cuis-full-screen-buttons.png?v={{pkg.version}}">
-
-```smalltalk
-Object subclass: #VFullScreenButtons
-    instanceVariableNames: ''
-    classVariableNames: ''
-    poolDictionaries: ''
-    category: 'Volkmann'
-
-fullScreen: aBoolean
-    Display fullScreenMode: aBoolean.
-    Display newDepth: Display depth
-
-fullScreenOff
-    self fullScreen: false
-
-fullScreenOn
-    self fullScreen: true
-
-initialize
-    "renders buttons for setting full screen on or off"
-
-    super initialize.
-    LayoutMorph newColumn
-        addMorph: (LabelMorph contents: 'Full Screen');
-        addMorph: (LayoutMorph newRow
-            addMorph: (
-                VButtonMorph label: 'On' block: [ self fullScreenOn ]
-            );
-            addMorph: (
-                VButtonMorph label: 'Off' block: [ self fullScreenOff ]
-            );
-            color: Color transparent
-        );
-        location: (MorphicTranslation withTranslation: 10@10);
-        openInWorld
-```
+This can be simplified by adding buttons to the World
+that turn full screen mode on or off.
+This is described in the Morphic subsection "Full Screen Buttons".
 
 ### Themes
 
@@ -5090,6 +5048,51 @@ selectors do: [ :selector |
         (SVGMainMorph perform: selector) openInWorld
     ]
 ].
+```
+
+### Full Screen Buttons
+
+You can add buttons to the World that simplify toggling full screen mode.
+The following class defines a class method `buttons` that displays buttons
+that activate and deactivate full screen mode.
+
+<img alt="Cuis full screen buttons" class="logo" style="width: 20%"
+  src="/blog/assets/cuis-full-screen-buttons.png?v={{pkg.version}}">
+
+```smalltalk
+Object subclass: #VFullScreenButtons
+    instanceVariableNames: ''
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'Volkmann'
+
+fullScreen: aBoolean
+    Display fullScreenMode: aBoolean.
+    Display newDepth: Display depth
+
+fullScreenOff
+    self fullScreen: false
+
+fullScreenOn
+    self fullScreen: true
+
+initialize
+    "renders buttons for setting full screen on or off"
+
+    super initialize.
+    LayoutMorph newColumn
+        addMorph: (LabelMorph contents: 'Full Screen');
+        addMorph: (LayoutMorph newRow
+            addMorph: (
+                VButtonMorph label: 'On' block: [ self fullScreenOn ]
+            );
+            addMorph: (
+                VButtonMorph label: 'Off' block: [ self fullScreenOff ]
+            );
+            color: Color transparent
+        );
+        location: (MorphicTranslation withTranslation: 10@10);
+        openInWorld
 ```
 
 ## Overriding doesNotUnderstand
