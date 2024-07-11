@@ -46,6 +46,13 @@ a virtual machine (VM) and an image.
 The VM is specific to the operating system being used.
 It reads and executes Smalltalk code found in an image file.
 
+Image files can be moved between
+operating systems on different CPU architectures.
+An image will display the same windows, pixel for pixel,
+across Windows, Linux, and MacOS, only differing based on screen size.
+There is no need to recompile code for different environments.
+This makes Smalltalk code highly portable!
+
 Smalltalk is not an interpreted language. Smalltalk code is compiled
 to optimized bytecode that is executed by a virtual machine.
 
