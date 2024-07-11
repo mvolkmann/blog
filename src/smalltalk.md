@@ -846,8 +846,6 @@ In static arrays the elements are separated by spaces.
 
 In dynamic arrays the expressions are separated by periods.
 
-TODO: What is a "compound literal"?
-
 ### Naming Conventions
 
 Names of classes, methods, and variables use camelCase.
@@ -859,23 +857,21 @@ but that is rarely used because camelCase is preferred.
 
 ### Assignment Operator
 
-Assignment operators (`:=`) can be rendered as a left pointing arrow
-for the purpose looking cool!
+Assignment operators (`:=`) can be rendered as a left pointing arrow and
+the caret character (`^`) used in methods to return a value
+can be render as an upward pointing arrow.
 
-To enable this, open the World menu and
+To enable these renderings, open the World menu and
 select Preferences...Show ST-80 Assignments.
-The next time code is modified, all the `:=` messages
-will be rendered by a left pointing arrow.
+The next time code is modified, all the `:=` and `^` operators
+will be rendered as arrows.
 
-TODO: Does this also enable returning the `^` return character as an up arrow?
-
-To disable this, open the World menu and
+To disable these renderings, open the World menu and
 select Preferences...Show ANSI Assignments.
 
-Typing an underscore is a shorthand way to type `:=`.
-Typing either will be rendered as a left pointing arrow.
-This does not change the characters that appear
-when code is saved in a "file out" or package.
+Typing an underscore is a shorthand way to type `:=` for variable assignments.
+Assignment underscores are changed to left pointing arrows
+regardless of whether "Show ST-80 Assigments" is selected.
 
 ## Creating Objects
 
