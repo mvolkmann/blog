@@ -620,7 +620,7 @@ To cause a menu to remain open so multiple selections can be made,
 click its push pin in the upper-right corner.
 If a menu is closed and re-opened, the push pin state will be reset.
 
-### Workspace Windows
+### Workspaces
 
 Workspace windows enable experimenting with code.
 They are somewhat like REPLs in other programming languages.
@@ -629,14 +629,11 @@ To open a Workspace, open a World menu and select "Open...Browser".
 
 Enter any number of expressions separated by periods.
 
-TODO: Replace this with a better screenshot.
-<img alt="Cuis Workspace window" style="width: 80%"
-  src="/blog/assets/cuis-workspace-window.png?v={{pkg.version}}">
-
 To prepare to execute expressions, select them or
 place the cursor at the end of a single-line expression.
 
 To execute the code for its side effects, press cmd-d (Do it).
+
 For example, enter the following and press cmd-d to set a variable:
 
 ```smalltalk
@@ -649,11 +646,17 @@ This sends the message `#printString` to the result object
 and outputs the return value.
 The output will be selected,
 so it can be removed by pressing the delete key.
+
 For example, enter the following and press cmd-p to get the output `6`:
 
 ```smalltalk
 2 * 3
 ```
+
+<img alt="Cuis Workspace window" style="width: 80%"
+  src="/blog/assets/cuis-workspace.png?v={{pkg.version}}">
+
+The `print` output from this Workspace is shown in the Transcript window below.
 
 You will use "Do it" and "Print it" often, so memorize their keyboard shortcuts.
 
@@ -679,7 +682,7 @@ and select "workspace with contents".
 
 If running code goes into an infinite loop, press cmd-period to break out of it.
 
-### Transcript Windows
+### Transcripts
 
 Transcript windows provide a read-only window display of output written to it.
 
@@ -726,11 +729,25 @@ To clear the contents of the Transcript window,
 right-click in it and select "Clear Transcript" (no keyboard shortcut).
 If there is more than one `Transcript` window, all of them will be cleared.
 
-TODO: Why does this window contain the word "Transcript" in its content?
+Transcript output can be captured in the file
+`Cuis-Smalltalk-Dev-UserFiles/Logs/transcript.txt`.
+To enable this, right-click in a Transcript and select "Start logging to File".
+To disable this, right-click in a Transcript and select "Stop logging to File".
+To clear the output that has been written to the file,
+right-click in a Transcript and select "Clear Transcript File".
 
-TODO: Change this image to one that shows ouptut from the examples given above.
+If Cuis Smalltalk was started from a terminal,
+Transcript output can also be written to stdout.
+To enable this, right-click in a Transcript and select "Start logging to Stdout".
+To disable this, right-click in a Transcript and select "Stop logging to Stdout".
+To clear the output that has been written to stdout,
+right-click in a Transcript and select "Clear Transcript Stdout".
+
+TODO: Why does this window contain the word "Transcript" in its content?
+See the Transcript class method clearInterval that you modified in the \*Volkmann method category.
+
 <img alt="Cuis Transcript window" style="width: 80%"
-  src="/blog/assets/cuis-transcript-window.png?v={{pkg.version}}">
+  src="/blog/assets/cuis-transcript.png?v={{pkg.version}}">
 
 ## Implementing in Debugger
 
