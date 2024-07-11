@@ -743,11 +743,16 @@ To disable this, right-click in a Transcript and select "Stop logging to Stdout"
 To clear the output that has been written to stdout,
 right-click in a Transcript and select "Clear Transcript Stdout".
 
-TODO: Why does this window contain the word "Transcript" in its content?
-See the Transcript class method clearInterval that you modified in the \*Volkmann method category.
-
 <img alt="Cuis Transcript window" style="width: 80%"
   src="/blog/assets/cuis-transcript.png?v={{pkg.version}}">
+
+Transcript windows have the title "Transcript".
+So it seems odd that after clearing a Transcript,
+the window also contains the word "Transcript".
+To change this, open the `Transcript` class in a System Browser,
+select the class method `clearInternal`,
+and change the line `entries at: 1 put: 'Transcript'.`
+to `entries at: 1 put: ''.`.
 
 ## Implementing in Debugger
 
@@ -5375,8 +5380,6 @@ Alternatively, open a Workspace,
 enter something like `Freecell newGame`, and "Do it".
 
 ## JSON
-
-GRONK: Continue review here.
 
 The `JSON` package defines the classes `Json`, `JsonObject`, and `JsonError`.
 It also adds the method `jsonWriteOn:` to many classes including
