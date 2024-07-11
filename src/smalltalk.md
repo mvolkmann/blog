@@ -5048,34 +5048,26 @@ Open a Workspace, enter `CanvasDemo new openInWorld` and "Do it".
 
 ### SVG
 
-GRONK: Continue review here.
-
-Starting around 32:30 in the YouTube video
-<a href="https://www.youtube.com/watch?v=_NB2_Q4bYEk"
-target="_blank">FAST Talks - Vector Graphics in Cuis Smalltalk</a>,
-Juan demonstrates the class `SVGElementMorph` from the package "SVG".
-
 To work with SVG images:
-
-- Open a terminal.
 
 - Clone the following Git repositories from Cuis Smalltalk:
 
   - <a href="https://github.com/Cuis-Smalltalk/Numerics.git" target="_blank">Numerics</a>
   - <a href="https://github.com/Cuis-Smalltalk/SVG.git" target="_blank">SVG</a>
 
-- Open a Workspace window and install the packages `LinearAlgebra` and `SVG.
+- Open a Workspace and install the packages `LinearAlgebra` and `SVG`.
 
   For each package, enter `Feature require: '{package-name}'` and "Do it".
 
 - Enter `SVGMainMorph exampleTiger openInWorld` and "Do it".
 
 There are many more example class methods in the `SVGMainMorph` class.
-To open all the examples,
+To open all the SVG examples,
 enter `SVGMainMorph openAllExamples SVGMainMorph` and "Do it".
-To delete all those morphs, enter `SVGMainMorph allInstancesDo: [ :obj | obj delete ]`.
+To delete all those morphs, enter
+`SVGMainMorph allInstancesDo: [ :obj | obj delete ]`.
 
-Another way to open all the examples using reflection is:
+Another way to open all the SVG examples is to use reflection as follows:
 
 ```smalltalk
 selectors := SVGMainMorph class allMethodsInCategory: #examples.
@@ -5089,12 +5081,12 @@ selectors do: [ :selector |
 ## Overriding doesNotUnderstand
 
 The `Object` class defines the `doesNotUnderstand` method
-to open a `MessageNotUnderstood` window.
+which opens a `MessageNotUnderstood` window.
 This can be overridden in specific classes to provide specialized processing
 of messages that do not have corresponding methods.
 
 Let's demonstrate this by defining an `Accessible` class that enables
-sending messages set and get any instance variable
+sending messages to set and get any instance variable
 in classes that inherit from this class.
 
 Here is the class definition:
@@ -5115,27 +5107,34 @@ doesNotUnderstand: aMessage
 
     | argCount getters index key setters |
 
+    "We are only processing messages with 0 or 1 arguments.
+    If there are 2 or more arguments, fall back to the default behavior."
     argCount := aMessage numArgs.
     argCount > 1 ifTrue: [ ^super doesNotUnderstand: aMessage ].
 
     key := aMessage keywords first.
 
+    "If the message is a getter, return the
+    corresponding instance variable value."
     getters := self class allInstVarNames.
     index := getters indexOf: key.
     index ifNotZero: [^self instVarAt: index].
 
+    "If the message is a setter, set the
+    corresponding instance variable value."
     setters := getters collect: [ :name | name, ':' ].
     index := setters indexOf: key.
     index ifNotZero: [^self instVarAt: index put: aMessage arguments first ].
 
+    "Otherwise fall back to the default behavior."
     ^super doesNotUnderstand: aMessage
 ```
 
-Here is a subclass of `Accessible:
+Here is an example subclass of `Accessible`:
 
 ```smalltalk
 Accessible subclass: #Person
-    instanceVariableNames: 'birthdate country firstName height lastName'
+    instanceVariableNames: 'birthdate firstName lastName'
     classVariableNames: ''
     poolDictionaries: ''
     category: 'Volkmann'
@@ -5146,7 +5145,7 @@ Here is an example of using this class:
 ```smalltalk
 p := Person new.
 p firstName: 'Mark'.
-p firstName print.
+p firstName print. "Mark"
 ```
 
 Getting and setting instance variables in this way is quite inefficient.
@@ -5157,14 +5156,9 @@ to generate accessor methods for each instance variable.
 
 ## File I/O
 
-In macOS, Cuis Smalltalk may prompt repeatedly for permission to access
-various file system folders.
-See this <a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Dev/issues/282"
-target="_blank">issue</a>.
-
 To create a file, send the `#asFileEntry` message
 to a string that contains the file name.
-The file is assumed to be in the '\*-UserFiles' directory.
+The file is assumed to be in the `\*-UserFiles` directory.
 For example:
 
 ```smalltalk
