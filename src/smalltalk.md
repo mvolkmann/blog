@@ -63,7 +63,7 @@ These support:
 - finding code in many ways
 - live environment where code changes are immediately reflected
   (no need to recompile or restart the environment)
-- debugging with ability to modify code and data, then continue or restart
+- debugging with the ability to modify code and data, then continue or restart
 - ability to modify the classes and methods that implement the
   development environment as easily as modifying your own classes and methods
 - TODO: add more?
@@ -498,7 +498,21 @@ On macOS:
 
 ## Pharo Smalltalk
 
-TODO: Add this detail.
+To install Pharo Smalltalk:
+
+1. Browse <a href="https://pharo.org" target="_blank">pharo.org</a>.
+1. Click the "Download" button.
+1. Click the button for your OS/CPU such as "MacOS arm64".
+1. In macOS:
+   1. Double-click the downloaded file to open an installer window.
+   1. Drag "PharoLauncher.app" icon to the Applications folder icon.
+   1. Close the installer window.
+   1. In the Finder, eject PharoLauncher.
+
+To start Pharo Smalltalk in macOS:
+
+1. Double-click PharoLauncher.app in the Applications directory.
+1. Click the Launch button (green triangle).
 
 ## Getting Started
 
