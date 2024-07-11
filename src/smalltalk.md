@@ -4695,8 +4695,9 @@ Then enter `MorphicGreet new.` and "Do it".
 
 ### Halo
 
-A morph halo is a set of circle buttons that surround a morph
-that each change the morph in some way or reveal information about it.
+A morph halo is a set of circle buttons,
+referred to as "handles", that surround a morph.
+Each handle changes the morph in some way or reveals information about it.
 
 To open the halo for a morph,
 cmd-click it in Cuis or option-click it in Squeak.
@@ -5010,7 +5011,7 @@ open the halo for the `LayoutMorph` and click the red button in the upper-left.
 To draw on a canvas, create a subclass of `Morph` as follows:
 
 ```smalltalk
-Morph subclass: #CanvasDemo
+PlacedMorph subclass: #CanvasDemo
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
@@ -5023,29 +5024,31 @@ with a line from its upper-left to lower-right.
 
 ```smalltalk
 drawOn: aCanvas
-	| height width x1 x2 y1 y2 |
-	height := 200.
-	width := 400.
-	x1 := 50.
-	y1 := 50.
-	x2 := x1 + width.
-	y2 := y1 + height.
-	aCanvas strokeWidth: 20 color: Color red do: [
-	aCanvas
- 		moveTo: x1 @ y1;
-	 	lineTo: x2 @ y2;
-		lineTo: x2 @ y1;
-		lineTo: x1 @ y1;
-		lineTo: x1 @ y2;
-		lineTo: x2 @ y2
+    | x1 x2 y1 y2 |
+    height := 200.
+    width := 400.
+    x1 := 0.
+    y1 := 0.
+    x2 := extent ifNil: [300] ifNotNil: [extent x].
+    y2 := extent ifNil: [150] ifNotNil: [extent y].
+    aCanvas strokeWidth: 10 color: Color red fillColor: Color green do: [
+        aCanvas
+        moveTo: x1 @ y1;
+        lineTo: x2 @ y2;
+        lineTo: x2 @ y1;
+        lineTo: x1 @ y1;
+        lineTo: x1 @ y2;
+        lineTo: x2 @ y2
     ]
 ```
 
-TODO: Change this to use the extend of the morph instead of hard-coded height and width values.
+TODO: See question sent to Cuis mailing list on 7/11/24 at 2:39 PM.
 
 Open a Workspace, enter `CanvasDemo new openInWorld` and "Do it".
 
 ### SVG
+
+GRONK: Continue review here.
 
 Starting around 32:30 in the YouTube video
 <a href="https://www.youtube.com/watch?v=_NB2_Q4bYEk"
@@ -5509,53 +5512,6 @@ See the class `MyWebServer` in the `Volkmann` package.
 
 See <a href="https://itchyeyes.net/articles/cuis-smalltalk.html"
 target="_blank">Using the FFI</a>.
-
-## Example Code
-
-```smalltalk
-Transcript show: 'Hello World!'
-
-Smalltalk allClasses size.
-
-label1 := LabelMorph new.
-label1 contents: 'red label'.
-label1 color: (Color red).
-
-label2 := LabelMorph new.
-label2 contents: 'yellow label'.
-label2 color: (Color yellow).
-
-layout1 := LayoutMorph new.
-"The :: syntax is used to set multiple properties on an object."
-layout1 beRow :: borderWidth: 5 :: borderColor: (Color white).
-layout1 separation: 30.
-layout1 axisEdgeWeight: 0.5. "0.0 for left, 0.5 for center, 1.0 for right"
-layout1 addMorph: label1.
-layout1 addMorph: label2.
-layout1 openInHand.
-
-image1 := ImageMorph new.
-layout1 addMorph: image1.
-
-label2 delete.
-
-layout1 beColumn.
-
-array1 := #(true 7 'Tami' (Color red)).
-array1 size. "4"
-"This prints each item in the array on a separate line in the Transcript window.
-The convention is to refer to each item with the parameter name `each`."
-array1 do: [:each | Transcript show: each :: newLine].
-
-"Operations on integers that have a non-integer result are reported as ratios (fractions)."
-#(89 97 94) mean. "result is 280/3"
-
-"This creates a range of integers from 1 to 5 and computes their sum."
-(1 to: 5) sum.
-
-myBlock := [:a :b | a + b].
-myBlock value: 2 value: 3.
-```
 
 ## Annoyances
 
