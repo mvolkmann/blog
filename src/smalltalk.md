@@ -881,6 +881,15 @@ By default, both initialize all attributes of the new object to `nil`.
 The difference between them is that `new` can be overridden
 to do something different, whereas `basicNew` cannot be overridden.
 
+The class `Object` is a subclass of `ProtoObject`.
+The class `ProtoObject` is a subclass of itself.
+`Object` is a superclass of nearly every other class.
+There are a small number of classes that are subclasses of `ProtoObject`
+and not subclasses of `Object`.
+These include `BreakingMethodWrapper`, `MessageCatcher`, and `ProtoCatcher`.
+
+TODO: Describe why the class `ProtoObject` exists.
+
 The methods `basicNew` and `new` are defined in the `Behavior` class.
 TODO: See question about this on the mailing list on 7/12/24 at 8:30 AM.
 
@@ -2657,7 +2666,7 @@ The `halt` method is defined in the `Object` class.
 It sends the `#signal` message to the `Halt` class
 which is a sublcass of `Exception` that is resumable.
 Then run code the invokes the methods.
-When `self halt` is reached, a Debugger will open.
+When `self halt` is evaluated, a Debugger will open.
 Locate the line in the stack trace ending in ">>halt".
 Click the line immediately after it to examine the
 method containing `self halt` and its variables.
