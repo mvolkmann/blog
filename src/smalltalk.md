@@ -881,6 +881,9 @@ By default, both initialize all attributes of the new object to `nil`.
 The difference between them is that `new` can be overridden
 to do something different, whereas `basicNew` cannot be overridden.
 
+The methods `basicNew` and `new` are defined in the `Behavior` class.
+TODO: See question about this on the mailing list on 7/12/24 at 8:30 AM.
+
 ## Variables
 
 Smalltalk supports five kinds of variables:
@@ -2649,8 +2652,15 @@ Execution will be stopped at the beginning of the selected code,
 waiting for you examine variable and decide whether/how to proceed.
 
 To set breakpoints in methods, add `self halt` message sends
-and selected locations in their code.
+in selected locations in their code.
+The `halt` method is defined in the `Object` class.
+It sends the `#signal` message to the `Halt` class
+which is a sublcass of `Exception` that is resumable.
 Then run code the invokes the methods.
+When `self halt` is reached, a Debugger will open.
+Locate the line in the stack trace ending in ">>halt".
+Click the line immediately after it to examine the
+method containing `self halt` and its variables.
 
 <img alt="Cuis Debug window" style="width: 100%"
   src="/blog/assets/cuis-debug-window.png?v={{pkg.version}}">
@@ -2672,6 +2682,9 @@ and press cmd-s (Accept).
 Click the "Where" button to highlight the next message to be sent in the code.
 
 The Debug window will close when the end of the selected code is reached.
+
+Using `self halt` in the middle of Morphic operations
+seems to produce unexpected results. TODO: Why?
 
 ### Change Sorter Windows
 
@@ -4480,7 +4493,10 @@ The supported assertion methods defined in the `TestCase` class include:
 
 - `assert:description:resumable`
 
-  TODO: What is a `resumableFailure`?
+  A resumable failure is one that opens a Debugging
+  and allows the code to procced.
+  TODO: Try this passing `true` for `resumable:` and see if a failing test
+  opens a Debugger and allows using the "Proceed" button.
 
 - `assert:doesNotChange`
 
