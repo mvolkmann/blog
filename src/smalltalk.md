@@ -2645,9 +2645,12 @@ repeat: anInteger
 To debug code, select one or more lines in a Workspace window
 and press cmd-shift-d (Debug it).
 A Debug window will appear.
+Execution will be stopped at the beginning of the selected code,
+waiting for you examine variable and decide whether/how to proceed.
 
-TODO: Describe other ways to open a Debug window.
-TODO: Is adding `self halt` to a method and then running it another way?
+To set breakpoints in methods, add `self halt` message sends
+and selected locations in their code.
+Then run code the invokes the methods.
 
 <img alt="Cuis Debug window" style="width: 100%"
   src="/blog/assets/cuis-debug-window.png?v={{pkg.version}}">
