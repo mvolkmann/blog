@@ -2266,8 +2266,8 @@ System Browsers contain four rows.
   | --------------- | ------------------------------------------------------------------- |
   | class category  | # of classes in the category, total # of instance and class methods |
   | class           | # of instance and class methods defined in the class                |
-  | method category | # of methods (TODO: Why labelled as "messages"?)                    |
-  | method          | # of sends, implementors, and senders                               |
+  | method category | # of methods                                                        |
+  | method          | # of message sends, implementors, and senders                       |
 
 - The third row contains a series of buttons that can be clicked to
   open other windows that show information related to the selected item.
