@@ -2770,13 +2770,14 @@ To stop it, right-click the process, select it and press cmd-t (terminate).
 
 ### Emergency Evaluator
 
-The Emergency Evaluator can be useful to save work
-when the current session becomes mostly unusable.
+The Emergency Evaluator appears when there is
+an error for which a Debugger cannot be opened.
+In this case the environment can become unusable.
+Enter the "revert" command to revert the last code modification.
+Enter the "exit" command to exit this window.
 
 <img alt="Cuis Emergency Evaluator" style="width: 30%"
   src="/blog/assets/cuis-emergency-evaluator.png?v={{pkg.version}}">
-
-TODO: Explain when this is useful.
 
 ## Saving Code
 
