@@ -22,7 +22,7 @@ layout: topic-layout.njk
 without tedious environment configuration or management."
 
 The primary appeal of using Docker is that "Dockerized" apps can run anywhere.
-This includes Windows, Mac, and Linux.
+This includes Windows, macOS, and Linux.
 Each platform must install Docker.
 Applications run in a virtual Linux environment.
 Many Linux variants are supported.
@@ -597,9 +597,7 @@ TODO: Add this detail.
 
 ### WORKPATH
 
-## Base Images
-
-TODO: Add this detail.
+## Images
 
 ### Creating Images
 
@@ -634,7 +632,7 @@ are much faster because locally installed base images are reused.
 Examples of commonly used base images include
 bash and node. ADD MORE!
 
-### Listing Existing Images
+### Listing Images
 
 To get a list of all exising images:
 
@@ -683,13 +681,7 @@ deleting one by its id, requires using the -f option.
 Deleting a tag only deletes the corresponding image
 if it is the only tag for that image. ???
 
-Here is a bash script that deletes all images:
-
-```bash
-#!/bin/bash
-# Removes all images.
-docker rmi -f $(docker images -q)
-```
+To delete all images, enter `docker rmi -f $(docker images -q)`
 
 ### Dangling Images
 
@@ -710,14 +702,15 @@ of all the dangling images.
 Second, "docker rmi" is used to delete those images.
 Why isn't there a build option to do this automatically?
 
-### Docker Containers
+## Containers
 
 A container is a running instance of an image.
 
-#### Creating/Running Containers
+### Creating/Running Containers
 
 To list the current running containers,
-enter: `docker ps`.
+enter: `docker ps`
+
 To list all containers including those that are stopped,
 enter: `docker ps -a`.
 
@@ -725,17 +718,10 @@ To see details about an existing container,
 enter: `docker inspect {container-id}`.
 
 To restart a container whose image is currently running,
+enter `docker restart {container-id}`
 
-```bash
-docker restart {container-id}
-```
-
-To rerun a container whose image has exited:
-
-```bash
-docker start -a {container-id}
-```
-
+To rerun a container whose image has exited,
+enter `docker start -a {container-id}`.
 This works even if the images used by the container have been deleted
 because the images have already been copied into the container.
 
@@ -756,13 +742,8 @@ open a shell inside it where commands can be entered.
 docker exec -it {container-id} /bin/sh
 ```
 
-Here is a bash script that deletes all containers:
-
-```bash
-#!/bin/bash
-# Removes all containers, including running ones.
-docker rm -f $(docker ps -qa)
-```
+To delete all containers including those that are running,
+enter `docker rm -f $(docker ps -qa)`
 
 ## Volumes
 
