@@ -2250,9 +2250,12 @@ System Browsers contain four rows.
   If no message category is selected, or if "-- all --" is selected,
   all the methods in all categories are listed.
 
-  The items in these panes are not sorted alphabetically by default.
-  To sort them, hover over a pane and press cmd-shift-a (alphabetize).
-  TODO: The menu shows the shortcut as just "a". Is that a bug?
+  The names in the class category and method category panes
+  are not sorted alphabetically by default.
+  To sort class categories, hover over that pane and press cmd-shift-a (alphabetize).
+  To sort method categories, hover over that pane and press cmd-a (alphabetize).
+  The reason for the shortcut key difference is that in the class category pane,
+  cmd-a is used for "add item...".
 
   To scroll any list to the first item that begins with a given letter,
   over over the lsit and type the letter.
