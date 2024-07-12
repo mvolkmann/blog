@@ -441,9 +441,11 @@ The objectives of Cuis Smalltalk are to:
 
 More classes can be added by installing packages.
 
-Some advantages that Cuis has over Squeak and Pharo are that it has
-built-in support for TrueType fonts and high quality vector graphics.
+Some advantages that Cuis has over Squeak and Pharo are that
+it has built-in support for Unicode and TrueType fonts.
 Those can be added to Squeak and Pharo through foreign libraries.
+Cuis also adds support for high quality vector graphics and
+rendering Scalable Vector Graphics (SVG).
 
 The Cuis mascot is southern mountain cavy which is a "tailless rodent with
 short, speckled, greyish-yellow fur, fading to pale grey on the underparts."
@@ -894,13 +896,13 @@ and lowercase for all other names.
 The only special character allowed is the underscore character,
 but that is rarely used because camelCase is preferred.
 
-### Assignment Operator
+### Special Characters
 
-Assignment operators (`:=`) can be rendered as a left pointing arrow and
-the caret character (`^`) used in methods to return a value
-can be render as an upward pointing arrow.
+The assignment operator (`:=`) can be rendered as a left pointing arrow.
+The return operator (`^`) which is used in methods to return a value
+can be rendered as an upward pointing arrow.
 
-To enable these renderings, open the World menu and
+To enable those renderings, open the World menu and
 select Preferences...Show ST-80 Assignments.
 The next time code is modified, all the `:=` and `^` operators
 will be rendered as arrows.
@@ -5095,7 +5097,7 @@ To draw on a canvas, create a subclass of `Morph` as follows:
 
 ```smalltalk
 PlacedMorph subclass: #CanvasDemo
-	instanceVariableNames: ''
+	instanceVariableNames: 'extent'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Volkmann'
@@ -5107,27 +5109,39 @@ with a line from its upper-left to lower-right.
 
 ```smalltalk
 drawOn: aCanvas
-    | x1 x2 y1 y2 |
-    height := 200.
-    width := 400.
-    x1 := 0.
-    y1 := 0.
-    x2 := extent ifNil: [300] ifNotNil: [extent x].
-    y2 := extent ifNil: [150] ifNotNil: [extent y].
-    aCanvas strokeWidth: 10 color: Color red fillColor: Color green do: [
-        aCanvas
-        moveTo: x1 @ y1;
-        lineTo: x2 @ y2;
-        lineTo: x2 @ y1;
-        lineTo: x1 @ y1;
-        lineTo: x1 @ y2;
-        lineTo: x2 @ y2
-    ]
+	| x1 x2 y1 y2 |
+	x1 := 0.
+	y1 := 0.
+	x2 := extent x.
+	y2 := extent y.
+	aCanvas strokeWidth: 10 color: Color red fillColor: Color green do: [
+		aCanvas
+	 		moveTo: x1 @ y1;
+		 	lineTo: x2 @ y2;
+			lineTo: x2 @ y1;
+			lineTo: x1 @ y1;
+			lineTo: x1 @ y2;
+			lineTo: x2 @ y2
+	]! !
+
+extent
+	^ extent
+
+extent: aPoint
+	extent := aPoint
+
+initialize
+	super initialize.
+	extent := 100 @ 100
 ```
 
-TODO: See question sent to Cuis mailing list on 7/11/24 at 2:39 PM.
+To try this:
 
-Open a Workspace, enter `CanvasDemo new openInWorld` and "Do it".
+- Open a Workspace.
+- Enter `(CanvasDemo new extent: 300@400) openInHand.`
+- Press cmd-d to "Do it".
+- Move the cursor to where the morph should be dropped.
+- Click to drop it.
 
 ### SVG
 
