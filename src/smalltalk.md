@@ -3005,6 +3005,7 @@ To verify that all this worked:
   are now present.
 
 There is no provided way to uninstall a package.
+TODO: Is this really true?
 The only way to remove it from the image is to start with a fresh image
 and only install the desired packages.
 
