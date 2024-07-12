@@ -40,16 +40,18 @@ At a high level, the steps involved in using Docker include:
 
 The steps to install Docker in Windows are:
 
-- Browse <a href="https://docs.docker.com/docker-for-windows/" target="_blank">https://docs.docker.com/docker-for-windows/</a>.
-- Scroll to and click "Get Docker for Windows (stable)" to download a <code>.msi</code> file.
+- Browse <a href="https://docs.docker.com/docker-for-windows/"
+  target="_blank">https://docs.docker.com/docker-for-windows/</a>.
+- Scroll to and click "Get Docker for Windows (stable)" to download a `.msi` file.
 - Double-click the downloaded .msi file and follow the instructions.
 
 The steps to install Docker in macOS are:
 
-- Browse <a href="https://docs.docker.com/docker-for-mac/" target="_blank">https://docs.docker.com/docker-for-mac/</a>.
-- Scroll to and click "Get Docker for Mac (stable)" to download a .dmg file.
-- Double-click the download <code>.dmg</code> file.
-- In the install dialog, drag Docker.app to the Applications folder.
+- Browse <a href="https://docs.docker.com/docker-for-mac/"
+  target="_blank">https://docs.docker.com/docker-for-mac/</a>.
+- Scroll to and click "Get Docker for Mac (stable)" to download a `.dmg` file.
+- Double-click the download `.dmg` file.
+- In the install dialog, drag `Docker.app` to the `Applications` folder.
 
 It is also possible to install Docker in macOS using Homebrew,
 but it requires more steps.
@@ -65,47 +67,45 @@ target="_blank">https://docs.docker.com/engine/installation/linux/</a>.
 
 The easiest way to verify that the installation was successful
 is to download and run the "hello-world" image.
-To do this enter: <code>docker run hello-world</code>.
-This will download the image, and output
-information related to the download,
-the line "<code>Hello from Docker!</code>",
+To do this enter: `docker run hello-world`.
+This will download the image, and output information related to the download,
+the line "`Hello from Docker!`",
 and information to help you get started using Docker.
 It also results in creation of an image and a container.
 
-To see the new image enter: <code>docker images</code>
+To see the new image, enter `docker images`.
 
-To see the new container enter: <code>docker ps -a</code>
+To see the new container, enter: `docker ps -a`.
 
-To run the container again enter: <code>docker start -a {container-id-prefix}</code>
+To run the container again, enter `docker start -a {container-id-prefix}`.
 
-To get help on a docker command enter: <code>docker help {command}</code>.
-For example, <code>docker help start</code>
-briefly describes the -a option.
+To get help on a docker command, enter: `docker help {command}`.
+For example, `docker help start` briefly describes the `-a` option.
 It is used to attach to an existing container.
 
 ## Docker Images
 
-A Docker image is a filesystem and
-a set of parameters to use at runtime.
+A Docker image is a filesystem and a set of parameters to use at runtime.
 It doesn't have state and never changes.
 Images can run a set of commands and exit,
 but more commonly they continue running until stopped.
-Examples include web servers, REST servers, and database daemons.
+Examples include web servers, API servers, and database daemons.
 An image runs inside a container.
 
-Images are described by and built from files
-that, by convention, are named "<code>Dockerfile</code>".
-When building an image, the <code>-f</code> option
-of the <code>docker build</code> commmand
+Images are described by and built from files that,
+by convention, are named "`Dockerfile`".
+When building an image, the `-f` option of the `docker build` commmand
 can be specified to use a file with a different name.
 
 ### Official Base Images
 
-Some images are labelled as "official".
-For details on what this means, see
-<a href="https://github.com/docker-library/official-images" target="_blank">https://github.com/docker-library/official-images</a>.
-For a list of the official images, sorted on the number of times they have been "pulled", see
-<a href="https://hub.docker.com/explore/" target="_blank">https://hub.docker.com/explore/</a>.
+Some images are labelled as "official". For details on what this means, see
+<a href="https://github.com/docker-library/official-images"
+target="_blank">https://github.com/docker-library/official-images</a>.
+For a list of the official images, sorted on
+the number of times they have been "pulled", see
+<a href="https://hub.docker.com/explore/"
+target="_blank">https://hub.docker.com/explore/</a>.
 
 Official programming language images include
 clojure, elixir, erlang, haskell, ibmjava, julia,
@@ -128,11 +128,12 @@ redmine, and wordpress.
 
 ## Examples
 
-Before diving into details about Docker, let's walk through some simple examples.
+Before diving into details about Docker,
+let's walk through some simple examples.
 
 We should only have one image now.
 That is the one created while verifying the installation.
-Verify this by running <code>docker images</code>.
+Verify this by running `docker images`.
 
 ### Bash Example
 
@@ -144,37 +145,37 @@ FROM bash
 CMD echo Hello, World!</pre>
 ```
 
-To build this image enter: <code>docker build -t my-demo .</code><br>
-Because we didn't already have the <code>bash</code> base image,
-that was downloaded and built.
+To build this image enter: `docker build -t my-demo .`<br>
+Because we don't already have the `bash` base image,
+that is downloaded and built.
 
-To see all the current images enter: <code>docker images</code><br>
-We should have three images now. They are
-<code>hello-world</code>, <code>bash,</code> and <code>my-demo</code>.
+To see all the current images enter: `docker images`<br>
+We should have three images now. They are named
+`hello-world`, `bash,` and `my-demo`.
 
-To run the <code>my-demo</code> image enter: <code>docker run my-demo</code><br>
+To run the `my-demo` image enter: `docker run my-demo`<br>
 This runs the image in a newly created container.
 The container still exists.
 
-To see this enter: <code>docker ps -a</code>
+To see this enter: `docker ps -a`
 
-To run this container again enter: <code>docker run -a {container-id}</code>
+To run this container again enter: `docker run -a {container-id}`
 
-To delete this container enter: <code>docker rm {container-id-prefix}</code>
+To delete this container enter: `docker rm {container-id-prefix}`
 
-To delete the <code>my-demo</code> image enter: <code>docker rmi my-demo</code><br>
-Note that the <code>bash</code> image on which it depended was not deleted,
-but it can be deleted with <code>docker rmi bash</code>.
+To delete the `my-demo` image enter: `docker rmi my-demo`<br>
+Note that the `bash` image on which it depended was not deleted,
+but it can be deleted with `docker rmi bash`.
 It is common to create multiple images that use the same base image
 and retain these rather than delete them.
 
 ### Node Example
 
-Now let's create an image that outputs "<code>Hello, World!</code>" using Node.js.
+Now let's create an image that outputs "`Hello, World!`" using Node.js.
 It uses the "chalk" npm package to output colored text.
 We are doing this to illustrate using npm packages from a Docker image.
 
-Here is the <code>package.json</code> file that describes dependencies.
+Here is the `package.json` file that describes dependencies.
 It can also specify a "script" for running the application.
 
 ```json
@@ -193,7 +194,7 @@ It can also specify a "script" for running the application.
 }
 ```
 
-Here is the JavaScript code from the file <code>index.js</code>.
+Here is the JavaScript code from the file `index.js`.
 
 ```js
 const chalk = require('chalk');
@@ -208,7 +209,7 @@ console.log('Hello, ' + chalk.red.bold(name) + '!');
 
 To run this Node application outside of Docker
 with no excess output from npm,
-enter: <code>npm -s start</code>
+enter: `npm -s start`
 Note how "World" is output in red.
 
 Here is the Dockerfile that describes the image to be built.
@@ -222,51 +223,51 @@ ENV name ""
 CMD ["npm", "--silent", "start"]
 ```
 
-Base images with an "<code>onbuild"</code> tag
-use <code>ONBUILD</code> instructions to specify
+Base images with an "`onbuild"` tag
+use `ONBUILD` instructions to specify
 instructions to be executed when the using image is executed.
 These instructions are executed as if were inserted
 immediately after the FROM instruction.
 In the case of node onbuild images, the following
 happens automatically when the image is executed:
 
-- Assume the current directory contains a <code>package.json</code> file.
-- Run <code>npm install</code> which installs the dependencies
-  described in <code>package.json</code>.
-- Assume <code>package.json</code> defines
-  a <code>start</code> script.
-- Run <code>npm start</code>.
+- Assume the current directory contains a `package.json` file.
+- Run `npm install` which installs the dependencies
+  described in `package.json`.
+- Assume `package.json` defines
+  a `start` script.
+- Run `npm start`.
 
 The CMD instruction in the Dockerfile above overrides the one provided
-by the <code>node onbuild</code> image to use the <code>--silent</code> option.
+by the `node onbuild` image to use the `--silent` option.
 This suppresses informational messages from npm.
 
-To build the Docker image enter: <code>docker build -t node-demo .</code><br>
+To build the Docker image enter: `docker build -t node-demo .`<br>
 This will take several minutes because it needs to
-download and build the <code>node</code> base image.
+download and build the `node` base image.
 Once the base image has been built, rebuilding this image,
 or other images that use the same base image,
 will build much faster.
 
 To run this image, but not retain the container in which it runs,
-enter: <code>docker run -t --rm node-demo</code><br>
-The <code>-t</code> option tells Docker to run the image in a pseudo-TTY
+enter: `docker run -t --rm node-demo`<br>
+The `-t` option tells Docker to run the image in a pseudo-TTY
 which is able to process the ANSI escape codes
-output by the <code>chalk</code> package to produce colored text.
-The <code>--rm</code> option tells Docker not to retain
+output by the `chalk` package to produce colored text.
+The `--rm` option tells Docker not to retain
 the container it creates after the image exits.
 Note that it is preceded by two dashes, not one.
 
-To override the value of the <code>name</code> environment variable
-specified in <code>Dockerfile</code> and <code>index.js</code>,
-add "<code>-e name={value}</code>" to the <code>docker run</code> command.
-For example, <code>docker run -t --rm -e name=Mark node-demo</code>
+To override the value of the `name` environment variable
+specified in `Dockerfile` and `index.js`,
+add "`-e name={value}`" to the `docker run` command.
+For example, `docker run -t --rm -e name=Mark node-demo`
 
 ### Volume Example
 
 Now let's create an image that writes and reads files on the host.
 
-Here is the <code>package.json</code> file.
+Here is the `package.json` file.
 This example has no dependencies.
 
 ```json
@@ -282,7 +283,7 @@ This example has no dependencies.
 }
 ```
 
-Here is the JavaScript code from the file <code>index.js</code>.
+Here is the JavaScript code from the file `index.js`.
 
 ```js
 const fs = require('fs');
@@ -308,25 +309,22 @@ FROM node:7.4-onbuild
 CMD ["npm", "start"]
 ```
 
-To build the Docker image enter: <code>docker build -t volume-demo .</code><br>
-
+To build the Docker image enter: `docker build -t volume-demo .`
 To run this image,
-enter: <code>docker run --rm -v $HOME/data:/data volume-demo</code><br>
-The <code>-v</code> option tells Docker to
-map the container directory <code>/data</code>
-to the host directory <code>data</code>
-under your home directory.
+enter: `docker run --rm -v $HOME/data:/data volume-demo`<br>
+The `-v` option tells Docker to map the container directory `/data`
+to the host directory `data` under your home directory.
 
-After running this, a file named <code>test.txt</code> will exist
-in <code>$HOME/data</code> directory and it will contain
-"<code>Hello, World!</code>".
+After running this, a file named `test.txt` will exist
+in `$HOME/data` directory and it will contain
+"`Hello, World!`".
 
 ### Express Example
 
 Now let's create an image that runs an Express HTTP server using Node.js.
 
-Here is the <code>package.json</code> file that describes dependencies.
-It also specifies a <code>script</code> for running the application.
+Here is the `package.json` file that describes dependencies.
+It also specifies a `script` for running the application.
 
 ```json
 {
@@ -344,7 +342,7 @@ It also specifies a <code>script</code> for running the application.
 }
 ```
 
-Here is the JavaScript code from the file <code>index.js</code>.
+Here is the JavaScript code from the file `index.js`.
 
 ```js
 const express = require('express');
@@ -361,49 +359,46 @@ app.listen(port, () => console.log('listening on port', port));
 ```
 
 To run this Node application outside of Docker
-enter: <code>npm start</code><br>
-and browse <code>localhost:3000/hello?name={your-first-name}</code>.
+enter: `npm start`<br>
+and browse `localhost:3000/hello?name={your-first-name}`.
 
-Here is the <code>Dockerfile</code> that describes the image to be built.
+Here is the `Dockerfile` that describes the image to be built.
 
 ```docker
 FROM node:7.4-onbuild
 EXPOSE 3000
 ```
 
-To build this image enter: <code>docker build -t express-demo .</code>
+To build this image enter: `docker build -t express-demo .`
 
 When a container exposes ports using the EXPOSE instruction,
 these ports are only available to processes running in the container.
 To use them outside of the container (in the host),
 they must be mapped to a host port.
-This is specified with the <code>--publish</code> or <code>-p</code> option.
-For example, <code>-p 3001:3000</code> specifies that port 3000
+This is specified with the `--publish` or `-p` option.
+For example, `-p 3001:3000` specifies that port 3000
 inside the container is mapped to the host port 3001.
 The same port number can be used for both if
 the container port isn't already in use on the host.
 
 To run this image in a container enter:
-<code>docker run -d -p 3000:3000 express-demo</code><br>
-The <code>-d</code> option causes the container
+`docker run -d -p 3000:3000 express-demo`<br>
+The `-d` option causes the container
 to run in the background (detached mode).
-Do not include the <code>--rm</code> option when using this.
+Do not include the `--rm` option when using this.
 
 To output log messages from container enter:
-<code>docker logs {container-id-prefix}</code><br>
+`docker logs {container-id-prefix}`<br>
 This is a great way to diagnose issues.
 
 When a container is not running in detached mode, it cannot be
 stopped by pressing ctrl-c in the terminal where it is running.
 To stop a running container enter:
-<code>docker stop {container-id-prefix}</code>
+`docker stop {container-id-prefix}`
 
-The docker info command outputs an overview of
-the current Docker environment including the
-operating system (ex. Ubuntu),
-provider (ex. amazonec2),
-number of images, number of containers,
-and how many are running and stopped.
+The docker info command outputs an overview of the current Docker environment
+including the operating system (ex. Ubuntu), provider (ex. amazonec2),
+number of images, number of containers, and how many are running and stopped.
 
 ## Amazon EC2
 
@@ -427,11 +422,13 @@ Skip the rest of this section if you already have an EC2 account.
 - Press the "Create account" button.
 - Enter contact information and check the "AWS Customer Agreement" checkbox.
 - Press the "Create Account and Continue" button.
-- Enter credit card information. You will only be charged if your usage exceeds certain limits after the trial period ends.
+- Enter credit card information. You will only be charged if
+  your usage exceeds certain limits after the trial period ends.
 - Press the "Continue" button.
 - Enter your telephone number.
 - Press the "Call Me Now" button.
-- You will receive a phone call. On your phone, enter the PIN number that is displayed in the browser.
+- You will receive a phone call. On your phone,
+  enter the PIN number that is displayed in the browser.
 - Press the "Continue to select your Support Plan" button.
 - Select the "Basic" radio button.
 - Press the "Continue" button.
@@ -471,56 +468,52 @@ This section assumes you already have an AWS account.
     {instance-name}
   ```
 
-  The values for <code>access-key</code> and <code>secret-key</code>
-  can be obtained from the <code>rootkey.csv</code> file
+  The values for `access-key` and `secret-key`
+  can be obtained from the `rootkey.csv` file
   that was downloaded in the previous section.
   The value for region will be similar to "us-west-2".</li>
   This command populates the
-  <code>~/.docker/machine/machines/{instance-name}</code> directory
-  with several <code>.pem</code> files and more.
+  `~/.docker/machine/machines/{instance-name}` directory
+  with several `.pem` files and more.
   It will take several minutes to complete.
 
-- Enter: <code>eval $(docker-machine env {instance-name})</code><br>
+- Enter: `eval $(docker-machine env {instance-name})`<br>
   This sets four Docker-related environment variables that cause
-  subsequent "<code>docker</code>" commands to run on the AWS instance
+  subsequent "`docker`" commands to run on the AWS instance
   instead of locally.
-  The environment variables are <code>DOCKER_CERT_PATH</code>,
-  <code>DOCKER_HOST</code>, <code>DOCKER_MACHINE_NAME</code>,
-  and <code>DOCKER_TLS_VERIFY</code>.
+  The environment variables are `DOCKER_CERT_PATH`,
+  `DOCKER_HOST`, `DOCKER_MACHINE_NAME`,
+  and `DOCKER_TLS_VERIFY`.
   Unset these environment variables later
-  to return to using Docker locally.</li>
+  to return to using Docker locally.
 
 To list the current Docker Machine instances enter:
-<code>docker-machine ls</code>
+`docker-machine ls`
 
 To get the IP address of an instance enter:
-<code>docker-machine ip {instance-name}</code>
+`docker-machine ip {instance-name}`
 
 Use the normal docker commands to build images
 and run them in containers within the AWS instance.
-For example, to build and run our <code>express-demo</code>,
+For example, to build and run our `express-demo`,
 cd to its directory and enter these commands:<br>
-<code>docker build -t express-demo .</code><br>
-<code>docker run -d -p 3000:3000 express-demo</code><br>
+`docker build -t express-demo .`<br>
+`docker run -d -p 3000:3000 express-demo`<br>
 
 To test this app running in the AWS instance,
-browse <code>http://{instance-ip-address}:3000/hello</code>.
+browse `http://{instance-ip-address}:3000/hello`.
 TODO: Why doesn't the server respond?
 You should also be able to test this by running<br>
-<code>docker run -d -p 8000:80 --name webserver kitematic/hello-world-nginx</code><br>
+`docker run -d -p 8000:80 --name webserver kitematic/hello-world-nginx`<br>
 and browsing {ip-address}:8000, but that doesn't work either!
 
-To stop a running instance enter
-<code>docker-machine stop {instance-name}</code>
+To stop a running instance, enter `docker-machine stop {instance-name}`
 
-To restart a running instance enter
-<code>docker-machine restart {instance-name}</code>
+To restart a running instance, enter `docker-machine restart {instance-name}`
 
-To remove a stopped instance enter
-<code>docker-machine remove {instance-name}</code>
+To remove a stopped instance, enter `docker-machine remove {instance-name}`
 
-To ssh into an instance enter:
-<code>docker-machine ssh {instance-name}</code>
+To ssh into an instance, enter `docker-machine ssh {instance-name}`
 
 TODO: Is there a good reason to create an IAM user and install the aws CLI?
 
@@ -533,7 +526,7 @@ Instruction names are not case sensitive, but
 the convention is for them to be all uppercase.
 To spread arguments over several lines,
 end all but the last line with a backslash like in Bash.
-Comments are lines that begin with <code>#</code>.
+Comments are lines that begin with `#`.
 Comments cannot appear at the ends of instructions.
 
 ## Dockerfile Instructions
@@ -562,12 +555,11 @@ ENV animal giraffe
 ```
 
 To refer to this enviroment variable in another instruction,
-use <code>${ANIMAL}</code> or <code>$ANIMAL</code>.
+use `${ANIMAL}` or `$ANIMAL`.
 
 Instructions that support references to environment variables include:
-<code>ADD</code>, <code>COPY</code>, <code>ENV</code>, <code>EXPOSE</code>,
-<code>LABEL</code>, <code>ONBUILD</code>, <code>STOPSIGNAL</code>,
-<code>USER</code>, <code>VOLUME</code>, and <code>WORKDIR</code>.
+`ADD`, `COPY`, `ENV`, `EXPOSE`, `LABEL`, `ONBUILD`, `STOPSIGNAL`,
+`USER`, `VOLUME`, and `WORKDIR`.
 
 ### MAINTAINER
 
@@ -596,7 +588,8 @@ to specify files that should not be exposed to the image.
 
 ### URL
 
-This specifies a Github repository whose files will be in the context of the image.
+This specifies a Github repository
+whose files will be in the context of the image.
 
 ### COPY
 
@@ -619,8 +612,9 @@ docker build [-t {tag}] {Dockerfile-path}</pre>
 While the -t option can be omitted, it is preferable include it.
 Otherwise the image can only be identified by
 the id that is automatically assigned.
-A tag consists of a name and an an optional version separated from the name by a colon.
-For example, <code>my-project:1.2</code>
+A tag consists of a name and
+an optional version separated from the name by a colon.
+For example, `my-project:1.2`
 
 Typically the "docker build" command is run
 from the directory that contains Dockerfile.
@@ -645,7 +639,7 @@ bash and node. ADD MORE!
 To get a list of all exising images:
 
 ```bash
-docker images</pre>
+docker images
 ```
 
 ### Tagging Images
@@ -657,7 +651,7 @@ Any number of tags can be added to the same image.
 To add a tag to an image:
 
 ```bash
-docker tag {id-or-existing-name} {new-name}</pre>
+docker tag {id-or-existing-name} {new-name}
 ```
 
 ### Deleting Images
@@ -665,11 +659,13 @@ docker tag {id-or-existing-name} {new-name}</pre>
 To delete an image:
 
 ```bash
-docker rmi [-f] {image-id-prefix-or-tag}</pre>
+docker rmi [-f] {image-id-prefix-or-tag}
 ```
 
 If an image has a tag other than "latest",
 deleting it requires specifying both the name and tag like this:
+
+MISSING CONTENT?
 
 If the image is used by an existing container,
 an error message explaining this will be output.
@@ -678,7 +674,7 @@ Containers whose images have been deleted can still be rerun
 because all images it requires were copied into it.
 
 ```bash
-docker rmi [-f] {name}:{tag}</pre>
+docker rmi [-f] {name}:{tag}
 ```
 
 There are multiple versions of an image, eash with a different tag,
@@ -705,7 +701,7 @@ These are referred to as "dangling images".
 The following command deletes all of them:
 
 ```bash
-docker rmi $(docker images -qa -f "dangling=true")</pre>
+docker rmi $(docker images -qa -f "dangling=true")
 ```
 
 This uses two docker commands.
@@ -721,12 +717,12 @@ A container is a running instance of an image.
 #### Creating/Running Containers
 
 To list the current running containers,
-enter: <code>docker ps</code>.
+enter: `docker ps`.
 To list all containers including those that are stopped,
-enter: <code>docker ps -a</code>.
+enter: `docker ps -a`.
 
 To see details about an existing container,
-enter: <code>docker inspect {container-id}</code>.
+enter: `docker inspect {container-id}`.
 
 To restart a container whose image is currently running,
 
@@ -737,7 +733,7 @@ docker restart {container-id}
 To rerun a container whose image has exited:
 
 ```bash
-docker start -a {container-id}</pre>
+docker start -a {container-id}
 ```
 
 This works even if the images used by the container have been deleted
@@ -745,11 +741,11 @@ because the images have already been copied into the container.
 
 ### Deleting Containers
 
-To delete specific containers enter: <code>docker rm {container-ids}</code><br>
+To delete specific containers, enter `docker rm {container-ids}`.
 A space-separated list of container id prefixes can be specified.
 Each id prefix must uniquely match a single container.
 
-To delete all containers enter: <code>docker rm $(docker ps -qa)</code>
+To delete all containers, enter `docker rm $(docker ps -qa)`.
 
 ### Opening a shell inside a running container
 
@@ -779,7 +775,7 @@ To specify a volume to be used by a container,
 use the -v option of the docker run command as follows:
 
 ```bash
-docker run {image-name} -v $(pwd):{directory}</pre>
+docker run {image-name} -v $(pwd):{directory}
 ```
 
 It should be possible to edit files under a volume directory
