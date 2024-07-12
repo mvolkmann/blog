@@ -3234,6 +3234,14 @@ n := 1.
 n := n + 1
 ```
 
+A series of assignment operators can be used to
+assign the same value to multiple variables.
+For example:
+
+```smalltalk
+foregroundColor := backgroundColor := Color blue.
+```
+
 There are no shorthand assignment operators like `+=` for numbers.
 
 Numbers are automatically converted to objects of the appropriate type.
@@ -5122,7 +5130,7 @@ drawOn: aCanvas
 			lineTo: x1 @ y1;
 			lineTo: x1 @ y2;
 			lineTo: x2 @ y2
-	]! !
+	]
 
 extent
 	^ extent
