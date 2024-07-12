@@ -80,8 +80,8 @@ To see the new container, enter: `docker ps -a`.
 To run the container again, enter `docker start -a {container-id-prefix}`.
 
 To get help on a docker command, enter: `docker help {command}`.
-For example, `docker help start` briefly describes the `-a` option.
-It is used to attach to an existing container.
+For example, `docker help start` briefly describes the `-a` option
+which is used to attach to an existing container.
 
 ## Docker Images
 
@@ -108,9 +108,9 @@ the number of times they have been "pulled", see
 target="_blank">https://hub.docker.com/explore/</a>.
 
 Official programming language images include
-clojure, elixir, erlang, haskell, ibmjava, julia,
-gcc, golang, java, jruby, node, openjdk, perl,
-php, python, ruby, and swift.
+clojure, dart, elixir, erlang, gcc, golang, groovy, haskell, haxe,
+ibmjava, java, julia, jruby, mono, node, openjdk, perl,
+php, python, ruby, rust, and swift.
 
 Official web server images include
 glassfish, httpd (Apache), jetty, nginx, and tomcat.
@@ -138,11 +138,11 @@ Verify this by running `docker images`.
 ### Bash Example
 
 Let's create a very simple image that just outputs "Hello, World!" using bash.
-Here is the Dockerfile that describes the image.
+Here is the `Dockerfile` that describes the image.
 
 ```docker
 FROM bash
-CMD echo Hello, World!</pre>
+CMD echo Hello, World!
 ```
 
 To build this image enter: `docker build -t my-demo .`<br>
@@ -604,7 +604,7 @@ TODO: Add this detail.
 To build an image from a Dockerfile:
 
 ```bash
-docker build [-t {tag}] {Dockerfile-path}</pre>
+docker build [-t {tag}] {Dockerfile-path}
 ```
 
 While the -t option can be omitted, it is preferable include it.
