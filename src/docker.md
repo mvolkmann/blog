@@ -544,281 +544,261 @@ Previous commands do not affect subsequent ones.
 For example, "RUN cd /usr/local" will not change
 the working directory used by the next instruction.
 
-    <h4>FROM</h4>
-    <p>
-      This specifies the base image.
-      It is required and MUST be the first instruction.
-    </p>
+### FROM
 
-    <h4>ENV</h4>
-    <p>
-      This instruction sets the value of an environment variable
-      that is used inside the Dockerfile.
-      It cannot be used to change the value
-      of a previously set environment variable.
-      For example, to set ANIMAL to GIRAFFE,
-    </p>
-    <pre class="brush: plain">
+This specifies the base image.
+It is required and MUST be the first instruction.
 
-ENV animal giraffe</pre>
+### ENV
 
-<p>
+This instruction sets the value of an environment variable
+that is used inside the Dockerfile.
+It cannot be used to change the value
+of a previously set environment variable.
+For example, to set ANIMAL to GIRAFFE,
+
+```docker
+ENV animal giraffe
+```
+
 To refer to this enviroment variable in another instruction,
 use <code>${ANIMAL}</code> or <code>$ANIMAL</code>.
-</p>
-<p>
+
 Instructions that support references to environment variables include:
 <code>ADD</code>, <code>COPY</code>, <code>ENV</code>, <code>EXPOSE</code>,
 <code>LABEL</code>, <code>ONBUILD</code>, <code>STOPSIGNAL</code>,
 <code>USER</code>, <code>VOLUME</code>, and <code>WORKDIR</code>.
-</p>
 
-    <h4>MAINTAINER</h4>
+### MAINTAINER
 
-    <h4>WORKDIR</h4>
-    <p>
-      This sets the default working directory from which commands will execute.
-      It defaults to "/".
-    </p>
+TODO: Add this detail.
 
-    <h4>RUN</h4>
+### WORKDIR
 
-    <h4>CMD</h4>
+This sets the default working directory from which commands will execute.
+It defaults to "/".
 
-    <h4>PATH</h4>
-    <p>
-      This specifies a local filesystem path that will be in the context of the image.
-      This should expose only the files needed by the image.
-      For example, do not use /.
-      A .dockerignore file can be added to any directory
-      to specify files that should not be exposed to the image.
-    </p>
+### RUN
 
-    <h4>URL</h4>
-    <p>
-      This specifies a Github repository whose files will be in the context of the image.
-    </p>
+TODO: Add this detail.
 
-    <h4>COPY</h4>
+### CMD
 
-    <h4>WORKPATH</h4>
+TODO: Add this detail.
 
-    <h3>Base images</h3>
-    <p>
-      TODO:
-    </p>
+### PATH
 
-    <h4>Creating images</h4>
-    <p>
-      To build an image from a Dockerfile:
-    </p>
-    <pre class="brush: plain">
-      docker build [-t {tag}] {Dockerfile-path}</pre>
-    <p>
-      While the -t option can be omitted, it is preferable include it.
-      Otherwise the image can only be identified by
-      the id that is automatically assigned.
-      A tag consists of a name and an an optional version separated from the name by a colon.
-      For example, <code>my-project:1.2</code>
-    </p>
-    <p>
-      Typically the "docker build" command is run
-      from the directory that contains Dockerfile.
-      When that is the case, the value for Dockerfile-path
-      can be a period representing the current directory.
-    </p>
-    <p>
-      If the base image identified in Dockerfile does not already
-      exist locally, its Dockerfile is downloaded from
-      <a href="https://hub.docker.com/" target="_blank">Docker Hub</a>.
-      Docker Hub is a repository of shared Docker images.
-      Next, the base image built.
-      The time required to do this depends on the base image,
-      but it is typically several minutes.
-      Subsequent builds of your images that use these base images
-      are much faster because locally installed base images are reused.
-    </p>
-    <p>
-      Examples of commonly used base images include
-      bash and node.  ADD MORE!
-    </p>
+This specifies a local filesystem path that will be in the context of the image.
+This should expose only the files needed by the image.
+For example, do not use /.
+A .dockerignore file can be added to any directory
+to specify files that should not be exposed to the image.
 
-    <h4>Listing existing images</h4>
-    <p>
-      To get a list of all exising images:
-    </p>
-    <pre class="brush: plain">
-      docker images</pre>
+### URL
 
-    <h4>Tagging images</h4>
-    <p>
-      Images have unique ids which are SHA values.
-      These are long and difficult to type.
-      Tags are human readable aliases for image ids.
-      Any number of tags can be added to the same image.
-      To add a tag to an image:
-    </p>
-    <pre class="brush: plain">
-      docker tag {id-or-existing-name} {new-name}</pre>
+This specifies a Github repository whose files will be in the context of the image.
 
-    <h4>Deleting images</h4>
-    <p>
-      To delete an image:
-    </p>
-    <pre class="brush: plain">
-      docker rmi [-f] {image-id-prefix-or-tag}</pre>
-    <p>
-      If an image has a tag other than "latest",
-      deleting it requires specifying both the name and tag like this:
-    </p>
-    <p>
-      If the image is used by an existing container,
-      an error message explaining this will be output.
-      The image can be deleted anyway if the -f option is used.
-      Containers whose images have been deleted can still be rerun
-      because all images it requires were copied into it.
-    </p>
-    <pre class="brush: plain">
-      docker rmi [-f] {name}:{tag}</pre>
-    <p>
-      There are multiple versions of an image, eash with a different tag,
-      deleting one by its id, requires using the -f option.
-    </p>
-    <p>
-      Deleting a tag only deletes the corresponding image
-      if it is the only tag for that image. ???
-    </p>
-    <p>
-      Here is a bash script that deletes all images.
-    </p>
-    <pre class="brush: plain">
+### COPY
 
+TODO: Add this detail.
+
+### WORKPATH
+
+## Base Images
+
+TODO: Add this detail.
+
+### Creating Images
+
+To build an image from a Dockerfile:
+
+```bash
+docker build [-t {tag}] {Dockerfile-path}</pre>
+```
+
+While the -t option can be omitted, it is preferable include it.
+Otherwise the image can only be identified by
+the id that is automatically assigned.
+A tag consists of a name and an an optional version separated from the name by a colon.
+For example, <code>my-project:1.2</code>
+
+Typically the "docker build" command is run
+from the directory that contains Dockerfile.
+When that is the case, the value for Dockerfile-path
+can be a period representing the current directory.
+
+If the base image identified in Dockerfile does not already
+exist locally, its Dockerfile is downloaded from
+<a href="https://hub.docker.com/" target="_blank">Docker Hub</a>.
+Docker Hub is a repository of shared Docker images.
+Next, the base image built.
+The time required to do this depends on the base image,
+but it is typically several minutes.
+Subsequent builds of your images that use these base images
+are much faster because locally installed base images are reused.
+
+Examples of commonly used base images include
+bash and node. ADD MORE!
+
+### Listing Existing Images
+
+To get a list of all exising images:
+
+```bash
+docker images</pre>
+```
+
+### Tagging Images
+
+Images have unique ids which are SHA values.
+These are long and difficult to type.
+Tags are human readable aliases for image ids.
+Any number of tags can be added to the same image.
+To add a tag to an image:
+
+```bash
+docker tag {id-or-existing-name} {new-name}</pre>
+```
+
+### Deleting Images
+
+To delete an image:
+
+```bash
+docker rmi [-f] {image-id-prefix-or-tag}</pre>
+```
+
+If an image has a tag other than "latest",
+deleting it requires specifying both the name and tag like this:
+
+If the image is used by an existing container,
+an error message explaining this will be output.
+The image can be deleted anyway if the -f option is used.
+Containers whose images have been deleted can still be rerun
+because all images it requires were copied into it.
+
+```bash
+docker rmi [-f] {name}:{tag}</pre>
+```
+
+There are multiple versions of an image, eash with a different tag,
+deleting one by its id, requires using the -f option.
+
+Deleting a tag only deletes the corresponding image
+if it is the only tag for that image. ???
+
+Here is a bash script that deletes all images:
+
+```bash
 #!/bin/bash
-
 # Removes all images.
+docker rmi -f $(docker images -q)
+```
 
-docker rmi -f $(docker images -q)</pre>
+### Dangling Images
 
-    <h4>Dangling images</h4>
-    <p>
-      During iterative development it is common
-      to rebuild an image multiple times.
-      When an image with the same name as an existing one is built,
-      the previous version remains but is stripped of its name and tag.
-      These are referred to as "dangling images".
-      The following command deletes all of them:
-    </p>
-    <pre class="brush: plain">
-      docker rmi $(docker images -qa -f "dangling=true")</pre>
-    <p>
-      This uses two docker commands.
-      First, "docker images" is used to get a list of the ids
-      of all the dangling images.
-      Second, "docker rmi" is used to delete those images.
-      Why isn't there a build option to do this automatically?
-    </p>
+During iterative development it is common
+to rebuild an image multiple times.
+When an image with the same name as an existing one is built,
+the previous version remains but is stripped of its name and tag.
+These are referred to as "dangling images".
+The following command deletes all of them:
 
-    <h3>Docker Containers</h3>
-    <p>
-      A container is a running instance of an image.
-    </p>
+```bash
+docker rmi $(docker images -qa -f "dangling=true")</pre>
+```
 
-    <h4>Creating/Running containers</h4>
+This uses two docker commands.
+First, "docker images" is used to get a list of the ids
+of all the dangling images.
+Second, "docker rmi" is used to delete those images.
+Why isn't there a build option to do this automatically?
 
-    <h4>Listing containers</h4>
-    <p>
-      To list the current running containers,
-      enter: <code>docker ps</code>.
-      To list all containers including those that are stopped,
-      enter: <code>docker ps -a</code>.
-    </p>
+### Docker Containers
 
-    <h4>Getting container details</h4>
-    <p>
-      To see details about an existing container,
-      enter: <code>docker inspect {container-id}</code>.
-    </p>
+A container is a running instance of an image.
 
-    <h4>Restarting containers</h4>
-    <p>
-      To restart a container whose image is currently running,
-    </p>
-    <pre class="brush: plain">
-      docker restart {container-id}</pre>
+#### Creating/Running Containers
 
-    <h4>Rerunning containers</h4>
-    <p>
-      To rerun a container whose image has exited,
-    </p>
-    <pre class="brush: plain">
-      docker start -a {container-id}</pre>
-    <p>
-      This works even if the images used by the container have been deleted
-      because the images have already been copied into the container.
-    </p>
+To list the current running containers,
+enter: <code>docker ps</code>.
+To list all containers including those that are stopped,
+enter: <code>docker ps -a</code>.
 
-    <h4>Deleting containers</h4>
-    <p>
-      To delete specific containers enter: <code>docker rm {container-ids}</code><br>
-      A space-separated list of container id prefixes can be specified.
-      Each id prefix must uniquely match a single container.
-    </p>
-    <p>
-      To delete all containers enter: <code>docker rm $(docker ps -qa)</code>
-    </p>
+To see details about an existing container,
+enter: <code>docker inspect {container-id}</code>.
 
-    <h4>Opening a shell inside a running container</h4>
-    <p>
-      To interact with a running container,
-      open a shell inside it where commands can be entered.
-    </p>
-    <pre class="brush: plain">
-      docker exec -it {container-id} /bin/sh</pre>
-    <p>
-      Here is a bash script that deletes all containers.
-    </p>
-    <pre class="brush: plain">
+To restart a container whose image is currently running,
 
+```bash
+docker restart {container-id}
+```
+
+To rerun a container whose image has exited:
+
+```bash
+docker start -a {container-id}</pre>
+```
+
+This works even if the images used by the container have been deleted
+because the images have already been copied into the container.
+
+### Deleting Containers
+
+To delete specific containers enter: <code>docker rm {container-ids}</code><br>
+A space-separated list of container id prefixes can be specified.
+Each id prefix must uniquely match a single container.
+
+To delete all containers enter: <code>docker rm $(docker ps -qa)</code>
+
+### Opening a shell inside a running container
+
+To interact with a running container,
+open a shell inside it where commands can be entered.
+
+```bash
+docker exec -it {container-id} /bin/sh
+```
+
+Here is a bash script that deletes all containers:
+
+```bash
 #!/bin/bash
-
 # Removes all containers, including running ones.
+docker rm -f $(docker ps -qa)
+```
 
-docker rm -f $(docker ps -qa)</pre>
+## Volumes
 
-    <h3>Volumes</h3>
-    <p>
-      Containers can also provide read-write access to the read-only image filesystem
-      a "Union File System".
-      Changes to files happens in the container, but are not saved in the image.
-      "Volumes" allow these changes to be persisted to the local filesystem.
-    </p>
-    <p>
-      To specify a volume to be used by a container,
-      use the -v option of the docker run command as follows:
-    </p>
-    <pre class="brush: plain">
-      docker run {image-name} -v $(pwd):{directory}</pre>
-    brush
-    <p>
-      It should be possible to edit files under a volume directory
-      and have the image in the container utilize the changes
-      without restarted it.  TRY THIS!
-      See https://dzone.com/articles/docker-for-devs-creating-a-developer-image?edition=264895&utm_source=Spotlight&utm_medium=email&utm_campaign=cloud%202017-01-24
-    </p>
+Containers can also provide read-write access to the read-only image filesystem
+a "Union File System".
+Changes to files happens in the container, but are not saved in the image.
+"Volumes" allow these changes to be persisted to the local filesystem.
 
-    <h3>Sharing Image</h3>
-    <p>
-      The easiest way to share a Docker image
-      is to share its Dockerfile.
-      The recipient can build this image from that.
-    </p>
-    <p>
-      Another alternative is to register for a
-      <a href="https://hub.docker.com/" target="_blank">Docker Hub</a>
-      account and upload your image there.
-      From here you can browse for shared, downloadable images.
-      For example, docker/whalesay.
-    </p>
+To specify a volume to be used by a container,
+use the -v option of the docker run command as follows:
+
+```bash
+docker run {image-name} -v $(pwd):{directory}</pre>
+```
+
+It should be possible to edit files under a volume directory
+and have the image in the container utilize the changes
+without restarted it. TRY THIS!
+See https://dzone.com/articles/docker-for-devs-creating-a-developer-image?edition=264895&utm_source=Spotlight&utm_medium=email&utm_campaign=cloud%202017-01-24
+
+### Sharing an Image
+
+The easiest way to share a Docker image is to share its Dockerfile.
+The recipient can build this image from that.
+
+Another alternative is to register for a
+<a href="https://hub.docker.com/" target="_blank">Docker Hub</a>
+account and upload your image there.
+From here you can browse for shared, downloadable images.
+For example, docker/whalesay.
+
+## Unorganized Content
 
 - Docker Engine: supports sharing Docker images
 - docker run docker/whalesay cowsay Hello from the whale!
@@ -994,10 +974,3 @@ Docker Compose
 - to stop an image
   - cd to a directory containing docker-compose.yml
   - docker-compose down
-
-Command Summary
-Action Containers Images
-
-```
-
-```
