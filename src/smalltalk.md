@@ -877,21 +877,31 @@ regardless of whether "Show ST-80 Assigments" is selected.
 
 New objects can be created by
 sending the message `#new` or `#basicNew` to a class.
-By default, both initialize all attributes of the new object to `nil`.
-The difference between them is that `new` can be overridden
-to do something different, whereas `basicNew` cannot be overridden.
+Those methods are defined in the `Behavior` class
+and are available on every object because:
 
-The class `Object` is a subclass of `ProtoObject`.
+- `Object` is a subclass of `ProtoObject`.
+- The metaclass of `ProtoObject` is `Class` (`ProtoObject class superclass -> Class`).
+- `Class` is a subclass of `ClassDescription`.
+- `ClassDescription` is a subclass of `Behavior`.
+
+The `new` method in `Behavior` sends the `#basicNew`
+to the class from which an instance is being created,
+which initializes all the instance variables to `nil`.
+Then it sends the `#initialize` message to the new instance.
+
+The `basicNew` method cannot be overridden in subclasses
+to do something different, but the `new` method can be overridden.
+
+TODO: Describe why the class `ProtoObject` exists.
+
 The class `ProtoObject` is a subclass of itself.
+TODO: What does this mean?
+
 `Object` is a superclass of nearly every other class.
 There are a small number of classes that are subclasses of `ProtoObject`
 and not subclasses of `Object`.
 These include `BreakingMethodWrapper`, `MessageCatcher`, and `ProtoCatcher`.
-
-TODO: Describe why the class `ProtoObject` exists.
-
-The methods `basicNew` and `new` are defined in the `Behavior` class.
-TODO: See question about this on the mailing list on 7/12/24 at 8:30 AM.
 
 ## Variables
 
