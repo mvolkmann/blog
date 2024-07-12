@@ -42,7 +42,7 @@ While Simula preceded Smalltalk, Smalltalk was
 the first programming language to make OOP popular.
 
 Running Smalltalk programs requires two parts,
-a virtual machine (VM) and an image.
+a virtual machine (VM) and an image file.
 The VM is specific to the operating system being used.
 It reads and executes Smalltalk code found in an image file.
 
@@ -209,7 +209,7 @@ Smalltalk has the following pros:
   Any kind of object, referred to as a "receiver",
   can be passed as a message argument as long as it
   responds to the messages that will be sent to it.
-- It provides automatic version control.
+- It provides versioning and development history.
 - It has a great web app. framework (Seaside) and a great CMS framework (Pier).
 
 Smalltalk has the following cons:
@@ -244,6 +244,11 @@ Smalltalk has the following cons:
   target="_blank">prefix registry</a> in its wiki.
   Unfortunately it was last updated in 2010.
 
+  There is an effort to add module support
+  which would scope class names to a module.
+  See <a href="http://haver.klix.ch/"
+  target="_blank">HaverOnCuis: A Cuis based Smalltalk With Modules</a>.
+
 - Immutability is not favored.
 
   While it is possible to define Smalltalk classes whose objects are immutable,
@@ -251,11 +256,18 @@ Smalltalk has the following cons:
   The lack of focus on immutability will feel wrong
   to developers that prefer functional programming.
 
-- Application deployment is tedious.
+- Application deployment is tedious in free versions of Smalltalk.
 
   Tools to strip a Smalltalk image of developer-only features
   in order to create an image that is suitable for deployment are lacking.
   This is a highly manual process.
+
+  Commercial Smalltalks semi-automatically upgrade application code
+  as their base implementation features change over time.
+  See the VAST, GemStone, and Circom Smalltalk implementations.
+  TODO: Do they provide tooling to strip out classes that are only used
+  in the development environment so what remains in the image is
+  only what is needed to run the application being developed?
 
 - Smalltalks use of late binding for resolving message sends
   means that there are more errors that can only be detected at run-time
@@ -263,7 +275,7 @@ Smalltalk has the following cons:
   However, Smalltalk does do incremental compiling when methods are saved,
   so it finds syntax errors before runtime, unlike most scripting languages.
 
-- All the code for a project is stored in one big image file.
+- The image file can be large.
   The base image for Cuis Smalltalk is 19 MB, but installing
   optional packages can easily increase the size to around 200 MB.
   However, it is common to store custom code and modifications to
@@ -297,6 +309,25 @@ Smalltalk has the following cons:
 - ANSI Smalltalk
 
   This became the standard language reference for Smalltalk in 1998.
+
+- Squeak Smalltalk
+
+  The first release of Squeak Smalltalk was in October, 1996.
+  See <a href="http://files.squeak.org/docs/OOPSLA.Squeak.html"
+  target="_blank">Back to the Future</a> -
+  The Story of Squeak, A Practical Smalltalk Written in Itself
+
+- Pharo Smalltalk
+
+  The first release of Pharo Smalltalk was in March, 2008.
+  See <a href="https://en.wikipedia.org/wiki/Pharo"
+  target="_blank">Wikipedia</a>.
+
+- Cuis Smalltalk
+
+  The first release of Cuis Smalltalk was in March, 2009.
+  See <a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Dev/blob/master/Documentation/CuisHistory.md"
+  target="_blank">A short history of Cuis</a>.
 
 ## Implementations
 
@@ -356,7 +387,7 @@ were created after those listed above in the "History" section.
 
 - Cuis - forked from Squeak with goal to remain small and easy to learn
 
-The most popular Smalltalk implementations include the following:
+The most popular open source Smalltalk implementations include the following:
 
 - <div class="row">
     <a href="https://squeak.org" target="_blank">Squeak (2,832 classes)</a>
@@ -385,6 +416,13 @@ The number of predefined classes in each implementation above
 were obtained by printing the result of `Smalltalk allClasses size`
 with latest versions as of June 10, 2024.
 
+## Commerial Applications
+
+Commercial applications built with Smalltalk are listed at:
+
+- <a href="https://gemtalksystems.com/about/customers/" target="_blank">GemTalk Systems</a>
+- <a href="https://web.archive.org/web/20070101092404/http://wiki.cs.uiuc.edu/VisualWorks/Commercial+projects+that+use+Smalltalk" target="_blank">VisualWorks</a>
+
 ## Cuis Smalltalk
 
 This article primarily focuses on Cuis Smalltalk and running in macOS.
@@ -403,8 +441,9 @@ The objectives of Cuis Smalltalk are to:
 
 More classes can be added by installing packages.
 
-Some advantages that Cuis has over Squeak and Pharo are that
-it supports TrueType fonts and high quality vector graphics.
+Some advantages that Cuis has over Squeak and Pharo are that it has
+built-in support for TrueType fonts and high quality vector graphics.
+Those can be added to Squeak and Pharo through foreign libraries.
 
 The Cuis mascot is southern mountain cavy which is a "tailless rodent with
 short, speckled, greyish-yellow fur, fading to pale grey on the underparts."

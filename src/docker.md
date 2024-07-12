@@ -157,9 +157,9 @@ To run the `my-demo` image enter: `docker run my-demo`<br>
 This runs the image in a newly created container.
 The container still exists.
 
-To see this enter: `docker ps -a`
+To see this enter: `docker ps -a | grep my-demo`
 
-To run this container again enter: `docker run -a {container-id}`
+To run this container again enter: `docker start -a {container-id}`
 
 To delete this container enter: `docker rm {container-id-prefix}`
 
