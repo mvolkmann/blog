@@ -885,6 +885,8 @@ and are available on every object because:
 - `Class` is a subclass of `ClassDescription`.
 - `ClassDescription` is a subclass of `Behavior`.
 
+TODO: Discuss what a "metaclass" is and how there methods become available.
+
 The `new` method in `Behavior` sends the `#basicNew`
 to the class from which an instance is being created,
 which initializes all the instance variables to `nil`.
