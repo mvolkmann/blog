@@ -1761,9 +1761,8 @@ The new methods will appear in System Browsers.
 
 ### Primitive Methods
 
-Primitive methods are implemented in the VM,
-often in a way that is more efficient than
-what could be achieved in Smalltalk code.
+Primitive methods are implemented in the VM, often in a way that is
+more efficient than what could be achieved in Smalltalk code.
 
 From the Blue Book ...
 
@@ -1800,6 +1799,9 @@ contains the following:
 > expressions are evaluated as though the primitive routine had not been
 > called.
 
+Historically the Squeak VM could support a maximum of 256 primitive operations.
+Newer versions of the Squeak VM do not have that limitation.
+
 From Vanessa Freudenberg, "The VM is mostly written in
 a subset of Smalltalk called Slang, transpiled to C, then compiled and linked
 with platform-specific code to create the VM executable."
@@ -1812,8 +1814,6 @@ target="_blank">vm.primitives.js</a>.
 For the OpenSmalltalk version, see the file
 <a href="https://github.com/OpenSmalltalk/opensmalltalk-vm/blob/Cog/src/spur32.cog/cointerp.c"
 target="_blank">cointerp.c</a>.
-
-TODO: Is there a limit of 256 primitive numbers?
 
 ## Control Flow
 
@@ -2086,10 +2086,12 @@ The available windows, in the order listed, include:
 - Message Names: for finding classes that implement a given method
 - Transcript: displays output
 - Installed Packages: lists all installed packages and allows more to be installed
-- Change Sorter: TODO: Describe this.
+- Change Sorter: for viewing, manipulating, and saving ChangeSets
 - Process Browser: displays the state of all Smalltalk processes
   and enables terminating them
-- Emergency Evaluator: TODO: Describe this.
+- Emergency Evaluator: a limited user interface that appears when
+  an error occurs that prevents opening a Debugger;
+  can revert the last code modification in order to recover
 - File List: file explorer for viewing all local files and editing text files
 - SUnit Test Runner: for running unit tests and viewing the results
 
