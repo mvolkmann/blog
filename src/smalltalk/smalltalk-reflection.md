@@ -21,10 +21,13 @@ The following table lists some of them.
 | `SomeClass allInstVarNames`                             | an `Array` of instance variable names defined in this class                                                  |
 | `SomeClass allInstVarNamesEverywhere`                   | an `Array` of instance variable names defined in this class and inherited classes                            |
 | `SomeClass allMethodsInCategory: 'some-category'`       | an `Array` of instance methods in a given category, including those defined in this class and inherited      |
-| `SomeClass class allMethodsInCategory: 'some-category'` | an `Array` of class methods in a given category, including those defined in this class and inherited         |
 | `SomeClass allSubclasses`                               | an `OrderedCollection` of subclasses                                                                         |
-| `SomeClass superclass`                                  | a `Class` that is the superclass of receiver                                                                 |
+| `SomeClass superclass`                                  | a `Class` that is the superclass of this class                                                               |
 | `SomeClass allSuperclasses`                             | an `OrderedCollection` of superclasses                                                                       |
+| `SomeClass selectors`                                   | an `Array` of all instance method selectors of this class                                                    |
+| `SomeClass class`                                       | the `Metaclass` subclass of this class                                                                       |
+| `SomeClass class selectors`                             | an `Array` of all class method selectors of this class                                                       |
+| `SomeClass class allMethodsInCategory: 'some-category'` | an `Array` of class methods in a given category, including those defined in this class and inherited         |
 | `CodeListPackages installedPackages`                    | an `Array` of `CodePackage` objects (appear in System Browser class category pane)                           |
 
 TODO: Why does `allClassVarNames` return a `Set` when `allInstVarNames` returns an `Array`?
