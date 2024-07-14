@@ -14,12 +14,12 @@ Alan Kay, one of the primary creators the Smalltalk,
 coined the term "object-oriented programming" in 1967.
 
 An object encapsulates related data and methods that operate on the data.
-For example, an object can hold the `name` and `breed` of a dog.
+For example, an object can hold the `center` and `radius` of a circl.
 In Smalltalk, these are referred to as instance variables.
 
 A class is often used as template for creating
 instances of the class which are referred to as objects.
-For example, a `Dog` class can be defined.
+For example, a `Circle` class can be defined.
 
 A class can define:
 
@@ -31,7 +31,7 @@ A class can define:
 - class variables whose values are shared by all instances
 
   For example, a class variable can hold
-  the timestamp at which the last `Dog` object was created.
+  the timestamp at which the last `Circle` object was created.
 
 - class methods that operate on class variables
 
