@@ -100,9 +100,9 @@ Here are some important facts about the diagram above:
 
 - Every class is represented by an object
   which is an instance of its own metaclass.
-- Metaclasses do not have names are referred to as "{class-name} class".
-  For example, the metaclass of the `Circle` class
-  is referred to as `Circle class`.
+- The name of each metaclass is the name of its corresponding class
+  followed by " class". For example, the name of the
+  metaclass of the `Circle` class is `Circle class`.
 - There is only one instance of each metaclass.
 - The superclass of all metaclasses it `Metaclass`.
 - `Metaclass` is subclass of `ClassDescription`

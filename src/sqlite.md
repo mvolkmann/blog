@@ -196,6 +196,12 @@ Some of the disadvantages of WAL include:
 - All processes that access the database must
   run on the same computer as the database.
 
+To enable WAL mode, start the server as follows:
+
+```bash
+sqlite3 {name}.db 'PRAGMA journal_mode=WAL;'
+```
+
 For more detail, see {% aTargetBlank "https://www.sqlite.org/wal.html",
 "Write-Ahead Logging" %}.
 
