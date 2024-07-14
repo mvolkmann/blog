@@ -20,20 +20,6 @@ the `new` method will call it.
 The `initialize` method typically initializes
 each of the instance variables of the object.
 
-Classes are also represented by objects.
-Every class object inherits from `Class`,
-which inherits from `ClassDescription`,
-which inherits from `Behavior`.
-The `Behavior` class defines the instance method `new`
-which contains the following:
-
-```smalltalk
-    ^ self basicNew initialize.
-```
-
-Every class also supports the method `basicNew` which is similar to
-the `new` method, but does not call the instance method `initialize`.
-
 Let's look at an example `Rect` class
 with instance variables `height` and `width`.
 
@@ -78,8 +64,8 @@ To determine the class of an object, send it the `#class` unary message.
 For example, `19 class` returns `SmallInteger`.
 
 Variables defined in a Workspace hold references to their object values.
-It may be necessary to close a Workspace in order to
-trigger garbage collection of those objects.
+Closing a Workspace removes those references,
+which makes it possible for them to be garbage collected.
 
 Some classes such as `Morph` implement a `delete` method.
 To delete all instances of such classes,
@@ -89,25 +75,19 @@ enter the following in Workspace and "Do it":
 SomeClass allInstancesDo: [ :obj | obj delete ]
 ```
 
-## Creating Objects
-
-TODO: This section repeats a lot of information that was covered above!
+## Object Creation Detail
 
 New objects can be created by
 sending the message `#new` or `#basicNew` to a class.
-Those methods are defined in the `Behavior` class
-and are available on every object because:
-
-- `Object` is a subclass of `ProtoObject`.
-- The metaclass of `ProtoObject` is `Class` (`ProtoObject class superclass -> Class`).
-- `Class` is a subclass of `ClassDescription`.
-- `ClassDescription` is a subclass of `Behavior`.
 
 The diagram below shows the classes involved
 when sending the message `#new` to a class.
+
 `Circle` is a subclass of `Shape`
 which is a subclass of `Object`
 which is a subclass of `ProtoObject`.
+The superclass of `ProtoObject` is `nil`.
+
 The asterisks in the diagram are placeholders
 for the class associated with an arrow.
 For example, sending the message `#superclass` to `Circle` gives `Shape`
@@ -131,6 +111,11 @@ Here are some important facts about the diagram above:
 - The `Behavior` class defines the `new` method and many others including
   `allInstances`, `allSubclasses`, `allSuperclasses`, `instVarNames`,
   and `methodDictionary`.
+- The `Behavior` `new` method returns `self basicNew initialize`.
+- The `Object` metaclass implements the instance method `initialize`
+  which does nothing, leaving all the instance variables initialized to `nil`.
+- Any class can implement the instance method `initialize`
+  to set its instance variables to values other than `nil`.
 
 Let's walk through the steps to find the `new` method
 when evaluating `circle := Circle new`.
@@ -143,20 +128,11 @@ when evaluating `circle := Circle new`.
 - Look in `ClassDescription class`.
 - Look in `Behavior class` where it is found.
 
-TODO: Discuss what a "metaclass" is and how there methods become available.
-
-The `new` method in `Behavior` sends the `#basicNew`
-to the class from which an instance is being created,
-which initializes all the instance variables to `nil`.
-Then it sends the `#initialize` message to the new instance.
-
+The `basicNew` method does not call the instance method `initialize`.
 The `basicNew` method cannot be overridden in subclasses
 to do something different, but the `new` method can be overridden.
 
 TODO: Describe why the class `ProtoObject` exists.
-
-The class `ProtoObject` is a subclass of itself.
-TODO: What does this mean?
 
 `Object` is a superclass of nearly every other class.
 There are a small number of classes that are subclasses of `ProtoObject`
