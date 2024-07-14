@@ -91,6 +91,8 @@ SomeClass allInstancesDo: [ :obj | obj delete ]
 
 ## Creating Objects
 
+TODO: This section repeats a lot of information that was covered above!
+
 New objects can be created by
 sending the message `#new` or `#basicNew` to a class.
 Those methods are defined in the `Behavior` class
@@ -100,6 +102,46 @@ and are available on every object because:
 - The metaclass of `ProtoObject` is `Class` (`ProtoObject class superclass -> Class`).
 - `Class` is a subclass of `ClassDescription`.
 - `ClassDescription` is a subclass of `Behavior`.
+
+The diagram below shows the classes involved
+when sending the message `#new` to a class.
+`Circle` is a subclass of `Shape`
+which is a subclass of `Object`
+which is a subclass of `ProtoObject`.
+The asterisks in the diagram are placeholders
+for the class associated with an arrow.
+For example, sending the message `#superclass` to `Circle` gives `Shape`
+and sending the message `#class` to `Circle` gives `Circle class`.
+
+<img alt="Smalltalk class hierarchy:" style="width: 100%"
+  src="/blog/assets/SmalltalkClassHierarchy.png?v={{pkg.version}}">
+
+Here are some important facts about the diagram above:
+
+- Every class is represented by an object
+  which is an instance of its own metaclass.
+- Metaclasses do not have names are referred to as "{class-name} class".
+  For example, the metaclass of the `Circle` class
+  is referred to as `Circle class`.
+- There is only one instance of each metaclass.
+- The superclass of all metaclasses it `Metaclass`.
+- `Metaclass` is subclass of `ClassDescription`
+  which is a subclass of `Behavior`
+  which is a subclass of `Object`.
+- The `Behavior` class defines the `new` method and many others including
+  `allInstances`, `allSubclasses`, `allSuperclasses`, `instVarNames`,
+  and `methodDictionary`.
+
+Let's walk through the steps to find the `new` method
+when evaluating `circle := Circle new`.
+
+- Look in `Circle class`.
+- Look in `Shape class`.
+- Look in `Object class`.
+- Look in `ProtoObject class`.
+- Look in `Class class`.
+- Look in `ClassDescription class`.
+- Look in `Behavior class` where it is found.
 
 TODO: Discuss what a "metaclass" is and how there methods become available.
 
