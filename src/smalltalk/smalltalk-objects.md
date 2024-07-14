@@ -100,6 +100,11 @@ Here are some important facts about the diagram above:
 
 - Every class is represented by an object
   which is an instance of its own metaclass.
+- The instance methods of a metaclass are
+  the class methods of the corresponding class.
+- When a class is selected in a System Browser, clicking the "class" button
+  causes it to display the metaclass instance variables
+  which are the class methods of the class.
 - The name of each metaclass is the name of its corresponding class
   followed by " class". For example, the name of the
   metaclass of the `Circle` class is `Circle class`.
