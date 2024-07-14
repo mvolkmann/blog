@@ -24,6 +24,9 @@ layout: topic-layout.njk
     src="/blog/assets/smalltalk-byte-cover.jpg?v={{pkg.version}}">
 </figure>
 
+THIS PAGE IS NO LONGER BEING MAINTAINED!
+See the individual pages in the Smalltalk category instead.
+
 ## Overview
 
 <a href="https://en.wikipedia.org/wiki/Smalltalk" target="_blank">Smalltalk</a>

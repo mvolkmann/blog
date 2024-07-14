@@ -23,7 +23,7 @@ While this works, it is not recommended for two main reasons.
    or they can install packages you create.
    Both are options described below.
 
-### fileOut and fileIn
+## fileOut and fileIn
 
 "fileOut" can be used to save any of the following in a `.st` text file:
 
@@ -122,7 +122,7 @@ To read a fileOut into the current image:
 All the class categories, classes, method categories, and methods
 defined in the fileOut will now be available in the current image.
 
-### Packages
+## Packages
 
 Cuis Smalltalk supports the ability to save code outside an image file
 as a "package" and load the package into running images.
@@ -240,3 +240,18 @@ TODO: It does not uninstall the selected package or delete the file that defines
 It is recommended to save packages in GitHub.
 For details on doing this, open the World menu and
 select Help...Using GitHub to host Cuis packages.
+
+## Restoring Changes After Crash
+
+If the VM crashes before changes are saved by a fileOut or saving in a package,
+they can still be recovered with the following steps:
+
+1. Restart the image.
+1. Open the World menu.
+1. Select Changes ... Recently logged Changes...
+1. In the popup that appears, select a line with a date/time
+   that indicates how far back in the history to examine.
+1. In the "Recent changes" window that appears,
+   click a row in the top panel to see the associated change.
+1. For each change to be restored, right-click the row in the top panel
+   and select "fileIn selections".
