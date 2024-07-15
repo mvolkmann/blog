@@ -7,7 +7,6 @@ layout: topic-layout.njk
 ---
 
 - How can you work with SQLite and Postgres databases from Smalltalk?
-- Where are method categories stored?
 - Build a Todo app using Morphic and practice stripping the image
   to create a version that can be distributed to users.
 - Is there an easy way to create a memoized version of a method?
