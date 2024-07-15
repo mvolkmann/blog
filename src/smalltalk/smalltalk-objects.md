@@ -20,8 +20,10 @@ the `new` method will call it.
 The `initialize` method typically initializes
 each of the instance variables of the object.
 
-Let's look at an example `Rect` class
+Let's look at an example class named `Rect`
 with instance variables `height` and `width`.
+We chose the name `Rect` because the name `Rectangle` is used
+by a provided class in the "Graphics-Primitives" class category.
 
 We can define the class method `height:width:`
 that provides an alternate way to create objects as follows:
@@ -50,7 +52,7 @@ area
 The `setHeight:width:` method should be in the "private" category
 to indicate that it is not meant to invoked from outside this class.
 
-We can use the `Rectangle` class as follows:
+We can use the `Rect` class as follows:
 
 ```smalltalk
 r1 := Rect new.
@@ -115,7 +117,7 @@ Here are some important facts about the diagram above:
   which is a subclass of `Object`.
 - The `Behavior` class defines the `new` method and many others including
   `allInstances`, `allSubclasses`, `allSuperclasses`, `instVarNames`,
-  and `methodDictionary`.
+  and `methodDict`.
 - The `Behavior` `new` method returns `self basicNew initialize`.
 - The `Object` metaclass implements the instance method `initialize`
   which does nothing, leaving all the instance variables initialized to `nil`.
@@ -144,6 +146,29 @@ There are a small number of classes that are subclasses of `ProtoObject`
 and not subclasses of `Object`.
 These include `BreakingMethodWrapper`, `MessageCatcher`, and `ProtoCatcher`.
 
+## Method Dictionaries
+
+Method dictionaries are used to process message sends.
+Their keys are symbols that are message selectors
+and their values are `CompiledMethod` objects.
+The processing for finding a matching method
+searches the `methodDict` instance variables
+found in the inheritance hierarchy of the receiver object.
+
+The instance methods of a class are stored in
+the provided instance variable `methodDict` of the class.
+This can be viewed by selecting the class name and pressing cmd-i (Inspect it).
+The value of `methodDict` is an instance of `MethodDictionary`
+which is a subclass of `Dictionary`.
+
+The class methods of a class are stored in
+the provided instance variable `methodDict` of the metaclass of the class.
+This can be viewed by selecting the class name followed by " class"
+and pressing cmd-i (Inspect it).
+It is also an instance of `MethodDictionary`.
+One way to find a metaclass name so it can be selected
+is to select the class in a System Browser and click the "class" button.
+
 ## Immutability
 
 A class can enforce the immutability of its object by
@@ -161,7 +186,7 @@ the instance method `beImmutable` to the `Object` class.
 
 To enforce a specific object to be immutable,
 send it the `#beImmutable` message.
-For example the `Rectangle` class described above
+For example the `Rect` class described above
 could have the following class method for creating new instances:
 
 ```smalltalk
