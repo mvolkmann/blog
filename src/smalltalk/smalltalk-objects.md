@@ -46,10 +46,10 @@ setHeight: aHeight width: aWidth
     width := aWidth
 
 area
-    ^height * width
+    ^ height * width
 ```
 
-The `setHeight:width:` method should be in the "private" category
+The `setHeight:width:` method should be in the "private" method category
 to indicate that it is not meant to invoked from outside this class.
 
 We can use the `Rect` class as follows:
@@ -100,13 +100,12 @@ and sending the message `#class` to `Circle` gives `Circle class`.
 
 Here are some important facts about the diagram above:
 
-- Every class is represented by an object
-  which is an instance of its own metaclass.
+- Every class is represented by a pair of objects.
+  One represents the class and the other represents its metaclass.
 - The instance methods of a metaclass are
   the class methods of the corresponding class.
 - When a class is selected in a System Browser, clicking the "class" button
-  causes it to display the metaclass instance variables
-  which are the class methods of the class.
+  causes it to display its metaclass.
 - The name of each metaclass is the name of its corresponding class
   followed by " class". For example, the name of the
   metaclass of the `Circle` class is `Circle class`.
@@ -126,6 +125,8 @@ Here are some important facts about the diagram above:
 
 Let's walk through the steps to find the `new` method
 when evaluating `circle := Circle new`.
+The `#new` message is sent to the `Circle` class,
+not to an instance of the class.
 
 - Look in `Circle class`.
 - Look in `Shape class`.
@@ -136,10 +137,8 @@ when evaluating `circle := Circle new`.
 - Look in `Behavior class` where it is found.
 
 The `basicNew` method does not call the instance method `initialize`.
-The `basicNew` method cannot be overridden in subclasses
+The `basicNew` method should not be overridden in subclasses
 to do something different, but the `new` method can be overridden.
-
-TODO: Describe why the class `ProtoObject` exists.
 
 `Object` is a superclass of nearly every other class.
 There are a small number of classes that are subclasses of `ProtoObject`
@@ -174,10 +173,11 @@ is to select the class in a System Browser and click the "class" button.
 A class can enforce the immutability of its object by
 simply not implementing any methods that change its instance variable.
 
-Another option is to use the "Immutability" package
-so attempts to change any instance variable of a given object
-wll result in a "ModificationForbidden" window opening that
-contains a stack trace which indicates where the attempt was made.
+Another option is to use the "Immutability" package.
+It causes attempts to change any instance variable of a given object
+to result in a "ModificationForbidden" error.
+This opens a Debugger window that contains a stack trace
+which indicates where the modification attempt was made.
 
 To install the "Immutability" package,
 enter `Feature require: 'Immutability'` and "Do it".
