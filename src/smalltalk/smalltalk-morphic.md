@@ -22,6 +22,14 @@ For example, the class `TextModelMorph` defines the methods
 `alwaysHideVerticalScrollbar` and `hideScrollBarsIndefinitely`.
 Note how the "b" is sometimes lowercase and sometimes uppercase.
 
+Morphic uses the term "extent" to describe the width and height of a morph.
+It is represented by a `Point` object with
+an `x` instance variable that holds the width and
+a `y` instance variable that holds the height.
+
+The location of a morph is represented by a `MorphicTranslation` object
+that has the instance properties `deltaX` and `deltaY`.
+
 ## Creating and Modifying Morphs
 
 To create a morph:
@@ -167,7 +175,7 @@ select "edit balloon help", and modify the help text.
 (3) To restore a collapsed item, click it's thumbnail in the bottom bar.
 
 (4) "Explore" windows enable viewing data associated with an item
-such as its location, extent (size), and color.
+such as its location, extent (width and height), and color.
 
 For more detail, see
 <a href="https://cuis-smalltalk.github.io/TheCuisBook/A-brief-introduction-to-Inspectors.html"
@@ -424,10 +432,10 @@ To draw on a canvas, create a subclass of `Morph` as follows:
 
 ```smalltalk
 PlacedMorph subclass: #CanvasDemo
-	instanceVariableNames: 'extent'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Volkmann'
+    instanceVariableNames: 'extent'
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'Volkmann'
 ```
 
 Then define the instance method `drawOn:`.
@@ -436,30 +444,30 @@ with a line from its upper-left to lower-right.
 
 ```smalltalk
 drawOn: aCanvas
-	| x1 x2 y1 y2 |
-	x1 := 0.
-	y1 := 0.
-	x2 := extent x.
-	y2 := extent y.
-	aCanvas strokeWidth: 10 color: Color red fillColor: Color green do: [
-		aCanvas
-	 		moveTo: x1 @ y1;
-		 	lineTo: x2 @ y2;
-			lineTo: x2 @ y1;
-			lineTo: x1 @ y1;
-			lineTo: x1 @ y2;
-			lineTo: x2 @ y2
-	]
+    | x1 x2 y1 y2 |
+    x1 := 0.
+    y1 := 0.
+    x2 := extent x.
+    y2 := extent y.
+    aCanvas strokeWidth: 10 color: Color red fillColor: Color green do: [
+        aCanvas
+            moveTo: x1 @ y1;
+            lineTo: x2 @ y2;
+            lineTo: x2 @ y1;
+            lineTo: x1 @ y1;
+            lineTo: x1 @ y2;
+            lineTo: x2 @ y2
+    ]
 
 extent
-	^ extent
+    ^ extent
 
 extent: aPoint
-	extent := aPoint
+    extent := aPoint
 
 initialize
-	super initialize.
-	extent := 100 @ 100
+    super initialize.
+    extent := 100 @ 100
 ```
 
 To try this:

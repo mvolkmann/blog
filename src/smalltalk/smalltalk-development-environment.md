@@ -153,8 +153,9 @@ where `self` refers to the selected object in the top pane.
 ### System Browsers
 
 To open a System Browser, open the World menu and select Open...Browser.
-Alternatively, type a class name (ex. String) in a Workspace window and
-press cmd-b (Browse it) to open a System Browser with that class already selected.
+Alternatively, type a class name (ex. String) in a Workspace window
+and press cmd-b (Browse it)
+to open a System Browser with that class already selected.
 
 For more detail, see
 <a href="https://cuis-smalltalk.github.io/TheCuisBook/A-brief-introduction-to-the-system-Browser.html"

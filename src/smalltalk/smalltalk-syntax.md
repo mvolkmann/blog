@@ -44,7 +44,7 @@ The following table summarizes all the syntax.
 | reference to current object in a method           | `self`                                                     |
 
 The caret (^) in a return expression can be followed by a space.
-The pretty printer includes a space, but some developers prefer to omit it.
+The pretty printer includes a space, but many developers prefer to omit it.
 
 In static arrays the elements are separated by spaces.
 

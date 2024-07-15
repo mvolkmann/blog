@@ -175,6 +175,9 @@ area
     ^height * width
 ```
 
+To view the bytecode for a method, select it in a System Browser,
+click the "show..." button, and select "byteCodes".
+
 To delete a method, select its name in the top, fourth pane
 and press cmd-x (remove method).
 
