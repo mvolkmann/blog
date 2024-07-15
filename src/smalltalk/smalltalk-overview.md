@@ -43,8 +43,8 @@ the first programming language to make OOP popular.
 
 Running Smalltalk programs requires two parts,
 a virtual machine (VM) and an image file.
-The VM is specific to the operating system being used.
-It reads and executes Smalltalk code found in an image file.
+The VM reads and executes Smalltalk code found in an image file.
+It is specific to the operating system and CPU architecture being used.
 
 Image files can be moved between
 operating systems on different CPU architectures.
@@ -54,7 +54,7 @@ There is no need to recompile code for different environments.
 This makes Smalltalk code highly portable!
 
 Smalltalk is not an interpreted language. Smalltalk code is compiled
-to optimized bytecode that is executed by a virtual machine.
+to optimized bytecode that is executed by a VM.
 
 Everything in Smalltalk is represented by an object, including
 classes and all GUI elements in the development environment.
@@ -434,18 +434,25 @@ and version 1.0 was released in March 2009.
 
 The objectives of Cuis Smalltalk are to:
 
-- strive for the simplicity of Smalltalk-80
-- include a minimal number of classes required for the kernel,
-  a GUI framework, and development tools
-- create a system that is good for learning and experimenting
+- Strive for the simplicity of Smalltalk-80.
+- Include a minimal number of classes required for the kernel,
+  a GUI framework, and development tools,
+  removing everything that is not essential.
+- Create a system that is good for learning and experimenting.
 
-More classes can be added by installing packages.
+Any missing features can be defined by combining the features that are present
+and by installing more packages.
 
 Some advantages that Cuis has over Squeak and Pharo are that
 it has built-in support for Unicode and TrueType fonts.
 Those can be added to Squeak and Pharo through foreign libraries.
 Cuis also adds support for high quality vector graphics and
 rendering Scalable Vector Graphics (SVG).
+
+Cuis Smalltalk uses the same VM as Squeak Smalltalk, now called the
+<a href="https://opensmalltalk.org"
+target="_blank">Open Smalltalk Virtual Machine</a>.
+Original Pharo Smalltalk did the same, but it now has its own VM.
 
 The Cuis mascot is southern mountain cavy which is a "tailless rodent with
 short, speckled, greyish-yellow fur, fading to pale grey on the underparts."

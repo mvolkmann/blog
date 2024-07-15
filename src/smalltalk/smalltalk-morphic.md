@@ -43,6 +43,10 @@ To create a morph:
 - Move the cursor to the location where the morph should be placed
   and click to drop it.
 
+A morph can be modified even after the code that defines it has been deleted,
+because its definition is part of the running image.
+TODO: Is this actually true?
+
 To modify an existing morph:
 
 - cmd-click a morph to open its halo.

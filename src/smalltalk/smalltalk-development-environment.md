@@ -41,7 +41,7 @@ To refresh all the windows after code changes that affect them
 open the World menu and select "Windows...Restore all Windows".
 This does not update windows to use a newly selected theme.
 
-### Editing Code
+## Editing Code
 
 Many kinds of windows support entering Smalltalk code.
 The syntax highlighting described in the table below is provided.
@@ -77,7 +77,7 @@ If the token is a literal value, it give its class name.
 If the token is a class name, it will give its class category.
 If the token is a message name, it will list the classes that implement it.
 
-### Inspect Windows
+## Inspect Windows
 
 Inspect windows display all the instance variables of a specific object.
 To open one, select an object reference or place the cursor immediately after it
@@ -137,7 +137,7 @@ Let's walk through an example:
    sends the `#redrawNeeded` message to `self`
    which triggers the morph to redraw itself with the updated color.
 
-### Explore Windows
+## Explore Windows
 
 Explore windows display an object tree starting at a specific object.
 Select an object reference or place the cursor immediately after it
@@ -150,7 +150,11 @@ where `self` refers to the selected object in the top pane.
 <img alt="Cuis Explore window" style="width: 40%"
   src="/blog/assets/cuis-explore-window.png?v={{pkg.version}}">
 
-### System Browsers
+## System Browsers
+
+A System Browser can be used to read and modify any class,
+including those provided by the base image,
+those provided by installed packages, and those you create.
 
 To open a System Browser, open the World menu and select Open...Browser.
 Alternatively, type a class name (ex. String) in a Workspace window
@@ -161,7 +165,7 @@ For more detail, see
 <a href="https://cuis-smalltalk.github.io/TheCuisBook/A-brief-introduction-to-the-system-Browser.html"
 target="_blank">A brief introduction to the System Browser</a>.
 
-#### System Browser UI
+### System Browser UI
 
 System Browsers contain four rows.
 
@@ -311,7 +315,7 @@ System Browsers contain four rows.
   Press cmd-s (Accept) to save the changes
   and the thin, red border will disappear.
 
-#### Code Formatting
+### Code Formatting
 
 To automatically display formatted code,
 enter the following in a Workspace and "Do it":
@@ -334,7 +338,7 @@ click the "show..." button in System Browsers and select "prettyPrint".
 <img alt="Cuis System Browser" style="width: 100%"
   src="/blog/assets/cuis-system-browser-window.png?v={{pkg.version}}">
 
-#### Working with Classes
+### Working with Classes
 
 To create a new class:
 
@@ -364,7 +368,7 @@ A confirmation popup will appear.
 If the class has subclasses, a second popup will appear
 to confirm that you also wish to delete those classes.
 
-#### Working with Methods
+### Working with Methods
 
 To create a new method:
 
@@ -396,7 +400,7 @@ To delete a method from a class, select it and press cmd-x (Remove it).
 Then select "Remove it" or "Remove, then browse senders".
 The latter option allows the senders to be modified.
 
-#### Refactorings
+### Refactorings
 
 To refactor a method or code, select it, right-click,
 and select an option from the "refactorings" submenu.
@@ -428,7 +432,7 @@ For selected code the options include:
 - Push Up Instance Variable
 - Push Down Instance Variable
 
-### Search Browser
+## Search Browser
 
 There is no provided way to search for code that contains a given string.
 However, Mariano Montone implemented a "Search Browser" that provides this.
@@ -467,7 +471,7 @@ The "Case sensitive" button toggles whether the search will be case sensitive.
 Methods whose code matches the search will appear in the top pane.
 Select a method name to see its implementation in a lower pane.
 
-### Hierarchy Browsers
+## Hierarchy Browsers
 
 When a class is selected in a System Browser,
 the list of classes in the second pane only includes
@@ -484,7 +488,7 @@ Here's an example of a Hierarchy Browser for the `Array` class:
 <img alt="Cuis Hierarchy window" style="width: 40%"
   src="/blog/assets/cuis-hierarchy-window.png?v={{pkg.version}}">
 
-### Protocol Browsers
+## Protocol Browsers
 
 When a class is selected in a System Browser,
 only the methods defined directly in that class are displayed.
@@ -502,7 +506,7 @@ Here's an example of a Protocol window for the `Array` class:
 <img alt="Cuis Smalltalk Protocol window" style="width: 100%"
   src="/blog/assets/cuis-protocol-window.png?v={{pkg.version}}">
 
-### Text Editor Windows
+## Text Editor Windows
 
 "Text Editor" windows enable editing text files.
 They support changing the font size, color, and style of selected text.
@@ -511,7 +515,7 @@ They are not intended to be used to edit Smalltalk source code.
 The text can be saved in external text files,
 but all the formatting is discarded and only the raw text is saved.
 
-### Message Names Windows
+## Message Names Windows
 
 These windows enable searching for method implementations
 whose name contains a given substring.
@@ -524,7 +528,7 @@ Click one the class names to see the method implementation.
 <img alt="Cuis Smalltalk Protocol window" style="width: 100%"
   src="/blog/assets/cuis-protocol-window.png?v={{pkg.version}}">
 
-### MessageNotUnderstood Errors
+## MessageNotUnderstood Errors
 
 A `MessageNotUnderstood` error is signaled when a message is sent to an object
 and no method is found in the class of the object or any of its superclasses
@@ -584,7 +588,7 @@ repeat: anInteger
 <img alt="Cuis MessageNotUnderstood window" style="width: 85%"
   src="/blog/assets/cuis-messagenotunderstood-window.png?v={{pkg.version}}">
 
-### Debug Windows
+## Debug Windows
 
 To debug code, select one or more lines in a Workspace window
 and press cmd-shift-d (Debug it).
@@ -627,7 +631,7 @@ The Debug window will close when the end of the selected code is reached.
 Using `self halt` in the middle of Morphic operations
 seems to produce unexpected results. TODO: Why?
 
-### Change Sorter Windows
+## Change Sorter Windows
 
 Change Sorters summarize all the currently unsaved changes.
 The first row left pane displays a list of change set names.
@@ -643,7 +647,7 @@ a context menu of operations that can be performed on it.
 <img alt="Cuis Change Sorter" style="width: 100%"
   src="/blog/assets/cuis-change-sorter.png?v={{pkg.version}}">
 
-### File List
+## File List
 
 To view local files and operate on them,
 select Open ... File List from the World menu.
@@ -659,7 +663,7 @@ A common operation performed in a File List window
 is to locate and select a `.pck.st` file that defines a package
 and click the "install package" button to install it.
 
-### Installed Packages Window
+## Installed Packages Window
 
 To see all the installed packages, open the World menu
 and select Open...Installed Packages.
@@ -694,7 +698,7 @@ so I can easily load it into new images.
 This is useful in case I accidentally modify an image in an unintended way.
 I can then return to using a base image and load my package into it.
 
-### Process Browsers
+## Process Browsers
 
 Process Browsers display a list of all the Smalltalk-related processes
 that are running.
@@ -722,7 +726,7 @@ block forkAt: Processor userBackgroundPriority named: 'hello'.
 The name of the process will be "hello".
 To stop it, right-click the process, select it and press cmd-t (terminate).
 
-### Emergency Evaluator
+## Emergency Evaluator
 
 The Emergency Evaluator appears when there is
 an error for which a Debugger cannot be opened.

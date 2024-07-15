@@ -6,7 +6,7 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-### Installing
+## Installing
 
 To install Cuis Smalltalk:
 
@@ -64,7 +64,7 @@ If you wish to change this:
 - Find the key "CFBundleName".
 - Change its value from "Squeak" to "Cuis".
 
-### Updating
+## Updating
 
 If Cuis Smalltak is started using a platform-specific shell script,
 it will automatically update to the latest version.
