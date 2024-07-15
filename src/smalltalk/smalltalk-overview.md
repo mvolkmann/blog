@@ -452,7 +452,7 @@ rendering Scalable Vector Graphics (SVG).
 Cuis Smalltalk uses the same VM as Squeak Smalltalk, now called the
 <a href="https://opensmalltalk.org"
 target="_blank">Open Smalltalk Virtual Machine</a>.
-Original Pharo Smalltalk did the same, but it now has its own VM.
+Pharo Smalltalk has its own VM which is a fork of the Open Smalltalk VM.
 
 The Cuis mascot is southern mountain cavy which is a "tailless rodent with
 short, speckled, greyish-yellow fur, fading to pale grey on the underparts."

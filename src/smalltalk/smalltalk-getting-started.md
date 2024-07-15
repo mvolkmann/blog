@@ -46,7 +46,8 @@ This does not differ in any way from the VM used by Squeak.
 All the differences between Cuis and Squeak are implemented in
 its base image file (19 MB).
 
-The Squeak VM is implemented in Slang and C.
+The Squeak VM is implemented in
+<a href="http://wiki.squeak.org/squeak/slang" target="_blank">Slang</a> and C.
 Slang is a subset of Smalltalk that can be easily translated to C.
 C is used for performance critical parts.
 There is a different version of the Squeak VM executable

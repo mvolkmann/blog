@@ -20,9 +20,10 @@ One way to start an image is to double-click its file.
 
 To save any changes, open the World menu and select "Save Image",
 "Save Image as", or "Save Image and Quit".
-The changes include open windows, their position and size,
+The changes include all placed morphs (includes development enviroment windows),
+their position, size, and colors,
 selections made (ex. System Browser top pane selections),
-and their content (ex. Workspaces).
+and window content (ex. Workspaces).
 
 To quit without saving changes,
 open the World menu and select "Quit without saving".
