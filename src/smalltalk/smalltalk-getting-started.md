@@ -350,6 +350,17 @@ select the class method `clearInternal`,
 and change the line `entries at: 1 put: 'Transcript'.`
 to `entries at: 1 put: ''.`.
 
+## Saving Image
+
+At this point you should have the environment configured to your liking
+with your preferred font size, theme, and window placements
+(such as a Workspace and Transcript).
+Consider saving this in a new image so future sessions can start in this state.
+To do so, open the World menu, select "save image as...",
+and enter a file name with the extension ".image".
+The image will be saved in the same directory as the base image,
+along with a corresponding ".changes" file.
+
 ## Implementing in Debugger
 
 Smalltalk makes it possible to implement missing methods in the debugger.
