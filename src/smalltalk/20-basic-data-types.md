@@ -579,6 +579,15 @@ an `Array` containing `'/foo/bar'` and `'baz.txt')`.
 '/foo/bar/baz.txt' prefixAndSuffix: $/
 ```
 
+Since the `String` class is a subclass of `Collection`, the `select:` method
+can be used to iterate over and select a subset of its characters.
+For example, the following code returns a `String`
+containing all the digits found in another `String`:
+
+```smalltalk
+'Buy 14 bananas.' select: [:c | c isDigit] "14"
+```
+
 ### Symbol
 
 There are no particularly interesting class methods in the `Symbol` class.
@@ -597,6 +606,9 @@ defined in the `Symbol` class that are not also defined in superclasses.
 
 Many of the `Symbol` instance methods are useful for
 run-time evaluation of instances as keyword messages.
+
+The `UnicodeSymbol` class is similar to the `Symbol` class,
+but can hold Unicode characters.
 
 ## UUID
 
