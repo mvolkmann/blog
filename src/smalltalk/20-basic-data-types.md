@@ -361,6 +361,27 @@ But instances of `CharacterSequence`, `Symbol`, and `UnicodeSymbol` are immutabl
 
 Literal strings are delimited by single quotes,
 not double quotes which are used to delimit comments.
+The type of object created, `String` or `UnicodeString`, is automatically
+selected based on whether any of the characters require more than one byte.
+`String` objects can only hold Latin-1 (ISO 8859-1) characters
+which are represented by a single byte.
+`UnicodeString` objects can, as the name implies, hold Unicode characters
+whose representation can require multiple bytes.
+
+Once a `String` object is created, the `#at:put:` message cannot be
+used to set its characters to ones that require multiple bytes.
+For example, the following code results in the error
+"String only store Latin-1 Characters".
+
+```smalltalk
+| s smile |
+s := 'abc'.
+smile := Character codePoint: 9786.
+s at: 1 put: smile.
+```
+
+To fix this, change the line that assigns to `s`
+to `s := 'abc' asUnicodeString`.
 
 The `CharacterSequence` class method `readFrom:` answers an instance
 created by reading text from a stream.

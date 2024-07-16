@@ -131,7 +131,31 @@ To do this:
 - Optionally click the "Proceed" button to
   resume execution with calling the new method.
 
-### Tab Completions
+## Message Cascades
+
+To send multiple messages to the same object,
+add a semicolon after all but the last message.
+
+The following code sends multiple messages to the `Transcript` class:
+
+```smalltalk
+Transcript show: 'first line'; newLine; show: 'second line'
+```
+
+The following code sends the `#add:` message
+to an `OrderedCollection` object three times.
+Each cascade can be written on a separate line for readability.
+
+```smalltalk
+| fruits |
+fruits := OrderedCollection new.
+fruits
+    add: 'apple';
+    add: 'banana';
+    add: 'cherry'.
+```
+
+## Tab Completions
 
 When entering code to send a message, completion hints are provided
 if at least the first letter in the message name is typed
@@ -155,7 +179,7 @@ Even if the object has no matching method anywhere in its inheritance hierarchy,
 it could still respond by handling it in a `doesNotUnderstand` method.
 Personally I do not find this helpful and wish it did not show those messages.
 
-### Dynamic Messages
+## Dynamic Messages
 
 The `#perform:` message and its variations can be sent to any class or object
 to send a message specified by the symbol that follows `perform:`.
