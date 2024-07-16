@@ -233,15 +233,46 @@ defined in the `BoxedFloat64` and `SmallFloat64` classes
 | `>=`   | answers `Boolean` value indicating if receiver is greater than or equal to argument |
 | `~=`   | answers `Boolean` value indicating if receiver is not equal to argument             |
 
-The `Integer` class overrides the division (`/`) method to
-return a `Fraction` object when the argument is an `Integer`.
-This retains accuracy.
-For example, the following expression sets the variable `result`
-to the `Fraction` `4/3` rather than the `Float` `1.333333...`.
+The following table describes some of the instance methods defined
+in the `Integer` class that are not defined in the `Number` class.
+
+| Method             | Description                                                                         |
+| ------------------ | ----------------------------------------------------------------------------------- |
+| `/`                | answers `Fraction` result of dividing receiver by argument to retain accuracy       |
+| `<`                | answers `Boolean` value indicating if receiver is less than argument                |
+| `<=`               | answers `Boolean` value indicating if receiver is less than or equal to argument    |
+| `=`                | answers `Boolean` value indicating if receiver is equal to argument                 |
+| `>`                | answers `Boolean` value indicating if receiver is greater than argument             |
+| `>=`               | answers `Boolean` value indicating if receiver is greater than or equal to argument |
+| `~=`               | answers `Boolean` value indicating if receiver is not equal to the argument         |
+| `<<`               | answers new `Integer` obtained by shifting argument bits left                       |
+| `>>`               | answers new `Integer` obtained by shifting argument bits right                      |
+| `atRandom`         | answers a random integer from 1 to receiver                                         |
+| `atRandom:`        | answers a random integer from 1 to receiver using argument as a generator           |
+| `bitAnd:`          | answers new `Integer` obtained by anding the bits in receiver and argument          |
+| `bitAt:`           | answers the bit (0 or 1) in receiver at argument position                           |
+| `bitAt:put:`       | answers new `Integer` obtained by changing the bit at `bitAt:` to `put:`            |
+| `bitOr:`           | answers new `Integer` obtained by oring the bits in receiver and argument           |
+| `bitXor:`          | answers new `Integer` obtained by exclusive oring the bits in receiver and argument |
+| `factorial`        | answers factorial of receiver                                                       |
+| `gcd`              | answers greatest common divisor of receiver and argument                            |
+| `hex`              | answers equivalent hexadecimal string                                               |
+| `isPrime`          | answers `Boolean` value indicating if receiver is a prime number                    |
+| `lcm`              | answers least common multiple of receiver and argument                              |
+| `printStringRoman` | answers `String` that is the equivalent Roman numeral                               |
+| `printStringWords` | answers `String` that is the equivalent in English words                            |
+| `timesRepeat:`     | evaluate argument block receiver times                                              |
+
+In the following code, the `Integer` instance method `/`
+is used to set the variable `result` to the `Fraction` `4/3`
+rather than the `Float` `1.333333...`.
 
 ```smalltalk
 result := (1/3) * 4
 ```
+
+The result of `1961 printStringRoman` is `'MCMLXI'`.  
+The result of `1961 printStringWords` is `'one thousand, nine hundred sixty-one'`.
 
 Fraction objects have the instance variables `numerator` and `denominator`.
 
@@ -256,33 +287,6 @@ in the `Fraction` class that are not defined in the `Number` class.
 | `denominator` | answers the denominator of the fraction                             |
 | `numerator`   | answers the numerator of the fraction                               |
 | `reduced`     | answers a new fraction that is a reduced equivalent of the receiver |
-
-The following table describes some of the instance methods defined
-in the `Integer` class that are not defined in the `Number` class.
-
-| Method         | Description                                                                         |
-| -------------- | ----------------------------------------------------------------------------------- |
-| `<`            | answers `Boolean` value indicating if receiver is less than argument                |
-| `<=`           | answers `Boolean` value indicating if receiver is less than or equal to argument    |
-| `=`            | answers `Boolean` value indicating if receiver is equal to argument                 |
-| `>`            | answers `Boolean` value indicating if receiver is greater than argument             |
-| `>=`           | answers `Boolean` value indicating if receiver is greater than or equal to argument |
-| `~=`           | answers `Boolean` value indicating if receiver is not equal to the argument         |
-| `<<`           | answers new `Integer` obtained by shifting argument bits left                       |
-| `>>`           | answers new `Integer` obtained by shifting argument bits right                      |
-| `atRandom`     | answers a random integer from 1 to receiver                                         |
-| `atRandom:`    | answers a random integer from 1 to receiver using argument as a generator           |
-| `bitAnd:`      | answers new `Integer` obtained by anding the bits in receiver and argument          |
-| `bitAt:`       | answers the bit (0 or 1) in receiver at argument position                           |
-| `bitAt:put:`   | answers new `Integer` obtained by changing the bit at `bitAt:` to `put:`            |
-| `bitOr:`       | answers new `Integer` obtained by oring the bits in receiver and argument           |
-| `bitXor:`      | answers new `Integer` obtained by exclusive oring the bits in receiver and argument |
-| `factorial`    | answers factorial of receiver                                                       |
-| `gcd`          | answers greatest common divisor of receiver and argument                            |
-| `hex`          | answers equivalent hexadecimal string                                               |
-| `isPrime`      | answers `Boolean` value indicating if receiver is a prime number                    |
-| `lcm`          | answers least common multiple of receiver and argument                              |
-| `timesRepeat:` | evaluate argument block receiver times                                              |
 
 ## Characters
 
