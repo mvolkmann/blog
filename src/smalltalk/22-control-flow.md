@@ -46,15 +46,27 @@ assessment := color caseOf: {
 
 ### Iteration
 
-The `timesRepeat` method in the `Integer` class can be used
-to evaluate a block a given number of times.
-For example:
+The `Integer` class described in the "Basic Data Types" section
+provides several methods for iteration.
+
+The `timesRepeat:` method evaluates a block a given number of times.
+For example, the following code prints the string `'Ho'`
+three times on separate lines:
 
 ```smalltalk
 3 timesRepeat: ['Ho' print]
 ```
 
-See the "Collections" section for messages that iterate over a collection.
+The `to:do:` and `to:by:do:` methods evaluate a block
+for each `Integer` value in a range with an optional step (`by:`) size.
+For example, the following code prints
+the numbers 1, 3, 5, 7, and 9 on separate lines.
+
+```smalltalk
+1 to: 10 by: 2 do: [:n | n print]
+```
 
 See the "Blocks" section for messages that
 use a block as an iteration condition.
+
+See the "Collections" section for messages that iterate over a collection.
