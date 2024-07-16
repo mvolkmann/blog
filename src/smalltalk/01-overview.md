@@ -213,10 +213,11 @@ Smalltalk has the following pros:
   Hierarchy Browser, Protocol Browser, and more.
 - Everything is an object.
 - All methods are invoked through message passing
-  which supports extreme polymorphism.
-  Any kind of object, referred to as a "receiver",
-  can be passed as a message argument as long as it
-  responds to the messages that will be sent to it.
+  which supports polymorphism.
+  Any kind of object can be passed as a message argument
+  as long as it responds to the messages that will be sent to it.
+- It provides automatic garbage collection to free the space
+  used by objects when they are no longer referenced.
 - It provides versioning and development history.
 - It has a great web app. framework (Seaside) and a great CMS framework (Pier).
 

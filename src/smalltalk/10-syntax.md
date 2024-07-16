@@ -13,6 +13,7 @@ it's important to understand the syntax of the Smalltalk programming language.
 ## Summary
 
 The following table summarizes all the syntax.
+The term "receiver" describes the object to which a message is sent.
 
 | Item                                              | Example                                                    |
 | ------------------------------------------------- | ---------------------------------------------------------- |
