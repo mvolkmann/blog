@@ -21,10 +21,14 @@ When multiple parameters have the same data type, a good way to
 name them is to include their meaning and type in the name.
 For example, `latitude: latNumber longitude: lngNumber`.
 
-Methods that return an object are said to "answer" a value.
+Methods always "answer" (return) an object,
+either explicitly with the `^` return operator
+or implicitly returning the receiver.
 For example, the instance method `asUppercase` in the `String` class
 contains the comment "Answer a String made up from
 the receiver whose characters are all uppercase."
+Returning the receiver enables message chaining
+in which multiple messages are sent to the same object.
 
 All methods are public.
 By convention, methods that should only be used by
