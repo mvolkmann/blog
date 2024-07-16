@@ -375,16 +375,20 @@ To create a new class:
 
 - Add desired instance and class variable names as space-separated strings.
 
-- Save by pressing cmd-s (Accept).
+- Press cmd-s (Accept).
 
 An alternative way to create a new class is to:
 
 - Select an existing class to display its code in the bottom pane.
-- Modify the `subclass:` message send,
+- Modify the `subclass:...` message send,
   including the superclass and subclass names.
-- Save by pressing cmd-s (Accept).
+- Press cmd-s (Accept).
 
 This will create a new class and will not modify the existing class.
+
+To modify an existing class, select it in the top second pane,
+edit the `subclass:...` message arguments in the bottom pane,
+and press cmd-s (Accept).
 
 To delete a class, select it and press cmd-x (Remove it).
 A confirmation popup will appear.
@@ -415,15 +419,18 @@ To create a new method:
 
 - Modify the code template to define the new method.
 
-- Save by pressing cmd-s (Accept).
+- Press cmd-s (Accept).
 
 An alternative way to create a new method is to:
 
 - Select an existing method to display its code in the bottom pane.
 - Modify the code, including its selector.
-- Save by pressing cmd-s (Accept).
+- Press cmd-s (Accept).
 
 This will create a new method and will not modify the existing method.
+
+To modify an existing method, select it in the top fourth pane,
+edit the code in the bottom pane, and press cmd-s (Accept).
 
 To move a method from the class side to the instance side or vice-versa,
 right-click the method name in the top fourth pane and
