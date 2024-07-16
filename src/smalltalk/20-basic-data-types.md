@@ -299,11 +299,16 @@ whenever possible for better calculation accuracy.
 The following table describes some of the instance methods defined
 in the `Fraction` class that are not defined in the `Number` class.
 
-| Method        | Description                                                         |
-| ------------- | ------------------------------------------------------------------- |
-| `denominator` | answers the denominator of the fraction                             |
-| `numerator`   | answers the numerator of the fraction                               |
-| `reduced`     | answers a new fraction that is a reduced equivalent of the receiver |
+| Method        | Description                                                           |
+| ------------- | --------------------------------------------------------------------- |
+| `asFloat`     | answers the nearest equivalent `Float` value                          |
+| `denominator` | answers the denominator of the fraction                               |
+| `numerator`   | answers the numerator of the fraction                                 |
+| `reduced`     | answers a new `Fraction` that is a reduced equivalent of the receiver |
+
+For example, `(4/6) reduced` returns `2/3`.
+Parentheses are needed here because otherwise the message `#reduced`
+is sent to the `Integer` `6` which does not have a corresponding method.
 
 ## Character
 
