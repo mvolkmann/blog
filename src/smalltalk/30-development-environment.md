@@ -153,8 +153,9 @@ where `self` refers to the selected object in the top pane.
 
 ## System Browsers
 
-A System Browser can be used to read and modify any class,
-including those provided by the base image,
+A System Browser can be used to examine, create, modify and delete
+class categories, classes, method categories, and methods.
+This includes those provided by the base image,
 those provided by installed packages, and those you create.
 
 To open a System Browser, open the World menu and select Open...Browser.
@@ -168,6 +169,9 @@ target="_blank">A brief introduction to the System Browser</a>.
 
 ### System Browser UI
 
+<img alt="Cuis System Browser" style="width: 100%"
+  src="/blog/assets/cuis-system-browser-window.png?v={{pkg.version}}">
+
 System Browsers contain four rows.
 
 - The first (top) row contains four panes for displaying and operating on
@@ -177,6 +181,9 @@ System Browsers contain four rows.
   Selecting a class category in the first pane
   displays the classes in that category in the second pane.
   For example, the class `String` is in the class category `Kernel-Text`.
+  Class categories include those provided by the base image
+  (ex. "Ordered - Sequenceable"), those defined by installed packages,
+  and class categories you create (used to save your code outside the image).
 
   Selecting a class in the second pane
   displays message categories for the class in the third pane.
@@ -184,6 +191,11 @@ System Browsers contain four rows.
   "copying", "converting", "enumerating", and "printing".
   There is a separate set of method categories
   for instance methods and class methods.
+
+  The second pane contains three buttons at the bottom.
+  Clicking the "instance" or "class" button causes the remaining panes
+  to display information about instance or class methods, respectively.
+  Clicking the "?" button shows the class comment for the select class.
 
   Selecting a message category (a.k.a protocol) in the third pane
   displays methods in that category in the fourth pane.
@@ -335,9 +347,6 @@ I wish it was.
 
 An alternative to setting the `#browseWithPrettyPrint` preference is to
 click the "show..." button in System Browsers and select "prettyPrint".
-
-<img alt="Cuis System Browser" style="width: 100%"
-  src="/blog/assets/cuis-system-browser-window.png?v={{pkg.version}}">
 
 ### Working with Classes
 

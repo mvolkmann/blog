@@ -42,6 +42,9 @@ Classes provided by the image are in categories such as
 If a new class definition is saved with an empty string category,
 it will be changed to 'as yet unclassified'.
 
+Classes in the "Kernel" category are considered to be fundamental classes.
+Examples include `Date`, `BlockClosure`, `Integer`, `Object`, and `String`.
+
 Pool dictionaries enable sharing data between related classes.
 They reside in the `Smalltalk` dictionary.
 To create a pool dictionary named "MyPool",
