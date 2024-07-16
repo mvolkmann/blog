@@ -53,8 +53,12 @@ across Windows, Linux, and MacOS, only differing based on screen size.
 There is no need to recompile code for different environments.
 This makes Smalltalk code highly portable!
 
-Smalltalk is not an interpreted language. Smalltalk code is compiled
-to optimized bytecode that is executed by a VM.
+Smalltalk is not an interpreted language.
+It was the first programming language
+to use just-in-time (JIT) compilation.
+Smalltalk code is compiled to optimized bytecode that is executed by a VM.
+Compilation occurs during program execution rather than before execution.
+This results in better performance than interpreting code.
 
 Everything in Smalltalk is represented by an object, including
 classes and all GUI elements in the development environment.
