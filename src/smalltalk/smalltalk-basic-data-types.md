@@ -125,6 +125,7 @@ foregroundColor := backgroundColor := Color blue.
 There are no shorthand assignment operators like `+=` for numbers.
 
 Numbers are automatically converted to objects of the appropriate type.
+This includes changing size to accomodate larger and smaller values.
 For example:
 
 ```smalltalk
@@ -232,10 +233,11 @@ defined in the `BoxedFloat64` and `SmallFloat64` classes
 | `>=`   | answers `Boolean` value indicating if receiver is greater than or equal to argument |
 | `~=`   | answers `Boolean` value indicating if receiver is not equal to argument             |
 
-The `Integer` class overrides the `/` method to
+The `Integer` class overrides the division (`/`) method to
 return a `Fraction` object when the argument is an `Integer`.
-For example, the following sets `result` to the `Fraction` `4/3`
-rather than the `Float` `1.333333...`.
+This retains accuracy.
+For example, the following expression sets the variable `result`
+to the `Fraction` `4/3` rather than the `Float` `1.333333...`.
 
 ```smalltalk
 result := (1/3) * 4
@@ -275,6 +277,7 @@ in the `Integer` class that are not defined in the `Number` class.
 | `bitAt:put:`   | answers new `Integer` obtained by changing the bit at `bitAt:` to `put:`            |
 | `bitOr:`       | answers new `Integer` obtained by oring the bits in receiver and argument           |
 | `bitXor:`      | answers new `Integer` obtained by exclusive oring the bits in receiver and argument |
+| `factorial`    | answers factorial of receiver                                                       |
 | `gcd`          | answers greatest common divisor of receiver and argument                            |
 | `hex`          | answers equivalent hexadecimal string                                               |
 | `isPrime`      | answers `Boolean` value indicating if receiver is a prime number                    |

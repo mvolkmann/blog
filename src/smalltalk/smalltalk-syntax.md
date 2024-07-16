@@ -41,6 +41,7 @@ The following table summarizes all the syntax.
 | message chaining - sends to previous result       | `2 * 3 :: squared :: negated` (-36)                        |
 | method return value                               | `^<expression>` such as ^42                                |
 | expression separator (period)                     | `'foo print'. 'bar' print`                                 |
+| parentheses to control evaluation order           | `a * (b + c)`                                              |
 | reference to current object in a method           | `self`                                                     |
 
 The caret (^) in a return expression can be followed by a space.
