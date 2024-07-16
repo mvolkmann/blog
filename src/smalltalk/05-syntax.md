@@ -44,6 +44,9 @@ The following table summarizes all the syntax.
 | parentheses to control evaluation order           | `a * (b + c)`                                              |
 | reference to current object in a method           | `self`                                                     |
 
+Whitespace in Smalltalk code is insignificant.
+Spaces, tabs, and newline characters can be freely inserted.
+
 The caret (^) in a return expression can be followed by a space.
 The pretty printer includes a space, but many developers prefer to omit it.
 

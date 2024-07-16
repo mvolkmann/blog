@@ -96,7 +96,10 @@ and promoting Smalltalk outside of PARC.
 The original goal was to use Smalltalk to teach programming.
 
 Many other technologies were invented at PARC including
-graphical user interfaces, the mouse, and virtual machines.
+graphical user interfaces, the mouse, drag and drop,
+model-view-controller architecture, and virtual machines.
+The office metaphor of applying the terms desktop, folder, and file
+were also introduced at PARC.
 
 Alan Kay said "OOP to me means only messaging,
 local retention and protection and hiding of state-process,

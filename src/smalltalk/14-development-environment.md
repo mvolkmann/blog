@@ -16,10 +16,10 @@ Alternatively, move the mouse cursor over the window and press cmd-w.
 The available windows, in the order listed, include:
 
 - Text Editor: for editing text other than Smalltalk source code
-- Workspace: for experimenting with code
+- Workspace: for experimenting with code (described in "Getting Started" section)
 - Browser (a.k.a System Browser): for examining and editing code
 - Message Names: for finding classes that implement a given method
-- Transcript: displays output
+- Transcript: displays output (described in "Getting Started" section)
 - Installed Packages: lists all installed packages and allows more to be installed
 - Change Sorter: for viewing, manipulating, and saving ChangeSets
 - Process Browser: displays the state of all Smalltalk processes

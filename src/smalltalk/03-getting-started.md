@@ -253,6 +253,8 @@ For example, enter the following and press cmd-d to set a variable:
 message := 'Hello, Smalltalk!'
 ```
 
+In a Workspace, it is not necessary to declare variables before setting them.
+
 To execute the code and print the result of the last expression
 at the cursor position, press cmd-p (Print it).
 This sends the message `#printString` to the result object
