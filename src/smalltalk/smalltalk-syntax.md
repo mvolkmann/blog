@@ -46,8 +46,9 @@ The following table summarizes all the syntax.
 The caret (^) in a return expression can be followed by a space.
 The pretty printer includes a space, but many developers prefer to omit it.
 
-In static arrays the elements are separated by spaces.
+Expressions in a method are separated by periods.
 
+In static arrays the elements are separated by spaces.  
 In dynamic arrays the expressions are separated by periods.
 
 ## Naming Conventions

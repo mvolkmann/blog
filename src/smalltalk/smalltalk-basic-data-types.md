@@ -9,7 +9,7 @@ layout: topic-layout.njk
 The following subsections provide a review of
 commonly used Smalltalk classes that represent data types.
 
-### UndefinedObject
+## UndefinedObject
 
 The pseudo-variable `nil` represents not having a value.
 It refers to the singleton instance of the `UndefinedObject` class.
@@ -31,7 +31,7 @@ These can be invoked on the pseudo-variable `nil`.
 | `isNil`           | always answers `true`                                    |
 | `notNil`          | always answers `false`                                   |
 
-### Booleans
+## Booleans
 
 The pseudo-variables `true` and `false` refer to
 singleton instances of the classes `True` and `False`
@@ -85,7 +85,7 @@ Since `True` and `False` are subclasses, they also have these methods.
 The `True` and `False` classes implement some of the methods described above,
 but they do not add any methods.
 
-### Numbers
+## Numbers
 
 The following list depicts the class hierarchy for various kinds of numbers:
 
@@ -281,7 +281,7 @@ in the `Integer` class that are not defined in the `Number` class.
 | `lcm`          | answers least common multiple of receiver and argument                              |
 | `timesRepeat:` | evaluate argument block receiver times                                              |
 
-### Characters
+## Characters
 
 Characters are represented by the `Character` class.
 Printable literal characters are preceded by a dollar sign.
@@ -337,7 +337,7 @@ in the `Character` class.
 | `to:`                      | answers `Array` of `Character` instances from receiver to argument                                                        |
 | `tokenish`                 | answers `Boolean` value indicating if receiver can appear in a token (letter, digit, or colon)                            |
 
-### Strings
+## Strings
 
 The following list depicts the class hierarchy for character data:
 
@@ -402,6 +402,13 @@ defined in the `CharacterSequence` class.
 | `withoutPrefix`                        | answers instance created by removing given substring prefix                                                                   |
 | `withoutSuffix`                        | answers instance created by removing given substring suffix                                                                   |
 | `withoutTrailingBlanks`                | answers instance created by removing trailing blanks                                                                          |
+
+The `String` class inherits many instance methods from the
+`CharacterSequence` class and overrides the behavior some of them.
+A notable addition is the binary method comma (`,`)
+which answers a new `String` containing
+the argument characters appended to the receiver characters.
+For example, `'Hello', ' ', 'World'` yields the `String` `'Hello World'`.
 
 The following table describes some of the class methods
 defined in the `String` class.
@@ -516,7 +523,7 @@ an `Array` containing `'/foo/bar'` and `'baz.txt')`.
 '/foo/bar/baz.txt' prefixAndSuffix: $/
 ```
 
-#### Symbols
+## Symbols
 
 There are no particularly interesting class methods in the `Symbol` class.
 
@@ -535,7 +542,7 @@ defined in the `Symbol` class that are not also defined in superclasses.
 Many of the `Symbol` instance methods are useful for
 run-time evaluation of instances as keyword messages.
 
-### UUIDs
+## UUIDs
 
 The package "Identities-UUID" generates UUID values.
 To install it, enter `Feature require: 'Identities-UUID'` in a Workspace

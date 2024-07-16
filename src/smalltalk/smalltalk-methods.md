@@ -164,7 +164,9 @@ height: aHeight width: aWidth
     ^self new setHeight: aHeight width: aWidth
 ```
 
-The `VRectangle` class can add the following instance methods:
+The `VRectangle` class can add the following instance methods.
+In method bodies that contain more than one expression,
+the expressions are separated by the period character (`.`).
 
 ```smalltalk
 setHeight: aHeight width: aWidth
