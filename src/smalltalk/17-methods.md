@@ -278,6 +278,30 @@ Accessor methods for all instance variables in a class can be generated
 by right-clicking the class name in a System Browser
 and selecting "more...create inst var accessors".
 
+## Overriding Methods
+
+A class can override methods defined in a superclass.
+In some cases this is required because the superclass method
+sends the message `#subclassResponsibility` to self.
+For example, the `Number` class defines the instance method `+` as follows:
+
+```smalltalk
++ aNumber
+    "Answer the sum of the receiver and aNumber."
+    self subclassResponsibility
+```
+
+The subclasses `BoxedFloat64`, `SmallFloat64`, `Fraction`, `Integer`, and others
+all override this method to add specific number types in a unique way.
+The need for this is especially evident when
+considering how to add two `Fraction` values.
+
+In some cases it is desirable for an overriding method in a subclass
+to call the corresponding method its superclass.
+This is done by sending the same message to the `super` keyword.
+This is always done in the `initialize` method because otherwise
+instance variables in the superclass will not be properly initialized.
+
 ## Primitive Methods
 
 Primitive methods are implemented in the VM, often in a way that is
