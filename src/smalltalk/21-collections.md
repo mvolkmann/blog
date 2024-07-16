@@ -273,8 +273,8 @@ there are predefined, type-specific array classes including
 
 ## Interval
 
-Instances of the `Interval` class represent a finite arithmetic progression
-which is a sequence of numbers where
+Instances of the `Interval` class represent a finite arithmetic progression.
+This is a sequence of numbers where
 the difference between consecutive terms is constant.
 An example is the numbers 2, 4, 6, and 8.
 

@@ -287,10 +287,14 @@ The result of `1961 printStringWords` is `'one thousand, nine hundred sixty-one'
 
 ### Fraction
 
-Fraction objects have the instance variables `numerator` and `denominator`.
+`Fraction` objects represent rational values that
+have the instance variables `numerator` and `denominator`.
 
 Operations of fractions always return a new `Fraction` object
 rather than a `Float` object in order to maintain accuracy.
+
+It is recommended to use `Fraction` values rather that `Float` values
+whenever possible for better calculation accuracy.
 
 The following table describes some of the instance methods defined
 in the `Fraction` class that are not defined in the `Number` class.
