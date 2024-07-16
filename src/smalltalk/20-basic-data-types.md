@@ -415,7 +415,7 @@ created by reading text from a stream.
 The following table describes some of the instance methods
 defined in the `CharacterSequence` class.
 
-All indexes are 1-based.
+All indexes are 1-based and `0` means not found.
 
 | Method                                 | Description                                                                                                                   |
 | -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
@@ -471,7 +471,7 @@ For example, `'Hello', ' ', 'World'` yields the `String` `'Hello World'`.
 The following table describes some of the class methods
 defined in the `String` class.
 
-All indexes are 1-based.
+All indexes are 1-based and `0` means not found.
 
 | Method                                  | Description                                                                                   |
 | --------------------------------------- | --------------------------------------------------------------------------------------------- |
@@ -613,6 +613,16 @@ run-time evaluation of instances as keyword messages.
 
 The `UnicodeSymbol` class is similar to the `Symbol` class,
 but can hold Unicode characters.
+
+## Point
+
+The `Point` class is in the "Graphics-Primitives" class category.
+Instances represent a 2D point and have the instance variables `x` and `y`.
+In addition to describing Cartesian points, these can be used to describe
+a 2D size where `x` represents the width and `y` represents the height.
+
+The `Point` class has a large number of instance methods (over 70)
+including methods for adding, subtracting, dividing, and comparing instances.
 
 ## UUID
 
