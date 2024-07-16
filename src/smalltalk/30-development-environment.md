@@ -77,6 +77,13 @@ If the token is a literal value, it give its class name.
 If the token is a class name, it will give its class category.
 If the token is a message name, it will list the classes that implement it.
 
+If an attempt is made to close a window that contains unsaved changes
+or move focus from an editing pane that contains unsaved changes,
+a popup will appear with the prompt
+"Changes have not been saved. Is it OK to cancel those changes?".
+Click the "Yes" to discard the changes or
+"No" to continue working in the editing pane.
+
 ## Inspect Windows
 
 Inspect windows display all the instance variables of a specific object.
