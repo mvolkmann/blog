@@ -1,7 +1,7 @@
 ---
 eleventyNavigation:
   key: Messages
-  order: 14
+  order: 13
   parent: Smalltalk
 layout: topic-layout.njk
 ---
@@ -154,6 +154,17 @@ fruits
     add: 'banana';
     add: 'cherry'.
 ```
+
+The value of a message cascade is the object returned by the last message.
+If the method invoked by the last message
+does not return the initial receiver object and
+you want the cascade to return that,
+end the cascade with `; yourself`.
+
+For example, the last expression above that uses a message cascade
+to send the message `#add:` three times. The result is `'cherry'`.
+Adding `; yourself` to the end of that expression
+changes it to result in the value of `fruits`.
 
 ## Tab Completions
 

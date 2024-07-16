@@ -1,7 +1,7 @@
 ---
 eleventyNavigation:
   key: Objects
-  order: 13
+  order: 14
 
   parent: Smalltalk
 layout: topic-layout.njk
