@@ -621,6 +621,17 @@ Instances represent a 2D point and have the instance variables `x` and `y`.
 In addition to describing Cartesian points, these can be used to describe
 a 2D size where `x` represents the width and `y` represents the height.
 
+An instance can be created by sending `#x:y:` to the `Point` class
+or by sending `#@` to a `Number` object.
+For example, the following expressions create equivalent `Point` objects:
+
+```smalltalk
+p1 := Point x: 1.2 y: 3.4.
+p2 := 1.2 @ 3.4.
+```
+
+Including spaces around `@` is optional.
+
 The `Point` class has a large number of instance methods (over 70)
 including methods for adding, subtracting, dividing, and comparing instances.
 
