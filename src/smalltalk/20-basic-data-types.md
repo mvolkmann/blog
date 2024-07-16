@@ -247,6 +247,7 @@ in the `Integer` class that are not defined in the `Number` class.
 | `~=`               | answers `Boolean` value indicating if receiver is not equal to the argument         |
 | `<<`               | answers new `Integer` obtained by shifting argument bits left                       |
 | `>>`               | answers new `Integer` obtained by shifting argument bits right                      |
+| `asFloat`          | answers the equivalent value as a `Float`                                           |
 | `atRandom`         | answers a random integer from 1 to receiver                                         |
 | `atRandom:`        | answers a random integer from 1 to receiver using argument as a generator           |
 | `bitAnd:`          | answers new `Integer` obtained by anding the bits in receiver and argument          |
@@ -270,6 +271,12 @@ rather than the `Float` `1.333333...`.
 ```smalltalk
 result := (1/3) * 4
 ```
+
+To cause the result of the expression above
+to be a `Float` value rather than a `Fraction`,
+change one or more of the literal `Integer` values to a `Float`
+by adding `.0` after the value.
+Alternatively, send the `#asFloat` message to any of the `Integer` values.
 
 The result of `1961 printStringRoman` is `'MCMLXI'`.  
 The result of `1961 printStringWords` is `'one thousand, nine hundred sixty-one'`.
