@@ -313,6 +313,8 @@ is sent to the `Integer` `6` which does not have a corresponding method.
 ## Character
 
 Characters are represented by the `Character` class.
+They are restricted to single-byte Latin-1 (ISO 8859-1) characters.
+
 Printable literal characters are preceded by a dollar sign.
 For example, `$a`.
 Non-printable characters can be obtained from unary class methods
