@@ -267,8 +267,7 @@ so it can be removed by pressing the delete key.
 > In documentation that describes sending a message,
 > it is common to include the pound sign,
 > because the lookup tables (called `methodDict`)
-> that maps message names to methods,
-> use symbols for the keys.
+> that map message names to methods use symbols for the keys.
 > This will be discussed in more detail in the "Objects" chapter.
 
 For example, enter the following and press cmd-p to get the output `6`:

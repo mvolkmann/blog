@@ -31,7 +31,7 @@ These can be invoked on the pseudo-variable `nil`.
 | `isNil`           | always answers `true`                                    |
 | `notNil`          | always answers `false`                                   |
 
-## Booleans
+## Boolean
 
 The pseudo-variables `true` and `false` refer to
 singleton instances of the classes `True` and `False`
@@ -85,7 +85,7 @@ Since `True` and `False` are subclasses, they also have these methods.
 The `True` and `False` classes implement some of the methods described above,
 but they do not add any methods.
 
-## Numbers
+## Number
 
 The following list depicts the class hierarchy for various kinds of numbers:
 
@@ -216,6 +216,8 @@ The `Fraction` class implements the `isLiteral` method
 to return `true` if the denominator is a multiple of 2 or 5,
 and `false` otherwise. TODO: Why?
 
+### Float
+
 The subclasses `Float`, `BoxedFloat64`, and `SmallFloat64`
 do not implement any particularly interesting methods
 that were not already described for the `Number` class.
@@ -233,36 +235,38 @@ defined in the `BoxedFloat64` and `SmallFloat64` classes
 | `>=`   | answers `Boolean` value indicating if receiver is greater than or equal to argument |
 | `~=`   | answers `Boolean` value indicating if receiver is not equal to argument             |
 
+### Integer
+
 The following table describes some of the instance methods defined
 in the `Integer` class that are not defined in the `Number` class.
 
-| Method             | Description                                                                         |
-| ------------------ | ----------------------------------------------------------------------------------- |
-| `/`                | answers `Fraction` result of dividing receiver by argument to retain accuracy       |
-| `<`                | answers `Boolean` value indicating if receiver is less than argument                |
-| `<=`               | answers `Boolean` value indicating if receiver is less than or equal to argument    |
-| `=`                | answers `Boolean` value indicating if receiver is equal to argument                 |
-| `>`                | answers `Boolean` value indicating if receiver is greater than argument             |
-| `>=`               | answers `Boolean` value indicating if receiver is greater than or equal to argument |
-| `~=`               | answers `Boolean` value indicating if receiver is not equal to the argument         |
-| `<<`               | answers new `Integer` obtained by shifting argument bits left                       |
-| `>>`               | answers new `Integer` obtained by shifting argument bits right                      |
-| `asFloat`          | answers the equivalent value as a `Float`                                           |
-| `atRandom`         | answers a random integer from 1 to receiver                                         |
-| `atRandom:`        | answers a random integer from 1 to receiver using argument as a generator           |
-| `bitAnd:`          | answers new `Integer` obtained by anding the bits in receiver and argument          |
-| `bitAt:`           | answers the bit (0 or 1) in receiver at argument position                           |
-| `bitAt:put:`       | answers new `Integer` obtained by changing the bit at `bitAt:` to `put:`            |
-| `bitOr:`           | answers new `Integer` obtained by oring the bits in receiver and argument           |
-| `bitXor:`          | answers new `Integer` obtained by exclusive oring the bits in receiver and argument |
-| `factorial`        | answers factorial of receiver                                                       |
-| `gcd`              | answers greatest common divisor of receiver and argument                            |
-| `hex`              | answers equivalent hexadecimal string                                               |
-| `isPrime`          | answers `Boolean` value indicating if receiver is a prime number                    |
-| `lcm`              | answers least common multiple of receiver and argument                              |
-| `printStringRoman` | answers `String` that is the equivalent Roman numeral                               |
-| `printStringWords` | answers `String` that is the equivalent in English words                            |
-| `timesRepeat:`     | evaluate argument block receiver times                                              |
+| Method             | Description                                                                                                            |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| `/`                | answers result of dividing receiver by argument (`Integer` if divides evenly; `Fraction` otherwise to retain accuracy) |
+| `<`                | answers `Boolean` value indicating if receiver is less than argument                                                   |
+| `<=`               | answers `Boolean` value indicating if receiver is less than or equal to argument                                       |
+| `=`                | answers `Boolean` value indicating if receiver is equal to argument                                                    |
+| `>`                | answers `Boolean` value indicating if receiver is greater than argument                                                |
+| `>=`               | answers `Boolean` value indicating if receiver is greater than or equal to argument                                    |
+| `~=`               | answers `Boolean` value indicating if receiver is not equal to the argument                                            |
+| `<<`               | answers new `Integer` obtained by shifting argument bits left                                                          |
+| `>>`               | answers new `Integer` obtained by shifting argument bits right                                                         |
+| `asFloat`          | answers the equivalent value as a `Float`                                                                              |
+| `atRandom`         | answers a random integer from 1 to receiver                                                                            |
+| `atRandom:`        | answers a random integer from 1 to receiver using argument as a generator                                              |
+| `bitAnd:`          | answers new `Integer` obtained by anding the bits in receiver and argument                                             |
+| `bitAt:`           | answers the bit (0 or 1) in receiver at argument position                                                              |
+| `bitAt:put:`       | answers new `Integer` obtained by changing the bit at `bitAt:` to `put:`                                               |
+| `bitOr:`           | answers new `Integer` obtained by oring the bits in receiver and argument                                              |
+| `bitXor:`          | answers new `Integer` obtained by exclusive oring the bits in receiver and argument                                    |
+| `factorial`        | answers factorial of receiver                                                                                          |
+| `gcd`              | answers greatest common divisor of receiver and argument                                                               |
+| `hex`              | answers equivalent hexadecimal string                                                                                  |
+| `isPrime`          | answers `Boolean` value indicating if receiver is a prime number                                                       |
+| `lcm`              | answers least common multiple of receiver and argument                                                                 |
+| `printStringRoman` | answers `String` that is the equivalent Roman numeral                                                                  |
+| `printStringWords` | answers `String` that is the equivalent in English words                                                               |
+| `timesRepeat:`     | evaluate argument block receiver times                                                                                 |
 
 In the following code, the `Integer` instance method `/`
 is used to set the variable `result` to the `Fraction` `4/3`
@@ -281,6 +285,8 @@ Alternatively, send the `#asFloat` message to any of the `Integer` values.
 The result of `1961 printStringRoman` is `'MCMLXI'`.  
 The result of `1961 printStringWords` is `'one thousand, nine hundred sixty-one'`.
 
+### Fraction
+
 Fraction objects have the instance variables `numerator` and `denominator`.
 
 Operations of fractions always return a new `Fraction` object
@@ -295,7 +301,7 @@ in the `Fraction` class that are not defined in the `Number` class.
 | `numerator`   | answers the numerator of the fraction                               |
 | `reduced`     | answers a new fraction that is a reduced equivalent of the receiver |
 
-## Characters
+## Character
 
 Characters are represented by the `Character` class.
 Printable literal characters are preceded by a dollar sign.
@@ -390,6 +396,8 @@ s at: 1 put: smile.
 To fix this, change the line that assigns to `s`
 to `s := 'abc' asUnicodeString`.
 
+### CharacterSequence
+
 The `CharacterSequence` class method `readFrom:` answers an instance
 created by reading text from a stream.
 
@@ -437,6 +445,8 @@ defined in the `CharacterSequence` class.
 | `withoutPrefix`                        | answers instance created by removing given substring prefix                                                                   |
 | `withoutSuffix`                        | answers instance created by removing given substring suffix                                                                   |
 | `withoutTrailingBlanks`                | answers instance created by removing trailing blanks                                                                          |
+
+### String
 
 The `String` class inherits many instance methods from the
 `CharacterSequence` class and overrides the behavior some of them.
@@ -558,7 +568,7 @@ an `Array` containing `'/foo/bar'` and `'baz.txt')`.
 '/foo/bar/baz.txt' prefixAndSuffix: $/
 ```
 
-## Symbols
+### Symbol
 
 There are no particularly interesting class methods in the `Symbol` class.
 
@@ -577,7 +587,7 @@ defined in the `Symbol` class that are not also defined in superclasses.
 Many of the `Symbol` instance methods are useful for
 run-time evaluation of instances as keyword messages.
 
-## UUIDs
+## UUID
 
 The package "Identities-UUID" generates UUID values.
 To install it, enter `Feature require: 'Identities-UUID'` in a Workspace
