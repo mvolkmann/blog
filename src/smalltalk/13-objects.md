@@ -78,6 +78,36 @@ enter the following in Workspace and "Do it":
 SomeClass allInstancesDo: [ :obj | obj delete ]
 ```
 
+## Counting Objects
+
+To determine the number of objects that currently exist
+from a given class, not counting its subclasses,
+send the message `#allInstances` to the class.
+This answers an `Array` containing all the objects.
+For example:
+
+```smalltalk
+Workspace allInstances size
+```
+
+To determine the number of objects that currently exist
+from all the subclasses of a given class,
+send the message `#allSubclasses` to the class to get the subclasses
+and sum the instance counts from each of those.
+For example:
+
+```smalltalk
+Morph allSubclasses sum: [:class | class allInstances size]
+```
+
+To determine the number of objects that currently exist from all classes,
+use the approach above with the class `ProtoObject`
+which is a superclass of all classes.
+
+```smalltalk
+ProtoObject allSubclasses sum: [:class | class allInstances size]
+```
+
 ## Object Creation Detail
 
 New objects can be created by
