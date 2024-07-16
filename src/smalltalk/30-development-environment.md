@@ -11,7 +11,7 @@ To open a window, open the World menu, hover over "Open"
 to display a submenu of window types, and click one of them.
 
 To close a window, click its red circle button on the left side of its title bar.
-Alternatively, move the mouse cursor over the window and press cmd-w.
+Alternatively, hover over the window and press cmd-w.
 
 The available windows, in the order listed, include:
 
@@ -369,9 +369,22 @@ To create a new class:
 
 - To inherit from a class other than `Object`,
   change that to another class name.
-- Change "NameOfSubclass" to the name of the new class.
+
+- Change the `subclass:` argument `#NameOfSubclass` to another `Symbol`
+  that is the name of the new class.
+
 - Add desired instance and class variable names as space-separated strings.
+
 - Save by pressing cmd-s (Accept).
+
+An alternative way to create a new class is to:
+
+- Select an existing class to display its code in the bottom pane.
+- Modify the `subclass:` message send,
+  including the superclass and subclass names.
+- Save by pressing cmd-s (Accept).
+
+This will create a new class and will not modify the existing class.
 
 To delete a class, select it and press cmd-x (Remove it).
 A confirmation popup will appear.
@@ -383,10 +396,11 @@ to confirm that you also wish to delete those classes.
 To create a new method:
 
 - Click the "instance" or "class" button to indicate the scope of the method.
+
 - Select a method category.
 
   This can be "-- all --", "as yet unclassified", or any other method category.
-  To create new category, move the mouse cursor over the method category pane,
+  To create new category, hover over the method category pane,
   press cmd-n (new category...), and enter the name of the new category.
 
   The bottom pane will now contain the following method template:
@@ -400,7 +414,16 @@ To create a new method:
   ```
 
 - Modify the code template to define the new method.
+
 - Save by pressing cmd-s (Accept).
+
+An alternative way to create a new method is to:
+
+- Select an existing method to display its code in the bottom pane.
+- Modify the code, including its selector.
+- Save by pressing cmd-s (Accept).
+
+This will create a new method and will not modify the existing method.
 
 To move a method from the class side to the instance side or vice-versa,
 right-click the method name in the top fourth pane and
