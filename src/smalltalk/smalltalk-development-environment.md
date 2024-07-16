@@ -59,9 +59,10 @@ The syntax highlighting described in the table below is provided.
 In any text editing pane, right-click and select "Help..."
 to see a list of the supported key bindings.
 
-To select arbitrary text, drag over it.
-To select a word, double-click it.
-To selet an entire line, triple-click it.
+To select arbitrary text, drag over it.  
+To select a word, double-click it.  
+To select an entire line, triple-click it.  
+To select all the code in an editing pane, press cmd-a.
 
 To toggle surrounding selected text with a given delimiter character,
 press cmd and the starting delimiter character

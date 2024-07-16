@@ -156,14 +156,15 @@ found in the inheritance hierarchy of the receiver object.
 
 The instance methods of a class are stored in
 the provided instance variable `methodDict` of the class.
-This can be viewed by selecting the class name
-and pressing cmd-shift-i (Explore it).
+This can be viewed by sending the message `#methodDict` to a class or
+by selecting the class name and pressing cmd-shift-i (Explore it).
 The value of `methodDict` is an instance of `MethodDictionary`
 which is a subclass of `Dictionary`.
 
 The class methods of a class are stored in
 the provided instance variable `methodDict` of the metaclass of the class.
-This can be viewed by selecting the class name followed by " class"
+This can be viewed by sending the message `#methodDict` to a metaclass or
+by selecting the class name followed by " class"
 and pressing cmd-shift-i (Explore it).
 It is also an instance of `MethodDictionary`.
 One way to find a metaclass name so it can be selected

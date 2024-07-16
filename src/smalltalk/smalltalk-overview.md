@@ -103,6 +103,7 @@ many people to focus on the lesser idea. The big idea is messaging!".
 
 Late binding means that messages sent to objects
 are looked up for compatible methods at runtime.
+A method name is referred to as a selector.
 However, Smalltalk editors do check for "unknown selectors" when
 code is entered that sends a message to a literal object (not to a variable).
 
@@ -426,6 +427,8 @@ Commercial applications built with Smalltalk are listed at:
 ## Cuis Smalltalk
 
 This blog primarily focuses on Cuis Smalltalk and running in macOS.
+Most keyboard shortcuts in macOS use the command key, abbreviated as "cmd".
+In Linux and Windows, the control key is used instead, abbreviated as "ctrl".
 
 Cuis Smalltalk was created by Juan Vuletich who
 has been active in the Smalltalk community since 1997.

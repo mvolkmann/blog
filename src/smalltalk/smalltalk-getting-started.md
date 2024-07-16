@@ -122,7 +122,7 @@ There are at least three ways to start working in Smalltalk.
 
 The initial Cuis Smalltalk window will appear similar to the following:
 
-<img alt="Cuis Smalltalk startup" class="logo" style="width: 400px"
+<img alt="Cuis Smalltalk startup" class="logo" style="width: 100%"
   src="/blog/assets/cuis-smalltalk-startup.png?v={{pkg.version}}">
 
 ### The World
@@ -208,6 +208,23 @@ specifying a different label color for specific buttons.
 All the graphical elements visible on the World are referred to as "morphs".
 
 Morphs can be dragged to different locations and resized.
+Morphs that represent windows can be dragged by their title bars
+and resized by dragging their edges or corners.
+
+Another option for resizing a window is to
+click the blue circle in its upper-left.
+A menu will appear that offers two ways to resize the window.
+
+<img alt="Cuis window resize" style="width: 60%"
+  src="/blog/assets/cuis-window-resize.png?v={{pkg.version}}">
+
+First, hover over the white rectangle below "resize..." until
+the area of the screen the window should occupy is highlighted in yellow
+and then click it.
+Second, click "resize..." to display a grid
+which offers more fine grained control.
+Drag over the grid cells that represent the area of the screen
+that the window should occupy and release the mouse button.
 
 To open an context-sensitive menu for a morph, right-click it.
 After a menu item is selected from a menu, it will close.
@@ -243,13 +260,22 @@ and outputs the return value.
 The output will be selected,
 so it can be removed by pressing the delete key.
 
+> Message names are referred to as selectors.
+> Beginning a name with a pound sign (`#`) makes it a symbol.
+> In documentation that describes sending a message,
+> it is common to include the pound sign,
+> because the lookup tables (called `methodDict`)
+> that maps message names to methods,
+> use symbols for the keys.
+> This will be discussed in more detail in the "Objects" chapter.
+
 For example, enter the following and press cmd-p to get the output `6`:
 
 ```smalltalk
 2 * 3
 ```
 
-<img alt="Cuis Workspace window" style="width: 80%"
+<img alt="Cuis Workspace window" style="width: 60%"
   src="/blog/assets/cuis-workspace.png?v={{pkg.version}}">
 
 The `print` output from this Workspace is shown in the Transcript window below.
@@ -339,7 +365,7 @@ To disable this, right-click in a Transcript and select "Stop logging to Stdout"
 To clear the output that has been written to stdout,
 right-click in a Transcript and select "Clear Transcript Stdout".
 
-<img alt="Cuis Transcript window" style="width: 80%"
+<img alt="Cuis Transcript window" style="width: 60%"
   src="/blog/assets/cuis-transcript.png?v={{pkg.version}}">
 
 Transcript windows have the title "Transcript".
