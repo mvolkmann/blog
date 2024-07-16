@@ -245,6 +245,8 @@ System Browsers contain four rows.
   The "implementors" button opens an "Implementors of" window
   that lists all the classes that implement the selected method.
   Selecting one displays its implementation in the bottom pane.
+  Another way to open this window is to select a method name in any
+  editing pane such as a Workspace and press cmd-m (Implementors of it).
 
   The "versions" button opens a "Recent versions" window
   that displays a list of time stamps for recent versions of the method.
@@ -357,6 +359,7 @@ To create a new class:
   If the desired class category is already selected
   and a class in that category is selected,
   click it so it is deselected.
+  If the "instance" button is not selected, click it.
   The bottom pane will now contain the following message send template:
 
   ```smalltalk
