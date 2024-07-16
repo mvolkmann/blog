@@ -63,7 +63,7 @@ r2 := Rect height: 2 width: 3.
 Transcript show: r2 area. "6"
 ```
 
-To determine the class of an object, send it the `#class` unary message.
+To determine the class of an object, send it the unary message `#class`.
 For example, `19 class` returns `SmallInteger`.
 
 Variables defined in a Workspace hold references to their object values.

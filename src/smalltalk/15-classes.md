@@ -14,7 +14,7 @@ A class is defined by sending the message
 to a superclass which can be `Object` or any other class.
 This message is handled by an instance method of the class `Class`.
 
-The `subclass` keyword takes a symbol.
+The `subclass:` keyword takes a symbol.
 The remaining keywords all take strings.
 All the keywords must be supplied, even if their value is an empty string.
 The following is an example class definition.
@@ -62,7 +62,10 @@ is added to a set of related class names in order to make the unique.
 Lack of namespacing is seen by some as a weakness of Smalltalk.
 
 All classes inherit from one other class,
-except `Object` which is the highest superclass of all classes.
+except `ProtoObject` which is the highest superclass of all classes.
+
+To get the superclass of a class, send it the `#superclass` method.
+For example, `Integer superclass` returns `Number`.
 
 Instance variables can only be directly accessed by methods in the same class.
 To expose them outside the class, add getter and setter (optional) methods.
