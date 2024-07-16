@@ -415,6 +415,8 @@ created by reading text from a stream.
 The following table describes some of the instance methods
 defined in the `CharacterSequence` class.
 
+All indexes are 1-based.
+
 | Method                                 | Description                                                                                                                   |
 | -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | `append:`                              | answers new `CharacterSequence` containing argument characters appended to receiver characters; same as `,` in `String` class |
@@ -468,6 +470,8 @@ For example, `'Hello', ' ', 'World'` yields the `String` `'Hello World'`.
 
 The following table describes some of the class methods
 defined in the `String` class.
+
+All indexes are 1-based.
 
 | Method                                  | Description                                                                                   |
 | --------------------------------------- | --------------------------------------------------------------------------------------------- |

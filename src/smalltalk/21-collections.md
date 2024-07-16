@@ -170,6 +170,8 @@ The following table describes some of the instance methods
 defined in the `SequenceableCollection` class
 that are not defined in the `Collection` superclass.
 
+All indexes are 1-based.
+
 | Method                    | Description                                                                                                                   |
 | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | `+=`                      | modifies receiver number elements by adding argument to each                                                                  |
