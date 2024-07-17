@@ -17,6 +17,7 @@ The following table lists some of them.
 | `SystemOrganization categoryOfElement: #SomeClass`      | name of the class category to which a given class belongs                                                    |
 | `SomeClass allClassVarNames`                            | a `Set` of class variable names defined in this class                                                        |
 | `SomeClass allSelectors`                                | an `IdentitySet` of all message selectors supported by this class, including selectors for inherited methods |
+| `SomeClass lookupSelector: #selector`                   | the matching `CompiledMethod`, indicating where it is found                                                  |
 | `SomeClass allInstances`                                | an `Array` of all existing instances of this class                                                           |
 | `SomeClass allInstVarNames`                             | an `Array` of instance variable names defined in this class                                                  |
 | `SomeClass allInstVarNamesEverywhere`                   | an `Array` of instance variable names defined in this class and inherited classes                            |

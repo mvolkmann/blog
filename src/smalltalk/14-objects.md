@@ -195,6 +195,15 @@ not to an instance of the class.
 - Look in `ClassDescription class`.
 - Look in `Behavior class` where it is found.
 
+Another way to discover where the `new` method is implemented
+is to enter the following in a Workspace and press cmd-p (Print it):
+
+```smalltalk
+Circle class lookupSelector: #new
+```
+
+The output is `(Behavior>>#new "a CompiledMethod:48(357226)")`.
+
 The `basicNew` method does not call the instance method `initialize`.
 The `basicNew` method should not be overridden in subclasses
 to do something different, but the `new` method can be overridden.
