@@ -17,7 +17,7 @@ The term "receiver" describes the object to which a message is sent.
 
 | Item                                              | Example                                                    |
 | ------------------------------------------------- | ---------------------------------------------------------- |
-| comment                                           | `"some text"`                                              |
+| comment                                           | `"some text"` (can span multiple lines)                    |
 | temporary (local) variable with private scope     | `myTemp` (camelCase)                                       |
 | global variable with shared scope                 | `MyGlobal` (CamelCase)                                     |
 | pseudo variable (cannot assign)                   | `self`, `super`, `nil`, `true`, `false`, and `thisContext` |
