@@ -596,6 +596,8 @@ containing all the digits found in another `String`:
 
 ### Symbol
 
+The `Symbol` class is a subclass of the `String` class.
+
 `Symbol` instances are globally unique whereas `String` instances are not.
 Literal symbols are preceded by a pound sign (`#`).
 Their text is surrounded by single quotes if it

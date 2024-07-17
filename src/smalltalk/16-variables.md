@@ -6,6 +6,12 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+Variables always refer to an object created from a specific class,
+but a new object can be assigned that was created from a different class.
+In other words, the "type" of a variable can change.
+
+The initial value of all variables is `nil`.
+
 Smalltalk supports five kinds of variables:
 
 - Pseudo-variables are provided by the system and cannot be modified.
