@@ -57,6 +57,56 @@ assessTemperature: aNumber
     ^ 'warm'
 ```
 
+Many classes define methods that return a `Boolean` value
+that is useful for conditional logic. Some examples include:
+
+| Class              | Instance Method   |
+| ------------------ | ----------------- |
+| `Character`        | `isAlphaNumeric`  |
+| `Character`        | `isDigit`         |
+| `Character`        | `isLetter`        |
+| `Character`        | `isLineSeparator` |
+| `Character`        | `isLowercase`     |
+| `Character`        | `isPathSeparator` |
+| `Character`        | `isSeparator`     |
+| `Character`        | `isUppercase`     |
+| `Character`        | `isVowel`         |
+| `Collection`       | `isEmpty`         |
+| `Color`            | `isDark`          |
+| `Color`            | `isLight`         |
+| `Color`            | `isTransparent`   |
+| `Date`             | `isLeapYear`      |
+| `Exception`        | `isResumable`     |
+| `Integer`          | `isPowerOfTwo`    |
+| `Integer`          | `isPrime`         |
+| `Interval`         | `isEmpty`         |
+| `Number`           | `isDivisbleBy:`   |
+| `Number`           | `isEven`          |
+| `Number`           | `isNaN`           |
+| `Number`           | `isOdd`           |
+| `Number`           | `isZero`          |
+| `Object`           | `isArray`         |
+| `Object`           | `isBlock`         |
+| `Object`           | `isCharacter`     |
+| `Object`           | `isCollection`    |
+| `Object`           | `isFloat`         |
+| `Object`           | `isFraction`      |
+| `Object`           | `isInteger`       |
+| `Object`           | `isInterval`      |
+| `Object`           | `isMemberOf`      |
+| `Object`           | `isNumber`        |
+| `Object`           | `isPinned`        |
+| `Object`           | `isPoint`         |
+| `Object`           | `isString`        |
+| `Object`           | `isSymbol`        |
+| `Point`            | `isZero`          |
+| `ProtoObject`      | `isNil`           |
+| `String`           | `isEmpty`         |
+| `SystemDictionary` | `isHeadless`      |
+| `SystemVersion`    | `isCuis`          |
+| `SystemVersion`    | `isPharo`         |
+| `SystemVersion`    | `isSqueak`        |
+
 ### Iteration
 
 The `Integer` class described in the "Basic Data Types" section

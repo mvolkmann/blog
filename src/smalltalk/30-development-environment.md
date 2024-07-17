@@ -194,7 +194,7 @@ System Browsers contain four rows.
   Selecting a class in the second pane
   displays message categories for the class in the third pane.
   Example message category names include "accessing", "comparing",
-  "copying", "converting", "enumerating", and "printing".
+  "copying", "converting", "enumerating", "printing", and "testing".
   There is a separate set of method categories
   for instance methods and class methods.
 
