@@ -1,6 +1,6 @@
 ---
 eleventyNavigation:
-  key: Smalltalk Big
+  key: Smalltalk (outdated)
 layout: topic-layout.njk
 ---
 
