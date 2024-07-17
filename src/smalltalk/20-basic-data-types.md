@@ -627,8 +627,13 @@ sym2 := #test.
 str1 := 'test'.
 str2 := 'test'.
 "str1 and str2 may or may not refer to the same object in memory.
- The compiler decides this and user code should not assume either outcome."
 ```
+
+The compiler decides whether equivalent string values
+should be represented by the same object in memory.
+Perhaps it only does this when they appear in the same scope.
+For this reason, user code should not assume that they will be different objects,
+especially when code modifies a `String` by sending it the `#at:put:` message.
 
 There are no particularly interesting class methods in the `Symbol` class.
 
