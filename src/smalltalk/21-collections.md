@@ -104,6 +104,7 @@ defined in the `Collection` class.
 | `collect:andFold`     | answers instance whose elements are results of passing receiver elements to a block; like `map` in JavaScript                              |
 | `count:`              | answers number of receiver elements that satisfy argument block                                                                            |
 | `detect:`             | answers first element in receiver that satisfies block argument; like `find` in JavaScript                                                 |
+| `difference:`         | answers instance that includes elements in receiver that are not in argument                                                               |
 | `do:`                 | evaluates block argument for each element; like `forEach` in JavaScript                                                                    |
 | `floor`               | answers instances whose elements are the floor of receiver elements                                                                        |
 | `fold:`               | answers value that results from folding receiver elements with a block; like `reduce` in JavaScript                                        |
@@ -117,7 +118,7 @@ defined in the `Collection` class.
 | `includesAllOf:`      | answers `Boolean` indicating if all elements in argument collection are elements of receiver                                               |
 | `includesAnyOf:`      | answers `Boolean` indicating if any elements in argument collection are elements of receiver                                               |
 | `inject:into:`        | similar to `fold:`, but can specify initial accumulator value; like `reduce` in JavaScript                                                 |
-| `intersection:`       | answers instance that only includes elements present in receiver and argument collection                                                   |
+| `intersection:`       | answers instance that includes elements present in both receiver and argument collections                                                  |
 | `isEmpty`             | answers `Boolean` indicating if collection does not contain any elements                                                                   |
 | `max`                 | answers largest number element                                                                                                             |
 | `mean`                | answers mean of number elements                                                                                                            |

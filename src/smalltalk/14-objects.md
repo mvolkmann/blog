@@ -83,6 +83,29 @@ enter the following in Workspace and "Do it":
 SomeClass allInstancesDo: [ :obj | obj delete ]
 ```
 
+## Object and ProtoObject
+
+The `Object` is a superclass of nearly every other class.
+It defines methods that are available on all objects.
+It is a subclass of the `ProtoObject` class.
+There are a small number of other classes that are
+subclasses of `ProtoObject` and not subclasses of `Object`.
+These include `BreakingMethodWrapper`, `MessageCatcher`, and `ProtoCatcher`.
+
+To get a `String` representation of any object
+that is meaninful to a Smalltalk developer
+and typically includes the class name of the object,
+send it the `#printString` message.
+For example, the following code prints `a Set(3 2 1)`,
+which is `String` representation of a `Set` of numbers,
+to a Transcript:
+
+```smalltalk
+| set |
+set := #(1 2 3 1) asSet.
+set printString print
+```
+
 ## Counting Objects
 
 To determine the number of objects that currently exist
@@ -175,11 +198,6 @@ not to an instance of the class.
 The `basicNew` method does not call the instance method `initialize`.
 The `basicNew` method should not be overridden in subclasses
 to do something different, but the `new` method can be overridden.
-
-`Object` is a superclass of nearly every other class.
-There are a small number of classes that are subclasses of `ProtoObject`
-and not subclasses of `Object`.
-These include `BreakingMethodWrapper`, `MessageCatcher`, and `ProtoCatcher`.
 
 ## Method Dictionaries
 
