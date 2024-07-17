@@ -8,7 +8,7 @@ layout: topic-layout.njk
 
 A block is closure (anonymous function) that can have parameters
 and contain many expressions.
-They are represented by the class `BlockClosure`.
+They are instances of the class `BlockClosure`.
 
 The value of the block is the value of its last expression.
 If a block uses the caret operator (`^`) to return a value,
@@ -65,7 +65,8 @@ average := [:a :b |
 ```
 
 Blocks are closures, meaning that they can
-access variables defined outside them. For example:
+access in-scope variables defined outside them.
+For example:
 
 ```smalltalk
 n := 19.
@@ -74,9 +75,9 @@ b value: 2 "result is 21"
 ```
 
 To use a block as an iteration condition,
-use the methods `whileTrue`, `whileFalse`, `whileNotNil`, and `whileNil`
+use the methods `whileTrue:`, `whileFalse:`, `whileNotNil:`, and `whileNil:`
 that are defined in the `BlockClosure` class.
-Note that these are not methods on the `Boolean` class.
+Note that these are not methods in the `Boolean` class.
 
 For example, the following code prints the integer values 1 through 10
 in the Transcript:
