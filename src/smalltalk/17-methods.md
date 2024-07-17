@@ -10,6 +10,16 @@ Methods are associated with a specific class.
 Class methods handle messages sent to the class.
 Instance methods handle messages sent to objects instantiated from the class.
 
+Method definitions take the following form:
+
+```smalltalk
+messageSelectorAndArgumentNames
+    "comment stating purpose of message"
+
+    | temporary variable names |
+    statements
+```
+
 In binary and keyword methods, parameter variable names typically
 indicate the expected object type and begin with "a" or "an".
 For example, `aNumber`, `aString`, or `anArray`.

@@ -9,7 +9,10 @@ layout: topic-layout.njk
 A block is closure (anonymous function) that can have parameters
 and contain many expressions.
 They are represented by the class `BlockClosure`.
+
 The value of the block is the value of its last expression.
+If a block uses the caret operator (`^`) to return a value,
+the containing method will exit and return that value.
 
 Blocks take zero or more positional arguments,
 which is something methods cannot do.
@@ -99,6 +102,3 @@ fact := [:block :n |
 
 fact value: fact value: 5 "gives 120"
 ```
-
-If a block uses the caret symbol (`^`) to return a value,
-the containing method will exit and return that value.
