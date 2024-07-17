@@ -114,6 +114,7 @@ assert: aNumber isCloseTo: anotherNumber
 
     self assert: aNumber isCloseTo: anotherNumber
         withPrecision: self defaultPrecision
+
 assert: aNumber isCloseTo: anotherNumber withPrecision: aPrecision
     "This asserts that the value of `assert:`
     is within `withinPrecision:` of `isCloseTo:`."

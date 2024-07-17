@@ -55,8 +55,9 @@ Smalltalk supports three types of messages:
   will be found in the inheritance hierarchy.
   The `Object` class defines `=` to be the same as `==`.
 
-  The binary message `==` tests whether
-  two objects are identical (same objects in memory).
+  The `ProtoObject` class defines the binary instance methods `==` and `~~`.
+  `==` tests whether two objects are the same objects in memory.
+  `~~` tests whether two objects are different objects in memory.
 
 - keyword
 

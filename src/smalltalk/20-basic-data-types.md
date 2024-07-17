@@ -594,6 +594,21 @@ containing all the digits found in another `String`:
 
 ### Symbol
 
+`Symbol` instances are globally unique whereas `String` instances are not.
+For example:
+
+```smalltalk
+| str1 str2 sym1 sym2 |
+str1 := 'test'.
+str2 := 'test'.
+sym1 := #test.
+sym2 := #test.
+self assert: str1 = str2. "passes"
+self assert: str1 ~~ str2. "TODO: Why does this fail?"
+self assert: sym1 = sym2. "passes"
+self assert: sym1 == sym2. "passes"
+```
+
 There are no particularly interesting class methods in the `Symbol` class.
 
 The following table describes some of the instance methods
