@@ -615,14 +615,13 @@ between `String` and `Symbol` objects.
 
 ```smalltalk
 | str1 str2 sym1 sym2 |
-str1 := 'test'.
-str2 := 'test'.
 sym1 := #test.
 sym2 := #test.
-self assert: str1 = str2. "passes"
-self assert: str1 ~~ str2. "TODO: Why does this fail?"
-self assert: sym1 = sym2. "passes"
-self assert: sym1 == sym2. "passes"
+"sym1 and sym2 will always refer to the same object in memory."
+
+str1 := 'test'.
+str2 := 'test'.
+"str1 and str2 may or may not refer to the same object in memory."
 ```
 
 There are no particularly interesting class methods in the `Symbol` class.
