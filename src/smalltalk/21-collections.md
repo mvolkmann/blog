@@ -9,7 +9,8 @@ layout: topic-layout.njk
 Smalltalk supports a large number of collection classes.
 Collection elements can be any kind of object, including other collections.
 
-The following list depicts the partial class hierarchy for collections:
+The Cuis Smalltalk base image contains 60 subclasses of the `Collection` class.
+The following list depicts the partial class hierarchy of those:
 
 - `Collection`
   - `SequenceableCollection`
@@ -244,6 +245,8 @@ There are no particularly interesting methods in this class.
 ## Array
 
 `Array` instances are fixed-length, ordered collections.
+Elements cannot be added or deleted, but they can be modified.
+
 Most of the interesting `Array` methods are defined in
 the superclasses `SequenceableCollection` and `Collection`.
 
@@ -254,6 +257,12 @@ For example, `#(true 7 'Tami' (Color red))`.
 Run-time literal arrays begin with `{`, end with `}`,
 and contain dot-separated values.
 For example, `{name. breed}`.
+This is an alternative to the more verbose syntax
+`Array with: name with: breed`.
+
+To create an array of a given size where the initial value of all the elements
+is `nil`, send the message `#ofSize:` to the `Array` class.
+For example, `rgb := Array ofSize: 3`.
 
 The following table describes some of the instance methods
 defined in the `Array` class

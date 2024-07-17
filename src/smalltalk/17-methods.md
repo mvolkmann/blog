@@ -110,7 +110,8 @@ successor
     ^self + 1
 ```
 
-Superclasses can define methods that subclasses must implement.
+Superclasses can define methods that subclasses must implement
+and each subclass can implement them differently.
 For example, a class named `VShape` can define the following method:
 
 ```smalltalk
