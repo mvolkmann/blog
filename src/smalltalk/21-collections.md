@@ -264,6 +264,10 @@ To create an array of a given size where the initial value of all the elements
 is `nil`, send the message `#ofSize:` to the `Array` class.
 For example, `rgb := Array ofSize: 3`.
 
+To create an array of a given size where the initial value of all the elements
+is the same non-nil value, send the message `#new:withAll:` to the `Array` class.
+For example, `rgb := Array new: 3 withAll: 255`.
+
 The following table describes some of the instance methods
 defined in the `Array` class
 that are not defined in its superclasses.
@@ -411,6 +415,11 @@ that can contain duplicates.
 
 To create an `OrderedCollection` from an array, send the `#newFrom:` message.
 For example, `fruits := OrderedCollection newFrom: #('apple' 'banana' 'cherry')`
+
+To create an `OrderedCollection` of a given size
+where the initial value of all the elements is `nil`,
+send the message `#ofSize:` to the `OrderedCollection` class.
+For example, `players := OrderedCollection ofSize: 4`.
 
 To get the number of elements, send the `#size` message.
 For example, `fruits size` returns `3`.
