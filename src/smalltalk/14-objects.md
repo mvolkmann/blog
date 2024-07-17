@@ -50,6 +50,11 @@ area
     ^ height * width
 ```
 
+It is recommended for `initialize` methods to
+begin by sending the `#initialize` message to `super`
+so the superclass will initialize its instance variables.
+Omitting this can produce unexpected results.
+
 The `setHeight:width:` method should be in the "private" method category
 to indicate that it is not meant to invoked from outside this class.
 

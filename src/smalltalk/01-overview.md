@@ -258,6 +258,14 @@ Smalltalk has the following cons:
   See <a href="http://haver.klix.ch/"
   target="_blank">HaverOnCuis: A Cuis based Smalltalk With Modules</a>.
 
+- Many errors are only caught at run-time.
+
+  The use of late binding for resolving message sends means that
+  there are more errors that can only be detected at run-time
+  than in statically typed languages such as C++, C#, and Java.
+  However, Smalltalk does do incremental compiling when methods are saved,
+  so it finds syntax errors before runtime, unlike most scripting languages.
+
 - Immutability is not favored.
 
   While it is possible to define Smalltalk classes whose objects are immutable,
@@ -277,12 +285,6 @@ Smalltalk has the following cons:
   TODO: Do they provide tooling to strip out classes that are only used
   in the development environment so what remains in the image is
   only what is needed to run the application being developed?
-
-- Smalltalks use of late binding for resolving message sends
-  means that there are more errors that can only be detected at run-time
-  than in statically typed languages such as C++, C#, and Java.
-  However, Smalltalk does do incremental compiling when methods are saved,
-  so it finds syntax errors before runtime, unlike most scripting languages.
 
 - The image file can be large.
   The base image for Cuis Smalltalk is 19 MB, but installing

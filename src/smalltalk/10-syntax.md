@@ -67,7 +67,8 @@ but that is rarely used because camelCase is preferred.
 
 ## Special Characters
 
-The assignment operator (`:=`) can be rendered as a left pointing arrow.
+The assignment operator (`:=`), pronounced "gets",
+can be rendered as a left pointing arrow.
 The return operator (`^`) which is used in methods to return a value
 can be rendered as an upward pointing arrow.
 
@@ -80,5 +81,6 @@ To disable these renderings, open the World menu and
 select Preferences...Show ANSI Assignments.
 
 Typing an underscore is a shorthand way to type `:=` for variable assignments.
-Assignment underscores are changed to left pointing arrows
+Assignment underscores are changed to `:=` (TODO: True?)
+and rendered as left pointing arrows
 regardless of whether "Show ST-80 Assigments" is selected.
