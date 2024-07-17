@@ -446,6 +446,15 @@ This will create a new method and will not modify the existing method.
 To modify an existing method, select it in the top fourth pane,
 edit the code in the bottom pane, and press cmd-s (Accept).
 
+To automatically assign methods in the "as yet unclassified" method category
+to better categories, right-click in the method category pane
+and select "categorize all uncategorized".
+This is only able to categorize some methods.
+For example, it will put the `initialize` method
+in the "initialization" method category.
+But it will not recognize accessor methods
+and put them in the "accessing" method category.
+
 To move a method from the class side to the instance side or vice-versa,
 right-click the method name in the top fourth pane and
 select "refactorings...move to instance/class methods".
