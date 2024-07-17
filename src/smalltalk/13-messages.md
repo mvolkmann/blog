@@ -9,10 +9,14 @@ layout: topic-layout.njk
 The only mechanism for communicating with an object is to send it a message.
 A message is a combination of a selector (or message name) and arguments.
 Messages are always sent to a explicit receiver.
+
 When inside an instance method, to send a message to the current object,
 use the pseudo-variable `self` as the receiver.
 To send a message to the superclass of the current object,
 use the pseudo-variable `super` as the receiver.
+The difference between `self` and `super` is where method lookup begins.
+With `self` it begins in the class of the current object and
+with `super` it beings in the superclass of that.
 
 If Smalltalk were to add the ability to
 specify the parameter and return types of methods,

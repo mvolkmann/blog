@@ -56,6 +56,8 @@ target="_blank">Cuis book</a>, "`thisContext` ...
 represents the top frame of the run-time stack. ...
 It is essential for implementing development tools like the Debugger and
 it is also used to implement exception handling and continuations."
+The value of `thisContext` is either
+a `MethodContext` or a `BlockContext` object.
 
 ## Instance Variables
 

@@ -48,6 +48,13 @@ The term "receiver" describes the object to which a message is sent.
 Whitespace in Smalltalk code is insignificant.
 Spaces, tabs, and newline characters can be freely inserted.
 
+An expression can have one of the following forms:
+
+- a pseudo-variable `true`, `false`, or `nil`
+- a literal value such as `3`, `'Hello'`, or `#(1 2 3)`
+- a message send such as `5 factorial`, `a + b`, or `colors at: 2`
+- a block such as `[:a :b | a + b]`
+
 The caret (^) in a return expression can be followed by a space.
 The pretty printer includes a space, but many developers prefer to omit it.
 
