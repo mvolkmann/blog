@@ -461,6 +461,8 @@ All indexes are 1-based and `0` means not found.
 
 ### String
 
+Literal `String` objects are surrounded by single quotes.
+
 The `String` class inherits many instance methods from the
 `CharacterSequence` class and overrides the behavior some of them.
 A notable addition is the binary method comma (`,`)
@@ -595,7 +597,19 @@ containing all the digits found in another `String`:
 ### Symbol
 
 `Symbol` instances are globally unique whereas `String` instances are not.
+Literal symbols are preceded by a pound sign (`#`).
+Their text is surrounded by single quotes if it
+contains any special characters such as spaces.
 For example:
+
+```smalltalk
+| sym1 sym2 |
+sym1 := #word.
+sym2 := #'multiple words'.
+```
+
+The following code demonstrates a difference
+between `String` and `Symbol` objects.
 
 ```smalltalk
 | str1 str2 sym1 sym2 |
