@@ -543,6 +543,11 @@ that are not also defined in its superclass `CharacterSequence`.
 | `substrings`                            | answers `Array` of substrings delimited by whitespace characters                              |
 | `unescapePercents`                      | answers reverse of `percentEscapeUrl`                                                         |
 
+The `at:put:` method is the only one
+that modifies a `String` in place (TODO: true?).
+All other methods return a new `String`
+that is a modified version of the receiver.
+
 The `format:` method returns a `String` created from a template
 using interpolation where input comes from an `Array`.
 For example, both of the following produce the string
@@ -621,7 +626,8 @@ sym2 := #test.
 
 str1 := 'test'.
 str2 := 'test'.
-"str1 and str2 may or may not refer to the same object in memory."
+"str1 and str2 may or may not refer to the same object in memory.
+ The compiler decides this and user code should not assume either outcome."
 ```
 
 There are no particularly interesting class methods in the `Symbol` class.
