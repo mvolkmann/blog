@@ -209,6 +209,11 @@ System Browsers contain four rows.
   If no message category is selected, or if "-- all --" is selected,
   all the methods in all categories are listed.
 
+  The list of methods in the fourth pane
+  only includes methods that are directly implemented by the class,
+  not those define in superclasses that are available via inheritance.
+  To see all available methods, open a Protocol Browser.
+
   The names in the class category and method category panes
   are not sorted alphabetically by default.
   To sort class categories, hover over that pane and press cmd-shift-a (alphabetize).
@@ -526,11 +531,15 @@ When a class is selected in a System Browser,
 the list of classes in the second pane only includes
 those defined in the selected class category.
 To also see the class hierarchy of a selected class,
-open a Hierarchy Browser by pressing cmd-h (browse hierarchy).
+open a Hierarchy Browser by selcting a class
+and pressing cmd-h (browse hierarchy).
 
-This window is similar to a System Browser,
-but it omits the class categories pane and
-displays the complete class hierarchy of the selected class.
+This window is similar to a System Browser, but it:
+
+- omits the class categories pane
+- displays the inheritance hierarchy of the selected class in the top first pane
+- displays method categories in the top center pane
+- displays methods defined directory in the class in the top last pane
 
 Here's an example of a Hierarchy Browser for the `Array` class:
 
@@ -542,13 +551,21 @@ Here's an example of a Hierarchy Browser for the `Array` class:
 When a class is selected in a System Browser,
 only the methods defined directly in that class are displayed.
 To also see methods defined in superclasses,
-open a Protocol window by pressing cmd-p (browse protocol).
+open a Protocol window by selecting a class name
+and pressing cmd-p (browse protocol).
 
-This window is similar to a System Browser,
-but it omits the class categories pane and
-displays all instance methods available on instances of the class.
-Methods defined directly on the class are in bold,
+This window is similar to a System Browser, but it:
+
+- omits the class categories pane
+- displays the inheritance hierarchy of the selected class in the top first pane
+- displays method categories in the top center pane
+- displays all available instance methods in the top last pane
+
+Methods defined directly in the class are in bold,
 and methods defined in superclasses are not.
+
+Select a method in the top last pane
+to see its implementation in the bottom pane.
 
 Here's an example of a Protocol window for the `Array` class:
 
