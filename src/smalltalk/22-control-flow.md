@@ -45,6 +45,18 @@ assessment := color caseOf: {
 }
 ```
 
+When a block uses the `^` operator to return a value,
+the containing method exits and returns that value.
+For example, the following method returns
+a `String` based on the `Number` passed in:
+
+```smalltalk
+assessTemperature: aNumber
+    aNumber > 80 ifTrue: [^ 'hot'].
+    aNumber < 40 ifTrue: [^ 'cold'].
+    ^ 'warm'
+```
+
 ### Iteration
 
 The `Integer` class described in the "Basic Data Types" section
