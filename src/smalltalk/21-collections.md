@@ -88,7 +88,8 @@ defined in the `Collection` class.
 | `=`                   | answers `Boolean` indicating if receiver and argument are equivalent                                                                       |
 | `\\`                  | answers instance whose elements are receiver elements modulo argument                                                                      |
 | `abs`                 | answers instance whose elements are absolute value of receiver elements                                                                    |
-| `adds:`               | adds argument to collection and answers argument                                                                                           |
+| `add:`                | adds argument to collection and answers argument                                                                                           |
+| `addALl:`             | adds all objects in argument collection to collection and answers argument                                                                 |
 | `allSatisfy:`         | answers `Boolean` indicating if ALL elements satisfy a block; like `every` in JavaScript                                                   |
 | `anySatisfy:`         | answers `Boolean` indicating if ANY elements satisfy a block; like `some` in JavaScript                                                    |
 | `asArray`             | answers `Array` instance whose elements are those in receiver                                                                              |
@@ -596,6 +597,12 @@ set remove: 'banana'.
 set includes 'apple`. "true"
 set includes 'banana`. "false"
 ```
+
+Numbers in a `Set` are compared based on their values,
+not considering the classes of which they are instances.
+For example, the `SmallInteger` value `2`, the `Float` value `2.0`,
+and the `Fraction` value `6/3` are all considered equal,
+so only one of those values can be present in a `Set`.
 
 ## Dictionary
 
