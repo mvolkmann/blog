@@ -13,12 +13,15 @@ The value of the block is the value of its last expression.
 
 Blocks take zero or more positional arguments,
 which is something methods cannot do.
-Argument names appear at the beginning of a block
+Parameter names appear at the beginning of a block
 and each name is preceded by a colon.
-The argument list is separated from the expressions by a vertical bar.
+(This syntax was most likely chosen to simplify parsing because it
+enables determining whether a block has any parameters without backtracking.)
+The parameter list is separated from the expressions by a vertical bar.
 
 Blocks can be saved in variables,
 passed as arguments to methods and other blocks,
+returned from methods and other blocks,
 and can be evaluated multiple times. For example:
 
 ```smalltalk
@@ -29,7 +32,7 @@ multipleArgBlock := [:a :b | a * b].
 
 Blocks support several messages that evaluate the block
 whose names begin with `value`.
-These message enable providing zero to four arguments.
+These messages enable providing zero to four arguments.
 For blocks with more than four parameters, send the message
 `#valueWithArguments:` and an array holding all the arguments.
 For example:
