@@ -88,6 +88,7 @@ defined in the `Collection` class.
 | `=`                   | answers `Boolean` indicating if receiver and argument are equivalent                                                                       |
 | `\\`                  | answers instance whose elements are receiver elements modulo argument                                                                      |
 | `abs`                 | answers instance whose elements are absolute value of receiver elements                                                                    |
+| `adds:`               | adds argument to collection and answers argument                                                                                           |
 | `allSatisfy:`         | answers `Boolean` indicating if ALL elements satisfy a block; like `every` in JavaScript                                                   |
 | `anySatisfy:`         | answers `Boolean` indicating if ANY elements satisfy a block; like `some` in JavaScript                                                    |
 | `asArray`             | answers `Array` instance whose elements are those in receiver                                                                              |
@@ -131,6 +132,7 @@ defined in the `Collection` class.
 | `range`               | answers difference between max and min values                                                                                              |
 | `reduce:`             | same as fold:                                                                                                                              |
 | `reject:`             | answers instance containing receiver elements that do not satisfy a block                                                                  |
+| `remove:`             | removes first occurrence of argument and answers argument                                                                                  |
 | `select:`             | answers instance containing receiver elements that satisfy a block; like `filter` in JavaScript                                            |
 | `select:thenCollect`  | combines `select:` and `collect:`                                                                                                          |
 | `select:thenDo:`      | combines `select:` and `do:`                                                                                                               |
