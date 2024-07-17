@@ -6,7 +6,8 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-Control flow is provided through message passing.
+Smalltalk does not provide special syntax for conditional logic and iteration.
+Instead, control flow is provided through message passing.
 
 ### Conditional Logic
 
