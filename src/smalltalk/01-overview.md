@@ -26,6 +26,12 @@ layout: topic-layout.njk
     src="/blog/assets/smalltalk-byte-cover.jpg?v={{pkg.version}}">
 </figure>
 
+The target audience for this series of articles on Smalltalk
+is readers that already know at least one programming language.
+There are many tables that summarize features of Smalltalk.
+These aim to quickly provide a sense of what is available
+by including the most useful features and not aiming to be exhaustive.
+
 <a href="https://en.wikipedia.org/wiki/Smalltalk" target="_blank">Smalltalk</a>
 "is a purely object oriented programming language (OOP)."
 Everything is represented by an object that is an instance of some class.
