@@ -449,11 +449,10 @@ edit the code in the bottom pane, and press cmd-s (Accept).
 To automatically assign methods in the "as yet unclassified" method category
 to better categories, right-click in the method category pane
 and select "categorize all uncategorized".
-This is only able to categorize some methods.
-For example, it will put the `initialize` method
-in the "initialization" method category.
-But it will not recognize accessor methods
-and put them in the "accessing" method category.
+For each uncategorized method,
+this tries to find a superclass method with the same name and,
+if found, puts it in the same method category as that method.
+Methods with no matching method in a superclass are not categorized.
 
 To move a method from the class side to the instance side or vice-versa,
 right-click the method name in the top fourth pane and
