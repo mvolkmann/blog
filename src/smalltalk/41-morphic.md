@@ -80,9 +80,14 @@ For example, `morph morphExtent: 200@100`.
 
 Only a small set of morphs are provided by default.
 A good source of additional morphs is the package "UI-Tools".
+
+TODO: Do you need to clone the https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-UI repository for this?
+
 To install this, open a Workspace, enter `Feature require: 'UI-Tools'`,
 and press cmd-d (Do it).
-This installs many other packages including:
+TODO: The UI-Tools package is being removed.
+This installs the following other packages
+that can also be installed individually:
 
 - Collections-CompactArrays
 - Compression
@@ -100,7 +105,6 @@ This installs many other packages including:
 - UI-Palette
 - UI-Panel
 - UI-Shapes
-- UI-Tools
 - UI-Widgets
 
 The set of "Basic" morphs will now include `BoxedMorph`, `EllipseMorph`,
@@ -122,6 +126,7 @@ Then enter `MorphicGreet new.` and "Do it".
 A morph halo is a set of circle buttons,
 referred to as "handles", that surround a morph.
 Each handle changes the morph in some way or reveals information about it.
+Hover over a handle to see a tooltip that describes its purpose.
 
 To open the halo for a morph,
 cmd-click it in Cuis or option-click it in Squeak.

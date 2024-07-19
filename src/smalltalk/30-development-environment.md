@@ -534,6 +534,9 @@ The "Case sensitive" button toggles whether the search will be case sensitive.
 Methods whose code matches the search will appear in the top pane.
 Select a method name to see its implementation in a lower pane.
 
+Regular expression searches are not currently supported.
+TODO: This has been added recently! Try it and document it here.
+
 ## Hierarchy Browsers
 
 When a class is selected in a System Browser,
@@ -602,6 +605,8 @@ Click one the class names to see the method implementation.
 
 <img alt="Cuis Smalltalk Protocol window" style="width: 100%"
   src="/blog/assets/cuis-protocol-window.png?v={{pkg.version}}">
+
+Regular expression searches are not currently supported.
 
 ## MessageNotUnderstood Errors
 

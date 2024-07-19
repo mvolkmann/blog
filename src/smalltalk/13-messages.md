@@ -10,6 +10,14 @@ The only mechanism for communicating with an object is to send it a message.
 A message is a combination of a selector (or message name) and arguments.
 Messages are always sent to a explicit receiver.
 
+Method lookup begins by searching for the selector
+in the `methodDict` of the receiver.
+If a match is not found there, the search
+continues upward in each of the superclasses.
+If a match is found, it is added to a method lookup cache.
+This removes the need to search the inheritance hierarchy for every message send
+and significantly improves performance.
+
 When inside an instance method, to send a message to the current object,
 use the pseudo-variable `self` as the receiver.
 To send a message to the superclass of the current object,
