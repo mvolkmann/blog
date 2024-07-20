@@ -394,6 +394,22 @@ To try this:
 - Move the cursor to where the morph should be dropped.
 - Click to drop it.
 
+`VectorCanvas` is a subclass of `AbstractVectorCanvas`,
+which is a subclass of `MorphicCanvas`.
+The `MorphicCanvas` class defines several methods
+whose names begin with `drawString:` method.
+
+To draw text in this morph that is centered,
+add the following in the `drawOn:` method:
+
+```smalltalk
+aCanvas
+    drawString: 'Hello'
+    atCenterXBaselineY: x1 + x2 / 2 @ (y1 + y2 / 2)
+    font: nil "uses default font"
+    color: Color yellow.
+```
+
 Instances of `PlacedMorph` subclasses have a `location` instance variable.
 If the morph only has a location and has not be rotated or scaled
 then `location` will hold a `MorphicTranslation` object
@@ -425,6 +441,9 @@ If the location of the morph was specified by sending the
 `#location#` message to it with a `MorphicTranslation` argument
 then it will be placed at that location.
 Otherwise it will be placed at a random location.
+
+Drawing-related methods like `drawOn:`
+should be placed in the "drawing" method category.
 
 ## BoxedMorph
 

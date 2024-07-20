@@ -270,6 +270,27 @@ The single quotes inside the `speak` method string are doubled to escape them.
 
 The new methods will appear in System Browsers.
 
+## Unknown Variables
+
+When saving a method, if it assigns a value to an unknown variable,
+the following dialog will appear:
+
+<img alt="Unknown Variable"
+  src="/blog/assets/cuis-unknown-variable.png?v={{pkg.version}}"
+  style="width: 65%">
+
+Choose "declare instance" to add the variable to the
+`instanceVariableNames:` list where the class is defined.
+
+Choose "declare method temp" to add a declaration
+at the top of the current method.
+
+Choose "declare block-local temp" to add a declaration
+inside the block where it is used.
+This will be at the top of the current method if not inside a block.
+
+Choose "cancel" to skip adding a variable declaration.
+
 ## Accessor Methods
 
 "Getter methods" allow instance or class variable values to be
