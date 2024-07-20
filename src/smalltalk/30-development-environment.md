@@ -499,10 +499,16 @@ For selected code the options include:
 There is no provided way to search for code that contains a given string.
 However, Mariano Montone implemented a "Search Browser" that provides this.
 
-To install it, clone the repository
-<a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Tools"
-target="_blank">Cuis-Smalltalk-Tools</a>,
-open a Workspace, enter `Feature require: 'SearchBrowser'`, and "Do it".
+To install it:
+
+- Install the optional packages to get Cuis-Smalltalk-Regex
+  which is required by the SearchBrowser package.
+- Clone the repository
+  <a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Tools"
+  target="_blank">Cuis-Smalltalk-Tools</a>.
+- Open a Workspace.
+- Enter `Feature require: 'SearchBrowser'` and "Do it".
+
 This adds the World menu item "Open...Search Browser".
 It also adds menu items to the menu that appears in a System Browser
 when you right-click a class name in the top second pane.
@@ -522,19 +528,25 @@ The "of:" menu has the options "class hierarchy" (default),
 "class protocol", "class", "system category", and "every class".
 
 The "using:" menu has the options
-"substring matcher" (default) and "wild matcher".
+"substring matcher" (default), "wild matcher", and "regex matcher".
+
 When using "wild matcher", the `CharacterSequence` `match:` method is used.
 Comments in that method provide many examples.
 The `#` wildcard character matches any single character and
 the `*` character matches any sequence of characters.
 
+When using "regex matcher", any regular expression can be entered.
+It will match on the method selectors (message names),
+the entire source of methods, and string literals.
+For example, in the "in:" menu select "message name".
+To search for method selectors that begin with "abc", enter "^abc.*".
+To search for method selectors that end with "abc", enter ".*abc$".
+Colons must be escaped by preceding them with a backslash (`\`).
+
 The "Case sensitive" button toggles whether the search will be case sensitive.
 
 Methods whose code matches the search will appear in the top pane.
 Select a method name to see its implementation in a lower pane.
-
-Regular expression searches are not currently supported.
-TODO: This has been added recently! Try it and document it here.
 
 ## Hierarchy Browsers
 

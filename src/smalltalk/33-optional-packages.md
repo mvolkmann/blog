@@ -6,11 +6,17 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-The shell script `clonePackageRepos.sh` clones many
-commonly used Git repositories that define optional packages.
-Cloning those enables installing the packages they define.
+To clone the GitHub repositories for a set of commonly used packages:
 
-The repositories that this clones include:
+- Clone the <a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Dev"
+  target="_blank">Cuis-Smalltalk-Dev</a> repository.
+- `cd` into the newly created "Cuis-Smalltalk-Dev" directory
+- Enter `./clonePackageRepos.sh` which clones many
+  commonly used Git repositories that define optional packages.
+
+The cloned repositories are listed below.
+To install them, enter `Feature require: '{PackageName}' in a Workspace
+and "Do it".
 
 - AMQP
 - AnimatedGIF

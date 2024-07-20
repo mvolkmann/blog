@@ -185,6 +185,8 @@ select "edit balloon help", and modify the help text.
 
 (4) "Explore" windows enable viewing data associated with an item
 such as its location, extent (width and height), and color.
+Send messages to `self` in the bottom pane to modify the morph.
+To add a method to the mo
 
 For more detail, see
 <a href="https://cuis-smalltalk.github.io/TheCuisBook/A-brief-introduction-to-Inspectors.html"

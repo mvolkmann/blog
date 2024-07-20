@@ -676,6 +676,28 @@ Including spaces around `@` is optional.
 The `Point` class has a large number of instance methods (over 70)
 including methods for adding, subtracting, dividing, and comparing instances.
 
+## Rectangle
+
+There are many ways create an instance of the `Rectangle` class.
+Each of the following lines creates an equivalent `Rectangle` instance.
+
+```smalltalk
+rect1 := Rectangle center: 5@4 extent: 4@6.
+rect2 := Rectangle left: 3 right: 7 top: 1 bottom: 7.
+rect3 := Rectangle origin: 3@1 corner: 7@7.
+rect4 := Rectangle origin: 3@1 extent: 4@6.
+rect5 := 3@1 extent: 4@6. "receiver is a Point instance"
+```
+
+The following messages get specific data from a `Rectangle` instance:
+
+```smalltalk
+rect origin. "3@1"
+rect extent. "4@6"
+rect width. "4"
+rect height. "6"
+```
+
 ## UUID
 
 The package "Identities-UUID" generates UUID values.
