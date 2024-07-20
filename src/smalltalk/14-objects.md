@@ -71,18 +71,6 @@ Transcript show: r2 area. "6"
 To determine the class of an object, send it the unary message `#class`.
 For example, `19 class` returns `SmallInteger`.
 
-Variables defined in a Workspace hold references to their object values.
-Closing a Workspace removes those references,
-which makes it possible for them to be garbage collected.
-
-Some classes such as `Morph` implement a `delete` method.
-To delete all instances of such classes,
-enter the following in Workspace and "Do it":
-
-```smalltalk
-SomeClass allInstancesDo: [ :obj | obj delete ]
-```
-
 ## Object and ProtoObject
 
 The `Object` is a superclass of nearly every other class.
@@ -134,6 +122,20 @@ which is a superclass of all classes.
 
 ```smalltalk
 ProtoObject allSubclasses sum: [:class | class allInstances size]
+```
+
+## Deleting Objects
+
+Variables defined in a Workspace hold references to their object values.
+Closing a Workspace removes those references,
+which makes it possible for them to be garbage collected.
+
+Some classes such as `Morph` implement a `delete` method.
+To delete all instances of such classes,
+enter the following in Workspace and "Do it":
+
+```smalltalk
+SomeClass allInstancesDo: [ :obj | obj delete ]
 ```
 
 ## Object Creation Detail
