@@ -698,6 +698,14 @@ rect width. "4"
 rect height. "6"
 ```
 
+To determine if a `Point` is inside or on the edge of a `Rectangle`,
+send the `#containsPoint:` message to the `Rectangle` with a `Point` argument.
+For example:
+
+```smalltalk
+rect containsPoint: 5@3. "true"
+```
+
 ## UUID
 
 The package "Identities-UUID" generates UUID values.
