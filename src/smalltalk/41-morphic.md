@@ -150,20 +150,20 @@ The class of the morph will be displayed at the bottom of the morph.
 
 The following buttons are provided:
 
-| Button                               | Location    | Purpose                                         |
-| ------------------------------------ | ----------- | ----------------------------------------------- |
-| red circle with white "x"            | upper-left  | removes the item                                |
-| blue circle with white document      | top         | opens menu "A" (1)                              |
-| black circle with house              | top         | drag to move the item within its parent         |
-| brown circle with resize icon        | top         | drag to move the item out of its parent         |
-| green circle with copy icon          | upper-right | drag to position a duplicate of the item        |
-| orange circle with wrench            | right side  | opens a menu of debugging options               |
-| blue circle with magnifier glass     | right side  | drag to change scale of item                    |
-| yellow circle with resize icon       | lower-right | drag to resize the item                         |
-| light blue circle with question mark | bottom      | click and hold to display a related tooltip (2) |
-| blue circle with rotate icon         | lower-left  | drag to rotate item                             |
-| dull yellow circle with odd shape    | left side   | click to collapse (hide) the item (3)           |
-| orange circle with wrench            | left side   | opens an "Explore" window (4)                   |
+| Button                               | Location    | Tooltip      | Purpose                                         |
+| ------------------------------------ | ----------- | ------------ | ----------------------------------------------- |
+| red circle with white "x"            | upper-left  | Remove       | removes the item                                |
+| blue circle with white document      | top         | Menu         | opens menu "A" (1)                              |
+| black circle with house              | top         | Pick up      | drag to move the item within its parent (2)     |
+| brown circle with resize icon        | top         | Move         | drag to move the item out of its parent         |
+| green circle with copy icon          | upper-right | Duplicate    | drag to position a duplicate of the item        |
+| orange circle with wrench            | right side  | Debug        | opens a menu of debugging options               |
+| blue circle with magnifier glass     | right side  | Change Scale | drag to change scale of item                    |
+| yellow circle with resize icon       | lower-right | Change Size  | drag to resize the item                         |
+| light blue circle with question mark | bottom      | Help         | click and hold to display a related tooltip (3) |
+| blue circle with rotate icon         | lower-left  | Rotate       | drag to rotate item                             |
+| dull yellow circle with odd shape    | left side   | Collapse     | click to collapse (hide) the item (4)           |
+| orange circle with wrench            | left side   | Explore      | opens an "Explore" window (5)                   |
 
 A morph can also be dragged directly without
 opening its halo and using the drag buttons.
@@ -187,13 +187,16 @@ TODO: How can you change the point about which a morph rotates?
 - export...
 - debug...
 
-(2) It seems most of the help tooltips default to "Help not yet supplied".
+(2) If the morph is embedded in another morph,
+this changes the owner to world, which unembeds it.
+
+(3) It seems most of the help tooltips default to "Help not yet supplied".
 To edit the help text, click the orange circle on the right,
 select "edit balloon help", and modify the help text.
 
-(3) To restore a collapsed item, click it's thumbnail in the bottom bar.
+(4) To restore a collapsed item, click it's thumbnail in the bottom bar.
 
-(4) "Explore" windows enable viewing data associated with an item
+(5) "Explore" windows enable viewing data associated with an item
 such as its location, extent (width and height), and color.
 Send messages to `self` in the bottom pane to modify the morph.
 To add a method to the mo
@@ -402,6 +405,15 @@ If the location of the morph was specified by sending the
 `#location#` message to it with a `MorphicTranslation` argument
 then it will be placed at that location.
 Otherwise it will be placed at a random location.
+
+## BoxedMorph
+
+The `BoxedMorph` class is a subclass of the `PlacedMorph` class
+that adds the instance variables `extent` (width and height),
+`color`, `borderWidth`, and `borderColor`.
+It is intended for morphs that are rectangular.
+
+TODO: The class comment says "DON'T subclass from here." Why?
 
 ## Button Labels
 

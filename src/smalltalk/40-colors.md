@@ -15,3 +15,9 @@ It defines the following class methods that create colors by name:
   `lightOrange`, `lightRed`, `lightYellow`
 - `darkGray`, `veryDarkGray`, `veryLightGray`, `veryVeryDarkGray`, `veryVeryLightGray`
 - `transparent`
+
+To get a random color, send the `#random` message to the `Color` class.
+
+To set the opacity of a color, send the `#alpha:` message to a `Color` object
+with an argument that is a float value between
+zero (fully transparent) and one (fully opaque).
