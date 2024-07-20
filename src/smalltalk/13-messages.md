@@ -24,7 +24,7 @@ To send a message to the superclass of the current object,
 use the pseudo-variable `super` as the receiver.
 The difference between `self` and `super` is where method lookup begins.
 With `self` it begins in the class of the current object and
-with `super` it beings in the superclass of that.
+with `super` it begins in the superclass of that.
 
 If Smalltalk were to add the ability to
 specify the parameter and return types of methods,

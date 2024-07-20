@@ -161,9 +161,9 @@ The following buttons are provided:
 | blue circle with magnifier glass     | right side  | Change Scale | drag to change scale of item                    |
 | yellow circle with resize icon       | lower-right | Change Size  | drag to resize the item                         |
 | light blue circle with question mark | bottom      | Help         | click and hold to display a related tooltip (3) |
-| blue circle with rotate icon         | lower-left  | Rotate       | drag to rotate item                             |
-| dull yellow circle with odd shape    | left side   | Collapse     | click to collapse (hide) the item (4)           |
-| orange circle with wrench            | left side   | Explore      | opens an "Explore" window (5)                   |
+| blue circle with rotate icon         | lower-left  | Rotate       | drag to rotate item (4)                         |
+| dull yellow circle with odd shape    | left side   | Collapse     | click to collapse (hide) the item (5)           |
+| orange circle with wrench            | left side   | Explore      | opens an "Explore" window (6)                   |
 
 A morph can also be dragged directly without
 opening its halo and using the drag buttons.
@@ -194,9 +194,16 @@ this changes the owner to world, which unembeds it.
 To edit the help text, click the orange circle on the right,
 select "edit balloon help", and modify the help text.
 
-(4) To restore a collapsed item, click it's thumbnail in the bottom bar.
+(4) To change the center of rotation of a morph, click the "Explore" handle,
+enter the following in the bottom pane, and "Do it":
 
-(5) "Explore" windows enable viewing data associated with an item
+```smalltalk
+self setProperty: #rotationCenter toValue: newX @ newY.
+```
+
+(5) To restore a collapsed item, click it's thumbnail in the bottom bar.
+
+(6) "Explore" windows enable viewing data associated with an item
 such as its location, extent (width and height), and color.
 Send messages to `self` in the bottom pane to modify the morph.
 To add a method to the mo
@@ -343,7 +350,7 @@ PlacedMorph subclass: #CanvasDemo
 ```
 
 The instance method `drawOn:` is passed a `VectorCanvas` object
-and uses local coodinates for drawing, not world coordinates.
+and uses local coordinates for drawing, not world coordinates.
 For example, the following draws a green rectangle with a red border
 and a red line from its upper-left to lower-right.
 It has a default width of 100, height of 100, and
@@ -394,6 +401,9 @@ with `deltaX` and `deltaY` instance variables.
 If the morph has been rotated or scaled
 then `location` will hold an `AffineTranslation` object
 with `scale`, `degrees`, and `translation` instance variables.
+
+Changing the translation, rotation, or scale of a morph
+changes its local coordinate system.
 
 The `Morph` method `openInHand` causes the morph to appear
 and be attached to the cursor.
