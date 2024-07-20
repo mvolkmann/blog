@@ -6,7 +6,8 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-Morphic is a GUI framework that is included into popular Smalltalk images.
+Morphic is a GUI framework that is included into popular Smalltalk images
+such as Squeak, Pharo, and Cuis.
 It defines user interfaces with "morphs" which are
 what other graphical systems refer to as widgets or components.
 Morphs are graphical items that can be added to
@@ -16,6 +17,15 @@ TODO: Technically speaking, can any morph be embedded in any other morph?
 For a great introduction to Morphic, see
 <a href="https://www.youtube.com/watch?v=62baNn3c56Y"
 target="_blank">Holistic computing with Smalltalk and Morphic. Part 1</a>.
+
+<a href="http://www.jvuletich.org/Morphic3/Morphic3-201006.html"
+target="_blank">Morphic 3</a> was developed by Juan Vuletich
+and is used in Cuis Smalltalk.
+It adds display resolution independence, float coordinates,
+modeling of coordinate systems as objects,
+alias free rendering based on signal processing theory,
+use of textures and photos,
+zoomable user interfaces (not tied to pixel density), and vector graphics.
 
 Some of the methods in Morphic classes are inconsistently named.
 For example, the class `TextModelMorph` defines the methods
@@ -311,6 +321,88 @@ For more detail on layouts, see
 <a href="https://github.com/Cuis-Smalltalk/Learning-Cuis/blob/master/LayoutTour.md"
 target="_blank">Exploring morph layouts in Cuis</a>.
 
+## Creating a Custom Morph
+
+Custom morphs are typically implemented as subclasses of the `PlacedMorph` class
+and implement the `drawOn:` method.
+They can be directly dragged to new locations.
+Otherwise dragging requires opening the morph halo and using the Move handle.
+
+The following example includes the instance variable `extent`
+to allow the width and height to be used to determine what to draw.
+
+```smalltalk
+PlacedMorph subclass: #CanvasDemo
+    instanceVariableNames: 'extent'
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'Volkmann'
+```
+
+The instance method `drawOn:` is passed a `VectorCanvas` object
+and uses local coodinates for drawing, not world coordinates.
+For example, the following draws a green rectangle with a red border
+and a red line from its upper-left to lower-right.
+It has a default width of 100, height of 100, and
+default location of the upper-left corner of the world.
+
+```smalltalk
+drawOn: aCanvas
+    | x1 x2 y1 y2 |
+    x1 := 0.
+    y1 := 0.
+    x2 := extent x.
+    y2 := extent y.
+    aCanvas strokeWidth: 10 color: Color red fillColor: Color green do: [
+        aCanvas
+            moveTo: x1 @ y1;
+            lineTo: x2 @ y2;
+            lineTo: x2 @ y1;
+            lineTo: x1 @ y1;
+            lineTo: x1 @ y2;
+            lineTo: x2 @ y2
+    ]
+
+extent
+    ^ extent
+
+extent: aPoint
+    extent := aPoint
+
+initialize
+    super initialize.
+    extent := 100@100 "default size"
+    "Place in upper-left corner by default."
+    self location: (MorphicTranslation withTranslation: 0@0).
+```
+
+To try this:
+
+- Open a Workspace.
+- Enter `(CanvasDemo new extent: 300@400) openInHand.`
+- Press cmd-d to "Do it".
+- Move the cursor to where the morph should be dropped.
+- Click to drop it.
+
+Instances of `PlacedMorph` subclasses have a `location` instance variable.
+If the morph only has a location and has not be rotated or scaled
+then `location` will hold a `MorphicTranslation` object
+with `deltaX` and `deltaY` instance variables.
+If the morph has been rotated or scaled
+then `location` will hold an `AffineTranslation` object
+with `scale`, `degrees`, and `translation` instance variables.
+
+The `Morph` method `openInHand` causes the morph to appear
+and be attached to the cursor.
+Move the cursor to the location where it should be placed and click to drop it.
+
+Alternative, send the message `#openInWorld` to cause the morph to appear
+and not be attached to the cursor.
+If the location of the morph was specified by sending the
+`#location#` message to it with a `MorphicTranslation` argument
+then it will be placed at that location.
+Otherwise it will be placed at a random location.
+
 ## Button Labels
 
 Button labels are automatically shortened to fit within the button width
@@ -437,58 +529,6 @@ To delete this from the World,
 enter layoutDelete in the Workspaces and "Do it", or
 open the halo for the `LayoutMorph` and click the red button in the upper-left.
 
-## Canvas Drawing
-
-To draw on a canvas, create a subclass of `Morph` as follows:
-
-```smalltalk
-PlacedMorph subclass: #CanvasDemo
-    instanceVariableNames: 'extent'
-    classVariableNames: ''
-    poolDictionaries: ''
-    category: 'Volkmann'
-```
-
-Then define the instance method `drawOn:`.
-For example, the following draws a red rectangle
-with a line from its upper-left to lower-right.
-
-```smalltalk
-drawOn: aCanvas
-    | x1 x2 y1 y2 |
-    x1 := 0.
-    y1 := 0.
-    x2 := extent x.
-    y2 := extent y.
-    aCanvas strokeWidth: 10 color: Color red fillColor: Color green do: [
-        aCanvas
-            moveTo: x1 @ y1;
-            lineTo: x2 @ y2;
-            lineTo: x2 @ y1;
-            lineTo: x1 @ y1;
-            lineTo: x1 @ y2;
-            lineTo: x2 @ y2
-    ]
-
-extent
-    ^ extent
-
-extent: aPoint
-    extent := aPoint
-
-initialize
-    super initialize.
-    extent := 100 @ 100
-```
-
-To try this:
-
-- Open a Workspace.
-- Enter `(CanvasDemo new extent: 300@400) openInHand.`
-- Press cmd-d to "Do it".
-- Move the cursor to where the morph should be dropped.
-- Click to drop it.
-
 ## SVG
 
 To work with SVG images:
@@ -565,3 +605,13 @@ initialize
         location: (MorphicTranslation withTranslation: 10@10);
         openInWorld
 ```
+
+## Redrawing
+
+After making code changes, if the UI does not update properly,
+there are two things that can be done to update the display.
+
+1. Open the World menu and select "Restore Display".
+1. Open the World menu and select "Debug ... Start drawing all again".
+
+TODO: What is the difference between these?
