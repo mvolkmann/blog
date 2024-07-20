@@ -402,6 +402,16 @@ If the morph has been rotated or scaled
 then `location` will hold an `AffineTranslation` object
 with `scale`, `degrees`, and `translation` instance variables.
 
+By default, morphs rotate about their center. To change this,
+override the `rotationCenter` method to return a different `Point`.
+For example, the following causes rotation
+to occur around the upper-left corner:
+
+```smalltalk
+rotationCenter
+    ^ 0@0
+```
+
 Changing the translation, rotation, or scale of a morph
 changes its local coordinate system.
 
