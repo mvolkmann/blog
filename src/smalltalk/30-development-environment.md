@@ -773,15 +773,16 @@ To see all the installed packages, open the World menu
 and select Open...Installed Packages.
 This opens an "Installed Packages" window.
 
-To browse everything that is defined in a package:
+<img alt="Cuis Installed Packages" style="width: 100%"
+  src="/blog/assets/cuis-installed-packages.png?v={{pkg.version}}">
 
-- Select the package.
-- Click the "Browse" button.
-- This opens a System Browser that is focused on the selected package package.
+To browse everything that is defined in a package,
+select the package and click the "Browse" button.
+This opens a System Browser that is focused on the selected package.
 
 To create a new package:
 
-- Click the "New" button in the center strip of buttons.
+- Click the "new" button in the center strip of buttons.
 - Enter a package name. For example, "Volkmann".
 - Select the newly created package.
 - Enter a comment describing the package.
@@ -801,6 +802,17 @@ I use this package to save all my experimental code
 so I can easily load it into new images.
 This is useful in case I accidentally modify an image in an unintended way.
 I can then return to using a base image and load my package into it.
+
+When there are unsaved changes to the classes and methods defined in a package,
+its name will be preceded by an asterisk.
+To see the changes that were made, select the package name
+and click the "changes" button.
+To save all the changes, select the package name and click the "save" button.
+When modifying your own packages, frequently check for unsaved changes here
+and save them when ready.
+
+To uninstall a package, select the package name
+and click the "delete/merge" button.
 
 ## Process Browsers
 
