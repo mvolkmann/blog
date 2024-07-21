@@ -457,6 +457,18 @@ Otherwise it will be placed at a random location.
 Drawing-related methods like `drawOn:`
 should be placed in the "drawing" method category.
 
+## MorphicCanvas
+
+The `MorphicCanvas` class has many subclasses including
+`BitBltBoundsFinderCanvas`, `BitBltCanvas`, `BoundsFinderCanvas`,
+`HybridCanvas`, and `VectorCanvas`.
+
+`BitBltCanvas` is a legacy class that doesn't support
+vector graphics operations, anti-aliasing, or zooming.
+But it provides great performance due to its simplicity.
+
+TODO: Is it worthwhile to learn about any of these besides `VectorCanvas`?
+
 ## BoxedMorph
 
 The `BoxedMorph` class is a subclass of the `PlacedMorph` class
