@@ -494,7 +494,47 @@ They are found in Argentina.
 Juan Vuletich began development of Cuis Smalltalk in Buenos Aires, Argentina.
 The word "cuis" means "squeak" in Rioplatense Spanish.
 
-The GitHub repository for Cuis Smalltalk is at
+## GitHub Account
+
+The GitHub account for Cuis Smalltalk is at
+<a href="https://github.com/Cuis-Smalltalk" target="_blank">Cuis-Smalltalk</a>.
+This hosts many related repositories including the main one
+that holds the latest code for the Cuis Smalltalk image,
 <a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Dev"
-  target="_blank">Cuis-Smalltalk-Dev</a>.
+target="_blank">Cuis-Smalltalk-Dev</a>.
 As of May 2024, 96.8% of the code in the repository is written in Smalltalk.
+Other related repositories include:
+
+- AMQP: messaging client library compatible with RabbitMQ and other AMQP servers
+- AnimatedGIF: supports animated GIFs
+- Cairo: supports Cairo graphics
+- Cuis6-2: stable release
+- Cuis7-0: stable release
+- Cuis-Smalltalk-UI: collection of Morphic components
+- Cuis-Smalltalk-Tools: collection of additional development tools
+- Cuis-Smalltalk-Regex: code for parsing and evaluating regular expressions
+- Cuis-Website: a Jekyll site that uses Markdown files
+  to generate the Cuis website
+- DatabaseSupport: implementation of the Open Database Connectivity (ODBC) standard
+  for access databases that support ODBC. This includes
+  MariaDB, Microsoft SQL Server, MongoDB, MySQL, Oracle, PostgreSQL, SQLite,
+  and many more.
+- Games: collection of games implemented in Smalltalk including
+  Anagram Aid, Construction, Life, Solitaire (FreeCell and Klondike),
+  and classes that can be used to build your own games
+- GeographicInformationSystems: supports cartography (maps)
+  and includes some data sets
+- LearningCuis: learning "tours" of various Cuis Smalltalk aspects
+  such as the development environment (UITour) and Morphic layout (LayoutTour)
+- Machine-Learning: code for machine learning in Smalltalk
+- Measures: code for operating on measurements that combine a number and a unit
+  such as 2 meters, 17 celcius, 3 days, and 4 dollars
+- Numerics: code for image processing, linear algebra, numerical methods,
+  probability distribution, signal processing, statistics, and 3D operations
+- OSProcess: provides access to operating system functions, including pipes,
+  child process creation, and control of Squeak VM processes
+- Parsers: for parsing Smalltalk source code (TODO: Verify this.)
+- Styled Text Editor: a framework for rich text editing using styles seen in
+  word processors like Apple Pages and Microsoft Word
+- SVG: code for reading and displaying Scalable Vector Graphics files
+- TheCuisBook: a free book about Cuis Smalltalk
