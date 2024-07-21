@@ -250,6 +250,17 @@ Smalltalk has the following cons:
   developers can just read it to determine how to use a library.
   This makes it difficult to get started using new libraries.
 
+- Interfacing with resources is challenging.
+
+  Interfacing with resources outside of the Smalltalk environment
+  can be difficult. Examples include accessing databases
+  and operating in cloud environments with tools like AWS and Docker.
+
+- Team development is challenging.
+
+  Resolve conflicts in code edited by multiple developers
+  may require working with the "chunk format".
+
 - Classes are global and not in namespaces, so all class names must be unique.
 
   Using class name prefixes is sometimes recommended.

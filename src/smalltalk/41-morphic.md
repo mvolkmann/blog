@@ -403,10 +403,11 @@ To draw text in this morph that is centered,
 add the following in the `drawOn:` method:
 
 ```smalltalk
+font := FontFamily defaultFamilyPointSize: 24.
 aCanvas
     drawString: 'Hello'
     atCenterXBaselineY: x1 + x2 / 2 @ (y1 + y2 / 2)
-    font: nil "uses default font"
+    font: font "pass nil to use default font"
     color: Color yellow.
 ```
 
@@ -453,6 +454,69 @@ that adds the instance variables `extent` (width and height),
 It is intended for morphs that are rectangular.
 
 TODO: The class comment says "DON'T subclass from here." Why?
+
+## Fonts
+
+To see a popup list of the installed fonts and fonts available to install,
+enter `FontFamily promptUser` in a Workspace and "Do it".
+The installed font names are displayed using their font.
+To install a font, click its checkbox under "Available to install".
+The list may include the following:
+
+- Alex Brush
+- Amaranth
+- CMU Typewriter Text
+- DejaVu Sans (default)
+- JetBrains Mono NL
+- Kiwi Maru Light
+- Kurinto Sans
+- Learning Curve
+- Noto Sans EqyptHiero
+- Parc Place Legacy
+- Source Sans 3 Medium
+
+The font files are located in the `Cuis-Smallltalk-Dev/TrueTypeFonts` directory.
+To add a new font, create a subdirectory whose name is the font name
+and place `.ttf` files inside it.
+
+To set the default font size used in the development environment:
+
+```smalltalk
+Preferences at: #defaultFontSize put: 14
+```
+
+To set the default font family used in the development environment:
+
+```smalltalk
+PreferenceSet setDefaultFont: 'Alex Brush'
+```
+
+If an invalid font name is used, the environment will lock up.
+TODO: Report this!
+
+To get a `Dictionary` of available font families:
+
+```smalltalk
+fontFamilies := FontFamily availableFamilies
+```
+
+To get the default font:
+
+```smalltalk
+font := FontFamily defaultFamilyAndPointSize
+```
+
+To get the default font with a specified point size:
+
+```smalltalk
+font := FontFamily defaultFamilyPointSize: 18
+```
+
+To get a font for a specific family and point size:
+
+```smalltalk
+font := FontFamily familyName: 'Alex Brush' pointSize: 36.
+```
 
 ## Button Labels
 
@@ -666,3 +730,7 @@ there are two things that can be done to update the display.
 1. Open the World menu and select "Debug ... Start drawing all again".
 
 TODO: What is the difference between these?
+
+## Todo App
+
+TODO: Implement a Todo app using Morphic and learn how to deploy it.
