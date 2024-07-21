@@ -133,13 +133,15 @@ Packages are collections of Smalltalk code
 stored in files with a `.pck.st` file.
 The code consists of complete class definitions
 and methods added to classes in other categories.
+
 When a package file is installed, if it defines new classes,
 they are placed in a new class category whose name is the package name.
 The new class category is visible in System Browsers.
 If the package defines methods to be
 added to a class in another class categories,
 a new method category name is added to the class
-whose name is an asterisk followed by the package name and an optional suffix.
+whose name is an asterisk followed by the package name and an optional suffix
+(for example, `*Volkmann-printing`).
 
 Package names are used as prefixes on class and method categories names.
 Package name abbreviations are often used as prefixes on class names.
@@ -152,6 +154,8 @@ These repositories must be cloned in order to install them.
 
 For additional packages, search GitHub for
 repositories whose names begin with "Cuis-Smalltalk-".
+The names of your GitHub repositories for reusable Smalltalk code
+should also begin this way so others can easily find and install them.
 
 There are three ways to install a package.
 
@@ -163,6 +167,8 @@ There are three ways to install a package.
    and press cmd-d (Do it).
    This option only works if the package is
    in the same directory as the image file that is loaded.
+
+Installing a package also installs all of its dependencies.
 
 Let's learn where the `Feature require:` method searches for packages.
 

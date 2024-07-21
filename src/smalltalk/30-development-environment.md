@@ -811,6 +811,12 @@ To save all the changes, select the package name and click the "save" button.
 When modifying your own packages, frequently check for unsaved changes here
 and save them when ready.
 
+To see all the code in a package, select the package name
+and click the "browse" button.
+This shows the classes defined by the package.
+It also shows the classes in other class categories
+to which the package adds classes and methods.
+
 To uninstall a package, select the package name
 and click the "delete/merge" button.
 
