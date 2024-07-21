@@ -757,6 +757,77 @@ initialize
         openInWorld
 ```
 
+## Morph Methods
+
+The `Morph` class provides a large number of instance methods.
+Highlights are provided in the following table:
+
+| Method     | Description                                                                |
+| ---------- | -------------------------------------------------------------------------- |
+| `collides` | answers `Boolean` indicating if receiver contour overlaps argument contour |
+
+TODO: Add more methods to this table.
+
+## Event Handling
+
+The `Morph` class provides many methods for event handling
+in the "events" method category. Examples include:
+
+- `keyDown:`
+- `keyStroke:`
+- `keyUp:`
+- `keyboardFocusChange:`
+- `keyboardShortcut:`
+- `mouseButton1Down:localPosition:`
+- `mouseButton1Up:localPosition:`
+- `mouseButton2Down:localPosition:`
+- `mouseButton2Up:localPosition:`
+- `mouseButton3Down:localPosition:`
+- `mouseButton3Up:localPosition:`
+- `mouseEnter:`
+- `mouseHover:localPosition:`
+- `mouseLeave:`
+- `mouseMove:localPosition:`
+- `mouseScroll:localPosition:`
+- `windowEvent:`
+
+Each of these methods is passed a `MorphicEvent` object.
+To get the `Morph` object that triggered the event,
+send the message `#hand` to the event object.
+
+To move focus to a `Morph`, send it the message
+`#newKeyboardFocus:` with the argument `self`.
+To give up focus from a `Morph`, send it the message
+`#releaseKeyboardFocus:` with the argument `self`.
+
+The `Morph` class provides several methods for focus handling
+in the "focus handling" method category. These include:
+
+- `hasKeyboardFocus` - answers a `Boolean`
+- `hasMouseFocus` - answers a `Boolean`
+- `keyboardFocusChange` - sent to morphs when they gain or lose focus
+- `keyboardFocused` TODO: Why does this not have any code?
+
+Consider changing the background color of a custom morph
+when it gains and loses focus.
+
+The class `EventSensor` handles keyboard and mouse events.
+
+TODO: Add much more detail on this.
+
+The inheritance hierarchy of classes that describe events is as follows:
+
+- `MorphicEvent`
+  - `DropEvent`
+  - `DropFilesEvent`
+  - `UserInputEvent`
+    - `KeyboardEvent`
+    - `MouseEvent`
+      - `MouseButtonEvent`
+      - `MouseMoveEvent`
+      - `MouseScrollEvent`
+  - `WindowEvent`
+
 ## Redrawing
 
 After making code changes, if the UI does not update properly,

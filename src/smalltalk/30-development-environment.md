@@ -40,6 +40,13 @@ To refresh all the windows after code changes that affect them
 open the World menu and select "Windows...Restore all Windows".
 This does not update windows to use a newly selected theme.
 
+## Focus
+
+By default, focus automatically goes to the morph under the mouse cursor.
+To change this, open the World menu and select Preferences ... Focus when Click.
+To restore the default behavior, open the World menu and
+select Preferences ... Focus follows Mouse.
+
 ## Editing Code
 
 Many kinds of windows support entering Smalltalk code.
@@ -163,6 +170,8 @@ A System Browser can be used to examine, create, modify and delete
 class categories, classes, method categories, and methods.
 This includes those provided by the base image,
 those provided by installed packages, and those you create.
+
+Class and method category names can contain spaces.
 
 To open a System Browser, open the World menu and select Open...Browser.
 Alternatively, type a class name (ex. String) in a Workspace window

@@ -706,6 +706,9 @@ For example:
 rect containsPoint: 5@3. "true"
 ```
 
+To determine if a `Rectangle` intersects another `Rectangle`,
+send one the `#intersects:` message with the other as the argument.
+
 ## UUID
 
 The package "Identities-UUID" generates UUID values.
