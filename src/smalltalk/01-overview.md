@@ -538,3 +538,10 @@ Other related repositories include:
   word processors like Apple Pages and Microsoft Word
 - SVG: code for reading and displaying Scalable Vector Graphics files
 - TheCuisBook: a free book about Cuis Smalltalk
+- VMMaker: port of the Squeak VMMaker for building VM plugins
+
+Many of these repositories define optional packages.
+To install them, clone their repository into the same directory
+as the Cuis-Smalltalk-Dev directory (or Cuis6-2 or Cuis7-0).
+Then install them using one of the approaches described in
+the "Packages" section of the "Saving Code" chapter.

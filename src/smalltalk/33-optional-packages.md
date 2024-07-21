@@ -8,15 +8,11 @@ layout: topic-layout.njk
 
 To clone the GitHub repositories for a set of commonly used packages:
 
-- Clone the <a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Dev"
-  target="_blank">Cuis-Smalltalk-Dev</a> repository.
-- `cd` into the newly created "Cuis-Smalltalk-Dev" directory
-- Enter `./clonePackageRepos.sh` which clones many
-  commonly used Git repositories that define optional packages.
+- `cd` into the "Cuis-Smalltalk-Dev" directory.
+- Enter `./clonePackageRepos.sh`.
 
-The cloned repositories are listed below.
-To install them, enter `Feature require: '{PackageName}' in a Workspace
-and "Do it".
+The cloned repositories are listed below. To install them,
+enter `Feature require: '{PackageName}' in a Workspace and "Do it".
 
 - AMQP
 - AnimatedGIF
@@ -44,3 +40,5 @@ and "Do it".
 - StyledTextEditor
 - SVG
 - VMMaker
+
+See the descriptions of these repositories in the "GitHub Account" section at the end of the "Overview" chapter.
