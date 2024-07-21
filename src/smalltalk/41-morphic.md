@@ -331,6 +331,21 @@ For more detail on layouts, see
 <a href="https://github.com/Cuis-Smalltalk/Learning-Cuis/blob/master/LayoutTour.md"
 target="_blank">Exploring morph layouts in Cuis</a>.
 
+## Coordinate Systems
+
+The world coordinate system places (0, 0) in
+the upper-left corner of the main window.
+X values increase going right and Y values increase going down.
+
+Each morph has its own local coordinate system
+with (0, 0) in the upper-left corner of the morph.
+This coordinate system is used for drawing the morph.
+
+Changing the translation, rotation, or scale of a morph
+changes its local coordinate system.
+
+Positive rotations are clockwise and negative rotations are counter-clockwise.
+
 ## Creating a Custom Morph
 
 Custom morphs are typically implemented as subclasses of the `PlacedMorph` class
@@ -349,8 +364,7 @@ PlacedMorph subclass: #CanvasDemo
     category: 'Volkmann'
 ```
 
-The instance method `drawOn:` is passed a `VectorCanvas` object
-and uses local coordinates for drawing, not world coordinates.
+The instance method `drawOn:` is passed a `VectorCanvas` object.
 For example, the following draws a green rectangle with a red border
 and a red line from its upper-left to lower-right.
 It has a default width of 100, height of 100, and
@@ -429,9 +443,6 @@ rotationCenter
     ^ 0@0
 ```
 
-Changing the translation, rotation, or scale of a morph
-changes its local coordinate system.
-
 The `Morph` method `openInHand` causes the morph to appear
 and be attached to the cursor.
 Move the cursor to the location where it should be placed and click to drop it.
@@ -454,6 +465,19 @@ that adds the instance variables `extent` (width and height),
 It is intended for morphs that are rectangular.
 
 TODO: The class comment says "DON'T subclass from here." Why?
+
+All the developer tool windows are subclasses of `BoxedMorph`.
+For example, System Browsers are implemented by the `BrowserWindow` class
+which has the following inheritance hierarchy.
+
+- `Object`
+  - `Morph`
+    - `PlacedMorph`
+      - `BoxedMorph`
+        - `PluggableMorph`
+          - `SystemWindow`
+            - `CodeWindow`
+              - `BrowserWindow`
 
 ## Fonts
 
