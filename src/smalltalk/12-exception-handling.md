@@ -6,7 +6,11 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-Methods can throw exceptions.
+Exceptions are described by a specific kind of exception object
+that can hold data describing the problem.
+To throw/raise an exception object, sent it the
+message `#signal:` with a `String` argument description.
+
 Exceptions that are thrown by code in a block can be caught and handled.
 Unhandled exceptions result in a Debug window being opened
 that contains a stack trace.
