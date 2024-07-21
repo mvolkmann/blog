@@ -733,7 +733,11 @@ seems to produce unexpected results. TODO: Why?
 
 ## Change Sorter Windows
 
-Change Sorters summarize all the currently unsaved changes.
+Each edit performed in a System Browser is saved in a `ChangeSet`.
+To browse all the change sets, open the World menu
+and select Open ... Change Sorter.
+This window summarize all the currently unsaved changes.
+
 The first row left pane displays a list of change set names.
 Selecting one displays a list of modified classes in the first row right pane.
 Selecting a modified class displays a list of modified methods

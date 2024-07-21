@@ -18,8 +18,11 @@ perhaps held in `Dictionary` objects, as an alternative to using a database.
 
 One way to start an image is to double-click its file.
 
-To save any changes, open the World menu and select "Save Image",
-"Save Image as", or "Save Image and Quit".
+To save any changes, open the World menu.
+Select "Save Image" to save in the current image file.
+Select "Save Image as" to save in a new image file.
+Select "Save Image and Quit" to save in the current image file and exit the VM.
+
 The changes include all placed morphs (includes development enviroment windows),
 their position, size, and colors,
 selections made (ex. System Browser top pane selections),
