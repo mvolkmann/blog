@@ -265,7 +265,8 @@ Smalltalk has the following cons:
 
   Using class name prefixes is sometimes recommended.
   These use 1, 2, or 3 capital letters.
-  Prefixes are important for packages intended to be reused by others.
+  Prefixes are important for packages of classes and methods
+  intended to be reused by others.
   Squeak has a <a href="http://wiki.squeak.org/squeak/3318"
   target="_blank">prefix registry</a> in its wiki.
   Unfortunately it was last updated in 2010.

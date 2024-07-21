@@ -131,6 +131,15 @@ target="_blank">Monticello</a> which is used in Squeak and Pharo.
 
 Packages are collections of Smalltalk code
 stored in files with a `.pck.st` file.
+The code consists of complete class definitions
+and methods added to classes in other categories.
+When a package file is installed, if it defines new classes,
+they are placed in a new class category whose name is the package name.
+The new class category is visible in System Browsers.
+If the package defines methods to be
+added to a class in another class categories,
+a new method category name is added to the class
+whose name is an asterisk followed by the package name and an optional suffix.
 
 Package names are used as prefixes on class and method categories names.
 Package name abbreviations are often used as prefixes on class names.
