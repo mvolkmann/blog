@@ -473,11 +473,11 @@ The list may include the following:
 - Learning Curve
 - Noto Sans EqyptHiero
 - Parc Place Legacy
-- Source Sans 3 Medium
+- Source Sans 3
 
 The font files are located in the `Cuis-Smallltalk-Dev/TrueTypeFonts` directory.
 To add a new font, create a subdirectory whose name is the font name
-and place `.ttf` files inside it.
+and place `.ttf` files for each variation of the font inside it.
 
 To set the default font size used in the development environment:
 
