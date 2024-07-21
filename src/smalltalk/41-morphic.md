@@ -127,9 +127,8 @@ and the desired subpackages will need to be installed individually.
 Still true?
 
 See my Morphic demos in package `Volkmann`
-in the classes `MorphicDemos` and `MorphicGreet`.
-In a Workspace, enter `MorphicDemos incDecButtons.` and "Do it".
-Then enter `MorphicGreet new.` and "Do it".
+in the classes `VButtonDemo` and `VGreet`.
+In a Workspace, enter `VButtonDemo new` or `VGreet new` and "Do it".
 
 ## Halo
 
@@ -790,6 +789,13 @@ in the "events" method category. Examples include:
 - `mouseMove:localPosition:`
 - `mouseScroll:localPosition:`
 - `windowEvent:`
+
+The mouse event handling methods are only called
+if the morph is configured to handle them.
+For example, `mouseEnter:` and `mouseLeave:` are only called
+if the `handleMouseOver:` method is implemented to return `true`.
+For an example, see `VGreet` class in the `Volkmann` category.
+See comments in each event handling method to determine how to enable it.
 
 Each of these methods is passed a `MorphicEvent` object.
 To get the `Morph` object that triggered the event,
