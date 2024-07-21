@@ -93,6 +93,7 @@ define a class method that returns it.
 To assign initial values to the class variables of a class,
 define the class method `initialize`
 and explicitly send that message to the class.
+TODO: It the class method `initialize` called automatically when its class is installed?
 
 ## Class Instance Variables
 
@@ -106,6 +107,8 @@ TODO: Describe how to define a class instance variable
 and set different values in the class and subclasses.
 Perhaps an example could be an Animal class with a legs variable
 that is set to 0 in the Animal class and 4 in the Dog subclass.
+
+TODO: Can a subclass class method set a class instance variable in a superclass?
 
 ## Temporary Variables
 
