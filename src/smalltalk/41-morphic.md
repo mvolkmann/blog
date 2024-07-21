@@ -792,10 +792,13 @@ in the "events" method category. Examples include:
 
 The mouse event handling methods are only called
 if the morph is configured to handle them.
-For example, `mouseEnter:` and `mouseLeave:` are only called
-if the `handleMouseOver:` method is implemented to return `true`.
-For an example, see `VGreet` class in the `Volkmann` category.
+For example, the `keyDown:`, `keyUp:`, and `keyStroke:` methods are only called
+if the `handlesKeyboard:` method is implemented to return `true`.
+Also, the `mouseEnter:` and `mouseLeave:` methodsare only called
+if the `handlesMouseOver:` method is implemented to return `true`.
 See comments in each event handling method to determine how to enable it.
+
+TODO: For a good code example, see `VGreet` class in the `Volkmann` category.
 
 Each of these methods is passed a `MorphicEvent` object.
 To get the `Morph` object that triggered the event,
