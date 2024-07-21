@@ -44,6 +44,7 @@ The term "receiver" describes the object to which a message is sent.
 | expression separator (period)                     | `'foo print'. 'bar' print`                                 |
 | parentheses to control evaluation order           | `a * (b + c)`                                              |
 | reference to current object in a method           | `self`                                                     |
+| compound literal evaluated by compiler            | `` `expression` ``                                         |
 
 Whitespace in Smalltalk code is insignificant.
 Spaces, tabs, and newline characters can be freely inserted.
@@ -62,6 +63,9 @@ Expressions in a method are separated by periods.
 
 In static arrays the elements are separated by spaces.  
 In dynamic arrays the expressions are separated by periods.
+
+Compound literals evaluate their expression at compile-time
+instead of run-time for better run-time performance.
 
 ## Naming Conventions
 
