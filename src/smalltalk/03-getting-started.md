@@ -13,8 +13,8 @@ To install Cuis Smalltalk:
 1. Browse <a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Dev"
    target="_blank">Cuis Smalltalk Git repository</a>.
 1. Click the "Zip file" link near the bottom of the page.
-1. Unzip the downloaded file to obtain the directory "Cuis-Smalltalk-Dev-master".
-1. Move this directory to your desired location.
+1. Unzip the downloaded file to obtain the directory "Cuis-Smalltalk-Dev".
+1. Move this directory to the desired location.
 
 Alternatively, clone the Git repository.
 This makes it possible to obtain updates by simply running "git pull".

@@ -545,3 +545,6 @@ To install them, clone their repository into the same directory
 as the Cuis-Smalltalk-Dev directory (or Cuis6-2 or Cuis7-0).
 Then install them using one of the approaches described in
 the "Packages" section of the "Saving Code" chapter.
+
+For additional packages, search GitHub for
+repositories whose names begin with "Cuis-Smalltalk-".
