@@ -350,6 +350,11 @@ System Browsers contain four rows.
   Press cmd-s (Accept) to save the changes
   and the thin, red border will disappear.
 
+To open a new System Browser for a class whose name appears in a System Browser,
+select the name and press cmb-d (Browse it).
+Currently there is no way to request for the current System Browser
+to be reused for browsing a selected class name.
+
 ### Code Formatting
 
 To automatically display formatted code,
