@@ -17,6 +17,22 @@ that contains a stack trace.
 
 Smalltalk seems to use the words "exception" and "error" interchangably.
 
+The following code demonstrates catching an exception
+that is thrown by code in a block that divides a number by zero.
+It opens an Inspector window to examine details of the exception object.
+
+```smalltalk
+[3 / 0] on: ZeroDivide do: [:ex | ex inspect].
+```
+
+The class of the exception object is `ZeroDivide`.
+Its instance variables include:
+
+- `messageText`: `nil`
+- `receiver`: `3`
+- `selector`: `#/`
+- `arguments`: `#(0)`
+
 To throw a generic `Exception`:
 
 ```smalltalk
