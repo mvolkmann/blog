@@ -196,6 +196,8 @@ To change the value of an instance variable in the menu, such as
 When changing a color, select a color palette and
 drag a color swatch onto the instance variable.
 
+Color swatches can be dragged from one menu to another to copy colors.
+
 (2) If the morph is embedded in another morph,
 this changes the owner to world, which unembeds it.
 

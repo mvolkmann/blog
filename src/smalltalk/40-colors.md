@@ -99,6 +99,7 @@ To use the selected color:
   one of the swatches in the menu for an instance variable such as
   `borderColor`, `color`, `fillColor`, or `lineColor`.
 
+  Tooltips for each of the three color swatches describe their purpose.
   The left swatch uses the selected color with the selected alpha value.
   The center swatch uses the selected color without the selected alpha value.
   The right swatch uses the closest web color to the selected color.
