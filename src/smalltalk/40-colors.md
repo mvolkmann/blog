@@ -95,7 +95,12 @@ To use the selected color:
 - Click the blue Menu button near the top-left.
 - In the menu that appears, click the red pin
   so the menu remains open if you click outside it.
-- Drag a color swatch to one of the swatches in the menu
-  for an instance variable such as
+- Drag one of the color swatches in the "Color Editor" dialog to
+  one of the swatches in the menu for an instance variable such as
   `borderColor`, `color`, `fillColor`, or `lineColor`.
+
+  The left swatch uses the selected color with the selected alpha value.
+  The center swatch uses the selected color without the selected alpha value.
+  The right swatch uses the closest web color to the selected color.
+
 - Close the menu.
