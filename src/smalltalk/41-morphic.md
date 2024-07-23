@@ -171,8 +171,6 @@ does not process mouse events.
 For example, you cannot drag a morph that contains a button
 by dragging the button.
 
-TODO: How can you change the point about which a morph rotates?
-
 (1) This menu contains the following options:
 
 - send to back
@@ -185,6 +183,13 @@ TODO: How can you change the point about which a morph rotates?
 - copy to clipboard
 - export...
 - debug...
+
+It is often useful to click the red pin in the upper-right of the menu
+so it remains open if you click outside it.
+This enables dragging values onto it (such as color swatches)
+to change the values of instance variables.
+If you forget the morph to which a pinned menu belongs,
+click "show target halo" to open the halo of the morph.
 
 (2) If the morph is embedded in another morph,
 this changes the owner to world, which unembeds it.
