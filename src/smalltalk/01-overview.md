@@ -381,9 +381,11 @@ were created after those listed above in the "History" section.
 
 - GemTalk
 
-- Etoys
+- <a href="https://en.wikipedia.org/wiki/Etoys_(programming_language)" target="_blank">Etoys</a>
 
-  This was created for the One Laptop per Child (OLPC) project.
+  "Etoys is a child-friendly computer environment and object-oriented
+  prototype-based programming language for use in education."
+  It was used in the One Laptop per Child (OLPC) project.
 
 - GNU Smalltalk
 

@@ -305,10 +305,13 @@ To change the border color or color of a morph:
 - Click "borderColor" or "color".
 - Select one of the following color sets
   to open a dialog containing color swatches:
-  CSS3 (Web) Colors, Crayon Colors, NBSISCC Colors, XKCD COlors,
+  CSS3 (Web) Colors, Crayon Colors, NBSISCC Colors, XKCD Colors,
   or ColorMix Editor (opens a Color Editor dialog).
   A Color Editor dialog enables selecting a color
   with RGB, HSL, and transparency.
+  For more detail on these color dictionaries, see
+  <a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Dev/blob/master/Packages/Features/NamedColors/README.md"
+  target="_blank">Cuis-NamedColors</a>.
 - Drag a color swatch from the dialog
   onto the swatch for "borderColor" or "color".
 - Close the color swatch dialog.
