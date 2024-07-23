@@ -191,6 +191,11 @@ to change the values of instance variables.
 If you forget the morph to which a pinned menu belongs,
 click "show target halo" to open the halo of the morph.
 
+To change the value of an instance variable in the menu, such as
+`borderColor`, click it and use the provided editor to change its value.
+When changing a color, select a color palette and
+drag a color swatch onto the instance variable.
+
 (2) If the morph is embedded in another morph,
 this changes the owner to world, which unembeds it.
 
