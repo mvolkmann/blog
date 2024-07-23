@@ -83,6 +83,8 @@ These support:
 - debugging with the ability to modify code and data, then continue or restart
 - ability to modify the classes and methods that implement the
   development environment as easily as modifying your own classes and methods
+- inspecting objects to see their class and instance variables
+- rapid prototyping
 - TODO: add more?
 
 Smalltalk is a dynamically typed language.
