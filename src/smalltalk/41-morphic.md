@@ -804,6 +804,31 @@ Highlights are provided in the following table:
 
 TODO: Add more methods to this table.
 
+## PopUpMenu
+
+The class `PopUpMenu` provides an easy way to render a dialog that
+displays information, asks the user for confirmation,
+or ask the user to select an option.
+It is similar to the JavaScript DOM functions `alert` and `confirm`.
+
+For example:
+
+```smalltalk
+PopUpMenu inform: 'Hello, World!'.
+
+likesIceCream := PopUpMenu confirm: 'Do you like ice cream?'.
+likesIceCream print. "prints true or false"
+
+likesIceCream := PopUpMenu
+    confirm: 'Do you like ice cream?'
+    trueChoice: 'Love it!'
+    falseChoice: 'Not for me'.
+likesIceCream print.
+
+color := PopUpMenu withCaption: 'Choose a color.' chooseFrom: #('red' 'green' 'blue').
+color print. "prints 1, 2, or 3"
+```
+
 ## Event Handling
 
 The `Morph` class provides many methods for event handling
@@ -886,13 +911,28 @@ instead of adding it to the definition of a `Morph` subclass:
 - After the morph reference, add code like the following:
 
   ```smalltalk
-  ellipseMorph2611483 setProperty: #handleMouseDown toValue: true.
-  ellipseMorph2611483 setProperty: #mouseButton1Up:localPosition: toValue: [:event :position | self inform: 'got click'].
+  ellipseMorph2611483 setProperty: #handlesMouseDown toValue: true.
+  ellipseMorph2611483
+      setProperty: #mouseButton1Up:localPosition:
+      toValue: [:event :position | self inform: 'got click'].
   ```
+
+  Be careful when using `setProperty:` that the `Symbol` argument value
+  is spelled correctly!
 
 - Select those lines of code and "Do it".
 - Click the morph.
 - Verify that a PopUpMenu appears containing "got click".
+
+To create and configure an `EllipseMorph` in code:
+
+```smalltalk
+em := EllipseMorph new openInWorld.
+em setProperty: #handlesMouseDown toValue: true.
+em
+    setProperty: #mouseButton1Up:localPosition:
+    toValue: [:event :position | self inform: 'got click'].
+```
 
 ## Redrawing
 
