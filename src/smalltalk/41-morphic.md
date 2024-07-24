@@ -10,9 +10,6 @@ Morphic is a GUI framework that is included into popular Smalltalk images
 such as Squeak, Pharo, and Cuis.
 It defines user interfaces with "morphs" which are
 what other graphical systems refer to as widgets or components.
-Morphs are graphical items that can be added to
-the `WorldMorph` (desktop) or a `LayoutMorph`.
-TODO: Technically speaking, can any morph be embedded in any other morph?
 
 For a great introduction to Morphic, see
 <a href="https://www.youtube.com/watch?v=62baNn3c56Y"
@@ -27,10 +24,16 @@ alias free rendering based on signal processing theory,
 use of textures and photos,
 zoomable user interfaces (not tied to pixel density), and vector graphics.
 
-Some of the methods in Morphic classes are inconsistently named.
-For example, the class `TextModelMorph` defines the methods
-`alwaysHideVerticalScrollbar` and `hideScrollBarsIndefinitely`.
-Note how the "b" is sometimes lowercase and sometimes uppercase.
+## Morphs
+
+Any morph be embedded in another.
+However, some morphs (such as `WorldMorph` and `LayoutMorph`)
+are more intended to have submorphs than others.
+
+Each morph holds a reference to its parent morph
+in its instance variable `owner`.
+Each morph stores its children (embedded) morphs
+in its `Array` instance variable `submorphs`.
 
 Morphic uses the term "extent" to describe the width and height of a morph.
 It is represented by a `Point` object with
@@ -39,6 +42,9 @@ a `y` instance variable that holds the height.
 
 The location of a morph is represented by a `MorphicTranslation` object
 that has the instance properties `deltaX` and `deltaY`.
+
+Each morph can store additional properties in its `properties` instance variable
+which holds a reference to a `Dictionary` of key/value pairs.
 
 ## Creating and Modifying Morphs
 
@@ -243,14 +249,42 @@ they are treated as a single unit and can be positioned together:
 
 - Drag a morph on top of its intended parent morph.
 - Open the halo of the morph.
-- Click the blue circle on the top.
-- Select "embed into" ... {parent morph name}.
-  The parent morph name is typically "LayoutMorph".
+- Click the blue Menu handle.
+- Hover over "embed into" to display a popup containing
+  the names of every morph under the one being embedded.
+  Hover over each option to highlight the corresponding morph,
+  which helps to verify the correct selection.
+- Click the name of the morph that will become the parent.
+  Often the intended parent morph is a "LayoutMorph".
 
 ## LayoutMorph
 
-A `LayoutMorph` arranges submorphs in a row or column.
-Pratically any layout can be achieved by nesting instances of this class.
+A `LayoutMorph` actively manages the position and size of its submorphs
+based on the following instance properties:
+
+- `direction`: `#horizontal` for a row or `#vertical` for a column
+
+- `separation`: a `Measure`
+
+  By default, there will be no separation between the submorphs.
+  To add separation, send the `#separationX:`, `#separationY`,
+  or `#separation:` (both x and y) messages.
+  For example, `myLayout separation: 20`.
+
+- `axisEdgeWeight`: a number from 0 to 1
+
+  By default, all the submorphs will be
+  pushed to the left of a row or top of a column.
+  To change this, send the `#axisEdgeWeight:` message with a number from 0 to 1.
+  A value zero pushes to the left/top,
+  a value one pushes to the right/bottom,
+  and a value of 0.5 centers.
+
+- `layoutSpec`: an optional `LayoutSpec` object that specifies
+  how to layout children on the off axis (opposite of `direction`)
+  using instance variables like `offAxisEdgeWeight`
+
+Practically any layout can be achieved by nesting instances of this class.
 
 An instance can be created with:
 
@@ -265,18 +299,6 @@ For example, `myLayout := Layout newRow`.
 To add a submorph to a `LayoutMorph`, send it the `#addMorph:` message.
 For example, `myLayout addMorph: EllipseMorph new`
 and `myLayout addMorph: BoxedMorph new`.
-
-By default, there will be no separation between the submorphs.
-To add separation, send the `#separationX:`, `#separationY`,
-or `#separation:` (both x and y) messages.
-For example, `myLayout separation: 20`.
-
-By default, all the submorphs will be
-pushed to the left of a row or top of a column.
-To change this, send the `#axisEdgeWeight:` message with a number from 0 to 1.
-A value zero pushes to the left/top,
-a value one pushes to the right/bottom,
-and a value of 0.5 centers.
 
 If the UI-Layout-Panel package is installed,
 all of these values can be specified interactively.
@@ -852,6 +874,26 @@ The inheritance hierarchy of classes that describe events is as follows:
       - `MouseScrollEvent`
   - `WindowEvent`
 
+To add event handling to a specific morph instances
+instead of adding it to the definition of a `Morph` subclass:
+
+- Open the halo of the morph.
+- Click the blue Menu button.
+- Press cmd-c (copy to clipboard).
+- Open a Workspace.
+- Press cmd-v (paste) which will insert
+  a morph reference like `ellipseMorph2611483`.
+- After the morph reference, add code like the following:
+
+  ```smalltalk
+  ellipseMorph2611483 setProperty: #handleMouseDown toValue: true.
+  ellipseMorph2611483 setProperty: #mouseButton1Up:localPosition: toValue: [:event :position | self inform: 'got click'].
+  ```
+
+- Select those lines of code and "Do it".
+- Click the morph.
+- Verify that a PopUpMenu appears containing "got click".
+
 ## Redrawing
 
 After making code changes, if the UI does not update properly,
@@ -861,6 +903,13 @@ there are two things that can be done to update the display.
 1. Open the World menu and select "Debug ... Start drawing all again".
 
 TODO: What is the difference between these?
+
+## Annoynances
+
+Some of the methods in Morphic classes are inconsistently named.
+For example, the class `TextModelMorph` defines the methods
+`alwaysHideVerticalScrollbar` and `hideScrollBarsIndefinitely`.
+Note how the "b" is sometimes lowercase and sometimes uppercase.
 
 ## Todo App
 
