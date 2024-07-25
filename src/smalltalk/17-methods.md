@@ -33,7 +33,7 @@ For example, `latitude: latNumber longitude: lngNumber`.
 
 Methods always "answer" (return) an object,
 either explicitly with the `^` return operator
-or implicitly returning the receiver.
+or implicitly returning the receiver (`self`).
 For example, the instance method `asUppercase` in the `String` class
 contains the comment "Answer a String made up from
 the receiver whose characters are all uppercase."

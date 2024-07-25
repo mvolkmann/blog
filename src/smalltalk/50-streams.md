@@ -11,6 +11,8 @@ that are not necessarily associated with a file.
 
 ## File I/O
 
+### Files
+
 To create a file, send the `#asFileEntry` message
 to a string that contains the file name.
 The file is assumed to be in the `\*-UserFiles` directory.
@@ -80,3 +82,25 @@ fileEntry delete.
 TODO: Harvest more information about file system operations from this video.
 <a href="https://youtu.be/stMoWMlLVzk?si=_3rmJFPkZ2g4ZIIV"
 target="_blank">squeak smalltalk tutorial: file handling part 1</a>.
+
+### Directories
+
+The following instance methods of the `DirectoryEntry` class
+iterate over its files and subdirectories:
+
+| Method              | Description                                                                 |
+| ------------------- | --------------------------------------------------------------------------- | --- |
+| `allChildrenDo:`    | iterates over all subdirectories and files recursively                      |     |
+| `allDirectoriesDo:` | iterates over all subdirectories recursively                                |
+| `allFilesDo:`       | iterates over all files in this directory and in subdirectories recursively |
+| `directoriesDo:`    | iteraters over all subdirectories non-recursively                           |
+| `filesDo:`          | iterates over all files in this directory                                   |
+| `childrenDo:`       | iterates over all subdirectories and files non-recursively                  |     |
+
+The following code iterates over all the files
+found in and below a given directory:
+
+```smalltalk
+de := DirectoryEntry smalltalkImageDirectory.
+de allFilesDo: [:file | file name print]
+```
