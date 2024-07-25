@@ -48,60 +48,18 @@ which holds a reference to a `Dictionary` of key/value pairs.
 
 ## Creating and Modifying Morphs
 
-To create a morph:
-
-- Open the World menu.
-- Select "New morph...".
-- In the dialog that appears, select a category of morphs
-  and then a specific kind (ex. `BoxedMorph`).
-- The morph will appear attached to the cursor
-  (uses the `Morph` method `openInHand`).
-- Move the cursor to the location where the morph should be placed
-  and click to drop it.
-
-A morph can be modified even after the code that defines it has been deleted,
-because its definition is part of the running image.
-TODO: Is this actually true?
-
-To modify an existing morph:
-
-- cmd-click a morph to open its halo.
-- Click the blue menu button on the top and select "copy to clipboard".
-- Open a Workspace window.
-- Assign the morph to a variable.
-  For example, enter `morph := ` and press cmd-p to paste the reference.
-- Press cmd-d (Do it).
-- Send messages to the morph to modify it.
-  For example, `morph borderColor: Color red`
-
-To change the colors used by a morph from its halo:
-
-- cmd-click a morph to open its halo.
-- Click the blue menu button on the top and select "copy to clipboard".
-- Select "change color..."
-- A window titled "Click-Select a Color" will appear attached to the cursor.
-- Position the window by moving the cursor and click to drop it.
-- Click a color swatch.
-- A menu will appear with the options "Cancel",
-  "adoptWidgetsColor:", "color:", and "borderColor:".
-  Select an option to change that color property of the morph.
-  Some morphs don't support all the options.
-  For example, "color" of a `LabelMorph` can be changed,
-  but it does not have a border.
-  TODO: What does "adoptWidgetsColor:" do?
-
-To explicitly set the size of a morph, send it the `morphExtent:` message
-with a `Point` value that represents the new width and height.
-For example, `morph morphExtent: 200@100`.
-
 Only a small set of morphs are provided by default.
 A good source of additional morphs is the package "UI-Tools".
 
-TODO: Do you need to clone the https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-UI repository for this?
+To install this:
 
-To install this, open a Workspace, enter `Feature require: 'UI-Tools'`,
-and press cmd-d (Do it).
-TODO: The UI-Tools package is being removed.
+- Clone the https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-UI repository
+  into the same directory as the Cuis-Smalltalk-Dev repository.
+- Open a Workspace.
+- Enter `Feature require: 'UI-Tools'` and "Do it".
+
+TODO: The UI-Tools package is being removed, so the following packages will need to be installed individually.
+
 This installs the following other packages
 that can also be installed individually:
 
@@ -128,9 +86,57 @@ The set of "Basic" morphs will now include `BoxedMorph`, `EllipseMorph`,
 `Sonogram`, and `TileResizeMorph`.
 TODO: Why does selecting `Sonogram` lock up the image, requiring a Force Quit?
 
-TODO: Supposedly Cuis 7 will remove support for the UI-Tools package
-and the desired subpackages will need to be installed individually.
-Still true?
+To create a morph:
+
+- Open the World menu.
+- Select "New morph...".
+- In the dialog that appears, select a category of morphs
+  and then a specific kind (ex. `BoxedMorph`).
+- The morph will appear attached to the cursor
+  (uses the `Morph` method `openInHand`).
+- Move the cursor to the location where the morph should be placed
+  and click to drop it.
+
+A morph can be modified even after the code that defines it has been deleted,
+because its definition is part of the running image.
+TODO: Is this actually true?
+
+To modify an existing morph:
+
+- cmd-click a morph to open its halo.
+- Click the orange Explore handle to open an Explorer OR
+  Click the orange Debug handle and select "inspect morph" to open an Inspector.
+- Send a message to `self` in the bottom pane of the Explorer or the Inspector
+  to change a property of the morph. For example, `self color: Color red`.
+
+Alternatively, to modify a morph from a Workspace:
+
+- cmd-click a morph to open its halo.
+- Click the blue Menu handle on the top and select "copy to clipboard".
+- Open a Workspace window.
+- Press cmd-v to paste the morph reference from the clipboard.
+- Send messages to the morph reference to modify it.
+
+To change the colors used by a morph from its halo:
+
+- Ensure that the "UI-Color-Panel" package is installed
+  (currently included with "UI-Tools").
+- cmd-click a morph to open its halo.
+- Click the blue menu button on the top and select "change color...".
+- A window titled "Click-Select a Color" will appear attached to the cursor.
+- Position the window by moving the cursor and click to drop it.
+- Click a color swatch.
+- A menu will appear with the options "Cancel",
+  "adoptWidgetsColor:", "color:", and "borderColor:".
+  Select an option to change that color property of the morph.
+  Some morphs don't support all the options.
+  For example, "color" of a `LabelMorph` can be changed,
+  but it does not have a border.
+  TODO: What does "adoptWidgetsColor:" do?
+
+To explicitly set the size of a morph, send it the `morphExtent:` message
+with a `Point` value that represents the new width and height.
+For example, `morph morphExtent: 200@100`.
 
 See my Morphic demos in package `Volkmann`
 in the classes `VButtonDemo` and `VGreet`.
@@ -203,6 +209,7 @@ When changing a color, select a color palette and
 drag a color swatch onto the instance variable.
 
 Color swatches can be dragged from one menu to another to copy colors.
+Fonts can also be dragged from one menu to another to copy fonts.
 
 (2) If the morph is embedded in another morph,
 this changes the owner to world, which unembeds it.

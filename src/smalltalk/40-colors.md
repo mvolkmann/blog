@@ -28,6 +28,7 @@ zero (fully transparent) and one (fully opaque).
 
 A `ColorEditorPanel` is a subclass of `DialogPanel`
 that is used to select a color from a cube of colors.
+In menus this is referred to as the "ColorMix Editor".
 
 <img alt="ColorEditorPanel"
   src="/blog/assets/cuis-color-editor-panel.png?v={{pkg.version}}"
@@ -80,11 +81,16 @@ from one of the color palettes (such as ?):
   first or second swatch in the `ColorEditorPanel`.
 - Optionally modify the color within the `ColorEditorPanel`.
 
-To enable dropping color swatches
-on those for the instance varaibles of a morph,
+To get additional menu options in the menu displayed by
+opening a morph halo and clicking the blue Menu handle,
 enter `Feature require: 'UI-MetaProperties` in a Workspace and "Do it".
+The menu items with purple text all have special editors
+that are opened by clicking the menu item.
+To change the color associated with
+any purple menu item that displays a color swatch,
+drag a color swatch from any color palette onto it and drop it.
 
-To use the selected color:
+For example:
 
 - Create a morph whose colors will be modified.
 
@@ -95,11 +101,15 @@ To use the selected color:
 - Click the blue Menu button near the top-left.
 - In the menu that appears, click the red pin
   so the menu remains open if you click outside it.
-- Drag one of the color swatches in the "Color Editor" dialog to
-  one of the swatches in the menu for an instance variable such as
+- Click the menu item whose color is to be changed.
+- Select one of the available color palettes such as "Crayon Colors"
+  or "ColorMixEditor".
+- Drag one of the color swatches in the palette or ColorMixEditor to
+  one of the menu items for an instance variable such as
   `borderColor`, `color`, `fillColor`, or `lineColor`.
 
-  Tooltips for each of the three color swatches describe their purpose.
+  Tooltips for each of the three color swatches
+  in the ColorMix Editor describe their purpose.
   The left swatch uses the selected color with the selected alpha value.
   The center swatch uses the selected color without the selected alpha value.
   The right swatch uses the closest web color to the selected color.
