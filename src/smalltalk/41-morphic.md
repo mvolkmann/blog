@@ -208,6 +208,10 @@ To change the value of an instance variable in the menu, such as
 When changing a color, select a color palette and
 drag a color swatch onto the instance variable.
 
+<img alt="Crayon Colors palette"
+  src="/blog/assets/cuis-crayon-colors-palette.png?v={{pkg.version}}"
+  style="width: 100%">
+
 Color swatches can be dragged from one menu to another to copy colors.
 Fonts can also be dragged from one menu to another to copy fonts.
 

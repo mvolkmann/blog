@@ -66,7 +66,7 @@ To select a color:
 - Optionally modify the numbers in the text inputs on the right.
 
 The view the color aspect values of a color swatch
-from one of the color palettes (such as ?):
+from one of the color palettes (such as Crayon Colors):
 
 - Open a `ColorEditorPanel`.
 - Open the default color palette.
