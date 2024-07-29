@@ -360,7 +360,7 @@ To change the border color or color of a morph:
 - Drag a color swatch from the dialog
   onto the swatch for "borderColor" or "color".
 - Close the color swatch dialog.
-- Close the morph options menu.
+- Close the morph menu.
 
 To edit the width, height, and off-axis edge weight of a submorph
 

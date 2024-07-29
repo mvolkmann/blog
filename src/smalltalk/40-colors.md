@@ -24,6 +24,47 @@ To set the opacity of a color, send the `#alpha:` message to a `Color` object
 with an argument that is a float value between
 zero (fully transparent) and one (fully opaque).
 
+## XKCD Colors
+
+Cuis Smalltalk supports many sets of named colors.
+One of them is named "XKCD", created by the author of the XKCD comics.
+The color names were selected through a
+<a href="https://blog.xkcd.com/2010/05/03/color-survey-results/"
+target="_blank">Color Survey</a> performed in 2010.
+
+To install this color set, enter `Feature require: 'XKCD-NamedColors'`
+in a Workspace and "Do it".
+
+## Color Names Dictionaries
+
+There are many `Dictionary` objects where the keys are `Symbol` color names
+and the values are `Color` objects.
+
+To change the colors associated with the instance variables of a morph:
+
+- Open the halo of the morph.
+- Click the blue Menu handle.
+- Click the red push pin to keep the menu open.
+- Click one of the instance variables that hold a `Color` object
+  such as `borderColor`, `color`, `fillColor`, or `lineColor`.
+- Select a color palette such as
+  CSS3 (Web) Colors, Crayon Colors, NBSISCC Colors, XKCD Colors,
+  or ColorMix Editor (opens a Color Editor dialog).
+- Drag a color swatch from the dialog
+  onto the swatch for "borderColor" or "color".
+- Close the color swatch dialog.
+- Close the morph menu.
+
+The `Color-Extras` package adds the
+class method `colorNamesDict` to the `Color` class.
+This returns the color `Dictionary` that is considered to be the default.
+To open a color palette that uses this `Dictionary`:
+
+- Open the World menu.
+- Select "New Morph...".
+- Select "User Interface...A - Dro...ColorPalette".
+- Move the mouse to where it should be dropped and click to drop it.
+
 ## ColorEditorPanel
 
 A `ColorEditorPanel` is a subclass of `DialogPanel`
