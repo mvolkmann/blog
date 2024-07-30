@@ -50,39 +50,33 @@ which holds a reference to a `Dictionary` of key/value pairs.
 ## Creating and Modifying Morphs
 
 Only a small set of morphs are provided by default.
-A good source of additional morphs is the package "UI-Tools".
-
-To install this:
+The package UI-MetaProperties is a good source of additional morphs.
+To install it:
 
 - Clone the https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-UI repository
   into the same directory as the Cuis-Smalltalk-Dev repository.
 - Open a Workspace.
 - Enter `Feature require: 'UI-MetaProperties'` and "Do it".
 
-This installs the following other packages
-that can also be installed individually:
+  This installs the following other packages
+  that can also be installed individually:
 
-- Complex
-- CuisBase
-- Graphics-Files-Additional
-- UI-Core
-- UI-Click-Select
-- UI-Color-Panel
-- UI-Edit-Lens
-- UI-Entry
-- UI-Layout-Panel
-- UI-Shapes
-- UI-Packager
-- UI-Panel
+  - Complex
+  - UI-Color-Panel
+  - UI-Components
+  - UI-Layout-Panel
+  - UI-Packager
+  - UI-Shapes
 
-Previously there was a package named `UI-Tools` that depended on
-`UI-MetaProperties` and the following packages.
-If needed, these must now be installed individually.
+- The UI-Compoents package installed above
+  installs the following other packages:
 
-- UI-Components
-- UI-DragAndDrop
-- UI-Palette
-- UI-Widgets
+  - UI-Click-Select
+  - UI-Core
+  - UI-DragAndDrop
+  - UI-Entry
+  - UI-Panel
+  - UI-Widgets
 
 The set of "Basic" morphs will now include `BoxedMorph`, `EllipseMorph`,
 `FrameMorph`, `ImageMorph`, `LabelMorph`, `LineMorph`, `PointerLineMorph`,
@@ -119,7 +113,7 @@ Alternatively, to modify a morph from a Workspace:
 To change the colors used by a morph from its halo:
 
 - Ensure that the "UI-Color-Panel" package is installed
-  (currently included with "UI-Tools").
+  (a dependency of the "UI-MetaProperties" package).
 - cmd-click a morph to open its halo.
 - Click the blue menu button on the top and select "change color...".
 - A window titled "Click-Select a Color" will appear attached to the cursor.
