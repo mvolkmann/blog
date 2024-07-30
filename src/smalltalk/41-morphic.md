@@ -57,29 +57,31 @@ To install this:
 - Clone the https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-UI repository
   into the same directory as the Cuis-Smalltalk-Dev repository.
 - Open a Workspace.
-- Enter `Feature require: 'UI-Tools'` and "Do it".
-
-TODO: The UI-Tools package is being removed, so the following packages will need to be installed individually.
+- Enter `Feature require: 'UI-MetaProperties'` and "Do it".
 
 This installs the following other packages
 that can also be installed individually:
 
-- Collections-CompactArrays
-- Compression
-- CSS3
+- Complex
+- CuisBase
 - Graphics-Files-Additional
+- UI-Core
 - UI-Click-Select
 - UI-Color-Panel
-- UI-Components
-- UI-Core
-- UI-DragAndDrop
 - UI-Edit-Lens
 - UI-Entry
 - UI-Layout-Panel
-- UI-MetaProperties
-- UI-Palette
-- UI-Panel
 - UI-Shapes
+- UI-Packager
+- UI-Panel
+
+Previously there was a package named `UI-Tools` that depended on
+`UI-MetaProperties` and the following packages.
+If needed, these must now be installed individually.
+
+- UI-Components
+- UI-DragAndDrop
+- UI-Palette
 - UI-Widgets
 
 The set of "Basic" morphs will now include `BoxedMorph`, `EllipseMorph`,
@@ -97,10 +99,6 @@ To create a morph:
   (uses the `Morph` method `openInHand`).
 - Move the cursor to the location where the morph should be placed
   and click to drop it.
-
-A morph can be modified even after the code that defines it has been deleted,
-because its definition is part of the running image.
-TODO: Is this actually true?
 
 To modify an existing morph:
 
