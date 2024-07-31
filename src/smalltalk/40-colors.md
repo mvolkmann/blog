@@ -40,9 +40,9 @@ in a Workspace and "Do it".
 There are many `Dictionary` objects where the keys are `Symbol` color names
 and the values are `Color` objects.
 
-To change the colors associated with the instance variables of a morph:
+To change the colors associated with the instance variables of a `Morph`:
 
-- Open the halo of the morph.
+- Open the halo of the `Morph`.
 - Click the blue Menu handle.
 - Click the red push pin to keep the menu open.
 - Click one of the instance variables that hold a `Color` object
@@ -53,7 +53,7 @@ To change the colors associated with the instance variables of a morph:
 - Drag a color swatch from the dialog
   onto the swatch for "borderColor" or "color".
 - Close the color swatch dialog.
-- Close the morph menu.
+- Close the `Morph` menu.
 
 The `Color-Extras` package adds the
 class method `colorNamesDict` to the `Color` class.
@@ -123,7 +123,7 @@ from one of the color palettes (such as Crayon Colors):
 - Optionally modify the color within the `ColorEditorPanel`.
 
 To get additional menu options in the menu displayed by
-opening a morph halo and clicking the blue Menu handle,
+opening a `Morph` halo and clicking the blue Menu handle,
 enter `Feature require: 'UI-MetaProperties` in a Workspace and "Do it".
 The menu items with purple text all have special editors
 that are opened by clicking the menu item.
@@ -133,12 +133,12 @@ drag a color swatch from any color palette onto it and drop it.
 
 For example:
 
-- Create a morph whose colors will be modified.
+- Create a `Morph` whose colors will be modified.
 
   For example, open the World menu, select "New Morph...",
   and select Vector Graphics ... A - Rec ... CircleShapeMorph.
 
-- Open the halo of a morph.
+- Open the halo of a `Morph`.
 - Click the blue Menu button near the top-left.
 - In the menu that appears, click the red pin
   so the menu remains open if you click outside it.

@@ -42,7 +42,7 @@ This does not update windows to use a newly selected theme.
 
 ## Focus
 
-By default, focus automatically goes to the morph under the mouse cursor.
+By default, focus automatically goes to the `Morph` under the mouse cursor.
 To change this, open the World menu and select Preferences ... Focus when Click.
 To restore the default behavior, open the World menu and
 select Preferences ... Focus follows Mouse.
@@ -111,7 +111,7 @@ displays related information in the top right pane.
 The bottom pane can be used to enter and execute Smalltalk expressions.
 Instance variables can be directly accessed and
 where `self` refers to the object being inspected.
-For example, when the object is a morph:
+For example, when the object is a `Morph`:
 
 - To get the value of the `color` instance variable,
   enter `color` or `self color` and press cmd-p (Print it).
@@ -128,10 +128,10 @@ Let's walk through an example:
 1. Select "Basic...Boxed Morph".
    An orange rectangle will appear, attached to the mouse cursor.
 1. Move to where you want to place it and click to drop it.
-1. cmd-click on the morph to open its halo.
+1. cmd-click on the `Morph` to open its halo.
 1. Click the blue button on the top row.
 1. Select "debug...inspect morph" to open an Inspect window
-   for the object that represents that morph.
+   for the object that represents that `Morph`.
 1. Click the `color` instance variable and
    note that the value is a `Color` object.
 1. Select the name "Color" and press cmb-b (Browse it)
@@ -143,13 +143,13 @@ Let's walk through an example:
 1. Back in the Inspect window, click in the bottom pane.
 1. Enter `color := Color red` and "Do it".
 1. Note that the value displayed in the top right pane updates,
-   but the fill color of the morph does not update.
+   but the fill color of the `Morph` does not update.
 1. Enter `self color: Color red` and "Do it".
    This time the value displayed in the top right pane updates
-   AND the fill color of the morph updates.
+   AND the fill color of the `Morph` updates.
    The reason is that the `color:` method in the `BoxedMorph` class
    sends the `#redrawNeeded` message to `self`
-   which triggers the morph to redraw itself with the updated color.
+   which triggers the `Morph` to redraw itself with the updated color.
 
 ## Explore Windows
 

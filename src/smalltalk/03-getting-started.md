@@ -197,7 +197,7 @@ Alternatively you can:
 - Select one of the methods such as `buttonLabel`.
 - Change the color returned from its default value to a new value.
 
-This will affect all morphs that use that theme property.
+This will affect all "morphs" (described below) that use that theme property.
 For example, the `PluggableButtonMorph` method `drawEmbossedLabelOn`
 uses `Theme current buttonLabel`.
 This method could be modified to enable
@@ -206,6 +206,7 @@ specifying a different label color for specific buttons.
 ### Morphs
 
 All the graphical elements visible on the World are referred to as "morphs".
+These are instances of subclasses of the `Morph` class.
 
 Morphs can be dragged to different locations and resized.
 Morphs that represent windows can be dragged by their title bars
@@ -226,7 +227,7 @@ which offers more fine grained control.
 Drag over the grid cells that represent the area of the screen
 that the window should occupy and release the mouse button.
 
-To open an context-sensitive menu for a morph, right-click it.
+To open an context-sensitive menu for a `Morph`, right-click it.
 After a menu item is selected from a menu, it will close.
 
 To cause a menu to remain open so multiple selections can be made,

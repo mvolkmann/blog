@@ -27,24 +27,24 @@ zoomable user interfaces (not tied to pixel density), and vector graphics.
 
 ## Morphs
 
-Any morph be embedded in another.
+Any `Morph` be embedded in another.
 However, some morphs (such as `WorldMorph` and `LayoutMorph`)
 are more intended to have submorphs than others.
 
-Each morph holds a reference to its parent morph
+Each `Morph` holds a reference to its parent `Morph`
 in its instance variable `owner`.
-Each morph stores its children (embedded) morphs
+Each `Morph` stores its children (embedded) morphs
 in its `Array` instance variable `submorphs`.
 
-Morphic uses the term "extent" to describe the width and height of a morph.
+Morphic uses the term "extent" to describe the width and height of a `Morph`.
 It is represented by a `Point` object with
 an `x` instance variable that holds the width and
 a `y` instance variable that holds the height.
 
-The location of a morph is represented by a `MorphicTranslation` object
+The location of a `Morph` is represented by a `MorphicTranslation` object
 that has the instance properties `deltaX` and `deltaY`.
 
-Each morph can store additional properties in its `properties` instance variable
+Each `Morph` can store additional properties in its `properties` instance variable
 which holds a reference to a `Dictionary` of key/value pairs.
 
 ## Creating and Modifying Morphs
@@ -83,51 +83,51 @@ The set of "Basic" morphs will now include `BoxedMorph`, `EllipseMorph`,
 `Sonogram`, and `TileResizeMorph`.
 TODO: Why does selecting `Sonogram` lock up the image, requiring a Force Quit?
 
-To create a morph:
+To create a `Morph`:
 
 - Open the World menu.
 - Select "New morph...".
 - In the dialog that appears, select a category of morphs
   and then a specific kind (ex. `BoxedMorph`).
-- The morph will appear attached to the cursor
+- The `Morph` will appear attached to the cursor
   (uses the `Morph` method `openInHand`).
-- Move the cursor to the location where the morph should be placed
+- Move the cursor to the location where the `Morph` should be placed
   and click to drop it.
 
-To modify an existing morph:
+To modify an existing `Morph`:
 
-- cmd-click a morph to open its halo.
+- cmd-click a `Morph` to open its halo.
 - Click the orange Explore handle to open an Explorer OR
   Click the orange Debug handle and select "inspect morph" to open an Inspector.
 - Send a message to `self` in the bottom pane of the Explorer or the Inspector
-  to change a property of the morph. For example, `self color: Color red`.
+  to change a property of the `Morph`. For example, `self color: Color red`.
 
-Alternatively, to modify a morph from a Workspace:
+Alternatively, to modify a `Morph` from a Workspace:
 
-- cmd-click a morph to open its halo.
+- cmd-click a `Morph` to open its halo.
 - Click the blue Menu handle on the top and select "copy to clipboard".
 - Open a Workspace window.
-- Press cmd-v to paste the morph reference from the clipboard.
-- Send messages to the morph reference to modify it.
+- Press cmd-v to paste the `Morph` reference from the clipboard.
+- Send messages to the `Morph` reference to modify it.
 
-To change the colors used by a morph from its halo:
+To change the colors used by a `Morph` from its halo:
 
 - Ensure that the "UI-Color-Panel" package is installed
   (a dependency of the "UI-MetaProperties" package).
-- cmd-click a morph to open its halo.
+- cmd-click a `Morph` to open its halo.
 - Click the blue menu button on the top and select "change color...".
 - A window titled "Click-Select a Color" will appear attached to the cursor.
 - Position the window by moving the cursor and click to drop it.
 - Click a color swatch.
 - A menu will appear with the options "Cancel",
   "adoptWidgetsColor:", "color:", and "borderColor:".
-  Select an option to change that color property of the morph.
+  Select an option to change that color property of the `Morph`.
   Some morphs don't support all the options.
   For example, "color" of a `LabelMorph` can be changed,
   but it does not have a border.
   TODO: What does "adoptWidgetsColor:" do?
 
-To explicitly set the size of a morph, send it the `morphExtent:` message
+To explicitly set the size of a `Morph`, send it the `morphExtent:` message
 with a `Point` value that represents the new width and height.
 For example, `morph morphExtent: 200@100`.
 
@@ -137,17 +137,17 @@ In a Workspace, enter `VButtonDemo new` or `VGreet new` and "Do it".
 
 ## Halo
 
-A morph halo is a set of circle buttons,
-referred to as "handles", that surround a morph.
-Each handle changes the morph in some way or reveals information about it.
+A `Morph` halo is a set of circle buttons,
+referred to as "handles", that surround a `Morph`.
+Each handle changes the `Morph` in some way or reveals information about it.
 Hover over a handle to see a tooltip that describes its purpose.
 
-To open the halo for a morph,
+To open the halo for a `Morph`,
 cmd-click it in Cuis or option-click it in Squeak.
 If the item is embedded in other morphs, repeat this multiple times
-until a halo appears around the desired morph.
+until a halo appears around the desired `Morph`.
 
-The class of the morph will be displayed at the bottom of the morph.
+The class of the `Morph` will be displayed at the bottom of the `Morph`.
 
 <img alt="Smalltalk halo" style="width: 50%"
   src="/blog/assets/smalltalk-halo.png?v={{pkg.version}}">
@@ -169,11 +169,11 @@ The following buttons are provided:
 | dull yellow circle with odd shape    | left side   | Collapse     | click to collapse (hide) the item (5)           |
 | orange circle with wrench            | left side   | Explore      | opens an "Explore" window (6)                   |
 
-A morph can also be dragged directly without
+A `Morph` can also be dragged directly without
 opening its halo and using the drag buttons.
 This only works if the area that is dragged
 does not process mouse events.
-For example, you cannot drag a morph that contains a button
+For example, you cannot drag a `Morph` that contains a button
 by dragging the button.
 
 (1) This menu contains the following options:
@@ -193,8 +193,8 @@ It is often useful to click the red pin in the upper-right of the menu
 so it remains open if you click outside it.
 This enables dragging values onto it (such as color swatches)
 to change the values of instance variables.
-If you forget the morph to which a pinned menu belongs,
-click "show target halo" to open the halo of the morph.
+If you forget the `Morph` to which a pinned menu belongs,
+click "show target halo" to open the halo of the `Morph`.
 
 To change the value of an instance variable in the menu, such as
 `borderColor`, click it and use the provided editor to change its value.
@@ -208,14 +208,14 @@ drag a color swatch onto the instance variable.
 Color swatches can be dragged from one menu to another to copy colors.
 Fonts can also be dragged from one menu to another to copy fonts.
 
-(2) If the morph is embedded in another morph,
+(2) If the `Morph` is embedded in another `Morph`,
 this changes the owner to world, which unembeds it.
 
 (3) It seems most of the help tooltips default to "Help not yet supplied".
 To edit the help text, click the orange circle on the right,
 select "edit balloon help", and modify the help text.
 
-(4) To change the center of rotation of a morph, click the "Explore" handle,
+(4) To change the center of rotation of a `Morph`, click the "Explore" handle,
 enter the following in the bottom pane, and "Do it":
 
 ```smalltalk
@@ -226,7 +226,7 @@ self setProperty: #rotationCenter toValue: newX @ newY.
 
 (6) "Explore" windows enable viewing data associated with an item
 such as its location, extent (width and height), and color.
-Send messages to `self` in the bottom pane to modify the morph.
+Send messages to `self` in the bottom pane to modify the `Morph`.
 To add a method to the mo
 
 For more detail, see
@@ -239,7 +239,7 @@ One way to change the desktop color is to:
 
 - Right-click the desktop to open its halo.
 - Click the blue menu button.
-- Select debug...inspect morph to open an Inspect window.
+- Select "debug...inspect morph" to open an Inspect window.
 - Click in the bottom pane of the Inspect window.
 - Enter `self color: Color red` or use some other color name.
 - "Do it".
@@ -248,18 +248,18 @@ This works with all colors except `transparent` and alpha values are ignored.
 
 ## Embedding
 
-To embed a morph into another (such as a LayoutMorph) so
+To embed a `Morph` into another (such as a LayoutMorph) so
 they are treated as a single unit and can be positioned together:
 
-- Drag a morph on top of its intended parent morph.
-- Open the halo of the morph.
+- Drag a `Morph` on top of its intended parent `Morph`.
+- Open the halo of the `Morph`.
 - Click the blue Menu handle.
 - Hover over "embed into" to display a popup containing
-  the names of every morph under the one being embedded.
-  Hover over each option to highlight the corresponding morph,
+  the names of every `Morph` under the one being embedded.
+  Hover over each option to highlight the corresponding `Morph`,
   which helps to verify the correct selection.
-- Click the name of the morph that will become the parent.
-  Often the intended parent morph is a "LayoutMorph".
+- Click the name of the `Morph` that will become the parent.
+  Often the intended parent `Morph` is a "LayoutMorph".
 
 ## LayoutMorph
 
@@ -319,10 +319,10 @@ all of these values can be specified interactively.
 
 ## Editing Characteristics
 
-Many chararacteristics of a morph can be edited by
+Many chararacteristics of a `Morph` can be edited by
 opening its halo and clicking its blue menu button.
 To get a halo for a submorph, cmd-click repeatedly
-until the halo appears around the target morph.
+until the halo appears around the target `Morph`.
 The following menu will appear:
 
 <img alt="Cuis halo blue menu" style="width: 60%"
@@ -332,13 +332,13 @@ Click the push pin at the upper-right of the menu
 to keep the menu open, which simplifies making multiple changes.
 
 To change the border width, size (`morphExtent`), or position (`morphPosition`)
-of a morph:
+of a `Morph`:
 
 - Click `borderWidth`, `morphExtent`, or `morphPosition`.
 - Modify the numbers in the dialog that appears.
 - Click the "Accept" to save the changes or the "Cancel" button to discard them.
 
-To change the border color or color of a morph:
+To change the border color or color of a `Morph`:
 
 - Click "borderColor" or "color".
 - Select one of the following color sets
@@ -353,7 +353,7 @@ To change the border color or color of a morph:
 - Drag a color swatch from the dialog
   onto the swatch for "borderColor" or "color".
 - Close the color swatch dialog.
-- Close the morph menu.
+- Close the `Morph` menu.
 
 To edit the width, height, and off-axis edge weight of a submorph
 
@@ -377,11 +377,11 @@ The world coordinate system places (0, 0) in
 the upper-left corner of the main window.
 X values increase going right and Y values increase going down.
 
-Each morph has its own local coordinate system
-with (0, 0) in the upper-left corner of the morph.
-This coordinate system is used for drawing the morph.
+Each `Morph` has its own local coordinate system
+with (0, 0) in the upper-left corner of the `Morph`.
+This coordinate system is used for drawing the `Morph`.
 
-Changing the translation, rotation, or scale of a morph
+Changing the translation, rotation, or scale of a `Morph`
 changes its local coordinate system.
 
 Positive rotations are clockwise and negative rotations are counter-clockwise.
@@ -391,7 +391,7 @@ Positive rotations are clockwise and negative rotations are counter-clockwise.
 Custom morphs are typically implemented as subclasses of the `PlacedMorph` class
 and implement the `drawOn:` method.
 They can be directly dragged to new locations.
-Otherwise dragging requires opening the morph halo and using the Move handle.
+Otherwise dragging requires opening the `Morph` halo and using the Move handle.
 
 The following example includes the instance variable `extent`
 to allow the width and height to be used to determine what to draw.
@@ -445,7 +445,7 @@ To try this:
 - Open a Workspace.
 - Enter `(CanvasDemo new extent: 300@400) openInHand.`
 - Press cmd-d to "Do it".
-- Move the cursor to where the morph should be dropped.
+- Move the cursor to where the `Morph` should be dropped.
 - Click to drop it.
 
 `VectorCanvas` is a subclass of `AbstractVectorCanvas`,
@@ -453,7 +453,7 @@ which is a subclass of `MorphicCanvas`.
 The `MorphicCanvas` class defines several methods
 whose names begin with `drawString:` method.
 
-To draw text in this morph that is centered,
+To draw text in this `Morph` that is centered,
 add the following in the `drawOn:` method:
 
 ```smalltalk
@@ -466,10 +466,10 @@ aCanvas
 ```
 
 Instances of `PlacedMorph` subclasses have a `location` instance variable.
-If the morph only has a location and has not be rotated or scaled
+If the `Morph` only has a location and has not be rotated or scaled
 then `location` will hold a `MorphicTranslation` object
 with `deltaX` and `deltaY` instance variables.
-If the morph has been rotated or scaled
+If the `Morph` has been rotated or scaled
 then `location` will hold an `AffineTranslation` object
 with `scale`, `degrees`, and `translation` instance variables.
 
@@ -483,13 +483,13 @@ rotationCenter
     ^ 0@0
 ```
 
-The `Morph` method `openInHand` causes the morph to appear
+The `Morph` method `openInHand` causes the `Morph` to appear
 and be attached to the cursor.
 Move the cursor to the location where it should be placed and click to drop it.
 
-Alternative, send the message `#openInWorld` to cause the morph to appear
+Alternative, send the message `#openInWorld` to cause the `Morph` to appear
 and not be attached to the cursor.
-If the location of the morph was specified by sending the
+If the location of the `Morph` was specified by sending the
 `#location#` message to it with a `MorphicTranslation` argument
 then it will be placed at that location.
 Otherwise it will be placed at a random location.
@@ -857,7 +857,7 @@ in the "events" method category. Examples include:
 - `windowEvent:`
 
 The mouse event handling methods are only called
-if the morph is configured to handle them.
+if the `Morph` is configured to handle them.
 For example, the `keyDown:`, `keyUp:`, and `keyStroke:` methods are only called
 if the `handlesKeyboard:` method is implemented to return `true`.
 Also, the `mouseEnter:` and `mouseLeave:` methodsare only called
@@ -883,7 +883,7 @@ in the "focus handling" method category. These include:
 - `keyboardFocusChange` - sent to morphs when they gain or lose focus
 - `keyboardFocused` TODO: Why does this not have any code?
 
-Consider changing the background color of a custom morph
+Consider changing the background color of a custom `Morph`
 when it gains and loses focus.
 
 The class `EventSensor` handles keyboard and mouse events.
@@ -903,16 +903,16 @@ The inheritance hierarchy of classes that describe events is as follows:
       - `MouseScrollEvent`
   - `WindowEvent`
 
-To add event handling to a specific morph instances
+To add event handling to a specific `Morph` instances
 instead of adding it to the definition of a `Morph` subclass:
 
-- Open the halo of the morph.
+- Open the halo of the `Morph`.
 - Click the blue Menu button.
 - Press cmd-c (copy to clipboard).
 - Open a Workspace.
 - Press cmd-v (paste) which will insert
-  a morph reference like `ellipseMorph2611483`.
-- After the morph reference, add code like the following:
+  a `Morph` reference like `ellipseMorph2611483`.
+- After the `Morph` reference, add code like the following:
 
   ```smalltalk
   ellipseMorph2611483 setProperty: #handlesMouseDown toValue: true.
@@ -925,7 +925,7 @@ instead of adding it to the definition of a `Morph` subclass:
   is spelled correctly!
 
 - Select those lines of code and "Do it".
-- Click the morph.
+- Click the `Morph`.
 - Verify that a PopUpMenu appears containing "got click".
 
 To create and configure an `EllipseMorph` in code:

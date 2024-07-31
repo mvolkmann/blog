@@ -46,13 +46,13 @@ layout: topic-layout.njk
   Does this imply that it is not for "normal" application development.
 - Can you configure your image so it never starts in full screen mode
   even if it was saved that way?
-- What do you click in a morph halo to cause it to
+- What do you click in a `Morph` halo to cause it to
   display its coordinate system axes?
 - Some packages are built-in meaning that they are included
   in the base image of the Smalltalk implementation.
   Other packages must be downloaded, sometimes by cloning a GitHub repository.
 - Formalize your code to generate HTML from an `Association` object.
-- Does “morph removeAll” remove a given morph and all of its sub morphs?
+- Does "morph removeAll" remove a given `Morph` and all of its sub morphs?
 - Try the Connectors package.
   Does it work in Cuis Smalltalk or is there a port of it?
   https://youtu.be/QBRm_hnl7sE?si=w4FDZLfoyMAehZv6
