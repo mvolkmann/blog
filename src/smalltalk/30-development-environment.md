@@ -699,7 +699,24 @@ To debug code, select one or more lines in a Workspace window
 and press cmd-shift-d (Debug it).
 A Debug window will appear.
 Execution will be stopped at the beginning of the selected code,
-waiting for you examine variable and decide whether/how to proceed.
+waiting for you examine variables and decide whether/how to proceed.
+
+<img alt="Cuis Debug window" style="width: 100%"
+  src="/blog/assets/cuis-debug-window.png?v={{pkg.version}}">
+
+The top pane shows the execution stack.
+Each message send causes another stack entry
+that is removed after the message is processed.
+Each stack entry shows the class of a receiver object and
+the method that was selected to handle a message.
+
+After selecting a stack entry, the center pane shows
+the implementation of the associated method and
+the bottom row, first pane shows
+an inspector for the associated receiver object.
+Select "all inst vars" to see a list of arguments and local variables
+in the bottom row, third pane.
+Select a variable name to see its value in the bottom row, fourth pane.
 
 To set breakpoints in methods, add `self halt` message sends
 in selected locations in their code.
@@ -711,9 +728,6 @@ When `self halt` is evaluated, a Debugger will open.
 Locate the line in the stack trace ending in ">>halt".
 Click the line immediately after it to examine the
 method containing `self halt` and its variables.
-
-<img alt="Cuis Debug window" style="width: 100%"
-  src="/blog/assets/cuis-debug-window.png?v={{pkg.version}}">
 
 Click the "Into" button to begin executing the code.
 The "Proceed", "Restart", "Into", "Over" buttons
