@@ -257,8 +257,8 @@ Compile-time literal arrays begin with `#(`, end with `)`,
 and contain space-separated values.
 For example, `#(true 7 'Tami' (Color red))`.
 
-Run-time literal arrays begin with `{`, end with `}`,
-and contain dot-separated values.
+Run-time literal arrays (a.k.a. dynamic arrays)
+begin with `{`, end with `}`, and contain dot-separated values.
 For example, `{name. breed}`.
 This is an alternative to the more verbose syntax
 `Array with: name with: breed`.

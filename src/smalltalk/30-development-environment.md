@@ -744,6 +744,9 @@ Hover over any of them to see a tooltip that describes their purpose.
 | Where         | selects the next message to be sent to clarify where execution has stopped          |
 | Create        | creates a new method in a selected class to override the currently displayed method |
 
+When execution is halted, existing code can be modified and
+new methods can be implemented before continuing execution.
+
 The in-scope variables are listed in the third pane of the bottom row.
 Click a variable name to see its current value
 in the fourth pane of the bottom row.

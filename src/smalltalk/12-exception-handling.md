@@ -103,3 +103,9 @@ For example:
     ex messageText print.
 ]
 ```
+
+## Context
+
+TODO: Supposedly the value of `thisContext` is captured in exeception objects,
+TODO: but I don't see this happening. Is it supposed to be the value of the
+TODO: `signalContext` instance variable? I see that getting set to `nil`.
