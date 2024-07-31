@@ -729,21 +729,26 @@ Locate the line in the stack trace ending in ">>halt".
 Click the line immediately after it to examine the
 method containing `self halt` and its variables.
 
-Click the "Into" button to begin executing the code.
-The "Proceed", "Restart", "Into", "Over" buttons
-function as expected if you have used other debuggers.
+The following table describes each button in the second row of buttons.
+Hover over any of them to see a tooltip that describes their purpose.
 
-To run up to a specific location in the code,
-click to place the cursor where execution should stop
-and click the "Run to Cursor" button.
+| Button        | Purpose                                                                             |
+| ------------- | ----------------------------------------------------------------------------------- |
+| Proceed       | closes the debugger window and continues execution                                  |
+| Restart       | restarts execution from the beginning                                               |
+| Into          | steps into the method that handles the next message send                            |
+| Over          | executes the next message send and stops at the one that follows                    |
+| Through       | steps into a block                                                                  |
+| Run to Cursor | restarts execution, stopping at the message send under the cursor                   |
+| Full Stack    | TODO: Is seems the full stack trace is always shown in the top pane.                |
+| Where         | selects the next message to be sent to clarify where execution has stopped          |
+| Create        | creates a new method in a selected class to override the currently displayed method |
 
 The in-scope variables are listed in the third pane of the bottom row.
 Click a variable name to see its current value
 in the fourth pane of the bottom row.
 To change the value of a variable, edit it where displayed
 and press cmd-s (Accept).
-
-Click the "Where" button to highlight the next message to be sent in the code.
 
 The Debug window will close when the end of the selected code is reached.
 
