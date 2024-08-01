@@ -49,6 +49,11 @@ The term "receiver" describes the object to which a message is sent.
 Whitespace in Smalltalk code is insignificant.
 Spaces, tabs, and newline characters can be freely inserted.
 
+There is no syntax for defining constants.
+A common way to provide a constant value is
+to define a class method that return it.
+For example, `pi` is a class method in the `Float` class.
+
 An expression can have one of the following forms:
 
 - a pseudo-variable `true`, `false`, or `nil`

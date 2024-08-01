@@ -385,6 +385,8 @@ But instances of `CharacterSequence`, `Symbol`, and `UnicodeSymbol` are immutabl
 
 Literal strings are delimited by single quotes,
 not double quotes which are used to delimit comments.
+To include a single quote, use two of them.
+
 The type of object created, `String` or `UnicodeString`, is automatically
 selected based on whether any of the characters require more than one byte.
 `String` objects can only hold Latin-1 (ISO 8859-1) characters

@@ -168,8 +168,8 @@ area
     ^Float pi * radius * radius
 ```
 
-A common way to provide constant values is
-to define class methods that return them.
+A common way to provide a constant value is
+to define a class method that returns it.
 For example, `pi` is a class method in the `Float` class.
 
 The `VRectangle` class can add the following class method for creating instances:
@@ -272,8 +272,8 @@ The new methods will appear in System Browsers.
 
 ## Unknown Variables
 
-When saving a method, if it assigns a value to an unknown variable,
-the following dialog will appear:
+When a method is saved, if it assigns a value to an unknown variable
+then the following dialog will appear:
 
 <img alt="Unknown Variable"
   src="/blog/assets/cuis-unknown-variable.png?v={{pkg.version}}"
