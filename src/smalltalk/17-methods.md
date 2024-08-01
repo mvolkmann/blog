@@ -343,7 +343,8 @@ instance variables in the superclass will not be properly initialized.
 Primitive methods are implemented in the VM, often in a way that is
 more efficient than what could be achieved in Smalltalk code.
 
-From the Blue Book ...
+From the book "Smalltalk-80: The Language and its Implementation",
+referred to as the "Blue Book":
 
 > All behavior in the system is invoked by messages, however,
 > all messages are not responded to by executing Smalltalk-80 methods.
