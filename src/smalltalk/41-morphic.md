@@ -261,6 +261,19 @@ they are treated as a single unit and can be positioned together:
 - Click the name of the `Morph` that will become the parent.
   Often the intended parent `Morph` is a "LayoutMorph".
 
+To embed a `Morph` in another using code send the message `#addMorph:`.
+For example:
+
+```smalltalk
+lm := LayoutMorph new.
+b1 := BoxedMorph new.
+b2 := EllipseMorph new.
+lm addMorph: b1.
+lm addMorph: b2.
+lm openInWorld.
+lm morphPosition: 200 @ 200. "relative to upper-left corner of World"
+```
+
 ## LayoutMorph
 
 A `LayoutMorph` actively manages the position and size of its submorphs
