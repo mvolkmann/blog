@@ -9,6 +9,7 @@ layout: topic-layout.njk
 A block is closure (anonymous function) that can have parameters
 and contain many expressions.
 They are instances of the class `BlockClosure`.
+Their execution is deferred until they are sent a message like `value`.
 
 The value of the block is the value of its last expression.
 If a block uses the caret operator (`^`) to return a value,

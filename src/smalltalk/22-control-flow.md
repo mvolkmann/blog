@@ -132,6 +132,12 @@ the numbers 1, 3, 5, 7, and 9 on separate lines.
 An alternative is to first create an `Interval` object and
 then send it the `#do:` message to evaluate a block argument
 for each value in the `Interval`.
+For example:
+
+```smalltalk
+interval := 1 to: 10 by: 2.
+interval do: [:n | n print]
+```
 
 See the "Blocks" section for messages that
 use a block as an iteration condition.
