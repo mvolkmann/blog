@@ -494,8 +494,13 @@ For methods the options include:
 - push down to subclasses
 - push down to one subclass
 
-To rename a method without opening the refactorings menu,
-select the method and press cmd-shift-r.
+When renaming a method, a popup will prompt for the new name
+and then the scope where message sends will be updated.
+The scope can be "In Class" (just in the current class),
+"In Hierarchy" (in the current class and all subclasses? TODO: also superclasses?),
+"In Category" (in all classes in the same class category),
+"In Hierarchy and its Categories", or
+"In System" (all classes).
 
 For selected code the options include:
 
