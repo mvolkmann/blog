@@ -167,6 +167,8 @@ Some reasons to learn Smalltalk include:
 
 - <a href="https://cuis.st" target="_blank">Cuis Smalltalk</a>
 
+- <a href="https://cuis-smalltalk.github.io/TheCuisBook/" target="_blank">The Cuis Book</a>
+
 - <a href="https://github.com/Cuis-Smalltalk" target="_blank">Cuis GitHub repositories</a>
 
 - <a href="https://pharo.org" target="_blank">Pharo Smalltalk</a>

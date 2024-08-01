@@ -427,3 +427,17 @@ Here's an example of a session doing this.
 An alternate approach to testing from a Workspace
 is to write and run a unit test. See the "Unit Test" section.
 This will also open a Debug window where the missing code can be created.
+
+## Golden Rules
+
+The following is a list of questions to ask when writing Smalltalk code.
+These appear in chapter 11 of
+<a href="https://cuis-smalltalk.github.io/TheCuisBook/"
+target="_blank">The Cuis Book</a>"The Cuis Book".
+
+- Are methods short and understandable?
+- Does a line of code read like a sentence?
+- Do method names say what they do, rather than how they do it?
+- Do class and instance variable names indicate their roles?
+- Are there useful class comments?
+- Can we make something simpler? Leave something out?
