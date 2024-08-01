@@ -178,6 +178,11 @@ Alternatively, type a class name (ex. String) in a Workspace window
 and press cmd-b (Browse it)
 to open a System Browser with that class already selected.
 
+Selecting a class name in an already open System Browser
+and pressing cmd-b (Browse it) opens a new System Browser.
+There is no command to navigate to the selected class
+within the current System Browser.
+
 For more detail, see
 <a href="https://cuis-smalltalk.github.io/TheCuisBook/A-brief-introduction-to-the-system-Browser.html"
 target="_blank">A brief introduction to the System Browser</a>.

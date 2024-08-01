@@ -100,3 +100,16 @@ The World menu contains a Help submenu which contains the following:
 
   This opens a popup that displays remaining memory.
   It may only be useful for debugging issues with running out of memory.
+
+## Documentation
+
+Smalltalk documentation often uses the notation `Foo>>bar` to indicate that
+`bar` is an instance method in the class `Foo`.
+The notation `Foo class>>bar` indicates that
+`bar` is a class method in the class `Foo`.
+
+In addition to its use in documentation, `>>` is also a binary method
+available to all classes.
+The `Behavior` class is a superclass of all classes.
+It defines the instance method `>>` which takes a `Symbol` selector and
+returns the `CompiledMethod` instance that handles the selector.

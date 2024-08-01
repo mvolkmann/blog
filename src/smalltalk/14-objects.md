@@ -205,6 +205,9 @@ Circle class lookupSelector: #new
 ```
 
 The output is `(Behavior>>#new "a CompiledMethod:48(357226)")`.
+The `Behavior` class defines the instance method `>>`
+which takes a `Symbol` selector and
+returns the `CompiledMethod` instance that handles the selector.
 
 The `basicNew` method does not call the instance method `initialize`.
 The `basicNew` method should not be overridden in subclasses
