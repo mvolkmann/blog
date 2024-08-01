@@ -398,7 +398,7 @@ to allow the width and height to be used to determine what to draw.
 
 ```smalltalk
 PlacedMorph subclass: #CanvasDemo
-    instanceVariableNames: 'extent'
+    instanceVariableNames: 'extent fillColor'
     classVariableNames: ''
     poolDictionaries: ''
     category: 'Volkmann'
@@ -417,7 +417,11 @@ drawOn: aCanvas
     y1 := 0.
     x2 := extent x.
     y2 := extent y.
-    aCanvas strokeWidth: 10 color: Color red fillColor: Color green do: [
+    aCanvas
+        strokeWidth: 10
+        color: Color red
+        fillColor: fillColor
+        do: [
         aCanvas
             moveTo: x1 @ y1;
             lineTo: x2 @ y2;
@@ -496,6 +500,23 @@ Otherwise it will be placed at a random location.
 
 Drawing-related methods like `drawOn:`
 should be placed in the "drawing" method category.
+
+To handle mouse clicks on a custom morph, add code
+like the following in the instance method `initialize`.
+On each click, this changes the `fillColor` instance variable
+to a random color and signals that the `Morph` needs to be redrawn.
+
+```smalltalk
+self
+    setProperty: #handlesMouseDown
+    toValue: true.
+self
+    setProperty: #mouseButton1Up:localPosition:
+    toValue: [:event :position |
+        fillColor := Color random.
+        self redrawNeeded
+    ].
+```
 
 ## MorphicCanvas
 
