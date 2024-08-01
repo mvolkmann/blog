@@ -39,7 +39,7 @@ The term "receiver" describes the object to which a message is sent.
 | binary message send (look like operators)         | `<object> <message> <argument>` such as `4 * 5`            |
 | keyword message send                              | `2 raisedTo: 4 modulo: 3`                                  |
 | message cascade - sends to initial receiver       | `Transcript show: 'foo'; newLine; show: 'bar'`             |
-| message chaining - sends to previous result       | `2 * 3 :: squared :: negated` (-36)                        |
+| message chaining - sends to previous result       | `2 * 3 :: squared` (36)                                    |
 | method return value                               | `^<expression>` such as ^42                                |
 | expression separator (period)                     | `'foo print'. 'bar' print`                                 |
 | parentheses to control evaluation order           | `a * (b + c)`                                              |
@@ -67,11 +67,19 @@ In dynamic arrays the expressions are separated by periods.
 Compound literals evaluate their expression at compile-time
 instead of run-time for better run-time performance.
 
-The `::` message chaining operator can remove the need
+The "cascade" delimiter enables sending multiple messages
+to the same receiver object.
+For example, `Transcript show: 'foo'; newLine; show: 'bar'`.
+The return value is that of the final message.
+To instead cause the return value to be the receiver object,
+end the cascade with `; yourself`.
+
+The "chain" delimiter `::` can remove the need
 to surround the preceding expression with parentheses.
 It sends a message to the result of the previous message send.
 It is useful for sending a unary message to
-the result of a binary or keyword message.
+the result of a binary or keyword message OR
+for sending a binary message to the result of a keyword message.
 For example:
 
 ```smalltalk
@@ -82,6 +90,9 @@ For example:
 15 rem: 4 squared. "15"
 (15 rem: 4) squared. "9"
 15 rem: 4 :: squared. "9"
+
+(15 rem: 4) * 2. "6"
+15 rem: 4 :: * 2. "6"
 ```
 
 ## Naming Conventions
