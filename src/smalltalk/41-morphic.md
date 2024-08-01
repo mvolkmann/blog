@@ -531,6 +531,15 @@ self
     ].
 ```
 
+An alternative to setting the property `#mouseButton1Up:localPosition:` above,
+is to add the following instance method:
+
+```smalltalk
+mouseButton1Up: aMouseEvent localPosition: aPosition
+    fillColor := Color random.
+    self redrawNeeded.
+```
+
 ## MorphicCanvas
 
 The `MorphicCanvas` class has many subclasses including
@@ -890,11 +899,11 @@ in the "events" method category. Examples include:
 - `mouseScroll:localPosition:`
 - `windowEvent:`
 
-The mouse event handling methods are only called
+The keyboard and mouse event handling methods are only called
 if the `Morph` is configured to handle them.
 For example, the `keyDown:`, `keyUp:`, and `keyStroke:` methods are only called
 if the `handlesKeyboard:` method is implemented to return `true`.
-Also, the `mouseEnter:` and `mouseLeave:` methodsare only called
+Also, the `mouseEnter:` and `mouseLeave:` methods are only called
 if the `handlesMouseOver:` method is implemented to return `true`.
 See comments in each event handling method to determine how to enable it.
 
