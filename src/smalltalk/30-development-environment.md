@@ -494,13 +494,23 @@ For methods the options include:
 - push down to subclasses
 - push down to one subclass
 
-When renaming a method, a popup will prompt for the new name
-and then the scope where message sends will be updated.
-The scope can be "In Class" (just in the current class),
-"In Hierarchy" (in the current class and all subclasses? TODO: also superclasses?),
-"In Category" (in all classes in the same class category),
-"In Hierarchy and its Categories", or
-"In System" (all classes).
+When renaming a method:
+
+1. A popup will prompt for the new name.
+1. A popup will prompt for the scope where the
+   methods and message sends will be updated.
+   The scope can be "In Class" (only in the current class),
+   "In Hierarchy" (in the current class and all subclasses? TODO: also superclasses?),
+   "In Category" (in all classes in the same class category),
+   "In Hierarchy and its Categories", or
+   "In System" (all classes).
+1. An "Implementors of" dialog will open to
+   show where all the changes will be made.
+1. To remove a method from the list to be modified,
+   select it in the top pane and click the "Remove" button.
+1. To confirm modifying the remaining methods listed in the top pane,
+   click the "Refactor" button.
+1. To cancel making the modifications, click the "Cancel" button.
 
 For selected code the options include:
 
