@@ -261,7 +261,8 @@ select Help...Using GitHub to host Cuis packages.
 ## Restoring Changes After Crash
 
 If the VM crashes before changes are saved by a fileOut or saving in a package,
-they can still be recovered with the following steps:
+they can still be recovered with the following steps.
+This does not include changes to the contents of Workspace windows.
 
 1. Restart the image.
 1. Open the World menu.
@@ -272,3 +273,23 @@ they can still be recovered with the following steps:
    click a row in the top panel to see the associated change.
 1. For each change to be restored, right-click the row in the top panel
    and select "fileIn selections".
+
+There is a option (disabled by default) to be automatically
+prompted to restore logged changes when the image is started.
+To enable it, enter the following in a Workspace and "Do it":
+
+```smalltalk
+Preferences at: #checkLostChangesOnStartUp put: true
+```
+
+With this enabled, if the VM crashes before changes are saved,
+it will display the following popup when restarted:
+
+<img alt="Cuis recover last changes" style="width: 50%"
+  src="/blog/assets/cuis-recover-last-changes.png?v={{pkg.version}}">
+
+TODO: This DOES NOT WORK in macOS!
+
+For more detail, see
+<a href="https://cuis-smalltalk.github.io/TheCuisBook/The-Change-Log.html"
+target="_blank">The Change Log</a>.
