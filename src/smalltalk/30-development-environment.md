@@ -786,7 +786,11 @@ To browse all the change sets, open the World menu
 and select Open ... Change Sorter.
 This window summarize all the currently unsaved changes.
 
+<img alt="Cuis Change Sorter" style="width: 100%"
+  src="/blog/assets/cuis-change-sorter.png?v={{pkg.version}}">
+
 The first row left pane displays a list of change set names.
+Unsaved change set names are preceded by an asterisk.
 Selecting one displays a list of modified classes in the first row right pane.
 Selecting a modified class displays a list of modified methods
 in the second row.
@@ -796,8 +800,19 @@ or a description of the change in the bottom row.
 Right-click a change set, class, or method name to get
 a context menu of operations that can be performed on it.
 
-<img alt="Cuis Change Sorter" style="width: 100%"
-  src="/blog/assets/cuis-change-sorter.png?v={{pkg.version}}">
+To save an unsaved change set, select
+"File out and remove" or "File out and keep".
+The difference between these is whether the change set
+continues to be listed in the Change Sorter window.
+The changes are not saved in the image and are instead saved in the file
+`Cuis-Smalltalk-Dev-UserFiles/ChangeSets/{change-set-name}.cs.st`.
+To also save them in the image, open the World menu and select "Save Image".
+
+TODO: Why don't I see a change set if I choose "File out and keep",
+open the World menu, select "Quick without saving",
+restart the image, and open a "Change Sorter" window?
+It seems the only way to recover the changes is to open a "File List",
+select the change set `.cs.st` file, and click the "install" button.
 
 ## File List
 
