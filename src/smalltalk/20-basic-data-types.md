@@ -523,25 +523,25 @@ The following table describes some of the instance methods
 defined in the `String` class
 that are not also defined in its superclass `CharacterSequence`.
 
-| Method                                  | Description                                                                                   |
-| --------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `,`                                     | answers new string that results from appending argument                                       |
-| `<`                                     | answers `Boolean` value indicating if receiver is less than argument                          |
-| `<=`                                    | answers `Boolean` value indicating if receiver is less than or equal to argument              |
-| `=`                                     | answers `Boolean` value indicating if receiver is equal to argument                           |
-| `>`                                     | answers `Boolean` value indicating if receiver is greater than argument                       |
-| `>=`                                    | answers `Boolean` value indicating if receiver is greater than or equal to argument           |
-| `at:`                                   | answers `Character` at given index                                                            |
-| `at:put:`                               | replaces `Character` at given index                                                           |
-| `byteSize`                              | answers size in bytes                                                                         |
-| `findString:startingAt:`                | answers index after `startingAt:` where a substring begins, case sensitive                    |
-| `findStringCaseInsenstive:startingAt::` | answers index after `startingAt:` where a substring begins, case insensitive                  |
-| `lineIndicesDo:`                        | evalautes block `lineIndicesDo:` for each substring of `string:` delimited by CR, LF, or CRLF |
-| `percentEscapeUrl`                      | answers URL encoded instance where non-ASCII characters are percent encoded                   |
-| `percentEscapeUrlField`                 | answers URL encoded instance where non-ASCII characters in fields are percent encoded         |
-| `size`                                  | answers largest index                                                                         |
-| `substrings`                            | answers `Array` of substrings delimited by whitespace characters                              |
-| `unescapePercents`                      | answers reverse of `percentEscapeUrl`                                                         |
+| Method                                 | Description                                                                                   |
+| -------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `,`                                    | answers new string that results from appending argument                                       |
+| `<`                                    | answers `Boolean` value indicating if receiver is less than argument                          |
+| `<=`                                   | answers `Boolean` value indicating if receiver is less than or equal to argument              |
+| `=`                                    | answers `Boolean` value indicating if receiver is equal to argument                           |
+| `>`                                    | answers `Boolean` value indicating if receiver is greater than argument                       |
+| `>=`                                   | answers `Boolean` value indicating if receiver is greater than or equal to argument           |
+| `at:`                                  | answers `Character` at given index                                                            |
+| `at:put:`                              | replaces `Character` at given index                                                           |
+| `byteSize`                             | answers size in bytes                                                                         |
+| `findString:startingAt:`               | answers index after `startingAt:` where a substring begins, case sensitive                    |
+| `findStringCaseInsenstive:startingAt:` | answers index after `startingAt:` where a substring begins, case insensitive                  |
+| `lineIndicesDo:`                       | evalautes block `lineIndicesDo:` for each substring of `string:` delimited by CR, LF, or CRLF |
+| `percentEscapeUrl`                     | answers URL encoded instance where non-ASCII characters are percent encoded                   |
+| `percentEscapeUrlField`                | answers URL encoded instance where non-ASCII characters in fields are percent encoded         |
+| `size`                                 | answers largest index                                                                         |
+| `substrings`                           | answers `Array` of substrings delimited by whitespace characters                              |
+| `unescapePercents`                     | answers reverse of `percentEscapeUrl`                                                         |
 
 The `at:put:` method is the only one
 that modifies a `String` in place (TODO: true?).

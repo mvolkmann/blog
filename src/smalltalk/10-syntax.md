@@ -67,6 +67,23 @@ In dynamic arrays the expressions are separated by periods.
 Compound literals evaluate their expression at compile-time
 instead of run-time for better run-time performance.
 
+The `::` message chaining operator can remove the need
+to surround the preceding expression with parentheses.
+It sends a message to the result of the previous message send.
+It is useful for sending a unary message to
+the result of a binary or keyword message.
+For example:
+
+```smalltalk
+1 + 2 squared. "5"
+(1 + 2) squared. "9"
+1 + 2 :: squared. "9"
+
+15 rem: 4 squared. "15"
+(15 rem: 4) squared. "9"
+15 rem: 4 :: squared. "9"
+```
+
 ## Naming Conventions
 
 Names of classes, methods, and variables use camelCase.
