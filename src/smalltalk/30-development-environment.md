@@ -808,11 +808,30 @@ The changes are not saved in the image and are instead saved in the file
 `Cuis-Smalltalk-Dev-UserFiles/ChangeSets/{change-set-name}.cs.st`.
 To also save them in the image, open the World menu and select "Save Image".
 
+To install a change set whose changes were not saved in the image:
+
+- Open the World menu.
+- Select "Open ... File List".
+- Select a file with a `.cs.st` extension.
+- Click the "code" button to review the changes
+  in a new window one class at a time.
+  To install all the changes to a class
+  or only the changes in a single method,
+  right-click a class or method name and select "fileIn".
+- Optionally click the "contents" button to review the changes
+  in a new window one change at a time.
+  To install a subset of the changes, select the changes,
+  right-click, and select "fileIn selections".
+- Click the "install" button to install all the changes in the change set.
+
+When viewing modified methods, removed code is shown in red
+and added code is shown in green.
+
 TODO: Why don't I see a change set if I choose "File out and keep",
 open the World menu, select "Quick without saving",
 restart the image, and open a "Change Sorter" window?
-It seems the only way to recover the changes is to open a "File List",
-select the change set `.cs.st` file, and click the "install" button.
+It seems the only way to recover the changes is to
+follow the steps above using a "File List".
 
 ## File List
 
@@ -879,6 +898,23 @@ and click the "browse" button.
 This shows the classes defined by the package.
 It also shows the classes in other class categories
 to which the package adds classes and methods.
+
+To add dependencies on other packages to a package
+so they will be installed when the package is installed:
+
+- Select a package in the upper-left pane of the "Installed Packages" window.
+- Click the "add requirements" button.
+- In the popup list of installed packages that appears, click on of them.
+  This adds a line that begins with `!requires:` to the `.pck.st` package file.
+- Repeat for additional dependencies.
+- Save the package.
+
+All the dependencies of the selected package are listed in the bottom pane.
+To remove a dependency, select it, click the "delete" button"
+in the bottom pane, and click the "save button.
+WARNING: Do not deleted `!requires:` lines from `.pck.st` manually
+because the development environment will not recognize the change
+unless the package is deleted from the image and reinstalled.
 
 To uninstall a package, select the package name
 and click the "delete/merge" button.
