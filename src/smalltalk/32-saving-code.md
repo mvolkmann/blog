@@ -270,9 +270,27 @@ This does not include changes to the contents of Workspace windows.
 1. In the popup that appears, select a line with a date/time
    that indicates how far back in the history to examine.
 1. In the "Recent changes" window that appears,
-   click a row in the top panel to see the associated change.
+   click a row in the top panel to see the associated changes.
+   They are ordered from the earliest to the most recent change.
+1. Right-click in the top pane to get a menu containing
+   many options for filtering the list of changes.
+   For example, "select new methods" will select
+   all the changes that add a new method.
+1. Click one of the buttons ending in "Diffs"
+   to view the changes in various ways.
+   These include "lineDiffs", "wordDiffs",
+   "linePrettyDiffs", and "wordPrettyDiffs".
+   The "Pretty" options compare the old and new code after formatting each.
+   The "linePrettyDiffs" seems to be the most useful.
 1. For each change to be restored, right-click the row in the top panel
    and select "fileIn selections".
+   Alternatively, click the "select all" button and then
+   the "fileIn selections" button to restore all the changes.
+
+<img alt="Cuis Recent Changes window" style="width: 100%"
+  src="/blog/assets/cuis-recent-changes.png?v={{pkg.version}}">
+
+TODO: When are unrestored changes deleted, if ever?
 
 There is a option (disabled by default) to be automatically
 prompted to restore logged changes when the image is started.

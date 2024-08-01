@@ -783,7 +783,7 @@ seems to produce unexpected results. TODO: Why?
 
 Each edit performed in a System Browser is saved in a `ChangeSet`.
 To browse all the change sets, open the World menu
-and select Open ... Change Sorter.
+and select Open ... Change Sorter or Changes ... Change Sorter.
 This window summarize all the currently unsaved changes.
 
 <img alt="Cuis Change Sorter" style="width: 100%"
