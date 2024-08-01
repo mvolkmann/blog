@@ -42,7 +42,9 @@ To create a fileOut:
 The file will be saved in
 `{distribution-name}-UserFiles/FileOuts/{name}.st`.
 
-These files use the bang-separated "chunked format".
+These files use the bang-separated "chunked format"
+which is human-readable.
+Package files with the extension `.pck.st` also use the chunked format.
 Each chunk is delimited by exclamation marks.
 A chunk can contain:
 

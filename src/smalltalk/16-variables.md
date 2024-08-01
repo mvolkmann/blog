@@ -114,6 +114,7 @@ TODO: Can a subclass class method set a class instance variable in a superclass?
 
 Temporary variables are declared in a space-separated string
 between vertical bars inside a method or block definition.
+Their initial value is `nil`.
 Method parameters are also considered to be temporary variables.
 These can only be accessed within the method or block that declares them.
 

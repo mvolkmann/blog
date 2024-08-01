@@ -41,4 +41,5 @@ enter `Feature require: '{PackageName}' in a Workspace and "Do it".
 - SVG
 - VMMaker
 
-See the descriptions of these repositories in the "GitHub Account" section at the end of the "Overview" chapter.
+See the descriptions of these repositories in the "GitHub Account" section
+at the end of the "Overview" chapter.

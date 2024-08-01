@@ -33,8 +33,14 @@ Examples include "attribute", "property", and "field".
 Smalltalk calls these "instance variables".
 
 Instance variables are described by a single `String`
-where the names are separated by spaces.
-The names must begin lowercase.
+that is the value of the `instanceVariableNames:` argument.
+The names are separated by spaces and must begin lowercase.
+Their initial value is `nil`.
+
+Class variables are described by a single `String`
+that is the value of the `classVariableNames:` argument.
+The names are separated by spaces and must begin uppercase.
+Their initial value is `nil`.
 
 Each class is a associated with a category.
 Classes provided by the image are in categories such as
@@ -73,6 +79,7 @@ For example, if `score` is an instance variable
 then the following is a getter method for it.
 By convention, the name of getter and setter methods is the same as
 the name of the associated instance variable, but this is not required.
+Setter method names end in a colon because they take an argument.
 
 ```smalltalk
 score
@@ -84,6 +91,17 @@ score: aNumber
 
 As shown above, another convention is for variables associated with
 keyword messages to indicate their expected type.
+
+Setter methods do not explicitly return a value
+and instead implicitly return `self`.
+This enables chaining setter messages.
+For example, an instance of a `Dog` class
+with setters for its `name` and `breed` instance variables
+can be created with the following:
+
+```smalltalk
+dog := Dog new name: 'Comet' :: breed: 'Whippet'
+```
 
 To find a class without needing to know its class category:
 
