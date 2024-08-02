@@ -213,6 +213,9 @@ System Browsers contain four rows.
   There is a separate set of method categories
   for instance methods and class methods.
 
+  Double-clicking a class name in the second pane
+  opens a new System Browser with that class selected.
+
   The second pane contains three buttons at the bottom.
   Clicking the "instance" or "class" button causes the remaining panes
   to display information about instance or class methods, respectively.

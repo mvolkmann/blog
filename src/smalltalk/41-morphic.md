@@ -1019,6 +1019,60 @@ em
     toValue: [:event :position | self inform: 'got click'].
 ```
 
+## Animation
+
+Animation in Morphic is achieved through stepping.
+The following class implements a `Morph` that renders a red circle
+and animates to a random location in the World every time it is clicked.
+After creating this class in a System Browser,
+enter `AnimatedMorph new openInWorld` in a Workspace and "Do it".
+
+```smalltalk
+EllipseMorph subclass: #AnimatedMorph
+    instanceVariableNames: 'dx dy stepNumber'
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'Volkmann'
+
+initialize
+    | size |
+    super initialize.
+    size := self size.
+    self morphExtent: size @ size.
+    self color: Color red
+
+size
+    ^ 100
+
+handlesMouseDown
+    ^ true
+
+mouseButton1Up: aMouseEvent localPosition: aPosition
+    | newX newY oldX oldY size worldExtent |
+    oldX := self morphPosition x.
+    oldY := self morphPosition y.
+    worldExtent := WorldMorph allInstances first morphExtent.
+    size := self size.
+    newX := (worldExtent x rounded - size) atRandom.
+    newY := (worldExtent y rounded - size) atRandom.
+    dx := newX - oldX / self stepCount.
+    dy := newY - oldY / self stepCount.
+    stepNumber := 0.
+    self startStepping
+
+step
+    self morphPosition: self morphPosition + (dx @ dy).
+    self redrawNeeded.
+    stepNumber := stepNumber + 1.
+    stepNumber = self stepCount ifTrue: [ self stopStepping ]
+
+stepCount
+    ^ 50
+
+stepTime
+    ^ 5
+```
+
 ## Redrawing
 
 After making code changes, if the UI does not update properly,
