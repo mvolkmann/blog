@@ -1026,6 +1026,8 @@ The following class implements a `Morph` that renders a red circle
 and animates to a random location in the World every time it is clicked.
 After creating this class in a System Browser,
 enter `AnimatedMorph new openInWorld` in a Workspace and "Do it".
+This animates position changes, but other properties such as
+rotation, scale, and color can also be animated.
 
 ```smalltalk
 EllipseMorph subclass: #AnimatedMorph
@@ -1070,7 +1072,7 @@ stepCount
     ^ 50
 
 stepTime
-    ^ 5
+    ^ 5 "default is 1000 for once per second"
 ```
 
 ## Redrawing
