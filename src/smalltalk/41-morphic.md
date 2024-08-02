@@ -576,6 +576,8 @@ keyStroke: aKeyboardEvent
     aKeyboardEvent isArrowUp ifTrue: [ 'got up arrow' print ].
 ```
 
+Also see the `isArrowRight`, `isArrowDown`, and `isArrowLeft` methods.
+
 ## MorphicCanvas
 
 The `MorphicCanvas` class has many subclasses including
