@@ -179,6 +179,7 @@ All indexes are 1-based.
 
 | Method                    | Description                                                                                                                   |
 | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `,`                       | answers new collection created by appending receiver and argument                                                             |
 | `+=`                      | modifies receiver number elements by adding argument to each                                                                  |
 | `-=`                      | modifies receiver number elements by subtracting argument from each                                                           |
 | `allButFirst`             | answers copy including all but first element                                                                                  |
