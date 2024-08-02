@@ -573,6 +573,7 @@ keyStroke: aKeyboardEvent
     | char |
     char := Character codePoint: aKeyboardEvent keyValue.
     char logAs: 'character'. "defined in Getting Started"
+    aKeyboardEvent isArrowUp ifTrue: [ 'got up arrow' print ].
 ```
 
 ## MorphicCanvas
