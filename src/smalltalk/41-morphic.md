@@ -514,10 +514,22 @@ Otherwise it will be placed at a random location.
 Drawing-related methods like `drawOn:`
 should be placed in the "drawing" method category.
 
-To handle mouse clicks on a custom morph, add code
-like the following in the instance method `initialize`.
+To handle mouse clicks on a custom morph,
+add instance methods like the following to a `Morph` subclass.
 On each click, this changes the `fillColor` instance variable
 to a random color and signals that the `Morph` needs to be redrawn.
+
+```smalltalk
+handlesMouseDown
+    ^ true
+
+mouseButton1Up: aMouseEvent localPosition: aPosition
+    fillColor := Color random.
+    self redrawNeeded.
+```
+
+An alternative to adding instance methods is to set properties as follows,
+perhaps in the instance method `initialize`.
 
 ```smalltalk
 self
@@ -531,14 +543,9 @@ self
     ].
 ```
 
-An alternative to setting the property `#mouseButton1Up:localPosition:` above,
-is to add the following instance method:
-
-```smalltalk
-mouseButton1Up: aMouseEvent localPosition: aPosition
-    fillColor := Color random.
-    self redrawNeeded.
-```
+Using a receiver other that `self` for the message sends above enables
+configuring event handling on a specific instance of a `Morph` subclass
+rather than for all instances.
 
 ## MorphicCanvas
 
