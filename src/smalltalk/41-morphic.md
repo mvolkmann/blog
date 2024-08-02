@@ -1053,7 +1053,8 @@ mouseButton1Up: aMouseEvent localPosition: aPosition
     | newX newY oldX oldY size worldExtent |
     oldX := self morphPosition x.
     oldY := self morphPosition y.
-    worldExtent := WorldMorph allInstances first morphExtent.
+    "UISupervior ui answers the WorldMorph instance."
+    worldExtent := UISupervisor ui morphExtent.
     size := self size.
     newX := (worldExtent x rounded - size) atRandom.
     newY := (worldExtent y rounded - size) atRandom.
