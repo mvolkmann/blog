@@ -514,6 +514,8 @@ Otherwise it will be placed at a random location.
 Drawing-related methods like `drawOn:`
 should be placed in the "drawing" method category.
 
+## Mouse Events
+
 To handle mouse clicks on a custom morph,
 add instance methods like the following to a `Morph` subclass.
 On each click, this changes the `fillColor` instance variable
@@ -546,6 +548,32 @@ self
 Using a receiver other that `self` for the message sends above enables
 configuring event handling on a specific instance of a `Morph` subclass
 rather than for all instances.
+
+## Keyboard Events
+
+To handle keyboard events on a custom morph,
+add instance methods like the following to a `Morph` subclass.
+
+```smalltalk
+handlesKeyboard
+    ^ self visible.
+
+mouseEnter: event
+    (Preferences at: #focusFollowsMouse)
+        ifTrue: [ event hand newKeyboardFocus: self ].
+
+mouseLeave: event
+    (Preferences at: #focusFollowsMouse)
+        ifTrue: [ event hand releaseKeyboardFocus: self ].
+
+keyboardFocusChange: aBoolean
+    ('has keyboard focus? {1}' format: {aBoolean}) print.
+
+keyStroke: aKeyboardEvent
+    | char |
+    char := Character codePoint: aKeyboardEvent keyValue.
+    char logAs: 'character'. "defined in Getting Started"
+```
 
 ## MorphicCanvas
 
