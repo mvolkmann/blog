@@ -104,3 +104,91 @@ fact := [:block :n |
 
 fact value: fact value: 5 "gives 120"
 ```
+
+## Partial Application
+
+Partial application is the ability to pass a subset
+of the arguments required by a function to the function
+and get a new function that takes the remaining arguments.
+
+Currying is similar, but only passes a single argument to the function.
+
+The Smalltalk `BlockClosure` class does not
+support currying or partial application.
+But we can implement both.
+The `PartialBlock` class defined below does this.
+
+Here are examples of using it:
+
+```smalltalk
+pb := PartialBlock block: [:a :b | a + b].
+"All arguments supplied."
+pb valueWithArguments: #(2 3). "5"
+
+"Single argument supplied".
+pb2 := pb value: 2. "a new PartialBlock"
+pb2 value: 3. "5"
+
+pb := PartialBlock block: [:a :b :c | a + b + c].
+
+"Partial arguments supplied."
+pb3 := pb valueWithArguments: #(2 3). "a new PartialBlock"
+"Remaining arguments supplied."
+pb3 valueWithArguments: #(4). "9"!
+```
+
+Here is the defintion of the `PartialBlock` class:
+
+```smalltalk
+Object subclass: #PartialBlock
+    instanceVariableNames: 'arguments block'
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'Volkmann'
+
+"class method in private category"
+block: aBlock arguments: anArray
+    ^ self new
+        setBlock: aBlock
+        arguments: anArray
+
+"class method in instance creation category"
+block: aBlock
+    ^ self new setBlock: aBlock
+
+"instance method in private category"
+setBlock: aBlock
+    block := aBlock.
+    arguments := #()
+
+"instance method in private category"
+setBlock: aBlock arguments: anArray
+    block := aBlock.
+    arguments := anArray
+
+"instance method in evaluating category"
+value: anObject
+    ^ self valueWithArguments: { anObject }
+
+"instance method in evaluating category"
+valueWithArguments: anArray
+    | args |
+    (anArray isMemberOf: Array) ifFalse: [
+        self error: 'valueWithArguments: requires an Array'
+    ].
+    args := arguments , anArray.
+    args logAs: 'args'.
+    anArray size = self argumentCount ifTrue: [
+        ^ block valueWithArguments: args
+    ].
+    anArray size > self argumentCount ifTrue: [
+        self error: 'too many arguments'
+    ].
+    ^ PartialBlock
+        block: block
+        arguments: args
+
+"instance method in accessing category"
+argumentCount
+    ^ block argumentCount - arguments size
+```
