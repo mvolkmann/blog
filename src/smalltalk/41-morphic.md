@@ -308,8 +308,8 @@ based on the following instance properties:
   and a value of 0.5 centers.
 
 - `layoutSpec`: an optional `LayoutSpec` object that specifies
-  how to layout children on the off axis (opposite of `direction`)
-  using instance variables like `offAxisEdgeWeight`
+  how to layout this `LayoutMorph` within its parent,
+  not how to layout the submorphs.
 
 Practically any layout can be achieved by nesting instances of this class.
 
