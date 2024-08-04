@@ -113,9 +113,28 @@ and get a new function that takes the remaining arguments.
 
 Currying is similar, but only passes a single argument to the function.
 
-The Smalltalk `BlockClosure` class does not
-support currying or partial application.
-But we can implement both.
+The Smalltalk `BlockClosure` class supports a limited form of currying,
+handling up to four arguments.
+But it does not support partial application.
+
+The following code demonstrates using currying with the `BlockClosure` class:
+
+```smalltalk
+add2Numbers := [:a :b | a + b].
+add2Numbers value: 2 value: 3. "5"
+block := add2Numbers withFirstArg: 2.
+block argumentCount. "1"
+block value: 3. "5"
+
+add3Numbers := [:a :b :c | a + b + c].
+block1 := add3Numbers withFirstArg: 2.
+block2 := block1 withFirstArg: 3.
+"The withFirstArg: method always returns a block.
+ Send it the #value message to get the final value."
+(block2 withFirstArg: 4) value.
+```
+
+We can implement unlimited currying and partial application.
 The `PartialBlock` class defined below does this.
 
 Here are examples of using it:
