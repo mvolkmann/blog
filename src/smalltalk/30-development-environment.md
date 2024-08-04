@@ -40,6 +40,21 @@ To refresh all the windows after code changes that affect them
 open the World menu and select "Windows...Restore all Windows".
 This does not update windows to use a newly selected theme.
 
+## Transcript Windows
+
+Transcript windows are not scrollable,
+so they only display a limited number of lines.
+This is intentional for performance reasons.
+
+If a more lines are written to Transcript windows than they currently display,
+there are two ways to see additional lines.
+The first is to resize the window to be taller.
+The second is to right-click in the Transcript window
+and select "Workspace with Contents".
+This opens a new Workspace whose content is
+all the lines in the Transcript window.
+All Workspace windows are scrollable.
+
 ## Focus
 
 By default, focus automatically goes to the `Morph` under the mouse cursor.
