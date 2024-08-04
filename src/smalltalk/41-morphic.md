@@ -330,6 +330,21 @@ all of these values can be specified interactively.
 <img alt="Cuis Morphic Layout dialog" style="width: 75%"
   src="/blog/assets/cuis-morphic-layout-dialog.png?v={{pkg.version}}">
 
+To specify the color of a `LayoutMorph` (its background),
+override the `drawOn:` method as follows:
+
+```smalltalk
+drawOn: aCanvas
+    self color: Color green.
+    super drawOn: aCanvas
+```
+
+It does not work to set the color in the `initialize` method
+because the `new` method sends `#newRow` to the instance
+which sends `#initialize` and then it
+sends `#color:` with the value `(Color red alpha: 0.2)`
+which replaces the value set in the `initialize` method.
+
 ## Editing Characteristics
 
 Many chararacteristics of a `Morph` can be edited by
