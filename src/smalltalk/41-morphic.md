@@ -296,6 +296,10 @@ based on the following instance properties:
 
 - `axisEdgeWeight`: a number from 0 to 1
 
+  This specifies the alignment of the submorphs
+  in the same direction as the `LayoutMorph`,
+  referred to as the "major axis".
+
   By default, all the submorphs will be
   pushed to the left of a row or top of a column.
   To change this, send the `#axisEdgeWeight:` message with a number from 0 to 1.
@@ -350,6 +354,20 @@ because the `new` method sends `#newRow` to the instance
 which sends `#initialize` and then it
 sends `#color:` with the value `(Color red alpha: 0.2)`
 which replaces the value set in the `initialize` method.
+
+### Submorphs
+
+The submorphs added to a `LayoutMorph` can each specify
+their alignment in the opposite direction of the `LayoutMorph`,
+referred to as the "minor axis".
+
+For example, the following will cause a submorph to be
+left-aligned in a vertical `LayoutMorph` or
+top-aligned in a horizontal `LayoutMorph`:
+
+```smalltalk
+submorph layoutSpec offAxisEdgeWeight: 0
+```
 
 ## Editing Characteristics
 
