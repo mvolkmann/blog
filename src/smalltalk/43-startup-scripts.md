@@ -13,6 +13,8 @@ Startup scripts automate starting an image with:
 - tool windows open at specfied locations with specified sizes
 - loaded packages
 
+## Example
+
 The following is an example script in a file named `cuis`.
 
 ```bash
@@ -104,3 +106,17 @@ To use this script:
 - Open a terminal window.
 - `cd` to the directory containing this script.
 - Enter `./cuis` to launch the VM in your preferred starting state.
+
+## When To Use
+
+Startup scripts like the one described above are useful
+when a new image version is released.
+They enable restoring your preferred environment setup using a new image.
+Once this is done, it's a good idea to open the World menu
+and select "Save Image as..." to save the image under a new name.
+
+Starting future sessions using the saved image will be much faster
+than starting the base image using your startup script.
+The reason is that the saved image will already contain
+all the packages installed by the startup script.
+Loading packages during startup is relative time consuming.
