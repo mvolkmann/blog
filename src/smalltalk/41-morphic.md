@@ -341,12 +341,13 @@ all of these values can be specified interactively.
   src="/blog/assets/cuis-morphic-layout-dialog.png?v={{pkg.version}}">
 
 To specify the color of a `LayoutMorph` (its background),
-override the `drawOn:` method as follows:
+override the class method `new` as follows:
 
 ```smalltalk
-drawOn: aCanvas
-    self color: Color green.
-    super drawOn: aCanvas
+new
+    | app |
+    app := super newColumn.
+    ^ app color: Color white.
 ```
 
 It does not work to set the color in the `initialize` method
