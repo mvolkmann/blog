@@ -283,10 +283,16 @@ based on the following instance properties:
 
 - `separation`: a `Measure`
 
-  By default, there will be no separation between the submorphs.
-  To add separation, send the `#separationX:`, `#separationY`,
-  or `#separation:` (both x and y) messages.
-  For example, `myLayout separation: 20`.
+  This adds space between the submorphs and the each other.
+  It also adds space between the submorphs and the edges of the `LayoutMorph`.
+
+  By default, there is no separation.
+  To add separation, send the `separation:` message.
+  If the argument is a number then it is used for both x and y separation.
+  Otherwise it should be a `Point` whose `x` and `y` values
+  specify the corresponding separations.
+  For example, `myLayout separation: 20 @ 10`
+  uses an x separation of 20 and a y separation of 10.
 
 - `axisEdgeWeight`: a number from 0 to 1
 
@@ -528,6 +534,13 @@ Otherwise it will be placed at a random location.
 
 Drawing-related methods like `drawOn:`
 should be placed in the "drawing" method category.
+
+## Text Entry
+
+For single-line text entry, use `TextEntryMorph`.
+For multi-line text entry, use `TextModelMorph`.
+
+TODO: Add much more detail here with examples.
 
 ## Mouse Events
 
