@@ -521,6 +521,9 @@ When renaming a method:
    click the "Refactor" button.
 1. To cancel making the modifications, click the "Cancel" button.
 
+This is the only way to rename a method.
+This is good because it forces developers to think about the affected senders.
+
 For selected code the options include:
 
 - Extract as Parameter...

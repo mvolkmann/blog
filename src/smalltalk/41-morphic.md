@@ -578,6 +578,10 @@ keyStroke: aKeyboardEvent
 
 Also see the `isArrowRight`, `isArrowDown`, and `isArrowLeft` methods.
 
+There is currently a bug in `Character codePoint:` method related to arrow keys.
+See <a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Dev/issues/292"
+target="_blank">issue 292</a>.
+
 ## MorphicCanvas
 
 The `MorphicCanvas` class has many subclasses including
