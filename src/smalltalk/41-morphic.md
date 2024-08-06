@@ -544,12 +544,28 @@ The `Morph` method `openInHand` causes the `Morph` to appear
 and be attached to the cursor.
 Move the cursor to the location where it should be placed and click to drop it.
 
-Alternative, send the message `#openInWorld` to cause the `Morph` to appear
+Alternatively, send the message `#openInWorld` to cause the `Morph` to appear
 and not be attached to the cursor.
 If the location of the `Morph` was specified by sending the
 `#location#` message to it with a `MorphicTranslation` argument
 then it will be placed at that location.
 Otherwise it will be placed at a random location.
+
+Also see the custom method `openAtCursor` that I added to the `Morph` class.
+It is defined as follows:
+
+```smalltalk
+openAtCursor
+    "Opens Morph, attempting to center it at hand location,
+    but keeping it in the world bounds."
+    | world |
+    world := self runningWorld.
+    world
+        ifNil: [ UISupervisor whenUIinSafeState: [ self openInWorld ]]
+        ifNotNil: [ :w |
+            w addMorph: self centeredNear: w activeHand morphPosition.
+        ]
+```
 
 Drawing-related methods like `drawOn:`
 should be placed in the "drawing" method category.
