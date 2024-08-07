@@ -109,6 +109,7 @@ defined in the `Collection` class.
 | `detect:`             | answers first element in receiver that satisfies block argument; like `find` in JavaScript                                                 |
 | `difference:`         | answers instance that includes elements in receiver that are not in argument                                                               |
 | `do:`                 | evaluates block argument for each element; like `forEach` in JavaScript                                                                    |
+| `do:separatedBy:`     | evaluates `do:` block argument for each element and `separatedBy:` block argument between each element                                     |
 | `floor`               | answers instances whose elements are the floor of receiver elements                                                                        |
 | `fold:`               | answers value that results from folding receiver elements with a block; like `reduce` in JavaScript                                        |
 | `fold:ifEmpty:`       | like `fold:`, but specifies value to use if collection is empty                                                                            |
