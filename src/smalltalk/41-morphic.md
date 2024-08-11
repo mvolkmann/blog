@@ -391,6 +391,10 @@ of a `Morph`:
 - Modify the numbers in the dialog that appears.
 - Click the "Accept" to save the changes or the "Cancel" button to discard them.
 
+It's unclear why a small subset of `Morph` methods begin with `morph`.
+Examples include `morphExtent`, `morphExtentInOwner`, `morphId`,
+`morphLocalBoundsForError`, `morphPosition`, and `morphPositionInWorld`.
+
 To change the border color or color of a `Morph`:
 
 - Click "borderColor" or "color".
@@ -877,9 +881,9 @@ To work with SVG images:
   - <a href="https://github.com/Cuis-Smalltalk/Numerics.git" target="_blank">Numerics</a>
   - <a href="https://github.com/Cuis-Smalltalk/SVG.git" target="_blank">SVG</a>
 
-- Open a Workspace and install the packages `LinearAlgebra` and `SVG`.
+- Open a Workspace and install the package `SVG`.
 
-  For each package, enter `Feature require: '{package-name}'` and "Do it".
+  enter `Feature require: 'SVG'` and "Do it".
 
 - Enter `SVGMainMorph exampleTiger openInWorld` and "Do it".
 
@@ -1152,6 +1156,20 @@ there are two things that can be done to update the display.
 1. Open the World menu and select "Debug ... Start drawing all again".
 
 TODO: What is the difference between these?
+
+## More Morphs
+
+TODO: Study these:
+CheckButtonMorph
+RadioButtonMorph
+CheckGroup
+RadioGroup
+DropDownButtonMorph
+DropDownListMorph
+MultiSelectMenu
+PluggableDropDownListMorph
+PluggableListOfMorph
+PluggableDropDownListOfMorph
 
 ## Annoynances
 
