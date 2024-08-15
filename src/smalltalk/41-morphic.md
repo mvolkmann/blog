@@ -673,6 +673,34 @@ But it provides great performance due to its simplicity.
 
 TODO: Is it worthwhile to learn about any of these besides `VectorCanvas`?
 
+## Drawing Details
+
+How does the message `#drawOn:` get sent to each currently visible morph?
+
+The abstract class `MorphicCanvas` defines the method `drawCurrentAndSubmorphs`
+as `subclassResponsibility`.
+The subclasses of `MorphicCanvas` which include
+`BitBltCanvas`, `BoundsFinderCanvas`, `HybridCanvas`, and `VectorCanvas`.
+all implement the `drawCurrentAndSubmorphs` method.
+
+The `MorphicCanvas` method `fullDraw:`
+sends the message `#drawCurrentAndSubmorphs` to
+an instance of one of these `MorphicCanvas` subclasses.
+The `drawCurrentAndSubmorphs` method
+sends the message `#drawOn:` to the the current morph and
+sends the message `#fullDraw` to each submorph.
+
+The sequence of message sends that lead to the first call to `fullDraw:` is:
+
+- `UISupervisor class newUIProcess`
+- `UISupervisor class spawnNewMorphicProcessFor:`
+- `WorldMorph runProcess`
+- `WorldMorph mainLoop`
+- `WorldMorph displayWorldOn:`
+- `MorphicCanvas drawWorld:repair: calls`
+- `MorphicCanvas drawRoots:rootsDamage:backgroundDamage:`
+- `MorphicCanvas fullDraw:`
+
 ## BoxedMorph
 
 The `BoxedMorph` class is a subclass of the `PlacedMorph` class

@@ -6,31 +6,62 @@ layout: topic-layout.njk
 
 The steps to create a Java-based AWS Lambda function are:
 
-- Browse https://aws.amazon.com.
-- Click the "Sign In to the Console" button in the upper-right.
-- Click the waffle button in the upper-left.
-- Click "Compute" in the left nav.
-- Click "Lambda"
-- Click the "Create a function" button.
-- Select the "Author from scratch" radio button.
-- Enter a value for "Function name".
-- Select a "Runtime" Java version such as "Java 21".
-- Select an "Architecture" such as "x86_64".
-- Click the "Create function" button at the bottom.
-- Create a local `.java` file that defines the function. For example:
+- In IDEA, create a new Java Gradle project
+  that uses Kotlin for the Gradle file.
+
+- In the file `build.gradle.kts`:
+
+  - Add the following dependencies:
+
+    ```kotlin
+    implementation("com.amazonaws:aws-lambda-java-core:1.2.1")
+    implementation("com.amazonaws:aws-lambda-java-events:3.11.0")
+    ```
+
+  - Add the following task definition:
+
+    ```kotlin
+    tasks.jar {
+        manifest {
+            attributes["Main-Class"] = "org.example.HelloLambda"
+        }
+    }
+    ```
+
+- Create the file `src/main/java/org/example/HelloLambda.java`
+  containing the following:
 
   ```java
-  package demo;
+  package org.example;
 
-  public class AwsLambdaFunctions {
-      public String alterPayload(String payload) {
-          System.out.println("We are in the Java AWS Lambda function!");
-          return payload.toLowerCase().replace('e', '3').replace('l', '1');
+  import com.amazonaws.services.lambda.runtime.Context;
+  import com.amazonaws.services.lambda.runtime.RequestHandler;
+
+  import java.util.Map;
+
+  public class HelloLambda implements RequestHandler<Map<String, Object>, String> {
+      @Override
+      public String handleRequest(Map<String, Object> input, Context context) {
+          return "Hello, " + input.get("name") + "!";
       }
   }
   ```
 
-- Create a `.zip` file containing the `.java` file.
+- In a terminal, enter `./gradlew jar`.
+  This will create the file `build/libs/AWSLambdaDemo-1.0-SNAPSHOT.jar`.
+
+- Browse https://aws.amazon.com.
+- Click the "Sign In to the Console" button in the upper-right.
+- If you do not see "Console Home" and a "Lambda" link ...
+  - Click the waffle button in the upper-left.
+  - Click "Compute" in the left nav.
+- Click "Lambda"
+- Click the "Create a function" button.
+- Select the "Author from scratch" radio button (selected by default).
+- Enter a value for "Function name".
+- Select a "Runtime" Java version such as "Java 21".
+- Select an "Architecture" such as "x86_64" (selected by default).
+- Click the "Create function" button at the bottom.
 - Click the "Upload from" dropdown and select ".zip or .jar file".
 - Click the "Upload" button.
 - Select the `.zip` file created above and click the "Upload" button.

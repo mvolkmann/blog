@@ -12,3 +12,5 @@ layout: topic-layout.njk
   separates parameters from code in a block?
 - Should the keywords of long keyword messages
   be on separate lines, indented from the receiver on the first line?
+- Should the last statement in a method or block be terminated with a period
+  even though it isn't required?

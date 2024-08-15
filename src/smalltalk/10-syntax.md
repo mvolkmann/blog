@@ -79,8 +79,8 @@ The return value is that of the final message.
 To instead cause the return value to be the receiver object,
 end the cascade with `; yourself`.
 
-The "chain" delimiter `::` can remove the need
-to surround the preceding expression with parentheses.
+The "chain" delimiter `::` is a Cuis-specific extension to Smalltalk-80 syntax.
+It can remove the need to surround the preceding expression with parentheses.
 It sends a message to the result of the previous message send.
 It is useful for sending a unary message to
 the result of a binary or keyword message OR
