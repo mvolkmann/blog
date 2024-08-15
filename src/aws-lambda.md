@@ -64,12 +64,22 @@ The steps to create a Java-based AWS Lambda function are:
 - Click the "Create function" button at the bottom.
 - Click the "Upload from" dropdown and select ".zip or .jar file".
 - Click the "Upload" button.
-- Select the `.zip` file created above and click the "Upload" button.
+- Select the `.jar` file created above and click the "Upload" button.
 - Click the "Save" button.
 - In the "Runtime settings" section, click the "Edit" button.
-- Change the "Handler" string to "AwsLambdaFunctions::alterPayload".
+- Change the "Handler" string to "org.example.HelloLambda::handleRequest".
 - Click the "Save" button.
 - Click the "Test" tab.
-- Enter an "Event name" like "test".
-- Click the "Save" tab.
-- Click the "Test" tab.
+- Enter an "Event name" like "demo".
+- In the "Event JSON" section, change the content to the following:
+
+  ```json
+  {
+    "name": "World"
+  }
+  ```
+
+- Click the "Save" button.
+- Click the "Test" button.
+- Expand "Details" in the light green section at the top.
+- Verify that output is "Hello, World!".
