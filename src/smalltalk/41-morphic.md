@@ -687,7 +687,7 @@ The `MorphicCanvas` method `fullDraw:`
 sends the message `#drawCurrentAndSubmorphs` to
 an instance of one of these `MorphicCanvas` subclasses.
 The `drawCurrentAndSubmorphs` method
-sends the message `#drawOn:` to the the current morph and
+sends the message `#drawOn:` to the current morph and
 sends the message `#fullDraw` to each submorph.
 
 The sequence of message sends that lead to the first call to `fullDraw:` is:
