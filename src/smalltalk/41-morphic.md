@@ -28,8 +28,13 @@ zoomable user interfaces (not tied to pixel density), and vector graphics.
 ## Morphs
 
 Any `Morph` be embedded in another.
-However, some morphs (such as `WorldMorph` and `LayoutMorph`)
-are more intended to have submorphs than others.
+These are referred to as "submorphs".
+However, not all morphs draw their submorphs.
+Examples that do include `WorldMorph` and `LayoutMorph`.
+
+TODO: How are the submorphs of a LayoutMorph drawn?
+TODO: I thought it would have a drawOn: method that sends #drawOn:
+TODO: to each submorph using the same canvas, but it doesn't.
 
 Each `Morph` holds a reference to its parent `Morph`
 in its instance variable `owner`.
@@ -445,9 +450,9 @@ Positive rotations are clockwise and negative rotations are counter-clockwise.
 
 ## Creating a Custom Morph
 
-Custom morphs are typically implemented as subclasses of the `PlacedMorph` class
-and implement the `drawOn:` method.
-They can be directly dragged to new locations.
+Custom morphs are typically implemented as subclasses of the
+`PlacedMorph` or `BoxedMorph` class and implement the `drawOn:` method.
+These can be directly dragged to new locations.
 Otherwise dragging requires opening the `Morph` halo and using the Move handle.
 
 The following example includes the instance variable `extent`
@@ -461,7 +466,14 @@ PlacedMorph subclass: #CanvasDemo
     category: 'Volkmann'
 ```
 
-The instance method `drawOn:` is passed a `VectorCanvas` object.
+In subclasses of `PlacedMorph`, the instance method `drawOn:`
+is passed a `VectorCanvas` object.
+In subclasses of `BoxedMorph`, the instance method `drawOn:`
+is passed a `HybridCanvas` object.
+
+To force a subclass of `BoxedMorph` to use a `VectorCanvas`,
+implement the `requiresVectorCanvas` method to return `true`.
+
 For example, the following draws a green rectangle with a red border
 and a red line from its upper-left to lower-right.
 It has a default width of 100, height of 100, and
