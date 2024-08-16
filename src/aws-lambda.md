@@ -4,6 +4,8 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+## Basics
+
 The steps to create a Java-based AWS Lambda function are:
 
 - In IDEA, create a new Java Gradle project
@@ -83,3 +85,257 @@ The steps to create a Java-based AWS Lambda function are:
 - Click the "Test" button.
 - Expand "Details" in the light green section at the top.
 - Verify that output is "Hello, World!".
+
+## Accessing DynamoDB in a Lambda Function
+
+The following code in the file `src/main/java/org/example/HelloLambda.java`
+implements a Lambda function that
+performs all the CRUD operations in a DynamoDB database.
+
+```java
+package org.example;
+
+import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.RequestHandler;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
+import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
+import software.amazon.awssdk.enhanced.dynamodb.DynamoDbTable;
+import software.amazon.awssdk.enhanced.dynamodb.Key;
+import software.amazon.awssdk.enhanced.dynamodb.TableSchema;
+import software.amazon.awssdk.services.dynamodb.model.DynamoDbException;
+
+import java.util.*;
+
+public class HelloLambda implements RequestHandler<Map<String, Object>, String> {
+    private static final Logger LOG = LoggerFactory.getLogger(HelloLambda.class);
+    private static final String tableName = "dogs";
+
+    private final DynamoDbTable<Dog> dogsTable;
+
+    public HelloLambda() {
+        DynamoDbClient client = DynamoDbClient.builder().build();
+        DynamoDbEnhancedClient enhancedClient =
+            DynamoDbEnhancedClient.builder().dynamoDbClient(client).build();
+        dogsTable =
+            enhancedClient.table(tableName, TableSchema.fromBean(Dog.class));
+    }
+
+    public String add(String name, String breed) throws DynamoDbException {
+        var pk = UUID.randomUUID().toString();
+        var dog = new Dog(pk, name, breed);
+        dogsTable.putItem(dog);
+        return pk;
+    }
+
+    public void delete(Dog dog) throws DynamoDbException {
+        Key key = Key
+            .builder()
+            .partitionValue(dog.getPk())
+            .sortValue(dog.getSk())
+            .build();
+        dogsTable.deleteItem(key);
+    }
+
+    public void deleteAll() throws DynamoDbException {
+        Iterator<Dog> dogs = this.getAllIterator();
+        while (dogs.hasNext()) {
+            Dog dog = dogs.next();
+            this.delete(dog);
+        }
+    }
+
+    public Dog get(String pk) throws DynamoDbException {
+        Key key = Key.builder().partitionValue(pk).sortValue("dog").build();
+        return dogsTable.getItem(key);
+    }
+
+    public Iterator<Dog> getAllIterator() {
+        return dogsTable.scan().items().iterator();
+    }
+
+    /**
+     * Returns a list of Dog objects sorted in ascending order on their names.
+     */
+    public List<Dog> getAllList() {
+        SortedSet<Dog> set = new TreeSet<>();
+        Iterator<Dog> iter = this.getAllIterator();
+        while (iter.hasNext()) {
+            set.add(iter.next());
+        }
+        return new ArrayList<>(set);
+    }
+
+    public void printAll() {
+        Iterator<Dog> dogs = this.getAllIterator();
+        while (dogs.hasNext()) {
+            Dog dog = dogs.next();
+            LOG.trace("printAll: dog = {}", dog);
+        }
+    }
+
+    public void rename(String pk, String newName) throws DynamoDbException {
+        Dog dog = get(pk);
+        dog.setName(newName);
+        dogsTable.putItem(dog);
+    }
+
+    @Override
+    public String handleRequest(Map<String, Object> input, Context context) {
+        deleteAll();
+        var pk = add("Comet", "Whippet");
+        add("Oscar", "German Shorthaired Pointer");
+        rename(pk, "Fireball");
+        printAll();
+        return "Hello, " + input.get("name") + "!";
+    }
+}
+```
+
+The following code in the file `src/main/java/org/example/Dog.java`
+defines the `Dog` class used above:
+
+```java
+package org.example;
+
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbSortKey;
+
+@DynamoDbBean
+public class Dog implements Comparable<Dog> {
+    private String pk;
+    private String sk;
+    private String name;
+    private String breed;
+
+    public Dog() {
+    }
+
+    public Dog(String pk, String name, String breed) {
+        this.pk = pk;
+        this.sk = "dog";
+        this.name = name;
+        this.breed = breed;
+    }
+
+    @Override
+    public int compareTo(Dog other) {
+        return this.name.compareTo(other.name);
+    }
+
+    public String getBreed() {
+        return this.breed;
+    }
+
+    public void setBreed(String breed) {
+        this.breed = breed;
+    }
+
+    @DynamoDbPartitionKey
+    public String getPk() {
+        return this.pk;
+    }
+
+    public void setPk(String pk) {
+        this.pk = pk;
+    }
+
+    @DynamoDbSortKey
+    public String getSk() {
+        return this.sk;
+    }
+
+    public void setSk(String sk) {
+        this.sk = sk;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Dog [pk=" + pk + ", sk=" + sk +
+            ", name=" + name + ", breed=" + breed + "]";
+    }
+}
+```
+
+The following `build.gradle.kts` file is used to create a `.zip` file
+that contains everything needed to deploy the Lambda function:
+
+```kotlin
+plugins {
+    id("java")
+}
+
+group = "org.example"
+version = "1.0-SNAPSHOT"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("ch.qos.logback:logback-classic:1.5.7")
+    implementation("com.amazonaws:aws-lambda-java-core:1.2.3")
+    implementation("com.amazonaws:aws-lambda-java-events:3.13.0")
+    implementation("org.slf4j:slf4j-api:2.0.16")
+    implementation("software.amazon.awssdk:dynamodb:2.27.6")
+    implementation("software.amazon.awssdk:dynamodb-enhanced:2.27.6")
+    implementation(platform("software.amazon.awssdk:bom:2.27.6"))
+    implementation("software.amazon.awssdk:auth:2.27.6")
+    implementation("software.amazon.awssdk:core:2.27.6")
+}
+
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = "org.example.HelloLambda"
+    }
+}
+
+tasks.register<Zip>("zip") {
+    into("lib") {
+        from(tasks.named("jar"))
+        from(configurations.runtimeClasspath)
+    }
+    into("resources") {
+        from("src/main/resources")
+    }
+}
+```
+
+The following `src/resources/logback.xml` file
+configures the use of SLF4J logging:
+
+```xml
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Set the root logger level -->
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+    </root>
+
+    <!-- Set logging level for specific packages -->
+    <logger name="org.example" level="TRACE" />
+</configuration>
+```
+
+To build the `.zip` file, enter `./gradlew zip`.
+
+To upload the `.zip` file, ...
+
+To test the Lambda function, ...
