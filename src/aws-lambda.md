@@ -4,6 +4,12 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+<style>
+    img {
+        border: 1px solid gray;
+    }
+</style>
+
 ## Basics
 
 The steps to create a Java-based AWS Lambda function are:
@@ -87,6 +93,16 @@ The steps to create a Java-based AWS Lambda function are:
 - Verify that output is "Hello, World!".
 
 ## Accessing DynamoDB in a Lambda Function
+
+Let's walk through the code and the steps to perform CRUD opertions
+in a DynamoDB index using a Lambda function.
+
+The index being used contains the following attributes:
+
+- `pk`: the partition key which holds a unique value for each document
+- `sk`: the sort key whose value is "dog" for every document
+- `name`: the name of a dog
+- `breed`: the breed of the dog
 
 The following code in the file `src/main/java/org/example/HelloLambda.java`
 implements a Lambda function that
@@ -336,6 +352,53 @@ configures the use of SLF4J logging:
 
 To build the `.zip` file, enter `./gradlew zip`.
 
-To upload the `.zip` file, ...
+To upload the `.zip` file:
 
-To test the Lambda function, ...
+Click the "Upload from" button and select ".zip or .jar file"
+in the following screenshot.
+
+<img alt="AWS Lambda code upload #1" style="width: 100%"
+  src="/blog/assets/aws-lambda-code-upload1.png?v={{pkg.version}}">
+
+Click the "Upload" button in the following screenshot.
+
+<img alt="AWS Lambda code upload #2" style="width: 60%"
+  src="/blog/assets/aws-lambda-code-upload2.png?v={{pkg.version}}">
+
+Select the generated `.zip` file and click the "Upload" button
+in the following screenshot.
+
+<img alt="AWS Lambda code upload #3" style="width: 90%"
+  src="/blog/assets/aws-lambda-code-upload3.png?v={{pkg.version}}">
+
+Click the "Save" button in the following screenshot.
+
+<img alt="AWS Lambda code upload #4" style="width: 60%"
+  src="/blog/assets/aws-lambda-code-upload4.png?v={{pkg.version}}">
+
+To test the Lambda function:
+
+Click the "Test" tab and click the "Test" button in the following screenshot.
+
+<img alt="AWS Lambda test #1" style="width: 100%"
+  src="/blog/assets/aws-lambda-test1.png?v={{pkg.version}}">
+
+Expand the "Details" section and examine the "Log output" section
+in the following screenshot.
+
+<img alt="AWS Lambda test #2" style="width: 100%"
+  src="/blog/assets/aws-lambda-test2.png?v={{pkg.version}}">
+
+To verify that the DynamoDB index was properly updated:
+
+- Go the AWS Console Home page.
+- Click the "DynamoDB" link.
+- Click the "Tables" link.
+- Click the link for the specific table that was updated.
+- Click the "Explore table items" button.
+- Verify the documents shown in the "Items returned" section.
+
+This will display something similar to the screenshot below.
+
+<img alt="AWS DynamoDB results" style="width: 100%"
+  src="/blog/assets/aws-dynamodb-results.png?v={{pkg.version}}">
