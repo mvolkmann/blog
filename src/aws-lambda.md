@@ -354,8 +354,9 @@ To build the `.zip` file, enter `./gradlew zip`.
 
 To upload the `.zip` file:
 
-Click the "Upload from" button and select ".zip or .jar file"
-in the following screenshot.
+In the following screenshot, verify that the correct region
+is selected in the dropdown in the upper right.
+Then click the "Upload from" button and select ".zip or .jar file".
 
 <img alt="AWS Lambda code upload #1" style="width: 100%"
   src="/blog/assets/aws-lambda-code-upload1.png?v={{pkg.version}}">
