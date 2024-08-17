@@ -28,3 +28,6 @@ layout: topic-layout.njk
 
 - Should there be a blank like after the line that declares local variables?
   Jon says "no", but he includes a blank line before it.
+
+- Should the closing `]` of a multiline block be on a new line?
+  Jon says "no". He places it at the end of the last statement.
