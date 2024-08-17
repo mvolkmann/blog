@@ -817,6 +817,8 @@ Selecting a modified class displays a list of modified methods
 in the second row.
 Selecting a modified method displays its implementation
 or a description of the change in the bottom row.
+To see the original and new code, click the "show..." button
+and select either "lineDiffs" or "wordDiffs".
 
 Right-click a change set, class, or method name to get
 a context menu of operations that can be performed on it.

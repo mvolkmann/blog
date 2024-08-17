@@ -270,7 +270,7 @@ To embed a `Morph` in another using code send the message `#addMorph:`.
 For example:
 
 ```smalltalk
-lm := LayoutMorph new.
+lm := LayoutMorph newRow.
 b1 := BoxedMorph new.
 b2 := EllipseMorph new.
 lm addMorph: b1.
@@ -322,9 +322,6 @@ An instance can be created with:
 
 - `LayoutMorph newColumn`
 - `LayoutMorph newRow`
-- `LayoutMorph new`
-
-  This calls `newRow` and sets the background color to `Color red alpha: 0.2`.
 
 For example, `myLayout := Layout newRow`.
 

@@ -15,3 +15,4 @@ layout: topic-layout.njk
   be on separate lines, indented from the receiver on the first line?
 - Should the last statement in a method or block be terminated with a period
   even though it isn't required?
+- Should there be a black like after the line that declares local variables?
