@@ -942,6 +942,27 @@ unless the package is deleted from the image and reinstalled.
 To uninstall a package, select the package name
 and click the "delete/merge" button.
 
+Warning:
+
+If a package is installed that define a subclass of a class
+that is defined in a package that has not been installed yet,
+the superclass will be changed to `ProtoObject`.
+No warning message about this will be displayed.
+
+For example, suppose the UI-Entry package is not installed.
+That defines the class `TextEntryMorph`.
+If a package is installed that defines the following class
+
+```smalltalk
+TextEntryMorph subclass: #CenteredTextEntryMorph
+```
+
+that will be changed to
+
+```smalltalk
+ProtoObject subclass: #CenteredTextEntryMorph
+```
+
 ## Process Browsers
 
 Process Browsers display a list of all the Smalltalk-related processes
