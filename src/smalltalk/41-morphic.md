@@ -132,9 +132,12 @@ To change the colors used by a `Morph` from its halo:
   but it does not have a border.
   TODO: What does "adoptWidgetsColor:" do?
 
-To explicitly set the size of a `Morph`, send it the `morphExtent:` message
-with a `Point` value that represents the new width and height.
-For example, `morph morphExtent: 200@100`.
+To explicitly set the size of a `Morph`, send it:
+
+- `#morphExtent:` with a `Point` value that represents the new width and height.
+  For example, `morph morphExtent: 200 @ 100`.
+- `#morphWidth:` with a `Number` value that represents the new width.
+- `#morphHeight:` with a `Number` value that represents the new height.
 
 See my Morphic demos in package `Volkmann`
 in the classes `VButtonDemo` and `VGreet`.
