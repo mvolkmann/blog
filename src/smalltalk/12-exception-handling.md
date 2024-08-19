@@ -13,7 +13,7 @@ message `#signal:` with a `String` argument description.
 
 Exceptions that are thrown by code in a block can be caught and handled.
 Unhandled exceptions result in a Debug window being opened
-that contains a stack trace.
+that contains a stack trace, also referred to as a "walkback".
 
 Smalltalk seems to use the words "exception" and "error" interchangably.
 

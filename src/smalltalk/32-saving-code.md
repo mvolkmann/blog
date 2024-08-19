@@ -258,6 +258,31 @@ It is recommended to save packages in GitHub.
 For details on doing this, open the World menu and
 select Help...Using GitHub to host Cuis packages.
 
+## Pre and Post Install Actions
+
+To register code to be executed before and/or after
+a given package, such as "Foo" is installed:
+
+- Create a subclass of `CodePackage` named `FooPackage`.
+- Create the class methods `prePackageInstall` and/or `postPackageInstall`.
+- Add the code to be execute in those methods.
+- Save the changes to the package.
+- Uninstall the package by opening an "Installed Packages" window,
+  selecting the package, and clicking the "Delete/Merge" button.
+- Restart the VM.
+- Open a Workspace.
+- Enter `Feature require: 'Foo'` and "Do it".
+
+For example, the package "TodoApp" requires that
+the font "KurintoSans" be installed.
+The following `prePackageInstall` class method does this:
+
+```smalltalk
+prePackageInstall
+    TrueTypeFontFamily readAllTrueTypeFontsIn:
+        (DirectoryEntry trueTypeFontsDirectory / 'KurintoSans')
+```
+
 ## Restoring Changes After Crash
 
 If the VM crashes before changes are saved by a fileOut or saving in a package,
