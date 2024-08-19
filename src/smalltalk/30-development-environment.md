@@ -956,10 +956,13 @@ and click the "delete/merge" button.
 
 Warning:
 
-If a package is installed that define a subclass of a class
+If a package is installed that defines a subclass of a class
 that is defined in a package that has not been installed yet,
 the superclass will be changed to `ProtoObject`.
-No warning message about this will be displayed.
+The following message will appear in the Transcript
+as a warning that this has happened:
+"Attempt to create {subclass-name} as a subclass of nil.
+Possibly a class is being loaded before its superclass."
 
 For example, suppose the UI-Entry package is not installed.
 That defines the class `TextEntryMorph`.
