@@ -40,6 +40,18 @@ To refresh all the windows after code changes that affect them
 open the World menu and select "Windows...Restore all Windows".
 This does not update windows to use a newly selected theme.
 
+## Workspace Windows
+
+Workspaces provide a place for experimenting with code.
+
+Pressing cmd-s in Workspace prompts for
+a file name where the contents will be saved.
+The file will be created in the `Cuis-Smalltalk-Dev-UserFiles` directory.
+This file can be shared with others.
+To load the file contents into a new Workspace in a future session,
+open a "File List" window, select the file, right-click the file,
+and select "workspace with contents".
+
 ## Transcript Windows
 
 Transcript windows are not scrollable,
