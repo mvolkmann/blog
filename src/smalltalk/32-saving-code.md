@@ -260,8 +260,22 @@ select Help...Using GitHub to host Cuis packages.
 
 ## Pre and Post Install Actions
 
-To register code to be executed before and/or after
-a given package, such as "Foo" is installed:
+To register code to be executed after a package in installed,
+add the class method `initialize` to any classes in the package.
+Each of those will be executed after the package is installed.
+
+For example, the class `Todo` in the the package "TodoApp" requires that
+the font "KurintoSans" be installed.
+The following class method `initialize` does that:
+
+```smalltalk
+initialize
+    TrueTypeFontFamily readAllTrueTypeFontsIn:
+        (DirectoryEntry trueTypeFontsDirectory / 'KurintoSans')
+```
+
+Another option that registers code to be executed before and/or after
+a given package (such as "Foo") is installed is the following steps:
 
 - Create a subclass of `CodePackage` named `FooPackage`.
 - Create the class methods `prePackageInstall` and/or `postPackageInstall`.

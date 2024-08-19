@@ -108,7 +108,7 @@ See https://www.youtube.com/watch?v=b3oGOMCjKU8&list=PLu8vLCSA-4hklsvT9W6ruintbd
 
 The steps to create a double-clickable macOS app are:
 
-- In the Applications directory, create the directory structure
+- In the `/Applications` directory, create the directory structure
   `{app-name}.app/Contents/MacOS`.
 - To see what is inside this directory in the Finder,
   right-click the {app-name}.app file and select "Show Package Contents".
@@ -116,13 +116,6 @@ The steps to create a double-clickable macOS app are:
   One can be found in Applications/Squeak.app/Contents/MacOS/Squeak.
 - Copy a Squeak image that implements the app into this directory
   with the name `{image-name}.image`.
-- Add an app icon.
-  Copy an image onto the clipboard.
-  One source for app icons is https://www.macosicongallery.com.
-  In the Finder, right-click the app in the Applications directory
-  and select "Get Info".
-  Click the app icon in the upper-left of the dialog that appears
-  and press cmd-v to paste the new icon.
 - Create the following shell script in this directory
   with the file name `{app-name}`:
 
@@ -136,3 +129,10 @@ The steps to create a double-clickable macOS app are:
 - Make the shell script executable by running `chmod a+x {app-name}`.
 - Create the file `PkgInfo` into this directory
   containing "APPL????" with no newline character.
+- Add an app icon.
+  Copy an image onto the clipboard.
+  One source for app icons is https://www.macosicongallery.com.
+  In the Finder, right-click the app in the Applications directory
+  and select "Get Info".
+  Click the app icon in the upper-left of the dialog that appears
+  and press cmd-v to paste the new icon.
