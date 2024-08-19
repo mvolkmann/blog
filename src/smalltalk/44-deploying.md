@@ -102,6 +102,8 @@ For more detail see the `SystemDictionary` class
 
 ## Building a Mac App
 
+See https://www.youtube.com/watch?v=T95k9m5zcX4&list=PLu8vLCSA-4hklsvT9W6ruintbdx_K0DYW&index=4
+
 See https://www.youtube.com/watch?v=b3oGOMCjKU8&list=PLu8vLCSA-4hklsvT9W6ruintbdx_K0DYW&index=3.
 
 The steps to create a double-clickable macOS app are:
