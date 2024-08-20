@@ -1041,3 +1041,37 @@ Enter the "exit" command to exit this window.
 
 <img alt="Cuis Emergency Evaluator" style="width: 30%"
   src="/blog/assets/cuis-emergency-evaluator.png?v={{pkg.version}}">
+
+## Menu Item Discovery
+
+To discover the message that is sent when a particular menu item is selected:
+
+- Open the menu.
+- cmd-click the menu to open its halo.
+- Click the orange Explore handle on the left side of the halo.
+- In the newly opened Explore window, expand the "root" item.
+- Expand the "submorphs" item to see all the `MenuItemMorph` instances.
+- Expand the `MenuItemMorph` of interest.
+- Note the values for `target` and `selector`.
+
+The target can be a class or an instance of a class,
+so the selector can refer to a class or instance method.
+The method may be in a superclass of the target class.
+
+For example, let's discover what happens when Changes ... Install New Updates
+is selected in the World menu.
+
+- Open the World menu.
+- cmd-click the World menu.
+- Click the orange explore handle on the left of the halo.
+- In the Explore window, expand the "root" item.
+- Expand the "submorphs" item to see all the `MenuItemMorph` instances.
+- Expand the "Changes" `MenuItemMorph`.
+- Expand the "subMenu" item.
+- Expand its "submorphs" item.
+- Expand the "Install New Updates" `MenuItemMorph`.
+- Note that the value for "target" is `ChangeSet`
+  and the value for "selector" is "#installNewUpdates".
+- Open a Browser window.
+- Search for the class `ChangeSet`.
+- Select the class method `installNewUpdates`.

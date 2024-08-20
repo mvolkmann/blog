@@ -65,8 +65,10 @@ layout: topic-layout.njk
 - Is there a library of collection types for Smalltalk
   that support structural sharing for immutability?
 - Is there a way to revert changes to more than one method at a time?
-- How can you determine the message that is sent when a menu item is selected?
 - Is there any way to add functionality to a morph
   without creating a new subclass? For example,
   I created a subclass of TextEntryMorph just so I could listen
   for presses of the escape key. Was that really necessary?
+- Describe what it means for a morph to be "pluggable".
+  I think it means that the morph is a subclass of `PluggableMorph`
+  and can be configured through message sends to change its behavior.
