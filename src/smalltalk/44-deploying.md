@@ -148,7 +148,7 @@ and results in smaller images.
 To hide the taskbar at the bottom of the World:
 
 ```smalltalk
-UISupervisor runningWorld showTaskbar.
+UISupervisor runningWorld hideTaskbar.
 ```
 
 To disable the World menu so clicking on the World background
