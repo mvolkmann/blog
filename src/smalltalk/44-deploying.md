@@ -136,3 +136,22 @@ The steps to create a double-clickable macOS app are:
   and select "Get Info".
   Click the app icon in the upper-left of the dialog that appears
   and press cmd-v to paste the new icon.
+
+## Preparing User Images
+
+To create images that define applications to be used by non-developers,
+it is a good idea to display and remove developer features.
+This the confusion that can arise when users
+accidentally open developer features
+and results in smaller images.
+
+To hide the taskbar at the bottom of the World:
+
+```smalltalk
+UISupervisor runningWorld showTaskbar.
+```
+
+To disable the World menu so clicking on the World background
+no longer opens it:
+
+TODO: How is this done?
