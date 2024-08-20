@@ -66,9 +66,7 @@ layout: topic-layout.njk
   that support structural sharing for immutability?
 - Is there a way to revert changes to more than one method at a time?
 - How can you determine the message that is sent when a menu item is selected?
-- When I see a morph in the bottom bar, click it, and do not
-  see the morph in the world, how can I close it?
-- Is there anyway to add functionality to a morph
+- Is there any way to add functionality to a morph
   without creating a new subclass? For example,
   I created a subclass of TextEntryMorph just so I could listen
   for presses of the escape key. Was that really necessary?

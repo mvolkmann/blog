@@ -67,6 +67,11 @@ This opens a new Workspace whose content is
 all the lines in the Transcript window.
 All Workspace windows are scrollable.
 
+Transcript windows do not support copy and paste, but Workpace windows do.
+To copy text in a Transcript window, right-click in the Transcript window
+and select "Workspace with Contents".
+Then select text in the new Workspace window with the mouse and press cmd-c.
+
 ## Focus
 
 By default, focus automatically goes to the `Morph` under the mouse cursor.
@@ -1005,6 +1010,26 @@ block forkAt: Processor userBackgroundPriority named: 'hello'.
 
 The name of the process will be "hello".
 To stop it, right-click the process, select it and press cmd-t (terminate).
+
+## Taskbar
+
+A `TaskbarMorph` is displayed across the bottom of the World.
+This displays the current time with a 24-hour clock
+and a thumbnail of each `Morph` currently displayed in the World.
+
+To bring one of the `Morphs` to the front, hover over its thumbnail.
+A tooltip will appear above the thumbnail that displays
+the window title or the class of the associated `Morph`.
+
+Occassionally the `Morph` for a thumbnail will not be visible.
+To delete it:
+
+- Repeatedly cmd-click on the thumbnail until its halo appears (3 times).
+- Click the blue menu handle and select debug... explore morph.
+- Expand the "root" item.
+- Select the "model" instance variable.
+- In the bottom pane, enter `self delete` and "Do It".
+- Close the Explorer window.
 
 ## Emergency Evaluator
 
