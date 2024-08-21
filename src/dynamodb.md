@@ -37,7 +37,7 @@ This is best when traffic is predictable.
 
 ## Concepts
 
-- Table
+- Index
 
   This is like a table in a relational database.
   It is a collection of items.
