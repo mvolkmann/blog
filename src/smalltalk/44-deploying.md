@@ -155,3 +155,13 @@ To disable the World menu so clicking on the World background
 no longer opens it:
 
 TODO: How is this done?
+
+Perhaps the way to prevent MessageNotUnderstood and other errors
+from displaying a debugger window is to execute the following:
+
+```smalltalk
+SystemDictionary removeKey: #Debugger
+```
+
+The `SystemDictionary` class method `isDevelopmentEnvironmentPresent`
+checks for that key in the `SystemDictionary`.

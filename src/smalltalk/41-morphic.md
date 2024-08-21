@@ -315,10 +315,6 @@ based on the following instance properties:
   a value one pushes to the right/bottom,
   and a value of 0.5 centers.
 
-- `layoutSpec`: an optional `LayoutSpec` object in a submorph of a `LayoutMorph`
-  that specifies how to layout the submorph within its owner `LayoutMorph`.
-  This is ignored if the owner is not a `LayoutMorph`.
-
 Practically any layout can be achieved by nesting instances of this class.
 
 An instance can be created with:
@@ -362,6 +358,17 @@ sends `#color:` with the value `(Color red alpha: 0.2)`
 which replaces the value set in the `initialize` method.
 
 ### Submorphs
+
+The `addMorph:` method defined in the `Morph` class
+adds a `Morph` as a submorph of another.
+For example, `ownerMorph addMorph: submorph`.
+
+The `Morph` subclass `PlacedMorph` adds the instance methods
+`layoutSpec` and `layoutSpec:` that get and set a `LayoutSpec` object
+specific to the `PlacedMorph`.
+The `LayoutSpec` specifies how to layout the submorph
+within its owner `LayoutMorph`.
+It is ignored if the owner is not a `LayoutMorph`.
 
 The submorphs added to a `LayoutMorph` can each specify
 their alignment in the opposite direction of the `LayoutMorph`,
