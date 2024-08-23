@@ -85,6 +85,33 @@ Since `True` and `False` are subclasses, they also have these methods.
 The `True` and `False` classes implement some of the methods described above,
 but they do not add any methods.
 
+Short-circuiting only works if the argument value is a block.
+This can be demonstrated by creating the class `ShortCircuitDemo`
+with the following instance methods:
+
+```smalltalk
+isHot
+    'isHot entered' print.
+    ^ true
+
+isNight
+    'isNight entered' print.
+    ^ true
+
+initialize
+    (self isHot or: [self isNight])
+        ifTrue: ['was true' print]
+        ifFalse: ['was false' print]
+```
+
+To test this, enter `ShortCircuitDemo new` and "Do it".
+It will print "isHot entered" and "was true" in the Transcript window.
+It will not print "isNight entered" due to short-circuiting.
+However, if the square brackets around "self isNight" are removed,
+it will print "isHot entered", "isNight entered", and "was true".
+This happens because "self isNight" will be
+evaluated before the "or:" method is evaluated.
+
 ## Number
 
 The following list depicts the class hierarchy for various kinds of numbers:
