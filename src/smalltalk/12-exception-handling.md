@@ -104,6 +104,35 @@ For example:
 ]
 ```
 
+## Custom Error Handling
+
+When creating an image for an app that non-developers will use,
+it is desirable to prevent Debug windows from appearing
+when an unhandled error occurs.
+One way to do this is to modify the `defaultAction` method
+in the `UnhandledError' class.
+
+The default implementation of this method is the following:
+
+```smalltalk
+defaultAction
+    Smalltalk isDevelopmentEnvironmentPresent
+        ifTrue: [ self devDefaultAction ]
+        ifFalse: [ self standaloneAppDefaultAction ]"
+```
+
+This can be changed to the following:
+
+```smalltalk
+defaultAction
+    | message receiverName selector |
+    receiverName := self exception receiver class name.
+    selector := self exception message selector.
+    message := '{1}: receiver {2}, selector {3}' format: {self description. receiverName. selector }.
+    self explore.
+    AlertDialog message: message.
+```
+
 ## Context
 
 TODO: Supposedly the value of `thisContext` is captured in exeception objects,
