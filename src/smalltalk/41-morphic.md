@@ -667,10 +667,6 @@ keyStroke: aKeyboardEvent
 
 Also see the `isArrowRight`, `isArrowDown`, and `isArrowLeft` methods.
 
-There is currently a bug in `Character codePoint:` method related to arrow keys.
-See <a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Dev/issues/292"
-target="_blank">issue 292</a>.
-
 ## MorphicCanvas
 
 The `MorphicCanvas` class has many subclasses including
@@ -747,7 +743,7 @@ The list may include the following:
 - DejaVu Sans (default)
 - JetBrains Mono NL
 - Kiwi Maru Light
-- Kurinto Sans
+- Kurinto Sans (defines many Unicode characters such as the wastebasket)
 - Learning Curve
 - Noto Sans EqyptHiero
 - Parc Place Legacy

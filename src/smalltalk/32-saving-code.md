@@ -264,8 +264,9 @@ To register code to be executed after a package in installed,
 add the class method `initialize` to any classes in the package.
 Each of those will be executed after the package is installed.
 
-For example, the class `Todo` in the the package "TodoApp" requires that
-the font "KurintoSans" be installed.
+For example, the class `Todo` in the the package "TodoApp"
+requires that the font "KurintoSans" be installed
+so it can display the wastebasket Unicode character.
 The following class method `initialize` does that:
 
 ```smalltalk
