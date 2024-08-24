@@ -75,7 +75,12 @@ Then select text in the new Workspace window with the mouse and press cmd-c.
 ## Focus
 
 By default, focus automatically goes to the `Morph` under the mouse cursor.
-To change this, open the World menu and select Preferences ... Focus when Click.
+This makes it unnecessary to click on a Morph
+in order to begin typing text into one of its inputs.
+Just move the mouse cursor over it and start typing.
+
+To change the focus behavior, open the World menu
+and select Preferences ... Focus when Click.
 To restore the default behavior, open the World menu and
 select Preferences ... Focus follows Mouse.
 
