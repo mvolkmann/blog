@@ -291,8 +291,11 @@ based on the following instance properties:
 
 - `separation`: a `Measure`
 
-  This adds space between the submorphs and the each other.
-  It also adds space between the submorphs and the edges of the `LayoutMorph`.
+  This adds space between the submorphs.
+  It also adds space between the outer submorphs
+  and the edges of the `LayoutMorph`.
+  To avoid adding space the outer space, send the message `#useEdgeSpace:`
+  with the value `false` to the `LayoutMorph`.
 
   By default, there is no separation.
   To add separation, send the `separation:` message.
