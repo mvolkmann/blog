@@ -418,12 +418,12 @@ Juan Vuletich answered with the following:
 > other classes, and as they are about the morph they are dealing with,
 > it just seemed right to me.
 >
-> Others, like `#morphPositionInWorld` and such, were created when I
-> converted the Morphic framework from Squeak's style global coordinates
-> to Morph local coordinates. It was a way to separate the two semantics
-> while they were both there, during that redesign.
-> So, they are no longer needed. I just pushed a few updates to rename them,
-> and to deprecate the old implementations. They will be removed later.
+> Others including `morphExtentInOwner`, `#morphPositionInWorld`, and
+> `morphPositionInWorld:` were created when I converted the Morphic framework
+> from Squeak's style global coordinates to Morph local coordinates.
+> It was a way to separate the two semantics while they were both there,
+> during that redesign. So they are no longer needed. I pushed updates to rename
+> them and to deprecate the old implementations. They will be removed later.
 >
 > Finally, we have others like `#morphPosition`, `#morphExtent`, and such.
 > The problem with them is that `#position` and `#position:` are part of
