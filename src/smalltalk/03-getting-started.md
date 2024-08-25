@@ -188,6 +188,8 @@ Close them and open new windows to get the intended styling.
 
 To customize the current theme, open the World menu
 and select Preferences...Theme Customizer...
+This only supports customizing a subset of the theme aspects.
+
 Alternatively you can:
 
 - Open a System Browser.
@@ -202,6 +204,33 @@ For example, the `PluggableButtonMorph` method `drawEmbossedLabelOn`
 uses `Theme current buttonLabel`.
 This method could be modified to enable
 specifying a different label color for specific buttons.
+
+To create a custom theme, define a new class
+that a subclass of `Theme` or an existing subclass.
+Then implement methods that override those in the subclass
+to return your preferred values.
+For example:
+
+```smalltalk
+Theme subclass: #VolkmannTheme
+    instanceVariableNames: ''
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'Volkmann'
+
+embossedButtonLabels
+    ^ false
+```
+
+Browse the instance side of the `Theme` class to see
+all the methods that can be overridden to return a custom value.
+
+The subclass `BrightColorTheme` does not override any of the
+methods in the `Theme` class and just uses its methods.
+
+After making changes to the methods of the current theme,
+to cause them to take effect, open the World menu,
+select Preferences ... Themes..., and select the theme again.
 
 ### Morphs
 
