@@ -406,9 +406,40 @@ of a `Morph`:
 - Modify the numbers in the dialog that appears.
 - Click the "Accept" to save the changes or the "Cancel" button to discard them.
 
-It's unclear why a small subset of `Morph` methods begin with `morph`.
-Examples include `morphExtent`, `morphExtentInOwner`, `morphId`,
-`morphLocalBoundsForError`, `morphPosition`, and `morphPositionInWorld`.
+Why do a small subset of `Morph` instance methods begin with `morph`?
+These include `morphExtent`, `morphExtentInOwner`, `morphId`,
+`morphLocalBoundsForError`, `morphPosition`, `morphPosition:`,
+`morphPositionInWorld`, and `morphPositionInWorld:`.
+
+Juan Vuletich answered with the following:
+
+> There are, perhaps, 3 different groups of selectors. For very few, like
+> `#morphId`, `#morphBoundsAfterDraw`, and maybe others are used in
+> other classes, and as they are about the morph they are dealing with,
+> it just seemed right to me.
+>
+> Others, like `#morphPositionInWorld` and such, were created when I
+> converted the Morphic framework from Squeak's style global coordinates
+> to Morph local coordinates. It was a way to separate the two semantics
+> while they were both there, during that redesign.
+> So, they are no longer needed. I just pushed a few updates to rename them,
+> and to deprecate the old implementations. They will be removed later.
+>
+> Finally, we have others like `#morphPosition`, `#morphExtent`, and such.
+> The problem with them is that `#position` and `#position:` are part of
+> the `Stream` protocol. `#extent` and `#extent:` are part of the
+> `Form` and `Rectangle` protocol. This looks like polymorphism, but it isn't.
+> In no way can a `Morph` and a `Stream` be used in the same code.
+> The same is true for a `Morph` and a `Form`, or a `Morph` and a `Rectangle`.
+> In this cases, when using Senders and Implementors in such messages,
+> you need to keep in your mind the fact that they form two distinct subsets
+> of senders and implementors that will never intersect.
+> The lists of senders and implementors become twice as large for no reason,
+> and working in that code is much harder than needed.
+>
+> Yes, I really dislike false polymorphism. So `#morphPosition`, `#morphExtent`,
+> and a few others have the "morph" prefix only so they are never
+> confused with Stream, Form and Rectangle protocol.
 
 To change the border color or color of a `Morph`:
 
