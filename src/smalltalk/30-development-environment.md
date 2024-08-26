@@ -43,6 +43,7 @@ This does not update windows to use a newly selected theme.
 ## Workspace Windows
 
 Workspaces provide a place for experimenting with code.
+Pharo Smalltalk calls these "Playground".
 
 Pressing cmd-s in Workspace prompts for
 a file name where the contents will be saved.
