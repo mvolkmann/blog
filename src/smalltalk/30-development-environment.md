@@ -54,6 +54,11 @@ and select "workspace with contents".
 
 ## Transcript Windows
 
+Transcript windows display output from methods.
+One way to send output to a Transcript is `Transcript show: {message}`.
+Another, more compact way is to send the `#print` message to any object.
+To clear the Transcript, send the `#clear` message to the `Transcript` class.
+
 Transcript windows are not scrollable,
 so they only display a limited number of lines.
 This is intentional for performance reasons.
