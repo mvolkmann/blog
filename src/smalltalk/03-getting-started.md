@@ -309,7 +309,8 @@ For example, enter the following and press cmd-p to get the output `6`:
 <img alt="Cuis Workspace window" style="width: 60%"
   src="/blog/assets/cuis-workspace.png?v={{pkg.version}}">
 
-The `print` output from this Workspace is shown in the Transcript window below.
+The "Print It" output from this Workspace
+is shown in the Transcript window below.
 
 You will use "Do it" and "Print it" often, so memorize their keyboard shortcuts.
 
@@ -349,6 +350,15 @@ because every object has a string representation.
 Another way to write to the Transcript is to
 send the `#print` message to an object.
 For example, `'Hello World!' print`.
+
+The `print` method does the following:
+
+```smalltalk
+Transcript show: self printString; newLine
+```
+
+This is unique to Cuis Smalltalk.
+The `Object` class in Squeak and Pharo does not have a `print` method.
 
 It is common in Smalltalk documentation that describes specific messages
 to precede their name with the `#`,
