@@ -13,6 +13,8 @@ A class is defined by sending the message
 `#subclass:instanceVariableNames:classVariableNames:poolDictionaries:category:`
 to a superclass which can be `Object` or any other class.
 This message is handled by an instance method of the class `Class`.
+Other Smalltalk implementations, such as Squeak and Pharo,
+use different methods to define a new class.
 
 The `subclass:` keyword takes a symbol.
 The remaining keywords all take strings.
