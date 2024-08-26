@@ -14,6 +14,10 @@ Their execution is deferred until they are sent a message like `value`.
 The value of the block is the value of its last expression.
 If a block uses the caret operator (`^`) to return a value,
 the containing method will exit and return that value.
+This is referred to as a "non-local return".
+Few programming languages support this.
+Languages that do include Common Lisp, Prolog,
+Ruby, Scala, Scheme, and Smalltalk.
 
 Blocks take zero or more positional arguments,
 which is something methods cannot do.
