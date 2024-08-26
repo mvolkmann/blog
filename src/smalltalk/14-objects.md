@@ -94,6 +94,38 @@ set := #(1 2 3 1) asSet.
 set printString print
 ```
 
+The following table describes some of the instance methods
+defined in the `ProtoObject` class.
+
+| Method            | Description                                                         |
+| ----------------- | ------------------------------------------------------------------- |
+| `ifNil:`          | never evaluates the argument block                                  |
+| `ifNil:ifNotNil:` | always evaluates the `ifNotNil:` block                              |
+| `ifNotNil:`       | always evalutes the argument block                                  |
+| `ifNotNil:ifNil:` | always evaluates the `ifNotNil:` block and never the `ifNil:` block |
+| `isNil`           | always answers `false`                                              |
+| `notNil`          | always answers `true`                                               |
+
+The following table describes some of the instance methods
+defined in the `Object` class.
+
+| Method                | Description                                                                                |
+| --------------------- | ------------------------------------------------------------------------------------------ |
+| `addDependent:`       | adds an object to be notified when this object is changed                                  |
+| `asJsonString`        | answsers `String` JSON representation from `jsonWriteOn: method                            |
+| `asString`            | answsers `String` representation from `printString` method                                 |
+| `assert:`             | signals `AssertionFailure` if block argument evaluates to `false`                          |
+| `assert:description:` | same as `assert:`, but with a custom message                                               |
+| `breakDependents`     | removes all objects to be notified when this object is changed                             |
+| `changed`             | informs all dependents that an unspecified aspect of the object has changed                |
+| `changed:`            | informs all dependents that a specified aspect of the object has changed                   |
+| `class`               | answers the class of this object                                                           |
+| `className`           | answers the class name of this object as a `String`                                        |
+| `confirm:`            | renders dialog that asks specified question with options "Yes" and "No"; returns `Boolean` |
+| `confirm:orCancel:`   | similar to `confirm:`, but adds "Cancel" option and evalutes `orCancel:` block if selected |
+| `removeDependent:`    | removes an object to be notified when this object is changed                               |
+| ``                    |                                                                                            |
+
 ## Counting Objects
 
 To determine the number of objects that currently exist
