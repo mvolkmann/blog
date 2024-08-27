@@ -126,6 +126,10 @@ defined in the `Object` class.
 | `removeDependent:`    | removes an object to be notified when this object is changed                               |
 | ``                    |                                                                                            |
 
+TODO: Add more methods to the table above?
+
+TODO: Show examples of using `confirm:` and `confirm:orCancel:`.
+
 ## Counting Objects
 
 To determine the number of objects that currently exist
