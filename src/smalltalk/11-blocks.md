@@ -149,6 +149,9 @@ open the World menu and select Open ... Process Browser.
 To terminate a process, select it and press cmd-t
 (or right-click and select "Terminate").
 
+To give a name to the process returned by `newProcess` or `newProcessWith:`,
+send the message `#name:` to it with a `String` argument.
+
 The following code demonstrates using each of the methods described above.
 
 ```smalltalk
@@ -164,16 +167,11 @@ The following code demonstrates using each of the methods described above.
 
 process := [ :a :b |
     (Delay forSeconds: 4) wait.
-    (a + b) print.
+    (a + b) print. "prints 5"
 ] newProcessWith: #(2 3).
 process name: 'addition'.
 process resume.
-
-TODO: Add more example code.
 ```
-
-To give a name to the process returned by `newProcess` or `newProcessWith:`,
-send the message `#name:` to it with a `String` argument.
 
 ## Partial Application
 
