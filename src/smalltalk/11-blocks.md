@@ -115,6 +115,9 @@ The Squeak VM is single-threaded, like JavaScript.
 Processes do not run in separate threads
 and instead use cooperative multitasking.
 
+Some Smalltalk implementations also support execute code in a new thread.
+The Squeak VM does not support this.
+
 Processes yield control to other processes by
 sending certain messages to the `Delay`, performing I/O,
 or performing another blocking operation.
