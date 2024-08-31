@@ -111,6 +111,21 @@ fact value: fact value: 5 "gives 120"
 
 ## Running in another Process
 
+The Squeak VM is single-threaded, like JavaScript.
+Processes do not run in separate threads
+and instead use cooperative multitasking.
+
+Processes yield control to other processes by
+sending certain messages to the `Delay`, performing I/O,
+or performing another blocking operation.
+
+The order in which processes execute is affected by their priority.
+The default priority is 40, the lowest is 10, and the highest is 80.
+The `priority:` method is used to set the priority of a `Process`
+to a value other than the default.
+This method ensures that the value actually used is
+in the range of the lowest to the highest allowed.
+
 The following table summaries the instance methods in the `BlockClosure` class
 that execute a block in a new process.
 
@@ -127,7 +142,38 @@ that execute a block in a new process.
 All the methods above must be used with a block that takes no arguments
 except `newProcessWith:`.
 
-TODO: Add example code.
+When a new process is not given a name, it defaults to "unnamed".
+
+To see long-running processes and optionally terminate them,
+open the World menu and select Open ... Process Browser.
+To terminate a process, select it and press cmd-t
+(or right-click and select "Terminate").
+
+The following code demonstrates using each of the methods described above.
+
+```smalltalk
+"This prints one, three, and two."
+'one' print.
+[ 'two' print ] fork.
+'three' print.
+
+"This prints one, two, and three."
+'one' print.
+[ 'two' print ] forkAndWait.
+'three' print.
+
+process := [ :a :b |
+    (Delay forSeconds: 4) wait.
+    (a + b) print.
+] newProcessWith: #(2 3).
+process name: 'addition'.
+process resume.
+
+TODO: Add more example code.
+```
+
+To give a name to the process returned by `newProcess` or `newProcessWith:`,
+send the message `#name:` to it with a `String` argument.
 
 ## Partial Application
 
