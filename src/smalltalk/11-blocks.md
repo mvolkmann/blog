@@ -109,6 +109,26 @@ fact := [:block :n |
 fact value: fact value: 5 "gives 120"
 ```
 
+## Running in another Process
+
+The following table summaries the instance methods in the `BlockClosure` class
+that execute a block in a new process.
+
+| Method            | Description                                                                          |
+| ----------------- | ------------------------------------------------------------------------------------ |
+| `fork`            | creates new process that executes block at default priority                          |
+| `forkNamed:`      | creates new process with given name that executes block at default priority          |
+| `forkAt:`         | creates new process that executes block at given priority                            |
+| `forkAt:named:`   | creates new process with given name that executes block at given priority            |
+| `forkAndWait`     | creates new process that executes block and blocks current process until it finishes |
+| `newProcess`      | creates new process that will execute block when `#resume` message is sent to it     |
+| `newProcessWith:` | creates new process that will execute block with arguments in array argument         |
+
+All the methods above must be used with a block that takes no arguments
+except `newProcessWith:`.
+
+TODO: Add example code.
+
 ## Partial Application
 
 Partial application is the ability to pass a subset

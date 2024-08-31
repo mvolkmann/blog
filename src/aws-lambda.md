@@ -64,7 +64,7 @@ The steps to create a Java-based AWS Lambda function are:
   - Click the waffle button in the upper-left.
   - Click "Compute" in the left nav.
 - Click "Lambda"
-- Click the "Create a function" button.
+- Click the "Create function" button.
 - Select the "Author from scratch" radio button (selected by default).
 - Enter a value for "Function name".
 - Select a "Runtime" Java version such as "Java 21".
