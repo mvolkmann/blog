@@ -113,3 +113,9 @@ available to all classes.
 The `Behavior` class is a superclass of all classes.
 It defines the instance method `>>` which takes a `Symbol` selector and
 returns the `CompiledMethod` instance that handles the selector.
+
+## Finding Methods
+
+To find methods that contain given text,
+enter the text in Workspace, select it, right-click,
+and select "Method Source with it".

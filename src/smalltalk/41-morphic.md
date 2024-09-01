@@ -73,7 +73,7 @@ To install it:
   - UI-Packager
   - UI-Shapes
 
-- The UI-Compoents package installed above
+- The UI-Components package installed above
   installs the following other packages:
 
   - UI-Click-Select
@@ -383,6 +383,48 @@ top-aligned in a horizontal `LayoutMorph`:
 
 ```smalltalk
 submorph layoutSpec offAxisEdgeWeight: 0
+```
+
+The following code demonstrates layout of submorphs.
+
+<img alt="Cuis Morphic layout" style="width: 40%"
+  src="/blog/assets/cuis-morphic-layout.png?v={{pkg.version}}">
+
+```smalltalk
+| column container item row |
+
+column := LayoutMorph newColumn.
+column layoutSpec fixedWidth: 300; fixedHeight: 200.
+column borderColor: Color green; borderWidth: 5.
+
+row := LayoutMorph newRow.
+row borderColor: Color yellow; borderWidth: 5.
+row addMorph: BoxedMorph new.
+row addMorph: BoxedMorph new.
+"By default, the submorphs will be
+pushed to the left and centered vertically."
+"Center the submorphs horizontally."
+row axisEdgeWeight: 0.5.
+"Move all the submorphs to the top of the row."
+row submorphsDo: [ :submorph | submorph layoutSpec offAxisEdgeWeight: 0 ].
+column addMorph: row.
+
+row := LayoutMorph newRow.
+row borderColor: Color red; borderWidth: 5.
+item := BoxedMorph new.
+item layoutSpec proportionalWidth: 1. "grows width to maximum available"
+row addMorph: item.
+row addMorph: BoxedMorph new.
+column addMorph: row.
+
+"Each of the column submorphs will have the same height be default.
+Since the column has a fixed height of 200,
+each row will have a height of 100."
+
+"The column LayoutSpec won't be honored unless it is inside a LayoutMorph."
+container := LayoutMorph newRow.
+container addMorph: column.
+container openInHand.
 ```
 
 ## Editing Characteristics
