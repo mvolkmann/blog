@@ -20,6 +20,14 @@ messageSelectorAndArgumentNames
     statements
 ```
 
+Other programming languages use a keyword
+like `function`, `func`, `fun`, or `fn`
+to identify the start of a function or method definition.
+Smalltalk does not require a keyword because it is always clear from context
+when a method is being defined.
+For example, System Browser windows provide a separate text editing area
+for viewing and editing each method definition.
+
 In binary and keyword methods, parameter variable names typically
 indicate the expected object type and begin with "a" or "an".
 For example, `aNumber`, `aString`, or `anArray`.
