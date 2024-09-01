@@ -10,6 +10,9 @@ Variables always refer to an object created from a specific class,
 but a new object can be assigned that was created from a different class.
 In other words, the "type" of a variable can change.
 
+Variable names are composed of letters, digits, and underscores.
+The first character cannot be a digit.
+
 The initial value of all variables is `nil`.
 
 Smalltalk supports five kinds of variables:

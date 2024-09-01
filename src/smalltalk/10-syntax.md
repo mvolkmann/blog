@@ -61,6 +61,9 @@ An expression can have one of the following forms:
 - a message send such as `5 factorial`, `a + b`, or `colors at: 2`
 - a block such as `[:a :b | a + b]`
 
+The same value can be assigned to multiple variables.
+For example: `score1 := score2 := 0`.
+
 The caret (^) in a return expression can be followed by a space.
 The pretty printer includes a space, but many developers prefer to omit it.
 
