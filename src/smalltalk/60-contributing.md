@@ -12,4 +12,15 @@ If interest is shown there then a "Change Set" should be submitted.
 
 To create a Change Set that includes your suggested changes to Cuis:
 
-- TODO: Finsh describing the steps.
+- Make changes to packages provided by Cuis.
+- Open the World menu and select Open ... Change Sorter.
+- Select the chnage set whose name contains "CuisCore".
+- Examine all the changes it contains
+  to verify they are what should be included.
+- Right-click the change set and select "Rename change set".
+- Replace "AuthorName" with your name.
+- Right-click the change set and select "File out and keep".
+
+The file will be saved in the `Cuis-Smalltalk-Dev-UserFiles/ChangeSets`
+directory with an extension of `.cs.st`.
+Send this file as an attachment to the mailing list.
