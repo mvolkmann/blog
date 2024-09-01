@@ -24,3 +24,11 @@ To create a Change Set that includes your suggested changes to Cuis:
 The file will be saved in the `Cuis-Smalltalk-Dev-UserFiles/ChangeSets`
 directory with an extension of `.cs.st`.
 Send this file as an attachment to the mailing list.
+
+To test a change set:
+
+- Start a fresh image.
+- Open the World menu and select Open ... File List.
+- Select a change set file.
+- Click the "install" button.
+- Write code in a Workspace to test the changes.
