@@ -360,6 +360,20 @@ which sends `#initialize` and then it
 sends `#color:` with the value `(Color red alpha: 0.2)`
 which replaces the value set in the `initialize` method.
 
+The following methods can be used to a `Morph` to a `LayoutMorph`.
+All but the first replace the `layoutSpec` with a new one.
+
+- `addMorph:`
+- `addMorph:fixedHeight:`
+- `addMorph:fixedWidth:`
+- `addMorph:proportionalHeight:`
+- `addMorph:proportionalWidth:`
+
+The `addMorphs:` method takes a collection of `Morphs` and adds each
+using the `addMorph:proportionalWidth:` method with a value of `1`.
+The `addMorphs:withProportionalWidth:` method is similar, but takes
+a collection of widths to use as the `proportionalWidth` of each submorph.
+
 ### Submorphs
 
 The `addMorph:` method defined in the `Morph` class
@@ -391,6 +405,7 @@ The following code demonstrates layout of submorphs.
   src="/blog/assets/cuis-morphic-layout.png?v={{pkg.version}}">
 
 ```smalltalk
+initialize
 | column container item row |
 
 column := LayoutMorph newColumn.
@@ -399,10 +414,9 @@ column borderColor: Color green; borderWidth: 5.
 
 row := LayoutMorph newRow.
 row borderColor: Color yellow; borderWidth: 5.
-row addMorph: BoxedMorph new.
-row addMorph: BoxedMorph new.
-"By default, the submorphs will be
-pushed to the left and centered vertically."
+row addMorph: (BoxedMorph new color: Color pink).
+row addMorph: (BoxedMorph new color: Color lightBlue).
+"By default, the submorphs will be pushed to the left and centered vertically."
 "Center the submorphs horizontally."
 row axisEdgeWeight: 0.5.
 "Move all the submorphs to the top of the row."
@@ -411,15 +425,14 @@ column addMorph: row.
 
 row := LayoutMorph newRow.
 row borderColor: Color red; borderWidth: 5.
-item := BoxedMorph new.
+item := BoxedMorph new color: Color lightGreen.
 item layoutSpec proportionalWidth: 1. "grows width to maximum available"
 row addMorph: item.
-row addMorph: BoxedMorph new.
+row addMorph: (BoxedMorph new color: Color lightOrange).
 column addMorph: row.
 
 "Each of the column submorphs will have the same height be default.
-Since the column has a fixed height of 200,
-each row will have a height of 100."
+Since the column has a fixed height of 200, each row will have a height of 100."
 
 "The column LayoutSpec won't be honored unless it is inside a LayoutMorph."
 container := LayoutMorph newRow.
