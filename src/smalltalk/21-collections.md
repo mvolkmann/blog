@@ -731,6 +731,20 @@ dogs do: [:dog | dog name print]
 
 The output in the Transcript will be "Comet" followed by "Oscar".
 
+## Indexable Classes
+
+Classes whose instances respond to messages like `#at:put:` are "indexable".
+This means they hold a collection of objects that are accessed by index.
+Such classes are defined with by sending the message
+`#variableSubclass:instanceVariableNames:classVariableNames:poolDictionaries:category:`
+to another class.
+That is handled by an instance method in the class `Class`.
+An example of a class that is defined this way is `Array`.
+
+Also see the `Class` instance methods whose names begin with
+`variableByteSubclass:`, `variableDoubleByteSubclass:`,
+`variableDoubleWordSubclass:`, and `variableWordSubclass:`.
+
 ## Identity Collections
 
 The collection classes `IdentityBag`, `IdentityDictionary`, and `IdentitySet`
