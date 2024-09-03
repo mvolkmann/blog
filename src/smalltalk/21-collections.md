@@ -745,6 +745,10 @@ Also see the `Class` instance methods whose names begin with
 `variableByteSubclass:`, `variableDoubleByteSubclass:`,
 `variableDoubleWordSubclass:`, and `variableWordSubclass:`.
 
+See the instance method `instSpec` in the `Behavior` class
+which defines values for the `format` instance variable.
+The values `2` and `3` indicate that the object in indexable.
+
 ## Identity Collections
 
 The collection classes `IdentityBag`, `IdentityDictionary`, and `IdentitySet`
