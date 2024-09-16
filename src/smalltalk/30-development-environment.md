@@ -222,6 +222,7 @@ and press cmd-b (Browse it)
 to open a System Browser with that class already selected.
 
 Selecting a class name in an already open System Browser
+(or in another window)
 and pressing cmd-b (Browse it) opens a new System Browser.
 There is no command to navigate to the selected class
 within the current System Browser.
@@ -260,9 +261,13 @@ System Browsers contain four rows.
   opens a new System Browser with that class selected.
 
   The second pane contains three buttons at the bottom.
+  Clicking the "?" button shows the class comment for the select class.
   Clicking the "instance" or "class" button causes the remaining panes
   to display information about instance or class methods, respectively.
-  Clicking the "?" button shows the class comment for the select class.
+  If no method is selected and the "instance" button is selected,
+  the message that defines the class is displayed in the bottom pane.
+  If no method is selected and the "class" button is selected,
+  the metaclass definition is displayed in the bottom pane.
 
   Selecting a message category (a.k.a protocol) in the third pane
   displays methods in that category in the fourth pane.
