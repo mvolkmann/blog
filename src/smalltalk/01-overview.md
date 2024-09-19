@@ -33,7 +33,7 @@ These aim to quickly provide a sense of what is available
 by including the most useful features and not aiming to be exhaustive.
 
 <a href="https://en.wikipedia.org/wiki/Smalltalk" target="_blank">Smalltalk</a>
-"is a purely object oriented programming language (OOP)."
+"is a purely object-oriented programming language (OOP)."
 Everything is represented by an object that is an instance of some class.
 This includes classes themselves and
 all the GUI elements in the development environment.
@@ -47,8 +47,15 @@ but primitive data types like numbers are not.
 While Simula preceded Smalltalk, Smalltalk was
 the first programming language to make OOP popular.
 
-Running Smalltalk programs requires two parts,
-a virtual machine (VM) and an image file.
+Smalltalk is not an interpreted language.
+It was the first programming language
+to use just-in-time (JIT) compilation.
+Smalltalk code is compiled to optimized bytecode
+that is executed by a virtual machine (VM).
+Compilation occurs during program execution rather than before execution.
+This results in better performance than interpreting code.
+
+Running Smalltalk programs requires two parts, a VM and an image file.
 The VM reads and executes Smalltalk code found in an image file.
 It is specific to the operating system and CPU architecture being used.
 
@@ -59,15 +66,6 @@ across Windows, Linux, and MacOS, only differing based on screen size.
 There is no need to recompile code for different environments.
 This makes Smalltalk code highly portable!
 
-Smalltalk is not an interpreted language.
-It was the first programming language
-to use just-in-time (JIT) compilation.
-Smalltalk code is compiled to optimized bytecode that is executed by a VM.
-Compilation occurs during program execution rather than before execution.
-This results in better performance than interpreting code.
-
-Everything in Smalltalk is represented by an object, including
-classes and all GUI elements in the development environment.
 An image file can be thought of as a snapshot
 of the current state of the development environment.
 It describes a collection of all the active objects.
@@ -151,11 +149,11 @@ The entire syntax of Smalltalk can be demonstrated on a post card.
 
 Some reasons to learn Smalltalk include:
 
-- Gaining an understanding of its pros and cons compared to other languages.
-- Getting ideas for features to be added to other languages.
-- Getting ideas for features to be added in the
+- Gain an understanding of its pros and cons compared to other languages.
+- Get ideas for features that can be added to other languages.
+- Get ideas for features that can be added in the
   development environments of other languages.
-- Actually using it as an alternative to other languages.
+- Actually use it as an alternative to other languages.
 
 ## Resources
 
