@@ -104,6 +104,7 @@ These are like a try/catch that can resume execution where the effect occurred.
 
   Click the "Playground" link to experiment with writing OCaml code online.
 
+- <a href="https://pliutau.com/my-first-experience-with-ocaml/" target="_blank">My First Experience With OCaml</a>
 - <a href="http://ocamlverse.net/content/ecosystem.html" target="_blank">OCamlverse Ecosystem</a>
 - <a href="https://learnxinyminutes.com/docs/ocaml/" target="_blank">Learn X in Y minutes</a>
   Where X=OCaml
