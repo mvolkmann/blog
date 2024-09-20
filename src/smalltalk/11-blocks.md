@@ -67,6 +67,7 @@ average := [:a :b |
     | sum |
     sum := a + b.
     sum / 2.0
+]
 ```
 
 Blocks are closures, meaning that they can

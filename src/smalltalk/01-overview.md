@@ -52,7 +52,7 @@ It was the first programming language
 to use just-in-time (JIT) compilation.
 Smalltalk code is compiled to optimized bytecode
 that is executed by a virtual machine (VM).
-Compilation occurs during program execution rather than before execution.
+Compilation occurs when method code is saved.
 This results in better performance than interpreting code.
 
 Running Smalltalk programs requires two parts, a VM and an image file.
@@ -301,7 +301,7 @@ Smalltalk has the following cons:
 
   Commercial Smalltalks semi-automatically upgrade application code
   as their base implementation features change over time.
-  See the VAST, GemStone, and Circom Smalltalk implementations.
+  See the VAST, GemStone, and Cincom Smalltalk implementations.
   TODO: Do they provide tooling to strip out classes that are only used
   in the development environment so what remains in the image is
   only what is needed to run the application being developed?
@@ -369,17 +369,18 @@ were created after those listed above in the "History" section.
 
   This was the first popular implementation that was free and open source.
 
-- VisualWorks
+- Cincom Smalltalk - VisualWorks and ObjectStudio
 
-- ObjectWorks
+- Instantiations VA Smalltalk
+
+  <a href="https://www.instantiations.com/vast-platform/"
+  target="_blank">VAST Platform</a> (stands for "VisualAge SmallTalk")
 
 - ParcPlace Systems for Unix and Sun systems
 
 - Digitalk for Windows and OS/2 systems
 
 - Enfin
-
-- Cincom
 
 - GemTalk
 
@@ -409,10 +410,6 @@ were created after those listed above in the "History" section.
   This runs on the Java Virtual Machine and uses some Java features.
 
 - <a href="https://www.cincomsmalltalk.com/main/" target="_blank">Cincom Smalltalk</a>
-
-- <a href="https://www.instantiations.com/vast-platform/" target="_blank">VAST Platform</a>
-
-  VAST stands for "VisualAge SmallTalk" and is provided by Instantiations.
 
 - <a href="https://gemtalksystems.com/products/gs64/" target="_blank">GemStone/S</a>
 
