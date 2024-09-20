@@ -478,7 +478,7 @@ and by installing more packages.
 Some advantages that Cuis has over Squeak and Pharo are that
 it has built-in support for Unicode and TrueType fonts.
 Those can be added to Squeak and Pharo through foreign libraries.
-Cuis also adds support for high quality vector graphics and
+Cuis also adds support for high-quality vector graphics and
 rendering Scalable Vector Graphics (SVG).
 
 Cuis Smalltalk uses the same VM as Squeak Smalltalk, now called the

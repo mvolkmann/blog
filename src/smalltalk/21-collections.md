@@ -250,6 +250,7 @@ There are no particularly interesting methods in this class.
 ## Array
 
 `Array` instances are fixed-length, ordered collections.
+They are indexed starting at 1, not 0.
 Elements cannot be added or deleted, but they can be modified.
 
 Most of the interesting `Array` methods are defined in
