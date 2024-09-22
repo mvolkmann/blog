@@ -165,3 +165,39 @@ SystemDictionary removeKey: #Debugger
 
 The `SystemDictionary` class method `isDevelopmentEnvironmentPresent`
 checks for that key in the `SystemDictionary`.
+
+## Hilaire Fernandes Approach
+
+This does not remove the World menu.
+
+- cd to `Cuis-Smalltalk-Dev` directory
+
+- git clone https://github.com/hilaire/CuisApp.git
+
+- Modify the value of the `cuisVersion` variable near the beginning of the file
+  `CuisApp/build/makeBundle.sh` to something like "7.1-6713".
+
+- Build an image for the app by entering
+  `./CuisApp/build/makeBundle.sh --build`
+  TODO: It's unclear whether this can run in macOS. I get the following:
+
+  ```text
+  CuisVM.app/Contents/Linux-x86_64/squeak: line 29: /usr/bin/ldd: No such file or directory
+  CuisVM.app/Contents/Linux-x86_64/squeak: line 29: /bin/fgrep: No such file or directory
+  Error. Could not determine platform's libc path for VM.
+  Try forcing $PLATFORMLIBDIR in CuisVM.app/Contents/Linux-x86_64/squeak, based on LIBC_SO.
+  ```
+
+  TODO: Where is the new image saved?
+
+- Create a bundle for macOS by entering
+  `./CuisApp/build/makeBundle.sh --package mac`
+
+- Create a bundle for Windows by entering
+  `./CuisApp/build/makeBundle.sh --package windows`
+
+- Create a bundle for GNU Linux by entering
+  `./CuisApp/build/makeBundle.sh --package gnulinux`
+
+To run a bundle ...
+TODO: Where is it saved?
