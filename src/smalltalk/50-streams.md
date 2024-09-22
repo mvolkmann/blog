@@ -12,20 +12,80 @@ The class `SequenceableCollection` which is a superclass of `Array`
 provides the methods `readStream`, `readStreamFrom:to:`, and `writeStream`
 that each return a stream.
 
-The `readStream` method returns a stream that can be used to
-read every element of the collection.
+The `readStream` method of `SequenceableCollection` returns a `ReadStream`
+which is a subclass of `Positionable` stream.
+It has a `position` instance variable
+that can be retrieved by sending `#position`
+and modified by sending `#position:`.
+It also has a `readLimit` instance variable
+that is intialized to the collection size.
+
+The `PositionableStream` class method `on:`
+takes a `Collection` and returns a stream over it.
+The `ReadStream` class method `on:from:to:`
+takes a `Collection` and two indexes, and
+returns a stream over that range of elements.
+
+The following table describes commonly used methods
+in the `PositionableStream` class.
+
+| Method          | Description                                                                 |
+| --------------- | --------------------------------------------------------------------------- |
+| `atEnd`         | answers true if `position` >= `readLimit`                                   |
+| `atStart`       | answers true if `position` is zero                                          |
+| `back`          | subtract 1 from `position` and answers that element                         |
+| `contents`      | answers copy of collection                                                  |
+| `isEmpty`       | answers true if `atEnd` and `position` is zero                              |
+| `next:`         | anwsers collection of next argument elements, advancing `position` for each |
+| `notEmpty`      | answers true if not `isEmpty`                                               |
+| `peek`          | answers element at `position`                                               |
+| `peekBack`      | answers element at `position` minus 1                                       |
+| `position`      | answers the current value of `position`                                     |
+| `position:`     | sets `position` to argument if not greater than `readLimit`                 |
+| `reset`         | sets `position` to zero                                                     |
+| `resetContents` | sets `position` and `readLimit` to zero                                     |
+| `setToEnd`      | sets `position` to `readLimit`                                              |
+| `skip`          | adds 1 to `position`                                                        |
+| `skip:`         | adds argument to `position`                                                 |
+| `skipBack`      | subtracts 1 from `position`                                                 |
+| `skipTo:`       | advances position to element matching argument and answers whether found    |
+
+The following table describes commonly used methods
+in the `ReadStream` class.
+
+| Method | Description                                   |
+| ------ | --------------------------------------------- |
+| `next` | adds 1 to `position` and answers that element |
+| `size` | answers value of `readLimit`                  |
+
+The following code demonstrates using many of the methods described above.
+When the end is reached, the `next` method returns `nil`.
 
 ```smalltalk
-arr := #('apple' 'banana' 'cherry' 'grape').
+arr := #('apple' 'banana' 'cherry').
 stream := arr readStream.
-stream next print. "apple"
-(stream next: 2) print. "banana cherry"
-stream next print. "grape"
-stream next print. "nil"
-stream next print. "nil"
+stream position logAs: 'position'. "0"
+stream size logAs: 'readLimit'. "3"
+stream atStart logAs: 'atStart'. "true"
+stream atEnd logAs: 'atEnd'. "false"
+stream next print. "position -> 1; apple"
+stream peek print. "position stays 1; banana"
+stream peekBack print. "position stays 1; apple"
+stream next print. "position -> 2; banana"
+stream reset. "position -> 0"
+stream next print. "position -> 1; apple"
+stream position: 2.
+stream next print. "position -> 3; cherry"
+stream back. "position -> 2"
+stream peekBack print. "banana"
+stream peek print. "cherry"
+stream atStart logAs: 'atStart'. "false"
+stream atEnd logAs: 'atEnd'. "true"
 ```
 
-The `readStreamFrom:to:` method returns a stream that can be used to
+TODO: Cover `nextLine` method for stepping though lines in a text file.
+
+The `readStreamFrom:to:` method returns a stream that can
 read the elements in a range of the collection.
 
 ```smalltalk
@@ -36,7 +96,21 @@ stream next print. "cherry"
 stream next print. "nil"
 ```
 
-The `writeStream` method returns a stream that can be used to
+The `writeStream` method returns a stream that can modify the collection.
+
+TODO: Add example code.
+
+The `ReadWriteStream` class creates a string that can
+read and write (modify) collection elements.
+
+```smalltalk
+coll := OrderedCollection newFrom: #('apple' 'banana' 'cherry').
+stream := ReadWriteStream with: coll. "position is 3"
+stream reset. "position is 0"
+stream next print. "changes position to 1; outputs apple"
+stream nextPut: 'grape'. "changes position to 2; changes element to grape"
+coll print. "apple grape cherry"
+```
 
 ## File I/O
 
