@@ -83,8 +83,6 @@ stream atStart logAs: 'atStart'. "false"
 stream atEnd logAs: 'atEnd'. "true"
 ```
 
-TODO: Cover `nextLine` method for stepping though lines in a text file.
-
 The `readStreamFrom:to:` method returns a stream that can
 read the elements in a range of the collection.
 
@@ -96,9 +94,19 @@ stream next print. "cherry"
 stream next print. "nil"
 ```
 
-The `writeStream` method returns a stream that can modify the collection.
+The `writeStream` method returns a `WriteStream` that can modify the collection.
+It adds the instance variable `writeLimit`
+which is initialized to the collection size.
 
-TODO: Add example code.
+TODO: So far I can only get a `WriteStream` to modify existing elements,
+not add new ones. For example, this does not work:
+
+```smalltalk
+coll := OrderedCollection newFrom: #('apple' 'banana' 'cherry').
+stream := coll writeStream.
+stream pastEndPut: 'grape'.
+coll print.
+```
 
 The `ReadWriteStream` class creates a string that can
 read and write (modify) collection elements.
@@ -116,9 +124,13 @@ coll print. "apple grape cherry"
 
 ### Files
 
-To create a file, send the `#asFileEntry` message
+To create a `FileEntry` object, send the `#asFileEntry` message
 to a string that contains the file name.
-The file is assumed to be in the `\*-UserFiles` directory.
+The file is assumed to be in the `\*-UserFiles` directory
+(ex. `Cuis-Smalltalk-Dev-UserFiles`).
+To see this, enter `DirectoryEntry currentDirectory` in a Workspace
+and "Print it".
+
 For example:
 
 ```smalltalk
@@ -146,6 +158,14 @@ To read the entire contents of a text file into a string:
 
 ```smalltalk
 contents := fileEntry fileContents.
+```
+
+To read lines in a text file one at a time:
+
+```smalltalk
+fileEntry := 'demo.txt' asFileEntry.
+stream := fileEntry readStream.
+line := stream nextLine "do repeatedly to get each line"
 ```
 
 To write serialized objects to a file:
