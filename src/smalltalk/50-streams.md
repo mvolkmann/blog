@@ -6,8 +6,37 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-TODO: Add information about working with streams
-that are not necessarily associated with a file.
+Streams provide a way to iterate over many kinds of collections and resources.
+
+The class `SequenceableCollection` which is a superclass of `Array`
+provides the methods `readStream`, `readStreamFrom:to:`, and `writeStream`
+that each return a stream.
+
+The `readStream` method returns a stream that can be used to
+read every element of the collection.
+
+```smalltalk
+arr := #('apple' 'banana' 'cherry' 'grape').
+stream := arr readStream.
+stream next print. "apple"
+(stream next: 2) print. "banana cherry"
+stream next print. "grape"
+stream next print. "nil"
+stream next print. "nil"
+```
+
+The `readStreamFrom:to:` method returns a stream that can be used to
+read the elements in a range of the collection.
+
+```smalltalk
+arr := #('apple' 'banana' 'cherry' 'grape').
+stream := arr readStreamFrom: 2 to: 3.
+stream next print. "banana"
+stream next print. "cherry"
+stream next print. "nil"
+```
+
+The `writeStream` method returns a stream that can be used to
 
 ## File I/O
 
