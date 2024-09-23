@@ -79,7 +79,7 @@ $ sqlite3 pets.db
 sqlite> create table dogs(id integer primary key autoincrement, name string, breed string, age integer);
 sqlite> create table cats(id integer primary key autoincrement, name string, breed string, remaining_lives integer);
 sqlite> .schema (displays the schema for each table)
-sqlite> insert into dogs values('Comet', 'Whippet', 1);
+sqlite> insert into dogs (name, breed, age) values('Comet', 'Whippet', 4);
 sqlite> select * from dogs;
 sqlite> .exit
 $ ls *.db
