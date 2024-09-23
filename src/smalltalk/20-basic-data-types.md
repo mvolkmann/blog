@@ -684,6 +684,28 @@ run-time evaluation of instances as keyword messages.
 The `UnicodeSymbol` class is similar to the `Symbol` class,
 but can hold Unicode characters.
 
+## Regular Expressions
+
+To add support for regular expressions:
+
+- `cd` to the directory containing the 'Cuis-Smalltalk-Dev' directory.
+- `git clone https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Regex.git`
+- Open a File List.
+- Navigate to the `Cuis-Smalltalk-Regex` directory.
+- Select the file `Regex-Core.pck.st` and click the "install package" button.
+- Select the file `Regex-TerseGuide.pck.st` and click the "install package" button.
+- Open the World menu and select Help ... Terse Guide to Cuis.
+- In the left nav, scroll to the bottom and select "Regex".
+- Review all the example code.
+
+The following code processes
+a URL path `String` like `'/state/:state/city/:city'`
+and returns the pattern `String` `'/state/*/city/*'`.
+
+```smalltalk
+pattern := pathString copyWithRegex: '\:\w+' matchesReplacedWith: '*'.
+```
+
 ## Point
 
 The `Point` class is in the "Graphics-Primitives" class category.

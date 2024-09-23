@@ -6,7 +6,6 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-- How can you work with SQLite and Postgres databases from Smalltalk?
 - Build a Todo app using Morphic and practice stripping the image
   to create a version that can be distributed to users.
 - Is there an easy way to create a memoized version of a method?
@@ -72,3 +71,5 @@ layout: topic-layout.njk
 - Describe what it means for a morph to be "pluggable".
   I think it means that the morph is a subclass of `PluggableMorph`
   and can be configured through message sends to change its behavior.
+- Is there a way to configure Cuis so class categories and method categories
+  are always alphabetized?

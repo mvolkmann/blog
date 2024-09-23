@@ -13,6 +13,8 @@ To install this, open a Workspace, enter `Feature require: 'WebClient'`,
 and "Do it".
 This adds many classes in the "WebClient - Core" category including
 `WebClient`, `WebRequest`, `WebResponse`, `WebServer`, and `WebSocket`.
+In addition, to send and receive requests with JSON bodies,
+open a Workspace, enter `Feature require: 'Json'`, and "Do it".
 
 Also see the
 <a href="https://github.com/SeasideSt/Seaside" target="_blank">Seaside</a> and
