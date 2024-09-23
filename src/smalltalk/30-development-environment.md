@@ -889,6 +889,11 @@ restart the image, and open a "Change Sorter" window?
 It seems the only way to recover the changes is to
 follow the steps above using a "File List".
 
+WARNING: If a class definition in a fileIn
+specifies a superclass that does not exist in the image,
+it will silently be changed to `ProtoObject`
+and almost certain break usages of that class.
+
 ## File List
 
 To view local files and operate on them,
