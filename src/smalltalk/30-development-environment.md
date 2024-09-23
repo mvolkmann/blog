@@ -168,7 +168,7 @@ are reflected.
 Let's walk through an example:
 
 1. Open the World menu and select "New Morph...".
-1. Select "Basic...Boxed Morph".
+1. Select "Basic...BorderedBoxMorph".
    An orange rectangle will appear, attached to the mouse cursor.
 1. Move to where you want to place it and click to drop it.
 1. cmd-click on the `Morph` to open its halo.
@@ -190,7 +190,8 @@ Let's walk through an example:
 1. Enter `self color: Color red` and "Do it".
    This time the value displayed in the top right pane updates
    AND the fill color of the `Morph` updates.
-   The reason is that the `color:` method in the `BoxedMorph` class
+   The reason is that the `color:` method in the `ColoredBoxMorph` class
+   which is the superclass of the `BorderedBoxMorph` class
    sends the `#redrawNeeded` message to `self`
    which triggers the `Morph` to redraw itself with the updated color.
 

@@ -83,17 +83,16 @@ To install it:
   - UI-Panel
   - UI-Widgets
 
-The set of "Basic" morphs will now include `BoxedMorph`, `EllipseMorph`,
-`FrameMorph`, `ImageMorph`, `LabelMorph`, `LineMorph`, `PointerLineMorph`,
-`Sonogram`, and `TileResizeMorph`.
-TODO: Why does selecting `Sonogram` lock up the image, requiring a Force Quit?
+The set of "Basic" morphs will now include `BorderedBoxMorph`,
+`ColoredBoxMorph`, `EllipseMorph`, `FrameMorph`, `ImageMorph`,
+`LabelMorph`, `LineMorph`, and `PointerLineMorph`.
 
 To create a `Morph`:
 
 - Open the World menu.
 - Select "New morph...".
 - In the dialog that appears, select a category of morphs
-  and then a specific kind (ex. `BoxedMorph`).
+  and then a specific kind (ex. `BorderedBoxMorph`).
 - The `Morph` will appear attached to the cursor
   (uses the `Morph` method `openInHand`).
 - Move the cursor to the location where the `Morph` should be placed
@@ -274,7 +273,7 @@ For example:
 
 ```smalltalk
 lm := LayoutMorph newRow.
-b1 := BoxedMorph new.
+b1 := BorderedBoxMorph new.
 b2 := EllipseMorph new.
 lm addMorph: b1.
 lm addMorph: b2.
@@ -329,7 +328,7 @@ For example, `myLayout := Layout newRow`.
 
 To add a submorph to a `LayoutMorph`, send it the `#addMorph:` message.
 For example, `myLayout addMorph: EllipseMorph new`
-and `myLayout addMorph: BoxedMorph new`.
+and `myLayout addMorph: new`.
 
 If the UI-Layout-Panel package is installed,
 all of these values can be specified interactively.
@@ -414,8 +413,8 @@ column borderColor: Color green; borderWidth: 5.
 
 row := LayoutMorph newRow.
 row borderColor: Color yellow; borderWidth: 5.
-row addMorph: (BoxedMorph new color: Color pink).
-row addMorph: (BoxedMorph new color: Color lightBlue).
+row addMorph: (BorderedBoxMorph new color: Color pink).
+row addMorph: (BorderedBoxMorph new color: Color lightBlue).
 "By default, the submorphs will be pushed to the left and centered vertically."
 "Center the submorphs horizontally."
 row axisEdgeWeight: 0.5.
@@ -425,10 +424,10 @@ column addMorph: row.
 
 row := LayoutMorph newRow.
 row borderColor: Color red; borderWidth: 5.
-item := BoxedMorph new color: Color lightGreen.
+item := BorderedBoxMorph new color: Color lightGreen.
 item layoutSpec proportionalWidth: 1. "grows width to maximum available"
 row addMorph: item.
-row addMorph: (BoxedMorph new color: Color lightOrange).
+row addMorph: (BorderedBoxMorph new color: Color lightOrange).
 column addMorph: row.
 
 "Each of the column submorphs will have the same height be default.
@@ -547,7 +546,7 @@ Positive rotations are clockwise and negative rotations are counter-clockwise.
 ## Creating a Custom Morph
 
 Custom morphs are typically implemented as subclasses of the
-`PlacedMorph` or `BoxedMorph` class and implement the `drawOn:` method.
+`PlacedMorph` or `BorderedBoxMorph` class and implement the `drawOn:` method.
 These can be directly dragged to new locations.
 Otherwise dragging requires opening the `Morph` halo and using the Move handle.
 
@@ -564,10 +563,10 @@ PlacedMorph subclass: #CanvasDemo
 
 In subclasses of `PlacedMorph`, the instance method `drawOn:`
 is passed a `VectorCanvas` object.
-In subclasses of `BoxedMorph`, the instance method `drawOn:`
+In subclasses of `BorderedBoxMorph`, the instance method `drawOn:`
 is passed a `HybridCanvas` object.
 
-To force a subclass of `BoxedMorph` to use a `VectorCanvas`,
+To force a subclass of `BorderedBoxMorph` to use a `VectorCanvas`,
 implement the `requiresVectorCanvas` method to return `true`.
 
 For example, the following draws a green rectangle with a red border
@@ -793,27 +792,32 @@ The sequence of message sends that lead to the first call to `fullDraw:` is:
 - `MorphicCanvas drawRoots:rootsDamage:backgroundDamage:`
 - `MorphicCanvas fullDraw:`
 
-## BoxedMorph
+## BorderedBoxMorph
 
-The `BoxedMorph` class is a subclass of the `PlacedMorph` class
-that adds the instance variables `extent` (width and height),
-`color`, `borderWidth`, and `borderColor`.
-It is intended for morphs that are rectangular.
+The `BorderedBoxMorph` class is a subclass of `ColoredBoxMorph`,
+which is a subclass of `BoxMorph`, which is a subclass of `PlacedMorph`.
+The `BorderedBoxMorph` class adds the instance variables
+`borderColor`, `borderWidth`, and `padding`.
+The `ColoredBoxMorph` class adds the instance variable `color`.
+The `BoxMorph` class adds the instance variable `extent` (width and height)
+and is intended for morphs that are rectangular.
 
-TODO: The class comment says "DON'T subclass from here." Why?
+TODO: The class comment for `BoxMorph` says "DON'T subclass from here." Why?
 
-All the developer tool windows are subclasses of `BoxedMorph`.
+All the developer tool windows are subclasses of `BorderedBoxMorph`.
 For example, System Browsers are implemented by the `BrowserWindow` class
 which has the following inheritance hierarchy.
 
 - `Object`
   - `Morph`
     - `PlacedMorph`
-      - `BoxedMorph`
-        - `PluggableMorph`
-          - `SystemWindow`
-            - `CodeWindow`
-              - `BrowserWindow`
+      - `BoxMorph`
+        - `ColoredBoxMorph`
+          - `BorderedBoxMorph`
+            - `PluggableMorph`
+              - `SystemWindow`
+                - `CodeWindow`
+                  - `BrowserWindow`
 
 ## Fonts
 
