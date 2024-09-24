@@ -140,7 +140,7 @@ fileEntry := 'demo.txt' asFileEntry.
 To write to a text file, overwriting any previous contents:
 
 ```smalltalk
-fileEntry forceWriteStreamDo: [ :fileStream |
+fileEntry forceWriteStreamDo: [:fileStream |
     fileStream nextPutAll: 'line #1'.
     fileStream newLine.
     fileStream nextPutAll: 'line #2'
@@ -171,7 +171,7 @@ line := stream nextLine "do repeatedly to get each line"
 To write serialized objects to a file:
 
 ```smalltalk
-fileEntry writeStreamDo: [ :fileStream |
+fileEntry writeStreamDo: [:fileStream |
     | refStream |
     refStream := ReferenceStream on: fileStream.
     refStream nextPut: true.
@@ -186,10 +186,10 @@ TODO: Do ReferenceStreams support circular object references?
 To read serialized objects from a file:
 
 ```smalltalk
-fileEntry readStreamDo: [ :fileStream |
+fileEntry readStreamDo: [:fileStream |
     | object refStream |
     refStream := ReferenceStream on: fileStream.
-    [ refStream atEnd ] whileFalse: [
+    [refStream atEnd] whileFalse: [
         object := refStream next.
         object print "writes to Transcript"
     ]

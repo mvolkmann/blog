@@ -161,15 +161,15 @@ The following code demonstrates using each of the methods described above.
 ```smalltalk
 "This prints one, three, and two."
 'one' print.
-[ 'two' print ] fork.
+['two' print] fork.
 'three' print.
 
 "This prints one, two, and three."
 'one' print.
-[ 'two' print ] forkAndWait.
+['two' print] forkAndWait.
 'three' print.
 
-process := [ :a :b |
+process := [:a :b |
     (Delay forSeconds: 4) wait.
     (a + b) print. "prints 5"
 ] newProcessWith: #(2 3).

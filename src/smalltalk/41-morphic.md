@@ -419,7 +419,7 @@ row addMorph: (BorderedBoxMorph new color: Color lightBlue).
 "Center the submorphs horizontally."
 row axisEdgeWeight: 0.5.
 "Move all the submorphs to the top of the row."
-row submorphsDo: [ :submorph | submorph layoutSpec offAxisEdgeWeight: 0 ].
+row submorphsDo: [:submorph | submorph layoutSpec offAxisEdgeWeight: 0].
 column addMorph: row.
 
 row := LayoutMorph newRow.
@@ -672,8 +672,8 @@ openAtCursor
     | world |
     world := self runningWorld.
     world
-        ifNil: [ UISupervisor whenUIinSafeState: [ self openInWorld ]]
-        ifNotNil: [ :w |
+        ifNil: [UISupervisor whenUIinSafeState: [self openInWorld]]
+        ifNotNil: [:w |
             w addMorph: self centeredNear: w activeHand morphPosition.
         ]
 ```
@@ -734,11 +734,11 @@ handlesKeyboard
 
 mouseEnter: event
     (Preferences at: #focusFollowsMouse)
-        ifTrue: [ event hand newKeyboardFocus: self ].
+        ifTrue: [event hand newKeyboardFocus: self].
 
 mouseLeave: event
     (Preferences at: #focusFollowsMouse)
-        ifTrue: [ event hand releaseKeyboardFocus: self ].
+        ifTrue: [event hand releaseKeyboardFocus: self].
 
 keyboardFocusChange: aBoolean
     ('has keyboard focus? {1}' format: {aBoolean}) print.
@@ -747,7 +747,7 @@ keyStroke: aKeyboardEvent
     | char |
     char := Character codePoint: aKeyboardEvent keyValue.
     char logAs: 'character'. "defined in Getting Started"
-    aKeyboardEvent isArrowUp ifTrue: [ 'got up arrow' print ].
+    aKeyboardEvent isArrowUp ifTrue: ['got up arrow' print].
 ```
 
 Also see the `isArrowRight`, `isArrowDown`, and `isArrowLeft` methods.
@@ -936,15 +936,15 @@ is to create a subclass of `PluggableButtonMorph` as follows:
            self isPressed
                ifFalse: [
                    self mouseIsOver
-                       ifFalse: [ colorForLabel := colorForLabel adjustSaturation: -0.10 brightness: 0.10 ]]
-               ifTrue: [ colorForLabel := colorForLabel adjustSaturation: 0.0 brightness: -0.07 ].
+                       ifFalse: [colorForLabel := colorForLabel adjustSaturation: -0.10 brightness: 0.10]]
+               ifTrue: [colorForLabel := colorForLabel adjustSaturation: 0.0 brightness: -0.07].
            f := self fontToUse.
            center := extent // 2.
            labelMargin := 3.
            w := f widthOfString: label.
            availableW := extent x - labelMargin - labelMargin.
            availableW >= w
-               ifTrue: [ l := label ]
+               ifTrue: [l := label]
                ifFalse: [
                    x := labelMargin.
                    targetSize := label size * availableW // w.
@@ -980,13 +980,13 @@ decBtn := VButtonMorph new
   color: Color yellow;
   label: 'Decrement';
   labelColor: Color red;
-  model: [ label contents: (label contents asNumber - 1) asString ];
+  model: [label contents: (label contents asNumber - 1) asString];
   action: #value.
 incBtn := VButtonMorph new
   color: Color yellow;
   label: 'Increment';
   labelColor: Color green;
-  model: [ label contents: (label contents asNumber + 1) asString ];
+  model: [label contents: (label contents asNumber + 1) asString];
   action: #value.
 layout := LayoutMorph new
   addMorph: decBtn;
@@ -1027,13 +1027,13 @@ There are many more example class methods in the `SVGMainMorph` class.
 To open all the SVG examples,
 enter `SVGMainMorph openAllExamples SVGMainMorph` and "Do it".
 To delete all those morphs, enter
-`SVGMainMorph allInstancesDo: [ :obj | obj delete ]`.
+`SVGMainMorph allInstancesDo: [:obj | obj delete]`.
 
 Another way to open all the SVG examples is to use reflection as follows:
 
 ```smalltalk
 selectors := SVGMainMorph class allMethodsInCategory: #examples.
-selectors do: [ :selector |
+selectors do: [:selector |
     (selector beginsWith: 'example') ifTrue: [
         (SVGMainMorph perform: selector) openInWorld
     ]
@@ -1074,10 +1074,10 @@ initialize
         addMorph: (LabelMorph contents: 'Full Screen');
         addMorph: (LayoutMorph newRow
             addMorph: (
-                VButtonMorph label: 'On' block: [ self fullScreenOn ]
+                VButtonMorph label: 'On' block: [self fullScreenOn]
             );
             addMorph: (
-                VButtonMorph label: 'Off' block: [ self fullScreenOff ]
+                VButtonMorph label: 'Off' block: [self fullScreenOff]
             );
             color: Color transparent
         );
@@ -1274,7 +1274,7 @@ step
     self morphPosition: self morphPosition + (dx @ dy).
     self redrawNeeded.
     stepNumber := stepNumber + 1.
-    stepNumber = self stepCount ifTrue: [ self stopStepping ]
+    stepNumber = self stepCount ifTrue: [self stopStepping]
 
 stepCount
     ^ 50

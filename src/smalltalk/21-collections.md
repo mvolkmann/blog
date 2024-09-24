@@ -665,13 +665,13 @@ as = dict associations.
 To iterate over the values:
 
 ```smalltalk
-dict do: [ :value | value print ].
+dict do: [:value | value print].
 ```
 
 To iterate over the keys and values:
 
 ```smalltalk
-dict associationsDo: [ :assoc |
+dict associationsDo: [:assoc |
     Transcript
         show: assoc key;
         show: ' ';

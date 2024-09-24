@@ -126,7 +126,7 @@ In the following example, `numbers` and `sum` are temporary variables.
 ```smalltalk
 average: numbers
     | sum |
-    sum := numbers inject: 0 into: [ :acc :each | acc + each ].
+    sum := numbers inject: 0 into: [:acc :each | acc + each].
     ^ sum / numbers size
 ```
 

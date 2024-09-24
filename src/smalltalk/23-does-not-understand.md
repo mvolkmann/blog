@@ -36,7 +36,7 @@ doesNotUnderstand: aMessage
     "We are only processing messages with 0 or 1 arguments.
     If there are 2 or more arguments, fall back to the default behavior."
     argCount := aMessage numArgs.
-    argCount > 1 ifTrue: [ ^super doesNotUnderstand: aMessage ].
+    argCount > 1 ifTrue: [^super doesNotUnderstand: aMessage].
 
     key := aMessage keywords first.
 
@@ -48,7 +48,7 @@ doesNotUnderstand: aMessage
 
     "If the message is a setter, set the
     corresponding instance variable value."
-    setters := getters collect: [ :name | name, ':' ].
+    setters := getters collect: [:name | name, ':'].
     index := setters indexOf: key.
     index ifNotZero: [^self instVarAt: index put: aMessage arguments first ].
 

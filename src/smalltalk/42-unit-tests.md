@@ -126,7 +126,7 @@ defaultPrecision
     ^ 0.0001
 
 is: aNumber closeTo: anotherNumber withPrecision: aPrecision
-    aNumber = 0 ifTrue: [ ^ anotherNumber abs < aPrecision ].
+    aNumber = 0 ifTrue: [^ anotherNumber abs < aPrecision].
     ^ (aNumber - anotherNumber) abs <
       (aPrecision * (aNumber abs max: anotherNumber abs))
 ```
@@ -156,23 +156,23 @@ To create unit tests for the `Pets` class:
       demo := Pets new.
 
       "dogs is now 0."
-      self assert: [ demo addDog ] changes: [ demo dogs].
+      self assert: [demo addDog] changes: [demo dogs].
 
       "dogs is now 1."
-      self assert: [ demo addDog ] changes: [ demo dogs] by: 1.
+      self assert: [demo addDog] changes: [demo dogs] by: 1.
 
       "dogs is now 2."
-      self assert: [ demo addDog ] changes: [ demo dogs] from: 2 to: 3.
+      self assert: [demo addDog] changes: [demo dogs] from: 2 to: 3.
 
       "dogs is now 3."
       self assert: demo dogs equals: 3.
 
-      self assert: [ demo addCat ] doesNotChange: [ demo dogs].
+      self assert: [demo addCat] doesNotChange: [demo dogs].
 
   testCats
       | demo |
       demo := Pets new.
-      self assert: [ demo cats = 0 ] description: 'no cats'.
+      self assert: [demo cats = 0] description: 'no cats'.
 
   testCollections
       "This test isn't related to the Pets class."

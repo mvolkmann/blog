@@ -140,7 +140,7 @@ The steps to create a double-clickable macOS app are:
 ## Preparing User Images
 
 To create images that define applications to be used by non-developers,
-it is a good idea to display and remove developer features.
+it is a good idea to disable and remove developer features.
 This the confusion that can arise when users
 accidentally open developer features
 and results in smaller images.
@@ -165,6 +165,53 @@ SystemDictionary removeKey: #Debugger
 
 The `SystemDictionary` class method `isDevelopmentEnvironmentPresent`
 checks for that key in the `SystemDictionary`.
+
+## Steps to Deploy TodoApp
+
+- Open a base image (currently named `Cuis7.1-6713.image`).
+- Open a Workspace.
+- Enter `Feature require: 'UI-MetaProperties'.` and "Do it".
+- Enter `Feature require: 'TodoApp'.` and "Do it".
+- Enter `TodoApp new` and "Do it".
+- Position and size the "Todo App" window as desired.
+- Close the Workspace and Transcript windows.
+- Remove the taskbar at the bottom.
+
+  - cmd-click the taskbar.
+  - Click the menu halo button and select debug...inspect morph.
+  - Enter `self delete` in the bottom pane and "Do it".
+
+- Save the image with a new name.
+
+  - Open the World menu and select "Save Image as...".
+  - Enter the image name "TodoApp.image".
+
+- Create the file `todoapp.st` that contains the following:
+
+  ```smalltalk
+  | world |
+
+  world := UISupervisor ui.
+  [
+      (Delay forSeconds: 1) wait.
+      UISupervisor whenUIinSafeState: [
+          Preferences at: #worldMenu put: nil.
+      ]
+  ] fork
+
+  ```
+
+- Create the following shell script in the file `todoapp`.
+  This assumes that the environment variable `SMALLTALK_DIR` is set to
+  the path where the `Cuis-Smalltalk-Dev` local repository resides.
+
+  ```bash
+  #!/usr/bin/env zsh
+  CUIS_DIR=$SMALLTALK_DIR/Cuis-Smalltalk-Dev
+  VM=$CUIS_DIR/CuisVM.app/Contents/MacOS/Squeak
+  IMAGE=$CUIS_DIR/CuisImage/TodoApp.image
+  $VM $IMAGE -s todoapp.st
+  ```
 
 ## Hilaire Fernandes Approach
 

@@ -39,4 +39,4 @@ To run code on every instance of a given class,
 send the `allInstancesDo:` message to the class.
 
 For example, to delete all instances of a given class, run
-`SomeClass allInstancesDo: [ :obj | obj delete ]`.
+`SomeClass allInstancesDo: [:obj | obj delete]`.

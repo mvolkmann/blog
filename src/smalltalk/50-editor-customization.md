@@ -47,21 +47,21 @@ Here is what I have tried so far.
   escapeKey: aKeyboardEvent
       | inCommandMode |
       inCommandMode := mode = 'command'.
-      inCommandMode ifFalse: [ mode := 'command' ].
+      inCommandMode ifFalse: [mode := 'command'].
       "Hopefully returning false means that a superclass can process the event."
       ^ inCommandMode not.
 
   iKey: aKeyboardEvent
       | inCommandMode |
       inCommandMode := mode = 'command'.
-      inCommandMode ifTrue: [ mode := 'insert' ].
+      inCommandMode ifTrue: [mode := 'insert'].
       "Hopefully returning false means that a superclass can process the event."
       ^ inCommandMode.
 
   xKey: aKeyboardEvent
       | inCommandMode |
       inCommandMode := mode = 'command'.
-      inCommandMode ifTrue: [ 'delete character under cursor' print ].
+      inCommandMode ifTrue: ['delete character under cursor' print].
       "Hopefully returning false means that a superclass can process the event."
       ^ inCommandMode.
   ```

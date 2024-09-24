@@ -749,7 +749,7 @@ doesNotUnderstand: aMessage
     (aMessage selector = 'bark:') ifTrue: [
         | count |
         count := aMessage arguments first.
-        count isNumber ifTrue: [ ('Woof! ' repeat: count) print. ^ nil ]
+        count isNumber ifTrue: [('Woof! ' repeat: count) print. ^nil]
     ].
     super doesNotUnderstand: aMessage
 ```

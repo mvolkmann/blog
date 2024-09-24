@@ -85,8 +85,8 @@ in a class that has a `score` instance variable:
 score: aNumber
     | ex |
     ex := OutOfBoundsException lower: lowerBound upper: upperBound.
-    aNumber <  lowerBound ifTrue: [ ex signal: 'too low' ].
-    aNumber > upperBound ifTrue: [ ex signal: 'too high' ].
+    aNumber <  lowerBound ifTrue: [ex signal: 'too low'].
+    aNumber > upperBound ifTrue: [ex signal: 'too high'].
     score := aNumber
 ```
 
@@ -99,7 +99,7 @@ returns the message text of the exception.
 For example:
 
 ```smalltalk
-[s := Game new score: 5] on: OutOfBoundsException do: [ :ex |
+[s := Game new score: 5] on: OutOfBoundsException do: [:ex |
     ex messageText print.
 ]
 ```
@@ -117,8 +117,8 @@ The default implementation of this method is the following:
 ```smalltalk
 defaultAction
     Smalltalk isDevelopmentEnvironmentPresent
-        ifTrue: [ self devDefaultAction ]
-        ifFalse: [ self standaloneAppDefaultAction ]"
+        ifTrue: [self devDefaultAction]
+        ifFalse: [self standaloneAppDefaultAction]"
 ```
 
 This can be changed to the following:

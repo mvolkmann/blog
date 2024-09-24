@@ -252,11 +252,11 @@ If it is given any other kind of object, it just returns `0`.
 ```smalltalk
 double: obj
     "Answer double the value of the argument."
-    (obj isKindOf: Number) ifTrue: [ ^ obj * 2 ].
+    (obj isKindOf: Number) ifTrue: [^ obj * 2].
     (obj isKindOf: String) ifTrue: [
-        [ ^ obj asNumber * 2 ]
+        [^ obj asNumber * 2]
             on: Error "error converting string to number"
-            do: [ ^ 0 ]].
+            do: [^ 0]].
     ^ 0.
 ```
 

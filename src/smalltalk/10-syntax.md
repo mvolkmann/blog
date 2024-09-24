@@ -33,7 +33,7 @@ The term "receiver" describes the object to which a message is sent.
 | array concatenation (comma message)               | `#(1 2), #(3 4)`                                           |
 | assignment                                        | `<variable> := <expression>`                               |
 | method and block variable declarations            | `\| foo bar baz \|`                                        |
-| block with no arguments                           | `[ <expressions> ]`                                        |
+| block with no arguments                           | `[<expressions>]`                                          |
 | block with arguments                              | `[:a :b \| a + b]`                                         |
 | unary message send                                | `<object> <message>` such as `5 factorial`                 |
 | binary message send (look like operators)         | `<object> <message> <argument>` such as `4 * 5`            |

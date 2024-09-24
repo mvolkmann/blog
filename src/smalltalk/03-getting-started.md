@@ -452,8 +452,8 @@ Here's an example of a session doing this.
    mid := size // 2 + 1.
    value := sorted at: mid.
    size odd
-       ifTrue: [ ^ value ]
-       ifFalse: [ ^ (value + (sorted at: mid - 1)) / 2 ]
+       ifTrue: [^ value]
+       ifFalse: [^ (value + (sorted at: mid - 1)) / 2]
    ```
 
 1. Press cmd-s to save.

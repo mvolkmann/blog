@@ -171,7 +171,7 @@ To delete all instances of such classes,
 enter the following in Workspace and "Do it":
 
 ```smalltalk
-SomeClass allInstancesDo: [ :obj | obj delete ]
+SomeClass allInstancesDo: [:obj | obj delete]
 ```
 
 ## Object Creation Detail
