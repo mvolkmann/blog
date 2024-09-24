@@ -195,7 +195,9 @@ checks for that key in the `SystemDictionary`.
   [
       (Delay forSeconds: 1) wait.
       UISupervisor whenUIinSafeState: [
+          "Disable the World menu."
           Preferences at: #worldMenu put: nil.
+          "Disable the cmd-click to get morph halos."
       ]
   ] fork
 
