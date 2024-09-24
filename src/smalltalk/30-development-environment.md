@@ -891,9 +891,11 @@ It seems the only way to recover the changes is to
 follow the steps above using a "File List".
 
 WARNING: If a class definition in a fileIn
-specifies a superclass that does not exist in the image,
-it will silently be changed to `ProtoObject`
-and almost certain break usages of that class.
+specifies a superclass that does not exist in the image, it will be
+changed to `ProtoObject` and almost certain break usages of that class.
+The following warning message will be written to the Transcript window:
+"Attempt to create {class-name} as a subclass of nil.
+Possibly a class is being loaded before its superclass."
 
 ## File List
 
