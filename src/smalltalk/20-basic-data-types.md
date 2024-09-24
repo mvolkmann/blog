@@ -690,10 +690,9 @@ To add support for regular expressions:
 
 - `cd` to the directory containing the 'Cuis-Smalltalk-Dev' directory.
 - `git clone https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Regex.git`
-- Open a File List.
-- Navigate to the `Cuis-Smalltalk-Regex` directory.
-- Select the file `Regex-Core.pck.st` and click the "install package" button.
-- Select the file `Regex-TerseGuide.pck.st` and click the "install package" button.
+- Open a Workspace.
+- Enter `Feature require: 'Regex-Core'` and "Do it".
+- Enter `Feature require: 'Regex-TerseGuide'` and "Do it".
 - Open the World menu and select Help ... Terse Guide to Cuis.
 - In the left nav, scroll to the bottom and select "Regex".
 - Review all the example code.

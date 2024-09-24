@@ -191,10 +191,29 @@ Let's learn where the `Feature require:` method searches for packages.
 1. Note the following comments in this code:
 
    - "Look inside my own folder"
+
+     This is represented by the instance variable `pathName`
+     which is `nil` by default.
+     To set it, send `@pathName:` to
+
    - "Look in codePackageFile folder"
+
+     This is represented by the instance variable `codePackageName`
+     which is `nil` for me.
+
    - "Packages that come included with Cuis"
+
+     These can be found under the `Cuis-Smalltalk-Dev/Packages` directory.
+
    - "Packages created by user"
+
+     These can be found under the
+     `Cuis-Smalltalk-Dev-UserFiles/NewPackages` directory.
+
    - "Packages in other folders or repos in the project directory"
+
+     These can be found under the parent directory of the
+     `Cuis-Smalltalk-Dev` directory.
 
 See the earlier section "Installed Packages Window"
 for more details on working with packages.
