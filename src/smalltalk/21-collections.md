@@ -77,73 +77,75 @@ These must be called on a concrete subclass, not on `Collection`.
 The following table describes some of the instance methods
 defined in the `Collection` class.
 
-| Method                | Description                                                                                                                                |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `*`                   | answers instance whose elements are receiver elements times argument                                                                       |
-| `+`                   | answers instance whose elements are receiver elements plus argument                                                                        |
-| `,`                   | answers instance whose elements are the concatenation of receiver and argument collections                                                 |
-| `-`                   | answers instance whose elements are receiver elements minus argument                                                                       |
-| `/`                   | answers instance whose elements are receiver elements divided by argument                                                                  |
-| `//`                  | answers instance whose elements are receiver elements integer divided by argument                                                          |
-| `=`                   | answers `Boolean` indicating if receiver and argument are equivalent                                                                       |
-| `\\`                  | answers instance whose elements are receiver elements modulo argument                                                                      |
-| `abs`                 | answers instance whose elements are absolute value of receiver elements                                                                    |
-| `add:`                | adds argument to collection and answers argument                                                                                           |
-| `addALl:`             | adds all objects in argument collection to collection and answers argument                                                                 |
-| `allSatisfy:`         | answers `Boolean` indicating if ALL elements satisfy a block; like `every` in JavaScript                                                   |
-| `anySatisfy:`         | answers `Boolean` indicating if ANY elements satisfy a block; like `some` in JavaScript                                                    |
-| `asArray`             | answers `Array` instance whose elements are those in receiver                                                                              |
-| `asBag`               | answers `Bag` instance whose elements are those in receiver                                                                                |
-| `asCommaStringAnd`    | answers comma-separated `String` where last elements are separated by "and"                                                                |
-| `asIdentitySet`       | answers `IdentifySet` instance whose elements are those in receiver with no duplicates                                                     |
-| `asOrderedCollection` | answers `OrderedCollection` instance whose elements are those in receiver                                                                  |
-| `asSortedCollection`  | answers `SortedCollection` instance whose elements are those in receiver                                                                   |
-| `asSortedCollection:` | same as `asSortedCollection`, but take block that defines sort order                                                                       |
-| `asSet`               | answers `Set` instance whose elements are those in receiver with no duplicates                                                             |
-| `atRandom`            | answers a random element                                                                                                                   |
-| `average`             | same as `mean`                                                                                                                             |
-| `ceiling`             | answers instances whose elements are the ceiling of receiver elements                                                                      |
-| `collect:`            | answers instance whose elements are results of passing receiver elements to a block; like `map` in JavaScript                              |
-| `collect:andFold`     | answers instance whose elements are results of passing receiver elements to a block; like `map` in JavaScript                              |
-| `count:`              | answers number of receiver elements that satisfy argument block                                                                            |
-| `detect:`             | answers first element in receiver that satisfies block argument; like `find` in JavaScript                                                 |
-| `difference:`         | answers instance that includes elements in receiver that are not in argument                                                               |
-| `do:`                 | evaluates block argument for each element; like `forEach` in JavaScript                                                                    |
-| `do:separatedBy:`     | evaluates `do:` block argument for each element and `separatedBy:` block argument between each element                                     |
-| `floor`               | answers instances whose elements are the floor of receiver elements                                                                        |
-| `fold:`               | answers value that results from folding receiver elements with a block; like `reduce` in JavaScript                                        |
-| `fold:ifEmpty:`       | like `fold:`, but specifies value to use if collection is empty                                                                            |
-| `groupBy:`            | answers `Dictionary` where keys are values returned by passing each element to block argument and values are `OrderedCollection` instances |
-| `ifEmpty:`            | evalutes block argument if collection is empty                                                                                             |
-| `ifEmpty:ifNotEmpty:` | combines `ifEmpty:` and `ifNotEmpty:`                                                                                                      |
-| `ifNotEmpty:`         | evalutes block argument if collection is not empty                                                                                         |
-| `ifNotEmpty:ifEmpty:` | combines `ifNotEmpty:` and `ifEmpty:`                                                                                                      |
-| `includes:`           | answers `Boolean` indicating if argument is an element of receiver                                                                         |
-| `includesAllOf:`      | answers `Boolean` indicating if all elements in argument collection are elements of receiver                                               |
-| `includesAnyOf:`      | answers `Boolean` indicating if any elements in argument collection are elements of receiver                                               |
-| `inject:into:`        | similar to `fold:`, but can specify initial accumulator value; like `reduce` in JavaScript                                                 |
-| `intersection:`       | answers instance that includes elements present in both receiver and argument collections                                                  |
-| `isEmpty`             | answers `Boolean` indicating if collection does not contain any elements                                                                   |
-| `max`                 | answers largest number element                                                                                                             |
-| `mean`                | answers mean of number elements                                                                                                            |
-| `min`                 | answers smallest number element                                                                                                            |
-| `noneSatisfy:`        | answers `Boolean` indicating if NONE of the elements satisfy a block                                                                       |
-| `notEmpty`            | answers `Boolean` indicating if collection is not empty                                                                                    |
-| `occurrencesOf:`      | answers number of elements that are equal to argument                                                                                      |
-| `product`             | answers product of number elements                                                                                                         |
-| `range`               | answers difference between max and min values                                                                                              |
-| `reduce:`             | same as fold:                                                                                                                              |
-| `reject:`             | answers instance containing receiver elements that do not satisfy a block                                                                  |
-| `remove:`             | removes first occurrence of argument and answers argument                                                                                  |
-| `select:`             | answers instance containing receiver elements that satisfy a block; like `filter` in JavaScript                                            |
-| `select:thenCollect`  | combines `select:` and `collect:`                                                                                                          |
-| `select:thenDo:`      | combines `select:` and `do:`                                                                                                               |
-| `sizes`               | answers number of elements in receiver                                                                                                     |
-| `sorted`              | answers instance containing all receiver elements in sorted order                                                                          |
-| `sqrt`                | answers instance whose elements are square root of receiver elements                                                                       |
-| `squared`             | answers instance whose elements are squared values of receiver elements                                                                    |
-| `sum`                 | answers sum of receiver number elements                                                                                                    |
-| `union:`              | answers `Set` instance that includes elements present in receiver or argument collection                                                   |
+| Method                  | Description                                                                                                                                |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `*`                     | answers instance whose elements are receiver elements times argument                                                                       |
+| `+`                     | answers instance whose elements are receiver elements plus argument                                                                        |
+| `,`                     | answers instance whose elements are the concatenation of receiver and argument collections                                                 |
+| `-`                     | answers instance whose elements are receiver elements minus argument                                                                       |
+| `/`                     | answers instance whose elements are receiver elements divided by argument                                                                  |
+| `//`                    | answers instance whose elements are receiver elements integer divided by argument                                                          |
+| `=`                     | answers `Boolean` indicating if receiver and argument are equivalent                                                                       |
+| `\\`                    | answers instance whose elements are receiver elements modulo argument                                                                      |
+| `abs`                   | answers instance whose elements are absolute value of receiver elements                                                                    |
+| `add:`                  | adds argument to collection and answers argument                                                                                           |
+| `addALl:`               | adds all objects in argument collection to collection and answers argument                                                                 |
+| `allSatisfy:`           | answers `Boolean` indicating if ALL elements satisfy a block; like `every` in JavaScript                                                   |
+| `anySatisfy:`           | answers `Boolean` indicating if ANY elements satisfy a block; like `some` in JavaScript                                                    |
+| `asArray`               | answers `Array` instance whose elements are those in receiver                                                                              |
+| `asBag`                 | answers `Bag` instance whose elements are those in receiver                                                                                |
+| `asCommaStringAnd`      | answers comma-separated `String` where last elements are separated by "and"                                                                |
+| `asIdentitySet`         | answers `IdentifySet` instance whose elements are those in receiver with no duplicates                                                     |
+| `asOrderedCollection`   | answers `OrderedCollection` instance whose elements are those in receiver                                                                  |
+| `asSortedCollection`    | answers `SortedCollection` instance whose elements are those in receiver                                                                   |
+| `asSortedCollection:`   | same as `asSortedCollection`, but take block that defines sort order                                                                       |
+| `asSet`                 | answers `Set` instance whose elements are those in receiver with no duplicates                                                             |
+| `atRandom`              | answers a random element                                                                                                                   |
+| `average`               | same as `mean`                                                                                                                             |
+| `ceiling`               | answers instances whose elements are the ceiling of receiver elements                                                                      |
+| `collect:`              | answers instance whose elements are results of passing receiver elements to a block; like `map` in JavaScript                              |
+| `collect:andFold`       | answers instance whose elements are results of passing receiver elements to a block; like `map` in JavaScript                              |
+| `count:`                | answers number of receiver elements that satisfy argument block                                                                            |
+| `detect:`               | answers first element in receiver that satisfies block argument; like `find` in JavaScript                                                 |
+| `detect:ifFound:ifNone` | like `detect:` but executes `ifFound:` block if found and `ifNone:` block if not found                                                     |
+| `detect:ifNone`         | like `detect:` but executes `ifNone:` block if not found                                                                                   |
+| `difference:`           | answers instance that includes elements in receiver that are not in argument                                                               |
+| `do:`                   | evaluates block argument for each element; like `forEach` in JavaScript                                                                    |
+| `do:separatedBy:`       | evaluates `do:` block argument for each element and `separatedBy:` block argument between each element                                     |
+| `floor`                 | answers instances whose elements are the floor of receiver elements                                                                        |
+| `fold:`                 | answers value that results from folding receiver elements with a block; like `reduce` in JavaScript                                        |
+| `fold:ifEmpty:`         | like `fold:`, but specifies value to use if collection is empty                                                                            |
+| `groupBy:`              | answers `Dictionary` where keys are values returned by passing each element to block argument and values are `OrderedCollection` instances |
+| `ifEmpty:`              | evalutes block argument if collection is empty                                                                                             |
+| `ifEmpty:ifNotEmpty:`   | combines `ifEmpty:` and `ifNotEmpty:`                                                                                                      |
+| `ifNotEmpty:`           | evalutes block argument if collection is not empty                                                                                         |
+| `ifNotEmpty:ifEmpty:`   | combines `ifNotEmpty:` and `ifEmpty:`                                                                                                      |
+| `includes:`             | answers `Boolean` indicating if argument is an element of receiver                                                                         |
+| `includesAllOf:`        | answers `Boolean` indicating if all elements in argument collection are elements of receiver                                               |
+| `includesAnyOf:`        | answers `Boolean` indicating if any elements in argument collection are elements of receiver                                               |
+| `inject:into:`          | similar to `fold:`, but can specify initial accumulator value; like `reduce` in JavaScript                                                 |
+| `intersection:`         | answers instance that includes elements present in both receiver and argument collections                                                  |
+| `isEmpty`               | answers `Boolean` indicating if collection does not contain any elements                                                                   |
+| `max`                   | answers largest number element                                                                                                             |
+| `mean`                  | answers mean of number elements                                                                                                            |
+| `min`                   | answers smallest number element                                                                                                            |
+| `noneSatisfy:`          | answers `Boolean` indicating if NONE of the elements satisfy a block                                                                       |
+| `notEmpty`              | answers `Boolean` indicating if collection is not empty                                                                                    |
+| `occurrencesOf:`        | answers number of elements that are equal to argument                                                                                      |
+| `product`               | answers product of number elements                                                                                                         |
+| `range`                 | answers difference between max and min values                                                                                              |
+| `reduce:`               | same as fold:                                                                                                                              |
+| `reject:`               | answers instance containing receiver elements that do not satisfy a block                                                                  |
+| `remove:`               | removes first occurrence of argument and answers argument                                                                                  |
+| `select:`               | answers instance containing receiver elements that satisfy a block; like `filter` in JavaScript                                            |
+| `select:thenCollect`    | combines `select:` and `collect:`                                                                                                          |
+| `select:thenDo:`        | combines `select:` and `do:`                                                                                                               |
+| `sizes`                 | answers number of elements in receiver                                                                                                     |
+| `sorted`                | answers instance containing all receiver elements in sorted order                                                                          |
+| `sqrt`                  | answers instance whose elements are square root of receiver elements                                                                       |
+| `squared`               | answers instance whose elements are squared values of receiver elements                                                                    |
+| `sum`                   | answers sum of receiver number elements                                                                                                    |
+| `union:`                | answers `Set` instance that includes elements present in receiver or argument collection                                                   |
 
 Collections support binary messages that operate on all the elements
 and return a new array containing the results.
