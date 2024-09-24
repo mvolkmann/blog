@@ -38,7 +38,8 @@ I sent the following to the Cuis mailing list on 9/23/2023:
 I'm learning how to access databases from Cuis Smalltalk.
 Here's what I've done so far:
 
-- Clone the Git repository at https://github.com/Cuis-Smalltalk/DatabaseSupport.
+- Clone the Git repository at
+  [DatabaseSupport](https://github.com/Cuis-Smalltalk/DatabaseSupport).
 - Open a "File List" window.
 - Navigate to the "DatabaseSupport" directory.
 - Select the file `ODBC_pck.st`.
@@ -60,7 +61,7 @@ Do I need to do something to let Cuis know where to find those files?
 The line where this fails is
 
 ```text
-<cdecl: int16 'SQLAllocEnv' (SQLHENV*)>
+&lt;cdecl: int16 'SQLAllocEnv' (SQLHENV*)&gt;
 ```
 
 Am I supposed to set an environment variable in order for this to work?
