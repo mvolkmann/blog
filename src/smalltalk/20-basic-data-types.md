@@ -720,7 +720,20 @@ Many standard regular expression features are not implemented.
 - To match a literal colon, use '\:'.
 - Non-greedy syntax is not implemented.
 - Limits such as `\d{2,5}` are not implemented.
-- Capture groups are not implemented.
+
+The following code demonstrates using capture groups
+which this package refers to as "subexpressions".
+
+```smalltalk
+s := 'Mark was born on 4/16/1961.'.
+re := '(\d+)/(\d+)\/(\d+)' asRegex. "returns an RxMatcher object"
+re search: s.
+re subexpressionCount print. "4"
+(re subexpression: 1) print. "4/16/1961"
+(re subexpression: 2) print. "4"
+(re subexpression: 3) print. "16"
+(re subexpression: 4) print. "1961"
+```
 
 ## Point
 
