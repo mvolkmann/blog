@@ -470,7 +470,7 @@ All indexes are 1-based and `0` means not found.
 | `isEmpty`                              | answers `Boolean` indicating if receiver size is zero                                                                         |
 | `isLiteral`                            | always answers `true`                                                                                                         |
 | `join:`                                | answers instance formed by joining `Array` elements of any type with receiver delimiter                                       |
-| `match:`                               | answers `Boolean` indicating whether receiver matches a pattern                                                               |
+| `match:`                               | answers `Boolean` indicating whether receiver matches a pattern (can include `#` and `\*` characters)                         |
 | `padded:to:width:`                     | answers copy formed by padding receiver on left or right with a given `Character`                                             |
 | `prefixAndSuffix:`                     | answers `Array` of instances formed by splitting receiver on last occurrence of a `Character`                                 |
 | `size`                                 | answers largest legal index                                                                                                   |
