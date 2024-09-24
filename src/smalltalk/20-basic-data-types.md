@@ -698,6 +698,8 @@ To add support for regular expressions:
 - In the left nav, scroll to the bottom and select "Regex".
 - Review all the example code.
 
+Regular expressions are specfied with strings.
+
 The following code processes
 a URL path `String` like `'/state/:state/city/:city'`
 and returns the pattern `String` `'/state/*/city/*'`.
@@ -705,6 +707,20 @@ and returns the pattern `String` `'/state/*/city/*'`.
 ```smalltalk
 pattern := pathString copyWithRegex: '\:\w+' matchesReplacedWith: '*'.
 ```
+
+Many standard regular expression features are not implemented.
+
+- The regex delimiters '^', '$', '\n' are not recognized.
+  - The `String matchesRegex:`, `String matchesRegexIgnoringCase:`,
+    `RxParser match:`, and `RxMatcher matches` methods
+    match against the entire string as if the regular expression
+    began with `^` and ended with `$`.
+  - The `RxMatcher` `search:` and `searchStream:` methods
+    match against any substring.
+- To match a literal colon, use '\:'.
+- Non-greedy syntax is not implemented.
+- Limits such as `\d{2,5}` are not implemented.
+- Capture groups are not implemented.
 
 ## Point
 
