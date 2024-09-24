@@ -181,27 +181,30 @@ checks for that key in the `SystemDictionary`.
   - Click the menu halo button and select debug...inspect morph.
   - Enter `self delete` in the bottom pane and "Do it".
 
-- Save the image with a new name.
+- Open the World menu and pin it so it remains open.
 
-  - Open the World menu and select "Save Image as...".
-  - Enter the image name "TodoApp.image".
+- Open a Browser.
 
-- Create the file `todoapp.st` that contains the following:
+- Disable the World menu.
+
+  Use the Browser to modify the `WorldMenu` `getMenu` method to return `nil`.
+
+- Disable Morph halos.
+
+  Use the Browser to modify the `Morph` `mouseButton3Down:localPosition:` method
+  so the following line is commented out:
 
   ```smalltalk
-  | world |
-
-  world := UISupervisor ui.
-  [
-      (Delay forSeconds: 1) wait.
-      UISupervisor whenUIinSafeState: [
-          "Disable the World menu."
-          Preferences at: #worldMenu put: nil.
-          "Disable the cmd-click to get morph halos."
-      ]
-  ] fork
-
+  self addHalo: aMouseButtonEvent.
   ```
+
+- Close the Browser.
+
+- Save the image with a new name.
+
+  - Click "Save Image as..." in the pinned World menu.
+  - Enter the image name "TodoApp.image".
+  - Close the World menu.
 
 - Create the following shell script in the file `todoapp`.
   This assumes that the environment variable `SMALLTALK_DIR` is set to
@@ -212,7 +215,7 @@ checks for that key in the `SystemDictionary`.
   CUIS_DIR=$SMALLTALK_DIR/Cuis-Smalltalk-Dev
   VM=$CUIS_DIR/CuisVM.app/Contents/MacOS/Squeak
   IMAGE=$CUIS_DIR/CuisImage/TodoApp.image
-  $VM $IMAGE -s todoapp.st
+  $VM $IMAGE
   ```
 
 ## Hilaire Fernandes Approach
