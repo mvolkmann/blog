@@ -170,9 +170,10 @@ checks for that key in the `SystemDictionary`.
 
 - Open a base image (currently named `Cuis7.1-6713.image`).
 - Open a Workspace.
-- Enter `Feature require: 'UI-MetaProperties'.` and "Do it".
+- Enter `Feature require: 'UI-MetaProperties'.` and "Do it"
+  (perhaps not everything installed by this is needed).
 - Enter `Feature require: 'TodoApp'.` and "Do it".
-- Enter `TodoApp new` and "Do it".
+- Enter `TodoApp new.` and "Do it".
 - Position and size the "Todo App" window as desired.
 - Close the Workspace and Transcript windows.
 - Remove the taskbar at the bottom.
@@ -180,6 +181,7 @@ checks for that key in the `SystemDictionary`.
   - cmd-click the taskbar.
   - Click the menu halo button and select debug...inspect morph.
   - Enter `self delete` in the bottom pane and "Do it".
+  - Close the Inspect window.
 
 - Open the World menu and pin it so it remains open.
 
@@ -187,7 +189,12 @@ checks for that key in the `SystemDictionary`.
 
 - Disable the World menu.
 
-  Use the Browser to modify the `WorldMenu` `getMenu` method to return `nil`.
+  Use the Browser to modify the `WorldMorph` `getMenu` method
+  to contain only the following:
+
+  ```smalltalk
+  ^nil
+  ```
 
 - Disable Morph halos.
 
@@ -213,10 +220,13 @@ checks for that key in the `SystemDictionary`.
 - Save the image with a new name.
 
   - Click "Save Image as..." in the pinned World menu.
-  - Enter the image name "TodoApp.image".
+  - Enter a name for the app (ex. TodoApp).
   - Close the World menu.
 
-- Create the following shell script in the file `todoapp`.
+- Quit the VM.
+
+- Create the following shell script in a file
+  whose name is the app name (ex. `todoapp`).
   This assumes that the environment variable `SMALLTALK_DIR` is set to
   the path where the `Cuis-Smalltalk-Dev` local repository resides.
 
@@ -227,6 +237,9 @@ checks for that key in the `SystemDictionary`.
   IMAGE=$CUIS_DIR/CuisImage/TodoApp.image
   $VM $IMAGE
   ```
+
+- To run the app, open a Terminal, cd to the directory containing the script,
+  and enter `./todoapp`.
 
 ## Hilaire Fernandes Approach
 
