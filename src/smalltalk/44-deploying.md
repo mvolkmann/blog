@@ -198,6 +198,16 @@ checks for that key in the `SystemDictionary`.
   self addHalo: aMouseButtonEvent.
   ```
 
+- Change error handling.
+
+  Display a simple error dialog instead of opening a Debug window.
+  To do this, modify the `UnhandledError` `defaultAction` method
+  to contain only the following:
+
+  ```smalltalk
+  self inform: exception description
+  ```
+
 - Close the Browser.
 
 - Save the image with a new name.
