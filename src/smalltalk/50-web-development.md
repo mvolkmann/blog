@@ -22,15 +22,21 @@ Also see the
 
 See the <a href="https://book.seaside.st/book" target="_blank">Seaside Book</a>.
 
-## Major Issue
-
-I sent the folllowing to the Cuis mailing list on September 24, 2024:
+## Basic Example
 
 Here is a very simple use of the WebServer class that can be installed with
-`Feature require: 'WebClient'`. A fileOut containing this code is attached.
-The class name is BasicWebServer
-and it has the single instance variable `server`.
-It contains only these instance methods.
+`Feature require: 'WebClient'`.
+Create the class `BasicWebServer` as follows:
+
+```smalltalk
+Object subclass: #BasicWebServer
+    instanceVariableNames: 'server'
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'Volkmann'
+```
+
+Add the following instance methods:
 
 ```smalltalk
 initialize
@@ -41,27 +47,21 @@ start
     server listenOn: 3000
 
 stop
-    server stopListener
+    server destroy
 ```
 
-I can start the web server with:
+Create and start the web server with:
 
 ```smalltalk
 server := BasicWebServer new.
 server start.
 ```
 
-Then I can browse localhost:3000 and see "Hello, World!" in the web browser.
+Browse localhost:3000 to see "Hello, World!".
 
-I can stop the web server with:
+Stop the web server with `server stop`.
 
-```smalltalk
-server stop.
-```
-
-But I cannot start it again unless I restart the VM.
-Can someone please explain what else I can do to enable
-restarting the server without needing to restart the VM?
+Restart it with `server start`.
 
 ## Sending HTTP Requests
 
