@@ -16,6 +16,9 @@ To install support for ODBC:
 
 This adds the class category "ODBC".
 
+See the example code in the `dsn:user:password:query:` class method
+of the `ODBCCOnnection` class.
+
 Open a Browser, select the ODBC class category,
 select the ODBCConnection class, click the "class" button,
 and see the sample code in the class method `dsn:user:password:query:`.

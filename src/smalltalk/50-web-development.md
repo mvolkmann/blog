@@ -95,3 +95,9 @@ and press cmd-t (Terminate).
 See the class `MyWebServer` in the `Volkmann` package.
 The `handleDog:` method defines CRUD endpoints.
 TODO: Provide more detail about defining endpoints.
+
+## WebClient Issues
+
+- It doesn't support paths containing path parameters.
+- It doesn't support query parameters.
+- It doesn't support PATCH requests.
