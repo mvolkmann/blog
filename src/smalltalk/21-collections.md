@@ -192,7 +192,7 @@ All indexes are 1-based.
 | `allButLast:`             | answers copy including all but last argument elements                                                                         |
 | `allButLastDo:`           | evaluates block argument with all but last element                                                                            |
 | `at:ifAbsent:`            | answers element at `at:` index or `ifAbsent:` if index out of bounds                                                          |
-| `atLast:`                 | answers element an index that is argument from end (1 for last)                                                               |
+| `atLast:`                 | answers element at index that is argument from end (1 for last)                                                               |
 | `atLast:ifAbsent:`        | like `atLast:` but specifies value to return if not enough elements                                                           |
 | `combinations:atATimeDo:` | evaluates `atATimeDo` once for every unique combination of `combinations:` elements                                           |
 | `copyFrom:to:`            | answers instance containing only receiver elements from index `copyFrom:` to index `to:`                                      |

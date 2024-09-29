@@ -488,6 +488,19 @@ All indexes are 1-based and `0` means not found.
 | `withoutSuffix`                        | answers instance created by removing given substring suffix                                                                   |
 | `withoutTrailingBlanks`                | answers instance created by removing trailing blanks                                                                          |
 
+To get a substring from a given index to another index,
+use the method `#copyFrom:to:`
+which is defined in the `SequenceableCollection` class.
+For example:
+
+```smalltalk
+s := 'abcdef'.
+sub := s copyFrom: 4 to: s size. "answers 'def'"
+```
+
+There is no method that only takes a start index
+and returns the subtring to the end of the string.
+
 ### String
 
 Literal `String` objects are surrounded by single quotes.
@@ -612,7 +625,7 @@ containing three spaces followed by `'19'`:
 
 The `prefixAndSuffix:` method answers an `Array` of instances
 formed by splitting receiver on last occurrence of a `Character`.
-For exsample, the following code answers
+For example, the following code answers
 an `Array` containing `'/foo/bar'` and `'baz.txt')`.
 
 ```smalltalk
