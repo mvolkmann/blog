@@ -796,14 +796,16 @@ Select a variable name to see its value in the bottom row, fourth pane.
 
 To set breakpoints in methods, add `self halt` message sends
 in selected locations in their code.
-The `halt` method is defined in the `Object` class.
-It sends the `#signal` message to the `Halt` class
+The `halt` and `halt:` methods are defined in the `Object` class.
+These sends the `#signal` message to the `Halt` class
 which is a sublcass of `Exception` that is resumable.
-Then run code the invokes the methods.
-When `self halt` is evaluated, a Debugger will open.
+Then run code the invokes the methods to be debugged.
+When `self halt` or `self halt: message` is evaluated,
+a Debug window will open.
+If a message is provided, it will appear in the Debug window title bar.
 Locate the line in the stack trace ending in ">>halt".
 Click the line immediately after it to examine the
-method containing `self halt` and its variables.
+method that sent the `halt` message and its variables.
 
 The following table describes each button in the second row of buttons.
 Hover over any of them to see a tooltip that describes their purpose.

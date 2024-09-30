@@ -84,6 +84,10 @@ The term "receiver" describes the object to which a message is sent.
 | reference to current object in a method           | `self`                                                     |
 | compound literal evaluated by compiler            | `` `expression` ``                                         |
 
+There is no syntax for describing a class as a whole.
+Instead, a class is described by sending a message to its superclass
+and each class/instance method is described separately.
+
 Whitespace in Smalltalk code is insignificant.
 Spaces, tabs, and newline characters can be freely inserted.
 
