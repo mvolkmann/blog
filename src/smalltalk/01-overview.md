@@ -351,6 +351,10 @@ Smalltalk has the following cons:
   target="_blank">Back to the Future</a> -
   The Story of Squeak, A Practical Smalltalk Written in Itself
 
+  The Squeak virtual machine is implemented in a subset of Smalltalk
+  called <a href="http://wiki.squeak.org/squeak/slang"
+  target="_blank">Slang</a>.
+
 - Pharo Smalltalk
 
   The first release of Pharo Smalltalk was in March, 2008.
