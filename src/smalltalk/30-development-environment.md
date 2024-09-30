@@ -40,6 +40,16 @@ To refresh all the windows after code changes that affect them
 open the World menu and select "Windows...Restore all Windows".
 This does not update windows to use a newly selected theme.
 
+## Background Image
+
+To add a background image to the `WorldMorph`:
+
+```smalltalk
+filePath := '/Users/volkmannm/Pictures/images/altitude1600.jpg'.
+stream := filePath asFileEntry readStream.
+self runningWorld backgroundImageData: stream binary contentsOfEntireFile.
+```
+
 ## Workspace Windows
 
 Workspaces provide a place for experimenting with code.
