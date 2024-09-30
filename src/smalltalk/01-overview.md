@@ -343,7 +343,10 @@ Smalltalk has the following cons:
 
 - Squeak Smalltalk
 
-  The first release of Squeak Smalltalk was in October, 1996.
+  Squeak Smalltalk was created by the team from Xerox PARC
+  that created Smalltalk-80 including Alan Kay, Dan Ingalls,
+  Ted Kaehler, John Maloney, and Scott Wallace.
+  The first release was in October, 1996.
   See <a href="http://files.squeak.org/docs/OOPSLA.Squeak.html"
   target="_blank">Back to the Future</a> -
   The Story of Squeak, A Practical Smalltalk Written in Itself
