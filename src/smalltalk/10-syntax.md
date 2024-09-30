@@ -10,7 +10,45 @@ Before diving into the functionality provided
 by the Smalltalk development environment,
 it's important to understand the syntax of the Smalltalk programming language.
 
-## Summary
+## Special Tokens
+
+The assignment operator (`:=`), pronounced "gets",
+can be rendered as a left pointing arrow.
+The return operator (`^`) which is used in methods to return a value
+can be rendered as an upward pointing arrow.
+
+To enable those renderings, open the World menu and
+select Preferences...Show ST-80 Assignments.
+The next time code is modified, all the `:=` and `^` operators
+will be rendered as arrows.
+
+To disable these renderings, open the World menu and
+select Preferences...Show ANSI Assignments.
+
+Typing an underscore is a shorthand way to type `:=` for variable assignments.
+Assignment underscores are changed to `:=` and rendered as left pointing arrows
+regardless of whether "Show ST-80 Assigments" is selected.
+
+The following table summarizes all the special tokens.
+
+| Token | Meaning                                                        |
+| ----- | -------------------------------------------------------------- |
+| `'`   | delimits a `String`                                            |
+| `#`   | begins a `Symbol`                                              |
+| `:`   | ends a keyword in a keyword message                            |
+| `.`   | separates statements                                           |
+| `\|`  | delimits local variables in a method or block                  |
+| `"`   | delimits a comment                                             |
+| `(`   | begins a subexpression                                         |
+| `)`   | ends a subexpression                                           |
+| `[`   | begins a block                                                 |
+| `]`   | ends a block                                                   |
+| `^`   | returns an object from a method                                |
+| `;`   | cascades statements to send multiple messages to same receiver |
+| `::`  | chains messages to remove need for parentheses                 |
+| `:=`  | assigns result of expression on right to variable on left      |
+
+## Syntax Summary
 
 The following table summarizes all the syntax.
 The term "receiver" describes the object to which a message is sent.
@@ -111,22 +149,3 @@ They start with a letter that is uppercase for classes and class variables,
 and lowercase for all other names.
 The only special character allowed is the underscore character,
 but that is rarely used because camelCase is preferred.
-
-## Special Characters
-
-The assignment operator (`:=`), pronounced "gets",
-can be rendered as a left pointing arrow.
-The return operator (`^`) which is used in methods to return a value
-can be rendered as an upward pointing arrow.
-
-To enable those renderings, open the World menu and
-select Preferences...Show ST-80 Assignments.
-The next time code is modified, all the `:=` and `^` operators
-will be rendered as arrows.
-
-To disable these renderings, open the World menu and
-select Preferences...Show ANSI Assignments.
-
-Typing an underscore is a shorthand way to type `:=` for variable assignments.
-Assignment underscores are changed to `:=` and rendered as left pointing arrows
-regardless of whether "Show ST-80 Assigments" is selected.
