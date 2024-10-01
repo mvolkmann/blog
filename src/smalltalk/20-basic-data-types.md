@@ -816,15 +816,11 @@ Many classes that represent generic data types have instance methods
 whose names begin with "as" that convert the value to a different type.
 Highlights include:
 
-- `asArray`: answers `Array` representation of any kind of `Collection`
-- `asBag`: answers `Bag` representation of any kind of `Collection`
 - `asCamelCase`: answers `String` created by
   removing spaces from a `CharacterSequence` and
   capitalizing the first letter of each word except the first
 - `asDate`: answers `Date` created from a `CharacterSequence`
   with many allowed forms
-- `asDictionary`: answers `Dictionary` representation of any kind of
-  `Collection` whose elements are `Association` instances
 - `asFloat`: answers `Float` representation of any kind of `Number`
 - `asFraction`: answers `Fraction` representation of a `Float` or `Integer`
 - `asInteger`: answers `Integer` representation of any kind of `Number` (truncates)
@@ -836,8 +832,6 @@ Highlights include:
   (`start` instance variable sets day to 1 and time to midnight,
   keeping the month and year)
 - `asNumber`: answers a `Number` parsed from a `CharacterSequence`
-- `asOrderedCollection`: answers an `OrderedCollection` representation
-  of any kind of `Collection`
 - `asOxfordCommandStringAnd`: answers `String` created from `Collection` elements;
   for example, `#(#red #green #blue) asOxfordCommaStringAnd`
   answers `'red, green, and blue'`
@@ -846,10 +840,6 @@ Highlights include:
 - `asRegex`: answers `RxMatcher` created from a `String`
   containing regular expression syntax
 - `asRegexIgnoringCase`: same as `asRegex`, but ignores case
-- `asSet`: answers a `Set` representation of any `Collection`,
-  removing duplicates
-- `asSortedCollection`: answers `SortedCollection` representation
-  of any `Collection`
 - `asString`: answers `String` representation of any kind of `Object`
 - `asSymbol`: answers `Symbol` representation of any `Character` or `CharacterSequence`
 - `asTrueFraction`: answers exact `Fraction` representation of a `Float`
@@ -858,3 +848,6 @@ Highlights include:
   of any `CharacterSequence` or `String`
 - `asYear`: answers `Year` created from a `CharacterSequence`
   containing only a year number
+
+See the "Collections" section for methods that
+convert from one kind of collection to another.

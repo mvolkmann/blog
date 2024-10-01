@@ -797,3 +797,24 @@ demo first
 
 The result will be `nil` because the `comet` and `oscar` objects
 will be garbage collected after the `initialize` method executes.
+
+## Conversions
+
+Many collection classes have instance methods whose names begin with "as"
+that create a different type of collection containing its elements.
+
+Highlights include:
+
+- `asArray`: answers `Array` representation of any kind of `Collection`
+- `asBag`: answers `Bag` representation of any kind of `Collection`
+- `asDictionary`: answers `Dictionary` representation of any kind of
+  `Collection` whose elements are `Association` instances
+- `asOrderedCollection`: answers an `OrderedCollection` representation
+  of any kind of `Collection`
+- `asSet`: answers a `Set` representation of any `Collection`,
+  removing duplicates
+- `asSortedCollection`: answers `SortedCollection` representation
+  of any `Collection`
+
+In addition, the `asJsonString` method answers
+a JSON `String` representation of any kind of collection.
