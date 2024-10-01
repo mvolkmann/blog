@@ -50,6 +50,78 @@ stream := filePath asFileEntry readStream.
 self runningWorld backgroundImageData: stream binary contentsOfEntireFile.
 ```
 
+To tile the image:
+
+- Modify `PasteUpMorph` method `buildMagnifiedBackgroundImage` as follows:
+
+  ```smalltalk
+  buildMagnifiedBackgroundImage
+      | image |
+      backgroundImageData
+          ifNil: [ backgroundImage := nil ]
+          ifNotNil: [
+              [
+                  | scale |
+                  extent logAs: 'PasteUpMorph buildMagnifiedBackgroundImage extent'.
+                  backgroundImage := nil.
+                  Smalltalk primitiveGarbageCollect.
+                  image := Form fromBinaryStream: backgroundImageData readStream.
+
+                  "backgroundImage := image magnifyTo: extent."
+
+                  "scale := extent x / image width."
+                  scale := 0.5.
+                  scale logAs: 'PasteUpMorph buildMagnifiedBackgroundImage scale'.
+                  backgroundImage := image magnifyBy: scale.
+
+                  "Save some memory. Enable if desired."
+                  "backgroundImage := backgroundImage orderedDither32To16 asColorFormOfDepth: 8."
+                  image := nil.
+                  Smalltalk primitiveGarbageCollect.
+                  backgroundImage bits pin.
+              ] on: Error do: [backgroundImage := nil]. "Can happen if JPEG plugin not built"
+              self redrawNeeded
+          ]
+  ```
+
+- Modify `WorldMorph` method `drawOn:` as follows:
+
+  ```smalltalk
+  drawOn: aCanvas
+
+      "draw background image."
+      backgroundImage
+          ifNotNil: [
+              "aCanvas image: backgroundImage at: `0@0`"
+              | height width x y |
+              height := backgroundImage height.
+              width := backgroundImage width.
+              x := 0.
+              y := 0.
+              [ x < extent x ] whileTrue: [
+                  [ y < extent y ] whileTrue: [
+                      aCanvas image: backgroundImage at: x @ y.
+                      y := y + height.
+                  ].
+                  x := x + width.
+                  y := 0.
+              ].
+          ]
+          ifNil: [
+              "draw background fill"
+              (aCanvas drawsOnDisplay and: [ color mightBeTranslucent ])
+                  ifTrue: [
+                      "Special case so a translucent background on the Display allows you to see through the main Cuis Window.
+                      Requires proper handling of translucent Display in the VM.
+                      Seems to work only on Linux when using a composing window manager."
+                      (BitBlt toForm: Display) clipRect: aCanvas clipRect;
+                          copy: Display boundingBox
+                          from: `0@0` in: nil
+                          fillColor: color rule: Form over.
+                      Display forceToScreen]
+                  ifFalse: [ super drawOn: aCanvas ]]
+  ```
+
 ## Workspace Windows
 
 Workspaces provide a place for experimenting with code.
@@ -118,9 +190,9 @@ The syntax highlighting described in the table below is provided.
 In any text editing pane, right-click and select "Help..."
 to see a list of the supported key bindings.
 
-To select arbitrary text, drag over it.  
-To select a word, double-click it.  
-To select an entire line, triple-click it.  
+To select arbitrary text, drag over it.
+To select a word, double-click it.
+To select an entire line, triple-click it.
 To select all the code in an editing pane, press cmd-a.
 
 To toggle surrounding selected text with a given delimiter character,
