@@ -62,20 +62,15 @@ To tile the image:
           ifNotNil: [
               [
                   | scale |
-                  extent logAs: 'PasteUpMorph buildMagnifiedBackgroundImage extent'.
                   backgroundImage := nil.
                   Smalltalk primitiveGarbageCollect.
                   image := Form fromBinaryStream: backgroundImageData readStream.
 
-                  "backgroundImage := image magnifyTo: extent."
-
-                  "scale := extent x / image width."
-                  scale := 0.5.
-                  scale logAs: 'PasteUpMorph buildMagnifiedBackgroundImage scale'.
+                  scale := extent. "for #stretch"
+                  scale := extent x / image width. "for #cover"
+                  "#tile is handled in WorldMorph drawOn:"
                   backgroundImage := image magnifyBy: scale.
 
-                  "Save some memory. Enable if desired."
-                  "backgroundImage := backgroundImage orderedDither32To16 asColorFormOfDepth: 8."
                   image := nil.
                   Smalltalk primitiveGarbageCollect.
                   backgroundImage bits pin.
