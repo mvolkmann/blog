@@ -31,8 +31,11 @@ inlining the code within the block and
 avoiding the need to send the `value` message.
 So it is more efficient to use blocks.
 
-The `Object` instance method `caseOf` is similar to
+The `Object` instance method `caseOf:` is similar to
 the `switch` statement in other programming languages.
+The argument for `caseOf:` is a dynamic array.
+It can optionally take an `otherwise:` argument
+whose value is a block to evaluate if none if the cases are matched.
 
 For example:
 
@@ -42,7 +45,12 @@ assessment := color caseOf: {
     ['red'] -> ['hot'].
     ['green'] -> ['warm'].
     ['blue'] -> ['cold']
-}
+}.
+assessment := color caseOf: {
+    ['red'] -> ['hot'].
+    ['green'] -> ['warm'].
+    ['blue'] -> ['cold']
+} otherwise: ['unknown'].
 ```
 
 When a block uses the `^` operator to return a value,
