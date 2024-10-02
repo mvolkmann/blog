@@ -33,9 +33,10 @@ So it is more efficient to use blocks.
 
 The `Object` instance method `caseOf:` is similar to
 the `switch` statement in other programming languages.
-The argument for `caseOf:` is a dynamic array.
+The argument for `caseOf:` is a dynamic array of `Association` elements.
 It can optionally take an `otherwise:` argument
-whose value is a block to evaluate if none if the cases are matched.
+whose value is a block that evaluates to the
+value to use if none if the cases are matched.
 
 For example:
 
