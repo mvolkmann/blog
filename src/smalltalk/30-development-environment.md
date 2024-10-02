@@ -56,65 +56,68 @@ To tile the image:
 
   ```smalltalk
   buildMagnifiedBackgroundImage
-      | image |
-      backgroundImageData
-          ifNil: [ backgroundImage := nil ]
-          ifNotNil: [
-              [
-                  | scale |
-                  backgroundImage := nil.
-                  Smalltalk primitiveGarbageCollect.
-                  image := Form fromBinaryStream: backgroundImageData readStream.
+  | effect image scale |
 
-                  scale := extent. "for #stretch"
-                  scale := extent x / image width. "for #cover"
-                  "#tile is handled in WorldMorph drawOn:"
-                  backgroundImage := image magnifyBy: scale.
+  backgroundImageData
+  	ifNil: [ backgroundImage := nil ]
+  	ifNotNil: [
+  		[
+  			backgroundImage := nil.
+  			Smalltalk primitiveGarbageCollect.
+  			image := Form fromBinaryStream: backgroundImageData readStream.
 
-                  image := nil.
-                  Smalltalk primitiveGarbageCollect.
-                  backgroundImage bits pin.
-              ] on: Error do: [backgroundImage := nil]. "Can happen if JPEG plugin not built"
-              self redrawNeeded
-          ]
+  			effect := Smalltalk at: #backgroundEffect.
+  			backgroundImage := effect caseOf: {
+  				[#cover] -> [
+  					scale := (extent x / image width) max: (extent y / image height).
+  					image magnifyBy: scale.
+  				].
+  				[#tile] -> [ image ].
+  			} otherwise: [ image magnifyTo: extent ]. "#stretch"
+
+  			"Save some memory. Enable if desired."
+  			"backgroundImage := backgroundImage orderedDither32To16 asColorFormOfDepth: 8."
+  			image := nil.
+  			Smalltalk primitiveGarbageCollect.
+  			backgroundImage bits pin.
+  		] on: Error do: [backgroundImage := nil]. "Can happen if JPEG plugin not built"
+  		self redrawNeeded
+  	]
   ```
 
-- Modify `WorldMorph` method `drawOn:` as follows:
+- Modify `PasteUpMorph` method `drawOn:` as follows:
 
   ```smalltalk
   drawOn: aCanvas
+  "draw background image."
 
-      "draw background image."
-      backgroundImage
-          ifNotNil: [
-              "aCanvas image: backgroundImage at: `0@0`"
-              | height width x y |
-              height := backgroundImage height.
-              width := backgroundImage width.
-              x := 0.
-              y := 0.
-              [ x < extent x ] whileTrue: [
-                  [ y < extent y ] whileTrue: [
-                      aCanvas image: backgroundImage at: x @ y.
-                      y := y + height.
-                  ].
-                  x := x + width.
-                  y := 0.
-              ].
-          ]
-          ifNil: [
-              "draw background fill"
-              (aCanvas drawsOnDisplay and: [ color mightBeTranslucent ])
-                  ifTrue: [
-                      "Special case so a translucent background on the Display allows you to see through the main Cuis Window.
-                      Requires proper handling of translucent Display in the VM.
-                      Seems to work only on Linux when using a composing window manager."
-                      (BitBlt toForm: Display) clipRect: aCanvas clipRect;
-                          copy: Display boundingBox
-                          from: `0@0` in: nil
-                          fillColor: color rule: Form over.
-                      Display forceToScreen]
-                  ifFalse: [ super drawOn: aCanvas ]]
+  backgroundImage
+  	ifNotNil: [
+  		| effect |
+  		effect := Smalltalk at: #backgroundEffect.
+  		effect = #tile
+  			ifTrue: [
+  				| height width x y |
+  				height := backgroundImage height.
+  				width := backgroundImage width.
+  				x := 0.
+  				y := 0.
+  				[ x < extent x ] whileTrue: [
+  					[ y < extent y ] whileTrue: [
+  						aCanvas image: backgroundImage at: x @ y.
+  						y := y + height.
+  					].
+  					x := x + width.
+  					y := 0.
+  				].
+  			]
+  			ifFalse: [
+  				aCanvas image: backgroundImage at: `0@0`
+  			].
+  	]
+  	ifNil: [
+  		super drawOn: aCanvas
+    ]
   ```
 
 ## Workspace Windows
