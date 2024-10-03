@@ -131,6 +131,8 @@ To change the colors used by a `Morph` from its halo:
   but it does not have a border.
   TODO: What does "adoptWidgetsColor:" do?
 
+To get the size of any `Morph`, send it the `#extentInWorld` message.
+
 To explicitly set the size of a `Morph`, send it:
 
 - `#morphExtent:` with a `Point` value that represents the new width and height.
@@ -542,6 +544,22 @@ Changing the translation, rotation, or scale of a `Morph`
 changes its local coordinate system.
 
 Positive rotations are clockwise and negative rotations are counter-clockwise.
+
+## ImageMorph
+
+An `ImageMorph` can render an image from a file.
+For example, the following image is from
+<a href="https://visualparadox.com/wallpapers/altitude1600.htm"
+target="_blank">VisualParadox</a>.
+
+<img alt="Altitude"
+    src="/blog/assets/altitude1600.jpg?v={{pkg.version}}">
+
+```smalltalk
+filePath := '/Users/volkmannm/Pictures/images/altitude1600.jpg'.
+imageMorph := ImageMorph new image: (Form fromFileNamed: filePath).
+imageMorph openInWorld.
+```
 
 ## Creating a Custom Morph
 

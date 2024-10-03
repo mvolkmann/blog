@@ -14,7 +14,7 @@ To create a Change Set that includes your suggested changes to Cuis:
 
 - Make changes to packages provided by Cuis.
 - Open the World menu and select Open ... Change Sorter.
-- Select the chnage set whose name contains "CuisCore".
+- Select the change set whose name contains "CuisCore".
 - Examine all the changes it contains
   to verify they are what should be included.
 - Right-click the change set and select "Rename change set".
