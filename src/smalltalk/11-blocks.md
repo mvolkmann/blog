@@ -98,16 +98,14 @@ counter := 1.
 ].
 ```
 
-Send `whileTrue` without an argument to a block
-to evaluate the block repeatedly until it answers `false`.
-For example, the following prints integer from 1 to 10.
+The following code does the same using the `whileTrue` method.
 
 ```smalltalk
-i := 0.
+counter := 1.
 [
-    i := i + 1.
-    i print.
-    i < 10
+    counter print.
+    counter := counter + 1.
+    counter <= 10
 ] whileTrue.
 ```
 
