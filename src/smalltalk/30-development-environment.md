@@ -50,6 +50,17 @@ stream := filePath asFileEntry readStream.
 self runningWorld backgroundImageData: stream binary contentsOfEntireFile.
 ```
 
+This will stretch the image over the window (`WorldMorph`).
+You may want other options that do not change the aspect ratio of the image
+such as:
+
+- covering the window with an image (right or bottom can be cut off)
+- tiling an image over the window
+
+The following code changes enable this.
+The option is specified with `Smalltalk at: #backgroundEffect put: option`
+where `option` is `#stretch` (default), `#cover`, or `#tile`.
+
 To tile the image:
 
 - Modify `PasteUpMorph` method `buildMagnifiedBackgroundImage` as follows:
