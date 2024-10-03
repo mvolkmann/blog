@@ -56,68 +56,72 @@ To tile the image:
 
   ```smalltalk
   buildMagnifiedBackgroundImage
-  | effect image scale |
+      | effect image scale |
 
-  backgroundImageData
-  	ifNil: [ backgroundImage := nil ]
-  	ifNotNil: [
-  		[
-  			backgroundImage := nil.
-  			Smalltalk primitiveGarbageCollect.
-  			image := Form fromBinaryStream: backgroundImageData readStream.
+      backgroundImage := nil.
+      backgroundImageData
+          ifNotNil: [
+              [
+                  Smalltalk primitiveGarbageCollect.
+                  image := Form fromBinaryStream: backgroundImageData readStream.
+                  effect := Smalltalk at: #backgroundEffect.
+                  backgroundImage := effect caseOf: {
+                      [#cover] -> [
+                          scale :=
+                              (extent x / image width)
+                              max: (extent y / image height).
+                          image magnifyBy: scale.
+                      ].
+                      [#tile] -> [ image ]
+                  } otherwise: [
+                      image magnifyTo: extent "for #stretch"
+                  ].
 
-  			effect := Smalltalk at: #backgroundEffect.
-  			backgroundImage := effect caseOf: {
-  				[#cover] -> [
-  					scale := (extent x / image width) max: (extent y / image height).
-  					image magnifyBy: scale.
-  				].
-  				[#tile] -> [ image ].
-  			} otherwise: [ image magnifyTo: extent ]. "#stretch"
+                  "Save some memory. Enable if desired."
+                  "backgroundImage := backgroundImage orderedDither32To16 asColorFormOfDepth: 8."
 
-  			"Save some memory. Enable if desired."
-  			"backgroundImage := backgroundImage orderedDither32To16 asColorFormOfDepth: 8."
-  			image := nil.
-  			Smalltalk primitiveGarbageCollect.
-  			backgroundImage bits pin.
-  		] on: Error do: [backgroundImage := nil]. "Can happen if JPEG plugin not built"
-  		self redrawNeeded
-  	]
+                  image := nil.
+                  Smalltalk primitiveGarbageCollect.
+                  backgroundImage bits pin.
+              ] on: Error do: [backgroundImage := nil]. "Can happen if JPEG plugin not built"
+
+              self redrawNeeded
+          ]
   ```
 
 - Modify `PasteUpMorph` method `drawOn:` as follows:
 
   ```smalltalk
   drawOn: aCanvas
-  "draw background image."
+      "draw background image"
 
-  backgroundImage
-  	ifNotNil: [
-  		| effect |
-  		effect := Smalltalk at: #backgroundEffect.
-  		effect = #tile
-  			ifTrue: [
-  				| height width x y |
-  				height := backgroundImage height.
-  				width := backgroundImage width.
-  				x := 0.
-  				y := 0.
-  				[ x < extent x ] whileTrue: [
-  					[ y < extent y ] whileTrue: [
-  						aCanvas image: backgroundImage at: x @ y.
-  						y := y + height.
-  					].
-  					x := x + width.
-  					y := 0.
-  				].
-  			]
-  			ifFalse: [
-  				aCanvas image: backgroundImage at: `0@0`
-  			].
-  	]
-  	ifNil: [
-  		super drawOn: aCanvas
-    ]
+      backgroundImage
+          ifNotNil: [
+              | effect |
+              effect := Smalltalk at: #backgroundEffect.
+              effect = #tile
+                  ifFalse: [
+                      aCanvas image: backgroundImage at: `0@0`
+                  ]
+                  ifTrue: [
+                      | height width x y |
+                      height := backgroundImage height.
+                      width := backgroundImage width.
+                      x := 0.
+                      y := 0.
+                      [ x < extent x ] whileTrue: [
+                          [ y < extent y ] whileTrue: [
+                              aCanvas image: backgroundImage at: x @ y.
+                              y := y + height.
+                          ].
+                          x := x + width.
+                          y := 0.
+                      ].
+                  ]
+          ]
+          ifNil: [
+              super drawOn: aCanvas
+        ]
   ```
 
 ## Workspace Windows
