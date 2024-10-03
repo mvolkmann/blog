@@ -71,11 +71,12 @@ To tile the image:
 
       backgroundImage := nil.
       backgroundImageData
+          ifNil: [ self redrawNeeded ]
           ifNotNil: [
               [
                   Smalltalk primitiveGarbageCollect.
                   image := Form fromBinaryStream: backgroundImageData readStream.
-                  effect := Smalltalk at: #backgroundEffect.
+                  effect := Smalltalk at: #backgroundEffect ifAbsent: nil.
                   backgroundImage := effect caseOf: {
                       [#cover] -> [
                           scale :=
@@ -84,9 +85,7 @@ To tile the image:
                           image magnifyBy: scale.
                       ].
                       [#tile] -> [ image ]
-                  } otherwise: [
-                      image magnifyTo: extent "for #stretch"
-                  ].
+                  } otherwise: [ image magnifyTo: extent "for #stretch" ].
 
                   "Save some memory. Enable if desired."
                   "backgroundImage := backgroundImage orderedDither32To16 asColorFormOfDepth: 8."
@@ -94,9 +93,8 @@ To tile the image:
                   image := nil.
                   Smalltalk primitiveGarbageCollect.
                   backgroundImage bits pin.
+                  self redrawNeeded
               ] on: Error do: [backgroundImage := nil]. "Can happen if JPEG plugin not built"
-
-              self redrawNeeded
           ]
   ```
 
@@ -107,13 +105,12 @@ To tile the image:
       "draw background image"
 
       backgroundImage
+          ifNil: [ super drawOn: aCanvas ]
           ifNotNil: [
               | effect |
-              effect := Smalltalk at: #backgroundEffect.
+              effect := Smalltalk at: #backgroundEffect ifAbsent: nil.
               effect = #tile
-                  ifFalse: [
-                      aCanvas image: backgroundImage at: `0@0`
-                  ]
+                  ifFalse: [ aCanvas image: backgroundImage at: `0 @ 0` ]
                   ifTrue: [
                       | height width x y |
                       height := backgroundImage height.
@@ -130,10 +127,10 @@ To tile the image:
                       ].
                   ]
           ]
-          ifNil: [
-              super drawOn: aCanvas
-        ]
   ```
+
+- In the `WorldMorph` method `drawOn:`, replace the statement
+  in the `ifNotNil:` block with `super drawOn: aCanvas`.
 
 ## Workspace Windows
 
