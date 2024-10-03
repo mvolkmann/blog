@@ -81,7 +81,8 @@ b value: 2 "result is 21"
 ```
 
 To use a block as an iteration condition,
-use the methods `whileTrue:`, `whileFalse:`, `whileNotNil:`, and `whileNil:`
+use the methods `whileTrue`, `whileTrue:`, `whileFalse`, `whileFalse:`,
+`whileNotNil:`, and `whileNil:`
 that are defined in the `BlockClosure` class.
 Note that these are not methods in the `Boolean` class.
 
@@ -96,6 +97,22 @@ counter := 1.
     counter := counter + 1.
 ].
 ```
+
+Send `whileTrue` without an argument to a block
+to evaluate the block repeatedly until it answers `false`.
+For example, the following prints integer from 1 to 10.
+
+```smalltalk
+i := 0.
+[
+    i := i + 1.
+    i print.
+    i < 10
+] whileTrue.
+```
+
+Send `whileFalse` without an argument to a block
+to evaluate the block repeatedly until it answers `true`.
 
 A block can call itself if it passes itself in as an argument.
 For example:

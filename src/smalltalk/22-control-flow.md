@@ -149,6 +149,8 @@ interval do: [:n | n print]
 ```
 
 See the "Blocks" section for messages that
-use a block as an iteration condition.
+use a `BlockClosure` as an iteration condition.
+The methods include `whileTrue`, `whileTrue:`, `whileFalse`, `whileFalse:`,
+`whileNotNil:`, and `whileNil:`.
 
 See the "Collections" section for messages that iterate over a collection.
