@@ -161,9 +161,12 @@ The following code demonstrates some of the methods described above:
 ```smalltalk
 #('red' 'green' 'blue') asCommaStringAnd "gives 'red, green and blue'
 
-#(1 2 3) inject: 0 into: [:acc :n | acc + n] "gives 6""
-
 #(1 2 3 4) mean` "gives Fraction 5/2"
+
+numbers := #(1 2 3 4).
+numbers collect: [:n | n * 2]. "#(2 4 6 8)"
+numbers select: [:n | n odd]. "#(1 3)"
+numbers inject: 0 into: [:acc :n | acc + n]. "10"
 ```
 
 I implemented the method `asOxfordCommaAnd` so
