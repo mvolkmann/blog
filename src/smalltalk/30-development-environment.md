@@ -996,6 +996,9 @@ Possibly a class is being loaded before its superclass."
 To view local files and operate on them,
 select Open ... File List from the World menu.
 
+<img alt="Cuis File List" style="width: 100%"
+  src="/blog/assets/cuis-file-list.png?v={{pkg.version}}">
+
 By default, the top directory will be one from which Cuis was started,
 referred to as "Cuis top".
 To instead start from the root directory of the drive,
@@ -1003,9 +1006,17 @@ right-click in the upper-left pane and
 select "default initial directories...OS roots".
 This change will not take effect until a new File List is opened.
 
-A common operation performed in a File List window
-is to locate and select a `.pck.st` file that defines a package
-and click the "install package" button to install it.
+A File List window can be used to:
+
+- navigate the file system
+- manage directories including ability to create, rename, view contents, and delete
+- manage files including ability to create, rename, view contents,
+  edit (text files only), and delete
+- for `.st` files, open "code changes" window to view contents
+  one class definition or method at a time
+- for `.st` files, "filein" to load into current image
+- for `.pck.st` files that contain code for an entire package,
+  install the package (alternative to `Feature require:`)
 
 ## Installed Packages Window
 
