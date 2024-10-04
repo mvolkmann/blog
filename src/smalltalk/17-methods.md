@@ -365,7 +365,7 @@ referred to as the "Blue Book":
 > When `3` gets the message `+ 4`, it does not execute a Smalltalk-80 method.
 > A primitive method returns `7` as the value of the message.
 > The complete set of primitive methods is included in the
-> fourth part of this book, which degcribes the virtual machine.
+> fourth part of this book, which describes the virtual machine.
 > Methods that are implemented as primitive methods begin with an
 > expression of the form `<primitive #>` where `#` is an integer
 > indicating which primitive method will be followed.

@@ -48,7 +48,7 @@ Package files with the extension `.pck.st` also use the chunked format.
 Each chunk is delimited by exclamation marks.
 A chunk can contain:
 
-- a "From" line the gives the version of Smalltalk that create the file
+- a "From" line that gives the version of Smalltalk that created the file
   and the date and time at which the file was created
 - a "classDefinition" that associates a class or metaclass with a class category
 - a "subclass: message send that creates a class

@@ -6,10 +6,10 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-Morphic is a GUI framework that is included into popular Smalltalk images
+Morphic is a GUI framework that is included in popular Smalltalk images
 such as Squeak, Pharo, and Cuis.
 It defines user interfaces with "morphs" which are objects that
-know how to display themselves in the Smalltalk environment.
+know how to render themselves in the Smalltalk environment.
 They are what other graphical systems refer to as widgets or components.
 
 For a great introduction to Morphic, see
