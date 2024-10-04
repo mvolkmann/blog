@@ -20,3 +20,39 @@ To change the value of a preference:
 - In the bottom pane, enter `value := {new-value}` and "Do it".
 - Close the Inspect window.
 - Close the Preferences window.
+
+## PreferenceSet
+
+Your packages can store user preferences in a `PreferenceSet`.
+
+The first step is to ensure that a default value for the preference is set.
+To do this, add the class method `initialize` to one of your classes.
+For example:
+
+```smalltalk
+initialize
+    | prefs |
+    prefs := PreferenceSet sysPreferences.
+    prefs
+        name: #backgroundEffect
+        description: 'determines how backgroundImage is applied'
+        category: #gui
+        type: Symbol
+        value: #stretch.
+```
+
+The provided category symbols can be retrieved with
+`PreferenceSet sysPreferences categories`.
+By default that returns `#(#font #gui #programming #system)`.
+
+To change the preference value:
+
+```smalltalk
+PreferenceSet sysPreferences at: #backgroundEffect put: #tile.
+```
+
+To retrieve the preference value:
+
+```smalltalk
+effect := PreferenceSet sysPreferences at: #backgroundEffect.
+```

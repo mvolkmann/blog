@@ -1212,3 +1212,10 @@ is selected in the World menu.
 - Open a Browser window.
 - Search for the class `ChangeSet`.
 - Select the class method `installNewUpdates`.
+
+## Screenshots
+
+To capture a screenshot of the entire window in a BMP file,
+evaluate `Utilities saveScreenshot` in a Workspace.
+This creates the file `CuisWorld.bmp` in the
+`Cuis-Smalltalk-Dev-UserFiles` directory.
