@@ -12,15 +12,17 @@ To install the `Pen` package, clone the
 [Morphic](https://github.com/Cuis-Smalltalk/Morphic.git) GitHub repository,
 enter `Feature require: 'Pen'` in a Workspace, and "Do it".
 
-The `Pen` class provides several examples in class methods.
-Try entering these in a Workspace and "Do it".
+The `Pen` class is a subclass of the `BitBlt` class.
+It provides several examples in class methods.
+Try entering them in a Workspace and "Do it".
 
 ```smalltalk
 Display restoreAfter: [Pen example]
 Pen exampleSketch. "drag around window to draw a thin, green trail"
 Pen makeStar display.
-
 ```
+
+The following code draws a house.
 
 ```smalltalk
 Display restoreAfter: [
@@ -51,6 +53,7 @@ Display restoreAfter: [
 `location`, `direction`, and `penDown`.
 
 The `location` value is a `Point` instance that specifies an x-y coordinate.
+It defaults to the center of the window.
 It can be changed by sending `#go:`, `#goto`,
 `location:direction:penDown:`, or `place:`.
 It can be retrieved by sending `#location`.
@@ -63,31 +66,33 @@ It can be retrieved by sending `#direction`.
 
 Highlights include:
 
-| Method                        | Description                                                 |
-| ----------------------------- | ----------------------------------------------------------- |
-| `color:`                      |                                                             |
-| `defaultNib:`                 |                                                             |
-| `direction`                   | answers current direction                                   |
-| `down`                        | places pen down so it can draw                              |
-| `dragon:`                     |                                                             |
-| `drawLoopX:Y:`                |                                                             |
-| `filberts:side:`              |                                                             |
-| `fill:color:`                 |                                                             |
-| `go:`                         | moves argument distance and draws if pen is down            |
-| `goto:`                       | moves to argument `Point` and draws if pen is down          |
-| `hilbert:side:`               |                                                             |
-| `hilberts:`                   |                                                             |
-| `home`                        | sets `location` to center of window                         |
-| `location`                    | answers current pen location                                |
-| `location:direction:penDown:` | sets `location`, `direction`, and `penDown`                 |
-| `mandala:`                    |                                                             |
-| `north`                       | sets `direction` to 270; why no `south`, `west`, or `east`? |
-| `place:`                      | moves to `Point` without drawing even if pen is down        |
-| `print:withFont:`             |                                                             |
-| `roundNib:`                   |                                                             |
-| `sourceForm:`                 |                                                             |
-| `spiral:angle:`               |                                                             |
-| `squareNib:`                  |                                                             |
-| `turn:`                       | adds argument in degrees to `direction`                     |
-| `up`                          | raise pen up so it cannot draw                              |
-| `web`                         |                                                             |
+| Method                        | Description                                                     |
+| ----------------------------- | --------------------------------------------------------------- |
+| `color:`                      | sets pen color to argument                                      |
+| `defaultNib:`                 | sets pen color to black and shape to square with argument width |
+| `direction`                   | answers current direction                                       |
+| `down`                        | places pen down so it can draw                                  |
+| `fill:color:`                 | TODO: Need an example of using this.                            |
+| `go:`                         | moves argument distance and draws if pen is down                |
+| `goto:`                       | moves to argument `Point` and draws if pen is down              |
+| `home`                        | sets `location` to center of window (default)                   |
+| `location`                    | answers current pen location                                    |
+| `location:direction:penDown:` | sets `location`, `direction`, and `penDown`                     |
+| `north`                       | sets `direction` to 270; why no `south`, `west`, or `east`?     |
+| `place:`                      | moves to `Point` without drawing even if pen is down            |
+| `print:withFont:`             | prints a given `String` at current location with given font     |
+| `roundNib:`                   | changes pen nib to be a circle with argument diameter           |
+| `squareNib:`                  | changes pend nib to be a square with argument size              |
+| `turn:`                       | adds argument in degrees to `direction`                         |
+| `up`                          | raise pen up so it cannot draw                                  |
+
+The `color:` method sends the message `#fillColor:`
+which is defined in the superclass `BitBlt`.
+That stores the color in the instance variable `halfToneForm`.
+
+The following code results in the error
+"MessageNotUnderstood: TrueTypeFont>>glyphAt:":
+
+```smalltalk
+pen print: 'Hello, World!' withFont: FontFamily defaultFamilyAndPointSize
+```
