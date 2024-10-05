@@ -24,27 +24,36 @@ Pen makeStar display.
 
 The following code draws a house.
 
+<img alt="Pen house" style="width: 30%"
+  src="/blog/assets/cuis-pen-house.png?v={{pkg.version}}">
+
 ```smalltalk
+height := 300.
+width := 500.
 Display restoreAfter: [
     Display fillWhite.
     pen := Pen new.
-    pen home. "center of window"
-    pen location logAs: 'location'.
-    pen direction logAs: 'direction'.
-    pen squareNib: 10.
+    pen roundNib: 10.
+
     pen color: (Color blue).
-    pen down.
-    "pen north. There is no south, west, or east."
-    pen go: 50.
+    loc := pen location.
+    x := loc x - (width / 2).
+    y := loc y - (height / 2).
+    pen place: x @ y.
+    pen turn: 180.
+    pen go: height.
     pen turn: -90.
-    pen go: 100.
-    pen up.
-    pen goto: 200@200. "will draw if pen is down"
+    pen go: width.
+    pen turn: -90.
+    pen go: height.
+    pen turn: -90.
+    pen go: width.
+
     pen color: (Color red).
-    pen down.
-    pen go: 100.
-    "pen place: 250@250." "will not draw even if pen is down"
-]
+    pen place: x @ y.
+    pen goto: loc x @ (y - height).
+    pen goto: x + width @ y.
+].
 ```
 
 ## Pen instance methods
