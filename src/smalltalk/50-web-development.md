@@ -129,7 +129,7 @@ This returns JSON if Accept header is "application/json" or as HTML otherwise.
 
 To get a specific dog as JSON, GET http://localhost:3000/dog/{id}.
 
-To get dogs that match query parameters,
+To get all dogs and print the query parameters in the Transcript,
 GET http://localhost:3000/dog?size=medium&color=brindle.
 
 To create a new dog, POST http://localhost:3000/dog
