@@ -101,3 +101,45 @@ TODO: Provide more detail about defining endpoints.
 - It doesn't support paths containing path parameters.
 - It doesn't support query parameters.
 - It doesn't support PATCH requests.
+
+## Work In Progress
+
+In your Volkmann2 image, see the classes
+`MyWebServer`, `WebContext`, `WebHtmlStr`, and `WebRoute`.
+
+To start the server:
+
+```smalltalk
+server := MyWebServer new.
+server start.
+```
+
+To restart the server:
+
+```smalltalk
+server stop.
+server := MyWebServer new.
+server start.
+```
+
+To test the server, send the following requests:
+
+To get all dogs, GET http://localhost:3000/dog.
+This returns JSON if Accept header is "application/json" or as HTML otherwise.
+
+To get a specific dog as JSON, GET http://localhost:3000/dog/{id}.
+
+To get dogs that match query parameters,
+GET http://localhost:3000/dog?size=medium&color=brindle.
+
+To create a new dog, POST http://localhost:3000/dog
+with JSON body { "name": "Snoopy", "breed": "Beagle" }.
+
+To update an existing dog, PUT http://localhost:3000/dog/{id}
+with JSON body { "name": "Fireball", "breed": "Greyhound" }.
+
+To delete an existing dog, DELETE http://localhost:3000/dog/{id}.
+
+```
+
+```
