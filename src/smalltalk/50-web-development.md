@@ -106,6 +106,8 @@ TODO: Provide more detail about defining endpoints.
 
 In your Volkmann2 image, see the classes
 `MyWebServer`, `WebContext`, `WebHtmlStr`, and `WebRoute`.
+Routes are defined in the `initialize` method of `MyWebServer`
+by sending messages to `method:path:selector:`.
 
 To start the server:
 
