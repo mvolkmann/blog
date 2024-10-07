@@ -139,7 +139,3 @@ To update an existing dog, PUT http://localhost:3000/dog/{id}
 with JSON body { "name": "Fireball", "breed": "Greyhound" }.
 
 To delete an existing dog, DELETE http://localhost:3000/dog/{id}.
-
-```
-
-```
