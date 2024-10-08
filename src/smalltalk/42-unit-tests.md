@@ -95,11 +95,11 @@ The supported assertion methods defined in the `TestCase` class include:
   It asserts that value of the `doesNotChange:` block
   does not change after evaluating the `assert:` block.
 
-- `assert:equals`
+- `assert:equals:`
 
   This asserts that the value of `assert:` (not a block) is equal to `equals:`.
 
-- `assert:includes`
+- `assert:includes:`
 
   This asserts that the collection `assert:`
   includes an element equal to `includes:`.
