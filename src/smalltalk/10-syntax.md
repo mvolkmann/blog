@@ -16,6 +16,8 @@ The assignment operator (`:=`), pronounced "gets",
 can be rendered as a left pointing arrow.
 The return operator (`^`) which is used in methods to return a value
 can be rendered as an upward pointing arrow.
+Be sure to include the colon because `a = b` answers whether
+`a` is equal to `b`, it doesn't assign `b` to `a`.
 
 To enable those renderings, open the World menu and
 select Preferences...Show ST-80 Assignments.

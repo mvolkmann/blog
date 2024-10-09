@@ -141,6 +141,9 @@ n := 1.
 n := n + 1
 ```
 
+Be sure to include the colon because `n = 1` answers whether
+`n` is equal to `1`, it doesn't assign `1` to `n`.
+
 A series of assignment operators can be used to
 assign the same value to multiple variables.
 For example:
