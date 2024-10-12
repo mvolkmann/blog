@@ -96,48 +96,118 @@ See the class `MyWebServer` in the `Volkmann` package.
 The `handleDog:` method defines CRUD endpoints.
 TODO: Provide more detail about defining endpoints.
 
-## WebClient Issues
+## WebClientPlus package
 
-- It doesn't support paths containing path parameters.
-- It doesn't support query parameters.
-- It doesn't support PATCH requests.
+I created the package WebClientPlus to add features to the WebClient package.
+See the [GitHub repository](https://github.com/mvolkmann/Cuis-Smalltalk-WebClientPlus).
 
-## Work In Progress
+### WebServerPlus class
 
-In your Volkmann2 image, see the classes
-`MyWebServer`, `WebContext`, `WebHtmlStr`, and `WebRoute`.
-Routes are defined in the `initialize` method of `MyWebServer`
-by sending messages to `method:path:selector:`.
+The class `WebServerPlus` is a subclass of `WebServer` which is defined in the WebClient package.
+It adds:
 
-To start the server:
+- an easier way to define routes
+- ability to access path parameters in route handlers
+- ability to access query parameters in route handlers
 
-```smalltalk
-server := MyWebServer new.
-server start.
-```
-
-To restart the server:
+To use it, define a subclass. The provided example is `DogWebServer`.
+Its `initialize` instance method creates some initial data and
+registers several routes by sending it the message `method:path:handler:`.
+Each route has a handler that is either a block or a method selector.
 
 ```smalltalk
-server stop.
-server := MyWebServer new.
-server start.
+initialize
+    | dog1 dog2 |
+
+    super initialize.
+
+    "Create some initial dogs."
+    dog1 := Dog name: 'Comet' breed: 'Whippet'.
+    dog2 := Dog name: 'Oscar' breed: 'German Shorthaired Pointer'.
+    dogDict := Dictionary newFrom: {
+        dog1 id -> dog1.
+        dog2 id -> dog2
+    }.
+
+    "Register routes."
+    self method: #GET path: '/hello' handler: [ :context |
+        context request send200Response: 'Hello, World!'
+    ].
+    "Don't forget the colon the end of the selectors!"
+    self method: #GET path: '/dog' handler: #getDogs:.
+    self method: #HEAD path: '/dog' handler: #headDogs:.
+    self method: #GET path: '/dog/:id' handler: #getDogAsJson:.
+    self method: #POST path: '/dog' handler: #createDog:.
+    self method: #PATCH path: '/dog/:id' handler: #patchDog:.
+    self method: #PUT path: '/dog/:id' handler: #updateDog:.
+    self method: #DELETE path: '/dog/:id' handler: #deleteDog:.
+    self method: #DELETE path: '/dog' handler: #deleteAllDogs:.
 ```
 
-To test the server, send the following requests:
+### WebContext class
 
-To get all dogs, GET http://localhost:3000/dog.
-This returns JSON if Accept header is "application/json" or as HTML otherwise.
+The route handler is passed a `WebContext` object that has
+the instance variables `request` (a `WebRequest` object)
+and `route` (a `WebRoute` object).
 
-To get a specific dog as JSON, GET http://localhost:3000/dog/{id}.
+To get the value of a specific path parameter,
+send `#pathParameter:` with its name to the `WebContext` object.
+
+To get a `Dictionary` of query parameters,
+send `#queryParameters` to the `WebContext` object.
+
+To get the `WebRequest` object, send `#request`.
+
+To get the `WebRoute` object, send `#route`.
+
+### Controlling the server
+
+To start the example server:
+
+```smalltalk
+server := DogWebServer new.
+server listenOn: 3000.
+```
+
+To restart the example server:
+
+```smalltalk
+server destroy.
+server := DogWebServer new.
+server listenOn: 3000.
+```
+
+### Testing the example server
+
+To get the port on which the server is listening,
+send `#listenerPort` to the server object.
+
+To test the example server, open an SUnit Test Runner,
+select `DogWebServerTests`, and click the "Run" button.
+
+To test the individual routes of the example server,
+send the requests described below, perhaps using a tool like Postman.
+
+To get all the dogs, send GET http://localhost:3000/dog.
+This returns HTML if the Accept header is "text/html" or JSON otherwise.
+
+To get a specific dog as JSON, send GET http://localhost:3000/dog/{id}.
 
 To get all dogs and print the query parameters in the Transcript,
 GET http://localhost:3000/dog?size=medium&color=brindle.
 
-To create a new dog, POST http://localhost:3000/dog
+To create a new dog, send POST http://localhost:3000/dog
 with JSON body { "name": "Snoopy", "breed": "Beagle" }.
 
-To update an existing dog, PUT http://localhost:3000/dog/{id}
+To update an existing dog, send PUT http://localhost:3000/dog/{id}
 with JSON body { "name": "Fireball", "breed": "Greyhound" }.
 
-To delete an existing dog, DELETE http://localhost:3000/dog/{id}.
+To delete an existing dog, send DELETE http://localhost:3000/dog/{id}.
+
+### WebClientPlus class
+
+The class `WebClientPlus` is a subclass of `WebClient`
+which is defined in the WebClient package.
+This simplifies sending HTTP requests.
+It is used by the `DogWebServerTests` class
+to test each of the routes defined above.

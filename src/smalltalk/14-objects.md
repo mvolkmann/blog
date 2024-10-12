@@ -81,9 +81,12 @@ subclasses of `ProtoObject` and not subclasses of `Object`.
 These include `BreakingMethodWrapper`, `MessageCatcher`, and `ProtoCatcher`.
 
 To get a `String` representation of any object
-that is meaninful to a Smalltalk developer
-and typically includes the class name of the object,
+that is meaningful to a Smalltalk developer,
 send it the `#printString` message.
+The default implementation in the `Object` class
+returns "a" or "an" followed by a space and the class name.
+Classes can override the `printString` method
+to customize the `String` that is returned.
 For example, the following code prints `a Set(3 2 1)`,
 which is `String` representation of a `Set` of numbers,
 to a Transcript:
@@ -93,6 +96,11 @@ to a Transcript:
 set := #(1 2 3 1) asSet.
 set printString print
 ```
+
+TODO: See the comments in Object printString about
+overriding the `printOn:` method instead of this!
+Try this!
+Also see how the `withArticle` method is used in Object printOn: !
 
 The following table describes some of the instance methods
 defined in the `ProtoObject` class.

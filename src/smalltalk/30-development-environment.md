@@ -40,6 +40,14 @@ To refresh all the windows after code changes that affect them
 open the World menu and select "Windows...Restore all Windows".
 This does not update windows to use a newly selected theme.
 
+## Push Pins
+
+By default, menus close after a selection is made or by clicking outside them.
+To keep a menu open until it is explicitly closed,
+click its push pin in the upper-right corner.
+This applies to the World menu and the "New morph..." menu.
+Any others? I wish it applied to the "Open..." menu!
+
 ## Background Image
 
 To add a background image to the `WorldMorph`:
