@@ -270,3 +270,16 @@ The first three of these methods all delegate to the last method.
 
 These methods are used by the `DogWebServerTests` class
 to test each of the routes defined in the `DogWebServer` initialize method.
+
+## HTML Generation
+
+The class `HtmlString` provides many class methods
+for generating strings of HTML.
+Attributes for elements are described in a `Dictionary`.
+Child elements are described in an `Array`.
+Text content is descried in a `String`.
+
+- `HtmlString el: name` generates `<name></name>`
+- `HtmlString elc: name` generates `<name>`
+
+TODO: Add more documentation on this!

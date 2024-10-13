@@ -266,10 +266,11 @@ and contain space-separated values.
 For example, `#(true 7 'Tami' (Color red))`.
 
 Run-time literal arrays (a.k.a. dynamic arrays)
-begin with `{`, end with `}`, and contain dot-separated values.
+begin with `{`, end with `}`, and contain dot-separated expressions.
 For example, `{name. breed}`.
 This is an alternative to the more verbose syntax
 `Array with: name with: breed`.
+A common error is to separate expressions with commas instead of periods.
 
 To create an array of a given size where the initial value of all the elements
 is `nil`, send the message `#ofSize:` to the `Array` class.
