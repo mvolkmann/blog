@@ -220,6 +220,12 @@ To stop the server, send `#destroy` to the server object.
 To get the port on which the server is listening,
 send `#listenerPort` to the server object.
 
+To serve static files, send `#staticFilePath:` to the server object
+with a `String` argument that is a relative or absolute file path
+of the directory where the static files reside.
+This defaults to serving files from the `Cuis-Smalltalk-Dev-UserFiles`
+directory and relative file paths are relative to that directory.
+
 ### Testing the example server
 
 To test the example server, open an SUnit Test Runner,

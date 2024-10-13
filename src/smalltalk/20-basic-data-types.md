@@ -590,6 +590,15 @@ that are not also defined in its superclass `CharacterSequence`.
 | `substrings`                           | answers `Array` of substrings delimited by whitespace characters                              |
 | `unescapePercents`                     | answers reverse of `percentEscapeUrl`                                                         |
 
+To get a substring of a `String`, use the `copyFrom:to:` method
+defined in the `OrderedCollection` class which is a superclass of `String`.
+For example:
+
+```smalltalk
+s := 'foobar'.
+sub := s copyFrom: 4 to: s size. "bar"
+```
+
 The `at:put:` method is the only one
 that modifies a `String` in place (TODO: true?).
 All other methods return a new `String`
