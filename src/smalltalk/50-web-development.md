@@ -101,6 +101,8 @@ The class `WebServerPlus` is a subclass of `WebServer`,
 which is defined in the WebClient package.
 It adds:
 
+- ability to serve static files with a "Content-Type" header
+  that is appropriate for the file extension
 - an easier way to define routes
 - ability to access path parameters in route handlers
 - ability to access query parameters in route handlers
