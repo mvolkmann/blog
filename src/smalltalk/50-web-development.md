@@ -13,16 +13,19 @@ To install this, open a Workspace, enter `Feature require: 'WebClient'`,
 and "Do it".
 This adds many classes in the "WebClient - Core" category including
 `WebClient`, `WebRequest`, `WebResponse`, `WebServer`, and `WebSocket`.
-In addition, to send and receive requests with JSON bodies,
+
+To enable sending and receiving requests with JSON bodies,
 open a Workspace, enter `Feature require: 'Json'`, and "Do it".
 
-Also see the
+The packages
 <a href="https://github.com/SeasideSt/Seaside" target="_blank">Seaside</a> and
-<a href="https://github.com/zeroflag/Teapot" target="_blank">Teapot</a> frameworks.
+<a href="https://github.com/zeroflag/Teapot" target="_blank">Teapot</a>
+are often used with other Smalltalk distributions,
+but they do not support Cuis Smalltalk.
 
 See the <a href="https://book.seaside.st/book" target="_blank">Seaside Book</a>.
 
-## Basic Example
+## Simple Example
 
 Here is a very simple use of the WebServer class that can be installed with
 `Feature require: 'WebClient'`.
@@ -42,26 +45,18 @@ Add the following instance methods:
 initialize
     server := WebServer new.
     server addService: '/' action: [:req | req send200Response: 'Hello, World!'].
-
-start
-    server listenOn: 3000
-
-stop
-    server destroy
 ```
 
 Create and start the web server with:
 
 ```smalltalk
 server := BasicWebServer new.
-server start.
+server listenOn: 3000.
 ```
 
 Browse localhost:3000 to see "Hello, World!".
 
-Stop the web server with `server stop`.
-
-Restart it with `server start`.
+Stop the web server with `server destroy`.
 
 ## Sending HTTP Requests
 
@@ -92,28 +87,37 @@ this starts a Smalltalk process called "WebServers's listener process".
 To kill it, open a "Process Browser", select the process,
 and press cmd-t (Terminate).
 
-See the class `MyWebServer` in the `Volkmann` package.
-The `handleDog:` method defines CRUD endpoints.
-TODO: Provide more detail about defining endpoints.
-
 ## WebClientPlus package
 
 I created the package WebClientPlus to add features to the WebClient package.
 See the [GitHub repository](https://github.com/mvolkmann/Cuis-Smalltalk-WebClientPlus).
 
+Let's walk through the classes this package defines and example routes
+that support CRUD (Create, Read, Update, Delete) operations on dogs.
+
 ### WebServerPlus class
 
-The class `WebServerPlus` is a subclass of `WebServer` which is defined in the WebClient package.
+The class `WebServerPlus` is a subclass of `WebServer`,
+which is defined in the WebClient package.
 It adds:
 
 - an easier way to define routes
 - ability to access path parameters in route handlers
 - ability to access query parameters in route handlers
 
-To use it, define a subclass. The provided example is `DogWebServer`.
-Its `initialize` instance method creates some initial data and
-registers several routes by sending it the message `method:path:handler:`.
+To use the `WebServerPlus` class, define a subclass.
+The provided example `DogWebServer` does that.
+Its `initialize` instance method creates some initial data in a `Dictionary`
+where the keys are increasing integers and the values are `Dog` objects.
+It then registers several routes
+by sending the message `method:path:handler:` to `self`.
 Each route has a handler that is either a block or a method selector.
+
+The route is passed a `WebContext` object
+that holds a `WebRequest` object and a `WebRoute` object.
+Passing a single object to a route handler
+that encapsulates everything needed to a handle a request
+is an idea that was copied from the Hono JavaScript framework.
 
 ```smalltalk
 initialize
@@ -122,6 +126,7 @@ initialize
     super initialize.
 
     "Create some initial dogs."
+    "The Dog class method name:breed: assigns an id."
     dog1 := Dog name: 'Comet' breed: 'Whippet'.
     dog2 := Dog name: 'Oscar' breed: 'German Shorthaired Pointer'.
     dogDict := Dictionary newFrom: {
@@ -133,7 +138,6 @@ initialize
     self method: #GET path: '/hello' handler: [ :context |
         context request send200Response: 'Hello, World!'
     ].
-    "Don't forget the colon the end of the selectors!"
     self method: #GET path: '/dog' handler: #getDogs:.
     self method: #HEAD path: '/dog' handler: #headDogs:.
     self method: #GET path: '/dog/:id' handler: #getDogAsJson:.
@@ -144,6 +148,31 @@ initialize
     self method: #DELETE path: '/dog' handler: #deleteAllDogs:.
 ```
 
+When defining routes where the handler is specified with a method selector,
+remember to include a colon at the end of the selector.
+
+The following code is an example of defining route handler.
+It gets data describing a dog whose id found in a path parameter
+and it sends a response with a JSON body.
+
+```smalltalk
+getDogAsJson: aWebContext
+    | dog id req |
+
+    req := aWebContext request.
+    id := aWebContext pathParameter: #id.
+    id := [id asNumber] on: Error do: [ :e | ^ req send400Response: e messageText].
+
+    dog := dogDict at: id ifAbsent: nil.
+    dog
+        ifNil: [ req send404Response ]
+        ifNotNil: [
+            req
+                send200Response: (Json render: dog)
+                contentType: WebServerPlus jsonContentType
+        ].
+```
+
 ### WebContext class
 
 The route handler is passed a `WebContext` object that has
@@ -151,10 +180,9 @@ the instance variables `request` (a `WebRequest` object)
 and `route` (a `WebRoute` object).
 
 To get the value of a specific path parameter,
-send `#pathParameter:` with its name to the `WebContext` object.
+send `#pathParameter:` with its name.
 
-To get a `Dictionary` of query parameters,
-send `#queryParameters` to the `WebContext` object.
+To get a `Dictionary` of query parameters, send `#queryParameters`.
 
 To get the `WebRequest` object, send `#request`.
 
@@ -169,21 +197,16 @@ server := DogWebServer new.
 server listenOn: 3000.
 ```
 
-To restart the example server:
-
-```smalltalk
-server destroy.
-server := DogWebServer new.
-server listenOn: 3000.
-```
-
-### Testing the example server
+To stop the server, send `#destroy` to the server object.
 
 To get the port on which the server is listening,
 send `#listenerPort` to the server object.
 
+### Testing the example server
+
 To test the example server, open an SUnit Test Runner,
 select `DogWebServerTests`, and click the "Run" button.
+This will start the server if it is not already running.
 
 To test the individual routes of the example server,
 send the requests described below, perhaps using a tool like Postman.
@@ -193,7 +216,7 @@ This returns HTML if the Accept header is "text/html" or JSON otherwise.
 
 To get a specific dog as JSON, send GET http://localhost:3000/dog/{id}.
 
-To get all dogs and print the query parameters in the Transcript,
+To get all the dogs and print query parameters in the Transcript,
 GET http://localhost:3000/dog?size=medium&color=brindle.
 
 To create a new dog, send POST http://localhost:3000/dog
@@ -208,6 +231,16 @@ To delete an existing dog, send DELETE http://localhost:3000/dog/{id}.
 
 The class `WebClientPlus` is a subclass of `WebClient`
 which is defined in the WebClient package.
-This simplifies sending HTTP requests.
-It is used by the `DogWebServerTests` class
-to test each of the routes defined above.
+This simplifies sending HTTP requests by providing the following class methods:
+
+```smalltalk
+method:url:
+method:url:content:
+method:url:headers:
+method:url:headers:content:
+```
+
+The first three of these methods all delegate to the last method.
+
+These methods are used by the `DogWebServerTests` class
+to test each of the routes defined in the `DogWebServer` initialize method.
