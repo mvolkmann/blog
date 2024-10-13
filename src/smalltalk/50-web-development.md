@@ -186,6 +186,24 @@ To get a `Dictionary` of query parameters, send `#queryParameters`.
 
 To get the `WebRequest` object, send `#request`.
 
+To get the value of a request header:
+
+```smalltalk
+req := aWebContext request.
+value := req headerAt: 'header-name'.
+```
+
+To set the value of a response header,
+use one of the methods defined in the `WebRequest` class
+whose name begins with `send*Response:` and ends with `do:`.
+For example:
+
+```smalltalk
+req send200Response: content do: [:res |
+    res headerAt: 'X-Demo' put: 'custom header value'.
+].
+```
+
 To get the `WebRoute` object, send `#route`.
 
 ### Controlling the server
