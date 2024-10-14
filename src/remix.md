@@ -4,16 +4,6 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-## Client Questions
-
-Do you plan to use any of these?
-
-- TypeScript instead of JavaScript
-- Tailwind for CSS
-- Reach UI component library
-- Prisma for database ORM
-- zod for object validation
-
 ## Overview
 
 {% aTargetBlank "https://remix.run", "Remix" %} is
@@ -44,10 +34,8 @@ Remix automatically provides route-level code splitting.
 1. Enter `npx create-remix@latest`
 1. Enter "y" to proceed.
 1. Enter a project name.
-1. Press return for "Just the basics".
-1. Press return for "Remix App Server".
-1. Press return for "TypeScript".
-1. Enter "Y" to run `npm install`.
+1. Press return for "Initialize a new git repository?".
+1. Press return for "Install dependencies with npm?".
 1. `cd` to the new project directory.
 1. See the `README.md` file for instructions.
 1. Enter `npm run dev`
@@ -59,8 +47,8 @@ The `public` directory contains static assets like images.
 
 The `app` directory defines the routes and components of the app.
 
-The file `root.jsx` defines the root component.
-This renders an `Output` component
+The file `root.tsx` defines the root component.
+This renders an `Outlet` component
 which is responsible for rendering each page.
 Content that should appear on every page such as a top navigation bar
 can be rendered here.
@@ -77,8 +65,9 @@ This begins with only the file `_index.tsx`.
 
 To create a new page in the app,
 create a new file in the `app/routes` directory.
-To add a link to this page in `_index.tsx`, add `<a href="/demo">Demo</a>`.
-But this downloads the page from the server.
+To add a link to this page in `_index.tsx`,
+add an element like `<a href="/demo">Demo</a>`.
+This downloads the page from the server.
 To perform client-side routing, import the `Link` component with:
 
 ```js
@@ -120,7 +109,7 @@ in the same directory as `index.tsx`.
 Subdirectories define URL paths and support nested routes.
 
 File names containing dots in a addition to the one before the file extension
-define route paths.  For example, the file `foo.bar.baz.tsx`
+define route paths. For example, the file `foo.bar.baz.tsx`
 defines the route `foo/bar/baz`.
 
 ## Dynamic Routes
@@ -144,17 +133,14 @@ export default function MyDynamicPage() {
     <main>
       <p>{data.someProperty}</p>
     </main>
-  )
+  );
 }
 
 export async function loader({params}) {
   const id = params.id;
   const data = await getMyData(id);
   if (!data) {
-    throw json(
-      {message: 'Could not find data.'},
-      {status: 404}
-    );
+    throw json({message: 'Could not find data.'}, {status: 404});
   }
   return data;
 }
@@ -206,15 +192,13 @@ The tilde (`~`) at the beginning of the path maps to the `app` directory.
 For example:
 
 ```ts
-import type { LinksFunction } from "@remix-run/node";
-import styles from "./Demo.css";
+import type {LinksFunction} from '@remix-run/node';
+import styles from './Demo.css';
 
 // Objects in the returned array can also contain a "media" property
 // to specify a media query that must be satisfied to use the styles.
 // For example, media: "screen and (min-width: 768px)"
-export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: styles }
-];
+export const links: LinksFunction = () => [{rel: 'stylesheet', href: styles}];
 ```
 
 Remix only looks for "links" and "meta" functions in route components.
@@ -225,14 +209,11 @@ This pattern is called "surfacing links" in the Remix docs.
 For example, the file `app/routes/some-route.tsx` could contain the following:
 
 ```ts
-import Demo, { links as demoLinks } from "~/components/Heading";
+import Demo, {links as demoLinks} from '~/components/Heading';
 
-import styles from "~/styles/some-route.css";
+import styles from '~/styles/some-route.css';
 
-export const links = () => [
-  { rel: "stylesheet", href: styles },
-  ...demoLinks(),
-];
+export const links = () => [{rel: 'stylesheet', href: styles}, ...demoLinks()];
 ```
 
 ## Links
@@ -263,10 +244,9 @@ The code in `loader` functions can communicate directly with a database.
 For example:
 
 ```ts
-
 type LoaderData = Todo[];
 
-export function loader({ params, request }) {
+export function loader({params, request}) {
   // We could authenticate with something like
   // await requireUserId(request);
   // which could throw if the user is not authenticated.
@@ -316,7 +296,7 @@ For example:
 import {redirect} from '@remix-run/node';
 
 // Note how the front and back end are implemented in the same file.
-export const action: ActionFunction = async ({ request }) => {
+export const action: ActionFunction = async ({request}) => {
   try {
     // No need to use the Fetch API or axios because
     // we are already running in the server.
@@ -328,22 +308,19 @@ export const action: ActionFunction = async ({ request }) => {
     const data = Object.fromEntries(formData);
 
     // This gets the value of a specific piece of data passed in the request.
-    const intent = formData.get("intent") as string;
+    const intent = formData.get('intent') as string;
 
-    if (intent === "add") {
+    if (intent === 'add') {
       await sleep(1); // to demonstrate "isSubmitting" state
-      const id = Date.now()
-      const todo = { id, text: formData.get("text") };
+      const id = Date.now();
+      const todo = {id, text: formData.get('text')};
       todos.push(todo);
       await saveTodos(todos);
-    } else if (intent?.startsWith("delete-")) {
-      const id = Number(intent.split("-")[1]);
-      const index = todos.findIndex((t: Todo) => t.id === id)
+    } else if (intent?.startsWith('delete-')) {
+      const id = Number(intent.split('-')[1]);
+      const index = todos.findIndex((t: Todo) => t.id === id);
       if (index === -1) {
-        return json(
-          { message: `No todo with id ${id} found.` },
-          { status: 404 }
-        );
+        return json({message: `No todo with id ${id} found.`}, {status: 404});
       }
       todos.splice(index, 1);
       await saveTodos(todos);
@@ -355,7 +332,7 @@ export const action: ActionFunction = async ({ request }) => {
     // to a page that displays the newly created resource.
     // For example, return redirect(`/todo/${todo.id}`);
   } catch (e) {
-    console.error("todos.tsx action:", e);
+    console.error('todos.tsx action:', e);
   }
 };
 ```
@@ -395,43 +372,44 @@ display an error message below each invalid input.
 The following code demonstrates this approach.
 
 ```ts
-import { type ActionFunction } from "@remix-run/node";
+import {type ActionFunction} from '@remix-run/node';
 
 type ActionData = {
-  fields: { text?: string }, // values entered for each field
-  fieldErrors: { text?: string }, // error messages for each field
-  formError?: string // describes error at form level, not individual input
-}
+  fields: {text?: string}; // values entered for each field
+  fieldErrors: {text?: string}; // error messages for each field
+  formError?: string; // describes error at form level, not individual input
+};
 
 // Define one function like this for each input to be validated.
 function validateText(text: string) {
   if (text.length < 3) {
-    return "Todo text must be at least three characters."
+    return 'Todo text must be at least three characters.';
   }
 }
 
-export const action: ActionFunction =
-  async ({ request }): Promise<Response | ActionData> => {
-    const fieldErrors = {
-      // Add a line like this for each form input.
-      text: validateText(text)
-    };
-
-    // This determines if there are one or more validation errors.
-    if (Object.values(fieldErrors).some(Boolean)) {
-      return { fieldErrors, fields: { text } };
-    }
-
-    // If we reach here then there were no validation errors.
-    const id = Date.now()
-    const todo = { id, text };
-    todos.push(todo);
-    await saveTodos(todos);
-    return null; // stays on current page
+export const action: ActionFunction = async ({
+  request
+}): Promise<Response | ActionData> => {
+  const fieldErrors = {
+    // Add a line like this for each form input.
+    text: validateText(text)
   };
 
+  // This determines if there are one or more validation errors.
+  if (Object.values(fieldErrors).some(Boolean)) {
+    return {fieldErrors, fields: {text}};
+  }
+
+  // If we reach here then there were no validation errors.
+  const id = Date.now();
+  const todo = {id, text};
+  todos.push(todo);
+  await saveTodos(todos);
+  return null; // stays on current page
+};
+
 export default function Todos() {
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
   const actionData = useActionData<ActionData>();
   const fieldErrors = actionData?.fieldErrors;
 
@@ -494,13 +472,15 @@ to where the error occurs is used.
 The `ErrorBoundary` function in `root.tsx` serves as a catch-all.
 
 ```ts
-export function ErrorBoundary({ error }) {
+export function ErrorBoundary({error}) {
   console.log('root.tsx ErrorBoundary: error =', error);
   return (
     <main className="error">
       <h1>An error occurred.</h1>
-      <p>{error?.message ?? "unknown"}</p>
-      <p>Back to <Link to="/">safety</Link>.</p>
+      <p>{error?.message ?? 'unknown'}</p>
+      <p>
+        Back to <Link to="/">safety</Link>.
+      </p>
     </main>
   );
 }
@@ -519,8 +499,9 @@ One place a `Response` object can be thrown is in a `loader` function.
 For example:
 
 ```ts
-if (some-condition) {
-  throw json( // creates a Response object
+if (some - condition) {
+  throw json(
+    // creates a Response object
     {message: 'some-message'},
     {status: 404, statusText: 'some-status-text'}
   );
@@ -530,16 +511,18 @@ if (some-condition) {
 The following code demonstrates defining a `CatchBoundary` function:
 
 ```ts
-import { useCatch } from "@remix-run/react";
+import {useCatch} from '@remix-run/react';
 
-export function CatchBoundary({ error }) {
+export function CatchBoundary({error}) {
   const response = useCatch();
-  const message = response.data?.message || "unspecified error";
-  return <main>
-    <h1>An error occurred.</h1>
-    <p>status: {response.status}</p>
-    <p>{message}</p>
-  </main>
+  const message = response.data?.message || 'unspecified error';
+  return (
+    <main>
+      <h1>An error occurred.</h1>
+      <p>status: {response.status}</p>
+      <p>{message}</p>
+    </main>
+  );
 }
 ```
 
