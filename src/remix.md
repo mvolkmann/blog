@@ -39,7 +39,7 @@ Remix automatically provides route-level code splitting.
 1. `cd` to the new project directory.
 1. See the `README.md` file for instructions.
 1. Enter `npm run dev`
-1. Browse localhost:3000.
+1. Browse localhost:5173.
 
 ## Project Structure
 
