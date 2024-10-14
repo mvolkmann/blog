@@ -6,6 +6,8 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+## Basics
+
 Unit tests verify that the code is working as expected now.
 They can also be run again in the future
 to verify that the code has not regressed.
@@ -103,6 +105,11 @@ The supported assertion methods defined in the `TestCase` class include:
 
   This asserts that the collection `assert:`
   includes an element equal to `includes:`.
+
+- `should:raise:`
+
+  This asserts that evaluating the `should:` block
+  will raise the exception specified by `raise:`.
 
 For comparing floating point numbers, consider adding
 the following instance methods to the `TestCase` class.

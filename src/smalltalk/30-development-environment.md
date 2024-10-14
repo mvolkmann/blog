@@ -50,7 +50,8 @@ Any others? I wish it applied to the "Open..." menu!
 
 ## Background Image
 
-To add a background image to the `WorldMorph`:
+To add a background image to the `WorldMorph`,
+execute the following statements in a Workspace:
 
 ```smalltalk
 filePath := '/Users/volkmannm/Pictures/images/altitude1600.jpg'.
@@ -58,87 +59,24 @@ stream := filePath asFileEntry readStream.
 self runningWorld backgroundImageData: stream binary contentsOfEntireFile.
 ```
 
-This will stretch the image over the window (`WorldMorph`).
-You may want other options that do not change the aspect ratio of the image
-such as:
+This will stretch the image over the window (`WorldMorph`),
+changing its aspect ratio.
+Other options do not change the aspect ratio of the image.
 
-- covering the window with an image (right or bottom can be cut off)
-- tiling an image over the window
+To cover the window with an image where the right or bottom of the image
+can be clipped, set the following preference before
+sending `#backgroundImageData` to the running World:
 
-The following code changes enable this.
-The option is specified with `Smalltalk at: #backgroundEffect put: option`
-where `option` is `#stretch` (default), `#cover`, or `#tile`.
+```smalltalk
+PreferenceSet sysPreferences at: #backgroundEffect put: #cover.
+```
 
-To tile the image:
+To tile the window with an image, set the following preference before
+sending `#backgroundImageData` to the running World:
 
-- Modify `PasteUpMorph` method `buildMagnifiedBackgroundImage` as follows:
-
-  ```smalltalk
-  buildMagnifiedBackgroundImage
-      | effect image scale |
-
-      backgroundImage := nil.
-      backgroundImageData
-          ifNil: [ self redrawNeeded ]
-          ifNotNil: [
-              [
-                  Smalltalk primitiveGarbageCollect.
-                  image := Form fromBinaryStream: backgroundImageData readStream.
-                  effect := Smalltalk at: #backgroundEffect ifAbsent: nil.
-                  backgroundImage := effect caseOf: {
-                      [#cover] -> [
-                          scale :=
-                              (extent x / image width)
-                              max: (extent y / image height).
-                          image magnifyBy: scale.
-                      ].
-                      [#tile] -> [ image ]
-                  } otherwise: [ image magnifyTo: extent "for #stretch" ].
-
-                  "Save some memory. Enable if desired."
-                  "backgroundImage := backgroundImage orderedDither32To16 asColorFormOfDepth: 8."
-
-                  image := nil.
-                  Smalltalk primitiveGarbageCollect.
-                  backgroundImage bits pin.
-                  self redrawNeeded
-              ] on: Error do: [backgroundImage := nil]. "Can happen if JPEG plugin not built"
-          ]
-  ```
-
-- Modify `PasteUpMorph` method `drawOn:` as follows:
-
-  ```smalltalk
-  drawOn: aCanvas
-      "draw background image"
-
-      backgroundImage
-          ifNil: [ super drawOn: aCanvas ]
-          ifNotNil: [
-              | effect |
-              effect := Smalltalk at: #backgroundEffect ifAbsent: nil.
-              effect = #tile
-                  ifFalse: [ aCanvas image: backgroundImage at: `0 @ 0` ]
-                  ifTrue: [
-                      | height width x y |
-                      height := backgroundImage height.
-                      width := backgroundImage width.
-                      x := 0.
-                      y := 0.
-                      [ x < extent x ] whileTrue: [
-                          [ y < extent y ] whileTrue: [
-                              aCanvas image: backgroundImage at: x @ y.
-                              y := y + height.
-                          ].
-                          x := x + width.
-                          y := 0.
-                      ].
-                  ]
-          ]
-  ```
-
-- In the `WorldMorph` method `drawOn:`, replace the statement
-  in the `ifNotNil:` block with `super drawOn: aCanvas`.
+```smalltalk
+PreferenceSet sysPreferences at: #backgroundEffect put: #tile.
+```
 
 ## Workspace Windows
 
