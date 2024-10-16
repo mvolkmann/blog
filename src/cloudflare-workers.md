@@ -377,14 +377,62 @@ To enable use of KV in a worker:
 
 - Create a KV namespace.
 
-  Enter `wrangler kv:namespace create {namespace}`.
-  This will output lines to be added to `wrangler.toml`.
+  To create a KV namespace from the Cloudflare Dashboard:
 
-- Add the lines output by previous command in `wrangler.toml`.
+  - Click "Workers & Pages" in the left nav.
+  - Click the subcategory "KV" in the left nav.
+  - Click the "Create a namespace" button.
+  - Enter a name like "KV".
+  - Click the "Add" button.
 
-TODO: Document the remaining instructions.
+  To create a KV namespace from the command-line:
 
-TODO: Can you store the map of dogs for your demo in a KV store?
+  - Enter `wrangler kv:namespace create {namespace}`.
+    This will output lines to be added to `wrangler.toml`.
+  - Add the lines output by previous command in `wrangler.toml`.
+
+- Add a binding to this KV namespace to a Workers or Pages project.
+
+  To add the binding in the web UI:
+
+  - Select a project.
+  - Click the "Settings" tab.
+  - Click "Variables and Secrets" in the left nav of "Settings".
+  - In the "Bindings" section, click the "+ Add" button.
+  - Select "KV Namespace".
+  - Enter a variable name like "KV"
+    that will be used to access the KV store in code.
+  - Select a KV namespace like "KV".
+  - Click the "Deploy" button.
+
+- Add key/value pairs to the KV namespace.
+
+  - Click the "KV Pairs" tab.
+  - Enter a key and value like "counter" and "0".
+  - Click the "Add entry" button.
+  - Values can also be edited in this web UI.
+
+- Use the KV namespace in the worker code.
+
+  - Click the "Edit Code" button in the upper-right.
+  - Add the following lines in the "fetch" function:
+
+    ```js
+    const counterString = await env.KV.get('counter');
+    const counter = Number(counterString);
+    console.log('counter =', counter);
+
+    const {pathname} = new URL(request.url);
+    if (pathname.startsWith('/increment')) {
+      await env.KV.put('counter', counter + 1);
+    }
+    ```
+
+  - Click the "Deploy" button in the upper-right.
+  - Click the refresh button (circular arrow) after the GET URL.
+  - Add "/increment" to the end of the URL after the GET button
+    to test the code above the checks `pathname`.
+  - Click the refresh button multiple times to see the `counter` value change.
 
 ## htmx
 
