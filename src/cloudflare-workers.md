@@ -415,23 +415,34 @@ To enable use of KV in a worker:
 - Use the KV namespace in the worker code.
 
   - Click the "Edit Code" button in the upper-right.
-  - Add the following lines in the "fetch" function:
+  - Modify the `index.js` file contain the following:
 
     ```js
-    const counterString = await env.KV.get('counter');
-    const counter = Number(counterString);
-    console.log('counter =', counter);
+    export default {
+      async fetch(request, env) {
+        const counterString = await env.KV.get('counter');
+        const counter = Number(counterString);
+        //console.log('counter =', counter);
 
-    const {pathname} = new URL(request.url);
-    if (pathname.startsWith('/increment')) {
-      await env.KV.put('counter', counter + 1);
-    }
+        const {pathname} = new URL(request.url);
+        if (pathname.startsWith('/increment')) {
+          await env.KV.put('counter', counter + 1);
+        }
+
+        const body = JSON.stringify({counter});
+        return new Response(body, {
+          headers: {'Content-Type': 'application/json'}
+        });
+      }
+    };
     ```
 
   - Click the "Deploy" button in the upper-right.
   - Click the refresh button (circular arrow) after the GET URL.
+    The response should contain `{"counter":0}`.
   - Add "/increment" to the end of the URL after the GET button
     to test the code above the checks `pathname`.
+    The response should contain `{"counter":1}`.
   - Click the refresh button multiple times to see the `counter` value change.
 
 ## htmx
