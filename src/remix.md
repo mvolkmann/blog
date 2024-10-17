@@ -12,6 +12,12 @@ focus on the user interface and work back through web standards
 to deliver a fast, slick, and resilient user experience."
 
 Remix enables many web applications to work with no client-side JavaScript code.
+If the use JavaScript is disabled in the browser,
+the Remix server will return fully-rendered HTML
+and perform full-page refreshes.
+If the use JavaScript is enabled in the browser,
+the Remix server will return JSON data describing updates to the current page
+and avoid performing full-page refreshes.
 
 Remix is heavily based on React Router.
 
