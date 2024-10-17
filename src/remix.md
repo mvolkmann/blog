@@ -32,8 +32,7 @@ Remix automatically provides route-level code splitting.
 1. Install Node.js.
 1. `cd` to the directory where the project will be created.
 1. Enter `npx create-remix@latest`
-1. Enter "y" to proceed.
-1. Enter a project name.
+1. Enter a project directory path (ex. `./dogs`).
 1. Press return for "Initialize a new git repository?".
 1. Press return for "Install dependencies with npm?".
 1. `cd` to the new project directory.
@@ -48,10 +47,21 @@ The `public` directory contains static assets like images.
 The `app` directory defines the routes and components of the app.
 
 The file `root.tsx` defines the root component.
-This renders an `Outlet` component
-which is responsible for rendering each page.
-Content that should appear on every page such as a top navigation bar
-can be rendered here.
+By default this:
+
+- loads Tailwind styles
+- loads Google fonts,
+- renders `meta` tags specified by exported `meta` functions in your routes
+- renders `link` tags specified by exported `links` functions in your routes
+- renders JSX returned by the default function exported in your routes
+- and more
+
+The default export in `root.tsx` is function that renders an `Output` component
+which is responsible for rendering the content for each route.
+This also exports a `Layout` function
+which is the "template" used for rendering all routes.
+Content that should appear on every page, such as a top navigation bar,
+can be rendered in the `Layout` function.
 
 The file `entry.server.tsx` defines the server code that runs on every request.
 Often no changes are needed in this file.
@@ -81,11 +91,6 @@ and use the following instead of an anchor tag:
 ```
 
 Routes can be in deeper subdirectories to require a deeper URL path.
-
-## Outlet component
-
-The `Outlet` component rendered in `root.tsx`
-renders the content of the current page.
 
 ## UI Components
 
@@ -186,20 +191,23 @@ as the corresponding `.tsx` file
 and imported using the path `./{some-name}.css`.
 
 CSS files for routes should be placed in the `app/styles` directory
-and imported using the path `~/styles/{some-name}.css`.
+and imported using the path `~/styles/{some-name}.css?url`.
 The tilde (`~`) at the beginning of the path maps to the `app` directory.
 
 For example:
 
 ```ts
 import type {LinksFunction} from '@remix-run/node';
-import styles from './Demo.css';
+import styles from '~/styles/Demo.css?url';
 
-// Objects in the returned array can also contain a "media" property
-// to specify a media query that must be satisfied to use the styles.
-// For example, media: "screen and (min-width: 768px)"
-export const links: LinksFunction = () => [{rel: 'stylesheet', href: styles}];
+export const links: LinksFunction = () => [
+  {rel: 'stylesheet', href: styles, as: 'style'}
+];
 ```
+
+Objects in the returned array can include a "media" property
+to specify a media query that must be satisfied to use the styles.
+For example, media: "screen and (min-width: 768px)".
 
 Remix only looks for "links" and "meta" functions in route components.
 So users of components (not pages) need to import and call those functions
@@ -209,11 +217,14 @@ This pattern is called "surfacing links" in the Remix docs.
 For example, the file `app/routes/some-route.tsx` could contain the following:
 
 ```ts
-import Demo, {links as demoLinks} from '~/components/Heading';
+import Heading, {links as headingLinks} from '~/components/Heading';
 
-import styles from '~/styles/some-route.css';
+import styles from '~/styles/this-route.css';
 
-export const links = () => [{rel: 'stylesheet', href: styles}, ...demoLinks()];
+export const links = () => [
+  {rel: 'stylesheet', href: styles},
+  ...headingLinks()
+];
 ```
 
 ## Links
@@ -275,7 +286,7 @@ and the `loader` functions of all ancestor routes are called.
 
 ## Actions
 
-Any route can export an `action` function that is optionally async.
+Any route can export an `action` function that is optionally `async`.
 These are invoked when a `form` on the page is submitted.
 Like `loader` functions, these functions only
 exist and run on the server, never in the browser.
