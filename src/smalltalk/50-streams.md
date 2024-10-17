@@ -7,6 +7,7 @@ layout: topic-layout.njk
 ---
 
 Streams provide a way to iterate over many kinds of collections and resources.
+They also provide a way to write data.
 
 The class `SequenceableCollection` which is a superclass of `Array`
 provides the methods `readStream`, `readStreamFrom:to:`, and `writeStream`
@@ -119,6 +120,26 @@ stream next print. "changes position to 1; outputs apple"
 stream nextPut: 'grape'. "changes position to 2; changes element to grape"
 coll print. "apple grape cherry"
 ```
+
+## Creating Strings
+
+One use of streams is to efficient build a `String`.
+For example:
+
+```smalltalk
+stream := WriteStream on: (String new: 100).
+stream nextPutAll: 'Hello'.
+stream nextPutAll: ', World'.
+stream nextPut: $!.
+string := stream contents. "Hello, World!"
+```
+
+`100` above is just a size estimate.
+It does not affect the size of the final `String`.
+More than 100 characters can be added,
+but doing that will be slightly less efficient
+because additional space will need to be allocated
+during execution of the `nextPut*` methods.
 
 ## File I/O
 
