@@ -286,13 +286,25 @@ TODO: Add more documentation on this!
 
 ## Headless Server
 
-To run the web server in headless mode:
+Here are steps that create and run an image for a web server.
 
-1. Create a file like `web-server-demo.st` containing the following:
+1. Open the base image.
+1. Open a Workspace.
+1. Enter and evaluate the following expressions in the Workspace:
 
    ```smalltalk
+   Feature require: 'WebClientPlus'.
    HtmxServer new listenOn: 3000
    ```
+
+1. Open the World menu and select "Save Image as ...".
+
+1. Enter a name like "HtmxServer", which is
+   a demo server in the WebClientPlus package.
+
+1. Open the World menu and select "Quit without saving".
+
+1. Confirm by click "Yes".
 
 1. Create a shell script like the following in the file `web-server-demo`:
 
@@ -301,7 +313,7 @@ To run the web server in headless mode:
    CUIS_DIR=$SMALLTALK_DIR/Cuis-Smalltalk-Dev
    VM=$CUIS_DIR/CuisVM.app/Contents/MacOS/Squeak
    IMAGE=$CUIS_DIR/CuisImage/WebClientPlus.image
-   $VM -headless $IMAGE -s web-server-demo.st
+   $VM -headless $IMAGE
    ```
 
 1. Make the shell script executable.
