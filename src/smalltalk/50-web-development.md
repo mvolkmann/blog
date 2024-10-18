@@ -286,7 +286,7 @@ TODO: Add more documentation on this!
 
 ## Headless Server
 
-Here are steps that create and run an image for a web server.
+Here are steps to run a web server in headless mode.
 
 1. Open the base image.
 1. Open a Workspace.
