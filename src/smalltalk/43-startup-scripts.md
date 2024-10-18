@@ -22,10 +22,16 @@ The following is an example script in a file named `cuis`.
 CUIS_DIR=$SMALLTALK_DIR/Cuis-Smalltalk-Dev
 VM=$CUIS_DIR/CuisVM.app/Contents/MacOS/Squeak
 IMAGE=$CUIS_DIR/CuisImage/base-copy.image
-$VM $IMAGE -s env-setup.st
+$VM $IMAGE -s setup.st
 ```
 
-The following is an example of what can appear in the file `env-setup.st`
+To run headless, change the last line to the following:
+
+```bash
+$VM -headless $IMAGE -s setup.st
+```
+
+The following is an example of what can appear in the file `setup.st`
 which contains Smalltalk code:
 
 ```smalltalk
@@ -101,7 +107,7 @@ To use this script:
   `Cuis7.1-6541.image` and name the copy `base-copy.image`.
 - Make a copy of the base changes file that has a name like
   `Cuis7.1-6541.changes` and name the copy `base-copy.changes`.
-- Create the file `env-setup.st` (described later)
+- Create the file `setup.st` (described later)
   in the same directory as this script.
 - Open a terminal window.
 - `cd` to the directory containing this script.

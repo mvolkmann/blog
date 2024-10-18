@@ -283,3 +283,37 @@ Text content is descried in a `String`.
 - `HtmlString elc: name` generates `<name>`
 
 TODO: Add more documentation on this!
+
+## Headless Server
+
+To run the web server in headless mode:
+
+1. Create a file like `web-server-demo.st` containing the following:
+
+   ```smalltalk
+   HtmxServer new listenOn: 3000
+   ```
+
+1. Create a shell script like the following in the file `web-server-demo`:
+
+   ```bash
+   !/usr/bin/env zsh
+   CUIS_DIR=$SMALLTALK_DIR/Cuis-Smalltalk-Dev
+   VM=$CUIS_DIR/CuisVM.app/Contents/MacOS/Squeak
+   IMAGE=$CUIS_DIR/CuisImage/WebClientPlus.image
+   $VM -headless $IMAGE -s web-server-demo.st
+   ```
+
+1. Make the shell script executable.
+
+   ```bash
+   chmod a+x web-server-demo
+   ```
+
+1. Start the web server by entering the following:
+
+   ```bash
+   ./web-server-demo
+   ```
+
+1. Browse `localhost:3000`
