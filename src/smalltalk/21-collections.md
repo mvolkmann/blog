@@ -422,8 +422,8 @@ The following table describes some of the instance methods defined in the
 
 ## OrderedCollection
 
-`OrderedCollection` instances are variable-length, ordered collections
-that can contain duplicates.
+The `OrderedCollection` class is a subclass of `SequenceableCollection`.
+Instances are variable-length, ordered collections that can contain duplicates.
 
 To create an `OrderedCollection` from an array, send the `#newFrom:` message.
 For example, `fruits := OrderedCollection newFrom: #('apple' 'banana' 'cherry')`

@@ -6,7 +6,9 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-To install support for ODBC:
+## Installing
+
+To install Cuis Smalltalk support for ODBC:
 
 - Clone the Git repository at https://github.com/Cuis-Smalltalk/DatabaseSupport.
 - Open a "File List" window.
@@ -16,8 +18,34 @@ To install support for ODBC:
 
 This adds the class category "ODBC".
 
+This package requires the `libodbc` external library.
+To install this in macOS, install Homebrew and enter `brew install unixodbc`.
+This installs the file `libodbc.2.dylib`.
+
+Add the following in `.bashrc` or `.zshrc`:
+
+```bash
+export DYLD_LIBRARY_PATH="/usr/local/lib"
+```
+
+To access SQLite databases in macOS,
+enter `brew install sqliteodbc`.
+
+Create the file `/usr/local/etc/odbc.ini` or `~/.odbc.ini`.
+Add the following contents:
+
+```text
+[TodoDSN]
+Description = SQLite ODBC Driver
+Driver = /usr/local/lib/libsqlite3odbc.dylib
+Database = /Users/volkmannm/Documents/dev/lang/smalltalk/Cuis-Smalltalk-Dev-UserFiles/todos.db
+Timeout = 2000
+```
+
+Test the connection by entering `isql TodoDSN` and `select * from todos;`.
+
 See the example code in the `dsn:user:password:query:` class method
-of the `ODBCCOnnection` class.
+of the `ODBCConnection` class.
 
 Open a Browser, select the ODBC class category,
 select the ODBCConnection class, click the "class" button,
@@ -26,12 +54,6 @@ and see the sample code in the class method `dsn:user:password:query:`.
 This fails on the line
 `conn := ODBCConnection dsn: dsn user: user password: password.`
 The error is "External module not found".
-
-This package requires the `libodbc` external library.
-To install this in macOS, install Homebrew and enter `brew install unixodbc`.
-This installs the file `libodbc.2.dylib`.
-
-TODO: How can I enable the ODCB package to find the dynamic library?
 
 TODO: Try using the ODBC package to access many kinds of databases including
 TODO: SQLite, PostgreSQL, and MongoDB.
