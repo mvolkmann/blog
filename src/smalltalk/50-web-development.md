@@ -286,6 +286,10 @@ TODO: Add more documentation on this!
 
 ## Headless Server
 
+An interesting feature of Smalltalk images is that
+if a web server is started inside an image and the image is saved,
+when the image is restarted, the web server will still be running.
+
 Here are steps to run a web server in headless mode.
 
 1. Open the base image.
