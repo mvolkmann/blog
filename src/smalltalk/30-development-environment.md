@@ -243,6 +243,9 @@ Click the disclosure triangles to drill down into instance variable values.
 
 Use the bottom pane to enter and execute Smalltalk expressions
 where `self` refers to the selected object in the top pane.
+Initially `self` refers to the object being inspected,
+but clicking another object within its tree
+changes `self` to refer to that object.
 
 <img alt="Cuis Explore window" style="width: 40%"
   src="/blog/assets/cuis-explore-window.png?v={{pkg.version}}">
@@ -265,6 +268,17 @@ To open a System Browser, open the World menu and select Open...Browser.
 Alternatively, type a class name (ex. String) in a Workspace window
 and press cmd-b (Browse it)
 to open a System Browser with that class already selected.
+
+To create a new class, click a class category in the first pane.
+This causes a class definition template to be displayed in the bottom pane.
+Change "NameOfSubclass" to the name of the new class.
+Change "Object" to the name of its superclass if it is not `Object`.
+Add a space-separated list of instance variable names
+in the `String` value for `instanceVariableNames:`.
+Add a space-separated list of class variable names
+in the `String` value for `classVariableNames:`.
+The value for `category:` should already be set to
+the name of the selected class category.
 
 Selecting a class name in an already open System Browser
 (or in another window)
