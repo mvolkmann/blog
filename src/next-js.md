@@ -788,7 +788,7 @@ and store this file there.
 
 {% raw %}
 
-```jsx
+```text
 'use client';
 
 import {createContext, ReactNode, useContext, useState} from 'react';
@@ -800,15 +800,12 @@ interface DogData {
   setName: (name: string) => void;
 }
 
-const DogContext =
-  createContext <
-  DogData >
-  {
-    breed: '',
-    name: '',
-    setBreed: string => '',
-    setName: string => ''
-  };
+const DogContext = createContext<DogData>({
+  breed: '',
+  name: '',
+  setBreed: string => '',
+  setName: string => ''
+});
 
 interface Props {
   children: ReactNode;
