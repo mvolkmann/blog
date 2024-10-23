@@ -816,9 +816,9 @@ export const DogContextProvider = ({children}: Props) => {
   const [name, setName] = useState('Comet');
 
   return (
-    <DogContext.Provider value={{breed, name, setBreed, setName}}>
+    &lt;DogContext.Provider value={{breed, name, setBreed, setName}}&gt;
       {children}
-    </DogContext.Provider>
+    &lt;/DogContext.Provider&gt;
   );
 };
 
