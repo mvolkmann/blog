@@ -18,7 +18,10 @@ Every class supports the class method `new`,
 which creates and returns a new instance of the class.
 If the class defines the instance method `initialize`,
 the `new` method will call it.
-The `initialize` method typically initializes
+If the class is a subclass of any class other that `Object`,
+its `initialize` method typically begins with `super initialize`
+which calls the `initialize` method in the superclass.
+The `initialize` method also typically initializes
 each of the instance variables of the object.
 
 Let's look at an example class named `Rect`

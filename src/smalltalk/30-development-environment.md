@@ -80,8 +80,9 @@ PreferenceSet sysPreferences at: #backgroundEffect put: #tile.
 
 ## Workspace Windows
 
-Workspaces provide a place for experimenting with code.
-Pharo Smalltalk calls these "Playground".
+Workspaces provide a place for experimenting with code
+and save arbitrary text.
+Pharo Smalltalk calls these "Playgrounds".
 
 Pressing cmd-s in Workspace prompts for
 a file name where the contents will be saved.
@@ -253,7 +254,12 @@ class categories, classes, method categories, and methods.
 This includes those provided by the base image,
 those provided by installed packages, and those you create.
 
+The title bar initially reads "System Browser".
+If a class name is selected, it changes to
+"System Browser: " followed by the class name.
+
 Class and method category names can contain spaces.
+TODO: The sentence above doesn't really belong in this section.
 
 To open a System Browser, open the World menu and select Open...Browser.
 Alternatively, type a class name (ex. String) in a Workspace window
@@ -265,6 +271,13 @@ Selecting a class name in an already open System Browser
 and pressing cmd-b (Browse it) opens a new System Browser.
 There is no command to navigate to the selected class
 within the current System Browser.
+
+After changing the code of a method, press cmd-s to save the changes.
+This causes the method to be compiled.
+If the compiler detects message sends to unknown methods,
+it prompts for confirmation.
+Click "yes" if the method doesn't exist now,
+but will be written later.
 
 For more detail, see
 <a href="https://cuis-smalltalk.github.io/TheCuisBook/A-brief-introduction-to-the-system-Browser.html"

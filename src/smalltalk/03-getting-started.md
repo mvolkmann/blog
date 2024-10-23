@@ -426,7 +426,11 @@ Consider saving this in a new image so future sessions can start in this state.
 To do so, open the World menu, select "save image as...",
 and enter a file name with the extension ".image".
 The image will be saved in the same directory as the base image,
-along with a corresponding ".changes" file.
+along with a corresponding `.changes` file.
+
+The `.changes` file contains a log of all source code changes made
+since the image was initially started.
+TODO: Finish describing this!
 
 ## Implementing in Debugger
 
