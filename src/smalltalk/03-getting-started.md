@@ -428,9 +428,20 @@ and enter a file name with the extension ".image".
 The image will be saved in the same directory as the base image,
 along with a corresponding `.changes` file.
 
-The `.changes` file contains a log of all source code changes made
-since the image was initially started.
-TODO: Finish describing this!
+Source code for the current version of Cuis Smalltalk is stored in
+the file `Cuis-Smalltalk-Dev/CuisImage/Cuis{version}.sources`.
+Each image stores all the code changes made in that image
+since the `.sources` file was created
+in a `.changes` file in the same directory.
+For example, an image file named `Demo.image`
+has a corresponding file named `Demo.changes`.
+
+When a new major version of Cuis Smalltalk is released,
+the `.changes` file for the base image is "condensed"
+and the source code in it is moved to the `.sources` file.
+That is the only time at which the `.changes` will contain no changes.
+See the `SystemDictionary` methods `condenseChanges`
+and `condenseSources` for details.
 
 ## Implementing in Debugger
 
