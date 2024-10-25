@@ -109,7 +109,7 @@ counter := 1.
 ] whileTrue.
 ```
 
-Send `whileFalse` without an argument to a block
+Send `#whileFalse` without an argument to a block
 to evaluate the block repeatedly until it answers `true`.
 
 A block can call itself if it passes itself in as an argument.
@@ -124,6 +124,10 @@ fact := [:block :n |
 
 fact value: fact value: 5 "gives 120"
 ```
+
+Send `#repeat` to a block to evaluate it repeated
+unit the block explicitly returns a value,
+which causes the containing method to exit and return that value.
 
 ## Running in another Process
 
