@@ -202,7 +202,7 @@ to make the "SUnit Test Runner" window aware of them.
 <img alt="Cuis SUnit Test Runner" style="width: 90%"
   src="/blog/assets/cuis-sunit-test-runner.png?v={{pkg.version}}">
 
-## Setup and Teardown
+## SetUp and TearDown
 
 To run code before and after each test method,
 define the methods `setUp` and `tearDown`.
