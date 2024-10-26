@@ -73,14 +73,24 @@ To install this in macOS, enter `brew install unixodbc` in a terminal.
 ## Database-specific Drivers
 
 Download a database-specific driver for each kind of database being used.
-In macOS, when using SQLite, enter `brew install sqliteodbc` in a terminal.
-Add the following line to each SQLite data source definition:
+
+In macOS, to access PostgreSQL databases,
+enter `brew install psqlodbc` in a terminal.
+Add the following line to each SQLite data source definition
+(described below):
 
 ```text
-Driver = /usr/local/lib/libsqlite3odbc.dylib
+Driver = /opt/homebrew/lib/psqlodbcw.so
 ```
 
-TODO: How do you install a driver for PostgreSQL databases?
+In macOS, to access SQLite databases,
+enter `brew install sqliteodbc` in a terminal.
+Add the following line to each SQLite data source definition
+(described below):
+
+```text
+Driver = /opt/homebrew/lib/libsqlite3odbc.so
+```
 
 ## ODBC Data Sources
 
@@ -89,12 +99,13 @@ To determine the directory where this file should reside
 and the expected file name, enter `odbcinst -j` in a terminal.
 Look for "User Data Sources" in the output.
 This will likely be `.odbc.ini` in your home directory.
-Create that file with contents similar to the following:
+Create that file with contents similar to the following,
+which defines a data source for a SQLite database in the file `todos.db`:
 
 ```text
 [TodoDSN]
 Description = SQLite database for a Todo app
-Driver = /usr/local/lib/libsqlite3odbc.dylib
+Driver = /opt/homebrew/lib/libsqlite3odbc.so
 Database = /Users/volkmannm/Documents/dev/lang/smalltalk/Cuis-Smalltalk-Dev-UserFiles/todos.db
 Timeout = 2000
 ```
@@ -104,6 +115,11 @@ by entering `isql TodoDSN` and `select * from todos;`.
 Press ctrl-d to exit.
 
 ## Database Access from Smalltalk
+
+In macOS, start a Cuis Smalltalk image by entering
+`./RunCuisOnMacTerminal.sh` in a terminal.
+This uses the base image.
+To use another image, copy and modify this script.
 
 Open a Browser, select the ODBC class category,
 select the `ODBCConnection` class, click the "class" button,
