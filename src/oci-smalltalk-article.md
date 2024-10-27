@@ -334,11 +334,12 @@ For our final exercise we will create a new class and use it.
 - To clear the contents of the Transcript window,
   right-click inside it and select "Clear Transcript".
 - Select both lines in the Workspace and "Do it".
+  This will print "Comet is a Whippet." in the Transcript window.
 
-There's much more to learn.
+Eager to learn more about Smalltalk?
 See my extensive set of <a href="https://mvolkmann.github.io/blog/"
 target="_blank">blog pages on Smalltalk</a>.
-Click "Smalltalk" in the hamburger menu to see a long list of subtopics.
+Click "Smalltalk" in the hamburger menu to open a long list of subtopics.
 
 ## Resources
 
