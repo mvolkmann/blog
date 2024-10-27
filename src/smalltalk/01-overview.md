@@ -75,15 +75,14 @@ or to a new image.
 Smalltalk is perhaps most known for its incredible development tools.
 These support:
 
-- finding code in many ways
-- live environment where code changes are immediately reflected
+- a live environment where code changes are immediately reflected
   (no need to recompile or restart the environment)
-- debugging with the ability to modify code and data, then continue or restart
-- ability to modify the classes and methods that implement the
-  development environment as easily as modifying your own classes and methods
+- finding code in many ways
+- modifying the classes and methods that implement the development environment
+  as easily as modifying your own classes and methods
 - inspecting objects to see their class and instance variables
+- debugging with the ability to modify code and data, then continue or restart
 - rapid prototyping
-- TODO: add more?
 
 Smalltalk is a dynamically typed language.
 Types of variables, method parameters,

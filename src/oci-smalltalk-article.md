@@ -24,8 +24,8 @@ all the GUI elements in the development environment.
 Everything happens by sending messages to objects.
 The objects decide whether and how to act on the messages.
 
-Smalltalk was the first programming language to make OOP popular.
-In the 1990's the popularity of Smalltalk had risen enough
+Smalltalk was the first popular OOP.
+In the 1990's its popularity had risen to the point
 that it was seen as an alternative to C++.
 In 1995 Smalltalk had a 15% market share compared to 71% for C++.
 
@@ -49,9 +49,9 @@ The VM reads and executes Smalltalk code found in an image file.
 It is specific to the operating system and CPU architecture being used.
 
 Image files can be moved between
-operating systems on different CPU architectures.
-It will render the same windows, pixel for pixel,
-across Windows, Linux, and MacOS, only differing based on screen size.
+operating systems and different CPU architectures.
+It will render the same windows pixel for pixel,
+across environments, only differing based on screen size.
 There is no need to recompile code for different environments.
 This makes Smalltalk code highly portable.
 
@@ -70,9 +70,10 @@ Squeak Smalltalk, released in 1996,
 was the first free, open-source implementation.
 Until then all Smalltalk implementations were commericial and expensive.
 The Java programming language was released in 1995 and was free.
-That removed most of the wind from Smalltalk sails
-and for most part it receded into the history of computer programming.
+That removed most of the wind from the sails of Smalltalk.
 
+Today many developers assume that Smalltalk has
+receded into the history of computer programming.
 However, Smalltalk is alive and well outside the United States.
 Two free, open-source forks of Squeak have been created, Pharo and Cuis.
 
@@ -81,7 +82,7 @@ aims to provide a more comprehensive feature set than Squeak.
 
 Cuis Smalltalk was created in Argentina and
 aims to remain small and easy to learn.
-Missing features can be defined by combining the features that are present
+Missing features can be implemented by combining the features that are present
 and by installing more packages.
 The Cuis mascot is southern mountain cavy found in Argentina
 which is a tailless rodent that looks similar to a very large mouse.
@@ -97,13 +98,13 @@ Cincom Smalltalk, GemStone/S, and VA Smalltalk.
 Smalltalk is perhaps most known for its incredible development tools.
 These support:
 
-- finding code in many ways
 - a live environment where code changes are immediately reflected
   (no need to recompile or restart the environment)
-- debugging with the ability to modify code and data, then continue or restart
-- ability to modify the classes and methods that implement the
-  development environment as easily as modifying your own classes and methods
+- finding code in many ways
+- modifying the classes and methods that implement the development environment
+  as easily as modifying your own classes and methods
 - inspecting objects to see their class and instance variables
+- debugging with the ability to modify code and data, then continue or restart
 - rapid prototyping
 
 ## Why learn Smalltalk now?
@@ -117,19 +118,19 @@ Learning Smalltalk will enable you to:
 - Actually use it as an alternative to other languages.
 - Have fun!
 
-## Taste Cuis Smalltalk
+## Taste of Smalltalk
 
 To really get a feel for what it's like to use Smalltalk,
-you have to try it. So follow the instructions below
+you have to try it. Follow the instructions below
 to install, start, and use Cuis Smalltalk.
 
 To install Cuis Smalltalk:
 
 1. Browse the <a href="https://cuis.st" target="_blank">Cuis Smalltalk home page</a>.
 1. Click the "Download" link at the top of the page.
-1. Click "Cuis Stable Release" or "Cuis Rolling Release". The later is
-   recommended so you can obtain updates by simply running `git pull`.
-   Both lead to a GitHub repository.
+1. Click "Cuis Stable Release" or "Cuis Rolling Release".
+   Both lead to a GitHub repository. The later is recommended
+   so you can obtain updates by simply running `git pull`.
 1. Clone the repository.
    If the rolling release was selected,
    this will create the directory `Cuis-Smalltalk-Dev`.
