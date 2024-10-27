@@ -117,9 +117,11 @@ Learning Smalltalk will enable you to:
 - Actually use it as an alternative to other languages.
 - Have fun!
 
-## Taste of Using Cuis Smalltalk
+## Taste Cuis Smalltalk
 
-Let's walk through using Cuis Smalltalk.
+To really get a feel for what it's like to use Smalltalk,
+you have to try it. So follow the instructions below
+to install, launch, and use Cuis Smalltalk.
 
 To install Cuis Smalltalk:
 
@@ -159,16 +161,51 @@ Clicking the World opens the World menu.
 Click "Open" to see a submenu of windows that can be opened inside the World.
 We will look at three of these: Workspace, Transcript, and Browser.
 
-Open a Workspace, enter the expression `#(1 2 3 4) average`,
-right-click in the Workspace, and select "Print it".
-This outputs "5/2" in the Workspace which is a `Fraction`.
-The syntax `#(1 2 3 4)` is a compile-time `Array`.
+Open a Workspace, enter the expressions shown in the following screenshot.
+
+<img alt="Cuis Smalltalk Workspace session"
+  src="/blog/assets/cuis-workspace-session.png?v={{pkg.version}}"
+  style="width: 40%">
+
+There are shortcut keys for many actions.
+In macOS, these use the command key (cmd).
+In other platforms these use the control key.
+All the examples that follow use the command key,
+so substitute the control key if you are not using a Mac.
+
+With the cursor positioned at the end of an expression,
+right-click and select "Do it" (cmd-d) or "Print it" (cmd-p).
+Selecting "Do it" evaluates the expression, but does not output its value.
+Selecting "Print it" evaluates the expression and outputs its value
+immediately after the expression in the Workspace.
+The result will be selected, so pressing the delete key will remove it.
+
+The first expression sends the unary message `asUppercase`
+to the literal string `'demo'`.
+
+The second expression sends the binary message `+`
+to the number `2` with the argument `3`.
+
+The next three expressions demonstrate working with a `Dictionary`,
+which is called a `Map` or `HashMap` in other programming languages.
+The expression `city := Dictionary new` sends the message `new`
+to the `Dictionary` class which returns a new instance.
+The syntax `:=` is automatically change to a left pointing arrow.
+The expression `city at: 'Kansas City' put: 'Chiefs'`
+sends the keyword message `at:put:` to `cityToTeam`
+which adds a key/value pair to the `Dictionary`.
+The expression `city at: 'Kansas City'`
+sends the keyword message `at:` to the `Dictionary`
+which returns the value at the specified key.
+
+The last expression, `#(1 2 3 4) average`, returns the `Fraction` `5/2`
+rather than a `Float` in order to preserve accuracy.
+The syntax `#(1 2 3 4)` creates a compile-time `Array`.
 `average` is an instance method defined in the `Collection` class
 which is a superclass of the `Array` class.
 
 We can examine the implementation of the `average` method.
-Open a Browser.
-TODO: Add a screenshot here.
+To do so, open a Browser.
 This contains four panes across the top row.
 
 - The first pane displays a list of class categories.
@@ -180,6 +217,8 @@ This contains four panes across the top row.
   - The "class" button causes the remaining panes to show class information.
 - The third pane displays a list of method categories in the selected class.
 - The fourth pane displays a list of methods in the selected method category.
+
+TODO: Add a screenshot here.
 
 Move the mouse cursor over the first pane and press cmd-f.
 Enter "Array" and press return.
