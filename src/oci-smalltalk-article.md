@@ -159,13 +159,14 @@ The window that appears has a blue background by default.
 This is referred to as the "World".
 Clicking the World opens the World menu.
 Click "Open" to see a submenu of windows that can be opened inside the World.
-We will look at three of these: Workspace, Transcript, and Browser.
+We will look at three of these:
+Workspace, Browser, Message Names, and Transcript.
 
-Open a Workspace, enter the expressions shown in the following screenshot.
+Open a Workspace and enter the expressions shown in the following screenshot.
 
 <img alt="Cuis Smalltalk Workspace session"
   src="/blog/assets/cuis-workspace-session.png?v={{pkg.version}}"
-  style="width: 40%">
+  style="width: 50%">
 
 There are shortcut keys for many actions.
 In macOS, these use the command key (cmd).
@@ -218,12 +219,15 @@ This contains four panes across the top row.
 - The third pane displays a list of method categories in the selected class.
 - The fourth pane displays a list of methods in the selected method category.
 
-TODO: Add a screenshot here.
-
 Move the mouse cursor over the first pane and press cmd-f.
 Enter "Array" and press return.
 The `Array` class will be selected in the second pane.
-There is no method named `average` in this class,
+
+<img alt="Cuis Smalltalk Browser"
+  src="/blog/assets/cuis-browser.png?v={{pkg.version}}"
+  style="width: 100%">
+
+There is no method named `average` in the `Array` class,
 so it must be defined in a superclass, but which one?
 Right-click "Array" in the second pane and select "browse hierarchy"
 to open a Hierarchy Browser.
@@ -233,19 +237,28 @@ which is a subclass of `Collection`.
 We could check each of those classes to
 find the one that defines the `average` method.
 But there's another way.
-Open the World menu, select "open", select "Message Names", and enter "average".
-This shows that the only class that defines that method is `Collection`.
+
+Open a "Message Names" window, and enter "average" in the "Search" input.
+This lists three methods whose names contain "average"
+which are `average`, `average:`, and `average:ifEmpty`.
+Select the first one.
+This shows that the only class that defines the selected method is `Collection`.
 Click "Collection average" in that window to see its implementation.
 The up arrow character specifies a value to be returned from a method.
 This method returns the result of sending the message `mean`
-to `self` which is the `Array` instance.
+to `self` which is the `Collection` instance.
 Double-click "mean" to select it and press cmd-b to "Browse it".
 This opens a new window that shows the method implementation
 which returns the result of divding `self sum` by `self size`.
 
-So what have we learned?
-All the code can be easily browsed.
-This include code that you write and code in provided classes.
+<img alt="Cuis Smalltalk Array average"
+  src="/blog/assets/cuis-array-average.png?v={{pkg.version}}"
+  style="width: 100%">
+
+What we have learned from this is that all the code can be easily browsed.
+This includes code that you write and code in provided classes.
+
+For our final exercise we will create a new class and use it.
 
 TODO: Continue here!
 
