@@ -10,7 +10,7 @@ layout: topic-layout.njk
   .logo {
     --size: 8rem;
     max-height: var(--size);
-    max-width: var(--size); 
+    max-width: var(--size);
     margin-left: 2rem;
   }
 
@@ -61,7 +61,7 @@ It is specific to the operating system and CPU architecture being used.
 
 Image files can be moved between
 operating systems on different CPU architectures.
-An image will display the same windows, pixel for pixel,
+It will render the same windows, pixel for pixel,
 across Windows, Linux, and MacOS, only differing based on screen size.
 There is no need to recompile code for different environments.
 This makes Smalltalk code highly portable!
@@ -94,7 +94,7 @@ This is determined at run-time.
 
 Alan Kay, Dan Ingalls, and Adele Goldberg worked at
 Xerox PARC (Palo Alto Research Center) in the 1970s.
-All of them collaborated to create Smalltalk.
+They collaborated to create Smalltalk.
 Alan Kay was the primary designer of Smalltalk and gave it its name.
 Dan Ingalls was the primary implementor.
 Adele Goldberg primarily focused on documentation
@@ -138,7 +138,7 @@ He also said "Languages like C++ and Java are OOP done wrong.
 Smalltalk is OOP done right."
 
 Today Smalltalk is still used by the financial industry,
-manufacturers, utilities, transportation, and academia.
+manufacturing, utilities, transportation, and academia.
 
 The entire syntax of Smalltalk can be demonstrated on a post card.
 
@@ -500,7 +500,7 @@ short, speckled, greyish-yellow fur, fading to pale grey on the underparts."
 They look similar to a mouse, but grow to around eight inches in length.
 They are found in Argentina.
 Juan Vuletich began development of Cuis Smalltalk in Buenos Aires, Argentina.
-The word "cuis" means "squeak" in Rioplatense Spanish.
+The word "cuis" in Rioplatense Spanish means "squeak".
 
 ## GitHub Account
 
