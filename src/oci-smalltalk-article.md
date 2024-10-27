@@ -13,7 +13,7 @@ layout: topic-layout.njk
 over my career is that if you do not aggressively fight complexity,
 it will eat you alive." - Vicki Boykis
 
-## Enter Smalltalk
+## Smalltalk Overview
 
 The Smalltalk programming language was created at
 Xerox PARC (Palo Alto Research Center) in the 1970s.
@@ -64,7 +64,7 @@ or to a new image.
 Today Smalltalk is still used by the financial industry,
 manufacturing, utilities, transportation, and academia.
 
-## A Bit of history
+## Bit of History
 
 Squeak Smalltalk, released in 1996,
 was the first free, open-source implementation.
@@ -93,7 +93,7 @@ Squeak, Pharo, and Cuis all use the MIT license.
 There are also many commercial Smalltalk implementations including
 Cincom Smalltalk, GemStone/S, and VA Smalltalk.
 
-## Smalltalk development environment
+## Smalltalk Development Environment
 
 Smalltalk is perhaps most known for its incredible development tools.
 These support:
@@ -107,7 +107,7 @@ These support:
 - debugging with the ability to modify code and data, then continue or restart
 - rapid prototyping
 
-## Why learn Smalltalk now?
+## Why Learn Smalltalk Now?
 
 Learning Smalltalk will enable you to:
 
@@ -347,9 +347,6 @@ Click "Smalltalk" in the hamburger menu to open a long list of subtopics.
 - <a href="https://en.wikipedia.org/wiki/Smalltalk"
   target="_blank">Smalltalk in Wikipedia</a>
 
-- <a href="https://archive.org/details/byte-magazine-1981-08"
-  target="_blank">Byte Magazine issue on Smalltalk</a>
-
 - <a href="https://cuis.st" target="_blank">Cuis Smalltalk</a>
 
 - <a href="https://pharo.org" target="_blank">Pharo Smalltalk</a>
@@ -362,10 +359,13 @@ Click "Smalltalk" in the hamburger menu to open a long list of subtopics.
 
 The following recent podcast episodes discuss Smalltalk:
 
-- <a href="https://www.youtube.com/watch?v=sokb6zZC-ZE&t=3105s"
+- Developer Voices:
+  <a href="https://www.youtube.com/watch?v=sokb6zZC-ZE&t=3105s"
   target="_blank">Cuis Smalltalk and the History of Computing’s Future</a>
   with Juan Vuletich
-- <a href="https://podcasts.apple.com/us/podcast/software-unscripted/id1602572955?i=1000656742775"
-  target="_blank">A Haskller Tries Smalltalk</a> with Ian Jeffries
-- <a href="https://podcasts.apple.com/us/podcast/software-unscripted/id1602572955"
+- Software Unscripted:
+  <a href="https://podcasts.apple.com/us/podcast/software-unscripted/id1602572955?i=1000656742775"
+  target="_blank">A Haskeller Tries Smalltalk</a> with Ian Jeffries
+- Software Unscripted:
+  <a href="https://podcasts.apple.com/us/podcast/software-unscripted/id1602572955"
   target="_blank">Smalltalk's Past, Present, and Future</a> with Juan Vuletich

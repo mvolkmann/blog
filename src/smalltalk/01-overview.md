@@ -202,12 +202,15 @@ target="_blank">Discord channel channel for Squeak Smalltalk</a>.
 
 The following recent podcast episodes discuss Smalltalk:
 
-- <a href="https://www.youtube.com/watch?v=sokb6zZC-ZE&t=3105s"
+- Developer Voices:
+  <a href="https://www.youtube.com/watch?v=sokb6zZC-ZE&t=3105s"
   target="_blank">Cuis Smalltalk and the History of Computing’s Future</a>
   with Juan Vuletich
-- <a href="https://podcasts.apple.com/us/podcast/software-unscripted/id1602572955?i=1000656742775"
-  target="_blank">A Haskller Tries Smalltalk</a> with Ian Jeffries
-- <a href="https://podcasts.apple.com/us/podcast/software-unscripted/id1602572955"
+- Software Unscripted:
+  <a href="https://podcasts.apple.com/us/podcast/software-unscripted/id1602572955?i=1000656742775"
+  target="_blank">A Haskeller Tries Smalltalk</a> with Ian Jeffries
+- Software Unscripted:
+  <a href="https://podcasts.apple.com/us/podcast/software-unscripted/id1602572955"
   target="_blank">Smalltalk's Past, Present, and Future</a> with Juan Vuletich
 
 ## Pros and Cons
