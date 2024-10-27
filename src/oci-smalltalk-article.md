@@ -264,12 +264,66 @@ This includes code that you write and code in provided classes.
 
 For our final exercise we will create a new class and use it.
 
-TODO: Continue here!
+- Open a Browser.
+- Right-click in the first pane and select "add item...".
+- Enter your last name to create a class category with that name.
+- In the bottom pane, replace "NameOfSubclass" with "Dog",
+  keeping the leading `#`.
+- Add the instance variables `breed` and `name` to the `Dog` class
+  by changing the value after `instanceVariableNames` to `'breed name'`.
+- Press cmd-s to save the changes.
+- You will prompted to enter your initials and full name
+  so Cuis Smalltalk can track who made each change.
+- Right-click the class name `Dog` in the second pane
+  and select "more...create inst var accessors".
+  This creates the instance methods `breed` (gets value),
+  `breed:` (sets value), and `name:` (sets value),
+  all in the method category "accessing".
+  It does not create the instance method `name` because
+  that already exists in the superclass `Object`.
+  But we want to override that.
+- Click "accessing" in the third pane.
+- Enter the following in the bottom pane and save it.
 
-- use a Workspace and Transcript
-- use a Browser to view and edit code
-- create a custom class
-- experiment with the class in a Browser
+  ```smalltalk
+  name
+      ^name
+  ```
+
+- Right-click in the third pane and select "new category...".
+- Select "asString".
+- Enter the following in the bottom lpane and save it.
+
+  ```smalltalk
+  asString
+      ^'{1} is a {2}.' format: { name. breed }
+  ```
+
+- Click the "class" button at the bottom of the second pane.
+- Right-click in the third pane and select "new category...".
+- Select "instance creation".
+- Enter the following in the bottom lpane and save it.
+
+  ```smalltalk
+  newName: nameString breed: breedString
+      | dog |
+      dog := Dog new.
+      dog name: nameString.
+      dog breed: breedString.
+      ^dog.
+  ```
+
+- Open a Workspace.
+- Enter the following statements:
+
+  ```smalltalk
+  myDog := Dog newName: 'Comet' breed: 'Whippet'.
+  myDog print.
+  ```
+
+- Select both lines in the Workspace and "Do it".
+- TODO: Do you need to open a Transcript first?
+- TODO: Why does this just print "a Dog"?
 
 There's much more to learn.
 See my extensive set of <a href="https://mvolkmann.github.io/blog/"
