@@ -64,11 +64,11 @@ operating systems on different CPU architectures.
 It will render the same windows, pixel for pixel,
 across Windows, Linux, and MacOS, only differing based on screen size.
 There is no need to recompile code for different environments.
-This makes Smalltalk code highly portable!
+This makes Smalltalk code highly portable.
 
 An image file can be thought of as a snapshot
 of the current state of the development environment.
-It describes a collection of all the active objects.
+It describes the collection of all active objects.
 During development, changes can be saved to the current image
 or to a new image.
 
