@@ -291,11 +291,11 @@ For our final exercise we will create a new class and use it.
   ```
 
 - Right-click in the third pane and select "new category...".
-- Select "asString".
-- Enter the following in the bottom lpane and save it.
+- Select "printing".
+- Enter the following in the bottom pane and save it.
 
   ```smalltalk
-  asString
+  printString
       ^'{1} is a {2}.' format: { name. breed }
   ```
 
@@ -321,9 +321,10 @@ For our final exercise we will create a new class and use it.
   myDog print.
   ```
 
+- If there is no Transcript window open then open one.
+- To clear the contents of the Transcript window,
+  right-click inside it and select "Clear Transcript".
 - Select both lines in the Workspace and "Do it".
-- TODO: Do you need to open a Transcript first?
-- TODO: Why does this just print "a Dog"?
 
 There's much more to learn.
 See my extensive set of <a href="https://mvolkmann.github.io/blog/"
