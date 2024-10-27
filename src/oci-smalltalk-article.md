@@ -290,6 +290,9 @@ For our final exercise we will create a new class and use it.
       ^name
   ```
 
+  The caret character is following by an expression that specifies a value to be returned from the method.
+  It is automatically replaced by an up pointing arrow.
+
 - Right-click in the third pane and select "new category...".
 - Select "printing".
 - Enter the following in the bottom pane and save it.
