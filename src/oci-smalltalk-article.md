@@ -162,6 +162,8 @@ Click "Open" to see a submenu of windows that can be opened inside the World.
 We will look at three of these:
 Workspace, Browser, Message Names, and Transcript.
 
+A Workspace is a window for experimenting with Smalltalk code.
+It is similar to a read-eval-print-loop (REPL) in other programming languages.
 Open a Workspace and enter the expressions shown in the following screenshot.
 
 <img alt="Cuis Smalltalk Workspace session"
@@ -201,13 +203,15 @@ which returns the value at the specified key.
 
 The last expression, `#(1 2 3 4) average`, returns the `Fraction` `5/2`
 rather than a `Float` in order to preserve accuracy.
+It does this because the `average` method
+returns the result of an integer division.
 The syntax `#(1 2 3 4)` creates a compile-time `Array`.
 `average` is an instance method defined in the `Collection` class
 which is a superclass of the `Array` class.
 
 We can examine the implementation of the `average` method.
 To do so, open a Browser.
-This contains four panes across the top row.
+Brower windows contains four panes across the top row.
 
 - The first pane displays a list of class categories.
 - The second pane displays a list of classes in the selected class category.
