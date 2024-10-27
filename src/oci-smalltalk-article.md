@@ -159,6 +159,55 @@ Clicking the World opens the World menu.
 Click "Open" to see a submenu of windows that can be opened inside the World.
 We will look at three of these: Workspace, Transcript, and Browser.
 
+Open a Workspace, enter the expression `#(1 2 3 4) average`,
+right-click in the Workspace, and select "Print it".
+This outputs "5/2" in the Workspace which is a `Fraction`.
+The syntax `#(1 2 3 4)` is a compile-time `Array`.
+`average` is an instance method defined in the `Collection` class
+which is a superclass of the `Array` class.
+
+We can examine the implementation of the `average` method.
+Open a Browser.
+TODO: Add a screenshot here.
+This contains four panes across the top row.
+
+- The first pane displays a list of class categories.
+- The second pane displays a list of classes in the selected class category.
+  There are three buttons at the bottom of this pane.
+  - The "instance" button causes the remaining panes to show instance information.
+  - The "?" button causes the bottom pane to display
+    the comment for the selected class.
+  - The "class" button causes the remaining panes to show class information.
+- The third pane displays a list of method categories in the selected class.
+- The fourth pane displays a list of methods in the selected method category.
+
+Move the mouse cursor over the first pane and press cmd-f.
+Enter "Array" and press return.
+The `Array` class will be selected in the second pane.
+There is no method named `average` in this class,
+so it must be defined in a superclass, but which one?
+Right-click "Array" in the second pane and select "browse hierarchy"
+to open a Hierarchy Browser.
+This shows that `Array` is a subclass of `ArrayedCollection`
+which is a subclass of `SequenceableCollection`
+which is a subclass of `Collection`.
+We could check each of those classes to
+find the one that defines the `average` method.
+But there's another way.
+Open the World menu, select "open", select "Message Names", and enter "average".
+This shows that the only class that defines that method is `Collection`.
+Click "Collection average" in that window to see its implementation.
+The up arrow character specifies a value to be returned from a method.
+This method returns the result of sending the message `mean`
+to `self` which is the `Array` instance.
+Double-click "mean" to select it and press cmd-b to "Browse it".
+This opens a new window that shows the method implementation
+which returns the result of divding `self sum` by `self size`.
+
+So what have we learned?
+All the code can be easily browsed.
+This include code that you write and code in provided classes.
+
 TODO: Continue here!
 
 - use a Workspace and Transcript
