@@ -121,7 +121,7 @@ Learning Smalltalk will enable you to:
 
 To really get a feel for what it's like to use Smalltalk,
 you have to try it. So follow the instructions below
-to install, launch, and use Cuis Smalltalk.
+to install, start, and use Cuis Smalltalk.
 
 To install Cuis Smalltalk:
 
@@ -143,32 +143,32 @@ in the installed directory based on your operating system.
   Alternatively, double-click the file `Cuis7.1-6770.image`
   in the `CuisImage` subdirectory.
 
-On macOS, if starting Cuis Smalltalk is blocked, follow these steps:
-
-1. Open the System Settings app.
-1. Select "Privacy & Security".
-1. Scroll down to the "Security" section.
-1. Look for the message '"CuisVM.app" was blocked from use
-   because it is not from an identified developer.'
-1. Click the "Open Anyway" button.
-1. Click the "Open" button in the next dialog that appears.
-1. Select the file `Cuis*.image` found in the subdirectory as `CuisImage`.
-1. Click the "Open" button.
-
 The window that appears has a blue background by default.
 This is referred to as the "World".
 Clicking the World opens the World menu.
 Click "Open" to see a submenu of windows that can be opened inside the World.
 We will look at three of these:
 Workspace, Browser, Message Names, and Transcript.
+Of these, only a Transcript window will be open by default in the initial image.
 
 A Workspace is a window for experimenting with Smalltalk code.
 It is similar to a read-eval-print-loop (REPL) in other programming languages.
-Open a Workspace and enter the expressions shown in the following screenshot.
+Open a Workspace and enter the statments shown in the following screenshot.
 
 <img alt="Cuis Smalltalk Workspace session"
   src="/blog/assets/cuis-workspace-session.png?v={{pkg.version}}"
   style="width: 50%">
+
+The period character is used to separate, not terminate, statements.
+
+The third statement assigns a value to the variable `cityToTeam`.
+To assign the value of an expression to a variable,
+enter a variable name, the assignment operator `:=`, and the expression.
+To cause assignment operators be rendered as a left pointing arrow,
+open the World menu and select "Preferences ... Show ST-80 assignments".
+The opposite setting is "Preferences ... Show ANSI assignments".
+Regardless of this setting, if an underscore is typed in place of
+the assignment operator, it will be rendered as a left pointing arrow.
 
 There are shortcut keys for many actions.
 In macOS, these use the command key (cmd).
@@ -192,7 +192,7 @@ to the number `2` with the argument `3`.
 The next three expressions demonstrate working with a `Dictionary`,
 which is called a `Map` or `HashMap` in other programming languages.
 The expression `city := Dictionary new` sends the message `new`
-to the `Dictionary` class which returns a new instance.
+to the `Dictionary` class which creates and returns a new instance.
 The syntax `:=` is automatically change to a left pointing arrow.
 The expression `city at: 'Kansas City' put: 'Chiefs'`
 sends the keyword message `at:put:` to `cityToTeam`
@@ -248,8 +248,14 @@ which are `average`, `average:`, and `average:ifEmpty`.
 Select the first one.
 This shows that the only class that defines the selected method is `Collection`.
 Click "Collection average" in that window to see its implementation.
-The up arrow character specifies a value to be returned from a method.
-This method returns the result of sending the message `mean`
+
+When the caret (`^`) character appears at
+the beginning of a statement within a method,
+it returns the value of the expression that follows from the method.
+When the preference "Show ST-80 Assigments" is selected,
+the caret character is rendered as an up pointing arrow.
+
+The `average` method returns the result of sending the message `mean`
 to `self` which is the `Collection` instance.
 Double-click "mean" to select it and press cmd-b to "Browse it".
 This opens a new window that shows the method implementation
