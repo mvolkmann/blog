@@ -77,7 +77,7 @@ However, Smalltalk is alive and well outside the United States.
 Two free, open-source forks of Squeak have been created, Pharo and Cuis.
 
 Pharo Smalltalk was created in France and
-aims to provide a more comprehensive set of features than Squeak.
+aims to provide a more comprehensive feature set than Squeak.
 
 Cuis Smalltalk was created in Argentina and
 aims to remain small and easy to learn.
