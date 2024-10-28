@@ -138,23 +138,26 @@ To install Cuis Smalltalk:
 To start Cuis Smalltalk, run the appropriate start script found
 in the installed directory based on your operating system.
 
-- For Windows, open a Command Prompt and enter `RunCuisOnWindows.bat`
-- For Linux, open a Terminal and enter `./RunCuisOnLinux.sh`
-- For macOS, open a Terminal and enter `./RunCuisOnMacTerminal.sh`
+- For Windows, open a Command Prompt and enter `RunCuisOnWindows.bat`.
+- For Linux, open a Terminal and enter `./RunCuisOnLinux.sh`.
+- For macOS, open a Terminal and enter `./RunCuisOnMacTerminal.sh`.
   Alternatively, double-click the file `Cuis7.1-6770.image`
   in the `CuisImage` subdirectory.
 
 The window that appears has a blue background by default.
 This is referred to as the "World".
 Clicking the World opens the World menu.
-Click "Open" to see a submenu of windows that can be opened inside the World.
-We will look at three of these:
+Click "Open" in that menu to see a submenu of
+windows that can be opened inside the World.
+We will look at four of these:
 Workspace, Browser, Message Names, and Transcript.
 Of these, only a Transcript window will be open by default in the initial image.
 
-A Workspace is a window for experimenting with Smalltalk code.
+A Workspace window supports entering and evaluating Smalltalk statements.
 It is similar to a read-eval-print-loop (REPL) in other programming languages.
 Open a Workspace and enter the statments shown in the following screenshot.
+The text in red boxes are the results of "printing"
+the value of the preceding expression. Do not enter that text.
 
 <img alt="Cuis Smalltalk Workspace session"
   src="/blog/assets/cuis-workspace-session.png?v={{pkg.version}}"
