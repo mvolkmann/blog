@@ -410,9 +410,14 @@ For our final exercise let's create a new class and use it.
 1. Enter a name such as your last name and press return.
 1. Open the World menu and select "Save Image and Quit" or
    "Quit without saving" (since you have already saved the changes).
-1. Locate the image file.
-   In macOS, it can be reopened by double-clicking it.
-   In Windows, run the command <???>.
+1. Locate the image file and double-click it to reopen the image.
+
+   In Windows, the first time you do this a dialog will appear asking
+   "How do you want to open this file?".
+   Click "Look for another app on this PC",
+   navigate to the file `Squeak.exe`, select it,
+   and check the "Always use this app to open .image files" checkbox.
+
 1. Verify that all the windows reappear in their saved locations
    and that all the code you added is present.
 
