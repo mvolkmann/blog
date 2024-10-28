@@ -396,6 +396,18 @@ For our final exercise let's create a new class and use it.
 1. Select both lines in the Workspace and press cmd-d to "Do it".
    This will print "Comet is a Whippet." in the Transcript window.
 
+1. Open the World menu and select "Save Image as...".
+   This is preferred over selecting "Save Image"
+   which would save your changes in the initial image.
+   That way you have to option to start from a clean slate.
+
+1. Enter a name such as your last name and press return.
+1. Open the World menu and select "Save Image and Quit" or
+   "Quit without saving" (since you have already saved the changes).
+1. Locate the image file and double-click it to reopen the saved image.
+1. Verify that all the windows reappear in their saved locations
+   and that all the code you added is present.
+
 Eager to learn more about Smalltalk?
 See my extensive set of <a href="https://mvolkmann.github.io/blog/"
 target="_blank">blog pages on Smalltalk</a>.
