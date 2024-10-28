@@ -254,9 +254,10 @@ but there's an easier way to find it.u
 Open a "Message Names" window, and enter "average" in the "Search" input.
 This lists three methods whose names contain "average"
 which are `average`, `average:`, and `average:ifEmpty`.
-Select the first one.
-This shows that the only class that defines the selected method is `Collection`.
-Click "Collection average" in that window to see its implementation.
+Select the first one. This shows that the only class
+that implements the selected method is `Collection`.
+Click "Collection average" in the "Message Names" window
+to see its implementation.
 
 When the caret (`^`) character appears at
 the beginning of a statement within a method,
