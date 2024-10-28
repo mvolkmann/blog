@@ -84,7 +84,7 @@ Cuis Smalltalk was created in Argentina and
 aims to remain small and easy to learn.
 Missing features can be implemented by combining the features that are present
 and by installing more packages.
-The Cuis mascot is southern mountain cavy found in Argentina
+The Cuis mascot is a southern mountain cavy found in Argentina,
 which is a tailless rodent that looks similar to a very large mouse.
 The word "cuis" in Rioplatense Spanish means "squeak".
 
@@ -203,7 +203,7 @@ The third statement assigns a value to the variable `cityToTeam`.
 To assign the value of an expression to a variable,
 enter a variable name, the assignment operator `:=`, and the expression.
 
-To cause assignment operators be rendered as a left pointing arrow
+To cause assignment operators to be rendered as a left pointing arrow
 (because its stylish and cool), open the World menu
 and select "Preferences ... Show ST-80 assignments".
 The opposite setting is "Preferences ... Show ANSI assignments".
@@ -286,7 +286,7 @@ which is a subclass of `SequenceableCollection`
 which is a subclass of `Collection`.
 We could examine each of those classes to
 find the one that defines the `average` method,
-but there's an easier way to find it.u
+but there's an easier way to find it.
 
 Open a "Message Names" window (shown in the screenshot below),
 and enter "average" in the "Search" input.
@@ -407,7 +407,9 @@ For our final exercise let's create a new class and use it.
 1. Enter a name such as your last name and press return.
 1. Open the World menu and select "Save Image and Quit" or
    "Quit without saving" (since you have already saved the changes).
-1. Locate the image file and double-click it to reopen the saved image.
+1. Locate the image file.
+   In macOS, it can be reopened by double-clicking it.
+   In Windows, run the command <???>.
 1. Verify that all the windows reappear in their saved locations
    and that all the code you added is present.
 
