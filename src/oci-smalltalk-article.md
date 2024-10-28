@@ -200,15 +200,15 @@ Its result is the number `5`.
 The next three expressions demonstrate working with a `Dictionary`,
 which you may know as a Map or HashMap in other programming languages.
 
-- The expression `cityToTeam := Dictionary new` sends the message `new`
-  to the `Dictionary` class. That creates and returns a new instance.
-- The expression `cityToTeam at: 'Kansas City' put: 'Chiefs'`
-  sends the keyword message `at:put:` to `cityToTeam`
-  which adds a key/value pair to the `Dictionary`.
-- The expression `cityTeam at: 'Kansas City'`
-  sends the keyword message `at:` to the `Dictionary`
-  which returns the value at the specified key.
-  In this case that is the string `'Chiefs'`.
+1. The expression `cityToTeam := Dictionary new` sends the message `new`
+   to the `Dictionary` class. That creates and returns a new instance.
+1. The expression `cityToTeam at: 'Kansas City' put: 'Chiefs'`
+   sends the keyword message `at:put:` to `cityToTeam`
+   which adds a key/value pair to the `Dictionary`.
+1. The expression `cityTeam at: 'Kansas City'`
+   sends the keyword message `at:` to the `Dictionary`
+   which returns the value at the specified key.
+   In this case that is the string `'Chiefs'`.
 
 The last expression, `#(1 2 3 4) average`, returns the `Fraction` `5/2`
 rather than a `Float` in order to preserve accuracy.
@@ -251,7 +251,8 @@ We could examine each of those classes to
 find the one that defines the `average` method,
 but there's an easier way to find it.u
 
-Open a "Message Names" window, and enter "average" in the "Search" input.
+Open a "Message Names" window (shown in the screenshot below),
+and enter "average" in the "Search" input.
 This lists three methods whose names contain "average"
 which are `average`, `average:`, and `average:ifEmpty`.
 Select the first one. This shows that the only class
@@ -262,13 +263,13 @@ to see its implementation.
 When the caret (`^`) character appears at
 the beginning of a statement within a method,
 it returns the value of the expression that follows from the method.
-When the preference "Show ST-80 Assigments" is selected,
+If the preference "Show ST-80 Assignments" is selected,
 the caret character is rendered as an up pointing arrow.
 
 The `average` method returns the result of sending the message `mean`
-to `self` which is the `Collection` instance.
+to `self`, which is a `Collection` instance.
 Double-click "mean" to select it and press cmd-b to "Browse it".
-This opens a new window that shows the method implementation
+This opens a new window that shows the method implementation,
 which returns the result of divding `self sum` by `self size`.
 
 <img alt="Cuis Smalltalk Array average"
@@ -278,73 +279,88 @@ which returns the result of divding `self sum` by `self size`.
 What we have learned from this is that all the code can be easily browsed.
 This includes code that you write and code in provided classes.
 
-For our final exercise we will create a new class and use it.
+For our final exercise let's create a new class and use it.
 
-- Open a Browser.
-- Right-click in the first pane and select "add item...".
-- Enter your last name to create a class category with that name.
-- In the bottom pane, replace "NameOfSubclass" with "Dog",
-  keeping the leading `#`.
-- Add the instance variables `breed` and `name` to the `Dog` class
-  by changing the value after `instanceVariableNames` to `'breed name'`.
-- Press cmd-s to save the changes.
-- You will prompted to enter your initials and full name
-  so Cuis Smalltalk can track who made each change.
-- Right-click the class name `Dog` in the second pane
-  and select "more...create inst var accessors".
-  This creates the instance methods `breed` (gets value),
-  `breed:` (sets value), and `name:` (sets value),
-  all in the method category "accessing".
-  It does not create the instance method `name` because
-  that already exists in the superclass `Object`.
-  But we want to override that.
-- Click "accessing" in the third pane.
-- Enter the following in the bottom pane and save it.
+1. Open a Browser window.
+1. Right-click in the first pane and select "add item...".
+1. Enter your last name to create a class category with that name.
+1. In the bottom pane, replace "NameOfSubclass" with "Dog",
+   retaining the leading `#`.
+1. Add the instance variables `breed` and `name` to the `Dog` class
+   by changing the value after `instanceVariableNames` to `'breed name'`,
+   which is a string containing
+   a space-separated list of instance variable names.
+1. Press cmd-s to save the changes.
+1. You will prompted to enter your initials and full name
+   so Cuis Smalltalk can track who made each change.
+1. Instance variables in Smalltalk are always private to their class.
+   They are only exposed outside the class through "accessor methods".
 
-  ```smalltalk
-  name
-      ^name
-  ```
+   Right-click the class name `Dog` in the second pane
+   and select "more...create inst var accessors".
+   This creates the instance methods `breed` (gets value),
+   `breed:` (sets value), and `name:` (sets value),
+   all in the method category "accessing".
+   It does not create the instance method `name` because
+   that already exists in the superclass `Object`.
+   But we want to override that to
+   return the value of the `name` instance variable.
 
-  The caret character is following by an expression that specifies a value to be returned from the method.
-  It is automatically replaced by an up pointing arrow.
+1. Click "accessing" in the third pane.
+1. Enter the following in the bottom pane and save it.
 
-- Right-click in the third pane and select "new category...".
-- Select "printing".
-- Enter the following in the bottom pane and save it.
+   ```smalltalk
+   name
+       ^name
+   ```
 
-  ```smalltalk
-  printString
-      ^'{1} is a {2}.' format: { name. breed }
-  ```
+   Note how simple it is write accessor methods.
 
-- Click the "class" button at the bottom of the second pane.
-- Right-click in the third pane and select "new category...".
-- Select "instance creation".
-- Enter the following in the bottom lpane and save it.
+1. Right-click in the third pane and select "new category...".
+1. Select "printing".
+1. Enter the following in the bottom pane and save it.
 
-  ```smalltalk
-  newName: nameString breed: breedString
-      | dog |
-      dog := Dog new.
-      dog name: nameString.
-      dog breed: breedString.
-      ^dog.
-  ```
+   ```smalltalk
+   printString
+       ^'{1} is a {2}.' format: { name. breed }
+   ```
 
-- Open a Workspace.
-- Enter the following statements:
+   This method returns a string describing a `Dog` instance.
+   It is called automatically when a `Dog` object is printed.
 
-  ```smalltalk
-  myDog := Dog newName: 'Comet' breed: 'Whippet'.
-  myDog print.
-  ```
+1. Click the "class" button at the bottom of the second pane.
+1. Right-click in the third pane and select "new category...".
+1. Select "instance creation".
+1. Enter the following in the bottom lpane and save it.
 
-- If there is no Transcript window open then open one.
-- To clear the contents of the Transcript window,
-  right-click inside it and select "Clear Transcript".
-- Select both lines in the Workspace and "Do it".
-  This will print "Comet is a Whippet." in the Transcript window.
+   ```smalltalk
+   newName: nameString breed: breedString
+       | dog |
+       dog := Dog new.
+       dog name: nameString.
+       dog breed: breedString.
+       ^dog.
+   ```
+
+   This method name follows a convention where class methods
+   that create and return a new instance begin with "new".
+   It takes two arguments, one of the dog name and one for the dog breed.
+   The parameter names follow a convention that they end with
+   the name of their expected type, `String` in this case.
+
+1. If there is no Transcript window open then open one.
+1. To clear the contents of the Transcript window,
+   right-click inside it and select "Clear Transcript".
+1. Open a Workspace.
+1. Enter the following statements:
+
+   ```smalltalk
+   myDog := Dog newName: 'Comet' breed: 'Whippet'.
+   myDog print.
+   ```
+
+1. Select both lines in the Workspace and press cmd-d to "Do it".
+   This will print "Comet is a Whippet." in the Transcript window.
 
 Eager to learn more about Smalltalk?
 See my extensive set of <a href="https://mvolkmann.github.io/blog/"
