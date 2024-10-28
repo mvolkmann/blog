@@ -187,6 +187,9 @@ We will look at four of these:
 Workspace, Browser, Message Names, and Transcript.
 Of these, only a Transcript window will be open by default in the initial image.
 
+If the font size is not to your liking, open the World menu,
+select "Preferences ... Size of GUI elements...", and select a different size.
+
 A Workspace window supports entering and evaluating Smalltalk statements.
 It is similar to a read-eval-print-loop (REPL) in other programming languages.
 Open a Workspace and enter the statements shown in the following screenshot.
