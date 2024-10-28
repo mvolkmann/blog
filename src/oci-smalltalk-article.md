@@ -118,6 +118,40 @@ Learning Smalltalk will enable you to:
 - Actually use it as an alternative to other languages.
 - Have fun!
 
+## Control Structures
+
+Part of simplicity of Smalltalk is that it
+doesn't have special syntax for control structures.
+Other programming languages support statements like
+`if`, `switch`, `for`, and `while`.
+In Smalltalk, the same functionality is provided by methods
+in classes like `Boolean` and `Collection`.
+
+These Smalltalk methods take arguments that are "blocks".
+A block is like an anonymous function in other programming languages.
+Blocks are delimited by square brackets, take any number of arguments,
+contain any number of statements, and
+automatically returns the value of their last expression.
+
+The following code prints an evaluation of the temperature.
+The `Boolean` method `ifTrue:ifFalse:` takes two blocks as arguments.
+This code can be written on a single line or split over multiple lines.
+
+```smalltalk
+temperature > 80
+    ifTrue: [ 'hot' print ]
+    ifFalse: [ 'not' print ]
+```
+
+The following code iterates over all the elements in an `Array` and prints them.
+The block passed to the `do:` method takes a single argument
+represented by the variable `score` inside the block.
+The vertical bar separates the block parameter list from its statements.
+
+```smalltalk
+scores do: [:score | score print]
+```
+
 ## Taste of Smalltalk
 
 To really get a feel for what it's like to use Smalltalk,
@@ -394,3 +428,6 @@ The following recent podcast episodes discuss Smalltalk:
 - Software Unscripted:
   <a href="https://podcasts.apple.com/us/podcast/software-unscripted/id1602572955"
   target="_blank">Smalltalk's Past, Present, and Future</a> with Juan Vuletich
+
+Feel free to send any questions you have about Smalltalk
+to <mark@objectcomputing.com>.
