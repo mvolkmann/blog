@@ -4,7 +4,7 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-# Lessons from Smalltalk
+# Smalltalk: Lessons from the Past
 
 "The further backward you can look, the further forward you are likely to see."
 — Winston Churchill
@@ -222,6 +222,9 @@ Selecting "Do it" evaluates the expression, but does not output its value.
 Selecting "Print it" evaluates the expression and outputs its value
 immediately after the expression in the Workspace.
 The result will be selected, so pressing the delete key will remove it.
+
+Smalltalk supports three kinds of messages: unary (no arguments),
+binary (one argument), and keyword (one or more arguments).
 
 The first expression sends the unary message `asUppercase`
 to the literal string `'demo'`.
