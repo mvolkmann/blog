@@ -22,20 +22,6 @@ TODO: Is the reason that this package cannot be installed by evaluating
 `Feature require: 'DatabaseSupport'` in a Workspace
 that the package file is not named `DatabaseSupport_pck.st`?
 
-As of October 26, 2024, there is an issue
-in the `ODBCResultSet` `fetchRow` method.
-Replace the line
-
-```smalltalk
-row := ODBCRow new: columns size.
-```
-
-with this:
-
-```smalltalk
-row := ODBCRow new.
-```
-
 ## macOS Installs
 
 The recommended way to install shared libraries in macOS is to
