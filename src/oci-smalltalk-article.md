@@ -155,7 +155,7 @@ Of these, only a Transcript window will be open by default in the initial image.
 
 A Workspace window supports entering and evaluating Smalltalk statements.
 It is similar to a read-eval-print-loop (REPL) in other programming languages.
-Open a Workspace and enter the statments shown in the following screenshot.
+Open a Workspace and enter the statements shown in the following screenshot.
 The text in red boxes are the results of "printing"
 the value of the preceding expression. Do not enter that text.
 
@@ -168,19 +168,21 @@ The period character is used to separate, not terminate, statements.
 The third statement assigns a value to the variable `cityToTeam`.
 To assign the value of an expression to a variable,
 enter a variable name, the assignment operator `:=`, and the expression.
-To cause assignment operators be rendered as a left pointing arrow,
-open the World menu and select "Preferences ... Show ST-80 assignments".
+
+To cause assignment operators be rendered as a left pointing arrow
+(because its stylish and cool), open the World menu
+and select "Preferences ... Show ST-80 assignments".
 The opposite setting is "Preferences ... Show ANSI assignments".
 Regardless of this setting, if an underscore is typed in place of
 the assignment operator, it will be rendered as a left pointing arrow.
 
-There are shortcut keys for many actions.
+There are shortcut keys for many actions in the development environment.
 In macOS, these use the command key (cmd).
 In other platforms these use the control key.
 All the examples that follow use the command key,
 so substitute the control key if you are not using a Mac.
 
-With the cursor positioned at the end of an expression,
+With the cursor positioned at the end of an expression in the Workspace,
 right-click and select "Do it" (cmd-d) or "Print it" (cmd-p).
 Selecting "Do it" evaluates the expression, but does not output its value.
 Selecting "Print it" evaluates the expression and outputs its value
@@ -189,21 +191,24 @@ The result will be selected, so pressing the delete key will remove it.
 
 The first expression sends the unary message `asUppercase`
 to the literal string `'demo'`.
+Its result is the string `'DEMO'`.
 
 The second expression sends the binary message `+`
 to the number `2` with the argument `3`.
+Its result is the number `5`.
 
 The next three expressions demonstrate working with a `Dictionary`,
-which is called a `Map` or `HashMap` in other programming languages.
-The expression `city := Dictionary new` sends the message `new`
-to the `Dictionary` class which creates and returns a new instance.
-The syntax `:=` is automatically change to a left pointing arrow.
-The expression `city at: 'Kansas City' put: 'Chiefs'`
-sends the keyword message `at:put:` to `cityToTeam`
-which adds a key/value pair to the `Dictionary`.
-The expression `city at: 'Kansas City'`
-sends the keyword message `at:` to the `Dictionary`
-which returns the value at the specified key.
+which you may know as a Map or HashMap in other programming languages.
+
+- The expression `cityToTeam := Dictionary new` sends the message `new`
+  to the `Dictionary` class. That creates and returns a new instance.
+- The expression `cityToTeam at: 'Kansas City' put: 'Chiefs'`
+  sends the keyword message `at:put:` to `cityToTeam`
+  which adds a key/value pair to the `Dictionary`.
+- The expression `cityTeam at: 'Kansas City'`
+  sends the keyword message `at:` to the `Dictionary`
+  which returns the value at the specified key.
+  In this case that is the string `'Chiefs'`.
 
 The last expression, `#(1 2 3 4) average`, returns the `Fraction` `5/2`
 rather than a `Float` in order to preserve accuracy.
@@ -220,14 +225,14 @@ Brower windows contains four panes across the top row.
 - The first pane displays a list of class categories.
 - The second pane displays a list of classes in the selected class category.
   There are three buttons at the bottom of this pane.
-  - The "instance" button causes the remaining panes to show instance information.
+  - The "instance" button causes the remaining panes to show instance methods.
   - The "?" button causes the bottom pane to display
     the comment for the selected class.
-  - The "class" button causes the remaining panes to show class information.
+  - The "class" button causes the remaining panes to show class methods.
 - The third pane displays a list of method categories in the selected class.
 - The fourth pane displays a list of methods in the selected method category.
 
-Move the mouse cursor over the first pane and press cmd-f.
+Move the mouse cursor over the first pane and press cmd-f for "find class...".
 Enter "Array" and press return.
 The `Array` class will be selected in the second pane.
 
@@ -238,13 +243,13 @@ The `Array` class will be selected in the second pane.
 There is no method named `average` in the `Array` class,
 so it must be defined in a superclass, but which one?
 Right-click "Array" in the second pane and select "browse hierarchy"
-to open a Hierarchy Browser.
+to open a Hierarchy Browser (shown in the screenshot below).
 This shows that `Array` is a subclass of `ArrayedCollection`
 which is a subclass of `SequenceableCollection`
 which is a subclass of `Collection`.
-We could check each of those classes to
-find the one that defines the `average` method.
-But there's another way.
+We could examine each of those classes to
+find the one that defines the `average` method,
+but there's an easier way to find it.u
 
 Open a "Message Names" window, and enter "average" in the "Search" input.
 This lists three methods whose names contain "average"
