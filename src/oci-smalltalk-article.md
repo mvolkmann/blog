@@ -415,9 +415,12 @@ For our final exercise let's create a new class and use it.
 
    In Windows, the first time you do this a dialog will appear asking
    "How do you want to open this file?".
-   Click "Look for another app on this PC",
-   navigate to the file `Squeak.exe`, select it,
-   and check the "Always use this app to open .image files" checkbox.
+   Click "Look for another app on this PC" and
+   navigate to the file `Squeak.exe`.
+   It will be in the `CuisVM.app\Contents\Windows-x86_64` subdirectory
+   of where Cuis Smalltalk is installed.
+   Select the that file and check the
+   "Always use this app to open .image files" checkbox.
 
 1. Verify that all the windows reappear in their saved locations
    and that all the code you added is present.
