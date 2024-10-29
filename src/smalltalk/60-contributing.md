@@ -6,7 +6,10 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-Suggested improvements to Cuis should be discussed on the mailing list at
+## Cuis-Smalltalk-Dev Changes
+
+Suggested improvements to Cuis Smalltalk should be
+discussed on the mailing list at
 [Cuis-dev -- Discusion of Cuis Smalltalk](https://lists.cuis.st/mailman/listinfo/cuis-dev).
 If interest is shown there then a "Change Set" should be submitted.
 
@@ -32,3 +35,13 @@ To test a change set:
 - Select a change set file.
 - Click the "install" button.
 - Write code in a Workspace to test the changes.
+
+## Changes to Other Repositories
+
+To contribute changes to other GitHub repositories
+under the Cuis-Smalltalk account at https://github.com/Cuis-Smalltalk:
+
+1. Fork the repository.
+1. Make changes in your fork.
+1. Test your changes.
+1. Create a pull request to have your fork merged into the original repository.
