@@ -1032,14 +1032,21 @@ I can then return to using a base image and load my package into it.
 When there are unsaved changes to the classes and methods defined in a package,
 its name will be preceded by an asterisk.
 
-To see the changes that were made, select the package name
-and click the "changes" button.
-This opens a ChangeSet window that displays a
-list of the modified classes in the upper-right pane.
-Select a class to see a list of the modified methods in the second row pane.
-Select a method to see the new version in the bottom pane.
-To see the differences between the previous and current versions of the code,
-click the "show..." button and select either "lineDiffs" or "wordDiffs".
+To see the changes that were made in a package:
+
+1. Select the package name.
+1. Click the "changes" button.
+   This opens a ChangeSet window that displays a
+   list of the modified classes in the upper-right pane.
+1. Select a class in the upper-right pane to see
+   a list of the modified methods in the second row pane.
+1. Select a method in the second row pane
+   to see the new version of its code in the bottom pane.
+1. Click the "versions" button to open a "Recent versions" window.
+1. Click to any version in the top pane to see the differences
+   between that version and the previous one.
+1. Click one of the "\*Diffs" buttons
+   to change how the differences are displayed.
 
 To save all the changes, select the package name and click the "save" button.
 When modifying your own packages, frequently check for unsaved changes here
