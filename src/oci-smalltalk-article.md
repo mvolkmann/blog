@@ -389,6 +389,7 @@ For our final exercise let's create a new class and use it.
    the name of their expected type, `String` in this case.
 
 1. If there is no Transcript window open then open one.
+   This is only used for displaying output.
 1. To clear the contents of the Transcript window,
    right-click inside it and select "Clear Transcript".
 1. Open a Workspace.
