@@ -111,10 +111,10 @@ These support:
 
 Learning Smalltalk will enable you to:
 
+- Experience a beautifully minimal syntax.
 - Gain an understanding of its pros and cons compared to other languages.
-- Get ideas for features that can be added to other languages.
-- Get ideas for features that can be added in the
-  development environments of other languages.
+- Get ideas for features that can be added to other languages
+  and their development enviroments.
 - Actually use it as an alternative to other languages.
 - Have fun!
 
