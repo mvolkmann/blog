@@ -36,3 +36,7 @@ int add(int a, int b) {
 
 To build a shared library from this, enter the command
 `clang -dynamiclib -o libmylib.dylib mylib.c`.
+
+## Plugins
+
+TODO: Learn how to implement these.
