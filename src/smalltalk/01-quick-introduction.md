@@ -254,7 +254,7 @@ which you may know as a Map or HashMap in other programming languages.
 1. The expression `cityToTeam at: 'Kansas City' put: 'Chiefs'`
    sends the keyword message `at:put:` to `cityToTeam`
    which adds a key/value pair to the `Dictionary`.
-1. The expression `cityTeam at: 'Kansas City'`
+1. The expression `cityToTeam at: 'Kansas City'`
    sends the keyword message `at:` to the `Dictionary`
    which returns the value at the specified key.
    In this case that is the string `'Chiefs'`.
