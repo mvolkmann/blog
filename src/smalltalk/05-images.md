@@ -1,7 +1,7 @@
 ---
 eleventyNavigation:
   key: Images
-  order: 4
+  order: 5
   parent: Smalltalk
 layout: topic-layout.njk
 ---

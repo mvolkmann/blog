@@ -1,7 +1,7 @@
 ---
 eleventyNavigation:
   key: Help
-  order: 5
+  order: 6
   parent: Smalltalk
 layout: topic-layout.njk
 ---

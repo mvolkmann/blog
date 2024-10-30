@@ -1,10 +1,10 @@
 ---
 eleventyNavigation:
-  key: ZZZ article
+  key: Quick Introduction to Smalltalk
+  order: 1
+  parent: Smalltalk
 layout: topic-layout.njk
 ---
-
-# Smalltalk: Lessons from the Past
 
 "The further backward you can look, the further forward you are likely to see."
 — Winston Churchill
@@ -13,7 +13,7 @@ layout: topic-layout.njk
 over my career is that if you do not aggressively fight complexity,
 it will eat you alive." - Vicki Boykis
 
-## Smalltalk Overview
+## Overview
 
 The Smalltalk programming language was created at
 Xerox PARC (Palo Alto Research Center) in the 1970s.
@@ -93,7 +93,7 @@ Squeak, Pharo, and Cuis all use the MIT license.
 There are also many commercial Smalltalk implementations including
 Cincom Smalltalk, GemStone/S, and VA Smalltalk.
 
-## Smalltalk Development Environment
+## Development Environment
 
 Smalltalk is perhaps most known for its incredible development tools.
 These support:

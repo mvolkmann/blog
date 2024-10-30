@@ -1,7 +1,7 @@
 ---
 eleventyNavigation:
   key: Getting Started
-  order: 3
+  order: 4
   parent: Smalltalk
 layout: topic-layout.njk
 ---

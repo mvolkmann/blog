@@ -48,6 +48,10 @@ and double-click that file to install Homebrew.
 
 The Smalltalk ODBC package requires the `libodbc` shared library.
 To install this in macOS, enter `brew install unixodbc` in a terminal.
+This also installs the `isql` command
+which can be used to test data source names (DSNs).
+This also installs the `odbcinst` command
+which can be used to output information about the ODBC installation.
 
 ## Database-specific Drivers
 
@@ -55,7 +59,7 @@ Download a database-specific driver for each kind of database being used.
 
 In macOS, to access PostgreSQL databases,
 enter `brew install psqlodbc` in a terminal.
-Add the following line to each SQLite data source definition
+Add the following line to each PostgreSQL data source definition
 (described below):
 
 ```text
@@ -82,6 +86,12 @@ Create that file with contents similar to the following,
 which defines a data source for a SQLite database in the file `todos.db`:
 
 ```text
+[DogsDSN]
+Description = Postgres database for pets
+Driver = PostgreSQL
+Database = pets
+Timeout = 2000
+
 [TodoDSN]
 Description = SQLite database for a Todo app
 Driver = /opt/homebrew/lib/libsqlite3odbc.so
@@ -89,8 +99,26 @@ Database = /Users/volkmannm/Documents/dev/lang/smalltalk/Cuis-Smalltalk-Dev-User
 Timeout = 2000
 ```
 
-Verify that the data source defined above can be accessed
-by entering `isql TodoDSN` and `select * from todos;`.
+The file `/usr/local/etc/odbcinst.ini` associates driver names
+with paths to their shared libraries.
+This avoids needing to repeat the path the shared library
+in the `.odbc.ini` file for each data source that uses the same driver.
+For example, the driver name "PostgreSQL" used above
+is registered as follows:
+
+```text
+[PostgreSQL]
+Description = PostgreSQL ODBC Driver
+Driver = /opt/homebrew/lib/psqlodbcw.so
+```
+
+To list all the registered data sources, enter `odbcinst -q -s`.
+
+To view the details of a specific data source,
+enter `odbcinst -q -s -n {name}`.
+
+To verify that the data source defined above can be accessed,
+enter `isql TodoDSN` and `select * from todos;`.
 Press ctrl-d to exit.
 
 ## Database Access from Smalltalk

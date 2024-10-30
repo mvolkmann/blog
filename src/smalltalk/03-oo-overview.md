@@ -1,7 +1,7 @@
 ---
 eleventyNavigation:
   key: Object-Oriented Programming
-  order: 2
+  order: 3
   parent: Smalltalk
 layout: topic-layout.njk
 ---
