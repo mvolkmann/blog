@@ -6,6 +6,13 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+<style>
+   code {
+     color: purple;
+     font-weight: bold;
+   }
+</style>
+
 "The further backward you can look, the further forward you are likely to see."
 — Winston Churchill
 
@@ -130,7 +137,7 @@ in classes like `Boolean` and `Collection`.
 These Smalltalk methods take arguments that are "blocks".
 A block is like an anonymous function in other programming languages.
 Blocks are delimited by square brackets, take any number of arguments,
-contain any number of statements, and
+contain any number of expressions, and
 automatically returns the value of their last expression.
 
 The following code prints an evaluation of the temperature.
@@ -146,7 +153,7 @@ temperature > 80
 The following code iterates over all the elements in an `Array` and prints them.
 The block passed to the `do:` method takes a single argument
 represented by the variable `score` inside the block.
-The vertical bar separates the block parameter list from its statements.
+The vertical bar separates the block parameter list from its expressions.
 
 ```smalltalk
 scores do: [:score | score print]
@@ -190,19 +197,21 @@ Of these, only a Transcript window will be open by default in the initial image.
 If the font size is not to your liking, open the World menu,
 select "Preferences ... Size of GUI elements...", and select a different size.
 
-A Workspace window supports entering and evaluating Smalltalk statements.
+A Workspace window supports entering and evaluating Smalltalk expressions.
 It is similar to a read-eval-print-loop (REPL) in other programming languages.
-Open a Workspace and enter the statements shown in the following screenshot.
+Open a Workspace and enter the expressions shown in the following screenshot.
 The text in red boxes are the results of "printing"
-the value of the preceding expression. Do not enter that text.
+the value of the preceding expression.
+Do not enter that text.
+We will discuss how to print those results below.
 
 <img alt="Cuis Smalltalk Workspace session"
   src="/blog/assets/cuis-workspace-session.png?v={{pkg.version}}"
   style="width: 50%">
 
-The period character is used to separate, not terminate, statements.
+The period character is used to separate, not terminate, expressions.
 
-The third statement assigns a value to the variable `cityToTeam`.
+The third expressions assigns a value to the variable `cityToTeam`.
 To assign the value of an expression to a variable,
 enter a variable name, the assignment operator `:=`, and the expression.
 
@@ -259,7 +268,7 @@ The syntax `#(1 2 3 4)` creates a compile-time `Array`.
 which is a superclass of the `Array` class.
 
 We can examine the implementation of the `average` method.
-To do so, open a Browser.
+To do so, use the World menu to open a Browser.
 Brower windows contains four panes across the top row.
 
 - The first pane displays a list of class categories.
@@ -301,8 +310,8 @@ Click "Collection average" in the "Message Names" window
 to see its implementation.
 
 When the caret (`^`) character appears at
-the beginning of a statement within a method,
-it returns the value of the expression that follows from the method.
+the beginning of an expressions within a method,
+it returns the value of that expression from the method.
 If the preference "Show ST-80 Assignments" is selected,
 the caret character is rendered as an up pointing arrow.
 
@@ -393,7 +402,7 @@ For our final exercise let's create a new class and use it.
 1. To clear the contents of the Transcript window,
    right-click inside it and select "Clear Transcript".
 1. Open a Workspace.
-1. Enter the following statements:
+1. Enter the following expressions:
 
    ```smalltalk
    myDog := Dog newName: 'Comet' breed: 'Whippet'.
