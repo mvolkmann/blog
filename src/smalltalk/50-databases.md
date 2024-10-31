@@ -28,7 +28,7 @@ In Apple Silicon Macs this should output `/opt/homebrew`.
 If it outputs a different directory, you will need to
 uninstall Homebrew and reinstall it.
 
-Unistalling Homebrew will delete all the libraries you have already installed.
+Uninstalling Homebrew will delete all the libraries you have already installed.
 Enter `brew list` before uninstalling Homebrew
 to get a list of the currently installed packages
 so they can be reinstalled after Homebrew is installed again.
@@ -53,27 +53,20 @@ which can be used to test data source names (DSNs).
 This also installs the `odbcinst` command
 which can be used to output information about the ODBC installation.
 
+If the files `isql` and `odbcinst` exist in the `/usr/local/bin` directory,
+delete them so the versions installed by Homebrew will be used instead:
+
 ## Database-specific Drivers
 
 Download a database-specific driver for each kind of database being used.
 
 In macOS, to access PostgreSQL databases,
 enter `brew install psqlodbc` in a terminal.
-Add the following line to each PostgreSQL data source definition
-(described below):
-
-```text
-Driver = /opt/homebrew/lib/psqlodbcw.so
-```
+This creates the file `/opt/homebrew/lib/psqlodbcw.so`.
 
 In macOS, to access SQLite databases,
 enter `brew install sqliteodbc` in a terminal.
-Add the following line to each SQLite data source definition
-(described below):
-
-```text
-Driver = /opt/homebrew/lib/libsqlite3odbc.so
-```
+This creates the file `/opt/homebrew/lib/libsqlite3odbc.so`.
 
 ## ODBC Data Sources
 
@@ -83,33 +76,39 @@ and the expected file name, enter `odbcinst -j` in a terminal.
 Look for "User Data Sources" in the output.
 This will likely be `.odbc.ini` in your home directory.
 Create that file with contents similar to the following,
-which defines a data source for a SQLite database in the file `todos.db`:
+which defines data sources for a PostgreSQL database and a SQLite database.
 
 ```text
 [DogsDSN]
 Description = Postgres database for pets
 Driver = PostgreSQL
 Database = pets
-Timeout = 2000
 
 [TodoDSN]
 Description = SQLite database for a Todo app
 Driver = /opt/homebrew/lib/libsqlite3odbc.so
 Database = /Users/volkmannm/Documents/dev/lang/smalltalk/Cuis-Smalltalk-Dev-UserFiles/todos.db
-Timeout = 2000
 ```
 
 The file `/usr/local/etc/odbcinst.ini` associates driver names
 with paths to their shared libraries.
-This avoids needing to repeat the path the shared library
-in the `.odbc.ini` file for each data source that uses the same driver.
-For example, the driver name "PostgreSQL" used above
-is registered as follows:
+In the `.odbc.ini` file above, the `Driver` values
+can be the absolute path to the driver shared library.
+But using driver names specfied in the `odbcinst.ini` file
+avoids needing to repeat the shared library paths
+for each data source that uses the same driver.
+
+The following `odbcinst.ini` file specifies driver shared libraries
+for PostgreSQL and SQLite.
 
 ```text
 [PostgreSQL]
 Description = PostgreSQL ODBC Driver
 Driver = /opt/homebrew/lib/psqlodbcw.so
+
+[SQLite]
+Description = SQLite ODBC Driver
+Driver = /opt/homebrew/lib/libsqlite3odbc.so
 ```
 
 To list all the registered data sources, enter `odbcinst -q -s`.
@@ -125,7 +124,14 @@ Press ctrl-d to exit.
 
 In macOS, start a Cuis Smalltalk image by entering
 `./RunCuisOnMacTerminal.sh` in a terminal.
-This uses the base image.
+This script includes the command which is necessary to allow
+the Smalltalk ODBC package to find ODBC driver shared libraries:
+
+```bash
+export DYLD_LIBRARY_PATH="$(brew --prefix)/lib:${DYLD_LIBRARY_PATH}"
+```
+
+This script also starts a Smalltalk VM using the base image.
 To use another image, copy and modify this script.
 
 Open a Browser, select the ODBC class category,
