@@ -79,7 +79,7 @@ Create that file with contents similar to the following,
 which defines data sources for a PostgreSQL database and a SQLite database.
 
 ```text
-[DogsDSN]
+[PetsDSN]
 Description = Postgres database for pets
 Driver = PostgreSQL
 Database = pets
