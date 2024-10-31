@@ -43,7 +43,8 @@ is its simple, minimal syntax.
 The entire syntax of Smalltalk can be demonstrated on a post card.
 
 <img alt="Smalltalk on a post card"
-  src="/blog/assets/smalltalk-on-postcard.jpg?v={{pkg.version}}">
+  src="/blog/assets/smalltalk-on-postcard.jpg?v={{pkg.version}}"
+  style="width: 100%">
 
 Smalltalk is a dynamically typed language.
 Types of variables, method parameters,
