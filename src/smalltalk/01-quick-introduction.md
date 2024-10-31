@@ -16,6 +16,8 @@ layout: topic-layout.njk
 "The further backward you can look, the further forward you are likely to see."
 — Winston Churchill
 
+"Simplicity is the ultimate sophistication." - Leonardo Da Vinci
+
 "The single most important thing I have learned about software development
 over my career is that if you do not aggressively fight complexity,
 it will eat you alive." - Vicki Boykis
