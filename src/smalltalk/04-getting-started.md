@@ -80,11 +80,12 @@ the steps to update are:
 
   Look for messages in the Transcript window that say
   "Package: {SomeName}. There is a newer version than currently loaded."
-  To load the newest version of a package, open a "File List" window,
-  navigate to the `.pck.st` file for the package,
-  and click the "install package" button.
-  Those files will be in `Cuis-Smalltalk-Dev/Packages/Features` or
-  `Cuis-Smalltalk-Dev/Packages/System`.
+  Evaluating `Feature require: '{SomeName}'` in a Workspace
+  will not load a package that is already loaded.
+  Instead, open a "File List" window, navigate to the `.pck.st` file
+  for the package, and click the "install package" button.
+  Those files will be in the `Cuis-Smalltalk-Dev/Packages/Features` or
+  `Cuis-Smalltalk-Dev/Packages/System` directories.
 
 ## Squeak Smalltalk
 
