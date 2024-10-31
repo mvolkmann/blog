@@ -84,7 +84,7 @@ Description = Postgres database for pets
 Driver = PostgreSQL
 Database = pets
 
-[TodoDSN]
+[TodosDSN]
 Description = SQLite database for a Todo app
 Driver = /opt/homebrew/lib/libsqlite3odbc.so
 Database = /Users/volkmannm/Documents/dev/lang/smalltalk/Cuis-Smalltalk-Dev-UserFiles/todos.db
@@ -117,7 +117,7 @@ To view the details of a specific data source,
 enter `odbcinst -q -s -n {name}`.
 
 To verify that the data source defined above can be accessed,
-enter `isql TodoDSN` and `select * from todos;`.
+enter `isql TodosDSN` and `select * from todos;`.
 Press ctrl-d to exit.
 
 ## Database Access from Smalltalk
@@ -134,6 +134,10 @@ export DYLD_LIBRARY_PATH="$(brew --prefix)/lib:${DYLD_LIBRARY_PATH}"
 This script also starts a Smalltalk VM using the base image.
 To use another image, copy and modify this script.
 
+Open an "Installed Packages" window and
+verify that the ODBC package is installed.
+If not, open a Workspace, enter `Feature require: 'ODBC'`, and "Do it".
+
 Open a Browser, select the ODBC class category,
 select the `ODBCConnection` class, click the "class" button,
 and see the sample code in the class method `dsn:user:password:query:`.
@@ -143,7 +147,7 @@ to verify that your database can be queried:
 
 ```smalltalk
 queryString := 'select * from todos'.
-conn := ODBCConnection dsn: 'TodoDSN' user: '' password: ''.
+conn := ODBCConnection dsn: 'TodosDSN' user: '' password: ''.
 stmt := conn query: queryString.
 rs := stmt execute.
 
