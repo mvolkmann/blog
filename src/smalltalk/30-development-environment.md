@@ -1029,6 +1029,11 @@ so I can easily load it into new images.
 This is useful in case I accidentally modify an image in an unintended way.
 I can then return to using a base image and load my package into it.
 
+If you accidentally save changes to the base image,
+a new one can be downloaded from the GitHub repository.
+Currently the files to download are `CuisImage/Cuis7.1-6770.image`.
+and `CuisImage/Cuis7.1-6770.changes`.
+
 When there are unsaved changes to the classes and methods defined in a package,
 its name will be preceded by an asterisk.
 
