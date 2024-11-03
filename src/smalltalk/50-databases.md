@@ -134,6 +134,19 @@ export DYLD_LIBRARY_PATH="$(brew --prefix)/lib:${DYLD_LIBRARY_PATH}"
 This script also starts a Smalltalk VM using the base image.
 To use another image, copy and modify this script.
 
+If an image is started in a way that does not
+set the `DYLD_LIBRARY_PATH` environment variable
+and an attempt is made to open an `ODBCConnetion`,
+the error message "External module not found" will be displayed.
+
+TODO: In macOS, you may be able to set that environment variable
+in a way that makes it accessible to apps that are started
+by double-clicking them in the Finder. Try this:
+
+```bash
+launchctl setenv DYLD_LIBRARY_PATH $(brew --prefix)/lib
+```
+
 Open an "Installed Packages" window and
 verify that the ODBC package is installed.
 If not, open a Workspace, enter `Feature require: 'ODBC'`, and "Do it".
