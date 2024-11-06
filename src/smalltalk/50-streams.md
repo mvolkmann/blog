@@ -123,7 +123,7 @@ coll print. "apple grape cherry"
 
 ## Creating Strings
 
-One use of streams is to efficient build a `String`.
+One use of streams is to efficiently build a `String`.
 For example:
 
 ```smalltalk
