@@ -803,8 +803,8 @@ interface DogData {
 const DogContext = createContext<DogData>({
   breed: '',
   name: '',
-  setBreed: string => '',
-  setName: string => ''
+  setBreed: string => {},
+  setName: string => {}
 });
 
 interface Props {
