@@ -102,16 +102,67 @@ TODO: It the class method `initialize` called automatically when its class is in
 
 Class instance variables are defined as an
 instance variables in the metaclass of a given class.
-Unlike class variables, subclasses can have a different value
-for the variable than that used by the class where it is defined.
+Unlike with class variables, subclasses can have a different value
+for a class instance variable than that of the class where it is defined.
+
 Class instance variables are not commonly used.
 
-TODO: Describe how to define a class instance variable
-and set different values in the class and subclasses.
-Perhaps an example could be an Animal class with a legs variable
-that is set to 0 in the Animal class and 4 in the Dog subclass.
+To declare a class instance variable in a Browser,
+select the class, click the "class" button in the second pane, and add it
+to the space-separated string argument value for `instanceVariableNames:`.
 
-TODO: Can a subclass class method set a class instance variable in a superclass?
+To add the ability to get and set the value from outside the class,
+add class-scoped accessor methods.
+For example, create an `Animal` class
+and define the following on its class side.
+
+```smalltalk
+Animal class
+    instanceVariableNames: 'legs'
+
+inititialize
+    legs := 0
+
+legs
+    "Only needed if the value will be accessed from outside this class,
+    including subclases."
+    ^ legs
+
+legs: aNumber
+    "Only needed if the value will be modified from outside this class,
+    including subclasses."
+    legs := aNumber
+```
+
+Next, create a `Giraffe` class that is a subclass of `Animal`
+and define the following on its class side.
+
+```smalltalk
+inititialize
+    legs := 4
+```
+
+Next, create an `Ostrich` class that is a subclass of `Animal`
+and define the following on its class side.
+
+```smalltalk
+inititialize
+    legs := 2
+```
+
+To demonstate this, evaluate the following expressions in a Workspace:
+
+```smalltalk
+Animal initialize.
+Giraffe initialize.
+Ostrich initialize.
+a := Animal new.
+a class legs print. "0"
+a := Giraffe new.
+a class legs print. "4"
+a := Ostrich new.
+a class legs print. "2"
+```
 
 ## Temporary Variables
 
