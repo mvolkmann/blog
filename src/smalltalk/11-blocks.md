@@ -23,8 +23,10 @@ Blocks take zero or more positional arguments,
 which is something methods cannot do.
 Parameter names appear at the beginning of a block
 and each name is preceded by a colon.
-(This syntax was most likely chosen to simplify parsing because it
-enables determining whether a block has any parameters without backtracking.)
+This syntax mirrors that of specifing arguments in keyword messages
+where each keyword is followed by a colon.
+It also simplifies parsing because it enables determining
+whether a block has any parameters without backtracking.
 The parameter list is separated from the expressions by a vertical bar.
 
 Blocks can be saved in variables,
