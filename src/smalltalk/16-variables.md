@@ -70,8 +70,31 @@ the value of the `instanceVariableNames:` keyword in a class definition.
 
 Instance variables are always private, which means they can only be accessed by
 instance methods in the class that defines them, and in subclasses.
-To expose an instance variable value to methods in other classes,
+
+To allow methods in other classes to access an instance variable,
 define an instance method that returns it.
+To allow methods in other classes to modify an instance variable,
+define an instance method that sets it.
+For example:
+
+```smalltalk
+score
+    ^score
+
+score: aNumber
+    score := aNumber
+```
+
+Instance variables can also be accessed
+using the methods `instVarNamed` and `instVarNamed:`
+which are defined in the `Object` class.
+These bypass the private nature of instance variables.
+For example:
+
+```smalltalk
+score := game instVarNamed: #score.
+game instVarNamed: #score put: score + 1.
+```
 
 When a new instance of a class is created,
 its instance method `initialize` is called.
