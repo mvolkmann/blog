@@ -62,7 +62,10 @@ Download a database-specific driver for each kind of database being used.
 
 In macOS, to access PostgreSQL databases,
 enter `brew install psqlodbc` in a terminal.
-This creates the file `/opt/homebrew/lib/psqlodbcw.so`.
+This creates the files `psqlodbcw.so` and `psqlodbca.so`
+in the `/opt/homebrew/lib` direcory.
+The "w" stands for "wide", meaning that it supports Unicode characters.
+The "a" stands for "ASCII", meaning that it only supports 8-bit characters.
 
 In macOS, to access SQLite databases,
 enter `brew install sqliteodbc` in a terminal.

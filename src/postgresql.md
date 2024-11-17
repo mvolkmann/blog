@@ -96,6 +96,8 @@ In interactive mode:
 
   ```sql
   create table dog (id bigserial primary key, name text, breed text);
+
+  create table todos (id serial primary key, description text unique, completed boolean);
   ```
 
 - To add a row to a table, enter an `insert` command like
