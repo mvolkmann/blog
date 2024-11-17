@@ -313,3 +313,21 @@ height: aHeight width: aWidth
 
 Note the use of `yourself` to return the current object
 rather than the return value of the `beImmutable` method.
+
+## Become
+
+The `become` method defined in the `ProtoObject` class
+changes all references to the receiver object
+to refer to the argument object AND
+changes all references to the argument object
+to refer to the receiver object.
+Copies are not created, only references change.
+
+The `becomeForward` method defined in the `Object` class
+is similar, but does less.
+It changes all references to the receiver object
+to refer to the argument object, but not vice-versa.
+
+For example, this can be used to model a physical address change.
+
+These methods have the potential to introduce bugs that are difficult to trace.
