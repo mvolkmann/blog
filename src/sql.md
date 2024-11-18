@@ -142,6 +142,11 @@ matching a column value in one table with a column value in another.
 
 There are many kinds of joins.
 
+<figure style="width: 75%">
+  <img alt="SQL joins" src="/blog/assets/sql-joins.jpg?v={{pkg.version}}">
+  <figcaption>SQL joins by @ezekiel_aleke</figcaption>
+</figure>
+
 - inner
 
   This is the most common kind of join and is the default kind.
