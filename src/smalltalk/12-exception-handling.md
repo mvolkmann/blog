@@ -33,6 +33,15 @@ Its instance variables include:
 - `selector`: `#/`
 - `arguments`: `#(0)`
 
+The methods `on:do:on:do:` and `on:do:on:do:on:do:`
+are used to handle two or three different kinds of exceptions.
+
+The method `onDNU:do:` is used to handle `MessageNotUnderstood` exceptions.
+
+The method `ensure:` is used to specify code to execute
+after the code in the receiver block executes,
+regardless of whether it raises an exception.
+
 To throw a generic `Exception`:
 
 ```smalltalk

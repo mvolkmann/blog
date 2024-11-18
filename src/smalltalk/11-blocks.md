@@ -131,6 +131,12 @@ Send `#repeat` to a block to evaluate it repeated
 unit the block explicitly returns a value,
 which causes the containing method to exit and return that value.
 
+## Error Handling
+
+See the "Exception Handing" section for details on how
+blocks can be used to execute code that may raise an exception
+and exceptions can be handled.
+
 ## Running in another Process
 
 The Squeak VM is single-threaded, like JavaScript.
