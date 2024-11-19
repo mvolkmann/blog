@@ -8,7 +8,7 @@ layout: topic-layout.njk
 
 Exceptions are described by a specific kind of exception object
 that can hold data describing the problem.
-To throw/raise an exception object, sent it the
+To throw/raise an exception object, send it the
 message `#signal:` with a `String` argument description.
 
 Exceptions that are thrown by code in a block can be caught and handled.
@@ -52,8 +52,8 @@ Smalltalk provides many subclasses of the `Exception` class.
 Examples include `ArithmeticError`, `AssertionFailure`, `Error`, `Halt`,
 `MessageNotUnderstood`, `NotYetImplemented`, and `ZeroDivide`.
 
-To define a custom exception, create a class that is a subclass
-of the `Exception` class or one of its subclasses such as `Error`.
+To define a custom exception, create a subclass of the `Error` class
+or one of its subclasses such as `Error`.
 The custom class can include instance variables and methods
 that are specific to that exception.
 For example:
