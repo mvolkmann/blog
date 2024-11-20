@@ -208,3 +208,38 @@ To run code before and after each test method,
 define the methods `setUp` and `tearDown`.
 Notice the uppercase `U` in `setUp`
 and the uppercase `D` in `tearDown`.
+
+## Abstract Base Classes
+
+It can be useful to define multiple subclasses of `TestClass`
+that share a common base class so they can share test methods.
+For example, the classes in this hierarchy can be created:
+
+- TestCase
+  - DatabaseAbstractTests
+    - MySQLTests
+    - PostgresTests
+    - SQLiteTests
+
+In "SUnit Test Runner", selecting all the database-specific test classes
+and clicking the "Run" button can run all the test methods in those classes
+AND the ones defined in `DatabaseAbstractTests`.
+
+To make this work it is required to:
+
+1. Add the following class method to `DatabaseAbstractTests`:
+
+```smalltalk
+isAbstract
+    ^true
+```
+
+1. Add the following class methods to each of its subclasses:
+
+```smalltalk
+isAbstract
+    ^false
+
+shouldInheritSelectors
+    ^true
+```

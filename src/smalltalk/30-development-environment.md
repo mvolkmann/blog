@@ -1200,6 +1200,84 @@ is selected in the World menu.
 - Search for the class `ChangeSet`.
 - Select the class method `installNewUpdates`.
 
+## Button Discovery
+
+To discover the message that is sent when a particular button is pressed:
+
+- Open the halo for the button by cmd-shift clicking it.
+- Click the orange Explore handle on the left side of the halo.
+- In the newly opened Explore window, expand the "root" item.
+- Note the values of `model` (the target class) and
+  `actionSelector` (the message that will be sent to the target).
+- Browse the target class and select the method corresponding to the message.
+
+For example, the "Run" button in the "SUnit Test Runner" window
+sends the message `#runTests` to an instance of the `TestRunner` class.
+That determines which tests to run by sending `#selectedTests` to itself.
+That returns an `OrderedCollection` of tests.
+It then iterates over that collection by sending it the `#do:` message
+and evaluates `self addTestsFor: ea toSuite: suite` for each test
+where `ea` is a test.
+The instance method `addTestsFor:toSuite:` method
+is implemented in the `TestRunner` class.
+
+A class is considered to be abstract if
+it has an `isAbstract` method that returns `true`.
+If the test class being evaluated is abstract,
+the `addTestsFor:toSuite:` method sends the message `addToSuiteFromSelectors:`
+to each subclass that is not also abstract.
+If the test class being evaluated is not abstract,
+the `addTestsFor:toSuite:` method sends the message `addToSuiteFromSelectors:`
+to the test class being evaluate.
+
+This means that the test methods either come from subclasses of the test class
+OR from the test class, but not both.
+
+The class `TestCase` defines the class method `addToSuiteFromSelectors:`.
+This method takes a test suite and adds methods to it.
+The class `TestCase` implements the class method `shouldInheritSelectors`
+which returns `true` if both of the following are true.
+
+1. `self` is not the `TestCase` class, but is instead a subclass of it.
+2. The superclass is abstract OR `self` has no selectors (methods).
+
+The class method `shouldInheritSelectors` can be overridden
+in subclasses of `TestCase` to always return `true`.
+
+When `shouldInheritSelectors` returns true,
+the `addToSuiteFromSelectors:` method sends `#allTestSelectors` to `self`.
+Otherwise it sends `#testSelectors` to `self`.
+
+The `allTestSelectors` method returns the selectors returned by `allSelectors`.
+The `testSelectors` method returns the selectors returned by `selectors`.
+The `allSelectors` and `selectors` methods are implemented in
+the `Behavior` class which is a superclass of `Class`.
+
+The `allSelectors` method returns all the selectors found
+in the receiver class and all its superclasses.
+
+The `selectors` method returns only the selectors found
+in the receiver class, excluding those in superclasses.
+
+To run test methods in both an abstract subclass of `TestCase`
+AND non-abstract subclasses of that class,
+add this class method to make the base class abstract:
+
+```smalltalk
+isAbstract
+    ^true
+```
+
+and add these class methods to each of its subclasses:
+
+```smalltalk
+isAbstract
+    ^false
+
+shouldInheritSelectors
+    ^true
+```
+
 ## Screenshots
 
 To capture a screenshot of the entire window in a BMP file,
