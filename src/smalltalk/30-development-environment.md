@@ -1241,9 +1241,6 @@ which returns `true` if both of the following are true.
 1. `self` is not the `TestCase` class, but is instead a subclass of it.
 2. The superclass is abstract OR `self` has no selectors (methods).
 
-The class method `shouldInheritSelectors` can be overridden
-in subclasses of `TestCase` to always return `true`.
-
 When `shouldInheritSelectors` returns true,
 the `addToSuiteFromSelectors:` method sends `#allTestSelectors` to `self`.
 Otherwise it sends `#testSelectors` to `self`.
@@ -1268,14 +1265,11 @@ isAbstract
     ^true
 ```
 
-and add these class methods to each of its subclasses:
+and add this class method to each of its subclasses:
 
 ```smalltalk
 isAbstract
     ^false
-
-shouldInheritSelectors
-    ^true
 ```
 
 ## Screenshots

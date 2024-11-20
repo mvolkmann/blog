@@ -234,12 +234,9 @@ isAbstract
     ^true
 ```
 
-1. Add the following class methods to each of its subclasses:
+1. Add the following class method to each of its subclasses:
 
 ```smalltalk
 isAbstract
     ^false
-
-shouldInheritSelectors
-    ^true
 ```
