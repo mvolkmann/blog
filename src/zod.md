@@ -111,7 +111,7 @@ Object types are specified with the `object` method.
 For example:
 
 ```ts
-const Dog = z.object({
+const DogSchema = z.object({
   name: z.string(),
   breed: z.string(),
   age: z.number().optional()
@@ -126,4 +126,13 @@ For example, the following both specify an array of integers:
 ```ts
 z.array(z.number().int());
 z.number().int().array();
+```
+
+## Infering TypeScript Types
+
+To generate a TypeScript type from a Zod schema object,
+use `z.infer`. For example:
+
+```ts
+type Dog = z.infer<typeof DogSchema>;
 ```
