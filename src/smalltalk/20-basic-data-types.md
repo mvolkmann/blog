@@ -607,13 +607,13 @@ that is a modified version of the receiver.
 The `format:` method returns a `String` created from a template
 using interpolation where input comes from an `Array`.
 For example, both of the following produce the string
-`'Player Gretzky is number 99.'`:
+`'Player Ratelle is number 19.'`:
 
 ```smalltalk
-s := 'Player {1} is number {2}.' format: #('Gretzky' 99).
+s := 'Player {1} is number {2}.' format: #('Ratelle' 19).
 
-name := 'Gretzky'.
-number := 99.
+name := 'Ratelle'.
+number := 19.
 s := 'Player {1} is number {2}.' format: {name. number}.
 ```
 
