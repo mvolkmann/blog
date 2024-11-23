@@ -822,3 +822,27 @@ Highlights include:
 
 In addition, the `asJsonString` method answers
 a JSON `String` representation of any kind of collection.
+
+## Common Abbreviations
+
+For method arguments and variables whose values are expected to be
+a kind of collection, it's useful to include the
+least restrictive kind of collection that is suitable
+in the name of the argument or variable.
+For example, it's rarely the case that an `Array` is required
+and often the case that any kind of `SequenceableCollection` will suffice.
+
+The names of many of the collection classes are long.
+I recommend using the following abbreviations in variable names.
+
+| Class Name               | Abbreviation |
+| ------------------------ | ------------ |
+| `Array`                  | `Array`      |
+| `Bag`                    | `Bag`        |
+| `Collection`             | `Coll`       |
+| `Dictionary`             | `Dict`       |
+| `IdentityDictionary`     | `IdDict`     |
+| `OrderedCollection`      | `Ordered`    |
+| `SequenceableCollection` | `Seq`        |
+| `Set`                    | `Set`        |
+| `SortedCollection`       | `Sorted`     |
