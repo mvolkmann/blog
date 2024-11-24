@@ -441,6 +441,15 @@ s at: 1 put: smile.
 To fix this, change the line that assigns to `s`
 to `s := 'abc' asUnicodeString`.
 
+To find the first character in a string `CharacterSequence`
+that matches some condition,
+use the `findFirst:` method in `SequenceableCollection`.
+For example, the following finds the index of the first uppercase character.
+
+```smalltalk
+'fooBar' findFirst: [:char |char isUppercase]. "4"
+```
+
 ### CharacterSequence
 
 The `CharacterSequence` class method `readFrom:` answers an instance
