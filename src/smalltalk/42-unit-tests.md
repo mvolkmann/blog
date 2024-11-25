@@ -209,6 +209,24 @@ define the methods `setUp` and `tearDown`.
 Notice the uppercase `U` in `setUp`
 and the uppercase `D` in `tearDown`.
 
+## Logging
+
+By default, the following will be written to the Transcript
+before each test method runs:
+
+```text
+Will run: SomeTestClass>>#someTestMethod
+```
+
+Also, at the end of each test method run,
+"finished." will be written to the Transcript.
+
+To prevent this output, enter the following in a Workspace and "Do it".
+
+```smalltalk
+Preferences at: #transcriptLogVerbose put: false.
+```
+
 ## Abstract Base Classes
 
 It can be useful to define multiple subclasses of `TestClass`

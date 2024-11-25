@@ -175,3 +175,10 @@ rs do: [:row | row print].
 
 conn close.
 ```
+
+## ODBC Built-in Logging
+
+The `ODBCConnection` class has the instance methods `checkFeatures` and `connect`.
+Both of those methods contain expressions that write to the Transcript.
+If that information is not useful,
+comment out those expressions to reduce Transcript output.
