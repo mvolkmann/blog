@@ -635,7 +635,7 @@ of a `console.log` call in JavaScript.
 ```
 
 An even better approach is to defined the `logAs:` method in the `Object` class.
-This is described in the earlier "Transcript Windows" section.
+This was described in "Getting Started" section "Transcripts".
 
 The `padded:to:with:` method answers a copy formed by
 padding receiver on the left or right with a given `Character`.

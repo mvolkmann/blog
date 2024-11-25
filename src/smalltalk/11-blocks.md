@@ -295,7 +295,6 @@ valueWithArguments: anArray
         self error: 'valueWithArguments: requires an Array'
     ].
     args := arguments , anArray.
-    args logAs: 'args'.
     anArray size = self argumentCount ifTrue: [
         ^ block valueWithArguments: args
     ].

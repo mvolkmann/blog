@@ -385,7 +385,13 @@ add the following instnace method to the `Object class:
 
 ```smalltalk
 logAs: aString
-    ('{1} = {2}' format: {aString. self}) print
+    "Writes logging information about receiver to the Transcript."
+    | message sender template |
+
+    sender := thisContext sender.
+    template := 'In {1}, {2} is a {3} = {4}'.
+    message := template format: {sender. aString. self class name. self}.
+    message print.
 ```
 
 For example, this can be used to print a `Dog` object as follows:

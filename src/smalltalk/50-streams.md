@@ -60,6 +60,7 @@ in the `ReadStream` class.
 | `size` | answers value of `readLimit`                  |
 
 The following code demonstrates using many of the methods described above.
+The `logAs:` method is defined in the "Getting Started" section "Transcripts".
 When the end is reached, the `next` method returns `nil`.
 
 ```smalltalk
