@@ -40,6 +40,8 @@ The following table lists some of them.
 | `someMethodContext selector`                            | the selector `Symbol` of the message that invoked the `MethodContext`                                        |
 | `someSelector keywords`                                 | an `Array` of the keywords in the selector                                                                   |
 
+## Getting Keywords from Selectors
+
 The following examples demonstrate getting keywords from a message selector:
 
 ```smalltalk
@@ -47,8 +49,7 @@ The following examples demonstrate getting keywords from a message selector:
 #foo:bar:baz: keywords. "#('foo:' 'bar:' 'baz:')"
 ```
 
-TODO: Why does `allClassVarNames` return a `Set` when `allInstVarNames` returns an `Array`?
-TODO: Is there a way to get all the message categories used by a class?
+## Operating on All Instances
 
 To run code on every instance of a given class,
 send the `allInstancesDo:` message to the class.
@@ -56,7 +57,9 @@ send the `allInstancesDo:` message to the class.
 For example, to delete all instances of a given class, run
 `SomeClass allInstancesDo: [:obj | obj delete]`.
 
-This isn't a provided method that finds the nearest class in the
+## Finding the Method for a Selector
+
+There isn't a provided method that finds the nearest class in the
 inheritance hierarchy that implements a method with a given selector.
 I added the following method to do that.
 It is in the `Behavior` class in the method category "\*TypeCheck",
@@ -78,6 +81,8 @@ lookupClassImplementingSelector: selectorSymbol
     ^ nil
 ```
 
+## Parsing Code
+
 The class `Class` inherits from `ClassDescription`
 which inherits from `Behavior`.
 The `Behavior` class implements the method `sourceCodeAt:`
@@ -90,9 +95,28 @@ from the `Dictionary` `#at:put:` method:
 code := Dictionary sourceCodeAt: #at:put:.
 ```
 
+The `code` variable will hold the following in a single string:
+
+```smalltalk
+at: key put: anObject
+    "Set the value at key to be anObject.
+    If key is not found, create a new entry for key and set is value to anObject.
+    If key is found, update the existing association.
+    Answer anObject."
+
+    | index assoc |
+    index := self findElementOrNil: key.
+    assoc := array at: index.
+    assoc
+        ifNil: [ self atNewIndex: index put: (Association key: key value: anObject) ]
+        ifNotNil: [ assoc value: anObject ].
+    ^ anObject
+```
+
 The `Parser` class can parse a string of source code
 that describes an existing method in a given class.
-It returns a `MethodNode` object describing the method.
+It returns a `MethodNode` object that is the
+root of the parse tree (a.k.a abstract syntax tree).
 For example, the following code parses the code from the previous example:
 
 ```smalltalk
@@ -106,3 +130,48 @@ The following code gets the names of the arguments that follow the keywords:
 argNodes := methodNode arguments.
 argNames := argNodes collect: [:node | node name].
 ```
+
+`MethodNode` objects include the following properties and more:
+
+- `comment` - an `OrderedCollection` of `UnicodeString` objects
+- `temporaries` - an `OrderedCollection` of `TempVariableNode` objects
+- `block` - a `BlockNode`
+
+`BlockNode` objects include the following properties:
+
+- `arguments` - an `Array` of ?
+- `returns` - a `Boolean` that indicates whether the method explicitly returns a value?
+- `statements` - an `OrderedCollection` of nodes
+
+The class `ParseNode` is the superclass of all nodes produced by the `Parser`.
+They include:
+
+- `AssignmentNode`
+- `BacktickNode`
+- `BraceNode`
+- `CascadeNode`
+- `CodeNode`
+  - `BlockNode`
+  - `MethodNode`
+- `LeafNode`
+  - `LiteralNode`
+  - `SelectorNode`
+    - `SpecialSelectorNode`
+  - `VariableNode`
+    - `InstanceVariableNode`
+      - `MaybeContextInstanceVariableNode`
+    - `LiteralVariableNode`
+    - `TempVariableNode`
+      - `RemoteTempVariableNode`
+    - `UndeclaredVariableNode`
+  - `MessageNode`
+    - `MessageAsTempNode`
+- `NewArrayNode`
+- `ReturnNode`
+- `TemporariesDeclartionNode`
+- `TempararyDeclartionNode`
+
+## Questions
+
+TODO: Why does `allClassVarNames` return a `Set` when `allInstVarNames` returns an `Array`?
+TODO: Is there a way to get all the message categories used by a class?
