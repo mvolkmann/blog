@@ -88,7 +88,7 @@ which inherits from `Behavior`.
 The `Behavior` class implements the method `sourceCodeAt:`
 which returns a `UnicodeString` containing the source code
 for the method with a given selector `Symbol`.
-For example, the following code gets a string of source code
+The following code gets a string of source code
 from the `Dictionary` `#at:put:` method:
 
 ```smalltalk
@@ -113,11 +113,12 @@ at: key put: anObject
     ^ anObject
 ```
 
-The `Parser` class can parse a string of source code
+The `Parser` class parses a string of source code
 that describes an existing method in a given class.
+TODO: Is it required to be code from an existing method?
 It returns a `MethodNode` object that is the
 root of the parse tree (a.k.a abstract syntax tree).
-For example, the following code parses the code from the previous example:
+The following code parses the code from the previous example:
 
 ```smalltalk
 parser := Parser new.
@@ -133,9 +134,11 @@ argNames := argNodes collect: [:node | node name].
 
 `MethodNode` objects include the following properties and more:
 
+- `block` - a `BlockNode` object (described below)
 - `comment` - an `OrderedCollection` of `UnicodeString` objects
+- `properties` - an `AdditionalMethodState` object (has `selector` property)
+- `sourceText` - a `UnicodeString` containing all the code for the method
 - `temporaries` - an `OrderedCollection` of `TempVariableNode` objects
-- `block` - a `BlockNode`
 
 `BlockNode` objects include the following properties:
 
@@ -146,8 +149,8 @@ argNames := argNodes collect: [:node | node name].
 The class `ParseNode` is the superclass of all nodes produced by the `Parser`.
 They include:
 
-- `AssignmentNode`
-- `BacktickNode`
+- `AssignmentNode` - assignment to a variable
+- `BacktickNode` - compound literal evaluated by compiler (surrounded by backticks)
 - `BraceNode`
 - `CascadeNode`
 - `CodeNode`
@@ -167,9 +170,11 @@ They include:
   - `MessageNode`
     - `MessageAsTempNode`
 - `NewArrayNode`
-- `ReturnNode`
+- `ReturnNode` - caret return of a specified value or implicit return of `self`
 - `TemporariesDeclartionNode`
-- `TempararyDeclartionNode`
+- `TemporaryDeclartionNode`
+
+TODO: Describe each of the node types above.
 
 ## Questions
 

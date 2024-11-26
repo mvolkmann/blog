@@ -55,36 +55,36 @@ The following table summarizes all the special tokens.
 The following table summarizes all the syntax.
 The term "receiver" describes the object to which a message is sent.
 
-| Item                                              | Example                                                    |
-| ------------------------------------------------- | ---------------------------------------------------------- |
-| comment                                           | `"some text"` (can span multiple lines)                    |
-| temporary (local) variable with private scope     | `myTemp` (camelCase)                                       |
-| global variable with shared scope                 | `MyGlobal` (CamelCase)                                     |
-| pseudo variable (cannot assign)                   | `self`, `super`, `nil`, `true`, `false`, and `thisContext` |
-| integer                                           | `123`                                                      |
-| float                                             | `3.14`                                                     |
-| exponential notation                              | `1.23e4`                                                   |
-| character                                         | `$a`                                                       |
-| string                                            | `'text'` (use double ' to include)                         |
-| string concatenation (comma message)              | `'foo', 'bar', 'baz'`                                      |
-| symbol (globally unique string)                   | `#name`                                                    |
-| static array (elements are literal values)        | `#(1 4 8)`                                                 |
-| dynamic array (elements are computed at run time) | `{1. 2 * 2. 2 raisedTo: 3}`                                |
-| array concatenation (comma message)               | `#(1 2), #(3 4)`                                           |
-| assignment                                        | `<variable> := <expression>`                               |
-| method and block variable declarations            | `\| foo bar baz \|`                                        |
-| block with no arguments                           | `[<expressions>]`                                          |
-| block with arguments                              | `[:a :b \| a + b]`                                         |
-| unary message send                                | `<object> <message>` such as `5 factorial`                 |
-| binary message send (look like operators)         | `<object> <message> <argument>` such as `4 * 5`            |
-| keyword message send                              | `2 raisedTo: 4 modulo: 3`                                  |
-| message cascade - sends to initial receiver       | `Transcript show: 'foo'; newLine; show: 'bar'`             |
-| message chaining - sends to previous result       | `2 * 3 :: squared` (36)                                    |
-| method return value                               | `^<expression>` such as ^42                                |
-| expression separator (period)                     | `'foo print'. 'bar' print`                                 |
-| parentheses to control evaluation order           | `a * (b + c)`                                              |
-| reference to current object in a method           | `self`                                                     |
-| compound literal evaluated by compiler            | `` `expression` ``                                         |
+| Item                                               | Example                                                    |
+| -------------------------------------------------- | ---------------------------------------------------------- |
+| comment                                            | `"some text"` (can span multiple lines)                    |
+| temporary (local) variable with private scope      | `myTemp` (camelCase)                                       |
+| global variable with shared scope                  | `MyGlobal` (CamelCase)                                     |
+| pseudo variable (cannot assign)                    | `self`, `super`, `nil`, `true`, `false`, and `thisContext` |
+| integer                                            | `123`                                                      |
+| float                                              | `3.14`                                                     |
+| exponential notation                               | `1.23e4`                                                   |
+| character                                          | `$a`                                                       |
+| string                                             | `'text'` (use double ' to include)                         |
+| string concatenation (comma message)               | `'foo', 'bar', 'baz'`                                      |
+| symbol (globally unique string)                    | `#name`                                                    |
+| static array (elements are literal values)         | `#(1 4 8)`                                                 |
+| dynamic array (elements are computed at run time)  | `{1. 2 * 2. 2 raisedTo: 3}`                                |
+| array concatenation (comma message)                | `#(1 2), #(3 4)`                                           |
+| assignment                                         | `<variable> := <expression>`                               |
+| method and block variable declarations             | `\| foo bar baz \|`                                        |
+| block with no arguments                            | `[<expressions>]`                                          |
+| block with arguments                               | `[:a :b \| a + b]`                                         |
+| unary message send                                 | `<object> <message>` such as `5 factorial`                 |
+| binary message send (look like operators)          | `<object> <message> <argument>` such as `4 * 5`            |
+| keyword message send                               | `2 raisedTo: 4 modulo: 3`                                  |
+| message cascade - sends to initial receiver        | `Transcript show: 'foo'; newLine; show: 'bar'`             |
+| message chaining - sends to previous result        | `2 * 3 :: squared` (36)                                    |
+| method return value                                | `^<expression>` such as ^42                                |
+| expression separator (period)                      | `'foo print'. 'bar' print`                                 |
+| parentheses to control evaluation order            | `a * (b + c)`                                              |
+| reference to current object in a method            | `self`                                                     |
+| compound literal evaluated by compiler (backticks) | `` `expression` ``                                         |
 
 There is no syntax for describing a class as a whole.
 Instead, a class is described by sending a message to its superclass

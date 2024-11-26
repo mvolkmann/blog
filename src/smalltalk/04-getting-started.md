@@ -366,6 +366,8 @@ The `print` method does the following:
 Transcript show: self printString; newLine
 ```
 
+Note the capital `L` in `newLine`.
+
 This is unique to Cuis Smalltalk.
 The `Object` class in Squeak and Pharo does not have a `print` method.
 
