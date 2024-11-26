@@ -77,3 +77,32 @@ lookupClassImplementingSelector: selectorSymbol
     ].
     ^ nil
 ```
+
+The class `Class` inherits from `ClassDescription`
+which inherits from `Behavior`.
+The `Behavior` class implements the method `sourceCodeAt:`
+which returns a `UnicodeString` containing the source code
+for the method with a given selector `Symbol`.
+For example, the following code gets a string of source code
+from the `Dictionary` `#at:put:` method:
+
+```smalltalk
+code := Dictionary sourceCodeAt: #at:put:.
+```
+
+The `Parser` class can parse a string of source code
+that describes an existing method in a given class.
+It returns a `MethodNode` object describing the method.
+For example, the following code parses the code from the previous example:
+
+```smalltalk
+parser := Parser new.
+methodNode := parser parse: code class: Dictionary.
+```
+
+The following code gets the names of the arguments that follow the keywords:
+
+```smalltalk
+argNodes := methodNode arguments.
+argNames := argNodes collect: [:node | node name].
+```
