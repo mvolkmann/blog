@@ -12,6 +12,10 @@ The following table lists some of them.
 
 | Method                                                  | Answers                                                                                                      |
 | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `object class`                                          | the class of `object`                                                                                        |
+| `object instVarNamed: #varName`                         | the value of an instance variable in `object`                                                                |
+| `object instVarNamed: #varName` put: newValue           | sets value of an instance variable in `object` and answers new value                                         |
+| `SomeClass name`                                        | the name of the class as a `String`                                                                          |
 | `Smalltalk allClasses`                                  | an `Array` of all classes defined in the current image                                                       |
 | `Smalltalk allClassesImplementing: #selector`           | an `Array` of all classes that implement a given selector                                                    |
 | `SystemOrganization categoryOfElement: #SomeClass`      | name of the class category to which a given class belongs                                                    |
@@ -31,6 +35,17 @@ The following table lists some of them.
 | `SomeClass class selectors`                             | an `Array` of all class method selectors of this class                                                       |
 | `SomeClass class allMethodsInCategory: 'some-category'` | an `Array` of class methods in a given category, including those defined in this class and inherited         |
 | `CodeListPackages installedPackages`                    | an `Array` of `CodePackage` objects (appear in System Browser class category pane)                           |
+| `thisContext sender`                                    | a `MethodContext` describing the method that invoked the current one                                         |
+| `someMethodContext receiver`                            | the object that sent the message that invoked the `MethodContext`                                            |
+| `someMethodContext selector`                            | the selector `Symbol` of the message that invoked the `MethodContext`                                        |
+| `someSelector keywords`                                 | an `Array` of the keywords in the selector                                                                   |
+
+The following examples demonstrate getting keywords from a message selector:
+
+```smalltalk
+#foo keywords. "#('foo')"
+#foo:bar:baz: keywords. "#('foo:' 'bar:' 'baz:')"
+```
 
 TODO: Why does `allClassVarNames` return a `Set` when `allInstVarNames` returns an `Array`?
 TODO: Is there a way to get all the message categories used by a class?
@@ -40,3 +55,25 @@ send the `allInstancesDo:` message to the class.
 
 For example, to delete all instances of a given class, run
 `SomeClass allInstancesDo: [:obj | obj delete]`.
+
+This isn't a provided method that finds the nearest class in the
+inheritance hierarchy that implements a method with a given selector.
+I added the following method to do that.
+It is in the `Behavior` class in the method category "\*TypeCheck",
+so it is saved in the TypeCheck package.
+
+```smalltalk
+lookupClassImplementingSelector: selectorSymbol
+    "Look up the given selector in my methodDictionary.
+    Return the class that implements it if found.
+    Otherwise chase the superclass chain and try again.
+    Return nil if no implementing class is found."
+    | class |
+
+    class := self.
+    [class == nil] whileFalse: [
+        class includesSelector: selectorSymbol :: ifTrue: [^ class].
+        class := class superclass
+    ].
+    ^ nil
+```
