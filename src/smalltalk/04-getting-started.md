@@ -294,6 +294,10 @@ message := 'Hello, Smalltalk!'
 
 In a Workspace, it is not necessary to declare variables before setting them.
 
+It is common in Smalltalk documentation that describes specific messages
+to precede their name with the `#`,
+which indicates that message names are symbols.
+
 To execute the code and print the result of the last expression
 at the cursor position, press cmd-p (Print it).
 This sends the message `#printString` to the result object
@@ -357,7 +361,7 @@ This can output any kind of object
 because every object has a string representation.
 
 Another way to write to the Transcript is to
-send the `#print` message to an object.
+send the `#print` message to any object.
 For example, `'Hello World!' print`.
 
 The `print` method does the following:
@@ -371,9 +375,16 @@ Note the capital `L` in `newLine`.
 This is unique to Cuis Smalltalk.
 The `Object` class in Squeak and Pharo does not have a `print` method.
 
-It is common in Smalltalk documentation that describes specific messages
-to precede their name with the `#`,
-which indicates that message names are symbols.
+Yet another way to write to the Transcript is to treat it as a stream
+which can passed to all the `print*On` methods.
+For example, the classes `True` and `False` (subclasses of `Boolean`)
+have the method `printOn`.
+The following code prints "true" to the Transcript
+without adding a trailing newline character.
+
+```smalltalk
+1 < 2 :: printOn: Transcript
+```
 
 The `print` method works with any kind of object because it is
 implemented in the `Object` class which is a superclass of all classes.
