@@ -83,6 +83,9 @@ lookupClassImplementingSelector: selectorSymbol
 
 ## Parsing Code
 
+The `Compiler` class can compile strings of Smalltalk code.
+For example, `Compiler evaluate: '1+2'` answers `3`.
+
 The class `Class` inherits from `ClassDescription`
 which inherits from `Behavior`.
 The `Behavior` class implements the method `sourceCodeAt:`

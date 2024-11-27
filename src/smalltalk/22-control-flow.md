@@ -12,7 +12,7 @@ Instead, control flow is provided through message passing.
 ### Conditional Logic
 
 The `Boolean` class in the `Kernel-Objects` category contains the methods
-`#ifTrue`, `#ifFalse`, `#ifTrue:ifFalse`, and `#ifFalse:ifTrue`.
+`#ifTrue:`, `#ifFalse:`, `#ifTrue:ifFalse:`, and `#ifFalse:ifTrue:`.
 For example:
 
 ```smalltalk
@@ -30,6 +30,7 @@ When blocks are used, the compiler is able to optimized the code by
 inlining the code within the block and
 avoiding the need to send the `value` message.
 So it is more efficient to use blocks.
+TODO: But does it make a difference if the value is a literal like a number or string?
 
 The `Object` instance method `caseOf:` is similar to
 the `switch` statement in other programming languages.
@@ -45,11 +46,13 @@ For example:
 
 ```smalltalk
 color := 'blue'.
+
 assessment := color caseOf: {
     ['red'] -> ['hot'].
     ['green'] -> ['warm'].
     ['blue'] -> ['cold']
 }.
+
 assessment := color caseOf: {
     ['red'] -> ['hot'].
     ['green'] -> ['warm'].
@@ -57,10 +60,34 @@ assessment := color caseOf: {
 } otherwise: ['unknown'].
 ```
 
+Using nested `#ifTrue:ifFalse:` messages can be verbose and
+requires having the correct number of closing square brackets at the end.
+For example, the following assigns a string to a variable
+based on the temperature:
+
+```smalltalk
+assessment :=
+    temperature > 80 ifTrue: 'hot' ifFalse: [
+    temperature < 40 ifTrue: 'cold' ifFalse: [
+    'warm']]
+```
+
+Another option is to send the message `#caseOf:` to `true`.
+This avoids using nested messages and counting square brackets.
+For example:
+
+```smalltalk
+assessment := true caseOf: {
+    [temperature > 80] -> ['hot'].
+    [temperature < 40] -> ['cold'].
+} otherwise: ['warm'].
+```
+
+Moving the logic to its own function, perhaps in the "private" category,
+can make the code less verbose and more clear.
 When a block uses the `^` operator to return a value,
 the containing method exits and returns that value.
-For example, the following method returns
-a `String` based on the `Number` passed in:
+For example:
 
 ```smalltalk
 assessTemperature: aNumber
