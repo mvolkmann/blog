@@ -8,6 +8,9 @@ layout: topic-layout.njk
 
 <a href="https://opensmalltalk.org" target="_blank">OpenSmalltalk</a>
 is a "cross-platform virtual machine for Squeak, Pharo, Cuis, and Newspeak".
+It has many contributors.
+The person with the most commits is
+<a href="http://www.mirandabanda.org/cogblog/microbio/" target="_blank">Eliot Miranda</a>.
 
 Many variants of the VM can be built with options such as:
 
@@ -29,18 +32,43 @@ Many variants of the VM can be built with options such as:
 
 To build a VM:
 
-- `git clone https://github.com/OpenSmalltalk/opensmalltalk-vm.git`
-- `./scripts/updateSCCSVersions`
-- run one of the scripts in the `scripts` directory such as
-  ``
+- Clone the repository by entering
+  `git clone https://github.com/OpenSmalltalk/opensmalltalk-vm.git`
+
+  The only branch present on 11/28/2024 was "Cog".
+
+- Perform source file substitutions by entering `./scripts/updateSCCSVersions`
+
+- Choose between the Stack, Cog, and Sista VMs.
+
+  Currently it seems that Cog is preferred.
+
+- Choose between the v3 and Spur VMs.
+
+  Currently it seems that Spur is preferred.
+
 - For ARM-based Macs
 
-  - cd to the `building/macos64ARMv8` directory.
-  - enter 'xcodebuild -runFirstLaunch`
-  - enter './makespur`
+  - cd to the `building/macos64ARMv8/squeak.cog.spur` directory.
+  - Copy the file `Squeak.app` to the `Applications` directory.
 
-    This will run for a long time (~10 minutes) and produces a large amount of output.
-    There will be many warnings about issues such as unused variables.
-    I got 39 warnings and 1 error.
-    The error was "call to undeclared function 'literalBeforeInlineCacheTagAt'".
-    Where is the generated VM placed?
+  - To build from scratch:
+
+    - If Xcode.app is not installed, install it.
+    - If the Xcode Command Line Tools are not installed,
+      install them by entering `xcode-select --install`.
+    - If Homebrew is not installed, install it.
+    - If the `cmake` command is not installed,i
+      install it by entering `brew install cmake`.
+    - Enter 'xcodebuild -runFirstLaunch` (not sure about this step)
+    - Enter './makespur` (not sure about this step)
+
+      This will run for a long time (~10 minutes) and produces a large amount of output.
+      There will be many warnings about issues such as unused variables.
+      I got 39 warnings and 1 error.
+      The error was "call to undeclared function 'literalBeforeInlineCacheTagAt'".
+      Where is the generated VM placed?
+
+For more detail, see
+<a href="https://github.com/OpenSmalltalk/opensmalltalk-vm/blob/Cog/building/macos64ARMv8/HowToBuild"
+target="_blank">HowToBuild</a>.
