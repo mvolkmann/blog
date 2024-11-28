@@ -21,6 +21,8 @@ and modified by sending `#position:`.
 It also has a `readLimit` instance variable
 that is intialized to the collection size.
 
+## PositionableStream
+
 The `PositionableStream` class method `on:`
 takes a `Collection` and returns a stream over it.
 The `ReadStream` class method `on:from:to:`
@@ -50,6 +52,8 @@ in the `PositionableStream` class.
 | `skip:`         | adds argument to `position`                                                 |
 | `skipBack`      | subtracts 1 from `position`                                                 |
 | `skipTo:`       | advances position to element matching argument and answers whether found    |
+
+## ReadStream
 
 The following table describes commonly used methods
 in the `ReadStream` class.
@@ -96,6 +100,8 @@ stream next print. "cherry"
 stream next print. "nil"
 ```
 
+## WriteStream
+
 The `writeStream` method returns a `WriteStream` that can modify the collection.
 It adds the instance variable `writeLimit`
 which is initialized to the collection size.
@@ -109,6 +115,8 @@ stream := coll writeStream.
 stream pastEndPut: 'grape'.
 coll print.
 ```
+
+## ReadWriteStream
 
 The `ReadWriteStream` class creates a string that can
 read and write (modify) collection elements.
@@ -129,10 +137,8 @@ For example:
 
 ```smalltalk
 stream := WriteStream on: (String new: 100).
-stream nextPutAll: 'Hello'.
-stream nextPutAll: ', World'.
-stream nextPut: $!.
-string := stream contents. "Hello, World!"
+stream nextPutAll: 'Hello'; nextPutAll: ', World'; nextPut: $!; newLine.
+string := stream contents. "Hello, World!\n"
 ```
 
 `100` above is just a size estimate.
@@ -141,6 +147,15 @@ More than 100 characters can be added,
 but doing that will be slightly less efficient
 because additional space will need to be allocated
 during execution of the `nextPut*` methods.
+
+If the purpose of building a `String` is to write it to the Transcript,
+it is better to just use methods in the `Transcript` class.
+That class implements many of the same methods as the `WriteStream` class.
+The example above can be written as follows to write to the Transcript.
+
+```smalltalk
+Transcript nextPutAll: 'Hello'; nextPutAll: ', World'; nextPut: $!; cr.
+```
 
 ## File I/O
 
