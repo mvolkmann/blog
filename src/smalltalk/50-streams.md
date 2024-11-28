@@ -152,6 +152,8 @@ If the purpose of building a `String` is to write it to the Transcript,
 it is better to just use methods in the `Transcript` class.
 That class implements many of the same methods as the `WriteStream` class,
 but it is a subclass of `Object`, not any stream-related class.
+The `Transcript` stream-related methods are on the class side,
+whereas the corresponding `WriteStream` methods are on the instance side.
 The example above can be written as follows to write to the Transcript.
 
 ```smalltalk
