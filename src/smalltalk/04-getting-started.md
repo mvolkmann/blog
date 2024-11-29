@@ -334,7 +334,8 @@ To remove the last expression added in a Workspace, press cmd-z.
 
 To save all the code in a Workspace to a text file,
 click the blue circle in the upper-left and select "Save as...".
-A popup will prompt for a file name. Include the `.st` file extension.
+A popup will prompt for a file name.
+It is not necessary to include the `.st` file extension.
 The title bar will change from "Workspace"
 to the file path where the code was saved.
 It may be necessary to make the window wider to see all of the path.

@@ -1623,6 +1623,9 @@ Common ways include:
    `transform` to `translate(-50%, -50%)`
    (see `.box4` below).
 
+1. To center an element vertically within its parent element,
+   set `align-content` to `center` (see `.center` below).
+
 Each of these approaches is demonstrated in the code below.
 
 {% include "_centering.html" %}
@@ -1683,6 +1686,13 @@ Each of these approaches is demonstrated in the code below.
         margin: auto; /* doesn't center without this */
       }
 
+      .center {
+        align-content: center; /* centers vertically */
+        height: 5rem;
+        border: 1px solid red;
+        text-align: center; /* centers horizontally */
+      }
+
       #centering-demo {
         --box-size: 100px;
         --size: 550px;
@@ -1732,6 +1742,8 @@ Each of these approaches is demonstrated in the code below.
 
       <!-- This box is centered in the browser window. -->
       <div class="box box4">Box #4<br />Click to hide.</div>
+
+      <div class="center">Centered</div>
     </section>
   </body>
 </html>

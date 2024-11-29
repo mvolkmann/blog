@@ -664,6 +664,13 @@ containing all the digits found in another `String`:
 'Buy 14 bananas.' select: [:c | c isDigit] "14"
 ```
 
+To create a string containing a given number of a single character
+such as a space for indentation:
+
+```smalltalk
+indentation := String new: aNumber * 4 withAll: Character space.
+```
+
 ### Symbol
 
 The `Symbol` class is a subclass of the `String` class.
