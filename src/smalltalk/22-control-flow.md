@@ -73,7 +73,7 @@ assessment :=
 ```
 
 Another option is to send the message `#caseOf:` to `true`.
-This avoids using nested messages and counting square brackets.
+This avoids using nested `ifFalse:` messages and counting square brackets.
 For example:
 
 ```smalltalk
@@ -81,6 +81,28 @@ assessment := true caseOf: {
     [temperature > 80] -> ['hot'].
     [temperature < 40] -> ['cold'].
 } otherwise: ['warm'].
+```
+
+Another option, suggested by Lauren Pullen, is to add an
+instance method like `cond:` to the `ArrayedCollection` class.
+It can be defined as follows:
+
+```smalltalk
+cond: defaultBlock
+    "Mimic the Common Lisp/Scheme COND with a Smalltalk twist."
+    self associationsDo: [:assoc |
+        assoc key value ifTrue: [^assoc value value]
+    ].
+    ^ defaultBlock value.
+```
+
+The following code demonstrates using the `cond:` method.
+
+```smalltalk
+condition := {
+    [temperature > 80] -> ['hot'].
+    [temperature < 40] -> ['cold']
+} cond: ['warm'].
 ```
 
 Moving the logic to its own function, perhaps in the "private" category,
@@ -91,9 +113,9 @@ For example:
 
 ```smalltalk
 assessTemperature: aNumber
-    aNumber > 80 ifTrue: [^ 'hot'].
-    aNumber < 40 ifTrue: [^ 'cold'].
-    ^ 'warm'
+    aNumber > 80 ifTrue: [^'hot'].
+    aNumber < 40 ifTrue: [^'cold'].
+    ^'warm'
 ```
 
 Many classes define methods that return a `Boolean` value
