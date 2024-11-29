@@ -87,8 +87,9 @@ the steps to update are:
   Those files will be in the `Cuis-Smalltalk-Dev/Packages/Features` or
   `Cuis-Smalltalk-Dev/Packages/System` directories.
 
-  The updates might break the functionality of any windows that are open
-  (such as Browsers), so it may be necessary to close and reopen them.
+  Updates are applied to a live environment. This means that updates
+  can might break the functionality of any open windows (such as Browsers),
+  so it may be necessary to close and reopen them.
 
 ## Squeak Smalltalk
 
