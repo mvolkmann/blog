@@ -107,5 +107,7 @@ For the latest stable image:
 ## Running an Image
 
 To run an image, double-click `Squeak.app`.
-That will open a dialog that prompts for an image file.
-Select one.
+That will open a dialog that prompts for a `.image` file.
+Select one and click the "Open" button.
+
+Alternatively, double-click a Squeak `.image` file.
