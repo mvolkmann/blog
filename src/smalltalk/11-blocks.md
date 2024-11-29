@@ -11,6 +11,9 @@ and contain many expressions.
 They are instances of the class `BlockClosure`.
 Their execution is deferred until they are sent a message like `value`.
 
+Blocks are surrounded by square brackets which is appropriate
+because real life blocks are typically rectangular.
+
 The value of the block is the value of its last expression.
 If a block uses the caret operator (`^`) to return a value,
 the containing method will exit and return that value.
@@ -23,7 +26,7 @@ Blocks take zero or more positional arguments,
 which is something methods cannot do.
 Parameter names appear at the beginning of a block
 and each name is preceded by a colon.
-This syntax mirrors that of specifing arguments in keyword messages
+This syntax mirrors that of specifying arguments in keyword messages
 where each keyword is followed by a colon.
 It also simplifies parsing because it enables determining
 whether a block has any parameters without backtracking.
