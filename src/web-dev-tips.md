@@ -205,9 +205,10 @@ These include:
 
 - `:required`
 - `:optional`
-- `:valid`
-- `:invalid`
-- `:user-invalid`
+- `:invalid` (triggers immediately)
+- `:valid` (triggers immediately)
+- `:user-invalid` (triggers only after user interaction)
+- `:user-valid` (triggers only after user interaction)
 - `:blank`
 - `:placeholder-shown`
 - `:in-range`
