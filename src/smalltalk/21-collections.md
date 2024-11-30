@@ -116,9 +116,9 @@ defined in the `Collection` class.
 | `fold:`                 | answers value that results from folding receiver elements with a block; like `reduce` in JavaScript                                        |
 | `fold:ifEmpty:`         | like `fold:`, but specifies value to use if collection is empty                                                                            |
 | `groupBy:`              | answers `Dictionary` where keys are values returned by passing each element to block argument and values are `OrderedCollection` instances |
-| `ifEmpty:`              | evalutes block argument if collection is empty                                                                                             |
+| `ifEmpty:`              | evaluates block argument if collection is empty                                                                                            |
 | `ifEmpty:ifNotEmpty:`   | combines `ifEmpty:` and `ifNotEmpty:`                                                                                                      |
-| `ifNotEmpty:`           | evalutes block argument if collection is not empty                                                                                         |
+| `ifNotEmpty:`           | evaluates block argument if collection is not empty                                                                                        |
 | `ifNotEmpty:ifEmpty:`   | combines `ifNotEmpty:` and `ifEmpty:`                                                                                                      |
 | `includes:`             | answers `Boolean` indicating if argument is an element of receiver                                                                         |
 | `includesAllOf:`        | answers `Boolean` indicating if all elements in argument collection are elements of receiver                                               |
@@ -194,7 +194,7 @@ All indexes are 1-based.
 | `allButLast`              | answers copy including all but last element                                                                                   |
 | `allButLast:`             | answers copy including all but last argument elements                                                                         |
 | `allButLastDo:`           | evaluates block argument with all but last element                                                                            |
-| `at:ifAbsent:`            | answers element at `at:` index or `ifAbsent:` if index out of bounds                                                          |
+| `at:ifAbsent:`            | answers element at `at:` index or if absent the value of `ifAbsent:` block                                                    |
 | `atLast:`                 | answers element at index that is argument from end (1 for last)                                                               |
 | `atLast:ifAbsent:`        | like `atLast:` but specifies value to return if not enough elements                                                           |
 | `combinations:atATimeDo:` | evaluates `atATimeDo` once for every unique combination of `combinations:` elements                                           |
@@ -459,29 +459,29 @@ For example, `fruits indexOf: 'banana'` returns 2.
 The following table describes some of the instance methods defined in the
 `OrderedCollection` class that are not also defined in superclasses.
 
-| Method                | Description                                                                       |
-| --------------------- | --------------------------------------------------------------------------------- |
-| `add:`                | adds argument to end                                                              |
-| `add:after:`          | adds `add:` object after `after:` object                                          |
-| `add:afterIndex:`     | adds `add:` object after `afterIndex:` index                                      |
-| `add:before:`         | adds `add:` object before `before:` object                                        |
-| `add:beforeIndex:`    | adds `add:` object before `beforeIndex:` index                                    |
-| `addAllFirst:`        | adds all objects in argument `OrderedColection` at beginning                      |
-| `addAllLast:`         | adds all objects in argument `OrderedColection` at end                            |
-| `at:`                 | answers element at argument index                                                 |
-| `at:ifAbsentPut:`     | answers element at `at:` index; if not present, add value of `ifAbsentPut:` block |
-| `at:put:`             | replaces existing element at `at:` index with `put:` object                       |
-| `collect:thenSelect:` | combines `collect:` and `select:`                                                 |
-| `find:`               | answers index of first occurrence of argument value                               |
-| `removeAll`           | removes all elements                                                              |
-| `removeAllSuchThat:`  | removes all elements that satisfy argument block                                  |
-| `removeAt:`           | removes element at argument index                                                 |
-| `removeFirst`         | removes first element and answers it                                              |
-| `removeFirst:`        | removes first argument elements and answers `Array` of them                       |
-| `removeLast`          | removes first element and answers it                                              |
-| `removeLast:`         | removes last argument elements and answers `Array` of them                        |
-| `sort`                | sorts the elements in place                                                       |
-| `sort:`               | sorts the elements in place using argument block to compare them                  |
+| Method                | Description                                                                                 |
+| --------------------- | ------------------------------------------------------------------------------------------- |
+| `add:`                | adds argument to end                                                                        |
+| `add:after:`          | adds `add:` object after `after:` object                                                    |
+| `add:afterIndex:`     | adds `add:` object after `afterIndex:` index                                                |
+| `add:before:`         | adds `add:` object before `before:` object                                                  |
+| `add:beforeIndex:`    | adds `add:` object before `beforeIndex:` index                                              |
+| `addAllFirst:`        | adds all objects in argument `OrderedColection` at beginning                                |
+| `addAllLast:`         | adds all objects in argument `OrderedColection` at end                                      |
+| `at:`                 | answers element at argument index                                                           |
+| `at:ifAbsentPut:`     | answers element at `at:` index; if not present, adds and answers `ifAbsentPut:` block value |
+| `at:put:`             | replaces existing element at `at:` index with `put:` object                                 |
+| `collect:thenSelect:` | combines `collect:` and `select:`                                                           |
+| `find:`               | answers index of first occurrence of argument value                                         |
+| `removeAll`           | removes all elements                                                                        |
+| `removeAllSuchThat:`  | removes all elements that satisfy argument block                                            |
+| `removeAt:`           | removes element at argument index                                                           |
+| `removeFirst`         | removes first element and answers it                                                        |
+| `removeFirst:`        | removes first argument elements and answers `Array` of them                                 |
+| `removeLast`          | removes first element and answers it                                                        |
+| `removeLast:`         | removes last argument elements and answers `Array` of them                                  |
+| `sort`                | sorts the elements in place                                                                 |
+| `sort:`               | sorts the elements in place using argument block to compare them                            |
 
 The following code creates an instance of `OrderedCollection`
 containing `Symbol` objects that are names of fruits.
@@ -697,7 +697,7 @@ not also defined in the superclasses `Set` or `Collection`.
 | `associationsDo:`           | evaluates argument block for each `Association`                                                                    |
 | `at:`                       | answers value for argument key; error if not found                                                                 |
 | `at:ifAbsent:`              | answers value for `at:` key or `ifAbsent:` value if not found                                                      |
-| `at:ifAbsentPut:`           | answers value for `at:` key; if not found, adds and answers `ifAbsentPut:` value                                   |
+| `at:ifAbsentPut:`           | answers value for `at:` key; if not found, adds and answers `ifAbsentPut:` block value                             |
 | `at:ifPresent:`             | if `at:` key is present, answers value of passing value to `ifAbsent` block; otherwise answers `nil`               |
 | `at:ifPresent:ifAbsent:`    | combines `at:ifPresent` and `at:ifAbsent`                                                                          |
 | `at:put:`                   | adds key `at:` with value `put:`                                                                                   |
