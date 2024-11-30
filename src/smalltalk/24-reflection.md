@@ -150,31 +150,73 @@ argNames := argNodes collect: [:node | node name].
 - `statements` - an `OrderedCollection` of nodes
 
 The class `ParseNode` is the superclass of all nodes produced by the `Parser`.
+It provides the child `comment` to all its subclasses.
+
 They include:
 
 - `AssignmentNode` - assignment to a variable
+
+  Children are `variable` and `value`.
+
 - `BacktickNode` - compound literal evaluated by compiler (surrounded by backticks)
+
+  Child is `expression`.
+
 - `BraceNode`
+
+  Children are in `elements`.
+
 - `CascadeNode`
+
+  Children are in `receiver` and `messages`.
+
 - `CodeNode`
+
   - `BlockNode`
+
+    Children are `arguments` and `statements`.
+
   - `MethodNode`
+
+    Children are `temporaries`, `arguments`, and `block`.
+
 - `LeafNode`
+
   - `LiteralNode`
   - `SelectorNode`
     - `SpecialSelectorNode`
   - `VariableNode`
+
+    This has a `name` property.
+
     - `InstanceVariableNode`
+
       - `MaybeContextInstanceVariableNode`
+
     - `LiteralVariableNode`
+
     - `TempVariableNode`
+
       - `RemoteTempVariableNode`
+
     - `UndeclaredVariableNode`
+
   - `MessageNode`
+
+    Children are `receiver`, `selector`, and `arguments`.
+
     - `MessageAsTempNode`
+
 - `NewArrayNode`
+
+  This has a `numElements` property.
+
 - `ReturnNode` - caret return of a specified value or implicit return of `self`
+
+  This has an `expr` property.
+
 - `TemporariesDeclartionNode`
+
 - `TemporaryDeclartionNode`
 
 TODO: Describe each of the node types above.
