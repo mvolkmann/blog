@@ -135,7 +135,7 @@ argNodes := methodNode arguments.
 argNames := argNodes collect: [:node | node name].
 ```
 
-`MethodNode` objects include the following properties and more:
+`MethodNode` objects include the following instance varaibles and more:
 
 - `block` - a `BlockNode` object (described below)
 - `comment` - an `OrderedCollection` of `UnicodeString` objects
@@ -143,7 +143,7 @@ argNames := argNodes collect: [:node | node name].
 - `sourceText` - a `UnicodeString` containing all the code for the method
 - `temporaries` - an `OrderedCollection` of `TempVariableNode` objects
 
-`BlockNode` objects include the following properties:
+`BlockNode` objects include the following instance varaibles:
 
 - `arguments` - an `Array` of ?
 - `returns` - a `Boolean` that indicates whether the method explicitly returns a value?
@@ -187,7 +187,7 @@ They include:
     - `SpecialSelectorNode`
   - `VariableNode`
 
-    This has a `name` property.
+    This has a `name` instance varaible.
 
     - `InstanceVariableNode`
 
@@ -212,17 +212,22 @@ They include:
 
 - `NewArrayNode`
 
-  This has a `numElements` property.
+  This has a `numElements` instance variable.
 
 - `ReturnNode` - caret return of a specified value or implicit return of `self`
 
-  This has an `expr` property.
+  This has an `expr` instance variable.
 
 - `TemporariesDeclartionNode`
 
 - `TemporaryDeclartionNode`
 
 TODO: Describe each of the node types above.
+
+For an example of parsing Smalltalk code and
+printing a representation of the parse tree, see the GitHub repository
+<a href="https://github.com/mvolkmann/Cuis-Smalltalk-CodeParse"
+target="_blank">CodeParse</a>.
 
 ## Questions
 

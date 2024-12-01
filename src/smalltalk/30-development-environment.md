@@ -99,6 +99,13 @@ One way to send output to a Transcript is `Transcript show: {message}`.
 Another, more compact way is to send the `#print` message to any object.
 To clear the Transcript, send the `#clear` message to the `Transcript` class.
 
+When output is sent to the `Transcript`, it appears in all `Transcript` windows.
+So it doesn't make sense to open more than one.
+
+If content is written to the Transcript,
+but no Transcript window is open,
+opening one will display the previously written content.
+
 Transcript windows are not scrollable,
 so they only display a limited number of lines.
 This is intentional for performance reasons.
