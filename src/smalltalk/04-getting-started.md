@@ -388,7 +388,7 @@ The following code prints "true" to the Transcript
 without adding a trailing newline character.
 
 ```smalltalk
-1 < 2 :: printOn: Transcript
+(1 < 2) printOn: Transcript
 ```
 
 The `print` method works with any kind of object because it is

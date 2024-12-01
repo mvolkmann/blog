@@ -50,6 +50,9 @@ The following table summarizes all the special tokens.
 | `::`  | chains messages to remove need for parentheses                 |
 | `:=`  | assigns result of expression on right to variable on left      |
 
+The `::` binary method is specific to Cuis Smalltalk
+and is not supported in Squeak or Pharo.
+
 ## Syntax Summary
 
 The following table summarizes all the syntax.
@@ -79,7 +82,7 @@ The term "receiver" describes the object to which a message is sent.
 | binary message send (look like operators)          | `<object> <message> <argument>` such as `4 * 5`            |
 | keyword message send                               | `2 raisedTo: 4 modulo: 3`                                  |
 | message cascade - sends to initial receiver        | `Transcript show: 'foo'; newLine; show: 'bar'`             |
-| message chaining - sends to previous result        | `2 * 3 :: squared` (36)                                    |
+| message chaining - sends to previous result        | `2 * 3 :: squared` (36); specific to Cuis Smalltalk        |
 | method return value                                | `^<expression>` such as ^42                                |
 | expression separator (period)                      | `'foo print'. 'bar' print`                                 |
 | parentheses to control evaluation order            | `a * (b + c)`                                              |
