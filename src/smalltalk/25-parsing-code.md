@@ -1,7 +1,7 @@
 ---
 eleventyNavigation:
   key: Parsing Code
-  order: 24
+  order: 25
   parent: Smalltalk
 layout: topic-layout.njk
 ---
@@ -40,8 +40,7 @@ at: key put: anObject
 ```
 
 The `Parser` class parses a string of source code
-that describes an existing method in a given class.
-TODO: Is it required to be code from an existing method?
+that describes a method that is associated with a given class.
 It returns a `MethodNode` object that is the
 root of the parse tree (a.k.a abstract syntax tree).
 The following code parses the code from the previous example:
@@ -62,19 +61,20 @@ argNames := argNodes collect: [:node | node name].
 
 - `block` - a `BlockNode` object (described below)
 - `comment` - an `OrderedCollection` of `UnicodeString` objects
-- `properties` - an `AdditionalMethodState` object (has `selector` property)
+- `properties` - an `AdditionalMethodState` object (has `selector` instance variable)
 - `sourceText` - a `UnicodeString` containing all the code for the method
 - `temporaries` - an `OrderedCollection` of `TempVariableNode` objects
 
 `BlockNode` objects include the following instance varaibles:
 
-- `arguments` - an `Array` of ?
-- `returns` - a `Boolean` that indicates whether the method explicitly returns a value?
+- `arguments` - an `Array` of `TempVariableNode` instances
+- `returns` - a `Boolean` that indicates whether the method
+  explicitly returns using `^` which exits the containing method
 - `statements` - an `OrderedCollection` of nodes
 
 The class `ParseNode` is the superclass of all nodes produced by the `Parser`.
 This class is provided in Cuis and Squeak Smalltalk, but not in Pharo.
-It provides the child `comment` to all its subclasses.
+It provides the instance variable `comment` to all its subclasses.
 
 They include:
 
@@ -116,7 +116,7 @@ They include:
 
   - `SelectorNode` - message selector
 
-    The `key` property holds the selector `String`.
+    The `key` instance variable holds the selector `String`.
 
     - `SpecialSelectorNode` - special message selectors that have their own bytecode for efficiency
 
