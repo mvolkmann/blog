@@ -160,6 +160,13 @@ The example above can be written as follows to write to the Transcript.
 Transcript nextPutAll: 'Hello'; nextPutAll: ', World'; nextPut: $!; cr.
 ```
 
+## Debugging
+
+When a stream variable is selected in the bottom panes of a debugger window,
+the current contents of the stream are displayed in the pane to its right.
+The current contents of a stream can also be displayed by
+selecting a stream variable and using "Inspect" or "Explore".
+
 ## File I/O
 
 ### Files

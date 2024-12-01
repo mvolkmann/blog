@@ -156,29 +156,29 @@ They include:
 
 - `AssignmentNode` - assignment to a variable
 
-  Children are `variable` and `value`.
+  The children are `variable` and `value`.
 
 - `BacktickNode` - compound literal evaluated by compiler (surrounded by backticks)
 
-  Child is `expression`.
+  The only child is `expression`.
 
-- `BraceNode`
+- `BraceNode` - dynamic array
 
-  Children are in `elements`.
+  The children are in `elements`.
 
 - `CascadeNode`
 
-  Children are in `receiver` and `messages`.
+  The children are in `receiver` and `messages`.
 
 - `CodeNode`
 
   - `BlockNode`
 
-    Children are `arguments` and `statements`.
+    The children are `arguments` and `statements`.
 
   - `MethodNode`
 
-    Children are `temporaries`, `arguments`, and `block`.
+    The children are `temporaries`, `arguments`, and `block`.
 
 - `LeafNode`
 
@@ -203,7 +203,7 @@ They include:
 
   - `MessageNode`
 
-    Children are `receiver`, `selector`, and `arguments`.
+    The children are `receiver`, `selector`, and `arguments`.
 
     - `MessageAsTempNode`
 
