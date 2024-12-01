@@ -6,7 +6,7 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-The `Compiler` class can compile strings of Smalltalk code.
+The `Compiler` class can compile and evaluate strings of Smalltalk code.
 For example, `Compiler evaluate: '1+2'` answers `3`.
 
 The class `Class` inherits from `ClassDescription`
@@ -57,7 +57,7 @@ argNodes := methodNode arguments.
 argNames := argNodes collect: [:node | node name].
 ```
 
-`MethodNode` objects include the following instance varaibles and more:
+`MethodNode` objects include the following instance variables and more:
 
 - `block` - a `BlockNode` object (described below)
 - `comment` - an `OrderedCollection` of `UnicodeString` objects
@@ -76,7 +76,7 @@ The class `ParseNode` is the superclass of all nodes produced by the `Parser`.
 This class is provided in Cuis and Squeak Smalltalk, but not in Pharo.
 It provides the instance variable `comment` to all its subclasses.
 
-They include:
+The subclasese of `ParseNode` include:
 
 - `AssignmentNode` - assignment to a variable
 
@@ -118,7 +118,8 @@ They include:
 
     The `key` instance variable holds the selector `String`.
 
-    - `SpecialSelectorNode` - special message selectors that have their own bytecode for efficiency
+    - `SpecialSelectorNode` - special message selectors that
+      have their own bytecode for efficiency
 
   - `VariableNode` - variable of any kind
 
@@ -151,13 +152,16 @@ They include:
 
 - `ReturnNode` - caret return of a specified value or implicit return of `self`
 
-  This has an `expr` instance variable.
+  This has an `expr` instance variable that
+  holds the expression whose value is returned.
 
-- `TemporariesDeclarationNode` - temporary variable declarations (plural) found at the start of a method or block
+- `TemporariesDeclarationNode` - temporary variable declarations (plural)
+  found at the start of a method or block
 
   This class is specific to Cuis Smalltalk.
 
-- `TemporaryDeclarationNode` - temporary variable declaration (singular) found at the start of a method or block
+- `TemporaryDeclarationNode` - temporary variable declaration (singular)
+  found at the start of a method or block
 
   This class is specific to Cuis Smalltalk.
 
