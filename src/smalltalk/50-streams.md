@@ -6,7 +6,8 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-Streams provide a way to iterate over many kinds of collections and resources.
+Streams provide a way to iterate over many kinds of collections and resources,
+including `String` objects.
 They also provide a way to write data.
 
 The class `SequenceableCollection` which is a superclass of `Array`
@@ -105,6 +106,19 @@ stream next print. "nil"
 The `writeStream` method returns a `WriteStream` that can modify the collection.
 It adds the instance variable `writeLimit`
 which is initialized to the collection size.
+
+This class is often used to write to a characters in a string.
+
+The following table describes some of the commonly instance methods defined
+in the `WriteStream` class that write to the stream.
+
+| Method        | Description                                       |
+| ------------- | ------------------------------------------------- |
+| `nextPut:`    | writes a single `Character`                       |
+| `nextPutAll:` | writes all the `Character` elements in a `String` |
+| `newLine`     | writes a newline character                        |
+| `space`       | writes a space character                          |
+| `tab`         | writes a tab character                            |
 
 TODO: So far I can only get a `WriteStream` to modify existing elements,
 not add new ones. For example, this does not work:
