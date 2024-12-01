@@ -205,6 +205,9 @@ They include:
 
     The children are `receiver`, `selector`, and `arguments`.
 
+    The `precedence` instance variable is set to 1 for unary messages,
+    2 for binary messages, and 3 for keyword messages.
+
     - `MessageAsTempNode`
 
 - `NewArrayNode`
