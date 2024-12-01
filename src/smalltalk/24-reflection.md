@@ -162,8 +162,8 @@ They include:
 - `BacktickNode` - compound literal evaluated by compiler (surrounded by backticks)
 
   The only child is `expression`.
-  This class is specific to Cuis Smalltalk
-  and is not supported in Squeak or Pharo.
+
+  This class is specific to Cuis Smalltalk.
 
 - `BraceNode` - dynamic array
 
@@ -174,6 +174,10 @@ They include:
   The children are in `receiver` and `messages`.
 
 - `CodeNode`
+
+  This class is specific to Cuis Smalltalk,
+  but it's subclasses `BlockNode` and `MethodNode`
+  are also provided in Squeak Smalltalk.
 
   - `BlockNode`
 
@@ -223,9 +227,16 @@ They include:
 
 - `TemporariesDeclartionNode`
 
+  This class is specific to Cuis Smalltalk.
+
 - `TemporaryDeclartionNode`
 
+  This class is specific to Cuis Smalltalk.
+
 TODO: Describe each of the node types above.
+
+Squeak Smalltalk adds the classes `CommentNode`, `FieldNode`, and `FutureNode`
+which are not present in Cuis Smalltalk.
 
 For an example of parsing Smalltalk code and
 printing a representation of the parse tree, see the GitHub repository
