@@ -881,6 +881,11 @@ Select a variable name to see its value in the bottom row, fourth pane.
 If the variable has a non-primitive value,
 select it and press cmd-i to inspect it.
 
+To see the class name and instance variables of
+a variable whose name appears in a bottom pane,
+select the variable name, right-click it,
+and select "Inspect" (cmd-i) or "Explore" (cmd-shift-i).
+
 To set breakpoints in methods, add `self halt` message sends
 in selected locations in their code.
 The `halt` and `halt:` methods are defined in the `Object` class.

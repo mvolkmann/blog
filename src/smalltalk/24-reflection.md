@@ -189,9 +189,11 @@ They include:
 
 - `LeafNode` - abstract class that provides shared methods to subclasses
 
-  - `LiteralNode`
+  - `LiteralNode` - literal number or string
 
-  - `SelectorNode`
+  - `SelectorNode` - message selector
+
+    The `key` property holds the selector `String`.
 
     - `SpecialSelectorNode`
 
