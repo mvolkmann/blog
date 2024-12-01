@@ -412,6 +412,9 @@ The following list depicts the class hierarchy for character data:
       - `UnicodeString`
         - `UnicodeSymbol`
 
+Many methods for operating on `String` and `Symbol` instances
+are found in the `SequenceableCollection` class.
+
 Instances of `String` and `UnicodeString` are mutable collections of characters.
 But instances of `CharacterSequence`, `Symbol`, and `UnicodeSymbol` are immutable.
 

@@ -165,33 +165,36 @@ They include:
 
   This class is specific to Cuis Smalltalk.
 
-- `BraceNode` - dynamic array
+- `BraceNode` - dynamic array with the syntax `{expr1. expr2. expr3}`
 
   The children are in `elements`.
 
-- `CascadeNode`
+- `CascadeNode` - cascade of messages using `;`
 
   The children are in `receiver` and `messages`.
 
-- `CodeNode`
+- `CodeNode` - abstract class that provides shared methods to subclasses
 
   This class is specific to Cuis Smalltalk,
   but it's subclasses `BlockNode` and `MethodNode`
   are also provided in Squeak Smalltalk.
 
-  - `BlockNode`
+  - `BlockNode` - block containing expressions to be evaluated later
 
     The children are `arguments` and `statements`.
 
-  - `MethodNode`
+  - `MethodNode` - method definition
 
     The children are `temporaries`, `arguments`, and `block`.
 
-- `LeafNode`
+- `LeafNode` - abstract class that provides shared methods to subclasses
 
   - `LiteralNode`
+
   - `SelectorNode`
+
     - `SpecialSelectorNode`
+
   - `VariableNode`
 
     This has a `name` instance varaible.
@@ -208,7 +211,7 @@ They include:
 
     - `UndeclaredVariableNode`
 
-  - `MessageNode`
+  - `MessageNode` - message sent to a receiver with optional arguments
 
     The children are `receiver`, `selector`, and `arguments`.
 
