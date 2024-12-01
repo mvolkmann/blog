@@ -1177,7 +1177,7 @@ To delete it:
 - Click the blue menu handle and select debug... explore morph.
 - Expand the "root" item.
 - Select the "model" instance variable.
-- In the bottom pane, enter `self delete` and "Do It".
+- In the bottom pane, enter `self delete` and "Do it".
 - Close the Explorer window.
 
 ## Emergency Evaluator

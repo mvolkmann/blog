@@ -195,23 +195,25 @@ They include:
 
     The `key` property holds the selector `String`.
 
-    - `SpecialSelectorNode`
+    - `SpecialSelectorNode` - special message selectors that have their own bytecode for efficiency
 
-  - `VariableNode`
+  - `VariableNode` - variable of any kind
 
     This has a `name` instance varaible.
 
-    - `InstanceVariableNode`
+    - `InstanceVariableNode` - instance variable
 
-      - `MaybeContextInstanceVariableNode`
+      - `MaybeContextInstanceVariableNode` - performance optimization
 
-    - `LiteralVariableNode`
+    - `LiteralVariableNode` - constants and global identifiers
 
-    - `TempVariableNode`
+      These include class names, global variables, and pool dictionary entries.
 
-      - `RemoteTempVariableNode`
+    - `TempVariableNode` - temporary (local) variable
 
-    - `UndeclaredVariableNode`
+      - `RemoteTempVariableNode` - collection of temporary variables shared between closures
+
+    - `UndeclaredVariableNode` - undeclared variable, perhaps used in a "Do it"
 
   - `MessageNode` - message sent to a receiver with optional arguments
 
@@ -222,26 +224,22 @@ They include:
 
     - `MessageAsTempNode`
 
-- `NewArrayNode`
-
-  This has a `numElements` instance variable.
+- `NewArrayNode` - created by the `genPushNewArray:` opcode optimization
 
 - `ReturnNode` - caret return of a specified value or implicit return of `self`
 
   This has an `expr` instance variable.
 
-- `TemporariesDeclartionNode`
+- `TemporariesDeclarationNode` - temporary variable declarations (plural) found at the start of a method or block
 
   This class is specific to Cuis Smalltalk.
 
-- `TemporaryDeclartionNode`
+- `TemporaryDeclarationNode` - temporary variable declaration (singular) found at the start of a method or block
 
   This class is specific to Cuis Smalltalk.
 
-TODO: Describe each of the node types above.
-
-Squeak Smalltalk adds the classes `CommentNode`, `FieldNode`, and `FutureNode`
-which are not present in Cuis Smalltalk.
+Squeak Smalltalk adds the `ParseNode` subclasses `CommentNode`, `FieldNode`,
+and `FutureNode` which are not present in Cuis Smalltalk.
 
 For an example of parsing Smalltalk code and
 printing a representation of the parse tree, see the GitHub repository
