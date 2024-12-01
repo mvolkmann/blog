@@ -150,6 +150,7 @@ argNames := argNodes collect: [:node | node name].
 - `statements` - an `OrderedCollection` of nodes
 
 The class `ParseNode` is the superclass of all nodes produced by the `Parser`.
+This class is provided in Cuis and Squeak Smalltalk, but not in Pharo.
 It provides the child `comment` to all its subclasses.
 
 They include:
@@ -161,6 +162,8 @@ They include:
 - `BacktickNode` - compound literal evaluated by compiler (surrounded by backticks)
 
   The only child is `expression`.
+  This class is specific to Cuis Smalltalk
+  and is not supported in Squeak or Pharo.
 
 - `BraceNode` - dynamic array
 
