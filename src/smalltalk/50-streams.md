@@ -120,6 +120,10 @@ in the `WriteStream` class that write to the stream.
 | `space`       | writes a space character                          |
 | `tab`         | writes a tab character                            |
 
+Methods whose names begin with `nextPut*` write to the
+"next" position in the stream which is typically at the end.
+I kind of wish the method names were shortened to `put*`.
+
 TODO: So far I can only get a `WriteStream` to modify existing elements,
 not add new ones. For example, this does not work:
 
