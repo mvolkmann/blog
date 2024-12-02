@@ -671,8 +671,14 @@ For selected code the options include:
 
 ## Search Browser
 
-There is no provided way to search for code that contains a given string.
-However, Mariano Montone implemented a "Search Browser" that provides this.
+One way to search for code that contains a given text
+is to move focus into the bottom pane of a System Browser, right-click,
+select "Find with Scope" (cmd-e), enter the text, and select a scope.
+The supported scopes are "This method", "All methods in image",
+"Class {selected}", "Class {selected} and subclasses",
+and "Class {selected}, subclasses, and superclasses".
+
+Another way is to use a "Search Browser", created by Mariano Montone.
 
 To install it:
 
@@ -685,9 +691,11 @@ To install it:
 - Enter `Feature require: 'SearchBrowser'` and "Do it".
 
 This adds the World menu item "Open...Search Browser".
-It also adds menu items to the menu that appears in a System Browser
-when you right-click a class name in the top second pane.
-The new menu items are "search in class...",
+It also adds menu items to the menus that appears in a System Browser
+when you right-click a class category or class name in the top panes.
+For a class category, the new menu items are "search in category.."
+and "search in every class...".
+For a class, the new menu items are "search in class...",
 "search in class hierarchy...", and "search in class protocol...".
 These all open a Search Browser with a different search scope.
 
