@@ -110,6 +110,25 @@ The supported assertion methods defined in the `TestCase` class include:
 
   This asserts that evaluating the `should:` block
   will raise the exception specified by `raise:`.
+  For example:
+
+  ```smalltalk
+  self should: [Todo unsupportedDBType] raise: ActiveRecordError
+
+  self
+      should: [Todo unsupportedDBType]
+      raise: ActiveRecordError
+      withExceptionDo: [:exception |
+          self assert:
+              (exception messageText beginsWith: 'unsupported database type ')
+      ].
+
+  "This tests the same condition as above, but more concisely."
+  self
+      should: [Todo unsupportedDBType]
+      raise: ActiveRecordError
+      withMessageText: ['unsupported database type ', Todo dbType].
+  ```
 
 For comparing floating point numbers, consider adding
 the following instance methods to the `TestCase` class.
