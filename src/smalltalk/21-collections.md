@@ -715,6 +715,32 @@ not also defined in the superclasses `Set` or `Collection`.
 | `values`                    | answers `Array` of all values                                                                                      |
 | `valuesDo:`                 | evaluates argument block for each value                                                                            |
 
+The `at:ifAbsentPut` method can be used to implement memoized methods
+that avoid computing their result if the same arguments have been passed before.
+The following code demonstrates this in a method that
+takes an array of numbers and returns their average.
+It caches previously computed values in an `IdentityDictionary`
+that is saved in `Smalltalk` which is also an `IdentityDictionary`.
+
+```smalltalk
+average: numberArray
+    | cache cacheKey valueKey |
+
+    "Smalltalk is a SystemDictionary which is an IdentityDictionary.
+    That is why cacheKey must be a Symbol."
+    cacheKey := ('cache-', thisContext name) asSymbol.
+
+    cache := Smalltalk at: cacheKey ifAbsentPut: [ IdentityDictionary new ].
+    valueKey := thisContext name, thisContext arguments asString :: asSymbol.
+
+    ^ cache at: valueKey ifAbsentPut: [
+        | sum |
+        'computing average' print.
+        sum := numberArray fold: [:acc :n | acc + n].
+        sum / numberArray size.
+    ].
+```
+
 ## OrderedDictionary
 
 The `OrderedDictionary` class is a subclass of `Dictionary`.
