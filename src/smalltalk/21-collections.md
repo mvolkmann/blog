@@ -741,6 +741,8 @@ average: numberArray
     ].
 ```
 
+TODO: Could you write a "memomize" method that simplifies creating new memoized methods?
+
 ## OrderedDictionary
 
 The `OrderedDictionary` class is a subclass of `Dictionary`.
