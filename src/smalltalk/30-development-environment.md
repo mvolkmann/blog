@@ -293,6 +293,15 @@ and pressing cmd-b (Browse it) opens a new System Browser.
 There is no command to navigate to the selected class
 within the current System Browser.
 
+To create a new method, click on a method category or "--all--"
+and modify the code template in the bottom pane.
+Alternatively, click an existing method name in the top last pane,
+modify method header and body, and save the changes.
+This can feel unsettling at first because it may seem
+that the existing method is being modified.
+However, as long as the method name is modified,
+the previous method will not be changed.
+
 After changing the code of a method, press cmd-s to save the changes.
 This causes the method to be compiled.
 If the compiler detects message sends to unknown methods,
@@ -1198,6 +1207,26 @@ Enter the "exit" command to exit this window.
 
 <img alt="Cuis Emergency Evaluator" style="width: 30%"
   src="/blog/assets/cuis-emergency-evaluator.png?v={{pkg.version}}">
+
+## Opening Windows
+
+To open a window of a particular type,
+click on the World, hover over "Open", and click a window type.
+All of these windows use `openInWorld`
+which causes them to open in a seemingly random location.
+
+It would be interesting to add a preference so these windows use `openInHand`
+which would allow users to place the windows where desired
+when they are initially opened.
+
+To cause all subclasses of `SystemWindow` to use `openInHand`,
+modify the `SystemWindow` class method `open:label:`.
+
+To cause Transcript windows to use `openInHand`,
+modify the `Transcript` class method `open`.
+
+TODO: Learn how to do this for other kinds of windows.
+TODO: Can this be controlled by a preference?
 
 ## Menu Item Discovery
 

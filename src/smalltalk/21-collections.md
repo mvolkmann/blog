@@ -717,31 +717,36 @@ not also defined in the superclasses `Set` or `Collection`.
 
 The `at:ifAbsentPut` method can be used to implement memoized methods
 that avoid computing their result if the same arguments have been passed before.
-The following code demonstrates this in a method that
-takes an array of numbers and returns their average.
-It caches previously computed values in an `IdentityDictionary`
+The following code demonstrates this by adding
+the `Object` instance method `memoize:` which takes a block.
+This caches previously computed values in an `IdentityDictionary`
 that is saved in `Smalltalk` which is also an `IdentityDictionary`.
+Using the `memoize:` method is demonstrated in the class method `average:`
+(added to any class) which takes an array of numbers.
 
 ```smalltalk
-average: numberArray
-    | cache cacheKey valueKey |
+memoize: aBlock
+    | cache cacheKey sender valueKey |
+
+    sender := thisContext sender.
 
     "Smalltalk is a SystemDictionary which is an IdentityDictionary.
-    That is why cacheKey must be a Symbol."
-    cacheKey := ('cache-', thisContext name) asSymbol.
+    That is way cacheKey must be a Symbol."
+    cacheKey := ('cache-', sender name) asSymbol.
 
     cache := Smalltalk at: cacheKey ifAbsentPut: [ IdentityDictionary new ].
-    valueKey := thisContext name, thisContext arguments asString :: asSymbol.
+    valueKey := thisContext name, sender arguments asString :: asSymbol.
 
-    ^ cache at: valueKey ifAbsentPut: [
+    ^ cache at: valueKey ifAbsentPut: [ aBlock value ].
+
+average: numberArray
+    ^ self memoize: [
         | sum |
         'computing average' print.
         sum := numberArray fold: [:acc :n | acc + n].
         sum / numberArray size.
     ].
 ```
-
-TODO: Could you write a "memomize" method that simplifies creating new memoized methods?
 
 ## OrderedDictionary
 
