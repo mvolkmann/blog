@@ -731,7 +731,7 @@ memoize: aBlock
     sender := thisContext sender.
 
     "Smalltalk is a SystemDictionary which is an IdentityDictionary.
-    That is way cacheKey must be a Symbol."
+    That is why cacheKey must be a Symbol."
     cacheKey := ('cache-', sender name) asSymbol.
 
     cache := Smalltalk at: cacheKey ifAbsentPut: [ IdentityDictionary new ].
