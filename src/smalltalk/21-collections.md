@@ -715,37 +715,55 @@ not also defined in the superclasses `Set` or `Collection`.
 | `values`                    | answers `Array` of all values                                                                                      |
 | `valuesDo:`                 | evaluates argument block for each value                                                                            |
 
+One way to delete an entry from a `Dictionary` is to inspect it,
+right-click a key in the left column, and select "Remove".
+There are also context menu items to add and rename keys.
+
 The `at:ifAbsentPut` method can be used to implement memoized methods
 that avoid computing their result if the same arguments have been passed before.
 The following code demonstrates this by adding
 the `Object` instance method `memoize:` which takes a block.
 This caches previously computed values in an `IdentityDictionary`
 that is saved in `Smalltalk` which is also an `IdentityDictionary`.
-Using the `memoize:` method is demonstrated in the class method `average:`
-(added to any class) which takes an array of numbers.
 
 ```smalltalk
 memoize: aBlock
+    "Cache the result of evaluating a method with specific arguments.
+    This intended for use in class methods that only use their arguments.
+    For example, here is a memoized class method that
+    returns a String containing a number of spaces.
+
+    indentDepth: aNumber
+    ^ self memoize: [
+        String new: aNumber * 4 withAll: Character space.
+    ]
+
+    To clear the cache for all methods in a given class, send
+    Object clearMemo: 'SomeClassName'
+    "
     | cache cacheKey sender valueKey |
 
     sender := thisContext sender.
 
     "Smalltalk is a SystemDictionary which is an IdentityDictionary.
     That is why cacheKey must be a Symbol."
-    cacheKey := ('cache-', sender name) asSymbol.
+    cacheKey := ('memo-', sender name) asSymbol.
 
     cache := Smalltalk at: cacheKey ifAbsentPut: [ IdentityDictionary new ].
     valueKey := thisContext name, sender arguments asString :: asSymbol.
 
-    ^ cache at: valueKey ifAbsentPut: [ aBlock value ].
+    ^ cache at: valueKey ifAbsentPut: [ aBlock value ].memoize: aBlock
+```
 
-average: numberArray
+Using the `memoize:` method is demonstrated in the class method `indentDepth:`
+(added to any class) which takes an integer and
+returns a string with four times that number of spaces.
+
+```smalltalk
+indentDepth: aNumber
     ^ self memoize: [
-        | sum |
-        'computing average' print.
-        sum := numberArray fold: [:acc :n | acc + n].
-        sum / numberArray size.
-    ].
+        String new: aNumber * 4 withAll: Character space.
+    ]
 ```
 
 ## OrderedDictionary
