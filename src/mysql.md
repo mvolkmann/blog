@@ -41,24 +41,20 @@ To enter interactive mode, enter `/opt/homebrew/bin/mysql -u root`.
 
 The following list includes commonly used interactive commands:
 
-- show databases;
-- create database {database-name};
-- drop database {database-name};
-- use {database-name};
-- show tables;
-- drop table if exists {table-name};
-- create table {table-name} ({col-name} {col-type}, ...);
+- `show databases;`
+- `create database {database-name};`
+- `drop database {database-name};`
+- `use {database-name};`
+- `show tables;`
+- `drop table if exists {table-name};`
+- `create table {table-name} ({col-name} {col-type}, ...);`
   - for example,
-    create table todos (
-    id int auto_increment primary key,
-    description text,
-    completed boolean
-    );
-- describe {table-name};
-- insert into {table-name} ({col1}, {col2}, ...) values ({v1}, {v2}, ...);
-- select \* from {table-name};
-- source {file-name}.sql;
-- exit
+    `create table todos ( id int auto_increment primary key, description text, completed boolean );`
+- `describe {table-name};`
+- `insert into {table-name} ({col1}, {col2}, ...) values ({v1}, {v2}, ...);`
+- `select \* from {table-name};`
+- `source {file-name}.sql;`
+- `exit`
 
 ## Supported Column Types
 
