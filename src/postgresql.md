@@ -33,41 +33,69 @@ Cons of PostgreSQL include:
 
 ## Installing
 
-To install PostgreSQL in macOS, use Homebrew with the command
-`brew install postgresql`.
+To install PostgreSQL in macOS, use Homebrew with the commands
+`brew uninstall libpq` and `brew install postgresql@14`.
+Verify the install by entering `psql --version`.
 
-To build PostgreSQL from source:
+If running in macOS with an Apple silicon processor and
+PostgreSQL has been previously install while using a non-silicon processor,
+enter the following commands to delete the previously installed commands.
+This will allow the newly installed versions
+in the `/opt/homebrew/bin` directory to be used instead.
 
-1. Download and unzip.
-1. cd to the unzipped directory.
-1. Enter `./configure`
-1. Enter `make`
-1. Enter `sudo make install`
+````bash
+rm /usr/local/bin/clusterdb
+rm /usr/local/bin/createdb
+rm /usr/local/bin/createuser
+rm /usr/local/bin/dropdb
+rm /usr/local/bin/dropuser
+rm /usr/local/bin/initdb
+rm /usr/local/bin/pg*
+rm /usr/local/bin/postgres
+rm /usr/local/bin/psql
+rm /usr/local/bin/reindexdb
+rm /usr/local/bin/vacuumdb
+rm -rf /usr/local/var/postgres
 
-If an installer is used, a default user named "postgres" is created
-and it prompts for a password to assign to the user during the install.
-All the commands are installed in `/usr/local/bin`.
-Add `-Upostgres` to all commands to run as that user.
-It seems that the server is always running when installed this way.
+Modify your shell startup script to set the `PGDATA` environment variable.
+In zsh, modify `~/.zshenv` to include the following:
+
+```bash
+export PGDATA="/opt/homebrew/var/postgres"
+````
 
 ## Getting Started
 
 To create the initial files required by the database server, enter
 
 ```bash
-initdb -D /usr/local/pgsql/data
+initdb
 ```
+
+This creates the directory `/opt/homebrew/var/postgres`.
 
 To start the database server, enter
 
 ```bash
-pg_ctl -D /usr/local/pgsql/data -l logfile start
+brew services start postgresql@14
+```
+
+OR
+
+```bash
+pg_ctl -D /opt/homebrew/var/postgres start
 ```
 
 To stop the database server, enter
 
 ```bash
-pg_ctl -D /usr/local/pgsql/data stop -m fast
+brew services stop postgresql@14
+```
+
+OR
+
+```bash
+pg_ctl -D /opt/homebrew/var/postgres stop
 ```
 
 To create a database, enter `createdb {db-name}`.
