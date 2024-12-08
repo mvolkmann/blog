@@ -235,6 +235,16 @@ factorial2
         ifFalse: [self * (self - 1) factorial2])
 ```
 
+Here is another example that recursively computes a Fibonacci number.
+
+```smalltalk
+fibonacci
+
+    self = 0 ifTrue: [ ^0 ].
+    self = 1 ifTrue: [ ^1 ].
+    ^ (self - 1) fibonacci + (self - 2) fibonacci.
+```
+
 If you edit the name of a method in code editing pane of a System Browser,
 it will create a copy of the method with the new name.
 The method with the previous name will still exist and can be deleted.

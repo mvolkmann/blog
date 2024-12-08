@@ -730,17 +730,8 @@ that is saved in `Smalltalk` which is also an `IdentityDictionary`.
 memoize: aBlock
     "Cache the result of evaluating a method with specific arguments.
     This intended for use in class methods that only use their arguments.
-    For example, here is a memoized class method that
-    returns a String containing a number of spaces.
-
-    indentDepth: aNumber
-    ^ self memoize: [
-        String new: aNumber * 4 withAll: Character space.
-    ]
-
     To clear the cache for all methods in a given class, send
-    Object clearMemo: 'SomeClassName'
-    "
+    Object clearMemo: 'SomeClassName'"
     | cache cacheKey sender valueKey |
 
     sender := thisContext sender.
@@ -763,6 +754,18 @@ returns a string with four times that number of spaces.
 indentDepth: aNumber
     ^ self memoize: [
         String new: aNumber * 4 withAll: Character space.
+    ]
+```
+
+Here is another class method that uses `memoize:`
+to avoid repeated computations:
+
+```smalltalk
+fibonacci: anInteger
+    ^ self memoize: [
+        anInteger = 0 ifTrue: [ 0 ]
+        ifFalse: [ anInteger = 1 ifTrue: [ 1 ]
+        ifFalse: [ (self fibonacci: (anInteger - 1)) + (self fibonacci: (anInteger - 2)) ] ]
     ]
 ```
 

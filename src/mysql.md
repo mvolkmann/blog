@@ -49,7 +49,7 @@ The following list includes commonly used interactive commands:
 - `drop table if exists {table-name};`
 - `create table {table-name} ({col-name} {col-type}, ...);`
   - for example,
-    `create table todos ( id int auto_increment primary key, description text, completed boolean );`
+    `create table todos (id int auto_increment primary key, description text, completed boolean, unique (description));`
 - `describe {table-name};`
 - `insert into {table-name} ({col1}, {col2}, ...) values ({v1}, {v2}, ...);`
 - `select \* from {table-name};`
