@@ -25,8 +25,15 @@ To get the initials of the current user, evaluate `OSProcess authorInitials`.
 To get the current working directory:
 
 ```smalltalk
-process := ThisOSProcess thisOSProcess.
+process := OSProcess thisOSProcess.
 cwd := process getCwd.
+```
+
+To get the value of an environment variable:
+
+```smalltalk
+process := OSProcess thisOSProcess.
+value := process environmentAt: 'HOME'.
 ```
 
 TODO: There are many more classes and methods in the OSProcess package that should be documented here.
