@@ -36,4 +36,15 @@ process := OSProcess thisOSProcess.
 value := process environmentAt: 'HOME'.
 ```
 
+Another way to do this is to add a class method like the following
+that uses FFI to any class:
+
+```smalltalk
+getenv: aString
+    "Answer value of environment variable with the given name of nil if not found."
+
+    <cdecl: char* 'getenv' (char*) module: 'libSystem.dylib'>
+    ^self externalCallFailed
+```
+
 TODO: There are many more classes and methods in the OSProcess package that should be documented here.
