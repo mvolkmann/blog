@@ -151,6 +151,9 @@ If an image is started in a way that does not
 set the `DYLD_LIBRARY_PATH` environment variable
 and an attempt is made to open an `ODBCConnetion`,
 the error message "External module not found" will be displayed.
+(My "ActiveRecord" package checks for this
+in the `establishConnection:dbType:` method and
+signals an `ActiveRecordError` if the environment variable is not set.)
 
 TODO: In macOS, you may be able to set that environment variable
 in a way that makes it accessible to apps that are started

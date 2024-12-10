@@ -36,8 +36,8 @@ process := OSProcess thisOSProcess.
 value := process environmentAt: 'HOME'.
 ```
 
-Another way to do this is to add a class method like the following
-that uses FFI to any class:
+Another way to do this is to add a class method like the following that
+uses FFI to any class (perhaps `Object` so it can be called from anywhere):
 
 ```smalltalk
 getenv: aString
