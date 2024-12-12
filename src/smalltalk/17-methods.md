@@ -20,6 +20,10 @@ messageSelectorAndArgumentNames
     statements
 ```
 
+The convention for indentation it to use tab characters,
+but spaces can also be used, as can no indentation at all.
+Unlike Python, indentation in Smalltalk is not significant.
+
 Other programming languages use a keyword
 like `function`, `func`, `fun`, or `fn`
 to identify the start of a function or method definition.

@@ -65,16 +65,13 @@ it is also used to implement exception handling and continuations."
 The value of `thisContext` is either
 a `MethodContext` or a `BlockContext` object.
 
-`MethodContext` object instance variables include:
-
-- `sender` - another `MethodContext` object that describes the object
-  that sent the message which caused the current method to be executed
-- `receiver` - the object to which the message was sent
-- `method` - a `CompiledMethod` object
-
 `MethodContext` object instance methods include:
 
-- arguments - answers an `Array` containing all the arguments passed to the method
+- `arguments` - answers an `Array` containing all the arguments passed to the method
+- `method` - answers a `CompiledMethod` object describing the current method
+- `receiver` - answers the object to which the message was sent
+- `sender` - answers another `MethodContext` object that describes the object
+  that sent the message which caused the current method to be executed
 - TODO: Add more!
 
 ## Instance Variables
