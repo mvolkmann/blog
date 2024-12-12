@@ -197,9 +197,14 @@ displays related information in the top right pane.
   of all instance variables and their values.
 - Click the name of an instance to display its current value.
 
+To modify the value of an instance variable,
+select the variable in the left pane,
+modify the value in the right pane,
+and press cmd-s to save the change.
+
 The bottom pane can be used to enter and execute Smalltalk expressions.
-Instance variables can be directly accessed and
-where `self` refers to the object being inspected.
+Instance variables can be directly accessed by
+using `self` which refers to the object being inspected.
 For example, when the object is a `Morph`:
 
 - To get the value of the `color` instance variable,
@@ -209,7 +214,9 @@ For example, when the object is a `Morph`:
   and press cmd-d (Do it).
 
 Inspector windows are live, so changes made to the instance variables
-are reflected.
+are reflected. This includes changes made anywhere including
+the bottom pane of the Inspect window, Workspaces,
+and any place that code can be executed.
 
 Let's walk through an example:
 
@@ -256,6 +263,10 @@ changes `self` to refer to that object.
 
 <img alt="Cuis Explore window" style="width: 40%"
   src="/blog/assets/cuis-explore-window.png?v={{pkg.version}}">
+
+Unlike Inspector windows, Explore windows are not live.
+Changes made to the instance variables are not reflected,
+regardless of where the changes are made.
 
 ## System Browsers
 
