@@ -53,14 +53,29 @@ For example, is typical for the instance method `initialize`
 to begin with `super initialize`.
 We will have more to say about the `initialize` method later.
 
+### thisContext
+
 From the
 <a href="https://cuis-smalltalk.github.io/TheCuisBook/Pseudo_002dvariables.html"
 target="_blank">Cuis book</a>, "`thisContext` ...
 represents the top frame of the run-time stack. ...
 It is essential for implementing development tools like the Debugger and
 it is also used to implement exception handling and continuations."
+
 The value of `thisContext` is either
 a `MethodContext` or a `BlockContext` object.
+
+`MethodContext` object instance variables include:
+
+- `sender` - another `MethodContext` object that describes the object
+  that sent the message which caused the current method to be executed
+- `receiver` - the object to which the message was sent
+- `method` - a `CompiledMethod` object
+
+`MethodContext` object instance methods include:
+
+- arguments - answers an `Array` containing all the arguments passed to the method
+- TODO: Add more!
 
 ## Instance Variables
 
