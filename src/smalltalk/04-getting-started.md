@@ -48,6 +48,9 @@ the update number, and the file path to the image that is running.
 It also opens a "Text Editor" window
 that provides an overview of Cuis Smalltalk.
 
+To get the Cuis Smalltalk version from code, evaluate
+`SystemDictionary new versionString`.
+
 The file `CuisVM.app` (36 MB) includes the Squeak virtual machine (VM).
 This does not differ in any way from the VM used by Squeak.
 All the differences between Cuis and Squeak are implemented in
