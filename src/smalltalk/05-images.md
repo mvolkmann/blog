@@ -54,6 +54,5 @@ There are three ways to discover the file path of the current image:
 1. Open the World menu and select Help...About this System...
    This opens a Text Editor window that displays a description of Cuis Smalltalk.
    It also displays a popup containing the same information as described above.
-1. Open a Workspace, enter `DirectoryEntry smalltalkImageDirectory`
-   or `SystemDictionary new imageName`, and "Print it".
+1. Open a Workspace, enter `SystemDictionary new imageName` and "Print it".
    This outputs the directory path of the current image without its file name.
