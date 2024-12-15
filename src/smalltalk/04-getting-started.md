@@ -41,6 +41,13 @@ in the installed directory based on your operating system.
      would like to access files in your Documents folder'.
      Click the "Allow" button each time.
 
+To determine the version of Cuis Smalltalk that is running,
+open the World menu and select "Help ... About this System...".
+This opens a popup that lists the version of Cuis Smalltalk,
+the update number, and the file path to the image that is running.
+It also opens a "Text Editor" window
+that provides an overview of Cuis Smalltalk.
+
 The file `CuisVM.app` (36 MB) includes the Squeak virtual machine (VM).
 This does not differ in any way from the VM used by Squeak.
 All the differences between Cuis and Squeak are implemented in

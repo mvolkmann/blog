@@ -64,7 +64,7 @@ changing its aspect ratio.
 Other options do not change the aspect ratio of the image.
 
 To cover the window with an image where the right or bottom of the image
-can be clipped, set the following preference before
+can be clipped, set the following preference BEFORE
 sending `#backgroundImageData` to the running World:
 
 ```smalltalk
@@ -1033,6 +1033,10 @@ To instead start from the root directory of the drive,
 right-click in the upper-left pane and
 select "default initial directories...OS roots".
 This change will not take effect until a new File List is opened.
+
+To sort the list of files by name, date, or size,
+click the corresponding column header.
+Click again to reverse the direction of the sort.
 
 A File List window can be used to:
 
