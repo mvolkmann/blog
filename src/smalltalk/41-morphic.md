@@ -563,10 +563,27 @@ imageMorph openInWorld.
 
 ## Creating a Custom Morph
 
-Custom morphs are typically implemented as subclasses of the
-`PlacedMorph` or `BorderedBoxMorph` class and implement the `drawOn:` method.
-These can be directly dragged to new locations.
-Otherwise dragging requires opening the `Morph` halo and using the Move handle.
+A custom morph is implemented as a subclass of `Morph` or one of its subclasses.
+The `drawOn:` method must be implemented to describe what to render.
+This is passed an object from a subclass of `MorphicCanvas` object.
+Typically this is `VectorCanvas` or `Hybrid` canvas.
+
+`Morph` and `PlacedMorph` use a `VectorCanvas` by default.
+`BoxMorph` uses `HybridCanvas` by default,
+but can be configured to use `VectorCanvas` instead by
+implementing the `requiresVectorCanvas` method to return `true`.
+
+Subclasses of `BoxMorph` should implement the `defaultExtent` method
+to return the desired size. For example:
+
+```smalltalk
+defaultExtent
+    ^`200@200`
+```
+
+Custom morphs that are subclasses of `PlacedMorph` (or one of its subclasses)
+can be directly dragged to new locations.
+Otherwise dragging requires opening the `Morph` halo and using the "Move" handle.
 
 The following example includes the instance variable `extent`
 to allow the width and height to be used to determine what to draw.
