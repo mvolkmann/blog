@@ -566,7 +566,8 @@ imageMorph openInWorld.
 A custom morph is implemented as a subclass of `Morph` or one of its subclasses.
 The `drawOn:` method must be implemented to describe what to render.
 This is passed an object from a subclass of `MorphicCanvas` object.
-Typically this is `VectorCanvas` or `Hybrid` canvas.
+Typically this is `VectorCanvas` or `HybridCanvas`.
+This defines the supported drawing methods.
 
 `Morph` and `PlacedMorph` use a `VectorCanvas` by default.
 `BoxMorph` uses `HybridCanvas` by default,
