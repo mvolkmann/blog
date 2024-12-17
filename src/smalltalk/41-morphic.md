@@ -574,6 +574,8 @@ Subclasses of `Morph`:
 
 - do not have a specified "extent" (size)
 - use the coordinate system of their owner, which can be a `WorldMorph`
+  (for example, if the owner is scaled by a factor of 2
+  then this will be also)
 - use a `VectorCanvas`
 - if the `drawOn:` method is not overridden,
   it will fill the morph with a blue rectangle
@@ -606,6 +608,10 @@ Examples include:
 - `fillRectangle:color:`
 - `circleCenter:radius:`
 - `drawString:from:to:atBaseline:font:color:`
+- TODO: Add more!
+
+Lines have rounded endpoints by default.
+TODO: Is there a way to change this?
 
 Subclasses of `BoxMorph` should implement the `defaultExtent` method
 to return the desired size. For example:
