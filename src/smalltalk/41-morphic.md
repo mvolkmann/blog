@@ -595,6 +595,8 @@ Subclasses of `BoxMorph`:
   if their `requiresVectorCanvas` method returns `true`
 - if the `drawOn:` method is not overridden,
   it will fill the morph with a light green rectangle
+- automatically clips its contents to its extent
+  (major difference between this class and the previous two!)
 
 Many of the drawing methods are defined in the superclasses
 `AbstractVectorCanvas` and `MorphicCanvas`.
