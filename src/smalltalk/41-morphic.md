@@ -131,7 +131,8 @@ To change the colors used by a `Morph` from its halo:
   but it does not have a border.
   TODO: What does "adoptWidgetsColor:" do?
 
-To get the size of any `Morph`, send it the `#extentInWorld` message.
+To get the size of an instance of `BoxMorph` or one of its subclasses,
+send it the `#extentInWorld` message.
 
 To explicitly set the size of a `Morph`, send it:
 
@@ -569,6 +570,32 @@ This is passed an object from a subclass of `MorphicCanvas` object.
 Typically this is `VectorCanvas` or `HybridCanvas`.
 This defines the supported drawing methods.
 
+Subclasses of `Morph`:
+
+- do not have a specified "extent" (size)
+- use the coordinate system of their owner, which can be a `WorldMorph`
+- use a `VectorCanvas`
+- if the `drawOn:` method is not overridden,
+  it will fill the morph with a blue rectangle
+  that is centered at origin, has a width of 150, and a height of 140
+
+Subclasses of `PlacedMorph`
+
+- do not have a specified "extent" (size)
+- use their own local coordinate system
+- can be dragged to a new location
+- use a `VectorCanvas`
+- inherits the `drawOn:` method defined in its superclass `Morph`
+
+Subclasses of `BoxMorph`:
+
+- have an "extent" (size) specified by their `defaultExtent` method
+  which defaults to `50@40`
+- use a `HybridCanvas` by default, but will use a `VectorCanvas`
+  if their `requiresVectorCanvas` method returns `true`
+- if the `drawOn:` method is not overridden,
+  it will fill the morph with a light green rectangle
+
 Many of the drawing methods are defined in the superclasses
 `AbstractVectorCanvas` and `MorphicCanvas`.
 Examples include:
@@ -577,11 +604,6 @@ Examples include:
 - `fillRectangle:color:`
 - `circleCenter:radius:`
 - `drawString:from:to:atBaseline:font:color:`
-
-`Morph` and `PlacedMorph` use a `VectorCanvas` by default.
-`BoxMorph` uses `HybridCanvas` by default,
-but can be configured to use `VectorCanvas` instead by
-implementing the `requiresVectorCanvas` method to return `true`.
 
 Subclasses of `BoxMorph` should implement the `defaultExtent` method
 to return the desired size. For example:
