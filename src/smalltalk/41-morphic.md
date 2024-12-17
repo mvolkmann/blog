@@ -569,6 +569,15 @@ This is passed an object from a subclass of `MorphicCanvas` object.
 Typically this is `VectorCanvas` or `HybridCanvas`.
 This defines the supported drawing methods.
 
+Many of the drawing methods are defined in the superclasses
+`AbstractVectorCanvas` and `MorphicCanvas`.
+Examples include:
+
+- `line:to:width:color:`
+- `fillRectangle:color:`
+- `circleCenter:radius:`
+- `drawString:from:to:atBaseline:font:color:`
+
 `Morph` and `PlacedMorph` use a `VectorCanvas` by default.
 `BoxMorph` uses `HybridCanvas` by default,
 but can be configured to use `VectorCanvas` instead by
