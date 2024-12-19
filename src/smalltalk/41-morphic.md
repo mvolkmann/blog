@@ -611,7 +611,7 @@ Examples include:
 - TODO: Add more!
 
 Lines have rounded endpoints by default.
-TODO: Is there a way to change this?
+TODO: Can the line cap be changed to square, butt, or round like in SVG?
 
 Subclasses of `BoxMorph` should implement the `defaultExtent` method
 to return the desired size. For example:
