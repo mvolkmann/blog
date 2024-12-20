@@ -618,6 +618,7 @@ Examples include:
 - `fillRectangle:color:`
 - `circleCenter:radius:`
 - `drawString:from:to:atBaseline:font:color:`
+- `image:at:` (see example below under "Drawing Images")
 - TODO: Add more!
 
 Lines have rounded endpoints by default.
@@ -765,6 +766,18 @@ openAtCursor
 
 Drawing-related methods like `drawOn:`
 should be placed in the "drawing" method category.
+
+### Drawing Images
+
+The following code can be used in a `drawOn:` method
+to draw an image on a canvas:
+
+```smalltalk
+filePath := '/Users/volkmannm/Pictures/logos/Smalltalk-balloon.png'.
+form := Form fromFileNamed: filePath.
+form := form magnifyBy: 0.25.
+aCanvas image: form at: 0@0
+```
 
 ## Text Entry
 
