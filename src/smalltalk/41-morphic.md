@@ -560,10 +560,13 @@ target="_blank">VisualParadox</a>.
 "Relative file references start from the Cuis-Smalltalk-Dev-UserFiles directory."
 filePath := '/Users/volkmannm/Pictures/images/altitude1600.jpg'.
 form := Form fromFileNamed: filePath.
+form := form magnifyBy: 0.25. "scale to 1/4 size"
 morph := ImageMorph new image: form.
 morph scaleBy: 0.25.
 morph openInWorld.
 ```
+
+A `Form` is a rectangular array of pixels that holds an image.
 
 PNG and TIFF files are not supported by default.
 To add support for those,
