@@ -557,9 +557,12 @@ target="_blank">VisualParadox</a>.
     src="/blog/assets/altitude1600.jpg?v={{pkg.version}}">
 
 ```smalltalk
+"Relative file references start from the Cuis-Smalltalk-Dev-UserFiles directory."
 filePath := '/Users/volkmannm/Pictures/images/altitude1600.jpg'.
-imageMorph := ImageMorph new image: (Form fromFileNamed: filePath).
-imageMorph openInWorld.
+form := Form fromFileNamed: filePath.
+morph := ImageMorph new image: form.
+morph scaleBy: 0.25.
+morph openInWorld.
 ```
 
 ## Creating a Custom Morph
