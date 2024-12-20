@@ -565,6 +565,10 @@ morph scaleBy: 0.25.
 morph openInWorld.
 ```
 
+PNG and TIFF files are not supported by default.
+To add support for those,
+evaluate `Feature require: 'Graphics-Files-Additional'`.
+
 ## Creating a Custom Morph
 
 A custom morph is implemented as a subclass of `Morph` or one of its subclasses.
