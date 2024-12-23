@@ -614,11 +614,16 @@ Many of the drawing methods are defined in the superclasses
 `AbstractVectorCanvas` and `MorphicCanvas`.
 Examples include:
 
-- `line:to:width:color:`
-- `fillRectangle:color:`
+- `arcTo:radius:angleOfXAxis:largeFlag:sweepFlag:`
 - `circleCenter:radius:`
 - `drawString:from:to:atBaseline:font:color:`
+- `ellipseCenter:radius:rotationAngle:
+  - `elipseCenter:` - `Point` where x/y represents the center location
+  - `radius:` - `Point` where x is major axis radius and y is minor axis radius
+  - `rotationAngle:` - `Number` of radians
+- `fillRectangle:color:`
 - `image:at:` (see example below under "Drawing Images")
+- `line:to:width:color:`
 - TODO: Add more!
 
 Lines have rounded endpoints by default.

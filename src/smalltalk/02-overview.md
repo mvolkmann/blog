@@ -247,6 +247,14 @@ Smalltalk has the following cons:
   This means there are fewer people available
   to answer questions for new developers.
 
+- Libraries are limited.
+
+  While there are many Smalltalk librarries- Libraries are limited.
+
+  While there are many available Smalltalk libraries,
+  there are far fewer than in more popular programming language ecosystems
+  such as Java, JavaScript, and Python.
+
 - Library documentation is lacking.
 
   Many Smalltalk libraries have little to no documentation and example code.
@@ -309,6 +317,7 @@ Smalltalk has the following cons:
   only what is needed to run the application being developed?
 
 - The image file can be large.
+
   The base image for Cuis Smalltalk is 19 MB, but installing
   optional packages can easily increase the size to around 200 MB.
   However, it is common to store custom code and modifications to

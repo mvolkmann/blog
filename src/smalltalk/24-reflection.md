@@ -15,6 +15,7 @@ The following table lists some of them.
 | `object class`                                          | the class of `object`                                                                                        |
 | `object instVarNamed: #varName`                         | the value of an instance variable in `object`                                                                |
 | `object instVarNamed: #varName` put: newValue           | sets value of an instance variable in `object` and answers new value                                         |
+| `object respondsTo: #selectorSymbol`                    | answers `Boolean` indicating if the object responds to a given method selector                               |
 | `SomeClass name`                                        | the name of the class as a `String`                                                                          |
 | `Smalltalk allClasses`                                  | an `Array` of all classes defined in the current image                                                       |
 | `Smalltalk allClassesImplementing: #selector`           | an `Array` of all classes that implement a given selector                                                    |
