@@ -45,19 +45,37 @@ If `otherwise:` is not used and no match is found, the error
 For example:
 
 ```smalltalk
-color := 'blue'.
+color := #blue.
 
 assessment := color caseOf: {
-    ['red'] -> ['hot'].
-    ['green'] -> ['warm'].
-    ['blue'] -> ['cold']
+    [#red] -> ['hot'].
+    [#green] -> ['warm'].
+    [#blue] -> ['cold']
 }.
 
 assessment := color caseOf: {
-    ['red'] -> ['hot'].
-    ['green'] -> ['warm'].
-    ['blue'] -> ['cold']
+    [#red] -> ['hot'].
+    [#green] -> ['warm'].
+    [#blue] -> ['cold']
 } otherwise: ['unknown'].
+```
+
+Using `caseOf:` requires a sequential search for a matching value.
+If there are a large number of cases, consider using a `Dictionary`
+that is initialized one time outside the methods that use it.
+The values can be blocks containing arbitrary code.
+For example:
+
+```smalltalk
+colorToAssessment := Dictionary newFrom: {
+    #red -> ['hot'].
+    #green -> ['warm'].
+    #blue -> ['cold']
+}.
+
+...
+
+assessment := colorToAssessment at: color.
 ```
 
 Using nested `#ifTrue:ifFalse:` messages can be verbose and
