@@ -608,7 +608,9 @@ Subclasses of `BoxMorph`:
 - if the `drawOn:` method is not overridden,
   it will fill the morph with a light green rectangle
 - automatically clips its contents to its extent
-  (major difference between this class and the previous two!)
+  (This is a major difference between this class and the previous two.
+  Those can also clip submorphs (morphs added using the `addMorph:` method)
+  if the implement the `clipSubmorphs` method to return `true`.)
 - display drawing artifacts (trail of left behind pixels)
   if anything is drawn outside of the bounding rectangle
   which requires clipping and the morph is dragged
