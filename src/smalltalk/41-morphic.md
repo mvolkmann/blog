@@ -609,6 +609,15 @@ Subclasses of `BoxMorph`:
   it will fill the morph with a light green rectangle
 - automatically clips its contents to its extent
   (major difference between this class and the previous two!)
+- display drawing artifacts (trail of left behind pixels)
+  if anything is drawn outside of the bounding rectangle
+  which requires clipping and the morph is dragged
+  (avoid by not drawing outside the bounding rectangle)
+
+`BoxMorph` provides excellent drag performance in part because
+it does not take the time to clean up the drawing artifacts.
+It assumes that subclasses will not draw outside its bounding rectangle
+so no cleanup is necessary.
 
 Many of the drawing methods are defined in the superclasses
 `AbstractVectorCanvas` and `MorphicCanvas`.
