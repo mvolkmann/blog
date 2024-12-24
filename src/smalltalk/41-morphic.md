@@ -610,7 +610,8 @@ Subclasses of `BoxMorph`:
 - automatically clips its contents to its extent
   (This is a major difference between this class and the previous two.
   Those can also clip submorphs (morphs added using the `addMorph:` method)
-  if the implement the `clipSubmorphs` method to return `true`.)
+  if the implement the `clipSubmorphs` method to return `true`.
+  For an example, see the class `Sample07Clipping`.)
 - display drawing artifacts (trail of left behind pixels)
   if anything is drawn outside of the bounding rectangle
   which requires clipping and the morph is dragged
