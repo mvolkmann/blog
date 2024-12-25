@@ -1059,16 +1059,26 @@ This opens an "Installed Packages" window.
 <img alt="Cuis Installed Packages" style="width: 100%"
   src="/blog/assets/cuis-installed-packages.png?v={{pkg.version}}">
 
+To see a description of a package, select the package
+and see the text in the pane above the bottom one
+that contains the "delete" and "update" buttons.
+The description text can be modified
+and should be entered for packages you create.
+
 To browse everything that is defined in a package,
-select the package and click the "Browse" button.
-This opens a System Browser that is focused on the selected package.
+select the package and click the "browse" button.
+This opens a System Browser that only shows classes
+that are defined and/or modified by the selected package.
+This includes classes defined in other packages
+in which the selected package adds methods.
 
 To create a new package:
 
 - Click the "new" button in the center strip of buttons.
 - Enter a package name. For example, "Volkmann".
 - Select the newly created package.
-- Enter a comment describing the package.
+- Enter a description of the package in the pane just above the last one
+  that contains the "delete" and "update" buttons.
 - Click the "Save" button.
 - You will be prompted for the file path and name
   where the package will be saved.
@@ -1079,6 +1089,15 @@ To create a new package:
 If package name matches the name of a class category
 that was created previously, all the classes in that category
 and their methods will automatically be associated with the new package.
+Otherwise, to add classes to a new package:
+
+- Open a Browser window.
+- Right-click in the first top pane and select "Add Category...".
+- Enter the name given to the new package.
+- Create classes in the new class category.
+
+Deleting a package does not delete the corresponding class category and
+deleting a class category does not delete the corresponding package.
 
 I created a package whose name is my last name.
 I use this package to save all my experimental code
