@@ -1088,7 +1088,7 @@ To create a new package:
 
 If package name matches the name of a class category
 that was created previously, all the classes in that category
-and their methods will automatically be associated with the new package.
+will automatically be associated with the new package.
 Otherwise, to add classes to a new package:
 
 - Open a Browser window.
