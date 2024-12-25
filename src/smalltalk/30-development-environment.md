@@ -385,6 +385,8 @@ System Browsers contain four rows.
   only includes methods that are directly implemented by the class,
   not those define in superclasses that are available via inheritance.
   To see all available methods, open a Protocol Browser.
+  To open a Method Browser focused on a single method,
+  right-click a method name and select "Browse Method".
 
   The names in the class category and method category panes
   are not sorted alphabetically by default.
