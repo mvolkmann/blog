@@ -608,18 +608,23 @@ Subclasses of `BoxMorph`:
 - if the `drawOn:` method is not overridden,
   it will fill the morph with a light green rectangle
 - automatically clips its contents to its extent
-  (This is a major difference between this class and the previous two.
-  Those can also clip submorphs (morphs added using the `addMorph:` method)
-  if the implement the `clipSubmorphs` method to return `true`.
-  For an example, see the class `Sample07Clipping`.)
 - display drawing artifacts (trail of left behind pixels)
   if anything is drawn outside of the bounding rectangle
   which requires clipping and the morph is dragged
   (avoid by not drawing outside the bounding rectangle)
 
+The clipping provided by `BoxMorph` is is a major difference
+between that class and the previous two (`Morph` and `PlacedMorph`).
+Those will also clip their submorphs (morphs added using the `addMorph:` method)
+to the bounds of what is drawn on them
+if they implement the `clipsSubmorphs` method to return `true`.
+For an example, see the class `Sample07Clipping`.
+NOTE: It seems that only drawing of shapes is clipped, not images.
+
 `BoxMorph` provides excellent drag performance in part because
-it does not take the time to clean up the drawing artifacts.
-It assumes that subclasses will not draw outside its bounding rectangle
+it does not take the time to clean up the drawing artifacts
+which are pixels drawn outside the bounding rectangle.
+It assumes that subclasses will not draw outside its bounding rectangle,
 so no cleanup is necessary.
 
 Many of the drawing methods are defined in the superclasses
@@ -637,6 +642,9 @@ Examples include:
 - `image:at:` (see example below under "Drawing Images")
 - `line:to:width:color:`
 - TODO: Add more!
+
+For examples of using these methods,
+see the classes in the category "Morphic ... Examples".
 
 Lines have rounded endpoints by default.
 TODO: Can the line cap be changed to square, butt, or round like in SVG?
