@@ -627,28 +627,6 @@ which are pixels drawn outside the bounding rectangle.
 It assumes that subclasses will not draw outside its bounding rectangle,
 so no cleanup is necessary.
 
-Many of the drawing methods are defined in the superclasses
-`AbstractVectorCanvas` and `MorphicCanvas`.
-Examples include:
-
-- `arcTo:radius:angleOfXAxis:largeFlag:sweepFlag:`
-- `circleCenter:radius:`
-- `drawString:from:to:atBaseline:font:color:`
-- `ellipseCenter:radius:rotationAngle:
-  - `elipseCenter:` - `Point` where x/y represents the center location
-  - `radius:` - `Point` where x is major axis radius and y is minor axis radius
-  - `rotationAngle:` - `Number` of radians
-- `fillRectangle:color:`
-- `image:at:` (see example below under "Drawing Images")
-- `line:to:width:color:`
-- TODO: Add more!
-
-For examples of using these methods,
-see the classes in the category "Morphic ... Examples".
-
-Lines have rounded endpoints by default.
-TODO: Can the line cap be changed to square, butt, or round like in SVG?
-
 Subclasses of `BoxMorph` should implement the `defaultExtent` method
 to return the desired size. For example:
 
@@ -676,11 +654,76 @@ In subclasses of `PlacedMorph`, the instance method `drawOn:`
 is passed a `VectorCanvas` object.
 In subclasses of `BorderedBoxMorph`, the instance method `drawOn:`
 is passed a `HybridCanvas` object.
-
 To force a subclass of `BorderedBoxMorph` to use a `VectorCanvas`,
 implement the `requiresVectorCanvas` method to return `true`.
 
-For example, the following draws a green rectangle with a red border
+Instances of `PlacedMorph` subclasses have a `location` instance variable.
+If the `Morph` only has a location and has not be rotated or scaled
+then `location` will hold a `MorphicTranslation` object
+with `deltaX` and `deltaY` instance variables.
+If the `Morph` has been rotated or scaled
+then `location` will hold an `AffineTranslation` object
+with `scale`, `degrees`, and `translation` instance variables.
+
+By default, morphs rotate about their center. To change this,
+override the `rotationCenter` method to return a different `Point`.
+For example, the following causes rotation
+to occur around the upper-left corner:
+
+```smalltalk
+rotationCenter
+    ^ 0@0
+```
+
+The `Morph` method `openInHand` causes the `Morph` to appear
+and be attached to the cursor.
+Move the cursor to the location where it should be placed and click to drop it.
+
+Alternatively, send the message `#openInWorld` to cause the `Morph` to appear
+and not be attached to the cursor.
+If the location of the `Morph` was specified by sending the
+`#location#` message to it with a `MorphicTranslation` argument
+then it will be placed at that location.
+Otherwise it will be placed at a random location.
+
+Also see the custom method `openAtCursor` that I added to the `Morph` class.
+It is defined as follows:
+
+```smalltalk
+openAtCursor
+    "Opens Morph, attempting to center it at hand location,
+    but keeping it in the world bounds."
+    | world |
+    world := self runningWorld.
+    world
+        ifNil: [UISupervisor whenUIinSafeState: [self openInWorld]]
+        ifNotNil: [:w |
+            w addMorph: self centeredNear: w activeHand morphPosition.
+        ]
+```
+
+### Drawing Lines and Shapes
+
+Many of the drawing methods are defined in the superclasses
+`AbstractVectorCanvas` and `MorphicCanvas`.
+Examples include:
+
+- `arcTo:radius:angleOfXAxis:largeFlag:sweepFlag:`
+- `circleCenter:radius:`
+- `drawString:from:to:atBaseline:font:color:`
+- `ellipseCenter:radius:rotationAngle:
+  - `elipseCenter:` - `Point` where x/y represents the center location
+  - `radius:` - `Point` where x is major axis radius and y is minor axis radius
+  - `rotationAngle:` - `Number` of radians
+- `fillRectangle:color:`
+- `image:at:` (see example below under "Drawing Images")
+- `line:to:width:color:`
+- TODO: Add more!
+
+For examples of using these methods,
+see the classes in the category "Morphic ... Examples".
+
+The following code draws a green rectangle with a red border
 and a red line from its upper-left to lower-right.
 It has a default width of 100, height of 100, and
 default location of the upper-left corner of the world.
@@ -744,52 +787,62 @@ aCanvas
     color: Color yellow.
 ```
 
-Instances of `PlacedMorph` subclasses have a `location` instance variable.
-If the `Morph` only has a location and has not be rotated or scaled
-then `location` will hold a `MorphicTranslation` object
-with `deltaX` and `deltaY` instance variables.
-If the `Morph` has been rotated or scaled
-then `location` will hold an `AffineTranslation` object
-with `scale`, `degrees`, and `translation` instance variables.
-
-By default, morphs rotate about their center. To change this,
-override the `rotationCenter` method to return a different `Point`.
-For example, the following causes rotation
-to occur around the upper-left corner:
+Lines have rounded endpoints by default.
+TODO: Can the line cap be changed to square, butt, or round like in SVG?
 
 ```smalltalk
-rotationCenter
-    ^ 0@0
+drawOn: aCanvas
+	| center filePath font form halfHeight halfWidth height padding rect text textStart width |
+
+	"filePath := '/Users/volkmannm/Pictures/images/altitude1600.jpg'."
+	filePath := '/Users/volkmannm/Pictures/logos/Smalltalk-balloon.png'.
+	form := Form fromFileNamed: filePath.
+	form := form magnifyBy: 0.25.
+	aCanvas image: form at: 0@0.
+
+	width := 250.
+	height := 200.
+	halfWidth := width / 2.
+	halfHeight := height / 2.
+	center := halfWidth @ halfHeight.
+	padding := 10.
+	rect := Rectangle origin: 0@0 extent: width@height.
+	font := FontFamily familyName: 'DejaVu Sans' pointSize: 24.
+	text := 'Hello, World!'.
+	textStart := padding @ height -  padding.
+
+	aCanvas fillRectangle: rect color: Color yellow.
+
+	aCanvas drawString: text from: 1 to: text size atBaseline: textStart font: font color: Color black.
+
+	aCanvas strokeWidth: 20 color: Color purple do: [
+		aCanvas circleCenter: center radius: 50.
+	].
+
+	aCanvas strokeWidth: 5 color: Color blue do: [
+		"radius is a Point with x as major axis radius and y as minor axis radius.
+		rotationAngle is clockwise rotation in radians."
+		aCanvas ellipseCenter: 50@50 radius: 40@20 rotationAngle: Float pi / 4.
+	].
+
+	aCanvas strokeWidth: 10 color: Color red do: [
+		aCanvas line: center to: width @ height width: 5 color: Color red.
+		"moveTo: 100 @ 100;
+		lineTo: 200 @ 200."
+	].
+
+	aCanvas strokeWidth: 5 color: Color green do: [
+		aCanvas
+			moveTo: width @ 0;
+			lineTo: halfWidth @ halfHeight;
+			arcTo: width * 3/4 @ (height * 3/4) radius: 30 angleOfXAxis: Float pi largeFlag: false sweepFlag: false
+	].
+
+	"A frameRectangle doesn't seem useful."
+	"aCanvas frameRectangle: rect topLeftColor: Color red bottomRightColor: Color blue borderWidth: 10."
 ```
 
-The `Morph` method `openInHand` causes the `Morph` to appear
-and be attached to the cursor.
-Move the cursor to the location where it should be placed and click to drop it.
-
-Alternatively, send the message `#openInWorld` to cause the `Morph` to appear
-and not be attached to the cursor.
-If the location of the `Morph` was specified by sending the
-`#location#` message to it with a `MorphicTranslation` argument
-then it will be placed at that location.
-Otherwise it will be placed at a random location.
-
-Also see the custom method `openAtCursor` that I added to the `Morph` class.
-It is defined as follows:
-
-```smalltalk
-openAtCursor
-    "Opens Morph, attempting to center it at hand location,
-    but keeping it in the world bounds."
-    | world |
-    world := self runningWorld.
-    world
-        ifNil: [UISupervisor whenUIinSafeState: [self openInWorld]]
-        ifNotNil: [:w |
-            w addMorph: self centeredNear: w activeHand morphPosition.
-        ]
-```
-
-Drawing-related methods like `drawOn:`
+Custom methods related to drawing like `drawOn:`
 should be placed in the "drawing" method category.
 
 ### Drawing Images
