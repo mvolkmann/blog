@@ -291,12 +291,20 @@ based on the following instance properties:
 
 - `direction`: `#horizontal` for a row or `#vertical` for a column
 
-- `separation`: a `Measure`
+  This is automatically set when the class methods `newRow` and `newColumn`
+  are used to create an instance.
+
+- `padding`: a `Number` or `Point`
+
+  This adds space inside the `LayoutMorph`
+  so the submorphs are not positioned at its edges.
+
+- `separation`: a `Number` or `Point`
 
   This adds space between the submorphs.
   It also adds space between the outer submorphs
   and the edges of the `LayoutMorph`.
-  To avoid adding space the outer space, send the message `#useEdgeSpace:`
+  To avoid adding outer space, send the message `#useEdgeSpace:`
   with the value `false` to the `LayoutMorph`.
 
   By default, there is no separation.
@@ -399,6 +407,14 @@ top-aligned in a horizontal `LayoutMorph`:
 
 ```smalltalk
 submorph layoutSpec offAxisEdgeWeight: 0
+```
+
+There is no provided method to set the `offAxisEdgeWeight`
+to the same value for all submorphs.
+To achieve that, use code like the following:
+
+```smalltalk
+layout submorphs do: [ :submorph | submorph layoutSpec offAxisEdgeWeight: 0 ]
 ```
 
 The following code demonstrates layout of submorphs.
@@ -790,56 +806,59 @@ aCanvas
 Lines have rounded endpoints by default.
 TODO: Can the line cap be changed to square, butt, or round like in SVG?
 
+The following code demonstrates many of the methods
+for drawing on a canvas:
+
 ```smalltalk
 drawOn: aCanvas
-	| center filePath font form halfHeight halfWidth height padding rect text textStart width |
+    | center filePath font form halfHeight halfWidth height padding rect text textStart width |
 
-	"filePath := '/Users/volkmannm/Pictures/images/altitude1600.jpg'."
-	filePath := '/Users/volkmannm/Pictures/logos/Smalltalk-balloon.png'.
-	form := Form fromFileNamed: filePath.
-	form := form magnifyBy: 0.25.
-	aCanvas image: form at: 0@0.
+    "filePath := '/Users/volkmannm/Pictures/images/altitude1600.jpg'."
+    filePath := '/Users/volkmannm/Pictures/logos/Smalltalk-balloon.png'.
+    form := Form fromFileNamed: filePath.
+    form := form magnifyBy: 0.25.
+    aCanvas image: form at: 0@0.
 
-	width := 250.
-	height := 200.
-	halfWidth := width / 2.
-	halfHeight := height / 2.
-	center := halfWidth @ halfHeight.
-	padding := 10.
-	rect := Rectangle origin: 0@0 extent: width@height.
-	font := FontFamily familyName: 'DejaVu Sans' pointSize: 24.
-	text := 'Hello, World!'.
-	textStart := padding @ height -  padding.
+    width := 250.
+    height := 200.
+    halfWidth := width / 2.
+    halfHeight := height / 2.
+    center := halfWidth @ halfHeight.
+    padding := 10.
+    rect := Rectangle origin: 0@0 extent: width@height.
+    font := FontFamily familyName: 'DejaVu Sans' pointSize: 24.
+    text := 'Hello, World!'.
+    textStart := padding @ height -  padding.
 
-	aCanvas fillRectangle: rect color: Color yellow.
+    aCanvas fillRectangle: rect color: Color yellow.
 
-	aCanvas drawString: text from: 1 to: text size atBaseline: textStart font: font color: Color black.
+    aCanvas drawString: text from: 1 to: text size atBaseline: textStart font: font color: Color black.
 
-	aCanvas strokeWidth: 20 color: Color purple do: [
-		aCanvas circleCenter: center radius: 50.
-	].
+    aCanvas strokeWidth: 20 color: Color purple do: [
+        aCanvas circleCenter: center radius: 50.
+    ].
 
-	aCanvas strokeWidth: 5 color: Color blue do: [
-		"radius is a Point with x as major axis radius and y as minor axis radius.
-		rotationAngle is clockwise rotation in radians."
-		aCanvas ellipseCenter: 50@50 radius: 40@20 rotationAngle: Float pi / 4.
-	].
+    aCanvas strokeWidth: 5 color: Color blue do: [
+        "radius is a Point with x as major axis radius and y as minor axis radius.
+        rotationAngle is clockwise rotation in radians."
+        aCanvas ellipseCenter: 50@50 radius: 40@20 rotationAngle: Float pi / 4.
+    ].
 
-	aCanvas strokeWidth: 10 color: Color red do: [
-		aCanvas line: center to: width @ height width: 5 color: Color red.
-		"moveTo: 100 @ 100;
-		lineTo: 200 @ 200."
-	].
+    aCanvas strokeWidth: 10 color: Color red do: [
+        aCanvas line: center to: width @ height width: 5 color: Color red.
+        "moveTo: 100 @ 100;
+        lineTo: 200 @ 200."
+    ].
 
-	aCanvas strokeWidth: 5 color: Color green do: [
-		aCanvas
-			moveTo: width @ 0;
-			lineTo: halfWidth @ halfHeight;
-			arcTo: width * 3/4 @ (height * 3/4) radius: 30 angleOfXAxis: Float pi largeFlag: false sweepFlag: false
-	].
+    aCanvas strokeWidth: 5 color: Color green do: [
+        aCanvas
+            moveTo: width @ 0;
+            lineTo: halfWidth @ halfHeight;
+            arcTo: width * 3/4 @ (height * 3/4) radius: 30 angleOfXAxis: Float pi largeFlag: false sweepFlag: false
+    ].
 
-	"A frameRectangle doesn't seem useful."
-	"aCanvas frameRectangle: rect topLeftColor: Color red bottomRightColor: Color blue borderWidth: 10."
+    "A frameRectangle doesn't seem useful."
+    "aCanvas frameRectangle: rect topLeftColor: Color red bottomRightColor: Color blue borderWidth: 10."
 ```
 
 Custom methods related to drawing like `drawOn:`
@@ -1402,7 +1421,48 @@ em
     toValue: [:event :position | self inform: 'got click'].
 ```
 
-## Animation
+The following class defines a custom morph that renders a close icon:
+
+```smalltalk
+PluggableButtonMorph subclass: #CloseButton
+    instanceVariableNames: ''
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'Demo'
+
+drawOn: aCanvas
+    super drawOn: aCanvas.
+    aCanvas drawCloseIcon.
+```
+
+The following code demonstrates using the `CloseButton` class
+in another morph to delete it.
+
+```smalltalk
+PlacedMorph subclass: #DeletableMorph
+    instanceVariableNames: ''
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'Demo'
+
+initialize
+    | layout |
+
+    super initialize.
+
+    layout := LayoutMorph newColumn.
+    layout separation: 10.
+
+    layout addMorph: (CloseButton model: [ self delete ] action: #value).
+    layout addMorph: (LabelMorph contents: 'Delete Me').
+    layout submorphs do: [ :submorph | submorph layoutSpec offAxisEdgeWeight: 0 ].
+
+    self addMorph: layout.
+
+drawOn: aCanvas
+    "This overrides the method in Morph to do nothing
+    so a blue rectangle is not drawn."
+```
 
 Animation in Morphic is achieved through stepping.
 The following class implements a `Morph` that renders a red circle
