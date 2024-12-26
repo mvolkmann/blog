@@ -437,6 +437,8 @@ System Browsers contain four rows.
   that displays a list of time stamps for recent versions of the method.
   TODO: Does this only include changes made since the current image was opened?
   Clicking a time stamp displays that version of the code in the bottom pane.
+  Click ther "revert" button to revert the method code
+  to that in the selected version.
 
   If one of the buttons "lineDiffs", "wordDiffs",
   "linePrettyDiffs", or "wordPrettyDiffs" is pressed, it will show

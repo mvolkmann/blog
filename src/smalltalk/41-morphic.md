@@ -920,6 +920,35 @@ drawOn: aCanvas
     "aCanvas frameRectangle: rect topLeftColor: Color red bottomRightColor: Color blue borderWidth: 10."
 ```
 
+The following code demonstrates using the
+`arcTo:radius:angleOfXAxis:largeFlag:sweepFlag:` method
+to draw an oval at a 45 degree angle.
+
+<img alt="Cuis arcTo:" style="width: 30%"
+  src="/blog/assets/cuis-morphic-oval.png?v={{pkg.version}}">
+
+```smalltalk
+drawOn: aCanvas
+	| height linen radius rect width |
+
+	width := 500.
+	height := 500.
+	rect := Rectangle origin: 0@0 extent: width@height.
+	linen := Color fromHexString: '#faf0e6'.
+	aCanvas fillRectangle: rect color: linen.
+
+	radius := 50 * 2 sqrt.
+	aCanvas strokeWidth: 5 color: Color red fillColor: Color yellow do: [
+		aCanvas
+			moveTo: 200 @ 100;
+			lineTo: 400 @ 300;
+			arcTo: 300 @ 400 radius: radius angleOfXAxis: 0 largeFlag: false sweepFlag: true;
+			lineTo: 100 @ 200;
+			arcTo: 200 @ 100 radius: radius angleOfXAxis: 0 largeFlag: false sweepFlag: true.
+
+	].
+```
+
 Custom methods related to drawing like `drawOn:`
 should be placed in the "drawing" method category.
 
