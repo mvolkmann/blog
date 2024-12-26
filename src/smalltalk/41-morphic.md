@@ -1421,7 +1421,8 @@ em
     toValue: [:event :position | self inform: 'got click'].
 ```
 
-The following class defines a custom morph that renders a close icon:
+The following class defines a `Morph` sublcass that renders a close icon.
+The icon changes color when the mouse cursor is over it or it is pressed.
 
 ```smalltalk
 PluggableButtonMorph subclass: #CloseButton
@@ -1434,6 +1435,11 @@ drawOn: aCanvas
     super drawOn: aCanvas.
     aCanvas drawCloseIcon.
 ```
+
+Other methods to draw icons provided in the `AbstractVectorCanvas` class
+include `drawCollapseIcon`, `drawDownIcon`, `drawExpancdIcon`,
+`drawHandleLarge`, `drawHandSmall`, `drawLeftIcon`, `drawMenuIcon`,
+`drawPushPinIcon`, `drawRightIcon`, and `drawUpIcon`.
 
 The following code demonstrates using the `CloseButton` class
 in another morph to delete it.
