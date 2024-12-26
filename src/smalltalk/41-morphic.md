@@ -1445,17 +1445,22 @@ PlacedMorph subclass: #DeletableMorph
     poolDictionaries: ''
     category: 'Demo'
 
-initialize
-    | layout |
+ initialize
+    | closeButton label layout |
 
     super initialize.
 
-    layout := LayoutMorph newColumn.
-    layout separation: 10.
+    closeButton := CloseButton model: [ self delete ] action: #value.
+    closeButton layoutSpec offAxisEdgeWeight: 1.
 
-    layout addMorph: (CloseButton model: [ self delete ] action: #value).
-    layout addMorph: (LabelMorph contents: 'Delete Me').
-    layout submorphs do: [ :submorph | submorph layoutSpec offAxisEdgeWeight: 0 ].
+    label := LabelMorph contents: 'Delete Me'.
+    label layoutSpec offAxisEdgeWeight: 0.
+
+    layout := LayoutMorph newColumn.
+    layout
+        separation: 10;
+        addMorph: closeButton;
+        addMorph: label.
 
     self addMorph: layout.
 
