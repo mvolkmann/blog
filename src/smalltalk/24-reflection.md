@@ -15,6 +15,8 @@ The following table lists some of them.
 | `object class`                                          | the class of `object`                                                                                        |
 | `object instVarNamed: #varName`                         | the value of an instance variable in `object`                                                                |
 | `object instVarNamed: #varName` put: newValue           | sets value of an instance variable in `object` and answers new value                                         |
+| `object class = SomeClass`                              | answers `Boolean` indicating if `object` is an instance of the class `SomeClass` (not one of its subclasses) |
+| `object isKindOf: SomeClass`                            | answers `Boolean` indicating if `object` is an instance of the class `SomeClass` or one of its subclasses    |
 | `object respondsTo: #selectorSymbol`                    | answers `Boolean` indicating if the object responds to a given method selector                               |
 | `SomeClass name`                                        | the name of the class as a `String`                                                                          |
 | `Smalltalk allClasses`                                  | an `Array` of all classes defined in the current image                                                       |
