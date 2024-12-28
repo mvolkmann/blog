@@ -683,24 +683,13 @@ Subclasses of `BoxMorph`:
 - if the `drawOn:` method is not overridden,
   it will fill the morph with a light green rectangle
 - automatically clips its contents to its extent
-- display drawing artifacts (trail of left behind pixels)
-  if anything is drawn outside of the bounding rectangle
-  which requires clipping and the morph is dragged
-  (avoid by not drawing outside the bounding rectangle)
 
-The clipping provided by `BoxMorph` is is a major difference
-between that class and the previous two (`Morph` and `PlacedMorph`).
-Those will also clip their submorphs (morphs added using the `addMorph:` method)
-to the bounds of what is drawn on them
-if they implement the `clipsSubmorphs` method to return `true`.
-For an example, see the class `Sample07Clipping`.
-NOTE: It seems that only drawing of shapes is clipped, not images.
-
+While `BoxMorph` provides clipping of content drawn outside its bounding box,
+its contract states that such drawing should not occur.
+Doing so will result in the display of drawing artifacts
+from the pixels drawn outside it if the morph is dragged or rotated.
 `BoxMorph` provides excellent drag performance in part because
-it does not take the time to clean up the drawing artifacts
-which are pixels drawn outside the bounding rectangle.
-It assumes that subclasses will not draw outside its bounding rectangle,
-so no cleanup is necessary.
+it does not take the time to clean up the drawing artifacts.
 
 Subclasses of `BoxMorph` should implement the `defaultExtent` method
 to return the desired size. For example:
@@ -709,6 +698,12 @@ to return the desired size. For example:
 defaultExtent
     ^`200@200`
 ```
+
+Submorphs added to instances of `Morph` and `PlacedMorph`
+(using the `addMorph:` method) will be clipped to the bounds of what is
+drawn on them if they implement the `clipsSubmorphs` method to return `true`.
+For an example, see the class `Sample07Clipping`.
+NOTE: It seems that only drawing of shapes is clipped, not images.
 
 Custom morphs that are subclasses of `PlacedMorph` (or one of its subclasses)
 can be directly dragged to new locations.
@@ -1651,4 +1646,5 @@ Note how the "b" is sometimes lowercase and sometimes uppercase.
 
 ## Todo App
 
-TODO: Implement a Todo app using Morphic and learn how to deploy it.
+See <https://github.com/mvolkmann/Cuis-Smalltalk-TodoApp>.
+TODO: Learn how to deploy this app.
