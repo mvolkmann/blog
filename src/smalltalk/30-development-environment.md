@@ -964,6 +964,14 @@ The Debug window will close when the end of the selected code is reached.
 Using `self halt` in the middle of Morphic operations
 seems to produce unexpected results. TODO: Why?
 
+To conditionally execute code only when debugging, write something like
+the following (found in the `InnerTextMorph` instance method `drawOn:`).
+Change `false` to `true` to activate.
+
+```smalltalk
+false ifTrue: [ self debugDrawLineRectsOn: aCanvas ].
+```
+
 ## Change Sorter Windows
 
 Each edit performed in a System Browser is saved in a `ChangeSet`.
