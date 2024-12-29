@@ -322,6 +322,7 @@ but will be written later.
 
 To search for text within the code of the selected method,
 press cmd-f and enter the search text.
+
 To search for text in a wider scope than just the selected method,
 right-click in the code editor area, select "Find with Scope",
 enter the search text, press return, and select a scope from the menu.
@@ -332,6 +333,9 @@ The scope options are:
 - Class '{current-class}'
 - Class '{current-class}' and subclasses
 - Class '{current-class}', subclasses, and superclasses
+
+Search through all methods in the image is surprisingly fast,
+only taking a few seconds.
 
 For more detail, see
 <a href="https://cuis-smalltalk.github.io/TheCuisBook/A-brief-introduction-to-the-system-Browser.html"
