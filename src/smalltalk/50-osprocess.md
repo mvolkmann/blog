@@ -48,3 +48,14 @@ getenv: aString
 ```
 
 TODO: There are many more classes and methods in the OSProcess package that should be documented here.
+
+Yet one more way to get the value of an environment variable
+is to use the package
+<a href="https://codeberg.org/auverlot/Cuis-Smalltalk-Environment"
+target="_blank">Environment</a>.
+This package defines methods to:
+
+- create, get, set, and unset environment variables
+- get the id and group id of the current process
+- execute a shell command
+- determine if the last executed shell command was successful
