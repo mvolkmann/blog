@@ -290,7 +290,8 @@ Smalltalk has the following cons:
 
 - Many errors are only caught at run-time.
 
-  The use of late binding for resolving message sends means that
+  The lack of compile-time type checking and the use of
+  late binding for resolving message sends means that
   there are more errors that can only be detected at run-time
   than in statically typed languages such as C++, C#, and Java.
   However, Smalltalk does do incremental compiling when methods are saved,
@@ -323,6 +324,11 @@ Smalltalk has the following cons:
   However, it is common to store custom code and modifications to
   provided classes in a "file out" or package that can be
   shared with other developers and installed into fresh images.
+
+- Smalltalk environments lack a Vim mode.
+  However, I implemented this for Cuis Smalltalk at
+  <a href="https://github.com/mvolkmann/Cuis-Smalltalk-Vim"
+  target="_blank">Cuis-Smalltalk-Vim</a>.
 
 ## History
 
