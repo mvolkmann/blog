@@ -1160,6 +1160,13 @@ To get a font for a specific family and point size:
 font := FontFamily familyName: 'Alex Brush' pointSize: 36.
 ```
 
+To change the font used by all instances of `TextEditor`,
+add a line like the following to its `initialize` method:
+
+```smalltalk
+defaultFont := FontFamily familyName: 'JetBrains Mono NL' pointSize: 14.
+```
+
 ## Button Labels
 
 Button labels are automatically shortened to fit within the button width

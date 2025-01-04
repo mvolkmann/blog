@@ -14,6 +14,19 @@ Their execution is deferred until they are sent a message like `value`.
 Blocks are surrounded by square brackets which is appropriate
 because real life blocks are typically rectangular.
 
+Blocks are first class in that they can be saved in variables,
+passed as arguments to methods and other blocks,
+returned from methods and other blocks,
+and can be evaluated multiple times. For example:
+
+```smalltalk
+noArgBlock := [2 * 3].
+singleArgBlock := [:a | a * 3].
+multipleArgBlock := [:a :b | a * b].
+```
+
+## Block Value
+
 The value of the block is the value of its last expression.
 If a block uses the caret operator (`^`) to return a value,
 the containing method will exit and return that value.
@@ -32,17 +45,6 @@ It also simplifies parsing because it enables determining
 whether a block has any parameters without backtracking.
 The parameter list is separated from the expressions by a vertical bar.
 
-Blocks can be saved in variables,
-passed as arguments to methods and other blocks,
-returned from methods and other blocks,
-and can be evaluated multiple times. For example:
-
-```smalltalk
-noArgBlock := [2 * 3].
-singleArgBlock := [:a | a * 3].
-multipleArgBlock := [:a :b | a * b].
-```
-
 Blocks support several messages that evaluate the block
 whose names begin with `value`.
 These messages enable providing zero to four arguments.
@@ -59,9 +61,13 @@ multiArgBlock value: 1 value: 2 value: 3 value: 4.
 multiArgBlock valueWithArguments: #(1 2 3 4 5).
 ```
 
+## Block Arguments
+
 A block must be passed the same number of arguments as it has parameters.
 If a block is passed fewer or more arguments than it accepts,
 a Debug window will open.
+
+## Block Variables
 
 Blocks can declare and use temporary (local) variables just like a method.
 
@@ -75,6 +81,8 @@ average := [:a :b |
 ]
 ```
 
+## Blocks as Closures
+
 Blocks are closures, meaning that they can
 access in-scope variables defined outside them.
 For example:
@@ -84,6 +92,8 @@ n := 19.
 b := [:a | a + n].
 b value: 2 "result is 21"
 ```
+
+## Blocks for Iteration
 
 To use a block as an iteration condition,
 use the methods `whileTrue`, `whileTrue:`, `whileFalse`, `whileFalse:`,
