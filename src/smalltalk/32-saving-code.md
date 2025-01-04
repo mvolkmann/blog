@@ -139,11 +139,17 @@ and methods added to classes in other categories.
 When a package file is installed, if it defines new classes,
 they are placed in a new class category whose name is the package name.
 The new class category is visible in System Browsers.
+
 If the package defines methods to be
-added to a class in another class categories,
+added to a class in another class category,
 a new method category name is added to the class
 whose name is an asterisk followed by the package name and an optional suffix
 (for example, `*Volkmann-printing`).
+
+If the package defines methods in existing classes
+that have the same name as existing methods,
+they replace the existing methods.
+This allows packages to modify existing implementations.
 
 Package names are used as prefixes on class and method categories names.
 Package name abbreviations are often used as prefixes on class names.
