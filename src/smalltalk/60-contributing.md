@@ -22,7 +22,7 @@ To create a Change Set that includes your suggested changes to Cuis:
   to verify they are what should be included.
 - Right-click the change set and select "Rename change set".
 - Replace "AuthorName" with your name.
-- Right-click the change set and select "File out and keep".
+- Right-click the change set and select "File out, keep current cs".
 
 The file will be saved in the `Cuis-Smalltalk-Dev-UserFiles/ChangeSets`
 directory with an extension of `.cs.st`.
