@@ -64,15 +64,16 @@ changing its aspect ratio.
 Other options do not change the aspect ratio of the image.
 
 To cover the window with an image where the right or bottom of the image
-can be clipped, set the following preference BEFORE
-sending `#backgroundImageData` to the running World:
+can be clipped, set the following preference.
+This must be done before sending `#backgroundImageData` to the running World
+or the lines above that create a stream for the image file
+and set the background image to its contents must be reevaluated.
 
 ```smalltalk
 PreferenceSet sysPreferences at: #backgroundEffect put: #cover.
 ```
 
-To tile the window with an image, set the following preference before
-sending `#backgroundImageData` to the running World:
+To tile the window with an image, set the following preference:
 
 ```smalltalk
 PreferenceSet sysPreferences at: #backgroundEffect put: #tile.
