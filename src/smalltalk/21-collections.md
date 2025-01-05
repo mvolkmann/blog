@@ -98,7 +98,7 @@ defined in the `Collection` class.
 | `asIdentitySet`         | answers `IdentifySet` instance whose elements are those in receiver with no duplicates                                                     |
 | `asOrderedCollection`   | answers `OrderedCollection` instance whose elements are those in receiver                                                                  |
 | `asSortedCollection`    | answers `SortedCollection` instance whose elements are those in receiver                                                                   |
-| `asSortedCollection:`   | same as `asSortedCollection`, but take block that defines sort order                                                                       |
+| `asSortedCollection:`   | same as `asSortedCollection`, but takes block that defines sort order                                                                      |
 | `asSet`                 | answers `Set` instance whose elements are those in receiver with no duplicates                                                             |
 | `atRandom`              | answers a random element                                                                                                                   |
 | `average`               | same as `mean`                                                                                                                             |
