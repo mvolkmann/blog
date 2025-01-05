@@ -603,8 +603,8 @@ and testing for the existence of an element:
 ```smalltalk
 set add: `orange`.
 set remove: 'banana'.
-set includes 'apple`. "true"
-set includes 'banana`. "false"
+set includes: 'apple`. "true"
+set includes: 'banana`. "false"
 ```
 
 Numbers in a `Set` are compared based on their values,
