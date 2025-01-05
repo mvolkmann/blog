@@ -481,7 +481,7 @@ All indexes are 1-based and `0` means not found.
 | `findString:startingAt:caseSensitive:` | answers index after `startingAt:` where a substring begins, optionally case sensitive                                         |
 | `findTokens:`                          | answers `Array` of instances created by splitting receiver on delimiters in argument                                          |
 | `format:`                              | answers instance created using interpolation                                                                                  |
-| `includesSubString:`                   | answers `Boolean` indicating if receiver contains substring                                                                   |
+| `includesSubString:`                   | answers `Boolean` indicating if receiver contains substring (note capital S)                                                  |
 | `includesSubstring:caseSensitive:`     | answers `Boolean` indicating if receiver contains substring                                                                   |
 | `indexOf:`                             | answers index of a character                                                                                                  |
 | `isEmpty`                              | answers `Boolean` indicating if receiver size is zero                                                                         |
