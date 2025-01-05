@@ -200,7 +200,7 @@ If there are no matching messages,
 it will show all known selectors that match in any class in blue.
 The reason is that you can send any message to any object.
 Even if the object has no matching method anywhere in its inheritance hierarchy,
-it could still respond by handling it in a `doesNotUnderstand` method.
+it could still respond by handling it in a `doesNotUnderstand:` method.
 Personally I do not find this helpful and wish it did not show those messages.
 
 ## Dynamic Messages

@@ -6,7 +6,7 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-The `Object` class defines the `doesNotUnderstand` method
+The `Object` class defines the `doesNotUnderstand:` method
 which opens a `MessageNotUnderstood` window.
 This can be overridden in specific classes to provide specialized processing
 of messages that do not have corresponding methods.
