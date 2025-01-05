@@ -60,6 +60,12 @@ send the `allInstancesDo:` message to the class.
 For example, to delete all instances of a given class, run
 `SomeClass allInstancesDo: [:obj | obj delete]`.
 
+## Sending Messages
+
+See the "Dynamic Messages" section in the "Messages" page.
+This describes how to use `perform:` to send messages to objects
+where the selector is a `Symbol`.
+
 ## Finding the Method for a Selector
 
 There isn't a provided method that finds the nearest class in the
