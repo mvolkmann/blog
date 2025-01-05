@@ -83,27 +83,74 @@ There are a small number of other classes that are
 subclasses of `ProtoObject` and not subclasses of `Object`.
 These include `BreakingMethodWrapper`, `MessageCatcher`, and `ProtoCatcher`.
 
-To get a `String` representation of any object
-that is meaningful to a Smalltalk developer,
+To get a `String` representation of any object that is
+meaningful to a Smalltalk developer (not necessarily to a user),
 send it the `#printString` message.
 The default implementation in the `Object` class
 returns "a" or "an" followed by a space and the class name.
-Classes can override the `printString` method
+For example, sending `#printString` to a `Dog` class
+will return the string `'a Dog'` by default.
+
+Classes can override the `printOn:` method
 to customize the `String` that is returned.
-For example, the following code prints `a Set(3 2 1)`,
+The `printOn:` method is invoked by both the `print` and `printString` methods.
+
+The following code prints `a Set(3 2 1)`,
 which is `String` representation of a `Set` of numbers,
-to a Transcript:
+to the `Transcript`:
 
 ```smalltalk
 | set |
 set := #(1 2 3 1) asSet.
-set printString print
+set print
 ```
 
-TODO: See the comments in Object printString about
-overriding the `printOn:` method instead of this!
-Try this!
-Also see how the `withArticle` method is used in Object printOn: !
+Here is a simple `Dog` class that overrides the `printOn:` method:
+
+```smalltalk
+Object subclass: #Dog
+    instanceVariableNames: 'breed name'
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'Demo'
+
+name: nameString breed: breedString
+    | dog |
+
+    dog := Dog new.
+    dog name: nameString.
+    dog breed: breedString.
+    ^ dog.
+
+breed
+    ^ breed
+
+breed: aString
+    breed := aString
+
+name
+    ^ name
+
+name: aString
+    name := aString
+
+printOn: aStream
+    aStream
+        nextPutAll: self class name withArticle; "adds a or an at beginning"
+        nextPutAll: ': ';
+        nextPutAll: name;
+        nextPutAll: ' is a ';
+        nextPutAll: breed;
+        nextPut: $.
+```
+
+The following code creates an instance of the `Dog` class
+and prints it to the Transcript:
+
+```smalltalk
+dog := Dog name: 'Comet' breed: 'Whippet'.
+dog print. "outputs a Dog: Comet is a Whippet."
+```
 
 The following table describes some of the instance methods
 defined in the `ProtoObject` class.
