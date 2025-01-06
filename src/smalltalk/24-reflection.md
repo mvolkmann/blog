@@ -90,6 +90,31 @@ lookupClassImplementingSelector: selectorSymbol
     ^ nil
 ```
 
+## Finding Methods by Example
+
+The Squeak development environment provides a way to find methods by example.
+
+I implemented this in Cuis, minus the GUI.
+See <a href="https://github.com/mvolkmann/Cuis-Smalltalk-FindByExample"
+target="_blank">Cuis-Smalltalk-FindByExample</a>.
+It's amazing how fast this is!
+
+For example, evaluating the following in a Workspace:
+
+```smalltalk
+Finder methodsByExample: #(#(1 2 3 4) 2.5)
+```
+
+prints the following in the Transcript:
+
+```text
+The following methods on #(1 2 3 4) with no arguments return 2.5:
+- average
+- mean
+```
+
+There are more examples in the README.
+
 ## Questions
 
 TODO: Why does `allClassVarNames` return a `Set` when `allInstVarNames` returns an `Array`?
