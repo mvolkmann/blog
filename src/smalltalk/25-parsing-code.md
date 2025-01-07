@@ -7,7 +7,15 @@ layout: topic-layout.njk
 ---
 
 The `Compiler` class can compile and evaluate strings of Smalltalk code.
-For example, `Compiler evaluate: '1+2'` answers `3`.
+For example:
+
+```smalltalk
+Compiler evaluate: '1 + 3'. "answers 3"
+
+Compiler evaluate:
+    '| s | s := Set new. s add: ''red''. s add: ''blue''. s'.
+    "answers Set('blue' 'red')"
+```
 
 The class `Class` inherits from `ClassDescription`
 which inherits from `Behavior`.

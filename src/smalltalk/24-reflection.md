@@ -92,9 +92,13 @@ lookupClassImplementingSelector: selectorSymbol
 
 ## Finding Methods by Example
 
-The Squeak development environment provides a way to find methods by example.
+The Squeak development environment provides a way to find methods by example
+using the "Method Finder" tool (a.k.a. Selector Browser).
 
-I implemented this in Cuis, minus the GUI.
+<img alt="Squeak Selector Browser" style="width: 85%"
+  src="/blog/assets/squeak-selector-browser.png?v={{pkg.version}}">
+
+I implemented similar functionality in Cuis, minus the GUI.
 See <a href="https://github.com/mvolkmann/Cuis-Smalltalk-FindByExample"
 target="_blank">Cuis-Smalltalk-FindByExample</a>.
 It's amazing how fast this is!
