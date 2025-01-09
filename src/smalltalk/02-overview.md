@@ -173,9 +173,7 @@ Some reasons to learn Smalltalk include:
 - <a href="https://squeak.org" target="_blank">Squeak Smalltalk</a>
 
 - <a href="https://squeak.js.org" target="_blank">SqueakJS</a> -
-  "A Squeak VM in JavaScript" by Vanessa Freudenberg
-
-  Try this! <a href="https://squeak.js.org/run/#highdpi&zip=https://files.squeak.org/6.1alpha/Squeak6.1alpha-22998-32bit/Squeak6.1alpha-22998-32bit.zip" target="_blank">Squeak 6.1 alpha hi-res<a/>
+  "A Squeak VM in JavaScript" by Vanessa Freudenberg and Craig Latta
 
 - <a href="https://github.com/Cuis-Smalltalk/Learning-Cuis/blob/master/Quick-UI-Tour.md"
   target="_blank">Quick-UI-Tour</a> for Cuis Smalltalk
@@ -391,9 +389,10 @@ Smalltalk has the following cons:
 The following implementations of Smalltalk
 were created after those listed above in the "History" section.
 
-- Squeak
+- SqueakJS
 
-  This was the first popular implementation that was free and open source.
+  Click the following link to run SqueakJS in a web browser!
+  <a href="https://squeak.js.org/run/#highdpi&zip=https://files.squeak.org/6.1alpha/Squeak6.1alpha-22998-32bit/Squeak6.1alpha-22998-32bit.zip" target="_blank">Squeak 6.1 alpha hi-res<a/>
 
 - Cincom Smalltalk - VisualWorks and ObjectStudio
 
