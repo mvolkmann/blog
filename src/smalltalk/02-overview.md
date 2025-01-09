@@ -477,6 +477,13 @@ Commercial applications built with Smalltalk are listed at:
 - <a href="https://gemtalksystems.com/about/customers/" target="_blank">GemTalk Systems</a>
 - <a href="https://web.archive.org/web/20070101092404/http://wiki.cs.uiuc.edu/VisualWorks/Commercial+projects+that+use+Smalltalk" target="_blank">VisualWorks</a>
 
+## Centers of Smalltalk Activity
+
+- France - Pharo - <a href="https://www.inria.fr/en/inria-centre-university-lille" target="_blank">INRIA</a> in Lille, France
+- Argentina - Cuis
+- Germany - Squeak - <a href="https://www.uni-potsdam.de/en/university-of-potsdam" target="_blank">University of Potsdam</a>
+- Cincinnati - VisualWorks - <a href="https://www.cincomsmalltalk.com/main/" target="_blank">Cincom</a>
+
 ## Conferences
 
 - ESUG
@@ -491,8 +498,11 @@ Commercial applications built with Smalltalk are listed at:
 
 ## User Groups
 
-- <a href="https://www.meetup.com/california-smalltalkers/" target="_blank">California Smalltalkers</a>
 - <a href="https://www.uksmalltalk.org" target="_blank">UK Smalltalk User Group</a>
+- <a href="https://www.meetup.com/california-smalltalkers/" target="_blank">California Smalltalkers</a>
+- <a href="http://www.bobjectsinc.com/cstug/" target="_blank">Chicago Smalltalk User Group (CSTUG)</a>
+- <a href="https://www.smalltalk.ca" target="_blank">Toronto Smalltalk User Group (TSUG)</a>
+- <a href="https://cuis.st/community#meetings" target="_blank">Cuis Smalltalk Monthly Meetings</a>
 
 ## Cuis Smalltalk
 
