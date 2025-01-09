@@ -479,9 +479,9 @@ Commercial applications built with Smalltalk are listed at:
 
 ## Centers of Smalltalk Activity
 
+- Germany - Squeak - <a href="https://www.uni-potsdam.de/en/university-of-potsdam" target="_blank">University of Potsdam</a>
 - France - Pharo - <a href="https://www.inria.fr/en/inria-centre-university-lille" target="_blank">INRIA</a> in Lille, France
 - Argentina - Cuis
-- Germany - Squeak - <a href="https://www.uni-potsdam.de/en/university-of-potsdam" target="_blank">University of Potsdam</a>
 - Cincinnati - VisualWorks - <a href="https://www.cincomsmalltalk.com/main/" target="_blank">Cincom</a>
 
 ## Conferences
