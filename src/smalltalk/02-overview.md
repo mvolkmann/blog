@@ -477,6 +477,23 @@ Commercial applications built with Smalltalk are listed at:
 - <a href="https://gemtalksystems.com/about/customers/" target="_blank">GemTalk Systems</a>
 - <a href="https://web.archive.org/web/20070101092404/http://wiki.cs.uiuc.edu/VisualWorks/Commercial+projects+that+use+Smalltalk" target="_blank">VisualWorks</a>
 
+## Conferences
+
+- ESUG
+
+  - <a href="https://esug.org" target="_blank">website</a>
+  - <a href="https://www.youtube.com/playlist?list=PLJ5nSnWzQXi-uyYOZIVgXg1up_bclQc7e" target="_blank">YouTube</a>
+  - <a href="https://www.youtube.com/playlist?list=PLJ5nSnWzQXi89jwnBCmGPh9xG6shuvuwb" target="_blank">Show Us Your Project</a>
+
+- Fundación Argentina de Smalltalk (FAST)
+  - <a href="https://www.fast.org.ar" target="_blank">website</a>
+  - <a href="https://www.youtube.com/@FASTFoundation" target="_blank">YouTube</a>
+
+## User Groups
+
+- <a href="https://www.meetup.com/california-smalltalkers/" target="_blank">California Smalltalkers</a>
+- <a href="https://www.uksmalltalk.org" target="_blank">UK Smalltalk User Group</a>
+
 ## Cuis Smalltalk
 
 This blog primarily focuses on Cuis Smalltalk and running in macOS.
