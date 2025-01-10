@@ -95,7 +95,7 @@ defined in the `Collection` class.
 | `asArray`               | answers `Array` instance whose elements are those in receiver                                                                              |
 | `asBag`                 | answers `Bag` instance whose elements are those in receiver                                                                                |
 | `asCommaStringAnd`      | answers comma-separated `String` where last elements are separated by "and"                                                                |
-| `asIdentitySet`         | answers `IdentifySet` instance whose elements are those in receiver with no duplicates                                                     |
+| `asIdentitySet`         | answers `IdentitySet` instance whose elements are those in receiver with no duplicates                                                     |
 | `asOrderedCollection`   | answers `OrderedCollection` instance whose elements are those in receiver                                                                  |
 | `asSortedCollection`    | answers `SortedCollection` instance whose elements are those in receiver                                                                   |
 | `asSortedCollection:`   | same as `asSortedCollection`, but takes block that defines sort order                                                                      |
@@ -815,8 +815,13 @@ The values `2` and `3` indicate that the object in indexable.
 The collection classes `IdentityBag`, `IdentityDictionary`, and `IdentitySet`
 are similar to their non-identity counterparts,
 but differ in that elements are compared using `==` instead of `=`.
-This means it checks to see if they are the same object in memory
+This means they check whether objects are the same memory
 rather than checking for equal values.
+The advantage is that this check can be done more quickly.
+
+They use hash values returned by the
+`ProtoObject` instance method `identityHash`.
+TODO: Does this use the memory address of the object?
 
 ## Weak Collections
 
