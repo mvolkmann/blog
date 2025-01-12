@@ -487,6 +487,7 @@ initialize
 
 column := LayoutMorph newColumn.
 column layoutSpec fixedWidth: 300; fixedHeight: 200.
+"Add a border to the LayoutMorph."
 column borderColor: Color green; borderWidth: 5.
 
 row := LayoutMorph newRow.
@@ -770,6 +771,16 @@ openAtCursor
         ifNotNil: [:w |
             w addMorph: self centeredNear: w activeHand morphPosition.
         ]
+```
+
+### Adding Borders
+
+To add a border around a morph with a given color and width,
+send it the message `#borderColor:borderWidth`.
+For example:
+
+```smalltalk
+myMorph borderColor: Color red; borderWidth: 3.
 ```
 
 ### Drawing Lines and Shapes
@@ -1096,6 +1107,11 @@ which has the following inheritance hierarchy.
               - `SystemWindow`
                 - `CodeWindow`
                   - `BrowserWindow`
+
+## SystemWindow
+
+Instances of this class have the instance property `layoutMorph`
+that is set to a `LayoutMorph` whose `direction` defaults to `#vertical`.
 
 ## Fonts
 
