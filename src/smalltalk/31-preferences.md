@@ -21,6 +21,124 @@ To change the value of a preference:
 - Close the Inspect window.
 - Close the Preferences window.
 
+## Built-in Preferences
+
+The global object `Preferences` is an instance of the `PreferenceSet` class.
+The base Cuis image populates this with the following preferences:
+
+- `#aaFontsColormapDepth`
+- `#allowBlockArgumentAssignment`
+- `#allowNonBooleanReceiversOfBooleanMessages`
+- `#allowNonLocalReturnsInExceptionHandlers`
+- `#alternativeBrowseIt`
+- `#askConfirmationOnQuit`
+- `#askToInstallComplexPackage`
+- `#atMinusDigitMeaning`
+- `#autoNumberUserChanges`
+- `#autoReplaceNamedCharacters`
+- `#automaticPlatformSettings`
+- `#backgroundEffect`
+- `#balloonHelpEnabled`
+- `#biggerCursors`
+- `#browseWithPrettyPrint`
+- `#browserWindowClass`
+- `#cacheDisplayContentWhenMovingMorphs`
+- `#cacheTrueTypeGlyphs`
+- `#caseSensitiveFinds`
+- `#changeSetVersionNumbers`
+- `#cheapWindowReframe`
+- `#checkForSlips`
+- `#checkLostChangesOnStartUp`
+- `#classAnnotations`
+- `#classFinder`
+- `#clearPackagePathsOnImageMove`
+- `#clickGrabsMorphs`
+- `#cmdDotEnabled`
+- `#cmdDotInterruptTakesStatistics`
+- `#ctrlArrowsScrollHorizontally`
+- `#debugHaloHandle`
+- `#debugLogTimestamp`
+- `#debugShowDamage`
+- `#decorateBrowserButtons`
+- `#defaultAuthorName`
+- `#defaultFontSize`
+- `#diffsInChangeList`
+- `#diffsWithPrettyPrint`
+- `#dismissAllOnOptionClose`
+- `#drawKeyboardFocusIndicator`
+- `#extraDebuggerButtons`
+- `#fileOutANSIassignment`
+- `#focusFollowsMouse`
+- `#focusIndicatorWidth`
+- `#fullPrintItInWorkspaces`
+- `#fullScreenLeavesDeskMargins`
+- `#haloEnclosesFullBounds`
+- `#haloHandleSize`
+- `#haloSpecifications`
+- `#halosMorphBoundsFillColor`
+- `#halosMorphBoundsFrameColor`
+- `#halosShowCoordinateSystem`
+- `#highlightBlockNesting`
+- `#initialFileListDirectories`
+- `#italicsInShout`
+- `#listClassesHierarchically`
+- `#logDebuggerStackToFile`
+- `#machine`
+- `#menuKeyboardControl`
+- `#messageCategoryAnnotations`
+- `#methodAnnotations`
+- `#optionalButtons`
+- `#pointer`
+- `#prettyPrintRectangularBlocks`
+- `#properDisplayAlphaForFonts`
+- `#roundedButtonRadius`
+- `#roundedWindowRadius`
+- `#saveReleaseOptionsInWorldMenu`
+- `#scrollbarThickness`
+- `#selectionsMayShrink`
+- `#selectiveHalos`
+- `#serverMode`
+- `#shiftClickShowsImplementors`
+- `#shoutInWorkspaces`
+- `#showAnnotations`
+- `#showAssignmentAsLeftArrow`
+- `#showLinesInHierarchyViews`
+- `#soundQuickStart`
+- `#soundStopWhenDone`
+- `#soundsEnabled`
+- `#standardButtonFont`
+- `#standardCodeFont`
+- `#standardListFont`
+- `#standardMenuFont`
+- `#stylingWithEmphasisInWorkspaces`
+- `#subPixelRenderColorFonts`
+- `#subPixelRenderFonts`
+- `#syntaxHighlightingAsYouType`
+- `#systemCategoryAnnotations`
+- `#systemWindowEmbedOK`
+- `#tapAndHoldEmulatesButton2`
+- `#thoroughSenders`
+- `#tileResizerInWindowMenu`
+- `#transcriptLogVerbose`
+- `#usePreDebugWindow`
+- `#useUserPrefsFile`
+- `#userChangesFileNameExtension`
+- `#wantsMenuIcons`
+- `#warnAboutNonLocalReturnsInExceptionHandlers`
+- `#warnAndOfferLastUserChanges`
+- `#warnIfNoChangesFile`
+- `#warnIfNoSourcesFile`
+- `#windowTitleFont`
+- `#worldMenu`
+
+The following code sets a preference to enable playing sounds
+and plays a basic sound:
+
+```smalltalk
+Preferences at: #soundsEnabled put: true.
+Smalltalk primitiveBeep.
+```
+
 ## PreferenceSet
 
 Your packages can store user preferences in a `PreferenceSet`.
