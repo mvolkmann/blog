@@ -28,12 +28,6 @@ multipleArgBlock := [:a :b | a * b].
 ## Block Value
 
 The value of the block is the value of its last expression.
-If a block uses the caret operator (`^`) to return a value,
-the containing method will exit and return that value.
-This is referred to as a "non-local return".
-Few programming languages support this.
-Languages that do include Common Lisp, Prolog,
-Ruby, Scala, Scheme, and Smalltalk.
 
 Blocks take zero or more positional arguments,
 which is something methods cannot do.
@@ -60,6 +54,70 @@ multiArgBlock value: 1 value: 2 value: 3.
 multiArgBlock value: 1 value: 2 value: 3 value: 4.
 multiArgBlock valueWithArguments: #(1 2 3 4 5).
 ```
+
+## Non-local Returns
+
+If a block uses the caret operator (`^`) to return a value,
+the containing method will exit and return that value.
+This is referred to as a "non-local return".
+Few programming languages support this.
+Languages that do include Common Lisp, Prolog,
+Ruby, Scala, Scheme, and Smalltalk.
+
+Let's explore this with the following methods in a class named `BlockTest`.
+
+```smalltalk
+takeBlock1: aBlock
+    | result |
+
+    'entered takeBlock1' print.
+    result := self takeBlock2: aBlock.
+    'exiting takeBlock1' print.
+    ^ result.
+
+takeBlock2: aBlock
+    | result |
+
+    'entered takeBlock2' print.
+    result := aBlock value.
+    'exiting takeBlock2' print.
+    ^ result.
+```
+
+We can evalute the `takeBlock1` method as follows:
+
+```smalltalk
+BlockTest new takeBlock1: [ 19 ].
+```
+
+This will return `19` and output the following to the Transcript:
+
+```text
+entered takeBlock1
+entered takeBlock2
+exiting takeBlock2
+exiting takeBlock1
+```
+
+Now let's do the same thing, but add a caret inside the block
+so we have a non-local return.
+
+```smalltalk
+BlockTest new takeBlock1: [ ^ 19 ].
+```
+
+This will also return `19`,
+but it will only write the following to the Transcript:
+
+```text
+entered takeBlock1
+entered takeBlock2
+```
+
+This happens because the caret inside the block
+causes execution to skip the remainder of the code
+in the `takeBlock2` and `takeBlock1` methods and
+return to the expression where the block was initially used.
 
 ## Block Arguments
 
