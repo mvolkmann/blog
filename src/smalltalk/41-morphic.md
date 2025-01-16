@@ -977,6 +977,16 @@ For multi-line text entry, use `TextModelMorph`.
 
 TODO: Add much more detail here with examples.
 
+The following code creates an instance of `TextModelMorph`,
+listens for every keystroke inside it,
+and prints their ASCII codes to the Transcript:
+
+```smalltalk
+input := TextModelMorph withText: 'edit me'.
+input keystrokeAction: [ :evt | evt keyValue print ].
+input openInWorld.
+```
+
 ## Mouse Events
 
 To handle mouse clicks on a custom morph,

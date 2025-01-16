@@ -24,6 +24,33 @@ To set the opacity of a color, send the `#alpha:` message to a `Color` object
 with an argument that is a float value between
 zero (fully transparent) and one (fully opaque).
 
+There are many `Color` instance methods in the "transformations" category
+that return a variation on a given color. These include:
+
+- `adjustBrightness:`
+- `adjustSaturation:brightness:`
+- `alpha:`
+- `alphaMixed:with:`
+- `blacker`
+- `darker`
+- `duller`
+- `lighter`
+- `mixed:with:`
+- `muchDarker`
+- `muchLigher`
+- `negated`
+- `paler`
+- `quiteBlacker`
+- `quiteWhiter`
+- `slightlyDarker`
+- `slightlyLighter`
+- `slightlyWhiter`
+- `twiceDarker`
+- `twiceLighter`
+- `veryMuchDarker`
+- `veryMuchLighter`
+- `whiter`
+
 ## XKCD Colors
 
 Cuis Smalltalk supports many sets of named colors.
@@ -64,6 +91,20 @@ To open a color palette that uses this `Dictionary`:
 - Select "New Morph...".
 - Select "User Interface...A - Dro...ColorPalette".
 - Move the mouse to where it should be dropped and click to drop it.
+
+## Themes
+
+Themes were described in the "Getting Started" section.
+
+The `Theme` class method category "icons" contains many methods
+that return specific icons.
+
+The `Theme` class method categories "colors", "menu colors",
+"tool colors", "widget colors" contain many methods
+that return `Color` objects for specific uses.
+
+The `Theme` class method category "other options" contains many methods
+that return sizes for sizes, radius values, and Boolean flags.
 
 ## ColorEditorPanel
 

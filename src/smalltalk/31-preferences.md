@@ -24,7 +24,9 @@ To change the value of a preference:
 ## Built-in Preferences
 
 The global object `Preferences` is an instance of the `PreferenceSet` class.
-The base Cuis image populates this with the following preferences:
+The base Cuis image populates this with the following preferences.
+This list was obtained by evaluating
+`Preferences allPreferences keys asSortedCollection print`.
 
 - `#aaFontsColormapDepth`
 - `#allowBlockArgumentAssignment`
