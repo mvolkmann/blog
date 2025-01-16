@@ -119,6 +119,11 @@ causes execution to skip the remainder of the code
 in the `takeBlock2` and `takeBlock1` methods and
 return to the expression where the block was initially used.
 
+Use of non-local returns is generally discouraged
+because they can make the code harder to understand.
+However, they are sometimes used in scenarios such as
+implementing control structures and handling errors.
+
 ## Block Arguments
 
 A block must be passed the same number of arguments as it has parameters.
