@@ -1646,6 +1646,13 @@ stepTime
     ^ 5 "default is 1000 for once per second"
 ```
 
+## Blocking UI Updates
+
+UI updates do not become visible until the method that made them completes.
+This can be an issue when methods are long-running.
+To address this, run such methods in a new process.
+See the section "Running in Another Process" in the "Blocks" chapter.
+
 ## Redrawing
 
 After making code changes, if the UI does not update properly,

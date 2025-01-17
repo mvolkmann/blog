@@ -213,7 +213,7 @@ See the "Exception Handing" section for details on how
 blocks can be used to execute code that may raise an exception
 and exceptions can be handled.
 
-## Running in another Process
+## Running in Another Process
 
 The Squeak VM is single-threaded, like JavaScript.
 Processes do not run in separate threads
@@ -278,6 +278,38 @@ process := [:a :b |
 ] newProcessWith: #(2 3).
 process name: 'addition'.
 process resume.
+```
+
+The `fork` method is useful for blocks of long-running code
+that would otherwise prevent UI updates.
+The following code iterates through the numbers 1 to 5,
+prints each number, and delays for one second.
+
+```smalltalk
+delay := Delay forSeconds: 1.
+1 to: 5 do: [ :n |
+    n print.
+    delay wait.
+].
+```
+
+This code does not produce the desired result.
+UI updates, including writing to the Transcript,
+are blocked until the code completes.
+Nothing appears in the Transcript for five seconds
+and then all the numbers appear at once.
+
+To fix this, we can wrap the entire iteration loop
+in a block and send `#fork` to it so it runs in a new process.
+This avoids blocking UI updates and allows
+one number per second to appear in the Transcript.
+
+```smalltalk
+delay := Delay forSeconds: 1.
+[ 1 to: 5 do: [ :n |
+    n print.
+    delay wait.
+]] fork.
 ```
 
 ## Partial Application
