@@ -1650,6 +1650,8 @@ stepTime
 
 UI updates do not become visible until the method that made them completes.
 This can be an issue when methods are long-running.
+This affects all morphs, including those provided by
+the development environment, such as the Transcript window.
 To address this, run such methods in a new process.
 See the section "Running in Another Process" in the "Blocks" chapter.
 
