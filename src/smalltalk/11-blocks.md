@@ -213,6 +213,18 @@ See the "Exception Handing" section for details on how
 blocks can be used to execute code that may raise an exception
 and exceptions can be handled.
 
+## Time to Run
+
+To evaluate a block by sending it `#value` AND
+determine how long it took to execute,
+send the block `#millisecondsToRun`.
+For example:
+
+```smalltalk
+block := [ 1 to: 1000 do: [ :i | i print ] ].
+ms := block millisecondsToRun.
+```
+
 ## Running in Another Process
 
 The Squeak VM is single-threaded, like JavaScript.
