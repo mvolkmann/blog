@@ -4792,7 +4792,7 @@ and a `ShareLink` that shares an `Image`.
 ```swift
 struct ContentView: View {
     private let linkColor: Color = .purple
-    private let urlDescription = "Mark Volkmann's Blog"
+    private let urlDescription = "The Question Mark - blog by Mark Volkmann"
     private let link = URL(string: "https://mvolkmann.github.io/blog")!
     private let linkSize: CGFloat = 20
 
