@@ -225,6 +225,13 @@ block := [ 1 to: 1000 do: [ :i | i print ] ].
 ms := block millisecondsToRun.
 ```
 
+One way to measure the time required to evaluate
+a set of expressions not contained in a block is to:
+
+- precede the expressions with `startTime := Time now.`
+- follow the expressions with
+  `durationNanos := (Time now - startTime) totalNanoSeconds.`
+
 ## Running in Another Process
 
 The Squeak VM is single-threaded, like JavaScript.
