@@ -179,16 +179,13 @@ To install Cuis Smalltalk:
    If the rolling release was selected,
    this will create the directory `Cuis-Smalltalk-Dev`.
 
-To start Cuis Smalltalk, edit the appropriate start script found
-in the installed directory based on your operating system
-to refer to the correct version of the Cuis `.image` file
-and then run the script.
-For example, change `Cuis?.?-????` to `Cuis7.3-6989`.
+To start Cuis Smalltalk from a terminal,
+run one of the platform-specific scripts.
 
 - For Windows, open a Command Prompt and enter `RunCuisOnWindows.bat`.
 - For Linux, open a Terminal and enter `./RunCuisOnLinux.sh`.
 - For macOS, open a Terminal and enter `./RunCuisOnMacTerminal.sh`.
-  Alternatively, double-click the file `Cuis7.1-6770.image`
+  Alternatively, double-click the file `Cuis{version}.image`
   in the `CuisImage` subdirectory.
 
 The window that appears has a blue background by default.
