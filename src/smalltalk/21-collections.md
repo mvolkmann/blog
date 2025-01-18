@@ -262,8 +262,17 @@ Most of the interesting `Array` methods are defined in
 the superclasses `SequenceableCollection` and `Collection`.
 
 Compile-time literal arrays begin with `#(`, end with `)`,
-and contain space-separated values.
+and contain space-separated expressions.
+The expressions can be literal values
+or expressions whose values can be determined at compile-time.
 For example, `#(true 7 'Tami' (Color red))`.
+
+Compile-time literal arrays cannot contain references to variables or
+other expressions whose values cannot be determined until run-time.
+The expression `#(a b c)` is not interpreted as
+an array containing the values of the variables `a`, `b`, `c`.
+It is instead interpreted as an array
+containing the symbols `#a`, `#b`, and `#c`.
 
 Run-time literal arrays (a.k.a. dynamic arrays)
 begin with `{`, end with `}`, and contain dot-separated expressions.
