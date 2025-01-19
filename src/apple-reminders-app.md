@@ -106,6 +106,33 @@ To modify a reminder:
 To delete a reminder, swipe it left and
 tap the "Delete" button that is exposed.
 
+### Subtasks
+
+Reminders can have subtasks.
+
+To add a subtask to a reminder:
+
+- Tap the circled ellipsis on the right side of a reminder to open a dialog.
+- Tap "Subtask".
+- Tap "Add Reminder".
+- Enter descriptions for any number of subtasks.
+- Tap "< Details" in the upper-left of the dialog.
+- Tap "Done" in the upper-right of the dialog.
+
+Alternatively, drag a reminder onto its intended parent reminder.
+
+Subtasks appear indented below their parent task.
+
+One more approach is to drag a reminder to below its intended parent reminder,
+swipe it right, and tap "Indent".
+To undo the indent, swipe it right again and tap "Outdent".
+
+Subtasks can be collapsed. When they are collapsed,
+the parent task will display the number of hidden subtasks.
+
+Marking all subtasks as completed does not mark the parent task as completed.
+That must be done manually.
+
 ### Sorting
 
 The reminders in a list can be sorted in ascending or descending order
@@ -125,15 +152,43 @@ dragged up and down to manually reorder them.
 
 The reminders in a list can be organized into sections.
 
-### Folders
+To add a section to the currently selected list:
 
-Related lists can be grouped into folders.
+- Tap the circled ellipsis in the upper-right.
+- Tap "New Section".
+- Enter a name for the section.
+
+Existing reminders will appear in a section titled "Others".
+
+To associated a reminder with a given section, drag it to the section.
+It's easiest to drag reminders by pressing to
+the area to the right of its description.
+This avoids being interpreted as an attempt to modify the description or note.
+
+### Groups
+
+Related lists can be grouped.
+
+To create a new group, drag one list onto a related list,
+enter a group title, and tap "Create".
+
+Alternatively:
+
+- Tap the ellipsis button that the top of the left nav.
+- Tap "Edit Lists".
+- Tap "Add Group" at the bottom of the left nav.
+- Enter a group title.
+- Tap "Include".
+- Select the lists to be included in the group.
+- Tap the "< New Group" button in the upper-left of the dialog.
+- Tap "Create" in the upper-right of the dialog.
+
+To delete a group, swipe it left and tap the "Delete" button that is exposed.
 
 ### Unorganized Content
 
 - Reminders app: The kanban board columns are really sections that can be created in another way when not in list view (view as columns versus view as list; manage columns versus manage sections)
 - Describe creating an adding tags to items. This can be done either from the button or from the get info dialogue.
-- tap the eye button for a reminder item to get the option to add subtasks
 - select “show list info” to get a dialogue where you can change the color and icon for a list
 - describe creating smart lists that are based on a set of tags; there is a button at the bottom of the show info. Dialogue to convert a normal list to a smart list.
 - “View as Columns” adds the ability to drag items to different columns, which are actually sections
@@ -153,10 +208,6 @@ Related lists can be grouped into folders.
 - Smart lists show all reminders with specified tags or priority. Their icon has a small gear in the lower right corner. They can be set to match on any or all conditions.
 - A normal list can be converted to a smart list.
 - Does every reminder need to reside in some non-smart list?
-- A reminder can have subtasks, created by dragging a reminder into the parent.
-- Subtasks are indented.
-- Subtasks can be collapsed and the parent will display the number of hidden subtasks.
-- Marking all subtasks as completed does not mark the parent task as completed.
 - To drag a reminder and not have the app think you want to modify its description, drag from the right of the description.
 - Can share a list with other Apple users so multiple people can view and update it.
 - Can assign tasks to specific people that are sharing a list.
