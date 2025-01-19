@@ -265,6 +265,18 @@ defined in the `BoxedFloat64` and `SmallFloat64` classes
 | `>=`   | answers `Boolean` value indicating if receiver is greater than or equal to argument |
 | `~=`   | answers `Boolean` value indicating if receiver is not equal to argument             |
 
+The following table describes some of the class methods defined
+in the `Float` class that return constant values.
+
+| Method   | Value              |
+| -------- | ------------------ |
+| `e`      | 2.718281828459045  |
+| `halfPi` | 1.5707963267948966 |
+| `one`    | 1.0                |
+| `pi`     | 3.141592653589793  |
+| `twoPi`  | 6.283185307179586  |
+| `zero`   | 0.0                |
+
 ### Integer
 
 The following table describes some of the instance methods defined
