@@ -11,11 +11,12 @@ It runs on Mac computers (macOS), iPads (iPadOS),
 iPhones (iOS), and Apple Watches (watchOS).
 The data is synced across all these devices.
 
-Reminders can be added using Siri.
+Reminders can be added using Siri,
+which is typically faster than typing them.
 Just speak phrases in forms like the following:
 
 - Remind me to {task}
-- Add a reminder to my {list-name} list to {task}
+- Add {task} to my {list-name} list
 - Remind me to {task} at {time} today
 - Remind me to {task} at {time} on {day-or-date}
 - Remind me to {task} on {date} at {time}
@@ -88,6 +89,8 @@ To add a reminder to a list:
   - List - change to move the reminder to a different list
   - Subtasks
 
+Reminders with a date can be set to repeat at a specified interval.
+
 To modify a reminder:
 
 - Tap it.
@@ -146,7 +149,37 @@ dragged up and down to manually reorder them.
 
 ### Smart Lists
 
+Smart lists display reminders that are also in non-smart lists
+based specified critera.
+The criteria can include tags,
+
+To create a smart list:
+
+- Tap "Add List" at the bottom of the left nav.
+- Enter a name for the list.
+- Change the list type to "Smart List".
+- Tap "Edit Filters".
+- Specify the criteria as any combination of tags, due date, due time,
+  location, flag state, priority, and specific source lists.
+  For example, tap "Priority" and select "High"
+  to create a smart list that displays all the high priority reminders
+  found in any non-smart list.
+
 ### Sharing Lists
+
+A specific list can be shared with other Apple users
+so multiple people can view and update the reminders in it.
+This is ideal for lists such a grocery lists.
+
+To share a list the currently selected list:
+
+- Tap the share button in the upper-right.
+- Optionally tap "People you invite ..." to specify whether
+  the selected person can add others to the sharing group.
+- Tap "Messages" and enter a phone number,
+  tap a button for a specific person,
+  or tap "Mail".
+- Send the message.
 
 ### Sections
 
@@ -160,14 +193,43 @@ To add a section to the currently selected list:
 
 Existing reminders will appear in a section titled "Others".
 
-To associated a reminder with a given section, drag it to the section.
+To associate a reminder with a given section, drag it to the section.
 It's easiest to drag reminders by pressing to
 the area to the right of its description.
 This avoids being interpreted as an attempt to modify the description or note.
 
+To reorder sections:
+
+- Tap the circled ellipsis in the upper-right.
+- Tap "Manage section".
+- Drag section names up or down.
+
+Alternative, in the list view, drag section names up or down.
+
+To view sections of the currently selected list in columns like a Kanban board:
+
+- Tap the circled ellipsis in the upper-right.
+- Tap "View as Columns".
+- Drag section names left or right to reorder the columns.
+
+The Reminders app does not infer any kind of relative priority of reminders
+based the position of the columns in which they appear.
+However, the left to right order may be meaningful to you,
+especially when modeling a Kanban board with section names like
+"Backlog", "In Progress", "Ready for Review", and "Complete".
+
+When viewing sections as colunns, the ellipsis menu
+contains "Manage Columns" instead of "Manage Sections",
+but the functionality is the same.
+
+To stop viewing sections in columns:
+
+- Tap the circled ellipsis in the upper-right.
+- Tap "View as List".
+
 ### Groups
 
-Related lists can be grouped.
+Related lists can be grouped into what appears as a folder in the left nav.
 
 To create a new group, drag one list onto a related list,
 enter a group title, and tap "Create".
@@ -185,22 +247,36 @@ Alternatively:
 
 To delete a group, swipe it left and tap the "Delete" button that is exposed.
 
+### Widgets
+
+Three differently sized widgets can be added to the home screen.
+These enable viewing reminders and marking them as completed
+without going to the app.
+
+To add a widget:
+
+- Press down on the home screen.
+- Tap the "Edit" button in the upper-left.
+- Tap "Add Widget".
+- Scroll down in the list of apps until "Reminders" appears and tap it.
+- Swipe right and left to select one of the three available sizes.
+- Tap the "Add Widget" button.
+
+I don't personally find the use of these widgets compelling.
+I'd rather just use the full app.
+
 ### Unorganized Content
 
-- Reminders app: The kanban board columns are really sections that can be created in another way when not in list view (view as columns versus view as list; manage columns versus manage sections)
 - Describe creating an adding tags to items. This can be done either from the button or from the get info dialogue.
 - select “show list info” to get a dialogue where you can change the color and icon for a list
 - describe creating smart lists that are based on a set of tags; there is a button at the bottom of the show info. Dialogue to convert a normal list to a smart list.
 - “View as Columns” adds the ability to drag items to different columns, which are actually sections
 - Reminders can link to Mail, Notes, Safari, and Messages items (It’s easy to create a reminder from an item in those apps instead of adding the link inside the Reminders app? In other apps, do this through the share button. Tap the Reminders app. That opens a dialogue where remind your text can be entered. In macOS, you can drag items directly into the Reminders app. You can also do this in iOS, if you tap and hold an item, then swipe up from the bottom of the screen to select the Reminders app then drop the item onto a target list.)
 - you can receive reminder notifications based on your location. To do this, select a reminder, tap the info button, turn on location, and select a location, such as home or work. It will be marked as showing the reminder either when you arrive or when you leave the location. To toggle that, tap the location again.
-- You can add a date to each reminder. That can be the date the item should be completed or the date on which you should be reminded. You can also select a specific time on that day. Reminders with a date can be set to repeat at a specified interval.
 - There are several widgets you can add to your home screen for the Reminders app.
 - Tapping the hollow circle on the left side of a reminder marks it as completed, but doesn’t delete it. You can still choose to view the completed items.
 - Lists of type “Groceries” automatically categorize their items in categories like Beverages, Dairy, and Produce.
 - Tap the three dots in the upper-right and then “Show Completed” to see items marked as completed (or purchased). Tap specific completed items to return them to the uncompleted state. This is great for updating a grocery list.
-- Dictating new reminders is faster than typing them.
-- To add a reminder with Siri, say “add **_ to my _** list”.
 - When changing the icon for a list, tap the emoji icon to select any emoji (more detailed and multi-color)
 - Can add arbitrary tags to a reminder or to all selected reminders.
 - click a tag in the left nav to see all the reminders that have that tag.
@@ -209,15 +285,12 @@ To delete a group, swipe it left and tap the "Delete" button that is exposed.
 - A normal list can be converted to a smart list.
 - Does every reminder need to reside in some non-smart list?
 - To drag a reminder and not have the app think you want to modify its description, drag from the right of the description.
-- Can share a list with other Apple users so multiple people can view and update it.
 - Can assign tasks to specific people that are sharing a list.
 - Can create a list template from an existing list.
 - Can create a new list from a template. This is ideal for packing lists. Create the template once and create a new list from it for every trip. After the trip, delete the list, but keep the template for future trips.
 - To create a template from an existing list, select a list, tap … in the upper right, and select “Save as Template”.
 - To create a new list from a template, tap “Add List”, tap the “Templates” tab, tap a template, enter a name for the new list, and tap “Create”.
 - To edit an existing template, tap ... at the top of the left column, select “Templates”, tap “i” to the right of a template name, tap “Edit Template”, makes changes, and tap “Done”. This will not modify existing lists that were created from the template.
-- Lists can be grouped into a groups (folders) like your Computer list.
-- Do you create a group by dragging one list on top of another? You can also create a group by tapping … at the top of the left nav, tapping “Edit Lists” in the popup, and tapping “New Group” at the bottom of the left nav.
 - When you select a group in the left NAV, all the list inside it will appear in the main area grouped in sections that are the list names.
 - The Today list can group its items by morning, afternoon, and evening. They seem to be automatically assigned at times of 9 AM, 3 PM, and 6 PM.
 - In the info dialogue for a task you can add early reminders to be reminded before the due date.
@@ -228,4 +301,3 @@ To delete a group, swipe it left and tap the "Delete" button that is exposed.
 - The default list for new reminders added with Siri is specified in the Settings for the Reminders app.
 - The time at which you will be reminded about reminders that have a date, but no time, is specified in the Settings for the Reminders app.
 - Including the number of reminders due today as a badge on the Reminders app icon is enabled in the Settings for the Reminders app. This seems to appear on the icon regardless of this setting.
-- Can add three different widget sizes to home screen to enable viewing reminders and marking them as completed without going to the app.
