@@ -4,7 +4,7 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-## Overview
+### Overview
 
 Apple Reminders is an excellent app for task management.
 It runs on Mac computers (macOS), iPads (iPadOS),
@@ -36,7 +36,7 @@ The left nav area displays large buttons for navigating to "pinned lists",
 followed by the names of non-pinned lists.
 Tapping a list button or name opens the list in the main area.
 
-## Lists
+### Lists
 
 Reminders can manage any number of task lists.
 
@@ -66,7 +66,7 @@ To delete a list:
   This will delete all the reminders in the list.
 - Tap "Delete" to confirm.
 
-## Reminders
+### Reminders
 
 To add a reminder to a list:
 
@@ -106,7 +106,7 @@ To modify a reminder:
 To delete a reminder, swipe it left and
 tap the "Delete" button that is exposed.
 
-## Sorting
+### Sorting
 
 The reminders in a list can be sorted in ascending or descending order
 based on their "Due Date", "Creation Date", "Priority", or "Title".
@@ -117,19 +117,19 @@ select "Sort By", and choose an option.
 Select "Manual" to enable the reminders to be
 dragged up and down to manually reorder them.
 
-## Smart Lists
+### Smart Lists
 
-## Sharing Lists
+### Sharing Lists
 
-## Sections
+### Sections
 
 The reminders in a list can be organized into sections.
 
-## Folders
+### Folders
 
 Related lists can be grouped into folders.
 
-## Unorganized Content
+### Unorganized Content
 
 - Reminders app: The kanban board columns are really sections that can be created in another way when not in list view (view as columns versus view as list; manage columns versus manage sections)
 - Describe creating an adding tags to items. This can be done either from the button or from the get info dialogue.
