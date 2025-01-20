@@ -384,3 +384,5 @@ I'd rather just use the full app.
 - Reminders that have a day, but not a time will appear at the top of a day in the calendar. Dragging it down to a specific time will set the time in the reminder.
 - dragging reminders in the calendar is probably not supported for recurring reminders
 - selecting a group of lists in the left NAV displays the reminders in each list within the group as separate sections.
+- Can you copy, paste, or duplicate a reminder?
+- Can multiple reminders be selected and dragged to a different list?
