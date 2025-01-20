@@ -260,7 +260,7 @@ To create a smart list:
   to create a smart list that displays all the high priority reminders
   found in any non-smart list.
 
-## Pinned Lists
+### Pinned Lists
 
 Lists can be pinned which makes them appear
 as buttons at the top of the left nav.
