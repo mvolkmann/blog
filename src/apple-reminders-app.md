@@ -116,6 +116,26 @@ To move a reminder to another list, drag it or:
 
 To delete a reminder, swipe it left and
 tap the "Delete" button that is exposed.
+Deleted reminders are held in a list named "Recently Deleted"
+that is always at the bottom of the left nav.
+The reminders are not actually deleted until that list is cleared.
+To clear it, tap the list, tap the circled ellipsis in the upper-right,
+and tap "Delete All".
+
+To search for a reminder containing specific text,
+tap the "Search" input at the top of the left nav
+and enter the text there.
+
+### Calendar Integration
+
+Reminders with dates appear in the iOS/iPad Calendar app (not in macOS)
+with a checkbox in front of their description.
+If they also have a time, the appear in the Calendar app at that time.
+
+To make a reminder as completed from the Calendar app,
+tap it open a dialog,
+tap the checkbox to the left of the reminder description,
+and tap "Done".
 
 ### Subtasks
 
@@ -155,62 +175,6 @@ tap the circled ellipsis in the upper-right,
 select "Sort By", and choose an option.
 Select "Manual" to enable the reminders to be
 dragged up and down to manually reorder them.
-
-### Smart Lists
-
-Smart lists display reminders that are also in non-smart lists
-based specified critera.
-The criteria can include tags,
-
-To create a smart list:
-
-- Tap "Add List" at the bottom of the left nav.
-- Enter a name for the list.
-- Change the list type to "Smart List".
-- Tap "Edit Filters".
-- Specify the criteria as any combination of tags, due date, due time,
-  location, flag state, priority, and specific source lists.
-  For example, tap "Priority" and select "High"
-  to create a smart list that displays all the high priority reminders
-  found in any non-smart list.
-
-## Pinned Lists
-
-Lists can be pinned which makes them appear
-as buttons at the top of the left nav.
-There is a default set of pinned lists.
-
-To unpin a pinned list,
-press on it until a popup appears and tap "Hide".
-
-To pin an unpinned list,
-press on it until a popup appears and tap "Pin".
-
-To restore a list that was pinned by default
-and is now unpinned,
-tap the the circled ellipsis at the top of the left nav,
-tap "Edit List", and tap the hollow circle
-to the left of the name of an unpined list.
-
-To change the order of pinned lists,
-tap the the circled ellipsis at the top of the left nav,
-tap "Edit List", and drag the pinned lists up and down.
-
-### Sharing Lists
-
-A specific list can be shared with other Apple users
-so multiple people can view and update the reminders in it.
-This is ideal for lists such a grocery lists.
-
-To share a list the currently selected list:
-
-- Tap the share button in the upper-right.
-- Optionally tap "People you invite ..." to specify whether
-  the selected person can add others to the sharing group.
-- Tap "Messages" and enter a phone number,
-  tap a button for a specific person,
-  or tap "Mail".
-- Send the message.
 
 ### Sections
 
@@ -278,6 +242,89 @@ Alternatively:
 
 To delete a group, swipe it left and tap the "Delete" button that is exposed.
 
+### Smart Lists
+
+Smart lists display reminders that are also in non-smart lists
+based specified critera.
+The criteria can include tags,
+
+To create a smart list:
+
+- Tap "Add List" at the bottom of the left nav.
+- Enter a name for the list.
+- Change the list type to "Smart List".
+- Tap "Edit Filters".
+- Specify the criteria as any combination of tags, due date, due time,
+  location, flag state, priority, and specific source lists.
+  For example, tap "Priority" and select "High"
+  to create a smart list that displays all the high priority reminders
+  found in any non-smart list.
+
+## Pinned Lists
+
+Lists can be pinned which makes them appear
+as buttons at the top of the left nav.
+Unfortunately, groups cannot be pinned.
+
+There is a default set of pinned lists.
+
+To unpin a pinned list,
+press on it until a popup appears and tap "Hide".
+
+To pin an unpinned list,
+press on it until a popup appears and tap "Pin".
+
+To restore a list that was pinned by default
+and is now unpinned,
+tap the the circled ellipsis at the top of the left nav,
+tap "Edit List", and tap the hollow circle
+to the left of the name of an unpined list.
+
+To change the order of pinned lists,
+tap the the circled ellipsis at the top of the left nav,
+tap "Edit List", and drag the pinned lists up and down.
+
+### Today Focus
+
+I find it useful to create a group of lists I can select
+to see a prioritized list of tasks that are my goals for today.
+To create this:
+
+- Create a smart list named "Must Do" where the enabled filters are
+  Date: Today and Priority: High.
+- Create a smart list named "Should Do" where the enabled filters are
+  Date: Today and Priority: Medium.
+- Create a smart list named "Could Do" where the enabled filters are
+  Date: Today and Priority: Low.
+- Create a smart list named "Unprioritized" where the enabled filters are
+  Date: Today and Priority: No Priority.
+- Create a group named "Today Focus".
+- Drag each of the lists created above into the group.
+- Drag the "Today Focus" group to the top of the "My Lists" section
+  in the left nav.
+
+Every day, consider the reminders to be addressed that day.
+For each one, set its Date to Today and its Priority to the appropriate value.
+In the left nav, tap "Today Focus"
+to see all of the tasks in the lists within that group,
+ordered from highest to lowest priority.
+
+### Sharing Lists
+
+A specific list can be shared with other Apple users
+so multiple people can view and update the reminders in it.
+This is ideal for lists such a grocery lists.
+
+To share a list the currently selected list:
+
+- Tap the share button in the upper-right.
+- Optionally tap "People you invite ..." to specify whether
+  the selected person can add others to the sharing group.
+- Tap "Messages" and enter a phone number,
+  tap a button for a specific person,
+  or tap "Mail".
+- Send the message.
+
 ### Widgets
 
 Three differently sized widgets can be added to the home screen.
@@ -337,7 +384,3 @@ I'd rather just use the full app.
 - Reminders that have a day, but not a time will appear at the top of a day in the calendar. Dragging it down to a specific time will set the time in the reminder.
 - dragging reminders in the calendar is probably not supported for recurring reminders
 - selecting a group of lists in the left NAV displays the reminders in each list within the group as separate sections.
-- deleted reminders are held in a list called “Recently Deleted”, and not really deleted until that list is cleared. To clear it, tap the list, tap the … button, and tap “Delete All”.
-- Document how you created the to-do focus group.
-- Reminders with dates or times appear in the calendar app with a checkbox in front of their description.
-- Say that groups cannot be pinned to the top part of the left nav.
