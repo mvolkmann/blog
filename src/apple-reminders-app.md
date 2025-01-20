@@ -106,6 +106,14 @@ To modify a reminder:
   to add or remove a tag.
 - Optionally tap the circled "i" to modify other aspects
 
+To move a reminder to another list, drag it or:
+
+- Tap it to select it.
+- Tap the circled "i" on its right.
+- In the dialog that opens, scroll down to "List".
+- Tap "List".
+- Tap the name of the list to which it should be moved.
+
 To delete a reminder, swipe it left and
 tap the "Delete" button that is exposed.
 
@@ -125,6 +133,7 @@ To add a subtask to a reminder:
 Alternatively, drag a reminder onto its intended parent reminder.
 
 Subtasks appear indented below their parent task.
+Parent tasks appear in bold.
 
 One more approach is to drag a reminder to below its intended parent reminder,
 swipe it right, and tap "Indent".
@@ -164,6 +173,28 @@ To create a smart list:
   For example, tap "Priority" and select "High"
   to create a smart list that displays all the high priority reminders
   found in any non-smart list.
+
+## Pinned Lists
+
+Lists can be pinned which makes them appear
+as buttons at the top of the left nav.
+There is a default set of pinned lists.
+
+To unpin a pinned list,
+press on it until a popup appears and tap "Hide".
+
+To pin an unpinned list,
+press on it until a popup appears and tap "Pin".
+
+To restore a list that was pinned by default
+and is now unpinned,
+tap the the circled ellipsis at the top of the left nav,
+tap "Edit List", and tap the hollow circle
+to the left of the name of an unpined list.
+
+To change the order of pinned lists,
+tap the the circled ellipsis at the top of the left nav,
+tap "Edit List", and drag the pinned lists up and down.
 
 ### Sharing Lists
 
@@ -301,3 +332,12 @@ I'd rather just use the full app.
 - The default list for new reminders added with Siri is specified in the Settings for the Reminders app.
 - The time at which you will be reminded about reminders that have a date, but no time, is specified in the Settings for the Reminders app.
 - Including the number of reminders due today as a badge on the Reminders app icon is enabled in the Settings for the Reminders app. This seems to appear on the icon regardless of this setting.
+- Reminders with dates or times appear in the calendar app with a checkbox in front of their description. To mark one as completed, tap it in the calendar, which opens a dialogue, tap the checkbox inside the dialogue, and tap done.
+- Reminders in the calendar can be dragged to different times or days, and the reminder will be updated inside the Reminders app.
+- Reminders that have a day, but not a time will appear at the top of a day in the calendar. Dragging it down to a specific time will set the time in the reminder.
+- dragging reminders in the calendar is probably not supported for recurring reminders
+- selecting a group of lists in the left NAV displays the reminders in each list within the group as separate sections.
+- deleted reminders are held in a list called “Recently Deleted”, and not really deleted until that list is cleared. To clear it, tap the list, tap the … button, and tap “Delete All”.
+- Document how you created the to-do focus group.
+- Reminders with dates or times appear in the calendar app with a checkbox in front of their description.
+- Say that groups cannot be pinned to the top part of the left nav.
