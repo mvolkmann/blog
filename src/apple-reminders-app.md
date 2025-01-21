@@ -176,6 +176,12 @@ To modify a reminder:
   tap specific tags to toggle whether they are applied to that reminder.
 - Optionally tap the circled "i" to modify other aspects
 
+Another way to modify a reminder is press down on it
+and wait for a popup to appear.
+The popup provides the ability to Cut, Copy, Mark as Completed, and Delete.
+It also supports modifying the Due Date, Flag state, Priority,
+containing list (Move to List), and Tags.
+
 To modify multiple reminders within a list in the same way:
 
 - Select the list.
@@ -229,11 +235,11 @@ The reminders are not actually deleted until that list is cleared.
 To clear it, tap the list, tap the circled ellipsis in the upper-right,
 and tap "Delete All".
 
-To search for a reminder containing specific text,
+To search for a reminder containing specific text in its description or note,
 tap the "Search" input at the top of the left nav
 and enter the text there.
 
-## Tags
+### Tags
 
 Tags enable identifying groups of reminders that reside in different lists.
 
@@ -375,6 +381,9 @@ To associate a reminder with a given section, drag it to the section.
 It's easiest to drag reminders by pressing to
 the area to the right of its description.
 This avoids being interpreted as an attempt to modify the description or note.
+
+To rename a section,
+TODO: ADD THIS!
 
 To reorder sections:
 
