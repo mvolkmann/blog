@@ -141,10 +141,22 @@ tap the hollow circle on its left side.
 This does not delete the reminder.
 It is just moved to the "Completed" list.
 
-To view the completed reminders,
+To view completed reminders across all lists,
 tap the pinned list "Completed" at the top of the left nav.
 To delete all completed reminders,
 tap "Clear" at the top of the Completed list.
+
+To show completed reminders in a specific list, select the list,
+tap the circled ellipsis in the upper-right, and tap "Show Completed".
+They will be displayed at the bottom of the list
+after all the uncompleted reminders.
+To delete all the completed reminders in the current list,
+tap "Clear" at the top.
+To change a completed reminder to uncompleted, tap its filled circle.
+This is great for updating a grocery list that will be reused.
+
+To hide completed reminders in a specific list, select the list,
+tap the circled ellipsis in the upper-right, and tap "Hide Completed".
 
 To modify a reminder:
 
@@ -488,6 +500,12 @@ To share a list the currently selected list:
   or tap "Mail".
 - Send the message.
 
+Tasks in a shared list can be be assign to
+specific people that are sharing the list.
+To do this, select a task, tap its circled "i",
+tap "Assign Item", and tap the name of a person.
+The person will receive a notification that tasks have been assigned to them.
+
 ### Templates
 
 TODO: Add detail here.
@@ -513,9 +531,6 @@ I'd rather just use the full app.
 ### Unorganized Content
 
 - Reminders can link to Mail, Notes, Safari, and Messages items (It’s easy to create a reminder from an item in those apps instead of adding the link inside the Reminders app? In other apps, do this through the share button. Tap the Reminders app. That opens a dialogue where remind your text can be entered. In macOS, you can drag items directly into the Reminders app. You can also do this in iOS, if you tap and hold an item, then swipe up from the bottom of the screen to select the Reminders app then drop the item onto a target list.)
-
-- Tap the three dots in the upper-right and then “Show Completed” to see items marked as completed (or purchased). Tap specific completed items to return them to the uncompleted state. This is great for updating a grocery list.
-- Can assign tasks to specific people that are sharing a list.
 
 - Can create a list template from an existing list.
 - Can create a new list from a template. This is ideal for packing lists. Create the template once and create a new list from it for every trip. After the trip, delete the list, but keep the template for future trips.
