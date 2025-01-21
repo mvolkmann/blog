@@ -143,6 +143,7 @@ It is just moved to the "Completed" list.
 
 To view completed reminders across all lists,
 tap the pinned list "Completed" at the top of the left nav.
+
 To delete all completed reminders,
 tap "Clear" at the top of the Completed list.
 
@@ -298,6 +299,26 @@ To mark a reminder as completed from the Calendar app,
 tap it open a dialog,
 tap the checkbox to the left of the reminder description,
 and tap "Done".
+
+### Adding Reminders from Other Apps
+
+Reminders can be added using the share button in other apps
+including Safari, Mail, Messages, and Notes.
+For example, when viewing a web page in Safari:
+
+- Tap the share button.
+- Tap the icon for the Reminders app.
+- Optionally modify the description.
+- Optionally add a note.
+- Optionally tap "Details" to specify the
+  Date, Time, Tags, Flag state, Priority, and List.
+
+Adding reminders from Mail, Messages, and Notes does not seem well-supported.
+In other apps, this sometimes can be done through the share button
+similarly to how it works in Safari.
+
+There is some support for dragging files and items from other apps
+into the Reminders app, but isn't particularly intuitive.
 
 ### Subtasks
 
@@ -553,8 +574,6 @@ I don't personally find the use of these widgets compelling.
 I'd rather just use the full app.
 
 ### Unorganized Content
-
-- Reminders can link to Mail, Notes, Safari, and Messages items (It’s easy to create a reminder from an item in those apps instead of adding the link inside the Reminders app? In other apps, do this through the share button. Tap the Reminders app. That opens a dialogue where remind your text can be entered. In macOS, you can drag items directly into the Reminders app. You can also do this in iOS, if you tap and hold an item, then swipe up from the bottom of the screen to select the Reminders app then drop the item onto a target list.)
 
 - Can create a list template from an existing list.
 - Can create a new list from a template. This is ideal for packing lists. Create the template once and create a new list from it for every trip. After the trip, delete the list, but keep the template for future trips.
