@@ -565,6 +565,9 @@ To create a template from an existing list:
 - Select a list.
 - Tap the circled ellipsis in the upper right.
 - Tap "Save as Template".
+- Enter a name for the template.
+- Tap "Save".
+- Optionally delete this list from which the template was created.
 
 To create a new list from a template:
 
@@ -574,7 +577,7 @@ To create a new list from a template:
 - Enter a name for the new list.
 - Tap "Create".
 
-To edit an existing template:
+To modify an existing template:
 
 - Tap the circled ellipsis at the top of the left nav.
 - Select "Templates".
@@ -585,6 +588,14 @@ To edit an existing template:
 
 Modifying a template will not modify
 existing lists that were created from the template.
+
+To delete a template:
+
+- Tap the circled ellipsis at the top of the left nav.
+- Select "Templates".
+- Swipe the template to be deleted left.
+- Tap the "Delete Template" button that is exposed.
+- Tap "Done".
 
 ### Widgets
 
