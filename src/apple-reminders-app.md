@@ -553,7 +553,38 @@ The person will receive a notification that tasks have been assigned to them.
 
 ### Templates
 
-TODO: Add detail here.
+A "template" can be created from an existing list.
+This enables creating multiple lists with the same initial set of reminders.
+For example, you can create a travel packing list, convert it to a template,
+and create new lists from that template for each trip you take.
+After each trip you can delete its list,
+but retain the template for use in future trips.
+
+To create a template from an existing list:
+
+- Select a list.
+- Tap the circled ellipsis in the upper right.
+- Tap "Save as Template".
+
+To create a new list from a template:
+
+- Tap "Add List" at the bottom of the left nav.
+- Tap the "Templates" tab.
+- Tap the name of a template.
+- Enter a name for the new list.
+- Tap "Create".
+
+To edit an existing template:
+
+- Tap the circled ellipsis at the top of the left nav.
+- Select "Templates".
+- Tap the circled "i" to the right of a template name.
+- Tap "Edit Template".
+- Make changes.
+- Tap "Done".
+
+Modifying a template will not modify
+existing lists that were created from the template.
 
 ### Widgets
 
@@ -572,11 +603,3 @@ To add a widget:
 
 I don't personally find the use of these widgets compelling.
 I'd rather just use the full app.
-
-### Unorganized Content
-
-- Can create a list template from an existing list.
-- Can create a new list from a template. This is ideal for packing lists. Create the template once and create a new list from it for every trip. After the trip, delete the list, but keep the template for future trips.
-- To create a template from an existing list, select a list, tap … in the upper right, and select “Save as Template”.
-- To create a new list from a template, tap “Add List”, tap the “Templates” tab, tap a template, enter a name for the new list, and tap “Create”.
-- To edit an existing template, tap ... at the top of the left column, select “Templates”, tap “i” to the right of a template name, tap “Edit Template”, makes changes, and tap “Done”. This will not modify existing lists that were created from the template.
