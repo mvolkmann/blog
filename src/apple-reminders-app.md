@@ -130,9 +130,18 @@ and enter the text there.
 
 Reminders with dates appear in the iOS/iPad Calendar app (not in macOS)
 with a checkbox in front of their description.
-If they also have a time, the appear in the Calendar app at that time.
 
-To make a reminder as completed from the Calendar app,
+If a reminder has a date, but not a time,
+it will appear at the top of the list for that day.
+
+If a reminder has both a date and time,
+it will appear at the assigned time in the Calendar app.
+
+Reminders in the Calendar app that are not recurring
+can be dragged to different days and/or times.
+This will update the reminder inside the Reminders app.
+
+To mark a reminder as completed from the Calendar app,
 tap it open a dialog,
 tap the checkbox to the left of the reminder description,
 and tap "Done".
@@ -242,6 +251,9 @@ Alternatively:
 
 To delete a group, swipe it left and tap the "Delete" button that is exposed.
 
+Selecting a group in the left nav displays the reminders
+in each list within the group as separate sections.
+
 ### Smart Lists
 
 Smart lists display reminders that are also in non-smart lists
@@ -259,6 +271,18 @@ To create a smart list:
   For example, tap "Priority" and select "High"
   to create a smart list that displays all the high priority reminders
   found in any non-smart list.
+
+To convert a standard list to a smart list:
+
+- Tap the list in the left nav to select it.
+- Tap the circled ellipsis in the upper-right.
+- Tap "Show List Info".
+- Scroll to the bottom of the dialog that opens.
+- Tap "Convert to Smart List".
+
+This will create a tag whose name is the list name
+and will tag all the reminders in the list with that tag.
+The filter for the Smart List will be the new tag.
 
 ### Pinned Lists
 
@@ -325,6 +349,10 @@ To share a list the currently selected list:
   or tap "Mail".
 - Send the message.
 
+### Templates
+
+TODO: Add detail here.
+
 ### Widgets
 
 Three differently sized widgets can be added to the home screen.
@@ -360,7 +388,6 @@ I'd rather just use the full app.
 - click a tag in the left nav to see all the reminders that have that tag.
 - Describe how to rename and delete tags.
 - Smart lists show all reminders with specified tags or priority. Their icon has a small gear in the lower right corner. They can be set to match on any or all conditions.
-- A normal list can be converted to a smart list.
 - Does every reminder need to reside in some non-smart list?
 - To drag a reminder and not have the app think you want to modify its description, drag from the right of the description.
 - Can assign tasks to specific people that are sharing a list.
@@ -379,10 +406,5 @@ I'd rather just use the full app.
 - The default list for new reminders added with Siri is specified in the Settings for the Reminders app.
 - The time at which you will be reminded about reminders that have a date, but no time, is specified in the Settings for the Reminders app.
 - Including the number of reminders due today as a badge on the Reminders app icon is enabled in the Settings for the Reminders app. This seems to appear on the icon regardless of this setting.
-- Reminders with dates or times appear in the calendar app with a checkbox in front of their description. To mark one as completed, tap it in the calendar, which opens a dialogue, tap the checkbox inside the dialogue, and tap done.
-- Reminders in the calendar can be dragged to different times or days, and the reminder will be updated inside the Reminders app.
-- Reminders that have a day, but not a time will appear at the top of a day in the calendar. Dragging it down to a specific time will set the time in the reminder.
-- dragging reminders in the calendar is probably not supported for recurring reminders
-- selecting a group of lists in the left NAV displays the reminders in each list within the group as separate sections.
 - Can you copy, paste, or duplicate a reminder?
 - Can multiple reminders be selected and dragged to a different list?
