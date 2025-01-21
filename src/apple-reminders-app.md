@@ -459,6 +459,12 @@ Reminders that also have a time appear below those in the sections
 "Morning" (before noon), "Afternoon" (before 5 PM),
 and "Tonight" (5 PM or later).
 
+By default, the Reminders app icon will include a number badge that indicates
+the number of reminders that are due today or past due.
+This can be changed in Settings for the app.
+Turn off "Include Due Today" to only see
+the number of past due reminders on the app icon.
+
 ### Today Focus
 
 I find it useful to create a group of lists I can select
@@ -538,5 +544,4 @@ I'd rather just use the full app.
 - To create a new list from a template, tap “Add List”, tap the “Templates” tab, tap a template, enter a name for the new list, and tap “Create”.
 - To edit an existing template, tap ... at the top of the left column, select “Templates”, tap “i” to the right of a template name, tap “Edit Template”, makes changes, and tap “Done”. This will not modify existing lists that were created from the template.
 
-- Including the number of reminders due today as a badge on the Reminders app icon is enabled in the Settings for the Reminders app. This seems to appear on the icon regardless of this setting.
 - Can you copy, paste, or duplicate a reminder?
