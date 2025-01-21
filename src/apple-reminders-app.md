@@ -239,6 +239,12 @@ To search for a reminder containing specific text in its description or note,
 tap the "Search" input at the top of the left nav
 and enter the text there.
 
+There are undo and redo buttons in the upper-left corner of main area
+that displays reminders.
+They only undo and redo the most recent text edit.
+They do not affect other kinds of changes and
+they do not go back farther in the history of text edits.
+
 ### Tags
 
 Tags enable identifying groups of reminders that reside in different lists.
@@ -372,6 +378,7 @@ The reminders in a list can be organized into sections.
 To add a section to the currently selected list:
 
 - Tap the circled ellipsis in the upper-right.
+- If other sections have already been added, tap "Manage Sections".
 - Tap "New Section".
 - Enter a name for the section.
 
@@ -382,8 +389,7 @@ It's easiest to drag reminders by pressing to
 the area to the right of its description.
 This avoids being interpreted as an attempt to modify the description or note.
 
-To rename a section,
-TODO: ADD THIS!
+To rename a section, tap the name, change it, and top off of it or press return.
 
 To reorder sections:
 
@@ -392,6 +398,13 @@ To reorder sections:
 - Drag section names up or down.
 
 Alternative, in the list view, drag section names up or down.
+
+To delete a section:
+
+- Move any reminders in the section that you wish to keep to another section.
+  Otherwise they will be deleted when the section is deleted.
+- Swipe the section name left.
+- Tap the "Delete" button that is exposed.
 
 To view sections of the currently selected list in columns like a Kanban board:
 
@@ -609,8 +622,10 @@ To delete a template:
 ### Widgets
 
 Three differently sized widgets can be added to the home screen.
-These enable viewing reminders and marking them as completed
-without going to the app.
+These enable viewing reminders in a specific list
+and marking them as completed without going to the app.
+Multiple widgets of the same or different sizes can be added
+and each widget can display reminders from a different list.
 
 To add a widget:
 
