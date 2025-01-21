@@ -202,6 +202,24 @@ To move a reminder to another list, drag it or:
 To drag a reminder, press on it for a half second before moving it.
 Otherwise the app may think you want to select the reminder rather than drag it.
 
+To modify, copy, or cut multiple more reminders in a selected list:
+
+- Tap the circled ellipsis in the upper-right.
+- Tap "Select Reminders".
+- Tap each reminder to be copied.
+- Press and hold on any of the selected reminders.
+- Optionally drag the set of selected reminders to a different list.
+- Release to open a popup containing many options including
+  "Cut" (cmd-x), "Copy" (cmd-c), "Paste" (cmd-v),
+  "Mark as Completed", "Due Date", "Indent n Reminders", "Flag", "Priority",
+  "Move To List", "New Sedction with Selection (n item)", "Tags", and "Delete".
+
+To paste the copied or cut reminders:
+
+- Press and hold on any reminders including an empty spot for a new one.
+- Release to open a popup containing many options.
+- Tap "Paste" or press cmd-v.
+
 To delete a reminder, swipe it left and
 tap the "Delete" button that is exposed.
 Deleted reminders are held in a list named "Recently Deleted"
@@ -543,5 +561,3 @@ I'd rather just use the full app.
 - To create a template from an existing list, select a list, tap … in the upper right, and select “Save as Template”.
 - To create a new list from a template, tap “Add List”, tap the “Templates” tab, tap a template, enter a name for the new list, and tap “Create”.
 - To edit an existing template, tap ... at the top of the left column, select “Templates”, tap “i” to the right of a template name, tap “Edit Template”, makes changes, and tap “Done”. This will not modify existing lists that were created from the template.
-
-- Can you copy, paste, or duplicate a reminder?
