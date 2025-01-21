@@ -52,6 +52,10 @@ To create a new list:
   These have more detail and can contain multiple colors.
 - Tap "Done" in the upper-right.
 
+Lists with the type "Groceries" automatically display their reminders
+in categories like Beverages, Dairy, and Produce
+to make it easier to find them in a grocery store.
+
 To modify a list:
 
 - Tap the list in the left nav.
@@ -74,6 +78,7 @@ To add a reminder to a list:
 
 - Tap the list in the left nav.
 - Tap "New Reminder" at the bottom of the main area.
+  New reminders are added to the currently selected list.
 - Enter a description.
 - Optionally enter a note below the description.
 - Optionally tap the circled "i" on the right side of the reminder
@@ -82,7 +87,9 @@ To add a reminder to a list:
 
   - URL associated with the task
   - Date at which the task is due
-  - Time at which the task is due
+  - Time at which the task is due (must also specify a date)
+  - Early Reminders (only for tasks with a date)
+  - Repeat (only for tasks with a date)
   - Tags
   - location at which you wish to be reminded
   - Flag (on or off) for easily viewing all flagged reminders
@@ -90,16 +97,26 @@ To add a reminder to a list:
   - List - change to move the reminder to a different list
   - Subtasks
 
+repeat interval, images
+
 Reminders with a date can be set to repeat at a specified interval.
 
-Reminders with a date or time can also specify an "Early Reminder".
+Reminders with a date can also specify an "Early Reminder".
 This allows the date/time to specify when the reminder is due and
 the early reminder to specify when you wish to be reminded to complete it.
 For reminders that have a date, this can be a number of
 days, weeks, or months before the due date.
-For reminders that have a time, this can be a number of
+For reminders that also have a time, this can be a number of
 minutes or hours the due time.
 Tap "Custom" to select an early reminder not included in the default options.
+
+Reminders with a date can also specify a "Repeat" interval.
+Preset options include "Hourly", "Daily", "Weekdays", "Weekends",
+"Biweekly", "Monthly", "Every 3 Months", "Every 6 Months", and "Yearly".
+Tap "Custom" to specify a custom repeat interval.
+This does not currently support specifying
+intervals such as "3rd Tuesday of every month".
+Use the Calendar app instead for those kinds of reminders.
 
 Reminders with a location can specify a preset or custom location.
 Preset locations include "Current", "Home", "Work",
@@ -140,6 +157,22 @@ To modify a reminder:
   tap specific tags to toggle whether they are applied to that reminder.
 - Optionally tap the circled "i" to modify other aspects
 
+To modify multiple reminders within a list in the same way:
+
+- Select the list.
+- Tap the circled ellipsis in the upper-right.
+- Tap "Select Reminders".
+- Tap each reminder to be selected.
+- Tap a button at the bottom to modify each selected reminder.
+  The buttons include:
+
+  - calendar icon for specifying Date, Time, Early Reminder, and Repeat
+  - list icon for moving the selected reminders to a different list
+    (Multiple selected icons cannot be dragged to a different list.)
+  - section icon for moving the selected reminders to a different or new section
+  - trash icon for deleting all the selected reminders
+  - circled ellipsis icon to "Mark as Completed", "Add Tag", or "Flag"
+
 To move a reminder to another list, drag it or:
 
 - Tap it to select it.
@@ -167,6 +200,8 @@ Tags enable identifying groups of reminders that reside in different lists.
 To add a tag to a selected reminder,
 tap the hash icon at the top of the main area
 and tap a tag to be added or removed.
+
+- Can add arbitrary tags to a reminder or to all selected reminders.
 
 To create a new tag,
 tap the hash icon at the top of the main area,
@@ -470,11 +505,7 @@ I'd rather just use the full app.
 
 - Reminders can link to Mail, Notes, Safari, and Messages items (It’s easy to create a reminder from an item in those apps instead of adding the link inside the Reminders app? In other apps, do this through the share button. Tap the Reminders app. That opens a dialogue where remind your text can be entered. In macOS, you can drag items directly into the Reminders app. You can also do this in iOS, if you tap and hold an item, then swipe up from the bottom of the screen to select the Reminders app then drop the item onto a target list.)
 
-- There are several widgets you can add to your home screen for the Reminders app.
-- Lists of type “Groceries” automatically categorize their items in categories like Beverages, Dairy, and Produce.
 - Tap the three dots in the upper-right and then “Show Completed” to see items marked as completed (or purchased). Tap specific completed items to return them to the uncompleted state. This is great for updating a grocery list.
-- Can add arbitrary tags to a reminder or to all selected reminders.
-- click a tag in the left nav to see all the reminders that have that tag.
 - To drag a reminder and not have the app think you want to modify its description, drag from the right of the description.
 - Can assign tasks to specific people that are sharing a list.
 
@@ -484,10 +515,7 @@ I'd rather just use the full app.
 - To create a new list from a template, tap “Add List”, tap the “Templates” tab, tap a template, enter a name for the new list, and tap “Create”.
 - To edit an existing template, tap ... at the top of the left column, select “Templates”, tap “i” to the right of a template name, tap “Edit Template”, makes changes, and tap “Done”. This will not modify existing lists that were created from the template.
 
-- New reminders are added to the currently selected list.
-- Each reminder can optionally include notes, URL, date, time, early reminders (alerts), repeat interval, tags, location, flag, priority, images
 - When a reminder is selected, the buttons at the top allow adding a date, time, location. flag, and tags.
 - The time at which you will be reminded about reminders that have a date, but no time, is specified in the Settings for the Reminders app.
 - Including the number of reminders due today as a badge on the Reminders app icon is enabled in the Settings for the Reminders app. This seems to appear on the icon regardless of this setting.
 - Can you copy, paste, or duplicate a reminder?
-- Can multiple reminders be selected and dragged to a different list?
