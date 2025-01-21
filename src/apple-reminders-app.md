@@ -96,8 +96,14 @@ To add a reminder to a list:
   - Priority (None, Low, Medium, or High)
   - List - change to move the reminder to a different list
   - Subtasks
+  - Images - Tap "Add Image" and select
+    "Take Photo", "Scan Document", or "Photo Library".
+    Any number of images can be added and they can be reordered.
 
-repeat interval, images
+The time at which you will be notified
+about reminders that have a date, but no time, is specified in
+the Settings for the Reminders app and defaults to 9 AM.
+See "Time" under the "ALL-DAY REMINDERS" section.
 
 Reminders with a date can be set to repeat at a specified interval.
 
@@ -180,6 +186,9 @@ To move a reminder to another list, drag it or:
 - In the dialog that opens, scroll down to "List".
 - Tap "List".
 - Tap the name of the list to which it should be moved.
+
+To drag a reminder, press on it for a half second before moving it.
+Otherwise the app may think you want to select the reminder rather than drag it.
 
 To delete a reminder, swipe it left and
 tap the "Delete" button that is exposed.
@@ -506,7 +515,6 @@ I'd rather just use the full app.
 - Reminders can link to Mail, Notes, Safari, and Messages items (It’s easy to create a reminder from an item in those apps instead of adding the link inside the Reminders app? In other apps, do this through the share button. Tap the Reminders app. That opens a dialogue where remind your text can be entered. In macOS, you can drag items directly into the Reminders app. You can also do this in iOS, if you tap and hold an item, then swipe up from the bottom of the screen to select the Reminders app then drop the item onto a target list.)
 
 - Tap the three dots in the upper-right and then “Show Completed” to see items marked as completed (or purchased). Tap specific completed items to return them to the uncompleted state. This is great for updating a grocery list.
-- To drag a reminder and not have the app think you want to modify its description, drag from the right of the description.
 - Can assign tasks to specific people that are sharing a list.
 
 - Can create a list template from an existing list.
@@ -515,7 +523,5 @@ I'd rather just use the full app.
 - To create a new list from a template, tap “Add List”, tap the “Templates” tab, tap a template, enter a name for the new list, and tap “Create”.
 - To edit an existing template, tap ... at the top of the left column, select “Templates”, tap “i” to the right of a template name, tap “Edit Template”, makes changes, and tap “Done”. This will not modify existing lists that were created from the template.
 
-- When a reminder is selected, the buttons at the top allow adding a date, time, location. flag, and tags.
-- The time at which you will be reminded about reminders that have a date, but no time, is specified in the Settings for the Reminders app.
 - Including the number of reminders due today as a badge on the Reminders app icon is enabled in the Settings for the Reminders app. This seems to appear on the icon regardless of this setting.
 - Can you copy, paste, or duplicate a reminder?
