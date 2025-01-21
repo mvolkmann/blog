@@ -492,7 +492,22 @@ Lists can be pinned which makes them appear
 as buttons at the top of the left nav.
 Unfortunately, groups cannot be pinned.
 
-There is a default set of pinned lists.
+There is a default set of pinned lists that include:
+
+- Today - a smart list that displays all reminders scheduled for today
+- Scheduled - a smart list that displays all reminders with a data
+- All - displays all reminders in all lists with a section for each list
+  (in a seemingly random order)
+- Flagged - a smart list that displays all flagged reminders
+- Completed - a smart list that displays all reminders
+  that have been marked as completed
+
+The following pinned lists are hidden by default:
+
+- Assigned to Me - a smart list that displays all reminders
+  in shared lists that are assiged to you
+- High Priority - a smart list that displays all reminders
+  whose priority is set to High
 
 To unpin a pinned list,
 press on it until a popup appears and tap "Hide".
