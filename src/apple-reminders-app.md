@@ -49,6 +49,7 @@ To create a new list:
 - Select a color.
 - Select an icon.
   The smiling face emoji opens a picker for selecting any emoji.
+  These have more detail and can contain multiple colors.
 - Tap "Done" in the upper-right.
 
 To modify a list:
@@ -91,6 +92,25 @@ To add a reminder to a list:
 
 Reminders with a date can be set to repeat at a specified interval.
 
+Reminders with a date or time can also specify an "Early Reminder".
+This allows the date/time to specify when the reminder is due and
+the early reminder to specify when you wish to be reminded to complete it.
+For reminders that have a date, this can be a number of
+days, weeks, or months before the due date.
+For reminders that have a time, this can be a number of
+minutes or hours the due time.
+Tap "Custom" to select an early reminder not included in the default options.
+
+To mark a reminder as completed,
+tap the hollow circle on its left side.
+This does not delete the reminder.
+It is just moved to the "Completed" list.
+
+To view the completed reminders,
+tap the pinned list "Completed" at the top of the left nav.
+To delete all completed reminders,
+tap "Clear" at the top of the Completed list.
+
 To modify a reminder:
 
 - Tap it.
@@ -103,7 +123,9 @@ To modify a reminder:
 - Tap the flag icon at the top of the main area
   to toggle whether the reminder is flagged.
 - Tap the hash icon at the top of the main area
-  to add or remove a tag.
+  to add or remove a tag. Anothe way to add or remove tags is to
+  tap the circled "i" to the right of a reminder, tap "Tags", and
+  tap specific tags to toggle whether they are applied to that reminder.
 - Optionally tap the circled "i" to modify other aspects
 
 To move a reminder to another list, drag it or:
@@ -125,6 +147,51 @@ and tap "Delete All".
 To search for a reminder containing specific text,
 tap the "Search" input at the top of the left nav
 and enter the text there.
+
+## Tags
+
+Tags enable identifying groups of reminders that reside in different lists.
+
+To add a tag to a selected reminder,
+tap the hash icon at the top of the main area
+and tap a tag to be added or removed.
+
+To create a new tag,
+tap the hash icon at the top of the main area,
+tap "Edit Tags..." at the bottom of the popup,
+tap "Add New Tag...", enter a new tag name,
+and tap "Apply" in the upper-right.
+
+To add or remove a tag from a selected reminder,
+tap the circled "i" to the right of a reminder, tap "Tags",
+and tap specific tags to toggle whether they are applied to that reminder.
+
+To view a list of all reminders that have a given tag,
+scroll to the bottom of the left nav,
+expand the "Tags" section if not already expanded,
+and tap one or more tag names.
+Tap "All Selected" or "Any Selected" to change the criteria
+on whether the displayed reminders must have all or any of the selected tags.
+
+To rename a tag:
+
+- Select the tag to be renamed at the bottom of the left nav.
+- Tap the circled ellipsis in the upper-right.
+- Tap "Rename Tag".
+- Modify the name.
+- Tap "OK".
+
+All reminders to which the old tag name were applied
+will now have the new tag name.
+
+To delete tags:
+
+- Select the tags to be deleted at the bottom of the left nav.
+- Tap the circled ellipsis in the upper-right.
+- Tap "Delete Tag" or "Delete n Tags".
+- Confirm by tapping "Delete" in the dialog.
+
+Deleted tags will be removed from the reminders to which they are applied
 
 ### Calendar Integration
 
@@ -251,14 +318,18 @@ Alternatively:
 
 To delete a group, swipe it left and tap the "Delete" button that is exposed.
 
-Selecting a group in the left nav displays the reminders
-in each list within the group as separate sections.
+Selecting a group in the left nav displays the reminders in each list
+within the group as separate sections whose names are the list names.
 
 ### Smart Lists
 
 Smart lists display reminders that are also in non-smart lists
 based specified critera.
-The criteria can include tags,
+The criteria can include date, time, flag state,
+list, location, priority, and tags.
+Smart lists can include reminders that match "any" or "all" of the criteria.
+
+The icon for smart lists have a small gear in the lower right corner.
 
 To create a smart list:
 
@@ -284,6 +355,8 @@ This will create a tag whose name is the list name
 and will tag all the reminders in the list with that tag.
 The filter for the Smart List will be the new tag.
 
+Every reminder resides in some non-smart list.
+
 ### Pinned Lists
 
 Lists can be pinned which makes them appear
@@ -307,6 +380,16 @@ to the left of the name of an unpined list.
 To change the order of pinned lists,
 tap the the circled ellipsis at the top of the left nav,
 tap "Edit List", and drag the pinned lists up and down.
+
+### Today List
+
+One of the provided pinned lists is "Today".
+This is a non-editable smart list that contains
+all reminders whose date is today.
+Reminders with no time appear at the top of the list.
+Reminders that also have a time appear below those in the sections
+"Morning" (before noon), "Afternoon" (before 5 PM),
+and "Tonight" (5 PM or later).
 
 ### Today Focus
 
@@ -373,37 +456,29 @@ I'd rather just use the full app.
 
 ### Unorganized Content
 
-- Describe creating an adding tags to items. This can be done either from the button or from the get info dialogue.
 - select “show list info” to get a dialogue where you can change the color and icon for a list
 - describe creating smart lists that are based on a set of tags; there is a button at the bottom of the show info. Dialogue to convert a normal list to a smart list.
 - “View as Columns” adds the ability to drag items to different columns, which are actually sections
 - Reminders can link to Mail, Notes, Safari, and Messages items (It’s easy to create a reminder from an item in those apps instead of adding the link inside the Reminders app? In other apps, do this through the share button. Tap the Reminders app. That opens a dialogue where remind your text can be entered. In macOS, you can drag items directly into the Reminders app. You can also do this in iOS, if you tap and hold an item, then swipe up from the bottom of the screen to select the Reminders app then drop the item onto a target list.)
 - you can receive reminder notifications based on your location. To do this, select a reminder, tap the info button, turn on location, and select a location, such as home or work. It will be marked as showing the reminder either when you arrive or when you leave the location. To toggle that, tap the location again.
 - There are several widgets you can add to your home screen for the Reminders app.
-- Tapping the hollow circle on the left side of a reminder marks it as completed, but doesn’t delete it. You can still choose to view the completed items.
 - Lists of type “Groceries” automatically categorize their items in categories like Beverages, Dairy, and Produce.
 - Tap the three dots in the upper-right and then “Show Completed” to see items marked as completed (or purchased). Tap specific completed items to return them to the uncompleted state. This is great for updating a grocery list.
-- When changing the icon for a list, tap the emoji icon to select any emoji (more detailed and multi-color)
 - Can add arbitrary tags to a reminder or to all selected reminders.
 - click a tag in the left nav to see all the reminders that have that tag.
-- Describe how to rename and delete tags.
-- Smart lists show all reminders with specified tags or priority. Their icon has a small gear in the lower right corner. They can be set to match on any or all conditions.
-- Does every reminder need to reside in some non-smart list?
 - To drag a reminder and not have the app think you want to modify its description, drag from the right of the description.
 - Can assign tasks to specific people that are sharing a list.
+
 - Can create a list template from an existing list.
 - Can create a new list from a template. This is ideal for packing lists. Create the template once and create a new list from it for every trip. After the trip, delete the list, but keep the template for future trips.
 - To create a template from an existing list, select a list, tap … in the upper right, and select “Save as Template”.
 - To create a new list from a template, tap “Add List”, tap the “Templates” tab, tap a template, enter a name for the new list, and tap “Create”.
 - To edit an existing template, tap ... at the top of the left column, select “Templates”, tap “i” to the right of a template name, tap “Edit Template”, makes changes, and tap “Done”. This will not modify existing lists that were created from the template.
-- When you select a group in the left NAV, all the list inside it will appear in the main area grouped in sections that are the list names.
-- The Today list can group its items by morning, afternoon, and evening. They seem to be automatically assigned at times of 9 AM, 3 PM, and 6 PM.
-- In the info dialogue for a task you can add early reminders to be reminded before the due date.
+
 - Lists can be sorted on many criteria and then ascending or descending order.
 - New reminders are added to the currently selected list.
 - Each reminder can optionally include notes, URL, date, time, early reminders (alerts), repeat interval, tags, location, flag, priority, images
 - When a reminder is selected, the buttons at the top allow adding a date, time, location. flag, and tags.
-- The default list for new reminders added with Siri is specified in the Settings for the Reminders app.
 - The time at which you will be reminded about reminders that have a date, but no time, is specified in the Settings for the Reminders app.
 - Including the number of reminders due today as a badge on the Reminders app icon is enabled in the Settings for the Reminders app. This seems to appear on the icon regardless of this setting.
 - Can you copy, paste, or duplicate a reminder?
