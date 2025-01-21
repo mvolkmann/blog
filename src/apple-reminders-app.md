@@ -101,6 +101,18 @@ For reminders that have a time, this can be a number of
 minutes or hours the due time.
 Tap "Custom" to select an early reminder not included in the default options.
 
+Reminders with a location can specify a preset or custom location.
+Preset locations include "Current", "Home", "Work",
+"Getting In" to car, or "Getting Out" of car.
+Custom locations can be entered by name or address.
+For example, entering a name like "Target"
+will prompt you to select one of the nearby Target stores.
+The selected location will be displayed on a map
+so you can verify that it is correct.
+To change the radius that determines when you are "close" to the location,
+drag the small blue circle on the edge of the big circle left or right.
+To specify when to be notified, tap "Arriving" or "Leaving".
+
 To mark a reminder as completed,
 tap the hollow circle on its left side.
 This does not delete the reminder.
@@ -456,11 +468,8 @@ I'd rather just use the full app.
 
 ### Unorganized Content
 
-- select “show list info” to get a dialogue where you can change the color and icon for a list
-- describe creating smart lists that are based on a set of tags; there is a button at the bottom of the show info. Dialogue to convert a normal list to a smart list.
-- “View as Columns” adds the ability to drag items to different columns, which are actually sections
 - Reminders can link to Mail, Notes, Safari, and Messages items (It’s easy to create a reminder from an item in those apps instead of adding the link inside the Reminders app? In other apps, do this through the share button. Tap the Reminders app. That opens a dialogue where remind your text can be entered. In macOS, you can drag items directly into the Reminders app. You can also do this in iOS, if you tap and hold an item, then swipe up from the bottom of the screen to select the Reminders app then drop the item onto a target list.)
-- you can receive reminder notifications based on your location. To do this, select a reminder, tap the info button, turn on location, and select a location, such as home or work. It will be marked as showing the reminder either when you arrive or when you leave the location. To toggle that, tap the location again.
+
 - There are several widgets you can add to your home screen for the Reminders app.
 - Lists of type “Groceries” automatically categorize their items in categories like Beverages, Dairy, and Produce.
 - Tap the three dots in the upper-right and then “Show Completed” to see items marked as completed (or purchased). Tap specific completed items to return them to the uncompleted state. This is great for updating a grocery list.
@@ -475,7 +484,6 @@ I'd rather just use the full app.
 - To create a new list from a template, tap “Add List”, tap the “Templates” tab, tap a template, enter a name for the new list, and tap “Create”.
 - To edit an existing template, tap ... at the top of the left column, select “Templates”, tap “i” to the right of a template name, tap “Edit Template”, makes changes, and tap “Done”. This will not modify existing lists that were created from the template.
 
-- Lists can be sorted on many criteria and then ascending or descending order.
 - New reminders are added to the currently selected list.
 - Each reminder can optionally include notes, URL, date, time, early reminders (alerts), repeat interval, tags, location, flag, priority, images
 - When a reminder is selected, the buttons at the top allow adding a date, time, location. flag, and tags.
