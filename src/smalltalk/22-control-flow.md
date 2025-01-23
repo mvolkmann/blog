@@ -72,11 +72,58 @@ colorToAssessment := Dictionary newFrom: {
     #green -> ['warm'].
     #blue -> ['cold']
 }.
-
 ...
-
 assessment := colorToAssessment at: color.
 ```
+
+The `Association` objects in the collection passed to the
+`caseOf:` method must have keys and values that are both blocks.
+Often the blocks just contain a single literal value
+such as a number, symbol, or string.
+We can define new instance methods in the `Object` class
+that are similar to `caseOf:` and `caseOf:otherwise:`,
+but do not require the `Association` keys and values to be blocks.
+
+```smalltalk
+switchOn: assocColl
+    "The elements of assocColl are associations. Answer the evaluated value
+    of the first association in assocCol whose evaluated key equals the receiver.
+    If no match is found, signal an error.
+    This differs from caseOf: in that the keys and values
+    of the associations are not required to be blocks."
+
+    ^ self switchOn: assocColl otherwise: [ self caseError ]
+
+switchOn: assocColl otherwise: aBlock
+    "The elements of assocColl must be associations. Answer the evaluated value
+    of the first association in assocCol whose evaluated key equals the receiver.
+    If no match is found, answer the result of evaluating aBlock.
+    This differs from caseOf: in that the keys and values
+    of the associations are not required to be blocks."
+
+    assocColl associationsDo:
+        [ :assoc | (assoc key value = self) ifTrue: [ ^assoc value value ] ].
+    ^ aBlock value
+```
+
+The following code demonstrates using the `switchOn:otherwise:` method.
+
+```smalltalk
+command := #pause.
+
+message := command switchOn: {
+    #start -> 'Starting the system'.
+    #pause -> 'Pausing the system'.
+    #resume -> 'Resuming the system'.
+    #stop -> 'Stopping the system'.
+} otherwise: 'Unsupported command'.
+
+message print.
+```
+
+The "switch" methods defined above are defined in the package
+<a href="https://github.com/mvolkmann/Cuis-Smalltalk-Switch"
+target="_blank">Cuis-Smalltalk-Switch</a>.
 
 Using nested `#ifTrue:ifFalse:` messages can be verbose and
 requires having the correct number of closing square brackets at the end.
