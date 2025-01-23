@@ -382,7 +382,7 @@ To add a section to the currently selected list:
 - Tap "New Section".
 - Enter a name for the section.
 
-Existing reminders will appear in a section titled "Others".
+Existing reminders will appear in a default section titled "Others".
 
 To associate a reminder with a given section, drag it to the section.
 It's easiest to drag reminders by pressing to
