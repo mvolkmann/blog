@@ -103,6 +103,9 @@ See <a href="https://github.com/mvolkmann/Cuis-Smalltalk-FindByExample"
 target="_blank">Cuis-Smalltalk-FindByExample</a>.
 It's amazing how fast this is!
 
+<img alt="Cuis Smalltalk Method Finder" style="width: 85%"
+  src="/blog/assets/cuis-smalltalk-method-finder.png?v={{pkg.version}}">
+
 For example, evaluating the following in a Workspace:
 
 ```smalltalk
