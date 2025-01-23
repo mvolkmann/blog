@@ -428,6 +428,10 @@ For example, this can be used to print a `Dog` object as follows:
 myDog logAs: 'myDog'
 ```
 
+The `logAs:` method can be added by installing the package
+<a href="https://github.com/mvolkmann/Cuis-Smalltalk-LogAs"
+target="_blank">Cuis-Smalltalk-LogAs</a>.
+
 When output is sent to the `Transcript`, it appears in all `Transcript` windows.
 So it doesn't make sense to open more than one.
 

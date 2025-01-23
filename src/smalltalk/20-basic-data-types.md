@@ -649,7 +649,7 @@ of a `console.log` call in JavaScript.
 ('myVariable = {1}' format: {myVariable}) print
 ```
 
-An even better approach is to defined the `logAs:` method in the `Object` class.
+An even better approach is to define the `logAs:` method in the `Object` class.
 This was described in "Getting Started" section "Transcripts".
 
 The `padded:to:with:` method answers a copy formed by
