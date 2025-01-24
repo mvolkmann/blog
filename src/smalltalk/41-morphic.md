@@ -1145,9 +1145,10 @@ worldMenuOptions
         } asDictionary}`
 ```
 
-The `#submenuOf` key specifies the submenu within the World menu
-where a menu item will be added.
-The "Open" menu is identified by `TheWorldMenu openLabel`.
+The `#submenuOf` key is optional and specifies
+the submenu within the World menu where a menu item will be added.
+If this is omitted, the menu item will appear directly in the World menu.
+The "Open" submenu is identified by `TheWorldMenu openLabel`.
 
 The `#itemGroup` key specifies the group within the target menu
 where a menu item will be added.
