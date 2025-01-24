@@ -182,12 +182,18 @@ The popup provides the ability to Cut, Copy, Mark as Completed, and Delete.
 It also supports modifying the Due Date, Flag state, Priority,
 containing list (Move to List), and Tags.
 
-To modify multiple reminders within a list in the same way:
+To select multiple reminders so they can be acted on as a group:
 
 - Select the list.
 - Tap the circled ellipsis in the upper-right.
 - Tap "Select Reminders".
 - Tap each reminder to be selected.
+
+To select multiple reminders with a keyboard, cmd-click each reminder.
+
+To modify multiple reminders within a list in the same way:
+
+- Select each reminder (see above).
 - Tap a button at the bottom to modify each selected reminder.
   The buttons include:
 
@@ -209,11 +215,9 @@ To move a reminder to another list, drag it or:
 To drag a reminder, press on it for a half second before moving it.
 Otherwise the app may think you want to select the reminder rather than drag it.
 
-To modify, copy, or cut multiple more reminders in a selected list:
+To modify, copy, or cut multiple reminders in a selected list:
 
-- Tap the circled ellipsis in the upper-right.
-- Tap "Select Reminders".
-- Tap each reminder to be copied.
+- Select each reminder (see above).
 - Press and hold on any of the selected reminders.
 - Optionally drag the set of selected reminders to a different list.
 - Release to open a popup containing many options including
@@ -311,6 +315,16 @@ To mark a reminder as completed from the Calendar app,
 tap it open a dialog,
 tap the checkbox to the left of the reminder description,
 and tap "Done".
+
+To add a reminder from the Calendar app:
+
+- Tap the day on which it will be added.
+- Tap the "+" in the upper-left.
+- In the dialog that appears, the "Event" button is selected by default.
+  Tap "Reminder".
+- Enter data for the reminder including
+  Title (required), Notes, Date (required), Time, Repeat, and List.
+  Tap "Details" to enter other reminder details.
 
 ### Adding Reminders from Other Apps
 
