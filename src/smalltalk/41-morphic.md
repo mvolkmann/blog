@@ -1123,6 +1123,93 @@ which has the following inheritance hierarchy.
 Instances of this class have the instance property `layoutMorph`
 that is set to a `LayoutMorph` whose `direction` defaults to `#vertical`.
 
+## World Menu Items
+
+To add menu items in the World menu,
+create a class with the class method `worldMenuOptions`
+that returns an array of `Dictionary` objects.
+Each `Dictionary` instance describes a single menu item.
+For example:
+
+```smalltalk
+worldMenuOptions
+    ^ `{{
+            #submenuOf -> TheWorldMenu openLabel.
+            #itemGroup -> 10.
+            #itemOrder -> 41.
+            #label -> 'Method Finder'.
+            #object -> MethodFinderWindow.
+            #selector -> #open.
+            #icon -> #inspectIcon.
+            #balloonText -> 'A tool for finding methods that return a given answer.'.
+        } asDictionary}`
+```
+
+The `#submenuOf` key specifies the submenu within the World menu
+where a menu item will be added.
+The "Open" menu is identified by `TheWorldMenu openLabel`.
+
+The `#itemGroup` key specifies the group within the target menu
+where a menu item will be added.
+The "Open" menu has four groups numbered 10, 20, 30, and $0.
+
+The `#itemOrder` key specifies the order in which
+a menu item will appear in its menu.
+Within the "Open" menu, the existing menu items use the following values:
+
+- Text Editor: 10
+- Worspace: 20
+- Browser: 30
+- SearchBrowser: 40
+- MessageNames: 40
+- Transcript: 50.
+
+So the example above places the menu item "Method Finder" after "Message Names".
+
+The `#label` key specifies the text that will appear in the menu item.
+
+The `#object` key specifies the class that implements the menu item.
+An instance of this class will be created when the menu item is selected.
+
+The `#selector` key specifies the message that will be sent
+to the class (not an instance of it) specified in the `#object` key.
+Often the corresponding class method creates an instance
+of a `SystemWindow` subclass and opens it.
+
+The `#icon` key is optional and specifies
+the icon that will appear before the menu item label.
+The value is a selector for a `Theme` class instance method
+in the "icons" method category.
+
+The `#balloonText` key is optional and specifies
+tooltip text that will appear when hovering over the menu item.
+
+To learn more about the existing menu items in the World menu,
+search for implementors of the `worldMenuOptions` method.
+
+Here's a simple example where selecting a custom menu item
+writes to the Transcript.
+Create the class `Greeter` as a subclass of `Object`
+and add the following class methods:
+
+```smalltalk
+worldMenuOptions
+    ^ `{{
+            #submenuOf -> TheWorldMenu openLabel.
+            #itemGroup -> 10.
+            #itemOrder -> 42.
+            #label -> 'Greet'.
+            #object -> MyMenuItem.
+            #selector -> #greet.
+            #icon -> #chatIcon.
+            #balloonText -> 'Writes a greeting to the Transcript'.
+        } asDictionary}`
+
+greet
+
+    'Hello World!' print
+```
+
 ## Fonts
 
 To see a popup list of the installed fonts and fonts available to install,
