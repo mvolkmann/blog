@@ -1133,16 +1133,18 @@ For example:
 
 ```smalltalk
 worldMenuOptions
-    ^ `{{
-            #submenuOf -> TheWorldMenu openLabel.
-            #itemGroup -> 10.
-            #itemOrder -> 41.
-            #label -> 'Method Finder'.
-            #object -> MethodFinderWindow.
-            #selector -> #open.
-            #icon -> #inspectIcon.
-            #balloonText -> 'A tool for finding methods that return a given answer.'.
-        } asDictionary}`
+    ^`{
+        {
+            \#submenuOf -> TheWorldMenu openLabel.
+            \#itemGroup -> 10.
+            \#itemOrder -> 41.
+            \#label -> 'Method Finder'.
+            \#object -> MethodFinderWindow.
+            \#selector -> \#open.
+            \#icon -> \#inspectIcon.
+            \#balloonText -> 'A tool for finding methods that return a given answer.'.
+        } asDictionary
+    }`
 ```
 
 The `#submenuOf` key is optional and specifies
@@ -1195,7 +1197,8 @@ and add the following class methods:
 
 ```smalltalk
 worldMenuOptions
-    ^ `{{
+    ^`{
+        {
             #submenuOf -> TheWorldMenu openLabel.
             #itemGroup -> 10.
             #itemOrder -> 42.
@@ -1204,7 +1207,8 @@ worldMenuOptions
             #selector -> #greet.
             #icon -> #chatIcon.
             #balloonText -> 'Writes a greeting to the Transcript'.
-        } asDictionary}`
+        } asDictionary
+    }`
 
 greet
 
