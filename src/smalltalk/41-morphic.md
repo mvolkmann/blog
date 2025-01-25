@@ -1175,11 +1175,11 @@ that opens a custom subclass of `SystemWindow`.
 The window prompts for your name.
 When a name is entered, it displays "Hello {name}!" below in the text input.
 
-<img alt="window before entering name" style="width: 30%"
-  src="/blog/assets/cuis-smalltalk-greeter1?v={{pkg.version}}">
+<img alt="window before entering name" style="width: 40%"
+  src="/blog/assets/cuis-smalltalk-greeter1.png?v={{pkg.version}}">
 
-<img alt="window after entering name" style="width: 30%"
-  src="/blog/assets/cuis-smalltalk-greeter2?v={{pkg.version}}">
+<img alt="window after entering name" style="width: 40%"
+  src="/blog/assets/cuis-smalltalk-greeter2.png?v={{pkg.version}}">
 
 ```smalltalk
 SystemWindow subclass: #Greeter
@@ -1210,7 +1210,7 @@ open
     window := self new.
     window openInWorld.
 
-    "Set window size to the smallest size that contains its submorphs.
+    "Set window size to the smallest height that contains its submorphs.
     This must be done AFTER the window is opened."
     extent := window layoutMorph minimumExtent.
     window morphExtent: 300 @ extent y.
