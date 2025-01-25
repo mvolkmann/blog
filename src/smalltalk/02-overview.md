@@ -540,6 +540,9 @@ Pharo Smalltalk has its own VM which is a fork of the Open Smalltalk VM.
 
 The Cuis Smalltalk base image is almost entirely implemented in Smalltalk.
 
+It is a goal to have a new stable release of Cuis Smalltalk every six months,
+typically in June and December.
+
 The Cuis mascot is southern mountain cavy which is a "tailless rodent with
 short, speckled, greyish-yellow fur, fading to pale grey on the underparts."
 They look similar to a mouse, but grow to around eight inches in length.
