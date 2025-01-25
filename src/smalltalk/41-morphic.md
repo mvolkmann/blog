@@ -1152,10 +1152,112 @@ that is the desired title string to an instance.
 Instances of this class have the instance property `layoutMorph`
 that is set to a `LayoutMorph` whose `direction` defaults to `#vertical`.
 
-To size a `SystemWindow` to its contents,
-TODO: Add this!
+To specify the size of a `SystemWindow`,
+implement the instance method `intialExtent`. For example:
 
-TODO: Add code from your Greeter class.
+```smalltalk
+initialExtent
+
+    ^ 400@300
+```
+
+To size a `SystemWindow` based on its contents,
+do the following AFTER the window has been opened,
+perhaps by sending it `#openInWorld`:
+
+```smalltalk
+extent := window layoutMorph minimumExtent.
+window morphExtent: extent.
+```
+
+Here's a basic example that demonstrates adding a World menu item
+that opens a custom subclass of `SystemWindow`.
+The window prompts for your name.
+When a name is entered, it displays "Hello {name}!" below in the text input.
+
+<img alt="window before entering name" style="width: 30%"
+  src="/blog/assets/cuis-smalltalk-greeter1?v={{pkg.version}}">
+
+<img alt="window after entering name" style="width: 30%"
+  src="/blog/assets/cuis-smalltalk-greeter2?v={{pkg.version}}">
+
+```smalltalk
+SystemWindow subclass: #Greeter
+    instanceVariableNames: ''
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'Greeter'
+
+"class method"
+worldMenuOptions
+    ^`{
+        {
+            #submenuOf -> TheWorldMenu openLabel.
+            #itemGroup -> 10.
+            #itemOrder -> 42.
+            #label -> 'Greeter'.
+            #object -> Greeter.
+            #selector -> #open.
+            #icon -> #chatIcon.
+            #balloonText -> 'Opens a window where you can greet yourself'.
+        } asDictionary
+    }`
+
+"class method"
+open
+    | extent window |
+
+    window := self new.
+    window openInWorld.
+
+    "Set window size to the smallest size that contains its submorphs.
+    This must be done AFTER the window is opened."
+    extent := window layoutMorph minimumExtent.
+    window morphExtent: 300 @ extent y.
+
+"instance method"
+initialize
+    | column greetingLabel nameInput row |
+
+    super initialize.
+
+    self setLabel: 'Greeter'.
+
+    nameInput := TextModelMorph withModel: (TextModel withText: '').
+    nameInput emptyTextDisplayMessage: 'Enter your name'.
+
+    "Don't warn the user that changes have not been saved when the window is closed."
+    nameInput askBeforeDiscardingEdits: false.
+
+    greetingLabel := LabelMorph contents: ''.
+
+    "Update greetingLabel on any keystroke in nameInput."
+    nameInput keystrokeAction: [ :event |
+        | name |
+        name := nameInput text.
+        greetingLabel contents: (name isEmpty
+            ifTrue: ''
+            ifFalse: [ 'Hello ', name, '!' ]
+        ).
+    ].
+
+    row := LayoutMorph newRow.
+    row separation: 10. "between child morphs; defaults to 0"
+    row padding: 0. "must set after separation"
+    row
+        addMorph: (LabelMorph contents: 'Name:');
+        addMorph: nameInput proportionalWidth: 1. "fills row"
+
+    column := self layoutMorph.
+    column separation: 10. "between child morphs; defaults to 0"
+    column padding: 10. "around window edges; must set after separation"
+    column
+        addMorph: row fixedHeight: 0; "to use minimum height that fits row children"
+        addMorph: greetingLabel.
+
+    "To left align all child morphs of column ...
+    column submorphs do: [ :morph | morph layoutSpec offAxisEdgeWeight: #leftOrTop ]."
+```
 
 ## World Menu Items
 
