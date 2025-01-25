@@ -1120,6 +1120,35 @@ which has the following inheritance hierarchy.
 
 ## SystemWindow
 
+To implement a custom window, create a subclass of `SystemWindow`.
+The supplies the standard buttons in the upper-left to
+close the window (red), minimize it (orange),
+toggle to and from full screen (green; not really the full screen),
+and open a menu of other window-related commands (blue).
+
+The menu includes:
+
+- change title...
+- window color... (broken?)
+- close others...
+- send to back
+- make next-to-topmost (moves behind one other window)
+- make undraggable/draggable (toggles)
+- close (same as red button)
+- collapse (same as orange button)
+- expand/contract (same as green button)
+- resize... (graphically select both location and size)
+
+`SystemWindow` subclasses have a default extent (size)
+that is the returned by the `initialExtent` method
+which returns `RealEstate standardWindowExtent`
+which is `1079@830`.
+Override the `initialExtent` method to use a different size.
+
+The window title defaults to "Untitled Window".
+To change this, send `#setLabel:` with an argument
+that is the desired title string to an instance.
+
 Instances of this class have the instance property `layoutMorph`
 that is set to a `LayoutMorph` whose `direction` defaults to `#vertical`.
 
