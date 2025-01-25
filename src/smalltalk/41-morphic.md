@@ -1152,6 +1152,11 @@ that is the desired title string to an instance.
 Instances of this class have the instance property `layoutMorph`
 that is set to a `LayoutMorph` whose `direction` defaults to `#vertical`.
 
+To size a `SystemWindow` to its contents,
+TODO: Add this!
+
+TODO: Add code from your Greeter class.
+
 ## World Menu Items
 
 To add menu items in the World menu,
