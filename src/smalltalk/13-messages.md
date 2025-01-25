@@ -174,10 +174,10 @@ does not return the initial receiver object and
 you want the cascade to return that,
 end the cascade with `; yourself`.
 
-For example, the last expression above that uses a message cascade
+For example, the last expression above uses a message cascade
 to send the message `#add:` three times. The result is `'cherry'`.
 Adding `; yourself` to the end of that expression
-changes it to result in the value of `fruits`.
+changes it to the value of the variable `fruits`.
 
 ## Tab Completions
 
