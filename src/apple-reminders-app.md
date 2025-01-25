@@ -509,7 +509,8 @@ Unfortunately, groups cannot be pinned.
 There is a default set of pinned lists that include:
 
 - Today - a smart list that displays all reminders scheduled for today
-- Scheduled - a smart list that displays all reminders with a data
+- Scheduled - a smart list that displays all reminders with a data;
+  includes sections for Overdue, Today, and Tomorrow reminders
 - All - displays all reminders in all lists with a section for each list
   (in a seemingly random order)
 - Flagged - a smart list that displays all flagged reminders
