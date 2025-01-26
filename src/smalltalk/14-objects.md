@@ -368,13 +368,76 @@ changes all references to the receiver object
 to refer to the argument object AND
 changes all references to the argument object
 to refer to the receiver object.
-Copies are not created, only references change.
+Copies are not created, only the references change.
 
 The `becomeForward` method defined in the `Object` class
 is similar, but does less.
-It changes all references to the receiver object
+It changes all the references to the receiver object
 to refer to the argument object, but not vice-versa.
 
 For example, this can be used to model a physical address change.
 
 These methods have the potential to introduce bugs that are difficult to trace.
+Despite that, they can be useful.
+
+The following code demonstrates using the `become:` method
+to track all the selectors of all messages sent to a given object.
+It can be used as follows:
+
+```smalltalk
+date := Date today.
+HistoryProxy on: date.
+date monthName print. "#January"
+date dayOfWeekName print. "#Sunday"
+date year print. "a Year (2025)"
+history := HistoryProxy restoreAndProvideHistory: date.
+history print. "an OrderedCollection(monthName dayOfWeekName year)"
+```
+
+Define the `HistoryProxy` class as follows:
+
+```smalltalk
+Object subclass: #HistoryProxy
+    instanceVariableNames: 'history object'
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'Demo'
+```
+
+Implement the following class methods in the `HistoryProxy` class.
+
+```smalltalk
+on: anObject
+    | proxy |
+
+    proxy := self new on: anObject.
+    anObject become: proxy.
+    ^ proxy
+
+restoreAndProvideHistory: aProxy
+    | result |
+
+    result := aProxy history.
+    aProxy become: aProxy object.
+    ^ result.
+```
+
+Implement the following instance methods in the `HistoryProxy` class.
+
+```smalltalk
+on: anObject
+    history := OrderedCollection new.
+    object := anObject shallowCopy.
+
+doesNotUnderstand: aMessage
+    "Record the message and reroute it to the object."
+
+    history add: aMessage.
+    ^ aMessage sendTo: object.
+
+history
+    ^ history
+
+object
+    ^ object
+```
