@@ -381,15 +381,20 @@ These methods have the potential to introduce bugs that are difficult to trace.
 Despite that, they can be useful.
 
 The following code demonstrates using the `become:` method
-to track all the selectors of all messages sent to a given object.
-It can be used as follows:
+to create a proxy for another object.
+It tracks the selectors of all messages sent to a given object.
+The object being proxied below is referenced in three places,
+in the `date` variable, in the `dates` `OrderedCollection`,
+and in the `occasions` `Dictionary`.
 
 ```smalltalk
 date := Date today.
+dates := OrderedCollection newFrom: { date }.
+occasions := Dictionary newFrom: { 'today' -> date }.
 HistoryProxy on: date.
 date monthName print. "#January"
-date dayOfWeekName print. "#Sunday"
-date year print. "a Year (2025)"
+dates first dayOfWeekName print. "#Sunday"
+occasions at: 'today' :: value year print. "a Year (2025)"
 history := HistoryProxy restoreAndProvideHistory: date.
 history print. "an OrderedCollection(monthName dayOfWeekName year)"
 ```
