@@ -359,21 +359,20 @@ based on the following instance properties:
 
 - `padding`: a `Number` or `Point`
 
-  This adds space inside the `LayoutMorph`
+  This property is inherited from the superclass `BorderedBoxMorph`.
+  It adds space inside the `LayoutMorph`
   so the submorphs are not positioned at its edges.
 
-- `separation`: a `Number` or `Point`
+- `gap`: a `Number` or `Point`
 
   This adds space between the submorphs.
   It also adds space between the outer submorphs
   and the edges of the `LayoutMorph`.
-  To avoid adding outer space, send the message `#useEdgeSpace:`
-  with the value `false` to the `LayoutMorph`.
 
-  By default, there is no separation.
-  To add separation, send the `separation:` message.
-  If the argument is a number then it is used for both x and y separation.
-  Otherwise it should be a `Point` whose `x` and `y` values
+  By default, there is no gap.
+  To add a gap, send the `separation:` message.
+  If the argument is a number then it is used for both the x and y gap.
+  Otherwise it must be a `Point` whose `x` and `y` values
   specify the corresponding separations.
   For example, `myLayout separation: 20 @ 10`
   uses an x separation of 20 and a y separation of 10.
@@ -393,72 +392,83 @@ based on the following instance properties:
 
 Practically any layout can be achieved by nesting instances of this class.
 
-An instance can be created with:
-
-- `LayoutMorph newColumn`
-- `LayoutMorph newRow`
-
+An instance of `LayoutMorph` can be created with
+`LayoutMorph newColumn` or `LayoutMorph newRow`,
+but not with `LayoutMorph new` because the direction must be specified.
 For example, `myLayout := Layout newRow`.
 
-To add a submorph to a `LayoutMorph`, send it the `#addMorph:` message.
-For example, `myLayout addMorph: EllipseMorph new`
-and `myLayout addMorph: new`.
+To add a submorph to an instance of `LayoutMorph`,
+send it the `#addMorph:` message.
+For example, `myLayout addMorph: ColoredBoxMorph new`.
 
-If the UI-Layout-Panel package is installed,
-all of these values can be specified interactively.
+If the UI-Layout-Panel package is installed then
+the direction, gap, edge weight, and background color
+can be configured interactively.
 
 - Open the halo for a `LayoutMorph`.
 - Click the blue menu button.
 - Select "edit me (a LayoutMorph)". The dialog below will appear.
 - Click the red push pin to enable trying multiple changes.
 - After each set of changes, click the "Update" button.
-- When satisfied withthe changes, close the dialog.
+- When satisfied with the changes, close the dialog.
 
 <img alt="Cuis Morphic Layout dialog" style="width: 75%"
   src="/blog/assets/cuis-morphic-layout-dialog.png?v={{pkg.version}}">
 
-To specify the color of a `LayoutMorph` (its background),
-override the class method `new` as follows:
-
-```smalltalk
-new
-    | app |
-    app := super newColumn.
-    ^ app color: Color white.
-```
-
-It does not work to set the color in the `initialize` method
-because the `new` method sends `#newRow` to the instance
-which sends `#initialize` and then it
-sends `#color:` with the value `(Color red alpha: 0.2)`
-which replaces the value set in the `initialize` method.
-
-The following methods can be used to a `Morph` to a `LayoutMorph`.
-All but the first replace the `layoutSpec` with a new one.
-
-- `addMorph:`
-- `addMorph:fixedHeight:`
-- `addMorph:fixedWidth:`
-- `addMorph:proportionalHeight:`
-- `addMorph:proportionalWidth:`
-
-The `addMorphs:` method takes a collection of `Morphs` and adds each
-using the `addMorph:proportionalWidth:` method with a value of `1`.
-The `addMorphs:withProportionalWidth:` method is similar, but takes
-a collection of widths to use as the `proportionalWidth` of each submorph.
+To change the background color of a `LayoutMorph` instance,
+send it `#color:` with an argument that is the new color.
 
 ### Submorphs
+
+All `Morph` instances, including instances of `LayoutMorph`,
+have the instance variable `submoprhs`
+whose value is an array of child morphs.
+
+`LayoutMorph` instances also have a `layoutSpec` instance variable
+that is inherited from the superclass `PlacedMorph`.
+It defaults to `nil` and can be set to an instance of `LayoutSpec`.
+This specifies how to layout the submorph within its owner `LayoutMorph`.
+It is ignored if the owner is not a `LayoutMorph`.
 
 The `addMorph:` method defined in the `Morph` class
 adds a `Morph` as a submorph of another.
 For example, `ownerMorph addMorph: submorph`.
 
+The following additional methods can be used to add a `Morph` to a `LayoutMorph`.
+Each of these set the `layoutSpec` instance variable
+to a new instance of `LayoutSpec`.
+
+- `addMorph:fixedHeight:`
+
+  The height remains at the specified size and
+  the width adjusts to fill the available space.
+
+- `addMorph:fixedWidth:`
+
+  The width remains at the specified size and
+  the height edjusts to fill the available space.
+
+- `addMorph:proportionalHeight:`
+
+  The height adjusts to be the specified percentage of the available height
+  and the width adjusts to fill the available space.
+
+- `addMorph:proportionalWidth:`
+
+  The width adjusts to be the specified percentage of the available width
+  and the height adjusts to fill the available space.
+
+The `addMorphs:` method takes a collection of `Morphs` and adds each
+using the `addMorph:proportionalWidth:` method with a value of `1`.
+This causes all the newly added submorphs have the same width
+that is adjusted to fill the available space.
+
+The `addMorphs:withProportionalWidth:` method is similar, but takes
+a collection of widths to use as the `proportionalWidth` of each submorph.
+
 The `Morph` subclass `PlacedMorph` adds the instance methods
 `layoutSpec` and `layoutSpec:` that get and set a `LayoutSpec` object
 specific to the `PlacedMorph`.
-The `LayoutSpec` specifies how to layout the submorph
-within its owner `LayoutMorph`.
-It is ignored if the owner is not a `LayoutMorph`.
 
 The submorphs added to a `LayoutMorph` can each specify
 their alignment in the opposite direction of the `LayoutMorph`,
