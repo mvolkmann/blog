@@ -363,19 +363,16 @@ based on the following instance properties:
   It adds space inside the `LayoutMorph`
   so the submorphs are not positioned at its edges.
 
-- `gap`: a `Number` or `Point`
+- `gap`: a `Number`
 
-  This adds space between the submorphs.
-  It also adds space between the outer submorphs
-  and the edges of the `LayoutMorph`.
+  This specifies the space between each of the submorphs.
 
   By default, there is no gap.
   To add a gap, send the `separation:` message.
-  If the argument is a number then it is used for both the x and y gap.
-  Otherwise it must be a `Point` whose `x` and `y` values
-  specify the corresponding separations.
-  For example, `myLayout separation: 20 @ 10`
-  uses an x separation of 20 and a y separation of 10.
+  The argument can be a number or a `Point`.
+  If it is a `Point` and the direction is `#horizontal`,
+  only the `x` value is used.
+  Otherwise, only the `y` value is used.
 
 - `axisEdgeWeight`: a number from 0 to 1
 
@@ -428,7 +425,11 @@ whose value is an array of child morphs.
 that is inherited from the superclass `PlacedMorph`.
 It defaults to `nil` and can be set to an instance of `LayoutSpec`.
 This specifies how to layout the submorph within its owner `LayoutMorph`.
-It is ignored if the owner is not a `LayoutMorph`.
+This is ignored if the owner is not a `LayoutMorph`.
+
+Instances of `LayoutSpec` have the following instance variables:
+`morph`, `fixedWidth`, `fixedHeight`, `offAxisEdgeWeight`,
+`proportionalWidth`, and `proportionalHeight`.
 
 The `addMorph:` method defined in the `Morph` class
 adds a `Morph` as a submorph of another.
@@ -450,13 +451,13 @@ to a new instance of `LayoutSpec`.
 
 - `addMorph:proportionalHeight:`
 
-  The height adjusts to be the specified percentage of the available height
-  and the width adjusts to fill the available space.
+  The height adjusts to be the specified percentage (number between 0 and 1)
+  of the available height and the width adjusts to fill the available space.
 
 - `addMorph:proportionalWidth:`
 
-  The width adjusts to be the specified percentage of the available width
-  and the height adjusts to fill the available space.
+  The width adjusts to be the specified percentage (number between 0 and 1)
+  of the available width and the height adjusts to fill the available space.
 
 The `addMorphs:` method takes a collection of `Morphs` and adds each
 using the `addMorph:proportionalWidth:` method with a value of `1`.
@@ -466,17 +467,23 @@ that is adjusted to fill the available space.
 The `addMorphs:withProportionalWidth:` method is similar, but takes
 a collection of widths to use as the `proportionalWidth` of each submorph.
 
+If the extent of a `LayoutMorph` instance is not
+explicitly set by sending it `#morphExtent:`,
+it will default to smallest size that contains its submorphs.
+
 The `Morph` subclass `PlacedMorph` adds the instance methods
 `layoutSpec` and `layoutSpec:` that get and set a `LayoutSpec` object
 specific to the `PlacedMorph`.
 
-The submorphs added to a `LayoutMorph` can each specify
-their alignment in the opposite direction of the `LayoutMorph`,
-referred to as the "minor axis".
+The submorphs added to a `LayoutMorph` can each specify their alignment in
+the opposite direction of the `LayoutMorph`, referred to as the "minor axis".
+It defaults to centering.
+To change this, send the `#axisEdgeWeight:` message with a number from 0 to 1.
+A value zero pushes to the top/left,
+a value one pushes to the bottom/right,
+and a value of 0.5 centers.
 
-For example, the following will cause a submorph to be
-left-aligned in a vertical `LayoutMorph` or
-top-aligned in a horizontal `LayoutMorph`:
+For example:
 
 ```smalltalk
 submorph layoutSpec offAxisEdgeWeight: 0
@@ -487,18 +494,60 @@ to the same value for all submorphs.
 To achieve that, use code like the following:
 
 ```smalltalk
-layout submorphs do: [ :submorph | submorph layoutSpec offAxisEdgeWeight: 0 ]
+layout submorphs do: [ :submorph | submorph layoutSpec offAxisEdgeWeight: 0 ].
+```
+
+Consider adding the following instance method to `LayoutMorph`:
+
+```smalltalk
+offAxisEdgeWeight: aNumber
+    "Sets offAxisEdgeWeight of all submorphs."
+
+    self submorphs do: [ :submorph | submorph layoutSpec offAxisEdgeWeight: 0 ].
 ```
 
 The following code demonstrates layout of submorphs.
 
 <img alt="Cuis Morphic layout" style="width: 40%"
-  src="/blog/assets/cuis-morphic-layout.png?v={{pkg.version}}">
+  src="/blog/assets/cuis-morphic-layout1.png?v={{pkg.version}}">
 
 ```smalltalk
-initialize
-| column container item row |
+row := LayoutMorph newRow.
+row morphExtent: 250@100.
+row borderColor: Color yellow; borderWidth: 5.
+row color: Color tan.
+row gap: 10.
+"left-aligned by default"
+"row axisEdgeWeight: 1." "right-aligned"
+row axisEdgeWeight: 0.5. "centered horizontally"
 
+box := ColoredBoxMorph new.
+box color: Color red.
+box morphExtent: 70@60.
+row addMorph: box.
+
+box := ColoredBoxMorph new.
+box color: Color green.
+"Keeping default extent of 50@40."
+row addMorph: box.
+
+box := ColoredBoxMorph new.
+box color: Color blue.
+box morphExtent: 30@20.
+row addMorph: box.
+
+"row submorphs do: [ :submorph | submorph layoutSpec offAxisEdgeWeight: 0 ]."
+row offAxisEdgeWeight: 1.
+
+row openInWorld.
+```
+
+Here is one more example.
+
+<img alt="Cuis Morphic layout" style="width: 40%"
+  src="/blog/assets/cuis-morphic-layout2.png?v={{pkg.version}}">
+
+```smalltalk
 column := LayoutMorph newColumn.
 column layoutSpec fixedWidth: 300; fixedHeight: 200.
 "Add a border to the LayoutMorph."
