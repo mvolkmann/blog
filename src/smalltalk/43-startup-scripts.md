@@ -2,7 +2,6 @@
 eleventyNavigation:
   key: Startup Scripts
   order: 43
-
   parent: Smalltalk
 layout: topic-layout.njk
 ---

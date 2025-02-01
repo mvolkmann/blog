@@ -2,7 +2,6 @@
 eleventyNavigation:
   key: Deploying
   order: 44
-
   parent: Smalltalk
 layout: topic-layout.njk
 ---
