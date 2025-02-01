@@ -38,8 +38,12 @@ TODO: to each submorph using the same canvas, but it doesn't.
 
 Each `Morph` holds a reference to its parent `Morph`
 in its instance variable `owner`.
+Those references can be followed all the way up to an instance of `WorldMorph`
+whose `owner` is `nil`.
+
 Each `Morph` stores its children (embedded) morphs
 in its `Array` instance variable `submorphs`.
+If there are no children, the value is an empty `Array` rather than `nil`.
 
 Morphic uses the term "extent" to describe the width and height of a `Morph`.
 It is represented by a `Point` object with
