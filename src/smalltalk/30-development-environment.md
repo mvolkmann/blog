@@ -1408,9 +1408,6 @@ If the location causes the window to extend beyond
 the right or bottom edges of the World,
 it is moved left and/or up to avoid that.
 
-Modify the `SystemWindow` instance method `openInWorld`
-to match the following:
-
 Modify the `WorldMorph` instance method `click:localPosition:`
 to match the following:
 
@@ -1420,6 +1417,9 @@ click: aMouseButtonEvent localPosition: localEventPosition
     Smalltalk at: #worldClickPosition put: localEventPosition.
     ^self mouseButton2Activity.
 ```
+
+Modify the `SystemWindow` instance method `openInWorld:`
+to match the following:
 
 ```smalltalk
 openInWorld: aWorld
@@ -1433,8 +1433,6 @@ openInWorld: aWorld
         windowExtent := frameRect extent.
     ].
     self morphExtent: windowExtent.
-
-    "aWorld addMorph: self position: frameRect topLeft."
 
     position := Smalltalk at: #worldClickPosition.
     worldExtent := aWorld morphExtent.
