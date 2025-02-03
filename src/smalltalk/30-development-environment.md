@@ -1394,3 +1394,60 @@ To capture a screenshot of the entire window in a BMP file,
 evaluate `Utilities saveScreenshot` in a Workspace.
 This creates the file `CuisWorld.bmp` in the
 `Cuis-Smalltalk-Dev-UserFiles` directory.
+
+## Window Locations
+
+When a window for a specific tool is opened by
+opening the World menu, hovering over "Open",
+and clicking the menu item for the tool,
+it seems to open in a random location.
+
+The following changes make it so the window opens
+at the location that was clicked to open the World menu.
+If the location causes the window to extend beyond
+the right or bottom edges of the World,
+it is moved left and/or up to avoid that.
+
+Modify the `SystemWindow` instance method `openInWorld`
+to match the following:
+
+Modify the `WorldMorph` instance method `click:localPosition:`
+to match the following:
+
+```smalltalk
+click: aMouseButtonEvent localPosition: localEventPosition
+
+    Smalltalk at: #worldClickPosition put: localEventPosition.
+    ^self mouseButton2Activity.
+```
+
+```smalltalk
+openInWorld: aWorld
+    "This msg and its callees result in the window being activeOnlyOnTop"
+    | frameRect position windowExtent worldExtent |
+
+    windowExtent := self morphExtent.
+    "300@200 is the default assigned in the SystemWindow instance method initialize."
+    windowExtent = `300 @ 200` ifTrue: [
+        frameRect := self initialFrameIn: aWorld.
+        windowExtent := frameRect extent.
+    ].
+    self morphExtent: windowExtent.
+
+    "aWorld addMorph: self position: frameRect topLeft."
+
+    position := Smalltalk at: #worldClickPosition.
+    worldExtent := aWorld morphExtent.
+
+    "Move left if hanging off right side of world"
+    position x + windowExtent x > worldExtent x ifTrue: [
+        position := Point x: (worldExtent  x - windowExtent x) y: position y
+    ].
+
+    "Move up if hanging off bottom of world."
+    position y + windowExtent y > worldExtent y ifTrue: [
+        position := Point x: position x y: (worldExtent y - windowExtent y)
+    ].
+
+    aWorld addMorph: self position: position.
+```
