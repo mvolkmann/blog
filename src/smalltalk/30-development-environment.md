@@ -1259,6 +1259,9 @@ Enter the "exit" command to exit this window.
 <img alt="Cuis Emergency Evaluator" style="width: 30%"
   src="/blog/assets/cuis-emergency-evaluator.png?v={{pkg.version}}">
 
+After entering one of these commands, to hide the Emergency Evaluator dialog
+open the World menu and select "Restore Display".
+
 ## Opening Windows
 
 To open a window of a particular type,
