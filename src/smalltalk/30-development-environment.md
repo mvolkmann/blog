@@ -1424,27 +1424,44 @@ to match the following:
 ```smalltalk
 openInWorld: aWorld
     "This msg and its callees result in the window being activeOnlyOnTop"
-    | frameRect position windowExtent worldExtent |
+    | position windowExtent windowHeight windowRect windowWidth worldExtent worldHeight worldWidth |
 
     windowExtent := self morphExtent.
     "300@200 is the default assigned in the SystemWindow instance method initialize."
     windowExtent = `300 @ 200` ifTrue: [
-        frameRect := self initialFrameIn: aWorld.
-        windowExtent := frameRect extent.
+        windowRect := self initialFrameIn: aWorld.
+        windowExtent := windowRect extent.
     ].
     self morphExtent: windowExtent.
+    windowWidth := windowExtent x.
+    windowHeight := windowExtent y.
+
+    worldExtent := aWorld morphExtent.
+    worldWidth := worldExtent x.
+    worldHeight := worldExtent y.
 
     position := Smalltalk at: #worldClickPosition.
-    worldExtent := aWorld morphExtent.
 
-    "Move left if hanging off right side of world"
-    position x + windowExtent x > worldExtent x ifTrue: [
-        position := Point x: (worldExtent  x - windowExtent x) y: position y
+    "Handle case where window is wider than World."
+    windowWidth > worldWidth ifTrue: [
+        self morphExtent: (Point x: worldWidth y: windowHeight).
+        position := Point x: 0 y: position y.
     ].
 
-    "Move up if hanging off bottom of world."
-    position y + windowExtent y > worldExtent y ifTrue: [
-        position := Point x: position x y: (worldExtent y - windowExtent y)
+    "Handle case where window is taller than World."
+    windowHeight > worldHeight ifTrue: [
+        self morphExtent: (Point x: windowWidth y: worldHeight).
+        position := Point x: position x y: 0.
+    ].
+
+    "If window extends past right side of world, move it left."
+    position x + windowWidth > worldWidth ifTrue: [
+        position := Point x: (worldWidth - windowWidth) y: position y
+    ].
+
+    "If window extends past bottom side of world, move it up."
+    position y + windowHeight > worldHeight ifTrue: [
+        position := Point x: position x y: (worldHeight - windowHeight)
     ].
 
     aWorld addMorph: self position: position.
