@@ -171,7 +171,9 @@ There are three ways to install a package.
 1. Open a File List, locate a package file,
    select it, and click the "install package" button.
 1. Open a Workspace,
-   enter the command `Feature require: '{package-name}'`,
+   enter the command `Feature require: '{package-name}'`
+   (or `Feature require: #PackageName` if it doesn't
+   contain special characters like dashes),
    and press cmd-d (Do it).
    This option only works if the package is
    in the same directory as the image file that is loaded.
@@ -311,7 +313,7 @@ a given package (such as "Foo") is installed is the following steps:
   selecting the package, and clicking the "Delete/Merge" button.
 - Restart the VM.
 - Open a Workspace.
-- Enter `Feature require: 'Foo'` and "Do it".
+- Enter `Feature require: #Foo` and "Do it".
 
 For example, the package "TodoApp" requires that
 the font "KurintoSans" be installed.

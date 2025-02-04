@@ -10,7 +10,7 @@ The `Pen` package supports turtle-like graphics.
 
 To install the `Pen` package, clone the
 [Morphic](https://github.com/Cuis-Smalltalk/Morphic.git) GitHub repository,
-enter `Feature require: 'Pen'` in a Workspace, and "Do it".
+enter `Feature require: #Pen` in a Workspace, and "Do it".
 
 The `Pen` class is a subclass of the `BitBlt` class.
 It provides several examples in class methods.

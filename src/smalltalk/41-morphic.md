@@ -1621,7 +1621,7 @@ To work with SVG images:
 
 - Open a Workspace and install the package `SVG`.
 
-  enter `Feature require: 'SVG'` and "Do it".
+  enter `Feature require: #SVG` and "Do it".
 
 - Enter `SVGMainMorph exampleTiger openInWorld` and "Do it".
 

@@ -9,7 +9,7 @@ layout: topic-layout.njk
 The `OSProcess` package provides methods for querying and interacting with
 the operating system processes in the Smalltalk virtual machine is running.
 
-To use this, install the package with `Feature require: 'OSProcess'`.
+To use this, install the package with `Feature require: #OSProcess`.
 
 To execute a shell command, evaluate `OSProcess command: 'some-shell-command'`.
 TODO: How can you get the text written to stdout and stderr?

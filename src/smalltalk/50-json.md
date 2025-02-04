@@ -12,7 +12,7 @@ It also adds the method `jsonWriteOn:` to many classes including
 `False`, `Integer`, `Number`, `Text`, `True`, and `UndefinedObject`.
 
 To install the `JSON` package,
-enter `Feature require: 'JSON'` in a Workspace and "Do it".
+enter `Feature require: #JSON` in a Workspace and "Do it".
 
 Custom classes whose instances need to be serialized to JSON
 should implement the instance method `jsonWriteOn:`.

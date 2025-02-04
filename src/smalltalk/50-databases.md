@@ -23,7 +23,7 @@ To install Cuis Smalltalk support for ODBC:
 - Clone the Git repository at https://github.com/Cuis-Smalltalk/DatabaseSupport
   into the same directory where the `Cuis-Smalltalk-Dev` directory resides.
 - Open a Workspace.
-- Enter `Feature require: 'ODBC'` and "Do it".
+- Enter `Feature require: #ODBC` and "Do it".
 
 ## macOS Installs
 
@@ -165,7 +165,7 @@ launchctl setenv DYLD_LIBRARY_PATH $(brew --prefix)/lib
 
 Open an "Installed Packages" window and
 verify that the ODBC package is installed.
-If not, open a Workspace, enter `Feature require: 'ODBC'`, and "Do it".
+If not, open a Workspace, enter `Feature require: #ODBC`, and "Do it".
 
 Open a Browser, select the ODBC class category,
 select the `ODBCConnection` class, click the "class" button,

@@ -9,13 +9,13 @@ layout: topic-layout.njk
 One package for implementing a web server is
 <a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Dev/blob/master/Packages/Features/WebClient.pck.st"
 target="_blank">WebClient</a>.
-To install this, open a Workspace, enter `Feature require: 'WebClient'`,
+To install this, open a Workspace, enter `Feature require: #WebClient`,
 and "Do it".
 This adds many classes in the "WebClient - Core" category including
 `WebClient`, `WebRequest`, `WebResponse`, `WebServer`, and `WebSocket`.
 
 To enable sending and receiving requests with JSON bodies,
-open a Workspace, enter `Feature require: 'Json'`, and "Do it".
+open a Workspace, enter `Feature require: #JSON`, and "Do it".
 
 The packages
 <a href="https://github.com/SeasideSt/Seaside" target="_blank">Seaside</a> and
@@ -28,7 +28,7 @@ See the <a href="https://book.seaside.st/book" target="_blank">Seaside Book</a>.
 ## Simple Example
 
 Here is a very simple use of the WebServer class that can be installed with
-`Feature require: 'WebClient'`.
+`Feature require: #WebClient`.
 Create the class `BasicWebServer` as follows:
 
 ```smalltalk
@@ -297,7 +297,7 @@ Here are steps to run a web server in headless mode.
 1. Enter and evaluate the following expressions in the Workspace:
 
    ```smalltalk
-   Feature require: 'WebClientPlus'.
+   Feature require: #WebClientPlus.
    HtmxServer new listenOn: 3000
    ```
 

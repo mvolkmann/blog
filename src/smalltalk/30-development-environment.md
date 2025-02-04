@@ -717,7 +717,7 @@ To install it:
   <a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Tools"
   target="_blank">Cuis-Smalltalk-Tools</a>.
 - Open a Workspace.
-- Enter `Feature require: 'SearchBrowser'` and "Do it".
+- Enter `Feature require: #SearchBrowser` and "Do it".
 
 This adds the World menu item "Open...Search Browser".
 It also adds menu items to the menus that appears in a System Browser

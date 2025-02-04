@@ -344,7 +344,7 @@ This opens a Debugger window that contains a stack trace
 which indicates where the modification attempt was made.
 
 To install the "Immutability" package,
-enter `Feature require: 'Immutability'` and "Do it".
+enter `Feature require: #Immutability` and "Do it".
 Among other things, this package adds
 the instance method `beImmutable` to the `Object` class.
 

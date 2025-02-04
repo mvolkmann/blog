@@ -169,9 +169,9 @@ checks for that key in the `SystemDictionary`.
 
 - Open a base image (currently named `Cuis7.1-6713.image`).
 - Open a Workspace.
-- Enter `Feature require: 'UI-MetaProperties'.` and "Do it"
+- Enter `Feature require: 'UI-MetaProperties'` and "Do it"
   (perhaps not everything installed by this is needed).
-- Enter `Feature require: 'TodoApp'.` and "Do it".
+- Enter `Feature require: #TodoApp` and "Do it".
 - Enter `TodoApp new.` and "Do it".
 - Position and size the "Todo App" window as desired.
 - Close the Workspace and Transcript windows.
