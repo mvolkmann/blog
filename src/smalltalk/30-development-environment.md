@@ -1423,46 +1423,66 @@ to match the following:
 
 ```smalltalk
 openInWorld: aWorld
-    "This msg and its callees result in the window being activeOnlyOnTop"
-    | position windowExtent windowHeight windowRect windowWidth worldExtent worldHeight worldWidth |
+    "This msg and its callees result in the window being activeOnlyOnTop."
+    | fromMenu sender |
 
-    windowExtent := self morphExtent.
-    "300@200 is the default assigned in the SystemWindow instance method initialize."
-    windowExtent = `300 @ 200` ifTrue: [
-        windowRect := self initialFrameIn: aWorld.
-        windowExtent := windowRect extent.
-    ].
-    self morphExtent: windowExtent.
-    windowWidth := windowExtent x.
-    windowHeight := windowExtent y.
-
-    worldExtent := aWorld morphExtent.
-    worldWidth := worldExtent x.
-    worldHeight := worldExtent y.
-
-    position := Smalltalk at: #worldClickPosition.
-
-    "Handle case where window is wider than World."
-    windowWidth > worldWidth ifTrue: [
-        self morphExtent: (Point x: worldWidth y: windowHeight).
-        position := Point x: 0 y: position y.
+    "Determine whether this method was invoked from a menu selection."
+    fromMenu := false.
+    sender := thisContext sender.
+    [ sender notNil and: [ fromMenu not ] ] whileTrue: [
+        fromMenu := sender receiver class = MenuMorph.
+        sender := sender sender.
     ].
 
-    "Handle case where window is taller than World."
-    windowHeight > worldHeight ifTrue: [
-        self morphExtent: (Point x: windowWidth y: worldHeight).
-        position := Point x: position x y: 0.
-    ].
+    fromMenu
+        ifTrue: [
+            | position windowExtent windowHeight windowRect windowWidth worldExtent worldHeight worldWidth |
 
-    "If window extends past right side of world, move it left."
-    position x + windowWidth > worldWidth ifTrue: [
-        position := Point x: (worldWidth - windowWidth) y: position y
-    ].
+            windowExtent := self morphExtent.
+            "300@200 is the default assigned in the SystemWindow instance method initialize."
+            windowExtent = `300 @ 200` ifTrue: [
+                windowRect := self initialFrameIn: aWorld.
+                windowExtent := windowRect extent.
+            ].
+            self morphExtent: windowExtent.
+            windowWidth := windowExtent x.
+            windowHeight := windowExtent y.
 
-    "If window extends past bottom side of world, move it up."
-    position y + windowHeight > worldHeight ifTrue: [
-        position := Point x: position x y: (worldHeight - windowHeight)
-    ].
+            worldExtent := aWorld morphExtent.
+            worldWidth := worldExtent x.
+            worldHeight := worldExtent y.
 
-    aWorld addMorph: self position: position.
+            position := Smalltalk at: #worldClickPosition.
+
+            "Handle case where window is wider than World."
+            windowWidth > worldWidth ifTrue: [
+                self morphExtent: (Point x: worldWidth y: windowHeight).
+                position := Point x: 0 y: position y.
+            ].
+
+            "Handle case where window is taller than World."
+            windowHeight > worldHeight ifTrue: [
+                self morphExtent: (Point x: windowWidth y: worldHeight).
+                position := Point x: position x y: 0.
+            ].
+
+            "If window extends past right side of world, move it left."
+            position x + windowWidth > worldWidth ifTrue: [
+                position := Point x: (worldWidth - windowWidth) y: position y
+            ].
+
+            "If window extends past bottom side of world, move it up."
+            position y + windowHeight > worldHeight ifTrue: [
+                position := Point x: position x y: (worldHeight - windowHeight)
+            ].
+
+            aWorld addMorph: self position: position.
+        ]
+        ifFalse: [
+            | frameRect |
+
+            frameRect := self initialFrameIn: aWorld.
+            self morphExtent: frameRect extent.
+            aWorld addMorph: self position: frameRect topLeft.
+        ].
 ```
