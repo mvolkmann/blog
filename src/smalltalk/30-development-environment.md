@@ -1424,13 +1424,16 @@ to match the following:
 ```smalltalk
 openInWorld: aWorld
     "This msg and its callees result in the window being activeOnlyOnTop."
-    | fromMenu sender |
+    | fromMenu hand sender |
 
-    "Determine whether this method was invoked from a menu selection."
+    "Determine whether this method was invoked from a menu selection
+    and capture the HandMorph if it is in the sender stack."
     fromMenu := false.
+    hand := nil.
     sender := thisContext sender.
     [ sender notNil and: [ fromMenu not ] ] whileTrue: [
         fromMenu := sender receiver class = MenuMorph.
+        sender receiver class = HandMorph ifTrue: [ hand := sender receiver ].
         sender := sender sender.
     ].
 
@@ -1479,10 +1482,13 @@ openInWorld: aWorld
             aWorld addMorph: self position: position.
         ]
         ifFalse: [
-            | frameRect |
+            | frameRect position |
 
             frameRect := self initialFrameIn: aWorld.
             self morphExtent: frameRect extent.
-            aWorld addMorph: self position: frameRect topLeft.
+            position := hand
+                ifNil: [ frameRect topLeft ]
+                ifNotNil: [ hand location translation ].
+            aWorld addMorph: self position: position.
         ].
 ```
