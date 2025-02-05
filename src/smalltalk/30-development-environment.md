@@ -1457,13 +1457,14 @@ openInWorld: aWorld
 
             position := Smalltalk at: #worldClickPosition.
 
+            "It seems most windows automatically choose their size
+            based on the World size, so this code isn't really necessary."
             "Handle case where window is wider than World."
             windowWidth > worldWidth ifTrue: [
                 'TOO WIDE' print.
                 self morphExtent: (Point x: worldWidth y: windowHeight).
                 position := Point x: 0 y: position y.
             ].
-
             "Handle case where window is taller than World."
             windowHeight > worldHeight ifTrue: [
                 'TOO TALL' print.
