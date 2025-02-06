@@ -1424,10 +1424,9 @@ to match the following:
 ```smalltalk
 openInWorld: aWorld
     "This msg and its callees result in the window being activeOnlyOnTop."
-    | fromMenu sender |
+    | fromMenu position sender windowExtent windowHeight windowRect windowWidth worldExtent worldHeight worldWidth |
 
-    "Determine whether this method was invoked from a menu selection
-    and capture the HandMorph if it is in the sender stack."
+    "Determine whether this method was invoked from a menu selection".
     fromMenu := false.
     sender := thisContext sender.
     [ sender notNil and: [ fromMenu not ] ] whileTrue: [
@@ -1435,67 +1434,49 @@ openInWorld: aWorld
         sender := sender sender.
     ].
 
-    fromMenu
-        ifTrue: [
-            | position windowExtent windowHeight windowRect windowWidth worldExtent worldHeight worldWidth |
+    "Determine the goal position for the upper-left corner of the window."
+    position := fromMenu
+        ifTrue: [ Smalltalk at: #worldClickPosition ]
+        ifFalse: [ self runningWorld activeHand location translation ].
 
-            windowExtent := self morphExtent.
-            "300@200 is the default assigned in the SystemWindow instance method initialize."
-            windowExtent = `300 @ 200` ifTrue: [
-                windowRect := self initialFrameIn: aWorld.
-                windowExtent := windowRect extent.
-            ].
-            self morphExtent: windowExtent.
-            windowWidth := windowExtent x.
-            windowHeight := windowExtent y.
-            windowHeight logAs: 'windowHeight'.
+    "Get the size of the window."
+    windowExtent := self morphExtent.
+    "300@200 is the default assigned in the SystemWindow instance method initialize."
+    windowExtent = `300 @ 200` ifTrue: [
+        windowRect := self initialFrameIn: aWorld.
+        windowExtent := windowRect extent.
+    ].
+    self morphExtent: windowExtent.
+    windowWidth := windowExtent x.
+    windowHeight := windowExtent y.
 
-            worldExtent := aWorld morphExtent.
-            worldWidth := worldExtent x.
-            worldHeight := worldExtent y.
-            worldHeight logAs: 'worldHeight'.
+    "Get the size of the World."
+    worldExtent := aWorld morphExtent.
+    worldWidth := worldExtent x.
+    worldHeight := worldExtent y.
 
-            position := Smalltalk at: #worldClickPosition.
+    "It seems most windows automatically choose their size
+    based on the World size, so this code isn't really necessary."
+    "Handle case where window is wider than World."
+    windowWidth > worldWidth ifTrue: [
+        self morphExtent: (Point x: worldWidth y: windowHeight).
+        position := Point x: 0 y: position y.
+    ].
+    "Handle case where window is taller than World."
+    windowHeight > worldHeight ifTrue: [
+        self morphExtent: (Point x: windowWidth y: worldHeight).
+        position := Point x: position x y: 0.
+    ].
 
-            "It seems most windows automatically choose their size
-            based on the World size, so this code isn't really necessary."
-            "Handle case where window is wider than World."
-            windowWidth > worldWidth ifTrue: [
-                'TOO WIDE' print.
-                self morphExtent: (Point x: worldWidth y: windowHeight).
-                position := Point x: 0 y: position y.
-            ].
-            "Handle case where window is taller than World."
-            windowHeight > worldHeight ifTrue: [
-                'TOO TALL' print.
-                self morphExtent: (Point x: windowWidth y: worldHeight).
-                position := Point x: position x y: 0.
-            ].
+    "If window extends past right side of world, move it left."
+    position x + windowWidth > worldWidth ifTrue: [
+        position := Point x: (worldWidth - windowWidth) y: position y
+    ].
 
-            "If window extends past right side of world, move it left."
-            position x + windowWidth > worldWidth ifTrue: [
-                'OFF RIGHT' print.
-                position := Point x: (worldWidth - windowWidth) y: position y
-            ].
+    "If window extends past bottom side of world, move it up."
+    position y + windowHeight > worldHeight ifTrue: [
+        position := Point x: position x y: (worldHeight - windowHeight)
+    ].
 
-            "If window extends past bottom side of world, move it up."
-            position y + windowHeight > worldHeight ifTrue: [
-                'OFF BOTTOM' print.
-                position := Point x: position x y: (worldHeight - windowHeight)
-            ].
-
-            position logAs: 'position'.
-            aWorld addMorph: self position: position.
-        ]
-        ifFalse: [
-            | frameRect hand position |
-
-            frameRect := self initialFrameIn: aWorld.
-            self morphExtent: frameRect extent.
-            hand := self runningWorld activeHand.
-            position := hand
-                ifNil: [ frameRect topLeft ]
-                ifNotNil: [ hand location translation ].
-            aWorld addMorph: self position: position.
-        ].
+    aWorld addMorph: self position: position.
 ```
