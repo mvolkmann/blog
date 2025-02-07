@@ -1353,8 +1353,16 @@ The `#submenuOf` key is optional and specifies
 the submenu within the World menu where a menu item will be added.
 If this is omitted, the menu item will appear directly in the World menu.
 For example, the "Open" submenu is identified by `TheWorldMenu openLabel`.
-All the submenus of the World menu are defined in the
+All the current submenus of the World menu are defined in the
 class method `worldMenuOptions` in the class `TheWorldMenu`.
+These include:
+
+- `TheWorldMenu openLabel`
+- `TheWorldMenu preferencesLabel`
+- `TheWorldMenu windowsLabel`
+- `TheWorldMenu helpLabel`
+- `TheWorldMenu changesLabel`
+- `TheWorldMenu debugLabel`
 
 The `#itemGroup` key specifies the group within the target menu
 where a menu item will be added.
@@ -1377,6 +1385,7 @@ The `#label` key specifies the text that will appear in the menu item.
 
 The `#object` key specifies the class that implements the menu item.
 An instance of this class will be created when the menu item is selected.
+This defaults to the current class when omitted.
 
 The `#selector` key specifies the message that will be sent
 to the class (not an instance of it) specified in the `#object` key.
