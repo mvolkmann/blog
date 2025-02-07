@@ -1325,9 +1325,12 @@ initialize
 ## World Menu Items
 
 To add menu items in the World menu,
-create a class with the class method `worldMenuOptions`
-that returns an array of `Dictionary` objects.
-Each `Dictionary` instance describes a single menu item.
+add the class method `worldMenuOptions` to any class.
+This method must returns an array of `Dictionary` objects,
+each of which describes a single menu item.
+Saving a new or modified `worldMenuOptions` method
+immediately updates the World menu.
+
 For example:
 
 ```smalltalk
@@ -1349,7 +1352,9 @@ worldMenuOptions
 The `#submenuOf` key is optional and specifies
 the submenu within the World menu where a menu item will be added.
 If this is omitted, the menu item will appear directly in the World menu.
-The "Open" submenu is identified by `TheWorldMenu openLabel`.
+For example, the "Open" submenu is identified by `TheWorldMenu openLabel`.
+All the submenus of the World menu are defined in the
+class method `worldMenuOptions` in the class `TheWorldMenu`.
 
 The `#itemGroup` key specifies the group within the target menu
 where a menu item will be added.
