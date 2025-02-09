@@ -1896,12 +1896,61 @@ drawOn: aCanvas
     so a blue rectangle is not drawn."
 ```
 
+## Animation
+
 Animation in Morphic is achieved through stepping.
-The following class implements a `Morph` that renders a red circle
+Subclasses of `Morph` add animation by defining two instance methods.
+The `step` method defines what to do at each step of the animation and
+the optional `stepTime` method returns
+the number of milliseconds to delay between each step (defaults to 1000).
+After an instance of the morph is opened,
+send it the messages `#startStepping` and `#stopStepping`
+to start and stop the animation.
+
+The following class animates the size of a `ColoredMorph` subclass.
+
+```smalltalk
+ColoredBoxMorph subclass: #AnimatedMorph
+    instanceVariableNames: 'delta maxSize minSize'
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'Demo'
+
+"class methods"
+
+open
+
+    self new openInWorld startStepping
+
+"instance methods"
+
+initialize
+
+    super initialize.
+    delta := 1.
+    maxSize := 200.
+    minSize := 50.
+    self morphExtent: minSize @ minSize.
+    self color: Color red.
+
+step
+    | newSize |
+
+    newSize := self morphExtent x + delta.
+    self morphExtent: newSize @ newSize.
+    delta = 1
+        ifTrue: [ newSize = maxSize ifTrue: [ delta := -1 ] ]
+        ifFalse: [ newSize = minSize ifTrue: [ delta := 1 ] ]
+
+stepTime
+    ^ 10
+```
+
+The following class implements a morph that renders a red circle
 and animates to a random location in the World every time it is clicked.
-After creating this class in a System Browser,
+After defining this class in a System Browser,
 enter `AnimatedMorph new openInWorld` in a Workspace and "Do it".
-This animates position changes, but other properties such as
+This only animates position changes, but other properties such as
 rotation, scale, and color can also be animated.
 
 ```smalltalk
@@ -1911,12 +1960,15 @@ EllipseMorph subclass: #AnimatedMorph
     poolDictionaries: ''
     category: 'Volkmann'
 
+"instance methods"
+
 initialize
     | size |
+
     super initialize.
     size := self size.
     self morphExtent: size @ size.
-    self color: Color red
+    self color: Color red.
 
 size
     ^ 100
@@ -1926,6 +1978,7 @@ handlesMouseDown
 
 mouseButton1Up: aMouseEvent localPosition: aPosition
     | newX newY oldX oldY size worldExtent |
+
     oldX := self morphPosition x.
     oldY := self morphPosition y.
     "UISupervior ui answers the WorldMorph instance."
@@ -1936,9 +1989,10 @@ mouseButton1Up: aMouseEvent localPosition: aPosition
     dx := newX - oldX / self stepCount.
     dy := newY - oldY / self stepCount.
     stepNumber := 0.
-    self startStepping
+    self startStepping. "must send after morph is opened, not in initialize"
 
 step
+
     self morphPosition: self morphPosition + (dx @ dy).
     self redrawNeeded.
     stepNumber := stepNumber + 1.
