@@ -70,13 +70,13 @@ or the lines above that create a stream for the image file
 and set the background image to its contents must be reevaluated.
 
 ```smalltalk
-PreferenceSet sysPreferences at: #backgroundEffect put: #cover.
+Preferences at: #backgroundEffect put: #cover.
 ```
 
 To tile the window with an image, set the following preference:
 
 ```smalltalk
-PreferenceSet sysPreferences at: #backgroundEffect put: #tile.
+Preferences at: #backgroundEffect put: #tile.
 ```
 
 ## Workspace Windows
