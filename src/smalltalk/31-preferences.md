@@ -39,11 +39,13 @@ included opposite `Boolean` values for the same preference.
   `#standardButtonFont`, `#standardCodeFont`, `#standardListFont`,
   `#standardMenuFont`, and `#WindowTitleFont`.
   The default font is "DejaVu Sans".
+  This preference is not saved in `UserPrefs.txt`.
 
 - Load all TrueType Fonts
 
   This loads all TrueType font files found in the directory
-  Cuis-Smalltalk-Dev/TrueTypeFonts.
+  Cuis-Smalltalk-Dev/TrueTypeFonts so they can be
+  selected from the "Set System Font..." menu item.
   Initially this directory contains the following font directories:
   AlexBrush, Amaranth, ComputerModern, Cream, DejaVu, JetBrainsMono,
   KiwiMaru, KurintoSans, LearningCurve, NotoEgyptianHieroglyphs, and SourceSans.
@@ -54,13 +56,17 @@ included opposite `Boolean` values for the same preference.
   This opens a submenu containing "Use icons for menu entries" (true; default)
   and "Don't use icons for menu entries" (false).
   Both set the `Boolean` preference `#wantsMenuIcons`.
+  This preference is not saved in `UserPrefs.txt`.
 
 - Themes...
 
   This opens a submenu containing all the loaded themes.
   Selecting one changes the theme used by newly opened windows,
   but not the theme used by already open windows.
-  Initially the only themes available are "BrightColorTheme" and "DarkTheme".
+  This preference is not saved in `UserPrefs.txt`.
+
+  Initially the only themes available are
+  "BrightColorTheme" (default) and "DarkTheme".
   Select "\* Load Additional Themes \*" to load more.
   These include:
 
@@ -80,6 +86,7 @@ included opposite `Boolean` values for the same preference.
   Selecting these menu items does not change a preference value.
   They just modify the instance of `WorldMorph` to show or hide the taskbar
   which is persisted when the image is saved.
+  This preference is not saved in `UserPrefs.txt`.
 
 - Full screen on / Full screen off
 
@@ -88,9 +95,30 @@ included opposite `Boolean` values for the same preference.
   to the `DisplayScreen` class which evaluates the primitive 233.
   This triggers the platform to change whether the Cuis window
   is rendered in full screen mode.
+  This preference is not saved in `UserPrefs.txt`, but it is saved in the image.
 
-- Save Prefs in UserPrefs.txt / Save Prefs in the Image
+- Save Prefs in UserPrefs.txt (true; default) / Save Prefs in the Image (false)
+
+  These both set the `Boolean` preference `#useUserPrefsFile`.
+  Saving preferences to the file `Cuis-Smalltalk-Dev-UserFiles/UserPrefs.txt`
+  enables them to affect all images opened in the future,
+  not just the current image.
+  This preference is not saved in `UserPrefs.txt`.
+
 - Set Code Author...
+
+  This prompts for your initials and full name.
+  The responses are saved in the
+  class variables `AuthorInitials` and `AuthorName`,
+  in the `Utilities` class, not in `UserPrefs.txt`.
+  They can be retrieved by evaluating
+  `Utilities authorInitials` and `Utilities authorName`.
+
+  If you have contributed to Cuis Smalltalk, your initials and name will
+  appear in the `SystemDictionary` instance method `knownInitialsAndNames`.
+  This makes it so after entering your initials, you can be asked to
+  confirm your name rather than requiring it to be entered it again.
+
 - All prefernces...
 
   This evaluates `Preferences allPreferences inspect`
