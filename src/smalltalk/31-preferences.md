@@ -6,24 +6,33 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-Many supported preferences are not directly on
-the Preferences submenu of the World menu.
-To access those, click "All preferences..."
-which opens a Preferences window.
-Click a preference symbol in the left pane
-to display its current value in the right pane.
+## Overview
 
-To change the value of a preference:
+The Cuis Smalltalk development environment is customized via many preferences.
+These are stored in the global variable `Preferences`
+which is an instance of the class `PreferenceSet`.
 
-- Select it in the left pane.
-- Press cmd-i (inspect) to open an Inspect window.
-- In the bottom pane, enter `value := {new-value}` and "Do it".
-- Close the Inspect window.
-- Close the Preferences window.
+## Setting from World Menu
+
+Some preferences can be set from the "Preferences" submenu of the World menu.
+These include the following where the ones separated by a slash
+included opposite Boolean values for the same preference.
+
+- Focus follows Mouse / Focus when Click
+- Show ST-80 assignments / Show ANSI assignments
+- Size of GUI elements...
+- Set System Font...
+- Load all TrueType Fonts
+- Icons...
+- Themes...
+- Show taskbar / Hide taskbar
+- Full screen on / Full screen off
+- Save Prefs in UserPrefs.txt / Save Prefs in the Image
+- Set Code Author...
+- All prefernces...
 
 ## Built-in Preferences
 
-The global object `Preferences` is an instance of the `PreferenceSet` class.
 The base Cuis image populates this with the following preferences.
 This list was obtained by evaluating
 `Preferences allPreferences keys asSortedCollection print`.
@@ -132,6 +141,23 @@ This list was obtained by evaluating
 - `#warnIfNoSourcesFile`
 - `#windowTitleFont`
 - `#worldMenu`
+
+## Setting in an Inspector
+
+Many supported preferences are not directly on
+the Preferences submenu of the World menu.
+To access those, click "All preferences..."
+which opens a Preferences window.
+Click a preference symbol in the left pane
+to display its current value in the right pane.
+
+To change the value of a preference:
+
+- Select it in the left pane.
+- Press cmd-i (inspect) to open an Inspect window.
+- In the bottom pane, enter `value := {new-value}` and "Do it".
+- Close the Inspect window.
+- Close the Preferences window.
 
 The following code sets a preference to enable playing sounds
 and plays a basic sound:
