@@ -18,15 +18,13 @@ Some preferences can be set from the "Preferences" submenu of the World menu.
 These include the following where the ones separated by a slash
 included opposite `Boolean` values for the same preference.
 
-- Focus follows Mouse (true) / Focus when Click (false)
+- Focus follows Mouse (true; default) / Focus when Click (false)
 
-  These both set the `Boolean` preference `#focusFollowsMouse`
-  which defaults to true.
+  These both set the `Boolean` preference `#focusFollowsMouse`.
 
-- Show ST-80 assignments (true) / Show ANSI assignments (false)
+- Show ST-80 assignments (true; default) / Show ANSI assignments (false)
 
-  These both set the `Boolean` preference `#showAssignmentAsLeftArrow`
-  which defaults to true.
+  These both set the `Boolean` preference `#showAssignmentAsLeftArrow`.
 
 - Size of GUI elements...
 
@@ -35,13 +33,47 @@ included opposite `Boolean` values for the same preference.
 
 - Set System Font...
 
-  This sets the `Font` preferences whose names match `#standard*Font`
-  where `*` includes `Button`, `Code`, `List`, and `Menu`.
+  This opens a menu that lists all the installed fonts
+  where their names provide a samples of the fonts.
+  Selecting one sets the `Font` preferences
+  `#standardButtonFont`, `#standardCodeFont`, `#standardListFont`,
+  `#standardMenuFont`, and `#WindowTitleFont`.
   The default font is "DejaVu Sans".
 
 - Load all TrueType Fonts
+
+  This loads all TrueType font files found in the directory
+  Cuis-Smalltalk-Dev/TrueTypeFonts.
+  Initially this directory contains the following font directories:
+  AlexBrush, Amaranth, ComputerModern, Cream, DejaVu, JetBrainsMono,
+  KiwiMaru, KurintoSans, LearningCurve, NotoEgyptianHieroglyphs, and SourceSans.
+  Additional font directories can be placed here before selecting this menu item.
+
 - Icons...
+
+  This opens a submenu containing "Use icons for menu entries" (true; default)
+  and "Don't use icons for menu entries" (false).
+  Both set the `Boolean` preference `#wantsMenuIcons`.
+
 - Themes...
+
+  This opens a submenu containing all the loaded themes.
+  Selecting one changes the theme used by newly opened windows,
+  but not the theme used by already open windows.
+  Initially the only themes available are "BrightColorTheme" and "DarkTheme".
+  Select "\* Load Additional Themes \*" to load more.
+  These include:
+
+  - ClassicTheme
+  - DarkBlueTheme
+  - DarkColorTheme
+  - HighContrastBlackTheme
+  - HighContrastWhiteTheme
+  - LightBluetheme (The "t" in "theme" shoud be uppercase for consistency!)
+  - LightGrayTheme
+  - LightTheme
+  - PersonalizedTheme
+
 - Show taskbar / Hide taskbar
 - Full screen on / Full screen off
 - Save Prefs in UserPrefs.txt / Save Prefs in the Image
