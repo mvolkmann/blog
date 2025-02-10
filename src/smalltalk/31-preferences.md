@@ -75,7 +75,20 @@ included opposite `Boolean` values for the same preference.
   - PersonalizedTheme
 
 - Show taskbar / Hide taskbar
+
+  The taskbar is shown by default.
+  Selecting these menu items does not change a preference value.
+  They just modify the instance of `WorldMorph` to show or hide the taskbar
+  which is persisted when the image is saved.
+
 - Full screen on / Full screen off
+
+  Full screen mode is off by default.
+  Selecting these sends the message `#fullScreenMode:`
+  to the `DisplayScreen` class which evaluates the primitive 233.
+  This triggers the platform to change whether the Cuis window
+  is rendered in full screen mode.
+
 - Save Prefs in UserPrefs.txt / Save Prefs in the Image
 - Set Code Author...
 - All prefernces...
