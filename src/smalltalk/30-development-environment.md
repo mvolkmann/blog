@@ -1253,8 +1253,25 @@ To delete it:
 The Emergency Evaluator appears when there is
 an error for which a Debugger cannot be opened.
 In this case the environment can become unusable.
-Enter the "revert" command to revert the last code modification.
-Enter the "exit" command to exit this window.
+
+This is often triggered by attempts to modify the development environment,
+which isn't typically possible in
+the development environments for other programming languages.
+It can make Smalltalk feel brittle, but keep in mind that this is
+a bit like trying to modify an airplane while in flight.
+
+For example, if the `SystemWindow` instance method `openInWorld:`
+is modified to include the expression `frameRect inspect`
+and a new window is opened, it will go into an endless loop
+because the `inspect` method itself opens a window.
+Pressing cmd-period may exit the loop and
+cause the Emergency Evaluator to appear.
+If this doesn't, it may be necessary to
+"force quit" the corresponding Squeak process.
+
+When the Emergency Evaluator dialog appears,
+enter "revert" to revert the last code modification
+or enter "exit" to exit this window.
 
 <img alt="Cuis Emergency Evaluator" style="width: 30%"
   src="/blog/assets/cuis-emergency-evaluator.png?v={{pkg.version}}">

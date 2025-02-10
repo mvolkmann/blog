@@ -363,6 +363,8 @@ open a File List, select the file, right-click it,
 and select "workspace with contents".
 
 If running code goes into an infinite loop, press cmd-period to break out of it.
+This does not always work and it may be necessary
+to "force quit" the corresponding Squeak process.
 
 ### Transcripts
 
