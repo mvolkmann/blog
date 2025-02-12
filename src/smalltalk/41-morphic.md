@@ -374,7 +374,10 @@ based on the following instance properties:
   only the `x` value is used.
   Otherwise, only the `y` value is used.
 
-- `axisEdgeWeight`: a number from 0 to 1
+- `axisEdgeWeight`: a number from 0 to 1 or one of the following symbols:
+
+  - for rows: `#rowLeft`, `#center`, or `#rowRight`
+  - for columns: `#columnTop`, `#center`, or `#columnBottom`
 
   This specifies the alignment of the submorphs
   in the same direction as the `LayoutMorph`,
