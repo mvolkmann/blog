@@ -394,6 +394,12 @@ An instance of `LayoutMorph` can be created with
 but not with `LayoutMorph new` because the direction must be specified.
 For example, `myLayout := Layout newRow`.
 
+To add space between the submorphs in a `LayoutMorph`,
+send it `#gap:` with an integer argument.
+
+To add space between the submorphs in a `LayoutMorph` AND outside them (padding),
+send it `#separation:` with an integer argument.
+
 To add a submorph to an instance of `LayoutMorph`,
 send it the `#addMorph:` message.
 For example, `myLayout addMorph: ColoredBoxMorph new`.
