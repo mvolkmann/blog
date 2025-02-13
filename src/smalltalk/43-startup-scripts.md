@@ -146,7 +146,7 @@ To apply this to an image, open a Workspace
 and enter `Feature require: #RMVSetup`.
 
 This runs the `initialize` method which calls the `openWindows` method.
-The code for each of these methods is show below.
+The code for each of these methods is shown below.
 You may wish to create a similar repository containing this code
 and customize it according to your preferences.
 
@@ -171,7 +171,9 @@ initialize
 
 ```smalltalk
 openWindows
-    | browser1 browser2 browserWidth browserX cpl cplHeight filled height taskbarHeight transcript transcriptHeight workspace world worldHeight worldWidth x |
+    | browser1 browser2 browserWidth browserX cpl cplHeight
+      filled height taskbarHeight transcript transcriptHeight
+      workspace world worldHeight worldWidth x |
 
     "Get sizes that will be used to position and size some window."
     world := UISupervisor ui.
