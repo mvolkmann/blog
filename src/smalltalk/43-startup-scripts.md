@@ -182,7 +182,7 @@ openWindows
     taskbarHeight := world taskbar morphExtent y.
 
     "Open, position, and size a System Browser."
-    browser1 := Smalltalk browse.
+    browser1 := Browser open.
     browserWidth := browser1 morphExtent x.
     browserX := (worldWidth / 2) - (browserWidth / 2).
     browser1 morphPosition: browserX @ 0.
@@ -205,7 +205,7 @@ openWindows
     Transcript clearAll.
 
     "Open, position, and size another System Browser."
-    browser2 := Smalltalk browse.
+    browser2 := Browser open.
     "Making the x position no less than 30 leaves a vertical strip of the World visible
     so that can be clicked to open the World menu."
     browser2 morphPosition: (browserX - browserWidth max: 30) @ 0.
