@@ -6,13 +6,32 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-Startup scripts automate starting an image with:
+It is helpful to have a way to configure an image with.
 
-- preferred settings
+- specific preferences set settings
 - tool windows open at specfied locations with specified sizes
-- loaded packages
+- desired packages loaded
 
-## Example
+There is more than one way to accomplish this.
+One way is to write and use a startup script.
+Another way is to create and load a package.
+
+## When To Use
+
+The ability to easily configure a new image is
+useful when new versions of Cuis Smalltalk are released
+or just to create an image for a specific project.
+A new base image can be opened and configured.
+Once this is done, open the World menu and
+select "Save Image as..." to save the image under a new name.
+
+Starting future sessions using the saved image will be much faster
+than starting the base image using a startup script.
+The reason is that the saved image will already contain
+all the packages installed by the startup script.
+Loading packages during startup is relative time consuming.
+
+## Startup Script Example
 
 The following is an example script in a file named `cuis`.
 
@@ -112,16 +131,89 @@ To use this script:
 - `cd` to the directory containing this script.
 - Enter `./cuis` to launch the VM in your preferred starting state.
 
-## When To Use
+## Package Example
 
-Startup scripts like the one described above are useful
-when a new image version is released.
-They enable restoring your preferred environment setup using a new image.
-Once this is done, it's a good idea to open the World menu
-and select "Save Image as..." to save the image under a new name.
+I created the package
+<a href="https://github.com/mvolkmann/Cuis-Smalltalk-RMVSetup"
+target="_blank">Cuis-Smalltalk-RMVSetup</a>
+which configures an image according to my preferences.
 
-Starting future sessions using the saved image will be much faster
-than starting the base image using your startup script.
-The reason is that the saved image will already contain
-all the packages installed by the startup script.
-Loading packages during startup is relative time consuming.
+This adds the class `RMVSetup` in the class category `RMVSetup`.
+The class has the class method `initialize`,
+the class method `openWindows`, and no instance methods.
+
+To apply this to an image, open a Workspace
+and enter `Feature require: #RMVSetup`.
+
+This runs the `initialize` method which calls the `openWindows` method.
+The code for each of these methods is show below.
+You may wish to create a similar repository containing this code
+and customize it according to your preferences.
+
+```smalltalk
+initialize
+    | filePath stream |
+
+    "Set preferences."
+    Utilities setAuthorName: 'R. Mark Volkmann' initials: 'rmv'.
+    Preferences name: #showAssignmentAsLeftArrow category: #programming value: true.
+    Preferences saveToDisk: #showAssignmentAsLeftArrow.
+    WindowManager openAtCursor.
+
+    "Add World background image."
+    Preferences at: #backgroundEffect put: #tile.
+    filePath := '../Cuis-Smalltalk-RMVSetup/altitude1600.jpg'.
+    stream := filePath asFileEntry readStream.
+    self runningWorld backgroundImageData: stream binary contentsOfEntireFile.
+
+    self openWindows.
+```
+
+```smalltalk
+openWindows
+    | browser1 browser2 browserWidth browserX cpl cplHeight filled height taskbarHeight transcript transcriptHeight workspace world worldHeight worldWidth x |
+
+    "Get sizes that will be used to position and size some window."
+    world := UISupervisor ui.
+    worldWidth := world morphExtent x.
+    worldHeight := world morphExtent y.
+    taskbarHeight := world taskbar morphExtent y.
+
+    "Open, position, and size a System Browser."
+    browser1 := Smalltalk browse.
+    browserWidth := browser1 morphExtent x.
+    browserX := (worldWidth / 2) - (browserWidth / 2).
+    browser1 morphPosition: browserX @ 0.
+    browser1 morphExtent: browserWidth @ worldHeight.
+
+    "Open, position, and size a Workspace."
+    workspace := Workspace open.
+    workspace morphExtent: browserWidth @ (worldHeight * 0.7).
+    x := browserX + browserWidth.
+    filled := x + browserWidth > worldWidth.
+    filled ifTrue: [ x := worldWidth - browserWidth ].
+    x + browserWidth > worldWidth ifTrue: [ x := worldWidth - browserWidth ].
+    workspace morphPosition: x @ 0.
+
+    "Open, position, and size a Transcript."
+    transcript := Transcript open.
+    transcriptHeight := worldHeight * 0.3.
+    transcript morphExtent: browserWidth @ transcriptHeight.
+    transcript morphPosition: x @ (worldHeight - transcriptHeight).
+    Transcript clearAll.
+
+    "Open, position, and size another System Browser."
+    browser2 := Smalltalk browse.
+    "Making the x position no less than 30 leaves a vertical strip of the World visible
+    so that can be clicked to open the World menu."
+    browser2 morphPosition: (browserX - browserWidth max: 30) @ 0.
+    height := filled ifTrue: [ worldHeight - taskbarHeight ] ifFalse: worldHeight.
+    browser2 morphExtent: browserWidth @ height.
+
+    "Open, position, and size an Installed Packages window."
+    cpl := CodePackageList open.
+    cplHeight := cpl morphExtent y.
+    cpl morphPosition: 0 @ (worldHeight - cplHeight - taskbarHeight).
+
+    browser1 activateWindow.
+```
