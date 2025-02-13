@@ -1044,8 +1044,11 @@ aCanvas image: form at: 0@0
 
 ## Text Entry
 
-For single-line text entry, use `TextEntryMorph`.
-For multi-line text entry, use `TextModelMorph`.
+For single-line text entry, use `TextEntryMorph`
+which is defined in the UI-Entry package.
+TODO: Consider using your UIForms package RMVLabelledTestMorph instead.
+For multi-line text entry, use `TextModelMorph`
+which is defined in the base image Morphic package.
 
 TODO: Add much more detail here with examples.
 

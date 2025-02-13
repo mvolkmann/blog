@@ -50,6 +50,10 @@ A chunk can contain:
 
 - a "From" line that gives the version of Smalltalk that created the file
   and the date and time at which the file was created
+- a "provides" line that specifies the name of the package being defined, if any
+- any number of "requires" lines that specifies the name of another package required by this one
+- a "SystemOrganization" line that specifies the name of the class category
+  to which all classes defined later belong
 - a "classDefinition" that associates a class or metaclass with a class category
 - a "subclass: message send that creates a class
 - a "methodsFor" which states that the method definitions
