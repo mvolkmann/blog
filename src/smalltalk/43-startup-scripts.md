@@ -136,16 +136,18 @@ To use this script:
 I created the package
 <a href="https://github.com/mvolkmann/Cuis-Smalltalk-RMVSetup"
 target="_blank">Cuis-Smalltalk-RMVSetup</a>
+which defines the class `RMVSetup` in the class category `RMVSetup`.
 which configures an image according to my preferences.
 
-This adds the class `RMVSetup` in the class category `RMVSetup`.
-The class has the class method `initialize`,
-the class method `openWindows`, and no instance methods.
+To install this package, clone the repositiory, open a Workspace,
+enter `Feature require: #RMVSetup`, and "Do it".
+This results in the following window:
 
-To apply this to an image, open a Workspace
-and enter `Feature require: #RMVSetup`.
+<img alt="Cuis-Smalltalk-RMVSetup" style="width: 100%"
+  src="/blog/assets/cuis-smalltalk-rmvsetup.png?v={{pkg.version}}">
 
-This runs the `initialize` method which calls the `openWindows` method.
+Installing the package runs the class method `initialize`
+which calls the class method `openWindows`.
 The code for each of these methods is shown below.
 You may wish to create a similar package containing this code
 and customize it according to your preferences.
@@ -184,15 +186,19 @@ openWindows
         fullHeightMinusTaskbar.
 
     Workspace open
+        percentHeight: 0.7;
         moveRightOf: browser;
-        moveTo: #worldTop;
-        percentHeight: 0.7.
+        moveTo: #worldTop.
 
     Transcript open
+        percentHeight: 0.3;
         moveRightOf: browser;
-        moveTo: #worldBottom;
-        percentHeight: 0.3.
+        moveTo: #worldBottom.
     Transcript clearAll.
+
+    MessageNames open
+        moveTo: #worldRight;
+        moveTo: #worldTop.
 
     CodePackageList open
         moveTo: #worldLeft;
