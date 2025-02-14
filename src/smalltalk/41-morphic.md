@@ -1082,14 +1082,15 @@ sets its instance variable `extent` to `200@100`.
 So that is the default size of `TextModelMorph` instances.
 Depending on the font, that will display around four lines
 of wrapping text with around 17 characters per line.
+
 A vertical scrollbar will appear automatically if more lines are entered.
 
+To prevent the text from automatically wrapping,
+send an instance `wrapFlag: false`.
+This will cause a horizontal scrollbar to appear automatically
+if the text entered on any line exceeds the width.
+
 To change the size, TODO.
-
-To prevent the text from wrapping, TODO.
-
-TODO: Can you get a horizontal scrollbar?
-That would be useful when restricting to a single line.
 
 The following code demonstrates listening for key events.
 It prints their ASCII codes to the Transcript.
