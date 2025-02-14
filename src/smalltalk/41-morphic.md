@@ -1075,6 +1075,22 @@ model actualContents: 'new content'.
 model actualContents print.
 ```
 
+The `TextModelMorph` class is a subclass of `PluggableScrollPane`
+which is a subclass of `PluggableMorph`.
+The instance method `initialize` in `PluggableMorph`
+sets its instance variable `extent` to `200@100`.
+So that is the default size of `TextModelMorph` instances.
+Depending on the font, that will display around four lines
+of wrapping text with around 17 characters per line.
+A vertical scrollbar will appear automatically if more lines are entered.
+
+To change the size, TODO.
+
+To prevent the text from wrapping, TODO.
+
+TODO: Can you get a horizontal scrollbar?
+That would be useful when restricting to a single line.
+
 The following code demonstrates listening for key events.
 It prints their ASCII codes to the Transcript.
 
