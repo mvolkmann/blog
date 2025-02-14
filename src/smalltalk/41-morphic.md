@@ -1046,20 +1046,40 @@ aCanvas image: form at: 0@0
 
 For single-line text entry, use `TextEntryMorph`
 which is defined in the UI-Entry package.
-TODO: Consider using your UIForms package RMVLabelledTestMorph instead.
+TODO: Consider using your UIForms package `TextInputMorf` class instead.
+
 For multi-line text entry, use `TextModelMorph`
 which is defined in the base image Morphic package.
 
-TODO: Add much more detail here with examples.
-
 The following code creates an instance of `TextModelMorph`,
-listens for every keystroke inside it,
-and prints their ASCII codes to the Transcript:
 
 ```smalltalk
-input := TextModelMorph withText: 'edit me'.
-input keystrokeAction: [ :evt | evt keyValue print ].
-input openInWorld.
+tmm := TextModelMorph withText: 'initial content'.
+tmm openInWorld.
+tmm editor actualContents: 'new content'.
+tmm text print.
+```
+
+The `withText:` method creates a `TextModel` object
+that is used by the `TextModelMorph` instance.
+Another option is to manually create that object
+which has the advantage of making it accessible
+so the content can be changed more easily.
+For example:
+
+```smalltalk
+model := TextModel withText: 'initial content'.
+tmm := TextModelMorph withModel: model.
+tmm openInWorld.
+model actualContents: 'new content'.
+model actualContents print.
+```
+
+The following code demonstrates listening for key events.
+It prints their ASCII codes to the Transcript.
+
+```smalltalk
+tmm keystrokeAction: [ :evt | evt keyValue print ].
 ```
 
 ## Mouse Events
