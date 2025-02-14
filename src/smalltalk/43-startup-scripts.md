@@ -147,7 +147,7 @@ and enter `Feature require: #RMVSetup`.
 
 This runs the `initialize` method which calls the `openWindows` method.
 The code for each of these methods is shown below.
-You may wish to create a similar repository containing this code
+You may wish to create a similar package containing this code
 and customize it according to your preferences.
 
 ```smalltalk
@@ -171,51 +171,94 @@ initialize
 
 ```smalltalk
 openWindows
-    | browser1 browser2 browserWidth browserX cpl cplHeight
-      filled height taskbarHeight transcript transcriptHeight
-      workspace world worldHeight worldWidth x |
+    | browser |
 
-    "Get sizes that will be used to position and size some window."
-    world := UISupervisor ui.
-    worldWidth := world morphExtent x.
-    worldHeight := world morphExtent y.
-    taskbarHeight := world taskbar morphExtent y.
+    browser := Browser open
+        moveTo: #worldCenter;
+        moveTo: #worldTop;
+        fullHeight.
 
-    "Open, position, and size a System Browser."
-    browser1 := Browser open.
-    browserWidth := browser1 morphExtent x.
-    browserX := (worldWidth / 2) - (browserWidth / 2).
-    browser1 morphPosition: browserX @ 0.
-    browser1 morphExtent: browserWidth @ worldHeight.
+    Browser open
+        moveLeftOf: browser;
+        moveTo: #worldTop;
+        fullHeightMinusTaskbar.
 
-    "Open, position, and size a Workspace."
-    workspace := Workspace open.
-    workspace morphExtent: browserWidth @ (worldHeight * 0.7).
-    x := browserX + browserWidth.
-    filled := x + browserWidth > worldWidth.
-    filled ifTrue: [ x := worldWidth - browserWidth ].
-    x + browserWidth > worldWidth ifTrue: [ x := worldWidth - browserWidth ].
-    workspace morphPosition: x @ 0.
+    Workspace open
+        moveRightOf: browser;
+        moveTo: #worldTop;
+        percentHeight: 0.7.
 
-    "Open, position, and size a Transcript."
-    transcript := Transcript open.
-    transcriptHeight := worldHeight * 0.3.
-    transcript morphExtent: browserWidth @ transcriptHeight.
-    transcript morphPosition: x @ (worldHeight - transcriptHeight).
+    Transcript open
+        moveRightOf: browser;
+        moveTo: #worldBottom;
+        percentHeight: 0.3.
     Transcript clearAll.
 
-    "Open, position, and size another System Browser."
-    browser2 := Browser open.
-    "Making the x position no less than 30 leaves a vertical strip of the World visible
-    so that can be clicked to open the World menu."
-    browser2 morphPosition: (browserX - browserWidth max: 30) @ 0.
-    height := filled ifTrue: [ worldHeight - taskbarHeight ] ifFalse: worldHeight.
-    browser2 morphExtent: browserWidth @ height.
+    CodePackageList open
+        moveTo: #worldLeft;
+        moveTo: #taskbarTop.
 
-    "Open, position, and size an Installed Packages window."
-    cpl := CodePackageList open.
-    cplHeight := cpl morphExtent y.
-    cpl morphPosition: 0 @ (worldHeight - cplHeight - taskbarHeight).
+    browser activateWindow.
+```
 
-    browser1 activateWindow.
+The following instance methods `moveTo:`, `moveLeftOf:`, `moveRightOf:`,
+`fullHeight`, `fullHeightMinusTaskbar`, and `percentHeight` were
+added to the `SystemWindow` class by the `Cuis-Smalltalk-RMVSetup` package.
+
+```smalltalk
+fullHeight
+    | world |
+
+    world := UISupervisor ui.
+    self morphExtent: (self morphExtent x) @ (world morphExtent y).
+
+fullHeightMinusTaskbar
+    | taskbarHeight world |
+
+    world := UISupervisor ui.
+    taskbarHeight := world taskbar morphExtent y.
+    self morphExtent: (self morphExtent x) @ (world morphExtent y - taskbarHeight).
+
+moveLeftOf: aWindow
+    "Move this window to the left of aWindow and guarantee
+    that it will not extend past the left edge of the World."
+    | newX newY position |
+
+    position := aWindow morphPosition.
+    newX := position x - extent x max: 0.
+    newY := position y.
+    self morphPosition: newX @ newY.
+
+moveRightOf: aWindow
+    "Move this window to the right of aWindow and guarantee
+    that it will not extend past the right edge of the World."
+    | newX newY position world worldWidth |
+
+    world := UISupervisor ui.
+    worldWidth := world morphExtent x.
+    position := aWindow morphPosition.
+    newX := position x + aWindow morphExtent x min: (worldWidth - extent x).
+    newY := position y.
+    self morphPosition: newX @ newY.
+
+moveRightOf: aWindow
+    "Move this window to the right of aWindow and guarantee
+    that it will not extend past the right edge of the World."
+    | newX newY position world worldWidth |
+
+    world := UISupervisor ui.
+    worldWidth := world morphExtent x.
+    position := aWindow morphPosition.
+    newX := position x + aWindow morphExtent x min: (worldWidth - extent x).
+    newY := position y.
+    self morphPosition: newX @ newY.
+
+percentHeight: aNumber
+    | world |
+
+    aNumber <= 0 ifTrue: [ Error signal: 'aNumber cannot be zero or less.' ].
+    aNumber > 1 ifTrue: [ Error signal: 'aNumber cannot be greater than one.' ].
+
+    world := UISupervisor ui.
+    self morphExtent: (self morphExtent x) @ (world morphExtent y * aNumber).
 ```
