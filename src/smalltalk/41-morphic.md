@@ -1117,6 +1117,12 @@ tmm morphExtent: 200 @ 0. "calculates required height for one line"
 tmm hideScrollBarsIndefinitely.
 ```
 
+To select all the content:
+
+```smalltalk
+tmm editor selectAll.
+```
+
 To select content from one index to another where both are inclusive:
 
 ```smalltalk
