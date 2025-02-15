@@ -368,9 +368,10 @@ based on the following instance properties:
   This specifies the space between each of the submorphs.
 
   By default, there is no gap.
-  To add a gap, send the `separation:` message.
-  The argument can be a number or a `Point`.
-  If it is a `Point` and the direction is `#horizontal`,
+  To add a gap, send the `gap:` message with a number argument.
+  To add a gap AND set the padding to applied on all four sides,
+  send the `separation:` message a number or `Point` argument.
+  If a `Point` is passed and the direction is `#horizontal`,
   only the `x` value is used.
   Otherwise, only the `y` value is used.
 
@@ -396,12 +397,6 @@ An instance of `LayoutMorph` can be created with
 `LayoutMorph newColumn` or `LayoutMorph newRow`,
 but not with `LayoutMorph new` because the direction must be specified.
 For example, `myLayout := Layout newRow`.
-
-To add space between the submorphs in a `LayoutMorph`,
-send it `#gap:` with an integer argument.
-
-To add space between the submorphs in a `LayoutMorph` AND outside them (padding),
-send it `#separation:` with an integer argument.
 
 To add a submorph to an instance of `LayoutMorph`,
 send it the `#addMorph:` message.
@@ -1142,6 +1137,8 @@ It prints their ASCII codes to the Transcript.
 ```smalltalk
 tmm keystrokeAction: [ :evt | evt keyValue print ].
 ```
+
+TODO: How do you listen for changes? Only when focus moves?
 
 ## Mouse Events
 
