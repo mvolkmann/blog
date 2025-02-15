@@ -1064,7 +1064,8 @@ The `withText:` method creates a `TextModel` object
 that is used by the `TextModelMorph` instance.
 Another option is to manually create that object
 which has the advantage of making it accessible
-so the content can be changed more easily.
+so the content can be changed more easily
+and the model object can be shared by multiple morphs.
 For example:
 
 ```smalltalk
@@ -1083,14 +1084,51 @@ So that is the default size of `TextModelMorph` instances.
 Depending on the font, that will display around four lines
 of wrapping text with around 17 characters per line.
 
-A vertical scrollbar will appear automatically if more lines are entered.
+To change the size:
+
+```smalltalk
+tmm morphExtent: width @ height.
+```
+
+The size should include space for scrollbars if they should be needed.
+
+A vertical scrollbar will appear automatically
+if more lines than will fit are entered.
 
 To prevent the text from automatically wrapping,
-send an instance `wrapFlag: false`.
+send `wrapFlag: false` to an instance.
 This will cause a horizontal scrollbar to appear automatically
 if the text entered on any line exceeds the width.
 
-To change the size, TODO.
+To prevent scrollbars from appearing,
+send one of the following messages to an instance:
+
+- `#hHideScrollBar` for horizontal (ignored if `wrapFlag: false` is also sent)
+- `#vHideScrollBar` for vertical (doesn't seem to work!)
+- `#hideScrollBarsIndefinitely` for both
+
+The following code creates a single-line text input
+with a given width that never shows scrollbars:
+
+```smalltalk
+tmm := TextModelMorph withText: ''.
+tmm wrapFlag: false.
+tmm morphExtent: 200 @ 0. "calculates required height for one line"
+tmm hideScrollBarsIndefinitely.
+```
+
+To select content from one index to another where both are inclusive:
+
+```smalltalk
+tmm editor selectFrom: startIndex to: endIndex.
+```
+
+To place the text cursor at the end of the current content:
+
+```smalltalk
+index := tmm text size + 1.
+tmm editor selectFrom: index to: index.
+```
 
 The following code demonstrates listening for key events.
 It prints their ASCII codes to the Transcript.
