@@ -380,11 +380,25 @@ System Browsers contain four rows.
   If no method is selected and the "class" button is selected,
   the metaclass definition is displayed in the bottom pane.
 
-  Selecting a message category (a.k.a protocol) in the third pane
-  displays methods in that category in the fourth pane.
+  The third pane lists the method categories in the selected class.
+  Selecting a message category (a.k.a protocol)
+  displays the methods in that category in the fourth pane.
   The top message category, provided by default, is "-- all --".
   If no message category is selected, or if "-- all --" is selected,
   all the methods in all categories are listed.
+  Right-clicking in this pane opens a context menu that includes
+  the following menu items:
+
+  - "Alphabetize" the categories
+  - "Remove empty Categories" (those with no methods)
+  - "Categorize all Uncategorized" methods (doesn't work well),
+  - "New Category..." to add one
+  - "New extension Category..." to add one whose name is
+    "\*" followed by an installed package name
+  - "Rename..." the category that was right-clicked
+  - "Remove" the category that was right-clicked
+  - "Run tests" to run all tests in the category
+  - and more
 
   The list of methods in the fourth pane
   only includes methods that are directly implemented by the class,
