@@ -1134,7 +1134,8 @@ TODO: How do you listen for changes? Only when focus moves?
 
 Another option that is suitable for single-line text entry is
 to use the `TextEntryMorph` class defined in the UI-Entry package.
-Also, consider using the `TextInputMorf` class defined in my UIForms package.
+Also, consider using the `TextInputMorf` class
+defined in my Cuis-Smalltalk-Morf package.
 
 ## Mouse Events
 
