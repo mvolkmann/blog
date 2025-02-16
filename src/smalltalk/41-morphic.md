@@ -1039,12 +1039,8 @@ aCanvas image: form at: 0@0
 
 ## Text Entry
 
-For single-line text entry, use `TextEntryMorph`
-which is defined in the UI-Entry package.
-TODO: Consider using your UIForms package `TextInputMorf` class instead.
-
-For multi-line text entry, use `TextModelMorph`
-which is defined in the base image Morphic package.
+The `TextModelMorph` class defined in the base image Morphic package
+can be used for single or multiple line text entry.
 
 The following code creates an instance of `TextModelMorph`,
 
@@ -1090,8 +1086,8 @@ The size should include space for scrollbars if they should be needed.
 A vertical scrollbar will appear automatically
 if more lines than will fit are entered.
 
-To prevent the text from automatically wrapping,
-send `wrapFlag: false` to an instance.
+By default, the text will automatically wrap to new lines.
+To prevent this, send `wrapFlag: false` to an instance.
 This will cause a horizontal scrollbar to appear automatically
 if the text entered on any line exceeds the width.
 
@@ -1106,29 +1102,25 @@ The following code creates a single-line text input
 with a given width that never shows scrollbars:
 
 ```smalltalk
-tmm := TextModelMorph withText: ''.
-tmm wrapFlag: false.
-tmm morphExtent: 200 @ 0. "calculates required height for one line"
-tmm hideScrollBarsIndefinitely.
+tmm := TextModelMorph withText: '' ::
+    hideScrollBarsIndefinitely;
+    morphExtent: 200 @ 0; "calculates required height for one line"
+    wrapFlag: false.
 ```
 
-To select all the content:
-
-```smalltalk
-tmm editor selectAll.
-```
+To select all the content in an instance, send it `#selectAll`.
 
 To select content from one index to another where both are inclusive:
 
 ```smalltalk
-tmm editor selectFrom: startIndex to: endIndex.
+tmm selectFrom: startIndex to: endIndex.
 ```
 
 To place the text cursor at the end of the current content:
 
 ```smalltalk
 index := tmm text size + 1.
-tmm editor selectFrom: index to: index.
+tmm selectFrom: index to: index.
 ```
 
 The following code demonstrates listening for key events.
@@ -1139,6 +1131,10 @@ tmm keystrokeAction: [ :evt | evt keyValue print ].
 ```
 
 TODO: How do you listen for changes? Only when focus moves?
+
+Another option that is suitable for single-line text entry is
+to use the `TextEntryMorph` class defined in the UI-Entry package.
+Also, consider using the `TextInputMorf` class defined in my UIForms package.
 
 ## Mouse Events
 
