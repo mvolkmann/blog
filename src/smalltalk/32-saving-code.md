@@ -329,7 +329,7 @@ prePackageInstall
         (DirectoryEntry trueTypeFontsDirectory / 'KurintoSans')
 ```
 
-## Restoring Changes After Crash
+## Restoring Changes After Crashes
 
 If the VM crashes before changes are saved by a fileOut or saving in a package,
 they can still be recovered with the following steps.

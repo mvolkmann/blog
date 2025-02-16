@@ -357,23 +357,31 @@ based on the following instance properties:
   This is automatically set when the class methods `newRow` and `newColumn`
   are used to create an instance.
 
+- `gap`: a `Number`
+
+  This specifies the space between each of the submorphs.
+
+  By default, there is no gap or padding.
+
+  To add a gap, send the `gap:` message with a number argument.
+
 - `padding`: a `Number` or `Point`
 
   This property is inherited from the superclass `BorderedBoxMorph`.
   It adds space inside the `LayoutMorph`
   so the submorphs are not positioned at its edges.
+  By default, there is no padding.
 
-- `gap`: a `Number`
+  To specify padding, send the `padding:` message
+  with a `Number` or `Point` argument.
+  If a number is passed, it used as the padding on all four sides.
+  If a `Point` is passed, its x value is used for left and right padding
+  and its y value is used for top and bottom padding.
 
-  This specifies the space between each of the submorphs.
-
-  By default, there is no gap.
-  To add a gap, send the `gap:` message with a number argument.
-  To add a gap AND set the padding to applied on all four sides,
-  send the `separation:` message a number or `Point` argument.
-  If a `Point` is passed and the direction is `#horizontal`,
-  only the `x` value is used.
-  Otherwise, only the `y` value is used.
+  To add both a gap AND padding, send the `separation:` message
+  with a number or `Point` argument.
+  If a `Point` is passed, the gap value is
+  its x value for rows and its y value for columns.
 
 - `axisEdgeWeight`: a number from 0 to 1 or one of the following symbols:
 

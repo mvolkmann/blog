@@ -1117,7 +1117,7 @@ To create a new package:
   but feel free to change the directory to one outside
   the distribution directory.
 
-If package name matches the name of a class category
+If the package name matches the name of a class category
 that was created previously, all the classes in that category
 will automatically be associated with the new package.
 Otherwise, to add classes to a new package:
@@ -1129,6 +1129,11 @@ Otherwise, to add classes to a new package:
 
 Deleting a package does not delete the corresponding class category and
 deleting a class category does not delete the corresponding package.
+
+Renaming a class category does not rename the previously corresponding package.
+A new package with the new name must be created in the
+"Installed Packages" window and it must be saved to
+create the initial `*.pck.st` file with the new package name.
 
 I created a package whose name is my last name.
 I use this package to save all my experimental code
