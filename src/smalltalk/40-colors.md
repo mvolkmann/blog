@@ -25,31 +25,34 @@ with an argument that is a float value between
 zero (fully transparent) and one (fully opaque).
 
 There are many `Color` instance methods in the "transformations" category
-that return a variation on a given color. These include:
+that return a new `Color` object that is a variation on a given color.
+These include:
 
-- `adjustBrightness:`
-- `adjustSaturation:brightness:`
-- `alpha:`
-- `alphaMixed:with:`
-- `blacker`
-- `darker`
-- `duller`
-- `lighter`
-- `mixed:with:`
-- `muchDarker`
-- `muchLigher`
-- `negated`
-- `paler`
-- `quiteBlacker`
-- `quiteWhiter`
-- `slightlyDarker`
-- `slightlyLighter`
-- `slightlyWhiter`
-- `twiceDarker`
-- `twiceLighter`
-- `veryMuchDarker`
-- `veryMuchLighter`
-- `whiter`
+| Method                         | Description                                                                                        |
+| ------------------------------ | -------------------------------------------------------------------------------------------------- |
+| `adjustBrightness:`            | adds to the V value (brightness) of the HSV representation, keeping the result between 0.005 and 1 |
+| `adjustSaturation:brightness:` | adds to the S and V values of the HSV representation, keeping both between 0.005 and 1             |
+| `alpha:`                       | creates a new `TranslucentColor` instance where its alpha is the specified value                   |
+| `alphaMixed:with:`             | mixes a Color with another using percentages of red, green, blue, and alpha values                 |
+| `blacker`                      | sends `alphaMised: 0.8333 with: Color black`                                                       |
+| `darker`                       | sends `adjustBrightness: -0.08`                                                                    |
+| `duller`                       | sends `adjustSaturation: -0.03 brightness: -0.2`                                                   |
+| `lighter`                      | sends `adjustSaturation: -0.03 brightness: 0.08`                                                   |
+| `mixed:with:`                  | mixes a Color with another using percentages of red, green, and blue values (alpha is unchanged)   |
+| `muchDarker`                   | sends `` alphaMixed: 0.5 with: `Color black` ``                                                    |
+| `muchLigher`                   | sends `` alphaMixed: 0.233 with: `Color white` ``                                                  |
+| `negated`                      | creates a new color where the R, G, and B values are all 1 minus their current value               |
+| `paler`                        | sends `adjustSaturation: -0.09 brightness: 0.09`                                                   |
+| `quiteBlacker`                 | sends `` alphaMixed: 0.8 with: `Color black` ``                                                    |
+| `quiteWhiter`                  | sends `` alphaMixed: 0.6 with: `Color white` ``                                                    |
+| `slightlyDarker`               | sends `adjustBrightness: -0.03`                                                                    |
+| `slightlyLighter`              | sends `adjustSaturation: -0.01 brightness: 0.03`                                                   |
+| `slightlyWhiter`               | sends `alphaMixed: 0.85 with: Color white`                                                         |
+| `twiceDarker`                  | sends `adjustSaturation: 0.076 brightness: -0.15`                                                  |
+| `twiceLighter`                 | sends `adjustSaturation: -0.06 brightness: 0.15`                                                   |
+| `veryMuchDarker`               | sends `` alphaMixed: 0.25 with: `Color black` ``                                                   |
+| `veryMuchLighter`              | sends `` alphaMixed: 0.07 with: `Color white` ``                                                   |
+| `whiter`                       | sends `alphaMixed: 0.8333 with: Color white`                                                       |
 
 ## XKCD Colors
 
