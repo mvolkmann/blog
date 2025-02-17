@@ -68,8 +68,5 @@ layout: topic-layout.njk
   without creating a new subclass? For example,
   I created a subclass of TextEntryMorph just so I could listen
   for presses of the escape key. Was that really necessary?
-- Describe what it means for a morph to be "pluggable".
-  I think it means that the morph is a subclass of `PluggableMorph`
-  and can be configured through message sends to change its behavior.
 - Is there a way to configure Cuis so class categories and method categories
   are always alphabetized?

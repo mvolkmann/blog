@@ -6,23 +6,69 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-## Color Class
+Morphic colors are specified using the `Color` class.
 
-The `Color` class defines many methods for creating and operating on colors.
-It defines the following class methods that create colors by name:
+## Predefined Colors
 
-- `black`, `blue`, `brown`, `cyan`, `gray`, `green`, `magenta`,
-  `orange`, `pink`, `purple`, `red`, `tan`, `white`, `yellow`
-- `lightBlue`, `lightBrown`, `lightCyan`, `lightGray`, `lightGreen`, `lightMagenta`,
-  `lightOrange`, `lightRed`, `lightYellow`
-- `darkGray`, `veryDarkGray`, `veryLightGray`, `veryVeryDarkGray`, `veryVeryLightGray`
-- `transparent`
+There are many class methods that return predefined colors.
+The following predefined colors range from white to black:
+
+`white`, `veryVeryLightGray`, `veryLightGray`, `lightGray`, `gray`,
+`darkGray`, `veryDarkGray`, `veryVeryDarkGray`, and `black`
+
+The following predefined colors are in the rainbow:
+
+`red`, `orange`, `yellow`, `green`, `cyan`, `blue`, `magenta`, and `purple`
+
+The following predefined colors are lighter versions of those in the rainbow:
+
+`lightRed`, `lightOrange`, `lightYellow`, `lightGreen`, `lightCyan`,
+`lightBlue`, and `lightMagenta` (no `lightPurple')
+
+The following additional colors are predefined:
+
+`tan`, `lightBrown`, `brown`, `pink`, and `transparent`
+
+The image below shows the colors
+tan, lightBrown, brown, pink, lightRed and red in that order
+to get a sense of how they differ.
+
+<img alt="Cuis browns and reds" style="width: 30%"
+  src="/blog/assets/cuis-colors-browns-and-reds.png?v={{pkg.version}}">
+
+## Custom Colors
+
+To create a color from RGB values,
+send the `#r:g:b:` message to the `Color` class.
+The arguments are floating point numbers between zero and one.
+For example, the following creates the CSS color linen:
+
+```smalltalk
+linen := Color r: 250 / 255 g: 240 / 255 b: 230 / 255
+```
+
+To create the same color with 50% transparency:
+
+```smalltalk
+linen := Color r: 250 / 255 g: 240 / 255 b: 230 / 255 alpha: 0.5
+```
+
+To create the same color from a hex string:
+
+```smalltalk
+linen := Color fromHexString: '#faf0e6'
+```
+
+To create the same color from hue, saturation,
+and brightness values (abbreviated as "v"):
+
+```smalltalk
+linen := Color h: 30.0 s: 0.08 v: 0.98.
+```
 
 To get a random color, send the `#random` message to the `Color` class.
 
-To set the opacity of a color, send the `#alpha:` message to a `Color` object
-with an argument that is a float value between
-zero (fully transparent) and one (fully opaque).
+## Color Variations
 
 There are many `Color` instance methods in the "transformations" category
 that return a new `Color` object that is a variation on a given color.

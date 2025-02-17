@@ -56,64 +56,19 @@ that has the instance properties `deltaX` and `deltaY`.
 Each `Morph` can store additional properties in its `properties` instance variable
 which holds a reference to a `Dictionary` of key/value pairs.
 
-## Colors
+## Pluggable
 
-Morphic colors are specified using the `Color` class.
-There are many class methods that return predefined colors.
-The following predefined colors range from white to black:
+Several of the `Morph` subclasses are "pluggable". This means that
+they can be configured through composition rather than inheritance.
+Configuration is achieved by specifying a target object and
+a selector for messages to be sent to the target object.
+The corresponding method in the target object often
+returns an object that changes the operation.
 
-`white`, `veryVeryLightGray`, `veryLightGray`, `lightGray`, `gray`,
-`darkGray`, `veryDarkGray`, `veryVeryDarkGray`, and `black`
-
-The following predefined colors are in the rainbow:
-
-`red`, `orange`, `yellow`, `green`, `cyan`, `blue`, `magenta`, and `purple`
-
-The following predefined colors are lighter versions of those in the rainbow:
-
-`lightRed`, `lightOrange`, `lightYellow`, `lightGreen`, `lightCyan`,
-`lightBlue`, and `lightMagenta` (no `lightPurple')
-
-The following additional colors are predefined:
-
-`tan`, `lightBrown`, `brown`, `pink`, and `transparent`
-
-The image below shows the colors
-tan, lightBrown, brown, pink, lightRed and red in that order
-to get a sense of how they differ.
-
-<img alt="Cuis browns and reds" style="width: 30%"
-  src="/blog/assets/cuis-colors-browns-and-reds.png?v={{pkg.version}}">
-
-To create a color from RGB values,
-send the `#r:g:b:` message to the `Color` class.
-The arguments are floating point numbers between zero and one.
-For example, the following creates the CSS color linen:
-
-```smalltalk
-linen := Color r: 250 / 255 g: 240 / 255 b: 230 / 255
-```
-
-To create the same color with 50% transparency:
-
-```smalltalk
-linen := Color r: 250 / 255 g: 240 / 255 b: 230 / 255 alpha: 0.5
-```
-
-To create the same color from a hex string:
-
-```smalltalk
-linen := Color fromHexString: '#faf0e6'
-```
-
-To create the same color from hue, saturation,
-and brightness values (abbreviated as "v"):
-
-```smalltalk
-linen := Color h: 30.0 s: 0.08 v: 0.98.
-```
-
-The `Color` class provides many more methods for creating colors.
+An example is the `PluggableButtonMorph` class whose instances can be
+created with the `on:getState:action:` class method.
+The `on:` keyword specifies a target object and
+the `action:` keyword specifies a selector for the target object.
 
 ## Creating and Modifying Morphs
 
