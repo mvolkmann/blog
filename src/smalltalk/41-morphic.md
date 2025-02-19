@@ -274,6 +274,30 @@ One way to change the desktop color is to:
 
 This works with all colors except `transparent` and alpha values are ignored.
 
+### Submorphs
+
+All `Morph` instances have the instance variable `submoprhs`
+whose value is an array of child morphs.
+The order of the morphs in the array indicates their stacking order
+with the lower indexes rendered on top of higher indexes.
+
+The following methods can be used to add a submorph to any morph:
+
+| Method                            | Description                                                                                                    |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `addMorph:`                       | delegates to `addMorphFront:`                                                                                  |
+| `addMorph:behind:`                | adds immediately after a given child morph                                                                     |
+| `addMorph:inFrontOf:`             | adds immediately before a given child morph                                                                    |
+| `addMorph:position:`              | same as `addMorphFront:position:`                                                                              |
+| `addMorphBack:`                   | adds to end                                                                                                    |
+| `addMorphBack:position:`          | adds at end AND sets x,y position                                                                              |
+| `addMorphFront:`                  | adds to beginning                                                                                              |
+| `addMorphFront:position:`         | adds at beginning AND sets x,y position                                                                        |
+| `addMorphFrontFromWorldPosition:` | adds to beginning AND performs owner location transformations to compute the location of the morph being added |
+
+NOTE: The `addMorph:position:` method should just delegate
+to `addMorphFront:position:`, but doesn't current do that.
+
 ## Embedding
 
 To embed a `Morph` into another (such as a LayoutMorph) so
@@ -304,8 +328,10 @@ lm morphPosition: 200 @ 200. "relative to upper-left corner of World"
 
 ## LayoutMorph
 
-A `LayoutMorph` actively manages the position and size of its submorphs
-based on the following instance properties:
+A `LayoutMorph` instance can only have submorphs that are
+instances of `PlacedMorph` or its subclasses.
+`LayoutMorph` instances actively manage the position and size
+of their submorphs based on the following instance properties:
 
 - `direction`: `#horizontal` for a row or `#vertical` for a column
 
@@ -382,11 +408,7 @@ can be configured interactively.
 To change the background color of a `LayoutMorph` instance,
 send it `#color:` with an argument that is the new color.
 
-### Submorphs
-
-All `Morph` instances, including instances of `LayoutMorph`,
-have the instance variable `submoprhs`
-whose value is an array of child morphs.
+### LayoutSpec
 
 `LayoutMorph` instances also have a `layoutSpec` instance variable
 that is inherited from the superclass `PlacedMorph`.
@@ -398,33 +420,28 @@ Instances of `LayoutSpec` have the following instance variables:
 `morph`, `fixedWidth`, `fixedHeight`, `offAxisEdgeWeight`,
 `proportionalWidth`, and `proportionalHeight`.
 
-The `addMorph:` method defined in the `Morph` class
-adds a `Morph` as a submorph of another.
-For example, `ownerMorph addMorph: submorph`.
+### More Ways to Add Submoprhs
 
-The following additional methods can be used to add a `Morph` to a `LayoutMorph`.
+The `LayoutMorph` class defines the following additional instance methods,
+beyond those defined in the `Morph` class,
+that can be used to add submorph to an instance.
 Each of these set the `layoutSpec` instance variable
 to a new instance of `LayoutSpec`.
 
-- `addMorph:fixedHeight:`
-
-  The height remains at the specified size and
-  the width adjusts to fill the available space.
-
-- `addMorph:fixedWidth:`
-
-  The width remains at the specified size and
-  the height edjusts to fill the available space.
-
-- `addMorph:proportionalHeight:`
-
-  The height adjusts to be the specified percentage (number between 0 and 1)
-  of the available height and the width adjusts to fill the available space.
-
-- `addMorph:proportionalWidth:`
-
-  The width adjusts to be the specified percentage (number between 0 and 1)
-  of the available width and the height adjusts to fill the available space.
+| Method                            | Description                                                                                                                                           |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `addMorph:fixedHeight:`           | The height remains at the specified size and the width adjusts to fill the available space.                                                           |
+| `addMorph:fixedWidth:`            | The width remains at the specified size and the height edjusts to fill the available space.                                                           |
+| `addMorph:layoutSpec:`            |                                                                                                                                                       |
+| `addMorph:proportionalHeight:`    | The height adjusts to be the specified percentage (number between 0 and 1) of the available height and the width adjusts to fill the available space. |
+| `addMorph:proportionalWidth:`     | The width adjusts to be the specified percentage (number between 0 and 1) of the available width and the height adjusts to fill the available space.  |
+| `addMorphBack:`                   | Adds at the left of row or top of column (seems opposite of expected).                                                                                |
+| `addMorphFront:`                  | Adds at the right or row or top of column (seems opposite of expected).                                                                               |
+| `addMorphFrontFromWorldPosition:` | Same as `addMorphFront:`, but adds `self layoutSubmorphs` at end (unclear when this would be used).                                                   |
+| `addMorphKeepWorldHeight:`        | Unclear when this would be used.                                                                                                                      |
+| `addMorphUseAll:`                 | Unclear when this would be used.                                                                                                                      |
+| `addMorphs:`                      | Adds a collection of morphs making each take the same percentage of the `LayoutMorph` width.                                                          |
+| `addMorphsWidthProportionalTo:`   | Adds a collection of moprhs making each take a given proportion of the `LayoutMorph` width (percentage of total)                                      |
 
 The `addMorphs:` method takes a collection of `Morphs` and adds each
 using the `addMorph:proportionalWidth:` method with a value of `1`.
