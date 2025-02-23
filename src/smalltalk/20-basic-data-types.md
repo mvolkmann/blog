@@ -367,17 +367,17 @@ All instances of this class are pre-created and new instances cannot be created.
 The following table describes some of the class methods defined
 in the `Character` class.
 
-| Method             | Description                                                           |
-| ------------------ | --------------------------------------------------------------------- |
-| `codePoint:`       | answers `Character` instance that corresponds to argument code        |
-| `cr`               | answers carriage return instance                                      |
-| `digitValue:`      | answers `Character` instance that corresponds to argument digit (0-9) |
-| `escape`           | answers `Character` instance that corresponds to escape character     |
-| `lf`               | answers `Character` instance that corresponds to line feed character  |
-| `newLineCharacter` | answers same as `lf`                                                  |
-| `separators`       | answers array of whitespace characters                                |
-| `space`            | answers `Character` instance that corresponds to space character      |
-| `tab`              | answers `Character` instance that corresponds to tab character        |
+| Method             | Description                                                               |
+| ------------------ | ------------------------------------------------------------------------- |
+| `codePoint:`       | answers `Character` instance that corresponds to argument code            |
+| `cr`               | answers carriage return instance (13)                                     |
+| `digitValue:`      | answers `Character` instance that corresponds to argument digit (0-9)     |
+| `escape`           | answers `Character` instance that corresponds to escape character (27)    |
+| `lf`               | answers `Character` instance that corresponds to line feed character (10) |
+| `newLineCharacter` | answers same as `lf` (10)                                                 |
+| `separators`       | answers array of whitespace characters                                    |
+| `space`            | answers `Character` instance that corresponds to space character (32)     |
+| `tab`              | answers `Character` instance that corresponds to tab character (9)        |
 
 The following table describes some of the instance methods defined
 in the `Character` class.
