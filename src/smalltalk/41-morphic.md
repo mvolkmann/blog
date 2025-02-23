@@ -839,7 +839,7 @@ Examples include:
 - `arcTo:radius:angleOfXAxis:largeFlag:sweepFlag:`
 - `circleCenter:radius:`
 - `drawString:from:to:atBaseline:font:color:`
-- `ellipseCenter:radius:rotationAngle:
+- `ellipseCenter:radius:rotationAngle:`
   - `elipseCenter:` - `Point` where x/y represents the center location
   - `radius:` - `Point` where x is major axis radius and y is minor axis radius
   - `rotationAngle:` - `Number` of radians
@@ -1841,10 +1841,12 @@ Each of these methods is passed a `MorphicEvent` object.
 To get the `Morph` object that triggered the event,
 send the message `#hand` to the event object.
 
-To move focus to a `Morph`, send it the message
-`#newKeyboardFocus:` with the argument `self`.
-To give up focus from a `Morph`, send it the message
-`#releaseKeyboardFocus:` with the argument `self`.
+To move focus to a `Morph`, get the instance of the `HandMorph` and
+send it the message `#newKeyboardFocus:` with the morph as the argument.
+To give up focus from a `Morph`, send the `HandMorph`
+the message `#releaseKeyboardFocus:` with the morph as the argument.
+The `HandMorph` can be obtained by
+sending `runningWorld activeHand` to any morph.
 
 The `Morph` class provides several methods for focus handling
 in the "focus handling" method category. These include:

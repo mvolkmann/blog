@@ -35,7 +35,17 @@ The following list depicts the partial class hierarchy of those:
 
 ## Association
 
-An `Association` represents a key/value pair.
+Some programming languages provide a `Pair` data type that represents a collection of a pair of values.
+Smalltalk provides two of these.
+
+Instances of the `Point` class represents a pair of numbers
+with accessor methods `x` and `y`.
+Sometimes these represent 2D Cartesian coordinates.
+Sometimes these represent a width and height.
+But they can be used for any pair of numbers.
+
+Instances of the `Association` class represents a key/value pair
+where the keys and values can be any kind of object.
 These are used by several other classes including `Dictionary` and `Bag`.
 
 An `Association` instance can be created in the following ways:
