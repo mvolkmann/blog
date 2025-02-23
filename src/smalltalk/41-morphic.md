@@ -330,6 +330,9 @@ lm morphPosition: 200 @ 200. "relative to upper-left corner of World"
 
 A `LayoutMorph` instance can only have submorphs that are
 instances of `PlacedMorph` or its subclasses.
+The order of the morphs within the `submorphs` collection of a `LayoutMorph`
+only indicates their stacking order, not their x/y locations.
+
 `LayoutMorph` instances actively manage the position and size
 of their submorphs based on the following instance properties:
 
@@ -389,7 +392,29 @@ For example, `myLayout := Layout newRow`.
 
 To add a submorph to an instance of `LayoutMorph`,
 send it the `#addMorph:` message.
-For example, `myLayout addMorph: ColoredBoxMorph new`.
+For example:
+
+<img alt="LayoutMorph" style="width: 30%"
+  src="/blog/assets/cuis-smalltalk-layoutmorph.png?v={{pkg.version}}">
+
+```smalltalk
+box1 := ColoredBoxMorph new color: Color red; morphExtent: 50 @ 50.
+box2 := ColoredBoxMorph new color: Color green; morphExtent: 75 @ 75.
+box3 := ColoredBoxMorph new color: Color blue; morphExtent: 100 @ 100.
+layout := LayoutMorph newRow
+    addMorph: box1;
+    addMorph: box2;
+    addMorph: box3;
+    openInWorld.
+```
+
+The `submorphs` collection in the `LayoutMorph` ablve will hold
+the three boxes in the reverse order from which they were added.
+But they will be rendered from left to right
+in the order in which they were added.
+This happens because the `LayoutMorph` methods
+`layoutSubmorphsHorizontallyIn` and `layoutSubmorphsVerticallyIn`
+both get the morphs to render with `self submorphsToLayout reversed`.
 
 If the UI-Layout-Panel package is installed then
 the direction, gap, edge weight, and background color
