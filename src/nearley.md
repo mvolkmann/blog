@@ -122,8 +122,10 @@ try {
 Abstract syntax trees (ASTs) describe the results of parsing input text.
 They have many uses, including generating code in some programming language.
 
+{% raw %}
 Each grammar rule can be followed by postprocessing code
 that is delimited by `{%` and `%}`.
+{% endraw %}
 The code must be the name of a predefined function or a function definition.
 The function is passed a data argument commonly named `d`
 whose value is an array.
