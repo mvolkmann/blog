@@ -69,11 +69,32 @@ For example, `@builtin "whitespace.ne"`.
 
 ## First Grammar
 
-## ASTs
+## Compiling a Grammar
+
+To compile a grammar to JavaScript code, use the `nearleyc` command.
+For example, `nearlyc my-grammar.ne -o my-grammar.js`.
+
+## Testing a Grammar
+
+To test a grammar with specific input,
+use the `nearley-test` command.
+For example, `nearly-test my-grammar.js -i 'some test input'.
+
+## Producing ASTs
+
+Abstract syntax trees (ASTs) describe the results of parsing input text.
+They have many uses, including generating code in some programming language.
+
+Each grammar rule can be followed by postprocessing code
+that is delimited by `{%` and `%}`.
+The code must be the name of a predefined function or a function definition.
+The function is passed a data argument commonly named `d`
+whose value is an array.
+The function can return an AST node.
 
 ## Railroad Diagrams
 
 To generate a railroad diagram from a grammar,
 use the `nearley-railroad` command.
-For example, `nearly-railroad my-grammar.ne > my-grammar-diagram.html`.
+For example, `nearly-railroad my-grammar.ne -o my-grammar.html`.
 To view the diagram, open the generated `.html` in any web browser.
