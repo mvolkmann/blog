@@ -12,7 +12,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-{% aTargetBlank "https://github.com/kach/nearley", "nearley" %}
+{% aTargetBlank "https://nearley.js.org", "nearley" %}
 is a parsing toolkit with many features including:
 
 - Handles all BNF grammars, including those with left recursion.
@@ -22,3 +22,12 @@ is a parsing toolkit with many features including:
   that include SVG-based diagrams (`nearley-railroad`).
 - Works with many lexers including
   {% aTargetBlank "https://github.com/no-context/moo", "Moo" %}.
+
+## Installing
+
+To install nearley in a node project, enter `npm install nearley`.
+This also installs the Moo lexer library.
+
+## First Grammar
+
+## ASTs
