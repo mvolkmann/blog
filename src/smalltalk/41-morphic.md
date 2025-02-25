@@ -481,12 +481,12 @@ and `addMorph:proportionalWidth:` is that they
 create and use a new `LayoutSpec` object.
 The `LayoutSpec` instance method `initialize` method sets
 both the `proportionalHeight` and `proportionalWidth` properties to `1.0`
-which may not be the desierd values.
+which may not be the desired values.
 So if the goal is to add a morph to a `LayoutMorph`,
 set one of the "proportional" properties to a given value,
 and not change the other, consider adding the morph with the `addMorph:` method
-and the setting the desired `LayoutSpec` property
-with an expression like `someMorph layoutSpec proportionalWidth: 1.0`.
+and then setg the desired `LayoutSpec` property with an expression like
+`someMorph layoutSpec proportionalWidth: 1.0`.
 
 If the extent of a `LayoutMorph` instance is not
 explicitly set by sending it `#morphExtent:`,
