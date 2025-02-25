@@ -70,3 +70,10 @@ For example, `@builtin "whitespace.ne"`.
 ## First Grammar
 
 ## ASTs
+
+## Railroad Diagrams
+
+To generate a railroad diagram from a grammar,
+use the `nearley-railroad` command.
+For example, `nearly-railroad my-grammar.ne > my-grammar-diagram.html`.
+To view the diagram, open the generated `.html` in any web browser.
