@@ -23,6 +23,16 @@ is a parsing toolkit with many features including:
 - Works with many lexers including
   {% aTargetBlank "https://github.com/no-context/moo", "Moo" %}.
 
+The nearley library:
+
+- can be used in both server-side and browser JavaScript code.
+- uses the Earley algorithm
+- implements right recursion optimizations from Joop Leo
+- can produce random strings that match a given grammar
+- has editor plug-ins that provide syntax highlighting
+  for VS Code (from Pouya Kary), Sublime Text, and Vim
+- has been maintained by volunteers since 2014
+
 ## Installing
 
 To install nearley global so its tools can be used from the command line,
@@ -67,7 +77,11 @@ inside the postprocesssor code associated with grammar rules:
 To include these files in `.ne` grammar file, use the `@builtin` directive.
 For example, `@builtin "whitespace.ne"`.
 
-## First Grammar
+## Creating a Grammar
+
+Grammars are defined in text files with a `.ne` file extension.
+The first grammar rule defines the starting point.
+The remaining rules can appear in any order, including alphabetical.
 
 ## Compiling a Grammar
 
@@ -79,6 +93,29 @@ For example, `nearlyc my-grammar.ne -o my-grammar.js`.
 To test a grammar with specific input,
 use the `nearley-test` command.
 For example, `nearly-test my-grammar.js -i 'some test input'.
+
+## Using a Grammar from JavaScript Code
+
+```js
+import nearley from 'nearley';
+import grammar from './grammar2.js';
+
+const input = `
+a := 1.
+b := 2.
+c := a + b.
+`;
+
+const parser = new nearley.Parser(nearley.Grammar.fromCompiled(grammar));
+
+try {
+  const output = parser.feed(input);
+  const nodes = output.results[0];
+  console.log('nodes =', nodes);
+} catch (e) {
+  console.error(e.toString());
+}
+```
 
 ## Producing ASTs
 
@@ -98,3 +135,8 @@ To generate a railroad diagram from a grammar,
 use the `nearley-railroad` command.
 For example, `nearly-railroad my-grammar.ne -o my-grammar.html`.
 To view the diagram, open the generated `.html` in any web browser.
+
+## Unparsing
+
+TODO: What does the `nearly-unparse` command do?
+Does in generate input that produces given output?
