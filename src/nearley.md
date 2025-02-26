@@ -44,6 +44,12 @@ To install nearley in a Node project, enter `npm install nearley`.
 
 Installing nearley also installs the Moo lexer library.
 
+## Grammar Terminology
+
+- terminal: a single, constant string (ex. "+" or "if")
+- nonterminal: a set of possible strings (ex. number or name)
+- rule: definition of a nonterminal
+
 ## Builtins
 
 Nearley provides files that define commonly used grammar rules and functions.
@@ -427,7 +433,7 @@ It matches a sequence of words separated by any amount of whitespace.
 #       return d.flat(2).filter(word => word !== null);
 #     } %}
 
-# EBNF technique
+# EBNF technique applied to a capture group
 words -> word (__ word):* {% d => {
   return d.flat(2).filter(word => word !== null);
 } %}
@@ -437,7 +443,7 @@ words -> word (__ word):* {% d => {
 #  -> letter {% id %}
 #   | letter word {% d => d.join('') %}
 
-# EBNF technique
+# EBNF technique applied to s single non-terminal
 word -> letter:+ {% d => d[0].join('') %}
 
 # The id function is equivalent to d => d[0].
