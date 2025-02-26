@@ -56,8 +56,8 @@ These are found at https://github.com/kach/nearley/tree/master/builtin.
 - `percentage` matches a decimal followed by %
 - `jsonfloat` matches same as decimal, but adds scientific notation matching
 
-`postprocessors.ne` defines the following functions that are used
-inside the postprocesssor code associated with grammar rules:
+`postprocessors.ne` defines the following functions that are used inside
+the postprocesssor code associated with grammar rules (more on this later):
 
 - `nth` returns the nth element from a data array
 - `$` ???
@@ -260,7 +260,9 @@ outputs the expected value in an array which is `[ 5 ]`.
 ## Postprocessor Rules for AST Building
 
 Let's modify the postprocessing so the result is an abstract syntax tree (AST).
-This can be useful for compiling one syntax into another.
+
+ASTs are trees of objects describe the results of parsing input text.
+They can be useful for compiling one syntax into another.
 For example, we could parse code written in Smalltalk
 and output corresponding JavaScript code.
 
@@ -390,26 +392,14 @@ try {
 }
 ```
 
-## Producing ASTs
-
-Abstract syntax trees (ASTs) describe the results of parsing input text.
-They have many uses, including generating code in some programming language.
-
-{% raw %}
-Each grammar rule can be followed by postprocessing code
-that is delimited by `{%` and `%}`.
-{% endraw %}
-The code must be the name of a predefined function or a function definition.
-The function is passed a data argument commonly named `d`
-whose value is an array.
-The function can return an AST node.
-
 ## Railroad Diagrams
 
 To generate a railroad diagram from a grammar,
 use the `nearley-railroad` command.
 For example, `nearly-railroad my-grammar.ne -o my-grammar.html`.
 To view the diagram, open the generated `.html` in any web browser.
+
+Here is the railroad diagram for our arithmetic grammar:
 
 <img alt="nearley Railroad Diagram" style="width: 60%"
   src="/blog/assets/nearley-railroad-diagram.png?v={{pkg.version}}">
