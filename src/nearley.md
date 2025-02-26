@@ -49,7 +49,7 @@ Installing nearley also installs the Moo lexer library.
 
 - terminal: a single, constant string (ex. "+" or "if")
 - nonterminal: a set of possible strings (ex. number or name)
-- rule: definition of a nonterminal
+- rule: definition of a nonterminal that can include a set of alternatives
 
 ## Builtins
 
@@ -85,7 +85,11 @@ the postprocesssor code associated with grammar rules (more on this later):
 - `__` matches one or more whitespace characters.
 
 To include these files in `.ne` grammar file, use the `@builtin` directive.
-For example, `@builtin "whitespace.ne"`.
+For example:
+
+```js
+@builtin "whitespace.ne"
+```
 
 ## Grammars
 
