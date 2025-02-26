@@ -409,6 +409,21 @@ Here is the railroad diagram for our arithmetic grammar:
 TODO: What does the `nearly-unparse` command do?
 Does in generate input that produces given output?
 
+## Customizing the Lexer
+
+The nearley parser library uses the Moo lexer library by default.
+Installing `nearley` also installs `moo`.
+
+Let's modify our arithmetic grammar to support single-line comments
+that begin with the `#` character and extend to the end of the line.
+This requires modifying the lexer because by default
+the lexer discards all newline characters.
+We need to consider those to know when a comment ends.
+
+TODO: Add this example.
+
 ## Example Grammars
 
-See https://github.com/kach/nearley/tree/master/examples.
+Many example grammars can be found in the nearley GitHub repository.
+See <a href="https://github.com/kach/nearley/tree/master/examples"
+target="_blank">examples</a>.
