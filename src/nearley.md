@@ -22,6 +22,8 @@ is a parsing toolkit with many features.
   which include SVG-based diagrams (`nearley-railroad`).
 - It works with many lexers including its default lexer
   {% aTargetBlank "https://github.com/no-context/moo", "Moo" %}.
+  The lexer converts the input string into tokens
+  that are matched by the parser rules.
 
 The nearley library:
 
@@ -283,9 +285,7 @@ and output corresponding JavaScript code.
 Arbitrary JavaScript code can be included in a grammar
 by delimiting it with `@{%` and `%}`.
 Often this is used to define functions that are used in postprocessing rules.
-It can also be used to customize the lexer,
-which is the code that converts the input string into tokens
-that are matched by the parser rules.
+It can also be used to customize the lexer.
 
 The provided `id` function returns the first element from the data array.
 It is equivalent to `d => d[0]`.
@@ -454,17 +454,14 @@ Color me unimpressed.
 
 ## Customizing the Lexer
 
-The nearley parser library uses the Moo lexer library by default.
-Installing `nearley` also installs `moo`.
-
 Let's modify our arithmetic grammar to support single-line comments
 that begin with the `#` character and extend to the end of the line.
 This requires modifying the lexer because by default
 the lexer discards all newline characters.
-We need to consider those to know when a comment ends.
+We need to consider newline characters to know when a comment ends.
 
-Here is an example of input that uses comments.
-Like before, this should produce the result `5`.
+Here is an example of input that includes single-line comments.
+Like before, evaluating this should produce the result `5`.
 
 ```text
 # first term
@@ -475,9 +472,15 @@ Like before, this should produce the result `5`.
 4
 ```
 
-The following grammar customizes the lexer to support single-line comments.
-Note how the tokens defined in the lexer are
-referred to in the grammar with a `%` prefix.
+The following grammar customizes the lexer.
+This grammar differs from previous ones we have seen in that:
+
+- We don't need the builtins `number.ne` and `whitespace.ne`
+  because the lexer takes care of those concerns.
+- We don't have to account for whitespace or comments in the grammar rules
+  because the lexer removes all tokens that represent them.
+- The tokens defined in the lexer are
+  referred to in the grammar with a `%` prefix.
 
 {% raw %}
 
@@ -512,9 +515,6 @@ referred to in the grammar with a `%` prefix.
 %}
 
 @lexer lexer
-
-@builtin "number.ne" # using decimal rule
-@builtin "whitespace.ne" # using _ rule
 
 start -> additive {% id %}
 
