@@ -535,7 +535,20 @@ term
 
 {% endraw %}
 
+## Compiling to TypeScript
+
+By default the nearley compiler generates JavaScript code for the parser.
+To change this to TypeScript:
+
+- Add the `@preprocessor typescript` directive in the grammar file.
+- Change references to the generatred parser file
+  to use the `.ts` file extension instead of `.js`.
+
 ## Example Grammars
+
+All of the example code shown above can be found in the GitHub repository
+<a href="https://github.com/mvolkmann/nearley-demos"
+target="_blank">nearley-demos</a>.
 
 Many example grammars can be found in the nearley GitHub repository.
 See <a href="https://github.com/kach/nearley/tree/master/examples"
