@@ -49,25 +49,25 @@ These are found at https://github.com/kach/nearley/tree/master/builtin.
 
 `number.ne` defines the grammar rules:
 
-- `unsigned_int`
-- `int`,
-- `unsigned_decimal`
-- `decimal`
-- `percentage`
-- `jsonfloat`
+- `unsigned_int` matches zero or positive integers
+- `int` matches any integer
+- `unsigned_decimal` matches zero or positive floating point numbers
+- `decimal` matches any floating point number
+- `percentage` matches a decimal followed by %
+- `jsonfloat` matches same as decimal, but adds scientific notation matching
 
 `postprocessors.ne` defines the following functions that are used
 inside the postprocesssor code associated with grammar rules:
 
-- `nth`
-- `$`
-- `delimited`
+- `nth` returns the nth element from a data array
+- `$` ???
+- `delimited` ???
 
 `string.ne` defines the grammar rules:
 
-- `dqstring` for strings delimited by double quotes
-- `sqstring` for strings delimited by single quotes
-- `btquote` for strings delimited by backticks
+- `dqstring` matches strings delimited by double quotes
+- `sqstring` matches strings delimited by single quotes
+- `btquote` matches strings delimited by backticks
 
 `whitespace.ne` defines the grammar rules:
 
@@ -83,16 +83,226 @@ Grammars are defined in text files with a `.ne` file extension.
 The first grammar rule defines the starting point.
 The remaining rules can appear in any order, including alphabetical.
 
+The following is a fairly simple grammar defined in the file `arithmetic.ne`.
+It defines rules for arithmetic expressions
+that use the following operators:
+
+- `+` addition
+- `-` subtraction
+- `*` multiplication
+- '/' division
+
+This grammar supports standard operator precedence
+and using parentheses to override that.
+
+```js
+@builtin "number.ne" # using decimal rule
+@builtin "whitespace.ne" # using _ rule
+
+start -> additive
+
+additive
+  -> multiplicative _ "+" _ additive
+   | multiplicative _ "-" _ additive
+   | multiplicative
+
+multiplicative
+  -> term _ "*" _ multiplicative
+   | term _ "/" _ multiplicative
+   | term
+
+term
+  -> decimal
+   | "(" additive ")"
+```
+
 ## Compiling a Grammar
 
 To compile a grammar to JavaScript code, use the `nearleyc` command.
-For example, `nearlyc my-grammar.ne -o my-grammar.js`.
+For example:
+
+```bash
+nearlyc arithmetic.ne -o arithmetic.js
+```
 
 ## Testing a Grammar
 
 To test a grammar with specific input,
 use the `nearley-test` command.
-For example, `nearly-test my-grammar.js -i 'some test input'.
+For example:
+
+```bash
+nearly-test arithmetic.js -i '2 * 3 + (5 + 1) / 2 - 4'",
+```
+
+This outputs the following nested array which represents the parse tree.
+For this example, each occurrence of `null`
+represents whitespace which is not being captured.
+
+```text
+[
+  [
+    [
+      [
+        [ 2 ], null, "*", null, [
+          [ 3 ]
+        ]
+      ], null, "+", null, [
+        [
+          [ "(", [
+              [
+                [ 5 ]
+              ], null, "+", null, [
+                [
+                  [ 1 ]
+                ]
+              ]
+            ], ")" ], null, "/", null, [
+            [ 2 ]
+          ]
+        ], null, "-", null, [
+          [
+            [ 4 ]
+          ]
+        ]
+      ]
+    ]
+  ]
+]
+```
+
+This output is not particularly helpful.
+It does demonstrate that our grammar is correct.
+
+Here is an example of supplying input that does not match the grammar.
+
+```bash
+nearley-test arithmetic-default.js -i '1 + two'
+```
+
+And here is the output with some parts elided because it is quite long.
+
+```text
+/usr/local/lib/node_modules/nearley/lib/nearley.js:346
+                throw err;
+                ^
+Error: Syntax error at line 1 col 5:
+
+1 1 + two
+      ^
+Unexpected "t". Instead, I was expecting to see one of the following:
+
+A character matching /[ \t\n\v\f]/ based on:
+    ...
+A "(" based on:
+    ...
+A "-" based on:
+    ...
+A character matching /[0-9]/ based on:
+    ...
+  offset: 4,
+  token: { value: 't' }
+```
+
+## Postprocessors
+
+Each rule can be followed by JavaScript code
+that is executed when the rule is matched.
+The code must be delimited by `{%` and `%}`.
+
+It must contain the name of a predefined function or
+a function definition (typically written as an arrow function).
+
+The function is passed three values:
+
+- `data` - array containing the parsed result for each matching token
+- `location` - zero-based index into the input string where the match began
+- `reject` - object that can be returned to indicate that the rule should not match
+
+Typically only the first argument, `data` is used
+and often the name is shortened to just `d`.
+
+## Postprocessor Rules for Evaluating
+
+Let's add postprocessing the previous grammar so that it
+evaluates each rule to a number.
+The value of the starting rule will be the value of the entire input expression.
+
+```js
+@builtin "number.ne" # using decimal rule
+@builtin "whitespace.ne" # using _ rule
+
+start -> additive {% id %}
+
+additive
+  -> multiplicative _ "+" _ additive {% d => d[0] + d[4] %}
+   | multiplicative _ "-" _ additive {% d => d[0] - d[4] %}
+   | multiplicative {% id %}
+
+multiplicative
+  -> term _ "*" _ multiplicative {% d => d[0] * d[4] %}
+   | term _ "/" _ multiplicative {% d => d[0] / d[4] %}
+   | term {% id %}
+
+term
+  -> decimal {% id %}
+   | "(" additive ")" {% d => Number(d[1]) %}
+```
+
+Running the following command:
+
+```bash
+nearly-test arithmetic.js -i '2 * 3 + (5 + 1) / 2 - 4'",
+```
+
+outputs the expected value in an array which is `[ 5 ]`.
+
+## Postprocessor Rules for AST Building
+
+Let's modify the postprocessing so the result is an abstract syntax tree (AST).
+This can be useful for compiling one syntax into another.
+For example, we could parse code written in Smalltalk
+and output corresponding JavaScript code.
+
+Arbitrary JavaScript code can be included in a grammar
+by delimiting it with `@{%` and `%}`.
+Often this is used to define functions that are used in postprocessing rules.
+It can also be used to customize the lexer,
+which is the code that converts the input string into tokens
+that are matched by the parser rules.
+
+The provided `id` function returns the first element from the data array.
+It is equivalent to `d => d[0]`.
+
+```js
+@{%
+function binaryOperation(data) {
+  return {
+    type: "binary operation",
+    operator: data[2],
+    left: data[0],
+    right: data[4],
+  };
+}
+%}
+
+@builtin "number.ne" # using decimal rule
+@builtin "whitespace.ne" # using _ rule
+
+start -> additive {% id %}
+
+additive
+  -> multiplicative _ [+-] _ additive {% binaryOperation %}
+   | multiplicative {% id %}
+
+multiplicative
+  -> term _ [*/] _ multiplicative {% binaryOperation %}
+   | term {% id %}
+
+term
+  -> decimal {% id %}
+   | "(" additive ")" {% data => data[1] %}
+```
 
 ## Using a Grammar from JavaScript Code
 
@@ -100,20 +310,19 @@ For example, `nearly-test my-grammar.js -i 'some test input'.
 import nearley from 'nearley';
 import grammar from './grammar2.js';
 
+const parser = new nearley.Parser(nearley.Grammar.fromCompiled(grammar));
+
 const input = `
 a := 1.
 b := 2.
 c := a + b.
 `;
 
-const parser = new nearley.Parser(nearley.Grammar.fromCompiled(grammar));
-
 try {
-  const output = parser.feed(input);
-  const nodes = output.results[0];
-  console.log('nodes =', nodes);
+  parser.feed(input);
+  console.log(parser.results);
 } catch (e) {
-  console.error(e.toString());
+  console.error(e.message);
 }
 ```
 
@@ -138,7 +347,14 @@ use the `nearley-railroad` command.
 For example, `nearly-railroad my-grammar.ne -o my-grammar.html`.
 To view the diagram, open the generated `.html` in any web browser.
 
+<img alt="nearley Railroad Diagram" style="width: 60%"
+  src="/blog/assets/nearley-railroad-diagram.png?v={{pkg.version}}">
+
 ## Unparsing
 
 TODO: What does the `nearly-unparse` command do?
 Does in generate input that produces given output?
+
+## Example Grammars
+
+See https://github.com/kach/nearley/tree/master/examples.
