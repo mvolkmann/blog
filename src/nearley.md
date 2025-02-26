@@ -415,6 +415,8 @@ with the recursive approach commented out and
 the corresponding EBNF approach uncommented.
 It matches a sequence of words separated by any amount of whitespace.
 
+{% raw %}
+
 ```js
 @builtin "whitespace.ne"
 
@@ -447,6 +449,8 @@ To test this, enter something like the following:
 ```bash
 nearley-test ./ebnf-demo.js -i 'apple banana cherry'
 ```
+
+{% endraw %}
 
 This outputs `[ [ 'apple', 'banana', 'cherry' ] ]`
 indicating that there was one result that is an array of the three words.
