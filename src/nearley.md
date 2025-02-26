@@ -401,7 +401,14 @@ const input = '2 * 3 + (5 + 1) / 2 - 4'; // expect 5
 
 try {
   parser.feed(input);
+
+  // parser.results is an array because there
+  // can be more than one way to parse given input.
+  // There is more than one element,
+  // the grammar is considered to be ambiguous.
+  // Often only the first element is of interest.
   console.log(parser.results);
+
   console.log(evaluateAstNode(parser.results[0]));
 } catch (e) {
   console.error(e.message);
