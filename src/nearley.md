@@ -134,8 +134,9 @@ term
    | "(" additive ")"
 ```
 
-A grammar rule cannot be named "null" because that is
-a nearley keyword that represents the absence of a match.
+A grammar rule cannot be named "null"
+because that is a nearley keyword (called the "epsilon rule")
+that represents the absence of a match.
 
 A grammar file can include the contents of other grammar files
 using the `@include "file-path"` directive.
@@ -307,7 +308,10 @@ outputs the expected value in an array which is `[ 5 ]`.
 Let's modify the postprocessing so the result is an abstract syntax tree (AST).
 
 ASTs are trees of objects describe the results of parsing input text.
-They can be useful for compiling one syntax into another.
+These objects are not standardized.
+You can choose the set of properties that make sense for your use case.
+
+ASTs are useful for compiling one syntax into another.
 For example, we could parse code written in Smalltalk
 and output corresponding JavaScript code.
 
