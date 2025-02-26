@@ -45,7 +45,8 @@ Installing nearley also installs the Moo lexer library.
 ## Builtins
 
 Nearley provides files that define commonly used grammar rules and functions.
-These are found at https://github.com/kach/nearley/tree/master/builtin.
+These are found at <a href="https://github.com/kach/nearley/tree/master/builtin"
+target="_blank">builtin</a>.
 
 `number.ne` defines the grammar rules:
 
@@ -206,9 +207,11 @@ A character matching /[0-9]/ based on:
 
 ## Postprocessors
 
+{% raw %}
 Each rule can be followed by JavaScript code
 that is executed when the rule is matched.
 The code must be delimited by `{%` and `%}`.
+{% endraw %}
 
 It must contain the name of a predefined function or
 a function definition (typically written as an arrow function).
@@ -227,6 +230,8 @@ and often the name is shortened to just `d`.
 Let's add postprocessing the previous grammar so that it
 evaluates each rule to a number.
 The value of the starting rule will be the value of the entire input expression.
+
+{% raw %}
 
 ```js
 @builtin "number.ne" # using decimal rule
@@ -249,6 +254,8 @@ term
    | "(" additive ")" {% d => Number(d[1]) %}
 ```
 
+{% endraw %}
+
 Running the following command:
 
 ```bash
@@ -265,6 +272,8 @@ ASTs are trees of objects describe the results of parsing input text.
 They can be useful for compiling one syntax into another.
 For example, we could parse code written in Smalltalk
 and output corresponding JavaScript code.
+
+{% raw %}
 
 Arbitrary JavaScript code can be included in a grammar
 by delimiting it with `@{%` and `%}`.
@@ -305,6 +314,8 @@ term
   -> decimal {% id %}
    | "(" additive ")" {% data => data[1] %}
 ```
+
+{% endraw %}
 
 Running the following command:
 
