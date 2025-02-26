@@ -514,7 +514,12 @@ try {
 
 To generate a railroad diagram from a grammar,
 use the `nearley-railroad` command.
-For example, `nearly-railroad my-grammar.ne -o my-grammar.html`.
+For example:
+
+```bash
+nearly-railroad my-grammar.ne -o my-grammar.html
+```
+
 To view the diagram, open the generated `.html` in any web browser.
 
 Here is the railroad diagram for our arithmetic grammar:
