@@ -15,7 +15,8 @@ layout: topic-layout.njk
 {% aTargetBlank "https://nearley.js.org", "nearley" %}
 is a parsing toolkit with many features.
 
-- It handles all BNF grammars, including those with left recursion.
+- It handles all Backus-Naur Form (BNF) grammars,
+  including those with left recursion.
 - It can produce abstract syntax trees, text output, or simply validate input.
 - It provides a testing tool (`nearley-test`).
 - It provides a railroad diagram generator that creates HTML files
