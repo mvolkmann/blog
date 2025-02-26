@@ -463,7 +463,77 @@ This requires modifying the lexer because by default
 the lexer discards all newline characters.
 We need to consider those to know when a comment ends.
 
-TODO: Add this example.
+Here is an example of input that uses comments.
+Like before, this should produce the result `5`.
+
+```text
+# first term
+2 * 3 +
+# middle term
+(5 + 1) / 2 -
+# last term
+4
+```
+
+The following grammar customizes the lexer to support single-line comments.
+Note how the tokens defined in the lexer are
+referred to in the grammar with a `%` prefix.
+
+{% raw %}
+
+```js
+@{%
+  const moo = require('moo');
+
+  const lexer = moo.compile({
+    add: '+',
+    comment: /#[^\n]*\n/,
+    divide: '/',
+    lparen: '(',
+    multiply: '*',
+    number: /0|[1-9][0-9]*(?:.[0-9]+)?/,
+    rparen: ')',
+    subtract: '-',
+    ws: { match: /[ \n\t]+/, lineBreaks: true },
+  });
+
+  // Redefine the lexer next function to skip certain tokens.
+  const originalNext = lexer.next;
+  lexer.next = function () {
+    while (true) {
+      const token = originalNext.call(this);
+      if (!token) return null; // end of tokens
+      if (token.type !== 'ws' && token.type !== 'comment') {
+        //console.log('token =', token);
+        return token;
+      }
+    }
+  };
+%}
+
+@lexer lexer
+
+@builtin "number.ne" # using decimal rule
+@builtin "whitespace.ne" # using _ rule
+
+start -> additive {% id %}
+
+additive
+  -> multiplicative %add additive {% d => d[0] + d[2] %}
+   | multiplicative %subtract additive {% d => d[0] - d[2] %}
+   | multiplicative {% id %}
+
+multiplicative
+  -> term %multiply multiplicative {% d => d[0] * d[2] %}
+   | term %divide multiplicative {% d => d[0] / d[2] %}
+   | term {% id %}
+
+term
+  -> %number {% d => Number(d[0]) %}
+   | %lparen additive %rparen {% d => Number(d[1]) %}
+```
+
+{% endraw %}
 
 ## Example Grammars
 
