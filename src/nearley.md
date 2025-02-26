@@ -91,6 +91,9 @@ Grammars are defined in text files with a `.ne` file extension.
 The first grammar rule defines the starting point.
 The remaining rules can appear in any order, including alphabetical.
 
+Grammars can contain single-line comments that begin with
+the `#` character and extend to the end of the line.
+
 The following is a fairly simple grammar defined in the file `arithmetic.ne`.
 It defines rules for arithmetic expressions
 that use the following operators:
@@ -109,6 +112,7 @@ and using parentheses to override that.
 
 start -> additive
 
+# Note the recursive references.
 additive
   -> multiplicative _ "+" _ additive
    | multiplicative _ "-" _ additive
@@ -123,6 +127,9 @@ term
   -> decimal
    | "(" additive ")"
 ```
+
+A grammar rule cannot be named "null" because that is
+a nearley keyword that represents the absence of a match.
 
 A grammar file can include the contents of other grammar files
 using the `@include "file-path"` directive.
