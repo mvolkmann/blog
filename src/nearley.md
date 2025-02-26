@@ -162,7 +162,7 @@ nearly-test arithmetic.js -i '2 * 3 + (5 + 1) / 2 - 4'",
 ```
 
 This outputs the following nested array which represents the parse tree.
-For this example, each occurrence of `null`
+In this example, each occurrence of `null`
 represents whitespace which is not being captured.
 
 ```text
@@ -229,6 +229,11 @@ A character matching /[0-9]/ based on:
   offset: 4,
   token: { value: 't' }
 ```
+
+A grammar like this, with no procressors (discussed next),
+can be used to validate input.
+When evaluated from JavaScript code, an exception will be thrown
+if the input does not match the grammar.
 
 ## Postprocessors
 
