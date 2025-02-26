@@ -291,6 +291,10 @@ Arbitrary JavaScript code can be included in a grammar
 by delimiting it with `@{%` and `%}`.
 Often this is used to define functions that are used in postprocessing rules.
 It can also be used to customize the lexer.
+Any number of these blocks can appear and
+they can be placed anywhere within the grammar file.
+There definitions will be hoisted to the top of the generated parser code
+regardless of where they appear in the grammar file.
 
 The provided `id` function returns the first element from the data array.
 It is equivalent to `d => d[0]`.
