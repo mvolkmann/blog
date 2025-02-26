@@ -399,6 +399,58 @@ function evaluateAstNode(node) {
 }
 ```
 
+## Using EBNF modifiers
+
+One way implement a rule that matches a repeated sequence of tokens
+is to use a recursive approach.
+Another way is to use Extended Backus-Naur Form (EBNF) modifiers
+which include:
+
+- `:?` optional (zero or one)
+- `:*` zero or more
+- `:+` one or more
+
+The grammar below shows both approaches
+with the recursive approach commented out and
+the corresponding EBNF approach uncommented.
+It matches a sequence of words separated by any amount of whitespace.
+
+```js
+@builtin "whitespace.ne"
+
+# Recursive technique
+#words
+#  -> word {% id %}
+#   | word __ words {% d => {
+#       return d.flat(2).filter(word => word !== null);
+#     } %}
+
+# EBNF technique
+words -> word (__ word):* {% d => {
+  return d.flat(2).filter(word => word !== null);
+} %}
+
+# Recursive technique
+#word
+#  -> letter {% id %}
+#   | letter word {% d => d.join('') %}
+
+# EBNF technique
+word -> letter:+ {% d => d[0].join('') %}
+
+# The id function is equivalent to d => d[0].
+letter -> [A-Za-z] {% id %}
+```
+
+To test this, enter something like the following:
+
+```bash
+nearley-test ./ebnf-demo.js -i 'apple banana cherry'
+```
+
+This outputs `[ [ 'apple', 'banana', 'cherry' ] ]`
+indicating that there was one result that is an array of the three words.
+
 ## Using a Grammar from JavaScript Code
 
 The compiled parser code can be used from a JavaScript program.
