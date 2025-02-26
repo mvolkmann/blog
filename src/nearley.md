@@ -406,8 +406,35 @@ Here is the railroad diagram for our arithmetic grammar:
 
 ## Unparsing
 
-TODO: What does the `nearly-unparse` command do?
-Does in generate input that produces given output?
+The `nearly-unparse` command takes a compiled grammar (`.js` file)
+and generates an input string that matches the grammar.
+Running it multiple times will produce different results.
+
+By default it begins at the first rule,
+but any rule can be specified with the `-s` flag.
+
+By default there is no limit to how deeply it will search through the rules
+to generate matching input. This can be quite slow.
+To limit the search, specify the `-d` option with a value like `500`.
+
+For example, the following command
+generates matching input for our arithmetic grammar:
+
+```bash
+nearley-unparse -d 200 arithmetic-ast.js
+```
+
+This produces results like the following:
+
+```text
+-48.6
+((20802.1530))
+(((-3)))
+```
+
+I could not get this to generate any matching input
+that contained an arithmetic operator.
+Color me unimpressed.
 
 ## Customizing the Lexer
 
