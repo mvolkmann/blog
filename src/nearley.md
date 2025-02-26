@@ -150,7 +150,7 @@ To compile a grammar to JavaScript code, use the `nearleyc` command.
 For example:
 
 ```bash
-nearlyc arithmetic.ne -o arithmetic.js
+nearleyc arithmetic.ne -o arithmetic.js
 ```
 
 ### Testing a Grammar
@@ -160,7 +160,7 @@ use the `nearley-test` command.
 For example:
 
 ```bash
-nearly-test arithmetic.js -i '2 * 3 + (5 + 1) / 2 - 4'",
+nearley-test arithmetic.js -i '2 * 3 + (5 + 1) / 2 - 4',
 ```
 
 This outputs the following nested array which represents the parse tree.
@@ -299,7 +299,7 @@ term
 Running the following command:
 
 ```bash
-nearly-test arithmetic.js -i '2 * 3 + (5 + 1) / 2 - 4'",
+nearley-test arithmetic.js -i '2 * 3 + (5 + 1) / 2 - 4'",
 ```
 
 outputs the expected value in an array which is `[ 5 ]`.
@@ -365,7 +365,7 @@ term
 Running the following command:
 
 ```bash
-nearly-test arithmetic.js -i '2 * 3 + (5 + 1) / 2 - 4'",
+nearley-test arithmetic.js -i '2 * 3 + (5 + 1) / 2 - 4'",
 ```
 
 outputs the following AST:
@@ -518,7 +518,7 @@ use the `nearley-railroad` command.
 For example:
 
 ```bash
-nearly-railroad my-grammar.ne -o my-grammar.html
+nearley-railroad my-grammar.ne -o my-grammar.html
 ```
 
 To view the diagram, open the generated `.html` in any web browser.
@@ -530,7 +530,7 @@ Here is the railroad diagram for our arithmetic grammar:
 
 ## Unparsing
 
-The `nearly-unparse` command takes a compiled grammar (`.js` file)
+The `nearley-unparse` command takes a compiled grammar (`.js` file)
 and generates an input string that matches the grammar.
 Running it multiple times will produce different results.
 
