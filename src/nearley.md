@@ -238,7 +238,7 @@ if the input does not match the grammar.
 ## Postprocessors
 
 {% raw %}
-Each rule can be followed by JavaScript code
+Each rule alternative can be followed by JavaScript code
 that is executed when the rule is matched.
 The code must be delimited by `{%` and `%}`.
 {% endraw %}
@@ -258,11 +258,16 @@ are not context-free, and are often much slower to parse."
 Typically only the first argument, `data` is used
 and often the name is shortened to just `d`.
 
+The return value of the function determines
+the value that represents the match that just occured.
+
 ### Postprocessor Rules for Evaluating
 
 Let's add postprocessing the previous grammar so that it
 evaluates each rule to a number.
-The value of the starting rule will be the value of the entire input expression.
+
+The value of the starting rule will be
+the value reported for the entire input expression.
 
 {% raw %}
 
