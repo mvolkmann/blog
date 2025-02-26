@@ -124,6 +124,11 @@ term
    | "(" additive ")"
 ```
 
+A grammar file can include the contents of other grammar files
+using the `@include "file-path"` directive.
+This allows sharing common elements between top-level grammars
+including lexer configurations, function defintions, and grammar rules.
+
 ### Compiling a Grammar
 
 To compile a grammar to JavaScript code, use the `nearleyc` command.
