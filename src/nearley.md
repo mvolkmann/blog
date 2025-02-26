@@ -252,6 +252,9 @@ The function is passed three values:
 - `location` - zero-based index into the input string where the match began
 - `reject` - object that can be returned to indicate that the rule should not match
 
+From the nearley docs, "Warning: Grammars using reject
+are not context-free, and are often much slower to parse."
+
 Typically only the first argument, `data` is used
 and often the name is shortened to just `d`.
 
