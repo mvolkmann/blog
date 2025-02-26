@@ -304,23 +304,87 @@ term
    | "(" additive ")" {% data => data[1] %}
 ```
 
+Running the following command:
+
+```bash
+nearly-test arithmetic.js -i '2 * 3 + (5 + 1) / 2 - 4'",
+```
+
+outputs the following AST:
+
+```text
+[
+  {
+    type: "binary operation",
+    operator: "+",
+    left: {
+      type: "binary operation",
+      operator: "*",
+      left: 2,
+      right: 3,
+    },
+    right: {
+      type: "binary operation",
+      operator: "-",
+      left: {
+        type: "binary operation",
+        operator: "/",
+        left: {
+          type: "binary operation",
+          operator: "+",
+          left: 5,
+          right: 1
+        },
+        right: 2
+      }
+      right: 4,
+    },
+  }
+]
+```
+
+The following JavaScript function takes
+a node from this AST and computes its result.
+If it is passed the root node above, it returns the expected result of `5`.
+
+```js
+function evaluateAstNode(node) {
+  let {left, operator, right} = node;
+  if (typeof left !== 'number') left = evaluateAstNode(left);
+  if (typeof right !== 'number') right = evaluateAstNode(right);
+  switch (operator) {
+    case '+':
+      return left + right;
+    case '-':
+      return left - right;
+    case '*':
+      return left * right;
+    case '/':
+      return left / right;
+  }
+}
+```
+
 ## Using a Grammar from JavaScript Code
+
+The compiled parser code can be used from a JavaScript program.
+This works in both server-side code and browser code.
+
+The following example uses the previous grammar to produce an AST.
+It then uses the `evaluateAstNode` function above to compute the result.
 
 ```js
 import nearley from 'nearley';
-import grammar from './grammar2.js';
+import grammar from './arithmetic.js'; // compiled grammar
 
 const parser = new nearley.Parser(nearley.Grammar.fromCompiled(grammar));
 
-const input = `
-a := 1.
-b := 2.
-c := a + b.
-`;
+const input = '2 * 3 + (5 + 1) / 2 - 4'; // expect 5
 
 try {
   parser.feed(input);
   console.log(parser.results);
+  console.log(evaluateAstNode(parser.results[0]));
 } catch (e) {
   console.error(e.message);
 }
