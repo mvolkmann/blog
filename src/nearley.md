@@ -13,21 +13,21 @@ layout: topic-layout.njk
 ## Overview
 
 {% aTargetBlank "https://nearley.js.org", "nearley" %}
-is a parsing toolkit with many features including:
+is a parsing toolkit with many features.
 
-- Handles all BNF grammars, including those with left recursion.
-- Can produce abstract syntax trees, text output, or simply validate input.
-- Provides a testing tool (`nearley-test`).
-- Provides a railroad diagram generator that creates HTML files
-  that include SVG-based diagrams (`nearley-railroad`).
-- Works with many lexers including
+- It handles all BNF grammars, including those with left recursion.
+- It can produce abstract syntax trees, text output, or simply validate input.
+- It provides a testing tool (`nearley-test`).
+- It provides a railroad diagram generator that creates HTML files
+  which include SVG-based diagrams (`nearley-railroad`).
+- It works with many lexers including its default lexer
   {% aTargetBlank "https://github.com/no-context/moo", "Moo" %}.
 
 The nearley library:
 
-- can be used in both server-side and browser JavaScript code.
+- can be used in both server-side and browser JavaScript code
 - uses the Earley algorithm
-- implements right recursion optimizations from Joop Leo
+- implements right recursion optimizations
 - can produce random strings that match a given grammar
 - has editor plug-ins that provide syntax highlighting
   for VS Code (from Pouya Kary), Sublime Text, and Vim
@@ -35,10 +35,10 @@ The nearley library:
 
 ## Installing
 
-To install nearley global so its tools can be used from the command line,
+To install nearley globally so its tools can be used from the command line,
 enter `npm install -g nearley`.
 
-To install nearley in a node project, enter `npm install nearley`.
+To install nearley in a Node project, enter `npm install nearley`.
 
 Installing nearley also installs the Moo lexer library.
 
@@ -78,7 +78,12 @@ the postprocesssor code associated with grammar rules (more on this later):
 To include these files in `.ne` grammar file, use the `@builtin` directive.
 For example, `@builtin "whitespace.ne"`.
 
-## Creating a Grammar
+## Grammars
+
+A grammar is a set of rules that define sequences of matching tokens.
+Each rule can optionally specify a result to produced.
+
+### Creating a Grammar
 
 Grammars are defined in text files with a `.ne` file extension.
 The first grammar rule defines the starting point.
@@ -117,7 +122,7 @@ term
    | "(" additive ")"
 ```
 
-## Compiling a Grammar
+### Compiling a Grammar
 
 To compile a grammar to JavaScript code, use the `nearleyc` command.
 For example:
@@ -126,7 +131,7 @@ For example:
 nearlyc arithmetic.ne -o arithmetic.js
 ```
 
-## Testing a Grammar
+### Testing a Grammar
 
 To test a grammar with specific input,
 use the `nearley-test` command.
@@ -225,7 +230,7 @@ The function is passed three values:
 Typically only the first argument, `data` is used
 and often the name is shortened to just `d`.
 
-## Postprocessor Rules for Evaluating
+### Postprocessor Rules for Evaluating
 
 Let's add postprocessing the previous grammar so that it
 evaluates each rule to a number.
@@ -264,7 +269,7 @@ nearly-test arithmetic.js -i '2 * 3 + (5 + 1) / 2 - 4'",
 
 outputs the expected value in an array which is `[ 5 ]`.
 
-## Postprocessor Rules for AST Building
+### Postprocessor Rules for AST Building
 
 Let's modify the postprocessing so the result is an abstract syntax tree (AST).
 
