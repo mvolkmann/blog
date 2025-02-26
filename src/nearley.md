@@ -399,7 +399,7 @@ function evaluateAstNode(node) {
 }
 ```
 
-## Using EBNF modifiers
+## EBNF modifiers
 
 One way implement a rule that matches a repeated sequence of tokens
 is to use a recursive approach.
