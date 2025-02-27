@@ -336,6 +336,9 @@ It is equivalent to `d => d[0]`.
 
 ```js
 @{%
+// This function creates and returns an AST node.
+// In this example only one type of AST node is created,
+// but typical there are many types in the AST tree.
 function binaryOperation(data) {
   return {
     type: "binary operation",
@@ -410,10 +413,19 @@ a node from this AST and computes its result.
 If it is passed the root node above, it returns the expected result of `5`.
 
 ```js
-function evaluateAstNode(node) {
+function evaluateAST(node) {
+  switch (node.type) {
+    case 'binary operation':
+      return evaluateBinaryOperation(node);
+    default:
+      throw new Error(`unsupported AST node type "${node.type}"`);
+  }
+}
+
+function evaluateBinaryOperation(node) {
   let {left, operator, right} = node;
-  if (typeof left !== 'number') left = evaluateAstNode(left);
-  if (typeof right !== 'number') right = evaluateAstNode(right);
+  if (typeof left !== 'number') left = evaluateAST(left);
+  if (typeof right !== 'number') right = evaluateAST(right);
   switch (operator) {
     case '+':
       return left + right;
