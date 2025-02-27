@@ -40,10 +40,13 @@ This installs the following commands:
 The most used commands are probably `pdflatex` and `xelatex`.
 
 If using VS Code to edit `.tex` files,
-install the extension "LaTeX" from Mathematic Inc.
+install the extension "LaTeX Workshop" from James Yu.
 This automatically generates a PDF
 every time changes to a `.tex` file are saved
 and the PDF can be viewed inside VS Code.
+It requires that a compatible LaTeX distribute be found in the `PATH`.
+<a href="https://www.tug.org/texlive/" target="_blank">TeX Live</a>
+is recommended. `mactex` is the macOS version of TeX Live.
 
 ## Generating PDFs from Command Line
 
