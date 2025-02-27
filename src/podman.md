@@ -34,34 +34,54 @@ It is a popular alternative to Docker.
 The names of images and containers are composed of three parts
 and have the syntax `{registry}/{repository}:{tag}`.
 
-When an image or container is downloaded from the web, the
-`{registry}` part indicates the source code registry it came from".
+When an image or container is downloaded from the web,
+the `{registry}` part indicates the
+source code registry from which it came.
 
-When an image or container is created locally and
+When an image or container is created locally,
 the `{registry}` part cannot be specified and defaults to "localhost".
 
-The tag can be used to identify multiple versions of an image or container.
-When `:{tag}` part is omitted, it defaults to "latest".
+The tag part can be used to identify
+multiple versions of an image or container.
+When `:{tag}` is omitted, the tag defaults to "latest".
 
 ## Images
 
 To build an image using the `Dockerfile` file in the current directory,
-enter `podman build -t {image-name} .`
+enter the following:
+
+```bash
+podman build -t {image-name} .
+```
+
 The `.` at the end indicates that the file `Dockerfile`
 can be found in the current directory.
+This can be replaced by a path to a file that
+contains instructions for building an image.
 
-To list all the images created on your machine, enter `podman images`.
+To list all the images created on your machine, enter the following:
 
-To delete an image, enter `podman rmi {name-or-id}`.
-If a name is specified,
-it must match the pattern `{registry}/{repository}:{tag}`
-or `{registry}/{repository}` if no tag was specified when it was created.
-Attemtping to delete an image will fail
-if it is being used by an existing container.
+```bash
+podman images
+```
+
+To delete an image, enter the following:
+
+```bash
+podman rmi {name-or-id}
+```
+
+This will fail if the image is being used by an existing container.
+
+If the image was created with a tag, specifying a name to delete
+must match the pattern `{registry}/{repository}:{tag}`.
+
+If the image was not created with a tag, specifying a name to delete
+must match the pattern `{registry}/{repository}`.
 
 ## Containers
 
-To create a container using a given image, enter the following command:
+To create a container using a given image, enter the following:
 
 ```bash
 podman create --name {container-name} {image-name}"
@@ -74,18 +94,38 @@ to the previous command.
 Typically `host-port` and `container-port` are the same.
 
 To list all the containers created on your machine,
-enter `podman ps -a` (for all) or `podman container list -a`.
+enter one of the folowing.
+The `-a` flag indicates that is should list all containers,
+not just the ones that are currently running.
 
-To start a container, enter `podman start {name-or-id}`.
+```bash
+podman ps -a
+podman container list -a
+```
 
-To stop a running container, enter `podman stop {name-or-id}`.
-This can take around 10 seconds.
+To start a container, enter the following:
 
-To delete a container, enter `podman rm {name-or-id}`.
-This will fail if the container is running.
+```bash
+podman start {name-or-id}
+```
+
+To stop a running container, enter the following
+which can take around 10 seconds to complete:
+
+```bash
+podman stop {name-or-id}
+```
+
+To delete a container, enter the following:
+
+```bash
+podman rm {name-or-id}
+```
+
+This will fail if the container is currently running.
 
 To create and run a container using a given image in a single command,
-enter the following command:
+enter the following:
 
 ```bash
 podman run --name {container-name} {image-name}"
@@ -93,9 +133,10 @@ podman run --name {container-name} {image-name}"
 
 Add the `--rm` flag to delete the container after it runs.
 
-Add the `-d` flag to run the container in detached mode (in the background).
+Add the `-d` flag to run the container in detached mode
+which runs it in a background process.
 When not running in detached mode, the process cannot be stopped by pressing ctrl-c.
-Instead, open another terminal and enter `podman stop {name-or-id}`.
+Instead, open another terminal and stop the container.
 
 ## Finding Available Containers
 
