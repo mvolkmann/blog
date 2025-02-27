@@ -88,15 +88,35 @@ It is a popular alternative to Docker.
 
 1. Enter `npm run` to run the image in a container.
 
+## Names
+
+The names of images and containers are composed of three parts
+and have the syntax `{registry}/{repository}:{tag}`.
+
+When an image or container is downloaded from the web, the
+`{registry}` part indicates the source code registry it came from".
+
+When an image or container is created locally and
+the `{registry}` part cannot be specified and defaults to "localhost".
+
+The tag can be used to identify multiple versions of an image or container.
+When `:{tag}` part is omitted, it defaults to "latest".
+
 ## Images
 
 To build an image using the `Dockerfile` file in the current directory,
 enter `podman build -t {image-name} .`
+The `.` at the end indicates that the file `Dockerfile`
+can be found in the current directory.
 
 To list all the images created on your machine, enter `podman images`.
 
-To delete an image by its id, enter `podman rmi {name-or-id}`.
-This will fail if the image is being used by an existing container.
+To delete an image, enter `podman rmi {name-or-id}`.
+If a name is specified,
+it must match the pattern `{registry}/{repository}:{tag}`
+or `{registry}/{repository}` if no tag was specified when it was created.
+Attemtping to delete an image will fail
+if it is being used by an existing container.
 
 ## Containers
 
@@ -113,7 +133,7 @@ to the previous command.
 Typically `host-port` and `container-port` are the same.
 
 To list all the containers created on your machine,
-enter `podman ps -a` (for all) or `podman container list`.
+enter `podman ps -a` (for all) or `podman container list -a`.
 
 To start a container, enter `podman start {name-or-id}`.
 
