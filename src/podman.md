@@ -88,6 +88,52 @@ It is a popular alternative to Docker.
 
 1. Enter `npm run` to run the image in a container.
 
-## Finding Containers
+## Images
+
+To build an image using the `Dockerfile` file in the current directory,
+enter `podman build -t {image-name} .`
+
+To list all the images created on your machine, enter `podman images`.
+
+To delete an image by its id, enter `podman rmi {name-or-id}`.
+This will fail if the image is being used by an existing container.
+
+## Containers
+
+To create a container using a given image, enter the following command:
+
+```bash
+podman create --name {container-name} {image-name}"
+```
+
+Often the container exposes a given port (container-port)
+and you want to map that to port on your machine (host-port).
+This is done by adding the flag `-p {host-port}:{container-port}`
+to the previous command.
+Typically `host-port` and `container-port` are the same.
+
+To list all the containers created on your machine,
+enter `podman ps -a` (for all) or `podman container list`.
+
+To start a container, enter `podman start {name-or-id}`.
+
+To stop a running container, enter `podman stop {name-or-id}`.
+This can take around 10 seconds.
+
+To delete a container, enter `podman rm {name-or-id}`.
+This will fail if the container is running.
+
+To create and run a container using a given image in a single command,
+enter the following command:
+
+```bash
+podman run --name {container-name} {image-name}"
+```
+
+Add the `-d` flag to run the container in detached mode (in the background).
+When not running in detached mode, the process cannot be stopped by pressing ctrl-c.
+Instead, open another terminal and enter `podman stop {name-or-id}`.
+
+## Finding Available Containers
 
 `podman search docker.io/busybox`
