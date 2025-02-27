@@ -12,9 +12,11 @@ layout: topic-layout.njk
 
 ## Overview
 
-{% aTargetBlank "https://www.latex-project.org", "LaTeX" %} is
-
-Consider using the VSCode extension "LaTeX Workshop" from James Yu.
+{% aTargetBlank "https://www.latex-project.org", "LaTeX" %} is a
+document preparation system and markup language used for
+creating high-quality documents, especially those containing
+mathematical formulas, scientific notations, and structured content.
+It is pronounced "Lay-tech" or "Lah-tech".
 
 ## Installing in macOS
 
@@ -52,3 +54,7 @@ is recommended. `mactex` is the macOS version of TeX Live.
 
 - `pdflatex {name}.tex`
 - `open {name}.pdf`
+
+## Syntax
+
+See the video tutorial at https://www.youtube.com/watch?v=ydOTMQC7np0!
