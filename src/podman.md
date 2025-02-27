@@ -29,6 +29,8 @@ It is a popular alternative to Docker.
 - Enter `podman machine start` to start the podman machine
 - Enter `podman info` to verify that the previous commands worked.
 
+I was not able to get the "Podman Desktop" app to work in macOS!
+
 ## Names
 
 The names of images and containers are composed of three parts
@@ -103,10 +105,23 @@ podman ps -a
 podman container list -a
 ```
 
-To start a container, enter the following:
+To start a container in a background process, enter the following:
 
 ```bash
 podman start {name-or-id}
+```
+
+To cause everything the container writes to stdout
+to also be written to stdout of the current process,
+add the `--attach` flag.
+
+To allow the container to read from stdin of the current process,
+add the `--interactive` flag.
+
+To view what the container writes to stdout, enter the following:
+
+```bash
+podman logs {name-or-id}
 ```
 
 To stop a running container, enter the following
