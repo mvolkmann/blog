@@ -25,9 +25,9 @@ It is a popular alternative to Docker.
   by repeatedly entering `which podman` and deleting the file that finds.
 - Download the installer for the podman CLI from https://podman.io.
 - Run that installer.
-- `podman machine init`
-- `podman machine start`
-- `podman info`
+- Enter `podman machine init` to create a podman machine.
+- Enter `podman machine start` to start the podman machine
+- Enter `podman info` to verify that the previous commands worked.
 
 ## Names
 
