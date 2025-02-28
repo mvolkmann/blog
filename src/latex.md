@@ -16,9 +16,21 @@ The "X" at the end is actually the Greek letter chi.
 That is why it is not pronounced the same as "latex", the substance
 that comes from trees and plants which is used to produce rubber.
 
-## Installing in macOS
+## Installing
 
-Install Homebrew and then enter `brew install mactex`.
+Generating PDF documents from LaTeX documents
+requires a distribution and an editor.
+
+The distribution provides executables that must be found
+in a directory listed in your `PATH` environment variable.
+The <a href="https://www.tug.org/texlive/" target="_blank">TeX Live</a>
+distribution is recommended.
+
+### Installing in macOS
+
+The macOS version of TeX Live is named mactex.
+One way to install mactex is to install Homebrew
+and then enter `brew install mactex`.
 This installs the following commands:
 
 | Command     | Description                                                       |
@@ -39,7 +51,33 @@ This installs the following commands:
 
 The most used commands are probably `pdflatex` and `xelatex`.
 
-## VS Code
+To generate a `.pdf` file from a `.tex` file, run the following command:
+
+```bash
+pdflatex {name}.tex
+```
+
+TeX editors do this for you.
+
+## Editors
+
+Recommended LaTeX editors include TeXmaker, VS Code, and Overleaf.
+
+### TeXmaker
+
+<a href="https://www.xm1math.net/texmaker/" target="_blank">TeXmaker</a>
+is a free, cross-platform LaTeX editor.
+Download the installer, run it, and drag the app icon to the Applications directory.
+Double-click the app to run it.
+It will likely show an error dialog that says
+"texmaker.app is damaged and can't be opened", but it is not damaged.
+To fix this, open a terminal window and enter the following command:
+
+```bash
+sudo xattr -dr com.apple.quarantine /Applications/texmaker.app
+```
+
+### VS Code
 
 VS Code can be used to edit `.tex` files.
 
@@ -47,9 +85,25 @@ Install the extension "LaTeX Workshop" from James Yu.
 This automatically generates a PDF
 every time changes to a `.tex` file are saved
 and the PDF can be viewed inside VS Code.
-It requires that a compatible LaTeX distribute be found in the `PATH`.
-<a href="https://www.tug.org/texlive/" target="_blank">TeX Live</a>
-is recommended. `mactex` is the macOS version of TeX Live.
+
+### Overleaf
+
+<a href="https://www.overleaf.com" target="_blank">Overleaf</a>
+is a web-based editor that doesn't require installing any software.
+It requires creating an account.
+There are free and paid accounts.
+Free accounts have the following limitations:
+
+- collaborating on documents with multiple editors is not supported
+- compiling can timeout for large documents
+- no document history is maintained
+- advanced search is not supported
+- the symbol palette for inserting math symbols with a click is not supported
+- no integrations with version control systems is supported
+- no technical support is provided
+
+Paid accounts are $199 (10 collaborators per project)
+or $399 (unlimited collaborators per project) per year.
 
 ## Generating PDFs from Command Line
 
