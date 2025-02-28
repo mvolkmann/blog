@@ -102,13 +102,25 @@ For example:
 The "comment" package adds support for multi-line comments.
 For example:
 
-```latex
+````latex
 \usepackage{comment}
 ...
 \begin{comment}
 This is a
 multi-line comment.
 \end{comment}
+
+## Basic Formatting
+
+```latex
+\textbf{Bold}
+
+\textit{Italic}
+
+\underline{Underline}
+
+\textbf{\textit{\underline{Bold, Italic, and Underline}}}
+```
 
 ## Greek Letters
 
@@ -145,4 +157,8 @@ which is not included because it is identical to a lowercase "o".
 
 - {% aTargetBlank "https://ctan.org/pkg/catalogue?lang=en", "CTAN" %}
   Comprehensive TeX Archive Network
+
 ```
+
+```
+````
