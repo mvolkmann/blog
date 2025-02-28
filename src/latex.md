@@ -276,6 +276,42 @@ For example:
 \end{itemize}
 ```
 
+## Sections
+
+Documents can have up to seven levels of sections,
+but not all of them are supported for every document class.
+The following example shows how to specify all seven levels.
+
+```latex
+\part{First Part}
+This is a paragraph in a part.
+
+\chapter{First Chapter}
+This is a paragraph in a chapter.
+
+\section{First Section}
+This is a paragraph in a section.
+
+\subsection{First subsection}
+This is a paragraph in a subsection.
+
+\subsubsection{First Subsubsection}
+This is a paragraph in a subsubsection.
+
+\paragraph{First Paragraph}
+This is a paragraph in a paragraph.
+
+\subparagraph{First Subparagraph}
+This is a paragraph in a subparagraph.
+```
+
+Unless the document is a book, the most common kinds of sections to use
+include `\section`, `\subsection`, and `\subsubsection`.
+
+Parts, chapters, sections, and subsections are
+automatically assigned increasing numbers starting from 1.
+Subsubsecdtions, paragraphs, and subparagraphs are not assigned numbers.
+
 ## Greek Letters
 
 Greek letters are produced using the following commands.
