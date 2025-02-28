@@ -73,7 +73,13 @@ Hello
 \end{document}
 ```
 
-Other options for `\documentclass` include:
+The first command must be `\documentclass{some-class}`.
+
+The content must be surrounded by `\begin{document}` and `\end{document}`.
+
+## Document Classes
+
+Options for `\documentclass{some-class}` include:
 
 - `article` supports sections and subsections, but not chapters
 - `beamer` for presentations
