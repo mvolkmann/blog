@@ -108,13 +108,14 @@ For example:
 The "comment" package adds support for multi-line comments.
 For example:
 
-````latex
+```latex
 \usepackage{comment}
 ...
 \begin{comment}
 This is a
 multi-line comment.
 \end{comment}
+```
 
 ## Basic Formatting
 
@@ -126,6 +127,42 @@ multi-line comment.
 \underline{Underline}
 
 \textbf{\textit{\underline{Bold, Italic, and Underline}}}
+```
+
+## Newlines
+
+Paragraphs are separated by blank lines which add two newlines.
+
+To add a single newline, end a line with `\\`.
+
+## Alignment
+
+By default text is left-aligned\dots
+
+To center a single line of text, use:
+
+```latex
+\centerline{some-text}
+```
+
+To center multiple lines of text, use:
+
+```latex
+{\centering
+This is a centered paragraph\\
+that spans multiple lines.\\
+Each line is centered.
+\par}
+```
+
+OR
+
+```latex
+\begin{center}
+This is a centered paragraph\\
+that spans multiple lines.\\
+Each line is centered.
+\end{center}
 ```
 
 ## Greek Letters
@@ -167,4 +204,7 @@ which is not included because it is identical to a lowercase "o".
 ```
 
 ```
-````
+
+```
+
+```
