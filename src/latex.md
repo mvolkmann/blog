@@ -204,16 +204,13 @@ Each line is centered.
 
 To right-align multiple lines of text instead of justifying them, use:
 
-{% raw %}
-
 ```latex
 \begin{flushright}
 This is a right-aligned paragraph\\
 that spans multiple lines.\\
 Each line is centered.
 \end{flushright}
-
-{% endraw %}
+```
 
 ## Greek Letters
 
@@ -258,13 +255,3 @@ For example, `\LaTeX\`.
 
 - {% aTargetBlank "https://ctan.org/pkg/catalogue?lang=en", "CTAN" %}
   Comprehensive TeX Archive Network
-
-```
-
-```
-
-```
-
-```
-
-```
