@@ -250,7 +250,31 @@ inside the "description" environment. For example:
 \end{description}
 ```
 
-Nested lists ...
+Lists can be nested up to four levels deep.
+For example:
+
+<img alt="LaTeX nested lists" style="width: 25%"
+  src="/blog/assets/LaTeX-nested-lists.png?v={{pkg.version}}">
+
+```latex
+\begin{itemize}
+  \item red
+    \begin{enumerate}
+      \item apple
+      \item cherry
+      \item strawberry
+    \end{enumerate}
+  \item green
+    \begin{enumerate}
+      \item kiwi
+      \item lime
+    \end{enumerate}
+  \item blue
+    \begin{enumerate}
+      \item blueberry
+    \end{enumerate}
+\end{itemize}
+```
 
 ## Greek Letters
 
