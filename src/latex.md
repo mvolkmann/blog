@@ -125,6 +125,62 @@ multi-line comment.
 \textbf{\textit{\underline{Bold, Italic, and Underline}}}
 ```
 
+## Font Family
+
+To change the font family for a section of the content,
+surround it with:
+
+TODO: TEST THESE!
+
+- `textrm{ ... }` for a serif font (Roman)
+- `textsf{ ... }` for a sans serif font
+- `texttt{ ... }` for a typewriter (monospace) font
+
+## Font Style
+
+To change the font size for a section of content,
+surround it with:
+
+TODO: TEST THESE!
+
+- `textmd{ ... }` for medium weight
+- `textbf{ ... }` for bold face
+- `textup{ ... }` for upright (not italic or slanted)
+- `textit{ ... }` for italic
+- `textsl{ ... }` for slanted
+- `textsc{ ... }` for small caps
+
+## Font Size
+
+To change the font size of all the content,
+TODO: ADD THIS!
+
+To change the font size of a section of the content,
+surround it with `{\size ... }` where size is one of
+`tiny`, `scriptsize`, `footnotesize`, `small`, `normalsize`,
+`large`, `Large`, `LARGE`, `huge`, or `Huge`.
+TODO: Do these use a percentage of the current default font size?
+
+For example:
+
+```latex
+{\huge
+some content
+}
+```
+
+A specific font size is specified with `\fontsize{size}{spacing}\selectfont`
+where `size` the font point size and `spacing` the point size between lines.
+For example:
+
+TODO: THIS IS NOT WORKING!
+
+```latex
+\fontsize{18}{10}\selectfont
+some content
+\end
+```
+
 ## Paragraphs
 
 Paragraphs are separated by blank lines.
@@ -311,6 +367,10 @@ include `\section`, `\subsection`, and `\subsubsection`.
 Parts, chapters, sections, and subsections are
 automatically assigned increasing numbers starting from 1.
 Subsubsecdtions, paragraphs, and subparagraphs are not assigned numbers.
+
+## Horizontal Rules
+
+To draw a horizontal line across the page, use `\hrule`.
 
 ## Greek Letters
 
