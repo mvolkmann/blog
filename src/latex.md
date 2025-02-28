@@ -364,7 +364,7 @@ Bulleted lists are created with `\item` commands
 inside the "itemize" environment. For example:
 
 <img alt="LaTeX itemize list" style="width: 10%"
-  src="/blog/assets/LaTeX-itemize-list.png?v={{pkg.version}}">
+  src="/blog/assets/latex-itemize-list.png?v={{pkg.version}}">
 
 ```latex
 \begin{itemize}
@@ -378,7 +378,7 @@ Numbered lists are created with `\item` commands
 inside the "enumerate" environment. For example:
 
 <img alt="LaTeX enumerate list" style="width: 10%"
-  src="/blog/assets/LaTeX-enumerate-list.png?v={{pkg.version}}">
+  src="/blog/assets/latex-enumerate-list.png?v={{pkg.version}}">
 
 ```latex
 \begin{enumerate}
@@ -392,7 +392,7 @@ Description lists are created with `\item` commands
 inside the "description" environment. For example:
 
 <img alt="LaTeX description list" style="width: 25%"
-  src="/blog/assets/LaTeX-description-list.png?v={{pkg.version}}">
+  src="/blog/assets/latex-description-list.png?v={{pkg.version}}">
 
 ```latex
 \begin{description}
@@ -406,7 +406,7 @@ Lists can be nested up to four levels deep.
 For example:
 
 <img alt="LaTeX nested lists" style="width: 25%"
-  src="/blog/assets/LaTeX-nested-lists.png?v={{pkg.version}}">
+  src="/blog/assets/latex-nested-lists.png?v={{pkg.version}}">
 
 ```latex
 \begin{itemize}
@@ -486,7 +486,7 @@ and after the last column.
 The following example creates a table describing dogs.
 
 <img alt="LaTeX table" style="width: 50%"
-  src="/blog/assets/LaTeX-table.png?v={{pkg.version}}">
+  src="/blog/assets/latex-table.png?v={{pkg.version}}">
 
 ```latex
 \begin{tabular}{|l|l|c|}
@@ -512,7 +512,7 @@ identical to the corresponding Latin letter,
 Latin letters are used for those.
 
 <img alt="LaTeX Greek letters" style="width: 30%"
-  src="/blog/assets/LaTeX-greek-letters.png?v={{pkg.version}}">
+  src="/blog/assets/latex-greek-letters.png?v={{pkg.version}}">
 
 | Name    | Lowercase    | Uppercase   |
 | ------- | ------------ | ----------- |
@@ -547,7 +547,7 @@ The word LaTeX is specially formatted by surrounding it with backslashes.
 For example, `\LaTeX\` is rendered as follows:
 
 <img alt="LaTeX rendered" style="width: 10%"
-  src="/blog/assets/LaTeX-rendered.png?v={{pkg.version}}">
+  src="/blog/assets/latex-rendered.png?v={{pkg.version}}">
 
 ## Resources
 
