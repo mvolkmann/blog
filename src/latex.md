@@ -4,12 +4,6 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-<style>
-  img {
-    border: 1px solid gray;
-  }
-</style>
-
 ## Overview
 
 {% aTargetBlank "https://www.latex-project.org", "LaTeX" %} is a
@@ -17,7 +11,7 @@ document preparation system and markup language used for
 creating high-quality documents, especially those containing
 mathematical formulas, scientific notations, and structured content.
 
-LaTeX is pronounced "Lay-tech" or "Lah-tech".
+LaTeX is pronounced "Lah-tech" or "Lay-tech".
 The "X" at the end is actually the Greek letter chi.
 That is why it is not pronounced the same as "latex", the substance
 that comes from trees and plants which is used to produce rubber.
@@ -212,6 +206,52 @@ Each line is centered.
 \end{flushright}
 ```
 
+## Lists
+
+Bulleted lists are created with `\item` commands
+inside the "itemize" environment. For example:
+
+<img alt="LaTeX itemize list" style="width: 10%"
+  src="/blog/assets/LaTeX-itemize-list.png?v={{pkg.version}}">
+
+```latex
+\begin{itemize}
+  \item red
+  \item green
+  \item blue
+\end{itemize}
+```
+
+Numbered lists are created with `\item` commands
+inside the "enumerate" environment. For example:
+
+<img alt="LaTeX enumerate list" style="width: 10%"
+  src="/blog/assets/LaTeX-enumerate-list.png?v={{pkg.version}}">
+
+```latex
+\begin{enumerate}
+  \item red
+  \item green
+  \item blue
+\end{enumerate}
+```
+
+Description lists are created with `\item` commands
+inside the "description" environment. For example:
+
+<img alt="LaTeX description list" style="width: 25%"
+  src="/blog/assets/LaTeX-description-list.png?v={{pkg.version}}">
+
+```latex
+\begin{description}
+  \item[apple] a red fruit
+  \item[kiwi] a green fruit
+  \item [blueberry] a blue fruit
+\end{description}
+```
+
+Nested lists ...
+
 ## Greek Letters
 
 Greek letters are produced using the following commands:
@@ -246,9 +286,9 @@ which is not included because it is identical to a lowercase "o".
 ## Formatting the Word LaTeX
 
 The word LaTeX is specially formatted by surrounding it with backslashes.
-For example, `\LaTeX\`.
+For example, `\LaTeX\` is rendered as follows:
 
-<img alt="LaTeX rendered" style="width: 20%"
+<img alt="LaTeX rendered" style="width: 10%"
   src="/blog/assets/LaTeX-rendered.png?v={{pkg.version}}">
 
 ## Resources
