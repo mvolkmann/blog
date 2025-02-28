@@ -272,6 +272,10 @@ To add a page break, insert the command `\newpage` or `\pagebreak`.
 
 To add a given amount of vertical space,
 insert the command `\vspace{amount}` where `amount` is a value like `1cm`.
+Alternatively, insert the commands
+`\smallskip` (3pt +/- 1pt),
+`\medskip` (6pt +/- 2pt), or
+`\bigskip` (12pt +/- 4pt).
 
 To push the remaining content to the bottom of the current page,
 insert the command `\vfill`.
