@@ -129,15 +129,50 @@ multi-line comment.
 \textbf{\textit{\underline{Bold, Italic, and Underline}}}
 ```
 
+## Paragraphs
+
+Paragraphs are separated by blank lines.
+By default, the first line in each paragraph will be indented
+and there will be no extra space separating the pargraphs.
+
+To opt for not indenting the first line of each paragraph and
+instead add vertical space between them, add `\usepackage(parskip)`.
+
+To customize the first line indentation:
+
+```latex
+\setlength{\parindent}{1em}
+```
+
+To customize the vertical space between paragraphs:
+
+```latex
+\setlength{\parskip}{1em}
+```
+
 ## Newlines
 
-Paragraphs are separated by blank lines which add two newlines.
-
-To add a single newline, end a line with `\\`.
+To add a single newline after a line, add `\\` at its end.
 
 ## Alignment
 
-By default text is left-aligned\dots
+In many document classes such as `article`, `report`, and `book`,
+paragraphs are justified by default so
+each full line of text has the same length.
+This is accomplished by adding variable spacing between the words.
+
+To change the default alignment so variable spacing between words is not used,
+add `\raggedright` or `\raggedleft`.
+
+When this is not the default, to justify multiple lines of text, use:
+
+```latex
+{\justify
+This is a justified paragraph\\
+that spans multiple lines.\\
+Each line is justified.
+}
+```
 
 To center a single line of text, use:
 
@@ -145,7 +180,7 @@ To center a single line of text, use:
 \centerline{some-text}
 ```
 
-To center multiple lines of text, use:
+To center multiple lines of text instead of justifying them, use:
 
 ```latex
 {\centering
@@ -164,6 +199,15 @@ that spans multiple lines.\\
 Each line is centered.
 \end{center}
 ```
+
+To right-align multiple lines of text instead of justifying them, use:
+
+```latex
+\begin{flushright}
+This is a right-aligned paragraph\\
+that spans multiple lines.\\
+Each line is centered.
+\end{flushright}
 
 ## Greek Letters
 
@@ -200,6 +244,8 @@ which is not included because it is identical to a lowercase "o".
 
 - {% aTargetBlank "https://ctan.org/pkg/catalogue?lang=en", "CTAN" %}
   Comprehensive TeX Archive Network
+
+```
 
 ```
 
