@@ -75,8 +75,9 @@ Hello
 
 Other options for `\documentclass` include:
 
+- `article` supports sections and subsections, but not chapters
 - `beamer` for presentations
-- `book`
+- `book` supports a title page, abstract, table of contents, chapters, and bibliography
 - `exam` for lists of questions
 - `leaflet`
 - `letter`
@@ -84,8 +85,8 @@ Other options for `\documentclass` include:
 - `minimal` only sets page size and a base font (mostly for debugging)
 - `paper`
 - `proc` for proceedings; based on the `article` class
-- `report` for documents with chapters, small books, and theses
-- `slides`
+- `report` for documents with chapters
+- `slides` for presentations, but `beamer` is preferred
 
 See the video tutorial at https://www.youtube.com/watch?v=ydOTMQC7np0!
 
