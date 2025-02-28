@@ -51,13 +51,15 @@ This installs the following commands:
 
 The most used commands are probably `pdflatex` and `xelatex`.
 
-To generate a `.pdf` file from a `.tex` file, run the following command:
+To generate a `.pdf` file from a `.tex` file in a terminal window,
+run the following command:
 
 ```bash
 pdflatex {name}.tex
+open {name}.tex
 ```
 
-TeX editors do this for you.
+TeX editors will do this for you.
 
 ## Editors
 
@@ -105,11 +107,6 @@ Free accounts have the following limitations:
 Paid accounts are $199 (10 collaborators per project)
 or $399 (unlimited collaborators per project) per year.
 
-## Generating PDFs from Command Line
-
-- `pdflatex {name}.tex`
-- `open {name}.pdf`
-
 ## Syntax
 
 The most basic LaTeX document contains the following:
@@ -120,6 +117,17 @@ The most basic LaTeX document contains the following:
 Hello
 \end{document}
 ```
+
+LaTeX documents consist of a sequence of commands and content.
+The commands before `\begin{document}` are referred to as the preamble.
+They do the following:
+
+- describe the class of document being created
+- import packages which provide support for addition commands
+- configure document-wide formatting
+
+Commands have the syntax `\name[options]{content}`,
+but some commands do not support options and/or content.
 
 The first command must be `\documentclass{some-class}`.
 
@@ -256,9 +264,39 @@ To customize the vertical space between paragraphs:
 \setlength{\parskip}{1em}
 ```
 
-## Newlines
+## Space
 
 To add a single newline after a line, add `\\` at its end.
+
+To add a page break, insert the command `\newpage` or `\pagebreak`.
+
+To add a given amount of vertical space,
+insert the command `\vspace{amount}` where `amount` is a value like `1cm`.
+
+To push the remaining content to the bottom of the current page,
+insert the command `\vfill`.
+If this command appears multiple times on page,
+the available space will be divided evenly between them.
+For example:
+
+```latex
+\newpage
+top
+\vfill
+middle
+\vfill
+bottom
+```
+
+To push a single line to the right side of the page,
+insert the command `\hfill` at the begining of the line.
+
+To split the content of a single line so the beginning is at
+the left side of the page and the end is at the right side,
+insert the command `\hfill` in the middle of the line.
+
+To insert a given amount of horizontal space in a line,
+insert the command `\hspace{amount}` where `amount` is a value like `1cm`.
 
 ## Justifying and Aligning
 
@@ -425,6 +463,24 @@ Subsubsecdtions, paragraphs, and subparagraphs are not assigned numbers.
 ## Horizontal Rules
 
 To draw a horizontal line across the page, use `\hrule`.
+
+## Tables
+
+```latex
+\begin{tabular}{|l|l|c|}
+  \hline
+  Name & Breed & Age \\
+  \hline\hline
+  Comet & Whippet & 4 \\
+  \hline
+  Greta & German Shorthaired Poiner & 1 \\
+  \hline
+  Oscar & Lab mix & 7 \\
+  \hline
+  Ramsay & Native American Indian Dog & 8 \\
+  \hline
+\end{tabular}
+```
 
 ## Greek Letters
 
