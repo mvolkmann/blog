@@ -278,34 +278,40 @@ For example:
 
 ## Greek Letters
 
-Greek letters are produced using the following commands:
+Greek letters are produced using the following commands.
+There are no commands for Greek letters that are
+identical to the corresponding Latin letter,
+Latin letters are used for those.
 
-- `$\alpha$`
-- `$\beta$`
-- `$\gamma$`
-- `$\delta$`
-- `$\epsilon$`
-- `$\zeta$`
-- `$\eta$`
-- `$\theta$`
-- `$\iota$`
-- `$\kappa$`
-- `$\lambda$`
-- `$\mu$`
-- `$\nu$`
-- `$\xi$`
-- `$\pi$`
-- `$\rho$`
-- `$\sigma$`
-- `$\tau$`
-- `$\upsilon$`
-- `$\phi$`
-- `$\chi$`
-- `$\psi$`
-- `$\omega$`
+<img alt="LaTeX Greek letters" style="width: 30%"
+  src="/blog/assets/LaTeX-greek-letters.png?v={{pkg.version}}">
 
-This includes all the Greek letters except omicron,
-which is not included because it is identical to a lowercase "o".
+| Name    | Lowercase    | Uppercase   |
+| ------- | ------------ | ----------- |
+| alpha   | `$\alpha$`   | `A`         |
+| beta    | `$\beta$`    | `B`         |
+| gamma   | `$\gamma$`   | `$\Gamma$`  |
+| delta   | `$\delta$`   | `$\Delta$`  |
+| epsilon | `$\epsilon$` | `E`         |
+| zeta    | `$\zeta$`    | `Z`         |
+| eta     | `$\eta$`     | `H`         |
+| theta   | `$\theta$`   | `$\Theta$`  |
+| iota    | `$\iota$`    | `I`         |
+| kappa   | `$\kappa$`   | `K`         |
+| lambda  | `$\lambda$`  | `$\Lambda$` |
+| mu      | `$\mu$`      | `M`         |
+| nu      | `$\nu$`      | `N`         |
+| xi      | `$\xi$`      | `$\Xi$`     |
+| omicron | `o`          | `O`         |
+| pi      | `$\pi$`      | `$\Pi$`     |
+| rho     | `$\rho$`     | `P`         |
+| sigma   | `$\sigma$`   | `$\Sigma$`  |
+| tau     | `$\tau$`     | `T`         |
+| upsilon | `$\upsilon$` | `$\Upsilon` |
+| phi     | `$\phi$`     | `$\Phi$`    |
+| chi     | `$\chi$`     | `X`         |
+| psi     | `$\psi$`     | `$\Psi$`    |
+| omega   | `$\omega$`   | `$\Omega$`  |
 
 ## Formatting the Word LaTeX
 
