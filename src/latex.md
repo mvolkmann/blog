@@ -470,6 +470,24 @@ To draw a horizontal line across the page, use `\hrule`.
 
 ## Tables
 
+To create a table, use the `\begin{tabular}{columns}` command.
+"columns" is replaced by text that specifies:
+
+- the number of columns
+- whether they should be left-aligned (`l`), centered (`c`), or right-aligned (`r`)
+- whether there should be vertical borders
+  before the columns, between the columns, and after the columns
+
+For example, `\begin{tabular}{|c|lr|}` creates a table with three columns.
+The first column is centered, the second is left-aligned, and the last is right-aligned.
+There will be vertical lines before the first and second columns,
+and after the last column.
+
+The following example creates a table describing dogs.
+
+<img alt="LaTeX table" style="width: 50%"
+  src="/blog/assets/LaTeX-table.png?v={{pkg.version}}">
+
 ```latex
 \begin{tabular}{|l|l|c|}
   \hline
