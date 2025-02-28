@@ -468,6 +468,47 @@ Subsubsecdtions, paragraphs, and subparagraphs are not assigned numbers.
 
 To draw a horizontal line across the page, use `\hrule`.
 
+## URLs and Links
+
+To render a URL in a monospace font, use the `\texttt` command.
+For example, `\texttt{https://mvolkmann.github.io/blog/}`.
+The URL will not be clickable.
+
+To render a clickable URL, include the hyperref package
+and use the `\url` or `\href` command.
+The `\url` command renders the URL.
+The `\href` command renders alternate text instead of the URL.
+For example:
+
+````latex
+\usepackage{hyperref}
+...
+\url{https://mvolkmann.github.io/blog/}
+
+\href{https://mvolkmann.github.io/blog/}{My Blog}
+```
+
+## Dots
+
+Dots are the ellipsis character rendered in different orientations.
+The dots commands must be used in math mode.
+Some of the dots commands require the amsmath package.
+
+To display an ellipsis, insert the `\ldots` command.
+
+The following examples demonstrate the dot commands:
+
+<img alt="LaTeX dots" style="width: 15%"
+  src="/blog/assets/latex-dots.png?v={{pkg.version}}">
+
+```latex
+$ 1, 2, \dots, 10 $ \\ % horizontal dots
+$ 2, 3, \ldots, 10 $ \\ % lower horizontal dots
+$ 3 \cdots 10 $ \\ % vertically centered horizontal dots
+$ 4~ \vdots ~10 $ \\ % vertical dots; ~ ("tie") and is like &nbsp; in HTML
+$ 5 \ddots 10 $ \\ % diagonal dots
+````
+
 ## Tables
 
 To create a table, use the `\begin{tabular}{columns}` command.
@@ -482,6 +523,16 @@ For example, `\begin{tabular}{|c|lr|}` creates a table with three columns.
 The first column is centered, the second is left-aligned, and the last is right-aligned.
 There will be vertical lines before the first and second columns,
 and after the last column.
+
+The table rows are specified with content that follows
+up to the `\end{tabular}` command.
+
+The cells of each row are separated by the `&` character.
+The end of each row is marked by `\\`.
+
+To add lines before and/or after a row, add the `\hline` command.
+To add double lines, such as below the heading row,
+add two `\hline` commands.
 
 The following example creates a table describing dogs.
 
@@ -540,6 +591,21 @@ Latin letters are used for those.
 | chi     | `$\chi$`     | `X`         |
 | psi     | `$\psi$`     | `$\Psi$`    |
 | omega   | `$\omega$`   | `$\Omega$`  |
+
+## Symbols
+
+Some of the supported symbols are shown in the table below:
+
+<img alt="LaTeX symbols" style="width: 65%"
+  src="/blog/assets/latex-symbols.png?v={{pkg.version}}">
+
+## Math Mode
+
+Math mode is used to display mathematical equations.
+
+Inline math mode content is delimited by single `$` characters.
+Display math mode content which appears on its on line, centered by default,
+is delimited by double `$$` characters.
 
 ## Formatting the Word LaTeX
 
