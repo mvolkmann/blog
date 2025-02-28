@@ -79,6 +79,8 @@ The content must be surrounded by `\begin{document}` and `\end{document}`.
 
 ## Document Classes
 
+Document classes change the default formatting and add support for new commands.
+
 Options for `\documentclass{some-class}` include:
 
 - `article` supports sections and subsections, but not chapters
@@ -154,7 +156,7 @@ To customize the vertical space between paragraphs:
 
 To add a single newline after a line, add `\\` at its end.
 
-## Alignment
+## Justifying and Aligning
 
 In many document classes such as `article`, `report`, and `book`,
 paragraphs are justified by default so
@@ -202,12 +204,16 @@ Each line is centered.
 
 To right-align multiple lines of text instead of justifying them, use:
 
+{% raw %}
+
 ```latex
 \begin{flushright}
 This is a right-aligned paragraph\\
 that spans multiple lines.\\
 Each line is centered.
 \end{flushright}
+
+{% endraw %}
 
 ## Greek Letters
 
@@ -239,6 +245,14 @@ Greek letters are produced using the following commands:
 
 This includes all the Greek letters except omicron,
 which is not included because it is identical to a lowercase "o".
+
+## Formatting the Word LaTeX
+
+The word LaTeX is specially formatted by surrounding it with backslashes.
+For example, `\LaTeX\`.
+
+<img alt="LaTeX rendered" style="width: 20%"
+  src="/blog/assets/LaTeX-rendered.png?v={{pkg.version}}">
 
 ## Resources
 
