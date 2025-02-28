@@ -187,35 +187,37 @@ multi-line comment.
 \textbf{\textit{\underline{Bold, Italic, and Underline}}}
 ```
 
-## Font Family
+## Fonts
+
+### Font Family
 
 To change the font family for a section of the content,
 surround it with:
-
-TODO: TEST THESE!
 
 - `textrm{ ... }` for a serif font (Roman)
 - `textsf{ ... }` for a sans serif font
 - `texttt{ ... }` for a typewriter (monospace) font
 
-## Font Style
+### Font Style
 
-To change the font size for a section of content,
-surround it with:
+To change the font style for a section of content,
+surround with commands shown in the following table.
+The style "upright" seems to be same as "medium".
 
-TODO: TEST THESE!
+<img alt="LaTeX font styles" style="width: 30%"
+  src="/blog/assets/latex-font-styles.png?v={{pkg.version}}">
 
-- `textmd{ ... }` for medium weight
-- `textbf{ ... }` for bold face
-- `textup{ ... }` for upright (not italic or slanted)
-- `textit{ ... }` for italic
-- `textsl{ ... }` for slanted
-- `textsc{ ... }` for small caps
+### Font Size
 
-## Font Size
+To change the default font size for the entire document,
+modify the `\documentclass` command as follows:
 
-To change the font size of all the content,
-TODO: ADD THIS!
+```latex
+\documentclass[12pt]{book}
+```
+
+For some reason the only font sizes that can be specified here
+are `10pt`, `11pt`, and `12pt`.
 
 To change the font size of a section of the content,
 surround it with `{\size ... }` where size is one of
@@ -231,16 +233,29 @@ some content
 }
 ```
 
-A specific font size is specified with `\fontsize{size}{spacing}\selectfont`
-where `size` the font point size and `spacing` the point size between lines.
+A specific font size is specified with `\fontsize{size}{baselineskip}`
+where `size` the font point size and `baselineskip` is
+the distance between the baselines of each line of text.
+The `baselineskip` value will be ignored unless each paragraph,
+including the last, is followed by a blank line.
+
 For example:
 
-TODO: THIS IS NOT WORKING!
-
 ```latex
-\fontsize{18}{10}\selectfont
-some content
-\end
+{\fontsize{18pt}{24pt}\selectfont
+Come and listen to a story about a man named Jed
+A poor mountaineer, barely kept his family fed,
+Then one day he was shootin at some food
+And up through the ground came a bubblin crude.
+
+Oil that is, black gold, Texas tea.
+
+Well the first thing you know ol Jed's a millionaire,
+Kinfolk said "Jed move away from there"
+Said "Californy is the place you ought to be"
+So they loaded up the truck and moved to Beverly.
+
+}
 ```
 
 ## Paragraphs
@@ -598,6 +613,10 @@ Some of the supported symbols are shown in the table below:
 
 <img alt="LaTeX symbols" style="width: 65%"
   src="/blog/assets/latex-symbols.png?v={{pkg.version}}">
+
+For more, see
+<a href="https://artofproblemsolving.com/wiki/index.php/LaTeX:Symbols"
+target="_blank">LaTeX:Symbols</a>.
 
 ## Math Mode
 
