@@ -133,6 +133,20 @@ The first command must be `\documentclass{some-class}`.
 
 The content must be surrounded by `\begin{document}` and `\end{document}`.
 
+A `.tex` file can include other `.tex` files.
+This enables breaking a large document into smaller documents
+that can be edited independently.
+The documents being included should not contain a preamble section
+or the `\begin{document}` and `\end{document}` commands.
+For example:
+
+```latex
+\input{other-file-name}
+```
+
+This will include the contents of the file named `other-file-name.tex`
+found in the same directory as the file that contains the `\include` command.
+
 ## Document Classes
 
 Document classes change the default formatting and add support for new commands.
@@ -321,6 +335,9 @@ To customize the vertical space between paragraphs:
 ```
 
 ## Space
+
+The LaTeX compiler typically removes extra spaces as it sees fit.
+To force a space to be retained, use `\,`.
 
 To add a single newline after a line, add `\\` at its end.
 
@@ -546,13 +563,17 @@ For example:
 
 ## Images
 
-To include images, use the `graphicx` package
-and the `\includegraphics` command.
+To include images, use the `graphicx` package.
+Use the `\includegraphics` command, specifying a file name.
+It is not necessary to include the file extension.
+The image file must reside in the same directory as the `.tex` file.
 
 The `float` package is required in order to use the "H" option
 which keeps the graphic "here" meaning where it occurs in the document flow.
 Without that the compiler can choose another location for the image
 that it deems better.
+Using the "t" option moves the image to the top of the page and
+using the "b" option moves it to the bottom of the page.
 
 Surrounding the image with a "figure" enables adding a caption
 which will be automatically numbered along with other figures
@@ -569,6 +590,11 @@ For example:
 \caption{Smalltalk Programming}
 \end{figure}
 ```
+
+In the example above we specified the image width.
+Any supported unit of measure can be used (ex. cm for centimeters).
+Alternatively we can specify the `height` (a measure like `width`)
+or `scale` (a number treated as a percentage).
 
 ## Dots
 
@@ -703,5 +729,7 @@ For example, `\LaTeX\` is rendered as follows:
 
 ## Resources
 
+- {% aTargetBlank "https://latexref.xyz",
+  "LaTeX2e: An unoffical reference manual" %}
 - {% aTargetBlank "https://ctan.org/pkg/catalogue?lang=en", "CTAN" %}
   Comprehensive TeX Archive Network
