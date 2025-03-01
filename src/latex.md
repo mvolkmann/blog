@@ -190,6 +190,10 @@ Documentation on all LaTeX packages can be found at
 <a href="https://ctan.org/pkg" target="_blank">
 Comprehensive TEX Archive Network</a> (CTAN).
 
+In packages whose names begin with "ams", that stands for
+<a href="https://www.ams.org/home/page" target="_blank">
+American Mathematical Society</a>.
+
 | Package  | Description                                                                      |
 | -------- | -------------------------------------------------------------------------------- |
 | amsfonts | adds fonts for use in mathematics                                                |
@@ -372,6 +376,54 @@ Said "Californy is the place you ought to be"
 So they loaded up the truck and moved to Beverly.
 
 }
+```
+
+## Colors
+
+The `color` package provides basic support the changing text color.
+The `xcolor` package provides more features and color models
+than the `color` package and is recommended.
+
+The following color models are supported:
+cmy, cmyk, gray, Gray, HSB, hsb, HTML, natural, rgb, and RGB.
+
+The following commands provide several examples
+of rendering text in a specific color:
+
+```latex
+% Using a color name from a small set.
+\textcolor{red}{This is red.}
+
+% rgb color
+\textcolor[rgb]{0.5, 0.1, 0.9}{Custom purple text}
+
+% HTML color
+\textcolor[HTML]{00FF00}{Hex green}
+
+% cmyk color
+\textcolor[cmyk]{1,0,0,0}{CMYK cyan}
+
+% Defining a name for a custom color and using it.
+\definecolor{darkblue}{RGB}{0,0,102}
+\textcolor{darkblue}{This is dark blue text}
+
+% Defining a command for a custom color and using it.
+\newcommand{\important}[1]{\textcolor{red}{#1}} % in preamble section
+This is a \important{serious issue!}.
+
+% Setting the default color for all the text remaining in a block.
+\begin{center}
+  \color{purple}
+  one
+  two
+  three
+\end{center}
+
+% Rendering text in a box with a colored background.
+\colorbox{yellow}{Text with yellow background}
+
+% Rendering text in a box with a colored border and a colored background.
+\fcolorbox{red}{lightgray}{Red-bordered box with gray background and black text}
 ```
 
 ## Paragraphs
