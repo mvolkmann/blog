@@ -120,7 +120,7 @@ Hello
 
 LaTeX documents consist of a sequence of commands and content.
 The commands before `\begin{document}` are referred to as the preamble.
-They do the following:
+These commands:
 
 - describe the class of document being created
 - import packages which provide support for addition commands
