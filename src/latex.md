@@ -154,6 +154,47 @@ Options for `\documentclass{some-class}` include:
 
 See the video tutorial at https://www.youtube.com/watch?v=ydOTMQC7np0!
 
+## Page Numbers
+
+Many document classes such as `article`, `book`, and `report`
+include page numbers by default.
+To suppress the page numbers,
+add one of the following commands in the preamble:
+
+```latex
+\pagestyle{empty}
+\pagenumbering{gobble}
+```
+
+The `\pagenumbering` command can also specify the following values
+to use a particular kind of page numbering:
+
+- `arabic`: 1, 2, 3, ...
+- `alph`: a, b, c, ...
+- `Alph`: A, B, C, ...
+- `roman`: i, ii, iii, ...
+- `Roman`: I, II, III, ...
+
+Each chapter or section can change the page numbering style
+and restart page numbering from one.
+In the following example,
+the preface page numbers use lowercase roman numerals and
+the chapters that follow use Arabic numbers.
+
+```latex
+\newpage
+\chapter{Preface}
+\pagenumbering{roman}
+
+preface content goes here
+
+\newpage
+\chapter{Getting Started}
+\pagenumbering{arabic}
+
+getting started content goes here
+```
+
 ## Comments
 
 Single-line comments begin with `%` and extend to the end of the line.
@@ -495,12 +536,38 @@ The `\url` command renders the URL.
 The `\href` command renders alternate text instead of the URL.
 For example:
 
-````latex
+```latex
 \usepackage{hyperref}
 ...
 \url{https://mvolkmann.github.io/blog/}
 
 \href{https://mvolkmann.github.io/blog/}{My Blog}
+```
+
+## Images
+
+To include images, use the `graphicx` package
+and the `\includegraphics` command.
+
+The `float` package is required in order to use the "H" option
+which keeps the graphic "here" meaning where it occurs in the document flow.
+Without that the compiler can choose another location for the image
+that it deems better.
+
+Surrounding the image with a "figure" enables adding a caption
+which will be automatically numbered along with other figures
+and can be placed above or below the image.
+
+For example:
+
+```latex
+\usepackage{float, graphicx}
+...
+\begin{figure}[H]
+\centering % horizontally centers image (caption always is centered)
+\includegraphics[width=3in]{Smalltalk-balloon}
+\caption{Smalltalk Programming}
+\end{figure}
 ```
 
 ## Dots
@@ -522,7 +589,7 @@ $ 2, 3, \ldots, 10 $ \\ % lower horizontal dots
 $ 3 \cdots 10 $ \\ % vertically centered horizontal dots
 $ 4~ \vdots ~10 $ \\ % vertical dots; ~ ("tie") and is like &nbsp; in HTML
 $ 5 \ddots 10 $ \\ % diagonal dots
-````
+```
 
 ## Tables
 
