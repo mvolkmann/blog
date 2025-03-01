@@ -719,6 +719,51 @@ Inline math mode content is delimited by single `$` characters.
 Display math mode content which appears on its on line, centered by default,
 is delimited by double `$$` characters.
 
+## Macros
+
+Macros make it unnecessary to repeat
+commonly used content and sequences of commands.
+
+The `\def` command is a TeX primitive.
+
+The `\newcommand` command is a LaTeX command that uses `\def`.
+It adds checking whether a command being defined already exists.
+It also adds support for optional arguments.
+
+Here's an example of defining a macro using `\def`
+which just inserts some static text.
+
+```latex
+\def\email{someone@gmail.com}
+```
+
+To use this, add `\email` everywhere that content should be inserted.
+
+Here's an example of defining a macro using `\newcommand`.
+The command being defined is `\image` and it takes three arguments.
+The arguments are inserted where `#1`, `#2`, and `#3` appear.
+
+```latex
+\newcommand{\image}[3]{
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=#2]{#1}
+    \caption{#3}
+  \end{figure}
+}
+```
+
+To use this, add `\image` followed by the three arguments,
+each in their own pair of curly braces.
+For example:
+
+```latex
+\image{smalltalk-balloon}{3in}{Smalltalk Programming}
+```
+
+This greatly simplies adding images in a document
+as long as all should be centered and have a caption.
+
 ## Formatting the Word LaTeX
 
 The word LaTeX is specially formatted by surrounding it with backslashes.
