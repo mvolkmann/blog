@@ -764,6 +764,77 @@ For example:
 This greatly simplies adding images in a document
 as long as all should be centered and have a caption.
 
+## Document Title, Author, and Date
+
+The preamble can used the `\title`, `\author`, and `\date` commands to
+specify information that will be used in a nicely formatted document title.
+For example:
+
+```latex
+\documentclass{article}
+\title{Server-Driven Web Apps with htmx}
+\author{R. Mark Volkmann}
+\date{\today}
+```
+
+Use the `\maketitle` command inside the document to render the title information.
+For example:
+
+```latex
+\begin{document}
+\tableofcontents
+...
+\end{document}
+```
+
+## Table of Contents
+
+A table of contents can be generated for documents that use the
+`\chapter`, `\section`, '\subsection`, and `\subsubsection` commands.
+For example:
+
+```latex
+\documentclass{article}
+\title{Server-Driven Web Apps with htmx}
+\author{R. Mark Volkmann}
+\date{\today}
+
+\begin{document}
+\tableofcontents
+\maketitle
+
+\section{Jumping In}
+...
+\subsection{Choosing a Tech Stack}
+...
+\subsection{Using htmx Attributes}
+...
+\subsection{Creating Your First Project}
+...
+\section{Exploring Server Options}
+...
+\subsection{Making the Grade}
+...
+\subsection{Popular Choices}
+...
+\subsection{Our Choice}
+...
+\section{Developing Endpoints}
+...
+\subsection{HTTP Requests}
+...
+\subsection{HTTP Responses}
+...
+\subsection{Endpoint Targets}
+...
+\end{document}
+```
+
+This generates the following table of contents:
+
+<img alt="LaTeX table of contents" style="width: 60%"
+  src="/blog/assets/latex-table-of-contents.png?v={{pkg.version}}">
+
 ## Formatting the Word LaTeX
 
 The word LaTeX is specially formatted by surrounding it with backslashes.
