@@ -575,6 +575,8 @@ Perl, PHP, Python, R, Ruby, Rust, Scheme, SQL, and Swift.
 It can also render many markup languages including
 CSS, HTML, JSON, LaTeXTeX, XML, and YAML.
 
+See the `\lstdefinelanguage` command that adds support for more languages.
+
 For example:
 
 <img alt="LaTeX listings" style="width: 80%"
@@ -582,9 +584,10 @@ For example:
 
 ```latex
 \usepackage{listings}
+\usepackage[dvipsnames]{xcolor} % dvipsnames gives 68 more predefined colors.
 ...
-\lstset{numbers=left}
-\begin{lstlisting}[frame=single, language=Python]
+\lstset{backgroundcolor=\color{Apricot}, numbers=left}
+\begin{lstlisting}[caption={Hello World code}, frame=single, frameround=tttt, language=Python]
   def hello():
       print("Hello, World!")
 
