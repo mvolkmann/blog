@@ -123,7 +123,7 @@ The commands before `\begin{document}` are referred to as the preamble.
 These commands:
 
 - describe the class of document being created
-- import packages which provide support for addition commands
+- import packages which provide support for additional commands
 - configure document-wide formatting
 
 Commands have the syntax `\name[options]{content}`,
@@ -167,6 +167,42 @@ Options for `\documentclass{some-class}` include:
 - `slides` for presentations, but `beamer` is preferred
 
 See the video tutorial at https://www.youtube.com/watch?v=ydOTMQC7np0!
+
+## Packages
+
+Packages can add support for additional commands.
+They can also modify default settings that affect how documents are rendered.
+
+To import a package, use the `\usepackage` command.
+This can take a set of optional arguments in square brackets.
+It also takes a comma-separated list of package names in curly braces.
+For example:
+
+```latex
+\usepackage{amsfonts, amsmath, amsthm, amssymb}
+\usepackage{float, graphicx}
+\usepackage{hyperref}
+```
+
+### Popular Packages
+
+Documentation on all LaTeX packages can be found at
+<a href="https://ctan.org/pkg" target="_blank">
+Comprehensive TEX Archive Network</a> (CTAN).
+
+| Package  | Description                                                                      |
+| -------- | -------------------------------------------------------------------------------- |
+| amsfonts | adds fonts for use in mathematics                                                |
+| amsmath  | adds commands for rendering mathematical formulas                                |
+| amssymb  | adds commands for additional mathematical symbols                                |
+| comment  | adds support for multi-line comments                                             |
+| fancyhdr | adds commands to configure page headers and footers                              |
+| float    | improves the ability to control the placement of objects like figures and tables |
+| geometry | adjusts page margins, page size, and layout                                      |
+| graphicx | builds on the graphic package to enhance support for graphics                    |
+| hyperref | adds commands to create clickable hyperlinks                                     |
+| listings | adds commands to typeset programming language source code                        |
+| xcolor   | adds commands to change the color of text                                        |
 
 ## Portrait vs. Landscape
 
@@ -530,6 +566,32 @@ For example:
 \end{itemize}
 ```
 
+## Code Listings
+
+The `listings` package renders programming code source code.
+It can render code in many programming languages including
+Bash, C, C++, Go, Haskell, Java, JavaScript, Lisp, Lua, Matlab,
+Perl, PHP, Python, R, Ruby, Rust, Scheme, SQL, and Swift.
+It can also render many markup languages including
+CSS, HTML, JSON, LaTeXTeX, XML, and YAML.
+
+For example:
+
+<img alt="LaTeX listings" style="width: 80%"
+  src="/blog/assets/latex-listings.png?v={{pkg.version}}">
+
+```latex
+\usepackage{listings}
+...
+\lstset{numbers=left}
+\begin{lstlisting}[frame=single, language=Python]
+  def hello():
+      print("Hello, World!")
+
+  hello()
+\end{lstlisting}
+```
+
 ## Sections
 
 Documents can have up to seven levels of sections,
@@ -596,6 +658,8 @@ To include images, use the `graphicx` package.
 Use the `\includegraphics` command, specifying a file name.
 It is not necessary to include the file extension.
 The image file must reside in the same directory as the `.tex` file.
+The supported image formats include JPEG (.jpg or .jpeg),
+PNG (.png), and PDF (.pdf).
 
 The `float` package is required in order to use the "H" option
 which keeps the graphic "here" meaning where it occurs in the document flow.
@@ -886,5 +950,5 @@ For example, `\LaTeX\` is rendered as follows:
 
 - {% aTargetBlank "https://latexref.xyz",
   "LaTeX2e: An unoffical reference manual" %}
-- {% aTargetBlank "https://ctan.org/pkg/catalogue?lang=en", "CTAN" %}
+- {% aTargetBlank "https://ctan.org/", "CTAN" %}
   Comprehensive TeX Archive Network
