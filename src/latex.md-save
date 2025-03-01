@@ -743,8 +743,6 @@ Here's an example of defining a macro using `\newcommand`.
 The command being defined is `\image` and it takes three arguments.
 The arguments are inserted where `#1`, `#2`, and `#3` appear.
 
-{% raw %}
-
 ```latex
 \newcommand{\image}[3]{
   \begin{figure}[H]
@@ -754,8 +752,6 @@ The arguments are inserted where `#1`, `#2`, and `#3` appear.
   \end{figure}
 }
 ```
-
-{% endraw %}
 
 To use this, add `\image` followed by the three arguments,
 each in their own pair of curly braces.
@@ -786,15 +782,10 @@ For example:
 
 ```latex
 \begin{document}
-\maketitle
+\tableofcontents
 ...
 \end{document}
 ```
-
-This renders the following title information:
-
-<img alt="LaTeX maketitle output" style="width: 50%"
-  src="/blog/assets/latex-maketitle.png?v={{pkg.version}}">
 
 ## Table of Contents
 
@@ -804,9 +795,13 @@ For example:
 
 ```latex
 \documentclass{article}
+\title{Server-Driven Web Apps with htmx}
+\author{R. Mark Volkmann}
+\date{\today}
 
 \begin{document}
 \tableofcontents
+\maketitle
 
 \section{Jumping In}
 ...
@@ -837,7 +832,7 @@ For example:
 
 This generates the following table of contents:
 
-<img alt="LaTeX table of contents" style="width: 80%"
+<img alt="LaTeX table of contents" style="width: 60%"
   src="/blog/assets/latex-table-of-contents.png?v={{pkg.version}}">
 
 ## Formatting the Word LaTeX
