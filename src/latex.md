@@ -340,9 +340,12 @@ So they loaded up the truck and moved to Beverly.
 
 ## Paragraphs
 
-Paragraphs are separated by blank lines.
+Paragraphs are separated by blank lines which introduce "hard returns".
+
 By default, the first line in each paragraph will be indented
-and there will be no extra space separating the pargraphs.
+(except for the first paragraph in each chapter or section).
+And there will be no extra space separating the pargraphs,
+despite having a blank line between them in the `.tex` file.
 
 To opt for not indenting the first line of each paragraph and
 instead add vertical space between them, add `\usepackage(parskip)`.
@@ -364,7 +367,8 @@ To customize the vertical space between paragraphs:
 The LaTeX compiler typically removes extra spaces as it sees fit.
 To force a space to be retained, use `\,`.
 
-To add a single newline after a line, add `\\` at its end.
+To add a single newline after a line, add `\\` at its end,
+which introduces a "soft return".
 
 To add a page break, insert the command `\newpage` or `\pagebreak`.
 
