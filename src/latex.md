@@ -381,6 +381,16 @@ So they loaded up the truck and moved to Beverly.
 ## Colors
 
 The `color` package provides basic support the changing text color.
+
+```latex
+\usepackage{color}
+...
+% Change text color within a group
+{\color{red} This text will be red.}
+% Or with a command
+\textcolor{blue}{This text will be blue.}
+```
+
 The `xcolor` package provides more features and color models
 than the `color` package and is recommended.
 
@@ -391,6 +401,9 @@ The following commands provide several examples
 of rendering text in a specific color:
 
 ```latex
+\usepackage[dvipsnames]{xcolor} % dvipsnames gives 68 more predefined colors.
+...
+
 % Using a color name from a small set.
 \textcolor{red}{This is red.}
 
