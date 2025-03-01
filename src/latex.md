@@ -168,6 +168,31 @@ Options for `\documentclass{some-class}` include:
 
 See the video tutorial at https://www.youtube.com/watch?v=ydOTMQC7np0!
 
+## Portrait vs. Landscape
+
+By default all pages will be in portrait mode.
+To cause all pages to use landscape mode, use the geometry package.
+For example:
+
+```latex
+\usepackage[letterpaper,landscape]{geometry}
+```
+
+To cause a specific page to use landscape mode, use the lscape package.
+For example:
+
+```latex
+\usepackage{lscape}
+...
+\begin{document}
+...
+\begin{landscape}
+...
+\end{landscape}
+...
+\end{document}
+```
+
 ## Page Numbers
 
 Many document classes such as `article`, `book`, and `report`
@@ -662,6 +687,11 @@ The following example creates a table describing dogs.
   \hline
 \end{tabular}
 ```
+
+TODO: Add an example where you surround a tabular with `\begin{table}`...`\end{table|`.
+This allows the table to be moved to a suitable location and it numbers the tables.
+Use `[H]` with the float package (described in the Images section)
+to prevent a table from being moved.
 
 ## Greek Letters
 
