@@ -866,6 +866,9 @@ $$ a \left(\frac{b + 1}{c + 2}\right) $$
 To align equal signs when showing the solution to an equation,
 use the `amsmath` package, wrap the steps in an `align` environment,
 preceded each `=` with `&`, and end each line with `\\`.
+The steps will be numbered by default.
+To prevent numbering, use `align*` instead of `align`.
+
 For example:
 
 <img alt="LaTeX equation equals align" style="width: 50%"
