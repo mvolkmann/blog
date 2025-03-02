@@ -831,6 +831,18 @@ given acceleration due to gravity of $g$ (9.8 $m/s^2$ on Earth).
 $$ v = \frac{1}{2} g t^2 $$
 ```
 
+All roots, square and otherwise, are rendered with the `\sqrt` command.
+For example:
+
+<img alt="LaTeX math roots" style="width: 25%"
+  src="/blog/assets/latex-math-roots.png?v={{pkg.version}}">
+
+```latex
+$$ \sqrt{25} = 5 $$
+$$ \sqrt[3]{8} = 2 $$
+$$ x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$
+```
+
 The following are additional examples of using math mode:
 
 <img alt="LaTeX more math mode" style="width: 18%"
