@@ -927,10 +927,39 @@ The following example creates a table describing dogs.
 \end{tabular}
 ```
 
-TODO: Add an example where you surround a tabular with `\begin{table}`...`\end{table|`.
-This allows the table to be moved to a suitable location and it numbers the tables.
-Use `[H]` with the float package (described in the Images section)
-to prevent a table from being moved.
+The LaTeX compiler can place a table somewhere else in the content flow
+if it decides that it fits better in another location.
+To prevent this, use the `float` package and add the option
+`h` (place here if possible) or `H` (absolutely place here).
+
+The command `\def\arraystretch` adds padding to table cells.
+
+For example:
+
+<img alt="LaTeX table with padding" style="width: 50%"
+  src="/blog/assets/latex-table-with-padding.png?v={{pkg.version}}">
+
+```latex
+\usepackage{float}
+...
+\begin{table}[H] % absolutely positions table here
+  \centering % centers table on page
+  \def\arraystretch{2} % adds padding inside cells
+  \begin{tabular}{|l|l|c|}
+    \hline
+    Name & Breed & Age \\
+    \hline\hline
+    Comet & Whippet & 4 \\
+    \hline
+    Greta & German Shorthaired Poiner & 1 \\
+    \hline
+    Oscar & Lab mix & 7 \\
+    \hline
+    Ramsay & Native American Indian Dog & 8 \\
+    \hline
+  \end{tabular}
+\end{table}
+```
 
 ## Greek Letters
 
