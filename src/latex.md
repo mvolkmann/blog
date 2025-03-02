@@ -802,7 +802,7 @@ are specified in their own pair of curly braces.
 
 For example:
 
-<img alt="LaTeX inline fractions" style="width: 70%"
+<img alt="LaTeX inline fractions" style="width: 60%"
   src="/blog/assets/latex-inline-fractions.png?v={{pkg.version}}">
 
 ```latex
