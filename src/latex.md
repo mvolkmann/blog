@@ -400,6 +400,8 @@ cmy, cmyk, gray, Gray, HSB, hsb, HTML, natural, rgb, and RGB.
 The following commands provide several examples
 of rendering text in a specific color:
 
+{% raw %}
+
 ```latex
 \usepackage[dvipsnames]{xcolor} % dvipsnames gives 68 more predefined colors.
 ...
@@ -438,6 +440,8 @@ This is a \important{serious issue!}.
 % Rendering text in a box with a colored border and a colored background.
 \fcolorbox{red}{lightgray}{Red-bordered box with gray background and black text}
 ```
+
+{% endraw %}
 
 ## Paragraphs
 
