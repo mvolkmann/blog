@@ -786,11 +786,25 @@ For example:
 <img alt="LaTeX inline math mode" style="width: 70%"
   src="/blog/assets/latex-inline-math-mode.png?v={{pkg.version}}">
 
+{% raw %}
+
 ```latex
 {\large
   The Pythagorean theorem states that
   for a triangle with sides of length $a$ and $b$
   and hypotenuse of length $c$, $a^2 + b^2 = c^2$.
+}
+```
+
+Fractions are rendered using the `\frac` (small) and `\dfrac` (large) commands.
+For example:
+
+<img alt="LaTeX inline fractions" style="width: 70%"
+  src="/blog/assets/latex-inline-fractions.png?v={{pkg.version}}">
+
+```latex
+{\large
+Inline fractions can be small like $\frac{x}{y}$ or large like $\dfrac{x}{y}$.
 }
 ```
 
@@ -814,7 +828,26 @@ To use display math mode, surround content by double dollar signs.
 }
 ```
 
-TODO: Add content here!
+The following are additional examples of using math mode:
+
+<img alt="LaTeX more math mode" style="width: 20%"
+  src="/blog/assets/latex-more-math-mode.png?v={{pkg.version}}">
+
+```latex
+{\large
+  $$ 3x^{2} $$ % single-character exponent
+  $$ 3x^{12} $$ % exponent must be in curly braces if more than one character
+  $$ 3x^{2x - 4} $$ % more complex exponent
+  $$ 3x^{y^z} $$ % multiple levels of exponents
+  $$ 3x^{2x^5 - 4} $$ % more complex multiple levels of exponents
+  $$ y_1 $$ % single-character subscript
+  $$ y_{12} $$ % multiple-character subscript
+  $$ y_{1_2} $$ % multiple levels of subscripts
+  $$ x_0, x_1, \ldots, x_n $$ % sequence of subscripted variables with ellipsis
+}
+```
+
+{% endraw %}
 
 ## Dots
 
