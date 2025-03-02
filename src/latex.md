@@ -797,6 +797,11 @@ For example:
 ```
 
 Fractions are rendered using the `\frac` (small) and `\dfrac` (large) commands.
+When in display mode (inside double dollar signs), both are rendered large,
+so `\dfrac` is only needed in inline math mode.
+For both commands, the numerator and denominator
+are specified in their own pair of curly braces.
+
 For example:
 
 <img alt="LaTeX inline fractions" style="width: 70%"
@@ -835,6 +840,7 @@ The following are additional examples of using math mode:
 
 ```latex
 {\large
+  $$ \frac{a}{b + \frac{c}{d}} $$ % nested fractions
   $$ 3x^{2} $$ % single-character exponent
   $$ 3x^{12} $$ % exponent must be in curly braces if more than one character
   $$ 3x^{2x - 4} $$ % more complex exponent
