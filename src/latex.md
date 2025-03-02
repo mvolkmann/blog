@@ -131,6 +131,9 @@ Hello
 
 The `\begin` command starts a new "environment"
 and must be paired with a corresponding `end` command.
+The name of the environment as an argument in a pair of curly braces.
+Some environments take additional arguments
+that are specified in additional pairs of curly braces.
 
 LaTeX documents consist of a sequence of commands and content.
 The commands before `\begin{document}` are referred to as the preamble
@@ -142,7 +145,7 @@ These commands:
 - configure document-wide formatting
 
 All commands begin with a backslash and a name.
-Command names area case-sensitive and consist of letters,
+Command names are case-sensitive and consist of letters,
 not numbers or other special characters.
 
 Some commands are followed by required arguments
@@ -155,7 +158,24 @@ inside a single pair of square brackets.
 Usually the optional arguments appear before the required arguments,
 but sometimes they appear after them.
 
-The content must be surrounded by `\begin{document}` and `\end{document}`.
+The entire content of a document must be surrounded by
+`\begin{document}` and `\end{document}`.
+
+A command group is defined by a pair of curly braces
+and limits the scope of a command
+so it only affects the content inside the group.
+For example, the following causes all the text rendered inside the group
+to in a huge font.
+
+```latex
+{\huge
+  ...
+}
+```
+
+Many commands support a "star variant" that affects its behavior.
+For example, `\chapter{some name}` starts a new, numbered chapter
+and `\chapter*{some name}` starts a new, unnumbered chapter.
 
 A `.tex` file can include other `.tex` files.
 This enables breaking a large document into smaller documents
