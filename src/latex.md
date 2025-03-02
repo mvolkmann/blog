@@ -824,11 +824,11 @@ The Pythagorean theorem states that
 for a triangle with sides of length $a$ and $b$
 and hypotenuse of length $c$, $a^2 + b^2 = c^2$.
 
-The following is the formula calculates
-the distance $y$ that an object will fall over time $t$
+The following is the formula calculates the velocity $v$
+that an object will be travelling after falling over time $t$
 given acceleration due to gravity of $g$ (9.8 $m/s^2$ on Earth).
 
-$$ y = \frac{1}{2} g t^2 $$
+$$ v = \frac{1}{2} g t^2 $$
 ```
 
 The following are additional examples of using math mode:
