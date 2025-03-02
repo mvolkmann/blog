@@ -129,18 +129,20 @@ Hello
 \end{document}
 ```
 
+The `\begin` command starts a new "environment"
+and must be paired with a corresponding `end` command.
+
 LaTeX documents consist of a sequence of commands and content.
-The commands before `\begin{document}` are referred to as the preamble.
+The commands before `\begin{document}` are referred to as the preamble
+and must begin with `\documentclass{some-class}`.
 These commands:
 
 - describe the class of document being created
 - import packages which provide support for additional commands
 - configure document-wide formatting
 
-Commands have the syntax `\name[options]{content}`,
+Commands have the syntax `\name[optional-arguments]{required-arguments}`,
 but some commands do not support options and/or content.
-
-The first command must be `\documentclass{some-class}`.
 
 The content must be surrounded by `\begin{document}` and `\end{document}`.
 
@@ -152,7 +154,7 @@ or the `\begin{document}` and `\end{document}` commands.
 For example:
 
 ```latex
-\input{other-file-name}
+\include{other-file-name}
 ```
 
 This will include the contents of the file named `other-file-name.tex`
@@ -165,7 +167,7 @@ Document classes change the default formatting and add support for new commands.
 Options for `\documentclass{some-class}` include:
 
 - `article` supports sections and subsections, but not chapters
-- `beamer` for presentations
+- `beamer` for slide presentations
 - `book` supports a title page, abstract, table of contents, chapters, and bibliography
 - `exam` for lists of questions
 - `leaflet`
@@ -175,7 +177,7 @@ Options for `\documentclass{some-class}` include:
 - `paper`
 - `proc` for proceedings; based on the `article` class
 - `report` for documents with chapters
-- `slides` for presentations, but `beamer` is preferred
+- `slides` for slide presentations, but `beamer` is preferred
 
 See the video tutorial at https://www.youtube.com/watch?v=ydOTMQC7np0!
 
@@ -737,6 +739,28 @@ For example:
 \href{https://mvolkmann.github.io/blog/}{My Blog}
 ```
 
+## Verbatim Text
+
+Text can be rendered verbatim to avoid
+interpreting anything in it as LaTeX commands.
+
+For short text, use the `\verb` command
+with the text delimited by vertical bars (pipes).
+For example:
+
+```latex
+\verb|This text will be rendered verbatim|
+```
+
+For long text, use a `verbatim` environment.
+For example:
+
+```latex
+\begin{verbatim}
+This text will be rendered verbatim.
+\end{verbatim}
+```
+
 ## Images
 
 To include images, use the `graphicx` package.
@@ -830,6 +854,17 @@ given acceleration due to gravity of $g$ (9.8 $m/s^2$ on Earth).
 
 $$ v = \frac{1}{2} g t^2 $$
 ```
+
+A vertically centered dot represents multiplication and can add clarity.
+In the expression $ 2xy^2 $ it is clear that
+$2$, $x$, and $y^2$ are to be multiplied.
+In this case adding dots between the terms doesn't add clarity.
+On the other hand, $23$ represents a single number, not multiplying $2$ and $3$.
+In this case it is appropriate to write \verb|$2 \cdot 3|
+which is rendered as follows:
+
+<img alt="LaTeX cdot command" style="width: 7%"
+  src="/blog/assets/latex-cdot-command.png?v={{pkg.version}}">
 
 All roots, square and otherwise, are rendered with the `\sqrt` command.
 For example:
