@@ -12,14 +12,19 @@ layout: topic-layout.njk
 
 ## Overview
 
+TeX is a low-level typesetting system created by Donald Knuth
+in 1978 at Stanford University.
+The "X" at the end is actually the Greek letter chi.
+That is why TeX is pronounced "tech" and not "tex".
+
 {% aTargetBlank "https://www.latex-project.org", "LaTeX" %} is a
-document preparation system and markup language used for
-creating high-quality documents, especially those containing
-mathematical formulas, scientific notations, and structured content.
+high-level typesetting system built on TeX.
+It was created by Leslie Lamport in 1984.
+LaTeX is widely used in academia for publication of
+techical articles, papers, and books.
 
 LaTeX is pronounced "Lah-tech" or "Lay-tech".
-The "X" at the end is actually the Greek letter chi.
-That is why it is not pronounced the same as "latex", the substance
+It is not pronounced the same as "latex", the substance
 that comes from trees and plants which is used to produce rubber.
 
 ## Installing
@@ -856,6 +861,23 @@ without and with those commands.
 ```latex
 $$ a (\frac{b + 1}{c + 2}) $$
 $$ a \left(\frac{b + 1}{c + 2}\right) $$
+```
+
+To align equal signs when showing the solution to an equation,
+use the `amsmath` package, wrap the steps in an `align` environment,
+preceded each `=` with `&`, and end each line with `\\`.
+For example:
+
+<img alt="LaTeX equals align" style="width: 30%"
+  src="/blog/assets/latex-equals-align.png?v={{pkg.version}}">
+
+```latex
+\begin{align}
+2x^2 &= 13x - 6 \\
+2x^2 - 13x + 6 &= 0 \\
+(2x - 1)(x - 6) &= 0 \\
+x &= 1/2 \,or\, 6
+\end{align}
 ```
 
 {% endraw %}
