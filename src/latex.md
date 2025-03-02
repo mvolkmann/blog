@@ -937,6 +937,8 @@ The command `\def\arraystretch` adds padding to table cells.
 
 The `\caption` command adds a caption above or below a table
 based on its placement in the flow.
+The caption will be automatically numbered by default.
+To prevent numbering, use the `caption` package and the `\caption*` command.
 
 For example:
 
@@ -963,6 +965,27 @@ For example:
     \hline
   \end{tabular}
   \caption{Dogs in my family}
+\end{table}
+```
+
+Text in a table cell can contain paragraphs of text that wrap to multiple lines.
+For example:
+
+<img alt="LaTeX table with paragraphs" style="width: 50%"
+  src="/blog/assets/latex-table-paragraphs.png?v={{pkg.version}}">
+
+```latex
+\begin{table}[H]
+  \def\arraystretch{1.5} % adds padding inside cells
+  \begin{tabular}{|l|p{3in}|} % note use of p with a specified width
+    \hline
+    Sport & Definition \\
+    \hline\hline
+    ice hockey & a game played on ice between two teams of six skaters each, the object being to score goals by shooting a puck into the opponents' cage using a stick with a wooden blade set at an obtuse angle to the shaft. \\
+    \hline
+    basketball & a game played by two teams of usually five players each on a rectangular court having a raised basket or goal at each end, points being scored by tossing the ball through the opponent's basket. \\
+    \hline
+  \end{tabular}
 \end{table}
 ```
 
