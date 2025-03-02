@@ -141,8 +141,19 @@ These commands:
 - import packages which provide support for additional commands
 - configure document-wide formatting
 
-Commands have the syntax `\name[optional-arguments]{required-arguments}`,
-but some commands do not support options and/or content.
+All commands begin with a backslash and a name.
+Command names area case-sensitive and consist of letters,
+not numbers or other special characters.
+
+Some commands are followed by required arguments
+where each is contained in its own pair of curly braces.
+
+Some commands take optional arguments
+where each is contained in its own pair of square brackets.
+But sometimes all the optional arguments appear in a comma-separated list
+inside a single pair of square brackets.
+Usually the optional arguments appear before the required arguments,
+but sometimes they appear after them.
 
 The content must be surrounded by `\begin{document}` and `\end{document}`.
 
@@ -724,6 +735,7 @@ Subsubsections, paragraphs, and subparagraphs are not assigned numbers.
 
 To suppress numbering of a chapter, section, or subsection,
 include an asterisk at the end of its command name.
+This is commonly do for sections like a preface.
 When a table of contents is being generated,
 unnumbered chapters and section not appear in the table of contents.
 
