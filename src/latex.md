@@ -868,8 +868,8 @@ use the `amsmath` package, wrap the steps in an `align` environment,
 preceded each `=` with `&`, and end each line with `\\`.
 For example:
 
-<img alt="LaTeX equals align" style="width: 30%"
-  src="/blog/assets/latex-equals-align.png?v={{pkg.version}}">
+<img alt="LaTeX equation equals align" style="width: 50%"
+  src="/blog/assets/latex-equation-equals-align.png?v={{pkg.version}}">
 
 ```latex
 \begin{align}
