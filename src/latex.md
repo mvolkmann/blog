@@ -789,11 +789,9 @@ For example:
 {% raw %}
 
 ```latex
-{\large
-  The Pythagorean theorem states that
-  for a triangle with sides of length $a$ and $b$
-  and hypotenuse of length $c$, $a^2 + b^2 = c^2$.
-}
+The Pythagorean theorem states that
+for a triangle with sides of length $a$ and $b$
+and hypotenuse of length $c$, $a^2 + b^2 = c^2$.
 ```
 
 Fractions are rendered using the `\frac` (small) and `\dfrac` (large) commands.
@@ -808,9 +806,7 @@ For example:
   src="/blog/assets/latex-inline-fractions.png?v={{pkg.version}}">
 
 ```latex
-{\large
 Inline fractions can be small like $\frac{x}{y}$ or large like $\dfrac{x}{y}$.
-}
 ```
 
 To use display math mode, surround content by double dollar signs.
@@ -819,38 +815,47 @@ To use display math mode, surround content by double dollar signs.
   src="/blog/assets/latex-display-math-mode.png?v={{pkg.version}}">
 
 ```latex
-{\large
-  The Pythagorean theorem states that
-  for a triangle with sides of length $a$ and $b$
-  and hypotenuse of length $c$, $a^2 + b^2 = c^2$.
+The Pythagorean theorem states that
+for a triangle with sides of length $a$ and $b$
+and hypotenuse of length $c$, $a^2 + b^2 = c^2$.
 
-  The following is the formula calculates
-  the distance $y$ that an object will fall over time $t$
-  given acceleration due to gravity of $g$ (9.8 $m/s^2$ on Earth).
-  $$
-  y = \frac{1}{2} g t^2
-  $$
-}
+The following is the formula calculates
+the distance $y$ that an object will fall over time $t$
+given acceleration due to gravity of $g$ (9.8 $m/s^2$ on Earth).
+
+$$ y = \frac{1}{2} g t^2 $$
 ```
 
 The following are additional examples of using math mode:
 
-<img alt="LaTeX more math mode" style="width: 20%"
+<img alt="LaTeX more math mode" style="width: 18%"
   src="/blog/assets/latex-more-math-mode.png?v={{pkg.version}}">
 
 ```latex
-{\large
-  $$ \frac{a}{b + \frac{c}{d}} $$ % nested fractions
-  $$ 3x^{2} $$ % single-character exponent
-  $$ 3x^{12} $$ % exponent must be in curly braces if more than one character
-  $$ 3x^{2x - 4} $$ % more complex exponent
-  $$ 3x^{y^z} $$ % multiple levels of exponents
-  $$ 3x^{2x^5 - 4} $$ % more complex multiple levels of exponents
-  $$ y_1 $$ % single-character subscript
-  $$ y_{12} $$ % multiple-character subscript
-  $$ y_{1_2} $$ % multiple levels of subscripts
-  $$ x_0, x_1, \ldots, x_n $$ % sequence of subscripted variables with ellipsis
-}
+$$ \frac{a}{b + \frac{c}{d}} $$ % nested fractions
+$$ 3x^{2} $$ % single-character exponent
+$$ 3x^{12} $$ % exponent must be in curly braces if more than one character
+$$ 3x^{2x - 4} $$ % more complex exponent
+$$ 3x^{y^z} $$ % multiple levels of exponents
+$$ 3x^{2x^5 - 4} $$ % more complex multiple levels of exponents
+$$ y_1 $$ % single-character subscript
+$$ y_{12} $$ % multiple-character subscript
+$$ y_{1_2} $$ % multiple levels of subscripts
+$$ x_0, x_1, \ldots, x_n $$ % sequence of subscripted variables with ellipsis
+```
+
+The `\left` and `\right` commands are used to make grouping characters
+like parentheses, square brackets, curly braces, and vertical bars
+have a height that matches their content.
+The following example demonstrates what is rendered
+without and with those commands.
+
+<img alt="LaTeX \left and \right commands" style="width: 15%"
+  src="/blog/assets/latex-left-right-commands.png?v={{pkg.version}}">
+
+```latex
+$$ a (\frac{b + 1}{c + 2}) $$
+$$ a \left(\frac{b + 1}{c + 2}\right) $$
 ```
 
 {% endraw %}
