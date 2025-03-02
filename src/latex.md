@@ -148,7 +148,7 @@ The content must be surrounded by `\begin{document}` and `\end{document}`.
 
 A `.tex` file can include other `.tex` files.
 This enables breaking a large document into smaller documents
-that can be edited independently.
+that can be edited independently, such as each chapter of a book.
 The documents being included should not contain a preamble section
 or the `\begin{document}` and `\end{document}` commands.
 For example:
@@ -275,9 +275,13 @@ In the following example,
 the preface page numbers use lowercase roman numerals and
 the chapters that follow use Arabic numbers.
 
+The preface chapter is defined with the `\chapter*` below
+to avoid numbering it and make the cause first chapter
+defined with the `\chapter` command be considered the first chapter.
+
 ```latex
 \newpage
-\chapter{Preface}
+\chapter*{Preface}
 \pagenumbering{roman}
 
 preface content goes here
@@ -683,6 +687,9 @@ For example:
 
 Documents can have up to seven levels of sections,
 but not all of them are supported for every document class.
+For example, the `\chapter` command can be used in the document class `book`,
+but not in the document class `article`.
+
 The following example shows how to specify all seven levels.
 
 ```latex
@@ -713,7 +720,12 @@ include `\section`, `\subsection`, and `\subsubsection`.
 
 Parts, chapters, sections, and subsections are
 automatically assigned increasing numbers starting from 1.
-Subsubsecdtions, paragraphs, and subparagraphs are not assigned numbers.
+Subsubsections, paragraphs, and subparagraphs are not assigned numbers.
+
+To suppress numbering of a chapter, section, or subsection,
+include an asterisk at the end of its command name.
+When a table of contents is being generated,
+unnumbered chapters and section not appear in the table of contents.
 
 ## Horizontal Rules
 
@@ -863,7 +875,7 @@ On the other hand, $23$ represents a single number, not multiplying $2$ and $3$.
 In this case it is appropriate to write \verb|$2 \cdot 3|
 which is rendered as follows:
 
-<img alt="LaTeX cdot command" style="width: 7%"
+<img alt="LaTeX cdot command" style="width: 6%"
   src="/blog/assets/latex-cdot-command.png?v={{pkg.version}}">
 
 All roots, square and otherwise, are rendered with the `\sqrt` command.
