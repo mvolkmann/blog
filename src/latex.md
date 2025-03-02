@@ -4,6 +4,12 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+<style>
+  img {
+    border: 1px solid gray;
+  }
+</style>
+
 ## Overview
 
 {% aTargetBlank "https://www.latex-project.org", "LaTeX" %} is a
@@ -205,6 +211,8 @@ American Mathematical Society</a>.
 | geometry | adjusts page margins, page size, and layout                                      |
 | graphicx | builds on the graphic package to enhance support for graphics                    |
 | hyperref | adds commands to create clickable hyperlinks                                     |
+| inputenc | adds support for various input encodings like utf8                               |
+| lipsum   | generates Lorem Ipsum text for testing                                           |
 | listings | adds commands to typeset programming language source code                        |
 | xcolor   | adds commands to change the color of text                                        |
 
@@ -761,6 +769,53 @@ Any supported unit of measure can be used (ex. cm for centimeters).
 Alternatively we can specify the `height` (a measure like `width`)
 or `scale` (a number treated as a percentage).
 
+## Math
+
+Mathematical equations are specially formatted when in math mode.
+This includes making variables names italicized and
+properly formatting fractions, subscripts, supercripts, and more.
+
+There are two kinds of math mode, inline and display.
+Inline math mode renders mathematical text inline with other content.
+Display math mode renders mathematical text on its own line,
+separated from surrounding content and horizontally centered by default.
+
+To use inline math mode, surround content by single dollar signs.
+For example:
+
+<img alt="LaTeX inline math mode" style="width: 70%"
+  src="/blog/assets/latex-inline-math-mode.png?v={{pkg.version}}">
+
+```latex
+{\large
+  The Pythagorean theorem states that
+  for a triangle with sides of length $a$ and $b$
+  and hypotenuse of length $c$, $a^2 + b^2 = c^2$.
+}
+```
+
+To use display math mode, surround content by double dollar signs.
+
+<img alt="LaTeX display math mode" style="width: 70%"
+  src="/blog/assets/latex-display-math-mode.png?v={{pkg.version}}">
+
+```latex
+{\large
+  The Pythagorean theorem states that
+  for a triangle with sides of length $a$ and $b$
+  and hypotenuse of length $c$, $a^2 + b^2 = c^2$.
+
+  The following is the formula calculates
+  the distance $y$ that an object will fall over time $t$
+  given acceleration due to gravity of $g$ (9.8 $m/s^2$ on Earth).
+  $$
+  y = \frac{1}{2} g t^2
+  $$
+}
+```
+
+TODO: Add content here!
+
 ## Dots
 
 Dots are the ellipsis character rendered in different orientations.
@@ -880,6 +935,8 @@ Some of the supported symbols are shown in the table below:
 For more, see
 <a href="https://artofproblemsolving.com/wiki/index.php/LaTeX:Symbols"
 target="_blank">LaTeX:Symbols</a>.
+
+TODO: Are more symbols available if you use the package `amssymb`?
 
 ## Math Mode
 
