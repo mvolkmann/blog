@@ -929,15 +929,19 @@ The following example creates a table describing dogs.
 
 The LaTeX compiler can place a table somewhere else in the content flow
 if it decides that it fits better in another location.
-To prevent this, use the `float` package and add the option
+To prevent this, use the `float` package,
+wrap the `tabular` section in a `table` section, and add the option
 `h` (place here if possible) or `H` (absolutely place here).
 
 The command `\def\arraystretch` adds padding to table cells.
 
+The `\caption` command adds a caption above or below a table
+based on its placement in the flow.
+
 For example:
 
-<img alt="LaTeX table with padding" style="width: 50%"
-  src="/blog/assets/latex-table-with-padding.png?v={{pkg.version}}">
+<img alt="LaTeX tabular in table" style="width: 50%"
+  src="/blog/assets/latex-tabular-in-table.png?v={{pkg.version}}">
 
 ```latex
 \usepackage{float}
@@ -958,6 +962,7 @@ For example:
     Ramsay & Native American Indian Dog & 8 \\
     \hline
   \end{tabular}
+  \caption{Dogs in my family}
 \end{table}
 ```
 
