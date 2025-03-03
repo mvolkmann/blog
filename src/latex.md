@@ -38,13 +38,16 @@ Some pros of using LaTeX include:
   especially those that contain mathematical equations
 - allows users to focus on content while maintaining consistent formatting,
   such as automatic numbering of chapters, sections, figures, and tables
-- supports extensive customization through packages
+- supports extensive customization through thousands of packages
   and templates for various document types
-- supports generating a table of contents, bibligraphy, index,
-  footnotes, and cross-references
+- supports generating a table of contents, bibligraphy (with references),
+  index, and footnotes
 - scales to support large projects like books and theses
   by allowing documents to be split into multiple files
 - supports defining parameterized macros that reduce duplicated code
+- works in Windows, macOS, and Linux
+- free and open source
+- being text-based enables easy viewing of diffs in version control systems
 
 Some cons of using LaTeX include:
 
@@ -52,6 +55,7 @@ Some cons of using LaTeX include:
 - customizing layouts and formatting can be time-consuming
 - markup syntax must be compiled in order to view
   what will be rendered in the output PDF
+- error messages can by cryptic
 - creating tables and managing placement of images is cumbersome
   compared to many word processing applications
 - collaboration requires all contributes to have knowledge of LaTeX syntax
