@@ -1255,6 +1255,30 @@ only the first row is affected. Is this a bug?
 \end{tabular}
 ```
 
+Tables created with the `tabular` environment
+cannot span across page boundaries.
+The `longtable` package supports this and provides an option
+for the table headings and footers to be repeated on each page.
+For example:
+
+```latex
+\usepackage{longtable}
+...
+\begin{longtable}{|l|c|l|}
+  \hline
+  Description & Symbol & Command \\
+  \hline\hline
+  \endhead % marks the end of the heading rows
+  checkmark & $\checkmark$ & \verb|\checkmark| \\
+  circle & $\circ$ & \verb|\circ| \\
+  club suit & $\clubsuit$ & \verb|\clubsuit| \\
+  ...
+  \hline
+\end{longtable}
+```
+
+Also see the commands `\endfirsthead`, `\endlastfoot`, and `\endfoot`.
+
 ## Greek Letters
 
 Greek letters are produced using the following commands.
@@ -1294,16 +1318,20 @@ Latin letters are used for those.
 
 ## Symbols
 
-Some of the supported symbols are shown in the table below:
+Some of the supported symbols are shown in the table below.
+The `\ddots`, `\iddots`, and `\vdots` commands
+are defined in the `mathdots` package.
+The `\frownie` and `\smiley` commands
+are defined in the `wasysym` package.
 
-<img alt="LaTeX symbols" style="width: 65%"
-  src="/blog/assets/latex-symbols.png?v={{pkg.version}}">
+<img alt="LaTeX symbols part 1" style="width: 65%"
+  src="/blog/assets/latex-symbols1.png?v={{pkg.version}}">
+<img alt="LaTeX symbols part 2" style="width: 65%"
+  src="/blog/assets/latex-symbols2.png?v={{pkg.version}}">
 
 For more, see
 <a href="https://artofproblemsolving.com/wiki/index.php/LaTeX:Symbols"
 target="_blank">LaTeX:Symbols</a>.
-
-TODO: Are more symbols available if you use the package `amssymb`?
 
 ## Math Mode
 
