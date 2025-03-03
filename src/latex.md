@@ -30,6 +30,32 @@ that comes from trees and plants which is used to produce rubber.
 Both TeX and LaTeX are markup languages.
 Other commonly used markup languages include HTML, Markdown, SVG, and XML.
 
+## Pros and Cons
+
+Some pros of using LaTeX include:
+
+- provides high-quality typesetting for professional looking documents,
+  especially those that contain mathematical equations
+- allows users to focus on content while maintaining consistent formatting,
+  such as automatic numbering of chapters, sections, figures, and tables
+- supports extensive customization through packages
+  and templates for various document types
+- supports generating a table of contents, bibligraphy, index,
+  footnotes, and cross-references
+- scales to support large projects like books and theses
+  by allowing documents to be split into multiple files
+- supports defining parameterized macros that reduce duplicated code
+
+Some cons of using LaTeX include:
+
+- steep learning curve for its markup syntax
+- customizing layouts and formatting can be time-consuming
+- markup syntax must be compiled in order to view
+  what will be rendered in the output PDF
+- creating tables and managing placement of images is cumbersome
+  compared to many word processing applications
+- collaboration requires all contributes to have knowledge of LaTeX syntax
+
 ## Installing
 
 Generating PDF documents from LaTeX documents
