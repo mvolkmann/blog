@@ -866,10 +866,14 @@ For example:
 ```latex
 \usepackage{float, graphicx}
 ...
+% non-figure image - caption specified with an argument
+\includegraphics[width=3in]{Smalltalk-balloon}{Smalltalk Programming}
+...
+% figure image - caption specified in its own command
 \begin{figure}[H]
-\centering % horizontally centers image (caption always is centered)
-\includegraphics[width=3in]{Smalltalk-balloon}
-\caption{Smalltalk Programming}
+  \centering % horizontally centers image (caption always is centered)
+  \includegraphics[width=3in]{Smalltalk-balloon}
+  \caption{Smalltalk Programming}
 \end{figure}
 ```
 
@@ -877,8 +881,12 @@ In the example above we specified the image width.
 Any supported unit of measure can be used.
 These include `cm` (centimeters), `em` (width of M), `ex` (height of x),
 `in` (inches), and `pt` (points).
+
 To scale an image so its width matches that of the current text area,
 use `\textwidth` for the `width` value.
+This can be preceded by a percentage.
+For example, `[width=0.7\textwidth]`.
+
 To scale an image so its width matches that of the current line,
 use `\linewidth` for the `width` value.
 
