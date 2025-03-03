@@ -1343,6 +1343,53 @@ For example, `\LaTeX\` is rendered as follows:
 <img alt="LaTeX rendered" style="width: 10%"
   src="/blog/assets/latex-rendered.png?v={{pkg.version}}">
 
+## Bibliography
+
+To add a bibliography pages to a document:
+
+1. Create a `.bib` file, perhaps with the same name as
+   the `.tex` file that will use it.
+
+1. Add directives to the `.bib` file. For example:
+
+   ```text
+   @book{htmx-volkmann,
+     author = "Volkmann, R. Mark",
+     isbn = "9798888650769",
+     journal = "Pragmatic Bookshelf",
+     pages = "184",
+     publisher = "Pragmatic Bookshelf",
+     title = "Server-Driven Web Apps with Htmx",
+     url = "https://pragprog.com/titles/mvhtmx/server-driven-web-apps-with-htmx/",
+     year = "2024"
+   }
+   ```
+
+   Also see the directives @article, @inproceedings, and @misc.
+   Each of these have a different set of required attributes.
+
+1. Add the following commands near the bottom of the `.tex` file:
+
+   ```latex
+   \bibliographystyle{plain}
+   \bibliography{some-name} % refers to the file some-name.bib
+   ```
+
+   This causes bibliography pages similar to the following to be generated.
+
+   <img alt="LaTeX bibliography" style="width: 60%"
+     src="/blog/assets/latex-bibliography.png?v={{pkg.version}}">
+
+1. Add citations within the document that link to bibliography entries.
+   For example:
+
+   ```latex
+   Learn about using htmx to build web applications.\cite{htmx-volkmann}
+   ```
+
+   This adds a number in square brackets that acts a
+   clickable link to the corresponding bibliography entry.
+
 ## Slide Presentations
 
 LaTeX can create PDF-based slide presentations
