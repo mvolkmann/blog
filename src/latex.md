@@ -1311,11 +1311,15 @@ This renders the following title information:
 ## Table of Contents
 
 A table of contents can be generated for documents that use the
-`\chapter`, `\section`, '\subsection`, and `\subsubsection` commands.
+`\chapter`, `\section`, `\subsection`, and `\subsubsection` commands.
+If the package `hyperref` is included,
+the entries in the table of contents will be clickable links.
+
 For example:
 
 ```latex
 \documentclass{article}
+\usepackage{hyperref}
 
 \begin{document}
 \tableofcontents
