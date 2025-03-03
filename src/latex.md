@@ -164,7 +164,9 @@ Hello
 
 The `\begin` command starts a new "environment"
 and must be paired with a corresponding `end` command.
-The name of the environment as an argument in a pair of curly braces.
+The name of the environment is specified as
+an argument in a pair of curly braces.
+The content of all documents must be contained in a document environment.
 Some environments take additional arguments
 that are specified in additional pairs of curly braces.
 
@@ -1025,6 +1027,17 @@ x &= 1/2 \,or\, 6
 \end{align}
 ```
 
+The following examples demonstrate rendering limits, sums, and integrals:
+
+<img alt="LaTeX limits, sums, and integrals" style="width: 25%"
+  src="/blog/assets/latex-lim-sum-int.png?v={{pkg.version}}">
+
+```latex
+$$ \lim_{x \to \infty} \frac{1}{x^r} = 0, r \in \mathbb{Z^+} $$
+$$ \sum_{n=1}^\infty \frac{1}{n^2} = \frac{\pi^2}{6} $$
+$$ \int_0^\infty e^{-x^2} dx = \sqrt{\pi} $$
+```
+
 {% endraw %}
 
 ## Dots
@@ -1262,6 +1275,10 @@ For example:
 
 This greatly simplies adding images in a document
 as long as all should be centered and have a caption.
+
+The `ifthen` package adds commands that support conditional logic
+for choosing the text to render.
+This can be used anywhere in a document, including in macros.
 
 ## Document Title, Author, and Date
 
