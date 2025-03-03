@@ -844,9 +844,16 @@ For example:
 ```
 
 In the example above we specified the image width.
-Any supported unit of measure can be used (ex. cm for centimeters).
-Alternatively we can specify the `height` (a measure like `width`)
-or `scale` (a number treated as a percentage).
+Any supported unit of measure can be used.
+These include `cm` (centimeters), `em` (width of M), `ex` (height of x),
+`in` (inches), and `pt` (points).
+To scale an image so its width matches that of the current text area,
+use `\textwidth` for the `width` value.
+To scale an image so its width matches that of the current line,
+use `\linewidth` for the `width` value.
+
+Instead of specifying a `width`, a `height` (a measure like `width`)
+or `scale` (a number treated as a percentage) can be specified.
 
 ## Math
 
