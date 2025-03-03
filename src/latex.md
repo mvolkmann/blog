@@ -1187,7 +1187,7 @@ For example:
 Text in a table cell can contain paragraphs of text that wrap to multiple lines.
 For example:
 
-<img alt="LaTeX table with paragraphs" style="width: 50%"
+<img alt="LaTeX table with paragraphs" style="width: 70%"
   src="/blog/assets/latex-table-paragraphs.png?v={{pkg.version}}">
 
 ```latex
@@ -1203,6 +1203,56 @@ For example:
     \hline
   \end{tabular}
 \end{table}
+```
+
+The table below demonstrates the following:
+
+- cells that span multiple columns
+- cells that span multiple rows
+- cells that span both multiple columns and multiple rows
+
+The `\multicolumn` command does not require an additional package.
+
+The `\multirow` command is defined in the `multirow` package.
+
+The `\cellcolor` command is defined in the `colortbl` package
+and requires the `xcolor` package.
+When the `\cellcolor` command is applied to a cell that spans more than one row,
+only the first row is affected. Is this a bug?
+
+<img alt="LaTeX table with spans" style="width: 30%"
+  src="/blog/assets/latex-table-with-spans.png?v={{pkg.version}}">
+
+```latex
+\usepackage{colortbl, multirow, xcolor}
+...
+\def\arraystretch{1.5} % adds padding inside cells
+\begin{tabular}{|c|c|c|c|}
+  \hline
+  & A & B & C \\
+  \hline\hline
+  1 & \cellcolor{yellow} A1 & B1 & C1 \\
+  \hline
+
+  2 & A2 & \multicolumn{2}{c|}{B2 \& C2} \\
+  \hline
+
+  3 & \multirow{2}{*}{\cellcolor{yellow} A3 \& A4} & B3 & C3 \\
+  \cline{1-1} \cline{3-4} % Draw cell lines below cells 1, 3, and 4.
+
+  4 & & B4 & C4 \\
+  \hline
+
+  5 & A5 & \multicolumn{2}{c|}{
+    \multirow{2}{1.5cm}{
+      \cellcolor{yellow} B5, C5, B6, \& C6
+    }
+  } \\
+  \cline{1-2} % Draw cell lines below cells 1 and 2.
+
+  6 & A6 & \multicolumn{2}{c|}{} \\
+  \hline
+\end{tabular}
 ```
 
 ## Greek Letters
