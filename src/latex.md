@@ -1343,6 +1343,27 @@ For example, `\LaTeX\` is rendered as follows:
 <img alt="LaTeX rendered" style="width: 10%"
   src="/blog/assets/latex-rendered.png?v={{pkg.version}}">
 
+## Footnotes
+
+To add numbered footnotes, use the `\footnote` command.
+For example:
+
+```latex
+Oil that is, black gold, Texas tea.
+\footnote{Texas tea is another name for oil.}
+```
+
+This adds a section at the bottom for page like the following:
+
+<img alt="LaTeX footnote" style="width: 40%"
+src="/blog/assets/latex-footnote.png?v={{pkg.version}}">
+
+It also adds a number in square brackets like the following
+that acts a clickable link to the corresponding footnote.
+
+<img alt="LaTeX footnote number" style="width: 35%"
+src="/blog/assets/latex-footnote-number.png?v={{pkg.version}}">
+
 ## Bibliography
 
 To add a bibliography pages to a document:
