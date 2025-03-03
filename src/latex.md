@@ -493,6 +493,9 @@ This is a \important{serious issue!}.
 
 {% endraw %}
 
+For more colors, see
+<a href="https://latexcolor.com" target="_blank">LaTeX Color</a>.
+
 ## Paragraphs
 
 Paragraphs are separated by blank lines which introduce "hard returns".
@@ -1298,3 +1301,4 @@ For example, `\LaTeX\` is rendered as follows:
   "LaTeX2e: An unoffical reference manual" %}
 - {% aTargetBlank "https://ctan.org/", "CTAN" %}
   Comprehensive TeX Archive Network
+- <a href="https://latexcolor.com" target="_blank">LaTeX Color</a>
