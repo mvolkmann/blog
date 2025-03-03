@@ -34,10 +34,10 @@ Other commonly used markup languages include HTML, Markdown, SVG, and XML.
 
 Some pros of using LaTeX include:
 
-- provides high-quality typesetting for professional looking documents,
+- provides high-quality typesetting for professional looking PDF documents,
   especially those that contain mathematical equations
 - allows users to focus on content while maintaining consistent formatting,
-  such as automatic numbering of chapters, sections, figures, and tables
+  such as automatic numbering of pages, chapters, sections, figures, and tables
 - supports extensive customization through thousands of packages
   and templates for various document types
 - supports generating a table of contents, bibligraphy (with references),
@@ -77,33 +77,40 @@ One way to install mactex is to install Homebrew
 and then enter `brew install mactex`.
 This installs the following commands:
 
-| Command     | Description                                                       |
-| ----------- | ----------------------------------------------------------------- |
-| `pdflatex`  | compiles .tex files into PDF format                               |
-| `xelatex`   | like pdflatex, but supports system fonts and Unicode              |
-| `lualatex`  | uses Lua for advanced typesetting and scripting                   |
-| `latex`     | compiles .tex files into DVI (older format)                       |
-| `dvips`     | converts DVI files to PostScript                                  |
-| `dvipdfmx`  | converts DVI files to PDF                                         |
-| `bibtex`    | processes .bib files for bibliography references                  |
-| `biber`     | more powerful bibliography processor (alternative to bibtex)      |
-| `makeindex` | generates an index for documents                                  |
-| `tlmgr`     | TeX Live package manager (for installing/updating LaTeX packages) |
-| `kpsewhich` | searches for installed TeX files                                  |
-| `texhash`   | updates TeX's file database after installing packages             |
-| `latexmk`   | automates LaTeX compilation (runs multiple passes as needed)      |
+| Command     | Description                                                            |
+| ----------- | ---------------------------------------------------------------------- |
+| `pdflatex`  | compiles .tex files into PDF format                                    |
+| `xelatex`   | like pdflatex, but supports TrueType font, OpenType fonts, and Unicode |
+| `lualatex`  | like xelatex, but supports Lua scripting                               |
+| `latex`     | compiles .tex files into DVI (older format)                            |
+| `dvips`     | converts DVI files to PostScript                                       |
+| `dvipdfmx`  | converts DVI files to PDF                                              |
+| `bibtex`    | processes .bib files for bibliography references                       |
+| `biber`     | more powerful bibliography processor (alternative to bibtex)           |
+| `makeindex` | generates an index for documents                                       |
+| `tlmgr`     | TeX Live package manager (for installing/updating LaTeX packages)      |
+| `kpsewhich` | searches for installed TeX files                                       |
+| `texhash`   | updates TeX's file database after installing packages                  |
+| `latexmk`   | automates LaTeX compilation (runs multiple passes as needed)           |
 
 The most used commands are probably `pdflatex` and `xelatex`.
 
 To generate a `.pdf` file from a `.tex` file in a terminal window,
-run the following command:
+run one of the following commands:
 
 ```bash
 pdflatex {name}.tex
-open {name}.tex
+xelatex {name}.tex
+lualatex {name}.tex
 ```
 
-TeX editors will do this for you.
+Open the generated PDF document with the following command:
+
+```bash
+open {name}.pdf
+```
+
+TeX editors will handle both of these steps for you.
 
 ## Editors
 
@@ -462,6 +469,35 @@ So they loaded up the truck and moved to Beverly.
 
 }
 ```
+
+## TrueType and OpenType Fonts
+
+The shell command `pdflatex` only supports using Type1 and bitmap fonts,
+not TrueType or OpenType fonts.
+The shell cvommands `xelatex` and `lualatex`
+both support TrueType and OpenType fonts.
+
+To use those kinds of fonts:
+
+1. User the `fontspec` package.
+
+   ```latex
+   \usepackage{fontspec}
+   ```
+
+1. Specify the font to use with a relative file path
+   or the name of an installed font.
+
+   ```latex
+   \setmainfont{Pangolin-Regular.ttf} % relative file path.
+   \setmainfont{Apple Chancery} % installed font name
+   ```
+
+1. Use `xelatex` or `lualatex` instead of `pdflatex` to generate a PDF document.
+
+   ```bash
+   xelatex some-name.tex
+   ```
 
 ## Colors
 
