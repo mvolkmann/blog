@@ -27,6 +27,9 @@ LaTeX is pronounced "Lah-tech" or "Lay-tech".
 It is not pronounced the same as "latex", the substance
 that comes from trees and plants which is used to produce rubber.
 
+Both TeX and LaTeX are markup languages.
+Other commonly used markup languages include HTML, Markdown, SVG, and XML.
+
 ## Installing
 
 Generating PDF documents from LaTeX documents
@@ -1294,6 +1297,17 @@ For example, `\LaTeX\` is rendered as follows:
 
 <img alt="LaTeX rendered" style="width: 10%"
   src="/blog/assets/latex-rendered.png?v={{pkg.version}}">
+
+## Slide Presentations
+
+LaTeX can create PDF-based slide presentations
+using the "beamer" document class.
+See the following YouTube videos:
+
+- <a href="https://www.youtube.com/watch?v=rx7wwtmFlD8"
+  target="_blank">How I Make Presentations Using LaTeX & Beamer</a>
+- <a href="https://www.youtube.com/watch?v=0fsWGg81RwU"
+  target="_blank">LaTeX Tutorial 11: Beamer Slide Presentation</a>
 
 ## Resources
 
