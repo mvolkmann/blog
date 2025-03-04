@@ -970,14 +970,18 @@ To temporarily avoid rendering the content of files included with `\input`,
 comment out those lines.
 This will change the numbering of the chapters and sections that follow.
 
-## Location of Items
+## Figures
 
-By default, the compiler can choose to
-place items like images, tables and figures
-in a location other than where it appears in the `.tex` file
-if it determines that another location is preferable.
-The `float` package enables overriding the compiler,
-and is required in order to use the options for doing so.
+The `figure` environment creates floating content
+(meaning the compiler can choose its location)
+that typically includes graphical elements like images and diagrams.
+A caption can be added above or below the element.
+A label can be specified to enable adding references to the figure.
+
+By default, the compiler will choose the location of the element
+attempting to keep it near its specified location in the `.tex` file.
+The `float` package adds support for overriding the compiler
+with the following options:
 
 - The "h" option tells the compiler to place the item "here" if possible.
 - The "H" option tells the compiler to absolutely place the item "here".
@@ -985,7 +989,31 @@ and is required in order to use the options for doing so.
 - The "t" option moves the item to the top of the page.
 - The "b" option moves the item to the bottom of the page.
 
-The example in the "Images" section below demonstratees using the "H" option.
+The same options can be used to control the placement of tables.
+
+The following example renders an image that is scaled to be 3 inches wide.
+
+<img alt="LaTeX figure image" style="width: 50%"
+  src="/blog/assets/latex-figure-image.png?v={{pkg.version}}">
+
+```latex
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=3in]{smalltalk-balloon}
+  \caption{Smalltalk Programming}
+  \label{smalltalk-balloon}
+\end{figure}
+```
+
+Any number of references to this figure can occur elsewhere in the document.
+For example:
+
+<img alt="LaTeX figure reference" style="width: 50%"
+  src="/blog/assets/latex-figure-reference.png?v={{pkg.version}}">
+
+```latex
+My favorite programming language is Smalltalk\ref{smalltalk-balloon}.
+```
 
 ## Images
 
