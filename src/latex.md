@@ -1200,7 +1200,16 @@ $ 5 \ddots 10 $ \\ % diagonal dots
 
 ## Matrices
 
-Matrices with square brackets are rendered with a `bmatrix` environment.
+Matrices are rendered with matrix environment.
+These include the following:
+
+- `bmatrix`: square brackets
+- `Bmatrix`: curly braces
+- `matrix`: no brackets
+- `pmatrix`: parentheses
+- `vmatrix`: single vertical bars
+- `Vmatrix`: double vertical bars
+
 For example, the following is the formula for rotating a 3D point
 about the origin in the x/y plane:
 
