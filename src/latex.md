@@ -836,6 +836,7 @@ interpreting anything in it as LaTeX commands.
 
 For short text, use the `\verb` command
 with the text delimited by vertical bars (pipes).
+Why aren't curly braces used instead?
 For example:
 
 ```latex
@@ -1400,10 +1401,16 @@ are defined in the `mathdots` package.
 The `\frownie` and `\smiley` commands
 are defined in the `wasysym` package.
 
-<img alt="LaTeX symbols part 1" style="width: 65%"
+<img alt="LaTeX symbols part 1" style="width: 57%"
   src="/blog/assets/latex-symbols1.png?v={{pkg.version}}">
-<img alt="LaTeX symbols part 2" style="width: 65%"
+<img alt="LaTeX symbols part 2" style="width: 57%"
   src="/blog/assets/latex-symbols2.png?v={{pkg.version}}">
+
+Symbols that represent classes of numbers
+are rendered with the `\mathbb` command.
+
+<img alt="LaTeX symbols part 3" style="width: 50%"
+  src="/blog/assets/latex-symbols3.png?v={{pkg.version}}">
 
 For more, see
 <a href="https://artofproblemsolving.com/wiki/index.php/LaTeX:Symbols"
