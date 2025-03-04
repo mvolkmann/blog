@@ -897,6 +897,31 @@ This is commonly do for sections like a preface.
 When a table of contents is being generated,
 unnumbered chapters and section not appear in the table of contents.
 
+## Columns
+
+Rendering content in multiple columns
+is not supported by the `pdflatex` command.
+The `xelatex` or `lualatex` command must be used instead.
+
+To render an entire document with two columns,
+add the `twocolumn` option to the document class.
+For example:
+
+```latex
+\documentclass[twocolumn]{article}
+```
+
+To render a section of content in multiple columns,
+use the `multicols` package. For example:
+
+```latex
+\usepackage{multicol}
+...
+\begin{multicols}{2}
+The content to appear in multiple columns goes here.
+\end{multicols}
+```
+
 ## Splitting Documents
 
 A `.tex` file can include the contents of other `.tex` files.
