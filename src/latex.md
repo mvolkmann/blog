@@ -14,7 +14,8 @@ layout: topic-layout.njk
 
 TeX is a low-level typesetting system created by Donald Knuth
 in 1978 at Stanford University.
-The "X" at the end is actually the Greek letter chi.
+The name was original composed of the Greek letters
+tau, epsilon, and chi (which looks like the Latin leter X).
 That is why TeX is pronounced "tech" and not "tex".
 
 {% aTargetBlank "https://www.latex-project.org", "LaTeX" %} is a
@@ -218,20 +219,6 @@ to in a huge font.
 Many commands support a "star variant" that affects its behavior.
 For example, `\chapter{some name}` starts a new, numbered chapter
 and `\chapter*{some name}` starts a new, unnumbered chapter.
-
-A `.tex` file can include other `.tex` files.
-This enables breaking a large document into smaller documents
-that can be edited independently, such as each chapter of a book.
-The documents being included should not contain a preamble section
-or the `\begin{document}` and `\end{document}` commands.
-For example:
-
-```latex
-\include{other-file-name}
-```
-
-This will include the contents of the file named `other-file-name.tex`
-found in the same directory as the file that contains the `\include` command.
 
 ## Document Classes
 
@@ -805,51 +792,6 @@ For example:
 TODO: Add an example where you define how Smalltalk code should be styled
 by describing its keywords, operators, and so on.
 
-## Sections
-
-Documents can have up to seven levels of sections,
-but not all of them are supported for every document class.
-For example, the `\chapter` command can be used in the document class `book`,
-but not in the document class `article`.
-
-The following example shows how to specify all seven levels.
-
-```latex
-\part{First Part}
-This is a paragraph in a part.
-
-\chapter{First Chapter}
-This is a paragraph in a chapter.
-
-\section{First Section}
-This is a paragraph in a section.
-
-\subsection{First subsection}
-This is a paragraph in a subsection.
-
-\subsubsection{First Subsubsection}
-This is a paragraph in a subsubsection.
-
-\paragraph{First Paragraph}
-This is a paragraph in a paragraph.
-
-\subparagraph{First Subparagraph}
-This is a paragraph in a subparagraph.
-```
-
-Unless the document is a book, the most common kinds of sections to use
-include `\section`, `\subsection`, and `\subsubsection`.
-
-Parts, chapters, sections, and subsections are
-automatically assigned increasing numbers starting from 1.
-Subsubsections, paragraphs, and subparagraphs are not assigned numbers.
-
-To suppress numbering of a chapter, section, or subsection,
-include an asterisk at the end of its command name.
-This is commonly do for sections like a preface.
-When a table of contents is being generated,
-unnumbered chapters and section not appear in the table of contents.
-
 ## Horizontal Rules
 
 To draw a horizontal line across the page, use `\hrule`.
@@ -895,6 +837,99 @@ For example:
 This text will be rendered verbatim.
 \end{verbatim}
 ```
+
+## Sections
+
+Documents can have up to seven levels of sections,
+but not all of them are supported for every document class.
+For example, the `\chapter` command can be used in the document class `book`,
+but not in the document class `article`.
+
+The following example shows how to specify all seven levels.
+
+```latex
+\part{First Part}
+This is a paragraph in a part.
+
+\chapter{First Chapter}
+This is a paragraph in a chapter.
+
+\section{First Section}
+This is a paragraph in a section.
+
+\subsection{First subsection}
+This is a paragraph in a subsection.
+
+\subsubsection{First Subsubsection}
+This is a paragraph in a subsubsection.
+
+\paragraph{First Paragraph}
+This is a paragraph in a paragraph.
+
+\subparagraph{First Subparagraph}
+This is a paragraph in a subparagraph.
+```
+
+Unless the document is a book, the most common kinds of sections to use
+include `\section`, `\subsection`, and `\subsubsection`.
+
+Parts, chapters, sections, and subsections are
+automatically assigned increasing numbers starting from 1.
+Subsubsections, paragraphs, and subparagraphs are not assigned numbers.
+
+To suppress numbering of a chapter, section, or subsection,
+include an asterisk at the end of its command name.
+This is commonly do for sections like a preface.
+When a table of contents is being generated,
+unnumbered chapters and section not appear in the table of contents.
+
+## Splitting Documents
+
+A `.tex` file can include the contents of other `.tex` files.
+This enables breaking a large document into smaller documents
+that can be edited independently, such as each chapter of a book.
+The documents being included should not contain a preamble section
+or the `\begin{document}` and `\end{document}` commands.
+
+The commands `\input` and `\include` can be both be used for this purpose.
+Both commands take a file name that is assumed
+to be in the same directory as the main `.tex` file.
+It is not necessary to include the `.tex` file extension.
+
+The `\include` command starts its content on a new page and
+begins a new page before rendering the content that follows.
+This command cannot be nested,
+so included files cannot use the `\include` command.
+
+For example:
+
+```latex
+\include{other-file-name}
+```
+
+To temporarily avoid rendering the content of files included with `\include`,
+add the `\includeonly` command in the preamble
+with an argument that lists the file paths to include.
+This will not change the numbering of the chapters and sections that follow.
+For example:
+
+```latex
+\includeonly{preface, chapter2, index}
+```
+
+The `\input` command does start its content where it appears
+and does not force a new page before or after the included content.
+This command can be nested, so included files can use the `\input` command.
+
+For example:
+
+```latex
+\input{other-file-name}
+```
+
+To temporarily avoid rendering the content of files included with `\input`,
+comment out those lines.
+This will change the numbering of the chapters and sections that follow.
 
 ## Images
 
