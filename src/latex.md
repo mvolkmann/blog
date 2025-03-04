@@ -955,6 +955,7 @@ and is required in order to use the options for doing so.
 
 - The "h" option tells the compiler to place the item "here" if possible.
 - The "H" option tells the compiler to absolutely place the item "here".
+  The option "!h" is somewhat equivalent.
 - The "t" option moves the item to the top of the page.
 - The "b" option moves the item to the bottom of the page.
 
