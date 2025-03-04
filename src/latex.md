@@ -299,12 +299,26 @@ American Mathematical Society</a>.
 ## Portrait vs. Landscape
 
 By default all pages will be in portrait mode.
-To cause all pages to use landscape mode, use the geometry package.
+To cause all pages to use landscape mode, use the `geometry` package.
 For example:
 
 ```latex
 \usepackage[letterpaper,landscape]{geometry}
 ```
+
+The `geometry` package can also adjust the page margins.
+For example:
+
+```latex
+\usepackage[margin=1in]{geometry}
+OR
+\usepackage[
+  top=1in, bottom=0.5in, left=0.75in, right=0.75in,
+  paperwidth=11in, paperheight=8.5in % landscape
+]{geometry}
+```
+
+TODO: Cover configuration to printing 2-sided where the left and right margins alternate.
 
 To cause a specific page to use landscape mode, use the lscape package.
 For example:
@@ -787,6 +801,9 @@ For example:
   hello()
 \end{lstlisting}
 ```
+
+TODO: Add an example where you define how Smalltalk code should be styled
+by describing its keywords, operators, and so on.
 
 ## Sections
 
@@ -1278,6 +1295,10 @@ For example:
 ```
 
 Also see the commands `\endfirsthead`, `\endlastfoot`, and `\endfoot`.
+
+## Charts
+
+TODO: Describe how to generate charts.
 
 ## Greek Letters
 
