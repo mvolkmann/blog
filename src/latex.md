@@ -283,6 +283,19 @@ American Mathematical Society</a>.
 | listings | adds commands to typeset programming language source code                        |
 | xcolor   | adds commands to change the color of text                                        |
 
+## Unicode Characters
+
+To enable the use of Unicode characters, add the following in the preamble:
+
+```latex
+\usepackage[utf8]{inputenc}
+```
+
+In addition, ensure that the selected font
+contains all the Unicode characters you wish to use.
+For example, the default font likely does not
+contain the Unicode wastebasket character.
+
 ## Portrait vs. Landscape
 
 By default all pages will be in portrait mode.
