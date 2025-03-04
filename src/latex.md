@@ -1385,6 +1385,20 @@ only the first row is affected. Is this a bug?
 \end{tabular}
 ```
 
+TODO: When I use `\cellcolor` in a `\multirow`, it only colors the first row.
+TODO: Am I doing something wrong in this simple example?
+TODO: I posted this question here: https://www.youtube.com/watch?v=xyZtxfMsD38
+
+```latex
+\begin{tabular}{|c|c|c|}
+  \hline
+  1 & \multirow{2}{*}{\cellcolor{yellow} 2 and 6} & 3 \\
+  \cline{1-1} \cline{3-3}
+  5 & & 7 \\
+  \hline
+\end{tabular}
+```
+
 Tables created with the `tabular` environment
 cannot span across page boundaries.
 The `longtable` package supports this and provides an option
