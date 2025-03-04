@@ -972,9 +972,10 @@ This will change the numbering of the chapters and sections that follow.
 
 ## Figures
 
-The `figure` environment creates floating content
-(meaning the compiler can choose its location)
-that typically includes graphical elements like images and diagrams.
+The `figure` environment creates floating content,
+meaning the compiler can choose its location.
+The content is typically a graphical elements like an image or diagram,
+but it can be anything, include plain text.
 A caption can be added above or below the element.
 A label can be specified to enable adding references to the figure.
 
@@ -1012,7 +1013,7 @@ For example:
   src="/blog/assets/latex-figure-reference.png?v={{pkg.version}}">
 
 ```latex
-My favorite programming language is Smalltalk\ref{smalltalk-balloon}.
+My favorite programming language is Smalltalk \ref{smalltalk-balloon}.
 ```
 
 ## Images
