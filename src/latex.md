@@ -252,7 +252,7 @@ It also takes a comma-separated list of package names in curly braces.
 For example:
 
 ```latex
-\usepackage{amsfonts, amsmath, amsthm, amssymb}
+\usepackage{amsfonts, amsmath, amssymb, amsthm}
 \usepackage{float, graphicx}
 \usepackage{hyperref}
 ```
@@ -267,21 +267,21 @@ In packages whose names begin with "ams", that stands for
 <a href="https://www.ams.org/home/page" target="_blank">
 American Mathematical Society</a>.
 
-| Package  | Description                                                                      |
-| -------- | -------------------------------------------------------------------------------- |
-| amsfonts | adds fonts for use in mathematics                                                |
-| amsmath  | adds commands for rendering mathematical formulas                                |
-| amssymb  | adds commands for additional mathematical symbols                                |
-| comment  | adds support for multi-line comments                                             |
-| fancyhdr | adds commands to configure page headers and footers                              |
-| float    | improves the ability to control the placement of objects like figures and tables |
-| geometry | adjusts page margins, page size, and layout                                      |
-| graphicx | builds on the graphic package to enhance support for graphics                    |
-| hyperref | adds commands to create clickable hyperlinks                                     |
-| inputenc | adds support for various input encodings like utf8                               |
-| lipsum   | generates Lorem Ipsum text for testing                                           |
-| listings | adds commands to typeset programming language source code                        |
-| xcolor   | adds commands to change the color of text                                        |
+| Package  | Description                                                              |
+| -------- | ------------------------------------------------------------------------ |
+| amsfonts | adds fonts for use in mathematics                                        |
+| amsmath  | adds commands for rendering mathematical formulas                        |
+| amssymb  | adds commands for additional mathematical symbols                        |
+| comment  | adds support for multi-line comments                                     |
+| fancyhdr | adds commands to configure page headers and footers                      |
+| float    | improves ability to control placement of objects like figures and tables |
+| geometry | adjusts page margins, page size, and layout                              |
+| graphicx | builds on the graphic package to enhance support for graphics            |
+| hyperref | adds commands to create clickable hyperlinks                             |
+| inputenc | adds support for various input encodings like utf8                       |
+| lipsum   | generates Lorem Ipsum text for testing                                   |
+| listings | adds commands to typeset programming language source code                |
+| xcolor   | adds commands to change the color of text                                |
 
 ## Unicode Characters
 
@@ -944,6 +944,22 @@ To temporarily avoid rendering the content of files included with `\input`,
 comment out those lines.
 This will change the numbering of the chapters and sections that follow.
 
+## Location of Items
+
+By default, the compiler can choose to
+place items like images, tables and figures
+in a location other than where it appears in the `.tex` file
+if it determines that another location is preferable.
+The `float` package enables overriding the compiler,
+and is required in order to use the options for doing so.
+
+- The "h" option tells the compiler to place the item "here" if possible.
+- The "H" option tells the compiler to absolutely place the item "here".
+- The "t" option moves the item to the top of the page.
+- The "b" option moves the item to the bottom of the page.
+
+The example in the "Images" section below demonstratees using the "H" option.
+
 ## Images
 
 To include images, use the `graphicx` package.
@@ -952,13 +968,6 @@ It is not necessary to include the file extension.
 The image file must reside in the same directory as the `.tex` file.
 The supported image formats include JPEG (.jpg or .jpeg),
 PNG (.png), and PDF (.pdf).
-
-The `float` package is required in order to use the "H" option
-which keeps the graphic "here" meaning where it occurs in the document flow.
-Without that the compiler can choose another location for the image
-that it deems better.
-Using the "t" option moves the image to the top of the page and
-using the "b" option moves it to the bottom of the page.
 
 Surrounding the image with a "figure" enables adding a caption
 which will be automatically numbered along with other figures
@@ -1208,12 +1217,6 @@ The following example creates a table describing dogs.
 \end{tabular}
 ```
 
-The LaTeX compiler can place a table somewhere else in the content flow
-if it decides that it fits better in another location.
-To prevent this, use the `float` package,
-wrap the `tabular` section in a `table` section, and add the option
-`h` (place here if possible) or `H` (absolutely place here).
-
 The command `\def\arraystretch` adds padding to table cells.
 
 The `\caption` command adds a caption above or below a table
@@ -1248,6 +1251,9 @@ For example:
   \caption{Dogs in my family}
 \end{table}
 ```
+
+The `[H]` option can be specified on a `table` environment,
+but not on a `tabular` environment.
 
 Text in a table cell can contain paragraphs of text that wrap to multiple lines.
 For example:
