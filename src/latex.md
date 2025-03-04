@@ -1173,6 +1173,29 @@ $ 4~ \vdots ~10 $ \\ % vertical dots; ~ ("tie") and is like &nbsp; in HTML
 $ 5 \ddots 10 $ \\ % diagonal dots
 ```
 
+## Matrices
+
+Matrices with square brackets are rendered with a `bmatrix` environment.
+For example, the following is the formula for rotating a 3D point
+about the origin in the x/y plane:
+
+<img alt="LaTeX matrices" style="width: 50%"
+  src="/blog/assets/latex-matrices.png?v={{pkg.version}}">
+
+```latex
+$$
+[x^{\prime} \, y^{\prime} \, z^{\prime} \, 1]
+=
+[x \, y \, z \, 1] \cdot
+\begin{bmatrix}
+    \cos\theta & -\sin\theta & 0 & 0 \\
+    \sin\theta & \cos\theta & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1 \\
+\end{bmatrix}
+$$
+```
+
 ## Tables
 
 To create a table, use the `\begin{tabular}{columns}` command.
