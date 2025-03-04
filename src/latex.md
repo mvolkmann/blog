@@ -1072,7 +1072,8 @@ For example:
 Inline fractions can be small like $\frac{x}{y}$ or large like $\dfrac{x}{y}$.
 ```
 
-To use display math mode, surround content by double dollar signs.
+To use display math mode, surround content by double dollar signs
+or `\[` and `\]`.
 
 <img alt="LaTeX display math mode" style="width: 70%"
   src="/blog/assets/latex-display-math-mode.png?v={{pkg.version}}">
