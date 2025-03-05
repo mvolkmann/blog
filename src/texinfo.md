@@ -268,6 +268,61 @@ The following Texinfo file demonstrates rendering bulleted and numbered lists.
 @bye
 ```
 
+## Tables
+
+The `@table` command produces a two-column table
+that is similar to an HTML definition list
+that is created with `dl`, `dt`, and `dd` elements.
+
+The `@multitable` command produces a multi-column table
+that is similar to an HTML table
+that is created with `table`, `tr`, and `td` elements.
+Unlike HTML tables, Texinfo tables do not support cell borders.
+In addition, cell padding cannot be specified
+and the default spacing tends to be insufficient.
+
+The following Texinfo file demonstrates rendering tables.
+
+```text
+\input texinfo
+@settitle Tables Demo
+
+@node Top
+@top Tables Demo
+
+@menu
+* 2-Column Tables:: similar to HTML definition lists
+* Multi-column Tables:: similar to HTML table
+@end menu
+
+@node 2-Column Tables
+@chapter 2-Column Tables
+
+@c @table must be followed by @asis, @code, @samp, @var, @option, or @kbd.
+@table @asis
+@item Apples
+A crisp and delicious fruit.
+@item Bananas
+A yellow, curved fruit rich in potassium.
+@item Cherries
+Small, red, and juicy fruits.
+@end table
+
+@node Multi-column Tables
+@chapter Multi-column Tables
+
+@c The sum of the column fractions should be 1.
+@multitable @columnfractions .3 .3 .4
+@c The @tab command separates row items.
+@headitem @strong{Header 1} @tab @strong{Header 2} @tab @strong{Header 3}
+@item Row 1, Column 1 @tab Row 1, Column 2 @tab Row 1, Column 3
+@item Row 2, Column 1 @tab Row 2, Column 2 @tab Row 2, Column 3
+@item Row 3, Column 1 @tab Row 3, Column 2 @tab Row 3, Column 3
+@end multitable
+
+@bye
+```
+
 ## Resources
 
 - {% aTargetBlank "https://www.gnu.org/software/texinfo/manual/texinfo/texinfo.pdf",
