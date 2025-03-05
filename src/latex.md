@@ -976,8 +976,16 @@ The `figure` environment creates floating content,
 meaning the compiler can choose its location.
 The content is typically a graphical elements like an image or diagram,
 but it can be anything, include plain text.
-A caption can be added above or below the element.
-A label can be specified to enable adding references to the figure.
+
+A caption can be added above or below the `figure` content
+by adding a `\caption{some caption}` command.
+The caption will be automatically numbered by default.
+To prevent numbering, use the `caption` package and the `\caption*` command.
+
+A label can be applied to a figure to enable adding references to the figure.
+This is done by adding a `\label{some-label}` command
+in a `figure` environment.
+To reference the figure, use the `\ref{some-label}` command.
 
 By default, the compiler will choose the location of the element
 attempting to keep it near its specified location in the `.tex` file.
@@ -1308,10 +1316,15 @@ The following example creates a table describing dogs.
 
 The command `\def\arraystretch` adds padding to table cells.
 
-The `\caption` command adds a caption above or below a table
-based on its placement in the flow.
+A caption can be added above or below the `table` content
+by adding a `\caption{some caption}` command.
 The caption will be automatically numbered by default.
 To prevent numbering, use the `caption` package and the `\caption*` command.
+
+A label can be applied to a table to enable adding references to the table.
+This is done by adding a `\label{some-label}` command
+in a `table` environment.
+To reference the table, use the `\ref{some-label}` command.
 
 For example:
 
@@ -1338,8 +1351,16 @@ For example:
     \hline
   \end{tabular}
   \caption{Dogs in my family}
+  \label{dog-table}
 \end{table}
+...
+Do you like dogs? \ref{dog-table}
 ```
+
+To include a page containing a list of tables
+where each line is a link to a table,
+add the `\listoftables` command.
+This typically appears near the end of the document.
 
 The `[H]` option can be specified on a `table` environment,
 but not on a `tabular` environment.
