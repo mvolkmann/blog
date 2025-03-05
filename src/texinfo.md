@@ -75,26 +75,26 @@ The following keyboard shortcuts are supported:
 | h           | open help on GNU info                 |
 | H           | toggles display of help window        |
 | q           | quit info, returning to command line  |
-| arrows keys | move cursor in associated direction   |
 | space       | scroll down one page                  |
 | backspace   | scroll up one page (delete key)       |
+| arrows keys | move cursor in associated direction   |
 | b           | go to beginning of curent node        |
+| d           | go to directory node                  |
 | e           | go to end of curent node              |
-| p           | go to previous node at this level     |
+| g           | go to a node by name                  |
+| i           | search for text in index              |
+| l           | return to last visited node           |
 | n           | go to next node at this level         |
+| p           | go to previous node at this level     |
+| t           | go to top node                        |
+| u           | go up to parent node                  |
 | [           | go to previous node in document order |
 | ]           | go to next node in document order     |
-| u           | go up to parent node                  |
-| t           | go to top node                        |
-| d           | go to directory node                  |
 | return      | go to menu item under cursor          |
-| l           | return to last visited node           |
 | 1-9         | select item n in current menu         |
-| g           | go to a node by name                  |
 | /           | search forward for given text         |
 | {           | search for previous text occurrence   |
 | }           | search for next text occurrence       |
-| i           | search for text in index              |
 | ctrl-g      | cancel current operation              |
 
 ## Resources
