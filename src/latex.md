@@ -1730,7 +1730,7 @@ To add a bibliography pages to a document:
    This adds a number in square brackets that acts a
    clickable link to the corresponding bibliography entry.
 
-## Slide Presentations
+## Slide Presentations (beamer)
 
 LaTeX can create PDF-based slide presentations
 using the "beamer" document class.
@@ -1740,6 +1740,150 @@ See the following YouTube videos:
   target="_blank">How I Make Presentations Using LaTeX & Beamer</a>
 - <a href="https://www.youtube.com/watch?v=0fsWGg81RwU"
   target="_blank">LaTeX Tutorial 11: Beamer Slide Presentation</a>
+- <a href="https://www.overleaf.com/learn/latex/Beamer"
+  target="_blank">Overleaf Beamer Guide</a>
+
+The example below demonstrates many `beamer` features.
+It is based on the the first link above
+which is to a YouTube video from Dr. Trefor Bazett.
+
+<img alt="LaTeX beamer example" style="width: 100%"
+src="/blog/assets/latex-beamer.png?v={{pkg.version}}">
+
+```latex
+% Specifying 14pt makes the text larger than the default.
+% Specifying an aspect ratio of 169 makes it 16 by 9 instead of 4 by 3.
+\documentclass[14pt, aspectratio=169, handout]{beamer}
+
+\usepackage[utf8]{inputenc}
+
+% Slide themes are names of cities including
+% default, AnnArbor, Antibes, Bergen, Berkeley, Berlin,
+% Boadialla, CambridgeUS, Copenhagen, Darmstadt,
+% Goettingenm, PaloAlto, Szeged, and Warsaw.
+\usetheme{Darmstadt}
+
+% Color themes are names of animals including
+% default, beaver, beetle, seahorse, and wolverine.
+\usecolortheme{wolverine}
+
+\setbeamertemplate{navigation symbols}{} % hides navigation buttons
+\setbeamercovered{transparent} % to faintly see upcoming slide builds
+
+% With these inlines in place, only handout pages are generated.
+% Comment them out to see the slides instead.
+%\usepackage{pgfpages}
+%\pgfpagesuselayout{4 on 1}[border shrink=5mm]
+
+\title{My First Beamer Presentation}
+\author{R. Mark Volkmann}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Table of Contents}
+    % This items in this list are links to the first slide in their section.
+  \tableofcontents
+\end{frame}
+
+\section{Introduction}
+
+\begin{frame}
+  \frametitle{Overview}
+
+  Some overview text goes here.
+\end{frame}
+
+\section{Using Lists}
+
+% Each slide is described in a frame environment.
+\begin{frame}
+  \frametitle{Single-Column Slide with Revealing Items}
+
+  \begin{itemize}
+    % The items are progressively revealed on separate slides.
+    % If the dash after each slide number is removed,
+    % only one item will appear on each slide of the frame.
+    \item<1-> Item 1
+    \item<2-> Item 2
+    \item<3-> Item 3
+  \end{itemize}
+
+  \vfill
+  % These maintain their positions as if all are present,
+  % but only one is visible at a time.
+  %\onslide<1>{Spring}
+  %\onslide<2>{Summer}
+  %\onslide<3>{Fall}
+
+  % Only one of these is visible at a time
+  % and they render in the same position.
+  \only<1>{Spring}
+  \only<2>{Summer}
+  \only<3>{Fall}
+
+  \vfill
+  \alert<2>{On all slides in the frame, but red only on the second.}
+
+  \vfill
+  \textbf<3>{On all slides in the frame, but bold only on the second.}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Two-Column Slide}
+  \begin{columns}
+
+    \begin{column}{0.5\textwidth}
+      \textbf{Column 1}
+      \begin{itemize}
+        \item Item 1
+        \item Item 2
+        \item Item 3
+      \end{itemize}
+    \end{column}
+
+    \begin{column}{0.5\textwidth}
+      \textbf{Column 2}
+
+      \begin{itemize}
+        \item Item A
+        \item Item B
+        \item Item C
+      \end{itemize}
+
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\section{Other Groupings}
+
+\begin{frame}
+  \frametitle{Kinds of Boxes}
+
+  \begin{block}{Some Block Title}
+    This is a block.
+  \end{block}
+
+  \begin{example}
+    This is an example.
+  \end{example}
+
+  \begin{theorem}[Pythogorean]
+    $a^2 + b^2 = c^2$
+  \end{theorem}
+
+  % The <2> below makes this hidden on the first slide of the frame
+  % and shown on the second.
+  \begin{proof}<2>
+    This is a proof. \\
+    A QED square is included on the last line.
+  \end{proof}
+\end{frame}
+
+\end{document}
+```
 
 ## Resources
 
@@ -1748,3 +1892,5 @@ See the following YouTube videos:
 - {% aTargetBlank "https://ctan.org/", "CTAN" %}
   Comprehensive TeX Archive Network
 - <a href="https://latexcolor.com" target="_blank">LaTeX Color</a>
+  Click the "Reference Guide" link to see
+  a collection of slide themes and color themes.
