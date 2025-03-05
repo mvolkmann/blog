@@ -45,13 +45,6 @@ This installs the following commands:
 - `texi2dvi` - This converts Texinfo files to DVI or PDF formats.
 - `texi2pdf` - same as `texi2dvi`
 
-If using VS Code to edit Texinfo files, consider installing
-the extension "Texinfo Language Support" from CismonX.
-This adds syntax highlighting, code completion, HTML preview,
-block folding, breadcrumb navigation, and diagnostics.
-To view an HTML preview, open a Texinfo file and click the preview button
-in the upper-right (document with small magnifier glass).
-
 To convert a Texinfo file to PDF from the command line,
 enter one of the following commands:
 
@@ -59,6 +52,18 @@ enter one of the following commands:
 texi2pdf name.texinfo
 texi2dvi --pdf name.texinfo
 ```
+
+### VS Code
+
+If using VS Code to edit Texinfo files, consider installing
+the extension "Texinfo Language Support" from CismonX.
+This adds syntax highlighting, code completion, HTML preview,
+block folding, breadcrumb navigation, and diagnostics.
+
+To view an HTML preview, open a Texinfo file and click the preview button
+in the upper-right (document with small magnifier glass).
+All the content will appear to be on a single page,
+unlike when viewed using the `info` command.
 
 ## info Command
 
@@ -97,9 +102,77 @@ The following keyboard shortcuts are supported:
 | }           | search for next text occurrence       |
 | ctrl-g      | cancel current operation              |
 
+## Basic Example
+
+The following Texinfo file, `smalltalk.texinfo`
+provides a reasonable starting point.
+
+```text
+\input texinfo
+@c This is a comment.
+@setfilename smalltalk.info
+@documentencoding UTF-8
+@settitle Smalltalk Notes
+
+@copying
+Copyright @copyright{} 2025 R. Mark Volkmnann
+@end copying
+
+@titlepage
+@title Smalltalk Notes
+@page
+@vskip 0pt plus 1fill
+@insertcopying
+@end titlepage
+
+@ifnottex
+  @node Top
+  @top Introduction to Smalltalk
+
+  Smalltalk is an object-oriented programming language
+  with a beautifully minimal syntax
+@end ifnottex
+
+@menu
+  * Getting Started:: an overview
+  * Images:: holder of objects
+  * Syntax:: beautifully minimal
+@end menu
+
+@node Getting Started
+@chapter Getting Started
+
+Do adipisicing quis dolore anim mollit dolor cupidatat. Esse ex ...
+
+Amet cupidatat do ullamco exercitation deserunt consequat veniam ...
+
+@node Images
+@chapter Images
+
+Quis aute do ex labore anim ex voluptate eiusmod adipisicing sint ...
+
+Aute culpa cillum veniam ea quis in eiusmod nisi in eu irure aute ...
+
+@include syntax.texinfo
+
+@bye
+```
+
+The following Texinfo file, `syntax.texinfo`
+is included by the file above.
+This enables breaking large documents into sections
+that can be edited and versioned independently.
+
+```text
+@node Syntax
+@chapter Syntax
+
+Aliquip consectetur labore adipisicing voluptate. Cupidatat ...
+
+Eu sint eu cillum nisi tempor id excepteur fugiat fugiat sunt ...
+```
+
 ## Resources
 
 - {% aTargetBlank "https://www.gnu.org/software/texinfo/manual/texinfo/texinfo.pdf",
   "Official texinfo Manual" %}
-- {% aTargetBlank "https://learnxinyminutes.com/texinfo/",
-  "Learn Texinfo in Y minutes" %}
