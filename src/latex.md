@@ -1217,9 +1217,8 @@ $$ \int_0^\infty e^{-x^2} dx = \sqrt{\pi} $$
 
 ## Charts
 
-The `tikz` package ...
-
-The following document renders several kinds of charts:
+LaTeX can render many kinds of charts.
+The following document demonstrates several of these.
 
 ```latex
 \documentclass{article}
