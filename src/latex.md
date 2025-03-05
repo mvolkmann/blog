@@ -1215,6 +1215,147 @@ $$ \int_0^\infty e^{-x^2} dx = \sqrt{\pi} $$
 
 {% endraw %}
 
+## Charts
+
+The `tikz` package ...
+
+The following document renders several kinds of charts:
+
+```latex
+\documentclass{article}
+\usepackage{pgf-pie}
+\usepackage{pgfplots}
+
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{fillbetween}
+
+\begin{document}
+```
+
+<img alt="LaTeX bar chart" style="width: 50%"
+  src="/blog/assets/latex-bar-chart.png?v={{pkg.version}}">
+
+```latex
+\begin{figure}
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+        ybar,
+        symbolic x coords={A, B, C, D},
+        xtick=data,
+        nodes near coords
+    ]
+      \addplot coordinates {(A, 5) (B, 3) (C, 8) (D, 6)};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Simple Bar Chart}
+\end{figure}
+```
+
+<img alt="LaTeX pie chart" style="width: 50%"
+  src="/blog/assets/latex-pie-chart.png?v={{pkg.version}}">
+
+```latex
+\begin{figure}
+  \centering
+  \begin{tikzpicture}
+    \pie[
+      text=legend,
+      radius=2,
+      color={blue, red, green, yellow}
+    ]{
+        30/A,
+        20/B,
+        40/C,
+        10/D
+    }
+  \end{tikzpicture}
+  \caption{Simple Pie Chart}
+\end{figure}
+```
+
+<img alt="LaTeX line plot" style="width: 50%"
+  src="/blog/assets/latex-line-plot.png?v={{pkg.version}}">
+
+```latex
+% TODO: How can this be modified to fill the area below the line?
+\begin{figure}
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      title={My Line Graph},
+      xlabel={x-axis label},
+      ylabel={y-axis label}
+    ]
+      \addplot coordinates {
+        (1, 1)
+        (2, 4)
+        (3, 9)
+        (4, 16)
+     }; % semicolon is really required
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Simple Line Graph}
+\end{figure}
+```
+
+<img alt="LaTeX curves plot" style="width: 50%"
+  src="/blog/assets/latex-curves-plot.png?v={{pkg.version}}">
+
+```latex
+\begin{figure}
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+        axis lines = center,
+        grid = both,
+        xlabel = \(x\),
+        ylabel = {\(f(x)\)},
+    ]
+      \addplot [domain=-3:3, samples=100, color=red]
+      {x};
+      \addlegendentry{\(x\)}
+
+      \addplot [domain=-3:3, samples=100, color=blue]
+      {x^2};
+      \addlegendentry{\(x^2\)}
+
+      \addplot [domain=-3:3, samples=100, color=purple]
+      {x^3};
+      \addlegendentry{\(x^3\)}
+    \end{axis}
+  \end{tikzpicture}
+\end{figure}
+```
+
+<img alt="LaTeX 3D plot" style="width: 50%"
+  src="/blog/assets/latex-3d-plot.png?v={{pkg.version}}">
+
+```latex
+% This takes as long time to render (around 15 seconds)!
+\begin{figure}
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+        title={My 3D Plot},
+        hide axis,
+        colormap/cool,
+    ]
+      \addplot3[
+          mesh,
+          samples=50,
+          domain=-8:8,
+      ]
+      {sin(deg(sqrt(x^2+y^2)))/sqrt(x^2+y^2)};
+      \addlegendentry{\(\frac{sin(r)}{r}\)}
+    \end{axis}
+  \end{tikzpicture}
+  \caption{3D Plot}
+\end{figure}
+
+\end{document}
+```
+
 ## Dots
 
 Dots are the ellipsis character rendered in different orientations.
@@ -1474,10 +1615,6 @@ For example:
 
 Also see the commands `\endfirsthead`, `\endlastfoot`, and `\endfoot`.
 
-## Charts
-
-TODO: Describe how to generate charts.
-
 ## Greek Letters
 
 Greek letters are produced using the following commands.
@@ -1537,14 +1674,6 @@ are rendered with the `\mathbb` command.
 For more, see
 <a href="https://artofproblemsolving.com/wiki/index.php/LaTeX:Symbols"
 target="_blank">LaTeX:Symbols</a>.
-
-## Math Mode
-
-Math mode is used to display mathematical equations.
-
-Inline math mode content is delimited by single `$` characters.
-Display math mode content which appears on its on line, centered by default,
-is delimited by double `$$` characters.
 
 ## Macros
 
