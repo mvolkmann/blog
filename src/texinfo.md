@@ -45,6 +45,16 @@ This installs the following commands:
 - `texi2dvi` - This converts Texinfo files to DVI or PDF formats.
 - `texi2pdf` - same as `texi2dvi`
 
+To convert a Texinfo file to an info file from the command line,
+enter the following command:
+
+```bash
+makeinfo name.texinfo
+```
+
+This creates the file `name.info`
+which can be viewed by entering `info name`.
+
 To convert a Texinfo file to PDF from the command line,
 enter one of the following commands:
 
@@ -52,6 +62,18 @@ enter one of the following commands:
 texi2pdf name.texinfo
 texi2dvi --pdf name.texinfo
 ```
+
+To convert a Texinfo file to HTML from the command line,
+enter one of the following commands:
+
+```bash
+makeinfo --html name.texinfo
+texi2any --html name.texinfo
+```
+
+This creates a diretory whose name is name_html.
+It will contain the file `index.html` that contains links
+to separate `.html` files for each menu item.
 
 ### VS Code
 
