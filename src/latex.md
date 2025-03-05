@@ -1747,6 +1747,8 @@ The example below demonstrates many `beamer` features.
 It is based on the the first link above
 which is to a YouTube video from Dr. Trefor Bazett.
 
+The following screenshot shows the handout pages it generates.
+
 <img alt="LaTeX beamer example" style="width: 100%"
 src="/blog/assets/latex-beamer.png?v={{pkg.version}}">
 
