@@ -194,6 +194,80 @@ Aliquip consectetur labore adipisicing voluptate. Cupidatat ...
 Eu sint eu cillum nisi tempor id excepteur fugiat fugiat sunt ...
 ```
 
+## Lists
+
+The following Texinfo file demonstrates rendering bulleted and numbered lists.
+
+<img alt="Texinfo Itemized Lists" style="width: 30%"
+  src="/blog/assets/texinfo-itemized-lists.png?v={{pkg.version}}">
+
+<img alt="Texinfo Enumerated Lists" style="width: 30%"
+  src="/blog/assets/texinfo-enumerated-lists.png?v={{pkg.version}}">
+
+```text
+\input texinfo
+@settitle Lists Demo
+
+@node Top
+@top Lists Demo
+
+@menu
+* Itemized Lists:: Similar to an unordered list in HTML
+* Enumerated Lists:: Similar to an ordered list in HTML
+@end menu
+
+@node Itemized Lists
+@chapter Itemized Lists
+
+@c The only bullet options are @bullet (default) and @minus.
+@itemize @bullet{}
+  @item Red
+  @itemize @minus{}
+    @item apple
+    @item cherry
+    @item strawberry
+  @end itemize
+
+  @item Green
+  @itemize @minus{}
+    @item grape
+    @item kiwi
+  @end itemize
+
+  @item Blue
+  @itemize @minus{}
+    @item blueberry
+  @end itemize
+@end itemize
+
+@node Enumerated Lists
+@chapter Enumerated Lists
+
+@c The only numbering options are 1 (numbers),
+@c a (lowercase letters), and A (uppercase letters).
+@enumerate 1
+  @item Red
+  @enumerate a
+    @item apple
+    @item cherry
+    @item strawberry
+  @end enumerate
+
+  @item Green
+  @enumerate A
+    @item grape
+    @item kiwi
+  @end enumerate
+
+  @item Blue
+  @enumerate 1
+    @item blueberry
+  @end enumerate
+@end enumerate
+
+@bye
+```
+
 ## Resources
 
 - {% aTargetBlank "https://www.gnu.org/software/texinfo/manual/texinfo/texinfo.pdf",
