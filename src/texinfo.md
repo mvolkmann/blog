@@ -1,7 +1,8 @@
----
+--
 eleventyNavigation:
-  key: Texinfo
+key: Texinfo
 layout: topic-layout.njk
+
 ---
 
 <style>
@@ -13,12 +14,17 @@ layout: topic-layout.njk
 ## Overview
 
 {% aTargetBlank "https://www.gnu.org/software/texinfo/", "Texinfo" %}
-is ...
+is a markup language for software documentation.
+It can be used to generate output in many formats including
+DocBook, DVI, EPUB 3, HTML, info, LaTeX, plain text, and XML.
 
-Text files containing Texinfo markup have a file extension of
-`.texi`, `.texinfo`, `.txi`, or `.tex`, but using `.tex` is discouraged
-because files for TeX and LaTeX use that file extension.
-All the examples in this document will use `.texinfo`.
+Texinfo markup appears in text files that can describe
+chapters, sections, cross-references, indices, lists, and tables.
+All of this is accomplished with commands that begin with the `@` character.
+
+Texinfo files have a file extension of `.texi`, `.texinfo`, `.txi`, or `.tex`,
+but using `.tex` is discouraged because
+files for the markup languages TeX and LaTeX use that file extension.
 
 ## Minimum Markup
 
@@ -36,20 +42,19 @@ To install commands for working with Texinfo files in macOS using Homebrew,
 enter `brew install texinfo`.
 This installs the following commands:
 
-- `info`: This renders `.info` files.
-- `makeinfo`: This translates Texinfo source documentation to other formats
-  including DocBook, DVI, EPUB 3, HTML, info, LaTeX, plain text, and XML.
-  By default it produces `.info` files that can be
-  rendered in Emacs or by the GNU info command.
-- `texi2any` - same as `makeinfo`
-- `texi2dvi` - This converts Texinfo files to DVI or PDF formats.
-- `texi2pdf` - same as `texi2dvi`
+| Command    | Description                                                                                                                                                                                                                          |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `info`     | This renders `.info` files.                                                                                                                                                                                                          |
+| `makeinfo` | This translates Texinfo source documentation to other formats including DocBook, DVI, EPUB 3, HTML, info, LaTeX, plain text, and XML. By default it produces `.info` files that can be rendered in Emacs or by the GNU info command. |
+| `texi2any` | same as `makeinfo`                                                                                                                                                                                                                   |
+| `texi2dvi` | This converts Texinfo files to DVI or PDF formats.                                                                                                                                                                                   |
+| `texi2pdf` | same as `texi2dvi`                                                                                                                                                                                                                   |
 
 To convert a Texinfo file to an info file from the command line,
 enter the following command:
 
 ```bash
-makeinfo name.texinfo
+makeinfo name.texi
 ```
 
 This creates the file `name.info`
@@ -59,16 +64,16 @@ To convert a Texinfo file to PDF from the command line,
 enter one of the following commands:
 
 ```bash
-texi2pdf name.texinfo
-texi2dvi --pdf name.texinfo
+texi2pdf name.texi
+texi2dvi --pdf name.texi
 ```
 
 To convert a Texinfo file to HTML from the command line,
 enter one of the following commands:
 
 ```bash
-makeinfo --html name.texinfo
-texi2any --html name.texinfo
+makeinfo --html name.texi
+texi2any --html name.texi
 ```
 
 This creates a diretory whose name is name_html.
@@ -91,9 +96,8 @@ unlike when viewed using the `info` command.
 
 The `info` command enables viewing and navigating
 the contents of a `.info` file.
-
-The `info` command provides information on itself.
-To view it, enter `info info`.
+It also provides information on itself
+which can be viewed by entering `info info`.
 
 The following keyboard shortcuts are supported:
 
@@ -126,7 +130,7 @@ The following keyboard shortcuts are supported:
 
 ## Basic Example
 
-The following Texinfo file, `smalltalk.texinfo`
+The following Texinfo file, `smalltalk.texi`
 provides a reasonable starting point.
 
 ```text
@@ -147,13 +151,11 @@ Copyright @copyright{} 2025 R. Mark Volkmnann
 @insertcopying
 @end titlepage
 
-@ifnottex
-  @node Top
-  @top Introduction to Smalltalk
+@node Top
+@top Introduction to Smalltalk
 
-  Smalltalk is an object-oriented programming language
-  with a beautifully minimal syntax
-@end ifnottex
+Smalltalk is an object-oriented programming language
+with a beautifully minimal syntax
 
 @menu
   * Getting Started:: an overview
@@ -175,12 +177,12 @@ Quis aute do ex labore anim ex voluptate eiusmod adipisicing sint ...
 
 Aute culpa cillum veniam ea quis in eiusmod nisi in eu irure aute ...
 
-@include syntax.texinfo
+@include syntax.texi
 
 @bye
 ```
 
-The following Texinfo file, `syntax.texinfo`
+The following Texinfo file, `syntax.texi`
 is included by the file above.
 This enables breaking large documents into sections
 that can be edited and versioned independently.
