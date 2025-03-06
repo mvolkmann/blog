@@ -300,8 +300,14 @@ Options that can be specified in this command include:
 
 - a font size which can be one of the following: `10pt`, `11pt`, or `12pt`
 
-- a paper size that can be one of the following: `a4paper`, `a5paper`,
-  `b5paper`, `executivepaper`, `legalpaper`, or `letterpaper`
+- a paper size that can be one of the following:
+
+  - `a4paper`: 210 x 297 mm; approx. 8.25" x 11.75"
+  - `a5paper`: 148 x 210 mm; approx. 5.8" x 8.3"
+  - `b5paper`: 176 x 250 mm; approx. 6.9" x 9.8"
+  - `executivepaper`: 7.25" x 10.5"
+  - `legalpaper`: 8.5" x 14"
+  - `letterpaper`: 8.5" x 11"
 
 See the video tutorial at https://www.youtube.com/watch?v=ydOTMQC7np0!
 
@@ -1036,6 +1042,30 @@ To temporarily avoid rendering the content of files included with `\input`,
 comment out those lines.
 This will change the numbering of the chapters and sections that follow.
 
+## Boxes
+
+The `tcolorbox` package renders a colored box with
+a title bar at the bottom and content below.
+The `coloframe` option specifies the border color
+and background color of the title area.
+The `colback` option specifies the background color of the content area.
+For example:
+
+<img alt="LaTeX tcolorbox" style="width: 80%"
+  src="/blog/assets/latex-tcolorbox.png?v={{pkg.version}}">
+
+```latex
+\usepackage{tcolorbox}
+...
+\begin{tcolorbox}[
+  title=\large\textsf{\textbf{My Box Title}},
+  colback=red!20!yellow,
+  colframe=blue!50
+]
+  My box content.
+\end{tcolorbox}
+```
+
 ## Figures
 
 The `figure` environment creates floating content,
@@ -1679,6 +1709,9 @@ For example:
 ```
 
 Also see the commands `\endfirsthead`, `\endlastfoot`, and `\endfoot`.
+
+Other packages that support rendering tables include
+`tabu`, `tabularx`, and `tabulary`.
 
 ## Greek Letters
 
