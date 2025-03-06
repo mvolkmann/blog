@@ -140,6 +140,28 @@ This automatically generates a PDF
 every time changes to a `.tex` file are saved
 and the PDF can be viewed inside VS Code.
 
+By default this extension uses the `pdflatex` command
+to generate PDF files. To change this to use `xelatex`,
+which is required for some functionality:
+
+1. Select "Preferences: Open User Settings (JSON)" from the command palette.
+2. Search for "pdflatex".
+3. Copy the object containing that immmedidated after it.
+4. In the copied object, change the values of "name" and "command"
+   from "pdflatex" to "xelatex".
+5. Add the following at the end of the `settings.json` file
+   before the closing curly brace:
+
+   ```json
+   "latex-workshop.latex.recipes": [
+     {
+       "name": "xelatex",
+       "tools": ["xelatex"]
+     }
+   ],
+   "latex-workshop.latex.recipe.default": "xelatex"
+   ```
+
 ### Overleaf
 
 <a href="https://www.overleaf.com" target="_blank">Overleaf</a>
@@ -224,7 +246,7 @@ and `\chapter*{some name}` starts a new, unnumbered chapter.
 
 Document classes change the default formatting and add support for new commands.
 
-Options for `\documentclass{some-class}` include:
+Document classes that can be specified in `\documentclass{some-class}` include:
 
 - `article` supports sections and subsections, but not chapters
 - `beamer` for slide presentations
@@ -238,6 +260,17 @@ Options for `\documentclass{some-class}` include:
 - `proc` for proceedings; based on the `article` class
 - `report` for documents with chapters
 - `slides` for slide presentations, but `beamer` is preferred
+
+Options that can be specified in this command include:
+
+- `flegn` to left-align equations rather than center them
+- `landscape` to use landscape orientation rather than portrait
+  (requires using `xelatex` instead of `pdflatex`)
+- `legno` to place equation numbers on their left side rather than right side
+- `openright` to begin chapters on right-hand pages when `twoside` is used
+- `titlepage` to generate a title page withouth using the `\maketitle` command
+- `twocolumn` for 2-column pages throughout the entire document
+- `twoside` to print on both sides of paper
 
 See the video tutorial at https://www.youtube.com/watch?v=ydOTMQC7np0!
 
@@ -2042,6 +2075,12 @@ src="/blog/assets/latex-beamer.png?v={{pkg.version}}">
   "LaTeX2e: An unoffical reference manual" %}
 - {% aTargetBlank "https://ctan.org/", "CTAN" %}
   Comprehensive TeX Archive Network
+- <a href="https://www.youtube.com/watch?v=ydOTMQC7np0" target="_blank">
+  LaTeX – Full Tutorial for Beginners</a> from Michelle Krummel
+- <a href="https://www.youtube.com/watch?v=Jp0lPj2-DQA&list=PLHXZ9OQGMqxcWWkx2DMnQmj5os2X5ZR73"
+  target="_blank">Dr. Trefor Bazett</a> series of 13 YouTube videos
+- <a href="https://www.youtube.com/watch?v=VhmkLrOjLsw&t=271s"
+  target="_blank">LaTeX Tutorial</a> from Derek Banas
 - <a href="https://latexcolor.com" target="_blank">LaTeX Color</a>
   Click the "Reference Guide" link to see
   a collection of slide themes and color themes.
