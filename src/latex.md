@@ -933,6 +933,13 @@ For example:
 TODO: Add an example where you define how Smalltalk code should be styled
 by describing its keywords, operators, and so on.
 
+To include a page containging a list of code listing
+where each line is a link to a code listing,
+add the `\lstlistoflisting` command.
+This typically appears after the table of contents.
+To include this page in the table of contents,
+add `\usepackage{tocbibind}` in the preamble.
+
 ## Horizontal Rules
 
 To draw a horizontal line across the page, use `\hrule`.
@@ -1183,6 +1190,13 @@ For example:
 ```latex
 My favorite programming language is Smalltalk \ref{smalltalk-balloon}.
 ```
+
+To include a page containing a list of figures
+where each line is a link to a fiture,
+add the `\listofigures` command.
+This typically appears after the table of contents.
+To include this page in the table of contents,
+add `\usepackage{tocbibind}` in the preamble.
 
 ## Images
 
@@ -1694,7 +1708,9 @@ Do you like dogs? \ref{dog-table}
 To include a page containing a list of tables
 where each line is a link to a table,
 add the `\listoftables` command.
-This typically appears near the end of the document.
+This typically appears after the table of contents.
+To include this page in the table of contents,
+add `\usepackage{tocbibind}` in the preamble.
 
 The `[H]` option can be specified on a `table` environment,
 but not on a `tabular` environment.
@@ -1914,6 +1930,8 @@ For example:
 
 \begin{document}
 \tableofcontents
+\listoffigures
+\listoftables
 
 \section{Jumping In}
 ...
@@ -2022,6 +2040,28 @@ To add a bibliography pages to a document:
 
    This adds a number in square brackets that acts a
    clickable link to the corresponding bibliography entry.
+
+## Index
+
+The `imakeidx` package generates an index including an alphabetical list
+of important words and phrases and the page numbers where they appear.
+Each item in the list is a link that can be clicked to scroll to the occurrence.
+
+The following steps achieve this:
+
+1. Include `\usepackage{imakeidx}` in the preamble.
+1. Include `\usepackage{hyperref}` in the preamble AFTER the previous line.
+1. Include `\makeindex[intoc]` in the preamble.
+   The `intoc` option causes the index to appear in the table of contents.
+   It may be necessary to build the PDF twice to get this to appear.
+1. Surround each occurrence of each word and phrase to be indexed
+   with `\index{word-or-phrase}`.
+1. Add `\printindex` near the bottom of the document.
+1. Compile by running `pdflatex name.tex`.
+1. Generate a `.idx` file by running `makeindex name.idx`.
+   The VS Code extension "LaTeX Workshop" does this for you.
+1. Compile again by running `pdflatex name.tex`.
+   The VS Code extension "LaTeX Workshop" does this for you.
 
 ## Slide Presentations (beamer)
 
