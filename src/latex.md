@@ -1105,6 +1105,14 @@ a title bar at the bottom and content below.
 The `coloframe` option specifies the border color
 and background color of the title area.
 The `colback` option specifies the background color of the content area.
+
+Color names can be followed with `!` and
+a number that specifies a percentage opacity.
+For example, `red!30` means red with an opacity of 30%.
+To specify a second color that should mixed with the first,
+add another `!` after the percentage value followed by another color.
+For example, `red!30!yellow` means 30% red and 70% yellow.
+
 For example:
 
 <img alt="LaTeX tcolorbox" style="width: 80%"
@@ -1627,6 +1635,19 @@ add the following in the preamble:
 ```latex
 \arrayrulecolor{red}
 \setlength{\arrayrulewidth}{1mm}
+```
+
+To change the background color of a single row,
+add `\rowcolor{color}` before its data.
+
+To change the background color of a single cell,
+add `\cellcolor{color}` before its data.
+
+For example, the following makes the background color of a row pale yellow,
+and makes the second cell be pink:
+
+```latex
+\rowcolor{yellow!50}Comet & \cellcolor{red!20}Whippet & 4 \\\
 ```
 
 A caption can be added above or below the `table` content
