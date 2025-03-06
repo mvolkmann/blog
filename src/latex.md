@@ -298,6 +298,9 @@ Options that can be specified in this command include:
 
 - `oneside` (default) or `twoside` to print on both sides of paper
 
+- a paper size that can be one of the following: `a4paper`, `a5paper`,
+  `b5paper`, `executivepaper`, `legalpaper`, or `letterpaper`
+
 See the video tutorial at https://www.youtube.com/watch?v=ydOTMQC7np0!
 
 ## Packages
