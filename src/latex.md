@@ -263,15 +263,40 @@ Document classes that can be specified in `\documentclass{some-class}` include:
 
 Options that can be specified in this command include:
 
+- `draft` or `final` (default)
+
+  When in draft mode:
+
+  - Lines in boxes that are too long to fit within the page margins
+    are highlighted with black bars in the margin.
+  - All figures are replaced with empty boxes of the same size
+    that contain image file paths.
+    These can help with diagnosing layout issues.
+
 - `flegn` to left-align equations rather than center them
+
 - `landscape` to use landscape orientation rather than portrait
-  (requires using `xelatex` instead of `pdflatex`)
+
+  This requires using `xelatex` or `lualatex` instead of `pdflatex`.
+
 - `legno` to place equation numbers on their left side rather than right side
-- `openright` to begin chapters on right-hand pages when `twoside` is used
-- `titlepage` to generate a title page withouth using the `\maketitle` command
-- `twocolumn` for 2-column pages throughout the entire document
-  (requires using `xelatex` instead of `pdflatex`)
-- `twoside` to print on both sides of paper
+
+- `openbib` to use the "open" bibliography format
+
+- `openany` (default) or `openright`
+  to begin chapters on right-hand pages when `twoside` is used
+
+- `titlepage`/`notitlepage` to specify whether there should be a title page
+
+  This seems to have no effect.
+  A title page is generate if and only if the `\maketitle` command is used.
+
+- `onecolumn` (default) or `twocolumn`
+  to use 2-column pages throughout the entire document
+
+  This requires using `xelatex` or `lualatex` instead of `pdflatex`.
+
+- `oneside` (default) or `twoside` to print on both sides of paper
 
 See the video tutorial at https://www.youtube.com/watch?v=ydOTMQC7np0!
 
