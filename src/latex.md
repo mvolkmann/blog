@@ -485,6 +485,62 @@ multi-line comment.
 \textbf{\textit{\underline{Bold, Italic, and Underline}}}
 ```
 
+## Macros
+
+Macros make it unnecessary to repeat
+commonly used content and sequences of commands.
+
+The `\def` command is a TeX primitive that defines a new command
+that can optionally have required parameters.
+
+The `\newcommand` command uses `\def`.
+It adds checking whether a command being defined already exists.
+It also adds support for optional arguments.
+
+Here's an example of defining a macro using `\def`
+which just inserts some static text.
+
+```latex
+\def\email{someone@gmail.com}
+```
+
+To use this, add `\email` everywhere that content should be inserted.
+
+Here's an example of defining a macro using `\newcommand`.
+The command being defined is `\image` and it takes three arguments.
+The arguments are inserted where `#1`, `#2`, and `#3` appear.
+
+{% raw %}
+
+```latex
+\newcommand{\image}[3]{
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=#2]{#1}
+    \caption{#3}
+  \end{figure}
+}
+```
+
+{% endraw %}
+
+To use this, add `\image` followed by the three arguments,
+each in their own pair of curly braces.
+For example:
+
+```latex
+\image{smalltalk-balloon}{3in}{Smalltalk Programming}
+```
+
+This greatly simplies adding images in a document
+as long as all should be centered and have a caption.
+
+The `\renewcommand` command redefines an existing command.
+
+The `ifthen` package adds commands that support conditional logic
+for choosing the text to render.
+This can be used anywhere in a document, including in macros.
+
 ## Fonts
 
 ### Font Family
@@ -1551,6 +1607,19 @@ The following example creates a table describing dogs.
 ```
 
 The command `\def\arraystretch` adds padding to table cells.
+To add padding to the table cells of a specific table,
+add the following in the `table` envirionment:
+
+```latex
+\def\arraystretch{1.5}
+```
+
+To add padding to the table cells of all tables,
+add the following in the preamble:
+
+```latex
+\renewcommand{\arraystretch}{1.5}
+```
 
 A caption can be added above or below the `table` content
 by adding a `\caption{some caption}` command.
@@ -1772,59 +1841,6 @@ are rendered with the `\mathbb` command.
 For more, see
 <a href="https://artofproblemsolving.com/wiki/index.php/LaTeX:Symbols"
 target="_blank">LaTeX:Symbols</a>.
-
-## Macros
-
-Macros make it unnecessary to repeat
-commonly used content and sequences of commands.
-
-The `\def` command is a TeX primitive.
-
-The `\newcommand` command is a LaTeX command that uses `\def`.
-It adds checking whether a command being defined already exists.
-It also adds support for optional arguments.
-
-Here's an example of defining a macro using `\def`
-which just inserts some static text.
-
-```latex
-\def\email{someone@gmail.com}
-```
-
-To use this, add `\email` everywhere that content should be inserted.
-
-Here's an example of defining a macro using `\newcommand`.
-The command being defined is `\image` and it takes three arguments.
-The arguments are inserted where `#1`, `#2`, and `#3` appear.
-
-{% raw %}
-
-```latex
-\newcommand{\image}[3]{
-  \begin{figure}[H]
-    \centering
-    \includegraphics[width=#2]{#1}
-    \caption{#3}
-  \end{figure}
-}
-```
-
-{% endraw %}
-
-To use this, add `\image` followed by the three arguments,
-each in their own pair of curly braces.
-For example:
-
-```latex
-\image{smalltalk-balloon}{3in}{Smalltalk Programming}
-```
-
-This greatly simplies adding images in a document
-as long as all should be centered and have a caption.
-
-The `ifthen` package adds commands that support conditional logic
-for choosing the text to render.
-This can be used anywhere in a document, including in macros.
 
 ## Document Title, Author, and Date
 
