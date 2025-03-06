@@ -1621,6 +1621,14 @@ add the following in the preamble:
 \renewcommand{\arraystretch}{1.5}
 ```
 
+To change the color and thickness of the table cell borders,
+add the following in the preamble:
+
+```latex
+\arrayrulecolor{red}
+\setlength{\arrayrulewidth}{1mm}
+```
+
 A caption can be added above or below the `table` content
 by adding a `\caption{some caption}` command.
 The caption will be automatically numbered by default.
