@@ -270,6 +270,7 @@ Options that can be specified in this command include:
 - `openright` to begin chapters on right-hand pages when `twoside` is used
 - `titlepage` to generate a title page withouth using the `\maketitle` command
 - `twocolumn` for 2-column pages throughout the entire document
+  (requires using `xelatex` instead of `pdflatex`)
 - `twoside` to print on both sides of paper
 
 See the video tutorial at https://www.youtube.com/watch?v=ydOTMQC7np0!
@@ -336,7 +337,9 @@ To cause all pages to use landscape mode, use the `geometry` package.
 For example:
 
 ```latex
-\usepackage[letterpaper,landscape]{geometry}
+\documentclass[landscape]{some-class}
+OR
+\usepackage[letterpaper, landscape]{geometry}
 ```
 
 The `geometry` package can also adjust the page margins.

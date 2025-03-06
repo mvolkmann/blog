@@ -1,8 +1,7 @@
---
+---
 eleventyNavigation:
-key: Texinfo
+  key: Texinfo
 layout: topic-layout.njk
-
 ---
 
 <style>
