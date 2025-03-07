@@ -437,26 +437,60 @@ to use a particular kind of page numbering:
 
 Each chapter or section can change the page numbering style
 and restart page numbering from one.
-In the following example,
-the preface page numbers use lowercase roman numerals and
-the chapters that follow use Arabic numbers.
+In the following example:
+
+- The title page and table of contents do not have page numbers.
+- The pages starting from the preface to before the first chapter
+  use lowercase Roman numerals.
+- The remaining pages use Arabic numbers.
 
 The preface chapter is defined with the `\chapter*` below
-to avoid numbering it and make the cause first chapter
-defined with the `\chapter` command be considered the first chapter.
+to avoid numbering it and cause the first chapter defined with
+the `\chapter` command be considered the first chapter.
 
 ```latex
-\newpage
+\begin{document}
+\pagestyle{empty}
+
+\maketitle
+
+\tableofcontents
+\thispagestyle{empty}
+
 \chapter*{Preface}
 \pagenumbering{roman}
+\setcounter{page}{1}
+\addcontentsline{toc}{chapter}{Preface}
+Preface content goes here.
 
-preface content goes here
+\lstlistoflistings
+\addcontentsline{toc}{chapter}{\lstlistlistingname}
 
-\newpage
-\chapter{Getting Started}
+\listoffigures
+
+\listoftables
+
+\pagestyle{fancy}
+\chapter{Jumping In}
 \pagenumbering{arabic}
 
-getting started content goes here
+...
+
+\section{Choosing a Tech Stack}
+Section content goes here.
+
+\section{Using htmx Attributes}
+Section content goes here.
+
+\section{Creating Your First Project}
+Chapter content goes here.
+
+\chapter{All About Tables}
+Chapter content goes here.
+
+\printindex
+
+\end{document}
 ```
 
 Unfortunately, changing the page numbering style breaks
@@ -2156,37 +2190,7 @@ The following steps achieve this:
 1. Compile by running `pdflatex name.tex`.
    It may be necessary to row this twice.
 
-The following sample content that can follow the preamble:
-
-```latex
-\begin{document}
-
-\tableofcontents
-
-\lstlistoflistings
-\addcontentsline{toc}{chapter}{\lstlistlistingname}
-
-\listoffigures
-
-\listoftables
-
-\chapter*{Preface}
-\addcontentsline{toc}{chapter}{Preface}
-
-Preface content goes here.
-
-\chapter{Getting Started}
-
-Chapter 1 content goes here.
-
-\chapter{More Depth}
-
-Chapter 2 content goes here.
-
-\printindex
-
-\end{document}
-```
+See the sample content in the "Page Numbering" section.
 
 Using the `\pagenumbering` command to switch between
 `roman` and `arabic` page numbers confuses the `\makeindex` command,
