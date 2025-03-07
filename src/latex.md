@@ -1774,6 +1774,14 @@ and makes the second cell be pink:
 \rowcolor{yellow!50}Comet & \cellcolor{red!20}Whippet & 4 \\\
 ```
 
+To alternate the background colors of all rows except the first,
+which typically contains column headings,
+add the following before the beginning of the `tabular` environment:
+
+```latex
+\rowcolors{2}{odd-row-color}{even-row-color}
+```
+
 A caption can be added above or below the `table` content
 by adding a `\caption{some caption}` command.
 The caption will be automatically numbered by default.
