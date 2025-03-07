@@ -2053,15 +2053,63 @@ Each item in the list is a link that can be clicked to scroll to the occurrence.
 
 The following steps achieve this:
 
-1. Include `\usepackage{imakeidx}` in the preamble.
-1. Include `\usepackage{hyperref}` in the preamble AFTER the previous line.
-1. Include `\makeindex[intoc]` in the preamble.
-   The `intoc` option causes the index to appear in the table of contents.
-   It may be necessary to build the PDF twice to get this to appear.
+1. Include the following in the preamble:
+
+   ```latex
+   % This needed to include lists of listings, figures, and tables in the TOC.
+   % The nottoc option tells it to not include "Contents" in the TOC.
+   \usepackage[nottoc]{tocbibind}
+
+   \usepackage{imakeidx}
+
+   % This turns index entries into hyperlinks
+   % and must appear before \makeindex.
+   \usepackage{hyperref}
+
+   % This makes the index and includes it in the TOC.
+   \makeindex[intoc]
+   ```
+
 1. After each occurrence of a word and phrase to be indexed,
-   add `\index{word-or-phrase}`. Yes, you have to duplicate the text.
+   add `\index{word-or-phrase}`.
+   The text must be duplicated and that is annoying!
+
 1. Add `\printindex` near the bottom of the document.
-1. Compile by running `pdflatex name.tex` twice.
+
+1. Compile by running `pdflatex name.tex`.
+   It may be necessary to row this twice.
+
+The following is some sample content that follows the preamble:
+
+```latex
+\begin{document}
+
+\tableofcontents
+
+\lstlistoflistings
+\addcontentsline{toc}{chapter}{\lstlistlistingname}
+
+\listoffigures
+
+\listoftables
+
+\chapter*{Preface}
+\addcontentsline{toc}{chapter}{Preface}
+
+Preface content goes here.
+
+\chapter{Getting Started}
+
+Chapter 1 content goes here.
+
+\chapter{More Depth}
+
+Chapter 2 content goes here.
+
+\printindex
+
+\end{document}
+```
 
 ## Slide Presentations (beamer)
 
