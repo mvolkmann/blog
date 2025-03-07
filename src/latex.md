@@ -168,15 +168,18 @@ which is required for some functionality:
 is a web-based editor that doesn't require installing any software.
 It requires creating an account.
 There are free and paid accounts.
-Free accounts have the following limitations:
 
-- collaborating on documents with multiple editors is not supported
-- compiling can timeout for large documents
-- no document history is maintained
-- advanced search is not supported
-- the symbol palette for inserting math symbols with a click is not supported
-- no integrations with version control systems is supported
-- no technical support is provided
+Paid accounts have the following features that are not present in free accounts:
+
+- collaborating on documents with multiple editors
+  - marked issues as resolved
+  - accept or reject suggested changes
+- compiling large documents will not timeout
+- document history is maintained
+- advanced search
+- symbol palette for inserting math symbols with a click
+- integrations with version control systems
+- technical support
 
 Paid accounts are $199 (10 collaborators per project)
 or $399 (unlimited collaborators per project) per year.
