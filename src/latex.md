@@ -1153,6 +1153,24 @@ This is commonly do for sections like a preface.
 When a table of contents is being generated,
 unnumbered chapters and section not appear in the table of contents.
 
+The `fncychap` package makes chapter titles fancier.
+The options include Bjarne, Bjornstrup, Conny, Glenn, Lenny, Rejne, and Sonny.
+For example:
+
+<img alt="LaTeX Bjornstrup" style="width: 80%"
+  src="/blog/assets/latex-fncychap-bjornstrup.png?v={{pkg.version}}">
+
+```latex
+\usepackage[Bjornstrup]{fncychap}
+```
+
+<img alt="LaTeX fncychap Glenn" style="width: 80%"
+  src="/blog/assets/latex-fncychap-glenn.png?v={{pkg.version}}">
+
+```latex
+\usepackage[Glenn]{fncychap}
+```
+
 ## Columns
 
 Rendering content in multiple columns
