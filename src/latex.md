@@ -361,6 +361,9 @@ To enable the use of Unicode characters, add the following in the preamble:
 \usepackage[utf8]{inputenc}
 ```
 
+This may only be needed when using `pdflatex`
+and not when using `xelatex` or `lualatex`.
+
 In addition, ensure that the selected font
 contains all the Unicode characters you wish to use.
 For example, the default font likely does not
@@ -991,7 +994,8 @@ This text will be rendered verbatim.
 
 Documents can have up to seven levels of sections,
 but not all of them are supported for every document class.
-For example, the `\chapter` command can be used in the document class `book`,
+For example, the `\chapter` command can be used
+in the document classes `book` and `report`,
 but not in the document class `article`.
 
 The following example shows how to specify all seven levels.
@@ -2054,14 +2058,10 @@ The following steps achieve this:
 1. Include `\makeindex[intoc]` in the preamble.
    The `intoc` option causes the index to appear in the table of contents.
    It may be necessary to build the PDF twice to get this to appear.
-1. Surround each occurrence of each word and phrase to be indexed
-   with `\index{word-or-phrase}`.
+1. After each occurrence of a word and phrase to be indexed,
+   add `\index{word-or-phrase}`. Yes, you have to duplicate the text.
 1. Add `\printindex` near the bottom of the document.
-1. Compile by running `pdflatex name.tex`.
-1. Generate a `.idx` file by running `makeindex name.idx`.
-   The VS Code extension "LaTeX Workshop" does this for you.
-1. Compile again by running `pdflatex name.tex`.
-   The VS Code extension "LaTeX Workshop" does this for you.
+1. Compile by running `pdflatex name.tex` twice.
 
 ## Slide Presentations (beamer)
 
