@@ -2067,12 +2067,17 @@ The following steps achieve this:
    \usepackage{hyperref}
 
    % This makes the index and includes it in the TOC.
-   \makeindex[intoc]
+   % The number of columns defaults to 2.
+   \makeindex[columns=3, intoc]
    ```
 
 1. After each occurrence of a word and phrase to be indexed,
    add `\index{word-or-phrase}`.
    The text must be duplicated and that is annoying!
+
+   To make a word or phrase be a subitem in the index, pass to the
+   `\index` command the main and sub index values separated by `!`.
+   For example, `Comet\index{dogs!Comet}`
 
 1. Add `\printindex` near the bottom of the document.
 
