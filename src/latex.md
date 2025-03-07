@@ -2079,7 +2079,7 @@ The following steps achieve this:
 1. Compile by running `pdflatex name.tex`.
    It may be necessary to row this twice.
 
-The following is some sample content that follows the preamble:
+The following sample content that can follow the preamble:
 
 ```latex
 \begin{document}
@@ -2110,6 +2110,10 @@ Chapter 2 content goes here.
 
 \end{document}
 ```
+
+Using the `\pagenumbering` command to switch between
+`roman` and `arabic` page numbers confuses the `\makeindex` command,
+so unfortunate it seems that cannot be done.
 
 ## Slide Presentations (beamer)
 
