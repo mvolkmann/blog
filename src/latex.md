@@ -474,6 +474,8 @@ For example, the following somewhat matches
 the convention followed by Pragmatic Bookshelf books.
 All of this must appear in the preamble.
 
+{% raw %}
+
 ```latex
 \usepackage{fancyhdr}
 \pagestyle{fancy}
@@ -502,6 +504,8 @@ All of this must appear in the preamble.
 % and the right side of odd pages.
 \fancyfoot[LE,RO]{\thepage}
 ```
+
+{% endraw %}
 
 ## Comments
 
