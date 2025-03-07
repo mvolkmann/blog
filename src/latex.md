@@ -1053,7 +1053,7 @@ add `\usepackage{tocbibind}` in the preamble.
 
 To draw a horizontal line across the page, use `\hrule`.
 
-## URLs and Links
+## Links and URLs
 
 To render a URL in a monospace font, use the `\texttt` command.
 For example, `\texttt{https://mvolkmann.github.io/blog/}`.
@@ -1067,6 +1067,14 @@ For example:
 
 ```latex
 \usepackage{hyperref}
+
+% linkcolor is used for internal links
+% like those in the table of contents and index.
+% urlcolor is used for external links
+% like those created with the \url and \href commands.
+% To use additional color names, include the following in the preamble:
+% \usepackage[dvipsnames, svgnames]{xcolor}
+\hypersetup{colorlinks=true, linkcolor=DarkBlue, urlcolor=FireBrick}
 ...
 \url{https://mvolkmann.github.io/blog/}
 
