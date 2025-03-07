@@ -316,6 +316,14 @@ See the video tutorial at https://www.youtube.com/watch?v=ydOTMQC7np0!
 Packages can add support for additional commands.
 They can also modify default settings that affect how documents are rendered.
 
+Documentation on all LaTeX packages can be found at
+<a href="https://ctan.org/pkg" target="_blank">
+Comprehensive TEX Archive Network</a> (CTAN).
+
+To open documentation for a given package from the command line,
+enter `texdoc {package-name}`.
+The documentation will open in your default web browser.
+
 To import a package, use the `\usepackage` command.
 This can take a set of optional arguments in square brackets.
 It also takes a comma-separated list of package names in curly braces.
@@ -328,10 +336,6 @@ For example:
 ```
 
 ### Popular Packages
-
-Documentation on all LaTeX packages can be found at
-<a href="https://ctan.org/pkg" target="_blank">
-Comprehensive TEX Archive Network</a> (CTAN).
 
 In packages whose names begin with "ams", that stands for
 <a href="https://www.ams.org/home/page" target="_blank">
@@ -735,6 +739,26 @@ To customize the vertical space between paragraphs:
 ```latex
 \setlength{\parskip}{1em}
 ```
+
+To insert random text for testing layouts,
+add the following in the preamble.
+
+```latex
+% This causes the \blindtext command to render English text
+% instead of the default Latin Lorem ipsum text.
+% Omit this line to get Lorem ipsum text.
+\usepackage[english]{babel}
+
+% The `random` option causes random text to be generated.
+% The `math` option is like the `random` option,
+% but also includes random math in the generated text.
+% These options only works when the "english" option is specified above.
+\usepackage[math]{blindtext}
+```
+
+In the document content, add `\blindtext`
+to insert a single paragraph of random text or
+`\blindtext[n]` to insert n paragraphs of random text.
 
 ## Space
 
@@ -2287,8 +2311,10 @@ src="/blog/assets/latex-beamer.png?v={{pkg.version}}">
   LaTeX – Full Tutorial for Beginners</a> from Michelle Krummel
 - <a href="https://www.youtube.com/watch?v=Jp0lPj2-DQA&list=PLHXZ9OQGMqxcWWkx2DMnQmj5os2X5ZR73"
   target="_blank">Dr. Trefor Bazett</a> series of 13 YouTube videos
-- <a href="https://www.youtube.com/watch?v=VhmkLrOjLsw&t=271s"
+- <a href="https://www.youtube.com/watch?v=VhmkLrOjLsw"
   target="_blank">LaTeX Tutorial</a> from Derek Banas
 - <a href="https://latexcolor.com" target="_blank">LaTeX Color</a>
   Click the "Reference Guide" link to see
   a collection of slide themes and color themes.
+- <a href="https://www.newthinktank.com/2019/01/latex-tutorial/"
+  target="_blank">LaTeK cheat sheet</a>
