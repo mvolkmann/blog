@@ -2224,6 +2224,14 @@ The following steps achieve this:
 
 See the sample content in the "Page Numbering" section.
 
+To add a page range to the index,
+mark the beginning of the range with `\index{some-term|(}`
+and mark the end of the range with `\index{some-term|)}`.
+Note the open and close parentheses in these commands.
+
+To reference another index entry instead of supplying a page number,
+mark the word or phrase with `\index{this-key|see{other-key}}`.
+
 Using the `\pagenumbering` command to switch between
 `roman` and `arabic` page numbers confuses the `\makeindex` command,
 so unfortunate it seems that cannot be done.
