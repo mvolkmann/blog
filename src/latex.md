@@ -1469,13 +1469,20 @@ $$ a \left(\frac{b + 1}{c + 2}\right) $$
 To align equal signs when showing the solution to an equation,
 use the `amsmath` package, wrap the steps in an `align` environment,
 preceded each `=` with `&`, and end each line with `\\`.
-The steps will be numbered by default.
-To prevent numbering, use `align*` instead of `align`.
+It is not necessary to have any text before the equal sign.
 
 For example:
 
 <img alt="LaTeX equation equals align" style="width: 50%"
   src="/blog/assets/latex-equation-equals-align.png?v={{pkg.version}}">
+
+```latex
+\begin{align}
+f(x) &= x^2 - 20x + 6 + 7x + x^2 \\
+     &= 2x^2 - 13x + 6 \\
+     &= (2x - 1)(x - 6)
+\end{align}
+```
 
 ```latex
 \begin{align}
@@ -1485,6 +1492,9 @@ For example:
 x &= 1/2 \,or\, 6
 \end{align}
 ```
+
+The steps will be numbered by default.
+To prevent numbering, use `align*` in place of `align`.
 
 The following examples demonstrate rendering limits, sums, and integrals:
 
@@ -1718,6 +1728,7 @@ To add double lines, such as below the heading row,
 add two `\hline` commands.
 
 The following example creates a table describing dogs.
+It uses the `\textbf` command is used to make the column headings bold.
 
 <img alt="LaTeX table" style="width: 50%"
   src="/blog/assets/latex-table.png?v={{pkg.version}}">
@@ -1725,7 +1736,7 @@ The following example creates a table describing dogs.
 ```latex
 \begin{tabular}{|l|l|c|}
   \hline
-  Name & Breed & Age \\
+  \textbf{Name} & \textbf{Breed} & \textbf{Age} \\
   \hline\hline
   Comet & Whippet & 4 \\
   \hline
@@ -1778,9 +1789,22 @@ To alternate the background colors of all rows except the first,
 which typically contains column headings,
 add the following before the beginning of the `tabular` environment:
 
-```latex
-\rowcolors{2}{odd-row-color}{even-row-color}
-```
+To specify the background color for all cells in a column,
+including the cell in the header row:
+
+1. Define a new column type in the preamble.
+
+   ```latex
+   % Column type "i" (for important) is red and centered.
+   \newcolumntype{i}{>{\columncolor{red!20}}c}
+   ```
+
+2. Use the new column type in place of
+   the built-in types that include `l`, `c`, and `r`.
+
+   ```latex
+   \rowcolors{2}{odd-row-color}{even-row-color}
+   ```
 
 A caption can be added above or below the `table` content
 by adding a `\caption{some caption}` command.
