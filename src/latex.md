@@ -2422,6 +2422,27 @@ src="/blog/assets/latex-beamer.png?v={{pkg.version}}">
 \end{document}
 ```
 
+## Converting to EPUB
+
+To convert a LaTeX document to the EPUB format:
+
+1. Install Pandoc.
+
+   In macOS this can be done with Homebrew by entering `brew install pandoc`.
+
+1. Run the `pandoc` command on a `.tex` file.
+
+   ```bash
+   pandoc -f latex -t epub -o name.epub name.tex
+   ```
+
+The `pandoc` command takes additional options including:
+
+- `--epub-cover-image=cover.jpg`
+- `--epub-metadata=metadata.xml`
+- `--mathml` to render math mode content
+- `--toc`
+
 ## Resources
 
 - {% aTargetBlank "https://latexref.xyz",
