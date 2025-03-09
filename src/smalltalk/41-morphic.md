@@ -2130,6 +2130,25 @@ there are two things that can be done to update the display.
 
 TODO: What is the difference between these?
 
+## Creating JPEG Images
+
+To create a JPEG image from any morph:
+
+```smalltalk
+myMorph imageForm: 32 :: writeJPEGfileNamed: 'myMorph.jpg'
+```
+
+Consider adding the following method to the `Morph` class to simplify this:
+
+```smalltalk
+writeJPEG: aFilePath
+
+   self imageForm: 32 :: writeJPEGfileNamed: aFilePath
+```
+
+The base image doesn't contain methods for
+writing other image formats such as PNG.
+
 ## More Morphs
 
 TODO: Study these:
