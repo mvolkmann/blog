@@ -344,21 +344,22 @@ In packages whose names begin with "ams", that stands for
 <a href="https://www.ams.org/home/page" target="_blank">
 American Mathematical Society</a>.
 
-| Package  | Description                                                              |
-| -------- | ------------------------------------------------------------------------ |
-| amsfonts | adds fonts for use in mathematics                                        |
-| amsmath  | adds commands for rendering mathematical formulas                        |
-| amssymb  | adds commands for additional mathematical symbols                        |
-| comment  | adds support for multi-line comments                                     |
-| fancyhdr | adds commands to configure page headers and footers                      |
-| float    | improves ability to control placement of objects like figures and tables |
-| geometry | adjusts page margins, page size, and layout                              |
-| graphicx | builds on the graphic package to enhance support for graphics            |
-| hyperref | adds commands to create clickable hyperlinks                             |
-| inputenc | adds support for various input encodings like utf8                       |
-| lipsum   | generates Lorem Ipsum text for testing                                   |
-| listings | adds commands to typeset programming language source code                |
-| xcolor   | adds commands to change the color of text                                |
+| Package   | Description                                                              |
+| --------- | ------------------------------------------------------------------------ |
+| amsfonts  | adds fonts for use in mathematics                                        |
+| amsmath   | adds commands for rendering mathematical formulas                        |
+| amssymb   | adds commands for additional mathematical symbols                        |
+| blindtext | generates random text for testing layouts                                |
+| comment   | adds support for multi-line comments                                     |
+| fancyhdr  | adds commands to configure page headers and footers                      |
+| float     | improves ability to control placement of objects like figures and tables |
+| geometry  | adjusts page margins, page size, and layout                              |
+| graphicx  | builds on the graphic package to enhance support for graphics            |
+| hyperref  | adds commands to create clickable hyperlinks                             |
+| inputenc  | adds support for various input encodings like utf8                       |
+| lipsum    | generates Lorem Ipsum text for testing layouts                           |
+| listings  | adds commands to typeset programming language source code                |
+| xcolor    | adds commands to change the color of text                                |
 
 ## Unicode Characters
 
@@ -1186,7 +1187,7 @@ For example:
 ```
 
 To render a section of content in multiple columns,
-use the `multicols` package. For example:
+use the `multicol` package. For example:
 
 ```latex
 \usepackage{multicol}
@@ -1195,6 +1196,12 @@ use the `multicols` package. For example:
 The content to appear in multiple columns goes here.
 \end{multicols}
 ```
+
+The commands `\onecolumn` and `\twocolumn` can be
+used to switch between those options, but for me the `\twocolumn` command
+produces columns that overlap slightly and spill outside the areas
+where the text should be contrained.
+The `multicol` package demonstrated above seems to produce better results.
 
 ## Splitting Documents
 
