@@ -6,7 +6,7 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-## Installing
+## Installing Cuis Smalltalk
 
 To install Cuis Smalltalk:
 
@@ -24,22 +24,32 @@ in the installed directory based on your operating system.
 
 - for Windows, open a Command Prompt and run `RunCuisOnWindows.bat`
 - for Linux, open a Terminal and run `RunCuisOnLinux.sh`
-- for macOS ...
+- for macOS, there are three options:
 
-  1. Double-click the file `CuisVM.app`
-     which will fail because the app is not verified.
-  1. Open the System Settings app.
-  1. Select "Privacy & Security".
-  1. Scroll down to the "Security" section.
-  1. Look for the message '"CuisVM.app" was blocked from use
-     because it is not from an identified developer.'
-  1. Click the "Open Anyway" button.
-  1. Click the "Open" button in the next dialog that appears.
-  1. Select the file `Cuis*.image` found in the subdirectory as `CuisImage`.
-  1. Click the "Open" button.
-  1. You may see several dialogs that say '"CuisVM.app"
-     would like to access files in your Documents folder'.
-     Click the "Allow" button each time.
+  1. Open a Terminal and run `RunCuisOnMac.sh`.
+
+  1. Double-clicking any `.image` file will work if
+     the only installed Smalltalk virtual machine
+     is the one that ships with Cuis Smalltalk.
+     This may fail if Squeak Smalltalk or Pharo Smalltalk are also installed.
+
+  1. Double-click the file `CuisVM.app`.
+
+     Initially this will fail because the app is not verified.
+     To fix this:
+
+     1. Open the System Settings app.
+     1. Select "Privacy & Security".
+     1. Scroll down to the "Security" section.
+     1. Look for the message '"CuisVM.app" was blocked from use
+        because it is not from an identified developer.'
+     1. Click the "Open Anyway" button.
+     1. Click the "Open" button in the next dialog that appears.
+     1. Select the file `Cuis*.image` found in the subdirectory as `CuisImage`.
+     1. Click the "Open" button.
+     1. You may see several dialogs that say '"CuisVM.app"
+        would like to access files in your Documents folder'.
+        Click the "Allow" button each time.
 
 To determine the version of Cuis Smalltalk that is running,
 open the World menu and select "Help ... About this System...".
@@ -75,7 +85,7 @@ If you wish to change this:
 - Find the key "CFBundleName".
 - Change its value from "Squeak" to "Cuis".
 
-## Updating
+## Updating Cuis Smalltalk
 
 If Cuis Smalltak is started using a platform-specific shell script,
 it will automatically update to the latest version.

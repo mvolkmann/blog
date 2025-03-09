@@ -849,7 +849,14 @@ to insert a single paragraph of random text or
 ## Space
 
 The LaTeX compiler typically removes extra spaces as it sees fit.
-To force a space to be retained, use `\,`.
+
+There are several way to force space to be retained.
+
+- `\,` inserts a thin space
+- `\` followed by a space inserts an interword space (normal size space)
+- `\quad` inserts space that is the width of a capital M in the current font
+  (seemining with a thin space on both sides)
+- `\qquad` insert double the space inserted by `\quad`
 
 To add a single newline after a line, add `\\` at its end,
 which introduces a "soft return".
