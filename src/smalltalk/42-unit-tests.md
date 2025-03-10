@@ -170,7 +170,7 @@ To create unit tests for the `Pets` class:
       category: 'Volkmann'
   ```
 
-- Add the message category "testing".
+- Add the instance message category "testing".
 
 - Add instance methods in the "testing" category whose names begin with "test".
   Each method can contain any number of assertions.
