@@ -140,6 +140,41 @@ This automatically generates a PDF
 every time changes to a `.tex` file are saved
 and the PDF can be viewed inside VS Code.
 
+To view the PDF, click the preview button in the upper-right that
+looks like a two-page document with a small magnifier glass on top of it.
+
+To jump from a `\ref{label}` command in the `.tex` file to the
+corresponding location in the generated PDF displayed in the preview,
+hover over the label text and click "View on pdf".
+
+To jump from the content under the cursor in the `.tex` file to the
+corresponding location in the generated PDF displayed in the preview,
+press cmd-option-j.
+
+To jump from a location in the PDF preview to the
+corresponding location in the `.tex` file, command-click it.
+
+LaTeX Workshop defines snippets to simplify entering some commands.
+For example, `BIT` expands to the following:
+
+```text
+\begin{itemize}
+  \item
+\end{itemize}
+```
+
+The `BEN` snippet is similar, but uses `enumerate`.
+The `BFI` snippet expands to the set commands typically used to create a figure.
+The `BTA` snippet expands to the set commands typically used to create a table.
+
+For more snippets, see
+<a href="https://github.com/James-Yu/LaTeX-Workshop/wiki/Snippets"
+target="_blank">Snippets and shortcuts</a>.
+
+For math equations in a `\begin{align}` environment,
+hover over "align" to see a preview of
+how the equations will be rendered in a popup.
+
 By default this extension uses the `pdflatex` command
 to generate PDF files. To change this to use `xelatex`,
 which is required for some functionality:
@@ -161,6 +196,27 @@ which is required for some functionality:
    ],
    "latex-workshop.latex.recipe.default": "xelatex"
    ```
+
+VS Code can format LaTeX documents, but it the "LaTeX Workshop" extension
+does not include a formatter.
+<a href="https://github.com/cmhughes/latexindent.pl"
+target="_blank">latexindent.pl</a> is a Perl script
+that formats `.tex` files and can be used from VS Code.
+The "getting started" section of its GitHub README page
+explains how to install it for various operating systems.
+In macOS, enter `brew install latexindent` from a terminal window.
+
+To configure they LaTeX Workshop extension to use `latexindent`,
+open Settings, select Extensions...LaTeX.
+For "Latex-workshop › Formatting: Latex", select "latexindent".
+For "Latex-workshop › Formatting › Latexindent: Path",
+enter the full path to the `latexindent` script.
+For me this is `/Library/Tex/texbin/latexindent`.
+
+To format the `.tex` file currently begin edited,
+right-click anywhere in the document and select "Format Document",
+or open the Command Palette and select "Format Document".
+TODO: This is not working for me!
 
 ### Overleaf
 
