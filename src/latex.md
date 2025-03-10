@@ -197,6 +197,11 @@ which is required for some functionality:
    "latex-workshop.latex.recipe.default": "xelatex"
    ```
 
+6. Open `settings.json` and modify "latex-workshop.latex.tools".
+
+   Add `"-shell-escape",` to the "args" arrays for the following commands:
+   latexmk, lualatexmk, xelatexmk, pdflatex, and xelatex.
+
 VS Code can format LaTeX documents, but it the "LaTeX Workshop" extension
 does not include a formatter.
 <a href="https://github.com/cmhughes/latexindent.pl"
@@ -210,8 +215,8 @@ To configure they LaTeX Workshop extension to use `latexindent`,
 open Settings, select Extensions...LaTeX.
 For "Latex-workshop › Formatting: Latex", select "latexindent".
 For "Latex-workshop › Formatting › Latexindent: Path",
-enter the full path to the `latexindent` script.
-For me this is `/Library/Tex/texbin/latexindent`.
+if the command `latexindent` is in your `PATH`,
+this can be set to only `latexindent`.
 
 To format the `.tex` file currently begin edited,
 right-click anywhere in the document and select "Format Document",
@@ -415,7 +420,11 @@ American Mathematical Society</a>.
 | inputenc  | adds support for various input encodings like utf8                       |
 | lipsum    | generates Lorem Ipsum text for testing layouts                           |
 | listings  | adds commands to typeset programming language source code                |
+| minted    | formats and highlights programming language source code                  |
 | xcolor    | adds commands to change the color of text                                |
+
+The `minted` package requires access to the `pygentize` command.
+To install that in macOS, enter `brew install pygments`.
 
 ## Unicode Characters
 
