@@ -69,3 +69,27 @@ So Cursor is only as secure as those subprocessors which include:
 TODO: Finish document what each subprocessor above is used for.
 
 TODO: Explain what enabling privacy mode does.
+
+TODO: Add more detail from https://www.cursor.com/security.
+
+TODO: Can Cursor be configured to never upload any of our source code?
+
+TODO: Can Cursor be configured to not use our source code to train its models?
+
+## Functionality
+
+Cursor provides the following functionality:
+
+- Predicts your next edit which can be accepted by pressing the tab key.
+- Answers questions about the codebase of your current project.
+- Enables writing code with natural language
+  instead of specific programming language syntax.
+
+## Paid vs. Free Versions
+
+TODO: What features does the paid version add?
+
+## Resources
+
+- {% aTargetBlank "https://www.youtube.com/watch?v=ocMOZpuAMw4", "Cursor Tutorial for Beginners" %}
+-
