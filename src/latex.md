@@ -423,9 +423,6 @@ American Mathematical Society</a>.
 | minted    | formats and highlights programming language source code                  |
 | xcolor    | adds commands to change the color of text                                |
 
-The `minted` package requires access to the `pygentize` command.
-To install that in macOS, enter `brew install pygments`.
-
 ## Unicode Characters
 
 To enable the use of Unicode characters, add the following in the preamble:
@@ -1127,15 +1124,36 @@ For example:
 \end{lstlisting}
 ```
 
-TODO: Add an example where you define how Smalltalk code should be styled
-by describing its keywords, operators, and so on.
-
-To include a page containging a list of code listing
+To include a page containing a list of code listing
 where each line is a link to a code listing,
 add the `\lstlistoflisting` command.
 This typically appears after the table of contents.
 To include this page in the table of contents,
 add `\usepackage{tocbibind}` in the preamble.
+
+A better option is to use the `minted` package.
+This uses the Python library Pygments to format source code.
+The supported languages are listed at <a href="https://pygments.org/languages/"
+target="_blank">Pygment Languages</a>.
+
+The `minted` package requires access to the `pygentize` command.
+To install that in macOS, enter `brew install pygments`.
+
+The following is an example of rendering Smalltalk code:
+
+<img alt="LaTeX minted Smalltalk code" style="width: 85%"
+  src="/blog/assets/latex-minted-smalltalk.png?v={{pkg.version}}">
+
+```latex
+\begin{minted}[bgcolor=Beige, frame=lines, framesep=3mm, linenos, numbersep=3pt]{smalltalk}
+newName: nameString breed: breedString
+    | dog |
+    dog := Dog new.
+    dog name: nameString.
+    dog breed: breedString.
+    ^ dog.
+\end{minted}
+```
 
 ## Horizontal Rules
 
