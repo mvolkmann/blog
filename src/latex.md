@@ -923,6 +923,18 @@ There are several way to force space to be retained.
   (seemining with a thin space on both sides)
 - `\qquad` insert double the space inserted by `\quad`
 
+By default there is no vertical space betweeen paragraphs
+and the first line of each paragraph in each section,
+except the first, is indented.
+The `parskip` package can change this.
+For example, the following adds vertical space of 14pt between each paragraph
+and 20pt of indentation for the first line of each paragraph in each section,
+except the first.
+
+```latex
+\usepackage[skip=14pt, indent=20pt]{parskip}
+```
+
 To add a single newline after a line, add `\\` at its end,
 which introduces a "soft return".
 
