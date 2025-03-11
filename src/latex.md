@@ -1145,14 +1145,17 @@ The following is an example of rendering Smalltalk code:
   src="/blog/assets/latex-minted-smalltalk.png?v={{pkg.version}}">
 
 ```latex
-\begin{minted}[bgcolor=Beige, frame=lines, framesep=3mm, linenos, numbersep=3pt]{smalltalk}
+\begin{listing}[H]
+  \begin{minted}[bgcolor=Beige, frame=lines, framesep=3mm, linenos, numbersep=3pt]{smalltalk}
 newName: nameString breed: breedString
     | dog |
     dog := Dog new.
     dog name: nameString.
     dog breed: breedString.
     ^ dog.
-\end{minted}
+  \end{minted}
+  \caption{My Smalltalk code}
+\end{listing}
 ```
 
 ## Horizontal Rules
