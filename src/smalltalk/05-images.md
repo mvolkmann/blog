@@ -17,6 +17,11 @@ An image can be used to manage collections of data,
 perhaps held in `Dictionary` objects, as an alternative to using a database.
 
 One way to start an image is to double-click its file.
+If both Squeak Smalltalk and Cuis Smalltalk are installed,
+starting an image this way may choose the wrong virtual machine
+which can result in errors.
+To avoid this, only install one of these Smalltalk implementations
+or start the image in a different way.
 
 To save any changes, open the World menu.
 Select "Save Image" to save in the current image file.
