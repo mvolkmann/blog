@@ -171,9 +171,9 @@ For more snippets, see
 <a href="https://github.com/James-Yu/LaTeX-Workshop/wiki/Snippets"
 target="_blank">Snippets and shortcuts</a>.
 
-For math equations in a `\begin{align}` environment,
-hover over "align" to see a preview of
-how the equations will be rendered in a popup.
+To see a preview of a mathematical expression rendered in a popup,
+hover over the opening `$`, the opening `$$`,
+or the word "align" in `\begin{align}`.
 
 By default this extension uses the `pdflatex` command
 to generate PDF files. To change this to use `xelatex`,
