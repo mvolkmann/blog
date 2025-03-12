@@ -140,6 +140,11 @@ This automatically generates a PDF
 every time changes to a `.tex` file are saved
 and the PDF can be viewed inside VS Code.
 
+When changes to a `.tex` file are saved, the "LaTeX Workshop" extension
+"Build LaTeX project" command will automatically run.
+There is also a right-pointing green triangle in the upper-right
+that can be clicked to run that same command.
+
 To view the PDF, click the preview button in the upper-right that
 looks like a two-page document with a small magnifier glass on top of it.
 
