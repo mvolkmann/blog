@@ -113,6 +113,16 @@ open {name}.pdf
 
 TeX editors will handle both of these steps for you.
 
+### Installing in Windows
+
+There preferred LaTeX distribution for windows is
+{% aTargetBlank "https://miktex.org", "MiKTeX" %}.
+
+### Installing in Linux
+
+Many Linux distributions come with the commands needed
+to process LaTeX documents already installed.
+
 ## Editors
 
 Recommended LaTeX editors include TeXmaker, VS Code, and Overleaf.
