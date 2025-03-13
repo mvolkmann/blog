@@ -341,6 +341,12 @@ To render text in single curly quotes,
 begin with one backtick and end with one single quote.
 For example, `` `quoted text' ``.
 
+There are three sizes of dashes:
+
+- intra-word with `-`
+- number ranges with `--`
+- punctuation with `---`
+
 ## Document Classes
 
 Document classes change the default formatting and add support for new commands.
