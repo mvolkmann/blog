@@ -321,6 +321,9 @@ Many commands support a "star variant" that affects its behavior.
 For example, `\chapter{some name}` starts a new, numbered chapter
 and `\chapter*{some name}` starts a new, unnumbered chapter.
 
+The following special characters must be escaped with a backslash
+in order for them to appear as literal characters: $ & # % \_ { }.
+
 ## Document Classes
 
 Document classes change the default formatting and add support for new commands.
@@ -648,7 +651,7 @@ multi-line comment.
 ```latex
 \textbf{Bold}
 
-\textit{Italic}
+\textit{Italic} or \emph{Italic}
 
 \underline{Underline}
 
