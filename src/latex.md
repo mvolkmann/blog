@@ -949,6 +949,18 @@ In the document content, add `\blindtext`
 to insert a single paragraph of random text or
 `\blindtext[n]` to insert n paragraphs of random text.
 
+There are special environments for certain kinds of text.
+Poems, haikus, and song verses should appear in a `verse` environment.
+For example:
+
+```latex
+%\begin{verse}
+Out of memory.\\
+We wish to hold the whole sky,\\
+but we never will.
+%\end{verse}
+```
+
 ## Space
 
 The LaTeX compiler typically removes extra spaces as it sees fit.
@@ -957,6 +969,8 @@ There are several way to force space to be retained.
 
 - `\,` inserts a thin space
 - `\` followed by a space inserts an interword space (normal size space)
+- `~` inserts a space and prevents the previous word from appearing
+  on a different line than the next word (ex. `Mr.~Mark~Volkmann`)
 - `\quad` inserts space that is the width of a capital M in the current font
   (seemining with a thin space on both sides)
 - `\qquad` insert double the space inserted by `\quad`
@@ -1546,8 +1560,8 @@ Inline math mode renders mathematical text inline with other content.
 Display math mode renders mathematical text on its own line,
 separated from surrounding content and horizontally centered by default.
 
-To use inline math mode, surround content by single dollar signs.
-For example:
+To use inline math mode, surround content by single dollar signs
+or `\(` and `\)`. For example:
 
 <img alt="LaTeX inline math mode" style="width: 70%"
   src="/blog/assets/latex-inline-math-mode.png?v={{pkg.version}}">
