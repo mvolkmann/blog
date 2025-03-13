@@ -321,8 +321,12 @@ Many commands support a "star variant" that affects its behavior.
 For example, `\chapter{some name}` starts a new, numbered chapter
 and `\chapter*{some name}` starts a new, unnumbered chapter.
 
-The following special characters must be escaped with a backslash
-in order for them to appear as literal characters: $ & # % \_ { }.
+There are ten special characters in LaTeX
+that require special handling to render as the literal character.
+The following characters must be escaped with a backslash: $ & # % \_ { }.
+To render a backslash, use the `\textbackslash` command.
+To render a caret, use the `\textasciicircum` command.
+To render a tilde, use the `\textasciitilde` command.
 
 ## Document Classes
 
