@@ -195,6 +195,10 @@ Aliquip consectetur labore adipisicing voluptate. Cupidatat ...
 Eu sint eu cillum nisi tempor id excepteur fugiat fugiat sunt ...
 ```
 
+## Special Characters
+
+To output a literal { character, escape it with `@{`.
+
 ## Lists
 
 The following Texinfo file demonstrates rendering bulleted and numbered lists.
