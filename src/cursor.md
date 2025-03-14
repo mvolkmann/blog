@@ -189,24 +189,7 @@ I ran `npm install` again to install new dependencies that were added.
 I ran `npm run dev` to start a local web server
 and browsed localhost:3000.
 
-## Chat Attempt #2
-
-Open a chat. One way is to open the command palette and select "New Chat".
-Another way is to press cmd-i (macOS) or ctrl-i (others).
-
-Requests entered here can create and/or edit multiple source files.
-For example, "Create a Svelte project in a directory named "restaurant-finder".
-This will suggest commands to run to create the project.
-For each command, click the "Run command" button
-(or press cmd-return) to run it.
-Click "Pop out terminal" in order to answer questions
-being asked by `npx sv create`.
-
-Ask Cursor to customize the default application.
-For example, "Change the main page to contain a drop-down
-from which users can select a kind of food such as Chinese or Mexican."
-
-## Chat Attempt #3
+## Chat Attempt #2 - FAIL!
 
 Creating a new SvelteKit project is somewhat complicated at the moment,
 so I did that manually and then opened that project in Cursor.
@@ -215,24 +198,28 @@ I entered the following in the chat:
 
 - Create a component that renders a drop-down for selecting
   a cuisine like Chinese or Mexican and use it in the main page.
+
 - Alphabetize the cuisines in the drop-down.
+
 - Prettier complains that CuisineSelector.svelte should
   include a key for each block. Fix that.
+
 - When a cuisine is selected, display a map that shows
   all the restaurants of that type that are
   within 10 miles of the current location of the user.
+
 - Change the code to use Google Maps instead of mapbox.
 
-The last step output the following:
+  This output the following:
 
-> To get this working, you'll need to:
->
-> 1. Get a Google Maps API key:
->    - Go to the Google Cloud Console (https://console.cloud.google.com/)
->    - Create a new project or select an existing one
->    - Enable the Maps JavaScript API
->    - Create credentials (API key)
->    - Replace YOUR_GOOGLE_MAPS_API_KEY in the main page with your actual API key
+  > To get this working, you'll need to:
+  >
+  > 1. Get a Google Maps API key:
+  >    - Go to the Google Cloud Console (https://console.cloud.google.com/)
+  >    - Create a new project or select an existing one
+  >    - Enable the Maps JavaScript API
+  >    - Create credentials (API key)
+  >    - Replace YOUR_GOOGLE_MAPS_API_KEY in the main page with your actual API key
 
 - Get the Google Maps API key from a .env file.
 
@@ -348,4 +335,3 @@ The last step output the following:
 ## Resources
 
 - {% aTargetBlank "https://www.youtube.com/watch?v=ocMOZpuAMw4", "Cursor Tutorial for Beginners" %}
--
