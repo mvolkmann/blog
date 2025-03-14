@@ -206,6 +206,145 @@ Ask Cursor to customize the default application.
 For example, "Change the main page to contain a drop-down
 from which users can select a kind of food such as Chinese or Mexican."
 
+## Chat Attempt #3
+
+Creating a new SvelteKit project is somewhat complicated at the moment,
+so I did that manually and then opened that project in Cursor.
+
+I entered the following in the chat:
+
+- Create a component that renders a drop-down for selecting
+  a cuisine like Chinese or Mexican and use it in the main page.
+- Alphabetize the cuisines in the drop-down.
+- Prettier complains that CuisineSelector.svelte should
+  include a key for each block. Fix that.
+- When a cuisine is selected, display a map that shows
+  all the restaurants of that type that are
+  within 10 miles of the current location of the user.
+- Change the code to use Google Maps instead of mapbox.
+
+The last step output the following:
+
+> To get this working, you'll need to:
+>
+> 1. Get a Google Maps API key:
+>    - Go to the Google Cloud Console (https://console.cloud.google.com/)
+>    - Create a new project or select an existing one
+>    - Enable the Maps JavaScript API
+>    - Create credentials (API key)
+>    - Replace YOUR_GOOGLE_MAPS_API_KEY in the main page with your actual API key
+
+- Get the Google Maps API key from a .env file.
+
+  This created a `.env` at the root of the project.
+  I edited that file and set PUBLIC_GOOGLE_MAPS_API_KEY to my API key.
+
+- I ran the app again and selected "Mexican" from the cuisine drop-down.
+  It opened a dialog that said "http://localhost:5173 wants to know your location."
+  I clicked the "Allow while visiting this site" button.
+  It rendered a map with the caption "Showing Mexican restaurants near you"
+  and a dialog that said "This page can't load Google Maps correctly.
+  Do you own this website?"
+  I clicked the "OK" button.
+  In the DevTools console I saw the following messages:
+
+  - "Google Maps JavaScript API has been loaded directly without loading=async.
+    This can result in suboptimal performance."
+  - "Google Maps JavaScript API warning: InvalidKey"
+  - "As of February 21st, 2024, google.maps.Marker is deprecated.
+    Please use google.maps.marker.AdvancedMarkerElement instead.
+    At this time, google.maps.Marker is not scheduled to be discontinued,
+    but google.maps.marker.AdvancedMarkerElement
+    is recommended over google.maps.Marker."
+
+- I see a message in the DevTools console that says "Google Maps
+  JavaScript API has been loaded directly without loading=async.
+  This can result in suboptimal performance." Please fix that.
+
+  Cursor attempted to fix this, but the changes it made
+  did not make the warning go away.
+
+- google.maps.Marker is deprecated.
+  Please use google.maps.marker.AdvancedMarkerElement instead.
+
+  The changes removed the warning about google.maps.Marker being deprecated,
+  but introduced these new issues:
+
+  - Please use addEventListener('gmp-click', ...)
+    instead of addEventListener('click', ...).
+  - The map is initialized without a valid Map ID,
+    which will prevent use of Advanced Markers.
+
+- Please use addEventListener('gmp-click', ...)
+  instead of addEventListener('click', ...).
+
+  The changes removed the warning about addEventListener.
+
+- The map is initialized without a valid Map ID,
+  which will prevent use of Advanced Markers.
+  Please initialize the map with a valid map id.
+
+  This make changes and output the following:
+
+  To get this working, you'll need to:
+
+  1. Create a Map ID in the Google Cloud Console:
+     - Go to https://console.cloud.google.com/google/maps-apis/maps
+     - Click "Create Map ID"
+     - Give your map a name
+     - Copy the generated Map ID
+  2. Update your .env file with your Map ID:
+     PUBLIC_GOOGLE_MAPS_ID=your_map_id_here
+
+  The URL given to create a map id is incorrect. The correct URL is
+  https://console.cloud.google.com/google/maps-apis/studio/maps.
+  I browsed that URL and did the following:
+
+  - click "Create map ID" button
+  - enter a name and description
+  - selected "JavaScript" for the Map type
+  - accepted the default of Raster rather than Vector
+  - clicked the "Save" button
+  - copied the "Map ID" that was displayed
+  - modified `PUBLIC_GOOGLE_MAPS_ID` in the `.env` file to have that value
+
+- When I restart the Svelte server, I'm getting the error
+  "No loader is configured for '.node' files:
+  node_modules/fsevents/fsevents.node". Please fix this.
+
+- Now I get SyntaxError: Identifier '**vite**injectQuery'
+  has already been declared in app.js. Please fix this.
+
+- The changes you made did not fix the problem. Please try again.
+
+- That didn't fix the problem either. Do you have another idea?
+
+- Check my SvelteKit version and ensure it's compatible with your Vite version.
+
+  This output the following:
+
+  I see the issue now. You're using some very recent versions that might
+  have compatibility issues. The problem is that you're using Svelte 5
+  (which is still in beta) along with Vite 6 (which is also very new).
+  Let's downgrade to more stable versions. I'll update your package.json.
+
+- Now I get the error "Top-level await is not available in the
+  configured target environment" Can you fix this?
+
+- That did not fix the problem. The file node_modules/vitefu/src/index.js
+  uses a top-level await.
+
+- It's back to giving me
+  "SyntaxError: Identifier '**vite**injectQuery' has already been declared".
+  Can you fix that?
+
+- Now I get SyntaxError: Invalid left-hand side in assignment in hook.js.
+  Can you fix that?
+
+- Now we are back to ERROR: Top-level await is
+  not available in the configured target environment.
+  It seems that your fixes are going in circles. Is it time to give up?
+
 ## Resources
 
 - {% aTargetBlank "https://www.youtube.com/watch?v=ocMOZpuAMw4", "Cursor Tutorial for Beginners" %}
