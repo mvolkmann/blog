@@ -106,8 +106,13 @@ add line containing `font-family = {name}`, and reload the configuration.
 
 ## Comparison to Warp
 
-Warp supports the following features which are not supported by Ghostty:
+| Topic          | Ghostty                        | Warp                               |
+| -------------- | ------------------------------ | ---------------------------------- |
+| focus          | performance                    | user experience and AI integration |
+| implemented in | Zig                            | Rust                               |
+| features       | minimalistic                   | rich                               |
+| configuation   | in a single configuration file | in a graphical UI                  |
 
-- blocks for each command that hold all its output
-- search within a block
-- scroll to top or bottom of a block
+Warp supports blocks which hold a command and all its output.
+Users can search within a block and
+can scroll to the top or bottom of the output.
