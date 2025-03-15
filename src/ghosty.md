@@ -75,12 +75,19 @@ To see all the available configuration options and their default values,
 enter the following in a split:
 
 ```bash
+ghostty +show-config --default | sort
+```
+
+To also see documenation on the configuration options
+enter the following in a split:
+
+```bash
 ghostty +show-config --default --docs
 ```
 
 This outputs over 2500 lines!
-You'll probably want to save this in a text file
-and then read it in your text editor.
+Pipe the previous command to Vim to make it easier
+to navigate and search the content.
 
 After modifying the `config` file, return to Ghostty
 and select Ghostty ... Reload Configuration or press cmd-shift-comma.
