@@ -113,12 +113,14 @@ add line containing `font-family = {name}`, and reload the configuration.
 
 ## Comparison to Warp
 
-| Topic          | Ghostty                        | Warp                               |
-| -------------- | ------------------------------ | ---------------------------------- |
-| focus          | performance                    | user experience and AI integration |
-| implemented in | Zig                            | Rust                               |
-| features       | minimalistic                   | rich                               |
-| configuation   | in a single configuration file | in a graphical UI                  |
+| Topic          | Ghostty                        | Warp              |
+| -------------- | ------------------------------ | ----------------- |
+| focus          | performance                    | user experience   |
+| AI integration | none                           | present           |
+| features       | minimalistic                   | rich              |
+| tabs           | only show working directory    | can be named      |
+| configuation   | in a single configuration file | in a graphical UI |
+| implemented in | Zig                            | Rust              |
 
 Warp supports blocks which hold a command and all its output.
 Users can search within a block and
