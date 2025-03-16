@@ -56,6 +56,7 @@ by selecting Ghostty ... Check for updates...
 Each new tab begins with a single split.
 
 Changing the font size only affects the currently focused split.
+It would be nice to have a way to change the font size of all splits at once.
 
 Closing the last/only split in a tab closes the tab.
 
