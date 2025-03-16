@@ -135,6 +135,13 @@ This font supports ligatures which are enabled by default.
 To select a different font, edit the settings file,
 add line containing `font-family = {name}`, and reload the configuration.
 
+## Images
+
+To render images in Ghostty:
+
+- `brew install --cask kitty`
+- `kitten icat {file-path}`
+
 ## Comparison to Warp
 
 | Topic          | Ghostty                        | Warp              |
