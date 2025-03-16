@@ -12,6 +12,9 @@ that uses platform-native UI and GPU acceleration".
 It is currently available for macOS and Linux.
 Windows support is planned for the future.
 
+Ghostty supports multiple windows, tabs within a window,
+and panes within a tab (referred to as "splits").
+
 Ghostty is primarily implemented in Zig.
 
 All the keyboard shortcuts described below are for macOS.
@@ -52,11 +55,11 @@ by selecting Ghostty ... Check for updates...
 
 Each new tab begins with a single split.
 
-Changing the font size only affects the current split.
+Changing the font size only affects the currently focused split.
 
 Closing the last/only split in a tab closes the tab.
 
-"Zoom split" causes the current split to use the entire window
+"Zoom split" causes the currently focused split to use the entire window
 and hides all other splits.
 Doing it again returns to the previous view.
 
@@ -66,7 +69,7 @@ They cannot be named.
 ## Settings
 
 To modify Ghostty settings, select Ghostty ... Settings... or press cmd-comma.
-This will open the file
+This will open the TOML file
 `~/Library/Application Support/com.mitchellh.ghostty/config`
 in your default text editor.
 See the comments in that file for instructions.
@@ -91,6 +94,23 @@ to navigate and search the content.
 
 After modifying the `config` file, return to Ghostty
 and select Ghostty ... Reload Configuration or press cmd-shift-comma.
+
+The following is an example of a Ghostty config file.
+
+```toml
+background = 282c34
+foreground = ffffff
+
+keybind = shift+ctrl+r=reload_config
+
+keybind = shift+ctrl+h=new_split:left
+keybind = shift+ctrl+j=new_split:down
+keybind = shift+ctrl+k=new_split:up
+keybind = shift+ctrl+l=new_split:right
+
+# Empty values reset the configuration to default value.
+font-family
+```
 
 ## Themes
 
@@ -122,6 +142,13 @@ add line containing `font-family = {name}`, and reload the configuration.
 | configuation   | in a single configuration file | in a graphical UI |
 | implemented in | Zig                            | Rust              |
 
+TODO: How likely is it that Ghostty will gain the ability to name tabs?
+TODO: Is there a list of requested features somewhere?
+
 Warp supports blocks which hold a command and all its output.
 Users can search within a block and
 can scroll to the top or bottom of the output.
+An alternative in Ghostty is to redirect command output to a file,
+open the file in Vim with read-only mode,
+and use its commands to navigate and view the output.
+For example: `ls | vim -R`.
