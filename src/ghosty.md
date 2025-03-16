@@ -69,10 +69,11 @@ They cannot be named.
 ## Settings
 
 To modify Ghostty settings, select Ghostty ... Settings... or press cmd-comma.
-This will open the TOML file
-`~/Library/Application Support/com.mitchellh.ghostty/config`
-in your default text editor.
-See the comments in that file for instructions.
+This will open a TOML file in your default text editor.
+In macOS this file is
+`~/Library/Application Support/com.mitchellh.ghostty/config`.
+In Linux this file is `$HOME/.config/ghostty/config`.
+See the comments in this file for instructions.
 
 To see all the available configuration options and their default values,
 enter the following in a split:
@@ -112,6 +113,8 @@ keybind = shift+ctrl+l=new_split:right
 font-family
 ```
 
+Setting `font-size` has no effect!
+
 ## Themes
 
 To view the available color themes, enter the following in a split:
@@ -142,8 +145,10 @@ add line containing `font-family = {name}`, and reload the configuration.
 | configuation   | in a single configuration file | in a graphical UI |
 | implemented in | Zig                            | Rust              |
 
-TODO: How likely is it that Ghostty will gain the ability to name tabs?
-TODO: Is there a list of requested features somewhere?
+Supposedly tab naming has been implemented.
+See https://github.com/ghostty-org/ghostty/pull/4217.
+But when I right-click in the body of a split,
+the context menu does not contain "Set Title".
 
 Warp supports blocks which hold a command and all its output.
 Users can search within a block and
