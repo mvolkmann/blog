@@ -1,6 +1,6 @@
 ---
 eleventyNavigation:
-  key: Ghosty
+  key: Ghostty
 layout: topic-layout.njk
 ---
 
