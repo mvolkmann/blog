@@ -288,17 +288,22 @@ To render images in Ghostty:
 Shaders apply a graphical effect to the terminal background.
 They are typically written in the OpenGL Shading Language (GLSL).
 Shaders can create dynamic, animated, or stylized effects.
-While they are cool, shaders can make Ghostty much slower.
 
-For example, download the file `cineShader-Lava.glsl` from
-https://github.com/hackr-sh/ghostty-shaders/blob/main/cineShader-Lava.glsl.
-Then add the following configuration option:
+There is a collection of shaders for Ghostty at
+{% aTargetBlank "https://github.com/hackr-sh/ghostty-shaders/",
+"ghostty-shaders" %}.
+Most of these work, but a few seem to have no effect.
+
+For example, download the file `cineShader-Lava.glsl`
+and add the following configuration option:
 
 ```toml
 custom-shader = {path-to-shader-files}/cineShader-Lava.glsl
 ```
 
-Restart Ghostty to see a lava lamp effect in the Ghostty background.
+Reload the configuration to see a lava lamp effect in the Ghostty background.
+This shader makes Ghostty much slower,
+but the others don't seem to hurt performance.
 
 ## Comparison to Warp
 
