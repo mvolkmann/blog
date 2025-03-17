@@ -103,9 +103,13 @@ and select Ghostty ... Reload Configuration or press cmd-shift-comma.
 The following is an example of a Ghostty config file.
 
 ```toml
+background-opacity = 0.9
 font-size = 16
 macos-titlebar-style = tabs
 theme = catppuccin-mocha
+
+# Save the windows, tabs, and splits when exiting Ghostty
+# so they are automatically restored when Ghostty is launched again.
 window-save-state = always # This does not save split titles!
 
 keybind = shift+ctrl+r=reload_config
@@ -140,9 +144,109 @@ add line containing `font-family = {name}`, and reload the config file.
 To list the current key bindings, enter `ghostty +list-keybinds`.
 
 To change the key bindings, modify and reload the config file.
+Add lines with the syntax `keybind = {trigger}={action}`.
+For example, `keybind = ctrl-shift-c=clear_screen`.
+
+The trigger can be a single key, a single key with modifiers,
+or a sequence of keys.
+
+Supported keys include:
+
+- letters: a to z
+- digits: 0 to 9
+- punctuation: . , ; ' ` / \ + - = [ ]
+- arrows: up down right left
+- enter (return), escape, space, tab,
+- function keys: F1 to F25
+- shift, control, alt, super
+- and more keys that are less frequently used in key bindings
+
+In macOS, "alt" means the option key and "super" means the command key.
+
+As of Ghostty version 1.1.3, the supported actions include:
+
+- adjust_selection
+- clear_screen
+- close_all_windows
+- close_surface
+- close_tab
+- close_window
+- copy_to_clipboard
+- copy_url_to_clipboard
+- crash
+- csi
+- cursor_key
+- decrease_font_size
+- equalize_splits
+- esc
+- goto_split
+- goto_tab
+- ignore
+- increase_font_size
+- inspector
+- jump_to_prompt
+- last_tab
+- move_tab
+- new_split
+- new_tab
+- new_window
+- next_tab
+- open_config
+- paste_from_clipboard
+- paste_from_selection
+- previous_tab
+- prompt_surface_title
+- quit
+- reload_config
+- reset
+- reset_font_size
+- reset_window_size
+- resize_split
+- scroll_page_down
+- scroll_page_fractional
+- scroll_page_lines
+- scroll_page_up
+- scroll_to_bottom
+- scroll_to_top
+- select_all
+- text
+- toggle_fullscreen
+- toggle_maximize
+- toggle_quick_terminal
+- toggle_secure_input
+- toggle_split_zoom
+- toggle_tab_overview
+- toggle_visibility
+- toggle_window_decorations
+- unbind
+- write_screen_file
+- write_scrollback_file
+- write_selection_file
 
 For more detail, see {% aTargetBlank "https://ghostty.org/docs/config/keybind",
 "Custom Keybindings" %}.
+
+## More Command-Line Interface (CLI)
+
+The following options can be specified after the `ghostty` command
+to obtain specific information:
+
+| Option           | Information                                                     |
+| ---------------- | --------------------------------------------------------------- |
+| +boo             | returns the Ghostty ASCII animation (ctrl-c to exit)            |
+| +crash-report    | to inspect and send crash reports                               |
+| +help            | outputs help on Ghostty                                         |
+| +list-actions    | outputs all Ghostty actions (can be bound to keys)              |
+| +list-colors     | lists all predefined color names and their RGB codes            |
+| +list-fonts      | lists all available fonts                                       |
+| +list-keybinds   | lists all current key bindings                                  |
+| +list-themes     | lists and previews all available themes (ctrl-c to exit)        |
+| +show-config     | outputs the current values of all configuration options         |
+| +show-face       | shows font face used to render a given codepoint or string      |
+| +validate-config | validates configuration file, outputting nothing if valid       |
+| +version         | outputs Ghostty version, Zig version used to build it, and more |
+
+For help on a given option, enter `ghostty {option} --help`.
 
 ## Images
 
