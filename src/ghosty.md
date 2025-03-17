@@ -84,10 +84,11 @@ It is available now if Ghostty is built from source.
 
 It seems there is currently no way to swap the positions of existing splits.
 
-## Settings
+## Configuration
 
 To modify Ghostty settings, select Ghostty ... Settings... or press cmd-comma.
-This will open a TOML file in your default text editor.
+This will open a text file (seems to use TOML syntax)
+in your default text editor.
 In macOS this file is
 `~/Library/Application Support/com.mitchellh.ghostty/config`.
 In Linux this file is `$HOME/.config/ghostty/config`.
