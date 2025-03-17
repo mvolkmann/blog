@@ -4,9 +4,9 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-<video width="300" height="400">
-  <source src="/blog/assets/ghostty-boo.mov" type="video/quicktime">
-  No video support.
+<video height="200" controls>
+  <source src="/blog/assets/ghostty-boo.mp4" type="video/mp4">
+  Your browser does not support the video tag.
 </video>
 
 ## Overview
