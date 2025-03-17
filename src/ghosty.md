@@ -283,6 +283,23 @@ To render images in Ghostty:
 - `brew install --cask kitty`
 - `kitten icat {file-path}`
 
+## Shaders
+
+Shaders apply a graphical effect to the terminal background.
+They are typically written in the OpenGL Shading Language (GLSL).
+Shaders can create dynamic, animated, or stylized effects.
+While they are cool, shaders can make Ghostty much slower.
+
+For example, download the file `cineShader-Lava.glsl` from
+https://github.com/hackr-sh/ghostty-shaders/blob/main/cineShader-Lava.glsl.
+Then add the following configuration option:
+
+```toml
+custom-shader = {path-to-shader-files}/cineShader-Lava.glsl
+```
+
+Restart Ghostty to see a lava lamp effect in the Ghostty background.
+
 ## Comparison to Warp
 
 | Topic          | Ghostty                        | Warp              |
