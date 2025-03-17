@@ -28,6 +28,17 @@ and follow the directions.
 Once Ghostty is running, check for updates
 by selecting Ghostty ... Check for updates...
 
+## Auto Updates
+
+In macOS, Ghostty can be configured to notify you about an available update.
+It can also automatically download a new version, but will not install it.
+
+Set the configuration option `auto-update` to `off`, `check`, or `download`.
+
+Set the configuration option `auto-update-channel`
+to `stable` or `tip` (latest development version).
+The default is based on whether the currently running version is from the `tip`.
+
 ## Keyboard Shortcuts
 
 | Action                  | Keyboard Shortcut      |
