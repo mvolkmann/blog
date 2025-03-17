@@ -35,7 +35,8 @@ LaTeX is pronounced "Lah-tech" or "Lay-tech".
 It is not pronounced the same as "latex", the substance
 that comes from trees and plants which is used to produce rubber.
 
-Both TeX and LaTeX are markup languages.
+Both TeX and LaTeX are markup languages that are
+used in text files with a `.tex` file extension.
 Other commonly used markup languages include HTML, Markdown, SVG, and XML.
 
 ## Pros and Cons
@@ -44,12 +45,13 @@ Some pros of using LaTeX include:
 
 - provides high-quality typesetting for professional looking PDF documents,
   especially those that contain mathematical equations
-- allows authors to focus on content while maintaining consistent formatting,
-  such as automatic numbering of pages, chapters, sections, figures, and tables
+- allows authors to focus on content before formatting while maintaining
+  consistent formatting and automatic numbering of
+  pages, chapters, sections, figures, and tables
 - supports extensive customization through thousands of packages
   and templates for various document types
-- supports generating a table of contents, bibligraphy (with references),
-  index, and footnotes
+- supports generating a table of contents, list of figures (images),
+  list of tables, footnotes, bibligraphy (with references), and an index
 - scales to support large projects like books and theses
   by allowing documents to be split into multiple files
 - supports defining parameterized macros that reduce duplicated code
@@ -62,11 +64,11 @@ Some cons of using LaTeX include:
 - steep learning curve for its markup syntax
 - customizing layouts and formatting can be time-consuming
 - markup syntax must be compiled in order to view
-  what will be rendered in the output PDF
+  what will be rendered in the target output (often a PDF)
 - error messages can by cryptic
-- creating tables and managing placement of images is cumbersome
+- creating tables and managing placement of images can be more cumbersome
   compared to many word processing applications
-- collaboration requires all contributes to have knowledge of LaTeX syntax
+- collaboration requires all contributors to have knowledge of LaTeX
 
 ## Installing
 
@@ -269,6 +271,11 @@ or $399 (unlimited collaborators per project) per year.
 
 ## Syntax
 
+LaTeX commands begin with a backslash followed by a name.
+Some commands have optional and/or required parameters.
+Optional arguments appear in square brackets separated by commas.
+Required arguments each appear in curly braces.
+
 The most basic LaTeX document contains the following:
 
 ```latex
@@ -277,6 +284,9 @@ The most basic LaTeX document contains the following:
 Hello
 \end{document}
 ```
+
+An "environment" can provide content to be rendered at its
+beginning and end, and can specify how its content will be formatted.
 
 The `\begin` command starts a new "environment"
 and must be paired with a corresponding `end` command.
@@ -915,9 +925,13 @@ For more colors, see
 ## Paragraphs
 
 Paragraphs are separated by blank lines which introduce "hard returns".
+A period is treated as the end of a sentence
+unless it is preceded by an uppercase letter.
+If a period that does not end a sentence appears in one
+(such as `etc.`), follow the period with a backslash and a space.
 
-By default, the first line in each paragraph will be indented
-(except for the first paragraph in each chapter or section).
+By default, the first line in each paragraph
+except the first in a chapter or section will be indented.
 And there will be no extra space separating the pargraphs,
 despite having a blank line between them in the `.tex` file.
 
@@ -971,6 +985,8 @@ but we never will.
 ## Space
 
 The LaTeX compiler typically removes extra spaces as it sees fit.
+A sequence of space characters such as a spaces, tabs, and linefeeds
+are treated the same as a single space character.
 
 There are several way to force space to be retained.
 
@@ -1854,11 +1870,9 @@ The following document demonstrates several of these.
 
 ## Dots
 
-Dots are the ellipsis character rendered in different orientations.
-The dots commands must be used in math mode.
-Some of the dots commands require the amsmath package.
-
-To display an ellipsis, insert the `\ldots` command.
+Dot commands render an ellipsis in different orientations.
+Simply typing three periods does not
+result in the correct spacing for an ellipsis.
 
 The following examples demonstrate the dot commands:
 
@@ -1872,6 +1886,9 @@ $ 3 \cdots 10 $ \\ % vertically centered horizontal dots
 $ 4~ \vdots ~10 $ \\ % vertical dots; ~ ("tie") and is like &nbsp; in HTML
 $ 5 \ddots 10 $ \\ % diagonal dots
 ```
+
+The commands `\dots`, `\ldots`, and `\vdots` can be used in any mode.
+The commands `\cdots` and `\vdots` can only be used in math mode.
 
 ## Matrices
 
@@ -2234,7 +2251,7 @@ target="_blank">LaTeX:Symbols</a>.
 
 ## Document Title, Author, and Date
 
-The preamble can used the `\title`, `\author`, and `\date` commands to
+The preamble can include the `\title`, `\author`, and `\date` commands to
 specify information that will be used in a nicely formatted document title.
 For example:
 
@@ -2244,6 +2261,10 @@ For example:
 \author{R. Mark Volkmann}
 \date{\today}
 ```
+
+The `\date` argument can be a specific date.
+The `\today` command provides the current date.
+Omitting the `\date` command will also render the current date.
 
 Use the `\maketitle` command inside the document to render the title information.
 For example:
@@ -2312,11 +2333,16 @@ This generates the following table of contents:
 
 ## Formatting the Word LaTeX
 
-The word LaTeX is specially formatted by surrounding it with backslashes.
-For example, `\LaTeX\` is rendered as follows:
+The word LaTeX is specially formatted with the command `\LaTeX`
+which reneders the following:
 
 <img alt="LaTeX rendered" style="width: 10%"
   src="/blog/assets/latex-rendered.png?v={{pkg.version}}">
+
+Similarly, the word TeX is spacially formatted with `\TeX`.
+
+Both are typically followed by a backslash and a space
+to get proper horizontal spacing between it and what follows.
 
 ## Footnotes
 
