@@ -68,7 +68,10 @@ and hides all other splits.
 Doing it again returns to the previous view.
 
 Tabs display their current working directory.
-They cannot be named.
+Currently tabs cannot be given a custom title, but that feature is coming soon.
+It is available now if Ghostty is built from source.
+
+It seems there is currently no way to swap the positions of existing splits.
 
 ## Settings
 
