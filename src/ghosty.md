@@ -32,26 +32,29 @@ by selecting Ghostty ... Check for updates...
 
 | Action                  | Keyboard Shortcut      |
 | ----------------------- | ---------------------- |
-| open new window         | cmd-n                  |
-| open new tab            | cmd-t                  |
-| create horizontal split | cmd-d                  |
-| create vertical split   | cmd-shift-d            |
+| toggle full screen      | globe f                |
 | increase font size      | cmd-plus               |
 | decrease font size      | cmd-minus              |
+| open new window         | cmd-n                  |
+| goto next window        | cmd-`                  |
+| open new tab            | cmd-t                  |
+| goto next tab           | cmd-shift-]            |
+| goto previous tab       | cmd-shift-[            |
+| create horizontal split | cmd-d                  |
+| create vertical split   | cmd-shift-d            |
 | reset font size         | cmd-0 (zero)           |
 | close split             | cmd-w                  |
 | zoom split              | cmd-shift-return       |
-| select previous split   | cmd-[                  |
-| select next split       | cmd-]                  |
-| select split above      | cmd-option-up arrow    |
-| select split below      | cmd-option-down arrow  |
-| select split left       | cmd-option-left arrow  |
-| select split right      | cmd-option-right arrow |
+| goto previous split     | cmd-[                  |
+| goto next split         | cmd-]                  |
+| goto split above        | cmd-option-up arrow    |
+| goto split below        | cmd-option-down arrow  |
+| goto split left         | cmd-option-left arrow  |
+| goto split right        | cmd-option-right arrow |
 | resize split up         | cmd-ctrl-up arrow      |
 | resize split down       | cmd-ctrl-down arrow    |
 | resize split left       | cmd-ctrl-left arrow    |
 | resize split right      | cmd-ctrl-right arrow   |
-| toggle full screen      | globe f                |
 
 Each new tab begins with a single split.
 
@@ -100,21 +103,16 @@ and select Ghostty ... Reload Configuration or press cmd-shift-comma.
 The following is an example of a Ghostty config file.
 
 ```toml
-background = 282c34
-foreground = ffffff
+font-size = 16
+macos-titlebar-style = tabs
+theme = catppuccin-mocha
+window-save-state = always # This does not save split titles!
 
 keybind = shift+ctrl+r=reload_config
-
-keybind = shift+ctrl+h=new_split:left
-keybind = shift+ctrl+j=new_split:down
-keybind = shift+ctrl+k=new_split:up
-keybind = shift+ctrl+l=new_split:right
 
 # Empty values reset the configuration to default value.
 font-family
 ```
-
-Setting `font-size` has no effect!
 
 ## Themes
 
