@@ -134,14 +134,27 @@ font-family
 
 ## Themes
 
+Ghostty ships with support for hundreds of color themes,
+including all of them from
+{% aTargetBlank "https://iterm2colorschemes.com", "Iterm2-color-schemes" %}.
+
 To view the available color themes, enter the following in a split:
 
 ```bash
 ghostty +list-themes
 ```
 
+To exit, press q.
+
 To select a color theme, edit the settings file,
 add line containing `theme = {name}`, and reload the configuration.
+
+To configure Ghostty to use different themes for light and dark mode
+based on the OS light/dark mode, set the theme like the following:
+
+```text
+theme = dark:catppuccin-frappe,light:catppuccin-latte
+```
 
 ## Fonts
 
