@@ -352,3 +352,9 @@ To use this version of the app:
 - Open the Finder.
 - Navigate to Applications.
 - Double-click ghostty.app.
+
+## Main Missing Features
+
+- ability to save custom tab titles so
+  they are restored when Ghostty is restarted
+- integration with LLMs to provide shell command suggestions
