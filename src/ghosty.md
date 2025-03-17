@@ -188,4 +188,10 @@ Here are the steps to build the Ghostty app from source in macOS:
 - `zig build -Doptimize=ReleaseFast` (runs for several minutes)
 - `cd macos`
 - `xcodebuild`
+
+To use this version of the app:
+
 - `mv build/releaseLocal/Ghostty.app /Applications`
+- Open the Finder.
+- Navigate to Applications.
+- Double-click ghostty.app.
