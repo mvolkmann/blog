@@ -18,11 +18,18 @@ The name was original composed of the Greek letters
 tau, epsilon, and chi (which looks like the Latin leter X).
 That is why TeX is pronounced "tech" and not "tex".
 
-{% aTargetBlank "https://www.latex-project.org", "LaTeX" %} is a
-high-level typesetting system built on TeX.
-It was created by Leslie Lamport in 1984.
+{% aTargetBlank "https://www.latex-project.org", "LaTeX" %}
+is a high-level typesetting system built on TeX.
+The initial version was created by Leslie Lamport in 1984.
+The latest version was implemented by a group led by Frank Mittelbach.
 LaTeX is widely used in academia for publication of
 techical articles, papers, and books.
+It is typically used to produce PDF files,
+but can also produce DVI (device independent), EPUB, HTML,
+Markdown, MathML, plain text, Postscript, SVG, and Word files.
+
+The additional programs `BibTeX` and `MakeIndex` are used to generate
+bibliography and index pages.
 
 LaTeX is pronounced "Lah-tech" or "Lay-tech".
 It is not pronounced the same as "latex", the substance
@@ -37,7 +44,7 @@ Some pros of using LaTeX include:
 
 - provides high-quality typesetting for professional looking PDF documents,
   especially those that contain mathematical equations
-- allows users to focus on content while maintaining consistent formatting,
+- allows authors to focus on content while maintaining consistent formatting,
   such as automatic numbering of pages, chapters, sections, figures, and tables
 - supports extensive customization through thousands of packages
   and templates for various document types
@@ -817,7 +824,7 @@ both support TrueType and OpenType fonts.
 
 To use those kinds of fonts:
 
-1. User the `fontspec` package.
+1. Use the `fontspec` package.
 
    ```latex
    \usepackage{fontspec}
