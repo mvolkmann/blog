@@ -357,4 +357,7 @@ To use this version of the app:
 
 - ability to save custom tab titles so
   they are restored when Ghostty is restarted
+  (see https://github.com/ghostty-org/ghostty/discussions/6785)
+
 - integration with LLMs to provide shell command suggestions
+  (see https://github.com/ghostty-org/ghostty/discussions/4642)

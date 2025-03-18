@@ -125,7 +125,7 @@ For best results, make detailed requests rather than general ones.
 For example, requesting "Write a todo app" is too general.
 Have a clear vision of what you want to build.
 
-## Chat Attempt #1 - FAIL!
+## Chat Attempt #1: Svelte - FAIL!
 
 Press cmd-i (macOS) or ctrl-i (others) to open Chat mode.
 Requests entered here can create and/or edit multiple source files.
@@ -189,7 +189,7 @@ I ran `npm install` again to install new dependencies that were added.
 I ran `npm run dev` to start a local web server
 and browsed localhost:3000.
 
-## Chat Attempt #2 - FAIL!
+## Chat Attempt #2: Svelte - FAIL!
 
 Creating a new SvelteKit project is somewhat complicated at the moment,
 so I did that manually and then opened that project in Cursor.
@@ -208,7 +208,7 @@ I entered the following in the chat:
   all the restaurants of that type that are
   within 10 miles of the current location of the user.
 
-- Change the code to use Google Maps instead of mapbox.
+- Change the code to use Google Maps instead of Mapbox.
 
   This output the following:
 
@@ -332,6 +332,57 @@ I entered the following in the chat:
   not available in the configured target environment.
   It seems that your fixes are going in circles. Is it time to give up?
 
+## Chat Attempt #3: React - FAIL!
+
+I entered the following in the chat:
+
+- Create a React application that renders a drop-down for selecting
+  a cuisine like Chinese or Mexican and use it in the main page.
+
+  After this I started the server with `yarn start`.
+
+- Alphabetize the cuisines in the drop-down.
+
+- When a cuisine is selected, display a map that shows
+  all the restaurants of that type that are
+  within 10 miles of the current location of the user.
+
+- Change the code to use Google Maps instead of Mapbox.
+
+- Get the Google Maps API key from a .env file.
+
+  After this I modified the `.env` file contain my Google Maps API key
+  and restarted the server with `yarn start`.
+
+- In the DevTools Console I see
+  "As of February 21st, 2024, google.maps.Marker is deprecated.
+  Please use google.maps.marker.AdvancedMarkerElement instead." Fix this.
+
+- Now I get "Performance warning! LoadScript has been reloaded unintentionally!
+  You should not pass `libraries` prop as new array. Please keep an array of
+  libraries as static class property for Components and PureComponents,
+  or just a const variable outside of component,
+  or somewhere in config files or ENV variables" Fix this.
+
+- Now I get "The map is initialized without a valid Map ID, which will prevent use of Advanced Markers." Fix this.
+
+  After this I modified the `.env` file contain my Google Maps map ID
+  and restarted the server with `yarn start`.
+
+- Now I get an error on line 199 of RestaurantMap.tsx that says
+  "Property 'mapId' does not exist on type 'IntrinsicAttributes &
+  IntrinsicClassAttributes<GoogleMap> & Readonly<GoogleMapProps>'." Fix this.
+
+- Now I get the error "This API key is not authorized to use this
+  service or API. Places API error: ApiTargetBlockedMapError".
+  How can I fix this?
+
+  After this I followed the instructions it output.
+  I also updated my Google Cloud payment method to use a new credit card.
+  Then I restarted restarted the server with `yarn start` and tried again.
+  It still says "This API key is not authorized to use this service or API."
+
 ## Resources
 
-- {% aTargetBlank "https://www.youtube.com/watch?v=ocMOZpuAMw4", "Cursor Tutorial for Beginners" %}
+- {% aTargetBlank "https://www.youtube.com/watch?v=ocMOZpuAMw4",
+  "Cursor Tutorial for Beginners" %}
