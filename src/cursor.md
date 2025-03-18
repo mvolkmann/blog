@@ -419,6 +419,11 @@ I entered the following in the chat:
   I don't see a popup containing the restaurant name and address,
   and no route lines are drawn on the map. Fix these issues.
 
+  Cursor modified the code and said "If you're still not seeing the popup
+  or route lines, please check that you have the correct Google Maps API key
+  with the following APIs enabled:
+  Maps JavaScript API, Places API, and Directions API.
+
 ## Resources
 
 - {% aTargetBlank "https://www.youtube.com/watch?v=ocMOZpuAMw4",
