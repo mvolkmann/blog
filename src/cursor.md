@@ -395,6 +395,8 @@ I entered the following in the chat:
 - Change the map markers for each restaurant to be
   circles that contain a rating for the restaurant.
 
+  This works! Where is it getting the ratings?
+
 - When a map marker is clicked, show the best route on the map
   and remove any previously displayed route.
 
