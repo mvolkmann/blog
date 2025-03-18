@@ -382,6 +382,43 @@ I entered the following in the chat:
   Then I restarted restarted the server with `yarn start` and tried again.
   It still says "This API key is not authorized to use this service or API."
 
+  It turns out that I needed to enable "Places API" under "Credentials"
+  for the GCP project I'm using.
+
+- Now I get the error "<gmp-advanced-marker>:
+  Please use addEventListener('gmp-click', ...)
+  instead of addEventListener('click', ...).
+  Error Component Stack". Fix this.
+
+- Add .env to the .gitignore file.
+
+- Change the map markers for each restaurant to be
+  circles that contain a rating for the restaurant.
+
+- When a map marker is clicked, show the best route on the map
+  and remove any previously displayed route.
+
+- Your solution is not working. When I click a marker,
+  I don't see any route lines on the map.
+
+  Cursor said I might need to enable the Directions API in GCP. When I
+  searched for that I discovered that it was replaced with the Routes API.
+  I enabled that, but it did not fix the problem.
+  I'm giving up on this feature for now.
+
+- Change the cursor to a wait cursor
+  while the map is being generated or updated.
+
+  This claimed to add changes for the cursor AND
+  add a semi-transparent white overlay that says "Loading restaurants...".
+  The cursor does not change and the overaly doesn't display any text.
+
+- I don't see any text in the semi-transparent white overlay.
+
+- Clicking a restaurant marker does nothing.
+  I don't see a popup containing the restaurant name and address,
+  and no route lines are drawn on the map. Fix these issues.
+
 ## Resources
 
 - {% aTargetBlank "https://www.youtube.com/watch?v=ocMOZpuAMw4",
