@@ -480,7 +480,7 @@ useEffect(() => {
 
 ## Error Boundaries
 
-Each route and `root.tsx` can befine an `ErrorBoundary` function
+Each route and `root.tsx` can define an `ErrorBoundary` function
 which returns JSX to be rendered if an unexpected error occurs.
 This replaces the content that would otherwise be rendered by <Outlet />.
 

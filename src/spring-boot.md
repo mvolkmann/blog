@@ -47,7 +47,7 @@ When using VS Code for Java development:
 1. Open a terminal and cd to the directory of the new project.
 1. Verify that the project builds by entering `./gradlew build`
 
-## Implementing CRUD Endpoits
+## Implementing CRUD Endpoints
 
 1. Open the project in your editor of choice.
 1. Create the file `src/main/java/com/example/demo/DogController.java`

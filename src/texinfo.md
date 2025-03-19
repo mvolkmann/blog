@@ -30,7 +30,7 @@ files for the markup languages TeX and LaTeX use that file extension.
 All Texinfo files must begin and end with the following lines:
 
 ```text
-\input textinfo
+\input texinfo
 ...
 @bye
 ```

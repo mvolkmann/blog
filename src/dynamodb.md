@@ -24,14 +24,14 @@ DynamoDB provides:
 ## Pricing
 
 There are two pricing models,
-"on-demand capacity" and "provisioned capactity".
+"on-demand capacity" and "provisioned capacity".
 In both cases there is a charge for the amount of storage used.
 
 In "on-demand capacity" pricing you pay for each read and write,
 so only for what you use.
 This is best when traffic is unpredictable.
 
-In "provisioned capactity" you specify the number of reads and writes
+In "provisioned capacity" you specify the number of reads and writes
 expected per second with automatic scaling to adjust when that changes.
 This is best when traffic is predictable.
 
@@ -85,7 +85,7 @@ This is best when traffic is predictable.
 1. Enter a name for the table (ex. Dogs).
 1. Enter a name for the "Partition key" (ex. id) and select its type (ex. Number).
 1. If the partition keys will not be unique, enter a name for the "Sort key"
-   which is an additional attribute that when combined with the parition key
+   which is an additional attribute that when combined with the partition key
    will uniquely identify each record.
 1. Under "Table settings", select the "Custom settings" radio button.
 1. Under "Read/Write capacity settings", you will likely want to change
@@ -151,7 +151,7 @@ To filter the set of items displayed:
 
 1. Click the disclosure triangle to expand the "Filters" section.
 1. Click the "Add Filter" button.
-1. Select an atrribute name, type, and condition (ex. "Contains).
+1. Select an attribute name, type, and condition (ex. "Contains).
 1. Enter a value.
 1. Optionally add more filters by repeating the steps above.
 1. Click the orange "Run" button.
@@ -182,9 +182,9 @@ target="_blank">DynamoDBMapper</a>.
 
 For JavaScript, see
 <a href="https://www.npmjs.com/package/@aws-sdk/lib-dynamodb"
-target="_blank">@aws-sdk/lib/dyamodb</a>.
+target="_blank">@aws-sdk/lib/dynamodb</a>.
 
-Both of these require AWS accesss keys.
+Both of these require AWS access keys.
 To create them:
 
 - Browse <a href="https://aws.amazon.com" target="_blank">aws.amazon.com</a>.

@@ -96,7 +96,7 @@ to the previous command.
 Typically `host-port` and `container-port` are the same.
 
 To list all the containers created on your machine,
-enter one of the folowing.
+enter one of the following.
 The `-a` flag indicates that is should list all containers,
 not just the ones that are currently running.
 
@@ -203,7 +203,7 @@ Instead, open another terminal and stop the container.
    podman create --name podman-executable-container podman-executable-image
    ```
 
-1. Start the container by entering the follwoing:
+1. Start the container by entering the following:
 
    ```bash
    podman start podman-executable-container

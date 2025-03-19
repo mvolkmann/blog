@@ -22,7 +22,7 @@ The `-x` option causes it to output inverted pairs of hex ASCII codes.
 
 ## Awk
 
-This commmand can replace given text in a set of files with new text.
+This command can replace given text in a set of files with new text.
 For example, the following replaces"foo" with "bar"
 in all the `.java` files in the current directory.
 

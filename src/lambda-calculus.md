@@ -153,13 +153,13 @@ An identity function that just returns the value passed in can be defined as:
 | ---------- | ---------- |
 | `λx.x`     | `x => x`   |
 
-Function defintions begin with the λ character,
+Function definitions begin with the λ character,
 followed by a single parameter name, a period, and
-the lambsda term to which the function evaluates.
+the lambda term to which the function evaluates.
 
 Here is an example of calling the identity function
 which results in the value `y`.
-Parentheses are used to surround function defintions
+Parentheses are used to surround function definitions
 and enable them to be applied.
 They are also used to define the order of operations.
 
@@ -318,7 +318,7 @@ Otherwise the second argument is the result.
 Replacing `false` with `x` results in an equivalent definition
 because the that is only returned when `x` evaluates to `false`.
 
-In a lazily evaluated programmming language like Haskell,
+In a lazily evaluated programming language like Haskell,
 the second argument is only evaluated if the first argument evaluates to true.
 In a strictly evaluated programming language like JavaScript,
 both arguments are always evaluated.
@@ -358,7 +358,7 @@ Otherwise the second argument is the result.
 Replacing `true` with `x` results in an equivalent definition
 because the that is only returned when `x` evaluates to `true`.
 
-In a lazily evaluated programmming language like Haskell,
+In a lazily evaluated programming language like Haskell,
 the second argument is only evaluated if the first argument evaluates to false.
 In a strictly evaluated programming language like JavaScript,
 both arguments are always evaluated.
@@ -439,7 +439,7 @@ as the function that represents false (above).
 
 These functions that represent numbers take another function and a value.
 They call the given function some number of times,
-initiallly passing it the value and
+initially passing it the value and
 subsequently passing it what the function returns.
 For example, the following JavaScript outputs
 the five numbers 3, 6, 12, 24, and 48.
@@ -477,7 +477,7 @@ For example, the successor of 1 is 2.
 
 The predecessor function (pred)
 returns the number that precedes a given number.
-It is one of the most compilicated functions in λ-calculus.
+It is one of the most complicated functions in λ-calculus.
 
 Alonzo Church was unable to discover a definition for the predecessor function.
 A student of his, Stephen Kleene (1909-1994), arrived at a solution
@@ -581,7 +581,7 @@ succ (λfx.f (f (f (f x))))
 
 ### Subtraction
 
-Substraction can be seen as iterated predecessors.
+Subtraction can be seen as iterated predecessors.
 A subtraction function can be defined as:
 
 | λ-calculus        | JavaScript             |
@@ -635,7 +635,7 @@ TODO: Add this.
 
 ### Exponentiation
 
-Exponentiation can be seen as iterated multiplicaation.
+Exponentiation can be seen as iterated multiplication.
 An exponentiation function (exp) can be defined as the following
 where `m` is the base and `n` is the exponent:
 
@@ -738,7 +738,7 @@ This assumes that functions have names that can be used to call themselves,
 but they do not.
 
 Instead we can use the Y combinator to define a factorial function.
-Note how this differs slightly from the defintion above
+Note how this differs slightly from the definition above
 in order to work in a strictly evaluated language.
 TODO: Is the modified version equivalent to the Z combinator?
 
@@ -780,7 +780,7 @@ and so on.
 
 The Z combinator is similar to the Y combinator,
 but it provides lazy evaluation,
-defering function applications until their results are needed.
+deferring function applications until their results are needed.
 It is an eta-expansion of the Y combinator which can be defined as:
 
 ```text
@@ -806,7 +806,7 @@ to define a factorial function.
 
 ## Linked Lists
 
-We can similate linked lists with "cons cells".
+We can simulate linked lists with "cons cells".
 The function `cons`, short of "construct",
 creates a cons cell which holds a pair of values.
 The function `car` takes a cons cell and returns its first element.

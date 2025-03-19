@@ -67,7 +67,7 @@ target="_blank">builtin</a>.
 - `jsonfloat` matches same as decimal, but adds scientific notation matching
 
 `postprocessors.ne` defines the following functions that are used inside
-the postprocesssor code associated with grammar rules (more on this later):
+the postprocessor code associated with grammar rules (more on this later):
 
 - `nth` returns the nth element from a data array
 - `$` ???
@@ -146,7 +146,7 @@ that represents the absence of a match.
 A grammar file can include the contents of other grammar files
 using the `@include "file-path"` directive.
 This allows sharing common elements between top-level grammars
-including lexer configurations, function defintions, and grammar rules.
+including lexer configurations, function definitions, and grammar rules.
 
 ### Compiling a Grammar
 
@@ -236,7 +236,7 @@ A character matching /[0-9]/ based on:
   token: { value: 't' }
 ```
 
-A grammar like this, with no procressors (discussed next),
+A grammar like this, with no processors (discussed next),
 can be used to validate input.
 When evaluated from JavaScript code, an exception will be thrown
 if the input does not match the grammar.
@@ -265,7 +265,7 @@ Typically only the first argument, `data` is used
 and often the name is shortened to just `d`.
 
 The return value of the function determines
-the value that represents the match that just occured.
+the value that represents the match that just occurred.
 
 ### Postprocessor Rules for Evaluating
 
@@ -704,7 +704,7 @@ By default the nearley compiler generates JavaScript code for the parser.
 To change this to TypeScript:
 
 - Add the `@preprocessor typescript` directive in the grammar file.
-- Change references to the generatred parser file
+- Change references to the generated parser file
   to use the `.ts` file extension instead of `.js`.
 
 ## Example Grammars

@@ -92,7 +92,7 @@ OCaml has a number of notable features including:
 
 ## OCaml 5
 
-OCaml version 5 was releasd in December 2022.
+OCaml version 5 was released in December 2022.
 It added domains which map to operating system threads.
 
 It also added "effect handlers" which used to be called "algebraic effects".
@@ -138,7 +138,7 @@ Docker uses OCaml in their desktop software for Windows and macOS.
 Facebook uses OCaml for many things including:
 
 - Hack programming language (extends PHP with static types)
-- Facebook Messager (the web version)
+- Facebook Messenger (the web version)
 - Flow static type system for JavaScript
 - Infer static analyzer for Java, C, C++, and Objective-C
 
@@ -486,7 +486,7 @@ Primitive values are expressions that do not require additional evaluation.
 OCaml does not support null values.
 
 There is a corresponding standard library module for each of these whose name
-begins uppercase. These provide functions for operating onvalues of the type.
+begins uppercase. These provide functions for operating on values of the type.
 
 ## Primitive Type Conversions
 
@@ -762,7 +762,7 @@ When this is done, your editor should flag it with the message
 If you compile the code, the message "Error: Syntax error" will be output
 and will refer to the last line in the file, which is unhelpful.
 
-Identifers bound by `let` expressions go out-of-scope
+Identifiers bound by `let` expressions go out-of-scope
 after they are evaluated.
 
 The type of a variable can be specified, but typically
@@ -1012,7 +1012,7 @@ and representing data structures whose shape can vary.
 
 Each variant name is called a "constructor" (aka "tag")
 and must begin with an uppercase letter.
-Each construtor can have an associated value
+Each constructor can have an associated value
 of a type that is specified after the `of` keyword.
 The value types of the variants can differ.
 
@@ -1436,7 +1436,7 @@ which means that the loop itself doesn't return a value.
 
 There are no `break` or `continue` statements like in other languages.
 
-The following code demonstates `for` loops.
+The following code demonstrates `for` loops.
 
 ```ocaml
 open Printf
@@ -1456,7 +1456,7 @@ This might be an expression involving a `ref` whose value changes
 or a function that returns a value to be tested.
 The loop terminates when the condition evaluates to `false`.
 
-The following code demonstates `while` loops.
+The following code demonstrates `while` loops.
 
 ```ocaml
 open Printf
@@ -1553,7 +1553,7 @@ There are no built-in functions for operating on longer tuples.
 
 Pattern matching can be used to get a specific element from a tuple.
 The following code shows four ways to write a function that
-returns the third elemet of a 4-element tuple.
+returns the third element of a 4-element tuple.
 
 ```ocaml
 let third_of_4 t = match t with _, _, c, _ -> c

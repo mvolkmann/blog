@@ -106,7 +106,7 @@ enter the following in a split:
 ghostty +show-config --default | sort
 ```
 
-To also see documenation on the configuration options
+To also see documentation on the configuration options
 enter the following in a split:
 
 ```bash
@@ -318,7 +318,7 @@ but the others don't seem to hurt performance.
 | AI integration | none                           | present           |
 | features       | minimalistic                   | rich              |
 | tabs           | only show working directory    | can be named      |
-| configuation   | in a single configuration file | in a graphical UI |
+| configuration  | in a single configuration file | in a graphical UI |
 | implemented in | Zig                            | Rust              |
 
 Supposedly tab naming has been implemented.

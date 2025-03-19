@@ -253,7 +253,7 @@ All downloaded packages are stored in the global cache directory
 When a project adds a dependency to a package version
 that is already in the global cache directory,
 it is "copied" from there instead of downloading it again.
-In Linux this uses hardlinks.
+In Linux this uses hard links.
 In MacOS, this uses "clonefile" which implements "copy on write".
 In both cases, the operation is extremely fast
 because the files are not actually copied.
