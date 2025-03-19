@@ -245,7 +245,14 @@ this can be set to only `latexindent`.
 To format the `.tex` file currently begin edited,
 right-click anywhere in the document and select "Format Document",
 or open the Command Palette and select "Format Document".
-TODO: This is not working for me!
+
+In order to get `latexindent` to work, I had to enter the following commands
+in a terminal to install additional Perl modules:
+
+```bash
+cpan YAML::Tiny
+cpan File::HomeDir
+```
 
 ### Overleaf
 
@@ -274,7 +281,7 @@ or $399 (unlimited collaborators per project) per year.
 LaTeX commands begin with a backslash followed by a name.
 Some commands have optional and/or required parameters.
 Optional arguments appear in square brackets separated by commas.
-Required arguments each appear in curly braces.
+Required arguments each appear in their own pair of curly braces.
 
 The most basic LaTeX document contains the following:
 
@@ -368,7 +375,7 @@ There are three sizes of dashes:
 
 Document classes change the default formatting and add support for new commands.
 
-Document classes that can be specified in `\documentclass{some-class}` include:
+Document classes that can be specified in `\documentclass[options]{some-class}` include:
 
 - `article` supports sections and subsections, but not chapters
 - `beamer` for slide presentations
@@ -420,7 +427,8 @@ Options that can be specified in this command include:
 
 - `oneside` (default) or `twoside` to print on both sides of paper
 
-- a font size which can be one of the following: `10pt`, `11pt`, or `12pt`
+- a font size which can be one of the following:
+  `10pt` (default), `11pt`, or `12pt`
 
 - a paper size that can be one of the following:
 
@@ -446,9 +454,9 @@ To open documentation for a given package from the command line,
 enter `texdoc {package-name}`.
 The documentation will open in your default web browser.
 
-To import a package, use the `\usepackage` command.
+To import a package, use the `\usepackage` command in the preamble.
 This can take a set of optional arguments in square brackets.
-It also takes a comma-separated list of package names in curly braces.
+It also takes a comma-separated list of package names to use in curly braces.
 For example:
 
 ```latex
@@ -1585,8 +1593,8 @@ Inline math mode renders mathematical text inline with other content.
 Display math mode renders mathematical text on its own line,
 separated from surrounding content and horizontally centered by default.
 
-To use inline math mode, surround content by single dollar signs
-or `\(` and `\)`. For example:
+To use inline math mode, surround content by single dollar signs,
+`\(` and `\)`, or `\begin{math}` and `\end{math}`. For example:
 
 <img alt="LaTeX inline math mode" style="width: 70%"
   src="/blog/assets/latex-inline-math-mode.png?v={{pkg.version}}">
@@ -1662,13 +1670,13 @@ The following are additional examples of using math mode:
 
 ```latex
 $$ \frac{a}{b + \frac{c}{d}} $$ % nested fractions
-$$ 3x^{2} $$ % single-character exponent
-$$ 3x^{12} $$ % exponent must be in curly braces if more than one character
+$$ 3x^2 $$ % single-character superscript
+$$ 3x^{12} $$ % multi-character superscript (requires curly braces)
 $$ 3x^{2x - 4} $$ % more complex exponent
 $$ 3x^{y^z} $$ % multiple levels of exponents
 $$ 3x^{2x^5 - 4} $$ % more complex multiple levels of exponents
 $$ y_1 $$ % single-character subscript
-$$ y_{12} $$ % multiple-character subscript
+$$ y_{12} $$ % multi-character subscript (requires curly braces)
 $$ y_{1_2} $$ % multiple levels of subscripts
 $$ x_0, x_1, \ldots, x_n $$ % sequence of subscripted variables with ellipsis
 ```
@@ -1905,14 +1913,16 @@ These include the following:
 - `Vmatrix`: double vertical bars
 
 For example, the following is the formula for rotating a 3D point
-about the origin in the x/y plane:
+about the origin in the x/y plane.
+In math mode a single quote renders a prime symbol,
+two single quotes render a double prime, and so on.
 
 <img alt="LaTeX matrices" style="width: 50%"
   src="/blog/assets/latex-matrices.png?v={{pkg.version}}">
 
 ```latex
 $$
-[x^{\prime} \, y^{\prime} \, z^{\prime} \, 1]
+[x' \, y' \, z' \, 1]
 =
 [x \, y \, z \, 1] \cdot
 \begin{bmatrix}

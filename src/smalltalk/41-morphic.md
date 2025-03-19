@@ -721,7 +721,7 @@ target="_blank">VisualParadox</a>.
 filePath := '/Users/volkmannm/Pictures/images/altitude1600.jpg'.
 form := Form fromFileNamed: filePath.
 form := form magnifyBy: 0.25. "scale to 1/4 size"
-morph := ImageMorph new image: form.
+morph := ImageMorph newWith: form.
 morph scaleBy: 0.25.
 morph openInWorld.
 ```
