@@ -426,6 +426,12 @@ I entered the following in the chat:
   with the following APIs enabled:
   Maps JavaScript API, Places API, and Directions API.
 
+- Where are you getting the restaurant ratings?
+
+  The answer was "The restaurant ratings are coming from the Google Places API.
+  Specifically, in the getDetails request, we're requesting
+  the "rating" field from the Places API." along with much more detail.
+
 ## Resources
 
 - {% aTargetBlank "https://www.youtube.com/watch?v=ocMOZpuAMw4",

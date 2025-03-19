@@ -689,11 +689,13 @@ multi-line comment.
 ## Basic Formatting
 
 ```latex
-\textbf{Bold}
+\textbf{This is bold.}
 
-\textit{Italic} or \emph{Italic}
+\textit{This is Italic.}
 
-\underline{Underline}
+\underline{This is underlined.}
+
+\emph{This can be underlined or Italic.}
 
 \textbf{\textit{\underline{Bold, Italic, and Underline}}}
 ```
