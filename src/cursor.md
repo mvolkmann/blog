@@ -467,6 +467,26 @@ I entered the following in the chat:
 
   This did not work.
 
+- Nothing happens when I hover over a restaurant map marker.
+
+  This mostly fixed the problem.
+
+- The popups that appear when I hover over a restaurant map marker
+  are not showing the restaurant name.
+  Maybe it is missing or maybe the font color is white. Fix this.
+
+- The distance from me to a restaurant is being computed as the crow flies.
+  Change this to show the shortest possible driving distance.
+
+  Now I see this in the DevTools Console:
+  Distance Matrix Service: This API project is not authorized to use this API.
+  For more information on authentication and Google Maps JavaScript API services
+  please see: https://developers.google.com/maps/documentation/javascript/get-api-key
+
+  Documentation in the GCP console says "Routes API is the next generation
+  version (v2) of the Directions and Distance Matrix APIs."
+  I already have the Routes API enabled.
+
 ## Resources
 
 - {% aTargetBlank "https://www.youtube.com/watch?v=ocMOZpuAMw4",
