@@ -461,6 +461,12 @@ I entered the following in the chat:
   doesn't have a dependency array, or
   one of the dependencies changes on every render.
 
+- When the user hovers over a restaurant map marker,
+  display the restaurant name, phone number, address, and distance from me
+  in a popup.
+
+  This did not work.
+
 ## Resources
 
 - {% aTargetBlank "https://www.youtube.com/watch?v=ocMOZpuAMw4",
