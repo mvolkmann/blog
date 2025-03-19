@@ -146,6 +146,8 @@ defined in the `Collection` class.
 | `range`                 | answers difference between max and min values                                                                                              |
 | `reduce:`               | same as fold:                                                                                                                              |
 | `reject:`               | answers instance containing receiver elements that do not satisfy a block                                                                  |
+| `reject:thenCollect:`   | combines `reject:` and `collect:`                                                                                                          |
+| `reject:thenDo:`        | combines `reject:` and `do:`                                                                                                               |
 | `remove:`               | removes first occurrence of argument and answers argument                                                                                  |
 | `select:`               | answers instance containing receiver elements that satisfy a block; like `filter` in JavaScript                                            |
 | `select:thenCollect`    | combines `select:` and `collect:`                                                                                                          |
