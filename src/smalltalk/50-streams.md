@@ -136,8 +136,10 @@ coll print.
 
 ## ReadWriteStream
 
-The `ReadWriteStream` class creates a string that can
+The `ReadWriteStream` class creates a stream that can
 read and write (modify) collection elements.
+Typically code only needs to read or write to a stream, not both,
+so this is rarely used.
 
 ```smalltalk
 coll := OrderedCollection newFrom: #('apple' 'banana' 'cherry').
