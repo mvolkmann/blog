@@ -278,6 +278,8 @@ or $399 (unlimited collaborators per project) per year.
 
 ## Syntax
 
+LaTeX documents consist of a sequence of commands and content.
+
 LaTeX commands begin with a backslash followed by a name.
 Some commands have optional and/or required parameters.
 Optional arguments appear in square brackets separated by commas.
@@ -287,30 +289,11 @@ The most basic LaTeX document contains the following:
 
 ```latex
 \documentclass{article}
+
 \begin{document}
 Hello
 \end{document}
 ```
-
-An "environment" can provide content to be rendered at its
-beginning and end, and can specify how its content will be formatted.
-
-The `\begin` command starts a new "environment"
-and must be paired with a corresponding `end` command.
-The name of the environment is specified as
-an argument in a pair of curly braces.
-The content of all documents must be contained in a document environment.
-Some environments take additional arguments
-that are specified in additional pairs of curly braces.
-
-LaTeX documents consist of a sequence of commands and content.
-The commands before `\begin{document}` are referred to as the preamble
-and must begin with `\documentclass{some-class}`.
-These commands:
-
-- describe the class of document being created
-- import packages which provide support for additional commands
-- configure document-wide formatting
 
 All commands begin with a backslash and a name.
 Command names are case-sensitive and consist of letters,
@@ -326,8 +309,33 @@ inside a single pair of square brackets.
 Usually the optional arguments appear before the required arguments,
 but sometimes they appear after them.
 
+Many commands support a "star variant" that affects its behavior.
+For example, `\chapter{some name}` starts a new, numbered chapter
+and `\chapter*{some name}` starts a new, unnumbered chapter.
+
+The commands before `\begin{document}` are referred to as the preamble
+which must begin with `\documentclass{some-class}`.
+These commands:
+
+- describe the class of document being created
+- import packages which provide support for additional commands
+- configure document-wide formatting
+
 The entire content of a document must be surrounded by
 `\begin{document}` and `\end{document}`.
+
+### Environments
+
+An "environment" can provide content to be rendered at its
+beginning and end, and can specify how its content will be formatted.
+
+The `\begin` command starts a new "environment"
+and must be paired with a corresponding `end` command.
+The name of the environment is specified as
+an argument in a pair of curly braces.
+Some environments take additional arguments.
+
+### Command Groups
 
 A command group is defined by a pair of curly braces
 and limits the scope of a command
@@ -340,10 +348,6 @@ to in a huge font.
   ...
 }
 ```
-
-Many commands support a "star variant" that affects its behavior.
-For example, `\chapter{some name}` starts a new, numbered chapter
-and `\chapter*{some name}` starts a new, unnumbered chapter.
 
 ## Special Characters
 
@@ -1310,32 +1314,36 @@ in the document classes `book` and `report`,
 but not in the document class `article`.
 
 The following example shows how to specify all seven levels.
+They must appear in this order without skipping levels.
 
 ```latex
 \part{First Part}
 This is a paragraph in a part.
 
-\chapter{First Chapter}
-This is a paragraph in a chapter.
+\chapter{First Chapter} % not supported by the article document class
+The content of a chapter appears here.
 
 \section{First Section}
-This is a paragraph in a section.
+The content of a section appears here.
 
 \subsection{First subsection}
-This is a paragraph in a subsection.
+The content of a subsection appears here.
 
 \subsubsection{First Subsubsection}
-This is a paragraph in a subsubsection.
+The content of a subsubsection appears here.
 
 \paragraph{First Paragraph}
-This is a paragraph in a paragraph.
+Any number of paragraphs can appear here.
 
 \subparagraph{First Subparagraph}
-This is a paragraph in a subparagraph.
+Any number of paragraphs can appear here.
 ```
 
 Unless the document is a book, the most common kinds of sections to use
 include `\section`, `\subsection`, and `\subsubsection`.
+
+The styling of section titles, including whether numbering appears,
+is determined by the document class.
 
 Parts, chapters, sections, and subsections are
 automatically assigned increasing numbers starting from 1.
@@ -2269,21 +2277,26 @@ For example:
 
 ```latex
 \documentclass{article}
+
+% These provide data used by \maketitle.
+% They typically appear in the preamble,
+% but can appear anywhere before \maketitle.
 \title{Server-Driven Web Apps with htmx}
 \author{R. Mark Volkmann}
-\date{\today}
+\date{\today} % can omit to default to today
 ```
 
 The `\date` argument can be a specific date.
 The `\today` command provides the current date.
 Omitting the `\date` command will also render the current date.
 
-Use the `\maketitle` command inside the document to render the title information.
+Use the `\maketitle` command inside the document to render the
+title information in most document classes (not in `letter` or `beamer`).
 For example:
 
 ```latex
 \begin{document}
-\maketitle
+\maketitle % generates a title page
 ...
 \end{document}
 ```
