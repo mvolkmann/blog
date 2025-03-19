@@ -180,7 +180,7 @@ replacing the empty string in the Map.svelte component.
 The application won't work without a valid API key."
 
 I asked it "How can I put the Google Maps API key in a .env file
-that is not commited to Git so I can keep it secret?"
+that is not committed to Git so I can keep it secret?"
 It created a `.env` file for me and modified `Map.svelte` to use it.
 I modified the `.env` file to use a Google Maps API key from a previous project.
 
@@ -413,7 +413,7 @@ I entered the following in the chat:
 
   This claimed to add changes for the cursor AND
   add a semi-transparent white overlay that says "Loading restaurants...".
-  The cursor does not change and the overaly doesn't display any text.
+  The cursor does not change and the overlay doesn't display any text.
 
 - I don't see any text in the semi-transparent white overlay.
 

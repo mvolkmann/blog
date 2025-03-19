@@ -9,7 +9,7 @@ layout: topic-layout.njk
 ## Overview
 
 Any object in Smalltalk can depend on another object
-and be notified when by it when something signficant occurs.
+and be notified when by it when something significant occurs.
 For example, multiple objects may want to be notified
 when a particular property in some object is modified.
 
@@ -44,7 +44,7 @@ In Cuis Smalltalk this method is implemented as
 `self triggerEvent: #changed: with: aspectSymbol`.
 
 The `changed:with:` method takes an argument that
-specifies the kind of change that occurred and an object descibes the change.
+specifies the kind of change that occurred and an object describes the change.
 Cuis Smalltalk does not support this.
 
 Each of the "changed" methods causes the message `#update:`
@@ -54,25 +54,25 @@ to be sent to each of the dependents.
 
 Let's walk though a simple example.
 First we will define a `Temperature` class
-that maintains a Celcius temperature
+that maintains a Celsius temperature
 and notifies dependents when the temperature changes.
 
 ```smalltalk
 Object subclass: #Temperature
-    instanceVariableNames: 'celcius'
+    instanceVariableNames: 'celsius'
     classVariableNames: ''
     poolDictionaries: ''
     category: 'Demo'
 
 initialize
-    celcius := 0
+    celsius := 0
 
-celcius: aNumber
-    celcius := aNumber.
+celsius: aNumber
+    celsius := aNumber.
     self changed: aNumber.
 
-celcius
-    ^ celcius
+celsius
+    ^ celsius
 ```
 
 Next we will define a `Water` class
@@ -110,6 +110,6 @@ t := Temperature new.
 w := Water new.
 w state print. "#liquid"
 t addDependent: w.
-t celcius: -10.
+t celsius: -10.
 w state. "#ice"
 ```

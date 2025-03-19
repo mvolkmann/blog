@@ -87,7 +87,7 @@ The supported assertion methods defined in the `TestCase` class include:
 - `assert:description:resumable`
 
   A resumable failure is one that opens a Debugging
-  and allows the code to procced.
+  and allows the code to proceed.
   TODO: Try this passing `true` for `resumable:` and see if a failing test
   opens a Debugger and allows using the "Proceed" button.
 

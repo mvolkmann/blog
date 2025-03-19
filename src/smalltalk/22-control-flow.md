@@ -206,7 +206,7 @@ that is useful for conditional logic. Some examples include:
 | `Integer`          | `isPowerOfTwo`    |
 | `Integer`          | `isPrime`         |
 | `Interval`         | `isEmpty`         |
-| `Number`           | `isDivisbleBy:`   |
+| `Number`           | `isDivisibleBy:`  |
 | `Number`           | `isEven`          |
 | `Number`           | `isNaN`           |
 | `Number`           | `isOdd`           |

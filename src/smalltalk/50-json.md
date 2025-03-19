@@ -18,7 +18,7 @@ Custom classes whose instances need to be serialized to JSON
 should implement the instance method `jsonWriteOn:`.
 This method describes the instance variables that should be included.
 Here's how it could be implemented for a `Dog` class
-with instance varaibles `id`, `name`, and `breed`.
+with instance variables `id`, `name`, and `breed`.
 
 ```smalltalk
 jsonWriteOn: aWriteStream

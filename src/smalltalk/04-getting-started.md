@@ -87,7 +87,7 @@ If you wish to change this:
 
 ## Updating Cuis Smalltalk
 
-If Cuis Smalltak is started using a platform-specific shell script,
+If Cuis Smalltalk is started using a platform-specific shell script,
 it will automatically update to the latest version.
 These scripts have a name that begins with `RunCuisOn`.
 
@@ -421,7 +421,7 @@ their value will be printed.
 For other objects, only their class name will be printed.
 
 For debugging purposes, a better approach is to
-add the following instnace method to the `Object class:
+add the following instance method to the `Object class:
 
 ```smalltalk
 logAs: aString
@@ -512,7 +512,7 @@ Here's an example of a session doing this.
 1. Enter `numbers median.` and "Print it".
 1. In the "Unknown selector" popup that appears,
    click "median" to confirm that is the message you meant to send.
-1. A Debug window will apppear with the title "MessageNotUnderstood".
+1. A Debug window will appear with the title "MessageNotUnderstood".
 1. Click the "Create" button on the right.
 1. In the "Define" popup that appears, click "SequenceableCollection"
    as the class where the method should be added.

@@ -15,7 +15,7 @@ Exceptions that are thrown by code in a block can be caught and handled.
 Unhandled exceptions result in a Debug window being opened
 that contains a stack trace, also referred to as a "walkback".
 
-Smalltalk seems to use the words "exception" and "error" interchangably.
+Smalltalk seems to use the words "exception" and "error" interchangeably.
 
 The following code demonstrates catching an exception
 that is thrown by code in a block that divides a number by zero.
@@ -145,6 +145,6 @@ defaultAction
 
 ## Context
 
-TODO: Supposedly the value of `thisContext` is captured in exeception objects,
+TODO: Supposedly the value of `thisContext` is captured in exception objects,
 TODO: but I don't see this happening. Is it supposed to be the value of the
 TODO: `signalContext` instance variable? I see that getting set to `nil`.

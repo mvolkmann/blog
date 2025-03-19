@@ -73,7 +73,7 @@ argNames := argNodes collect: [:node | node name].
 - `sourceText` - a `UnicodeString` containing all the code for the method
 - `temporaries` - an `OrderedCollection` of `TempVariableNode` objects
 
-`BlockNode` objects include the following instance varaibles:
+`BlockNode` objects include the following instance variables:
 
 - `arguments` - an `Array` of `TempVariableNode` instances
 - `returns` - a `Boolean` that indicates whether the method
@@ -84,7 +84,7 @@ The class `ParseNode` is the superclass of all nodes produced by the `Parser`.
 This class is provided in Cuis and Squeak Smalltalk, but not in Pharo.
 It provides the instance variable `comment` to all its subclasses.
 
-The subclasese of `ParseNode` include:
+The subclasses of `ParseNode` include:
 
 - `AssignmentNode` - assignment to a variable
 
@@ -131,7 +131,7 @@ The subclasese of `ParseNode` include:
 
   - `VariableNode` - variable of any kind
 
-    This has a `name` instance varaible.
+    This has a `name` instance variable.
 
     - `InstanceVariableNode` - instance variable
 

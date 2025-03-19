@@ -14,7 +14,7 @@ Alan Kay, one of the primary creators the Smalltalk,
 coined the term "object-oriented programming" in 1967.
 
 An object encapsulates related data and methods that operate on the data.
-For example, an object can hold the `center` and `radius` of a circl.
+For example, an object can hold the `center` and `radius` of a circle.
 In Smalltalk, these are referred to as instance variables.
 
 A class is often used as template for creating
@@ -81,5 +81,5 @@ A somewhat unique feature of Smalltalk is that
 methods are invoked through message passing.
 Rather that directly invoking a method,
 a message is passed to an object and
-a lookup process is used to find a corrsponding method.
+a lookup process is used to find a corresponding method.
 Details about this lookup process are presented later.

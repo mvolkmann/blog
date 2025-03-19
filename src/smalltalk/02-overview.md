@@ -120,7 +120,7 @@ However, Smalltalk editors do check for "unknown selectors" when
 code is entered that sends a message to a literal object (not to a variable).
 
 Smalltalk did not gain much traction outside Xerox Parc until
-BYTE magizine published an issue focused on Smalltalk in August 1981.
+BYTE magazine published an issue focused on Smalltalk in August 1981.
 The cover, shown at the beginning of this article,
 featured a colorful hot air balloon.
 
@@ -249,8 +249,6 @@ Smalltalk has the following cons:
 
 - Libraries are limited.
 
-  While there are many Smalltalk librarries- Libraries are limited.
-
   While there are many available Smalltalk libraries,
   there are far fewer than in more popular programming language ecosystems
   such as Java, JavaScript, and Python.
@@ -342,7 +340,7 @@ Smalltalk has the following cons:
 
   This version influenced the actor model
   that is used by some modern programming languages.
-  From this point on, most of the implementation was provided by Dan Ingalis.
+  From this point on, most of the implementation was provided by Dan Ingalls.
 
 - Smalltalk-76
 
@@ -465,13 +463,13 @@ The most popular open source Smalltalk implementations include the following:
 Squeak, Pharo, and Cuis all use the MIT license.
 Both Pharo and Cuis began as forks of Squeak
 after maintenance of Squeak was turned over to the community
-and there was a lack of concensus on its future goals.
+and there was a lack of consensus on its future goals.
 
 The number of predefined classes in each implementation above
 were obtained by printing the result of `Smalltalk allClasses size`
 with latest versions as of June 10, 2024.
 
-## Commerial Applications
+## Commercial Applications
 
 Commercial applications built with Smalltalk are listed at:
 
@@ -584,7 +582,7 @@ Other related repositories include:
   such as the development environment (UITour) and Morphic layout (LayoutTour)
 - Machine-Learning: code for machine learning in Smalltalk
 - Measures: code for operating on measurements that combine a number and a unit
-  such as 2 meters, 17 celcius, 3 days, and 4 dollars
+  such as 2 meters, 17 celsius, 3 days, and 4 dollars
 - Numerics: code for image processing, linear algebra, numerical methods,
   probability distribution, signal processing, statistics, and 3D operations
 - OSProcess: provides access to operating system functions, including pipes,

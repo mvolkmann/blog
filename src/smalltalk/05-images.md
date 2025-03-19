@@ -28,7 +28,7 @@ Select "Save Image" to save in the current image file.
 Select "Save Image as" to save in a new image file.
 Select "Save Image and Quit" to save in the current image file and exit the VM.
 
-The changes include all placed morphs (includes development enviroment windows),
+The changes include all placed morphs (includes development environment windows),
 their position, size, and colors,
 selections made (ex. System Browser top pane selections),
 and window content (ex. Workspaces).

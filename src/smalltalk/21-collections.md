@@ -67,7 +67,7 @@ defined in the `Association` class and its superclass `LookupKey`.
 | `key:`       | modifies the receiver key           |
 | `key:value:` | modifies the receiver key and value |
 | `value`      | answers the receiver value          |
-| `value:`     | modifies the receiver alue          |
+| `value:`     | modifies the receiver value         |
 
 ## Collection
 
@@ -328,7 +328,7 @@ the difference between consecutive terms is constant.
 An example is the numbers 2, 4, 6, and 8.
 
 The `Interval` class is a subclass of `SequenceableCollection`
-which is a subclaass of `Collection`.
+which is a subclass of `Collection`.
 
 The following table describes some of the class methods
 defined in the `Interval` class.
@@ -473,7 +473,7 @@ For example, `fruits add: 'orange' beforeIndex: 3`.
 To remove an element at a given 1-based index send the `#removeAt` message.
 For example, `fruits removeAt: 3` removes `'cherry'`.
 
-To get the index of the first occurence of a given value,
+To get the index of the first occurrence of a given value,
 send the `#indexOf:` message.
 For example, `fruits indexOf: 'banana'` returns 2.
 
@@ -855,7 +855,7 @@ are not prevented from being garbage collected
 if they are only referred to by weak collections.
 
 If an attempt is made to use an element in one of these collections
-that has been gargage collected, its value will be `nil`.
+that has been garbage collected, its value will be `nil`.
 
 For example, create a class named `WeakSetDemo` with
 the instance variable `set` and the following instance methods:

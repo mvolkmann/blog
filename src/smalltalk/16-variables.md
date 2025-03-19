@@ -155,12 +155,12 @@ and define the following on its class side.
 Animal class
     instanceVariableNames: 'legs'
 
-inititialize
+initialize
     legs := 0
 
 legs
     "Only needed if the value will be accessed from outside this class,
-    including subclases."
+    including subclasses."
     ^ legs
 
 legs: aNumber
@@ -173,7 +173,7 @@ Next, create a `Giraffe` class that is a subclass of `Animal`
 and define the following on its class side.
 
 ```smalltalk
-inititialize
+initialize
     legs := 4
 ```
 
@@ -181,11 +181,11 @@ Next, create an `Ostrich` class that is a subclass of `Animal`
 and define the following on its class side.
 
 ```smalltalk
-inititialize
+initialize
     legs := 2
 ```
 
-To demonstate this, evaluate the following expressions in a Workspace:
+To demonstrate this, evaluate the following expressions in a Workspace:
 
 ```smalltalk
 Animal initialize.

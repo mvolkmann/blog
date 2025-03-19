@@ -237,7 +237,7 @@ Color swatches can be dragged from one menu to another to copy colors.
 Fonts can also be dragged from one menu to another to copy fonts.
 
 (2) If the `Morph` is embedded in another `Morph`,
-this changes the owner to world, which unembeds it.
+this changes the owner to world, which un-embeds it.
 
 (3) It seems most of the help tooltips default to "Help not yet supplied".
 To edit the help text, click the orange circle on the right,
@@ -276,7 +276,7 @@ This works with all colors except `transparent` and alpha values are ignored.
 
 ### Submorphs
 
-All `Morph` instances have the instance variable `submoprhs`
+All `Morph` instances have the instance variable `submorphs`
 whose value is an array of child morphs.
 The order of the morphs in the array indicates their stacking order
 with the lower indexes rendered on top of higher indexes.
@@ -408,7 +408,7 @@ layout := LayoutMorph newRow
     openInWorld.
 ```
 
-The `submorphs` collection in the `LayoutMorph` ablve will hold
+The `submorphs` collection in the `LayoutMorph` above will hold
 the three boxes in the reverse order from which they were added.
 But they will be rendered from left to right
 in the order in which they were added.
@@ -445,7 +445,7 @@ Instances of `LayoutSpec` have the following instance variables:
 `morph`, `fixedWidth`, `fixedHeight`, `offAxisEdgeWeight`,
 `proportionalWidth`, and `proportionalHeight`.
 
-### More Ways to Add Submoprhs
+### More Ways to Add Submorphs
 
 The `LayoutMorph` class defines the following additional instance methods,
 beyond those defined in the `Morph` class,
@@ -485,7 +485,7 @@ which may not be the desired values.
 So if the goal is to add a morph to a `LayoutMorph`,
 set one of the "proportional" properties to a given value,
 and not change the other, consider adding the morph with the `addMorph:` method
-and then setg the desired `LayoutSpec` property with an expression like
+and then set the desired `LayoutSpec` property with an expression like
 `someMorph layoutSpec proportionalWidth: 1.0`.
 
 If the extent of a `LayoutMorph` instance is not
@@ -604,7 +604,7 @@ container openInHand.
 
 ## Editing Characteristics
 
-Many chararacteristics of a `Morph` can be edited by
+Many characteristics of a `Morph` can be edited by
 opening its halo and clicking its blue menu button.
 To get a halo for a submorph, cmd-click repeatedly
 until the halo appears around the target `Morph`.
@@ -682,7 +682,7 @@ To edit the width, height, and off-axis edge weight of a submorph
 - Select "edit my LayoutSpec". The dialog below will appear.
 - Click the red push pin to enable trying multiple changes.
 - After each set of changes, click the "Update" button.
-- When satisfied withthe changes, close the dialog.
+- When satisfied with the changes, close the dialog.
 
 <img alt="Cuis edit my LayoutSpec" style="width: 80%"
   src="/blog/assets/cuis-edit-my-layoutspec.png?v={{pkg.version}}">
@@ -877,7 +877,7 @@ Examples include:
 - `circleCenter:radius:`
 - `drawString:from:to:atBaseline:font:color:`
 - `ellipseCenter:radius:rotationAngle:`
-  - `elipseCenter:` - `Point` where x/y represents the center location
+  - `ellipseCenter:` - `Point` where x/y represents the center location
   - `radius:` - `Point` where x is major axis radius and y is minor axis radius
   - `rotationAngle:` - `Number` of radians
 - `fillRectangle:color:`
@@ -1098,7 +1098,7 @@ To change the size:
 tmm morphExtent: width @ height.
 ```
 
-The size should include space for scrollbars if they should be needed.
+The size should include space for scroll bars if they should be needed.
 
 A vertical scrollbar will appear automatically
 if more lines than will fit are entered.
@@ -1108,7 +1108,7 @@ To prevent this, send `wrapFlag: false` to an instance.
 This will cause a horizontal scrollbar to appear automatically
 if the text entered on any line exceeds the width.
 
-To prevent scrollbars from appearing,
+To prevent scroll bars from appearing,
 send one of the following messages to an instance:
 
 - `#hHideScrollBar` for horizontal (ignored if `wrapFlag: false` is also sent)
@@ -1116,7 +1116,7 @@ send one of the following messages to an instance:
 - `#hideScrollBarsIndefinitely` for both
 
 The following code creates a single-line text input
-with a given width that never shows scrollbars:
+with a given width that never shows scroll bars:
 
 ```smalltalk
 tmm := TextModelMorph withText: '' ::
@@ -1320,7 +1320,7 @@ Instances of this class have the instance property `layoutMorph`
 that is set to a `LayoutMorph` whose `direction` defaults to `#vertical`.
 
 To specify the size of a `SystemWindow`,
-implement the instance method `intialExtent`. For example:
+implement the instance method `initialExtent`. For example:
 
 ```smalltalk
 initialExtent
@@ -1477,7 +1477,7 @@ a menu item will appear in its menu.
 Within the "Open" menu, the existing menu items use the following values:
 
 - Text Editor: 10
-- Worspace: 20
+- Workspace: 20
 - Browser: 30
 - SearchBrowser: 40
 - MessageNames: 40
@@ -1552,7 +1552,7 @@ The list may include the following:
 - Parc Place Legacy
 - Source Sans 3
 
-The font files are located in the `Cuis-Smallltalk-Dev/TrueTypeFonts` directory.
+The font files are located in the `Cuis-Smalltalk-Dev/TrueTypeFonts` directory.
 To add a new font, create a subdirectory whose name is the font name
 and place `.ttf` files for each variation of the font inside it.
 
@@ -1948,7 +1948,7 @@ em
     toValue: [:event :position | self inform: 'got click'].
 ```
 
-The following class defines a `Morph` sublcass that renders a close icon.
+The following class defines a `Morph` subclass that renders a close icon.
 The icon changes color when the mouse cursor is over it or it is pressed.
 
 ```smalltalk
@@ -1964,7 +1964,7 @@ drawOn: aCanvas
 ```
 
 Other methods to draw icons provided in the `AbstractVectorCanvas` class
-include `drawCollapseIcon`, `drawDownIcon`, `drawExpancdIcon`,
+include `drawCollapseIcon`, `drawDownIcon`, `drawExpandIcon`,
 `drawHandleLarge`, `drawHandSmall`, `drawLeftIcon`, `drawMenuIcon`,
 `drawPushPinIcon`, `drawRightIcon`, and `drawUpIcon`.
 
@@ -2087,7 +2087,7 @@ mouseButton1Up: aMouseEvent localPosition: aPosition
 
     oldX := self morphPosition x.
     oldY := self morphPosition y.
-    "UISupervior ui answers the WorldMorph instance."
+    "UISupervisor ui answers the WorldMorph instance."
     worldExtent := UISupervisor ui morphExtent.
     size := self size.
     newX := (worldExtent x rounded - size) atRandom.
@@ -2163,7 +2163,7 @@ PluggableDropDownListMorph
 PluggableListOfMorph
 PluggableDropDownListOfMorph
 
-## Annoynances
+## Annoyances
 
 Some of the methods in Morphic classes are inconsistently named.
 For example, the class `TextModelMorph` defines the methods

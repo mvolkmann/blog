@@ -11,7 +11,7 @@ While this works, it is not recommended for two main reasons.
 
 1. Corrupt images
 
-   On rare occassions, changes make to an image can render it unusable.
+   On rare occasions, changes make to an image can render it unusable.
    If this happens and the code you developed has not be saved elsewhere,
    it could lost.
 

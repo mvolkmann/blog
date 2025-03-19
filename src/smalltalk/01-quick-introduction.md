@@ -78,7 +78,7 @@ manufacturing, utilities, transportation, and academia.
 
 Squeak Smalltalk, released in 1996,
 was the first free, open-source implementation.
-Until then all Smalltalk implementations were commericial and expensive.
+Until then all Smalltalk implementations were commercial and expensive.
 The Java programming language was released in 1995 and was free.
 That removed most of the wind from the sails of Smalltalk.
 
@@ -124,7 +124,7 @@ Learning Smalltalk will enable you to:
 - Experience a beautifully minimal syntax.
 - Gain an understanding of its pros and cons compared to other languages.
 - Get ideas for features that can be added to other languages
-  and their development enviroments.
+  and their development environments.
 - Actually use it as an alternative to other languages.
 - Have fun!
 
@@ -272,7 +272,7 @@ which is a superclass of the `Array` class.
 
 We can examine the implementation of the `average` method.
 To do so, use the World menu to open a Browser.
-Brower windows contains four panes across the top row.
+Browser windows contains four panes across the top row.
 
 - The first pane displays a list of class categories.
 - The second pane displays a list of classes in the selected class category.
@@ -322,7 +322,7 @@ The `average` method returns the result of sending the message `mean`
 to `self`, which is a `Collection` instance.
 Double-click "mean" to select it and press cmd-b to "Browse it".
 This opens a new window that shows the method implementation,
-which returns the result of divding `self sum` by `self size`.
+which returns the result of dividing `self sum` by `self size`.
 
 <img alt="Cuis Smalltalk Array average"
   src="/blog/assets/cuis-array-average.png?v={{pkg.version}}"
@@ -383,7 +383,7 @@ For our final exercise let's create a new class and use it.
 1. Click the "class" button at the bottom of the second pane.
 1. Right-click in the third pane and select "new category...".
 1. Select "instance creation".
-1. Enter the following in the bottom lpane and save it.
+1. Enter the following in the bottom pane and save it.
 
    ```smalltalk
    newName: nameString breed: breedString

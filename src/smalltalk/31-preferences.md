@@ -75,7 +75,7 @@ included opposite `Boolean` values for the same preference.
   - DarkColorTheme
   - HighContrastBlackTheme
   - HighContrastWhiteTheme
-  - LightBluetheme (The "t" in "theme" shoud be uppercase for consistency!)
+  - LightBluetheme (The "t" in "theme" should be uppercase for consistency!)
   - LightGrayTheme
   - LightTheme
   - PersonalizedTheme
@@ -119,7 +119,7 @@ included opposite `Boolean` values for the same preference.
   This makes it so after entering your initials, you can be asked to
   confirm your name rather than requiring it to be entered it again.
 
-- All prefernces...
+- All preferences...
 
   This evaluates `Preferences allPreferences inspect`
   which opens an Inspect window that displays all the current preferences.

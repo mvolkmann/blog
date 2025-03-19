@@ -28,7 +28,7 @@ target="_blank">Make a standalone click-&-run Smalltalk application for macOS</a
 
 To run Smalltalk programs that are command-line utilities, apps, or servers,
 use the Smalltalk VM that is bundled inside the macOS app
-`CuisVM.app` that is included in the Cuis-Smalltlk-Dev GitHub repository.
+`CuisVM.app` that is included in the Cuis-Smalltalk-Dev GitHub repository.
 This is actually a Squeak VM.
 
 Squeak VMs can also be obtained from

@@ -9,7 +9,7 @@ layout: topic-layout.njk
 It is helpful to have a way to configure an image with.
 
 - specific preferences set settings
-- tool windows open at specfied locations with specified sizes
+- tool windows open at specified locations with specified sizes
 - desired packages loaded
 
 There is more than one way to accomplish this.
@@ -139,7 +139,7 @@ target="_blank">Cuis-Smalltalk-RMVSetup</a>
 which defines the class `RMVSetup` in the class category `RMVSetup`.
 which configures an image according to my preferences.
 
-To install this package, clone the repositiory, open a Workspace,
+To install this package, clone the repository, open a Workspace,
 enter `Feature require: #RMVSetup`, and "Do it".
 This results in the following window:
 

@@ -15,7 +15,7 @@ layout: topic-layout.njk
 TeX is a low-level typesetting system created by Donald Knuth
 in 1978 at Stanford University.
 The name was original composed of the Greek letters
-tau, epsilon, and chi (which looks like the Latin leter X).
+tau, epsilon, and chi (which looks like the Latin letter X).
 That is why TeX is pronounced "tech" and not "tex".
 
 {% aTargetBlank "https://www.latex-project.org", "LaTeX" %}
@@ -23,7 +23,7 @@ is a high-level typesetting system built on TeX.
 The initial version was created by Leslie Lamport in 1984.
 The latest version was implemented by a group led by Frank Mittelbach.
 LaTeX is widely used in academia for publication of
-techical articles, papers, and books.
+technical articles, papers, and books.
 It is typically used to produce PDF files,
 but can also produce DVI (device independent), EPUB, HTML,
 Markdown, MathML, plain text, Postscript, SVG, and Word files.
@@ -51,7 +51,7 @@ Some pros of using LaTeX include:
 - supports extensive customization through thousands of packages
   and templates for various document types
 - supports generating a table of contents, list of figures (images),
-  list of tables, footnotes, bibligraphy (with references), and an index
+  list of tables, footnotes, bibliography (with references), and an index
 - scales to support large projects like books and theses
   by allowing documents to be split into multiple files
 - supports defining parameterized macros that reduce duplicated code
@@ -205,7 +205,7 @@ which is required for some functionality:
 
 1. Select "Preferences: Open User Settings (JSON)" from the command palette.
 2. Search for "pdflatex".
-3. Copy the object containing that immmedidated after it.
+3. Copy the object containing that immediately after it.
 4. In the copied object, change the values of "name" and "command"
    from "pdflatex" to "xelatex".
 5. Add the following at the end of the `settings.json` file

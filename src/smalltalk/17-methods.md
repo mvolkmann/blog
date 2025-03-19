@@ -155,7 +155,7 @@ To add the missing method from the Error window:
 
 - Click the "Create" button.
 - Select a message category for the method.
-- Enter its implemenation.
+- Enter its implementation.
 - Press cmd-s to save.
 - Press the "Proceed" button to continue running the code
   at the point of the failed message send.

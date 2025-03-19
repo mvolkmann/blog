@@ -29,7 +29,7 @@ select Preferences...Show ANSI Assignments.
 
 Typing an underscore is a shorthand way to type `:=` for variable assignments.
 Assignment underscores are changed to `:=` and rendered as left pointing arrows
-regardless of whether "Show ST-80 Assigments" is selected.
+regardless of whether "Show ST-80 Assignments" is selected.
 
 The following table summarizes all the special tokens.
 

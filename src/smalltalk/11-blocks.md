@@ -84,7 +84,7 @@ takeBlock2: aBlock
     ^ result.
 ```
 
-We can evalute the `takeBlock1` method as follows:
+We can evaluate the `takeBlock1` method as follows:
 
 ```smalltalk
 BlockTest new takeBlock1: [ 19 ].

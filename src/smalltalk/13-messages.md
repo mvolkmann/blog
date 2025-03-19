@@ -125,7 +125,7 @@ the following popup will appear:
 If the selector was incorrectly typed,
 any implemented selector can be selected from this popup.
 
-If the selector is confirmed or if such a message is sent from runnning code,
+If the selector is confirmed or if such a message is sent from running code,
 the following Debugger window will appear:
 
 <img alt="Debugger MessageNotUnderstood"
@@ -218,7 +218,7 @@ The object can be passed around and the actual send can be triggered later.
 For example, the following sets of expressions are equivalent:
 
 ```smalltalk
-"These demostrates sending a unary message. Each gives the result 2."
+"These demonstrate sending a unary message. Each gives the result 2."
 4 sqrt.
 4 perform: #sqrt.
 (MessageSend receiver: 4 selector: #sqrt) value.

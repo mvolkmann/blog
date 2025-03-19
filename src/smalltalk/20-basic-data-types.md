@@ -155,7 +155,7 @@ foregroundColor := backgroundColor := Color blue.
 There are no shorthand assignment operators like `+=` for numbers.
 
 Numbers are automatically converted to objects of the appropriate type.
-This includes changing size to accomodate larger and smaller values.
+This includes changing size to accommodate larger and smaller values.
 For example:
 
 ```smalltalk
@@ -528,7 +528,7 @@ sub := s copyFrom: 4 to: s size. "answers 'def'"
 ```
 
 There is no method that only takes a start index
-and returns the subtring to the end of the string.
+and returns the substring to the end of the string.
 
 ### String
 
@@ -755,7 +755,7 @@ To add support for regular expressions:
 - In the left nav, scroll to the bottom and select "Regex".
 - Review all the example code.
 
-Regular expressions are specfied with strings.
+Regular expressions are specified with strings.
 
 The following code processes
 a URL path `String` like `'/state/:state/city/:city'`

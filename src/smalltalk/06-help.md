@@ -21,7 +21,7 @@ The World menu contains a Help submenu which contains the following:
 
 - Terse Guide to Cuis
 
-  An excellent source of categoried code snippets for
+  An excellent source of categorized code snippets for
   performing a large number of common tasks.
 
   If the prompt "The Terse Guide is not loaded.
@@ -89,7 +89,7 @@ The World menu contains a Help submenu which contains the following:
 - Useful Expressions
 
   This opens a window that contains useful expressions.
-  To execute one, selecte it and "Do it" or "Print it".
+  To execute one, select it and "Do it" or "Print it".
 
 - VM Statistics
 

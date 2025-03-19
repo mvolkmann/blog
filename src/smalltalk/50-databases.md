@@ -107,7 +107,7 @@ The file `/usr/local/etc/odbcinst.ini` associates driver names
 with paths to their shared libraries.
 In the `.odbc.ini` file above, the `Driver` values
 can be the absolute path to the driver shared library.
-But using driver names specfied in the `odbcinst.ini` file
+But using driver names specified in the `odbcinst.ini` file
 avoids needing to repeat the shared library paths
 for each data source that uses the same driver.
 
@@ -149,7 +149,7 @@ To use another image, copy and modify this script.
 
 If an image is started in a way that does not
 set the `DYLD_LIBRARY_PATH` environment variable
-and an attempt is made to open an `ODBCConnetion`,
+and an attempt is made to open an `ODBCConnection`,
 the error message "External module not found" will be displayed.
 (My "ActiveRecord" package checks for this
 in the `establishConnection:dbType:` method and
