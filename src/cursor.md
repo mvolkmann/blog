@@ -432,6 +432,35 @@ I entered the following in the chat:
   Specifically, in the getDetails request, we're requesting
   the "rating" field from the Places API." along with much more detail.
 
+- I'm seeing two ESLint errors in RestaurantMaps.tsx about no-unused vars.
+  Fix those.
+
+  It fixed them by commenting out code, not deleting it.
+
+- Delete all code that is commented out.
+
+  This took a couple of minutes to complete.
+
+- I'm seeing an ESLint warning react-hooks/exhaustive-deps in RestaurantMap.tsx.
+  Fix it.
+
+  It did not fix the error.
+
+- Your changes did not fix the error. Add a dependency on markers
+  to the useEffect in RestaurantMap.tsx where it is needed.
+
+- ESLint says "The createMarkerContent function makes the dependencies
+  of useEffect Hook (at line 247) change on every render.
+  Move it inside the useEffect callback." Fix this.
+
+  Finally I'm getting a clean startup of the app!
+
+- The app is broken now. I'm seeing this in the DevTools Console:
+  Maximum update depth exceeded. This can happen when a component
+  calls setState inside useEffect, but useEffect either
+  doesn't have a dependency array, or
+  one of the dependencies changes on every render.
+
 ## Resources
 
 - {% aTargetBlank "https://www.youtube.com/watch?v=ocMOZpuAMw4",
