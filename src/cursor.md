@@ -521,6 +521,26 @@ when I click a map marker. So I'm ignoring this warning.
 
 I'm calling the app good now!
 
+- Generate unit tests.
+
+  This added the following line in RestaurantMap.tsx,
+  but `loadavg` is not used so I deleted the line:
+
+  ```js
+  import {loadavg} from 'os';
+  ```
+
+  I ran `npm test` to verify that the new tests pass. They do not.
+  The first issue is that `src/App.test.tsx` isn't useful or correct.
+  I deleted that file.
+  The second issue is that `src/components/__tests__/RestaurantMap.test.tsx`
+  gives a "Geolocation error".
+
+- When I run the tests I get a Geolocation error in RestaurantMap.test.tsx. Fix this.
+
+  There are SO MANY errors in the tests now.
+  Honestly I'm tired of fighting with Cursor.
+
 ## Resources
 
 - {% aTargetBlank "https://www.youtube.com/watch?v=ocMOZpuAMw4",
