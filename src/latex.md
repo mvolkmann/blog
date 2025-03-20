@@ -1665,6 +1665,10 @@ Inline fractions can be small like $\frac{x}{y}$ or large like $\dfrac{x}{y}$.
 
 To use display math mode, surround content by double dollar signs,
 `\[` and `\]`, or `\begin{displaymath}` and `\end{displaymath}`.
+Each formula should appear on its own line
+and all but the last should end in `\\`.
+LaTeX will not break a long formula over multiple lines,
+so each formula must fit on one line.
 
 <img alt="LaTeX display math mode" style="width: 70%"
   src="/blog/assets/latex-display-math-mode.png?v={{pkg.version}}">
