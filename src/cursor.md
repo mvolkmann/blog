@@ -187,7 +187,7 @@ I selected the following CSS code:
 ```
 
 Then I clicked "Add to Chat" and entered "What does this code do?".
-The response was:
+I received the following detailed response:
 
 ```text
 This code is a CSS media query that controls animation behavior based on
