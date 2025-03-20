@@ -1094,6 +1094,7 @@ except the first.
 
 To add a single newline after a line, add `\\` at its end,
 which introduces a "soft return".
+To add a newline AND prevent a page break at that point, use `\\*`.
 
 To add a page break, insert the command `\newpage` or `\pagebreak`.
 
@@ -1662,8 +1663,8 @@ For example:
 Inline fractions can be small like $\frac{x}{y}$ or large like $\dfrac{x}{y}$.
 ```
 
-To use display math mode, surround content by double dollar signs
-or `\[` and `\]`.
+To use display math mode, surround content by double dollar signs,
+`\[` and `\]`, or `\begin{displaymath}` and `\end{displaymath}`.
 
 <img alt="LaTeX display math mode" style="width: 70%"
   src="/blog/assets/latex-display-math-mode.png?v={{pkg.version}}">
