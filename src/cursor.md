@@ -20,7 +20,9 @@ when asking it to explain code, modify code, or generate new code:
 "High Load - We're experiencing high demand for Claude 3.5 Sonnet right now.
 Please upgrade to Pro, switch to the 'default' model, Claude 3.7 sonnet,
 another model, or try again in a few moments."
-This makes the free tier.
+This makes the Gfree tier somewhat unusable.
+
+The paid tiers start at $20 per month.
 
 It works best when given a somewhat detailed plan of what it should build.
 This includes identifying the frameworks and libraries to use.
@@ -429,7 +431,7 @@ I entered the following in the chat:
   not available in the configured target environment.
   It seems that your fixes are going in circles. Is it time to give up?
 
-## Chat Attempt #3: React - FAIL!
+## Chat Attempt #3: React - Mostly successful
 
 I entered the following in the chat:
 
@@ -652,8 +654,9 @@ I'm calling the app good now!
 - Change the game so the player that takes the last tab loses.
 
   It claimed to make this change, but is still wrong.
+  And the computer does use good logic in its moves.
 
-  An the computer does use good logic in its moves.
+Overall Cursor did a decent job at generating this app.
 
 ## Resources
 
