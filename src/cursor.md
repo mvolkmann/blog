@@ -208,6 +208,10 @@ more inclusive for users who are sensitive to motion
 or prefer minimal animations.
 ```
 
+Supposedly Cursor can implement a UI based on a provided mockup.
+I tried this, but the cursor servers were
+too busy to do this using the free tier.
+
 ## Paid vs. Free Versions
 
 TODO: What features does the paid version add?
@@ -633,6 +637,23 @@ I'm calling the app good now!
 
   There are SO MANY errors in the tests now.
   Honestly I'm tired of fighting with Cursor.
+  The app works fine, but the tests do not.
+
+## Nim Game
+
+- Create a web app using Svelte that implements a Nim game with
+  three rows containing 3, 5, and 7 pink tabs on a black background.
+  Allow the user to choose whether they go first or the computer goes first.
+  Then play out the game until there is a winner.
+
+- Change the game so at each turn the player can
+  take any number of tabs from a single row.
+
+- Change the game so the player that takes the last tab loses.
+
+  It claimed to make this change, but is still wrong.
+
+  An the computer does use good logic in its moves.
 
 ## Resources
 
