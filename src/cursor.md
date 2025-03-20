@@ -12,8 +12,29 @@ layout: topic-layout.njk
 
 ## Overview
 
-{% aTargetBlank "https://www.cursor.com.", "Cursor" %} is anu
+{% aTargetBlank "https://www.cursor.com.", "Cursor" %} is an
 "AI Code Editor" that aims to make developers "extraordinarily productive".
+
+While Cursor offers a free tier, I frequently saw the following message
+when asking it to explain code, modify code, or generate new code:
+"High Load - We're experiencing high demand for Claude 3.5 Sonnet right now.
+Please upgrade to Pro, switch to the 'default' model, Claude 3.7 sonnet,
+another model, or try again in a few moments."
+This makes the free tier.
+
+It works best when given a somewhat detailed plan of what it should build.
+This includes identifying the frameworks and libraries to use.
+
+When Cursor is asked to implement code for a specific task,
+it provides a detailed explanation of the code it generates and
+gives the developer an opportunity to review the code before accepting it.
+It can be very tempting to accept the code without reviewing it,
+especially if the app is running and live reload indicates
+that the desired result is achieved.
+Developers need to resist the urge to skip reviewing the code.
+
+Every piece of text in the Cursor chat pane is a clickable link
+that leads to the original or modified code, or related documentation.
 
 ## Installing
 
@@ -114,6 +135,78 @@ Cursor provides the following functionality:
 - Answers questions about the codebase of your current project.
 - Enables writing code with natural language
   instead of specific programming language syntax.
+
+To test some of the functionality, I opened a source file containing
+`const cuisines = [ "American", "Chinese", ... ]`.
+After that code I inserted "for (" and it suggested
+"for (const cuisine of cuisines) {".
+
+I selected the code that creates the `cuisines` array.
+Then I clicked "Add to Chat" and entered "Add more cuisines."
+It successfully added many more.
+
+Then I selected code again, clicked "Edit", and
+entered "sort from shortest to longest".
+It responded with "High Load - We're experiencing high demand for
+Claude 3.5 Sonnet right now. Please upgrade to Pro, switch to the
+'default' model, Claude 3.7 sonnet, another model,
+or try again in a few moments.
+
+I selected a function definition that was inside a `useEffect`,
+clicked "Add to Chat", and entered "Move this code
+to its own function defined outside the useEffect."
+It did this correctly, but did not wrap the new function in `useCallback`.
+
+I selected the function name, clicked "Edit", and
+entered "Wrap this function in a useCallback."
+I had to press the tab key several times to get it to make all
+the necessary changes, but it successfully made correct changes.
+
+I selected the function name, clicked "Edit", and
+entered "rename this to {new-name}".
+After accepting the change I had to press tab once for
+each call to update the name of the function being called.
+
+After the array of cuisine names, I entered "const longestCuisine ="
+and it suggested following code which is perfect:
+
+```js
+const longestCuisine = cuisines.reduce((longest, current) => {
+  return current.length > longest.length ? current : longest;
+}, cuisines[0]);
+```
+
+I selected the following CSS code:
+
+```css
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+```
+
+Then I clicked "Add to Chat" and entered "What does this code do?".
+The response was:
+
+```text
+This code is a CSS media query that controls animation behavior based on
+user preferences. Specifically: @media (prefers-reduced-motion: no-preference)
+targets users who haven't set any preference for reduced motion in their
+system settings.  When this condition is met, it applies an animation to
+elements with the class App-logo: The animation is named App-logo-spin
+It runs infinitely (keeps repeating)
+Takes 20s (20 seconds) to complete one cycle
+Uses linear timing function (constant speed throughout the animation)
+This is an accessibility feature that respects user preferences for
+motion sensitivity.  Users who have enabled "reduced motion" in their
+system settings (like those who might get motion sickness from animations)
+won't see the spinning animation,
+while other users will see the full animated effect.
+This is a common accessibility practice that helps make web applications
+more inclusive for users who are sensitive to motion
+or prefer minimal animations.
+```
 
 ## Paid vs. Free Versions
 
