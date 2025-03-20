@@ -487,6 +487,40 @@ I entered the following in the chat:
   version (v2) of the Directions and Distance Matrix APIs."
   I already have the Routes API enabled.
 
+- There are a bunch of ESLint errors again. Fix them.
+
+- You did not fix the ESLint errors. There are two react-hooks/exhaustive-deps
+  errors in RestaurantMap.tsx. Can you fix them or do I need to do it?
+
+  This failed again. It turns out that the `markers` and `setMarkers`
+  variables set from a `useState` weren't even needed.
+  I manually deleted all references to those and the ESLint errors went away.
+
+I'm getting the error "Distance Matrix Service: This API project is not
+authorized to use this API." The Distance Matrix Service has been replaced
+by "Routes API" which I do have enabled.
+
+- Change the code to use the Google Maps Routes API
+  instead of the Distance Matrix Service.
+
+- When I click a map marker, no popup is appearing. Fix that.
+
+- Your changes did not fix the issue.
+  I still don't see a popup when I click a map marker.
+
+  It fixed the issue this time AND
+  I now see route lines when a marker is clicked!
+  But the ESLint errors related to `markers` are back.
+  I manually deleted that unused code.
+
+In the DevTools Console I see the warning "<gmp-advanced-marker>:
+Please use addEventListener('gmp-click', ...)
+instead of addEventListener('click', ...)".
+But when I make that change, I no longer see a popup
+when I click a map marker. So I'm ignoring this warning.
+
+I'm calling the app good now!
+
 ## Resources
 
 - {% aTargetBlank "https://www.youtube.com/watch?v=ocMOZpuAMw4",
