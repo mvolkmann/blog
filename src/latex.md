@@ -493,6 +493,74 @@ American Mathematical Society</a>.
 | minted    | formats and highlights programming language source code                  |
 | xcolor    | adds commands to change the color of text                                |
 
+## Sections
+
+Documents can have up to seven levels of sections,
+but not all of them are supported for every document class.
+For example, the `\chapter` command can be used
+in the document classes `book` and `report`,
+but not in the document class `article`.
+
+The following example shows how to specify all seven levels.
+They must appear in this order without skipping levels.
+
+```latex
+\part{First Part}
+This is a paragraph in a part.
+
+\chapter{First Chapter} % not supported by the article document class
+The content of a chapter appears here.
+
+\section{First Section}
+The content of a section appears here.
+
+\subsection{First subsection}
+The content of a subsection appears here.
+
+\subsubsection{First Subsubsection}
+The content of a subsubsection appears here.
+
+\paragraph{First Paragraph}
+Any number of paragraphs can appear here.
+
+\subparagraph{First Subparagraph}
+Any number of paragraphs can appear here.
+```
+
+Unless the document is a book, the most common kinds of sections to use
+include `\section`, `\subsection`, and `\subsubsection`.
+
+The styling of section titles, including whether numbering appears,
+is determined by the document class.
+
+Parts, chapters, sections, and subsections are
+automatically assigned increasing numbers starting from 1.
+Subsubsections, paragraphs, and subparagraphs are not assigned numbers.
+
+To suppress numbering of a chapter, section, or subsection,
+include an asterisk at the end of its command name.
+This is commonly do for sections like a preface.
+When a table of contents is being generated,
+unnumbered chapters and section not appear in the table of contents.
+
+The `fncychap` package makes chapter titles fancier.
+The options include Bjarne, Bjornstrup, Conny, Glenn, Lenny, Rejne, and Sonny.
+For example:
+
+<img alt="LaTeX Bjornstrup" style="width: 80%"
+  src="/blog/assets/latex-fncychap-bjornstrup.png?v={{pkg.version}}">
+
+```latex
+\usepackage[Bjornstrup]{fncychap}
+```
+
+<img alt="LaTeX fncychap Glenn" style="width: 80%"
+  src="/blog/assets/latex-fncychap-glenn.png?v={{pkg.version}}">
+
+```latex
+\usepackage[Glenn]{fncychap}
+```
+
 ## Unicode Characters
 
 To enable the use of Unicode characters, add the following in the preamble:
@@ -1117,6 +1185,38 @@ Each line is centered.
 \end{flushright}
 ```
 
+## Quotes
+
+The `quote` environment is used for short quotes.
+The `quotation` environment is used for multi-paragraph quotes.
+For example:
+
+<img alt="LaTeX quotes" style="width: 70%"
+  src="/blog/assets/latex-quotes.png?v={{pkg.version}}">
+
+```latex
+\begin{quote}
+  I hope that I may always desire more than I can accomplish. \emph{Michelangelo}
+
+  The greater danger for most of us lies
+  not in setting our aim too high and falling short;
+  but in setting our aim too low, and achieving our mark. \emph{Michelangelo}
+
+  There is no greater harm than that of time wasted. \emph{Michelangelo}
+\end{quote}
+```
+
+```latex
+\begin{quotation}
+  Multi-paragraph quotes go here.
+  Far better it is to dare mighty things,
+  to win glorious triumphs even though checkered by failure ...
+  than to rank with those poor spirits who neither enjoy much nor suffer much,
+  because they live in the gray twilight that knows not victory nor defeat.
+  \emph{Theodore Roosevelt}
+\end{quotation}
+```
+
 ## Lists
 
 Bulleted lists are created with `\item` commands
@@ -1303,74 +1403,6 @@ For example:
 \begin{verbatim}
 This text will be rendered verbatim.
 \end{verbatim}
-```
-
-## Sections
-
-Documents can have up to seven levels of sections,
-but not all of them are supported for every document class.
-For example, the `\chapter` command can be used
-in the document classes `book` and `report`,
-but not in the document class `article`.
-
-The following example shows how to specify all seven levels.
-They must appear in this order without skipping levels.
-
-```latex
-\part{First Part}
-This is a paragraph in a part.
-
-\chapter{First Chapter} % not supported by the article document class
-The content of a chapter appears here.
-
-\section{First Section}
-The content of a section appears here.
-
-\subsection{First subsection}
-The content of a subsection appears here.
-
-\subsubsection{First Subsubsection}
-The content of a subsubsection appears here.
-
-\paragraph{First Paragraph}
-Any number of paragraphs can appear here.
-
-\subparagraph{First Subparagraph}
-Any number of paragraphs can appear here.
-```
-
-Unless the document is a book, the most common kinds of sections to use
-include `\section`, `\subsection`, and `\subsubsection`.
-
-The styling of section titles, including whether numbering appears,
-is determined by the document class.
-
-Parts, chapters, sections, and subsections are
-automatically assigned increasing numbers starting from 1.
-Subsubsections, paragraphs, and subparagraphs are not assigned numbers.
-
-To suppress numbering of a chapter, section, or subsection,
-include an asterisk at the end of its command name.
-This is commonly do for sections like a preface.
-When a table of contents is being generated,
-unnumbered chapters and section not appear in the table of contents.
-
-The `fncychap` package makes chapter titles fancier.
-The options include Bjarne, Bjornstrup, Conny, Glenn, Lenny, Rejne, and Sonny.
-For example:
-
-<img alt="LaTeX Bjornstrup" style="width: 80%"
-  src="/blog/assets/latex-fncychap-bjornstrup.png?v={{pkg.version}}">
-
-```latex
-\usepackage[Bjornstrup]{fncychap}
-```
-
-<img alt="LaTeX fncychap Glenn" style="width: 80%"
-  src="/blog/assets/latex-fncychap-glenn.png?v={{pkg.version}}">
-
-```latex
-\usepackage[Glenn]{fncychap}
 ```
 
 ## Columns
