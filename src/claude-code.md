@@ -27,6 +27,12 @@ npm install -g @anthropic-ai/claude-code
 
 ## Starting
 
+- Create a directory for a project.
+- cd to the directory.
+- Enter `claude`.
+- You'll be prompted to create an account.
+- A credit card is required to buy credits.
+
 ## Security
 
 ## Functionality
