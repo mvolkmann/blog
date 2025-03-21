@@ -1180,6 +1180,14 @@ To listen for changes to the value of a `TextModelMorph`:
 TODO: ADD THIS! Use the dependency mechanism.
 ```
 
+By default, if the user attempts to close a `SystemWindow`
+and it contains `TextModelMorph` instances that have unsaved changes,
+the user will be asked to confirm this with the message
+"Changes have not been saved. Is it OK to cancel those changes?".
+They must select "Yes" to close the window.
+To disable this check for a particular instance of `TextModelMorph`,
+send it `askBeforeDiscardingEdits: false`.
+
 The following code creates a single-line text input
 with a given width that never shows scroll bars:
 
