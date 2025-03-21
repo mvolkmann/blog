@@ -768,6 +768,8 @@ multi-line comment.
 
 ## Basic Formatting
 
+The following commands change the formatting of text in their argument.
+
 ```latex
 \textbf{This is bold.}
 
@@ -779,6 +781,11 @@ multi-line comment.
 
 \textbf{\textit{\underline{Bold, Italic, and Underline}}}
 ```
+
+An alternative to using these commands is to use a declaration.
+A declaration stays in effect until the next
+right curly brace or `\end` command is reached.
+The scope of commands seems less confusing than that of declarations.
 
 ## Macros
 

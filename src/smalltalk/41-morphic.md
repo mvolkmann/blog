@@ -1060,6 +1060,7 @@ The `TextModelMorph` class defined in the base image Morphic package
 can be used for single or multiple line text entry.
 
 The following code creates an instance of `TextModelMorph`,
+changes its value, and prints its value:
 
 ```smalltalk
 tmm := TextModelMorph withText: 'initial content'.
@@ -1068,52 +1069,116 @@ tmm editor actualContents: 'new content'.
 tmm text print.
 ```
 
-The `withText:` method creates a `TextModel` object
-that is used by the `TextModelMorph` instance.
-Another option is to manually create that object
-which has the advantage of making it accessible
-so the content can be changed more easily
-and the model object can be shared by multiple morphs.
-For example:
+The value associated with a `TextModelMorph` will either be
+held in a `TextModel` object or a `Text` object.
+
+There are three common ways to create an instance of `TextModelMorph`.
+The choice is based on how the initial value is supplied
+and where the current value will be held.
+
+1. `TextModelMorph withText: aTextOrString`
+
+   This creates a `TextModel` object that is initialized with the given value
+   and passes it to the next method.
+
+1. `TextModelMorph withModel: aTextModel`
+
+   The approach allows the same `TextModel` to be used by multiple other morphs.
+   It creates an instance, sets its model to `aTextModel`,
+   and returns the instance.
+
+1. `TextModelMorph textProvider: aTextProvider textGetter: selectorSymbol1 textSetter: selectorSymbol2`
+
+   This approach allows the value to maintained in
+   any object (`aTextProvider`) that responds to the given selectors.
+   It creates an instance, sets `newModel` to
+   an instance of `PluggableTextModel` that uses `aTextProvider`,
+   adds `aTextProvider` as a dependent of `newModel`,
+   sets its model to `newModel`,
+   and returns the instance.
+
+The default background color of a `TextModelMorph` is white.
+A `TextModelMorph` only displays a border when it has focus.
+One way to make its bounds apparent when it doesn't have focus
+is to set the background color of the parent component.
 
 ```smalltalk
-model := TextModel withText: 'initial content'.
-tmm := TextModelMorph withModel: model.
-tmm openInWorld.
-model actualContents: 'new content'.
-model actualContents print.
+tmm owner color: (Color blue alpha: 0.1)
 ```
 
-The `TextModelMorph` class is a subclass of `PluggableScrollPane`
-which is a subclass of `PluggableMorph`.
-The instance method `initialize` in `PluggableMorph`
-sets its instance variable `extent` to `200@100`.
-So that is the default size of `TextModelMorph` instances.
-Depending on the font, that will display around four lines
+Another way is to set the background color of the `TextModelMorph`.
+
+```smalltalk
+tmm color: (Color blue alpha: 0.1)
+```
+
+By default, words that would extend past the right side
+will wrap to the next line.
+To prevent wrapping:
+
+```smalltalk
+tmm wrapFlag: false
+```
+
+By default, when there are more lines than will fit in the height,
+a vertical scroll bar will appear.
+When wrapping is turned off, if the text does not fit in the width
+then a horizontal scroll bar will appear.
+
+To prevent scroll bars from appearing,
+send one of the following messages to an instance:
+
+- `#hHideScrollBar` for horizontal (doesn't seem to work!)
+- `#vHideScrollBar` for vertical (doesn't seem to work!)
+- `#hideScrollBarsIndefinitely` for both
+
+The default size of a `TextModelMorph` is 200 by 100.
+This is set in the `initialize` method of `PluggableMorph`
+which is the superclass of `PluggableScrollPane`
+which is the superclass of `TextModelMorph`.
+Depending on the font, the default size will display around four lines
 of wrapping text with around 17 characters per line.
 
 To change the size:
 
 ```smalltalk
-tmm morphExtent: width @ height.
+tmm morphExtent: width @ height
 ```
 
-The size should include space for scroll bars if they should be needed.
+The size should include space for scroll bars if they may be needed.
 
-A vertical scrollbar will appear automatically
-if more lines than will fit are entered.
+Setting the height to zero will cause it to actually be set to
+the height required for a single line in the current font.
 
-By default, the text will automatically wrap to new lines.
-To prevent this, send `wrapFlag: false` to an instance.
-This will cause a horizontal scrollbar to appear automatically
-if the text entered on any line exceeds the width.
+By default, pressing the tab key will not move focus from
+one `TextModelMorph` instance to another.
+To enable this:
 
-To prevent scroll bars from appearing,
-send one of the following messages to an instance:
+```smalltalk
+tmm tabToFocus: true
+```
 
-- `#hHideScrollBar` for horizontal (ignored if `wrapFlag: false` is also sent)
-- `#vHideScrollBar` for vertical (doesn't seem to work!)
-- `#hideScrollBarsIndefinitely` for both
+When the user changes the text in a `TextModelMorph`,
+the object that holds its value is not automatically updated.
+To manually request the update:
+
+```smalltalk
+tmm scroller acceptContents
+```
+
+There are multiple ways to configure user actions that trigger an update.
+The easiest are:
+
+```smalltalk
+tmm acceptOnAny: true. "updates after every keystroke"
+tmm acceptOnCR: true. "updates after return key is pressed"
+```
+
+To listen for changes to the value of a `TextModelMorph`:
+
+```smalltalk
+TODO: ADD THIS! Use the dependency mechanism.
+```
 
 The following code creates a single-line text input
 with a given width that never shows scroll bars:
@@ -1124,6 +1189,9 @@ tmm := TextModelMorph withText: '' ::
     morphExtent: 200 @ 0; "calculates required height for one line"
     wrapFlag: false.
 ```
+
+If the text exceeds the width,
+use the left and right arrow keys to scroll the text.
 
 To select all the content in an instance, send it `#selectAll`.
 
@@ -1146,8 +1214,6 @@ It prints their ASCII codes to the Transcript.
 ```smalltalk
 tmm keystrokeAction: [ :evt | evt keyValue print ].
 ```
-
-TODO: How do you listen for changes? Only when focus moves?
 
 Another option that is suitable for single-line text entry is
 to use the `TextEntryMorph` class defined in the UI-Entry package.
