@@ -2012,7 +2012,10 @@ The commands `\cdots` and `\vdots` can only be used in math mode.
 
 ## Arrays
 
-Arrays render values in rows and columns and can only be used in math mode.
+Arrays render values in rows and columns of math formulas
+and can only be used in math mode.
+For rows and columns of text items, use the `tabular` environment.
+
 The `array` environment has a required parameter that indicates
 the number of columns and the horizontal alignment of each.
 
@@ -2032,6 +2035,19 @@ $$
     \textup{area}          & \pi r^2 \\
   \end{array}
 $$
+```
+
+To place delimiters such as vertical bars, parentheses, square brackets,
+or curly braces on the left and/or right sides of an array,
+use the `\left` and `\right` commands.
+The delimeters will have the full height the associated array.
+For example:
+
+```latex
+\left| ... \right|
+\left( ... \right)
+\left[ ... \right]
+\left\{ ... \right\} % curly braces must be escaped
 ```
 
 ## Matrices
