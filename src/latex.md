@@ -103,7 +103,17 @@ This installs the following commands:
 | `texhash`   | updates TeX's file database after installing packages                  |
 | `latexmk`   | automates LaTeX compilation (runs multiple passes as needed)           |
 
-The most used commands are probably `pdflatex` and `xelatex`.
+### Installing in Windows
+
+There preferred LaTeX distribution for windows is
+{% aTargetBlank "https://miktex.org", "MiKTeX" %}.
+
+### Installing in Linux
+
+Many Linux distributions come with the commands needed
+to process LaTeX documents already installed.
+
+## Command-line Processing
 
 To generate a `.pdf` file from a `.tex` file in a terminal window,
 run one of the following commands:
@@ -127,15 +137,31 @@ open {name}.pdf
 
 TeX editors will handle both of these steps for you.
 
-### Installing in Windows
+### Error Handling
 
-There preferred LaTeX distribution for windows is
-{% aTargetBlank "https://miktex.org", "MiKTeX" %}.
+Common errors encountered when processing `.tex` files include:
 
-### Installing in Linux
+- misspelled command, environment, or declaration name
+- mismatched braces or other delimiters
+- command missing a required argument
+- attempting to print a special character without escaping it
+- use of syntax that is only valid in a math environment
+  outside a math environment
 
-Many Linux distributions come with the commands needed
-to process LaTeX documents already installed.
+If an error is encountered, an error message will appear in the terminal.
+The message will begin with `!` and be followed by
+"LaTeX Error:" if it was detected by LaTex rather than by TeX.
+The next line will include the line number where the error occurred.
+The final line will only contain `?`.
+
+To continue processing, press the return key.
+This allows viewing multiple errors that can all be fixed before the next run.
+
+To stop processing, type `x` and press the return key (or press ctrl-d).
+
+If the final line only contains `*`,
+it is likely that the `\end{document}` command was not found.
+Press ctrl-d to exit and add the missing command.
 
 ## Editors
 
@@ -805,7 +831,7 @@ The `\def` command is a TeX primitive that defines a new command
 that can optionally have required parameters.
 
 The `\newcommand` command uses `\def`.
-It adds checking whether a command being defined already exists.
+Unlike `\def`, it checks whether the command being defined already exists.
 It also adds support for optional arguments.
 
 Here's an example of defining a macro using `\def`
