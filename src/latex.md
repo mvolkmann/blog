@@ -114,6 +114,11 @@ xelatex {name}.tex
 lualatex {name}.tex
 ```
 
+Everything these commands write to the terminal
+is also written to the file `{name}.log`.
+However, when using the VS Code extension "LaTeX Workshop",
+it seems to delete the log file.
+
 Open the generated PDF document with the following command:
 
 ```bash
