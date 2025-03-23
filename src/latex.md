@@ -211,7 +211,7 @@ corresponding location in the `.tex` file, command-click it.
 LaTeX Workshop defines snippets to simplify entering some commands.
 For example, `BIT` expands to the following:
 
-```text
+```latex
 \begin{itemize}
   \item
 \end{itemize}
@@ -2010,6 +2010,30 @@ $ 5 \ddots 10 $ \\ % diagonal dots
 The commands `\dots`, `\ldots`, and `\vdots` can be used in any mode.
 The commands `\cdots` and `\vdots` can only be used in math mode.
 
+## Arrays
+
+Arrays render values in rows and columns and can only be used in math mode.
+The `array` environment has a required parameter that indicates
+the number of columns and the horizontal alignment of each.
+
+For example, the following displays some formulas related to circles.
+The argument `ll` indicates that there are
+two columns and both are left-aligned.
+Use `c` for columns that are centered
+and `r` for columns that are right-aligned.
+The `\textup` command is used here to prevent words from being
+treated as variables and therefore being printed in italics.
+
+```latex
+$$
+  \begin{array}{ll}
+    \textup{diameter}      & 2r      \\
+    \textup{circumference} & 2 \pi r \\
+    \textup{area}          & \pi r^2 \\
+  \end{array}
+$$
+```
+
 ## Matrices
 
 Matrices are rendered with matrix environment.
@@ -2579,7 +2603,7 @@ The following steps achieve this:
 
    {% raw %}
 
-   ```text
+   ```latex
    \newcommand{\ind}[1]{#1\index{#1}}
    ```
 
