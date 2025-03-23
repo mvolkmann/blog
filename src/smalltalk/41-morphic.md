@@ -50,8 +50,12 @@ It is represented by a `Point` object with
 an `x` instance variable that holds the width and
 a `y` instance variable that holds the height.
 
-The location of a `Morph` is represented by a `MorphicTranslation` object
-that has the instance properties `deltaX` and `deltaY`.
+The `location` of a `Morph` is represented by
+a `MorphicTranslation` or `AffineTransformation` object,
+both of which are subclasses of `GeometricTransformation`.
+Instances of `MorphicTranslation` have the properties `deltaX` and `deltaY`.
+Instance of `AffineTransformation` hold matrix entries that specify
+translation, scaling, and rotation in indexed properties.
 
 Each `Morph` can store additional properties in its `properties` instance variable
 which holds a reference to a `Dictionary` of key/value pairs.
@@ -719,10 +723,8 @@ target="_blank">VisualParadox</a>.
 ```smalltalk
 "Relative file references start from the Cuis-Smalltalk-Dev-UserFiles directory."
 filePath := '/Users/volkmannm/Pictures/images/altitude1600.jpg'.
-form := Form fromFileNamed: filePath.
-form := form magnifyBy: 0.25. "scale to 1/4 size"
+form := Form fromFileNamed: filePath :: magnifyBy: 0.25. "scale to 1/4 size"
 morph := ImageMorph newWith: form.
-morph scaleBy: 0.25.
 morph openInWorld.
 ```
 

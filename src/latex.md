@@ -2509,11 +2509,19 @@ The following steps achieve this:
 
 1. After each occurrence of a word and phrase to be indexed,
    add `\index{word-or-phrase}`.
-   The text must be duplicated and that is annoying!
 
    To make a word or phrase be a subitem in the index, pass to the
    `\index` command the main and sub index values separated by `!`.
    For example, `Comet\index{dogs!Comet}`
+
+   The text to be indexed must be duplicated and that is annoying!
+   To avoid duplicating the text when it is a single word,
+   define the following command and replace all occurrences of
+   `word\index{word}` with `\ind{word}`:
+
+   ```text
+   \newcommand{\ind}[1]{#1\index{#1}}
+   ```
 
 1. Add `\printindex` near the bottom of the document.
 
