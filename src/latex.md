@@ -785,7 +785,9 @@ The following commands change the formatting of text in their argument.
 An alternative to using these commands is to use a declaration.
 A declaration stays in effect until the next
 right curly brace or `\end` command is reached.
-The scope of commands seems less confusing than that of declarations.
+
+Every declaration has a corresponding environment with the same name.
+The scope of environments seems less confusing than that of declarations.
 
 ## Macros
 
@@ -2519,9 +2521,13 @@ The following steps achieve this:
    define the following command and replace all occurrences of
    `word\index{word}` with `\ind{word}`:
 
+   {% raw %}
+
    ```text
    \newcommand{\ind}[1]{#1\index{#1}}
    ```
+
+   {% endraw %}
 
 1. Add `\printindex` near the bottom of the document.
 
