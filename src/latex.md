@@ -2726,6 +2726,7 @@ The `pandoc` command takes additional options including:
   "LaTeX2e: An unoffical reference manual" %}
 - {% aTargetBlank "https://ctan.org/", "CTAN" %}
   Comprehensive TeX Archive Network
+- {% aTargetBlank "https://latex.org/forum/", "LaTeX Forum" %}
 - <a href="https://www.youtube.com/watch?v=ydOTMQC7np0" target="_blank">
   LaTeX – Full Tutorial for Beginners</a> from Michelle Krummel
 - <a href="https://www.youtube.com/watch?v=Jp0lPj2-DQA&list=PLHXZ9OQGMqxcWWkx2DMnQmj5os2X5ZR73"
