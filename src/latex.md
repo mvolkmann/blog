@@ -2038,7 +2038,7 @@ $$
 ```
 
 To place delimiters such as vertical bars, parentheses, square brackets,
-or curly braces on the left and/or right sides of an array,
+or curly braces on the left and right sides of an array,
 use the `\left` and `\right` commands.
 The delimeters will have the full height the associated array.
 For example:
@@ -2049,6 +2049,12 @@ For example:
 \left[ ... \right]
 \left\{ ... \right\} % curly braces must be escaped
 ```
+
+The `\left` and `\right` commands must be used as a pair.
+To place a delimiter only on one side,
+specify a period for the other side to make it invisible.
+For example, `\left. ... \right\}` renders
+no delimeter on the left side and a curly brace on the right side.
 
 ## Matrices
 
