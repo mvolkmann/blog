@@ -145,8 +145,7 @@ Common errors encountered when processing `.tex` files include:
 - mismatched braces or other delimiters
 - command missing a required argument
 - attempting to print a special character without escaping it
-- use of syntax that is only valid in a math environment
-  outside a math environment
+- use of syntax that is only valid in math mode outside of math mode
 
 If an error is encountered, an error message will appear in the terminal.
 The message will begin with `!` and be followed by
@@ -405,6 +404,10 @@ There are three sizes of dashes:
 - intra-word with `-`
 - number ranges with `--`
 - punctuation with `---`
+
+To print accented characters and symbols that appear in non-English text,
+see {% aTargetBlank "https://en.wikibooks.org/wiki/LaTeX/Special_Characters",
+"LaTeX/Special Characters" %}.
 
 ## Document Classes
 
@@ -804,13 +807,28 @@ The following commands change the formatting of text in their argument.
 ```latex
 \textbf{This is bold.}
 
-\textit{This is Italic.}
+\textmd{This is medium.} % typically the default
+
+\textit{This is italic.}
+
+\textsc{This is small caps.}
+
+\textsl{This is slanted.} % similar to italic
+
+\textup{This is upright.} % the default
 
 \underline{This is underlined.}
 
-\emph{This can be underlined or Italic.}
+\emph{This can be underlined or italic.}
 
-\textbf{\textit{\underline{Bold, Italic, and Underline}}}
+\textbf{\textit{\underline{bold, italic, and underline}}}
+
+\textrm{This uses a Roman font.}
+
+\textsf{This uses a sans serif font.}
+
+\texttt{This uses a typewriter font.} % monospace
+
 ```
 
 An alternative to using these commands is to use a declaration.
@@ -1665,7 +1683,7 @@ use `\linewidth` for the `width` value.
 Instead of specifying a `width`, a `height` (a measure like `width`)
 or `scale` (a number treated as a percentage) can be specified.
 
-## Math
+## Math Mode
 
 Mathematical equations are specially formatted when in math mode.
 This includes making variables names italicized and
@@ -1824,6 +1842,11 @@ $$ \int_0^\infty e^{-x^2} dx = \sqrt{\pi} $$
 ```
 
 {% endraw %}
+
+There are commands for standard math functions
+that can only be used in math mode.
+They prevent function names from being rendered in italics like variable names.
+Examples include `\sin`, `\cos`, `\tan`, `\ln`, `\log`, and `\gcd`.
 
 ## Charts
 
