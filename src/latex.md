@@ -785,9 +785,11 @@ The following commands change the formatting of text in their argument.
 An alternative to using these commands is to use a declaration.
 A declaration stays in effect until the next
 right curly brace or `\end` command is reached.
+For example, the declaration `\em` corresponds to the `\emph` command.
 
 Every declaration has a corresponding environment with the same name.
-The scope of environments seems less confusing than that of declarations.
+For example, `{\em ... }` can be replaced by `\begin{em} ... \end{em}`
+which feels more explicit.
 
 ## Macros
 
