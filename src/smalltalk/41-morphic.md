@@ -1180,6 +1180,11 @@ To listen for changes to the value of a `TextModelMorph`:
 
 ```smalltalk
 TODO: ADD THIS! Use the dependency mechanism.
+tmm keystrokeAction: [:event |
+    | value |
+    value := tmm text.
+    "Do something with the value."
+].
 ```
 
 By default, if the user attempts to close a `SystemWindow`
