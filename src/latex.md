@@ -1845,7 +1845,7 @@ To add text above an `\overbrace`, use a superscript.
 To add text below an `\underbrace`, use a subscript.
 For example:
 
-<img alt="LaTeX \overbrace and \underbrace" style="width: 25%"
+<img alt="LaTeX \overbrace and \underbrace" style="width: 20%"
   src="/blog/assets/latex-overbrace-underbrace.png?v={{pkg.version}}">
 
 ```latex
