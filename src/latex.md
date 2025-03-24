@@ -817,7 +817,7 @@ The following commands change the formatting of text in their argument.
 
 \textup{This is upright.} % the default
 
-\underline{This is underlined.}
+\underline{This is underlined.} % line below
 
 \emph{This can be underlined or italic.}
 
@@ -1830,6 +1830,33 @@ x &= 1/2 \,or\, 6
 The steps will be numbered by default.
 To prevent numbering, use `align*` in place of `align`.
 
+The following formatting commands can only be used in math mode:
+
+```latex
+\overline{This has a horizontal line above.}
+\overbrace{This has a horizontal brace above.}
+\underbrace{This has a horizontal brace below.}
+```
+
+The `\underline` command can be used in any mode
+to draw a horizontal line below its argument.
+
+To add text above an `\overbrace`, use a superscript.
+To add text below an `\underbrace`, use a subscript.
+For example:
+
+<img alt="LaTeX \overbrace and \underbrace" style="width: 25%"
+  src="/blog/assets/latex-overbrace-underbrace.png?v={{pkg.version}}">
+
+```latex
+$$
+  a + \overbrace{b + c}^{\textup{middle}} + d
+$$
+$$
+  a + \underbrace{b + c}_{\textup{middle}} + d
+$$
+```
+
 The following examples demonstrate rendering limits, sums, and integrals:
 
 <img alt="LaTeX limits, sums, and integrals" style="width: 25%"
@@ -2076,7 +2103,7 @@ where the first column contains the left sides of equations,
 the last column contains the right sides of equations,
 and the center column describes the relationships
 between the left and right sides (usually `=`).
-The formula described in each row is numbered.
+The equation described in each row is numbered.
 
 For example:
 
@@ -2100,6 +2127,11 @@ LaTeX Error: \begin{document} ended by \end{eqnarray}
 Missing $ inserted
 Display math should end with $$
 ```
+
+To avoid rendering equation numbers, use `eqnarray*`.
+
+If an equation is too long to fit on a single line,
+use the `\lefteqn` command to allow using multiple lines.
 
 ## Matrices
 
