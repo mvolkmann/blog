@@ -2056,6 +2056,51 @@ specify a period for the other side to make it invisible.
 For example, `\left. ... \right\}` renders
 no delimeter on the left side and a curly brace on the right side.
 
+<img alt="LaTeX array delimiters" style="width: 25%"
+  src="/blog/assets/latex-array-delimiters.png?v={{pkg.version}}">
+
+```latex
+$$
+  \left.
+  \begin{array}{ll}
+    \textup{diameter}      & 2r      \\
+    \textup{circumference} & 2 \pi r \\
+    \textup{area}          & \pi r^2 \\
+  \end{array}
+  \right\}
+$$
+```
+
+The `eqnarray` environment creates a three-column array
+where the first column contains the left sides of equations,
+the last column contains the right sides of equations,
+and the center column describes the relationships
+between the left and right sides (usually `=`).
+The formula described in each row is numbered.
+
+For example:
+
+<img alt="LaTeX eqnarray" style="width: 60%"
+  src="/blog/assets/latex-eqnarray.png?v={{pkg.version}}">
+
+```latex
+\begin{eqnarray}
+  2x^2 & = & 13x - 6 \\
+  2x^2 - 13x + 6 & = & 0 \\
+  (2x - 1)(x - 6) & = & 0 \\
+  x & = & 1/2 \textup{ or } 6
+\end{eqnarray}
+```
+
+This environment automatically uses math mode for its contents
+and will output the following error messages if embedded in math mode:
+
+```text
+LaTeX Error: \begin{document} ended by \end{eqnarray}
+Missing $ inserted
+Display math should end with $$
+```
+
 ## Matrices
 
 Matrices are rendered with matrix environment.
