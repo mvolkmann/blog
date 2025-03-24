@@ -1179,7 +1179,6 @@ tmm acceptOnCR: true. "updates after return key is pressed"
 To listen for changes to the value of a `TextModelMorph`:
 
 ```smalltalk
-TODO: ADD THIS! Use the dependency mechanism.
 tmm keystrokeAction: [:event |
     | value |
     value := tmm text.
