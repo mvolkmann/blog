@@ -363,10 +363,24 @@ The `\begin{name}` command starts a usage of the named environment.
 It must be paired with a corresponding `\end{name}` command.
 Some environments take additional arguments.
 
-Custom environments are typically defined in the preamble.
+For example, the following uses the center environment
+which centers each line of text inside it:
+
+```latex
+\begin{center}
+  one \\
+  two \\
+  three \\
+\end{center}
+```
+
+Custom environments are defined with the `\newenvironment` command.
+They are typically defined in the preamble.
 
 The following contrived example defines a custom environment
-that inserts common starting and ending text of a fairy tale:
+that inserts common starting and ending text of a fairy tale.
+The arguments to the `\newenvironment` command are
+the environment name, the beginning text, and the ending text.
 
 ```latex
 \newenvironment{fairytale}
@@ -1071,9 +1085,9 @@ This is a \important{serious issue!}.
 % Setting the default color for all the text remaining in a block.
 \begin{center}
   \color{purple}
-  one
-  two
-  three
+  one \\
+  two \\
+  three \\
 \end{center}
 
 % Rendering text in a box with a colored background.
