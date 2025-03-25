@@ -359,11 +359,34 @@ The entire content of a document must be surrounded by
 An "environment" can provide content to be rendered at its
 beginning and end, and can specify how its content will be formatted.
 
-The `\begin` command starts a new "environment"
-and must be paired with a corresponding `end` command.
-The name of the environment is specified as
-an argument in a pair of curly braces.
+The `\begin{name}` command starts a usage of the named environment.
+It must be paired with a corresponding `\end{name}` command.
 Some environments take additional arguments.
+
+Custom environments are typically defined in the preamble.
+
+The following contrived example defines a custom environment
+that inserts common starting and ending text of a fairy tale:
+
+```latex
+\newenvironment{fairytale}
+  {Once upon a time,}
+  {And they all lived happily ever after.}
+```
+
+The following is an example of using the fairytale environment:
+
+```latex
+\begin{fairytale}
+in a kingdom nestled beside a sparkling sea,
+lived a young princess named Aurora.
+Her days were filled with laughter and the gentle rhythm of the waves,
+until a mischievous sea sprite stole her favorite seashell,
+a gift from her grandmother.
+\end{fairytale}
+```
+
+\new
 
 ### Command Groups
 
@@ -806,29 +829,20 @@ The following commands change the formatting of text in their argument.
 
 ```latex
 \textbf{This is bold.}
-
 \textmd{This is medium.} % typically the default
-
 \textit{This is italic.}
-
 \textsc{This is small caps.}
-
 \textsl{This is slanted.} % similar to italic
-
 \textup{This is upright.} % the default
 
 \underline{This is underlined.} % line below
-
 \emph{This can be underlined or italic.}
 
 \textbf{\textit{\underline{bold, italic, and underline}}}
 
 \textrm{This uses a Roman font.}
-
 \textsf{This uses a sans serif font.}
-
 \texttt{This uses a typewriter font.} % monospace
-
 ```
 
 An alternative to using these commands is to use a declaration.
@@ -844,6 +858,10 @@ which feels more explicit.
 
 Macros make it unnecessary to repeat
 commonly used content and sequences of commands.
+They can significantly reduce the amount of markup required in documents.
+
+Typically all macros are defined in the preable.
+Macro definitions must appear before they are used.
 
 The `\def` command is a TeX primitive that defines a new command
 that can optionally have required parameters.
@@ -890,7 +908,13 @@ For example:
 This greatly simplies adding images in a document
 as long as all should be centered and have a caption.
 
-The `\renewcommand` command redefines an existing command.
+For custom commands that must be evaluated in math mode,
+regardless of whether they are applied in math mode,
+wrap the command contents in the `\ensuremath` command.
+
+Defining a command with `\newcommand` that already exists
+results in an error.
+To redefine an exising command, define it with `\renewcommand` instead.
 
 The `ifthen` package adds commands that support conditional logic
 for choosing the text to render.
@@ -1130,15 +1154,38 @@ The LaTeX compiler typically removes extra spaces as it sees fit.
 A sequence of space characters such as a spaces, tabs, and linefeeds
 are treated the same as a single space character.
 
-There are several way to force space to be retained.
+There are many ways to insert different amounts of space.
+The following options are ordered from least to most space
+and are depicted in the image that follows.
+Note the differences in the amount of space
+between the words "space" and "with".
 
 - `\,` inserts a thin space
+- `\:` inserts a medium space
+- `\;` inserts a thick space
 - `\` followed by a space inserts an interword space (normal size space)
-- `~` inserts a space and prevents the previous word from appearing
-  on a different line than the next word (ex. `Mr.~Mark~Volkmann`)
+- `~` inserts a normal size space and
+  prevents the next word from appearing
+  on a different line than the previous word (ex. `Mr.~Mark~Volkmann`)
 - `\quad` inserts space that is the width of a capital M in the current font
   (seemining with a thin space on both sides)
-- `\qquad` insert double the space inserted by `\quad`
+- `\qquad` inserts double the space inserted by `\quad`
+
+<img alt="LaTeX adding space" style="width: 30%"
+  src="/blog/assets/latex-space.png?v={{pkg.version}}">
+
+The image above was created with the following markup:
+
+```latex
+\noindent
+space\,with comma\\
+space\:with colon\\
+space\;with semicolon\\
+space\ with space\\
+space~with tilde\\
+space\quad with quad\\
+space\qquad with qquad
+```
 
 By default there is no vertical space betweeen paragraphs
 and the first line of each paragraph in each section,
@@ -1833,6 +1880,13 @@ To prevent numbering, use `align*` in place of `align`.
 The following formatting commands can only be used in math mode:
 
 ```latex
+\mathbf{This is bold.}
+\mathit{This is italic.}
+
+\mathrm{This uses a Roman font.}
+\mathsf{This uses a sans serif font.}
+\mathtt{This uses a typewriter font.} % monospace
+
 \overline{This has a horizontal line above.}
 \overbrace{This has a horizontal brace above.}
 \underbrace{This has a horizontal brace below.}
