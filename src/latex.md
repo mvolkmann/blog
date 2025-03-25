@@ -375,7 +375,8 @@ which centers each line of text inside it:
 ```
 
 Custom environments are defined with the `\newenvironment` command.
-They are typically defined in the preamble.
+To redefine an existing environment, use the `\renewenvironment` command.
+Environments are typically defined in the preamble.
 
 The following contrived example defines a custom environment
 that inserts common starting and ending text of a fairy tale.
@@ -406,6 +407,8 @@ The number in square brackets specifies
 the number of optional parameters accepted.
 The text in square brackets that follows specifies
 the default values of each of the optional parameters.
+The optional parameters can only be used in the begin text
+and are referred to with `#1`, `#2`, and so on.
 
 ```latex
 \newenvironment{fairytale}[1][blue]
