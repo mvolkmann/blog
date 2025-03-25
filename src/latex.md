@@ -410,11 +410,15 @@ the default values of each of the optional parameters.
 The optional parameters can only be used in the begin text
 and are referred to with `#1`, `#2`, and so on.
 
+{% raw %}
+
 ```latex
 \newenvironment{fairytale}[1][blue]
   {\color{#1}Once upon a time,}
   {And they all lived happily ever after.}
 ```
+
+{% endraw %}
 
 Using declarations instead of commands is especially useful
 in environment definitions because an environment
@@ -425,11 +429,15 @@ all the text that follows, up to the end of the environment.
 The following is an example of using the new version of fairytale environment
 and specifying green as the text color:
 
+{% raw %}
+
 ```latex
 \begin{fairytale}[green]
   in a kingdom nestled beside a sparkling sea, ...
 \end{fairytale}
 ```
+
+{% endraw %}
 
 ### Command Groups
 
