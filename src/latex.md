@@ -416,6 +416,12 @@ and are referred to with `#1`, `#2`, and so on.
   {And they all lived happily ever after.}
 ```
 
+Using declarations instead of commands is especially useful
+in environment definitions because an environment
+cannot use a command to wrap around the supplied content.
+Instead, they can use declarations to change styling for
+all the text that follows, up to the end of the environment.
+
 The following is an example of using the new version of fairytale environment
 and specifying green as the text color:
 
