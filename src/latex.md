@@ -400,7 +400,24 @@ a gift from her grandmother.
 \end{fairytale}
 ```
 
-\new
+The following version of the fairytale environment
+adds an optional parameter to specify the text color.
+It defaults to blue.
+
+```latex
+\newenvironment{fairytale}[1][blue]
+  {\color{#1}Once upon a time,}
+  {And they all lived happily ever after.}
+```
+
+The following is an example of using the new version of fairytale environment
+and specifying green as the text color:
+
+```latex
+\begin{fairytale}[green]
+  in a kingdom nestled beside a sparkling sea, ...
+\end{fairytale}
+```
 
 ### Command Groups
 
