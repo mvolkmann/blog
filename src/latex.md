@@ -402,7 +402,10 @@ a gift from her grandmother.
 
 The following version of the fairytale environment
 adds an optional parameter to specify the text color.
-It defaults to blue.
+The number in square brackets specifies
+the number of optional parameters accepted.
+The text in square brackets that follows specifies
+the default values of each of the optional parameters.
 
 ```latex
 \newenvironment{fairytale}[1][blue]
