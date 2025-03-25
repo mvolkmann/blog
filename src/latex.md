@@ -357,7 +357,7 @@ The entire content of a document must be surrounded by
 ### Environments
 
 An "environment" can provide content to be rendered at its
-beginning and end, and can specify how its content will be formatted.
+beginning and end, and can specify the default formatting of its content.
 
 The `\begin{name}` command starts a usage of the named environment.
 It must be paired with a corresponding `\end{name}` command.
@@ -448,7 +448,9 @@ see {% aTargetBlank "https://en.wikibooks.org/wiki/LaTeX/Special_Characters",
 
 ## Document Classes
 
-Document classes change the default formatting and add support for new commands.
+Document classes change the default formatting
+by redefining environments and commands.
+They can also define new environments and commands.
 
 Document classes that can be specified in `\documentclass[options]{some-class}` include:
 
