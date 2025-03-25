@@ -932,10 +932,10 @@ The arguments are inserted where `#1`, `#2`, and `#3` appear.
 
 ```latex
 \newcommand{\image}[3]{
-  \begin{figure}[H]
+  \begin{figure}[H] % see "here" in Figures section
     \centering
     \includegraphics[width=#2]{#1}
-    \caption{#3}
+    \caption{#3} % see "\caption" in Figures section
   \end{figure}
 }
 ```
@@ -1490,7 +1490,7 @@ The following is an example of rendering Smalltalk code:
   src="/blog/assets/latex-minted-smalltalk.png?v={{pkg.version}}">
 
 ```latex
-\begin{listing}[H]
+\begin{listing}[H] % see "here" in Figures section
   \begin{minted}[bgcolor=Beige, frame=lines, framesep=3mm, linenos, numbersep=3pt]{smalltalk}
 newName: nameString breed: breedString
     | dog |
@@ -1499,9 +1499,13 @@ newName: nameString breed: breedString
     dog breed: breedString.
     ^ dog.
   \end{minted}
-  \caption{My Smalltalk code}
+  \caption{My Smalltalk code} % see "\caption" in Figures section
 \end{listing}
 ```
+
+Listings with a caption are automatically numbered.
+The sequence of listing numbers is independent from
+the numbering of figures and tables.
 
 ## Horizontal Rules
 
@@ -1678,7 +1682,9 @@ but it can be anything, include plain text.
 
 A caption can be added above or below the `figure` content
 by adding a `\caption{some caption}` command.
-The caption will be automatically numbered by default.
+Figures with a caption are automatically numbered.
+The sequence of figure numbers is independent from
+the numbering of listings and tables.
 To prevent numbering, use the `caption` package and the `\caption*` command.
 
 A label can be applied to a figure to enable adding references to the figure.
@@ -2410,6 +2416,10 @@ For example:
 ...
 Do you like dogs? \ref{dog-table}
 ```
+
+Tables with a caption are automatically numbered.
+The sequence of table numbers is independent from
+the numbering of listings and figures.
 
 To include a page containing a list of tables
 where each line is a link to a table,
