@@ -64,10 +64,8 @@ which holds a reference to a `Dictionary` of key/value pairs.
 
 Several of the `Morph` subclasses are "pluggable". This means that
 they can be configured through composition rather than inheritance.
-Configuration is achieved by specifying a model object and
-a selector for messages to be sent to the model object.
-The corresponding method in the model object often
-returns an object that changes the operation.
+Configuration is achieved by specifying a model object and a selector
+for messages to be sent to the model object when the button is clicked.
 
 An example is the `PluggableButtonMorph` class whose instances
 can be created with the `model:action:label:` class method.
