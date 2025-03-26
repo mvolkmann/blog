@@ -62,14 +62,15 @@ which holds a reference to a `Dictionary` of key/value pairs.
 
 ## Pluggable
 
-Several of the `Morph` subclasses are "pluggable". This means that
+Several of the `Morph` subclasses are "pluggable". This means
 they can be configured through composition rather than inheritance.
 Configuration is achieved by specifying a model object and a selector
-for messages to be sent to the model object when the button is clicked.
+for messages to be sent to the model object when an interaction occurs.
 
 An example is the `PluggableButtonMorph` class whose instances
 can be created with the `model:action:label:` class method.
-The `action:` keyword specifies a selector on the model object and
+The `model:` keyword specifies a model object,
+the `action:` keyword specifies a selector on the model object, and
 the `label:` keyword specifies the text that will appear in the button.
 
 ## Creating and Modifying Morphs
