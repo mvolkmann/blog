@@ -666,8 +666,10 @@ The latter option allows the senders to be modified.
 
 To refactor a method or code, select it, right-click,
 and select an option from the "refactorings" submenu.
+Alternatively, make a note of the keyboard shortcut for the refactoring
+and press the key combination for it instead of opening the menus.
 
-For methods the options include:
+For methods the refactoring options include:
 
 - rename... (cmd-shift-r)
 - change keyword order...
@@ -701,16 +703,23 @@ When renaming a method:
 This is the only way to rename a method.
 This is good because it forces developers to think about the affected senders.
 
-For selected code the options include:
+Changes made to the code in a method
+must be saved before applying a refactoring.
 
-- Extract as Parameter...
-- Extract Temporary...
-- Extract Method...
+For selected code the refactoring options include:
+
+- Rename...: renames a selected variable
+- Extract as Parameter...: replaces a literal value with a method parameter
+- Add Parameter...: adds a parameter to the current method and
+  updates senders to all supply a given value
+- Remove Parameter...
+- Extract Temporary...: changes a selected expression within another expression
+  to a local variable assignment
+- Extract Method...: replaces selected expression with a message send that
+  invokes a new method that answers the selected expression
 - Inline Temporary...
 - Inline Method...
 - Temporary to Instance Variable
-- Push Up Instance Variable
-- Push Down Instance Variable
 
 ## Search Browser
 

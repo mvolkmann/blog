@@ -1098,6 +1098,10 @@ and where the current value will be held.
    sets its model to `newModel`,
    and returns the instance.
 
+To display prompting text inside a `TextModelMorph`
+until the user begins typing a value,
+send it `#emptyTextDisplayMessage:` with a string message.
+
 The default background color of a `TextModelMorph` is white.
 A `TextModelMorph` only displays a border when it has focus.
 One way to make its bounds apparent when it doesn't have focus
@@ -1366,8 +1370,9 @@ which has the following inheritance hierarchy.
 
 ## SystemWindow
 
-To implement a custom window, create a subclass of `SystemWindow`.
-The supplies the standard buttons in the upper-left to
+To implement a custom window, create an instance of the class `SystemWindow`
+or a custom subclass of it.
+This supplies the standard buttons in the upper-left to
 close the window (red), minimize it (orange),
 toggle to and from full screen (green; not really the full screen),
 and open a menu of other window-related commands (blue).
@@ -1384,6 +1389,10 @@ The menu includes:
 - collapse (same as orange button)
 - expand/contract (same as green button)
 - resize... (graphically select both location and size)
+
+The simplest way to create a `SystemWindow` that displays a single morph
+is to send `#embeddedInMorphicWindowLabeled:` to the morph
+with an argument that is the label to be displayed in the window title bar.
 
 `SystemWindow` subclasses have a default extent (size)
 that is the returned by the `initialExtent` method
