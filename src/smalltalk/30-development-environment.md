@@ -389,15 +389,19 @@ System Browsers contain four rows.
   Right-clicking in this pane opens a context menu that includes
   the following menu items:
 
-  - "Alphabetize" the categories
-  - "Remove empty Categories" (those with no methods)
-  - "Categorize all Uncategorized" methods (doesn't work well),
-  - "New Category..." to add one
+  - "Reorganize" opens a list of parenthesized rows that each list
+    a message category and the selectors of methods in the category.
+    Edit this text view and save to reorganize the selectors.
+    Add rows to add new message categories.`
+  - "Alphabetize" the categories.
+  - "Remove empty Categories" which are those with no methods.
+  - "Categorize all Uncategorized" methods (doesn't work well).
+  - "New Category..." to add one.
   - "New extension Category..." to add one whose name is
-    "\*" followed by an installed package name
-  - "Rename..." the category that was right-clicked
-  - "Remove" the category that was right-clicked
-  - "Run tests" to run all tests in the category
+    "\*" followed by an installed package name.
+  - "Rename..." the category that was right-clicked.
+  - "Remove" the category that was right-clicked.
+  - "Run tests" to run all tests in the category.
   - and more
 
   The list of methods in the fourth pane
