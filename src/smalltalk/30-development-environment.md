@@ -678,6 +678,10 @@ This saves the code for one of the following in a `.st` text file:
 - all the methods in a selected method category of a selected class
 - a selected method
 
+When filing out a single class, consider selecting the menu item
+"File Out (alphabetically)" instead of "File Out".
+This makes it easier to find particular methods when viewing the file.
+
 To add code from a file out to another image, open a "File List" window,
 navigate to and select a file out `.st` file, and click the "filein" button.
 
