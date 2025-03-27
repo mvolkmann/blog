@@ -6,6 +6,8 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+## Overview
+
 Smalltalk provides many methods for
 getting information about classes and objects.
 The following table lists some of them.

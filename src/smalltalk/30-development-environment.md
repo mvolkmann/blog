@@ -666,6 +666,21 @@ To delete a method from a class, select it and press cmd-x (Remove it).
 Then select "Remove it" or "Remove, then browse senders".
 The latter option allows the senders to be modified.
 
+## File Outs
+
+One way to save code outside of the current image is to
+right-click in one of the top panes of a System Browser
+and select "File Out".
+This saves the code for one of the following in a `.st` text file:
+
+- every class in a selected class category
+- a selected class and all its methods
+- all the methods in a selected method category of a selected class
+- a selected method
+
+To add code from a file out to another image, open a "File List" window,
+navigate to and select a file out `.st` file, and click the "filein" button.
+
 ### Refactorings
 
 To refactor a method or code, select it, right-click,
