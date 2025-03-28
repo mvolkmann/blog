@@ -507,7 +507,7 @@ All indexes are 1-based and `0` means not found.
 | `subStrings:`                          | answers `Array` of instances formed by splitting receiver on delimiters                                                       |
 | `substrings`                           | answers `Array` of instances created by splitting receiver on whitespace                                                      |
 | `substringsSeparatedBy:`               | answers `Array` of instances formed by splitting receiver on a single delimiter `Character`                                   |
-| `truncateWithElipsisTo:`               | answers instance formed by truncating receiver to given length with elipsis in last 3 of length                               |
+| `truncateWithEllipsisTo:`              | answers instance formed by truncating receiver to given length with ellipsis in last 3 of length                              |
 | `uncapitalized`                        | answers copy where first letter is changed to lowercase                                                                       |
 | `withBlanksCondensed`                  | answers instance created by removing leading and trailing spaces and replacing consecutive spaces with one                    |
 | `withBlanksTrimmed`                    | answers instance created by removing leading and trailing spaces                                                              |
@@ -529,6 +529,16 @@ sub := s copyFrom: 4 to: s size. "answers 'def'"
 
 There is no method that only takes a start index
 and returns the substring to the end of the string.
+
+Use the `join:` method to create a string that is the result of
+joining all the strings in an array with a delimiter string.
+For example, the following uses the newline character as the delimiter.
+
+```smalltalk
+labels := #(burrito enchilada taco chips quacamole salsa water soda tea).
+nl := Character newLineCharacter asString.
+joined := nl join: labels.
+```
 
 ### String
 
