@@ -2051,8 +2051,7 @@ Create the following class:
 
 ```smalltalk
 Object subclass: #ListDemo
-    instanceVariableNames: 'addButton colorList colors deleteButton
-        newColorEntry newColorName selectedColorIndex selectedLabel window'
+    instanceVariableNames: 'colorList colors deleteButton newColorEntry selectedColorIndex selectedLabel window'
     classVariableNames: ''
     poolDictionaries: ''
     category: 'LayoutMorphDemos'
@@ -2062,12 +2061,10 @@ Add the following instance methods:
 
 ```smalltalk
 initialize
-    | layout row |
+    | addButton layout row |
 
     colors := SortedCollection newFrom: #(red orange yellow green blue purple).
     selectedColorIndex := 0.
-    newColorName := ''.
-
     colorList := PluggableListMorph
         withModel: self
         listGetter: #colors
@@ -2077,12 +2074,8 @@ initialize
 
     newColorEntry :=  self textEntryOn: #newColor.
     newColorEntry emptyTextDisplayMessage: 'new color'.
-    newColorEntry keystrokeAction: [ :event |
-        event keyValue = 13 ifTrue: [ self addColor ]
-    ].
 
     addButton := PluggableButtonMorph model: self action: #addColor label: 'Add'.
-    addButton disable.
 
     row := LayoutMorph newRow
         gap: 10;
@@ -2117,14 +2110,23 @@ colors
     ^ colors
 
 newColor
-    ^ newColorName
+    "In this app there is no need to retrieve this value
+    or even hold it in an instance variable, but
+    TextModelMorph requires that this method exists."
 
-newColor: aString
+    ^ ''
 
-    newColorName := aString.
-    self changed: #newColor.
-    self changed: #clearUserEdits.
-    addButton enable: aString isEmpty not.
+newColor: aText
+    | potentialColor |
+
+    potentialColor := aText asString withBlanksTrimmed.
+    potentialColor ifNotEmpty: [
+        colors add: potentialColor asSymbol.
+        colorList updateList.
+        self selectedColorIndex: (colors indexOf: potentialColor ).
+        self changed: #clearUserEdits.
+        self changed: #newColor.
+    ].
 
 selectedColorIndex
     ^ selectedColorIndex
@@ -2149,15 +2151,7 @@ selectedColorIndex: anIndex
     window layoutMorph color: (color alpha: 0.6).
 
 addColor
-    | colorName |
-
-    colorName := newColorName string withBlanksTrimmed.
-    newColorName isEmpty ifFalse: [
-        colors add: colorName asSymbol.
-        colorList updateList.
-        self newColor: ''.
-        self selectedColorIndex: (colors indexOf: colorName).
-    ]
+    self newColor: newColorEntry text
 
 deleteColor
 
@@ -2176,14 +2170,12 @@ textEntryOn: aSymbol
         textProvider: self
         textGetter: aSymbol
         textSetter: (aSymbol, ':') asSymbol ::
-        acceptOnAny: true;
+        acceptOnCR: true;
         askBeforeDiscardingEdits: false;
         hideScrollBarsIndefinitely;
         "Width is made proportional below.
         Setting height to zero causes it to use minimum height for one line."
-        morphExtent: 0 @ 0;
-        tabToFocus: true;
-        wrapFlag: false.
+        morphExtent: 0 @ 0.
     entry layoutSpec proportionalWidth: 1.
     ^ entry.
 ```
