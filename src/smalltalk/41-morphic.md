@@ -1963,6 +1963,75 @@ selection := menu startUpMenu.
 selection print. "prints selected label index"
 ```
 
+The following code demonstrates opening a `SelectionMenu`
+when a button is clicked.
+
+<img alt="Cuis SelectionMenu closed" style="width: 40%"
+  src="/blog/assets/cuis-selectionmenu1.png?v={{pkg.version}}">
+
+<img alt="Cuis SelectionMenu open" style="width: 40%"
+  src="/blog/assets/cuis-selectionmenu2.png?v={{pkg.version}}">
+
+<img alt="Cuis SelectionMenu selected" style="width: 40%"
+  src="/blog/assets/cuis-selectionmenu3.png?v={{pkg.version}}">
+
+Define the following class:
+
+```smalltalk
+Object subclass: #MenuDemo
+    instanceVariableNames: 'colorButton colorMenu statusLabel colors window'
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'Demos'
+```
+
+Define the following instance methods:
+
+```smalltalk
+initialize
+    | layout |
+
+    colorButton := PluggableButtonMorph
+        model: self
+        action: #openMenu
+        label: 'Select Color'.
+
+    colors := #(red orange yellow green blue purple).
+    colorMenu := SelectionMenu labels: colors lines: #().
+
+    statusLabel := LabelMorph contents: ''.
+
+    window := SystemWindow new.
+    window
+        setLabel: 'Menu Demo';
+        addMorph: colorButton;
+        addMorph: statusLabel;
+        openInWorld.
+
+    "Set window size to the smallest height that contains its submorphs.
+    This must be done AFTER the window is opened."
+    layout := window layoutMorph.
+    layout separation: 10.
+    window morphExtent: 300 @ layout minimumExtent y.
+
+openMenu
+    | color colorName index |
+
+    index := colorMenu startUpMenu.
+    index = 0 ifFalse: [
+        colorName := colors at: index.
+        colorButton label: colorName.
+        statusLabel contents: ('You selected {1}.' format: { colorName }).
+
+        color := colorName
+            ifNil: [ Color gray ]
+            ifNotNil: [ [ Color perform: colorName ] on: MessageNotUnderstood do: [ Color gray ] ].
+        window layoutMorph color: (color alpha: 0.6).
+    ]
+```
+
+To run this, evaluate `MenuDemo new` in a Workspace.
+
 ## PluggableListMorph
 
 The `PluggableListMorph` displays a scrollable list of items.
