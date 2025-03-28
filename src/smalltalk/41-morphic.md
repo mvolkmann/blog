@@ -1963,6 +1963,164 @@ selection := menu startUpMenu.
 selection print. "prints selected label index"
 ```
 
+## PluggableListMorph
+
+The `PluggableListMorph` displays a scrollable list of items.
+Users can select an item by clicking it or by typing its first few letters.
+
+The follow code implements a small application that allows users to
+select a color from a list to change the background color of the window.
+Users can also add new colors and delete existing colors.
+
+In addition to demonstrating the use of `PluggableListMorph`,
+this also disables buttons when their use is not appropriate.
+
+<img alt="Cuis PluggableListMorph" style="width: 30%"
+  src="/blog/assets/cuis-pluggablelistmorph.png?v={{pkg.version}}">
+
+Create the following class:
+
+```smalltalk
+Object subclass: #ListDemo
+    instanceVariableNames: 'addButton colorList colors deleteButton
+        newColorEntry newColorName selectedColorIndex selectedLabel window'
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'LayoutMorphDemos'
+```
+
+Add the following instance methods:
+
+```smalltalk
+initialize
+    | layout row |
+
+    colors := SortedCollection newFrom: #(red orange yellow green blue purple).
+    selectedColorIndex := 0.
+    newColorName := ''.
+
+    colorList := PluggableListMorph
+        withModel: self
+        listGetter: #colors
+        indexGetter: #selectedColorIndex
+        indexSetter: #selectedColorIndex:.
+    colorList layoutSpec proportionalWidth: 1.
+
+    newColorEntry :=  self textEntryOn: #newColor.
+    newColorEntry emptyTextDisplayMessage: 'new color'.
+    newColorEntry keystrokeAction: [ :event |
+        event keyValue = 13 ifTrue: [ self addColor ]
+    ].
+
+    addButton := PluggableButtonMorph model: self action: #addColor label: 'Add'.
+    addButton disable.
+
+    row := LayoutMorph newRow
+        gap: 10;
+        addMorph: newColorEntry;
+        addMorph: addButton.
+
+    deleteButton := PluggableButtonMorph
+        model: self
+        action: #deleteColor
+        label: 'Delete Selected Color'.
+
+    selectedLabel := LabelMorph contents: ''.
+
+    window := SystemWindow new.
+    window
+        setLabel: 'List Demo';
+        addMorph: colorList;
+        addMorph: row;
+        addMorph: deleteButton;
+        addMorph: selectedLabel;
+        openInWorld.
+
+    self selectedColorIndex: 0. "sets initial background color"
+
+    "Set window size to the smallest height that contains its submorphs.
+    This must be done AFTER the window is opened."
+    layout := window layoutMorph.
+    layout separation: 10.
+    window morphExtent: 250 @ layout minimumExtent y.
+
+colors
+    ^ colors
+
+newColor
+    ^ newColorName
+
+newColor: aString
+
+    newColorName := aString.
+    self changed: #newColor.
+    self changed: #clearUserEdits.
+    addButton enable: aString isEmpty not.
+
+selectedColorIndex
+    ^ selectedColorIndex
+
+selectedColorIndex: anIndex
+    | color colorName selected |
+
+    selectedColorIndex := anIndex.
+
+    selected := anIndex ~= 0.
+    deleteButton enable: selected.
+    colorName := selected ifTrue: [ colors at: anIndex ].
+
+    selectedLabel contents: (colorName
+        ifNil: ''
+        ifNotNil: [ 'You selected {1}.' format: { colorName } ]
+    ).
+
+    color := colorName
+        ifNil: [ Color gray ]
+        ifNotNil: [ [ Color perform: colorName ] on: MessageNotUnderstood do: [ Color gray ] ].
+    window layoutMorph color: (color alpha: 0.6).
+
+addColor
+    | colorName |
+
+    colorName := newColorName string withBlanksTrimmed.
+    newColorName isEmpty ifFalse: [
+        colors add: colorName asSymbol.
+        colorList updateList.
+        self newColor: ''.
+        self selectedColorIndex: (colors indexOf: colorName).
+    ]
+
+deleteColor
+
+    selectedColorIndex = 0 ifFalse: [
+        colors removeAt: selectedColorIndex.
+        self selectedColorIndex: 0.
+        colorList updateList.
+        selectedLabel contents: ''.
+    ]
+
+textEntryOn: aSymbol
+    "Answer a TextModelMorph where aSymbol provides the name for the getter and setter."
+    | entry |
+
+    entry := TextModelMorph
+        textProvider: self
+        textGetter: aSymbol
+        textSetter: (aSymbol, ':') asSymbol ::
+        acceptOnAny: true;
+        askBeforeDiscardingEdits: false;
+        hideScrollBarsIndefinitely;
+        "Width is made proportional below.
+        Setting height to zero causes it to use minimum height for one line."
+        morphExtent: 0 @ 0;
+        tabToFocus: true;
+        wrapFlag: false.
+    entry layoutSpec proportionalWidth: 1.
+    ^ entry.
+```
+
+To run this, evaluate `ListDemo new` in a Workspace.
+
 ## Event Handling
 
 The `Morph` class provides many methods for event handling
@@ -2282,7 +2440,6 @@ DropDownButtonMorph
 DropDownListMorph
 MultiSelectMenu
 PluggableDropDownListMorph
-PluggableListOfMorph
 PluggableDropDownListOfMorph
 
 ## Annoyances
