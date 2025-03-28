@@ -2431,16 +2431,20 @@ writing other image formats such as PNG.
 
 ## More Morphs
 
-TODO: Study these:
-CheckButtonMorph
-RadioButtonMorph
-CheckGroup
-RadioGroup
-DropDownButtonMorph
-DropDownListMorph
-MultiSelectMenu
-PluggableDropDownListMorph
-PluggableDropDownListOfMorph
+TODO: Study the following morphs defined in Cuis-Smalltalk-UI.
+
+Clone the `Cuis-Smalltalk-UI` repository and
+install the morphs by evaluating `Feature require: 'UI-Click-Select'`.
+
+- `CheckButtonMorph`
+- `RadioButtonMorph`
+- `CheckGroup`
+- `RadioGroup`
+- `DropDownButtonMorph`
+- `DropDownListMorph`
+- `MultiSelectMenu`
+- `PluggableDropDownListMorph`
+- `PluggableListOfMorph`
 
 ## Annoyances
 
