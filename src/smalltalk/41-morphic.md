@@ -1913,20 +1913,54 @@ It is similar to the JavaScript DOM functions `alert` and `confirm`.
 
 For example:
 
-```smalltalk
-PopUpMenu inform: 'Hello, World!'.
+<img alt="Cuis PopupMenu inform" style="width: 50%"
+  src="/blog/assets/cuis-popupmenu-inform.png?v={{pkg.version}}">
 
+```smalltalk
+PopUpMenu inform: 'Something interesting just happened.'.
+```
+
+<img alt="Cuis PopupMenu confirm" style="width: 32%"
+  src="/blog/assets/cuis-popupmenu-confirm.png?v={{pkg.version}}">
+
+```smalltalk
 likesIceCream := PopUpMenu confirm: 'Do you like ice cream?'.
 likesIceCream print. "prints true or false"
+```
 
+<img alt="Cuis PopupMenu confirm:trueChoice:falseChoice:" style="width: 32%"
+  src="/blog/assets/cuis-popupmenu-confirm-truechoice-falsechoice.png?v={{pkg.version}}">
+
+```smalltalk
 likesIceCream := PopUpMenu
     confirm: 'Do you like ice cream?'
     trueChoice: 'Love it!'
     falseChoice: 'Not for me'.
-likesIceCream print.
+likesIceCream print. "prints true or false"
+```
 
+<img alt="Cuis PopupMenu withCaption:chooseFrom" style="width: 24%"
+  src="/blog/assets/cuis-popupmenu-withcaption-choosefrom.png?v={{pkg.version}}">
+
+```smalltalk
 color := PopUpMenu withCaption: 'Choose a color.' chooseFrom: #('red' 'green' 'blue').
-color print. "prints 1, 2, or 3"
+color print. "prints choice index 1, 2, or 3"
+```
+
+## SelectionMenu
+
+The `SelectionMenu` class is a subclass of `PopupMenu`.
+For example:
+
+<img alt="Cuis SelectionMenu" style="width: 18%"
+  src="/blog/assets/cuis-selectionmenu.png?v={{pkg.version}}">
+
+```smalltalk
+labels := #(burrito enchilada taco chips quacamole salsa water soda tea).
+lines := #(3 6). "draw lines after these indexes"
+menu := SelectionMenu labels: labels lines: lines.
+selection := menu startUpMenu.
+selection print. "prints selected label index"
 ```
 
 ## Event Handling
