@@ -1082,6 +1082,10 @@ The following warning message will be written to the Transcript window:
 "Attempt to create {class-name} as a subclass of nil.
 Possibly a class is being loaded before its superclass."
 
+TODO: Document the use of these World menu items:
+TODO: - Changes - Browse my Changes
+TODO: - Changes - Recently logged Changes...
+
 ## File List
 
 To view local files and operate on them,
