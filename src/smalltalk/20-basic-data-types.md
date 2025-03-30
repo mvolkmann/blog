@@ -112,7 +112,7 @@ it will print "isHot entered", "isNight entered", and "was true".
 This happens because "self isNight" will be
 evaluated before the "or:" method is evaluated.
 
-## Number
+## Numbers
 
 The following list depicts the class hierarchy for various kinds of numbers:
 
