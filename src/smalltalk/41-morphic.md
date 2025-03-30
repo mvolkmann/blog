@@ -1685,6 +1685,8 @@ To get a font for a specific family and point size:
 font := FontFamily familyName: 'Alex Brush' pointSize: 36.
 ```
 
+To get the point size from a `FontFamily` object, send it `#pointSize`.
+
 To change the font used by all instances of `TextEditor`,
 add a line like the following to its `initialize` method:
 
