@@ -1904,7 +1904,12 @@ Highlights are provided in the following table:
 
 TODO: Add more methods to this table.
 
-## PopUpMenu
+## Popups
+
+The classes `PopUpMenu`, `SelectionMenu`, and `StringRequestMorph` all display
+a dialog that shares information with users or prompts them for input.
+
+### PopUpMenu
 
 The class `PopUpMenu` provides an easy way to render a dialog that
 displays information, asks the user for confirmation,
@@ -1947,7 +1952,7 @@ color := PopUpMenu withCaption: 'Choose a color.' chooseFrom: #('red' 'green' 'b
 color print. "prints choice index 1, 2, or 3"
 ```
 
-## SelectionMenu
+### SelectionMenu
 
 The `SelectionMenu` class is a subclass of `PopupMenu`.
 For example:
@@ -2031,6 +2036,27 @@ openMenu
 ```
 
 To run this, evaluate `MenuDemo new` in a Workspace.
+
+### StringRequestMorph
+
+The class `StringRequestMorph` prompts the user to enter a text response.
+It can verify the response using a provided block that returns
+a Boolean value indicating whether the response is valid.
+It can also evaluate a block if the user clicks the cancel button.
+
+For example:
+
+<img alt="Cuis StringRequestMorph" style="width: 40%"
+  src="/blog/assets/cuis-stringrequestmorph.png?v={{pkg.version}}">
+
+```smalltalk
+StringRequestMorph
+    request: 'Comment'
+    initialAnswer: 'no comment'
+    verifying: [ :answer | answer isEmpty not ]
+    do: [ :answer | answer print ]
+    orCancel: [ 'cancelled' print ].
+```
 
 ## PluggableListMorph
 
