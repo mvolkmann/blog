@@ -116,15 +116,16 @@ evaluated before the "or:" method is evaluated.
 
 The following list depicts the class hierarchy for various kinds of numbers:
 
-- `Number`
-  - `Float`
-    - `BoxedFloat64`
-    - `SmallFloat64`
-  - `Fraction`
-    - `Integer`
-      - `LargePositiveInteger`
-        - `LargeNegativeInteger`
-      - `SmallInteger`
+- `Magnitude`
+  - `Number`
+    - `Float`
+      - `BoxedFloat64`
+      - `SmallFloat64`
+    - `Fraction`
+      - `Integer`
+        - `LargePositiveInteger`
+          - `LargeNegativeInteger`
+        - `SmallInteger`
 
 Literal numbers without a decimal point automatically become
 objects of one of the `Integer` subclasses.
@@ -167,6 +168,21 @@ a class print. "SmallInteger"
 b class print. "LargePositiveInteger"
 c class print. "SmallInteger"
 ```
+
+The following table describes most of the instance methods
+defined in the `Magnitude` class.
+These can be invoked on instances of all `Magnitude` subclasses.
+
+| Method          | Description                                                                         |
+| --------------- | ----------------------------------------------------------------------------------- |
+| `<`             | answers `Boolean` value indicating if receiver is less than argument                |
+| `<=`            | answers `Boolean` value indicating if receiver is less than or equal to argument    |
+| `=`             | answers `Boolean` value indicating if receiver is equal to argument                 |
+| `>`             | answers `Boolean` value indicating if receiver is greater than argument             |
+| `>=`            | answers `Boolean` value indicating if receiver is greater than or equal to argument |
+| `betweeen:and:` | answers `Boolean` value indicating if receiver is between the bounds                |
+| `max:`          | answers minimum of receiver and argument                                            |
+| `min:`          | answers minimum of receiver and argument                                            |
 
 The following table describes most of the instance methods
 defined in the `Number` class.

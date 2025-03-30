@@ -1677,6 +1677,8 @@ To get the default font with a specified point size:
 font := FontFamily defaultFamilyPointSize: 18
 ```
 
+To get the point size from a `FontFamily` object, send it `#pointSize`.
+
 To get a font for a specific family and point size:
 
 ```smalltalk
