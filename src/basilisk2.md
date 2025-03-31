@@ -82,6 +82,18 @@ On the Volumes tab:
 
 Start the emulator by double-clicking the file BasiliskII.app.
 
+## Colors
+
+To enable colors in the emulator:
+
+- Open the Apple menu.
+- Select "Control Panels".
+- Double-click Monitors.
+- Select the Colors radio button.
+- Select 256.
+- Close the Monitors window.
+- Close the "Control Panels" window.
+
 ## File Sharing
 
 To allow the emulator to share files with the host Mac:
@@ -96,9 +108,13 @@ To allow the emulator to share files with the host Mac:
 - Click the Save button.
 - Click the Quit button.
 - Double-click "BasiliskII.app".
+- Double-click the "Unix" drive to see the shared files.
 
 For example, browse https://macintoshgarden.org, click the GAMES link,
 download some sames, and move the files to the shared directory.
+
+Extract `.sit` files inside the emulator using "Stuffit Expander",
+not in the host Mac.
 
 ## HyperCard
 
