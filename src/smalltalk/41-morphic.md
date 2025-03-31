@@ -1748,8 +1748,17 @@ is to create a subclass of `PluggableButtonMorph` as follows:
            self isPressed
                ifFalse: [
                    self mouseIsOver
-                       ifFalse: [colorForLabel := colorForLabel adjustSaturation: -0.10 brightness: 0.10]]
-               ifTrue: [colorForLabel := colorForLabel adjustSaturation: 0.0 brightness: -0.07].
+                       ifFalse: [
+                           colorForLabel := colorForLabel
+                               adjustSaturation: -0.10
+                               brightness: 0.10
+                           ]
+                       ]
+               ifTrue: [
+                  colorForLabel := colorForLabel
+                      adjustSaturation: 0.0
+                      brightness: -0.07
+               ].
            f := self fontToUse.
            center := extent // 2.
            labelMargin := 3.
@@ -2059,7 +2068,7 @@ StringRequestMorph
     initialAnswer: 'no comment'
     verifying: [ :answer | answer isEmpty not ]
     do: [ :answer | answer print ]
-    orCancel: [ 'cancelled' print ].
+    orCancel: [ 'canceled' print ].
 ```
 
 ## PluggableListMorph
