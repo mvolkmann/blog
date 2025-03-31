@@ -4,12 +4,18 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+## Overview
+
 {% aTargetBlank "https://basilisk.cebix.net", "Basilisk II" %}
 is an open source 68K Macintosh emulator.
 
 For instructions on installing this, see
 {% aTargetBlank "https://www.youtube.com/watch?v=QSWWZ4hkvVk",
 "Emulate a Classic Macintosh Today! Basilisk II Tutorial!" %}.
+The main parts of this for installing and using the emulator
+in a modern Mac are described below.
+
+## Downloads
 
 The following files must be downloaded:
 
@@ -33,6 +39,17 @@ The following files must be downloaded:
   I clicked the link after "Download version 0.22".
   The unzipped file name will be "Basilisk II GUI.app".
 
+I moved the following files to a new directory
+in the Applications directory named "Macintosh Emulator":
+
+- 368CADFE - Macintosh IIci.rom
+- 755_2GB_drive.dsk
+- Basilisk II GUI.app
+- BasiliskII.app
+- Mac OS 7.6.1 toast
+
+## Setup
+
 In the Finder, locate the "Mac OS 7.6.1.toast" file, right-click it,
 select "Get Info", check the Locked checkbox, and close the dialog.
 
@@ -51,7 +68,8 @@ On the System tab:
 On the Graphics/Sound tab:
 
 - change "Window Refresh Rate" to Dynamic
-- optionally change the Width and Height values (640 x 480 may work best)
+- optionally change the Width and Height values
+  (640 x 480 may work best for some games)
 
 On the Volumes tab:
 
@@ -62,13 +80,30 @@ On the Volumes tab:
 - click the Save button
 - click the Quit button
 
-I moved the following files to a new directory
-in the Applications directory named "Macintosh Emulator":
-
-- 368CADFE - Macintosh IIci.rom
-- 755_2GB_drive.dsk
-- Basilisk II GUI.app
-- BasiliskII.app
-- Mac OS 7.6.1 toast
-
 Start the emulator by double-clicking the file BasiliskII.app.
+
+## File Sharing
+
+To allow the emulator to share files with the host Mac:
+
+- Quit "BasiliskII.app" if it is running.
+- Create a directory in the host Mac that will be shared.
+  I created a "share" directory in Applications/Macintosh Emulator.
+- Double-click "Basilisk II GUI.app".
+- Click the Volumes tab.
+- After "Unix root", click the "Browse..." button.
+- Select the directory to be shared.
+- Click the Save button.
+- Click the Quit button.
+- Double-click "BasiliskII.app".
+
+For example, browse https://macintoshgarden.org, click the GAMES link,
+download some sames, and move the files to the shared directory.
+
+## HyperCard
+
+HyperCard is located in Mac OS 7.6.1 ... CD Extras ... HyperCard Player.
+Double-click "HyperCard Player".
+A dialog will appear that says the Geneva and Palatino fonts
+must be installed for text to display correctly in the stacks.
+Press cmd-q to quit HyperCard.
