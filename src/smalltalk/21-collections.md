@@ -163,6 +163,16 @@ Collections support binary messages that operate on all the elements
 and return a new array containing the results.
 For example, `#(1 2 3) * 2` returns `#(2 4 6)`.
 
+The `allSatisfy:` method can be used to verify whether all the characters in
+a `String` are digits before asking for the value as a number. For example:
+
+```smalltalk
+someString allSatisfy: [:char | char isDigit] :: ifTrue: [
+    number := someString asNumber.
+    ...
+]
+```
+
 The `fold:` method uses the first element as the initial value
 and folds in the remaining elements.
 The `inject:into:` method takes an initial value
