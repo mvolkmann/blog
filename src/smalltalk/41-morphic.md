@@ -1272,6 +1272,19 @@ Using a receiver other that `self` for the message sends above enables
 configuring event handling on a specific instance of a `Morph` subclass
 rather than for all instances.
 
+When listening for mouse events in a morph that is a subclass of `SystemWindow`,
+it is necessary to avoid intercepting mouse clicks
+on the buttons in the title bar.
+To do this, implement the `handlesMouseDown` method as follows:
+
+```smalltalk
+handlesMouseDown: aMouseEvent
+    | localPoint |
+
+    localPoint := self internalizeFromWorld: aMouseEvent eventPosition.
+    ^ localPoint y > self labelHeight.
+```
+
 ## Keyboard Events
 
 To handle keyboard events on a custom morph,
