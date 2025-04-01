@@ -1476,12 +1476,12 @@ open
     | extent window |
 
     window := self new.
-    window openInWorld.
 
-    "Set window size to the smallest height that contains its submorphs.
-    This must be done AFTER the window is opened."
+    "Set window size to the smallest height that contains its submorphs."
     extent := window layoutMorph minimumExtent.
-    window morphExtent: 300 @ extent y.
+    window
+        morphExtent: 300 @ extent y;
+        openInWorld.
 
 "instance method"
 initialize
@@ -2036,14 +2036,14 @@ initialize
     window
         setLabel: 'Menu Demo';
         addMorph: colorButton;
-        addMorph: statusLabel;
-        openInWorld.
+        addMorph: statusLabel.
 
-    "Set window size to the smallest height that contains its submorphs.
-    This must be done AFTER the window is opened."
+    "Set window size to the smallest height that contains its submorphs."
     layout := window layoutMorph.
     layout separation: 10.
-    window morphExtent: 300 @ layout minimumExtent y.
+    window
+        morphExtent: 300 @ layout minimumExtent y;
+        openInWorld.
 
 openMenu
     | color colorName index |
@@ -2140,6 +2140,7 @@ initialize
         label: 'Delete Selected Color'.
 
     selectedLabel := LabelMorph contents: ''.
+    self selectedColorIndex: 0. "sets initial background color"
 
     window := SystemWindow new.
     window
@@ -2147,16 +2148,14 @@ initialize
         addMorph: colorList;
         addMorph: row;
         addMorph: deleteButton;
-        addMorph: selectedLabel;
-        openInWorld.
+        addMorph: selectedLabel.
 
-    self selectedColorIndex: 0. "sets initial background color"
-
-    "Set window size to the smallest height that contains its submorphs.
-    This must be done AFTER the window is opened."
+    "Set window size to the smallest height that contains its submorphs."
     layout := window layoutMorph.
     layout separation: 10.
-    window morphExtent: 250 @ layout minimumExtent y.
+    window
+        morphExtent: 250 @ layout minimumExtent y;
+        openInWorld.
 
 colors
     ^ colors
