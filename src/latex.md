@@ -1700,8 +1700,9 @@ This is done by adding a `\label{some-label}` command
 in a `figure` environment.
 To reference the figure, use the `\ref{some-label}` command.
 
-By default, the compiler will choose the location of the element
-attempting to keep it near its specified location in the `.tex` file.
+By default, the compiler will choose the location of the element,
+placing it at the top of the current page, bottom of the current page,
+or on a new page containing only figures and tables.
 The `float` package adds support for overriding the compiler
 with the following options:
 
@@ -1738,7 +1739,7 @@ My favorite programming language is Smalltalk \ref{smalltalk-balloon}.
 ```
 
 To include a page containing a list of figures
-where each line is a link to a fiture,
+where each line is a link to a figure,
 add the `\listofigures` command.
 This typically appears after the table of contents.
 To include this page in the table of contents,

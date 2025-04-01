@@ -2056,7 +2056,11 @@ openMenu
 
         color := colorName
             ifNil: [ Color gray ]
-            ifNotNil: [ [ Color perform: colorName ] on: MessageNotUnderstood do: [ Color gray ] ].
+            ifNotNil: [
+                [ Color perform: colorName ]
+                    on: MessageNotUnderstood
+                    do: [ Color gray ]
+            ].
         window layoutMorph color: (color alpha: 0.6).
     ]
 ```
@@ -2140,7 +2144,6 @@ initialize
         label: 'Delete Selected Color'.
 
     selectedLabel := LabelMorph contents: ''.
-    self selectedColorIndex: 0. "sets initial background color"
 
     window := SystemWindow new.
     window
@@ -2156,6 +2159,8 @@ initialize
     window
         morphExtent: 250 @ layout minimumExtent y;
         openInWorld.
+
+    self selectedColorIndex: 0. "sets initial background color"
 
 colors
     ^ colors
@@ -2198,7 +2203,11 @@ selectedColorIndex: anIndex
 
     color := colorName
         ifNil: [ Color gray ]
-        ifNotNil: [ [ Color perform: colorName ] on: MessageNotUnderstood do: [ Color gray ] ].
+        ifNotNil: [
+          [ Color perform: colorName ]
+              on: MessageNotUnderstood
+              do: [ Color gray ]
+        ].
     window layoutMorph color: (color alpha: 0.6).
 
 addColor
