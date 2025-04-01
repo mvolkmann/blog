@@ -1201,6 +1201,21 @@ but we never will.
 %\end{verse}
 ```
 
+## Margin Notes
+
+To place a note in the right margin,
+use the `\marginpar` command immediately after the content
+for the line where it should begin.
+While there is no limit on the amount of text in the note,
+it will not wrap onto another page.
+For example:
+
+```latex
+\marginpar{
+  This is a margin note.
+}
+```
+
 ## Space
 
 The LaTeX compiler typically removes extra spaces as it sees fit.
@@ -2284,6 +2299,8 @@ $$
 ## Tables
 
 To create a table, use the `\begin{tabular}{columns}` command.
+This can be used in any mode, unlike the `array` environment
+which can only be used in math mode.
 "columns" is replaced by text that specifies:
 
 - the number of columns
@@ -2294,7 +2311,7 @@ To create a table, use the `\begin{tabular}{columns}` command.
 For example, `\begin{tabular}{|c|lr|}` creates a table with three columns.
 The first column is centered, the second is left-aligned, and the last is right-aligned.
 There will be vertical lines before the first and second columns,
-and after the last column.
+and after the last column, that extent the entire height of the table.
 
 The table rows are specified with content that follows
 up to the `\end{tabular}` command.
@@ -2302,7 +2319,7 @@ up to the `\end{tabular}` command.
 The cells of each row are separated by the `&` character.
 The end of each row is marked by `\\`.
 
-To add lines before and/or after a row, add the `\hline` command.
+To add horizontal lines before and/or after a row, add the `\hline` command.
 To add double lines, such as below the heading row,
 add two `\hline` commands.
 
