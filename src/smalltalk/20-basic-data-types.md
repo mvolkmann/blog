@@ -582,12 +582,12 @@ All indexes are 1-based and `0` means not found.
 | `findStringIgnoringCase:in:startingAt:` | same as `findString:in:startingAt:`, but case is ignored                                      |
 | `is:equalTo:`                           | answers `Boolean` indicating if `is:` is equal to `equalTo:`                                  |
 | `isAscii:`                              | answers `Boolean` indicating if all the characters are ASCII                                  |
-| `isEmpy:`                               | answers `Boolean` indicating if size is zero                                                  |
+| `isEmpty:`                              | answers `Boolean` indicating if size is zero                                                  |
 | `lfString`                              | answers instance containing only a line feed character                                        |
 | `new:withAll:`                          | answers instance with length `new:` where all characters are `withAll:`                       |
 | `newLineString`                         | answers instance containing only a newline character                                          |
 | `percentEscapingNonAscii`               | answers URL encoded instance where non-ASCII characters are percent encoded                   |
-| `string:lineIndicesDo:`                 | evalautes block `lineIndicesDo:` for each substring of `string:` delimited by CR, LF, or CRLF |
+| `string:lineIndicesDo:`                 | evaluates block `lineIndicesDo:` for each substring of `string:` delimited by CR, LF, or CRLF |
 | `substringsIn:`                         | answers an `Array` of substrings delimited by whitespace characters                           |
 | `tab`                                   | answers instance containing the tab character                                                 |
 
@@ -901,9 +901,9 @@ Highlights include:
   (`start` instance variable sets day to 1 and time to midnight,
   keeping the month and year)
 - `asNumber`: answers a `Number` parsed from a `CharacterSequence`
-- `asOxfordCommandStringAnd`: answers `String` created from `Collection` elements;
+- `asOxfordCommaStringAnd`: answers `String` created from `Collection` elements;
   for example, `#(#red #green #blue) asOxfordCommaStringAnd`
-  answers `'red, green, and blue'`
+  answers `'red, green, and blue'` (see implementation below)
 - `asPlural`: answers `String` plural of a `CharacterSequence`;
   for example, `'cactus' asPlural` answers `'cacti'`
 - `asRegex`: answers `RxMatcher` created from a `String`
@@ -917,6 +917,24 @@ Highlights include:
   of any `CharacterSequence` or `String`
 - `asYear`: answers `Year` created from a `CharacterSequence`
   containing only a year number
+
+The `Collection` method `asOxfordCommaStringAnd` can be implemented as follows:
+
+```smalltalk
+asOxfordCommaStringAnd
+    "Answer string created by converting elements to strings,
+     separating them by commas, and
+     adding the word 'and' before the last element."
+
+    ^ self size caseOf: {
+        [ 0 ] -> [ '' ].
+        [ 1 ] -> [ self first asString ].
+        [ 2 ] -> [ self first asString, ' and ', self second asString ].
+    } otherwise: [
+        ', ' join: (self allButLast collect: [:each | each asString]) ::
+            , ', and ', self last asString.
+    ]
+```
 
 See the "Collections" section for methods that
 convert from one kind of collection to another.
