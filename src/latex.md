@@ -124,6 +124,14 @@ xelatex {name}.tex
 lualatex {name}.tex
 ```
 
+It is sometimes necessary to run these commands multiple times
+in order to get the desired result.
+The first run gathers information about the document
+and writes it to special files (described later)
+that are needed to produce the final output.
+The PDF output can be produced using the previous versions
+of these special files.
+
 Everything these commands write to the terminal
 is also written to the file `{name}.log`.
 However, when using the VS Code extension "LaTeX Workshop",
@@ -1495,7 +1503,9 @@ For example:
 To include a page containing a list of code listing
 where each line is a link to a code listing,
 add the `\lstlistoflisting` command.
-This typically appears after the table of contents.
+This causes LaTeX to create a `.lol` file
+that is used to render the list of listings pages.
+The `\lstlistoflisting` command typically appears after the table of contents.
 To include this page in the table of contents,
 add `\usepackage{tocbibind}` in the preamble.
 
@@ -1767,8 +1777,10 @@ My favorite programming language is Smalltalk \ref{smalltalk-balloon}.
 
 To include a page containing a list of figures
 where each line is a link to a figure,
-add the `\listofigures` command.
-This typically appears after the table of contents.
+add the `\listoffigures` command.
+This causes LaTeX to create a `.lof` file
+that is used to render the list of figures pages.
+The `\listoffigures` command typically appears after the table of contents.
 To include this page in the table of contents,
 add `\usepackage{tocbibind}` in the preamble.
 
@@ -2462,7 +2474,9 @@ the numbering of listings and figures.
 To include a page containing a list of tables
 where each line is a link to a table,
 add the `\listoftables` command.
-This typically appears after the table of contents.
+This causes LaTeX to create a `.lot` file
+that is used to render the list of tables pages.
+The `\listoftables` command typically appears after the table of contents.
 To include this page in the table of contents,
 add `\usepackage{tocbibind}` in the preamble.
 
@@ -2689,6 +2703,9 @@ A table of contents can be generated for documents that use the
 `\chapter`, `\section`, `\subsection`, and `\subsubsection` commands.
 If the package `hyperref` is included,
 the entries in the table of contents will be clickable links.
+
+The `\tableofcontents` command causes LaTeX to create a `.toc` file
+that is used to render the table of contents pages.
 
 For example:
 
