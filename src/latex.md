@@ -1564,8 +1564,13 @@ For example:
 
 ## Verbatim Text
 
-Text can be rendered verbatim to avoid
-interpreting anything in it as LaTeX commands.
+Text can be rendered verbatim in order to:
+
+- begin on a new line
+- print in a monospace font
+- honor all line breaks
+- avoid interpreting anything in the text as LaTeX commands
+- begin the content that follows on a new line
 
 For short text, use the `\verb` command
 with the text delimited by vertical bars (pipes).
@@ -1581,7 +1586,11 @@ For example:
 
 ```latex
 \begin{verbatim}
-This text will be rendered verbatim.
+This haiku will be rendered verbatim.
+
+Out of memory.
+We wish to hold the whole sky,
+but we never will.
 \end{verbatim}
 ```
 
@@ -1609,6 +1618,9 @@ use the `multicol` package. For example:
 The content to appear in multiple columns goes here.
 \end{multicols}
 ```
+
+The `multicols` environment is distinct from
+the `\multicolumn` command that is used in tables.
 
 The commands `\onecolumn` and `\twocolumn` can be
 used to switch between those options, but for me the `\twocolumn` command
@@ -2485,6 +2497,11 @@ The table below demonstrates the following:
 - cells that span both multiple columns and multiple rows
 
 The `\multicolumn` command does not require an additional package.
+It takes three arguments that describe the number of columns to span,
+the horizontal positioning of its content (`l`, `c`, or `r`),
+and the content.
+The second argument can also contain vertical bars to indicate
+borders to be drawn on the left and/or right side of the content.
 
 The `\multirow` command is defined in the `multirow` package.
 
