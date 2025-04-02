@@ -126,11 +126,12 @@ lualatex {name}.tex
 
 It is sometimes necessary to run these commands multiple times
 in order to get the desired result.
-The first run gathers information about the document
-and writes it to special files (described later)
-that are needed to produce the final output.
-The PDF output can be produced using the previous versions
-of these special files.
+The first run gathers information about the document,
+such a page numbers where figures and tables appear,
+and writes it to special files (described later).
+These files are used to produce the final output,
+but on the first run the output is be produced
+using the previous versions of these special files.
 
 Everything these commands write to the terminal
 is also written to the file `{name}.log`.
