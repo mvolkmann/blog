@@ -45,9 +45,10 @@ Some pros of using LaTeX include:
 
 - provides high-quality typesetting for professional looking PDF documents,
   especially those that contain mathematical equations
-- allows authors to focus on content before formatting while maintaining
-  consistent formatting and automatic numbering of
+- allows authors to focus on content before formatting while
+  maintaining consistent formatting and automatic numbering of
   pages, chapters, sections, figures, and tables
+  (uses a separate "counter" for each kind of content)
 - supports extensive customization through thousands of packages
   and templates for various document types
 - supports generating a table of contents, list of figures (images),
@@ -1172,6 +1173,23 @@ This is a \important{serious issue!}.
 For more colors, see
 <a href="https://latexcolor.com" target="_blank">LaTeX Color</a>.
 
+## Lengths
+
+Many commands take a length argument that must include a unit.
+The supported units are:
+
+- `cm` - centimeters
+- `em` - width of an uppercase M in the current font (for horizontal lengths)
+- `ex` - height of a lowercase x in the current font (for vertical lengths)
+- `in` - inches
+- `mm` - millimeters
+- `pt` - points
+- `\baselineskip` - line height (distance from the bottom of one line
+  to the bottom of another in the same paragraph)
+- `\parindent` - width of paragraph indentation
+- `\textheight` - height of page text area
+- `\textwidth` - width of page text area
+
 ## Paragraphs
 
 Paragraphs are separated by blank lines which introduce "hard returns".
@@ -1307,7 +1325,8 @@ In two-column mode, these move the content that follows to the next column
 which may be on the same page.
 
 To add a given amount of vertical space,
-insert the command `\vspace{amount}` where `amount` is a value like `1cm`.
+insert the command `\vspace{amount}`
+where `amount` is a length value like `1cm`.
 Alternatively, insert the commands
 `\smallskip` (3pt +/- 1pt),
 `\medskip` (6pt +/- 2pt), or
@@ -1335,8 +1354,14 @@ To split the content of a single line so the beginning is at
 the left side of the page and the end is at the right side,
 insert the command `\hfill` in the middle of the line.
 
-To insert a given amount of horizontal space in a line,
-insert the command `\hspace{amount}` where `amount` is a value like `1cm`.
+To insert horizontal space in a line, insert the command `\hspace{amount}`
+where `amount` is a length value like `1cm`.
+This is treated like an invisible word of the given length
+with a single space on each side that
+separates it from the previous and next words.
+
+If the `\hspace` command ends up at the beginning or ending of a line,
+it is removed. Use `\*hspace` instead to avoid this.
 
 ## Justifying and Aligning
 
