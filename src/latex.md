@@ -500,9 +500,10 @@ They can also define new environments and commands.
 
 Document classes that can be specified in `\documentclass[options]{some-class}` include:
 
-- `article` supports sections and subsections, but not chapters
+- `article` supports an abstract, sections, and subsections, but not chapters
 - `beamer` for slide presentations
-- `book` supports a title page, abstract, table of contents, chapters, and bibliography
+- `book` supports a title page, table of contents,
+  chapters (starting on odd-numbered pages), and bibliography
 - `exam` for lists of questions
 - `leaflet`
 - `letter`
@@ -611,6 +612,17 @@ American Mathematical Society</a>.
 | listings  | adds commands to typeset programming language source code                |
 | minted    | formats and highlights programming language source code                  |
 | xcolor    | adds commands to change the color of text                                |
+
+## Abstract
+
+To add an abstract section to an article:
+
+```latex
+\begin{abstract}
+  This is the abstract.
+  \newpage
+\end{abstract}
+```
 
 ## Sections
 
@@ -746,6 +758,7 @@ add one of the following commands in the preamble:
 
 ```latex
 \pagestyle{empty}
+
 \pagenumbering{gobble}
 ```
 
@@ -773,12 +786,12 @@ the `\chapter` command be considered the first chapter.
 
 ```latex
 \begin{document}
-\pagestyle{empty}
+\pagestyle{empty} % removes header and footer from all pages
 
 \maketitle
 
 \tableofcontents
-\thispagestyle{empty}
+\thispagestyle{empty} % only affects the current page
 
 \chapter*{Preface}
 \pagenumbering{roman}
@@ -1290,6 +1303,8 @@ which introduces a "soft return".
 To add a newline AND prevent a page break at that point, use `\\*`.
 
 To add a page break, insert the command `\newpage` or `\pagebreak`.
+In two-column mode, these move the content that follows to the next column
+which may be on the same page.
 
 To add a given amount of vertical space,
 insert the command `\vspace{amount}` where `amount` is a value like `1cm`.
