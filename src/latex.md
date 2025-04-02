@@ -2860,8 +2860,10 @@ The following steps achieve this:
 1. Include the following in the preamble:
 
    ```latex
-   % This needed to include lists of listings, figures, and tables in the TOC.
-   % The nottoc option tells it to not include "Contents" in the TOC.
+   % This needed to include lists of listings, figures, and tables
+   % in the Table of Contents.
+   % The nottoc option tells it to not include the "Contents" page
+   % in the Table of Contents.
    \usepackage[nottoc]{tocbibind}
 
    \usepackage{imakeidx}
@@ -2898,7 +2900,7 @@ The following steps achieve this:
 1. Add `\printindex` near the bottom of the document.
 
 1. Compile by running `pdflatex name.tex`.
-   It may be necessary to row this twice.
+   It may be necessary to run this twice.
 
 See the sample content in the "Page Numbering" section.
 
