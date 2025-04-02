@@ -1735,7 +1735,6 @@ To prevent numbering, use the `caption` package and the `\caption*` command.
 A label can be applied to a figure to enable adding references to the figure.
 This is done by adding a `\label{some-label}` command
 in a `figure` environment.
-To reference the figure, use the `\ref{some-label}` command.
 
 By default, the compiler will choose the location of the element,
 placing it at the top of the current page, bottom of the current page,
@@ -1783,6 +1782,21 @@ that is used to render the list of figures pages.
 The `\listoffigures` command typically appears after the table of contents.
 To include this page in the table of contents,
 add `\usepackage{tocbibind}` in the preamble.
+
+## References
+
+To reference the figure, listing, or table, use the `\ref{some-label}` command.
+This will output a hyperlink to the item using its assigned number.
+Only the number will be output, so consider adding
+the word "figure", "listing", or "table" before this.
+For example, "See table \ref{dog-table}."
+
+Do you like \ind{dogs}? See page \pageref{dog-table}.
+To instead output a hyperlink to the item using its page nubmer,
+use the `\pageref{some-label}` command.
+Only the number will be output, so consider adding
+the word "page" before this.
+For example, "See page \pageref{dog-table}."
 
 ## Images
 
