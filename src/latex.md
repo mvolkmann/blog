@@ -1644,6 +1644,9 @@ The `multicol` package demonstrated above seems to produce better results.
 A `.tex` file can include the contents of other `.tex` files.
 This enables breaking a large document into smaller documents
 that can be edited independently, such as each chapter of a book.
+It also sharing the definitions of custom commands and environments
+with multiple documents.
+
 The documents being included should not contain a preamble section
 or the `\begin{document}` and `\end{document}` commands.
 
