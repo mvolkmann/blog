@@ -885,6 +885,15 @@ multi-line comment.
 \end{comment}
 ```
 
+An alternative way to remind yourself to make a change to the document
+is to use the `\typeout` command which writes its argument to stdout
+where the command to process the document is running.
+For example:
+
+```latex
+\typeout{Add more dogs in this table.}
+```
+
 ## Basic Formatting
 
 The following commands change the formatting of text in their argument.
