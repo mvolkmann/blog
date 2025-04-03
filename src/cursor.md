@@ -20,7 +20,7 @@ when asking it to explain code, modify code, or generate new code:
 "High Load - We're experiencing high demand for Claude 3.5 Sonnet right now.
 Please upgrade to Pro, switch to the 'default' model, Claude 3.7 sonnet,
 another model, or try again in a few moments."
-This makes the Gfree tier somewhat unusable.
+This makes the free tier somewhat unusable.
 
 The paid tiers start at $20 per month.
 
