@@ -1070,8 +1070,11 @@ tmm editor actualContents: 'new content'.
 tmm text print.
 ```
 
+Typically you will want to modify many aspects of this morph
+such as its size and whether words automatically wrap to a new lines.
+
 The value associated with a `TextModelMorph` will either be
-held in a `TextModel` object or a `Text` object.
+held in a `TextModel` object or a `TextProvider` object.
 
 There are three common ways to create an instance of `TextModelMorph`.
 The choice is based on how the initial value is supplied
@@ -1157,7 +1160,7 @@ the height required for a single line in the current font.
 
 By default, pressing the tab key will not move focus from
 one `TextModelMorph` instance to another.
-To enable this:
+To enable this, do the following for each instance:
 
 ```smalltalk
 tmm tabToFocus: true
@@ -1176,6 +1179,7 @@ The easiest are:
 
 ```smalltalk
 tmm acceptOnAny: true. "updates after every keystroke"
+
 tmm acceptOnCR: true. "updates after return key is pressed"
 ```
 
@@ -1229,13 +1233,140 @@ The following code demonstrates listening for key events.
 It prints their ASCII codes to the Transcript.
 
 ```smalltalk
-tmm keystrokeAction: [ :evt | evt keyValue print ].
+tmm keystrokeAction: [ :evt |
+    evt keyValue print.
+    evt keyCharacter print.
+].
 ```
 
 Another option that is suitable for single-line text entry is
 to use the `TextEntryMorph` class defined in the UI-Entry package.
 Also, consider using the `TextInputMorf` class
 defined in my Cuis-Smalltalk-Morf package.
+
+Let's combine what we have learned above to create a small application.
+The user can enter their first and last name.
+Clicking the "Greet" button displays a greeting message below the button.
+
+<img alt="Cuis user interaction demo" style="width: 40%"
+  src="/blog/assets/cuis-user-interaction-demo.png?v={{pkg.version}}">
+
+Create the class `UserInteractionDemo` as follows:
+
+```smalltalk
+Object subclass: #UserInteractionDemo
+    instanceVariableNames: 'firstName greetLabel lastName'
+    classVariableNames: ''
+    poolDictionaries: ''
+    category: 'Demo'
+```
+
+Define the following accessor methods:
+
+```smalltalk
+firstName
+    ^ firstName
+
+firstName: aString
+    firstName := aString
+
+lastName
+    ^ lastName
+
+lastName: aString
+    lastName := aString
+```
+
+Define the instance method `textEntryOn:` as follows:
+
+```smalltalk
+textEntryOn: aSymbol
+    "Answer a TextModelMorph where aSymbol provides
+     the name for the getter and setter."
+    | entry |
+
+    entry := TextModelMorph
+        textProvider: self
+        textGetter: aSymbol
+        textSetter: (aSymbol, ':') asSymbol ::
+        acceptOnAny: true;
+        askBeforeDiscardingEdits: false;
+        hideScrollBarsIndefinitely;
+        "Width is made proportional below.
+        Setting height to zero causes it to use minimum height for one line."
+        morphExtent: 0 @@ 0;
+        tabToFocus: true;
+        wrapFlag: false.
+    entry layoutSpec proportionalWidth: 1.
+    ^ entry.
+```
+
+Define the instance method `rowLabeled:` as follows:
+
+```smalltalk
+rowLabeled: aString for: aMorph
+    "Answer a row LayoutMorph containing a LabelMorph and a given morph."
+    | row |
+
+    row := LayoutMorph newRow
+        gap: 10;
+        addMorph: (LabelMorph contents: aString);
+        addMorph: aMorph.
+    row layoutSpec proportionalHeight: 0.
+    ^ row.
+```
+
+Define the instance method `greet` as follows:
+
+```smalltalk
+greet
+    | greeting |
+
+    greeting := firstName isEmpty
+        ifTrue: ''
+        ifFalse: [ 'Hello @{1@} @{2@}!' format: @{firstName. lastName@} ].
+    greetLabel contents: greeting.
+```
+
+Define the instance method `initialize` as follows:
+
+```smalltalk
+initialize
+    | button extent firstNameEntry form image lastNameEntry window |
+
+    firstName := ''.
+    lastName := ''.
+
+    "Relative file paths start from the Cuis-Smalltalk-Dev-UserFiles directory."
+    form := Form fromFileNamed: './hot-air-balloon.png' :: magnifyBy: 0.5.
+    image := ImageMorph newWith: form.
+
+    firstNameEntry := self textEntryOn: #firstName.
+    lastNameEntry := self textEntryOn: #lastName.
+    button := PluggableButtonMorph model: self action: #greet label: 'Greet'.
+
+    greetLabel := LabelMorph contents: ''.
+
+    window := SystemWindow new.
+    window layoutMorph separation: 10.
+    window
+        setLabel: 'User Interaction Demo';
+        addMorph: image;
+        addMorph: (self rowLabeled: 'First Name:' for: firstNameEntry);
+        addMorph: (self rowLabeled: 'Last Name:' for: lastNameEntry);
+        addMorph: button;
+        addMorph: greetLabel.
+
+    "Set window size to the smallest height that contains its submorphs."
+    extent := window layoutMorph minimumExtent.
+    window
+        morphExtent: 400 @@ extent y;
+        openInWorld.
+
+    "Set a background color so it's clear where the TextModelMorphs
+    are placed when they do not have focus."
+    window layoutMorph color: (Color blue alpha: 0.1).
+```
 
 ## Mouse Events
 
