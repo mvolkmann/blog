@@ -658,6 +658,25 @@ I'm calling the app good now!
 
 Overall Cursor did a decent job at generating this app.
 
+## Summary
+
+Cursor is a very useful tool and I recommend allowing all developers
+to have access to it. However:
+
+- Developers must still be able to distinguish between good and bad code.
+  Junior developers are unlikely to achieve good results.
+- The tool works best when it is sent detailed requests.
+  For example, instead of asking "Write a todo application", ask
+  "Write a todo web application using the React framework
+  and use Tailwind for styling."
+- There is a strong temptation to just accept all the generated code
+  and not review it. This temptation must be resisted.
+- Often when asking the tool to add a feature or fix a problem,
+  it introduces new problems.
+- Using the tool to build a non-trivial application
+  is generally not possible in a single request.
+  Instead, a dialog with the tool that is composed of many requests is needed.
+
 ## Resources
 
 - {% aTargetBlank "https://www.youtube.com/watch?v=ocMOZpuAMw4",
