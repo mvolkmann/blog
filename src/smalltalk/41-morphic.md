@@ -1423,7 +1423,7 @@ add instance methods like the following to a `Morph` subclass.
 
 ```smalltalk
 handlesKeyboard
-    ^ self visible.
+    ^ self visible
 
 mouseEnter: event
     (Preferences at: #focusFollowsMouse)

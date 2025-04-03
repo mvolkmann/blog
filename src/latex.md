@@ -1041,7 +1041,8 @@ To change the font size of a section of the content,
 surround it with `{\size ... }` where size is one of
 `tiny`, `scriptsize`, `footnotesize`, `small`, `normalsize`,
 `large`, `Large`, `LARGE`, `huge`, or `Huge`.
-TODO: Do these use a percentage of the current default font size?
+The font size used by each of these depends on the default font size.
+These commands cannot be used in math mode.
 
 For example:
 
