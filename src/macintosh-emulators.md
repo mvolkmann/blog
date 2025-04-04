@@ -282,6 +282,8 @@ To install in macOS:
    will appear in the "Unix" drive.
 1. To adjust the window size, select Apple menu ... Control Panels ... Monitors
    and select another resolution.
+1. To enable sound, select Apple menu ... Control Panels ... Sound,
+   select "Output", and select "Built-in".
 1. In SheepShaver, click the Apple menu
    and select Control Panels ... Appearance.
 1. On the Themes tab, optionally change the theme or keep "Mac OS Default".
