@@ -280,6 +280,8 @@ To install in macOS:
 1. There will now be a "Unix" drive that is empty.
    Files placed in the "Mac OS Share" directory of the host
    will appear in the "Unix" drive.
+1. To adjust the window size, select Apple menu ... Control Panels ... Monitors
+   and select another resolution.
 1. In SheepShaver, click the Apple menu
    and select Control Panels ... Appearance.
 1. On the Themes tab, optionally change the theme or keep "Mac OS Default".
@@ -310,6 +312,10 @@ To install HyperCard:
 1. Click the Select button.
 1. Click the Start button. This will run for a few minutes.
 1. Click the Restart button.
+1. The folder "HyperCard 2.4" will be at the top of "MacOS_HD".
+1. Drag it to the Applications folder.
+1. To launch HyperCard, open the "HyperCard 2.4" folder
+   and double-click HyperCard.
 
 ## Colors
 
