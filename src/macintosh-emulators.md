@@ -160,42 +160,148 @@ TODO: Add information about this.
 
 To install in macOS:
 
-- Browse https://www.emaculation.com
-- Click the "E-Maculation wiki" link.
-- Click the SheepShaver link.
-- Under "Download the Latest Version",
-  click the "SheepShaver for OSX/macOS" link.
-- Under "Version 2.5, 25 January 2025, universal (x86_64 and arm64)",
-  click the Download link to get the file "SheepShaver.app".
-- Under "For the above version 2.5 builds",
-  click the link after "SheepShaver folder".
-- Browse https://www.redundantrobot.com
-- Click the "SHEEPSHAVER TUTORIAL" link.
-- Click the "New World PPC ROM" link.
-- Browse https://winworldpc.com
-- Click the Library link.
-- Under "Apple/Mac", click the "Mac OS 9" link.
-- Under "Available releases", click the 9.0 link.
-  Supposedly SheepShaver does not support 9.1 or 9.2.
-- Under Downloads, click the "Apple Mac OS 9.0.4 (ISO)" link.
-- Click one of the Server links.
-  I chose "Server 2" because it is closest to me.
-- Create a directory named SheepShaver
-  and move all the downloaded files into it.
-  These include SheepShaver.app, the SheepShaver directory, newworld86.rom,
-  and "Apple Mac OS 9.0.4.7z" (which may still be downloading).
-- Right-click the newworld86.rom file and select "Get Info".
-- Under "Name & Extension", change the name to "Mac OS ROM".
-- Close the info dialog.
-- Double-click the "Apple Mac OS 9.0.4.7z" file to unzip it.
-- Delete the "Apple Mac OS 9.0.4.7z" file.
-- Double-click the "Apple Mac OS 9.0.4" directory.
-- Move the "Apple MacOS 9.0.4.iso" file up one directory.
-- Delete the "Apple Mac OS 9.0.4" directory.
-- Right-click the "Apple MacOS 9.0.4.iso" file and select "Get Info".
-- Click the Locked checkbox.
-- Close the info dialog.
-- Double-click the SheepShaver.app file.
+1. Browse https://www.emaculation.com
+1. Click the "E-Maculation wiki" link.
+1. Click the SheepShaver link.
+1. Under "Download the Latest Version",
+   click the "SheepShaver for OSX/macOS" link.
+1. Under "Version 2.5, 25 January 2025, universal (x86_64 and arm64)",
+   click the Download link to get the file "SheepShaver.app".
+1. Under "For the above version 2.5 builds",
+   click the link after "SheepShaver folder".
+1. Browse https://www.redundantrobot.com
+1. Click the "SHEEPSHAVER TUTORIAL" link.
+1. Click the "New World PPC ROM" link.
+1. Browse https://winworldpc.com
+1. Click the Library link.
+1. Under "Apple/Mac", click the "Mac OS 9" link.
+1. Under "Available releases", click the 9.0 link.
+   Supposedly SheepShaver does not support 9.1 or 9.2.
+1. Under Downloads, click the "Apple Mac OS 9.0.4 (ISO)" link.
+1. Click one of the Server links.
+   I chose "Server 2" because it is closest to me.
+1. Create a directory named SheepShaver
+   and move all the downloaded files into it.
+   These include SheepShaver.app, the SheepShaver directory, newworld86.rom,
+   and "Apple Mac OS 9.0.4.7z" (which may still be downloading).
+1. Right-click the newworld86.rom file and select "Get Info".
+1. Under "Name & Extension", change the name to "Mac OS ROM".
+1. Close the info dialog.
+1. Double-click the "Apple Mac OS 9.0.4.7z" file to unzip it.
+1. Delete the "Apple Mac OS 9.0.4.7z" file.
+1. Double-click the "Apple Mac OS 9.0.4" directory.
+1. Move the "Apple MacOS 9.0.4.iso" file up one directory.
+1. Delete the "Apple Mac OS 9.0.4" directory.
+1. Right-click the "Apple MacOS 9.0.4.iso" file and select "Get Info".
+1. Click the Locked checkbox.
+1. Close the info dialog.
+1. Double-click the SheepShaver.app file.
+1. Click the SheepShaver menu and select "Settings...".
+1. After "ROM File:", click the "Browse..." button.
+1. Select the "Mac OS ROM" file.
+1. Create a directory that will be used to share files with the emulator,
+   perhaps named "Mac OS Share".
+1. After "Unix Root:", click the "Browse..." button.
+1. Select the directory that was just created.
+1. Change "RAM Size (MB):" to 512.
+1. Click the "Create..." button.
+1. Change "Save As:" to Mac_Disk.
+1. Change "Volume Size (MB)" to 10000.
+1. Click the Save button.
+1. Click the "Add..." button.
+1. Select the "Apple MacOS 9.0.4.iso" file.
+1. Click the "Open" button.
+1. Uncheck the CDROM checkbox for the "Apple MacOS 9.0.4.iso" file.
+1. Click the "Audio / Video" tab.
+1. Change "Refresh Rate:" to Dynamic.
+1. Change "Width:" to Maximum.
+1. Change "Height:" to Maximum.
+1. Click the "Miscellaneous" tab.
+1. Uncheck "Ignore Illegal Instructions".
+1. Change "Mouse Wheel Function:" to "Page Up/Down".
+1. Change "Lines to Scroll:" to 1.
+1. Click the "Save and Quit" button.
+1. Select "Force Quit..." from the Apple menu (or press cmd-option-esc)
+   and force quit the SheepShaver app.
+1. Double-click the SheepShaver.app file again.
+1. Wait for a dialog to appear that says "This disk is unreadable ...".
+1. Change "Name:" from untitled to "MacOS_HD".
+1. Change "Format:" to "Mac OS Extended 9.7 GB".
+1. Click the Initialize button.
+1. Click the Continue button.
+1. In the Finder dialog that appears, double-click "Mac OS 9 Install".
+1. Click the Continue button.
+1. Click the Select button.
+1. Click the Continue button.
+1. Click the Continue button.
+1. Click the Agree button.
+1. Click the Start button. This will run for around five minutes.
+1. Click the Continue button.
+1. In the Finder window, double-click "Mac OS 9.0.4 Update Install".
+1. Click the Select button.
+1. Click the Continue button.
+1. Click the Agree button.
+1. Click the Start button.
+1. Click the Quit button.
+1. Click and hold on the Special menu.
+1. Select Restart.
+1. In the "Mac OS Setup Assistant" window,
+   click the right triangle in the lower-right to advance to page 2.
+1. Click the right triangle again to advance to page 3.
+1. Under "What is your name?", enter your name.
+1. Click the right triangle again to advance to page 4.
+1. If necessary, correct whether you are currently
+   observing daylight savings time.
+1. If necessary, correct the time and date.
+1. Click the right triangle again to advance to page 5.
+1. Select the nearest city ("Chicago, U.S.A." for me).
+1. Close the window.
+1. Click the Quit button.
+1. In the Finder window, double-click "Adobe Software" folder.
+1. Double-click the "Install Adobe Acrobat Reader 4.0" file.
+1. Double-click the "Install Adobe Acrobat Reader 4.0" folder.
+1. Double-click the "Adobe Acrobat Installer" file.
+1. Click the Continue button.
+1. Click the Install button.
+1. Click the Quit button.
+1. Close all the Finder windows.
+1. Click the SheepShaver menu and select "Settings...".
+1. Uncheck CDROM checkbox for the "Apple MacOS 9.0.4.iso" file.
+1. Click the Remove button to remove the file "Apple MacOS 9.0.4.iso"
+   since we are finished using it to install the operating system.
+1. Click the "Save and Quit" button.
+1. Click the "Shut Down" button.
+1. Double-click the SheepShaver.app file.
+1. Click the SheepShaver menu and select "Settings...".
+1. Click the Miscellaneous tab.
+1. Click the "Save and Quit" button.
+1. Click the "Shut Down" button.
+1. Double-click the SheepShaver.app file.
+1. There will now be a "Unix" drive that is empty.
+   Files placed in the "Mac OS Share" directory of the host
+   will appear in the "Unix" drive.
+1. In SheepShaver, click the Apple menu
+   and select Control Panels ... Appearance.
+1. On the Themes tab, optionally change the theme or keep "Mac OS Default".
+1. On the Sound tab, change "Sound tracks:" to "Platinum Sounds".
+1. On the Desktop tab, optionally select a different pattern and
+   click the "Set Desktop" button, or keep "Mac OS Default".
+1. Close the Appearance window.
+1. Drag all the aliases on the desktop to the trash can.
+1. From the Special menu, select "Empty Trash..." and click the OK button.
+1. In SheepShaver, click the Apple menu and select Favorites ... www.apple.com.
+   This will launch Internet Explorer 4.5 and open an error dialog
+   that says "Security failure. The server reply is invalid."
+1. In the address bar, enter "http://macintoshgarden.org/"
+   or "http://macintoshrepository.org" to download apps and games.
+1.
+
+To install HyperCard:
+
+1. Download the HyperCard241.img\_.sit file.
+1. Move it to the "Mac OS Share" directory.
+1. In SheepShaver, double-click the Unix drive.
+1. Double-click the HyperCard241.img\_.sit file.
 
 ##
 
