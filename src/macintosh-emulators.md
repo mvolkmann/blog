@@ -290,20 +290,26 @@ To install in macOS:
 1. Drag all the aliases on the desktop to the trash can.
 1. From the Special menu, select "Empty Trash..." and click the OK button.
 1. In SheepShaver, click the Apple menu and select Favorites ... www.apple.com.
-   This will launch Internet Explorer 4.5 and open an error dialog
+   This will launch Microsoft Internet Explorer 4.5 and open an error dialog
    that says "Security failure. The server reply is invalid."
+   "Microsoft Internet Explorer" can also be found in MacOS_HD ... Internet.
 1. In the address bar, enter "http://macintoshgarden.org/"
    or "http://macintoshrepository.org" to download apps and games.
-1.
 
 To install HyperCard:
 
-1. Download the HyperCard241.img\_.sit file.
+1. Browse https://macintoshgarden.org/apps/hypercard-241.
+1. Download the HyperCard-241.iso file using link #2.
 1. Move it to the "Mac OS Share" directory.
 1. In SheepShaver, double-click the Unix drive.
-1. Double-click the HyperCard241.img\_.sit file.
-
-##
+1. Double-click the HyperCard-241.iso file to create a HyperCard drive.
+1. Double-click the HyperCard drive.
+1. Double click HyperCard Software Installer.
+1. Click the Continue button three times.
+1. Click the Agree button.
+1. Click the Select button.
+1. Click the Start button. This will run for a few minutes.
+1. Click the Restart button.
 
 ## Colors
 
