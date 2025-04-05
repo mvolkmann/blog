@@ -2674,6 +2674,10 @@ The `picture` environment supports drawing basic diagrams containing
 lines, arrows, rectangles, circles, and curves.
 Rectangles can be solid or dashed, and they can have square or rounded corners.
 
+Slanted lines, not horizontal or vertical,
+are drawn using characters from a special font.
+This limits the accuracy of the line lengths and their slope.
+
 The following example defines several custom commands.
 Some of them are used as variables in other commands.
 
@@ -2687,8 +2691,8 @@ which can be used alone or in a pair:
 - t for top
 - b for bottom
 
-<img alt="LaTeX picture object" style="width: 50%"
-  src="/blog/assets/latex-picture-object.png?v={{pkg.version}}">
+<img alt="LaTeX picture environment" style="width: 50%"
+  src="/blog/assets/latex-picture-environment.png?v={{pkg.version}}">
 
 ```latex
 \def\myWidth{200}
@@ -2723,6 +2727,7 @@ which can be used alone or in a pair:
     \putCenter{\circle*{\myDiameter}} % filled circle
     \putCenter{\scalebox{1}{\circle{\myDiameter}}} % hollow circle
     \putCenter{\scalebox{2}{\circle{\myDiameter}}} % hollow circle
+    \putCenter{\oval(150, 100)} % oval
 \end{picture}
 ```
 
