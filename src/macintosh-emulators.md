@@ -158,7 +158,13 @@ TODO: Add information about this.
 
 ## SheepShaver
 
-To install in macOS:
+For instructions on installing this, see the YouTube videos
+{% aTargetBlank "https://www.youtube.com/watch?v=4kiACxmEe6Q&t=607s",
+"Mac OS 9 on SheepShaver" %} and
+{% aTargetBlank "https://www.youtube.com/watch?v=XQAf7GII9NY",
+"How To Install Mac OS 9 In OS X Using SheepShaver" %}.
+
+The steps for installing this in macOS are summarized below.
 
 1. Browse https://www.emaculation.com
 1. Click the "E-Maculation wiki" link.
@@ -300,6 +306,8 @@ To install in macOS:
 1. In the address bar, enter "http://macintoshgarden.org/"
    or "http://macintoshrepository.org" to download apps and games.
 
+The last version of HyperCard is 2.4.1.
+The last Mac OS version that supports this is 9.2.2.
 To install HyperCard:
 
 1. Browse https://macintoshgarden.org/apps/hypercard-241.
