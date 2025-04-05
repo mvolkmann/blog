@@ -2668,6 +2668,27 @@ Also see the commands `\endfirsthead`, `\endlastfoot`, and `\endfoot`.
 Other packages that support rendering tables include
 `tabu`, `tabularx`, and `tabulary`.
 
+## Scaling, Resizing, and Rotating
+
+The graphicsx package defines the following commands (and more):
+
+- `\scalebox` - argument is a constant scale factor
+- `\resizebox` - arguments are width and height
+- `\rotatebox` - argument is angle in degrees
+
+For example:
+
+<img alt="LaTeX scalebox, resizebox, and rotatebox" style="width: 30%"
+  src="/blog/assets/latex-scalebox-resizebox-rotatebox.png?v={{pkg.version}}">
+
+```latex
+\scalebox{3}{TEST}
+
+\resizebox{1in}{1.5in}{TEST}
+
+\rotatebox{45}{TEST}
+```
+
 ## picture Environment
 
 The `picture` environment supports drawing basic diagrams containing
@@ -2720,10 +2741,9 @@ which can be used alone or in a pair:
     \putOrigin{\line(4, 3){\myWidth}} % diagonal line with slope 4/3
     \put(0, \myHeight){\vector(4, -3){68}} % arrow with slope 4/-3, not -4/3
     % Supported circle sizes include 1-41.
-    % To get larger circles, combine the use of
-    % \scalebox defined in the graphicx package.
-    % It specifies the number of times larger to make its argument,
-    % so \scalebox{1} doubles the size.
+    % To get larger circles, combine the use of \scalebox which
+    % specifies the number of times larger to make its argument.
+    % \scalebox{1} doubles the size.
     \putCenter{\circle*{\myDiameter}} % filled circle
     \putCenter{\scalebox{1}{\circle{\myDiameter}}} % hollow circle
     \putCenter{\scalebox{2}{\circle{\myDiameter}}} % hollow circle
