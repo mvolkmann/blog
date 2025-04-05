@@ -2668,7 +2668,7 @@ Also see the commands `\endfirsthead`, `\endlastfoot`, and `\endfoot`.
 Other packages that support rendering tables include
 `tabu`, `tabularx`, and `tabulary`.
 
-## Picture Objects
+## picture Environment
 
 The `picture` environment supports drawing basic diagrams containing
 lines, arrows, rectangles, circles, and curves.
