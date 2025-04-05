@@ -338,3 +338,13 @@ Double-click "HyperCard Player".
 A dialog will appear that says the Geneva and Palatino fonts
 must be installed for text to display correctly in the stacks.
 Press cmd-q to quit HyperCard.
+
+## Resources
+
+- {% aTargetBlank "https://www.emaculation.com/doku.php", "Emaculation.com" %}
+- {% aTargetBlank "https://archive.org", "Internet Archive" %}
+- {% aTargetBlank "http://obsolete.macfixer.com/vintage-software/", "MacFixer" %}
+- {% aTargetBlank "http://macintoshgarden.org", "Macintosh Garden" %}
+- {% aTargetBlank "https://www.macintoshrepository.org", "Macintosh Repository" %}
+- {% aTargetBlank "https://rescuemyclassicmac.com", "RescueMyClassicMac" %}
+- {% aTargetBlank "https://vintagemacmuseum.com/resources/mac-software/", "The Vintage Mac Museum" %}
