@@ -2712,6 +2712,14 @@ which can be used alone or in a pair:
 - t for top
 - b for bottom
 
+The `\put` command sets the reference point
+for the drawing command that follows.
+For lines and arrows, the reference point is its starting point.
+For shapes like rectangles, ovals, and circles,
+the reference point is its center.
+
+TODO: How do you draw a rectangle?
+
 <img alt="LaTeX picture environment" style="width: 50%"
   src="/blog/assets/latex-picture-environment.png?v={{pkg.version}}">
 
