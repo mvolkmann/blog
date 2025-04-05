@@ -2668,6 +2668,64 @@ Also see the commands `\endfirsthead`, `\endlastfoot`, and `\endfoot`.
 Other packages that support rendering tables include
 `tabu`, `tabularx`, and `tabulary`.
 
+## Picture Objects
+
+The `picture` environment supports drawing basic diagrams containing
+lines, arrows, rectangles, circles, and curves.
+Rectangles can be solid or dashed, and they can have square or rounded corners.
+
+The following example defines several custom commands.
+Some of them are used as variables in other commands.
+
+The `\framebox` command takes an optional argument that specifies
+where in the box its contents should be rendered.
+The location is specified with the following letters
+which can be used alone or in a pair:
+
+- l for left
+- r for right
+- t for top
+- b for bottom
+
+<img alt="LaTeX picture object" style="width: 50%"
+  src="/blog/assets/latex-picture-object.png?v={{pkg.version}}">
+
+```latex
+\def\myWidth{200}
+\def\myHeight{150}
+\newcommand{\myHalfWidth}{\dimexpr\myWidth pt/2\relax}
+\newcommand{\myHalfHeight}{\dimexpr\myHeight pt/2\relax}
+\def\myDiameter{40}
+\def\putOrigin{\put(0, 0)}
+\def\putCenter{\put(\myHalfWidth, \myHalfHeight)}
+\def\myFramebox{\framebox(\myWidth, \myHeight)}
+\begin{picture}(\myWidth, \myHeight)
+    \putOrigin{\myFramebox[tl]{top left}}
+    \putOrigin{\myFramebox[t]{top}}
+    \putOrigin{\myFramebox[tr]{top right}}
+    \putOrigin{\myFramebox[l]{left}}
+    % Centers text by default.
+    \putOrigin{\myFramebox{\huge{center}}}
+    \putOrigin{\myFramebox[r]{right}}
+    \putOrigin{\myFramebox[b]{bottom}}
+    \putOrigin{\myFramebox[bl]{bottom left}}
+    \putOrigin{\myFramebox[br]{bottom right}}
+    % Slopes must be defined with two integers
+    % that form a fraction in its simplest form.
+    % So 4/3 is valid, but 8/6 is not.
+    \putOrigin{\line(4, 3){\myWidth}} % diagonal line with slope 4/3
+    \put(0, \myHeight){\vector(4, -3){68}} % arrow with slope 4/-3, not -4/3
+    % Supported circle sizes include 1-41.
+    % To get larger circles, combine the use of
+    % \scalebox defined in the graphicx package.
+    % It specifies the number of times larger to make its argument,
+    % so \scalebox{1} doubles the size.
+    \putCenter{\circle*{\myDiameter}} % filled circle
+    \putCenter{\scalebox{1}{\circle{\myDiameter}}} % hollow circle
+    \putCenter{\scalebox{2}{\circle{\myDiameter}}} % hollow circle
+\end{picture}
+```
+
 ## Greek Letters
 
 Greek letters are produced using the following commands.
