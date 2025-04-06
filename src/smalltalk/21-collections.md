@@ -503,6 +503,7 @@ The following table describes some of the instance methods defined in the
 | `at:ifAbsentPut:`     | answers element at `at:` index; if not present, adds and answers `ifAbsentPut:` block value |
 | `at:put:`             | replaces existing element at `at:` index with `put:` object                                 |
 | `collect:thenSelect:` | combines `collect:` and `select:`                                                           |
+| `copy`                | answers a shallow copy                                                                      |
 | `find:`               | answers index of first occurrence of argument value                                         |
 | `removeAll`           | removes all elements                                                                        |
 | `removeAllSuchThat:`  | removes all elements that satisfy argument block                                            |
