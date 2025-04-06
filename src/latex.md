@@ -1166,10 +1166,29 @@ This is a \important{serious issue!}.
 \colorbox{yellow}{Text with yellow background}
 
 % Rendering text in a box with a colored border and a colored background.
-\fcolorbox{red}{lightgray}{Red-bordered box with gray background and black text}
+\fcolorbox{red}{lightgray}
+  {Red-bordered box with gray background and black text}
 ```
 
 {% endraw %}
+
+To change the background color of pages, use the `\pagecolor` command.
+This stays in effect until another `\pagecolor` command changes the color.
+A limited set of color names are recognized, including
+black, white, red, yellow, green, cyan, blue, and magenta.
+Use the `\definecolor` command to define more color names.
+For example:
+
+```latex
+\definecolor{lightgray}{gray}{0.8} % uses gray color model
+\definecolor{lightmagenta}{rgb}{1, 0, 1} % uses RGB color model
+\pagecolor{lightgray}
+
+% Add page content here.
+
+\newpage
+\pagecolor{white} % resets background color for subsequent pages
+```
 
 For more colors, see
 <a href="https://latexcolor.com" target="_blank">LaTeX Color</a>.
@@ -1776,7 +1795,7 @@ For example:
 
 The `figure` environment creates floating content,
 meaning the compiler can choose its location.
-The content is typically a graphical elements like an image or diagram,
+The content is typically a graphical element like an image or diagram,
 but it can be anything, include plain text.
 
 A caption can be added above or below the `figure` content
