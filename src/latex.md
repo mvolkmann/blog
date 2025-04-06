@@ -3259,6 +3259,14 @@ The `pandoc` command takes additional options including:
 - `--mathml` to render math mode content
 - `--toc`
 
+## Debugging
+
+When LaTeX reports errors, it is often useful to temporarily comment out
+or delete sections of the document until the offending line is identified.
+LaText prints the following during processing:
+
+TODO: FINISH THIS SECTION
+
 ## Resources
 
 - {% aTargetBlank "https://latexref.xyz",
