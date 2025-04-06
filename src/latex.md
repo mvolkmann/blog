@@ -2718,8 +2718,6 @@ For lines and arrows, the reference point is its starting point.
 For shapes like rectangles, ovals, and circles,
 the reference point is its center.
 
-TODO: How do you draw a rectangle?
-
 <img alt="LaTeX picture environment" style="width: 50%"
   src="/blog/assets/latex-picture-environment.png?v={{pkg.version}}">
 
@@ -2743,19 +2741,26 @@ TODO: How do you draw a rectangle?
     \putOrigin{\myFramebox[b]{bottom}}
     \putOrigin{\myFramebox[bl]{bottom left}}
     \putOrigin{\myFramebox[br]{bottom right}}
+
     % Slopes must be defined with two integers
     % that form a fraction in its simplest form.
     % So 4/3 is valid, but 8/6 is not.
     \putOrigin{\line(4, 3){\myWidth}} % diagonal line with slope 4/3
     \put(0, \myHeight){\vector(4, -3){68}} % arrow with slope 4/-3, not -4/3
+
     % Supported circle sizes include 1-41.
-    % To get larger circles, combine the use of \scalebox which
-    % specifies the number of times larger to make its argument.
-    % \scalebox{1} doubles the size.
+    % To get larger circles, combine the use of
+    % \scalebox defined in the graphicx package.
+    % It specifies the number of times larger to make its argument,
+    % so \scalebox{1} doubles the size.
     \putCenter{\circle*{\myDiameter}} % filled circle
     \putCenter{\scalebox{1}{\circle{\myDiameter}}} % hollow circle
     \putCenter{\scalebox{2}{\circle{\myDiameter}}} % hollow circle
+
     \putCenter{\oval(150, 100)} % oval
+
+    \put(15, 15){\dashbox{5}(40, 40){dashed}} % dashed rectangle
+    \put(145, 15){\framebox(40, 40){solid}} % solid rectangle
 \end{picture}
 ```
 
