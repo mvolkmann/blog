@@ -2053,6 +2053,22 @@ which is rendered as follows:
 <img alt="LaTeX cdot command" style="width: 6%"
   src="/blog/assets/latex-cdot-command.png?v={{pkg.version}}">
 
+The `equation` environment is like the `displaymath` environment,
+but it adds numbers in parentheses to the right of equations
+to identify them. For example:
+
+<img alt="LaTeX equations" style="width: 55%"
+  src="/blog/assets/latex-equations.png?v={{pkg.version}}">
+
+```latex
+\begin{equation}
+    area = width \cdot height
+\end{equation}
+\begin{equation}
+    area = \frac{1}{2} \cdot base \cdot height
+\end{equation}
+```
+
 All roots, square and otherwise, are rendered with the `\sqrt` command.
 For example:
 
