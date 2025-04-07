@@ -319,11 +319,18 @@ or $399 (unlimited collaborators per project) per year.
 ## Syntax
 
 LaTeX documents consist of a sequence of commands and content.
+Most commands begin with a backslash.
+Some commands have a second form whose name ends with as asterisk
+that behave somewhat differently than their non-asterisk form.
 
 LaTeX commands begin with a backslash followed by a name.
 Some commands have optional and/or required parameters.
 Optional arguments appear in square brackets separated by commas.
 Required arguments each appear in their own pair of curly braces.
+
+Optional arguments are positional.
+If a command accepts two optional arguments and only one is supplied,
+it is used as the first and the second uses its default value.
 
 The most basic LaTeX document contains the following:
 
@@ -371,10 +378,15 @@ beginning and end, and can specify the default formatting of its content.
 
 The `\begin{name}` command starts a usage of the named environment.
 It must be paired with a corresponding `\end{name}` command.
-Some environments take additional arguments.
+Some environments take additional arguments
+that are specified on the `\begin` command.
+Some environments have a second form whose name ends with as asterisk
+that behave somewhat differently than their non-asterisk form.
 
-For example, the following uses the center environment
-which centers each line of text inside it:
+The following example uses the `center` environment
+which centers each line of text inside it.
+The `\\` command inserts a newline character.
+For more on inserting space, see the "Space" section below.
 
 ```latex
 \begin{center}
@@ -1291,7 +1303,9 @@ The LaTeX compiler typically removes extra spaces as it sees fit.
 A sequence of space characters such as a spaces, tabs, and linefeeds
 are treated the same as a single space character.
 
-There are many ways to insert different amounts of space.
+### Horizontal Space
+
+There are many ways to insert different amounts of horizontal space.
 The following options are ordered from least to most space
 and are depicted in the image that follows.
 Note the differences in the amount of space
@@ -1324,6 +1338,26 @@ space\quad with quad\\
 space\qquad with qquad
 ```
 
+To push a single line to the right side of the page,
+insert the command `\hfill` at the begining of the line.
+
+To split the content of a single line so the beginning is at
+the left side of the page and the end is at the right side,
+insert the command `\hfill` in the middle of the line.
+
+To insert horizontal space in a line, insert the command `\hspace{amount}`
+where `amount` is a length value like `1cm`.
+This is treated like an invisible word of the given length
+with a single space on each side that
+separates it from the previous and next words.
+
+If the `\hspace` command ends up at the beginning or ending of a line,
+it is removed. Use `\*hspace` instead to avoid this.
+
+### Vertical Space
+
+There are many ways to insert different amounts of vertical space.
+
 By default there is no vertical space betweeen paragraphs
 and the first line of each paragraph in each section,
 except the first, is indented.
@@ -1339,6 +1373,9 @@ except the first.
 To add a single newline after a line, add `\\` at its end,
 which introduces a "soft return".
 To add a newline AND prevent a page break at that point, use `\\*`.
+To specify vertical space to be added after a newline,
+enclose a length in square brackets after the `\\` or `\\*` command.
+For example: `\\[1in]`.
 
 To add a page break, insert the command `\newpage` or `\pagebreak`.
 In two-column mode, these move the content that follows to the next column
@@ -1366,22 +1403,6 @@ middle
 \vfill
 bottom
 ```
-
-To push a single line to the right side of the page,
-insert the command `\hfill` at the begining of the line.
-
-To split the content of a single line so the beginning is at
-the left side of the page and the end is at the right side,
-insert the command `\hfill` in the middle of the line.
-
-To insert horizontal space in a line, insert the command `\hspace{amount}`
-where `amount` is a length value like `1cm`.
-This is treated like an invisible word of the given length
-with a single space on each side that
-separates it from the previous and next words.
-
-If the `\hspace` command ends up at the beginning or ending of a line,
-it is removed. Use `\*hspace` instead to avoid this.
 
 ## Justifying and Aligning
 
