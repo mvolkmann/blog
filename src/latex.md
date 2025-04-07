@@ -443,12 +443,18 @@ a gift from her grandmother.
 
 The following version of the fairytale environment
 adds an optional parameter to specify the text color.
-The number in square brackets specifies
-the number of optional parameters accepted.
-The text in square brackets that follows specifies
-the default values of each of the optional parameters.
-The optional parameters can only be used in the begin text
-and are referred to with `#1`, `#2`, and so on.
+The parts of the definition, in order are:
+
+- The environment name in curly braces.
+- The number of parameters in square brackets.
+- The default values for the parameters,
+  each in their own pair of square brackets.
+  Parameters that are not given a default value are required parameters.
+- The begin content in curly braces.
+- The end content in curly braces.
+
+The parameters can only be used in the begin content.
+They are referred to with `#1`, `#2`, and so on.
 
 {% raw %}
 
@@ -1042,7 +1048,10 @@ To redefine an existing command, use the `\renewcommand` instead.
 To define a command only if it doesn't already exist,
 use the `\providecommand` command instead.
 
-The `ifthen` package adds commands that support conditional logic
+## Conditional Logic and Iteration
+
+The `ifthen` package adds commands that support
+conditional logic (`\ifthenelse` command) and iteration (`\whiledo` command)
 for choosing the text to render.
 This can be used anywhere in a document, including in macros.
 
