@@ -1036,9 +1036,11 @@ For custom commands that must be evaluated in math mode,
 regardless of whether they are applied in math mode,
 wrap the command contents in the `\ensuremath` command.
 
-Defining a command with `\newcommand` that already exists
+Defining a command that already exists with `\newcommand`
 results in an error.
-To redefine an exising command, define it with `\renewcommand` instead.
+To redefine an existing command, use the `\renewcommand` instead.
+To define a command only if it doesn't already exist,
+use the `\providecommand` command instead.
 
 The `ifthen` package adds commands that support conditional logic
 for choosing the text to render.
