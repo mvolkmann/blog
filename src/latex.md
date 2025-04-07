@@ -1745,8 +1745,8 @@ For example:
 \includeonly{preface, chapter2, index}
 ```
 
-The `\input` command does start its content where it appears
-and does not force a new page before or after the included content.
+The `\input` command start its content where it appears and
+does not force a new page before or after the included content.
 This command can be nested, so included files can use the `\input` command.
 
 For example:
@@ -3263,7 +3263,19 @@ The `pandoc` command takes additional options including:
 
 When LaTeX reports errors, it is often useful to temporarily comment out
 or delete sections of the document until the offending line is identified.
-LaText prints the following during processing:
+When LaTeX begins processing each file,
+it outputs "(" followed by the file name.
+Then it outputs each page number being processed inside square brackets.
+When it finishes processing a file, it outputs ")".
+For example:
+
+```text
+(main.tex [1] [2] (chapter1.tex [3] [4] [5]) (chapter2.tex [6] ...
+```
+
+If an error occurs, the output above stops and a new line
+describing the error is output.
+This line begins with "!", followed by an error message.
 
 TODO: FINISH THIS SECTION
 
