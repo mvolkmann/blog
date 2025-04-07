@@ -1755,6 +1755,14 @@ For example:
 \setlength{\columnsep}{1cm}
 ```
 
+To add vertical lines between the columns,
+using the `\setlength` and `\columnseprule` commands.
+For example:
+
+```latex
+\setlength{\columnseprule}{2pt}
+```
+
 ## Splitting Documents
 
 A `.tex` file can include the contents of other `.tex` files.
