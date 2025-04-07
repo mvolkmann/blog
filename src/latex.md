@@ -1933,15 +1933,20 @@ add `\usepackage{tocbibind}` in the preamble.
 
 ## References
 
-To reference the figure, listing, or table, use the `\ref{some-label}` command.
-This will output a hyperlink to the item using its assigned number.
+To reference a figure, listing, or table
+that is labeled with `\label{some-label}`,
+use the `\ref{some-label}` command.
+If the hyperref package is included with `\usepackage{hyperref}`,
+this will output a hyperlink to the item using its assigned number.
 Only the number will be output, so consider adding
 the word "figure", "listing", or "table" before this.
 For example, "See table \ref{dog-table}."
 
-Do you like \ind{dogs}? See page \pageref{dog-table}.
-To instead output a hyperlink to the item using its page nubmer,
+To instead output a page number reference to a figure, listing, or table
+that is labeled with `\label{some-label}`,
 use the `\pageref{some-label}` command.
+If the hyperref package is included with `\usepackage{hyperref}`,
+this will output a hyperlink to the item using its page number.
 Only the number will be output, so consider adding
 the word "page" before this.
 For example, "See page \pageref{dog-table}."
