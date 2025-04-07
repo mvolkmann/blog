@@ -780,6 +780,15 @@ For example:
 \end{document}
 ```
 
+## Page Styles
+
+The following diagram shows the commands that can be used to change
+the layout of pages, including the margins, the sizes of the areas,
+and the space between the areas.
+
+<img alt="LaTeX page styles" style="width: 90%"
+  src="/blog/assets/latex-page-styles.png?v={{pkg.version}}">
+
 ## Page Numbers
 
 Many document classes such as `article`, `book`, and `report`
