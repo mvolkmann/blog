@@ -365,8 +365,8 @@ which must begin with `\documentclass{some-class}`.
 These commands:
 
 - describe the class of document being created
-- import packages which provide support for additional commands
-- configure document-wide formatting
+- optionally import packages which provide support for additional commands
+- optionally configure document-wide formatting
 
 The entire content of a document must be surrounded by
 `\begin{document}` and `\end{document}`.
@@ -975,7 +975,7 @@ Macros make it unnecessary to repeat
 commonly used content and sequences of commands.
 They can significantly reduce the amount of markup required in documents.
 
-Typically all macros are defined in the preable.
+Typically all macros are defined in the preamble.
 Macro definitions must appear before they are used.
 
 The `\def` command is a TeX primitive that defines a new command
