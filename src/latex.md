@@ -371,6 +371,24 @@ These commands:
 The entire content of a document must be surrounded by
 `\begin{document}` and `\end{document}`.
 
+### Declarations
+
+A "declaration" changes the effect of subsequent commands
+or the meaning of arguments to subsequent commands.
+The scope of the effect is from the declaration to
+the next closing curly brace (`}`) or end of an an environment (`\end{name}`).
+
+There is a set of special declarations
+whose scope extends to the end of the document.
+Examples include `\pagenumbering` and `\pagecolor`.
+
+For example, the following declaration causes
+the text inside the curly braces to be huge:
+
+```latex
+{\Huge Shout it from the rooftops!}
+```
+
 ### Environments
 
 An "environment" can provide content to be rendered at its
