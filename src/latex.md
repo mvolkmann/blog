@@ -3267,17 +3267,84 @@ When LaTeX begins processing each file,
 it outputs "(" followed by the file name.
 Then it outputs each page number being processed inside square brackets.
 When it finishes processing a file, it outputs ")".
-For example:
-
-```text
-(main.tex [1] [2] (chapter1.tex [3] [4] [5]) (chapter2.tex [6] ...
-```
 
 If an error occurs, the output above stops and a new line
 describing the error is output.
 This line begins with "!", followed by an error message.
 
-TODO: FINISH THIS SECTION
+For example, suppose we have the following in the file `book.tex`:
+
+```latex
+\documentclass{book}
+\usepackage{hyperref}
+
+% These provide data used by \maketitle.
+\title{Server-Driven Web Apps with htmx}
+\author{R. Mark Volkmann}
+
+% END OF PREAMBLE
+
+\begin{document}
+\maketitle % generates a title page
+\tableofcontents % generates table of contents pages
+
+\chapter*{Preface}
+\addcontentsline{toc}{chapter}{Preface}
+This is the preface.
+
+See my blog at \href{https://mvolkmann.github.io/blog/}{My Blog}.
+
+\include{chapter1}
+\include{chapter2}
+\end{document}
+```
+
+Running the command `pdflatex book` generates the following output
+(several lines omitted):
+
+```text
+(./book.tex
+Document Class: book 2024/06/29 v1.4n Standard LaTeX document class
+[1{/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+[2] (./book.toc)
+[3]
+[4]
+[5] (./chapter1.tex
+[6]
+Chapter 1.
+)
+[7] (./chapter2.tex
+[8]
+Chapter 2.
+)
+```
+
+Now let's add the invalid command `\badcommand` in the file `chapter2.tex`
+and run the command `pdflatex book` again.
+This time the output is the following (many lines omitted):
+
+```text
+(./book.tex
+Document Class: book 2024/06/29 v1.4n Standard LaTeX document class
+[1{/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+[2] (./book.toc)
+[3]
+[4]
+[5] (./chapter1.tex
+[6]
+Chapter 1.
+)
+[7] (./chapter2.tex
+[8]
+Chapter 2.
+! Undefined control sequence.
+l.3 \badcommand
+```
+
+We can see from this that the error is in `chapter2.tex`
+because the closing ")" for that chapter was never output.
+And we see from "l.3" that the error is on line 3 of that file
+and is caused by `\badcommand`.
 
 ## Resources
 
