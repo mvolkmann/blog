@@ -3006,6 +3006,37 @@ that acts a clickable link to the corresponding footnote.
 <img alt="LaTeX footnote number" style="width: 35%"
 src="/blog/assets/latex-footnote-number.png?v={{pkg.version}}">
 
+## Appendices
+
+The `\appendix` command marks the beginning of appendix content.
+The following example document demonstrates a book with two appendices
+that are included in the table of contents.
+
+```latex
+\documentclass{book}
+\usepackage[toc, page]{appendix}
+
+\title{Server-Driven Web Apps with htmx}
+\author{R. Mark Volkmann}
+
+\begin{document}
+\maketitle % generates a title page
+\tableofcontents % generates table of contents pages
+
+\chapter{Getting Started}
+This is the first chapter.
+
+\appendix
+
+\chapter{The Past}
+This is the first appendix.
+
+\chapter{The Future}
+This is the second appendix.
+
+\end{document}
+```
+
 ## Bibliography
 
 To add a bibliography pages to a document:
