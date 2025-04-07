@@ -1747,6 +1747,14 @@ produces columns that overlap slightly and spill outside the areas
 where the text should be contrained.
 The `multicol` package demonstrated above seems to produce better results.
 
+To change the horizontal space between columns,
+using the `\setlength` and `\columnsep` commands.
+For example:
+
+```latex
+\setlength{\columnsep}{1cm}
+```
+
 ## Splitting Documents
 
 A `.tex` file can include the contents of other `.tex` files.
