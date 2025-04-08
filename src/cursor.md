@@ -259,7 +259,7 @@ The command to run the app failed due to an issue with optional dependencies.
 I had to delete the `package-lock.json` file and the `node_modules` directory,
 and then run `npm install` again which worked.
 
-Enhance the project code with followup requests.
+The project code can be enhanced with followup requests.
 For example, "Instead of displaying default map markers for each restaurant,
 display their Yelp rating."
 
@@ -272,9 +272,9 @@ allow users to select a kind of food such as Chinese or Mexican
 from a drop-down menu. Then display on a Google Map all the matching
 restaurants within 10 miles of the current location of the user."
 This ran for a couple of minutes.
-Then I press cmd-return to accept all the changes.
+Then I pressed cmd-return to accept all the changes.
 
-This output the following request:
+This output the following:
 "Also, please make sure to provide your Google Maps API key by
 replacing the empty string in the Map.svelte component.
 The application won't work without a valid API key."
@@ -288,6 +288,7 @@ I ran `npm install` again to install new dependencies that were added.
 
 I ran `npm run dev` to start a local web server
 and browsed localhost:3000.
+The app wasn't even close to working.
 
 ## Chat Attempt #2: Svelte - FAIL!
 
@@ -344,14 +345,16 @@ I entered the following in the chat:
     but google.maps.marker.AdvancedMarkerElement
     is recommended over google.maps.Marker."
 
-- I see a message in the DevTools console that says "Google Maps
+- I entered the following the chat:
+  I see a message in the DevTools console that says "Google Maps
   JavaScript API has been loaded directly without loading=async.
   This can result in suboptimal performance." Please fix that.
 
   Cursor attempted to fix this, but the changes it made
   did not make the warning go away.
 
-- google.maps.Marker is deprecated.
+- I entered the following the chat:
+  google.maps.Marker is deprecated.
   Please use google.maps.marker.AdvancedMarkerElement instead.
 
   The changes removed the warning about google.maps.Marker being deprecated,
@@ -362,16 +365,18 @@ I entered the following in the chat:
   - The map is initialized without a valid Map ID,
     which will prevent use of Advanced Markers.
 
-- Please use addEventListener('gmp-click', ...)
+- I entered the following the chat:
+  Please use addEventListener('gmp-click', ...)
   instead of addEventListener('click', ...).
 
   The changes removed the warning about addEventListener.
 
-- The map is initialized without a valid Map ID,
+- I entered the following the chat:
+  The map is initialized without a valid Map ID,
   which will prevent use of Advanced Markers.
   Please initialize the map with a valid map id.
 
-  This make changes and output the following:
+  This made changes and output the following:
 
   To get this working, you'll need to:
 
@@ -395,18 +400,23 @@ I entered the following in the chat:
   - copied the "Map ID" that was displayed
   - modified `PUBLIC_GOOGLE_MAPS_ID` in the `.env` file to have that value
 
-- When I restart the Svelte server, I'm getting the error
+- I entered the following the chat:
+  When I restart the Svelte server, I get the error
   "No loader is configured for '.node' files:
   node_modules/fsevents/fsevents.node". Please fix this.
 
-- Now I get SyntaxError: Identifier '**vite**injectQuery'
+- I entered the following the chat:
+  Now I get SyntaxError: Identifier '**vite**injectQuery'
   has already been declared in app.js. Please fix this.
 
-- The changes you made did not fix the problem. Please try again.
+- I entered the following the chat:
+  The changes you made did not fix the problem. Please try again.
 
-- That didn't fix the problem either. Do you have another idea?
+- I entered the following the chat:
+  That didn't fix the problem either. Do you have another idea?
 
-- Check my SvelteKit version and ensure it's compatible with your Vite version.
+- I entered the following the chat:
+  Check my SvelteKit version and ensure it's compatible with your Vite version.
 
   This output the following:
 
@@ -415,22 +425,30 @@ I entered the following in the chat:
   (which is still in beta) along with Vite 6 (which is also very new).
   Let's downgrade to more stable versions. I'll update your package.json.
 
-- Now I get the error "Top-level await is not available in the
+- I entered the following the chat:
+  Now I get the error "Top-level await is not available in the
   configured target environment" Can you fix this?
 
-- That did not fix the problem. The file node_modules/vitefu/src/index.js
+- I entered the following the chat:
+  That did not fix the problem. The file node_modules/vitefu/src/index.js
   uses a top-level await.
 
-- It's back to giving me
+- I entered the following the chat:
+  It's back to giving me
   "SyntaxError: Identifier '**vite**injectQuery' has already been declared".
   Can you fix that?
 
-- Now I get SyntaxError: Invalid left-hand side in assignment in hook.js.
+- I entered the following the chat:
+  Now I get SyntaxError: Invalid left-hand side in assignment in hook.js.
   Can you fix that?
 
-- Now we are back to ERROR: Top-level await is
+- I entered the following the chat:
+  Now we are back to ERROR: Top-level await is
   not available in the configured target environment.
   It seems that your fixes are going in circles. Is it time to give up?
+
+  At this point I did give up. Perhaps Cursor will work better
+  when directed to use a more popular web framework like React.
 
 ## Chat Attempt #3: React - Mostly successful
 
