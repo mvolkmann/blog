@@ -19,7 +19,8 @@ tau, epsilon, and chi (which looks like the Latin letter X).
 That is why TeX is pronounced "tech" and not "tex".
 
 {% aTargetBlank "https://www.latex-project.org", "LaTeX" %}
-is a high-level typesetting system built on TeX.
+is a high-level typesetting system built on TeX
+by defining a set of custom TeX commands.
 The initial version was created by Leslie Lamport in 1984.
 The latest version was implemented by a group led by Frank Mittelbach.
 LaTeX is widely used in academia for publication of
