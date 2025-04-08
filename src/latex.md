@@ -1812,12 +1812,12 @@ For example:
 
 To temporarily avoid rendering the content of files included with `\include`,
 add the `\includeonly` command in the preamble
-with an argument that lists the file paths to include.
+with an argument that lists the file names to include.
 This will not change the numbering of the chapters and sections that follow.
 For example:
 
 ```latex
-\includeonly{preface, chapter2, index}
+\includeonly{preface, chapter2}
 ```
 
 The `\input` command start its content where it appears and
@@ -2877,6 +2877,22 @@ the reference point is its center.
     \put(15, 15){\dashbox{5}(40, 40){dashed}} % dashed rectangle
     \put(145, 15){\framebox(40, 40){solid}} % solid rectangle
 \end{picture}
+```
+
+To draw graph paper grids, use the `\graphpaper` command
+that is defined in the `graphpap` package.
+This takes an optional argument that specifies the grid spacing
+with a default value of `10`.
+That is followed by the coordinates of the lower-left corner
+and the width and height.
+
+The following example uses a grid spacing of 15,
+begins at x = 0, y = 0, has a width of 200 and a height of 150.
+
+```latex
+\usepackage{graphpap}
+...
+\graphpaper[15](0,0)(200,150)
 ```
 
 ## Greek Letters
