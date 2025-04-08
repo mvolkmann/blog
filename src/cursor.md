@@ -482,7 +482,8 @@ I entered the following in the chat:
   or just a const variable outside of component,
   or somewhere in config files or ENV variables" Fix this.
 
-- Now I get "The map is initialized without a valid Map ID, which will prevent use of Advanced Markers." Fix this.
+- Now I get "The map is initialized without a valid Map ID,
+  which will prevent use of Advanced Markers." Fix this.
 
   After this I modified the `.env` file contain my Google Maps map ID
   and restarted the server with `yarn start`.
@@ -497,7 +498,7 @@ I entered the following in the chat:
 
   After this I followed the instructions it output.
   I also updated my Google Cloud payment method to use a new credit card.
-  Then I restarted restarted the server with `yarn start` and tried again.
+  Then I restarted the server with `yarn start` and tried again.
   It still says "This API key is not authorized to use this service or API."
 
   It turns out that I needed to enable "Places API" under "Credentials"
@@ -513,7 +514,7 @@ I entered the following in the chat:
 - Change the map markers for each restaurant to be
   circles that contain a rating for the restaurant.
 
-  This works! Where is it getting the ratings?
+  This works!
 
 - When a map marker is clicked, show the best route on the map
   and remove any previously displayed route.
@@ -614,9 +615,9 @@ I entered the following in the chat:
   variables set from a `useState` weren't even needed.
   I manually deleted all references to those and the ESLint errors went away.
 
-I'm getting the error "Distance Matrix Service: This API project is not
-authorized to use this API." The Distance Matrix Service has been replaced
-by "Routes API" which I do have enabled.
+  I'm still etting the error "Distance Matrix Service: This API project is not
+  authorized to use this API." The Distance Matrix Service has been replaced
+  by "Routes API" which I do have enabled.
 
 - Change the code to use the Google Maps Routes API
   instead of the Distance Matrix Service.
@@ -641,7 +642,7 @@ I'm calling the app good now!
 
 - Generate unit tests.
 
-  This added the following line in RestaurantMap.tsx,
+  This added the following line in `RestaurantMap.tsx`,
   but `loadavg` is not used so I deleted the line:
 
   ```js
