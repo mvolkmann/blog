@@ -846,7 +846,7 @@ the `\chapter` command be considered the first chapter.
 \addcontentsline{toc}{chapter}{Preface}
 Preface content goes here.
 
-\lstlistoflistings
+\lstlistoflistings % requires the listings package
 \addcontentsline{toc}{chapter}{\lstlistlistingname}
 
 \listoffigures
@@ -1695,6 +1695,9 @@ For example:
 % like those created with the \url and \href commands.
 % To use additional color names, include the following in the preamble:
 % \usepackage[dvipsnames, svgnames]{xcolor}
+% dvipsnames are described at
+% https://en.wikibooks.org/wiki/LaTeX/Colors#The_68_standard_colors_known_to_dvips
+% svgnames are described at https://www.latextemplates.com/svgnames-colors.
 \hypersetup{colorlinks=true, linkcolor=DarkBlue, urlcolor=FireBrick}
 ...
 \url{https://mvolkmann.github.io/blog/}
