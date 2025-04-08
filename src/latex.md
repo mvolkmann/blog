@@ -1636,8 +1636,14 @@ add the `\lstlistoflisting` command.
 This causes LaTeX to create a `.lol` file
 that is used to render the list of listings pages.
 The `\lstlistoflisting` command typically appears after the table of contents.
+
 To include this page in the table of contents,
-add `\usepackage{tocbibind}` in the preamble.
+add the following after the `\lstlistoflisting` command
+where "Code Listings" can be any page title:
+
+```latex
+\addcontentsline{toc}{chapter}{Code Listings}
+```
 
 A better option is to use the `minted` package.
 This uses the Python library Pygments to format source code.
@@ -1931,9 +1937,14 @@ where each line is a link to a figure,
 add the `\listoffigures` command.
 This causes LaTeX to create a `.lof` file
 that is used to render the list of figures pages.
-The `\listoffigures` command typically appears after the table of contents.
+
 To include this page in the table of contents,
-add `\usepackage{tocbibind}` in the preamble.
+add the following after the `\listoffigures` command
+where "Images" can be any page title:
+
+```latex
+\addcontentsline{toc}{chapter}{Images}
+```
 
 ## References
 
@@ -2547,7 +2558,7 @@ It uses the `\textbf` command is used to make the column headings bold.
   \hline\hline
   Comet & Whippet & 4 \\
   \hline
-  Greta & German Shorthaired Poiner & 1 \\
+  Greta & German Shorthaired Pointer & 1 \\
   \hline
   Oscar & Lab mix & 7 \\
   \hline
@@ -2640,7 +2651,7 @@ For example:
     \hline\hline
     Comet & Whippet & 4 \\
     \hline
-    Greta & German Shorthaired Poiner & 1 \\
+    Greta & German Shorthaired Pointer & 1 \\
     \hline
     Oscar & Lab mix & 7 \\
     \hline
@@ -2663,9 +2674,14 @@ where each line is a link to a table,
 add the `\listoftables` command.
 This causes LaTeX to create a `.lot` file
 that is used to render the list of tables pages.
-The `\listoftables` command typically appears after the table of contents.
+
 To include this page in the table of contents,
-add `\usepackage{tocbibind}` in the preamble.
+add the following after the `\listoffiguures` command
+where "Tables" can be any page title:
+
+```latex
+\addcontentsline{toc}{chapter}{Tables}
+```
 
 The `[H]` option can be specified on a `table` environment,
 but not on a `tabular` environment.
