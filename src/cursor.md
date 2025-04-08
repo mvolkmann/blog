@@ -14,6 +14,7 @@ layout: topic-layout.njk
 
 {% aTargetBlank "https://www.cursor.com.", "Cursor" %} is an
 "AI Code Editor" that aims to make developers "extraordinarily productive".
+It is a fork of Microsoft VS Code.
 
 While Cursor offers a free tier, I frequently saw the following message
 when asking it to explain code, modify code, or generate new code:
@@ -24,7 +25,7 @@ This makes the free tier somewhat unusable.
 
 The paid tiers start at $20 per month.
 
-It works best when given a somewhat detailed plan of what it should build.
+Cursor works best when given a somewhat detailed plan of what it should build.
 This includes identifying the frameworks and libraries to use.
 
 When Cursor is asked to implement code for a specific task,
@@ -119,7 +120,7 @@ So Cursor is only as secure as those subprocessors which include:
 - Vercel
 - WorkOS
 
-TODO: Finish document what each subprocessor above is used for.
+TODO: Finish documenting what each subprocessor above is used for.
 
 TODO: Explain what enabling privacy mode does.
 
@@ -136,7 +137,7 @@ Cursor provides the following functionality:
 - Predicts your next edit which can be accepted by pressing the tab key.
 - Answers questions about the codebase of your current project.
 - Enables writing code with natural language
-  instead of specific programming language syntax.
+  instead of writing programming language syntax.
 
 To test some of the functionality, I opened a source file containing
 `const cuisines = [ "American", "Chinese", ... ]`.
