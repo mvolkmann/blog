@@ -84,9 +84,11 @@ To edit a background used by the current stack:
 
 ## Cards
 
-To add a card to the current stack:
+To add a card to the current stack, select Edit ... New Card or press cmd-n.
 
-- Select Edit ... New Card or press cmd-n.
+To configure the current card, select Objects ... Card Info...
+This enables editing the card name, its script, and checking the checkboxes
+for "Card Marked", "Don't Search Card", and "Can't Delete Card".
 
 To delete the current card:
 
@@ -99,113 +101,116 @@ that can be clicked to select one of the 18 tools.
 Drag the Tools menu off the menu bar
 to create a floating palette of tool buttons.
 
+<img alt="HyperCard Tools" style="border: 0; width: 20%"
+  src="/blog/assets/hypercard-tools.png?v={{pkg.version}}">
+
 The tools include:
 
 - Row #1
 
-  - Browse
+  - **Browse**
 
     This enters Browse mode which enables interacting with cards as a user
     rather than as an author.
 
-  - Button
+  - **Button**
 
     This enters Button mode which enables editing existing buttons.
 
-  - Field
+  - **Field**
 
     This enters Field mode which enables editing existing text fields.
 
 - Row #2
 
-  - Rectangle Selection
+  - **Rectangle Selection**
 
     This selects a rectangular area of a drawing
     which can then be copied, cut, deleted, dragged, or transformed
     (using the Options menu items Rotate, Slant, Distort, and Perspective).
 
-  - Lasso Selection
+  - **Lasso Selection**
 
   This selects an arbitrary area of a drawing
   which can then be copied, cut, deleted, or dragged.
 
-  - Pencil
+  - **Pencil**
 
     This is used for freehand drawing.
     The pencil width is a single pixel and cannot be changed.
 
 - Row #3
 
-  - Brush
+  - **Brush**
 
     This is used for freehand painting.
     To change the shape and size of the brush,
     Select Options ... Brush Shape... before painting.
 
-  - Eraser
+  - **Eraser**
 
     Drag over painted items to erase them.
     The size of the eraser cannot be changed.
     To erase large areas, use the Rectangle and Lasso selection tools.
 
-  - Line
+  - **Line**
 
     Click at start of line and drag to end of line.
     To change the line size, Select Options ... Line Size... before drawing.
 
 - Row #4
 
-  - Spray
+  - **Spray**
 
     This sprays paint using the currently selected pattern.
 
-  - Rectangle
+  - **Rectangle**
 
     This draws a rectangle, specified by clicking at the
     location of any corner and dragging to the opposite corner.
 
-  - Round Rectangle
+  - **Round Rectangle**
 
     This draws a rectangle with rounded corners, specified by clicking at the
     location of any corner and dragging to the opposite corner.
 
 - Row #5
 
-  - Bucket
+  - **Bucket**
 
     This fills an area with the currently selected pattern
     from the Patterns menu or palette
     when a pixel inside an enclosed area is clicked.
 
-  - Oval
+  - **Oval**
 
     This draws an oval which is any closed curve that
     resembles the outline of an egg or an ellipse.
     It doesn't have a strict mathematical definition.
     To draw a circle, hold down the shift key while dragging.
 
-  - Curve
+  - **Curve**
 
     This is similar to the Line tool, but will automatically
     close the shape if Options ... Draw Filled is selected.
 
 - Row #6
 
-  - Text
+  - **Text**
 
     This paints text that cannot be edited.
     The text style must be specified by selecting Edit ... Text Style...
     before typing the text.
     Then click where the text should go and begin typing.
 
-  - Regular Polygon
+  - **Regular Polygon**
 
     This draws a convex polygon whose sides all have the same length.
     Select Options ... Polygon Sides...
     to select the number of sides to include.
     The options are 3, 4, 5, 6, 8, and circle.
 
-  - Polygon
+  - **Polygon**
 
     This draws an arbitrary polygon.
     Click at each point in the polygon. Double-click to end.
@@ -239,6 +244,9 @@ to select the pattern that is used by the Bucket tool.
 Drag the Patterns menu off the menu bar
 to create a floating palette of pattern buttons.
 
+<img alt="HyperCard Patterns" style="border: 0; width: 20%"
+  src="/blog/assets/hypercard-patterns.png?v={{pkg.version}}">
+
 To edit one of the provided 40 patterns,
 select it and select Options ... Edit Pattern...
 Then click or drag across pixels in the dialog
@@ -249,7 +257,7 @@ so be careful with these changes!
 To cause drawn shapes to be filled with the currently selected pattern,
 select Options ... Draw Filled.
 
-### Buttons
+## Buttons
 
 To add a button to the current card.
 
@@ -294,7 +302,7 @@ To delete a button:
 - Click a button to select it.
 - Press the delete key, or select Edit ... Cut Button, or press cmd-x.
 
-### Text Fields
+## Text Fields
 
 To add a text field to the current card:
 
@@ -349,18 +357,48 @@ To draw a shape, select one of the tools from the Tools menu.
 
 ## Sounds
 
-To play a sound, use the `play` command
-with an argument that is the name of a sound.
-The builtin sounds are Boing, Chime, Click,
-Clunk, Glass, Honk, Pop, and Thud.
+To play a predefined sound, use the `beep` or `play` commands.
+The `beep` command takes an optional argument
+that specifies the number of times to play, defaulting to one.
+The `play` command takes the following arguments:
+
+- name of a sound, either boing or harpsichord
+- optional keyword "tempo" followed by a number (seems to default to 120)
+- optional set of notes to play in double quotes
+
+For example, `play harpsichord tempo 120 "c4 e g4 e c5 q"`
+
+To play a sound file, use the `play file` command.
+TODO: What sound formats are supported?
 
 ## Backgrounds
 
 Select Edit ... Background or select cmd-b
 to toggle between background and foreground modes.
 
+To add a new background to the current stack,
+select Objects ... New Background.
+
+TODO: How can a stack use more than one background?
 TODO: How can a stack use more than one background?
 TODO: How do you select the background that should be used by a particular card?
+
+## Card Transitions
+
+TODO: Add detail on these.
+
+## Images
+
+One source of images is other stacks such as "Art Bits".
+The "Art Bits" stack that is linked from the Home card
+contains links to the cards with images in the following categories:
+Beasts, Buildings, Communication and media, Hypercard miscellany,
+Icon ideas, Macintosh miscellany, Nature and science, Odds and ends,
+People, Small treasures, and Transportation.
+
+To get an image, open a stack, find a desired image on one of its cards,
+use the selection tools to select it, copy it, and
+paste it onto a card in your stack.
 
 ## Keyboard Shortcuts
 
@@ -389,6 +427,10 @@ TODO: How do you select the background that should be used by a particular card?
 - go first|next|prev|last
 - go home
 - go stack "stack-name"
+
+## User Levels
+
+TODO: Document these.
 
 ## Popular Stacks
 
