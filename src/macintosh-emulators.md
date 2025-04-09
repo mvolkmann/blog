@@ -339,6 +339,20 @@ To enable colors in the emulator:
 - Close the Monitors window.
 - Close the "Control Panels" window.
 
+## Zooming In
+
+One way to increase the size of an app (such as HyperCard)
+running in an emulator from a modern Mac host is to:
+
+- open "System Settings"
+- select Accessibility
+- select Zoom
+- toggle the "Use keyboard shortcuts to zoom" option on
+- open the emulator
+- launch the app
+- press cmd-option-= (plus key) to zoom in
+- press cmd-option-minus to zoom out
+
 ## HyperCard
 
 HyperCard is located in Mac OS 7.6.1 ... CD Extras ... HyperCard Player.

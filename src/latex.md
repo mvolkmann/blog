@@ -57,7 +57,7 @@ Some pros of using LaTeX include:
 - scales to support large projects like books and theses
   by allowing documents to be split into multiple files
 - supports defining parameterized macros that reduce duplicated code
-- works in Windows, macOS, and Linux
+- cross-platform, running in Windows, macOS, and Linux
 - free and open source
 - being text-based enables easy viewing of diffs in version control systems
 
