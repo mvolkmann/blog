@@ -400,6 +400,77 @@ To get an image, open a stack, find a desired image on one of its cards,
 use the selection tools to select it, copy it, and
 paste it onto a card in your stack.
 
+## Scripts
+
+Scripts handle messages that are triggered by many actions.
+The messages travel through the object hierarchy,
+searching for an object that handles them.
+The levels of the object hierarchy, from bottom to top are:
+
+- buttons and text fields
+- cards
+- backgrounds
+- stacks
+- Home stack
+- HyperCard app
+
+This is also the order in which scripts are most commonly defined,
+with button scripts being the most common
+and HyperCard app scripts being the least common.
+
+For example, in a stack with two cards where the first card contains a button:
+
+- Open the stack. The first card will be displayed.
+- Select the Button tool.
+- Double-click the button.
+- Click the "Script" button.
+- Enter the following:
+
+  ```text
+  on mouseUp
+    go to next card
+  end mouseUp
+  ```
+
+- Press cmd-s to save the changes.
+- Press cmd-w to close the script window.
+
+- Select Object ... Card Info...
+- Click the "Script" button.
+- Enter the following:
+
+  ```text
+  on mouseUp
+    beep
+  end mouseUp
+  ```
+
+- Select Object ... Stack Info...
+- Click the "Script" button.
+- Enter the following:
+
+  ```text
+  on mouseUp
+    flash
+  end mouseUp
+  ```
+
+- Click the Browse tool.
+- Click outside the button.
+- Notice that the `beep` command runs because the card script is run.
+- Click the button.
+- Notice that it navigates to the next card because the button script is run.
+- While on the next card, click anywhere inside it
+  except on a button or text field.
+- Notice that the window flashes because the stack script is executed.
+
+When editing a script, press the tab key to format it
+which indents the lines properly.
+
+When changes to a script are saved,
+the script is not checked for possible errors.
+Any errors are only found when the script is run.
+
 ## Keyboard Shortcuts
 
 | Shortcut | Action                                           |
