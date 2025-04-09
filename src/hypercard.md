@@ -23,6 +23,11 @@ fetching data from a server by sending an HTTP request.
 
 The Home card contains buttons that navigate to commonly used stacks.
 
+## Help
+
+For popup help on a particular menu item or button,
+select Help ... Show Balloons and hover over an item.
+
 ## Basic Operations
 
 ## Stacks
@@ -84,6 +89,7 @@ To add an icon to a button:
 - Optionally remove the text name on the button by unchecking "Show Name".
 - Optionally cause the button to highlight when it is clicked
   by checking the "Auto Hilite" checkbox.
+- Icon sizes cannot be modified.
 
 To move a button:
 
@@ -156,6 +162,53 @@ To delete a text field:
 - Click the Field tool.
 - Click an object to select it.
 - Press the delete key, or select Edit ... Cut Field, or press cmd-x.
+
+## Drawing
+
+To draw a shape, select one of the following tools:
+
+- Pencil
+- Brush
+- Eraser
+- Line
+- Spray
+- Rectangle
+- Round Rectangle
+- Bucket - This fills a clicked area with the currently selected pattern
+  from the Patterns menu.
+- Oval - To draw a circle, hold down the shift key while dragging.
+- Curve
+- Text
+- Regular Polygon - This draws a convex polygon
+  whose sides have the same length.
+  Select Options ... Polygon Sides...
+  to select the number of sides it should have.
+  The options are 3, 4, 5, 6, 8, and circle.
+- Polygon - Click at each point in the polygon. Double-click to end.
+  It does not automatically connect the last point to the first.
+
+To select all or part of a drawing,
+use the Rectangle or Lasso Selection Tools.
+Shapes cannot be selected by clicking them.
+
+To cause a drawn shape to be centered at the location of the initial click,
+select Options ... Draw Centered.
+This stays in effect until it is toggled off.
+
+To cause drawn shapes to be filled with the currently selected pattern,
+select Options ... Draw Filled.
+
+To rotate the selected portion of a drawing,
+select Options ... Rotate and drag any of the selection handles.
+Other options include Slant, Distort, and Perspective.
+
+To undo the last drawing action, press the esc key or cmd-z.
+
+To erase part of a drawing, do one of the following:
+
+- Select the Erase tool and drag over the drawing.
+- Select an area with the Rectangle or Lasso Selection Tools
+  and press the delete key, or select Edit ... Cut Picture, or press cmd-x.
 
 ## Keyboard Shortcuts
 
