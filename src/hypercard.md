@@ -297,6 +297,10 @@ To tear off the Tools menu into a floating window for easier access ...
 - {% aTargetBlank
   "https://www.youtube.com/playlist?list=PL1GQPxft2cQh_KsYz399Hlq7FHPp7XhBJ",
   "Eric's Edge" %} YouTube videos on HyperCard
-- {% aTargetBlank "https://hcsimulator.com", "HyperCard Simulator" %} - web-based
+- {% aTargetBlank "https://hcsimulator.com", "HyperCard Simulator" %} -
+  web-based
 - {% aTargetBlank "https://beyondloom.com/decker", "Decker" %}
   open-source, web-based HyperCard clone
+- {% aTargetBlank "https://www.youtube.com/watch?v=x-FkNd5DkOQ",
+  "[LIVE '21] Modifiable Software Systems: Smalltalk and HyperCard" %}
+  YouTube video
