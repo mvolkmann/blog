@@ -97,67 +97,147 @@ To delete the current card:
 The tools menu contains a grid of buttons
 that can be clicked to select one of the 18 tools.
 Drag the Tools menu off the menu bar
-to make the grid of buttons available in a dialog.
+to create a floating palette of tool buttons.
 
 The tools include:
 
-- Rectangle Selection
+- Row #1
 
-  This selects a rectangular area of a drawing
-  which can then be copied, cut, deleted, dragged, or transformed
-  (using the Options menu items Rotate, Slant, Distort, and Perspective).
+  - Browse
 
-- Lasso Selection
+    This enters Browse mode which enables interacting with cards as a user
+    rather than as an author.
+
+  - Button
+
+    This enters Button mode which enables editing existing buttons.
+
+  - Field
+
+    This enters Field mode which enables editing existing text fields.
+
+- Row #2
+
+  - Rectangle Selection
+
+    This selects a rectangular area of a drawing
+    which can then be copied, cut, deleted, dragged, or transformed
+    (using the Options menu items Rotate, Slant, Distort, and Perspective).
+
+  - Lasso Selection
 
   This selects an arbitrary area of a drawing
   which can then be copied, cut, deleted, or dragged.
 
-- Pencil
+  - Pencil
 
-  This is used for freehand drawing.
-  The pencil width is a single pixel and cannot be changed.
+    This is used for freehand drawing.
+    The pencil width is a single pixel and cannot be changed.
 
-- Brush
+- Row #3
 
-  This is used for freehand painting.
-  To change the shape and size of the brush,
-  Select Options ... Brush Shape... before painting.
+  - Brush
 
-- Eraser
+    This is used for freehand painting.
+    To change the shape and size of the brush,
+    Select Options ... Brush Shape... before painting.
 
-  Drag over painted items to erase them.
-  The size of the eraser cannot be changed.
-  To erase large areas, use the Rectangle and Lasso selection tools.
+  - Eraser
 
-- Line
+    Drag over painted items to erase them.
+    The size of the eraser cannot be changed.
+    To erase large areas, use the Rectangle and Lasso selection tools.
 
-  Click at start of line and drag to end of line.
-  To change the line size, Select Options ... Line Size... before drawing.
+  - Line
 
-- Spray
+    Click at start of line and drag to end of line.
+    To change the line size, Select Options ... Line Size... before drawing.
 
-  This sprays paint using the currently selected pattern.
+- Row #4
 
-- Rectangle
-- Round Rectangle
-- Bucket - This fills a clicked area with the currently selected pattern
-  from the Patterns menu.
-- Oval - To draw a circle, hold down the shift key while dragging.
-- Curve
-- Text
-- Regular Polygon - This draws a convex polygon
-  whose sides have the same length.
-  Select Options ... Polygon Sides...
-  to select the number of sides it should have.
-  The options are 3, 4, 5, 6, 8, and circle.
-- Polygon - Click at each point in the polygon. Double-click to end.
-  It does not automatically connect the last point to the first.
+  - Spray
+
+    This sprays paint using the currently selected pattern.
+
+  - Rectangle
+
+    This draws a rectangle, specified by clicking at the
+    location of any corner and dragging to the opposite corner.
+
+  - Round Rectangle
+
+    This draws a rectangle with rounded corners, specified by clicking at the
+    location of any corner and dragging to the opposite corner.
+
+- Row #5
+
+  - Bucket
+
+    This fills an area with the currently selected pattern
+    from the Patterns menu or palette
+    when a pixel inside an enclosed area is clicked.
+
+  - Oval
+
+    This draws an oval which is any closed curve that
+    resembles the outline of an egg or an ellipse.
+    It doesn't have a strict mathematical definition.
+    To draw a circle, hold down the shift key while dragging.
+
+  - Curve
+
+    This is similar to the Line tool, but will automatically
+    close the shape if Options ... Draw Filled is selected.
+
+- Row #6
+
+  - Text
+
+    This paints text that cannot be edited.
+    The text style must be specified by selecting Edit ... Text Style...
+    before typing the text.
+    Then click where the text should go and begin typing.
+
+  - Regular Polygon
+
+    This draws a convex polygon whose sides all have the same length.
+    Select Options ... Polygon Sides...
+    to select the number of sides to include.
+    The options are 3, 4, 5, 6, 8, and circle.
+
+  - Polygon
+
+    This draws an arbitrary polygon.
+    Click at each point in the polygon. Double-click to end.
+    It does not automatically connect the last point to the first.
+
+To undo the last drawing action, press the esc key or cmd-z.
+
+To cause a drawn shape to be centered at the location of the initial click,
+select Options ... Draw Centered.
+This stays in effect until it is toggled off.
+
+To select all or part of a drawing,
+use the Rectangle or Lasso Selection Tools.
+Shapes cannot be selected by clicking them.
+
+To rotate the selected portion of a drawing,
+select Options ... Rotate and drag any of the selection handles.
+Other options include Slant, Distort, and Perspective.
+
+To erase part of a drawing, do one of the following:
+
+- Select the Erase tool and drag over the drawing.
+- Select an area with the Rectangle or Lasso Selection Tools
+  and press the delete key, or select Edit ... Cut Picture, or press cmd-x.
+
+## Patterns
 
 When the Bucket tool is selected, a Patterns menu appears.
-It contains a grid of buttons that can clicked to
-select the pattern that is used by the Bucket tool.
+This menu contains a grid of buttons that can clicked
+to select the pattern that is used by the Bucket tool.
 Drag the Patterns menu off the menu bar
-to make the grid of buttons available in a dialog.
+to create a floating palette of pattern buttons.
 
 To edit one of the provided 40 patterns,
 select it and select Options ... Edit Pattern...
@@ -166,28 +246,8 @@ to toggle them between black and white.
 I couldn't find a way to reset a pattern to its default state,
 so be careful with these changes!
 
-To select all or part of a drawing,
-use the Rectangle or Lasso Selection Tools.
-Shapes cannot be selected by clicking them.
-
-To cause a drawn shape to be centered at the location of the initial click,
-select Options ... Draw Centered.
-This stays in effect until it is toggled off.
-
 To cause drawn shapes to be filled with the currently selected pattern,
 select Options ... Draw Filled.
-
-To rotate the selected portion of a drawing,
-select Options ... Rotate and drag any of the selection handles.
-Other options include Slant, Distort, and Perspective.
-
-To undo the last drawing action, press the esc key or cmd-z.
-
-To erase part of a drawing, do one of the following:
-
-- Select the Erase tool and drag over the drawing.
-- Select an area with the Rectangle or Lasso Selection Tools
-  and press the delete key, or select Edit ... Cut Picture, or press cmd-x.
 
 ### Buttons
 
@@ -294,6 +354,14 @@ with an argument that is the name of a sound.
 The builtin sounds are Boing, Chime, Click,
 Clunk, Glass, Honk, Pop, and Thud.
 
+## Backgrounds
+
+Select Edit ... Background or select cmd-b
+to toggle between background and foreground modes.
+
+TODO: How can a stack use more than one background?
+TODO: How do you select the background that should be used by a particular card?
+
 ## Keyboard Shortcuts
 
 | Shortcut | Action                                           |
@@ -315,31 +383,6 @@ Clunk, Glass, Honk, Pop, and Thud.
 | cmd-v    | past                                             |
 | cmd-x    | cut                                              |
 | cmd-z    | undo                                             |
-
-## Tools
-
-The Tools menu contains the following buttons that select a tool:
-
-- Browse
-- Button
-- Field
-- Rectangle selection
-- Lasso selection
-- Pencil
-- Brush
-- Eraser
-- Line
-- Spray
-- Rectangle
-- Rounded Rectangle
-- Bucket
-- Oval
-- Curve
-- Text
-- Regular Polygon
-- Polygon
-
-To tear off the Tools menu into a floating window for easier access ...
 
 ## HyperTalk Commands
 
