@@ -13,7 +13,9 @@ layout: topic-layout.njk
 ## Overview
 
 HyperCard is a Macintosh application for viewing and creating
-HyperCard stacks (a.k.a HyperCard applications) which are collections of cards.
+multimedia applications built with HyperCard stacks
+(a.k.a HyperCard applications) which are collections of cards.
+Cards primarily contain text, graphics, and buttons.
 
 HyperCard initially released in August, 1987.
 The last version of HyperCard, released in 1988, was 2.4.1.
@@ -37,10 +39,17 @@ The Home card contains buttons that navigate to commonly used stacks.
 Changes to stacks are saved automatically.
 There is no save button or menu item.
 
+## Launching HyperCard
+
+To launch HyperCard, double-click on the app icon
+or on the icon of a HyperCard stack.
+
 ## Help
 
 For popup help on a particular menu item or button,
 select Help ... Show Balloons and hover over an item.
+This is a Mac OS feature and is not specific to HyperCard.
+To turn this off, select Help ... Hide Balloons.
 
 ## Basic Operations
 
@@ -82,6 +91,103 @@ To add a card to the current stack:
 To delete the current card:
 
 - Select Edit ... Delete Card.
+
+## Tools
+
+The tools menu contains a grid of buttons
+that can be clicked to select one of the 18 tools.
+Drag the Tools menu off the menu bar
+to make the grid of buttons available in a dialog.
+
+The tools include:
+
+- Rectangle Selection
+
+  This selects a rectangular area of a drawing
+  which can then be copied, cut, deleted, dragged, or transformed
+  (using the Options menu items Rotate, Slant, Distort, and Perspective).
+
+- Lasso Selection
+
+  This selects an arbitrary area of a drawing
+  which can then be copied, cut, deleted, or dragged.
+
+- Pencil
+
+  This is used for freehand drawing.
+  The pencil width is a single pixel and cannot be changed.
+
+- Brush
+
+  This is used for freehand painting.
+  To change the shape and size of the brush,
+  Select Options ... Brush Shape... before painting.
+
+- Eraser
+
+  Drag over painted items to erase them.
+  The size of the eraser cannot be changed.
+  To erase large areas, use the Rectangle and Lasso selection tools.
+
+- Line
+
+  Click at start of line and drag to end of line.
+  To change the line size, Select Options ... Line Size... before drawing.
+
+- Spray
+
+  This sprays paint using the currently selected pattern.
+
+- Rectangle
+- Round Rectangle
+- Bucket - This fills a clicked area with the currently selected pattern
+  from the Patterns menu.
+- Oval - To draw a circle, hold down the shift key while dragging.
+- Curve
+- Text
+- Regular Polygon - This draws a convex polygon
+  whose sides have the same length.
+  Select Options ... Polygon Sides...
+  to select the number of sides it should have.
+  The options are 3, 4, 5, 6, 8, and circle.
+- Polygon - Click at each point in the polygon. Double-click to end.
+  It does not automatically connect the last point to the first.
+
+When the Bucket tool is selected, a Patterns menu appears.
+It contains a grid of buttons that can clicked to
+select the pattern that is used by the Bucket tool.
+Drag the Patterns menu off the menu bar
+to make the grid of buttons available in a dialog.
+
+To edit one of the provided 40 patterns,
+select it and select Options ... Edit Pattern...
+Then click or drag across pixels in the dialog
+to toggle them between black and white.
+I couldn't find a way to reset a pattern to its default state,
+so be careful with these changes!
+
+To select all or part of a drawing,
+use the Rectangle or Lasso Selection Tools.
+Shapes cannot be selected by clicking them.
+
+To cause a drawn shape to be centered at the location of the initial click,
+select Options ... Draw Centered.
+This stays in effect until it is toggled off.
+
+To cause drawn shapes to be filled with the currently selected pattern,
+select Options ... Draw Filled.
+
+To rotate the selected portion of a drawing,
+select Options ... Rotate and drag any of the selection handles.
+Other options include Slant, Distort, and Perspective.
+
+To undo the last drawing action, press the esc key or cmd-z.
+
+To erase part of a drawing, do one of the following:
+
+- Select the Erase tool and drag over the drawing.
+- Select an area with the Rectangle or Lasso Selection Tools
+  and press the delete key, or select Edit ... Cut Picture, or press cmd-x.
 
 ### Buttons
 
@@ -179,50 +285,7 @@ To delete a text field:
 
 ## Drawing
 
-To draw a shape, select one of the following tools:
-
-- Pencil
-- Brush
-- Eraser
-- Line
-- Spray
-- Rectangle
-- Round Rectangle
-- Bucket - This fills a clicked area with the currently selected pattern
-  from the Patterns menu.
-- Oval - To draw a circle, hold down the shift key while dragging.
-- Curve
-- Text
-- Regular Polygon - This draws a convex polygon
-  whose sides have the same length.
-  Select Options ... Polygon Sides...
-  to select the number of sides it should have.
-  The options are 3, 4, 5, 6, 8, and circle.
-- Polygon - Click at each point in the polygon. Double-click to end.
-  It does not automatically connect the last point to the first.
-
-To select all or part of a drawing,
-use the Rectangle or Lasso Selection Tools.
-Shapes cannot be selected by clicking them.
-
-To cause a drawn shape to be centered at the location of the initial click,
-select Options ... Draw Centered.
-This stays in effect until it is toggled off.
-
-To cause drawn shapes to be filled with the currently selected pattern,
-select Options ... Draw Filled.
-
-To rotate the selected portion of a drawing,
-select Options ... Rotate and drag any of the selection handles.
-Other options include Slant, Distort, and Perspective.
-
-To undo the last drawing action, press the esc key or cmd-z.
-
-To erase part of a drawing, do one of the following:
-
-- Select the Erase tool and drag over the drawing.
-- Select an area with the Rectangle or Lasso Selection Tools
-  and press the delete key, or select Edit ... Cut Picture, or press cmd-x.
+To draw a shape, select one of the tools from the Tools menu.
 
 ## Sounds
 
