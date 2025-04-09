@@ -1054,7 +1054,10 @@ use the `\providecommand` command instead.
 The `ifthen` package adds commands that support
 conditional logic (`\ifthenelse` command) and iteration (`\whiledo` command)
 for choosing the text to render.
-This can be used anywhere in a document, including in macros.
+These can be used anywhere in a document, including in macros.
+
+See {% aTargetBlank "https://www.youtube.com/watch?v=6VMglkW9nFk",
+"Master Loops & Conditionals in LaTeX: Beginner's Guide" %}.
 
 ## Fonts
 

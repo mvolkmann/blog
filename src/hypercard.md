@@ -4,15 +4,16 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-<figure style="width: 80%">
-  <img alt="_hyperscript logo" style="border: 0"
-    src="/blog/assets/hypercard-welcome.jpg?v={{pkg.version}}">
-</figure>
+<img alt="HyperCard logo" style="border: 0; width: 10%"
+  src="/blog/assets/hypercard-logo.jpg?v={{pkg.version}}">
+<br />
+<img alt="HyperCard Welcome card" style="border: 0; width: 80%"
+  src="/blog/assets/hypercard-welcome.jpg?v={{pkg.version}}">
 
 ## Overview
 
 HyperCard is a Macintosh application
-It was developed by Bill Atkinson
+It was developed at Apple by Bill Atkinson and Dan Winkler,
 and initially released in August, 1987.
 
 {% aTargetBlank "https://hyperscript.org", "_hyperscript" %} is
