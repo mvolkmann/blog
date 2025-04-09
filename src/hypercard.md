@@ -23,6 +23,9 @@ fetching data from a server by sending an HTTP request.
 
 The Home card contains buttons that navigate to commonly used stacks.
 
+Changes to stacks are saved automatically.
+There is no save button or menu item.
+
 ## Help
 
 For popup help on a particular menu item or button,
@@ -209,6 +212,13 @@ To erase part of a drawing, do one of the following:
 - Select the Erase tool and drag over the drawing.
 - Select an area with the Rectangle or Lasso Selection Tools
   and press the delete key, or select Edit ... Cut Picture, or press cmd-x.
+
+## Sounds
+
+To play a sound, use the `play` command
+with an argument that is the name of a sound.
+The builtin sounds are Boing, Chime, Click,
+Clunk, Glass, Honk, Pop, and Thud.
 
 ## Keyboard Shortcuts
 
