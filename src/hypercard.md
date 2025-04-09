@@ -12,15 +12,25 @@ layout: topic-layout.njk
 
 ## Overview
 
-HyperCard is a Macintosh application
-It was developed at Apple by Bill Atkinson and Dan Winkler,
-and initially released in August, 1987.
+HyperCard is a Macintosh application for viewing and creating
+HyperCard stacks (a.k.a HyperCard applications) which are collections of cards.
+
+HyperCard initially released in August, 1987.
+The last version of HyperCard, released in 1988, was 2.4.1.
+The oldest version of Mac OS that supports some version of HyperCard
+is Mac OS 6.0.1.
+The newest version of Mac OS that can run HyperCard is 9.2.2.
+
+HyperCard was developed at Apple by Bill Atkinson and Dan Winkler,
+using Apple Pascal.
 
 {% aTargetBlank "https://hyperscript.org", "_hyperscript" %} is
 programming language that can be used in HTML files
 to implement interactive features such as event handling.
 It also supports asynchronous operations such as
 fetching data from a server by sending an HTTP request.
+
+The original version of the game Myst was developed in HyperCard.
 
 The Home card contains buttons that navigate to commonly used stacks.
 
@@ -284,3 +294,9 @@ To tear off the Tools menu into a floating window for easier access ...
 - {% aTargetBlank "https://en.wikipedia.org/wiki/HyperCard",
   "HyperCard on Wikipedia" %}
 - {% aTargetBlank "https://hypercard.org", "hypercard.org" %}
+- {% aTargetBlank
+  "https://www.youtube.com/playlist?list=PL1GQPxft2cQh_KsYz399Hlq7FHPp7XhBJ",
+  "Eric's Edge" %} YouTube videos on HyperCard
+- {% aTargetBlank "https://hcsimulator.com", "HyperCard Simulator" %} - web-based
+- {% aTargetBlank "https://beyondloom.com/decker", "Decker" %}
+  open-source, web-based HyperCard clone
