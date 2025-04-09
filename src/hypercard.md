@@ -4,9 +4,9 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-<figure style="width: 60%">
+<figure style="width: 80%">
   <img alt="_hyperscript logo" style="border: 0"
-    src="/blog/assets/hyperscript-logo.png?v={{pkg.version}}">
+    src="/blog/assets/hypercard-welcome.jpg?v={{pkg.version}}">
 </figure>
 
 ## Overview
@@ -25,17 +25,44 @@ The Home card contains buttons that navigate to commonly used stacks.
 
 ## Basic Operations
 
+## Stacks
+
 To create a new stack:
 
 - Select File ... New Stack...
 - Enter a stack name.
-- Select an option from the "Card size" dropdown such as "Large".
+- Select an option from the "Card size" dropdown with the following options:
+  - Small: 416 x 240
+  - Classic: 512 x 342
+  - PowerBook: 640 x 400
+  - Large: 640 x 480
+  - MacPaint: 576 x 720
+  - Window: 640 x 480 (same as Large)
 - Optionally check "Open stack in new window".
 - Click the Save button.
+
+To get information about the current stack:
+
+- Select Objects ... Stack Info... to open a Stack Info dialog.
+
+  This enables renaming the stack, resizing it, and editing its script.
+  It also gives the number of cards in the stack
+  and the number of backgrounds used.
+
+To edit a background used by the current stack:
+
+- Select Edit ... Background or press cmd-b to toggle background mode.
+  This is indicated by a hatched pattern in the menu bar.
+
+## Cards
 
 To add a card to the current stack:
 
 - Select Edit ... New Card or press cmd-n.
+
+To delete the current card:
+
+- Select Edit ... Delete Card.
 
 ### Buttons
 
@@ -48,15 +75,32 @@ To add a button to the current card.
 - Click the "Script..." button.
 - Enter the command(s) to execute when the button is clicked.
 
+To add an icon to a button:
+
+- Click the Button tool.
+- Double-click a button to open its "Button Info" dialog.
+- Click the "Icon..." button.
+- Click the OK button.
+- Optionally remove the text name on the button by unchecking "Show Name".
+- Optionally cause the button to highlight when it is clicked
+  by checking the "Auto Hilite" checkbox.
+
 To move a button:
 
-- Select the button tool.
+- Select the Button tool.
 - Drag the inside or edge of any button.
 
 To resize a button:
 
-- Select the button tool.
+- Select the Button tool.
 - Drag any corner of a button.
+
+To edit the script for a button:
+
+- Select the Button tool.
+- Double-click a button to open its "Button Info" dialog.
+- Click the "Script..." button.
+- Enter commands.
 
 To delete a button:
 
