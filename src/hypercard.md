@@ -842,6 +842,10 @@ To send a message to the next level up in the object hierarchy,
 use the `send` keyword.
 For example, `send "messageName [parameterList]" to object.
 
+### Debug Menu
+
+TODO: What causes the Debug menu to appear? Can you trigger it?
+
 ## Search Paths
 
 HyperCard searches specific directories to find
