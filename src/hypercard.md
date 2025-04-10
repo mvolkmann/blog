@@ -318,6 +318,17 @@ To resize a button:
 - Select the Button tool.
 - Drag any corner of a button.
 
+To link a button so clicking it navigates to another card:
+
+- Select the Button tool.
+- Double-click a button to open its "Button Info" dialog.
+- Click the "LinkTo..." button.
+- Navigate to another card.
+- In the "Link" dialog, click the "This Card" button.
+
+This is alternative to writing a script.
+It writes the script for you, adding the line "go to card id {some-id}".
+
 To edit the script for a button:
 
 - Select the Button tool.
