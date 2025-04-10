@@ -755,13 +755,17 @@ Functions can be defined inside scripts with the following syntax:
 
 ```text
 function fnName -- no parameters
+  ...
 end fnName
 
-function fnName param1, param2 -- two parameters
+function fnName param1, param2 -- parameters separated by commas
+  ...
 end fnName
 ```
 
-Functions can be called with the following syntax:
+The `return` keyword is used to return a value from a function.
+
+Functions are called with the following syntax:
 
 ```text
 fnName()
@@ -815,6 +819,12 @@ end mouseUp
 
 Using the `put` command to set `message` or `msg`
 also opens the message box and puts it there.
+
+### Messages
+
+To send a message to the next level up in the object hierarchy,
+use the `send` keyword.
+For example, `send "messageName [parameterList]" to object.
 
 ## Search Paths
 
