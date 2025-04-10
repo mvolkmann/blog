@@ -415,9 +415,13 @@ To delete a text field:
 - Click an object to select it.
 - Press the delete key, or select Edit ... Cut Field, or press cmd-x.
 
+To execute a HyperTalk command that was entered in a text field,
+run the command `do card field "{field-name}"`.
+
 ## Drawing
 
-To draw a shape, select one of the tools from the Tools menu.
+To draw a shape, select a tool from the Tools menu
+and drag the mouse in a card.
 
 ## Sounds
 
@@ -657,6 +661,25 @@ end mouseUp
 
 Using the `put` command to set `message` or `msg`
 also opens the message box and puts it there.
+
+## Functions
+
+Functions can be defined inside scripts with the following syntax:
+
+```text
+function fnName -- no parameters
+end fnName
+
+function fnName param1, param2 -- two parameters
+end fnName
+```
+
+Functions can be called with the following syntax:
+
+```text
+fnName()
+fnName(arg1, arg2)
+```
 
 ## Search Paths
 
