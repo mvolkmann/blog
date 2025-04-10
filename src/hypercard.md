@@ -609,6 +609,44 @@ which I placed in the Applications directory.
 - go home
 - go stack "stack-name"
 
+To display a dialog box that displays specified text
+and includes an "OK" button that can be clicked to dismiss it,
+use the `answer` command. For example:
+
+```text
+answer "Good morning!"
+```
+
+To display a dialog box that asks the user a question
+and includes a set of buttons they can click,
+use the `answer` command.
+The result will be in a variable named `result`.
+For example:
+
+```text
+on mouseUp
+  answer "Are you happy?" with Yes or No or Maybe
+  put it into card field "user name" -- can change card to background
+end mouseUp
+```
+
+To display a dialog box that asks the user a question
+and includes a text field where they can type an answer,
+along with OK and Cancel buttons, use the `ask` command.
+The result will be in a variable named `it`.
+For example the following script can be attached to a button:
+
+```text
+on mouseUp
+  ask "What is your name?"
+  put "Hello," && it & "!" into greeting
+  put greeting into card field "user name"
+end mouseUp
+```
+
+Using the `put` command to set `message` or `msg`
+also opens the message box and puts it there.
+
 ## Search Paths
 
 HyperCard searches specific directories to find
