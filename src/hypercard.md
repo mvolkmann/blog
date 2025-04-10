@@ -96,10 +96,14 @@ To get information about the current stack:
   It also gives the number of cards in the stack
   and the number of backgrounds used.
 
-To edit a background used by the current stack:
+To edit a background used by the current card:
 
 - Select Edit ... Background or press cmd-b to toggle background mode.
   This is indicated by a hatched pattern in the menu bar.
+
+To share a stack with others, send them the stack file.
+They can open the stack by double-clicking it,
+or by launching HyperCard and selecting File ... Open Stack...
 
 ## Cards
 
@@ -491,8 +495,13 @@ TODO: What image formats can be pasted into cards?
 
 ## Scripts
 
-Scripts handle messages that are triggered by many actions.
-The are implemented with the {% aTargetBlank
+Scripts are associated with a specific object
+such as a button, text field, or card.
+They handle messages that are triggered by many actions.
+A single script can define any number of message handlers
+that each begin with the `on` keyword.
+
+Scripts are implemented with the {% aTargetBlank
 "https://en.wikipedia.org/wiki/HyperTalk", "HyperTalk" %} language
 which has an English-like syntax.
 The messages travel through the object hierarchy,
@@ -527,7 +536,7 @@ For example, in a stack with two cards where the first card contains a button:
 - Press cmd-s to save the changes.
 - Press cmd-w to close the script window.
 
-- Select Object ... Card Info...
+- Select Objects ... Card Info...
 - Click the "Script" button.
 - Enter the following:
 
@@ -537,7 +546,7 @@ For example, in a stack with two cards where the first card contains a button:
   end mouseUp
   ```
 
-- Select Object ... Stack Info...
+- Select Objects ... Stack Info...
 - Click the "Script" button.
 - Enter the following:
 
@@ -565,9 +574,10 @@ Any errors are only found when the script is run.
 
 ## Color
 
-To use colors in HyperCard, install the color tools.
+Some amount of color support was added to HyperCard in version 2.3.
+To use colors, install the color tools.
 This requires more than the default amount of memory.
-To add more:
+To add more memory:
 
 - Quit HyperCard if it is running.
 - Locate and select the HyperCard app in the Finder.
@@ -625,7 +635,12 @@ which I placed in the Applications directory.
 
 ## HyperTalk
 
-HyperTalk is the scripting language used by HyperCard.
+HyperTalk ...
+
+- is the scripting language used by HyperCard.
+- is interpreted at run-time.
+- supports message passing and message handlers.
+- implements a simple database.
 
 The commands (a.k.a. statements) supported by HyperTalk
 are documented at {% aTargetBlank
@@ -862,21 +877,40 @@ move your files into one of the directories already in the lists.
 
 ## User Levels
 
-Each stack can specify one of the following user levels:
+HyperCard supports the following five user levels:
 
-- Browsing
-- Typing
-- Painting
-- Authoring
-- Scripting
+- 5 Browsing: read-only
+- 4 Typing: can enter text in text fields
+- 3 Painting: can use tools to draw and paint on cards
+- 2 Authoring: can add and modify buttons and text fields on cards
+- 1 Scripting: can add and modify scripts associated with any object
 
-To set the level:
+To set the level for the HyperCard application as a whole:
 
 - Open the Home stack by pressing cmd-h.
 - Click the left-pointing triangle in the lower-left.
-- Click one of the five level.
+- Click one of the five levels.
 
-TODO: Document these.
+Alternative, open the message box and enter
+`set [the] userLevel to n` where n is a number from 1 to 5.
+
+Each stack can specify its own user levels.
+To do this:
+
+- Set the HyperCard-wide user level to 5 (see above).
+- Open the stack whose user level will be changed.
+- Select Objects ... Stack Info.
+- In the Stack Info dialog, click the "Script..." button.
+- Enter the following which runs every time a user opens the stack:
+
+  ```text
+  on openStack
+    set [the] userLevel to n -- replace n with a number from 1 to 5
+  end openStack
+  ```
+
+To restore the highest user level for a stack with a restricted level,
+open the message box (cmd-m) and enter `set [the] userLevel to 5`.
 
 ## Popular Stacks
 
