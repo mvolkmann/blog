@@ -81,6 +81,9 @@ To make it easy to open your stacks from the Home stack:
   end mouseUp
   ```
 
+- In the Home stack, optionally rename both the card named "Card 3"
+  and the button that contains "Card 3" to "My Stacks".
+
 - Change "go to" to "open" to open the stack in a new window.
 - Select the Browse tool.
 - From now on you can click this button to navigate to your stack.
@@ -231,6 +234,8 @@ The tools include:
     The text style must be specified by selecting Edit ... Text Style...
     before typing the text.
     Then click where the text should go and begin typing.
+
+    For text that may need to be edited later, use a text field instead.
 
   - **Regular Polygon**
 
@@ -626,6 +631,17 @@ The commands (a.k.a. statements) supported by HyperTalk
 are documented at {% aTargetBlank
 "https://www.hypercard.center/HyperTalkReference#commands",
 "HyperTalk Reference" %}.
+
+### Message Box
+
+One way to test commands is to enter them in the message box.
+To open the message box, select Go ... Message or press cmd-m.
+Then enter commands separated by semicolons and press return to execute them.
+
+### Comments
+
+Single-line comments begin with `--` and extend to the end of the line.
+Multi-line comments are not supported.
 
 ### Data Types
 
