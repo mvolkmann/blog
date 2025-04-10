@@ -618,11 +618,152 @@ The "Open Stack" dialog contains:
 The "Home" stack is inside the "HyperCard 2.4" directory
 which I placed in the Applications directory.
 
-## HyperTalk Commands
+## HyperTalk
 
-- go first|next|prev|last
-- go home
-- go stack "stack-name"
+HyperTalk is the scripting language used by HyperCard.
+
+The commands (a.k.a. statements) supported by HyperTalk
+are documented at {% aTargetBlank
+"https://www.hypercard.center/HyperTalkReference#commands",
+"HyperTalk Reference" %}.
+
+### Data Types
+
+HyperTalk supports the following data types:
+
+- booleans with the literal values `true` and `false`
+- numbers with literal values that are either integers or floating point
+- string with literal values delimited by double quotes
+- string lists that are a single string with commas delimiting the items
+- containers which are variables, buttons, and text fields
+
+To extract a substring from a string list, use the `of` keyword.
+For example:
+
+```text
+put "apple,banana,cherry" into fruits
+put item 2 of fruits into fruit -- sets to banana
+```
+
+### Variables
+
+Variables are not declared.
+
+To assign a value to a variable, use the `put` keyword.
+For example, `put 3.14159265 into pi`
+
+### Math
+
+HyperCard supports the arithmetic infix binary operators
+`+`, `-`, `*`, `\`, and `mod`.
+Normal precedence rules apply.
+Parentheses can be used to change the evaluation order.
+
+A "container" is a variable or field.
+
+To add a number to a container that already contains a number,
+use the `add` keyword. For example, `add 3 to total`.
+
+To subtract a number from a container that already contains a number,
+use the `subtract` keyword. For example, `subtract 3 from total`.
+
+To multiply a number in a container that already contains a number,
+use the `multiply` keyword. For example, `multiply total by 3`.
+
+To divide a number in a container that already contains a number,
+use the `divide` keyword. For example, `divide total by 3`.
+
+### Conditional Logic
+
+Conditional logic can be implemented with an if-then-else statement
+with the following syntax:
+
+````text
+if condition1 then
+  ...
+else if condition2 then
+  ...
+else
+  ...
+if
+
+### Iteration
+
+To repeat a set of statements forever, or until `exit repeat` is reached,
+use a `repeat` statement.  For example:
+
+```text
+repeat [forever]
+  ...
+  if condition then exit repeat
+  ...
+end repeat
+```
+
+To repeat a set of statements a given number of times
+use a `repeat for` statement.  For example:
+
+```text
+repeat [for] 5 [times]
+  ...
+end repeat
+```
+
+To repeat a set of statements until a condition is true
+use a `repeat until` statement.  For example:
+
+```text
+repeat until cowsComeHome
+  ...
+end repeat
+```
+
+To repeat a set of statements while a condition is true
+use a `repeat while` statement.  For example:
+
+```text
+repeat while cowsAreGone
+  ...
+end repeat
+```
+
+To iterate over a range of integers, use a `repeat with` statement.
+For example:
+
+```text
+repeat with name = start [down] to end
+  ...
+end repeat
+```
+
+### Functions
+
+Functions can be defined inside scripts with the following syntax:
+
+```text
+function fnName -- no parameters
+end fnName
+
+function fnName param1, param2 -- two parameters
+end fnName
+````
+
+Functions can be called with the following syntax:
+
+```text
+fnName()
+fnName(arg1, arg2)
+```
+
+### Navigation
+
+To go to another card or stack, use the following commands:
+
+- `go first|next|prev|last`
+- `go home`
+- `go stack "stack-name"`
+
+### Dialogs
 
 To display a dialog box that displays specified text
 and includes an "OK" button that can be clicked to dismiss it,
@@ -661,25 +802,6 @@ end mouseUp
 
 Using the `put` command to set `message` or `msg`
 also opens the message box and puts it there.
-
-## Functions
-
-Functions can be defined inside scripts with the following syntax:
-
-```text
-function fnName -- no parameters
-end fnName
-
-function fnName param1, param2 -- two parameters
-end fnName
-```
-
-Functions can be called with the following syntax:
-
-```text
-fnName()
-fnName(arg1, arg2)
-```
 
 ## Search Paths
 
