@@ -69,6 +69,28 @@ To create a new stack:
 - Optionally check "Open stack in new window".
 - Click the Save button.
 
+To make it easy to open your stacks from the Home stack:
+
+- Press cmd-h to open the Home stack.
+- Go to Card 3, 4, or 5 that all say
+  "You can add your own buttons to this card."
+- Add a button to one of those cards.
+- Select the Button tool.
+- Double-click the button open its Info dialog.
+- Change the "Button Name" to the name of your stack.
+- Click the "Script..." button.
+- Enter the following, replacing the path with one for your stack:
+
+  ```text
+  on mouseUp
+    go to stack "MacOS_HD:Documents:HyperCard Stacks:My First Stack"
+  end mouseUp
+  ```
+
+- Change "go to" to "open" to open the stack in a new window.
+- Click the Browse tool.
+- From now on you can click this button to navigate to your stack.
+
 To get information about the current stack:
 
 - Select Objects ... Stack Info... to open a Stack Info dialog.
@@ -93,6 +115,14 @@ for "Card Marked", "Don't Search Card", and "Can't Delete Card".
 To delete the current card:
 
 - Select Edit ... Delete Card.
+
+To copy the current card and paste the copy after another card:
+
+- Select Edit ... Copy Card.
+- Navigate to the destination card.
+- Select Edit ... Paste Card.
+
+The background of new card will be the same as that of the copied card.
 
 ## Tools
 
@@ -378,10 +408,18 @@ to toggle between background and foreground modes.
 
 To add a new background to the current stack,
 select Objects ... New Background.
+This creates a new card that uses the new background,
+but it will not be in background mode.
+Press cmd-b to enter background mode and add content.
+Then press cmd-b again to enter foreground mode and add content.
+Cards created after this one will use the new background by default.
 
-TODO: How can a stack use more than one background?
-TODO: How can a stack use more than one background?
-TODO: How do you select the background that should be used by a particular card?
+To assign a name to a background, select Options ... Bkgnd Info...
+and enter/change the "Background Name".
+
+It seems there is no way to change the background used by an existing card.
+The only option seems to be copying the content from the existing card
+to a new card that use the desired background.
 
 ## Card Transitions
 
@@ -394,7 +432,7 @@ One source of images is other stacks.
 For example, the "Art Bits" stack is linked from
 the first card of the Home stack.
 It contains links to the cards with images in the following categories:
-Beasts, Buildings, Communication and media, Hypercard miscellany,
+Beasts, Buildings, Communication and media, HyperCard miscellany,
 Icon ideas, Macintosh miscellany, Nature and science, Odds and ends,
 People, Small treasures, and Transportation.
 
@@ -405,6 +443,8 @@ and "Background Art".
 To get an image, open a stack, find a desired image on one of its cards,
 use the selection tools to select it, copy it, and
 paste it onto a card in your stack.
+
+TODO: What image formats can be pasted into cards?
 
 ## Scripts
 
@@ -543,6 +583,20 @@ which I placed in the Applications directory.
 - go home
 - go stack "stack-name"
 
+## Search Paths
+
+HyperCard searches specific directories to find
+stacks, applications, and documents.
+To view these directory lists:
+
+- Open the home stack by pressing cmd-h.
+- Click the left-pointing triangle in the lower-left two times.
+- Click one of the buttons labeled Stacks, Applications, or Documents.
+- Optionally edit the list of directories.
+
+An alternative to modifying the directory lists is to
+move your files into one of the directories already in the lists.
+
 ## User Levels
 
 Each stack can specify one of the following user levels:
@@ -552,6 +606,12 @@ Each stack can specify one of the following user levels:
 - Painting
 - Authoring
 - Scripting
+
+To set the level:
+
+- Open the Home stack by pressing cmd-h.
+- Click the left-pointing triangle in the lower-left.
+- Click one of the five level.
 
 TODO: Document these.
 
