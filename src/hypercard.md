@@ -26,12 +26,6 @@ The newest version of Mac OS that can run HyperCard is 9.2.2.
 HyperCard was developed at Apple by Bill Atkinson and Dan Winkler,
 using Apple Pascal.
 
-{% aTargetBlank "https://hyperscript.org", "_hyperscript" %} is
-programming language that can be used in HTML files
-to implement interactive features such as event handling.
-It also supports asynchronous operations such as
-fetching data from a server by sending an HTTP request.
-
 The original version of the game Myst was developed in HyperCard.
 
 The Home card contains buttons that navigate to commonly used stacks.
@@ -88,7 +82,7 @@ To make it easy to open your stacks from the Home stack:
   ```
 
 - Change "go to" to "open" to open the stack in a new window.
-- Click the Browse tool.
+- Select the Browse tool.
 - From now on you can click this button to navigate to your stack.
 
 To get information about the current stack:
@@ -146,10 +140,14 @@ The tools include:
   - **Button**
 
     This enters Button mode which enables editing existing buttons.
+    When in this mode, a thin black border is drawn around all buttons
+    so they can be located even when they are transparent with no text or icon.
 
   - **Field**
 
     This enters Field mode which enables editing existing text fields.
+    When in this mode, a thin black border is drawn around all text fields
+    so they can be located even when they are transparent with no text.
 
 - Row #2
 
@@ -198,6 +196,7 @@ The tools include:
 
     This draws a rectangle, specified by clicking at the
     location of any corner and dragging to the opposite corner.
+    To draw a square, hold down the shift key while dragging.
 
   - **Round Rectangle**
 
@@ -294,13 +293,13 @@ To add a button to the current card.
 - Select Objects ... New Button.
   This adds a new button to the center of the current card.
 - Double-click the button to open its "Button Info" dialog.
-- Change "Button Name".
+- Change "Button Name" to the text to appear on the button.
 - Click the "Script..." button.
 - Enter the command(s) to execute when the button is clicked.
 
 To add an icon to a button:
 
-- Click the Button tool.
+- Select the Button tool.
 - Double-click a button to open its "Button Info" dialog.
 - Click the "Icon..." button.
 - Click the OK button.
@@ -328,9 +327,33 @@ To edit the script for a button:
 
 To delete a button:
 
-- Click the Button tool.
+- Select the Button tool.
 - Click a button to select it.
 - Press the delete key, or select Edit ... Cut Button, or press cmd-x.
+
+To create special kinds of buttons:
+
+- Select the Button tool.
+- Double-click a button to open its Info dialog.
+- Optionally remove the "Button Name" so it contains no text.
+- Optionally change the Style to one of the following:
+
+  - Transparent
+  - Opaque
+  - Rectangle
+  - Round Rectangle
+  - Shadow
+  - Check Box: TODO: Investigate
+  - Radio Button: TODO: Investigate
+  - Standard: TODO: Investigate
+  - Default: TODO: Investigate
+  - Oval: TODO: Investigate
+  - Popup: TODO: Investigate
+
+To make a section of an image clickable,
+add a button that is transparent and has no label.
+Unfortunately the clickable area must be rectangular.
+Modify the button script to execute HyperTalk commands when clicked.
 
 ## Text Fields
 
@@ -449,6 +472,9 @@ TODO: What image formats can be pasted into cards?
 ## Scripts
 
 Scripts handle messages that are triggered by many actions.
+The are implemented with the {% aTargetBlank
+"https://en.wikipedia.org/wiki/HyperTalk", "HyperTalk" %} language
+which has an English-like syntax.
 The messages travel through the object hierarchy,
 searching for an object that handles them.
 The levels of the object hierarchy, from bottom to top are:
@@ -501,7 +527,7 @@ For example, in a stack with two cards where the first card contains a button:
   end mouseUp
   ```
 
-- Click the Browse tool.
+- Select the Browse tool.
 - Click outside the button.
 - Notice that the `beep` command runs because the card script is run.
 - Click the button.
