@@ -675,22 +675,35 @@ use the `divide` keyword. For example, `divide total by 3`.
 
 ### Conditional Logic
 
-Conditional logic can be implemented with an if-then-else statement
-with the following syntax:
+Conditional logic can be implemented with an if-then-else statement.
+When the branches only contain single statements,
+the following syntax can be used:
 
-````text
+```text
+if condition1
+then statement1
+else if condition2
+then statement2
+else statement3
+```
+
+When the branches can contain multiple statements,
+the following syntax can be used:
+
+```text
 if condition1 then
-  ...
+  statements1
 else if condition2 then
-  ...
+  statements2
 else
-  ...
-if
+  statements3
+end if
+```
 
 ### Iteration
 
 To repeat a set of statements forever, or until `exit repeat` is reached,
-use a `repeat` statement.  For example:
+use a `repeat` statement. For example:
 
 ```text
 repeat [forever]
@@ -701,7 +714,7 @@ end repeat
 ```
 
 To repeat a set of statements a given number of times
-use a `repeat for` statement.  For example:
+use a `repeat for` statement. For example:
 
 ```text
 repeat [for] 5 [times]
@@ -710,7 +723,7 @@ end repeat
 ```
 
 To repeat a set of statements until a condition is true
-use a `repeat until` statement.  For example:
+use a `repeat until` statement. For example:
 
 ```text
 repeat until cowsComeHome
@@ -719,7 +732,7 @@ end repeat
 ```
 
 To repeat a set of statements while a condition is true
-use a `repeat while` statement.  For example:
+use a `repeat while` statement. For example:
 
 ```text
 repeat while cowsAreGone
@@ -746,7 +759,7 @@ end fnName
 
 function fnName param1, param2 -- two parameters
 end fnName
-````
+```
 
 Functions can be called with the following syntax:
 
