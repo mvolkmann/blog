@@ -389,12 +389,18 @@ TODO: Add detail on these.
 
 ## Images
 
-One source of images is other stacks such as "Art Bits".
-The "Art Bits" stack that is linked from the Home card
-contains links to the cards with images in the following categories:
+One source of images is other stacks.
+
+For example, the "Art Bits" stack is linked from
+the first card of the Home stack.
+It contains links to the cards with images in the following categories:
 Beasts, Buildings, Communication and media, Hypercard miscellany,
 Icon ideas, Macintosh miscellany, Nature and science, Odds and ends,
 People, Small treasures, and Transportation.
+
+Another source is the stacks linked from the "Stack Kit" card of the Home stack.
+See "Readymade Buttons", "Readymade Fields", "Stack Templates",
+and "Background Art".
 
 To get an image, open a stack, find a desired image on one of its cards,
 use the selection tools to select it, copy it, and
@@ -471,27 +477,65 @@ When changes to a script are saved,
 the script is not checked for possible errors.
 Any errors are only found when the script is run.
 
+## Color
+
+To use colors in HyperCard, install the color tools.
+This requires more than the default amount of memory.
+To add more:
+
+- Quit HyperCard if it is running.
+- Locate and select the HyperCard app in the Finder.
+- Press cmd-i to open its Info dialog.
+- In the Show dropdown, select Memory.
+- Try changing the "Minimum Size" to 5000 K
+  and the "Preferred Size" to 10000 K.
+- Close the Info dialog.
+- Launch HyperCard.
+
+To enable use of colors:
+
+- Click "Color Tools are OFF" on the Home card to toggle it ON.
+  This will add a Color menu that contains the menu item "Open Coloring Tools".
+- Select that menu item to open the color palette.
+  This has buttons labeled Button, Field, Pict, Rect, and Paint at the top.
+- Select one of the buttons to indicate
+  the kind of object for which a color will be selected.
+- Select a color.
+
+TODO: Why does the Tools menu disappear when the Color palette is open?
+
 ## Keyboard Shortcuts
 
-| Shortcut | Action                                           |
-| -------- | ------------------------------------------------ |
-| cmd-h    | Home                                             |
-| cmd-~    | go to Back to previous card                      |
-| cmd-1    | go to First card in stack                        |
-| cmd-2    | go to Prev card in stack                         |
-| cmd-3    | go to Next card in stack                         |
-| cmd-4    | go to Last card in stack                         |
-| cmd-b    | toggle Background mode                           |
-| cmd-c    | copy                                             |
-| cmd-e    | open Scroll window                               |
-| cmd-f    | Find within current stack                        |
-| cmd-i    | open Icon editor                                 |
-| cmd-m    | open Message box (where commands can be entered) |
-| cmd-n    | New card                                         |
-| cmd-r    | Recent cards                                     |
-| cmd-v    | past                                             |
-| cmd-x    | cut                                              |
-| cmd-z    | undo                                             |
+| Shortcut | Action                                                       |
+| -------- | ------------------------------------------------------------ |
+| cmd-h    | Home                                                         |
+| cmd-~    | go to Back to previous card                                  |
+| cmd-1    | go to First card in stack                                    |
+| cmd-2    | go to Prev card in stack                                     |
+| cmd-3    | go to Next card in stack                                     |
+| cmd-4    | go to Last card in stack                                     |
+| cmd-b    | toggle Background mode                                       |
+| cmd-c    | copy                                                         |
+| cmd-e    | open Scroll window                                           |
+| cmd-f    | Find within current stack                                    |
+| cmd-i    | open Icon editor                                             |
+| cmd-m    | open Message box (where commands can be entered)             |
+| cmd-o    | open a stack                                                 |
+| cmd-l    | go to the next open HyperCard window                         |
+| cmd-n    | New card                                                     |
+| cmd-r    | open window of recently visited cards (click one to open it) |
+| cmd-v    | past                                                         |
+| cmd-x    | cut                                                          |
+| cmd-z    | undo                                                         |
+
+The "Open Stack" dialog contains:
+
+- "Show Preview" checkbox that causes a thumbnail of the first card
+  of the selected stack to be displayed inside the dialog.
+- "Open stack in new window" which does what it says when a stack is opened.
+
+The "Home" stack is inside the "HyperCard 2.4" directory
+which I placed in the Applications directory.
 
 ## HyperTalk Commands
 
@@ -500,6 +544,14 @@ Any errors are only found when the script is run.
 - go stack "stack-name"
 
 ## User Levels
+
+Each stack can specify one of the following user levels:
+
+- Browsing
+- Typing
+- Painting
+- Authoring
+- Scripting
 
 TODO: Document these.
 
