@@ -507,6 +507,8 @@ such as a button, text field, or card.
 They handle messages that are triggered by many actions.
 A single script can define any number of message handlers
 that each begin with the `on` keyword.
+Each message handler listens for a specific kind of event
+and executes the code inside when triggered.
 
 Scripts are implemented with the {% aTargetBlank
 "https://en.wikipedia.org/wiki/HyperTalk", "HyperTalk" %} language
@@ -525,6 +527,11 @@ The levels of the object hierarchy, from bottom to top are:
 This is also the order in which scripts are most commonly defined,
 with button scripts being the most common
 and HyperCard app scripts being the least common.
+
+You cannot control which scripts will exist
+at the home card and HyperCard levels
+when other users use your stacks,
+so it is risky to depend on those.
 
 For example, in a stack with two cards where the first card contains a button:
 
@@ -859,6 +866,13 @@ Using the `put` command to set `message` or `msg`
 also opens the message box and puts it there.
 
 ### Messages
+
+Message are sent when:
+
+- a system event occurs such as opening a stack,
+  opening a card, or clicking a button.
+- a script explicitly sends an event with the `send` command
+- the user sends an event from the message box
 
 To send a message to the next level up in the object hierarchy,
 use the `send` keyword.
