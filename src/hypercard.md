@@ -875,8 +875,11 @@ Message are sent when:
 - the user sends an event from the message box
 
 To send a message to the next level up in the object hierarchy,
-use the `send` keyword.
-For example, `send "messageName [parameterList]" to object.
+use the `pass` command.
+For example, `pass "messageName [parameterList]"`.
+
+To send a message to another object, use the `send` command.
+For example, `send "messageName [parameterList]" to objectReference`.
 
 ### Debug Menu
 
