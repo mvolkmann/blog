@@ -125,6 +125,13 @@ To copy the current card and paste the copy after another card:
 
 The background of new card will be the same as that of the copied card.
 
+Sadly there is no easy way to:
+
+- reorder the cards in a stack
+- change the background used by an existing card
+
+This seem like large oversights!
+
 ## Tools
 
 The tools menu contains a grid of buttons
@@ -297,25 +304,42 @@ select Options ... Draw Filled.
 
 ## Buttons
 
+There are four basic kinds of buttons:
+
+1. Buttons that perform an action when clicked.
+   These can contain text, an icon, both, or neither.
+1. A check box
+1. A radio button
+1. Buttons that display a popup when they are clicked. TODO: Verify this.
+
 To add a button to the current card.
 
 - Select Objects ... New Button.
   This adds a new button to the center of the current card.
 - Double-click the button to open its "Button Info" dialog.
-- Change "Button Name" to the text to appear on the button.
-- Click the "Script..." button.
-- Enter the command(s) to execute when the button is clicked.
+- Change "Button Name" to be a name used to refer to the button
+  or the text that will appear on it.
+- Optionally uncheck the "Show Name" checkbox to remove the text.
+- Optionally click the "Icon..." button to add an icon to the button.
+  Icon sizes cannot be modified.
+- Optionally change the Style to one of the following:
 
-To add an icon to a button:
+  - Transparent
+  - Opaque
+  - Rectangle
+  - Round Rectangle
+  - Shadow
+  - Check Box: Can click the checkbox or the name to toggle the value of its `hilite` property
+  - Radio Button: TODO: Investigate
+  - Standard: TODO: Investigate
+  - Default: TODO: Investigate
+  - Oval: TODO: Investigate
+  - Popup: TODO: Investigate
 
-- Select the Button tool.
-- Double-click a button to open its "Button Info" dialog.
-- Click the "Icon..." button.
-- Click the OK button.
-- Optionally remove the text name on the button by unchecking "Show Name".
 - Optionally cause the button to highlight when it is clicked
   by checking the "Auto Hilite" checkbox.
-- Icon sizes cannot be modified.
+- Click the "Script..." button.
+- Enter the command(s) to execute when the button is clicked.
 
 To move a button:
 
@@ -342,7 +366,7 @@ To configure a button so clicking it navigates to another card or stack:
   - In the "Link" dialog, click the "This Card" button.
 
 These are alternatives to writing a script.
-They writes the script for you, adding a `go` command
+They write the script for you, adding a `go` command
 that is executed when the user clicks the button.
 
 To edit the script for a button:
@@ -358,24 +382,10 @@ To delete a button:
 - Click a button to select it.
 - Press the delete key, or select Edit ... Cut Button, or press cmd-x.
 
-To create special kinds of buttons:
-
-- Select the Button tool.
-- Double-click a button to open its Info dialog.
-- Optionally remove the "Button Name" so it contains no text.
-- Optionally change the Style to one of the following:
-
-  - Transparent
-  - Opaque
-  - Rectangle
-  - Round Rectangle
-  - Shadow
-  - Check Box: TODO: Investigate
-  - Radio Button: TODO: Investigate
-  - Standard: TODO: Investigate
-  - Default: TODO: Investigate
-  - Oval: TODO: Investigate
-  - Popup: TODO: Investigate
+To get the value of a check box,
+use the command `get [the] hilite of {button-reference}`.
+To put the value of a check box into the message box for testing,
+use the command `put [the] hilite of {button-reference} into message [box]`.
 
 To make a section of an image clickable,
 add a button that is transparent and has no label.
@@ -582,6 +592,16 @@ For example, in a stack with two cards where the first card contains a button:
 When editing a script, press the tab key to format it
 which indents the lines properly.
 
+Another interesting example:
+
+```text
+on mouseUp
+  get the length of card field "user name"
+  multiply it by 2
+  answer it
+end mouseUp
+```
+
 When changes to a script are saved,
 the script is not checked for possible errors.
 Any errors are only found when the script is run.
@@ -652,7 +672,7 @@ which I placed in the Applications directory.
 HyperTalk ...
 
 - is the scripting language used by HyperCard.
-- is interpreted at run-time.
+- is interpreted at run-time, but cached for executing again later.
 - supports message passing and message handlers.
 - implements a simple database.
 
@@ -692,7 +712,11 @@ put item 2 of fruits into fruit -- sets to banana
 
 ### Variables
 
-Variables are not declared.
+Variables exist in two scopes, local to a specific handler
+and global across all handlers.
+TODO: Are global variables at least scoped to one stack?
+Variables spring into existence when a value is assigned to them
+and are not declared.
 
 To assign a value to a variable, use the `put` keyword.
 For example, `put 3.14159265 into pi`
@@ -881,7 +905,9 @@ For example, `pass "messageName [parameterList]"`.
 To send a message to another object, use the `send` command.
 For example, `send "messageName [parameterList]" to objectReference`.
 
-### Debug Menu
+### Debugging
+
+TODO: Add content on debugging support.
 
 TODO: What causes the Debug menu to appear? Can you trigger it?
 
