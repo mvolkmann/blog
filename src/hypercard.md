@@ -335,7 +335,7 @@ To add a button to the current card.
   - Standard: TODO: Investigate
   - Default: TODO: Investigate
   - Oval: TODO: Investigate
-  - Popup: TODO: Investigate
+  - Popup: a dropdown containing options
 
 - Optionally cause the button to highlight when it is clicked
   by checking the "Auto Hilite" checkbox.
@@ -457,6 +457,15 @@ end mouseUp
 
 HyperTalk can store the name or id of a button/field in a variable,
 but it cannot store a button or field object in a variable.
+
+## Popup
+
+A button with the style "Popup" displays a dropdown list of options.
+To specify the options, click the "Contents..." button
+and enter each option on its own line.
+
+To get the currently selected value of a Popup,
+TODO: Finish this.
 
 ## Text Fields
 
