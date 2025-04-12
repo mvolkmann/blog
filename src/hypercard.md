@@ -329,8 +329,9 @@ To add a button to the current card.
   - Rectangle
   - Round Rectangle
   - Shadow
-  - Check Box: Can click the checkbox or the name to toggle the value of its `hilite` property
-  - Radio Button: TODO: Investigate
+  - Check Box: for a Boolean selection; click the checkbox or the name
+    to toggle the value of its `hilite` property
+  - Radio Button: for a set of mutually exclusive choices
   - Standard: TODO: Investigate
   - Default: TODO: Investigate
   - Oval: TODO: Investigate
