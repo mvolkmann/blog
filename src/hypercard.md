@@ -388,7 +388,7 @@ Buttons have the following properties:
 - `blendLevel`: transparency level
 - `enabled`: whether the button can be clicked
 - `family`: for associating radio buttons
-- `hilite`: whether the button is highlighted
+- `hilite`: whether the button is highlighted (or check box checked)
 - `icon`: an icon ID
 - `id`: unique identifier
 - `name`: a name used to refer to the button or the text displayed on it
@@ -397,11 +397,6 @@ Buttons have the following properties:
 - `showname`: whether the name is shown
 - `style`: one of the dropdown values
 - `visible`: whether it is visible
-
-To get the value of a check box,
-use the command `get [the] hilite of {button-reference}`.
-To put the value of a check box into the message box for testing,
-use the command `put [the] hilite of {button-reference} into message [box]`.
 
 Example button references include:
 
@@ -419,6 +414,49 @@ To make a section of an image clickable,
 add a button that is transparent and has no label.
 Unfortunately the clickable area must be rectangular.
 Modify the button script to execute HyperTalk commands when clicked.
+
+### Check Boxes
+
+To get the value of a check box,
+use the command `get [the] hilite of {button-reference}`.
+
+To put the value of a check box into the message box for testing,
+use the command `put [the] hilite of {button-reference} into message [box]`.
+
+### Radio Buttons
+
+In order to make a set of radio buttons mutually exclusive,
+the `family` property of each must be set to the same integer from 1 to 15.
+To set the family number (1-15) of a radio button,
+select a number from the Family dropdown or
+enter the following command in the message box:
+
+```text
+set the family of {button-reference} to {family-number}
+```
+
+To get the name of the selected radio button:
+
+```text
+on findSelectedRadioButton familyName
+  repeat with i = 1 to the number of buttons
+    if the family of button i is familyName then
+      if the hilite of button i then
+        put "Selected radio button: " & the name of button i into the message box
+        return the name of button i
+      end if
+    end if
+  end repeat
+
+  -- If no button is selected
+  put "No button selected in family " & familyName into the message box
+  return empty
+end findSelectedRadioButton
+
+on mouseUp
+  findSelectedRadioButton 3
+end mouseUp
+```
 
 ## Text Fields
 
