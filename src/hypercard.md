@@ -382,13 +382,38 @@ To delete a button:
 - Click a button to select it.
 - Press the delete key, or select Edit ... Cut Button, or press cmd-x.
 
+Buttons have the following properties:
+
+- `autoHilite`: whether it highlights when clicked
+- `blendLevel`: transparency level
+- `enabled`: whether the button can be clicked
+- `family`: for associating radio buttons
+- `hilite`: whether the button is highlighted
+- `icon`: an icon ID
+- `id`: unique identifier
+- `name`: a name used to refer to the button or the text displayed on it
+- `rectangle`: gives the position and size
+- `sharedHilite`: whether the highlight state is shared (radio-style)
+- `showname`: whether the name is shown
+- `style`: one of the dropdown values
+- `visible`: whether it is visible
+
 To get the value of a check box,
 use the command `get [the] hilite of {button-reference}`.
 To put the value of a check box into the message box for testing,
 use the command `put [the] hilite of {button-reference} into message [box]`.
-Example button references include `me` (when handler is attached to the button),
-`button "{name}"`, `button id {id}`, and `button {number-within-card}`.
+
+Example button references include:
+
+- `me` (when handler is attached to the button),
+- by name: `button "{name}"`
+- by id: `button id {id}`
+- by number: `button {number-within-card}`.
+- `the target` (when handler is attached the parent card)
+
 If the button is not on the current card, add `of card {card-reference}`.
+If the button is not on a card in the current stack,
+add `of card {card-reference} of stack "{stack-name"}`.
 
 To make a section of an image clickable,
 add a button that is transparent and has no label.
