@@ -386,6 +386,9 @@ To get the value of a check box,
 use the command `get [the] hilite of {button-reference}`.
 To put the value of a check box into the message box for testing,
 use the command `put [the] hilite of {button-reference} into message [box]`.
+Example button references include `me` (when handler is attached to the button),
+`button "{name}"`, `button id {id}`, and `button {number-within-card}`.
+If the button is not on the current card, add `of card {card-reference}`.
 
 To make a section of an image clickable,
 add a button that is transparent and has no label.
