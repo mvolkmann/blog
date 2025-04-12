@@ -438,25 +438,24 @@ set the family of {button-reference} to {family-number}
 To get the name of the selected radio button:
 
 ```text
-on findSelectedRadioButton familyName
+function selectedButtonName familyNumber
   repeat with i = 1 to the number of buttons
-    if the family of button i is familyName then
+    if the family of button i is familyNumber then
       if the hilite of button i then
-        put "Selected radio button: " & the name of button i into the message box
-        return the name of button i
+        return the short name of button i
       end if
     end if
   end repeat
-
-  -- If no button is selected
-  put "No button selected in family " & familyName into the message box
   return empty
-end findSelectedRadioButton
+end selectedButtonName
 
 on mouseUp
-  findSelectedRadioButton 3
+  put selectedButtonName(3) -- updates the message box
 end mouseUp
 ```
+
+HyperTalk can store the name or id of a button/field in a variable,
+but it cannot store a button or field object in a variable.
 
 ## Text Fields
 
