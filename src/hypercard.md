@@ -837,8 +837,30 @@ HyperTalk defines the following predefined constants:
 - horizontal positions `left`, `center`, and `right`
 - vertical positions `top`, `middle`, and `bottom`
 
-- `it`: stores the result of some commands
-- `the result`: stores the result of some operations
+- `it`: stores the result of some commands such as
+  `ask`, `get`, and `read from file`.
+
+- `result`: stores the result of some operations such as the following:
+
+  - `go`: Sets result to an error message if the card/stack can't be found
+  - visual effect: if the effect can't be completed
+  - `open file` - sets result to an error message if the file can't be opened
+  - `close file` - sets result if there's an error closing the file
+  - `read from file` - sets result to "EOF" when the end of file is reached
+  - `write to file` - sets result if the write operation fails
+  - external commands (XCMDs) to indicate success or failure
+  - external functions (XFCNs) to indicate success or failure
+  - `create stack`: if an error occurs
+  - `save stack`: if an error occurs
+  - `create` - if object creation fails
+  - `delete` - if object deletion fails
+  - `answer`: sets to the button that was clicked
+  - `answer file`: sets to the selected file path or empty if canceled
+  - `do`: sets to any error message from the executed script
+  - `value`: sets if the expression cannot be evaluated
+
+  Typically `result` is empty if an operation succeeds
+  and is set to an error message if it fails.
 
 - `me`: refers to the current object
 - `target`: refers to the object that received the message
@@ -1097,6 +1119,7 @@ answer "Good morning!"
 To display a dialog box that asks the user a question
 and includes a set of buttons they can click,
 use the `answer` command.
+By default, the buttons "OK" and "Cancel" are included.
 The result will be in a variable named `result`.
 For example:
 
@@ -1106,6 +1129,8 @@ on mouseUp
   put it into card field "user name" -- can change card to background
 end mouseUp
 ```
+
+To hide the value entered by the user, use `answer password`.
 
 To display a dialog box that asks the user a question
 and includes a text field where they can type an answer,
