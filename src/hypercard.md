@@ -590,10 +590,6 @@ TODO: What image formats can be pasted into cards?
 Scripts are associated with a specific object
 such as a button, text field, or card.
 They handle messages that are triggered by many actions.
-A single script can define any number of message handlers
-that each begin with the `on` keyword.
-Each message handler listens for a specific kind of event
-and executes the code inside when triggered.
 
 Scripts are implemented with the {% aTargetBlank
 "https://en.wikipedia.org/wiki/HyperTalk", "HyperTalk" %} language
@@ -617,6 +613,16 @@ You cannot control which scripts will exist
 at the home card and HyperCard levels
 when other users use your stacks,
 so it is risky to depend on those.
+
+When editing a script, press the tab key to format it
+which indents the lines properly.
+
+### Message Handlers
+
+A single script can define any number of message handlers
+that each begin with the `on` keyword.
+Each message handler listens for a specific kind of event
+and executes the code inside when triggered.
 
 For example, in a stack with two cards where the first card contains a button:
 
@@ -664,9 +670,6 @@ For example, in a stack with two cards where the first card contains a button:
   except on a button or text field.
 - Notice that the window flashes because the stack script is executed.
 
-When editing a script, press the tab key to format it
-which indents the lines properly.
-
 Another interesting example:
 
 ```text
@@ -680,6 +683,18 @@ end mouseUp
 When changes to a script are saved,
 the script is not checked for possible errors.
 Any errors are only found when the script is run.
+
+Message handlers for custom event names can be implemented in any script.
+For example:
+
+```text
+on doubleBeep
+  beep
+  beep
+end doubleBeep
+```
+
+To send an event, just use its name. For example, `doubleBeep`.
 
 ## Color
 
