@@ -762,6 +762,37 @@ One way to test commands is to enter them in the message box.
 To open the message box, select Go ... Message or press cmd-m.
 Then enter commands separated by semicolons and press return to execute them.
 
+To write a value to the message box, use the command
+`put {expression} into [the] message [box]`.
+The put command writes to the message box by default,
+so the previous command can shorted to `put {expression}`.
+
+### get Command
+
+The `get` command sets the value of the special variable `it`
+to the value of an expression. For example:
+
+```text
+get 2 + 3
+get the short date -- ex. 4/12/25; short is the default and can be omitted
+get the long date -- ex. Saturday, April 12, 2025
+get the text of field "My Field"
+get the label of button "My Button"
+get the hilite of button "My Checkbox"
+get item 2 of colorList -- colorList is a comma-delimited string
+```
+
+Two ways see the value of any variable, including `it`,
+are to use the `put` and `answer` commands.
+The `put` command writes the value to the message box.
+The `answer` command opens a dialog box containing the value.
+Both commands take an expression as an argument
+which can be just a variable name.
+
+Once the variable `it` is set by using the `get` command,
+it can be used in subsequent expressions.
+For example, `multiply it by 2`.
+
 ### Comments
 
 Single-line comments begin with `--` and extend to the end of the line.
