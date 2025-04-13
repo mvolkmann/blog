@@ -790,13 +790,17 @@ It supports many arguments described below.
 - Other ways to go to another card in the current stack
 
   - `go any card` - randomly selects a card?
-  - `go {stack-name}` - first card in a given stack (ex. "HyperCard Help")
+  - `go bkgnd "{background-name}"
 
 - Other ways to go to another card, possibly in another stack
 
   - `go back` - previously visited card
-  - `go forth` - opposite of `go back` used after that command
+  - `go bkgnd "{background-name}" of stack "{stack-name}"`
   - `go card id {card-id}`
+  - `go forth` - opposite of `go back` used after that command
+  - `go home` - Home stack
+  - `go [[to] stack] {stack-name} [in a new window]` -
+    first card in a given stack (ex. "HyperCard Help")
 
 ### get Command
 
