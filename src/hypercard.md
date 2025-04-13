@@ -585,6 +585,120 @@ paste it onto a card in your stack.
 
 TODO: What image formats can be pasted into cards?
 
+## Color
+
+Some amount of color support was added to HyperCard in version 2.3.
+To use colors, install the color tools.
+This requires more than the default amount of memory.
+To add more memory:
+
+- Quit HyperCard if it is running.
+- Locate and select the HyperCard app in the Finder.
+- Press cmd-i to open its Info dialog.
+- In the Show dropdown, select Memory.
+- Try changing the "Minimum Size" to 5000 K
+  and the "Preferred Size" to 10000 K.
+- Close the Info dialog.
+- Launch HyperCard.
+
+To enable use of colors:
+
+- Click "Color Tools are OFF" on the Home card to toggle it ON.
+  This will add a Color menu that contains the menu item "Open Coloring Tools".
+- Select that menu item to open the color palette.
+  This has buttons labeled Button, Field, Pict, Rect, and Paint at the top.
+- Select one of the buttons to indicate
+  the kind of object for which a color will be selected.
+- Select a color.
+
+TODO: Why does the Tools menu disappear when the Color palette is open?
+
+## Keyboard Shortcuts
+
+| Shortcut | Action                                                       |
+| -------- | ------------------------------------------------------------ |
+| cmd-h    | Home                                                         |
+| cmd-~    | go to Back to previous card                                  |
+| cmd-1    | go to First card in stack                                    |
+| cmd-2    | go to Prev card in stack                                     |
+| cmd-3    | go to Next card in stack                                     |
+| cmd-4    | go to Last card in stack                                     |
+| cmd-b    | toggle Background mode                                       |
+| cmd-c    | copy                                                         |
+| cmd-e    | open Scroll window                                           |
+| cmd-f    | Find within current stack                                    |
+| cmd-i    | open Icon editor                                             |
+| cmd-m    | open Message box (where commands can be entered)             |
+| cmd-o    | open a stack                                                 |
+| cmd-l    | go to the next open HyperCard window                         |
+| cmd-n    | New card                                                     |
+| cmd-r    | open window of recently visited cards (click one to open it) |
+| cmd-v    | past                                                         |
+| cmd-x    | cut                                                          |
+| cmd-z    | undo                                                         |
+
+The "Open Stack" dialog contains:
+
+- "Show Preview" checkbox that causes a thumbnail of the first card
+  of the selected stack to be displayed inside the dialog.
+- "Open stack in new window" which does what it says when a stack is opened.
+
+The "Home" stack is inside the "HyperCard 2.4" directory
+which I placed in the Applications directory.
+
+## HyperTalk
+
+HyperTalk ...
+
+- is the scripting language used by HyperCard.
+- has an English-like syntax.
+- is interpreted at run-time, but cached for executing again later.
+- supports message passing (events) and message handlers.
+- implements a simple database.
+
+The commands (a.k.a. statements) supported by HyperTalk
+are documented at {% aTargetBlank
+"https://www.hypercard.center/HyperTalkReference#commands",
+"HyperTalk Reference" %}.
+
+### Message Box
+
+One way to test commands is to enter them in the message box.
+To open the message box, select Go ... Message or press cmd-m.
+Then enter commands separated by semicolons and press return to execute them.
+
+To write a value to the message box, use the command
+`put {expression} into [the] message [box]`.
+The put command writes to the message box by default,
+so the previous command can shorted to `put {expression}`.
+
+### Comments
+
+Single-line comments begin with `--` and extend to the end of the line.
+Multi-line comments are not supported.
+
+### Data Types
+
+HyperTalk supports the following data types:
+
+- booleans with the literal values `true` and `false`
+- numbers with literal values that are either integers or floating point
+- string with literal values delimited by double quotes
+- string lists that are a single string with commas delimiting the items
+- containers which are variables, buttons, and text fields
+
+To concatenate strings, or values that can be converted to strings,
+use the binary operators `&` and `&&`.
+The double ampersand adds a space between the values.
+
+To extract a substring from a string list, use the `of` keyword.
+For example:
+
+```text
+put "apple,banana,cherry" into fruits
+put item 2 of fruits into fruit -- sets to banana
+```
+
 ## Scripts
 
 Scripts are associated with a specific object
@@ -695,116 +809,20 @@ end doubleBeep
 ```
 
 To send an event, just use its name. For example, `doubleBeep`.
+If no handler is found for the event, a dialog that says
+"Can't understand {message}." will open.
 
-## Color
-
-Some amount of color support was added to HyperCard in version 2.3.
-To use colors, install the color tools.
-This requires more than the default amount of memory.
-To add more memory:
-
-- Quit HyperCard if it is running.
-- Locate and select the HyperCard app in the Finder.
-- Press cmd-i to open its Info dialog.
-- In the Show dropdown, select Memory.
-- Try changing the "Minimum Size" to 5000 K
-  and the "Preferred Size" to 10000 K.
-- Close the Info dialog.
-- Launch HyperCard.
-
-To enable use of colors:
-
-- Click "Color Tools are OFF" on the Home card to toggle it ON.
-  This will add a Color menu that contains the menu item "Open Coloring Tools".
-- Select that menu item to open the color palette.
-  This has buttons labeled Button, Field, Pict, Rect, and Paint at the top.
-- Select one of the buttons to indicate
-  the kind of object for which a color will be selected.
-- Select a color.
-
-TODO: Why does the Tools menu disappear when the Color palette is open?
-
-## Keyboard Shortcuts
-
-| Shortcut | Action                                                       |
-| -------- | ------------------------------------------------------------ |
-| cmd-h    | Home                                                         |
-| cmd-~    | go to Back to previous card                                  |
-| cmd-1    | go to First card in stack                                    |
-| cmd-2    | go to Prev card in stack                                     |
-| cmd-3    | go to Next card in stack                                     |
-| cmd-4    | go to Last card in stack                                     |
-| cmd-b    | toggle Background mode                                       |
-| cmd-c    | copy                                                         |
-| cmd-e    | open Scroll window                                           |
-| cmd-f    | Find within current stack                                    |
-| cmd-i    | open Icon editor                                             |
-| cmd-m    | open Message box (where commands can be entered)             |
-| cmd-o    | open a stack                                                 |
-| cmd-l    | go to the next open HyperCard window                         |
-| cmd-n    | New card                                                     |
-| cmd-r    | open window of recently visited cards (click one to open it) |
-| cmd-v    | past                                                         |
-| cmd-x    | cut                                                          |
-| cmd-z    | undo                                                         |
-
-The "Open Stack" dialog contains:
-
-- "Show Preview" checkbox that causes a thumbnail of the first card
-  of the selected stack to be displayed inside the dialog.
-- "Open stack in new window" which does what it says when a stack is opened.
-
-The "Home" stack is inside the "HyperCard 2.4" directory
-which I placed in the Applications directory.
-
-## HyperTalk
-
-HyperTalk ...
-
-- is the scripting language used by HyperCard.
-- has an English-like syntax.
-- is interpreted at run-time, but cached for executing again later.
-- supports message passing (events) and message handlers.
-- implements a simple database.
-
-The commands (a.k.a. statements) supported by HyperTalk
-are documented at {% aTargetBlank
-"https://www.hypercard.center/HyperTalkReference#commands",
-"HyperTalk Reference" %}.
-
-### Message Box
-
-One way to test commands is to enter them in the message box.
-To open the message box, select Go ... Message or press cmd-m.
-Then enter commands separated by semicolons and press return to execute them.
-
-To write a value to the message box, use the command
-`put {expression} into [the] message [box]`.
-The put command writes to the message box by default,
-so the previous command can shorted to `put {expression}`.
-
-### Comments
-
-Single-line comments begin with `--` and extend to the end of the line.
-Multi-line comments are not supported.
-
-### Data Types
-
-HyperTalk supports the following data types:
-
-- booleans with the literal values `true` and `false`
-- numbers with literal values that are either integers or floating point
-- string with literal values delimited by double quotes
-- string lists that are a single string with commas delimiting the items
-- containers which are variables, buttons, and text fields
-
-To extract a substring from a string list, use the `of` keyword.
+Message handlers can have parameters that appear
+after the event name in a comma-separated list.
 For example:
 
-```text
-put "apple,banana,cherry" into fruits
-put item 2 of fruits into fruit -- sets to banana
+````text
+on add n1, n2
+  answer "The sum is" && (n1 + n2) & "."
+end add
 ```
+
+To invoke this, use an expression like `add 2, 3`.
 
 ### Variables
 
@@ -1178,3 +1196,4 @@ open the message box (cmd-m) and enter `set [the] userLevel to 5`.
   and enter `go "HyperCard Help".
 - {% aTargetBlank "https://www.hypercard.center/HyperTalkReference",
   "HyperTalk Reference" %} - another reference with links for each command
+````
