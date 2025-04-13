@@ -747,8 +747,9 @@ which I placed in the Applications directory.
 HyperTalk ...
 
 - is the scripting language used by HyperCard.
+- has an English-like syntax.
 - is interpreted at run-time, but cached for executing again later.
-- supports message passing and message handlers.
+- supports message passing (events) and message handlers.
 - implements a simple database.
 
 The commands (a.k.a. statements) supported by HyperTalk
@@ -766,6 +767,36 @@ To write a value to the message box, use the command
 `put {expression} into [the] message [box]`.
 The put command writes to the message box by default,
 so the previous command can shorted to `put {expression}`.
+
+### go Command
+
+The `go` command supports going to another card.
+It supports many arguments described below.
+
+- Ordinal
+
+  - `go first` - 1st card in current stack
+  - `go second` - 2nd card in current stack
+  - `go third` - 3rd card in current stack
+  - `go last` - last card in current stack
+  - `go card {n}` - nth card in current stack
+
+- Positional
+
+  - `go next` - next card
+  - `go prev` - previous card
+  - `go this` - stay on current card
+
+- Other ways to go to another card in the current stack
+
+  - `go any card` - randomly selects a card?
+  - `go {stack-name}` - first card in a given stack (ex. "HyperCard Help")
+
+- Other ways to go to another card, possibly in another stack
+
+  - `go back` - previously visited card
+  - `go forth` - opposite of `go back` used after that command
+  - `go card id {card-id}`
 
 ### get Command
 
@@ -1108,3 +1139,11 @@ open the message box (cmd-m) and enter `set [the] userLevel to 5`.
 - {% aTargetBlank "https://www.youtube.com/watch?v=x-FkNd5DkOQ",
   "[LIVE '21] Modifiable Software Systems: Smalltalk and HyperCard" %}
   YouTube video
+- {% aTargetBlank "https://hypercard.org/HyperTalk%20Reference%202.4.pdf",
+  "HyperTalk Reference" %} - a PDF containing screenshots
+  of most of the pages of the HyperTalk Reference stack
+  that came with HyperCard 2.4 (362 pages!)
+  To see this inside HyperCard, open the message box
+  and enter `go "HyperCard Help".
+- {% aTargetBlank "https://www.hypercard.center/HyperTalkReference",
+  "HyperTalk Reference" %} - another reference with links for each command
