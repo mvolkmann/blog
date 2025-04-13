@@ -768,6 +768,40 @@ To write a value to the message box, use the command
 The put command writes to the message box by default,
 so the previous command can shorted to `put {expression}`.
 
+### Comments
+
+Single-line comments begin with `--` and extend to the end of the line.
+Multi-line comments are not supported.
+
+### Data Types
+
+HyperTalk supports the following data types:
+
+- booleans with the literal values `true` and `false`
+- numbers with literal values that are either integers or floating point
+- string with literal values delimited by double quotes
+- string lists that are a single string with commas delimiting the items
+- containers which are variables, buttons, and text fields
+
+To extract a substring from a string list, use the `of` keyword.
+For example:
+
+```text
+put "apple,banana,cherry" into fruits
+put item 2 of fruits into fruit -- sets to banana
+```
+
+### Variables
+
+Variables exist in two scopes, local to a specific handler
+and global across all handlers.
+TODO: Are global variables at least scoped to one stack?
+Variables spring into existence when a value is assigned to them
+and are not declared.
+
+To assign a value to a variable, use the `put` keyword.
+For example, `put 3.14159265 into pi`
+
 ### go Command
 
 The `go` command supports going to another card.
@@ -847,40 +881,6 @@ put the value of card field "user name" into myVariable
 ```
 
 If the keyword "card" is omitted, it will only look for a background field.
-
-### Comments
-
-Single-line comments begin with `--` and extend to the end of the line.
-Multi-line comments are not supported.
-
-### Data Types
-
-HyperTalk supports the following data types:
-
-- booleans with the literal values `true` and `false`
-- numbers with literal values that are either integers or floating point
-- string with literal values delimited by double quotes
-- string lists that are a single string with commas delimiting the items
-- containers which are variables, buttons, and text fields
-
-To extract a substring from a string list, use the `of` keyword.
-For example:
-
-```text
-put "apple,banana,cherry" into fruits
-put item 2 of fruits into fruit -- sets to banana
-```
-
-### Variables
-
-Variables exist in two scopes, local to a specific handler
-and global across all handlers.
-TODO: Are global variables at least scoped to one stack?
-Variables spring into existence when a value is assigned to them
-and are not declared.
-
-To assign a value to a variable, use the `put` keyword.
-For example, `put 3.14159265 into pi`
 
 ### Math
 
@@ -978,6 +978,18 @@ repeat with name = start [down] to end
   ...
 end repeat
 ```
+
+### Mouse Events
+
+The following mouse-related events are automatically triggered:
+
+- `mouseDoubleUp` - double-click
+- `mouseDown` - pressed but not released
+- `mouseEnter` - entered
+- `mouseLeave` - exited
+- `mouseStillDown` - triggered continuously while over
+- `mouseUp` - released
+- `mouseWithin` - triggered on every move within
 
 ### Functions
 
