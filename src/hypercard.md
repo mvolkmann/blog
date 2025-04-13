@@ -824,16 +824,45 @@ end add
 
 To invoke this, use an expression like `add 2, 3`.
 
+### Constants
+
+HyperTalk defines the following predefined constants:
+
+- Boolean values `true` and `false`
+- special characters `quote`, `return`, `space`, and `tab`
+- `pi`: approximately 3.14159265359
+- `empty`: empty string
+
+- directions `up`, `down`, `left`, and `right`
+- horizontal positions `left`, `center`, and `right`
+- vertical positions `top`, `middle`, and `bottom`
+
+- `it`: stores the result of some commands
+- `the result`: stores the result of some operations
+
+- `me`: refers to the current object
+- `target`: refers to the object that received the message
+
+- mouse positions `mouseH` and `mouseV`
+- state of modifier keys `commandKey`, `optionKey`, and `shiftKey`
+
+- `ticks`: number of ticks (1/60th of a second) since system startup
+
 ### Variables
 
 Variables exist in two scopes, local to a specific handler
-and global across all handlers.
-TODO: Are global variables at least scoped to one stack?
-Variables spring into existence when a value is assigned to them
+and global across all handlers in all stacks.
+
+Local variables spring into existence when a value is assigned to them
 and are not declared.
 
+Global variables must be declared everywhere they are used
+with the `global` keyword.
+For example, `global favoriteColor, maximumTemperature, taxRate`
+The values of global variables are not saved across HyperCard sessions.
+
 To assign a value to a variable, use the `put` keyword.
-For example, `put 3.14159265 into pi`
+For example, `put 3.14159265 into pie` (`pi` is a predefined constant)
 
 ### go Command
 
