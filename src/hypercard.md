@@ -770,16 +770,22 @@ so the previous command can shorted to `put {expression}`.
 ### get Command
 
 The `get` command sets the value of the special variable `it`
-to the value of an expression. For example:
+to the value of an expression.
+The command `get {expression}` is equivalent to `put {expression} into it`.
+
+The following are examples of using the `get` command:
 
 ```text
 get 2 + 3
 get the short date -- ex. 4/12/25; short is the default and can be omitted
 get the long date -- ex. Saturday, April 12, 2025
-get the text of field "My Field"
+get the value of card field "My Foreground Field"
+get the value of background field "My Background Field"
 get the label of button "My Button"
 get the hilite of button "My Checkbox"
-get item 2 of colorList -- colorList is a comma-delimited string
+get item 2 of colorList -- where colorList is a comma-delimited string
+get word 1 of "some long string"
+get line 3 of field "My Text Area"
 ```
 
 Two ways see the value of any variable, including `it`,
@@ -792,6 +798,20 @@ which can be just a variable name.
 Once the variable `it` is set by using the `get` command,
 it can be used in subsequent expressions.
 For example, `multiply it by 2`.
+
+### put Command
+
+The `put` command sets the value of a variable or object property.
+For example:
+
+```text
+put "test" into card field "My Field Name" -- by name
+put "test" into card field id 10 -- by id
+put "test" into card field 2 -- by number
+put the value of card field "user name" into myVariable
+```
+
+If the keyword "card" is omitted, it will only look for a background field.
 
 ### Comments
 
