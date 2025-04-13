@@ -737,6 +737,7 @@ A single script can define any number of message handlers
 that each begin with the `on` keyword.
 Each message handler listens for a specific kind of event
 and executes the code inside when triggered.
+Unlike functions, message handlers cannot return a value.
 
 For example, in a stack with two cards where the first card contains a button:
 
@@ -1077,7 +1078,11 @@ The following mouse-related events are automatically triggered:
 
 ### Functions
 
-Functions can be defined inside scripts with the following syntax:
+Functions can be defined inside scripts.
+They can have parameters.
+Unlike message handlers, they can return a value.
+
+Function definitions have the following syntax:
 
 ```text
 function fnName -- no parameters
@@ -1096,6 +1101,24 @@ Functions are called with the following syntax:
 ```text
 fnName()
 fnName(arg1, arg2)
+```
+
+The following function takes two numbers and returns their sum.
+This can be defined in any script.
+If it is defined in the stack script of the current stack,
+it can be invoked from any card using the message box.
+
+```text
+function sum n1, n2
+  return n1 + n2
+end sum
+```
+
+To call this function and display its result in a dialog,
+enter the following in the message box.
+
+```text
+answer sum(2, 3)
 ```
 
 ### Navigation
