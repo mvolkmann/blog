@@ -179,13 +179,15 @@ The steps for installing this in macOS are summarized below.
 
 1. Browse https://www.emaculation.com
 1. Click the "E-Maculation wiki" link.
-1. Click the SheepShaver link.
+1. Under "Welcome", click the SheepShaver link.
 1. Under "Download the Latest Version",
    click the "SheepShaver for OSX/macOS" link.
 1. Under "Version 2.5, 25 January 2025, universal (x86_64 and arm64)",
-   click the Download link to get the file "SheepShaver.app".
+   click the Download link.
+1. Double-click the downloaded file to get the file "SheepShaver.app".
 1. Under "For the above version 2.5 builds",
    click the link after "SheepShaver folder".
+1. Double-click the downloaded file to get the folder "SheepShaver scripts".
 1. Browse https://www.redundantrobot.com
 1. Click the "SHEEPSHAVER TUTORIAL" link.
 1. Click the "New World PPC ROM" link.
@@ -199,8 +201,8 @@ The steps for installing this in macOS are summarized below.
    I chose "Server 2" because it is closest to me.
 1. Create a directory named SheepShaver
    and move all the downloaded files into it.
-   These include SheepShaver.app, the SheepShaver directory, newworld86.rom,
-   and "Apple Mac OS 9.0.4.7z" (which may still be downloading).
+   These include SheepShaver.app, the "SheepShaver scripts" directory,
+   newworld86.rom, and "Apple Mac OS 9.0.4.7z" (which may still be downloading).
 1. Right-click the newworld86.rom file and select "Get Info".
 1. Under "Name & Extension", change the name to "Mac OS ROM".
 1. Close the info dialog.
