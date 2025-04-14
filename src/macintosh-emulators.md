@@ -28,7 +28,8 @@ in a modern Mac are described below.
 
 The following files must be downloaded:
 
-- one of these ISO files
+- one of these ISO files (exact copies of CDs)
+  for installing system software
 
   - Mac OS 7.6.1 at
     https://macintoshgarden.org/apps/macintosh-mac-os-76/ (file #7).
@@ -43,7 +44,7 @@ The following files must be downloaded:
     This unzips to a directory named "macos-922-uni"
     that contains the file "macos-922-uni.iso".
 
-- one of these ROM files
+- one of these ROM files for emulating a specific Macintosh computer
 
   - http://hampa.ch/pub/software/ROM/Macintosh%2068K/.
     Click the link "368CADFE - Macintosh IIci.7z".
@@ -110,10 +111,9 @@ On the System tab:
 - change "CPU Type" to 68040.
 - check "Don't use CPU when idle"
 - after "ROM File", click the "Browse..." button
-- select the file "368CADFE - Macintosh IIci.rom"
-  or "F1ACAD13 - Macintosh Quadra 650.rom"
-  or "420DBFF3 - Macintosh Quadra 700.rom"
-  that was downloaded above
+- select the file "368CADFE - Macintosh IIci.rom",
+  "F1ACAD13 - Macintosh Quadra 650.rom", or
+  "420DBFF3 - Macintosh Quadra 700.rom".
 
 On the Graphics/Sound tab:
 
@@ -124,11 +124,12 @@ On the Graphics/Sound tab:
 On the Volumes tab:
 
 - Click the "Add..." button.
-- Select the file "755_2GB_drive.dsk" or "Mac OS 8.1.cdr"
-  or "Mac_OS_9.2.2_HD_Restore.dmg" that was downloaded above.
+- Select a drive file such as "755_2GB_drive.dsk",
+  "Mac OS 8.1.cdr", or "Mac_OS_9.2.2_HD_Restore.dmg".
 - Click the "Add..." button again.
-- Select the file "Mac OS 7.6.1.toast" or ""
-  or "macos-922-uni.iso" that was downloaded above.
+- Select an ISO file such as "Mac OS 7.6.1.toast",
+  "Mac OS 8.1.cdr", or "Mac_OS_9.2.2_HD_Restore.dmg".
+  or "macos-922-uni.iso".
 - Click the Save button.
 - Click the Quit button.`
 
