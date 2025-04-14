@@ -30,9 +30,12 @@ The following files must be downloaded:
 
 - one of these ISO files
 
-  - Macintosh toast file #7 at
-    https://macintoshgarden.org/apps/macintosh-mac-os-76/.
+  - Mac OS 7.6.1 at
+    https://macintoshgarden.org/apps/macintosh-mac-os-76/ (file #7).
     The unzipped file name was "Mac OS 7.6.1.toast".
+
+  - Mac OS 8.1 at
+    https://www.macintoshrepository.org/15953-mac-os-8-1-691-1912-a-cd-
 
   - Macintosh OS 9.2.2 Universal toast file #1 at
     https://macintoshgarden.org/apps/mac-os-922-universal
@@ -42,27 +45,32 @@ The following files must be downloaded:
 
 - one of these ROM files
 
-  - Macintosh ROM at
-    http://hampa.ch/pub/software/ROM/Macintosh%2068K/.
+  - http://hampa.ch/pub/software/ROM/Macintosh%2068K/.
     Click the link "368CADFE - Macintosh IIci.7z".
-    The file name was "368CADFE - Macintosh IIci.7z".
     Double-click this file to get unzipped file
     "368CADFE - Macintosh IIci.rom".
 
-  - Macintosh ROM at
-    http://hampa.ch/pub/software/ROM/Macintosh%2068K/.
+  - http://hampa.ch/pub/software/ROM/Macintosh%2068K/.
     Click the link "F1ACAD13 - Macintosh Quadra 650.7z".
-    The file name was "F1ACAD13 - Macintosh Quadra 650.7z".
     Double-click this file to get the unzipped file
     "F1ACAD13 - Macintosh Quadra 650.rom".
 
+  - http://hampa.ch/pub/software/ROM/Macintosh%2068K/420DBFF3%20-%20Macintosh%20Quadra%20700.7z
+    Click the link "420DBFF3 - Macintosh Quadra 700.7z".
+    Double-click this file to get the unzipped file
+    "420DBFF3 - Macintosh Quadra 700.rom".
+
 - one of these bootstrap image files
 
-  - System 7.5.5 Drive Image from
+  - System 7.5.5 drive image from
     https://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Bootdisks/755_2GB_drive.zip
     The unzipped file name was 755_2GB_drive.dsk.
 
-  - System 9.2.2 Drive Image from
+  - System 8.1 drive image from
+    https://www.macintoshrepository.org/15953-mac-os-8-1-691-1912-a-cd-
+    The unzipped file name was Mac OS 8.1.cdr.
+
+  - System 9.2.2 drive image from
     https://www.macintoshrepository.org/36322-random-mac-os-9-2-2-hard-drive-image-home-made-
     The unzipped file name was Mac_OS_9.2.2_HD_Restore.dmg.
 
@@ -77,13 +85,13 @@ The following files must be downloaded:
   The unzipped file name was "Basilisk II GUI.app".
 
 I moved the following files to a new directory in the
-Documents/dev directory named "BasiliskII":
+Documents/dev directory named "mac-emulators":
 
-- 368CADFE - Macintosh IIci.rom
-- 755_2GB_drive.dsk
-- Basilisk II GUI.app
-- BasiliskII.app
-- Mac OS 7.6.1 toast
+- BasiliskII/Basilisk II GUI.app
+- BasiliskII/BasiliskII.app
+- disk/755_2GB_drive.dsk
+- iso/Mac OS 7.6.1 toast
+- rom/368CADFE - Macintosh IIci.rom
 
 ### Setup
 
@@ -98,29 +106,31 @@ Click the "Open" button.
 On the System tab:
 
 - change "RAM Size (MB)" to 1024?.
-- change "Mac Model ID" to .
+- change "Mac Model ID" to "Quadra 900 (MacOS 8.x)".
 - change "CPU Type" to 68040.
 - check "Don't use CPU when idle"
 - after "ROM File", click the "Browse..." button
-- select the file "368CADFE - Macintosh IIci.rom" or
-  "F1ACAD13 - Macintosh Quadra 650.rom" that was downloaded above
+- select the file "368CADFE - Macintosh IIci.rom"
+  or "F1ACAD13 - Macintosh Quadra 650.rom"
+  or "420DBFF3 - Macintosh Quadra 700.rom"
+  that was downloaded above
 
 On the Graphics/Sound tab:
 
-- change "Window Refresh Rate" to Dynamic
-- optionally change the Width and Height values
-  (640 x 480 may work best for some games)
+- Change "Window Refresh Rate" to Dynamic.
+- Optionally change the Width and Height values.
+  640 x 480 may work best for some games.
 
 On the Volumes tab:
 
-- click the "Add..." button
-- select the file "755_2GB_drive.dsk" or "Mac_OS_9.2.2_HD_Restore.dmg".
-  that was downloaded above
-- click the "Add..." button again
-- select the file "Mac OS 7.6.1.toast" or "macos-922-uni.iso"
-  that was downloaded above
-- click the Save button
-- click the Quit button
+- Click the "Add..." button.
+- Select the file "755_2GB_drive.dsk" or "Mac OS 8.1.cdr"
+  or "Mac_OS_9.2.2_HD_Restore.dmg" that was downloaded above.
+- Click the "Add..." button again.
+- Select the file "Mac OS 7.6.1.toast" or ""
+  or "macos-922-uni.iso" that was downloaded above.
+- Click the Save button.
+- Click the Quit button.`
 
 Start the emulator by double-clicking the file BasiliskII.app.
 
