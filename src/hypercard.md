@@ -677,7 +677,11 @@ so the previous command can shorted to `put {expression}`.
 Single-line comments begin with `--` and extend to the end of the line.
 Multi-line comments are not supported.
 
-To comment out a set of lines, select them and press cmd-dash.
+To comment a set of lines, select them and
+press cmd-dash or select Script ... Comment.
+
+To uncomment a set of lines, select them and
+press cmd-equal or select Script ... Uncomment.
 
 ### Data Types
 
@@ -1308,7 +1312,3 @@ end mouseUp
   and enter `go "HyperCard Help".
 - {% aTargetBlank "https://www.hypercard.center/HyperTalkReference",
   "HyperTalk Reference" %} - another reference with links for each command
-
-```
-
-```
