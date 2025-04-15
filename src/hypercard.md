@@ -246,7 +246,8 @@ The tools include:
     before typing the text.
     Then click where the text should go and begin typing.
 
-    For text that may need to be edited later, use a text field instead.
+    For text that may need to be edited later, use a text field instead
+    and check the "Lock Text" checkbox in its Field Info dialog.
 
   - **Regular Polygon**
 
@@ -1414,3 +1415,5 @@ end mouseUp
 - {% aTargetBlank "https://archive.org/details/AppleMacintoshSystem753",
   "Macintosh System 7.5.3" %} on Internet Archive;
   click to begin; includes HyperCard
+- {% aTargetBlank "https://livecode.com", "LiveCode" %} active,
+  commercial alternative to HyperCard
