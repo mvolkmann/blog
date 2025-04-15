@@ -315,19 +315,18 @@ There are four basic kinds of buttons:
 To add a button to the current card.
 
 - Select Objects ... New Button.
+  Alternatively, select the Button tool and
+  cmd-drag to indicate the location and size of a new button.
   This adds a new button to the center of the current card.
 - Double-click the button to open its "Button Info" dialog.
 - Change "Button Name" to be a name used to refer to the button
   or the text that will appear on it.
-- Optionally uncheck the "Show Name" checkbox to remove the text.
-- Optionally click the "Icon..." button to add an icon to the button.
-  Icon sizes cannot be modified.
-- Optionally change the Style to one of the following:
+- Choose a button style from the following options:
 
-  - Transparent
+  - Transparent: default when created with cmd-drag
   - Opaque
   - Rectangle
-  - Round Rectangle
+  - Round Rect: default when created with "New Button" menu item
   - Shadow
   - Check Box: for a Boolean selection; click the checkbox or the name
     to toggle the value of its `hilite` property
@@ -337,6 +336,14 @@ To add a button to the current card.
   - Oval: TODO: Investigate
   - Popup: a dropdown containing options
 
+- Decide whether the button name should be displayed
+  by checking or unchecking the "Show Name" checkbox.
+
+  - It will be checked if the button was created with "New Button".
+  - It will be unchecked if the button was created with cmd-drag.
+
+- Optionally click the "Icon..." button to add an icon to the button.
+  Icon sizes cannot be modified.
 - Optionally cause the button to highlight when it is clicked
   by checking the "Auto Hilite" checkbox.
 - Click the "Script..." button.
@@ -710,6 +717,12 @@ put item 2 of fruits into fruit -- sets to banana
 
 ## Scripts
 
+A HyperCard script is a collection of function and event handler definitions.
+Often a script only contains a single handler definition.
+However, to aid in finding a definition inside a script,
+the script editor contains dropdowns in the upper-right
+for selecting and scrolling to a specific function or handler.
+
 Scripts are associated with a specific object
 such as a button, text field, or card.
 They handle messages that are triggered by many actions.
@@ -833,6 +846,33 @@ end add
 ```
 
 To invoke this, use an expression like `add 2, 3`.
+
+### Standard System Events
+
+- `appleEvent`
+- `arrowKey`: argument gives direction
+- `closeStack`
+- `deleteButton`
+- `deleteField`
+- `doMenu`
+- `enterKey`
+- `idle`
+- `mouseDown`
+- `mouseEnter`
+- `mouseLeave`
+- `mouseStillDown`
+- `mouseUp`
+- `mouseWithin`
+- `newButton`
+- `newField`
+- `openCard`
+- `openStack`
+- `quit` of HyperCard
+- `resume` of HyperCard
+- `returnKey`
+- `startup` of HyperCard
+- `suspend` of HyperCard
+- `tabKey`
 
 ### Constants
 
