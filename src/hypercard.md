@@ -516,6 +516,9 @@ To delete a text field:
 - Click an object to select it.
 - Press the delete key, or select Edit ... Cut Field, or press cmd-x.
 
+To get the text from a field, use the expression
+`the text of card field "{field-name}"`.
+
 To execute a HyperTalk command that was entered in a text field,
 run the command `do card field "{field-name}"`.
 
@@ -1257,6 +1260,22 @@ open the message box (cmd-m) and enter `set [the] userLevel to 5`.
   "The Haunted House" %} by Mark Klink
 
 ## Demos
+
+### Experimenting With HyperTalk
+
+<img alt="HyperCard Experimenting" style="border: 0; width: 60%"
+  src="/blog/assets/hypercard-experimenting.png?v={{pkg.version}}">
+
+Create a Field where arbitrary HyperTalk statements can be entered.
+Set its Field Name to "code" and set its Style to "Scrolling".
+
+Create a Button that executes the code using the following script:
+
+```text
+on mouseUp
+  do card field "code"
+end mouseUp
+```
 
 ### Adding Numbers
 
