@@ -311,7 +311,7 @@ There are four basic kinds of buttons:
    These can contain text, an icon, both, or neither.
 1. A check box
 1. A radio button
-1. Buttons that display a popup when they are clicked. TODO: Verify this.
+1. Buttons that display a popup (dropdown menu) when they are clicked.
 
 To add a button to the current card.
 
@@ -547,6 +547,8 @@ Example field references include:
 - by id: `field id {id}`
 - by number: `field {number-within-card}`.
 - `the target` (when handler is attached the parent card)
+
+The keyword `field` can be abbreviated to `fld`.
 
 If the field is on the card instead of the background,
 add `card` or `cd` before `button`.
@@ -972,6 +974,10 @@ The values of global variables are not saved across HyperCard sessions.
 
 To assign a value to a variable, use the `put` keyword.
 For example, `put 3.14159265 into pie` (`pi` is a predefined constant)
+
+It's a good idea to initialize all global variables used by a stack
+in the `openStack` handler associated with the stack.
+This avoids using values assigned by other stacks.
 
 ### go Command
 
