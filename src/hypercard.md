@@ -1363,3 +1363,6 @@ end mouseUp
   and enter `go "HyperCard Help".
 - {% aTargetBlank "https://www.hypercard.center/HyperTalkReference",
   "HyperTalk Reference" %} - another reference with links for each command
+- {% aTargetBlank "https://archive.org/details/AppleMacintoshSystem753",
+  "Macintosh System 7.5.3" %} on Internet Archive;
+  click to begin; includes HyperCard
