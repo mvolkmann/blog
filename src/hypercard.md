@@ -950,19 +950,27 @@ To invoke this, use an expression like `add 2, 3`.
 
 ### Constants
 
+Constants are variables whose values cannot be changed.
 HyperTalk defines the following predefined constants:
 
 - Boolean values `true` and `false`
 - special characters `quote`, `return`, `space`, and `tab`
 - `pi`: approximately 3.14159265359
 - `empty`: empty string
-
 - directions `up`, `down`, `left`, and `right`
 - horizontal positions `left`, `center`, and `right`
 - vertical positions `top`, `middle`, and `bottom`
 
+### Special Variables
+
+The following variables are set by HyperCard and cannot be modified:
+
 - `it`: stores the result of some commands such as
   `ask`, `get`, and `read from file`.
+- `me`: refers to the current object
+- modifier keys state `commandKey`, `optionKey`, and `shiftKey`
+- `mouseLoc` stores the current location of the mouse pointer
+- mouse positions `mouseH` and `mouseV`
 
 - `result`: stores the result of some operations such as the following:
 
@@ -986,12 +994,7 @@ HyperTalk defines the following predefined constants:
   Typically `result` is empty if an operation succeeds
   and is set to an error message if it fails.
 
-- `me`: refers to the current object
 - `target`: refers to the object that received the message
-
-- mouse positions `mouseH` and `mouseV`
-- state of modifier keys `commandKey`, `optionKey`, and `shiftKey`
-
 - `ticks`: number of ticks (1/60th of a second) since system startup
 
 ### Variables
