@@ -1197,6 +1197,20 @@ For example, `pass "messageName [parameterList]"`.
 To send a message to another object, use the `send` command.
 For example, `send "messageName [parameterList]" to objectReference`.
 
+### Menu Items
+
+To execute a menu item, use the command `doMenu`
+with argument that is the menu item label.
+For example, a button can create a new card with the following handler:
+
+```text
+on mouseUp
+  doMenu "New Card"
+end mouseUp
+```
+
+The new card will be inserted immediately after the current card.
+
 ### Long Running Tasks
 
 For scripts that run for a bit, it is a good idea to
