@@ -159,7 +159,7 @@ The tools include:
 
   - **Field**
 
-    This enters Field mode which enables editing existing text fields.
+    This enters Field mode which enables editing existing fields.
     When in this mode, a thin black border is drawn around all text fields
     so they can be located even when they are transparent with no text.
 
@@ -359,6 +359,9 @@ To resize a button:
 - Select the Button tool.
 - Drag any corner of a button.
 
+To create a copy of a button,
+option-drag it OR select Edit ... Copy Button.
+
 To configure a button so clicking it navigates to another card or stack:
 
 - Select the Button tool.
@@ -476,19 +479,21 @@ TODO: Finish this.
 
 ## Text Fields
 
-To add a text field to the current card:
+A text field is referred to as simply a "field".
+
+To add a field to the current card:
 
 - Select Objects ... New Field.
-  This adds a new text field to the center of the current card.
+  This adds a new field to the center of the current card.
 - Click the browse tool (hand with pointing finger).
-- Click the text field.
+- Click the field.
 - Enter text.
 
-To change the font or styling of a text field:
+To change the font or styling of a field:
 
 - Select the Field tool.
-- Double-click a text field to open its "Field Info" dialog.
-  Alternatively, click a text field to select it
+- Double-click a field to open its "Field Info" dialog.
+  Alternatively, click a field to select it
   and select Objects ... Field Info...
 - Select one of the following options from the Style dropdown:
   - Transparent - no border and background is transparent,
@@ -507,17 +512,20 @@ To change the font or styling of a text field:
 - Select a line height.
 - Click the OK button.
 
-To move a text field:
+To move a field:
 
 - Select the Field tool.
-- Drag the inside or edge of any text field.
+- Drag the inside or edge of any field.
 
-To resize a text field:
+To resize a field:
 
 - Select the Field tool.
-- Drag any corner of a text field.
+- Drag any corner of a field.
 
-To delete a text field:
+To create a copy of a field,
+option-drag it OR select Edit ... Copy Button.
+
+To delete a field:
 
 - Click the Field tool.
 - Click an object to select it.
@@ -526,7 +534,7 @@ To delete a text field:
 To get the text from a field, use the expression
 `the text of card field "{field-name}"`.
 
-To execute a HyperTalk command that was entered in a text field,
+To execute a HyperTalk command that was entered in a field,
 run the command `do card field "{field-name}"`.
 
 ## Drawing
@@ -701,7 +709,7 @@ HyperTalk supports the following data types:
 - numbers with literal values that are either integers or floating point
 - string with literal values delimited by double quotes
 - string lists that are a single string with commas delimiting the items
-- containers which are variables, buttons, and text fields
+- containers which are variables, buttons, and fields
 
 To concatenate strings, or values that can be converted to strings,
 use the binary operators `&` and `&&`.
@@ -719,12 +727,12 @@ put item 2 of fruits into fruit -- sets to banana
 
 A HyperCard script is a collection of function and event handler definitions.
 Often a script only contains a single handler definition.
-However, to aid in finding a definition inside a script,
-the script editor contains dropdowns in the upper-right
-for selecting and scrolling to a specific function or handler.
+However, to aid in finding a definition inside a long script,
+the script editor includes dropdowns in the upper-right
+for selecting and scrolling to a selected function or handler.
 
 Scripts are associated with a specific object
-such as a button, text field, or card.
+such as a button, field, or card.
 They handle messages that are triggered by many actions.
 
 Scripts are implemented with the {% aTargetBlank
@@ -734,7 +742,7 @@ The messages travel through the object hierarchy,
 searching for an object that handles them.
 The levels of the object hierarchy, from bottom to top are:
 
-- buttons and text fields
+- buttons and fields
 - cards
 - backgrounds
 - stacks
@@ -804,7 +812,7 @@ For example, in a stack with two cards where the first card contains a button:
 - Click the button.
 - Notice that it navigates to the next card because the button script is run.
 - While on the next card, click anywhere inside it
-  except on a button or text field.
+  except on a button or field.
 - Notice that the window flashes because the stack script is executed.
 
 Another interesting example:
@@ -1205,7 +1213,7 @@ end mouseUp
 To hide the value entered by the user, use `answer password`.
 
 To display a dialog box that asks the user a question
-and includes a text field where they can type an answer,
+and includes a field where they can type an answer,
 along with OK and Cancel buttons, use the `ask` command.
 The result will be in a variable named `it`.
 For example the following script can be attached to a button:
@@ -1294,9 +1302,9 @@ move your files into one of the directories already in the lists.
 HyperCard supports the following five user levels:
 
 - 5 Browsing: read-only
-- 4 Typing: can enter text in text fields
+- 4 Typing: can enter text in fields
 - 3 Painting: can use tools to draw and paint on cards
-- 2 Authoring: can add and modify buttons and text fields on cards
+- 2 Authoring: can add and modify buttons and fields on cards
 - 1 Scripting: can add and modify scripts associated with any object
 
 To set the level for the HyperCard application as a whole:
