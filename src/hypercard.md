@@ -1197,6 +1197,24 @@ For example, `pass "messageName [parameterList]"`.
 To send a message to another object, use the `send` command.
 For example, `send "messageName [parameterList]" to objectReference`.
 
+### Long Running Tasks
+
+For scripts that run for a bit, it is a good idea to
+change the cursor to a watch until the script completes.
+The supported cursor names include `arrow`, `busy`, `cross`,
+`hand`, `iBeam`, `none`, `plus`, `wait`, and `watch`.
+
+Here's an example:
+
+```text
+on mouseUp
+  set cursor to watch
+  wait 2 seconds
+  set cursor to hand -- default
+  answer "Finished!"
+end mouseUp
+```
+
 ### Debugging
 
 TODO: Add content on debugging support.
