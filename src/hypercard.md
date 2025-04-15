@@ -960,6 +960,9 @@ HyperTalk defines the following predefined constants:
 - directions `up`, `down`, `left`, and `right`
 - horizontal positions `left`, `center`, and `right`
 - vertical positions `top`, `middle`, and `bottom`
+- `the screenRect`: size of screen in a string
+  with the content `left,top,right,bottom`
+  (It seems that left and top are always zero.)
 
 ### Special Variables
 
@@ -967,12 +970,16 @@ The following variables are set by HyperCard and cannot be modified:
 
 - `it`: stores the result of some commands such as
   `ask`, `get`, and `read from file`.
-- `me`: refers to the current object
 - modifier keys state `commandKey`, `optionKey`, and `shiftKey`
-- `mouseLoc` stores the current location of the mouse pointer
+- `me`: refers to the current object
+- `the clickLoc`: location of the last mouse click
+- `the [short|long] date`: the current date in two formats (default is short)
+- `the mouseLoc`: current location of the mouse pointer
 - mouse positions `mouseH` and `mouseV`
+- `the params`: inside a message handler this is set to a string
+  that is a comma-separated list of all the parameter values
 
-- `result`: stores the result of some operations such as the following:
+- `the result`: stores the result of some operations such as the following:
 
   - `go`: Sets result to an error message if the card/stack can't be found
   - visual effect: if the effect can't be completed
@@ -994,8 +1001,17 @@ The following variables are set by HyperCard and cannot be modified:
   Typically `result` is empty if an operation succeeds
   and is set to an error message if it fails.
 
-- `target`: refers to the object that received the message
+- `the target`: in a handler this refers to the object
+  that initially received the message
 - `ticks`: number of ticks (1/60th of a second) since system startup
+
+The following variables are set by HyperCard and CAN be modified:
+
+- `the cursor`: current cursor shape
+- `the lockScreen`: a Boolean that determines whether
+  screen updates will appear during script execution.
+  Setting this to false can improve performance.
+- `the userLevel`: current user level from 1 to 5
 
 ### Variables
 
