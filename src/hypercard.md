@@ -437,6 +437,26 @@ add a button that is transparent and has no label.
 Unfortunately the clickable area must be rectangular.
 Modify the button script to execute HyperTalk commands when clicked.
 
+To detect whether special keys where held down during a click, check the
+state of the special variables `commandKey`, `optionKey`, and `shiftKey`.
+There is no support for detecting that the control key is down.
+The following code demonstrates special key detection:
+
+```text
+on mouseUp
+  if the commandKey is down then
+    put "command" into whichKey
+  else if the optionKey is down then
+    put "option" into whichKey
+  else if the shiftKey is down then
+    put "shift" into whichKey
+  else
+    put "none" into whichKey
+  end if
+  answer "key =" && whichKey
+end mouseUp
+```
+
 To allow a button to be dragged to a new location,
 add the following handler in its script.
 This isn't particularly useful, but it demonstrates changing
