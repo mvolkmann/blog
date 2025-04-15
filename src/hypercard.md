@@ -406,7 +406,7 @@ Buttons have the following properties:
 - `name`: a name used to refer to the button or the text displayed on it
 - `rectangle`: gives the position and size
 - `sharedHilite`: whether the highlight state is shared (radio-style)
-- `showname`: whether the name is shown
+- `showName`: whether the name is shown
 - `style`: one of the dropdown values
 - `visible`: whether it is visible
 
@@ -417,6 +417,14 @@ Example button references include:
 - by id: `button id {id}`
 - by number: `button {number-within-card}`.
 - `the target` (when handler is attached the parent card)
+
+If the button is on the card instead of the background,
+optionally add `card` or `cd` before `button`.
+If the button is on the background instead of the card,
+add `background`, `bkgnd`, or `bg` before `button`.
+If none of these keywords are added,
+HyperTalk will assume the button is on the card.
+This differs from the default for fields.
 
 If the button is not on the current card, add `of card {card-reference}`.
 If the button is not on a card in the current stack,
@@ -478,7 +486,7 @@ and enter each option on its own line.
 To get the currently selected value of a Popup,
 TODO: Finish this.
 
-## Text Fields
+## Fields
 
 A text field is referred to as simply a "field".
 
@@ -531,6 +539,26 @@ To delete a field:
 - Click the Field tool.
 - Click an object to select it.
 - Press the delete key, or select Edit ... Cut Field, or press cmd-x.
+
+Example field references include:
+
+- `me` (when handler is attached to the button),
+- by name: `field "{name}"`
+- by id: `field id {id}`
+- by number: `field {number-within-card}`.
+- `the target` (when handler is attached the parent card)
+
+If the field is on the card instead of the background,
+add `card` or `cd` before `button`.
+If the button is on the background instead of the card,
+optionally add `background`, `bkgnd`, or `bg` before `button`.
+If none of these keywords are added,
+HyperTalk will assume the field is on the background.
+This differs from the default for buttons.
+
+If the field is not on the current card, add `of card {card-reference}`.
+If the field is not on a card in the current stack,
+add `of card {card-reference} of stack "{stack-name"}`.
 
 To get the text from a field, use the expression
 `the text of card field "{field-name}"`.
