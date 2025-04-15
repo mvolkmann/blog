@@ -437,6 +437,17 @@ add a button that is transparent and has no label.
 Unfortunately the clickable area must be rectangular.
 Modify the button script to execute HyperTalk commands when clicked.
 
+To allow a button to be dragged to a new location,
+add the following handler in its script.
+This isn't particularly useful, but it demonstrates changing
+the location of an object based on the current mouse location.
+
+```text
+on mouseStillDown
+  set the location of me to the mouseLoc
+end mouseStillDown
+```
+
 ### Check Boxes
 
 To get the value of a check box,
