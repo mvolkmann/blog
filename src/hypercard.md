@@ -322,6 +322,8 @@ To add a button to the current card.
 - Double-click the button to open its "Button Info" dialog.
 - Change "Button Name" to be a name used to refer to the button
   or the text that will appear on it.
+  It's too bad buttons can't have separate values for
+  the name used to refer to them and the label displayed in them.
 - Choose a button style from the following options:
 
   - Transparent: default when created with cmd-drag
@@ -493,6 +495,8 @@ A text field is referred to as simply a "field".
 To add a field to the current card:
 
 - Select Objects ... New Field.
+  Alternatively, select the Field tool and
+  cmd-drag to indicate the location and size of a new field.
   This adds a new field to the center of the current card.
 - Click the browse tool (hand with pointing finger).
 - Click the field.
@@ -532,7 +536,7 @@ To resize a field:
 - Drag any corner of a field.
 
 To create a copy of a field,
-option-drag it OR select Edit ... Copy Button.
+option-drag it OR select Edit ... Copy Field.
 
 To delete a field:
 
