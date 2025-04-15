@@ -677,6 +677,8 @@ so the previous command can shorted to `put {expression}`.
 Single-line comments begin with `--` and extend to the end of the line.
 Multi-line comments are not supported.
 
+To comment out a set of lines, select them and press cmd-dash.
+
 ### Data Types
 
 HyperTalk supports the following data types:
@@ -817,7 +819,7 @@ Message handlers can have parameters that appear
 after the event name in a comma-separated list.
 For example:
 
-````text
+```text
 on add n1, n2
   answer "The sum is" && (n1 + n2) & "."
 end add
@@ -1250,6 +1252,39 @@ open the message box (cmd-m) and enter `set [the] userLevel to 5`.
 - {% aTargetBlank "https://macintoshgarden.org/games/the-haunted-house",
   "The Haunted House" %} by Mark Klink
 
+## Demos
+
+### Adding Numbers
+
+<img alt="HyperCard Tools" style="border: 0; width: 50%"
+  src="/blog/assets/hypercard-adding-numbers.png?v={{pkg.version}}">
+
+```text
+-- Script for "Add Number" button
+on mouseUp
+  ask "Number"
+  put it & return after card field "numbers"
+end mouseUp
+
+-- Script for "Total" button
+on mouseUp
+  put 0 into total
+  put the number of lines in card field "numbers" into lines
+
+  repeat with i = 1 to lines
+    put line i of card field "numbers" into line
+    if line is a number then add line to total
+  end repeat
+
+  put return & "total =" && total after card field "numbers"
+end mouseUp
+
+-- Script for "Clear" button
+on mouseUp
+  put empty into card field "numbers"
+end mouseUp
+```
+
 ## Resources
 
 - {% aTargetBlank "https://en.wikipedia.org/wiki/HyperCard",
@@ -1273,4 +1308,7 @@ open the message box (cmd-m) and enter `set [the] userLevel to 5`.
   and enter `go "HyperCard Help".
 - {% aTargetBlank "https://www.hypercard.center/HyperTalkReference",
   "HyperTalk Reference" %} - another reference with links for each command
-````
+
+```
+
+```
