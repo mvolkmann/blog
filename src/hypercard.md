@@ -132,6 +132,8 @@ Sadly there is no easy way to:
 
 This seem like large oversights!
 
+TODO: Discuss "marking" cards and what you can do with marked cards.
+
 ## Tools
 
 The tools menu contains a grid of buttons
@@ -357,6 +359,7 @@ To move a button:
 
 - Select the Button tool.
 - Drag the inside or edge of any button.
+- The ability to snap-to-grid is missing and would be useful for better layout.
 
 To resize a button:
 
@@ -591,6 +594,7 @@ To move a field:
 
 - Select the Field tool.
 - Drag the inside or edge of any field.
+- The ability to snap-to-grid is missing and would be useful for better layout.
 
 To resize a field:
 
