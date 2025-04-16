@@ -247,7 +247,8 @@ The tools include:
     Then click where the text should go and begin typing.
 
     For text that may need to be edited later, use a text field instead
-    and check the "Lock Text" checkbox in its Field Info dialog.
+    and check the "Lock Text" checkbox in its Field Info dialog
+    to make it read-only.
 
   - **Regular Polygon**
 
@@ -529,9 +530,39 @@ To add a field to the current card:
   Alternatively, select the Field tool and
   cmd-drag to indicate the location and size of a new field.
   This adds a new field to the center of the current card.
-- Click the browse tool (hand with pointing finger).
+- With the Field tool selected:
+
+  - Enter a Field name.
+  - Select a Style from the following options:
+
+    - Transparent: can see through to objects behind it
+    - Opaque: cannot see through to objects behind it
+    - Rectangle: adds a rectangular border
+    - Shadow: same as Rectangle, but adds shadows
+      on the right and bottom sides for a 3D effect
+    - Scrolling: adds a rectangular border and
+      a vertical scrollbar (even when not needed)
+
+  - Select the desired checkbox options which include:
+
+    - Lock Text
+    - Don't Wrap
+    - Auto Select
+    - Multiple Lines
+    - Wide Margins
+    - Fixed Line Height
+    - Show Lines: displays dotted lines it indicate where text can be entered
+    - Auto Tab
+    - Don't Search
+
+    TODO: Describe the options above.
+
+- Click the Browse tool (hand with pointing finger).
 - Click the field.
 - Enter text.
+
+- Double-click a Text object.
+- Enter
 
 To change the font or styling of a field:
 
