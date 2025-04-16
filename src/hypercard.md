@@ -632,8 +632,10 @@ If the field is not on the current card, add `of card {card-reference}`.
 If the field is not on a card in the current stack,
 add `of card {card-reference} of stack "{stack-name"}`.
 
-To get the text from a field, use the expression
-`the text of card field "{field-name}"`.
+To get the text from a field, a field reference.
+For example, `card field "{field-name}"`.
+This explains why setting a variable to a card reference
+only gets its text, not an object reference.
 
 To execute a HyperTalk command that was entered in a field,
 run the command `do card field "{field-name}"`.
@@ -1500,6 +1502,42 @@ Create a Button that executes the code using the following script:
 ```text
 on mouseUp
   do card field "code"
+end mouseUp
+```
+
+### Counter
+
+Create the following objects:
+
+- "+" button to increment the value
+- field to display the counter value
+- "-" button to decrement the counter
+
+<img alt="HyperCard Counter" style="border: 0; width: 20%"
+  src="/blog/assets/hypercard-counter.png?v={{pkg.version}}">
+
+The following screenshot shows the field configuration:
+
+<img alt="HyperCard Counter field" style="border: 0; width: 60%"
+  src="/blog/assets/hypercard-counter-field.png?v={{pkg.version}}">
+
+Add the following script to the "+" button:
+
+```text
+on mouseUp
+  put card field "counter" into counter
+  put counter + 1 into card field "counter"
+end mouseUp
+```
+
+Add the following script to the "-" button:
+
+```text
+on mouseUp
+  put card field "counter" into counter
+  if counter > 0 then
+    put counter - 1 into card field "counter"
+  end if
 end mouseUp
 ```
 
