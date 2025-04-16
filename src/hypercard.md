@@ -734,11 +734,12 @@ which I placed in the Applications directory.
 
 HyperTalk ...
 
-- is the scripting language used by HyperCard.
-- has an English-like syntax.
-- is interpreted at run-time, but cached for executing again later.
-- supports message passing (events) and message handlers.
-- implements a simple database.
+- is the scripting language used by HyperCard
+- has an English-like syntax
+- is case-insensitive except when comparing strings
+- is interpreted at run-time, but cached for executing again later
+- supports message passing (events) and message handlers
+- implements a simple database
 
 The commands (a.k.a. statements) supported by HyperTalk
 are documented at {% aTargetBlank
@@ -771,7 +772,7 @@ press cmd-equal or select Script ... Uncomment.
 
 HyperTalk supports the following data types:
 
-- booleans with the literal values `true` and `false`
+- booleans with the literal values `true` (or `1`) and `false` (or `0`)
 - numbers with literal values that are either integers or floating point
 - string with literal values delimited by double quotes
 - string lists that are a single string with commas delimiting the items
@@ -826,6 +827,8 @@ so it is risky to depend on those.
 
 When editing a script, press the tab key to format it
 which indents the lines properly.
+This uses two-space indentation,
+but any indentation (including none) will work.
 
 ### Message Handlers
 
@@ -1148,6 +1151,8 @@ then statement2
 else statement3
 ```
 
+In this form, `end if` is not allowed.
+
 When the branches can contain multiple statements,
 the following syntax can be used:
 
@@ -1160,6 +1165,23 @@ else
   statements3
 end if
 ```
+
+In this form, `end if` is required.
+
+Conditions can use the following "operators":
+
+- `is` or `=`
+- `is not` or `<>`
+- `<`
+- `>`
+- `<=`
+- `>=`
+
+For example, `is empty` checks for an empty string.
+
+Conditions can be combined with `and` and `or`.
+
+Conditions can be negated with `not`.
 
 ### Iteration
 
