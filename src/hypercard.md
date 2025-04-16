@@ -736,27 +736,30 @@ TODO: Why does the Tools menu disappear when the Color palette is open?
 
 ## Keyboard Shortcuts
 
-| Shortcut | Action                                                       |
-| -------- | ------------------------------------------------------------ |
-| cmd-h    | Home                                                         |
-| cmd-~    | go to Back to previous card                                  |
-| cmd-1    | go to First card in stack                                    |
-| cmd-2    | go to Prev card in stack                                     |
-| cmd-3    | go to Next card in stack                                     |
-| cmd-4    | go to Last card in stack                                     |
-| cmd-b    | toggle Background mode                                       |
-| cmd-c    | copy                                                         |
-| cmd-e    | open Scroll window                                           |
-| cmd-f    | Find within current stack                                    |
-| cmd-i    | open Icon editor                                             |
-| cmd-m    | open Message box (where commands can be entered)             |
-| cmd-o    | open a stack                                                 |
-| cmd-l    | go to the next open HyperCard window                         |
-| cmd-n    | New card                                                     |
-| cmd-r    | open window of recently visited cards (click one to open it) |
-| cmd-v    | past                                                         |
-| cmd-x    | cut                                                          |
-| cmd-z    | undo                                                         |
+| Shortcut    | Action                                                       |
+| ----------- | ------------------------------------------------------------ |
+| cmd-h       | Home                                                         |
+| cmd-~       | go to Back to previous card                                  |
+| cmd-1       | go to First card in stack                                    |
+| cmd-2       | go to Prev card in stack                                     |
+| cmd-3       | go to Next card in stack                                     |
+| cmd-4       | go to Last card in stack                                     |
+| left arrow  | go to Prev card in stack                                     |
+| right arrow | go to Next card in stack                                     |
+| up arrow    | go to First card in stack or Home stack if already on 1st    |
+| cmd-b       | toggle Background mode                                       |
+| cmd-c       | copy                                                         |
+| cmd-e       | open Scroll window                                           |
+| cmd-f       | Find within current stack                                    |
+| cmd-i       | open Icon editor                                             |
+| cmd-m       | open Message box (where commands can be entered)             |
+| cmd-o       | open a stack                                                 |
+| cmd-l       | go to the next open HyperCard window                         |
+| cmd-n       | New card                                                     |
+| cmd-r       | open window of recently visited cards (click one to open it) |
+| cmd-v       | past                                                         |
+| cmd-x       | cut                                                          |
+| cmd-z       | undo                                                         |
 
 The "Open Stack" dialog contains:
 
