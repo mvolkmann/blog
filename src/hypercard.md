@@ -1538,8 +1538,7 @@ Add the following script to the "+" button:
 
 ```text
 on mouseUp
-  put cd fld "counter" into counter
-  put counter + 1 into cd fld "counter"
+  put cd fld "counter" + 1 into cd fld "counter"
   set enabled of cd button "-" to true
 end mouseUp
 ```
@@ -1548,8 +1547,7 @@ Add the following script to the "-" button:
 
 ```text
 on mouseUp
-  put cd fld "counter" into counter
-  put counter - 1 into counter
+  put cd fld "counter" - 1 into counter
   put counter into cd fld "counter"
   if counter is 0 then
     set enabled of cd button "-" to false
