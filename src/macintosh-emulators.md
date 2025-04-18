@@ -38,11 +38,18 @@ The following files must be downloaded:
   - Mac OS 8.1 at
     https://www.macintoshrepository.org/15953-mac-os-8-1-691-1912-a-cd-
 
-  - Macintosh OS 9.2.2 Universal toast file #1 at
+  - Mac OS 9.2.2 Universal toast file #1 at
     https://macintoshgarden.org/apps/mac-os-922-universal
     The downloaded file name was "macos-922-uni.zip".
     This unzips to a directory named "macos-922-uni"
     that contains the file "macos-922-uni.iso".
+
+  - Mac OS 8.1 at https://winworldpc.com/product/mac-os-8/81
+    Click the link "Apple Mac OS 8.1 (ISO)".
+    Click the server link closet to you.
+    This takes several minutes to download the file `Apple Mac OS 8.1 (ISO).7z`.
+    Double-click this file to get the directory `Apple Mac OS 8.1 (ISO)`
+    which contains the file `MacOS8_1.iso`.
 
 - one of these ROM files for emulating a specific Macintosh computer
 
@@ -60,6 +67,11 @@ The following files must be downloaded:
     Click the link "420DBFF3 - Macintosh Quadra 700.7z".
     Double-click this file to get the unzipped file
     "420DBFF3 - Macintosh Quadra 700.rom".
+
+  - https://www.redundantrobot.com/sheepshaver
+    Click the link "Performa ROM".
+    This downloads a directory named `1mbMacrom`
+    that contains the file `PERFORMA.ROM`.
 
 - one of these bootstrap image files
 
@@ -85,14 +97,14 @@ The following files must be downloaded:
   I clicked the link after "Download version 0.22".
   The unzipped file name was "Basilisk II GUI.app".
 
-I moved the following files to a new directory in the
-Documents/dev directory named "mac-emulators":
+I moved the following files to the new directory
+`Documents/dev/mac-emulators/BasiliskII`.
 
-- BasiliskII/Basilisk II GUI.app
-- BasiliskII/BasiliskII.app
-- disk/755_2GB_drive.dsk
-- iso/Mac OS 7.6.1 toast
-- rom/368CADFE - Macintosh IIci.rom
+- Basilisk II GUI.app
+- BasiliskII.app
+- Mac OS 8.1.cdr
+- MacOS8_1.iso
+- PERFORMA.ROM
 
 ### Setup
 
