@@ -1396,6 +1396,11 @@ For example, `pass "messageName [parameterList]"`.
 To send a message to another object, use the `send` command.
 For example, `send "messageName [parameterList]" to objectReference`.
 
+## Speaking
+
+To speak the words in a string, use the `speak` command.
+For example, `speak "Happy Birthday!`.
+
 ### Menu Items
 
 To execute a menu item, use the command `doMenu`
