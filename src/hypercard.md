@@ -1524,12 +1524,23 @@ The following screenshot shows the field configuration:
 <img alt="HyperCard Counter field" style="border: 0; width: 60%"
   src="/blog/assets/hypercard-counter-field.png?v={{pkg.version}}">
 
+Add the following script to the card
+to reset the state every time to card is opened:
+
+```text
+on openCard
+  put 0 into cd fld counter
+  set enabled of cd button "-" to false
+end openCard
+```
+
 Add the following script to the "+" button:
 
 ```text
 on mouseUp
-  put card field "counter" into counter
-  put counter + 1 into card field "counter"
+  put cd fld "counter" into counter
+  put counter + 1 into cd fld "counter"
+  set enabled of cd button "-" to true
 end mouseUp
 ```
 
@@ -1537,9 +1548,11 @@ Add the following script to the "-" button:
 
 ```text
 on mouseUp
-  put card field "counter" into counter
-  if counter > 0 then
-    put counter - 1 into card field "counter"
+  put cd fld "counter" into counter
+  put counter - 1 into counter
+  put counter into cd fld "counter"
+  if counter is 0 then
+    set enabled of cd button "-" to false
   end if
 end mouseUp
 ```
