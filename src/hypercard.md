@@ -802,6 +802,10 @@ One way to test commands is to enter them in the message box.
 To open the message box, select Go ... Message or press cmd-m.
 Then enter commands separated by semicolons and press return to execute them.
 
+If a field reference is entered in the message box,
+it is replaced by the contents of the field.
+For example, `card field 2`, `card field id 7`, or `card field "first name"`.
+
 To write a value to the message box, use the command
 `put {expression} into [the] message [box]`.
 The put command writes to the message box by default,
