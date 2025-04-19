@@ -77,7 +77,11 @@ To make it easy to open your stacks from the Home stack:
 
   ```text
   on mouseUp
-    go to stack "MacOS_HD:Documents:HyperCard Stacks:My First Stack"
+    -- My path in SheepShaver.
+    --put "MacOS_HD:Documents:HyperCard Stacks:My First Stack"
+    -- My path in Basilisk.
+    put "Macintosh HD:My First Stack" into path
+    go to stack path in a new window
   end mouseUp
   ```
 

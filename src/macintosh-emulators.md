@@ -108,8 +108,15 @@ I moved the following files to the new directory
 
 ### Setup
 
-In the Finder, locate the "Mac OS 7.6.1.toast" file, right-click it,
-select "Get Info", check the Locked checkbox, and close the dialog.
+In the Finder, rename `Mac OS 8.1.cdr` to `Macintosh HD.dsk`.
+
+In the Finder, do the following for `MacOS8_1.iso` and `PERFORMA.ROM`:
+
+- find the file in the Finder
+- right-click it
+- select "Get Info"
+- check the Locked checkbox
+- close the dialog
 
 Double-click the file "Basilisk II GUI.app".
 A warning dialog will appear that asks
@@ -118,14 +125,12 @@ Click the "Open" button.
 
 On the System tab:
 
-- change "RAM Size (MB)" to 1024?.
-- change "Mac Model ID" to "Quadra 900 (MacOS 8.x)".
-- change "CPU Type" to 68040.
+- change "RAM Size (MB)" to 1024
+- change "Mac Model ID" to "Quadra 900 (MacOS 8.x)"
+- change "CPU Type" to 68040
 - check "Don't use CPU when idle"
 - after "ROM File", click the "Browse..." button
-- select the file "368CADFE - Macintosh IIci.rom",
-  "F1ACAD13 - Macintosh Quadra 650.rom", or
-  "420DBFF3 - Macintosh Quadra 700.rom".
+- select the file "PERFORMA.ROM"
 
 On the Graphics/Sound tab:
 
@@ -136,14 +141,15 @@ On the Graphics/Sound tab:
 On the Volumes tab:
 
 - Click the "Add..." button.
-- Select a drive file such as "755_2GB_drive.dsk",
-  "Mac OS 8.1.cdr", or "Mac_OS_9.2.2_HD_Restore.dmg".
+- Select a drive file such as `Mac OS 8.1.cdr`
 - Click the "Add..." button again.
-- Select an ISO file such as "Mac OS 7.6.1.toast",
-  "Mac OS 8.1.cdr", or "Mac_OS_9.2.2_HD_Restore.dmg".
-  or "macos-922-uni.iso".
+- Select an ISO file such as `MacOS8_1.iso`
+- Create a drive where new software can be installed and files can be saved.
+  - Click the "Create..." button.
+  - Enter the name "Macintosh HD.dsk".
+  - Click the Create button.
 - Click the Save button.
-- Click the Quit button.`
+- Click the Quit button.
 
 Start the emulator by double-clicking the file BasiliskII.app.
 
