@@ -465,6 +465,12 @@ on mouseUp
 end mouseUp
 ```
 
+To change the text on a button in a handler:
+
+```text
+set name of {button-reference} to "new-text"
+```
+
 To allow a button to be dragged to a new location,
 add the following handler in its script.
 This isn't particularly useful, but it demonstrates changing
