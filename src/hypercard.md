@@ -49,6 +49,10 @@ To turn this off, select Help ... Hide Balloons.
 
 ## Stacks
 
+A stack can be thought of as an application that runs in HyperCard
+OR as a database table with a user interface for
+creating, reading, updating, and deleting records.
+
 To create a new stack:
 
 - Select File ... New Stack...
