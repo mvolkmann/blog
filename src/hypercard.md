@@ -646,7 +646,7 @@ If the field is not on the current card, add `of card {card-reference}`.
 If the field is not on a card in the current stack,
 add `of card {card-reference} of stack "{stack-name"}`.
 
-To get the text from a field, a field reference.
+To get the text from a field, use a field reference.
 For example, `card field "{field-name}"`.
 This explains why setting a variable to a card reference
 only gets its text, not an object reference.
@@ -667,7 +667,7 @@ that specifies the number of times to play, defaulting to one.
 The `play` command takes the following arguments:
 
 - name of a sound, either boing or harpsichord
-- optional keyword "tempo" followed by a number (seems to default to 120)
+- optional keyword `tempo` followed by a number (seems to default to 120)
 - optional set of notes to play in double quotes
 
 For example, `play harpsichord tempo 120 "c4 e g4 e c5 q"`
@@ -840,7 +840,7 @@ To concatenate strings, or values that can be converted to strings,
 use the binary operators `&` and `&&`.
 The double ampersand adds a space between the values.
 
-To extract a substring from a string list, use the `of` keyword.
+To extract a substring from a string list, use the keyword `of`.
 For example:
 
 ```text
@@ -891,7 +891,7 @@ but any indentation (including none) will work.
 ### Message Handlers
 
 A single script can define any number of message handlers
-that each begin with the `on` keyword.
+that each begin with the keyword `on`.
 Each message handler listens for a specific kind of event
 and executes the code inside when triggered.
 Unlike functions, message handlers cannot return a value.
@@ -1083,12 +1083,16 @@ Local variables spring into existence when a value is assigned to them
 and are not declared.
 
 Global variables must be declared everywhere they are used
-with the `global` keyword.
+with the keyword `global`.
 For example, `global favoriteColor, maximumTemperature, taxRate`
 The values of global variables are not saved across HyperCard sessions.
 
-To assign a value to a variable, use the `put` keyword.
+To assign a value to a variable, use the `put` command.
 For example, `put 3.14159265 into pie` (`pi` is a predefined constant)
+
+To assign a value to a property of an object
+(such as a stack, card, button, or field), use the `set` command.
+For example,`set the visible of button "save" to false`.
 
 It's a good idea to initialize all global variables used by a stack
 in the `openStack` handler associated with the stack.
@@ -1172,7 +1176,7 @@ put "test" into card field 2 -- by number
 put the value of card field "user name" into myVariable
 ```
 
-If the keyword "card" is omitted, it will only look for a background field.
+If the keyword `card` is omitted, it will only look for a background field.
 
 ### Math
 
@@ -1184,16 +1188,16 @@ Parentheses can be used to change the evaluation order.
 A "container" is a variable or field.
 
 To add a number to a container that already contains a number,
-use the `add` keyword. For example, `add 3 to total`.
+use the `add` command. For example, `add 3 to total`.
 
 To subtract a number from a container that already contains a number,
-use the `subtract` keyword. For example, `subtract 3 from total`.
+use the `subtract` command. For example, `subtract 3 from total`.
 
 To multiply a number in a container that already contains a number,
-use the `multiply` keyword. For example, `multiply total by 3`.
+use the `multiply` command. For example, `multiply total by 3`.
 
 To divide a number in a container that already contains a number,
-use the `divide` keyword. For example, `divide total by 3`.
+use the `divide` command. For example, `divide total by 3`.
 
 ### Conditional Logic
 
@@ -1320,7 +1324,7 @@ function fnName param1, param2 -- parameters separated by commas
 end fnName
 ```
 
-The `return` keyword is used to return a value from a function.
+The `return` command is used to return a value from a function.
 
 Functions are called with the following syntax:
 
