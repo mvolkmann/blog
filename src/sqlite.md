@@ -208,12 +208,17 @@ For more detail, see {% aTargetBlank "https://www.sqlite.org/wal.html",
 ## JavaScript Support
 
 There are many client libraries in npm for working with SQLite databases.
-A recommended library is {% aTargetBlank
+A recommended Node library is {% aTargetBlank
 "https://github.com/JoshuaWise/better-sqlite3", "better-sqlite3" %}.
 To install this, enter `npm install better-sqlite3`.
 To use TypeScript types, enter `npm install @types/better-sqlite3`.
 
-The example code below demonstrates using this with TypeScript.
+No library is needed when using Bun instead of Node.
+Bun has {% aTargetBlank "https://bun.sh/docs/api/sqlite",
+"built-in support for SQLite" %} which claims to be
+3 to 6 times faster than better-sqlite3.
+
+The example code below demonstrates using better-sqlite3 with TypeScript.
 
 ```js
 import sqlite from 'better-sqlite3';
@@ -275,15 +280,15 @@ db.exec(
 
 // Create prepared statements.
 
-insertPersonPS = db.prepare(
+const insertPersonPS = db.prepare(
   'insert into people (name, month, day, year) values (?, ?, ?, ?)'
 );
-getAllPeoplePS = db.prepare('select * from people');
-getPersonPS = db.prepare('select * from people where id = ?');
-updatePersonPS = db.prepare(
+const getAllPeoplePS = db.prepare('select * from people');
+const getPersonPS = db.prepare('select * from people where id = ?');
+const updatePersonPS = db.prepare(
   'update people set name=?, month=?, day=?, year=? where id = ?'
 );
-deletePersonPS = db.prepare('delete from people where id = ?');
+const deletePersonPS = db.prepare('delete from people where id = ?');
 
 // Execute prepared statements.
 
