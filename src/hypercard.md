@@ -1537,7 +1537,9 @@ end mouseUp
 
 ### Counter
 
-Create the following objects:
+Let's create a read-only field that displays an integer
+and buttons that increment and decrement the value.
+Start by creating the following objects:
 
 - "+" button to increment the value
 - field to display the counter value
@@ -1582,7 +1584,41 @@ on mouseUp
 end mouseUp
 ```
 
+### Dice Button
+
+Let's create a button whose icon is a dice face.
+Each time the button is clicked, its icon changes to the next dice value.
+
+<img alt="HyperCard Dice Button" style="border: 0; width: 6%"
+  src="/blog/assets/hypercard-dice-button.png?v={{pkg.version}}">
+
+Create the following button with its icon set to any of the dice icons:
+
+<img alt="HyperCard Dice Button Info" style="border: 0; width: 55%"
+  src="/blog/assets/hypercard-dice-button-info.png?v={{pkg.version}}">
+
+Add the following script to the button:
+
+```text
+on mouseUp
+  -- The dice icon IDs are 2101 to 2106.
+  put the icon of me - 2101 into index
+  put (index + 1) mod 6 into index
+  set the icon of me to 2101 + index
+end mouseUp
+```
+
 ### Adding Numbers
+
+Let's create a field where the user can type any number of lines.
+When the "Add Number" button is clicked, a dialog is displayed
+which prompts the user to enter a number.
+Whatever they enter, number or not, is added as a new line in the field.
+The field can also be directly edited.
+
+When the "Total" button is clicked, the total of all the numbers entered on
+separate lines in the field is computed and displayed inside the field.
+When the "Clear" button is clicked, the contents of the field is cleared.
 
 <img alt="HyperCard Tools" style="border: 0; width: 50%"
   src="/blog/assets/hypercard-adding-numbers.png?v={{pkg.version}}">
