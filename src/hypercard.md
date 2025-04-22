@@ -97,7 +97,11 @@ a dialog will appear asking you to locate it.
 
 The default Home stack contains nine cards.
 
-- "Welcome to HyperCard" contains buttons to open several stacks including:
+- "Welcome to HyperCard" contains buttons to open several stacks.
+
+  To jump to this card, select Home ... Home Cards.
+
+  The stacks include:
 
   - HyperCard Tour
   - HyperCard Help
@@ -127,6 +131,23 @@ The default Home stack contains nine cards.
   - your stacks
   - other applications
   - documents in other applications
+
+- "Search Paths"
+
+  This is a set of three cards that list in order the paths that
+  HyperCard will search to find stacks, applications, and documents.
+  To jump to the first of these cards, select Home ... Search Paths.
+
+- "Preferences"
+
+  To jump to this card, select Home ... Preference.
+  This enables specifying the following preferences:
+
+  - Your name: accessed in a script with `the userName`
+  - User level: 1 through 5
+  - Blind Typing:
+  - Power Keys:
+  - Arrow Keys in Text:
 
 ### Stack Operations
 
@@ -196,7 +217,9 @@ TODO: Why doesn't this work? Maybe it just doesn't work in emulators.
 The Home stack initially contains buttons labeled
 "Card 3", "Card 4", and "Card 5"
 that navigate to a card with the same name.
-These buttons and their associated cards can be renamed.
+To rename these buttons and their associated card,
+go to one of the cards, select Home ... Rename This Card,
+enter the new name in the dialog that appears, and click the "OK" button.
 For example, consider renaming "Card 3" to "My Stacks"
 if that is where you place links to your stacks.
 
