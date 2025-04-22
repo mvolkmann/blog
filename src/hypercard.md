@@ -625,6 +625,13 @@ TODO: Finish this.
 ## Fields
 
 A text field is referred to as simply a "field".
+These hold text that can differ on each card within a stack.
+For example, the background of the cards in the provided "Addresses" stack
+contains "Name" and "Telephone" fields.
+Different values can be entered in these fields for each card.
+
+Fields can hold a single line of text or multiple lines.
+The choice is specified in the "Field Info" dialog for each field.
 
 To add a field to the current card:
 
@@ -763,6 +770,8 @@ To play a sound file, use the `play file` command.
 TODO: What sound formats are supported?
 
 ## Backgrounds
+
+Every stack has at least one background, but it can be empty.
 
 To switch to background mode,
 which temporarily hides the foreground of the current card
