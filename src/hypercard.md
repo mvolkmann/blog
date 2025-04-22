@@ -124,7 +124,7 @@ To open an existing stack:
 - Optionally check the "Open stack in new window" checkbox.
 - Click the "Open" button.
 
-The Home stack cannot be closed.
+At least one stack window must be open.
 To close another stack that is open in its own window,
 click its close box in the upper-left, press cmd-w,
 or select File ... Close Stack.
