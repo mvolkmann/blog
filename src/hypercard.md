@@ -95,6 +95,39 @@ in the following locations in this order:
 If the Home stack is not found in one of these locations,
 a dialog will appear asking you to locate it.
 
+The default Home stack contains nine cards.
+
+- "Welcome to HyperCard" contains buttons to open several stacks including:
+
+  - HyperCard Tour
+  - HyperCard Help
+  - Art Bits: a collection of clip art that can be
+    copied and pasted into your stacks
+  - Addresses: a sample address book
+  - Graph Maker: displays bar, column, line, and pie charts
+  - and more
+
+- "Stack Kit" contains buttons to open several stacks including:
+
+  - Readymade Buttons
+  - Readymade Fields
+  - Stack Templates
+  - Power Tools
+  - Background Art
+  - HyperTalk Reference
+  - Color Tools
+  - HyperTalk AppleScript Reference
+  - Apple Event Primer
+  - AppleScript Library
+
+- "Card 3", "Card 4", and "Card 5"
+
+  These are excellent places to add buttons that open:
+
+  - your stacks
+  - other applications
+  - documents in other applications
+
 ### Stack Operations
 
 There are three ways to open an existing stack.
@@ -140,11 +173,32 @@ To enable opening your stacks from the Home stack:
   "You can add your own buttons to this card."
 - Select Home ... New Link to Stack...
 - In the dialog that appears, select a stack file.
-- Click the "Open" button.
-- Optionally rename both the card named "Card 3"
-  and the button that contains "Card 3" to "My Stacks".
+- Click the "Open" button to add a new button.
 - Select the Browse tool.
-- From now on you can click this button to navigate to your stack.
+- The new button can be clicked to open the stack in a new window.
+
+To enable opening other applications from the Home Stack:
+
+- Press cmd-h to open the Home stack.
+- Go to Card 3, 4, or 5 that all say
+  "You can add your own buttons to this card."
+- Select Home ... New Link to Application...
+- In the dialog that appears, select an application.
+- Click the "Open" button to add a new button.
+- Select the Browse tool.
+- The new button can be clicked to launch the application.
+
+The process is similar to create a button that opens
+a given document using a given application.
+Select Home ... New Link to Document...
+TODO: Why doesn't this work? Maybe it just doesn't work in emulators.
+
+The Home stack initially contains buttons labeled
+"Card 3", "Card 4", and "Card 5"
+that navigate to a card with the same name.
+These buttons and their associated cards can be renamed.
+For example, consider renaming "Card 3" to "My Stacks"
+if that is where you place links to your stacks.
 
 To get information about the current stack:
 
