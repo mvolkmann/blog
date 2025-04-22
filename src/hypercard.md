@@ -56,6 +56,15 @@ A stack can be thought of as an application that runs in HyperCard
 OR as a database table with a user interface for
 creating, reading, updating, and deleting records.
 
+Each stack is stored in its own file in the Finder.
+
+There are three ways to open an existing stack.
+
+1. Double-click its file in the Finder.
+1. In the HyperCard app, select File ... Open Stack...
+1. In the HyperCard app, from the Home stack,
+   click a button that opens the stack.
+
 To create a new stack:
 
 - Select File ... New Stack...
@@ -334,6 +343,10 @@ There are four basic kinds of buttons:
 1. A check box
 1. A radio button
 1. Buttons that display a popup (dropdown menu) when they are clicked.
+
+To find all the buttons on the current card, press and hold cmd-option.
+This adds a dotted outline around all the buttons
+that disappears when the keys are released.
 
 To add a button to the current card.
 
