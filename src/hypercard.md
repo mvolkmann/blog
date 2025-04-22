@@ -72,6 +72,8 @@ OR as a database table with a user interface for
 creating, reading, updating, and deleting records.
 
 Each stack is stored in its own file in the Finder.
+All changes made to the cards in a stack are automatically saved.
+This includes modifying the content of fields, adding cards, and deleting cards.
 
 Stacks are not meant to be concurrently modified by multiple users.
 
@@ -165,6 +167,15 @@ To get information about the current stack:
   This enables renaming the stack, resizing it, and editing its script.
   It also gives the number of cards in the stack
   and the number of backgrounds used.
+
+To create a copy of the current stack:
+
+- Select File ... Save a Copy...
+- In the dialog that appears, select the target directory.
+- Enter a stack name under the label "Save a copy of stack as:".
+- Optionally change the "File type" to "Application"
+  to create an application that can be run without HyperCard.
+- Click the "Save" button.
 
 To edit a background used by the current card:
 
