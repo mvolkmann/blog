@@ -49,6 +49,9 @@ To turn this off, select Help ... Hide Balloons.
 
 ## Stacks
 
+A stack is a collection of cards that all have the same size.
+Each stack can use a different card size.
+
 A stack can be thought of as an application that runs in HyperCard
 OR as a database table with a user interface for
 creating, reading, updating, and deleting records.
@@ -114,6 +117,14 @@ They can open the stack by double-clicking it,
 or by launching HyperCard and selecting File ... Open Stack...
 
 ## Cards
+
+A card belongs to a specific stack.
+Each card has a foreground and background layer.
+Both the foreground and background can contain
+graphics, buttons, and fields (for text).
+All transparent parts of a card foreground display
+content from the background at the same location.
+Typically many cards share a background.
 
 To add a card to the current stack, select Edit ... New Card or press cmd-n.
 
