@@ -177,7 +177,7 @@ To create a copy of the current stack:
   to create an application that can be run without HyperCard.
 - Click the "Save" button.
 
-To edit a background used by the current card:
+To view and optionally edit a background used by the current card:
 
 - Select Edit ... Background or press cmd-b to toggle background mode.
   This is indicated by a hatched pattern in the menu bar.
@@ -739,6 +739,8 @@ only gets its text, not an object reference.
 To execute a HyperTalk command that was entered in a field,
 run the command `do card field "{field-name}"`.
 
+To move the focus to the next field, press the tab key.
+
 ## Drawing
 
 To draw a shape, select a tool from the Tools menu
@@ -762,8 +764,12 @@ TODO: What sound formats are supported?
 
 ## Backgrounds
 
-Select Edit ... Background or select cmd-b
-to toggle between background and foreground modes.
+To switch to background mode,
+which temporarily hides the foreground of the current card
+and only displays its background,
+select Edit ... Background or press cmd-b.
+Repeat to return to foreground mode which
+displays the foreground and background of the current card.
 
 To add a new background to the current stack,
 select Objects ... New Background.
