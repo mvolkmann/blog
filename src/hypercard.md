@@ -70,6 +70,10 @@ creating, reading, updating, and deleting records.
 
 Each stack is stored in its own file in the Finder.
 
+Stacks are not meant to be concurrently modified by multiple users.
+
+### Home Stack
+
 HyperCard ships with several stacks including one named "Home".
 When HyperCard is launched, it looks for the file `Home`
 in the following locations in this order:
@@ -80,6 +84,11 @@ in the following locations in this order:
 1. directory containing the HyperCard app (default location of `Home` file)
 1. `HyperCard Stacks` directory in the director containing the HyperCard app
 1. root directory of the drive containing the HyperCard app
+
+If the Home stack is not found in one of these locations,
+a dialog will appear asking you to locate it.
+
+### Stack Operations
 
 There are three ways to open an existing stack.
 
