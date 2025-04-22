@@ -41,6 +41,9 @@ The original version of the game Myst was developed in HyperCard.
 
 The first card in the default HyperCard Home stack
 contains buttons that navigate to commonly used stacks.
+Begin by clicking the "HyperCard Tour" stack
+which provides a good overview of the application.
+At any point, press cmd-h to return to the Home stack.
 
 Changes to stacks are saved automatically.
 There is no save button or menu item.
@@ -113,6 +116,18 @@ To create a new stack:
   - Window: 640 x 480 (same as Large)
 - Optionally check "Open stack in new window".
 - Click the Save button.
+
+To open an existing stack:
+
+- Select File ... Open Stack...
+- In the dialog that appears, navigate to the stack to open.
+- Optionally check the "Open stack in new window" checkbox.
+- Click the "Open" button.
+
+The Home stack cannot be closed.
+To close another stack that is open in its own window,
+click its close box in the upper-left, press cmd-w,
+or select File ... Close Stack.
 
 To make it easy to open your stacks from the Home stack:
 
@@ -1547,8 +1562,10 @@ HyperCard supports the following five user levels:
 To set the level for the HyperCard application as a whole:
 
 - Open the Home stack by pressing cmd-h.
-- Click the left-pointing triangle in the lower-left.
-- Click one of the five levels.
+- Go the last card by pressing cmd-4 or
+  by clicking the left-pointing triangle in the lower-left.
+- Select a level by clicking it or
+  by dragging the right-pointing triangle up and down.
 
 Alternative, open the message box and enter
 `set [the] userLevel to n` where n is a number from 1 to 5.
