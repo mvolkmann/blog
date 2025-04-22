@@ -52,6 +52,8 @@ There is no save button or menu item.
 
 To launch HyperCard, double-click on the app icon
 or on the icon of a HyperCard stack.
+If the app icon was double-clicked, the Home stack will be opened.
+The first card in the opened stack will be displayed.
 
 ## Help
 
@@ -131,32 +133,16 @@ To close another stack that is open in its own window,
 click its close box in the upper-left, press cmd-w,
 or select File ... Close Stack.
 
-To make it easy to open your stacks from the Home stack:
+To enable opening your stacks from the Home stack:
 
 - Press cmd-h to open the Home stack.
 - Go to Card 3, 4, or 5 that all say
   "You can add your own buttons to this card."
-- Add a button to one of those cards.
-- Select the Button tool.
-- Double-click the button open its Info dialog.
-- Change the "Button Name" to the name of your stack.
-- Click the "Script..." button.
-- Enter the following, replacing the path with one for your stack:
-
-  ```text
-  on mouseUp
-    -- My path in SheepShaver.
-    --put "MacOS_HD:Documents:HyperCard Stacks:My First Stack"
-    -- My path in Basilisk.
-    put "Macintosh HD:My First Stack" into path
-    go to stack path in a new window
-  end mouseUp
-  ```
-
-- In the Home stack, optionally rename both the card named "Card 3"
+- Select Home ... New Link to Stack...
+- In the dialog that appears, select a stack file.
+- Click the "Open" button.
+- Optionally rename both the card named "Card 3"
   and the button that contains "Card 3" to "My Stacks".
-
-- Change "go to" to "open" to open the stack in a new window.
 - Select the Browse tool.
 - From now on you can click this button to navigate to your stack.
 
