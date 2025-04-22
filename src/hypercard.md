@@ -156,7 +156,21 @@ The default Home stack contains nine cards.
     all typed characters are added to the message box
     even when the message box is not open.
 
-  - Power Keys: TODO: What does this do?
+  - Power Keys
+
+    This enables issuing commands related to the painting tools
+    by pressing the letter, digit, `[`, and `]` keys.
+
+    Examples include:
+
+    - 1, 2, 3, 4, 6, and 8 set the line thickness to that number of pixels
+    - `c` toggles draw centered on and off
+    - `g` toggles snap to grid on and off
+    - `h` flips the selection horizontally
+    - `v` flips the selection vertically
+    - `[` rotates the selection left 90 degrees
+    - `]` rotates the selection right 90 degrees
+    - TODO: Add more. See page 292-294 in book.
 
   - Arrow Keys in Text
 
@@ -354,7 +368,7 @@ The tools include:
 
   - **Brush**
 
-    This is used for freehand painting.
+    This is used for freehand painting using the currently selected pattern.
     To change the shape and size of the brush,
     Select Options ... Brush Shape... before painting.
 
@@ -368,6 +382,8 @@ The tools include:
 
     Click at start of line and drag to end of line.
     To change the line size, Select Options ... Line Size... before drawing.
+    If the option key is held down while drawing,
+    the line will use the currently selected pattern.
 
 - Row #4
 
@@ -431,6 +447,14 @@ The tools include:
     This draws an arbitrary polygon.
     Click at each point in the polygon. Double-click to end.
     It does not automatically connect the last point to the first.
+
+If Options ... Draw Filled is selected, the following tools will
+fill their shape with the currently selected pattern:
+Rectangle, Rounded Rectangle, Oval, Regular Polygon, and Polygon.
+
+If Options ... Draw Filled is selected, the following tools will
+draw their lines with the currently selected pattern:
+Line, Rectangle, Rounded Rectangle, Oval, Regular Polygon, and Polygon.
 
 To undo the last drawing action, press the esc key or cmd-z.
 
@@ -825,11 +849,6 @@ To execute a HyperTalk command that was entered in a field,
 run the command `do card field "{field-name}"`.
 
 To move the focus to the next field, press the tab key.
-
-## Drawing
-
-To draw a shape, select a tool from the Tools menu
-and drag the mouse in a card.
 
 ## Sounds
 
