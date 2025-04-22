@@ -16,19 +16,31 @@ HyperCard is a Macintosh application for viewing and creating
 multimedia applications built with HyperCard stacks
 (a.k.a HyperCard applications) which are collections of cards.
 Cards primarily contain text, graphics, and buttons.
+They can also play sounds and videos.
+
+The original application name was WildCard. It was changed
+to HyperCard shortly before the initial release
+because the name WildCard was already trademarked.
 
 HyperCard initially released in August, 1987.
 The last version of HyperCard, released in 1988, was 2.4.1.
 The oldest version of Mac OS that supports some version of HyperCard
-is Mac OS 6.0.1.
+is Mac OS 6.0.5.
 The newest version of Mac OS that can run HyperCard is 9.2.2.
 
 HyperCard was developed at Apple by Bill Atkinson and Dan Winkler,
 using Apple Pascal.
 
+Bill Atkinson said of HyperCard that "It's programming for the rest of us."
+HyperCard allows non-developers to create applications
+that can easily be shared with others.
+
+For a time, HyperCard came preinstalled on all Macintosh computers.
+
 The original version of the game Myst was developed in HyperCard.
 
-The Home card contains buttons that navigate to commonly used stacks.
+The first card in the default HyperCard Home stack
+contains buttons that navigate to commonly used stacks.
 
 Changes to stacks are saved automatically.
 There is no save button or menu item.
@@ -58,12 +70,26 @@ creating, reading, updating, and deleting records.
 
 Each stack is stored in its own file in the Finder.
 
+HyperCard ships with several stacks including one named "Home".
+When HyperCard is launched, it looks for the file `Home`
+in the following locations in this order:
+
+1. `System Folder` at the root of the drive containing the HyperCard app
+1. directory containing another stack that was
+   double-clicked to launch HyperCard
+1. directory containing the HyperCard app (default location of `Home` file)
+1. `HyperCard Stacks` directory in the director containing the HyperCard app
+1. root directory of the drive containing the HyperCard app
+
 There are three ways to open an existing stack.
 
 1. Double-click its file in the Finder.
 1. In the HyperCard app, select File ... Open Stack...
 1. In the HyperCard app, from the Home stack,
    click a button that opens the stack.
+
+Multiple stacks can be open at the same time,
+each it its own window.
 
 To create a new stack:
 
