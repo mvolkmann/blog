@@ -431,6 +431,8 @@ The tools include:
     before typing the text.
     Then click where the text should go and begin typing.
 
+    TODO: Can this use the currently selected pattern?
+
     For text that may need to be edited later, use a text field instead
     and check the "Lock Text" checkbox in its Field Info dialog
     to make it read-only.
