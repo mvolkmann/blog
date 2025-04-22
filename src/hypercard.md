@@ -144,10 +144,25 @@ The default Home stack contains nine cards.
   This enables specifying the following preferences:
 
   - Your name: accessed in a script with `the userName`
+
   - User level: 1 through 5
-  - Blind Typing:
-  - Power Keys:
-  - Arrow Keys in Text:
+
+  - Blind Typing
+
+    When no field has focus and the message box is open,
+    all typed characters are added to the message box
+    because it gets focus by default.
+    When "blind typing" is enabled, and no field has focus,
+    all typed characters are added to the message box
+    even when the message box is not open.
+
+  - Power Keys: TODO: What does this do?
+
+  - Arrow Keys in Text
+
+    By default, pressing the arrow keys navigates to other cards.
+    Checking this checkbox enables using all four arrow keys
+    to move the cursor inside focused fields.
 
 ### Stack Operations
 
