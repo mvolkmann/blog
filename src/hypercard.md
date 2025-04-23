@@ -549,10 +549,35 @@ select Options ... Draw Filled.
 There are four basic kinds of buttons:
 
 1. Buttons that perform an action when clicked.
-   These can contain text, an icon, both, or neither.
-1. A check box
-1. A radio button
-1. Buttons that display a popup (dropdown menu) when they are clicked.
+   The style for these can be "Transparent", "Opaque", "Rectangle",
+   "Rounded Rect", "Shadow", "Oval", "Standard", or "Default".
+   Any of these button styles can contain text, an icon, both, or neither.
+1. "Check Box" for specifying a Boolean value.
+1. "Radio Button" for selecting from a small set of options.
+1. "Popup" that displays a dropdown menu of options when clicked
+   for selecting from a possibly large set options.
+
+Each of the supported button styles are shown below.
+
+<img alt="HyperCard button types" style="border: 0; width: 50%"
+  src="/blog/assets/hypercard-button-types.png?v={{pkg.version}}">
+
+Standard and Default buttons conform to
+the Macintosh interface guidelines for buttons.
+There should be at most one Default button per card
+and a card script must be added to
+trigger the button when the return key is pressed.
+For example:
+
+```text
+on returnKey
+  send "mouseUp" to card button "My Default Button"
+end returnKey
+```
+
+Oval buttons are transparent and do not display their border.
+They only differ from Transparent buttons in
+the shape of their target (clickable) area.
 
 To find all the buttons on the current card, press and hold cmd-option.
 This adds a dotted outline around all the buttons
