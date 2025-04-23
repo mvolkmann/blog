@@ -456,9 +456,12 @@ The tools include:
   - **Text**
 
     This paints text that cannot be edited.
-    The text style must be specified by selecting Edit ... Text Style...
-    before typing the text.
-    Then click where the text should go and begin typing.
+    The text style must be specified before typing the text.
+    To open the Text Style dialog, select Edit ... Text Style..., press cmd-t,
+    or double-click the Text tool icon ("A") in the Tools palette.
+    Then click the Text tool, click on the card or background
+    where the text should go, and begin typing.
+    To create multiline text, press the return key at the end of a line.
 
     TODO: Can this use the currently selected pattern?
 
@@ -479,9 +482,18 @@ The tools include:
     Click at each point in the polygon. Double-click to end.
     It does not automatically connect the last point to the first.
 
-The Patterns menu only appears when a painting tool is selected.
-Like the Tools menu, it can be dragged off the menu bar
+When a painting tool is selected,
+the Objects, Font, and Style menus disappear,
+and the Paint, Options, and Patterns menus appear.
+When the browse, button, or field tools are selected,
+the reverse menu changes occurs.
+
+Like the Tools menu, it can be dragged off of the menu bar
 to create a floating palette.
+
+When a painting tool is selected, pressing the tab key
+toggles the display of the Patterns palette,
+even if it was not previously dragged off of the menu bar.
 
 If Options ... Draw Filled is selected, the following tools will
 fill their shape with the currently selected pattern:
