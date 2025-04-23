@@ -833,9 +833,9 @@ Example field references include:
 
 The keyword `field` can be abbreviated to `fld`.
 
-If the field is on the card instead of the background,
+If the field is on the card (foreground) instead of the background,
 add `card` or `cd` before `button`.
-If the button is on the background instead of the card,
+If the button is on the background instead of the card (foreground),
 optionally add `background`, `bkgnd`, or `bg` before `button`.
 If none of these keywords are added,
 HyperTalk will assume the field is on the background.
@@ -1722,6 +1722,23 @@ open the message box (cmd-m) and enter `set [the] userLevel to 5`.
   "The Haunted House" %} by Mark Klink
 
 ## Demos
+
+### Card Numbers
+
+To display a card number on each card in a stack:
+
+- Add the following field to each background:
+
+  <img alt="HyperCard card number field" style="border: 0; width: 60%"
+  src="/blog/assets/hypercard-card-number-field.png?v={{pkg.version}}">
+
+- Add the following script to each background:
+
+  ```text
+  on openCard
+    put the number of this card into field "cardNumber"
+  end openCard
+  ```
 
 ### Experimenting With HyperTalk
 
