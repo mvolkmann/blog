@@ -893,6 +893,11 @@ Cards created after this one will use the new background by default.
 To assign a name to a background, select Options ... Bkgnd Info...
 and enter/change the "Background Name".
 
+In a stack that uses multiple backgrounds,
+button and field names can be duplicated across the backgrounds.
+This enables background scripts to use the same code
+for referring to those containers.
+
 It seems there is no way to change the background used by an existing card.
 The only option seems to be copying the content from the existing card
 to a new card that use the desired background.
