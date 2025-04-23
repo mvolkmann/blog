@@ -1943,5 +1943,9 @@ This version of HyperCard ...
 - {% aTargetBlank "https://archive.org/details/AppleMacintoshSystem753",
   "Macintosh System 7.5.3" %} on Internet Archive;
   click to begin; includes HyperCard
+- {% aTargetBlank "https://archive.org/details/hypercardstacks",
+  "HyperCard Stacks" %}
 - {% aTargetBlank "https://livecode.com", "LiveCode" %} active,
   commercial alternative to HyperCard
+- {% aTargetBlank "https://www.vipercard.net", "ViperCard" %} -
+  an open source recreation and re-imagination of HyperCard
