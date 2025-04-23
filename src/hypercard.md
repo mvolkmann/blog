@@ -1853,6 +1853,48 @@ on mouseUp
 end mouseUp
 ```
 
+## Books
+
+The book "The Complete HyperCard 2.2 Handbook" volumes 1 and 2
+are widely seen as the best documentation on HyperCard.
+But these books to not cover improvements made in HyperCard 2.3 and 2.4.
+The following subsections describe those improvements.
+
+### HyperCard 2.3
+
+This version of HyperCard ...
+
+- added limited color capabilities through XCMD extensions
+  and better integration with ColorTools
+- enhanced support for QuickTime movies and sound resources
+- improved AppleScript support, allowing HyperCard
+  to be controlled by other applications
+- added optimizations for faster script execution and card rendering
+- added support for running on the PowerPC Macintosh models,
+  though not as a native PowerPC application
+- enhanced printing capabilities
+- improved the script editor
+- improved debugging tools
+- added external commands (XCMDs) and functions (XFCNs).
+- included bug fixes
+
+### HyperCard 2.4
+
+This version of HyperCard ...
+
+- improved support for styled text
+- improved the painting tools
+- added ability to use a palette of 256 colors
+- added improvements to the HyperTalk language
+- added support for over 30 standard media file types, including PICT files
+- added support stacks that span multiple monitors
+- improved multimedia controls, making it possible to
+  resize, flip, mirror, rotate, or skew QuickTime movies in real-time,
+  as well as loop movies for continuous play
+- added QuickTime integration which enables linking HyperCard stacks to
+  QuickTime movies, QuickTime VR scenes, and the World Wide Web
+- included bug fixes
+
 ## Resources
 
 - {% aTargetBlank "https://en.wikipedia.org/wiki/HyperCard",
