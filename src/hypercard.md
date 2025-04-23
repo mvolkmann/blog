@@ -164,16 +164,17 @@ The default Home stack contains nine cards.
     Examples include:
 
     - 1, 2, 3, 4, 6, and 8 set the line thickness to that number of pixels
+    - `a` selects all the painting on the current card (not buttons or fields)
     - `c` toggles draw centered on and off
     - `d` darkens all pixels in the selected region
     - `e` traces the edges of the current shape; can apply repeatedly
     - `g` toggles snap to grid on and off
     - `h` flips the selection horizontally
+    - `i` inverts all the pixels in the selected area
     - `l` lightens all pixels in the selected region
     - `v` flips the selection vertically
     - `[` rotates the selection left 90 degrees
     - `]` rotates the selection right 90 degrees
-    - TODO: Add more. See page 292-294 in book.
 
   - Arrow Keys in Text
 
@@ -280,6 +281,31 @@ To view and optionally edit a background used by the current card:
 To share a stack with others, send them the stack file.
 They can open the stack by double-clicking it,
 or by launching HyperCard and selecting File ... Open Stack...
+
+### Stack Compacting
+
+When changes are made in a stack, such as entering text in a field,
+HyperCard allocates extra space
+in anticipation of more space being needed later.
+This makes future changes more efficient because
+it isn't always necessary to allocate more space.
+In large stacks that have undergone many changes,
+this can result in quite a bit of allocated space that is unused ...
+referred to as "free space".
+
+To see the amount of free space in a stack,
+open it and select Objects ... Stack Info... .
+In the dialog that appears, the total amount of disk space
+used by the stack is listed after "Size of stack" and
+the amount of free space is listed after "Free in stack".
+
+The free space can be removed, reducing the size of the stack,
+by selecting File ... Compact Stack.
+This also verifies the internal structure of the stack
+and is able to fix some issues.
+
+It is recommended to periodically compact all stacks,
+perhaps daily for frequently modified stacks.
 
 ## Cards
 
@@ -452,6 +478,10 @@ The tools include:
     This draws an arbitrary polygon.
     Click at each point in the polygon. Double-click to end.
     It does not automatically connect the last point to the first.
+
+The Patterns menu only appears when a painting tool is selected.
+Like the Tools menu, it can be dragged off the menu bar
+to create a floating palette.
 
 If Options ... Draw Filled is selected, the following tools will
 fill their shape with the currently selected pattern:
@@ -889,6 +919,10 @@ but it will not be in background mode.
 Press cmd-b to enter background mode and add content.
 Then press cmd-b again to enter foreground mode and add content.
 Cards created after this one will use the new background by default.
+
+To copy a background and create a new background
+that starts out with the same configuration,
+TODO: ???
 
 To assign a name to a background, select Options ... Bkgnd Info...
 and enter/change the "Background Name".
