@@ -596,17 +596,19 @@ To add a button to the current card.
   the name used to refer to them and the label displayed in them.
 - Choose a button style from the following options:
 
-  - Transparent: default when created with cmd-drag
-  - Opaque
-  - Rectangle
-  - Round Rect: default when created with "New Button" menu item
-  - Shadow
+  - Transparent: no border and can see through;
+    default when created with cmd-drag
+  - Opaque: no border and cannot see through
+  - Rectangle: opaque with rectangle border
+  - Round Rect: opaque with rectangle border that has rounded corners;
+    default when created with "New Button" menu item
+  - Shadow: like Rectangle, but adds shadows on the right and bottom sides
   - Check Box: for a Boolean selection; click the checkbox or the name
     to toggle the value of its `hilite` property
   - Radio Button: for a set of mutually exclusive choices
-  - Standard: TODO: Investigate
-  - Default: TODO: Investigate
-  - Oval: TODO: Investigate
+  - Standard: conforms to Macintosh interface guidelines for non-default buttons
+  - Default: conforms to Macintosh interface guidelines for default buttons
+  - Oval: like Transparent, but the target area is an oval instead of a rectangle
   - Popup: a dropdown containing options
 
 - Decide whether the button name should be displayed
