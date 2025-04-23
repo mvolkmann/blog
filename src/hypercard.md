@@ -165,8 +165,11 @@ The default Home stack contains nine cards.
 
     - 1, 2, 3, 4, 6, and 8 set the line thickness to that number of pixels
     - `c` toggles draw centered on and off
+    - `d` darkens all pixels in the selected region
+    - `e` traces the edges of the current shape; can apply repeatedly
     - `g` toggles snap to grid on and off
     - `h` flips the selection horizontally
+    - `l` lightens all pixels in the selected region
     - `v` flips the selection vertically
     - `[` rotates the selection left 90 degrees
     - `]` rotates the selection right 90 degrees
