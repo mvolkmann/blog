@@ -1104,6 +1104,9 @@ are documented at {% aTargetBlank
 ### Message Box
 
 One way to execute HyperTalk commands is to enter them in the message box.
+This is a small window that allows entry of a single line of HyperTalk code.
+It can be moved, but cannot be resized.
+
 To toggle display of the message box, select Go ... Message or press cmd-m.
 Then enter commands separated by semicolons and press return to execute them.
 
@@ -1126,24 +1129,49 @@ so the previous command can shorted to `put {expression}`.
 The following are examples of HyperTalk commands
 that can be entered in the message box:
 
-- `go to Art Bits` - opens the stack named "Art Bits"
-- `go art bits` - same but without optional keyword `to` and without capitalizing
-- `edit script of button "My Button"` - must be in the current card
-- `searchScript "some text", "stack name"`
+- navigation
 
-  This opens the script editor for the first script
-  found in the stack "stack name" that contains the text "some text".
-  Closing the script editor opens another for the next match found.
-  After the last match is displayed,
-  a dialog containing "Search script done!" is opened.
+  - `go to Art Bits` - opens the stack named "Art Bits"
+  - `go art bits` - same but without optional keyword `to`
+    and without capitalizing
 
-  `searchScript` is a handler defined in the Home stack.
-  To see it, open the Home stack, select Objects ... Stack Info...,
-  and click the "Script..." button.
-  Alternatively, enter `edit script of Home` in the message box.
-  Press cmd-f to open a Find dialog and enter "searchScript".
-  Repeatedly press cmd-g to find the next match until the line
-  `on searchScript pattern,stackName` is found.
+- scripts
+
+  - `edit script of button "My Button"`
+
+    This opens a script editor for a given script.
+    Unless a card name is specified, the script must be in the current card.
+
+  - `searchScript "some text", "stack name"`
+
+    This opens the script editor for the first script
+    found in the stack "stack name" that contains the text "some text".
+    Closing the script editor opens another for the next match found.
+    After the last match is displayed,
+    a dialog containing "Search script done!" is opened.
+
+    `searchScript` is a handler defined in the Home stack.
+    To see it, open the Home stack, select Objects ... Stack Info...,
+    and click the "Script..." button.
+    Alternatively, enter `edit script of Home` in the message box.
+    Press cmd-f to open a Find dialog and enter "searchScript".
+    Repeatedly press cmd-g to find the next match until the line
+    `on searchScript pattern,stackName` is found.
+
+- mathematical expressions
+
+  The entered expression is replaced by its result.
+
+  - `2 * 3` - gives `6`
+  - `4 * (5 - 2)` - uses parentheses to control order of evaluation and gives `12`
+  - `4^3` - uses exponentiation and gives `64`
+  - `2 * pi * 3^2` - gives `56.548668`
+  - `sin(45)` - evaluates a trigonometry function and gives `0.850904`
+
+  The built-in mathematical functions include
+  `abs`, `annuity`, `atan`, `average`, `cos`, `ln`, `ln1`, `log2`,
+  `exp`, `exp1`, `exp2`, `ln`, `ln1`, `log2`, `max`, `min`, `random`,
+  `round`, `sin`, `sqrt`, `sum`, `tan`, and `trunc`
 
 ### Comments
 
