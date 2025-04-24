@@ -1131,8 +1131,10 @@ are documented at {% aTargetBlank
 ### Message Box
 
 One way to execute HyperTalk commands is to enter them in the message box.
-This is a small window that allows entry of a single HyperTalk command.
-The box can be moved, but cannot be resized.
+This is a single, small window that allows entry of a single HyperTalk command.
+If the text entered extends past the right edge, that portion
+will not be visible and the text cannot be scrolled horizontally.
+The message box can be moved, but it cannot be resized.
 
 To toggle display of the message box, select Go ... Message or press cmd-m.
 Then enter commands separated by semicolons and press return to execute them.
