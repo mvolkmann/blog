@@ -143,7 +143,17 @@ The default Home stack contains nine cards.
   To jump to this card, select Home ... Preference.
   This enables specifying the following preferences:
 
-  - Your name: accessed in a script with `the userName`
+  - Your name
+
+    The string entered here is saved in the global variable `UserName`.
+    It can be used in scripts like the one below that can be added to a button.
+
+    ```text
+    on mouseUp
+      global UserName
+      answer "Hello," && UserName & "!"
+    end mouseUp
+    ```
 
   - User level: 1 through 5
 
