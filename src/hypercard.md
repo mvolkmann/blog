@@ -340,7 +340,15 @@ Sadly there is no easy way to:
 - reorder the cards in a stack
 - change the background used by an existing card
 
-This seem like large oversights!
+These seem like large oversights!
+
+HyperCard remembers the last 42 unique cards viewed in the current session.
+To view thumbnails of the viewed cards, select Go ... Recent or press cmd-r.
+This opens a modal dialog.
+The thumbnail for the card currently being viewed has a black border.
+To navigate to a different card and dismiss the dialog, click its thumbnail.
+To remain on the current card and dismiss the dialog,
+click the background of the dialog.
 
 TODO: Discuss "marking" cards and what you can do with marked cards.
 
