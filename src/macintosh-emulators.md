@@ -358,6 +358,12 @@ To install HyperCard:
 1. To launch HyperCard, open the "HyperCard 2.4" folder
    and double-click HyperCard.
 
+## Full Screen Mode
+
+To toggle full screen mode, press ctrl-return.
+This is highly recommended because it enables resizing windows
+that have become taller than the SheepShaver window.
+
 ## Colors
 
 To enable colors in the emulator:
