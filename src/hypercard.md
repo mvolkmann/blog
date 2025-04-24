@@ -2085,23 +2085,26 @@ To implement buttons like these:
   <img alt="HyperCard Next Button" style="width: 49%"
     src="/blog/assets/hypercard-next-button.png?v={{pkg.version}}">
 
+- Create the following field between the buttons:
+
+  <img alt="HyperCard Card Number Field" style="width: 49%"
+    src="/blog/assets/hypercard-card-number-field.png?v={{pkg.version}}">
+
 - Select Objects .. Bkgnd Info...
 - Click the Script button.
 - Add the following script:
 
   ```text
   on openCard
-    if the number of this card is 1 then
-      set the visible of bg button "prevCard" to false
-    else
-      set the visible of bg button "prevCard" to true
-    end if
+    put the number of this card into cardNum
+    put the number of cards into cardCount
+    put cardNum && "of" && cardCount into field "cardNumber"
 
-    if the number of this card is the number of cards then
-      set the visible of bg button "nextCard" to false
-    else
-      set the visible of bg button "nextCard" to true
-    end if
+    put cardNum &lt;&gt; 1 into showPrev
+    set the visible of bg button "prevButton" to showPrev
+
+    put cardNum &lt;&gt; cardCount into showNext
+    set the visible of bg button "nextButton" to showNext
   end openCard
   ```
 
