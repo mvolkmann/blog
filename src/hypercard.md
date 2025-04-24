@@ -359,7 +359,7 @@ that can be clicked to select one of the 18 tools.
 Drag the Tools menu off the menu bar
 to create a floating palette of tool buttons.
 
-<img alt="HyperCard Tools" style="border: 0; width: 20%"
+<img alt="HyperCard Tools" style="border: 0; width: 15%"
   src="/blog/assets/hypercard-tools.png?v={{pkg.version}}">
 
 The tools include:
@@ -405,7 +405,7 @@ The tools include:
 
   - **Brush**
 
-    This is used for freehand painting using the currently selected pattern.
+    This is used for freehand painting using the selected pattern.
     To change the shape and size of the brush,
     Select Options ... Brush Shape... before painting.
 
@@ -420,13 +420,13 @@ The tools include:
     Click at start of line and drag to end of line.
     To change the line size, Select Options ... Line Size... before drawing.
     If the option key is held down while drawing,
-    the line will use the currently selected pattern.
+    the line will use the selected pattern.
 
 - Row #4
 
   - **Spray**
 
-    This sprays paint using the currently selected pattern.
+    This sprays paint using the selected pattern.
 
   - **Rectangle**
 
@@ -443,7 +443,7 @@ The tools include:
 
   - **Bucket**
 
-    This fills an area with the currently selected pattern
+    This fills an area with the selected pattern
     from the Patterns menu or palette
     when a pixel inside an enclosed area is clicked.
 
@@ -471,7 +471,7 @@ The tools include:
     where the text should go, and begin typing.
     To create multiline text, press the return key at the end of a line.
 
-    TODO: Can this use the currently selected pattern?
+    To apply a pattern to painted text, see the "Patterns" section below.
 
     For text that may need to be edited later, use a text field instead
     and check the "Lock Text" checkbox in its Field Info dialog
@@ -504,11 +504,11 @@ toggles the display of the Patterns palette,
 even if it was not previously dragged off of the menu bar.
 
 If Options ... Draw Filled is selected, the following tools will
-fill their shape with the currently selected pattern:
+fill their shape with the selected pattern:
 Rectangle, Rounded Rectangle, Oval, Regular Polygon, and Polygon.
 
 If Options ... Draw Filled is selected, the following tools will
-draw their lines with the currently selected pattern:
+draw their lines with the selected pattern:
 Line, Rectangle, Rounded Rectangle, Oval, Regular Polygon, and Polygon.
 
 To undo the last drawing action, press the esc key or cmd-z.
@@ -539,18 +539,35 @@ to select the pattern that is used by the Bucket tool.
 Drag the Patterns menu off the menu bar
 to create a floating palette of pattern buttons.
 
-<img alt="HyperCard Patterns" style="border: 0; width: 20%"
+<img alt="HyperCard Patterns" style="border: 0; width: 15%"
   src="/blog/assets/hypercard-patterns.png?v={{pkg.version}}">
 
-To edit one of the provided 40 patterns,
-select it and select Options ... Edit Pattern...
+To fill an existing, closed shape with the selected pattern,
+select the Bucket tool and click the
+dripping tip of the bucket icon (lower-right) inside the shape.
+
+To cause drawn shapes to be filled with the selected pattern,
+select Options ... Draw Filled before drawing the shape.
+
+To apply a pattern to the lines in characters drawn with the Text tool,
+select a pattern, select the Bucket tool, and click inside each character.
+To include a black outline around each character,
+select all the text, select Paint ... Trace Edges, and use
+the Bucket tool to fill the resulting character outlines with a pattern.
+
+<img alt="HyperCard Text Patterns" style="border: 0; width: 30%"
+  src="/blog/assets/hypercard-text-patterns.png?v={{pkg.version}}">
+
+The Trace Edges menu item can be applied multiple times.
+The screenshot below shows the effect when it is applied to text four times.
+
+<img alt="HyperCard Trace Edges multiple times" style="border: 0; width: 25%"
+  src="/blog/assets/hypercard-trace-edges-multiple.png?v={{pkg.version}}">
+
 Then click or drag across pixels in the dialog
 to toggle them between black and white.
 I couldn't find a way to reset a pattern to its default state,
 so be careful with these changes!
-
-To cause drawn shapes to be filled with the currently selected pattern,
-select Options ... Draw Filled.
 
 ## Buttons
 
@@ -810,7 +827,7 @@ To make it appear, enter a value for "Title Width" in the Button Info dialog.
 Alternatively, drag the left edge of the button to the right
 to reveal the title and set the "Title Width".
 
-To get the currently selected text or line number of a Popup,
+To get the selected text or line number of a Popup,
 use the following expressions:
 
 ```text
