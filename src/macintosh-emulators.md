@@ -362,7 +362,9 @@ To install HyperCard:
 
 To toggle full screen mode, press ctrl-return.
 This is highly recommended because it enables resizing windows
-that have become taller than the SheepShaver window.
+(such as script editors) that have become taller than the SheepShaver window.
+However, when in full screen mode the mouse cursor cannot be
+moved outside of SheepShaver, which prevents accessing other applications.
 
 ## Colors
 
