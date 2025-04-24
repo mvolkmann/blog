@@ -381,6 +381,10 @@ The tools include:
     This enters Browse mode which enables interacting with cards as a user
     rather than as an author.
 
+    Another way to enter Browse mode is to press cmd-tab.
+    This will not work with running HyperCard in an emulator on a modern Mac,
+    because cmd-tab there is used to switch applications.
+
   - **Button**
 
     This enters Button mode which enables editing existing buttons.
@@ -1415,6 +1419,8 @@ To invoke this, use an expression like `add 2, 3`.
 
 ### Standard System Events
 
+TODO: Add more to this list and describe each one.
+
 - `appleEvent`
 - `arrowKey`: argument gives direction
 - `closeStack`
@@ -2057,6 +2063,54 @@ on mouseUp
   set the icon of me to 2101 + index
 end mouseUp
 ```
+
+### Previous and Next Buttons
+
+It is common for the background of all cards in a stack to contain
+buttons that can be clicked to go the next and previous cards.
+There are several provided icons that are typically used for this purpose.
+The screenshot below shows a common choices
+that often appear at the bottom of each card.
+
+<img alt="HyperCard Previous and Next Buttons" style="width: 70%"
+  src="/blog/assets/hypercard-prev-next-buttons.png?v={{pkg.version}}">
+
+To implement buttons like these:
+
+- Press cmd-b to enter background mode.
+- Add the following buttons in the lower-left and lower-right corners:
+
+  <img alt="HyperCard Previous Button" style="width: 49%"
+    src="/blog/assets/hypercard-prev-button.png?v={{pkg.version}}">
+  <img alt="HyperCard Next Button" style="width: 49%"
+    src="/blog/assets/hypercard-next-button.png?v={{pkg.version}}">
+
+- Select Objects .. Bkgnd Info...
+- Click the Script button.
+- Add the following script:
+
+  ```text
+  on openCard
+    if the number of this card is 1 then
+      set the visible of bg button "prevCard" to false
+    else
+      set the visible of bg button "prevCard" to true
+    end if
+
+    if the number of this card is the number of cards then
+      set the visible of bg button "nextCard" to false
+    else
+      set the visible of bg button "nextCard" to true
+    end if
+  end openCard
+  ```
+
+- Press cmd-b to exit background mode.
+- Test the new buttons.
+  These should appear on every card, with the exceptions that:
+
+  - The previous button will not appear on the first card.
+  - The next button will not appear on the last card.
 
 ### Adding Numbers
 
