@@ -795,8 +795,20 @@ A button with the style "Popup" displays a dropdown list of options.
 To specify the options, click the "Contents..." button
 and enter each option on its own line.
 
-To get the currently selected value of a Popup,
-TODO: Finish this.
+The name assigned to the button is used for
+a label that appears to the left of the dropdown.
+By default, the label is given a width of zero and doesn't appear.
+To make it appear, enter a value for "Title Width" in the Button Info dialog.
+Alternatively, drag the left edge of the button to the right
+to reveal the title and set the "Title Width".
+
+To get the currently selected text or line number of a Popup,
+use the following expressions:
+
+```text
+the selectedText of button "My Popup Name"
+the selectedLine of button "My Popup Name"
+```
 
 ## Fields
 
