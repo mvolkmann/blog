@@ -198,7 +198,28 @@ The default Home stack contains nine cards.
     Checking this checkbox enables using all four arrow keys
     to move the cursor inside focused fields.
 
-### Stack Operations
+### Sorting Cards
+
+To sort all the cards currently in a stack based on
+the content of a background field (appears on every card),
+open the message box and enter a command like
+`sort by field dogName`.
+This changes the number of each card in the stack, but not their IDs.
+
+Newly added cards are not automatically places in the current sort order
+because the contents of their fields is not known when the card is created.
+
+To automatically resort the stack each time it is opened,
+select Objects ... Stack Info..., click the Script button,
+and add a handler like the following:
+
+```text
+on openStack
+  sort by field dogName
+end openStack
+```
+
+### More Stack Operations
 
 There are three ways to open an existing stack.
 
