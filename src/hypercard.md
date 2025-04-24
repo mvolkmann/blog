@@ -978,7 +978,7 @@ The `beep` command takes an optional argument
 that specifies the number of times to play, defaulting to one.
 The `play` command takes the following arguments:
 
-- name of a sound, either boing or harpsichord
+- name of a sound, either `boing` or `harpsichord`
 - optional keyword `tempo` followed by a number (seems to default to 120)
 - optional set of notes to play in double quotes
 
@@ -1131,8 +1131,8 @@ are documented at {% aTargetBlank
 ### Message Box
 
 One way to execute HyperTalk commands is to enter them in the message box.
-This is a small window that allows entry of a single line of HyperTalk code.
-It can be moved, but cannot be resized.
+This is a small window that allows entry of a single HyperTalk command.
+The box can be moved, but cannot be resized.
 
 To toggle display of the message box, select Go ... Message or press cmd-m.
 Then enter commands separated by semicolons and press return to execute them.
@@ -1199,6 +1199,17 @@ that can be entered in the message box:
   `abs`, `annuity`, `atan`, `average`, `cos`, `ln`, `ln1`, `log2`,
   `exp`, `exp1`, `exp2`, `ln`, `ln1`, `log2`, `max`, `min`, `random`,
   `round`, `sin`, `sqrt`, `sum`, `tan`, and `trunc`
+
+- multiple commands
+
+  While only a single command can be entered, multiple commands
+  can be described in a string with a return character between each command.
+  The string can be passed to the `do` command to execute each of the commands.
+  For example:
+
+  ```text
+  do "beep" & return & "wait for 1 second" & return & "play boing"
+  ```
 
 ### Comments
 
