@@ -1050,30 +1050,31 @@ TODO: Why does the Tools menu disappear when the Color palette is open?
 
 ## Keyboard Shortcuts
 
-| Shortcut    | Action                                                       |
-| ----------- | ------------------------------------------------------------ |
-| cmd-h       | Home                                                         |
-| cmd-~       | go to Back to previous card                                  |
-| cmd-1       | go to First card in stack                                    |
-| cmd-2       | go to Prev card in stack                                     |
-| cmd-3       | go to Next card in stack                                     |
-| cmd-4       | go to Last card in stack                                     |
-| left arrow  | go to Prev card in stack                                     |
-| right arrow | go to Next card in stack                                     |
-| up arrow    | go to First card in stack or Home stack if already on 1st    |
-| cmd-b       | toggle Background mode                                       |
-| cmd-c       | copy                                                         |
-| cmd-e       | open Scroll window                                           |
-| cmd-f       | Find within current stack                                    |
-| cmd-i       | open Icon editor                                             |
-| cmd-m       | open Message box (where commands can be entered)             |
-| cmd-o       | open a stack                                                 |
-| cmd-l       | go to the next open HyperCard window                         |
-| cmd-n       | New card                                                     |
-| cmd-r       | open window of recently visited cards (click one to open it) |
-| cmd-v       | past                                                         |
-| cmd-x       | cut                                                          |
-| cmd-z       | undo                                                         |
+| Shortcut    | Action                                                                         |
+| ----------- | ------------------------------------------------------------------------------ |
+| cmd-h       | Home                                                                           |
+| cmd-~       | go to Back to the previously browsed card                                      |
+| cmd-1       | go to First card in stack                                                      |
+| cmd-2       | go to Prev card in stack                                                       |
+| cmd-3       | go to Next card in stack                                                       |
+| cmd-4       | go to Last card in stack                                                       |
+| left arrow  | go to Prev card in stack                                                       |
+| right arrow | go to Next card in stack                                                       |
+| up arrow    | go to First card in current stack or first card in Home stack if already there |
+| down arrow  | go to previously visited card in any stack?                                    |
+| cmd-b       | toggle Background mode                                                         |
+| cmd-c       | copy                                                                           |
+| cmd-e       | open Scroll window                                                             |
+| cmd-f       | Find within current stack                                                      |
+| cmd-i       | open Icon editor                                                               |
+| cmd-m       | open Message box (where commands can be entered)                               |
+| cmd-o       | open a stack                                                                   |
+| cmd-l       | go to the next open HyperCard window                                           |
+| cmd-n       | New card                                                                       |
+| cmd-r       | open window of recently visited cards (click one to open it)                   |
+| cmd-v       | past                                                                           |
+| cmd-x       | cut                                                                            |
+| cmd-z       | undo                                                                           |
 
 The "Open Stack" dialog contains:
 
@@ -1102,9 +1103,16 @@ are documented at {% aTargetBlank
 
 ### Message Box
 
-One way to test commands is to enter them in the message box.
-To open the message box, select Go ... Message or press cmd-m.
+One way to execute HyperTalk commands is to enter them in the message box.
+To toggle display of the message box, select Go ... Message or press cmd-m.
 Then enter commands separated by semicolons and press return to execute them.
+
+Typing while focus is not in the message box or in a card field
+replaces the text in the message box.
+See "Blind Typing" in the "Home Stack ... Preferences" section for more detail.
+
+To change the font family and size used in the message box,
+click in it to give it focus and make selections in the Font and Style menus.
 
 If a field reference is entered in the message box,
 it is replaced by the contents of the field.
@@ -1114,6 +1122,28 @@ To write a value to the message box, use the command
 `put {expression} into [the] message [box]`.
 The put command writes to the message box by default,
 so the previous command can shorted to `put {expression}`.
+
+The following are examples of HyperTalk commands
+that can be entered in the message box:
+
+- `go to Art Bits` - opens the stack named "Art Bits"
+- `go art bits` - same but without optional keyword `to` and without capitalizing
+- `edit script of button "My Button"` - must be in the current card
+- `searchScript "some text", "stack name"`
+
+  This opens the script editor for the first script
+  found in the stack "stack name" that contains the text "some text".
+  Closing the script editor opens another for the next match found.
+  After the last match is displayed,
+  a dialog containing "Search script done!" is opened.
+
+  `searchScript` is a handler defined in the Home stack.
+  To see it, open the Home stack, select Objects ... Stack Info...,
+  and click the "Script..." button.
+  Alternatively, enter `edit script of Home` in the message box.
+  Press cmd-f to open a Find dialog and enter "searchScript".
+  Repeatedly press cmd-g to find the next match until the line
+  `on searchScript pattern,stackName` is found.
 
 ### Comments
 
