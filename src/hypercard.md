@@ -824,7 +824,7 @@ end mouseUp
 HyperTalk can store the name or id of a button/field in a variable,
 but it cannot store a button or field object in a variable.
 
-## Popup
+### Popup
 
 A button with the style "Popup" displays a dropdown list of options.
 To specify the options, click the "Contents..." button
@@ -1074,6 +1074,39 @@ To enable use of colors:
 - Select a color.
 
 TODO: Why does the Tools menu disappear when the Color palette is open?
+
+## Scroll Window
+
+The scroll window enables scrolling in a stack window.
+It is useful when the card size of a stack is larger than the monitor.
+This is not typically the case, so this tool is rarely used.
+
+To toggle display of the scroll window, select Go ... Scroll or press cmd-e.
+
+The black rectangle in the scroll window represents
+the visible size of the stack with focus.
+
+There are two ways to change the viewable size of the stack window.
+
+1. Drag any edge or corner of the rectangle in the scroll window.
+1. Press cmd-shift-e and drag the grow box that appears
+   in the lower-right corner of the stack window.
+
+To change the portion of the stack window that is visible,
+drag the rectangle in scroll window.
+
+To toggle the viewable size between full size and the last reduced size,
+double-click the rectangle in the scroll window or
+click the zoom box in the upper-right corner of the stack window.
+The rectangle cannot be dragged if its size is the same as the scroll window.
+
+The screenshot below shows the scroll Window
+after its rectangle has been resized and dragged.
+It also shows the portion of the Home stack that is visible
+based on the state of the scroll window.
+
+<img alt="HyperCard Scroll Window" style="border: 0; width: 70%"
+  src="/blog/assets/hypercard-scroll-window.png?v={{pkg.version}}">
 
 ## Keyboard Shortcuts
 
