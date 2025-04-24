@@ -376,6 +376,9 @@ This contains buttons that map to the each of the Go menu items except "Scroll".
 To add a card to the current stack, select Edit ... New Card or press cmd-n.
 The new card will be placed immediately after the card that was being viewed
 and it will become the current card.
+It will be assigned a unique ID within the stack that never changes.
+It will also be assigned a number that specifies its order within the stack,
+which can change if the cards are sorted later.
 
 To configure the current card, select Objects ... Card Info...
 This enables editing the card name, its script, and checking the checkboxes
