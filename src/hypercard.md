@@ -82,6 +82,9 @@ Stacks are not meant to be concurrently modified by multiple users.
 ### Home Stack
 
 HyperCard ships with several stacks including one named "Home".
+If the Home stack is not currently open,
+it can be opened by selecting Go ... Home or pressing cmd-h.
+
 When HyperCard is launched, it looks for the file `Home`
 in the following locations in this order:
 
@@ -326,6 +329,25 @@ graphics, buttons, and fields (for text).
 All transparent parts of a card foreground display
 content from the background at the same location.
 Typically many cards share a background.
+
+To navigate between the cards in a stack:
+
+- Select Go ... First or press cmd-1 to go the first card in the stack.
+- Select Go ... Prev or press cmd-2 to go to the previous card in the stack.
+- Select Go ... Next or press cmd-3 to go to the next card in the stack.
+- Select Go ... Last or press cmd-4 to go the last card in the stack.
+- Select Go ... Back or press cmd-~ to go back to the previously browsed card.
+- Select Go .. Find... and enter search text to go to the next matching card.
+  The text must be found in the content of a field,
+  not button text or painted text.
+  The search is case-insensitive.
+
+Another way to navigate is to open the Navigator Palette (shown below)
+by entering the command `nav` in the message box.
+This contains buttons that map to the each of the Go menu items except "Scroll".
+
+<img alt="HyperCard Navigator Palette" style="border: 0; width: 20%"
+  src="/blog/assets/hypercard-navigator-palette.png?v={{pkg.version}}">
 
 To add a card to the current stack, select Edit ... New Card or press cmd-n.
 
