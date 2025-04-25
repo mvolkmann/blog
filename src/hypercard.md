@@ -4,10 +4,10 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-<img alt="HyperCard logo" style="border: 0; width: 10%"
+<img alt="HyperCard logo" style="width: 10%"
   src="/blog/assets/hypercard-logo.jpg?v={{pkg.version}}">
 <br />
-<img alt="HyperCard Welcome card" style="border: 0; width: 80%"
+<img alt="HyperCard Welcome card" style="width: 80%"
   src="/blog/assets/hypercard-welcome.jpg?v={{pkg.version}}">
 
 ## Overview
@@ -361,16 +361,12 @@ To navigate between the cards in a stack:
 - Select Go ... Next or press cmd-3 to go to the next card in the stack.
 - Select Go ... Last or press cmd-4 to go the last card in the stack.
 - Select Go ... Back or press cmd-~ to go back to the previously browsed card.
-- Select Go .. Find... and enter search text to go to the next matching card.
-  The text must be found in the content of a field,
-  not button text or painted text.
-  The search is case-insensitive.
 
 Another way to navigate is to open the Navigator Palette (shown below)
 by entering the command `nav` in the message box.
 This contains buttons that map to the each of the Go menu items except "Scroll".
 
-<img alt="HyperCard Navigator Palette" style="border: 0; width: 20%"
+<img alt="HyperCard Navigator Palette" style="width: 20%"
   src="/blog/assets/hypercard-navigator-palette.png?v={{pkg.version}}">
 
 To add a card to the current stack, select Edit ... New Card or press cmd-n.
@@ -413,6 +409,22 @@ click the background of the dialog.
 
 TODO: Discuss "marking" cards and what you can do with marked cards.
 
+### Find/Search
+
+To search for an occurrence of text, select Go .. Find... or press cmd-f.
+Then enter search text and press the return key
+to go to the next card with a field containing matching text.
+
+The text must be found in the content of a field,
+not button text or painted text.
+
+The search is case-insensitive.
+
+To repeat the search to find the next occurrence,
+possibly on the same card, press the return key.
+After the last occurrence is found,
+the search wraps around to the first card in the stack.
+
 ## Tools
 
 The tools menu contains a grid of buttons
@@ -420,7 +432,7 @@ that can be clicked to select one of the 18 tools.
 Drag the Tools menu off the menu bar
 to create a floating palette of tool buttons.
 
-<img alt="HyperCard Tools" style="border: 0; width: 15%"
+<img alt="HyperCard Tools" style="width: 15%"
   src="/blog/assets/hypercard-tools.png?v={{pkg.version}}">
 
 The tools include:
@@ -604,7 +616,7 @@ to select the pattern that is used by the Bucket tool.
 Drag the Patterns menu off the menu bar
 to create a floating palette of pattern buttons.
 
-<img alt="HyperCard Patterns" style="border: 0; width: 15%"
+<img alt="HyperCard Patterns" style="width: 15%"
   src="/blog/assets/hypercard-patterns.png?v={{pkg.version}}">
 
 To fill an existing, closed shape with the selected pattern,
@@ -620,13 +632,13 @@ To include a black outline around each character,
 select all the text, select Paint ... Trace Edges, and use
 the Bucket tool to fill the resulting character outlines with a pattern.
 
-<img alt="HyperCard Text Patterns" style="border: 0; width: 30%"
+<img alt="HyperCard Text Patterns" style="width: 30%"
   src="/blog/assets/hypercard-text-patterns.png?v={{pkg.version}}">
 
 The Trace Edges menu item can be applied multiple times.
 The screenshot below shows the effect when it is applied to text four times.
 
-<img alt="HyperCard Trace Edges multiple times" style="border: 0; width: 25%"
+<img alt="HyperCard Trace Edges multiple times" style="width: 25%"
   src="/blog/assets/hypercard-trace-edges-multiple.png?v={{pkg.version}}">
 
 Then click or drag across pixels in the dialog
@@ -647,9 +659,13 @@ There are four basic kinds of buttons:
 1. "Popup" that displays a dropdown menu of options when clicked
    for selecting from a possibly large set options.
 
+To implement selection from a scrolling list options,
+use a field that displays a scrolling list of options.
+See the demo "List Selection" below.
+
 Each of the supported button styles are shown below.
 
-<img alt="HyperCard button types" style="border: 0; width: 50%"
+<img alt="HyperCard button types" style="width: 50%"
   src="/blog/assets/hypercard-button-types.png?v={{pkg.version}}">
 
 Standard and Default buttons conform to
@@ -672,6 +688,7 @@ the shape of their target (clickable) area.
 To find all the buttons on the current card, press and hold cmd-option.
 This adds a dotted outline around all the buttons
 that disappears when the keys are released.
+This is particularly useful for finding transparent buttons.
 
 To add a button to the current card.
 
@@ -1160,7 +1177,7 @@ after its rectangle has been resized and dragged.
 It also shows the portion of the Home stack that is visible
 based on the state of the scroll window.
 
-<img alt="HyperCard Scroll Window" style="border: 0; width: 70%"
+<img alt="HyperCard Scroll Window" style="width: 70%"
   src="/blog/assets/hypercard-scroll-window.png?v={{pkg.version}}">
 
 ## Keyboard Shortcuts
@@ -1182,7 +1199,7 @@ based on the state of the scroll window.
 | cmd-b           | toggle Background mode                                                         |
 | cmd-c           | copy                                                                           |
 | cmd-e           | open Scroll window                                                             |
-| cmd-f           | Find within current stack                                                      |
+| cmd-f           | Find text within current stack                                                 |
 | cmd-i           | open Icon editor                                                               |
 | cmd-m           | open Message box (where commands can be entered)                               |
 | cmd-o           | open a stack                                                                   |
@@ -2017,7 +2034,7 @@ To display a card number on each card in a stack:
 
 - Add the following field to each background:
 
-  <img alt="HyperCard card number field" style="border: 0; width: 60%"
+  <img alt="HyperCard card number field" style="width: 60%"
   src="/blog/assets/hypercard-card-number-field.png?v={{pkg.version}}">
 
 - Add the following script to each background:
@@ -2030,7 +2047,7 @@ To display a card number on each card in a stack:
 
 ### Experimenting With HyperTalk
 
-<img alt="HyperCard Experimenting" style="border: 0; width: 60%"
+<img alt="HyperCard Experimenting" style="width: 60%"
   src="/blog/assets/hypercard-experimenting.png?v={{pkg.version}}">
 
 Create a Field where arbitrary HyperTalk statements can be entered.
@@ -2054,12 +2071,12 @@ Start by creating the following objects:
 - field to display the counter value
 - "-" button to decrement the counter
 
-<img alt="HyperCard Counter" style="border: 0; width: 20%"
+<img alt="HyperCard Counter" style="width: 20%"
   src="/blog/assets/hypercard-counter.png?v={{pkg.version}}">
 
 The following screenshot shows the field configuration:
 
-<img alt="HyperCard Counter field" style="border: 0; width: 60%"
+<img alt="HyperCard Counter field" style="width: 60%"
   src="/blog/assets/hypercard-counter-field.png?v={{pkg.version}}">
 
 Add the following script to the card
@@ -2098,12 +2115,12 @@ end mouseUp
 Let's create a button whose icon is a dice face.
 Each time the button is clicked, its icon changes to the next dice value.
 
-<img alt="HyperCard Dice Button" style="border: 0; width: 6%"
+<img alt="HyperCard Dice Button" style="width: 6%"
   src="/blog/assets/hypercard-dice-button.png?v={{pkg.version}}">
 
 Create the following button with its icon set to any of the dice icons:
 
-<img alt="HyperCard Dice Button Info" style="border: 0; width: 55%"
+<img alt="HyperCard Dice Button Info" style="width: 55%"
   src="/blog/assets/hypercard-dice-button-info.png?v={{pkg.version}}">
 
 Add the following script to the button:
@@ -2180,7 +2197,7 @@ When the "Total" button is clicked, the total of all the numbers entered on
 separate lines in the field is computed and displayed inside the field.
 When the "Clear" button is clicked, the contents of the field is cleared.
 
-<img alt="HyperCard Tools" style="border: 0; width: 50%"
+<img alt="HyperCard Adding Numbers" style="width: 50%"
   src="/blog/assets/hypercard-adding-numbers.png?v={{pkg.version}}">
 
 ```text
@@ -2208,6 +2225,58 @@ on mouseUp
   put empty into card field "numbers"
 end mouseUp
 ```
+
+### List Selection
+
+<img alt="HyperCard List Selection" style="width: 50%"
+  src="/blog/assets/hypercard-list-selection.png?v={{pkg.version}}">
+
+Create fields like the following:
+
+<img alt="HyperCard field #1 for list selection" style="width: 49%"
+  src="/blog/assets/hypercard-field1-for-list-selection.png?v={{pkg.version}}">
+<img alt="HyperCard field #2 for list selection" style="width: 49%"
+  src="/blog/assets/hypercard-field2-for-list-selection.png?v={{pkg.version}}">
+
+Note that currently "Lock Text" is only checked in the second field.
+
+Enter the options in the first field on separate lines.
+
+Open the Field Info dialog for the first field and
+check the "Lock Text" checkbox so users cannot modify it.
+
+Add the following script to the field:
+
+TODO: Find a way to avoid using a global variable in this code.
+TODO: Can you attach a custom property to the field?
+
+```text
+on mouseUp
+  global selectedLineNumber
+  put word 2 of the clickLine into lineNumber
+
+  -- Approach #1
+  --select line lineNumber of me
+
+  -- Approach #2
+  put the number of chars in me into length
+  set the textStyle of char 1 to length of me to plain -- resets style
+  if lineNumber is selectedLineNumber then
+    put empty into card field selectedColor
+    put 0 into selectedLineNumber
+  else
+    put line lineNumber of me into text
+    put text into card field selectedColor
+    set the textStyle of line lineNumber of me to bold
+    put lineNumber into selectedLineNumber
+  end if
+end mouseUp
+```
+
+Clicking a line in the first field highlights it
+and sets the content of the second field to that line.
+Clicking a line that is already highlighted
+removes the highlighting and clears the second field.
 
 ## Books
 
