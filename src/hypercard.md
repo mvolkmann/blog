@@ -2228,7 +2228,18 @@ end mouseUp
 
 ### List Selection
 
-<img alt="HyperCard List Selection" style="width: 50%"
+This demonstrates using a field to display a list of options.
+When the user clicks an option, it is highlighted by making it bold.
+The option text is also copied to another field.
+
+A hidden field is used to store the selected line number.
+This approach is used because HyperCard does not
+support associating custom data with a field.
+When as option is selected, its line number is
+compared to that of the previously selected option.
+If they match, the option is deselected.
+
+<img alt="HyperCard List Selection" style="width: 30%"
   src="/blog/assets/hypercard-list-selection.png?v={{pkg.version}}">
 
 Create fields like the following:
@@ -2237,38 +2248,49 @@ Create fields like the following:
   src="/blog/assets/hypercard-field1-for-list-selection.png?v={{pkg.version}}">
 <img alt="HyperCard field #2 for list selection" style="width: 49%"
   src="/blog/assets/hypercard-field2-for-list-selection.png?v={{pkg.version}}">
+<img alt="HyperCard field #3 for list selection" style="width: 49%"
+  src="/blog/assets/hypercard-field3-for-list-selection.png?v={{pkg.version}}">
 
-Note that currently "Lock Text" is only checked in the second field.
-
-Enter the options in the first field on separate lines.
-
-Open the Field Info dialog for the first field and
+Note that currently "Lock Text" is not checked in the "colorOptions" field.
+Enter the options in the "colorOptions" field on separate lines.
+Open the Field Info dialog for the "colorOptions" field and
 check the "Lock Text" checkbox so users cannot modify it.
 
-Add the following script to the field:
+Add the following script to the card
+to hide the "colorOptionsSelectedLineNumber" field:
 
-TODO: Find a way to avoid using a global variable in this code.
-TODO: Can you attach a custom property to the field?
+```text
+on openCard
+  set the visible of card field colorOptionsSelectedLineNumber to false
+end openCard
+```
+
+Add the following script to the "colorOptions" field:
 
 ```text
 on mouseUp
-  global selectedLineNumber
-  put word 2 of the clickLine into lineNumber
-
-  -- Approach #1
-  --select line lineNumber of me
-
-  -- Approach #2
+  -- Reset all the text in me to plain style.
   put the number of chars in me into length
   set the textStyle of char 1 to length of me to plain -- resets style
-  if lineNumber is selectedLineNumber then
+
+  -- Get the previously selected line number from a hidden field.
+  put card field colorOptionsSelectedLineNumber into previous
+
+  -- Get the currently selected line number from me.
+  put word 2 of the clickLine into current
+
+  if current is previous then
     put empty into card field selectedColor
-    put 0 into selectedLineNumber
+    put empty into card field colorOptionsSelectedLineNumber
   else
-    put line lineNumber of me into text
-    put text into card field selectedColor
-    set the textStyle of line lineNumber of me to bold
-    put lineNumber into selectedLineNumber
+    -- Display the selected option in another field.
+    put line current of me into card field selectedColor
+
+    -- Make the selected option bold.
+    set the textStyle of line current of me to bold
+
+    -- Save the selected line number in a hidden field.
+    put current into card field colorOptionsSelectedLineNumber
   end if
 end mouseUp
 ```
