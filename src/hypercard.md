@@ -8,7 +8,7 @@ layout: topic-layout.njk
   src="/blog/assets/hypercard-logo.jpg?v={{pkg.version}}">
 <br />
 <img alt="HyperCard Welcome card" style="width: 80%"
-  src="/blog/assets/hypercard-welcome.jpg?v={{pkg.version}}">
+  src="/blog/assets/hypercard-home-stack.jpg?v={{pkg.version}}">
 
 ## Overview
 
@@ -87,6 +87,9 @@ Stacks are not meant to be concurrently modified by multiple users.
 HyperCard ships with several stacks including one named "Home".
 If the Home stack is not currently open,
 it can be opened by selecting Go ... Home or pressing cmd-h.
+
+<img alt="HyperCard Home stack" style="width: 60%"
+  src="/blog/assets/hypercard-home-stack.jpg?v={{pkg.version}}">
 
 When HyperCard is launched, it looks for the file `Home`
 in the following locations in this order:
@@ -257,6 +260,12 @@ To close another stack that is open in its own window,
 click its close box in the upper-left, press cmd-w,
 or select File ... Close Stack.
 
+To edit the properties of the current stack, select Objects ... Stack Info...
+which opens the following dialog:
+
+<img alt="HyperCard Stack Info" style="width: 45%"
+  src="/blog/assets/hypercard-stack-info.png?v={{pkg.version}}">
+
 To enable opening your stacks from the Home stack:
 
 - Press cmd-h to open the Home stack.
@@ -376,9 +385,11 @@ It will be assigned a unique ID within the stack that never changes.
 It will also be assigned a number that specifies its order within the stack,
 which can change if the cards are sorted later.
 
-To configure the current card, select Objects ... Card Info...
-This enables editing the card name, its script, and checking the checkboxes
-for "Card Marked", "Don't Search Card", and "Can't Delete Card".
+To edit the properties of the current card, select Objects ... Card Info...
+which opens the following dialog:
+
+<img alt="HyperCard Card Info" style="width: 45%"
+  src="/blog/assets/hypercard-card-info.png?v={{pkg.version}}">
 
 To delete the current card:
 
@@ -745,10 +756,15 @@ To resize a button:
 To create a copy of a button,
 option-drag it OR select Edit ... Copy Button.
 
+To edit the properties of a button, select the Button tool,
+select a button, and select Objects ... Button Info... (or double-click a button).
+This opens the following dialog:
+
+<img alt="HyperCard Button Info" style="width: 50%"
+  src="/blog/assets/hypercard-button-info.png?v={{pkg.version}}">
+
 To configure a button so clicking it navigates to another card or stack:
 
-- Select the Button tool.
-- Double-click a button to open its "Button Info" dialog.
 - Option #1
   - Click the "Tasks..." button.
   - In the "Tasks" dialog, select a destination from the radio buttons
@@ -765,8 +781,6 @@ that is executed when the user clicks the button.
 
 To edit the script for a button:
 
-- Select the Button tool.
-- Double-click a button to open its "Button Info" dialog.
 - Click the "Script..." button.
 - Enter commands.
 
@@ -965,15 +979,15 @@ To add a field to the current card:
 - Click the field.
 - Enter text.
 
-- Double-click a Text object.
-- Enter
+To edit the properties of a field, select the Field tool,
+select a field, and select Objects ... Field Info... (or double-click a field).
+This opens the following dialog:
+
+<img alt="HyperCard Field Info" style="width: 50%"
+  src="/blog/assets/hypercard-field-info.png?v={{pkg.version}}">
 
 To change the font or styling of a field:
 
-- Select the Field tool.
-- Double-click a field to open its "Field Info" dialog.
-  Alternatively, click a field to select it
-  and select Objects ... Field Info...
 - Select one of the following options from the Style dropdown:
   - Transparent - no border and background is transparent,
     showing what is behind it
@@ -1062,6 +1076,12 @@ TODO: What sound formats are supported?
 ## Backgrounds
 
 Every stack has at least one background, but it can be empty.
+
+To edit the properties of the background of the current card,
+select Objects ... Bkgnd Info... which opens the following dialog:
+
+<img alt="HyperCard Background Info" style="width: 45%"
+  src="/blog/assets/hypercard-background-info.png?v={{pkg.version}}">
 
 To switch to background mode,
 which temporarily hides the foreground of the current card
