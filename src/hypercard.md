@@ -391,6 +391,10 @@ which opens the following dialog:
 <img alt="HyperCard Card Info" style="width: 45%"
   src="/blog/assets/hypercard-card-info.png?v={{pkg.version}}">
 
+Cards can be assigned names.
+A HyperTalk script can go to a card with a given name
+using the command `go to card "{card-name}".
+
 To delete the current card:
 
 - Select Edit ... Delete Card.
@@ -1373,7 +1377,7 @@ put "apple,banana,cherry" into fruits
 put item 2 of fruits into fruit -- sets to banana
 ```
 
-## Scripts
+### Scripts
 
 A HyperCard script is a collection of function and event handler definitions.
 Often a script only contains a single handler definition.
@@ -1628,6 +1632,8 @@ This avoids using values assigned by other stacks.
 ### go Command
 
 The `go` command supports going to another card.
+It can be followed by the optional preposition "to"
+which is omitted in the examples below.
 It supports many arguments described below.
 
 - Ordinal
@@ -1654,9 +1660,10 @@ It supports many arguments described below.
   - `go back` - previously visited card
   - `go bkgnd "{background-name}" of stack "{stack-name}"`
   - `go card id {card-id}`
+  - `go card "{card-name}"`
   - `go forth` - opposite of `go back` used after that command
   - `go home` - Home stack
-  - `go [[to] stack] {stack-name} [in a new window]` -
+  - `go [stack] {stack-name} [in a new window]` -
     first card in a given stack (ex. "HyperCard Help")
 
 ### get Command
