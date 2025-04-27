@@ -445,6 +445,18 @@ possibly on the same card, press the return key.
 After the last occurrence is found,
 the search wraps around to the first card in the stack.
 
+When the search string contains more than one string separated by spaces,
+the find command searches for the next card that matches each of the strings,
+but not necessarily in the same field.
+For example, `find "comet whippet"` finds cards
+with a field that contains "comet" AND a field that contains "whippet".
+
+The `find words` command seems to be same as the plain `find` command.
+
+The `find chars` command matches substrings.
+For example `find ome pet` would match a card that contains
+a field with "Comet" and a field with "Whippet".
+
 ## Tools
 
 The tools menu contains a grid of buttons
