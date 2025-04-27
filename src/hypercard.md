@@ -2250,14 +2250,22 @@ end mouseUp
 
 This demonstrates using a field to display a list of options.
 When the user clicks an option, it is highlighted by making it bold.
-The option text is also copied to another field.
+The option text is also copied to another field
+to demonstrate that is was captured.
 
-A hidden field is used to store the selected line number.
-This approach is used because HyperCard does not
-support associating custom data with a field.
-When as option is selected, its line number is
-compared to that of the previously selected option.
+We need a way to remember the line number (or index)
+of the last list option that was selected.
+When an option is selected, its index is
+compared to that of the previous index.
 If they match, the option is deselected.
+
+We can't associated a value with a container like a stack, card, button, or field.
+We can store a value in a hidden field or in a global variable.
+Neither option is ideal, but using a global variable seems best.
+
+There is a non-strict convention where global variables
+begin with the letter "g" and are followed by a CamelCase name.
+So we will use the global variable `gColorListIndex`.
 
 <img alt="HyperCard List Selection" style="width: 30%"
   src="/blog/assets/hypercard-list-selection.png?v={{pkg.version}}">
@@ -2268,49 +2276,46 @@ Create fields like the following:
   src="/blog/assets/hypercard-field1-for-list-selection.png?v={{pkg.version}}">
 <img alt="HyperCard field #2 for list selection" style="width: 49%"
   src="/blog/assets/hypercard-field2-for-list-selection.png?v={{pkg.version}}">
-<img alt="HyperCard field #3 for list selection" style="width: 49%"
-  src="/blog/assets/hypercard-field3-for-list-selection.png?v={{pkg.version}}">
 
-Note that currently "Lock Text" is not checked in the "colorOptions" field.
-Enter the options in the "colorOptions" field on separate lines.
-Open the Field Info dialog for the "colorOptions" field and
+Note that currently "Lock Text" is not checked in the "colorList" field.
+Enter the options in the "colorList" field on separate lines.
+Now open the Field Info dialog for the "colorList" field and
 check the "Lock Text" checkbox so users cannot modify it.
 
-Add the following script to the card
-to hide the "colorOptionsSelectedLineNumber" field:
+Add the following script to the stack
+to initialize the global variable `gColorOptionsIndex" field:
 
 ```text
-on openCard
-  set the visible of card field colorOptionsSelectedLineNumber to false
-end openCard
+on openStack
+  put 0 into gColorListIndex
+end openStack
 ```
 
-Add the following script to the "colorOptions" field:
+Add the following script to the "colorList" field:
 
 ```text
 on mouseUp
+  global gColorListIndex
+
   -- Reset all the text in me to plain style.
   put the number of chars in me into length
-  set the textStyle of char 1 to length of me to plain -- resets style
-
-  -- Get the previously selected line number from a hidden field.
-  put card field colorOptionsSelectedLineNumber into previous
+  set the textStyle of char 1 to length of me to plain
 
   -- Get the currently selected line number from me.
-  put word 2 of the clickLine into current
+  put word 2 of the clickLine into index
 
-  if current is previous then
+  if index is gColorListIndex then
     put empty into card field selectedColor
-    put empty into card field colorOptionsSelectedLineNumber
+    put 0 into gColorListIndex
   else
     -- Display the selected option in another field.
-    put line current of me into card field selectedColor
+    put line index of me into card field selectedColor
 
     -- Make the selected option bold.
-    set the textStyle of line current of me to bold
+    set the textStyle of line index of me to bold
 
-    -- Save the selected line number in a hidden field.
-    put current into card field colorOptionsSelectedLineNumber
+    -- Save the selected index.
+    put index into gColorListIndex
   end if
 end mouseUp
 ```
