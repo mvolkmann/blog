@@ -440,11 +440,11 @@ Key facts about the `find` command are:
 - The last search is remembered. If you begin a new search later,
   the previous search text will be in the quotes.
 - When the search string contains spaces,
-  they are treated as delimiters between words.
-  The search is for the next card that matches
-  each of the complete words (not substrings).
+  they are treated as delimiters between search terms.
+  The search is for the next card with a field containing
+  a word that **begins** with each of the search terms.
   The words are not required to be in the same field.
-  For example, `find "comet whippet"` finds the next card with
+  For example, `find "com whip"` matches a card with
   a field that contains "Comet Fireball" AND
   a field that contains "Brindle Whippet".
 - Multi-term searches are AND searches, not OR searches.
@@ -454,11 +454,16 @@ possibly on the same card, press the return key.
 After the last occurrence is found,
 the search wraps around to the first card in the stack.
 
-The `find words` command seems to be same as the plain `find` command.
+The `find words` command matches cards with fields that contain
+complete words that matches the search terms.
+For example, `find "comet whippet"` matches a card with
+a field that contains "Comet Fireball" AND
+a field that contains "Brindle Whippet".
 
 The `find chars` command matches substrings.
-For example `find ome pet` would match a card that contains
-a field with "Comet" and a field with "Whippet".
+For example, `find "ome pet"` matches a card with
+a field that contains "Comet Fireball" AND
+a field that contains "Brindle Whippet".
 
 ## Tools
 
