@@ -1754,7 +1754,7 @@ the number of lines in ("red" & return & "green" & return & "blue")
 
 The following script displays the string "green":
 
-```item
+```text
 set the itemDelimiter to ";"
 put "red;green;blue" into s
 answer item 2 of s
