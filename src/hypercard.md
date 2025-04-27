@@ -1328,11 +1328,6 @@ that can be entered in the message box:
   - `2 * pi * 3^2` - gives `56.548668`
   - `sin(45)` - evaluates a trigonometry function and gives `0.850904`
 
-  The built-in mathematical functions include
-  `abs`, `annuity`, `atan`, `average`, `cos`, `ln`, `ln1`, `log2`,
-  `exp`, `exp1`, `exp2`, `ln`, `ln1`, `log2`, `max`, `min`, `random`,
-  `round`, `sin`, `sqrt`, `sum`, `tan`, and `trunc`
-
 - multiple commands
 
   While only a single command can be entered, multiple commands
@@ -1780,6 +1775,11 @@ use the `multiply` command. For example, `multiply total by 3`.
 
 To divide a number in a container that already contains a number,
 use the `divide` command. For example, `divide total by 3`.
+
+The built-in mathematical functions include
+`abs`, `annuity`, `atan`, `average`, `cos`, `ln`, `ln1`, `log2`,
+`exp`, `exp1`, `exp2`, `ln`, `ln1`, `log2`, `max`, `min`, `random`,
+`round`, `sin`, `sqrt`, `sum`, `tan`, and `trunc`
 
 ### Conditional Logic
 
