@@ -431,7 +431,7 @@ Then enter search text inside the provided double quotes
 and press the return key to go to
 the next occurrence of a field containing matching text.
 
-Key facts about the find command are:
+Key facts about the `find` command are:
 
 - The search is case-insensitive.
 - The matching text is surrounded by a black rectangle.
@@ -439,17 +439,20 @@ Key facts about the find command are:
 - If no match is found, the beep sound is played.
 - The last search is remembered. If you begin a new search later,
   the previous search text will be in the quotes.
+- When the search string contains spaces,
+  they are treated as delimiters between words.
+  The search is for the next card that matches
+  each of the complete words (not substrings).
+  The words are not required to be in the same field.
+  For example, `find "comet whippet"` finds the next card with
+  a field that contains "Comet Fireball" AND
+  a field that contains "Brindle Whippet".
+- Multi-term searches are AND searches, not OR searches.
 
 To repeat the search to find the next occurrence,
 possibly on the same card, press the return key.
 After the last occurrence is found,
 the search wraps around to the first card in the stack.
-
-When the search string contains more than one string separated by spaces,
-the find command searches for the next card that matches each of the strings,
-but not necessarily in the same field.
-For example, `find "comet whippet"` finds cards
-with a field that contains "comet" AND a field that contains "whippet".
 
 The `find words` command seems to be same as the plain `find` command.
 
