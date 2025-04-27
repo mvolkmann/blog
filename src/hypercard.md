@@ -427,18 +427,21 @@ TODO: Discuss "marking" cards and what you can do with marked cards.
 ### Find/Search
 
 To search for an occurrence of text, select Go .. Find... or press cmd-f.
-Then enter search text and press the return key
-to go to the next card with a field containing matching text.
-
-The text must be found in the content of a field,
-not button text or painted text.
-
+Then enter search text inside the provided double quotes
+and press the return key to go to
+the next occurrence of a field containing matching text.
 The search is case-insensitive.
+The matching text is surrounded by a black rectangle.
+
+Only fields are searched, not button labels or painted text.
 
 To repeat the search to find the next occurrence,
 possibly on the same card, press the return key.
 After the last occurrence is found,
 the search wraps around to the first card in the stack.
+
+The last search is remembered.
+If you begin a new search later, the previous search text will be in the quotes.
 
 ## Tools
 
