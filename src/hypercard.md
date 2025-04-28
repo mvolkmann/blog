@@ -755,6 +755,9 @@ This adds a dotted outline around all the buttons
 that disappears when the keys are released.
 This is particularly useful for finding transparent buttons.
 
+Selecting the Button tool from the Tools menu or palette
+adds a solid, rectangular outline around all the buttons.
+
 To add a button to the current card.
 
 - Select Objects ... New Button.
@@ -996,6 +999,18 @@ Different values can be entered in these fields for each card.
 Fields can hold a single line of text or multiple lines.
 The choice is specified in the "Field Info" dialog for each field.
 
+One way to find fields on the current card is to
+move the cursor around the card and notice when the cursor changes
+from the browser cursor (hand with pointing index finger) to an I-beam.
+
+A better way to find fields is to press and hold cmd-shift-option.
+This adds a dotted outline around all the fields
+that disappears when the keys are released.
+This is particularly useful for finding transparent fields.
+
+Selecting the Field tool from the Tools menu or palette
+adds a solid, rectangular outline around all the fields.
+
 To add a field to the current card:
 
 - Select Objects ... New Field.
@@ -1109,7 +1124,9 @@ only gets its text, not an object reference.
 To execute a HyperTalk command that was entered in a field,
 run the command `do card field "{field-name}"`.
 
-To move the focus to the next field, press the tab key.
+To move the focus to the next field in the current card, press the tab key.
+After the last field on the card is reached, pressing the tab key
+moves the focus to the first field on the card.
 
 ## Sounds
 
