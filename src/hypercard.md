@@ -1055,7 +1055,7 @@ This opens the following dialog:
 <img alt="HyperCard Field Info" style="width: 50%"
   src="/blog/assets/hypercard-field-info.png?v={{pkg.version}}">
 
-To change the font or styling of a field:
+To change the default text style of a field:
 
 - Select one of the following options from the Style dropdown:
   - Transparent - no border and background is transparent,
@@ -1074,6 +1074,23 @@ To change the font or styling of a field:
 - Select a line height.
 - Click the OK button.
 
+To change the text style of specific text
+in a single field on the current card to something
+different than the default text style for the field:
+
+- Select the text by dragging over it.
+- Select a font name from the Font menu.
+- Select a font style from the Style menu.
+- Select a font size from the Style menu.
+
+The text style does not affect the ability to
+search for matching text using the `find` command.
+
+Field text that is copied retains its text style.
+To paste the text without its text style,
+instead using the text style of the character before where it is pasted,
+hold down the shift key when selecting Edit ... Paste or press cmd-shift-v.
+
 To move a field:
 
 - Select the Field tool.
@@ -1084,6 +1101,8 @@ To resize a field:
 
 - Select the Field tool.
 - Drag any corner of a field.
+  It is easiest to grab a corner by clicking just inside it
+  rather than trying to click directly on it.
 
 To create a copy of a field,
 option-drag it OR select Edit ... Copy Field.
