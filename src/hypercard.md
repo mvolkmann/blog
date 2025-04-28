@@ -379,8 +379,8 @@ This contains buttons that map to the each of the Go menu items except "Scroll".
   src="/blog/assets/hypercard-navigator-palette.png?v={{pkg.version}}">
 
 To add a card to the current stack, select Edit ... New Card or press cmd-n.
-The new card will be placed immediately after the card that was being viewed
-and it will become the current card.
+The new card will use the same background as the current card,
+be placed immediately after the current card, and become the current card.
 It will be assigned a unique ID within the stack that never changes.
 It will also be assigned a number that specifies its order within the stack,
 which can change if the cards are sorted later.
@@ -395,9 +395,10 @@ Cards can be assigned names.
 A HyperTalk script can go to a card with a given name
 using the command `go to card "{card-name}".
 
-To delete the current card:
-
-- Select Edit ... Delete Card.
+To delete the current card, select Edit ... Delete Card or press cmd-delete.
+Be careful because no confirmation is requested!
+If no other action has taken place yet, the deleted card
+can be recovered by selecting Edit ... Undo or pressing cmd-z.
 
 To copy the current card and paste the copy after another card:
 
@@ -406,6 +407,17 @@ To copy the current card and paste the copy after another card:
 - Select Edit ... Paste Card.
 
 The background of new card will be the same as that of the copied card.
+
+There is no explicit save command.
+Changes to the content of a field are automatically saved
+when any of the following occur:
+
+- The return key is pressed.
+- The mouse is clicked outside the field.
+- Focus is moved to another field.
+- A menu item is selected.
+- Navigation to another card occurs.
+- A new card is created.
 
 Sadly there is no easy way to:
 
