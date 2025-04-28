@@ -455,15 +455,40 @@ After the last occurrence is found,
 the search wraps around to the first card in the stack.
 
 The `find words` command matches cards with fields that contain
-complete words that matches the search terms.
-For example, `find "comet whippet"` matches a card with
+complete words that match the search terms.
+For example, `find words "comet whippet"` matches a card with
 a field that contains "Comet Fireball" AND
 a field that contains "Brindle Whippet".
 
+The `find whole` command matches cards with a single field that contains
+the specified words in order.
+For example, `find whole "comet fireball"` matches
+a card with a field that contains "Comet Fireball", but does not match
+a card with a field that contains "Comet the Fireball".
+This command can be entered in the message box by pressing cmd-shift-f.
+
 The `find chars` command matches substrings.
-For example, `find "ome pet"` matches a card with
+For example, `find chars "ome pet"` matches a card with
 a field that contains "Comet Fireball" AND
 a field that contains "Brindle Whippet".
+
+HyperCard does not treat the characters "?" and "*"
+in search terms like wildcards.
+Instead of using `find chars "wh*pet"`and hoping to match "Whippet",
+use`find chars "wh pet"` which is almost the same.
+It differs in that words containing "wh" and "pet"
+can be found in different fields of the same card.
+
+The `find string` command is similar to `find chars`, but it
+treats the search string as a single term even if it contains spaces.
+It matches cards with a single matching field.
+For example, `find string "met fir"` matches a card with
+a field that contains "Comet Fireball".
+
+To treat accented characters the same as their non-accented counterparts
+when finding matches, add the keyword `international` after `find`
+in any of the `find` commands described above.
+For example, this treats the character é the same as the character e.
 
 ## Tools
 
