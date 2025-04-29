@@ -15,7 +15,8 @@ layout: topic-layout.njk
 HyperCard is a Macintosh application for viewing and creating
 multimedia applications built with HyperCard stacks
 (a.k.a HyperCard applications) which are collections of cards.
-Cards primarily contain text, graphics, and buttons.
+Cards have two layers, a background and a foreground (referred to as "card").
+These layers can contain text, graphics, buttons, and fields.
 They can also play sounds and videos.
 
 The original application name was WildCard. It was changed
@@ -24,7 +25,7 @@ because the name WildCard was already trademarked.
 
 HyperCard initially released in August, 1987.
 The last version of HyperCard, released in 1988, was 2.4.1.
-The oldest version of Mac OS that supports some version of HyperCard
+The oldest version of Mac OS that can run some version of HyperCard
 is Mac OS 6.0.5.
 The newest version of Mac OS that can run HyperCard is 9.2.2.
 
