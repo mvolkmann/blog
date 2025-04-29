@@ -1324,9 +1324,20 @@ moves the focus to the first field on the card.
 
 ## Layers
 
+The HyperCard application uses the following layers, from bottom to top:
+
+- Document layer - displays stack windows which display cards
+- Palette layer - displays the Tools, Patterns, and Nav palettes
+- Dialog layer - displays all dialogs including those for
+  Stack Info, Background Info, Card Info, Button Info, Field Info,
+  `answer` command, and `ask` command.
+- Menu layer - displays the menu items in each of the menus
+- Cursor layer - displays the mouse cursor
+
 The elements of a card consist of
 painted objects (e.g. polygon), buttons, and fields.
-Each element is displayed in its own layer.
+Each element is displayed in its own layer
+within the "document layer".
 
 All painted objects appear below buttons and fields.
 So buttons and fields are never obscured by painted objects.
@@ -1386,6 +1397,9 @@ Cards created after this one will use the new background by default.
 To copy a background and create a new background
 that starts out with the same configuration,
 TODO: ???
+
+To create multiple backgrounds that have some common elements,
+the common elements must be copied from one background to the others.
 
 To assign a name to a background, select Options ... Bkgnd Info...
 and enter/change the "Background Name".
