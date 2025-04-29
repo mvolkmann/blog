@@ -429,6 +429,48 @@ and is able to fix some issues.
 It is recommended to periodically compact all stacks,
 perhaps daily for frequently modified stacks.
 
+### Stack Protection
+
+To protect a stack from user actions,
+open the stack and select File ... Protect Stack...
+which opens the following dialog:
+
+<img alt="HyperCard Protect Stack dialog" style="width: 50%"
+  src="/blog/assets/hypercard-protect-stack.png?v={{pkg.version}}">
+
+If the user level of the stack causes
+the "Protect Stack..." menu item to be missing from "File" menu,
+hold down the command key when opening the File menu to reveal it.
+
+When the "Can't Modify Stack" checkbox is checked,
+users can browse the stack, but are prevented from making any changes
+including modifying the text in fields.
+
+When the "Can't Delete Stack" checkbox is checked,
+users are prevented from deleting the stack.
+
+When the "Can't Abort" checkbox is checked,
+are prevented from aborting operations by pressing cmd-period.
+This can be useful in stacks that run in kiosk settings,
+
+When the "Can't Peek" checkbox is checked,
+prevents users from seeing:
+
+- the locations of buttons by pressing cmd-option
+- the locations of fields by pressing cmd-shift-option
+
+When the "Private Access" checkbox is checked,
+users must enter a password in order to access the stack.
+If no password has been specified,
+a dialog for entering one will be opened.
+
+The radio buttons under "Limit user level to"
+set the default user level that is active when the stack is opened.
+
+The "Set Password..." button opens a dialog where a password can be entered.
+If the "Private Access" checkbox is checked,
+users must enter this password in order to open the stack.
+
 ## Cards
 
 A card belongs to a specific stack.
