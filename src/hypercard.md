@@ -1294,6 +1294,26 @@ To move the focus to the next field in the current card, press the tab key.
 After the last field on the card is reached, pressing the tab key
 moves the focus to the first field on the card.
 
+## Layers
+
+The elements of a card consist of
+painted objects (ex. polygon), buttons, and fields.
+Each element is displayed in its own layer.
+
+All painted objects appear below buttons and fields.
+So buttons and fields are never obscured by painted objects.
+
+The order in which elements are created determines their initial stacking order,
+with the newer elements on top of older elements.
+
+The stacking order of buttons and fields can be changed by selecting one
+and then selecting Objects ... Bring Closer (cmd-plus)
+or Objects ... Send Farther (cmd-minus).
+Doing so changes the "Card Part Number" values of the elements.
+
+When the mouse is clicked, only one element receives the event ...
+the element that overlaps the click location and is in the closest layer.
+
 ## Sounds
 
 To play a predefined sound, use the `beep` or `play` commands.
