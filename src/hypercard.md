@@ -2538,6 +2538,13 @@ To implement buttons like these:
   end openCard
   ```
 
+  An alternative approach is to:
+
+  - Omit the script above.
+  - Allow `prevButton` and `nextButton` to be visible on all cards.
+  - Draw an opaque button over the `prevButton` in the card layer of the first card.
+  - Draw an opaque button over the `nextButton` in the card layer of the last card.
+
 - Press cmd-b to exit background mode.
 - Test the new buttons.
   These should appear on every card, with the exceptions that:
