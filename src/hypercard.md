@@ -253,7 +253,34 @@ There are three ways to open an existing stack.
 Multiple stacks can be open at the same time,
 each it its own window.
 
-To create a new stack:
+To create a new stack from stack template:
+
+- Open the Home stack.
+- Click the "Stack Kit" button on the bottom row.
+- Click the "Stack Templates" button to display a list of templates.
+
+  <img alt="HyperCard Stack Kit card" style="width: 60%"
+    src="/blog/assets/hypercard-stack-kit-card.png?v={{pkg.version}}">
+
+- Click the name of one of the 15 stack templates.
+
+  <img alt="HyperCard Stack Templates" style="width: 60%"
+    src="/blog/assets/hypercard-stack-templates.png?v={{pkg.version}}">
+
+- In the dialog that appears on top of the template:
+
+  <img alt="HyperCard Todo List template" style="width: 60%"
+    src="/blog/assets/hypercard-todo-list-template.png?v={{pkg.version}}">
+
+  - Click the lightbulb button to display information about the template.
+  - Click the "Create Stack" button to
+    create a new stack using the selected template.
+  - Click the house icon to return the Home stack.
+  - Click the "Templates" button to return to the list of templates.
+  - Click the left arrow to go to the previous template.
+  - Click the right arrow to go to the next template.
+
+To create a new stack from scratch:
 
 - Select File ... New Stack...
 - Enter a stack name.
