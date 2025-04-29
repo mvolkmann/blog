@@ -371,6 +371,8 @@ To view and optionally edit a background used by the current card:
 - Navigate to a card that uses the background.
 - Select Edit ... Background or press cmd-b to toggle background mode.
   This is indicated by a hatched pattern in the menu bar.
+  The card layer is temporarily hidden and
+  only the background layer is displayed.
 
 ### Stack Sharing
 
@@ -526,6 +528,8 @@ To add a new, first card in a stack:
 - Press cmd-1 to return to the first card.
 - Select Edit ... Cut Card to remove the first card.
 - Select Edit ... Paste Card to paste the cut card after the new first card.
+
+All of the steps above can be performed in a script using the `doMenu` command.
 
 To edit the properties of the current card, select Objects ... Card Info...
 which opens the following dialog:
@@ -925,7 +929,12 @@ To add a button to the current card.
   Alternatively, select the Button tool and
   cmd-drag to indicate the location and size of a new button.
   This adds a new button to the center of the current card.
+
 - Double-click the button to open its "Button Info" dialog.
+
+  <img alt="HyperCard Button Info" style="width: 50%"
+    src="/blog/assets/hypercard-button-info.png?v={{pkg.version}}">
+
 - Change "Button Name" to be a name used to refer to the button
   or the text that will appear on it.
   It's too bad buttons can't have separate values for
@@ -975,11 +984,12 @@ To create a copy of a button,
 option-drag it OR select Edit ... Copy Button.
 
 To edit the properties of a button, select the Button tool,
-select a button, and select Objects ... Button Info... (or double-click a button).
-This opens the following dialog:
-
-<img alt="HyperCard Button Info" style="width: 50%"
-  src="/blog/assets/hypercard-button-info.png?v={{pkg.version}}">
+and double-click a button.
+Alternatively, select a button, and select Objects ... Button Info...
+Either way, a "Button Info" dialog like the one shown above will open.
+This works regardless of whether the button is in the card or background layer.
+It is not necessary to switch to background mode
+in order to modify a background button.
 
 To configure a button so clicking it navigates to another card or stack:
 
@@ -1210,8 +1220,12 @@ To add a field to the current card:
 - Enter text.
 
 To edit the properties of a field, select the Field tool,
-select a field, and select Objects ... Field Info... (or double-click a field).
-This opens the following dialog:
+and double-click a field.
+Alternatively, select a field, and select Objects ... Field Info...
+Either way, a "Field Info" dialog like the one shown below will open.
+This works regardless of whether the field is in the card or background layer.
+It is not necessary to switch to background mode
+in order to modify a background field.
 
 <img alt="HyperCard Field Info" style="width: 50%"
   src="/blog/assets/hypercard-field-info.png?v={{pkg.version}}">
