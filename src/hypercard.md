@@ -470,6 +470,8 @@ set the default user level that is active when the stack is opened.
 The "Set Password..." button opens a dialog where a password can be entered.
 If the "Private Access" checkbox is checked,
 users must enter this password in order to open the stack.
+Regardless of the "Private Access" setting,
+users must enter this password in order to open the "Protect Stack" dialog.
 
 ## Cards
 
