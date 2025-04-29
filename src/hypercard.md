@@ -1372,12 +1372,20 @@ TODO: What sound formats are supported?
 ## Backgrounds
 
 Every stack has at least one background, but it can be empty.
+Often backgrounds have a design that mimics something in real life
+such as an address book, calendar, notebook, or paper form.
+They contain buttons and fields that
+appear on every card that uses the background.
 
 To edit the properties of the background of the current card,
 select Objects ... Bkgnd Info... which opens the following dialog:
 
 <img alt="HyperCard Background Info" style="width: 45%"
   src="/blog/assets/hypercard-background-info.png?v={{pkg.version}}">
+
+Assigning a name to a background is optional,
+but they are handy when printing reports and
+they enable accessing backgrounds by name in scripts.
 
 To switch to background mode,
 which temporarily hides the foreground of the current card
