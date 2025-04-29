@@ -1387,6 +1387,13 @@ Assigning a name to a background is optional,
 but they are handy when printing reports and
 they enable accessing backgrounds by name in scripts.
 
+To prevent a background from being deleted,
+check the "Can't Delete Background" checkbox.
+When this is checked, if a user tries to
+delete the last card that uses the background,
+a dialog will open that says
+"Can't delete last card of protected background".
+
 To switch to background mode,
 which temporarily hides the foreground of the current card
 and only displays its background,
@@ -1402,6 +1409,19 @@ Press cmd-b to enter background mode and add content.
 Then press cmd-b again to enter foreground mode and add content.
 Cards created after this one will use the new background by default.
 
+If some cards that use a particular background
+do not wish to display all the elements in the background layer,
+those elements can be covered by elements in the card layer.
+For example, a rectangle that is filled with white
+can be used to hide painted elements, buttons, and fields.
+
+To draw a white rectangle without a black border:
+
+- Select Options ... Draw Filled.
+- Select solid white from the Patterns menu or palette.
+- Select the Rectangle tool from the Tools menu or palette.
+- Hold down the option key while dragging out the rectangle.
+
 To copy a background and create a new background
 that starts out with the same configuration,
 TODO: ???
@@ -1409,8 +1429,8 @@ TODO: ???
 To create multiple backgrounds that have some common elements,
 the common elements must be copied from one background to the others.
 
-To assign a name to a background, select Options ... Bkgnd Info...
-and enter/change the "Background Name".
+To assign/change the name of a background,
+select Options ... Bkgnd Info... and enter/change the "Background Name".
 
 In a stack that uses multiple backgrounds,
 button and field names can be duplicated across the backgrounds.
