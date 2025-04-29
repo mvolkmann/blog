@@ -366,17 +366,6 @@ To view and optionally edit a background used by the current card:
 - Select Edit ... Background or press cmd-b to toggle background mode.
   This is indicated by a hatched pattern in the menu bar.
 
-### Stack Copying
-
-To create a copy of the current stack:
-
-- Select File ... Save a Copy...
-- In the dialog that appears, select the target directory.
-- Enter a stack name under the label "Save a copy of stack as:".
-- Optionally change the "File type" to "Application"
-  to create an application that can be run without HyperCard.
-- Click the "Save" button.
-
 ### Stack Sharing
 
 To share a stack with others, send them the stack file.
@@ -473,6 +462,24 @@ users must enter this password (once per HyperCard session)
 in order to open the stack.
 Regardless of the "Private Access" setting,
 users must enter this password in order to open the "Protect Stack" dialog.
+
+Users that have access to a stack file can find ways
+in the HyperCard app to bypass its password protection.
+A better way to ensure password protection is to
+save the stack as an application (see the next section)
+and distribute that.
+Applications cannot be edited in HyperCard.
+
+### Stack Copying
+
+To create a copy of the current stack:
+
+- Select File ... Save a Copy...
+- In the dialog that appears, select the target directory.
+- Enter a stack name under the label "Save a copy of stack as:".
+- Optionally change the "File type" to "Application"
+  to create an application that can be run without HyperCard.
+- Click the "Save" button.
 
 ## Cards
 
