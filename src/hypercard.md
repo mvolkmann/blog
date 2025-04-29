@@ -220,28 +220,7 @@ The default Home stack contains nine cards.
     Checking this checkbox enables using all four arrow keys
     to move the cursor inside focused fields.
 
-### Sorting Cards
-
-To sort all the cards currently in a stack based on
-the content of a background field (appears on every card),
-open the message box and enter a command like
-`sort by field dogName`.
-This changes the number of each card in the stack, but not their IDs.
-
-Newly added cards are not automatically places in the current sort order
-because the contents of their fields is not known when the card is created.
-
-To automatically resort the stack each time it is opened,
-select Objects ... Stack Info..., click the Script button,
-and add a handler like the following:
-
-```text
-on openStack
-  sort by field dogName
-end openStack
-```
-
-### More Stack Operations
+### Stack Creation
 
 There are three ways to open an existing stack.
 
@@ -311,6 +290,8 @@ To create a new stack from scratch:
   to keep the stack currently being viewed open.
 - Click the Save button.
 
+### Stack Opening
+
 To open an existing stack:
 
 - Select File ... Open Stack...
@@ -366,6 +347,8 @@ enter the new name in the dialog that appears, and click the "OK" button.
 For example, consider renaming "Card 3" to "My Stacks"
 if that is where you place links to your stacks.
 
+### Stack Information
+
 To get information about the current stack:
 
 - Select Objects ... Stack Info... to open a Stack Info dialog.
@@ -373,6 +356,17 @@ To get information about the current stack:
   This enables renaming the stack, resizing it, and editing its script.
   It also gives the number of cards in the stack
   and the number of backgrounds used.
+
+### Stack Backgrounds
+
+To view and optionally edit a background used by the current card:
+
+- Open the stack.
+- Navigate to a card that uses the background.
+- Select Edit ... Background or press cmd-b to toggle background mode.
+  This is indicated by a hatched pattern in the menu bar.
+
+### Stack Copying
 
 To create a copy of the current stack:
 
@@ -383,14 +377,32 @@ To create a copy of the current stack:
   to create an application that can be run without HyperCard.
 - Click the "Save" button.
 
-To view and optionally edit a background used by the current card:
-
-- Select Edit ... Background or press cmd-b to toggle background mode.
-  This is indicated by a hatched pattern in the menu bar.
+### Stack Sharing
 
 To share a stack with others, send them the stack file.
 They can open the stack by double-clicking it,
 or by launching HyperCard and selecting File ... Open Stack...
+
+### Card Sorting
+
+To sort all the cards currently in a stack based on
+the content of a background field (appears on every card),
+open the message box and enter a command like
+`sort by field dogName`.
+This changes the number of each card in the stack, but not their IDs.
+
+Newly added cards are not automatically places in the current sort order
+because the contents of their fields is not known when the card is created.
+
+To automatically resort the stack each time it is opened,
+select Objects ... Stack Info..., click the Script button,
+and add a handler like the following:
+
+```text
+on openStack
+  sort by field dogName
+end openStack
+```
 
 ### Stack Compacting
 
