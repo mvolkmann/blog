@@ -284,16 +284,31 @@ To create a new stack from scratch:
 
 - Select File ... New Stack...
 - Enter a stack name.
-- Select an option from the "Card size" dropdown with the following options:
+- Select an option from the "Card size" dropdown with the following options
+  where the sizes are in pixels:
+
   - Small: 416 x 240
   - Classic: 512 x 342
   - PowerBook: 640 x 400
   - Large: 640 x 480
   - MacPaint: 576 x 720
   - Window: 640 x 480 (same as Large)
-  - Screen: fills the current screen
-  - Custom: specify a size between 64x64 and 1280x1280
-- Optionally check "Open stack in new window".
+  - Screen: This fills the current screen.
+  - Custom: Specify a size between 64x64 and 1280x1280 in 32-pixel increments
+    by dragging the lower-right corner of
+    the rectangle under the "Card size" label.
+
+  This will default to the size of the stack currently being viewed.
+
+  The card size used by a stack can be changed later by
+  opening its Stack Info dialog and clicking the "Resize..." button.
+  However, this can require rearranging the objects on each card,
+  especially if the size is reduced.
+
+- Optionally check "Copy current background" to copy the
+  background of the currently open stack into the new stack.
+- Optionally check "Open stack in new window"
+  to keep the stack currently being viewed open.
 - Click the Save button.
 
 To open an existing stack:
@@ -322,6 +337,7 @@ To enable opening your stacks from the Home stack:
 - Select Home ... New Link to Stack...
 - In the dialog that appears, select a stack file.
 - Click the "Open" button to add a new button.
+- Position the new button as desired.
 - Select the Browse tool.
 - The new button can be clicked to open the stack in a new window.
 
@@ -1401,6 +1417,8 @@ which I placed in the Applications directory.
 HyperTalk ...
 
 - is the scripting language used by HyperCard
+- is used to write event handlers and functions in the scripts
+  associated with stacks, backgrounds, cards, buttons, and fields
 - has an English-like syntax
 - is case-insensitive except when comparing strings
 - is interpreted at run-time, but cached for executing again later
@@ -1411,6 +1429,9 @@ The commands (a.k.a. statements) supported by HyperTalk
 are documented at {% aTargetBlank
 "https://www.hypercard.center/HyperTalkReference#commands",
 "HyperTalk Reference" %}.
+
+A good way to learn about HyperTalk is to
+examine the scripts in provided stacks such as the Home stack.
 
 ### Message Box
 
