@@ -80,6 +80,25 @@ This includes modifying the content of fields, adding cards, and deleting cards.
 If multiple stack windows are open,
 select Go ... Next Window or press cmd-l to move focus to the next one.
 
+A stack can be homogeneous or heterogeneous.
+In a homogeneous stack, all the cards have the same background.
+In a heterogeneous stack, the cards use more than one background.
+An example is a stack that begins with a table of contents card
+that contains buttons that link to all other cards
+which share a different background.
+TODO: Learn how to implement this.
+
+A table of contents card can have multiple levels.
+For example, it can have a list of categories on the left
+and a list of topics on the right.
+Clicking a category on the left can
+change the list of topics displayed on the right.
+Clicking a topic can navigate to a card that provides details on the topic.
+TODO: See page 74 in HyperCard Handbook. Learn how to implement this.
+
+A stack can contain links to cards in other stacks.
+TODO: Learn how to implement this.
+
 Stacks are not meant to be concurrently modified by multiple users.
 
 ### Home Stack
@@ -245,6 +264,8 @@ To create a new stack:
   - Large: 640 x 480
   - MacPaint: 576 x 720
   - Window: 640 x 480 (same as Large)
+  - Screen: fills the current screen
+  - Custom: specify a size between 64x64 and 1280x1280
 - Optionally check "Open stack in new window".
 - Click the Save button.
 
@@ -508,9 +529,14 @@ The tools menu contains a grid of buttons
 that can be clicked to select one of the 18 tools.
 Drag the Tools menu off the menu bar
 to create a floating palette of tool buttons.
+Alternatively, press option-tab to toggle display of the Tools palette.
 
 <img alt="HyperCard Tools" style="width: 15%"
   src="/blog/assets/hypercard-tools.png?v={{pkg.version}}">
+
+The keyboard shortcuts described below that begin with cmd-tab
+will not work with running HyperCard in an emulator on a modern Mac,
+because cmd-tab there is used to bring up the application switcher.
 
 The tools include:
 
@@ -522,8 +548,6 @@ The tools include:
     rather than as an author.
 
     Another way to enter Browse mode is to press cmd-tab.
-    This will not work with running HyperCard in an emulator on a modern Mac,
-    because cmd-tab there is used to switch applications.
 
   - **Button**
 
@@ -531,11 +555,15 @@ The tools include:
     When in this mode, a thin black border is drawn around all buttons
     so they can be located even when they are transparent with no text or icon.
 
+    Another way to enter Button mode is to press cmd-tab-tab.
+
   - **Field**
 
     This enters Field mode which enables editing existing fields.
     When in this mode, a thin black border is drawn around all text fields
     so they can be located even when they are transparent with no text.
+
+    Another way to enter Field mode is to press cmd-tab-tab-tab.
 
 - Row #2
 
@@ -2098,6 +2126,24 @@ For example, `pass "messageName [parameterList]"`.
 To send a message to another object, use the `send` command.
 For example, `send "messageName [parameterList]" to objectReference`.
 
+### Custom Menus
+
+A stack can add custom menus, remove menus,
+and remove specific menu items using HyperTalk.
+For example, the Home stack adds the Home menu
+and the Addresses stack adds the Utilities menu.
+
+To see how this is done:
+
+- Open the Home stack.
+- Select Objects ... Stack Info...
+- Click the Script... button.
+- Examine the handler `createTheMenus`,
+  the function `homeMenuItems`, and
+  the function `homeMenuMsgs`.
+
+TODO: Learn how to do this in one of your stacks.
+
 ## Speaking
 
 To speak the words in a string, use the `speak` command.
@@ -2164,6 +2210,9 @@ HyperCard supports the following five user levels:
 - 3 Painting: can use tools to draw and paint on cards
 - 2 Authoring: can add and modify buttons and fields on cards
 - 1 Scripting: can add and modify scripts associated with any object
+
+The user level affects the menu items that are present
+and the functionality available to the user.
 
 To set the level for the HyperCard application as a whole:
 
