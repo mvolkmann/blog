@@ -519,6 +519,14 @@ It will be assigned a unique ID within the stack that never changes.
 It will also be assigned a number that specifies its order within the stack,
 which can change if the cards are sorted later.
 
+To add a new, first card in a stack:
+
+- Press cmd-1 to go to the first card.
+- Select Edit ... New Card to add a new, second card.
+- Press cmd-1 to return to the first card.
+- Select Edit ... Cut Card to remove the first card.
+- Select Edit ... Paste Card to paste the cut card after the new first card.
+
 To edit the properties of the current card, select Objects ... Card Info...
 which opens the following dialog:
 
