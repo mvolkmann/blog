@@ -14,10 +14,15 @@ layout: topic-layout.njk
 
 HyperCard is a Macintosh application for viewing and creating
 multimedia applications built with HyperCard stacks
-(a.k.a HyperCard applications) which are collections of cards.
+which are collections of cards.
+
 Cards have two layers, a background and a foreground (referred to as "card").
-These layers can contain text, graphics, buttons, and fields.
-They can also play sounds and videos.
+Each layers can contain painted objects (e.g. a filled rectangle),
+buttons, and fields.
+
+A background can be shared by any number of cards in its stack.
+The objects in a card background that are not obscured
+by objects in its foreground are visible.
 
 The original application name was WildCard. It was changed
 to HyperCard shortly before the initial release
@@ -1298,7 +1303,7 @@ moves the focus to the first field on the card.
 ## Layers
 
 The elements of a card consist of
-painted objects (ex. polygon), buttons, and fields.
+painted objects (e.g. polygon), buttons, and fields.
 Each element is displayed in its own layer.
 
 All painted objects appear below buttons and fields.
@@ -1918,7 +1923,7 @@ It supports many arguments described below.
   - `go forth` - opposite of `go back` used after that command
   - `go home` - Home stack
   - `go [stack] {stack-name} [in a new window]` -
-    first card in a given stack (ex. "HyperCard Help")
+    first card in a given stack (e.g. "HyperCard Help")
 
 ### get Command
 
@@ -1930,8 +1935,8 @@ The following are examples of using the `get` command:
 
 ```text
 get 2 + 3
-get the short date -- ex. 4/12/25; short is the default and can be omitted
-get the long date -- ex. Saturday, April 12, 2025
+get the short date -- e.g. 4/12/25; short is the default and can be omitted
+get the long date -- e.g. Saturday, April 12, 2025
 get the value of card field "My Foreground Field"
 get the value of background field "My Background Field"
 get the label of button "My Button"
