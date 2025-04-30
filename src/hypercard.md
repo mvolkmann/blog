@@ -1420,8 +1420,11 @@ To do so:
 - Select Objects ... Bring Closer (cmd-plus)
   or Objects ... Send Farther (cmd-minus).
 
-Doing so changes the "Bkgnd part number" or "Card part number" values
-of the elements.
+This changes the "Bkgnd part number" or "Card part number" values
+of the elements by one.
+
+To move an object to the extreme end of the stacking order,
+hold down the shift key when issuing the command.
 
 For fields, the stacking order affects the order in which
 they are visited when the tab key is pressed.
