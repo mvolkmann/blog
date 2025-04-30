@@ -585,7 +585,13 @@ To copy the current card and paste the copy after another card:
 - Navigate to the destination card.
 - Select Edit ... Paste Card.
 
-The background of new card will be the same as that of the copied card.
+The background of new card will be the same as that of the copied card,
+not a copy of the background.
+Modifying the background will affect all cards that use the background.
+
+If the card is pasted into a different stack
+that does not already contain the background of the card,
+that background will be added to the stack.
 
 ### Card Moving
 
@@ -595,8 +601,12 @@ To move the current card to a new location in the stack:
 - Navigate to the card after which it will be placed.
 - Select Edit ... Paste Card.
 
-TODO: Will it retain its current background or
-TODO: take on the background of the previous card?
+The background of moved card will not change.
+Modifying the background will affect all cards that use the background.
+
+If the card is pasted into a different stack
+that does not already contain the background of the card,
+that background will be added to the stack.
 
 ### Card Deletion
 
