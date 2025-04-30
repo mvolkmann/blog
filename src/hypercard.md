@@ -499,6 +499,8 @@ All transparent parts of a card foreground display
 content from the background at the same location.
 Typically many cards share a background.
 
+### Card Navigation
+
 To navigate between the cards in a stack:
 
 - Select Go ... First or press cmd-1 to go the first card in the stack.
@@ -514,12 +516,17 @@ This contains buttons that map to the each of the Go menu items except "Scroll".
 <img alt="HyperCard Navigator Palette" style="width: 20%"
   src="/blog/assets/hypercard-navigator-palette.png?v={{pkg.version}}">
 
+### Card Creation
+
 To add a card to the current stack, select Edit ... New Card or press cmd-n.
-The new card will use the same background as the current card,
-be placed immediately after the current card, and become the current card.
-It will be assigned a unique ID within the stack that never changes.
-It will also be assigned a number that specifies its order within the stack,
-which can change if the cards are sorted later.
+The new card will:
+
+- use the same background as the current card.
+- be placed immediately after the current card.
+- become the current card.
+- be assigned a unique ID within the stack that never changes.
+- be assigned a number that specifies its order within the stack,
+  which can change if the cards are inserted and/or sorted later.
 
 To add a new, first card in a stack:
 
@@ -531,6 +538,8 @@ To add a new, first card in a stack:
 
 All of the steps above can be performed in a script using the `doMenu` command.
 
+### Card Information
+
 To edit the properties of the current card, select Objects ... Card Info...
 which opens the following dialog:
 
@@ -539,12 +548,16 @@ which opens the following dialog:
 
 Cards can be assigned names.
 A HyperTalk script can go to a card with a given name
-using the command `go to card "{card-name}".
+using the command `go [to] card "{card-name}".
+
+### Card Deletion
 
 To delete the current card, select Edit ... Delete Card or press cmd-delete.
 Be careful because no confirmation is requested!
 If no other action has taken place yet, the deleted card
 can be recovered by selecting Edit ... Undo or pressing cmd-z.
+
+### Card Copying
 
 To copy the current card and paste the copy after another card:
 
@@ -553,6 +566,8 @@ To copy the current card and paste the copy after another card:
 - Select Edit ... Paste Card.
 
 The background of new card will be the same as that of the copied card.
+
+### Card Saving
 
 There is no explicit save command.
 Changes to the content of a field are automatically saved
@@ -565,12 +580,7 @@ when any of the following occur:
 - Navigation to another card occurs.
 - A new card is created.
 
-Sadly there is no easy way to:
-
-- reorder the cards in a stack
-- change the background used by an existing card
-
-These seem like large oversights!
+### Recent Cards
 
 HyperCard remembers the last 42 unique cards viewed in the current session.
 To view thumbnails of the viewed cards, select Go ... Recent or press cmd-r.
@@ -580,9 +590,11 @@ To navigate to a different card and dismiss the dialog, click its thumbnail.
 To remain on the current card and dismiss the dialog,
 click the background of the dialog.
 
+### Card Marking
+
 TODO: Discuss "marking" cards and what you can do with marked cards.
 
-### Find/Search
+### Card Finding
 
 To search for an occurrence of text, select Go .. Find... or press cmd-f.
 Then enter search text inside the provided double quotes
@@ -647,6 +659,15 @@ To treat accented characters the same as their non-accented counterparts
 when finding matches, add the keyword `international` after `find`
 in any of the `find` commands described above.
 For example, this treats the character é the same as the character e.
+
+### Card Issues
+
+Sadly there is no easy way to:
+
+- reorder the cards in a stack
+- change the background used by an existing card
+
+These seem like large oversights!
 
 ## Tools
 
