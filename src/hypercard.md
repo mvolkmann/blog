@@ -543,6 +543,9 @@ The "Card Info" dialog contains the following:
 - "Card Marked" checkbox to "mark" the card
 - "Don't Search Card" checkbox to omit the card from searches
 - "Can't Delete Card" checkbox to prevent users from deleting the card
+  If an attempt is made to delete the card,
+  a dialog will open that says "Can't delete protected card."
+- "Script..." button to view and edit the associate script
 
 ### Card Navigation
 
@@ -583,6 +586,17 @@ To copy the current card and paste the copy after another card:
 - Select Edit ... Paste Card.
 
 The background of new card will be the same as that of the copied card.
+
+### Card Moving
+
+To move the current card to a new location in the stack:
+
+- Select Edit ... Cut Card.
+- Navigate to the card after which it will be placed.
+- Select Edit ... Paste Card.
+
+TODO: Will it retain its current background or
+TODO: take on the background of the previous card?
 
 ### Card Deletion
 
@@ -1423,8 +1437,7 @@ To prevent a background from being deleted,
 check the "Can't Delete Background" checkbox.
 When this is checked, if a user tries to
 delete the last card that uses the background,
-a dialog will open that says
-"Can't delete last card of protected background".
+a dialog will open that says "Can't delete last card of protected background".
 
 To switch to background mode,
 which temporarily hides the foreground of the current card
