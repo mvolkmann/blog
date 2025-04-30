@@ -836,9 +836,20 @@ The tools include:
 
     To apply a pattern to painted text, see the "Patterns" section below.
 
-    For text that may need to be edited later, use a text field instead
-    and check the "Lock Text" checkbox in its Field Info dialog
-    to make it read-only.
+    Pros of painted text:
+
+    - Users do not need to have the selected font installed.
+    - The text is automatically read-only.
+      Using a field instead requires opening its "Field Info" dialog
+      and checking the "Lock Text" checkbox.
+
+    Cons of painted text:
+
+    - The bitmap representation requires more disk space
+      than would be used by the same text in a locked field.
+    - The text cannot be modified later.
+      Changes require erasing the text and recreating it.
+      For text that may need to be edited later, use a locked field instead.
 
   - **Regular Polygon**
 
