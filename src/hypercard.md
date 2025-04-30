@@ -499,23 +499,6 @@ All transparent parts of a card foreground display
 content from the background at the same location.
 Typically many cards share a background.
 
-### Card Navigation
-
-To navigate between the cards in a stack:
-
-- Select Go ... First or press cmd-1 to go the first card in the stack.
-- Select Go ... Prev or press cmd-2 to go to the previous card in the stack.
-- Select Go ... Next or press cmd-3 to go to the next card in the stack.
-- Select Go ... Last or press cmd-4 to go the last card in the stack.
-- Select Go ... Back or press cmd-~ to go back to the previously browsed card.
-
-Another way to navigate is to open the Navigator Palette (shown below)
-by entering the command `nav` in the message box.
-This contains buttons that map to the each of the Go menu items except "Scroll".
-
-<img alt="HyperCard Navigator Palette" style="width: 20%"
-  src="/blog/assets/hypercard-navigator-palette.png?v={{pkg.version}}">
-
 ### Card Creation
 
 To add a card to the current stack, select Edit ... New Card or press cmd-n.
@@ -550,22 +533,33 @@ Cards can be assigned names.
 A HyperTalk script can go to a card with a given name
 using the command `go [to] card "{card-name}".
 
-### Card Deletion
+The "Card Info" dialog contains the following:
 
-To delete the current card, select Edit ... Delete Card or press cmd-delete.
-Be careful because no confirmation is requested!
-If no other action has taken place yet, the deleted card
-can be recovered by selecting Edit ... Undo or pressing cmd-z.
+- card name which can be edited
+- card number (position) within its stack
+- unique card ID within its stack
+- number of fields on the card
+- number of buttons on the card
+- "Card Marked" checkbox to "mark" the card
+- "Don't Search Card" checkbox to omit the card from searches
+- "Can't Delete Card" checkbox to prevent users from deleting the card
 
-### Card Copying
+### Card Navigation
 
-To copy the current card and paste the copy after another card:
+To navigate between the cards in a stack:
 
-- Select Edit ... Copy Card.
-- Navigate to the destination card.
-- Select Edit ... Paste Card.
+- Select Go ... First or press cmd-1 to go the first card in the stack.
+- Select Go ... Prev or press cmd-2 to go to the previous card in the stack.
+- Select Go ... Next or press cmd-3 to go to the next card in the stack.
+- Select Go ... Last or press cmd-4 to go the last card in the stack.
+- Select Go ... Back or press cmd-~ to go back to the previously browsed card.
 
-The background of new card will be the same as that of the copied card.
+Another way to navigate is to open the Navigator Palette (shown below)
+by entering the command `nav` in the message box.
+This contains buttons that map to the each of the Go menu items except "Scroll".
+
+<img alt="HyperCard Navigator Palette" style="width: 20%"
+  src="/blog/assets/hypercard-navigator-palette.png?v={{pkg.version}}">
 
 ### Card Saving
 
@@ -579,6 +573,23 @@ when any of the following occur:
 - A menu item is selected.
 - Navigation to another card occurs.
 - A new card is created.
+
+### Card Copying
+
+To copy the current card and paste the copy after another card:
+
+- Select Edit ... Copy Card.
+- Navigate to the destination card.
+- Select Edit ... Paste Card.
+
+The background of new card will be the same as that of the copied card.
+
+### Card Deletion
+
+To delete the current card, select Edit ... Delete Card or press cmd-delete.
+Be careful because no confirmation is requested!
+If no other action has taken place yet, the deleted card
+can be recovered by selecting Edit ... Undo or pressing cmd-z.
 
 ### Recent Cards
 
