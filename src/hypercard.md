@@ -1412,10 +1412,27 @@ So buttons and fields are never obscured by painted objects.
 The order in which elements are created determines their initial stacking order,
 with the newer elements on top of older elements.
 
-The stacking order of buttons and fields can be changed by selecting one
-and then selecting Objects ... Bring Closer (cmd-plus)
-or Objects ... Send Farther (cmd-minus).
-Doing so changes the "Card Part Number" values of the elements.
+The stacking order of buttons and fields can be changed.
+To do so:
+
+- Select the Button or Field tool.
+- Selecting the button or field whose order will be changed.
+- Select Objects ... Bring Closer (cmd-plus)
+  or Objects ... Send Farther (cmd-minus).
+
+Doing so changes the "Bkgnd part number" or "Card part number" values
+of the elements.
+
+For fields, the stacking order affects the order in which
+they are visited when the tab key is pressed.
+If the focus is in a background field, repeatedly pressing the tab key
+visits each of the remaining background fields that are
+higher the stacking order before visiting each of the card fields.
+If the focus is in a card field, repeatedly pressing the tab key
+visits each of the remaining card fields that are
+higher the stacking order before visiting each of the background fields.
+It is not possible to set a stacking order that
+alternates between background and foreground fields.
 
 When the mouse is clicked, only one element receives the event ...
 the element that overlaps the click location and is in the closest layer.
