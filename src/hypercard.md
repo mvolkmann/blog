@@ -1006,7 +1006,7 @@ To add a button to the current card.
   or the text that will appear on it.
   It's too bad buttons can't have separate values for
   the name used to refer to them and the label displayed in them.
-- Choose a button style from the following options:
+- Select a button style from the following options:
 
   - Transparent: no border and can see through;
     default when created with cmd-drag
@@ -1036,7 +1036,15 @@ To add a button to the current card.
 - Click the "Script..." button.
 - Enter the command(s) to execute when the button is clicked.
 
-To move a button:
+To edit the properties of a button, select the Button tool,
+and double-click a button.
+Alternatively, select a button, and select Objects ... Button Info...
+Either way, a "Button Info" dialog like the one shown above will open.
+This works regardless of whether the button is in the card or background layer.
+It is not necessary to switch to background mode
+in order to modify a background button.
+
+To move a button within its card:
 
 - Select the Button tool.
 - Drag the inside or edge of any button.
@@ -1046,17 +1054,18 @@ To resize a button:
 
 - Select the Button tool.
 - Drag any corner of a button.
+  It is easiest to grab a corner by clicking just inside it
+  rather than trying to click directly on it.
 
-To create a copy of a button,
-option-drag it OR select Edit ... Copy Button.
+To create a copy of a button, option-drag it OR
+select Edit ... Copy Button (cmd-c),
+optionally navigate to another card (possibly in another stack),
+and select Edit ... Paste Button (cmd-v).
 
-To edit the properties of a button, select the Button tool,
-and double-click a button.
-Alternatively, select a button, and select Objects ... Button Info...
-Either way, a "Button Info" dialog like the one shown above will open.
-This works regardless of whether the button is in the card or background layer.
-It is not necessary to switch to background mode
-in order to modify a background button.
+To move a button, to another card (possibly in another stack),
+select Edit ... Cut Button (cmd-x),
+navigate to the destination card,
+and select Edit ... Paste Button (cmd-v).
 
 To configure a button so clicking it navigates to another card or stack:
 
@@ -1255,47 +1264,50 @@ To add a field to the current card:
   Alternatively, select the Field tool and
   cmd-drag to indicate the location and size of a new field.
   This adds a new field to the center of the current card.
-- With the Field tool selected:
 
-  - Enter a Field name.
-  - Select a Style from the following options:
+- Double-click the field to open its "Button Info" dialog.
 
-    - Transparent: can see through to objects behind it
-    - Opaque: cannot see through to objects behind it
-    - Rectangle: adds a rectangular border
-    - Shadow: same as Rectangle, but adds shadows
-      on the right and bottom sides for a 3D effect
-    - Scrolling: adds a rectangular border and
-      a vertical scrollbar (even when not needed)
+  <img alt="HyperCard Field Info" style="width: 50%"
+    src="/blog/assets/hypercard-field-info.png?v={{pkg.version}}">
 
-  - Select the desired checkbox options which include:
+- Enter a Field name.
+- Select a field style from the following options:
 
-    - Lock Text
-    - Don't Wrap
-    - Auto Select
-    - Multiple Lines
-    - Wide Margins
-    - Fixed Line Height
-    - Show Lines: displays dotted lines it indicate where text can be entered
-    - Auto Tab
-    - Don't Search
+  - Transparent: can see through to objects behind it
+  - Opaque: cannot see through to objects behind it
+  - Rectangle: adds a rectangular border
+  - Shadow: same as Rectangle, but adds shadows
+    on the right and bottom sides for a 3D effect
+  - Scrolling: adds a rectangular border and
+    a vertical scrollbar (even when not needed)
 
-    TODO: Describe the options above.
+- Select the desired checkbox options which include:
+
+  - Lock Text
+  - Don't Wrap
+  - Auto Select
+  - Multiple Lines
+  - Wide Margins
+  - Fixed Line Height
+  - Show Lines: displays dotted lines it indicate where text can be entered
+  - Auto Tab
+  - Don't Search
+
+  TODO: Describe the options above.
 
 - Click the Browse tool (hand with pointing finger).
 - Click the field.
 - Enter text.
+- For read-only text, open the "Field Info" dialog again
+  and check the "Lock Text" checkbox.
 
 To edit the properties of a field, select the Field tool,
 and double-click a field.
 Alternatively, select a field, and select Objects ... Field Info...
-Either way, a "Field Info" dialog like the one shown below will open.
+Either way, a "Field Info" dialog like the one shown above will open.
 This works regardless of whether the field is in the card or background layer.
 It is not necessary to switch to background mode
 in order to modify a background field.
-
-<img alt="HyperCard Field Info" style="width: 50%"
-  src="/blog/assets/hypercard-field-info.png?v={{pkg.version}}">
 
 To change the default text style of a field:
 
@@ -1333,7 +1345,7 @@ To paste the text without its text style,
 instead using the text style of the character before where it is pasted,
 hold down the shift key when selecting Edit ... Paste or press cmd-shift-v.
 
-To move a field:
+To move a field within its card:
 
 - Select the Field tool.
 - Drag the inside or edge of any field.
@@ -1346,8 +1358,15 @@ To resize a field:
   It is easiest to grab a corner by clicking just inside it
   rather than trying to click directly on it.
 
-To create a copy of a field,
-option-drag it OR select Edit ... Copy Field.
+To create a copy of a field, option-drag it OR
+select Edit ... Copy Field (cmd-c),
+optionally navigate to another card (possibly in another stack),
+and select Edit ... Paste Field (cmd-v).
+
+To move a field, to another card (possibly in another stack),
+select Edit ... Cut Field (cmd-x),
+navigate to the destination card,
+and select Edit ... Paste Field (cmd-v).
 
 To delete a field:
 
