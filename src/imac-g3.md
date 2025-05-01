@@ -77,7 +77,7 @@ onto a modern Mac.
 - Install HyperCard 4.2.1.
 - Install "The Haunted House 1.0.2" HyperCard stack.
 
-## Tips
+## Mac OS 9 Tips
 
 To simulate a right mouse button click in order to get context-sensitive menus,
 hold down the control key while clicking.
