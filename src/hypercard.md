@@ -1239,9 +1239,14 @@ the selectedLine of button "My Popup Name"
 
 A text field is referred to as simply a "field".
 These hold text that can differ on each card within a stack.
-For example, the background of the cards in the provided "Addresses" stack
-contains "Name" and "Telephone" fields.
-Different values can be entered in these fields for each card.
+For example, the background of the cards in the provided "Addresses" stack,
+shown below, contains "Name" and "Telephone" fields.
+Typically each field is preceded by a label
+that describes the data that should be entered.
+Different values can be entered in background fields for each card.
+
+<img alt="HyperCard Addresses stack" style="width: 60%"
+  src="/blog/assets/hypercard-addresses-stack.png?v={{pkg.version}}">
 
 Fields can hold a single line of text or multiple lines.
 The choice is specified in the "Field Info" dialog for each field.
@@ -1273,27 +1278,36 @@ To add a field to the current card:
 - Enter a Field name.
 - Select a field style from the following options:
 
-  - Transparent: can see through to objects behind it
-  - Opaque: cannot see through to objects behind it
-  - Rectangle: adds a rectangular border
+  - Transparent: no border and can see through to objects behind it
+  - Opaque: no border and cannot see through to objects behind it;
+    useful to place on top of graphics
+  - Rectangle: adds a rectangular border; most common style
   - Shadow: same as Rectangle, but adds shadows
     on the right and bottom sides for a 3D effect
   - Scrolling: adds a rectangular border and
-    a vertical scrollbar (even when not needed)
+    a vertical scrollbar (even when not needed),
+    but never a horizontal scrollbar
 
 - Select the desired checkbox options which include:
 
-  - Lock Text
-  - Don't Wrap
-  - Auto Select
-  - Multiple Lines
-  - Wide Margins
-  - Fixed Line Height
-  - Show Lines: displays dotted lines it indicate where text can be entered
-  - Auto Tab
-  - Don't Search
+  - Lock Text: makes the content read-only
+  - Don't Wrap: prevents words from wrapping when they go past the right edge,
+    without a way to scroll the text to see that content
+  - Auto Select: enables implementing selection lists (described later)
+  - Multiple Lines: enables enter
+  - Wide Margins: adds a top margin of about half character height
+    along with left and right margins of about a character width,
+    but no bottom margin
+  - Fixed Line Height: keeps the same default height for all lines
+    regardless of the font sizes used in the lines;
+    allows text to overlap vertically which seems bad
+  - Show Lines: displays dotted lines that indicate where each line of text can be entered
+  - Auto Tab: moves focus to the next field when the return key is pressed
+    and the text cursor is on the last visible line of a non-scrolling field;
+    most useful in a series of single-line fields
+  - Don't Search: prevents contents from being searched by `find` commands
 
-  TODO: Describe the options above.
+  TODO: Describe using the Auto Select option.
 
 - Click the Browse tool (hand with pointing finger).
 - Click the field.
