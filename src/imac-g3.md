@@ -6,15 +6,14 @@ layout: topic-layout.njk
 
 ## Overview
 
-I purchased a used iMac G3 on April 30, 2025
-because it is one of the newest Macintosh computers
+I purchased a used iMac G3 on April 30, 2025 for $200.
+It chose this model because it is one of the newest Macintosh computers
 that can run the HyperCard application.
 I'm learning about HyperCard so I can attempt to recreate it as web application.
 
 The specs for this computer can be found at {% aTargetBlank
 "https://everymac.com/systems/apple/imac/specs/imac_dv_se_500.html",
 "everymac.com" %}.
-
 The highlights are:
 
 - Apple iMac G3/500 DV SE (Summer 2000)
