@@ -79,6 +79,22 @@ onto a modern Mac.
 
 ## Tips
 
+To simulate a right mouse button click in order to get context-sensitive menus,
+hold down the control key while clicking.
+For example, doing this on the trash can icon,
+opens a menu containing "Empty Trash...".
+
+To delete a file or folder in the Finder,
+click it to select it and press cmd-delete.
+The trash can icon will change to a bulging trash can
+to indicate that something is inside it.
+
+To empty the trash can, do one of the following:
+
+- Select Special ... Empty Trash...
+- control-click the trash can and select "Empty Trash..."
+- Press cmd-shift-delete.
+
 The name of the currently running application
 is displayed on the right end of the menu bar.
 To see a list of the applications that are currently running in a menu,

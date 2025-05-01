@@ -2667,7 +2667,8 @@ end mouseUp
 ### Dice Button
 
 Let's create a button whose icon is a dice face.
-Each time the button is clicked, its icon changes to the next dice value.
+Each time the button is clicked, its icon changes to 10 random values,
+before settling on a new value.
 
 <img alt="HyperCard Dice Button" style="width: 6%"
   src="/blog/assets/hypercard-dice-button.png?v={{pkg.version}}">
@@ -2681,10 +2682,13 @@ Add the following script to the button:
 
 ```text
 on mouseUp
-  -- The dice icon IDs are 2101 to 2106.
-  put the icon of me - 2101 into index
-  put (index + 1) mod 6 into index
-  set the icon of me to 2101 + index
+  repeat 10 times
+    -- The dice icon IDs are 2101 to 2106.
+    put the icon of me - 2101 into index
+    put (index + random(6)) mod 6 into index
+    set the icon of me to 2101 + index
+    wait for 5 ticks
+  end repeat
 end mouseUp
 ```
 
