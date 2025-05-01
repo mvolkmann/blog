@@ -76,3 +76,41 @@ onto a modern Mac.
 - Install the "Mac OS 9.2.1 Updater".
 - Install HyperCard 4.2.1.
 - Install "The Haunted House 1.0.2" HyperCard stack.
+
+## Tips
+
+To boot from a CD, insert the CD, reboot the computer,
+and hold down the "C" key until the Apple logo appears.
+
+To adjust the monitor settings:
+
+- Click the Apple logo on the left end of the menu bar.
+- Select "Control Panels".
+- Select "Monitors"
+  - Select "Monitor".
+    - Adjust the slider for Contrast.
+    - Adjust the slider for Brightness.
+  - Select "Geometry".
+    - Select "Height/Width".
+      - Adjust the width and height.
+    - Select "Position".
+      - Adjust the horizontal and vertical position.
+- Close the control panel window.
+
+To adjust the layout of icons in the Finder:
+
+- Open a Finder window.
+- Select View ... as Icons.
+- Select View ... View Options...
+- Select "None" to enable dragging icons to any pixel location.
+- Select "Always snap to grid" to constrain the placement of icons.
+- Select "Keep arranged: by Name (or another option)
+  to automatically order icons by their names.
+- Optionally change "Icon Size" to small or large icons.
+
+To sort the contents of a directory by file/folder names,
+select View ... Arrange ...by Name.
+
+To resize a Finder window to the minimum size required
+to display all of its contents, click the first button
+in the upper-right corner of its title bar.
