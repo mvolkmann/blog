@@ -79,6 +79,26 @@ onto a modern Mac.
 
 ## Tips
 
+The name of the currently running application
+is displayed on the right end of the menu bar.
+To see a list of the applications that are currently running in a menu,
+click that.
+To make a different application active, click its name in the menu.
+
+The "Control Strip" provides quick access to many settings.
+It is not displayed by default.
+To display it, select Apple menu ... Control Panels ... Control Strip
+and click the "Show Control Strip" radio button.
+To collapse the Control Strip so only its right end is visible,
+click on its left or right end.
+To expand the Control Strip,
+click on its right end which is the only visible part.
+
+To adjust the number of minutes the computer
+must be inactive before it goes to sleep,
+select Apple menu ... Control Panels ... Energy Saver
+and drag the slider to the desired number of minutes.
+
 To boot from a CD, insert the CD, reboot the computer,
 and hold down the "C" key until the Apple logo appears.
 
@@ -114,3 +134,14 @@ select View ... Arrange ...by Name.
 To resize a Finder window to the minimum size required
 to display all of its contents, click the first button
 in the upper-right corner of its title bar.
+
+To watch a DVD:
+
+- Insert a DVD in the slot.
+- Wait for the "Apple DVD Player" app to launch.
+- Click the Play button (right-pointing triangle).
+- Optionally select Video ... Fill Screen or press cmd-3.
+- For me this played for about 30 seconds and then locked up,
+  requiring a reboot. Force quit did not work.
+
+To eject a disc when booting, hold down the mouse button.
