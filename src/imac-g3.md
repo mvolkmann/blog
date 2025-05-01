@@ -95,6 +95,8 @@ To empty the trash can, do one of the following:
 - control-click the trash can and select "Empty Trash..."
 - Press cmd-shift-delete.
 
+To eject a disc or USB stick, drag it to the trash can.
+
 The name of the currently running application
 is displayed on the right end of the menu bar.
 To see a list of the applications that are currently running in a menu,
@@ -150,6 +152,15 @@ select View ... Arrange ...by Name.
 To resize a Finder window to the minimum size required
 to display all of its contents, click the first button
 in the upper-right corner of its title bar.
+
+To capture a screenshot:
+
+- Press cmd-shift-3 to capture the full screen in the clipboard.
+- Press cmd-shift-4 to drag out a selected area of the screen
+  and capture it in the clipboard.
+- Open a graphics application like MacPaint.
+- Paste the clipboard image.
+- TODO: The Edit ... Paste menu item is disabled!
 
 To watch a DVD:
 
