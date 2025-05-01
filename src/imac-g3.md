@@ -26,8 +26,9 @@ The highlights are:
 - processor type PowerPC 750
 - processor speed 500 MHz
 - 4X DVD ROM slot loading
-- 2 Firewire 400 ports
+- Ethernet port
 - 2 USB-A ports
+- 2 Firewire 400 ports
 - AirPort card for wireless internet using WEP
 - original price $1499
 
