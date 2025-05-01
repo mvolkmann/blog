@@ -2323,6 +2323,15 @@ repeat with name = start [down] to end
 end repeat
 ```
 
+### Waiting
+
+To pause for a given amount of time, use the `wait` command.
+The syntax is one of the following:
+
+- `wait [for] {n} {tick | ticks | second | seconds}`
+- `wait until {boolean-expression}`
+- `wait while {boolean-expression}`
+
 ### Mouse Events
 
 The following mouse-related events are automatically triggered:
