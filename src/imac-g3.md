@@ -117,6 +117,9 @@ must be inactive before it goes to sleep,
 select Apple menu ... Control Panels ... Energy Saver
 and drag the slider to the desired number of minutes.
 
+To wake the computer from sleep, press any key.
+Moving the mouse will not wake it.
+
 To boot from a CD, insert the CD, reboot the computer,
 and hold down the "C" key until the Apple logo appears.
 
@@ -153,14 +156,11 @@ To resize a Finder window to the minimum size required
 to display all of its contents, click the first button
 in the upper-right corner of its title bar.
 
-To capture a screenshot:
+To capture a screenshot to a file named "Picture {n}"
+at the top of the hard drive:
 
-- Press cmd-shift-3 to capture the full screen in the clipboard.
-- Press cmd-shift-4 to drag out a selected area of the screen
-  and capture it in the clipboard.
-- Open a graphics application like MacPaint.
-- Paste the clipboard image.
-- TODO: The Edit ... Paste menu item is disabled!
+- Press cmd-shift-3 to capture the full screen.
+- Press cmd-shift-4 to drag out a selected area of the screen.
 
 To watch a DVD:
 
