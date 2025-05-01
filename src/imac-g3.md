@@ -57,7 +57,7 @@ as evidenced by the photos below.
   src="/blog/assets/iMac-G3-back.jpg?v={{pkg.version}}">
 
 <img alt="iMac G3 keyboard" style="width: 90%"
-  src="/blog/assets/iMac-G3-keyboard.jpg?v={{pkg.version}}">
+  src="/blog/assets/iMac-G3-keyboard-mouse.jpg?v={{pkg.version}}">
 
 ## Setup
 
