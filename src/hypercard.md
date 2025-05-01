@@ -2332,6 +2332,8 @@ The syntax is one of the following:
 - `wait until {boolean-expression}`
 - `wait while {boolean-expression}`
 
+A tick is 1/60th of a second.
+
 ### Mouse Events
 
 The following mouse-related events are automatically triggered:
