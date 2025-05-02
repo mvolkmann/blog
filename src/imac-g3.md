@@ -110,6 +110,22 @@ The software comes in many file formats:
 - `.zip`: compression format; decompress with MacZip or StuffIt Expander
 - `.tar.gz` or `.tgz`: gzipped Tape Archive; a Unix utility for bundling multiple files into a single archive that is then compressed with gzip
 
+The utility "Toast 5 Titanium" can be obtained from {% aTargetBlank
+"https://macintoshgarden.org/apps/toast-5-titanium", "Macintosh Garden" %}.
+The first "www" link downloads the file `Toast_501_523_Install.sit`.
+Copy the file to the old Mac and double-click it to expand.
+Install version ? and then each of the updates in order.
+Double-click the file ? to run it and enter the license key "SP-HG15N-HP693-S72OR"
+which is provided after the list of links on the download page.
+
+To mount a disk image using Toast,
+TODO: Finish this.
+The disk image often contains an installer for a specific application,
+but it make contain raw files that just need to be copied to the hard drive.
+
+Some applications like the game Myst require having a CD installed to use it.
+Mounting the disk image satisfies this requirement.
+
 ## Mac OS 9 Tips
 
 To simulate a right mouse button click in order to get context-sensitive menus,
