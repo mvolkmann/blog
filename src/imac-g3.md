@@ -61,10 +61,6 @@ as evidenced by the photos below.
 ## Setup
 
 Below are the steps I took to setup this computer.
-Many of the steps required downloading software from
-either {% aTargetBlank "https://macintoshgarden.org", "Macintosh Garden" %} or
-{% aTargetBlank "https://www.macintoshrepository.org", "Macintosh Repository" %}
-onto a modern Mac.
 
 - Reinstall the operating system to run Mac OS 9.0.1 instead of OS X
   using the provided CD "iMac Software Restore".
@@ -76,6 +72,43 @@ onto a modern Mac.
 - Install the "Mac OS 9.2.1 Updater".
 - Install HyperCard 4.2.1.
 - Install "The Haunted House 1.0.2" HyperCard stack.
+
+## Installing Software
+
+The websites
+{% aTargetBlank "https://macintoshgarden.org", "Macintosh Garden" %} and
+{% aTargetBlank "https://www.macintoshrepository.org", "Macintosh Repository" %}
+provide lots of software that can be
+downloaded and installed on older Macintoshes.
+
+Web browsers that run in Mac OS 9 do not support HTTPS.
+That prevents them from accessing modern websites.
+One way to obtain software for a computer running Mac OS 9 is to:
+
+- Insert a USB stick into the computer running Mac OS 9 (referred to as "old" below).
+- If you see the message "This disk is unreadable by this Computer",
+  select the format "Mac OS Extended 1.8 GB" and click the Initialize button.
+- Eject the USB stick.
+- Insert the USB stick into a modern Macintosh computer (referred to as "new" below).
+- Download the software onto the new Mac.
+- Copy the software to the USB stick.
+- Insert the USB stick into the old Mac.
+- Copy the software from the USB stick to the hard drive of the old Mac.
+
+The software comes in many file formats:
+
+- `.bin`: binary executable file
+- `.dmg`: standard disk image format for macOS (OS X and later); mount with "Disk Copy" utility
+- `.dsk`: disk image
+- `.gz`: compressed with gzip
+- `.hqx`: ASCII text in BinHex format; use StuffIt Expander or BinHex 4.0 to decode
+- `.img`: generic disk image format; mount with "Disk Copy" utility
+- `.sea`: self-extracting archive; double-click to decompress
+- `.sit`: compressed with Stuffit; requires Stuffit Expander or Stuffit Deluxe to decompress
+- `.smi`: Self-Mounting Image; double-click to create a virtual disk on the desktop
+- `.toast`: proprietary disk image format associated with Toast Titanium (a CD/DVD burning software for macOS); mount with "Roxio Toast"
+- `.zip`: compression format; decompress with MacZip or StuffIt Expander
+- `.tar.gz` or `.tgz`: gzipped Tape Archive; a Unix utility for bundling multiple files into a single archive that is then compressed with gzip
 
 ## Mac OS 9 Tips
 
