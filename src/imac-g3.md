@@ -73,6 +73,61 @@ Below are the steps I took to setup this computer.
 - Install HyperCard 4.2.1.
 - Install "The Haunted House 1.0.2" HyperCard stack.
 
+## PRAM Battery
+
+The PRAM battery in a computer is responsible for maintaining the date and time.
+Old computers likely have a PRAM battery with very little charge remaining.
+These batteries can also begin to leak acid which can damage the computer.
+It's highly recommended to replace the PRAM battery with a new one
+as soon as possible.
+
+In an iMac G3 computer, the PRAM battery is a 1/2 AA 3.6 volt lithium battery.
+I ordered {% aTargetBlank
+"https://www.amazon.com/dp/B008POD4E2?ref=ppx_yo2ov_dt_b_fed_asin_title",
+"Xeno Energy XL-050F" %} battery from Amazon.
+
+The steps to install a new PRAM battery are shown below.
+
+1. Verify that the new PRAM battery has close to 3.5 volts.
+1. Shut down the computer.
+1. Unplug everything including the
+   power cord, keyboard, mouse, and ethernet cable.
+1. Spread a blanket or towel on the table/desk where you will work
+   to provide a soft surface for the computer.
+1. Lay the computer upside down on the soft surface.
+1. Unscrew the four screws that hold the bottom of the plastic case in place.
+1. Gently remove the bottom plastic case.
+   It will be somewhat difficult to free the edge that is near the CD slot.
+   You will likely hear some cracking sounds, but supposedly that is okay.
+   I heard cracking, but nothing seems to have broken.
+1. Unscrew the six screws that hold the metal shield in place.
+1. Remove the metal shield.
+1. Remove the old PRAM battery.
+1. Insert the new PRAM battery.
+1. Replace the metal shield.
+1. Optionally clean the bottom of the plastic case. See "Cleaning" below.
+1. Replace the bottom of the plastic case.
+1. Return the computer to its upright position.
+1. Plug in the power cord, ethernet cable, keyboard, and mouse.
+1. Boot the computer.
+1. Open the "Date & Time" control panel.
+1. Set the date and time.
+
+## Cleaning
+
+To clean the top and bottom parts of the plastic case of an iMac G3 computer:
+
+- Remove the bottom of the plastic case as described above.
+- Remove the top of the plastic case.
+- Wash the plastic case parts using Dawn liquid dish washing soap or similar
+  and a microfiber cloth.
+- Dry the plastic case parts with another microfiber cloth.
+- Use a blow dryer on low heat to thoroughly dry the plastic case parts.
+- Optionally use Meguiar's PlasticX to
+  remove scuffs and scratches in the plastic case parts.
+- Reattach the top of the plastic case.
+- Reattach the bottom of the plastic case.
+
 ## Installing Software
 
 The websites
@@ -118,10 +173,17 @@ Install version ? and then each of the updates in order.
 Double-click the file ? to run it and enter the license key "SP-HG15N-HP693-S72OR"
 which is provided after the list of links on the download page.
 
-To mount a disk image using Toast,
-TODO: Finish this.
-The disk image often contains an installer for a specific application,
-but it make contain raw files that just need to be copied to the hard drive.
+To mount a disk image using Toast:
+
+- Launch "Toast Titanium".
+- Select Utilities ... Mount Disc Image...
+- Select a disk image file.
+- Click the "Open" button.
+- This may run the app in the disk image or
+  it may open a Finder window that displays the contents.
+- If it opens a Finder window, it may contain an installer app or the needed files.
+- If it contains an installer app, double-click it to run it.
+- If it contains the raw files, copy them to the hard drive.
 
 Some applications like the game Myst require having a CD installed to use it.
 Mounting the disk image satisfies this requirement.
