@@ -75,7 +75,14 @@ Below are the steps I took to setup this computer.
 
 ## PRAM Battery
 
-The PRAM battery in a computer is responsible for maintaining the date and time.
+The PRAM battery in a computer is responsible for maintaining:
+
+- date and time
+- startup disk preference
+- display settings like resolution and color depth
+- sound volume
+- other system parameters
+
 Old computers likely have a PRAM battery with very little charge remaining.
 These batteries can also begin to leak acid which can damage the computer.
 It's highly recommended to replace the PRAM battery with a new one
@@ -100,11 +107,13 @@ The steps to install a new PRAM battery are shown below.
    It will be somewhat difficult to free the edge that is near the CD slot.
    You will likely hear some cracking sounds, but supposedly that is okay.
    I heard cracking, but nothing seems to have broken.
-1. Unscrew the six screws that hold the metal shield in place.
-1. Remove the metal shield.
+1. Unscrew the six screws that hold the
+   electromagnetic interference (EMI) shield
+   (a molded, thin, silver metal with lots of pin holes) in place.
+1. Remove the EMI shield.
 1. Remove the old PRAM battery.
 1. Insert the new PRAM battery.
-1. Replace the metal shield.
+1. Replace the EMI shield.
 1. Optionally clean the bottom of the plastic case. See "Cleaning" below.
 1. Replace the bottom of the plastic case.
 1. Return the computer to its upright position.
