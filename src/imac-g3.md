@@ -110,10 +110,12 @@ The steps to install a new PRAM battery are shown below.
 1. Unscrew the six screws that hold the
    electromagnetic interference (EMI) shield
    (a molded, thin, silver metal with lots of pin holes) in place.
+   Be careful not to allow the removed screws to fall inside the computer!
 1. Remove the EMI shield.
 1. Remove the old PRAM battery.
 1. Insert the new PRAM battery.
 1. Replace the EMI shield.
+   Be careful not to allow the screws to fall inside the computer!
 1. Optionally clean the bottom of the plastic case. See "Cleaning" below.
 1. Replace the bottom of the plastic case.
 1. Return the computer to its upright position.
