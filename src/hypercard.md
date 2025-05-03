@@ -2650,9 +2650,9 @@ Let's create a read-only field that displays an integer
 and buttons that increment and decrement the value.
 Start by creating the following objects:
 
-- "+" button to increment the value
-- field to display the counter value
 - "-" button to decrement the counter
+- field to display the counter value
+- "+" button to increment the value
 
 <img alt="HyperCard Counter" style="width: 20%"
   src="/blog/assets/hypercard-counter.png?v={{pkg.version}}">
