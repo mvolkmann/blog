@@ -1301,7 +1301,8 @@ To add a field to the current card:
   - Fixed Line Height: keeps the same default height for all lines
     regardless of the font sizes used in the lines;
     allows text to overlap vertically which seems bad
-  - Show Lines: displays dotted lines that indicate where each line of text can be entered
+  - Show Lines: displays dotted lines that indicate
+    where each line of text can be entered
   - Auto Tab: moves focus to the next field when the return key is pressed
     and the text cursor is on the last visible line of a non-scrolling field;
     most useful in a series of single-line fields
@@ -1347,8 +1348,19 @@ To change the default text style of a field:
 - Select any of the style checkboxes.
 - Select an alignment option (Left, Center, or Right).
 - Select a font name.
+
+  Commonly available fonts include Chicago, Courier,
+  Geneva, Helvetica, Monaco, Palatino, New York, and Times.
+  If a font other than these is selected and
+  users of the stack do not have the chosen font,
+  a substitute font will be selected automatically
+  and the cards may not render as expected.
+
 - Select a font size.
-- Select a line height.
+- Select a line height which is the distance between text base lines.
+  Typically this is 4 points more than the font size,
+  but 2 points more is a good value for closely spaced lines.
+  TODO: Changing this seems to have no effect!
 - Click the OK button.
 
 To change the text style of specific text
