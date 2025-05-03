@@ -1306,6 +1306,15 @@ To add a field to the current card:
     and the text cursor is on the last visible line of a non-scrolling field;
     most useful in a series of single-line fields
   - Don't Search: prevents contents from being searched by `find` commands
+  - Shared Text: displays read-only text in a background
+
+    This option is only available for background fields and
+    only allows its content to be edited when in background mode.
+    This makes it a good alternative to painted (bitmap) text
+    that is the same, read-only text which
+    appears on each card that uses the background.
+    When this option is checked,
+    the "Don't Search" option is also required to be checked.
 
   TODO: Describe using the Auto Select option.
 
