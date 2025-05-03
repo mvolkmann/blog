@@ -34,28 +34,31 @@ The highlights are:
 This is one of the cleanest iMac G3 computers I was able to find,
 as evidenced by the photos below.
 
-<img alt="iMac G3 full" style="width: 90%"
+<img alt="iMac G3 full" style="width: 100%"
   src="/blog/assets/iMac-G3-full.jpg?v={{pkg.version}}">
 
-<img alt="iMac G3 top" style="width: 90%"
+<img alt="iMac G3 top" style="width: 100%"
   src="/blog/assets/iMac-G3-top.jpg?v={{pkg.version}}">
 
-<img alt="iMac G3 bottom" style="width: 90%"
+<img alt="iMac G3 bottom" style="width: 100%"
   src="/blog/assets/iMac-G3-bottom.jpg?v={{pkg.version}}">
 
-<img alt="iMac G3 left" style="width: 90%"
+<img alt="iMac G3 barcodes" style="width: 50%"
+   src="/blog/assets/iMac-G3-barcodes.jpg?v={{pkg.version}}">
+
+<img alt="iMac G3 left" style="width: 100%"
   src="/blog/assets/iMac-G3-left.jpg?v={{pkg.version}}">
 
-<img alt="iMac G3 right" style="width: 90%"
+<img alt="iMac G3 right" style="width: 100%"
   src="/blog/assets/iMac-G3-right.jpg?v={{pkg.version}}">
 
-<img alt="iMac G3 ports" style="width: 90%"
+<img alt="iMac G3 ports" style="width: 100%"
   src="/blog/assets/iMac-G3-ports.jpg?v={{pkg.version}}">
 
-<img alt="iMac G3 back" style="width: 90%"
+<img alt="iMac G3 back" style="width: 100%"
   src="/blog/assets/iMac-G3-back.jpg?v={{pkg.version}}">
 
-<img alt="iMac G3 keyboard and mouse" style="width: 90%"
+<img alt="iMac G3 keyboard and mouse" style="width: 100%"
   src="/blog/assets/iMac-G3-keyboard-mouse.jpg?v={{pkg.version}}">
 
 ## Setup
@@ -103,17 +106,41 @@ The steps to install a new PRAM battery are shown below.
    to provide a soft surface for the computer.
 1. Lay the computer upside down on the soft surface.
 1. Unscrew the four screws that hold the bottom of the plastic case in place.
+   The photos below show the location of the four screws.
+
+   <img alt="iMac G3 bottom plastic screws set #1" style="width: 49%"
+     src="/blog/assets/iMac-G3-bottom-plastic-screws-1.jpg?v={{pkg.version}}">
+   <img alt="iMac G3 bottom plastic screws set #2" style="width: 49%"
+     src="/blog/assets/iMac-G3-bottom-plastic-screws-2.jpg?v={{pkg.version}}">
+
 1. Gently remove the bottom plastic case.
    It will be somewhat difficult to free the edge that is near the CD slot.
    You will likely hear some cracking sounds, but supposedly that is okay.
    I heard cracking, but nothing seems to have broken.
+
 1. Unscrew the six screws that hold the
    electromagnetic interference (EMI) shield
    (a molded, thin, silver metal with lots of pin holes) in place.
    Be careful not to allow the removed screws to fall inside the computer!
+   The photo below shows the location of the six screws.
+
+   <img alt="iMac G3 bottom plastic removed" style="width: 70%"
+     src="/blog/assets/iMac-G3-bottom-plastic-removed.jpg?v={{pkg.version}}">
+
 1. Remove the EMI shield.
+
+   <img alt="iMac G3 EMI shield removed" style="width: 70%"
+     src="/blog/assets/iMac-G3-emi-shield-removed.jpg?v={{pkg.version}}">
+
 1. Remove the old PRAM battery.
+
+   The image above shows the location of the PRAM battery.
+
 1. Insert the new PRAM battery.
+
+   <img alt="iMac G3 new PRAM battery" style="width: 70%"
+     src="/blog/assets/iMac-G3-new-pram-battery.jpg?v={{pkg.version}}">
+
 1. Replace the EMI shield.
    Be careful not to allow the screws to fall inside the computer!
 1. Optionally clean the bottom of the plastic case. See "Cleaning" below.
@@ -132,6 +159,8 @@ To clean the top and bottom parts of the plastic case of an iMac G3 computer:
 - Remove the top of the plastic case.
 - Wash the plastic case parts using Dawn liquid dish washing soap or similar
   and a microfiber cloth.
+  Do not use Windex, isopropyl alcohol, or a Magic Eraser sponge
+  as these can make the plastic cloudy.
 - Dry the plastic case parts with another microfiber cloth.
 - Use a blow dryer on low heat to thoroughly dry the plastic case parts.
 - Optionally use Meguiar's PlasticX to
