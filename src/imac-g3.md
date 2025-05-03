@@ -92,7 +92,7 @@ It's highly recommended to replace the PRAM battery with a new one
 as soon as possible.
 
 In an iMac G3 computer, the PRAM battery is a 1/2 AA 3.6 volt lithium battery.
-I ordered {% aTargetBlank
+I ordered a {% aTargetBlank
 "https://www.amazon.com/dp/B008POD4E2?ref=ppx_yo2ov_dt_b_fed_asin_title",
 "Xeno Energy XL-050F" %} battery from Amazon.
 
@@ -109,9 +109,9 @@ The steps to install a new PRAM battery are shown below.
    The photos below show the location of the four screws.
 
    <img alt="iMac G3 bottom plastic screws set #1" style="width: 49%"
-     src="/blog/assets/iMac-G3-bottom-plastic-screws-1.jpg?v={{pkg.version}}">
+     src="/blog/assets/imac-g3-bottom-plastic-screws-1.jpg?v={{pkg.version}}">
    <img alt="iMac G3 bottom plastic screws set #2" style="width: 49%"
-     src="/blog/assets/iMac-G3-bottom-plastic-screws-2.jpg?v={{pkg.version}}">
+     src="/blog/assets/imac-g3-bottom-plastic-screws-2.jpg?v={{pkg.version}}">
 
 1. Gently remove the bottom plastic case.
    It will be somewhat difficult to free the edge that is near the CD slot.
@@ -125,12 +125,12 @@ The steps to install a new PRAM battery are shown below.
    The photo below shows the location of the six screws.
 
    <img alt="iMac G3 bottom plastic removed" style="width: 70%"
-     src="/blog/assets/iMac-G3-bottom-plastic-removed.jpg?v={{pkg.version}}">
+     src="/blog/assets/imac-g3-bottom-plastic-removed.jpg?v={{pkg.version}}">
 
 1. Remove the EMI shield.
 
    <img alt="iMac G3 EMI shield removed" style="width: 70%"
-     src="/blog/assets/iMac-G3-emi-shield-removed.jpg?v={{pkg.version}}">
+     src="/blog/assets/imac-g3-emi-shield-removed.jpg?v={{pkg.version}}">
 
 1. Remove the old PRAM battery.
 
@@ -139,7 +139,7 @@ The steps to install a new PRAM battery are shown below.
 1. Insert the new PRAM battery.
 
    <img alt="iMac G3 new PRAM battery" style="width: 70%"
-     src="/blog/assets/iMac-G3-new-pram-battery.jpg?v={{pkg.version}}">
+     src="/blog/assets/imac-g3-new-pram-battery.jpg?v={{pkg.version}}">
 
 1. Replace the EMI shield.
    Be careful not to allow the screws to fall inside the computer!
