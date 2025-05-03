@@ -65,16 +65,16 @@ as evidenced by the photos below.
 
 Below are the steps I took to setup this computer.
 
-- Reinstall the operating system to run Mac OS 9.0.1 instead of OS X
-  using the provided CD "iMac Software Restore".
-- Insert a 32GB USB stick into the iMac G3.
-- Erase the USB stick and format it as "Macintosh ? Extended".
-- Use the USB stick to copy software from a modern Mac to the iMac G3.
-- Install "Aladdin Stuffit Expander" from a self-extracting archive.
-- Install the "Mac OS 9.1 Updater".
-- Install the "Mac OS 9.2.1 Updater".
-- Install HyperCard 4.2.1.
-- Install "The Haunted House 1.0.2" HyperCard stack.
+1. Reinstall the operating system to run Mac OS 9.0.1 instead of OS X
+   using the provided CD "iMac Software Restore".
+1. Insert a 32GB USB stick into the iMac G3.
+1. Erase the USB stick and format it as "Macintosh ? Extended".
+1. Use the USB stick to copy software from a modern Mac to the iMac G3.
+1. Install "Aladdin Stuffit Expander" from a self-extracting archive.
+1. Install the "Mac OS 9.1 Updater".
+1. Install the "Mac OS 9.2.1 Updater".
+1. Install HyperCard 4.2.1.
+1. Install "The Haunted House 1.0.2" HyperCard stack.
 
 ## PRAM Battery
 
@@ -155,18 +155,18 @@ The steps to install a new PRAM battery are shown below.
 
 To clean the top and bottom parts of the plastic case of an iMac G3 computer:
 
-- Remove the bottom of the plastic case as described above.
-- Remove the top of the plastic case.
-- Wash the plastic case parts using Dawn liquid dish washing soap or similar
-  and a microfiber cloth.
-  Do not use Windex, isopropyl alcohol, or a Magic Eraser sponge
-  as these can make the plastic cloudy.
-- Dry the plastic case parts with another microfiber cloth.
-- Use a blow dryer on low heat to thoroughly dry the plastic case parts.
-- Optionally use Meguiar's PlasticX to
-  remove scuffs and scratches in the plastic case parts.
-- Reattach the top of the plastic case.
-- Reattach the bottom of the plastic case.
+1. Remove the bottom of the plastic case as described above.
+1. Remove the top of the plastic case.
+1. Wash the plastic case parts using Dawn liquid dish washing soap or similar
+   and a microfiber cloth.
+   Do not use Windex, isopropyl alcohol, or a Magic Eraser sponge
+   as these can make the plastic cloudy.
+1. Dry the plastic case parts with another microfiber cloth.
+1. Use a blow dryer on low heat to thoroughly dry the plastic case parts.
+1. Optionally use Meguiar's PlasticX to
+   remove scuffs and scratches in the plastic case parts.
+1. Reattach the top of the plastic case.
+1. Reattach the bottom of the plastic case.
 
 ## Installing Software
 
@@ -180,11 +180,13 @@ Web browsers that run in Mac OS 9 do not support HTTPS.
 That prevents them from accessing modern websites.
 One way to obtain software for a computer running Mac OS 9 is to:
 
-- Insert a USB stick into the computer running Mac OS 9 (referred to as "old" below).
+- Insert a USB stick into the computer running Mac OS 9
+  (referred to as "old" below).
 - If you see the message "This disk is unreadable by this Computer",
   select the format "Mac OS Extended 1.8 GB" and click the Initialize button.
 - Eject the USB stick.
-- Insert the USB stick into a modern Macintosh computer (referred to as "new" below).
+- Insert the USB stick into a modern Macintosh computer
+  (referred to as "new" below).
 - Download the software onto the new Mac.
 - Copy the software to the USB stick.
 - Insert the USB stick into the old Mac.
@@ -193,37 +195,45 @@ One way to obtain software for a computer running Mac OS 9 is to:
 The software comes in many file formats:
 
 - `.bin`: binary executable file
-- `.dmg`: standard disk image format for macOS (OS X and later); mount with "Disk Copy" utility
+- `.dmg`: standard disk image format for macOS (OS X and later);
+  mount with "Disk Copy" utility
 - `.dsk`: disk image
 - `.gz`: compressed with gzip
-- `.hqx`: ASCII text in BinHex format; use StuffIt Expander or BinHex 4.0 to decode
+- `.hqx`: ASCII text in BinHex format;
+  use StuffIt Expander or BinHex 4.0 to decode
 - `.img`: generic disk image format; mount with "Disk Copy" utility
 - `.sea`: self-extracting archive; double-click to decompress
-- `.sit`: compressed with Stuffit; requires Stuffit Expander or Stuffit Deluxe to decompress
-- `.smi`: Self-Mounting Image; double-click to create a virtual disk on the desktop
-- `.toast`: proprietary disk image format associated with Toast Titanium (a CD/DVD burning software for macOS); mount with "Roxio Toast"
+- `.sit`: compressed with Stuffit;
+  requires Stuffit Expander or Stuffit Deluxe to decompress
+- `.smi`: Self-Mounting Image;
+  double-click to create a virtual disk on the desktop
+- `.toast`: proprietary disk image format associated with Toast Titanium
+  (a CD/DVD burning software for macOS); mount with "Roxio Toast"
 - `.zip`: compression format; decompress with MacZip or StuffIt Expander
-- `.tar.gz` or `.tgz`: gzipped Tape Archive; a Unix utility for bundling multiple files into a single archive that is then compressed with gzip
+- `.tar.gz` or `.tgz`: gzipped Tape Archive; a Unix utility for bundling
+  multiple files into a single archive that is then compressed with gzip
 
 The utility "Toast 5 Titanium" can be obtained from {% aTargetBlank
 "https://macintoshgarden.org/apps/toast-5-titanium", "Macintosh Garden" %}.
 The first "www" link downloads the file `Toast_501_523_Install.sit`.
 Copy the file to the old Mac and double-click it to expand.
 Install version ? and then each of the updates in order.
-Double-click the file ? to run it and enter the license key "SP-HG15N-HP693-S72OR"
+Double-click the file ? to run it and
+enter the license key "SP-HG15N-HP693-S72OR"
 which is provided after the list of links on the download page.
 
 To mount a disk image using Toast:
 
-- Launch "Toast Titanium".
-- Select Utilities ... Mount Disc Image...
-- Select a disk image file.
-- Click the "Open" button.
-- This may run the app in the disk image or
-  it may open a Finder window that displays the contents.
-- If it opens a Finder window, it may contain an installer app or the needed files.
-- If it contains an installer app, double-click it to run it.
-- If it contains the raw files, copy them to the hard drive.
+1. Launch "Toast Titanium".
+1. Select Utilities ... Mount Disc Image...
+1. Select a disk image file.
+1. Click the "Open" button.
+1. This may run the app in the disk image or
+   it may open a Finder window that displays the contents.
+1. If it opens a Finder window,
+   it may contain an installer app or the needed files.
+1. If it contains an installer app, double-click it to run it.
+1. If it contains the raw files, copy them to the hard drive.
 
 Some applications like the game Myst require having a CD installed to use it.
 Mounting the disk image satisfies this requirement.
@@ -298,29 +308,29 @@ and hold down the "C" key until the Apple logo appears.
 
 To adjust the monitor settings:
 
-- Click the Apple logo on the left end of the menu bar.
-- Select "Control Panels".
-- Select "Monitors"
-  - Select "Monitor".
-    - Adjust the slider for Contrast.
-    - Adjust the slider for Brightness.
-  - Select "Geometry".
-    - Select "Height/Width".
-      - Adjust the width and height.
-    - Select "Position".
-      - Adjust the horizontal and vertical position.
-- Close the control panel window.
+1. Click the Apple logo on the left end of the menu bar.
+1. Select "Control Panels".
+1. Select "Monitors"
+   1. Select "Monitor".
+      1. Adjust the slider for Contrast.
+      1. Adjust the slider for Brightness.
+   1. Select "Geometry".
+      1. Select "Height/Width".
+         1. Adjust the width and height.
+      1. Select "Position".
+         1. Adjust the horizontal and vertical position.
+1. Close the control panel window.
 
 To adjust the layout of icons in the Finder:
 
-- Open a Finder window.
-- Select View ... as Icons.
-- Select View ... View Options...
-- Select "None" to enable dragging icons to any pixel location.
-- Select "Always snap to grid" to constrain the placement of icons.
-- Select "Keep arranged: by Name (or another option)
-  to automatically order icons by their names.
-- Optionally change "Icon Size" to small or large icons.
+1. Open a Finder window.
+1. Select View ... as Icons.
+1. Select View ... View Options...
+1. Select "None" to enable dragging icons to any pixel location.
+1. Select "Always snap to grid" to constrain the placement of icons.
+1. Select "Keep arranged: by Name (or another option)
+   to automatically order icons by their names.
+1. Optionally change "Icon Size" to small or large icons.
 
 To sort the contents of a directory by file/folder names,
 select View ... Arrange ...by Name.
@@ -337,11 +347,11 @@ at the top of the hard drive:
 
 To watch a DVD:
 
-- Insert a DVD in the slot.
-- Wait for the "Apple DVD Player" app to launch.
-- Click the Play button (right-pointing triangle).
-- Optionally select Video ... Fill Screen or press cmd-3.
-- For me this played for about 30 seconds and then locked up,
-  requiring a reboot. Force quit did not work.
+1. Insert a DVD in the slot.
+1. Wait for the "Apple DVD Player" app to launch.
+1. Click the Play button (right-pointing triangle).
+1. Optionally select Video ... Fill Screen or press cmd-3.
+1. For me this played for about 30 seconds and then locked up,
+   requiring a reboot. Force quit did not work.
 
 To eject a disc when booting, hold down the mouse button.
