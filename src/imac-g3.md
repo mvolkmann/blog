@@ -101,7 +101,7 @@ The steps to install a new PRAM battery are shown below.
 1. Verify that the new PRAM battery has close to 3.5 volts.
 1. Shut down the computer.
 1. Unplug everything including the
-   power cord, keyboard, mouse, and ethernet cable.
+   power cord, keyboard, mouse, and Ethernet cable.
 1. Spread a blanket or towel on the table/desk where you will work
    to provide a soft surface for the computer.
 1. Lay the computer upside down on the soft surface.
@@ -146,7 +146,7 @@ The steps to install a new PRAM battery are shown below.
 1. Optionally clean the bottom of the plastic case. See "Cleaning" below.
 1. Replace the bottom of the plastic case.
 1. Return the computer to its upright position.
-1. Plug in the power cord, ethernet cable, keyboard, and mouse.
+1. Plug in the power cord, Ethernet cable, keyboard, and mouse.
 1. Boot the computer.
 1. Open the "Date & Time" control panel.
 1. Set the date and time.
