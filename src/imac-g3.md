@@ -35,31 +35,31 @@ This is one of the cleanest iMac G3 computers I was able to find,
 as evidenced by the photos below.
 
 <img alt="iMac G3 full" style="width: 100%"
-  src="/blog/assets/iMac-G3-full.jpg?v={{pkg.version}}">
+  src="/blog/assets/imac-g3-full.jpeg?v={{pkg.version}}">
 
 <img alt="iMac G3 top" style="width: 100%"
-  src="/blog/assets/iMac-G3-top.jpg?v={{pkg.version}}">
+  src="/blog/assets/imac-g3-top.jpeg?v={{pkg.version}}">
 
 <img alt="iMac G3 bottom" style="width: 100%"
-  src="/blog/assets/iMac-G3-bottom.jpg?v={{pkg.version}}">
+  src="/blog/assets/imac-g3-bottom.jpeg?v={{pkg.version}}">
 
 <img alt="iMac G3 barcodes" style="width: 50%"
-   src="/blog/assets/iMac-G3-barcodes.jpg?v={{pkg.version}}">
+   src="/blog/assets/imac-g3-barcodes.jpeg?v={{pkg.version}}">
 
 <img alt="iMac G3 left" style="width: 100%"
-  src="/blog/assets/iMac-G3-left.jpg?v={{pkg.version}}">
+  src="/blog/assets/imac-g3-left.jpeg?v={{pkg.version}}">
 
 <img alt="iMac G3 right" style="width: 100%"
-  src="/blog/assets/iMac-G3-right.jpg?v={{pkg.version}}">
+  src="/blog/assets/imac-g3-right.jpeg?v={{pkg.version}}">
 
 <img alt="iMac G3 ports" style="width: 100%"
-  src="/blog/assets/iMac-G3-ports.jpg?v={{pkg.version}}">
+  src="/blog/assets/imac-g3-ports.jpeg?v={{pkg.version}}">
 
 <img alt="iMac G3 back" style="width: 100%"
-  src="/blog/assets/iMac-G3-back.jpg?v={{pkg.version}}">
+  src="/blog/assets/imac-g3-back.jpeg?v={{pkg.version}}">
 
 <img alt="iMac G3 keyboard and mouse" style="width: 100%"
-  src="/blog/assets/iMac-G3-keyboard-mouse.jpg?v={{pkg.version}}">
+  src="/blog/assets/imac-g3-keyboard-mouse.jpeg?v={{pkg.version}}">
 
 ## Setup
 
@@ -109,9 +109,9 @@ The steps to install a new PRAM battery are shown below.
    The photos below show the location of the four screws.
 
    <img alt="iMac G3 bottom plastic screws set #1" style="width: 49%"
-     src="/blog/assets/imac-g3-bottom-plastic-screws-1.jpg?v={{pkg.version}}">
+     src="/blog/assets/imac-g3-bottom-plastic-screws-1.jpeg?v={{pkg.version}}">
    <img alt="iMac G3 bottom plastic screws set #2" style="width: 49%"
-     src="/blog/assets/imac-g3-bottom-plastic-screws-2.jpg?v={{pkg.version}}">
+     src="/blog/assets/imac-g3-bottom-plastic-screws-2.jpeg?v={{pkg.version}}">
 
 1. Gently remove the bottom plastic case.
    It will be somewhat difficult to free the edge that is near the CD slot.
@@ -125,12 +125,12 @@ The steps to install a new PRAM battery are shown below.
    The photo below shows the location of the six screws.
 
    <img alt="iMac G3 bottom plastic removed" style="width: 70%"
-     src="/blog/assets/imac-g3-bottom-plastic-removed.jpg?v={{pkg.version}}">
+     src="/blog/assets/imac-g3-bottom-plastic-removed.jpeg?v={{pkg.version}}">
 
 1. Remove the EMI shield.
 
    <img alt="iMac G3 EMI shield removed" style="width: 70%"
-     src="/blog/assets/imac-g3-emi-shield-removed.jpg?v={{pkg.version}}">
+     src="/blog/assets/imac-g3-emi-shield-removed.jpeg?v={{pkg.version}}">
 
 1. Remove the old PRAM battery.
 
@@ -139,7 +139,7 @@ The steps to install a new PRAM battery are shown below.
 1. Insert the new PRAM battery.
 
    <img alt="iMac G3 new PRAM battery" style="width: 70%"
-     src="/blog/assets/imac-g3-new-pram-battery.jpg?v={{pkg.version}}">
+     src="/blog/assets/imac-g3-new-pram-battery.jpeg?v={{pkg.version}}">
 
 1. Replace the EMI shield.
    Be careful not to allow the screws to fall inside the computer!
