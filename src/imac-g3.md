@@ -228,6 +228,28 @@ To mount a disk image using Toast:
 Some applications like the game Myst require having a CD installed to use it.
 Mounting the disk image satisfies this requirement.
 
+## Internet
+
+To connect to the internet using an Ethernet cable:
+
+1. Connect an active Ethernet cable to the Ethernet port
+   on the right side of the iMac G3.
+1. Open the "TCP/IP" control panel.
+1. In the "Connect via" dropdown, select "Ethernet built-in".
+1. In the "Configure" dropdown, select "Using DHCP Server".
+1. Close the control panel.
+1. Open the "AppleTalk" control panel.
+1. In the "Connect via" dropdown, select "Ethernet built-in".
+1. Close the control panel.
+1. Open a web browser such as "Internet Explorer" found in
+   Applications (Mac OS 9) ... Internet Explorer 5
+1. Try browsing a website that does not require HTTPS
+   such as www.google.com.
+
+Attempting to access a site that requires HTTPS
+will display an error dialog with the message
+"Security failure. A secure connection could not be established."
+
 ## Mac OS 9 Tips
 
 To simulate a right mouse button click in order to get context-sensitive menus,
