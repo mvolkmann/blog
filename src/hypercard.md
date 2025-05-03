@@ -1355,6 +1355,8 @@ To change the default text style of a field:
   users of the stack do not have the chosen font,
   a substitute font will be selected automatically
   and the cards may not render as expected.
+  This is not an issue for painted text because
+  the fonts used are not required by others that browse the stack.
 
 - Select a font size.
 - Select a line height which is the distance between text base lines.
@@ -1442,6 +1444,12 @@ run the command `do card field "{field-name}"`.
 To move the focus to the next field in the current card, press the tab key.
 After the last field on the card is reached, pressing the tab key
 moves the focus to the first field on the card.
+
+TODO: Learn about the "Group" text style which can be
+added to a group of words in a locked field.
+Scripts can listen for clicks on a group to take action
+such as treating the group as a hyperlink.
+This is covered in Volume 2 of "The Complete HyperCard 2.2 Handbook".
 
 ## Layers
 
