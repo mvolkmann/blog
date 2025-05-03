@@ -240,6 +240,12 @@ Mounting the disk image satisfies this requirement.
 
 ## Internet
 
+If WiFi is available and the iMac G3 has an AirPort card,
+it can be used to connect to the internet wirelessly.
+However, this requires the wireless router
+to support WEP protocol which is insecure.
+It is likely that the router is not configure to support WEP.
+
 To connect to the internet using an Ethernet cable:
 
 1. Connect an active Ethernet cable to the Ethernet port
@@ -253,12 +259,20 @@ To connect to the internet using an Ethernet cable:
 1. Close the control panel.
 1. Open a web browser such as "Internet Explorer" found in
    Applications (Mac OS 9) ... Internet Explorer 5
-1. Try browsing a website that does not require HTTPS
-   such as www.google.com.
+1. Try browsing a website that does not require HTTPS such as
+   freshsilverbrightplan.neverssl.com/online or www.google.com.
 
 Attempting to access a site that requires HTTPS
 will display an error dialog with the message
 "Security failure. A secure connection could not be established."
+
+## File Sharing
+
+Once connection to the internet is working,
+the following steps enable sharing files between
+the iMac G3 and a modern Macintosh that is on the same network:
+
+TODO: Add the steps.
 
 ## Mac OS 9 Tips
 
