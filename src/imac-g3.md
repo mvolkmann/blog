@@ -29,6 +29,7 @@ The highlights are:
 - 2 USB-A ports
 - 2 Firewire 400 ports
 - AirPort card for wireless internet using WEP
+- VGA port for display mirroring (couldn't get this to work)
 - original price $1499
 
 This is one of the cleanest iMac G3 computers I was able to find,
@@ -259,8 +260,15 @@ To connect to the internet using an Ethernet cable:
 1. Close the control panel.
 1. Open a web browser such as "Internet Explorer" found in
    Applications (Mac OS 9) ... Internet Explorer 5
-1. Try browsing a website that does not require HTTPS such as
-   freshsilverbrightplan.neverssl.com/online or www.google.com.
+
+Internet Explorer 5 does not support HTTPS.
+That means it cannot browser the majority of modern websites that require HTTPS.
+Notable web sites that do not require HTTPS include:
+
+- www.google.com
+- freshsilverbrightplan.neverssl.com/online
+- macintoshgarden.org
+- macintoshrepository.org
 
 Attempting to access a site that requires HTTPS
 will display an error dialog with the message
@@ -270,9 +278,38 @@ will display an error dialog with the message
 
 Once connection to the internet is working,
 the following steps enable sharing files between
-the iMac G3 and a modern Macintosh that is on the same network:
+a Macintosh running Mac OS 9 and a Macintosh running macOS X
+that are on the same network:
 
-TODO: Add the steps.
+On the Macintosh running Mac OS 9:
+
+1. Open the "File Sharing" control panel.
+1. Click the "Start/Stop" tab.
+1. Under "File Sharing Off",
+   check the "Enable File Sharing clients to connect over TCP/IP" checkbox
+   and click the "Start" button.
+1. Make a note of the URL that is displayed which begins with "afp://".
+1. Click the "Users & Groups" tab.
+1. Click the "New User" button.
+1. If a user is not already present, click the "New User" button and create one.
+1. Close the control panel.
+1. Create a directory to hold shared files on the desktop.
+1. Select the directory.
+1. Press cmd-i to view its Info dialog.
+1. In the "Show" dropdown, select "Sharing".
+1. Check the "Share this item and its contents" checkbox.
+1. In the "Owner" dropdown, select the user from "Users & Groups" earlier.
+1. In the "Privilege" dropdown in the "Owner" row, select "Read & Write".
+1. Close the control panel.
+
+On the Macintosh running macOS X:
+
+1. Open the Finder.
+1. Select Go ... Connect to Server...
+1. Enter "afp://" followed by the IP address of the Macintosh running Mac OS 9.
+1. Click the "Connect" button.
+
+TODO: I get the error "There was a problem connecting to the server".
 
 ## Mac OS 9 Tips
 
