@@ -715,10 +715,6 @@ Alternatively, press option-tab to toggle display of the Tools palette.
 <img alt="HyperCard Tools" style="width: 15%"
   src="/blog/assets/hypercard-tools.png?v={{pkg.version}}">
 
-The keyboard shortcuts described below that begin with cmd-tab
-will not work with running HyperCard in an emulator on a modern Mac,
-because cmd-tab there is used to bring up the application switcher.
-
 The tools include:
 
 - Row #1
@@ -728,7 +724,8 @@ The tools include:
     This enters Browse mode which enables interacting with cards as a user
     rather than as an author.
 
-    Another way to enter Browse mode is to press cmd-tab.
+    Another way to enter Browse mode is to press cmd-tab,
+    but see IMPORTANT below.
 
   - **Button**
 
@@ -736,7 +733,8 @@ The tools include:
     When in this mode, a thin black border is drawn around all buttons
     so they can be located even when they are transparent with no text or icon.
 
-    Another way to enter Button mode is to press cmd-tab-tab.
+    Another way to enter Button mode is to press cmd-tab-tab,
+    but see IMPORTANT below.
 
   - **Field**
 
@@ -744,7 +742,8 @@ The tools include:
     When in this mode, a thin black border is drawn around all text fields
     so they can be located even when they are transparent with no text.
 
-    Another way to enter Field mode is to press cmd-tab-tab-tab.
+    Another way to enter Field mode is to press cmd-tab-tab-tab,
+    but see IMPORTANT below.
 
 - Row #2
 
@@ -863,6 +862,32 @@ The tools include:
     This draws an arbitrary polygon.
     Click at each point in the polygon. Double-click to end.
     It does not automatically connect the last point to the first.
+
+IMPORTANT: The keyboard shortcuts described above that begin with cmd-tab
+do not because cmd-tab is used to switch to another application.
+As an alternative:
+
+1. Open the Keyboard control panel.
+1. Click the "Function Keys..." button.
+1. Uncheck the "Enable Hot Function Keys" checkbox.
+1. Click the "OK" button.
+1. Close the control panel.
+1. Launch HyperCard.
+1. Open the Home stack.
+1. Select Objects ... Stack Info...
+1. Click the "Script..." button.
+1. Add the following to the end of the existing script to associate
+   function keys to commands that choose the Browse, Button, and Field tools.
+   I chose F9, F10, and F11, but others can be used instead.
+
+   ```text
+   on functionKey whichKey
+     if whichKey is 9 then choose browse tool
+     else if whichKey is 10 then choose button tool
+     else if whichKey is 11 then choose field tool
+     else pass functionKey
+   end functionKey
+   ```
 
 When a painting tool is selected,
 the Objects, Font, and Style menus disappear,
