@@ -1627,7 +1627,20 @@ to a new card that use the desired background.
 
 ## Card Transitions
 
-TODO: Add detail on these.
+To add a transition effect that occurs on card navigation, add a script
+like the following to each button whose handler navigates to a new card:
+
+```text
+on mouseUp
+  visual effect wipe right slowly
+  go to previous card
+end mouseUp
+
+on mouseUp
+  visual effect wipe left slowly
+  go to next card
+end mouseUp
+```
 
 ## Images
 
@@ -1850,6 +1863,8 @@ that can be entered in the message box:
   ```text
   do "beep" & return & "wait for 1 second" & return & "play boing"
   ```
+
+````
 
 ### Comments
 
@@ -2081,7 +2096,7 @@ The following variables are set by HyperCard and cannot be modified:
 - `the result`: stores the result of some operations such as the following:
 
   - `go`: Sets result to an error message if the card/stack can't be found
-  - visual effect: if the effect can't be completed
+  - `visual effect`: if the effect can't be completed
   - `open file` - sets result to an error message if the file can't be opened
   - `close file` - sets result if there's an error closing the file
   - `read from file` - sets result to "EOF" when the end of file is reached
@@ -2153,9 +2168,9 @@ It supports many arguments described below.
 
 - Positional
 
-  - `go next` - next card
-  - `go prev` - previous card
-  - `go this` - stay on current card
+  - `go [to] next [card]` - next card
+  - `go [to] prev[ious] [card]` - previous card
+  - `go [to] this [card]` - stay on current card
 
 - Other ways to go to another card in the current stack
 
@@ -2164,13 +2179,13 @@ It supports many arguments described below.
 
 - Other ways to go to another card, possibly in another stack
 
-  - `go back` - previously visited card
-  - `go bkgnd "{background-name}" of stack "{stack-name}"`
-  - `go card id {card-id}`
-  - `go card "{card-name}"`
+  - `go [to] back` - previously visited card
+  - `go [to] bkgnd "{background-name}" of stack "{stack-name}"`
+  - `go [to] card id {card-id}`
+  - `go [to] card "{card-name}"`
   - `go forth` - opposite of `go back` used after that command
-  - `go home` - Home stack
-  - `go [stack] {stack-name} [in a new window]` -
+  - `go [to] home` - Home stack
+  - `go [to] [stack] {stack-name} [in a new window]` -
     first card in a given stack (e.g. "HyperCard Help")
 
 ### get Command
@@ -3044,3 +3059,4 @@ This version of HyperCard ...
   commercial alternative to HyperCard
 - {% aTargetBlank "https://www.vipercard.net", "ViperCard" %} -
   an open source recreation and re-imagination of HyperCard
+````
