@@ -905,6 +905,8 @@ even if it was not previously dragged off of the menu bar.
 If Options ... Draw Filled is selected, the following tools will
 fill their shape with the selected pattern:
 Rectangle, Rounded Rectangle, Oval, Regular Polygon, and Polygon.
+A shortcut for toggling the "Draw Filled" option is to double-click
+any of the shape buttons in the Tools palette that draw a closed shape.
 
 If Options ... Draw Filled is selected, the following tools will
 draw their lines with the selected pattern:
@@ -1475,6 +1477,39 @@ added to a group of words in a locked field.
 Scripts can listen for clicks on a group to take action
 such as treating the group as a hyperlink.
 This is covered in Volume 2 of "The Complete HyperCard 2.2 Handbook".
+
+### Reverse Lettering
+
+To create white text on a black background:
+
+1. Select the Rectangle tool from the Tools palette.
+1. Drag out a rectangle that is at least
+   as large as the anticipated size of the text.
+1. Press the tab key to open the Patterns palette.
+1. Select the solid black pattern.
+   If none of the patterns are solid black, double-click the one
+   closest to solid black to open its "Edit Pattern" dialog,
+   click all the white pixels to turn them black, and click the "OK" button.
+1. Select the Bucket tool.
+1. Click inside the rectangle to fill it with black.
+1. Click the Field tool.
+1. Hold down the cmd key and drag out a
+   transparent field on top of the black rectangle.
+1. Double-click the field to open its Info dialog.
+1. Click the "Text Style..." button.
+1. Check the "Outline" checkbox.
+1. Select a font that works well with the Outline style like "Chicago".
+1. Select the desired font size.
+1. Check the "OK" button.
+1. Select the Browse tool.
+1. Enter the desired text in the field.
+1. Double-click the field to open its Info dialog.
+1. Check the "Lock Text" checkbox.
+1. Check the "OK" button.
+1. If the black rectangle is too large,
+   select the excess on the right side with the "Rectangle Selection" tool
+   and press the delete key.
+1. Repeat the previous step for excess on the bottom side.
 
 ## Layers
 
