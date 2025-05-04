@@ -344,6 +344,7 @@ On computers running macOS X:
 1. Open the Finder.
 1. Select Go ... Connect to Server...
 1. Enter "ftp://{ip-address}" where ip-address is that of the Mac OS 9 computer.
+1. Click the "+" button in the lower-left to remember this server.
 1. Enter the password for the Mac OS 9 computer.
 1. Check the "Remember this password in my keychain" checkbox.
 1. Click the "Connect" button.
