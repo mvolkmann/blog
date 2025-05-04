@@ -319,6 +319,12 @@ It does support SMB, but Mac OS 9 does not support that.
 
 On the computer running Mac OS 9:
 
+1. Open the "File Sharing" control panel.
+1. Click the "Start/Stop" tab.
+1. Under "File Sharing Off",
+   check the "Enable File Sharing clients to connect over TCP/IP" checkbox
+   and click the "Start" button.
+1. Make a note of the IP address that is displayed after "afp://".
 1. Download and install {% aTargetBlank
    "https://macintoshgarden.org/apps/netpresenz", "Netpresenz 4.1" %}
    on the computer running Mac OS 9.
@@ -351,8 +357,8 @@ at the top of the hard drive:
 - Press cmd-shift-3 to capture the full screen.
 - Press cmd-shift-4 to drag out a selected area of the screen.
 
-PICT files will likely appear as an all white rectangle
-when viewed in macOS using the Preview app.
+When viewed in macOS using the Preview app,
+PICT files will likely appear as an all white rectangle.
 This happens because Mac OS 9 stores the image data
 in the Resource Fork instead of the Data Fork.
 
@@ -362,12 +368,12 @@ the free app XnConvert which can be downloaded from the App Store.
 1. Add the file extension ".pict" to PICT files.
 1. Launch the XnConvert app.
 1. Click the "Add files..." button.
-1. Select a PICT file.
+1. Select any number of ".pict" files.
 1. Click the "Convert" button.
 1. Select the destination directory (defaults to directory of PICT file).
 1. Click the "Open" button to generate
-   a ".png" file in the destination directory.
-   The file name will be the same name as the ".pict" file,
+   ".png" files in the destination directory.
+   The file names will be the same name as the ".pict" files,
    but with "\_result" appended.
 1. Click the "Close" button.
 
