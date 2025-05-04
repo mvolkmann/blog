@@ -378,6 +378,9 @@ the free app XnConvert which can be downloaded from the App Store.
    but with "\_result" appended.
 1. Click the "Close" button.
 
+As an alternative to steps 2, 3, and 4, right-click a ".pict" file
+and select Open With ... XnConvert.
+
 ## Mac OS 9 Tips
 
 To simulate a right mouse button click in order to get context-sensitive menus,
