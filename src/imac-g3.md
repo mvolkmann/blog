@@ -171,6 +171,19 @@ To clean the top and bottom parts of the plastic case of an iMac G3 computer:
 1. Reattach the top of the plastic case.
 1. Reattach the bottom of the plastic case.
 
+To disassemble, clean, and reassemble the keyboard, see this {% aTargetBlank
+"https://www.youtube.com/watch?v=dnO3kCGxdgY", "YouTube video" %}.
+From 7:36 to 8:28 in the video he struggles to remove a hidden screw.
+It is not necessary to use heat and pull back the sticker.
+It is located 15mm to the left of the Apple logo on the sticker
+and can be seen from the top edge of the keyboard.
+Poke the point of a razor knife directly over the top of the screw
+and gently turn it to create a small hole in the sticker
+through which it can be unscrewed.
+
+<img alt="iMac G3 keyboard screw hole" style="width: 70%"
+  src="/blog/assets/imac-g3-keyboard-screw-hole.jpg?v={{pkg.version}}">
+
 ## Installing Software
 
 The websites
