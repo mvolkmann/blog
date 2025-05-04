@@ -827,8 +827,10 @@ The tools include:
 
     This paints text that cannot be edited.
     The text style must be specified before typing the text.
-    To open the Text Style dialog, select Edit ... Text Style..., press cmd-t,
-    or double-click the Text tool icon ("A") in the Tools palette.
+    To open the "Text Properties" dialog,
+    select Edit ... Text Style...,
+    press cmd-t, or
+    double-click the Text tool icon ("A") in the Tools palette.
     Then click the Text tool, click on the card or background
     where the text should go, and begin typing.
     To create multiline text, press the return key at the end of a line.
@@ -1371,7 +1373,7 @@ To change the default text style of a field:
   - Shadow - rectangle border with a shadow to lower-right
   - Scrolling - adds a vertical scrollbar;
     text wraps by default and there is never a horizontal scrollbar
-- Click the "Text Style..." button.
+- Click the "Text Style..." button to open the "Text Properties" dialog.
 - Select any of the style checkboxes.
 - Select an alignment option (Left, Center, or Right).
 - Select a font name.
@@ -1495,8 +1497,7 @@ To create white text on a black background:
 1. Click the Field tool.
 1. Hold down the cmd key and drag out a
    transparent field on top of the black rectangle.
-1. Double-click the field to open its Info dialog.
-1. Click the "Text Style..." button.
+1. Press cmd-t to open the "Text Properties" dialog for the field.
 1. Check the "Outline" checkbox.
 1. Select a font that works well with the Outline style like "Chicago".
 1. Select the desired font size.
