@@ -390,6 +390,19 @@ and select Open With ... XnConvert.
 For a more powerful screenshot solution that supports many graphics formats
 including GIF, JPEG, and PNG, see {% aTargetBlank
 "https://macintoshgarden.org/apps/snapz-pro-2", "Snapz Pro 2" %}.
+License keys are provided in a text file.
+This adds the "Snapz Pro" control panel.
+Click the "Settings..." button to configure.
+The default key to take a screenshot is cmd-shift-3.
+In the dialog that appears, specify:
+
+- kind of capture to perform (Screen, Window, Menu, or Selection)
+- "Send to" location such as Desktop
+  (defaults to Macintosh HD:SystemFolder:Screen Snapz)
+- "File Type" such as .gif, .jpg, or .png
+
+When capturing a selection, adjust the rectangle to capture
+and press the return key.
 
 ## Mac OS 9 Tips
 
