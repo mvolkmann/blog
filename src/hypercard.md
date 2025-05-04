@@ -2523,8 +2523,8 @@ To fix this:
 
 The handlers registered in the "Stack Info..." script of the Home stack
 are active for all stacks.
-To register function keys to select the Browse, Button, and Field tools
-in all stacks:
+To register function keys to choose the Browse, Button, and Field tools
+in all stacks, even if the Tools palette is not open:
 
 1. Launch HyperCard.
 1. Open the Home stack.
