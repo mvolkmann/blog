@@ -160,8 +160,10 @@ To clean the top and bottom parts of the plastic case of an iMac G3 computer:
 1. Remove the top of the plastic case.
 1. Wash the plastic case parts using Dawn liquid dish washing soap or similar
    and a microfiber cloth.
+   Do not use paper towels because
+   the wood fibers in them can scratch the plastic.
    Do not use Windex, isopropyl alcohol, or a Magic Eraser sponge
-   as these can make the plastic cloudy.
+   because they can make the plastic cloudy.
 1. Dry the plastic case parts with another microfiber cloth.
 1. Use a blow dryer on low heat to thoroughly dry the plastic case parts.
 1. Optionally use Meguiar's PlasticX to
@@ -396,10 +398,15 @@ Click the "Settings..." button to configure.
 The default key to take a screenshot is cmd-shift-3.
 In the dialog that appears, specify:
 
-- kind of capture to perform (Screen, Window, Menu, or Selection)
-- "Send to" location such as Desktop
-  (defaults to Macintosh HD:SystemFolder:Screen Snapz)
-- "File Type" such as .gif, .jpg, or .png
+- Capture: Select Screen, Window, Menu, or Selection.
+- Send to: Select a location such as Desktop.
+  It defaults to Macintosh HD:SystemFolder:Screen Snapz.
+- "Cursor visible" checkbox:
+  Uncheck this to avoid including the mouse cursor in the screenshot.
+- File Type: Select one such as .gif, .jpg, or .png.
+- "Choose file name" checkbox: When prompted for a file name,
+  include a file extension because it will not be
+  added automatically based on the selected file type.
 
 When capturing a selection, adjust the rectangle to capture
 and press the return key.
