@@ -348,7 +348,10 @@ On computers running macOS X:
 1. Enter the password for the Mac OS 9 computer.
 1. Check the "Remember this password in my keychain" checkbox.
 1. Click the "Connect" button.
-1. Read and write the shared files.
+1. Read the shared files.
+
+Writing to the Mac OS 9 computer requires using
+an FTP client on the macOS X computer like Transmit.
 
 ## Screenshots
 
@@ -357,6 +360,9 @@ at the top of the hard drive:
 
 - Press cmd-shift-3 to capture the full screen.
 - Press cmd-shift-4 to drag out a selected area of the screen.
+- Press caps lock, then cmd-shift-4 to capture a selected window.
+- Hold down the control when with any of the above
+  to copy the screenshot to the clipboard.
 
 When viewed in macOS using the Preview app,
 PICT files will likely appear as an all white rectangle.
@@ -380,6 +386,10 @@ the free app XnConvert which can be downloaded from the App Store.
 
 As an alternative to steps 2, 3, and 4, right-click a ".pict" file
 and select Open With ... XnConvert.
+
+For a more powerful screenshot solution that supports many graphics formats
+including GIF, JPEG, and PNG, see {% aTargetBlank
+"https://macintoshgarden.org/apps/snapz-pro-2", "Snapz Pro 2" %}.
 
 ## Mac OS 9 Tips
 
