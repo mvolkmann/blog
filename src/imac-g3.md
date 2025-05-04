@@ -276,6 +276,8 @@ will display an error dialog with the message
 
 ## File Sharing
 
+### Using AFP (does not work)
+
 Once connection to the internet is working,
 the following steps enable sharing files between
 a Macintosh running Mac OS 9 and a Macintosh running macOS X
@@ -309,7 +311,39 @@ On the Macintosh running macOS X:
 1. Enter "afp://" followed by the IP address of the Macintosh running Mac OS 9.
 1. Click the "Connect" button.
 
-TODO: I get the error "There was a problem connecting to the server".
+This gives the error "There was a problem connecting to the server".
+The reason is that macOS X does not support AFP.
+It does support SMB, but Mac OS 9 does not support that.
+
+### Using FTP
+
+On the computer running Mac OS 9:
+
+1. Download and install {% aTargetBlank
+   "https://macintoshgarden.org/apps/netpresenz", "Netpresenz 4.1" %}
+   on the computer running Mac OS 9.
+
+On computers running macOS X:
+
+1. Open the Finder.
+1. Select Go ... Connect to Server...
+1. Enter "ftp://{ip-address}" where ip-address is that of the Mac OS 9 computer.
+
+## Screenshots
+
+To capture a screenshot to a PICT file named "Picture {n}"
+at the top of the hard drive:
+
+- Press cmd-shift-3 to capture the full screen.
+- Press cmd-shift-4 to drag out a selected area of the screen.
+
+PICT files will likely appear as an all white rectangle
+when viewed in macOS using the Preview app.
+This happens because Mac OS 9 stores the image data
+in the Resource Fork instead of the Data Fork.
+
+One way to convert a PICT file to a PNG file in macOS
+is to use the free app XnConvert which can be downloaded from the App Store.
 
 ## Mac OS 9 Tips
 
@@ -389,20 +423,6 @@ select View ... Arrange ...by Name.
 To resize a Finder window to the minimum size required
 to display all of its contents, click the first button
 in the upper-right corner of its title bar.
-
-To capture a screenshot to a PICT file named "Picture {n}"
-at the top of the hard drive:
-
-- Press cmd-shift-3 to capture the full screen.
-- Press cmd-shift-4 to drag out a selected area of the screen.
-
-PICT files will likely appear as an all white rectangle
-when viewed in macOS using the Preview app.
-This happens because Mac OS 9 stores the image data
-in the Resource Fork instead of the Data Fork.
-
-One way to convert a PICT file to a PNG file in macOS
-is to use the free app XnConvert which can be downloaded from the App Store.
 
 To watch a DVD:
 
