@@ -353,7 +353,25 @@ On computers running macOS X:
 1. Read the shared files.
 
 Writing to the Mac OS 9 computer requires using
-an FTP client on the macOS X computer like Transmit.
+an FTP client on the macOS X computer like Transmit or CyberDuck.
+
+To use CyberDuck:
+
+- On the Mac OS 9 computer:
+
+  1. Open the "Multiple Users" control panel.
+  1. After "Multiple User Accounts", select the "On" radio button.
+  1. Optionally change the user name and password.
+
+- On the macOS computer:
+  1. Launch the CyberDuck app.
+  1. Click "Open Connection".
+  1. After "Server", enter the IP address of the Mac OS 9 computer
+     which can be found in the "File Sharing" control panel.
+  1. Enter the username and password for the Mac OS 9 computer.
+  1. Click the "Connect" button.
+  1. Drag files from the CyberDuck window to the Finder.
+  1. Drag files from the Finder to the CyberDuck window.
 
 ## Screenshots
 
