@@ -322,12 +322,26 @@ On the computer running Mac OS 9:
 1. Download and install {% aTargetBlank
    "https://macintoshgarden.org/apps/netpresenz", "Netpresenz 4.1" %}
    on the computer running Mac OS 9.
+1. Double-click "NetPresenz Setup".
+1. Dismiss the "About" dialog.
+1. Click "FTP Setup".
+1. Under "Owner", change "File Access" to Full and check "Enabled".
+1. Under "Users" and "Guest", change "File Access" to None and uncheck "Enabled".
+1. Uncheck "Allow Simple Internet Version Control (SIVC) periodic queries"
+   because there will never be an updates.
+1. Click the "Save" button.
+1. Press cmd-q to quit the setup app.
+1. Double-click "NetPresenz Setup" to start the FTP server.
 
 On computers running macOS X:
 
 1. Open the Finder.
 1. Select Go ... Connect to Server...
 1. Enter "ftp://{ip-address}" where ip-address is that of the Mac OS 9 computer.
+1. Enter the password for the Mac OS 9 computer.
+1. Check the "Remember this password in my keychain" checkbox.
+1. Click the "Connect" button.
+1. Read and write the shared files.
 
 ## Screenshots
 
