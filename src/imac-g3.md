@@ -356,8 +356,20 @@ when viewed in macOS using the Preview app.
 This happens because Mac OS 9 stores the image data
 in the Resource Fork instead of the Data Fork.
 
-One way to convert a PICT file to a PNG file in macOS
-is to use the free app XnConvert which can be downloaded from the App Store.
+One way to convert a PICT file to a PNG file in macOS is to use
+the free app XnConvert which can be downloaded from the App Store.
+
+1. Add the file extension ".pict" to PICT files.
+1. Launch the XnConvert app.
+1. Click the "Add files..." button.
+1. Select a PICT file.
+1. Click the "Convert" button.
+1. Select the destination directory (defaults to directory of PICT file).
+1. Click the "Open" button to generate
+   a ".png" file in the destination directory.
+   The file name will be the same name as the ".pict" file,
+   but with "\_result" appended.
+1. Click the "Close" button.
 
 ## Mac OS 9 Tips
 
