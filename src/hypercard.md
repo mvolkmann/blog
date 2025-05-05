@@ -1155,6 +1155,10 @@ Example button references that can be used in scripts include:
 
 - `me` (when handler is attached to the button),
 - by name: `button "{name}"`
+
+  The quotes are not required if the name does not
+  contain spaces or other special characters.
+
 - by id: `button id {id}`
 - by number: `button {number-within-card}`.
 - `the target` (when handler is attached the parent card)
@@ -1506,18 +1510,22 @@ moves the focus to the first field on the card.
 
 Example field references include:
 
-- `me` (when handler is attached to the button),
+- `me` (when handler is attached to the field),
 - by name: `field "{name}"`
+
+  The quotes are not required if the name does not
+  contain spaces or other special characters.
+
 - by id: `field id {id}`
 - by number: `field {number-within-card}`.
 - `the target` (when handler is attached the parent card)
 
 The keyword `field` can be abbreviated to `fld`.
 
-If the field is on the card (foreground) instead of the background,
-add `card` or `cd` before `button`.
-If the button is on the background instead of the card (foreground),
-optionally add `background`, `bkgnd`, or `bg` before `button`.
+If the field is on the card instead of the background,
+add `card` or `cd` before `field`.
+If the field is on the background instead of the card,
+optionally add `background`, `bkgnd`, or `bg` before `field`.
 If none of these keywords are added,
 HyperTalk will assume the field is on the background.
 This differs from the default for buttons.
@@ -1951,8 +1959,6 @@ that can be entered in the message box:
   ```text
   do "beep" & return & "wait for 1 second" & return & "play boing"
   ```
-
-````
 
 ### Comments
 
@@ -2997,17 +3003,17 @@ end mouseUp
 ### List Selection
 
 This demonstrates using a field to display a list of options.
-When the user clicks an option, it is highlighted by making it bold.
+When the user clicks an option, it is highlighted by
+reversing the background and foreground colors of the selected line.
 The option text is also copied to another field
 to demonstrate that is was captured.
 
-We need a way to remember the line number (or index)
-of the last list option that was selected.
-When an option is selected, its index is
-compared to that of the previous index.
-If they match, the option is deselected.
+We need a way to remember the previously selected option.
+When an option is selected, if it was already selected
+then the option is deselected.
 
-We can't associated a value with a container like a stack, card, button, or field.
+We can't associate a value with a container
+like a stack, card, button, or field.
 We can store a value in a hidden field or in a global variable.
 Neither option is ideal, but using a global variable seems best.
 
@@ -3147,4 +3153,3 @@ This version of HyperCard ...
   commercial alternative to HyperCard
 - {% aTargetBlank "https://www.vipercard.net", "ViperCard" %} -
   an open source recreation and re-imagination of HyperCard
-````
