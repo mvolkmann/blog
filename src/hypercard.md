@@ -1340,8 +1340,9 @@ To add a field to the current card:
 - Lock Text: makes the content read-only
 - Don't Wrap: prevents words from wrapping when they go past the right edge,
   without a way to scroll the text to see that content
-- Auto Select: turns a field into a list selection
-  (see Demos ... List Selection below)
+- Auto Select: automatically selects an entire line in the field
+  when any character in the line is clicked,
+  making it a list selection component (see Demos ... List Selection below)
 - Multiple Lines:
   This option is only available when "Auto Select" is checked.
   When checked, multiple lines can be selected when the shift key is held down.
