@@ -16,14 +16,6 @@ HyperCard is a Macintosh application for viewing and creating
 multimedia applications built with HyperCard stacks
 which are collections of cards.
 
-Cards have two layers, a background and a foreground (referred to as "card").
-Each layers can contain painted objects (e.g. a filled rectangle),
-buttons, and fields.
-
-A background can be shared by any number of cards in its stack.
-The objects in a card background that are not obscured
-by objects in its foreground are visible.
-
 The original application name was WildCard. It was changed
 to HyperCard shortly before the initial release
 because the name WildCard was already trademarked.
@@ -68,7 +60,29 @@ select Help ... Show Balloons and hover over an item.
 This is a Mac OS feature and is not specific to HyperCard.
 To turn this off, select Help ... Hide Balloons.
 
-## Basic Operations
+## Domains
+
+Cards have two domains, a background and a foreground (referred to as "card").
+Each domain can contain painted objects (e.g. a filled rectangle),
+buttons, and fields.
+Fields display text and can allow users to enter text.
+
+Buttons and fields are referred to collectively as objects.
+When an object is created, it is
+automatically assigned a part number and an ID.
+Both are unique within their domain which is a specific background or card.
+
+The ID values never change and are never reused, even if an object is deleted.
+
+The part numbers specify stacking order where
+objects with higher part numbers are drawn on top of
+objects with lower part numbers.
+All objects in the card domain are drawn on top of
+all objects in the background domain.
+
+A background can be shared by any number of cards in its stack.
+Objects in the background of the current card that are
+not obscured by objects in card are visible.
 
 ## Stacks
 

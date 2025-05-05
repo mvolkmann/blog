@@ -66,8 +66,9 @@ as evidenced by the photos below.
 
 Below are the steps I took to setup this computer.
 
-1. Reinstall the operating system to run Mac OS 9.0.1 instead of OS X
+1. Reinstall the operating system to run Mac OS 9.0.1 instead of macOS X
    using the provided CD "iMac Software Restore".
+   While macOS X can run on this computer, it is slow compared to Mac OS 9.
 1. Insert a 32GB USB stick into the iMac G3.
 1. Erase the USB stick and format it as "Macintosh ? Extended".
 1. Use the USB stick to copy software from a modern Mac to the iMac G3.
@@ -540,6 +541,31 @@ select View ... Arrange ...by Name.
 To resize a Finder window to the minimum size required
 to display all of its contents, click the first button
 in the upper-right corner of its title bar.
+
+Mac OS 9 did not ship with a music app like iTunes,
+which was introduced in macOS X.
+
+To play an audio CD:
+
+1. Insert a CD in the slot and wait about 10 seconds for it to load.
+1. An icon representing the CD titled "Audio CD {n}" will appear on the desktop.
+1. The first track will start playing automatically.
+1. To control the playback, open the "AppleCD Audio Player" app
+   found in Macintosh HD:AppleCD Audio Player f.
+
+The "AppleCD Audio Player" app:
+
+- contains buttons to play, pause,
+  skip to the next and previous tracks,
+  shuffle the tracks, repeat after the last track plays,
+  and eject the disc.
+- contains a dropdown to skip to a specific track.
+- contains a slider to control the volume relative to the system volume.
+- displays the total duration and the duration of each track.
+- contains inputs to the enter the CD title and the name of each track.
+  These are remembered after the disc is ejected
+  and displayed when the disc is reinserted.
+- cannot import the tracks and save them on the hard drive
 
 To watch a DVD:
 
