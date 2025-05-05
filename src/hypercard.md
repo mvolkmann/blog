@@ -1375,9 +1375,6 @@ To change the default text style of a field:
   TODO: Changing this seems to have no effect!
 - Click the OK button.
 
-The text style does not affect the ability to
-search for matching text using the `find` command.
-
 To resize a field:
 
 - Select the Field tool.
@@ -1385,11 +1382,14 @@ To resize a field:
   It is easiest to grab a corner by clicking just inside it
   rather than trying to click directly on it.
 
-To change the text style of specific text
+### Text Style of Selected Text
+
+To change the text style of selected text
 in a single field on the current card to something
 different than the default text style for the field:
 
-- Select the text by dragging over it.
+- Select the text by dragging over it or
+  press cmd-shift-a to select all the text.
 - Select a font name from the Font menu.
 - Select a font style from the Style menu.
 - Select a font size from the Style menu.
@@ -1398,7 +1398,6 @@ The following keyboard shortcuts modify the style of the selected field:
 
 | Keyboard Shortcut | Style Change                          |
 | ----------------- | ------------------------------------- |
-| cmd-shift-a       | select all                            |
 | cmd-shift-p       | plain                                 |
 | cmd-shift-b       | bold                                  |
 | cmd-shift-i       | italic                                |
@@ -1413,6 +1412,9 @@ The following keyboard shortcuts modify the style of the selected field:
 | cmd-shift-[       | next font                             |
 | cmd-shift-]       | previous font                         |
 | cmd-shift-d       | return to defaults                    |
+
+The text style does not affect the ability to
+search for matching text using the `find` command.
 
 ### Copying and Moving Fields
 
