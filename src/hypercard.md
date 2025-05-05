@@ -949,6 +949,8 @@ so be careful with these changes!
 
 ## Buttons
 
+### Button Types
+
 There are four basic kinds of buttons:
 
 1. Buttons that perform an action when clicked.
@@ -986,6 +988,60 @@ Oval buttons are transparent and do not display their border.
 They only differ from Transparent buttons in
 the shape of their target (clickable) area.
 
+### Creating Buttons
+
+To add a button to the current card.
+
+1. Select Objects ... New Button.
+   Alternatively, select the Button tool and
+   cmd-drag to indicate the location and size of a new button.
+   This adds a new button to the center of the current card.
+
+1. Double-click the button to open its "Button Info" dialog.
+
+   <img alt="HyperCard Button Info" style="width: 50%"
+     src="/blog/assets/hypercard-button-info.png?v={{pkg.version}}">
+
+1. Change "Button Name" to be a name used to refer to the button
+   or the text that will appear on it.
+   It's too bad buttons can't have separate values for
+   the name used to refer to them and the label displayed in them.
+
+1. Select a button style from the following options:
+
+   - Transparent: no border and can see through;
+     default when created with cmd-drag
+   - Opaque: no border and cannot see through
+   - Rectangle: opaque with rectangle border
+   - Round Rect: opaque with rectangle border that has rounded corners;
+     default when created with "New Button" menu item
+   - Shadow: like Rectangle, but adds shadows on the right and bottom sides
+   - Check Box: for a Boolean selection; click the checkbox or the name
+     to toggle the value of its `hilite` property
+   - Radio Button: for a set of mutually exclusive choices
+   - Standard: conforms to Macintosh interface guidelines for non-default buttons
+   - Default: conforms to Macintosh interface guidelines for default buttons
+   - Oval: like Transparent, but the target area is an oval instead of a rectangle
+   - Popup: a dropdown containing options
+
+1. Decide whether the button name should be displayed
+   by checking or unchecking the "Show Name" checkbox.
+
+   - It will be checked if the button was created with "New Button".
+   - It will be unchecked if the button was created with cmd-drag.
+
+1. Optionally click the "Icon..." button to add an icon to the button.
+   Icon sizes cannot be modified.
+
+1. Optionally cause the button to highlight when it is clicked
+   by checking the "Auto Hilite" checkbox.
+
+1. Optionally click the "Script..." button.
+
+   Enter the command(s) to execute when the button is clicked.
+
+### Finding Buttons
+
 To find all the buttons on the current card, press and hold cmd-option.
 This adds a dotted outline around all the buttons
 that disappears when the keys are released.
@@ -994,51 +1050,7 @@ This is particularly useful for finding transparent buttons.
 Selecting the Button tool from the Tools menu or palette
 adds a solid, rectangular outline around all the buttons.
 
-To add a button to the current card.
-
-- Select Objects ... New Button.
-  Alternatively, select the Button tool and
-  cmd-drag to indicate the location and size of a new button.
-  This adds a new button to the center of the current card.
-
-- Double-click the button to open its "Button Info" dialog.
-
-  <img alt="HyperCard Button Info" style="width: 50%"
-    src="/blog/assets/hypercard-button-info.png?v={{pkg.version}}">
-
-- Change "Button Name" to be a name used to refer to the button
-  or the text that will appear on it.
-  It's too bad buttons can't have separate values for
-  the name used to refer to them and the label displayed in them.
-- Select a button style from the following options:
-
-  - Transparent: no border and can see through;
-    default when created with cmd-drag
-  - Opaque: no border and cannot see through
-  - Rectangle: opaque with rectangle border
-  - Round Rect: opaque with rectangle border that has rounded corners;
-    default when created with "New Button" menu item
-  - Shadow: like Rectangle, but adds shadows on the right and bottom sides
-  - Check Box: for a Boolean selection; click the checkbox or the name
-    to toggle the value of its `hilite` property
-  - Radio Button: for a set of mutually exclusive choices
-  - Standard: conforms to Macintosh interface guidelines for non-default buttons
-  - Default: conforms to Macintosh interface guidelines for default buttons
-  - Oval: like Transparent, but the target area is an oval instead of a rectangle
-  - Popup: a dropdown containing options
-
-- Decide whether the button name should be displayed
-  by checking or unchecking the "Show Name" checkbox.
-
-  - It will be checked if the button was created with "New Button".
-  - It will be unchecked if the button was created with cmd-drag.
-
-- Optionally click the "Icon..." button to add an icon to the button.
-  Icon sizes cannot be modified.
-- Optionally cause the button to highlight when it is clicked
-  by checking the "Auto Hilite" checkbox.
-- Click the "Script..." button.
-- Enter the command(s) to execute when the button is clicked.
+### Editing Buttons
 
 To edit the properties of a button, select the Button tool,
 and double-click a button.
@@ -1047,56 +1059,6 @@ Either way, a "Button Info" dialog like the one shown above will open.
 This works regardless of whether the button is in the card or background layer.
 It is not necessary to switch to background mode
 in order to modify a background button.
-
-To move a button within its card:
-
-- Select the Button tool.
-- Drag the inside or edge of any button.
-- The ability to snap-to-grid is missing and would be useful for better layout.
-
-To resize a button:
-
-- Select the Button tool.
-- Drag any corner of a button.
-  It is easiest to grab a corner by clicking just inside it
-  rather than trying to click directly on it.
-
-To create a copy of a button, option-drag it OR
-select Edit ... Copy Button (cmd-c),
-optionally navigate to another card (possibly in another stack),
-and select Edit ... Paste Button (cmd-v).
-
-To move a button, to another card (possibly in another stack),
-select Edit ... Cut Button (cmd-x),
-navigate to the destination card,
-and select Edit ... Paste Button (cmd-v).
-
-To configure a button so clicking it navigates to another card or stack:
-
-- Option #1
-  - Click the "Tasks..." button.
-  - In the "Tasks" dialog, select a destination from the radio buttons
-    that include "Back", "Home",
-    "First Card", "Previous Card", "Next Card", and "Last Card".
-- Option #2
-  - Click the "LinkTo..." button.
-  - Navigate to another card.
-  - In the "Link" dialog, click the "This Card" button.
-
-These are alternatives to writing a script.
-They write the script for you, adding a `go` command
-that is executed when the user clicks the button.
-
-To edit the script for a button:
-
-- Click the "Script..." button.
-- Enter commands.
-
-To delete a button:
-
-- Select the Button tool.
-- Click a button to select it.
-- Press the delete key, or select Edit ... Cut Button, or press cmd-x.
 
 Buttons have the following properties:
 
@@ -1114,7 +1076,65 @@ Buttons have the following properties:
 - `style`: one of the dropdown values
 - `visible`: whether it is visible
 
-Example button references include:
+### Moving and Resizing Buttons
+
+To move a button within its card:
+
+1. Select the Button tool.
+1. Drag the inside or edge of any button.
+
+   The ability to snap-to-grid is missing and would be useful for better layout.
+
+To move a button to another card (possibly in another stack):
+
+1. Select Edit ... Cut Button (cmd-x).
+1. Navigate to the destination card.
+1. Select Edit ... Paste Button (cmd-v).
+
+To resize a button:
+
+1. Select the Button tool.
+1. Drag any corner of a button.
+
+   It is easiest to grab a corner by clicking just inside it
+   rather than trying to click directly on it.
+
+### Copying Buttons
+
+To create a copy of a button, option-drag it OR
+select Edit ... Copy Button (cmd-c),
+optionally navigate to another card (possibly in another stack),
+and select Edit ... Paste Button (cmd-v).
+
+### Deleting Buttons
+
+To delete a button:
+
+1. Select the Button tool.
+1. Click a button to select it.
+1. Press the delete key, or select Edit ... Cut Button, or press cmd-x.
+
+### Linking Buttons
+
+To configure a button so clicking it navigates to another card or stack:
+
+- Option #1
+  1. Click the "Tasks..." button.
+  1. In the "Tasks" dialog, select a destination from the radio buttons
+     that include "Back", "Home",
+     "First Card", "Previous Card", "Next Card", and "Last Card".
+- Option #2
+  1. Click the "LinkTo..." button.
+  1. Navigate to another card.
+  1. In the "Link" dialog, click the "This Card" button.
+
+These are alternatives to writing a script.
+They write the script for you, adding a `go` command
+that is executed when the user clicks the button.
+
+### Button References
+
+Example button references that can be used in scripts include:
 
 - `me` (when handler is attached to the button),
 - by name: `button "{name}"`
@@ -1134,10 +1154,19 @@ If the button is not on the current card, add `of card {card-reference}`.
 If the button is not on a card in the current stack,
 add `of card {card-reference} of stack "{stack-name"}`.
 
+### Clickable Images
+
 To make a section of an image clickable,
 add a button that is transparent and has no label.
 Unfortunately the clickable area must be rectangular.
 Modify the button script to execute HyperTalk commands when clicked.
+
+### Scripting Buttons
+
+To edit the script for a button:
+
+1. Click the "Script..." button.
+1. Enter commands.
 
 To detect whether special keys where held down during a click, check the
 state of the special variables `commandKey`, `optionKey`, and `shiftKey`.
@@ -1218,7 +1247,7 @@ end mouseUp
 HyperTalk can store the name or id of a button/field in a variable,
 but it cannot store a button or field object in a variable.
 
-### Popup
+### Popups
 
 A button with the style "Popup" displays a dropdown list of options.
 To specify the options, click the "Contents..." button
@@ -1254,20 +1283,6 @@ Different values can be entered in background fields for each card.
 
 Fields can hold a single line of text or multiple lines.
 The choice is specified in the "Field Info" dialog for each field.
-
-### Finding Fields
-
-One way to find fields on the current card is to
-move the cursor around the card and notice when the cursor changes
-from the browser cursor (hand with pointing index finger) to an I-beam.
-
-A better way to find fields is to press and hold cmd-shift-option.
-This adds a dotted outline around all the fields
-that disappears when the keys are released.
-This is particularly useful for finding transparent fields.
-
-Selecting the Field tool from the Tools menu or palette
-adds a solid, rectangular outline around all the fields.
 
 ### Creating Fields
 
@@ -1335,6 +1350,20 @@ TODO: Describe using the Auto Select option.
 1. Enter text.
 1. For read-only text, open the "Field Info" dialog again
    and check the "Lock Text" checkbox.
+
+### Finding Fields
+
+One way to find fields on the current card is to
+move the cursor around the card and notice when the cursor changes
+from the browser cursor (hand with pointing index finger) to an I-beam.
+
+A better way to find fields is to press and hold cmd-shift-option.
+This adds a dotted outline around all the fields
+that disappears when the keys are released.
+This is particularly useful for finding transparent fields.
+
+Selecting the Field tool from the Tools menu or palette
+adds a solid, rectangular outline around all the fields.
 
 ### Editing Fields
 
