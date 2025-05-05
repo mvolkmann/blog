@@ -566,11 +566,13 @@ The "Card Info" dialog contains the following:
 
 To navigate between the cards in a stack:
 
-- Select Go ... First or press cmd-1 to go the first card in the stack.
-- Select Go ... Prev or press cmd-2 to go to the previous card in the stack.
-- Select Go ... Next or press cmd-3 to go to the next card in the stack.
-- Select Go ... Last or press cmd-4 to go the last card in the stack.
-- Select Go ... Back or press cmd-~ to go back to the previously browsed card.
+| Destination             | Command      | Keyboard Shortcut |
+| ----------------------- | ------------ | ----------------- |
+| first card              | Go ... First | cmd-1             |
+| previous card           | Go ... Prev  | cmd-2             |
+| next card               | Go ... Next  | cmd-3             |
+| last card               | Go ... Last  | cmd-4             |
+| previously browsed card | Go ... Back  | cmd-~             |
 
 Another way to navigate is to open the Navigator Palette (shown below)
 by entering the command `nav` in the message box.
