@@ -1255,6 +1255,8 @@ Different values can be entered in background fields for each card.
 Fields can hold a single line of text or multiple lines.
 The choice is specified in the "Field Info" dialog for each field.
 
+### Finding Fields
+
 One way to find fields on the current card is to
 move the cursor around the card and notice when the cursor changes
 from the browser cursor (hand with pointing index finger) to an I-beam.
@@ -1267,67 +1269,71 @@ This is particularly useful for finding transparent fields.
 Selecting the Field tool from the Tools menu or palette
 adds a solid, rectangular outline around all the fields.
 
+### Creating Fields
+
 To add a field to the current card:
 
-- Select Objects ... New Field.
-  Alternatively, select the Field tool and
-  cmd-drag to indicate the location and size of a new field.
-  This adds a new field to the center of the current card.
+1. Select Objects ... New Field.
+   Alternatively, select the Field tool and
+   cmd-drag to indicate the location and size of a new field.
+   This adds a new field to the center of the current card.
 
-- Double-click the field to open its "Button Info" dialog.
+1. Double-click the field to open its "Button Info" dialog.
 
-  <img alt="HyperCard Field Info" style="width: 50%"
+<img alt="HyperCard Field Info" style="width: 50%"
     src="/blog/assets/hypercard-field-info.png?v={{pkg.version}}">
 
-- Enter a Field name.
-- Select a field style from the following options:
+1. Enter a Field name.
+1. Select a field style from the following options:
 
-  - Transparent: no border and can see through to objects behind it
-  - Opaque: no border and cannot see through to objects behind it;
-    useful to place on top of graphics
-  - Rectangle: adds a rectangular border; most common style
-  - Shadow: same as Rectangle, but adds shadows
-    on the right and bottom sides for a 3D effect
-  - Scrolling: adds a rectangular border and
-    a vertical scrollbar (even when not needed),
-    but never a horizontal scrollbar
+- Transparent: no border and can see through to objects behind it
+- Opaque: no border and cannot see through to objects behind it;
+  useful to place on top of graphics
+- Rectangle: adds a rectangular border; most common style
+- Shadow: same as Rectangle, but adds shadows
+  on the right and bottom sides for a 3D effect
+- Scrolling: adds a rectangular border and
+  a vertical scrollbar (even when not needed),
+  but never a horizontal scrollbar
 
-- Select the desired checkbox options which include:
+1. Select the desired checkbox options which include:
 
-  - Lock Text: makes the content read-only
-  - Don't Wrap: prevents words from wrapping when they go past the right edge,
-    without a way to scroll the text to see that content
-  - Auto Select: enables implementing selection lists (described later)
-  - Multiple Lines: enables enter
-  - Wide Margins: adds a top margin of about half character height
-    along with left and right margins of about a character width,
-    but no bottom margin
-  - Fixed Line Height: keeps the same default height for all lines
-    regardless of the font sizes used in the lines;
-    allows text to overlap vertically which seems bad
-  - Show Lines: displays dotted lines that indicate
-    where each line of text can be entered
-  - Auto Tab: moves focus to the next field when the return key is pressed
-    and the text cursor is on the last visible line of a non-scrolling field;
-    most useful in a series of single-line fields
-  - Don't Search: prevents contents from being searched by `find` commands
-  - Shared Text: displays read-only text in a background
+- Lock Text: makes the content read-only
+- Don't Wrap: prevents words from wrapping when they go past the right edge,
+  without a way to scroll the text to see that content
+- Auto Select: enables implementing selection lists (described later)
+- Multiple Lines: enables enter
+- Wide Margins: adds a top margin of about half character height
+  along with left and right margins of about a character width,
+  but no bottom margin
+- Fixed Line Height: keeps the same default height for all lines
+  regardless of the font sizes used in the lines;
+  allows text to overlap vertically which seems bad
+- Show Lines: displays dotted lines that indicate
+  where each line of text can be entered
+- Auto Tab: moves focus to the next field when the return key is pressed
+  and the text cursor is on the last visible line of a non-scrolling field;
+  most useful in a series of single-line fields
+- Don't Search: prevents contents from being searched by `find` commands
+- Shared Text: displays read-only text in a background
 
-    This option is only available for background fields and
-    only allows its content to be edited when in background mode.
-    This makes it a good alternative to painted (bitmap) text
-    that is the same, read-only text which
-    appears on each card that uses the background.
-    When this option is checked,
-    the "Don't Search" option is also required to be checked.
+  This option is only available for background fields and
+  only allows its content to be edited when in background mode.
+  This makes it a good alternative to painted (bitmap) text
+  that is the same, read-only text which
+  appears on each card that uses the background.
+  When this option is checked,
+  the "Don't Search" option is also required to be checked.
 
-  TODO: Describe using the Auto Select option.
+TODO: Describe using the Auto Select option.
 
-- Click the Browse tool (hand with pointing finger).
-- Click the field.
-- Enter text.
-- For read-only text, open the "Field Info" dialog again
-  and check the "Lock Text" checkbox.
+1. Click the Browse tool (hand with pointing finger).
+1. Click the field.
+1. Enter text.
+1. For read-only text, open the "Field Info" dialog again
+   and check the "Lock Text" checkbox.
+
+### Editing Fields
 
 To edit the properties of a field, select the Field tool,
 and double-click a field.
@@ -1369,6 +1375,16 @@ To change the default text style of a field:
   TODO: Changing this seems to have no effect!
 - Click the OK button.
 
+The text style does not affect the ability to
+search for matching text using the `find` command.
+
+To resize a field:
+
+- Select the Field tool.
+- Drag any corner of a field.
+  It is easiest to grab a corner by clicking just inside it
+  rather than trying to click directly on it.
+
 To change the text style of specific text
 in a single field on the current card to something
 different than the default text style for the field:
@@ -1378,8 +1394,32 @@ different than the default text style for the field:
 - Select a font style from the Style menu.
 - Select a font size from the Style menu.
 
-The text style does not affect the ability to
-search for matching text using the `find` command.
+The following keyboard shortcuts modify the style of the selected field:
+
+| Keyboard Shortcut | Style Change                          |
+| ----------------- | ------------------------------------- |
+| cmd-shift-a       | select all                            |
+| cmd-shift-p       | plain                                 |
+| cmd-shift-b       | bold                                  |
+| cmd-shift-i       | italic                                |
+| cmd-shift-u       | underline                             |
+| cmd-shift-o       | outline                               |
+| cmd-shift-s       | shadow                                |
+| cmd-shift-c       | condense (less space between letters) |
+| cmd-shift-x       | extend (more space between letters)   |
+| cmd-shift-g       | create a group from selected text     |
+| cmd-shift-<       | decrease font size                    |
+| cmd-shift->       | increase font size                    |
+| cmd-shift-[       | next font                             |
+| cmd-shift-]       | previous font                         |
+| cmd-shift-d       | return to defaults                    |
+
+### Copying and Moving Fields
+
+To create a copy of a field, option-drag it OR
+select Edit ... Copy Field (cmd-c),
+optionally navigate to another card (possibly in another stack),
+and select Edit ... Paste Field (cmd-v).
 
 Field text that is copied retains its text style.
 To paste the text without its text style,
@@ -1392,28 +1432,26 @@ To move a field within its card:
 - Drag the inside or edge of any field.
 - The ability to snap-to-grid is missing and would be useful for better layout.
 
-To resize a field:
-
-- Select the Field tool.
-- Drag any corner of a field.
-  It is easiest to grab a corner by clicking just inside it
-  rather than trying to click directly on it.
-
-To create a copy of a field, option-drag it OR
-select Edit ... Copy Field (cmd-c),
-optionally navigate to another card (possibly in another stack),
-and select Edit ... Paste Field (cmd-v).
-
 To move a field, to another card (possibly in another stack),
 select Edit ... Cut Field (cmd-x),
 navigate to the destination card,
 and select Edit ... Paste Field (cmd-v).
+
+### Deleting Fields
 
 To delete a field:
 
 - Click the Field tool.
 - Click an object to select it.
 - Press the delete key, or select Edit ... Cut Field, or press cmd-x.
+
+### Field Focus
+
+To move the focus to the next field in the current card, press the tab key.
+After the last field on the card is reached, pressing the tab key
+moves the focus to the first field on the card.
+
+### Field References
 
 Example field references include:
 
@@ -1445,12 +1483,11 @@ only gets its text, not an object reference.
 To execute a HyperTalk command that was entered in a field,
 run the command `do card field "{field-name}"`.
 
-To move the focus to the next field in the current card, press the tab key.
-After the last field on the card is reached, pressing the tab key
-moves the focus to the first field on the card.
+### Field Groups
 
 TODO: Learn about the "Group" text style which can be
 added to a group of words in a locked field.
+Select words and press cmd-shift-g to create a group.
 Scripts can listen for clicks on a group to take action
 such as treating the group as a hyperlink.
 This is covered in Volume 2 of "The Complete HyperCard 2.2 Handbook".

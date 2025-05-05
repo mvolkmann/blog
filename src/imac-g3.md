@@ -173,6 +173,17 @@ To clean the top and bottom parts of the plastic case of an iMac G3 computer:
 
 To disassemble, clean, and reassemble the keyboard, see this {% aTargetBlank
 "https://www.youtube.com/watch?v=dnO3kCGxdgY", "YouTube video" %}.
+
+To clean the key caps and the area beneath all the keys,
+gently pop them off with something like a butter knife.
+
+There are three phillips screws on the top side of the keyboard
+that need to be removed. They are under the caps lock key,
+the semicolon key, and the 6 key on the numeric keypad.
+
+There are four screws on the bottom of the keyboard that need to be removed
+with a 1.3mm allen wrench. You likely don't have one that small!
+
 From 7:36 to 8:28 in the video he struggles to remove a hidden screw.
 It is not necessary to use heat and pull back the sticker.
 It is located 15mm to the left of the Apple logo on the sticker
@@ -180,6 +191,15 @@ and can be seen from the top edge of the keyboard.
 Poke the point of a razor knife directly over the top of the screw
 and gently turn it to create a small hole in the sticker
 through which it can be unscrewed.
+
+At this point the back of the keyboard case can be removed, but not easily.
+From the top side of the keyboard,
+pry the top edge that runs between the two USB ports free.
+Then work your way down the sides with a thin piece of metal
+until you reach the front edge of the keyboard.
+Continue using the thin piece of metal to pop the top plastic piece
+free from the tabs that snap it into place,
+being careful not to crack the case.
 
 <img alt="iMac G3 keyboard screw hole" style="width: 70%"
   src="/blog/assets/imac-g3-keyboard-screw-hole.jpg?v={{pkg.version}}">
