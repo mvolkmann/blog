@@ -1342,7 +1342,13 @@ To add a field to the current card:
   without a way to scroll the text to see that content
 - Auto Select: turns a field into a list selection
   (see Demos ... List Selection below)
-- Multiple Lines: enables enter
+- Multiple Lines:
+  This option is only available when "Auto Select" is checked.
+  When checked, multiple lines can be selected when the shift key is held down.
+  The lines must be contiguous.
+  The expression "the selectedText" only returns the first selected line.
+  The expression "the selectedLines" returns a string
+  that matches the pattern "line {i} to {j} of card field {n}".
 - Wide Margins: adds a top margin of about half character height
   along with left and right margins of about a character width,
   but no bottom margin
