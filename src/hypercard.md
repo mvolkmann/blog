@@ -79,6 +79,7 @@ objects with higher part numbers are drawn on top of
 objects with lower part numbers.
 All objects in the card domain are drawn on top of
 all objects in the background domain.
+For more detail, see the "Layers" section below.
 
 A background can be shared by any number of cards in its stack.
 Objects in the background of the current card that are
@@ -1595,7 +1596,7 @@ So buttons and fields are never obscured by painted objects.
 The order in which elements are created determines their initial stacking order,
 with the newer elements on top of older elements.
 
-The stacking order of buttons and fields can be changed.
+The stacking order of buttons and fields with their domain can be changed.
 To do so:
 
 - Select the Button or Field tool.

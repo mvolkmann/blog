@@ -577,3 +577,10 @@ To watch a DVD:
    requiring a reboot. Force quit did not work.
 
 To eject a disc when booting, hold down the mouse button.
+
+All audio, including that from CDs and DVDs,
+can be played on external speakers by plugging them into
+one of the headphone jacks on the front of the iMac G3.
+There are two headphone jacks to allow
+two people to listen on headphones at the same time.
+Later versions of the iMac only have one headphone jack.
