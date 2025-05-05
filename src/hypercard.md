@@ -3033,43 +3033,22 @@ Create fields like the following:
 
 Note that currently "Lock Text" is not checked in the "colorList" field.
 Enter the options in the "colorList" field on separate lines.
-Now open the Field Info dialog for the "colorList" field and
+Then open the Field Info dialog for the "colorList" field and
 check the "Lock Text" checkbox so users cannot modify it.
-
-Add the following script to the stack
-to initialize the global variable `gColorOptionsIndex" field:
-
-```text
-on openStack
-  put 0 into gColorListIndex
-end openStack
-```
 
 Add the following script to the "colorList" field:
 
 ```text
 on mouseUp
-  global gColorListIndex
-
-  -- Reset all the text in me to plain style.
-  put the number of chars in me into length
-  set the textStyle of char 1 to length of me to plain
-
-  -- Get the currently selected line number from me.
-  put word 2 of the clickLine into index
-
-  if index is gColorListIndex then
+  global gCurrentColor
+  get the selectedText of me
+  if it is gCurrentColor then
+    put empty into gColorListIndex
     put empty into card field selectedColor
-    put 0 into gColorListIndex
+    select empty -- should clear the selection, but doesn't!
   else
-    -- Display the selected option in another field.
-    put line index of me into card field selectedColor
-
-    -- Make the selected option bold.
-    set the textStyle of line index of me to bold
-
-    -- Save the selected index.
-    put index into gColorListIndex
+    put it into gCurrentColor
+    put it into card field selectedColor
   end if
 end mouseUp
 ```
