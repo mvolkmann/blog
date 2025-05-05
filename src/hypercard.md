@@ -1340,7 +1340,8 @@ To add a field to the current card:
 - Lock Text: makes the content read-only
 - Don't Wrap: prevents words from wrapping when they go past the right edge,
   without a way to scroll the text to see that content
-- Auto Select: enables implementing selection lists (described later)
+- Auto Select: turns a field into a list selection
+  (see Demos ... List Selection below)
 - Multiple Lines: enables enter
 - Wide Margins: adds a top margin of about half character height
   along with left and right margins of about a character width,
@@ -1363,8 +1364,6 @@ To add a field to the current card:
   appears on each card that uses the background.
   When this option is checked,
   the "Don't Search" option is also required to be checked.
-
-TODO: Describe using the Auto Select option.
 
 1. Click the Browse tool (hand with pointing finger).
 1. Click the field.
