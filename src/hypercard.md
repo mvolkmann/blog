@@ -1283,7 +1283,10 @@ To add a field to the current card:
 <img alt="HyperCard Field Info" style="width: 50%"
     src="/blog/assets/hypercard-field-info.png?v={{pkg.version}}">
 
-1. Enter a Field name.
+1. Enter a "Field Name" which can be used to
+   refer to the field in scripts and reports.
+   This can be up to 30 characters and can include
+   spaces, numbers, and punctuation, but cannot be all numbers.
 1. Select a field style from the following options:
 
 - Transparent: no border and can see through to objects behind it
