@@ -490,6 +490,9 @@ To create a PNG file for an icon:
 
 - Launch ResEdit.
 - Open the file that contains the icon resource.
+  When copying resources from the `System` file,
+  avoid damaging that file by making a copy of it in the Finder
+  and opening the copy in ResEdit.
 - Double-click the icon resource.
 - Press cmd-a to select all the pixels.
 - Press cmd-c to copy the icon.
