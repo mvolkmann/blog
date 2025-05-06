@@ -1054,6 +1054,9 @@ To add a button to the current card.
    - It will be unchecked if the button was created with cmd-drag.
 
 1. Optionally click the "Icon..." button to add an icon to the button.
+   Select an icon.
+   Optionally click the Edit button to edit the pixels in the icon.
+   Click the OK button to use the selected icon.
    Icon sizes cannot be modified.
 
 1. Optionally cause the button to highlight when it is clicked
@@ -1062,6 +1065,26 @@ To add a button to the current card.
 1. Optionally click the "Script..." button.
 
    Enter the command(s) to execute when the button is clicked.
+
+### Adding Icons
+
+To copy an icon from another stack or application (source)
+and make it available in your stack (destination):
+
+1. Install the ResEdit application if not already installed.
+1. Launch ResEdit.
+1. Open the source stack or application in ResEdit.
+1. Double-click on "ICON" to view those resources.
+1. Click a resource to select it.
+1. Press cmd-c to copy it.
+1. Open the destination stack in ResEdit.
+1. Double-click on "ICON" to view those resources.
+1. Press cmd-v to paste the copied resource.
+1. Press cmd-s to save the changes.
+1. Press cmd-q to quit ResEdit.
+
+The copied icon should now be available when the "Icon..." button
+in a "Button Info" dialog is clicked.
 
 ### Finding Buttons
 
