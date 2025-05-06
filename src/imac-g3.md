@@ -474,6 +474,28 @@ In the dialog that appears, specify:
 When capturing a selection, adjust the rectangle to capture
 and press the return key.
 
+## Sounds
+
+To record a new alert sound:
+
+1. Open the "Sound" control panel.
+1. Click the "Input" tab.
+1. Select "Built-in Mic".
+1. Check the "Check signal level" checkbox.
+1. Say something to verify that the microphone is working.
+1. If the "Level" meter doesn't move, adjust the "Gain" slider.
+1. Click the "Alert" tab.
+1. Click the "New Sound" button.
+1. Click the "Record" button.
+1. Make the desired sound.
+1. Click the "Stop" button.
+1. Click the "Play" button to verify that the sound was captured.
+1. Click the "Save" button.
+
+All the alert sounds are stored in "snd" resources
+inside the `System` file which is in the `System Folder` directory.
+These can be copied to HyperCard stacks using ResEdit.
+
 ## AppleWorks
 
 AppleWorks is an office suite from Apple that supersedes ClarisWorks.

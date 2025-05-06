@@ -1780,6 +1780,8 @@ To play a sound file, use the `play file {sound-file-path}` command.
 Supposedly the AIFF sound format is the most reliable.
 TODO: I could not get this to work!
 
+To record new sounds, see the "Sounds" section in the "iMac G3" blog page.
+
 ## Backgrounds
 
 Every stack has at least one background, but it can be empty.
