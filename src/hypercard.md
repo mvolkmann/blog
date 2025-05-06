@@ -3101,7 +3101,8 @@ on mouseUp
   if it is gCurrentColor then
     put empty into gColorListIndex
     put empty into card field selectedColor
-    select empty -- should clear the selection, but doesn't!
+    -- select empty -- should clear the selection, but doesn't!
+    select line 0 of me
   else
     put it into gCurrentColor
     put it into card field selectedColor
