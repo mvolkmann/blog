@@ -468,6 +468,14 @@ In the dialog that appears, specify:
 When capturing a selection, adjust the rectangle to capture
 and press the return key.
 
+## AppleWorks
+
+AppleWorks is an office suite from Apple that supersedes ClarisWorks.
+The final version was 6.2.9.
+It can be downloaded from {% aTargetBlank
+"https://www.macintoshrepository.org/21008-appleworks-6-2-9-691-4718-a-cd-",
+"Macintosh Repository" %}.
+
 ## Mac OS 9 Tips
 
 To simulate a right mouse button click in order to get context-sensitive menus,

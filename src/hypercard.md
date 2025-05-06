@@ -1066,6 +1066,11 @@ To add a button to the current card.
 
    Icon sizes cannot be modified.
 
+   The active area of all buttons that receives mouse clicks
+   is always a rectangle.
+   This is the case even if the button has the "Transparent" style
+   and has a non-rectangular icon.
+
 1. Optionally cause the button to highlight when it is clicked
    by checking the "Auto Hilite" checkbox.
 
