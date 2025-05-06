@@ -1054,9 +1054,16 @@ To add a button to the current card.
    - It will be unchecked if the button was created with cmd-drag.
 
 1. Optionally click the "Icon..." button to add an icon to the button.
+
+   This opens a "Choose Icon" dialog.
    Select an icon.
+   Its ID, name and source file are displayed at the top of the dialog.
+   For example, most of the icons come from ICON resources
+   defined in the "HyperCard" app itself.
+   Some icons come from ICON resources in the "Home" stack.
    Optionally click the Edit button to edit the pixels in the icon.
    Click the OK button to use the selected icon.
+
    Icon sizes cannot be modified.
 
 1. Optionally cause the button to highlight when it is clicked
@@ -1085,6 +1092,18 @@ and make it available in your stack (destination):
 
 The copied icon should now be available when the "Icon..." button
 in a "Button Info" dialog is clicked.
+
+The Apple logo icon is an icn4 and icn8 resource
+found in Macintosh HD:System Folder:System.
+To copy this icon:
+
+- Select the `System` file.
+- Press cmd-d to duplicate it, creating the file `System copy`.
+- Launch ResEdit.
+- Open the file `System copy`.
+- Double click the resource type "icn8".
+- Click the resource with id -16386 to select it.
+- Press cmd-c to copy it.
 
 ### Finding Buttons
 

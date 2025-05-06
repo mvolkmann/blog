@@ -373,17 +373,22 @@ On the computer running Mac OS 9:
    because there will never be an updates.
 1. Click the "Save" button.
 1. Press cmd-q to quit the setup app.
-1. Double-click "NetPresenz Setup" to start the FTP server.
+1. Double-click "NetPresenz" to start the FTP server.
+
+Once this has been done the first time,
+only the last step is required to start the FTP server.
 
 On computers running macOS X:
 
 1. Open the Finder.
 1. Select Go ... Connect to Server...
-1. Enter "ftp://{ip-address}" where ip-address is that of the Mac OS 9 computer.
+1. Enter or select "ftp://{ip-address}"
+   where ip-address is that of the Mac OS 9 computer.
 1. Click the "+" button in the lower-left to remember this server.
-1. Enter the password for the Mac OS 9 computer.
+1. Change "Name" to a username on the Mac OS 9 computer.
+1. Enter the password for for that username.
 1. Check the "Remember this password in my keychain" checkbox.
-1. Click the "Connect" button.
+1. Click the "Connect" button to open a new Finder window.
 1. Read the shared files.
 
 Writing to the Mac OS 9 computer requires using
