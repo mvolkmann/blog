@@ -966,6 +966,8 @@ so be careful with these changes!
 
 ## Buttons
 
+Buttons perform some action defined by the stack author when they are clicked.
+
 ### Button Types
 
 There are four basic kinds of buttons:
@@ -1509,6 +1511,8 @@ To move a field, to another card (possibly in another stack):
 
 To move a field to the opposite domain (background or card),
 cut it from its current domain, switch to the other domain, and paste it.
+To retain text already entered in the field,
+hold down the shift key while pasting.
 
 ### Resizing Fields
 
