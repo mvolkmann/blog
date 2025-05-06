@@ -476,6 +476,37 @@ It can be downloaded from {% aTargetBlank
 "https://www.macintoshrepository.org/21008-appleworks-6-2-9-691-4718-a-cd-",
 "Macintosh Repository" %}.
 
+To install AppleWorks:
+
+- Launch the "Toast Titanium" app.
+- Selecting Utilities ... Mount Disc Image...
+- Select the downloaded `.toast` file and click the "Open" button.
+- Double-click the disc image "AppleWorks Mac 6.2.9".
+- Double-click "US and Canadian Installer" or "International English Installer"
+  and perform the installation.
+- Restart the computer.
+
+To create a PNG file for an icon:
+
+- Launch ResEdit.
+- Open the file that contains the icon resource.
+- Double-click the icon resource.
+- Press cmd-a to select all the pixels.
+- Press cmd-c to copy the icon.
+- Launch AppleWorks.
+- Click the "Painting" button.
+- Press cmd-v to paste the icon.
+- Drag the icon to the upper-left corner.
+- Press cmd-s to save the icon.
+- Optionally change the file destination which defaults to "Desktop".
+- Enter a name with the file extension `.png`.
+- Change the "File Format" to "PNG [QT]".
+- Click the "Save" button.
+- Press cmd-q to quit AppleWorks.
+- Click the "Don't Save" button.
+- Return to ResEdit.
+- Press cmd-q to quit ResEdit.
+
 ## Mac OS 9 Tips
 
 To simulate a right mouse button click in order to get context-sensitive menus,
