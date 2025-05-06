@@ -1749,7 +1749,15 @@ The `play` command takes the following arguments:
 
 For example, `play harpsichord tempo 120 "c4 e g4 e c5 q"`
 
-To copy a sound response (type "snd") from another application or stack:
+Sound resources can be copied from other files such as:
+
+- the `System` file in the directory `System Folder`
+- application files (ex. cow in
+  HyperCard 2.4:Your Tour of HyperCard:HyperCard Tour)
+- a HyperCard stack (ex. "Ghost Laugh" in
+  Documents:HyperCard Stacks:Haunted House:The Haunted House 1.0.2)
+
+To copy a sound response (type "snd") from another file:
 
 1. Install the ResEdit application if not already installed.
 1. Launch ResEdit.
@@ -1764,6 +1772,9 @@ To copy a sound response (type "snd") from another application or stack:
 
 The copied sound can now be played
 with the command `play "{snd-resource-name}"`.
+In a handler, consider using the command `play stop`
+before this command to stop any sound that is already playing
+before playing another.
 
 To play a sound file, use the `play file {sound-file-path}` command.
 Supposedly the AIFF sound format is the most reliable.
