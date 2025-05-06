@@ -1059,7 +1059,8 @@ To add a button to the current card.
 
 ### Finding Buttons
 
-To find all the buttons on the current card, press and hold cmd-option.
+To find all the buttons on the current card when in Browse mode,
+press and hold cmd-option.
 This adds a dotted outline around all the buttons
 that disappears when the keys are released.
 This is particularly useful for finding transparent buttons.
@@ -1093,14 +1094,17 @@ Buttons have the following properties:
 - `style`: one of the dropdown values
 - `visible`: whether it is visible
 
-### Moving and Resizing Buttons
+### Moving Buttons
 
 To move a button within its card:
 
 1. Select the Button tool.
 1. Drag the inside or edge of any button.
 
-   The ability to snap-to-grid is missing and would be useful for better layout.
+To constrain the movement to be only horizontal or only vertical,
+hold down the shift key while dragging.
+
+The ability to snap-to-grid is missing and would be useful for better layout.
 
 To move a button to another card (possibly in another stack):
 
@@ -1108,13 +1112,20 @@ To move a button to another card (possibly in another stack):
 1. Navigate to the destination card.
 1. Select Edit ... Paste Button (cmd-v).
 
+To move a button to the opposite domain (background or card),
+cut it from its current domain, switch to the other domain, and paste it.
+
+### Resizing Buttons
+
 To resize a button:
 
 1. Select the Button tool.
 1. Drag any corner of a button.
-
    It is easiest to grab a corner by clicking just inside it
    rather than trying to click directly on it.
+
+To constrain the resizing to be only horizontal or only vertical,
+hold down the shift key while dragging.
 
 ### Copying Buttons
 
@@ -1122,6 +1133,10 @@ To create a copy of a button, option-drag it OR
 select Edit ... Copy Button (cmd-c),
 optionally navigate to another card (possibly in another stack),
 and select Edit ... Paste Button (cmd-v).
+
+If the shift key is held down during option-drag,
+the movement of the copy is constrained to be only horizontal or only vertical.
+This simplifies creating a perfectly aligned row or column of buttons.
 
 ### Deleting Buttons
 
@@ -1385,11 +1400,12 @@ To add a field to the current card:
 
 ### Finding Fields
 
-One way to find fields on the current card is to
-move the cursor around the card and notice when the cursor changes
+One way to find fields on the current card when in Browse mode
+is to move the cursor around the card and notice when the cursor changes
 from the browser cursor (hand with pointing index finger) to an I-beam.
 
-A better way to find fields is to press and hold cmd-shift-option.
+A better way to find fields when in Browse mode
+is to press and hold cmd-shift-option.
 This adds a dotted outline around all the fields
 that disappears when the keys are released.
 This is particularly useful for finding transparent fields.
@@ -1439,13 +1455,6 @@ To change the default text style of a field:
   TODO: Changing this seems to have no effect!
 - Click the OK button.
 
-To resize a field:
-
-- Select the Field tool.
-- Drag any corner of a field.
-  It is easiest to grab a corner by clicking just inside it
-  rather than trying to click directly on it.
-
 ### Text Style of Selected Text
 
 To change the text style of selected text
@@ -1480,28 +1489,54 @@ The following keyboard shortcuts modify the style of the selected field:
 The text style does not affect the ability to
 search for matching text using the `find` command.
 
-### Copying and Moving Fields
+### Moving Fields
+
+To move a field within its card:
+
+1. Select the Field tool.
+1. Drag the inside or edge of any field.
+
+To constrain the movement to be only horizontal or only vertical,
+hold down the shift key while dragging.
+
+The ability to snap-to-grid is missing and would be useful for better layout.
+
+To move a field, to another card (possibly in another stack):
+
+1. Select Edit ... Cut Field (cmd-x).
+1. Navigate to the destination card.
+1. Select Edit ... Paste Field (cmd-v).
+
+To move a field to the opposite domain (background or card),
+cut it from its current domain, switch to the other domain, and paste it.
+
+### Resizing Fields
+
+To resize a field:
+
+- Select the Field tool.
+- Drag any corner of a field.
+  It is easiest to grab a corner by clicking just inside it
+  rather than trying to click directly on it.
+
+To constrain the resizing to be only horizontal or only vertical,
+hold down the shift key while dragging.
+
+### Copying Fields
 
 To create a copy of a field, option-drag it OR
 select Edit ... Copy Field (cmd-c),
 optionally navigate to another card (possibly in another stack),
 and select Edit ... Paste Field (cmd-v).
 
+If the shift key is held down during option-drag,
+the movement of the copy is constrained to be only horizontal or only vertical.
+This simplifies creating a perfectly aligned row or column of fields.
+
 Field text that is copied retains its text style.
 To paste the text without its text style,
 instead using the text style of the character before where it is pasted,
 hold down the shift key when selecting Edit ... Paste or press cmd-shift-v.
-
-To move a field within its card:
-
-- Select the Field tool.
-- Drag the inside or edge of any field.
-- The ability to snap-to-grid is missing and would be useful for better layout.
-
-To move a field, to another card (possibly in another stack),
-select Edit ... Cut Field (cmd-x),
-navigate to the destination card,
-and select Edit ... Paste Field (cmd-v).
 
 ### Deleting Fields
 
