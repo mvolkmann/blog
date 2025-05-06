@@ -18,6 +18,8 @@ The highlights are:
 
 - Apple iMac G3/500 DV SE (Summer 2000)
 - Graphite color
+- Pro Keyboard
+- Pro Mouse
 - 15" CRT display
 - native resolution 800x600
 - 30 GB hard drive
@@ -155,6 +157,8 @@ The steps to install a new PRAM battery are shown below.
 
 ## Cleaning
 
+### Plastic Case
+
 To clean the top and bottom parts of the plastic case of an iMac G3 computer:
 
 1. Remove the bottom of the plastic case as described above.
@@ -172,7 +176,9 @@ To clean the top and bottom parts of the plastic case of an iMac G3 computer:
 1. Reattach the top of the plastic case.
 1. Reattach the bottom of the plastic case.
 
-To disassemble, clean, and reassemble the keyboard, see this {% aTargetBlank
+### Pro Keyboard
+
+To disassemble, clean, and reassemble the Pro Keyboard, see this {% aTargetBlank
 "https://www.youtube.com/watch?v=dnO3kCGxdgY", "YouTube video" %}.
 
 To clean the key caps and the area beneath all the keys,
