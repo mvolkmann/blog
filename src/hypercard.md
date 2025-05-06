@@ -514,7 +514,7 @@ All transparent parts of a card foreground display
 content from the background at the same location.
 Typically many cards share a background.
 
-### Card Creation
+### Creating Cards
 
 To add a card to the current stack, select Edit ... New Card or press cmd-n.
 The new card will:
@@ -581,7 +581,7 @@ This contains buttons that map to the each of the Go menu items except "Scroll".
 <img alt="HyperCard Navigator Palette" style="width: 20%"
   src="/blog/assets/hypercard-navigator-palette.png?v={{pkg.version}}">
 
-### Card Saving
+### Saving Cards
 
 There is no explicit save command.
 Changes to the content of a field are automatically saved
@@ -594,7 +594,7 @@ when any of the following occur:
 - Navigation to another card occurs.
 - A new card is created.
 
-### Card Copying
+### Copying Cards
 
 To copy the current card and paste the copy after another card:
 
@@ -610,7 +610,7 @@ If the card is pasted into a different stack
 that does not already contain the background of the card,
 that background will be added to the stack.
 
-### Card Moving
+### Moving Cards
 
 To move the current card to a new location in the stack:
 
@@ -625,7 +625,7 @@ If the card is pasted into a different stack
 that does not already contain the background of the card,
 that background will be added to the stack.
 
-### Card Deletion
+### Deleting Cards
 
 To delete the current card, select Edit ... Delete Card or press cmd-delete.
 Be careful because no confirmation is requested!
@@ -642,11 +642,11 @@ To navigate to a different card and dismiss the dialog, click its thumbnail.
 To remain on the current card and dismiss the dialog,
 click the background of the dialog.
 
-### Card Marking
+### Marking Cards
 
 TODO: Discuss "marking" cards and what you can do with marked cards.
 
-### Card Finding
+### Finding Cards
 
 To search for an occurrence of text, select Go .. Find... or press cmd-f.
 Then enter search text inside the provided double quotes
@@ -1310,9 +1310,14 @@ The choice is specified in the "Field Info" dialog for each field.
 To add a field to the current card:
 
 1. Select Objects ... New Field.
+   This adds a new field to the center of the current card
+   that is sized to hold five lines of text.
+   and has its style is set to Rectangle.
    Alternatively, select the Field tool and
    cmd-drag to indicate the location and size of a new field.
-   This adds a new field to the center of the current card.
+   This creates a field whose style is set to Transparent.
+   Both approaches create a field with
+   a default font of Geneva, 12 points.
 
 1. Double-click the field to open its "Button Info" dialog.
 
