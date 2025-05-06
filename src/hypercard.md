@@ -1090,12 +1090,11 @@ and make it available in your stack (destination):
 1. Click a resource to select it.
 1. Press cmd-c to copy it.
 1. Open the destination stack in ResEdit.
-1. Double-click on "ICON" to view those resources.
-1. Press cmd-v to paste the copied resource.
+1. Press cmd-v to paste the copied "ICON" resource.
 1. Press cmd-s to save the changes.
 1. Press cmd-q to quit ResEdit.
 
-The copied icon should now be available when the "Icon..." button
+The copied icon will be available when the "Icon..." button
 in a "Button Info" dialog is clicked.
 
 The Apple logo icon is an icn4 and icn8 resource
@@ -1750,8 +1749,25 @@ The `play` command takes the following arguments:
 
 For example, `play harpsichord tempo 120 "c4 e g4 e c5 q"`
 
-To play a sound file, use the `play file` command.
-TODO: What sound formats are supported?
+To copy a sound response (type "snd") from another application or stack:
+
+1. Install the ResEdit application if not already installed.
+1. Launch ResEdit.
+1. Open the source stack or application in ResEdit.
+1. Double-click on "snd" to view its sound resources.
+1. Click a resource to select it.
+1. Press cmd-c to copy it.
+1. Open the destination stack in ResEdit.
+1. Press cmd-v to paste the copied "snd" resource.
+1. Press cmd-s to save the changes.
+1. Press cmd-q to quit ResEdit.
+
+The copied sound can now be played
+with the command `play "{snd-resource-name}"`.
+
+To play a sound file, use the `play file {sound-file-path}` command.
+Supposedly the AIFF sound format is the most reliable.
+TODO: I could not get this to work!
 
 ## Backgrounds
 
