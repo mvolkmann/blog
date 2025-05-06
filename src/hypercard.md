@@ -968,6 +968,10 @@ so be careful with these changes!
 
 Buttons perform some action defined by the stack author when they are clicked.
 
+In HyperCard, only fields received focus, not buttons like in HTML.
+So the part numbers of buttons only affect stacking order,
+not tab navigation.
+
 ### Button Types
 
 There are four basic kinds of buttons:
@@ -1116,6 +1120,8 @@ To move a button to another card (possibly in another stack):
 
 To move a button to the opposite domain (background or card),
 cut it from its current domain, switch to the other domain, and paste it.
+
+When a button is moved to another stack, it is given a new ID and part number.
 
 ### Resizing Buttons
 
@@ -1514,6 +1520,8 @@ cut it from its current domain, switch to the other domain, and paste it.
 To retain text already entered in the field,
 hold down the shift key while pasting.
 
+When a field is moved to another stack, it is given a new ID and part number.
+
 ### Resizing Fields
 
 To resize a field:
@@ -1552,7 +1560,8 @@ To delete a field:
 
 ### Field Focus
 
-To move the focus to the next field in the current card, press the tab key.
+To move the focus to the next field in the current card,
+defined by their part numbers, press the tab key.
 After the last field on the card is reached, pressing the tab key
 moves the focus to the first field on the card.
 
@@ -1661,11 +1670,8 @@ To do so:
 
 - Select the Button or Field tool.
 - Selecting the button or field whose order will be changed.
-- Select Objects ... Bring Closer (cmd-plus)
-  or Objects ... Send Farther (cmd-minus).
-
-This changes the "Bkgnd part number" or "Card part number" values
-of the elements by one.
+- Select Objects ... Bring Closer (cmd-plus) to increase the part number.
+- Select Objects ... Send Farther (cmd-minus) to decrease the part number.
 
 To move an object to the extreme end of the stacking order,
 hold down the shift key when issuing the command.
