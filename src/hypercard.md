@@ -3236,6 +3236,8 @@ This version of HyperCard ...
 - {% aTargetBlank "https://en.wikipedia.org/wiki/HyperCard",
   "HyperCard on Wikipedia" %}
 - {% aTargetBlank "https://hypercard.org", "hypercard.org" %}
+- {% aTargetBlank "https://www.youtube.com/watch?v=fFX1otbE_wU",
+  "NOTACON 5: Wasn't HyperCard Cool?" %} by Drew Ivan
 - {% aTargetBlank
   "https://www.youtube.com/playlist?list=PL1GQPxft2cQh_KsYz399Hlq7FHPp7XhBJ",
   "Eric's Edge" %} YouTube videos on HyperCard
