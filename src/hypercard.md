@@ -1053,16 +1053,23 @@ To add a button to the current card.
    - It will be checked if the button was created with "New Button".
    - It will be unchecked if the button was created with cmd-drag.
 
-1. Optionally click the "Icon..." button to add an icon to the button.
+1. To add an icon to the button or remove its icon, click the "Icon..." button.
 
    This opens a "Choose Icon" dialog.
-   Select an icon.
-   Its ID, name and source file are displayed at the top of the dialog.
-   For example, most of the icons come from ICON resources
-   defined in the "HyperCard" app itself.
-   Some icons come from ICON resources in the "Home" stack.
-   Optionally click the Edit button to edit the pixels in the icon.
-   Click the OK button to use the selected icon.
+
+   To add an icon:
+
+   - Select an icon.
+
+     Its ID, name and source file are displayed at the top of the dialog.
+     For example, most of the icons come from ICON resources
+     defined in the "HyperCard" app itself.
+     Some icons come from ICON resources in the "Home" stack.
+     Optionally click the Edit button to edit the pixels in the icon.
+
+   - Click the OK button to use the selected icon.
+
+   To remove the current icon, click the "None" button.
 
    Icons are all 32x32 pixels. Their sizes cannot be modified.
 
@@ -1095,10 +1102,20 @@ add all custom icons to that stack to ensure that the users will have them.
 To create a new, custom icon:
 
 1. Select Edit ... Icon... to open an "Icon Editor" dialog.
-1. Select the icon that is closest to what will be created.
+1. To start from an existing icon that is defined in the current stack,
+   scroll through them using the scrollbar at the bottom, or use
+   the keyboard shortcuts cmd-1 (first), cmd-2 (previous),
+   cmd-3 (next), and cmd-4 (last).
 1. Enter a name.
 1. Enter a unique ID.
 1. Modify the pixels as desired.
+   - To clear all the pixels, select Icon ... Erase.
+   - To copy a 32x32 black and white swatch from anywhere on the screen,
+     select Icon ... Pickup, hover over the area to copy, and click.
+   - To undo all the changes made to the pixels
+     before clicking the "OK" button, select Icon ... Revert.
+   - To commit pixel changes so they cannot be undone by
+     selecting Icon ... Revert, select Icon ... Keep.
 1. Click the "Save" button.
 
 To modify an existing icon:
@@ -1141,6 +1158,17 @@ To copy this icon:
 - Double click the resource type "icn8".
 - Click the resource with id -16386 to select it.
 - Press cmd-c to copy it.
+
+### Deleting Icons
+
+To delete icons from a stack:
+
+- Launch ResEdit.
+- Open the stack file.
+- Double-click the "ICON" resource type.
+- For each icon to be deleted, select it and press the delete key.
+- Press cmd-s to save the changes.
+- Press cmd-q to quit ResEdit.
 
 ### Finding Buttons
 
