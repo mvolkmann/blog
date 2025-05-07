@@ -994,10 +994,6 @@ Each of the supported button styles are shown below.
 <img alt="HyperCard button types" style="width: 50%"
   src="/blog/assets/hypercard-button-types.png?v={{pkg.version}}">
 
-Oval buttons are transparent and do not display their border.
-They only differ from Transparent buttons in
-the shape of their target (clickable) area.
-
 ### Creating Buttons
 
 To add a button to the current card.
@@ -1070,7 +1066,8 @@ To add a button to the current card.
      end returnKey
      ```
 
-   - Oval: like Transparent, but the target area is an oval instead of a rectangle
+   - Oval: like Transparent, but the target (clickable) area
+     is an oval instead of a rectangle
 
    - Popup: a dropdown containing options
 
