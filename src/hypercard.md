@@ -994,19 +994,6 @@ Each of the supported button styles are shown below.
 <img alt="HyperCard button types" style="width: 50%"
   src="/blog/assets/hypercard-button-types.png?v={{pkg.version}}">
 
-Standard and Default buttons conform to
-the Macintosh interface guidelines for buttons.
-There should be at most one Default button per card
-and a card script must be added to
-trigger the button when the return key is pressed.
-For example:
-
-```text
-on returnKey
-  send "mouseUp" to card button "My Default Button"
-end returnKey
-```
-
 Oval buttons are transparent and do not display their border.
 They only differ from Transparent buttons in
 the shape of their target (clickable) area.
@@ -1063,9 +1050,25 @@ To add a button to the current card.
 
    - Radio Button: for a set of mutually exclusive choices
 
+     Check "Show Name" to display a label for the radio button to its right.
+
+     Select the same "Family" number (1-15) to each radio button
+     on the card that is a member of the same group.
+
    - Standard: conforms to Macintosh interface guidelines for non-default buttons
 
    - Default: conforms to Macintosh interface guidelines for default buttons
+
+     There should be at most one Default button per card
+     and a card script must be added to
+     trigger the button when the return key is pressed.
+     For example:
+
+     ```text
+     on returnKey
+       send "mouseUp" to card button "My Default Button"
+     end returnKey
+     ```
 
    - Oval: like Transparent, but the target area is an oval instead of a rectangle
 
@@ -1108,6 +1111,10 @@ To add a button to the current card.
 1. Optionally click the "Script..." button.
 
    Enter the command(s) to execute when the button is clicked.
+
+   Buttons with the style "Check Box" and "Radio Button"
+   do not typically have an associated script.
+   Their state is usually queried by the script of another button.
 
 ### Adding Icons
 
