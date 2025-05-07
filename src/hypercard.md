@@ -1161,7 +1161,10 @@ To copy this icon:
 
 ### Deleting Icons
 
-To delete icons from a stack:
+The HyperCard app can remove icons from buttons,
+but cannot delete icons from the resources of a stack.
+
+To delete icon resources from a stack:
 
 - Launch ResEdit.
 - Open the stack file.
