@@ -1040,7 +1040,8 @@ To add a button to the current card.
 
      Check "Show Name" to display a label for the checkbox to its right.
 
-     Check "Auto Hilite" to enable toggling the checkbox
+     It doesn't make sense to uncheck the "Auto Hilite" checkbox.
+     Check it enables toggling the checkbox
      by clicking either the checkbox or the label.
      This toggles the value of its `hilite` property
 
@@ -1049,6 +1050,7 @@ To add a button to the current card.
    - Radio Button: for a set of mutually exclusive choices
 
      Check "Show Name" to display a label for the radio button to its right.
+     The "Auto Hilite" checkbox cannot be unchecked for radio buttons.
 
      Select the same "Family" number (1-15) to each radio button
      on the card that is a member of the same group.
@@ -1108,8 +1110,12 @@ To add a button to the current card.
    This is the case even if the button has the "Transparent" style
    and has a non-rectangular icon.
 
-1. Optionally cause the button to highlight when it is clicked
-   by checking the "Auto Hilite" checkbox.
+1. Optionally check the "Auto Hilite" checkbox to
+   cause the button to highlight when it is clicked.
+
+   Highlighting toggles the colors of the pixels for the button
+   when the mouse button is down and
+   restores the colors when the mouse button is released.
 
 1. Optionally click the "Script..." button.
 
@@ -1402,6 +1408,13 @@ use the command `get [the] hilite of {button-reference}`.
 
 To put the value of a check box into the message box for testing,
 use the command `put [the] hilite of {button-reference} into message [box]`.
+
+The "Button Info" dialog for background checkboxes contains
+the checkbox "Shared Hilite" which is not present for card checkboxes.
+When this is checked, the state of the checkbox is
+shared across all cards that use the background.
+When this is unchecked, each card that uses the background
+has its own state for the checkbox.
 
 ### Radio Buttons
 
