@@ -1081,6 +1081,10 @@ To add a button to the current card.
 
      For more detail, see the "Popups" section below.
 
+1. If the selected style is "Radio Button",
+   select a Family number from 1 to 15
+   that is the same for all radio buttons in the group.
+
 1. Decide whether the button name should be displayed
    by checking or unchecking the "Show Name" checkbox.
 
@@ -1105,6 +1109,9 @@ To add a button to the current card.
    ```text
    set the enabled of {button-ref} to {true|false}
    ```
+
+1. Click the "Text Style..." button to open the "Text Properties" dialog.
+   This allows specifying the text style, alignment, font, and size.
 
 1. To add an icon to the button or remove its icon, click the "Icon..." button.
 
@@ -1131,9 +1138,13 @@ To add a button to the current card.
    This is the case even if the button has the "Transparent" style
    and has a non-rectangular icon.
 
-1. Optionally click the "Script..." button.
+1. Optionally click the "Script..." button
+   to open a dialog where a script can be added or modified.
 
-   Enter the command(s) to execute when the button is clicked.
+   Enter code that defines action handlers and functions.
+   Actions related to buttons include `mouseDown`, `mouseEnter`,
+   `mouseLeave`, `mouseUp`, `mouseWithin`.
+   The most commonly implemented handler is for the `mouseUp` action.
 
    Buttons with the style "Check Box" and "Radio Button"
    do not typically have an associated script.
@@ -1535,40 +1546,52 @@ To add a field to the current card:
 
 1. Select the desired checkbox options which include:
 
-- Lock Text: makes the content read-only
-- Don't Wrap: prevents words from wrapping when they go past the right edge,
-  without a way to scroll the text to see that content
-- Auto Select: automatically selects an entire line in the field
-  when any character in the line is clicked,
-  making it a list selection component (see Demos ... List Selection below)
-- Multiple Lines:
-  This option is only available when "Auto Select" is checked.
-  When checked, multiple lines can be selected when the shift key is held down.
-  The lines must be contiguous.
-  The expression "the selectedText" only returns the first selected line.
-  The expression "the selectedLines" returns a string
-  that matches the pattern "line {i} to {j} of card field {n}".
-- Wide Margins: adds a top margin of about half character height
-  along with left and right margins of about a character width,
-  but no bottom margin
-- Fixed Line Height: keeps the same default height for all lines
-  regardless of the font sizes used in the lines;
-  allows text to overlap vertically which seems bad
-- Show Lines: displays dotted lines that indicate
-  where each line of text can be entered
-- Auto Tab: moves focus to the next field when the return key is pressed
-  and the text cursor is on the last visible line of a non-scrolling field;
-  most useful in a series of single-line fields
-- Don't Search: prevents contents from being searched by `find` commands
-- Shared Text: displays read-only text in a background
+   - Lock Text: makes the content read-only
+   - Don't Wrap: prevents words from wrapping when they go past the right edge,
+     without a way to scroll the text to see that content
+   - Auto Select: automatically selects an entire line in the field
+     when any character in the line is clicked,
+     making it a list selection component (see Demos ... List Selection below)
+   - Multiple Lines:
+     This option is only available when "Auto Select" is checked.
+     When checked, multiple lines can be selected when the shift key is held down.
+     The lines must be contiguous.
+     The expression "the selectedText" only returns the first selected line.
+     The expression "the selectedLines" returns a string
+     that matches the pattern "line {i} to {j} of card field {n}".
+   - Wide Margins: adds a top margin of about half character height
+     along with left and right margins of about a character width,
+     but no bottom margin
+   - Fixed Line Height: keeps the same default height for all lines
+     regardless of the font sizes used in the lines;
+     allows text to overlap vertically which seems bad
+   - Show Lines: displays dotted lines that indicate
+     where each line of text can be entered
+   - Auto Tab: moves focus to the next field when the return key is pressed
+     and the text cursor is on the last visible line of a non-scrolling field;
+     most useful in a series of single-line fields
+   - Don't Search: prevents contents from being searched by `find` commands
+   - Shared Text: displays read-only text in a background
 
-  This option is only available for background fields and
-  only allows its content to be edited when in background mode.
-  This makes it a good alternative to painted (bitmap) text
-  that is the same, read-only text which
-  appears on each card that uses the background.
-  When this option is checked,
-  the "Don't Search" option is also required to be checked.
+     This option is only available for background fields and
+     only allows its content to be edited when in background mode.
+     This makes it a good alternative to painted (bitmap) text
+     that is the same, read-only text which
+     appears on each card that uses the background.
+     When this option is checked,
+     the "Don't Search" option is also required to be checked.
+
+1. Click the "Text Style..." button to open the "Text Properties" dialog.
+   This allows specifying the text style, alignment, font, and size.
+
+1. Optionally click the "Script..." button
+   to open a dialog where a script can be added or modified.
+
+   Enter code that defines action handlers and functions.
+   Actions related to fields include
+   `closeField`, `exitField`, `keyDown`, `keyUp`, `mouseDown`, `mouseEnter`,
+   `mouseLeave`, `mouseUp`, `mouseWithin`, and `openField`.
+   It is not common to implement handlers for any of these actions.
 
 1. Click the Browse tool (hand with pointing finger).
 1. Click the field.
