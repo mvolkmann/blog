@@ -1032,19 +1032,43 @@ To add a button to the current card.
 
 1. Select a button style from the following options:
 
-   - Transparent: no border and can see through;
-     default when created with cmd-drag
+   - Transparent: no border and can see through
+
+     This style is used for buttons that:
+
+     - have an icon, but "Show Name" is unchecked
+     - are positioned over a specific part of a graphic (ex. city on a map)
+     - are positioned over a specific text to act as a hyperlink
+
+     This is the default style when a button is created with cmd-drag.
+
    - Opaque: no border and cannot see through
+
    - Rectangle: opaque with rectangle border
-   - Round Rect: opaque with rectangle border that has rounded corners;
-     default when created with "New Button" menu item
+
+   - Round Rect: opaque with rectangle border, rounded corners,
+     and shadows on right and bottom sides;
+
+     This is the default when created with the "New Button" menu item.
+
    - Shadow: like Rectangle, but adds shadows on the right and bottom sides
-   - Check Box: for a Boolean selection; click the checkbox or the name
-     to toggle the value of its `hilite` property
+
+   - Check Box: for a Boolean selection
+
+     Check "Show Name" to display a label for the checkbox to its right.
+
+     Check "Auto Hilite" to enable toggling the checkbox
+     by clicking either the checkbox or the label.
+     This toggles the value of its `hilite` property
+
    - Radio Button: for a set of mutually exclusive choices
+
    - Standard: conforms to Macintosh interface guidelines for non-default buttons
+
    - Default: conforms to Macintosh interface guidelines for default buttons
+
    - Oval: like Transparent, but the target area is an oval instead of a rectangle
+
    - Popup: a dropdown containing options
 
 1. Decide whether the button name should be displayed
@@ -1112,6 +1136,8 @@ To create a new, custom icon:
    - To clear all the pixels, select Icon ... Erase.
    - To copy a 32x32 black and white swatch from anywhere on the screen,
      select Icon ... Pickup, hover over the area to copy, and click.
+   - To modify individual pixels, toggling between white and black,
+     click them or drag over them.
    - To undo all the changes made to the pixels
      before clicking the "OK" button, select Icon ... Revert.
    - To commit pixel changes so they cannot be undone by
