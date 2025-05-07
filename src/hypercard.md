@@ -975,6 +975,7 @@ not tab navigation.
 For inspiration on buttons that can be created,
 open the "Home" stack, click "Stack Kit", click "Readymade Buttons",
 and visit each of the topics.
+The buttons defined here can be copied into your stacks.
 
 ### Button Types
 
@@ -1522,6 +1523,7 @@ The choice is specified in the "Field Info" dialog for each field.
 For inspiration on fields that can be created,
 open the "Home" stack, click "Stack Kit", click "Readymade Fields",
 and visit each of the topics.
+The fields defined here can be copied into your stacks.
 
 ### Creating Fields
 
