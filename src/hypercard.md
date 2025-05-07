@@ -1112,6 +1112,8 @@ To add a button to the current card.
 
 1. Click the "Text Style..." button to open the "Text Properties" dialog.
    This allows specifying the text style, alignment, font, and size.
+   Alternatively, specify each of these except alignment
+   using the Font and Style menus.
 
 1. To add an icon to the button or remove its icon, click the "Icon..." button.
 
@@ -1583,6 +1585,8 @@ To add a field to the current card:
 
 1. Click the "Text Style..." button to open the "Text Properties" dialog.
    This allows specifying the text style, alignment, font, and size.
+   Alternatively, specify each of these except alignment
+   using the Font and Style menus.
 
 1. Optionally click the "Script..." button
    to open a dialog where a script can be added or modified.
