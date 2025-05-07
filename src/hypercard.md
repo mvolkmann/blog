@@ -2598,7 +2598,7 @@ but it cannot store a button or field object in a variable.
 The `go` command supports going to another card.
 It can be followed by the optional preposition "to"
 which is omitted in the examples below.
-It supports many arguments described below.
+The `go` command supports many arguments described below.
 
 - Ordinal
 
@@ -2610,9 +2610,9 @@ It supports many arguments described below.
 
 - Positional
 
-  - `go [to] next [card]` - next card
-  - `go [to] prev[ious] [card]` - previous card
-  - `go [to] this [card]` - stay on current card
+  - `go next [card]` - next card
+  - `go prev[ious] [card]` - previous card
+  - `go this [card]` - stay on current card
 
 - Other ways to go to another card in the current stack
 
@@ -2621,14 +2621,24 @@ It supports many arguments described below.
 
 - Other ways to go to another card, possibly in another stack
 
-  - `go [to] back` - previously visited card
-  - `go [to] bkgnd "{background-name}" of stack "{stack-name}"`
-  - `go [to] card id {card-id}`
-  - `go [to] card "{card-name}"`
+  - `go back` - previously visited card
+  - `go bkgnd "{background-name}" [of stack "{stack-name}"]`
+  - `go card id {card-id} [of stack "{stack-name}]`
+  - `go card "{card-name}" [of stack "{stack-name}]`
   - `go forth` - opposite of `go back` used after that command
-  - `go [to] home` - Home stack
-  - `go [to] [stack] {stack-name} [in a new window]` -
+  - `go home` - Home stack
+  - `go stack {stack-name} [in [a] new window]` -
     first card in a given stack (e.g. "HyperCard Help")
+
+All the `go` commands above implement "hard links"
+that do not depend on other data.
+Soft links do depend on other data.
+For example, suppose we have a stack where specific dogs are
+described on their own card and the card name is the dog name.
+The first card in the stack and contain a field where a dog name can be entered
+and a button that navigates to the matching card when clicked.
+TODO: Add the button script when you get it working.
+TODO: Handle the case when no card matches what is entered in the field.
 
 ### get Command
 
