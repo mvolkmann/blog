@@ -1122,7 +1122,7 @@ To add a button to the current card.
    Alternatively, specify each of these except alignment
    using the Font and Style menus.
 
-1. To add an icon to the button or remove its icon, click the "Icon..." button.
+1. Click the "Icon..." button to add an icon to the button or remove its icon.
 
    This opens a "Choose Icon" dialog.
 
@@ -1146,6 +1146,25 @@ To add a button to the current card.
    is always a rectangle.
    This is the case even if the button has the "Transparent" style
    and has a non-rectangular icon.
+
+1. Click the "LinkTo..." button to configure the button
+   so clicking it navigates to another card or stack.
+
+   This opens a dialog with the buttons "This Card", "This Stack", and "Cancel".
+
+   - To cause a click on the button to navigate to
+     another card in the same stack, navigate to that card
+     and then click the "This Card" button.
+     This adds the command `go to card id "{card-id}"`.
+   - To cause a click on the button to navigate to
+     the first card in another stack, navigate to that stack (any of its cards)
+     and then click the "This Stack" button.
+     This adds the command `go to stack "{stack-name}"`.
+   - To close the dialog without making a change, click the "Cancel" button.
+
+   The change affects the script handler for the "mouseUp" action.
+   The handler is added if it doesn't exist and is modified if it already exists.
+   Open the script for the button to see the change that is made.
 
 1. Optionally click the "Script..." button
    to open a dialog where a script can be added or modified.
