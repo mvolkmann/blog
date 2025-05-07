@@ -1064,7 +1064,7 @@ To add a button to the current card.
    Optionally click the Edit button to edit the pixels in the icon.
    Click the OK button to use the selected icon.
 
-   Icon sizes cannot be modified.
+   Icons are all 32x32 pixels. Their sizes cannot be modified.
 
    The active area of all buttons that receives mouse clicks
    is always a rectangle.
@@ -1079,6 +1079,39 @@ To add a button to the current card.
    Enter the command(s) to execute when the button is clicked.
 
 ### Adding Icons
+
+Icons that appear in the Icon dialog come from "ICON" resources
+in the following locations, searched in this order:
+
+- the file of the current stack
+- the file of the Home stack
+- the HyperCard app
+
+The icons must have unique IDs.
+
+For stacks that will be distributed for use by others,
+add all custom icons to that stack to ensure that the users will have them.
+
+To create a new, custom icon:
+
+1. Select Edit ... Icon... to open an "Icon Editor" dialog.
+1. Select the icon that is closest to what will be created.
+1. Enter a name.
+1. Enter a unique ID.
+1. Modify the pixels as desired.
+1. Click the "Save" button.
+
+To modify an existing icon:
+
+1. Open the "Button Info" dialog for any button.
+1. Click the "Icon..." button.
+1. Select the icon to be edited.
+1. Click the "Edit..." button.
+1. If the icon is defined in the Home stack or the HyperCard application,
+   a dialog will appear asking if you want to make a copy.
+   Click the "OK" button.
+1. Modify the pixels as desired.
+1. Click the "OK" button.
 
 To copy an icon from another stack or application (source)
 and make it available in your stack (destination):
@@ -2747,6 +2780,14 @@ end mouseUp
 
 Using the `put` command to set `message` or `msg`
 also opens the message box and puts it there.
+
+### Icons
+
+To get the id of the icon used by a button,
+use the expression `the icon of {button-ref}`.
+
+To change the icon used by as button,
+use the command `set the icon of {button-ref} to {icon-id}`.
 
 ### Function Keys
 
