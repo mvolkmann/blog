@@ -2041,7 +2041,8 @@ to a new card that use the desired background.
 ## Card Transitions
 
 To add a transition effect that occurs on card navigation, add a script
-like the following to each button whose handler navigates to a new card:
+like the following to each button whose handler navigates to a new card.
+In the `visual` command, the keyword `effect` is optional.
 
 ```text
 on mouseUp
