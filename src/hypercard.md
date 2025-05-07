@@ -972,6 +972,10 @@ In HyperCard, only fields received focus, not buttons like in HTML.
 So the part numbers of buttons only affect stacking order,
 not tab navigation.
 
+For inspiration on buttons that can be created,
+open the "Home" stack, click "Stack Kit", click "Readymade Buttons",
+and visit each of the topics.
+
 ### Button Types
 
 There are four basic kinds of buttons:
@@ -1514,6 +1518,10 @@ Different values can be entered in background fields for each card.
 
 Fields can hold a single line of text or multiple lines.
 The choice is specified in the "Field Info" dialog for each field.
+
+For inspiration on fields that can be created,
+open the "Home" stack, click "Stack Kit", click "Readymade Fields",
+and visit each of the topics.
 
 ### Creating Fields
 
