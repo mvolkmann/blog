@@ -998,6 +998,8 @@ Each of the supported button styles are shown below.
 
 To add a button to the current card.
 
+1. Verify that the correct domain, card or background, is selected.
+
 1. Select Objects ... New Button.
    Alternatively, select the Button tool and
    cmd-drag to indicate the location and size of a new button.
@@ -1313,6 +1315,8 @@ To resize a button:
 
 To constrain the resizing to be only horizontal or only vertical,
 hold down the shift key while dragging.
+If the button style is "Rounded Rectangle", "Standard", or "Default",
+dragging with the shift key down changes the height to the Macintosh standard.
 
 ### Copying Buttons
 
@@ -1514,6 +1518,8 @@ The choice is specified in the "Field Info" dialog for each field.
 ### Creating Fields
 
 To add a field to the current card:
+
+1. Verify that the correct domain, card or background, is selected.
 
 1. Select Objects ... New Field.
    This adds a new field to the center of the current card
@@ -1856,6 +1862,13 @@ painted objects (e.g. polygon), buttons, and fields.
 Each element is displayed in its own layer
 within the "document layer".
 
+To set the visibility of all painted object on the current card or background,
+use the following command:
+
+```text
+set showPict of this {background|card} to {true|false}`.
+```
+
 All painted objects appear below buttons and fields.
 So buttons and fields are never obscured by painted objects.
 
@@ -2103,6 +2116,12 @@ based on the state of the scroll window.
 <img alt="HyperCard Scroll Window" style="width: 70%"
   src="/blog/assets/hypercard-scroll-window.png?v={{pkg.version}}">
 
+## Menu Bar
+
+To hide the menu bar that typically appears at the top of the screen,
+use the command `hide menubar`.
+To restore the menu bar, use the command `show menuBar`.
+
 ## Keyboard Shortcuts
 
 | Shortcut        | Action                                                                         |
@@ -2326,49 +2345,51 @@ Unlike functions, message handlers cannot return a value.
 
 For example, in a stack with two cards where the first card contains a button:
 
-- Open the stack. The first card will be displayed.
-- Select the Button tool.
-- Double-click the button.
-- Click the "Script" button.
-- Enter the following:
+1. Open the stack. The first card will be displayed.
+1. Select the Button tool.
+1. Double-click the button.
+1. Click the "Script" button.
+1. Enter the following:
 
-  ```text
-  on mouseUp
-    go to next card
-  end mouseUp
-  ```
+   ```text
+   on mouseUp
+     go to next card
+   end mouseUp
+   ```
 
-- Press cmd-s to save the changes.
-- Press cmd-w to close the script window.
+1. Press cmd-s to save the changes.
+1. Press cmd-w to close the script window.
 
-- Select Objects ... Card Info...
-- Click the "Script" button.
-- Enter the following:
+1. Select Objects ... Card Info...
+1. Click the "Script" button.
+1. Enter the following:
 
-  ```text
-  on mouseUp
-    beep
-  end mouseUp
-  ```
+   ```text
+   on mouseUp
+     beep
+   end mouseUp
+   ```
 
-- Select Objects ... Stack Info...
-- Click the "Script" button.
-- Enter the following:
+1. Select Objects ... Stack Info...
+1. Click the "Script" button.
+1. Enter the following:
 
-  ```text
-  on mouseUp
-    flash
-  end mouseUp
-  ```
+   ```text
+   on mouseUp
+     flash
+   end mouseUp
+   ```
 
-- Select the Browse tool.
-- Click outside the button.
-- Notice that the `beep` command runs because the card script is run.
-- Click the button.
-- Notice that it navigates to the next card because the button script is run.
-- While on the next card, click anywhere inside it
-  except on a button or field.
-- Notice that the window flashes because the stack script is executed.
+1. Select the Browse tool.
+1. Click outside the button.
+1. Notice that the `beep` command runs because the card script is run.
+1. Click the button.
+1. Notice that it navigates to the next card because the button script is run.
+1. While on the next card, click anywhere inside it
+   except on a button or field.
+1. Notice that the window flashes because the stack script is executed.
+   The `flash` command alternates the color of every pixel on the card
+   between white and black two times.
 
 Another interesting example:
 
@@ -3352,6 +3373,20 @@ Clicking a line in the first field highlights it
 and sets the content of the second field to that line.
 Clicking a line that is already highlighted
 removes the highlighting and clears the second field.
+
+### Disclosure Buttons
+
+For an example of the script handlers and functions necessary
+to implement a button that toggles the display of a field:
+
+1. Open the "Home" stack.
+1. Click the "Stack Kit" button.
+1. Click "Readymade Buttons".
+1. Click "Create pop-up fields".
+1. Select the Button tool.
+1. Double-click the "Things To Do" or "HyperCard Notes" button.
+1. Click the "Script..." button.
+1. Study the script
 
 ## Books
 
