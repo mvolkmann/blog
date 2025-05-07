@@ -1395,10 +1395,13 @@ Modify the button script to execute HyperTalk commands when clicked.
 
 ### Scripting Buttons
 
-To edit the script for a button:
+To view and edit the script for a button:
 
-1. Click the "Script..." button.
-1. Enter commands.
+1. Select the Button tool.
+1. Double-click the button to open its "Button Info" dialog
+   and click the "Script..." button to open its script editor.
+   Alternatively, hold down the shift key and double-click the button
+   to bypass the "Button Info" dialog and go straight to its script editor.
 
 To detect whether special keys where held down during a click, check the
 state of the special variables `commandKey`, `optionKey`, and `shiftKey`.
@@ -1813,6 +1816,16 @@ only gets its text, not an object reference.
 
 To execute a HyperTalk command that was entered in a field,
 run the command `do card field "{field-name}"`.
+
+### Scripting Fields
+
+To view and edit the script for a field:
+
+1. Select the Field tool.
+1. Double-click the field to open its "Field Info" dialog
+   and click the "Script..." button to open its script editor.
+   Alternatively, hold down the shift key and double-click the field
+   to bypass the "Field Info" dialog and go straight to its script editor.
 
 ### Field Groups
 
