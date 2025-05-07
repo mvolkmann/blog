@@ -1085,6 +1085,25 @@ To add a button to the current card.
    - It will be checked if the button was created with "New Button".
    - It will be unchecked if the button was created with cmd-drag.
 
+1. Optionally check the "Auto Hilite" checkbox to
+   cause the button to highlight when it is clicked.
+
+   Highlighting toggles the colors of the pixels for the button
+   when the mouse button is down and
+   restores the colors when the mouse button is released.
+
+1. Optionally uncheck the "Enabled" checkbox to
+   cause the button to be disabled by default.
+
+   When a button is disabled, it will be grayed out
+   and clicking it will not run its script.
+
+   To enable/disable a button from a script, use the following command:
+
+   ```text
+   set the enabled of {button-ref} to {true|false}
+   ```
+
 1. To add an icon to the button or remove its icon, click the "Icon..." button.
 
    This opens a "Choose Icon" dialog.
@@ -1109,13 +1128,6 @@ To add a button to the current card.
    is always a rectangle.
    This is the case even if the button has the "Transparent" style
    and has a non-rectangular icon.
-
-1. Optionally check the "Auto Hilite" checkbox to
-   cause the button to highlight when it is clicked.
-
-   Highlighting toggles the colors of the pixels for the button
-   when the mouse button is down and
-   restores the colors when the mouse button is released.
 
 1. Optionally click the "Script..." button.
 
@@ -1436,6 +1448,13 @@ on mouseUp
   put selectedButtonName(3) -- updates the message box
 end mouseUp
 ```
+
+The "Button Info" dialog for background radio buttons contains
+the checkbox "Shared Hilite" which is not present for card radio buttons.
+When this is checked, the state of the radio button family is
+shared across all cards that use the background.
+When this is unchecked, each card that uses the background
+has its own state for the radio button family.
 
 ### Popups
 
