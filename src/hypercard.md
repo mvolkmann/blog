@@ -1044,12 +1044,16 @@ To add a button to the current card.
      by clicking either the checkbox or the label.
      This toggles the value of its `hilite` property
 
+     For more detail, see the "Check Boxes" section below.
+
    - Radio Button: for a set of mutually exclusive choices
 
      Check "Show Name" to display a label for the radio button to its right.
 
      Select the same "Family" number (1-15) to each radio button
      on the card that is a member of the same group.
+
+     For more detail, see the "Radio Buttons" section below.
 
    - Standard: conforms to Macintosh interface guidelines for non-default buttons
 
@@ -1070,6 +1074,8 @@ To add a button to the current card.
      is an oval instead of a rectangle
 
    - Popup: a dropdown containing options
+
+     For more detail, see the "Popups" section below.
 
 1. Decide whether the button name should be displayed
    by checking or unchecking the "Show Name" checkbox.
@@ -1399,16 +1405,6 @@ use the command `put [the] hilite of {button-reference} into message [box]`.
 
 ### Radio Buttons
 
-In order to make a set of radio buttons mutually exclusive,
-the `family` property of each must be set to the same integer from 1 to 15.
-To set the family number (1-15) of a radio button,
-select a number from the Family dropdown or
-enter the following command in the message box:
-
-```text
-set the family of {button-reference} to {family-number}
-```
-
 To get the name of the selected radio button:
 
 ```text
@@ -1427,9 +1423,6 @@ on mouseUp
   put selectedButtonName(3) -- updates the message box
 end mouseUp
 ```
-
-HyperTalk can store the name or id of a button/field in a variable,
-but it cannot store a button or field object in a variable.
 
 ### Popups
 
@@ -2470,6 +2463,9 @@ For example,`set the visible of button "save" to false`.
 It's a good idea to initialize all global variables used by a stack
 in the `openStack` handler associated with the stack.
 This avoids using values assigned by other stacks.
+
+HyperTalk can store the name or id of a button/field in a variable,
+but it cannot store a button or field object in a variable.
 
 ### go Command
 
