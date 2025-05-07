@@ -1009,7 +1009,9 @@ To add a button to the current card.
      src="/blog/assets/hypercard-button-info.png?v={{pkg.version}}">
 
 1. Change "Button Name" to be a name used to refer to the button
-   or the text that will appear on it.
+   and the text that will appear on it.
+   This can be up to 30 characters and can include
+   spaces, numbers, and punctuation, but cannot be all numbers.
    It's too bad buttons can't have separate values for
    the name used to refer to them and the label displayed in them.
 
@@ -1464,8 +1466,11 @@ and enter each option on its own line.
 
 The name assigned to the button is used for
 a label that appears to the left of the dropdown.
+It should end with a colon.
 By default, the label is given a width of zero and doesn't appear.
-To make it appear, enter a value for "Title Width" in the Button Info dialog.
+To make it appear, enter a number in "Title Width" input
+in the "Button Info" dialog, noting the effect in the "Preview" area.
+This input only appears for Popup style buttons.
 Alternatively, drag the left edge of the button to the right
 to reveal the title and set the "Title Width".
 
