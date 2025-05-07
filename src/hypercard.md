@@ -1155,11 +1155,13 @@ To add a button to the current card.
    - To cause a click on the button to navigate to
      another card in the same stack, navigate to that card
      and then click the "This Card" button.
-     This adds the command `go to card id "{card-id}"`.
+     This adds the command `go to card id "{card-id}"`
+     and returns to the card containing the button.
    - To cause a click on the button to navigate to
      the first card in another stack, navigate to that stack (any of its cards)
      and then click the "This Stack" button.
-     This adds the command `go to stack "{stack-name}"`.
+     This adds the command `go to stack "{stack-name}"`
+     and returns to the card containing the button.
    - To close the dialog without making a change, click the "Cancel" button.
 
    The change affects the script handler for the "mouseUp" action.
