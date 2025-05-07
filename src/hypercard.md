@@ -2077,6 +2077,20 @@ on mouseUp
 end mouseUp
 ```
 
+There are 27 effects and five speeds.
+To specify a visual effect that is trigger by a specific button:
+
+1. Select the Button tool.
+1. Double-click the button.
+1. Click the "Tasks..." button.
+1. Select "Visual Effect" in the list on the left.
+1. Select an effect from the list in the center.
+1. Select a speed from the radio buttons on the right.
+1. Click the "Assign Tasks" button.
+
+TODO: You also need to add a `go` command to go to another card
+after the line that specifies the effect.
+
 ## Images
 
 One source of images is other stacks.
