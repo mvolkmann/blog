@@ -759,7 +759,7 @@ The tools include:
 
   - **Browse**
 
-    This enters Browse mode which enables interacting with cards as a user
+    The Browse tool enters Browse mode which enables interacting with cards as a user
     rather than as an author.
 
     In Mac OS 7, another way to enter Browse mode is to press cmd-tab.
@@ -770,7 +770,7 @@ The tools include:
 
   - **Button**
 
-    This enters Button mode which enables editing existing buttons.
+    The Button tool enters Button mode which enables editing existing buttons.
     When in this mode, a thin black border is drawn around all buttons
     so they can be located even when they are transparent with no text or icon.
 
@@ -778,7 +778,7 @@ The tools include:
 
   - **Field**
 
-    This enters Field mode which enables editing existing fields.
+    The Field tool enters Field mode which enables editing existing fields.
     When in this mode, a thin black border is drawn around all text fields
     so they can be located even when they are transparent with no text.
 
@@ -786,9 +786,10 @@ The tools include:
 
 - Row #2
 
-  - **Rectangle Selection**
+  - **Selection**
 
-    Drag from any corner of the painted area to be selected
+    The Selection tool selects a rectangular area specified by
+    dragging from any corner of the painted area to be selected
     to the opposite corner.
     The selected area will be surrounded by a rectangle of marching ants.
     The selected area can then be copied, cut, deleted, dragged, or transformed
@@ -809,7 +810,7 @@ The tools include:
     hold down both the shift and option keys while dragging it.
 
     To select the entire picture layer of the current domain (background or card),
-    double-click the "Rectangle Selection" tool in the Tools palette.
+    double-click the Selection tool in the Tools palette.
     This is useful for copying everything that was painted
     to another card and/or domain.
 
@@ -841,7 +842,7 @@ The tools include:
     not the entire contents of the lassoed area.
     The selection can then be copied, cut, deleted, or dragged.
 
-    The modifier keys that affect the Rectangle Selection tool
+    The modifier keys that affect the Selection tool
     affect the Lasso tool in mostly the same way.
 
     To select all the items in th picture layer of the current domain (background or card),
@@ -874,7 +875,7 @@ The tools include:
 
   - **Brush**
 
-    This is used for freehand painting using the selected pattern.
+    The Brush tool is used for freehand painting using the selected pattern.
     To change the shape and size of the brush,
     Select Options ... Brush Shape... before painting.
 
@@ -883,13 +884,14 @@ The tools include:
 
   - **Eraser**
 
-    Drag over painted items to erase them.
+    The Eraser tool erases painted pixels that are dragged over.
     The size of the eraser cannot be changed.
     To erase large areas, use the Rectangle and Lasso selection tools.
 
   - **Line**
 
-    Click at start of line and drag to end of line.
+    The Line tool draws a straight line formed by
+    clicking the start pixel and dragging to end pixel.
     To change the line size, Select Options ... Line Size... before drawing.
     If the option key is held down while drawing,
     the line will use the selected pattern.
@@ -904,11 +906,11 @@ The tools include:
 
   - **Spray**
 
-    This sprays paint using the selected pattern.
+    The Spray tool sprays paint using the selected pattern.
 
   - **Rectangle**
 
-    This draws a rectangle, specified by clicking at the
+    The Rectangle tool draws a rectangle, specified by clicking at the
     location of any corner and dragging to the opposite corner.
     To draw a square, hold down the shift key while dragging.
 
@@ -917,8 +919,9 @@ The tools include:
 
   - **Round Rectangle**
 
-    This draws a rectangle with rounded corners, specified by clicking at the
-    location of any corner and dragging to the opposite corner.
+    The Round Rectangle tool draws a rectangle with rounded corners,
+    specified by clicking the pixel of any corner
+    and dragging to the opposite corner.
 
     Double-clicking this toggles the "Draw Filled" option
     as an alternative to selecting Options ... Draw Filled.
@@ -927,7 +930,7 @@ The tools include:
 
   - **Bucket**
 
-    This fills an area with the selected pattern
+    The Bucket tool fills an area with the selected pattern
     from the Patterns menu or palette
     when a pixel inside an enclosed area is clicked.
 
@@ -935,7 +938,7 @@ The tools include:
 
   - **Oval**
 
-    This draws an oval which is any closed curve that
+    The Oval tool draws an oval which is any closed curve that
     resembles the outline of an egg or an ellipse.
     It doesn't have a strict mathematical definition.
     To draw a circle, hold down the shift key while dragging.
@@ -945,7 +948,7 @@ The tools include:
 
   - **Curve**
 
-    This is similar to the Line tool, but will automatically
+    The Curve tool is similar to the Line tool, but will automatically
     close the shape if Options ... Draw Filled is selected.
 
     Double-clicking this toggles the "Draw Filled" option
@@ -955,7 +958,7 @@ The tools include:
 
   - **Text**
 
-    This paints text that cannot be edited.
+    The Text tool paints text that cannot be edited.
 
     Double-clicking this opens the "Text Properties" dialog
     as an alternative to selecting Edit ... Text Style.
@@ -988,7 +991,8 @@ The tools include:
 
   - **Regular Polygon**
 
-    This draws a convex polygon whose sides all have the same length.
+    The Regular Polygon tool draws a convex polygon
+    whose sides all have the same length.
     Select Options ... Polygon Sides...
     to select the number of sides to include.
     The options are 3, 4, 5, 6, 8, and circle.
@@ -998,7 +1002,7 @@ The tools include:
 
   - **Polygon**
 
-    This draws an arbitrary polygon.
+    The Polygon tool draws an arbitrary polygon.
     Click at each point in the polygon. Double-click to end.
     It does not automatically connect the last point to the first.
 
@@ -2163,7 +2167,7 @@ To create white text on a black background:
 1. Check the "Lock Text" checkbox.
 1. Check the "OK" button.
 1. If the black rectangle is too large,
-   select the excess on the right side with the "Rectangle Selection" tool
+   select the excess on the right side with the Selection tool
    and press the delete key.
 1. Repeat the previous step for excess on the bottom side.
 
