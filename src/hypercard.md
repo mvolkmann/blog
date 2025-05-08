@@ -118,7 +118,6 @@ Clicking a topic can navigate to a card that provides details on the topic.
 TODO: See page 74 in HyperCard Handbook. Learn how to implement this.
 
 A stack can contain links to cards in other stacks.
-TODO: Learn how to implement this.
 
 Stacks are not meant to be concurrently modified by multiple users.
 
@@ -333,31 +332,38 @@ which opens the following dialog:
 
 To enable opening your stacks from the Home stack:
 
-- Press cmd-h to open the Home stack.
-- Go to Card 3, 4, or 5 that all say
-  "You can add your own buttons to this card."
-- Select Home ... New Link to Stack...
-- In the dialog that appears, select a stack file.
-- Click the "Open" button to add a new button.
-- Position the new button as desired.
-- Select the Browse tool.
-- The new button can be clicked to open the stack in a new window.
+1. Press cmd-h to open the Home stack.
+1. Go to Card 3, 4, or 5 that all say
+   "You can add your own buttons to this card."
+1. Select Home ... New Link to Stack...
+1. In the dialog that appears, select a stack file.
+1. Click the "Open" button to add a new button.
+1. Position the new button as desired.
+1. Select the Browse tool.
+1. The new button can be clicked to open the stack in a new window.
 
 To enable opening other applications from the Home Stack:
 
-- Press cmd-h to open the Home stack.
-- Go to Card 3, 4, or 5 that all say
-  "You can add your own buttons to this card."
-- Select Home ... New Link to Application...
-- In the dialog that appears, select an application.
-- Click the "Open" button to add a new button.
-- Select the Browse tool.
-- The new button can be clicked to launch the application.
+1. Press cmd-h to open the Home stack.
+1. Go to Card 3, 4, or 5 that all say
+   "You can add your own buttons to this card."
+1. Select Home ... New Link to Application...
+1. In the dialog that appears, select an application.
+1. Click the "Open" button to add a new button.
+1. Select the Browse tool.
+1. The new button can be clicked to launch the application.
 
 The process is similar to create a button that opens
 a given document using a given application.
-Select Home ... New Link to Document...
-TODO: Why doesn't this work? Maybe it just doesn't work in emulators.
+
+1. Press cmd-h to open the Home stack.
+1. Go to Card 3, 4, or 5 that all say
+   "You can add your own buttons to this card."
+1. Select Home ... New Link to Document...
+1. In the dialog that appears, select a document.
+1. Click the "Open" button.
+1. In the dialog that appears, select an application that can open the document.
+1. Click the "Open" button.
 
 The Home stack initially contains buttons labeled
 "Card 3", "Card 4", and "Card 5"
