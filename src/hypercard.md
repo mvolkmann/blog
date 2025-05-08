@@ -802,6 +802,9 @@ The tools include:
     This is used for freehand drawing.
     The pencil width is a single pixel and cannot be changed.
 
+    Double-clicking this button toggles FatBits mode
+    as an alternative to selecting Options ... FatBits.
+
 - Row #3
 
   - **Brush**
@@ -809,6 +812,9 @@ The tools include:
     This is used for freehand painting using the selected pattern.
     To change the shape and size of the brush,
     Select Options ... Brush Shape... before painting.
+
+    Double-clicking this opens the "Brush" dialog
+    as an alternative to selecting Options ... Brush Shape...
 
   - **Eraser**
 
@@ -823,6 +829,9 @@ The tools include:
     If the option key is held down while drawing,
     the line will use the selected pattern.
 
+    Double-clicking this opens the "Line Size" dialog
+    as an alternative to selecting Options ... Line Size...
+
 - Row #4
 
   - **Spray**
@@ -835,10 +844,16 @@ The tools include:
     location of any corner and dragging to the opposite corner.
     To draw a square, hold down the shift key while dragging.
 
+    Double-clicking this toggles the "Draw Filled" option
+    as an alternative to selecting Options ... Draw Filled.
+
   - **Round Rectangle**
 
     This draws a rectangle with rounded corners, specified by clicking at the
     location of any corner and dragging to the opposite corner.
+
+    Double-clicking this toggles the "Draw Filled" option
+    as an alternative to selecting Options ... Draw Filled.
 
 - Row #5
 
@@ -848,6 +863,8 @@ The tools include:
     from the Patterns menu or palette
     when a pixel inside an enclosed area is clicked.
 
+    Double-clicking this toggles display of the Patterns palette.
+
   - **Oval**
 
     This draws an oval which is any closed curve that
@@ -855,16 +872,26 @@ The tools include:
     It doesn't have a strict mathematical definition.
     To draw a circle, hold down the shift key while dragging.
 
+    Double-clicking this toggles the "Draw Filled" option
+    as an alternative to selecting Options ... Draw Filled.
+
   - **Curve**
 
     This is similar to the Line tool, but will automatically
     close the shape if Options ... Draw Filled is selected.
+
+    Double-clicking this toggles the "Draw Filled" option
+    as an alternative to selecting Options ... Draw Filled.
 
 - Row #6
 
   - **Text**
 
     This paints text that cannot be edited.
+
+    Double-clicking this opens the "Text Properties" dialog
+    as an alternative to selecting Edit ... Text Style.
+
     The text style must be specified before typing the text.
     To open the "Text Properties" dialog,
     select Edit ... Text Style...,
@@ -898,11 +925,17 @@ The tools include:
     to select the number of sides to include.
     The options are 3, 4, 5, 6, 8, and circle.
 
+    Double-clicking this opens the "Polygon Sides" dialog
+    as an alternative to selecting Options ... Polygon Sides...
+
   - **Polygon**
 
     This draws an arbitrary polygon.
     Click at each point in the polygon. Double-click to end.
     It does not automatically connect the last point to the first.
+
+    Double-clicking this toggles the "Draw Filled" option
+    as an alternative to selecting Options ... Draw Filled.
 
 Shapes cannot be selected by clicking them.
 To select all or part of a drawing,
