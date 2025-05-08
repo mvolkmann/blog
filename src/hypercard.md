@@ -1174,6 +1174,17 @@ To add a button to the current card.
    The handler is added if it doesn't exist and is modified if it already exists.
    Open the script for the button to see the change that is made.
 
+1. Click the "Tasks..." button to configure the following seven options:
+
+   1. Go to Destination: choose from 10 radio buttons
+   1. Visual Effect: choose an effect and a speed
+   1. Launch Application: choose an application and optionally a specific document
+   1. Link to URL: enter a URL
+   1. MovieL choose a movie file and specify details on how is should be played
+   1. Sound: choose a sound resource and playback quality;
+      can also record or import a sound
+   1. Speak Text: enter text or use selected text, and select a voice
+
 1. Optionally click the "Script..." button
    to open a dialog where a script can be added or modified.
 
@@ -2094,8 +2105,24 @@ To specify a visual effect that is trigger by a specific button:
 1. Select a speed from the radio buttons on the right.
 1. Click the "Assign Tasks" button.
 
-TODO: You also need to add a `go` command to go to another card
-after the line that specifies the effect.
+This adds a `visual effect` command to the `mouseUp` handler.
+If one is already present, it is replaced.
+
+Clicking the button will only exercise the visual effect
+if the button has also been configured to navigate to another card.
+To configure this, open the "Button Info" dialog for the button
+and do one of the following:
+
+- Click the "LinkTo..." button and follow the instructions
+  for this in the "Creating Buttons" section above.
+- Click the "Tasks..." button and follow the instructions
+  for this in the "Creating Buttons" section above.
+- Click the "Scripts..." button and manually
+  add a `go` command after the `visual` command.
+
+The "LinkTo..." and "Tasks..." options
+add a `go` command to the `mouseUp` handler.
+If one is already present, it is replaced.
 
 ## Images
 
