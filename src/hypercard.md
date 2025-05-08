@@ -748,8 +748,8 @@ They select, draw, or erase square pixels that are either white or black.
 Painting can be performed in both the background and card domains.
 
 Painting tool operations can be undone by
-selecting Edit ... Undo or pressing cmd-z,
-but only if the undo is requested BEFORE performing another operation.
+selecting Edit ... Undo, pressing cmd-z, or pressing the esc key.
+But this must be done BEFORE performing another operation.
 
 The tools include:
 
@@ -938,40 +938,106 @@ TODO: Finish describing all the menu items above.
 
 The Options menu contains the following menu items:
 
-- Grid:
-- FatBits:
-- Power Keys:
-- Line Size...:
-- Brush Shape...:
-- Edit Pattern...:
-- Polygon Sides...:
+- Grid
+
+  This toggles grid mode where invisible grid lines are spaced every 8 pixels.
+  When turned on, all painting begins and ends at a grid point.
+  This makes it easier to line up
+  multiple painted items horizontally or vertically.
+
+- FatBits
+
+  This toggles FatBits mode which zooms in on the pixels
+  and makes detailed painting easier.
+
+- Power Keys: TODO: What does this do?
+
+- Line Size...
+
+  This opens a dialog that allows one of six line widths to be selected.
+  The default is a small, round brush.
+  The choice affects all subsequent painting operations
+  and remains in effect until changed.
+
+- Brush Shape...
+
+  This opens a dialog that allows one of 32 brush shapes to be selected.
+  The default is a single pixel.
+  The choice only affects use of the brush tool
+  and remains in effect until it is changed.
+
+- Edit Pattern...
+
+  This opens a dialog that allows the pixel colors
+  of the currently selected pattern to be modified.
+
+- Polygon Sides...
+
+  This opens a dialog that allows selection of the number of sides
+  drawn by the regular polygon tool.
+  The choices are triangle (3), square (4), pentagon (5),
+  hexagon (6), octagon (8), and circle (infinite).
+
 - Draw Filled:
+
+  If this option is selected, the following tools will
+  fill their shape with the selected pattern:
+  Rectangle, Rounded Rectangle, Oval, Regular Polygon, and Polygon.
+
+  If this option is selected, the following tools will
+  draw their lines with the selected pattern:
+  Line, Rectangle, Rounded Rectangle, Oval, Regular Polygon, and Polygon.
+
+  A shortcut for toggling the "Draw Filled" option is to double-click
+  any of the shape buttons in the Tools palette that draw a closed shape.
+
 - Draw Centered:
-- Draw Multiple:
-- Rotate:
-- Slant:
-- Distort:
+
+  This option causes a drawn shape to be
+  centered at the location of the initial click.
+  It stays in effect until toggled off.
+
+- Draw Multiple
+
+  This causes the following painting tools to
+  draw multiple times as the mouse is dragged:
+  Rectangle, Rounded Rectangle, Oval, Curve, and Regular Polygon
+
+- Rotate
+
+  This menu item is only enabled when the selection tool
+  has been used to select a rectangular area.
+  It adds square handles to the four corners that can be
+  dragged to rotate all the selected pixels.
+  The effect is not displayed until the mouse button is released.
+
+- Slant
+
+  This menu item is only enabled when the selection tool
+  has been used to select a rectangular area.
+  It adds square handles to the four corners that can be
+  dragged up or down to "slant" all the selected pixels.
+  The effect is not displayed until the mouse button is released.
+
+- Distort
+
+  This menu item is only enabled when the selection tool
+  has been used to select a rectangular area.
+  It adds square handles to the four corners that can be
+  dragged "distort" all the selected pixels.
+  The effect is not displayed until the mouse button is released.
+
 - Perspective:
 
-TODO: Finish describing all the menu items above.
+  This menu item is only enabled when the selection tool
+  has been used to select a rectangular area.
+  It adds square handles to the four corners that can be
+  dragged left or right to change the perspective of all the selected pixels.
+  The effect is not displayed until the mouse button is released.
 
 The Patterns menu contains the Patterns palette.
 
-If Options ... Draw Filled is selected, the following tools will
-fill their shape with the selected pattern:
-Rectangle, Rounded Rectangle, Oval, Regular Polygon, and Polygon.
-A shortcut for toggling the "Draw Filled" option is to double-click
-any of the shape buttons in the Tools palette that draw a closed shape.
-
-If Options ... Draw Filled is selected, the following tools will
-draw their lines with the selected pattern:
-Line, Rectangle, Rounded Rectangle, Oval, Regular Polygon, and Polygon.
-
 To undo the last drawing action, press the esc key or cmd-z.
-
-To cause a drawn shape to be centered at the location of the initial click,
-select Options ... Draw Centered.
-This stays in effect until it is toggled off.
 
 To select all or part of a drawing,
 use the Rectangle or Lasso Selection Tools.
@@ -1099,7 +1165,7 @@ To add a button to the current card.
 
    - Rectangle: opaque with rectangle border
 
-   - Round Rect: opaque with rectangle border, rounded corners,
+   - Round Rectangle: opaque with rectangle border, rounded corners,
      and shadows on right and bottom sides;
 
      This is the default when created with the "New Button" menu item.
