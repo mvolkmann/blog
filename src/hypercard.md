@@ -740,16 +740,18 @@ Alternatively, press option-tab to toggle display of the Tools palette.
 <img alt="HyperCard Tools" style="width: 15%"
   src="/blog/assets/hypercard-tools.png?v={{pkg.version}}">
 
-The first row of buttons select the current mode
-which is always one of Browse, Button, or Field.
-The remaining rows are painting tools that act on bitmap graphics.
-They select, draw, or erase square pixels that are either white or black.
-
 Painting can be performed in both the background and card domains.
 
 Painting tool operations can be undone by
 selecting Edit ... Undo, pressing cmd-z, or pressing the esc key.
 But this must be done BEFORE performing another operation.
+
+### Tools Palette
+
+The first row of buttons select the current mode
+which is always one of Browse, Button, or Field.
+The remaining rows are painting tools that act on bitmap graphics.
+They select, draw, or erase square pixels that are either white or black.
 
 The tools include:
 
@@ -902,39 +904,92 @@ The tools include:
     Click at each point in the polygon. Double-click to end.
     It does not automatically connect the last point to the first.
 
+Shapes cannot be selected by clicking them.
+To select all or part of a drawing,
+use the Rectangle or Lasso Selection Tools.
+
+To erase part of a drawing, do one of the following:
+
+- Select the Erase tool and drag over the drawing.
+- Select an area with the Rectangle or Lasso Selection Tools
+  and press the delete key, or select Edit ... Cut Picture, or press cmd-x.
+
+### Menu Changes
+
 When a painting tool is selected,
 the Objects, Font, and Style menus disappear,
 and the Paint, Options, and Patterns menus appear.
 When the Browse, Button, or Field tools are selected,
 the opposite menu changes occur.
 
-Like the Tools menu, the Patterns menu can be dragged off of the menu bar
-to create a floating palette.
-
-When a painting tool is selected, pressing the tab key
-toggles the display of the Patterns palette,
-even if it was not previously dragged off of the menu bar.
+### Paint Menu
 
 The Paint menu contains the following menu items:
 
-- Select: selects the smallest area that includes all the painted, black pixels
-- Select All: selects the entire painting layer
-- Fill:
-- Invert:
-- Pickup:
-- Darken:
-- Lighten:
-- Trace Edges:
-- Rotate Left:
-- Rotate Right:
-- Flip Vertical:
-- Flip Horizontal:
-- Opaque:
-- Transparent:
-- Keep:
-- Revert:
+- Select
 
-TODO: Finish describing all the menu items above.
+  This selects the smallest area that includes all the painted, black pixels.
+
+- Select All
+
+  This selects the entire painting layer.
+
+- Fill: TODO: What does this do?
+
+- Invert
+
+  This inverts all selected pixels,
+  changing transparent & white to black, and changing black to transparent.
+
+- Pickup: TODO: What does this do?
+
+- Darken: TODO: What does this do?
+
+- Lighten: TODO: What does this do?
+
+- Trace Edges
+
+  This highlights the edges of all the selected shapes by
+  inverting their border color and
+  tracing new shapes around them, both outside and inside the original shapes.
+
+  The Trace Edges menu item can be applied multiple times.
+  The screenshot below shows the effect when it is applied to text four times.
+
+  <img alt="HyperCard Trace Edges multiple times" style="width: 25%"
+    src="/blog/assets/hypercard-trace-edges-multiple.png?v={{pkg.version}}">
+
+- Rotate Left
+
+  This rotates the selected pixels 90 degrees to the left.
+
+- Rotate Right:
+
+  This rotates the selected pixels 90 degrees to the right.
+
+- Flip Vertical
+
+  This rotates the selected pixels over a horizontal line
+  through the center of the selected area.
+
+- Flip Horizontal
+
+  This rotates the selected pixels over a vertical line
+  through the center of the selected area.
+
+- Opaque
+
+  This changes all transparent pixels in the selected area to be white.
+
+- Transparent:
+
+  This changes all white pixels in the selected area to be transparent.
+
+- Keep: TODO: What does this do?
+
+- Revert: TODO: What does this do?
+
+### Options Menu
 
 The Options menu contains the following menu items:
 
@@ -970,6 +1025,10 @@ The Options menu contains the following menu items:
 
   This opens a dialog that allows the pixel colors
   of the currently selected pattern to be modified.
+  Click or drag across pixels in the dialog
+  to toggle them between black and white.
+  I couldn't find a way to reset a pattern to its default state,
+  so be careful with these changes!
 
 - Polygon Sides...
 
@@ -1035,34 +1094,21 @@ The Options menu contains the following menu items:
   dragged left or right to change the perspective of all the selected pixels.
   The effect is not displayed until the mouse button is released.
 
-The Patterns menu contains the Patterns palette.
+### Patterns Menu
 
-To undo the last drawing action, press the esc key or cmd-z.
-
-To select all or part of a drawing,
-use the Rectangle or Lasso Selection Tools.
-Shapes cannot be selected by clicking them.
-
-To rotate the selected portion of a drawing,
-select Options ... Rotate and drag any of the selection handles.
-Other options include Slant, Distort, and Perspective.
-
-To erase part of a drawing, do one of the following:
-
-- Select the Erase tool and drag over the drawing.
-- Select an area with the Rectangle or Lasso Selection Tools
-  and press the delete key, or select Edit ... Cut Picture, or press cmd-x.
-
-## Patterns
-
-When the Bucket tool is selected, a Patterns menu appears.
-This menu contains a grid of buttons that can clicked
-to select the pattern that is used by the Bucket tool.
-Drag the Patterns menu off the menu bar
-to create a floating palette of pattern buttons.
+The Patterns menu contains the Patterns palette
+which contains a grid of buttons that can clicked
+to select the pattern that is used by the Bucket and Spray Can tools.
 
 <img alt="HyperCard Patterns" style="width: 15%"
   src="/blog/assets/hypercard-patterns.png?v={{pkg.version}}">
+
+Like the Tools menu, the Patterns menu can be dragged off of the menu bar
+to create a floating palette.
+
+When a painting tool is selected, pressing the tab key
+toggles the display of the Patterns palette,
+even if it was not previously dragged off of the menu bar.
 
 To fill an existing, closed shape with the selected pattern,
 select the Bucket tool and click the
@@ -1079,17 +1125,6 @@ the Bucket tool to fill the resulting character outlines with a pattern.
 
 <img alt="HyperCard Text Patterns" style="width: 30%"
   src="/blog/assets/hypercard-text-patterns.png?v={{pkg.version}}">
-
-The Trace Edges menu item can be applied multiple times.
-The screenshot below shows the effect when it is applied to text four times.
-
-<img alt="HyperCard Trace Edges multiple times" style="width: 25%"
-  src="/blog/assets/hypercard-trace-edges-multiple.png?v={{pkg.version}}">
-
-Then click or drag across pixels in the dialog
-to toggle them between black and white.
-I couldn't find a way to reset a pattern to its default state,
-so be careful with these changes!
 
 ## Buttons
 
