@@ -822,10 +822,10 @@ The tools include:
       constrain the movement to be only horizontal or only vertical.
     - Drag the selected area.
 
-    To stretch the selected area, hold down the cmd key
+    To stretch (or shrink) the selected area, hold down the cmd key
     and drag any corner or edge of the selection rectangle.
 
-    Select Options ... Grid to constrain dragging
+    Select Options ... Grid to constrain dragging and stretching
     to be in increments of 8 pixels.
 
   - **Lasso**
@@ -840,6 +840,12 @@ The tools include:
     The selection is the combined contents of those paths,
     not the entire contents of the lassoed area.
     The selection can then be copied, cut, deleted, or dragged.
+
+    The modifier keys that affect the Rectangle Selection tool
+    affect the Lasso tool in mostly the same way.
+
+    To select all the items in th picture layer of the current domain (background or card),
+    double-click the Lasso tool in the Tools palette.
 
   - **Pencil**
 
