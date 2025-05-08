@@ -2648,13 +2648,15 @@ The `go` command supports many arguments described below.
 
 All the `go` commands above implement "hard links"
 that do not depend on other data.
+
 "Soft links" do depend on other data.
 For example, suppose we have a stack where specific dogs are
 described on their own card and the card name is the dog name.
 The first card in the stack can contain
 a field where a dog name can be entered (named "dogName") and
 a button that navigates to the matching card when clicked.
-The button can be implemented with the following script:
+
+Add the following script to the button:
 
 ```text
 on mouseUp
@@ -2665,6 +2667,26 @@ on mouseUp
     answer "No matching card was found."
   end if
 end mouseUp
+```
+
+Add the following script to the field so
+pressing the return key after ending a dog name
+has the same effect as clicking the button:
+
+```text
+on keyDown which
+  if charToNum(which) is 13 then
+    put the length of me - 1 into len
+    put character 1 to len of me into name
+    if there is a card name then
+      go to card name
+    else
+      answer "No matching card was found."
+    end if
+  else
+    pass keyDown
+  end if
+end keyDown
 ```
 
 ### get Command
