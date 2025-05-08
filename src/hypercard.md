@@ -788,14 +788,56 @@ The tools include:
 
   - **Rectangle Selection**
 
-    This selects a rectangular area of a drawing
-    which can then be copied, cut, deleted, dragged, or transformed
+    Drag from any corner of the painted area to be selected
+    to the opposite corner.
+    The selected area will be surrounded by a rectangle of marching ants.
+    The selected area can then be copied, cut, deleted, dragged, or transformed
     (using the Options menu items Rotate, Slant, Distort, and Perspective).
 
-  - **Lasso Selection**
+    If the cmd key is held down before releasing the mouse button,
+    the selected area will collapse to be the
+    smallest rectangle that contains all the black pixels.
 
-  This selects an arbitrary area of a drawing
-  which can then be copied, cut, deleted, or dragged.
+    To constrain dragging of the selected area
+    to be only in the horizontal or vertical direction,
+    hold down the shift key while dragging it.
+
+    To duplicate the selected area,
+    hold down the option key while dragging it.
+
+    To both constrain the movement AND duplicate the selected area,
+    hold down both the shift and option keys while dragging it.
+
+    To select the entire picture layer of the current domain (background or card),
+    double-click the "Rectangle Selection" tool in the Tools palette.
+    This is useful for copying everything that was painted
+    to another card and/or domain.
+
+    To paint a trail of the selected area repeated every 1 to 8 pixels:
+
+    - Specify the number of pixels between the copies by
+      pressing option-{n} where n is a number from 1 to 8.
+    - Hold down the cmd and option keys.
+    - Optionally, also hold down the shift key to
+      constrain the movement to be only horizontal or only vertical.
+    - Drag the selected area.
+
+    To stretch the selected area, hold down the cmd key
+    and drag any corner or edge of the selection rectangle.
+
+    Select Options ... Grid to constrain dragging
+    to be in increments of 8 pixels.
+
+  - **Lasso**
+
+    The Lasso tool enables selecting
+    non-rectangular portions of the painted layer.
+    Drag around the an arbitrary portion of the painted area.
+    When the mouse button is released, the dragged path will automatically
+    be closed, as if with a straight line to the starting point.
+    Each contiguous set of black pixels inside the selected area
+    will be surrounded by a path of marching ants.
+    The selected area can then be copied, cut, deleted, or dragged.
 
   - **Pencil**
 
