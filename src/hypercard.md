@@ -936,6 +936,25 @@ The Paint menu contains the following menu items:
 
 TODO: Finish describing all the menu items above.
 
+The Options menu contains the following menu items:
+
+- Grid:
+- FatBits:
+- Power Keys:
+- Line Size...:
+- Brush Shape...:
+- Edit Pattern...:
+- Polygon Sides...:
+- Draw Filled:
+- Draw Centered:
+- Draw Multiple:
+- Rotate:
+- Slant:
+- Distort:
+- Perspective:
+
+TODO: Finish describing all the menu items above.
+
 The Patterns menu contains the Patterns palette.
 
 If Options ... Draw Filled is selected, the following tools will
