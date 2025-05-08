@@ -1185,7 +1185,7 @@ To add a button to the current card.
    1. Movie: Choose a movie file and specify details on
       how and where it should be played.
    1. Sound: Choose a sound resource already available to the stack,
-      record a sound to create a new sound resource,
+      record a sound to create a new sound resource (doesn't work),
       or import a sound resource ("snd") from another file.
       Select playback quality (Good, Better, or Best).
    1. Speak Text: Enter text or use selected text. Select a voice.
