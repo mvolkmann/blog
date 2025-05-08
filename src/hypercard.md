@@ -1153,8 +1153,8 @@ To add a button to the current card.
    This is the case even if the button has the "Transparent" style
    and has a non-rectangular icon.
 
-1. Click the "LinkTo..." button to configure the button
-   so clicking it navigates to another card or stack.
+1. Click the "LinkTo..." button to modify the `mouseUp` handler
+   so clicking the button navigates to another card or stack.
 
    This opens a dialog with the buttons "This Card", "This Stack", and "Cancel".
 
@@ -1174,16 +1174,21 @@ To add a button to the current card.
    The handler is added if it doesn't exist and is modified if it already exists.
    Open the script for the button to see the change that is made.
 
-1. Click the "Tasks..." button to configure the following seven options:
+1. Click the "Tasks..." button to modify the `mouseUp` handler
+   to execute a command for one of the following seven actions:
 
-   1. Go to Destination: choose from 10 radio buttons
-   1. Visual Effect: choose an effect and a speed
-   1. Launch Application: choose an application and optionally a specific document
-   1. Link to URL: enter a URL
-   1. MovieL choose a movie file and specify details on how is should be played
-   1. Sound: choose a sound resource and playback quality;
-      can also record or import a sound
-   1. Speak Text: enter text or use selected text, and select a voice
+   1. Go to Destination: Choose from 10 radio buttons.
+   1. Visual Effect: Choose an effect and a speed.
+   1. Launch Application: Choose an application and
+      optionally a specific document to open.
+   1. Link to URL: Enter a URL to be opened in the default web browser.
+   1. Movie: Choose a movie file and specify details on
+      how and where it should be played.
+   1. Sound: Choose a sound resource already available to the stack,
+      record a sound to create a new sound resource,
+      or import a sound resource ("snd") from another file.
+      Select playback quality (Good, Better, or Best).
+   1. Speak Text: Enter text or use selected text. Select a voice.
 
 1. Optionally click the "Script..." button
    to open a dialog where a script can be added or modified.
