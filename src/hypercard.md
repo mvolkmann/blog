@@ -1179,6 +1179,7 @@ To add a button to the current card.
 
    1. Go to Destination: Choose from 10 radio buttons.
    1. Visual Effect: Choose an effect and a speed.
+      For more detail, see the "Card Transitions" section below.
    1. Launch Application: Choose an application and
       optionally a specific document to open.
    1. Link to URL: Enter a URL to be opened in the default web browser.
@@ -2103,11 +2104,11 @@ There are 27 effects and five speeds.
 To specify a visual effect that is trigger by a specific button:
 
 1. Select the Button tool.
-1. Double-click the button.
+1. Double-click the button to open its "Button Info" dialog.
 1. Click the "Tasks..." button.
-1. Select "Visual Effect" in the list on the left.
-1. Select an effect from the list in the center.
-1. Select a speed from the radio buttons on the right.
+1. Select "Visual Effect" in the left list.
+1. Select an effect from the center list.
+1. Select a speed from the right radio buttons.
 1. Click the "Assign Tasks" button.
 
 This adds a `visual effect` command to the `mouseUp` handler.
