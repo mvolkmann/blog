@@ -849,11 +849,26 @@ The tools include:
 
   - **Pencil**
 
-    This is used for freehand drawing.
-    The pencil width is a single pixel and cannot be changed.
+    The Pencil tool is used for freehand drawing
+    which is accomplished by dragging.
+    The pencil width is a single pixel is not affected by
+    selecting a different size from Options ... Line Size...
+
+    If the current pixel color at the start of the drag is black
+    then the drawing color will be white.
+    Otherwise it will be black.
+    It makes no difference whether the start pixel color
+    comes from the card or background domain.
+    The drawing color remains the same throughout the drag.
+
+    Holding down the shift key while dragging
+    constrains the line to be horizontal or vertical,
+    depending on the initial drag direction.
 
     Double-clicking this button toggles FatBits mode
     as an alternative to selecting Options ... FatBits.
+    Another way to enter FatBits mode when the Pencil tool is selected
+    is to cmd-click on the pixel to be in the center of the FatBits display.
 
 - Row #3
 
@@ -881,6 +896,9 @@ The tools include:
 
     Double-clicking this opens the "Line Size" dialog
     as an alternative to selecting Options ... Line Size...
+
+    While dragging to the end of the line, holding down the shift key
+    constrains the line angle to be a multiple of 15 degrees.
 
 - Row #4
 
