@@ -2352,6 +2352,23 @@ put "apple,banana,cherry" into fruits
 put item 2 of fruits into fruit -- sets to banana
 ```
 
+#### Booleans
+
+TODO: Add more to this section.
+
+#### Numbers
+
+TODO: Add more to this section.
+
+#### Strings
+
+| Desired Result | Expression                          |
+| -------------- | ----------------------------------- |
+| length         | `the length of {string-expr}`       |
+| substring      | `character i to j of {string-expr}` |
+
+TODO: Add more to this section.
+
 ### Scripts
 
 A HyperCard script is a collection of function and event handler definitions.
