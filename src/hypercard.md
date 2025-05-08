@@ -731,12 +731,25 @@ These seem like large oversights!
 
 The tools menu contains a grid of buttons
 that can be clicked to select one of the 18 tools.
+These are arranged in six rows and three columns.
+
 Drag the Tools menu off the menu bar
 to create a floating palette of tool buttons.
 Alternatively, press option-tab to toggle display of the Tools palette.
 
 <img alt="HyperCard Tools" style="width: 15%"
   src="/blog/assets/hypercard-tools.png?v={{pkg.version}}">
+
+The first row of buttons select the current mode
+which is always one of Browse, Button, or Field.
+The remaining rows are painting tools that act on bitmap graphics.
+They select, draw, or erase square pixels that are either white or black.
+
+Painting can be performed in both the background and card domains.
+
+Painting tool operations can be undone by
+selecting Edit ... Undo or pressing cmd-z,
+but only if the undo is requested BEFORE performing another operation.
 
 The tools include:
 
@@ -892,15 +905,38 @@ The tools include:
 When a painting tool is selected,
 the Objects, Font, and Style menus disappear,
 and the Paint, Options, and Patterns menus appear.
-When the browse, button, or field tools are selected,
-the reverse menu changes occurs.
+When the Browse, Button, or Field tools are selected,
+the opposite menu changes occur.
 
-Like the Tools menu, it can be dragged off of the menu bar
+Like the Tools menu, the Patterns menu can be dragged off of the menu bar
 to create a floating palette.
 
 When a painting tool is selected, pressing the tab key
 toggles the display of the Patterns palette,
 even if it was not previously dragged off of the menu bar.
+
+The Paint menu contains the following menu items:
+
+- Select: selects the smallest area that includes all the painted, black pixels
+- Select All: selects the entire painting layer
+- Fill:
+- Invert:
+- Pickup:
+- Darken:
+- Lighten:
+- Trace Edges:
+- Rotate Left:
+- Rotate Right:
+- Flip Vertical:
+- Flip Horizontal:
+- Opaque:
+- Transparent:
+- Keep:
+- Revert:
+
+TODO: Finish describing all the menu items above.
+
+The Patterns menu contains the Patterns palette.
 
 If Options ... Draw Filled is selected, the following tools will
 fill their shape with the selected pattern:
@@ -2216,7 +2252,7 @@ based on the state of the scroll window.
 
 To hide the menu bar that typically appears at the top of the screen,
 use the command `hide menubar`.
-To restore the menu bar, use the command `show menuBar`.
+To restore the menu bar, use the command `show menubar`.
 
 ## Keyboard Shortcuts
 
