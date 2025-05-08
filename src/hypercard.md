@@ -832,12 +832,14 @@ The tools include:
 
     The Lasso tool enables selecting
     non-rectangular portions of the painted layer.
-    Drag around the an arbitrary portion of the painted area.
+    Drag around an arbitrary portion of the painted area.
     When the mouse button is released, the dragged path will automatically
     be closed, as if with a straight line to the starting point.
     Each contiguous set of black pixels inside the selected area
     will be surrounded by a path of marching ants.
-    The selected area can then be copied, cut, deleted, or dragged.
+    The selection is the combined contents of those paths,
+    not the entire contents of the lassoed area.
+    The selection can then be copied, cut, deleted, or dragged.
 
   - **Pencil**
 
