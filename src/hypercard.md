@@ -916,6 +916,8 @@ The tools include:
     select an area using the Selection or Lasso tool
     and then press the delete key.
 
+    For fine grained erasing, use "Fat Bits" mode.
+
     Hold the shift key down while dragging to
     constrain the eraser movement to be horizontal or vertical,
     depending on the initial drag direction.
@@ -944,9 +946,6 @@ The tools include:
     before ending the drag by releasing the mouse button.
     This is most often used to create horizontal (0 or 180 degrees)
     or vertical (90 or 270 degrees) lines.
-
-    While dragging to the end of the line, holding down the shift key
-    constrains the line angle to be a multiple of 15 degrees.
 
     To draw the line using the selected pattern,
     hold down the option key before dragging.
@@ -1024,17 +1023,24 @@ The tools include:
     with all the same keyboard shortcuts.
 
     The size of the rounded corners cannot be adjusted.
-    The only option to obtain a different rounded corner size is to
-    draw a normal rectangle and use Fat Bits mode to manually edit the corners.
+    The only option to obtain a different rounded corner size
+    is to draw a normal rectangle and
+    use "Fat Bits" mode to manually edit the corners.
     This is quite tedious.
 
 - Row #5
 
   - **Bucket**
 
-    The Bucket tool fills an area with the selected pattern
-    from the Patterns menu or palette
-    when a pixel inside an enclosed area is clicked.
+    The Bucket tool fills an area encompassed by black pixels
+    with the selected pattern from the Patterns menu or palette.
+    The cursor changes to match the Bucket tool icon.
+    Position the bottom top of the dripping paint in the cursor icon
+    over a pixel inside the area to be filled and click.
+
+    When a solid black area is filled with the Bucket tool,
+    all the black pixels, including the border,
+    are replaced by the selected pattern.
 
     To toggle display of the Patterns palette, double click this tool.
 
@@ -1043,15 +1049,22 @@ The tools include:
     The Oval tool draws an oval which is any closed curve that
     resembles the outline of an egg or an ellipse.
     It doesn't have a strict mathematical definition.
+
+    This tool is used in the same way as the Rectangle tool.
+
     To draw a circle, hold down the shift key while dragging.
 
-    To toggle the "Draw Filled" option, double click this tool
-    as an alternative to selecting Options ... Draw Filled.
+    To draw a portion of an oval,
+    draw a complete oval and erase the undesired part.
 
   - **Curve**
 
-    The Curve tool is similar to the Line tool, but will automatically
-    close the shape if Options ... Draw Filled is selected.
+    The Curve tool is similar to the Pencil tool, but it:
+
+    - uses the selected line width
+    - automatically closes the shape and fills it
+      if Options ... Draw Filled is selected
+    - draws with the selected pattern if the option key is held down
 
     To toggle the "Draw Filled" option, double click this tool
     as an alternative to selecting Options ... Draw Filled.
@@ -1061,24 +1074,41 @@ The tools include:
   - **Text**
 
     The Text tool paints text that cannot be edited.
+    It is often used for card titles or for
+    labels that appear above or to the left of fields.
 
-    To open the "Text Properties" dialog, double click this tool
-    as an alternative to selecting Edit ... Text Style.
+    While entering text, press the return key to create multi-line text.
 
     The text style must be specified before typing the text.
     To open the "Text Properties" dialog,
-    select Edit ... Text Style...,
-    press cmd-t, or
-    double click the Text tool icon ("A") in the Tools palette.
-    Then click the Text tool, click on the card or background
+    select Edit ... Text Style..., press cmd-t, or
+    double click this tool in the Tools palette.
+    Select the font styles, alignment, font name,
+    font size, and line height to be used.
+    A sample of using the selected text properties
+    is displayed in the lower right of the dialog.
+    Click the "OK" button when satisfied.
+
+    To paint text, click the Text tool, click on the card or background
     where the text should go, and begin typing.
-    To create multiline text, press the return key at the end of a line.
+
+    To paint multiline text, press the return key at the end of a line.
+
+    To select the text after it has been typed, but before clicking away,
+    press cmd-s. The text can then be dragged to a new location.
+
+    As long as you have not clicked away from the text being typed,
+    its text properties can be changed.
+    Opening the "Text Properties" dialog again and
+    changing them affects the text already typed and
+    the text that will be typed after the dialog is closed.
 
     To apply a pattern to painted text, see the "Patterns" section below.
 
     Pros of painted text:
 
-    - Users do not need to have the selected font installed.
+    - Users do not need to have the selected font installed
+      because the text is stored in bitmap form.
     - The text is automatically read-only.
       Using a field instead requires opening its "Field Info" dialog
       and checking the "Lock Text" checkbox.
@@ -1090,17 +1120,40 @@ The tools include:
     - The text cannot be modified later.
       Changes require erasing the text and recreating it.
       For text that may need to be edited later, use a locked field instead.
+    - All the characters in one set of painted text
+      must use the same text properties.
+      To use multiple text properties settings,
+      create multiple sets of painted text and position them next to each other.
+      The text in a field can used multiple text properties settings.
 
   - **Regular Polygon**
 
     The Regular Polygon tool draws a convex polygon
     whose sides all have the same length.
-    Select Options ... Polygon Sides...
-    to select the number of sides to include.
-    The options are 3, 4, 5, 6, 8, and circle.
 
-    To open the "Polygon Sides" dialog, double click this tool
-    as an alternative to selecting Options ... Polygon Sides...
+    Select Options ... Polygon Sides... or double-click this tool
+    to opens a dialog with the options
+    triangle (3), square (4), pentagon (5),
+    hexagon (6), octagon (8), and circle (infinite).
+
+    Click the center location and draw outward
+    to specify the size and rotation of the shape.
+
+    To constrain the angle of the shape to multiples of 15 degrees,
+    hold down the shift key
+    before ending the drag by releasing the mouse button.
+
+    To change the border width from the default of 1 pixel,
+    Select Options ... Line Size... or double click the Line tool
+    before using this tool.
+
+    To draw a filled polygon, select Options ... Draw Filled
+    before using this tool.
+
+    To move the polygon as it is being drawn, keep the mouse button down,
+    hold the cmd key down, and drag to a new location.
+    To continue drawing the polygon, release the cmd key,
+    but keep the mouse button down and continue dragging.
 
   - **Polygon**
 
