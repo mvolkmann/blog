@@ -39,8 +39,7 @@ The original version of the game Myst was developed in HyperCard.
 
 The first card in the default HyperCard Home stack
 contains buttons that navigate to commonly used stacks.
-Begin by clicking the "HyperCard Tour" stack
-which provides a good overview of the application.
+Click the "HyperCard Tour" stack for a good overview of the application.
 At any point, press cmd-h to return to the Home stack.
 
 Changes to stacks are saved automatically.
@@ -48,9 +47,9 @@ There is no save button or menu item.
 
 ## Launching HyperCard
 
-To launch HyperCard, double-click on the app icon
+To launch HyperCard, double click on the app icon
 or on the icon of a HyperCard stack.
-If the app icon was double-clicked, the Home stack will be opened.
+If the app icon was double clicked, the Home stack will be opened.
 The first card in the opened stack will be displayed.
 
 ## Help
@@ -135,7 +134,7 @@ in the following locations in this order:
 
 1. `System Folder` at the root of the drive containing the HyperCard app
 1. directory containing another stack that was
-   double-clicked to launch HyperCard
+   double clicked to launch HyperCard
 1. directory containing the HyperCard app (default location of `Home` file)
 1. `HyperCard Stacks` directory in the director containing the HyperCard app
 1. root directory of the drive containing the HyperCard app
@@ -299,8 +298,8 @@ To create a new stack from scratch:
 
   This will default to the size of the stack currently being viewed.
 
-  The card size used by a stack can be changed later by
-  opening its Stack Info dialog and clicking the "Resize..." button.
+  To later change the card size used by a stack,
+  open its Stack Info dialog and click the "Resize..." button.
   However, this can require rearranging the objects on each card,
   especially if the size is reduced.
 
@@ -398,7 +397,7 @@ To view and optionally edit a background used by the current card:
 ### Stack Sharing
 
 To share a stack with others, send them the stack file.
-They can open the stack by double-clicking it,
+They can open the stack by double clicking it,
 or by launching HyperCard and selecting File ... Open Stack...
 
 ### Card Sorting
@@ -810,7 +809,7 @@ The tools include:
     hold down both the shift and option keys while dragging it.
 
     To select the entire picture layer of the current domain (background or card),
-    double-click the Selection tool in the Tools palette.
+    double click the Selection tool in the Tools palette.
     This is useful for copying everything that was painted
     to another card and/or domain.
 
@@ -846,7 +845,7 @@ The tools include:
     affect the Lasso tool in mostly the same way.
 
     To select all the items in th picture layer of the current domain (background or card),
-    double-click the Lasso tool in the Tools palette.
+    double click the Lasso tool in the Tools palette.
 
   - **Pencil**
 
@@ -862,11 +861,11 @@ The tools include:
     comes from the card or background domain.
     The drawing color remains the same throughout the drag.
 
-    Holding down the shift key while dragging
-    constrains the line to be horizontal or vertical,
+    Hold the shift key down while dragging to
+    constrain the line to be horizontal or vertical,
     depending on the initial drag direction.
 
-    Double-clicking this button toggles FatBits mode
+    To toggle FatBits mode, double click this tool
     as an alternative to selecting Options ... FatBits.
     Another way to enter FatBits mode when the Pencil tool is selected
     is to cmd-click on the pixel to be in the center of the FatBits display.
@@ -875,11 +874,24 @@ The tools include:
 
   - **Brush**
 
-    The Brush tool is used for freehand painting using the selected pattern.
+    The Brush tool is used for freehand painting
+    using the selected brush shape and pattern.
     To change the shape and size of the brush,
     Select Options ... Brush Shape... before painting.
 
-    Double-clicking this opens the "Brush" dialog
+    For example, select the diagonal line brush shape
+    to draw calligraphy.
+
+    Hold the shift key down while dragging to
+    constrain the line to be horizontal or vertical,
+    depending on the initial drag direction.
+
+    To use the Brush tool as an eraser,
+    hold down the cmd key while dragging.
+    When used in the card domain, this turns all pixels to transparent.
+    When used in the background domain, this turns all pixels to white.
+
+    To open the "Brush" dialog, double click this tool
     as an alternative to selecting Options ... Brush Shape...
 
   - **Eraser**
@@ -890,13 +902,13 @@ The tools include:
 
   - **Line**
 
-    The Line tool draws a straight line formed by
-    clicking the start pixel and dragging to end pixel.
+    The Line tool draws a straight line.
+    Click the start pixel and drag to end pixel.
     To change the line size, Select Options ... Line Size... before drawing.
     If the option key is held down while drawing,
     the line will use the selected pattern.
 
-    Double-clicking this opens the "Line Size" dialog
+    To open the "Line Size" dialog, double click this tool
     as an alternative to selecting Options ... Line Size...
 
     While dragging to the end of the line, holding down the shift key
@@ -910,20 +922,19 @@ The tools include:
 
   - **Rectangle**
 
-    The Rectangle tool draws a rectangle, specified by clicking at the
-    location of any corner and dragging to the opposite corner.
+    The Rectangle tool draws a rectangle.
+    Click the location of any corner and drag to the opposite corner.
     To draw a square, hold down the shift key while dragging.
 
-    Double-clicking this toggles the "Draw Filled" option
+    To toggle the "Draw Filled" option, double click this tool
     as an alternative to selecting Options ... Draw Filled.
 
   - **Round Rectangle**
 
-    The Round Rectangle tool draws a rectangle with rounded corners,
-    specified by clicking the pixel of any corner
-    and dragging to the opposite corner.
+    The Round Rectangle tool draws a rectangle with rounded corners.
+    Click the location of any corner and drag to the opposite corner.
 
-    Double-clicking this toggles the "Draw Filled" option
+    To toggle the "Draw Filled" option, double click this tool
     as an alternative to selecting Options ... Draw Filled.
 
 - Row #5
@@ -934,7 +945,7 @@ The tools include:
     from the Patterns menu or palette
     when a pixel inside an enclosed area is clicked.
 
-    Double-clicking this toggles display of the Patterns palette.
+    To toggle display of the Patterns palette, double click this tool.
 
   - **Oval**
 
@@ -943,7 +954,7 @@ The tools include:
     It doesn't have a strict mathematical definition.
     To draw a circle, hold down the shift key while dragging.
 
-    Double-clicking this toggles the "Draw Filled" option
+    To toggle the "Draw Filled" option, double click this tool
     as an alternative to selecting Options ... Draw Filled.
 
   - **Curve**
@@ -951,7 +962,7 @@ The tools include:
     The Curve tool is similar to the Line tool, but will automatically
     close the shape if Options ... Draw Filled is selected.
 
-    Double-clicking this toggles the "Draw Filled" option
+    To toggle the "Draw Filled" option, double click this tool
     as an alternative to selecting Options ... Draw Filled.
 
 - Row #6
@@ -960,14 +971,14 @@ The tools include:
 
     The Text tool paints text that cannot be edited.
 
-    Double-clicking this opens the "Text Properties" dialog
+    To open the "Text Properties" dialog, double click this tool
     as an alternative to selecting Edit ... Text Style.
 
     The text style must be specified before typing the text.
     To open the "Text Properties" dialog,
     select Edit ... Text Style...,
     press cmd-t, or
-    double-click the Text tool icon ("A") in the Tools palette.
+    double click the Text tool icon ("A") in the Tools palette.
     Then click the Text tool, click on the card or background
     where the text should go, and begin typing.
     To create multiline text, press the return key at the end of a line.
@@ -997,7 +1008,7 @@ The tools include:
     to select the number of sides to include.
     The options are 3, 4, 5, 6, 8, and circle.
 
-    Double-clicking this opens the "Polygon Sides" dialog
+    To open the "Polygon Sides" dialog, double click this tool
     as an alternative to selecting Options ... Polygon Sides...
 
   - **Polygon**
@@ -1006,10 +1017,10 @@ The tools include:
     Click at each point in the polygon. Double-click to end.
     It does not automatically connect the last point to the first.
 
-    Double-clicking this toggles the "Draw Filled" option
+    To toggle the "Draw Filled" option, double click this tool
     as an alternative to selecting Options ... Draw Filled.
 
-Shapes cannot be selected by clicking them.
+Unlike in some applications, shapes cannot be selected by clicking them.
 To select all or part of a drawing,
 use the Rectangle or Lasso Selection Tools.
 
@@ -1152,7 +1163,7 @@ The Options menu contains the following menu items:
   draw their lines with the selected pattern:
   Line, Rectangle, Rounded Rectangle, Oval, Regular Polygon, and Polygon.
 
-  A shortcut for toggling the "Draw Filled" option is to double-click
+  A shortcut for toggling the "Draw Filled" option is to double click
   any of the shape buttons in the Tools palette that draw a closed shape.
 
 - Draw Centered:
@@ -1317,9 +1328,9 @@ To add a button to the current card.
      Check "Show Name" to display a label for the checkbox to its right.
 
      It doesn't make sense to uncheck the "Auto Hilite" checkbox.
-     Check it enables toggling the checkbox
-     by clicking either the checkbox or the label.
-     This toggles the value of its `hilite` property
+     When it is checked, the state is toggled by
+     clicking either the checkbox or the label.
+     Doing so toggles the value of its `hilite` property.
 
      For more detail, see the "Check Boxes" section below.
 
@@ -1568,7 +1579,7 @@ adds a solid, rectangular outline around all the buttons.
 ### Editing Buttons
 
 To edit the properties of a button, select the Button tool,
-and double-click a button.
+and double click a button.
 Alternatively, select a button, and select Objects ... Button Info...
 Either way, a "Button Info" dialog like the one shown above will open.
 This works regardless of whether the button is in the card or background layer.
@@ -1702,9 +1713,9 @@ Modify the button script to execute HyperTalk commands when clicked.
 
 There are three ways to view and edit the script for a button:
 
-1. Select the Button tool, double-click the button to open
+1. Select the Button tool, double click the button to open
    its "Button Info" dialog, and click the "Script..." button.
-1. Select the Button tool, hold down the shift key, and double-click the button.
+1. Select the Button tool, hold down the shift key, and double click the button.
 1. Hold down cmd-option and click the button.
 
 To detect whether special keys where held down during a click, check the
@@ -1944,7 +1955,7 @@ adds a solid, rectangular outline around all the fields.
 ### Editing Fields
 
 To edit the properties of a field, select the Field tool,
-and double-click a field.
+and double click a field.
 Alternatively, select a field, and select Objects ... Field Info...
 Either way, a "Field Info" dialog like the one shown above will open.
 This works regardless of whether the field is in the card or background layer.
@@ -2125,9 +2136,9 @@ run the command `do card field "{field-name}"`.
 
 There are three ways to view and edit the script for a field:
 
-1. Select the Field tool, double-click the field to open
+1. Select the Field tool, double click the field to open
    its "Field Info" dialog, and click the "Script..." button.
-1. Select the Field tool, hold down the shift key, and double-click the field.
+1. Select the Field tool, hold down the shift key, and double click the field.
 1. Hold down cmd-option-shift and click the field.
 
 ### Field Groups
@@ -2148,7 +2159,7 @@ To create white text on a black background:
    as large as the anticipated size of the text.
 1. Press the tab key to open the Patterns palette.
 1. Select the solid black pattern.
-   If none of the patterns are solid black, double-click the one
+   If none of the patterns are solid black, double click the one
    closest to solid black to open its "Edit Pattern" dialog,
    click all the white pixels to turn them black, and click the "OK" button.
 1. Select the Bucket tool.
@@ -2461,7 +2472,7 @@ To change the portion of the stack window that is visible,
 drag the rectangle in scroll window.
 
 To toggle the viewable size between full size and the last reduced size,
-double-click the rectangle in the scroll window or
+double click the rectangle in the scroll window or
 click the zoom box in the upper-right corner of the stack window.
 The rectangle cannot be dragged if its size is the same as the scroll window.
 
@@ -3236,7 +3247,7 @@ A tick is 1/60th of a second.
 
 The following mouse-related events are automatically triggered:
 
-- `mouseDoubleUp` - double-click
+- `mouseDoubleUp` - double click
 - `mouseDown` - pressed but not released
 - `mouseEnter` - entered
 - `mouseLeave` - exited
