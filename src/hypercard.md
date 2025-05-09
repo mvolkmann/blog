@@ -1026,6 +1026,7 @@ The tools include:
     The size of the rounded corners cannot be adjusted.
     The only option to obtain a different rounded corner size is to
     draw a normal rectangle and use Fat Bits mode to manually edit the corners.
+    This is quite tedious.
 
 - Row #5
 
