@@ -1326,9 +1326,12 @@ The Options menu contains the following menu items:
 
 - Draw Multiple
 
-  This causes the following painting tools to
+  This option causes the following painting tools to
   draw multiple times as the mouse is dragged:
   Rectangle, Rounded Rectangle, Oval, Curve, and Regular Polygon.
+  Before drawing a shape with this option turned on,
+  specify the number of pixels between the copies by
+  pressing option-{n} where n is a number from 1 to 8.
 
   Interesting designs can be created by
   using this with the Regular Polygon tool.
