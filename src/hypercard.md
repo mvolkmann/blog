@@ -982,7 +982,19 @@ The tools include:
 
     The Rectangle tool draws a rectangle.
     Click the location of any corner and drag to the opposite corner.
+
     To draw a square, hold down the shift key while dragging.
+
+    To specify the center point of the rectangle
+    and drag out its size from there,
+    select Options ... Draw Centered before dragging out the rectangle.
+    The center of the cross cursor will turn white to indicate
+    being in this mode and aid it locating the desired center pixel.
+
+    The "Draw Centered" mode can be used to draw concentric shapes of all types.
+    Begin by drawing a dot at the target center.
+    Draw each shape by starting at this center location and dragging outward.
+    Finally, erase the dot at the center.
 
     To move the rectangle as it is being drawn, keep the mouse button down,
     hold the cmd key down, and drag to a new location.
@@ -994,8 +1006,9 @@ The tools include:
 
     To draw the border using the selected line thickness and pattern,
     hold down the option key before the initial corner click.
-    This can be combined with the "Draw Filled" option
-    to use the same pattern for both the border and the fill.
+    Combine this with the "Draw Filled" option to
+    use the same pattern for both the border and the fill,
+    resulting in a rectangle that appears to have no border.
 
     To draw a dashed line border, select a line width of 1 pixel,
     edit one of the patterns to match the screenshot below,
@@ -1007,10 +1020,12 @@ The tools include:
   - **Round Rectangle**
 
     The Round Rectangle tool draws a rectangle with rounded corners.
-    Click the location of any corner and drag to the opposite corner.
+    It is used in the same way as the Rectangle tool,
+    with all the same keyboard shortcuts.
 
-    To toggle the "Draw Filled" option, double click this tool
-    as an alternative to selecting Options ... Draw Filled.
+    The size of the rounded corners cannot be adjusted.
+    The only option to obtain a different rounded corner size is to
+    draw a normal rectangle and use Fat Bits mode to manually edit the corners.
 
 - Row #5
 
