@@ -1130,6 +1130,8 @@ The tools include:
 
     The Regular Polygon tool draws a convex polygon
     whose sides all have the same length.
+    It is used in the same way as the Rectangle tool,
+    with many of the same keyboard shortcuts.
 
     Select Options ... Polygon Sides... or double-click this tool
     to opens a dialog with the options
@@ -1154,6 +1156,12 @@ The tools include:
     hold the cmd key down, and drag to a new location.
     To continue drawing the polygon, release the cmd key,
     but keep the mouse button down and continue dragging.
+
+    To draw the border using the selected line thickness and pattern,
+    hold down the option key before the center click.
+    Combine this with the "Draw Filled" option to
+    use the same pattern for both the border and the fill,
+    resulting in a polygon that appears to have no border.
 
   - **Polygon**
 
@@ -1320,7 +1328,16 @@ The Options menu contains the following menu items:
 
   This causes the following painting tools to
   draw multiple times as the mouse is dragged:
-  Rectangle, Rounded Rectangle, Oval, Curve, and Regular Polygon
+  Rectangle, Rounded Rectangle, Oval, Curve, and Regular Polygon.
+
+  Interesting designs can be created by
+  using this with the Regular Polygon tool.
+  For example, double click that tool and select the triangle shape.
+  Then click the intended center and drag away in a curved path
+  to create something like the screenshot below.
+
+  <img alt="HyperCard Regular Polygon Draw Multiple" style="width: 40%"
+    src="/blog/assets/hypercard-regular-polygon-draw-multiple.png?v={{pkg.version}}">
 
 - Rotate
 
