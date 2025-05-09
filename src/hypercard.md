@@ -883,22 +883,41 @@ The tools include:
     to draw calligraphy.
 
     Hold the shift key down while dragging to
-    constrain the line to be horizontal or vertical,
+    constrain the painted stroke to be horizontal or vertical,
     depending on the initial drag direction.
 
     To use the Brush tool as an eraser,
     hold down the cmd key while dragging.
-    When used in the card domain, this turns all pixels to transparent.
     When used in the background domain, this turns all pixels to white.
+    When used in the card domain, this turns all pixels to transparent.
 
-    To open the "Brush" dialog, double click this tool
+    To turn all erased pixels to white instead of transparent,
+    hold down the cmd key while dragging.
+    When used in a card domain, this provides an easy way to
+    add white pixels that hide part of the background domain for that card.
+    It is an alternative to using the Brush tool when the all white pattern
+    or the Rectangle tool filled with the all white pattern.
+
+    The default brush shape is a small circle.
+    To open the "Brush" dialog so the brush shape can be changed
+    to one of the 32 options, double click this tool
     as an alternative to selecting Options ... Brush Shape...
 
   - **Eraser**
 
-    The Eraser tool erases painted pixels that are dragged over.
-    The size of the eraser cannot be changed.
-    To erase large areas, use the Rectangle and Lasso selection tools.
+    The Eraser tool is a white square whose shape and size cannot be changed.
+    Drag over pixels to erase them.
+    In a background domain this changes black pixels to white.
+    In a card domain this changes black and white pixels to transparent,
+    revealing black pixels in the background.
+
+    To erase large areas, it is more efficient to
+    select an area using the Selection or Lasso tool
+    and then press the delete key.
+
+    Hold the shift key down while dragging to
+    constrain the eraser movement to be horizontal or vertical,
+    depending on the initial drag direction.
 
   - **Line**
 
