@@ -844,8 +844,9 @@ The tools include:
     The modifier keys that affect the Selection tool
     affect the Lasso tool in mostly the same way.
 
-    To select all the items in th picture layer of the current domain (background or card),
-    double click the Lasso tool in the Tools palette.
+    To select all the items in the picture layer
+    of the current domain (background or card),
+    double click this tool.
 
   - **Pencil**
 
@@ -919,25 +920,63 @@ The tools include:
     constrain the eraser movement to be horizontal or vertical,
     depending on the initial drag direction.
 
+    To erase all painting the current domain (background or card),
+    double click this tool. Undo to restore everything that was erased.
+    To keep a selected area and erase all the rest,
+    select the area to keep, copy it to the clipboard,
+    double click this tool, and paste the copied area.
+
+    It's too bad that the Erase shape and size
+    is not determined by the selected brush shape.
+
   - **Line**
 
     The Line tool draws a straight line.
     Click the start pixel and drag to end pixel.
-    To change the line size, Select Options ... Line Size... before drawing.
-    If the option key is held down while drawing,
-    the line will use the selected pattern.
 
-    To open the "Line Size" dialog, double click this tool
-    as an alternative to selecting Options ... Line Size...
+    To change the line width from the default of 1 pixel,
+    Select Options ... Line Size... or double click this tool before drawing.
+    This opens the "Line Size" dialog where
+    a width of 1, 2, 3, 4, 6, or 8 pixels can be selected.
+
+    To constrain the angle of the line to multiples of 15 degrees,
+    hold down the shift key
+    before ending the drag by releasing the mouse button.
+    This is most often used to create horizontal (0 or 180 degrees)
+    or vertical (90 or 270 degrees) lines.
 
     While dragging to the end of the line, holding down the shift key
     constrains the line angle to be a multiple of 15 degrees.
+
+    To draw the line using the selected pattern,
+    hold down the option key before dragging.
+    The painted pattern is not affected by the angle of the line.
+
+    To draw a dashed line, select a line width of 1 pixel,
+    edit one of the patterns to match the screenshot below,
+    select that pattern, and draw the line with the option key held down.
+
+    <img alt="HyperCard dashed line pattern" style="width: 30%"
+      src="/blog/assets/hypercard-dashed-line-pattern.png?v={{pkg.version}}">
 
 - Row #4
 
   - **Spray**
 
-    The Spray tool sprays paint using the selected pattern.
+    The Spray tool sprays paint (black pixels) using
+    randomly chosen pixels from the selected pattern.
+    The more this is applied to a specific area,
+    the more it will resemble the selected pattern.
+
+    The speed of the drag affects the number of pixels that are painted,
+    with slow drags painting more pixels.
+
+    Hold the shift key down while dragging to
+    constrain the spray movement to be horizontal or vertical,
+    depending on the initial drag direction.
+
+    To spray white pixels instead of black,
+    hold down the cmd key while dragging.
 
   - **Rectangle**
 
@@ -945,8 +984,25 @@ The tools include:
     Click the location of any corner and drag to the opposite corner.
     To draw a square, hold down the shift key while dragging.
 
+    To move the rectangle as it is being drawn, keep the mouse button down,
+    hold the cmd key down, and drag to a new location.
+    To continue drawing the rectangle, release the cmd key,
+    but keep the mouse button down and continue dragging.
+
     To toggle the "Draw Filled" option, double click this tool
     as an alternative to selecting Options ... Draw Filled.
+
+    To draw the border using the selected line thickness and pattern,
+    hold down the option key before the initial corner click.
+    This can be combined with the "Draw Filled" option
+    to use the same pattern for both the border and the fill.
+
+    To draw a dashed line border, select a line width of 1 pixel,
+    edit one of the patterns to match the screenshot below,
+    select that pattern, and draw the rectangle with the option key held down.
+
+    <img alt="HyperCard dashed line pattern" style="width: 30%"
+      src="/blog/assets/hypercard-dashed-line-pattern.png?v={{pkg.version}}">
 
   - **Round Rectangle**
 
