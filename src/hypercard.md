@@ -1163,14 +1163,22 @@ The tools include:
     use the same pattern for both the border and the fill,
     resulting in a polygon that appears to have no border.
 
-  - **Polygon**
+  - **Irregular Polygon**
 
-    The Polygon tool draws an arbitrary polygon.
-    Click at each point in the polygon. Double-click to end.
-    It does not automatically connect the last point to the first.
+    The Irregular Polygon tool draws an arbitrary polygon.
+    Click at each point in the polygon.
+    To close the polygon, click on the start point
+    or double-click on the last point.
+    TODO: Double-clicking doesn't work for me.
 
     To toggle the "Draw Filled" option, double click this tool
     as an alternative to selecting Options ... Draw Filled.
+
+    The keyboard shortcuts described for the Regular Polygon tool
+    are also used by this tool.
+
+    To constrain the angle of each edge to multiples of 15 degrees,
+    hold down the shift key before clicking the first point.
 
 Unlike in some applications, shapes cannot be selected by clicking them.
 To select all or part of a drawing,
@@ -1192,24 +1200,44 @@ the opposite menu changes occur.
 
 ### Paint Menu
 
-The Paint menu contains the following menu items:
+The Paint menu is only present when one of the painting tools is selected
+in the Tools menu or the Tools palette.
+This menu contains the following menu items:
 
-- Select
+- Select (cmd-s)
 
-  This selects the smallest area that includes all the painted, black pixels.
+  This selects the last most recently painted item.
 
-- Select All
+- Select All (cmd-a)
 
-  This selects the entire painting layer.
+  This selects the entire painting layer
+  of the current domain (background or card).
 
-- Fill: TODO: What does this do?
+- Fill
+
+  This acts on the last item created.
+  If the item is already filled,
+  it changes the interior to be filled with the currently selected pattern.
+  If the item is not filled,
+  it changes its border to be painted with the currently selected pattern.
 
 - Invert
 
-  This inverts all selected pixels,
-  changing transparent & white to black, and changing black to transparent.
+  This inverts all pixels in the selected area,
+  changing transparent and white pixels to black,
+  and changing black pixels to transparent.
 
-- Pickup: TODO: What does this do?
+- Pickup
+
+  This copies an area of the painting layer
+  so it can be pasted elsewhere.
+  To do this:
+
+  1. Draw any filled shape on top of the area to be copied.
+  1. Select Paint ... Fill.
+  1. Drag the copy that is automatically selected
+     to another location of the current card OR
+     cut it, move to another card, and paste it.
 
 - Darken: TODO: What does this do?
 
@@ -1377,14 +1405,14 @@ The Options menu contains the following menu items:
 ### Patterns Menu
 
 The Patterns menu contains the Patterns palette
-which contains a grid of buttons that can clicked
+which contains a grid of 40 buttons that can clicked
 to select the pattern that is used by the Bucket and Spray Can tools.
 
 <img alt="HyperCard Patterns" style="width: 15%"
   src="/blog/assets/hypercard-patterns.png?v={{pkg.version}}">
 
-Like the Tools menu, the Patterns menu can be dragged off of the menu bar
-to create a floating palette.
+Like the Tools menu, the Patterns menu can be
+dragged off of the menu bar to create a floating palette.
 
 When a painting tool is selected, pressing the tab key
 toggles the display of the Patterns palette,
@@ -1396,6 +1424,15 @@ dripping tip of the bucket icon (lower-right) inside the shape.
 
 To cause drawn shapes to be filled with the selected pattern,
 select Options ... Draw Filled before drawing the shape.
+
+To edit the pixels in a pattern:
+
+1. Double click the pattern to open the "Edit Pattern" dialog.
+1. Click pixel in the left square to toggle them between white and black.
+1. Verify that the intended, actual size pattern is visible in the right square.
+1. Click the "OK" button.
+
+TODO: How can an edited pattern be reset to its default?
 
 To apply a pattern to the lines in characters drawn with the Text tool,
 select a pattern, select the Bucket tool, and click inside each character.
