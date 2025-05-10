@@ -1347,8 +1347,35 @@ The Options menu contains the following menu items:
 
 - FatBits
 
-  This toggles FatBits mode which zooms in on the pixels
-  and makes detailed painting easier.
+  This toggles FatBits mode.
+  When turned it, the window zooms in on the selected pixels
+  or the most recently painted item.
+  This makes detailed painting easier.
+  The pixels can be modified using all the painting tools
+  in the Tools menu and palette.
+  To toggle individual pixels, select the Pencil tool and click the pixels.
+
+  A small window that initially appears in the lower left shows
+  how the area visible in the large window will appear at the normal scale.
+  This window can be dragged to a different location
+  or closed if not needed.
+
+  To scroll around in the large window where editing takes place,
+  hold down the option key (which turns the cursor into a hand) and drag.
+
+  To enter FatBits mode, perform any of the following actions:
+
+  - select Options ... FatBits
+  - double click the Pencil tool
+  - with the Pencil tool selected,
+    cmd-click anywhere in the card window
+
+  The last option is preferred because it is the only option
+  that specifies exactly where the zoom should be centered.
+
+  To exit FatBits mode,
+  perform any of the actions above for entering FatBits mode
+  OR select the Browse, Button, or Field tool.
 
 - Power Keys: TODO: What does this do?
 
