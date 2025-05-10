@@ -1460,6 +1460,11 @@ The Options menu contains the following menu items:
   <img alt="HyperCard Edit Pattern dialog" style="width: 30%"
     src="/blog/assets/hypercard-dashed-line-pattern.png?v={{pkg.version}}">
 
+  The supplied patterns are designed for placing copies in columns and rows.
+  This means that their right edges flow nicely into their left edges
+  and their bottom edges flow nicely into their top edges.
+  Any edits you make should do this as well.
+
   I couldn't find a way to reset a pattern to its default state,
   so be careful with these changes!
 
