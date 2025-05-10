@@ -1239,9 +1239,15 @@ This menu contains the following menu items:
      to another location of the current card OR
      cut it, move to another card, and paste it.
 
-- Darken: TODO: What does this do?
+- Darken
 
-- Lighten: TODO: What does this do?
+  This can be applied repeatedly to gradually and randomly change pixels
+  inside the most recently painted item or the selected area to black.
+
+- Lighten
+
+  This can be applied repeatedly to gradually and randomly change pixels
+  inside the most recently painted item or the selected area to white.
 
 - Trace Edges
 
@@ -1257,20 +1263,30 @@ This menu contains the following menu items:
 
 - Rotate Left
 
-  This rotates the selected pixels 90 degrees to the left.
+  This rotates the most recently painted item or the selected area
+  90 degrees to the left.
+
+  In can introduce gaps in the border of some shapes
+  that prevent filling with the Bucket tool.
+  The gaps can be repaired in FatBits mode.
 
 - Rotate Right:
 
-  This rotates the selected pixels 90 degrees to the right.
+  This rotates the most recently painted item or the selected area
+  90 degrees to the right.
+
+  In can introduce gaps in the border of some shapes
+  that prevent filling with the Bucket tool.
+  The gaps can be repaired in FatBits mode.
 
 - Flip Vertical
 
-  This rotates the selected pixels over a horizontal line
+  This flips the selected pixels over a horizontal line
   through the center of the selected area.
 
 - Flip Horizontal
 
-  This rotates the selected pixels over a vertical line
+  This flips the selected pixels over a vertical line
   through the center of the selected area.
 
 - Opaque
