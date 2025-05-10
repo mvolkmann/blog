@@ -1377,7 +1377,36 @@ The Options menu contains the following menu items:
   perform any of the actions above for entering FatBits mode
   OR select the Browse, Button, or Field tool.
 
-- Power Keys: TODO: What does this do?
+- Power Keys
+
+  This enables the use of single-letter key shortcuts
+  to activate a specific menu item or perform a common action:
+
+  - A: Paint ... Select All
+  - B: Select the all black pattern.
+    (TODO: This selects a different pattern for me.)
+  - C: Options ... Draw Centered (toggles)
+  - D: Paint ... Darken
+  - E: Paint ... Trace Edges
+  - F: Paint ... Fill
+  - G: Options ... Grid (toggles)
+  - H: Paint ... Flip Horizontal
+  - I: Paint ... Invert
+  - L: Paint ... Lighten
+  - M: Options ... Draw Multiple (toggles)
+  - O: Paint ... Opaque
+  - P: Paint ... Pickup
+  - R: Paint ... Revert
+  - S: Paint ... Select
+  - T: Paint ... Transparent
+  - V: Paint .. Flip Vertical
+  - W: Select the all white pattern.
+  - 1, 2, 3, 4, 6, and 8: Set the line thickness to that number of pixels.
+  - [: Paint ... Rotate Left
+  - ]: Paint ... Rotate Right
+
+  The D and L keys are handy for repeatedly applying Darken and Lighten
+  more easily than repeatedly selecting the corresponding menu items.
 
 - Line Size...
 
