@@ -891,6 +891,9 @@ The tools include:
     To change the shape and size of the brush,
     Select Options ... Brush Shape... before painting.
 
+    <img alt="HyperCard Brush Shape dialog" style="width: 50%"
+      src="/blog/assets/hypercard-brush-shape-dialog.png?v={{pkg.version}}">
+
     For example, select the diagonal line brush shape
     to draw calligraphy.
 
@@ -951,6 +954,9 @@ The tools include:
     Select Options ... Line Size... or double click this tool before drawing.
     This opens the "Line Size" dialog where
     a width of 1, 2, 3, 4, 6, or 8 pixels can be selected.
+
+    <img alt="HyperCard Line Size dialog" style="width: 30%"
+      src="/blog/assets/hypercard-line-size-dialog.png?v={{pkg.version}}">
 
     To constrain the angle of the line to multiples of 15 degrees,
     hold down the shift key
@@ -1148,6 +1154,9 @@ The tools include:
     to opens a dialog with the options
     triangle (3), square (4), pentagon (5),
     hexagon (6), octagon (8), and circle (infinite).
+
+    <img alt="HyperCard Polygon Sides dialog" style="width: 40%"
+     src="/blog/assets/hypercard-polygon-sides-dialog.png?v={{pkg.version}}">
 
     Click the center location and draw outward
     to specify the size and rotation of the shape.
