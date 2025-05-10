@@ -1521,26 +1521,32 @@ The Options menu contains the following menu items:
   has been used to select a rectangular area.
   It temporarily changes the selection rectangle lines to solid lines
   and adds square handles to the four corners.
-  The handles can be dragged to rotate all the selected pixels.
+  The handles can be dragged to rotate all the selected pixels
+  around the center point of the selection rectangle.
+  To restrict the rotation angle to increments of 15 degrees,
+  hold down the shift key during dragging.
   During dragging, only the solid lines and handles move.
   When the mouse button is released, the selected pixels are modified.
 
 - Slant
 
   This menu item works similarly to Rotate,
-  but the handles can only be dragged up or down
-  to "slant" all the selected pixels.
+  but dragging a handle turns the selected rectangle into a parallelogram.
+  The result is to "slant" all the selected pixels.
 
 - Distort
 
-  This menu item works similarly to Rotate.
-  Any of the handles can be dragged "distort" all the selected pixels.
+  This menu item works similarly to Rotate,
+  but dragging a handle moves only that handle in any direction.
+  The result is to "distort" all the selected pixels.
+  This can be thought of as a combination of Slant and Perspective.
 
 - Perspective:
 
   This menu item works similarly to Rotate,
-  but the handles can be only be dragged left or right
-  to change the perspective of all the selected pixels.
+  but dragging a handle moves only that handle horizontally or vertically.
+  The result is to change the selected pixels
+  in a way that creates an illusion of distance.
 
 ### Patterns Menu
 
