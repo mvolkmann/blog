@@ -805,10 +805,21 @@ The tools include:
     To duplicate the selected area,
     hold down the option key while dragging it.
 
+    To copy or move the selected area to another card,
+    possibly in another stack:
+
+    1. Select Edit ... Copy (cmd-c) to copy or
+       Edit ... Cut Button (cmd-x) to move.
+    1. Navigate to the destination card.
+    1. Select Edit ... Paste Button (cmd-v).
+
+       The pasted content will be selected and can be dragged to a new location.
+
     To both constrain the movement AND duplicate the selected area,
     hold down both the shift and option keys while dragging it.
 
-    To select the entire picture layer of the current domain (background or card),
+    To select the entire picture layer
+    of the current domain (background or card),
     double click the Selection tool in the Tools palette.
     This is useful for copying everything that was painted
     to another card and/or domain.
@@ -1292,10 +1303,14 @@ This menu contains the following menu items:
 - Opaque
 
   This changes all transparent pixels in the selected area to be white.
+  It is useful to hide background elements.
 
 - Transparent:
 
-  This changes all white pixels in the selected area to be transparent.
+  This changes all white pixels in the selected area to be transparent
+  which allows background elements to show through.
+  It is useful when copying a selected area of a painting layer
+  because it defaults to having an opaque background.
 
 - Keep: TODO: What does this do?
 
