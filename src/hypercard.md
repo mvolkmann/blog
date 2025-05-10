@@ -1436,12 +1436,18 @@ The Options menu contains the following menu items:
   The choice affects all subsequent painting operations
   and remains in effect until changed.
 
+  <img alt="HyperCard Line Size dialog" style="width: 30%"
+    src="/blog/assets/hypercard-line-size-dialog.png?v={{pkg.version}}">
+
 - Brush Shape...
 
   This opens a dialog that allows one of 32 brush shapes to be selected.
   The default is a single pixel.
   The choice only affects use of the brush tool
   and remains in effect until it is changed.
+
+  <img alt="HyperCard Brush Shape dialog" style="width: 50%"
+    src="/blog/assets/hypercard-brush-shape-dialog.png?v={{pkg.version}}">
 
 - Edit Pattern...
 
@@ -1452,12 +1458,18 @@ The Options menu contains the following menu items:
   I couldn't find a way to reset a pattern to its default state,
   so be careful with these changes!
 
+  <img alt="HyperCard Edit Pattern dialog" style="width: 30%"
+    src="/blog/assets/hypercard-dashed-line-pattern.png?v={{pkg.version}}">
+
 - Polygon Sides...
 
   This opens a dialog that allows selection of the number of sides
   drawn by the regular polygon tool.
   The choices are triangle (3), square (4), pentagon (5),
   hexagon (6), octagon (8), and circle (infinite).
+
+  <img alt="HyperCard Polygon Sides dialog" style="width: 40%"
+   src="/blog/assets/hypercard-polygon-sides-dialog.png?v={{pkg.version}}">
 
 - Draw Filled:
 
