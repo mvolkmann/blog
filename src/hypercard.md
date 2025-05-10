@@ -1522,35 +1522,25 @@ The Options menu contains the following menu items:
   It temporarily changes the selection rectangle lines to solid lines
   and adds square handles to the four corners.
   The handles can be dragged to rotate all the selected pixels.
-  The effect is not displayed until the mouse button is released.
+  During dragging, only the solid lines and handles move.
+  When the mouse button is released, the selected pixels are modified.
 
 - Slant
 
-  This menu item is only enabled when the Selection tool (not the Lasso tool)
-  has been used to select a rectangular area.
-  It temporarily changes the selection rectangle lines to solid lines
-  and adds square handles to the four corners.
-  The handles can be dragged up or down to "slant" all the selected pixels.
-  The effect is not displayed until the mouse button is released.
+  This menu item works similarly to Rotate,
+  but the handles can only be dragged up or down
+  to "slant" all the selected pixels.
 
 - Distort
 
-  This menu item is only enabled when the Selection tool (not the Lasso tool)
-  has been used to select a rectangular area.
-  It temporarily changes the selection rectangle lines to solid lines
-  and adds square handles to the four corners.
-  The handles can be dragged "distort" all the selected pixels.
-  The effect is not displayed until the mouse button is released.
+  This menu item works similarly to Rotate.
+  Any of the handles can be dragged "distort" all the selected pixels.
 
 - Perspective:
 
-  This menu item is only enabled when the Selection tool (not the Lasso tool)
-  has been used to select a rectangular area.
-  It temporarily changes the selection rectangle lines to solid lines
-  and adds square handles to the four corners.
-  The handles can be dragged left or right
+  This menu item works similarly to Rotate,
+  but the handles can be only be dragged left or right
   to change the perspective of all the selected pixels.
-  The effect is not displayed until the mouse button is released.
 
 ### Patterns Menu
 
