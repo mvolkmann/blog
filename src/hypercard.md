@@ -1312,9 +1312,24 @@ This menu contains the following menu items:
   It is useful when copying a selected area of a painting layer
   because it defaults to having an opaque background.
 
-- Keep: TODO: What does this do?
+- Keep
 
-- Revert: TODO: What does this do?
+  Multiple changes made to a painting layer (background or card)
+  are not save until one the following occurs:
+
+  - select a non-painting tool
+  - switch to the opposite domain (background or card)
+  - navigate to another card
+  - select Paint ... Keep
+
+  The Keep menu item provides a way to explicitly save painting layer changes.
+  The next menu item, Revert, only reverts unsaved painting layer changes.
+
+- Revert
+
+  This reverts (undoes) all painting layer changes since they were last saved.
+  The description of the Keep menu item above
+  lists the actions that cause those changes to be saved.
 
 ### Options Menu
 
@@ -1323,9 +1338,12 @@ The Options menu contains the following menu items:
 - Grid
 
   This toggles grid mode where invisible grid lines are spaced every 8 pixels.
-  When turned on, all painting begins and ends at a grid point.
-  This makes it easier to line up
-  multiple painted items horizontally or vertically.
+  When turned on, all points selected when painting
+  using the following tools are snapped to a grid point:
+  Line, Rectangle, Rounded Rectangle, Oval,
+  Regular Polygon, and Irregular Polygon.
+  This makes it easier to create items that are a specific size
+  and line up multiple painted items horizontally or vertically.
 
 - FatBits
 
