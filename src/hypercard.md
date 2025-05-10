@@ -1380,7 +1380,9 @@ The Options menu contains the following menu items:
 - Power Keys
 
   This enables the use of single-letter key shortcuts
-  to activate a specific menu item or perform a common action:
+  to activate a specific menu item or perform a common action.
+  Many of the keys require an area of the painting layer to be selected
+  which is what they will act upon.
 
   - A: Paint ... Select All
   - B: Select the all black pattern.
