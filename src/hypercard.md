@@ -1546,7 +1546,7 @@ The Options menu contains the following menu items:
   This menu item works similarly to Rotate,
   but dragging a handle moves only that handle horizontally or vertically.
   The result is to change the selected pixels
-  in a way that creates an illusion of distance.
+  in a way that creates an illusion of depth.
 
 ### Patterns Menu
 
