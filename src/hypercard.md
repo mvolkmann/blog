@@ -1517,7 +1517,7 @@ The Options menu contains the following menu items:
 
 - Rotate
 
-  This menu item is only enabled when the selection tool
+  This menu item is only enabled when the Selection tool (not the Lasso tool)
   has been used to select a rectangular area.
   It adds square handles to the four corners that can be
   dragged to rotate all the selected pixels.
@@ -1525,7 +1525,7 @@ The Options menu contains the following menu items:
 
 - Slant
 
-  This menu item is only enabled when the selection tool
+  This menu item is only enabled when the Selection tool (not the Lasso tool)
   has been used to select a rectangular area.
   It adds square handles to the four corners that can be
   dragged up or down to "slant" all the selected pixels.
@@ -1533,7 +1533,7 @@ The Options menu contains the following menu items:
 
 - Distort
 
-  This menu item is only enabled when the selection tool
+  This menu item is only enabled when the Selection tool (not the Lasso tool)
   has been used to select a rectangular area.
   It adds square handles to the four corners that can be
   dragged "distort" all the selected pixels.
@@ -1541,7 +1541,7 @@ The Options menu contains the following menu items:
 
 - Perspective:
 
-  This menu item is only enabled when the selection tool
+  This menu item is only enabled when the Selection tool (not the Lasso tool)
   has been used to select a rectangular area.
   It adds square handles to the four corners that can be
   dragged left or right to change the perspective of all the selected pixels.
