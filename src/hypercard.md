@@ -1451,15 +1451,17 @@ The Options menu contains the following menu items:
 
 - Edit Pattern...
 
-  This opens a dialog that allows the pixel colors
-  of the currently selected pattern to be modified.
-  Click or drag across pixels in the dialog
-  to toggle them between black and white.
-  I couldn't find a way to reset a pattern to its default state,
-  so be careful with these changes!
+  This opens a dialog that allows the pixel colors (white or black)
+  of the currently selected 8x8 pixel pattern to be modified.
+  Click or drag across pixels in the dialog to toggle them
+  between black and white in the same way as using the Pencil tool.
+  Other painting tools such as Line and Rectangle cannot be used here.
 
   <img alt="HyperCard Edit Pattern dialog" style="width: 30%"
     src="/blog/assets/hypercard-dashed-line-pattern.png?v={{pkg.version}}">
+
+  I couldn't find a way to reset a pattern to its default state,
+  so be careful with these changes!
 
 - Polygon Sides...
 
@@ -1552,9 +1554,9 @@ to select the pattern that is used by the Bucket and Spray Can tools.
 Like the Tools menu, the Patterns menu can be
 dragged off of the menu bar to create a floating palette.
 
-When a painting tool is selected, pressing the tab key
-toggles the display of the Patterns palette,
-even if it was not previously dragged off of the menu bar.
+When a painting tool is selected, press the tab key
+to toggle display of the Patterns palette.
+This works even if it was not previously dragged off of the menu bar.
 
 To fill an existing, closed shape with the selected pattern,
 select the Bucket tool and click the
