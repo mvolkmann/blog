@@ -1824,7 +1824,8 @@ To add a button to the current card.
 
 ### Icons
 
-Icons are 32x32 arrangements of black and white pixels.
+Icons are 32x32 arrangements of black and white pixels
+that have a unique ID and an optional name.
 
 To add an icon to a button:
 
@@ -1842,11 +1843,19 @@ To add an icon to a button:
    - HyperCard app
    - System (in "System Folder")
 
-   Each icon has a unique ID and can optionally have a name.
    When an icon is selected, its ID, name, and source
    are displayed at the top of this dialog.
 
-To create a new icon or modify one in the current stack:
+1. Click the "OK" button.
+
+To remove the icon from a button:
+
+1. Select the Button tool.
+1. Double click a button to open its "Button Info" dialog.
+1. Click the "Icon..." button.
+1. Click the "None" button.
+
+To create or modify an icon in the current stack:
 
 1. Open an "Icon Editor" dialog in one of these ways:
 
