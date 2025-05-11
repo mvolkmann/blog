@@ -1929,7 +1929,10 @@ and make it available in your stack (destination):
 The copied icon will be available when the "Icon..." button
 in a "Button Info" dialog is clicked.
 
-When the "Icon Editor" dialog is open, the following new menu items appear:
+When the "Icon Editor" dialog is open, the following new menu items appear.
+Some of these menu items can be triggered by Power Keys
+even if "Power Keys" is not checked in the Options menu
+(which can only be done when a painting tool is selected).
 
 - File menu
 
@@ -1944,6 +1947,7 @@ When the "Icon Editor" dialog is open, the following new menu items appear:
   The icon-related commands in this menu act on the selected pixels,
   or on all the pixels if none are selected.
 
+  - Undo (cmd-z, esc, backtick, or tilde)
   - Cut Icon (cmd-x)
   - Copy Icon (cmd-c)
   - Paste Picture (cmd-v or cmd-option-v)
@@ -1968,37 +1972,39 @@ When the "Icon Editor" dialog is open, the following new menu items appear:
 
 - Icon menu
 
-  - Erase: changes all the pixels to white
+  - Erase (e): changes all the pixels to white
     regardless of whether any are selected
   - Pickup (cmd-p): enters Pickup mode
   - Keep (cmd-k): saves pixel changes
-  - Revert: reverts all pixel changes or only those since the last Keep
-  - First (cmd-1): scrolls to the first icon
-  - Prev (cmd-2): scrolls to the previous icon
-  - Next (cmd-3): scrolls to the next icon
-  - Last (cmd-4): scrolls to the last icon
+  - Revert (r): reverts all pixel changes or only those since the last Keep
+  - First (cmd-1 or cmd-left arrow): scrolls to the first icon
+  - Prev (cmd-2 or left arrow): scrolls to the previous icon
+  - Next (cmd-3 or right arrow): scrolls to the next icon
+  - Last (cmd-4 or cmd-right arrow): scrolls to the last icon
   - Find (cmd-f): searches for an icon by its complete name or ID
 
 - Special Menu
 
-  - Flip Horizontal: flips the icon pixels over a vertical line
+  - Flip Horizontal (h): flips the icon pixels over a vertical line
     at the center of the icon or the selection
-  - Flip Vertical: flips the icon pixels over a horizontal line
+  - Flip Vertical (v): flips the icon pixels over a horizontal line
     at the center of the icon or the selection
-  - Frame: adds a 1-pixel rectangle around the inside edge
+  - Frame (f): adds a 1-pixel rectangle around the inside edge
     of the icon or selection
-  - Gray: changes all black pixels or only those in the selection to white
+  - Gray (g): changes all black pixels or only those in the selection to white
     if they are in an odd column of an odd row
     or an even column of an even row (checkerboard pattern)
-  - Invert: toggles all pixels or only those in the selection
+  - Invert (i): toggles all pixels or only those in the selection
     between white and black
-  - Mirror Horizontal: copies all or selected pixels
+  - Mirror Horizontal (m): copies all or selected pixels
     from the left size to the right side
-  - Mirror Vertical: copies all or the selected pixels
+  - Mirror Vertical (x): copies all or the selected pixels
     from the top side to the bottom side
-  - Rotate 90°: rotates all of the selected pixels by 90°
+  - Rotate 90° ([ for clockwise or ] for counter-clockwise):
+    rotates all of the selected pixels by 90°
     around the center of the icon or the selection
   - Shadow: adds black pixels below and to the right
+    of all contiguous sets of black pixels
     to give the appearance of a drop shadow
 
 For stacks that will be distributed for use by others,
