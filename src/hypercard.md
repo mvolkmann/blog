@@ -1885,6 +1885,14 @@ To create or modify an icon in the current stack:
    - To clear all the pixels, select Icon ... Erase.
    - To modify individual pixels, toggling between white and black,
      click them or drag over them.
+     Hold down the shift key while dragging to
+     constrain movement to be only horizontal or vertical.
+   - To drag all the pixels as a group,
+     hold down the option key and drag in any direction.
+     Also hold down the shift key
+     to constrain dragging to horizontal or vertical.
+     When the mouse is released,
+     any pixels that are dragged out of view are lost.
    - To copy a 32x32 black and white swatch from anywhere on the screen:
 
      1. Select Icon ... Pickup.
