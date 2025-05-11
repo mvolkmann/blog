@@ -1961,8 +1961,13 @@ even if "Power Keys" is not checked in the Options menu
     the menu item changes to "Clear Picture"
     and selecting it changes all the selected pixels to white.
 
-    If there is no selection, this deletes the entire icon.
+    If there is no selection,
+    this deletes the ICON resource from the current stack.
+    Icons from other stacks and the HyperCard app cannot be deleted
+    with this menu item.
     WARNING: This cannot be undone!
+    Another way to delete ICON resources that works on any file
+    is to use ResEdit.
 
   - New Button
 
