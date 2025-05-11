@@ -1981,15 +1981,25 @@ When the "Icon Editor" dialog is open, the following new menu items appear:
 
 - Special Menu
 
-  - Flip Horizontal
-  - Flip Vertical
-  - Frame
-  - Gray
-  - Invert
-  - Mirror Horizontal
-  - Mirror Vertical
-  - Rotate 90°
-  - Shadow
+  - Flip Horizontal: flips the icon pixels over a vertical line
+    at the center of the icon or the selection
+  - Flip Vertical: flips the icon pixels over a horizontal line
+    at the center of the icon or the selection
+  - Frame: adds a 1-pixel rectangle around the inside edge
+    of the icon or selection
+  - Gray: changes all black pixels or only those in the selection to white
+    if they are in an odd column of an odd row
+    or an even column of an even row (checkerboard pattern)
+  - Invert: toggles all pixels or only those in the selection
+    between white and black
+  - Mirror Horizontal: copies all or selected pixels
+    from the left size to the right side
+  - Mirror Vertical: copies all or the selected pixels
+    from the top side to the bottom side
+  - Rotate 90°: rotates all of the selected pixels by 90°
+    around the center of the icon or the selection
+  - Shadow: adds black pixels below and to the right
+    to give the appearance of a drop shadow
 
 For stacks that will be distributed for use by others,
 add all custom icons to that stack to ensure that the users will have them.
