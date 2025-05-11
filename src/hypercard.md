@@ -1829,7 +1829,7 @@ Icons are 32x32 arrangements of black and white pixels.
 To add an icon to a button:
 
 1. Select the Button tool.
-1. Double click a button.
+1. Double click a button to open its "Button Info" dialog.
 1. Click the "Icon..." button.
 1. Select an icon from the scrolling list.
 
@@ -1846,39 +1846,51 @@ To add an icon to a button:
    When an icon is selected, its ID, name, and source
    are displayed at the top of this dialog.
 
-1. Click the "OK" button.
+To create a new icon or modify one in the current stack:
 
-To create a new, custom icon in the current stack:
+1. Open an "Icon Editor" dialog in one of these ways:
 
-1. Select Edit ... Icon... to open an "Icon Editor" dialog.
-1. To start from an existing icon that is defined in the current stack,
-   scroll through them using the scrollbar at the bottom, or use
-   the keyboard shortcuts cmd-1 (first), cmd-2 (previous),
-   cmd-3 (next), and cmd-4 (last).
-1. Enter a name.
-1. Enter a unique ID.
-1. Modify the pixels as desired.
-   - To clear all the pixels, select Icon ... Erase.
-   - To copy a 32x32 black and white swatch from anywhere on the screen,
-     select Icon ... Pickup, hover over the area to copy, and click.
-   - To modify individual pixels, toggling between white and black,
-     click them or drag over them.
-   - To undo all the changes made to the pixels
-     before clicking the "OK" button, select Icon ... Revert.
-   - To commit pixel changes so they cannot be undone by
-     selecting Icon ... Revert, select Icon ... Keep.
-1. Click the "Save" button.
+   1. Select Edit ... Icon... and select the icon to be edited.
 
-To modify an existing icon in the current stack:
+      If the stack does not already contain any custom icons,
+      an ID will be automatically assigned and no initial pixels will be black.
+      If the stack does contain custom icons,
+      select one as the starting point.
+      Scroll through them using the scrollbar at the bottom, or use
+      the keyboard shortcuts cmd-1 (first), cmd-2 (previous),
+      cmd-3 (next), and cmd-4 (last).
 
-1. Open the "Button Info" dialog for any button.
-1. Click the "Icon..." button.
-1. Select the icon to be edited.
-1. Click the "Edit..." button.
+   1. Select the Button tool, select a button that uses the icon,
+      and select Edit ... Icon...
+
+   1. Select the Button tool, double click a button that uses the icon
+      to open its "Button Info" dialog, click the "Icon..." button,
+      and click the "Edit..." button.
+
 1. If the icon is not defined in the current, a dialog will appear
    asking if you want to make a copy. Click the "OK" button.
+1. Optionally modify the name.
+1. To create a new icon, change the ID to a unique value.
 1. Modify the pixels as desired.
-1. Click the "OK" button.
+
+   - To clear all the pixels, select Icon ... Erase.
+   - To modify individual pixels, toggling between white and black,
+     click them or drag over them.
+   - To copy a 32x32 black and white swatch from anywhere on the screen:
+
+     1. Select Icon ... Pickup.
+     1. Drag over the area to copy, noting the updated icon pixels.
+     1. Release the mouse button when satisfied.
+
+   - To commit the current state so it cannot be undone by
+     selecting Icon ... Revert, select Icon ... Keep.
+   - To revert all changes made since the beginning of editing
+     or since Icon ... Keep was selected, select Icon ... Revert.
+
+1. Click the "OK" or "Cancel" button.
+
+   If the ID matches that of an existing icon,
+   a dialog will prompt whether to replace the existing icon.
 
 To copy an icon from another stack or application (source)
 and make it available in your stack (destination):
