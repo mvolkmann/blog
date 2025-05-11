@@ -1822,21 +1822,33 @@ To add a button to the current card.
    do not typically have an associated script.
    Their state is usually queried by the script of another button.
 
-### Adding Icons
+### Icons
 
-Icons that appear in the Icon dialog come from "ICON" resources
-in the following locations, searched in this order:
+Icons are 32x32 arrangements of black and white pixels.
 
-- the file of the current stack
-- the file of the Home stack
-- the HyperCard app
+To add an icon to a button:
 
-The icons must have unique IDs.
+1. Select the Button tool.
+1. Double click a button.
+1. Click the "Icon..." button.
+1. Select an icon from the scrolling list.
 
-For stacks that will be distributed for use by others,
-add all custom icons to that stack to ensure that the users will have them.
+   The icons that appear in this list come from "ICON" resources
+   in the following files, searched in this order:
 
-To create a new, custom icon:
+   - current stack
+   - "Audio Help" stack
+   - Home stack
+   - HyperCard app
+   - System (in "System Folder")
+
+   Each icon has a unique ID and can optionally have a name.
+   When an icon is selected, its ID, name, and source
+   are displayed at the top of this dialog.
+
+1. Click the "OK" button.
+
+To create a new, custom icon in the current stack:
 
 1. Select Edit ... Icon... to open an "Icon Editor" dialog.
 1. To start from an existing icon that is defined in the current stack,
@@ -1857,15 +1869,14 @@ To create a new, custom icon:
      selecting Icon ... Revert, select Icon ... Keep.
 1. Click the "Save" button.
 
-To modify an existing icon:
+To modify an existing icon in the current stack:
 
 1. Open the "Button Info" dialog for any button.
 1. Click the "Icon..." button.
 1. Select the icon to be edited.
 1. Click the "Edit..." button.
-1. If the icon is defined in the Home stack or the HyperCard application,
-   a dialog will appear asking if you want to make a copy.
-   Click the "OK" button.
+1. If the icon is not defined in the current, a dialog will appear
+   asking if you want to make a copy. Click the "OK" button.
 1. Modify the pixels as desired.
 1. Click the "OK" button.
 
@@ -1885,6 +1896,9 @@ and make it available in your stack (destination):
 
 The copied icon will be available when the "Icon..." button
 in a "Button Info" dialog is clicked.
+
+For stacks that will be distributed for use by others,
+add all custom icons to that stack to ensure that the users will have them.
 
 The Apple logo icon is an icn4 and icn8 resource
 found in Macintosh HD:System Folder:System.
