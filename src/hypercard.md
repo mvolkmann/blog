@@ -1893,6 +1893,9 @@ To create or modify an icon in the current stack:
      to constrain dragging to horizontal or vertical.
      When the mouse is released,
      any pixels that are dragged out of view are lost.
+   - To select a rectangle of pixels,
+     hold down the cmd key and drag out a rectangle.
+     The selection can be copied (cmd-c), cut (cmd-x), or cloned (option-drag).
    - To copy a 32x32 black and white swatch from anywhere on the screen:
 
      1. Select Icon ... Pickup.
@@ -1925,6 +1928,68 @@ and make it available in your stack (destination):
 
 The copied icon will be available when the "Icon..." button
 in a "Button Info" dialog is clicked.
+
+When the "Icon Editor" dialog is open, the following new menu items appear:
+
+- File menu
+
+  - New Icon: This clears the pixels and changes the ID to a unique value
+    in preparation for creating a new icon.
+  - Close Icon Editor: This is the same as clicking the "Cancel" button.
+  - Duplicate Icon: This changes the ID to a unique value
+    in preparation for creating a new icon.
+
+- Edit menu
+
+  The icon-related commands in this menu act on the selected pixels,
+  or on all the pixels if none are selected.
+
+  - Cut Icon (cmd-x)
+  - Copy Icon (cmd-c)
+  - Paste Picture (cmd-v or cmd-option-v)
+
+    Pastes the icon ID, name, and pixels,
+    but only the pixels if cmd-option-v is pressed.
+
+  - Clear Icon (cmd-delete)
+
+    If a rectangle of pixels have been selected,
+    the menu item changes to "Clear Picture"
+    and selecting it changes all the selected pixels to white.
+
+    If there is no selection, this deletes the entire icon.
+    WARNING: This cannot be undone!
+
+  - New Button
+
+    This creates a new button that uses the icon being edited
+    and has "Show Name" unchecked.
+    Changes to the icon must still be saved by clicking the "OK" button.
+
+- Icon menu
+
+  - Erase: changes all the pixels to white
+    regardless of whether any are selected
+  - Pickup (cmd-p): enters Pickup mode
+  - Keep (cmd-k): saves pixel changes
+  - Revert: reverts all pixel changes or only those since the last Keep
+  - First (cmd-1): scrolls to the first icon
+  - Prev (cmd-2): scrolls to the previous icon
+  - Next (cmd-3): scrolls to the next icon
+  - Last (cmd-4): scrolls to the last icon
+  - Find (cmd-f): searches for an icon by its complete name or ID
+
+- Special Menu
+
+  - Flip Horizontal
+  - Flip Vertical
+  - Frame
+  - Gray
+  - Invert
+  - Mirror Horizontal
+  - Mirror Vertical
+  - Rotate 90°
+  - Shadow
 
 For stacks that will be distributed for use by others,
 add all custom icons to that stack to ensure that the users will have them.
