@@ -973,9 +973,23 @@ The tools include:
     hold down the option key before dragging.
     The painted pattern is not affected by the angle of the line.
 
-    To draw a dashed line, select a line width of 1 pixel,
-    edit one of the patterns to match the screenshot below,
-    select that pattern, and draw the line with the option key held down.
+    To draw a dotted line:
+
+    1. Double click the Line tool.
+    1. Select a line width of 1 pixel.
+    1. Select one of the provided patterns such as
+       3, 4, 5, 11, 13, 14, 17, or 19.
+    1. Hold down the shift and option keys.
+    1. Drag to create a dotted line that is horizontal or vertical.
+
+    To draw a dashed line:
+
+    1. Double click the Line tool.
+    1. Select a line width of 1 pixel.
+    1. Edit one of the patterns to match the screenshot below.
+    1. Select that pattern.
+    1. Hold down the shift and option keys.
+    1. Drag to create a dashed line that is horizontal or vertical.
 
     <img alt="HyperCard dashed line pattern" style="width: 30%"
       src="/blog/assets/hypercard-dashed-line-pattern.png?v={{pkg.version}}">
