@@ -3254,9 +3254,22 @@ with button scripts being the most common
 and HyperCard app scripts being the least common.
 
 You cannot control which scripts will exist
-at the home card and HyperCard levels
+at the Home stack and HyperCard app levels
 when other users use your stacks,
 so it is risky to depend on those.
+
+To open a Script editor window for any kind of object,
+open its "Info" window and click the "Script..." button.
+The following keyboard shortcuts remove the need to open an "Info" window
+and directly open the Script editor for a given object:
+
+| Object Type | Keyboard Shortcut                                  |
+| ----------- | -------------------------------------------------- |
+| Button      | select Button tool and cmd-option-click the button |
+| Field       | select Field tool and cmd-option-click the field   |
+| Background  | cmd-option-b                                       |
+| Card        | cmd-option-c                                       |
+| Stack       | cmd-option-s                                       |
 
 When editing a script, press the tab key to format it
 which indents the lines properly.
