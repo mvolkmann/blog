@@ -97,8 +97,10 @@ Each stack is stored in its own file in the Finder.
 All changes made to the cards in a stack are automatically saved.
 This includes modifying the content of fields, adding cards, and deleting cards.
 
-If multiple stack windows are open,
-select Go ... Next Window or press cmd-l to move focus to the next one.
+Many HyperCard windows can be open simultaneously.
+These include windows for stacks, scripts, and palettes.
+If multiple windows are open, select Go ... Next Window
+or press cmd-l to move focus to the next one.
 
 A stack can be homogeneous or heterogeneous.
 In a homogeneous stack, all the cards have the same background.
