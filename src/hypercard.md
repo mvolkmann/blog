@@ -383,6 +383,11 @@ To get information about the current stack:
   It also gives the number of cards in the stack
   and the number of backgrounds used.
 
+### Stack Navigation
+
+To navigate to the next open stack window,
+select Go ... Next Window or press cmd-l.
+
 ### Stack Backgrounds
 
 To view and optionally edit a background used by the current card:
