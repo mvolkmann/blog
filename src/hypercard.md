@@ -2785,6 +2785,24 @@ To create graphics in MacPaint and import them into a HyperCard stack:
 1. Select the pasted graphics and move them to the desired location.
 1. Optionally edited the imported graphics.
 
+## Exporting Graphics
+
+The painting layer of the current card or background
+can be exported to a file that uses the MacPaint format.
+This includes buttons (along with their icons)
+and fields (including text entered into them).
+
+To export the current painting layer:
+
+1. Navigate to the card or background whose graphics will be exported.
+1. Select any painting tool.
+1. Select File ... Export Paint...
+1. Select the target directory.
+1. Enter a file name.
+1. Click the "Save" button.
+
+It seems that the right edge is cut off.
+
 ## Backgrounds
 
 Every stack has at least one background, but it can be empty.
