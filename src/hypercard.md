@@ -3533,23 +3533,33 @@ The `go` command supports many arguments described below.
 All the `go` commands above implement "hard links"
 that do not depend on other data.
 
-"Soft links" do depend on other data.
+"Soft links" depend on other data.
 For example, suppose we have a stack where specific dogs are
 described on their own card and the card name is the dog name.
 The first card in the stack can contain
 a field where a dog name can be entered (named "dogName") and
 a button that navigates to the matching card when clicked.
 
+Add the following script to the stack
+to define a handler for a custom action
+that is triggered by the clicking the button
+or by pressing the return key while in the field:
+
+```text
+on findDog name
+  if there is a card name then
+    go to card name
+  else
+    answer "No matching dog was found."
+  end if
+end findDog
+```
+
 Add the following script to the button:
 
 ```text
 on mouseUp
-  put card field dogName into dogName
-  if there is a card dogName then
-    go to card dogName
-  else
-    answer "No matching card was found."
-  end if
+  findDog card field dogName
 end mouseUp
 ```
 
@@ -3558,18 +3568,8 @@ pressing the return key after ending a dog name
 has the same effect as clicking the button:
 
 ```text
-on keyDown which
-  if charToNum(which) is 13 then
-    put the length of me - 1 into len
-    put character 1 to len of me into name
-    if there is a card name then
-      go to card name
-    else
-      answer "No matching card was found."
-    end if
-  else
-    pass keyDown
-  end if
+on returnInField
+  findDog me
 end keyDown
 ```
 
