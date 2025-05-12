@@ -1246,6 +1246,8 @@ This menu contains the following menu items:
 - Select (cmd-s)
 
   This selects the last most recently painted item.
+  To also exit background editing mode,
+  hold down the shift key when clicking this.
 
 - Select All (cmd-a)
 
