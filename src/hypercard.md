@@ -1187,9 +1187,9 @@ The tools include:
 
     The Irregular Polygon tool draws an arbitrary polygon.
     Click at each point in the polygon.
-    To close the polygon, click on the start point
-    or double-click on the last point.
-    TODO: Double-clicking doesn't work for me.
+    To close the polygon, click on the start point.
+    If the "Draw Filled" option is on, the polygon can be closed by
+    double-clicking the last point, even if the selected pattern is all white.
 
     To toggle the "Draw Filled" option, double click this tool
     as an alternative to selecting Options ... Draw Filled.
@@ -1579,6 +1579,11 @@ To edit the pixels in a pattern:
 1. Click the "OK" button.
 
 TODO: How can an edited pattern be reset to its default?
+
+The patterns are numbered from 1 to 40 starting in the upper-left
+and progressing down each column.
+For example, the first pattern in the second column is number 11.
+To copy a pattern from one stack to another, TODO: HOW?
 
 To apply a pattern to the lines in characters drawn with the Text tool,
 select a pattern, select the Bucket tool, and click inside each character.
@@ -2758,6 +2763,27 @@ Supposedly the AIFF sound format is the most reliable.
 TODO: I could not get this to work!
 
 To record new sounds, see the "Sounds" section in the "iMac G3" blog page.
+
+## Importing Graphics
+
+Graphics can be imported from files that use the MacPaint format,
+such as the MacPaint application.
+
+To create graphics in MacPaint and import them into a HyperCard stack:
+
+1. Launch MacPaint.
+1. Create graphics using its painting tools
+   which are nearly identical to those in HyperCard.
+1. Save the graphics in a file.
+1. Launch HyperCard.
+1. Open the target stack.
+1. Choose the target domain (background or card).
+1. Choose the specific target background or card.
+1. Select any painting tool.
+1. Select File ... Import Paint...
+1. Select the file created earlier.
+1. Select the pasted graphics and move them to the desired location.
+1. Optionally edited the imported graphics.
 
 ## Backgrounds
 
