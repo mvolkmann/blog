@@ -2779,7 +2779,7 @@ To create graphics in MacPaint and import them into a HyperCard stack:
 1. Open the target stack.
 1. Choose the target domain (background or card).
 1. Choose the specific target background or card.
-1. Select any painting tool.
+1. Select any painting tool so the following menu item is available.
 1. Select File ... Import Paint...
 1. Select the file created earlier.
 1. Select the pasted graphics and move them to the desired location.
@@ -2795,7 +2795,7 @@ and fields (including text entered into them).
 To export the current painting layer:
 
 1. Navigate to the card or background whose graphics will be exported.
-1. Select any painting tool.
+1. Select any painting tool so the following menu item is available.
 1. Select File ... Export Paint...
 1. Select the target directory.
 1. Enter a file name.
