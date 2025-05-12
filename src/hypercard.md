@@ -4358,6 +4358,25 @@ and sets the content of the second field to that line.
 Clicking a line that is already highlighted
 removes the highlighting and clears the second field.
 
+### Detecting Duplicates in a List
+
+Create a field "Style" set to "Scrolling"
+and "Don't Wrap" checked.
+Add the following script:
+
+```text
+on returnInField
+  get me -- saves copy of field contents in "it"
+  delete last line of it
+  if last line of me is in it then
+    answer "Duplicate names cannot be entered."
+    select last line of me
+  else
+    pass returnInField -- allows newline to be added
+  end if
+end returnInField
+```
+
 ### Disclosure Buttons
 
 For an example of the script handlers and functions necessary
