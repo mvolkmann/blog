@@ -4299,6 +4299,43 @@ on mouseUp
 end mouseUp
 ```
 
+### Number Input
+
+To create a field where only a positive integer can be entered,
+add the following script to the field.
+
+```text
+function startsWith s, prefix
+  return char 1 to length of prefix of s is prefix
+end startsWith
+
+-- This assumes that the stack script contains the following line
+-- to allow the use of the left and right arrow keys in fields:
+-- set the textArrows to true
+
+on keyDown which
+  put char 1 of which into firstChar
+  put charToNum(firstChar) into asciiCode
+
+  if asciiCode is 8 -- delete key
+  then pass keyDown
+  else if asciiCode is 9 -- tab key
+  then pass keyDown
+  else if asciiCode is 28 -- left arrow key
+  then pass keyDown
+  else if asciiCode is 29 -- right arrow key
+  then pass keyDown
+  else if firstChar < 0 or firstChar › 9 -- not a digit key
+  then beep
+  else if me is empty and firstChar = 0 -- cannot start with zero
+  then beep
+  -- Cannot replace first character with zero.
+  else if startsWith(the selectedChunk, "char 1 ") and firstChar is 0
+  then beep
+  else pass keyDown
+end keyDown
+```
+
 ### List Selection
 
 This demonstrates using a field to display a list of options.
