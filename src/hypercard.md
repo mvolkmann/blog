@@ -3230,16 +3230,17 @@ TODO: Add more to this section.
 ### Accessing Fields
 
 A field reference evaluates to the value of the field.
-Examples include:
+The syntax is:
 
 ```text
-background field "{field-name}"
-background field id {n}
-card field "{field-name}"
-card field id {n}
-field "{field-name}" -- defaults to background
-field id {n} -- defaults to background
+[background|card] field "{field-name}"
+[background|card] field id {id-number}
+[background|card] field {sequence-number}
 ```
+
+If neither `background` nor `card` is specified, it defaults to `background`.
+
+The sequence-number option is not recommended because those can change.
 
 Quotes around field names are optional if the field name
 doesn't contain special characters such as spaces.
@@ -3253,16 +3254,17 @@ if it contains special characters such as spaces.
 ### Accessing Buttons
 
 A button reference evaluates to a button object.
-Examples include:
+The syntax is:
 
 ```text
-background button "{button-name}"
-background button id {n}
-card button "{button-name}"
-card button id {n}
-button "{field-name}" -- defaults to card
-button id {n} -- defaults to card
+[background|card] button "{button-name}"
+[background|card] button id {id-number}
+[background|card] button {sequence-number}
 ```
+
+If neither `background` nor `card` is specified, it defaults to `card`.
+
+The sequence-number option is not recommended because those can change.
 
 It is more common to refer to buttons by their ID than by their name.
 The reason is that button names are often used as their displayed labels
