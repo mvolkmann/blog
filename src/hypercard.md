@@ -4306,7 +4306,7 @@ add the following script to the field.
 
 ```text
 function decrementField
-  if me > 1 then
+  if me &gt; 1 then
     put me - 1 into me
     select after text of me
   else
@@ -4343,7 +4343,7 @@ on keyDown which
   then incrementField
   else if asciiCode is 31 -- down arrow key
   then decrementField
-  else if firstChar < 0 or firstChar › 9 -- not a digit key
+  else if firstChar &lt; 0 or firstChar &gt; 9 -- not a digit key
   then beep
   else if me is empty and firstChar = 0 -- cannot start with zero
   then beep
