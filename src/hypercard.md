@@ -4299,12 +4299,26 @@ on mouseUp
 end mouseUp
 ```
 
-### Number Input
+### Number Field
 
 To create a field where only a positive integer can be entered,
 add the following script to the field.
 
 ```text
+function decrementField
+  if me > 1 then
+    put me - 1 into me
+    select after text of me
+  else
+    beep
+  end if
+end decrementField
+
+function incrementField
+  put me + 1 into me
+  select after text of me
+end incrementField
+
 function startsWith s, prefix
   return char 1 to length of prefix of s is prefix
 end startsWith
@@ -4325,6 +4339,10 @@ on keyDown which
   then pass keyDown
   else if asciiCode is 29 -- right arrow key
   then pass keyDown
+  else if asciiCode is 30 -- up arrow key
+  then incrementField
+  else if asciiCode is 31 -- down arrow key
+  then decrementField
   else if firstChar < 0 or firstChar › 9 -- not a digit key
   then beep
   else if me is empty and firstChar = 0 -- cannot start with zero
@@ -4332,7 +4350,7 @@ on keyDown which
   -- Cannot replace first character with zero.
   else if startsWith(the selectedChunk, "char 1 ") and firstChar is 0
   then beep
-  else pass keyDown
+  else pass keyDown -- allow digit key
 end keyDown
 ```
 
