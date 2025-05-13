@@ -3080,6 +3080,7 @@ which I placed in the Applications directory.
 HyperTalk ...
 
 - is the primary scripting language used by HyperCard
+- can only be used with HyperCard, not as a standalone programming language
 - is used to write message handlers and functions in the scripts
   associated with stacks, backgrounds, cards, buttons, and fields
 - has an English-like syntax
@@ -3193,7 +3194,7 @@ HyperTalk supports the following data types:
 
 - booleans with the literal values `true` (or `1`) and `false` (or `0`)
 - numbers with literal values that are either integers or floating point
-- string with literal values delimited by double quotes
+- strings with literal values delimited by double quotes
 - string lists that are a single string with commas delimiting the items
 - containers which are variables, buttons, and fields
 
@@ -3225,6 +3226,59 @@ TODO: Add more to this section.
 | substring      | `character i to j of {string-expr}` |
 
 TODO: Add more to this section.
+
+### Accessing Fields
+
+A field reference evaluates to the value of the field.
+Examples include:
+
+```text
+background field "{field-name}"
+background field id {n}
+card field "{field-name}"
+card field id {n}
+field "{field-name}" -- defaults to background
+field id {n} -- defaults to background
+```
+
+Quotes around field names are optional if the field name
+doesn't contain special characters such as spaces.
+The keyword "background" can be abbreviated to "bkgnd" or "bg".
+
+The `put` command can be used to change the contents of a field.
+It has the syntax `put {value} into {field-ref}`.
+It the value is a literal string, it must be surrounded by quotes
+if it contains special characters such as spaces.
+
+### Accessing Buttons
+
+A button reference evaluates to a button object.
+Examples include:
+
+```text
+background button "{button-name}"
+background button id {n}
+card button "{button-name}"
+card button id {n}
+button "{field-name}" -- defaults to card
+button id {n} -- defaults to card
+```
+
+It is more common to refer to buttons by their ID than by their name.
+The reason is that button names are often used as their displayed labels
+and a card can have multiple buttons with the same name.
+
+To change the name of a button:
+
+```text
+set name of {button-ref} to {new-name}
+```
+
+To click a button from a script:
+
+```text
+send mouseUp to {button-ref}
+```
 
 ### Scripts
 
@@ -4093,7 +4147,7 @@ open the message box (cmd-m) and enter `set [the] userLevel to 5`.
 
 ## Demos
 
-### Card Numbers
+### Card Numbering
 
 To display a card number on each card in a stack:
 
