@@ -15,6 +15,9 @@ layout: topic-layout.njk
 HyperCard is a Macintosh application for viewing and creating
 multimedia applications built with HyperCard stacks
 which are collections of cards.
+Actions can be scripted using the built-in HyperTalk language or AppleScript.
+This includes interacting with other applications
+and exchanging data with documents from other applications.
 
 The original application name was WildCard. It was changed
 to HyperCard shortly before the initial release
@@ -2738,7 +2741,7 @@ higher the stacking order before visiting each of the background fields.
 It is not possible to set a stacking order that
 alternates between background and foreground fields.
 
-When the mouse is clicked, only one element receives the event ...
+When the mouse is clicked, only one element receives the message ...
 the element that overlaps the click location and is in the closest layer.
 
 ## Sounds
@@ -3076,11 +3079,11 @@ which I placed in the Applications directory.
 
 HyperTalk ...
 
-- is the scripting language used by HyperCard
-- is used to write event handlers and functions in the scripts
+- is the primary scripting language used by HyperCard
+- is used to write message handlers and functions in the scripts
   associated with stacks, backgrounds, cards, buttons, and fields
 - has an English-like syntax
-- is case-insensitive except when comparing strings
+- is case-insensitive, even when comparing strings
 - is interpreted at run-time, but cached for executing again later
 - supports message passing (events) and message handlers
 - implements a simple database
@@ -3225,7 +3228,7 @@ TODO: Add more to this section.
 
 ### Scripts
 
-A HyperCard script is a collection of function and event handler definitions.
+A HyperCard script is a collection of message handler and function definitions.
 Often a script only contains a single handler definition.
 However, to aid in finding a definition inside a long script,
 the script editor includes dropdowns in the upper-right
@@ -3280,7 +3283,7 @@ but any indentation (including none) will work.
 
 A single script can define any number of message handlers
 that each begin with the keyword `on`.
-Each message handler listens for a specific kind of event
+Each message handler listens for a specific kind of message
 and executes the code inside when triggered.
 Unlike functions, message handlers cannot return a value.
 
@@ -3346,7 +3349,7 @@ When changes to a script are saved,
 the script is not checked for possible errors.
 Any errors are only found when the script is run.
 
-Message handlers for custom event names can be implemented in any script.
+Message handlers for custom message names can be implemented in any script.
 For example:
 
 ```text
@@ -3356,12 +3359,12 @@ on doubleBeep
 end doubleBeep
 ```
 
-To send an event, just use its name. For example, `doubleBeep`.
-If no handler is found for the event, a dialog that says
+To send a message, just use its name. For example, `doubleBeep`.
+If no handler is found for the message, a dialog that says
 "Can't understand {message}." will open.
 
 Message handlers can have parameters that appear
-after the event name in a comma-separated list.
+after the message name in a comma-separated list.
 For example:
 
 ```text
@@ -3372,7 +3375,7 @@ end add
 
 To invoke this, use an expression like `add 2, 3`.
 
-### Standard System Events
+### Standard System Messages
 
 TODO: Add more to this list and describe each one.
 
@@ -3799,9 +3802,9 @@ The syntax is one of the following:
 
 A tick is 1/60th of a second.
 
-### Mouse Events
+### Mouse Messages
 
-The following mouse-related events are automatically triggered:
+The following mouse-related messages are automatically triggered:
 
 - `mouseDoubleUp` - double click
 - `mouseDown` - pressed but not released
@@ -3956,8 +3959,8 @@ Message are sent when:
 
 - a system event occurs such as opening a stack,
   opening a card, or clicking a button.
-- a script explicitly sends an event with the `send` command
-- the user sends an event from the message box
+- a script explicitly sends a message with the `send` command
+- the user sends a message from the message box
 
 To send a message to the next level up in the object hierarchy,
 use the `pass` command.
