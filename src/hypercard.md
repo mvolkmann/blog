@@ -3360,6 +3360,10 @@ so it is risky to depend on those.
 
 To open a Script editor window for any kind of object,
 open its "Info" window and click the "Script..." button.
+
+<img alt="HyperCard Script editor" style="width: 80%"
+  src="/blog/assets/hypercard-script-editor.png?v={{pkg.version}}">
+
 The following keyboard shortcuts remove the need to open an "Info" window
 and directly open the Script editor for a given object:
 
@@ -4355,7 +4359,7 @@ To display a card number on each card in a stack:
 - Add the following field to each background:
 
   <img alt="HyperCard card number field" style="width: 60%"
-  src="/blog/assets/hypercard-card-number-field.png?v={{pkg.version}}">
+    src="/blog/assets/hypercard-card-number-field.png?v={{pkg.version}}">
 
 - Add the following script to each background:
 
