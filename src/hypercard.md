@@ -3474,6 +3474,18 @@ To invoke this, use an expression like `add 2, 3`.
 
 ### Standard System Messages
 
+The following messages are related to buttons:
+
+- `newButton`
+- `deleteButton`
+- `mouseDown`
+- `mouseStillDown`
+- `mouseUp`
+- `mouseDoubleClick`
+- `mouseEnter`
+- `mouseWithin`
+- `mouseLeave`
+
 TODO: Add more to this list and describe each one.
 
 - `appleEvent`
@@ -4487,56 +4499,62 @@ end mouseUp
 
 ### Number Field
 
-To create a field where only a positive integer can be entered,
-add the following script to the field.
+To create fields where only a positive integer can be entered,
+add the following script to the stack:
 
 ```text
-function decrementField
-  if me &gt; 1 then
-    put me - 1 into me
-    select after text of me
-  else
-    beep
-  end if
-end decrementField
-
-function incrementField
-  put me + 1 into me
-  select after text of me
-end incrementField
-
 function startsWith s, prefix
   return char 1 to length of prefix of s is prefix
 end startsWith
 
--- This assumes that the stack script contains the following line
--- to allow the use of the left and right arrow keys in fields:
--- set the textArrows to true
+on incrementField
+  get target
+  put it + 1 into the target
+  select after text of the target
+end incrementField
 
-on keyDown which
-  put char 1 of which into firstChar
-  put charToNum(firstChar) into asciiCode
+on decrementField
+  get target
+  if it &gt; 1 then
+    put it - 1 into the target
+    select after text of the target
+  end if
+end decrementField
 
-  if asciiCode is 8 -- delete key
-  then pass keyDown
-  else if asciiCode is 9 -- tab key
-  then pass keyDown
-  else if asciiCode is 28 -- left arrow key
-  then pass keyDown
-  else if asciiCode is 29 -- right arrow key
-  then pass keyDown
-  else if asciiCode is 30 -- up arrow key
-  then incrementField
-  else if asciiCode is 31 -- down arrow key
-  then decrementField
-  else if firstChar &lt; 0 or firstChar &gt; 9 -- not a digit key
-  then beep
-  else if me is empty and firstChar = 0 -- cannot start with zero
-  then beep
+-- This returns true if the handler should pass the message up the hierarchy.
+function shouldPassKeyDown which
+  put charToNum(which) into asciiCode
+  if asciiCode is 8 then return true -- delete key
+  if asciiCode is 9 then return true -- tab key
+  if asciiCode is 28 then return true -- left arrow key
+  if asciiCode is 29 then return true -- right arrow key
+
+  if asciiCode is 30 then -- up arrow key
+    incrementField
+    return false
+  end if
+
+  if asciiCode is 31 then -- down arrow key
+    decrementField
+    return false
+  end if
+
+  put true into valid
+  if which &lt; 0 or which &gt; 9 then put false into valid -- not a digit key
+  if contents is empty and which = 0 then put false into valid -- cannot start with zero
   -- Cannot replace first character with zero.
-  else if startsWith(the selectedChunk, "char 1 ") and firstChar is 0
-  then beep
-  else pass keyDown -- allow digit key
+  if startsWith(the selectedChunk, "char 1 ") and which is 0 then put false into valid
+  if not valid then beep
+  return valid
+end shouldPassKeyDown
+```
+
+Add the following script to each field
+where only a positive integer can be entered:
+
+```text
+on keyDown which
+  if shouldPassKeyDown(which) then pass keyDown
 end keyDown
 ```
 
