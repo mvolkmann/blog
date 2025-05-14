@@ -3436,14 +3436,103 @@ The Script menu contains the following:
 
 - "Set Checkpoint" (cmd-d)
 
-  This makes the line under the cursor so execution will stop there
-  the next time that line is reached while running the app.
-  TODO: How can you inspect variables when at a checkpoint?
+  This toggles where there is a checkpoint on the line under the cursor.
+  See the "Debugging" section below for details.
 
 When editing a script, press the tab key to format it
 which indents the lines properly.
 This uses two-space indentation,
 but any indentation (including none) will work.
+
+### Debugging
+
+"Checkpoints" mark lines in scripts where execution will stop
+if reached while running the application.
+Most other programming languages refer to these "breakpoints".
+
+To toggle whether there is a checkpoint on a line within a script window,
+click anywhere in the line and press cmd-d.
+Alternatively, this can be done by clicking in the left gutter.
+
+When there are checkpoints in the scripts and
+one of them is reached while running the app,
+two things happen.
+First, a Script window opens to the display the
+script containing the checkpoint that was reached.
+Second, the debug menu appears which is represented by a bug.
+
+The debug menu contains the following menu items:
+
+- Step (cmd-s)
+
+  This executes the current line and stops at the beginning of the next line.
+
+- Step Into (cmd-i)
+
+  This steps into a message handler or function
+  that is invoked by the current line.
+  If the handler or function is another script,
+  a script window for that script is opened
+
+- Trace
+
+  This traces execution of all remaining script lines.
+  Before selecting this,
+  select "Trace Delay..." to set it to a non-zero value,
+  select "Variable Watcher" to open that dialog,
+  and select "Message Watcher" to open that dialog
+
+- Trace Into (cmd-t)
+
+  TODO: How does this differ from Trace? It seems to do the same thing.
+
+- Go (cmd-g)
+
+  This continues execution until the initial handler that
+  triggered execution completes or another checkpoint is reached
+
+- Trace Delay...
+
+  This opens a dialog where the delay in ticks
+  between trace steps can be entered.
+  It defaults to zero, so there is no delay.
+  This means that only the final state of variables can be observed.
+  For a delay of one second, enter 60 and click the OK button.
+
+- Clear Checkpoint (cmd-d)
+
+  This toggles the checkpoint on the current line.
+
+- Abort (cmd-a)
+
+  This aborts execution of the initial handler that triggered execution.
+
+- Variable Watcher
+
+  This opens a "Variable Watcher" window where
+  the values of all variables in scope are displayed.
+
+  <img alt="HyperCard Variable Watcher" style="width: 45%"
+    src="/blog/assets/hypercard-variable-watcher.png?v={{pkg.version}}">
+
+  To change the value of a variable:
+
+  1. Click the name or value of the variable.
+  1. The value will copied to the bottom pane.
+  1. Modify the value in the bottom pane.
+  1. Press the enter key, not the return key.
+  1. Repeat the steps above for other variables to be modified.
+  1. Continue execution with the Step, Step Into, or Go command
+     to use the new variable values.
+
+- Message Watcher
+
+  This opens a "Message Watcher" window
+  which logs the names of all messages that are sent.
+  At the end of execution, only global variables will be displayed.
+
+  <img alt="HyperCard Message Watcher" style="width: 45%"
+    src="/blog/assets/hypercard-message-watcher.png?v={{pkg.version}}">
 
 ### Message Handlers
 
