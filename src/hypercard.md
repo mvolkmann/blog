@@ -3183,10 +3183,10 @@ Single-line comments begin with `--` and extend to the end of the line.
 Multi-line comments are not supported.
 
 To comment a set of lines, select them and
-press cmd-dash or select Script ... Comment.
+select Script ... Comment or press cmd-dash.
 
 To uncomment a set of lines, select them and
-press cmd-equal or select Script ... Uncomment.
+select Script ... Uncomment or press cmd-equal.
 
 ### Data Types
 
@@ -3893,8 +3893,14 @@ end fnName
 ```
 
 The `return` command is used to return a value from a function.
+Any number of these can be used inside a function,
+including none in functions that only cause side effects.
+Commands in a function body that follow
+an unconditional `return` are never executed.
 
-Functions are called with the following syntax:
+Functions are called with the following syntax.
+The open and closing parentheses are required,
+even if no arguments are being passed.
 
 ```text
 fnName()
@@ -3925,7 +3931,7 @@ HyperCard provides many built-in functions,
 most of which are prefixed with the keyword "the".
 Examples of these functions include:
 
-TODO: Summarize what each of these do.
+TODO: Finish summarizing what each of these do.
 
 - `the abbreviated date`: e.g. Tue, May 13, 2025
 
