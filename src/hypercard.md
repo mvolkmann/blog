@@ -3238,6 +3238,8 @@ The syntax is:
 [background|card] field {sequence-number}
 ```
 
+TODO: Can you add "in stack {stack-name}" to these?
+
 If neither `background` nor `card` is specified, it defaults to `background`.
 
 The sequence-number option is not recommended because those can change.
@@ -3261,6 +3263,8 @@ The syntax is:
 [background|card] button id {id-number}
 [background|card] button {sequence-number}
 ```
+
+TODO: Can you add "in stack {stack-name}" to these?
 
 If neither `background` nor `card` is specified, it defaults to `card`.
 
@@ -3873,7 +3877,7 @@ The following mouse-related messages are automatically triggered:
 ### Functions
 
 Functions can be defined inside scripts.
-They can have parameters.
+Like message handlers, they can have parameters.
 Unlike message handlers, they can return a value.
 
 Function definitions have the following syntax:
@@ -3914,6 +3918,78 @@ enter the following in the message box.
 ```text
 answer sum(2, 3)
 ```
+
+### Built-in Functions
+
+HyperCard provides many built-in functions,
+most of which are prefixed with the keyword "the".
+Examples of these functions include:
+
+TODO: Summarize what each of these do.
+
+- `the abbreviated date`: e.g. Tue, May 13, 2025
+
+  `abbreviated` can be shortened to `abbrev` or `abbr`.
+
+- `the clickChunk`
+- `the clickH`
+- `the clickLine`
+- `the clickLoc`
+- `the clickText`
+- `the clickV`
+- `the commandKey`: `up` or `down`
+- `the date`: e.g. 5/13/25
+- `the destination`
+- `the foundChunk`
+- `the foundField`
+- `the foundLine`
+- `the foundText`
+- `the length of {string}`: number of characters in string
+- `the length of {field-ref}`: number of characters in field content
+- `the long date`: e.g. Tuesday, May 13, 2025
+- `the long time`: e.g. 8:20:52 PM
+- `me`
+- `the menus`
+- `the mouse`: `up` or `down`
+- `the mouseClick`: the x coordinate
+- `the mouseH`
+- `the mouseLoc`: string containing x and y coordinates
+  from upper-left of window separated by a comma
+- `the mouseV`: the y coordinate
+- `the number of [card|bkgnd] buttons`
+- `the number of [card|bkgnd] fields`
+- `the number of backgrounds`
+- `the number of cards [of {bkgnd-expr}]`
+- `the number of marked cards`
+- `the number of menuItems of {menu-expr}`
+- `the number of menus`
+- `the number of windows`
+- `the optionKey`: `up` or `down`
+- `the param`
+- `the paramCount`
+- `the params`
+- `the random`
+- `the result`
+- `the screenRect`
+- `the sec[ond]s`: e.g. 3830012502; seconds since ?
+- `the selectedButton`
+- `the selectedChunk`
+- `the selectedField`
+- `the selectedLine[s] of [{field-ref}|{button-ref}]`
+- `the selectedLoc`
+- `the selectedText [of [{field-ref}|{button-ref}]`
+- `the shiftKey`: `up` or `down`
+- `the sound`
+- `the stacks`
+- `the sum`
+- `the systemVersion`
+- `[the] target`: the object that triggered the message such as a specific button
+- `the ticks`
+- `the time`: e.g. 8:20 PM
+- `the tool`: e.g. "browse tool"
+- `the value`
+- `the version`: of HyperCard; e.g. 2.41
+- `the windows`
 
 ### Navigation
 
