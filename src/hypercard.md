@@ -659,7 +659,35 @@ click the background of the dialog.
 
 ### Marking Cards
 
-TODO: Discuss "marking" cards and what you can do with marked cards.
+Marking cards provides a way to identify a subset of
+the cards in a stack that meet specific criteria.
+
+There are many reasons to mark cards including:
+
+- bookmark cards to be revisited later
+- perform an operation on a subset of the cards, such as exporting data
+- print a subset of the cards
+
+To mark or unmark a card from the HyperCard UI:
+
+1. Open its "Card Info" dialog.
+1. Check or uncheck the "Card Marked" checkbox.
+
+The following HyperTalk commands mark or unmark cards in scripts:
+
+- `[un]mark {card-ref}`
+
+- `[un]mark cards where {boolean-expression}`
+
+  e.g. `mark cards where the length  of field dogBreed > 6`
+
+- `[un]mark cards by finding {string} in {field-ref}`
+
+  e.g. `mark cards by finding whip in field dogBreed`
+
+- `[un]mark all cards`
+
+To mark all cards that meet some criteria, use the command `mark {card-ref}`.
 
 ### Finding Cards
 
@@ -1685,7 +1713,7 @@ To add a button to the current card.
      This style is used for buttons that:
 
      - have an icon, but "Show Name" is unchecked
-     - are positioned over a specific part of a graphic (ex. city on a map)
+     - are positioned over a specific part of a graphic (e.g. city on a map)
      - are positioned over a specific text to act as a hyperlink
 
      This is the default style when a button is created with cmd-drag.
@@ -2760,9 +2788,9 @@ For example, `play harpsichord tempo 120 "c4 e g4 e c5 q"`
 Sound resources can be copied from other files such as:
 
 - the `System` file in the directory `System Folder`
-- application files (ex. cow in
+- application files (e.g. cow in
   HyperCard 2.4:Your Tour of HyperCard:HyperCard Tour)
-- a HyperCard stack (ex. "Ghost Laugh" in
+- a HyperCard stack (e.g. "Ghost Laugh" in
   Documents:HyperCard Stacks:Haunted House:The Haunted House 1.0.2)
 
 To copy a sound response (type "snd") from another file:
