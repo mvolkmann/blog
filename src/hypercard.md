@@ -3375,6 +3375,71 @@ and directly open the Script editor for a given object:
 | Card        | cmd-option-c                                       |
 | Stack       | cmd-option-s                                       |
 
+When a Script window is open, the menus change to contain script-related items.
+The File menu contains "Close Script", "Save Script", "Revert to Saved",
+and "Print Script...".
+The Edit menu contains "Undo", "Cut", "Copy", "Paste", "Clear",
+and "Select All".
+The Go menu contains a menu item to jump to each open script window.
+The Script menu contains the following:
+
+- "Find..." (cmd-f)
+
+  This opens the Find dialog shown below.
+
+  <img alt="HyperCard Find dialog" style="width: 45%"
+    src="/blog/assets/hypercard-find-dialog.png?v={{pkg.version}}">
+
+  If there are no occurrences then a beep is played.
+
+- "Find Again" (cmd-g)
+
+  This jumps to the next occurrence of the text searched previously.
+  If there are no more occurrences and
+  the "Wraparound Search" checkbox was not checked
+  then a beep is played.
+
+- "Enter "Find" String" (cmd-e)
+
+  TODO: What does this do?
+
+- "Find Selection" (cmd-h)
+
+  This jumps to the next occurrence of the selected text.
+  If there are no more occurrences then a beep is played.
+
+- "Replace..." (cmd-r)
+
+  This opens the Replace dialog shown below.
+
+  <img alt="HyperCard Replace dialog" style="width: 45%"
+    src="/blog/assets/hypercard-replace-dialog.png?v={{pkg.version}}">
+
+  If there are no occurrences then a beep is played.
+
+- "Replace Again" (cmd-t)
+
+  This replaces the next occurrence.
+  If there are no more occurrences and
+  the "Wraparound Search" checkbox was not checked
+  then a beep is played.
+
+- "Comment" (cmd-dash)
+
+  This adds `--` to the beginning of each selected line.
+
+- "Uncomment" (cmd-equal)
+
+  This removes `--` from the beginning of each selected line.
+
+- "Check Syntax" (cmd-k):
+
+- "Set Checkpoint" (cmd-d)
+
+  This makes the line under the cursor so execution will stop there
+  the next time that line is reached while running the app.
+  TODO: How can you inspect variables when at a checkpoint?
+
 When editing a script, press the tab key to format it
 which indents the lines properly.
 This uses two-space indentation,
