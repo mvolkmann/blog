@@ -4497,10 +4497,20 @@ on mouseUp
 end mouseUp
 ```
 
-### Number Field
+### Number Fields
 
-To create fields where only a positive integer can be entered,
-add the following script to the stack:
+In the Home stack Preferences card, check the "Arrow Keys in Text" checkbox.
+
+Add the following script to the stack to support fields where:
+
+- Only a positive integer can be entered.
+- The left and right arrow keys can be used to
+  move the text cursor inside the field.
+- The up and down arrow keys can be used to
+  increment and decrement the value by one.
+- The zero key is not allowed when the field is empty.
+- The zero key is not allowed when characters are selected
+  that include the first character.
 
 ```text
 function startsWith s, prefix
