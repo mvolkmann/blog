@@ -544,6 +544,9 @@ To create a PNG file for an icon:
 
 The highest version of BBEdit that runs in Mac OS 9 is 6.1.2.
 
+This can create pure text files that can be copied to and read on
+a newer computer like one running macOS.
+
 TODO: What is the difference between BBEdit and BBEdit Lite?
 
 ### SimpleEdit

@@ -3476,42 +3476,102 @@ To invoke this, use an expression like `add 2, 3`.
 
 The following messages are related to buttons:
 
-- `newButton`
 - `deleteButton`
+- `mouseDoubleClick`
+- `mouseDown`
+- `mouseEnter`
+- `mouseLeave`
+- `mouseStillDown`
+- `mouseUp`
+- `mouseWithin`
+- `newButton`
+
+The following messages are related to fields:
+
+- `closeField`
+- `deleteField`
+- `enterInField`
+- `exitField`
+- `keyDown`
+- `mouseDoubleClick`
+- `mouseDown`
+- `mouseEnter`
+- `mouseLeave`
+- `mouseStillDown`
+- `mouseUp`
+- `mouseWithin`
+- `newField`
+- `openField`
+- `returnInField`
+- `tabKey`
+
+The following messages are related to cards:
+
+- `closeCard`
+- `deleteCard`
+- `newCard`
+- `openCard`
+
+The following messages are related to backgrounds:
+
+- `closeBackground`
+- `deleteBackground`
+- `newBackground`
+- `openBackground`
+
+The following messages are related to stacks:
+
+- `closeStack`
+- `deleteStack`
+- `moveWindow`
+- `newStack`
+- `openStack`
+- `resumeStack`
+- `sizeWindow`
+- `suspendStack`
+
+The following messages are related to pictures:
+
+- `closePicture`
+- `mouseDownInPicture`
+- `mouseUpInPicture`
+- `openPicture`
+
+The following messages are related to palettes:
+
+- `closePalette`
+- `openPalette`
+
+TODO: How should these messages be categorized?
+
+- `appleEvent`
+- `arrowKey: parameter gives direction`
+- `close`
+- `commandKeyDown`
+- `controlKey`
+- `doMenu`
+- `enterKey`
+- `functionKey`
+- `help`
+- `idle`
+- `keyDown`
+- `mouseDoubleClick`
 - `mouseDown`
 - `mouseStillDown`
 - `mouseUp`
-- `mouseDoubleClick`
-- `mouseEnter`
-- `mouseWithin`
-- `mouseLeave`
+- `quit`
+- `resume`
+- `returnKey`
+- `startup`
+- `suspend`
+- `tabKey`
 
 TODO: Add more to this list and describe each one.
 
-- `appleEvent`
-- `arrowKey`: argument gives direction
-- `closeStack`
-- `deleteButton`
-- `deleteField`
-- `doMenu`
-- `enterKey`
-- `idle`
-- `mouseDown`
-- `mouseEnter`
-- `mouseLeave`
-- `mouseStillDown`
-- `mouseUp`
-- `mouseWithin`
-- `newButton`
-- `newField`
-- `openCard`
-- `openStack`
 - `quit` of HyperCard
 - `resume` of HyperCard
-- `returnKey`
 - `startup` of HyperCard
 - `suspend` of HyperCard
-- `tabKey`
 
 ### Constants
 
@@ -4567,6 +4627,42 @@ where only a positive integer can be entered:
 on keyDown which
   if shouldPassKeyDown(which) then pass keyDown
 end keyDown
+```
+
+### Compound Interest
+
+The card shown below computes compound interest.
+
+<img alt="HyperCard Compound Interest" style="width: 25%"
+  src="/blog/assets/hypercard-compound-interest.png?v={{pkg.version}}">
+
+The stack has the script described above in the "Number Fields" section.
+
+The first three fields have the names "principal", "interest", and "periods".
+Each of them have the following script:
+
+```text
+on keyDown which
+  if shouldPassKeyDown(which) then pass keyDown -- defined in stack script
+end keyDown
+```
+
+The final field has the name "future",
+has its "Lock Text" checkbox checked,
+and does not have a script.
+
+The "Compute" button has the following script:
+
+```text
+on mouseUp
+  put card field principal into principal
+  put card field interest into interest
+  put card field periods into periods
+  put principal * compound(interest / 100, periods) into result
+
+  set the numberFormat to "0.00"
+  put result into card field future
+end mouseUp
 ```
 
 ### List Selection
