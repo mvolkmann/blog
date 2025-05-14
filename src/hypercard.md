@@ -3932,11 +3932,12 @@ TODO: Summarize what each of these do.
   `abbreviated` can be shortened to `abbrev` or `abbr`.
 
 - `the clickChunk`
-- `the clickH`
+- `the clickH`: x coordinate of the last mouse click
 - `the clickLine`
-- `the clickLoc`
+- `the clickLoc`: string containing x and y coordinates
+  from upper-left of window separated by a comma of the last mouse click
 - `the clickText`
-- `the clickV`
+- `the clickV`: y coordinate of the last mouse click
 - `the commandKey`: `up` or `down`
 - `the date`: e.g. 5/13/25
 - `the destination`
@@ -3949,13 +3950,15 @@ TODO: Summarize what each of these do.
 - `the long date`: e.g. Tuesday, May 13, 2025
 - `the long time`: e.g. 8:20:52 PM
 - `me`
-- `the menus`
+- `the menus`: a string containing all the menu names separated by newlines;
+  includes the system menus Apple, Help, and Application
 - `the mouse`: `up` or `down`
 - `the mouseClick`
-- `the mouseH`: the x coordinate
+- `the mouseH`: x coordinate of the current mouse location
 - `the mouseLoc`: string containing x and y coordinates
-  from upper-left of window separated by a comma
-- `the mouseV`: the y coordinate
+  of the current mouse location
+  from upper-left of window separated by a comma of the current mouse location
+- `the mouseV`: y coordinate of the current mouse location
 - `the number of [card|bkgnd] buttons`
 - `the number of [card|bkgnd] fields`
 - `the number of backgrounds`
@@ -3964,7 +3967,7 @@ TODO: Summarize what each of these do.
   To mark a card, open its "Card Info" dialog
   and check the "Card Marked" checkbox.
 - `the number of menuItems of {menu-expr}`
-- `the number of menus`: seems to include menus that are currently hidden
+- `the number of menus`: includes the system menus Apple, Help, and Application
 - `the number of windows`: TODO: result is higher than expected
 - `the optionKey`: `up` or `down`
 - `the param`
