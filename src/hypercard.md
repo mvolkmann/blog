@@ -3951,8 +3951,8 @@ TODO: Summarize what each of these do.
 - `me`
 - `the menus`
 - `the mouse`: `up` or `down`
-- `the mouseClick`: the x coordinate
-- `the mouseH`
+- `the mouseClick`
+- `the mouseH`: the x coordinate
 - `the mouseLoc`: string containing x and y coordinates
   from upper-left of window separated by a comma
 - `the mouseV`: the y coordinate
@@ -3960,10 +3960,12 @@ TODO: Summarize what each of these do.
 - `the number of [card|bkgnd] fields`
 - `the number of backgrounds`
 - `the number of cards [of {bkgnd-expr}]`
-- `the number of marked cards`
+- `the number of marked cards`: in the current stack;
+  To mark a card, open its "Card Info" dialog
+  and check the "Card Marked" checkbox.
 - `the number of menuItems of {menu-expr}`
-- `the number of menus`
-- `the number of windows`
+- `the number of menus`: seems to include menus that are currently hidden
+- `the number of windows`: TODO: result is higher than expected
 - `the optionKey`: `up` or `down`
 - `the param`
 - `the paramCount`
