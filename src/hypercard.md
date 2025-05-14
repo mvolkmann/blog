@@ -3515,21 +3515,22 @@ The debug menu contains the following menu items:
   <img alt="HyperCard Variable Watcher" style="width: 45%"
     src="/blog/assets/hypercard-variable-watcher.png?v={{pkg.version}}">
 
-  To change the value of a variable:
+  To change the values of variables:
 
-  1. Click the name or value of the variable.
-  1. The value will copied to the bottom pane.
+  1. Click the name or value of the variable
+     which copies the value to the bottom pane.
   1. Modify the value in the bottom pane.
   1. Press the enter key, not the return key.
   1. Repeat the steps above for other variables to be modified.
   1. Continue execution with the Step, Step Into, or Go command
      to use the new variable values.
 
+  At the end of execution, only global variables will be displayed.
+
 - Message Watcher
 
   This opens a "Message Watcher" window
   which logs the names of all messages that are sent.
-  At the end of execution, only global variables will be displayed.
 
   <img alt="HyperCard Message Watcher" style="width: 45%"
     src="/blog/assets/hypercard-message-watcher.png?v={{pkg.version}}">
