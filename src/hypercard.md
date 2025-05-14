@@ -3246,6 +3246,15 @@ TODO: Add more to this section.
 
 TODO: Add more to this section.
 
+To set a field to a number that is rounded to a given number of decimal places,
+set `numberFormat` before setting the field.
+For example:
+
+```text
+set the numberFormat to "0.00" -- for currency
+put amount into field total
+```
+
 #### Strings
 
 | Desired Result | Expression                          |
@@ -3983,7 +3992,8 @@ TODO: Finish summarizing what each of these do.
 - `the length of {field-ref}`: number of characters in field content
 - `the long date`: e.g. Tuesday, May 13, 2025
 - `the long time`: e.g. 8:20:52 PM
-- `me`
+- `me`: evaluates to the value the object that triggered the message;
+  can use in handlers, but not in functions
 - `the menus`: a string containing all the menu names separated by newlines;
   includes the system menus Apple, Help, and Application
 - `the mouse`: `up` or `down`
@@ -4022,7 +4032,9 @@ TODO: Finish summarizing what each of these do.
 - `the stacks`
 - `the sum`
 - `the systemVersion`
-- `[the] target`: the object that triggered the message such as a specific button
+- `[the] target`: reference to the object that
+  triggered the message being processed, such as a specific button;
+  can use in handlers and functions
 - `the ticks`
 - `the time`: e.g. 8:20 PM
 - `the tool`: e.g. "browse tool"
