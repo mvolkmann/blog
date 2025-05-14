@@ -496,7 +496,9 @@ All the alert sounds are stored in "snd" resources
 inside the `System` file which is in the `System Folder` directory.
 These can be copied to HyperCard stacks using ResEdit.
 
-## AppleWorks
+## Applications
+
+### AppleWorks
 
 AppleWorks is an office suite from Apple that supersedes ClarisWorks.
 The final version was 6.2.9.
@@ -537,6 +539,21 @@ To create a PNG file for an icon:
 - Click the "Don't Save" button.
 - Return to ResEdit.
 - Press cmd-q to quit ResEdit.
+
+### BBEdit
+
+The highest version of BBEdit that runs in Mac OS 9 is 6.1.2.
+
+TODO: What is the difference between BBEdit and BBEdit Lite?
+
+### SimpleEdit
+
+This is a simple text editor that is installed by default.
+The text files it produces cannot be read by macOS apps like TextEdit.
+To create plain text files, consider using BBEdit instead.
+
+SimpleEdit documents can contain graphics.
+TODO: What other kinds of media can be pasted in these documents?
 
 ## Mac OS 9 Tips
 

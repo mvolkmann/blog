@@ -4531,7 +4531,8 @@ on decrementField
   end if
 end decrementField
 
--- This returns true if the handler should pass the message up the hierarchy.
+-- This returns true if the handler should
+-- pass the keyDown message up the hierarchy.
 function shouldPassKeyDown which
   put charToNum(which) into asciiCode
   if asciiCode is 8 then return true -- delete key
