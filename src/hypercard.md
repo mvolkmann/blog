@@ -3992,7 +3992,7 @@ TODO: Finish summarizing what each of these do.
 - `the length of {field-ref}`: number of characters in field content
 - `the long date`: e.g. Tuesday, May 13, 2025
 - `the long time`: e.g. 8:20:52 PM
-- `me`: evaluates to the value the object that triggered the message;
+- `me`: evaluates to the value the object whose handler is being executed;
   can use in handlers, but not in functions
 - `the menus`: a string containing all the menu names separated by newlines;
   includes the system menus Apple, Help, and Application
@@ -4033,7 +4033,7 @@ TODO: Finish summarizing what each of these do.
 - `the sum`
 - `the systemVersion`
 - `[the] target`: reference to the object that
-  triggered the message being processed, such as a specific button;
+  triggered the message being processed, such as a specific button or field;
   can use in handlers and functions
 - `the ticks`
 - `the time`: e.g. 8:20 PM
