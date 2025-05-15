@@ -3326,6 +3326,7 @@ send mouseUp to {button-ref}
 ### Scripts
 
 A HyperCard script is a collection of message handler and function definitions.
+Those contain HyperTalk commands.
 Often a script only contains a single handler definition.
 However, to aid in finding a definition inside a long script,
 the script editor includes dropdowns in the upper-right
@@ -3837,10 +3838,10 @@ The `go` command supports many arguments described below.
 
 - Ordinal
 
-  - `go first` - 1st card in current stack
-  - `go second` - 2nd card in current stack
-  - `go third` - 3rd card in current stack
-  - `go last` - last card in current stack
+  - `go first [card]` - 1st card in current stack
+  - `go second [card]` - 2nd card in current stack
+  - `go third [card]` - 3rd card in current stack
+  - `go last [card]` - last card in current stack
   - `go card {n}` - nth card in current stack
 
 - Positional
@@ -3860,6 +3861,9 @@ The `go` command supports many arguments described below.
   - `go bkgnd "{background-name}" [of stack "{stack-name}"]`
   - `go card id {card-id} [of stack "{stack-name}]`
   - `go card "{card-name}" [of stack "{stack-name}]`
+
+    e.g. `go to card "User Preferences" of stack Home`
+
   - `go forth` - opposite of `go back` used after that command
   - `go home` - Home stack
   - `go stack {stack-name} [in [a] new window]` -
