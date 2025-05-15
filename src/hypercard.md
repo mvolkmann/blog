@@ -69,23 +69,26 @@ Each domain can contain painted objects (e.g. a filled rectangle),
 buttons, and fields.
 Fields display text and can allow users to enter text.
 
-Buttons and fields are referred to collectively as objects.
-When an object is created, it is
+A background can be shared by any number of cards in its stack.
+Objects in the background of the current card that are
+not obscured by objects in card are visible.
+
+When a button or field is created, it is
 automatically assigned a part number and an ID.
 Both are unique within their domain which is a specific background or card.
 
-The ID values never change and are never reused, even if an object is deleted.
+The ID values never change and are never reused,
+even if a button or field is deleted.
 
-The part numbers specify stacking order where
+There are five kinds of "objects" in HyperCard,
+stacks, cards, backgrounds, buttons, and fields.
+
+Part numbers specify stacking order where
 objects with higher part numbers are drawn on top of
 objects with lower part numbers.
 All objects in the card domain are drawn on top of
 all objects in the background domain.
 For more detail, see the "Layers" section below.
-
-A background can be shared by any number of cards in its stack.
-Objects in the background of the current card that are
-not obscured by objects in card are visible.
 
 ## Stacks
 
@@ -3479,7 +3482,7 @@ The Script menu contains the following:
   This toggles where there is a checkpoint on the line under the cursor.
   See the "Debugging" section below for details.
 
-When editing a script, press the tab key to format it
+When editing a script, press the tab key to format it,
 which indents the lines properly.
 This uses two-space indentation,
 but any indentation (including none) will work.
@@ -3692,8 +3695,8 @@ TODO: Add more to this list and describe each one.
 
 ### Message Handlers
 
-A single script can define any number of message handlers
-that each begin with the keyword `on`.
+A single script can define any number of message handlers.
+These begin with `on {message-name}` and end with `end {message-name}`.
 Each message handler listens for a specific kind of message
 and executes the code inside when triggered.
 Unlike functions, message handlers cannot return a value.
