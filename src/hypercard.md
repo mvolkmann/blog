@@ -2355,8 +2355,12 @@ This input only appears for Popup style buttons.
 Alternatively, drag the left edge of the button to the right
 to reveal the title and set the "Title Width".
 
-<img alt="HyperCard color popup Button" style="width: 20%"
-  src="/blog/assets/hypercard-color-popup-button.png?v={{pkg.version}}">
+<div style="display: flex; align-items: start">
+  <img alt="HyperCard color popup Button" style="width: 23%"
+    src="/blog/assets/hypercard-color-popup-button.png?v={{pkg.version}}">
+  <img alt="HyperCard color popup Button open" style="width: 28%"
+    src="/blog/assets/hypercard-color-popup-button-open.png?v={{pkg.version}}">
+</div>
 
 To get the selected text or line number of a Popup,
 use the following expressions:
