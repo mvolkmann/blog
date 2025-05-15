@@ -3257,12 +3257,51 @@ put amount into field total
 
 #### Strings
 
-| Desired Result | Expression                          |
-| -------------- | ----------------------------------- |
-| length         | `the length of {string-expr}`       |
-| substring      | `character i to j of {string-expr}` |
+Literal strings are surrounded by double quotes.
 
-TODO: Add more to this section.
+The value of `the itemDelimiter` defaults to a comma.
+
+Indexes for characters, words and lines are all one-based.
+
+The following table describes common operations on strings.
+In the example scripts, `s`, `s1`, and `s2` are all string references.
+
+| Operation                | Script                                         |
+| ------------------------ | ---------------------------------------------- |
+| concatenate              | `s1 & s2`                                      |
+| concatenate with a space | `s1 && s2`                                     |
+| include carriage return  | `s1 & return & s2`                             |
+| length in characters     | `[the] length of s`                            |
+| length in characters     | `[the] number of char[acter]s in s`            |
+| length in characters     | `length(s)`                                    |
+| length in words          | `[the] number of words in s`                   |
+| character by index       | `char i of s`                                  |
+| substring by indexes     | `char i to j of s`                             |
+| substring by word        | `word i of s`                                  |
+| substring by words       | `word i to j of s`                             |
+| substring by line        | `line i of s`                                  |
+| substring by lines       | `line i to j of s`                             |
+| get the item delimiter   | `the itemDelimiter`                            |
+| set item delimiter       | `set the itemDelimiter to "{char}"`            |
+| substring by delimiters  | `item i of s`                                  |
+| substring by delimiters  | `item i to j of s`                             |
+| substring index          | `the offset of s1 in s2` - s1 is substring     |
+| substring index          | `offset(s1, s2)` - s1 is substring             |
+| convert to number        | `number(s)` - 0 if invalid TODO: Doesn't work! |
+
+The following expression result is `3`:
+
+```text
+the number of lines in ("red" & return & "green" & return & "blue")
+```
+
+The following script displays the string "green":
+
+```text
+set the itemDelimiter to ";"
+put "red;green;blue" into s
+answer item 2 of s
+```
 
 ### Accessing Fields
 
@@ -3946,65 +3985,20 @@ For example, `multiply it by 2`.
 
 ### put Command
 
-The `put` command sets the value of a variable or object property.
+The `put` command sets the value of a container.
+Containers include variables, fields, and the Message Box.
+The syntax is `put {value} into {container-ref}`.
+
 For example:
 
 ```text
-put "test" into card field "My Field Name" -- by name
-put "test" into card field id 10 -- by id
-put "test" into card field 2 -- by number
-put the value of card field "user name" into myVariable
+put "Mark" into card field "first name" -- by name
+put "Mark" into card field id 10 -- by id
+put card field "user name" into firstName
 ```
 
-If the keyword `card` is omitted, it will only look for a background field.
-
-### Strings
-
-Literal strings are surrounded by double quotes.
-
-The value of `the itemDelimiter` defaults to a comma.
-
-Indexes for characters, words and lines are all one-based.
-
-The following table describes common operations on strings.
-In the example scripts, `s`, `s1`, and `s2` are all string references.
-
-| Operation                | Script                                         |
-| ------------------------ | ---------------------------------------------- |
-| concatenate              | `s1 & s2`                                      |
-| concatenate with a space | `s1 && s2`                                     |
-| include carriage return  | `s1 & return & s2`                             |
-| length in characters     | `[the] length of s`                            |
-| length in characters     | `[the] number of char[acter]s in s`            |
-| length in characters     | `length(s)`                                    |
-| length in words          | `[the] number of words in s`                   |
-| character by index       | `char i of s`                                  |
-| substring by indexes     | `char i to j of s`                             |
-| substring by word        | `word i of s`                                  |
-| substring by words       | `word i to j of s`                             |
-| substring by line        | `line i of s`                                  |
-| substring by lines       | `line i to j of s`                             |
-| get the item delimiter   | `the itemDelimiter`                            |
-| set item delimiter       | `set the itemDelimiter to "{char}"`            |
-| substring by delimiters  | `item i of s`                                  |
-| substring by delimiters  | `item i to j of s`                             |
-| substring index          | `the offset of s1 in s2` - s1 is substring     |
-| substring index          | `offset(s1, s2)` - s1 is substring             |
-| convert to number        | `number(s)` - 0 if invalid TODO: Doesn't work! |
-
-The following expression result is `3`:
-
-```text
-the number of lines in ("red" & return & "green" & return & "blue")
-```
-
-The following script displays the string "green":
-
-```text
-set the itemDelimiter to ";"
-put "red;green;blue" into s
-answer item 2 of s
-```
+If the keyword `card` is omitted,
+it will default to looking for a background field.
 
 ### Math
 
