@@ -560,6 +560,15 @@ TODO: What other kinds of media can be pasted in these documents?
 
 ## Mac OS 9 Tips
 
+To add a desktop picture:
+
+1. Select Apple menu ... Control Panels ... Appearance ... Desktop.
+1. If a picture was previously selected, click the "Remove Picture" button.
+1. Click the "Place Picture..." button.
+1. Click the "Place Picture..." button.
+1. Select a file with the format JPEG, GIF, PICT, or Photoshop.
+1. Click the "Open" button.
+
 To simulate a right mouse button click in order to get context-sensitive menus,
 hold down the control key while clicking.
 For example, doing this on the trash can icon,
