@@ -4884,6 +4884,76 @@ and sets the content of the second field to that line.
 Clicking a line that is already highlighted
 removes the highlighting and clears the second field.
 
+### Dropdown List
+
+Let's create a dropdown for selecting a color.
+The screenshots below show it in its collapsed and expanded forms.
+
+<div style="display: flex; align-items: start">
+  <img alt="HyperCard color dropdown collapsed" style="width: 14%"
+    src="/blog/assets/hypercard-color-dropdown-collapsed.png?v={{pkg.version}}">
+  <img alt="HyperCard color dropdown expanded" style="width: 15%"
+    src="/blog/assets/hypercard-color-dropdown-expanded.png?v={{pkg.version}}">
+</div>
+
+1. Create a field to hold and display the selected value.
+
+   <img alt="HyperCard color dropdown value" style="width: 60%"
+     src="/blog/assets/hypercard-color-dropdown-value.png?v={{pkg.version}}">
+
+1. Add the following script to the field
+   which toggles the visibility of the list when it is clicked:
+
+   ```text
+   on mouseUp
+     put the visible of card field colorDropDownList into visible
+     set the visible of card field colorDropDownList to not visible
+   end mouseUp
+   ```
+
+1. Create a field to allow selection of a color from a list.
+
+   <img alt="HyperCard color dropdown list selection" style="width: 60%"
+     src="/blog/assets/hypercard-color-dropdown-list-selection.png?v={{pkg.version}}">
+
+1. Add the following script to the field
+   which displays the selected value and hides the list
+   when a color in the list is clicked:
+
+   ```text
+   on mouseUp
+     get the selectedText of me
+     put it into card field colorDropDownValue
+     set the visible of me to false
+   end mouseUp
+   ```
+
+1. Create a button that can be clicked to toggle display of the color list.
+
+   <img alt="HyperCard color dropdown toggle" style="width: 50%"
+     src="/blog/assets/hypercard-color-dropdown-toggle.png?v={{pkg.version}}">
+
+1. Edit the button icon to match the following.
+   This can be created by copying an existing icon that is similar,
+   rotating it 90 degrees, and
+   modifying the pixels slightly in the "Icon Editor".
+
+   <img alt="HyperCard color dropdown button icon" style="width: 40%"
+     src="/blog/assets/hypercard-color-dropdown-button-icon.png?v={{pkg.version}}">
+
+1. Add the following script to the button,
+   which is identical to the script in the first field:
+
+   ```text
+   on mouseUp
+     put the visible of card field colorDropDownList into visible
+     set the visible of card field colorDropDownList to not visible
+   end mouseUp
+   ```
+
+1. Resize and position the fields and the button to match
+   the expanded screenshot above.
+
 ### Detecting Duplicates in a List
 
 Create a field "Style" set to "Scrolling"
