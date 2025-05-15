@@ -4913,8 +4913,8 @@ The screenshots below show it in its collapsed and expanded forms.
 
 1. Create a field to allow selection of a color from a list.
 
-   <img alt="HyperCard color dropdown list selection" style="width: 60%"
-     src="/blog/assets/hypercard-color-dropdown-list-selection.png?v={{pkg.version}}">
+   <img alt="HyperCard color dropdown list" style="width: 60%"
+     src="/blog/assets/hypercard-color-dropdown-list.png?v={{pkg.version}}">
 
 1. Add the following script to the field
    which displays the selected value and hides the list
@@ -4927,6 +4927,11 @@ The screenshots below show it in its collapsed and expanded forms.
      set the visible of me to false
    end mouseUp
    ```
+
+1. Add the color names in the `colorDropDownList` field.
+
+1. Open the "Field Info" dialog for the `colorDropDownList` field,
+   check the "Lock Text" checkbox, and click the "OK" button.
 
 1. Create a button that can be clicked to toggle display of the color list.
 
