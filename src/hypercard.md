@@ -3588,6 +3588,8 @@ See the section "Message Handlers" next.
 
 HyperCard defines many standard messages such as `mouseUp`.
 HyperTalk code in message handlers and functions can also send custom messages.
+If no message handler is found,
+HyperCard carries on, waiting for the next message.
 
 The following messages are related to buttons:
 
