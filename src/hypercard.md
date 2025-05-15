@@ -3453,6 +3453,7 @@ Most other programming languages refer to these "breakpoints".
 To toggle whether there is a checkpoint on a line within a script window,
 click anywhere in the line and press cmd-d.
 Alternatively, this can be done by clicking in the left gutter.
+All checkpoints are lost when the HyperCard app is quit.
 
 When there are checkpoints in the scripts and
 one of them is reached while running the app,
@@ -3460,6 +3461,8 @@ two things happen.
 First, a Script window opens to the display the
 script containing the checkpoint that was reached.
 Second, the debug menu appears which is represented by a bug.
+Once the debug menu is present, the debugging session must
+be run to completion or be aborted before HyperCard can be quit.
 
 The debug menu contains the following menu items:
 
@@ -3498,6 +3501,7 @@ The debug menu contains the following menu items:
   It defaults to zero, so there is no delay.
   This means that only the final state of variables can be observed.
   For a delay of one second, enter 60 and click the OK button.
+  This value resets to zero when the HyperCard app is restarted.
 
 - Clear Checkpoint (cmd-d)
 
@@ -4379,6 +4383,9 @@ Message are sent when:
 To send a message to the next level up in the object hierarchy,
 use the `pass` command.
 For example, `pass "messageName [parameterList]"`.
+The `pass` command can only be used in
+the handler that initially trapped the message,
+not in other handlers or functions invoked by that handler.
 
 To send a message to another object, use the `send` command.
 For example, `send "messageName [parameterList]" to objectReference`.
@@ -4437,12 +4444,6 @@ on mouseUp
   answer "Finished!"
 end mouseUp
 ```
-
-### Debugging
-
-TODO: Add content on debugging support.
-
-TODO: What causes the Debug menu to appear? Can you trigger it?
 
 ## Search Paths
 
