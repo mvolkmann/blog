@@ -3579,103 +3579,15 @@ The debug menu contains the following menu items:
   <img alt="HyperCard Message Watcher" style="width: 45%"
     src="/blog/assets/hypercard-message-watcher.png?v={{pkg.version}}">
 
-### Message Handlers
+### Messages
 
-A single script can define any number of message handlers
-that each begin with the keyword `on`.
-Each message handler listens for a specific kind of message
-and executes the code inside when triggered.
-Unlike functions, message handlers cannot return a value.
+HyperCard generates messages when specific things occur.
+Some messages are handled by HyperCard.
+Other messages are only handled when a corresponding message handler is found.
+See the section "Message Handlers" next.
 
-For example, in a stack with two cards where the first card contains a button:
-
-1. Open the stack. The first card will be displayed.
-1. Select the Button tool.
-1. Double-click the button.
-1. Click the "Script" button.
-1. Enter the following:
-
-   ```text
-   on mouseUp
-     go to next card
-   end mouseUp
-   ```
-
-1. Press cmd-s to save the changes.
-1. Press cmd-w to close the script window.
-
-1. Select Objects ... Card Info...
-1. Click the "Script" button.
-1. Enter the following:
-
-   ```text
-   on mouseUp
-     beep
-   end mouseUp
-   ```
-
-1. Select Objects ... Stack Info...
-1. Click the "Script" button.
-1. Enter the following:
-
-   ```text
-   on mouseUp
-     flash
-   end mouseUp
-   ```
-
-1. Select the Browse tool.
-1. Click outside the button.
-1. Notice that the `beep` command runs because the card script is run.
-1. Click the button.
-1. Notice that it navigates to the next card because the button script is run.
-1. While on the next card, click anywhere inside it
-   except on a button or field.
-1. Notice that the window flashes because the stack script is executed.
-   The `flash` command alternates the color of every pixel on the card
-   between white and black two times.
-
-Another interesting example:
-
-```text
-on mouseUp
-  get the length of card field "user name"
-  multiply it by 2
-  answer it
-end mouseUp
-```
-
-When changes to a script are saved,
-the script is not checked for possible errors.
-Any errors are only found when the script is run.
-
-Message handlers for custom message names can be implemented in any script.
-For example:
-
-```text
-on doubleBeep
-  beep
-  beep
-end doubleBeep
-```
-
-To send a message, just use its name. For example, `doubleBeep`.
-If no handler is found for the message, a dialog that says
-"Can't understand {message}." will open.
-
-Message handlers can have parameters that appear
-after the message name in a comma-separated list.
-For example:
-
-```text
-on add n1, n2
-  answer "The sum is" && (n1 + n2) & "."
-end add
-```
-
-To invoke this, use an expression like `add 2, 3`.
-
-### Standard System Messages
+HyperCard defines many standard messages such as `mouseUp`.
+HyperTalk code in message handlers and functions can also send custom messages.
 
 The following messages are related to buttons:
 
@@ -3775,6 +3687,102 @@ TODO: Add more to this list and describe each one.
 - `resume` of HyperCard
 - `startup` of HyperCard
 - `suspend` of HyperCard
+
+### Message Handlers
+
+A single script can define any number of message handlers
+that each begin with the keyword `on`.
+Each message handler listens for a specific kind of message
+and executes the code inside when triggered.
+Unlike functions, message handlers cannot return a value.
+
+For example, in a stack with two cards where the first card contains a button:
+
+1. Open the stack. The first card will be displayed.
+1. Select the Button tool.
+1. Double-click the button.
+1. Click the "Script" button.
+1. Enter the following:
+
+   ```text
+   on mouseUp
+     go to next card
+   end mouseUp
+   ```
+
+1. Press cmd-s to save the changes.
+1. Press cmd-w to close the script window.
+
+1. Select Objects ... Card Info...
+1. Click the "Script" button.
+1. Enter the following:
+
+   ```text
+   on mouseUp
+     beep
+   end mouseUp
+   ```
+
+1. Select Objects ... Stack Info...
+1. Click the "Script" button.
+1. Enter the following:
+
+   ```text
+   on mouseUp
+     flash
+   end mouseUp
+   ```
+
+1. Select the Browse tool.
+1. Click outside the button.
+1. Notice that the `beep` command runs because the card script is run.
+1. Click the button.
+1. Notice that it navigates to the next card because the button script is run.
+1. While on the next card, click anywhere inside it
+   except on a button or field.
+1. Notice that the window flashes because the stack script is executed.
+   The `flash` command alternates the color of every pixel on the card
+   between white and black two times.
+
+Another interesting example:
+
+```text
+on mouseUp
+  get the length of card field "user name"
+  multiply it by 2
+  answer it
+end mouseUp
+```
+
+When changes to a script are saved,
+the script is not checked for possible errors.
+Any errors are only found when the script is run.
+
+Message handlers for custom message names can be implemented in any script.
+For example:
+
+```text
+on doubleBeep
+  beep
+  beep
+end doubleBeep
+```
+
+To send a message, just use its name. For example, `doubleBeep`.
+If no handler is found for the message, a dialog that says
+"Can't understand {message}." will open.
+
+Message handlers can have parameters that appear
+after the message name in a comma-separated list.
+For example:
+
+```text
+on add n1, n2
+  answer "The sum is" && (n1 + n2) & "."
+end add
+```
+
+To invoke this, use an expression like `add 2, 3`.
 
 ### Constants
 
