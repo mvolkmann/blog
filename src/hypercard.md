@@ -2342,6 +2342,9 @@ A button with the style "Popup" displays a dropdown list of options.
 To specify the options, click the "Contents..." button
 and enter each option on its own line.
 
+<img alt="HyperCard color popup Button Info" style="width: 60%"
+  src="/blog/assets/hypercard-color-popup-button-info.png?v={{pkg.version}}">
+
 The name assigned to the button is used for
 a label that appears to the left of the dropdown.
 It should end with a colon.
@@ -2352,12 +2355,15 @@ This input only appears for Popup style buttons.
 Alternatively, drag the left edge of the button to the right
 to reveal the title and set the "Title Width".
 
+<img alt="HyperCard color popup Button" style="width: 20%"
+  src="/blog/assets/hypercard-color-popup-button.png?v={{pkg.version}}">
+
 To get the selected text or line number of a Popup,
 use the following expressions:
 
 ```text
-the selectedText of button "My Popup Name"
-the selectedLine of button "My Popup Name"
+the selectedText of button id {n}
+the selectedLine of button id {n}
 ```
 
 ## Fields
@@ -4897,8 +4903,13 @@ removes the highlighting and clears the second field.
 
 ### Dropdown List
 
-Let's create a dropdown for selecting a color.
-The screenshots below show it in its collapsed and expanded forms.
+Let's create a custom dropdown for selecting a color.
+This is an alternative to using a button with the style "Popup",
+which is typically preferred.
+Implementing a custom dropdown requires much more work,
+but may be worthwhile in order to have more control over the styling.
+
+The screenshots below show this in its collapsed and expanded forms.
 
 <div style="display: flex; align-items: start">
   <img alt="HyperCard color dropdown collapsed" style="width: 14%"
