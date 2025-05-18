@@ -3982,7 +3982,57 @@ This avoids using values assigned by other stacks.
 HyperTalk can store the name or id of a button/field in a variable,
 but it cannot store a button or field object in a variable.
 
-### go Command
+### Commands
+
+#### add Command
+
+The `add` command adds a number to the number in a given container.
+The numeric value of an empty container is zero.
+An "Expected number here" error occurs if the container
+is not empty and does not contain a number.
+
+For example, the following commands add the values in two fields
+and place the result in a third field:
+
+```text
+put card field n1 into result
+add card field n2 to result
+put result into card field sum
+```
+
+#### get Command
+
+The `get` command sets the value of the special variable `it`
+to the value of an expression.
+The command `get {expression}` is equivalent to `put {expression} into it`.
+
+The following are examples of using the `get` command:
+
+```text
+get 2 + 3
+get the short date -- e.g. 4/12/25; short is the default and can be omitted
+get the long date -- e.g. Saturday, April 12, 2025
+get the value of card field "My Foreground Field"
+get the value of background field "My Background Field"
+get the label of button "My Button"
+get the hilite of button "My Checkbox"
+get item 2 of colorList -- where colorList is a comma-delimited string
+get word 1 of "some long string"
+get line 3 of field "My Text Area"
+```
+
+Two ways see the value of any variable, including `it`,
+are to use the `put` and `answer` commands.
+The `put` command writes the value to the message box.
+The `answer` command opens a dialog box containing the value.
+Both commands take an expression as an argument
+which can be just a variable name.
+
+Once the variable `it` is set by using the `get` command,
+it can be used in subsequent expressions.
+For example, `multiply it by 2`.
+
+#### go Command
 
 The `go` command supports going to another card.
 It can be followed by the optional preposition "to"
@@ -4065,39 +4115,7 @@ on returnInField
 end keyDown
 ```
 
-### get Command
-
-The `get` command sets the value of the special variable `it`
-to the value of an expression.
-The command `get {expression}` is equivalent to `put {expression} into it`.
-
-The following are examples of using the `get` command:
-
-```text
-get 2 + 3
-get the short date -- e.g. 4/12/25; short is the default and can be omitted
-get the long date -- e.g. Saturday, April 12, 2025
-get the value of card field "My Foreground Field"
-get the value of background field "My Background Field"
-get the label of button "My Button"
-get the hilite of button "My Checkbox"
-get item 2 of colorList -- where colorList is a comma-delimited string
-get word 1 of "some long string"
-get line 3 of field "My Text Area"
-```
-
-Two ways see the value of any variable, including `it`,
-are to use the `put` and `answer` commands.
-The `put` command writes the value to the message box.
-The `answer` command opens a dialog box containing the value.
-Both commands take an expression as an argument
-which can be just a variable name.
-
-Once the variable `it` is set by using the `get` command,
-it can be used in subsequent expressions.
-For example, `multiply it by 2`.
-
-### put Command
+#### put Command
 
 The `put` command sets the value of a container.
 Containers include variables, fields, and the Message Box.
