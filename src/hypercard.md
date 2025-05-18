@@ -3822,15 +3822,7 @@ The following messages are related to cards:
 
   This is sent when the return key is pressed.
 
-The following messages are related to buttons, fields, and cards:
-
-- `mouseDoubleClick`
-
-  This is sent when the mouse button is double clicked while over the target.
-
-- `mouseDown`
-
-  This is sent when the mouse button is pressed while over the target.
+The following messages are related to buttons and fields:
 
 - `mouseEnter`
 
@@ -3839,6 +3831,23 @@ The following messages are related to buttons, fields, and cards:
 - `mouseLeave`
 
   This is sent when the mouse cursor leaves the target.
+
+- `mouseWithin`
+
+  This is sent every time the mouse moves inside the target.
+  To get the mouse cursor coordinates, use the functions
+  `the mouseLoc`, `the mouseH`, and `the mouseV`.
+
+The following messages are related to buttons, fields, and cards:
+
+- `mouseDoubleClick`
+
+  This is sent when the mouse button is double clicked while over the target.
+  Before this message is sent, the messages `mouseDown` and `mouseUp` are sent.
+
+- `mouseDown`
+
+  This is sent when the mouse button is pressed while over the target.
 
 - `mouseStillDown`
 
@@ -3849,12 +3858,6 @@ The following messages are related to buttons, fields, and cards:
 
   This is sent when the mouse button is released while over the target
   only if it was also pressed on the same target.
-
-- `mouseWithin`
-
-  This is sent every time the mouse moves inside the target.
-  To get the mouse cursor coordinates, use the functions
-  `the mouseLoc`, `the mouseH`, and `the mouseV`.
 
 The following messages are related to fields and cards:
 
