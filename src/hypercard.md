@@ -3695,11 +3695,26 @@ The debug menu contains the following menu items:
 
 ### Messages
 
+Message are sent when:
+
+To send a message to the next level up in the object hierarchy,
+use the `pass` command.
+For example, `pass "messageName [parameterList]"`.
+The `pass` command can only be used in
+the handler that initially trapped the message,
+not in other handlers or functions invoked by that handler.
+
+To send a message to another object, use the `send` command.
+For example, `send "messageName [parameterList]" to objectReference`.
+
 Messages are generated in HyperCard in these ways:
 
-1. A specific event occurs such as clicking a mouse button.
+1. A system event occurs such as opening a stack,
+   opening a card, or clicking a button.
 1. A script executes a HyperTalk command.
 1. A script sends a custom message.
+1. A script explicitly sends a message with the `send` command
+1. the user sends a message from the message box
 
 Some messages are handled by HyperCard.
 Other messages are only handled by specific objects
@@ -3814,7 +3829,7 @@ TODO: Add more to this list and describe each one.
 
 A single script can define any number of message handlers.
 These begin with `on {message-name}` and end with `end {message-name}`.
-Each message handler listens for a specific kind of message
+Each message handler listens for ("traps") a specific kind of message
 and executes the code inside when triggered.
 
 Suppose a button has the following script:
@@ -3829,7 +3844,7 @@ All HyperTalk commands, including `help`, send a message.
 If the `help` message is not handled by scripts in the current stack,
 it is handled by the HyperCard application.
 The following can be added to the button script above
-to trap the `help` message and provide custom handling.
+to trap `help` messages and provide custom handling.
 
 ```text
 on help
@@ -4186,6 +4201,10 @@ put "card myCardName" into cardRef
 do "go to" && cardRef
 ```
 
+#### help Command
+
+The `help` command opens the "HyperCard Help" stack in a new window.
+
 #### put Command
 
 The `put` command sets the value of a container.
@@ -4212,6 +4231,16 @@ For example:
 select word 2 to 4 of card field story
 get the selectedText
 answer it
+```
+
+#### send Command
+
+The `send` command sends a message to a specific object.
+It is often used to simulate a user action such as clicking a button.
+For example:
+
+```text
+send mouseUp to button myButton
 ```
 
 ### Math
@@ -4578,25 +4607,6 @@ in all stacks, even if the Tools palette is not open:
      else pass functionKey
    end functionKey
    ```
-
-### Messages
-
-Message are sent when:
-
-- a system event occurs such as opening a stack,
-  opening a card, or clicking a button.
-- a script explicitly sends a message with the `send` command
-- the user sends a message from the message box
-
-To send a message to the next level up in the object hierarchy,
-use the `pass` command.
-For example, `pass "messageName [parameterList]"`.
-The `pass` command can only be used in
-the handler that initially trapped the message,
-not in other handlers or functions invoked by that handler.
-
-To send a message to another object, use the `send` command.
-For example, `send "messageName [parameterList]" to objectReference`.
 
 ### Custom Menus
 
