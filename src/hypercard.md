@@ -3697,18 +3697,6 @@ The debug menu contains the following menu items:
 
 ### Messages
 
-Message are sent when:
-
-To send a message to the next level up in the object hierarchy,
-use the `pass` command.
-For example, `pass "messageName [parameterList]"`.
-The `pass` command can only be used in
-the handler that initially trapped the message,
-not in other handlers or functions invoked by that handler.
-
-To send a message to another object, use the `send` command.
-For example, `send "messageName [parameterList]" to objectReference`.
-
 Messages are generated in HyperCard in these ways:
 
 1. A system event occurs such as opening a stack,
@@ -3722,6 +3710,20 @@ Some messages are handled by HyperCard.
 Other messages are only handled by specific objects
 such as buttons and fields if they define a corresponding message handler.
 See the section "Message Handlers" next.
+
+A message handler can forward the message it trapped up to
+the next level up in the object hierarchy using the `pass` command.
+The syntax is `pass {messageName}`.
+The message name must match that of the containing handler.
+The parameters passed to the containing handler
+are automatically included in the forwarded message.
+
+The `pass` command can only be used in
+the handler that initially trapped the message,
+not in other handlers or functions invoked by that handler.
+
+To send a message to another object, use the `send` command.
+For example, `send "messageName [parameterList]" to objectReference`.
 
 HyperCard defines many standard messages such as `mouseUp`.
 HyperTalk code in message handlers and functions can also send custom messages.
