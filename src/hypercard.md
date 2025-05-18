@@ -3397,6 +3397,7 @@ the elements up to the end are returned and no error is reported.
 1. By item
 
    Items are delimited by commas.
+   This can be used to simulate an array.
 
    ```text
    get item i of {container-ref}
@@ -3406,6 +3407,7 @@ the elements up to the end are returned and no error is reported.
 1. By line
 
    Lines are delimited by carriage return characters.
+   This can also be used to simulate an array.
 
    ```text
    get line i of {container-ref}
