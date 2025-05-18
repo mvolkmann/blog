@@ -3368,6 +3368,50 @@ put "red;green;blue" into s
 answer item 2 of s
 ```
 
+#### Containers
+
+Containers include variables, fields, and selections within fields.
+Each container holds a string.
+
+There are many ways to get a substring from the contents of a container.
+When getting a range, if the end of the range is
+greater than the number of elements available,
+the elements up to the end are returned and no error is reported.
+
+1. By character
+
+   ```text
+   get char i of {container-ref}
+   get char i to j of {container-ref}
+   ```
+
+1. By word
+
+   Words are delimited by spaces and carriage returns.
+
+   ```text
+   get word i of {container-ref}
+   get word i to j of {container-ref}
+   ```
+
+1. By item
+
+   Items are delimited by commas.
+
+   ```text
+   get item i of {container-ref}
+   get item i to j of {container-ref}
+   ```
+
+1. By line
+
+   Lines are delimited by carriage return characters.
+
+   ```text
+   get line i of {container-ref}
+   get line i to j of {container-ref}
+   ```
+
 ### Accessing Fields
 
 A field reference evaluates to the value of the field.
