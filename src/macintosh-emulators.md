@@ -11,7 +11,25 @@ There are four primary ways to emulate older Macintosh computers.
 - {% aTargetBlank "https://basilisk.cebix.net", "Basilisk II" %} for MacOS 0.x to 8.1
 - {% aTargetBlank "https://infinitemac.org", "Infinite Mac" %} for MacOS 1.0 to 10.4
 - {% aTargetBlank "https://www.gryphel.com/c/minivmac/", "Mini vMac" %} for MacOS 1.1 to 7.5.5
+- {% aTargetBlank "https://www.qemu.org", "QEMU" %}
 - {% aTargetBlank "https://sheepshaver.cebix.net", "SheepShaver" %} for MacOS 7.5.2 to 9.0.4
+- {% aTargetBlank "https://mac.getutm.app", "UTM" %}
+
+## UTM
+
+1. Browse the {% aTargetBlank "https://mac.getutm.app", "UTM home page" %}.
+1. Click the "Download" button to download the file `UTM.dmg`.
+1. Double-click the file `UTM.dmg`.
+1. Drag the icon for `UTM.app` to the `Applications` folder.
+1. Close the window.
+1. In a Finder window under "Locations", eject `UTM`.
+1. In the Finder window, click `Applications` in the left nav.
+1. Double-click `UTM.app`.
+1. Click the "Continue" button.
+1. Download `Mac OS X 9.2.2.utm.zip` from {% aTargetBlank
+   "https://www.macintoshrepository.org/85192-utm-powerpc-mac-os-archive-9-1-9-2-2-10-0-10-1-10-2-10-3-10-4-10-5-",
+   "Macintosh Repository" %}.
+   I gave up here. I can't find the file anywhere.
 
 ## Basilisk II
 
