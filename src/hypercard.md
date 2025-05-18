@@ -4157,6 +4157,17 @@ put card field "user name" into firstName
 If the keyword `card` is omitted,
 it will default to looking for a background field.
 
+#### select Command
+
+The `select` command selects a subset of the text in field.
+For example:
+
+```text
+select word 2 to 4 of card field story
+get the selectedText
+answer it
+```
+
 ### Math
 
 HyperCard supports the arithmetic infix binary operators
