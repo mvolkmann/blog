@@ -3155,6 +3155,15 @@ HyperTalk ...
 - supports message passing (events) and message handlers
 - implements a simple database
 
+HyperCard includes a HyperTalk compiler that is used to
+compile scripts into machine code the first time they are executed.
+The machine code for each handler and function defined in a script
+is stored in memory.
+The next time the same handlers and functions are executed,
+they run faster because there is no need to compile them again.
+This remains true unless the machine code is pushed out of memory
+by more newly generated machine code due to memory limits.
+
 The commands supported by HyperTalk are documented at {% aTargetBlank
 "https://www.hypercard.center/HyperTalkReference#commands",
 "HyperTalk Reference" %}.
@@ -3425,7 +3434,10 @@ Those contain HyperTalk commands.
 Often a script only contains a single handler definition.
 However, to aid in finding a definition inside a long script,
 the script editor includes dropdowns in the upper-right
-for selecting and scrolling to a selected function or handler.
+for selecting and scrolling to a selected handler or function.
+
+<img alt="HyperCard Script editor" style="width: 80%"
+  src="/blog/assets/hypercard-script-editor.png?v={{pkg.version}}">
 
 Scripts are associated with a specific object
 such as a button, field, or card.
@@ -3438,10 +3450,10 @@ The messages travel through the object hierarchy,
 searching for an object that handles them.
 The levels of the object hierarchy, from bottom to top are:
 
-- buttons and fields
-- cards
-- backgrounds
-- stacks
+- target button or field
+- current card
+- current background
+- current stack
 - Home stack
 - HyperCard app
 
@@ -3456,9 +3468,6 @@ so it is risky to depend on those.
 
 To open a Script editor window for any kind of object,
 open its "Info" window and click the "Script..." button.
-
-<img alt="HyperCard Script editor" style="width: 80%"
-  src="/blog/assets/hypercard-script-editor.png?v={{pkg.version}}">
 
 The following keyboard shortcuts remove the need to open an "Info" window
 and directly open the Script editor for a given object:
