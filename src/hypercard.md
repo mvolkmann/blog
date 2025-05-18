@@ -3269,7 +3269,11 @@ HyperTalk supports the following data types:
   stored as strings
 - strings with literal values delimited by double quotes
 - string lists that are a single string with commas delimiting the items
-- containers which are variables, buttons, and fields
+- containers which are variables (including `it`), fields,
+  and selections within fields
+
+The big takeaway is that every data type is really just a string
+and all containers store a string.
 
 To concatenate strings, or values that can be converted to strings,
 use the binary operators `&` and `&&`.
@@ -4002,8 +4006,8 @@ put result into card field sum
 
 #### get Command
 
-The `get` command sets the value of the special variable `it`
-to the value of an expression.
+The `get` command gets the value of a container or expression
+and sets the value of the special variable `it` to that value.
 The command `get {expression}` is equivalent to `put {expression} into it`.
 
 The following are examples of using the `get` command:
@@ -4012,8 +4016,8 @@ The following are examples of using the `get` command:
 get 2 + 3
 get the short date -- e.g. 4/12/25; short is the default and can be omitted
 get the long date -- e.g. Saturday, April 12, 2025
-get the value of card field "My Foreground Field"
-get the value of background field "My Background Field"
+get [the value of] card field "My Foreground Field"
+get [the value of] background field "My Background Field"
 get the label of button "My Button"
 get the hilite of button "My Checkbox"
 get item 2 of colorList -- where colorList is a comma-delimited string
@@ -4023,7 +4027,8 @@ get line 3 of field "My Text Area"
 
 Two ways see the value of any variable, including `it`,
 are to use the `put` and `answer` commands.
-The `put` command writes the value to the message box.
+The `put` command writes the value to the message box
+if no destination container is specified.
 The `answer` command opens a dialog box containing the value.
 Both commands take an expression as an argument
 which can be just a variable name.
@@ -4113,6 +4118,17 @@ has the same effect as clicking the button:
 on returnInField
   findDog me
 end keyDown
+```
+
+A card reference can be stored in a variable and used in `go` command
+that is evaluated with the `do` command. For example:
+
+```text
+put "card id 123" into cardRef
+do "go to" && cardRef
+
+put "card myCardName" into cardRef
+do "go to" && cardRef
 ```
 
 #### put Command
@@ -4410,14 +4426,6 @@ TODO: Finish summarizing what each of these do.
 - `the value`
 - `the version`: of HyperCard; e.g. 2.41
 - `the windows`
-
-### Navigation
-
-To go to another card or stack, use the following commands:
-
-- `go first|next|prev|last`
-- `go home`
-- `go stack "stack-name"`
 
 ### Dialogs
 
