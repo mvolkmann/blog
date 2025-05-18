@@ -2249,6 +2249,10 @@ Modify the button script to execute HyperTalk commands when clicked.
 
 ### Scripting Buttons
 
+The script associated with a button can defined handlers that are invoked
+when the user interacts with the button.
+The most commonly implemented handler begins with `on mouseUp`.
+
 There are three ways to view and edit the script for a button:
 
 1. Select the Button tool, double click the button to open
@@ -2576,6 +2580,20 @@ The following keyboard shortcuts modify the style of the selected field:
 The text style does not affect the ability to
 search for matching text using the `find` command.
 
+### Setting Fields
+
+To set the content of a field, use a command matching
+`put "{content}" into {field-ref}`.
+
+To clear the content of field, use a command matching
+`put empty into {field-ref}`.
+
+To append to the content of a field, use a command matching
+`put "{content}" after {field-ref}`.
+
+To append a new line of content in a field, use a command matching
+`put return & "{content}" after {field-ref}`.
+
 ### Moving Fields
 
 To move a field within its card:
@@ -2875,8 +2893,15 @@ It seems that the right edge is cut off.
 Every stack has at least one background, but it can be empty.
 Often backgrounds have a design that mimics something in real life
 such as an address book, calendar, notebook, or paper form.
-They contain buttons and fields that
+They can contain buttons and fields that
 appear on every card that uses the background.
+Each background field stores a different value
+for each card that uses the background.
+
+Every card has an associated background.
+When a new card is created, it uses the background of the current card.
+When a card is cut and then pasted in a new location within the stack,
+it retains its background.
 
 To edit the properties of the background of the current card,
 select Objects ... Bkgnd Info... which opens the following dialog:
@@ -3487,6 +3512,9 @@ The Script menu contains the following:
 
 - "Check Syntax" (cmd-k):
 
+  This is only enabled when AppleScript selected instead of HyperTalk.
+  It reports errors in AppleScript syntax.
+
 - "Set Checkpoint" (cmd-d)
 
   This toggles where there is a checkpoint on the line under the cursor.
@@ -3596,7 +3624,8 @@ The debug menu contains the following menu items:
 
 HyperCard generates messages when specific things occur.
 Some messages are handled by HyperCard.
-Other messages are only handled when a corresponding message handler is found.
+Other messages are only handled by specific objects
+such as buttons and fields if they define a corresponding message handler.
 See the section "Message Handlers" next.
 
 HyperCard defines many standard messages such as `mouseUp`.
@@ -3683,7 +3712,7 @@ TODO: How should these messages be categorized?
 - `enterKey`
 - `functionKey`
 - `help`
-- `idle`
+- `idle`: generated every tick (1/60th of a second) when no handlers are running
 - `keyDown`
 - `mouseDoubleClick`
 - `mouseDown`
@@ -3709,6 +3738,16 @@ A single script can define any number of message handlers.
 These begin with `on {message-name}` and end with `end {message-name}`.
 Each message handler listens for a specific kind of message
 and executes the code inside when triggered.
+
+Only one message handler at a time can run.
+If one runs for a long time, perhaps by using the `wait` command,
+no other messages are handled
+until the currently running message handler completes.
+Some messages are queued and processed later.
+For some messages, only the last queued message of that type is processed later.
+Some queued messages are not processed.
+This is very confusing!
+
 Unlike functions, message handlers cannot return a value.
 
 For example, in a stack with two cards where the first card contains a button:
@@ -4428,6 +4467,22 @@ To see how this is done:
   the function `homeMenuMsgs`.
 
 TODO: Learn how to do this in one of your stacks.
+
+## AppleScript
+
+AppleScript can be used as an alternative to HyperTalk for implementing scripts.
+Change "Scripting language" from "HyperTalk" to "AppleScript".
+For example, the following script displays a dialog when its associated button is clicked.
+
+```text
+on mouseUp
+  display dialog "got click"
+end mouseUp
+```
+
+When the language is AppleScript,
+the "Check Script" menu item in the "Script" menu becomes enabled.
+Selecting that checks the script for errors and reports them in a dialog.
 
 ## Speaking
 
