@@ -2249,9 +2249,11 @@ Modify the button script to execute HyperTalk commands when clicked.
 
 ### Scripting Buttons
 
-The script associated with a button can defined handlers that are invoked
-when the user interacts with the button.
-The most commonly implemented handler begins with `on mouseUp`.
+The script associated with a button can define handlers
+that are invoked when the user interacts with the button.
+When a button is created, it is automatically given a script
+with an empty handler (no commands) for `mouseUp` messages.
+This is the most commonly implemented handler for buttons.
 
 There are three ways to view and edit the script for a button:
 
