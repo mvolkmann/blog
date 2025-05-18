@@ -2299,6 +2299,38 @@ on mouseStillDown
 end mouseStillDown
 ```
 
+If several buttons are clicked while a handler is executing,
+only messages for the last button clicked will be delivered.
+To demonstrate this, create three buttons that each have `mouseUp` handler.
+In the first handler, do the following:
+
+```text
+beep
+wait 2 seconds
+beep
+```
+
+In the second handler, do the following:
+
+```text
+play flute
+wait 1 second
+```
+
+In the third handler, do the following:
+
+```text
+play harpsichord
+wait 1 second
+```
+
+Clicking all three buttons in order results in a beep,
+a delay, another beep, and the harpsichord sound.
+The handler for the second button is never invoked
+because the system was busy running the handler for the first button
+when it was clicked and it was not the last button clicked
+while the system was busy.
+
 ### Check Boxes
 
 To get the value of a check box,
