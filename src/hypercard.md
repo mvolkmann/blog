@@ -3835,6 +3835,13 @@ The following messages are related to palettes:
 - `closePalette`
 - `openPalette`
 
+The following messages are related to the HyperCard app:
+
+- `quit`
+- `resume`
+- `startup`
+- `suspend`
+
 TODO: How should these messages be categorized?
 
 - `appleEvent`
@@ -3860,11 +3867,6 @@ TODO: How should these messages be categorized?
 - `tabKey`
 
 TODO: Add more to this list and describe each one.
-
-- `quit` of HyperCard
-- `resume` of HyperCard
-- `startup` of HyperCard
-- `suspend` of HyperCard
 
 ### Message Handlers
 
