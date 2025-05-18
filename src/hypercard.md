@@ -3622,7 +3622,12 @@ The debug menu contains the following menu items:
 
 ### Messages
 
-HyperCard generates messages when specific things occur.
+Messages are generated in HyperCard in these ways:
+
+1. A specific event occurs such as clicking a mouse button.
+1. A script executes a HyperTalk command.
+1. A script sends a custom message.
+
 Some messages are handled by HyperCard.
 Other messages are only handled by specific objects
 such as buttons and fields if they define a corresponding message handler.
@@ -3739,6 +3744,26 @@ These begin with `on {message-name}` and end with `end {message-name}`.
 Each message handler listens for a specific kind of message
 and executes the code inside when triggered.
 
+Suppose a button has the following script:
+
+```text
+on mouseUp
+  help -- opens the "HyperCard Help" stack in a new window
+end mouseUp
+```
+
+All HyperTalk commands, including `help`, send a message.
+If the `help` message is not handled by scripts in the current stack,
+it is handled by the HyperCard application.
+The following can be added to the button script above
+to trap the `help` message and provide custom handling.
+
+```text
+on help
+  answer "No soup for you!"
+end help
+```
+
 Only one message handler at a time can run.
 If one runs for a long time, perhaps by using the `wait` command,
 no other messages are handled
@@ -3746,7 +3771,7 @@ until the currently running message handler completes.
 Some messages are queued and processed later.
 For some messages, only the last queued message of that type is processed later.
 Some queued messages are not processed.
-This is very confusing!
+TODO: This is very confusing!
 
 Unlike functions, message handlers cannot return a value.
 
