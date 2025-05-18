@@ -3541,6 +3541,11 @@ This is also the order in which scripts are most commonly defined,
 with button scripts being the most common
 and HyperCard app scripts being the least common.
 
+Some messages begin at a higher level (a.k.a. entry point)
+in the hierarchy than buttons and fields.
+For example, the `openCard` message begins at the card level
+and the `openStack` message begins at the stack level.
+
 You cannot control which scripts will exist
 at the Home stack and HyperCard app levels
 when other users use your stacks,
