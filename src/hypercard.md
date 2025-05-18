@@ -3155,10 +3155,16 @@ HyperTalk ...
 - supports message passing (events) and message handlers
 - implements a simple database
 
-The commands (a.k.a. statements) supported by HyperTalk
-are documented at {% aTargetBlank
+The commands supported by HyperTalk are documented at {% aTargetBlank
 "https://www.hypercard.center/HyperTalkReference#commands",
 "HyperTalk Reference" %}.
+Each command sends a message
+that is typically handled by the HyperCard application.
+Messages can accept arguments that become
+the values of corresponding parameters in a message handler.
+
+If no handler is found for a command,
+a dialog opens that contains "Can't understand {command-name}".
 
 A good way to learn about HyperTalk is to
 examine the scripts in provided stacks such as the Home stack.
@@ -3258,8 +3264,9 @@ select Script ... Uncomment or press cmd-equal.
 
 HyperTalk supports the following data types:
 
-- booleans with the literal values `true` (or `1`) and `false` (or `0`)
-- numbers with literal values that are either integers or floating point
+- booleans represented by the string values `true` and `false`
+- numbers with literal values that are either integers or floating point,
+  stored as strings
 - strings with literal values delimited by double quotes
 - string lists that are a single string with commas delimiting the items
 - containers which are variables, buttons, and fields
@@ -3278,10 +3285,17 @@ put item 2 of fruits into fruit -- sets to banana
 
 #### Booleans
 
+Booleans are stored as the strings "true" and "false".
+
+Relational operators return one of these strings
+and the `if` command checks for them.
+
 TODO: Add more to this section.
 
 #### Numbers
 
+Numbers are stored as strings and
+converted to numbers when used in a context that requires a number.
 TODO: Add more to this section.
 
 To set a field to a number that is rounded to a given number of decimal places,
@@ -3709,7 +3723,7 @@ The following messages are related to palettes:
 TODO: How should these messages be categorized?
 
 - `appleEvent`
-- `arrowKey: parameter gives direction`
+- `arrowKey`: parameter gives direction
 - `close`
 - `commandKeyDown`
 - `controlKey`
@@ -3930,16 +3944,29 @@ The following variables are set by HyperCard and CAN be modified:
 
 ### Variables
 
+Variables provide a way to store a value and use it later.
+The value can be a Boolean, number, or string.
+The value can be changed any number of times to any type.
+
+Variable names must begin with a letter and contain
+letters, digits, and underscores.
+That cannot match a reserved word which includes
+all commands, functions, properties, and keywords defined by HyperTalk.
+
 Variables exist in two scopes, local to a specific handler
 and global across all handlers in all stacks.
 
-Local variables spring into existence when a value is assigned to them
-and are not declared.
+Local variables are not declared and
+spring into existence when a value is assigned to them.
+The value of a local variables is lost when the
+message handler or function in which it is assigned ends.
 
 Global variables must be declared everywhere they are used
 with the keyword `global`.
 For example, `global favoriteColor, maximumTemperature, taxRate`
-The values of global variables are not saved across HyperCard sessions.
+The value of a global variable is not lost when the
+message handler or function in which it is assigned ends.
+But the value is lost when HyperCard is quit.
 
 To assign a value to a variable, use the `put` command.
 For example, `put 3.14159265 into pie` (`pi` is a predefined constant)
@@ -4233,9 +4260,13 @@ The following mouse-related messages are automatically triggered:
 
 ### Functions
 
-Functions can be defined inside scripts.
+Functions are similar to message handlers, but always return a value.
+They must be called in a context where a value is required.
+
+HyperCard defines many functions that are invoked with "the {name}"
+and a few that do not begin with "the" (`me`, `offset`, and `target`).
+Custom functions can be defined inside scripts.
 Like message handlers, they can have parameters.
-Unlike message handlers, they can return a value.
 
 Function definitions have the following syntax:
 
