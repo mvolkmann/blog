@@ -196,8 +196,8 @@ The default Home stack contains nine cards.
 
 - "Search Paths"
 
-  This is a set of three cards that list in order the paths that
-  HyperCard will search to find stacks, applications, and documents.
+  This is a set of three cards that list in order the directory paths
+  that HyperCard will search to find stacks, applications, and documents.
   To jump to the first of these cards, select Home ... Search Paths.
 
 - "Preferences"
@@ -3139,9 +3139,21 @@ based on the state of the scroll window.
 
 ## Menu Bar
 
-To hide the menu bar that typically appears at the top of the screen,
+To hide the menu bar that appears at the top of the screen,
 use the command `hide menubar`.
 To restore the menu bar, use the command `show menubar`.
+These commands are typically used in message handlers in a stack script.
+For example:
+
+```text
+on openStack
+  hide menubar
+end openStack
+
+on closeStack
+  show menubar
+end closeStack
+```
 
 ## Keyboard Shortcuts
 
