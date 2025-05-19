@@ -4606,8 +4606,11 @@ It takes up to six arguments.
    defaulting to "true".
 5. The bit depth of the picture from 1 to 32, defaulting to 32.
 6. Whether the window should be floating, defaulting to false.
-   A value of true places the window in the palette domain.
-   A value of false places the window in the document domain.
+   A value of true places the window in the palette domain
+   so it always floats on top of stack windows.
+   A value of false places the window in the document domain
+   so it is on the same level and stack windows and
+   can be partially or fully hidden behind them.
 
 For example:
 
@@ -4621,18 +4624,18 @@ The properties of picture objects include:
 
 | Property        | Value                                                           |
 | --------------- | --------------------------------------------------------------- |
-| `visible`       | true or false                                                   |
-| `loc`           | top-left point in stack window coordinates                      |
-| `rect`          | rectangle in stack window coordinates                           |
+| `bitDepth`      | 1 to 32 (cannot set)                                            |
+| `dithering`     | true or false                                                   |
 | `globalLoc`     | top-left point in screen coordinates                            |
 | `globalRect`    | rectangle in screen coordinates                                 |
-| `scroll`        | point in picture that is in the upper-left corner of the window |
-| `zoom`          | "in" or "out" (state of the zoom box)                           |
-| `scale`         | -5 to 5, defaulting to 0                                        |
-| `dithering`     | true or false                                                   |
+| `loc`           | top-left point in stack window coordinates                      |
 | `pictureHeight` | in pixels                                                       |
 | `pictureWidth`  | in pixels                                                       |
-| `bitDepth`      | 1 to 32                                                         |
+| `rect`          | rectangle in stack window coordinates                           |
+| `scale`         | -5 to 5, defaulting to 0                                        |
+| `scroll`        | point in picture that is in the upper-left corner of the window |
+| `visible`       | true or false                                                   |
+| `zoom`          | "in" or "out" (state of the zoom box)                           |
 | `properties`    | list of all the property names above, used to iterate over them |
 
 To get and set properties of picture windows, use the following commands
@@ -4643,6 +4646,18 @@ that was specified in the `picture` command:
 get {property} of window {name}
 set {property} of window {name} to {value}
 ```
+
+For example:
+
+```text
+set globalLoc of window "My File" to 17, 50 -- near upper-left of screen
+
+set loc of window "My File" to 0, 0 -- upper-left of stack window
+If the floating argument is false, the picture will be
+behind the stack window if the stack window is clicked.
+```
+
+The most common property to set is `visible` to hide and show the picture.
 
 #### put Command
 
