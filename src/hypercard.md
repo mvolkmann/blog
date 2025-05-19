@@ -3963,29 +3963,55 @@ HyperCard carries on, waiting for the next message.
 
 #### Messages for stacks
 
+Keep in mind when reading the descriptions below
+that one stack window is always open.
+It is not possible to close all of them.
+
+A reasonable location the handlers for each of these messages
+is in the Home stack script.
+
 - `closeStack`
 
-  TODO: Does the handler for this need to be added to the Home stack?
+  This is sent when a stack is closed, which can be done by
+  clicking the close box in the upper-left corner of its window
+  or by selecting File ... Close Stack.
+  It is followed by a `resumeStack` message
+  for the stack that is now active.
 
 - `deleteStack`
 
-  TODO: Does the handler for this need to be added to the Home stack?
+  This is sent when a stack is deleted
+  which can be done by selecting File ... Delete Stack...
+  It is preceded by a `closeStack` message
+  because the current stack is closed before it is deleted.
+  If no other stack is open,
+  it is followed by an `openStack` message for the Home stack
+  because some stack must be open at all times.
+  If another stack is open, it is followed by an `resumeStack` message
+  because that stack is made active.
 
 - `moveWindow`
 
-  This is sent when the window that displays the stack is moved.
+  This is sent when a window that displays a stack is moved.
 
 - `newStack`
 
-  TODO: Does the handler for this need to be added to the Home stack?
+  This is sent when a stack is created,
+  which can be done by selecting File ... New Stack...
+  If the "Open stack in new window" checkbox is checked,
+  it is preceded by a `suspendStack` message for the current stack.
+  Otherwise it is followed by a `closeStack` message for the current stack.
+  It is followed by an `openStack` message.
 
 - `openStack`
 
-  TODO: Does the handler for this need to be added to the Home stack?
+  This is sent when a stack that is not current opened in a window is opened.
 
 - `resumeStack`
 
-  TODO: Is this only relevant in Mac OS 6?
+  This is sent when a stack window gains focus.
+  This can happen when a non-active window for an already open stack
+  is clicked, making it the active stack.
 
 - `sizeWindow`
 
@@ -3993,7 +4019,14 @@ HyperCard carries on, waiting for the next message.
 
 - `suspendStack`
 
-  TODO: Is this only relevant in Mac OS 6?
+  This is sent in two scenarios which both involve a stack window losing focus.
+  The first is when another stack is opened in a new window
+  In this case the current stack is suspended and
+  an `openStack` message is sent for the newly opened stack.
+  The second is when another stack window
+  is clicked to make it the active stack.
+  In this case the current stack is suspended and
+  a `resumeStack` message is sent for the clicked stack.
 
 #### Messages for pictures
 
