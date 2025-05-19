@@ -4606,6 +4606,7 @@ It takes up to six arguments.
    defaulting to "true".
 5. The bit depth of the picture from 1 to 32, defaulting to 32.
 6. Whether the window should be floating, defaulting to false.
+   This seems like a bad default value!
    A value of true places the window in the palette domain
    so it always floats on top of stack windows.
    A value of false places the window in the document domain
