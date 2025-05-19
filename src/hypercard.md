@@ -4125,15 +4125,28 @@ TODO: I was not able to cause either of these messages to be triggered.
 
 - `resume`
 
-  TODO: This seems to never be triggered.
+  This is only sent when running in Mac OS 6.
+  It indicates that another app was the active application,
+  but HyperCard is about to become the active application.
 
 - `startup`
 
-  TODO: This seems to never be triggered.
+  This is sent to the first card in the stack that is opened
+  when HyperCard is started.
+  It is not sent again during that session.
+
+  When HyperCard is started by double clicking its icon,
+  the Home stack is opened.
+  Adding a handler for the `startup` message to another stack
+  (either in its first card script or its stack script)
+  will only trap this message if that stack
+  was the first one opened in a HyperCard session.
 
 - `suspend`
 
-  TODO: This seems to never be triggered.
+  This is only sent when running in Mac OS 6.
+  It indicates that HyperCar is the active application,
+  but another app is about to become the active application.
 
 #### Messages for menu selections
 
@@ -4156,7 +4169,8 @@ TODO: I was not able to cause either of these messages to be triggered.
 
 - `help`
 
-  This is sent by selecting Go ... Help or pressing cmd-?
+  This is sent by selecting Go ... Help, pressing cmd-?,
+  or pressing the help key (below the F13 key).
 
 ### Message Handlers
 
