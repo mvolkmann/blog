@@ -3836,6 +3836,12 @@ HyperCard carries on, waiting for the next message.
 - `returnInField`
 
   This is sent when the focus is in a field and the return key is pressed.
+  One reason to trap this message is to prevent users
+  from entering multiple lines of text in a field.
+  In that case, consider adding the `beep` command to the handler
+  to let the user know that the keystroke was not accepted.
+  Another reason to trap this message is to
+  validate what has been entered so far.
   Also see `enterInField`.
 
 - `tabKey`
@@ -3843,6 +3849,8 @@ HyperCard carries on, waiting for the next message.
   This is sent when the focus is in a field and the tab key is pressed.
   By default this moves the focus to the next field on the current card,
   or the first field when focus is in the last field.
+  To trap this message and also perform the default behavior,
+  add `pass tabKey` to the end of the handler.
 
 #### Messages only for cards
 
@@ -3920,6 +3928,7 @@ HyperCard carries on, waiting for the next message.
 - `enterKey`
 
   This is sent when the enter key on the numeric keypad is pressed.
+  TODO: Is this really only sent for cards and not for fields like returnKey?
 
 - `keyDown`
 
@@ -5486,9 +5495,11 @@ The screenshots below show this in its collapsed and expanded forms.
 
 ### Detecting Duplicates in a List
 
-Create a field "Style" set to "Scrolling"
+In a field where multiple items will be entered on separate lines,
+we can prevent duplicates from being entered.
+To do this, create a field with its "Style" set to "Scrolling"
 and "Don't Wrap" checked.
-Add the following script:
+Then add the following script:
 
 ```text
 on returnInField
