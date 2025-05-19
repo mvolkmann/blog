@@ -3915,6 +3915,7 @@ HyperCard carries on, waiting for the next message.
   This is sent when the command key is pressed
   in conjunction with another key.
   The parameter gives the character of the other key that was pressed.
+  See `keyDown` below for details on testing the key.
 
 - `enterKey`
 
@@ -3924,6 +3925,28 @@ HyperCard carries on, waiting for the next message.
 
   This is sent when any key is pressed.
   The parameter gives the key that was pressed.
+  For letter and digit keys, the parameter value is the character.
+  To test for other keys, use the `numToChar` function.
+  For example, to test for the delete key, use the following:
+
+  ```text
+  if which is numToChar(8) ...
+  ```
+
+  The following table provides some of the key codes.
+
+  | Key               | Code |
+  | ----------------- | ---- |
+  | home              | 1    |
+  | help              | 5    |
+  | delete            | 8    |
+  | tab               | 9    |
+  | all function keys | 16   |
+  | clear             | 27   |
+  | left arrow        | 28   |
+  | right arrow       | 29   |
+  | up arrow          | 30   |
+  | down arrow        | 31   |
 
 - `tabKey`
 
@@ -4450,7 +4473,7 @@ has the same effect as clicking the button:
 ```text
 on returnInField
   findDog me
-end keyDown
+end returnInField
 ```
 
 A card reference can be stored in a variable and used in `go` command
