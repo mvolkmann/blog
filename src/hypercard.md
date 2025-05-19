@@ -4101,6 +4101,8 @@ is in the Home stack script.
   and click the "OK" button.
   Another way is to execute the command
   `set rect of card window to {x}, {y}, {width}, {height}`.
+  If the values for x or y differ from their current value,
+  the `moveWindow` message is also triggered.
   To get the current location and size of the window,
   open the message box and enter `answer rect of card window`.
 
