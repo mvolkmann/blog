@@ -3887,6 +3887,30 @@ HyperCard carries on, waiting for the next message.
 
   This is sent every tick (1/60th of a second)
   when no handlers are running.
+  Some commands prevent field editing when executed in this handler.
+  For example, if the handler uses the `put` command to update another field,
+  that moves focus out of the field in which the user is typing.
+  The user will not be able to continue typing in that field
+  unless they click back into it to regain focus.
+
+  The following handler demonstrates one way to handle this.
+  It updates a field with the current time whenever it changes.
+
+  ```text
+  on idle
+    global previousTime
+    put the time into currentTime
+    if currentTime is not previousTime then
+      put the selectedField into field
+      put currentTime into card field timeField
+      put currentTime into previousTime
+      if field is not empty then
+        do "click at the location of" && field
+      end if
+    end if
+  end idle
+  ```
+
   This message and `mouseWithin` are sent in alternating fashion.
 
 - `newCard`
@@ -4382,6 +4406,14 @@ put card field n1 into result
 add card field n2 to result
 put result into card field sum
 ```
+
+#### do Command
+
+The `do` command takes any container as a parameter.
+The value of the container must be a string of HyperTalk commands,
+each on their own line (separated by carriage returns).
+This enables creating a script by concatenating strings
+and then evaluating the result.
 
 #### get Command
 
