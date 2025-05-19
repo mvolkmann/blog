@@ -3870,7 +3870,9 @@ HyperCard carries on, waiting for the next message.
   This is sent when the control key is pressed
   in conjunction with another key.
   The parameter gives the code for the other key pressed
-  where a=1, z=26, 0=48, 1=49, and 9=57
+  where a=1, z=26, 0=48, 1=49, and 9=57.
+  For more codes, see the table under `keyDown` below.
+  Holding down the shift key does not change the code that is passed.
 
 - `deleteCard`
 
@@ -3879,7 +3881,7 @@ HyperCard carries on, waiting for the next message.
 - `functionKey`
 
   This is sent when any function key is pressed.
-  The parameter gives the function key number 1 to 15
+  The parameter gives the function key number 1 to 15.
 
 - `idle`
 
@@ -4114,7 +4116,18 @@ TODO: I was not able to cause either of these messages to be triggered.
 
   This is sent when a menu item is selected,
   either using the menu or typing its keyboard shortcut.
-  The parameter gives the text of the menu item.
+  The first parameter gives the text of the menu item.
+  The second parameter gives the name of the menu containing the menu item.
+  Typically it is not necessary to check the menu name
+  because the menu items are unique across all the menus.
+
+  Trapping this message can be used to disable menu items
+  or add functionality to them.
+  To allow the default functionality of all or most of the menu items
+  to be performed, add the command `pass doMenu`.
+  If this is not done, the stack will become nearly unusable.
+  To recover, press cmd-option-s to open the stack script
+  and add the command `pass doMenu`.
 
 - `help`
 
