@@ -3887,6 +3887,7 @@ HyperCard carries on, waiting for the next message.
 
   This is sent every tick (1/60th of a second)
   when no handlers are running.
+  This message and `mouseWithin` are sent in alternating fashion.
 
 - `newCard`
 
@@ -3902,15 +3903,7 @@ HyperCard carries on, waiting for the next message.
 
   This is sent when the return key is pressed.
 
-#### Messages for buttons and cards
-
-- `mouseEnter`
-
-  This is sent when the mouse cursor enters the target.
-
-- `mouseLeave`
-
-  This is sent when the mouse cursor leaves the target.
+#### Messages for buttons and fields
 
 - `mouseWithin`
 
@@ -3973,6 +3966,14 @@ HyperCard carries on, waiting for the next message.
 - `mouseDown`
 
   This is sent when the mouse button is pressed while over the target.
+
+- `mouseEnter`
+
+  This is sent when the mouse cursor enters the target.
+
+- `mouseLeave`
+
+  This is sent when the mouse cursor leaves the target.
 
 - `mouseStillDown`
 
