@@ -4076,8 +4076,6 @@ TODO: I was not able to cause either of these messages to be triggered.
 
   This is sent by selecting Go ... Help or pressing cmd-?
 
-TODO: Describe each command above.
-
 ### Message Handlers
 
 A single script can define any number of message handlers.
