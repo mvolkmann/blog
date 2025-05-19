@@ -3859,6 +3859,14 @@ HyperCard carries on, waiting for the next message.
   This is sent when any arrow key is pressed.
   The parameter gives the direction as "left", "right", "up", or "down".
 
+- `close`
+
+  This is sent when the window containing the card
+  is closed by clicking the close box in the upper left.
+  It is not sent if the user presses cmd-w to close the stack window.
+  A handler prevent the window from being closed
+  by not including the command `pass close`.
+
 - `closeCard`
 
   This is sent when leaving a card.
