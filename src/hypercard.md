@@ -3767,27 +3767,58 @@ HyperTalk code in message handlers and functions can also send custom messages.
 If no message handler is found,
 HyperCard carries on, waiting for the next message.
 
-The following messages are related to buttons:
+#### Messages only for buttons
 
 - `deleteButton`
+
+  This is sent when a button is deleted from a card or background.
+
 - `newButton`
 
-The following messages are related to fields:
+  This is sent when a button is added to a card or background.
+
+#### Messages only for fields
 
 - `closeField`
+
+  This is sent when a focus leaves the field and its contents were modified.
+  Also see `exitField`.
+
 - `deleteField`
+
+  This is sent when a field is deleted from a card or background.
+
 - `enterInField`
+
+  This is sent when the focus is in a field and
+  the enter key (on the numeric keypad) is pressed.
+  Also see `returnInField`.
+
 - `exitField`
 
-  This is sent when a key is pressed while focus is in the field.
-  The parameter is ?.
+  This is sent when a focus leaves the field and its contents were not modified.
+  Also see `closeField`.
 
 - `newField`
+
+  This is sent when a field is added to a card or background.
+
 - `openField`
+
+  This is sent when a focus moves into the field.
+
 - `returnInField`
+
+  This is sent when the focus is in a field and the return key is pressed.
+  Also see `enterInField`.
+
 - `tabKey`
 
-The following messages are related to cards:
+  This is sent when the focus is in a field and the tab key is pressed.
+  By default this moves the focus to the next field on the current card,
+  or the first field when focus is in the last field.
+
+#### Messages only for cards
 
 - `arrowKey`
 
@@ -3804,12 +3835,6 @@ The following messages are related to cards:
 
 - `deleteCard`
 
-- `doMenu`
-
-  This is sent when a menu item is selected,
-  either using the menu or typing its keyboard shortcut.
-  The parameter gives the text of the menu item.
-
 - `functionKey`: parameter gives function key number 1 to 15
 - `idle`
 
@@ -3822,7 +3847,7 @@ The following messages are related to cards:
 
   This is sent when the return key is pressed.
 
-The following messages are related to buttons and fields:
+#### Messages for buttons and cards
 
 - `mouseEnter`
 
@@ -3838,28 +3863,7 @@ The following messages are related to buttons and fields:
   To get the mouse cursor coordinates, use the functions
   `the mouseLoc`, `the mouseH`, and `the mouseV`.
 
-The following messages are related to buttons, fields, and cards:
-
-- `mouseDoubleClick`
-
-  This is sent when the mouse button is double clicked while over the target.
-  Before this message is sent, the messages `mouseDown` and `mouseUp` are sent.
-
-- `mouseDown`
-
-  This is sent when the mouse button is pressed while over the target.
-
-- `mouseStillDown`
-
-  This is sent repeatedly while the mouse button is held down.
-  The frequency of the messages is much more than one per tick.
-
-- `mouseUp`
-
-  This is sent when the mouse button is released while over the target
-  only if it was also pressed on the same target.
-
-The following messages are related to fields and cards:
+#### Messages for fields and cards
 
 - `commandKeyDown`
 
@@ -3880,14 +3884,35 @@ The following messages are related to fields and cards:
 
   This is sent when the tab key is pressed.
 
-The following messages are related to backgrounds:
+#### Messages for buttons, fields, and cards
+
+- `mouseDoubleClick`
+
+  This is sent when the mouse button is double clicked while over the target.
+  Before this message is sent, the messages `mouseDown` and `mouseUp` are sent.
+
+- `mouseDown`
+
+  This is sent when the mouse button is pressed while over the target.
+
+- `mouseStillDown`
+
+  This is sent repeatedly while the mouse button is held down.
+  The frequency of the messages is much more than one per tick.
+
+- `mouseUp`
+
+  This is sent when the mouse button is released while over the target
+  only if it was also pressed on the same target.
+
+#### Messages for backgrounds
 
 - `closeBackground`
 - `deleteBackground`
 - `newBackground`
 - `openBackground`
 
-The following messages are related to stacks:
+#### Messages for stacks
 
 - `closeStack`
 - `deleteStack`
@@ -3898,26 +3923,32 @@ The following messages are related to stacks:
 - `sizeWindow`
 - `suspendStack`
 
-The following messages are related to pictures:
+#### Messages for pictures
 
 - `closePicture`
 - `mouseDownInPicture`
 - `mouseUpInPicture`
 - `openPicture`
 
-The following messages are related to palettes:
+#### Messages for palettes
 
 - `closePalette`
 - `openPalette`
 
-The following messages are related to the HyperCard app:
+#### Messages for the HyperCard app
 
 - `quit`
 - `resume`
 - `startup`
 - `suspend`
 
-The following messages are sent by a menu selection:
+#### Messages for menu selections
+
+- `doMenu`
+
+  This is sent when a menu item is selected,
+  either using the menu or typing its keyboard shortcut.
+  The parameter gives the text of the menu item.
 
 - `help`
 
