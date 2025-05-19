@@ -3259,14 +3259,14 @@ that can be entered in the message box:
 
   - `edit script of button "My Button"`
 
-    This opens a script editor for a given script.
+    This opens a Script editor for a given script.
     Unless a card name is specified, the script must be in the current card.
 
   - `searchScript "some text", "stack name"`
 
-    This opens the script editor for the first script
+    This opens the Script editor for the first script
     found in the stack "stack name" that contains the text "some text".
-    Closing the script editor opens another for the next match found.
+    Closing the Script editor opens another for the next match found.
     After the last match is displayed,
     a dialog containing "Search script done!" is opened.
 
@@ -3520,14 +3520,21 @@ A HyperCard script is a collection of message handler and function definitions.
 Those contain HyperTalk commands.
 Often a script only contains a single handler definition.
 However, to aid in finding a definition inside a long script,
-the script editor includes dropdowns in the upper-right
+the Script editor includes dropdowns in the upper-right
 for selecting and scrolling to a selected handler or function.
 
 <img alt="HyperCard Script editor" style="width: 80%"
   src="/blog/assets/hypercard-script-editor.png?v={{pkg.version}}">
 
+When a Script editor window opens,
+it defaults to being centered horizontally on the screen
+and being the full height of the screen.
+The window can be resized and moved.
+HyperCard remembers the last set of Script editor window sizes and positions.
+Those are reused when Script editors are closed and later reopened.
+
 Scripts are associated with a specific object
-such as a button, field, or card.
+such as a button, field, card, background, or stack.
 They handle messages that are triggered by many actions.
 
 Scripts are implemented with the {% aTargetBlank
@@ -5447,7 +5454,7 @@ This version of HyperCard ...
 - added support for running on the PowerPC Macintosh models,
   though not as a native PowerPC application
 - enhanced printing capabilities
-- improved the script editor
+- improved the Script editor
 - improved debugging tools
 - added external commands (XCMDs) and functions (XFCNs).
 - included bug fixes
