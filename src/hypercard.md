@@ -3823,9 +3823,14 @@ HyperCard carries on, waiting for the next message.
 - `arrowKey`
 
   This is sent when any arrow key is pressed.
-  The parameter gives direction as "left", "right", "up", or "down".
+  The parameter gives the direction as "left", "right", "up", or "down".
 
 - `closeCard`
+
+  This is sent when leaving a card.
+  To get the name of the card being left,
+  use the expression `the name of this card`.
+
 - `controlKey`
 
   This is sent when the control key is pressed
@@ -3835,14 +3840,28 @@ HyperCard carries on, waiting for the next message.
 
 - `deleteCard`
 
-- `functionKey`: parameter gives function key number 1 to 15
+  This is sent when a card is deleted from its stack.
+
+- `functionKey`
+
+  This is sent when any function key is pressed.
+  The parameter gives the function key number 1 to 15
+
 - `idle`
 
   This is sent every tick (1/60th of a second)
   when no handlers are running.
 
 - `newCard`
+
+  This is sent when a new card is added to a stack.
+
 - `openCard`
+
+  This is sent when arriving at a different card.
+  To get the name of the card arrived at,
+  use the expression `the name of this card`.
+
 - `returnKey`
 
   This is sent when the return key is pressed.
@@ -3908,20 +3927,53 @@ HyperCard carries on, waiting for the next message.
 #### Messages for backgrounds
 
 - `closeBackground`
+
+  This is sent before navigating to
+  another card that uses a different background.
+
 - `deleteBackground`
+
+  This is sent when the last card that uses the current background is deleted.
+  It is immediately followed by an `openBackground` message
+  for the background of the next card that is displayed.
+
 - `newBackground`
+
+  This is sent when a new background is created.
+  It is immediately followed by an `openBackground` message.
+
 - `openBackground`
+
+  This is after before navigating to
+  another card that uses a different background.
 
 #### Messages for stacks
 
 - `closeStack`
 - `deleteStack`
 - `moveWindow`
+
+  This is sent when the window that displays the stack is moved.
+
 - `newStack`
+
+  TODO: Does the handler for this need to be added to the Home stack?
+
 - `openStack`
+
+  TODO: Does the handler for this need to be added to the Home stack?
+
 - `resumeStack`
+
+  TODO: Is this only relevant in Mac OS 6?
+
 - `sizeWindow`
+
+  TODO: Stack windows cannot be resized. Is this ever sent?
+
 - `suspendStack`
+
+  TODO: Is this only relevant in Mac OS 6?
 
 #### Messages for pictures
 
