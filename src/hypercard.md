@@ -4127,6 +4127,7 @@ is in the Home stack script.
 #### Messages for palettes
 
 TODO: I was not able to cause either of these messages to be triggered.
+TODO: See the `palette` command on page 555.
 
 - `closePalette`
 - `openPalette`
@@ -4573,6 +4574,75 @@ do "go to" && cardRef
 #### help Command
 
 The `help` command opens the "HyperCard Help" stack in a new window.
+
+#### picture Command
+
+The `picture` command displays an image in a separate window.
+It takes up to six arguments.
+
+1. The name of a file in the same directory as the current stack
+   OR
+   the resource name or ID of a PICT resource in
+   any stack currently open, the Home stack, or the HyperCard app
+2. The picture type which can be "file" (default), "resource", or "clipboard".
+3. The window style which can be one of the following:
+
+   - plain: has a title bar containing a close box, but no zoom box or scroll bars
+   - zoom (default): has a title bar containing a close box, zoom box, and scroll bars
+   - document: has a title bar containing a close box and scroll bars, but no zoom box
+   - windoid: like plain, but has a shorter title bar and smaller close box
+   - roundRect: rounded rectangle with a title bar
+   - rect: rectangle with no title bar and a thin, black border
+   - dialog:
+   - shadow
+
+   In window styles that have a title bar,
+   the file name or resource name are displayed there.
+   Resizable windows cannot be resized to be larger than the picture.
+   The scroll bars are activated when a resizable window
+   is resized to be smaller than the picture.
+
+4. A boolean indicating whether the picture should be immediately visible,
+   defaulting to "true".
+5. The bit depth of the picture from 1 to 32, defaulting to 32.
+6. Whether the window should be floating, defaulting to false.
+   A value of true places the window in the palette domain.
+   A value of false places the window in the document domain.
+
+For example:
+
+- `picture racoon` looks for the file "racoon" in the directory
+  of the current stack and displays it in a zoom style window.
+- `picture 137, resource` displays the PICT resource found in
+  the HyperCard app using a "zoom" style window.
+- `picture 137, resource, shadow, true, 32, true` specifies all the arguments.
+
+The properties of picture objects include:
+
+| Property        | Value                                                           |
+| --------------- | --------------------------------------------------------------- |
+| `visible`       | true or false                                                   |
+| `loc`           | top-left point in stack window coordinates                      |
+| `rect`          | rectangle in stack window coordinates                           |
+| `globalLoc`     | top-left point in screen coordinates                            |
+| `globalRect`    | rectangle in screen coordinates                                 |
+| `scroll`        | point in picture that is in the upper-left corner of the window |
+| `zoom`          | "in" or "out" (state of the zoom box)                           |
+| `scale`         | -5 to 5, defaulting to 0                                        |
+| `dithering`     | true or false                                                   |
+| `pictureHeight` | in pixels                                                       |
+| `pictureWidth`  | in pixels                                                       |
+| `bitDepth`      | 1 to 32                                                         |
+| `properties`    | list of all the property names above, used to iterate over them |
+
+To get and set properties of picture windows, use the following commands
+where name is the file name, resource name, or resource id
+that was specified in the `picture` command:
+
+```text
+get {property} of window {name}
+set {property} of window {name} to {value}
+```
 
 #### put Command
 
