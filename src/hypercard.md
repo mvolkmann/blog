@@ -4015,7 +4015,11 @@ is in the Home stack script.
 
 - `sizeWindow`
 
-  TODO: Stack windows cannot be resized. Is this ever sent?
+  This is sent when the size of a stack is changed.
+  One way to do this is to
+  select Objects ... Stack Info..., click the "Resize..." button,
+  select a different value from the "Card size" dropdown,
+  and click the "OK" button.
 
 - `suspendStack`
 
