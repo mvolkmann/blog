@@ -3950,7 +3950,13 @@ HyperCard carries on, waiting for the next message.
 #### Messages for stacks
 
 - `closeStack`
+
+  TODO: Does the handler for this need to be added to the Home stack?
+
 - `deleteStack`
+
+  TODO: Does the handler for this need to be added to the Home stack?
+
 - `moveWindow`
 
   This is sent when the window that displays the stack is moved.
