@@ -4041,15 +4041,28 @@ is in the Home stack script.
 
 #### Messages for palettes
 
+TODO: I was not able to cause either of these messages to be triggered.
+
 - `closePalette`
 - `openPalette`
 
 #### Messages for the HyperCard app
 
 - `quit`
+
+  This is sent immediately before the HyperCard app is quit.
+
 - `resume`
+
+  TODO: This seems to never be triggered.
+
 - `startup`
+
+  TODO: This seems to never be triggered.
+
 - `suspend`
+
+  TODO: This seems to never be triggered.
 
 #### Messages for menu selections
 
@@ -5536,6 +5549,9 @@ This version of HyperCard ...
   that came with HyperCard 2.4 (362 pages!)
   To see this inside HyperCard, open the message box
   and enter `go "HyperCard Help".
+- {% aTargetBlank
+  "https://cancel.fm/stuff/share/HyperCard_Script_Language_Guide_1.pdf",
+  "HyperCard Script Language Guide" %}
 - {% aTargetBlank "https://www.hypercard.center/HyperTalkReference",
   "HyperTalk Reference" %} - another reference with links for each command
 - {% aTargetBlank "https://archive.org/details/AppleMacintoshSystem753",
