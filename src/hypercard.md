@@ -13,11 +13,26 @@ layout: topic-layout.njk
 ## Overview
 
 HyperCard is a Macintosh application for viewing and creating
-multimedia applications built with HyperCard stacks
-which are collections of cards.
+multimedia applications built with HyperCard stacks.
+Stacks are collections of cards.
+Cards can contain graphics, buttons, and fields.
+
+Some stacks are analogous to a relational database table
+where each card is a record and each field is a column.
+
 Actions can be scripted using the built-in HyperTalk language or AppleScript.
 This includes interacting with other applications
 and exchanging data with documents from other applications.
+
+Changes to stacks are saved automatically.
+There is no save button or menu item.
+
+The first card in the default HyperCard Home stack
+contains buttons that navigate to commonly used stacks.
+Click the "HyperCard Tour" stack for a good overview of the application.
+At any point, press cmd-h to return to the Home stack.
+
+## History
 
 The original application name was WildCard. It was changed
 to HyperCard shortly before the initial release
@@ -39,14 +54,6 @@ that can easily be shared with others.
 For a time, HyperCard came preinstalled on all Macintosh computers.
 
 The original version of the game Myst was developed in HyperCard.
-
-The first card in the default HyperCard Home stack
-contains buttons that navigate to commonly used stacks.
-Click the "HyperCard Tour" stack for a good overview of the application.
-At any point, press cmd-h to return to the Home stack.
-
-Changes to stacks are saved automatically.
-There is no save button or menu item.
 
 ## Launching HyperCard
 
