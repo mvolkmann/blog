@@ -4099,6 +4099,10 @@ is in the Home stack script.
   select Objects ... Stack Info..., click the "Resize..." button,
   select a different value from the "Card size" dropdown,
   and click the "OK" button.
+  Another way is to execute the command
+  `set rect of card window to {x}, {y}, {width}, {height}`.
+  To get the current location and size of the window,
+  open the message box and enter `answer rect of card window`.
 
 - `suspendStack`
 
