@@ -4183,11 +4183,33 @@ actions for clickable regions within a picture.
 
 #### Messages for palettes
 
-TODO: I was not able to cause either of these messages to be triggered.
-TODO: See the `palette` command on page 555.
+Palettes are collections of buttons that are defined by
+a PLTE resource and matching PICT resource (same name and ID).
+The PICT resource provides the graphics for the entire palette,
+including all the buttons.
+The PLTE resource defines clickable regions (buttons) in the graphic
+and the commands to execute when each region is clicked.
+
+The HyperCard app provides three palettes
+which are Tools, Patterns, and Navigator.
+The Tools and Patterns palettes are special in that
+they are not defined by PLTE/PICT resource pairs
+and do not send messages when opened or closed.
+
+Custom palettes can be implemented.
+
+The Home stack does not define any PLTE resources.
 
 - `closePalette`
+
+  This is sent when a picture window is closed.
+  A palette can be closed by clicking its close box
+  or executing the command `close window "{name}"`.
+
 - `openPalette`
+
+  This is sent when a palette is opened.
+  For example, the command `palette Navigator` opens the Navigator palette.
 
 #### Messages for the HyperCard app
 
