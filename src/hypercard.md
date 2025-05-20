@@ -577,7 +577,7 @@ which opens the following dialog:
 <img alt="HyperCard Card Info" style="width: 45%"
   src="/blog/assets/hypercard-card-info.png?v={{pkg.version}}">
 
-Cards can be assigned names.
+Cards can be assigned names up to 30 characters.
 A HyperTalk script can go to a card with a given name
 using the command `go [to] card "{card-name}".
 
@@ -3502,12 +3502,12 @@ line 2
 In the expression:
 
 ```text
-char 4 of word 3 of item 2 of line 1 of field "source"
+char 2 of word 3 of item 2 of line 1 of field "source"
 ```
 
 `item 2 of line1` is "apple banana cherry date"  
 and `word 3` of that is "cherry"  
-and `char 4` of that is "r".
+and `char 2` of that is "h".
 
 ### Accessing Fields
 
@@ -3526,7 +3526,7 @@ If neither `background` nor `card` is specified, it defaults to `background`.
 
 The sequence-number option is not recommended because those can change.
 
-Quotes around field names are optional if the field name
+Quotes around field names are optional if the name
 doesn't contain special characters such as spaces.
 The keyword "background" can be abbreviated to "bkgnd" or "bg".
 
@@ -3549,6 +3549,9 @@ The syntax is:
 TODO: Can you add "in stack {stack-name}" to these?
 
 If neither `background` nor `card` is specified, it defaults to `card`.
+
+Quotes around button names are optional if the name
+doesn't contain special characters such as spaces.
 
 The sequence-number option is not recommended because those can change.
 
@@ -4571,6 +4574,8 @@ Recall that Booleans and numbers are actually stored as strings.
 
 Variable names must begin with a letter and contain
 letters, digits, and underscores.
+By convention, variable names composed of multiple words
+are written in camelCase.
 That cannot match a reserved word which includes
 all commands, functions, properties, and keywords defined by HyperTalk.
 
