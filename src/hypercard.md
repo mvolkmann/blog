@@ -3550,7 +3550,7 @@ it is risky to depend on those.
 
 ### Script Editor
 
-To open a Script editor window for any kind of object,
+To open a Script editor for any kind of object,
 open its "Info" window and click the "Script..." button.
 
 <img alt="HyperCard Script editor" style="width: 80%"
@@ -3590,20 +3590,37 @@ Instead, press option-return to insert a continuation character.
 To save the changes made to a script,
 select File ... Save Script or press cmd-s.
 
-To close the script editor, click its close box,
+To close the Script editor, click its close box,
 select File ... Close Script, or press cmd-w.
 
 To both save and close, press the enter key on the numeric keypad.
 
-To close all open script editors,
+To close all open Script editors,
 hold down the option key and select File ... Close All Scripts.
 
-When a Script editor window opens,
-it defaults to being centered horizontally on the screen
-and being the full height of the screen.
+When a Script editor opens, it defaults to being
+centered horizontally on the screen and being the full height of the screen.
 The window can be resized and moved.
-HyperCard remembers the last set of Script editor window sizes and positions.
-Those are reused when Script editors are closed and later reopened.
+
+HyperCard remembers the last set of Script editor window sizes and positions
+in the global variable `scriptWindowRects`.
+Those are reused when Script editors are closed and later others are opened.
+The value of `scriptWindowRects` is a string
+where each rect is separated by a carriage return
+and each line has the syntax "{left},{top},{right},{bottom}".
+
+The value of `scriptWindowRects` is last when the HyperCard app is quit.
+Consider setting it in the Home stack script "startUp" message handler
+in order to always have Script editors open in preferred locations and sizes.
+For example:
+
+```text
+on startUp
+  global scriptWindowRects
+  put "6,294,300,600" into line 1 of scriptWindowRects
+  put "494,294,800,600" into line 2 of scriptWindowRects
+end startUp
+```
 
 ### Script Menu
 
@@ -3669,7 +3686,7 @@ The Script menu contains the following:
   This is only enabled when AppleScript selected instead of HyperTalk.
   It reports errors in AppleScript syntax.
 
-- "Set Checkpoint" (cmd-d)
+- "Set Checkpoint" or "Clear Checkpoint" (cmd-d)
 
   This toggles whether there is a checkpoint on the line under the cursor.
   See the "Debugging" section below for details.
