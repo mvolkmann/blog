@@ -3617,8 +3617,8 @@ For example:
 ```text
 on startUp
   global scriptWindowRects
-  put "6,294,300,600" into line 1 of scriptWindowRects
-  put "494,294,800,600" into line 2 of scriptWindowRects
+  put "7,289,300,595" into line 1 of scriptWindowRects -- lower-left corner
+  put "491,289,794,595" into line 2 of scriptWindowRects -- lower-right corner
 end startUp
 ```
 
