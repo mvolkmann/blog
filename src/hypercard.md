@@ -229,12 +229,12 @@ The default Home stack contains nine cards.
 
   - Blind Typing
 
-    When no field has focus and the message box is open,
-    all typed characters are added to the message box
+    When no field has focus and the Message Box is open,
+    all typed characters are added to the Message Box
     because it gets focus by default.
     When "blind typing" is enabled, and no field has focus,
-    all typed characters are added to the message box
-    even when the message box is not open.
+    all typed characters are added to the Message Box
+    even when the Message Box is not open.
 
   - Power Keys
 
@@ -432,7 +432,7 @@ or by launching HyperCard and selecting File ... Open Stack...
 
 To sort all the cards currently in a stack based on
 the content of a background field (appears on every card),
-open the message box and enter a command like
+open the Message Box and enter a command like
 `sort by field dogName`.
 This changes the number of each card in the stack, but not their IDs.
 
@@ -608,7 +608,7 @@ To navigate between the cards in a stack:
 | previously browsed card | Go ... Back  | cmd-~             |
 
 Another way to navigate is to open the Navigator Palette (shown below)
-by entering the command `nav` in the message box.
+by entering the command `nav` in the Message Box.
 This contains buttons that map to the each of the Go menu items except "Scroll".
 
 <img alt="HyperCard Navigator Palette" style="width: 20%"
@@ -748,7 +748,7 @@ the specified words in order.
 For example, `find whole "comet fireball"` matches
 a card with a field that contains "Comet Fireball", but does not match
 a card with a field that contains "Comet the Fireball".
-This command can be entered in the message box by pressing cmd-shift-f.
+This command can be entered in the Message Box by pressing cmd-shift-f.
 
 The `find chars` command matches substrings.
 For example, `find chars "ome pet"` matches a card with
@@ -2351,7 +2351,7 @@ while the system was busy.
 To get the value of a check box,
 use the command `get [the] hilite of {button-reference}`.
 
-To put the value of a check box into the message box for testing,
+To put the value of a check box into the Message Box for testing,
 use the command `put [the] hilite of {button-reference} into message [box]`.
 
 The "Button Info" dialog for background checkboxes contains
@@ -2378,7 +2378,7 @@ function selectedButtonName familyNumber
 end selectedButtonName
 
 on mouseUp
-  put selectedButtonName(3) -- updates the message box
+  put selectedButtonName(3) -- updates the Message Box
 end mouseUp
 ```
 
@@ -3244,33 +3244,33 @@ examine the scripts in provided stacks such as the Home stack.
 
 ### Message Box
 
-One way to execute HyperTalk commands is to enter them in the message box.
+One way to execute HyperTalk commands is to enter them in the Message Box.
 This is a single, small window that allows entry of a single HyperTalk command.
 If the text entered extends past the right edge, that portion
 will not be visible and the text cannot be scrolled horizontally.
-The message box can be moved, but it cannot be resized.
+The Message Box can be moved, but it cannot be resized.
 
-To toggle display of the message box, select Go ... Message or press cmd-m.
+To toggle display of the Message Box, select Go ... Message or press cmd-m.
 Then enter commands separated by semicolons and press return to execute them.
 
-Typing while focus is not in the message box or in a card field
-replaces the text in the message box.
+Typing while focus is not in the Message Box or in a card field
+replaces the text in the Message Box.
 See "Blind Typing" in the "Home Stack ... Preferences" section for more detail.
 
-To change the font family and size used in the message box,
+To change the font family and size used in the Message Box,
 click in it to give it focus and make selections in the Font and Style menus.
 
-If a field reference is entered in the message box,
+If a field reference is entered in the Message Box,
 it is replaced by the contents of the field.
 For example, `card field 2`, `card field id 7`, or `card field "first name"`.
 
-To write a value to the message box, use the command
+To write a value to the Message Box, use the command
 `put {expression} into [the] message [box]`.
-The put command writes to the message box by default,
+The put command writes to the Message Box by default,
 so the previous command can shorted to `put {expression}`.
 
 The following are examples of HyperTalk commands
-that can be entered in the message box:
+that can be entered in the Message Box:
 
 - navigation
 
@@ -3296,7 +3296,7 @@ that can be entered in the message box:
     `searchScript` is a handler defined in the Home stack.
     To see it, open the Home stack, select Objects ... Stack Info...,
     and click the "Script..." button.
-    Alternatively, enter `edit script of Home` in the message box.
+    Alternatively, enter `edit script of Home` in the Message Box.
     Press cmd-f to open a Find dialog and enter "searchScript".
     Repeatedly press cmd-g to find the next match until the line
     `on searchScript pattern,stackName` is found.
@@ -3343,7 +3343,7 @@ HyperTalk supports the following data types:
 - strings with literal values delimited by double quotes
 - string lists that are a single string with commas delimiting the items
 - "containers" which include variables (including `it`), fields,
-  selections within fields, and the message box
+  selections within fields, and the Message Box
 
 The big takeaway is that every data type is really just a string
 and all containers store a string.
@@ -3771,7 +3771,7 @@ Messages are generated in HyperCard in the following ways:
 1. A script sends a custom message.
 1. A script explicitly sends a message
    to a given object with the `send` command.
-1. The user sends a message from the message box.
+1. The user sends a message from the Message Box.
 
 Some actions generate multiple messages.
 For example, when a new stack is created
@@ -4157,7 +4157,7 @@ is in the Home stack script.
   If the values for x or y differ from their current value,
   the `moveWindow` message is also triggered.
   To get the current location and size of the window,
-  open the message box and enter `answer rect of card window`.
+  open the Message Box and enter `answer rect of card window`.
 
 - `suspendStack`
 
@@ -4600,7 +4600,7 @@ get line 3 of field "My Text Area"
 
 Two ways see the value of any variable, including `it`,
 are to use the `put` and `answer` commands.
-The `put` command writes the value to the message box
+The `put` command writes the value to the Message Box
 if no destination container is specified.
 The `answer` command opens a dialog box containing the value.
 Both commands take an expression as an argument
@@ -4802,12 +4802,12 @@ The most common property to set is `visible` to hide and show the picture.
 
 The `put` command sets the value of a container.
 The syntax is `put {value} [into {container-ref}]`.
-If no container is specified, it defaults to the message box.
+If no container is specified, it defaults to the Message Box.
 
 For example:
 
 ```text
-put "Hello World!" -- replaces the message box contents
+put "Hello World!" -- replaces the Message Box contents
 put "Mark" into card field "first name" -- sets a field by name
 put "Mark" into card field id 10 -- sets a field by id
 put card field "user name" into firstName -- sets a variable to field contents
@@ -5021,7 +5021,7 @@ fnName(arg1, arg2)
 The following function takes two numbers and returns their sum.
 This can be defined in any script.
 If it is defined in the stack script of the current stack,
-it can be invoked from any card using the message box.
+it can be invoked from any card using the Message Box.
 
 ```text
 function sum n1, n2
@@ -5030,7 +5030,7 @@ end sum
 ```
 
 To call this function and display its result in a dialog,
-enter the following in the message box.
+enter the following in the Message Box.
 
 ```text
 answer sum(2, 3)
@@ -5157,7 +5157,7 @@ end mouseUp
 ```
 
 Using the `put` command to set `message` or `msg`
-also opens the message box and puts it there.
+also opens the Message Box and puts it there.
 
 ### Icons
 
@@ -5308,7 +5308,7 @@ To set the level for the HyperCard application as a whole:
 - Select a level by clicking it or
   by dragging the right-pointing triangle up and down.
 
-Alternative, open the message box and enter
+Alternative, open the Message Box and enter
 `set [the] userLevel to n` where n is a number from 1 to 5.
 
 Each stack can specify its own user levels.
@@ -5327,7 +5327,7 @@ To do this:
   ```
 
 To restore the highest user level for a stack with a restricted level,
-open the message box (cmd-m) and enter `set [the] userLevel to 5`.
+open the Message Box (cmd-m) and enter `set [the] userLevel to 5`.
 
 ## Popular Stacks
 
@@ -5890,7 +5890,7 @@ This version of HyperCard ...
   "HyperTalk Reference" %} - a PDF containing screenshots
   of most of the pages of the HyperTalk Reference stack
   that came with HyperCard 2.4 (362 pages!)
-  To see this inside HyperCard, open the message box
+  To see this inside HyperCard, open the Message Box
   and enter `go "HyperCard Help".
 - {% aTargetBlank
   "https://cancel.fm/stuff/share/HyperCard_Script_Language_Guide_1.pdf",
