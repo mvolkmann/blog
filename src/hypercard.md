@@ -3339,23 +3339,11 @@ HyperTalk supports the following data types:
   stored as strings
 - strings with literal values delimited by double quotes
 - string lists that are a single string with commas delimiting the items
-- containers which are variables (including `it`), fields,
-  and selections within fields
+- "containers" which include variables (including `it`), fields,
+  selections within fields, and the message box
 
 The big takeaway is that every data type is really just a string
 and all containers store a string.
-
-To concatenate strings, or values that can be converted to strings,
-use the binary operators `&` and `&&`.
-The double ampersand adds a space between the values.
-
-To extract a substring from a string list, use the keyword `of`.
-For example:
-
-```text
-put "apple,banana,cherry" into fruits
-put item 2 of fruits into fruit -- sets to banana
-```
 
 #### Booleans
 
@@ -3390,7 +3378,8 @@ The value of `the itemDelimiter` defaults to a comma.
 Indexes for characters, words and lines are all one-based.
 
 The following table describes common operations on strings.
-In the example scripts, `s`, `s1`, and `s2` are all string references.
+In the example scripts, `s`, `s1`, and `s2` are container references,
+all of which have a string value.
 
 | Operation                | Script                                         |
 | ------------------------ | ---------------------------------------------- |
@@ -3403,6 +3392,8 @@ In the example scripts, `s`, `s1`, and `s2` are all string references.
 | length in words          | `[the] number of words in s`                   |
 | character by index       | `char i of s`                                  |
 | substring by indexes     | `char i to j of s`                             |
+| substring by item        | `item i of s`                                  |
+| substring by items       | `item i to j of s`                             |
 | substring by word        | `word i of s`                                  |
 | substring by words       | `word i to j of s`                             |
 | substring by line        | `line i of s`                                  |
@@ -3415,75 +3406,36 @@ In the example scripts, `s`, `s1`, and `s2` are all string references.
 | substring index          | `offset(s1, s2)` - s1 is substring             |
 | convert to number        | `number(s)` - 0 if invalid TODO: Doesn't work! |
 
-The following expression result is `3`:
+Words are delimited by any number of consecutive spaces and carriage returns.
+The resulting words never have
+leading or trailing spaces or carriage returns.
+
+Items are delimited by some character which is a comma by default.
+They include spaces and carriage returns between the delimiters.
+The resulting items can have
+leading and trailing spaces and carriage returns.
+Items can be used to simulate an array.
+
+Lines are delimited by carriage return characters.
+Lines can also be used to simulate an array.
+
+When getting a range, if the end of the range is
+greater than the number of elements available,
+the elements up to the end are returned and no error is reported.
+
+The following expression evaluates to `3`:
 
 ```text
 the number of lines in ("red" & return & "green" & return & "blue")
 ```
 
-The following script displays the string "green":
+The following script displays the string "green" in a dialog:
 
 ```text
 set the itemDelimiter to ";"
-put "red;green;blue" into s
-answer item 2 of s
+put "red;green;blue" into colors
+answer item 2 of colors
 ```
-
-#### Containers
-
-Containers include variables, fields, and selections within fields.
-Each container holds a string.
-
-There are many ways to get a substring from the contents of a container.
-When getting a range, if the end of the range is
-greater than the number of elements available,
-the elements up to the end are returned and no error is reported.
-
-1. By character
-
-   ```text
-   get char i of {container-ref}
-   get char i to j of {container-ref}
-   ```
-
-1. By word
-
-   Words are delimited by any number of consecutive spaces and carriage returns.
-   The resulting words never have
-   leading or trailing spaces or carriage returns.
-
-   ```text
-   get word i of {container-ref}
-   get word i to j of {container-ref}
-   ```
-
-1. By item
-
-   Items are delimited by commas
-   and include spaces and carriage returns between the
-   The resulting items can have
-   leading and trailing spaces and carriage returns.
-   This can be used to simulate an array.
-
-   ```text
-   get item i of {container-ref}
-   get item i to j of {container-ref}
-   ```
-
-1. By line
-
-   Lines are delimited by carriage return characters.
-   This can also be used to simulate an array.
-
-   ```text
-   get line i of {container-ref}
-   get line i to j of {container-ref}
-   ```
-
-| String          | Expression    | Value |
-| --------------- | ------------- | ----- |
-| "one two three" | `word 2 of s` | "two" |
-| "one,two,three" | `item 2 of s` | "two" |
 
 ### Accessing Fields
 
@@ -4578,8 +4530,20 @@ but it cannot store a button or field object in a variable.
 
 ### Commands
 
+HyperTalk commands tend to read like English sentences that begin with a verb.
+Some commands support shorter forms that are less English-like.
+
+Many commands operate on any kind of container.
+
 Some HyperTalk commands accept arguments.
 Arguments can be required or optional.
+The notation used below shows:
+
+- required arguments in curly braces
+- optional arguments in square brackets
+- choices separated by vertical bars
+
+Command names and keywords are not surrounded by any delimiter characters.
 
 #### add Command
 
@@ -4829,7 +4793,6 @@ The most common property to set is `visible` to hide and show the picture.
 #### put Command
 
 The `put` command sets the value of a container.
-Containers include variables, fields, and the Message Box.
 The syntax is `put {value} into {container-ref}`.
 
 For example:
