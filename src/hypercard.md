@@ -3301,8 +3301,11 @@ If a field reference is entered in the Message Box,
 it is replaced by the contents of the field.
 For example, `card field 2`, `card field id 7`, or `card field "first name"`.
 
-To write a value to the Message Box, use the command
-`put {expression} into [the] message [box]`.
+To get the contents of the Message Box,
+use the expression `[the] message|msg [box]`.
+
+To set the contents of the Message Box, use the command
+`put {expression} into [the] message|msg [box]`.
 The put command writes to the Message Box by default,
 so the previous command can shorted to `put {expression}`.
 
