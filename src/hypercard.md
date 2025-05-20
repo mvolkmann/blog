@@ -4196,9 +4196,9 @@ The Tools and Patterns palettes are special in that
 they are not defined by PLTE/PICT resource pairs
 and do not send messages when opened or closed.
 
-Custom palettes can be implemented.
-
 The Home stack does not define any PLTE resources.
+
+Custom palettes can be implemented.
 
 - `closePalette`
 
