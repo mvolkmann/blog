@@ -2436,6 +2436,9 @@ Different values can be entered in background fields for each card.
 <img alt="HyperCard Addresses stack" style="width: 60%"
   src="/blog/assets/hypercard-addresses-stack.png?v={{pkg.version}}">
 
+The values of fields are saved automatically and
+retained when the HyperCard application is quit.
+
 Fields can hold a single line of text or multiple lines.
 The choice is specified in the "Field Info" dialog for each field.
 
@@ -3357,9 +3360,8 @@ TODO: Add more to this section.
 
 #### Numbers
 
-Numbers are stored as strings and
-converted to numbers when used in a context that requires a number.
-TODO: Add more to this section.
+Numbers are stored as strings and are converted to numbers
+when used in a context that requires a number.
 
 To set a field to a number that is rounded to a given number of decimal places,
 set `numberFormat` before setting the field.
@@ -3369,6 +3371,8 @@ For example:
 set the numberFormat to "0.00" -- for currency
 put amount into field total
 ```
+
+TODO: Add more to this section.
 
 #### Strings
 
@@ -4493,7 +4497,10 @@ The following variables are set by HyperCard and CAN be modified:
 
 Variables provide a way to store a value and use it later.
 The value can be a Boolean, number, or string.
-The value can be changed any number of times to any type.
+String values can have any number of lines
+separated by the carriage return character.
+The value of a variable can be changed any number of times to any type.
+Recall that Booleans and numbers are actually stored as strings.
 
 Variable names must begin with a letter and contain
 letters, digits, and underscores.
@@ -4508,12 +4515,12 @@ spring into existence when a value is assigned to them.
 The value of a local variables is lost when the
 message handler or function in which it is assigned ends.
 
-Global variables must be declared everywhere they are used
-with the keyword `global`.
+Global variables are shared across all cards in all stacks.
+They must be declared everywhere they are used with the keyword `global`.
 For example, `global favoriteColor, maximumTemperature, taxRate`
 The value of a global variable is not lost when the
 message handler or function in which it is assigned ends.
-But the value is lost when HyperCard is quit.
+But the value is lost when the HyperCard app is quit.
 
 To assign a value to a variable, use the `put` command.
 For example, `put 3.14159265 into pie` (`pi` is a predefined constant)
