@@ -3461,10 +3461,6 @@ Items can be used to simulate an array.
 Lines are delimited by carriage return characters.
 Lines can also be used to simulate an array.
 
-When getting a range, if the end of the range is
-greater than the number of elements available,
-the elements up to the end are returned and no error is reported.
-
 The following expression evaluates to `3`:
 
 ```text
@@ -3478,6 +3474,40 @@ set the itemDelimiter to ";"
 put "red;green;blue" into colors
 answer item 2 of colors
 ```
+
+When getting a range, if the end of the range is
+greater than the number of elements available,
+the elements up to the end are returned and no error is reported.
+
+The indexes used with the `char`, `item`, `word`, and `line` keywords
+can be positive integers OR any of the following keywords:
+
+- `first`
+- `mid` or `middle`
+- `last`
+- `any` for a random selection
+- other ordinal positions including `second`, `third`, `fourth`, `fifth`,
+  `sixth`, `seventh`, `eighth`, `ninth`, and `tenth`
+
+The keywords `char`, `item`, `word`, and `line`
+can be combined in a single expression.
+
+For example, suppose the background field named "source" contains the following:
+
+```text
+item 1,apple banana cherry date,item3
+line 2
+```
+
+In the expression:
+
+```text
+char 4 of word 3 of item 2 of line 1 of field "source"
+```
+
+`item 2 of line1` is "apple banana cherry date"  
+and `word 3` of that is "cherry"  
+and `char 4` of that is "r".
 
 ### Accessing Fields
 
