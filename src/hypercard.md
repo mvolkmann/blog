@@ -3448,7 +3448,9 @@ the elements up to the end are returned and no error is reported.
 
 1. By word
 
-   Words are delimited by spaces and carriage returns.
+   Words are delimited by any number of consecutive spaces and carriage returns.
+   The resulting words never have
+   leading or trailing spaces or carriage returns.
 
    ```text
    get word i of {container-ref}
@@ -3457,7 +3459,10 @@ the elements up to the end are returned and no error is reported.
 
 1. By item
 
-   Items are delimited by commas.
+   Items are delimited by commas
+   and include spaces and carriage returns between the
+   The resulting items can have
+   leading and trailing spaces and carriage returns.
    This can be used to simulate an array.
 
    ```text
@@ -3474,6 +3479,11 @@ the elements up to the end are returned and no error is reported.
    get line i of {container-ref}
    get line i to j of {container-ref}
    ```
+
+| String          | Expression    | Value |
+| --------------- | ------------- | ----- |
+| "one two three" | `word 2 of s` | "two" |
+| "one,two,three" | `item 2 of s` | "two" |
 
 ### Accessing Fields
 
@@ -4567,6 +4577,9 @@ HyperTalk can store the name or id of a button/field in a variable,
 but it cannot store a button or field object in a variable.
 
 ### Commands
+
+Some HyperTalk commands accept arguments.
+Arguments can be required or optional.
 
 #### add Command
 
