@@ -3560,25 +3560,6 @@ They handle messages that are triggered by many actions.
 Scripts are implemented with the {% aTargetBlank
 "https://en.wikipedia.org/wiki/HyperTalk", "HyperTalk" %} language
 which has an English-like syntax.
-The messages travel through the object hierarchy,
-searching for an object that handles them.
-The levels of the object hierarchy, from bottom to top are:
-
-- target button or field
-- current card
-- current background
-- current stack
-- Home stack
-- HyperCard app
-
-This is also the order in which scripts are most commonly defined,
-with button scripts being the most common
-and HyperCard app scripts being the least common.
-
-Some messages begin at a higher level (a.k.a. entry point)
-in the hierarchy than buttons and fields.
-For example, the `openCard` message begins at the card level
-and the `openStack` message begins at the stack level.
 
 You cannot control which scripts will exist
 at the Home stack and HyperCard app levels
@@ -3769,38 +3750,61 @@ The debug menu contains the following menu items:
 ### Messages
 
 HyperCard sends messages for pretty much everything that happens in a session.
-The messages can be "trapped" by writing message handlers in HyperTalk scripts.
-This enables acting on messages, optionally preventing their default behavior.
+Messages can be "trapped" by writing message handlers in HyperTalk scripts.
+These enable acting on messages and
+optionally preventing their default behavior.
 For example, the "quit" messages can be trapped
 to perform cleanup activities before quitting the application,
-and possibly preventing the application from quitting.
+and possibly prevent HyperCard from quitting.
 
-Messages are generated in HyperCard in these ways:
+Messages are generated in HyperCard in the following ways:
 
 1. A system event occurs such as opening a stack,
    opening a card, or clicking a button.
 1. A script executes a HyperTalk command.
 1. A script sends a custom message.
-1. A script explicitly sends a message with the `send` command
+1. A script explicitly sends a message
+   to a given object with the `send` command.
 1. The user sends a message from the message box.
 
-TODO: Decide if the next four paragraphs flow together well.
+Messages travel through the object hierarchy,
+searching for an object that handles them.
+The levels of the object hierarchy from bottom to top are:
 
-Some messages are handled by HyperCard.
-Other messages are only handled by specific objects
-such as buttons and fields if they define a corresponding message handler.
-See the section "Message Handlers" next.
+- target button or field
+- current card
+- current background
+- current stack
+- Home stack
+- HyperCard app
 
-Each message has an "entry point"
-which is the first level within the object hierarchy
-that is checked for a corresponding message handler.
-If one is found, the commands in the handler are executed.
-Processing of the message stops there
-unless the handler ends with the `pass` command.
-If one is not found, the search continues
+This is also the order in which scripts are most commonly defined,
+with button scripts being the most common and
+Home stack scripts being the least common.
+It is not possible to add or modify scripts in the HyperCard app itself.
+
+Each message has a specific entry point which is
+the object that first has an opportunity to handle the message.
+For example,
+the `mouseUp` message begins at the clicked object (often a button),
+the `openCard` message begins at the current card,
+and the `openStack` message begins at the current stack.
+
+If a matching message handler is found at the message entry point,
+the commands in the handler are executed.
+Those commands often send additional messages.
+Processing of the message stops after executing the handler
+unless it ends with the `pass` command which
+forwards the message up to the next level in the object hierarchy.
+
+If a matching message handler is not found, the search continues
 at the next level higher in the object hierarchy.
 If the top of the object hierarchy is reached and no handler is found,
-the message is ignored.
+the message is ignored and HyperCard carries on, waiting for the next message.
+
+For more detail, see the section "Message Handlers" below.
+
+#### pass Command
 
 A message handler can forward the message it trapped up to
 the next level up in the object hierarchy using the `pass` command.
@@ -3813,13 +3817,10 @@ The `pass` command can only be used in
 the handler that initially trapped the message,
 not in other handlers or functions invoked by that handler.
 
-To send a message to another object, use the `send` command.
-For example, `send "messageName [parameterList]" to objectReference`.
+#### send Command
 
-HyperCard defines many standard messages such as `mouseUp`.
-HyperTalk code in message handlers and functions can also send custom messages.
-If no message handler is found,
-HyperCard carries on, waiting for the next message.
+To manually send a message to a specific object, use the `send` command.
+For example, `send "messageName [parameterList]" to objectReference`.
 
 #### Messages only for buttons
 
@@ -4217,10 +4218,12 @@ TODO: See the `palette` command on page 555.
 
 ### Message Handlers
 
-A single script can define any number of message handlers.
+A script is a associated with a single object
+which can be a button, field, background, card, or stack.
+Each script can define any number of message handlers.
 These begin with `on {message-name}` and end with `end {message-name}`.
-Each message handler listens for ("traps") a specific kind of message
-and executes the code inside when triggered.
+Each message handler listens for (or traps) a specific kind of message
+and executes the commands inside it when triggered.
 
 Suppose a button has the following script:
 
@@ -4233,23 +4236,24 @@ end mouseUp
 All HyperTalk commands, including `help`, send a message.
 If the `help` message is not handled by scripts in the current stack,
 it is handled by the HyperCard application.
+
 The following can be added to the button script above
 to trap `help` messages and provide custom handling.
 
 ```text
 on help
-  answer "No soup for you!"
+  answer "No soup for you!" -- displays test in a dialog
 end help
 ```
 
-Only one message handler at a time can run.
+Only one message handler at a time runs.
 If one runs for a long time, perhaps by using the `wait` command,
 no other messages are handled
 until the currently running message handler completes.
 Some messages are queued and processed later.
 For some messages, only the last queued message of that type is processed later.
-Some queued messages are not processed.
-TODO: This is very confusing!
+Some queued messages seem to not be processed.
+TODO: This is confusing!
 
 Unlike functions, message handlers cannot return a value.
 
