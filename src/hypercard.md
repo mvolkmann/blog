@@ -3556,6 +3556,8 @@ open its "Info" window and click the "Script..." button.
 <img alt="HyperCard Script editor" style="width: 80%"
   src="/blog/assets/hypercard-script-editor.png?v={{pkg.version}}">
 
+The title bar describes the object whose script is being edited.
+
 The following keyboard shortcuts remove the need to open an "Info" window
 and directly open the Script editor for a given object:
 
@@ -3570,15 +3572,31 @@ and directly open the Script editor for a given object:
 | Card        | cmd-option-c                                                 |
 | Stack       | cmd-option-s                                                 |
 
+Often a script only contains a single handler definition.
+However, to aid in finding a definition inside a long script,
+the Script editor includes dropdowns in the upper-right
+for selecting and scrolling to a selected handler or function.
+
 When editing a script, press the tab key to format it,
 which indents the lines properly.
 This uses two-space indentation,
 but any indentation (including none) will work.
 
-Often a script only contains a single handler definition.
-However, to aid in finding a definition inside a long script,
-the Script editor includes dropdowns in the upper-right
-for selecting and scrolling to a selected handler or function.
+To select an entire line, triple click it.
+
+Commands cannot be broken across multiple lines by inserting carriage returns.
+Instead, press option-return to insert a continuation character.
+
+To save the changes made to a script,
+select File ... Save Script or press cmd-s.
+
+To close the script editor, click its close box,
+select File ... Close Script, or press cmd-w.
+
+To both save and close, press the enter key on the numeric keypad.
+
+To close all open script editors,
+hold down the option key and select File ... Close All Scripts.
 
 When a Script editor window opens,
 it defaults to being centered horizontally on the screen
@@ -3653,7 +3671,7 @@ The Script menu contains the following:
 
 - "Set Checkpoint" (cmd-d)
 
-  This toggles where there is a checkpoint on the line under the cursor.
+  This toggles whether there is a checkpoint on the line under the cursor.
   See the "Debugging" section below for details.
 
 ### Debugging
