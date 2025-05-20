@@ -4148,10 +4148,27 @@ is in the Home stack script.
 
 #### Messages for pictures
 
+Pictures are windows that are opened with the `picture` command.
+See the "picture Command" section below.
+
 - `closePicture`
+
+  This is sent when a picture window is closed.
+  A picture window can be closed by clicking its close box
+  or executing the command `close window "{name}"`.
+
 - `mouseDownInPicture`
+
+  This is sent when the mouse button is pressed down in a picture window.
+
 - `mouseUpInPicture`
+
+  This is sent when the mouse button is released in a picture window
+  where it was pressed.
+
 - `openPicture`
+
+  This is sent when a picture window is opened.
 
 #### Messages for palettes
 
@@ -4652,6 +4669,11 @@ For example:
 - `picture 137, resource` displays the PICT resource found in
   the HyperCard app using a "zoom" style window.
 - `picture 137, resource, shadow, true, 32, true` specifies all the arguments.
+
+A picture window can be closed by clicking its close box
+or executing the command `close window "{name}"`.
+The latter is especially useful for
+window styles that do not include a close box.
 
 The properties of picture objects include:
 
