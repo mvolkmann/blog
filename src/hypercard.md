@@ -4151,6 +4151,8 @@ is in the Home stack script.
 Pictures are windows that are opened with the `picture` command.
 See the "picture Command" section below.
 
+The following messages are sent to the current card.
+
 - `closePicture`
 
   This is sent when a picture window is closed.
@@ -4160,15 +4162,24 @@ See the "picture Command" section below.
 - `mouseDownInPicture`
 
   This is sent when the mouse button is pressed down in a picture window.
+  The first parameter gives the window name.
+  The second parameter gives the location of the mouse cursor within the window
+  as a string with the format "{x},{y}".
 
 - `mouseUpInPicture`
 
   This is sent when the mouse button is released in a picture window
   where it was pressed.
+  The first parameter gives the window name.
+  The second parameter gives the location of the mouse cursor within the window
+  as a string with the format "{x},{y}".
 
 - `openPicture`
 
   This is sent when a picture window is opened.
+
+Getting the mouse cursor location enables implementing
+actions for clickable regions within a picture.
 
 #### Messages for palettes
 
