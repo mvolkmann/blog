@@ -3537,14 +3537,48 @@ send mouseUp to {button-ref}
 ### Scripts
 
 A HyperCard script is a collection of message handler and function definitions.
-Those contain HyperTalk commands.
+Those contain {% aTargetBlank "https://en.wikipedia.org/wiki/HyperTalk",
+"HyperTalk" %} (most common) or AppleScript commands.
+Both have an English-like syntax.
+
+Scripts are associated with a specific object
+such as a button, field, card, background, or stack.
+
+Since you cannot control which scripts will exist
+in the Home stack or HyperCard app of the users of your stacks,
+it is risky to depend on those.
+
+### Script Editor
+
+To open a Script editor window for any kind of object,
+open its "Info" window and click the "Script..." button.
+
+<img alt="HyperCard Script editor" style="width: 80%"
+  src="/blog/assets/hypercard-script-editor.png?v={{pkg.version}}">
+
+The following keyboard shortcuts remove the need to open an "Info" window
+and directly open the Script editor for a given object:
+
+| Object Type | Keyboard Shortcut                                            |
+| ----------- | ------------------------------------------------------------ |
+| Button      | select Browse or Button tool and cmd-option-click the button |
+| Button      | select Button tool and shift-double-click the button         |
+| Field       | select Browse tool and cmd-option-shift click the field      |
+| Field       | select Field tool and shift-double-click the field           |
+| Field       | select Field tool and cmd-option-click the field             |
+| Background  | cmd-option-b                                                 |
+| Card        | cmd-option-c                                                 |
+| Stack       | cmd-option-s                                                 |
+
+When editing a script, press the tab key to format it,
+which indents the lines properly.
+This uses two-space indentation,
+but any indentation (including none) will work.
+
 Often a script only contains a single handler definition.
 However, to aid in finding a definition inside a long script,
 the Script editor includes dropdowns in the upper-right
 for selecting and scrolling to a selected handler or function.
-
-<img alt="HyperCard Script editor" style="width: 80%"
-  src="/blog/assets/hypercard-script-editor.png?v={{pkg.version}}">
 
 When a Script editor window opens,
 it defaults to being centered horizontally on the screen
@@ -3553,32 +3587,7 @@ The window can be resized and moved.
 HyperCard remembers the last set of Script editor window sizes and positions.
 Those are reused when Script editors are closed and later reopened.
 
-Scripts are associated with a specific object
-such as a button, field, card, background, or stack.
-They handle messages that are triggered by many actions.
-
-Scripts are implemented with the {% aTargetBlank
-"https://en.wikipedia.org/wiki/HyperTalk", "HyperTalk" %} language
-which has an English-like syntax.
-
-You cannot control which scripts will exist
-at the Home stack and HyperCard app levels
-when other users use your stacks,
-so it is risky to depend on those.
-
-To open a Script editor window for any kind of object,
-open its "Info" window and click the "Script..." button.
-
-The following keyboard shortcuts remove the need to open an "Info" window
-and directly open the Script editor for a given object:
-
-| Object Type | Keyboard Shortcut                                  |
-| ----------- | -------------------------------------------------- |
-| Button      | select Button tool and cmd-option-click the button |
-| Field       | select Field tool and cmd-option-click the field   |
-| Background  | cmd-option-b                                       |
-| Card        | cmd-option-c                                       |
-| Stack       | cmd-option-s                                       |
+### Script Menu
 
 When a Script window is open, the menus change to contain script-related items.
 The File menu contains "Close Script", "Save Script", "Revert to Saved",
@@ -3646,11 +3655,6 @@ The Script menu contains the following:
 
   This toggles where there is a checkpoint on the line under the cursor.
   See the "Debugging" section below for details.
-
-When editing a script, press the tab key to format it,
-which indents the lines properly.
-This uses two-space indentation,
-but any indentation (including none) will work.
 
 ### Debugging
 
