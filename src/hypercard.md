@@ -4663,6 +4663,18 @@ each on their own line (separated by carriage returns).
 This enables creating a script by concatenating strings
 and then evaluating the result.
 
+For example, suppose we have a card field named "code"
+and a card button named "Execute".
+Users can enter HyperTalk commands on separate lines in the field
+and execute them by clicking the Execute button
+which would have the following script:
+
+```text
+on mouseUp
+  do card field "code"
+end mouseUp
+```
+
 #### get Command
 
 The `get` command gets the value of any expression
