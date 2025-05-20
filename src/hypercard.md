@@ -55,6 +55,13 @@ For a time, HyperCard came preinstalled on all Macintosh computers.
 
 The original version of the game Myst was developed in HyperCard.
 
+Even though HyperCard stacks can be created without doing any "programming",
+more elaborate functionality can be added by writing bits of HyperTalk code.
+For many people that were in middle school and high school
+during the late 80's and 90's,
+HyperCard was their first introduction to programming.
+It led some of them to become professional software developers.
+
 ## Launching HyperCard
 
 To launch HyperCard, double click on the app icon
@@ -4633,7 +4640,7 @@ The properties of picture objects include:
 | `pictureHeight` | in pixels                                                       |
 | `pictureWidth`  | in pixels                                                       |
 | `rect`          | rectangle in stack window coordinates                           |
-| `scale`         | -5 to 5, defaulting to 0                                        |
+| `scale`         | -5 to 5, defaulting to 0 (1 doubles the size)                   |
 | `scroll`        | point in picture that is in the upper-left corner of the window |
 | `visible`       | true or false                                                   |
 | `zoom`          | "in" or "out" (state of the zoom box)                           |
