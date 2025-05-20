@@ -3245,9 +3245,16 @@ examine the scripts in provided stacks such as the Home stack.
 ### Message Box
 
 One way to execute HyperTalk commands is to enter them in the Message Box.
-This is a single, small window that allows entry of a single HyperTalk command.
+This is a single, small window that allows
+entry of a single HyperTalk command on one line.
 If the text entered extends past the right edge, that portion
 will not be visible and the text cannot be scrolled horizontally.
+
+Text entered in the Message Box is saved within a HyperCard session,
+even if the the Message Box is closed and then reopened later.
+It is not specified to the current stack.
+However, the text is lost when the HyperCard app is quit.
+
 The Message Box can be moved, but it cannot be resized.
 
 To toggle display of the Message Box, select Go ... Message or press cmd-m.
