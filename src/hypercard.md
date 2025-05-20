@@ -3390,7 +3390,7 @@ All containers are mutable.
 
 Booleans are stored as the strings "true" and "false".
 
-Relational operators return one of these strings
+Relational operators like `<` and `>=` return one of these strings
 and the `if` command checks for them.
 
 TODO: Add more to this section.
@@ -3490,7 +3490,8 @@ can be positive integers OR any of the following keywords:
   `sixth`, `seventh`, `eighth`, `ninth`, and `tenth`
 
 The keywords `char`, `item`, `word`, and `line`
-can be combined in a single expression.
+are used to form "chunk expressions".
+Those keywords can be combined in a single expression.
 
 For example, suppose the background field named "source" contains the following:
 
@@ -3508,6 +3509,15 @@ char 2 of word 3 of item 2 of line 1 of field "source"
 `item 2 of line1` is "apple banana cherry date"  
 and `word 3` of that is "cherry"  
 and `char 2` of that is "h".
+
+In addition to retrieving text, chunk expressions can be used to modify text.
+For example, suppose we have a card field named "fullName"
+that contains "Richard Roy Volkmann".
+The following command replaces "Roy" with "Mark":
+
+```text
+put "Mark" into the second word of field fullName`.
+```
 
 ### Accessing Fields
 
@@ -3623,6 +3633,7 @@ To select an entire line, triple click it.
 
 Commands cannot be broken across multiple lines by inserting carriage returns.
 Instead, press option-return to insert a continuation character.
+Continuation characters cannot be used in the Message Box.
 
 To save the changes made to a script,
 select File ... Save Script or press cmd-s.
@@ -4651,8 +4662,10 @@ and then evaluating the result.
 
 #### get Command
 
-The `get` command gets the value of a container or expression
+The `get` command gets the value of any expression
 and sets the value of the special variable `it` to that value.
+The expression can be a container reference.
+
 The command `get {expression}` is equivalent to `put {expression} into it`.
 
 The following are examples of using the `get` command:
@@ -5308,7 +5321,7 @@ When the language is AppleScript,
 the "Check Script" menu item in the "Script" menu becomes enabled.
 Selecting that checks the script for errors and reports them in a dialog.
 
-## Speaking
+## Speaking Text
 
 To speak the words in a string, use the `speak` command.
 For example, `speak "Happy Birthday!`.
