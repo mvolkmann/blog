@@ -2598,6 +2598,25 @@ To change the default text style of a field:
   TODO: Changing this seems to have no effect!
 - Click the OK button.
 
+### Field Selections
+
+Dragging over text in field or double-clicking a word creates a selection.
+
+To get the selected text, use the function `the selectedText`.
+
+To get the beginning and ending indexes of the selected text,
+use the function `the selectedChunk`
+which returns a string like "char 19 to 37 of card field 2".
+
+To get the line number containing the selected text,
+or the line number containing text cursor when there is no selection,
+use the function `theSelectedLine`
+which returns a string like "line 3 of card field 2".
+
+To get the location of the upper-left corner of the selected
+in stack window coordinates, use the function `the selectedLoc`
+which returns a string containing the x and y coordinates like "135, 110".
+
 ### Text Style of Selected Text
 
 To change the text style of selected text
