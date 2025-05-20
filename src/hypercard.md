@@ -60,7 +60,8 @@ more elaborate functionality can be added by writing bits of HyperTalk code.
 For many people that were in middle school and high school
 during the late 80's and 90's,
 HyperCard was their first introduction to programming.
-It led some of them to become professional software developers.
+It was easier to learn than other options and
+led some of them to become professional software developers.
 
 ## Launching HyperCard
 
@@ -3766,6 +3767,13 @@ The debug menu contains the following menu items:
     src="/blog/assets/hypercard-message-watcher.png?v={{pkg.version}}">
 
 ### Messages
+
+HyperCard sends messages for pretty much everything that happens in a session.
+The messages can be "trapped" by writing message handlers in HyperTalk scripts.
+This enables acting on messages, optionally preventing their default behavior.
+For example, the "quit" messages can be trapped
+to perform cleanup activities before quitting the application,
+and possibly preventing the application from quitting.
 
 Messages are generated in HyperCard in these ways:
 
