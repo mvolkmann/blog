@@ -2603,19 +2603,30 @@ To change the default text style of a field:
 Dragging over text in field or double-clicking a word creates a selection.
 
 To get the selected text, use the function `the selectedText`.
+If no text is selected, an empty string is returned.
 
 To get the beginning and ending indexes of the selected text,
 use the function `the selectedChunk`
 which returns a string like "char 19 to 37 of card field 2".
+If no text is selected,
+it will return a string like "char i to j of card field 2"
+where i is the text cursor index and j is one less than i.
 
 To get the line number containing the selected text,
 or the line number containing text cursor when there is no selection,
 use the function `theSelectedLine`
 which returns a string like "line 3 of card field 2".
+If no text is selected,
+the line number will be the one that contains the text cursor.
 
 To get the location of the upper-left corner of the selected
 in stack window coordinates, use the function `the selectedLoc`
 which returns a string containing the x and y coordinates like "135, 110".
+If no text is selected, the coordinates will be that of the text cursor.
+
+To replace the selected text with new text,
+use a `put` command like `put "new text" into the selection`.
+If no text is selected, the new text is inserted at the text cursor location.
 
 ### Text Style of Selected Text
 
