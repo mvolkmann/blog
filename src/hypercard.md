@@ -3776,10 +3776,23 @@ Messages are generated in HyperCard in these ways:
 1. A script explicitly sends a message with the `send` command
 1. The user sends a message from the message box.
 
+TODO: Decide if the next four paragraphs flow together well.
+
 Some messages are handled by HyperCard.
 Other messages are only handled by specific objects
 such as buttons and fields if they define a corresponding message handler.
 See the section "Message Handlers" next.
+
+Each message has an "entry point"
+which is the first level within the object hierarchy
+that is checked for a corresponding message handler.
+If one is found, the commands in the handler are executed.
+Processing of the message stops there
+unless the handler ends with the `pass` command.
+If one is not found, the search continues
+at the next level higher in the object hierarchy.
+If the top of the object hierarchy is reached and no handler is found,
+the message is ignored.
 
 A message handler can forward the message it trapped up to
 the next level up in the object hierarchy using the `pass` command.
