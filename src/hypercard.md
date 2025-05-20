@@ -3767,6 +3767,24 @@ Messages are generated in HyperCard in the following ways:
    to a given object with the `send` command.
 1. The user sends a message from the message box.
 
+Some actions generate multiple messages.
+For example, when a new stack is created
+and the "Open stack in new window" checkbox is not checked,
+the following messages are sent:
+
+1. `closeCard` for the current card of the current stack
+1. `closeBackground` for the background of the current card
+1. `closeStack` for the current stack
+1. `newStack` to create a new stack
+1. `newBackground` to create the first background in the new stack
+1. `newCard` to create the first card in the new stack
+1. `openStack` to open the new stack
+1. `openBackground` to open the background of the first card in the new stack
+1. `openCard` to open the first card in the new stack
+
+For more actions that generate multiple events,
+see page 446 in "The Complete HyperCard 2.2 Handbook".
+
 Messages travel through the object hierarchy,
 searching for an object that handles them.
 The levels of the object hierarchy from bottom to top are:
