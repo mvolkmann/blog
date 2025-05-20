@@ -3344,6 +3344,7 @@ HyperTalk supports the following data types:
 
 The big takeaway is that every data type is really just a string
 and all containers store a string.
+All containers are mutable.
 
 #### Booleans
 
@@ -4793,14 +4794,16 @@ The most common property to set is `visible` to hide and show the picture.
 #### put Command
 
 The `put` command sets the value of a container.
-The syntax is `put {value} into {container-ref}`.
+The syntax is `put {value} [into {container-ref}]`.
+If no container is specified, it defaults to the message box.
 
 For example:
 
 ```text
-put "Mark" into card field "first name" -- by name
-put "Mark" into card field id 10 -- by id
-put card field "user name" into firstName
+put "Hello World!" -- replaces the message box contents
+put "Mark" into card field "first name" -- sets a field by name
+put "Mark" into card field id 10 -- sets a field by id
+put card field "user name" into firstName -- sets a variable to field contents
 ```
 
 If the keyword `card` is omitted,
