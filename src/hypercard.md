@@ -4156,6 +4156,9 @@ The following messages are sent to the current card.
 - `closePicture`
 
   This is sent when a picture window is closed.
+  The first parameter is the picture name.
+  The second parameter is the picture ID.
+
   A picture window can be closed by clicking its close box
   or executing the command `close window "{name}"`.
 
@@ -4177,6 +4180,8 @@ The following messages are sent to the current card.
 - `openPicture`
 
   This is sent when a picture window is opened.
+  The first parameter is the picture name.
+  The second parameter is the picture ID.
 
 Getting the mouse cursor location enables implementing
 actions for clickable regions within a picture.
@@ -4203,12 +4208,16 @@ Custom palettes can be implemented.
 - `closePalette`
 
   This is sent when a picture window is closed.
+  The parameter is the palette name.
+
   A palette can be closed by clicking its close box
   or executing the command `close window "{name}"`.
 
 - `openPalette`
 
   This is sent when a palette is opened.
+  The parameter is the palette name.
+
   For example, the command `palette Navigator` opens the Navigator palette.
 
 #### Messages for the HyperCard app
