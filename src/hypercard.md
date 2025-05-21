@@ -5429,6 +5429,15 @@ To do this:
 To restore the highest user level for a stack with a restricted level,
 open the Message Box (cmd-m) and enter `set [the] userLevel to 5`.
 
+## Palettes
+
+The Power Tools stack contains a "Palette Maker" card
+that is used to create custom palettes.
+It supports creating the required PICT resource
+that is a single picture containing all the buttons.
+It also supports defining transparent buttons over the buttons in the PICT.
+Each button has a script that specifies the command to execute when clicked.
+
 ## Popular Stacks
 
 - {% aTargetBlank "https://macintoshgarden.org/games/the-haunted-house",
