@@ -3556,6 +3556,47 @@ The following command replaces "Roy" with "Mark":
 put "Mark" into the second word of field fullName`.
 ```
 
+#### Dates
+
+See the `convert` command.
+
+| Format Name      | Example                     |
+| ---------------- | --------------------------- |
+| seconds          | 1234567890                  |
+| short date       | 2/13/43                     |
+| abbreviated date | Sat, Feb 13, 1943           |
+| long date        | Saturday, February 13, 1943 |
+
+For example, to get the date two weeks from today:
+
+```text
+convert the seconds to dateItems
+put it into dateItems
+add 14 to the third item in dateItems -- adds two weeks to day
+convert dateItems to long date
+answer it
+```
+
+#### Times
+
+See the `convert` command.
+
+| Format Name | Example     |
+| ----------- | ----------- |
+| seconds     | 1234567890  |
+| short time  | 11:31 PM    |
+| long time   | 11:31:30 PM |
+
+For example, to get the time 12 hours from now:
+
+```text
+convert the seconds to dateItems
+put it into dateItems
+add 12 to the fourth item in dateItems -- adds 12 hours
+convert dateItems to long time
+answer it
+```
+
 ### Accessing Fields
 
 A field reference evaluates to the value of the field.
