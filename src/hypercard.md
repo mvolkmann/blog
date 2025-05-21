@@ -2929,7 +2929,31 @@ To play a sound file, use the `play file {sound-file-path}` command.
 Supposedly the AIFF sound format is the most reliable.
 TODO: I could not get this to work!
 
-To record new sounds, see the "Sounds" section in the "iMac G3" blog page.
+To record a new sound and add it as an "snd" resource to the current stack file:
+
+1. Select Edit ... Audio... which opens a window.
+1. Change "Untitled" to a name for the sound.
+1. Click the "Rec" button containing a red circle.
+1. Speak or make other sounds.
+1. Click the "Stop" button containing a black square.
+1. Click the "Save" button containing a down-pointing triangle.
+1. In the dialog that appears, enter a name for the sound.
+1. Click the "OK" button.
+
+This adds a button to the center of the current card
+whose name is the name of the sound.
+Clicking this button plays the sound.
+
+To delete a sound resource from the current stack:
+
+1. Select Edit ... Audio... which opens a window.
+1. Click the "Edit" button to add options to the bottom of the window.
+1. Click the "Delete..." button.
+1. In the dialog that appears, select the name of the sound to be deleted.
+1. Click the "OK" button.
+
+For another way to record sounds,
+see the "Sounds" section in the "iMac G3" blog page.
 
 ## Importing Graphics
 
@@ -3404,6 +3428,14 @@ Numbers are stored as strings and are converted to numbers
 when used in a context that requires a number.
 If the conversion fails because a string doesn't contain a valid number,
 an error dialog with the message "Expected number here" is displayed.
+
+To test whether a container contains a number,
+use one of the following:
+
+```text
+if container is a number ...
+if container is not a number ...
+```
 
 To set a field to a number that is rounded to a given number of decimal places,
 set `numberFormat` before setting the field.
