@@ -5302,6 +5302,56 @@ in all stacks, even if the Tools palette is not open:
    end functionKey
    ```
 
+### Drawing
+
+All the painting tools can be used from scripts to draw on a card or background.
+For example, add a "Draw" button with the following script:
+
+```text
+on mouseUp
+  -- Draw a circle
+  choose oval tool
+  set lineSize to 2
+  set centered to true
+  drag from 205,135 to 285,215
+  set centered to false
+
+  -- Draw lines to create pie wedges.
+  choose line tool
+  drag from 205,135 to 205,55
+  drag from 205,135 to 275,175
+  drag from 205,135 to 130,115
+
+  -- Fill the pie wedges with different patterns.
+  choose bucket tool
+  set pattern to 14
+  click at 240,95
+  set pattern to 22
+  click at 170,170
+  set pattern to 13
+  click at 170,95
+
+  -- Reset all the paint tool properties that were modified above.
+  -- They include the lineSize, centered, and pattern properties.
+  reset paint
+
+  choose browse tool
+end mouseUp
+```
+
+Add a "Clear" button with the following script to erase what was drawn above:
+
+```text
+on mouseUp
+  choose select tool
+  drag from 120,50 to 290,220
+  doMenu "Clear Picture"
+  -- This also works but is more obscure.
+  -- keyDown numToChar(8) -- delete key
+  choose browse tool
+end mouseUp
+```
+
 ### Custom Menus
 
 A stack can add custom menus, remove menus,
