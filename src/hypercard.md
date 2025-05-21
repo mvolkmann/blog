@@ -5313,14 +5313,15 @@ on mouseUp
   choose oval tool
   set lineSize to 2
   set centered to true
-  drag from 205,135 to 285,215
+  put "205,135" into center
+  drag from center to 285,215
   set centered to false
 
   -- Draw lines to create pie wedges.
   choose line tool
-  drag from 205,135 to 205,55
-  drag from 205,135 to 275,175
-  drag from 205,135 to 130,115
+  drag from center to 205,55
+  drag from center to 275,175
+  drag from center to 130,115
 
   -- Fill the pie wedges with different patterns.
   choose bucket tool
