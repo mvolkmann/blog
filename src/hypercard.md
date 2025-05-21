@@ -3558,6 +3558,19 @@ put "Mark" into the second word of field fullName`.
 
 #### Dates
 
+HyperTalk can represent dates from 1/1/1 to 12/31/9999.
+
+The following functions return date values:
+
+| Function                   | Value Returned or Example                |
+| -------------------------- | ---------------------------------------- |
+| `the sec[ond]s`            | number since midnight on January 1, 1904 |
+| `the abbr[ev[iated]] date` | "Wed, May 21, 2025"                      |
+| `the date`                 | "5/21/25"                                |
+| `the long date`            | "Wednesday, May 21, 2025"                |
+
+A "tick" is 1/60th of a second.
+
 The `convert` command converts a date expression to a specific format.
 The format of the input expression can optionally
 be specified after the `from` keyword.
@@ -3573,20 +3586,45 @@ The syntax is
 | "abbreviated date" | Sat, Feb 13, 1943           |
 | "long date"        | Saturday, February 13, 1943 |
 
+Seconds values are from midnight on January 1, 1904.
+Negative values are before that.
+
 The format "abbreviated date" can also be written as
 "abbrev date" or "abbr date".
+
+For example:
+
+```text
+convert the seconds to dateItems
+
+```
 
 For example, to get the date two weeks from today:
 
 ```text
 convert the seconds to dateItems
-put it into dateItems
-add 14 to the third item in dateItems -- adds two weeks to day
-convert dateItems to long date
+put it into di
+add 14 to the third item in di -- adds two weeks to day
+convert di to long date
 answer it
 ```
 
+If an item in dateItems is set to a value greater than its normal limit,
+conversions to other formats will still be correct.
+For example, the hour can be set greater than 24.
+Conversions will not be correct if
+any item in dateItems is set to a negative number.
+
 #### Times
+
+The following functions return time values:
+
+| Function        | Value Returned or Example                |
+| --------------- | ---------------------------------------- |
+| `the sec[ond]s` | number since midnight on January 1, 1904 |
+| `the long time` | "2:16:38 PM"                             |
+| `the ticks`     | number of ticks since Mac was started    |
+| `the time`      | "2:16 PM"                                |
 
 The `convert` command can also be used to convert times.
 
@@ -3600,9 +3638,9 @@ For example, to get the time 12 hours from now:
 
 ```text
 convert the seconds to dateItems
-put it into dateItems
-add 12 to the fourth item in dateItems -- adds 12 hours
-convert dateItems to long time
+put it into di
+add 12 to the fourth item in di -- adds 12 hours
+convert di to long time
 answer it
 ```
 
