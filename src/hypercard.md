@@ -3558,14 +3558,23 @@ put "Mark" into the second word of field fullName`.
 
 #### Dates
 
-See the `convert` command.
+The `convert` command converts a date expression to a specific format.
+The format of the input expression can optionally
+be specified after the `from` keyword.
+The format of the output can be specified as
+a specific date format, a specific time format, or both.
+The syntax is
+`convert {date-expr} [from {input-fmt}] [to {output-fmt1} [and {output-fmt2}]]`.
 
-| Format Name      | Example                     |
-| ---------------- | --------------------------- |
-| seconds          | 1234567890                  |
-| short date       | 2/13/43                     |
-| abbreviated date | Sat, Feb 13, 1943           |
-| long date        | Saturday, February 13, 1943 |
+| Format Name        | Example                     |
+| ------------------ | --------------------------- |
+| "seconds"          | 1234567890                  |
+| "short date"       | 2/13/43                     |
+| "abbreviated date" | Sat, Feb 13, 1943           |
+| "long date"        | Saturday, February 13, 1943 |
+
+The format "abbreviated date" can also be written as
+"abbrev date" or "abbr date".
 
 For example, to get the date two weeks from today:
 
@@ -3579,13 +3588,13 @@ answer it
 
 #### Times
 
-See the `convert` command.
+The `convert` command can also be used to convert times.
 
-| Format Name | Example     |
-| ----------- | ----------- |
-| seconds     | 1234567890  |
-| short time  | 11:31 PM    |
-| long time   | 11:31:30 PM |
+| Format Name  | Example     |
+| ------------ | ----------- |
+| "seconds"    | 1234567890  |
+| "short time" | 11:31 PM    |
+| "long time"  | 11:31:30 PM |
 
 For example, to get the time 12 hours from now:
 
