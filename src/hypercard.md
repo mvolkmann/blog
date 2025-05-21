@@ -3402,6 +3402,8 @@ TODO: Add more to this section.
 
 Numbers are stored as strings and are converted to numbers
 when used in a context that requires a number.
+If the conversion fails because a string doesn't contain a valid number,
+an error dialog with the message "Expected number here" is displayed.
 
 To set a field to a number that is rounded to a given number of decimal places,
 set `numberFormat` before setting the field.
@@ -5259,7 +5261,7 @@ end mouseUp
 Using the `put` command to set `message` or `msg`
 also opens the Message Box and puts it there.
 
-### Icons
+### Icons from Scripts
 
 To get the id of the icon used by a button,
 use the expression `the icon of {button-ref}`.
