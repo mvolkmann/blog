@@ -4036,24 +4036,6 @@ the message is ignored and HyperCard carries on, waiting for the next message.
 
 For more detail, see the section "Message Handlers" below.
 
-#### pass Command
-
-A message handler can forward the message it trapped up to
-the next level up in the object hierarchy using the `pass` command.
-The syntax is `pass {messageName}`.
-The message name must match that of the containing handler.
-The parameters passed to the containing handler
-are automatically included in the forwarded message.
-
-The `pass` command can only be used in
-the handler that initially trapped the message,
-not in other handlers or functions invoked by that handler.
-
-#### send Command
-
-To manually send a message to a specific object, use the `send` command.
-For example, `send "messageName [parameterList]" to objectReference`.
-
 #### Messages only for buttons
 
 - `deleteButton`
@@ -4932,6 +4914,19 @@ do "go to" && cardRef
 
 The `help` command opens the "HyperCard Help" stack in a new window.
 
+#### pass Command
+
+A message handler can forward the message it trapped up to
+the next level up in the object hierarchy using the `pass` command.
+The syntax is `pass {messageName}`.
+The message name must match that of the containing handler.
+The parameters passed to the containing handler
+are automatically included in the forwarded message.
+
+The `pass` command can only be used in
+the handler that initially trapped the message,
+not in other handlers or functions invoked by that handler.
+
 #### picture Command
 
 The `picture` command displays an image in a separate window.
@@ -5053,13 +5048,24 @@ answer it
 
 #### send Command
 
-The `send` command sends a message to a specific object.
+The `send` command manually sends a message to a specific object.
 It is often used to simulate a user action such as clicking a button.
+Its syntax is `send "messageName [parameterList]" to objectReference`.
+
 For example:
 
 ```text
 send mouseUp to button myButton
 ```
+
+#### xy Command
+
+The `xy` command is helping in determining
+the coordinates to use in other commands.
+Type `xy` in the Message Box and press return.
+The cursor will change to a crosshair.
+Move the mouse over the active stack to see the
+mouse coordinates update in real time inside the Message Box.
 
 ### Math
 
