@@ -5066,6 +5066,7 @@ Type `xy` in the Message Box and press return.
 The cursor will change to a crosshair.
 Move the mouse over the active stack to see the
 mouse coordinates update in real time inside the Message Box.
+Click the mouse to end the updates.
 
 ### Math
 
@@ -5235,6 +5236,14 @@ its window without closing the stack.
 Provided palette names include "tools" and "patterns".
 
 Provided window names include "navigator".
+
+The show command can include "at {x},{y}" to show
+anything but the menu bar and title bar at a specific location.
+If the object is already showing, it is moved to the specified location.
+For buttons and fields, the coordinates are relative to
+the upper-left of the stack window content area.
+For all other objects, the coordinates are relative to
+the upper-left of the screen.
 
 ### Waiting
 
