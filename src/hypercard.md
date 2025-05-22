@@ -3204,8 +3204,10 @@ based on the state of the scroll window.
 
 ## Menu Bar
 
-To hide the menu bar that appears at the top of the screen,
-use the command `hide menubar`.
+Visibility of the menu bar that appears at the top of the screen
+can be toggled by pressing cmd-space.
+
+To hide the menu bar from a script, use the command `hide menubar`.
 To restore the menu bar, use the command `show menubar`.
 These commands are typically used in message handlers in a stack script.
 For example:
@@ -5179,6 +5181,38 @@ repeat with name = start [down] to end
   ...
 end repeat
 ```
+
+### Hiding and Showing
+
+The `hide` and `show` commands set the `visible` property
+of the menubar, a window, the stack titlebar, a button, or a field.
+
+For example, a button can toggle between hiding and showing a field
+with the following script:
+
+```text
+on mouseUp
+  put "card field help" into ref
+  if the visible of ref then
+    hide ref
+    set the name of me to "Show Help"
+  else
+    show ref
+    set the name of me to "Hide Help"
+  end if
+  -- Here is another way to toggle visibility.
+  -- set the visible of ref to not the visible of ref
+end mouseUp
+```
+
+To change the visibility of the menu bar at the top of the screen,
+use the commands `hide menubar` and `show menubar`.
+
+To change the visibility of the title bar in the window of the current stack,
+use the commands `hide titlebar` and `show titlebar`.
+
+To change the visibility of a palette (such as "tools" or "patterns"),
+use the commands `hide {palette-name}` and `show {palette-name}`.
 
 ### Waiting
 
