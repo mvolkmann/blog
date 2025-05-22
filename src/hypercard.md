@@ -5185,7 +5185,7 @@ end repeat
 ### Hiding and Showing
 
 The `hide` and `show` commands set the `visible` property
-of the menubar, a window, the stack titlebar, a button, or a field.
+of the menubar, a window, a palette, the stack titlebar, a button, or a field.
 
 For example, a button can toggle between hiding and showing a field
 with the following script:
@@ -5211,7 +5211,7 @@ Following table summarizes the visibility commands.
 | ----------- | --------------------- | --------------------- |
 | menu bar    | `hide menubar`        | `show menubar`        |
 | title bar   | `hide titlebar`       | `show titlebar`       |
-| Message Box | `hide message`        | `show message`        |
+| Message Box | `hide message box`    | `show message box`    |
 | a window    | `hide window {name}`  | `show window {name}`  |
 | a palette   | `hide {palette-name}` | `show {palette-name}` |
 | a button    | `hide {button-ref}`   | `show {button-ref}`   |
@@ -5219,6 +5219,12 @@ Following table summarizes the visibility commands.
 
 Hiding the title bar removes the ability of users
 to drag the window to a new location.
+
+Other names that can be used in place of "message box"
+include "message window", "message", and "msg".
+
+A stack name can be used to hide (and show)
+its window without closing the stack.
 
 Provided palette names include "tools" and "patterns".
 
