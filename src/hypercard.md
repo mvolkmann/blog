@@ -607,7 +607,7 @@ To navigate between the cards in a stack:
 | last card               | Go ... Last  | cmd-4             |
 | previously browsed card | Go ... Back  | cmd-~             |
 
-Another way to navigate is to open the Navigator Palette (shown below)
+Another way to navigate is to open the Navigator palette (shown below)
 by entering the command `nav` in the Message Box.
 This contains buttons that map to the each of the Go menu items except "Scroll".
 
@@ -5205,14 +5205,24 @@ on mouseUp
 end mouseUp
 ```
 
-To change the visibility of the menu bar at the top of the screen,
-use the commands `hide menubar` and `show menubar`.
+Following table summarizes the visibility commands.
 
-To change the visibility of the title bar in the window of the current stack,
-use the commands `hide titlebar` and `show titlebar`.
+| Target      | To Hide               | To Show               |
+| ----------- | --------------------- | --------------------- |
+| menu bar    | `hide menubar`        | `show menubar`        |
+| title bar   | `hide titlebar`       | `show titlebar`       |
+| Message Box | `hide message`        | `show message`        |
+| a window    | `hide window {name}`  | `show window {name}`  |
+| a palette   | `hide {palette-name}` | `show {palette-name}` |
+| a button    | `hide {button-ref}`   | `show {button-ref}`   |
+| a field     | `hide {field-ref}`    | `show {field-ref}`    |
 
-To change the visibility of a palette (such as "tools" or "patterns"),
-use the commands `hide {palette-name}` and `show {palette-name}`.
+Hiding the title bar removes the ability of users
+to drag the window to a new location.
+
+Provided palette names include "tools" and "patterns".
+
+Provided window names include "navigator".
 
 ### Waiting
 
