@@ -495,7 +495,7 @@ When the "Can't Delete Stack" checkbox is checked,
 users are prevented from deleting the stack.
 
 When the "Can't Abort" checkbox is checked,
-are prevented from aborting operations by pressing cmd-period.
+users are prevented from aborting operations by pressing cmd-period.
 This can be useful in stacks that run in kiosk settings,
 
 When the "Can't Peek" checkbox is checked,
@@ -3718,6 +3718,8 @@ Both have an English-like syntax.
 Scripts are associated with a specific object
 such as a button, field, card, background, or stack.
 
+To stop a running script, press cmd-period.
+
 Since you cannot control which scripts will exist
 in the Home stack or HyperCard app of the users of your stacks,
 it is risky to depend on those.
@@ -5550,9 +5552,10 @@ The steps to implement a hyperlink are:
 1. Enter text in the field.
 1. Select some or all of the text.
 1. Select Style ... Group.
+1. Optionally select additional styles such as Underline or Bold.
 1. Open the "Field Info" dialog for the field.
 1. Check the "Lock Text" checkbox.
-   Clicks on groups are only recogized in locked fields.
+   Clicks on groups are only recognized in locked fields.
 1. Edit the script for the field.
 1. Add a `mouseUp` handler similar to the following:
 
@@ -5569,6 +5572,27 @@ To display gray underlines under every group in every stack,
 open the Message Box and enter `show groups`.
 To remove the gray underlines,
 open the Message Box and enter `hide groups`.
+
+To change the style of all group text in
+all fields of all cards in the current stack
+add the following handler to the stack script:
+
+TODO: THIS IS NOT CORRECT!
+
+```text
+on changeGroupStyle
+  repeat with cardNum = 1 to the number of cards
+    go to card cardNum
+    repeat with partNum = 1 to the number of card parts
+      if the textStyle of card part partNum is group then
+        set the textStyle of card part partNum to "bold,group"
+      end if
+    end repeat
+  end repeat
+end changeGroupStyle
+```
+
+Then open the Message Box and enter `changeGroupStyle`.
 
 ### Custom Menus
 
