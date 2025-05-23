@@ -5552,18 +5552,20 @@ The steps to implement a hyperlink are:
 1. Select Style ... Group.
 1. Open the "Field Info" dialog for the field.
 1. Check the "Lock Text" checkbox.
+   Clicks on groups are only recogized in locked fields.
 1. Edit the script for the field.
-1. Add the following:
+1. Add a `mouseUp` handler similar to the following:
 
    ```text
    on mouseUp
      if the clickText is "some group text" then
-       -- act on the hyperlink click
+       -- Act on the hyperlink click,
+       -- perhaps by navigating to another card.
      end if
    end mouseUp
    ```
 
-To add gray underlines to every group in every stack,
+To display gray underlines under every group in every stack,
 open the Message Box and enter `show groups`.
 To remove the gray underlines,
 open the Message Box and enter `hide groups`.
