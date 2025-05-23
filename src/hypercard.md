@@ -5540,6 +5540,34 @@ on mouseUp
 end mouseUp
 ```
 
+### Groups
+
+Selected text in fields can be marked as a group.
+This enables treating the text as a hyperlink.
+The steps to implement a hyperlink are:
+
+1. Create a field.
+1. Enter text in the field.
+1. Select some or all of the text.
+1. Select Style ... Group.
+1. Open the "Field Info" dialog for the field.
+1. Check the "Lock Text" checkbox.
+1. Edit the script for the field.
+1. Add the following:
+
+   ```text
+   on mouseUp
+     if the clickText is "some group text" then
+       -- act on the hyperlink click
+     end if
+   end mouseUp
+   ```
+
+To add gray underlines to every group in every stack,
+open the Message Box and enter `show groups`.
+To remove the gray underlines,
+open the Message Box and enter `hide groups`.
+
 ### Custom Menus
 
 A stack can add custom menus, remove menus,
