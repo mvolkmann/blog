@@ -5755,6 +5755,14 @@ open the Message Box (cmd-m) and enter `set [the] userLevel to 5`.
 ## File I/O
 
 HyperTalk can read and write text files.
+
+TODO: Add more detail here about the related commands.
+
+The `read file` command reads until a given character is encountered
+or for a given number of characters.
+The character to read up to can be specified with the constants
+`return` (carriage return), `eof` (end of file), or `end` (same as `eof').
+
 The following example card contains two buttons and two fields.
 The "Open" button prompts for a text file to open
 using the standard file dialog.
@@ -5786,7 +5794,7 @@ on mouseUp
     exit mouseUp
   end if
 
-  read from file gFilePath until EOF
+  read from file gFilePath until end
   put it into card field contents
   close file gFilePath
 end mouseUp
