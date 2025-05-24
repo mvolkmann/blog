@@ -3454,7 +3454,16 @@ TODO: Add more to this section.
 
 Literal strings are surrounded by double quotes.
 
-The value of `the itemDelimiter` defaults to a comma.
+To embed double quotes in a string, concatenate the `quote` constant.
+Attempting to escape the double quote character with a backslash
+or doubling it does not work.
+For example:
+
+```text
+"foo\"bar\"baz" -- does not work
+"foo""bar""baz" -- does not work
+"foo" & quote & "bar" & quote & "baz" -- works!
+```
 
 Indexes for characters, words and lines are all one-based.
 
@@ -3492,7 +3501,8 @@ The resulting words never have
 leading or trailing spaces or carriage returns.
 
 Items are delimited by some character which is a comma by default.
-They include spaces and carriage returns between the delimiters.
+The delimiter character is stored in `the itemDelimiter`.
+Items include spaces and carriage returns between the delimiters.
 The resulting items can have
 leading and trailing spaces and carriage returns.
 Items can be used to simulate an array.
