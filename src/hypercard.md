@@ -4521,6 +4521,10 @@ on help
 end help
 ```
 
+To exit a message handler early,
+use the `exit` command with an argument that is the message name.
+For example, the handler above could use `exit help`.
+
 Only one message handler at a time runs.
 If one runs for a long time, perhaps by using the `wait` command,
 no other messages are handled
@@ -5577,18 +5581,35 @@ To change the style of all group text in
 all fields of all cards in the current stack
 add the following handler to the stack script:
 
-TODO: THIS IS NOT CORRECT!
-
 ```text
+on styleCharsIn domain, fieldNum
+  put "italic,underline,group" into newStyles
+  put domain && "field" && fieldNum into fieldRef
+  repeat with i = 1 to the number of chars in fieldRef
+    -- Test if the style contains "group".
+    put "char" && i && "of" && fieldRef into charRef
+    do "put the textStyle of" && charRef && "into style"
+    if offset("group", style) > 0 then
+      do "set the textStyle of" && charRef && "to" && newStyles
+    end if
+  end repeat
+end styleCharsIn
+
 on changeGroupStyle
+  put the number of this card into currentCardNum
   repeat with cardNum = 1 to the number of cards
     go to card cardNum
-    repeat with partNum = 1 to the number of card parts
-      if the textStyle of card part partNum is group then
-        set the textStyle of card part partNum to "bold,group"
-      end if
+    repeat with fieldNum = 1 to the number of card fields
+      styleCharsIn "card", fieldNum
     end repeat
   end repeat
+  repeat with bgNum = 1 to the number of backgrounds
+    go to background bgNum
+    repeat with fieldNum = 1 to the number of background fields
+      styleCharsIn "background", fieldNum
+    end repeat
+  end repeat
+  go to card currentCardNum
 end changeGroupStyle
 ```
 
@@ -5720,6 +5741,64 @@ To do this:
 
 To restore the highest user level for a stack with a restricted level,
 open the Message Box (cmd-m) and enter `set [the] userLevel to 5`.
+
+## File I/O
+
+HyperTalk can read and write text files.
+The following example card contains two buttons and two fields.
+The "Open" button prompts for a text file to open
+using the standard file dialog.
+The selected file path is displayed in the first field
+and the contents of the file are displayed in the second field.
+The second field allows the contents to be edited.
+The "Save" button saves the modified content back to the text file.
+
+<img alt="HyperCard read/write files" style="width: 70%"
+  src="/blog/assets/hypercard-read-write-files.png?v={{pkg.version}}">
+
+The following message handler is for the "Open" button:
+
+```text
+on mouseUp
+  global gFilePath
+
+  answer file "Select file to open" of type text
+  if the result is not empty then
+    if the result is not "Cancel" then answer the result
+    exit mouseUp
+  end if
+
+  put it into gFilePath
+  put gFilePath into card field filePath
+  open file gFilePath
+  if the result is not empty then
+    answer the result
+    exit mouseUp
+  end if
+
+  read from file gFilePath until EOF
+  put it into card field contents
+  close file gFilePath
+end mouseUp
+```
+
+The following message handler is for the "Save" button:
+
+```text
+on mouseUp
+  global gFilePath
+
+  open file gFilePath
+  if the result is not empty then
+    answer the result
+    exit mouseUp
+  end if
+
+  write card field contents to file gFilePath
+  close file gFilePath
+  answer "Saved changes to" && gFilePath
+end mouseUp
+```
 
 ## Palettes
 
