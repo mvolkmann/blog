@@ -5713,11 +5713,13 @@ end mouseUp
 
 HyperCard searches specific directories to find
 stacks, applications, and documents.
-To view these directory lists:
+To view and edit these directory lists:
 
-- Open the home stack by pressing cmd-h.
-- Click the left-pointing triangle in the lower-left two times.
-- Click one of the buttons labeled Stacks, Applications, or Documents.
+- Open the Home stack by pressing cmd-h.
+- Click the left-pointing triangle in the lower-left two times
+  to navigate to one of the "Search Paths" card.
+- Click one of the buttons labeled Stacks, Applications, or Documents
+  to navigate to a specific "Search Paths" card.
 - Optionally edit the list of directories.
 
 An alternative to modifying the directory lists is to
