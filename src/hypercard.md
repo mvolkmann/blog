@@ -3488,8 +3488,6 @@ For example:
 The following table describes common operations on strings.
 In the example scripts, `s`, `s1`, and `s2` are container references,
 all of which have a string value.
-Expressions that begin with `char`, `item`, `word`, or `line`
-are "chunk expressions" which are described later.
 
 | Operation                | Script                                         |
 | ------------------------ | ---------------------------------------------- |
@@ -3500,16 +3498,6 @@ are "chunk expressions" which are described later.
 | length in characters     | `[the] number of char[acter]s in s`            |
 | length in characters     | `length(s)`                                    |
 | length in words          | `[the] number of words in s`                   |
-| character by index       | `char i of s`                                  |
-| substring by index range | `char i to j of s`                             |
-| substring by item        | `item i of s`                                  |
-| substring by item range  | `item i to j of s`                             |
-| substring by word        | `word i of s`                                  |
-| substring by word range  | `word i to j of s`                             |
-| substring by line        | `line i of s`                                  |
-| substring by line range  | `line i to j of s`                             |
-| get the item delimiter   | `the itemDelimiter`                            |
-| set item delimiter       | `set the itemDelimiter to "{char}"`            |
 | substring index          | `offset(s1, s2)` - s1 is substring             |
 | convert to number        | `number(s)` - 0 if invalid TODO: Doesn't work! |
 
@@ -3519,6 +3507,9 @@ The expression `"foo" && "bar"` evaluates to `"foo bar"`.
 
 The `offset` function returns a 1-based index.
 If the substring is not found in the string, it returns zero.
+
+The "Chunked Expressions" section below
+describes additional string functionality.
 
 #### Dates
 
@@ -3689,6 +3680,24 @@ The resulting items can have
 leading and trailing spaces and carriage returns.
 Items can be used to simulate an array.
 
+Lines are delimited by carriage return characters.
+Lines can also be used to simulate an array.
+
+The following table summarize all the expressions related to chunk expressions.
+
+| Operation                | Script                              |
+| ------------------------ | ----------------------------------- |
+| character by index       | `char i of s`                       |
+| substring by index range | `char i to j of s`                  |
+| substring by item        | `item i of s`                       |
+| substring by item range  | `item i to j of s`                  |
+| substring by word        | `word i of s`                       |
+| substring by word range  | `word i to j of s`                  |
+| substring by line        | `line i of s`                       |
+| substring by line range  | `line i to j of s`                  |
+| get the item delimiter   | `the itemDelimiter`                 |
+| set item delimiter       | `set the itemDelimiter to "{char}"` |
+
 The following script displays the string "green" in a dialog:
 
 ```text
@@ -3696,9 +3705,6 @@ set the itemDelimiter to ";"
 put "red;green;blue" into colors
 answer item 2 of colors
 ```
-
-Lines are delimited by carriage return characters.
-Lines can also be used to simulate an array.
 
 The following expression evaluates to `3`:
 
@@ -6253,6 +6259,84 @@ Clicking a line in the first field highlights it
 and sets the content of the second field to that line.
 Clicking a line that is already highlighted
 removes the highlighting and clears the second field.
+
+### Automatic Table of Contents
+
+Here's a recipe for making the first card in a stack
+act as a clickable table of contents.
+This works well when each card that follows has a name
+that is suitable for appearing in the table of contents.
+It updates automatically each time it is displayed
+to account for newly added and deleted cards.
+
+1. Create a first card that will hold the table of contents
+   and has a different background from the remaining cards.
+
+1. Add the following script to the first card.
+
+   ```text
+   function cardName
+     -- "the name of this card" returns a string like
+     -- card "name".
+     -- We want the name without the quotes.
+     put word 2 of the name of this card into cardName
+     put length(cardName) into len
+     return char 2 to len-1 of cardName -- removes quotes
+   end cardName
+
+   on openCard
+     -- Prevent screen updates while visiting all the cards.
+     lock screen
+
+     -- Build a string containing the name of
+     -- each card after this card on separate lines.
+     put empty into toc
+     repeat with cardNum = 2 to the number of cards
+       go to card cardNum
+       put cardName() after toc
+       put return after toc
+     end repeat
+     delete char length(toc) of toc
+
+     -- Return to this card without trigger this handler again.
+     lock messages
+     go to first card
+     unlock messages
+
+     -- Update the tableOfContents field.
+     put toc into card field tableOfContents
+
+     -- Resume screen updates.
+     unlock screen
+   end openCard
+   ```
+
+1. Add a field to the new first card named "tableOfContents".
+1. Set its Style to "Scrolling".
+1. Check its "Lock Text" checkbox.
+1. Check its "Auto Select" checkbox which will
+   automatically select its "Don't Wrap" checkbox.
+1. Click its "Script" button and add the following:
+
+   ```text
+   on mouseUp
+     put the selectedText of me into cardName
+     go to card cardName
+   end mouseUp
+   ```
+
+1. Position and size the "tableOfContents" field on the first card.
+1. Go to the first card after the table of contents card.
+1. Press cmd-b to edit the background of the card.
+1. Add a transparent button with a home icon.
+1. Add the following script to that button
+   to return to the table of contents card.
+
+   ```text
+   on mouseUp
+     go to first card
+   end mouseUp
+   ```
 
 ### Dropdown List
 
