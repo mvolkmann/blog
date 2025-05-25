@@ -4812,12 +4812,13 @@ end mouseUp
 
 The `do` command can also be used to set a variable
 whose name is defined dynamically.
-For example:
+For example, the following code places the value of all background fields
+in the current card into the variables `value1`, `value2`, and so on:
 
 ```text
-put 7 into index
-do "put" && quote & "some value" & quote && "into slot" & index
-answer slot7
+repeat with index = 1 to the number of fields
+  do "put field" && index && "into value" & index
+end repeat
 ```
 
 #### get Command
