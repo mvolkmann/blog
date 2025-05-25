@@ -3469,11 +3469,11 @@ For example:
 "foo" & quote & "bar" & quote & "baz" -- works!
 ```
 
-Indexes for characters, words and lines are all one-based.
-
 The following table describes common operations on strings.
 In the example scripts, `s`, `s1`, and `s2` are container references,
 all of which have a string value.
+Expressions that begin with `char`, `item`, `word`, or `line`
+are "chunk expressions" which are described later.
 
 | Operation                | Script                                         |
 | ------------------------ | ---------------------------------------------- |
@@ -3499,48 +3499,6 @@ all of which have a string value.
 | substring index          | `the offset of s1 in s2` - s1 is substring     |
 | substring index          | `offset(s1, s2)` - s1 is substring             |
 | convert to number        | `number(s)` - 0 if invalid TODO: Doesn't work! |
-
-Words are delimited by any number of consecutive spaces and carriage returns.
-The resulting words never have
-leading or trailing spaces or carriage returns.
-
-Items are delimited by some character which is a comma by default.
-The delimiter character is stored in `the itemDelimiter`.
-Items include spaces and carriage returns between the delimiters.
-The resulting items can have
-leading and trailing spaces and carriage returns.
-Items can be used to simulate an array.
-
-Lines are delimited by carriage return characters.
-Lines can also be used to simulate an array.
-
-The following expression evaluates to `3`:
-
-```text
-the number of lines in ("red" & return & "green" & return & "blue")
-```
-
-The following script displays the string "green" in a dialog:
-
-```text
-set the itemDelimiter to ";"
-put "red;green;blue" into colors
-answer item 2 of colors
-```
-
-When getting a range, if the end of the range is
-greater than the number of elements available,
-the elements up to the end are returned and no error is reported.
-
-The indexes used with the `char`, `item`, `word`, and `line` keywords
-can be positive integers OR any of the following keywords:
-
-- `first`
-- `mid` or `middle`
-- `last`
-- `any` for a random selection
-- other ordinal positions including `second`, `third`, `fourth`, `fifth`,
-  `sixth`, `seventh`, `eighth`, `ninth`, and `tenth`
 
 #### Dates
 
@@ -3698,7 +3656,37 @@ Chunk expressions identify a substring within a string
 using the keywords `char`, `item`, `word`, and `line`.
 Those keywords can be combined in a single expression.
 
-For example, suppose the background field named "source" contains the following:
+Indexes for characters, words and lines are all one-based.
+
+Words are delimited by any number of consecutive spaces and carriage returns.
+The resulting words never have
+leading or trailing spaces or carriage returns.
+
+Items are delimited by some character which is a comma by default.
+The delimiter character is stored in `the itemDelimiter`.
+Items include spaces and carriage returns between the delimiters.
+The resulting items can have
+leading and trailing spaces and carriage returns.
+Items can be used to simulate an array.
+
+The following script displays the string "green" in a dialog:
+
+```text
+set the itemDelimiter to ";"
+put "red;green;blue" into colors
+answer item 2 of colors
+```
+
+Lines are delimited by carriage return characters.
+Lines can also be used to simulate an array.
+
+The following expression evaluates to `3`:
+
+```text
+the number of lines in ("red" & return & "green" & return & "blue")
+```
+
+Suppose the background field named "source" contains the following:
 
 ```text
 item 1,apple banana cherry date,item3
@@ -3716,6 +3704,16 @@ and `item 2` of that is "apple banana cherry date"
 and `word 3` of that is "cherry"  
 and `char 2` of that is "h".
 
+The indexes used with the `char`, `item`, `word`, and `line` keywords
+can be positive integers OR any of the following keywords:
+
+- `first`
+- `mid` or `middle`
+- `last`
+- `any` for a random selection
+- other ordinal positions including `second`, `third`, `fourth`, `fifth`,
+  `sixth`, `seventh`, `eighth`, `ninth`, and `tenth`
+
 In addition to retrieving text, chunk expressions can be used to modify text.
 For example, suppose the card field named "fullName"
 contains "Richard Roy Volkmann".
@@ -3724,6 +3722,10 @@ The following command replaces "Roy" with "Mark":
 ```text
 put "Mark" into the second word of card field "fullName"`.
 ```
+
+When getting a range, if the end of the range
+is greater than the number of elements available,
+the elements up to the end are returned and no error is reported.
 
 ### Scripts
 
