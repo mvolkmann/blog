@@ -758,7 +758,7 @@ a field that contains "Brindle Whippet".
 HyperCard does not treat the characters "?" and "*"
 in search terms like wildcards.
 Instead of using `find chars "wh*pet"`and hoping to match "Whippet",
-use`find chars "wh pet"` which is almost the same.
+use `find chars "wh pet"` which is almost the same.
 It differs in that words containing "wh" and "pet"
 can be found in different fields of the same card.
 
@@ -4808,6 +4808,16 @@ which would have the following script:
 on mouseUp
   do card field "code"
 end mouseUp
+```
+
+The `do` command can also be used to set a variable
+whose name is defined dynamically.
+For example:
+
+```text
+put 7 into index
+do "put" && quote & "some value" & quote && "into slot" & index
+answer slot7
 ```
 
 #### get Command
