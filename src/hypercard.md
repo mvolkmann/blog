@@ -3485,20 +3485,24 @@ are "chunk expressions" which are described later.
 | length in characters     | `length(s)`                                    |
 | length in words          | `[the] number of words in s`                   |
 | character by index       | `char i of s`                                  |
-| substring by indexes     | `char i to j of s`                             |
+| substring by index range | `char i to j of s`                             |
 | substring by item        | `item i of s`                                  |
-| substring by items       | `item i to j of s`                             |
+| substring by item range  | `item i to j of s`                             |
 | substring by word        | `word i of s`                                  |
-| substring by words       | `word i to j of s`                             |
+| substring by word range  | `word i to j of s`                             |
 | substring by line        | `line i of s`                                  |
-| substring by lines       | `line i to j of s`                             |
+| substring by line range  | `line i to j of s`                             |
 | get the item delimiter   | `the itemDelimiter`                            |
 | set item delimiter       | `set the itemDelimiter to "{char}"`            |
-| substring by delimiters  | `item i of s`                                  |
-| substring by delimiters  | `item i to j of s`                             |
-| substring index          | `the offset of s1 in s2` - s1 is substring     |
 | substring index          | `offset(s1, s2)` - s1 is substring             |
 | convert to number        | `number(s)` - 0 if invalid TODO: Doesn't work! |
+
+The expression `"foo" & "bar"` evaluates to `"foobar"`.
+
+The expression `"foo" && "bar"` evaluates to `"foo bar"`.
+
+The `offset` function returns a 1-based index.
+If the substring is not found in the string, it returns zero.
 
 #### Dates
 
