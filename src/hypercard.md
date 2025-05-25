@@ -3408,8 +3408,8 @@ HyperTalk supports the following data types:
   stored as strings
 - strings with literal values delimited by double quotes
 - string lists that are a single string with commas delimiting the items
-- "containers" which include variables (including `it`), fields,
-  selections within fields, and the Message Box
+- "containers" which include variables (including `it`), buttons, fields,
+  selections within fields, the Message Box, and "chunk expressions"
 
 The big takeaway is that every data type is really just a string
 and all containers store a string.
@@ -3542,36 +3542,6 @@ can be positive integers OR any of the following keywords:
 - other ordinal positions including `second`, `third`, `fourth`, `fifth`,
   `sixth`, `seventh`, `eighth`, `ninth`, and `tenth`
 
-The keywords `char`, `item`, `word`, and `line`
-are used to form "chunk expressions".
-Those keywords can be combined in a single expression.
-
-For example, suppose the background field named "source" contains the following:
-
-```text
-item 1,apple banana cherry date,item3
-line 2
-```
-
-In the expression:
-
-```text
-char 2 of word 3 of item 2 of line 1 of field "source"
-```
-
-`item 2 of line1` is "apple banana cherry date"  
-and `word 3` of that is "cherry"  
-and `char 2` of that is "h".
-
-In addition to retrieving text, chunk expressions can be used to modify text.
-For example, suppose we have a card field named "fullName"
-that contains "Richard Roy Volkmann".
-The following command replaces "Roy" with "Mark":
-
-```text
-put "Mark" into the second word of field fullName`.
-```
-
 #### Dates
 
 HyperTalk can represent dates from 1/1/1 to 12/31/9999.
@@ -3660,32 +3630,6 @@ convert di to long time
 answer it
 ```
 
-### Accessing Fields
-
-A field reference evaluates to the value of the field.
-The syntax is:
-
-```text
-[background|card] field "{field-name}"
-[background|card] field id {id-number}
-[background|card] field {sequence-number}
-```
-
-TODO: Can you add "in stack {stack-name}" to these?
-
-If neither `background` nor `card` is specified, it defaults to `background`.
-
-The sequence-number option is not recommended because those can change.
-
-Quotes around field names are optional if the name
-doesn't contain special characters such as spaces.
-The keyword "background" can be abbreviated to "bkgnd" or "bg".
-
-The `put` command can be used to change the contents of a field.
-It has the syntax `put {value} into {field-ref}`.
-It the value is a literal string, it must be surrounded by quotes
-if it contains special characters such as spaces.
-
 ### Accessing Buttons
 
 A button reference evaluates to a button object.
@@ -3720,6 +3664,65 @@ To click a button from a script:
 
 ```text
 send mouseUp to {button-ref}
+```
+
+### Accessing Fields
+
+A field reference evaluates to the value of the field.
+The syntax is:
+
+```text
+[background|card] field "{field-name}"
+[background|card] field id {id-number}
+[background|card] field {sequence-number}
+```
+
+TODO: Can you add "in stack {stack-name}" to these?
+
+If neither `background` nor `card` is specified, it defaults to `background`.
+
+The sequence-number option is not recommended because those can change.
+
+Quotes around field names are optional if the name
+doesn't contain special characters such as spaces.
+The keyword "background" can be abbreviated to "bkgnd" or "bg".
+
+The `put` command can be used to change the contents of a field.
+It has the syntax `put {value} into {field-ref}`.
+It the value is a literal string, it must be surrounded by quotes
+if it contains special characters such as spaces.
+
+### Chunk Expressions
+
+Chunk expressions identify a substring within a string
+using the keywords `char`, `item`, `word`, and `line`.
+Those keywords can be combined in a single expression.
+
+For example, suppose the background field named "source" contains the following:
+
+```text
+item 1,apple banana cherry date,item3
+line 2
+```
+
+In the expression:
+
+```text
+char 2 of word 3 of item 2 of line 1 of field "source"
+```
+
+`line1` is "item 1,apple banana cherry date,item3"  
+and `item 2` of that is "apple banana cherry date"  
+and `word 3` of that is "cherry"  
+and `char 2` of that is "h".
+
+In addition to retrieving text, chunk expressions can be used to modify text.
+For example, suppose the card field named "fullName"
+contains "Richard Roy Volkmann".
+The following command replaces "Roy" with "Mark":
+
+```text
+put "Mark" into the second word of card field "fullName"`.
 ```
 
 ### Scripts
@@ -4169,7 +4172,7 @@ For more detail, see the section "Message Handlers" below.
     put the time into currentTime
     if currentTime is not previousTime then
       put the selectedField into field
-      put currentTime into card field timeField
+      put currentTime into card field "timeField"
       put currentTime into previousTime
       if field is not empty then
         do "click at the location of" && field
@@ -4759,9 +4762,9 @@ Some HyperTalk commands accept arguments.
 Arguments can be required or optional.
 The notation used below shows:
 
-- required arguments in curly braces
-- optional arguments in square brackets
-- choices separated by vertical bars
+- required arguments in curly braces ({arg})
+- optional arguments in square brackets ([arg])
+- choices separated by vertical bars (this|that)
 
 Command names and keywords are not surrounded by any delimiter characters.
 
@@ -4776,9 +4779,9 @@ For example, the following commands add the values in two fields
 and place the result in a third field:
 
 ```text
-put card field n1 into result
-add card field n2 to result
-put result into card field sum
+put card field "n1" into result
+add card field "n2" to result
+put result into card field "sum"
 ```
 
 #### do Command
@@ -4905,7 +4908,7 @@ Add the following script to the button:
 
 ```text
 on mouseUp
-  findDog card field dogName
+  findDog card field "dogName"
 end mouseUp
 ```
 
@@ -5061,7 +5064,7 @@ The `select` command selects a subset of the text in field.
 For example:
 
 ```text
-select word 2 to 4 of card field story
+select word 2 to 4 of card field "story"
 get the selectedText
 answer it
 ```
@@ -5799,7 +5802,7 @@ on mouseUp
   end if
 
   read from file gFilePath until end
-  put it into card field contents
+  put it into card field "contents"
   close file gFilePath
 end mouseUp
 ```
@@ -5816,7 +5819,7 @@ on mouseUp
     exit mouseUp
   end if
 
-  write card field contents to file gFilePath
+  write card field "contents" to file gFilePath
   close file gFilePath
   answer "Saved changes to" && gFilePath
 end mouseUp
@@ -6145,13 +6148,13 @@ The "Compute" button has the following script:
 
 ```text
 on mouseUp
-  put card field principal into principal
-  put card field interest into interest
-  put card field periods into periods
+  put card field "principal" into principal
+  put card field "interest" into interest
+  put card field "periods" into periods
   put principal * compound(interest / 100, periods) into result
 
   set the numberFormat to "0.00"
-  put result into card field future
+  put result into card field "future"
 end mouseUp
 ```
 
@@ -6199,12 +6202,12 @@ on mouseUp
   get the selectedText of me
   if it is gCurrentColor then
     put empty into gColorListIndex
-    put empty into card field selectedColor
+    put empty into card field "selectedColor"
     -- select empty -- should clear the selection, but doesn't!
     select line 0 of me
   else
     put it into gCurrentColor
-    put it into card field selectedColor
+    put it into card field "selectedColor"
   end if
 end mouseUp
 ```
@@ -6241,8 +6244,8 @@ The screenshots below show this in its collapsed and expanded forms.
 
    ```text
    on mouseUp
-     put the visible of card field colorDropDownList into visible
-     set the visible of card field colorDropDownList to not visible
+     put the visible of card field "colorDropDownList" into visible
+     set the visible of card field "colorDropDownList" to not visible
    end mouseUp
    ```
 
@@ -6258,7 +6261,7 @@ The screenshots below show this in its collapsed and expanded forms.
    ```text
    on mouseUp
      get the selectedText of me
-     put it into card field colorDropDownValue
+     put it into card field "colorDropDownValue"
      set the visible of me to false
    end mouseUp
    ```
@@ -6286,8 +6289,8 @@ The screenshots below show this in its collapsed and expanded forms.
 
    ```text
    on mouseUp
-     put the visible of card field colorDropDownList into visible
-     set the visible of card field colorDropDownList to not visible
+     put the visible of card field "colorDropDownList" into visible
+     set the visible of card field "colorDropDownList" to not visible
    end mouseUp
    ```
 
