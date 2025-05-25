@@ -2789,6 +2789,22 @@ There are three ways to view and edit the script for a field:
 1. Select the Field tool, hold down the shift key, and double click the field.
 1. Hold down cmd-option-shift and click the field.
 
+A `keyDown` message is sent for each key press
+with an argument that is the character or code of the key.
+There is no `keyUp` message.
+See the table in the subsection "Messages for fields and cards"
+in the "HyperTalk" section.
+
+For example:
+
+```text
+on keyDown which
+  if charToNum(which) is 8
+  then answer "You pressed the delete key.";
+  pass keyDown
+end keyDown
+```
+
 ### Field Groups
 
 TODO: Learn about the "Group" text style which can be
@@ -4230,11 +4246,13 @@ For more detail, see the section "Message Handlers" below.
   This is sent when any key is pressed.
   The parameter gives the key that was pressed.
   For letter and digit keys, the parameter value is the character.
-  To test for other keys, use the `numToChar` function.
-  For example, to test for the delete key, use the following:
+  To test for other keys, use the `charToNum` or `numToChar` functions
+  to determine the key.
+  For example, to test for the delete key, use one of the following:
 
   ```text
   if which is numToChar(8) ...
+  if charToNum(which) is 8 ...
   ```
 
   The following table provides some of the key codes.
