@@ -5337,6 +5337,10 @@ The following mouse-related messages are automatically triggered:
 Functions are similar to message handlers, but always return a value.
 They must be called in a context where a value is required.
 
+When a function is called, the search to find its definition
+follows the same path as searching for a message handler.
+It searches up the object hierarchy starting with the script making the call.
+
 HyperCard defines many functions that are invoked with "the {name}"
 and a few that do not begin with "the" (`me`, `offset`, and `target`).
 Custom functions can be defined inside scripts.
