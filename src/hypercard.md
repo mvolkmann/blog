@@ -6289,9 +6289,10 @@ to account for newly added and deleted cards.
      -- "the name of this card" returns a string like
      -- card "name".
      -- We want the name without the quotes.
-     put word 2 of the name of this card into cardName
-     put length(cardName) into len
-     return char 2 to len-1 of cardName -- removes quotes
+     put word 2 of the name of this card into name
+     delete the first char of name -- removes leading quote
+     delete the last char of name -- removes trailing quote
+     return name
    end cardName
 
    on openCard
