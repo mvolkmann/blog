@@ -3475,10 +3475,6 @@ TODO: Add more to this section.
 #### Strings
 
 Literal strings are surrounded by double quotes.
-Technically the quotes are not required
-if there are no special characters such as spaces in the text,
-but omitting the quotes causes HyperTalk to
-search for a variable with that name before treating it as a string.
 
 To embed double quotes in a string, concatenate the `quote` constant.
 Attempting to escape the double quote character with a backslash
@@ -4757,6 +4753,10 @@ By convention, variable names composed of multiple words
 are written in camelCase.
 That cannot match a reserved word which includes
 all commands, functions, properties, and keywords defined by HyperTalk.
+
+If a variable is used before being set,
+it will evaluate to a string that is the name of the variable,
+not an empty string.
 
 Variables exist in two scopes, local to a specific handler
 and global across all handlers in all stacks.
