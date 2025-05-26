@@ -1904,6 +1904,12 @@ To add a button to the current card.
 Icons are 32x32 arrangements of black and white pixels
 that have a unique ID and an optional name.
 
+Here's an icon of the creator of HyperCard, Bill Atkinson.
+It is an ICON resource in the HyperCard app with the ID 2002 and name "Bill".
+
+<img alt="HyperCard Atkinson icon" style="width: 60%"
+  src="/blog/assets/hypercard-atkinson-icon.png?v={{pkg.version}}">
+
 To add an icon to a button:
 
 1. Select the Button tool.
