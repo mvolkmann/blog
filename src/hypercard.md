@@ -6457,6 +6457,45 @@ to implement a button that toggles the display of a field:
 1. Click the "Script..." button.
 1. Study the script
 
+### Dynamically Creating Buttons and Fields
+
+A script can create new buttons and fields.
+
+The following code creates and configures a new button:
+
+```text
+on mouseUp
+  lock screen
+  doMenu "New Button"
+  put "button" && the number of buttons into ref
+  set the name of ref to "Dynamic"
+  set the location of ref to 100, 100
+  set the script of ref to
+    "on mouseUp" & return &
+    "  answer" && quote & "Got click" & quote & return &
+    "end mouseUp"
+  choose browse tool
+  unlock screen
+end mouseUp
+```
+
+The following code creates and configures a new field:
+
+```text
+on mouseUp
+  lock screen
+  doMenu "New Field"
+  put "card field" && the number of card fields into ref
+  set the name of ref to "dynamicField"
+  set the location of ref to 100, 300
+  set the width of ref to 100
+  set the height of ref to 20
+  set the dontWrap of ref to true
+  choose browse tool
+  unlock screen
+end mouseUp
+```
+
 ## Books
 
 The book "The Complete HyperCard 2.2 Handbook" volumes 1 and 2
