@@ -5542,14 +5542,21 @@ send mouseUp to button myButton
 
 #### type Command
 
-The `type` command simulates the user typing text into a field.
+The `type` command simulates the user typing text.
 The syntax is:
 
 ```text
 type {string-expression} [with {modifier1}[, {modifier2}[, {modifier3}]]]
 ```
 
-Before using the `type` command, use the `select` command
+This command can be used to type a keyboard shortcut.
+For example, as an alternative to using
+`doMenu First` to go to the first card in the current stack,
+use `type "1" with commandKey`.
+As an alternative to using `doMenu "Cut Text"` to cut selected text,
+use `type "x" with commandKey`.
+
+To type into a field, first use the `select` command
 to move focus to the target field and position the text cursor.
 
 For example:
