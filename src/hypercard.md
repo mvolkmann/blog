@@ -4979,6 +4979,17 @@ Check the return value of the function `the result`
 which will return an empty string if the stack is found
 and the string "No such stack" otherwise.
 
+Another approach is to check whether the stack exists
+before attempting to go to it.
+For example:
+
+```text
+put "Some Stack Name" into stackName
+if there is a stack stackName
+then go to stack stackName
+else answer "The stack" && stackName && "was not found."
+```
+
 All the `go` commands above implement "hard links"
 that do not depend on other data.
 
