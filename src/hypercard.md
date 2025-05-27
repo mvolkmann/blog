@@ -5398,6 +5398,8 @@ select after char 3 of card field "story"
 
 The function `the selectedText` returns the selected text.
 
+Each field can have only one contiguous range of selected characters.
+
 #### send Command
 
 The `send` command manually sends a message to a specific object.
@@ -5699,11 +5701,32 @@ TODO: Finish summarizing what each of these do.
   `abbreviated` can be shortened to `abbrev` or `abbr`.
 
 - `the clickChunk`
+
+  When a locked field is clicked, its `mouseUp` handler
+  can use the function `the clickChunk` to get a chunk expression
+  that describes the range of characters that contains the clicked word.
+  It will have a value like "char 26 to 33 of card field 3".
+  Also see `the clickLine` and `the clickText`.
+
 - `the clickH`: x coordinate of the last mouse click
+
 - `the clickLine`
+
+  When a locked field is clicked, its `mouseUp` handler
+  can use the function `the clickLine` to get a chunk expression
+  that describes the range of characters that contains the clicked word.
+  It will have a value like "line 2 of card field 3".
+  Also see `the clickChunk` and `the clickText`.
+
 - `the clickLoc`: string containing x and y coordinates
   from upper-left of window separated by a comma of the last mouse click
+
 - `the clickText`
+
+  When a locked field is clicked, its `mouseUp` handler
+  can use the function `the clickText` to get the word that was clicked.
+  Also see `the clickChunk` and `the clickLine`.
+
 - `the clickV`: y coordinate of the last mouse click
 - `the commandKey`: `up` or `down`
 - `the date`: e.g. 5/13/25
