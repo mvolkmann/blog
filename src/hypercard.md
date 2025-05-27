@@ -4907,6 +4907,21 @@ add card field "n2" to result
 put result into card field "sum"
 ```
 
+#### answer command
+
+The `answer` command display a value in a dialog
+that contains an "OK" button for closing it.
+For example, `answer "Hello, World!"
+
+The `answer file` command opens a file selection dialog.
+It restricted to only allow selecting a file with a given type.
+For example:
+
+```text
+answer file "Select an application to launch." of type "APPL".
+if it is not empty then open it
+```
+
 #### do Command
 
 The `do` command takes any container as a parameter.
@@ -5102,6 +5117,36 @@ do "go to" && cardRef
 #### help Command
 
 The `help` command opens the "HyperCard Help" stack in a new window.
+
+#### open Command
+
+The `open` command opens another application or
+a document in another application.
+For example:
+
+```text
+put "Macintosh HD:Applications:Mac Paint 2.0" into application
+open application
+
+put "Macintosh HD:Documents:Paintings:Masterpiece" into document
+open document with application
+```
+
+If the application path is not specified,
+it will search the directories listed in the
+Home stack "Search Paths - Applications" card.
+That includes "Macintosh HD:Applications (Mac OS 9):" by default.
+Note the trailing colon.
+Modify this field to add more application paths.
+
+Similarly, if the document path is not specified,
+it will search the directories listed in the
+Home stack "Search Paths - Documents" card.
+Modify this field to add more document paths.
+
+The Calculator is a "desk accessory", not an application.
+To open it with HyperTalk,
+select it from the Apple menu with `doMenu Calculator`.
 
 #### pass Command
 
