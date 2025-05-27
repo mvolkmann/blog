@@ -4955,12 +4955,19 @@ The `go` command supports many arguments described below.
 
 - Other ways to go to another card, possibly in another stack
 
-  - `go back` - previously visited card
-  - `go bkgnd "{background-name}" [of stack "{stack-name}"]`
   - `go card id {card-id} [of stack "{stack-name}]`
   - `go card "{card-name}" [of stack "{stack-name}]`
 
     e.g. `go to card "User Preferences" of stack Home`
+
+    To check for the existence of a card before attempting to go to it,
+    use `if there is a card "{card-name}" ...`
+
+  - `go back` - previously visited card
+  - `go bkgnd "{background-name}" [of stack "{stack-name}"]`
+
+    To check for the existence of a background before attempting to go to it,
+    use `if there is a background "{background-name}" ...`
 
   - `go forth` - opposite of `go back` used after that command
   - `go home` - Home stack
