@@ -5368,14 +5368,35 @@ in the "Chunk Expressions" section.
 
 #### select Command
 
-The `select` command selects a subset of the text in field.
+The `select` command selects a subset of the text in field
+or positions the text cursor.
+Either can be specified with a chunk expression.
+
+When text is selected, the user can begin typing to replaced it.
+
 For example:
 
 ```text
+-- Select all the text in the field.
+select text of card field "story"
+
+-- Place the text cursor at the beginning of the field.
+select before text of card field "story"
+
+-- Place the text cursor at the end of the field.
+select after text of card field "story"
+
+-- Select words 2, 3, and 4.
 select word 2 to 4 of card field "story"
-get the selectedText
-answer it
+
+-- Place the text cursor between characters 2 and 3.
+select before char 3 of card field "story"
+
+-- Place the text cursor between characters 3 and 4.
+select after char 3 of card field "story"
 ```
+
+The function `the selectedText` returns the selected text.
 
 #### send Command
 
