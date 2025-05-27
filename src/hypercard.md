@@ -3112,6 +3112,10 @@ on mouseUp
 end mouseUp
 ```
 
+When going to a card in a different stack,
+the visual effect is only applied if
+the stack is configured to have the same size.
+
 There are 27 effects and five speeds.
 To specify a visual effect that is trigger by a specific button:
 
@@ -5201,6 +5205,39 @@ behind the stack window if the stack window is clicked.
 ```
 
 The most common property to set is `visible` to hide and show the picture.
+
+#### pop Command
+
+This removes the card reference
+that was placed on the stack using the `push` command
+AND navigates to that card.
+
+To remove a card reference from the stack without navigating to that card
+and place the card reference in a variable,
+use `pop card into someVariable`.
+To navigate to that card later, use `do "go to" && someVariable`.
+
+#### push Command
+
+This adds a card reference to the top of the stack,
+making it easy to return to that card later using the `pop` command.
+The card reference is a string with the syntax
+'card id {someID} of stack "some-stack-path"'.
+The stack has a maximum size of 20 card references.
+
+There are two ways to use this command:
+
+1. Push the current card onto the stack and then navigate to another card.
+
+   ```text
+   push [this] card [of {stack}]
+   ```
+
+1. Navigate to another card and then push the previous card onto the stack.
+
+   ```text
+   push recent card
+   ```
 
 #### put Command
 
