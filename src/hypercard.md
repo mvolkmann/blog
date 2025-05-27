@@ -2936,13 +2936,33 @@ the element that overlaps the click location and is in the closest layer.
 ## Sounds
 
 To play a predefined sound, use the `beep` or `play` commands.
+
 The `beep` command takes an optional argument
 that specifies the number of times to play, defaulting to one.
+
 The `play` command takes the following arguments:
 
 - name of a sound, either `boing` or `harpsichord`
 - optional keyword `tempo` followed by a number (seems to default to 120)
-- optional set of notes to play in double quotes
+- optional set of space-separated notes to play in double quotes
+
+Each note is defined by:
+
+1. a letter from `a` to `g`
+1. an optional `#` for sharp or `b` for flat,
+1. an optional octave of `3`, `4` (default), or `5`
+1. an optional duration of:
+
+   - `w` for whole note
+   - `h` for half note
+   - `q` for quarter note (default)
+   - `e` for 8th note
+   - `s` for 16th note
+   - `t` for 32nd note
+   - `x` for 64th note
+
+   Add a period after the duration to add half its value.
+   For example, `h.` is a 3/4 note.
 
 For example, `play harpsichord tempo 120 "c4 e g4 e c5 q"`
 
@@ -5436,6 +5456,11 @@ behind the stack window if the stack window is clicked.
 ```
 
 The most common property to set is `visible` to hide and show the picture.
+
+### play Command
+
+The `play` command plays a series of notes.
+See the "Sounds" section for more detail.
 
 #### pop Command
 
