@@ -3755,7 +3755,7 @@ The `delete` command can delete a chunk from a string.
 In the following examples, `second` can be replaced by
 any of the position keywords such as `last`:
 
-````text
+```text
 delete the second char from myString
 delete the second item from myString
 delete the second word from myString
@@ -3781,6 +3781,9 @@ To stop a running script, press cmd-period.
 Since you cannot control which scripts will exist
 in the Home stack or HyperCard app of the users of your stacks,
 it is risky to depend on those.
+
+A collection of useful scripts can be found in the Home stack
+under Stack Kit ... Power Tools ... Script Library.
 
 ### Script Editor
 
@@ -3855,7 +3858,7 @@ on startUp
   put "7,289,300,595" into line 1 of scriptWindowRects -- lower-left corner
   put "491,289,794,595" into line 2 of scriptWindowRects -- lower-right corner
 end startUp
-````
+```
 
 ### Script Menu
 
