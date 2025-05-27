@@ -4989,7 +4989,7 @@ The `click` command simulates clicking the mouse button at a specific pixel loca
 The syntax is:
 
 ```text
-click at {x}, {y} [width {modifier1}[, {modifier2}[, {modifier3}]]]
+click at {x}, {y} [with {modifier1}[, {modifier2}[, {modifier3}]]]
 ```
 
 where the modifiers are
@@ -5005,6 +5005,8 @@ OR
 
 send mouseUp to button id 19
 ```
+
+TODO: Determine why the "Draw House" button doesn't work in "My First Stack".
 
 #### close Command
 
@@ -5092,6 +5094,42 @@ repeat with index = 1 to the number of fields
 end repeat
 ```
 
+#### drag Command
+
+The `drag` command simulates dragging the mouse button
+from one pixel location to another.
+The syntax is:
+
+```text
+drag from {x1}, {y1} to {x2}, {y2} [with {modifier1}[, {modifier2}[, {modifier3}]]]
+```
+
+where the modifiers are
+`shiftKey`, `commandKey` (alias `cmdKey`), or `optionKey`.
+
+The following code uses the `drag` command to draw a rectangle:
+
+```text
+choose "Rectangle" tool
+drag from 100, 100 to 300, 200
+```
+
+The following code animates dragging a button to a new location
+each time it is clicked:
+
+````text
+on mouseUp
+  put the location of me into point
+  put the first item of point into x
+  put the second item of point into y
+  choose "Button" tool
+  set the dragSpeed to 100
+  drag from point to x - 50, y + 50
+  set the dragSpeed to 0
+  choose Browse Tool
+end mouseUp
+```
+
 #### get Command
 
 The `get` command gets the value of any expression
@@ -5113,7 +5151,7 @@ get the hilite of button "My Checkbox"
 get item 2 of colorList -- where colorList is a comma-delimited string
 get word 1 of "some long string"
 get line 3 of field "My Text Area"
-```
+````
 
 Once the variable `it` is set by using the `get` command,
 it can be used in subsequent expressions.
