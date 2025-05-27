@@ -5403,6 +5403,9 @@ The function `the selectedText` returns the selected text.
 
 Each field can have only one contiguous range of selected characters.
 
+To unselect the currently selected text,
+use the command `select empty`.
+
 #### send Command
 
 The `send` command manually sends a message to a specific object.
