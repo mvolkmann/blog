@@ -1279,9 +1279,9 @@ The tools include:
     use the same pattern for both the border and the fill,
     resulting in a polygon that appears to have no border.
 
-  - **Irregular Polygon** (18)
+  - **Polygon** (18)
 
-    The Irregular Polygon tool draws an arbitrary polygon.
+    The Polygon tool draws an arbitrary polygon.
     Click at each point in the polygon.
     To close the polygon, click on the start point.
     If the "Draw Filled" option is on, the polygon can be closed by
@@ -1448,7 +1448,7 @@ The Options menu contains the following menu items:
   When turned on, all points selected when painting
   using the following tools are snapped to a grid point:
   Line, Rectangle, Rounded Rectangle, Oval,
-  Regular Polygon, and Irregular Polygon.
+  Regular Polygon, and Polygon.
   This makes it easier to create items that are a specific size
   and line up multiple painted items horizontally or vertically.
 
@@ -1569,7 +1569,7 @@ The Options menu contains the following menu items:
 - Polygon Sides...
 
   This opens a dialog that allows selection of the number of sides
-  drawn by the regular polygon tool.
+  drawn by the "Regular Polygon" tool.
   The choices are triangle (3), square (4), pentagon (5),
   hexagon (6), octagon (8), and circle (infinite).
 
@@ -4963,7 +4963,7 @@ The "Tools Palette" section gives the names and numbers of each of the tools.
 
 When a number is used, it identifies a position in the Tools palette
 where the numbers go across each row and then down.
-So the "Browse" tool is 1 and the "Irregular Polygon" tool is 18.
+So the "Browse" tool is 1 and the "Polygon" tool is 18.
 
 For example:
 
@@ -4982,6 +4982,29 @@ To get the name of the currently selected tool, use the function `the tool`.
 When a script changes the selected tool,
 it is recommended to first get the name of the currently selected tool,
 and restore that selection at the end of the script.
+
+#### click Command
+
+The `click` command simulates clicking the mouse button at a specific pixel location.
+The syntax is:
+
+```text
+click at {x}, {y} [width {modifier1}[, {modifier2}[, {modifier3}]]]
+```
+
+where the modifiers are
+`shiftKey`, `commandKey` (alias `cmdKey`), or `optionKey`.
+
+For example, to simulate clicking a button, use one of the following approaches:
+
+```text
+get the location of button id 19
+click at it
+
+OR
+
+send mouseUp to button id 19
+```
 
 #### close Command
 
