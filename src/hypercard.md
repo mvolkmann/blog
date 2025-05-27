@@ -2942,13 +2942,13 @@ that specifies the number of times to play, defaulting to one.
 
 The `play` command takes the following arguments:
 
-- name of a sound, either `boing` or `harpsichord`
+- name of a sound such as `boing`, `flute`, or `harpsichord`
 - optional keyword `tempo` followed by a number (seems to default to 120)
 - optional set of space-separated notes to play in double quotes
 
 Each note is defined by:
 
-1. a letter from `a` to `g`
+1. a letter from `a` to `g`, or `r` for rest (no sound)
 1. an optional `#` for sharp or `b` for flat,
 1. an optional octave of `3`, `4` (default), or `5`
 1. an optional duration of:
