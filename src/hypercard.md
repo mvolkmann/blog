@@ -3751,15 +3751,59 @@ The following command replaces "Roy" with "Mark":
 put "Mark" into the second word of card field "fullName"`.
 ```
 
-The `delete` command can delete a chunk from a string.
-In the following examples, `second` can be replaced by
-any of the position keywords such as `last`:
+The `get` command can copy a chunk into the variable `it`.
+For example:
 
 ```text
-delete the second char from myString
-delete the second item from myString
-delete the second word from myString
-delete the second line from myString
+put "red,green,blue" into colors
+get the second item of colors
+-- it is now "green"
+```
+
+The `put` command can update a chunk in a string.
+
+```text
+put {source} into {chunk}
+put {source} before {chunk}
+put {source} after {chunk}
+```
+
+Use `into` to replace a chunk.
+For example:
+
+```text
+put "red,green,blue" into colors
+put "yellow" into the second item in colors
+-- colors is now "red,yellow,blue"
+```
+
+When using `before` to insert a new chunk,
+include the appropriate delimiter at the end of the source.
+For example:
+
+```text
+put "red,blue" into colors
+put "green," before the last item in colors
+-- colors is now "red,green,blue"
+```
+
+When using `after` to insert a new chunk,
+include the appropriate delimiter at the before of the source.
+For example:
+
+```text
+put "red,blue" into colors
+put ",green" after the first item in colors
+-- colors is now "red,green,blue"
+```
+
+The `delete` command can delete a chunk from a string.
+For example:
+
+```text
+put "red,green,blue" into colors
+delete the second item from colors
+-- colors is now "red,blue"
 ```
 
 When getting a range, if the end of the range
