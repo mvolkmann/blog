@@ -5337,6 +5337,13 @@ The syntax is one of the following:
 
 A tick is 1/60th of a second.
 
+### Mouse Cursor
+
+The mouse cursor can be changed to any of the following strings:
+`arrow` (standard), `busy`, `cross`, `hand`,
+`ibeam`, `none`, `plus`, or `watch`.
+For example, `set cursor to watch`.
+
 ### Mouse Messages
 
 The following mouse-related messages are automatically triggered:
