@@ -812,7 +812,7 @@ The tools include:
 
 - Row #1
 
-  - **Browse**
+  - **Browse** (1)
 
     The Browse tool enters Browse mode which enables interacting with cards as a user
     rather than as an author.
@@ -823,7 +823,7 @@ The tools include:
     Another approach for Mac OS 8 and 9 is
     described in "HyperTalk - Function Keys" below.
 
-  - **Button**
+  - **Button** (2)
 
     The Button tool enters Button mode which enables editing existing buttons.
     When in this mode, a thin black border is drawn around all buttons
@@ -831,7 +831,7 @@ The tools include:
 
     In Mac OS 7, another way to enter Button mode is to press cmd-tab-tab.
 
-  - **Field**
+  - **Field** (3)
 
     The Field tool enters Field mode which enables editing existing fields.
     When in this mode, a thin black border is drawn around all text fields
@@ -841,9 +841,9 @@ The tools include:
 
 - Row #2
 
-  - **Selection**
+  - **Select** (4)
 
-    The Selection tool selects a rectangular area specified by
+    The Select tool selects a rectangular area specified by
     dragging from any corner of the painted area to be selected
     to the opposite corner.
     The selected area will be surrounded by a rectangle of marching ants.
@@ -895,7 +895,7 @@ The tools include:
     Select Options ... Grid to constrain dragging and stretching
     to be in increments of 8 pixels.
 
-  - **Lasso**
+  - **Lasso** (5)
 
     The Lasso tool enables selecting
     non-rectangular portions of the painted layer.
@@ -915,7 +915,7 @@ The tools include:
     of the current domain (background or card),
     double click this tool.
 
-  - **Pencil**
+  - **Pencil** (6)
 
     The Pencil tool is used for freehand drawing
     which is accomplished by dragging.
@@ -940,7 +940,7 @@ The tools include:
 
 - Row #3
 
-  - **Brush**
+  - **Brush** (7)
 
     The Brush tool is used for freehand painting
     using the selected brush shape and pattern.
@@ -974,7 +974,7 @@ The tools include:
     to one of the 32 options, double click this tool
     as an alternative to selecting Options ... Brush Shape...
 
-  - **Eraser**
+  - **Eraser** (8)
 
     The Eraser tool is a white square whose shape and size cannot be changed.
     Drag over pixels to erase them.
@@ -1001,7 +1001,7 @@ The tools include:
     It's too bad that the Erase shape and size
     is not determined by the selected brush shape.
 
-  - **Line**
+  - **Line** (9)
 
     The Line tool draws a straight line.
     Click the start pixel and drag to end pixel.
@@ -1047,7 +1047,7 @@ The tools include:
 
 - Row #4
 
-  - **Spray**
+  - **Spray** (10)
 
     The Spray tool sprays paint (black pixels) using
     randomly chosen pixels from the selected pattern.
@@ -1064,7 +1064,7 @@ The tools include:
     To spray white pixels instead of black,
     hold down the cmd key while dragging.
 
-  - **Rectangle**
+  - **Rectangle** (11)
 
     The Rectangle tool draws a rectangle.
     Click the location of any corner and drag to the opposite corner.
@@ -1103,7 +1103,7 @@ The tools include:
     <img alt="HyperCard dashed line pattern" style="width: 30%"
       src="/blog/assets/hypercard-dashed-line-pattern.png?v={{pkg.version}}">
 
-  - **Round Rectangle**
+  - **Round Rectangle** (12)
 
     The Round Rectangle tool draws a rectangle with rounded corners.
     It is used in the same way as the Rectangle tool,
@@ -1117,7 +1117,7 @@ The tools include:
 
 - Row #5
 
-  - **Bucket**
+  - **Bucket** (13)
 
     The Bucket tool fills an area encompassed by black pixels
     with the selected pattern from the Patterns menu or palette.
@@ -1131,7 +1131,7 @@ The tools include:
 
     To toggle display of the Patterns palette, double click this tool.
 
-  - **Oval**
+  - **Oval** (14)
 
     The Oval tool draws an oval which is any closed curve that
     resembles the outline of an egg or an ellipse.
@@ -1144,7 +1144,7 @@ The tools include:
     To draw a portion of an oval,
     draw a complete oval and erase the undesired part.
 
-  - **Curve**
+  - **Curve** (15)
 
     The Curve tool is similar to the Pencil tool, but it:
 
@@ -1158,7 +1158,7 @@ The tools include:
 
 - Row #6
 
-  - **Text**
+  - **Text** (16)
 
     The Text tool paints text that cannot be edited.
     It is often used for card titles or for
@@ -1213,7 +1213,7 @@ The tools include:
       create multiple sets of painted text and position them next to each other.
       The text in a field can used multiple text properties settings.
 
-  - **Regular Polygon**
+  - **Regular Polygon** (17)
 
     The Regular Polygon tool draws a convex polygon
     whose sides all have the same length.
@@ -1253,7 +1253,7 @@ The tools include:
     use the same pattern for both the border and the fill,
     resulting in a polygon that appears to have no border.
 
-  - **Irregular Polygon**
+  - **Irregular Polygon** (18)
 
     The Irregular Polygon tool draws an arbitrary polygon.
     Click at each point in the polygon.
@@ -4924,10 +4924,12 @@ if it is not empty then open it
 
 #### choose Command
 
-The `choose` command chooses a tool by name or number.
+The `choose` command chooses a tool by name (preferred) or number.
+The "Tools Palette" section gives the names and numbers of each of the tools.
+
 When a number is used, it identifies a position in the Tools palette
 where the numbers go across each row and then down.
-So the Browse tool is 1 and the Irregular Polygon tool is 18.
+So the "Browse" tool is 1 and the "Irregular Polygon" tool is 18.
 
 For example:
 
@@ -4935,8 +4937,17 @@ For example:
 choose Browse tool
 choose Button tool
 choose Field tool
-choose tool 4 -- Selection tool
+choose tool 4 -- Select tool
 ```
+
+When a script creates a button, the Button tool is automatically selected.
+
+When a script creates a field, the Field tool is automatically selected.
+
+To get the name of the currently selected tool, use the function `the tool`.
+When a script changes the selected tool,
+it is recommended to first get the name of the currently selected tool,
+and restore that selection at the end of the script.
 
 #### close Command
 
@@ -5001,7 +5012,7 @@ each on their own line (separated by carriage returns).
 This enables creating a script by concatenating strings
 and then evaluating the result.
 
-For example, suppose we have a card field named "code"
+For example, suppose we have a ca76543rd field named "code"
 and a card button named "Execute".
 Users can enter HyperTalk commands on separate lines in the field
 and execute them by clicking the Execute button
