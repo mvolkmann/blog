@@ -4948,6 +4948,35 @@ Check the return value of `the result` for possible error messages.
 For example, when closing a MacPaint document
 this returns "Not handled by target program."
 
+#### delete Command
+
+The `delete` command deletes a "chunk" from a container.
+
+See examples of using the `delete` command
+in the "Chunk Expressions" section.
+
+To delete the entire contents of a container,
+use the `put` command to put `empty` into it.
+For example, `put empty into field "firstName"`.
+
+The `delete button` command deletes a button by its name or ID,
+but does not trigger a UI update.
+For example:
+
+```text
+delete button "Some Name"
+go to this card -- updates the UI
+```
+
+The `delete field` command deletes a field by its name or ID,
+but does not trigger a UI update.
+For example:
+
+```text
+delete card field "Some Name"
+go to this card -- updates the UI
+```
+
 #### do Command
 
 The `do` command takes any container as a parameter.
@@ -5005,6 +5034,9 @@ get line 3 of field "My Text Area"
 Once the variable `it` is set by using the `get` command,
 it can be used in subsequent expressions.
 For example, `multiply it by 2`.
+
+See more examples of using the `get` command
+in the "Chunk Expressions" section.
 
 #### go Command
 
@@ -5331,7 +5363,8 @@ put card field "first name" into firstName -- sets a variable to field contents
 If the keyword `field` is used and it is not preceded by `card`,
 it will default to looking for a background field.
 
-See more examples in the "Chunk Expressions" section.
+See more examples of using the `put` command
+in the "Chunk Expressions" section.
 
 #### select Command
 
