@@ -5377,22 +5377,25 @@ When text is selected, the user can begin typing to replaced it.
 For example:
 
 ```text
--- Select all the text in the field.
+-- Select all the current field.
+select text of me
+
+-- Select all the text in a field.
 select text of card field "story"
 
--- Place the text cursor at the beginning of the field.
+-- Place the text cursor at the beginning of a field.
 select before text of card field "story"
 
--- Place the text cursor at the end of the field.
+-- Place the text cursor at the end of a field.
 select after text of card field "story"
 
--- Select words 2, 3, and 4.
+-- Select words 2, 3, and 4 in a field.
 select word 2 to 4 of card field "story"
 
--- Place the text cursor between characters 2 and 3.
+-- Place the text cursor between characters 2 and 3 of a field.
 select before char 3 of card field "story"
 
--- Place the text cursor between characters 3 and 4.
+-- Place the text cursor between characters 3 and 4 of a field.
 select after char 3 of card field "story"
 ```
 
