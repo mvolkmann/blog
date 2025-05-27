@@ -4927,9 +4927,11 @@ For example, `multiply it by 2`.
 
 #### go Command
 
-The `go` command supports going to another card.
+The `go` command supports going to another
+card (most common case), background, or stack.
 It can be followed by the optional preposition "to"
 which is omitted in the examples below.
+
 The `go` command supports many arguments described below.
 
 - Ordinal
@@ -4962,8 +4964,20 @@ The `go` command supports many arguments described below.
 
   - `go forth` - opposite of `go back` used after that command
   - `go home` - Home stack
-  - `go stack {stack-name} [in [a] new window]` -
-    first card in a given stack (e.g. "HyperCard Help")
+  - `go stack {stack-name}` - first card in a given stack
+
+When going to another stack,
+by default that stack replaces the current stack
+using the existing window.
+To instead open it in a new window,
+add `in [a] new window`.
+
+When going to another stack, if the stack cannot be found
+then by default a file dialog opens to allow the user to locate the stack.
+To instead handle the error in a script, add `without dialog`.
+Check the return value of the function `the result`
+which will return an empty string if the stack is found
+and the string "No such stack" otherwise.
 
 All the `go` commands above implement "hard links"
 that do not depend on other data.
