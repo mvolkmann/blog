@@ -5002,14 +5002,6 @@ get word 1 of "some long string"
 get line 3 of field "My Text Area"
 ```
 
-Two ways see the value of any variable, including `it`,
-are to use the `put` and `answer` commands.
-The `put` command writes the value to the Message Box
-if no destination container is specified.
-The `answer` command opens a dialog box containing the value.
-Both commands take an expression as an argument
-which can be just a variable name.
-
 Once the variable `it` is set by using the `get` command,
 it can be used in subsequent expressions.
 For example, `multiply it by 2`.
@@ -5338,8 +5330,6 @@ put card field "first name" into firstName -- sets a variable to field contents
 
 If the keyword `field` is used and it is not preceded by `card`,
 it will default to looking for a background field.
-
-The destination field can be in a different card within the same stack.
 
 See more examples in the "Chunk Expressions" section.
 
