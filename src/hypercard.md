@@ -63,6 +63,19 @@ HyperCard was their first introduction to programming.
 It was easier to learn than other options and
 led some of them to become professional software developers.
 
+## Some Cons
+
+The following is a list of things that HyperCard cannot do:
+
+- run in Windows or Linux
+- run in an Macintosh OS newer than Mac OS 9
+- use color (except with Color Tools that are not fully supported)
+- make information available on the Web
+- interact with REST APIs
+- support multi-user interactions
+
+Stacks can be shared and edited by one user at a time.
+
 ## Launching HyperCard
 
 To launch HyperCard, double click on the app icon
@@ -76,6 +89,19 @@ For popup help on a particular menu item or button,
 select Help ... Show Balloons and hover over an item.
 This is a Mac OS feature and is not specific to HyperCard.
 To turn this off, select Help ... Hide Balloons.
+
+For help on HyperCard, go to the Home stack, click the "Welcome to" button,
+and click the "HyperCard Help" button.
+
+For help on HyperTalk, go to the Home stack, click the "Stack Kit" button,
+and click the "HyperTalk Reference" button.
+
+Another source of help on HyperTalk is the {% aTargetBlank
+"https://archive.org/details/hypercard_ht_quickref", "HyperTalk QuickRef" %}
+stack. After downloading this, open it in HyperCard,
+click the "Install..." button, and click the "Install" button.
+To get help on a particular topic, open the Message Box
+and enter quickref "{topic}".
 
 ## Domains
 
@@ -3170,7 +3196,7 @@ TODO: What image formats can be pasted into cards?
 ## Color
 
 Some amount of color support was added to HyperCard in version 2.3.
-To use colors, install the color tools.
+To use colors, install the Color Tools.
 This requires more than the default amount of memory.
 To add more memory:
 
@@ -3185,14 +3211,22 @@ To add more memory:
 
 To enable use of colors:
 
-- Click "Color Tools are OFF" on the Home card to toggle it ON.
+- Open the Home stack.
+- Click the "Stack Kit" button.
+- Click the "Color Tools" button.
+- Click "Install Color Tools".
+- Return the Home stack.
+- Click the "Welcome to" button.
+- Click the "Color Tools are OFF" button to toggle it ON.
   This will add a Color menu that contains the menu item "Open Coloring Tools".
-- Select that menu item to open the color palette.
-  This has buttons labeled Button, Field, Pict, Rect, and Paint at the top.
+- Select Color ... Open Coloring Tools.
+- Click the "OK" button. This opens the color palette which
+  has buttons labeled Button, Field, Pict, Rect, and Paint at the top.
 - Select one of the buttons to indicate
   the kind of object for which a color will be selected.
 - Select a color.
 
+TODO: How can I create a colored button or field?
 TODO: Why does the Tools menu disappear when the Color palette is open?
 
 ## Scroll Window
