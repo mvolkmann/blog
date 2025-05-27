@@ -4956,6 +4956,15 @@ answer file "Select an application to launch." of type "APPL".
 if it is not empty then open it
 ```
 
+#### beep Command
+
+The `beep` command plays the System beep sound
+a given number of times, defaulting to 1.
+It is commonly used to grab the attention of the user
+to let them know about a problem such as a keystroke not being accepted.
+
+To beep 3 times, use `beep 3`.
+
 #### choose Command
 
 The `choose` command chooses a tool by name (preferred) or number.
