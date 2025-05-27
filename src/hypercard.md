@@ -68,8 +68,8 @@ led some of them to become professional software developers.
 The following is a list of things that HyperCard cannot do:
 
 - run in Windows or Linux
-- run in an Macintosh OS newer than Mac OS 9
-- use color (except with Color Tools that are not fully supported)
+- run in a Macintosh OS newer than Mac OS 9
+- use color (except with Color Tools that are a bit of an awkward add on)
 - make information available on the Web
 - interact with REST APIs
 - support multi-user interactions
@@ -6886,7 +6886,7 @@ end mouseUp
 
 The book "The Complete HyperCard 2.2 Handbook" volumes 1 and 2
 are widely seen as the best documentation on HyperCard.
-But these books to not cover improvements made in HyperCard 2.3 and 2.4.
+But these books do not cover improvements made in HyperCard 2.3 and 2.4.
 The following subsections describe those improvements.
 
 ### HyperCard 2.3
@@ -6896,6 +6896,7 @@ This version of HyperCard ...
 - added limited color capabilities through XCMD extensions
   and better integration with ColorTools
 - enhanced support for QuickTime movies and sound resources
+  (more than 30 standard media file types are supported)
 - improved AppleScript support, allowing HyperCard
   to be controlled by other applications
 - added optimizations for faster script execution and card rendering
