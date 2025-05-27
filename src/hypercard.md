@@ -5318,20 +5318,30 @@ There are two ways to use this command:
 #### put Command
 
 The `put` command sets the value of a container.
-The syntax is `put {value} [into {container-ref}]`.
+The syntax is `put {expression} [into|after|before {container-ref}]`.
 If no container is specified, it defaults to the Message Box.
 
 For example:
 
 ```text
 put "Hello World!" -- replaces the Message Box contents
+
+put "def" into letters -- replaces previous value if any
+put "abc" before letters -- now set to "abcdef"
+put "ghi" after letters -- now set to "abcdefghi"
+
 put "Mark" into card field "first name" -- sets a field by name
 put "Mark" into card field id 10 -- sets a field by id
-put card field "user name" into firstName -- sets a variable to field contents
+
+put card field "first name" into firstName -- sets a variable to field contents
 ```
 
-If the keyword `card` is omitted,
+If the keyword `field` is used and it is not preceded by `card`,
 it will default to looking for a background field.
+
+The destination field can be in a different card within the same stack.
+
+See more examples in the "Chunk Expressions" section.
 
 #### select Command
 
