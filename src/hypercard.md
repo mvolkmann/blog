@@ -4922,6 +4922,32 @@ answer file "Select an application to launch." of type "APPL".
 if it is not empty then open it
 ```
 
+#### close Command
+
+The `close` command closes another application or
+a document that was opened in another application.
+See the `open` command for opening another application or document.
+
+For example:
+
+```text
+put "Macintosh HD:Applications:Mac Paint 2.0" into application
+-- This quits the application.
+-- If there are unsaved changes to document,
+-- it will prompt the user to save them.
+close application
+
+put "Macintosh HD:Documents:Paintings:Masterpiece" into document
+-- This closes the document, but does not quit the application.
+-- If there are unsaved changes to the document,
+-- it will prompt the user to save them.
+close document with application
+```
+
+Check the return value of `the result` for possible error messages.
+For example, when closing a MacPaint document
+this returns "Not handled by target program."
+
 #### do Command
 
 The `do` command takes any container as a parameter.
@@ -5122,6 +5148,8 @@ The `help` command opens the "HyperCard Help" stack in a new window.
 
 The `open` command opens another application or
 a document in another application.
+See the `close` command for closing another application or document.
+
 For example:
 
 ```text
@@ -5131,6 +5159,9 @@ open application
 put "Macintosh HD:Documents:Paintings:Masterpiece" into document
 open document with application
 ```
+
+If the application or document is not found at the given path,
+a file dialog will open asking the user to find it.
 
 If the application path is not specified,
 it will search the directories listed in the
