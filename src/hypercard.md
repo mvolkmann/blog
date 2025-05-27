@@ -3926,6 +3926,31 @@ The Script menu contains the following:
   This toggles whether there is a checkpoint on the line under the cursor.
   See the "Debugging" section below for details.
 
+### Exporting Scripts
+
+To export all the scripts in a stack to a single text file
+for analyzing outside of HyperCard:
+
+1. Press cmd-h to open the Home stack.
+1. Click the "Stack Kit" button.
+1. Click the "Power Tools" button.
+1. Click "Export a Stack's Scripts".
+1. Click the "Export Stack Scripts" button.
+   See the script of this button for tips on how to
+   iterate through all the scripts in a stack.
+1. In the file selection dialog that appears,
+   locate and select the stack whose scripts will be exported.
+1. Click the "Open" button.
+1. In the next file selection dialog that appears,
+   select a destination directory and enter a name of the file to create.
+1. Click the "Save" button.
+1. In the dialog that appears and says "Export done", click the "OK" button.
+1. Open the file that is created with any text editor
+   such as SimpleText or BBEdit
+
+There is no support for modifying the exported script file
+and importing it back into HyperCard.
+
 ### Debugging
 
 "Checkpoints" mark lines in scripts where execution will stop
