@@ -4922,6 +4922,22 @@ answer file "Select an application to launch." of type "APPL".
 if it is not empty then open it
 ```
 
+#### choose Command
+
+The `choose` command chooses a tool by name or number.
+When a number is used, it identifies a position in the Tools palette
+where the numbers go across each row and then down.
+So the Browse tool is 1 and the Irregular Polygon tool is 18.
+
+For example:
+
+```text
+choose Browse tool
+choose Button tool
+choose Field tool
+choose tool 4 -- Selection tool
+```
+
 #### close Command
 
 The `close` command closes another application or
