@@ -5540,6 +5540,43 @@ For example:
 send mouseUp to button myButton
 ```
 
+#### type Command
+
+The `type` command simulates the user typing text into a field.
+The syntax is:
+
+```text
+type {string-expression} [with {modifier1}[, {modifier2}[, {modifier3}]]]
+```
+
+Before using the `type` command, use the `select` command
+to move focus to the target field and position the text cursor.
+
+For example:
+
+```text
+select after text of card field "story"
+put "The quick brown fox jumps over the lazy dog." into text
+type text
+```
+
+This adds the text so quickly that there is no perceptible difference
+between using the `type` command and the following:
+
+```text
+put text into card field "story"
+```
+
+The following code types the characters one at a time
+with a short delay between each:
+
+```text
+repeat with i = 1 to length(text)
+  type char i of text
+  wait 5 ticks
+end repeat
+```
+
 #### xy Command
 
 The `xy` command is helping in determining
