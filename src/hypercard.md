@@ -5302,6 +5302,30 @@ do "go to" && cardRef
 
 The `help` command opens the "HyperCard Help" stack in a new window.
 
+#### multiply Command
+
+The `multiply` command multiplies the number in a given container by a number.
+The numeric value of an empty container is zero.
+An "Expected number here" error occurs if the container
+is not empty and does not contain a number.
+
+The following commands multiplies numbers using the `it` variable:
+
+```text
+get 2
+multiply it by 3
+answer it -- displays 6 in a dialog
+```
+
+The following commands multiply the values in two fields
+and place the result in a third field:
+
+```text
+put card field "n1" into result
+multiply result by card field "n2"
+put result into card field "product"
+```
+
 #### open Command
 
 The `open` command opens another application or
