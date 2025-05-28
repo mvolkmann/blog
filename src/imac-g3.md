@@ -301,7 +301,10 @@ The steps to configure this are:
 1. Select "Chooser" from the Apple menu.
 1. Select "Acrobat PDFWriter 4.0".
 1. Close the Chooser window.
-1. In any application from which printing will be requested,
+
+When an application prints something, a PDF named "untitled [n]"
+will be created on the desktop.
+Double click one to open it in Acrobat Reader.
 
 ## Internet
 
