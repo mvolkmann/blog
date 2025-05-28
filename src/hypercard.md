@@ -5265,6 +5265,10 @@ For example, `multiply it by 2`.
 See more examples of using the `get` command
 in the "Chunk Expressions" section.
 
+#### find Command
+
+See the "Finding Cards" section.
+
 #### go Command
 
 The `go` command supports going to another
