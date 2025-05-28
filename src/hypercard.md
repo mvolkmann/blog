@@ -742,26 +742,29 @@ the next occurrence of a field containing matching text.
 
 Key facts about the `find` command are:
 
-- The search is case-insensitive.
-- The matching text is surrounded by a black rectangle.
 - Only fields are searched, not button labels or painted text.
+- The search is case-insensitive.
+- The matching text is indicated on cards
+  by surrounding it with a black rectangle.
 - If no match is found, the beep sound is played.
 - The last search is remembered. If you begin a new search later,
   the previous search text will be in the quotes.
 - When the search string contains spaces,
-  they are treated as delimiters between search terms.
-  The search is for the next card with a field containing
-  a word that **begins** with each of the search terms.
-  The words are not required to be in the same field.
-  For example, `find "com whip"` matches a card with
-  a field that contains "Comet Fireball" AND
-  a field that contains "Brindle Whippet".
-- Multi-term searches are AND searches, not OR searches.
+  they are treated as delimiters between search terms
+  (unless the `find string` variation is used).
 
 To repeat the search to find the next occurrence,
 possibly on the same card, press the return key.
 After the last occurrence is found,
 the search wraps around to the first card in the stack.
+
+The plain `find` command matches cards
+that have at least one field containing
+a word that **begins** with each of the search terms.
+The words are not required to be in the same field.
+For example, `find "com whip"` matches a card with
+a field that contains "Comet Fireball" AND
+a field that contains "Brindle Whippet".
 
 The `find words` command matches cards with fields that contain
 complete words that match the search terms.
@@ -801,16 +804,6 @@ For example, this treats the character é the same as the character e.
 
 To only search marked cards,
 add `of marked cards` to the end of the `find` command.
-
-The following table summarizes all the `find` command variants.
-
-| Variant             | Searches          | AND or OR |
-| ------------------- | ----------------- | --------- |
-| `find`              | start of words    | AND       |
-| `find string`       | anywhere in words | OR        |
-| `find char[acter]s` | anywhere in words | AND       |
-| `find whole`        | entire words      | OR        |
-| `find world`        | entire words      | AND       |
 
 ### Card Issues
 
