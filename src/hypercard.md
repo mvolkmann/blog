@@ -454,27 +454,6 @@ To share a stack with others, send them the stack file.
 They can open the stack by double clicking it,
 or by launching HyperCard and selecting File ... Open Stack...
 
-### Card Sorting
-
-To sort all the cards currently in a stack based on
-the content of a background field (appears on every card),
-open the Message Box and enter a command like
-`sort by field dogName`.
-This changes the number of each card in the stack, but not their IDs.
-
-Newly added cards are not automatically places in the current sort order
-because the contents of their fields is not known when the card is created.
-
-To automatically resort the stack each time it is opened,
-select Objects ... Stack Info..., click the Script button,
-and add a handler like the following:
-
-```text
-on openStack
-  sort by field dogName
-end openStack
-```
-
 ### Stack Compacting
 
 When changes are made in a stack, such as entering text in a field,
@@ -808,6 +787,27 @@ For example, this treats the character é the same as the character e.
 
 To only search marked cards,
 add `of marked cards` to the end of the `find` command.
+
+### Sorting Cards
+
+To sort all the cards currently in a stack based on
+the content of a background field (appears on every card),
+open the Message Box and enter a command like
+`sort by field dogName`.
+This changes the number of each card in the stack, but not their IDs.
+
+Newly added cards are not automatically places in the current sort order
+because the contents of their fields is not known when the card is created.
+
+To automatically resort the stack each time it is opened,
+select Objects ... Stack Info..., click the Script button,
+and add a handler like the following:
+
+```text
+on openStack
+  sort by field dogName
+end openStack
+```
 
 ### Card Issues
 
