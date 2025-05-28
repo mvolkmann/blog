@@ -6391,6 +6391,9 @@ The "Power Tools" stack provides a collection of tools for developing stacks.
 To access this stack, go the Home stack, click the "Stack Kit" button,
 and click "Power Tools".
 
+<img alt="HyperCard Power Tools" style="width: 80%"
+  src="/blog/assets/hypercard-Power-Tools.png?v={{pkg.version}}">
+
 The following subsections describe each of the tools.
 
 ### Super Grouper
@@ -6400,6 +6403,9 @@ group objects, move them on their card, align them,
 adjust their spacing, duplicate them, and delete them.
 
 To open the palette, click "Super Grouper" and click the "Show Palette" button.
+
+<img alt="HyperCard Super Grouper" style="width: 80%"
+  src="/blog/assets/hypercard-Super-Grouper.png?v={{pkg.version}}">
 
 To "Group Objects":
 
