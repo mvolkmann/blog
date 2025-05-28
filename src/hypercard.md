@@ -6395,6 +6395,71 @@ The following subsections describe each of the tools.
 
 ### Super Grouper
 
+Super Grouper adds a palette of buttons that can be used to
+group objects, move them on their card, align them,
+adjust their spacing, duplicate them, and delete them.
+
+To open the palette, click "Super Grouper" and click the "Show Palette" button.
+
+To "Group Objects":
+
+- Navigate to the card containing the objects.
+- Click the top left button in the "Super Grouper" palette
+  to enter grouping mode.
+- Click each object to be added to the group.
+- Exit grouping mode by
+  clicking on the card background (not on a button or field)
+  OR by clicking the top left button again.
+- The group will remain in effect after each of the operations below
+  to enable applying any number of them.
+
+To "Move Objects" in the group:
+
+- Click the top middle button in the "Super Grouper" palette
+  to enter move mode.
+- Begin dragging from within the top middle button.
+- Release the mouse button when the objects are at the desired location
+  to exit move mode.
+
+To "Align Objects" in the group:
+
+- Click the top right button in the "Super Grouper" palette.
+- In the dialog that appears, click the "Vert" or "Horz" button.
+- Another dialog will appear.
+  If "Horz" was selected then click the "Right" or "Left" button.
+  If "Vert" was selected then click the "Bottom" or "Top" button.
+- Click the object in the group that should not be moved.
+  All the other objects in the group will move to align with that one.
+
+To "Align Object Spacing" in the group:
+
+- Click the bottom left button in the "Super Grouper" palette.
+- In the dialog that appears, click the "Vert" or "Horz" button.
+
+  If "Vert" is selected, the topmost object will not move,
+  but the others will move to have the requested spacing.
+
+  If "Horz" is selected, the leftmost object will not move,
+  but the others will move to have the requested spacing.
+
+- In the dialog that appears,
+  enter the desired number of pixels between the objects
+  which defaults to 5.
+- Click the "OK" button.
+
+To "Duplicate Objects" in the group:
+
+- Click the bottom middle button in the "Super Grouper" palette.
+- In the dialog that appears, click the "OK" button.
+- The new objects will be directly on top of the group objects.
+  To move the group objects out from under the new objects,
+  follow the steps for "Move Objects" above.
+
+To "Delete Objects" in the group:
+
+- Click the bottom right button in the "Super Grouper" palette.
+- In the dialog that appears, click the "OK" button.
+
 ### Window Manager
 
 TODO: Add details about this.
