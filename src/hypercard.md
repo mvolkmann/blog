@@ -799,6 +799,19 @@ when finding matches, add the keyword `international` after `find`
 in any of the `find` commands described above.
 For example, this treats the character é the same as the character e.
 
+To only search marked cards,
+add `of marked cards` to the end of the `find` command.
+
+The following table summarizes all the `find` command variants.
+
+| Variant             | Searches          | AND or OR |
+| ------------------- | ----------------- | --------- |
+| `find`              | start of words    | AND       |
+| `find string`       | anywhere in words | OR        |
+| `find char[acter]s` | anywhere in words | AND       |
+| `find whole`        | entire words      | OR        |
+| `find world`        | entire words      | AND       |
+
 ### Card Issues
 
 Sadly there is no easy way to:
@@ -5267,7 +5280,7 @@ in the "Chunk Expressions" section.
 
 #### find Command
 
-See the "Finding Cards" section.
+See the "Cards - Finding Cards" section.
 
 #### go Command
 
