@@ -281,6 +281,28 @@ To mount a disk image using Toast:
 Some applications like the game Myst require having a CD installed to use it.
 Mounting the disk image satisfies this requirement.
 
+## Printing
+
+One solution to printing is to use Adobe Acrobat PDFWriter
+and configure that as a printer.
+It will create a PDF file rather than actually printing.
+The PDF can be copied to another computer, perhaps via a USB stick,
+that has access to a real printer.
+
+Adobe Acrobat PDFWriter 4.0 can be downloaded from
+{% aTargetBlank "https://macintoshgarden.org/apps/adobe-acrobat-pdfwriter-40",
+"Macintosh Garden" %}.
+
+The steps to configure this are:
+
+1. Install Adobe Acrobat PDFWriter.
+1. Move the file "Acrobat PDFWriter 4.0" to
+   Macintosh HD ... System Folder ... Extensions.
+1. Select "Chooser" from the Apple menu.
+1. Select "Acrobat PDFWriter 4.0".
+1. Close the Chooser window.
+1. In any application from which printing will be requested,
+
 ## Internet
 
 If WiFi is available and the iMac G3 has an AirPort card,
@@ -558,21 +580,25 @@ To create plain text files, consider using BBEdit instead.
 SimpleEdit documents can contain graphics.
 TODO: What other kinds of media can be pasted in these documents?
 
-## Mac OS 9 Tips
+## Finder Tips
 
-To add a desktop picture:
+To adjust the layout of icons in the Finder:
 
-1. Select Apple menu ... Control Panels ... Appearance ... Desktop.
-1. If a picture was previously selected, click the "Remove Picture" button.
-1. Click the "Place Picture..." button.
-1. Click the "Place Picture..." button.
-1. Select a file with the format JPEG, GIF, PICT, or Photoshop.
-1. Click the "Open" button.
+1. Open a Finder window.
+1. Select View ... as Icons.
+1. Select View ... View Options...
+1. Select "None" to enable dragging icons to any pixel location.
+1. Select "Always snap to grid" to constrain the placement of icons.
+1. Select "Keep arranged: by Name (or another option)
+   to automatically order icons by their names.
+1. Optionally change "Icon Size" to small or large icons.
 
-To simulate a right mouse button click in order to get context-sensitive menus,
-hold down the control key while clicking.
-For example, doing this on the trash can icon,
-opens a menu containing "Empty Trash...".
+To sort the contents of a directory by file/folder names,
+select View ... Arrange ...by Name.
+
+To resize a Finder window to the minimum size required
+to display all of its contents, click the first button
+in the upper-right corner of its title bar.
 
 To delete a file or folder in the Finder,
 click it to select it and press cmd-delete.
@@ -592,6 +618,25 @@ is displayed on the right end of the menu bar.
 To see a list of the applications that are currently running in a menu,
 click that.
 To make a different application active, click its name in the menu.
+
+To close all Finder windows, hold down the option key
+and click the close box of any one of them.
+
+## Mac OS 9 Tips
+
+To add a desktop picture:
+
+1. Select Apple menu ... Control Panels ... Appearance ... Desktop.
+1. If a picture was previously selected, click the "Remove Picture" button.
+1. Click the "Place Picture..." button.
+1. Click the "Place Picture..." button.
+1. Select a file with the format JPEG, GIF, PICT, or Photoshop.
+1. Click the "Open" button.
+
+To simulate a right mouse button click in order to get context-sensitive menus,
+hold down the control key while clicking.
+For example, doing this on the trash can icon,
+opens a menu containing "Empty Trash...".
 
 The "Control Strip" provides quick access to many settings.
 It is not displayed by default.
@@ -627,24 +672,6 @@ To adjust the monitor settings:
       1. Select "Position".
          1. Adjust the horizontal and vertical position.
 1. Close the control panel window.
-
-To adjust the layout of icons in the Finder:
-
-1. Open a Finder window.
-1. Select View ... as Icons.
-1. Select View ... View Options...
-1. Select "None" to enable dragging icons to any pixel location.
-1. Select "Always snap to grid" to constrain the placement of icons.
-1. Select "Keep arranged: by Name (or another option)
-   to automatically order icons by their names.
-1. Optionally change "Icon Size" to small or large icons.
-
-To sort the contents of a directory by file/folder names,
-select View ... Arrange ...by Name.
-
-To resize a Finder window to the minimum size required
-to display all of its contents, click the first button
-in the upper-right corner of its title bar.
 
 Mac OS 9 did not ship with a music app like iTunes,
 which was introduced in macOS X.
