@@ -3586,7 +3586,8 @@ The following functions return date values:
 
 A "tick" is 1/60th of a second.
 
-The `convert` command converts a date expression to a specific format.
+The `convert` command converts a date expression to a specific format
+and places the result in the `it` variable.
 The format of the input expression can optionally
 be specified after the `from` keyword.
 The format of the output can be specified as
@@ -3596,10 +3597,14 @@ The syntax is
 
 | Format Name        | Example                     |
 | ------------------ | --------------------------- |
-| "seconds"          | 1234567890                  |
-| "short date"       | 2/13/43                     |
-| "abbreviated date" | Sat, Feb 13, 1943           |
-| "long date"        | Saturday, February 13, 1943 |
+| `seconds`          | 1234567890                  |
+| `short date`       | 2/13/43                     |
+| `abbreviated date` | Sat, Feb 13, 1943           |
+| `long date`        | Saturday, February 13, 1943 |
+| `dateItems`        | 1943,2,13,23,31,30,7        |
+
+The "dateItems" format is a comma-separated string containing
+the year, month, day, hour, minute, second, and
 
 Seconds values are from midnight on January 1, 1904.
 Negative values are before that.
@@ -3610,8 +3615,9 @@ The format "abbreviated date" can also be written as
 For example:
 
 ```text
-convert the seconds to dateItems
-
+put 1234567890 into seconds
+convert seconds to dateItems
+answer it -- displays a string like "1943,2,13,23,31,30,7
 ```
 
 For example, to get the date two weeks from today:
@@ -5045,6 +5051,11 @@ close document with application
 Check the return value of `the result` for possible error messages.
 For example, when closing a MacPaint document
 this returns "Not handled by target program."
+
+#### convert Command
+
+The `convert` command converts a date or time to a different format.
+See examples in the sections "Dates" and "Times" above.
 
 #### delete Command
 
