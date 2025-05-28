@@ -797,6 +797,10 @@ It matches cards with a single matching field.
 For example, `find string "met fir"` matches a card with
 a field that contains "Comet Fireball".
 
+To search only within a specific field of each card,
+add `in {field-ref}` to the end of the `find` command.
+For example, `find words "comet" in field "dogName"`.
+
 To treat accented characters the same as their non-accented counterparts
 when finding matches, add the keyword `international` after `find`
 in any of the `find` commands described above.
