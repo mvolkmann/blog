@@ -4927,7 +4927,15 @@ The numeric value of an empty container is zero.
 An "Expected number here" error occurs if the container
 is not empty and does not contain a number.
 
-For example, the following commands add the values in two fields
+The following commands add numbers using the `it` variable:
+
+```text
+get 2
+add 3 to it
+answer it -- displays 5 in a dialog
+```
+
+The following commands add the values in two fields
 and place the result in a third field:
 
 ```text
@@ -5547,6 +5555,30 @@ For example:
 
 ```text
 send mouseUp to button myButton
+```
+
+#### subtract Command
+
+The `subtract` command subtracts a number from the number in a given container.
+The numeric value of an empty container is zero.
+An "Expected number here" error occurs if the container
+is not empty and does not contain a number.
+
+The following commands subtract numbers using the `it` variable:
+
+```text
+get 5
+subtract 2 from it
+answer it -- displays 3 in a dialog
+```
+
+The following commands subtracts the values in two fields
+and place the result in a third field:
+
+```text
+put card field "n1" into result
+subtract card field "n2" from result
+put result into card field "difference"
 ```
 
 #### type Command
