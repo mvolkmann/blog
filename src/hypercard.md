@@ -3619,12 +3619,12 @@ else answer "invalid date"
 
 The `convert` command converts a date expression to a specific format
 and places the result in the `it` variable.
-The format of the input expression can optionally
-be specified after the `from` keyword.
-The format of the output can be specified as
-a specific date format, a specific time format, or both.
 The syntax is
-`convert {date-expr} [from {input-fmt}] [to {output-fmt1} [and {output-fmt2}]]`.
+`convert {date-expr} [from {input-fmt}] to {output-fmt1} [and {output-fmt2}]`.
+
+If the input format is not specified, it guessed based on the input expression.
+The output format can be specified as
+a specific date format, a specific time format, or both.
 
 | Format Name        | Example                     |
 | ------------------ | --------------------------- |
