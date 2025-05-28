@@ -6534,6 +6534,13 @@ on mouseUp
 end mouseUp
 ```
 
+## Printing
+
+See the "iMac G3" page for details on using Adobe Acrobat PDFWriter
+as a printer.
+
+TODO: Add detail about all the printing options.
+
 ## Palettes
 
 The Power Tools stack contains a "Palette Maker" card
