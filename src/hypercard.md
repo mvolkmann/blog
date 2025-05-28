@@ -3495,6 +3495,17 @@ The big takeaway is that every data type is really just a string
 and all containers store a string.
 All containers are mutable.
 
+To test whether a container holds a valid integer, number, or date,
+use the `is a[n]` operator.
+For example, all of the following expressions evaluate to "true":
+
+```text
+19 is an integer
+19 is a number
+3.14 is a number
+"4/16/1961" is a date
+```
+
 #### Booleans
 
 Booleans are stored as the strings "true" and "false".
@@ -3586,6 +3597,26 @@ The following functions return date values:
 
 A "tick" is 1/60th of a second.
 
+To determine if a container holds a valid date,
+use the `is a date` operator.
+The following are examples of valid dates:
+
+- a number of seconds such as 1234567890
+- "April 16, 1961"
+- "4/16/1961"
+- "4/16/61"
+- "4-16-1961"
+- "4-16-61"
+- 1961,4,16
+
+The following code demonstrates using the `is a date` operator.
+
+```text
+if value is a date
+them answer "valid date"
+else answer "invalid date"
+```
+
 The `convert` command converts a date expression to a specific format
 and places the result in the `it` variable.
 The format of the input expression can optionally
@@ -3601,10 +3632,12 @@ The syntax is
 | `short date`       | 2/13/43                     |
 | `abbreviated date` | Sat, Feb 13, 1943           |
 | `long date`        | Saturday, February 13, 1943 |
-| `dateItems`        | 1943,2,13,23,31,30,7        |
+| `dateItems`        | 1943,2,13,23,31,30,1        |
 
 The "dateItems" format is a comma-separated string containing
-the year, month, day, hour, minute, second, and
+the year, month, day, hour, minute, second, and day of the week.
+The day of the week number is
+1 for Sunday, 2 for Monday, ..., and 7 for Saturday.
 
 Seconds values are from midnight on January 1, 1904.
 Negative values are before that.
@@ -3612,15 +3645,25 @@ Negative values are before that.
 The format "abbreviated date" can also be written as
 "abbrev date" or "abbr date".
 
-For example:
+The following code converts a number fo seconds to a `dateItems` value.
 
 ```text
 put 1234567890 into seconds
-convert seconds to dateItems
+convert seconds from seconds to dateItems
 answer it -- displays a string like "1943,2,13,23,31,30,7
 ```
 
-For example, to get the date two weeks from today:
+The following code gets the day of the week of a given date.
+
+```text
+put "Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday" into daysOfWeek
+put "4/16/1961" into bd
+convert bd from short date to dateItems
+put the last item in it into dayOfWeek
+answer item dayOfWeek of daysOfWeek
+```
+
+The following code gets the date that is two weeks from today.
 
 ```text
 convert the seconds to dateItems
@@ -3640,12 +3683,23 @@ any item in dateItems is set to a negative number.
 
 The following functions return time values:
 
-| Function        | Value Returned or Example                |
-| --------------- | ---------------------------------------- |
-| `the sec[ond]s` | number since midnight on January 1, 1904 |
-| `the long time` | "2:16:38 PM"                             |
-| `the ticks`     | number of ticks since Mac was started    |
-| `the time`      | "2:16 PM"                                |
+| Function        | Value Returned or Example             |
+| --------------- | ------------------------------------- |
+| `the long time` | "2:16:38 PM"                          |
+| `the ticks`     | number of ticks since Mac was started |
+| `the time`      | "2:16 PM"                             |
+
+To determine if a container holds a valid time,
+use the `is a date` operator.
+This does not distinguish between dates and times.
+
+The following code demonstrates using the `is a date` operator.
+
+```text
+if value is a date
+them answer "valid date"
+else answer "invalid date"
+```
 
 The `convert` command can also be used to convert times.
 
