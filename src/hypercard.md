@@ -5075,6 +5075,34 @@ delete card field "Some Name"
 go to this card -- updates the UI
 ```
 
+#### divide Command
+
+The `divide` command divides the number in a given container by a number.
+The numeric value of an empty container is zero.
+An "Expected number here" error occurs if the container
+is not empty and does not contain a number.
+
+The following commands divides numbers using the `it` variable:
+
+```text
+get 6
+divide it by 2
+answer it -- displays 3 in a dialog
+```
+
+The following commands divides the values in two fields
+and place the result in a third field:
+
+```text
+put card field "n1" into result
+divide result by card field "n2"
+put result into card field "quotient"
+```
+
+If the value after the `by` keyword evaluates to zero,
+the result is the string "INF".
+No error is reported.
+
 #### do Command
 
 The `do` command takes any container as a parameter.
