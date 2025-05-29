@@ -705,13 +705,14 @@ When going to a card in a different stack,
 the visual effect is only applied if
 the stack is configured to have the same size.
 
-There are 30 effects and six speeds.
+There are 30 effects and 7 speeds.
 To see a list of the supported effects, open the Home stack,
 click the "Stack Kit" button, click "HyperTalk Reference",
 click "Commands", scroll down to "visual" and click it, and
 click the word "effect" that is underlined and italicized.
 The speeds in order from slowest to fastest are
-"very slowly", "very slow", "slowly", "slow", "fast", and "very fast".
+"very slowly", "very slow", "slowly", "slow", default, "fast", and "very fast".
+If no speed is specified, it will default to a speed between "slow" and "fast".
 
 To specify a visual effect that is trigger by a specific button:
 
