@@ -6363,6 +6363,10 @@ The default value will appear in the dialog field and
 will be selected so the user can just begin typing to replace it.
 For example, `ask "What is your favorite color?" with "yellow"`.
 
+The default value can be just a string that
+shows the required format of the value.
+For example, `ask "When is your birthday?" with "month day"`.
+
 To hide the user response from onlookers, use the `ask password` command.
 This displays filled circles in the field
 in place of the characters that are typed.
