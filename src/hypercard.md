@@ -845,7 +845,8 @@ an ID of 19 and a style of "Check Box".
 The property "hilite" is used to indicate whether a checkbox is checked.
 To sort all the cards where that checkbox is checked
 before all the cards where it is unchecked, use the command
-`sort by hilite of background button id 19 is false`.
+`sort by hilite of background button id 19 is false` or
+`sort by descending hilite of background button id 19`.
 If `is false` is omitted, it is treated as though `is true` where present
 which sorts unchecked before checked.
 
@@ -877,6 +878,11 @@ is the first one with the given background.
 Suppose we have a stack with multiple backgrounds and
 the cards with each background ARE NOT all grouped together.
 To remedy this, use the command `sort by number of background`.
+
+If the expression after the `by` keyword is invalid,
+perhaps referencing a field that is not present in the cards,
+an error dialog will appear with a message like
+"The sort key was not a valid expression for any card."
 
 ### Card Issues
 
@@ -3462,8 +3468,11 @@ examine the scripts in provided stacks such as the Home stack.
 One way to execute HyperTalk commands is to enter them in the Message Box.
 This is a single, small window that allows
 entry of a single HyperTalk command on one line.
+
 If the text entered extends past the right edge, that portion
 will not be visible and the text cannot be scrolled horizontally.
+The width of the message box can be changed
+by dragging just inside the border of its lower-right corner.
 
 To execute the command entered in the Message Box, press the return key.
 The text cursor is not required to be at the end of the command
