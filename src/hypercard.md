@@ -836,8 +836,18 @@ on openStack
 end openStack
 ```
 
-The expression after the `by` keyword can be a field reference,
-a chunk expression, or an expression that combines multiple of those.
+The expression after the `by` keyword can be
+a field reference, property reference, chunk expression,
+or expression that combines multiple of those.
+
+Suppose we have a stack with a background button that has
+an ID of 19 and a style of "Check Box".
+The property "hilite" is used to indicate whether a checkbox is checked.
+To sort all the cards where that checkbox is checked
+before all the cards where it is unchecked, use the command
+`sort by hilite of background button id 19 is false`.
+If `is false` is omitted, it is treated as though `is true` where present
+which sorts unchecked before checked.
 
 Suppose we have a stack with two backgrounds named "rectangle" and "circle".
 Cards with the "rectangle" background have the fields "width" and "height".
