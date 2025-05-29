@@ -5736,6 +5736,9 @@ For example:
   the HyperCard app using a "zoom" style window.
 - `picture 137, resource, shadow, true, 32, true` specifies all the arguments.
 
+The `picture` command sets the value returned by the function `the result`
+to describe any errors that occurred while attempting to render the picture.
+
 A picture window can be closed by clicking its close box
 or executing the command `close window "{name}"`.
 The latter is especially useful for
