@@ -851,6 +851,16 @@ To sort all the circle cards in ascending order based on their area,
 use the command
 `sort cards of background "circle" numeric by pi * field radius * field radius`.
 
+When sorting in ascending order based on numeric values,
+if `numeric` is not specified then
+the number `2` will be sorted after the number `10`
+because "2" comes after "1".
+
+When sorting in ascending order based on date/time values,
+if `datetime` is not specified then
+the date `January 1, 2025` will be sorted after the date `February 1, 2025`
+because "J" comes after "F".
+
 After these commands are run, the card displayed
 is the first one with the given background.
 
