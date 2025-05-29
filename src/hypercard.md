@@ -874,6 +874,10 @@ because "J" comes after "F".
 After these commands are run, the card displayed
 is the first one with the given background.
 
+Suppose we have a stack with multiple backgrounds and
+the cards with each background ARE NOT all grouped together.
+To remedy this, use the command `sort by number of background`.
+
 ### Card Issues
 
 Sadly there is no easy way to:
