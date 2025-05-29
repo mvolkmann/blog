@@ -871,6 +871,8 @@ When sorting in ascending order based on date/time values,
 if `datetime` is not specified then
 the date `January 1, 2025` will be sorted after the date `February 1, 2025`
 because "J" comes after "F".
+When `datetime` is specified, if the date and time values entered in each card
+use different formats, they will still be sorted correctly.
 
 After these commands are run, the card displayed
 is the first one with the given background.
