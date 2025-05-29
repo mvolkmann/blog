@@ -5146,18 +5146,33 @@ add card field "n2" to result
 put result into card field "sum"
 ```
 
-#### answer command
+#### answer Command
 
 The `answer` command display a value in a dialog
-that contains an "OK" button for closing it.
-For example, `answer "Hello, World!"
+that contains buttons that can be clicked to close the dialog.
+If no button labels are specified, an "OK" button is supplied by default.
+For example, `answer "Hello, World!"`.
 
-Add the `with` keyword to the `answer` command
-to specify one, two, or three button labels.
+The first argument is an expression that gives the text display.
+The value must be 254 characters.
+Only the first 14 lines are displayed.
+
+Add the `with` keyword to specify one, two, or three button labels.
 For example, `answer "Do you like this card?" with "Yes" or "No" or "Maybe"`.
 The last button is styled as the default button
 that is selected if the return key is pressed.
+
 The variable `it` is set to the label of the selected button.
+
+The value displayed and the button labels
+all use the Geneva font with a size of 12
+and those cannot be changed.
+
+The width of the `answer` dialog is fixed,
+so there is a limit on the width of the buttons.
+Button labels should be no wider than the width of seven capital "M" characters.
+Button labels are centered in their button, so labels that
+are too long to fit will be cropped at their beginning and end.
 
 The `answer file` command opens a file selection dialog.
 It restricted to only allow selecting a file with a given type.
