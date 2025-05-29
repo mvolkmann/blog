@@ -710,8 +710,6 @@ The following HyperTalk commands mark or unmark cards in scripts:
 
 - `[un]mark all cards`
 
-To mark all cards that meet some criteria, use the command `mark {card-ref}`.
-
 ### Finding Cards
 
 To search for an occurrence of text, select Go .. Find... or press cmd-f.
@@ -5398,21 +5396,21 @@ The `go` command supports many arguments described below.
 
 - Ordinal
 
-  - `go first [card]` - 1st card in current stack
-  - `go second [card]` - 2nd card in current stack
-  - `go third [card]` - 3rd card in current stack
-  - `go last [card]` - last card in current stack
-  - `go card {n}` - nth card in current stack
+  - `go first [[marked] card]` - 1st card in current stack
+  - `go second [[marked] card]` - 2nd card in current stack
+  - `go third [[marked] card]` - 3rd card in current stack
+  - `go last [[marked] card]` - last card in current stack
+  - `go [marked] card {n}` - nth card in current stack
 
 - Positional
 
-  - `go next [card]` - next card
-  - `go prev[ious] [card]` - previous card
+  - `go next [[marked] card]` - next card
+  - `go prev[ious] [[marked] card]` - previous card
   - `go this [card]` - stay on current card
 
 - Other ways to go to another card in the current stack
 
-  - `go any card` - randomly selects a card?
+  - `go any [[marked] card]` - randomly selects a card?
   - `go bkgnd "{background-name}"
 
 - Other ways to go to another card, possibly in another stack
