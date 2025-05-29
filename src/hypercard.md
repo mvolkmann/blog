@@ -5659,8 +5659,8 @@ select it from the Apple menu with `doMenu Calculator`.
 The `palette` command displays a "PLTE" resource
 and its associated "PICT" resource.
 The "PICT" resource is a picture of a rectangular set of buttons.
-The "PLTE" resource specifies the messages to send
-when each of the buttons is clicked.
+The "PLTE" resource specifies the clickable regions in the picture
+and the message to send when each region is clicked.
 
 An example of a provided palette is the Navigator palette.
 It can be opened by opening the Message Box
