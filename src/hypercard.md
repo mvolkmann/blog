@@ -680,6 +680,68 @@ To navigate to a different card and dismiss the dialog, click its thumbnail.
 To remain on the current card and dismiss the dialog,
 click the background of the dialog.
 
+### Card Transitions
+
+To add a transition effect that occurs on card navigation, add a script
+like the following to each button whose handler navigates to a new card.
+In the `visual` command, the keyword `effect` is optional.
+
+```text
+on mouseUp
+  visual effect wipe right slowly
+  go to previous card
+end mouseUp
+
+on mouseUp
+  visual effect wipe left slowly
+  go to next card
+end mouseUp
+```
+
+The `visual` command cannot be used to transition between
+hiding and showing an object on a card.
+
+When going to a card in a different stack,
+the visual effect is only applied if
+the stack is configured to have the same size.
+
+There are 30 effects and six speeds.
+To see a list of the supported effects, open the Home stack,
+click the "Stack Kit" button, click "HyperTalk Reference",
+click "Commands", scroll down to "visual" and click it, and
+click the word "effect" that is underlined and italicized.
+The speeds in order from slowest to fastest are
+"very slowly", "very slow", "slowly", "slow", "fast", and "very fast".
+
+To specify a visual effect that is trigger by a specific button:
+
+1. Select the Button tool.
+1. Double-click the button to open its "Button Info" dialog.
+1. Click the "Tasks..." button.
+1. Select "Visual Effect" in the left list.
+1. Select an effect from the center list.
+1. Select a speed from the right radio buttons.
+1. Click the "Assign Tasks" button.
+
+This adds a `visual effect` command to the `mouseUp` handler.
+If one is already present, it is replaced.
+
+Clicking the button will only exercise the visual effect
+if the button has also been configured to navigate to another card.
+To configure this, open the "Button Info" dialog for the button
+and do one of the following:
+
+- Click the "LinkTo..." button and follow the instructions
+  for this in the "Creating Buttons" section above.
+- Click the "Tasks..." button and follow the instructions
+  for this in the "Creating Buttons" section above.
+- Click the "Scripts..." button and manually
+  add a `go` command after the `visual` command.
+
+The "LinkTo..." and "Tasks..." options
+add a `go` command to the `mouseUp` handler.
+If one is already present, it is replaced.
+
 ### Marking Cards
 
 Marking cards provides a way to identify a subset of
@@ -3231,58 +3293,6 @@ for referring to those containers.
 It seems there is no way to change the background used by an existing card.
 The only option seems to be copying the content from the existing card
 to a new card that use the desired background.
-
-## Card Transitions
-
-To add a transition effect that occurs on card navigation, add a script
-like the following to each button whose handler navigates to a new card.
-In the `visual` command, the keyword `effect` is optional.
-
-```text
-on mouseUp
-  visual effect wipe right slowly
-  go to previous card
-end mouseUp
-
-on mouseUp
-  visual effect wipe left slowly
-  go to next card
-end mouseUp
-```
-
-When going to a card in a different stack,
-the visual effect is only applied if
-the stack is configured to have the same size.
-
-There are 27 effects and five speeds.
-To specify a visual effect that is trigger by a specific button:
-
-1. Select the Button tool.
-1. Double-click the button to open its "Button Info" dialog.
-1. Click the "Tasks..." button.
-1. Select "Visual Effect" in the left list.
-1. Select an effect from the center list.
-1. Select a speed from the right radio buttons.
-1. Click the "Assign Tasks" button.
-
-This adds a `visual effect` command to the `mouseUp` handler.
-If one is already present, it is replaced.
-
-Clicking the button will only exercise the visual effect
-if the button has also been configured to navigate to another card.
-To configure this, open the "Button Info" dialog for the button
-and do one of the following:
-
-- Click the "LinkTo..." button and follow the instructions
-  for this in the "Creating Buttons" section above.
-- Click the "Tasks..." button and follow the instructions
-  for this in the "Creating Buttons" section above.
-- Click the "Scripts..." button and manually
-  add a `go` command after the `visual` command.
-
-The "LinkTo..." and "Tasks..." options
-add a `go` command to the `mouseUp` handler.
-If one is already present, it is replaced.
 
 ## Images
 
@@ -5873,6 +5883,13 @@ repeat with i = 1 to length(text)
   wait 5 ticks
 end repeat
 ```
+
+#### visual Command
+
+The `visual` command specifies
+a transition effect that occurs on card navigation.
+See the "Cards - Card Transitions" section
+for more details on the `visual` command.
 
 #### xy Command
 
