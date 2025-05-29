@@ -343,7 +343,7 @@ To create a new stack from scratch:
   - Screen: This fills the current screen.
   - Custom: Specify a size between 64x64 and 1280x1280 in 32-pixel increments
     by dragging the lower-right corner of
-    the rectangle under the "Card size" label.
+    the preview rectangle under the "Card size" label.
 
   This will default to the size of the stack currently being viewed.
 
@@ -2623,7 +2623,9 @@ the selectedLine of button id {n}
 ## Fields
 
 A text field is referred to as simply a "field".
-These hold text that can differ on each card within a stack.
+These hold up to 32,767 characters.
+Background fields can have a different value
+on each card that uses the background.
 For example, the background of the cards in the provided "Addresses" stack,
 shown below, contains "Name" and "Telephone" fields.
 Typically each field is preceded by a label
