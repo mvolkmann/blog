@@ -6357,6 +6357,12 @@ on mouseUp
 end mouseUp
 ```
 
+To supply a default response in the dialog, add the `with` keyword
+followed by an expression that evaluates to the default value.
+The default value will appear in the dialog field and
+will be selected so the user can just begin typing to replace it.
+For example, `ask "What is your favorite color?" with "yellow"`.
+
 To hide the user response from onlookers, use the `ask password` command.
 This displays filled circles in the field
 in place of the characters that are typed.
