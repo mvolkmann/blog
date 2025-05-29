@@ -5580,6 +5580,18 @@ do "go to" && cardRef
 
 The `help` command opens the "HyperCard Help" stack in a new window.
 
+#### lock screen Command
+
+The `lock screen` command prevents screen updates
+until the `unlock screen` command is executed.
+It is frequently used at the beginning of handlers
+make multiple modifications to the current card or
+go to other cards to gather data and then return to the current card.
+
+Handlers that use this command typically end with the `unlock screen` command.
+
+Several examples in the "Demos" section use this command.
+
 #### multiply Command
 
 The `multiply` command multiplies the number in a given container by a number.
@@ -5932,6 +5944,10 @@ repeat with i = 1 to length(text)
   wait 5 ticks
 end repeat
 ```
+
+#### unlock screen Command
+
+See the description of the `lock screen` command above.
 
 #### visual Command
 
