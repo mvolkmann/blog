@@ -4035,6 +4035,13 @@ If the commas in the field value are replaced by carriage return characters
 then the command `sort lines of card field "colors"`
 changes the field value to "blue" & return & "green" & return & "red".
 
+An expression can be added to the end of the `sort` command
+to specify the value on which to sort.
+For example, to sort the colors above on their length, use the command
+`sort items of card field "colors" by length(each)`.
+
+See the "Cards - Sorting Cards" section for more details on the `sort` command.
+
 When referring to a range, if the end of the range
 is greater than the number of elements available,
 the elements up to the end are used and no error is reported.
