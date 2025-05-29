@@ -6358,19 +6358,36 @@ end mouseUp
 ```
 
 To hide the user response from onlookers, use the `ask password` command.
-It displays filled circles in the field
+This displays filled circles in the field
 in place of the characters that are typed.
-By default the response saved in the `it` variable
+By default, the response saved in the `it` variable
 as an encrypted, integer value.
-This can be stored in a hidden text field
-and compared to the value from what the user types.
-Add the `clear` keyword to instead save it in clear text.
+
+Enter the correct password once in order to get its integer value.
+Then store that value in a hidden text field
+that will be compared to the value for the password that the user enters.
+One way to hide a field is to place an opaque button over it
+that does not display its name.
+
+Add the `clear` keyword to the `ask password` command
+to instead save the password in clear text.
+
+To require entering a password in order to open a stack,
+see the "Stack - Stack Protection" section.
 
 The following code demonstrates implementing password protection
-in a stack script:
+to the functionality of a button:
 
 ```text
-
+on mouseUp
+  ask password "Password"
+  if it is card field "encryptedPassword" then
+    -- Do the protected thing.
+  else
+    flash
+    answer "Incorrect password"
+  end if
+end mouseUp
 ```
 
 Using the `put` command to set `message` or `msg`
