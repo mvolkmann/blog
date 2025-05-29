@@ -5671,7 +5671,11 @@ add `, "{x}, {y}"` to the end of the `palette` command.
 
 To create a new palette:
 
-1.
+1. Open the Home stack.
+1. Click the "Stack Kit" button.
+1. Click "Power Tools".
+1. Click "Palette Maker".
+1. Follow the steps on that card.
 
 #### pass Command
 
