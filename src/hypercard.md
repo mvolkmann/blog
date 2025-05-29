@@ -788,7 +788,34 @@ For example, this treats the character é the same as the character e.
 To only search marked cards,
 add `of marked cards` to the end of the `find` command.
 
+### Background Names
+
+Each background has a unique ID.
+But by default they do not have an associated name.
+
+To add a name to the current background, open the Message Box
+and enter `set the name of this background to "some name"`.
+
+To get the background name of the current card,
+use the expression `the name of this background`.
+If a name has been assigned, this returns the string 'bkgnd "{name}"'.
+If no name has been assigned, this returns the string "bkgnd id {id}".
+
+To go to the first card with a given background name in the current stack,
+open the Message Box and enter `go to background "some name"`.
+
 ### Sorting Cards
+
+The `sort` command sorts all cards within a stack
+or only those with a given background.
+The syntax is
+`sort [[[marked] cards of] {stack-expr}|{background-expr}]
+[ascending|descending] [datetime|international|numeric|text] by {expr}`.
+When a part of the syntax is omitted, the default value used is:
+
+- sort all cards, not just those that are marked
+- sort order `descending`
+- sort type `text`
 
 To sort all the cards currently in a stack based on
 the content of a background field (appears on every card),
@@ -3396,6 +3423,11 @@ entry of a single HyperTalk command on one line.
 If the text entered extends past the right edge, that portion
 will not be visible and the text cannot be scrolled horizontally.
 
+To execute the command entered in the Message Box, press the return key.
+The text cursor is not required to be at the end of the command
+when the return key is pressed.
+It can be anywhere within the Message Box.
+
 Text entered in the Message Box is saved within a HyperCard session,
 even if the the Message Box is closed and then reopened later.
 It is not specified to the current stack.
@@ -5695,6 +5727,11 @@ For example:
 ```text
 send mouseUp to button myButton
 ```
+
+#### sort Command
+
+The `sort` command sorts cards within a stack.
+See the "Cards - Sorting Cards" section.
 
 #### subtract Command
 
