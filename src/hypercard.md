@@ -3726,7 +3726,15 @@ convert the seconds to dateItems
 put it into di
 add 12 to the fourth item in di -- adds 12 hours
 convert di to long time
-answer it
+answer it -- for 6:49:33 AM this gives 6:49:33 PM
+```
+
+A date and time can be combined. For example:
+
+```text
+put "4/16/1961 10:20" into value
+convert value [from date and time] to abbr date and short time
+answer it -- Sun, Apr 16, 1961 10:20AM
 ```
 
 ### Accessing Buttons
