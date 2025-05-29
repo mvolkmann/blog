@@ -491,6 +491,8 @@ which opens the following dialog:
 If the user level of the stack causes
 the "Protect Stack..." menu item to be missing from "File" menu,
 hold down the command key when opening the File menu to reveal it.
+If a password has already been set for the stack,
+it must be entered to gain access to the "Protect Stack" dialog.
 
 When the "Can't Modify Stack" checkbox is checked,
 users can browse the stack, but are prevented from making any changes
@@ -511,11 +513,8 @@ prevents users from seeing:
 
 When the "Private Access" checkbox is checked,
 users must enter a password in order to access the stack.
-If no password has been specified,
+If the "OK" buttons is clicked and no password has been specified,
 a dialog for entering one is opened.
-
-The radio buttons under "Limit user level to"
-set the default user level that is active when the stack is opened.
 
 The "Set Password..." button opens a dialog where a password can be entered.
 If the "Private Access" checkbox is checked,
@@ -523,6 +522,9 @@ users must enter this password (once per HyperCard session)
 in order to open the stack.
 Regardless of the "Private Access" setting,
 users must enter this password in order to open the "Protect Stack" dialog.
+
+The radio buttons under "Limit user level to"
+set the default user level that is active when the stack is opened.
 
 Users that have access to a stack file can find ways
 in the HyperCard app to bypass its password protection.
@@ -5012,7 +5014,7 @@ HyperTalk defines the following predefined constants:
 The following variables are set by HyperCard and cannot be modified:
 
 - `it`: stores the result of some commands such as
-  `ask`, `get`, and `read from file`.
+  `answer`, `ask`, `get`, and `read from file`.
 - modifier keys state `commandKey`, `optionKey`, and `shiftKey`
 - `me`: refers to the current object
 - `the clickLoc`: location of the last mouse click
@@ -5182,6 +5184,14 @@ For example:
 answer file "Select an application to launch." of type "APPL".
 if it is not empty then open it
 ```
+
+#### ask Command
+
+The `ask` command displays a dialog box that asks the user a question
+and includes a field where they can type an answer,
+along with OK and Cancel buttons.
+
+See the "Dialogs" section for more detail.
 
 #### beep Command
 
@@ -6336,8 +6346,8 @@ To hide the value entered by the user, use `answer password`.
 To display a dialog box that asks the user a question
 and includes a field where they can type an answer,
 along with OK and Cancel buttons, use the `ask` command.
-The result will be in a variable named `it`.
-For example the following script can be attached to a button:
+The response is placed in the `it` variable.
+For example, the following script can be attached to a button:
 
 ```text
 on mouseUp
@@ -6345,6 +6355,22 @@ on mouseUp
   put "Hello," && it & "!" into greeting
   put greeting into card field "user name"
 end mouseUp
+```
+
+To hide the user response from onlookers, use the `ask password` command.
+It displays filled circles in the field
+in place of the characters that are typed.
+By default the response saved in the `it` variable
+as an encrypted, integer value.
+This can be stored in a hidden text field
+and compared to the value from what the user types.
+Add the `clear` keyword to instead save it in clear text.
+
+The following code demonstrates implementing password protection
+in a stack script:
+
+```text
+
 ```
 
 Using the `put` command to set `message` or `msg`
