@@ -4027,9 +4027,17 @@ delete the second item from colors
 -- colors is now "red,blue"
 ```
 
-When getting a range, if the end of the range
+The `sort` command can be used to sort the items or lines within a string.
+Suppose the card field "colors" contains "red,green,blue".
+The command `sort items of card field "colors"`
+changes the field value to "blue,green,red".
+If the commas in the field value are replaced by carriage return characters
+then the command `sort lines of card field "colors"`
+changes the field value to "blue" & return & "green" & return & "red".
+
+When referring to a range, if the end of the range
 is greater than the number of elements available,
-the elements up to the end are returned and no error is reported.
+the elements up to the end are used and no error is reported.
 
 ### Scripts
 
