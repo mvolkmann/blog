@@ -702,13 +702,20 @@ The following HyperTalk commands mark or unmark cards in scripts:
 
 - `[un]mark cards where {boolean-expression}`
 
-  e.g. `mark cards where the length  of field dogBreed > 6`
+  Typically it is desired to run
+  the command `unmark all cards` before running this.
+  For example, `mark cards where the length  of field dogBreed > 6`.
 
 - `[un]mark cards by finding {string} in {field-ref}`
 
-  e.g. `mark cards by finding whip in field dogBreed`
+  Typically it is desired to run
+  the command `unmark all cards` before running this.
+  For example, `mark cards by finding whip in field dogBreed`.
 
 - `[un]mark all cards`
+
+To get the number of cards that are marked,
+use the expression `the number of marked cards`.
 
 ### Finding Cards
 
