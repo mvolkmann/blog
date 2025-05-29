@@ -6650,7 +6650,10 @@ end mouseUp
 See the "iMac G3" page for details on using Adobe Acrobat PDFWriter
 as a printer.
 
-TODO: Add detail about all the printing options.
+To print all marked cards in the current stack,
+use the command `print marked cards`.
+
+TODO: Add more detail about all the printing options.
 
 ## Palettes
 
