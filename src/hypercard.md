@@ -5654,6 +5654,25 @@ The Calculator is a "desk accessory", not an application.
 To open it with HyperTalk,
 select it from the Apple menu with `doMenu Calculator`.
 
+#### palette Command
+
+The `palette` command displays a "PLTE" resource
+and its associated "PICT" resource.
+The "PICT" resource is a picture of a rectangular set of buttons.
+The "PLTE" resource specifies the messages to send
+when each of the buttons is clicked.
+
+An example of a provided palette is the Navigator palette.
+It can be opened by opening the Message Box
+and entering `nav` or `palette Navigator`.
+The palette appears near the upper-left corner of the stack window.
+To specify another location,
+add `, "{x}, {y}"` to the end of the `palette` command.
+
+To create a new palette:
+
+1.
+
 #### pass Command
 
 A message handler can forward the message it trapped up to
