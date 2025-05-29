@@ -1138,8 +1138,8 @@ The tools include:
     To change the shape and size of the brush,
     Select Options ... Brush Shape... before painting.
 
-    <img alt="HyperCard Brush Shape dialog" style="width: 50%"
-      src="/blog/assets/hypercard-brush-shape-dialog.png?v={{pkg.version}}">
+    <img alt="HyperCard Brush dialog" style="width: 50%"
+      src="/blog/assets/hypercard-brush-dialog.png?v={{pkg.version}}">
 
     For example, select the diagonal line brush shape
     to draw calligraphy.
@@ -1199,10 +1199,10 @@ The tools include:
 
     To change the line width from the default of 1 pixel,
     Select Options ... Line Size... or double click this tool before drawing.
-    This opens the "Line Size" dialog where
+    This opens the "Line Size" palette where
     a width of 1, 2, 3, 4, 6, or 8 pixels can be selected.
 
-    <img alt="HyperCard Line Size dialog" style="width: 30%"
+    <img alt="HyperCard Line Size palette" style="width: 30%"
       src="/blog/assets/hypercard-line-size-dialog.png?v={{pkg.version}}">
 
     To constrain the angle of the line to multiples of 15 degrees,
