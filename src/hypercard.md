@@ -813,7 +813,7 @@ The syntax is
 [ascending|descending] [datetime|international|numeric|text] by {expr}`.
 When a part of the syntax is omitted, the default value used is:
 
-- sort all cards, not just those that are marked
+- sort all cards in the current stack, not just those that are marked
 - sort order `descending`
 - sort type `text`
 
@@ -823,7 +823,7 @@ open the Message Box and enter a command like
 `sort by field dogName`.
 This changes the number of each card in the stack, but not their IDs.
 
-Newly added cards are not automatically places in the current sort order
+Newly added cards are not automatically placed in the last sort order
 because the contents of their fields is not known when the card is created.
 
 To automatically resort the stack each time it is opened,
@@ -835,6 +835,24 @@ on openStack
   sort by field dogName
 end openStack
 ```
+
+The expression after the `by` keyword can be a field reference,
+a chunk expression, or an expression that combines multiple of those.
+
+Suppose we have a stack with two backgrounds named "rectangle" and "circle".
+Cards with the "rectangle" background have the fields "width" and "height".
+Cards with the "circle" background have the field "radius".
+
+To sort all the rectangle cards in descending order based on their area,
+use the command
+`sort cards of background "rectangle" descending numeric by field width & field height`.
+
+To sort all the circle cards in ascending order based on their area,
+use the command
+`sort cards of background "circle" numeric by pi * field radius * field radius`.
+
+After these commands are run, the card displayed
+is the first one with the given background.
 
 ### Card Issues
 
