@@ -5583,12 +5583,13 @@ The `help` command opens the "HyperCard Help" stack in a new window.
 #### lock screen Command
 
 The `lock screen` command prevents screen updates
-until the `unlock screen` command is executed.
-It is frequently used at the beginning of handlers
+during the execution of a handler.
+Updates resume when the `unlock screen` command is executed
+or when the handler ends.
+
+The `lock screen` command is frequently used at the beginning of handlers that
 make multiple modifications to the current card or
 go to other cards to gather data and then return to the current card.
-
-Handlers that use this command typically end with the `unlock screen` command.
 
 Several examples in the "Demos" section use this command.
 
@@ -7387,9 +7388,6 @@ to account for newly added and deleted cards.
 
      -- Update the tableOfContents field.
      put toc into card field tableOfContents
-
-     -- Resume screen updates.
-     unlock screen
    end openCard
    ```
 
@@ -7570,7 +7568,6 @@ on mouseUp
   set the height of ref to 20
   set the dontWrap of ref to true
   choose browse tool
-  unlock screen
 end mouseUp
 ```
 
