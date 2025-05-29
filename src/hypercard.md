@@ -5586,12 +5586,14 @@ The `lock screen` command prevents screen updates
 during the execution of a handler.
 Updates resume when the `unlock screen` command is executed
 or when the handler ends.
+Both commands change the value of the global Boolean property `lockScreen`.
 
 The `lock screen` command is frequently used at the beginning of handlers that
 make multiple modifications to the current card or
 go to other cards to gather data and then return to the current card.
 
-Several examples in the "Demos" section use this command.
+See the examples of using the `lock screen` and `unlock screen` commands
+in the "Drawing" and "Demos" sections.
 
 #### multiply Command
 
@@ -5948,7 +5950,25 @@ end repeat
 
 #### unlock screen Command
 
+The `unlock screen` command resumes updates to the screen
+after the `lock screen` command has been executed.
 See the description of the `lock screen` command above.
+
+The `unlock screen` command takes optional arguments
+to specify a visual effect to be applied.
+This is useful when the current card was modified
+after the `lock screen` command was executed.
+The modifications could include scripted use of the painting tools
+and adding/modifying/removing buttons and fields.
+
+The "Drawing" section contains an example of drawing a pie chart
+that includes the following commands:
+
+```text
+lock screen
+-- Make modifications to the current card.
+unlock screen with dissolve slow
+```
 
 #### visual Command
 
@@ -6466,10 +6486,14 @@ in all stacks, even if the Tools palette is not open:
 ### Drawing
 
 All the painting tools can be used from scripts to draw on a card or background.
-For example, add a "Draw" button with the following script:
+
+The following code demonstrates drawing a pie chart
+when a "Draw" button is clicked:
 
 ```text
 on mouseUp
+  lock screen
+
   -- Draw a circle
   choose oval tool
   set lineSize to 2
@@ -6498,6 +6522,8 @@ on mouseUp
   reset paint
 
   choose browse tool
+
+  unlock screen with dissolve slow
 end mouseUp
 ```
 
@@ -6505,12 +6531,16 @@ Add a "Clear" button with the following script to erase what was drawn above:
 
 ```text
 on mouseUp
+  lock screen
+
   choose select tool
   drag from 120,50 to 290,220
   doMenu "Clear Picture"
   -- This also works but is more obscure.
   -- keyDown numToChar(8) -- delete key
   choose browse tool
+
+  unlock screen with dissolve slow
 end mouseUp
 ```
 
