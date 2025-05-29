@@ -728,8 +728,12 @@ This adds a `visual effect` command to the `mouseUp` handler.
 If one is already present, it is replaced.
 
 Clicking the button will only exercise the visual effect
-if the button has also been configured to navigate to another card.
-To configure this, open the "Button Info" dialog for the button
+if the button has also been configured to navigate to another card
+**in the same handler**.
+Commands that navigate to another card include `go`, `push`, `pop`, and `find`.
+
+To configure a button to navigate to another card,
+open the "Button Info" dialog for the button
 and do one of the following:
 
 - Click the "LinkTo..." button and follow the instructions
@@ -737,7 +741,7 @@ and do one of the following:
 - Click the "Tasks..." button and follow the instructions
   for this in the "Creating Buttons" section above.
 - Click the "Scripts..." button and manually
-  add a `go` command after the `visual` command.
+  add one of the navigation commands after the `visual` command.
 
 The "LinkTo..." and "Tasks..." options
 add a `go` command to the `mouseUp` handler.
