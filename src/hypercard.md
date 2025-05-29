@@ -80,8 +80,8 @@ Stacks can be shared and edited by one user at a time.
 
 To launch HyperCard, double click on the app icon
 or on the icon of a HyperCard stack.
-If the app icon was double clicked, the Home stack will be opened.
-The first card in the opened stack will be displayed.
+If the app icon was double clicked, the Home stack is opened.
+The first card in the opened stack is displayed.
 
 ## Help
 
@@ -512,7 +512,7 @@ prevents users from seeing:
 When the "Private Access" checkbox is checked,
 users must enter a password in order to access the stack.
 If no password has been specified,
-a dialog for entering one will be opened.
+a dialog for entering one is opened.
 
 The radio buttons under "Limit user level to"
 set the default user level that is active when the stack is opened.
@@ -640,13 +640,13 @@ To copy the current card and paste the copy after another card:
 - Navigate to the destination card.
 - Select Edit ... Paste Card.
 
-The background of new card will be the same as that of the copied card,
+The background of new card is the same as that of the copied card,
 not a copy of the background.
 Modifying the background will affect all cards that use the background.
 
 If the card is pasted into a different stack
 that does not already contain the background of the card,
-that background will be added to the stack.
+that background is added to the stack.
 
 ### Moving Cards
 
@@ -661,7 +661,7 @@ Modifying the background will affect all cards that use the background.
 
 If the card is pasted into a different stack
 that does not already contain the background of the card,
-that background will be added to the stack.
+that background is added to the stack.
 
 ### Deleting Cards
 
@@ -747,6 +747,10 @@ The "LinkTo..." and "Tasks..." options
 add a `go` command to the `mouseUp` handler.
 If one is already present, it is replaced.
 
+When clicking a button triggers a "zoom open" or "zoom close" effect,
+the center of the zoom is the mouse location when the button is clicked.
+Otherwise it is the center of the card.
+
 ### Marking Cards
 
 Marking cards provides a way to identify a subset of
@@ -798,7 +802,7 @@ Key facts about the `find` command are:
 - The matching text is indicated on cards
   by surrounding it with a black rectangle.
 - If no match is found, the beep sound is played.
-- The last search is remembered. If you begin a new search later,
+- The last search is remembered. If a new search is begun later,
   the previous search text will be in the quotes.
 - When the search string contains spaces,
   they are treated as delimiters between search terms
@@ -936,12 +940,12 @@ use the command
 
 When sorting in ascending order based on numeric values,
 if `numeric` is not specified then
-the number `2` will be sorted after the number `10`
+the number `2` is sorted after the number `10`
 because "2" comes after "1".
 
 When sorting in ascending order based on date/time values,
 if `datetime` is not specified then
-the date `January 1, 2025` will be sorted after the date `February 1, 2025`
+the date `January 1, 2025` is sorted after the date `February 1, 2025`
 because "J" comes after "F".
 When `datetime` is specified, if the date and time values entered in each card
 use different formats, they will still be sorted correctly.
@@ -1031,7 +1035,7 @@ The tools include:
     The Select tool selects a rectangular area specified by
     dragging from any corner of the painted area to be selected
     to the opposite corner.
-    The selected area will be surrounded by a rectangle of marching ants.
+    The selected area is surrounded by a rectangle of marching ants.
     The selected area can then be copied, cut, deleted, dragged, or transformed
     (using the Options menu items Rotate, Slant, Distort, and Perspective).
 
@@ -1054,7 +1058,7 @@ The tools include:
     1. Navigate to the destination card.
     1. Select Edit ... Paste Button (cmd-v).
 
-       The pasted content will be selected and can be dragged to a new location.
+       The pasted content is selected and can be dragged to a new location.
 
     To both constrain the movement AND duplicate the selected area,
     hold down both the shift and option keys while dragging it.
@@ -1088,7 +1092,7 @@ The tools include:
     When the mouse button is released, the dragged path will automatically
     be closed, as if with a straight line to the starting point.
     Each contiguous set of black pixels inside the selected area
-    will be surrounded by a path of marching ants.
+    is surrounded by a path of marching ants.
     The selection is the combined contents of those paths,
     not the entire contents of the lassoed area.
     The selection can then be copied, cut, deleted, or dragged.
@@ -1108,8 +1112,8 @@ The tools include:
     selecting a different size from Options ... Line Size...
 
     If the current pixel color at the start of the drag is black
-    then the drawing color will be white.
-    Otherwise it will be black.
+    then the drawing color is white.
+    Otherwise it is black.
     It makes no difference whether the start pixel color
     comes from the card or background domain.
     The drawing color remains the same throughout the drag.
@@ -1373,7 +1377,7 @@ The tools include:
     its text properties can be changed.
     Opening the "Text Properties" dialog again and
     changing them affects the text already typed and
-    the text that will be typed after the dialog is closed.
+    the text that is typed after the dialog is closed.
 
     To apply a pattern to painted text, see the "Patterns" section below.
 
@@ -1982,8 +1986,8 @@ To add a button to the current card.
 1. Decide whether the button name should be displayed
    by checking or unchecking the "Show Name" checkbox.
 
-   - It will be checked if the button was created with "New Button".
-   - It will be unchecked if the button was created with cmd-drag.
+   - It is checked if the button was created with "New Button".
+   - It is unchecked if the button was created with cmd-drag.
 
 1. Optionally check the "Auto Hilite" checkbox to
    cause the button to highlight when it is clicked.
@@ -1995,7 +1999,7 @@ To add a button to the current card.
 1. Optionally uncheck the "Enabled" checkbox to
    cause the button to be disabled by default.
 
-   When a button is disabled, it will be grayed out
+   When a button is disabled, it is grayed out
    and clicking it will not run its script.
 
    To enable/disable a button from a script, use the following command:
@@ -2130,7 +2134,7 @@ To create or modify an icon in the current stack:
    1. Select Edit ... Icon... and select the icon to be edited.
 
       If the stack does not already contain any custom icons,
-      an ID will be automatically assigned and no initial pixels will be black.
+      an ID is automatically assigned and no initial pixels will be black.
       If the stack does contain custom icons,
       select one as the starting point.
       Scroll through them using the scrollbar at the bottom, or use
@@ -2194,7 +2198,7 @@ and make it available in your stack (destination):
 1. Press cmd-s to save the changes.
 1. Press cmd-q to quit ResEdit.
 
-The copied icon will be available when the "Icon..." button
+The copied icon is available when the "Icon..." button
 in a "Button Info" dialog is clicked.
 
 When the "Icon Editor" dialog is open, the following new menu items appear.
@@ -2506,7 +2510,7 @@ end mouseStillDown
 ```
 
 If several buttons are clicked while a handler is executing,
-only messages for the last button clicked will be delivered.
+only messages for the last button clicked are delivered.
 To demonstrate this, create three buttons that each have `mouseUp` handler.
 In the first handler, do the following:
 
@@ -2777,7 +2781,7 @@ To change the default text style of a field:
   Geneva, Helvetica, Monaco, Palatino, New York, and Times.
   If a font other than these is selected and
   users of the stack do not have the chosen font,
-  a substitute font will be selected automatically
+  a substitute font is selected automatically
   and the cards may not render as expected.
   This is not an issue for painted text because
   the fonts used are not required by others that browse the stack.
@@ -2808,12 +2812,12 @@ or the line number containing text cursor when there is no selection,
 use the function `theSelectedLine`
 which returns a string like "line 3 of card field 2".
 If no text is selected,
-the line number will be the one that contains the text cursor.
+the line number is the one that contains the text cursor.
 
 To get the location of the upper-left corner of the selected
 in stack window coordinates, use the function `the selectedLoc`
 which returns a string containing the x and y coordinates like "135, 110".
-If no text is selected, the coordinates will be that of the text cursor.
+If no text is selected, the coordinates are that of the text cursor.
 
 To replace the selected text with new text,
 use a `put` command like `put "new text" into the selection`.
@@ -3071,7 +3075,7 @@ The stacking order of buttons and fields with their domain can be changed.
 To do so:
 
 - Select the Button or Field tool.
-- Selecting the button or field whose order will be changed.
+- Select the button or field whose order will be changed.
 - Select Objects ... Bring Closer (cmd-plus) to increase the part number.
 - Select Objects ... Send Farther (cmd-minus) to decrease the part number.
 
@@ -4314,7 +4318,7 @@ The debug menu contains the following menu items:
   1. Continue execution with the Step, Step Into, or Go command
      to use the new variable values.
 
-  At the end of execution, only global variables will be displayed.
+  At the end of execution, only global variables are displayed.
 
 - Message Watcher
 
@@ -4901,7 +4905,7 @@ Unlike functions, message handlers cannot return a value.
 
 For example, in a stack with two cards where the first card contains a button:
 
-1. Open the stack. The first card will be displayed.
+1. Open the stack. The first card is displayed.
 1. Select the Button tool.
 1. Double-click the button.
 1. Click the "Script" button.
@@ -5147,6 +5151,13 @@ put result into card field "sum"
 The `answer` command display a value in a dialog
 that contains an "OK" button for closing it.
 For example, `answer "Hello, World!"
+
+Add the `with` keyword to the `answer` command
+to specify one, two, or three button labels.
+For example, `answer "Do you like this card?" with "Yes" or "No" or "Maybe"`.
+The last button is styled as the default button
+that is selected if the return key is pressed.
+The variable `it` is set to the label of the selected button.
 
 The `answer file` command opens a file selection dialog.
 It restricted to only allow selecting a file with a given type.
@@ -5406,6 +5417,13 @@ in the "Chunk Expressions" section.
 #### find Command
 
 See the "Cards - Finding Cards" section.
+
+#### flash Command
+
+The `flash` command alternates the color of every pixel on the card
+between white and black two times.
+An optional argument specifies the number of times to flash.
+This is useful for calling attention to a condition.
 
 #### go Command
 
@@ -5693,9 +5711,10 @@ For example:
 set globalLoc of window "My File" to 17, 50 -- near upper-left of screen
 
 set loc of window "My File" to 0, 0 -- upper-left of stack window
-If the floating argument is false, the picture will be
-behind the stack window if the stack window is clicked.
 ```
+
+If the floating argument is "false", the picture will be
+behind the stack window if the stack window is clicked.
 
 The most common property to set is `visible` to hide and show the picture.
 
@@ -6530,7 +6549,7 @@ on mouseUp
 end mouseUp
 ```
 
-The new card will be inserted immediately after the current card.
+The new card is inserted immediately after the current card.
 
 ### Long Running Tasks
 
@@ -6800,7 +6819,7 @@ for analyzing outside of HyperCard:
    See the script of this button for tips on how to
    iterate through all the scripts in a stack.
 1. In the file selection dialog that appears,
-   locate and select the stack whose scripts will be exported.
+   locate and select the stack whose scripts are to be exported.
 1. Click the "Open" button.
 1. In the next file selection dialog that appears,
    select a destination directory and enter a name of the file to create.
@@ -7399,7 +7418,7 @@ The screenshots below show this in its collapsed and expanded forms.
 
 ### Detecting Duplicates in a List
 
-In a field where multiple items will be entered on separate lines,
+In a field where multiple items can be entered on separate lines,
 we can prevent duplicates from being entered.
 To do this, create a field with its "Style" set to "Scrolling"
 and "Don't Wrap" checked.
