@@ -6610,9 +6610,13 @@ The steps to implement a hyperlink are:
    ```
 
 To display gray underlines under every group in every stack,
-open the Message Box and enter `show groups`.
+execute the `show groups` command.
+This can be done in the `openStack` handler.
+
 To remove the gray underlines,
-open the Message Box and enter `hide groups`.
+execute the `hide groups` command.
+This can be done in the `closeStack` handler
+to avoid enabling this preference in other stacks.
 
 To change the style of all group text in
 all fields of all cards in the current stack
