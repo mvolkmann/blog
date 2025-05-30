@@ -5585,6 +5585,10 @@ The `hide` command hides a button, field, stack title bar, window, menu bar,
 picture layer, or the Message Box.
 See the "Hiding and Showing" section for more detail.
 
+The `hide groups` command hides the gray underlines
+under text in fields that has the "Group" style.
+See the "Groups" section for more detail.
+
 #### lock screen Command
 
 The `lock screen` command prevents screen updates
@@ -5911,6 +5915,10 @@ send mouseUp to button myButton
 The `show` command shows a button, field, stack title bar, window, menu bar,
 picture layer, or the Message Box.
 See the "Hiding and Showing" section for more detail.
+
+The `show groups` command displays gray underlines
+under text in fields that has the "Group" style.
+See the "Groups" section for more detail.
 
 #### sort Command
 
