@@ -5940,7 +5940,31 @@ in the "Chunk Expressions" section.
 
 #### read from file Command
 
-The `read from file` command ...
+The `read from file` command reads text from
+a file that was opened with the `open file` command.
+It can optionally begin reading at a specified character index.
+It can read until:
+
+- the end of the file is reached
+- a given number of characters are read
+- a given character is encountered
+
+The syntax is one of:
+
+```text
+read from file {file-path-expr} [at {start-index}] for {character-count}
+read from file {file-path-expr} [at {start-index}] until {character}
+```
+
+The `until` character can be `EOF` or `end` to read to the end of the file.
+It can be the constant `return` to read to the end of the current line.
+
+The variable `it` is set to the text that is read
+or `empty` if there is no more to read.
+
+The index of the last character read is maintained.
+The next `read from file` command begins reading after that by default.
+To read from the beginning of the file again, close and reopen the file.
 
 #### reset paint Command
 
@@ -6982,10 +7006,8 @@ This command verifies that the file is not already open by another application.
 The function `the result` returns an error message
 if the file could not be opened.
 
-The `read file` command reads until a given character is encountered
+The `read from file` command reads until a given character is encountered
 or for a given number of characters.
-The character to read up to can be specified with the constants
-`return` (carriage return), `eof` (end of file), or `end` (same as `eof').
 
 The following example card contains two buttons and two fields.
 The "Open" button prompts for a text file to open
