@@ -5081,8 +5081,11 @@ The value of a local variables is lost when the
 message handler or function in which it is assigned ends.
 
 Global variables are shared across all cards in all stacks.
-They must be declared everywhere they are used with the keyword `global`.
-For example, `global favoriteColor, maximumTemperature, taxRate`
+They must be declared in all handlers and functions
+where they are used, before they are used, with the keyword `global`.
+For example, `global favoriteColor, maximumTemperature, taxRate`.
+Typically `global` commands appears at the beginning of handlers and functions.
+
 The value of a global variable is not lost when the
 message handler or function in which it is assigned ends.
 But the value is lost when the HyperCard app is quit.
@@ -5446,6 +5449,12 @@ For example, `multiply it by 2`.
 
 See more examples of using the `get` command
 in the "Chunk Expressions" section.
+
+#### global Command
+
+The `global` command declares that specified names
+used in a handler or function refer to global variables.
+See the section "Variables" for more detail.
 
 #### go Command
 
@@ -5931,8 +5940,8 @@ Highlights of the global properties include:
   when the `drag` command is executed;
   defaults to `0` which jumps immediately to the target point
 - `itemDelimiter`: delimiter character between items in fields
-- `scriptTextFont`: font family used in script editor windows
-- `scriptTextSize`: font size used in script editor windows
+- `scriptTextFont`: font family used in script editor windows; defaults to Monaco
+- `scriptTextSize`: font size used in script editor windows; defaults to 9
 - `stacksInUse`: list of paths to stacks currently in the message hierarchy
 - `textArrows`: Boolean indicating if the arrow keys can be used
   to move the text cursor in fields
