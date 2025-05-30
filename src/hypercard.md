@@ -5896,8 +5896,6 @@ in a `mouseUp` handler.
 #### select Command
 
 The `select` command selects a button or field.
-If a button is selected, the current tool changes to the Button tool.
-If a field is selected, the current tool changes to the Field tool.
 Once a button or field is selected, it is ready to
 drag to a new location, copy, cut, or delete.
 
@@ -5914,6 +5912,13 @@ The `select target` command is useful in functions and
 in handlers at a higher level in the message hierarchy.
 For example, when a button is clicked, a `mouseUp` handler
 in its card, background, or stack can use this to select the button.
+
+If a button is selected then the current tool changes to the Button tool,
+which displays an outline around all the buttons in card.
+If a field is selected then the current tool changes to the Field tool,
+which displays an outline around all the fields in card.
+To avoid having users see those outlines,
+execute the `lock screen` command before the `select` command.
 
 #### select text of Command
 
