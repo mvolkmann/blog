@@ -5455,6 +5455,20 @@ For example, `multiply it by 2`.
 See more examples of using the `get` command
 in the "Chunk Expressions" section.
 
+#### edit script Command
+
+The `edit script` command opens a script editor window for a given object.
+For example:
+
+```text
+edit script of button id 19
+edit script of field "firstName"
+edit script of this card
+edit script of this background
+edit script of this stack
+edit script of "some stack name"
+```
+
 #### global Command
 
 The `global` command declares that specified names
@@ -5869,6 +5883,15 @@ it will default to looking for a background field.
 
 See more examples of using the `put` command
 in the "Chunk Expressions" section.
+
+#### reset paint Command
+
+The `reset paint` command resets all paint properties to their default values.
+This command is typically used at the end of handlers
+that modify paint properties.
+
+The pie chart example in the "Drawing" section uses this command
+in a `mouseUp` handler.
 
 #### select Command
 
