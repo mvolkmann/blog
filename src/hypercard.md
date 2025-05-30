@@ -5428,8 +5428,46 @@ end repeat
 #### doMenu Command
 
 The `doMenu` command executes a menu item as if it were selected by the user.
+It can be used to execute HyperCard menu items and those on the Apple menu
+(ex. "Calculator" and "Sherlock 2").
+It can even be used when you have deleted the menu containing the menu item
+or you have opted to hide the menu bar.
 
-TODO: Add more detail.
+The menus that are present and the items in them can change
+based on the current state of the application.
+This includes the type of object that is selected.
+For example, the "Objects" menu is only present when
+the Browse, Button, or Field tool is selected.
+The "Paint" menu is only present when
+one of the paint tools is selected.
+
+In some cases the text of menu item changes based on what is selected.
+For example, the Edit menu contains a "Copy" menu item whose text is:
+
+- "Copy Card" when nothing is selected
+- "Copy Button" when a button is selected
+- "Copy Field" when a field is selected
+- "Copy Picture" when pixels on the paint layer are selected
+
+It can be easier to select a menu item using the `type` command
+to generate its keyboard shortcut.
+For example, the Copy menu item has the keyboard shortcut cmd-c
+which can be generated with `type "c" with commandKey`.
+
+The syntax is
+`doMenu {menu-item}, [{menu-name}] [without dialog] [with {key1} [, {key2}]]`.
+A commonly used example is `doMenu "New Card"`.
+
+The specified menu item must exactly match what is displayed in the menu.
+Specifying the menu name is only necessary if
+the same menu item appears in more than one menu, which is uncommon.
+Adding `without dialog` suppresses the confirmation dialog
+normally presented by some commands such as "Delete Stack..."
+and "Cut Field..." (only when a background field is selected).
+
+The values for `key1` and `key2` describe the modifier keys
+that should be simulated as being down when the menu item is invoked.
+They include `shiftKey`, `controlKey`, `optionKey`, and `commandKey` (or `cmdKey`).
 
 #### drag Command
 
