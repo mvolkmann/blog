@@ -6023,6 +6023,17 @@ a transition effect that occurs on card navigation.
 See the "Cards - Card Transitions" section
 for more details on the `visual` command.
 
+#### wait Command
+
+To pause for a given amount of time, use the `wait` command.
+The syntax is one of the following:
+
+- `wait [for] {n} {tick | ticks | second | seconds}`
+- `wait until {boolean-expression}`
+- `wait while {boolean-expression}`
+
+A tick is 1/60th of a second.
+
 #### xy Command
 
 The `xy` command is helping in determining
@@ -6157,7 +6168,10 @@ end repeat
 ### Hiding and Showing
 
 The `hide` and `show` commands set the `visible` property
-of a button, field, stack title bar, window, menu bar, or picture layer.
+of a button, field, stack title bar, window, or menu bar.
+
+The `hide` and `show` commands set the `showPict` property
+of a picture layer.
 
 For example, a button can toggle between hiding and showing a field
 with the following script:
@@ -6207,17 +6221,6 @@ For buttons and fields, the coordinates are relative to
 the upper-left of the stack window content area.
 For all other objects, the coordinates are relative to
 the upper-left of the screen.
-
-###
-
-To pause for a given amount of time, use the `wait` command.
-The syntax is one of the following:
-
-- `wait [for] {n} {tick | ticks | second | seconds}`
-- `wait until {boolean-expression}`
-- `wait while {boolean-expression}`
-
-A tick is 1/60th of a second.
 
 ### Mouse Cursor
 
