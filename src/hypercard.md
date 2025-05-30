@@ -5889,6 +5889,12 @@ and place the card reference in a variable,
 use `pop card into someVariable`.
 To navigate to that card later, use `do "go to" && someVariable`.
 
+#### print Command
+
+The `print` command prints a file from another application.
+It does not print information found in HyperCard stacks.
+The syntax is `print {path} with {application}.
+
 #### push Command
 
 This adds a card reference to the top of the stack,
