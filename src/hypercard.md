@@ -6595,7 +6595,8 @@ The steps to implement a hyperlink are:
 1. Optionally select additional styles such as Underline or Bold.
 1. Open the "Field Info" dialog for the field.
 1. Check the "Lock Text" checkbox.
-   Clicks on groups are only recognized in locked fields.
+   When a field is clicked, the message `mouseUp`
+   is only sent if the field is locked.
 1. Edit the script for the field.
 1. Add a `mouseUp` handler similar to the following:
 
