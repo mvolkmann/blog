@@ -4511,12 +4511,12 @@ For more detail, see the section "Message Handlers" below.
 
   ```text
   on idle
-    global previousTime
+    global gPreviousTime
     put the time into currentTime
-    if currentTime is not previousTime then
+    if currentTime is not gPreviousTime then
       put the selectedField into field
       put currentTime into card field "timeField"
-      put currentTime into previousTime
+      put currentTime into gPreviousTime
       if field is not empty then
         do "click at the location of" && field
       end if
@@ -5003,6 +5003,59 @@ HyperTalk defines the following predefined constants:
   with the content `left,top,right,bottom`
   (It seems that left and top are always zero.)
 
+### Variables
+
+Variables provide a way to store a value and use it later.
+The value can be a Boolean, number, or string.
+String values can have any number of lines
+separated by the carriage return character.
+The value of a variable can be changed any number of times to any type.
+Recall that Booleans and numbers are actually stored as strings.
+
+Variable names must begin with a letter and contain
+letters, digits, and underscores.
+By convention, variable names composed of multiple words
+are written in camelCase.
+That cannot match a reserved word which includes
+all commands, functions, properties, and keywords defined by HyperTalk.
+
+If a variable is used before being set,
+it will evaluate to a string that is the name of the variable,
+not an empty string.
+
+Variables exist in two scopes, local to a specific handler
+and global across all handlers in all stacks.
+
+Local variables are not declared and
+spring into existence when a value is assigned to them.
+The value of a local variables is lost when the
+message handler or function in which it is assigned ends.
+
+Global variables are shared across all cards in all stacks.
+They must be declared in all handlers and functions
+where they are used, before they are used.
+This is done with the `global` command which is
+followed by a comma-separated list of names.
+For example, `global gFavoriteColor, gMaxTemperature, gTaxRate`.
+Typically `global` commands appears at the beginning of handlers and functions.
+
+It is a common convention to begin the names
+of all global variables with the letter "g".
+
+The values of global variables are not lost when the
+message handler or function in which they are assigned ends.
+But their values are lost when the HyperCard app is quit.
+
+To assign a value to a variable, use the `put` command.
+For example, `put 3.14159265 into pie` (`pi` is a predefined constant)
+
+It's a good idea to initialize all global variables used by a stack
+in the `openStack` handler associated with the stack.
+This avoids using values assigned by other stacks.
+
+HyperTalk can store the name or id of a button/field in a variable,
+but it cannot store a button or field object in a variable.
+
 ### Special Variables
 
 The following variables are set by HyperCard and cannot be modified:
@@ -5051,54 +5104,6 @@ The following variables are set by HyperCard and CAN be modified:
   screen updates will appear during script execution.
   Setting this to false can improve performance.
 - `the userLevel`: current user level from 1 to 5
-
-### Variables
-
-Variables provide a way to store a value and use it later.
-The value can be a Boolean, number, or string.
-String values can have any number of lines
-separated by the carriage return character.
-The value of a variable can be changed any number of times to any type.
-Recall that Booleans and numbers are actually stored as strings.
-
-Variable names must begin with a letter and contain
-letters, digits, and underscores.
-By convention, variable names composed of multiple words
-are written in camelCase.
-That cannot match a reserved word which includes
-all commands, functions, properties, and keywords defined by HyperTalk.
-
-If a variable is used before being set,
-it will evaluate to a string that is the name of the variable,
-not an empty string.
-
-Variables exist in two scopes, local to a specific handler
-and global across all handlers in all stacks.
-
-Local variables are not declared and
-spring into existence when a value is assigned to them.
-The value of a local variables is lost when the
-message handler or function in which it is assigned ends.
-
-Global variables are shared across all cards in all stacks.
-They must be declared in all handlers and functions
-where they are used, before they are used, with the keyword `global`.
-For example, `global favoriteColor, maximumTemperature, taxRate`.
-Typically `global` commands appears at the beginning of handlers and functions.
-
-The value of a global variable is not lost when the
-message handler or function in which it is assigned ends.
-But the value is lost when the HyperCard app is quit.
-
-To assign a value to a variable, use the `put` command.
-For example, `put 3.14159265 into pie` (`pi` is a predefined constant)
-
-It's a good idea to initialize all global variables used by a stack
-in the `openStack` handler associated with the stack.
-This avoids using values assigned by other stacks.
-
-HyperTalk can store the name or id of a button/field in a variable,
-but it cannot store a button or field object in a variable.
 
 ### Commands
 
