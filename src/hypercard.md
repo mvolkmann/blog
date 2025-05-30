@@ -5288,6 +5288,24 @@ use the command `close window Navigator` to close it.
 The `convert` command converts a date or time to a different format.
 See examples in the sections "Dates" and "Times" above.
 
+#### create stack Command
+
+The `create stack` command creates a new stack.
+It optionally includes a given background from the current stack.
+It optionally opens in a new window
+rather than replacing the current stack in its window.
+
+The syntax is
+`create stack {path} [with {background-expr}] [in [a] new window]`.
+
+If the path argument is only a name, the stack is
+created in the same directory as the current stack.
+
+After creating a stack, use the `go stack` command to make it the active stack.
+
+This command is useful in a script that creates a set of cards from known data.
+For example, a stack of flash cards can be created.
+
 #### delete Command
 
 The `delete` command deletes a "chunk" from a container.
@@ -5399,7 +5417,7 @@ drag from 100, 100 to 300, 200
 The following code animates dragging a button to a new location
 each time it is clicked:
 
-````text
+```text
 on mouseUp
   put the location of me into point
   put the first item of point into x
@@ -5446,7 +5464,7 @@ get the hilite of button "My Checkbox" -- hilite is a button property
 get item 2 of colorList -- where colorList is a comma-delimited string
 get word 1 of "some long string"
 get line 3 of field "My Text Area"
-````
+```
 
 Once the variable `it` is set by using the `get` command,
 it can be used in subsequent expressions.
