@@ -5895,7 +5895,22 @@ in a `mouseUp` handler.
 
 #### select Command
 
-The `select` command selects a subset of the text in field
+The `select` command selects a button or field.
+If a button is selected, the current tool changes to the Button tool.
+If a field is selected, the current tool changes to the Field tool.
+
+For example:
+
+```text
+select button id 19
+select field "firstName"
+select me -- in a button or field handler
+select target -- in a function called from a button or field handler
+```
+
+#### select text of Command
+
+The `select text of` command selects a subset of the text in field
 or positions the text cursor.
 Either can be specified with a chunk expression.
 
