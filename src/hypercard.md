@@ -5920,19 +5920,23 @@ For example:
 set the visible of button "save" to false
 ```
 
-The global properties include:
-userLevel
-cantModify
-heapSpace
-textArrows
-wideMargins
-menuBar
-messageBox
-scroll
-cmdChar
-enabled
-textSize
-textStyle
+There are around 40 global properties.
+To view the current value of a global property,
+open the Message Box and enter `answer the {global-property-name}`.
+
+Highlights of the global properties include:
+
+- `cursor`: current mouse cursor shape (see the "Mouse Cursor" section)
+- `dragSpeed`: controls how fast the mouse cursor moves
+  when the `drag` command is executed;
+  defaults to `0` which jumps immediately to the target point
+- `itemDelimiter`: delimiter character between items in fields
+- `scriptTextFont`: font family used in script editor windows
+- `scriptTextSize`: font size used in script editor windows
+- `stacksInUse`: list of paths to stacks currently in the message hierarchy
+- `textArrows`: Boolean indicating if the arrow keys can be used
+  to move the text cursor in fields
+- `userLevel`: 1 to 5
 
 #### show Command
 
@@ -6249,8 +6253,13 @@ the upper-left of the screen.
 
 The mouse cursor can be changed to any of the following strings:
 `arrow` (standard), `busy`, `cross`, `hand`,
-`ibeam`, `none`, `plus`, or `watch`.
+`ibeam` (when text can be entered), `none`, `plus`, or `watch`.
 For example, `set cursor to watch`.
+The cursor is automatically reset to the appropriate value
+when no message handler is running (idle).
+
+The current value of the global property `cursor`
+cannot be retrieved with the expression `the cursor`.
 
 ### Mouse Messages
 
