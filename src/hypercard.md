@@ -5301,6 +5301,9 @@ The syntax is
 If the path argument is only a name, the stack is
 created in the same directory as the current stack.
 
+The function `the result` returns an error message if saving a copy failed.
+
+This command does not make the newly created stack active.
 After creating a stack, use the `go stack` command to make it the active stack.
 
 This command is useful in a script that creates a set of cards from known data.
@@ -5837,7 +5840,7 @@ behind the stack window if the stack window is clicked.
 
 The most common property to set is `visible` to hide and show the picture.
 
-### play Command
+#### play Command
 
 The `play` command plays a series of notes.
 See the "Sounds" section for more detail.
@@ -5910,6 +5913,18 @@ that modify paint properties.
 
 The pie chart example in the "Drawing" section uses this command
 in a `mouseUp` handler.
+
+#### save stack Command
+
+The `save stack` command saves a copy of a given stack.
+The syntax is `save stack {stack-expr} as {path}`.
+
+If the path argument is only a name, the stack copy is
+created in the same directory as the current stack.
+
+The function `the result` returns an error message if saving a copy failed.
+
+This command does not make the newly created stack active.
 
 #### select Command
 
