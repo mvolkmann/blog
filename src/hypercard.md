@@ -4799,6 +4799,7 @@ Custom palettes can be implemented.
 
   A palette can be closed by clicking its close box
   or executing the command `close window "{name}"`.
+  This does not work with "Tools" or "Patterns".
 
 - `openPalette`
 
@@ -5281,6 +5282,11 @@ close document with application
 Check the return value of `the result` for possible error messages.
 For example, when closing a MacPaint document
 this returns "Not handled by target program."
+
+The `close window "{name}"` command closes a given window.
+The name can be that of a stack.
+For example, after opening the Navigator with the `nav` command,
+use the command `close window Navigator` to close it.
 
 #### convert Command
 
@@ -6144,7 +6150,7 @@ end repeat
 ### Hiding and Showing
 
 The `hide` and `show` commands set the `visible` property
-of the menubar, a window, a palette, the stack title bar, a button, or a field.
+of the menubar, a window, the stack title bar, a button, or a field.
 
 For example, a button can toggle between hiding and showing a field
 with the following script:
@@ -6166,15 +6172,14 @@ end mouseUp
 
 Following table summarizes the visibility commands.
 
-| Target      | To Hide               | To Show               |
-| ----------- | --------------------- | --------------------- |
-| menu bar    | `hide menubar`        | `show menubar`        |
-| title bar   | `hide titlebar`       | `show titlebar`       |
-| Message Box | `hide message box`    | `show message box`    |
-| a window    | `hide window {name}`  | `show window {name}`  |
-| a palette   | `hide {palette-name}` | `show {palette-name}` |
-| a button    | `hide {button-ref}`   | `show {button-ref}`   |
-| a field     | `hide {field-ref}`    | `show {field-ref}`    |
+| Target      | To Hide              | To Show              |
+| ----------- | -------------------- | -------------------- |
+| menu bar    | `hide menubar`       | `show menubar`       |
+| title bar   | `hide titlebar`      | `show titlebar`      |
+| Message Box | `hide message box`   | `show message box`   |
+| a window    | `hide window {name}` | `show window {name}` |
+| a button    | `hide {button-ref}`  | `show {button-ref}`  |
+| a field     | `hide {field-ref}`   | `show {field-ref}`   |
 
 Hiding the title bar removes the ability of users
 to drag the window to a new location.
@@ -6182,12 +6187,10 @@ to drag the window to a new location.
 Other names that can be used in place of "message box"
 include "message window", "message", and "msg".
 
-A stack name can be used to hide (and show)
+A stack name can be used to hide and show
 its window without closing the stack.
 
-Provided palette names include "tools" and "patterns".
-
-Provided window names include "navigator".
+Provided window names include "Tools" and "Patterns".
 
 The show command can include "at {x},{y}" to show
 anything but the menu bar and title bar at a specific location.
