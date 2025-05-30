@@ -5518,6 +5518,30 @@ edit script of this stack
 edit script of "some stack name"
 ```
 
+#### export paint Command
+
+The `export paint` command creates a MacPaint-compatible file
+that contains everything that is visible in the current card.
+This includes buttons, fields, and the paint layer
+of both the background and card.
+
+The syntax is `export paint to file {file-path}`.
+
+This command is similar to the menu item File ... Export Paint...
+which is only present if a paint tool is selected.
+
+#### import paint Command
+
+The `import paint` command copies the contents of a MacPaint-compatible file
+and uses it to replace the paint layer of the current card or background.
+If the paint layer of a card is replaced,
+its background paint layer is completely blocked from view.
+
+The syntax is `import paint from file {file-path}`.
+
+This command is similar to the menu item File ... Import Paint...
+which is only present if a paint tool is selected.
+
 #### global Command
 
 The `global` command declares that specified names
