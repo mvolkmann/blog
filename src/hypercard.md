@@ -5090,10 +5090,6 @@ But the value is lost when the HyperCard app is quit.
 To assign a value to a variable, use the `put` command.
 For example, `put 3.14159265 into pie` (`pi` is a predefined constant)
 
-To assign a value to a property of an object
-(such as a stack, card, button, or field), use the `set` command.
-For example,`set the visible of button "save" to false`.
-
 It's a good idea to initialize all global variables used by a stack
 in the `openStack` handler associated with the stack.
 This avoids using values assigned by other stacks.
@@ -5426,6 +5422,8 @@ and sets the value of the special variable `it` to that value.
 The expression can be a container reference or a property reference.
 
 The command `get {expression}` is equivalent to `put {expression} into it`.
+To put the expression value into another variable,
+use the `put` command instead.
 
 The following are examples of using the `get` command:
 
@@ -5909,6 +5907,32 @@ For example:
 ```text
 send mouseUp to button myButton
 ```
+
+#### set Command
+
+The `set` command sets the value of a global or object property.
+The object can be a button, field, card, background, or stack.
+The syntax is `set {property-ref} [of {object-ref}] to {value}`.
+
+For example:
+
+```text
+set the visible of button "save" to false
+```
+
+The global properties include:
+userLevel
+cantModify
+heapSpace
+textArrows
+wideMargins
+menuBar
+messageBox
+scroll
+cmdChar
+enabled
+textSize
+textStyle
 
 #### show Command
 
