@@ -6965,6 +6965,42 @@ To see how this is done:
 
 TODO: Learn how to do this in one of your stacks.
 
+```text
+on openStack
+  create menu "Custom"
+  put "Calculator,Greet" into menu "Custom"
+end openStack
+
+on closeStack
+  reset menuBar
+end closeStack
+
+on resumeStack
+  create menu "Custom"
+  put "Calculator,Greet" into menu "Custom"
+end resumeStack
+
+on suspendStack
+  reset menuBar
+end suspendStack
+
+on doMenu menuItem
+  if menuItem is "Calculator" then
+    send "doMenu Calculator" to HyperCard
+  else if menuItem is "Greet" then
+    greet
+  else
+    pass doMenu
+  end if
+end doMenu
+
+on greet
+  ask "What is your name?"
+  if it is not empty
+  then answer "Hello," && it & "!"
+end greet
+```
+
 ## AppleScript
 
 AppleScript can be used as an alternative to HyperTalk for implementing scripts.
