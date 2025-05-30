@@ -5582,6 +5582,11 @@ do "go to" && cardRef
 
 The `help` command opens the "HyperCard Help" stack in a new window.
 
+#### hide Command
+
+The `hide` command hides a button, field, title bar, window, or the menu bar.
+See the "Hiding and Showing" section for more detail.
+
 #### lock screen Command
 
 The `lock screen` command prevents screen updates
@@ -6139,7 +6144,7 @@ end repeat
 ### Hiding and Showing
 
 The `hide` and `show` commands set the `visible` property
-of the menubar, a window, a palette, the stack titlebar, a button, or a field.
+of the menubar, a window, a palette, the stack title bar, a button, or a field.
 
 For example, a button can toggle between hiding and showing a field
 with the following script:
