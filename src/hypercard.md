@@ -3004,15 +3004,6 @@ on keyDown which
 end keyDown
 ```
 
-### Field Groups
-
-TODO: Learn about the "Group" text style which can be
-added to a group of words in a locked field.
-Select words and press cmd-shift-g to create a group.
-Scripts can listen for clicks on a group to take action
-such as treating the group as a hyperlink.
-This is covered in Volume 2 of "The Complete HyperCard 2.2 Handbook".
-
 ### Reverse Lettering
 
 To create white text on a black background:
@@ -6600,7 +6591,7 @@ The steps to implement a hyperlink are:
 1. Create a field.
 1. Enter text in the field.
 1. Select some or all of the text.
-1. Select Style ... Group.
+1. Select Style ... Group or press cmd-shift-g.
 1. Optionally select additional styles such as Underline or Bold.
 1. Open the "Field Info" dialog for the field.
 1. Check the "Lock Text" checkbox.
@@ -6682,7 +6673,8 @@ TODO: Learn how to do this in one of your stacks.
 
 AppleScript can be used as an alternative to HyperTalk for implementing scripts.
 Change "Scripting language" from "HyperTalk" to "AppleScript".
-For example, the following script displays a dialog when its associated button is clicked.
+For example, the following script displays a dialog
+when its associated button is clicked.
 
 ```text
 on mouseUp
