@@ -5408,11 +5408,22 @@ on mouseUp
 end mouseUp
 ```
 
+#### find Command
+
+See the "Cards - Finding Cards" section.
+
+#### flash Command
+
+The `flash` command alternates the color of every pixel on the card
+between white and black two times.
+An optional argument specifies the number of times to flash.
+This is useful for calling attention to a condition.
+
 #### get Command
 
 The `get` command gets the value of any expression
 and sets the value of the special variable `it` to that value.
-The expression can be a container reference.
+The expression can be a container reference or a property reference.
 
 The command `get {expression}` is equivalent to `put {expression} into it`.
 
@@ -5424,8 +5435,8 @@ get the short date -- e.g. 4/12/25; short is the default and can be omitted
 get the long date -- e.g. Saturday, April 12, 2025
 get [the value of] card field "My Foreground Field"
 get [the value of] background field "My Background Field"
-get the label of button "My Button"
-get the hilite of button "My Checkbox"
+get the name of button id 19 -- name is a button property
+get the hilite of button "My Checkbox" -- hilite is a button property
 get item 2 of colorList -- where colorList is a comma-delimited string
 get word 1 of "some long string"
 get line 3 of field "My Text Area"
@@ -5437,17 +5448,6 @@ For example, `multiply it by 2`.
 
 See more examples of using the `get` command
 in the "Chunk Expressions" section.
-
-#### find Command
-
-See the "Cards - Finding Cards" section.
-
-#### flash Command
-
-The `flash` command alternates the color of every pixel on the card
-between white and black two times.
-An optional argument specifies the number of times to flash.
-This is useful for calling attention to a condition.
 
 #### go Command
 
