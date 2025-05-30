@@ -5086,7 +5086,6 @@ The following variables are set by HyperCard and cannot be modified:
   - `create` - if object creation fails
   - `delete` - if object deletion fails
   - `answer`: sets to the button that was clicked
-  - `answer file`: sets to the selected file path or empty if canceled
   - `do`: sets to any error message from the executed script
   - `value`: sets if the expression cannot be evaluated
 
@@ -5174,11 +5173,26 @@ Button labels should be no wider than the width of seven capital "M" characters.
 Button labels are centered in their button, so labels that
 are too long to fit will be cropped at their beginning and end.
 
-The `answer file` command opens a file selection dialog.
-It restricted to only allow selecting a file with a given type.
+#### answer file Command
+
+The `answer file` command opens a file selection dialog
+for selecting an existing file.
+It can restrict the user to only allow selecting a file with a given type.
+The syntax is `answer file {prompt} [of type {file-type}]`.
+
+The file type can be to four file types separated by the keyword `or`.
+Each file type can be a creator code (ex. `TEXT` or `STAK`)
+or one of the following keywords:
+`application`, `paint`, `painting`, `picture`, `stack`, or `text`.
+
+The variable `it` is set to the selected file path.
+
 For example:
 
 ```text
+answer file "Select a graphic file." of type "TEXT" or "picture".
+-- Do something with it.
+
 answer file "Select an application to launch." of type "APPL".
 if it is not empty then open it
 ```
@@ -5190,6 +5204,15 @@ and includes a field where they can type an answer,
 along with OK and Cancel buttons.
 
 See the "Dialogs" section for more detail.
+
+#### ask file Command
+
+The `ask file` command opens a file selection dialog that
+prompts the user to specify the path and name of a new file to be created.
+Existing files cannot be selected.
+The syntax is `ask file {prompt} [with {default-name-expr}`.
+
+The variable `it` is set to the selected file path.
 
 #### beep Command
 
@@ -5282,6 +5305,11 @@ The `close window "{name}"` command closes a given window.
 The name can be that of a stack.
 For example, after opening the Navigator with the `nav` command,
 use the command `close window Navigator` to close it.
+
+#### close file Command
+
+The `close file` command closes a file that was opened for reading or writing.
+See the "File I/O section for more detail.
 
 #### convert Command
 
@@ -5710,6 +5738,11 @@ The Calculator is a "desk accessory", not an application.
 To open it with HyperTalk,
 select it from the Apple menu with `doMenu Calculator`.
 
+#### open file Command
+
+The `open file` command opens a file for reading or writing.
+See the "File I/O section for more detail.
+
 #### palette Command
 
 The `palette` command displays a "PLTE" resource
@@ -5904,6 +5937,10 @@ it will default to looking for a background field.
 
 See more examples of using the `put` command
 in the "Chunk Expressions" section.
+
+#### read from file Command
+
+The `read from file` command ...
 
 #### reset paint Command
 
@@ -6928,7 +6965,22 @@ open the Message Box (cmd-m) and enter `set [the] userLevel to 5`.
 
 HyperTalk can read and write text files.
 
-TODO: Add more detail here about the related commands.
+The `answer file` command opens a file selection dialog that
+prompts the user to select an existing file.
+The path to the existing file is placed in the `it` variable.
+
+The `ask file` command opens a file selection dialog that
+prompts the user to specify the path and name of a new file to be created.
+Existing files cannot be selected.
+The path to the new file is placed in the `it` variable.
+
+The `open file {path-expr}` command opens a text file for reading or writing.
+If the file does not exist, it is created.
+If the path only contains a name, the file
+must be in the same directory as the HyperCard application.
+This command verifies that the file is not already open by another application.
+The function `the result` returns an error message
+if the file could not be opened.
 
 The `read file` command reads until a given character is encountered
 or for a given number of characters.
