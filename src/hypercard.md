@@ -5590,7 +5590,8 @@ The `help` command opens the "HyperCard Help" stack in a new window.
 
 #### hide Command
 
-The `hide` command hides a button, field, title bar, window, or the menu bar.
+The `hide` command hides a button, field, stack title bar, window, menu bar,
+picture layer, or the Message Box.
 See the "Hiding and Showing" section for more detail.
 
 #### lock screen Command
@@ -5914,6 +5915,12 @@ For example:
 send mouseUp to button myButton
 ```
 
+#### show Command
+
+The `show` command shows a button, field, stack title bar, window, menu bar,
+picture layer, or the Message Box.
+See the "Hiding and Showing" section for more detail.
+
 #### sort Command
 
 The `sort` command sorts cards within a stack.
@@ -6150,7 +6157,7 @@ end repeat
 ### Hiding and Showing
 
 The `hide` and `show` commands set the `visible` property
-of the menubar, a window, the stack title bar, a button, or a field.
+of a button, field, stack title bar, window, menu bar, or picture layer.
 
 For example, a button can toggle between hiding and showing a field
 with the following script:
@@ -6172,14 +6179,15 @@ end mouseUp
 
 Following table summarizes the visibility commands.
 
-| Target      | To Hide              | To Show              |
-| ----------- | -------------------- | -------------------- |
-| menu bar    | `hide menubar`       | `show menubar`       |
-| title bar   | `hide titlebar`      | `show titlebar`      |
-| Message Box | `hide message box`   | `show message box`   |
-| a window    | `hide window {name}` | `show window {name}` |
-| a button    | `hide {button-ref}`  | `show {button-ref}`  |
-| a field     | `hide {field-ref}`   | `show {field-ref}`   |
+| Target          | To Hide                         | To Show                         |
+| --------------- | ------------------------------- | ------------------------------- |
+| a button        | `hide {button-ref}`             | `show {button-ref}`             |
+| a field         | `hide {field-ref}`              | `show {field-ref}`              |
+| stack title bar | `hide titlebar`                 | `show titlebar`                 |
+| a window        | `hide window {name}`            | `show window {name}`            |
+| menu bar        | `hide menubar`                  | `show menubar`                  |
+| picture layer   | `hide card\|background picture` | `show card\|background picture` |
+| Message Box     | `hide message box`              | `show message box`              |
 
 Hiding the title bar removes the ability of users
 to drag the window to a new location.
@@ -6200,7 +6208,7 @@ the upper-left of the stack window content area.
 For all other objects, the coordinates are relative to
 the upper-left of the screen.
 
-### Waiting
+###
 
 To pause for a given amount of time, use the `wait` command.
 The syntax is one of the following:
