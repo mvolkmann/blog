@@ -6171,7 +6171,7 @@ The `hide` and `show` commands set the `visible` property
 of a button, field, stack title bar, window, or menu bar.
 
 The `hide` and `show` commands set the `showPict` property
-of a picture layer.
+of a picture layer in a card or background.
 
 For example, a button can toggle between hiding and showing a field
 with the following script:
