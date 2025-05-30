@@ -5425,6 +5425,12 @@ repeat with index = 1 to the number of fields
 end repeat
 ```
 
+#### doMenu Command
+
+The `doMenu` command executes a menu item as if it were selected by the user.
+
+TODO: Add more detail.
+
 #### drag Command
 
 The `drag` command simulates dragging the mouse button
