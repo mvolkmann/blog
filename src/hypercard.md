@@ -6225,7 +6225,12 @@ A tick is 1/60th of a second.
 
 The `write to file` command writes text to
 a file that was opened with the `open file` command.
-It can optionally begin writing at a specified character index.
+It can optionally begin writing at a specified character index
+where zero is the index for writing the first character.
+To append to an existing file, end the command with `at end`.
+
+The syntax is
+`write {string-expr} to file {file-path-expr} [at {start-index}]`.
 
 This command can be used create any kind of text file,
 including CSV files with comma or tab delimiters.
