@@ -6986,6 +6986,7 @@ end suspendStack
 
 on doMenu menuItem
   if menuItem is "Calculator" then
+    -- Bypass this handler to avoid infinite recursion.
     send "doMenu Calculator" to HyperCard
   else if menuItem is "Greet" then
     greet
