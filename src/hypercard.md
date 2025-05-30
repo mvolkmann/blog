@@ -5966,6 +5966,8 @@ The index of the last character read is maintained.
 The next `read from file` command begins reading after that by default.
 To read from the beginning of the file again, close and reopen the file.
 
+See the example in the section "File I/O".
+
 #### reset paint Command
 
 The `reset paint` command resets all paint properties to their default values.
@@ -6218,6 +6220,17 @@ The syntax is one of the following:
 - `wait while {boolean-expression}`
 
 A tick is 1/60th of a second.
+
+#### write to file Command
+
+The `write to file` command writes text to
+a file that was opened with the `open file` command.
+It can optionally begin writing at a specified character index.
+
+This command can be used create any kind of text file,
+including CSV files with comma or tab delimiters.
+
+See the example in the section "File I/O".
 
 #### xy Command
 
@@ -6988,6 +7001,7 @@ open the Message Box (cmd-m) and enter `set [the] userLevel to 5`.
 ## File I/O
 
 HyperTalk can read and write text files.
+All of the commands related to file handling support resolving aliases.
 
 The `answer file` command opens a file selection dialog that
 prompts the user to select an existing file.
@@ -7008,6 +7022,9 @@ if the file could not be opened.
 
 The `read from file` command reads until a given character is encountered
 or for a given number of characters.
+
+The `write to file` command writes text to a given file,
+optionally beginning at a given character index in an existing file.
 
 The following example card contains two buttons and two fields.
 The "Open" button prompts for a text file to open
