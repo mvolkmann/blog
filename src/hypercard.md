@@ -5316,6 +5316,11 @@ See the "File I/O section for more detail.
 The `convert` command converts a date or time to a different format.
 See examples in the sections "Dates" and "Times" above.
 
+#### create menu Command
+
+The `create stack` command creates a new menu.
+See the section "Custom Menus" for more detail.
+
 #### create stack Command
 
 The `create stack` command creates a new stack.
@@ -6012,6 +6017,11 @@ it will default to looking for a background field.
 See more examples of using the `put` command
 in the "Chunk Expressions" section.
 
+#### put into menu Command
+
+The `put into stack` command adds menu items to a menu.
+See the section "Custom Menus" for more detail.
+
 #### read from file Command
 
 The `read from file` command reads text from
@@ -6041,6 +6051,12 @@ The next `read from file` command begins reading after that by default.
 To read from the beginning of the file again, close and reopen the file.
 
 See the example in the section "File I/O".
+
+#### reset menuBar Command
+
+The `reset menuBar` command restores all the
+menus and their menu items to the default contents.
+See the section "Custom Menus" for more detail.
 
 #### reset paint Command
 
