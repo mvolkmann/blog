@@ -6992,18 +6992,24 @@ The command `create menu` adds a new menu with no menu items.
 For example, `create menu "Custom"`.
 
 The command `put into menu` adds menu items to an existing menu.
-For example, `put "Calculator,Greet" into menu "Custom"`.
+For example, `put "Calculator, Greet" into menu "Custom"`.
+TODO: Does `into` cause it to replace all the menu items in the menu?
+TODO: Add an example of using `before` and `after`
+TODO: to insert a menu item into an existing menu.
 
 It can also specify a message to be sent when each menu item is selected.
 For example,
-`put "Calculator,Greet" into menu "Custom" with menuMessages "???,greet"`.
+`put "Calculator, Greet" into menu "Custom" with menuMessages "doMenu Calculator, greet"`.
 
 Alternatively, a `doMenu` handler can detect the selected menu item
 and act upon it as demonstrated in the example below.
 
-The `delete` command can delete an entire menu or a specific menu item.
+The `delete menu` command deletes an entire menu.
 For example, `delete menu "Font"`.
 The Apple menu and the Help menu cannot be deleted.
+
+The `delete menuItem` command deletes a specific menu item.
+For example, `delete menuItem "Delete Stack..." from menu "File"`.
 
 The `reset menuBar` command resets the menu bar
 to the default set of menus and menu items.
