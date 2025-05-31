@@ -5344,14 +5344,14 @@ For example, a stack of flash cards can be created.
 
 #### delete Command
 
-The `delete` command deletes a "chunk" from a container.
+The `delete` command can delete the following:
 
-See examples of using the `delete` command
-in the "Chunk Expressions" section.
-
-To delete the entire contents of a container,
-use the `put` command to put `empty` into it.
-For example, `put empty into field "firstName"`.
+1. a button
+1. a field
+1. the entire contents of a container
+1. a "chunk" from a container
+1. a menu and all its menu items
+1. a menu item
 
 The `delete button` command deletes a button by its name or ID,
 but does not trigger a UI update.
@@ -5370,6 +5370,15 @@ For example:
 delete card field "Some Name"
 go to this card -- updates the UI
 ```
+
+To delete the entire contents of a container,
+use the `put` command to put `empty` into it.
+For example, `put empty into field "firstName"`.
+
+See the section "Chunk Expressions" for examples of
+deleting a chunk of container content.
+
+See the section "Custom Menus" for examples of deleting a menu or a menu item.
 
 #### divide Command
 
