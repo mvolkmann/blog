@@ -5319,7 +5319,7 @@ See examples in the sections "Dates" and "Times" above.
 #### create menu Command
 
 The `create stack` command creates a new menu.
-See the section "Custom Menus" for more detail.
+See the section "Customizing Menus" for more detail.
 
 #### create stack Command
 
@@ -5378,7 +5378,7 @@ For example, `put empty into field "firstName"`.
 See the section "Chunk Expressions" for examples of
 deleting a chunk of container content.
 
-See the section "Custom Menus" for examples of deleting a menu or a menu item.
+See the section "Customizing Menus" for examples of deleting a menu or a menu item.
 
 #### divide Command
 
@@ -6029,7 +6029,7 @@ in the "Chunk Expressions" section.
 #### put into menu Command
 
 The `put into stack` command adds menu items to a menu.
-See the section "Custom Menus" for more detail.
+See the section "Customizing Menus" for more detail.
 
 #### read from file Command
 
@@ -6065,7 +6065,7 @@ See the example in the section "File I/O".
 
 The `reset menuBar` command restores all the
 menus and their menu items to the default contents.
-See the section "Custom Menus" for more detail.
+See the section "Customizing Menus" for more detail.
 
 #### reset paint Command
 
@@ -6972,7 +6972,7 @@ end changeGroupStyle
 
 Then open the Message Box and enter `changeGroupStyle`.
 
-### Custom Menus
+### Customizing Menus
 
 A stack can add custom menus, remove menus,
 and remove specific menu items using HyperTalk.
@@ -7026,6 +7026,8 @@ on greet
   then answer "Hello," && it & "!"
 end greet
 ```
+
+TODO: Cover deleting menus and menu items.
 
 ## AppleScript
 
