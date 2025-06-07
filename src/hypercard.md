@@ -5369,6 +5369,10 @@ delete card field "Some Name"
 go to this card -- updates the UI
 ```
 
+The `delete menu` command deletes an entire menu.
+The `delete menuItem` command deletes a menu item from a menu.
+See the section "Customizing Menus" for more detail.
+
 To delete the entire contents of a container,
 use the `put` command to put `empty` into it.
 For example, `put empty into field "firstName"`.
@@ -5743,6 +5747,9 @@ See the "Hiding and Showing" section for more detail.
 The `hide groups` command hides the gray underlines
 under text in fields that has the "Group" style.
 See the "Groups" section for more detail.
+
+The `hide menuBar` command hides all the menus
+by hiding the menu bar at the top of the screen.
 
 #### lock screen Command
 
@@ -7026,8 +7033,6 @@ add dashes in the list of menu items.
 For example, to add a divider between the "Calculator" and "Greet" menu items,
 change the command above to use `"Calculator,-,Greet"`.
 
-TODO: How can you assign shortcut keys to new menu items?
-
 Alternatively, a `doMenu` handler can detect the selected menu item
 and act upon it as demonstrated in the example below.
 If a `doMenu` handler handles a menu item selection,
@@ -7049,7 +7054,8 @@ The following provided menus cannot be modified:
 application (far right list of running apps),
 Font, Help, Patterns, and Tools.
 
-The `hide menuBar` command hides all the menus.
+The `hide menuBar` command hides all the menus
+by hiding the menu bar at the top of the screen.
 
 The `reset menuBar` command resets the menu bar
 to the default set of menus and menu items.
