@@ -6316,14 +6316,33 @@ for more details on the `visual` command.
 
 #### wait Command
 
-To pause for a given amount of time, use the `wait` command.
-The syntax is one of the following:
+The `wait` command has three variations.
+The syntax to pause for a given amount of time is:
 
-- `wait [for] {n} {tick | ticks | second | seconds}`
-- `wait until {boolean-expression}`
-- `wait while {boolean-expression}`
+```text
+wait [for] {n} [tick|ticks|second|seconds]
+```
 
-A tick is 1/60th of a second.
+If no unit is specified, it defaults to `ticks`.
+A tick is approximately 1/60th of a second.
+
+For example, `wait for 2 seconds`.
+
+The syntax to iterate until a given Boolean expression becomes true is:
+
+```text
+wait until {boolean-expression}
+```
+
+For example, `wait until the shiftKey is down`.
+
+The syntax to iterate while a given Boolean expression is true is:
+
+```text
+wait while {boolean-expression}
+```
+
+For example, `wait while the shiftKey is up`.
 
 #### write to file Command
 
