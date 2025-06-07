@@ -6990,6 +6990,8 @@ Adding menu items for functionality that is specific to a stack is
 an alternative to adding buttons that consumes less screen real estate.
 
 The command `create menu` adds a new menu with no menu items.
+The first new menu appears to the right of the Style menu.
+Other new menus appear to the right of the last new menu that was added.
 For example, `create menu "Custom"`.
 
 The command `put into menu` adds menu items to an existing menu.
@@ -7005,7 +7007,14 @@ put "Baz,Qux" before menuItem "Greet" of menu "Custom"
 The `put into menu` command can also specify
 a message to be sent when each menu item is selected.
 For example,
-`put "Calculator, Greet" into menu "Custom" with menuMessages "doMenu Calculator,greet"`.
+`put "Calculator,Greet" into menu "Custom" with menuMessages "doMenu Calculator,greet"`.
+
+To add horizontal divider lines between menu items,
+add dashes in the list of menu items.
+For example, to add a divider between the "Calculator" and "Greet" menu items,
+change the command above to use `"Calculator,-,Greet"`.
+
+TODO: How can you assign shortcut keys to new menu items?
 
 Alternatively, a `doMenu` handler can detect the selected menu item
 and act upon it as demonstrated in the example below.
@@ -7019,6 +7028,12 @@ The Apple menu and the Help menu cannot be deleted.
 The `delete menuItem` command deletes a specific menu item.
 One use is to delete menu items that may be dangerous for users to select.
 For example, `delete menuItem "Delete Stack..." from menu "File"`.
+This does not prevent the menu item from being invoked
+using its shortcut key or the `doMenu` command.
+
+The following provided menus cannot be modified:
+application (far right list of running apps),
+Font, Help, Patterns, and Tools.
 
 The `hide menuBar` command hides all the menus.
 
@@ -7069,7 +7084,8 @@ on greet
 end greet
 ```
 
-TODO: Cover deleting menus and menu items.
+Menus and menu items can be referred to by number instead of by name.
+When determining the number of a menu item, divider lines are also counted.
 
 ## AppleScript
 
