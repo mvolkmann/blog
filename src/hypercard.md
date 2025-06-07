@@ -777,7 +777,7 @@ The following HyperTalk commands mark or unmark cards in scripts:
 
   Typically it is desired to run
   the command `unmark all cards` before running this.
-  For example, `mark cards where the length  of field dogBreed > 6`.
+  For example, `mark cards where the length of field dogBreed > 6`.
 
 - `[un]mark cards by finding {string} in {field-ref}`
 
@@ -843,8 +843,7 @@ a field that contains "Brindle Whippet".
 
 HyperCard does not treat the characters "?" and "*"
 in search terms like wildcards.
-Instead of using `find chars "wh*pet"`and hoping to match "Whippet",
-use `find chars "wh pet"` which is almost the same.
+Instead of using `find chars "wh*pet"`and hoping to match "Whippet", use `find chars "wh pet"` which is almost the same.
 It differs in that words containing "wh" and "pet"
 can be found in different fields of the same card.
 
@@ -887,8 +886,7 @@ open the Message Box and enter `go to background "some name"`.
 The `sort` command sorts all cards within a stack
 or only those with a given background.
 The syntax is
-`sort [[[marked] cards of] {stack-expr}|{background-expr}]
-[ascending|descending] [datetime|international|numeric|text] by {expr}`.
+`sort [[[marked] cards of] {stack-expr}|{background-expr}] [ascending|descending] [datetime|international|numeric|text] by {expr}`.
 When a part of the syntax is omitted, the default value used is:
 
 - sort all cards in the current stack, not just those that are marked
@@ -6995,7 +6993,6 @@ The command `put into menu` adds menu items to an existing menu.
 For example, `put "Calculator, Greet" into menu "Custom"`.
 TODO: Does `into` cause it to replace all the menu items in the menu?
 TODO: Add an example of using `before` and `after`
-TODO: to insert a menu item into an existing menu.
 
 It can also specify a message to be sent when each menu item is selected.
 For example,
