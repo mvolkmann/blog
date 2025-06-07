@@ -7137,7 +7137,12 @@ specify either `bold,italic` or `3`.
 Most applications leave the text style of all menu items set to `plain`.
 
 Set the `enabled` property to `false`
-when it is not applicable in the current state.
+when it is not applicable in the current state
+and reset it to `true` when it becomes applicable again.
+The command `enable menuItem {name} of menu {name}`
+sets this property to `true`.
+and the command `disable menuItem {name} of menu {name}`
+sets this property to `false`.
 
 The following command sets the variable `it`
 to the value of a menu item property:
@@ -7163,6 +7168,8 @@ Menus also support the `enabled` property.
 Setting this to `false` dims the menu.
 It does not prevent its menu items from being displayed
 when the menu is clicked, but it does disable all of them.
+The command `enable menu {name}` sets this property to `true`.
+and the command `disable menu {name}` sets this property to `false`.
 
 ## AppleScript
 
