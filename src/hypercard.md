@@ -7134,6 +7134,10 @@ Commonly used numbers include
 These numbers can be added for multiple styles.
 For example, to change the text of a menu item be both bold and italic,
 specify either `bold,italic` or `3`.
+Most applications leave the text style of all menu items set to `plain`.
+
+Set the `enabled` property to `false`
+when it is not applicable in the current state.
 
 The following command sets the variable `it`
 to the value of a menu item property:
@@ -7154,6 +7158,11 @@ to the "Greet" menu item:
 ```text
 set "commandChar" of menuItem "Greet" of menu "Custom" to "g"
 ```
+
+Menus also support the `enabled` property.
+Setting this to `false` dims the menu.
+It does not prevent its menu items from being displayed
+when the menu is clicked, but it does disable all of them.
 
 ## AppleScript
 
