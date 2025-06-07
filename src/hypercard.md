@@ -5521,6 +5521,19 @@ on mouseUp
 end mouseUp
 ```
 
+#### exit Command
+
+The `exit` command has two variations.
+
+The `exit {handler-name}` command can only be used in a handler and
+the handler name specified must match that of the handler in which it is used.
+If the handler that executes this command was invoked by another handler,
+control returns to the invoking handler.
+
+The `exit to HyperCard` command terminates all pending handlers
+and returns to the idle state.
+This command can be used in a handler or a function.
+
 #### find Command
 
 See the "Cards - Finding Cards" section.
