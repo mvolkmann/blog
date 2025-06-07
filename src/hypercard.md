@@ -6994,7 +6994,7 @@ The first new menu appears to the right of the Style menu.
 Other new menus appear to the right of the last new menu that was added.
 For example, `create menu "Custom"`.
 
-The command `put into menu` adds menu items to an existing menu.
+The command `put into menu` adds one or more menu items to an existing menu.
 Do not include spaces around the menu item names.
 For example:
 
@@ -7002,12 +7002,15 @@ For example:
 put "Calculator,Greet" into menu "Custom" -- replaces any existing menu items
 put "Foo,Bar" after menuItem "Calculator" of menu "Custom"
 put "Baz,Qux" before menuItem "Greet" of menu "Custom"
+put "Hello" into menuItem "Greet" of menu "Custom" -- replaces a menu item
 ```
 
 The `put into menu` command can also specify
 a message to be sent when each menu item is selected.
 For example,
 `put "Calculator,Greet" into menu "Custom" with menuMessages "doMenu Calculator,greet"`.
+Alternatives to the keyword `menuMessages` include
+`menuMessage`, `menuMsg`, and `menuMsgs`.
 
 To add horizontal divider lines between menu items,
 add dashes in the list of menu items.
@@ -7085,7 +7088,9 @@ end greet
 ```
 
 Menus and menu items can be referred to by number instead of by name.
-When determining the number of a menu item, divider lines are also counted.
+The numbers begin at 1, not 0.
+The Apple menu is `menu 1`.
+When determining a menu item number, divider lines are also counted.
 
 ## AppleScript
 
