@@ -7120,7 +7120,7 @@ Menu items have the following properties:
 | Property                   | Description                                   |
 | -------------------------- | --------------------------------------------- |
 | `name`                     | displayed text                                |
-| `textStyle`                | text style number (see below)                 |
+| `textStyle`                | text styles (see below)                       |
 | `commandChar` or `cmdChar` | keyboard shortcut (letter after command key)  |
 | `enabled`                  | Boolean                                       |
 | `checkMark`                | Boolean                                       |
@@ -7128,9 +7128,12 @@ Menu items have the following properties:
 | `menuMessage` or `menuMsg` | message to send when selected                 |
 
 The value of the `textStyle` property is
+either a command-separated list of style names or a number.
+Commonly used numbers include
 `0` for plain, `1` for bold, `2` for italic, and `4` for underline.
 These numbers can be added for multiple styles.
-For example, specify `3` for bold and italic.
+For example, to change the text of a menu item be both bold and italic,
+specify either `bold,italic` or `3`.
 
 The following command sets the variable `it`
 to the value of a menu item property:
