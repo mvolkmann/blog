@@ -3391,18 +3391,18 @@ based on the state of the scroll window.
 Visibility of the menu bar that appears at the top of the screen
 can be toggled by pressing cmd-space.
 
-To hide the menu bar from a script, use the command `hide menubar`.
-To restore the menu bar, use the command `show menubar`.
+To hide the menu bar from a script, use the command `hide menuBar`.
+To restore the menu bar, use the command `show menuBar`.
 These commands are typically used in message handlers in a stack script.
 For example:
 
 ```text
 on openStack
-  hide menubar
+  hide menuBar
 end openStack
 
 on closeStack
-  show menubar
+  show menuBar
 end closeStack
 ```
 
@@ -6497,9 +6497,9 @@ Following table summarizes the visibility commands.
 | --------------- | ------------------------------- | ------------------------------- |
 | a button        | `hide {button-ref}`             | `show {button-ref}`             |
 | a field         | `hide {field-ref}`              | `show {field-ref}`              |
-| stack title bar | `hide titlebar`                 | `show titlebar`                 |
+| stack title bar | `hide titleBar`                 | `show titleBar`                 |
 | a window        | `hide window {name}`            | `show window {name}`            |
-| menu bar        | `hide menubar`                  | `show menubar`                  |
+| menu bar        | `hide menuBar`                  | `show menuBar`                  |
 | picture layer   | `hide card\|background picture` | `show card\|background picture` |
 | Message Box     | `hide message box`              | `show message box`              |
 
@@ -6986,27 +6986,41 @@ To see how this is done:
   the function `homeMenuItems`, and
   the function `homeMenuMsgs`.
 
+Adding menu items for functionality that is specific to a stack is
+an alternative to adding buttons that consumes less screen real estate.
+
 The command `create menu` adds a new menu with no menu items.
 For example, `create menu "Custom"`.
 
 The command `put into menu` adds menu items to an existing menu.
-For example, `put "Calculator, Greet" into menu "Custom"`.
-TODO: Does `into` cause it to replace all the menu items in the menu?
-TODO: Add an example of using `before` and `after`
+Do not include spaces around the menu item names.
+For example:
 
-It can also specify a message to be sent when each menu item is selected.
+```text
+put "Calculator,Greet" into menu "Custom" -- replaces any existing menu items
+put "Foo,Bar" after menuItem "Calculator" of menu "Custom"
+put "Baz,Qux" before menuItem "Greet" of menu "Custom"
+```
+
+The `put into menu` command can also specify
+a message to be sent when each menu item is selected.
 For example,
-`put "Calculator, Greet" into menu "Custom" with menuMessages "doMenu Calculator, greet"`.
+`put "Calculator, Greet" into menu "Custom" with menuMessages "doMenu Calculator,greet"`.
 
 Alternatively, a `doMenu` handler can detect the selected menu item
 and act upon it as demonstrated in the example below.
 
 The `delete menu` command deletes an entire menu.
+This can simplify a stack for users by
+reducing the number of exposed menus and menu items.
 For example, `delete menu "Font"`.
 The Apple menu and the Help menu cannot be deleted.
 
 The `delete menuItem` command deletes a specific menu item.
+One use is to delete menu items that may be dangerous for users to select.
 For example, `delete menuItem "Delete Stack..." from menu "File"`.
+
+The `hide menuBar` command hides all the menus.
 
 The `reset menuBar` command resets the menu bar
 to the default set of menus and menu items.
