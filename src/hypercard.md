@@ -7115,6 +7115,43 @@ on doMenu menuItem
 end doMenu
 ```
 
+Menu items have the following properties:
+
+| Property                   | Description                                   |
+| -------------------------- | --------------------------------------------- |
+| `name`                     | displayed text                                |
+| `textStyle`                | text style number (see below)                 |
+| `commandChar` or `cmdChar` | keyboard shortcut (letter after command key)  |
+| `enabled`                  | Boolean                                       |
+| `checkMark`                | Boolean                                       |
+| `markChar`                 | character to display when `checkMark` is true |
+| `menuMessage` or `menuMsg` | message to send when selected                 |
+
+The value of the `textStyle` property is
+`0` for plain, `1` for bold, `2` for italic, and `4` for underline.
+These numbers can be added for multiple styles.
+For example, specify `3` for bold and italic.
+
+The following command sets the variable `it`
+to the value of a menu item property:
+
+```text
+get {property} of menuItem {name} of menu {name}
+```
+
+The following command changes the value of a menu item property:
+
+```text
+set {property} of menuItem {name} of menu {name} to {value}
+```
+
+The following command assigns the keyboard shortcut cmd-g
+to the "Greet" menu item:
+
+```text
+set "commandChar" of menuItem "Greet" of menu "Custom" to "g"
+```
+
 ## AppleScript
 
 AppleScript can be used as an alternative to HyperTalk for implementing scripts.
