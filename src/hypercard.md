@@ -7006,11 +7006,20 @@ put "Hello" into menuItem "Greet" of menu "Custom" -- replaces a menu item
 ```
 
 The `put into menu` command can also specify
-a message to be sent when each menu item is selected.
+a message to be sent to the current card
+when each menu item is selected.
+If the current card does not handle the message,
+it bubbles up to the current stack.
 For example,
 `put "Calculator,Greet" into menu "Custom" with menuMessages "doMenu Calculator,greet"`.
 Alternatives to the keyword `menuMessages` include
 `menuMessage`, `menuMsg`, and `menuMsgs`.
+
+If the menu contains divider lines,
+leave empty messages in the list of messages at those positions.
+
+If a message requires commas for passing multiple arguments,
+add only one menu item at a time.
 
 To add horizontal divider lines between menu items,
 add dashes in the list of menu items.
@@ -7021,6 +7030,8 @@ TODO: How can you assign shortcut keys to new menu items?
 
 Alternatively, a `doMenu` handler can detect the selected menu item
 and act upon it as demonstrated in the example below.
+If a `doMenu` handler handles a menu item selection,
+the message specified using `menuMessages` for that menu item is not sent.
 
 The `delete menu` command deletes an entire menu.
 This can simplify a stack for users by
@@ -7091,6 +7102,18 @@ Menus and menu items can be referred to by number instead of by name.
 The numbers begin at 1, not 0.
 The Apple menu is `menu 1`.
 When determining a menu item number, divider lines are also counted.
+
+A `doMenu` handler can override the functionality of provided menu items.
+For example:
+
+```text
+on doMenu menuItem
+  if menuItem is "Delete Stack..." then
+    answer "I don't think you should do that!"
+    pass doMenu -- This allows the default functionality.
+  end if
+end doMenu
+```
 
 ## AppleScript
 
