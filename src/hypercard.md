@@ -5798,6 +5798,17 @@ on errorDialog message
 end errorDialog
 ```
 
+#### lock messages Command
+
+The `lock messages` command prevents the messages
+`openStack`, `closeStack`, `suspendStack`, and `resumeStack` from being sent.
+It sets the global variable `lockMessages` to true.
+
+This can be useful in scripts that navigate to other stacks
+to gather information or update them.
+When finished, execute the `unlock messages` command
+to reenable the effected messages.
+
 #### lock screen Command
 
 The `lock screen` command prevents screen updates
@@ -6338,6 +6349,12 @@ The `unlock error dialogs` command resumes allowing
 error dialogs to be displayed when an error occurs.
 This sets the global variable `lockErrorDialogs` to false.
 See the example in the description of the `lock error dialogs` command.
+
+#### unlock messages Command
+
+The `unlock messages` command allows messages that are
+prevented by the `lock messages` command to be sent again.
+It sets the global variable `lockMessages` to false.
 
 #### unlock screen Command
 
