@@ -6226,14 +6226,26 @@ use the command `select empty`.
 #### send Command
 
 The `send` command manually sends a message to a specific object.
-It is often used to simulate a user action such as clicking a button.
-Its syntax is `send "messageName [parameterList]" to objectReference`.
+It is often used to simulate user actions such as clicking a button.
+Its syntax is `send "messageName [{parameterList}]" to {objectReference}`.
+The `objectReference` can refer to a button, field, card, background,
+stack (including the `Home` stack), or the `HyperCard` application.
 
 For example:
 
 ```text
-send mouseUp to button myButton
+send "mouseUp" to button "myButton"
 ```
+
+The `send` command should not be used to send a message to the current object.
+For example, the command `send "mouseUp" to me`
+is equivalent to the command `mouseUp`.
+
+The `send` command can also be use used to
+bypass handlers in the object hierarchy.
+For example, suppose the current stack has a `doMenu` handler.
+We can use the `doMenu` command and bypass that handler
+with a command like `send "doMenu New Card" to HyperCard`.
 
 #### set Command
 
