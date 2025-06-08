@@ -3630,11 +3630,8 @@ For example, all of the following expressions evaluate to "true":
 #### Booleans
 
 Booleans are stored as the strings "true" and "false".
-
-Relational operators like `<` and `>=` return one of these strings
-and the `if` command checks for them.
-
-TODO: Add more to this section.
+Relational operators like `<` and `>=` return one of these strings.
+The commands `if`, `repeat until`, and `repeat while` use a Boolean expression.
 
 #### Numbers
 
@@ -3659,8 +3656,6 @@ For example:
 set the numberFormat to "0.00" -- for currency
 put amount into field total
 ```
-
-TODO: Add more to this section.
 
 #### Strings
 
@@ -3700,7 +3695,7 @@ The expression `"foo" && "bar"` evaluates to `"foo bar"`.
 The `offset` function returns a 1-based index.
 If the substring is not found in the string, it returns zero.
 
-The "Chunked Expressions" section below
+The section <a href="#chunk-expressions">Chunk Expressions</a>
 describes additional string functionality.
 
 #### Dates
