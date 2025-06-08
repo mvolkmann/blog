@@ -5764,6 +5764,39 @@ See the "Groups" section for more detail.
 The `hide menuBar` command hides all the menus
 by hiding the menu bar at the top of the screen.
 
+#### lock error dialogs Command
+
+The `lock error dialogs` command prevents error dialogs
+from being displayed when errors occur.
+Instead the message `errorDialog {message}` is sent to the current card.
+
+For example, suppose we have a card with
+fields named "menuItem" and "errorMessage",
+and a button named "Do Menu Item".
+When the button is clicked, we want to trigger
+the menu item whose name is entered in the "menuItem" field.
+If no such menu item exists, we want to
+display an error message in the "errorMessage" field.
+
+Add the following script to the button:
+
+```text
+on mouseUp
+  put empty into card field "errorMessage"
+  lock error dialogs
+  doMenu card field "menuItem"
+  unlock error dialogs
+end mouseUp
+```
+
+Add the following script to the card:
+
+```text
+on errorDialog message
+  put message into card field "errorMessage"
+end errorDialog
+```
+
 #### lock screen Command
 
 The `lock screen` command prevents screen updates
@@ -6297,6 +6330,12 @@ repeat with i = 1 to length(text)
   wait 5 ticks
 end repeat
 ```
+
+#### unlock error dialogs Command
+
+The `unlock error dialogs` command resumes allowing
+error dialogs to be displayed when an error occurs.
+See the example in the description of the `lock error dialogs` command.
 
 #### unlock screen Command
 
