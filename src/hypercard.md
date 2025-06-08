@@ -5310,7 +5310,7 @@ use the command `close window Navigator` to close it.
 #### close file Command
 
 The `close file` command closes a file that was opened for reading or writing.
-See the <a href="#file-i-o">File I/O</a> section for more detail.
+See the <a href="#file-i%2Fo">File I/O</a> section for more detail.
 
 #### convert Command
 
@@ -5320,7 +5320,8 @@ See examples in the sections "Dates" and "Times" above.
 #### create menu Command
 
 The `create stack` command creates a new menu.
-See the section "Customizing Menus" for more detail.
+See the section <a href="#customizing-menus">Customizing Menus</a>
+for more detail.
 
 #### create stack Command
 
@@ -5382,16 +5383,15 @@ go to this card -- updates the UI
 
 The `delete menu` command deletes an entire menu.
 The `delete menuItem` command deletes a menu item from a menu.
-See the section "Customizing Menus" for more detail.
+See the section <a href="#customizing-menus">Customizing Menus</a>
+for more detail.
 
 To delete the entire contents of a container,
 use the `put` command to put `empty` into it.
 For example, `put empty into field "firstName"`.
 
-See the section "Chunk Expressions" for examples of
-deleting a chunk of container content.
-
-See the section "Customizing Menus" for examples of deleting a menu or a menu item.
+See the section <a href="#chunk-expressions">Chunk Expressions</a>
+for examples of deleting a chunk of container content.
 
 #### divide Command
 
@@ -5547,7 +5547,8 @@ This command can be used in a handler or a function.
 
 #### find Command
 
-See the "Cards - Finding Cards" section.
+The `find` command finds the next card that meets specified criteria.
+See the <a href="#finding-cards">Cards - Finding Cards</a> section.
 
 #### flash Command
 
