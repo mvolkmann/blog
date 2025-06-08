@@ -129,7 +129,7 @@ objects with higher part numbers are drawn on top of
 objects with lower part numbers.
 All objects in the card domain are drawn on top of
 all objects in the background domain.
-For more detail, see the <a href="#layers">Layers</a> section below.
+For more detail, see the <a href="#layers">Layers</a> section.
 
 ## Stacks
 
@@ -741,12 +741,12 @@ To configure a button to navigate to another card,
 open the "Button Info" dialog for the button
 and do one of the following:
 
-- Click the "LinkTo..." button and follow the instructions
-  for this in the "Creating Buttons" section above.
-- Click the "Tasks..." button and follow the instructions
-  for this in the "Creating Buttons" section above.
-- Click the "Scripts..." button and manually
-  add one of the navigation commands after the `visual` command.
+- Click the "LinkTo..." button and follow the instructions for this
+  in the section <a href="#creating-buttons">Creating Buttons</a>.
+- Click the "Tasks..." button and follow the instructions for this
+  in the section <a href="#creating-buttons">Creating Buttons</a>.
+- Click the "Scripts..." button and manually add one of the
+  navigation commands after the <a href="#visual-command">visual command</a>.
 
 The "LinkTo..." and "Tasks..." options
 add a `go` command to the `mouseUp` handler.
@@ -1012,8 +1012,8 @@ The tools include:
     In Mac OS 7, another way to enter Browse mode is to press cmd-tab.
     This doesn't work in Mac OS 8 and 9 because in those,
     cmd-tab switches to the next active application.
-    Another approach for Mac OS 8 and 9 is
-    described in "HyperTalk - Function Keys" below.
+    Another approach for Mac OS 8 and 9 is described in the section
+    <a href="#function-keys">HyperTalk - Function Keys</a>.
 
   - **Button** (2)
 
@@ -1382,7 +1382,8 @@ The tools include:
     changing them affects the text already typed and
     the text that is typed after the dialog is closed.
 
-    To apply a pattern to painted text, see the "Patterns" section below.
+    To apply a pattern to painted text,
+    see the section <a href="#patterns-menu">Patterns Menu</a> below.
 
     Pros of painted text:
 
@@ -1948,7 +1949,8 @@ To add a button to the current card.
      clicking either the checkbox or the label.
      Doing so toggles the value of its `hilite` property.
 
-     For more detail, see the "Check Boxes" section below.
+     For more detail, see the section
+     <a href="#check-boxes">Check Boxes</a> below.
 
    - Radio Button: for a set of mutually exclusive choices
 
@@ -1958,7 +1960,8 @@ To add a button to the current card.
      Select the same "Family" number (1-15) to each radio button
      on the card that is a member of the same group.
 
-     For more detail, see the "Radio Buttons" section below.
+     For more detail, see the section
+     <a href="#radio-buttons">Radio Buttons</a> below.
 
    - Standard: conforms to Macintosh interface guidelines for non-default buttons
 
@@ -1980,7 +1983,7 @@ To add a button to the current card.
 
    - Popup: a dropdown containing options
 
-     For more detail, see the "Popups" section below.
+     For more detail, see the section <a href="#popups">Popups</a>.
 
 1. If the selected style is "Radio Button",
    select a Family number from 1 to 15
