@@ -2070,7 +2070,8 @@ To add a button to the current card.
 
    1. Go to Destination: Choose from 10 radio buttons.
    1. Visual Effect: Choose an effect and a speed.
-      For more detail, see the "Card Transitions" section below.
+      For more detail, see the section
+      <a href="#card-transitions">Card Transitions</a>.
    1. Launch Application: Choose an application and
       optionally a specific document to open.
    1. Link to URL: Enter a URL to be opened in the default web browser.
@@ -2995,9 +2996,8 @@ There are three ways to view and edit the script for a field:
 A `keyDown` message is sent for each key press
 with an argument that is the character or code of the key.
 There is no `keyUp` message.
-See the table in the subsection
-<a href="#messages-for-fields-and-cards">Messages for fields and cards</a>
-in the "HyperTalk" section.
+See the table in the section
+<a href="#messages-for-fields-and-cards">HyperTalk - Messages for fields and cards</a>.
 
 For example:
 
@@ -3183,8 +3183,9 @@ To delete a sound resource from the current stack:
 1. In the dialog that appears, select the name of the sound to be deleted.
 1. Click the "OK" button.
 
-For another way to record sounds,
-see the "Sounds" section in the "iMac G3" blog page.
+For another way to record sounds, see the section
+<a href="/blog/topics/#/blog/imac-g3#sounds">Sounds</a>
+in the "iMac G3" blog page.
 
 ## Importing Graphics
 
