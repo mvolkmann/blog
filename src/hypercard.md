@@ -5769,6 +5769,7 @@ by hiding the menu bar at the top of the screen.
 The `lock error dialogs` command prevents error dialogs
 from being displayed when errors occur.
 Instead the message `errorDialog {message}` is sent to the current card.
+This sets the global variable `lockErrorDialogs` to true.
 
 For example, suppose we have a card with
 fields named "menuItem" and "errorMessage",
@@ -6335,6 +6336,7 @@ end repeat
 
 The `unlock error dialogs` command resumes allowing
 error dialogs to be displayed when an error occurs.
+This sets the global variable `lockErrorDialogs` to false.
 See the example in the description of the `lock error dialogs` command.
 
 #### unlock screen Command
