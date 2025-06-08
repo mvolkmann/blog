@@ -5340,6 +5340,14 @@ After creating a stack, use the `go stack` command to make it the active stack.
 This command is useful in a script that creates a set of cards from known data.
 For example, a stack of flash cards can be created.
 
+#### debug checkpoint Command
+
+The `debug checkpoint` command adds a debugging checkpoint
+in a handler or function that persists when the HyperCard app is quit.
+This differs from debug checkpoints that are added
+by clicking in the left margin of a script.
+Those debug checkpoints are lost when the HyperCard application is quit.
+
 #### delete Command
 
 The `delete` command can delete the following:
