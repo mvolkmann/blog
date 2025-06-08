@@ -3184,7 +3184,7 @@ To delete a sound resource from the current stack:
 1. Click the "OK" button.
 
 For another way to record sounds, see the section
-<a href="/blog/topics/#/blog/imac-g3#sounds">Sounds</a>
+<a href="/blog/topics/#/blog/imac-g3#sounds" target="_blank">Sounds</a>
 in the "iMac G3" blog page.
 
 ## Importing Graphics
@@ -3518,7 +3518,8 @@ Then enter commands separated by semicolons and press return to execute them.
 
 Typing while focus is not in the Message Box or in a card field
 replaces the text in the Message Box.
-See "Blind Typing" in the "Home Stack ... Preferences" section for more detail.
+For more detail see "Blind Typing" under "Preferences"
+in the section <a href="#home-stack">Home Stack</a>.
 
 To change the font family and size used in the Message Box,
 click in it to give it focus and make selections in the Font and Style menus.
