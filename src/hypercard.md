@@ -129,7 +129,7 @@ objects with higher part numbers are drawn on top of
 objects with lower part numbers.
 All objects in the card domain are drawn on top of
 all objects in the background domain.
-For more detail, see the <a href="#layers">Layers</a> section.
+For more detail, see the section <a href="#layers">Layers</a>.
 
 ## Stacks
 
@@ -6439,8 +6439,8 @@ after the `lock screen` command was executed.
 The modifications could include scripted use of the painting tools
 and adding/modifying/removing buttons and fields.
 
-The "Drawing" section contains an example of drawing a pie chart
-that includes the following commands:
+The section <a href="#drawing">Drawing</a> contains an example
+of drawing a pie chart that includes the following commands:
 
 ```text
 lock screen
@@ -6452,8 +6452,8 @@ unlock screen with dissolve slow
 
 The `visual` command specifies
 a transition effect that occurs on card navigation.
-See the "Cards - Card Transitions" section
-for more details on the `visual` command.
+For more details, see the section
+<a href="#card-transitions">Cards - Card Transitions</a>.
 
 #### wait Command
 
@@ -6499,7 +6499,7 @@ The syntax is
 This command can be used create any kind of text file,
 including CSV files with comma or tab delimiters.
 
-See the example in the section <a href="#file-i%2Fo">File I/O</a>.
+For an example, see the section <a href="#file-i%2Fo">File I/O</a>.
 
 #### xy Command
 
@@ -6939,7 +6939,7 @@ Add the `clear` keyword to the `ask password` command
 to instead save the password in clear text.
 
 To require entering a password in order to open a stack,
-see the "Stack - Stack Protection" section.
+see the section <a href="#stack-protection">Stack - Stack Protection</a>.
 
 The following code demonstrates implementing password protection
 to the functionality of a button:
@@ -8008,7 +8008,8 @@ The card shown below computes compound interest.
 <img alt="HyperCard Compound Interest" style="width: 25%"
   src="/blog/assets/hypercard-compound-interest.png?v={{pkg.version}}">
 
-The stack has the script described above in the "Number Fields" section.
+The stack has the script described in the section
+<a href="#number-fields">Number Fields</a>.
 
 The first three fields have the names "principal", "interest", and "periods".
 Each of them have the following script:
