@@ -4058,7 +4058,7 @@ to specify the value on which to sort.
 For example, to sort the colors above on their length, use the command
 `sort items of card field "colors" by length(each)`.
 
-See the <a href="#sorting-cards">Cards - Sorting Cards</a> section
+See the section <a href="#sorting-cards">Cards - Sorting Cards</a>
 for more details on the `sort` command.
 
 When referring to a range, if the end of the range
@@ -4226,7 +4226,7 @@ The Script menu contains the following:
 - "Set Checkpoint" or "Clear Checkpoint" (cmd-d)
 
   This toggles whether there is a checkpoint on the line under the cursor.
-  See the <a href="#debugging">Debugging</a> section below for details.
+  See the section <a href="#debugging">Debugging</a> below for details.
 
 ### Debugging
 
@@ -4727,7 +4727,7 @@ is in the Home stack script.
 #### Messages for pictures
 
 Pictures are windows that are opened with the `picture` command.
-See the <a href="#picture-command">picture Command</a> section below.
+See the section <a href="#picture-command">picture Command</a> below.
 
 The following messages are sent to the current card.
 
@@ -5203,7 +5203,7 @@ The `ask` command displays a dialog box that asks the user a question
 and includes a field where they can type an answer,
 along with OK and Cancel buttons.
 
-See the <a href="#dialogs">Dialogs</a> section for more detail.
+See the section <a href="#dialogs">Dialogs</a> for more detail.
 
 #### ask file Command
 
@@ -5310,12 +5310,13 @@ use the command `close window Navigator` to close it.
 #### close file Command
 
 The `close file` command closes a file that was opened for reading or writing.
-See the <a href="#file-i%2Fo">File I/O</a> section for more detail.
+See the section <a href="#file-i%2Fo">File I/O</a> for more detail.
 
 #### convert Command
 
 The `convert` command converts a date or time to a different format.
-See examples in the sections "Dates" and "Times" above.
+See examples in the sections <a href="#dates">Dates</a>
+and <a href="#times">Times</a> above.
 
 #### create menu Command
 
@@ -5548,7 +5549,7 @@ This command can be used in a handler or a function.
 #### find Command
 
 The `find` command finds the next card that meets specified criteria.
-See the <a href="#finding-cards">Cards - Finding Cards</a> section.
+See the section <a href="#finding-cards">Finding Cards</a>.
 
 #### flash Command
 
@@ -5631,7 +5632,7 @@ which is only present if a paint tool is selected.
 
 The `global` command declares that specified names
 used in a handler or function refer to global variables.
-See the section "Variables" for more detail.
+See the section <a href="#variables">variables</a> for more detail.
 
 #### go Command
 
@@ -5767,11 +5768,12 @@ The `help` command opens the "HyperCard Help" stack in a new window.
 
 The `hide` command hides a button, field, stack title bar, window, menu bar,
 picture layer, or the Message Box.
-See the "Hiding and Showing" section for more detail.
+See the section <a href="#hiding-and-showing">Hiding and Showing</a>
+for more detail.
 
 The `hide groups` command hides the gray underlines
 under text in fields that has the "Group" style.
-See the "Groups" section for more detail.
+See the section <a href="#groups">Groups</a> for more detail.
 
 The `hide menuBar` command hides all the menus
 by hiding the menu bar at the top of the screen.
@@ -5834,7 +5836,7 @@ make multiple modifications to the current card or
 go to other cards to gather data and then return to the current card.
 
 See the examples of using the `lock screen` and `unlock screen` commands
-in the "Drawing" and "Demos" sections.
+in the <a href="#drawing">Drawing</a> and <a href="#demos">Demos</a> sections.
 
 #### multiply Command
 
@@ -5864,7 +5866,8 @@ put result into card field "product"
 
 The `open` command opens another application or
 a document in another application.
-See the `close` command for closing another application or document.
+See the <a href="#close-command">close</a> command
+for closing another application or document.
 
 For example:
 
@@ -5898,7 +5901,7 @@ select it from the Apple menu with `doMenu Calculator`.
 #### open file Command
 
 The `open file` command opens a file for reading or writing.
-See the "File I/O section for more detail.
+See the section <a href="#file-i%2Fo">File I/O</a> for more detail.
 
 #### palette Command
 
@@ -6139,7 +6142,7 @@ The index of the last character read is maintained.
 The next `read from file` command begins reading after that by default.
 To read from the beginning of the file again, close and reopen the file.
 
-See the example in the section "File I/O".
+See the example in the section <a href="#file-i%2Fo">File I/O</a>.
 
 #### reset menuBar Command
 
@@ -6293,7 +6296,8 @@ Highlights of the global properties include:
 
 The `show` command shows a button, field, stack title bar, window, menu bar,
 picture layer, or the Message Box.
-See the "Hiding and Showing" section for more detail.
+See the section <a href="#hiding-and-showing">Hiding and Showing</a>
+for more detail.
 
 The `show groups` command displays gray underlines
 under text in fields that has the "Group" style.
@@ -6487,7 +6491,7 @@ The syntax is
 This command can be used create any kind of text file,
 including CSV files with comma or tab delimiters.
 
-See the example in the section "File I/O".
+See the example in the section <a href="#file-i%2Fo">File I/O</a>.
 
 #### xy Command
 
