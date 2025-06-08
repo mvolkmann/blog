@@ -5913,12 +5913,17 @@ To create a new palette:
 
 #### pass Command
 
-A message handler can forward the message it trapped up to
-the next level up in the object hierarchy using the `pass` command.
+The `pass` command is used in a message handler
+to forward the message it trapped up to
+the next level up in the object hierarchy.
 The syntax is `pass {messageName}`.
 The message name must match that of the containing handler.
 The parameters passed to the containing handler
 are automatically included in the forwarded message.
+
+Once the `pass` command is executed,
+no other commands in the current handler are executed.
+For this reason, the `pass` command should be the last command in its handler.
 
 The `pass` command can only be used in
 the handler that initially trapped the message,
