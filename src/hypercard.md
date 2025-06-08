@@ -1883,7 +1883,7 @@ There are four basic kinds of buttons:
 
 To implement selection from a scrolling list options,
 use a field that displays a scrolling list of options.
-See the demo "List Selection" below.
+See the demo <a href="#list-selection">List Selection</a> below.
 
 Each of the supported button styles are shown below.
 
@@ -2989,7 +2989,8 @@ There are three ways to view and edit the script for a field:
 A `keyDown` message is sent for each key press
 with an argument that is the character or code of the key.
 There is no `keyUp` message.
-See the table in the subsection "Messages for fields and cards"
+See the table in the subsection
+<a href="#messages-for-fields-and-cards">Messages for fields and cards</a>
 in the "HyperTalk" section.
 
 For example:
@@ -4057,7 +4058,8 @@ to specify the value on which to sort.
 For example, to sort the colors above on their length, use the command
 `sort items of card field "colors" by length(each)`.
 
-See the "Cards - Sorting Cards" section for more details on the `sort` command.
+See the <a href="#sorting-cards">Cards - Sorting Cards</a> section
+for more details on the `sort` command.
 
 When referring to a range, if the end of the range
 is greater than the number of elements available,
@@ -4224,7 +4226,7 @@ The Script menu contains the following:
 - "Set Checkpoint" or "Clear Checkpoint" (cmd-d)
 
   This toggles whether there is a checkpoint on the line under the cursor.
-  See the "Debugging" section below for details.
+  See the <a href="#debugging">Debugging</a> section below for details.
 
 ### Debugging
 
@@ -4725,7 +4727,7 @@ is in the Home stack script.
 #### Messages for pictures
 
 Pictures are windows that are opened with the `picture` command.
-See the "picture Command" section below.
+See the <a href="#picture-command">picture Command</a> section below.
 
 The following messages are sent to the current card.
 
@@ -5201,7 +5203,7 @@ The `ask` command displays a dialog box that asks the user a question
 and includes a field where they can type an answer,
 along with OK and Cancel buttons.
 
-See the "Dialogs" section for more detail.
+See the <a href="#dialogs">Dialogs</a> section for more detail.
 
 #### ask file Command
 
@@ -5277,7 +5279,8 @@ TODO: Determine why the "Draw House" button doesn't work in "My First Stack".
 
 The `close` command closes another application or
 a document that was opened in another application.
-See the `open` command for opening another application or document.
+See the <a href="#open-command">open command</a>
+for opening another application or document.
 
 For example:
 
@@ -5307,7 +5310,7 @@ use the command `close window Navigator` to close it.
 #### close file Command
 
 The `close file` command closes a file that was opened for reading or writing.
-See the "File I/O section for more detail.
+See the <a href="#file-i-o">File I/O</a> section for more detail.
 
 #### convert Command
 
