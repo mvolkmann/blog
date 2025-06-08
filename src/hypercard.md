@@ -6292,6 +6292,35 @@ See the "Groups" section for more detail.
 The `sort` command sorts cards within a stack.
 See the "Cards - Sorting Cards" section.
 
+#### start using Command
+
+The `start using` command inserts a given stack into the message hierarchy.
+Inserting the same stack into multiple other stacks allows them to share
+functions, handlers, and resources like icons and sounds.
+
+The stack is inserted before the Home stack
+and before the last inserted stack in the message hierarchy.
+For example, after executing the commands
+`start using stack "Alpha"` and `start using stack "Beta"`,
+the object hierarchy from top to bottom becomes:
+
+- HyperCard
+- Home stack
+- Alpha stack
+- Beta stack
+- current stack
+- current background
+- current card
+- a button or field
+
+Up to ten stacks can be inserted into the message hierarchy.
+
+#### stop using Command
+
+The `stop using` command removes a given stack from the message hierarchy.
+For example, `stop using stack "Alpha"`.
+See the description of the `start using` command above.
+
 #### subtract Command
 
 The `subtract` command subtracts a number from the number in a given container.
