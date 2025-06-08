@@ -4399,7 +4399,8 @@ at the next level higher in the object hierarchy.
 If the top of the object hierarchy is reached and no handler is found,
 the message is ignored and HyperCard carries on, waiting for the next message.
 
-For more detail, see the section "Message Handlers" below.
+For more detail, see the section
+<a href="#message-handlers">Message Handlers</a>.
 
 #### Messages only for buttons
 
@@ -4730,7 +4731,7 @@ is in the Home stack script.
 #### Messages for pictures
 
 Pictures are windows that are opened with the `picture` command.
-See the section <a href="#picture-command">picture Command</a> below.
+See the section <a href="#picture-command">picture Command</a>.
 
 The following messages are sent to the current card.
 
@@ -5206,7 +5207,7 @@ The `ask` command displays a dialog box that asks the user a question
 and includes a field where they can type an answer,
 along with OK and Cancel buttons.
 
-See the section <a href="#dialogs">Dialogs</a> for more detail.
+For more detail, see the section <a href="#dialogs">Dialogs</a>.
 
 #### ask file Command
 
@@ -5229,7 +5230,8 @@ To beep 3 times, use `beep 3`.
 #### choose Command
 
 The `choose` command chooses a tool by name (preferred) or number.
-The "Tools Palette" section gives the names and numbers of each of the tools.
+The section <a href="#tools-palette">Tools Palette</a>
+gives the names and numbers of each of the tools.
 
 When a number is used, it identifies a position in the Tools palette
 where the numbers go across each row and then down.
@@ -5313,19 +5315,19 @@ use the command `close window Navigator` to close it.
 #### close file Command
 
 The `close file` command closes a file that was opened for reading or writing.
-See the section <a href="#file-i%2Fo">File I/O</a> for more detail.
+For more detail, see the section <a href="#file-i%2Fo">File I/O</a>.
 
 #### convert Command
 
 The `convert` command converts a date or time to a different format.
 See examples in the sections <a href="#dates">Dates</a>
-and <a href="#times">Times</a> above.
+and <a href="#times">Times</a>.
 
 #### create menu Command
 
 The `create stack` command creates a new menu.
-See the section <a href="#customizing-menus">Customizing Menus</a>
-for more detail.
+For more detail, see the section
+<a href="#customizing-menus">Customizing Menus</a>.
 
 #### create stack Command
 
@@ -5387,15 +5389,15 @@ go to this card -- updates the UI
 
 The `delete menu` command deletes an entire menu.
 The `delete menuItem` command deletes a menu item from a menu.
-See the section <a href="#customizing-menus">Customizing Menus</a>
-for more detail.
+For more detail, see the section
+<a href="#customizing-menus">Customizing Menus</a>.
 
 To delete the entire contents of a container,
 use the `put` command to put `empty` into it.
 For example, `put empty into field "firstName"`.
 
-See the section <a href="#chunk-expressions">Chunk Expressions</a>
-for examples of deleting a chunk of container content.
+For examples of deleting a chunk of container content,
+see the section <a href="#chunk-expressions">Chunk Expressions</a>.
 
 #### divide Command
 
@@ -5590,8 +5592,8 @@ Once the variable `it` is set by using the `get` command,
 it can be used in subsequent expressions.
 For example, `multiply it by 2`.
 
-See more examples of using the `get` command
-in the "Chunk Expressions" section.
+For more examples of using the `get` command,
+see the section <a href="#chunk-expressions">Chunk Expressions</a>.
 
 #### edit script Command
 
@@ -5635,7 +5637,7 @@ which is only present if a paint tool is selected.
 
 The `global` command declares that specified names
 used in a handler or function refer to global variables.
-See the section <a href="#variables">variables</a> for more detail.
+For more detail, see the section <a href="#variables">variables</a>.
 
 #### go Command
 
@@ -5771,12 +5773,12 @@ The `help` command opens the "HyperCard Help" stack in a new window.
 
 The `hide` command hides a button, field, stack title bar, window, menu bar,
 picture layer, or the Message Box.
-See the section <a href="#hiding-and-showing">Hiding and Showing</a>
-for more detail.
+For more detail, see the section
+<a href="#hiding-and-showing">Hiding and Showing</a>.
 
 The `hide groups` command hides the gray underlines
 under text in fields that has the "Group" style.
-See the section <a href="#groups">Groups</a> for more detail.
+For more detail, see the section <a href="#groups">Groups</a>.
 
 The `hide menuBar` command hides all the menus
 by hiding the menu bar at the top of the screen.
@@ -5904,7 +5906,7 @@ select it from the Apple menu with `doMenu Calculator`.
 #### open file Command
 
 The `open file` command opens a file for reading or writing.
-See the section <a href="#file-i%2Fo">File I/O</a> for more detail.
+For more detail, see the section <a href="#file-i%2Fo">File I/O</a>.
 
 #### palette Command
 
@@ -6044,7 +6046,7 @@ The most common property to set is `visible` to hide and show the picture.
 #### play Command
 
 The `play` command plays a series of notes.
-See the "Sounds" section for more detail.
+For more detail, see the "Sounds" section.
 
 #### pop Command
 
@@ -6115,7 +6117,7 @@ in the "Chunk Expressions" section.
 #### put into menu Command
 
 The `put into stack` command adds menu items to a menu.
-See the section "Customizing Menus" for more detail.
+For more detail, see the section "Customizing Menus".
 
 #### read from file Command
 
@@ -6151,7 +6153,7 @@ See the example in the section <a href="#file-i%2Fo">File I/O</a>.
 
 The `reset menuBar` command restores all the
 menus and their menu items to the default contents.
-See the section "Customizing Menus" for more detail.
+For more detail, see the section "Customizing Menus".
 
 #### reset paint Command
 
@@ -6299,12 +6301,12 @@ Highlights of the global properties include:
 
 The `show` command shows a button, field, stack title bar, window, menu bar,
 picture layer, or the Message Box.
-See the section <a href="#hiding-and-showing">Hiding and Showing</a>
-for more detail.
+For more detail, see the section
+<a href="#hiding-and-showing">Hiding and Showing</a>.
 
 The `show groups` command displays gray underlines
 under text in fields that has the "Group" style.
-See the "Groups" section for more detail.
+For more detail, see the section <a href="#groups">Groups</a>.
 
 #### sort Command
 
