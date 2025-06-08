@@ -129,7 +129,7 @@ objects with higher part numbers are drawn on top of
 objects with lower part numbers.
 All objects in the card domain are drawn on top of
 all objects in the background domain.
-For more detail, see the "Layers" section below.
+For more detail, see the <a href="#layers">Layers</a> section below.
 
 ## Stacks
 
@@ -533,16 +533,19 @@ save the stack as an application (see the next section)
 and distribute that.
 Applications cannot be edited in HyperCard.
 
-### Stack Copying
+### Stack Copying and Creating Applications
 
 To create a copy of the current stack:
 
 - Select File ... Save a Copy...
 - In the dialog that appears, select the target directory.
-- Enter a stack name under the label "Save a copy of stack as:".
-- Optionally change the "File type" to "Application"
-  to create an application that can be run without HyperCard.
+- Enter a name under the label "Save a copy of stack as:".
+- Optionally change the "File type" dropdown to "Application" to create
+  a double-clickable application that can be run without HyperCard.
 - Click the "Save" button.
+- If the selected file type is "Application" ...
+  - Enter a version string like "1.0".
+  - Click the "OK" button.
 
 ## Cards
 
@@ -7709,19 +7712,6 @@ TODO: Add details about this.
 ### Resource Mover
 
 TODO: Add details about this.
-
-## Creating Applications
-
-To create a double-clickable application from a HyperCard stack:
-
-- Open the stack in HyperCard.
-- Select File ... Save a Copy...
-- Select the directory where the application will be saved.
-- Enter a name for the application.
-- In the "File type" dropdown, select "Application".
-- Click the "Save" button.
-- Enter a version string like "1.0".
-- Click the "OK" button.
 
 ## Demos
 
