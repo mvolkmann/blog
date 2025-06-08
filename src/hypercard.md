@@ -7702,6 +7702,19 @@ TODO: Add details about this.
 
 TODO: Add details about this.
 
+## Creating Applications
+
+To create a double-clickable application from a HyperCard stack:
+
+- Open the stack in HyperCard.
+- Select File ... Save a Copy...
+- Select the directory where the application will be saved.
+- Enter a name for the application.
+- In the "File type" dropdown, select "Application".
+- Click the "Save" button.
+- Enter a version string like "1.0".
+- Click the "OK" button.
+
 ## Demos
 
 ### Card Numbering
