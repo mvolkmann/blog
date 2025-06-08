@@ -5841,7 +5841,7 @@ make multiple modifications to the current card or
 go to other cards to gather data and then return to the current card.
 
 See the examples of using the `lock screen` and `unlock screen` commands
-in the <a href="#drawing">Drawing</a> and <a href="#demos">Demos</a> sections.
+in the sections <a href="#drawing">Drawing</a> and <a href="#demos">Demos</a>.
 
 #### multiply Command
 
@@ -6046,7 +6046,7 @@ The most common property to set is `visible` to hide and show the picture.
 #### play Command
 
 The `play` command plays a series of notes.
-For more detail, see the "Sounds" section.
+For more detail, see the section <a href="#sounds">Sounds</a>.
 
 #### pop Command
 
@@ -6111,13 +6111,14 @@ put card field "first name" into firstName -- sets a variable to field contents
 If the keyword `field` is used and it is not preceded by `card`,
 it will default to looking for a background field.
 
-See more examples of using the `put` command
-in the "Chunk Expressions" section.
+For more examples of using the `put` command,
+see the section <a href="#chunk-expressions">Chunk Expressions</a>.
 
 #### put into menu Command
 
 The `put into stack` command adds menu items to a menu.
-For more detail, see the section "Customizing Menus".
+For more detail, see the section
+<a href="#customizing-menus">Customizing Menus</a>.
 
 #### read from file Command
 
@@ -6147,13 +6148,14 @@ The index of the last character read is maintained.
 The next `read from file` command begins reading after that by default.
 To read from the beginning of the file again, close and reopen the file.
 
-See the example in the section <a href="#file-i%2Fo">File I/O</a>.
+For an example, see the section <a href="#file-i%2Fo">File I/O</a>.
 
 #### reset menuBar Command
 
 The `reset menuBar` command restores all the
 menus and their menu items to the default contents.
-For more detail, see the section "Customizing Menus".
+For more detail, see the section
+<a href="#customizing-menus">Customizing Menus</a>.
 
 #### reset paint Command
 
@@ -6161,8 +6163,8 @@ The `reset paint` command resets all paint properties to their default values.
 This command is typically used at the end of handlers
 that modify paint properties.
 
-The pie chart example in the "Drawing" section uses this command
-in a `mouseUp` handler.
+The pie chart example in the section <a href="#drawing">Drawing</a>
+uses this command in a `mouseUp` handler.
 
 #### save stack Command
 
@@ -6285,7 +6287,8 @@ open the Message Box and enter `answer the {global-property-name}`.
 
 Highlights of the global properties include:
 
-- `cursor`: current mouse cursor shape (see the "Mouse Cursor" section)
+- `cursor`: current mouse cursor shape
+  (see the section <a href="#mouse-cursor">Mouse Cursor</a>)
 - `dragSpeed`: controls how fast the mouse cursor moves
   when the `drag` command is executed;
   defaults to `0` which jumps immediately to the target point
@@ -6311,7 +6314,7 @@ For more detail, see the section <a href="#groups">Groups</a>.
 #### sort Command
 
 The `sort` command sorts cards within a stack.
-See the "Cards - Sorting Cards" section.
+See the section <a href="#sorting-cards">Cards - Sorting Cards</a>.
 
 #### start using Command
 
