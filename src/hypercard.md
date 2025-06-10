@@ -73,6 +73,13 @@ The following is a list of things that HyperCard cannot do:
 - make information available on the Web
 - interact with REST APIs
 - support multi-user interactions
+- create custom dialogs
+
+  The `answer` command renders a dialog that displays a message or
+  requests a selection from a set of two or three buttons.
+  The `ask` command renders a dialog that prompts for text input.
+  But it's not possible to implement a dialog with more inputs
+  or one containing UI elements like checkboxes, radio buttons, and lists.
 
 Stacks can be shared and edited by one user at a time.
 
