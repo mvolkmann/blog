@@ -201,7 +201,29 @@ The Mac OS 6.0.5, 7.6, 8.5, and 9 emulators all include HyperCard 2.4.1.
 
 ## Mini vMac
 
-TODO: Add information about this.
+The Mini vMac emulator supports Mac System 1 to 7.5.
+
+The steps to install and configure this emulator are:
+
+TODO: These steps are not working! Maybe the downloaded files are incorrect.
+
+1. Download a ROM file for Mac OS 7.0.1 from the {% aTargetBlank
+   "https://archive.org/details/AppleMacintoshSystem701", "Internet Archive" %}
+   by clicking the "ISO IMAGE" link.
+1. Rename the downloaded file `System_7_0_1.img` to `vMac.ROM`.
+1. Download a bootable disk image for Mac OS 7.5.5 from {% aTargetBlank
+   "https://winworldpc.com/product/mac-os-7/75", "WinWorld" %}.
+   by clicking the "Apple Mac OS 7.5.5 [PowerPC Specific] (CD)" link
+   at the bottom of the list.
+1. Double-click the downloaded file `Apple Mac OS 7.5.5.7z`
+   to get the directory `Apple Mac OS 7.5.5`
+   that contains the file `MacOS 7.5.5.iso`.
+1. Download `minivmac-36.04-mc64.bin.tar` from {% aTargetBlank
+   "https://www.gryphel.com/c/minivmac/", "Mini vMac" %} web site.
+1. Double-click the downloaded `.tar` file to get the file `Mini vMac.app`.
+1. Double-click the file `Mini vMac.app`.
+1. Drag the ROM file `System_7_0_1.img` onto the Mini vMac window.
+1. Drag the bootable disk image file `` onto the Mini vMac window.
 
 ## SheepShaver
 
