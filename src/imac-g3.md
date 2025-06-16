@@ -524,6 +524,43 @@ All the alert sounds are stored in "snd" resources
 inside the `System` file which is in the `System Folder` directory.
 These can be copied to HyperCard stacks using ResEdit.
 
+Some Mac OS 9 sound resources can be found in the `System` file.
+Others are in the `Platinum Sounds` file
+located in `System Folder:Appearance:Sound Sets`.
+
+To extract a sound resource from a file:
+
+1. Download the "SoundApp" application from {% aTargetBlank
+   "https://macintoshgarden.org/apps/soundapp", "Macintosh Garden" %}
+1. Install the SoundApp application on a Mac running OS 9.
+1. Launch the SoundApp.
+1. Select File ... Convert...
+1. Select a file whose "snd" resources will be
+   converted to individual "System Sound" files.
+   For example, the `Platinum Sounds` file mentioned above.
+1. Click the "Convert" button.
+1. Select a destination directory.
+1. Click the "Save" button.
+
+   The destination directory will contain
+   a directory named `SoundApp Converted f"
+   which contains a directory with the same name as the converted file.
+   Inside that directory will be a "System Sound" file
+   for each converted snd resource.
+
+1. To convert a "System Sound" file to a WAV file:
+
+   1. In the Controls dialog, click the document icon button.
+   1. In the Format drop-down, select the target format such as "Windows WAVE".
+   1. Click the "Convert" button.
+   1. Select the target directory.
+   1. Click the "Save" button.
+
+1. Quit the SoundApp application.
+
+The directory of converted sounds can be copied to a modern Mac
+and played there.
+
 ## Applications
 
 ### AppleWorks
