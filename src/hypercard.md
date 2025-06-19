@@ -1496,23 +1496,30 @@ To see this:
 
 The characters that render the tools palette icons are:
 
-- B: hand pointer
+- B: browse mode
 - C: button mode
 - D: field mode
-- E and ^s: lasso selection
-- F: rectangular selection
+- E: lasso tool
+- F: select tool (rectangular)
 - H: text tool
-- I and \: fill tool (bucket)
+- I: bucket tool (fill)
 - J: spray tool
-- K: paint tool (brush)
+- K: brush tool
 - L: pencil tool
 - M: line tool
 - N: eraser tool
 - O: rectangle tool
+- P: filled rectangle tool
 - Q: rounded rectangle tool
+- R: filled rounded rectangle tool
 - S: oval tool
-- U: ? tool
+- T: filled oval tool
+- U: curve tool
+- V: filled curve tool
 - W: irregular polygon tool
+- X: filled irregular polygon tool
+- Z: regular polygon tool
+- [: filled regular polygon tool
 
 The "c" character renders the debug icon.
 
