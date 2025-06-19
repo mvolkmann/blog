@@ -1480,6 +1480,42 @@ To erase part of a drawing, do one of the following:
 - Select an area with the Rectangle or Lasso Selection Tools
   and press the delete key, or select Edit ... Cut Picture, or press cmd-x.
 
+### Tools Palette Icons
+
+The icon for each tool palette button is a
+character in a custom font inside the HyperCard app.
+To see this:
+
+- Launch the ResEdit app.
+- Open the HyperCard file.
+- Double click the "NFNT" resource.
+- Double click the resource with id 32268.
+- Click through the characters on the right
+  to see how that character is rendered by this font.
+  For example, the "A" character renders a lock icon.
+
+The characters that render the tools palette icons are:
+
+- B: hand pointer
+- C: button mode
+- D: field mode
+- E and ^s: lasso selection
+- F: rectangular selection
+- H: text tool
+- I and \: fill tool (bucket)
+- J: spray tool
+- K: paint tool (brush)
+- L: pencil tool
+- M: line tool
+- N: eraser tool
+- O: rectangle tool
+- Q: rounded rectangle tool
+- S: oval tool
+- U: ? tool
+- W: irregular polygon tool
+
+The "c" character renders the debug icon.
+
 ### Menu Changes
 
 When a painting tool is selected,
