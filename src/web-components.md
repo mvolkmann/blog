@@ -443,14 +443,21 @@ Then in the `head` element of the main HTML file, add the following:
 </style>
 ```
 
-## ES Modules
+## JavaScript Modules
 
 The {% aTargetBlank
-"https://html.spec.whatwg.org/multipage/webappapis.html#integration-with-the-javascript-module-system",
-"ES Modules" %} specification define the mechanisms for
-exporting and importing JavaScript modules.
+"https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules",
+"JavaScript Modules" %} support exporting and importing
+functions, classes, objects, constants, and variables.
 
-## HTML Template
+To use the `export` and `import` keywords in a JavaScript source file,
+it must be included with a `script` element like the following:
+
+```html
+<script src="{path-to-js-file}" type="module"></script>
+```
+
+## HTML Templates
 
 The HTML {% aTargetBlank
 "https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_templates_and_slots",
