@@ -168,7 +168,19 @@ customElements.define('greet-message', GreetMessage);
 
 It is common to use a template literal (in backticks) to construct
 the string used as the value of the `innerHTML` property.
-When then string contains an HTML element with an optional attribute,
+
+When the string contains an optional HTML element,
+the following pattern can be used to specify it.
+
+```js
+element.innerHTML = `
+  <always-present></always-present>
+  ${value ? `<optionally-present></optionally-present>` : ''}
+  <always-present></always-present>
+`;
+```
+
+When the string contains an HTML element with an optional attribute,
 the following pattern can be used to specify it.
 
 ```js
