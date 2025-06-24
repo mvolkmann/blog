@@ -51,6 +51,7 @@ is likely to pay off in the long run.
 
 Web components can encapsulate their markup, styles, and functionality
 by using a "shadow DOM".
+DOM that is not embedded in a shadow DOM is referred to as "light DOM".
 
 Tags for custom elements cannot be self-closing,
 even when they have no content.
