@@ -218,6 +218,7 @@ but it prevents access to the shadow DOM from outside the component.
 
 - {% aTargetBlank "/blog/topics/#/blog/lit/", "Lit" %}
 - {% aTargetBlank "https://stenciljs.com", "Stencil" %}
+- {% aTargetBlank "https://fast.design", "Microsoft FAST" %}
 
 ## Available Web Components
 
