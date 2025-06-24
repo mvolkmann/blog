@@ -817,6 +817,32 @@ This method is typically used to
 add elements to the DOM of the web component
 and add event listeners.
 
+An event listener can be a specific method in a web component, or simply `this`.
+When `this` is specified and the event is dispatched,
+the `handleEvent` method is called, passing it an `Event` object.
+For example:
+
+```js
+
+connectedCallback() {
+  const decrementBtn = this.shadowRoot.querySelector('#decrement-btn');
+  decrementBtn.addEventListener('click', this.decrement);
+
+  this.incrementBtn = this.shadowRoot.querySelector('#increment-btn');
+  this.incrementBtn.addEventListener('click', this);
+}
+
+decrement() {
+  this.count--;
+}
+
+handleEvent(event) {
+  if (event.target === this.incrementBtn) {
+    this.count++;
+  }
+}
+```
+
 ### attributeChangedCallback(name, oldValue, newValue)
 
 This lifecycle method is called automatically
@@ -941,6 +967,84 @@ This section shows four ways to implement a counter web component
 that contains a minus button, the current count value, and a plus button.
 
 ### Vanilla with No Shadow DOM
+
+```js
+const counterTemplate = document.createElement('template');
+counterTemplate.innerHTML = /*html*/ `
+  <style>
+    .counter {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    button {
+      background-color: lightgreen;
+    }
+
+    button:disabled {
+      background-color: gray;
+    }
+  </style>
+  <div>
+    <button id="decrement-btn">-</button>
+    <span>${this.count}</span>
+    <button id="increment-btn">+</button>
+  </div>
+`;
+
+class CounterNoShadow extends HTMLElement {
+  static get observedAttributes() {
+    return ['count'];
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (this.isConnected) this.update();
+  }
+
+  connectedCallback() {
+    this.appendChild(counterTemplate.content.cloneNode(true));
+
+    this.querySelector('#decrement-btn').addEventListener('click', () => {
+      this.decrement();
+    });
+    this.querySelector('#increment-btn').addEventListener('click', () => {
+      this.increment();
+    });
+
+    this.span = this.querySelector('span');
+    this.update();
+  }
+
+  // Treat the count attribute as the source of truth
+  // rather than adding a property.
+  get count() {
+    return this.getAttribute('count') || 0;
+  }
+
+  set count(newCount) {
+    return this.setAttribute('count', newCount);
+  }
+
+  decrement() {
+    if (this.count > 0) {
+      this.count--;
+      this.update();
+    }
+  }
+
+  increment() {
+    this.count++;
+    this.update();
+  }
+
+  update() {
+    this.span.textContent = this.count;
+  }
+}
+
+customElements.define('counter-no-shadow', CounterNoShadow);
+```
 
 ### Vanilla with Shadow DOM "open"
 
