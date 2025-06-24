@@ -159,7 +159,7 @@ to add a bit of interactivity.
 <html>
   <head>
     <title>Web Components Demo</title>
-    <script type="module" src="/src/greet-message.js"></script>
+    <script type="module" src="greet-message.js"></script>
     <script
       defer
       src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
@@ -167,7 +167,7 @@ to add a bit of interactivity.
   </head>
   <body>
   <body x-data="{name: 'World'}">
-    <greet-message :name="name"></greet-message3>
+    <greet-message :name="name"></greet-message>
     <button @click="name = 'Earth'">Change Name</button>
   </body>
 </html>
