@@ -55,6 +55,9 @@ by using a "shadow DOM".
 Tags for custom elements cannot be self-closing,
 even when they have no content.
 For example, `<my-element></my-element>` is valid, but `<my-element />` is not.
+HTML parsers only handle a fixed set of
+"void elements" that can be self-closing.
+Commonly used examples include `br`, `hr`, `img`, `input`, `link`, and `meta`.
 
 ## DOM Terminology
 
