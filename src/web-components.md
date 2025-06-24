@@ -360,7 +360,7 @@ this.attachShadow({mode: 'open'});
 ```
 
 To add content to the shadow DOM in a web component,
-add a line like th3e following in the `connectedCallback` method:
+add a line like the following in the `connectedCallback` method:
 
 ```js
 this.shadowRoot.appendChild(someElement);
@@ -804,7 +804,9 @@ The class of a custom element can:
 - attach new elements to its shadow DOM
 
   ```js
-  el.appendChild(otherEl);
+  el.appendChild(otherEl); // appends a single element
+
+  el.append(node1, node2, ...); // appends any number of nodes
   ```
 
 - set text content
