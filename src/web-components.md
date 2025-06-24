@@ -400,22 +400,30 @@ The HTML {% aTargetBlank
 "https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_templates_and_slots"
 "template element" %} provides a way to define an HTML fragment
 that can be cloned and inserted multiple times into a DOM tree.
-This is fast because the content of a `template` element
-in parsed only once, placed in its `content` property, and not rendered.
-The `content` property value can be cloned and appended to a DOM element,
-which is faster than parsing an HTML string again.
+This is fast because the content of a `template` element in parsed only once.
+The resulting DOM root element is assigned to its `content` property.
 
-`template` elements have their CSS `display` property set to `none`
+All `template` elements have their CSS `display` property set to `none`,
 so their content is not rendered.
+Changing the `display` property to another value does not cause it to render.
+
+To render the contents of a template,
+create a deep clone and append the clone to another element.
+This is faster than parsing an HTML string again.
+For example:
+
+```js
+document.body.appendChild(myTemplate.content.cloneNode(true));
+```
 
 Templates can contain slots that are used to insert content.
 Each template can contain one unnamed slot and any number of named slots.
 This is primarily useful when `template` elements are cloned by web components.
 
 The following code demonstrates
-using the `template` element inside a web component.
+using a `template` element inside a web component.
 This approach has the advantage that the content of a web component
-can be described with HTML instead of using
+can be described with HTML instead of creating it using
 DOM methods like `createElement` and `appendChild`.
 However, it has the disadvantage that the web component definition
 must assume that a `template` with a given `id` has been defined outside it.
