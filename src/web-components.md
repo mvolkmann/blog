@@ -82,7 +82,7 @@ work their way into the HTML specification.
 This would provide native alternatives to
 some of the web components we might build and use today.
 
-See the list of components being explorered at the Open UI link above.
+See the list of components being explored at the Open UI link above.
 
 ## Migrating to Web Components
 
@@ -96,6 +96,12 @@ The following file `src/greet-message.js` defines a web component.
 
 ```js
 export class GreetMessage extends HTMLElement {
+  // This constructor can be omitted for approach #1.
+  constructor() {
+    super();
+    this.attachShadow({mode: 'open'});
+  }
+
   connectedCallback() {
     const name = this.getAttribute('name');
     if (!name) throw new Error('name is a required attribute');
@@ -115,12 +121,10 @@ export class GreetMessage extends HTMLElement {
     div.textContent = `Hello, ${name}!`;
     div.style.color = 'purple';
 
-    this.attachShadow({mode: 'open'});
     this.shadowRoot.appendChild(div);
     */
 
     // Approach #3
-    this.attachShadow({mode: 'open'});
     this.render();
   }
 
@@ -315,16 +319,20 @@ The following HTML demonstrates using the custom element defined above.
 
 ## Shadow DOM
 
-The {% aTargetBlank "https://dom.spec.whatwg.org/#interface-shadowroot",
+The {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM",
 "Shadow DOM" %} provides a way to encapsulate the content and styling
 of a custom element.
 
 Many standard HTML elements utilize a shadow DOM.
 Examples include `input`, `audio`, `video`, and `detail`.
 This can be seen by examining such elements
-in the "Elements" tab of the Chrome DevTools.
-Click the settings gear icon, scroll to the "Elements" section,
+in the Chrome DevTools "Elements" tab.
+The "shadow-root" of standard HTML elements
+can only be viewed in the DevTools when enabled.
+To enable this, click the settings gear icon, scroll to the "Elements" section,
 and check "Show user agent shadow DOM".
+The "shadow-root" of custom elements is always visible.
 
 The CSS `display` property for the root element of custom elements
 defaults to "inline".
