@@ -435,30 +435,32 @@ So we can't define templates in a separate file that is included.
   src="/blog/assets/web-component-templates.png?v={{pkg.version}}">
 
 ```js
+class MyCard extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({mode: 'open'});
+  }
+
+  connectedCallback() {
+    const template = document.getElementById('my-card');
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
+  }
+}
+
+customElements.define('my-card', MyCard);
+```
+
+```html
 <!DOCTYPE html>
 <html>
   <head>
     <title>Template Demo</title>
-    <script>
-      window.onload = () => {
-        // The class name is not required to match the custom element name.
-        class Card extends HTMLElement {
-          constructor() {
-            super();
-            this.attachShadow({mode: 'open'});
-            const template = document.getElementById('card');
-            // Passing true creates a deep clone.
-            this.shadowRoot.appendChild(template.content.cloneNode(true));
-          }
-        }
-        customElements.define('my-card', Card);
-      };
-    </script>
+    <script src="my-card.js"></script>
   </head>
   <body>
     <h1>Template Demo</h1>
 
-    <template id="card">
+    <template id="my-card">
       <!-- This styling is only scoped when the
            template is used in a web component. -->
       <style>
