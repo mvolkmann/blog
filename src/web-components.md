@@ -20,19 +20,21 @@ layout: topic-layout.njk
 {% aTargetBlank "https://www.webcomponents.org/introduction", "Web components" %}
 define custom HTML elements that can be used just like standard HTML elements.
 They are defined by a set of standards that include the
-<a href="https://html.spec.whatwg.org/multipage/custom-elements.html"
-target="_blank">Custom Elements API</a>,
-<a href="https://dom.spec.whatwg.org/#shadow-trees"
-target="_blank">Shadow DOM API</a>,
-<a href="https://html.spec.whatwg.org/multipage/webappapis.html#integration-with-the-javascript-module-system"
-target="_blank">ES Modules</a>, and
-<a href="https://html.spec.whatwg.org/multipage/scripting.html#the-template-element"
-target="_blank">HTML Templates</a>.
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements"
+target="_blank">Custom Elements</a>,
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM"
+target="_blank">Shadow DOM</a>,
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/template"
+target="_blank">HTML Templates</a>, and
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules"
+target="_blank">JavaScript Modules</a>.
 
 Web components can be used in any web page,
 with any web framework, and in Markdown files.
 This gives them much broader applicability than components
 implemented using a specific frameworks such as React.
+Those components can typically only be used in
+applications that use the same framework.
 
 Web components are more future-proof than other kinds of components
 because they are likely to be usable
@@ -45,22 +47,13 @@ be used in multiple apps written using multiple frameworks.
 Even if you are only using one web framework today,
 that may change in the future.
 The investment in creating high quality, reusable web components
-will pay off in the long run.
-
-Implementing a reusable library of UI components that can only be used
-in web applications that are implemented with a specific framework
-is not a good time investment.
-It is much better to implement them as web components so they can be
-used in all web applications, regardless of the web framework they use.
+is likely to pay off in the long run.
 The {% aTargetBlank "/blog/topics/#/blog/shoelace", "Shoelace" %}
-library of web components is a great example.
+library of web components and its successor
+{% aTargetBlank "https://backers.webawesome.com", "Web Awesome" %}
+are great examples.
 
-While you could implement every UI component of a web app as a web component,
-that is a bit harder than using other web framework like Svelte.
-Consider only implementing web components for general purpose UI components
-that will be used in multiple apps.
-
-Web components encapsulate their markup, styles, and functionality
+Web components can encapsulate their markup, styles, and functionality
 by using a "shadow DOM".
 
 Tags for custom elements cannot be self-closing,
@@ -92,7 +85,7 @@ work their way into the HTML specification.
 This would provide native alternatives to
 some of the web components we might build and use today.
 
-See the list of components being explorer at the Open UI link above.
+See the list of components being explorered at the Open UI link above.
 
 ## Migrating to Web Components
 
@@ -153,25 +146,9 @@ export class GreetMessage extends HTMLElement {
     `;
   }
 }
+
 customElements.define('greet-message', GreetMessage);
 ```
-
-The `attachShadow` method must be passed an options object
-with a "mode" property that is set to "open" or "closed".
-The recommended value is "open", which causes `this.shadowRoot`
-to be set to a {% aTargetBlank
-"https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot",
-"ShadowRoot" %} object.
-When the "mode" is "closed", `this.shadowRoot` is not set.
-That prevents setting its innerHTML or textContent,
-and prevents appending nodes to it.
-
-This can be accessed in other lifecycle methods such as `connectedCallback`.
-Reasons include:
-
-- setting its `innerHTML`
-- modifying its descendant elements
-- registering listeners for `slotchange` events
 
 The following HTML renders an instance of the web component defined above.
 It uses {% aTargetBlank "https://alpinejs.dev/", "Alpine" %}
@@ -189,12 +166,53 @@ to add a bit of interactivity.
     ></script>
   </head>
   <body>
-  <body x-data="{name: 'World'">
+  <body x-data="{name: 'World'}">
     <greet-message :name="name"></greet-message3>
     <button @click="name = 'Earth'">Change Name</button>
   </body>
 </html>
 ```
+
+## Options
+
+There are three options for implementing web components:
+
+1. Do not use a shadow DOM.
+1. Use an "open" shadow DOM.
+1. Use a "closed" shadow DOM.
+
+Regardless of the option selected,
+there are two ways to specify the component DOM:
+
+1. Set the `innerHTML` property of some object.
+1. Call the `appendChild` method on some object.
+
+When not using a shadow DOM, "some object" is `this`.
+
+When using an open shadow DOM, "some object" is `this.shadowRoot`.
+
+When using a closed shadow DOM, "some object" is
+the return value of the `attachShadow` method.
+
+There are two places where you might consider
+specifying the DOM of the web component,
+in its constructor or in its `connectedCallback` method.
+While doing this in the constructor sometimes works, it is discouraged.
+The reason is that when the constructor runs,
+the attributes and child nodes of the custom element are not yet known.
+
+To create a shadow DOM,
+call `this.attachShadow({mode: "open"})`
+or `this.attachShadow({mode: "closed"})`.
+The recommended mode is "open", which causes `this.shadowRoot`
+to be set to a {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot",
+"ShadowRoot" %} object.
+When the "mode" is "closed", `this.shadowRoot` is not set.
+Instead it must be captured via the return value of the `attachShadow` method.
+This allows setting its `innerHTML` property
+or calling its `appendChild` method,
+but it prevents access to the shadow DOM from outside the component.
 
 ## Libraries That Simplify
 
@@ -272,7 +290,7 @@ customElements.define('hello-world', HelloWorld);
 The name of the class is not required to correspond to the tag name in any way.
 
 The names of custom elements must be all lowercase
-and contain at least one hyphen.
+and contain at least one hyphen (dash).
 This avoids name conflicts with standard HTML elements.
 
 Often the part before the first hyphen serves as a namespace.
