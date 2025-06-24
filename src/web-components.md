@@ -460,6 +460,78 @@ Then in the `head` element of the main HTML file, add the following:
 </style>
 ```
 
+Another way to share styles across components is
+to have each refer to the same `.css` file.
+For example, the following main page and two web components
+all use the file `share.css` to get
+the same styling for all `button` elements.
+
+In `share.css`:
+
+```css
+button {
+  background-color: cornflowerblue;
+  color: orange;
+}
+```
+
+In `index.html`:
+
+```html
+<html>
+  <head>
+    <link rel="stylesheet" href="share.css" />
+    <script src="wc-one.js"></script>
+    <script src="wc-two.js"></script>
+  </head>
+  <body>
+    <button>Main</button>
+    <wc-one></wc-one>
+    <wc-two></wc-two>
+  </body>
+</html>
+```
+
+In `wc-one.js`:
+
+```js
+class WCOne extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({mode: 'open'});
+  }
+
+  connectedCallback() {
+    this.shadowRoot.innerHTML = /*html*/ `
+      <link rel="stylesheet" href="share.css" />
+      <button>WC One</button>
+    `;
+  }
+}
+
+customElements.define('wc-one', WCOne);
+```
+
+In `wc-two.js`:
+
+```js
+class WCTwo extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({mode: 'open'});
+  }
+
+  connectedCallback() {
+    this.shadowRoot.innerHTML = /*html*/ `
+      <link rel="stylesheet" href="share.css" />
+      <button>WC Two</button>
+    `;
+  }
+}
+
+customElements.define('wc-two', WCTwo);
+```
+
 ## JavaScript Modules
 
 The {% aTargetBlank
