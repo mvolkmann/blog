@@ -996,13 +996,11 @@ export class CounterLit extends LitElement {
     .counter {
       display: flex;
       align-items: center;
-      gap: 1rem;
-      font-size: 1.5rem;
+      gap: 0.5rem;
     }
+
     button {
       background-color: lightgreen;
-      font-size: 1.2rem;
-      padding: 0.5rem 1rem;
     }
 
     button:disabled {
