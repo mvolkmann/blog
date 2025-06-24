@@ -366,7 +366,7 @@ For example:
 ### Forms
 
 Instances of web components that are nested in a `form` element
-cannot by default contributed to the set of name/value pairs
+cannot by default contribute to the set of name/value pairs
 that are submitted by the form.
 They are prevented from doing so by the shadow DOM.
 {% aTargetBlank "https://dev.to/steveblue/form-associated-custom-elements-ftw-16bi",
@@ -376,38 +376,69 @@ TODO: Try this and add an example here.
 
 ### Piercing the Shadow DOM
 
-By default, styling used by web components
+The CSS defined in web components that create a shadow DOM is scoped to them.
+It does not "leak out" to affect HTML outside it.
+
+By default, web component styling
 cannot be modified by users of the web components.
-A web component can allow specific overrides
-by exposing the use of CSS variables.
+There are two workarounds for this.
 
-For example, suppose we want to allow users of the `greet-message`
-custom element to select the color which defaults to "purple".
-To achieve this we can change the `render` method to the following.
+Inheritable CSS properties, of which there are many,
+can be used by web components.
+These include `color`, `cursor`, `font`,
+`font-family`, `font-size`, `font-style`, `font-variant`, `font-weight`,
+`letter-spacing`, `line-height`, `text-align`, `text-indent`, `text-transform`,
+`visibility`, and `white-space`, `word-spacing`.
 
-```js
-  render() {
-    const name = this.getAttribute('name');
-    this.shadowRoot.innerHTML = `
-      <style>
-        div { color: var(--greet-message-color, purple); }
-      </style>
-      <div>Hello, ${name}!</div>
-    `;
-  }
-```
-
-The CSS used by web components that create a shadow DOM is scoped to them.
-So the CSS rule above only affects the `div` element that it renders.
-The `var` above specifies that the `color` should be the value of the
-`--greet-message-color` CSS variable if it is set, and "purple" otherwise.
-
-Now users of this custom element can override the color with the following.
+For example, suppose we want to set the color used for
+`label` elements in a custom element named `dog-data`.
+In the `head` element of the main HTML file, add the following:
 
 ```html
 <style>
+  dog-data {
+    color: green;
+  }
+</style>
+```
+
+Then in the web component that defines the custom element, add the following:
+
+```html
+<style>
+  label {
+    color: inherit;
+  }
+</style>
+```
+
+Web components can also allow specific style overrides by using CSS variables.
+
+For example, suppose we want to allow users of the `dog-data`
+custom element to select the label color which defaults to "purple".
+In the web component that defines the custom element, add the following:
+
+<style>
+  label {
+    color: var(--dog-data-label-color, purple);
+  }
+</style>
+
+The `var` above specifies that the `color` should be the value of the
+`--dog-data-label-color` CSS variable if it is set, and "purple" otherwise.
+
+Then in the `head` element of the main HTML file, add the following:
+
+```html
+<style>
+  dog-data {
+    --dog-data-label-color: red;
+  }
+
+  /* OR */
+
   :root {
-    --greet-message-color: green;
+    --dog-data-label-color: red;
   }
 </style>
 ```
