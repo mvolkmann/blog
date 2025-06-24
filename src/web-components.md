@@ -51,11 +51,25 @@ is likely to pay off in the long run.
 
 Web components can encapsulate their markup, styles, and functionality
 by using a "shadow DOM".
-DOM that is not embedded in a shadow DOM is referred to as "light DOM".
 
 Tags for custom elements cannot be self-closing,
 even when they have no content.
 For example, `<my-element></my-element>` is valid, but `<my-element />` is not.
+
+## DOM Terminology
+
+The term "shadow DOM" refers to DOM nodes that
+have an ancestor that is a "shadow root".
+A shadow root is created by calling the `HTMLElement` `attachShadow` method.
+
+The term "shadow host" refers to the regular DOM node
+to which the shadow root is attached.
+
+The term "light DOM" refers to DOM nodes that
+are supplied as slot content to a web component.
+
+The term "regular DOM" refers to all DOM nodes
+that are not in a shadow DOM or light DOM.
 
 ## Pros and Cons
 
@@ -561,27 +575,6 @@ customElements.define('my-card', MyCard);
   </body>
 </html>
 ```
-
-## DOM Terminology
-
-The term "shadow DOM" refers to DOM nodes that
-have an ancestor that is a "shadow root".
-A shadow root is created by calling the `HTMLElement` `attachShadow` method.
-
-The term "shadow host" refers to the regular DOM node
-to which the shadow root is attached.
-
-The term "light DOM" refers to DOM nodes that
-are supplied as slot content to a web component.
-
-The term "regular DOM" refers to all DOM nodes
-that are not in a shadow DOM or light DOM.
-
-In the example from the previous section,
-
-- `<h1>Template Demo</h1>` is in the regular DOM
-- `<span slot="title">Title #1</span>` is in the light DOM
-- `<section class="card">` is in the shadow DOM
 
 ## Inheritable Styles
 
