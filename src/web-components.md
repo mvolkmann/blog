@@ -763,6 +763,12 @@ in the same way that attributes are passed to standard HTML elements.
 
 The class of a custom element can:
 
+- get the names of all provided attributes
+
+  ```js
+  const attrNames = this.getAttributeNames();
+  ```
+
 - get the value of an attribute
 
   ```js
