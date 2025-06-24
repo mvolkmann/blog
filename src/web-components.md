@@ -48,10 +48,6 @@ Even if you are only using one web framework today,
 that may change in the future.
 The investment in creating high quality, reusable web components
 is likely to pay off in the long run.
-The {% aTargetBlank "/blog/topics/#/blog/shoelace", "Shoelace" %}
-library of web components and its successor
-{% aTargetBlank "https://backers.webawesome.com", "Web Awesome" %}
-are great examples.
 
 Web components can encapsulate their markup, styles, and functionality
 by using a "shadow DOM".
@@ -221,6 +217,8 @@ but it prevents access to the shadow DOM from outside the component.
 - {% aTargetBlank "https://fast.design", "Microsoft FAST" %}
 
 ## Available Web Components
+
+- {% aTargetBlank "https://backers.webawesome.com", "Web Awesome" %}
 
 - {% aTargetBlank "https://shoelace.style", "Shoelace" %}
 
