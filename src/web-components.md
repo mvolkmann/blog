@@ -934,3 +934,115 @@ A more involved approach using `customElements.whenDefined`
 is described in {% aTargetBlank
 "https://shoelace.style/getting-started/usage#waiting-for-components-to-load",
 "Waiting for Components to Load" %}.
+
+## Counter Example
+
+This section shows four ways to implement a counter web component
+that contains a minus button, the current count value, and a plus button.
+
+### Vanilla with No Shadow DOM
+
+### Vanilla with Shadow DOM "open"
+
+### Vanilla with Shadow DOM "closed"
+
+### Lit
+
+In `package.json`:
+
+```json
+{
+  "name": "lit-demo",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "lit": "^3.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "vite": "^5.0.0"
+  }
+}
+```
+
+In `tsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ES2022",
+    "moduleResolution": "node",
+    "lib": ["ES2022", "dom"],
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false
+  }
+}
+```
+
+In `counter-lit.ts`:
+
+```ts
+import {LitElement, css, html} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
+
+@customElement('counter-lit')
+export class CounterLit extends LitElement {
+  static styles = css`
+    .counter {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 1.5rem;
+    }
+    button {
+      background-color: lightgreen;
+      font-size: 1.2rem;
+      padding: 0.5rem 1rem;
+    }
+
+    button:disabled {
+      background-color: gray;
+    }
+  `;
+
+  @property({type: Number}) count = 0;
+
+  private decrement() {
+    if (this.count > 0) this.count--;
+  }
+
+  private increment() {
+    this.count++;
+  }
+
+  render() {
+    return html`
+      <div class="counter">
+        <button ?disabled=${this.count === 0} @click=${this.decrement}>
+          −
+        </button>
+        <span>${this.count}</span>
+        <button @click=${this.increment}>+</button>
+      </div>
+    `;
+  }
+}
+```
+
+In `index.html`:
+
+```html
+<html>
+  <head>
+    <script src="counter-lit.ts" type="module"></script>
+  </head>
+  <body>
+    <counter-lit count="3"></counter-lit>
+  </body>
+</html>
+```
