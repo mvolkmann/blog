@@ -285,24 +285,27 @@ A tag name can be associated with this class as follows:
 customElements.define('hello-world', HelloWorld);
 ```
 
-The name of the class is not required to correspond to the tag name in any way.
-
 The names of custom elements must be all lowercase
 and contain at least one hyphen (dash).
 This avoids name conflicts with standard HTML elements.
+
+The name of the class that implements a custom element
+is not required to correspond to the tag name in any way.
+However, a common convention is for class names to use CamelCase
+and element names to use kebab-case.
 
 Often the part before the first hyphen serves as a namespace.
 For example, all the custom elements provided by
 {% aTargetBlank "https://shoelace.style", "Shoelace" %} begin with "sl-".
 
-The following HTML demonstrates using this custom element.
+The following HTML demonstrates using the custom element defined above.
 
 ```html
 <!DOCTYPE html>
 <html>
   <head>
     <title>Custom Element Demo</title>
-    <script type="module" src="/hello-world.js"></script>
+    <script type="module" src="hello-world.js"></script>
   </head>
   <body>
     <hello-world></hello-world>
