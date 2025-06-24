@@ -96,9 +96,7 @@ The following file `src/greet-message.js` defines a web component.
 
 ```js
 export class GreetMessage extends HTMLElement {
-  constructor() {
-    super();
-
+  connectedCallback() {
     const name = this.getAttribute('name');
     if (!name) throw new Error('name is a required attribute');
 
@@ -390,14 +388,15 @@ Now users of this custom element can override the color with the following.
 
 ## ES Modules
 
-The {% aTargetBlank "https://html.spec.whatwg.org/multipage/webappapis.html#integration-with-the-javascript-module-system",
+The {% aTargetBlank
+"https://html.spec.whatwg.org/multipage/webappapis.html#integration-with-the-javascript-module-system",
 "ES Modules" %} specification define the mechanisms for
 exporting and importing JavaScript modules.
 
 ## HTML Template
 
 The HTML {% aTargetBlank
-"https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_templates_and_slots"
+"https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_templates_and_slots",
 "template element" %} provides a way to define an HTML fragment
 that can be cloned and inserted multiple times into a DOM tree.
 This is fast because the content of a `template` element in parsed only once.
