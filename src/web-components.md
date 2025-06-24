@@ -166,6 +166,17 @@ export class GreetMessage extends HTMLElement {
 customElements.define('greet-message', GreetMessage);
 ```
 
+It is common to use a template literal (in backticks) to construct
+the string used as the value of the `innerHTML` property.
+When then string contains an HTML element with an optional attribute,
+the following pattern can be used to specify it.
+
+```js
+element.innerHTML = `
+  <some-element ${value ? `some-attr="${value}"` : ''}></some-element>
+`;
+```
+
 The following HTML renders an instance of the web component defined above.
 It uses {% aTargetBlank "https://alpinejs.dev/", "Alpine" %}
 to add a bit of interactivity.
