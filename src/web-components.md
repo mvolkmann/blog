@@ -397,11 +397,13 @@ exporting and importing JavaScript modules.
 ## HTML Template
 
 The HTML {% aTargetBlank
-"https://html.spec.whatwg.org/multipage/scripting.html#the-template-element",
+"https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_templates_and_slots"
 "template element" %} provides a way to define an HTML fragment
 that can be cloned and inserted multiple times into a DOM tree.
-This is fast because `template` elements
-are parsed even though they are not rendered.
+This is fast because the content of a `template` element
+in parsed only once, placed in its `content` property, and not rendered.
+The `content` property value can be cloned and appended to a DOM element,
+which is faster than parsing an HTML string again.
 
 `template` elements have their CSS `display` property set to `none`
 so their content is not rendered.
