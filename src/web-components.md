@@ -576,15 +576,6 @@ customElements.define('my-card', MyCard);
 </html>
 ```
 
-## Inheritable Styles
-
-CSS defines many styles that are inherited by descendant elements.
-Examples include `color`, `font`, `font-family`, and `font-weight`.
-
-When these styles are applied to ancestor elements of web components,
-they will be applied to elements in the shadow DOM of the web components
-unless the web components override them.
-
 ## Slots and Parts
 
 A web component can render HTML that includes slots and parts.
@@ -717,22 +708,24 @@ It is commonly used for one time initializations
 such as computing property values.
 
 This method can be omitted if no initializations are required.
+If a constructor is included, it must begin with a call to `super`
+which executes the constructor in the superclass `HTMLElement`.
 
 ### connectedCallback
 
 This lifecycle method is called automatically
 after an instance is added to the DOM.
-It can be used to add event listeners
-to elements outside this custom element.
-Typically anything done in this method
-is undone in the `disconnectedCallback` method.
+This method is typically used to
+add elements to the DOM of the web component
+and add event listeners.
 
 ### attributeChangedCallback(name, oldValue, newValue)
 
 This lifecycle method is called automatically
 when the value of an observed attribute changes.
 
-To define the attributes that are observed, implement the following:
+To define the attributes that are observed,
+implement the following static method:
 
 ```js
 static get observedAttributes() {
@@ -740,6 +733,7 @@ static get observedAttributes() {
 }
 
 attributeChangedCallback(name, oldValue, newValue) {
+  // Do something with the new attribute value.
   this.render(); // assumes this method exists and updates the shadow DOM
 }
 ```
@@ -753,15 +747,13 @@ Lit refers to them as "reactive properties".
 This lifecycle method is called automatically
 after an instance is removed from the DOM.
 It can be used to remove event listeners
-from elements outside this custom element.
-Typically anything done in the `connectedCallback` method
-is undone in this method.
+and clean up anything done in `connectedCallback`
+if that is needed.
 
 ### adoptedCallback
 
 This lifecycle method is called automatically
 when the instance is moved to a new document.
-
 This method is rarely used.
 
 ## Attributes
