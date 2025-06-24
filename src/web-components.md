@@ -334,6 +334,21 @@ To enable this, click the settings gear icon, scroll to the "Elements" section,
 and check "Show user agent shadow DOM".
 The "shadow-root" of custom elements is always visible.
 
+To use a shadow DOM in a web component,
+add a line line the following in the constructor
+where the value of `mode` is `'open'` or `'closed'`:
+
+```js
+this.attachShadow({mode: 'open'});
+```
+
+To add content to the shadow DOM in a web component,
+add a line like th3e following in the `connectedCallback` method:
+
+```js
+this.shadowRoot.appendChild(someElement);
+```
+
 The CSS `display` property for the root element of custom elements
 defaults to "inline".
 Often it is desirable to change this to "block" or "inline-block".
