@@ -1329,6 +1329,11 @@ In `index.html`:
 
 I wanted to see whether I could provide the primary benefits of Lit
 using much less code and avoid requiring a build process.
+All that is needed is the class `ZitElement`
+which is less than 300 lines of code including blank lines and comments.
+JavaScript classes that implement a web component
+simply extend `ZitElement` instead of `HTMLElement` or `LitElement`.
+
 The following goals are achieved when using the `ZitElement` superclass:
 
 - Simplify adding event listeners.
