@@ -594,8 +594,16 @@ To use the `export` and `import` keywords in a JavaScript source file,
 it must be included with a `script` element like the following:
 
 ```html
-<script src="{path-to-js-file}" type="module"></script>
+<script src="{path-to-js-file}" type="module" defer></script>
 ```
+
+Including the `defer` attribute is recommended.
+It allows the download of the JavaScript file to occur in parallel
+with parsing the HTML and downloading other JavaScript files.
+Top-level JavaScript statements in the downloaded files
+will not be executed until HTML parsing completes.
+Each downloaded file will be executed in the order specified
+rather than the order in which each download completes.
 
 ## HTML Templates
 
