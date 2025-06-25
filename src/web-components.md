@@ -421,7 +421,9 @@ It does not "leak out" to affect HTML outside it.
 
 By default, web component styling
 cannot be modified by users of the web components.
-There are two workarounds for this.
+There are four workarounds for this, each described below.
+
+#### Inheritable CSS Properties
 
 Inheritable CSS properties, of which there are many,
 can be used by web components.
@@ -452,7 +454,10 @@ Then in the web component that defines the custom element, add the following:
 </style>
 ```
 
-Web components can also allow specific style overrides by using CSS variables.
+#### CSS Variables
+
+Web components can allow specific CSS property overrides
+by using CSS variables with default values.
 
 For example, suppose we want to allow users of the `dog-data`
 custom element to select the label color which defaults to "purple".
@@ -482,6 +487,28 @@ Then in the `head` element of the main HTML file, add the following:
   }
 </style>
 ```
+
+#### part Attributes
+
+The styles of elements rendered by web components that use a shadow DOM
+can be modified if they have a `part` attribute.
+
+For example, suppose we want to enable
+styling a `span` element in the custom element `my-counter`:
+
+```html
+<span part="count">${this.count}</span>
+```
+
+In HTML that uses the custom element, add CSS like the following:
+
+```css
+my-counter::part(count) {
+  color: blue;
+}
+```
+
+#### Shared CSS Files
 
 Another way to share styles across components is
 to have each refer to the same `.css` file.
