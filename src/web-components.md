@@ -1327,20 +1327,65 @@ In `index.html`:
 
 ### Zit
 
-I wanted to see whether I could provided the primary benefits of Lit
-in much less code that does not require a build process.
-The goals are:
+I wanted to see whether I could provide the primary benefits of Lit
+using much less code and avoid requiring a build process.
+The following goals are achieved when using the `ZitElement` superclass:
 
 - Simplify adding event listeners.
+
+  An HTML element can include attributes whose names begin with "on",
+  followed by the name of a DOM event in any case.
+  The value of these attributes must be
+  the name of a method that will handled the events.
+  For example:
+
+  ```html
+  <button onclick="increment">+</button>
+  ```
+
 - Simplify updating the text content and attribute values of elements
   to match the value of a given web component property.
+
+  For example, the content of the `span` element below
+  will always be the current value of the `count` property.
+  The "$" prefix is required to opt into this behavior.
+
+  ```html
+  <span>$count</span>
+  ```
+
 - Simplify updating the text content and attribute values of elements
   to match the value of a given expression
   involving any number of web component property.
+
+  For example, the `disabled` attribute on the `button` element below
+  is automatically updated based on the value of the expression `count === 0`.
+  The "$:" prefix is required to indicate that what follows
+  is a JavaScript expression that can refer to property names.
+
+  ```html
+  <button disabled="$: count === 0" onclick="decrement">-</button>
+  ```
+
 - Associate all web component attributes with a web component property
   so that modifying either causes the other to be modified to the same value.
 
-All of these goals are achieved using the `ZitElement` superclass.
+  To demonstrate this:
+
+  1. Browse the `index.html` file shown below in Chrome.
+  1. Open the DevTools.
+  1. Click the "Elements" tab.
+  1. Double-click the value of the `count` attribute
+     on the `counter-zit` custom element.
+  1. Change the value to another number.
+  1. Note that the UI updates to display the new value.
+  1. Click the "Console" tab.
+  1. Enter `$0.count`.
+  1. Note that the value of this property matches the new attribute value.
+  1. Enter `$0.count = 10`.
+  1. Note that the UI updates to display the new value.
+  1. Note that the `count` attribute on the custom element
+     updates to the new value.
 
 TODO: Maybe choose a better name than Zit.
 
@@ -1348,7 +1393,6 @@ In `counter-zit.ts`:
 
 ```js
 import ZitElement from './zit-element.js';
-//import ZitElement from "./zit-element.min.js";
 
 class CounterZit extends ZitElement {
   static properties = {count: 'number'};
