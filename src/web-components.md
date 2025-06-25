@@ -972,7 +972,7 @@ The class of a custom element can:
   el.innerHTML = 'some HTML';
   ```
 
-## Avoiding Flash Of Undefined Custom Elements (FOUCE)
+## Flash Of Undefined Custom Elements (FOUCE)
 
 When a page containing web components is initially rendered,
 the CSS and JavaScript for the components may not be loaded yet.
@@ -1321,6 +1321,91 @@ In `index.html`:
   </head>
   <body>
     <counter-lit count="3"></counter-lit>
+  </body>
+</html>
+```
+
+### Zit
+
+I wanted to see whether I could provided the primary benefits of Lit
+in much less code that does not require a build process.
+The goals are:
+
+- Simplify adding event listeners.
+- Simplify updating the text content and attribute values of elements
+  to match the value of a given web component property.
+- Simplify updating the text content and attribute values of elements
+  to match the value of a given expression
+  involving any number of web component property.
+- Associate all web component attributes with a web component property
+  so that modifying either causes the other to be modified to the same value.
+
+All of these goals are achieved using the `ZitElement` superclass.
+
+TODO: Maybe choose a better name than Zit.
+
+In `counter-zit.ts`:
+
+```js
+import ZitElement from './zit-element.js';
+//import ZitElement from "./zit-element.min.js";
+
+class CounterZit extends ZitElement {
+  static properties = {count: 'number'};
+
+  static css() {
+    return /*css*/ `
+      :not(:defined) {
+        visibility: hidden;
+      }
+
+      .counter {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      button {
+        background-color: lightgreen;
+      }
+
+      button:disabled {
+        background-color: gray;
+      }
+    `;
+  }
+
+  static html() {
+    return /*html*/ `
+      <div>
+        <button disabled="$: count === 0" onclick="decrement">-</button>
+        <span>$count</span>
+        <button onclick="increment">+</button>
+      </div>
+    `;
+  }
+
+  decrement() {
+    if (this.count > 0) this.count--;
+  }
+
+  increment() {
+    this.count++;
+  }
+}
+
+CounterZit.register();
+```
+
+In `index.html`:
+
+```html
+<html>
+  <head>
+    <script src="counter-zit.ts" type="module"></script>
+  </head>
+  <body>
+    <counter-zit count="3"></counter-zit>
   </body>
 </html>
 ```
