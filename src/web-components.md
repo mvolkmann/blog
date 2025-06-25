@@ -1005,7 +1005,8 @@ class CounterNoShadow extends HTMLElement {
   connectedCallback() {
     this.appendChild(counterTemplate.content.cloneNode(true));
 
-    this.querySelector('#decrement-btn').addEventListener('click', () => {
+    this.decrementBtn = this.querySelector('#decrement-btn');
+    this.decrementBtn.addEventListener('click', () => {
       this.decrement();
     });
     this.querySelector('#increment-btn').addEventListener('click', () => {
@@ -1075,7 +1076,8 @@ class CounterShadowOpen extends HTMLElement {
     const root = this.shadowRoot;
     root.appendChild(counterTemplate.content.cloneNode(true));
 
-    root.querySelector('#decrement-btn').addEventListener('click', () => {
+    this.decrementBtn = root.querySelector('#decrement-btn');
+    this.decrementBtn.addEventListener('click', () => {
       this.decrement();
     });
     root.querySelector('#increment-btn').addEventListener('click', () => {
@@ -1097,14 +1099,20 @@ class CounterShadowOpen extends HTMLElement {
   }
 
   decrement() {
-    if (this.count > 0) {
-      this.count--;
-      this.update();
+    if (this.count === 0) return;
+
+    this.count--;
+    // this.count gets converted to a string,
+    // so we have to use == instead of === on the next line.
+    if (this.count == 0) {
+      this.decrementBtn.setAttribute('disabled', 'disabled');
     }
+    this.update();
   }
 
   increment() {
     this.count++;
+    this.decrementBtn.removeAttribute('disabled');
     this.update();
   }
 
@@ -1142,7 +1150,8 @@ class CounterShadowClosed extends HTMLElement {
   connectedCallback() {
     this.root.appendChild(counterTemplate.content.cloneNode(true));
 
-    this.root.querySelector('#decrement-btn').addEventListener('click', () => {
+    this.decrementBtn = this.root.querySelector('#decrement-btn');
+    this.decrementBtn.addEventListener('click', () => {
       this.decrement();
     });
     this.root.querySelector('#increment-btn').addEventListener('click', () => {
@@ -1164,14 +1173,18 @@ class CounterShadowClosed extends HTMLElement {
   }
 
   decrement() {
-    if (this.count > 0) {
-      this.count--;
-      this.update();
+    this.count--;
+    // this.count gets converted to a string,
+    // so we have to use == instead of === on the next line.
+    if (this.count == 0) {
+      this.decrementBtn.setAttribute('disabled', 'disabled');
     }
+    this.update();
   }
 
   increment() {
     this.count++;
+    this.decrementBtn.removeAttribute('disabled');
     this.update();
   }
 
