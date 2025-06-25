@@ -145,6 +145,7 @@ export class GreetMessage extends HTMLElement {
     this.render();
   }
 
+  // attributeChangedCallback will only be called for attributes listed here.
   static get observedAttributes() {
     return ['name'];
   }
@@ -876,7 +877,9 @@ This lifecycle method is called automatically
 when the value of an observed attribute changes.
 
 To define the attributes that are observed,
-implement the following static method:
+implement the following static method.
+This cannot be determined dynamically
+when an instance of the custom element is created.
 
 ```js
 static get observedAttributes() {
