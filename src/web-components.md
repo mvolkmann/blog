@@ -999,33 +999,16 @@ that contains a minus button, the current count value, and a plus button.
 ### Vanilla with No Shadow DOM
 
 ```js
-const counterTemplate = document.createElement('template');
-counterTemplate.innerHTML = /*html*/ `
-  <style>
-    .counter {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    button {
-      background-color: lightgreen;
-    }
-
-    button:disabled {
-      background-color: gray;
-    }
-  </style>
-  <div>
-    <button id="decrement-btn">-</button>
-    <span>${this.count}</span>
-    <button id="increment-btn">+</button>
-  </div>
-`;
-
 class CounterNoShadow extends HTMLElement {
+  static template;
+
   static get observedAttributes() {
     return ['count'];
+  }
+
+  constructor() {
+    super();
+    CounterNoShadow.template = document.createElement('template');
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
@@ -1033,7 +1016,35 @@ class CounterNoShadow extends HTMLElement {
   }
 
   connectedCallback() {
-    this.appendChild(counterTemplate.content.cloneNode(true));
+    const {template} = CounterNoShadow;
+    template.innerHTML = /*html*/ `
+      <style>
+        :not(:defined) {
+          visibility: hidden;
+        }
+
+        .counter {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
+        button {
+          background-color: lightgreen;
+        }
+
+        button:disabled {
+          background-color: gray;
+        }
+      </style>
+      <div>
+        <button id="decrement-btn">-</button>
+        <span part="count">${this.count}</span>
+        <button id="increment-btn">+</button>
+      </div>
+    `;
+
+    this.appendChild(template.content.cloneNode(true));
 
     this.decrementBtn = this.querySelector('#decrement-btn');
     this.decrementBtn.addEventListener('click', () => {
@@ -1104,7 +1115,7 @@ class CounterShadowOpen extends HTMLElement {
 
   connectedCallback() {
     const root = this.shadowRoot;
-    root.appendChild(counterTemplate.content.cloneNode(true));
+    root.appendChild(CounterNoShadow.template.content.cloneNode(true));
 
     this.decrementBtn = root.querySelector('#decrement-btn');
     this.decrementBtn.addEventListener('click', () => {
@@ -1178,7 +1189,7 @@ class CounterShadowClosed extends HTMLElement {
   }
 
   connectedCallback() {
-    this.root.appendChild(counterTemplate.content.cloneNode(true));
+    this.root.appendChild(CounterNoShadow.template.content.cloneNode(true));
 
     this.decrementBtn = this.root.querySelector('#decrement-btn');
     this.decrementBtn.addEventListener('click', () => {
