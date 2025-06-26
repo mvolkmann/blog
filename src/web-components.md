@@ -244,15 +244,27 @@ the attributes and child nodes of the custom element are not yet known.
 To create a shadow DOM,
 call `this.attachShadow({mode: "open"})`
 or `this.attachShadow({mode: "closed"})`.
-The recommended mode is "open", which causes `this.shadowRoot`
-to be set to a {% aTargetBlank
+The `attachShadow` method returns a {% aTargetBlank
 "https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot",
 "ShadowRoot" %} object.
-When the "mode" is "closed", `this.shadowRoot` is not set.
-Instead it must be captured via the return value of the `attachShadow` method.
-This allows setting its `innerHTML` property
-or calling its `appendChild` method,
-but it prevents access to the shadow DOM from outside the component.
+
+The recommended mode is "open", which causes `this.shadowRoot`
+to be set to the same `ShadowRoot` object that is returned.
+When the mode is "closed", `this.shadowRoot` is not set.
+
+It either case, content can be added to the `ShadowRoot` object
+by setting its `innerHTML` property or calling its `appendChild` method.
+However, when the mode is "closed", descendants of the shadow object
+cannot be accessed from outside the component.
+For example, calling the `querySelectorAll` method on a custom element
+that uses a shadow DOM in "closed" mode always returns an empty `NodeList`
+regardless of the selector.
+
+A web component that uses a shadow DOM in "closed" mode can implement
+methods that provide access to descendants of the `ShadowRoot` object.
+
+In browser DevTools, all ancestors of the `ShadowRoot` are visible
+regardless of the mode.
 
 ## Libraries That Simplify
 
