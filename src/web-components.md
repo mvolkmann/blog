@@ -252,16 +252,18 @@ The recommended mode is "open", which causes `this.shadowRoot`
 to be set to the same `ShadowRoot` object that is returned.
 When the mode is "closed", `this.shadowRoot` is not set.
 
-It either case, content can be added to the `ShadowRoot` object
-by setting its `innerHTML` property or calling its `appendChild` method.
-However, when the mode is "closed", descendants of the shadow object
-cannot be accessed from outside the component.
+It either mode, code in the web component
+can add nodes to the `ShadowRoot` object by
+setting its `innerHTML` property or calling its `appendChild` method.
+
+When the mode is "open", code outside the web component can
+query, add, modify, and delete its nodes and styles.
+However, when the mode is "closed", none of that is possible
+unless the web component implements methods that
+provide access to descendants of the `ShadowRoot` object.
 For example, calling the `querySelectorAll` method on a custom element
 that uses a shadow DOM in "closed" mode always returns an empty `NodeList`
 regardless of the selector.
-
-A web component that uses a shadow DOM in "closed" mode can implement
-methods that provide access to descendants of the `ShadowRoot` object.
 
 In browser DevTools, all ancestors of the `ShadowRoot` are visible
 regardless of the mode.
