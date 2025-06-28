@@ -150,7 +150,7 @@ export class GreetMessage extends HTMLElement {
     return ['name'];
   }
 
-  attributeChangedCallback(name, oldValue, newValue) {
+  attributeChangedCallback(name) {
     if (name === 'name') this.render();
   }
 
@@ -278,9 +278,15 @@ regardless of the mode.
 
 - {% aTargetBlank "https://backers.webawesome.com", "Web Awesome" %}
 
+  "Make something awesome with open-source web components."
+
 - {% aTargetBlank "https://shoelace.style", "Shoelace" %}
 
   "A forward-thinking library of web components."
+
+- {% aTargetBlank "https://github.com/microsoft/fluentui/tree/master/packages/web-components", "Fluent UI Web Components" %}
+
+  from Microsoft
 
 - {% aTargetBlank "https://lion-web.netlify.app", "Lion" %}
 
@@ -1033,7 +1039,7 @@ class CounterNoShadow extends HTMLElement {
     CounterNoShadow.template = document.createElement('template');
   }
 
-  attributeChangedCallback(name, oldValue, newValue) {
+  attributeChangedCallback() {
     if (this.isConnected) this.update();
   }
 
@@ -1087,7 +1093,7 @@ class CounterNoShadow extends HTMLElement {
   }
 
   set count(newCount) {
-    return this.setAttribute('count', newCount);
+    this.setAttribute('count', newCount);
   }
 
   decrement() {
@@ -1131,7 +1137,7 @@ class CounterShadowOpen extends HTMLElement {
     this.attachShadow({mode: 'open'});
   }
 
-  attributeChangedCallback(name, oldValue, newValue) {
+  attributeChangedCallback() {
     if (this.isConnected) this.update();
   }
 
@@ -1158,7 +1164,7 @@ class CounterShadowOpen extends HTMLElement {
   }
 
   set count(newCount) {
-    return this.setAttribute('count', newCount);
+    this.setAttribute('count', newCount);
   }
 
   decrement() {
@@ -1206,7 +1212,7 @@ class CounterShadowClosed extends HTMLElement {
     this.root = this.attachShadow({mode: 'closed'});
   }
 
-  attributeChangedCallback(name, oldValue, newValue) {
+  attributeChangedCallback() {
     if (this.isConnected) this.update();
   }
 
@@ -1232,7 +1238,7 @@ class CounterShadowClosed extends HTMLElement {
   }
 
   set count(newCount) {
-    return this.setAttribute('count', newCount);
+    this.setAttribute('count', newCount);
   }
 
   decrement() {
