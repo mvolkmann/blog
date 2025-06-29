@@ -430,10 +430,288 @@ Instances of web components that are nested in a `form` element
 cannot by default contribute to the set of name/value pairs
 that are submitted by the form.
 They are prevented from doing so by the shadow DOM.
-{% aTargetBlank "https://dev.to/steveblue/form-associated-custom-elements-ftw-16bi",
-"Form-associated custom elements" %} provide a solution.
+However, this can be implemented if
+the static property `formAssociated` is set to `true` and
+the component sets the form values to be contributed to the containing form
+using the `setFormValue` method
+on an object returned by the `HTMLElement` method {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/attachInternals",
+"attachInternals" %} method.
 
-TODO: Try this and add an example here.
+To demonstrate this, let's create web components
+that render a group of radio buttons.
+
+First we will look at an implementation that does not use a shadow DOM.
+Instances of this component can be nested in `form` elements
+and their values will be automatically included in form submissions.
+
+An example instance follows.
+It takes the required attributes "name" and "options".
+The "name" attribute is the name associate with the value in a form submission.
+The "options" attribute is a comma-separated list of radio button values
+that are also used for the labels that follow them.
+It also accepts the optional attributes "default" and "value".
+If the "value" attribute is omitted, the "default" value is used.
+If the "default" attribute is also omitted, the first option is used.
+
+```html
+<radio-group-no-shadow name="color1" options="red,green,blue">
+</radio-group-no-shadow>
+```
+
+```js
+class RadioGroupNoShadow extends HTMLElement {
+  #name;
+  #value;
+
+  connectedCallback() {
+    this.#name = this.getAttribute('name');
+    const options = this.getAttribute('options')
+      .split(',')
+      .map(option => option.trim());
+    this.#value =
+      this.getAttribute('value') || this.getAttribute('default') || options[0];
+
+    this.innerHTML = /*html*/ `
+      <style>
+        :not(:defined) {
+          visibility: hidden;
+        }
+
+        .radio-group {
+          display: flex;
+          gap: 0.25rem;
+
+          > div {
+            display: flex;
+            align-items: center;
+          }
+        }
+      </style>
+      <div class="radio-group">
+        ${options.map(option => this.#makeRadio(option)).join('')}
+      </div>
+    `;
+  }
+
+  #makeRadio(option) {
+    return /*html*/ `
+      <div>
+        <input
+          type="radio"
+          id="${option}"
+          name="${this.#name}"
+          value="${option}"
+          ${option === this.#value ? 'checked' : ''}
+        />
+        <label for="${option}">${option}</label>
+      </div>
+    `;
+  }
+}
+
+customElements.define('radio-group-no-shadow', RadioGroupNoShadow);
+```
+
+Next, we will look at an implementation that does use a shadow DOM.
+It can be used in same way as "radio-group-no-shadow",
+but its implementation is a bit more complicated
+in order to work around the restrictions of the shadow DOM.
+
+```js
+class RadioGroupShadow extends HTMLElement {
+  static formAssociated = true;
+  #default;
+  #internals;
+  #name;
+  #value;
+
+  constructor() {
+    super();
+    this.attachShadow({mode: 'open'});
+    this.#internals = this.attachInternals();
+  }
+
+  connectedCallback() {
+    this.#name = this.getAttribute('name');
+    const options = this.getAttribute('options')
+      .split(',')
+      .map(option => option.trim());
+    this.#default = this.getAttribute('default') || options[0];
+    this.value = this.getAttribute('value') || this.#default;
+
+    this.shadowRoot.innerHTML = /*html*/ `
+      <style>
+        :not(:defined) {
+          visibility: hidden;
+        }
+
+        .radio-group {
+          display: flex;
+          gap: 0.25rem;
+
+          > div {
+            display: flex;
+            align-items: center;
+          } 
+        }
+      </style>
+      <div class="radio-group">
+        ${options.map(option => this.#makeRadio(option)).join('')}
+      </div>
+    `;
+
+    // Add event listeners to the radio buttons.
+    const inputs = this.shadowRoot.querySelectorAll('input');
+    for (const input of inputs) {
+      input.addEventListener('change', event => {
+        this.value = event.target.value;
+      });
+    }
+  }
+
+  formResetCallback() {
+    const value = (this.value = this.#default);
+    for (const input of this.shadowRoot.querySelectorAll('input')) {
+      input.checked = input.value === value;
+    }
+  }
+
+  handleChange(event) {
+    this.value = event.target.value;
+  }
+
+  #makeRadio(option) {
+    return /*html*/ `
+      <div>
+        <input
+          type="radio"
+          id="${option}"
+          name="${this.#name}"
+          value="${option}"
+          ${option === this.value ? 'checked' : ''}
+        />
+        <label for="${option}">${option}</label>
+      </div>
+    `;
+  }
+
+  get value() {
+    return this.#value;
+  }
+
+  set value(newValue) {
+    this.#value = newValue;
+    //this.#internals.setFormValue(newValue);
+    // This demonstrates how a custom element
+    // can contributed multiple values to a form.
+    const data = new FormData();
+    data.append(this.#name, newValue);
+    data.append('special', 19);
+    this.#internals.setFormValue(data);
+  }
+}
+
+customElements.define('radio-group-shadow', RadioGroupShadow);
+```
+
+Finally, we will look at an implementation in TypeScript
+that uses the Lit library.
+It can also be used in same way as "radio-group-no-shadow".
+This has about the same complexity and number of lines
+as the `RadioGroupShadow` class.
+
+```ts
+import {LitElement, css, html} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
+
+@customElement('radio-group-lit')
+export class RadioGroupLit extends LitElement {
+  static formAssociated = true;
+  #internals;
+  #options;
+
+  static styles = css`
+    :not(:defined) {
+      visibility: hidden;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 0.25rem;
+
+      > div {
+        display: flex;
+        align-items: center;
+      }
+    }
+  `;
+
+  @property({type: String}) name = ''; // used in form submission
+  @property({type: String}) options = ''; // comma-separated list
+  // This is the reset value and
+  // the initial value if the "value" attribute is not specified.
+  @property({type: String}) default = '';
+  @property({type: String}) value = ''; // current value
+
+  constructor() {
+    super();
+    this.#internals = this.attachInternals();
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.#options = this.options.split(',').map(label => label.trim());
+    if (!this.default) this.default = this.#options[0];
+    if (!this.value) this.value = this.default;
+  }
+
+  formResetCallback() {
+    this.value = this.default;
+  }
+
+  // This is called when a radio button or its label is clicked.
+  handleChange(event) {
+    this.value = event.target.value;
+  }
+
+  #makeRadio(option) {
+    return html`
+      <div>
+        <input
+          type="radio"
+          id="${option}"
+          name="${this.name}"
+          value="${option}"
+          .checked=${option === this.value}
+          @change=${this.handleChange}
+        />
+        <!-- Note the "." before "checked", not "?", in order to
+             update the "checked" property of the input element
+             and not just the checked attribute. -->
+        <label for="${option}">${option}</label>
+      </div>
+    `;
+  }
+
+  // This called automatically initially and
+  // whenever a property value changes (such as "value").
+  render() {
+    return html`
+      <div class="radio-group">
+        ${this.#options.map(option => this.#makeRadio(option))}
+      </div>
+    `;
+  }
+
+  // This is called automatically after every DOM update,
+  // such as those triggered by the render method.
+  updated() {
+    // Keep the form value in sync with the "value" property.
+    this.#internals.setFormValue(this.value);
+  }
+}
+```
 
 ### Piercing the Shadow DOM
 
