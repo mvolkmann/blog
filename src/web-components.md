@@ -438,10 +438,10 @@ on an object returned by the `HTMLElement` method {% aTargetBlank
 "https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/attachInternals",
 "attachInternals" %} method.
 
-To demonstrate this, let's create web components
+To demonstrate this, let's create three web components
 that render a group of radio buttons.
 
-First we will look at an implementation that does not use a shadow DOM.
+First, we will look at an implementation that does not use a shadow DOM.
 Instances of this component can be nested in `form` elements
 and their values will be automatically included in form submissions.
 
@@ -455,7 +455,12 @@ If the "value" attribute is omitted, the "default" value is used.
 If the "default" attribute is also omitted, the first option is used.
 
 ```html
-<radio-group-no-shadow name="color1" options="red,green,blue">
+<radio-group-no-shadow
+  name="color1"
+  options="red,green,blue"
+  default="green"
+  value="blue"
+>
 </radio-group-no-shadow>
 ```
 
@@ -602,13 +607,7 @@ class RadioGroupShadow extends HTMLElement {
 
   set value(newValue) {
     this.#value = newValue;
-    //this.#internals.setFormValue(newValue);
-    // This demonstrates how a custom element
-    // can contributed multiple values to a form.
-    const data = new FormData();
-    data.append(this.#name, newValue);
-    data.append('special', 19);
-    this.#internals.setFormValue(data);
+    this.#internals.setFormValue(newValue);
   }
 }
 
@@ -711,6 +710,23 @@ export class RadioGroupLit extends LitElement {
     this.#internals.setFormValue(this.value);
   }
 }
+```
+
+All the example implementations above
+contribute a single value to a form submission.
+A web component that does not use a shadow DOM
+can contribute multiple values by simply rendering multiple
+`input`, `textarea`, and `select` elements.
+A web component that uses a shadow DOM can do this using the `FormData` class.
+For example, the lines that call the `setFormValue` method
+in the `RadioGroupShadow` and `RadioGroupLit` classes
+can be replaced with the following code:
+
+```js
+const data = new FormData();
+data.append(this.#name, newValue);
+data.append('favoriteNumber', 19);
+this.#internals.setFormValue(data);
 ```
 
 ### Piercing the Shadow DOM
