@@ -1588,9 +1588,6 @@ In `tsconfig.json`:
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "ES2022",
-    "moduleResolution": "node",
-    "lib": ["ES2022", "dom"],
     "experimentalDecorators": true,
     "useDefineForClassFields": false
   }
