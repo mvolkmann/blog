@@ -424,6 +424,174 @@ For example:
 </style>
 ```
 
+### Piercing the Shadow DOM
+
+The CSS defined in web components that create a shadow DOM is scoped to them.
+It does not "leak out" to affect HTML outside it.
+
+By default, web component styling
+cannot be modified by users of the web components.
+There are four workarounds for this, each described below.
+
+#### Inheritable CSS Properties
+
+Inheritable CSS properties, of which there are many,
+can be used by web components.
+These include `color`, `cursor`, `font`,
+`font-family`, `font-size`, `font-style`, `font-variant`, `font-weight`,
+`letter-spacing`, `line-height`, `text-align`, `text-indent`, `text-transform`,
+`visibility`, and `white-space`, `word-spacing`.
+
+For example, suppose we want to set the color used for
+`label` elements in a custom element named `dog-data`.
+In the `head` element of the main HTML file, add the following:
+
+```html
+<style>
+  dog-data {
+    color: green;
+  }
+</style>
+```
+
+Then in the web component that defines the custom element, add the following:
+
+```html
+<style>
+  label {
+    color: inherit;
+  }
+</style>
+```
+
+#### CSS Variables
+
+Web components can allow specific CSS property overrides
+by using CSS variables with default values.
+
+For example, suppose we want to allow users of the `dog-data`
+custom element to select the label color which defaults to "purple".
+In the web component that defines the custom element, add the following:
+
+<style>
+  label {
+    color: var(--dog-data-label-color, purple);
+  }
+</style>
+
+The `var` above specifies that the `color` should be the value of the
+`--dog-data-label-color` CSS variable if it is set, and "purple" otherwise.
+
+Then in the `head` element of the main HTML file, add the following:
+
+```html
+<style>
+  dog-data {
+    --dog-data-label-color: red;
+  }
+
+  /* OR */
+
+  :root {
+    --dog-data-label-color: red;
+  }
+</style>
+```
+
+#### part Attributes
+
+The styles of elements rendered by web components that use a shadow DOM
+can be modified if they have a `part` attribute.
+
+For example, suppose we want to enable
+styling a `span` element in the custom element `my-counter`:
+
+```html
+<span part="count">${this.count}</span>
+```
+
+In HTML that uses the custom element, add CSS like the following:
+
+```css
+my-counter::part(count) {
+  color: blue;
+}
+```
+
+#### Shared CSS Files
+
+Another way to share styles across components is
+to have each refer to the same `.css` file.
+For example, the following main page and two web components
+all use the file `share.css` to get
+the same styling for all `button` elements.
+
+In `share.css`:
+
+```css
+button {
+  background-color: cornflowerblue;
+  color: orange;
+}
+```
+
+In `index.html`:
+
+```html
+<html>
+  <head>
+    <link rel="stylesheet" href="share.css" />
+    <script src="wc-one.js"></script>
+    <script src="wc-two.js"></script>
+  </head>
+  <body>
+    <button>Main</button>
+    <wc-one></wc-one>
+    <wc-two></wc-two>
+  </body>
+</html>
+```
+
+In `wc-one.js`:
+
+```js
+class WCOne extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({mode: 'open'});
+  }
+
+  connectedCallback() {
+    this.shadowRoot.innerHTML = /*html*/ `
+      <link rel="stylesheet" href="share.css" />
+      <button>WC One</button>
+    `;
+  }
+}
+
+customElements.define('wc-one', WCOne);
+```
+
+In `wc-two.js`:
+
+```js
+class WCTwo extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({mode: 'open'});
+  }
+
+  connectedCallback() {
+    this.shadowRoot.innerHTML = /*html*/ `
+      <link rel="stylesheet" href="share.css" />
+      <button>WC Two</button>
+    `;
+  }
+}
+
+customElements.define('wc-two', WCTwo);
+```
+
 ### Forms
 
 Instances of web components that are nested in a `form` element
@@ -727,174 +895,6 @@ const data = new FormData();
 data.append(this.#name, newValue);
 data.append('favoriteNumber', 19);
 this.#internals.setFormValue(data);
-```
-
-### Piercing the Shadow DOM
-
-The CSS defined in web components that create a shadow DOM is scoped to them.
-It does not "leak out" to affect HTML outside it.
-
-By default, web component styling
-cannot be modified by users of the web components.
-There are four workarounds for this, each described below.
-
-#### Inheritable CSS Properties
-
-Inheritable CSS properties, of which there are many,
-can be used by web components.
-These include `color`, `cursor`, `font`,
-`font-family`, `font-size`, `font-style`, `font-variant`, `font-weight`,
-`letter-spacing`, `line-height`, `text-align`, `text-indent`, `text-transform`,
-`visibility`, and `white-space`, `word-spacing`.
-
-For example, suppose we want to set the color used for
-`label` elements in a custom element named `dog-data`.
-In the `head` element of the main HTML file, add the following:
-
-```html
-<style>
-  dog-data {
-    color: green;
-  }
-</style>
-```
-
-Then in the web component that defines the custom element, add the following:
-
-```html
-<style>
-  label {
-    color: inherit;
-  }
-</style>
-```
-
-#### CSS Variables
-
-Web components can allow specific CSS property overrides
-by using CSS variables with default values.
-
-For example, suppose we want to allow users of the `dog-data`
-custom element to select the label color which defaults to "purple".
-In the web component that defines the custom element, add the following:
-
-<style>
-  label {
-    color: var(--dog-data-label-color, purple);
-  }
-</style>
-
-The `var` above specifies that the `color` should be the value of the
-`--dog-data-label-color` CSS variable if it is set, and "purple" otherwise.
-
-Then in the `head` element of the main HTML file, add the following:
-
-```html
-<style>
-  dog-data {
-    --dog-data-label-color: red;
-  }
-
-  /* OR */
-
-  :root {
-    --dog-data-label-color: red;
-  }
-</style>
-```
-
-#### part Attributes
-
-The styles of elements rendered by web components that use a shadow DOM
-can be modified if they have a `part` attribute.
-
-For example, suppose we want to enable
-styling a `span` element in the custom element `my-counter`:
-
-```html
-<span part="count">${this.count}</span>
-```
-
-In HTML that uses the custom element, add CSS like the following:
-
-```css
-my-counter::part(count) {
-  color: blue;
-}
-```
-
-#### Shared CSS Files
-
-Another way to share styles across components is
-to have each refer to the same `.css` file.
-For example, the following main page and two web components
-all use the file `share.css` to get
-the same styling for all `button` elements.
-
-In `share.css`:
-
-```css
-button {
-  background-color: cornflowerblue;
-  color: orange;
-}
-```
-
-In `index.html`:
-
-```html
-<html>
-  <head>
-    <link rel="stylesheet" href="share.css" />
-    <script src="wc-one.js"></script>
-    <script src="wc-two.js"></script>
-  </head>
-  <body>
-    <button>Main</button>
-    <wc-one></wc-one>
-    <wc-two></wc-two>
-  </body>
-</html>
-```
-
-In `wc-one.js`:
-
-```js
-class WCOne extends HTMLElement {
-  constructor() {
-    super();
-    this.attachShadow({mode: 'open'});
-  }
-
-  connectedCallback() {
-    this.shadowRoot.innerHTML = /*html*/ `
-      <link rel="stylesheet" href="share.css" />
-      <button>WC One</button>
-    `;
-  }
-}
-
-customElements.define('wc-one', WCOne);
-```
-
-In `wc-two.js`:
-
-```js
-class WCTwo extends HTMLElement {
-  constructor() {
-    super();
-    this.attachShadow({mode: 'open'});
-  }
-
-  connectedCallback() {
-    this.shadowRoot.innerHTML = /*html*/ `
-      <link rel="stylesheet" href="share.css" />
-      <button>WC Two</button>
-    `;
-  }
-}
-
-customElements.define('wc-two', WCTwo);
 ```
 
 ## JavaScript Modules
@@ -1229,7 +1229,7 @@ if that is needed.
 ### adoptedCallback
 
 This lifecycle method is called automatically
-when the instance is moved to a new document.
+when the instance is moved to a different document.
 This method is rarely used.
 
 ## Attributes
