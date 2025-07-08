@@ -225,9 +225,37 @@ They can be ordered from {% aTargetBlank
 The item description is "SOTAMIA 2Pcs 1 Inch Speaker Foam Folding Ring
 Speakers Repair Accessories DIY Harman Laptop JBL Speaker Edge Repair".
 See the YouTube video {% aTargetBlank
-"https://www.youtube.com/watch?v=_W38TJNgxmE&t=213s",
+"https://www.youtube.com/watch?v=_W38TJNgxmE",
 "iMac G3 speaker replacement (2023)" %} which walks through
 the steps to remove and repair the speakers.
+
+## Hard Drive
+
+The internal hard drive in an iMac G3 is typically quite small and loud.
+It's a good idea to replace it with an SSD drive.
+I purchased a kit from Other World Computing (OWC) called {% aTargetBlank
+"https://eshop.macsales.com/item/OWC/SSDMXLE250/",
+"250GB OWC Mercury Pro Legacy" %}.
+The iMac G3 can only address up to 128GB, so
+about half the available drive space will not be used,
+but it still works fine.
+
+See the YouTube video {% aTargetBlank
+"https://www.youtube.com/watch?v=fq3QMli0sZU",
+"installing an SSD in an iMac G3" %} which walks through
+the steps to remove the old hard drive and install the SSD kit.
+
+The steps I followed were:
+
+1. Copy everything from the current, spinning hard drive
+   to an external drive, not the SSD kit.
+1. Remove the spinning hard drive.
+1. Install the SSD kit.
+1. Boot from an install CD.
+1. Format the SSD.
+1. Copy all the files from the external drive to the SSD.
+1. Reboot, this time from the SSD.
+1. Eject the install CD.
 
 ## Installing Software
 
