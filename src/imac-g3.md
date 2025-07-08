@@ -211,6 +211,24 @@ being careful not to crack the case.
 <img alt="iMac G3 keyboard screw hole" style="width: 70%"
   src="/blog/assets/imac-g3-keyboard-screw-hole.jpg?v={{pkg.version}}">
 
+## Speakers
+
+The speakers in an iMac G3 are surrounded by a black foam ring
+that deteriorates over time. When that happens,
+the speakers will begin making an annoying, vibrating sound.
+This is caused by the metal speakers rattling against their plastic enclosure.
+
+To fix this, order new form rings and install them.
+They can be ordered from {% aTargetBlank
+"https://www.aliexpress.com/i/3256804516580076.html?gatewayAdapt=4itemAdapt",
+"AliExpress" %}.
+The item description is "SOTAMIA 2Pcs 1 Inch Speaker Foam Folding Ring
+Speakers Repair Accessories DIY Harman Laptop JBL Speaker Edge Repair".
+See the YouTube video {% aTargetBlank
+"https://www.youtube.com/watch?v=_W38TJNgxmE&t=213s",
+"iMac G3 speaker replacement (2023)" %} which walks through
+the steps to remove and repair the speakers.
+
 ## Installing Software
 
 The websites
