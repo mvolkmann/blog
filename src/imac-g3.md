@@ -229,6 +229,9 @@ See the YouTube video {% aTargetBlank
 "iMac G3 speaker replacement (2023)" %} which walks through
 the steps to remove and repair the speakers.
 
+Make sure you remove the large screw from each plastic speaker enclosure
+before attempting to pry it open with a flathead screw driver!
+
 ## Hard Drive
 
 The internal hard drive in an iMac G3 is typically quite small and loud.
@@ -249,8 +252,10 @@ The steps I followed were:
 
 1. Copy everything from the current, spinning hard drive
    to an external drive, not the SSD kit.
+1. Remove the AirPort card if present.
 1. Remove the spinning hard drive.
 1. Install the SSD kit.
+1. Replace the AirPort card if present.
 1. Boot from an install CD.
 1. Format the SSD.
 1. Copy all the files from the external drive to the SSD.
