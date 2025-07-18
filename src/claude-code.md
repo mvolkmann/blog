@@ -111,4 +111,17 @@ I got this message:
 "Credit balance too low ·
 Add funds: https://console.anthropic.com/settings/billing"
 
+I ran "/login" and logged in. That seems to have fixed the balance issue.
+
+I ran the previous request again and it worked!
+
+"In the display of the current value near the bottom of the dial,
+do not show any decimal places."
+
+"Now it always shows "NaN" for the curren value.
+Please show the actual value rounded to the nearest integer."
+
+"Add a small, red circle to the end of the needle and make that be
+the only part of the needle that can be dragged to change the value."
+
 ## Resources
