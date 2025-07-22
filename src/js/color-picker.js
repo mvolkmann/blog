@@ -38,7 +38,6 @@ class ColorPicker extends Wrec {
       ${this.makeSlider('Red')} ${this.makeSlider('Green')}
       ${this.makeSlider('Blue')}
     </div>
-    <div>color = <span>this.color</span></div>
   `;
 
   static makeSlider(label) {

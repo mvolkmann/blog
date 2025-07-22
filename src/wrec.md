@@ -4,6 +4,13 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+<script src="/blog/js/basic-wrec.js" type="module"></script>
+<script src="/blog/js/color-demo.js" type="module" webc:keep></script>
+<script src="/blog/js/color-picker.js" type="module" webc:keep></script>
+<script src="/blog/js/counter-wrec.js" type="module"></script>
+<script src="/blog/js/hello-world.js" type="module"></script>
+<script src="/blog/js/number-slider.js" type="module" webc:keep></script>
+
 <style>
   img {
     border: 1px solid gray;
@@ -67,13 +74,13 @@ For `BasicWrec`, the element name is `basic-wrec`.
 To use this in a web page or Markdown file, include the following:
 
 ```html
+<!--
 <script src="some-path/basic-wrec.js" type="module"></script>
 <basic-wrec></basic-wrec>
+-->
 ```
 
 Here it is in action.
-
-<script src="/blog/js/basic-wrec.js" type="module"></script>
 
 <basic-wrec></basic-wrec>
 
@@ -97,17 +104,7 @@ class HelloWorld extends Wrec {
 HelloWorld.register();
 ```
 
-To use this in a web page or Markdown file, include the following:
-
-```html
-<script src="some-path/hello-world.js" type="module"></script>
-<hello-world></hello-world>
-<hello-world name="wrec"></hello-world>
-```
-
 Here it is in action.
-
-<script src="/blog/js/hello-world.js" type="module"></script>
 
 <hello-world></hello-world>
 <hello-world name="wrec"></hello-world>
@@ -166,8 +163,6 @@ CounterWrec.register();
 ```
 
 Here it is in action.
-
-<script src="/blog/js/counter-wrec.js" type="module"></script>
 
 <counter-wrec></counter-wrec>
 
@@ -228,8 +223,6 @@ NumberSlider.register();
 ```
 
 Here it is in action.
-
-<script src="/blog/js/number-slider.js" type="module"></script>
 
 <number-slider label="Rating" max="10"></number-slider>
 
@@ -312,8 +305,6 @@ ColorPicker.register();
 
 Here it is in action.
 
-<script src="/blog/js/color-picker.js" type="module"></script>
-
 <color-picker></color-picker>
 
 Drag the sliders to change the color of the swatch on the left.
@@ -364,7 +355,5 @@ ColorDemo.register();
 ```
 
 Here it is in action.
-
-<script src="/blog/js/color-demo.js" type="module"></script>
 
 <color-demo></color-demo>
