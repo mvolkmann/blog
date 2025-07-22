@@ -292,12 +292,17 @@ in the "Kicking it up a Notch" section below.
 
 ## Two-way Data Binding
 
-Wrec provides two-way data binding for
-HTML `input`, `textarea`, and `select` elements.
-When the user changes their value,
-an associated property is automatically updated.
+Wrec supports two-way data binding for HTML form elements.
+
+- `input` and `select` elements can have a `value` attribute
+  whose value is "this.somePropertyName".
+- `textarea` elements can have text content
+  that is "this.somePropertyName"
+
+When the user changes the value of these form elements,
+the associated property is automatically updated.
 When code changes the value of an associated property,
-the element is automatically updated.
+the form element is automatically updated.
 
 The following web component demonstrates this.
 Ignore the CSS variable `--label-width` for now.
@@ -353,6 +358,14 @@ Here it is in action.
 <number-slider label="Rating" max="10"></number-slider>
 
 Drag the slider thumb to change the value.
+
+Data binding in Lit is not two-way like in wrec.
+A Lit component cannot simply pass one of its properties to
+a child Lit component and have the child can update the property.
+The child must dispatch custom events that
+the parent listens for so it can update its own state.
+For an example of this, see
+[wrec-compare](https://github.com/mvolkmann/lit-examples/blob/main/wrec-compare/binding-demo.ts).
 
 ## Computed Properties
 
