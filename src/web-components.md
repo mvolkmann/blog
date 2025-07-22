@@ -9,7 +9,7 @@ layout: topic-layout.njk
     border: 1px solid gray;
   }
 </style>
-<script src="./wrec/hello-world.js" type="module"></script>
+<script src="/js/hello-world.js" type="module"></script>
 
 <figure style="width: 30%">
   <img alt="Web Components logo" style="border: 0"
