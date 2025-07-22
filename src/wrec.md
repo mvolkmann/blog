@@ -35,7 +35,12 @@ zero dependency library that greatly simplifies building web components.
 Its main features are that it automates
 wiring event listeners and implementing reactivity.
 
-Wrec was inspired by [Lit](https://lit.dev).
+If you're new to web components, see my slides
+from a one-hour talk on web components at {% aTargetBlank
+"https://github.com/mvolkmann/talks/blob/master/web-components.key.pdf",
+"Web Components" %}.
+
+Wrec was inspired by {% aTargetBlank "https://lit.dev", "Lit" %}.
 It has the following advantages over Lit:
 
 - Wrec is simpler ... just a single class to extend (Wrec).
