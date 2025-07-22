@@ -5,11 +5,14 @@ layout: topic-layout.njk
 ---
 
 <script src="/blog/js/basic-wrec.js" type="module"></script>
-<script src="/blog/js/color-demo.js" type="module" webc:keep></script>
-<script src="/blog/js/color-picker.js" type="module" webc:keep></script>
+<script src="/blog/js/color-demo.js" type="module"></script>
+<script src="/blog/js/color-picker.js" type="module"></script>
 <script src="/blog/js/counter-wrec.js" type="module"></script>
+<script src="/blog/js/data-binding.js" type="module"></script>
 <script src="/blog/js/hello-world.js" type="module"></script>
-<script src="/blog/js/number-slider.js" type="module" webc:keep></script>
+<script src="/blog/js/radio-group.js" type="module"></script>
+<script src="/blog/js/select-list.js" type="module"></script>
+<script src="/blog/js/number-slider.js" type="module"></script>
 
 <style>
   img {
@@ -357,3 +360,245 @@ ColorDemo.register();
 Here it is in action.
 
 <color-demo></color-demo>
+
+## Kicking it up a Notch
+
+For this demo we need to define three more custom elements which are:
+
+- `radio-group`: renders a set of radio buttons which are `input` elements with `type="radio"`
+- `select-list`: renders a `select` element with `option` children
+- `data-binding`: renders elements that tie everything together
+
+We will also use `number-slider` which was defined above.
+
+Here is the class that defines the `radio-group` custom element:
+
+```js
+import Wrec, {css, html} from './wrec.js';
+
+class RadioGroup extends Wrec {
+  static formAssociated = true;
+
+  static properties = {
+    default: {type: String},
+    labels: {type: String},
+    name: {type: String, required: true},
+    values: {type: String, required: true},
+    value: {type: String}
+  };
+
+  static css = css`
+    :host > div {
+      display: flex;
+      gap: 0.5rem;
+
+      > div {
+        display: flex;
+        align-items: center;
+      }
+    }
+  `;
+
+  static html = html`
+    <div>
+      this.values.split(",").map((value, index) => this.makeRadio(value, index,
+      this.labels )).join("")
+    </div>
+  `;
+
+  connectedCallback() {
+    super.connectedCallback();
+    if (!this.default) this.default = this.values.split(',')[0];
+    if (!this.value) this.value = this.default;
+    this.#fixValue();
+  }
+
+  attributeChangedCallback(attrName, oldValue, newValue) {
+    super.attributeChangedCallback(attrName, oldValue, newValue);
+    if (attrName === 'value') {
+      // Update the checked state of the radio buttons.
+      const inputs = this.shadowRoot.querySelectorAll('input');
+      for (const input of inputs) {
+        input.checked = input.value === newValue;
+      }
+    } else if (attrName === 'values') {
+      this.#fixValue();
+    }
+  }
+
+  // This handles the case when the specified value
+  // is not in the list of values.
+  #fixValue() {
+    requestAnimationFrame(() => {
+      const values = this.values.split(',');
+      if (!values.includes(this.value)) this.value = values[0];
+    });
+  }
+
+  handleChange(event) {
+    this.value = event.target.value;
+  }
+
+  makeRadio(value, index) {
+    let label = this.labels.split(',')[index];
+    if (!label) return '';
+    value = value.trim();
+    return html`
+      <div>
+        <input
+          type="radio"
+          id="${value}"
+          name="${this.name}"
+          onchange="handleChange"
+          value="${value}"
+          ${value === this.value ? 'checked' : ''}
+        />
+        <label for="${value}">${label}</label>
+      </div>
+    `;
+  }
+}
+
+RadioGroup.register();
+```
+
+Here is the class that defines the `select-list` custom element:
+
+```js
+import Wrec, {html} from './wrec.js';
+
+class SelectList extends Wrec {
+  static formAssociated = true;
+
+  static properties = {
+    name: {type: String, required: true},
+    labels: {type: String},
+    values: {type: String, required: true},
+    value: {type: String}
+  };
+
+  static html = html`
+    <select name="${this.name}" value="this.value">
+      this.values.split(",").map((value, index) => this.makeOption(value, index,
+      this.labels)).join("")
+    </select>
+  `;
+
+  connectedCallback() {
+    super.connectedCallback();
+
+    // Wait for the DOM to update.
+    requestAnimationFrame(() => {
+      const values = this.values.split(',');
+      if (!values.includes(this.value)) this.value = values[0];
+    });
+  }
+
+  makeOption(value, index) {
+    let label = this.labels.split(',')[index];
+    if (!label) return '';
+    value = value.trim();
+    return html`<option value="${value}">${label}</option>`;
+  }
+}
+
+SelectList.register();
+```
+
+Here is the class that defines the `data-binding` custom element:
+
+```js
+import Wrec, {css, html} from './wrec.js';
+
+const capitalize = str =>
+  str ? str.charAt(0).toUpperCase() + str.slice(1) : str;
+
+class DataBinding extends Wrec {
+  static properties = {
+    color: {type: String},
+    colors: {type: String, required: true},
+    labels: {
+      type: String,
+      computed: 'this.getLabels()',
+      uses: 'colors'
+    },
+    size: {type: Number, value: 18}
+  };
+
+  static css = css`
+    :host {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      font-family: sans-serif;
+    }
+    p {
+      --color: this.color;
+      --size: this.size;
+      color: var(--color);
+      font-size: calc(var(--size) * 1px);
+      margin: 6px 0;
+    }
+  `;
+
+  static html = html`
+    <div>
+      <label>Color Options (comma-separated):</label>
+      <input value="this.colors" />
+    </div>
+    <radio-group
+      name="color1"
+      labels="this.labels"
+      value="this.color"
+      values="this.colors"
+    ></radio-group>
+    <select-list
+      name="color2"
+      labels="this.labels"
+      value="this.color"
+      values="this.colors"
+    ></select-list>
+    <number-slider
+      label="Size"
+      max="48"
+      min="12"
+      value="this.size"
+    ></number-slider>
+    <p>You selected the color <span id="selected-color">this.color</span>.</p>
+  `;
+
+  getLabels() {
+    return this.colors
+      .split(',')
+      .map(color => capitalize(color))
+      .join(',');
+  }
+}
+
+DataBinding.register();
+```
+
+Finally, here it is in action.
+
+<data-binding color="blue" colors="red,green,blue"></data-binding>
+
+Select one of the radio buttons and
+note how the color of the text at the bottom updates.
+Also, the corresponding `option` is selected in the `select` element.
+
+Select a different color in the `select-list` and
+note how the color of the text at the bottom updates.
+Also, the corresponding radio button is selected.
+
+Drag the "Size" slider to change the size of the text at the bottom.
+
+Drum roll please ... For the most amazing part,
+change the comma-separated list of colors in the input at the top.
+Notice how the radio buttons and the select options update.
+The first color in the list is selected by default.
+Selecting other colors works as before.
+
+Take a moment to review the code above that implements these web components.
+Consider how much code would have to be written to
+reproduce this using another library or framework and
+how much more complicated that code would be!
