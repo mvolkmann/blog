@@ -1,16 +1,16 @@
-const FIRST_CHAR = "a-zA-Z_$";
-const OTHER_CHAR = FIRST_CHAR + "0-9";
+const FIRST_CHAR = 'a-zA-Z_$';
+const OTHER_CHAR = FIRST_CHAR + '0-9';
 const IDENTIFIER = `[${FIRST_CHAR}][${OTHER_CHAR}]*`;
 const REFERENCE_RE = new RegExp(`^this.${IDENTIFIER}$`);
-const REFERENCES_RE = new RegExp(`this.${IDENTIFIER}`, "g");
-const SKIP = "this.".length;
+const REFERENCES_RE = new RegExp(`this.${IDENTIFIER}`, 'g');
+const SKIP = 'this.'.length;
 
-const defaultForType = (type) =>
-  type === Number ? 0 : type === Boolean ? false : "";
+const defaultForType = type =>
+  type === Number ? 0 : type === Boolean ? false : '';
 
 function updateAttribute(element, attrName, value) {
   const currentValue = element.getAttribute(attrName);
-  if (typeof value === "boolean") {
+  if (typeof value === 'boolean') {
     if (value) {
       if (currentValue !== attrName) {
         element.setAttribute(attrName, attrName);
@@ -42,12 +42,12 @@ class Wrec extends HTMLElement {
 
   constructor() {
     super();
-    this.attachShadow({ mode: "open" });
+    this.attachShadow({mode: 'open'});
 
     if (!this.constructor.properties) this.constructor.properties = {};
 
-    const map = this.constructor["#propertyToExpressionsMap"];
-    if (!map) this.constructor["#propertyToExpressionsMap"] = new Map();
+    const map = this.constructor['#propertyToExpressionsMap'];
+    if (!map) this.constructor['#propertyToExpressionsMap'] = new Map();
 
     if (this.constructor.formAssociated) {
       this.#internals = this.attachInternals();
@@ -66,7 +66,7 @@ class Wrec extends HTMLElement {
 
   // attrName must be "value" OR undefined!
   #bind(element, propertyName, attrName) {
-    element.addEventListener("input", (event) => {
+    element.addEventListener('input', event => {
       this[propertyName] = event.target.value;
     });
 
@@ -75,15 +75,15 @@ class Wrec extends HTMLElement {
       bindings = [];
       this.#propertyToBindingsMap.set(propertyName, bindings);
     }
-    bindings.push(attrName ? { element, attrName } : element);
+    bindings.push(attrName ? {element, attrName} : element);
   }
 
   #buildDOM() {
     const clazz = this.constructor;
-    let { _template } = clazz;
+    let {_template} = clazz;
     if (!_template) {
-      _template = clazz.template = document.createElement("template");
-      let text = clazz.css ? `<style>${clazz.css}</style>` : "";
+      _template = clazz.template = document.createElement('template');
+      let text = clazz.css ? `<style>${clazz.css}</style>` : '';
       text += clazz.html;
       _template.innerHTML = text;
     }
@@ -105,14 +105,14 @@ class Wrec extends HTMLElement {
   }
 
   #computeProperties() {
-    const { properties } = this.constructor;
-    for (const [propertyName, { computed }] of Object.entries(properties)) {
+    const {properties} = this.constructor;
+    for (const [propertyName, {computed}] of Object.entries(properties)) {
       if (computed) this[propertyName] = this.#evaluateInContext(computed);
     }
   }
 
   #defineProperties() {
-    const { observedAttributes, properties } = this.constructor;
+    const {observedAttributes, properties} = this.constructor;
     for (const [propertyName, config] of Object.entries(properties)) {
       this.#defineProperty(propertyName, config, observedAttributes);
     }
@@ -121,7 +121,7 @@ class Wrec extends HTMLElement {
   #defineProperty(propertyName, config, observedAttributes) {
     const attrName = Wrec.getAttributeName(propertyName);
     if (config.required && !this.hasAttribute(attrName)) {
-      this.#throw(this, propertyName, "is a required attribute");
+      this.#throw(this, propertyName, 'is a required attribute');
     }
 
     // Copy the property value to a private property.
@@ -130,7 +130,7 @@ class Wrec extends HTMLElement {
       observedAttributes.includes(propertyName) && this.hasAttribute(attrName)
         ? this.#typedAttribute(propertyName)
         : config.value || defaultForType(config.type);
-    const privateName = "#" + propertyName;
+    const privateName = '#' + propertyName;
     this[privateName] = value;
 
     if (config.computed) this.#registerComputedProperty(propertyName, config);
@@ -147,7 +147,7 @@ class Wrec extends HTMLElement {
         this[privateName] = value;
 
         // Update all computed properties that reference this property.
-        let map = this.constructor["#propertyToComputedMap"];
+        let map = this.constructor['#propertyToComputedMap'];
         if (map) {
           const computes = map.get(propertyName) || [];
           for (const [computedName, expression] of computes) {
@@ -177,25 +177,25 @@ class Wrec extends HTMLElement {
 
         if (config.dispatch) {
           this.dispatchEvent(
-            new CustomEvent("change", {
+            new CustomEvent('change', {
               bubbles: true, // up DOM tree
               composed: true, // can pass through shadow DOM
-              detail: { propertyName },
+              detail: {propertyName}
             })
           );
         }
-      },
+      }
     });
   }
 
   // This inserts a dash before each uppercase letter
   // that is preceded by a lowercase letter or digit.
   static elementName() {
-    return this.name.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+    return this.name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
   }
 
   #evaluateAttributes(element) {
-    const isWC = element.localName.includes("-");
+    const isWC = element.localName.includes('-');
 
     for (const attrName of element.getAttributeNames()) {
       const text = element.getAttribute(attrName);
@@ -210,7 +210,7 @@ class Wrec extends HTMLElement {
         }
 
         element[propertyName] = value;
-        if (attrName === "value") this.#bind(element, propertyName, attrName);
+        if (attrName === 'value') this.#bind(element, propertyName, attrName);
 
         // If the element is a web component,
         // save a mapping from the attribute name in this web component
@@ -235,13 +235,13 @@ class Wrec extends HTMLElement {
   }
 
   #evaluateText(element) {
-    const { localName } = element;
+    const {localName} = element;
 
-    if (localName === "style") {
+    if (localName === 'style') {
       for (const rule of element.sheet.cssRules) {
         if (rule.type === CSSRule.STYLE_RULE) {
           for (const prop of rule.style) {
-            if (prop.startsWith("--")) {
+            if (prop.startsWith('--')) {
               const value = rule.style.getPropertyValue(prop);
               this.#registerPlaceholders(value, rule, prop);
             }
@@ -253,7 +253,7 @@ class Wrec extends HTMLElement {
       // Only add a binding the element is a "textarea" and
       // its text content is a single property reference.
       const propertyName = this.#propertyReferenceName(element, text);
-      if (localName === "textarea" && propertyName) {
+      if (localName === 'textarea' && propertyName) {
         // Configure data binding.
         this.#bind(element, propertyName);
         element.textContent = this[propertyName];
@@ -267,7 +267,7 @@ class Wrec extends HTMLElement {
     let attrName = Wrec.#propToAttrMap.get(propertyName);
     if (!attrName) {
       attrName = propertyName
-        .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
+        .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
         .toLowerCase();
       Wrec.#propToAttrMap.set(propertyName, attrName);
     }
@@ -286,7 +286,7 @@ class Wrec extends HTMLElement {
   }
 
   #makeReactive(root) {
-    const elements = root.querySelectorAll("*");
+    const elements = root.querySelectorAll('*');
     for (const element of elements) {
       this.#evaluateAttributes(element);
 
@@ -318,7 +318,7 @@ class Wrec extends HTMLElement {
 
   #react(propertyName) {
     // Update all expression references.
-    const map = this.constructor["#propertyToExpressionsMap"];
+    const map = this.constructor['#propertyToExpressionsMap'];
     const expressions = map.get(propertyName) || [];
     for (const expression of expressions) {
       const value = this.#evaluateInContext(expression);
@@ -346,10 +346,10 @@ class Wrec extends HTMLElement {
   }
 
   #registerComputedProperty(propertyName, config) {
-    const { computed, uses } = config;
+    const {computed, uses} = config;
 
-    let map = this.constructor["#propertyToComputedMap"];
-    if (!map) map = this.constructor["#propertyToComputedMap"] = new Map();
+    let map = this.constructor['#propertyToComputedMap'];
+    if (!map) map = this.constructor['#propertyToComputedMap'] = new Map();
 
     function register(referencedProperty, expression) {
       let computes = map.get(referencedProperty);
@@ -366,13 +366,13 @@ class Wrec extends HTMLElement {
       if (this[referencedProperty] === undefined) {
         this.#throwInvalidReference(null, propertyName, referencedProperty);
       }
-      if (typeof this[referencedProperty] !== "function") {
+      if (typeof this[referencedProperty] !== 'function') {
         register(referencedProperty, computed);
       }
     }
 
     if (uses) {
-      for (const use of uses.split(",")) {
+      for (const use of uses.split(',')) {
         register(use, computed);
       }
     }
@@ -383,7 +383,7 @@ class Wrec extends HTMLElement {
   #registerPlaceholders(text, element, attrName) {
     const matches = this.#validateExpression(element, attrName, text);
     if (!matches) {
-      const value = text.replaceAll("this..", "this.");
+      const value = text.replaceAll('this..', 'this.');
       if (attrName) {
         updateValue(element, attrName, value);
       } else {
@@ -395,9 +395,9 @@ class Wrec extends HTMLElement {
     // Only map properties to expressions once for each web component because
     // the mapping will be the same for every instance of the web component.
     if (!this.constructor.processed) {
-      matches.forEach((capture) => {
+      matches.forEach(capture => {
         const propertyName = capture.substring(SKIP);
-        const map = this.constructor["#propertyToExpressionsMap"];
+        const map = this.constructor['#propertyToExpressionsMap'];
         let expressions = map.get(propertyName);
         if (!expressions) {
           expressions = [];
@@ -412,7 +412,7 @@ class Wrec extends HTMLElement {
       references = [];
       this.#expressionToReferencesMap.set(text, references);
     }
-    references.push(attrName ? { element, attrName } : element);
+    references.push(attrName ? {element, attrName} : element);
 
     const value = this.#evaluateInContext(text);
     if (attrName) {
@@ -431,8 +431,8 @@ class Wrec extends HTMLElement {
   #throw(element, attrName, message) {
     throw new Error(
       `component ${this.constructor.elementName()}` +
-        (element ? `, element "${element.localName}"` : "") +
-        (attrName ? `, attribute "${attrName}"` : "") +
+        (element ? `, element "${element.localName}"` : '') +
+        (attrName ? `, attribute "${attrName}"` : '') +
         ` ${message}`
     );
   }
@@ -452,7 +452,7 @@ class Wrec extends HTMLElement {
   #typedValue(propertyName, stringValue) {
     if (stringValue?.match(REFERENCES_RE)) return stringValue;
 
-    const { type } = this.constructor.properties[propertyName];
+    const {type} = this.constructor.properties[propertyName];
     if (type === String) return stringValue;
     if (type === Number) {
       const number = Number(stringValue);
@@ -464,19 +464,19 @@ class Wrec extends HTMLElement {
       );
     }
     if (type === Boolean) {
-      if (stringValue === "true") return true;
-      if (stringValue === "false") return false;
+      if (stringValue === 'true') return true;
+      if (stringValue === 'false') return false;
       if (stringValue && stringValue !== propertyName) {
         this.#throw(
           null,
           propertyName,
-          "is a Boolean attribute, so its value " +
-            "must match attribute name or be missing"
+          'is a Boolean attribute, so its value ' +
+            'must match attribute name or be missing'
         );
       }
       return stringValue === propertyName;
     }
-    this.#throw(null, propertyName, "does not specify its type");
+    this.#throw(null, propertyName, 'does not specify its type');
   }
 
   #updateBindings(propertyName) {
@@ -484,13 +484,13 @@ class Wrec extends HTMLElement {
     const bindings = this.#propertyToBindingsMap.get(propertyName) || [];
     for (const binding of bindings) {
       if (binding instanceof Element) {
-        if (binding.localName === "textarea") {
+        if (binding.localName === 'textarea') {
           binding.value = value;
         } else {
           binding.textContent = value;
         }
       } else {
-        const { element, attrName } = binding;
+        const {element, attrName} = binding;
         updateAttribute(element, attrName, value);
         element[attrName] = value;
       }
@@ -498,15 +498,15 @@ class Wrec extends HTMLElement {
   }
 
   #updateElementContent(element, value) {
-    const { localName } = element;
+    const {localName} = element;
     const t = typeof value;
-    if (t !== "string" && t !== "number") {
+    if (t !== 'string' && t !== 'number') {
       this.#throw(element, null, ` computed content is not a string or number`);
     }
 
-    if (localName === "textarea") {
+    if (localName === 'textarea') {
       element.value = value;
-    } else if (t === "string" && value.trim().startsWith("<")) {
+    } else if (t === 'string' && value.trim().startsWith('<')) {
       element.innerHTML = value;
       this.#wireEvents(element);
       this.#makeReactive(element);
@@ -518,10 +518,10 @@ class Wrec extends HTMLElement {
   #validateAttributes() {
     const propertyNames = new Set(Object.keys(this.constructor.properties));
     for (const attrName of this.getAttributeNames()) {
-      if (attrName === "id") continue;
-      if (attrName.startsWith("on")) continue;
+      if (attrName === 'id') continue;
+      if (attrName.startsWith('on')) continue;
       if (!propertyNames.has(Wrec.getPropertyName(attrName))) {
-        this.#throw(null, attrName, "is not a supported attribute");
+        this.#throw(null, attrName, 'is not a supported attribute');
       }
     }
   }
@@ -530,7 +530,7 @@ class Wrec extends HTMLElement {
     const matches = expression.match(REFERENCES_RE);
     if (!matches) return;
 
-    matches.forEach((capture) => {
+    matches.forEach(capture => {
       const propertyName = capture.substring(SKIP);
       if (this[propertyName] === undefined) {
         this.#throwInvalidReference(element, attrName, propertyName);
@@ -541,24 +541,24 @@ class Wrec extends HTMLElement {
   }
 
   #wireEvents(root) {
-    for (const element of root.querySelectorAll("*")) {
+    for (const element of root.querySelectorAll('*')) {
       // We don't want to remove attributes while we are iterating over them.
       const attributesToRemove = [];
 
       for (const attr of element.attributes) {
         const attrName = attr.name;
-        if (attrName.startsWith("on")) {
+        if (attrName.startsWith('on')) {
           const eventName = attrName.slice(2).toLowerCase();
           const attrValue = attr.value;
           this.#validateExpression(element, attrName, attrValue);
 
           let fn;
-          if (typeof this[attrValue] === "function") {
-            fn = (event) => this[attrValue](event);
+          if (typeof this[attrValue] === 'function') {
+            fn = event => this[attrValue](event);
           } else {
             this.#validateExpression(element, attrName, attrValue);
             // oxlint-disable-next-line no-eval no-unused-vars
-            fn = (event) => eval(attrValue);
+            fn = () => eval(attrValue);
           }
           element.addEventListener(eventName, fn);
           attributesToRemove.push(attrName);
