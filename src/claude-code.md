@@ -124,4 +124,16 @@ Please show the actual value rounded to the nearest integer."
 "Add a small, red circle to the end of the needle and make that be
 the only part of the needle that can be dragged to change the value."
 
+"Add support for optional attributes to the SpeedometerDial component
+that customize the background color, tick color, and needle color."
+
+"Change the attributes you added (backgroundColor, tickColor, and needleColor)
+to use kebab-case (background-color, tick-color, and needle-color)."
+
+"Add small labels to the tick marks that indicate their value,
+rounded to the nearest integer."
+
+"I want small labels on all the tick marks,
+not just the min, max, and major ones."
+
 ## Resources
