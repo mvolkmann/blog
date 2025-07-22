@@ -949,6 +949,16 @@ Here it is in action.
 
 <toggle-switch checked></toggle-switch>
 
+## Form Submissions
+
+Web components that extend `Wrec` can contribute values to
+form submissions by adding the following line to their class definition.
+Wrec looks for this automatically does the rest of the work.
+
+```js
+static formAssociated = true;
+```
+
 ## Error Checking
 
 Wrec checks for many kinds of errors and throws an `Error` when they are found.
