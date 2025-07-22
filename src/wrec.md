@@ -948,3 +948,78 @@ Here it is in action.
 ```
 
 <toggle-switch checked></toggle-switch>
+
+## Error Checking
+
+Wrec checks for many kinds of errors and throws an `Error` when they are found.
+Look for messages in the DevTools console.
+The kinds of errors that are detected include:
+
+- attribute names in web component instances
+  with no matching property declaration
+- attribute values with a type that differs from the declared property type
+- event handling function names that
+  don't match any method name in the web component
+- expressions in attribute values or element text content
+  that reference undeclared web component properties
+- expressions in element text content
+  that do not evaluate to a string or number
+
+## Security
+
+Wrec uses the JavaScript `eval` function to evaluate JavaScript expressions
+that are placed in attribute values and the text content of elements.
+This has security implications if those expressions
+can come from untrusted sources, so it is best avoid
+creating web components that use untrusted content in those ways.
+
+Perhaps the most dangerous thing the use of `eval` allows
+is sending HTTP requests to other servers.
+Such requests could contain data scraped from your web app
+in order to share it with unscrupulous sites.
+
+The easiest way to prevent this is to add a
+Content Security Policy (CSP) to your web app.
+Simply adding the following element as a child of the
+`head` element in each page blocks sending HTTP requests
+to any domain except that of your web app:
+
+```html
+<meta http-equiv="Content-Security-Policy" content="connect-src 'self'" />
+```
+
+## More Examples
+
+Check out the `examples` directory in the
+[wrec GitHub repository](https://github.com/mvolkmann/wrec).
+This contains many example web components that are defined using wrec.
+
+Compare the files `counter-vanilla.js` and `counter-wrec.js`
+to get a feel for how much using wrec
+simplifies the code required to define a web component.
+
+To try the examples, clone the repository, cd to that directory,
+enter `npm install`, enter `npm run dev`, and browse localhost:5173.
+Also try browsing other `.html` files besides `index.html`.
+
+## Tests
+
+wrec has an extensive set of Playwright tests.
+To run them:
+
+1. Clone the wrec repository.
+1. cd to the `examples` directory.
+1. Enter `npm install`.
+1. Enter `npm run testui`.
+1. Click the right pointing triangle.
+
+If there is no "Action" tab which displays a browser view of the running tests,
+reset the Playwright UI settings by entering one of these commands:
+
+```bash
+# macOS
+rm -rf ~/Library/Caches/ms-playwright/.settings
+
+# Windows
+del %LOCALAPPDATA%\ms-playwright\.settings /s /q
+```
