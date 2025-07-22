@@ -1,6 +1,6 @@
 ---
 eleventyNavigation:
-  key: wrec
+  key: Web Reactive Components (wrec)
 layout: topic-layout.njk
 ---
 
