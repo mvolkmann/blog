@@ -25,6 +25,8 @@ function updateAttribute(element, attrName, value) {
 
 function updateValue(element, attrName, value) {
   if (element instanceof CSSRule) {
+    //TODO: This doesn't work in Safari 18.5!
+    //TODO: This causes the "sliders" test in color-demo.spec.ts to fail.
     element.style.setProperty(attrName, value); // CSS variable
   } else {
     updateAttribute(element, attrName, value);
@@ -39,6 +41,9 @@ class Wrec extends HTMLElement {
   #formData;
   #internals;
   #propertyToBindingsMap = new Map();
+  // This must be an instance property and cannot be private because
+  // child components need to access the property in their parent component.
+  propertyToParentPropertyMap = new Map();
 
   constructor() {
     super();
@@ -46,7 +51,7 @@ class Wrec extends HTMLElement {
 
     if (!this.constructor.properties) this.constructor.properties = {};
 
-    const map = this.constructor['#propertyToExpressionsMap'];
+    let map = this.constructor['#propertyToExpressionsMap'];
     if (!map) this.constructor['#propertyToExpressionsMap'] = new Map();
 
     if (this.constructor.formAssociated) {
@@ -166,11 +171,12 @@ class Wrec extends HTMLElement {
 
         // If this property is bound to a parent web component property,
         // update that as well.
-        map = this.propertyToParentPropertyMap;
-        const parentProperty = map ? map.get(propertyName) : null;
+        const parentProperty =
+          this.propertyToParentPropertyMap.get(propertyName);
         if (parentProperty) {
           const parent = this.getRootNode().host;
           parent.setAttribute(parentProperty, value);
+          //parent[parentProperty] = value;
         }
 
         this.#setFormValue(propertyName, value);
@@ -216,12 +222,10 @@ class Wrec extends HTMLElement {
         // save a mapping from the attribute name in this web component
         // to the property name in the parent web component.
         if (isWC) {
-          let map = element.propertyToParentPropertyMap;
-          if (!map) {
-            map = new Map();
-            element.propertyToParentPropertyMap = map;
-          }
-          map.set(attrName, propertyName);
+          element.propertyToParentPropertyMap.set(
+            Wrec.getPropertyName(attrName),
+            propertyName
+          );
         }
       }
 
@@ -300,6 +304,11 @@ class Wrec extends HTMLElement {
       this.#expressionToReferencesMap
     );
     console.log("#propertyToComputedMap =", this.constructor["#propertyToComputedMap"]);
+    console.log("this.constructor.name =", this.constructor.name);
+    console.log(
+      "propertyToParentPropertyMap =",
+      this.propertyToParentPropertyMap"]
+    );
     */
   }
 
