@@ -4,7 +4,6 @@ class RadioGroup extends Wrec {
   static formAssociated = true;
 
   static properties = {
-    default: {type: String},
     labels: {type: String},
     name: {type: String, required: true},
     values: {type: String, required: true},
@@ -32,8 +31,7 @@ class RadioGroup extends Wrec {
 
   connectedCallback() {
     super.connectedCallback();
-    if (!this.default) this.default = this.values.split(',')[0];
-    if (!this.value) this.value = this.default;
+    if (!this.value) this.value = this.values.split(',')[0];
     this.#fixValue();
   }
 
