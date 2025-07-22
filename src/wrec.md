@@ -10,9 +10,11 @@ layout: topic-layout.njk
 <script src="/blog/js/counter-wrec.js" type="module"></script>
 <script src="/blog/js/data-binding.js" type="module"></script>
 <script src="/blog/js/hello-world.js" type="module"></script>
-<script src="/blog/js/radio-group.js" type="module"></script>
-<script src="/blog/js/select-list.js" type="module"></script>
 <script src="/blog/js/number-slider.js" type="module"></script>
+<script src="/blog/js/radio-group.js" type="module"></script>
+<script src="/blog/js/rectangle-area.js" type="module"></script>
+<script src="/blog/js/select-list.js" type="module"></script>
+<script src="/blog/js/toggle-switch.js" type="module"></script>
 
 <style>
   img {
@@ -32,7 +34,22 @@ zero dependency library that greatly simplifies building web components.
 Its main features are that it automates
 wiring event listeners and implementing reactivity.
 
-To install it in one of your projects, enter `npm install wrec`.
+Wrec was inspired by [Lit](https://lit.dev).
+It has the following advantages over Lit:
+
+- Wrec is simpler ... just a single class to extend (Wrec).
+- Wrec is slightly smaller ... 4K versus 5.8K minified.
+- Wrec has a cleaner syntax ... no need to
+  surround JS expressions with `${...}`.
+- Wrec provides automatic 2-way data binding ...
+  no need to dispatch custom events and listen for them.
+- Wrec doesn't require a special syntax for Boolean attributes.
+- Wrec enables specifying the content of a `textarea` element
+  with a JavaScript expressions in its text content.
+
+Wrec components have many of the features provided by Alpine.js.
+
+To install wrec in one of your projects, enter `npm install wrec`.
 
 ## Getting Started
 
@@ -125,6 +142,27 @@ Press the return key or tab key, or click away from the value
 to commit the change.
 Note how the page updates to greet you.
 
+## Event Listeners
+
+To wire event listeners,
+Wrec looks for attributes whose name begins with "on".
+It assumes the remainder of the attribute name is an event name.
+It also assumes that the value of the attribute is either
+a method name that should be called or code that should be executed
+when that event is dispatched.
+For example, with the attribute `onclick="increment"`,
+if `increment` is a method in the component, wrec will
+add an event listener to the element containing the attribute
+for "click" events and call `this.increment(event)`.
+Alternatively, the attribute `onclick="this.count++"`
+adds an event listener that increments `this.count`
+when the element is clicked.
+
+The case of the event name within the attribute name
+does not matter because Wrec lowercases the name.
+So the attributes in the previous examples
+can be replaced by `onClick="increment"`.
+
 ## JavaScript Expressions
 
 The attributes and text content of the HTML to be rendered
@@ -134,8 +172,10 @@ are not surrounded by noisy syntax like `${...}`.
 
 If the expressions contain references to properties in the form
 `this.propertyName`, wrec automatically watches them for changes.
+In this context, `this` always refers to the parent web component.
 When changes are detected, wrec automatically reevaluates the expressions
 and replaces the attribute values or text contents with new values.
+Wrec does not rerender the entire web component.
 
 Here's an example of a counter component that takes advantage of this feature:
 
@@ -171,7 +211,16 @@ class CounterWrec extends Wrec {
 CounterWrec.register();
 ```
 
+When the value of an attribute is a Boolean,
+wrec adds the attribute to the element with no value
+or removes the attribute from the element.
+This is commonly used for attributes like `disabled`.
+
 Here it is in action.
+
+```html
+<counter-wrec></counter-wrec>
+```
 
 <counter-wrec></counter-wrec>
 
@@ -185,6 +234,19 @@ Wrec will render only a single period.
 
 To follow the word "this" with an ellipsis,
 include a space before it as in "this ... and that".
+
+## Unchanging Expressions
+
+In insert the value of an expression
+that does not use properties of the web component,
+into an HTML template string,
+surround the expression with the syntax `${...}`.
+For example, assuming `DAYS` is a variable
+whose value is an array of month names:
+
+```html
+<p>The month is ${DAYS[new Date().getDay()]}.</p>
+```
 
 ## Two-way Data Binding
 
@@ -242,9 +304,90 @@ NumberSlider.register();
 
 Here it is in action.
 
+```html
+<number-slider label="Rating" max="10"></number-slider>
+```
+
 <number-slider label="Rating" max="10"></number-slider>
 
 Drag the slider thumb to change the value.
+
+## Computed Properties
+
+The value of a property can be computed using the values of other properties.
+To do this, add the `computed` attribute to the description of the property.
+
+The example component below has a computed property
+that compute the area of a rectangle.
+It shows three ways to accomplish this, with the first two commented out.
+
+```js
+import Wrec, {css, html} from '../wrec.js';
+
+class RectangleArea extends Wrec {
+  static properties = {
+    width: {type: Number, value: 10},
+    height: {type: Number, value: 5},
+    /*
+    area: {
+      type: Number,
+      computed: "this.width * this.height",
+    },
+    area: {
+      type: Number,
+      computed: "this.rectangleArea(this.width, this.height)",
+    },
+    */
+    area: {
+      type: Number,
+      computed: 'this.rectangleArea()',
+      uses: 'width,height'
+    }
+  };
+
+  static css = css`
+    .area {
+      font-weight: bold;
+    }
+  `;
+
+  static html = html`
+    <number-slider label="Width" value="this.width"></number-slider>
+    <number-slider label="Height" value="this.height"></number-slider>
+    <div class="area">Area: <span>this.area</span></div>
+  `;
+
+  /*
+  rectangleArea(width, height) {
+    return width * height;
+  }
+  */
+  rectangleArea() {
+    return this.width * this.height;
+  }
+}
+
+RectangleArea.register();
+```
+
+Since the `rectangleArea` method uses properties
+that don't appear in the expression,
+we need to let wrec know which properties the method uses.
+The `uses` property value is a comma-separated list of properties names.
+When the value of any of those properties changes,
+the expression is reevaluated and
+a new value is assigned to the computed property.
+
+Here it is in action:
+
+```html
+<rectangle-area></rectangle-area>
+```
+
+<rectangle-area></rectangle-area>
+
+Drag the "Width" and "Height" sliders.
+Note how the "Area" is automatically updated.
 
 ## Dynamic CSS
 
@@ -325,6 +468,10 @@ ColorPicker.register();
 
 Here it is in action.
 
+```html
+<color-picker></color-picker>
+```
+
 <color-picker></color-picker>
 
 Drag the sliders to change the color of the swatch on the left.
@@ -376,7 +523,18 @@ ColorDemo.register();
 
 Here it is in action.
 
+```html
 <color-demo></color-demo>
+```
+
+<color-demo></color-demo>
+
+CSS variable values can be any valid JavaScript expression.
+The example above can be changed to double the size as follows:
+
+```css
+--size: this.size * 2;
+```
 
 ## Kicking it up a Notch
 
@@ -388,7 +546,9 @@ For this demo we need to define three more custom elements which are:
 
 We will also use `number-slider` which was defined above.
 
-Here is the class that defines the `radio-group` custom element:
+Here is the class that defines the `radio-group` custom element.
+Note how properties that are mapped to required attributes,
+such as `name` and `values` below, specify that with `required: true`.
 
 ```js
 import Wrec, {css, html} from './wrec.js';
@@ -524,12 +684,6 @@ Here is the class that defines the `data-binding` custom element.
 
 The `label` property is a computed property that
 calls a method in the class to obtain its value.
-Since the method uses properties that don't appear in the expression,
-we need to let wrec know which properties the function uses.
-The `uses` property value is a comma-separated list of properties names.
-When the value of any of those properties changes,
-the expression is reevaluated and
-a new value is assigned to the computed property.
 
 ```js
 import Wrec, {css, html} from './wrec.js';
@@ -604,6 +758,10 @@ DataBinding.register();
 
 Finally, here it is in action.
 
+```html
+<data-binding color="blue" colors="red,green,blue"></data-binding>
+```
+
 <data-binding color="blue" colors="red,green,blue"></data-binding>
 
 Select one of the radio buttons and
@@ -626,3 +784,112 @@ Take a moment to review the code above that implements these web components.
 Consider how much code would be required to reproduce this
 using another library or framework and
 how much more complicated that code would be!
+
+## Property Change Events
+
+Wrec components will dispatch "change" events whenever
+a property configured with `dispatch: true` changes.
+For an example of this,
+see the `checked` property in `examples/toggle-switch.js`.
+The component defined in `examples/binding-demo.js`
+listens for that event, as does the `script` in `examples/index.html`.
+
+The following web component implements a toggle switch.
+The code was generated by ChatGPT using the "o3 pro" model,
+and then modified.
+
+A "change" event is dispatched each time
+the value of the `checked` property changes.
+
+```js
+import Wrec, {css, html} from './wrec.js';
+
+class ToggleSwitch extends Wrec {
+  static properties = {
+    checked: {type: Boolean, dispatch: true}
+  };
+
+  static css = css`
+    :host {
+      --padding: 2px;
+      --thumb-size: 22px;
+      --height: calc(var(--thumb-size) + var(--padding) * 2);
+      --checked-x: calc(var(--thumb-size) - var(--padding) * 2);
+    }
+
+    div {
+      cursor: pointer;
+      display: inline-block;
+      position: relative;
+      width: calc(var(--thumb-size) * 2);
+      height: var(--height);
+      outline: none;
+    }
+
+    .track {
+      position: absolute;
+      inset: 0;
+      background: #ccc;
+      border-radius: calc(var(--height) / 2);
+      transition: background 160ms;
+    }
+
+    .thumb {
+      position: absolute;
+      top: var(--padding);
+      left: var(--padding);
+      width: var(--thumb-size);
+      height: var(--thumb-size);
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 2px rgb(0 0 0 / 0.4);
+      transition: transform 160ms;
+    }
+
+    .checked .track {
+      background: #4caf50;
+    }
+
+    /* thumb slides with a CSS transition */
+    .checked .thumb {
+      transform: translateX(var(--checked-x));
+    }
+  `;
+
+  // The tabindex attribute is required to make the div focusable.
+  static html = html`
+    <div
+      aria-checked="this.checked"
+      class="this.checked ? 'checked' : ''"
+      onClick="toggle"
+      onKeyDown="handleKey"
+      role="switch"
+      tabindex="0"
+    >
+      <span class="track"></span>
+      <span class="thumb"></span>
+    </div>
+  `;
+
+  handleKey(e) {
+    if (e.code === 'Space' || e.code === 'Enter') {
+      e.preventDefault();
+      this.toggle();
+    }
+  }
+
+  toggle() {
+    this.checked = !this.checked;
+  }
+}
+
+ToggleSwitch.register();
+```
+
+Here it is in action.
+
+```html
+<toggle-switch checked></toggle-switch>
+```
+
+<toggle-switch checked></toggle-switch>
