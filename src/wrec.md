@@ -39,14 +39,15 @@ Wrec was inspired by [Lit](https://lit.dev).
 It has the following advantages over Lit:
 
 - Wrec is simpler ... just a single class to extend (Wrec).
-- Wrec is slightly smaller ... 4K versus 5.8K minified.
+- Wrec is smaller ... 7K (`wrec.min.js`) versus
+  16K (lit-core.min.js`) minified.
 - Wrec has a cleaner syntax ... no need to
   surround JS expressions with `${...}`.
 - Wrec provides automatic 2-way data binding ...
   no need to dispatch custom events and listen for them.
 - Wrec doesn't require a special syntax for Boolean attributes.
 - Wrec enables specifying the content of a `textarea` element
-  with a JavaScript expressions in its text content.
+  with a JavaScript expression in its text content.
 
 Wrec components have many of the features provided by Alpine.js.
 
