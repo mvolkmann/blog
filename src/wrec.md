@@ -77,10 +77,8 @@ For `BasicWrec`, the element name is `basic-wrec`.
 To use this in a web page or Markdown file, include the following:
 
 ```html
-<!--
 <script src="some-path/basic-wrec.js" type="module"></script>
 <basic-wrec></basic-wrec>
--->
 ```
 
 Here it is in action.
@@ -107,13 +105,19 @@ class HelloWorld extends Wrec {
 HelloWorld.register();
 ```
 
-Here it is in action.
+We can used this custom element as follows:
+
+```html
+<hello-world></hello-world> <hello-world name="wrec"></hello-world>
+```
+
+This will render the following:
 
 <hello-world></hello-world>
 <hello-world name="wrec"></hello-world>
 
-Using your browser DevTools,
-inspect the last instance of the `hello-world` custom element.
+Use your browser DevTools to inspect the
+last instance of the `hello-world` custom element.
 Double-click the value of the `name` attribute and change it to your name.
 Press the return key or tab key, or click away from the value
 to commit the change.
@@ -171,6 +175,15 @@ Here it is in action.
 
 Click the "+" and "-" buttons to try it.
 
+It is highly unlikely that an attribute value or element text content
+will ever need to render the word "this", followed by a period,
+followed by a valid JavaScript identifier.
+But if that need arises, just escape the period by using two.
+Wrec will render only a single period.
+
+To follow the word "this" with an ellipsis,
+include a space before it as in "this ... and that".
+
 ## Two-way Data Binding
 
 Wrec provides two-way data binding for
@@ -182,7 +195,7 @@ the element is automatically updated.
 
 The following web component demonstrates this.
 Ignore the CSS variable `--label-width` for now.
-We will discuss how that works later.
+We will discuss how that works in the "Dynamic CSS" section below.
 
 ```js
 import Wrec, {css, html} from './wrec.js';
@@ -244,8 +257,9 @@ This prevents wrec from processing the expressions.
 
 A workaround is to use CSS properties (a.k.a. CSS variables).
 
-The following color picker component demonstrates this,
-along with defining a computed property.
+The following color picker component demonstrates this.
+It also defines a computed property whose value
+can be any valid JavaScript expression.
 
 ```js
 import Wrec, {css, html} from '../wrec.js';
@@ -285,6 +299,7 @@ class ColorPicker extends Wrec {
   static html = html`
     <div id="swatch"></div>
     <div id="sliders">
+      <!-- Prettier formatted these lines poorly. -->
       ${this.makeSlider('Red')} ${this.makeSlider('Green')} ${this.makeSlider(
         'Blue'
       )}
@@ -314,8 +329,8 @@ Drag the sliders to change the color of the swatch on the left.
 
 ## Nested Web Components
 
-Let's take this a step farther and define a web component
-that uses `color-picker` to change the color of some text.
+Let's define a web component that uses `color-picker`
+to change the color of some text.
 It also uses a `number-slider` to change the size of the text.
 
 ```js
@@ -380,7 +395,6 @@ class RadioGroup extends Wrec {
   static formAssociated = true;
 
   static properties = {
-    default: {type: String},
     labels: {type: String},
     name: {type: String, required: true},
     values: {type: String, required: true},
@@ -408,8 +422,7 @@ class RadioGroup extends Wrec {
 
   connectedCallback() {
     super.connectedCallback();
-    if (!this.default) this.default = this.values.split(',')[0];
-    if (!this.value) this.value = this.default;
+    if (!this.value) this.value = this.values.split(',')[0];
     this.#fixValue();
   }
 
@@ -505,7 +518,16 @@ class SelectList extends Wrec {
 SelectList.register();
 ```
 
-Here is the class that defines the `data-binding` custom element:
+Here is the class that defines the `data-binding` custom element.
+
+The `label` property is a computed property that
+calls a method in the class to obtain its value.
+Since the method uses properties that don't appear in the expression,
+we need to let wrec know which properties the function uses.
+The `uses` property value is a comma-separated list of properties names.
+When the value of any of those properties changes,
+the expression is reevaluated and
+a new value is assigned to the computed property.
 
 ```js
 import Wrec, {css, html} from './wrec.js';
@@ -592,13 +614,13 @@ Also, the corresponding radio button is selected.
 
 Drag the "Size" slider to change the size of the text at the bottom.
 
-Drum roll please ... For the most amazing part,
+For the most amazing part,
 change the comma-separated list of colors in the input at the top.
 Notice how the radio buttons and the select options update.
 The first color in the list is selected by default.
-Selecting other colors works as before.
+Selecting other colors via the radio buttons or the `select` works as before.
 
 Take a moment to review the code above that implements these web components.
-Consider how much code would have to be written to
-reproduce this using another library or framework and
+Consider how much code would be required to reproduce this
+using another library or framework and
 how much more complicated that code would be!
