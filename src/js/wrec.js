@@ -44,6 +44,8 @@ class Wrec extends HTMLElement {
     super();
     this.attachShadow({ mode: "open" });
 
+    if (!this.constructor.properties) this.constructor.properties = {};
+
     const map = this.constructor["#propertyToExpressionsMap"];
     if (!map) this.constructor["#propertyToExpressionsMap"] = new Map();
 

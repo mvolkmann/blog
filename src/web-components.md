@@ -9,14 +9,11 @@ layout: topic-layout.njk
     border: 1px solid gray;
   }
 </style>
-<script src="/js/hello-world.js" type="module"></script>
 
 <figure style="width: 30%">
   <img alt="Web Components logo" style="border: 0"
     src="/blog/assets/web-components-logo.svg?v={{pkg.version}}">
 </figure>
-
-<hello-world></hello-world>
 
 ## Overview
 
