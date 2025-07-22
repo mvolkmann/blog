@@ -14,6 +14,7 @@ layout: topic-layout.njk
 <script src="/blog/js/radio-group.js" type="module"></script>
 <script src="/blog/js/rectangle-area.js" type="module"></script>
 <script src="/blog/js/select-list.js" type="module"></script>
+<script src="/blog/js/temperature-eval.js" type="module"></script>
 <script src="/blog/js/toggle-switch.js" type="module"></script>
 
 <style>
@@ -247,6 +248,47 @@ whose value is an array of month names:
 ```html
 <p>The month is ${DAYS[new Date().getDay()]}.</p>
 ```
+
+## Conditional and Iterative HTML Generation
+
+Wrec supports conditional and iterative generation of HTML.
+
+The following web component demonstrates conditional generation
+using the ternary operator.
+
+```js
+import Wrec, {html} from '../wrec.js';
+
+class TemperatureEval extends Wrec {
+  static properties = {
+    temperature: {type: Number}
+  };
+
+  static html = html`
+    <p>this.temperature < 32 ? "freezing" : "not freezing"</p>
+  `;
+}
+
+TemperatureEval.register();
+```
+
+Here it is in action.
+
+```html
+<temperature-eval temperature="100"></temperature-eval>
+```
+
+<temperature-eval temperature="100"></temperature-eval>
+
+Use your browser DevTools to inspect the
+instance of the `temperature-eval` custom element.
+Double-click the value of the `temperature` attribute and change it "20".
+Note how the rendered output changes from "not freezing" to "freezing".
+
+For an example of a web component that iterates over values
+in a comma-delimited attribute value to determine what to render,
+see the `RadioGroup` and `SelectList` classes
+in the "Kicking it up a Notch" section below.
 
 ## Two-way Data Binding
 
