@@ -105,10 +105,12 @@ class HelloWorld extends Wrec {
 HelloWorld.register();
 ```
 
-We can used this custom element as follows:
+We can use this custom element as follows:
 
 ```html
-<hello-world></hello-world> <hello-world name="wrec"></hello-world>
+<hello-world></hello-world>
+
+<hello-world name="wrec"></hello-world>
 ```
 
 This will render the following:
