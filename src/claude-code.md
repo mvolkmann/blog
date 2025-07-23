@@ -236,4 +236,18 @@ they just duplicate what is in the "Workout Statistics" section."
 
 "Add pagination to the list of workouts so only five are displayed at a time."
 
+"Add the ability to filter and sort the list of workouts
+on any of their properties."
+
+"The UI for filtering and sorting looks good, but there is no
+button to click that applies the specified filtering and sorting."
+
+"The filtering is not working. For example, I entered 20 for "Min Miles"
+and clicked the "Apply Filters" button, but all the workouts
+are still displayed, including ones with less than 20 miles."
+
+I had to restart the server to get it to work.
+I seems like Claude Code should know when it makes
+a change that requires a server restart and do that for me.
+
 ## Resources
