@@ -312,7 +312,7 @@ the form element is automatically updated.
 
 The following web component demonstrates this.
 Ignore the CSS variable `--label-width` for now.
-We will discuss how that works in the "Dynamic CSS" section below.
+We will discuss how that works in the "Reactive CSS" section below.
 
 ```js
 import Wrec, {css, html} from './wrec.js';
@@ -450,7 +450,7 @@ Here it is in action:
 Drag the "Width" and "Height" sliders.
 Note how the "Area" is automatically updated.
 
-## Dynamic CSS
+## Reactive CSS
 
 Wrec also supports JavaScript expressions in CSS,
 but there's a wrinkle.
