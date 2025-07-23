@@ -70,8 +70,8 @@ class Wrec extends HTMLElement {
   }
 
   // attrName must be "value" OR undefined!
-  #bind(element, propertyName, attrName) {
-    element.addEventListener('input', event => {
+  #bind(element, propertyName, attrName, eventName) {
+    element.addEventListener(eventName, event => {
       this[propertyName] = event.target.value;
     });
 
@@ -216,14 +216,23 @@ class Wrec extends HTMLElement {
         }
 
         element[propertyName] = value;
-        if (attrName === 'value') this.#bind(element, propertyName, attrName);
+
+        let [realAttrName, eventName] = attrName.split(':');
+        if (realAttrName === 'value') {
+          if (eventName) {
+            element.setAttribute(realAttrName, this[propertyName]);
+          } else {
+            eventName = 'change';
+          }
+          this.#bind(element, propertyName, realAttrName, eventName);
+        }
 
         // If the element is a web component,
         // save a mapping from the attribute name in this web component
         // to the property name in the parent web component.
         if (isWC) {
           element.propertyToParentPropertyMap.set(
-            Wrec.getPropertyName(attrName),
+            Wrec.getPropertyName(realAttrName),
             propertyName
           );
         }
@@ -259,7 +268,7 @@ class Wrec extends HTMLElement {
       const propertyName = this.#propertyReferenceName(element, text);
       if (localName === 'textarea' && propertyName) {
         // Configure data binding.
-        this.#bind(element, propertyName);
+        this.#bind(element, propertyName, null, 'change');
         element.textContent = this[propertyName];
       } else {
         this.#registerPlaceholders(text, element);
