@@ -296,14 +296,17 @@ in a comma-delimited attribute value to determine what to render,
 see the `RadioGroup` and `SelectList` classes
 in the "Kicking it up a Notch" section below.
 
-## Two-way Data Binding
+## Form Elements
 
 Wrec supports two-way data binding for HTML form elements.
 
 - `input` and `select` elements can have a `value` attribute
   whose value is "this.somePropertyName".
+  An event listener for "change" events will be added.
+  To instead listen for "input" events, use the attribute "value:input".
 - `textarea` elements can have text content
-  that is "this.somePropertyName"
+  that is "this.somePropertyName".
+  An event listener for "change" events will be added.
 
 When the user changes the value of these form elements,
 the associated property is automatically updated.
@@ -347,7 +350,12 @@ class NumberSlider extends Wrec {
 
   static html = html`
     <label>this.label</label>
-    <input type="range" min="this.min" max="this.max" value="this.value" />
+    <input
+      type="range"
+      min="this.min"
+      max="this.max"
+      value:input="this.value"
+    />
     <span>this.value</span>
   `;
 }
