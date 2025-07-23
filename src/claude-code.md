@@ -202,4 +202,38 @@ of all workouts above the list of recent workouts."
 
 The app looks good!
 
+"Store the workouts in a SQLite database instead of a JSON file."
+
+"Where is the workouts.db file stored?"
+
+It told me the file is in the root directory of the project.
+I had to restart the server to get it to create that file.
+
+"Add all the data from the workouts.json file
+that was used by the app previously to the SQLite database."
+
+"Change the import of wrec in workout-stats.js to just import from "wrec",
+not a path into the node_modules directory."
+
+"Create a public GitHub repository for the app.
+Add the appropriate files and push."
+
+It created the local repository, but did not create the remote repository
+or push to it.
+
+"Change the GitHub user id from volkmannm to mvolkmann."
+
+After this, I had to manually create the remote repository and push to it.
+
+"Add ability to enter a date for each workout.
+Set the date for all existing workouts to today in the database."
+
+"Move the "Workout Statistics" section to above the "Recent Workouts" section.
+Remove the total statistics from the "Recent Workout" section because
+they just duplicate what is in the "Workout Statistics" section."
+
+"Sort the workouts from newest to oldest."
+
+"Add pagination to the list of workouts so only five are displayed at a time."
+
 ## Resources
