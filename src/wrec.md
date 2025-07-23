@@ -844,7 +844,8 @@ Also, the corresponding radio button is selected.
 Drag the "Size" slider to change the size of the text at the bottom.
 
 For the most amazing part,
-change the comma-separated list of colors in the input at the top.
+change the comma-separated list of colors in the input at the top
+and press the return key to commit the change.
 Notice how the radio buttons and the select options update.
 The first color in the list is selected by default.
 Selecting other colors via the radio buttons or the `select` works as before.

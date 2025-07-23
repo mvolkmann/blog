@@ -136,4 +136,24 @@ rounded to the nearest integer."
 "I want small labels on all the tick marks,
 not just the min, max, and major ones."
 
+"There have been many updates to the wrec library since you last examined it.
+Summarize the new features."
+
+It described six features, but only these were actually new features:
+
+- Computed Properties
+- Enhanced Data Binding (ex. value:input attribute)
+- Property-to-attribute name caching
+
+It missed the new feature that enables
+JavaScript expressions in CSS variable values.
+
+I quit `claude`, cd'ed to a different directory,
+created the directory "cycling-app", restarted `claude`,
+and entered the following:
+
+'Build a web app that tracks my bike workouts including
+location, miles, times, and elevation gain.
+Use the npm packages "wrec" and "htmx".'
+
 ## Resources

@@ -30,7 +30,12 @@ class NumberSlider extends Wrec {
 
   static html = html`
     <label>this.label</label>
-    <input type="range" min="this.min" max="this.max" value="this.value" />
+    <input
+      type="range"
+      min="this.min"
+      max="this.max"
+      value:input="this.value"
+    />
     <span>this.value</span>
   `;
 }
