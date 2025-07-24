@@ -191,6 +191,7 @@ import Wrec, {css, html} from './wrec.js';
 
 class CounterWrec extends Wrec {
   static properties = {
+    label: {type: String},
     count: {type: Number}
   };
 
@@ -202,12 +203,13 @@ class CounterWrec extends Wrec {
       background-color: lightgreen;
     }
     button:disabled {
-      background-color: gray;
+      opacity: 0.8;
     }
   `;
 
   static html = html`
-    <button disabled="this.count === 0" onClick="this.count--" type="button">
+    <label>this.label</label>
+    <button onClick="this.count--" type="button" disabled="this.count === 0">
       -
     </button>
     <span>this.count</span>
@@ -226,10 +228,10 @@ This is commonly used for attributes like `disabled`.
 Here it is in action.
 
 ```html
-<counter-wrec></counter-wrec>
+<counter-wrec label="Score" count="0"></counter-wrec>
 ```
 
-<counter-wrec></counter-wrec>
+<counter-wrec label="Score" count="0"></counter-wrec>
 
 Click the "+" and "-" buttons to try it.
 
