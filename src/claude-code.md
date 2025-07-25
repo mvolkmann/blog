@@ -302,4 +302,70 @@ repeatedly to find elements that need to be updated.
 Change this to find all those elements at the beginning and
 save them in variables so the search for them is only performed once."
 
+"It seems that the gameState property humanFirst is set, but never used.
+If that property isn't needed, remove it."
+
+"In the CSS properties, prefer rem units over px units.
+Use values that are multiples of 0.5."
+
+"Alphabetize the properties within each CSS rule."
+
+"It seems that the div elements with class="column" are not needed
+because the div elements with class="items" hold all the items.
+Remove the unnecessary div elements."
+
+I manually removed some excessive blank lines.
+
+'Instead of using the gameState property "currentPlayer"
+with a string value of "human" or "computer",
+use the gameState property "computerMove" with a Boolean value.'
+
+"Alphabetize the function definitions."
+
+"Currently the updateDisplay function blows away all the div elements inside
+itemsContainer and creates new ones from scratch every time it is called.
+This is inefficient. Instead just remove the items selected in the last move
+and update the remaining div elements as needed."
+
+"When the remaining items are 0, 1, and 2, at it is the computers turn to move,
+it removes 1 item from the column containing 2 which allows the human to win.
+Fix this."
+
+"In the calculateOptimalMove function, the if statement that
+tests pilesWithOne contains two return statements.
+Replace this with a single return statement that uses the ternary operator
+to get the value of the count property being returned."
+
+"If the computer wins, display a large sad face emoji.
+If the human wins, fire a confetti cannon."
+
+"Your confetti implementation wasn't great. Use an
+existing library for that instead of implementing it yourself."
+
+"Deploy this as a web app to Cloudflare."
+
+This created the files worker.js and wrangler.toml for me.
+I followed the instructions from Claude Code which included the following:
+
+- Commit and push the new files.
+- Browse https://dash.cloudflare.com/.
+- Log in.
+- It said to "Navigate to Pages in the sidebar", but that doesn't exist.
+- It said to click "Create a project", but I only see "Create application",
+  so I clicked that.
+- It said to select "Connect to Git", but I only see "Import a repository".
+  I clicked the "Get Started" button for that.
+- I clicked the "GitHub" button which wasn't in the instructions.
+- I signed in to my GitHub account.
+- On the "Install Cloudflare Workers and Pages" page, I clicked my username.
+- I selected the "Only select repositories" radio button.
+- I selected my "nim-claude" repository.
+- I clicked the "Install & Authorize" button.
+- I clicked "Back to Compute (Workers) overview".
+- I do not see a new application!
+- I started over using "Pages" instead of "Workers".
+- This worked! See https://nim-claude.pages.dev/.
+
+"Make the UI responsive so it looks good on phones."
+
 ## Resources
