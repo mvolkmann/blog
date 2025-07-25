@@ -365,7 +365,16 @@ I followed the instructions from Claude Code which included the following:
 - I do not see a new application!
 - I started over using "Pages" instead of "Workers".
 - This worked! See https://nim-claude.pages.dev/.
+- Pushing changes to the GitHub repository automatically redeploys the app.
 
 "Make the UI responsive so it looks good on phones."
+
+"Add a Help button that displays game instructions in a popup when clicked."
+
+"In the mobile view, left justify the items
+just like they are in the desktop view."
+
+"The CSS rules are no longer alphabetized like they were before. Fix that.
+Also, alphabetize the CSS rules inside the media query."
 
 ## Resources
