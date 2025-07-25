@@ -132,8 +132,8 @@ class Wrec extends HTMLElement {
     // Copy the property value to a private property.
     // The property is replaced below with Object.defineProperty.
     const value =
-      observedAttributes.includes(propertyName) && this.hasAttribute(attrName)
-        ? this.#typedAttribute(propertyName)
+      observedAttributes.includes(attrName) && this.hasAttribute(attrName)
+        ? this.#typedAttribute(propertyName, attrName)
         : config.value || defaultForType(config.type);
     const privateName = '#' + propertyName;
     this[privateName] = value;
@@ -163,7 +163,7 @@ class Wrec extends HTMLElement {
         // If there is a matching attribute on the custom element,
         // update that attribute.
         if (this.hasAttribute(attrName)) {
-          const oldValue = this.#typedAttribute(propertyName);
+          const oldValue = this.#typedAttribute(propertyName, attrName);
           if (value !== oldValue) updateAttribute(this, propertyName, value);
         }
 
@@ -463,8 +463,8 @@ class Wrec extends HTMLElement {
     );
   }
 
-  #typedAttribute(attrName) {
-    return this.#typedValue(attrName, this.getAttribute(attrName));
+  #typedAttribute(propertyName, attrName) {
+    return this.#typedValue(propertyName, this.getAttribute(attrName));
   }
 
   #typedValue(propertyName, stringValue) {
