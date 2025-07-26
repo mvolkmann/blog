@@ -62,6 +62,10 @@ To install wrec in one of your projects, enter `npm install wrec`.
 
 To define a web component using wrec:
 
+1. Copy the file `wrec.min.js` from the wrec
+   [GitHub](https://github.com/mvolkmann/wrec/tree/main/dist)
+   repository.
+   (Alternatively, install wrec using npm and use a bundler like Vite.)
 1. Define a class that extends the `Wrec` class.
 1. Optionally define a static property named `css`
    whose value is a string containing CSS rules.
