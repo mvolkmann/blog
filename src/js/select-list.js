@@ -1,4 +1,4 @@
-import Wrec, {html} from './wrec.js';
+import Wrec, {html} from './wrec.min.js';
 
 class SelectList extends Wrec {
   static formAssociated = true;

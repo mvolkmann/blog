@@ -1,4 +1,4 @@
-import Wrec, {css, html} from './wrec.js';
+import Wrec, {css, html} from './wrec.min.js';
 
 class ColorPicker extends Wrec {
   static properties = {

@@ -73,7 +73,7 @@ To define a web component using wrec:
 For example:
 
 ```js
-import Wrec, {css, html} from './wrec.js';
+import Wrec, {css, html} from './wrec.min.js';
 
 class BasicWrec extends Wrec {
   static css = css`
@@ -116,7 +116,7 @@ Properties are automatically mapped to attributes in the custom element.
 Here's a simple example that enables specifying a name.
 
 ```js
-import Wrec, {html} from './wrec.js';
+import Wrec, {html} from './wrec.min.js';
 
 class HelloWorld extends Wrec {
   static properties = {
@@ -187,7 +187,7 @@ Wrec does not rerender the entire web component.
 Here's an example of a counter component that takes advantage of this feature:
 
 ```js
-import Wrec, {css, html} from './wrec.js';
+import Wrec, {css, html} from './wrec.min.js';
 
 class CounterWrec extends Wrec {
   static properties = {
@@ -320,7 +320,7 @@ Ignore the CSS variable `--label-width` for now.
 We will discuss how that works in the "Reactive CSS" section below.
 
 ```js
-import Wrec, {css, html} from './wrec.js';
+import Wrec, {css, html} from './wrec.min.js';
 
 class NumberSlider extends Wrec {
   static properties = {
@@ -554,7 +554,7 @@ to change the color of some text.
 It also uses a `number-slider` to change the size of the text.
 
 ```js
-import Wrec, {css, html} from './wrec.js';
+import Wrec, {css, html} from './wrec.min.js';
 
 class ColorDemo extends Wrec {
   static properties = {
@@ -622,7 +622,7 @@ Note how properties that are mapped to required attributes,
 such as `name` and `values` below, specify that with `required: true`.
 
 ```js
-import Wrec, {css, html} from './wrec.js';
+import Wrec, {css, html} from './wrec.min.js';
 
 class RadioGroup extends Wrec {
   static formAssociated = true;
@@ -714,7 +714,7 @@ RadioGroup.register();
 Here is the class that defines the `select-list` custom element:
 
 ```js
-import Wrec, {html} from './wrec.js';
+import Wrec, {html} from './wrec.min.js';
 
 class SelectList extends Wrec {
   static formAssociated = true;
@@ -763,7 +763,7 @@ The `label` property is a computed property that
 calls a method in the class to obtain its value.
 
 ```js
-import Wrec, {css, html} from './wrec.js';
+import Wrec, {css, html} from './wrec.min.js';
 
 const capitalize = str =>
   str ? str.charAt(0).toUpperCase() + str.slice(1) : str;
@@ -880,7 +880,7 @@ A "change" event is dispatched each time
 the value of the `checked` property changes.
 
 ```js
-import Wrec, {css, html} from './wrec.js';
+import Wrec, {css, html} from './wrec.min.js';
 
 class ToggleSwitch extends Wrec {
   static properties = {
