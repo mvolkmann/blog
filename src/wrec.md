@@ -515,10 +515,10 @@ class ColorPicker extends Wrec {
   static html = html`
     <div id="swatch"></div>
     <div id="sliders">
-      <!-- Prettier formatted these lines poorly. -->
-      ${this.makeSlider('Red')} ${this.makeSlider('Green')} ${this.makeSlider(
-        'Blue'
-      )}
+      <!-- prettier-ignore -->
+      ${this.makeSlider('Red')}
+      ${this.makeSlider('Green')}
+      ${this.makeSlider('Blue')}
     </div>
   `;
 
@@ -648,8 +648,11 @@ class RadioGroup extends Wrec {
 
   static html = html`
     <div>
-      this.values.split(",").map((value, index) => this.makeRadio(value, index,
-      this.labels )).join("")
+      <!-- prettier-ignore -->
+      this.values
+        .split(",")
+        .map((value, index) => this.makeRadio(value, index, this.labels ))
+        .join("")
     </div>
   `;
 
@@ -725,8 +728,11 @@ class SelectList extends Wrec {
 
   static html = html`
     <select name="${this.name}" value="this.value">
-      this.values.split(",").map((value, index) => this.makeOption(value, index,
-      this.labels)).join("")
+      <!-- prettier-ignore -->
+      this.values
+        .split(",")
+        .map((value, index) => this.makeOption(value, index, this.labels))
+        .join("")
     </select>
   `;
 
