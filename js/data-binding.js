@@ -1,4 +1,4 @@
-import Wrec, {css, html} from './wrec.js';
+import Wrec, {css, html} from './wrec.min.js';
 
 const capitalize = str =>
   str ? str.charAt(0).toUpperCase() + str.slice(1) : str;
