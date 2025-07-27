@@ -571,13 +571,13 @@ class ColorDemo extends Wrec {
 
   static css = css`
     :host {
-      --color: this.color;
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
       font-family: sans-serif;
     }
     p {
+      --color: this.color;
       --size: this.size;
       color: var(--color);
       font-size: calc(var(--size) * 1px);
