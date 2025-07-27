@@ -17,6 +17,10 @@ layout: topic-layout.njk
 
 ## Overview
 
+See my talk on Web Components at
+<a href="https://drive.google.com/file/d/16rGM2L8psBGlQ-Zhu6EBXN1GMO30YdRF/view"
+target="_blank">OCI Tech Lunch - July 2025</a>.
+
 {% aTargetBlank "https://www.webcomponents.org/introduction", "Web components" %}
 define custom HTML elements that can be used just like standard HTML elements.
 They are defined by a set of standards that include the

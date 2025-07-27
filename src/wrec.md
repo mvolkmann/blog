@@ -39,6 +39,9 @@ If you're new to web components, see my slides
 from a one-hour talk on web components at {% aTargetBlank
 "https://github.com/mvolkmann/talks/blob/master/web-components.key.pdf",
 "Web Components" %}.
+A video of the talk is at
+<a href="https://drive.google.com/file/d/16rGM2L8psBGlQ-Zhu6EBXN1GMO30YdRF/view"
+target="_blank">OCI Tech Lunch - July 2025</a>.
 
 Wrec was inspired by {% aTargetBlank "https://lit.dev", "Lit" %}.
 It has the following advantages over Lit:
