@@ -24,10 +24,15 @@ class RadioGroup extends Wrec {
 
   static html = html`
     <div>
-      this.values.split(",").map((value, index) => this.makeRadio(value, index,
-      this.labels )).join("")
+      <!-- prettier-ignore -->
+      this.values
+        .split(",")
+        .map(this.makeRadio.bind(this))
+        .join("")
     </div>
   `;
+
+  #labelArray = [];
 
   connectedCallback() {
     super.connectedCallback();
@@ -43,6 +48,8 @@ class RadioGroup extends Wrec {
       for (const input of inputs) {
         input.checked = input.value === newValue;
       }
+    } else if (attrName === 'labels') {
+      this.#labelArray = this.labels.split(',');
     } else if (attrName === 'values') {
       this.#fixValue();
     }
@@ -57,13 +64,15 @@ class RadioGroup extends Wrec {
     });
   }
 
+  // This method cannot be private because it is called when
+  // a change event is dispatched from a radio button.
   handleChange(event) {
     this.value = event.target.value;
   }
 
+  // This method cannot be private because it is
+  // called from the expression in the html method.
   makeRadio(value, index) {
-    let label = this.labels.split(',')[index];
-    if (!label) return '';
     value = value.trim();
     return html`
       <div>
@@ -75,7 +84,7 @@ class RadioGroup extends Wrec {
           value="${value}"
           ${value === this.value ? 'checked' : ''}
         />
-        <label for="${value}">${label}</label>
+        <label for="${value}">${this.#labelArray[index]}</label>
       </div>
     `;
   }
