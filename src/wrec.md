@@ -629,13 +629,13 @@ Note how properties that are mapped to required attributes,
 such as `name` and `values` below, specify that with `required: true`.
 
 ```js
-import Wrec, {css, html} from './wrec.min.js';
+import Wrec, {css, html} from '../wrec.js';
 
 class RadioGroup extends Wrec {
   static formAssociated = true;
 
   static properties = {
-    labels: {type: String},
+    labels: {type: String, required: true},
     name: {type: String, required: true},
     values: {type: String, required: true},
     value: {type: String}
@@ -658,10 +658,12 @@ class RadioGroup extends Wrec {
       <!-- prettier-ignore -->
       this.values
         .split(",")
-        .map((value, index) => this.makeRadio(value, index, this.labels ))
+        .map(this.makeRadio.bind(this))
         .join("")
     </div>
   `;
+
+  #labelArray = [];
 
   connectedCallback() {
     super.connectedCallback();
@@ -677,6 +679,8 @@ class RadioGroup extends Wrec {
       for (const input of inputs) {
         input.checked = input.value === newValue;
       }
+    } else if (attrName === 'labels') {
+      this.#labelArray = this.labels.split(',');
     } else if (attrName === 'values') {
       this.#fixValue();
     }
@@ -691,13 +695,15 @@ class RadioGroup extends Wrec {
     });
   }
 
+  // This method cannot be private because it is called when
+  // a change event is dispatched from a radio button.
   handleChange(event) {
     this.value = event.target.value;
   }
 
+  // This method cannot be private because it is
+  // called from the expression in the html method.
   makeRadio(value, index) {
-    let label = this.labels.split(',')[index];
-    if (!label) return '';
     value = value.trim();
     return html`
       <div>
@@ -709,7 +715,7 @@ class RadioGroup extends Wrec {
           value="${value}"
           ${value === this.value ? 'checked' : ''}
         />
-        <label for="${value}">${label}</label>
+        <label for="${value}">${this.#labelArray[index]}</label>
       </div>
     `;
   }
@@ -721,14 +727,14 @@ RadioGroup.register();
 Here is the class that defines the `select-list` custom element:
 
 ```js
-import Wrec, {html} from './wrec.min.js';
+import Wrec, {html} from '../wrec.js';
 
 class SelectList extends Wrec {
   static formAssociated = true;
 
   static properties = {
     name: {type: String, required: true},
-    labels: {type: String},
+    labels: {type: String, required: true},
     values: {type: String, required: true},
     value: {type: String}
   };
@@ -738,26 +744,41 @@ class SelectList extends Wrec {
       <!-- prettier-ignore -->
       this.values
         .split(",")
-        .map((value, index) => this.makeOption(value, index, this.labels))
+        .map(this.makeOption.bind(this))
         .join("")
     </select>
   `;
 
+  #labelArray = [];
+
   connectedCallback() {
     super.connectedCallback();
+    if (!this.value) this.value = this.values.split(',')[0];
+    this.#fixValue();
+  }
 
-    // Wait for the DOM to update.
+  attributeChangedCallback(attrName, oldValue, newValue) {
+    super.attributeChangedCallback(attrName, oldValue, newValue);
+    if (attrName === 'labels') {
+      this.#labelArray = this.labels.split(',');
+    }
+  }
+
+  // This handles the case when the specified value
+  // is not in the list of values.
+  #fixValue() {
     requestAnimationFrame(() => {
       const values = this.values.split(',');
       if (!values.includes(this.value)) this.value = values[0];
     });
   }
 
+  // This method cannot be private because it is
+  // called from the expression in the html method.
   makeOption(value, index) {
-    let label = this.labels.split(',')[index];
-    if (!label) return '';
-    value = value.trim();
-    return html`<option value="${value}">${label}</option>`;
+    return html`
+      <option value="${value.trim()}">${this.#labelArray[index]}</option>
+    `;
   }
 }
 
@@ -770,7 +791,7 @@ The `label` property is a computed property that
 calls a method in the class to obtain its value.
 
 ```js
-import Wrec, {css, html} from './wrec.min.js';
+import Wrec, {css, html} from '../wrec.js';
 
 const capitalize = str =>
   str ? str.charAt(0).toUpperCase() + str.slice(1) : str;
@@ -781,6 +802,7 @@ class DataBinding extends Wrec {
     colors: {type: String, required: true},
     labels: {
       type: String,
+      //computed: "this.colors.split(',').map(color => this.capitalize(color)).join(',')",
       computed: 'this.getLabels()',
       uses: 'colors'
     },
@@ -830,10 +852,7 @@ class DataBinding extends Wrec {
   `;
 
   getLabels() {
-    return this.colors
-      .split(',')
-      .map(color => capitalize(color))
-      .join(',');
+    return this.colors.split(',').map(capitalize).join(',');
   }
 }
 
