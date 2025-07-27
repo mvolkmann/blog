@@ -4,7 +4,7 @@ class RadioGroup extends Wrec {
   static formAssociated = true;
 
   static properties = {
-    labels: {type: String},
+    labels: {type: String, required: true},
     name: {type: String, required: true},
     values: {type: String, required: true},
     value: {type: String}
