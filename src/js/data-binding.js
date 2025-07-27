@@ -9,6 +9,7 @@ class DataBinding extends Wrec {
     colors: {type: String, required: true},
     labels: {
       type: String,
+      //computed: "this.colors.split(',').map(color => this.capitalize(color)).join(',')",
       computed: 'this.getLabels()',
       uses: 'colors'
     },
