@@ -272,7 +272,7 @@ The following web component demonstrates conditional generation
 using the ternary operator.
 
 ```js
-import Wrec, {html} from '../wrec.js';
+import Wrec, {html} from './wrec.min.js';
 
 class TemperatureEval extends Wrec {
   static properties = {
@@ -400,7 +400,7 @@ that compute the area of a rectangle.
 It shows three ways to accomplish this, with the first two commented out.
 
 ```js
-import Wrec, {css, html} from '../wrec.js';
+import Wrec, {css, html} from './wrec.min.js';
 
 class RectangleArea extends Wrec {
   static properties = {
@@ -485,7 +485,7 @@ It also defines a computed property whose value
 can be any valid JavaScript expression.
 
 ```js
-import Wrec, {css, html} from '../wrec.js';
+import Wrec, {css, html} from './wrec.min.js';
 
 class ColorPicker extends Wrec {
   static properties = {
@@ -629,7 +629,7 @@ Note how properties that are mapped to required attributes,
 such as `name` and `values` below, specify that with `required: true`.
 
 ```js
-import Wrec, {css, html} from '../wrec.js';
+import Wrec, {css, html} from './wrec.min.js';
 
 class RadioGroup extends Wrec {
   static formAssociated = true;
@@ -667,7 +667,6 @@ class RadioGroup extends Wrec {
 
   connectedCallback() {
     super.connectedCallback();
-    if (!this.value) this.value = this.values.split(',')[0];
     this.#fixValue();
   }
 
@@ -691,7 +690,11 @@ class RadioGroup extends Wrec {
   #fixValue() {
     requestAnimationFrame(() => {
       const values = this.values.split(',');
-      if (!values.includes(this.value)) this.value = values[0];
+      if (this.value) {
+        if (!values.includes(this.value)) this.value = values[0];
+      } else {
+        this.value = values[0];
+      }
     });
   }
 
@@ -727,7 +730,7 @@ RadioGroup.register();
 Here is the class that defines the `select-list` custom element:
 
 ```js
-import Wrec, {html} from '../wrec.js';
+import Wrec, {html} from './wrec.min.js';
 
 class SelectList extends Wrec {
   static formAssociated = true;
@@ -753,7 +756,6 @@ class SelectList extends Wrec {
 
   connectedCallback() {
     super.connectedCallback();
-    if (!this.value) this.value = this.values.split(',')[0];
     this.#fixValue();
   }
 
@@ -769,7 +771,11 @@ class SelectList extends Wrec {
   #fixValue() {
     requestAnimationFrame(() => {
       const values = this.values.split(',');
-      if (!values.includes(this.value)) this.value = values[0];
+      if (this.value) {
+        if (!values.includes(this.value)) this.value = values[0];
+      } else {
+        this.value = values[0];
+      }
     });
   }
 
@@ -791,7 +797,7 @@ The `label` property is a computed property that
 calls a method in the class to obtain its value.
 
 ```js
-import Wrec, {css, html} from '../wrec.js';
+import Wrec, {css, html} from './wrec.min.js';
 
 const capitalize = str =>
   str ? str.charAt(0).toUpperCase() + str.slice(1) : str;

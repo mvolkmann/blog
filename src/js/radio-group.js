@@ -36,7 +36,6 @@ class RadioGroup extends Wrec {
 
   connectedCallback() {
     super.connectedCallback();
-    if (!this.value) this.value = this.values.split(',')[0];
     this.#fixValue();
   }
 
@@ -60,7 +59,11 @@ class RadioGroup extends Wrec {
   #fixValue() {
     requestAnimationFrame(() => {
       const values = this.values.split(',');
-      if (!values.includes(this.value)) this.value = values[0];
+      if (this.value) {
+        if (!values.includes(this.value)) this.value = values[0];
+      } else {
+        this.value = values[0];
+      }
     });
   }
 
