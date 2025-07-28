@@ -56,6 +56,8 @@ It has the following advantages over Lit:
   surround JS expressions with `${...}`.
 - Wrec provides automatic 2-way data binding ...
   no need to dispatch custom events and listen for them.
+- Wrec performs direct DOM manipulation, which is
+  more efficient than the virtual DOM approach used in Lit
 - Wrec doesn't require a special syntax for Boolean attributes.
 - Wrec enables specifying the content of a `textarea` element
   with a JavaScript expression in its text content.
