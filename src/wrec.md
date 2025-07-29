@@ -900,6 +900,29 @@ Consider how much code would be required to reproduce this
 using another library or framework and
 how much more complicated that code would be!
 
+## Non-primitive Properties
+
+Wrec automatically keeps
+primitive web component properties (Boolean, Number, or String)
+in sync with corresponding attributes.
+Non-primitive web component properties (objects, including arrays)
+are not reflected in attributes because they are not valid attribute values.
+
+Non-primitive web component properties are useful in scenarios where
+JavaScript code will find instances of the web component
+and directly set the properties.
+
+For an example of this, see `examples/table-plus.ts`
+and the corresponding file `examples/table-plus.html`.
+This implements an HTML table that supports
+sorting the rows by clicking a column heading.
+The sort begins in ascending order.
+Clicking the heading current used for sorting reverses the sort order.
+
+The `table-plus` component also provides an example of
+implementing reactivity through the `propertyChangedCallback` method
+rather than through JavaScript expressions embedded in HTML.
+
 ## Property Change Events
 
 Wrec components will dispatch "change" events whenever
