@@ -72,8 +72,6 @@ It has the following advantages over Lit:
   surround JS expressions with `${...}`.
 - Wrec provides automatic 2-way data binding ...
   no need to dispatch custom events and listen for them.
-- Wrec performs direct DOM manipulation, which is
-  more efficient than the virtual DOM approach used in Lit
 - Wrec doesn't require a special syntax for Boolean attributes.
 - Wrec enables specifying the content of a `textarea` element
   with a JavaScript expression in its text content.
@@ -81,6 +79,42 @@ It has the following advantages over Lit:
 Wrec components have many of the features provided by Alpine.js.
 
 To install wrec in one of your projects, enter `npm install wrec`.
+
+## Reactivity
+
+When we use the word "reactivity", we mean the ability to automatically
+update the DOM when the value of a component property changes.
+
+There are many approaches that can be used to implement reactivity.
+One approach is to use a virtual DOM.
+When a component property changes,
+a new version of the component DOM is created.
+That DOM is compared to the existing DOM for the component,
+referred to as "diffing".
+Then the existing DOM is updated, but only the parts where a "diff" was found.
+Web frameworks that use this approach include React and Vue.js.
+
+Wrec takes a more surgical approach to reactivity.
+
+- The first time an instance of a given web component class is used,
+  wrec searches all attribute values, element text content, and
+  CSS variable declarations for expressions matching `this.{property-name}`
+  using a regular expression.
+- It creates a static map (one per `Wrec` subclass)
+  whose keys are property names and
+  whose values are the expressions where they are found.
+  This map is held in the Wrec property `propToExprsMap`.
+- It creates a map (one per instance of each `Wrec` subclass)
+  whose keys are the expressions and whose values are references to
+  the elements, attributes, and CSS variable declarations where they appear.
+  This map is held in the Wrec property `exprToRefsMap`.
+- When a property in an instance changes, wrec gets a list of the expressions
+  that use the property and computes their new values.
+- Then for each expression whose value was computed,
+  it gets a list of all references to the expression in the instance
+  and updates them with the new value.
+
+This approach is highly efficient.
 
 ## Getting Started
 
