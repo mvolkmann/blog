@@ -1,3 +1,5 @@
+// NOTE: After copying dist/table-plus.js to the blog directory src/js,
+// change the import from './wrec' to './wrec.min.js'!
 import Wrec, {css, createElement, html} from './wrec.min.js';
 // This component demonstrates a different way of implementing reactivity.
 // Rather than relying on the parsing of JavaScript expressions in HTML,
