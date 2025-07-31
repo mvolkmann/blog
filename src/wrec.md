@@ -946,6 +946,18 @@ Here it is in action.
 
 <table-plus></table-plus>
 
+Try these steps to experiment with the reactivity of the table.
+
+1. Click the table headings to sort the rows.
+   TODO: This is not currently working!
+1. Right-click the table and select "Inspect".
+1. In the DevTools Elements tab, click the `<table-plus>` element.
+1. Click the "Console" tab.
+1. Enter `$0.headings = ['Job', 'Call Me'];`
+   The headings look incorrect now, but we'll fix that in the next step.
+1. Enter `$0.properties = ['occupation', 'name'];`.
+1. Enter `$0.data = [{name: 'Mark', age: 64, occupation: 'retired'}, {name: 'Tami', age: 63, occupation: 'receptionist'}]`.
+
 ## Property Change Events
 
 Wrec components will dispatch "change" events whenever
