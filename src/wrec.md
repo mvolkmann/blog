@@ -19,10 +19,13 @@ layout: topic-layout.njk
 <script src="/blog/js/toggle-switch.js" type="module"></script>
 <script>
   window.onload = () => {
-    const tablePlus = document.querySelector('table-plus');
     requestAnimationFrame(() => {
-      tablePlus.headings = ['Name', 'Age', 'Occupation'];
+    const tablePlus = document.querySelector('table-plus');
+      // The property "properties" must be set before the property "headings"
+      // because changing headings triggers the buildTh method
+      // which uses properties to determine the data to sort.k
       tablePlus.properties = ['name', 'age', 'occupation'];
+      tablePlus.headings = ['Name', 'Age', 'Occupation'];
       tablePlus.data = [
         {name: 'Alice', age: 30, occupation: 'Engineer'},
         {name: 'Bob', age: 25, occupation: 'Designer'},
