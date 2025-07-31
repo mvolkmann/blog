@@ -19,7 +19,6 @@ layout: topic-layout.njk
 <script src="/blog/js/toggle-switch.js" type="module"></script>
 <script>
   window.onload = () => {
-    requestAnimationFrame(() => {
     const tablePlus = document.querySelector('table-plus');
       // The property "properties" must be set before the property "headings"
       // because changing headings triggers the buildTh method
@@ -31,7 +30,6 @@ layout: topic-layout.njk
         {name: 'Bob', age: 25, occupation: 'Designer'},
         {name: 'Charlie', age: 35, occupation: 'Teacher'}
       ];
-    });
   };
 </script>
 
@@ -935,7 +933,7 @@ and the corresponding file `src/table-plus.html`.
 This implements an HTML table that supports
 sorting the rows by clicking a column heading.
 The sort begins in ascending order.
-Clicking the heading current used for sorting reverses the sort order.
+Clicking the heading currently used for sorting reverses the sort order.
 
 The `table-plus` component also provides an example of
 implementing reactivity through the `propertyChangedCallback` method
@@ -947,19 +945,36 @@ Here it is in action.
 <table-plus></table-plus>
 ```
 
+The properties of the `table-plus` component are set with the following code:
+
+```js
+window.onload = () => {
+  const tablePlus = document.querySelector('table-plus');
+  // The property "properties" must be set before the property "headings"
+  // because changing "headings" triggers the "buildTh" method
+  // which uses properties to determine the data to sort.
+  tablePlus.properties = ['name', 'age', 'occupation'];
+  tablePlus.headings = ['Name', 'Age', 'Occupation'];
+  tablePlus.data = [
+    {name: 'Alice', age: 30, occupation: 'Engineer'},
+    {name: 'Bob', age: 25, occupation: 'Designer'},
+    {name: 'Charlie', age: 35, occupation: 'Teacher'}
+  ];
+};
+```
+
 <table-plus></table-plus>
 
 Try these steps to experiment with the reactivity of the table.
 
 1. Click the table headings to sort the rows.
-   TODO: This is not currently working!
 1. Right-click the table and select "Inspect".
 1. In the DevTools Elements tab, click the `<table-plus>` element.
 1. Click the "Console" tab.
-1. Enter `$0.headings = ['Job', 'Call Me'];`
+1. Enter `$0.properties = ['occupation', 'name']`
    The headings look incorrect now, but we'll fix that in the next step.
-1. Enter `$0.properties = ['occupation', 'name'];`.
-1. Enter `$0.data = [{name: 'Mark', age: 64, occupation: 'retired'}, {name: 'Tami', age: 63, occupation: 'receptionist'}]`.
+1. Enter `$0.headings = ['Job', 'Call Me']`
+1. Enter `$0.data = [{name: 'Mark', age: 64, occupation: 'retired'}, {name: 'Tami', age: 63, occupation: 'receptionist'}]`
 
 ## Property Change Events
 
