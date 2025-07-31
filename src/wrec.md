@@ -971,10 +971,16 @@ Try these steps to experiment with the reactivity of the table.
 1. Right-click the table and select "Inspect".
 1. In the DevTools Elements tab, click the `<table-plus>` element.
 1. Click the "Console" tab.
-1. Enter `$0.properties = ['occupation', 'name']`
-   The headings look incorrect now, but we'll fix that in the next step.
-1. Enter `$0.headings = ['Job', 'Call Me']`
-1. Enter `$0.data = [{name: 'Mark', age: 64, occupation: 'retired'}, {name: 'Tami', age: 63, occupation: 'receptionist'}]`
+1. To see the current data objects that are being rendered,
+   enter `$0.data`
+1. To see the current properties from the `data` objects
+   whose values are rendered, enter `$0.properties`
+1. Change the properties that are rendered by
+   entering `$0.properties = ['occupation', 'name']`
+   The headings are incorrect now, but we'll fix that in the next step.
+1. Change the table headings by entering `$0.headings = ['Job', 'Call Me']`
+1. Change the data objects that are being rendered by entering
+   `$0.data = [{name: 'Mark', age: 64, occupation: 'retired'}, {name: 'Tami', age: 63, occupation: 'receptionist'}]`
 
 ## Property Change Events
 
