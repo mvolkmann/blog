@@ -234,7 +234,8 @@ can be replaced by `onClick="increment"`.
 
 ## JavaScript Expressions
 
-The attributes and text content of the HTML to be rendered
+In the HTML to be rendered, CSS property values,
+element attributes, and element text content
 can contain raw JavaScript expressions.
 By "raw" we mean that the expressions
 are not surrounded by noisy syntax like `${...}`.
@@ -378,8 +379,6 @@ When code changes the value of an associated property,
 the form element is automatically updated.
 
 The following web component demonstrates this.
-Ignore the CSS variable `--label-width` for now.
-We will discuss how that works in the "Reactive CSS" section below.
 
 ```js
 import Wrec, {css, html} from './wrec.min.js';
@@ -405,10 +404,9 @@ class NumberSlider extends Wrec {
     }
 
     label {
-      --label-width: this.labelWidth;
       font-weight: bold;
       text-align: right;
-      width: var(--label-width);
+      width: this.labelWidth;
     }
   `;
 
@@ -524,16 +522,7 @@ Note how the "Area" is automatically updated.
 
 ## Reactive CSS
 
-Wrec also supports JavaScript expressions in CSS,
-but there's a wrinkle.
-When the browsers built-in HTML parser sees a JavaScript expression
-in an attribute or the text content of an element, it is ignored.
-This allows wrec to process the expressions.
-But when the browsers built-in CSS parser sees a JavaScript expression
-in a property value, it sees it as invalid and strips it out.
-This prevents wrec from processing the expressions.
-
-A workaround is to use CSS properties (a.k.a. CSS variables).
+Wrec supports JavaScript expressions in CSS property values.
 
 The following color picker component demonstrates this.
 It also defines a computed property whose value
@@ -567,8 +556,7 @@ class ColorPicker extends Wrec {
     }
 
     #swatch {
-      --color: this.color;
-      background-color: var(--color);
+      background-color: this.color;
       height: 5rem;
       width: 5rem;
     }
@@ -632,10 +620,8 @@ class ColorDemo extends Wrec {
       font-family: sans-serif;
     }
     p {
-      --color: this.color;
-      --size: this.size;
-      color: var(--color);
-      font-size: calc(var(--size) * 1px);
+      color: this.color;
+      font-size: this.size + 'px';
     }
   `;
 
@@ -663,10 +649,12 @@ Here it is in action.
 <color-demo></color-demo>
 
 CSS variable values can be any valid JavaScript expression.
-The example above can be changed to double the size as follows:
+The example above can be changed to double the size by adding
+the CSS variable `--size` and modifying the rule for `font-size` as follows:
 
 ```css
 --size: this.size * 2;
+font-size: calc(var(--size) * 1px);
 ```
 
 ## Kicking it up a Notch
@@ -878,10 +866,8 @@ class DataBinding extends Wrec {
       font-family: sans-serif;
     }
     p {
-      --color: this.color;
-      --size: this.size;
-      color: var(--color);
-      font-size: calc(var(--size) * 1px);
+      color: this.color;
+      font-size: this.size + 'px';
       margin: 6px 0;
     }
   `;

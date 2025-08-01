@@ -21,10 +21,9 @@ class NumberSlider extends Wrec {
     }
 
     label {
-      --label-width: this.labelWidth;
       font-weight: bold;
       text-align: right;
-      width: var(--label-width);
+      width: this.labelWidth;
     }
   `;
 
