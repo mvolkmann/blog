@@ -24,10 +24,8 @@ class DataBinding extends Wrec {
       font-family: sans-serif;
     }
     p {
-      --color: this.color;
-      --size: this.size;
-      color: var(--color);
-      font-size: calc(var(--size) * 1px);
+      color: this.color;
+      font-size: this.size + 'px';
       margin: 6px 0;
     }
   `;
