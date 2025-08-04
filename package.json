@@ -24,7 +24,8 @@
     "commit": "git commit -av",
     "deploy": "gh-pages -d _site",
     "format": "prettier --write 'src/**/*.{css,html,js}'",
-    "lint": "eslint --fix --quiet src --ext .js",
+    "lint": "oxlint",
+    "lint-old": "eslint --fix --quiet src --ext .js",
     "push": "git push origin master",
     "reinstall": "rm -rf node_modules package-lock.json && npm install",
     "sass": "sass --style=compressed src/sass:_site/assets",
@@ -50,6 +51,7 @@
     "markdown-it-sub": "^1.0.0",
     "markdown-it-sup": "^1.0.0",
     "npm-run-all": "^4.1.5",
+    "oxlint": "^1.9.0",
     "prettier": "^2.7.1",
     "sass": "^1.55.0"
   },
