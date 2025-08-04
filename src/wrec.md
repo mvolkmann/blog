@@ -14,18 +14,18 @@ layout: topic-layout.njk
 <script src="/blog/js/radio-group.js" type="module"></script>
 <script src="/blog/js/rectangle-area.js" type="module"></script>
 <script src="/blog/js/select-list.js" type="module"></script>
-<script src="/blog/js/table-plus.js" type="module"></script>
+<script src="/blog/js/table-wired.js" type="module"></script>
 <script src="/blog/js/temperature-eval.js" type="module"></script>
 <script src="/blog/js/toggle-switch.js" type="module"></script>
 <script>
   window.onload = () => {
-    const tablePlus = document.querySelector('table-plus');
+    const tableWired = document.querySelector('table-wired');
       // The property "properties" must be set before the property "headings"
       // because changing headings triggers the buildTh method
       // which uses properties to determine the data to sort.k
-      tablePlus.properties = ['name', 'age', 'occupation'];
-      tablePlus.headings = ['Name', 'Age', 'Occupation'];
-      tablePlus.data = [
+      tableWired.properties = ['name', 'age', 'occupation'];
+      tableWired.headings = ['Name', 'Age', 'Occupation'];
+      tableWired.data = [
         {name: 'Alice', age: 30, occupation: 'Engineer'},
         {name: 'Bob', age: 25, occupation: 'Designer'},
         {name: 'Charlie', age: 35, occupation: 'Teacher'}
@@ -948,34 +948,34 @@ Non-primitive web component properties are useful in scenarios where
 JavaScript code will find instances of the web component
 and directly set the properties.
 
-For an example of this, see `src/table-plus.ts`
-and the corresponding file `src/table-plus.html`.
+For an example of this, see `src/table-wired.ts`
+and the corresponding file `src/table-demo.html`.
 This implements an HTML table that supports
 sorting the rows by clicking a column heading.
 The sort begins in ascending order.
 Clicking the heading currently used for sorting reverses the sort order.
 
-The `table-plus` component also provides an example of
-implementing reactivity through the `propertyChangedCallback` method
+The `table-manual` component is similar to `table-wired`, but it provides an
+example of implementing reactivity through the `propertyChangedCallback` method
 rather than through JavaScript expressions embedded in HTML.
 
 Here it is in action.
 
 ```html
-<table-plus></table-plus>
+<table-wired></table-wired>
 ```
 
-The properties of the `table-plus` component are set with the following code:
+The properties of the `table-wired` component are set with the following code:
 
 ```js
 window.onload = () => {
-  const tablePlus = document.querySelector('table-plus');
+  const tableWired = document.querySelector('table-wired');
   // The property "properties" must be set before the property "headings"
   // because changing "headings" triggers the "buildTh" method
   // which uses properties to determine the data to sort.
-  tablePlus.properties = ['name', 'age', 'occupation'];
-  tablePlus.headings = ['Name', 'Age', 'Occupation'];
-  tablePlus.data = [
+  tableWired.properties = ['name', 'age', 'occupation'];
+  tableWired.headings = ['Name', 'Age', 'Occupation'];
+  tableWired.data = [
     {name: 'Alice', age: 30, occupation: 'Engineer'},
     {name: 'Bob', age: 25, occupation: 'Designer'},
     {name: 'Charlie', age: 35, occupation: 'Teacher'}
@@ -983,13 +983,13 @@ window.onload = () => {
 };
 ```
 
-<table-plus></table-plus>
+<table-wired></table-wired>
 
 Try these steps to experiment with the reactivity of the table.
 
 1. Click the table headings to sort the rows.
 1. Right-click the table and select "Inspect".
-1. In the DevTools Elements tab, click the `<table-plus>` element.
+1. In the DevTools Elements tab, click the `<table-wired>` element.
 1. Click the "Console" tab.
 1. To see the current data objects that are being rendered,
    enter `$0.data`
