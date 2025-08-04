@@ -1121,6 +1121,14 @@ Wrec looks for this automatically does the rest of the work.
 static formAssociated = true;
 ```
 
+## State
+
+Wrec supports holding state outside of web components and
+creating two-way bindings between state properties and web component properties.
+This can be used as an alternative to holding state in a parent component
+of multiple components that use the state.
+For an example of this, see the file `src/examples/data-binding2.ts`.
+
 ## Error Checking
 
 Wrec checks for many kinds of errors and throws an `Error` when they are found.
